@@ -5,7 +5,9 @@
   <title>SaoriVerse Console</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.6/dist/umd/supabase.min.js"></script>
+  <link rel="icon" href="data:,">
   <style>
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -214,51 +216,48 @@
   </section>
 
 <script>
-  // 1) Configure Supabase and Edge Function
-  const SUPABASE_URL = 'https://gyqzyuvuuyfjxnramkfq.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8';
+  const PROJECT_URL = 'https://gyqzyuvuuyfjxnramkfq.supabase.co';
+  const PROJECT_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8';
 
-  // Use the public, CORS-friendly function
-  const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/saori-fixed`;
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-async function loadGlyphTrail() {
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
+  const EDGE_FUNCTION_URL = `${PROJECT_URL}/functions/v1/saori-fixed`;
+  const supabase = window.supabase.createClient(PROJECT_URL, PROJECT_ANON_KEY);
 
-  if (!session) {
-    console.warn('🧪 No session found—glyph trail will not load.');
-    return;
+  async function loadGlyphTrail() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      console.warn('🧪 No session found—glyph trail will not load.');
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('glyph_trail')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Glyph trail error:', error);
+      return;
+    }
+
+    const trailSection = document.getElementById('glyph-trail');
+    trailSection.innerHTML =
+      '<h2>Glyph Trail Archive</h2>' +
+      data.map(entry => `<div>${entry.message}</div>`).join('');
   }
 
-  const { data, error } = await supabase
-    .from('glyph_trail')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Glyph trail error:', error);
-    return;
-  }
-
-  const trailSection = document.getElementById('glyph-trail');
-  trailSection.innerHTML =
-    '<h2>Glyph Trail Archive</h2>' +
-    data.map(entry => `<div>${entry.message}</div>`).join('');
-}
-  // 2) DOM references
   const chatForm = document.getElementById('chat-form');
   const chatLog = document.getElementById('chat-log');
   const chatInput = document.getElementById('chat-message');
   const voiceToggle = document.getElementById('voice-toggle');
   voiceToggle.checked = false;
   const modeSelect = document.getElementById('mode-switcher');
-modeSelect.addEventListener('change', () => {
-  const mode = modeSelect.value;
-  const preview = document.getElementById('app-preview-inner');
-  preview.innerHTML = `<div style="padding:2rem;">Rendering: ${mode}</div>`;
-});
-  // 3) Chat helpers
+
+  modeSelect.addEventListener('change', () => {
+    const mode = modeSelect.value;
+    const preview = document.getElementById('app-preview-inner');
+    preview.innerHTML = `<div style="padding:2rem;">Rendering: ${mode}</div>`;
+  });
+
   function appendChat(role, text) {
     const div = document.createElement('div');
     div.className = `chat-entry ${role}`;
@@ -267,7 +266,6 @@ modeSelect.addEventListener('change', () => {
     chatLog.scrollTop = chatLog.scrollHeight;
   }
 
-  // 4) Send message -> Edge Function
   chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const message = chatInput.value.trim();
@@ -277,53 +275,48 @@ modeSelect.addEventListener('change', () => {
     chatInput.value = '';
     chatInput.style.height = 'auto';
 
-try {
-  // Get the current user's session token
-  const {
-  data: { session }
-} = await supabase.auth.getSession();
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session || !session.access_token) {
+        appendChat('saori', 'No active session. Please sign in to continue.');
+        return;
+      }
 
-if (!session || !session.access_token) {
-  appendChat('saori', 'No active session. Please sign in to continue.');
-  return;
-}
+      const accessToken = session.access_token;
+      const res = await fetch(EDGE_FUNCTION_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          message,
+          mode: modeSelect.value
+        })
+      });
 
-const accessToken = session?.access_token;
+      const data = await res.json().catch(() => ({}));
+      console.log('Edge Function status:', res.status, 'payload:', data);
 
-  const res = await fetch(EDGE_FUNCTION_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    },
-    body: JSON.stringify({
-      message,
-      mode: modeSelect.value
-    })
+      if (!res.ok) {
+        appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
+        return;
+      }
+
+      const reply = data.reply || data.saoriReply || 'No response received.';
+      appendChat('saori', reply);
+
+      if (voiceToggle.checked && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(reply);
+        speechSynthesis.speak(utterance);
+      }
+
+      await loadGlyphTrail();
+    } catch (err) {
+      console.error('Edge Function Error:', err);
+      appendChat('saori', 'Error contacting backend.');
+    }
   });
-
-  const data = await res.json().catch(() => ({}));
-  console.log('Edge Function status:', res.status, 'payload:', data);
-
-  if (!res.ok) {
-    appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
-    return;
-  }
-
-  const reply = data.reply || data.saoriReply || 'No response received.';
-  appendChat('saori', reply);
-
- if (voiceToggle.checked && 'speechSynthesis' in window) {
-  const utterance = new SpeechSynthesisUtterance(reply);
-  speechSynthesis.speak(utterance);
-}
-
-  await loadGlyphTrail();
-} catch (err) {
-  console.error('Edge Function Error:', err);
-  appendChat('saori', 'Error contacting backend.');
-}
-    });
 </script>
 </body>
 </html>
