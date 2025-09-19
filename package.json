@@ -1,0 +1,12 @@
+{
+  "name": "supabase-test",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "test.js",
+  "scripts": {
+    "start": "node test.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0"
+  }
+}

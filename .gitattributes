@@ -1,0 +1,2 @@
+Offshoots/ToneCore/sf2/FluidR3_GM.sf2 filter=lfs diff=lfs merge=lfs -text
+velinor/data/FluidR3_GM.sf2 filter=lfs diff=lfs merge=lfs -text
