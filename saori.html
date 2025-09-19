@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SaoriVerse Console</title>
+</head>
+<body>
+  <h1>Speak to Saori</h1>
+  <textarea id="message" rows="4" cols="50" placeholder="Type your message here..."></textarea><br>
+  <button onclick="sendMessage()">Speak to Saori</button>
+  <pre id="response"></pre>
+
+  <script>
+    async function sendMessage() {
+      const message = document.getElementById('message').value;
+
+      const response = await fetch('https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_ACCESS_TOKEN_HERE'
+        },
+        body: JSON.stringify({
+          message: message,
+          mode: 'interpret'
+        })
+      });
+
+      const result = await response.json();
+      document.getElementById('response').textContent = result.reply;
+    }
+  </script>
+</body>
+</html>
