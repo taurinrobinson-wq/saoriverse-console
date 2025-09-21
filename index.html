@@ -272,8 +272,7 @@
   function appendChat(role, text) {
     const div = document.createElement('div');
     div.className = `chat-entry ${role}`;
-    div.textContent = `${role === 'user' ? 'You' : 'Saori'}:
-    div.textContent = `${role === 'user' ? 'You' : 'Saori'}: ${text}`;
+div.textContent = `${role === 'user' ? 'You' : 'Saori'}: ${text}`;
     chatLog.appendChild(div);
     chatLog.scrollTop = chatLog.scrollHeight;
   }
@@ -329,6 +328,26 @@
       appendChat('saori', 'Error contacting backend.');
     }
   });
+  document.getElementById('google-login').addEventListener('click', async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin
+    }
+  });
+  if (error) {
+    console.error('Google login error:', error.message);
+  }
+});
+
+supabase.auth.onAuthStateChange(async (event, session) => {
+  if (session?.user) {
+    console.log('Logged in as:', session.user.email);
+    appendChat('saori', `Welcome back, ${session.user.email}`);
+    await loadGlyphTrail();
+  }
+});
+
 </script>
 </body>
 </html>
