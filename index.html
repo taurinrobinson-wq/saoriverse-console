@@ -273,3 +273,62 @@
     const div = document.createElement('div');
     div.className = `chat-entry ${role}`;
     div.textContent = `${role === 'user' ? 'You' : 'Saori'}:
+    div.textContent = `${role === 'user' ? 'You' : 'Saori'}: ${text}`;
+    chatLog.appendChild(div);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    appendChat('user', message);
+    chatInput.value = '';
+    chatInput.style.height = 'auto';
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session || !session.access_token) {
+        appendChat('saori', 'No active session. Please sign in to continue.');
+        return;
+      }
+
+      const accessToken = session.access_token;
+      const res = await fetch(EDGE_FUNCTION_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({
+          message,
+          mode: modeSelect.value
+        })
+      });
+
+      const data = await res.json().catch(() => ({}));
+      console.log('Edge Function status:', res.status, 'payload:', data);
+
+      if (!res.ok) {
+        appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
+        return;
+      }
+
+      const reply = data.reply || data.saoriReply || 'No response received.';
+      appendChat('saori', reply);
+
+      if (voiceToggle.checked && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(reply);
+        speechSynthesis.speak(utterance);
+      }
+
+      await loadGlyphTrail();
+    } catch (err) {
+      console.error('Edge Function Error:', err);
+      appendChat('saori', 'Error contacting backend.');
+    }
+  });
+</script>
+</body>
+</html>
