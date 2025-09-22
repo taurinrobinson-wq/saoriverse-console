@@ -347,7 +347,21 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     await loadGlyphTrail();
   }
 });
+window.addEventListener('load', async () => {
+  const { data: { session }, error } = await supabase.auth.getSession();
+  if (session?.user) {
+    console.log('Session restored for:', session.user.email);
+    appendChat('saori', `Welcome back, ${session.user.email}`);
+    await loadGlyphTrail();
+  } else if (error) {
+    console.error('Session retrieval error:', error.message);
+  }
 
+  // Clean up the hash fragment from the URL
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+});
 </script>
 </body>
 </html>
