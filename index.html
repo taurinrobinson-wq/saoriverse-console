@@ -339,7 +339,7 @@ document.getElementById('google-login').addEventListener('click', async () => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: 'http://localhost:3000' // Ensure this matches your local server
+      redirectTo: 'https://taurinrobinson-wq.github.io/saoriverse-console/'
     }
   });
   if (error) {
