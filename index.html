@@ -233,106 +233,113 @@
   const EDGE_FUNCTION_URL = `${PROJECT_URL}/functions/v1/saori-fixed`;
   const supabase = window.supabase.createClient(PROJECT_URL, PROJECT_ANON_KEY);
 
-  async function loadGlyphTrail() {
+  // 🌀 Load Glyph Trail
+async function loadGlyphTrail() {
+  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  if (sessionError || !session?.user) {
+    console.warn('🧪 No session found—glyph trail will not load.');
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from('glyph_trail')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Glyph trail error:', error.message);
+    return;
+  }
+
+  const trailSection = document.getElementById('glyph-trail');
+  trailSection.innerHTML =
+    '<h2>Glyph Trail Archive</h2>' +
+    data.map(entry => `<div>${entry.message}</div>`).join('');
+}
+
+// 🌀 DOM Elements
+const chatForm = document.getElementById('chat-form');
+const chatLog = document.getElementById('chat-log');
+const chatInput = document.getElementById('chat-message');
+const voiceToggle = document.getElementById('voice-toggle');
+const modeSelect = document.getElementById('mode-switcher');
+voiceToggle.checked = false;
+
+// 🌀 Mode Preview
+modeSelect.addEventListener('change', () => {
+  const mode = modeSelect.value;
+  const preview = document.getElementById('app-preview-inner');
+  preview.innerHTML = `<div style="padding:2rem;">Rendering: ${mode}</div>`;
+});
+
+// 🌀 Chat Renderer
+function appendChat(role, text) {
+  const div = document.createElement('div');
+  div.className = `chat-entry ${role}`;
+  div.textContent = `${role === 'user' ? 'You' : 'Saori'}: ${text}`;
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+// 🌀 Chat Submit Handler
+chatForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const message = chatInput.value.trim();
+  if (!message) return;
+
+  appendChat('user', message);
+  chatInput.value = '';
+  chatInput.style.height = 'auto';
+
+  try {
     const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      console.warn('🧪 No session found—glyph trail will not load.');
+    if (!session?.access_token) {
+      appendChat('saori', 'No active session. Please sign in to continue.');
       return;
     }
 
-    const { data, error } = await supabase
-      .from('glyph_trail')
-      .select('*')
-      .order('created_at', { ascending: false });
+    const accessToken = session.access_token;
+    const res = await fetch(EDGE_FUNCTION_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({
+        message,
+        mode: modeSelect.value
+      })
+    });
 
-    if (error) {
-      console.error('Glyph trail error:', error);
+    const data = await res.json().catch(() => ({}));
+    console.log('Edge Function status:', res.status, 'payload:', data);
+
+    if (!res.ok) {
+      appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
       return;
     }
 
-    const trailSection = document.getElementById('glyph-trail');
-    trailSection.innerHTML =
-      '<h2>Glyph Trail Archive</h2>' +
-      data.map(entry => `<div>${entry.message}</div>`).join('');
-  }
+    const reply = data.reply || data.saoriReply || 'No response received.';
+    appendChat('saori', reply);
 
-  const chatForm = document.getElementById('chat-form');
-  const chatLog = document.getElementById('chat-log');
-  const chatInput = document.getElementById('chat-message');
-  const voiceToggle = document.getElementById('voice-toggle');
-  voiceToggle.checked = false;
-  const modeSelect = document.getElementById('mode-switcher');
-
-  modeSelect.addEventListener('change', () => {
-    const mode = modeSelect.value;
-    const preview = document.getElementById('app-preview-inner');
-    preview.innerHTML = `<div style="padding:2rem;">Rendering: ${mode}</div>`;
-  });
-
-  function appendChat(role, text) {
-    const div = document.createElement('div');
-    div.className = `chat-entry ${role}`;
-div.textContent = `${role === 'user' ? 'You' : 'Saori'}: ${text}`;
-    chatLog.appendChild(div);
-    chatLog.scrollTop = chatLog.scrollHeight;
-  }
-
-  chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const message = chatInput.value.trim();
-    if (!message) return;
-
-    appendChat('user', message);
-    chatInput.value = '';
-    chatInput.style.height = 'auto';
-
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session || !session.access_token) {
-        appendChat('saori', 'No active session. Please sign in to continue.');
-        return;
-      }
-
-      const accessToken = session.access_token;
-      const res = await fetch(EDGE_FUNCTION_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        },
-        body: JSON.stringify({
-          message,
-          mode: modeSelect.value
-        })
-      });
-
-      const data = await res.json().catch(() => ({}));
-      console.log('Edge Function status:', res.status, 'payload:', data);
-
-      if (!res.ok) {
-        appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
-        return;
-      }
-
-      const reply = data.reply || data.saoriReply || 'No response received.';
-      appendChat('saori', reply);
-
-      if (voiceToggle.checked && 'speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(reply);
-        speechSynthesis.speak(utterance);
-      }
-
-      await loadGlyphTrail();
-    } catch (err) {
-      console.error('Edge Function Error:', err);
-      appendChat('saori', 'Error contacting backend.');
+    if (voiceToggle.checked && 'speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(reply);
+      speechSynthesis.speak(utterance);
     }
-  });
-  document.getElementById('google-login').addEventListener('click', async () => {
+
+    await loadGlyphTrail();
+  } catch (err) {
+    console.error('Edge Function Error:', err);
+    appendChat('saori', 'Error contacting backend.');
+  }
+});
+
+// 🌀 Google Login Handler
+document.getElementById('google-login').addEventListener('click', async () => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-redirectTo: 'http://localhost:3000'
+      redirectTo: 'http://localhost:3000' // Ensure this matches your local server
     }
   });
   if (error) {
@@ -340,6 +347,7 @@ redirectTo: 'http://localhost:3000'
   }
 });
 
+// 🌀 Live Session Listener
 supabase.auth.onAuthStateChange(async (event, session) => {
   if (session?.user) {
     console.log('Logged in as:', session.user.email);
@@ -347,6 +355,8 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     await loadGlyphTrail();
   }
 });
+
+// 🌀 Restore Session on Page Load
 window.addEventListener('load', async () => {
   const { data: { session }, error } = await supabase.auth.getSession();
   if (session?.user) {
@@ -357,7 +367,7 @@ window.addEventListener('load', async () => {
     console.error('Session retrieval error:', error.message);
   }
 
-  // Clean up the hash fragment from the URL
+  // Clean up hash fragment
   if (window.location.hash) {
     history.replaceState(null, '', window.location.pathname);
   }
