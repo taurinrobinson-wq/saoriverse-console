@@ -185,7 +185,11 @@
         <option value="legal">Legal App</option>
         <option value="voltage">Voltage Chat</option>
       </select>
-      <button id="google-login">Login with Google</button>
+     <form id="login-form">
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button type="submit">Login</button>
+</form>
     </div>
     <label class="toggle">
       <input type="checkbox" id="voice-toggle" />
@@ -334,17 +338,22 @@ chatForm.addEventListener('submit', async (e) => {
   }
 });
 
-// 🌀 Google Login Handler
-document.getElementById('google-login').addEventListener('click', async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: 'https://taurinrobinson-wq.github.io/saoriverse-console/'
-    }
-  });
-  if (error) {
-    console.error('Google login error:', error.message);
-  }
+// 🌀 Login Handler
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+ if (error) {
+  appendChat('saori', `Login failed: ${error.message}`);
+  return;
+}
+
+  console.log('Logged in as:', data.user.email);
+  appendChat('saori', `Welcome back, ${data.user.email}`);
+  await loadGlyphTrail();
 });
 
 // 🌀 Live Session Listener
