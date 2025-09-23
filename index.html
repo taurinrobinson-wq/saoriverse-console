@@ -372,16 +372,21 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     await loadGlyphTrail();
   }
 });
-// 🌀 Restore Session on Page Load
 window.addEventListener('load', async () => {
   const { data: { session }, error } = await supabase.auth.getSession();
+
   if (session?.user) {
     console.log('Session restored for:', session.user.email);
     appendChat('saori', `Welcome back, ${session.user.email}`);
+
+    // 🔐 Log the access token for debugging
+    console.log('🔐 Access Token:', session.access_token);
+
     await loadGlyphTrail();
   } else if (error) {
     console.error('Session retrieval error:', error.message);
   }
+
   // Clean up hash fragment
   if (window.location.hash) {
     history.replaceState(null, '', window.location.pathname);
