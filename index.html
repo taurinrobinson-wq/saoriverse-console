@@ -245,22 +245,46 @@ async function loadGlyphTrail() {
     return;
   }
 
-  const { data, error } = await supabase
+  const userId = session.user.id;
+
+  // Load glyph_trail entries
+  const { data: trailData, error: trailError } = await supabase
     .from('glyph_trail')
     .select('*')
+    .eq('user_id', userId)
     .order('created_at', { ascending: false });
 
-  if (error) {
-    console.error('Glyph trail error:', error.message);
-    return;
+  if (trailError) {
+    console.error('Glyph trail error:', trailError.message);
+  }
+
+  // Load glyphs created from chat
+  const { data: glyphs, error: glyphError } = await supabase
+    .from('glyphs')
+    .select('name, description, source_message, last_updated')
+    .eq('user_id', userId)
+    .eq('created_from_chat', true)
+    .order('last_updated', { ascending: false });
+
+  if (glyphError) {
+    console.error('Glyphs error:', glyphError.message);
   }
 
   const trailSection = document.getElementById('glyph-trail');
-  trailSection.innerHTML =
-    '<h2>Glyph Trail Archive</h2>' +
-    data.map(entry => `<div>${entry.message}</div>`).join('');
+  trailSection.innerHTML = '<h2>Glyph Trail Archive</h2>';
+  // Render glyph_trail messages
+  if (trailData?.length) {
+    trailSection.innerHTML += trailData.map(entry =>
+      `<div><strong>Trail:</strong> ${entry.message}</div>`
+    ).join('');
+  }
+  // Render glyphs created from chat
+  if (glyphs?.length) {
+    trailSection.innerHTML += glyphs.map(g =>
+      `<div><strong>${g.name}</strong><br>${g.description}<br><em>${g.source_message}</em></div>`
+    ).join('');
+  }
 }
-
 // 🌀 DOM Elements
 const chatForm = document.getElementById('chat-form');
 const chatLog = document.getElementById('chat-log');
@@ -268,14 +292,12 @@ const chatInput = document.getElementById('chat-message');
 const voiceToggle = document.getElementById('voice-toggle');
 const modeSelect = document.getElementById('mode-switcher');
 voiceToggle.checked = false;
-
 // 🌀 Mode Preview
 modeSelect.addEventListener('change', () => {
   const mode = modeSelect.value;
   const preview = document.getElementById('app-preview-inner');
   preview.innerHTML = `<div style="padding:2rem;">Rendering: ${mode}</div>`;
 });
-
 // 🌀 Chat Renderer
 function appendChat(role, text) {
   const div = document.createElement('div');
@@ -284,24 +306,20 @@ function appendChat(role, text) {
   chatLog.appendChild(div);
   chatLog.scrollTop = chatLog.scrollHeight;
 }
-
 // 🌀 Chat Submit Handler
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const message = chatInput.value.trim();
   if (!message) return;
-
   appendChat('user', message);
   chatInput.value = '';
   chatInput.style.height = 'auto';
-
   try {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.access_token) {
       appendChat('saori', 'No active session. Please sign in to continue.');
       return;
     }
-
     const accessToken = session.access_token;
     const res = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
@@ -314,48 +332,38 @@ chatForm.addEventListener('submit', async (e) => {
         mode: modeSelect.value
       })
     });
-
     const data = await res.json().catch(() => ({}));
     console.log('Edge Function status:', res.status, 'payload:', data);
-
     if (!res.ok) {
       appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
       return;
     }
-
     const reply = data.reply || data.saoriReply || 'No response received.';
     appendChat('saori', reply);
-
     if (voiceToggle.checked && 'speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(reply);
       speechSynthesis.speak(utterance);
     }
-
     await loadGlyphTrail();
   } catch (err) {
     console.error('Edge Function Error:', err);
     appendChat('saori', 'Error contacting backend.');
   }
 });
-
 // 🌀 Login Handler
 document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
-
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
  if (error) {
   appendChat('saori', `Login failed: ${error.message}`);
   return;
 }
-
   console.log('Logged in as:', data.user.email);
   appendChat('saori', `Welcome back, ${data.user.email}`);
   await loadGlyphTrail();
 });
-
 // 🌀 Live Session Listener
 supabase.auth.onAuthStateChange(async (event, session) => {
   if (session?.user) {
@@ -364,7 +372,6 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     await loadGlyphTrail();
   }
 });
-
 // 🌀 Restore Session on Page Load
 window.addEventListener('load', async () => {
   const { data: { session }, error } = await supabase.auth.getSession();
@@ -375,7 +382,6 @@ window.addEventListener('load', async () => {
   } else if (error) {
     console.error('Session retrieval error:', error.message);
   }
-
   // Clean up hash fragment
   if (window.location.hash) {
     history.replaceState(null, '', window.location.pathname);
