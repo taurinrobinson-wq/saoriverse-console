@@ -232,7 +232,9 @@
 
 <script>
   const PROJECT_URL = 'https://gyqzyuvuuyfjxnramkfq.supabase.co';
-  const PROJECT_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8';
+  // IMPORTANT: Replace the placeholder below with your project's ANON (public) key.
+  // Do NOT paste a service_role key here. Service role keys must only live on the server.
+  const PROJECT_ANON_KEY = 'REPLACE_WITH_ANON_KEY';
 
   const EDGE_FUNCTION_URL = `${PROJECT_URL}/functions/v1/saori-fixed`;
   const supabase = window.supabase.createClient(PROJECT_URL, PROJECT_ANON_KEY);
@@ -364,6 +366,34 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   appendChat('saori', `Welcome back, ${data.user.email}`);
   await loadGlyphTrail();
 });
+// Button to show / copy current access token (useful for testing curl requests)
+(function addTokenButton(){
+  const loginForm = document.getElementById('login-form');
+  if (!loginForm) return;
+  const showTokenBtn = document.createElement('button');
+  showTokenBtn.id = 'show-token-btn';
+  showTokenBtn.type = 'button';
+  showTokenBtn.textContent = 'Show token';
+  showTokenBtn.style.marginLeft = '8px';
+  showTokenBtn.addEventListener('click', async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const token = session?.access_token;
+    if (!token) {
+      alert('No active session / access token. Please sign in first.');
+      return;
+    }
+    const doCopy = confirm('Copy access token to clipboard? (Only for local testing)');
+    if (doCopy) {
+      try {
+        await navigator.clipboard.writeText(token);
+        alert('Access token copied to clipboard.');
+      } catch (err) {
+        window.prompt('Copy this access token:', token);
+      }
+    }
+  });
+  loginForm.appendChild(showTokenBtn);
+})();
 // 🌀 Live Session Listener
 supabase.auth.onAuthStateChange(async (event, session) => {
   if (session?.user) {
@@ -372,19 +402,28 @@ supabase.auth.onAuthStateChange(async (event, session) => {
     await loadGlyphTrail();
   }
 });
-window.addEventListener('load', async () => {
+  window.addEventListener('load', async () => {
   const { data: { session }, error } = await supabase.auth.getSession();
+
+  // Warn if anon key not configured (development-only)
+  if (PROJECT_ANON_KEY === 'REPLACE_WITH_ANON_KEY') {
+    const banner = document.createElement('div');
+    banner.style.background = '#fff3cd';
+    banner.style.color = '#856404';
+    banner.style.padding = '8px 12px';
+    banner.style.border = '1px solid #ffeeba';
+    banner.style.margin = '8px';
+    banner.textContent = 'Development notice: PROJECT_ANON_KEY is not set. Paste your Supabase anon key into the source to enable auth and DB access.';
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
 
   if (session?.user) {
     console.log('Session restored for:', session.user.email);
     appendChat('saori', `Welcome back, ${session.user.email}`);
 
-    // 🔐 Log the access token for debugging
-    console.log('🔐 Access Token:', session.access_token);
-
     await loadGlyphTrail();
   } else if (error) {
-    console.error('Session retrieval error:', error.message);
+    console.error('Session retrieval error:', error?.message ?? error);
   }
 
   // Clean up hash fragment
