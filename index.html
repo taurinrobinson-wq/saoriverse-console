@@ -69,23 +69,24 @@
   </style>
 </head>
 <body>
-  <div id="chat-box">
-    <div id="auth-box" style="max-width:600px;margin:auto;margin-bottom:2rem;">
-  <h2>Login to Access Rituals</h2>
-  <form id="login-form" style="display:flex;gap:0.5rem;margin-bottom:1rem;">
-    <input type="email" id="email" placeholder="Enter your email" required />
-    <button type="submit">Send Magic Link</button>
-  </form>
-  <button id="logout-button" style="display:none;">Logout</button>
-  <div id="auth-status" style="margin-top:0.5rem;color:#aaa;"></div>
-</div>
-    <h1>Saori Console</h1>
-    <div id="messages"></div>
-    <form id="chat-form">
-      <input type="text" id="message" placeholder="Speak to Saori..." autocomplete="off" />
-      <button type="submit">Send</button>
+<div id="chat-box">
+  <div id="auth-box" style="max-width:600px;margin:auto;margin-bottom:2rem;border:1px solid red;">
+    <h2>Login to Access Rituals</h2>
+    <form id="login-form" style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <button type="submit">Send Magic Link</button>
     </form>
+    <button id="logout-button" style="display:none;">Logout</button>
+    <div id="auth-status" style="margin-top:0.5rem;color:#aaa;"></div>
   </div>
+
+  <h1>Saori Console</h1>
+  <div id="messages"></div>
+  <form id="chat-form">
+    <input type="text" id="message" placeholder="Speak to Saori..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+</div>
 
   <!-- Supabase client (UMD build) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
