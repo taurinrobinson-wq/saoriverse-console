@@ -2,432 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SaoriVerse Console</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.6/dist/umd/supabase.min.js"></script>
-  <link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saori Console</title>
   <style>
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
+      background: #0f0f0f;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 2rem;
     }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      background-color: #f5f5f5;
-      border-bottom: 1px solid #ccc;
-      flex-shrink: 0;
+    h1 {
+      font-weight: 400;
+      margin-bottom: 1rem;
     }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr;
-      gap: 1px;
-      flex-grow: 1;
-      background-color: #eaeaea;
-      overflow: hidden;
+    #chat-box {
+      max-width: 600px;
+      margin: auto;
     }
-
-    section {
-      padding: 16px;
-      background-color: #ffffff;
-      border: 1px solid #ddd;
-      overflow: hidden;
-      height: 100%;
-    }
-
-    #chat-console {
-      display: flex;
-      flex-direction: column;
-    }
-
-    #app-preview {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #app-preview-inner {
-      width: 428px;
-      height: 845px;
-      border: 1px solid #ccc;
-      background-color: #fdfdfd;
-    }
-
-    #code-editor, #edge-functions {
-      height: 50%;
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: 1rem;
-      color: #6a5acd;
-    }
-
-    .chat-area {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .chat-log {
-      flex-grow: 1;
+    #messages {
+      border: 1px solid #333;
+      padding: 1rem;
+      height: 400px;
       overflow-y: auto;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      margin-bottom: 0.5rem;
-      background-color: #fdfdfd;
+      background: #1a1a1a;
+      margin-bottom: 1rem;
     }
-
-    .chat-entry {
-      margin-bottom: 0.75rem;
+    .message {
+      margin-bottom: 1rem;
     }
-
-    .chat-entry.user {
-      font-weight: bold;
-      color: #333;
+    .user {
+      color: #9cdcfe;
     }
-
-    .chat-entry.saori {
-      font-style: italic;
-      color: #6a5acd;
+    .saori {
+      color: #dcdcaa;
     }
-
-    .chat-input {
+    form {
       display: flex;
       gap: 0.5rem;
-      align-items: flex-start;
     }
-
-    .chat-input textarea {
+    input {
       flex: 1;
       padding: 0.5rem;
       font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      resize: vertical;
-      font-family: inherit;
-      min-height: 2.5rem;
-      max-height: 10rem;
-      overflow-y: hidden;
-      line-height: 1.4;
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
     }
-
-    .chat-input button {
+    button {
       padding: 0.5rem 1rem;
-      background-color: #6a5acd;
-      color: white;
+      font-size: 1rem;
+      background: #444;
+      color: #fff;
       border: none;
-      border-radius: 4px;
-      font-weight: bold;
       cursor: pointer;
     }
-
-    textarea.editor {
-      width: 100%;
-      height: 100%;
-      background-color: #fdfdfd;
-      color: #333;
-      border: 1px solid #ccc;
-      resize: none;
-      font-family: monospace;
+    button:hover {
+      background: #666;
+    }
+    .glyph {
       font-size: 0.9rem;
-      padding: 1rem;
-    }
-
-    #glyph-trail {
-      height: 300px;
-      background-color: #ffffff;
-      border-top: 1px solid #ccc;
-      padding: 16px;
-      overflow-y: auto;
-      flex-shrink: 0;
-    }
-
-    .toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .toggle input {
-      transform: scale(1.2);
-    }
-
-    #google-login {
-      padding: 0.5rem 1rem;
-      background-color: #4285F4;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-left: 1rem;
+      color: #aaa;
+      margin-top: 0.25rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <strong>SaoriVerse Console</strong>
-      <select id="mode-switcher">
-        <option value="threshold">Threshold App</option>
-        <option value="legal">Legal App</option>
-        <option value="voltage">Voltage Chat</option>
-      </select>
-     <form id="login-form">
-  <input type="email" id="email" placeholder="Email" required />
-  <input type="password" id="password" placeholder="Password" required />
-  <button type="submit">Login</button>
-</form>
-    </div>
-    <label class="toggle">
-      <input type="checkbox" id="voice-toggle" />
-      🔊 Saori speaks aloud
-    </label>
-  </header>
-
-  <div class="main-grid">
-    <section id="chat-console">
-      <h2>Chat with Saori</h2>
-      <div class="chat-area">
-        <div class="chat-log" id="chat-log"></div>
-        <form class="chat-input" id="chat-form">
-          <textarea id="chat-message" rows="1" placeholder="Speak to Saori..." required></textarea>
-          <button type="submit">Send</button>
-        </form>
-      </div>
-    </section>
-
-    <section id="app-preview">
-      <h2>App Preview</h2>
-      <div id="app-preview-inner"></div>
-    </section>
-
-    <section>
-      <div id="code-editor">
-        <h2>HTML + JS Editor</h2>
-        <textarea class="editor" placeholder="Write or revise frontend code here..."></textarea>
-      </div>
-      <div id="edge-functions">
-        <h2>Supabase Edge Functions</h2>
-        <textarea class="editor" placeholder="Edit backend logic, glyph processors, etc..."></textarea>
-      </div>
-    </section>
+  <div id="chat-box">
+    <h1>Saori Console</h1>
+    <div id="messages"></div>
+    <form id="chat-form">
+      <input type="text" id="message" placeholder="Speak to Saori..." autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
   </div>
 
-  <section id="glyph-trail">
-    <h2>Glyph Trail Archive</h2>
-  </section>
+  <script>
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("message");
+    const messages = document.getElementById("messages");
 
-<script>
-  const PROJECT_URL = 'https://gyqzyuvuuyfjxnramkfq.supabase.co';
-  const PROJECT_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8';
-  const EDGE_FUNCTION_URL = `${PROJECT_URL}/functions/v1/saori-fixed`;
-  const supabase = window.supabase.createClient(PROJECT_URL, PROJECT_ANON_KEY);
+    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed"; // Replace with your actual function path
+    const SUPABASE_TOKEN = "YOUR_JWT_TOKEN"; // Replace with actual token from Supabase auth
 
-  // 🌀 Load Glyph Trail
-async function loadGlyphTrail() {
-  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-  if (sessionError || !session?.user) {
-    console.warn('🧪 No session found—glyph trail will not load.');
-    return;
-  }
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
 
-  const userId = session.user.id;
+      appendMessage("You", userMessage, "user");
+      input.value = "";
 
-  // Load glyph_trail entries
-  const { data: trailData, error: trailError } = await supabase
-    .from('glyph_trail')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false });
-
-  if (trailError) {
-    console.error('Glyph trail error:', trailError.message);
-  }
-
-  // Load glyphs created from chat
-  const { data: glyphs, error: glyphError } = await supabase
-    .from('glyphs')
-    .select('name, description, source_message, last_updated')
-    .eq('user_id', userId)
-    .eq('created_from_chat', true)
-    .order('last_updated', { ascending: false });
-
-  if (glyphError) {
-    console.error('Glyphs error:', glyphError.message);
-  }
-
-  const trailSection = document.getElementById('glyph-trail');
-  trailSection.innerHTML = '<h2>Glyph Trail Archive</h2>';
-  // Render glyph_trail messages
-  if (trailData?.length) {
-    trailSection.innerHTML += trailData.map(entry =>
-      `<div><strong>Trail:</strong> ${entry.message}</div>`
-    ).join('');
-  }
-  // Render glyphs created from chat
-  if (glyphs?.length) {
-    trailSection.innerHTML += glyphs.map(g =>
-      `<div><strong>${g.name}</strong><br>${g.description}<br><em>${g.source_message}</em></div>`
-    ).join('');
-  }
-}
-// 🌀 DOM Elements
-const chatForm = document.getElementById('chat-form');
-const chatLog = document.getElementById('chat-log');
-const chatInput = document.getElementById('chat-message');
-const voiceToggle = document.getElementById('voice-toggle');
-const modeSelect = document.getElementById('mode-switcher');
-voiceToggle.checked = false;
-// 🌀 Mode Preview
-modeSelect.addEventListener('change', () => {
-  const mode = modeSelect.value;
-  const preview = document.getElementById('app-preview-inner');
-  preview.innerHTML = `<div style="padding:2rem;">Rendering: ${mode}</div>`;
-});
-// 🌀 Chat Renderer
-function appendChat(role, text) {
-  const div = document.createElement('div');
-  div.className = `chat-entry ${role}`;
-  div.textContent = `${role === 'user' ? 'You' : 'Saori'}: ${text}`;
-  chatLog.appendChild(div);
-  chatLog.scrollTop = chatLog.scrollHeight;
-}
-// 🌀 Chat Submit Handler
-chatForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const message = chatInput.value.trim();
-  if (!message) return;
-  appendChat('user', message);
-  chatInput.value = '';
-  chatInput.style.height = 'auto';
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.access_token) {
-      appendChat('saori', 'No active session. Please sign in to continue.');
-      return;
-    }
-    const accessToken = session.access_token;
-    const res = await fetch(EDGE_FUNCTION_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      },
-      body: JSON.stringify({
-        message,
-        mode: modeSelect.value
-      })
-    });
-    const data = await res.json().catch(() => ({}));
-    console.log('Edge Function status:', res.status, 'payload:', data);
-    if (!res.ok) {
-      appendChat('saori', `Error: ${data.error || data.message || 'Backend error'}`);
-      return;
-    }
-    const reply = data.reply || data.saoriReply || 'No response received.';
-    appendChat('saori', reply);
-    if (voiceToggle.checked && 'speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(reply);
-      speechSynthesis.speak(utterance);
-    }
-    await loadGlyphTrail();
-  } catch (err) {
-    console.error('Edge Function Error:', err);
-    appendChat('saori', 'Error contacting backend.');
-  }
-});
-// 🌀 Login Handler
-document.getElementById('login-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
- if (error) {
-  appendChat('saori', `Login failed: ${error.message}`);
-  return;
-}
-  console.log('Logged in as:', data.user.email);
-  appendChat('saori', `Welcome back, ${data.user.email}`);
-  await loadGlyphTrail();
-});
-// Button to show / copy current access token (useful for testing curl requests)
-(function addTokenButton(){
-  const loginForm = document.getElementById('login-form');
-  if (!loginForm) return;
-  const showTokenBtn = document.createElement('button');
-  showTokenBtn.id = 'show-token-btn';
-  showTokenBtn.type = 'button';
-  showTokenBtn.textContent = 'Show token';
-  showTokenBtn.style.marginLeft = '8px';
-  showTokenBtn.addEventListener('click', async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    const token = session?.access_token;
-    if (!token) {
-      alert('No active session / access token. Please sign in first.');
-      return;
-    }
-    const doCopy = confirm('Copy access token to clipboard? (Only for local testing)');
-    if (doCopy) {
       try {
-        await navigator.clipboard.writeText(token);
-        alert('Access token copied to clipboard.');
+        const res = await fetch(EDGE_FUNCTION_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${SUPABASE_TOKEN}`
+          },
+          body: JSON.stringify({ message: userMessage })
+        });
+
+        const { reply, glyph } = await res.json();
+        appendMessage("Saori", reply, "saori", glyph);
       } catch (err) {
-        window.prompt('Copy this access token:', token);
+        console.error("Error:", err);
+        appendMessage("Saori", "I couldn’t reach the oracle. Try again soon.", "saori");
       }
+    });
+
+    function appendMessage(sender, text, className, glyph = null) {
+      const div = document.createElement("div");
+      div.classList.add("message", className);
+      div.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      if (glyph?.tag_name) {
+        const glyphDiv = document.createElement("div");
+        glyphDiv.classList.add("glyph");
+        glyphDiv.textContent = `Glyph: ${glyph.tag_name} ${glyph.glyph ? `(${glyph.glyph})` : ""}`;
+        div.appendChild(glyphDiv);
+      }
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
     }
-  });
-  loginForm.appendChild(showTokenBtn);
-})();
-// 🌀 Live Session Listener
-supabase.auth.onAuthStateChange(async (event, session) => {
-  if (session?.user) {
-    console.log('Logged in as:', session.user.email);
-    appendChat('saori', `Welcome back, ${session.user.email}`);
-    await loadGlyphTrail();
-  }
-});
-  window.addEventListener('load', async () => {
-  const { data: { session }, error } = await supabase.auth.getSession();
-
-  // Warn if anon key not configured (development-only)
-  if (PROJECT_ANON_KEY === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8') {
-    const banner = document.createElement('div');
-    banner.style.background = '#fff3cd';
-    banner.style.color = '#856404';
-    banner.style.padding = '8px 12px';
-    banner.style.border = '1px solid #ffeeba';
-    banner.style.margin = '8px';
-    banner.textContent = 'Development notice: PROJECT_ANON_KEY is not set. Paste your Supabase anon key into the source to enable auth and DB access.';
-    document.body.insertBefore(banner, document.body.firstChild);
-  }
-
-  if (session?.user) {
-    console.log('Session restored for:', session.user.email);
-    appendChat('saori', `Welcome back, ${session.user.email}`);
-
-    await loadGlyphTrail();
-  } else if (error) {
-    console.error('Session retrieval error:', error?.message ?? error);
-  }
-
-  // Clean up hash fragment
-  if (window.location.hash) {
-    history.replaceState(null, '', window.location.pathname);
-  }
-});
-</script>
+  </script>
 </body>
 </html>
