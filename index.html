@@ -70,6 +70,15 @@
 </head>
 <body>
   <div id="chat-box">
+    <div id="auth-box" style="max-width:600px;margin:auto;margin-bottom:2rem;">
+  <h2>Login to Access Rituals</h2>
+  <form id="login-form" style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <button type="submit">Send Magic Link</button>
+  </form>
+  <button id="logout-button" style="display:none;">Logout</button>
+  <div id="auth-status" style="margin-top:0.5rem;color:#aaa;"></div>
+</div>
     <h1>Saori Console</h1>
     <div id="messages"></div>
     <form id="chat-form">
@@ -86,7 +95,43 @@
     const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe"; // Your publishable key
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const loginForm = document.getElementById("login-form");
+const emailInput = document.getElementById("email");
+const logoutButton = document.getElementById("logout-button");
+const authStatus = document.getElementById("auth-status");
 
+// Handle login
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = emailInput.value.trim();
+  if (!email) return;
+
+  const { error } = await supabase.auth.signInWithOtp({ email });
+  if (error) {
+    authStatus.textContent = "Login failed. Try again.";
+    console.error("Login error:", error);
+  } else {
+    authStatus.textContent = "Magic link sent! Check your email.";
+  }
+});
+
+// Handle logout
+logoutButton.addEventListener("click", async () => {
+  await supabase.auth.signOut();
+  authStatus.textContent = "Logged out.";
+  logoutButton.style.display = "none";
+});
+
+// Track session
+supabase.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    authStatus.textContent = `Logged in as ${session.user.email}`;
+    logoutButton.style.display = "inline-block";
+  } else {
+    authStatus.textContent = "Not logged in.";
+    logoutButton.style.display = "none";
+  }
+});
     const form = document.getElementById("chat-form");
     const input = document.getElementById("message");
     const messages = document.getElementById("messages");
