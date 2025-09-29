@@ -88,51 +88,65 @@
   </form>
 </div>
 
-  <!-- Supabase client (UMD build) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script>
-    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
-    const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe"; // Your publishable key
+<!-- Supabase client (UMD build) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+  const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
+  const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe"; // Your publishable key
 
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const loginForm = document.getElementById("login-form");
-const emailInput = document.getElementById("email");
-const logoutButton = document.getElementById("logout-button");
-const authStatus = document.getElementById("auth-status");
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Handle login
-loginForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const email = emailInput.value.trim();
-  if (!email) return;
+  // Handle magic link redirect
+  (async () => {
+    const { error } = await supabase.auth.getSessionFromUrl();
+    if (error) {
+      console.error("Error completing login:", error.message);
+    } else {
+      console.log("Magic link login completed.");
+      window.history.replaceState({}, document.title, "/saoriverse-console/");
+    }
+  })();
 
-  const { error } = await supabase.auth.signInWithOtp({ email });
-  if (error) {
-    authStatus.textContent = "Login failed. Try again.";
-    console.error("Login error:", error);
-  } else {
-    authStatus.textContent = "Magic link sent! Check your email.";
-  }
-});
+  const loginForm = document.getElementById("login-form");
+  const emailInput = document.getElementById("email");
+  const logoutButton = document.getElementById("logout-button");
+  const authStatus = document.getElementById("auth-status");
 
-// Handle logout
-logoutButton.addEventListener("click", async () => {
-  await supabase.auth.signOut();
-  authStatus.textContent = "Logged out.";
-  logoutButton.style.display = "none";
-});
+  // Handle login
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email) return;
 
-// Track session
-supabase.auth.onAuthStateChange((event, session) => {
-  if (session) {
-    authStatus.textContent = `Logged in as ${session.user.email}`;
-    logoutButton.style.display = "inline-block";
-  } else {
-    authStatus.textContent = "Not logged in.";
+    const { error } = await supabase.auth.signInWithOtp({ email });
+    if (error) {
+      authStatus.textContent = "Login failed. Try again.";
+      console.error("Login error:", error);
+    } else {
+      authStatus.textContent = "Magic link sent! Check your email.";
+    }
+  });
+
+  // Handle logout
+  logoutButton.addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    authStatus.textContent = "Logged out.";
     logoutButton.style.display = "none";
-  }
-});
+  });
+
+  // Track session
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (session) {
+      authStatus.textContent = `Logged in as ${session.user.email}`;
+      logoutButton.style.display = "inline-block";
+    } else {
+      authStatus.textContent = "Not logged in.";
+      logoutButton.style.display = "none";
+    }
+  });
+</script>
+
     const form = document.getElementById("chat-form");
     const input = document.getElementById("message");
     const messages = document.getElementById("messages");
