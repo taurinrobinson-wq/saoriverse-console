@@ -78,13 +78,18 @@
     </form>
   </div>
 
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm"></script>
   <script>
+    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
+    const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe"; // Your publishable key
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
     const form = document.getElementById("chat-form");
     const input = document.getElementById("message");
     const messages = document.getElementById("messages");
-
-    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
-    const SUPABASE_TOKEN = "YOUR_VALID_SUPABASE_JWT"; // Replace with actual token from Supabase Auth
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -94,12 +99,16 @@
       appendMessage("You", userMessage, "user");
       input.value = "";
 
+      // Get current session token
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+
       try {
         const res = await fetch(EDGE_FUNCTION_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${SUPABASE_TOKEN}`
+            ...(token && { "Authorization": `Bearer ${token}` })
           },
           body: JSON.stringify({ message: userMessage })
         });
