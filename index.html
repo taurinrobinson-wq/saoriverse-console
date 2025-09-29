@@ -78,14 +78,14 @@
     </form>
   </div>
 
-  <!-- Supabase client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm"></script>
+  <!-- Supabase client (UMD build) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
   <script>
     const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
     const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
     const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe"; // Your publishable key
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const form = document.getElementById("chat-form");
     const input = document.getElementById("message");
