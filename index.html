@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Add this inside <head> -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Saori Console</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -84,8 +83,8 @@
     const input = document.getElementById("message");
     const messages = document.getElementById("messages");
 
-    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed"; // Replace with your actual function path
-    const SUPABASE_TOKEN = "eyJhbGciOiJIUzI1NiIsImtpZCI6IlFlaW9Ici8wS1YyT3dVT3YiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2d5cXp5dXZ1dXlmanhucmFta2ZxLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIwMWI0YjNiMy01ZGFmLTRjNTUtYmE2MS02YzM4MmY2YzFhMWIiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU4Njc2OTE0LCJpYXQiOjE3NTg2NzMzMTQsImVtYWlsIjoidGF1cmlucm9iaW5zb25AZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbF92ZXJpZmllZCI6dHJ1ZX0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3NTg2NzMzMTR9XSwic2Vzc2lvbl9pZCI6IjdhYjAwNmI2LWNkY2UtNGM3ZC05ZDc2LWE1OTA4ZTE4MjI3NyIsImlzX2Fub255bW91cyI6ZmFsc2V9.38v7OikDfxRk209IyqOLHBeAlf5uIDzKGzBlfP4BFyg"; // Replace with actual token from Supabase auth
+    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed";
+    const SUPABASE_TOKEN = "YOUR_VALID_SUPABASE_JWT"; // Replace with actual token from Supabase Auth
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
