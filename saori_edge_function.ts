@@ -1,11 +1,11 @@
-import { createClient } from "npm:@supabase/supabase-js@2.45.4";
-import OpenAI from "npm:openai@4.56.0";
+import { createClient } from "@supabase/supabase-js";
+import OpenAI from "openai";
 // Allow GitHub Pages, console.saonyx.com, and Streamlit Community Cloud domains
 const ALLOWED_ORIGINS = [
   "https://taurinrobinson-wq.github.io",
   "https://console.saonyx.com"
 ];
-function getCorsHeaders(req) {
+function getCorsHeaders(req: Request) {
   const origin = req.headers.get("Origin");
   
   // Allow Streamlit Community Cloud domains (*.streamlit.app)
@@ -14,13 +14,13 @@ function getCorsHeaders(req) {
   // Allow localhost for development
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
   
-  let allowOrigin;
-  if (ALLOWED_ORIGINS.includes(origin)) {
+  let allowOrigin: string;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
   } else if (isStreamlitApp || isLocalhost) {
-    allowOrigin = origin;
+    allowOrigin = origin!;
   } else {
-    allowOrigin = ALLOWED_ORIGINS[0];
+    allowOrigin = ALLOWED_ORIGINS[0] || "*";
   }
   
   return {
@@ -42,7 +42,7 @@ const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
   if (!OPENAI_API_KEY) missing.push("OPENAI_API_KEY");
   if (missing.length) console.error(`saori-fixed missing env: ${missing.join(", ")}`);
 })();
-Deno.serve(async (req)=>{
+Deno.serve(async (req: Request): Promise<Response> => {
   const corsHeaders = getCorsHeaders(req);
   if (req.method === "OPTIONS") return new Response(null, {
     status: 204,
@@ -199,7 +199,7 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
     const raw = extract.choices?.[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(raw);
     const glyphs = Array.isArray(parsed?.glyphs) ? parsed.glyphs : [];
-    parsedGlyphs = glyphs.filter((g)=>g?.name && typeof g.name === "string").map((g)=>({
+    parsedGlyphs = glyphs.filter((g: any) => g?.name && typeof g.name === "string").map((g: any) => ({
         name: String(g.name).slice(0, 80),
         description: String(g.description ?? "").slice(0, 300),
         response_layer: g.response_layer ? String(g.response_layer).slice(0, 80) : undefined,
@@ -214,9 +214,9 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
   let upsertedGlyphs = [];
   if (parsedGlyphs.length && userId) {
     try {
-      const names = parsedGlyphs.map((g)=>g.name);
+      const names = parsedGlyphs.map((g: any) => g.name);
       const { data: existing } = await admin.from("glyphs").select("id, name, description, response_layer, depth, user_id").eq("user_id", userId).in("name", names);
-      const existByName = new Map((existing ?? []).map((g)=>[
+      const existByName = new Map((existing ?? []).map((g: any) => [
           g.name,
           g
         ]));
@@ -240,12 +240,12 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
             last_updated: now
           });
         } else {
-          const mergedDescription = g.description && ex.description ? (ex.description + " | " + g.description).slice(0, 300) : g.description || ex.description || null;
+          const mergedDescription = g.description && (ex as any).description ? ((ex as any).description + " | " + g.description).slice(0, 300) : g.description || (ex as any).description || null;
           toUpdate.push({
-            id: ex.id,
+            id: (ex as any).id,
             description: mergedDescription,
-            response_layer: g.response_layer ?? ex.response_layer ?? null,
-            depth: Number.isFinite(g.depth) ? g.depth : ex.depth ?? null,
+            response_layer: g.response_layer ?? (ex as any).response_layer ?? null,
+            depth: Number.isFinite(g.depth) ? g.depth : (ex as any).depth ?? null,
             glyph_type: g.glyph_type ?? null,
             symbolic_pairing: g.symbolic_pairing ?? null,
             created_from_chat: true,
