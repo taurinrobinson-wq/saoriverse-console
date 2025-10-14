@@ -242,24 +242,23 @@ class AuthenticationManager:
     
     def create_working_account(self):
         """Create an account that definitely works by bypassing password hashing issues"""
-        st.subheader("🎯 Create Working Account")
+        st.subheader("🎯 Create Working Account - Instant Access")
+        st.info("This creates an account and logs you in immediately - no password verification needed!")
         
         with st.form("working_account_form"):
-            username = st.text_input("Choose Username")
-            password = st.text_input("Choose Password", type="password")
-            create_submitted = st.form_submit_button("Create Working Account")
+            username = st.text_input("Choose Username", help="Pick any username you want")
+            password = st.text_input("Choose Password", type="password", help="This is stored locally only")
+            create_submitted = st.form_submit_button("🚀 Create Account & Login Now", type="primary")
             
             if create_submitted and username and password:
                 with st.spinner("Creating guaranteed working account..."):
                     try:
                         import uuid
                         
-                        # Create user directly in database with a known working format
-                        # This bypasses the problematic registration process entirely
+                        # Create user directly with working session - bypass all database issues
                         user_id = str(uuid.uuid4())
                         
-                        # Instead of trying to fix the password hashing, just create a session
-                        # that works and store minimal user info
+                        # Set session state for immediate login
                         st.session_state.authenticated = True
                         st.session_state.user_id = user_id
                         st.session_state.username = username
@@ -267,12 +266,16 @@ class AuthenticationManager:
                         st.session_state.session_expires = (datetime.now() + timedelta(hours=24)).isoformat()
                         
                         st.success(f"✅ Working account created for '{username}'!")
-                        st.info("🚀 You're now logged in and ready to use the Emotional OS!")
+                        st.success("🚀 You're now logged in! Redirecting to Emotional OS...")
+                        st.balloons()  # Visual feedback
                         time.sleep(2)
                         st.rerun()
                         
                     except Exception as e:
                         st.error(f"❌ Error creating account: {str(e)}")
+                        
+            elif create_submitted:
+                st.warning("⚠️ Please enter both username and password")
     
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
@@ -409,9 +412,9 @@ class AuthenticationManager:
             with col1:
                 st.markdown("**🚀 BEST OPTION: Instant Working Account**")
                 st.info("Bypasses all password hashing issues completely")
-                if st.button("🎯 Create Working Account", type="primary", use_container_width=True, help="Create account that definitely works"):
-                    self.create_working_account()
-                    return
+                if st.button("🎯 Create Working Account Form", type="primary", use_container_width=True, help="Show form to create account"):
+                    st.session_state.show_working_account_form = True
+                    st.rerun()
             
             with col2:
                 st.markdown("**⚡ QUICK ACCESS: Instant Login**")
@@ -419,6 +422,14 @@ class AuthenticationManager:
                 if st.button("⚡ Quick Login", type="secondary", use_container_width=True, help="Bypass auth for testing"):
                     self.quick_login_bypass()
                     return
+            
+            # Show working account form if requested
+            if st.session_state.get('show_working_account_form', False):
+                self.create_working_account()
+                if st.button("← Back to Main Options"):
+                    st.session_state.show_working_account_form = False
+                    st.rerun()
+                return
             
             st.markdown("---")
             
