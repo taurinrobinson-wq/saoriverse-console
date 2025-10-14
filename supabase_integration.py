@@ -68,7 +68,12 @@ class SupabaseIntegrator:
             payload["conversation_context"] = conversation_context
         
         try:
-            response = self.session.post(self.function_url, json=payload)
+            response = self.session.post(self.function_url, json=payload, timeout=30)
+            
+            # Log response details for debugging
+            logging.info(f"Supabase response status: {response.status_code}")
+            logging.info(f"Response headers: {dict(response.headers)}")
+            
             response.raise_for_status()
             
             data = response.json()
@@ -81,23 +86,45 @@ class SupabaseIntegrator:
                 log=data.get('log', {})
             )
             
-        except requests.RequestException as e:
-            logging.error(f"Supabase edge function error: {e}")
+        except requests.exceptions.Timeout as e:
+            error_msg = f"Request timed out after 30 seconds: {e}"
+            logging.error(error_msg)
             return SaoriResponse(
-                reply="Connection to the emotional processing system temporarily unavailable.",
+                reply="Connection to the emotional processing system temporarily unavailable. (Timeout)",
                 glyph=None,
                 parsed_glyphs=[],
                 upserted_glyphs=[],
-                log={}
+                log={"error": error_msg}
+            )
+        except requests.exceptions.ConnectionError as e:
+            error_msg = f"Connection error: {e}"
+            logging.error(error_msg)
+            return SaoriResponse(
+                reply="Connection to the emotional processing system temporarily unavailable. (Network Error)",
+                glyph=None,
+                parsed_glyphs=[],
+                upserted_glyphs=[],
+                log={"error": error_msg}
+            )
+        except requests.RequestException as e:
+            error_msg = f"Supabase edge function error: {e}"
+            logging.error(error_msg)
+            return SaoriResponse(
+                reply=f"Connection to the emotional processing system temporarily unavailable. (HTTP {getattr(e.response, 'status_code', 'Unknown')})",
+                glyph=None,
+                parsed_glyphs=[],
+                upserted_glyphs=[],
+                log={"error": error_msg}
             )
         except json.JSONDecodeError as e:
-            logging.error(f"JSON decode error: {e}")
+            error_msg = f"JSON decode error: {e}"
+            logging.error(error_msg)
             return SaoriResponse(
                 reply="Response parsing error from emotional processing system.",
                 glyph=None,
                 parsed_glyphs=[],
                 upserted_glyphs=[],
-                log={}
+                log={"error": error_msg}
             )
 
 class HybridEmotionalProcessor:
