@@ -8,6 +8,14 @@ import os
 import re
 from typing import Dict, List
 
+# Import the auto-evolving glyph system
+try:
+    from evolving_glyph_integrator import EvolvingGlyphIntegrator
+    EVOLUTION_AVAILABLE = True
+except ImportError:
+    EVOLUTION_AVAILABLE = False
+    st.warning("Auto-evolving glyph system not available - check configuration")
+
 st.set_page_config(page_title="Emotional OS", layout="wide", initial_sidebar_state="expanded")
 
 # Load configuration
@@ -78,6 +86,24 @@ if 'hybrid_processor' not in st.session_state:
         st.sidebar.error(f"Hybrid processor initialization failed: {e}")
         st.session_state.hybrid_processor = None
         st.session_state.processor_available = False
+
+# Initialize auto-evolving glyph integrator
+if 'evolving_integrator' not in st.session_state and EVOLUTION_AVAILABLE:
+    try:
+        config = st.session_state.config
+        st.session_state.evolving_integrator = EvolvingGlyphIntegrator(
+            supabase_function_url=config['supabase']['function_url'],
+            supabase_anon_key=config['supabase']['anon_key'],
+            enable_auto_evolution=True,
+            evolution_frequency=5  # Check for evolution every 5 conversations
+        )
+        st.session_state.evolution_enabled = True
+    except Exception as e:
+        st.sidebar.warning(f"Auto-evolving glyph system disabled: {e}")
+        st.session_state.evolving_integrator = None
+        st.session_state.evolution_enabled = False
+else:
+    st.session_state.evolution_enabled = False
 
 # Custom CSS for chat-like interface
 st.markdown("""
@@ -233,6 +259,16 @@ def load_conversations() -> Dict:
 # Sidebar for conversation management
 with st.sidebar:
     st.title("💭 Conversations")
+    
+    # Evolution Status
+    if st.session_state.evolution_enabled:
+        st.success("🧬 Auto-Evolving Glyphs: **Active**")
+        if st.session_state.evolving_integrator:
+            stats = st.session_state.evolving_integrator.get_evolution_stats()
+            st.caption(f"Conversations processed: {stats.get('conversations_processed', 0)}")
+            st.caption(f"Next evolution check in: {stats.get('next_evolution_check', 'N/A')} conversations")
+    else:
+        st.info("🧬 Auto-Evolving Glyphs: **Disabled**")
     
     # Processing Settings
     st.markdown("### ⚙️ Processing Settings")
@@ -410,37 +446,59 @@ else:
         print(f"DEBUG: Conversation ID: {current_conversation.get('conversation_id', 'None')}")
         print(f"DEBUG: Processing mode: {st.session_state.config['processing']['mode']}")
         
-        # Process using hybrid system
-        if st.session_state.processor_available and st.session_state.hybrid_processor:
+        # Process using evolving glyph system if available
+        evolution_result = None
+        if st.session_state.evolution_enabled and st.session_state.evolving_integrator:
             try:
-                processing_config = st.session_state.config['processing']
-                result = st.session_state.hybrid_processor.process_emotional_input(
+                evolution_result = st.session_state.evolving_integrator.process_conversation_with_evolution(
                     message=user_input.strip(),
-                    conversation_context=current_conversation,
-                    prefer_ai=processing_config['prefer_ai'],
-                    privacy_mode=processing_config['privacy_mode']
+                    conversation_context=current_conversation
                 )
-                
-                print(f"DEBUG: Processing source: {result.get('source', 'unknown')}")
-                print(f"DEBUG: Processing method: {result.get('processing_method', 'unknown')}")
-                
+                if evolution_result['saori_response']:
+                    result = {
+                        "response": evolution_result['saori_response'].reply,
+                        "source": "evolving_glyph_system"
+                    }
+                    print(f"DEBUG: Used evolving glyph system")
+                else:
+                    raise Exception("No response from evolving system")
+                    
             except Exception as e:
-                print(f"DEBUG: Hybrid processing failed: {e}")
-                # Fallback to local processing
+                print(f"DEBUG: Evolving glyph system failed: {e}")
+                evolution_result = None
+        
+        # Fallback to hybrid system if evolving system not available
+        if not evolution_result or not evolution_result.get('saori_response'):
+            if st.session_state.processor_available and st.session_state.hybrid_processor:
+                try:
+                    processing_config = st.session_state.config['processing']
+                    result = st.session_state.hybrid_processor.process_emotional_input(
+                        message=user_input.strip(),
+                        conversation_context=current_conversation,
+                        prefer_ai=processing_config['prefer_ai'],
+                        privacy_mode=processing_config['privacy_mode']
+                    )
+                    
+                    print(f"DEBUG: Processing source: {result.get('source', 'unknown')}")
+                    print(f"DEBUG: Processing method: {result.get('processing_method', 'unknown')}")
+                    
+                except Exception as e:
+                    print(f"DEBUG: Hybrid processing failed: {e}")
+                    # Fallback to local processing
+                    result = parse_input(
+                        user_input.strip(), 
+                        "parser/signal_lexicon.json",
+                        conversation_context=current_conversation
+                    )
+                    result = {"response": result.get("voltage_response", "Processing error"), "source": "local_fallback"}
+            else:
+                # Fallback to original local processing
                 result = parse_input(
                     user_input.strip(), 
                     "parser/signal_lexicon.json",
                     conversation_context=current_conversation
                 )
-                result = {"response": result.get("voltage_response", "Processing error"), "source": "local_fallback"}
-        else:
-            # Fallback to original local processing
-            result = parse_input(
-                user_input.strip(), 
-                "parser/signal_lexicon.json",
-                conversation_context=current_conversation
-            )
-            result = {"response": result.get("voltage_response", "Processing error"), "source": "local_only"}
+                result = {"response": result.get("voltage_response", "Processing error"), "source": "local_only"}
         
         # Add user message
         user_message = {
@@ -469,6 +527,31 @@ else:
         # Debug output to see what response we got
         print(f"UI DEBUG: Response received: {response_text[:100]}...")
         print(f"UI DEBUG: Response source: {result.get('source', 'unknown')}")
+        
+        # Add evolution information if available
+        if evolution_result and evolution_result.get('evolution_triggered'):
+            evolution_info = {
+                'type': 'evolution',
+                'timestamp': datetime.datetime.now().isoformat(),
+                'new_glyphs_count': len(evolution_result.get('new_glyphs_generated', [])),
+                'new_glyphs': evolution_result.get('new_glyphs_generated', [])
+            }
+            
+            if evolution_info['new_glyphs_count'] > 0:
+                evolution_message = f"🧬 **Evolution Triggered!** Generated {evolution_info['new_glyphs_count']} new glyph(s):\n"
+                for glyph in evolution_info['new_glyphs']:
+                    evolution_message += f"• **{glyph.get('tag_name', 'Unknown')}** ({glyph.get('glyph', 'N/A')})\n"
+                
+                evolution_system_message = {
+                    'type': 'system',
+                    'content': evolution_message,
+                    'timestamp': datetime.datetime.now().isoformat(),
+                    'metadata': {'source': 'evolution_system', 'is_evolution': True}
+                }
+                system_message = evolution_system_message  # Replace the normal system message
+            else:
+                # Just add a small note that evolution was checked
+                st.success("🧬 Evolution check completed - patterns analyzed")
         
         # Update conversation
         if not current_conv:
