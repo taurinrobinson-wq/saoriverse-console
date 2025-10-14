@@ -504,7 +504,9 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             # Alternative options
             col1, col2 = st.columns([2, 1])
             with col1:
-                st.success("✅ **Authentication Fixed!** Try the improved registration/login system below")
+                st.warning("⚠️ **Still Debugging** - Try creating the database table first, then test registration/login")
+                if st.button("🗃️ Create Users Table First", type="primary"):
+                    self.create_users_table()
             with col2:
                 col2a, col2b = st.columns(2)
                 with col2a:
@@ -578,7 +580,8 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
         
         # Add login/register tabs with improved authentication
         st.markdown("---")
-        st.markdown("### 🔐 **Traditional Login/Register** *(Now Fixed!)*")
+        st.markdown("### 🔐 **Traditional Login/Register** *(Still Debugging...)*")
+        st.info("💡 **Debug Steps**: 1️⃣ Create table above → 2️⃣ Register new user → 3️⃣ Try login")
         
         tab1, tab2 = st.tabs(["Login", "Register"])
         
