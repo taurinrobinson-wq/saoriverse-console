@@ -187,7 +187,11 @@ class AuthenticationManager:
             )
             
             if response.status_code == 200:
-                return {"success": True, "message": "Account created successfully"}
+                data = response.json()
+                if data.get("success"):
+                    return {"success": True, "message": "Account created successfully"}
+                else:
+                    return {"success": False, "message": data.get("error", "Failed to create account")}
             else:
                 error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
                 return {"success": False, "message": error_data.get("error", "Failed to create account")}
@@ -220,19 +224,19 @@ class AuthenticationManager:
             
             if response.status_code == 200:
                 data = response.json()
-                if data.get("success"):
+                if data.get("authenticated"):  # Edge function returns "authenticated", not "success"
                     # Set session state
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
-                    st.session_state.session_token = data.get("session_token")
+                    st.session_state.session_token = data.get("session_token", f"session_{data.get('user_id')}")
                     st.session_state.session_expires = (datetime.now() + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])).isoformat()
                     
                     self.record_login_attempt(username, True)
                     return {"success": True, "message": "Login successful"}
                 else:
                     self.record_login_attempt(username, False)
-                    error_msg = data.get("message", "Invalid username or password")
+                    error_msg = data.get("error", "Invalid username or password")  # Edge function returns "error", not "message"
                     return {"success": False, "message": f"Login failed: {error_msg}"}
             else:
                 self.record_login_attempt(username, False)
