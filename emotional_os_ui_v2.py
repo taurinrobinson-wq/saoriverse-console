@@ -91,15 +91,37 @@ if 'hybrid_processor' not in st.session_state:
 if 'evolving_integrator' not in st.session_state and EVOLUTION_AVAILABLE:
     try:
         config = st.session_state.config
+        supabase_url = None
+        
+        # Extract Supabase URL from function URL if not directly available
+        function_url = config['supabase']['function_url']
+        if function_url:
+            # Extract base URL from function URL (e.g., https://abc.supabase.co/functions/v1/... -> https://abc.supabase.co)
+            import re
+            match = re.match(r'(https://[^/]+\.supabase\.co)', function_url)
+            supabase_url = match.group(1) if match else None
+            
         st.session_state.evolving_integrator = EvolvingGlyphIntegrator(
             supabase_function_url=config['supabase']['function_url'],
             supabase_anon_key=config['supabase']['anon_key'],
+            supabase_url=supabase_url,
             enable_auto_evolution=True,
             evolution_frequency=5  # Check for evolution every 5 conversations
         )
         st.session_state.evolution_enabled = True
     except Exception as e:
-        st.sidebar.warning(f"Auto-evolving glyph system disabled: {e}")
+        config = st.session_state.config
+        supabase_url = None
+        function_url = config['supabase']['function_url']
+        if function_url:
+            import re
+            match = re.match(r'(https://[^/]+\.supabase\.co)', function_url)
+            supabase_url = match.group(1) if match else None
+            
+        st.sidebar.error(f"Auto-evolving glyph system failed to initialize: {str(e)}")
+        st.sidebar.info(f"Debug: Function URL available: {'Yes' if config['supabase']['function_url'] else 'No'}")
+        st.sidebar.info(f"Debug: Anon key available: {'Yes' if config['supabase']['anon_key'] else 'No'}")
+        st.sidebar.info(f"Debug: Supabase URL extracted: {'Yes' if supabase_url else 'No'}")
         st.session_state.evolving_integrator = None
         st.session_state.evolution_enabled = False
 else:
