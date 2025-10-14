@@ -145,11 +145,11 @@ class SaoynxAuthentication:
         
         /* Main container */
         .main-splash {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem;
             text-align: center;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -158,23 +158,24 @@ class SaoynxAuthentication:
         
         /* Logo section */
         .logo-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+            width: 100%;
         }
         
         .logo-text {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 300;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             color: #2E2E2E;
-            margin: 0.8rem 0 0.3rem 0;
+            margin: 0.5rem 0 0.2rem 0;
             font-family: 'Arial', sans-serif;
             text-align: center;
         }
         
         .logo-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: #666;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             font-weight: 300;
             text-transform: uppercase;
             line-height: 1.2;
@@ -185,19 +186,21 @@ class SaoynxAuthentication:
         .auth-container {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            gap: 1rem;
+            margin: 1rem 0;
+            width: 100%;
         }
         
         .auth-section {
             text-align: center;
-            min-width: 140px;
+            flex: 1;
+            max-width: 150px;
         }
         
         .auth-title {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: #2E2E2E;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 300;
         }
         
@@ -250,15 +253,15 @@ class SaoynxAuthentication:
         
         /* Quick access */
         .quick-access {
-            margin-top: 1.5rem;
-            padding-top: 1rem;
+            margin-top: 1rem;
+            padding-top: 0.5rem;
             border-top: 1px solid #eee;
         }
         
         .quick-title {
             color: #999;
-            font-size: 0.8rem;
-            margin-bottom: 0.8rem;
+            font-size: 0.7rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -271,15 +274,11 @@ class SaoynxAuthentication:
         # Logo section
         st.markdown('<div class="logo-section">', unsafe_allow_html=True)
         
-        # Display logo at proper size - graphic only version, perfectly centered
+        # Display logo - compact and centered
         try:
-            # Center the logo perfectly - use centered container
-            st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
-            st.image("Saonyx_Logo2 (2).png", width=150)
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.image("Saonyx_Logo2 (2).png", width=100)
         except:
-            # Fallback if logo not found
-            st.markdown('<div style="font-size: 3rem; color: #666; text-align: center;">🧠</div>', unsafe_allow_html=True)
+            st.markdown('<div style="font-size: 2rem; color: #666;">🧠</div>', unsafe_allow_html=True)
         
         # Center-justified text underneath the logo
         st.markdown('''
