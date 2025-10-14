@@ -77,7 +77,9 @@ class AuthenticationManager:
     
     def is_session_valid(self) -> bool:
         """Check if current session is valid"""
-        if not st.session_state.authenticated:
+        authenticated = getattr(st.session_state, 'authenticated', False)
+        st.write(f"🔍 DEBUG - Session check: authenticated={authenticated}")
+        if not authenticated:
             return False
         
         if not st.session_state.session_expires:
@@ -113,10 +115,11 @@ class AuthenticationManager:
         
         # Set up test user session
         st.session_state.authenticated = True
+        st.write("DEBUG: Test session state set")
         st.session_state.user_id = str(uuid.uuid4())
         st.session_state.username = "test_user"
         st.session_state.session_token = "test_token_" + str(uuid.uuid4())[:8]
-        st.session_state.session_expires = datetime.now() + timedelta(hours=8)
+        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
         
         return True
     
@@ -188,6 +191,7 @@ class AuthenticationManager:
             
             if response.status_code == 200:
                 data = response.json()
+                st.write("🔍 DEBUG - Registration response:", data)  # Debug output
                 if data.get("success"):
                     return {"success": True, "message": "Account created successfully"}
                 else:
@@ -224,6 +228,7 @@ class AuthenticationManager:
             
             if response.status_code == 200:
                 data = response.json()
+                st.write("🔍 DEBUG - Login response:", data)  # Debug output
                 if data.get("authenticated"):  # Edge function returns "authenticated", not "success"
                     # Set session state
                     st.session_state.authenticated = True
