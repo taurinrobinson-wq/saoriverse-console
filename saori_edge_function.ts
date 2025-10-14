@@ -1,13 +1,28 @@
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import OpenAI from "npm:openai@4.56.0";
-// Allow both your GitHub Pages and console.saonyx.com domains
+// Allow GitHub Pages, console.saonyx.com, and Streamlit Community Cloud domains
 const ALLOWED_ORIGINS = [
   "https://taurinrobinson-wq.github.io",
   "https://console.saonyx.com"
 ];
 function getCorsHeaders(req) {
   const origin = req.headers.get("Origin");
-  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  
+  // Allow Streamlit Community Cloud domains (*.streamlit.app)
+  const isStreamlitApp = origin && origin.includes(".streamlit.app");
+  
+  // Allow localhost for development
+  const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
+  
+  let allowOrigin;
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    allowOrigin = origin;
+  } else if (isStreamlitApp || isLocalhost) {
+    allowOrigin = origin;
+  } else {
+    allowOrigin = ALLOWED_ORIGINS[0];
+  }
+  
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
