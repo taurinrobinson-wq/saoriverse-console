@@ -145,9 +145,9 @@ class SaoynxAuthentication:
         
         /* Main container */
         .main-splash {
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 2rem;
             text-align: center;
             min-height: 100vh;
             display: flex;
@@ -157,15 +157,15 @@ class SaoynxAuthentication:
         
         /* Logo section */
         .logo-section {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .logo-text {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             font-weight: 300;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             color: #2E2E2E;
-            margin: 1rem 0 0.3rem 0;
+            margin: 0.8rem 0 0.3rem 0;
             font-family: 'Arial', sans-serif;
             text-align: center;
         }
@@ -267,12 +267,12 @@ class SaoynxAuthentication:
         # Logo section
         st.markdown('<div class="logo-section">', unsafe_allow_html=True)
         
-        # Display logo at full size - graphic only version
+        # Display logo at proper size - graphic only version
         try:
-            # Center the logo - use graphic-only version at full size
-            col1, col2, col3 = st.columns([1, 2, 1])
+            # Center the logo - use graphic-only version at reasonable size
+            col1, col2, col3 = st.columns([1, 1, 1])
             with col2:
-                st.image("Saonyx_Logo2 (2).png", use_column_width=True)
+                st.image("Saonyx_Logo2 (2).png", width=150)
         except:
             # Fallback if logo not found
             st.markdown('<div style="font-size: 3rem; color: #666;">🧠</div>', unsafe_allow_html=True)
