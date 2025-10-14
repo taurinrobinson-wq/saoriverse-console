@@ -504,13 +504,17 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             # Alternative options
             col1, col2 = st.columns([2, 1])
             with col1:
-                st.info("Or try the standard registration/login below (may have password issues)")
+                # HIDDEN: Confusing message about password issues
+                if False:
+                    st.info("Or try the standard registration/login below (may have password issues)")
             with col2:
                 col2a, col2b = st.columns(2)
                 with col2a:
-                    if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
-                        self.create_test_session()
-                        st.rerun()
+                    # HIDDEN: Test Mode button
+                    if False:
+                        if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
+                            self.create_test_session()
+                            st.rerun()
                 with col2b:
                     if st.button("🔧 Debug", help="Test backend connection"):
                         self.test_backend_connection()
@@ -537,16 +541,18 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                     return
             
             with col2:
-                st.markdown("**⚙️ Advanced**")
-                with st.expander("Debug & Settings", expanded=False):
-                    if st.button("🔧 Test Connection"):
-                        self.test_backend_connection()
-                    if st.button("🧮 Hash Test"):
-                        self.test_password_hashing()
-                    if st.button("🗃️ Create Table"):
-                        self.create_users_table()
-                    if st.button("🔑 Fix Password"):
-                        self.fix_user_password()
+                # HIDDEN: Advanced debug section (set to never show)
+                if False:
+                    st.markdown("**⚙️ Advanced**")
+                    with st.expander("Debug & Settings", expanded=False):
+                        if st.button("🔧 Test Connection"):
+                            self.test_backend_connection()
+                        if st.button("🧮 Hash Test"):
+                            self.test_password_hashing()
+                        if st.button("🗃️ Create Table"):
+                            self.create_users_table()
+                        if st.button("🔑 Fix Password"):
+                            self.fix_user_password()
             
             # Benefits section
             st.markdown("### ✨ **What You Get**")
