@@ -453,7 +453,7 @@ def render_main_app():
                 
                 # Connect to authenticated Saori backend
                 try:
-                    saori_url = st.secrets.get("supabase", {}).get("saori_function_url", f"https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori")
+                    saori_url = st.secrets.get("supabase", {}).get("current_saori_url", f"https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed")
                     
                     response_data = requests.post(
                         saori_url,
@@ -462,9 +462,9 @@ def render_main_app():
                             "Content-Type": "application/json"
                         },
                         json={
-                            "message": user_input,  # Edge function expects "message", not "user_input"
+                            "message": user_input,
                             "user_id": st.session_state.user_id,
-                            "mode": processing_mode,  # Edge function expects "mode", not "processing_mode"
+                            "mode": "quick" if processing_mode == "hybrid" else processing_mode,  # Force quick mode for faster responses
                         },
                         timeout=10
                     )
