@@ -185,6 +185,21 @@ class AuthenticationManager:
             except Exception as e:
                 st.error(f"❌ Hash test failed: {str(e)}")
     
+    def quick_login_bypass(self):
+        """Quick bypass login for testing - creates session with freshtest user"""
+        import uuid
+        
+        st.success("⚡ Quick login activated! Logging in as freshtest...")
+        
+        # Create session using same method as test mode but with real user ID
+        st.session_state.authenticated = True
+        st.session_state.user_id = "44004441-f3fe-4e7b-8500-4ee25229cecd"  # freshtest user ID from database
+        st.session_state.username = "freshtest"
+        st.session_state.session_token = "quick_session_" + str(uuid.uuid4())[:8]
+        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
+        
+        st.rerun()
+    
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
         if username not in st.session_state.login_attempts:
@@ -327,6 +342,8 @@ class AuthenticationManager:
                         self.test_backend_connection()
                     if st.button("🧮 Hash Test", help="Test password hashing"):
                         self.test_password_hashing()
+                    if st.button("⚡ Quick Login", help="Bypass auth for testing"):
+                        self.quick_login_bypass()
         
         tab1, tab2 = st.tabs(["Login", "Register"])
         
