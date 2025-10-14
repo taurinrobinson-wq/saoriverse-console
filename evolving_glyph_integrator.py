@@ -111,6 +111,14 @@ class EvolvingGlyphIntegrator:
                     conversation_context=conversation_context or {}
                 )
                 result['saori_response'] = saori_response
+            else:
+                # If no supabase integrator, create a simple response to allow evolution processing
+                print("DEBUG: No supabase integrator available, creating simple response")
+                result['saori_response'] = SaoriResponse(
+                    reply=f"I hear you speaking about {message[:50]}...",
+                    glyph="",
+                    parsed_glyphs=[]
+                )
             
             # Check if evolution should be triggered
             self.conversation_count += 1
@@ -129,11 +137,15 @@ class EvolvingGlyphIntegrator:
                 if result['saori_response']:
                     conversation_text += f" || {result['saori_response'].reply}"
                 
-                # Generate new glyphs if patterns warrant it
-                new_glyphs = self.glyph_generator.process_conversation_for_glyphs(
-                    conversation_text=conversation_text,
-                    context=conversation_context or {}
-                )
+                # Generate new glyphs if patterns warrant it (if glyph generator available)
+                new_glyphs = []
+                if self.glyph_generator:
+                    new_glyphs = self.glyph_generator.process_conversation_for_glyphs(
+                        conversation_text=conversation_text,
+                        context=conversation_context or {}
+                    )
+                else:
+                    print("DEBUG: No glyph generator available, skipping glyph generation")
                 
                 result['new_glyphs_generated'] = new_glyphs
                 
