@@ -601,9 +601,13 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                         if username == "testuser12":
                             st.info("🔍 **Debug Mode for testuser12** - Testing password hash...")
                             
-                            # Test with known values from database
+                            # Test with known values from database  
                             expected_hash = "9a988b9aac65e187977ecbc34e86f807eb28d2385ec88ff9c74b2a40f5e7e209daaa436ef66dfa98ef5fd28cd1959d9cbac1de86d794ef9cbb45b57d0d82fa6d"
                             expected_salt = "ff85422337871d5b3d2ee73276aa17999548e8708524e37145eb77df3e2ed1d6"
+                            
+                            st.write(f"🔍 Testing password '{password}' against database values")
+                            st.write(f"Expected hash: `{expected_hash[:32]}...`")
+                            st.write(f"Expected salt: `{expected_salt}`")
                             
                             # Test hash comparison
                             try:
@@ -625,15 +629,27 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                                 
                                 if response.status_code == 200:
                                     hash_result = response.json()
+                                    st.write("🔍 **Hash Test Results:**")
                                     st.json(hash_result)
                                     
-                                    if hash_result.get("match"):
-                                        st.success("✅ Hash matches! The password is correct.")
+                                    if hash_result.get("success"):
+                                        if hash_result.get("match"):
+                                            st.success("✅ Hash matches! The password is correct.")
+                                        else:
+                                            st.error("❌ Hash mismatch - this explains the login failure")
+                                            
+                                            # Show comparison details
+                                            if "full_computed" in hash_result and "full_expected" in hash_result:
+                                                st.write("**Computed hash:**", hash_result["full_computed"][:64] + "...")
+                                                st.write("**Expected hash:**", hash_result["full_expected"][:64] + "...")
                                     else:
-                                        st.error("❌ Hash mismatch - this explains the login failure")
+                                        st.error(f"❌ Hash test failed: {hash_result.get('error', 'Unknown error')}")
+                                else:
+                                    st.error(f"❌ HTTP {response.status_code}: {response.text}")
                                         
                             except Exception as e:
                                 st.error(f"Hash test error: {str(e)}")
+                                st.write("Debug - Exception details:", str(type(e)), str(e))
                         
                         with st.spinner("Authenticating with improved system..."):
                             result = self.authenticate_user(username, password)
