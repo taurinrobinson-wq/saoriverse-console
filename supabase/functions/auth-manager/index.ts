@@ -1,5 +1,4 @@
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
-import { createHash, pbkdf2Sync, randomBytes } from "node:crypto";
 
 // Authentication Edge Function for Emotional OS
 // Handles user registration, login, and session management with privacy isolation
@@ -36,19 +35,55 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-// Password hashing functions
-function hashPassword(password: string, salt?: string): { hash: string, salt: string } {
-  const saltBuffer = salt ? Buffer.from(salt, 'hex') : randomBytes(32);
-  const hash = pbkdf2Sync(password, saltBuffer, 100000, 64, 'sha256');
+// Deno-compatible password hashing functions using Web Crypto API
+async function hashPassword(password: string, salt?: string): Promise<{ hash: string, salt: string }> {
+  // Generate or parse salt
+  let saltBytes: Uint8Array;
+  if (salt) {
+    // Convert hex salt to Uint8Array
+    saltBytes = new Uint8Array(salt.match(/.{2}/g)!.map(byte => parseInt(byte, 16)));
+  } else {
+    // Generate new random salt
+    saltBytes = crypto.getRandomValues(new Uint8Array(32));
+  }
+  
+  // Encode password as UTF-8
+  const passwordBytes = new TextEncoder().encode(password);
+  
+  // Import password as key
+  const key = await crypto.subtle.importKey(
+    'raw',
+    passwordBytes,
+    { name: 'PBKDF2' },
+    false,
+    ['deriveBits']
+  );
+  
+  // Derive hash using PBKDF2
+  const hashBuffer = await crypto.subtle.deriveBits(
+    {
+      name: 'PBKDF2',
+      salt: saltBytes,
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    key,
+    512 // 64 bytes = 512 bits
+  );
+  
+  // Convert to hex strings
+  const hashArray = new Uint8Array(hashBuffer);
+  const hash = Array.from(hashArray).map(b => b.toString(16).padStart(2, '0')).join('');
+  const saltHex = Array.from(saltBytes).map(b => b.toString(16).padStart(2, '0')).join('');
   
   return {
-    hash: hash.toString('hex'),
-    salt: saltBuffer.toString('hex')
+    hash,
+    salt: saltHex
   };
 }
 
-function verifyPassword(password: string, hash: string, salt: string): boolean {
-  const { hash: newHash } = hashPassword(password, salt);
+async function verifyPassword(password: string, hash: string, salt: string): Promise<boolean> {
+  const { hash: newHash } = await hashPassword(password, salt);
   console.log("Password verification:", {
     inputPassword: password,
     storedHash: hash.substring(0, 20) + "...",
@@ -78,7 +113,7 @@ async function createUser(data: any, admin: any): Promise<any> {
     console.log("Creating user with custom table approach:", { username });
     
     // Hash the password using our consistent hashing
-    const { hash: password_hash, salt } = hashPassword(password);
+    const { hash: password_hash, salt } = await hashPassword(password);
     
     // Check if username already exists
     const { data: existingUser } = await admin
@@ -162,7 +197,7 @@ async function authenticateUser(data: any, admin: any): Promise<any> {
     // Verify password
     let isValidPassword = false;
     try {
-      isValidPassword = verifyPassword(password, user.password_hash, user.salt);
+      isValidPassword = await verifyPassword(password, user.password_hash, user.salt);
     } catch (verifyError) {
       console.error("Password verification error:", verifyError);
       return {
@@ -314,7 +349,7 @@ Deno.serve(async (req: any) => {
           console.log(`Fixing password for user: ${username}`);
           
           // Hash the new password consistently
-          const { hash: password_hash, salt } = hashPassword(new_password);
+          const { hash: password_hash, salt } = await hashPassword(new_password);
           
           console.log(`Generated hash length: ${password_hash.length}, salt length: ${salt.length}`);
           
@@ -354,7 +389,7 @@ Deno.serve(async (req: any) => {
             break;
           }
           
-          const { hash: computed_hash } = hashPassword(password, expected_salt);
+          const { hash: computed_hash } = await hashPassword(password, expected_salt);
           result = {
             success: true,
             test_password: password,
