@@ -504,17 +504,13 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             # Alternative options
             col1, col2 = st.columns([2, 1])
             with col1:
-                # HIDDEN: Confusing message about password issues
-                if False:
-                    st.info("Or try the standard registration/login below (may have password issues)")
+                st.success("✅ **Authentication Fixed!** Try the improved registration/login system below")
             with col2:
                 col2a, col2b = st.columns(2)
                 with col2a:
-                    # HIDDEN: Test Mode button
-                    if False:
-                        if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
-                            self.create_test_session()
-                            st.rerun()
+                    if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
+                        self.create_test_session()
+                        st.rerun()
                 with col2b:
                     if st.button("🔧 Debug", help="Test backend connection"):
                         self.test_backend_connection()
@@ -541,18 +537,16 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                     return
             
             with col2:
-                # HIDDEN: Advanced debug section (set to never show)
-                if False:
-                    st.markdown("**⚙️ Advanced**")
-                    with st.expander("Debug & Settings", expanded=False):
-                        if st.button("🔧 Test Connection"):
-                            self.test_backend_connection()
-                        if st.button("🧮 Hash Test"):
-                            self.test_password_hashing()
-                        if st.button("🗃️ Create Table"):
-                            self.create_users_table()
-                        if st.button("🔑 Fix Password"):
-                            self.fix_user_password()
+                st.markdown("**⚙️ Advanced**")
+                with st.expander("Debug & Settings (For Testing)", expanded=False):
+                    if st.button("🔧 Test Connection"):
+                        self.test_backend_connection()
+                    if st.button("🧮 Hash Test"):
+                        self.test_password_hashing()
+                    if st.button("🗃️ Create Table"):
+                        self.create_users_table()
+                    if st.button("🔑 Fix Password"):
+                        self.fix_user_password()
             
             # Benefits section
             st.markdown("### ✨ **What You Get**")
@@ -581,6 +575,61 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                 - Builds personalized vocabulary  
                 - Improves over time
                 """)
+        
+        # Add login/register tabs with improved authentication
+        st.markdown("---")
+        st.markdown("### 🔐 **Traditional Login/Register** *(Now Fixed!)*")
+        
+        tab1, tab2 = st.tabs(["Login", "Register"])
+        
+        with tab1:
+            st.subheader("Login to Your Account")
+            
+            with st.form("login_form"):
+                username = st.text_input("Username")
+                password = st.text_input("Password", type="password")
+                login_submitted = st.form_submit_button("Login")
+                
+                if login_submitted:
+                    if not username or not password:
+                        st.error("Please enter both username and password")
+                    else:
+                        with st.spinner("Authenticating with improved system..."):
+                            result = self.authenticate_user(username, password)
+                        
+                        if result["success"]:
+                            st.success(result["message"])
+                            time.sleep(1)
+                            st.rerun()
+                        else:
+                            st.error(result["message"])
+        
+        with tab2:
+            st.subheader("Create New Account")
+            
+            with st.form("register_form"):
+                new_username = st.text_input("Choose Username")
+                new_email = st.text_input("Email (optional)")
+                new_password = st.text_input("Choose Password", type="password")
+                confirm_password = st.text_input("Confirm Password", type="password")
+                register_submitted = st.form_submit_button("Create Account")
+                
+                if register_submitted:
+                    if not new_username or not new_password:
+                        st.error("Username and password are required")
+                    elif new_password != confirm_password:
+                        st.error("Passwords do not match")
+                    elif len(new_password) < 6:
+                        st.error("Password must be at least 6 characters")
+                    else:
+                        with st.spinner("Creating account with improved authentication..."):
+                            result = self.create_user(new_username, new_password, new_email)
+                        
+                        if result["success"]:
+                            st.success(result["message"])
+                            st.info("✅ Account created! Now try logging in with your credentials above.")
+                        else:
+                            st.error(result["message"])
 
 def render_main_app():
     """Render the main application for authenticated users"""
