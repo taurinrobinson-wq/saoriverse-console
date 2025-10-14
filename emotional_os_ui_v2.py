@@ -12,9 +12,11 @@ from typing import Dict, List
 try:
     from evolving_glyph_integrator import EvolvingGlyphIntegrator
     EVOLUTION_AVAILABLE = True
-except ImportError:
+    EVOLUTION_IMPORT_ERROR = None
+except ImportError as e:
     EVOLUTION_AVAILABLE = False
-    st.warning("Auto-evolving glyph system not available - check configuration")
+    EVOLUTION_IMPORT_ERROR = str(e)
+    st.warning(f"Auto-evolving glyph system not available - Import error: {e}")
 
 st.set_page_config(page_title="Emotional OS", layout="wide", initial_sidebar_state="expanded")
 
@@ -122,6 +124,8 @@ if 'evolving_integrator' not in st.session_state and EVOLUTION_AVAILABLE:
         st.sidebar.info(f"Debug: Function URL available: {'Yes' if config['supabase']['function_url'] else 'No'}")
         st.sidebar.info(f"Debug: Anon key available: {'Yes' if config['supabase']['anon_key'] else 'No'}")
         st.sidebar.info(f"Debug: Supabase URL extracted: {'Yes' if supabase_url else 'No'}")
+        if EVOLUTION_IMPORT_ERROR:
+            st.sidebar.info(f"Debug: Import error: {EVOLUTION_IMPORT_ERROR}")
         st.session_state.evolving_integrator = None
         st.session_state.evolution_enabled = False
 else:
