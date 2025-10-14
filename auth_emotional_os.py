@@ -451,8 +451,34 @@ def render_main_app():
             with st.spinner("Processing your emotional input..."):
                 start_time = time.time()
                 
-                # Simple response for now (replace with actual processing when available)
-                response = "Thank you for sharing. I'm here to listen and support you through whatever you're experiencing. Your feelings are valid and important."
+                # Connect to authenticated Saori backend
+                try:
+                    saori_url = st.secrets.get("supabase", {}).get("saori_function_url", f"https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori")
+                    
+                    response_data = requests.post(
+                        saori_url,
+                        headers={
+                            "Authorization": f"Bearer {st.secrets['supabase']['key']}",
+                            "Content-Type": "application/json"
+                        },
+                        json={
+                            "user_input": user_input,
+                            "user_id": st.session_state.user_id,
+                            "processing_mode": processing_mode,
+                            "conversation_history": st.session_state[conversation_key][-5:] if len(st.session_state[conversation_key]) > 0 else []
+                        },
+                        timeout=10
+                    )
+                    
+                    if response_data.status_code == 200:
+                        result = response_data.json()
+                        response = result.get("response", "I apologize, but I couldn't process your message right now.")
+                    else:
+                        response = f"Connection issue (HTTP {response_data.status_code}). Using fallback response: I'm here to listen and support you."
+                        
+                except Exception as e:
+                    response = f"Processing unavailable ({str(e)[:50]}...). I'm still here to support you through whatever you're experiencing."
+                
                 processing_time = time.time() - start_time
                 
                 st.write(response)
