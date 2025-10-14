@@ -491,21 +491,29 @@ else:
         evolution_result = None
         if st.session_state.evolution_enabled and st.session_state.evolving_integrator:
             try:
+                print(f"DEBUG: Attempting to use evolving glyph system...")
                 evolution_result = st.session_state.evolving_integrator.process_conversation_with_evolution(
                     message=user_input.strip(),
                     conversation_context=current_conversation
                 )
-                if evolution_result['saori_response']:
+                print(f"DEBUG: Evolution result keys: {list(evolution_result.keys())}")
+                print(f"DEBUG: Has saori_response: {evolution_result.get('saori_response') is not None}")
+                
+                if evolution_result.get('saori_response'):
                     result = {
                         "response": evolution_result['saori_response'].reply,
                         "source": "evolving_glyph_system"
                     }
-                    print(f"DEBUG: Used evolving glyph system")
+                    print(f"DEBUG: Used evolving glyph system successfully")
                 else:
-                    raise Exception("No response from evolving system")
+                    print(f"DEBUG: No saori_response in evolution result, falling back")
+                    evolution_result = None
                     
             except Exception as e:
-                print(f"DEBUG: Evolving glyph system failed: {e}")
+                print(f"DEBUG: Evolving glyph system failed with error: {e}")
+                print(f"DEBUG: Error type: {type(e)}")
+                # Don't disable the system, just fall back for this conversation
+                st.sidebar.warning(f"Evolution system error (not disabled): {str(e)}")
                 evolution_result = None
         
         # Fallback to hybrid system if evolving system not available
