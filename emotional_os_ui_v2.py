@@ -128,8 +128,6 @@ if 'evolving_integrator' not in st.session_state and EVOLUTION_AVAILABLE:
             st.sidebar.info(f"Debug: Import error: {EVOLUTION_IMPORT_ERROR}")
         st.session_state.evolving_integrator = None
         st.session_state.evolution_enabled = False
-else:
-    st.session_state.evolution_enabled = False
 
 # Custom CSS for chat-like interface
 st.markdown("""
