@@ -442,16 +442,31 @@ else:
             
             st.markdown('</div>', unsafe_allow_html=True)
     
+    # Input mode toggle
+    input_mode = st.radio(
+        "Input Mode:", 
+        ["Quick (Enter to send)", "Multi-line (Button to send)"],
+        horizontal=True,
+        key="input_mode"
+    )
+    
     # Input area
     with st.form(key="message_form", clear_on_submit=True):
         prompt_text = "What are you feeling right now?" if not current_conv or not current_conv['messages'] else "Continue sharing..."
         
-        user_input = st.text_area(
-            prompt_text,
-            height=100,
-            placeholder="Speak plainly. The system will reflect back what it hears...",
-            key="message_input"
-        )
+        if input_mode == "Quick (Enter to send)":
+            user_input = st.text_input(
+                prompt_text,
+                placeholder="Speak plainly. The system will reflect back what it hears... (Press Enter to send)",
+                key="message_input"
+            )
+        else:
+            user_input = st.text_area(
+                prompt_text,
+                height=100,
+                placeholder="Speak plainly. The system will reflect back what it hears... (Use button to send)",
+                key="message_input"
+            )
         
         # Send button (right-aligned)
         col1, col2, col3 = st.columns([4, 1, 1])
