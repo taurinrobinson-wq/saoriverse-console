@@ -6,9 +6,9 @@
 # =============================================================================
 # Replace these with your actual Supabase project details
 
-SUPABASE_URL = "https://your-project-id.supabase.co"
+SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co"
 SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8"  
-SUPABASE_FUNCTION_URL = "https://your-project-id.supabase.co/functions/v1/saori-fixed"
+SUPABASE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed"
 
 # =============================================================================
 # EVOLUTION SETTINGS

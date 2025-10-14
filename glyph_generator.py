@@ -58,6 +58,9 @@ class GlyphGenerator:
         self.min_pattern_frequency = min_pattern_frequency
         self.novelty_threshold = novelty_threshold
         
+        # Setup logging first
+        self.setup_logging()
+        
         # Load existing emotional tags to avoid duplication
         self.existing_tags = self._load_existing_tags()
         self.detected_patterns = self._load_pattern_cache()
@@ -104,8 +107,6 @@ class GlyphGenerator:
             'welcoming': 'Welcome',
             'connecting': 'Companion'
         }
-        
-        self.setup_logging()
     
     def setup_logging(self):
         """Setup logging for glyph generation tracking"""
@@ -140,7 +141,7 @@ class GlyphGenerator:
             # Parse the SQL file if it exists
             sql_path = "emotional_tags_rows.sql"
             if os.path.exists(sql_path):
-                with open(sql_path, 'r') as f:
+                with open(sql_path, 'r', encoding='utf-8') as f:
                     content = f.read()
                     # Extract tag names and glyphs from SQL INSERT statements
                     pattern = r"'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)'"
