@@ -109,15 +109,27 @@ class GlyphGenerator:
     
     def setup_logging(self):
         """Setup logging for glyph generation tracking"""
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler('glyph_generation.log'),
-                logging.StreamHandler()
-            ]
-        )
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
+        
+        # Only add handlers if they don't already exist
+        if not self.logger.handlers:
+            # Add console handler (always available)
+            console_handler = logging.StreamHandler()
+            console_handler.setLevel(logging.INFO)
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            console_handler.setFormatter(formatter)
+            self.logger.addHandler(console_handler)
+            
+            # Try to add file handler, but don't fail if we can't
+            try:
+                file_handler = logging.FileHandler('glyph_generation.log')
+                file_handler.setLevel(logging.INFO)
+                file_handler.setFormatter(formatter)
+                self.logger.addHandler(file_handler)
+            except Exception:
+                # If we can't create the file handler, just use console
+                pass
     
     def _load_existing_tags(self) -> Dict[str, Dict]:
         """Load existing emotional tags from the system"""
@@ -176,10 +188,10 @@ class GlyphGenerator:
     
     def _save_pattern_cache(self):
         """Save detected patterns to cache"""
-        cache_path = "learning/detected_patterns.json"
-        os.makedirs(os.path.dirname(cache_path), exist_ok=True)
-        
         try:
+            cache_path = "learning/detected_patterns.json"
+            os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+            
             data = {}
             for key, pattern in self.detected_patterns.items():
                 data[key] = {
@@ -195,7 +207,12 @@ class GlyphGenerator:
                 json.dump(data, f, indent=2)
                 
         except Exception as e:
-            self.logger.error(f"Error saving pattern cache: {e}")
+            # In Streamlit or restricted environments, file writing might fail
+            # Just log the error and continue
+            if hasattr(self, 'logger'):
+                self.logger.error(f"Error saving pattern cache: {e}")
+            else:
+                print(f"Error saving pattern cache: {e}")
     
     def detect_new_emotional_patterns(self, conversation_text: str, context: Optional[Dict] = None) -> List[EmotionalPattern]:
         """
@@ -675,12 +692,20 @@ class GlyphGenerator:
     
     def save_glyph_to_sql_file(self, emotional_tag: Dict):
         """Save new glyph as SQL INSERT statement for backup"""
-        sql_statement = f"""INSERT INTO "public"."emotional_tags" ("id", "tag_name", "core_emotion", "response_cue", "glyph", "domain", "response_type", "narrative_hook", "created_at", "tone_profile", "cadence", "depth_level", "style_variant", "humor_style") VALUES ('{emotional_tag['id']}', '{emotional_tag['tag_name']}', '{emotional_tag['core_emotion']}', '{emotional_tag['response_cue']}', '{emotional_tag['glyph']}', '{emotional_tag['domain']}', '{emotional_tag['response_type']}', '{emotional_tag['narrative_hook']}', '{emotional_tag['created_at']}', '{emotional_tag['tone_profile']}', '{emotional_tag['cadence']}', '{emotional_tag['depth_level']}', '{emotional_tag['style_variant']}', '{emotional_tag['humor_style']}');"""
-        
-        # Append to generated glyphs file
-        os.makedirs('generated', exist_ok=True)
-        with open('generated/new_glyphs.sql', 'a') as f:
-            f.write(sql_statement + '\n')
+        try:
+            sql_statement = f"""INSERT INTO "public"."emotional_tags" ("id", "tag_name", "core_emotion", "response_cue", "glyph", "domain", "response_type", "narrative_hook", "created_at", "tone_profile", "cadence", "depth_level", "style_variant", "humor_style") VALUES ('{emotional_tag['id']}', '{emotional_tag['tag_name']}', '{emotional_tag['core_emotion']}', '{emotional_tag['response_cue']}', '{emotional_tag['glyph']}', '{emotional_tag['domain']}', '{emotional_tag['response_type']}', '{emotional_tag['narrative_hook']}', '{emotional_tag['created_at']}', '{emotional_tag['tone_profile']}', '{emotional_tag['cadence']}', '{emotional_tag['depth_level']}', '{emotional_tag['style_variant']}', '{emotional_tag['humor_style']}');"""
+            
+            # Append to generated glyphs file
+            os.makedirs('generated', exist_ok=True)
+            with open('generated/new_glyphs.sql', 'a') as f:
+                f.write(sql_statement + '\n')
+        except Exception as e:
+            # In Streamlit or restricted environments, file writing might fail
+            # Just log the error and continue
+            if hasattr(self, 'logger'):
+                self.logger.warning(f"Could not save glyph to SQL file: {e}")
+            else:
+                print(f"Could not save glyph to SQL file: {e}")
     
     def process_conversation_for_glyphs(self, conversation_text: str, context: Optional[Dict] = None) -> List[Dict]:
         """
