@@ -1,6 +1,7 @@
 """
 Streamlit Cloud Compatible Emotional OS with Authentication
 Self-contained version that works without external dependencies
+Updated: October 14, 2025 - Cache Buster v2
 """
 
 import streamlit as st
@@ -237,6 +238,7 @@ class AuthenticationManager:
     def render_login_form(self):
         """Render login/registration form"""
         st.title("🔐 Emotional OS - Secure Access")
+        st.caption("🚀 Authentication System v2.0 - October 14, 2025")
         
         # Test mode banner
         with st.container():
@@ -416,6 +418,7 @@ def main():
         return
     
     # User is authenticated - render main app
+    st.sidebar.success(f"🚀 AUTH SYSTEM ACTIVE - v2.0 - {datetime.now().strftime('%H:%M')}")
     auth_manager.render_user_header()
     render_main_app()
 
