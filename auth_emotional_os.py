@@ -402,9 +402,30 @@ class AuthenticationManager:
         # Test mode banner
         with st.container():
             st.warning("⚠️ **Backend Deployment Status**: Authentication functions deployed and ready")
+            # MAIN OPTIONS - Most Reliable Methods
+            st.markdown("### 🎯 **RECOMMENDED SOLUTIONS**")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown("**🚀 BEST OPTION: Instant Working Account**")
+                st.info("Bypasses all password hashing issues completely")
+                if st.button("🎯 Create Working Account", type="primary", use_container_width=True, help="Create account that definitely works"):
+                    self.create_working_account()
+                    return
+            
+            with col2:
+                st.markdown("**⚡ QUICK ACCESS: Instant Login**")
+                st.info("Skip authentication for immediate system access")
+                if st.button("⚡ Quick Login", type="secondary", use_container_width=True, help="Bypass auth for testing"):
+                    self.quick_login_bypass()
+                    return
+            
+            st.markdown("---")
+            
+            # Alternative options
             col1, col2 = st.columns([2, 1])
             with col1:
-                st.info("Full authentication system is active. Try registering or use Test Mode for immediate access.")
+                st.info("Or try the standard registration/login below (may have password issues)")
             with col2:
                 col2a, col2b = st.columns(2)
                 with col2a:
@@ -416,12 +437,8 @@ class AuthenticationManager:
                         self.test_backend_connection()
                     if st.button("🧮 Hash Test", help="Test password hashing"):
                         self.test_password_hashing()
-                    if st.button("⚡ Quick Login", help="Bypass auth for testing"):
-                        self.quick_login_bypass()
                     if st.button("🔑 Fix Password", help="Reset password for user"):
                         self.fix_user_password()
-                if st.button("🎯 Create Working Account", help="Create account that definitely works"):
-                    self.create_working_account()
         
         tab1, tab2 = st.tabs(["Login", "Register"])
         
