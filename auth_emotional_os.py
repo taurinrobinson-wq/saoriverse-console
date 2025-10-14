@@ -167,10 +167,7 @@ class AuthenticationManager:
     def create_user(self, username: str, password: str, email: str = "") -> dict:
         """Create new user account"""
         try:
-            # Hash password
-            password_hash, salt = self.hash_password(password)
-            
-            # Create user via Supabase edge function  
+            # Let edge function handle all password hashing for consistency
             auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
@@ -182,8 +179,7 @@ class AuthenticationManager:
                     "action": "create_user",
                     "username": username,
                     "email": email,
-                    "password_hash": password_hash,
-                    "salt": salt,
+                    "password": password,  # Send plain password, edge function will hash it
                     "created_at": datetime.now().isoformat()
                 },
                 timeout=10
