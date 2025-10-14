@@ -57,21 +57,26 @@ class AuthenticationManager:
             st.session_state.login_attempts = {}
     
     def hash_password(self, password: str, salt: str = None) -> tuple:
-        """Hash password with salt"""
+        """Hash password with salt - matches backend exactly"""
         if salt is None:
             salt = secrets.token_hex(32)
         
+        # Convert salt from hex string to bytes (like backend)
+        salt_bytes = bytes.fromhex(salt) if isinstance(salt, str) else salt
+        
+        # Use 64-byte output to match backend exactly
         password_hash = hashlib.pbkdf2_hmac(
             'sha256',
             password.encode('utf-8'),
-            salt.encode('utf-8'),
-            100000  # iterations
+            salt_bytes,
+            100000,  # iterations
+            64       # 64-byte output to match backend
         )
         
-        return password_hash.hex(), salt
+        return password_hash.hex(), salt_bytes.hex()
     
     def verify_password(self, password: str, stored_hash: str, salt: str) -> bool:
-        """Verify password against stored hash"""
+        """Verify password against stored hash - matches backend exactly"""
         password_hash, _ = self.hash_password(password, salt)
         return password_hash == stored_hash
     
