@@ -7,10 +7,35 @@ Connects the glyph generator to your existing conversation processing flow
 import json
 import os
 import re
-from typing import Dict, List, Optional
-from glyph_generator import GlyphGenerator
-from supabase_integration import SupabaseIntegrator, SaoriResponse
 import logging
+from typing import Dict, List, Optional
+
+# Try to import dependencies with fallbacks
+try:
+    from glyph_generator import GlyphGenerator
+    GLYPH_GENERATOR_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: GlyphGenerator not available: {e}")
+    GLYPH_GENERATOR_AVAILABLE = False
+    GlyphGenerator = None
+
+try:
+    from supabase_integration import SupabaseIntegrator
+    SUPABASE_INTEGRATOR_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: SupabaseIntegrator not available: {e}")
+    SUPABASE_INTEGRATOR_AVAILABLE = False
+    SupabaseIntegrator = None
+
+# Define a simple SaoriResponse class if not available
+try:
+    from supabase_integration import SaoriResponse
+except ImportError:
+    class SaoriResponse:
+        def __init__(self, reply="", glyph="", parsed_glyphs=None):
+            self.reply = reply
+            self.glyph = glyph
+            self.parsed_glyphs = parsed_glyphs or []
 
 class EvolvingGlyphIntegrator:
     """
@@ -30,18 +55,26 @@ class EvolvingGlyphIntegrator:
         self.evolution_frequency = evolution_frequency
         self.conversation_count = 0
         
-        # Initialize components if credentials provided
-        if supabase_function_url and supabase_anon_key:
-            self.supabase_integrator = SupabaseIntegrator(
-                function_url=supabase_function_url,
-                supabase_anon_key=supabase_anon_key
-            )
+        # Initialize components if credentials provided and dependencies available
+        if supabase_function_url and supabase_anon_key and SUPABASE_INTEGRATOR_AVAILABLE and SupabaseIntegrator is not None:
+            try:
+                self.supabase_integrator = SupabaseIntegrator(
+                    function_url=supabase_function_url,
+                    supabase_anon_key=supabase_anon_key
+                )
+            except Exception as e:
+                print(f"Failed to initialize SupabaseIntegrator: {e}")
+                self.supabase_integrator = None
         
-        if enable_auto_evolution and supabase_url and supabase_anon_key:
-            self.glyph_generator = GlyphGenerator(
-                supabase_url=supabase_url,
-                supabase_key=supabase_anon_key
-            )
+        if enable_auto_evolution and supabase_url and supabase_anon_key and GLYPH_GENERATOR_AVAILABLE and GlyphGenerator is not None:
+            try:
+                self.glyph_generator = GlyphGenerator(
+                    supabase_url=supabase_url,
+                    supabase_key=supabase_anon_key
+                )
+            except Exception as e:
+                print(f"Failed to initialize GlyphGenerator: {e}")
+                self.glyph_generator = None
         
         self.setup_logging()
     
