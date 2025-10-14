@@ -49,6 +49,13 @@ function hashPassword(password: string, salt?: string): { hash: string, salt: st
 
 function verifyPassword(password: string, hash: string, salt: string): boolean {
   const { hash: newHash } = hashPassword(password, salt);
+  console.log("Password verification:", {
+    inputPassword: password,
+    storedHash: hash.substring(0, 20) + "...",
+    storedSalt: salt.substring(0, 20) + "...",
+    computedHash: newHash.substring(0, 20) + "...",
+    match: newHash === hash
+  });
   return newHash === hash;
 }
 
@@ -66,7 +73,10 @@ async function ensureUsersTable(admin: any) {
 // Create user account
 async function createUser(data: any, admin: any): Promise<any> {
   try {
-    const { username, password_hash, salt, email, created_at } = data;
+    const { username, password, email, created_at } = data;
+    
+    // Hash the password using our consistent hashing
+    const { hash: password_hash, salt } = hashPassword(password);
     
     // Check if username already exists
     const { data: existingUser } = await admin
@@ -131,6 +141,8 @@ async function authenticateUser(data: any, admin: any): Promise<any> {
       .eq('username', username)
       .single();
     
+    console.log("Auth lookup result:", { found: !!user, error: error?.message, username });
+    
     if (error || !user) {
       return {
         authenticated: false,
@@ -146,7 +158,16 @@ async function authenticateUser(data: any, admin: any): Promise<any> {
     }
     
     // Verify password
-    const isValidPassword = verifyPassword(password, user.password_hash, user.salt);
+    let isValidPassword = false;
+    try {
+      isValidPassword = verifyPassword(password, user.password_hash, user.salt);
+    } catch (verifyError) {
+      console.error("Password verification error:", verifyError);
+      return {
+        authenticated: false,
+        error: "Password verification failed"
+      };
+    }
     
     if (!isValidPassword) {
       return {
@@ -277,6 +298,65 @@ Deno.serve(async (req: any) => {
           result = { success: false, error: "Missing user_id" };
         } else {
           result = await getUserProfile(user_id, admin);
+        }
+        break;
+        
+      case "fix_password":
+        try {
+          const { username, new_password } = body;
+          if (!username || !new_password) {
+            result = { success: false, error: "Missing username or new_password" };
+            break;
+          }
+          
+          // Hash the new password consistently
+          const { hash: password_hash, salt } = hashPassword(new_password);
+          
+          // Update user password in database
+          const { data: updatedUser, error: updateError } = await admin
+            .from('users')
+            .update({ 
+              password_hash: password_hash, 
+              salt: salt,
+              updated_at: new Date().toISOString()
+            })
+            .eq('username', username)
+            .select('id, username');
+          
+          if (updateError || !updatedUser || updatedUser.length === 0) {
+            result = { success: false, error: "User not found or update failed" };
+          } else {
+            result = { success: true, message: `Password updated for user ${username}` };
+          }
+        } catch (fixError) {
+          console.error("Fix password error:", fixError);
+          result = { success: false, error: `Password fix failed: ${fixError.message}` };
+        }
+        break;
+
+      case "test_hash":
+        try {
+          const { password, expected_hash, expected_salt } = body;
+          console.log("Hash test params:", { password, has_hash: !!expected_hash, has_salt: !!expected_salt });
+          
+          if (!password || !expected_hash || !expected_salt) {
+            result = { success: false, error: "Missing required parameters" };
+            break;
+          }
+          
+          const { hash: computed_hash } = hashPassword(password, expected_salt);
+          result = {
+            success: true,
+            test_password: password,
+            expected_hash: expected_hash?.substring(0, 20) + "...",
+            computed_hash: computed_hash?.substring(0, 20) + "...",
+            match: computed_hash === expected_hash,
+            full_computed: computed_hash,
+            full_expected: expected_hash
+          };
+        } catch (hashError) {
+          console.error("Hash test error:", hashError);
+          result = { success: false, error: `Hash test failed: ${hashError.message}` };
         }
         break;
         

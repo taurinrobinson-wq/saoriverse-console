@@ -200,6 +200,46 @@ class AuthenticationManager:
         
         st.rerun()
     
+    def fix_user_password(self):
+        """Fix password for existing user by updating with consistent hashing"""
+        st.subheader("🔑 Fix User Password")
+        
+        with st.form("fix_password_form"):
+            username = st.text_input("Username to fix")
+            new_password = st.text_input("New Password", type="password")
+            fix_submitted = st.form_submit_button("Fix Password")
+            
+            if fix_submitted and username and new_password:
+                with st.spinner("Fixing password..."):
+                    try:
+                        # Update password directly in database using edge function's hashing
+                        auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                        response = requests.post(
+                            auth_url,
+                            headers={
+                                "Authorization": f"Bearer {self.supabase_key}",
+                                "Content-Type": "application/json"
+                            },
+                            json={
+                                "action": "fix_password",
+                                "username": username,
+                                "new_password": new_password
+                            },
+                            timeout=10
+                        )
+                        
+                        if response.status_code == 200:
+                            result = response.json()
+                            if result.get("success"):
+                                st.success("✅ Password fixed! You can now log in normally.")
+                            else:
+                                st.error(f"❌ {result.get('error', 'Failed to fix password')}")
+                        else:
+                            st.error(f"❌ HTTP {response.status_code}: {response.text}")
+                            
+                    except Exception as e:
+                        st.error(f"❌ Error: {str(e)}")
+    
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
         if username not in st.session_state.login_attempts:
@@ -344,6 +384,8 @@ class AuthenticationManager:
                         self.test_password_hashing()
                     if st.button("⚡ Quick Login", help="Bypass auth for testing"):
                         self.quick_login_bypass()
+                    if st.button("🔑 Fix Password", help="Reset password for user"):
+                        self.fix_user_password()
         
         tab1, tab2 = st.tabs(["Login", "Register"])
         
