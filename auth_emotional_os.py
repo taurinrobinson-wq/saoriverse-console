@@ -205,6 +205,54 @@ class AuthenticationManager:
         
         st.rerun()
     
+    def create_users_table(self):
+        """Create the users table in Supabase database"""
+        st.subheader("🗃️ Create Users Table")
+        
+        if st.button("Create Users Table in Database"):
+            with st.spinner("Creating users table..."):
+                try:
+                    auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                    response = requests.post(
+                        auth_url,
+                        headers={
+                            "Authorization": f"Bearer {self.supabase_key}",
+                            "Content-Type": "application/json"
+                        },
+                        json={
+                            "action": "create_table"
+                        },
+                        timeout=10
+                    )
+                    
+                    if response.status_code == 200:
+                        result = response.json()
+                        if result.get("success"):
+                            st.success("✅ Users table created! Try registration now.")
+                        else:
+                            st.error(f"❌ {result.get('error', 'Failed to create table')}")
+                    else:
+                        st.error(f"❌ HTTP {response.status_code}: {response.text}")
+                        
+                except Exception as e:
+                    st.error(f"❌ Error: {str(e)}")
+                    
+        st.markdown("**Or run this SQL in Supabase Dashboard → SQL Editor:**")
+        st.code("""
+CREATE TABLE IF NOT EXISTS public.users (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  salt TEXT NOT NULL,
+  email TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow all operations" ON public.users FOR ALL USING (true);
+GRANT ALL ON public.users TO anon, authenticated, service_role;
+        """, language="sql")
+
     def fix_user_password(self):
         """Fix password for existing user by updating with consistent hashing"""
         st.subheader("🔑 Fix User Password")
@@ -453,7 +501,9 @@ class AuthenticationManager:
                         self.test_backend_connection()
                     if st.button("🧮 Hash Test", help="Test password hashing"):
                         self.test_password_hashing()
-                    if st.button("🔑 Fix Password", help="Reset password for user"):
+                    if st.button("�️ Create Table", help="Create users table in database"):
+                        self.create_users_table()
+                    if st.button("�🔑 Fix Password", help="Reset password for user"):
                         self.fix_user_password()
         
         tab1, tab2 = st.tabs(["Login", "Register"])
