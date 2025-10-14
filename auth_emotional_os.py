@@ -151,6 +151,40 @@ class AuthenticationManager:
             except Exception as e:
                 st.error(f"❌ Connection failed: {str(e)}")
     
+    def test_password_hashing(self):
+        """Test password hashing consistency with database"""
+        with st.spinner("Testing password hashing..."):
+            try:
+                # Use the freshtest user data from your debug
+                test_password = "password123"
+                stored_hash = "c9d5187d1ddbe6fc60d324b6ebd71252339edb501e3fe981a30d12f14e3eb2dfda4d263814a95b9f624a38dbd1dc72511493f10c2949aac00227c973d71d6525"
+                stored_salt = "c4235b1aec307a490c7873ae53a90505aee7453667f623c5b2d3b66ca91a4e48"
+                
+                auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                response = requests.post(
+                    auth_url,
+                    headers={
+                        "Authorization": f"Bearer {self.supabase_key}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "action": "test_hash",
+                        "password": test_password,
+                        "expected_hash": stored_hash,
+                        "expected_salt": stored_salt
+                    },
+                    timeout=5
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    st.json(result)
+                else:
+                    st.error(f"HTTP {response.status_code}: {response.text}")
+                    
+            except Exception as e:
+                st.error(f"❌ Hash test failed: {str(e)}")
+    
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
         if username not in st.session_state.login_attempts:
@@ -291,6 +325,8 @@ class AuthenticationManager:
                 with col2b:
                     if st.button("🔧 Debug", help="Test backend connection"):
                         self.test_backend_connection()
+                    if st.button("🧮 Hash Test", help="Test password hashing"):
+                        self.test_password_hashing()
         
         tab1, tab2 = st.tabs(["Login", "Register"])
         
