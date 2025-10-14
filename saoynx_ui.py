@@ -147,13 +147,17 @@ class SaoynxAuthentication:
         .main-splash {
             max-width: 700px;
             margin: 0 auto;
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
             text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         /* Logo section */
         .logo-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         
         .logo-text {
@@ -161,8 +165,9 @@ class SaoynxAuthentication:
             font-weight: 300;
             letter-spacing: 8px;
             color: #2E2E2E;
-            margin: 0.8rem 0 0.3rem 0;
+            margin: 1rem 0 0.3rem 0;
             font-family: 'Arial', sans-serif;
+            text-align: center;
         }
         
         .logo-subtitle {
@@ -172,6 +177,7 @@ class SaoynxAuthentication:
             font-weight: 300;
             text-transform: uppercase;
             line-height: 1.2;
+            text-align: center;
         }
         
         /* Auth sections */
@@ -179,7 +185,7 @@ class SaoynxAuthentication:
             display: flex;
             justify-content: center;
             gap: 3rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         
         .auth-section {
@@ -192,6 +198,16 @@ class SaoynxAuthentication:
             color: #2E2E2E;
             margin-bottom: 1.5rem;
             font-weight: 300;
+        }
+        
+        /* Form container centering */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
         }
         
         /* Form styling */
@@ -230,8 +246,8 @@ class SaoynxAuthentication:
         
         /* Quick access */
         .quick-access {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
             border-top: 1px solid #eee;
         }
         
@@ -251,16 +267,17 @@ class SaoynxAuthentication:
         # Logo section
         st.markdown('<div class="logo-section">', unsafe_allow_html=True)
         
-        # Display logo
+        # Display logo at full size - graphic only version
         try:
-            # Center the logo - use cleaner version
-            col1, col2, col3 = st.columns([1, 1, 1])
+            # Center the logo - use graphic-only version at full size
+            col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                st.image("Saonyx_Logo2.png", width=120)
+                st.image("Saonyx_Logo2 (2).png", use_column_width=True)
         except:
             # Fallback if logo not found
-            st.markdown('<div style="font-size: 2.5rem; color: #666;">🧠</div>', unsafe_allow_html=True)
+            st.markdown('<div style="font-size: 3rem; color: #666;">🧠</div>', unsafe_allow_html=True)
         
+        # Center-justified text underneath the logo
         st.markdown('''
         <div class="logo-text">SAOYNX</div>
         <div class="logo-subtitle">AI EMOTIONAL<br>INTERFACES</div>
@@ -316,22 +333,15 @@ class SaoynxAuthentication:
     def render_login_form(self):
         """Clean login form matching your design"""
         
-        st.markdown('<div class="main-splash">', unsafe_allow_html=True)
+        st.markdown('<div class="form-container">', unsafe_allow_html=True)
         
         # Back button
         if st.button("← Back", key="back_login"):
             st.session_state.show_login = False
             st.rerun()
         
-        # Logo (smaller)
-        try:
-            col1, col2, col3 = st.columns([1, 1, 1])
-            with col2:
-                st.image("Saonyx_Logo2.png", width=80)
-        except:
-            st.markdown('<div style="font-size: 2rem; text-align: center; color: #666;">🧠</div>', unsafe_allow_html=True)
-        
-        st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
+        # No duplicate logo - just the title
+        st.markdown('<div class="auth-title" style="text-align: center; margin: 2rem 0 1.5rem 0;">Sign In</div>', unsafe_allow_html=True)
         
         # Login form
         col1, col2, col3 = st.columns([1, 2, 1])
@@ -366,22 +376,15 @@ class SaoynxAuthentication:
     def render_register_form(self):
         """Clean registration form"""
         
-        st.markdown('<div class="main-splash">', unsafe_allow_html=True)
+        st.markdown('<div class="form-container">', unsafe_allow_html=True)
         
         # Back button
         if st.button("← Back", key="back_register"):
             st.session_state.show_register = False
             st.rerun()
         
-        # Logo (smaller)
-        try:
-            col1, col2, col3 = st.columns([1, 1, 1])
-            with col2:
-                st.image("Saonyx_Logo2.png", width=80)
-        except:
-            st.markdown('<div style="font-size: 2rem; text-align: center; color: #666;">🧠</div>', unsafe_allow_html=True)
-        
-        st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
+        # No duplicate logo - just the title
+        st.markdown('<div class="auth-title" style="text-align: center; margin: 2rem 0 1.5rem 0;">Create Account</div>', unsafe_allow_html=True)
         
         # Register form
         col1, col2, col3 = st.columns([1, 2, 1])
