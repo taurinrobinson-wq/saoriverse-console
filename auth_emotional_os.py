@@ -462,17 +462,16 @@ def render_main_app():
                             "Content-Type": "application/json"
                         },
                         json={
-                            "user_input": user_input,
+                            "message": user_input,  # Edge function expects "message", not "user_input"
                             "user_id": st.session_state.user_id,
-                            "processing_mode": processing_mode,
-                            "conversation_history": st.session_state[conversation_key][-5:] if len(st.session_state[conversation_key]) > 0 else []
+                            "mode": processing_mode,  # Edge function expects "mode", not "processing_mode"
                         },
                         timeout=10
                     )
                     
                     if response_data.status_code == 200:
                         result = response_data.json()
-                        response = result.get("response", "I apologize, but I couldn't process your message right now.")
+                        response = result.get("reply", "I apologize, but I couldn't process your message right now.")  # Edge function returns "reply", not "response"
                     else:
                         response = f"Connection issue (HTTP {response_data.status_code}). Using fallback response: I'm here to listen and support you."
                         
