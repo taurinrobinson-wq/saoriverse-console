@@ -10,8 +10,21 @@ import time
 from datetime import datetime, timedelta
 import hashlib
 import secrets
-from config import SUPABASE_URL, SUPABASE_ANON_KEY
-from supabase_integration import create_hybrid_processor
+
+# Try to import from config first, fallback to Streamlit secrets
+try:
+    from config import SUPABASE_URL, SUPABASE_ANON_KEY
+except ImportError:
+    # Use Streamlit secrets for cloud deployment
+    SUPABASE_URL = st.secrets["supabase"]["url"]
+    SUPABASE_ANON_KEY = st.secrets["supabase"]["key"]
+
+try:
+    from supabase_integration import create_hybrid_processor
+except ImportError:
+    # Fallback if supabase_integration not available
+    def create_hybrid_processor():
+        return None
 
 # Authentication configuration
 AUTH_CONFIG = {
@@ -24,8 +37,20 @@ class AuthenticationManager:
     """Handles user authentication and session management"""
     
     def __init__(self):
-        self.supabase_url = SUPABASE_URL
-        self.supabase_key = SUPABASE_ANON_KEY
+        # Use Streamlit secrets for cloud deployment, fallback to config
+        try:
+            self.supabase_url = st.secrets["supabase"]["url"]
+            self.supabase_key = st.secrets["supabase"]["key"]
+        except (KeyError, FileNotFoundError):
+            # Fallback to config.py for local development
+            try:
+                from config import SUPABASE_URL, SUPABASE_ANON_KEY
+                self.supabase_url = SUPABASE_URL
+                self.supabase_key = SUPABASE_ANON_KEY
+            except ImportError:
+                st.error("❌ Supabase configuration not found. Please check your secrets or config.py")
+                st.stop()
+        
         self.init_session_state()
     
     def init_session_state(self):
@@ -127,9 +152,10 @@ class AuthenticationManager:
             # Hash password
             password_hash, salt = self.hash_password(password)
             
-            # Create user via Supabase edge function
+            # Create user via Supabase edge function  
+            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
-                f"{self.supabase_url}/functions/v1/auth-manager",
+                auth_url,
                 headers={
                     "Authorization": f"Bearer {self.supabase_key}",
                     "Content-Type": "application/json"
@@ -162,8 +188,9 @@ class AuthenticationManager:
                 return {"success": False, "message": "Account temporarily locked due to failed attempts"}
             
             # Authenticate via Supabase edge function
+            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
-                f"{self.supabase_url}/functions/v1/auth-manager",
+                auth_url,
                 headers={
                     "Authorization": f"Bearer {self.supabase_key}",
                     "Content-Type": "application/json"
@@ -343,7 +370,15 @@ def main():
     
     # Initialize conversation processor with user context
     if 'processor' not in st.session_state:
-        st.session_state.processor = create_hybrid_processor()
+        try:
+            from supabase_integration import create_hybrid_processor
+            st.session_state.processor = create_hybrid_processor()
+        except ImportError:
+            # Create a simple processor fallback
+            class SimpleProcessor:
+                def process_emotional_input(self, message, **kwargs):
+                    return {"response": "Processing temporarily unavailable. Please try the Test Mode.", "processing_time": 0}
+            st.session_state.processor = SimpleProcessor()
     
     # User-specific conversation history
     conversation_key = f"conversation_history_{st.session_state.user_id}"
