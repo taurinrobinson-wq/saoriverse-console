@@ -202,10 +202,11 @@ class AuthenticationManager:
                     return {"success": True, "message": "Login successful"}
                 else:
                     self.record_login_attempt(username, False)
-                    return {"success": False, "message": data.get("message", "Login failed")}
+                    error_msg = data.get("message", "Invalid username or password")
+                    return {"success": False, "message": f"Login failed: {error_msg}"}
             else:
                 self.record_login_attempt(username, False)
-                return {"success": False, "message": "Authentication service unavailable"}
+                return {"success": False, "message": f"Authentication service error (HTTP {response.status_code})"}
                 
         except Exception as e:
             self.record_login_attempt(username, False)
