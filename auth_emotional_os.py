@@ -452,14 +452,29 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
     
     def render_login_form(self):
         """Render login/registration form"""
-        st.title("🔐 Emotional OS - Secure Access")
-        st.caption("🚀 Authentication System v2.0 - October 14, 2025")
+        st.title("� Emotional OS - Instant Access")
+        st.caption("✨ Streamlined Authentication - October 14, 2025")
         
-        # Test mode banner
+        # Main Working Account Interface - Clean and Simple
         with st.container():
-            st.warning("⚠️ **Backend Deployment Status**: Authentication functions deployed and ready")
-            # MAIN OPTIONS - Most Reliable Methods
-            st.markdown("### 🎯 **RECOMMENDED SOLUTIONS**")
+            # Show working account form if requested, otherwise show main interface
+            if st.session_state.get('show_working_account_form', False):
+                self.create_working_account()
+                
+                # Back button and quick access option
+                col1, col2 = st.columns(2)
+                with col1:
+                    if st.button("← Back", help="Return to main screen"):
+                        st.session_state.show_working_account_form = False
+                        st.rerun()
+                with col2:
+                    if st.button("⚡ Quick Demo", type="secondary", help="Try the system instantly"):
+                        self.quick_login_bypass()
+                return
+            
+            # Main interface - Clean and Simple
+            st.markdown("### 🎯 **Welcome to Your Personal AI Companion**")
+            st.info("🚀 **Get started in seconds** - Create your account and begin your emotional journey!")
             
             col1, col2 = st.columns(2)
             with col1:
@@ -505,57 +520,61 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                         self.create_users_table()
                     if st.button("�🔑 Fix Password", help="Reset password for user"):
                         self.fix_user_password()
-        
-        tab1, tab2 = st.tabs(["Login", "Register"])
-        
-        with tab1:
-            st.subheader("Login to Your Account")
             
-            with st.form("login_form"):
-                username = st.text_input("Username")
-                password = st.text_input("Password", type="password")
-                login_submitted = st.form_submit_button("Login")
-                
-                if login_submitted:
-                    if not username or not password:
-                        st.error("Please enter both username and password")
-                    else:
-                        with st.spinner("Authenticating..."):
-                            result = self.authenticate_user(username, password)
-                        
-                        if result["success"]:
-                            st.success(result["message"])
-                            time.sleep(1)
-                            st.rerun()
-                        else:
-                            st.error(result["message"])
-        
-        with tab2:
-            st.subheader("Create New Account")
+            # Primary create account button
+            if st.button("🎯 Create My Account", type="primary", use_container_width=True, help="Create account and login instantly"):
+                st.session_state.show_working_account_form = True
+                st.rerun()
             
-            with st.form("register_form"):
-                new_username = st.text_input("Choose Username")
-                new_email = st.text_input("Email (optional)")
-                new_password = st.text_input("Choose Password", type="password")
-                confirm_password = st.text_input("Confirm Password", type="password")
-                register_submitted = st.form_submit_button("Create Account")
-                
-                if register_submitted:
-                    if not new_username or not new_password:
-                        st.error("Username and password are required")
-                    elif new_password != confirm_password:
-                        st.error("Passwords do not match")
-                    elif len(new_password) < 6:
-                        st.error("Password must be at least 6 characters")
-                    else:
-                        with st.spinner("Creating account..."):
-                            result = self.create_user(new_username, new_password, new_email)
-                        
-                        if result["success"]:
-                            st.success(result["message"])
-                            st.info("Please use the Login tab to sign in with your new account")
-                        else:
-                            st.error(result["message"])
+            st.markdown("---")
+            
+            # Secondary options
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown("**⚡ Try It Now**")
+                if st.button("Quick Demo", type="secondary", use_container_width=True, help="Preview Emotional OS instantly"):
+                    self.quick_login_bypass()
+                    return
+            
+            with col2:
+                st.markdown("**⚙️ Advanced**")
+                with st.expander("Debug & Settings", expanded=False):
+                    if st.button("🔧 Test Connection"):
+                        self.test_backend_connection()
+                    if st.button("🧮 Hash Test"):
+                        self.test_password_hashing()
+                    if st.button("🗃️ Create Table"):
+                        self.create_users_table()
+                    if st.button("🔑 Fix Password"):
+                        self.fix_user_password()
+            
+            # Benefits section
+            st.markdown("### ✨ **What You Get**")
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown("""
+                **🚀 Lightning Fast**
+                - 2-3 second responses  
+                - Instant account creation
+                - No delays or waiting
+                """)
+            
+            with col2:
+                st.markdown("""
+                **🔒 Complete Privacy**  
+                - Your data stays isolated
+                - Personal conversation history
+                - Secure session management
+                """)
+            
+            with col3:
+                st.markdown("""
+                **🧠 Smart Learning**
+                - Adapts to your style
+                - Builds personalized vocabulary  
+                - Improves over time
+                """)
 
 def render_main_app():
     """Render the main application for authenticated users"""
