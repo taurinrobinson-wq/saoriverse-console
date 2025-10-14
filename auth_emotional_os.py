@@ -109,6 +109,8 @@ class AuthenticationManager:
         """Create a temporary test session for UI testing"""
         import uuid
         
+        st.success("🧪 Test Mode activated! Creating temporary session...")
+        
         # Set up test user session
         st.session_state.authenticated = True
         st.session_state.user_id = str(uuid.uuid4())
@@ -117,6 +119,34 @@ class AuthenticationManager:
         st.session_state.session_expires = datetime.now() + timedelta(hours=8)
         
         return True
+    
+    def test_backend_connection(self):
+        """Test connection to Supabase backend"""
+        with st.spinner("Testing backend connection..."):
+            try:
+                auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                st.write(f"Testing URL: {auth_url}")
+                
+                response = requests.post(
+                    auth_url,
+                    headers={
+                        "Authorization": f"Bearer {self.supabase_key}",
+                        "Content-Type": "application/json"
+                    },
+                    json={"action": "test"},
+                    timeout=5
+                )
+                
+                st.write(f"Response status: {response.status_code}")
+                st.write(f"Response body: {response.text}")
+                
+                if response.status_code == 200:
+                    st.success("✅ Backend connection working!")
+                else:
+                    st.error(f"❌ Backend error: HTTP {response.status_code}")
+                    
+            except Exception as e:
+                st.error(f"❌ Connection failed: {str(e)}")
     
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
@@ -248,9 +278,14 @@ class AuthenticationManager:
             with col1:
                 st.info("Full authentication system is active. Try registering or use Test Mode for immediate access.")
             with col2:
-                if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
-                    self.create_test_session()
-                    st.rerun()
+                col2a, col2b = st.columns(2)
+                with col2a:
+                    if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
+                        self.create_test_session()
+                        st.rerun()
+                with col2b:
+                    if st.button("🔧 Debug", help="Test backend connection"):
+                        self.test_backend_connection()
         
         tab1, tab2 = st.tabs(["Login", "Register"])
         
