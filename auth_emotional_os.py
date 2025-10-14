@@ -597,6 +597,44 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                     if not username or not password:
                         st.error("Please enter both username and password")
                     else:
+                        # Debug: Test the hash for the existing user
+                        if username == "testuser12":
+                            st.info("🔍 **Debug Mode for testuser12** - Testing password hash...")
+                            
+                            # Test with known values from database
+                            expected_hash = "9a988b9aac65e187977ecbc34e86f807eb28d2385ec88ff9c74b2a40f5e7e209daaa436ef66dfa98ef5fd28cd1959d9cbac1de86d794ef9cbb45b57d0d82fa6d"
+                            expected_salt = "ff85422337871d5b3d2ee73276aa17999548e8708524e37145eb77df3e2ed1d6"
+                            
+                            # Test hash comparison
+                            try:
+                                auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                                response = requests.post(
+                                    auth_url,
+                                    headers={
+                                        "Authorization": f"Bearer {self.supabase_key}",
+                                        "Content-Type": "application/json"
+                                    },
+                                    json={
+                                        "action": "test_hash",
+                                        "password": password,
+                                        "expected_hash": expected_hash,
+                                        "expected_salt": expected_salt
+                                    },
+                                    timeout=5
+                                )
+                                
+                                if response.status_code == 200:
+                                    hash_result = response.json()
+                                    st.json(hash_result)
+                                    
+                                    if hash_result.get("match"):
+                                        st.success("✅ Hash matches! The password is correct.")
+                                    else:
+                                        st.error("❌ Hash mismatch - this explains the login failure")
+                                        
+                            except Exception as e:
+                                st.error(f"Hash test error: {str(e)}")
+                        
                         with st.spinner("Authenticating with improved system..."):
                             result = self.authenticate_user(username, password)
                         
