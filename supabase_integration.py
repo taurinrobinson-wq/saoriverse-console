@@ -42,15 +42,25 @@ class SupabaseIntegrator:
     def process_message(self, 
                        message: str, 
                        mode: str = "quick",
-                       conversation_context: Dict = None) -> SaoriResponse:
+                       conversation_context: Dict = None,
+                       conversation_style: str = "conversational") -> SaoriResponse:
         """
         Send message to your Supabase edge function for processing
         This leverages your complete emotional tagging and AI system
         """
         
+        # Add conversational trigger words to ensure normal tone
+        if conversation_style == "conversational":
+            # The edge function looks for these keywords to switch to conversational mode
+            if not any(word in message.lower() for word in ["plain", "normal", "conversational", "talk normal"]):
+                message = f"Please talk normal. {message}"
+        
         payload = {
             "message": message,
-            "mode": mode
+            "mode": mode,
+            "style": conversation_style,
+            "tone": "casual",
+            "response_type": "conversational"
         }
         
         # Add conversation context if available (could enhance your edge function to use this)
@@ -138,7 +148,11 @@ class HybridEmotionalProcessor:
         if prefer_ai and self.supabase:
             # Try AI-enhanced processing first
             try:
-                saori_response = self.supabase.process_message(message, conversation_context=conversation_context)
+                saori_response = self.supabase.process_message(
+                    message, 
+                    conversation_context=conversation_context,
+                    conversation_style="conversational"
+                )
                 
                 return {
                     "source": "supabase_ai",
