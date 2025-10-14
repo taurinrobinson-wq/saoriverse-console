@@ -48,6 +48,18 @@ if 'current_conversation_id' not in st.session_state:
     st.session_state.current_conversation_id = None
 if 'conversation_started' not in st.session_state:
     st.session_state.conversation_started = False
+
+# Debug configuration (only show in debug mode)
+config = load_config()
+if config.get('ui', {}).get('debug_mode', False):
+    with st.expander("🔧 Debug Info"):
+        st.write("**Configuration Status:**")
+        st.write(f"- Supabase URL: {'✅' if config['supabase']['url'] else '❌'}")
+        st.write(f"- Supabase Key: {'✅' if config['supabase']['anon_key'] else '❌'}")
+        st.write(f"- Function URL: {'✅' if config['supabase']['function_url'] else '❌'}")
+        st.write(f"- Processing Mode: {config['processing']['mode']}")
+        if config['supabase']['function_url']:
+            st.code(config['supabase']['function_url'])
 if 'learned_patterns' not in st.session_state:
     st.session_state.learned_patterns = {}
 
