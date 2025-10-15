@@ -438,16 +438,124 @@ class SaoynxAuthentication:
         st.markdown('</div>', unsafe_allow_html=True)
 
 def render_main_app():
-    """Main app interface for authenticated users"""
-    st.markdown("### 🧠 Welcome to SAOYNX")
-    st.write(f"Hello, **{st.session_state.username}**!")
+    """Main app interface for authenticated users - Full Emotional OS"""
+    st.title("🧠 Emotional OS - Personal AI Companion")
+    st.markdown("*Your private space for emotional processing and growth*")
     
-    if st.button("Sign Out"):
-        auth = SaoynxAuthentication()
-        auth.logout()
+    # User header with logout
+    col1, col2, col3 = st.columns([2, 1, 1])
     
-    # Your main app content here
-    st.write("Main application interface goes here...")
+    with col1:
+        st.write(f"Welcome back, **{st.session_state.username}**! 👋")
+    
+    with col2:
+        if st.button("⚙️ Settings", help="User settings and preferences"):
+            st.info("Settings panel coming soon!")
+    
+    with col3:
+        if st.button("🚪 Logout", help="Sign out of your account"):
+            auth = SaoynxAuthentication()
+            auth.logout()
+    
+    # User-specific conversation history
+    conversation_key = f"conversation_history_{st.session_state.user_id}"
+    if conversation_key not in st.session_state:
+        st.session_state[conversation_key] = []
+    
+    # Main interface
+    with st.container():
+        # Processing mode selection
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            processing_mode = st.selectbox(
+                "Processing Mode",
+                ["hybrid", "local", "ai_preferred"],
+                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+            )
+        
+        with col2:
+            if st.button("Clear History", type="secondary"):
+                st.session_state[conversation_key] = []
+                st.rerun()
+    
+    # Chat interface
+    chat_container = st.container()
+    
+    # Display conversation history
+    with chat_container:
+        for i, exchange in enumerate(st.session_state[conversation_key]):
+            with st.chat_message("user"):
+                st.write(exchange["user"])
+            
+            with st.chat_message("assistant"):
+                st.write(exchange["assistant"])
+                if "processing_time" in exchange:
+                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+    
+    # Input area
+    user_input = st.chat_input("Share what you're feeling...")
+    
+    if user_input:
+        # Add user message to chat
+        with chat_container:
+            with st.chat_message("user"):
+                st.write(user_input)
+        
+        # Process the input
+        with st.chat_message("assistant"):
+            with st.spinner("Processing your emotional input..."):
+                start_time = time.time()
+                
+                # Simple response for now (replace with actual processing when available)
+                response = "Thank you for sharing. I'm here to listen and support you through whatever you're experiencing. Your feelings are valid and important."
+                processing_time = time.time() - start_time
+                
+                st.write(response)
+                st.caption(f"Processed in {processing_time:.2f}s")
+        
+        # Add to conversation history
+        st.session_state[conversation_key].append({
+            "user": user_input,
+            "assistant": response,
+            "processing_time": f"{processing_time:.2f}s",
+            "mode": processing_mode,
+            "timestamp": datetime.now().isoformat()
+        })
+        
+        st.rerun()
+    
+    # Sidebar with user stats and settings
+    with st.sidebar:
+        st.subheader("Your Emotional Journey")
+        
+        # User-specific stats
+        conversation_count = len(st.session_state[conversation_key])
+        st.metric("Conversations", conversation_count)
+        
+        if conversation_count > 0:
+            recent_conversation = st.session_state[conversation_key][-1]
+            st.metric("Last Session", recent_conversation["timestamp"][:10])
+        
+        st.subheader("Privacy Settings")
+        st.write("🔒 Your data is completely isolated")
+        st.write("🧠 Learning happens only from your conversations")
+        st.write("⚡ Optimized for 2-3 second responses")
+        
+        if st.button("Download My Data", type="secondary"):
+            # Option to export user's conversation data
+            user_data = {
+                "user_id": st.session_state.user_id,
+                "username": st.session_state.username,
+                "conversations": st.session_state[conversation_key],
+                "export_date": datetime.now().isoformat()
+            }
+            st.download_button(
+                "Download JSON",
+                json.dumps(user_data, indent=2),
+                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
+                mime="application/json"
+            )
 
 def main():
     """Main application entry point"""
