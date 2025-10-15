@@ -141,19 +141,15 @@ class SaoynxAuthentication:
         /* Hide Streamlit default elements */
         .stDeployButton {display: none;}
         header[data-testid="stHeader"] {display: none;}
-        .stMainBlockContainer {padding-top: 2rem;}
+        .stMainBlockContainer {padding-top: 1rem;}
+        .main .block-container {padding-top: 1rem; padding-bottom: 1rem;}
         
         /* Main container */
         .main-splash {
             max-width: 500px;
-            margin: 0 auto;
+            margin: 2rem auto;
             padding: 1rem;
             text-align: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         
         /* Logo section */
@@ -206,15 +202,10 @@ class SaoynxAuthentication:
         
         /* Form container centering */
         .form-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 2rem;
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 1rem;
             text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
         
         /* Form styling */
