@@ -182,7 +182,7 @@ class SaoynxAuthentication:
         .auth-container {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.5rem;
             margin: 1rem 0;
             width: 100%;
         }
@@ -190,7 +190,7 @@ class SaoynxAuthentication:
         .auth-section {
             text-align: center;
             flex: 1;
-            max-width: 150px;
+            max-width: 130px;
         }
         
         .auth-title {
@@ -212,9 +212,14 @@ class SaoynxAuthentication:
         .stTextInput > div > div > input {
             border-radius: 30px;
             border: 2px solid #ddd;
-            padding: 12px 20px;
-            font-size: 1rem;
+            padding: 8px 16px;
+            font-size: 0.9rem;
             text-align: center;
+        }
+        
+        /* Reduce form spacing */
+        .stTextInput {
+            margin-bottom: 0.3rem;
         }
         
         .stTextInput > div > div > input:focus {
@@ -265,11 +270,13 @@ class SaoynxAuthentication:
         # Logo section
         st.markdown('<div class="logo-section">', unsafe_allow_html=True)
         
-        # Display logo - compact and centered
-        try:
-            st.image("Saonyx_Logo2 (2).png", width=100)
-        except:
-            st.markdown('<div style="font-size: 2rem; color: #666;">🧠</div>', unsafe_allow_html=True)
+        # Display logo - perfectly centered
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            try:
+                st.image("Saonyx_Logo2 (2).png", width=100)
+            except:
+                st.markdown('<div style="font-size: 2rem; color: #666;">🧠</div>', unsafe_allow_html=True)
         
         # Center-justified text underneath the logo
         st.markdown('''
@@ -338,17 +345,17 @@ class SaoynxAuthentication:
         st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
         
         # Login form - more compact
-        col1, col2, col3 = st.columns([1, 3, 1])
+        col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("login_form"):
                 # Match your design labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.3rem; color: #666; font-size: 0.9rem;">login:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; color: #666; font-size: 0.85rem;">login:</div>', unsafe_allow_html=True)
                 username = st.text_input("login", label_visibility="collapsed", placeholder="username")
                 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.3rem; margin-top: 0.5rem; color: #666; font-size: 0.9rem;">password:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; margin-top: 0.3rem; color: #666; font-size: 0.85rem;">password:</div>', unsafe_allow_html=True)
                 password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="password")
                 
-                st.markdown('<div style="margin: 0.8rem 0 0.3rem 0;"></div>', unsafe_allow_html=True)
+                st.markdown('<div style="margin: 0.5rem 0 0.2rem 0;"></div>', unsafe_allow_html=True)
                 login_submitted = st.form_submit_button("Sign In", use_container_width=True)
                 
                 if login_submitted:
@@ -381,20 +388,20 @@ class SaoynxAuthentication:
         st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
         
         # Register form - more compact
-        col1, col2, col3 = st.columns([1, 3, 1])
+        col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("register_form"):
                 # Match your design labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.3rem; color: #666; font-size: 0.9rem;">login:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; color: #666; font-size: 0.85rem;">login:</div>', unsafe_allow_html=True)
                 username = st.text_input("login", label_visibility="collapsed", placeholder="choose username")
                 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.3rem; margin-top: 0.5rem; color: #666; font-size: 0.9rem;">password:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; margin-top: 0.3rem; color: #666; font-size: 0.85rem;">password:</div>', unsafe_allow_html=True)
                 password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="choose password")
                 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.3rem; margin-top: 0.5rem; color: #666; font-size: 0.9rem;">confirm:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; margin-top: 0.3rem; color: #666; font-size: 0.85rem;">confirm:</div>', unsafe_allow_html=True)
                 confirm_password = st.text_input("confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
                 
-                st.markdown('<div style="margin: 0.8rem 0 0.3rem 0;"></div>', unsafe_allow_html=True)
+                st.markdown('<div style="margin: 0.5rem 0 0.2rem 0;"></div>', unsafe_allow_html=True)
                 register_submitted = st.form_submit_button("Register Now", use_container_width=True)
                 
                 if register_submitted:
