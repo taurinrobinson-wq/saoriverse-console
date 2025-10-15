@@ -144,12 +144,18 @@ class SaoynxAuthentication:
         .stMainBlockContainer {padding-top: 1rem;}
         .main .block-container {padding-top: 1rem; padding-bottom: 1rem;}
         
-        /* Main container */
+        /* Main container - professional centering */
         .main-splash {
-            max-width: 500px;
-            margin: 2rem auto;
-            padding: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            background: white;
+            padding: 2rem;
             text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         /* Logo section */
@@ -159,7 +165,7 @@ class SaoynxAuthentication:
         }
         
         .logo-text {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 300;
             letter-spacing: 4px;
             color: #2E2E2E;
@@ -169,7 +175,7 @@ class SaoynxAuthentication:
         }
         
         .logo-subtitle {
-            font-size: 0.75rem;
+            font-size: 1rem;
             color: #666;
             letter-spacing: 2px;
             font-weight: 300;
@@ -178,19 +184,16 @@ class SaoynxAuthentication:
             text-align: center;
         }
         
-        /* Auth sections */
+        /* Auth sections - tight compact layout */
         .auth-container {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 1rem 0;
-            width: 100%;
+            margin: 0.5rem 0;
         }
         
-        .auth-section {
+        .auth-question {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
             text-align: center;
-            flex: 1;
-            max-width: 130px;
         }
         
         .auth-title {
@@ -200,26 +203,35 @@ class SaoynxAuthentication:
             font-weight: 300;
         }
         
-        /* Form container centering */
+        /* Form container centering - compact */
         .form-container {
-            max-width: 400px;
-            margin: 2rem auto;
+            max-width: 350px;
+            margin: 1rem auto;
             padding: 1rem;
             text-align: center;
         }
         
-        /* Form styling */
+        /* Form styling - ultra tight spacing */
         .stTextInput > div > div > input {
             border-radius: 30px;
             border: 2px solid #ddd;
-            padding: 8px 16px;
-            font-size: 0.9rem;
+            padding: 6px 12px;
+            font-size: 0.85rem;
             text-align: center;
+            height: 30px;
+            line-height: 0.6;
         }
         
-        /* Reduce form spacing */
+        /* Minimal form spacing */
         .stTextInput {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.1rem;
+            line-height: 0.6;
+        }
+        
+        /* Compact form layout */
+        .stTextInput > label {
+            margin-bottom: 0.1rem !important;
+            line-height: 0.6;
         }
         
         .stTextInput > div > div > input:focus {
@@ -227,62 +239,64 @@ class SaoynxAuthentication:
             box-shadow: 0 0 0 1px #666;
         }
         
-        /* Button styling */
+        /* Professional button styling */
         .stButton > button {
-            border-radius: 30px;
+            width: 100%;
+            max-width: 140px;
+            height: 35px;
             border: 2px solid #2E2E2E;
             background-color: #2E2E2E;
+            border-radius: 8px;
+            font-size: 0.8rem;
             color: white;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .stButton > button:hover {
             background-color: white;
             color: #2E2E2E;
             border-color: #2E2E2E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 46, 46, 0.2);
         }
         
-        /* Quick access */
+        /* Quick access - clean divider */
         .quick-access {
-            margin-top: 1rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid #eee;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+            text-align: center;
         }
         
         .quick-title {
             color: #999;
-            font-size: 0.7rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         </style>
         """, unsafe_allow_html=True)
         
-        # Main container
-        st.markdown('<div class="main-splash">', unsafe_allow_html=True)
+        # Complete logo with text - perfectly centered
+        st.markdown('<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
         
-        # Logo section
-        st.markdown('<div class="logo-section">', unsafe_allow_html=True)
-        
-        # Display logo - perfectly centered
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
-                st.image("Saonyx_Logo2 (2).png", width=100)
+                st.image("Saonyx_Logo.png", width=200)
             except:
-                st.markdown('<div style="font-size: 2rem; color: #666;">🧠</div>', unsafe_allow_html=True)
+                st.markdown('''
+                <div style="font-size: 4rem;">🧠</div>
+                <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
+                <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">AI EMOTIONAL<br>INTERFACES</div>
+                ''', unsafe_allow_html=True)
         
-        # Center-justified text underneath the logo
-        st.markdown('''
-        <div class="logo-text">SAOYNX</div>
-        <div class="logo-subtitle">AI EMOTIONAL<br>INTERFACES</div>
-        ''', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Handle different states
@@ -291,30 +305,29 @@ class SaoynxAuthentication:
         elif st.session_state.get('show_register', False):
             self.render_register_form()
         else:
-            # Main splash screen - two columns as per your design
+            # Main splash screen - professional centered layout
             st.markdown('<div class="auth-container">', unsafe_allow_html=True)
             
-            col1, col2 = st.columns([1, 1], gap="large")
-            
-            with col1:
-                st.markdown('<div class="auth-section">', unsafe_allow_html=True)
-                st.markdown('<div class="auth-title">existing user?</div>', unsafe_allow_html=True)
-                
-                if st.button("Sign In", key="existing_btn", use_container_width=False):
-                    st.session_state.show_login = True
-                    st.rerun()
-                    
-                st.markdown('</div>', unsafe_allow_html=True)
-            
+            # Tight, compact button layout
+            col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
-                st.markdown('<div class="auth-section">', unsafe_allow_html=True)
-                st.markdown('<div class="auth-title">new user?</div>', unsafe_allow_html=True)
+                # Questions closer together
+                qcol1, qcol2 = st.columns([1, 1], gap="small")
+                with qcol1:
+                    st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
+                with qcol2:
+                    st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
                 
-                if st.button("Register Now", key="new_btn", use_container_width=False):
-                    st.session_state.show_register = True
-                    st.rerun()
-                    
-                st.markdown('</div>', unsafe_allow_html=True)
+                # Buttons closer together
+                bcol1, bcol2 = st.columns([1, 1], gap="small")
+                with bcol1:
+                    if st.button("Sign In", key="existing_btn"):
+                        st.session_state.show_login = True
+                        st.rerun()
+                with bcol2:
+                    if st.button("Register Now", key="new_btn"):
+                        st.session_state.show_register = True
+                        st.rerun()
             
             st.markdown('</div>', unsafe_allow_html=True)
             
@@ -328,8 +341,6 @@ class SaoynxAuthentication:
                     self.quick_login_bypass()
             
             st.markdown('</div>', unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
     
     def render_login_form(self):
         """Clean login form matching your design"""
@@ -344,18 +355,18 @@ class SaoynxAuthentication:
         # No duplicate logo - just the title
         st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
         
-        # Login form - more compact
+        # Login form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("login_form"):
-                # Match your design labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; color: #666; font-size: 0.85rem;">login:</div>', unsafe_allow_html=True)
+                # Tight spacing labels
+                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
                 username = st.text_input("login", label_visibility="collapsed", placeholder="username")
                 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; margin-top: 0.3rem; color: #666; font-size: 0.85rem;">password:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
                 password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="password")
                 
-                st.markdown('<div style="margin: 0.5rem 0 0.2rem 0;"></div>', unsafe_allow_html=True)
+                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
                 login_submitted = st.form_submit_button("Sign In", use_container_width=True)
                 
                 if login_submitted:
@@ -387,21 +398,21 @@ class SaoynxAuthentication:
         # No duplicate logo - just the title
         st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
         
-        # Register form - more compact
+        # Register form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("register_form"):
-                # Match your design labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; color: #666; font-size: 0.85rem;">login:</div>', unsafe_allow_html=True)
+                # Tight spacing labels
+                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
                 username = st.text_input("login", label_visibility="collapsed", placeholder="choose username")
                 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; margin-top: 0.3rem; color: #666; font-size: 0.85rem;">password:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
                 password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="choose password")
                 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.2rem; margin-top: 0.3rem; color: #666; font-size: 0.85rem;">confirm:</div>', unsafe_allow_html=True)
+                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>', unsafe_allow_html=True)
                 confirm_password = st.text_input("confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
                 
-                st.markdown('<div style="margin: 0.5rem 0 0.2rem 0;"></div>', unsafe_allow_html=True)
+                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
                 register_submitted = st.form_submit_button("Register Now", use_container_width=True)
                 
                 if register_submitted:
