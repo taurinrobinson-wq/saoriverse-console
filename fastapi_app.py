@@ -17,9 +17,6 @@ from datetime import datetime, timedelta
 import hashlib
 import secrets
 import base64
-
-# Import admin system
-from admin_system import admin_router
 from typing import Optional
 import uvicorn
 
