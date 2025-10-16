@@ -517,15 +517,15 @@ class SaoynxAuthentication:
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
     
-    # Header with logo and title on same line
-    col1, col2 = st.columns([1, 6])
+    # Header with logo and title properly aligned
+    col1, col2 = st.columns([1, 8])
     with col1:
         try:
-            st.image("graphics/FirstPerson-Logo.svg", width=50)
+            st.image("graphics/FirstPerson-Logo.svg", width=60)
         except:
-            st.markdown("🧠", unsafe_allow_html=True)
+            st.markdown('<div style="font-size: 3rem; margin: 0;">🧠</div>', unsafe_allow_html=True)
     with col2:
-        st.markdown("# FirstPerson - Personal AI Companion")
+        st.markdown('<h1 style="margin-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
     
     st.markdown("*Your private space for emotional processing and growth*")
     
