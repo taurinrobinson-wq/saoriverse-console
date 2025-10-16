@@ -14,7 +14,7 @@ import secrets
 # Page configuration
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="🧠",
+    page_icon="graphics/FirstPerson-Logo.png",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -366,12 +366,12 @@ class SaoynxAuthentication:
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
-                st.image("Saonyx_Logo.png", width=200)
+                st.image("graphics/FirstPerson-Logo.png", width=200)
             except:
                 st.markdown('''
                 <div style="font-size: 4rem;">🧠</div>
-                <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
-                <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">AI EMOTIONAL<br>INTERFACES</div>
+                <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">FirstPerson</div>
+                <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">Personal AI<br>Companion</div>
                 ''', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
@@ -516,7 +516,17 @@ class SaoynxAuthentication:
 
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
-    st.title("🧠 FirstPerson - Personal AI Companion")
+    
+    # Header with logo and title on same line
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        try:
+            st.image("graphics/FirstPerson-Logo.png", width=50)
+        except:
+            st.markdown("🧠", unsafe_allow_html=True)
+    with col2:
+        st.markdown("# FirstPerson - Personal AI Companion")
+    
     st.markdown("*Your private space for emotional processing and growth*")
     
     # User header with logout
