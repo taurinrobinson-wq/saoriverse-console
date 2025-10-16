@@ -1,0 +1,11 @@
+# Environment variables for FirstPerson Web App
+# Copy this file to .env and fill in your actual values
+
+SUPABASE_URL=your_supabase_url_here
+SUPABASE_KEY=your_supabase_anon_key_here
+SECRET_KEY=your_secret_key_here
+
+# Production settings
+ENVIRONMENT=production
+HOST=0.0.0.0
+PORT=8000
