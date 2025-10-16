@@ -675,24 +675,6 @@ def main():
     """Main application entry point"""
     auth = SaoynxAuthentication()
     
-    # Debug info (temporary - remove later)
-    with st.sidebar:
-        with st.expander("🔧 Debug Info"):
-            st.write(f"Authenticated: {st.session_state.authenticated}")
-            st.write(f"Username: {st.session_state.username}")
-            st.write(f"User ID: {st.session_state.user_id}")
-            if "session_token" in st.query_params:
-                st.write("Session token present in URL")
-                # Test token validation
-                token = st.query_params.get("session_token")
-                if token:
-                    result = auth.validate_session_token(token)
-                    st.write(f"Token valid: {result.get('valid', False)}")
-                    if not result.get('valid'):
-                        st.write(f"Error: {result.get('error', 'Unknown')}")
-            else:
-                st.write("No session token in URL")
-    
     # Check if user is authenticated
     if st.session_state.authenticated:
         render_main_app()
