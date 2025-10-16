@@ -99,6 +99,13 @@ Deno.serve(async (req)=>{
   }
   const message = body?.message?.toString?.().trim();
   const mode = body?.mode?.toString?.() || "quick";
+  const requestUserId = body?.user_id?.toString?.();
+  
+  // Use user_id from request body if provided, otherwise try token
+  if (requestUserId) {
+    userId = requestUserId;
+  }
+  
   if (!message) return new Response(JSON.stringify({
     error: "Missing 'message'"
   }), {
