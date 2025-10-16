@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Professional gradient for modern look -->
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E2E2E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A4A4A;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Brain pattern for AI theme -->
+    <pattern id="brainPattern" patternUnits="userSpaceOnUse" width="40" height="40">
+      <circle cx="20" cy="20" r="2" fill="#666" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Main circular background -->
+  <circle cx="200" cy="200" r="180" fill="url(#logoGradient)" stroke="#1A1A1A" stroke-width="4"/>
+  
+  <!-- Inner circle with pattern -->
+  <circle cx="200" cy="200" r="160" fill="url(#brainPattern)" opacity="0.1"/>
+  
+  <!-- Central brain/neural network design -->
+  <g transform="translate(200,200)">
+    <!-- Main neural nodes -->
+    <circle cx="-60" cy="-40" r="8" fill="#fff" opacity="0.9"/>
+    <circle cx="60" cy="-40" r="8" fill="#fff" opacity="0.9"/>
+    <circle cx="0" cy="-70" r="10" fill="#fff" opacity="1"/>
+    <circle cx="-30" cy="20" r="6" fill="#fff" opacity="0.8"/>
+    <circle cx="30" cy="20" r="6" fill="#fff" opacity="0.8"/>
+    <circle cx="0" cy="60" r="8" fill="#fff" opacity="0.9"/>
+    
+    <!-- Neural connections -->
+    <path d="M -60,-40 Q -30,-55 0,-70 Q 30,-55 60,-40" 
+          stroke="#fff" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M -60,-40 Q -45,10 -30,20" 
+          stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M 60,-40 Q 45,10 30,20" 
+          stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M -30,20 Q 0,40 30,20" 
+          stroke="#fff" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M -30,20 Q -15,40 0,60" 
+          stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M 30,20 Q 15,40 0,60" 
+          stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  </g>
+  
+  <!-- FirstPerson Text -->
+  <text x="200" y="320" text-anchor="middle" 
+        font-family="Arial, sans-serif" font-size="28" font-weight="300" 
+        fill="#2E2E2E" letter-spacing="3px">FirstPerson</text>
+  
+  <!-- Subtitle -->
+  <text x="200" y="350" text-anchor="middle" 
+        font-family="Arial, sans-serif" font-size="14" font-weight="300" 
+        fill="#666" letter-spacing="2px" text-transform="uppercase">Personal AI Companion</text>
+</svg>

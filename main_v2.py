@@ -14,7 +14,7 @@ import secrets
 # Page configuration
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="graphics/FirstPerson-Logo.png",
+    page_icon="graphics/FirstPerson-Logo.svg",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -366,7 +366,7 @@ class SaoynxAuthentication:
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
-                st.image("graphics/FirstPerson-Logo.png", width=200)
+                st.image("graphics/FirstPerson-Logo.svg", width=200)
             except:
                 st.markdown('''
                 <div style="font-size: 4rem;">🧠</div>
@@ -521,7 +521,7 @@ def render_main_app():
     col1, col2 = st.columns([1, 6])
     with col1:
         try:
-            st.image("graphics/FirstPerson-Logo.png", width=50)
+            st.image("graphics/FirstPerson-Logo.svg", width=50)
         except:
             st.markdown("🧠", unsafe_allow_html=True)
     with col2:
