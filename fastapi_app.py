@@ -24,7 +24,7 @@ import uvicorn
 app = FastAPI(
     title="FirstPerson - Personal AI Companion",
     description="Your private space for emotional processing and growth",
-    version="2.0.0"
+    version="2.0.1"  # Force redeploy
 )
 
 # Add CORS middleware
