@@ -507,12 +507,48 @@ def render_main_app():
             with st.spinner("Processing your emotional input..."):
                 start_time = time.time()
                 
-                # Simple response for now (replace with actual processing when available)
-                response = "Thank you for sharing. I'm here to listen and support you through whatever you're experiencing. Your feelings are valid and important."
+                # Call Saori AI processing
+                try:
+                    saori_url = st.secrets.get("supabase", {}).get("current_saori_url", f"{st.secrets['supabase']['url']}/functions/v1/saori-fixed")
+                    
+                    response_data = requests.post(
+                        saori_url,
+                        headers={
+                            "Authorization": f"Bearer {st.secrets['supabase']['key']}",
+                            "Content-Type": "application/json"
+                        },
+                        json={
+                            "message": user_input,
+                            "mode": processing_mode,
+                            "user_id": st.session_state.user_id
+                        },
+                        timeout=15
+                    )
+                    
+                    if response_data.status_code == 200:
+                        result = response_data.json()
+                        response = result.get("reply", "I'm here to listen.")
+                        glyph_info = result.get("glyph", {})
+                        processing_details = result.get("log", {})
+                    else:
+                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                        glyph_info = {}
+                        processing_details = {"error": f"HTTP {response_data.status_code}"}
+                        
+                except Exception as e:
+                    response = "I'm having trouble connecting right now, but your feelings are still valid and important."
+                    glyph_info = {}
+                    processing_details = {"error": str(e)}
+                
                 processing_time = time.time() - start_time
                 
                 st.write(response)
-                st.caption(f"Processed in {processing_time:.2f}s")
+                
+                # Show processing details
+                if glyph_info and glyph_info.get("tag_name"):
+                    st.caption(f"✨ Emotional resonance: {glyph_info.get('tag_name')} • Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                else:
+                    st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
         
         # Add to conversation history
         st.session_state[conversation_key].append({
@@ -520,6 +556,7 @@ def render_main_app():
             "assistant": response,
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
+            "glyph": glyph_info.get("tag_name") if glyph_info else None,
             "timestamp": datetime.now().isoformat()
         })
         
