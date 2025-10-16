@@ -68,6 +68,11 @@ def get_admin_session(request: Request) -> dict:
     return admin_sessions[token]
 
 # Routes
+@admin_router.get("/test")
+async def admin_test():
+    """Test route to verify admin router is working"""
+    return {"message": "Admin router is working!"}
+
 @admin_router.get("/", response_class=HTMLResponse)
 async def admin_login(request: Request):
     """Admin login page"""

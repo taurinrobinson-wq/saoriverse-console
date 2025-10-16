@@ -39,6 +39,12 @@ app.add_middleware(
 # Include routers
 app.include_router(admin_router)
 
+# Debug route to check what routes are registered
+@app.get("/debug/routes")
+async def debug_routes():
+    """Debug endpoint to see all registered routes"""
+    return {"admin_router_included": "admin_router" in str(app.routes), "total_routes": len(app.routes)}
+
 # Static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
