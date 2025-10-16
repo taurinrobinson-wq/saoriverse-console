@@ -13,7 +13,7 @@ import secrets
 
 # Page configuration
 st.set_page_config(
-    page_title="SAOYNX - AI Emotional Interfaces",
+    page_title="FirstPerson - Personal AI Companion",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -439,7 +439,7 @@ class SaoynxAuthentication:
 
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
-    st.title("🧠 Emotional OS - Personal AI Companion")
+    st.title("🧠 FirstPerson - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
     
     # User header with logout
