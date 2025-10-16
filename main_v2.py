@@ -33,8 +33,49 @@ class SaoynxAuthentication:
         
         self.init_session_state()
     
+    def create_session_token(self, username: str, user_id: str) -> str:
+        """Create a secure session token"""
+        import base64
+        session_data = {
+            "username": username,
+            "user_id": user_id,
+            "created": datetime.now().isoformat(),
+            "expires": (datetime.now() + timedelta(days=2)).isoformat()
+        }
+        # Simple base64 encoding (in production, use proper JWT)
+        token = base64.b64encode(json.dumps(session_data).encode()).decode()
+        return token
+    
+    def validate_session_token(self, token: str) -> dict:
+        """Validate and decode session token"""
+        try:
+            import base64
+            # Decode the token
+            decoded_data = base64.b64decode(token.encode()).decode()
+            session_data = json.loads(decoded_data)
+            
+            # Check required fields
+            required_fields = ["username", "user_id", "expires"]
+            for field in required_fields:
+                if field not in session_data:
+                    return {"valid": False, "error": f"Missing field: {field}"}
+            
+            # Check expiration
+            try:
+                expires = datetime.fromisoformat(session_data["expires"])
+                if datetime.now() < expires:
+                    return {"valid": True, "data": session_data}
+                else:
+                    return {"valid": False, "error": "Session expired"}
+            except ValueError as e:
+                return {"valid": False, "error": f"Invalid date format: {e}"}
+                
+        except Exception as e:
+            return {"valid": False, "error": f"Token validation error: {str(e)}"}
+    
     def init_session_state(self):
-        """Initialize authentication session state"""
+        """Initialize authentication session state with persistence"""
+        # Initialize defaults first
         if 'authenticated' not in st.session_state:
             st.session_state.authenticated = False
         if 'user_id' not in st.session_state:
@@ -43,6 +84,26 @@ class SaoynxAuthentication:
             st.session_state.username = None
         if 'session_expires' not in st.session_state:
             st.session_state.session_expires = None
+        
+        # Only try to restore session if not already authenticated
+        if not st.session_state.authenticated:
+            # Check for existing session token in query params
+            query_params = st.query_params
+            session_token = query_params.get("session_token")
+            
+            if session_token:
+                # Try to restore session from token
+                session_result = self.validate_session_token(session_token)
+                if session_result["valid"]:
+                    data = session_result["data"]
+                    st.session_state.authenticated = True
+                    st.session_state.user_id = data["user_id"]
+                    st.session_state.username = data["username"]
+                    st.session_state.session_expires = data["expires"]
+                else:
+                    # Invalid token, remove it
+                    if "session_token" in st.query_params:
+                        del st.query_params["session_token"]
     
     def authenticate_user(self, username: str, password: str) -> dict:
         """Authenticate user login"""
@@ -69,7 +130,13 @@ class SaoynxAuthentication:
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
-                    st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
+                    st.session_state.session_expires = (datetime.now() + timedelta(days=2)).isoformat()
+                    
+                    # Create persistent session token
+                    session_token = self.create_session_token(username, data.get("user_id"))
+                    
+                    # Add session token to URL for persistence
+                    st.query_params["session_token"] = session_token
                     
                     return {"success": True, "message": "Login successful"}
                 else:
@@ -117,10 +184,15 @@ class SaoynxAuthentication:
         """Quick demo access"""
         import uuid
         
+        user_id = str(uuid.uuid4())
         st.session_state.authenticated = True
-        st.session_state.user_id = str(uuid.uuid4())
+        st.session_state.user_id = user_id
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
+        st.session_state.session_expires = (datetime.now() + timedelta(days=2)).isoformat()
+        
+        # Create persistent session token for demo user too
+        session_token = self.create_session_token("demo_user", user_id)
+        st.query_params["session_token"] = session_token
         
         st.rerun()
     
@@ -130,6 +202,11 @@ class SaoynxAuthentication:
         st.session_state.user_id = None
         st.session_state.username = None
         st.session_state.session_expires = None
+        
+        # Clear session token from URL
+        if "session_token" in st.query_params:
+            del st.query_params["session_token"]
+        
         st.rerun()
     
     def render_splash_interface(self):
@@ -597,6 +674,24 @@ def render_main_app():
 def main():
     """Main application entry point"""
     auth = SaoynxAuthentication()
+    
+    # Debug info (temporary - remove later)
+    with st.sidebar:
+        with st.expander("🔧 Debug Info"):
+            st.write(f"Authenticated: {st.session_state.authenticated}")
+            st.write(f"Username: {st.session_state.username}")
+            st.write(f"User ID: {st.session_state.user_id}")
+            if "session_token" in st.query_params:
+                st.write("Session token present in URL")
+                # Test token validation
+                token = st.query_params.get("session_token")
+                if token:
+                    result = auth.validate_session_token(token)
+                    st.write(f"Token valid: {result.get('valid', False)}")
+                    if not result.get('valid'):
+                        st.write(f"Error: {result.get('error', 'Unknown')}")
+            else:
+                st.write("No session token in URL")
     
     # Check if user is authenticated
     if st.session_state.authenticated:
