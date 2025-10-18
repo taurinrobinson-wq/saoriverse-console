@@ -26,10 +26,11 @@ def load_signal_map(path: str) -> Dict[str, str]:
     return combined_lexicon
 
 # Extract signals using fuzzy matching
-def parse_signals(input_text: str, signal_map: Dict[str, str]) -> List[str]:
+def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[str]:
     lowered = input_text.lower()
     signals = []
-    for keyword, signal in signal_map.items():
+    for keyword, metadata in signal_map.items():
+        signal = metadata.get("signal")
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
             signals.append(signal)
     return list(set(signals))
