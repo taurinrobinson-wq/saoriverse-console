@@ -39,7 +39,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
     return matched_signals
 
 # Map signals to ECM gates
-def evaluate_gates(signals: List[str]) -> List[str]:
+def evaluate_gates(signals: List[Dict]) -> List[str]:
     ecm_gates = {
         "Gate 2": ["β"],
         "Gate 4": ["γ", "θ"],
@@ -48,9 +48,10 @@ def evaluate_gates(signals: List[str]) -> List[str]:
         "Gate 9": ["α", "β", "γ", "δ", "ε", "Ω"],
         "Gate 10": ["θ"]
     }
+
     activated = []
     for gate, required in ecm_gates.items():
-        if any(signal in signals for signal in required):
+        if any(s["signal"] in required for s in signals):
             activated.append(gate)
     return activated
 
