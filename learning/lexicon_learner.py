@@ -206,6 +206,35 @@ class LexiconLearner:
         # Return themes sorted by frequency
         return [theme for theme, score in sorted(theme_scores.items(), key=lambda x: x[1], reverse=True)]
     
+    class ToneMemory:
+    def __init__(self):
+        self.recent_tones = []
+
+    def update(self, tone: str):
+        self.recent_tones.append(tone)
+        if len(self.recent_tones) > 3:
+            self.recent_tones.pop(0)
+
+    def get_default_tone(self):
+        return self.recent_tones[-1] if self.recent_tones else "plain"
+    
+    def parse_glyph_from_patterns(patterns: Dict[str, List[str]]) -> str:
+    if patterns['feeling_expressions'] or patterns['intensity_modifiers']:
+        return "emotive"
+    elif patterns['emotional_metaphors']:
+        return "mythic"
+    else:
+        return "plain"
+    
+    def scale_emotional_voltage(patterns: Dict[str, List[str]]) -> str:
+    count = sum(len(v) for v in patterns.values())
+    if count > 5:
+        return "high"
+    elif count > 2:
+        return "medium"
+    else:
+        return "low"
+
     def update_lexicon_from_learning(self, learning_results: Dict):
         """Update the learned lexicon based on learning results"""
         # Add new emotional words with appropriate signal mappings
