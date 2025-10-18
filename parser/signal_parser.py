@@ -6,14 +6,13 @@ from typing import List, Dict
 from datetime import datetime
 
 # Load signal lexicon from JSON (base + learned)
-def load_signal_map(path: str) -> Dict[str, Dict]:
+def load_signal_map(base_path: str, learned_path: str = "parser/learned_lexicon.json") -> Dict[str, Dict]:
     base_lexicon = {}
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
+    if os.path.exists(base_path):
+        with open(base_path, 'r', encoding='utf-8') as f:
             base_lexicon = json.load(f)
 
     learned_lexicon = {}
-    learned_path = "parser/learned_lexicon.json"
     if os.path.exists(learned_path):
         try:
             with open(learned_path, 'r', encoding='utf-8') as f:
