@@ -72,10 +72,12 @@ Deno.serve(async (req) => {
   if (!message) return new Response(JSON.stringify({ error: "Missing 'message'" }), { status: 400, headers: corsHeaders });
 
   const toneMap = {
-    hybrid: "regular and grounded",
-    local: "editorial and private",
-    ai_preferred: "mythic and reverent",
-    quick: "plain and conversational"
+  hybrid: "editorial and private",
+  local: "plain and conversational",
+  ai_preferred: "emotionally attuned and responsive",
+  quick: "regular and grounded"
+};
+
   };
   const overrideTone = toneMap[mode] ?? null;
 
