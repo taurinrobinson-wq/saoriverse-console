@@ -102,7 +102,7 @@ Deno.serve(async (req) => {
     console.error("Tag lookup failed:", e);
   }
 
-  const tone = matchedTag?.tone_profile ?? overrideTone ?? "mythic and reverent";
+  const tone = matchedTag?.tone_profile ?? overrideTone ?? "regular and grounded";
   const cadence = matchedTag?.cadence ?? "poetic and flowing";
   const depthTone = matchedTag?.depth_level ?? "emotional excavation";
   const style = matchedTag?.style_variant ?? "oracle";
