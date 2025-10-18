@@ -55,7 +55,9 @@ class AuthenticationManager:
             st.session_state.session_expires = None
         if 'login_attempts' not in st.session_state:
             st.session_state.login_attempts = {}
-    
+        if 'processing_mode' not in st.session_state:
+            st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+
     def hash_password(self, password: str, salt: str = None) -> tuple:
         """Hash password with salt - matches backend exactly"""
         if salt is None:
@@ -705,11 +707,13 @@ def render_main_app():
         
         with col1:
             processing_mode = st.selectbox(
-                "Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
-                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
-            )
-        
+    "Processing Mode",
+    ["hybrid", "local", "ai_preferred"],
+    index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
+    help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+)
+st.session_state.processing_mode = processing_mode
+
         with col2:
             if st.button("Clear History", type="secondary"):
                 st.session_state[conversation_key] = []
