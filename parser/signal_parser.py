@@ -25,14 +25,18 @@ def load_signal_map(base_path: str, learned_path: str = "parser/learned_lexicon.
     return combined_lexicon
 
 # Extract signals using fuzzy matching
-def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[str]:
+def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
     lowered = input_text.lower()
-    signals = []
+    matched_signals = []
     for keyword, metadata in signal_map.items():
-        signal = metadata.get("signal")
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
-            signals.append(signal)
-    return list(set(signals))
+            matched_signals.append({
+                "keyword": keyword,
+                "signal": metadata.get("signal"),
+                "voltage": metadata.get("voltage", "medium"),
+                "tone": metadata.get("tone", "unknown")
+            })
+    return matched_signals
 
 # Map signals to ECM gates
 def evaluate_gates(signals: List[str]) -> List[str]:
