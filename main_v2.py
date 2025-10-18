@@ -555,11 +555,21 @@ def render_main_app():
         col1, col2 = st.columns([2, 1])
         
         with col1:
-            processing_mode = st.selectbox(
-                "Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
-                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
-            )
+    # Set default processing mode if not already set
+    if 'processing_mode' not in st.session_state:
+        st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+
+    # Render selectbox using session state
+    processing_mode = st.selectbox(
+        "Processing Mode",
+        ["hybrid", "local", "ai_preferred"],
+        index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
+        help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+    )
+
+    # Update session state with selected mode
+    st.session_state.processing_mode = processing_mode
+
         
         with col2:
             if st.button("Clear History", type="secondary"):
