@@ -570,6 +570,7 @@ def render_main_app():
     # Update session state with selected mode
     st.session_state.processing_mode = processing_mode
 
+
         
         with col2:
             if st.button("Clear History", type="secondary"):
