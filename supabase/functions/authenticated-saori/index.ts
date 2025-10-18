@@ -383,6 +383,8 @@ Deno.serve(async (req: any) => {
 Respond conversationally and supportively. Keep responses concise and under 150 words.
 Focus on emotional resonance rather than lengthy explanations.`;
 
+    console.log("SYSTEM PROMPT:\n", systemPrompt);
+
       return await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
