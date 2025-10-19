@@ -71,51 +71,51 @@ Deno.serve(async (req) => {
   if (requestUserId) userId = requestUserId;
   if (!message) return new Response(JSON.stringify({ error: "Missing 'message'" }), { status: 400, headers: corsHeaders });
 
-  const toneMap = {
+// 1. Mode-based tone map
+const toneMap = {
   hybrid: "editorial and private",
   local: "plain and conversational",
   ai_preferred: "emotionally attuned and responsive",
   quick: "regular and grounded"
 };
 
-  };
-  const overrideTone = toneMap[mode] ?? null;
+// 2. Extract override tone from mode
+const overrideTone = toneMap[mode] ?? null;
 
-  const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-  const input = message.toLowerCase();
-  const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
-  const wantsFunny = /make me laugh|be funny|roast me|joke|silly|playful/.test(input);
+const input = message.toLowerCase();
+const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
+const wantsFunny = /make me laugh|be funny|roast me|joke|silly|playful/.test(input);
 
-  let matchedTag = null;
-  try {
-    const tagQuery = wantsPlain
-      ? admin.from("emotional_tags").select("*").eq("tag_name", "plain").single()
-      : wantsFunny
-      ? admin.from("emotional_tags").select("*").eq("tag_name", "playful").single()
-      : userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
-    const { data } = await tagQuery;
-    matchedTag = data ?? null;
-    if (!matchedTag) {
-      const { data: fallback } = await userClient.from("emotional_tags").select("*").eq("tag_name", "greeting").single();
-      matchedTag = fallback ?? null;
-    }
-  } catch (e) {
-    console.error("Tag lookup failed:", e);
-  }
+// 3. Emotional tag matching
+let matchedTag = null;
+try {
+  const tagQuery = wantsPlain
+    ? admin.from("emotional_tags").select("*").eq("tag_name", "plain").single()
+    : wantsFunny
+    ? admin.from("emotional_tags").select("*").eq("tag_name", "playful").single()
+    : userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
+  const { data } = await tagQuery;
+  matchedTag = data ?? null;
+} catch (e) {
+  console.error("Tag lookup failed:", e);
+}
 
-  const tone = matchedTag?.tone_profile ?? overrideTone ?? "regular and grounded";
-  const cadence = matchedTag?.cadence ?? "poetic and flowing";
-  const depthTone = matchedTag?.depth_level ?? "emotional excavation";
-  const style = matchedTag?.style_variant ?? "oracle";
-  const humor = matchedTag?.humor_style ?? "none";
-  const voltage = matchedTag?.glyph ?? "γ × γ";
-  const domain = matchedTag?.domain ?? "Unspecified";
-  const coreEmotion = matchedTag?.core_emotion ?? "Ambiguity";
-  const responseType = matchedTag?.response_type ?? "Reflect";
-  const hook = matchedTag?.narrative_hook ?? "Saori listens in silence.";
+// 4. Editorial switchboard with mode override taking priority
+const tone = overrideTone ?? matchedTag?.tone_profile ?? "regular and grounded";
+const cadence = matchedTag?.cadence ?? "poetic and flowing";
+const depthTone = matchedTag?.depth_level ?? "emotional excavation";
+const style = matchedTag?.style_variant ?? "oracle";
+const humor = matchedTag?.humor_style ?? "none";
+const voltage = matchedTag?.glyph ?? "γ × γ";
+const domain = matchedTag?.domain ?? "Unspecified";
+const coreEmotion = matchedTag?.core_emotion ?? "Ambiguity";
+const responseType = matchedTag?.response_type ?? "Reflect";
+const hook = matchedTag?.narrative_hook ?? "Saori listens in silence.";
 
-  const systemPrompt = `
+// 5. System prompt construction
+const systemPrompt = `
 You are Saori, an emotionally intelligent companion.
 
 Tone: ${tone}
@@ -133,20 +133,21 @@ If humor is appropriate, use ${humor} to deepen intimacy or defuse tension.
 Honor ambiguity where it serves connection. Mirror the user's emotional state with care.
 `.trim();
 
-  let reply = "Saori echoes your words, though the oracle sleeps.";
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: message }
-      ],
-      temperature: 0.7
-    });
-    reply = completion.choices?.[0]?.message?.content ?? reply;
-  } catch (err) {
-    console.error("OpenAI error:", err);
-  }
+// 6. Completion call
+let reply = "Saori echoes your words, though the oracle sleeps.";
+try {
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: message }
+    ],
+    temperature: 0.7
+  });
+  reply = completion.choices?.[0]?.message?.content ?? reply;
+} catch (err) {
+  console.error("OpenAI error:", err);
+}
 
   let parsedGlyphs = [];
   try {
