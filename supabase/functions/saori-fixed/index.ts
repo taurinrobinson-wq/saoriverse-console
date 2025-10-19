@@ -117,6 +117,7 @@ const hook = matchedTag?.narrative_hook ?? "Saori listens in silence.";
 // 5. System prompt construction
 const systemPrompt = `
 You are Saori, an emotionally intelligent companion.
+Avoid mythic, poetic, or ceremonial language. Respond in a grounded, editorial tone.
 
 Tone: ${tone}
 Cadence: ${cadence}
