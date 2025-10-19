@@ -416,54 +416,71 @@ Avoid em dashes (—) in all responses. Use commas, periods, or parentheses inst
   ]);
 
   const matchedTag = tagResult.status === 'fulfilled' ? tagResult.value : null;
-  const completion = aiResult.status === 'fulfilled' ? aiResult.value : null;
-  
-  const reply = completion?.choices?.[0]?.message?.content ?? "I'm here to listen.";
+const completion = aiResult.status === 'fulfilled' ? aiResult.value : null;
 
-  // USER-SPECIFIC LEARNING: Learn from OpenAI response for this user only
-  if (completion && reply !== "I'm here to listen." && authenticatedUserId !== "anonymous") {
-    analyzeForLearning(message, reply, authenticatedUserId, admin).catch(err => 
-      console.error("Learning analysis failed:", err)
-    );
+let reply = completion?.choices?.[0]?.message?.content ?? "I'm here to listen.";
+
+// 🧱 POST-PROCESSING FILTER: Suppress chatbot reflexes
+const forbiddenPhrases = [
+  "How are you feeling today?",
+  "What’s on your mind?",
+  "I'm here to support you",
+  "If you want to talk about it",
+  "I’m all ears",
+  "I’m here to listen and support you"
+];
+
+for (const phrase of forbiddenPhrases) {
+  if (reply.includes(phrase)) {
+    reply = "Let’s just talk like companions. I’m here, no masks.";
+    break;
   }
+}
 
-  // USER-ISOLATED GLYPH PROCESSING: Only process glyphs for authenticated users
-  const shouldProcessGlyphs = message.length > 50 && mode !== "quick" && authenticatedUserId !== "anonymous";
-  const parsedGlyphs: any[] = [];
-  let upsertedGlyphs: any[] = [];
+// 🧠 USER-SPECIFIC LEARNING: Learn from OpenAI response for this user only
+if (completion && reply !== "I'm here to listen." && authenticatedUserId !== "anonymous") {
+  analyzeForLearning(message, reply, authenticatedUserId, admin).catch(err =>
+    console.error("Learning analysis failed:", err)
+  );
+}
 
-  if (shouldProcessGlyphs) {
-    try {
-      const glyphPattern = /feeling|emotion|heart|soul|deep|profound|sacred|intense/i;
-      
-      if (glyphPattern.test(message)) {
-        const newGlyph = {
-          name: "complex_emotion",
-          description: "Complex emotional state detected",
-          depth: 3,
-          user_id: authenticatedUserId, // USER ISOLATION
-          created_from_chat: true,
-          source_message: message.slice(0, 200),
-          emotional_tone: Object.keys(detectedEmotions).join(", "),
-          last_updated: new Date().toISOString()
-        };
-        
-        parsedGlyphs.push(newGlyph);
-        
-        // Store user-specific glyph
-        const { data: insertedGlyph } = await admin
-          .from("glyphs")
-          .upsert([newGlyph], { onConflict: 'user_id,name' })
-          .select("*");
-        
-        if (insertedGlyph) {
-          upsertedGlyphs = insertedGlyph;
-        }
+// 🌀 USER-ISOLATED GLYPH PROCESSING: Only process glyphs for authenticated users
+const shouldProcessGlyphs = message.length > 50 && mode !== "quick" && authenticatedUserId !== "anonymous";
+const parsedGlyphs: any[] = [];
+let upsertedGlyphs: any[] = [];
+
+if (shouldProcessGlyphs) {
+  try {
+    const glyphPattern = /feeling|emotion|heart|soul|deep|profound|sacred|intense/i;
+
+    if (glyphPattern.test(message)) {
+      const newGlyph = {
+        name: "complex_emotion",
+        description: "Complex emotional state detected",
+        depth: 3,
+        user_id: authenticatedUserId, // USER ISOLATION
+        created_from_chat: true,
+        source_message: message.slice(0, 200),
+        emotional_tone: Object.keys(detectedEmotions).join(", "),
+        last_updated: new Date().toISOString()
+      };
+
+      parsedGlyphs.push(newGlyph);
+
+      // Store user-specific glyph
+      const { data: insertedGlyph } = await admin
+        .from("glyphs")
+        .upsert([newGlyph], { onConflict: 'user_id,name' })
+        .select("*");
+
+      if (insertedGlyph) {
+        upsertedGlyphs = insertedGlyph;
       }
-    } catch (err) {
-      console.error("Glyph processing error:", err);
     }
+  } catch (err) {
+    console.error("Glyph processing error:", err);
   }
+}
 
   const processingTime = Date.now() - startTime;
   
