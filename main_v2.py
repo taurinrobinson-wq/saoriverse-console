@@ -607,7 +607,8 @@ def render_main_app():
                 
                 # Call Saori AI processing
                 try:
-                    saori_url = st.secrets.get("supabase", {}).get("current_saori_url", f"{st.secrets['supabase']['url']}/functions/v1/saori-fixed")
+                    saori_url = st.secrets["supabase"]["saori_function_url"]
+
                     
                     response_data = requests.post(
                         saori_url,
