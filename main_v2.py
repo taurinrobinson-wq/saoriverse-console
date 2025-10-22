@@ -573,9 +573,9 @@ def render_main_app():
 
         
     with col2:
-    if st.button("Clear History", type="secondary"):
-        st.session_state[conversation_key] = []
-        st.rerun()
+        if st.button("Clear History", type="secondary"):
+            st.session_state[conversation_key] = []
+            st.rerun()
 
     # Chat interface
     chat_container = st.container()
