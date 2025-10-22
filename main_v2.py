@@ -591,7 +591,6 @@ def render_main_app():
                 if "processing_time" in exchange:
                     st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
     
-    # Input area
     # Document upload for emotional processing
 uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
 
@@ -600,6 +599,7 @@ uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", 
         st.session_state["uploaded_text"] = file_content
         st.success("Document uploaded successfully!")
 
+    # Input area
     user_input = st.chat_input("Share what you're feeling...")
     
     if user_input:
