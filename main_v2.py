@@ -592,6 +592,14 @@ def render_main_app():
                     st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
     
     # Input area
+    # Document upload for emotional processing
+uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
+
+    if uploaded_file:
+        file_content = uploaded_file.read().decode("utf-8", errors="ignore")  # Adjust for docx/pdf later
+        st.session_state["uploaded_text"] = file_content
+        st.success("Document uploaded successfully!")
+
     user_input = st.chat_input("Share what you're feeling...")
     
     if user_input:
