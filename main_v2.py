@@ -573,49 +573,53 @@ def render_main_app():
 
         
     with col2:
-            if st.button("Clear History", type="secondary"):
-                st.session_state[conversation_key] = []
-                st.rerun()
-    
+    if st.button("Clear History", type="secondary"):
+        st.session_state[conversation_key] = []
+        st.rerun()
+
     # Chat interface
     chat_container = st.container()
-    
+
     # Display conversation history
     with chat_container:
         for i, exchange in enumerate(st.session_state[conversation_key]):
             with st.chat_message("user"):
                 st.write(exchange["user"])
-            
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
                     st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
-    
-    # Document upload for emotional processing
-uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
 
+    # ✅ Process uploaded document if present
+    if "uploaded_text" in st.session_state:
+        with chat_container:
+            with st.chat_message("user"):
+                st.write("📄 Document uploaded for processing.")
+            with st.chat_message("assistant"):
+                with st.spinner("Metabolizing document..."):
+                    response = f"Processed document content:\n\n{st.session_state['uploaded_text'][:500]}..."
+                    st.write(response)
+
+    # ✅ Document upload for emotional processing
+    uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
     if uploaded_file:
         file_content = uploaded_file.read().decode("utf-8", errors="ignore")  # Adjust for docx/pdf later
         st.session_state["uploaded_text"] = file_content
         st.success("Document uploaded successfully!")
 
-    # Input area
+    # ✅ Input area
     user_input = st.chat_input("Share what you're feeling...")
-    
     if user_input:
-        # Add user message to chat
         with chat_container:
             with st.chat_message("user"):
                 st.write(user_input)
-        
-        # Process the input
-        with st.chat_message("assistant"):
-            with st.spinner("Processing your emotional input..."):
-                start_time = time.time()
-                
-                # Call Saori AI processing
-                try:
-                    saori_url = st.secrets["supabase"]["saori_function_url"]
+            with st.chat_message("assistant"):
+                with st.spinner("Processing your emotional input..."):
+                    start_time = time.time()
+                    try:
+                        saori_url = st.secrets["supabase"]["saori_function_url"]
+                        # Continue with your Saori API call...
+
 
                     
                     response_data = requests.post(
