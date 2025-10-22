@@ -636,15 +636,15 @@ def render_main_app():
                         timeout=15
                     )
                     
-                    if response_data.status_code == 200:
-                        result = response_data.json()
-                        response = result.get("reply", "I'm here to listen.")
-                        glyph_info = result.get("glyph", {})
-                        processing_details = result.get("log", {})
-                    else:
-                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
-                        glyph_info = {}
-                        processing_details = {"error": f"HTTP {response_data.status_code}"}
+                        if response_data.status_code == 200:
+                            result = response_data.json()
+                            response = result.get("reply", "I'm here to listen.")
+                            glyph_info = result.get("glyph", {})
+                            processing_details = result.get("log", {})
+                        else:
+                            response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                glyph_info = {}
+                            processing_details = {"error": f"HTTP {response_data.status_code}"}
                         
                 except Exception as e:
                     response = "I'm having trouble connecting right now, but your feelings are still valid and important."
