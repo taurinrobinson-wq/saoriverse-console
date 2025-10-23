@@ -548,10 +548,13 @@ def render_main_app():
                         glyphs = signal_parser.fetch_glyphs(gates, db_path)
                     except Exception as e:
                         glyphs = []
-        # 3. Format response as if glyph was always present
+
+        # 3. Format response: always surface glyph details if found, plus supportive text
         if glyphs:
             glyph = glyphs[0]
-            response = f"{glyph['glyph_name']}: {glyph['description']}"
+            glyph_text = f"**Glyph Activated:** {glyph['glyph_name']}\n{glyph['description']}"
+            supportive_text = result["voltage_response"]
+            response = f"{glyph_text}\n\n{supportive_text}"
         else:
             response = result["voltage_response"]
 
