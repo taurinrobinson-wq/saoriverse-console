@@ -1,5 +1,6 @@
 
 import streamlit as st
+import docx
 import time
 import requests
 import datetime
@@ -119,9 +120,20 @@ def render_main_app():
                     st.write(response)
     uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
     if uploaded_file:
-        file_content = uploaded_file.read().decode("utf-8", errors="ignore")
-        st.session_state["uploaded_text"] = file_content
-        st.success("Document uploaded successfully!")
+        file_text = None
+        if uploaded_file.name.lower().endswith(".txt"):
+            file_text = uploaded_file.read().decode("utf-8", errors="ignore")
+        elif uploaded_file.name.lower().endswith(".docx"):
+            try:
+                doc = docx.Document(uploaded_file)
+                file_text = "\n".join([para.text for para in doc.paragraphs])
+            except Exception as e:
+                st.error(f"Error reading Word document: {e}")
+        else:
+            st.warning("PDF support is not yet implemented.")
+        if file_text:
+            st.session_state["uploaded_text"] = file_text
+            st.success("Document uploaded successfully!")
     user_input = st.chat_input("Share what you're feeling...")
     if user_input:
         with chat_container:
