@@ -495,25 +495,84 @@ def render_main_app():
     
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
-    
     if user_input:
         # Add user message to chat
         with chat_container:
             with st.chat_message("user"):
                 st.write(user_input)
-        
-        # Process the input
-        with st.chat_message("assistant"):
-            with st.spinner("Processing your emotional input..."):
-                start_time = time.time()
-                
-                # Simple response for now (replace with actual processing when available)
-                response = "Thank you for sharing. I'm here to listen and support you through whatever you're experiencing. Your feelings are valid and important."
-                processing_time = time.time() - start_time
-                
+
+        # --- Seamless glyph response logic ---
+        import sys
+        sys.path.append(".")
+        from parser import signal_parser
+        import sqlite3
+        import os
+        # Try to import glyph generator if available
+        try:
+            from glyph_generator import GlyphGenerator
+        except ImportError:
+            GlyphGenerator = None
+        # Try to import lexicon learner if available
+        try:
+            from learning.lexicon_learner import LexiconLearner
+        except ImportError:
+            LexiconLearner = None
+
+        start_time = time.time()
+        # 1. Parse signals and gates
+        lexicon_path = "velonix_lexicon.json"
+        db_path = "glyphs.db"
+        result = signal_parser.parse_input(user_input, lexicon_path, db_path)
+        signals = result["signals"]
+        gates = result["gates"]
+        glyphs = result["glyphs"]
+
+        # 2. If no glyphs found, generate and insert a new glyph
+        if not glyphs and GlyphGenerator:
+            generator = GlyphGenerator()
+            patterns = generator.detect_new_emotional_patterns(user_input)
+            if patterns:
+                new_glyph = generator.generate_new_glyph(patterns[0])
+                if new_glyph:
+                    # Insert into SQLite glyphs.db
+                    try:
+                        conn = sqlite3.connect(db_path)
+                        cursor = conn.cursor()
+                        cursor.execute(
+                            "INSERT INTO glyph_lexicon (voltage_pair, glyph_name, description, gate, activation_signals) VALUES (?, ?, ?, ?, ?)",
+                            (new_glyph.glyph_symbol, new_glyph.tag_name, new_glyph.narrative_hook, gates[0] if gates else "Gate 4", ",".join(signals[0]["signal"] if signals else []))
+                        )
+                        conn.commit()
+                        conn.close()
+                        # Re-fetch glyphs
+                        glyphs = signal_parser.fetch_glyphs(gates, db_path)
+                    except Exception as e:
+                        glyphs = []
+        # 3. Format response as if glyph was always present
+        if glyphs:
+            glyph = glyphs[0]
+            response = f"{glyph['glyph_name']}: {glyph['description']}"
+        else:
+            response = result["voltage_response"]
+
+        # 4. Lexicon learning after each message
+        if LexiconLearner:
+            learner = LexiconLearner()
+            # Prepare conversation data for learning
+            conversation_data = {
+                "messages": [
+                    {"type": "user", "content": user_input},
+                    {"type": "system", "content": response}
+                ]
+            }
+            learner.learn_from_conversation(conversation_data)
+
+        processing_time = time.time() - start_time
+        with chat_container:
+            with st.chat_message("assistant"):
                 st.write(response)
                 st.caption(f"Processed in {processing_time:.2f}s")
-        
+
         # Add to conversation history
         st.session_state[conversation_key].append({
             "user": user_input,
@@ -522,7 +581,6 @@ def render_main_app():
             "mode": processing_mode,
             "timestamp": datetime.now().isoformat()
         })
-        
         st.rerun()
     
     # Sidebar with user stats and settings
