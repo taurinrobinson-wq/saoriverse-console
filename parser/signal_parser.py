@@ -3,6 +3,7 @@ import re
 import sqlite3
 import os
 from typing import List, Dict
+from typing import Optional
 from datetime import datetime
 
 # Load signal lexicon from JSON (base + learned)
@@ -32,7 +33,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
             matched_signals.append({
                 "keyword": keyword,
-                "signal": metadata.get("signal"),
+                "signal": metadata.get("signal", "unknown"),
                 "voltage": metadata.get("voltage", "medium"),
                 "tone": metadata.get("tone", "unknown")
             })
@@ -73,7 +74,7 @@ def generate_prompt(glyphs: List[Dict]) -> str:
     return f"Would you like to mark this moment with {glyphs[0]['glyph_name']}?"
 
 # Generate voltage response based on theme density
-def generate_voltage_response(glyphs: List[Dict], conversation_context: Dict = None) -> str:
+def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional[Dict] = None) -> str:
     themes = {
         "grief": 0, "longing": 0, "containment": 0,
         "joy": 0, "devotion": 0, "recognition": 0, "insight": 0
@@ -110,7 +111,7 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Dict = N
     return "You're carrying something layered. Let's sit with it and see what wants to be named."
 
 # Main parser function
-def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Dict = None) -> Dict:
+def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None) -> Dict:
     signal_map = load_signal_map(lexicon_path)
     signals = parse_signals(input_text, signal_map)
     gates = evaluate_gates(signals)
