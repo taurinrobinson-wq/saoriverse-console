@@ -1,3 +1,32 @@
+/* --- Minimal expander and settings area --- */
+.stExpander, .stExpanderHeader {
+    font-size: 0.92rem !important;
+    padding: 0.2rem 0.7rem 0.2rem 0.7rem !important;
+}
+.stExpanderContent {
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem !important;
+}
+.stExpander .stSelectbox, .stExpander .stCheckbox, .stExpander .stButton, .stExpander .stDownloadButton {
+    margin-bottom: 0.2rem !important;
+    font-size: 0.92rem !important;
+}
+.stExpander .stCaption, .stExpander .stMarkdown {
+    font-size: 0.88rem !important;
+    margin-bottom: 0.1rem !important;
+}
+.stExpander .stMetric {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.1rem !important;
+}
+.stExpander .stButton > button {
+    max-width: 120px;
+    height: 28px;
+    font-size: 0.85rem !important;
+    padding: 2px 8px;
+}
+.stExpander .stSelectbox > div > div {
+    min-height: 28px !important;
+}
 /* Hide Streamlit default elements */
 .stDeployButton {display: none;}
 header[data-testid="stHeader"] {display: none;}
