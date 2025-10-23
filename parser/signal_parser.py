@@ -31,6 +31,9 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
     matched_signals = []
     for keyword, metadata in signal_map.items():
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
+            # Ensure metadata is a dict
+            if not isinstance(metadata, dict):
+                metadata = {}
             matched_signals.append({
                 "keyword": keyword,
                 "signal": metadata.get("signal", "unknown"),
