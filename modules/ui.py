@@ -147,16 +147,20 @@ def render_main_app():
                 with st.spinner("Processing your emotional input..."):
                     start_time = time.time()
                     response = ""
+                    debug_signals = []
+                    debug_gates = []
+                    debug_glyphs = []
                     if processing_mode == "local":
-                        # Local-only: use signal_parser for emotional analysis
                         from parser.signal_parser import parse_input
                         local_analysis = parse_input(user_input, "velonix_lexicon.json", db_path="glyphs.db")
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
+                        debug_signals = local_analysis.get("signals", [])
+                        debug_gates = local_analysis.get("gates", [])
+                        debug_glyphs = glyphs
                         response = f"{voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}"
                     elif processing_mode == "ai_preferred":
-                        # AI-preferred: use remote API only
                         try:
                             saori_url = st.secrets["supabase"]["saori_function_url"]
                             payload = {
@@ -168,6 +172,9 @@ def render_main_app():
                                 glyphs = document_analysis.get("glyphs", [])
                                 voltage_response = document_analysis.get("voltage_response", "")
                                 ritual_prompt = document_analysis.get("ritual_prompt", "")
+                                debug_signals = document_analysis.get("signals", [])
+                                debug_gates = document_analysis.get("gates", [])
+                                debug_glyphs = glyphs
                                 doc_context = "\n".join([
                                     f"Document Insights: {voltage_response}",
                                     f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs else "",
@@ -191,12 +198,14 @@ def render_main_app():
                         except Exception as e:
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
-                        # Hybrid: combine local and AI analysis
                         from parser.signal_parser import parse_input
                         local_analysis = parse_input(user_input, "velonix_lexicon.json", db_path="glyphs.db")
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
+                        debug_signals = local_analysis.get("signals", [])
+                        debug_gates = local_analysis.get("gates", [])
+                        debug_glyphs = glyphs
                         try:
                             saori_url = st.secrets["supabase"]["saori_function_url"]
                             payload = {
@@ -211,6 +220,9 @@ def render_main_app():
                                 doc_glyphs = document_analysis.get("glyphs", [])
                                 doc_voltage_response = document_analysis.get("voltage_response", "")
                                 doc_ritual_prompt = document_analysis.get("ritual_prompt", "")
+                                debug_signals = document_analysis.get("signals", [])
+                                debug_gates = document_analysis.get("gates", [])
+                                debug_glyphs = doc_glyphs
                                 doc_context = "\n".join([
                                     f"Document Insights: {doc_voltage_response}",
                                     f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs else "",
@@ -238,6 +250,11 @@ def render_main_app():
                     processing_time = time.time() - start_time
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                    # Debug output: show signals, gates, and glyphs
+                    with st.expander("Debug: Emotional OS Activation Details", expanded=False):
+                        st.write("**Signals Detected:**", debug_signals)
+                        st.write("**Gates Activated:**", debug_gates)
+                        st.write("**Glyphs Matched:**", debug_glyphs)
         st.session_state[conversation_key].append({
             "user": user_input,
             "assistant": response,
