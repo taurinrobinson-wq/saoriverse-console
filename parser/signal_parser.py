@@ -61,13 +61,24 @@ def evaluate_gates(signals: List[Dict]) -> List[str]:
 
 # Retrieve glyphs from SQLite
 def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
+    # Guard against empty gates
+    if not gates:
+        return []
+
+    gates = [str(g) for g in gates]
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     placeholders = ','.join('?' for _ in gates)
     query = f"SELECT glyph_name, description, gate FROM glyph_lexicon WHERE gate IN ({placeholders})"
-    cursor.execute(query, gates)
-    rows = cursor.fetchall()
-    conn.close()
+    try:
+        cursor.execute(query, gates)
+        rows = cursor.fetchall()
+    except sqlite3.OperationalError as e:
+        print(f"SQLite error: {e}")
+        rows = []
+    finally:
+        conn.close()
+
     return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
 
 # Generate ritual prompt
