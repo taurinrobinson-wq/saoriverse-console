@@ -20,10 +20,6 @@ def generate_doc(date, time, event, mood, reflections, insights):
     buffer.seek(0)
     return buffer
 # --- End Generate Word Document ---
-"""
-Clean SAOYNX UI - Professional login interface
-Based on the splash page design with clean branding
-"""
 
 import streamlit as st
 from modules.auth import SaoynxAuthentication

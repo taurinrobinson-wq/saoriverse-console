@@ -76,7 +76,13 @@ def render_main_app():
         st.write(f"Welcome back, **{st.session_state.username}**! 👋")
     with col2:
         if st.button("⚙️ Settings", help="User settings and preferences"):
-            st.info("Settings panel coming soon!")
+            with st.sidebar:
+                st.markdown("## Settings")
+                theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0)
+                privacy = st.checkbox("Strict Privacy Mode", value=False)
+                mode = st.selectbox("Default Processing Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode))
+                st.session_state.processing_mode = mode
+                st.success("Settings updated!")
     with col3:
         if st.button("🚪 Logout", help="Sign out of your account"):
             from modules.auth import SaoynxAuthentication
@@ -110,14 +116,19 @@ def render_main_app():
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
                     st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+    # 1. Show a single message at the top if a document is uploaded and being processed
+    document_analysis = None
+    document_title = None
     if "uploaded_text" in st.session_state:
-        with chat_container:
-            with st.chat_message("user"):
-                st.write("📄 Document uploaded for processing.")
-            with st.chat_message("assistant"):
-                with st.spinner("Metabolizing document..."):
-                    response = f"Processed document content:\n\n{st.session_state['uploaded_text'][:500]}..."
-                    st.write(response)
+        from parser.signal_parser import parse_input
+        doc_text = st.session_state["uploaded_text"]
+        first_line = doc_text.split("\n", 1)[0]
+        document_title = "Document" if not first_line else first_line[:60]
+        with st.spinner(f"Analyzing {document_title}..."):
+            try:
+                document_analysis = parse_input(doc_text, "velonix_lexicon.json", db_path="glyphs.db")
+            except Exception as e:
+                st.error(f"Glyph analysis error: {e}")
     uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
     if uploaded_file:
         file_text = None
@@ -142,46 +153,103 @@ def render_main_app():
             with st.chat_message("assistant"):
                 with st.spinner("Processing your emotional input..."):
                     start_time = time.time()
-                    try:
-                        saori_url = st.secrets["supabase"]["saori_function_url"]
-                        response_data = requests.post(
-                            saori_url,
-                            headers={
-                                "Authorization": f"Bearer {st.secrets['supabase']['key']}",
-                                "Content-Type": "application/json"
-                            },
-                            json={
+                    response = ""
+                    if processing_mode == "local":
+                        # Local-only: use signal_parser for emotional analysis
+                        from parser.signal_parser import parse_input
+                        local_analysis = parse_input(user_input, "velonix_lexicon.json", db_path="glyphs.db")
+                        glyphs = local_analysis.get("glyphs", [])
+                        voltage_response = local_analysis.get("voltage_response", "")
+                        ritual_prompt = local_analysis.get("ritual_prompt", "")
+                        response = f"{voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}"
+                    elif processing_mode == "ai_preferred":
+                        # AI-preferred: use remote API only
+                        try:
+                            saori_url = st.secrets["supabase"]["saori_function_url"]
+                            payload = {
                                 "message": user_input,
                                 "mode": processing_mode,
                                 "user_id": st.session_state.user_id
-                            },
-                            timeout=15
-                        )
-                        if response_data.status_code == 200:
-                            result = response_data.json()
-                            response = result.get("reply", "I'm here to listen.")
-                            glyph_info = result.get("glyph", {})
-                            processing_details = result.get("log", {})
-                        else:
-                            response = "I'm experiencing some technical difficulties, but I'm still here for you."
-                            glyph_info = {}
-                            processing_details = {"error": f"HTTP {response_data.status_code}"}
-                    except Exception as e:
-                        response = "I'm having trouble connecting right now, but your feelings are still valid and important."
-                        glyph_info = {}
-                        processing_details = {"error": str(e)}
+                            }
+                            if document_analysis:
+                                glyphs = document_analysis.get("glyphs", [])
+                                voltage_response = document_analysis.get("voltage_response", "")
+                                ritual_prompt = document_analysis.get("ritual_prompt", "")
+                                doc_context = "\n".join([
+                                    f"Document Insights: {voltage_response}",
+                                    f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs else "",
+                                    f"Ritual Prompt: {ritual_prompt}" if ritual_prompt else ""
+                                ])
+                                payload["document_context"] = doc_context
+                            response_data = requests.post(
+                                saori_url,
+                                headers={
+                                    "Authorization": f"Bearer {st.secrets['supabase']['key']}",
+                                    "Content-Type": "application/json"
+                                },
+                                json=payload,
+                                timeout=15
+                            )
+                            if response_data.status_code == 200:
+                                result = response_data.json()
+                                response = result.get("reply", "I'm here to listen.")
+                            else:
+                                response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                        except Exception as e:
+                            response = "I'm having trouble connecting right now, but your feelings are still valid and important."
+                    elif processing_mode == "hybrid":
+                        # Hybrid: combine local and AI analysis
+                        from parser.signal_parser import parse_input
+                        local_analysis = parse_input(user_input, "velonix_lexicon.json", db_path="glyphs.db")
+                        glyphs = local_analysis.get("glyphs", [])
+                        voltage_response = local_analysis.get("voltage_response", "")
+                        ritual_prompt = local_analysis.get("ritual_prompt", "")
+                        try:
+                            saori_url = st.secrets["supabase"]["saori_function_url"]
+                            payload = {
+                                "message": user_input,
+                                "mode": processing_mode,
+                                "user_id": st.session_state.user_id,
+                                "local_voltage_response": voltage_response,
+                                "local_glyphs": ', '.join([g['glyph_name'] for g in glyphs]) if glyphs else '',
+                                "local_ritual_prompt": ritual_prompt
+                            }
+                            if document_analysis:
+                                doc_glyphs = document_analysis.get("glyphs", [])
+                                doc_voltage_response = document_analysis.get("voltage_response", "")
+                                doc_ritual_prompt = document_analysis.get("ritual_prompt", "")
+                                doc_context = "\n".join([
+                                    f"Document Insights: {doc_voltage_response}",
+                                    f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs else "",
+                                    f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
+                                ])
+                                payload["document_context"] = doc_context
+                            response_data = requests.post(
+                                saori_url,
+                                headers={
+                                    "Authorization": f"Bearer {st.secrets['supabase']['key']}",
+                                    "Content-Type": "application/json"
+                                },
+                                json=payload,
+                                timeout=15
+                            )
+                            if response_data.status_code == 200:
+                                result = response_data.json()
+                                response = result.get("reply", "I'm here to listen.")
+                            else:
+                                response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                        except Exception as e:
+                            response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
+                    else:
+                        response = "Unknown processing mode."
                     processing_time = time.time() - start_time
                     st.write(response)
-                    if glyph_info and glyph_info.get("tag_name"):
-                        st.caption(f"✨ Emotional resonance: {glyph_info.get('tag_name')} • Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-                    else:
-                        st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                    st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
         st.session_state[conversation_key].append({
             "user": user_input,
             "assistant": response,
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
-            "glyph": glyph_info.get("tag_name") if glyph_info else None,
             "timestamp": datetime.datetime.now().isoformat()
         })
         st.rerun()
