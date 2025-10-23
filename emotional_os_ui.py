@@ -527,6 +527,12 @@ def render_main_app():
         gates = result["gates"]
         glyphs = result["glyphs"]
 
+        # Debug output: show signals, gates, and glyphs
+        with st.expander("Debug: Emotional OS Activation Details", expanded=False):
+            st.write("**Signals Detected:**", signals)
+            st.write("**Gates Activated:**", gates)
+            st.write("**Glyphs Matched:**", glyphs)
+
         # 2. If no glyphs found, generate and insert a new glyph
         if not glyphs and GlyphGenerator:
             generator = GlyphGenerator()
