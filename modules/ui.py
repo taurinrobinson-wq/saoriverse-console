@@ -138,6 +138,40 @@ def render_main_app():
         if file_text:
             st.session_state["uploaded_text"] = file_text
             st.success("Document uploaded successfully!")
+    # --- Always render sidebar: settings, journey, privacy, download ---
+    with st.sidebar:
+        st.sidebar.markdown("## 🧭 Navigation & Settings")
+        with st.expander("⚙️ Settings", expanded=False):
+            st.markdown("## Settings")
+            theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0)
+            privacy = st.checkbox("Strict Privacy Mode", value=False)
+            mode = st.selectbox("Default Processing Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode))
+            st.session_state.processing_mode = mode
+            st.success("Settings updated!")
+        st.subheader("Your Emotional Journey")
+        conversation_count = len(st.session_state[conversation_key])
+        st.metric("Conversations", conversation_count)
+        if conversation_count > 0:
+            recent_conversation = st.session_state[conversation_key][-1]
+            st.metric("Last Session", recent_conversation["timestamp"][:10])
+        st.subheader("Privacy Settings")
+        st.write("🔒 Your data is completely isolated")
+        st.write("🧠 Learning happens only from your conversations")
+        st.write("⚡ Optimized for 2-3 second responses")
+        if st.button("Download My Data", type="secondary"):
+            user_data = {
+                "user_id": st.session_state.user_id,
+                "username": st.session_state.username,
+                "conversations": st.session_state[conversation_key],
+                "export_date": datetime.datetime.now().isoformat()
+            }
+            st.download_button(
+                "Download JSON",
+                json.dumps(user_data, indent=2),
+                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
+                mime="application/json"
+            )
+
     user_input = st.chat_input("Share what you're feeling...")
     if user_input:
         with chat_container:
@@ -290,34 +324,3 @@ def render_main_app():
                 st.error(f"Error generating Word document: {e}")
         else:
             st.info("You can continue adding to this log.")
-        with st.sidebar:
-            with st.expander("⚙️ Settings", expanded=False):
-                st.markdown("## Settings")
-                theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0)
-                privacy = st.checkbox("Strict Privacy Mode", value=False)
-                mode = st.selectbox("Default Processing Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode))
-                st.session_state.processing_mode = mode
-                st.success("Settings updated!")
-            st.subheader("Your Emotional Journey")
-            conversation_count = len(st.session_state[conversation_key])
-            st.metric("Conversations", conversation_count)
-            if conversation_count > 0:
-                recent_conversation = st.session_state[conversation_key][-1]
-                st.metric("Last Session", recent_conversation["timestamp"][:10])
-            st.subheader("Privacy Settings")
-            st.write("🔒 Your data is completely isolated")
-            st.write("🧠 Learning happens only from your conversations")
-            st.write("⚡ Optimized for 2-3 second responses")
-            if st.button("Download My Data", type="secondary"):
-                user_data = {
-                    "user_id": st.session_state.user_id,
-                    "username": st.session_state.username,
-                    "conversations": st.session_state[conversation_key],
-                    "export_date": datetime.datetime.now().isoformat()
-                }
-                st.download_button(
-                    "Download JSON",
-                    json.dumps(user_data, indent=2),
-                    file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
-                    mime="application/json"
-                )
