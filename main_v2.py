@@ -1,3 +1,25 @@
+from docx import Document
+from io import BytesIO
+
+# --- Generate Word Document from Personal Log ---
+def generate_doc(date, time, event, mood, reflections, insights):
+    doc = Document()
+    doc.add_heading("Personal Log Entry", level=1)
+
+    doc.add_paragraph(f"Date: {date}")
+    doc.add_paragraph(f"Time: {time}")
+    doc.add_paragraph(f"Event: {event}")
+    doc.add_paragraph(f"Mood: {mood}")
+    doc.add_paragraph("Reflections:")
+    doc.add_paragraph(reflections)
+    doc.add_paragraph("Insights:")
+    doc.add_paragraph(insights)
+
+    buffer = BytesIO()
+    doc.save(buffer)
+    buffer.seek(0)
+    return buffer
+# --- End Generate Word Document ---
 """
 Clean SAOYNX UI - Professional login interface
 Based on the splash page design with clean branding
@@ -7,7 +29,7 @@ import streamlit as st
 import requests
 import json
 import time
-from datetime import datetime, timedelta
+import datetime
 import hashlib
 import secrets
 
@@ -39,8 +61,8 @@ class SaoynxAuthentication:
         session_data = {
             "username": username,
             "user_id": user_id,
-            "created": datetime.now().isoformat(),
-            "expires": (datetime.now() + timedelta(days=2)).isoformat()
+            "created": datetime.datetime.now().isoformat(),
+            "expires": (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
         }
         # Simple base64 encoding (in production, use proper JWT)
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
@@ -62,8 +84,8 @@ class SaoynxAuthentication:
             
             # Check expiration
             try:
-                expires = datetime.fromisoformat(session_data["expires"])
-                if datetime.now() < expires:
+                expires = datetime.datetime.fromisoformat(session_data["expires"])
+                if datetime.datetime.now() < expires:
                     return {"valid": True, "data": session_data}
                 else:
                     return {"valid": False, "error": "Session expired"}
@@ -130,7 +152,7 @@ class SaoynxAuthentication:
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
-                    st.session_state.session_expires = (datetime.now() + timedelta(days=2)).isoformat()
+                    st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
                     
                     # Create persistent session token
                     session_token = self.create_session_token(username, data.get("user_id"))
@@ -162,7 +184,7 @@ class SaoynxAuthentication:
                     "action": "create_user",
                     "username": username,
                     "password": password,
-                    "created_at": datetime.now().isoformat()
+                    "created_at": datetime.datetime.now().isoformat()
                 },
                 timeout=10
             )
@@ -183,17 +205,14 @@ class SaoynxAuthentication:
     def quick_login_bypass(self):
         """Quick demo access"""
         import uuid
-        
         user_id = str(uuid.uuid4())
         st.session_state.authenticated = True
         st.session_state.user_id = user_id
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (datetime.now() + timedelta(days=2)).isoformat()
-        
+        st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
         # Create persistent session token for demo user too
         session_token = self.create_session_token("demo_user", user_id)
         st.query_params["session_token"] = session_token
-        
         st.rerun()
     
     def logout(self):
@@ -555,20 +574,20 @@ def render_main_app():
         col1, col2 = st.columns([2, 1])
         
     with col1:
-            # Set default processing mode if not already set
-            if 'processing_mode' not in st.session_state:
-                st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+        # Set default processing mode if not already set
+        if 'processing_mode' not in st.session_state:
+            st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
 
-            # Render selectbox using session state
-            processing_mode = st.selectbox(
-                "Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
-                index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
-                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
-            )
+        # Render selectbox using session state
+        processing_mode = st.selectbox(
+            "Processing Mode",
+            ["hybrid", "local", "ai_preferred"],
+            index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
+            help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+        )
 
-            # Update session state with selected mode
-            st.session_state.processing_mode = processing_mode
+        # Update session state with selected mode
+        st.session_state.processing_mode = processing_mode
 
 
         
@@ -619,23 +638,19 @@ def render_main_app():
                     try:
                         saori_url = st.secrets["supabase"]["saori_function_url"]
                         # Continue with your Saori API call...
-
-
-                    
                         response_data = requests.post(
-                        saori_url,
-                        headers={
-                            "Authorization": f"Bearer {st.secrets['supabase']['key']}",
-                            "Content-Type": "application/json"
-                        },
-                        json={
-                            "message": user_input,
-                            "mode": processing_mode,
-                            "user_id": st.session_state.user_id
-                        },
-                        timeout=15
-                    )
-                    
+                            saori_url,
+                            headers={
+                                "Authorization": f"Bearer {st.secrets['supabase']['key']}",
+                                "Content-Type": "application/json"
+                            },
+                            json={
+                                "message": user_input,
+                                "mode": processing_mode,
+                                "user_id": st.session_state.user_id
+                            },
+                            timeout=15
+                        )
                         if response_data.status_code == 200:
                             result = response_data.json()
                             response = result.get("reply", "I'm here to listen.")
@@ -643,24 +658,19 @@ def render_main_app():
                             processing_details = result.get("log", {})
                         else:
                             response = "I'm experiencing some technical difficulties, but I'm still here for you."
-                                glyph_info = {}
+                            glyph_info = {}
                             processing_details = {"error": f"HTTP {response_data.status_code}"}
-                        
-                except Exception as e:
-                    response = "I'm having trouble connecting right now, but your feelings are still valid and important."
-                    glyph_info = {}
-                    processing_details = {"error": str(e)}
-                
-                processing_time = time.time() - start_time
-                
-                st.write(response)
-                
-                # Show processing details
-                if glyph_info and glyph_info.get("tag_name"):
-                    st.caption(f"✨ Emotional resonance: {glyph_info.get('tag_name')} • Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-                else:
-                    st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-        
+                    except Exception as e:
+                        response = "I'm having trouble connecting right now, but your feelings are still valid and important."
+                        glyph_info = {}
+                        processing_details = {"error": str(e)}
+                    processing_time = time.time() - start_time
+                    st.write(response)
+                    # Show processing details
+                    if glyph_info and glyph_info.get("tag_name"):
+                        st.caption(f"✨ Emotional resonance: {glyph_info.get('tag_name')} • Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                    else:
+                        st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
         # Add to conversation history
         st.session_state[conversation_key].append({
             "user": user_input,
@@ -668,10 +678,67 @@ def render_main_app():
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
             "glyph": glyph_info.get("tag_name") if glyph_info else None,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.datetime.now().isoformat()
         })
-        
         st.rerun()
+
+    # Personal Log Button
+    if "show_personal_log" not in st.session_state:
+        st.session_state.show_personal_log = False
+    if st.button("Start Personal Log", help="Begin a structured emotional entry—date, event, mood, reflections, and insights."):
+        st.session_state.show_personal_log = True
+        st.rerun()
+
+    if st.session_state.show_personal_log:
+        import datetime as dt
+        st.markdown("### 📘 Start Personal Log")
+        st.markdown("Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights.")
+
+        # Auto-filled date and time
+        date = st.date_input("Date", value=dt.date.today())
+        log_time = st.time_input("Time", value=dt.datetime.now().time())
+
+        # Event description
+        event = st.text_area("Event", placeholder="What happened?")
+
+        # Mood (user-defined or AI-suggested)
+        mood = st.text_input("Mood", placeholder="How did it feel?")
+
+        # Reflections (freeform or guided)
+        reflections = st.text_area("Reflections", placeholder="What’s emerging emotionally?")
+
+        # Insights (symbolic clarity)
+        insights = st.text_area("Insights", placeholder="What truth or clarity surfaced?")
+
+        # Completion prompt
+        def generate_doc(date, log_time, event, mood, reflections, insights):
+            from docx import Document
+            import io
+            doc = Document()
+            doc.add_heading("Personal Log", 0)
+            doc.add_paragraph(f"Date: {date}")
+            doc.add_paragraph(f"Time: {log_time}")
+            doc.add_paragraph(f"Event: {event}")
+            doc.add_paragraph(f"Mood: {mood}")
+            doc.add_paragraph(f"Reflections: {reflections}")
+            doc.add_paragraph(f"Insights: {insights}")
+            buf = io.BytesIO()
+            doc.save(buf)
+            buf.seek(0)
+            return buf.read()
+
+        if st.button("Conclude Log"):
+            st.success("Your personal log has been saved.")
+            try:
+                st.download_button(
+                    label="Download as Word Doc",
+                    data=generate_doc(date, log_time, event, mood, reflections, insights),
+                    file_name="personal_log.docx"
+                )
+            except Exception as e:
+                st.error(f"Error generating Word document: {e}")
+        else:
+            st.info("You can continue adding to this log.")
     
     # Sidebar with user stats and settings
     with st.sidebar:
@@ -696,12 +763,12 @@ def render_main_app():
                 "user_id": st.session_state.user_id,
                 "username": st.session_state.username,
                 "conversations": st.session_state[conversation_key],
-                "export_date": datetime.now().isoformat()
+                "export_date": datetime.datetime.now().isoformat()
             }
             st.download_button(
                 "Download JSON",
                 json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
+                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
                 mime="application/json"
             )
 

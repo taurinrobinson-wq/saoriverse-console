@@ -6,7 +6,7 @@ Professional web application for firstperson.chat
 from fastapi import FastAPI, HTTPException, Depends, Request, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from admin_router import admin_router
@@ -19,6 +19,10 @@ import secrets
 import base64
 from typing import Optional
 import uvicorn
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -35,6 +39,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Force HTTPS in production
+@app.middleware("http")
+async def force_https(request, call_next):
+    if request.headers.get("x-forwarded-proto") == "http":
+        url = request.url.replace(scheme="https")
+        return RedirectResponse(url, status_code=301)
+    response = await call_next(request)
+    return response
 
 # Include routers
 app.include_router(admin_router)
@@ -283,7 +296,17 @@ async def validate_session(token: str):
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
-    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+    return {
+        "status": "healthy", 
+        "timestamp": datetime.now().isoformat(),
+        "environment_check": {
+            "supabase_url": "✓" if SUPABASE_URL else "✗",
+            "supabase_key": "✓" if SUPABASE_KEY else "✗",
+            "supabase_function_url": "✓" if CURRENT_SAORI_URL else "✗"
+        }
+    }
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
