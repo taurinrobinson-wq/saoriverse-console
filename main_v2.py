@@ -31,7 +31,7 @@ st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
     page_icon="graphics/FirstPerson-Logo.svg",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 def main():
