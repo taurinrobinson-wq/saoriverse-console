@@ -138,16 +138,14 @@ def render_main_app():
         if file_text:
             st.session_state["uploaded_text"] = file_text
             st.success("Document uploaded successfully!")
-    # --- Always render sidebar: settings, journey, privacy, download ---
-    with st.sidebar:
-        st.sidebar.markdown("## 🧭 Navigation & Settings")
-        with st.expander("⚙️ Settings", expanded=False):
-            st.markdown("## Settings")
-            theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0)
-            privacy = st.checkbox("Strict Privacy Mode", value=False)
-            mode = st.selectbox("Default Processing Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode))
-            st.session_state.processing_mode = mode
-            st.success("Settings updated!")
+    # --- Persistent settings/navigation panel in main page ---
+    with st.expander("🧭 Navigation & Settings", expanded=False):
+        st.markdown("## Settings")
+        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
+        privacy = st.checkbox("Strict Privacy Mode", value=False, key="privacy_checkbox")
+        mode = st.selectbox("Default Processing Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode), key="mode_select")
+        st.session_state.processing_mode = mode
+        st.success("Settings updated!")
         st.subheader("Your Emotional Journey")
         conversation_count = len(st.session_state[conversation_key])
         st.metric("Conversations", conversation_count)
@@ -158,7 +156,7 @@ def render_main_app():
         st.write("🔒 Your data is completely isolated")
         st.write("🧠 Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
-        if st.button("Download My Data", type="secondary"):
+        if st.button("Download My Data", type="secondary", key="download_btn"):
             user_data = {
                 "user_id": st.session_state.user_id,
                 "username": st.session_state.username,
