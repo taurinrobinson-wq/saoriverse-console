@@ -21,9 +21,7 @@ def generate_doc(date, time, event, mood, reflections, insights):
     return buffer
 # --- End Generate Word Document ---
 """
-Clean SAOYNX UI - Professional login interface
-Based on the splash page design with clean branding
-"""
+
 
 import streamlit as st
 import requests
