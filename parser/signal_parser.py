@@ -2,8 +2,7 @@ import json
 import re
 import sqlite3
 import os
-from typing import List, Dict
-from typing import Optional
+from typing import List, Dict, Optional
 from datetime import datetime
 
 # Load signal lexicon from JSON (base + learned)
@@ -21,6 +20,23 @@ def load_signal_map(base_path: str, learned_path: str = "parser/learned_lexicon.
         except Exception:
             pass
 
+    # Ensure all entries are dictionaries
+    for key, value in base_lexicon.items():
+        if isinstance(value, str):
+            base_lexicon[key] = {
+                "signal": value,
+                "voltage": "medium",
+                "tone": "unknown"
+            }
+
+    for key, value in learned_lexicon.items():
+        if isinstance(value, str):
+            learned_lexicon[key] = {
+                "signal": value,
+                "voltage": "medium",
+                "tone": "unknown"
+            }
+
     combined_lexicon = base_lexicon.copy()
     combined_lexicon.update(learned_lexicon)
     return combined_lexicon
@@ -31,7 +47,6 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
     matched_signals = []
     for keyword, metadata in signal_map.items():
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
-            # Ensure metadata is a dict
             if not isinstance(metadata, dict):
                 metadata = {}
             matched_signals.append({
@@ -61,7 +76,6 @@ def evaluate_gates(signals: List[Dict]) -> List[str]:
 
 # Retrieve glyphs from SQLite
 def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
-    # Guard against empty gates
     if not gates:
         return []
 
