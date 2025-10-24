@@ -176,7 +176,7 @@ def render_main_app():
                     debug_glyphs = []
                     if processing_mode == "local":
                         from parser.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "velonix_lexicon.json", db_path="glyphs.db")
+                        local_analysis = parse_input(user_input, "signal_lexicon.json", db_path="glyphs.db")
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
