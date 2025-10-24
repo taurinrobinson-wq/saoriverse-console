@@ -85,7 +85,7 @@ def render_main_app():
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
     # --- Controls row: Processing Mode | Theme | Debug | Clear History | Download ---
-    controls = st.columns([2, 1, 1, 1, 1])
+    controls = st.columns([2, 1, 1, 1])
     with controls[0]:
         if 'processing_mode' not in st.session_state:
             st.session_state.processing_mode = "hybrid"
@@ -98,18 +98,16 @@ def render_main_app():
         )
         st.session_state.processing_mode = processing_mode
     with controls[1]:
-        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_toggle_row")
-    with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
         if st.button("Debug", key="debug_toggle_row"):
             st.session_state.show_debug = not st.session_state.show_debug
             st.rerun()
-    with controls[3]:
+    with controls[2]:
         if st.button("Clear History", type="secondary", key="clear_history_btn_row"):
             st.session_state[conversation_key] = []
             st.rerun()
-    with controls[4]:
+    with controls[3]:
         if st.button("Download My Data", type="secondary", key="download_btn_row"):
             user_data = {
                 "user_id": st.session_state.user_id,
@@ -309,8 +307,8 @@ def render_main_app():
                     processing_time = time.time() - start_time
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-        # Show debug expander only if toggled and in local/hybrid mode
-        if processing_mode in ("local", "hybrid") and st.session_state.get("show_debug", False):
+        # Always show debug expander if toggled, regardless of mode
+        if st.session_state.get("show_debug", False):
             with st.expander("Debug: Emotional OS Activation Details", expanded=True):
                 st.write("**Signals Detected:**", debug_signals)
                 st.write("**Gates Activated:**", debug_gates)
