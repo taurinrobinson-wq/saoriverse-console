@@ -7,10 +7,54 @@ import json
 from modules.auth import SaoynxAuthentication
 from modules.doc_export import generate_doc
 
+
 def inject_css(css_file_path):
     with open(css_file_path, "r") as f:
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+def render_controls_row(conversation_key):
+    controls = st.columns([2, 1, 1, 1, 1])
+    with controls[0]:
+        if 'processing_mode' not in st.session_state:
+            st.session_state.processing_mode = "hybrid"
+        processing_mode = st.selectbox(
+            "Processing Mode",
+            ["hybrid", "local", "ai_preferred"],
+            index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
+            help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses",
+            key="mode_select_row"
+        )
+        st.session_state.processing_mode = processing_mode
+    with controls[1]:
+        if "theme_select_row" not in st.session_state:
+            st.session_state.theme_select_row = "Light"
+        theme = st.selectbox("Theme", ["Light", "Dark"], index=0 if st.session_state.theme_select_row=="Light" else 1, key="theme_select_row")
+        st.session_state.theme_select_row = theme
+    with controls[2]:
+        if "show_debug" not in st.session_state:
+            st.session_state.show_debug = False
+        if st.button("Debug", key="debug_toggle_row"):
+            st.session_state.show_debug = not st.session_state.show_debug
+            st.rerun()
+    with controls[3]:
+        if st.button("Clear History", type="secondary", key="clear_history_btn_row"):
+            st.session_state[conversation_key] = []
+            st.rerun()
+    with controls[4]:
+        if st.button("Download My Data", type="secondary", key="download_btn_row"):
+            user_data = {
+                "user_id": st.session_state.user_id,
+                "username": st.session_state.username,
+                "conversations": st.session_state[conversation_key],
+                "export_date": datetime.datetime.now().isoformat()
+            }
+            st.download_button(
+                "Download JSON",
+                json.dumps(user_data, indent=2),
+                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
+                mime="application/json"
+            )
 
 # UI rendering functions
 
@@ -61,7 +105,10 @@ def render_splash_interface(auth):
 
 def render_main_app():
     # (Simple chat history example removed; only advanced chat/conversation system remains)
-    inject_css("emotional_os_ui.css")
+    # Dynamically inject theme CSS
+    theme = st.session_state.get("theme_select_row", "Light")
+    css_file = "emotional_os_ui_light.css" if theme == "Light" else "emotional_os_ui_dark.css"
+    inject_css(css_file)
     col1, col2 = st.columns([0.5, 8], gap="small")
     with col1:
         try:
@@ -84,43 +131,9 @@ def render_main_app():
     conversation_key = f"conversation_history_{st.session_state.user_id}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
-    # --- Controls row: Processing Mode | Theme | Debug | Clear History | Download ---
-    controls = st.columns([2, 1, 1, 1])
-    with controls[0]:
-        if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"
-        processing_mode = st.selectbox(
-            "Processing Mode",
-            ["hybrid", "local", "ai_preferred"],
-            index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
-            help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses",
-            key="mode_select_row"
-        )
-        st.session_state.processing_mode = processing_mode
-    with controls[1]:
-        if "show_debug" not in st.session_state:
-            st.session_state.show_debug = False
-        if st.button("Debug", key="debug_toggle_row"):
-            st.session_state.show_debug = not st.session_state.show_debug
-            st.rerun()
-    with controls[2]:
-        if st.button("Clear History", type="secondary", key="clear_history_btn_row"):
-            st.session_state[conversation_key] = []
-            st.rerun()
-    with controls[3]:
-        if st.button("Download My Data", type="secondary", key="download_btn_row"):
-            user_data = {
-                "user_id": st.session_state.user_id,
-                "username": st.session_state.username,
-                "conversations": st.session_state[conversation_key],
-                "export_date": datetime.datetime.now().isoformat()
-            }
-            st.download_button(
-                "Download JSON",
-                json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
-            )
+    # Set processing_mode in session and local variable for use below
+    render_controls_row(conversation_key)
+    processing_mode = st.session_state.get('processing_mode', 'hybrid')
     chat_container = st.container()
     with chat_container:
         for i, exchange in enumerate(st.session_state[conversation_key]):
@@ -159,29 +172,6 @@ def render_main_app():
         if file_text:
             st.session_state["uploaded_text"] = file_text
             st.success("Document uploaded successfully!")
-    # --- Inline settings and debug controls ---
-    col_settings, col_debug = st.columns([2, 1])
-    with col_settings:
-        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
-        if st.button("Download My Data", type="secondary", key="download_btn_inline"):
-            user_data = {
-                "user_id": st.session_state.user_id,
-                "username": st.session_state.username,
-                "conversations": st.session_state[conversation_key],
-                "export_date": datetime.datetime.now().isoformat()
-            }
-            st.download_button(
-                "Download JSON",
-                json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
-            )
-    with col_debug:
-        if "show_debug" not in st.session_state:
-            st.session_state.show_debug = False
-        if st.button("Debug", key="debug_btn"):
-            st.session_state.show_debug = not st.session_state.show_debug
-            st.rerun()
 
     user_input = st.chat_input("Share what you're feeling...")
     debug_signals = []
