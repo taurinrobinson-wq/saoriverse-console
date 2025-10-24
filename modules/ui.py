@@ -164,6 +164,12 @@ def render_main_app():
     debug_sql = ""
     debug_glyph_rows = []
     if user_input:
+        # Always set debug info defaults
+        debug_signals = []
+        debug_gates = []
+        debug_glyphs = []
+        debug_sql = ""
+        debug_glyph_rows = []
         with chat_container:
             with st.chat_message("user"):
                 st.write(user_input)
@@ -275,8 +281,7 @@ def render_main_app():
                     processing_time = time.time() - start_time
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-                    # Debug output: show signals, gates, and glyphs
-        # Always show debug expander for local/hybrid
+        # Always show debug expander for local/hybrid, outside chat_container
         if processing_mode in ("local", "hybrid"):
             with st.expander("Debug: Emotional OS Activation Details", expanded=False):
                 st.write("**Signals Detected:**", debug_signals)
@@ -307,6 +312,7 @@ def render_main_app():
         mood = st.text_input("Mood", placeholder="How did it feel?")
         reflections = st.text_area("Reflections", placeholder="What’s emerging emotionally?")
         insights = st.text_area("Insights", placeholder="What truth or clarity surfaced?")
+        log_closed = False
         if st.button("Conclude Log"):
             st.success("Your personal log has been saved.")
             try:
@@ -317,5 +323,8 @@ def render_main_app():
                 )
             except Exception as e:
                 st.error(f"Error generating Word document: {e}")
+        if st.button("Close Log"):
+            st.session_state.show_personal_log = False
+            st.rerun()
         else:
             st.info("You can continue adding to this log.")
