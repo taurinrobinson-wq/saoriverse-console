@@ -60,23 +60,7 @@ def render_splash_interface(auth):
         st.markdown('</div>', unsafe_allow_html=True)
 
 def render_main_app():
-    # --- Simple Chat History (Streamlit Example) ---
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    # Display chat messages from history on app rerun
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    # Accept user input for simple chat
-    if prompt := st.chat_input("What is up?"):
-        # Display user message in chat message container
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
-    # --- End Simple Chat History ---
+    # (Simple chat history example removed; only advanced chat/conversation system remains)
     inject_css("emotional_os_ui.css")
     col1, col2 = st.columns([0.5, 8], gap="small")
     with col1:
