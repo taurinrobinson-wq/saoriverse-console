@@ -27,10 +27,8 @@ def render_controls_row(conversation_key):
         )
         st.session_state.processing_mode = processing_mode
     with controls[1]:
-        if "theme_select_row" not in st.session_state:
-            st.session_state.theme_select_row = "Light"
-        theme = st.selectbox("Theme", ["Light", "Dark"], index=0 if st.session_state.theme_select_row=="Light" else 1, key="theme_select_row")
-        st.session_state.theme_select_row = theme
+        theme_default = 0 if st.session_state.get("theme_select_row", "Light") == "Light" else 1
+        st.selectbox("Theme", ["Light", "Dark"], index=theme_default, key="theme_select_row")
     with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
