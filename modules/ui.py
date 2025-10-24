@@ -93,23 +93,24 @@ def render_main_app():
             "Processing Mode",
             ["hybrid", "local", "ai_preferred"],
             index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
-            help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+            help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses",
+            key="mode_select_row"
         )
         st.session_state.processing_mode = processing_mode
     with controls[1]:
-        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select_controls")
+        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_toggle_row")
     with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
-        if st.button("Debug", key="debug_btn"):
+        if st.button("Debug", key="debug_toggle_row"):
             st.session_state.show_debug = not st.session_state.show_debug
             st.rerun()
     with controls[3]:
-        if st.button("Clear History", type="secondary"):
+        if st.button("Clear History", type="secondary", key="clear_history_btn_row"):
             st.session_state[conversation_key] = []
             st.rerun()
     with controls[4]:
-        if st.button("Download My Data", type="secondary", key="download_btn_inline"):
+        if st.button("Download My Data", type="secondary", key="download_btn_row"):
             user_data = {
                 "user_id": st.session_state.user_id,
                 "username": st.session_state.username,
