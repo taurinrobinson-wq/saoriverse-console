@@ -139,23 +139,16 @@ def render_main_app():
             st.session_state["uploaded_text"] = file_text
             st.success("Document uploaded successfully!")
     # --- Persistent settings/navigation panel in main page ---
-    with st.expander("🧭 Navigation & Settings", expanded=False):
-        st.markdown("## Settings")
-        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
-        privacy = st.checkbox("Strict Privacy Mode", value=False, key="privacy_checkbox")
-        mode = st.selectbox("Default Processing Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode), key="mode_select")
+    with st.expander("⚙️ Quick Settings", expanded=False):
+        st.markdown("#### Settings", unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
+        with c2:
+            mode = st.selectbox("Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode), key="mode_select")
         st.session_state.processing_mode = mode
-        st.success("Settings updated!")
-        st.subheader("Your Emotional Journey")
         conversation_count = len(st.session_state[conversation_key])
-        st.metric("Conversations", conversation_count)
-        if conversation_count > 0:
-            recent_conversation = st.session_state[conversation_key][-1]
-            st.metric("Last Session", recent_conversation["timestamp"][:10])
-        st.subheader("Privacy Settings")
-        st.write("🔒 Your data is completely isolated")
-        st.write("🧠 Learning happens only from your conversations")
-        st.write("⚡ Optimized for 2-3 second responses")
+        st.caption(f"Conversations: {conversation_count}")
         if st.button("Download My Data", type="secondary", key="download_btn"):
             user_data = {
                 "user_id": st.session_state.user_id,
