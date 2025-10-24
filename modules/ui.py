@@ -97,7 +97,7 @@ def render_main_app():
         )
         st.session_state.processing_mode = processing_mode
     with controls[1]:
-        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
+        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select_controls")
     with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
