@@ -107,14 +107,20 @@ def render_main_app():
     theme = st.session_state.get("theme_select_row", "Light")
     css_file = "emotional_os_ui_light.css" if theme == "Light" else "emotional_os_ui_dark.css"
     inject_css(css_file)
+    # Logo switching based on theme
+    if theme == "Dark":
+        logo_path = "graphics/FirstPerson-Logo.png"  # Use your dark logo file here
+    else:
+        logo_path = "graphics/FirstPerson-Logo.svg"  # Use your light logo file here
     col1, col2 = st.columns([0.5, 8], gap="small")
     with col1:
         try:
-            st.image("graphics/FirstPerson-Logo.svg", width=50)
+            st.image(logo_path, width=50)
         except:
             st.markdown('<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
+    st.markdown(f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
     st.markdown("*Your private space for emotional processing and growth*")
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
