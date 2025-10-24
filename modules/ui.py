@@ -84,9 +84,9 @@ def render_main_app():
     conversation_key = f"conversation_history_{st.session_state.user_id}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
-    with st.container():
-        col1, col2 = st.columns([2, 1])
-    with col1:
+    # --- Controls row: Processing Mode | Theme | Debug | Clear History | Download ---
+    controls = st.columns([2, 1, 1, 1, 1])
+    with controls[0]:
         if 'processing_mode' not in st.session_state:
             st.session_state.processing_mode = "hybrid"
         processing_mode = st.selectbox(
@@ -96,10 +96,32 @@ def render_main_app():
             help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
         )
         st.session_state.processing_mode = processing_mode
-    with col2:
+    with controls[1]:
+        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
+    with controls[2]:
+        if "show_debug" not in st.session_state:
+            st.session_state.show_debug = False
+        if st.button("Debug", key="debug_btn"):
+            st.session_state.show_debug = not st.session_state.show_debug
+            st.rerun()
+    with controls[3]:
         if st.button("Clear History", type="secondary"):
             st.session_state[conversation_key] = []
             st.rerun()
+    with controls[4]:
+        if st.button("Download My Data", type="secondary", key="download_btn_inline"):
+            user_data = {
+                "user_id": st.session_state.user_id,
+                "username": st.session_state.username,
+                "conversations": st.session_state[conversation_key],
+                "export_date": datetime.datetime.now().isoformat()
+            }
+            st.download_button(
+                "Download JSON",
+                json.dumps(user_data, indent=2),
+                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
+                mime="application/json"
+            )
     chat_container = st.container()
     with chat_container:
         for i, exchange in enumerate(st.session_state[conversation_key]):
