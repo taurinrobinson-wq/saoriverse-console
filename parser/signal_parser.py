@@ -60,13 +60,14 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 # Map signals to ECM gates
 def evaluate_gates(signals: List[Dict]) -> List[str]:
     ecm_gates = {
-        "Gate 2": ["β"],
+        "Gate 2": ["β", "θ"],
         "Gate 4": ["γ", "θ"],
         "Gate 5": ["λ", "ε", "δ"],
         "Gate 6": ["α", "Ω", "ε"],
-        "Gate 9": ["α", "β", "γ", "δ", "ε", "Ω"],
+        "Gate 9": ["α", "β", "γ", "δ", "ε", "Ω", "θ"],
         "Gate 10": ["θ"]
     }
+
 
     activated = []
     for gate, required in ecm_gates.items():
