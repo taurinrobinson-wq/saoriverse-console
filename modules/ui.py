@@ -284,7 +284,7 @@ def render_main_app():
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
         # Always show debug expander for local/hybrid, outside chat_container
         if processing_mode in ("local", "hybrid"):
-            with st.expander("Debug: Emotional OS Activation Details", expanded=False):
+            with st.expander("Debug: Emotional OS Activation Details", expanded=True):
                 st.write("**Signals Detected:**", debug_signals)
                 st.write("**Gates Activated:**", debug_gates)
                 st.write("**Glyphs Matched:**", debug_glyphs)
