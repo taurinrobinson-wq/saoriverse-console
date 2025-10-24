@@ -138,13 +138,11 @@ def render_main_app():
         if file_text:
             st.session_state["uploaded_text"] = file_text
             st.success("Document uploaded successfully!")
-    # --- Persistent settings/navigation panel in main page ---
-    with st.expander("⚙️ Quick Settings", expanded=False):
-        st.markdown("#### Settings", unsafe_allow_html=True)
+    # --- Inline settings and debug controls ---
+    col_settings, col_debug = st.columns([2, 1])
+    with col_settings:
         theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
-        conversation_count = len(st.session_state[conversation_key])
-        st.caption(f"Conversations: {conversation_count}")
-        if st.button("Download My Data", type="secondary", key="download_btn"):
+        if st.button("Download My Data", type="secondary", key="download_btn_inline"):
             user_data = {
                 "user_id": st.session_state.user_id,
                 "username": st.session_state.username,
@@ -157,6 +155,12 @@ def render_main_app():
                 file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
                 mime="application/json"
             )
+    with col_debug:
+        if "show_debug" not in st.session_state:
+            st.session_state.show_debug = False
+        if st.button("Debug", key="debug_btn"):
+            st.session_state.show_debug = not st.session_state.show_debug
+            st.rerun()
 
     user_input = st.chat_input("Share what you're feeling...")
     debug_signals = []
@@ -282,8 +286,8 @@ def render_main_app():
                     processing_time = time.time() - start_time
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-        # Always show debug expander for local/hybrid, outside chat_container
-        if processing_mode in ("local", "hybrid"):
+        # Show debug expander only if toggled and in local/hybrid mode
+        if processing_mode in ("local", "hybrid") and st.session_state.get("show_debug", False):
             with st.expander("Debug: Emotional OS Activation Details", expanded=True):
                 st.write("**Signals Detected:**", debug_signals)
                 st.write("**Gates Activated:**", debug_gates)
