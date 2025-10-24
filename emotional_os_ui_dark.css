@@ -1,3 +1,21 @@
+/* Ensure bottom chat input container is dark */
+.st-emotion-cache-1y34ygi, /* stBottomBlockContainer */
+.st-emotion-cache-tn0cau,   /* stVerticalBlock */
+.st-emotion-cache-1vo6xi6,  /* stElementContainer */
+.st-emotion-cache-1eeryuo,  /* stChatInput */
+.st-emotion-cache-yd4u6l,   /* chat input inner */
+.st-emotion-cache-12o5wl7,  /* input instructions */
+.st-emotion-cache-sey4o0,   /* chat input button wrapper */
+.st-emotion-cache-o0516v,   /* input instructions inner */
+.st-ak, .st-as, .st-am, .st-cr, .st-cs, .st-ct, .st-cu, .st-bv, .st-bx, .st-bw, .st-by, .st-c0, .st-d5, .st-bp, .st-au, .st-d6, .st-bi, .st-bj, .st-c7, .st-d7, .st-ae, .st-af, .st-ag, .st-ah, .st-ai, .st-aj, .st-b6, .st-d8, .st-d9, .st-da, .st-bc, .st-dd {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+.st-emotion-cache-1nzi1q1 {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
 
 /* Dark theme overrides for Emotional OS UI */
 @import url('emotional_os_ui.css');
