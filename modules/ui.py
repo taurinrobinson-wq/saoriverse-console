@@ -132,7 +132,7 @@ def render_main_app():
     with col2:
         pass  # Settings panel now in sidebar expander
     with col3:
-        if st.button("🚪 Logout", help="Sign out of your account"):
+        if st.button("Logout", help="Sign out of your account"):
             from modules.auth import SaoynxAuthentication
             auth = SaoynxAuthentication()
             auth.logout()
