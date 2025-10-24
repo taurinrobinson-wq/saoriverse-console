@@ -118,7 +118,7 @@ def render_main_app():
         document_title = "Document" if not first_line else first_line[:60]
         with st.spinner(f"Analyzing {document_title}..."):
             try:
-                document_analysis = parse_input(doc_text, "velonix_lexicon.json", db_path="glyphs.db")
+                document_analysis = parse_input(doc_text, "signal_lexicon.json", db_path="glyphs.db")
             except Exception as e:
                 st.error(f"Glyph analysis error: {e}")
     uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
@@ -183,6 +183,9 @@ def render_main_app():
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
+                        # Add raw SQL and glyph fetch debug if present
+                        debug_sql = local_analysis.get("debug_sql", "")
+                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         response = f"{voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}"
                     elif processing_mode == "ai_preferred":
                         try:
@@ -223,13 +226,15 @@ def render_main_app():
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
                         from parser.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "velonix_lexicon.json", db_path="glyphs.db")
+                        local_analysis = parse_input(user_input, "signal_lexicon.json", db_path="glyphs.db")
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
+                        debug_sql = local_analysis.get("debug_sql", "")
+                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         try:
                             saori_url = st.secrets["supabase"]["saori_function_url"]
                             payload = {
@@ -279,6 +284,10 @@ def render_main_app():
                         st.write("**Signals Detected:**", debug_signals)
                         st.write("**Gates Activated:**", debug_gates)
                         st.write("**Glyphs Matched:**", debug_glyphs)
+                        if 'debug_sql' in locals() or 'debug_sql' in globals() or 'debug_sql' in vars():
+                            st.write("**Raw SQL Query:**", debug_sql if 'debug_sql' in locals() else "")
+                        if 'debug_glyph_rows' in locals() or 'debug_glyph_rows' in globals() or 'debug_glyph_rows' in vars():
+                            st.write("**Glyph Rows (Raw):**", debug_glyph_rows if 'debug_glyph_rows' in locals() else [])
         st.session_state[conversation_key].append({
             "user": user_input,
             "assistant": response,

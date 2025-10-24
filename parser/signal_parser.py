@@ -86,14 +86,24 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
     placeholders = ','.join('?' for _ in gates)
     query = f"SELECT glyph_name, description, gate FROM glyph_lexicon WHERE gate IN ({placeholders})"
     try:
+        print(f"[fetch_glyphs] Gates: {gates}")
+        print(f"[fetch_glyphs] SQL: {query}")
         cursor.execute(query, gates)
         rows = cursor.fetchall()
+        print(f"[fetch_glyphs] Rows: {rows}")
     except sqlite3.OperationalError as e:
         print(f"SQLite error: {e}")
         rows = []
     finally:
         conn.close()
 
+    # For debug: attach SQL and rows to result if called from parse_input
+    import inspect
+    stack = inspect.stack()
+    # Attach debug info to a global for UI debug drawer if called from parse_input
+    if any('parse_input' in s.function for s in stack):
+        global _last_glyphs_debug
+        _last_glyphs_debug = {"sql": query, "rows": rows}
     return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
 
 # Generate ritual prompt
@@ -145,6 +155,16 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     signals = parse_signals(input_text, signal_map)
     gates = evaluate_gates(signals)
     glyphs = fetch_glyphs(gates, db_path)
+    # Pull debug info from global if available
+    debug_sql = ""
+    debug_glyph_rows = []
+    try:
+        from parser import signal_parser
+        if hasattr(signal_parser, '_last_glyphs_debug'):
+            debug_sql = signal_parser._last_glyphs_debug.get("sql", "")
+            debug_glyph_rows = signal_parser._last_glyphs_debug.get("rows", [])
+    except Exception:
+        pass
     ritual_prompt = generate_prompt(glyphs)
     voltage_response = generate_voltage_response(glyphs, conversation_context)
 
@@ -155,7 +175,9 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         "gates": gates,
         "glyphs": glyphs,
         "ritual_prompt": ritual_prompt,
-        "voltage_response": voltage_response
+        "voltage_response": voltage_response,
+        "debug_sql": debug_sql,
+        "debug_glyph_rows": debug_glyph_rows
     }
 
 # Example usage
