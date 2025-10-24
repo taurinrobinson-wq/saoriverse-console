@@ -109,9 +109,9 @@ def render_main_app():
     inject_css(css_file)
     # Logo switching based on theme
     if theme == "Dark":
-        logo_path = "graphics/FirstPerson-Logo.png"  # Use your dark logo file here
+        logo_path = "static/graphics/FirstPerson-Logo(invert-cropped_notext).svg"
     else:
-        logo_path = "graphics/FirstPerson-Logo.svg"  # Use your light logo file here
+        logo_path = "static/graphics/FirstPerson-Logo(black-cropped_notext).svg"
     col1, col2 = st.columns([0.5, 8], gap="small")
     with col1:
         try:
