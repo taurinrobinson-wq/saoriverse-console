@@ -65,3 +65,30 @@ button[title*="Start Personal Log"]:hover {
     background-color: #fff !important;
     color: #23272F !important;
 }
+
+/* Chat input, chat messages, and footer full dark coverage */
+.stChatInput, .stTextInput, .stTextArea, .stChatMessage {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+.stChatInput > div > div > input {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
+footer, .stFooter {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+
+/* Remove custom Start Personal Log button override to use .stButton > button styling */
+button[title*="Start Personal Log"] {
+    background-color: inherit !important;
+    color: inherit !important;
+    border: inherit !important;
+}
+button[title*="Start Personal Log"]:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    border: inherit !important;
+}

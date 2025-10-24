@@ -14,7 +14,7 @@ def inject_css(css_file_path):
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 def render_controls_row(conversation_key):
-    controls = st.columns([2, 1, 1, 1, 1])
+    controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
         if 'processing_mode' not in st.session_state:
             st.session_state.processing_mode = "hybrid"
@@ -53,6 +53,10 @@ def render_controls_row(conversation_key):
                 file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
                 mime="application/json"
             )
+    with controls[5]:
+        if st.button("Start Personal Log", key="start_log_btn"):
+            st.session_state.show_personal_log = True
+            st.rerun()
 
 # UI rendering functions
 
@@ -319,9 +323,6 @@ def render_main_app():
         st.rerun()
     if "show_personal_log" not in st.session_state:
         st.session_state.show_personal_log = False
-    if st.button("Start Personal Log", help="Begin a structured emotional entry—date, event, mood, reflections, and insights."):
-        st.session_state.show_personal_log = True
-        st.rerun()
     if st.session_state.show_personal_log:
         import datetime as dt
         st.markdown("### 📘 Start Personal Log")
