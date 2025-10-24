@@ -140,12 +140,7 @@ def render_main_app():
     # --- Persistent settings/navigation panel in main page ---
     with st.expander("⚙️ Quick Settings", expanded=False):
         st.markdown("#### Settings", unsafe_allow_html=True)
-        c1, c2 = st.columns(2)
-        with c1:
-            theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
-        with c2:
-            mode = st.selectbox("Mode", ["hybrid", "local", "ai_preferred"], index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode), key="mode_select")
-        st.session_state.processing_mode = mode
+        theme = st.selectbox("Theme", ["Light", "Dark", "System Default"], index=0, key="theme_select")
         conversation_count = len(st.session_state[conversation_key])
         st.caption(f"Conversations: {conversation_count}")
         if st.button("Download My Data", type="secondary", key="download_btn"):
@@ -163,6 +158,11 @@ def render_main_app():
             )
 
     user_input = st.chat_input("Share what you're feeling...")
+    debug_signals = []
+    debug_gates = []
+    debug_glyphs = []
+    debug_sql = ""
+    debug_glyph_rows = []
     if user_input:
         with chat_container:
             with st.chat_message("user"):
@@ -171,9 +171,6 @@ def render_main_app():
                 with st.spinner("Processing your emotional input..."):
                     start_time = time.time()
                     response = ""
-                    debug_signals = []
-                    debug_gates = []
-                    debug_glyphs = []
                     if processing_mode == "local":
                         from parser.signal_parser import parse_input
                         local_analysis = parse_input(user_input, "signal_lexicon.json", db_path="glyphs.db")
@@ -183,7 +180,6 @@ def render_main_app():
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
-                        # Add raw SQL and glyph fetch debug if present
                         debug_sql = local_analysis.get("debug_sql", "")
                         debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         response = f"{voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}"
@@ -280,14 +276,14 @@ def render_main_app():
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
                     # Debug output: show signals, gates, and glyphs
-                    with st.expander("Debug: Emotional OS Activation Details", expanded=False):
-                        st.write("**Signals Detected:**", debug_signals)
-                        st.write("**Gates Activated:**", debug_gates)
-                        st.write("**Glyphs Matched:**", debug_glyphs)
-                        if 'debug_sql' in locals() or 'debug_sql' in globals() or 'debug_sql' in vars():
-                            st.write("**Raw SQL Query:**", debug_sql if 'debug_sql' in locals() else "")
-                        if 'debug_glyph_rows' in locals() or 'debug_glyph_rows' in globals() or 'debug_glyph_rows' in vars():
-                            st.write("**Glyph Rows (Raw):**", debug_glyph_rows if 'debug_glyph_rows' in locals() else [])
+        # Always show debug expander for local/hybrid
+        if processing_mode in ("local", "hybrid"):
+            with st.expander("Debug: Emotional OS Activation Details", expanded=False):
+                st.write("**Signals Detected:**", debug_signals)
+                st.write("**Gates Activated:**", debug_gates)
+                st.write("**Glyphs Matched:**", debug_glyphs)
+                st.write("**Raw SQL Query:**", debug_sql)
+                st.write("**Glyph Rows (Raw):**", debug_glyph_rows)
         st.session_state[conversation_key].append({
             "user": user_input,
             "assistant": response,
