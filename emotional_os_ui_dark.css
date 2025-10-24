@@ -1,3 +1,13 @@
+.st-emotion-cache-1y34ygi textarea,
+.st-emotion-cache-1y34ygi input,
+.st-emotion-cache-1eeryuo textarea,
+.st-emotion-cache-1eeryuo input,
+.stChatInput textarea,
+.stChatInput input {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
 /* Ensure bottom chat input container is dark */
 .st-emotion-cache-1y34ygi, /* stBottomBlockContainer */
 .st-emotion-cache-tn0cau,   /* stVerticalBlock */
