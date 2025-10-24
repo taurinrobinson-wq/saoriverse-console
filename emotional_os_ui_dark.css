@@ -5,6 +5,26 @@
 .stChatInput textarea,
 .stChatInput input {
     background-color: #23272F !important;
+    color: #e6e6e6 !important;
+    border: 1px solid #555 !important;
+}
+/* Lighter placeholder text for chat input */
+.st-emotion-cache-1y34ygi textarea::placeholder,
+.st-emotion-cache-1y34ygi input::placeholder,
+.st-emotion-cache-1eeryuo textarea::placeholder,
+.st-emotion-cache-1eeryuo input::placeholder,
+.stChatInput textarea::placeholder,
+.stChatInput input::placeholder {
+    color: #cccccc !important;
+    opacity: 1 !important;
+}
+.st-emotion-cache-1y34ygi textarea,
+.st-emotion-cache-1y34ygi input,
+.st-emotion-cache-1eeryuo textarea,
+.st-emotion-cache-1eeryuo input,
+.stChatInput textarea,
+.stChatInput input {
+    background-color: #23272F !important;
     color: #f1f1f1 !important;
     border: 1px solid #555 !important;
 }
