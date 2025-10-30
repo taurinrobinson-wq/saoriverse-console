@@ -4,14 +4,19 @@ import time
 import requests
 import datetime
 import json
-from modules.auth import SaoynxAuthentication
-from modules.doc_export import generate_doc
+from .auth import SaoynxAuthentication
+from .doc_export import generate_doc
 
 
 def inject_css(css_file_path):
-    with open(css_file_path, "r") as f:
-        css = f.read()
-    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+    try:
+        with open(css_file_path, "r") as f:
+            css = f.read()
+        st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.warning(f"CSS file not found: {css_file_path}")
+    except Exception as e:
+        st.warning(f"Could not load CSS: {e}")
 
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
@@ -61,7 +66,7 @@ def render_controls_row(conversation_key):
 # UI rendering functions
 
 def render_splash_interface(auth):
-    inject_css("emotional_os_ui.css")
+    inject_css("emotional_os/deploy/emotional_os_ui.css")
     st.markdown('<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
@@ -109,7 +114,7 @@ def render_main_app():
     # (Simple chat history example removed; only advanced chat/conversation system remains)
     # Dynamically inject theme CSS
     theme = st.session_state.get("theme_select_row", "Light")
-    css_file = "emotional_os_ui_light.css" if theme == "Light" else "emotional_os_ui_dark.css"
+    css_file = "emotional_os/deploy/emotional_os_ui_light.css" if theme == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
     inject_css(css_file)
     # Logo switching based on theme
     if theme == "Dark":
@@ -133,7 +138,7 @@ def render_main_app():
         pass  # Settings panel now in sidebar expander
     with col3:
         if st.button("Logout", help="Sign out of your account"):
-            from modules.auth import SaoynxAuthentication
+            from .auth import SaoynxAuthentication
             auth = SaoynxAuthentication()
             auth.logout()
     conversation_key = f"conversation_history_{st.session_state.user_id}"
@@ -258,8 +263,8 @@ def render_main_app():
                     start_time = time.time()
                     response = ""
                     if processing_mode == "local":
-                        from emotional_os.parser.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "signal_lexicon.json", db_path="glyphs.db")
+                        from emotional_os.glyphs.signal_parser import parse_input
+                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db")
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
@@ -268,47 +273,53 @@ def render_main_app():
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
                         debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
-                        response = f"{voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}"
+                        glyph_names = [g.get('glyph_name', 'Unknown') for g in glyphs[:5]] if glyphs else []
+                        glyph_display = f"{', '.join(glyph_names)}{' (+' + str(len(glyphs)-5) + ' more)' if len(glyphs) > 5 else ''}" if glyph_names else 'None'
+                        response = f"{voltage_response}\nActivated Glyphs: {glyph_display}\n{ritual_prompt}"
                     elif processing_mode == "ai_preferred":
                         try:
-                            saori_url = st.secrets["supabase"]["saori_function_url"]
-                            payload = {
-                                "message": user_input,
-                                "mode": processing_mode,
-                                "user_id": st.session_state.user_id
-                            }
-                            if document_analysis:
-                                glyphs = document_analysis.get("glyphs", [])
-                                voltage_response = document_analysis.get("voltage_response", "")
-                                ritual_prompt = document_analysis.get("ritual_prompt", "")
-                                debug_signals = document_analysis.get("signals", [])
-                                debug_gates = document_analysis.get("gates", [])
-                                debug_glyphs = glyphs
-                                doc_context = "\n".join([
-                                    f"Document Insights: {voltage_response}",
-                                    f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs and hasattr(glyphs, '__iter__') and type(glyphs).__name__ not in ["Never", "_Never"] else "",
-                                    f"Ritual Prompt: {ritual_prompt}" if ritual_prompt else ""
-                                ])
-                                payload["document_context"] = doc_context
-                            response_data = requests.post(
-                                saori_url,
-                                headers={
-                                    "Authorization": f"Bearer {st.secrets['supabase']['key']}",
-                                    "Content-Type": "application/json"
-                                },
-                                json=payload,
-                                timeout=15
-                            )
-                            if response_data.status_code == 200:
-                                result = response_data.json()
-                                response = result.get("reply", "I'm here to listen.")
+                            saori_url = st.secrets.get("supabase", {}).get("saori_function_url")
+                            supabase_key = st.secrets.get("supabase", {}).get("key")
+                            if not saori_url or not supabase_key:
+                                response = "AI processing unavailable in demo mode. Your feelings are still valid and important."
                             else:
-                                response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                payload = {
+                                    "message": user_input,
+                                    "mode": processing_mode,
+                                    "user_id": st.session_state.user_id
+                                }
+                                if document_analysis:
+                                    glyphs = document_analysis.get("glyphs", [])
+                                    voltage_response = document_analysis.get("voltage_response", "")
+                                    ritual_prompt = document_analysis.get("ritual_prompt", "")
+                                    debug_signals = document_analysis.get("signals", [])
+                                    debug_gates = document_analysis.get("gates", [])
+                                    debug_glyphs = glyphs
+                                    doc_context = "\n".join([
+                                        f"Document Insights: {voltage_response}",
+                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs and isinstance(glyphs, list) else "",
+                                        f"Ritual Prompt: {ritual_prompt}" if ritual_prompt else ""
+                                    ])
+                                    payload["document_context"] = doc_context
+                                response_data = requests.post(
+                                    saori_url,
+                                    headers={
+                                        "Authorization": f"Bearer {supabase_key}",
+                                        "Content-Type": "application/json"
+                                    },
+                                    json=payload,
+                                    timeout=15
+                                )
+                                if response_data.status_code == 200:
+                                    result = response_data.json()
+                                    response = result.get("reply", "I'm here to listen.")
+                                else:
+                                    response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception as e:
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
-                        from parser.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "signal_lexicon.json", db_path="glyphs.db")
+                        from emotional_os.glyphs.signal_parser import parse_input
+                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db")
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
@@ -318,42 +329,46 @@ def render_main_app():
                         debug_sql = local_analysis.get("debug_sql", "")
                         debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         try:
-                            saori_url = st.secrets["supabase"]["saori_function_url"]
-                            payload = {
-                                "message": user_input,
-                                "mode": processing_mode,
-                                "user_id": st.session_state.user_id,
-                                "local_voltage_response": voltage_response,
-                                "local_glyphs": ', '.join([g['glyph_name'] for g in glyphs]) if glyphs else '',
-                                "local_ritual_prompt": ritual_prompt
-                            }
-                            if document_analysis:
-                                doc_glyphs = document_analysis.get("glyphs", [])
-                                doc_voltage_response = document_analysis.get("voltage_response", "")
-                                doc_ritual_prompt = document_analysis.get("ritual_prompt", "")
-                                debug_signals = document_analysis.get("signals", [])
-                                debug_gates = document_analysis.get("gates", [])
-                                debug_glyphs = doc_glyphs
-                                doc_context = "\n".join([
-                                    f"Document Insights: {doc_voltage_response}",
-                                    f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs and hasattr(doc_glyphs, '__iter__') and type(doc_glyphs).__name__ not in ["Never", "_Never"] else "",
-                                    f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
-                                ])
-                                payload["document_context"] = doc_context
-                            response_data = requests.post(
-                                saori_url,
-                                headers={
-                                    "Authorization": f"Bearer {st.secrets['supabase']['key']}",
-                                    "Content-Type": "application/json"
-                                },
-                                json=payload,
-                                timeout=15
-                            )
-                            if response_data.status_code == 200:
-                                result = response_data.json()
-                                response = result.get("reply", "I'm here to listen.")
+                            saori_url = st.secrets.get("supabase", {}).get("saori_function_url")
+                            supabase_key = st.secrets.get("supabase", {}).get("key")
+                            if not saori_url or not supabase_key:
+                                response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable in demo mode)"
                             else:
-                                response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                payload = {
+                                    "message": user_input,
+                                    "mode": processing_mode,
+                                    "user_id": st.session_state.user_id,
+                                    "local_voltage_response": voltage_response,
+                                    "local_glyphs": ', '.join([g['glyph_name'] for g in glyphs]) if glyphs else '',
+                                    "local_ritual_prompt": ritual_prompt
+                                }
+                                if document_analysis:
+                                    doc_glyphs = document_analysis.get("glyphs", [])
+                                    doc_voltage_response = document_analysis.get("voltage_response", "")
+                                    doc_ritual_prompt = document_analysis.get("ritual_prompt", "")
+                                    debug_signals = document_analysis.get("signals", [])
+                                    debug_gates = document_analysis.get("gates", [])
+                                    debug_glyphs = doc_glyphs
+                                    doc_context = "\n".join([
+                                        f"Document Insights: {doc_voltage_response}",
+                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs and isinstance(doc_glyphs, list) else "",
+                                        f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
+                                    ])
+                                    payload["document_context"] = doc_context
+                                response_data = requests.post(
+                                    saori_url,
+                                    headers={
+                                        "Authorization": f"Bearer {supabase_key}",
+                                        "Content-Type": "application/json"
+                                    },
+                                    json=payload,
+                                    timeout=15
+                                )
+                                if response_data.status_code == 200:
+                                    result = response_data.json()
+                                    response = result.get("reply", "I'm here to listen.")
+                                else:
+                                    response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception as e:
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
