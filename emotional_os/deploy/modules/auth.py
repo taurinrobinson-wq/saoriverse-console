@@ -41,9 +41,13 @@ class SaoynxAuthentication:
         try:
             self.supabase_url = st.secrets["supabase"]["url"]
             self.supabase_key = st.secrets["supabase"]["key"]
+            self.supabase_configured = True
         except KeyError:
-            st.error("❌ Supabase configuration not found in secrets")
-            st.stop()
+            # Allow demo mode without Supabase
+            self.supabase_url = None
+            self.supabase_key = None
+            self.supabase_configured = False
+            st.warning("⚠️ Running in demo mode - Supabase not configured")
         self.init_session_state()
     def create_session_token(self, username: str, user_id: str) -> str:
         import base64
@@ -98,6 +102,20 @@ class SaoynxAuthentication:
                     if "session_token" in st.query_params:
                         del st.query_params["session_token"]
     def authenticate_user(self, username: str, password: str) -> dict:
+        if not self.supabase_configured:
+            # Demo mode - accept any credentials
+            if username and password:
+                user_id = str(uuid.uuid4())
+                st.session_state.authenticated = True
+                st.session_state.user_id = user_id
+                st.session_state.username = username
+                st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+                session_token = self.create_session_token(username, user_id)
+                st.query_params["session_token"] = session_token
+                return {"success": True, "message": "Demo login successful"}
+            else:
+                return {"success": False, "message": "Please enter username and password"}
+        
         try:
             auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
@@ -131,6 +149,13 @@ class SaoynxAuthentication:
         except Exception as e:
             return {"success": False, "message": f"Login error: {str(e)}"}
     def create_user(self, username: str, password: str) -> dict:
+        if not self.supabase_configured:
+            # Demo mode - simulate user creation
+            if username and password:
+                return {"success": True, "message": "Demo account created successfully"}
+            else:
+                return {"success": False, "message": "Please enter username and password"}
+        
         try:
             auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
