@@ -275,7 +275,7 @@ def render_main_app():
                         debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         best_glyph = local_analysis.get("best_glyph")
                         glyph_display = best_glyph['glyph_name'] if best_glyph else 'None'
-                        response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}\n{ritual_prompt}"
+                        response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
                     elif processing_mode == "ai_preferred":
                         try:
                             saori_url = st.secrets.get("supabase", {}).get("saori_function_url")
