@@ -121,7 +121,16 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict]) -> t
 		name = glyph['glyph_name'].lower()
 		
 		# Score based on emotional match
-		if any(word in signal_keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
+		if any(word in signal_keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
+			if 'spiral' in name and 'containment' in name:
+				score += 15  # "Spiral Containment" perfect for overwhelm with change
+			elif 'containment' in name or 'boundary' in name:
+				score += 12
+			elif 'still' in name and 'ache' in name:
+				score += 10  # "Still Ache" for processing difficulty
+			elif 'clarity' in name or 'insight' in name:
+				score += 8
+		elif any(word in signal_keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
 			if 'still' in name and 'insight' in name:
 				score += 15  # "Still Insight" perfect for anxiety
 			elif 'clarity' in name or 'insight' in name:
@@ -158,9 +167,13 @@ def generate_contextual_response(glyph: Dict, keywords: List[str]) -> str:
 	name = glyph['glyph_name']
 	description = glyph.get('description', '')
 	
+	# Overwhelm/change responses
+	if any(word in keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
+		return f"You're navigating a lot of moving pieces right now. When life shifts in multiple directions at once, it makes sense to feel overwhelmed. This isn't about weakness—it's about being human in the face of complexity. What feels like the most important piece to focus on first?"
+	
 	# Anxiety/stress responses
-	if any(word in keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
-		return f"I can feel the anxiety you're carrying about your presentation. When our minds race like this, it often helps to find a still point. The energy you're feeling - that's your system preparing you, even if it feels overwhelming right now. What if we could transform this racing energy into focused readiness?"
+	elif any(word in keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
+		return f"I can feel the anxiety you're carrying. When our minds race like this, it often helps to find a still point. The energy you're feeling - that's your system preparing you, even if it feels overwhelming right now. What if we could transform this racing energy into focused readiness?"
 	
 	# Sadness/grief responses  
 	elif any(word in keywords for word in ['sad', 'grief', 'mourning', 'loss']):
