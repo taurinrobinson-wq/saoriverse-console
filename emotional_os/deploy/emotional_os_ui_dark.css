@@ -1,0 +1,142 @@
+.st-emotion-cache-1y34ygi textarea,
+.st-emotion-cache-1y34ygi input,
+.st-emotion-cache-1eeryuo textarea,
+.st-emotion-cache-1eeryuo input,
+.stChatInput textarea,
+.stChatInput input {
+    background-color: #23272F !important;
+    color: #e6e6e6 !important;
+    border: 1px solid #555 !important;
+}
+/* Lighter placeholder text for chat input */
+.st-emotion-cache-1y34ygi textarea::placeholder,
+.st-emotion-cache-1y34ygi input::placeholder,
+.st-emotion-cache-1eeryuo textarea::placeholder,
+.st-emotion-cache-1eeryuo input::placeholder,
+.stChatInput textarea::placeholder,
+.stChatInput input::placeholder {
+    color: #cccccc !important;
+    opacity: 1 !important;
+}
+.st-emotion-cache-1y34ygi textarea,
+.st-emotion-cache-1y34ygi input,
+.st-emotion-cache-1eeryuo textarea,
+.st-emotion-cache-1eeryuo input,
+.stChatInput textarea,
+.stChatInput input {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
+/* Ensure bottom chat input container is dark */
+.st-emotion-cache-1y34ygi, /* stBottomBlockContainer */
+.st-emotion-cache-tn0cau,   /* stVerticalBlock */
+.st-emotion-cache-1vo6xi6,  /* stElementContainer */
+.st-emotion-cache-1eeryuo,  /* stChatInput */
+.st-emotion-cache-yd4u6l,   /* chat input inner */
+.st-emotion-cache-12o5wl7,  /* input instructions */
+.st-emotion-cache-sey4o0,   /* chat input button wrapper */
+.st-emotion-cache-o0516v,   /* input instructions inner */
+.st-ak, .st-as, .st-am, .st-cr, .st-cs, .st-ct, .st-cu, .st-bv, .st-bx, .st-bw, .st-by, .st-c0, .st-d5, .st-bp, .st-au, .st-d6, .st-bi, .st-bj, .st-c7, .st-d7, .st-ae, .st-af, .st-ag, .st-ah, .st-ai, .st-aj, .st-b6, .st-d8, .st-d9, .st-da, .st-bc, .st-dd {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+.st-emotion-cache-1nzi1q1 {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
+
+/* Dark theme overrides for Emotional OS UI */
+@import url('emotional_os_ui.css');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+body, .main, .block-container, .stApp {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+.stExpander, .stExpanderHeader, .stExpanderContent {
+    background: #23272F !important;
+    color: #f1f1f1 !important;
+}
+.stMarkdown, .stCaption, .stTextInput, .stTextArea, .stSelectbox {
+    color: #f1f1f1 !important;
+}
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6,
+.stSelectbox label, .stExpanderHeader, .stFileUploader label, .stTextInput label {
+    color: rgba(173,173,173,1) !important;
+}
+.stSelectbox > label, .stTextInput > label {
+    color: rgba(173,173,173,1) !important;
+}
+.stFileUploader > label {
+    color: rgba(173,173,173,1) !important;
+}
+.stExpanderHeader {
+    color: rgba(173,173,173,1) !important;
+}
+.stChatInputContainer, .stChatInputContainer textarea, .stChatInputContainer input {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
+.stChatInputContainer label {
+    color: rgba(173,173,173,1) !important;
+}
+/* Start Personal Log button: match Debug button color */
+button[title*="Start Personal Log"] {
+    background-color: #444 !important;
+    color: #fff !important;
+    border: 2px solid #444 !important;
+}
+button[title*="Start Personal Log"]:hover {
+    background-color: #fff !important;
+    color: #23272F !important;
+    border: 2px solid #23272F !important;
+}
+.stTextInput > div > div > input,
+.stTextArea > div > textarea {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
+.stButton > button {
+    background-color: #444 !important;
+    color: #fff !important;
+}
+.stButton > button:hover {
+    background-color: #fff !important;
+    color: #23272F !important;
+}
+
+/* Chat input, chat messages, and footer full dark coverage */
+.stChatInput, .stTextInput, .stTextArea, .stChatMessage {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+.stChatInput > div > div > input {
+    background-color: #23272F !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #555 !important;
+}
+footer, .stFooter {
+    background-color: #18191A !important;
+    color: #f1f1f1 !important;
+}
+
+/* Remove custom Start Personal Log button override to use .stButton > button styling */
+button[title*="Start Personal Log"] {
+    background-color: inherit !important;
+    color: inherit !important;
+    border: inherit !important;
+}
+button[title*="Start Personal Log"]:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    border: inherit !important;
+}

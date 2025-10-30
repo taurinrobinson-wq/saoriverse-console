@@ -1,0 +1,1 @@
+Legacy root files archived here for lineage preservation. Migration complete. Do not edit unless restoring legacy logic.

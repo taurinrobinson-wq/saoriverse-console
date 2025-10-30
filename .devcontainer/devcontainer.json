@@ -1,0 +1,44 @@
+{
+  "name": "Emotional OS DevContainer",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "emotional_os_ui_v2.py"
+      ]
+    },
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/env-vars:1": {
+      "GLYPH_MODE": "hybrid",
+      "DEFAULT_TONE": "plain"
+    }
+  },
+  "updateContentCommand": "bash .devcontainer/setup.sh",
+  "postAttachCommand": {
+    "server": "streamlit run emotional_os_ui_v2.py --server.enableCORS false --server.enableXsrfProtection false"
+  },
+  "portsAttributes": {
+    "8501": {
+      "label": "Emotional OS UI",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [
+    8501
+  ]
+}
