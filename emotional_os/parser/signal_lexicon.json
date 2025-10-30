@@ -42,7 +42,7 @@
   "worry": { "signal": "ε", "voltage": "medium", "tone": "insight" },
   "racing": { "signal": "ε", "voltage": "high", "tone": "insight" },
   "focus": { "signal": "ε", "voltage": "medium", "tone": "insight" },
-  "overwhelmed": { "signal": "δ", "voltage": "high", "tone": "containment" },
+  "overwhelmed": { "signal": "ε", "voltage": "high", "tone": "insight" },
   "stressed": { "signal": "ε", "voltage": "high", "tone": "insight" },
   "nervous": { "signal": "ε", "voltage": "medium", "tone": "insight" },
   "scared": { "signal": "θ", "voltage": "medium", "tone": "grief" },
@@ -58,5 +58,13 @@
   "lonely": { "signal": "γ", "voltage": "high", "tone": "longing" },
   "alone": { "signal": "γ", "voltage": "medium", "tone": "longing" },
   "tired": { "signal": "δ", "voltage": "medium", "tone": "containment" },
-  "exhausted": { "signal": "δ", "voltage": "high", "tone": "containment" }
+  "exhausted": { "signal": "δ", "voltage": "high", "tone": "containment" },
+  "shifting": { "signal": "ε", "voltage": "medium", "tone": "insight" },
+  "uncertain": { "signal": "γ", "voltage": "medium", "tone": "longing" },
+  "uncertainty": { "signal": "γ", "voltage": "medium", "tone": "longing" },
+  "process": { "signal": "ε", "voltage": "medium", "tone": "insight" },
+  "processing": { "signal": "ε", "voltage": "medium", "tone": "insight" },
+  "changes": { "signal": "ε", "voltage": "medium", "tone": "insight" },
+  "change": { "signal": "ε", "voltage": "medium", "tone": "insight" },
+  "changing": { "signal": "ε", "voltage": "medium", "tone": "insight" }
 }
