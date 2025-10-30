@@ -273,9 +273,9 @@ def render_main_app():
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
                         debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
-                        glyph_names = [g.get('glyph_name', 'Unknown') for g in glyphs[:5]] if glyphs else []
-                        glyph_display = f"{', '.join(glyph_names)}{' (+' + str(len(glyphs)-5) + ' more)' if len(glyphs) > 5 else ''}" if glyph_names else 'None'
-                        response = f"{voltage_response}\nActivated Glyphs: {glyph_display}\n{ritual_prompt}"
+                        best_glyph = local_analysis.get("best_glyph")
+                        glyph_display = best_glyph['glyph_name'] if best_glyph else 'None'
+                        response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}\n{ritual_prompt}"
                     elif processing_mode == "ai_preferred":
                         try:
                             saori_url = st.secrets.get("supabase", {}).get("saori_function_url")

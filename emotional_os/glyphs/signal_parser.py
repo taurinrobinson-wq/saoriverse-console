@@ -105,11 +105,84 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
 		_last_glyphs_debug = {"sql": query, "rows": rows}
 	return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
 
-# Generate ritual prompt
-def generate_prompt(glyphs: List[Dict]) -> str:
+# Select most relevant glyph and generate contextual response
+def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict]) -> tuple:
 	if not glyphs:
-		return "No glyphs activated."
-	return f"Would you like to mark this moment with {glyphs[0]['glyph_name']}?"
+		return None, "I'm here to listen and hold space for whatever you're experiencing."
+	
+	# Get primary emotional signals
+	primary_signals = [s['signal'] for s in signals]
+	signal_keywords = [s['keyword'] for s in signals]
+	
+	# Prioritize glyphs based on emotional relevance
+	scored_glyphs = []
+	for glyph in glyphs:
+		score = 0
+		name = glyph['glyph_name'].lower()
+		
+		# Score based on emotional match
+		if any(word in signal_keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
+			if 'still' in name and 'insight' in name:
+				score += 15  # "Still Insight" perfect for anxiety
+			elif 'clarity' in name or 'insight' in name:
+				score += 12
+			elif 'still' in name and 'grief' not in name:
+				score += 10
+			elif 'containment' in name or 'boundary' in name:
+				score += 8
+		elif any(word in signal_keywords for word in ['sad', 'grief', 'mourning', 'loss']):
+			if 'grief' in name or 'mourning' in name:
+				score += 10
+		elif any(word in signal_keywords for word in ['angry', 'frustrated', 'rage']):
+			if 'ache' in name or 'longing' in name:
+				score += 10
+		elif any(word in signal_keywords for word in ['happy', 'joy', 'excited']):
+			if 'joy' in name or 'bliss' in name:
+				score += 10
+		
+		# Prefer simpler, more accessible glyphs
+		if any(word in name for word in ['still', 'quiet', 'gentle', 'soft']):
+			score += 5
+		
+		scored_glyphs.append((glyph, score))
+	
+	# Select best glyph
+	best_glyph = max(scored_glyphs, key=lambda x: x[1])[0]
+	
+	# Generate contextual response based on glyph and emotions
+	response = generate_contextual_response(best_glyph, signal_keywords)
+	
+	return best_glyph, response
+
+def generate_contextual_response(glyph: Dict, keywords: List[str]) -> str:
+	name = glyph['glyph_name']
+	description = glyph.get('description', '')
+	
+	# Anxiety/stress responses
+	if any(word in keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
+		return f"I can feel the anxiety you're carrying about your presentation. When our minds race like this, it often helps to find a still point. The energy you're feeling - that's your system preparing you, even if it feels overwhelming right now. What if we could transform this racing energy into focused readiness?"
+	
+	# Sadness/grief responses  
+	elif any(word in keywords for word in ['sad', 'grief', 'mourning', 'loss']):
+		return f"There's a heaviness you're holding, and it deserves to be witnessed. Grief moves at its own pace - not the pace we think it should. Your sorrow is valid and it's okay to feel the full weight of it."
+	
+	# Anger/frustration responses
+	elif any(word in keywords for word in ['angry', 'frustrated', 'rage']):
+		return f"I can sense the intensity of what you're feeling. Anger often carries important information about our boundaries and values. What is this feeling trying to tell you about what matters to you?"
+	
+	# Joy/happiness responses
+	elif any(word in keywords for word in ['happy', 'joy', 'excited']):
+		return f"There's brightness in what you're sharing. Joy deserves to be fully felt and celebrated. Let yourself receive this good feeling completely."
+	
+	# Default empathetic response
+	else:
+		return f"I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+
+# Generate ritual prompt  
+def generate_simple_prompt(glyph: Dict) -> str:
+	if not glyph:
+		return ""
+	return f"Would you like to take a moment to honor this feeling with the essence of '{glyph['glyph_name']}'?"
 
 # Generate voltage response based on theme density
 def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional[Dict] = None) -> str:
@@ -164,8 +237,9 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 			debug_glyph_rows = signal_parser._last_glyphs_debug.get("rows", [])
 	except Exception:
 		pass
-	ritual_prompt = generate_prompt(glyphs)
-	voltage_response = generate_voltage_response(glyphs, conversation_context)
+	# Select best glyph and generate contextual response
+	best_glyph, contextual_response = select_best_glyph_and_response(glyphs, signals)
+	ritual_prompt = generate_simple_prompt(best_glyph)
 
 	return {
 		"timestamp": datetime.now().isoformat(),
@@ -173,8 +247,9 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 		"signals": signals,
 		"gates": gates,
 		"glyphs": glyphs,
+		"best_glyph": best_glyph,
 		"ritual_prompt": ritual_prompt,
-		"voltage_response": voltage_response,
+		"voltage_response": contextual_response,  # Now contains the smart contextual response
 		"debug_sql": debug_sql,
 		"debug_glyph_rows": debug_glyph_rows
 	}
