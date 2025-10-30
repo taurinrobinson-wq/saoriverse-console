@@ -1,0 +1,18 @@
+/* Light theme overrides for Emotional OS UI */
+@import url('emotional_os_ui.css');
+body, .main, .block-container {
+    background: #fff !important;
+    color: #222 !important;
+}
+.stExpander, .stExpanderHeader, .stExpanderContent {
+    background: #f9f9f9 !important;
+    color: #222 !important;
+}
+.stButton > button {
+    background-color: #2E2E2E !important;
+    color: #fff !important;
+}
+.stButton > button:hover {
+    background-color: #fff !important;
+    color: #2E2E2E !important;
+}
