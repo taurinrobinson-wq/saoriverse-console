@@ -4,6 +4,15 @@ import sqlite3
 import os
 from typing import List, Dict, Optional
 from datetime import datetime
+from difflib import SequenceMatcher
+
+# Try to import NRC lexicon for better emotion detection
+try:
+    from parser.nrc_lexicon_loader import nrc
+    HAS_NRC = True
+except ImportError:
+    HAS_NRC = False
+    nrc = None
 
 # Load signal lexicon from JSON (base + learned)
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
@@ -41,11 +50,33 @@ def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/lea
 	combined_lexicon.update(learned_lexicon)
 	return combined_lexicon
 
+def fuzzy_match(word: str, lexicon_keys: List[str], threshold: float = 0.6) -> Optional[str]:
+	"""Find best fuzzy match in lexicon, returns matching key if similarity > threshold"""
+	best_match = None
+	best_score = threshold
+	
+	for key in lexicon_keys:
+		# Skip comment entries
+		if key.startswith("_comment_"):
+			continue
+		
+		score = SequenceMatcher(None, word.lower(), key.lower()).ratio()
+		if score > best_score:
+			best_score = score
+			best_match = key
+	
+	return best_match
+
 # Extract signals using fuzzy matching
 def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 	lowered = input_text.lower()
 	matched_signals = []
+	lexicon_keys = [k for k in signal_map.keys() if not k.startswith("_comment_")]
+	
+	# First pass: exact word boundary matching in signal_lexicon
 	for keyword, metadata in signal_map.items():
+		if keyword.startswith("_comment_"):
+			continue
 		if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
 			if not isinstance(metadata, dict):
 				metadata = {}
@@ -55,6 +86,54 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 				"voltage": metadata.get("voltage", "medium"),
 				"tone": metadata.get("tone", "unknown")
 			})
+	
+	# Second pass: Use NRC lexicon if available for richer emotion detection
+	if HAS_NRC and nrc and nrc.loaded:
+		nrc_emotions = nrc.analyze_text(input_text)
+		if nrc_emotions and not matched_signals:
+			# Map NRC emotions to signal voltages
+			nrc_to_signal = {
+				'trust': ('β', 'medium', 'containment'),  # Boundary/trust
+				'fear': ('θ', 'high', 'grief'),            # Fear/grief
+				'negative': ('θ', 'high', 'grief'),        # General negative = grief
+				'sadness': ('θ', 'medium', 'grief'),       # Sadness/grief
+				'disgust': ('β', 'high', 'containment'),   # Rejection/boundary
+				'anger': ('γ', 'high', 'longing'),         # Anger/longing
+				'surprise': ('ε', 'medium', 'insight'),    # Surprise/insight
+				'positive': ('λ', 'high', 'joy'),          # Positive/joy
+				'anticipation': ('ε', 'medium', 'insight'),# Anticipation/insight
+				'joy': ('λ', 'high', 'joy'),               # Joy
+			}
+			
+			# Find strongest emotion from NRC
+			top_emotion = max(nrc_emotions.items(), key=lambda x: x[1])[0]
+			if top_emotion in nrc_to_signal:
+				signal, voltage, tone = nrc_to_signal[top_emotion]
+				matched_signals.append({
+					"keyword": top_emotion,
+					"signal": signal,
+					"voltage": voltage,
+					"tone": tone
+				})
+	
+	# Third pass: fuzzy matching for unmatched single words
+	if not matched_signals:
+		words = re.findall(r'\b\w+\b', lowered)
+		for word in words:
+			if len(word) > 3:  # Only match words longer than 3 chars
+				fuzzy_key = fuzzy_match(word, lexicon_keys, threshold=0.65)
+				if fuzzy_key:
+					metadata = signal_map.get(fuzzy_key, {})
+					if not isinstance(metadata, dict):
+						metadata = {}
+					matched_signals.append({
+						"keyword": fuzzy_key,
+						"signal": metadata.get("signal", "unknown"),
+						"voltage": metadata.get("voltage", "medium"),
+						"tone": metadata.get("tone", "unknown")
+					})
+					break  # Use first good fuzzy match
+	
 	return matched_signals
 
 # Map signals to ECM gates
@@ -106,9 +185,14 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
 	return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
 
 # Select most relevant glyph and generate contextual response
-def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict]) -> tuple:
+def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], input_text: str = "") -> tuple:
 	if not glyphs:
-		return None, "I'm here to listen and hold space for whatever you're experiencing."
+		# Fallback: if no glyphs found via gates, search by emotion tone directly
+		fallback_glyphs = _find_fallback_glyphs(signals, input_text)
+		if fallback_glyphs:
+			glyphs = fallback_glyphs
+		else:
+			return None, "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
 	
 	# Get primary emotional signals
 	primary_signals = [s['signal'] for s in signals]
@@ -139,14 +223,27 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict]) -> t
 				score += 10
 			elif 'containment' in name or 'boundary' in name:
 				score += 8
-		elif any(word in signal_keywords for word in ['sad', 'grief', 'mourning', 'loss']):
+		elif any(word in signal_keywords for word in ['sad', 'grief', 'mourning', 'loss', 'sad']):
 			if 'grief' in name or 'mourning' in name:
 				score += 10
-		elif any(word in signal_keywords for word in ['angry', 'frustrated', 'rage']):
+		elif any(word in signal_keywords for word in ['angry', 'frustrated', 'rage', 'anger']):
 			if 'ache' in name or 'longing' in name:
 				score += 10
-		elif any(word in signal_keywords for word in ['happy', 'joy', 'excited']):
+		elif any(word in signal_keywords for word in ['happy', 'joy', 'excited', 'delight']):
 			if 'joy' in name or 'bliss' in name:
+				score += 10
+		elif any(word in signal_keywords for word in ['ashamed', 'shame', 'embarrassed', 'humiliated']):
+			if 'boundary' in name or 'containment' in name:
+				score += 10
+			elif 'still' in name:
+				score += 8
+		elif any(word in signal_keywords for word in ['disappointed', 'failed', 'failure']):
+			if 'ache' in name or 'longing' in name:
+				score += 10
+			elif 'recognition' in name or 'witness' in name:
+				score += 8
+		elif any(word in signal_keywords for word in ['broken', 'trap', 'trapped', 'stuck']):
+			if 'containment' in name or 'boundary' in name or 'still' in name:
 				score += 10
 		
 		# Prefer simpler, more accessible glyphs
@@ -156,16 +253,71 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict]) -> t
 		scored_glyphs.append((glyph, score))
 	
 	# Select best glyph
-	best_glyph = max(scored_glyphs, key=lambda x: x[1])[0]
+	best_glyph = max(scored_glyphs, key=lambda x: x[1])[0] if scored_glyphs else None
 	
 	# Generate contextual response based on glyph and emotions
-	response = generate_contextual_response(best_glyph, signal_keywords)
+	response = generate_contextual_response(best_glyph, signal_keywords, input_text)
 	
 	return best_glyph, response
 
-def generate_contextual_response(glyph: Dict, keywords: List[str]) -> str:
-	name = glyph['glyph_name']
-	description = glyph.get('description', '')
+def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
+	"""Fallback: search database by emotion tone when gates don't return results"""
+	if not signals:
+		return []
+	
+	# Map tones to glyph name keywords
+	tone_keywords = {}
+	for signal in signals:
+		tone = signal.get('tone', '').lower()
+		if tone == 'grief':
+			tone_keywords.setdefault('grief', []).extend(['grief', 'mourning', 'ache', 'sorrow', 'loss', 'collapse'])
+		elif tone == 'longing':
+			tone_keywords.setdefault('longing', []).extend(['ache', 'longing', 'yearning', 'recursive', 'disappointed', 'lonely'])
+		elif tone == 'containment':
+			tone_keywords.setdefault('containment', []).extend(['still', 'boundary', 'containment', 'shield', 'hold', 'stuck', 'trapped'])
+		elif tone == 'insight':
+			tone_keywords.setdefault('insight', []).extend(['insight', 'clarity', 'knowing', 'revelation', 'spiral', 'focus'])
+		elif tone == 'joy':
+			tone_keywords.setdefault('joy', []).extend(['joy', 'delight', 'bliss', 'ecstasy', 'brightness'])
+		elif tone == 'devotion':
+			tone_keywords.setdefault('devotion', []).extend(['devotional', 'vow', 'sacred', 'offering', 'ceremony'])
+		elif tone == 'recognition':
+			tone_keywords.setdefault('recognition', []).extend(['recognition', 'witness', 'seen', 'mirror', 'known'])
+	
+	if not tone_keywords:
+		return []
+	
+	# Search database for glyphs matching tone keywords
+	try:
+		db_path = "emotional_os/glyphs/glyphs.db"
+		if not os.path.exists(db_path):
+			return []
+		
+		conn = sqlite3.connect(db_path)
+		cursor = conn.cursor()
+		
+		# Build OR query for all tone keywords
+		all_keywords = []
+		for kw_list in tone_keywords.values():
+			all_keywords.extend(kw_list)
+		
+		# Search for glyphs with names containing any keyword
+		query_conditions = ' OR '.join([f"glyph_name LIKE ?" for _ in all_keywords])
+		query = f"SELECT glyph_name, description, gate FROM glyph_lexicon WHERE {query_conditions} LIMIT 5"
+		
+		params = [f"%{kw}%" for kw in all_keywords]
+		cursor.execute(query, params)
+		rows = cursor.fetchall()
+		conn.close()
+		
+		return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
+	except Exception as e:
+		return []
+
+
+def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], input_text: str = "") -> str:
+	name = glyph['glyph_name'] if glyph else ""
+	description = glyph.get('description', '') if glyph else ''
 	
 	# Overwhelm/change responses
 	if any(word in keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
@@ -180,12 +332,36 @@ def generate_contextual_response(glyph: Dict, keywords: List[str]) -> str:
 		return f"There's a heaviness you're holding, and it deserves to be witnessed. Grief moves at its own pace - not the pace we think it should. Your sorrow is valid and it's okay to feel the full weight of it."
 	
 	# Anger/frustration responses
-	elif any(word in keywords for word in ['angry', 'frustrated', 'rage']):
+	elif any(word in keywords for word in ['angry', 'frustrated', 'rage', 'anger']):
 		return f"I can sense the intensity of what you're feeling. Anger often carries important information about our boundaries and values. What is this feeling trying to tell you about what matters to you?"
 	
 	# Joy/happiness responses
-	elif any(word in keywords for word in ['happy', 'joy', 'excited']):
+	elif any(word in keywords for word in ['happy', 'joy', 'excited', 'delight']):
 		return f"There's brightness in what you're sharing. Joy deserves to be fully felt and celebrated. Let yourself receive this good feeling completely."
+	
+	# Shame/embarrassment responses
+	elif any(word in keywords for word in ['ashamed', 'shame', 'embarrassed', 'humiliated']):
+		return f"What you're feeling is deeply human. Shame often carries a message about our worth—but shame is a liar about that. You deserve compassion, especially from yourself. What would it feel like to offer yourself the same grace you'd give to someone you love?"
+	
+	# Disappointment/failure responses
+	elif any(word in keywords for word in ['disappointed', 'failed', 'failure']):
+		return f"I can sense the disappointment you're carrying. Unmet expectations can cut deep. But this moment of 'not succeeding' doesn't define your worth or your capability. What do you need to hear right now?"
+	
+	# Trapped/stuck responses
+	elif any(word in keywords for word in ['trapped', 'trap', 'stuck', 'broken']):
+		return f"Feeling trapped is exhausting. That sense of being locked in can feel so heavy. But you're here, you're aware, and you're reaching out—those are already signs of movement. What feels like the smallest possible shift you could make?"
+	
+	# Loneliness/misunderstanding responses
+	elif any(word in keywords for word in ['lonely', 'alone', 'nobody', 'understand']):
+		return f"Loneliness can make us feel so disconnected. But the very fact that you're trying to be understood shows there's a part of you still reaching out. You don't have to be alone in this. I'm here."
+	
+	# Strength/resilience doubts
+	elif any(word in keywords for word in ['strong', 'doubt', 'doubting']):
+		return f"Doubting your strength is actually part of being human. The very fact that you keep showing up despite your doubts? That's strength. You've likely already survived things you didn't think you could handle."
+	
+	# Growth/healing responses
+	elif any(word in keywords for word in ['learning', 'healing', 'proud', 'grateful', 'come far', 'letting go']):
+		return f"There's something beautiful in what you're sharing. Growth isn't linear, but the fact that you're noticing this moment of learning? That matters. You're building something real within yourself."
 	
 	# Default empathetic response
 	else:
@@ -251,7 +427,7 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 	except Exception:
 		pass
 	# Select best glyph and generate contextual response
-	best_glyph, contextual_response = select_best_glyph_and_response(glyphs, signals)
+	best_glyph, contextual_response = select_best_glyph_and_response(glyphs, signals, input_text)
 	ritual_prompt = generate_simple_prompt(best_glyph)
 
 	return {
