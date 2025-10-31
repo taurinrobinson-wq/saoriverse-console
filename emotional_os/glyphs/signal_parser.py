@@ -6,6 +6,11 @@ from typing import List, Dict, Optional
 from datetime import datetime
 from difflib import SequenceMatcher
 
+# Phase 2 learning + Sanctuary Mode imports
+from emotional_os.glyphs.glyph_learner import GlyphLearner
+from emotional_os.glyphs.learning_response_generator import create_training_response
+from emotional_os.safety import SANCTUARY_MODE, is_sensitive_input, ensure_sanctuary_response, sanitize_for_storage
+
 # Try to import NRC lexicon for better emotion detection
 try:
     from parser.nrc_lexicon_loader import nrc
@@ -411,7 +416,7 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 	return "You're carrying something layered. Let's sit with it and see what wants to be named."
 
 # Main parser function
-def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None) -> Dict:
+def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None, user_id: Optional[str] = None) -> Dict:
 	signal_map = load_signal_map(lexicon_path)
 	signals = parse_signals(input_text, signal_map)
 	gates = evaluate_gates(signals)
@@ -430,6 +435,57 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 	best_glyph, contextual_response = select_best_glyph_and_response(glyphs, signals, input_text)
 	ritual_prompt = generate_simple_prompt(best_glyph)
 
+	# If no glyph matched, trigger learning pipeline to generate a candidate and craft a training response
+	learning_payload = None
+	if best_glyph is None and GlyphLearner and create_training_response:
+		try:
+			learner = GlyphLearner(db_path=db_path if db_path else "emotional_os/glyphs/glyphs.db")
+			candidate = learner.analyze_input_for_glyph_generation(
+				input_text=input_text,
+				signals=signals,
+				user_hash=None
+			)
+			# Sanitize source input before logging to storage
+			if candidate.get("metadata"):
+				candidate["metadata"]["source_input"] = sanitize_for_storage(candidate["metadata"].get("source_input", input_text))
+			# Log candidate for review/learning
+			learner.log_glyph_candidate(candidate)
+			# Compose a training-oriented response
+			emotional_tone = signals[0].get('tone', 'unknown') if signals else 'unknown'
+			analysis = {
+				"primary_tone": emotional_tone,
+				"emotional_terms": candidate.get("emotional_terms", {}),
+				"nrc_analysis": candidate.get("nrc_analysis", {}),
+			}
+			training_response = create_training_response(
+				glyph_candidate=candidate,
+				original_input=input_text,
+				signals=signals,
+				emotional_analysis=analysis
+			)
+			contextual_response = training_response or contextual_response
+			learning_payload = {
+				"candidate": {
+					"glyph_name": candidate.get("glyph_name"),
+					"description": candidate.get("description"),
+					"gates": candidate.get("gates"),
+					"confidence_score": candidate.get("confidence_score"),
+				},
+				"analysis": analysis,
+			}
+		except Exception:
+			# If learning pipeline fails, retain the original contextual response
+			pass
+
+	# Sanctuary Mode: ensure compassionate handling for sensitive content
+	primary_tone = signals[0].get('tone', 'unknown') if signals else 'unknown'
+	if SANCTUARY_MODE or is_sensitive_input(input_text):
+		contextual_response = ensure_sanctuary_response(
+			input_text=input_text,
+			base_response=contextual_response,
+			tone=primary_tone
+		)
+
 	return {
 		"timestamp": datetime.now().isoformat(),
 		"input": input_text,
@@ -440,7 +496,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 		"ritual_prompt": ritual_prompt,
 		"voltage_response": contextual_response,  # Now contains the smart contextual response
 		"debug_sql": debug_sql,
-		"debug_glyph_rows": debug_glyph_rows
+		"debug_glyph_rows": debug_glyph_rows,
+		"learning": learning_payload
 	}
 
 # Example usage
