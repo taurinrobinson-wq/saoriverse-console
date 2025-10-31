@@ -160,87 +160,106 @@ def render_main_app():
     document_analysis = None
     document_title = None
     if "uploaded_text" in st.session_state:
-        import spacy
-        import nltk
-        from nltk.corpus import wordnet as wn
-        import json
-        from pathlib import Path
-        # Load spaCy model
-        try:
-            nlp = spacy.load("en_core_web_sm")
-        except Exception:
-            st.error("spaCy model 'en_core_web_sm' not found. Run: python -m spacy download en_core_web_sm")
-            nlp = None
-        # Load NLTK WordNet
-        try:
-            nltk.data.find('corpora/wordnet')
-        except LookupError:
-            nltk.download('wordnet')
+        # Simple document processing without heavy dependencies
         doc_text = st.session_state["uploaded_text"]
         first_line = doc_text.split("\n", 1)[0]
         document_title = "Document" if not first_line else first_line[:60]
-        summary = ""
-        entities = []
-        legal_definitions = {}
-        # Summarization (optional, using transformers if available)
-        try:
-            from transformers import pipeline
-            summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
-            summary = summarizer(doc_text[:2000], max_length=120, min_length=30, do_sample=False)[0]['summary_text']
-        except ImportError:
-            summary = "(Summarization model not available. Install 'transformers' and download a local model for full support.)"
-        except Exception:
-            summary = "(Summarization failed due to an unexpected error.)"
-        # Entity extraction (spaCy)
-        if nlp:
-            doc = nlp(doc_text)
-            entities = [(ent.text, ent.label_) for ent in doc.ents]
-        # Legal dictionary lookup (custom JSON/CSV)
-        legal_dict_path = Path("velonix_lexicon.json")
-        if legal_dict_path.exists():
-            with open(legal_dict_path, "r", encoding="utf-8") as f:
-                legal_dict = json.load(f)
-            for word in set(doc_text.split()):
-                if word.lower() in legal_dict:
-                    legal_definitions[word] = legal_dict[word.lower()]
-        # WordNet definitions
-        for word in set(doc_text.split()):
-            syns = wn.synsets(word)
-            if syns:
-                definition = getattr(syns[0], "definition", None)
-                if callable(definition):
-                    legal_definitions[word] = definition()
-        with st.expander(f"Document Analysis: {document_title}", expanded=True):
-            st.markdown(f"**Summary:**\n{summary}")
-            st.markdown("**Entities:**")
-            for ent, label in entities:
-                st.write(f"- {ent} ({label})")
-            if legal_definitions:
-                st.markdown("**Legal Definitions / WordNet:**")
-                for word, definition in legal_definitions.items():
-                    st.write(f"- {word}: {definition}")
-    uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
+        
+        st.info(f"📄 Document uploaded: {document_title}")
+        st.info("🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
+        
+        # Basic analysis without dependencies
+        document_analysis = {
+            "glyphs": [],
+            "voltage_response": f"Document content recognized: {len(doc_text)} characters",
+            "ritual_prompt": "Document-based emotional processing",
+            "signals": [],
+            "gates": []
+        }
+    
+    # File upload with multiple formats
+    uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"])
     if uploaded_file:
         file_text = None
-        if uploaded_file.name.lower().endswith(".txt"):
-            file_text = uploaded_file.read().decode("utf-8", errors="ignore")
-        elif uploaded_file.name.lower().endswith(".docx"):
-            try:
-                import docx
-                doc = docx.Document(uploaded_file)
-                file_text = "\n".join([para.text for para in doc.paragraphs])
-            except Exception as e:
-                st.error(f"Error reading Word document: {e}")
-        elif uploaded_file.name.lower().endswith(".pdf"):
-            try:
-                import pdfplumber
-                with pdfplumber.open(uploaded_file) as pdf:
-                    file_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
-            except Exception as e:
-                st.error(f"Error reading PDF document: {e}")
-        if file_text:
-            st.session_state["uploaded_text"] = file_text
-            st.success("Document uploaded successfully!")
+        file_ext = uploaded_file.name.lower().split('.')[-1]
+        
+        try:
+            if file_ext == "txt":
+                file_text = uploaded_file.read().decode("utf-8", errors="ignore")
+                
+            elif file_ext == "docx":
+                try:
+                    from docx import Document
+                    doc = Document(uploaded_file)
+                    file_text = "\n".join([para.text for para in doc.paragraphs])
+                except Exception as e:
+                    st.error(f"Error reading Word document: {e}")
+                    
+            elif file_ext == "pdf":
+                try:
+                    import pdfplumber
+                    with pdfplumber.open(uploaded_file) as pdf:
+                        file_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+                except Exception as e:
+                    st.error(f"Error reading PDF document: {e}")
+                    
+            elif file_ext == "md":
+                try:
+                    import markdown
+                    raw_text = uploaded_file.read().decode("utf-8", errors="ignore")
+                    # Convert markdown to HTML then extract text
+                    html = markdown.markdown(raw_text)
+                    from bs4 import BeautifulSoup
+                    soup = BeautifulSoup(html, 'html.parser')
+                    file_text = soup.get_text()
+                except Exception as e:
+                    st.error(f"Error reading Markdown document: {e}")
+                    
+            elif file_ext in ["html", "htm"]:
+                try:
+                    from bs4 import BeautifulSoup
+                    raw_html = uploaded_file.read().decode("utf-8", errors="ignore")
+                    soup = BeautifulSoup(raw_html, 'html.parser')
+                    file_text = soup.get_text()
+                except Exception as e:
+                    st.error(f"Error reading HTML document: {e}")
+                    
+            elif file_ext == "csv":
+                try:
+                    import pandas as pd
+                    df = pd.read_csv(uploaded_file)
+                    # Convert CSV to readable text format
+                    file_text = df.to_string(index=False)
+                except Exception as e:
+                    st.error(f"Error reading CSV document: {e}")
+                    
+            elif file_ext in ["xlsx", "xls"]:
+                try:
+                    import pandas as pd
+                    df = pd.read_excel(uploaded_file)
+                    # Convert Excel to readable text format
+                    file_text = df.to_string(index=False)
+                except Exception as e:
+                    st.error(f"Error reading Excel document: {e}")
+                    
+            elif file_ext == "json":
+                try:
+                    import json
+                    raw_json = uploaded_file.read().decode("utf-8", errors="ignore")
+                    data = json.loads(raw_json)
+                    # Convert JSON to readable text format
+                    file_text = json.dumps(data, indent=2)
+                except Exception as e:
+                    st.error(f"Error reading JSON document: {e}")
+            
+            if file_text:
+                st.session_state["uploaded_text"] = file_text
+                st.success(f"✅ {file_ext.upper()} document uploaded successfully!")
+            else:
+                st.warning(f"Could not extract text from {file_ext.upper()} file")
+                
+        except Exception as e:
+            st.error(f"Error reading document: {e}")
 
     user_input = st.chat_input("Share what you're feeling...")
     debug_signals = []
