@@ -1,9 +1,3 @@
-# Environment and Configuration
-.env
-*.env
-.env.local
-.env.production
-
 # Python
 __pycache__/
 *.py[cod]
@@ -22,41 +16,24 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
-# Streamlit
-.streamlit/
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# Database files (keep local)
-*.db
-*.sqlite
-*.sqlite3
-
-# Conversation logs (privacy)
-conversations/
-logs/
-*.log
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Streamlit secrets (IMPORTANT - keeps credentials private)
+.streamlit/secrets.toml
 
 # IDE
 .vscode/
@@ -64,6 +41,22 @@ Thumbs.db
 *.swp
 *.swo
 
-# Supabase temp files
-supabase/functions/_shared/
-supabase/.temp/
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite3
+
+# Environment variables
+.env.local
+.env.production
+
+# Temporary files
+*.tmp
+*.temp
