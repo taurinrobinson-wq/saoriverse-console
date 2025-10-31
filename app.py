@@ -22,6 +22,24 @@ def main():
     
     # Run the Streamlit app
     try:
+        # First try to import streamlit to make sure it's installed
+        import streamlit
+        print(f"Streamlit version: {streamlit.__version__}")
+        print(f"Starting Streamlit on port {port}")
+        
+        subprocess.run([
+            sys.executable, '-m', 'streamlit', 'run', 'main_v2.py',
+            '--server.port', port,
+            '--server.address', '0.0.0.0',
+            '--server.headless', 'true',
+            '--server.enableCORS', 'false',
+            '--server.enableXsrfProtection', 'false'
+        ], check=True)
+    except ImportError as e:
+        print(f"Streamlit not found: {e}")
+        print("Attempting to install streamlit...")
+        subprocess.run([sys.executable, '-m', 'pip', 'install', 'streamlit'], check=True)
+        # Try again
         subprocess.run([
             sys.executable, '-m', 'streamlit', 'run', 'main_v2.py',
             '--server.port', port,
