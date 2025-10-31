@@ -29,9 +29,9 @@ RUN mkdir -p /app/data_local
 # Expose port
 EXPOSE $PORT
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:$PORT/health', timeout=10)" || exit 1
+# Health check - Streamlit runs on PORT env var, no built-in health endpoint
+HEALTHCHECK --interval=30s --timeout=30s --start-period=10s --retries=3 \
+    CMD python -c "import socket; socket.create_connection(('localhost', 8000), timeout=5)" || exit 1
 
 # Default command - can be overridden by Railway
 CMD ["python", "start.py"]
