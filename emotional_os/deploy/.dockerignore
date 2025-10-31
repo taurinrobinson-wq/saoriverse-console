@@ -26,3 +26,5 @@ coverage.xml
 .DS_Store
 *.sqlite3
 logs/
+data
+# Exclude external drive references and local data files
