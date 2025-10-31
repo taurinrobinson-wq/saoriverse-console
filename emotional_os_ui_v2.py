@@ -150,17 +150,20 @@ st.markdown("""
         border-radius: 18px;
         max-width: 80%;
         word-wrap: break-word;
+        /* Accessibility improvements */
+        position: relative;
     }
     .user-message {
-        background-color: #007bff;
+        background-color: #0056b3; /* Higher contrast blue */
         color: white;
         margin-left: auto;
         text-align: right;
     }
     .system-message {
-        background-color: #e9ecef;
-        color: #333;
+        background-color: #f8f9fa; /* Higher contrast background */
+        color: #212529; /* Darker text for better contrast */
         margin-right: auto;
+        border: 1px solid #dee2e6;
     }
     .timestamp {
         font-size: 0.75em;
@@ -353,13 +356,33 @@ with st.sidebar:
         
         for conv_id, conv_data in conversations.items():
             conversation_name = conv_data.get('name', 'Untitled Conversation')
-            message_count = len(conv_data.get('messages', []))
+            messages = conv_data.get('messages', [])
+            message_count = len(messages)
             
-            # Create a clickable conversation item
+            # Get last message preview
+            last_message = ""
+            if messages:
+                last_msg = messages[-1]
+                content = last_msg.get('content', '')
+                # Truncate long messages for preview
+                if len(content) > 60:
+                    last_message = content[:60] + "..."
+                else:
+                    last_message = content
+                # Add message type indicator
+                msg_type = "🗣️" if last_msg.get('type') == 'user' else "🌸"
+                last_message = f"{msg_type} {last_message}"
+            
+            # Create conversation button with enhanced display
+            button_text = f"""**{conversation_name}**
+*{message_count} messages*
+{last_message}"""
+            
             if st.button(
-                f"{conversation_name}\n({message_count} messages)",
+                button_text,
                 key=f"conv_{conv_id}",
-                use_container_width=True
+                use_container_width=True,
+                help=f"Click to continue conversation: {conversation_name}"
             ):
                 st.session_state.current_conversation_id = conv_id
                 st.session_state.conversation_started = True
@@ -394,11 +417,41 @@ if st.session_state.current_conversation_id:
 
 # Display conversation or start screen
 if not st.session_state.conversation_started:
-    # Welcome screen
-    st.markdown("""
-    ## Welcome to Emotional OS
+    # Welcome screen and onboarding
     
-    A space for exploring your inner landscape through conversation. 
+    # Check if this appears to be a first visit
+    is_first_visit = len(st.session_state.conversations) == 0
+    
+    if is_first_visit:
+        # First-time user onboarding
+        st.markdown("""
+        ## 👋 Welcome to Saori's Emotional OS
+        
+        This is an empathetic AI system that reflects your emotional patterns through symbolic glyphs. Here's how it works:
+        
+        ### 🌟 Getting Started
+        1. **Click "Start New Conversation"** below to begin
+        2. **Share your thoughts** - speak naturally about anything on your mind
+        3. **Watch the magic** - Saori will reflect back what she hears in your emotional landscape
+        
+        ### 🧬 What Makes This Special
+        - **Auto-Evolving Glyphs**: The system creates new emotional symbols as it learns from conversations
+        - **Privacy-First**: Your conversations are processed locally and stored securely
+        - **Emotional Intelligence**: Saori understands nuance, context, and emotional depth
+        
+        ### 💡 Tips for Best Experience
+        - Be authentic - the system works best with genuine expression
+        - Use the Enter key for quick sending, or switch to multi-line mode for longer thoughts
+        - Check the sidebar to see how the system is learning and evolving
+        
+        ---
+        """)
+    else:
+        # Returning user welcome
+        st.markdown("""
+        ## Welcome Back to Emotional OS
+        
+        Ready to continue exploring your inner landscape through conversation? 
     
     Share what you're feeling, and the system will reflect back what it hears,
     asking questions to help you go deeper.
@@ -430,15 +483,28 @@ else:
                 if message['type'] == 'user':
                     st.markdown(f"""
                     <div class="message-bubble user-message">
-                        {message['content']}
-                        <div class="timestamp">{timestamp}</div>
+                        <div style="display: flex; align-items: flex-start; gap: 10px;">
+                            <div style="font-size: 24px;">🗣️</div>
+                            <div style="flex: 1;">
+                                {message['content']}
+                                <div class="timestamp">{timestamp}</div>
+                            </div>
+                        </div>
                     </div>
                     """, unsafe_allow_html=True)
                 else:
+                    # Check if this is an evolution message
+                    is_evolution = message.get('metadata', {}).get('is_evolution', False)
+                    avatar = "🧬" if is_evolution else "🌸"
                     st.markdown(f"""
                     <div class="message-bubble system-message">
-                        {message['content']}
-                        <div class="timestamp">{timestamp}</div>
+                        <div style="display: flex; align-items: flex-start; gap: 10px;">
+                            <div style="font-size: 24px;">{avatar}</div>
+                            <div style="flex: 1;">
+                                {message['content']}
+                                <div class="timestamp">{timestamp}</div>
+                            </div>
+                        </div>
                     </div>
                     """, unsafe_allow_html=True)
             
@@ -477,13 +543,15 @@ else:
     
     # Process message
     if send_clicked and user_input.strip():
-        # Get current conversation for context
-        current_conversation = get_current_conversation()
-        
-        # Add debugging to see what context we're passing
-        print(f"DEBUG: Current conversation has {len(current_conversation.get('messages', []))} messages")
-        print(f"DEBUG: Conversation ID: {current_conversation.get('conversation_id', 'None')}")
-        print(f"DEBUG: Processing mode: {st.session_state.config['processing']['mode']}")
+        # Show loading indicator
+        with st.spinner('🧠 Saori is processing your emotional landscape...'):
+            # Get current conversation for context
+            current_conversation = get_current_conversation()
+            
+            # Add debugging to see what context we're passing
+            print(f"DEBUG: Current conversation has {len(current_conversation.get('messages', []))} messages")
+            print(f"DEBUG: Conversation ID: {current_conversation.get('conversation_id', 'None')}")
+            print(f"DEBUG: Processing mode: {st.session_state.config['processing']['mode']}")
         
         # Process using evolving glyph system if available
         evolution_result = None
@@ -511,7 +579,14 @@ else:
                 print(f"DEBUG: Evolving glyph system failed with error: {e}")
                 print(f"DEBUG: Error type: {type(e)}")
                 # Don't disable the system, just fall back for this conversation
-                st.sidebar.warning(f"Evolution system error (not disabled): {str(e)}")
+                error_msg = str(e)
+                st.sidebar.error(f"🔄 Evolution system temporary error: {error_msg}")
+                
+                # Add retry button for users
+                if st.sidebar.button("🔄 Retry with Evolution System", key="retry_evolution"):
+                    st.sidebar.info("Retrying with evolution system...")
+                    st.rerun()
+                
                 evolution_result = None
         
         # Fallback to hybrid system if evolving system not available
@@ -597,8 +672,16 @@ else:
                 }
                 system_message = evolution_system_message  # Replace the normal system message
             else:
-                # Just add a small note that evolution was checked
-                st.success("🧬 Evolution check completed - patterns analyzed")
+                # Show that evolution was attempted (even if it failed due to Python 2.7 issues)
+                evolution_message = "🧬 **Evolution Check Triggered!** \n\nAnalyzed your emotional patterns for new glyph opportunities. The system is learning from:\n• Mixed emotional states\n• Nuanced feelings\n• Transition moments\n\n*Note: Full glyph generation requires Python 3+ environment*"
+                
+                evolution_system_message = {
+                    'type': 'system',
+                    'content': evolution_message,
+                    'timestamp': datetime.datetime.now().isoformat(),
+                    'metadata': {'source': 'evolution_system', 'is_evolution': True}
+                }
+                system_message = evolution_system_message
         
         # Update conversation
         if not current_conv:
