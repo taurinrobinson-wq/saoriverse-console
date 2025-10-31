@@ -8,6 +8,15 @@ import os
 import re
 from typing import Dict, List
 
+# Import poetry enrichment system for local mode
+try:
+    from parser.poetry_enrichment import PoetryEnrichment
+    POETRY_AVAILABLE = True
+    POETRY_ERROR = None
+except ImportError as e:
+    POETRY_AVAILABLE = False
+    POETRY_ERROR = str(e)
+
 # Import the auto-evolving glyph system
 try:
     from evolving_glyph_integrator import EvolvingGlyphIntegrator
@@ -58,6 +67,13 @@ if 'current_conversation_id' not in st.session_state:
     st.session_state.current_conversation_id = None
 if 'conversation_started' not in st.session_state:
     st.session_state.conversation_started = False
+if 'poetry_enrichment_enabled' not in st.session_state:
+    st.session_state.poetry_enrichment_enabled = False
+if 'poetry_enrichment' not in st.session_state and POETRY_AVAILABLE:
+    try:
+        st.session_state.poetry_enrichment = PoetryEnrichment()
+    except Exception as e:
+        st.session_state.poetry_enrichment = None
 
 # Debug configuration (only show in debug mode)
 config = load_config()
@@ -324,6 +340,29 @@ with st.sidebar:
         )
     else:
         prefer_ai = False
+    
+    # Poetry Enrichment (Local Mode)
+    st.markdown("### 🎭 Local Mode Enhancement")
+    if POETRY_AVAILABLE and st.session_state.poetry_enrichment:
+        poetry_enabled = st.checkbox(
+            "Poetry Enrichment",
+            value=st.session_state.poetry_enrichment_enabled,
+            help="Enhance responses with poetry and emotional glyphs (100% local)"
+        )
+        st.session_state.poetry_enrichment_enabled = poetry_enabled
+        
+        if poetry_enabled:
+            st.success("✨ Poetry enrichment enabled (0% external API usage)")
+            # Show poetry enrichment stats
+            stats = st.session_state.poetry_enrichment.get_stats()
+            with st.expander("📊 Poetry System Stats"):
+                st.metric("Poetry Poems", stats['poetry_poems'])
+                st.metric("Emotion Categories", stats['emotions_with_glyphs'])
+                st.metric("Vocabulary Words", stats['nrc_words'])
+    elif POETRY_AVAILABLE:
+        st.warning("🎭 Poetry enrichment system initializing...")
+    else:
+        st.info(f"🎭 Poetry enrichment not available: {POETRY_ERROR}")
     
     # Update config if settings changed
     if (processing_mode != st.session_state.config['processing']['mode'] or 
@@ -631,9 +670,32 @@ else:
         
         # Add system response
         response_text = result.get("response", "No response generated")
+        
+        # Apply poetry enrichment if enabled
+        enriched_response = response_text
+        enrichment_metadata = {}
+        if (st.session_state.poetry_enrichment_enabled and 
+            st.session_state.poetry_enrichment and 
+            POETRY_AVAILABLE):
+            try:
+                enrichment = st.session_state.poetry_enrichment.enrich_emotion_analysis(user_input.strip())
+                if enrichment.get('dominant_emotion'):
+                    enrichment_metadata = {
+                        'poetry_enrichment': {
+                            'dominant_emotion': enrichment.get('dominant_emotion'),
+                            'emotion_strength': enrichment.get('emotion_strength'),
+                            'glyphs': enrichment.get('glyphs'),
+                            'poetry_excerpt': enrichment.get('poetry', '')[:100]
+                        }
+                    }
+                    # Add enriched response
+                    enriched_response = enrichment.get('enriched_response', response_text)
+            except Exception as e:
+                print(f"DEBUG: Poetry enrichment failed: {e}")
+        
         system_message = {
             'type': 'system',
-            'content': response_text,
+            'content': enriched_response,
             'timestamp': datetime.datetime.now().isoformat(),
             'metadata': {
                 'source': result.get('source', 'unknown'),
@@ -642,13 +704,16 @@ else:
                 'glyphs': result.get('glyphs', []),
                 'glyph_data': result.get('glyph_data'),
                 'parsed_glyphs': result.get('parsed_glyphs', []),
-                'privacy_preserved': result.get('privacy_preserved', True)
+                'privacy_preserved': result.get('privacy_preserved', True),
+                **enrichment_metadata
             }
         }
         
         # Debug output to see what response we got
         print(f"UI DEBUG: Response received: {response_text[:100]}...")
         print(f"UI DEBUG: Response source: {result.get('source', 'unknown')}")
+        if enrichment_metadata:
+            print(f"UI DEBUG: Poetry enrichment applied: {enrichment_metadata['poetry_enrichment']['dominant_emotion']}")
         
         # Add evolution information if available
         if evolution_result and evolution_result.get('evolution_triggered'):
