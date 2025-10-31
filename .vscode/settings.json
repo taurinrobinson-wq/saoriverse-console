@@ -1,0 +1,19 @@
+{
+  "deno.enable": true,
+  "deno.lint": false,
+  "deno.unstable": true,
+  "typescript.preferences.strict": false,
+  "typescript.suggest.autoImports": false,
+  "python.defaultInterpreterPath": "./venv/Scripts/python.exe",
+  "files.associations": {
+    "*.ts": "typescript"
+  },
+  "typescript.validate.enable": false,
+  "deno.codeLens.implementations": false,
+  "deno.codeLens.references": false,
+  "deno.suggest.imports.hosts": {
+    "https://deno.land": false,
+    "https://cdn.skypack.dev": false,
+    "https://crux.land": false
+  }
+}
