@@ -5,6 +5,8 @@ import datetime
 import uuid
 
 class SaoynxAuthentication:
+    """Authentication and session management"""
+    
     def render_login_form(self):
         st.markdown("## Sign In")
         username = st.text_input("Username", key="login_username")
@@ -36,7 +38,7 @@ class SaoynxAuthentication:
         if st.button("Back", key="register_back_btn"):
             st.session_state.show_register = False
             st.rerun()
-    """Authentication and session management"""
+
     def __init__(self):
         try:
             self.supabase_url = st.secrets["supabase"]["url"]

@@ -12,8 +12,11 @@ st.set_page_config(
 )
 
 def main():
+    # Initialize authentication
     auth = SaoynxAuthentication()
-    if st.session_state.authenticated:
+    
+    # Check if user is authenticated
+    if st.session_state.get('authenticated', False):
         render_main_app()
     else:
         render_splash_interface(auth)
