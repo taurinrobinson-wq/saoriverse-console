@@ -1,10 +1,25 @@
-# FirstPerson Web Application - October 15, 2025
+# FirstPerson Web Application - October 30, 2025
+# Streamlit App Dependencies
+streamlit==1.40.1
+python-dotenv==1.1.1
+requests==2.32.3
+supabase==2.9.1
+
+# Document Processing
+python-docx==1.1.0
+pdfplumber==0.11.5
+openpyxl
+xlrd
+markdown
+beautifulsoup4
+lxml
+
+# Data Processing
+pandas
+numpy
+
+# Optional: FastAPI (if needed for API endpoints)
 fastapi==0.119.0
 uvicorn[standard]==0.37.0
 jinja2==3.1.6
 python-multipart==0.0.20
-python-dotenv==1.1.1
-requests==2.32.3
-supabase==2.9.1
-python-docx
-streamlit
