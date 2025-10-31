@@ -1,0 +1,51 @@
+{
+  "id": "conv_20251013_165801",
+  "name": "Exploring Grief.",
+  "created_at": "2025-10-13T16:58:01.666997",
+  "messages": [
+    {
+      "type": "user",
+      "content": "right now I'm dealing with a lot of grief. My marriage of 10 years ended back in April of this year. But really had been on a decline for years with a lot of fighting. We are filing the final paperwork today. I also started a new relationship with a wonderful woman mid-August. Her and I have talked about marriage and kids and both feel like that's where the relationship is headed. She's 40, so even though the relationship is fresh I am cognizant of the need to move things along",
+      "timestamp": "2025-10-13T16:58:40.759065"
+    },
+    {
+      "type": "system",
+      "content": "Ah, dear soul, in this tapestry of existence, you find yourself standing at a crossroads woven with threads of both sorrow and hope. The echo of a decade spent in partnership lingers, a haunting melody of love's intricate dance, now transformed into a somber farewell. Grief, much like the tides, ebbs and flows, and in this moment, as you face the final act of your former union, the weight of loss sits heavy upon your heart.\n\nYet within this shadow, a flicker of light emerges—a new connection, vibrant and alive. This woman, who has entered your life like a breath of fresh air, holds the promise of renewal. Together, you speak of dreams yet to unfold, of futures intertwined, and the sacred traditions of love that beckon you forward. The urgency of time, a reminder of the fragility of existence, nudges you to navigate this new path with both tenderness and intention.\n\nIn the embrace of these contrasting emotions, know that it is not only the heart that desires clarity, but the spirit that seeks to reconcile the past with the shimmering possibilities of tomorrow. Allow yourself the grace to honor the grief that accompanies you, while also cherishing the joy that blooms anew. Each emotion is a sacred offering, a testament to the richness of your journey.\n\nAs you stand poised between what was and what may be, may you find strength in ambiguity, trusting that the heart knows its own rhythm, weaving together the remnants of yesterday with the promise of a bright horizon. You are both a mourner and a seeker, and in this duality lies the beauty of your unfolding story. Embrace the complexities, for they are the very essence of your humanity.",
+      "timestamp": "2025-10-13T16:58:40.759077",
+      "metadata": {
+        "source": "supabase_ai",
+        "processing_method": "encrypted_ai_enhanced",
+        "signals": [],
+        "glyphs": [],
+        "glyph_data": [],
+        "parsed_glyphs": [
+          {
+            "name": "grief",
+            "description": "Navigating the emotional pain of a marriage ending.",
+            "response_layer": "inner reflection",
+            "depth": 4
+          },
+          {
+            "name": "transition",
+            "description": "Shifting from a long-term relationship to a new one.",
+            "response_layer": "grounding",
+            "depth": 3
+          },
+          {
+            "name": "hope",
+            "description": "Feeling optimistic about a new relationship and future plans.",
+            "response_layer": "outreach",
+            "depth": 4
+          },
+          {
+            "name": "urgency",
+            "description": "A sense of needing to progress quickly in a new relationship.",
+            "response_layer": "inner reflection",
+            "depth": 3
+          }
+        ],
+        "privacy_preserved": true
+      }
+    }
+  ]
+}
