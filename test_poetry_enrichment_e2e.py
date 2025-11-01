@@ -11,7 +11,9 @@ import json
 from pathlib import Path
 
 sys.path.insert(0, '.')
-os.chdir('/Users/taurinrobinson/saoriverse-console')
+# Make the test portable: change CWD to the repository root relative to this test file
+repo_root = Path(__file__).resolve().parent
+os.chdir(str(repo_root))
 
 from parser.nrc_lexicon_loader import nrc
 from parser.poetry_database import PoetryDatabase
