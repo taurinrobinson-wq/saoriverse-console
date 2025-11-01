@@ -707,12 +707,12 @@ def render_main_app():
         
         with col1:
             processing_mode = st.selectbox(
-    "Processing Mode",
-    ["hybrid", "local", "ai_preferred"],
-    index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
-    help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
-)
-st.session_state.processing_mode = processing_mode
+                "Processing Mode",
+                ["hybrid", "local", "ai_preferred"],
+                index=["hybrid", "local", "ai_preferred"].index(st.session_state.processing_mode),
+                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses",
+            )
+            st.session_state.processing_mode = processing_mode
 
         with col2:
             if st.button("Clear History", type="secondary"):

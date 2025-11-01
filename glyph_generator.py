@@ -57,15 +57,18 @@ class GlyphGenerator:
         self.supabase_key = supabase_key
         self.min_pattern_frequency = min_pattern_frequency
         self.novelty_threshold = novelty_threshold
-        
+
+        # Setup logging first (so _load_existing_tags can log failures)
+        self.setup_logging()
+
         # Load existing emotional tags to avoid duplication
         self.existing_tags = self._load_existing_tags()
         self.detected_patterns = self._load_pattern_cache()
-        
+
         # Base glyph symbols for combinations
         self.base_symbols = ['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'θ', 'λ', 'Ω']
         self.combination_operators = ['×', '⊕', '∧', '∨', '⟡']
-        
+
         # Emotional domain mappings
         self.emotion_domains = {
             'joy': 'Joy & Levity',
@@ -140,7 +143,8 @@ class GlyphGenerator:
             # Parse the SQL file if it exists
             sql_path = "emotional_tags_rows.sql"
             if os.path.exists(sql_path):
-                with open(sql_path, 'r') as f:
+                # Read with utf-8 and replace undecodable bytes to avoid decode errors
+                with open(sql_path, 'r', encoding='utf-8', errors='replace') as f:
                     content = f.read()
                     # Extract tag names and glyphs from SQL INSERT statements
                     pattern = r"'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)'"

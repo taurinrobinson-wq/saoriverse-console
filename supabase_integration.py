@@ -1,14 +1,4 @@
-#!/usr/bin/env python3
+from tools.supabase_integration import *
 
-import requests
-import json
-import os
-from typing import Dict, List, Optional
-from dataclasses import dataclass
-import logging
-
-@dataclass
-class SaoriResponse:
-    reply: str
-    glyph: Optional[Dict]
-    from tools.supabase_integration import *
+# Re-export all public names from the tools module for backwards compatibility
+__all__ = [n for n in dir() if not n.startswith("_")]
