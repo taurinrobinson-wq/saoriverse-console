@@ -1,5 +1,8 @@
 from docx import Document
 from io import BytesIO
+import streamlit as st
+from modules.auth import SaoynxAuthentication
+from modules.ui import render_splash_interface, render_main_app
 
 # --- Generate Word Document from Personal Log ---
 def generate_doc(date, time, event, mood, reflections, insights):
@@ -20,10 +23,6 @@ def generate_doc(date, time, event, mood, reflections, insights):
     buffer.seek(0)
     return buffer
 # --- End Generate Word Document ---
-
-import streamlit as st
-from modules.auth import SaoynxAuthentication
-from modules.ui import render_splash_interface, render_main_app
 
 # Page configuration
 st.set_page_config(

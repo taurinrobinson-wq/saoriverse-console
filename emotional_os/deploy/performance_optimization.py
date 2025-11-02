@@ -209,7 +209,7 @@ class StreamlitOptimizedUI:
                 result["source"] = "local_fallback"
                 result["processing_time"] = "< 1.0s"
                 return result
-            except:
+            except Exception:
                 return {
                     "response": "I'm experiencing some connection issues, but I'm here to listen. Can you tell me more about what you're feeling?",
                     "source": "emergency_fallback",

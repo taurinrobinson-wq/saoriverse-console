@@ -72,7 +72,7 @@ def render_splash_interface(auth):
     with col2:
         try:
             st.image("graphics/FirstPerson-Logo.svg", width=200)
-        except:
+        except Exception:
             st.markdown('''
             <div style="font-size: 4rem;">🧠</div>
             <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">FirstPerson</div>
@@ -87,20 +87,20 @@ def render_splash_interface(auth):
         st.markdown('<div class="auth-container">', unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            qcol1, qcol2 = st.columns([1, 1], gap="small")
-            with qcol1:
-                st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
-            with qcol2:
-                st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
-            bcol1, bcol2 = st.columns([1, 1], gap="small")
-            with bcol1:
-                if st.button("Sign In", key="existing_btn"):
-                    st.session_state.show_login = True
-                    st.rerun()
-            with bcol2:
-                if st.button("Register Now", key="new_btn"):
-                    st.session_state.show_register = True
-                    st.rerun()
+                qcol1, qcol2 = st.columns([1, 1], gap="small")
+                with qcol1:
+                    st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
+                with qcol2:
+                    st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
+                bcol1, bcol2 = st.columns([1, 1], gap="small")
+                with bcol1:
+                    if st.button("Sign In", key="existing_btn"):
+                        st.session_state.show_login = True
+                        st.rerun()
+                with bcol2:
+                    if st.button("Register Now", key="new_btn"):
+                        st.session_state.show_register = True
+                        st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
         st.markdown('<div class="quick-access">', unsafe_allow_html=True)
         st.markdown('<div class="quick-title">Quick Access</div>', unsafe_allow_html=True)
@@ -125,7 +125,7 @@ def render_main_app():
     with col1:
         try:
             st.image(logo_path, width=50)
-        except:
+        except Exception:
             st.markdown('<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
@@ -447,32 +447,32 @@ def render_main_app():
                     st.error(f"Error generating Word document: {e}")
         elif journal_type == "Daily Emotional Check-In":
             st.markdown("Log your mood, stress level, and a short reflection for today.")
-            checkin_date = st.date_input("Date", value=dt.date.today(), key="checkin_date")
+            checkin_date = st.date_input("Date", value=dt.date.today(), key="checkin_date")  # noqa: F841  # used for Streamlit UI side-effect
             mood = st.selectbox("Mood", ["Calm", "Stressed", "Sad", "Angry", "Joyful", "Fatigued", "Other"], key="checkin_mood")
-            stress = st.slider("Stress Level", 0, 10, 5, key="checkin_stress")
-            reflection = st.text_area("Reflection", placeholder="What's on your mind today?", key="checkin_reflection")
+            stress = st.slider("Stress Level", 0, 10, 5, key="checkin_stress")  # noqa: F841  # used for Streamlit UI side-effect
+            reflection = st.text_area("Reflection", placeholder="What's on your mind today?", key="checkin_reflection")  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Check-In"):
                 st.success("Your daily check-in has been saved.")
         elif journal_type == "Self-Care Tracker":
             st.markdown("Track your self-care activities and routines.")
-            activities = st.multiselect(
+            activities = st.multiselect(  # noqa: F841  # used for Streamlit UI side-effect
                 "Self-Care Activities",
                 ["Exercise", "Creative Work", "Peer Support", "Rest", "Healthy Meal", "Time Outdoors", "Other"],
                 key="selfcare_activities"
             )
-            notes = st.text_area("Notes", placeholder="Any details or thoughts about your self-care today?", key="selfcare_notes")
+            notes = st.text_area("Notes", placeholder="Any details or thoughts about your self-care today?", key="selfcare_notes")  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Self-Care Entry"):
                 st.success("Your self-care entry has been saved.")
         elif journal_type == "Micro-Boundary Ritual":
             st.markdown("Mark a transition between work and personal time.")
-            ritual_type = st.selectbox("Ritual Type", ["Change Location", "Wash Hands", "Listen to Music", "Short Walk", "Other"], key="ritual_type")
-            ritual_notes = st.text_area("Ritual Notes", placeholder="How did this ritual help you shift gears?", key="ritual_notes")
+            ritual_type = st.selectbox("Ritual Type", ["Change Location", "Wash Hands", "Listen to Music", "Short Walk", "Other"], key="ritual_type")  # noqa: F841  # used for Streamlit UI side-effect
+            ritual_notes = st.text_area("Ritual Notes", placeholder="How did this ritual help you shift gears?", key="ritual_notes")  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Log Ritual"):
                 st.success("Your boundary ritual has been logged.")
         elif journal_type == "Reflective Journal":
             st.markdown("Write about your own reactions, growth, and challenges. No client details—just your personal journey.")
-            journal_date = st.date_input("Date", value=dt.date.today(), key="reflective_date")
-            entry = st.text_area("Reflection Entry", placeholder="What's emerging for you emotionally or personally?", key="reflective_entry")
+            journal_date = st.date_input("Date", value=dt.date.today(), key="reflective_date")  # noqa: F841  # used for Streamlit UI side-effect
+            entry = st.text_area("Reflection Entry", placeholder="What's emerging for you emotionally or personally?", key="reflective_entry")  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Reflection"):
                 st.success("Your reflection has been saved.")
         if st.button("Close Journal Center"):

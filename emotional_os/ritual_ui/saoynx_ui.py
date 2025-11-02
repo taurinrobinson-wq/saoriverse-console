@@ -285,7 +285,7 @@ class SaoynxAuthentication:
         with col2:
             try:
                 st.image("Saonyx_Logo.png", width=200)
-            except:
+            except Exception:
                 st.markdown('''
                 <div style="font-size: 4rem;">🧠</div>
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
