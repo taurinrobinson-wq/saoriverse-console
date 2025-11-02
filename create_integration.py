@@ -6,7 +6,6 @@ to your existing Saoriverse conversation flow
 
 import os
 import sys
-from typing import Dict, Optional
 
 # Add the current directory to the path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -15,7 +14,7 @@ def create_enhanced_conversation_demo():
     """
     Enhanced version of your conversation_demo.py that includes auto-evolving glyphs
     """
-    
+
     enhanced_demo_code = '''#!/usr/bin/env python3
 """
 Enhanced Saoriverse Conversation Demo with Auto-Evolving Glyphs
@@ -42,7 +41,8 @@ class EnhancedSaoriverse:
                  supabase_function_url: str,
                  supabase_anon_key: str,
                  supabase_url: str = None,
-                 enable_evolution: bool = True):
+                 enable_evolution: bool = True,
+                 limbic_engine=None):
         
         self.basic_function_url = supabase_function_url
         self.basic_headers = {
@@ -65,6 +65,10 @@ class EnhancedSaoriverse:
             self.integrator = None
             self.evolution_enabled = False
             print("Basic conversation mode (no evolution)")
+
+        # Optional limbic engine (backend-only). If provided, it will be used
+        # to decorate baseline replies to sound more companion-like.
+        self.limbic_engine = limbic_engine
     
     def chat(self, message: str, conversation_context: Optional[Dict] = None) -> Dict:
         """Enhanced chat method with optional evolution"""
@@ -114,6 +118,47 @@ class EnhancedSaoriverse:
                     'evolution_info': {'evolution_triggered': False}
                 }
         
+        # --- Limbic decoration (backend-only) ---
+        try:
+            # Use limbic engine to produce a decorated reply if available and safe
+            if self.limbic_engine and isinstance(response, dict) and 'reply' in response:
+                try:
+                    from emotional_os.glyphs.limbic_decorator import decorate_reply
+                except Exception:
+                    decorate_reply = None
+
+                # Load simple trauma lexicon to gate decoration
+                safety_flag = False
+                try:
+                    import json, os
+                    trauma_path = os.path.join(os.path.dirname(__file__), 'emotional_os', 'safety', 'trauma_lexicon.json')
+                    if os.path.exists(trauma_path):
+                        with open(trauma_path, 'r', encoding='utf-8') as f:
+                            trauma_terms = set(json.load(f))
+                        lowered = message.lower()
+                        for t in trauma_terms:
+                            if t and t.lower() in lowered:
+                                safety_flag = True
+                                break
+                except Exception:
+                    safety_flag = False
+
+                if not safety_flag and decorate_reply:
+                    try:
+                        limbic_result = self.limbic_engine.process_emotion_with_limbic_mapping(message)
+                        decorated = decorate_reply(response.get('reply', ''), limbic_result)
+                        response['reply'] = decorated
+                        response['limbic_decorated'] = True
+                    except Exception:
+                        # if decoration fails, return baseline reply
+                        response['limbic_decorated'] = False
+                else:
+                    response['limbic_decorated'] = False
+
+        except Exception:
+            # Keep original response on any unexpected error
+            pass
+
         return response
     
     def get_evolution_stats(self) -> Dict:
@@ -276,17 +321,17 @@ if __name__ == "__main__":
     else:
         interactive_demo()
 '''
-    
+
     # Write the enhanced demo to a file
     with open('enhanced_conversation_demo.py', 'w') as f:
         f.write(enhanced_demo_code)
-    
+
     print("Created enhanced_conversation_demo.py")
     print("This shows how to integrate the evolving glyph system with your existing conversation flow.")
 
 def create_quick_setup_guide():
     """Create a quick setup guide"""
-    
+
     setup_guide = '''# Quick Setup Guide: Auto-Evolving Glyphs
 
 ## 🚀 Getting Started
@@ -371,22 +416,22 @@ The system can run alongside your existing setup, monitoring conversations and a
 
 Your emotional OS will now continuously evolve and become more sophisticated! 🎉
 '''
-    
+
     with open('SETUP_EVOLVING_GLYPHS.md', 'w') as f:
         f.write(setup_guide)
-    
+
     print("Created SETUP_EVOLVING_GLYPHS.md - your quick setup guide!")
 
 if __name__ == "__main__":
     print("🔧 Creating integration examples and setup guides...")
-    
+
     create_enhanced_conversation_demo()
     create_quick_setup_guide()
-    
+
     print("\n✅ Integration files created:")
     print("   - enhanced_conversation_demo.py (replaces your existing demo)")
     print("   - SETUP_EVOLVING_GLYPHS.md (setup guide)")
     print("   - config_template.py (configuration template)")
-    
+
     print("\n🌟 Your auto-evolving glyph system is ready!")
     print("   Follow the setup guide to integrate with your Saoriverse system.")

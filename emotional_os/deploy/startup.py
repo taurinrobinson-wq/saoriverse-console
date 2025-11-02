@@ -4,7 +4,7 @@ Startup script for FirstPerson on cPanel
 Tests environment variable loading and starts the FastAPI app
 """
 import os
-import sys
+
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -19,8 +19,8 @@ print("==========================")
 
 # Import and run the FastAPI app
 if __name__ == "__main__":
-    from fastapi_app import app
     import uvicorn
-    
+    from fastapi_app import app
+
     # Run the server
     uvicorn.run(app, host="0.0.0.0", port=8000)

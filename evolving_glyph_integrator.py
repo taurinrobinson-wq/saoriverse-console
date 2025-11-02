@@ -5,9 +5,9 @@ Connects the glyph generator to your existing conversation processing flow
 """
 
 import json
+import logging
 import os
 import re
-import logging
 from typing import Dict, List, Optional
 
 # Try to import dependencies with fallbacks
@@ -41,20 +41,20 @@ class EvolvingGlyphIntegrator:
     """
     Integrates auto-evolving glyph generation with your existing Saoriverse system
     """
-    
-    def __init__(self, 
+
+    def __init__(self,
                  supabase_function_url: Optional[str] = None,
                  supabase_anon_key: Optional[str] = None,
                  supabase_url: Optional[str] = None,
                  enable_auto_evolution: bool = True,
                  evolution_frequency: int = 5):  # Generate new glyphs every N conversations
-        
+
         self.supabase_integrator = None
         self.glyph_generator = None
         self.enable_auto_evolution = enable_auto_evolution
         self.evolution_frequency = evolution_frequency
         self.conversation_count = 0
-        
+
         # Initialize components if credentials provided and dependencies available
         if supabase_function_url and supabase_anon_key and SUPABASE_INTEGRATOR_AVAILABLE and SupabaseIntegrator is not None:
             try:
@@ -65,7 +65,7 @@ class EvolvingGlyphIntegrator:
             except Exception as e:
                 print(f"Failed to initialize SupabaseIntegrator: {e}")
                 self.supabase_integrator = None
-        
+
         if enable_auto_evolution and supabase_url and supabase_anon_key and GLYPH_GENERATOR_AVAILABLE and GlyphGenerator is not None:
             try:
                 self.glyph_generator = GlyphGenerator(
@@ -75,9 +75,9 @@ class EvolvingGlyphIntegrator:
             except Exception as e:
                 print(f"Failed to initialize GlyphGenerator: {e}")
                 self.glyph_generator = None
-        
+
         self.setup_logging()
-    
+
     def setup_logging(self):
         """Setup logging for integration tracking"""
         logging.basicConfig(
@@ -85,9 +85,9 @@ class EvolvingGlyphIntegrator:
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         )
         self.logger = logging.getLogger(__name__)
-    
-    def process_conversation_with_evolution(self, 
-                                          message: str, 
+
+    def process_conversation_with_evolution(self,
+                                          message: str,
                                           mode: str = "quick",
                                           conversation_context: Optional[Dict] = None) -> Dict:
         """
@@ -101,7 +101,7 @@ class EvolvingGlyphIntegrator:
             'evolution_triggered': False,
             'error': None
         }
-        
+
         try:
             # First, process through normal Saoriverse pipeline
             if self.supabase_integrator:
@@ -119,24 +119,24 @@ class EvolvingGlyphIntegrator:
                     glyph="",
                     parsed_glyphs=[]
                 )
-            
+
             # Check if evolution should be triggered
             self.conversation_count += 1
             should_evolve = (
-                self.enable_auto_evolution and 
+                self.enable_auto_evolution and
                 self.glyph_generator and
-                (self.conversation_count % self.evolution_frequency == 0 or 
+                (self.conversation_count % self.evolution_frequency == 0 or
                  self._has_strong_emotional_content(message))
             )
-            
+
             if should_evolve:
                 result['evolution_triggered'] = True
-                
+
                 # Analyze conversation for new emotional patterns
                 conversation_text = message
                 if result['saori_response']:
                     conversation_text += f" || {result['saori_response'].reply}"
-                
+
                 # Generate new glyphs if patterns warrant it (if glyph generator available)
                 new_glyphs = []
                 if self.glyph_generator:
@@ -146,9 +146,9 @@ class EvolvingGlyphIntegrator:
                     )
                 else:
                     print("DEBUG: No glyph generator available, skipping glyph generation")
-                
+
                 result['new_glyphs_generated'] = new_glyphs
-                
+
                 # Log evolution activity
                 if new_glyphs:
                     self.logger.info(f"Evolution triggered: Generated {len(new_glyphs)} new glyphs")
@@ -156,15 +156,15 @@ class EvolvingGlyphIntegrator:
                         self.logger.info(f"  - {glyph['tag_name']} ({glyph['glyph']}): {glyph['response_cue']}")
                 else:
                     self.logger.info("Evolution triggered but no new glyphs generated")
-            
+
             return result
-            
+
         except Exception as e:
             error_msg = f"Error in conversation processing with evolution: {e}"
             self.logger.error(error_msg)
             result['error'] = error_msg
             return result
-    
+
     def _has_strong_emotional_content(self, message: str) -> bool:
         """
         Check if a message has particularly strong emotional content
@@ -176,10 +176,10 @@ class EvolvingGlyphIntegrator:
             'mixed with', 'combined with', 'alongside', 'tinged with',
             'paradox', 'contradiction', 'simultaneously', 'at the same time'
         ]
-        
+
         message_lower = message.lower()
         return any(indicator in message_lower for indicator in strong_emotion_indicators)
-    
+
     def force_evolution_check(self, conversation_text: str, context: Optional[Dict] = None) -> List[Dict]:
         """
         Force an immediate evolution check regardless of frequency settings
@@ -188,22 +188,22 @@ class EvolvingGlyphIntegrator:
         if not self.glyph_generator:
             self.logger.warning("Glyph generator not initialized, cannot force evolution")
             return []
-        
+
         try:
             new_glyphs = self.glyph_generator.process_conversation_for_glyphs(
                 conversation_text=conversation_text,
                 context=context or {}
             )
-            
+
             if new_glyphs:
                 self.logger.info(f"Forced evolution generated {len(new_glyphs)} new glyphs")
-            
+
             return new_glyphs
-            
+
         except Exception as e:
             self.logger.error(f"Error in forced evolution check: {e}")
             return []
-    
+
     def get_evolution_stats(self) -> Dict:
         """Get statistics about the evolution process"""
         stats = {
@@ -212,27 +212,27 @@ class EvolvingGlyphIntegrator:
             'evolution_frequency': self.evolution_frequency,
             'next_evolution_check': self.evolution_frequency - (self.conversation_count % self.evolution_frequency)
         }
-        
+
         if self.glyph_generator:
             stats['detected_patterns_count'] = len(self.glyph_generator.detected_patterns)
             stats['existing_tags_count'] = len(self.glyph_generator.existing_tags)
-        
+
         return stats
-    
+
     def export_generated_glyphs(self, format: str = 'json') -> str:
         """Export all generated glyphs in specified format"""
         if not self.glyph_generator:
             return "Glyph generator not initialized"
-        
+
         try:
             if format == 'json':
                 output_path = 'generated/all_generated_glyphs.json'
                 os.makedirs('generated', exist_ok=True)
-                
+
                 # Collect all generated glyphs from the SQL file
                 generated_glyphs = []
                 sql_file = 'generated/new_glyphs.sql'
-                
+
                 if os.path.exists(sql_file):
                     with open(sql_file, 'r') as f:
                         content = f.read()
@@ -264,24 +264,22 @@ class EvolvingGlyphIntegrator:
                                             'style_variant': values[12] if len(values) > 12 else '',
                                             'humor_style': values[13] if len(values) > 13 else ''
                                         })
-                
+
                 with open(output_path, 'w') as f:
                     json.dump(generated_glyphs, f, indent=2)
-                
+
                 return f"Exported {len(generated_glyphs)} generated glyphs to {output_path}"
-            
-            elif format == 'sql':
+
+            if format == 'sql':
                 sql_file = 'generated/new_glyphs.sql'
                 if os.path.exists(sql_file):
                     with open(sql_file, 'r') as f:
                         content = f.read()
                     return f"Generated glyphs SQL content:\n{content}"
-                else:
-                    return "No generated glyphs SQL file found"
-            
-            else:
-                return f"Unsupported export format: {format}"
-        
+                return "No generated glyphs SQL file found"
+
+            return f"Unsupported export format: {format}"
+
         except Exception as e:
             error_msg = f"Error exporting generated glyphs: {e}"
             self.logger.error(error_msg)
@@ -293,14 +291,14 @@ def conversation_demo_with_evolution():
     Demo showing how the auto-evolving glyph system works
     """
     print("🌟 Saoriverse Auto-Evolving Glyph System Demo 🌟\n")
-    
+
     # Initialize the evolving integrator
     # Note: Replace with your actual Supabase credentials
     integrator = EvolvingGlyphIntegrator(
         enable_auto_evolution=True,
         evolution_frequency=2  # Check for evolution every 2 conversations
     )
-    
+
     # Sample conversations with rich emotional content
     test_conversations = [
         {
@@ -320,23 +318,23 @@ def conversation_demo_with_evolution():
             'context': {'session_type': 'emotional_exploration'}
         },
         {
-            'message': "I'm feeling this quiet celebration mixed with deep reverence, like joy that doesn't need to be loud to be complete.",  
+            'message': "I'm feeling this quiet celebration mixed with deep reverence, like joy that doesn't need to be loud to be complete.",
             'context': {'session_type': 'gratitude_practice'}
         }
     ]
-    
+
     print("Processing conversations and checking for glyph evolution...\n")
-    
+
     for i, conv in enumerate(test_conversations, 1):
         print(f"--- Conversation {i} ---")
         print(f"Message: {conv['message']}")
-        
+
         # Process with evolution
         result = integrator.process_conversation_with_evolution(
             message=conv['message'],
             conversation_context=conv['context']
         )
-        
+
         if result['evolution_triggered']:
             print("🧬 Evolution check triggered!")
             if result['new_glyphs_generated']:
@@ -348,15 +346,15 @@ def conversation_demo_with_evolution():
                 print("   No new glyphs needed - existing tags cover this pattern")
         else:
             print("   Evolution not triggered this time")
-        
+
         print()
-    
+
     # Show evolution stats
     print("📊 Evolution Statistics:")
     stats = integrator.get_evolution_stats()
     for key, value in stats.items():
         print(f"   {key}: {value}")
-    
+
     # Export generated glyphs
     print("\n💾 Exporting generated glyphs...")
     export_result = integrator.export_generated_glyphs('json')

@@ -3,10 +3,10 @@ Streamlit UI for Real-Time Glyph Ingestion Status
 ------------------------------------------------
 Displays live ingestion status, glyph lineage, and resonance shifts.
 """
-import streamlit as st
-import os
 import json
-from datetime import datetime
+import os
+
+import streamlit as st
 
 PROCESSED_DIR = os.path.join(os.path.dirname(__file__), '..', 'deploy', 'processed_glyphs')
 GLYPH_DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'deploy', 'glyphs_db.json')

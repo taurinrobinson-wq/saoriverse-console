@@ -2,15 +2,15 @@
 FirstPerson Chat - Simplified FastAPI Backend for cPanel Testing
 """
 
-from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from datetime import datetime
 import os
+from datetime import datetime
 
 # Load environment variables
 from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
 load_dotenv()
 
 # Initialize FastAPI app
@@ -54,11 +54,11 @@ async def home():
 async def health_check():
     """Health check endpoint"""
     return {
-        "status": "healthy", 
+        "status": "healthy",
         "timestamp": datetime.now().isoformat(),
         "environment_check": {
             "supabase_url": "✓" if SUPABASE_URL else "✗",
-            "supabase_key": "✓" if SUPABASE_KEY else "✗", 
+            "supabase_key": "✓" if SUPABASE_KEY else "✗",
             "supabase_function_url": "✓" if SUPABASE_FUNCTION_URL else "✗"
         },
         "python_version": "3.9.23",
@@ -70,13 +70,13 @@ async def register(register_data: RegisterRequest):
     """User registration endpoint - simplified for testing"""
     if register_data.password != register_data.confirm_password:
         raise HTTPException(status_code=400, detail="Passwords do not match")
-    
+
     if len(register_data.password) < 6:
         raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
-    
+
     # For testing - just return success without actually creating user
     return {
-        "success": True, 
+        "success": True,
         "message": "Registration endpoint is working! (Test mode)",
         "username": register_data.username,
         "environment_vars_loaded": bool(SUPABASE_URL and SUPABASE_KEY and SUPABASE_FUNCTION_URL)

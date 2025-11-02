@@ -1,10 +1,10 @@
-import streamlit as st
-import docx
-import time
-import requests
 import datetime
 import json
-from .auth import SaoynxAuthentication
+import time
+
+import requests
+import streamlit as st
+
 from .doc_export import generate_doc
 
 
@@ -164,10 +164,10 @@ def render_main_app():
         doc_text = st.session_state["uploaded_text"]
         first_line = doc_text.split("\n", 1)[0]
         document_title = "Document" if not first_line else first_line[:60]
-        
+
         st.info(f"📄 Document uploaded: {document_title}")
         st.info("🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
-        
+
         # Basic analysis without dependencies
         document_analysis = {
             "glyphs": [],
@@ -176,17 +176,17 @@ def render_main_app():
             "signals": [],
             "gates": []
         }
-    
+
     # File upload with multiple formats
     uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"])
     if uploaded_file:
         file_text = None
         file_ext = uploaded_file.name.lower().split('.')[-1]
-        
+
         try:
             if file_ext == "txt":
                 file_text = uploaded_file.read().decode("utf-8", errors="ignore")
-                
+
             elif file_ext == "docx":
                 try:
                     from docx import Document
@@ -194,7 +194,7 @@ def render_main_app():
                     file_text = "\n".join([para.text for para in doc.paragraphs])
                 except Exception as e:
                     st.error(f"Error reading Word document: {e}")
-                    
+
             elif file_ext == "pdf":
                 try:
                     import pdfplumber
@@ -202,7 +202,7 @@ def render_main_app():
                         file_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
                 except Exception as e:
                     st.error(f"Error reading PDF document: {e}")
-                    
+
             elif file_ext == "md":
                 try:
                     import markdown
@@ -214,7 +214,7 @@ def render_main_app():
                     file_text = soup.get_text()
                 except Exception as e:
                     st.error(f"Error reading Markdown document: {e}")
-                    
+
             elif file_ext in ["html", "htm"]:
                 try:
                     from bs4 import BeautifulSoup
@@ -223,7 +223,7 @@ def render_main_app():
                     file_text = soup.get_text()
                 except Exception as e:
                     st.error(f"Error reading HTML document: {e}")
-                    
+
             elif file_ext == "csv":
                 try:
                     import pandas as pd
@@ -232,7 +232,7 @@ def render_main_app():
                     file_text = df.to_string(index=False)
                 except Exception as e:
                     st.error(f"Error reading CSV document: {e}")
-                    
+
             elif file_ext in ["xlsx", "xls"]:
                 try:
                     import pandas as pd
@@ -241,7 +241,7 @@ def render_main_app():
                     file_text = df.to_string(index=False)
                 except Exception as e:
                     st.error(f"Error reading Excel document: {e}")
-                    
+
             elif file_ext == "json":
                 try:
                     import json
@@ -251,13 +251,13 @@ def render_main_app():
                     file_text = json.dumps(data, indent=2)
                 except Exception as e:
                     st.error(f"Error reading JSON document: {e}")
-            
+
             if file_text:
                 st.session_state["uploaded_text"] = file_text
                 st.success(f"✅ {file_ext.upper()} document uploaded successfully!")
             else:
                 st.warning(f"Could not extract text from {file_ext.upper()} file")
-                
+
         except Exception as e:
             st.error(f"Error reading document: {e}")
 
@@ -334,7 +334,7 @@ def render_main_app():
                                     response = result.get("reply", "I'm here to listen.")
                                 else:
                                     response = "I'm experiencing some technical difficulties, but I'm still here for you."
-                        except Exception as e:
+                        except Exception:
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
                         from emotional_os.glyphs.signal_parser import parse_input
