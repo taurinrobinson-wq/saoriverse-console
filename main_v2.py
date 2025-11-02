@@ -20,17 +20,14 @@ st.set_page_config(
 )
 
 def main():
-    # Sidebar controls for integrations
-    st.sidebar.markdown("## Integrations")
-    enable_limbic = st.sidebar.checkbox("Enable Limbic-Adjacent Integration", value=st.session_state.get('enable_limbic', False))
-    st.session_state['enable_limbic'] = enable_limbic
-
-    # Initialize limbic engine if requested and available
-    if enable_limbic and HAS_LIMBIC and 'limbic_engine' not in st.session_state:
+    # Initialize limbic engine if available — now enabled by default and not user-toggled
+    st.session_state['enable_limbic'] = True
+    if HAS_LIMBIC and 'limbic_engine' not in st.session_state:
         try:
             st.session_state['limbic_engine'] = LimbicIntegrationEngine()
-            st.sidebar.success("Limbic engine initialized")
+            # note: we intentionally do not expose a toggle to the user
         except Exception as e:
+            # non-fatal: record error in sidebar for visibility
             st.sidebar.error(f"Failed to initialize limbic engine: {e}")
 
     # Initialize authentication
@@ -56,7 +53,7 @@ def main():
             fetch_recent = None
             init_db = None
 
-    # A/B test opt-in
+    # A/B test opt-in (kept in sidebar for experiments, optional)
     participate_ab = st.sidebar.checkbox("Participate in Limbic A/B test", value=st.session_state.get('ab_participate', False))
     st.session_state['ab_participate'] = participate_ab
 
