@@ -98,10 +98,37 @@ class EnhancedSaoriverse:
         else:
             # Fall back to basic API call
             try:
+                # Safety gating: check trauma lexicon before sending limbic cues
+                safety_flag = False
+                try:
+                    import json, os
+                    trauma_path = os.path.join(os.path.dirname(__file__), 'emotional_os', 'safety', 'trauma_lexicon.json')
+                    if os.path.exists(trauma_path):
+                        with open(trauma_path, 'r', encoding='utf-8') as f:
+                            trauma_terms = set(json.load(f))
+                        lowered = message.lower()
+                        for t in trauma_terms:
+                            if t and t.lower() in lowered:
+                                safety_flag = True
+                                break
+                except Exception:
+                    safety_flag = False
+
                 payload = {"message": message}
                 if conversation_context:
                     payload.update(conversation_context)
-                
+
+                limbic_injected = False
+                # If a limbic engine is available and message is safe, compute limbic cues
+                if self.limbic_engine and not safety_flag:
+                    try:
+                        limbic_result = self.limbic_engine.process_emotion_with_limbic_mapping(message)
+                        # Include a compact limbic result for the generator to consume
+                        payload['limbic'] = limbic_result
+                        limbic_injected = True
+                    except Exception:
+                        limbic_injected = False
+
                 response_raw = requests.post(
                     self.basic_function_url, 
                     headers=self.basic_headers, 
@@ -111,7 +138,11 @@ class EnhancedSaoriverse:
                 response_raw.raise_for_status()
                 response = response_raw.json()
                 response['evolution_info'] = {'evolution_triggered': False}
-                
+
+                # If limbic cues were injected, assume server used them to shape generation
+                if limbic_injected:
+                    response['limbic_decorated'] = True
+
             except Exception as e:
                 response = {
                     'reply': f'Error: {e}',
@@ -121,7 +152,8 @@ class EnhancedSaoriverse:
         # --- Limbic decoration (backend-only) ---
         try:
             # Use limbic engine to produce a decorated reply if available and safe
-            if self.limbic_engine and isinstance(response, dict) and 'reply' in response:
+            # Skip post-hoc decoration when limbic cues were already injected into generation
+            if self.limbic_engine and isinstance(response, dict) and 'reply' in response and not response.get('limbic_decorated', False):
                 try:
                     from emotional_os.glyphs.limbic_decorator import decorate_reply
                 except Exception:

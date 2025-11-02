@@ -95,6 +95,27 @@ class EnhancedSaoriverse:
                 response = response_raw.json()
                 response['evolution_info'] = {'evolution_triggered': False}
 
+                # Fallback: if server didn't return parsed_glyphs but we have a limbic engine,
+                # generate glyph candidates locally so the client still surfaces glyphs.
+                try:
+                    if self.limbic_engine and (not response.get('parsed_glyphs')):
+                        # Create local candidates to surface to the UI
+                        candidates = self.limbic_engine.create_neural_glyph_candidates(message)
+                        # Map internal candidate shape to a lightweight parsed glyph summary
+                        parsed = []
+                        for c in candidates[:10]:
+                            parsed.append({
+                                'glyph_name': c.get('glyph_name'),
+                                'glyph': c.get('glyph') or c.get('primary_glyph'),
+                                'emotion': c.get('emotion'),
+                                'system': c.get('system')
+                            })
+                        response['parsed_glyphs'] = parsed
+                        response['glyphs_fallback'] = True
+                except Exception:
+                    # Non-fatal fallback failure — continue with server response
+                    pass
+
             except Exception as e:
                 response = {
                     'reply': f'Error: {e}',
