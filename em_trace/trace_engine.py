@@ -1,6 +1,8 @@
 import json
 from datetime import datetime
+
 from parser.signal_parser import parse_input
+
 
 # Save trace entry to JSON file
 def save_trace_json(trace: dict, logs_dir: str = "logs/") -> None:

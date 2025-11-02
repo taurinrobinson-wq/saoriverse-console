@@ -22,13 +22,12 @@ Outputs:
 
 """
 
-import sqlite3
 import argparse
 import json
-import os
-from pathlib import Path
+import sqlite3
 from difflib import SequenceMatcher
-from typing import List, Dict, Tuple
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 DB_PATH = "emotional_os/glyphs/glyphs.db"
 REPORT_DIR = Path("emotional_os/deploy/consolidation_reports")

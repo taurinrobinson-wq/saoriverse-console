@@ -1,6 +1,6 @@
-from typing import Tuple
-import os
 import json
+import os
+from typing import Tuple
 
 # Lightweight, non-intrusive risk classifier and consent prompt builder
 # This module intentionally does NOT perform any automatic routing or external calls.

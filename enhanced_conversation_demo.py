@@ -1,0 +1,306 @@
+#!/usr/bin/env python3
+"""
+Enhanced Saoriverse Conversation Demo with Auto-Evolving Glyphs
+This replaces your existing conversation_demo.py with glyph evolution capabilities
+"""
+
+import time
+from typing import Dict, Optional
+
+import requests
+
+# Import the evolving glyph system
+try:
+    from evolving_glyph_integrator import EvolvingGlyphIntegrator
+    EVOLUTION_AVAILABLE = True
+except ImportError:
+    print("Evolution system not available - falling back to basic mode")
+    EVOLUTION_AVAILABLE = False
+
+class EnhancedSaoriverse:
+    """Enhanced Saoriverse with auto-evolving glyphs"""
+
+    def __init__(self,
+                 supabase_function_url: str,
+                 supabase_anon_key: str,
+                 supabase_url: str = None,
+                 enable_evolution: bool = True,
+                 limbic_engine=None):
+
+        self.basic_function_url = supabase_function_url
+        self.basic_headers = {
+            'Authorization': f'Bearer {supabase_anon_key}',
+            'Content-Type': 'application/json'
+        }
+
+        # Initialize evolution system if available
+        if EVOLUTION_AVAILABLE and enable_evolution:
+            self.integrator = EvolvingGlyphIntegrator(
+                supabase_function_url=supabase_function_url,
+                supabase_anon_key=supabase_anon_key,
+                supabase_url=supabase_url,
+                enable_auto_evolution=True,
+                evolution_frequency=3  # Check every 3 conversations
+            )
+            self.evolution_enabled = True
+            print("Auto-evolving glyph system enabled!")
+        else:
+            self.integrator = None
+            self.evolution_enabled = False
+            print("Basic conversation mode (no evolution)")
+
+        # Optional limbic engine (backend-only). If provided, it will be used
+        # to decorate baseline replies to sound more companion-like.
+        self.limbic_engine = limbic_engine
+
+    def chat(self, message: str, conversation_context: Optional[Dict] = None) -> Dict:
+        """Enhanced chat method with optional evolution"""
+
+        if self.evolution_enabled and self.integrator:
+            # Use the evolving integrator
+            result = self.integrator.process_conversation_with_evolution(
+                message=message,
+                conversation_context=conversation_context or {}
+            )
+
+            # Extract the basic response for display
+            if result['saori_response']:
+                response = {
+                    'reply': result['saori_response'].reply,
+                    'glyph': result['saori_response'].glyph,
+                    'parsed_glyphs': result['saori_response'].parsed_glyphs,
+                    'evolution_info': {
+                        'evolution_triggered': result['evolution_triggered'],
+                        'new_glyphs_count': len(result['new_glyphs_generated']),
+                        'new_glyphs': result['new_glyphs_generated']
+                    }
+                }
+            else:
+                response = {'reply': 'Connection error', 'evolution_info': {'evolution_triggered': False}}
+
+        else:
+            # Fall back to basic API call
+            try:
+                payload = {"message": message}
+                if conversation_context:
+                    payload.update(conversation_context)
+
+                response_raw = requests.post(
+                    self.basic_function_url,
+                    headers=self.basic_headers,
+                    json=payload,
+                    timeout=30
+                )
+                response_raw.raise_for_status()
+                response = response_raw.json()
+                response['evolution_info'] = {'evolution_triggered': False}
+
+            except Exception as e:
+                response = {
+                    'reply': f'Error: {e}',
+                    'evolution_info': {'evolution_triggered': False}
+                }
+
+        # --- Limbic decoration (backend-only) ---
+        try:
+            # Use limbic engine to produce a decorated reply if available and safe
+            if self.limbic_engine and isinstance(response, dict) and 'reply' in response:
+                try:
+                    from emotional_os.glyphs.limbic_decorator import decorate_reply
+                except Exception:
+                    decorate_reply = None
+
+                # Load simple trauma lexicon to gate decoration
+                safety_flag = False
+                try:
+                    import json
+                    import os
+                    trauma_path = os.path.join(os.path.dirname(__file__), 'emotional_os', 'safety', 'trauma_lexicon.json')
+                    if os.path.exists(trauma_path):
+                        with open(trauma_path, 'r', encoding='utf-8') as f:
+                            trauma_terms = set(json.load(f))
+                        lowered = message.lower()
+                        for t in trauma_terms:
+                            if t and t.lower() in lowered:
+                                safety_flag = True
+                                break
+                except Exception:
+                    safety_flag = False
+
+                if not safety_flag and decorate_reply:
+                    try:
+                        limbic_result = self.limbic_engine.process_emotion_with_limbic_mapping(message)
+                        decorated = decorate_reply(response.get('reply', ''), limbic_result)
+                        response['reply'] = decorated
+                        response['limbic_decorated'] = True
+                    except Exception:
+                        # if decoration fails, return baseline reply
+                        response['limbic_decorated'] = False
+                else:
+                    response['limbic_decorated'] = False
+
+        except Exception:
+            # Keep original response on any unexpected error
+            pass
+
+        return response
+
+    def get_evolution_stats(self) -> Dict:
+        """Get statistics about glyph evolution"""
+        if self.evolution_enabled and self.integrator:
+            return self.integrator.get_evolution_stats()
+        return {'evolution_enabled': False}
+
+def interactive_demo():
+    """Interactive demo with evolving glyphs"""
+
+    print("Enhanced Saoriverse Console with Auto-Evolving Glyphs")
+    print("=" * 60)
+    print()
+
+    # Configuration (replace with your actual values)
+    SUPABASE_FUNCTION_URL = "https://your-project.supabase.co/functions/v1/saori-fixed"
+    SUPABASE_ANON_KEY = "your-anon-key-here"
+    SUPABASE_URL = "https://your-project.supabase.co"
+
+    # Initialize enhanced saoriverse
+    saori = EnhancedSaoriverse(
+        supabase_function_url=SUPABASE_FUNCTION_URL,
+        supabase_anon_key=SUPABASE_ANON_KEY,
+        supabase_url=SUPABASE_URL,
+        enable_evolution=True
+    )
+
+    print("Type 'quit' to exit, 'stats' to see evolution statistics")
+    print("Try expressing complex emotions to trigger glyph evolution!")
+    print("-" * 60)
+
+    conversation_count = 0
+
+    while True:
+        try:
+            user_input = input("\nYou: ").strip()
+
+            if user_input.lower() in ['quit', 'exit', 'q']:
+                break
+            if user_input.lower() == 'stats':
+                stats = saori.get_evolution_stats()
+                print("\n📊 Evolution Statistics:")
+                for key, value in stats.items():
+                    print(f"   {key}: {value}")
+                continue
+            if not user_input:
+                continue
+
+            conversation_count += 1
+
+            # Process the message
+            print("\nSaori: ", end="", flush=True)
+
+            result = saori.chat(
+                message=user_input,
+                conversation_context={
+                    'conversation_id': conversation_count,
+                    'timestamp': time.time()
+                }
+            )
+
+            # Display the response
+            print(result.get('reply', 'No response'))
+
+            # Show evolution info if available
+            evolution_info = result.get('evolution_info', {})
+            if evolution_info.get('evolution_triggered'):
+                print("\n🧬 Evolution Check Triggered!")
+                new_glyphs_count = evolution_info.get('new_glyphs_count', 0)
+                if new_glyphs_count > 0:
+                    print(f"✨ Generated {new_glyphs_count} new glyphs:")
+                    for glyph in evolution_info.get('new_glyphs', []):
+                        print(f"   • {glyph['tag_name']} ({glyph['glyph']})")
+                else:
+                    print("   No new glyphs needed - existing patterns cover this")
+
+            # Show parsed glyphs if available
+            if 'parsed_glyphs' in result and result['parsed_glyphs']:
+                print(f"\n🔮 Activated Glyphs: {', '.join([g.get('glyph_name', 'Unknown') for g in result['parsed_glyphs']])}")
+
+        except KeyboardInterrupt:
+            break
+        except Exception as e:
+            print(f"\nError: {e}")
+
+    print("\n🎉 Thanks for exploring the evolving Saoriverse!")
+
+    # Final stats
+    final_stats = saori.get_evolution_stats()
+    if final_stats.get('evolution_enabled'):
+        print("\n📊 Final Evolution Statistics:")
+        for key, value in final_stats.items():
+            print(f"   {key}: {value}")
+
+def batch_evolution_test():
+    """Test batch processing of conversations to see evolution in action"""
+
+    print("🧪 Batch Evolution Test")
+    print("=" * 30)
+
+    # Sample conversations designed to trigger evolution
+    test_conversations = [
+        "I'm feeling this profound mixture of joy and sorrow, like watching a sunset that breaks your heart with beauty.",
+        "There's this sacred ache when I think about deep connection - not painful, but a gentle yearning that flows like water.",
+        "I experience this intense clarity mixed with overwhelming confusion, like seeing truth through a fractured lens.",
+        "Sometimes I feel this contained wildness - like having a storm inside a sacred vessel, powerful but held.",
+        "I'm touched by this quiet celebration mixed with deep reverence, like joy that doesn't need to perform.",
+        "This flowing stillness moves through me - not static, but dynamically peaceful, like a deep silent river.",
+        "I feel this expansive vulnerability - not weakness, but strength that opens like a flower toward sunlight."
+    ]
+
+    # Configuration (replace with your actual values)
+    SUPABASE_FUNCTION_URL = "https://your-project.supabase.co/functions/v1/saori-fixed"
+    SUPABASE_ANON_KEY = "your-anon-key-here"
+    SUPABASE_URL = "https://your-project.supabase.co"
+
+    saori = EnhancedSaoriverse(
+        supabase_function_url=SUPABASE_FUNCTION_URL,
+        supabase_anon_key=SUPABASE_ANON_KEY,
+        supabase_url=SUPABASE_URL,
+        enable_evolution=True
+    )
+
+    total_new_glyphs = 0
+
+    for i, conversation in enumerate(test_conversations, 1):
+        print(f"\n--- Processing Conversation {i} ---")
+        print(f"Input: {conversation}")
+
+        result = saori.chat(
+            message=conversation,
+            conversation_context={'test_id': i}
+        )
+
+        print(f"Response: {result.get('reply', 'No response')[:100]}...")
+
+        evolution_info = result.get('evolution_info', {})
+        if evolution_info.get('evolution_triggered'):
+            new_count = evolution_info.get('new_glyphs_count', 0)
+            total_new_glyphs += new_count
+            print(f"🧬 Evolution: Generated {new_count} new glyphs")
+        else:
+            print("🧬 Evolution: Not triggered")
+
+    print("\n🎉 Batch test complete!")
+    print(f"   Total new glyphs generated: {total_new_glyphs}")
+
+    final_stats = saori.get_evolution_stats()
+    if final_stats.get('evolution_enabled'):
+        print("\n📊 Final Statistics:")
+        for key, value in final_stats.items():
+            print(f"   {key}: {value}")
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) > 1 and sys.argv[1] == "batch":
+        batch_evolution_test()
+    else:
+        interactive_demo()

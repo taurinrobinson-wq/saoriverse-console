@@ -1,8 +1,9 @@
-import streamlit as st
-from emotional_os.parser.signal_parser import parse_input
-
 import datetime
 import random
+
+import streamlit as st
+
+from emotional_os.parser.signal_parser import parse_input
 
 st.set_page_config(page_title="Emotional OS", layout="centered")
 
@@ -48,11 +49,11 @@ st.markdown("""
 def get_conversational_prompt():
     """Generate contextual prompts based on conversation history and depth"""
     depth = st.session_state.conversation_depth
-    
+
     if depth == 0:
         prompts = [
             "What are you feeling right now?",
-            "What's moving through you today?", 
+            "What's moving through you today?",
             "How is your inner landscape?",
             "What wants to be witnessed?"
         ]
@@ -70,7 +71,7 @@ def get_conversational_prompt():
             "How does this connect to what you shared before?",
             "What wants to unfold next?"
         ]
-    
+
     return random.choice(prompts)
 
 def get_follow_up_question(result):
@@ -86,7 +87,7 @@ def get_follow_up_question(result):
             themes.append("joy")
         elif any(k in name for k in ["boundary", "contain", "still"]):
             themes.append("protection")
-    
+
     questions = {
         "grief": [
             "What are you grieving? Would you like to say more about what you've lost?",
@@ -95,7 +96,7 @@ def get_follow_up_question(result):
         ],
         "longing": [
             "What is this ache pointing toward?",
-            "What are you yearning for that feels just out of reach?", 
+            "What are you yearning for that feels just out of reach?",
             "When did you first notice this recursive pattern?"
         ],
         "joy": [
@@ -109,7 +110,7 @@ def get_follow_up_question(result):
             "What does this containment serve?"
         ]
     }
-    
+
     if themes:
         theme = themes[0]  # Take the first detected theme
         return random.choice(questions.get(theme, [
@@ -117,7 +118,7 @@ def get_follow_up_question(result):
             "How does this feel in your body right now?",
             "What would it look like to go deeper with this feeling?"
         ]))
-    
+
     return "What else is present for you right now?"
 
 st.title("🕯 Emotional OS")
@@ -125,10 +126,10 @@ st.title("🕯 Emotional OS")
 # Display conversation history
 if st.session_state.conversation_history:
     st.markdown("### Our Conversation")
-    
+
     for i, entry in enumerate(st.session_state.conversation_history[-3:]):  # Show last 3 exchanges
         timestamp = entry['timestamp'].strftime("%H:%M")
-        
+
         # User input
         st.markdown(f"""
         <div class="conversation-bubble user-bubble">
@@ -136,7 +137,7 @@ if st.session_state.conversation_history:
             {entry['input']}
         </div>
         """, unsafe_allow_html=True)
-        
+
         # System response
         st.markdown(f"""
         <div class="conversation-bubble">
@@ -144,7 +145,7 @@ if st.session_state.conversation_history:
             {entry['response']}
         </div>
         """, unsafe_allow_html=True)
-    
+
     if len(st.session_state.conversation_history) > 3:
         if st.button("🔍 Show full conversation history"):
             for entry in st.session_state.conversation_history:
@@ -160,7 +161,7 @@ current_prompt = get_conversational_prompt()
 st.markdown("### " + ("Continue..." if st.session_state.conversation_depth > 0 else "Begin"))
 
 input_text = st.text_area(
-    current_prompt, 
+    current_prompt,
     height=120,
     key="current_input",
     placeholder="Speak plainly. The system will reflect back what it hears..."
@@ -193,9 +194,9 @@ if trace_button and input_text.strip():
         'depth': st.session_state.conversation_depth,
         'history': st.session_state.conversation_history
     }
-    
+
     result = parse_input(input_text, "parser/signal_lexicon.json")
-    
+
     # Add to conversation history
     st.session_state.conversation_history.append({
         'timestamp': datetime.datetime.now(),
@@ -203,17 +204,17 @@ if trace_button and input_text.strip():
         'response': result["voltage_response"],
         'glyphs': result["glyphs"]
     })
-    
+
     st.session_state.conversation_depth += 1
-    
+
     # Display current response
     st.markdown("### 💬 Response")
     st.markdown(f"*{result['voltage_response']}*")
-    
+
     # Generate and display follow-up question
     follow_up = get_follow_up_question(result)
     st.markdown(f"**{follow_up}**")
-    
+
     # Expandable glyph details
     with st.expander(f"🔮 Activated Glyphs ({len(result['glyphs'])} found)"):
         if result["glyphs"]:
@@ -221,7 +222,7 @@ if trace_button and input_text.strip():
                 st.markdown(f"**{glyph['glyph_name']}** — *{glyph['gate']}*  \n{glyph['description']}")
         else:
             st.markdown("*No specific glyphs activated - this might be a moment of quiet or transition.*")
-    
+
     # Show detected signals for transparency
     with st.expander("⚡ Signal Analysis"):
         if result["signals"]:

@@ -3,14 +3,14 @@ FirstPerson Admin Portal - FastAPI Router
 Comprehensive admin interface for system management
 """
 
-from fastapi import APIRouter, HTTPException, Depends, Request, Form
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, RedirectResponse
-from pydantic import BaseModel
-from datetime import datetime, timedelta
-import hashlib
-import secrets
 import os
+import secrets
+from datetime import datetime, timedelta
+
+from fastapi import APIRouter, Depends, Form, HTTPException, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 
 # Admin router
 admin_router = APIRouter(prefix="/admin", tags=["admin"])
@@ -52,12 +52,12 @@ def verify_admin_session(token: str) -> bool:
     """Verify admin session token"""
     if token not in admin_sessions:
         return False
-    
+
     session = admin_sessions[token]
     if datetime.now() > session["expires"]:
         del admin_sessions[token]
         return False
-    
+
     return True
 
 def get_admin_session(request: Request) -> dict:
@@ -86,16 +86,15 @@ async def admin_login_post(request: Request, username: str = Form(), password: s
         response = RedirectResponse(url="/admin/dashboard", status_code=302)
         response.set_cookie(key="admin_token", value=token, httponly=True, max_age=86400)
         return response
-    else:
-        return templates.TemplateResponse("admin_login.html", {
-            "request": request, 
-            "error": "Invalid credentials"
-        })
+    return templates.TemplateResponse("admin_login.html", {
+        "request": request,
+        "error": "Invalid credentials"
+    })
 
 @admin_router.get("/dashboard", response_class=HTMLResponse)
 async def admin_dashboard(request: Request, session: dict = Depends(get_admin_session)):
     """Admin dashboard"""
-    
+
     # Mock system stats (replace with real data)
     system_stats = {
         "total_users": 42,
@@ -105,19 +104,19 @@ async def admin_dashboard(request: Request, session: dict = Depends(get_admin_se
         "avg_response_time": "2.3s",
         "error_rate": "0.1%"
     }
-    
+
     # Mock recent activity
     recent_activity = [
         {
             "timestamp": "2025-10-15 14:30:15",
-            "type": "user_login", 
+            "type": "user_login",
             "user": "demo_user",
             "description": "User logged in via demo mode"
         },
         {
             "timestamp": "2025-10-15 14:25:42",
             "type": "conversation",
-            "user": "john_doe", 
+            "user": "john_doe",
             "description": "Started new conversation about stress management"
         },
         {
@@ -127,7 +126,7 @@ async def admin_dashboard(request: Request, session: dict = Depends(get_admin_se
             "description": "New user registered"
         }
     ]
-    
+
     return templates.TemplateResponse("admin_dashboard.html", {
         "request": request,
         "session": session,
@@ -138,7 +137,7 @@ async def admin_dashboard(request: Request, session: dict = Depends(get_admin_se
 @admin_router.get("/users", response_class=HTMLResponse)
 async def admin_users(request: Request, session: dict = Depends(get_admin_session)):
     """User management"""
-    
+
     # Mock user data (replace with Supabase queries)
     users = [
         {
@@ -152,7 +151,7 @@ async def admin_users(request: Request, session: dict = Depends(get_admin_sessio
         },
         {
             "id": 2,
-            "username": "john_doe", 
+            "username": "john_doe",
             "email": "john@example.com",
             "created_at": "2025-10-14",
             "last_active": "2025-10-15 14:25:42",
@@ -162,14 +161,14 @@ async def admin_users(request: Request, session: dict = Depends(get_admin_sessio
         {
             "id": 3,
             "username": "sarah_m",
-            "email": "sarah@example.com", 
+            "email": "sarah@example.com",
             "created_at": "2025-10-15",
             "last_active": "2025-10-15 14:20:33",
             "total_conversations": 1,
             "status": "active"
         }
     ]
-    
+
     return templates.TemplateResponse("admin_users.html", {
         "request": request,
         "session": session,
@@ -179,7 +178,7 @@ async def admin_users(request: Request, session: dict = Depends(get_admin_sessio
 @admin_router.get("/system", response_class=HTMLResponse)
 async def admin_system(request: Request, session: dict = Depends(get_admin_session)):
     """System monitoring"""
-    
+
     # Mock system metrics
     metrics = {
         "cpu_usage": 45.2,
@@ -194,13 +193,13 @@ async def admin_system(request: Request, session: dict = Depends(get_admin_sessi
                 "message": "High response time detected for Supabase query"
             },
             {
-                "timestamp": "2025-10-15 14:15:22", 
+                "timestamp": "2025-10-15 14:15:22",
                 "level": "INFO",
                 "message": "New deployment successful"
             }
         ]
     }
-    
+
     return templates.TemplateResponse("admin_system.html", {
         "request": request,
         "session": session,
@@ -210,7 +209,7 @@ async def admin_system(request: Request, session: dict = Depends(get_admin_sessi
 @admin_router.get("/settings", response_class=HTMLResponse)
 async def admin_settings(request: Request, session: dict = Depends(get_admin_session)):
     """System settings"""
-    
+
     # Mock configuration settings
     settings = {
         "ai_processing_mode": "hybrid",
@@ -220,7 +219,7 @@ async def admin_settings(request: Request, session: dict = Depends(get_admin_ses
         "enable_demo_mode": True,
         "maintenance_mode": False
     }
-    
+
     return templates.TemplateResponse("admin_settings.html", {
         "request": request,
         "session": session,
@@ -233,7 +232,7 @@ async def admin_logout(request: Request):
     token = request.cookies.get("admin_token")
     if token and token in admin_sessions:
         del admin_sessions[token]
-    
+
     response = RedirectResponse(url="/admin/", status_code=302)
     response.delete_cookie("admin_token")
     return response
