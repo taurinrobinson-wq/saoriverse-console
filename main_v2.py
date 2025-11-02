@@ -22,7 +22,7 @@ st.set_page_config(
 def main():
     # Initialize limbic engine if available — now enabled by default and not user-toggled
     st.session_state['enable_limbic'] = True
-    if HAS_LIMBIC and 'limbic_engine' not in st.session_state:
+    if HAS_LIMBIC and LimbicIntegrationEngine is not None and 'limbic_engine' not in st.session_state:
         try:
             st.session_state['limbic_engine'] = LimbicIntegrationEngine()
             # note: we intentionally do not expose a toggle to the user
@@ -53,43 +53,59 @@ def main():
             fetch_recent = None
             init_db = None
 
-    # Sidebar: Conversation history (replace demo panel)
+    # Sidebar: Privacy & Storage (friendlier UX)
     st.sidebar.markdown("---")
-    # Optional persistence toggle (opt-in)
-    persist_history = st.sidebar.checkbox(
-        "Persist history to Supabase (opt-in)",
-        value=st.session_state.get('persist_history', False),
-        help="When enabled, new messages will be stored in your Supabase project's `conversation_history` table."
-    )
+    with st.sidebar.expander("Privacy & Storage", expanded=False):
+        status_on = bool(st.session_state.get('persist_history', False) and st.session_state.get('persist_confirmed', False))
+        status_chip = "🟢 On" if status_on else "⚪ Off"
+        st.markdown(f"**Status:** {status_chip}")
 
-    # Consent flow: require explicit confirmation
-    if persist_history and not st.session_state.get('persist_confirmed', False):
-        st.sidebar.markdown("**Confirm consent**: Persisting messages off-device stores your message content on your Supabase project. Do you consent to this for this account?")
-        if st.sidebar.button("Confirm persist"):
-            st.session_state['persist_confirmed'] = True
-            st.session_state['persist_history'] = True
-            st.rerun()
-        if st.sidebar.button("Cancel"):
-            st.session_state['persist_confirmed'] = False
-            st.session_state['persist_history'] = False
-            st.rerun()
-    else:
-        st.session_state['persist_history'] = bool(persist_history and st.session_state.get('persist_confirmed', False))
-
-    # Provide a short explanation and quick link/details for data stored and how to delete it
-    with st.sidebar.expander("What is stored & how to delete it", expanded=False):
-        st.markdown(
-            "When you opt in to persist conversation history, the following fields are stored in your Supabase project under the `conversation_history` table:\n\n" \
-            "• user_id — your local identifier (text)\n" \
-            "• username — your display name (text)\n" \
-            "• user_message — the message you submitted (text)\n" \
-            "• assistant_reply — the model's response (text)\n" \
-            "• processing_time — how long the message took to process (text)\n" \
-            "• mode — processing mode used (e.g. hybrid/local/ai_preferred)\n" \
-            "• timestamp — server timestamp when the row was created\n\n"
+        enable_toggle = st.checkbox(
+            "Store my chats to my Supabase",
+            value=status_on,
+            help="When enabled, new messages will be saved to your own Supabase project (you control the data)."
         )
-        st.markdown("To delete your stored messages from the server: enable the persistence consent, then use the 'Clear Server History' button in the sidebar. This performs a best-effort delete via the Supabase REST API and will remove rows matching your `user_id`.")
-        st.markdown("I've also included an example SQL DDL in `sql/create_conversation_history_tables.sql` that shows a recommended table schema plus a `conversation_deletion_audit` table to record deletion requests.")
+
+        if enable_toggle and not st.session_state.get('persist_confirmed', False):
+            st.info("To enable storage, please confirm that you're okay with saving your chats to your Supabase project.")
+            c1, c2 = st.columns([1, 1])
+            with c1:
+                if st.button("I consent"):
+                    st.session_state['persist_confirmed'] = True
+                    st.session_state['persist_history'] = True
+                    st.rerun()
+            with c2:
+                if st.button("Not now"):
+                    st.session_state['persist_confirmed'] = False
+                    st.session_state['persist_history'] = False
+                    st.rerun()
+        else:
+            st.session_state['persist_history'] = bool(enable_toggle and st.session_state.get('persist_confirmed', False))
+
+        st.caption("Stored fields: user_id, username, your message, assistant reply, processing time, mode, timestamp.")
+
+        # Group server-side deletion under the same expander
+        if st.session_state.get('persist_confirmed', False) and st.session_state.get('user_id'):
+            if not st.session_state.get('clear_server_history_pending'):
+                if st.button('Delete my server history'):
+                    st.session_state['clear_server_history_pending'] = True
+                    st.rerun()
+            else:
+                st.warning('This will permanently delete your persisted messages for your account.')
+                col_a, col_b = st.columns([1, 1])
+                with col_a:
+                    if st.button('Confirm delete'):
+                        success, msg = delete_user_history_from_supabase(str(st.session_state.get('user_id', '')))
+                        if success:
+                            st.success('Server-side history deleted.')
+                        else:
+                            st.error(f'Failed to delete server history: {msg}')
+                        st.session_state['clear_server_history_pending'] = False
+                        st.rerun()
+                with col_b:
+                    if st.button('Cancel'):
+                        st.session_state['clear_server_history_pending'] = False
+                        st.rerun()
     st.sidebar.markdown("### Conversation History")
     # Use a per-user conversation history key that matches the main UI
     conversation_key = f"conversation_history_{st.session_state.get('user_id', 'anonymous')}"
@@ -130,25 +146,6 @@ def main():
             st.sidebar.download_button('Download JSON', _json.dumps(st.session_state[conversation_key], indent=2), file_name=f'history_{st.session_state.get("user_id","anon")}.json')
         except Exception:
             st.sidebar.error('Failed to prepare history download')
-    # Server-side clear (consent required)
-    if st.session_state.get('persist_confirmed', False) and st.session_state.get('user_id'):
-        if st.sidebar.button('Clear Server History'):
-            st.session_state['clear_server_history_pending'] = True
-            st.rerun()
-
-        if st.session_state.get('clear_server_history_pending'):
-            st.sidebar.markdown('**Confirm server-side deletion of your persisted conversation history**')
-            if st.sidebar.button('Confirm Delete Server History'):
-                success, msg = delete_user_history_from_supabase(st.session_state.get('user_id'))
-                if success:
-                    st.sidebar.success('Server-side history deleted.')
-                else:
-                    st.sidebar.error(f'Failed to delete server history: {msg}')
-                st.session_state['clear_server_history_pending'] = False
-                st.rerun()
-            if st.sidebar.button('Cancel Delete'):
-                st.session_state['clear_server_history_pending'] = False
-                st.rerun()
     # Check if user is authenticated
     if st.session_state.get('authenticated', False):
         render_main_app()
