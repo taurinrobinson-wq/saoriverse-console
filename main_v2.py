@@ -130,15 +130,6 @@ def main():
             st.sidebar.download_button('Download JSON', _json.dumps(st.session_state[conversation_key], indent=2), file_name=f'history_{st.session_state.get("user_id","anon")}.json')
         except Exception:
             st.sidebar.error('Failed to prepare history download')
-    # Allow the user to declare which emotional states they'd like the system to actively capture
-    default_emotions = ["joy", "sadness", "anger", "fear", "surprise", "disgust", "trust", "anticipation"]
-    captured = st.sidebar.multiselect(
-        "Capture emotional states (rollout)",
-        default_emotions,
-        default=st.session_state.get('captured_emotions', default_emotions),
-        help="Select the emotional states you want the limbic system to actively capture and map."
-    )
-    st.session_state['captured_emotions'] = captured
     # Server-side clear (consent required)
     if st.session_state.get('persist_confirmed', False) and st.session_state.get('user_id'):
         if st.sidebar.button('Clear Server History'):
