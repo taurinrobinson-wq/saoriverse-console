@@ -10,6 +10,7 @@ import csv
 import json
 from collections import defaultdict
 
+
 def load_glyph_lexicon_from_csv(csv_path: str) -> dict:
     """Load glyph definitions from CSV file"""
     glyphs = {}

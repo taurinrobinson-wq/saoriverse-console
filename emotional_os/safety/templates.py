@@ -1,5 +1,6 @@
 from typing import Optional
 
+
 class SanctuaryTemplates:
     """Pre-approved compassionate responses for Sanctuary Mode."""
 

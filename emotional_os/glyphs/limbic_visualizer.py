@@ -9,25 +9,22 @@ across the glyph-encoded systems (Lightpath, Threshold, VELONIX, Velinor, Saonyx
 This demonstrates the chiasmus - the nervous system composing rather than reacting.
 """
 
-import json
 import os
-from typing import Dict, List, Any
+from typing import Dict
 
 # Import from local module
 try:
     from limbic_adjacent_system import (
         LimbicAdjacentSystem,
         SystemType,
-        get_limbic_system
+        get_limbic_system,
     )
 except ImportError:
     # Fallback for when run from different directory
     import sys
     sys.path.append(os.path.dirname(__file__))
     from limbic_adjacent_system import (
-        LimbicAdjacentSystem,
-        SystemType,
-        get_limbic_system
+        get_limbic_system,
     )
 
 
@@ -100,7 +97,7 @@ GLYPH SEQUENCES BY SYSTEM:
             diagram += f"""
 {system_type.value.upper():>12}: {glyph_sequence}"""
 
-        diagram += f"""
+        diagram += """
 
 RITUAL MAPPINGS:
 """
@@ -194,7 +191,7 @@ HARMONIC INTERACTIONS:
                     diagram += f"""
 {system1.value[:3].upper()}+{system2.value[:3].upper()}: {sig1['glyph']}{sig2['glyph']} {sig1['signal']} × {sig2['signal']}"""
 
-        diagram += f"""
+        diagram += """
 
 INDIVIDUAL CONTRIBUTIONS:
 """
@@ -202,7 +199,7 @@ INDIVIDUAL CONTRIBUTIONS:
             diagram += f"""
 {system_type.value.upper():>12}: {signal_data['glyph']} {signal_data['signal']}"""
 
-        diagram += f"""
+        diagram += """
 
 🎼 The five systems create emotional harmony through coordinated signaling.
    Each system contributes its unique resonance to the emotional symphony.

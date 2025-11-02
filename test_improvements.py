@@ -23,12 +23,12 @@ glyphs_none = 0
 for msg in test_messages:
     result = parse_input(msg, 'emotional_os/parser/signal_lexicon.json', 'emotional_os/glyphs/glyphs.db')
     glyph = result['best_glyph']['glyph_name'] if result['best_glyph'] else 'None'
-    
+
     if glyph != 'None':
         glyphs_found += 1
     else:
         glyphs_none += 1
-    
+
     print(f"\n📝 Message: {msg}")
     print(f"✨ Glyph: {glyph}")
     print(f"💬 Response: {result['voltage_response'][:100]}...")

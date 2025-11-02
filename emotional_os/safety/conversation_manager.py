@@ -1,9 +1,9 @@
-from typing import Optional, Dict
 from datetime import datetime
+from typing import Dict, Optional
 
 from .sanctuary_handler import (
-    classify_risk,
     build_consent_prompt,
+    classify_risk,
     handle_consent_reply,
     make_privacy_safe_log,
 )

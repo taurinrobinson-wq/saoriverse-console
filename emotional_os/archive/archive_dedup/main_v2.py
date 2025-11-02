@@ -23,7 +23,6 @@ def generate_doc(date, time, event, mood, reflections, insights):
 
 import streamlit as st
 from modules.auth import SaoynxAuthentication
-from modules.doc_export import generate_doc
 from modules.ui import render_splash_interface, render_main_app
 
 # Page configuration

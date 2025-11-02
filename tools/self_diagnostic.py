@@ -21,11 +21,10 @@ Design notes:
 """
 
 import argparse
-import subprocess
 import re
+import subprocess
 import sys
 from pathlib import Path
-
 
 RE_ABSOLUTE_PATH_UNIX = re.compile(r"/Users/[\w\-_/\.]+")
 RE_CHDIR_CALL = re.compile(r"os\.chdir\(([^)]+)\)")

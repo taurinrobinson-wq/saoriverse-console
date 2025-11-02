@@ -7,7 +7,6 @@ to your existing Saoriverse conversation flow
 
 import os
 import sys
-from typing import Dict, Optional
 
 # Add the current directory to the path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -16,7 +15,7 @@ def create_enhanced_conversation_demo():
     """
     Enhanced version of your conversation_demo.py that includes auto-evolving glyphs
     """
-    
+
     enhanced_demo_code = '''#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -214,16 +213,16 @@ def interactive_demo():
 if __name__ == "__main__":
     interactive_demo()
 '''
-    
+
     # Write the enhanced demo to a file
     with open('enhanced_conversation_demo.py', 'w') as f:
         f.write(enhanced_demo_code)
-    
+
     print("Created enhanced_conversation_demo.py")
 
 def create_quick_setup_guide():
     """Create a quick setup guide"""
-    
+
     setup_guide = '''# Quick Setup Guide: Auto-Evolving Glyphs
 
 ## Getting Started
@@ -289,22 +288,22 @@ result = integrator.process_conversation_with_evolution(message="user input")
 
 Your emotional OS will now continuously evolve and become more sophisticated!
 '''
-    
+
     with open('SETUP_EVOLVING_GLYPHS.md', 'w') as f:
         f.write(setup_guide)
-    
+
     print("Created SETUP_EVOLVING_GLYPHS.md - your quick setup guide!")
 
 if __name__ == "__main__":
     print("Creating integration examples and setup guides...")
-    
+
     create_enhanced_conversation_demo()
     create_quick_setup_guide()
-    
+
     print("\\nIntegration files created:")
     print("   - enhanced_conversation_demo.py (replaces your existing demo)")
     print("   - SETUP_EVOLVING_GLYPHS.md (setup guide)")
     print("   - config_template.py (configuration template)")
-    
+
     print("\\nYour auto-evolving glyph system is ready!")
     print("   Follow the setup guide to integrate with your Saoriverse system.")

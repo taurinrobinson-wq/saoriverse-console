@@ -2,8 +2,9 @@
 """
 Railway Diagnostics - Check for startup issues
 """
-import sys
 import os
+import sys
+
 
 def main():
     print("🔍 RAILWAY DIAGNOSTICS - Starting checks...\n")
@@ -50,7 +51,7 @@ def main():
     try:
         print("  Checking main_v2.py imports...")
         import streamlit as st  # noqa: F401
-        print(f"    ✓ streamlit imported")
+        print("    ✓ streamlit imported")
         print("    ✓ Basic imports successful")
     except Exception as e:
         print(f"    ✗ Error: {e}")

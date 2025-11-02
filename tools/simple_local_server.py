@@ -5,11 +5,8 @@ Simple local server for Emotional OS testing
 No external dependencies required - uses only built-in Python modules
 """
 
-import json
-import datetime
-from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-import urlparse
-import cgi
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+
 
 class EmotionalOSHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -17,7 +14,7 @@ class EmotionalOSHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-            
+
             html = """
             <!DOCTYPE html>
             <html>
@@ -199,7 +196,7 @@ Analyzed your emotional patterns for new glyph opportunities. The system is lear
             </body>
             </html>
             """
-            
+
             self.wfile.write(html)
         else:
             self.send_response(404)
@@ -212,7 +209,7 @@ def run_server(port=8080):
     print("🌐 Open your browser and go to: http://localhost:" + str(port))
     print("🧬 Evolution system demo ready!")
     print("⏹️  Press Ctrl+C to stop")
-    
+
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
