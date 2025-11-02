@@ -229,78 +229,6 @@ def render_main_app():
                     st.error(f"Error reading HTML document: {e}")
 
             elif file_ext == "csv":
-
-
-    def delete_user_history_from_supabase(user_id: str):
-        """Best-effort delete of conversation history rows for a given user_id in Supabase.
-
-        Returns (success: bool, message: str)
-        """
-        try:
-            if not user_id:
-                return False, "No user_id provided"
-            sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
-            supabase_url = sup_cfg.get('url') or sup_cfg.get('saori_url') or sup_cfg.get('saori_function_url')
-            supabase_key = sup_cfg.get('key') or sup_cfg.get('anon_key') or sup_cfg.get('apikey')
-            if not supabase_url or not supabase_key:
-                return False, "Supabase credentials not configured"
-
-            if supabase_url.endswith('/'):
-                supabase_url = supabase_url.rstrip('/')
-
-            if '/functions/' in supabase_url:
-                base_url = supabase_url.split('/functions/')[0]
-            elif supabase_url.startswith('https://') and '.supabase.' in supabase_url:
-                # derive base from host
-                host = supabase_url.split('/')[2]
-                base_url = f"https://{host}"
-            else:
-                base_url = supabase_url
-
-            rest_url = f"{base_url}/rest/v1/conversation_history"
-            import urllib.parse
-            encoded = urllib.parse.quote(str(user_id), safe='')
-            delete_url = f"{rest_url}?user_id=eq.{encoded}"
-            headers = {
-                'apikey': supabase_key,
-                'Authorization': f'Bearer {supabase_key}'
-            }
-            resp = requests.delete(delete_url, headers=headers, timeout=10)
-            success = resp.status_code in (200, 204)
-            # Attempt to write a deletion audit row (best-effort, non-blocking)
-            try:
-                audit_url = f"{base_url}/rest/v1/conversation_deletion_audit"
-                audit_headers = {
-                    'Content-Type': 'application/json',
-                    'apikey': supabase_key,
-                    'Authorization': f'Bearer {supabase_key}',
-                    'Prefer': 'return=representation'
-                }
-                audit_payload = [
-                    {
-                        'user_id': user_id,
-                        'requested_by': st.session_state.get('user_id') if 'user_id' in st.session_state else None,
-                        'method': 'user-requested-via-ui',
-                        'details': {
-                            'delete_status': resp.status_code,
-                            'delete_text': resp.text if hasattr(resp, 'text') else None
-                        }
-                    }
-                ]
-                try:
-                    requests.post(audit_url, headers=audit_headers, json=audit_payload, timeout=6)
-                except Exception:
-                    # swallow audit failures
-                    pass
-            except Exception:
-                pass
-
-            if success:
-                return True, 'Deleted server-side history successfully.'
-            else:
-                return False, f'Supabase delete returned {resp.status_code}: {resp.text}'
-        except Exception as e:
-            return False, str(e)
                 try:
                     import pandas as pd
                     df = pd.read_csv(uploaded_file)
@@ -646,3 +574,73 @@ def render_main_app():
             st.rerun()
         else:
             st.info("You can continue adding to this log.")
+
+
+def delete_user_history_from_supabase(user_id: str):
+    """Best-effort delete of conversation history rows for a given user_id in Supabase.
+
+    Returns a tuple: (success: bool, message: str)
+    """
+    try:
+        if not user_id:
+            return False, "No user_id provided"
+
+        sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
+        supabase_url = sup_cfg.get('url') or sup_cfg.get('saori_url') or sup_cfg.get('saori_function_url')
+        supabase_key = sup_cfg.get('key') or sup_cfg.get('anon_key') or sup_cfg.get('apikey')
+        if not supabase_url or not supabase_key:
+            return False, "Supabase credentials not configured"
+
+        # Normalize base URL
+        if supabase_url.endswith('/'):
+            supabase_url = supabase_url.rstrip('/')
+        if '/functions/' in supabase_url:
+            base_url = supabase_url.split('/functions/')[0]
+        elif supabase_url.startswith('https://') and '.supabase.' in supabase_url:
+            # Derive base from host
+            host = supabase_url.split('/')[2]
+            base_url = f"https://{host}"
+        else:
+            base_url = supabase_url
+
+        # Perform REST delete on conversation_history
+        import urllib.parse
+        encoded = urllib.parse.quote(str(user_id), safe='')
+        rest_url = f"{base_url}/rest/v1/conversation_history"
+        delete_url = f"{rest_url}?user_id=eq.{encoded}"
+        headers = {
+            'apikey': supabase_key,
+            'Authorization': f'Bearer {supabase_key}'
+        }
+        resp = requests.delete(delete_url, headers=headers, timeout=10)
+        success = resp.status_code in (200, 204)
+
+        # Attempt to write a deletion audit row (best-effort)
+        try:
+            audit_url = f"{base_url}/rest/v1/conversation_deletion_audit"
+            audit_headers = {
+                'Content-Type': 'application/json',
+                'apikey': supabase_key,
+                'Authorization': f'Bearer {supabase_key}',
+                'Prefer': 'return=representation'
+            }
+            audit_payload = [{
+                'user_id': user_id,
+                'requested_by': st.session_state.get('user_id') if 'user_id' in st.session_state else None,
+                'method': 'user-requested-via-ui',
+                'details': {
+                    'delete_status': getattr(resp, 'status_code', None),
+                    'delete_text': getattr(resp, 'text', None)
+                }
+            }]
+            requests.post(audit_url, headers=audit_headers, json=audit_payload, timeout=6)
+        except Exception:
+            # Swallow audit failures; do not block the main delete result
+            pass
+
+        if success:
+            return True, 'Deleted server-side history successfully.'
+        else:
+            return False, f'Supabase delete returned {resp.status_code}: {resp.text}'
+    except Exception as e:
+        return False, str(e)
