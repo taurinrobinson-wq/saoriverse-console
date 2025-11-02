@@ -2,7 +2,11 @@ import datetime
 import json
 import uuid
 
-import requests
+try:
+    import requests
+except Exception:
+    requests = None
+
 import streamlit as st
 
 

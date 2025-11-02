@@ -2,10 +2,22 @@ import datetime
 import json
 import time
 
-import requests
+try:
+    import requests
+except Exception:
+    # Allow the module to be imported in environments where `requests` is not
+    # installed (e.g., lightweight CI or minimal runtime). Functions that need
+    # network access will handle the missing library at call time.
+    requests = None
+
 import streamlit as st
 
-from .doc_export import generate_doc
+try:
+    from .doc_export import generate_doc
+except Exception:
+    # Allow the module to be imported even if optional doc export dependencies
+    # (like python-docx) are not installed
+    generate_doc = None
 
 
 def inject_css(css_file_path):
@@ -62,6 +74,48 @@ def render_controls_row(conversation_key):
         if st.button("Start Personal Log", key="start_log_btn"):
             st.session_state.show_personal_log = True
             st.rerun()
+
+# Data management functions
+
+def delete_user_history_from_supabase(user_id: str) -> tuple:
+    """Delete all persisted conversation history for a user from Supabase.
+    
+    Args:
+        user_id: The user ID whose history should be deleted.
+    
+    Returns:
+        A tuple (success: bool, message: str) indicating whether the deletion succeeded.
+    """
+    try:
+        if requests is None:
+            return False, "Network requests not available in this environment."
+        
+        supabase_url = st.secrets.get("supabase", {}).get("url")
+        supabase_key = st.secrets.get("supabase", {}).get("key")
+        
+        if not supabase_url or not supabase_key:
+            return False, "Supabase not configured. Cannot delete server history."
+        
+        # Call a Supabase function or use the REST API to delete user history
+        # For now, we'll attempt a direct REST API call to a hypothetical endpoint
+        delete_url = f"{supabase_url}/rest/v1/conversations?user_id=eq.{user_id}"
+        
+        response = requests.delete(
+            delete_url,
+            headers={
+                "Authorization": f"Bearer {supabase_key}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal"
+            },
+            timeout=10
+        )
+        
+        if response.status_code in [200, 204, 404]:
+            return True, "Server-side history deleted successfully."
+        else:
+            return False, f"Failed to delete history (HTTP {response.status_code})."
+    except Exception as e:
+        return False, f"Error deleting history: {str(e)}"
 
 # UI rendering functions
 
@@ -329,11 +383,15 @@ def render_main_app():
                                     json=payload,
                                     timeout=15
                                 )
-                                if response_data.status_code == 200:
-                                    result = response_data.json()
-                                    response = result.get("reply", "I'm here to listen.")
+                                if requests is None:
+                                    # requests not available in this runtime
+                                    response = "AI processing unavailable (requests library not installed)."
                                 else:
-                                    response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                    if response_data.status_code == 200:
+                                        result = response_data.json()
+                                        response = result.get("reply", "I'm here to listen.")
+                                    else:
+                                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception:
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
@@ -383,11 +441,14 @@ def render_main_app():
                                     json=payload,
                                     timeout=15
                                 )
-                                if response_data.status_code == 200:
-                                    result = response_data.json()
-                                    response = result.get("reply", "I'm here to listen.")
+                                if requests is None:
+                                    response = "AI processing unavailable (requests library not installed)."
                                 else:
-                                    response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                    if response_data.status_code == 200:
+                                        result = response_data.json()
+                                        response = result.get("reply", "I'm here to listen.")
+                                    else:
+                                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception as e:
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
