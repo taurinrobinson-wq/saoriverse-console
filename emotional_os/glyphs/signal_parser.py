@@ -1,15 +1,20 @@
 import json
+import os
 import re
 import sqlite3
-import os
-from typing import List, Dict, Optional
 from datetime import datetime
 from difflib import SequenceMatcher
+from typing import Dict, List, Optional
 
 # Phase 2 learning + Sanctuary Mode imports
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import create_training_response
-from emotional_os.safety import SANCTUARY_MODE, is_sensitive_input, ensure_sanctuary_response, sanitize_for_storage
+from emotional_os.safety import (
+    SANCTUARY_MODE,
+    ensure_sanctuary_response,
+    is_sensitive_input,
+    sanitize_for_storage,
+)
 
 # Try to import NRC lexicon for better emotion detection
 try:
@@ -59,17 +64,17 @@ def fuzzy_match(word: str, lexicon_keys: List[str], threshold: float = 0.6) -> O
 	"""Find best fuzzy match in lexicon, returns matching key if similarity > threshold"""
 	best_match = None
 	best_score = threshold
-	
+
 	for key in lexicon_keys:
 		# Skip comment entries
 		if key.startswith("_comment_"):
 			continue
-		
+
 		score = SequenceMatcher(None, word.lower(), key.lower()).ratio()
 		if score > best_score:
 			best_score = score
 			best_match = key
-	
+
 	return best_match
 
 # Extract signals using fuzzy matching
@@ -77,7 +82,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 	lowered = input_text.lower()
 	matched_signals = []
 	lexicon_keys = [k for k in signal_map.keys() if not k.startswith("_comment_")]
-	
+
 	# First pass: exact word boundary matching in signal_lexicon
 	for keyword, metadata in signal_map.items():
 		if keyword.startswith("_comment_"):
@@ -91,7 +96,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 				"voltage": metadata.get("voltage", "medium"),
 				"tone": metadata.get("tone", "unknown")
 			})
-	
+
 	# Second pass: Use NRC lexicon if available for richer emotion detection
 	if HAS_NRC and nrc and nrc.loaded:
 		nrc_emotions = nrc.analyze_text(input_text)
@@ -109,7 +114,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 				'anticipation': ('ε', 'medium', 'insight'),# Anticipation/insight
 				'joy': ('λ', 'high', 'joy'),               # Joy
 			}
-			
+
 			# Find strongest emotion from NRC
 			top_emotion = max(nrc_emotions.items(), key=lambda x: x[1])[0]
 			if top_emotion in nrc_to_signal:
@@ -120,7 +125,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 					"voltage": voltage,
 					"tone": tone
 				})
-	
+
 	# Third pass: fuzzy matching for unmatched single words
 	if not matched_signals:
 		words = re.findall(r'\b\w+\b', lowered)
@@ -138,7 +143,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 						"tone": metadata.get("tone", "unknown")
 					})
 					break  # Use first good fuzzy match
-	
+
 	return matched_signals
 
 # Map signals to ECM gates
@@ -198,17 +203,17 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
 			glyphs = fallback_glyphs
 		else:
 			return None, "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
-	
+
 	# Get primary emotional signals
-	primary_signals = [s['signal'] for s in signals]
+	primary_signals = [s['signal'] for s in signals]  # noqa: F841  # intermediate extraction
 	signal_keywords = [s['keyword'] for s in signals]
-	
+
 	# Prioritize glyphs based on emotional relevance
 	scored_glyphs = []
 	for glyph in glyphs:
 		score = 0
 		name = glyph['glyph_name'].lower()
-		
+
 		# Score based on emotional match
 		if any(word in signal_keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
 			if 'spiral' in name and 'containment' in name:
@@ -250,26 +255,26 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
 		elif any(word in signal_keywords for word in ['broken', 'trap', 'trapped', 'stuck']):
 			if 'containment' in name or 'boundary' in name or 'still' in name:
 				score += 10
-		
+
 		# Prefer simpler, more accessible glyphs
 		if any(word in name for word in ['still', 'quiet', 'gentle', 'soft']):
 			score += 5
-		
+
 		scored_glyphs.append((glyph, score))
-	
+
 	# Select best glyph
 	best_glyph = max(scored_glyphs, key=lambda x: x[1])[0] if scored_glyphs else None
-	
+
 	# Generate contextual response based on glyph and emotions
 	response = generate_contextual_response(best_glyph, signal_keywords, input_text)
-	
+
 	return best_glyph, response
 
 def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
 	"""Fallback: search database by emotion tone when gates don't return results"""
 	if not signals:
 		return []
-	
+
 	# Map tones to glyph name keywords
 	tone_keywords = {}
 	for signal in signals:
@@ -288,91 +293,90 @@ def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
 			tone_keywords.setdefault('devotion', []).extend(['devotional', 'vow', 'sacred', 'offering', 'ceremony'])
 		elif tone == 'recognition':
 			tone_keywords.setdefault('recognition', []).extend(['recognition', 'witness', 'seen', 'mirror', 'known'])
-	
+
 	if not tone_keywords:
 		return []
-	
+
 	# Search database for glyphs matching tone keywords
 	try:
 		db_path = "emotional_os/glyphs/glyphs.db"
 		if not os.path.exists(db_path):
 			return []
-		
+
 		conn = sqlite3.connect(db_path)
 		cursor = conn.cursor()
-		
+
 		# Build OR query for all tone keywords
 		all_keywords = []
 		for kw_list in tone_keywords.values():
 			all_keywords.extend(kw_list)
-		
+
 		# Search for glyphs with names containing any keyword
-		query_conditions = ' OR '.join([f"glyph_name LIKE ?" for _ in all_keywords])
+		query_conditions = ' OR '.join(["glyph_name LIKE ?" for _ in all_keywords])
 		query = f"SELECT glyph_name, description, gate FROM glyph_lexicon WHERE {query_conditions} LIMIT 5"
-		
+
 		params = [f"%{kw}%" for kw in all_keywords]
 		cursor.execute(query, params)
 		rows = cursor.fetchall()
 		conn.close()
-		
+
 		return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
-	except Exception as e:
+	except Exception:
 		return []
 
 
 def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], input_text: str = "") -> str:
-	name = glyph['glyph_name'] if glyph else ""
-	description = glyph.get('description', '') if glyph else ''
-	
+	name = glyph['glyph_name'] if glyph else ""  # noqa: F841  # kept for clarity / future use
+	description = glyph.get('description', '') if glyph else ''  # noqa: F841  # kept for clarity / future use
+
 	# Overwhelm/change responses
 	if any(word in keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
-		return f"You're navigating a lot of moving pieces right now. When life shifts in multiple directions at once, it makes sense to feel overwhelmed. This isn't about weakness—it's about being human in the face of complexity. What feels like the most important piece to focus on first?"
-	
-	# Anxiety/stress responses
-	elif any(word in keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
-		return f"I can feel the anxiety you're carrying. When our minds race like this, it often helps to find a still point. The energy you're feeling - that's your system preparing you, even if it feels overwhelming right now. What if we could transform this racing energy into focused readiness?"
-	
-	# Sadness/grief responses  
-	elif any(word in keywords for word in ['sad', 'grief', 'mourning', 'loss']):
-		return f"There's a heaviness you're holding, and it deserves to be witnessed. Grief moves at its own pace - not the pace we think it should. Your sorrow is valid and it's okay to feel the full weight of it."
-	
-	# Anger/frustration responses
-	elif any(word in keywords for word in ['angry', 'frustrated', 'rage', 'anger']):
-		return f"I can sense the intensity of what you're feeling. Anger often carries important information about our boundaries and values. What is this feeling trying to tell you about what matters to you?"
-	
-	# Joy/happiness responses
-	elif any(word in keywords for word in ['happy', 'joy', 'excited', 'delight']):
-		return f"There's brightness in what you're sharing. Joy deserves to be fully felt and celebrated. Let yourself receive this good feeling completely."
-	
-	# Shame/embarrassment responses
-	elif any(word in keywords for word in ['ashamed', 'shame', 'embarrassed', 'humiliated']):
-		return f"What you're feeling is deeply human. Shame often carries a message about our worth—but shame is a liar about that. You deserve compassion, especially from yourself. What would it feel like to offer yourself the same grace you'd give to someone you love?"
-	
-	# Disappointment/failure responses
-	elif any(word in keywords for word in ['disappointed', 'failed', 'failure']):
-		return f"I can sense the disappointment you're carrying. Unmet expectations can cut deep. But this moment of 'not succeeding' doesn't define your worth or your capability. What do you need to hear right now?"
-	
-	# Trapped/stuck responses
-	elif any(word in keywords for word in ['trapped', 'trap', 'stuck', 'broken']):
-		return f"Feeling trapped is exhausting. That sense of being locked in can feel so heavy. But you're here, you're aware, and you're reaching out—those are already signs of movement. What feels like the smallest possible shift you could make?"
-	
-	# Loneliness/misunderstanding responses
-	elif any(word in keywords for word in ['lonely', 'alone', 'nobody', 'understand']):
-		return f"Loneliness can make us feel so disconnected. But the very fact that you're trying to be understood shows there's a part of you still reaching out. You don't have to be alone in this. I'm here."
-	
-	# Strength/resilience doubts
-	elif any(word in keywords for word in ['strong', 'doubt', 'doubting']):
-		return f"Doubting your strength is actually part of being human. The very fact that you keep showing up despite your doubts? That's strength. You've likely already survived things you didn't think you could handle."
-	
-	# Growth/healing responses
-	elif any(word in keywords for word in ['learning', 'healing', 'proud', 'grateful', 'come far', 'letting go']):
-		return f"There's something beautiful in what you're sharing. Growth isn't linear, but the fact that you're noticing this moment of learning? That matters. You're building something real within yourself."
-	
-	# Default empathetic response
-	else:
-		return f"I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+		return "You're navigating a lot of moving pieces right now. When life shifts in multiple directions at once, it makes sense to feel overwhelmed. This isn't about weakness—it's about being human in the face of complexity. What feels like the most important piece to focus on first?"
 
-# Generate ritual prompt  
+	# Anxiety/stress responses
+	if any(word in keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
+		return "I can feel the anxiety you're carrying. When our minds race like this, it often helps to find a still point. The energy you're feeling - that's your system preparing you, even if it feels overwhelming right now. What if we could transform this racing energy into focused readiness?"
+
+	# Sadness/grief responses
+	if any(word in keywords for word in ['sad', 'grief', 'mourning', 'loss']):
+		return "There's a heaviness you're holding, and it deserves to be witnessed. Grief moves at its own pace - not the pace we think it should. Your sorrow is valid and it's okay to feel the full weight of it."
+
+	# Anger/frustration responses
+	if any(word in keywords for word in ['angry', 'frustrated', 'rage', 'anger']):
+		return "I can sense the intensity of what you're feeling. Anger often carries important information about our boundaries and values. What is this feeling trying to tell you about what matters to you?"
+
+	# Joy/happiness responses
+	if any(word in keywords for word in ['happy', 'joy', 'excited', 'delight']):
+		return "There's brightness in what you're sharing. Joy deserves to be fully felt and celebrated. Let yourself receive this good feeling completely."
+
+	# Shame/embarrassment responses
+	if any(word in keywords for word in ['ashamed', 'shame', 'embarrassed', 'humiliated']):
+		return "What you're feeling is deeply human. Shame often carries a message about our worth—but shame is a liar about that. You deserve compassion, especially from yourself. What would it feel like to offer yourself the same grace you'd give to someone you love?"
+
+	# Disappointment/failure responses
+	if any(word in keywords for word in ['disappointed', 'failed', 'failure']):
+		return "I can sense the disappointment you're carrying. Unmet expectations can cut deep. But this moment of 'not succeeding' doesn't define your worth or your capability. What do you need to hear right now?"
+
+	# Trapped/stuck responses
+	if any(word in keywords for word in ['trapped', 'trap', 'stuck', 'broken']):
+		return "Feeling trapped is exhausting. That sense of being locked in can feel so heavy. But you're here, you're aware, and you're reaching out—those are already signs of movement. What feels like the smallest possible shift you could make?"
+
+	# Loneliness/misunderstanding responses
+	if any(word in keywords for word in ['lonely', 'alone', 'nobody', 'understand']):
+		return "Loneliness can make us feel so disconnected. But the very fact that you're trying to be understood shows there's a part of you still reaching out. You don't have to be alone in this. I'm here."
+
+	# Strength/resilience doubts
+	if any(word in keywords for word in ['strong', 'doubt', 'doubting']):
+		return "Doubting your strength is actually part of being human. The very fact that you keep showing up despite your doubts? That's strength. You've likely already survived things you didn't think you could handle."
+
+	# Growth/healing responses
+	if any(word in keywords for word in ['learning', 'healing', 'proud', 'grateful', 'come far', 'letting go']):
+		return "There's something beautiful in what you're sharing. Growth isn't linear, but the fact that you're noticing this moment of learning? That matters. You're building something real within yourself."
+
+	# Default empathetic response
+	return "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+
+# Generate ritual prompt
 def generate_simple_prompt(glyph: Dict) -> str:
 	if not glyph:
 		return ""
@@ -387,13 +391,20 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 
 	for g in glyphs:
 		name = g["glyph_name"].lower()
-		if any(k in name for k in ["grief", "mourning", "collapse", "sorrow"]): themes["grief"] += 1
-		if any(k in name for k in ["ache", "yearning", "longing", "recursive"]): themes["longing"] += 1
-		if any(k in name for k in ["boundary", "contain", "still", "shield"]): themes["containment"] += 1
-		if any(k in name for k in ["joy", "delight", "ecstasy", "bliss"]): themes["joy"] += 1
-		if any(k in name for k in ["devotional", "vow", "exalted", "sacred"]): themes["devotion"] += 1
-		if any(k in name for k in ["recognition", "seen", "witness", "mirror"]): themes["recognition"] += 1
-		if any(k in name for k in ["insight", "clarity", "knowing", "revelation"]): themes["insight"] += 1
+		if any(k in name for k in ["grief", "mourning", "collapse", "sorrow"]):
+			themes["grief"] += 1
+		if any(k in name for k in ["ache", "yearning", "longing", "recursive"]):
+			themes["longing"] += 1
+		if any(k in name for k in ["boundary", "contain", "still", "shield"]):
+			themes["containment"] += 1
+		if any(k in name for k in ["joy", "delight", "ecstasy", "bliss"]):
+			themes["joy"] += 1
+		if any(k in name for k in ["devotional", "vow", "exalted", "sacred"]):
+			themes["devotion"] += 1
+		if any(k in name for k in ["recognition", "seen", "witness", "mirror"]):
+			themes["recognition"] += 1
+		if any(k in name for k in ["insight", "clarity", "knowing", "revelation"]):
+			themes["insight"] += 1
 
 	dominant = sorted(themes.items(), key=lambda x: x[1], reverse=True)
 	top_themes = [t[0] for t in dominant if t[1] > 0][:2]

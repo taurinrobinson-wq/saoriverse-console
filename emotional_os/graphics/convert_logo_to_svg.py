@@ -2,38 +2,40 @@
 Convert FirstPerson PNG logo to optimized SVG format
 """
 
-from PIL import Image
-import numpy as np
 import os
+
+import numpy as np
+from PIL import Image
+
 
 def analyze_logo():
     """Analyze the PNG logo to understand its structure"""
     logo_path = "graphics/FirstPerson-Logo.png"
-    
+
     if not os.path.exists(logo_path):
         print(f"❌ Logo not found at {logo_path}")
-        return
-    
+        return None
+
     # Load and analyze the image
     img = Image.open(logo_path)
     print(f"📏 Image size: {img.size}")
     print(f"🎨 Image mode: {img.mode}")
     print(f"📊 Image format: {img.format}")
-    
+
     # Convert to RGBA if not already
     if img.mode != 'RGBA':
         img = img.convert('RGBA')
-    
+
     # Get image data
     img_array = np.array(img)
     print(f"📐 Array shape: {img_array.shape}")
-    
+
     # Check if it has transparency
     if img_array.shape[2] == 4:
         alpha_channel = img_array[:, :, 3]
         has_transparency = np.any(alpha_channel < 255)
         print(f"🔍 Has transparency: {has_transparency}")
-        
+
         if has_transparency:
             # Find the bounding box of non-transparent pixels
             non_transparent = np.where(alpha_channel > 0)
@@ -42,24 +44,24 @@ def analyze_logo():
                 min_x, max_x = non_transparent[1].min(), non_transparent[1].max()
                 print(f"📦 Content bounding box: ({min_x}, {min_y}) to ({max_x}, {max_y})")
                 print(f"📦 Content size: {max_x - min_x + 1} x {max_y - min_y + 1}")
-    
+
     # Check for common colors
     rgb_array = img_array[:, :, :3]
     unique_colors = np.unique(rgb_array.reshape(-1, rgb_array.shape[2]), axis=0)
     print(f"🎨 Number of unique colors: {len(unique_colors)}")
-    
+
     if len(unique_colors) <= 20:  # Simple logo with few colors
         print("🎯 This appears to be a simple logo suitable for SVG conversion")
         print("🎨 Main colors found:")
         for i, color in enumerate(unique_colors[:10]):  # Show first 10 colors
             hex_color = '#{:02x}{:02x}{:02x}'.format(color[0], color[1], color[2])
             print(f"   Color {i+1}: RGB{tuple(color)} = {hex_color}")
-    
+
     return img
 
 def create_simple_svg():
     """Create a simple SVG version based on the FirstPerson branding"""
-    
+
     # Professional FirstPerson SVG logo
     svg_content = '''<?xml version="1.0" encoding="UTF-8"?>
 <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -117,31 +119,31 @@ def create_simple_svg():
         font-family="Arial, sans-serif" font-size="14" font-weight="300" 
         fill="#666" letter-spacing="2px" text-transform="uppercase">Personal AI Companion</text>
 </svg>'''
-    
+
     # Save the SVG
     svg_path = "graphics/FirstPerson-Logo.svg"
     with open(svg_path, 'w', encoding='utf-8') as f:
         f.write(svg_content)
-    
+
     print(f"✅ Created SVG logo at {svg_path}")
     print("📏 SVG is scalable and optimized for web use")
     print("🎨 Features professional gradient and neural network design")
-    
+
     return svg_path
 
 if __name__ == "__main__":
     print("🧠 FirstPerson Logo Conversion Tool")
     print("=" * 50)
-    
+
     # Analyze the existing PNG
     print("\n📊 Analyzing existing PNG logo...")
     img = analyze_logo()
-    
+
     # Create optimized SVG
     print("\n🎨 Creating optimized SVG version...")
     svg_path = create_simple_svg()
-    
-    print(f"\n✅ Conversion complete!")
+
+    print("\n✅ Conversion complete!")
     print(f"📁 New SVG logo: {svg_path}")
     print("💡 The SVG is:")
     print("   - Scalable to any size")

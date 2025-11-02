@@ -9,7 +9,6 @@ import json
 import os
 import sys
 from pathlib import Path
-from collections import defaultdict
 
 # Handle imports properly
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -18,7 +17,7 @@ from parser.nrc_lexicon_loader import nrc
 
 class PoetryDatabase:
     """Curated poetry database organized by emotion."""
-    
+
     # Beautiful, authentic public domain poetry - curated for each emotion
     POETRY_COLLECTION = {
         "joy": [
@@ -77,14 +76,14 @@ class PoetryDatabase:
             "How like a poison given to drink in a golden cup,\nSo is this world that offers us its false and bitter sup;",
         ],
     }
-    
+
     def __init__(self, db_path: str = "data/poetry/poetry_database.json"):
         """Initialize poetry database."""
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self.database = {}
         self.load_or_create()
-    
+
     def load_or_create(self):
         """Load existing database or create new one."""
         if self.db_path.exists():
@@ -92,21 +91,21 @@ class PoetryDatabase:
             with open(self.db_path, 'r', encoding='utf-8') as f:
                 self.database = json.load(f)
         else:
-            print(f"✨ Creating poetry database...")
+            print("✨ Creating poetry database...")
             self._build_database()
             self._save_database()
-    
+
     def _build_database(self):
         """Build database from poetry collection."""
         self.database = {}
-        
+
         for emotion, poems in self.POETRY_COLLECTION.items():
             self.database[emotion] = []
-            
+
             for i, poem_text in enumerate(poems):
                 # Analyze emotional content
                 analysis = nrc.analyze_text(poem_text)
-                
+
                 entry = {
                     'id': f"{emotion}_{i}",
                     'text': poem_text,
@@ -115,45 +114,45 @@ class PoetryDatabase:
                     'word_count': len(poem_text.split()),
                     'line_count': len(poem_text.split('\n'))
                 }
-                
+
                 self.database[emotion].append(entry)
-        
+
         print(f"✓ Created poetry database with {sum(len(v) for v in self.database.values())} poems")
-    
+
     def _save_database(self):
         """Save database to JSON file."""
         with open(self.db_path, 'w', encoding='utf-8') as f:
             json.dump(self.database, f, indent=2, ensure_ascii=False)
         print(f"💾 Saved to {self.db_path}")
-    
+
     def get_poem(self, emotion: str) -> dict:
         """Get a poem for an emotion."""
         if emotion not in self.database:
             return {}
-        
+
         poems = self.database[emotion]
         if not poems:
             return {}
-        
+
         import random
         return random.choice(poems)
-    
+
     def get_poems(self, emotion: str, count: int = 3) -> list:
         """Get multiple poems for an emotion."""
         if emotion not in self.database:
             return []
-        
+
         poems = self.database[emotion]
         if not poems:
             return []
-        
+
         import random
         return random.sample(poems, min(count, len(poems)))
-    
+
     def get_all_emotions(self) -> list:
         """Get all emotions in database."""
         return list(self.database.keys())
-    
+
     def get_stats(self) -> dict:
         """Get database statistics."""
         return {
@@ -177,19 +176,19 @@ def load_poetry_database():
 if __name__ == "__main__":
     # Test
     print("\n🎭 Testing Poetry Database\n")
-    
+
     db = PoetryDatabase()
-    
+
     # Show stats
     stats = db.get_stats()
-    print(f"\n📊 Poetry Database Stats:")
+    print("\n📊 Poetry Database Stats:")
     print(f"  Total poems: {stats['total_poems']}")
     print(f"  Emotions: {stats['emotions']}")
     for emotion, count in stats['emotion_breakdown'].items():
         print(f"    {emotion}: {count}")
-    
+
     # Show samples
-    print(f"\n🎭 Sample Poems by Emotion:\n")
+    print("\n🎭 Sample Poems by Emotion:\n")
     for emotion in ['joy', 'sadness', 'love', 'fear', 'anger']:
         poem = db.get_poem(emotion)
         if poem:

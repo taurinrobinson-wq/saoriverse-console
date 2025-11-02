@@ -8,8 +8,8 @@ import requests
 import json
 import time
 from datetime import datetime, timedelta
-import hashlib
-import secrets
+# `hashlib` and `secrets` were imported in earlier work but are unused in this archived UI copy.
+# Removed to satisfy lint (F401) while keeping the file minimal and archive-only.
 
 # Page configuration
 st.set_page_config(
@@ -290,7 +290,7 @@ class SaoynxAuthentication:
         with col2:
             try:
                 st.image("Saonyx_Logo.png", width=200)
-            except:
+            except Exception:
                 st.markdown('''
                 <div style="font-size: 4rem;">🧠</div>
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
@@ -507,9 +507,8 @@ def render_main_app():
         # --- Seamless glyph response logic ---
         import sys
         sys.path.append(".")
-    from emotional_os.parser import signal_parser
+        from emotional_os.parser import signal_parser
         import sqlite3
-        import os
         # Try to import glyph generator if available
         try:
             from glyph_generator import GlyphGenerator
@@ -556,7 +555,7 @@ def render_main_app():
                         conn.close()
                         # Re-fetch glyphs
                         glyphs = signal_parser.fetch_glyphs(gates, db_path)
-                    except Exception as e:
+                    except Exception:
                         glyphs = []
                     # Update debug info after glyph generation
                     st.session_state['debug_info']['glyphs'] = glyphs

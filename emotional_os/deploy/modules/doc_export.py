@@ -1,5 +1,7 @@
-from docx import Document
 from io import BytesIO
+
+from docx import Document
+
 
 def generate_doc(date, time, event, mood, reflections, insights):
     doc = Document()

@@ -1,5 +1,8 @@
-import pytest
-from emotional_os.safety.sanctuary_handler import classify_risk, detect_crisis, build_consent_prompt
+from emotional_os.safety.sanctuary_handler import (
+    build_consent_prompt,
+    classify_risk,
+    detect_crisis,
+)
 
 
 def test_classify_risk_high():

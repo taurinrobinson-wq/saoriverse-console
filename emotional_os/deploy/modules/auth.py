@@ -1,12 +1,14 @@
-import streamlit as st
-import requests
-import json
 import datetime
+import json
 import uuid
+
+import requests
+import streamlit as st
+
 
 class SaoynxAuthentication:
     """Authentication and session management"""
-    
+
     def render_login_form(self):
         st.markdown("## Sign In")
         username = st.text_input("Username", key="login_username")
@@ -74,8 +76,7 @@ class SaoynxAuthentication:
                 expires = datetime.datetime.fromisoformat(session_data["expires"])
                 if datetime.datetime.now() < expires:
                     return {"valid": True, "data": session_data}
-                else:
-                    return {"valid": False, "error": "Session expired"}
+                return {"valid": False, "error": "Session expired"}
             except ValueError as e:
                 return {"valid": False, "error": f"Invalid date format: {e}"}
         except Exception as e:
@@ -115,9 +116,8 @@ class SaoynxAuthentication:
                 session_token = self.create_session_token(username, user_id)
                 st.query_params["session_token"] = session_token
                 return {"success": True, "message": "Demo login successful"}
-            else:
-                return {"success": False, "message": "Please enter username and password"}
-        
+            return {"success": False, "message": "Please enter username and password"}
+
         try:
             auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
@@ -143,11 +143,9 @@ class SaoynxAuthentication:
                     session_token = self.create_session_token(username, data.get("user_id"))
                     st.query_params["session_token"] = session_token
                     return {"success": True, "message": "Login successful"}
-                else:
-                    error_msg = data.get("error", "Invalid username or password")
-                    return {"success": False, "message": f"Login failed: {error_msg}"}
-            else:
-                return {"success": False, "message": f"Authentication service error (HTTP {response.status_code})"}
+                error_msg = data.get("error", "Invalid username or password")
+                return {"success": False, "message": f"Login failed: {error_msg}"}
+            return {"success": False, "message": f"Authentication service error (HTTP {response.status_code})"}
         except Exception as e:
             return {"success": False, "message": f"Login error: {str(e)}"}
     def create_user(self, username: str, password: str) -> dict:
@@ -155,9 +153,8 @@ class SaoynxAuthentication:
             # Demo mode - simulate user creation
             if username and password:
                 return {"success": True, "message": "Demo account created successfully"}
-            else:
-                return {"success": False, "message": "Please enter username and password"}
-        
+            return {"success": False, "message": "Please enter username and password"}
+
         try:
             auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
@@ -178,11 +175,9 @@ class SaoynxAuthentication:
                 data = response.json()
                 if data.get("success"):
                     return {"success": True, "message": "Account created successfully"}
-                else:
-                    return {"success": False, "message": data.get("error", "Failed to create account")}
-            else:
-                error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
-                return {"success": False, "message": error_data.get("error", "Failed to create account")}
+                return {"success": False, "message": data.get("error", "Failed to create account")}
+            error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
+            return {"success": False, "message": error_data.get("error", "Failed to create account")}
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
     def quick_login_bypass(self):

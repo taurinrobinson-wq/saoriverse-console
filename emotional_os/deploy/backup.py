@@ -1,5 +1,10 @@
 from docx import Document
 from io import BytesIO
+import json
+import requests
+import time
+import streamlit as st
+import datetime
 
 # --- Generate Word Document from Personal Log ---
 def generate_doc(date, time, event, mood, reflections, insights):
@@ -20,16 +25,7 @@ def generate_doc(date, time, event, mood, reflections, insights):
     buffer.seek(0)
     return buffer
 # --- End Generate Word Document ---
-"""
 
-
-import streamlit as st
-import requests
-import json
-import time
-import datetime
-import hashlib
-import secrets
 
 # Page configuration
 st.set_page_config(
@@ -384,7 +380,7 @@ class SaoynxAuthentication:
         with col2:
             try:
                 st.image("graphics/FirstPerson-Logo.svg", width=200)
-            except:
+            except Exception:
                 st.markdown('''
                 <div style="font-size: 4rem;">🧠</div>
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">FirstPerson</div>
@@ -539,7 +535,7 @@ def render_main_app():
     with col1:
         try:
             st.image("graphics/FirstPerson-Logo.svg", width=50)
-        except:
+        except Exception:
             st.markdown('<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
@@ -653,15 +649,15 @@ def render_main_app():
                             result = response_data.json()
                             response = result.get("reply", "I'm here to listen.")
                             glyph_info = result.get("glyph", {})
-                            processing_details = result.get("log", {})
+                            processing_details = result.get("log", {})  # noqa: F841  # optional debug/logging info
                         else:
                             response = "I'm experiencing some technical difficulties, but I'm still here for you."
                             glyph_info = {}
-                            processing_details = {"error": f"HTTP {response_data.status_code}"}
+                            processing_details = {"error": f"HTTP {response_data.status_code}"}  # noqa: F841  # optional debug/logging info
                     except Exception as e:
                         response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                         glyph_info = {}
-                        processing_details = {"error": str(e)}
+                        processing_details = {"error": str(e)}  # noqa: F841  # optional debug/logging info
                     processing_time = time.time() - start_time
                     st.write(response)
                     # Show processing details
