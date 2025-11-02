@@ -1,11 +1,11 @@
-from typing import Optional
 import json
 import os
+from typing import Optional
 
-from .config import SANCTUARY_MODE, DEFAULT_LOCALE, INCLUDE_CRISIS_RESOURCES
-from .templates import SanctuaryTemplates
-from .sanctuary_handler import classify_risk, build_consent_prompt, get_crisis_resources
+from .config import DEFAULT_LOCALE, INCLUDE_CRISIS_RESOURCES
 from .redaction import redact_text
+from .sanctuary_handler import build_consent_prompt, classify_risk, get_crisis_resources
+from .templates import SanctuaryTemplates
 
 # Load trauma lexicon once
 _TRAUMA_LEXICON_PATH = os.path.join(os.path.dirname(__file__), "trauma_lexicon.json")

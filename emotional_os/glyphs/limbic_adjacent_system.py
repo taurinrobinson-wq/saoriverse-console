@@ -13,11 +13,9 @@ Neural functions feed into ritual scaffolding:
 This creates a chiasmus where the nervous system composes rather than just reacts.
 """
 
-import json
-import os
-from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 
 class SystemType(Enum):

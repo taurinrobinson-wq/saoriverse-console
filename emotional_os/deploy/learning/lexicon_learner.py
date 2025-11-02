@@ -1,9 +1,9 @@
 import json
 import re
 import os
-from typing import Dict, List, Set
-from collections import Counter, defaultdict
+from typing import Dict, List
 import datetime
+
 
 class LexiconLearner:
     """
@@ -207,33 +207,35 @@ class LexiconLearner:
         return [theme for theme, score in sorted(theme_scores.items(), key=lambda x: x[1], reverse=True)]
     
     class ToneMemory:
-    def __init__(self):
-        self.recent_tones = []
+        def __init__(self):
+            self.recent_tones = []
 
-    def update(self, tone: str):
-        self.recent_tones.append(tone)
-        if len(self.recent_tones) > 3:
-            self.recent_tones.pop(0)
+        def update(self, tone: str):
+            self.recent_tones.append(tone)
+            if len(self.recent_tones) > 3:
+                self.recent_tones.pop(0)
 
-    def get_default_tone(self):
-        return self.recent_tones[-1] if self.recent_tones else "plain"
-    
-    def parse_glyph_from_patterns(patterns: Dict[str, List[str]]) -> str:
-    if patterns['feeling_expressions'] or patterns['intensity_modifiers']:
-        return "emotive"
-    elif patterns['emotional_metaphors']:
-        return "mythic"
-    else:
-        return "plain"
-    
-    def scale_emotional_voltage(patterns: Dict[str, List[str]]) -> str:
-    count = sum(len(v) for v in patterns.values())
-    if count > 5:
-        return "high"
-    elif count > 2:
-        return "medium"
-    else:
-        return "low"
+        def get_default_tone(self):
+            return self.recent_tones[-1] if self.recent_tones else "plain"
+
+        @staticmethod
+        def parse_glyph_from_patterns(patterns: Dict[str, List[str]]) -> str:
+            if patterns.get('feeling_expressions') or patterns.get('intensity_modifiers'):
+                return "emotive"
+            elif patterns.get('emotional_metaphors'):
+                return "mythic"
+            else:
+                return "plain"
+
+        @staticmethod
+        def scale_emotional_voltage(patterns: Dict[str, List[str]]) -> str:
+            count = sum(len(v) for v in patterns.values())
+            if count > 5:
+                return "high"
+            elif count > 2:
+                return "medium"
+            else:
+                return "low"
 
     def update_lexicon_from_learning(self, learning_results: Dict):
         """Update the learned lexicon based on learning results"""
@@ -312,6 +314,7 @@ class LexiconLearner:
         """Get top N learned words by effectiveness"""
         frequencies = self.pattern_history.get('pattern_frequencies', {})
         return sorted(frequencies.items(), key=lambda x: x[1], reverse=True)[:n]
+
 
 # Usage functions for the UI
 def learn_from_conversation_data(conversation_data: Dict) -> Dict:

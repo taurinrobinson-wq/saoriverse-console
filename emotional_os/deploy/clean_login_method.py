@@ -1,3 +1,26 @@
+import streamlit as st
+
+def render_login_form():
+    """Minimal clean login form used by the deployment UI.
+
+    This is a small, well-formed fallback implementation to replace a
+    corrupted file that contained only an indented function body.
+    """
+    st.title("🚀 Emotional OS")
+    st.markdown("*Your Personal AI Companion*")
+
+    # Simple create / demo buttons
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("🎯 Create Account", type="primary"):
+            st.info("Create account flow (not implemented in this stub)")
+    with col2:
+        if st.button("⚡ Quick Demo", type="secondary"):
+            st.success("Demo login triggered (stub)")
+
+    # Advanced settings placeholder
+    with st.expander("⚙️ Advanced", expanded=False):
+        st.markdown("Debug and advanced options go here.")
     def render_login_form(self):
         """Render ultra-clean login form"""
         st.title("🚀 Emotional OS")

@@ -11,12 +11,12 @@ This creates the complete chiasmus: neural activation → ritual scaffolding →
 
 import os
 import sys
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
 
 # Add the glyphs directory to path for imports
 sys.path.append(os.path.dirname(__file__))
 
-from limbic_adjacent_system import get_limbic_system, SystemType
+from limbic_adjacent_system import SystemType, get_limbic_system
 from limbic_visualizer import LimbicVisualizer
 
 try:
@@ -159,7 +159,7 @@ class LimbicIntegrationEngine:
 
         try:
             # Process through limbic system
-            limbic_result = self.process_emotion_with_limbic_mapping(emotion)
+            limbic_result = self.process_emotion_with_limbic_mapping(emotion)  # noqa: F841  # kept for potential debugging
             result["limbic_processed"] = True
 
             # Generate glyph candidates
@@ -173,7 +173,7 @@ class LimbicIntegrationEngine:
                     try:
                         # Store glyph candidate
                         glyph_name = candidate["glyph_name"]
-                        glyph_data = {
+                        glyph_data = {  # noqa: F841  # built for potential downstream storage/logging
                             "emotion": candidate["emotion"],
                             "glyph": candidate.get("glyph", candidate.get("primary_glyph", "❓")),
                             "signal": candidate.get("signal", f"Neural {emotion} signal"),

@@ -4,13 +4,12 @@ Analyze glyph database for redundancy and consolidation opportunities
 """
 
 import sqlite3
-import json
-from collections import defaultdict
+
 
 def analyze_database():
     conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
     cursor = conn.cursor()
-    
+
     # Get all tables
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
     tables = cursor.fetchall()

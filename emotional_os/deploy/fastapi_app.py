@@ -3,23 +3,22 @@ FirstPerson Chat - FastAPI Backend
 Professional web application for firstperson.chat
 """
 
-from fastapi import FastAPI, HTTPException, Depends, Request, Response
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from admin_router import admin_router
-import requests
+import base64
 import json
 import os
-from datetime import datetime, timedelta
-import hashlib
 import secrets
-import base64
-from typing import Optional
+from datetime import datetime, timedelta
+
+import requests
 import uvicorn
+from admin_router import admin_router
 from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 
 # Load environment variables from .env file
 load_dotenv()
@@ -92,7 +91,7 @@ class SessionData(BaseModel):
 
 class FirstPersonAuth:
     """Authentication system for FirstPerson"""
-    
+
     @staticmethod
     def create_session_token(username: str, user_id: str) -> str:
         """Create a secure session token"""
@@ -104,28 +103,27 @@ class FirstPersonAuth:
         }
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
         return token
-    
+
     @staticmethod
     def validate_session_token(token: str) -> dict:
         """Validate and decode session token"""
         try:
             decoded_data = base64.b64decode(token.encode()).decode()
             session_data = json.loads(decoded_data)
-            
+
             required_fields = ["username", "user_id", "expires"]
             for field in required_fields:
                 if field not in session_data:
                     return {"valid": False, "error": f"Missing field: {field}"}
-            
+
             expires = datetime.fromisoformat(session_data["expires"])
             if datetime.now() < expires:
                 return {"valid": True, "data": session_data}
-            else:
-                return {"valid": False, "error": "Session expired"}
-                
+            return {"valid": False, "error": "Session expired"}
+
         except Exception as e:
             return {"valid": False, "error": f"Token validation error: {str(e)}"}
-    
+
     @staticmethod
     @staticmethod
     async def authenticate_user(username: str, password: str):
@@ -145,23 +143,21 @@ class FirstPersonAuth:
                 },
                 timeout=10
             )
-            
+
             if response.status_code == 200:
                 data = response.json()
                 if data.get("authenticated"):
                     return {
-                        "success": True, 
+                        "success": True,
                         "user_id": data.get("user_id"),
                         "username": username
                     }
-                else:
-                    return {"success": False, "message": "Invalid credentials"}
-            else:
-                return {"success": False, "message": "Authentication service error"}
-                
+                return {"success": False, "message": "Invalid credentials"}
+            return {"success": False, "message": "Authentication service error"}
+
         except Exception as e:
             return {"success": False, "message": f"Login error: {str(e)}"}
-    
+
     @staticmethod
     async def create_user(username: str, password: str) -> dict:
         """Create new user account"""
@@ -181,13 +177,12 @@ class FirstPersonAuth:
                 },
                 timeout=10
             )
-            
+
             if response.status_code == 200:
                 data = response.json()
                 return {"success": data.get("success"), "message": data.get("error", "Account created")}
-            else:
-                return {"success": False, "message": "Failed to create account"}
-                
+            return {"success": False, "message": "Failed to create account"}
+
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
 
@@ -206,14 +201,14 @@ async def chat_app(request: Request):
 async def login(login_data: LoginRequest):
     """User login endpoint"""
     result = await FirstPersonAuth.authenticate_user(
-        login_data.username, 
+        login_data.username,
         login_data.password
     )
-    
+
     if result["success"]:
         # Create session token
         token = FirstPersonAuth.create_session_token(
-            result["username"], 
+            result["username"],
             result["user_id"]
         )
         return {
@@ -222,34 +217,32 @@ async def login(login_data: LoginRequest):
             "user_id": result["user_id"],
             "username": result["username"]
         }
-    else:
-        raise HTTPException(status_code=401, detail=result["message"])
+    raise HTTPException(status_code=401, detail=result["message"])
 
 @app.post("/api/register")
 async def register(register_data: RegisterRequest):
     """User registration endpoint"""
     if register_data.password != register_data.confirm_password:
         raise HTTPException(status_code=400, detail="Passwords do not match")
-    
+
     if len(register_data.password) < 6:
         raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
-    
+
     result = await FirstPersonAuth.create_user(
-        register_data.username, 
+        register_data.username,
         register_data.password
     )
-    
+
     if result["success"]:
         return {"success": True, "message": "Account created successfully"}
-    else:
-        raise HTTPException(status_code=400, detail=result["message"])
+    raise HTTPException(status_code=400, detail=result["message"])
 
 @app.post("/api/chat")
 async def chat(chat_data: ChatRequest):
     """Process chat message with AI"""
     try:
         saori_url = CURRENT_SAORI_URL or f"{SUPABASE_URL}/functions/v1/saori-fixed"
-        
+
         response = requests.post(
             saori_url,
             headers={
@@ -263,7 +256,7 @@ async def chat(chat_data: ChatRequest):
             },
             timeout=15
         )
-        
+
         if response.status_code == 200:
             result = response.json()
             return {
@@ -272,13 +265,12 @@ async def chat(chat_data: ChatRequest):
                 "glyph": result.get("glyph", {}),
                 "processing_time": result.get("processing_time", 0)
             }
-        else:
-            return {
-                "success": False,
-                "reply": "I'm experiencing some technical difficulties, but I'm still here for you."
-            }
-            
-    except Exception as e:
+        return {
+            "success": False,
+            "reply": "I'm experiencing some technical difficulties, but I'm still here for you."
+        }
+
+    except Exception:
         return {
             "success": False,
             "reply": "I'm having trouble connecting right now, but your feelings are still valid."
@@ -290,14 +282,13 @@ async def validate_session(token: str):
     result = FirstPersonAuth.validate_session_token(token)
     if result["valid"]:
         return {"valid": True, "data": result["data"]}
-    else:
-        raise HTTPException(status_code=401, detail=result["error"])
+    raise HTTPException(status_code=401, detail=result["error"])
 
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
     return {
-        "status": "healthy", 
+        "status": "healthy",
         "timestamp": datetime.now().isoformat(),
         "environment_check": {
             "supabase_url": "✓" if SUPABASE_URL else "✗",

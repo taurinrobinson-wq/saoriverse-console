@@ -4,8 +4,8 @@ CGI Wrapper for FirstPerson FastAPI Application
 Place this in your cgi-bin directory
 """
 
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Add the application directory to Python path
@@ -17,17 +17,17 @@ os.chdir(str(app_dir))
 
 # Import and run the FastAPI app
 try:
-    from fastapi_app import app
     from fastapi.middleware.wsgi import WSGIMiddleware
-    
+    from fastapi_app import app
+
     # Convert FastAPI to WSGI for CGI
     wsgi_app = WSGIMiddleware(app)
-    
+
     # CGI execution
     if __name__ == '__main__':
         from wsgiref.handlers import CGIHandler
         CGIHandler().run(wsgi_app)
-        
+
 except Exception as e:
     print("Content-Type: text/html\n")
     print(f"<h1>Error</h1><p>{str(e)}</p>")
