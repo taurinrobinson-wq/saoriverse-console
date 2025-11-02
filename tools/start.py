@@ -2,9 +2,10 @@
 """
 Simple Railway startup script for FirstPerson Streamlit app
 """
+import os
 import subprocess
 import sys
-import os
+
 
 def main():
     port = os.environ.get('PORT', '8501')
@@ -16,7 +17,7 @@ def main():
         '--server.enableCORS=false',
         '--server.enableXsrfProtection=false'
     ]
-    
+
     print(f"Starting Streamlit with command: {' '.join(cmd)}")
     subprocess.run(cmd)
 

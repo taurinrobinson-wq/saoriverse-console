@@ -29,7 +29,7 @@ print(f'Consolidation mappings: {mapped}')
 cursor.execute("SELECT glyph_name FROM glyph_lexicon WHERE glyph_name LIKE '[DEPRECATED]%' LIMIT 3")
 examples = cursor.fetchall()
 if examples:
-    print(f'Deprecated examples:')
+    print('Deprecated examples:')
     for ex in examples:
         print(f'  - {ex[0][:80]}...' if len(ex[0]) > 80 else f'  - {ex[0]}')
 
@@ -37,7 +37,7 @@ if examples:
 cursor.execute('SELECT merged_name, COUNT(*) FROM consolidation_map GROUP BY merged_name')
 merges = cursor.fetchall()
 if merges:
-    print(f'Merged entries:')
+    print('Merged entries:')
     for name, count in merges:
         print(f'  - "{name}" (consolidated {count} duplicates)')
 

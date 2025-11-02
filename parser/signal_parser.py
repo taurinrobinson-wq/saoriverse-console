@@ -1,18 +1,19 @@
 import json
+import os
 import re
 import sqlite3
-from typing import List, Dict
-import os
+from typing import Dict, List
+
 
 # Load signal lexicon from JSON (enhanced to include learned patterns)
 def load_signal_map(path: str) -> Dict[str, str]:
     base_lexicon = {}
-    
+
     # Load base lexicon
     if os.path.exists(path):
         with open(path, 'r', encoding='utf-8') as f:
             base_lexicon = json.load(f)
-    
+
     # Load learned lexicon if it exists
     learned_lexicon = {}
     learned_path = "parser/learned_lexicon.json"
@@ -22,11 +23,11 @@ def load_signal_map(path: str) -> Dict[str, str]:
                 learned_lexicon = json.load(f)
         except Exception:
             pass
-    
+
     # Combine base and learned lexicons
     combined_lexicon = base_lexicon.copy()
     combined_lexicon.update(learned_lexicon)
-    
+
     return combined_lexicon
 
 # Extract signals using fuzzy matching and phrase detection
@@ -90,7 +91,7 @@ def translate_prompt(glyphs: List[Dict]) -> str:
 def map_constellation_response(glyphs: List[Dict], conversation_context: Dict = None) -> str:
     # Disable constellation responses entirely to let voltage responses handle everything
     return None
-    
+
     themes = {
         "grief": 0,
         "longing": 0,
@@ -142,14 +143,14 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     gates = evaluate_gates(signals)
     glyphs = fetch_glyphs(gates, db_path)
     ritual_prompt = translate_prompt(glyphs)
-    
+
     if use_enhanced_tags:
         # Use the new emotional tag system
         try:
             from emotional_tag_matcher import enhance_parser_with_emotional_tags
             enhanced_response_data = enhance_parser_with_emotional_tags(glyphs, conversation_context)
             final_response = enhanced_response_data.get('response_text', 'Enhanced response system temporarily unavailable.')
-            
+
             return {
                 "input": input_text,
                 "signals": signals,
@@ -161,7 +162,7 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             }
         except ImportError:
             print("Enhanced emotional tag system not available, falling back to basic responses")
-    
+
     # Fallback to original system
     constellation_response = map_constellation_response(glyphs, conversation_context)
     voltage_response = generate_voltage_response(glyphs, conversation_context)
@@ -209,14 +210,14 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Dict = N
     conversation_depth = 0
     if conversation_context:
         conversation_depth = len(conversation_context.get('messages', []))
-    
+
     print(f"DEBUG: Voltage response - conversation_depth: {conversation_depth}, grief: {themes['grief']}, longing: {themes['longing']}")
     print(f"DEBUG: All themes: {themes}")
-    
+
     dominant = sorted(themes.items(), key=lambda x: x[1], reverse=True)
     top_themes = [t[0] for t in dominant if t[1] > 0][:2]
     total_patterns = sum(themes.values())
-    
+
     print(f"DEBUG: Top themes: {top_themes}, Total patterns: {total_patterns}")
 
     # Special patterns for heavy emotional labor - BUT ONLY for first message
@@ -227,65 +228,60 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Dict = N
     if top_themes == ["grief", "containment"]:
         if conversation_depth <= 1:
             return "You're holding a lot right now—and doing it with care. It's okay to feel the weight of it. You don't have to carry it alone."
-        elif total_patterns >= 6:
+        if total_patterns >= 6:
             return "The grief patterns are intense, and you're managing them with such strength. Major life transitions leave deep impressions—let yourself feel the full scope of what's shifting."
-        else:
-            return "Still holding space for the sorrow. The way you're containing this loss shows real wisdom about grief's timing."
-    
+        return "Still holding space for the sorrow. The way you're containing this loss shows real wisdom about grief's timing."
+
     if top_themes == ["grief", "longing"] or (themes["grief"] >= 3 and themes["longing"] >= 2):
         if conversation_depth <= 1:
             return "Deep grief mixed with yearning—that's the territory of profound loss. Something precious ended, and part of you still reaches toward what was."
-        else:
-            return "The grief and longing patterns are speaking to each other. When we lose something central, the heart keeps seeking what can no longer be found. This is sacred territory."
-    
+        return "The grief and longing patterns are speaking to each other. When we lose something central, the heart keeps seeking what can no longer be found. This is sacred territory."
+
     if top_themes == ["longing", "devotion"]:
         return "There's something you care about deeply, maybe even painfully. That kind of longing is sacred. Let's honor it."
-    
+
     if top_themes == ["joy", "recognition"]:
         return "You're being seen in your joy. That's a beautiful thing—let it land."
-    
+
     if top_themes == ["grief", "recognition"]:
         if conversation_depth <= 1:
             return "You're being seen in your sorrow. That kind of witnessing matters. You're not invisible here."
-        else:
-            return "The grief continues to ask for recognition. Being truly seen in loss is one of the most healing things possible."
-    
+        return "The grief continues to ask for recognition. Being truly seen in loss is one of the most healing things possible."
+
     if top_themes == ["insight", "stillness"]:
         return "There's clarity emerging in the quiet. You don't have to rush it—just stay with what's unfolding."
 
     # Enhanced contextual responses that acknowledge specific content
     if conversation_depth >= 4 and themes["grief"] >= 5:
-        print(f"DEBUG: Triggering major life transitions response")
+        print("DEBUG: Triggering major life transitions response")
         return "Major life transitions detected—divorce, new love, timeline pressures. The system recognizes you're navigating the complex territory between ending and beginning, with external pressures around timing that add weight to already profound changes."
-    
+
     if conversation_depth >= 2 and themes["longing"] >= 8:
         if themes["grief"] >= 8:
-            print(f"DEBUG: Triggering grief + longing response")
+            print("DEBUG: Triggering grief + longing response")
             return "The patterns show deep grief mixed with new longing—classic territory of major relationship transition. Ending a marriage while opening to new love creates complex emotional currents. The system tracks both the loss and the reaching toward what calls to you."
-        else:
-            print(f"DEBUG: Triggering intelligence/ambition response")
-            return "Intense longing patterns with high intelligence themes—this speaks to the gap between capability and ambition. The system recognizes the frustration of knowing you have intelligence but feeling it's not enough to break through the barriers you're encountering."
-    
+        print("DEBUG: Triggering intelligence/ambition response")
+        return "Intense longing patterns with high intelligence themes—this speaks to the gap between capability and ambition. The system recognizes the frustration of knowing you have intelligence but feeling it's not enough to break through the barriers you're encountering."
+
     # Handle pure grief patterns
     if themes["grief"] >= 3 and conversation_depth > 1:
         return f"Major grief constellation active: {themes['grief']} patterns. This speaks to fundamental life change—the kind that reshapes the very ground you stand on."
-    
+
     if themes["grief"] >= 2:
         if conversation_depth <= 1:
             return "Significant grief patterns detected. The system recognizes you're in the territory of real loss."
-        else:
-            return "The grief patterns persist and deepen. Whatever ended was central to your life's architecture."
+        return "The grief patterns persist and deepen. Whatever ended was central to your life's architecture."
 
     # Enhanced default responses
     if conversation_depth >= 4:
         return "Multiple layers emerging—the system tracks frustration with creative barriers, intelligence versus ambition tensions, and relationship transitions. Each thread carries its own emotional signature."
-        
+
     if total_patterns >= 6:
         return "Rich emotional complexity mapped—you're carrying the full spectrum of human experience through whatever transition you're navigating."
-    
+
     if conversation_depth > 2:
         return "Your emotional patterns continue to evolve. The system tracks the subtle shifts as you move through this territory."
-    
+
     return "You're carrying something layered. Let's sit with it and see what wants to be named."
 
 # Example usage

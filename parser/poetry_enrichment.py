@@ -5,20 +5,20 @@ Blends NRC emotion analysis with beautiful poetic language.
 Creates responses enriched with poetry and metaphor from the glyph collection.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import json
 import random
-from pathlib import Path
+
 from parser.nrc_lexicon_loader import nrc
 from parser.poetry_database import PoetryDatabase
 
 
 class PoetryEnrichment:
     """Enriches emotional responses with poetry and glyphs."""
-    
+
     # Map emotions to glyph categories from the 292-glyph collection
     EMOTION_TO_GLYPHS = {
         'joy': ['✨', '🌟', '💫', '🎉', '🎊', '🌞', '🦋', '🌸', '🌺', '🌻'],
@@ -33,20 +33,20 @@ class PoetryEnrichment:
         'negative': ['⚫', '🌑', '😞', '💔', '🔥', '⛓️', '⚡', '🌧️'],
         'positive': ['✨', '🌟', '💫', '☀️', '🌈', '🎉', '💖', '🦋'],
     }
-    
+
     def __init__(self):
         """Initialize enrichment engine."""
         self.poetry_db = PoetryDatabase()
         self.nrc = nrc
         self.poetry_cache = {}
-    
+
     def get_glyphs_for_emotion(self, emotion: str, count: int = 3) -> list:
         """Get glyph symbols for an emotion."""
         glyphs = self.EMOTION_TO_GLYPHS.get(emotion, [])
         if not glyphs:
             return []
         return random.sample(glyphs, min(count, len(glyphs)))
-    
+
     def get_poetry_for_emotion(self, emotion: str) -> str:
         """Get a poem excerpt for an emotion."""
         poem = self.poetry_db.get_poem(emotion)
@@ -58,7 +58,7 @@ class PoetryEnrichment:
                 text = text[:100] + "..."
             return text
         return ""
-    
+
     def enrich_emotion_analysis(self, text: str) -> dict:
         """
         Analyze text and enrich with poetry and glyphs.
@@ -75,7 +75,7 @@ class PoetryEnrichment:
         """
         # Analyze emotions
         emotions = self.nrc.analyze_text(text)
-        
+
         if not emotions:
             return {
                 'emotions': {},
@@ -85,17 +85,17 @@ class PoetryEnrichment:
                 'glyphs': [],
                 'enriched_response': 'I sensed your words, but found no clear emotion.'
             }
-        
+
         # Find dominant emotion
         dominant = max(emotions.items(), key=lambda x: x[1])
         dominant_emotion = dominant[0]
         emotion_strength = dominant[1]
-        
+
         # Get poetry and glyphs
         poetry = self.get_poetry_for_emotion(dominant_emotion)
         glyphs = self.get_glyphs_for_emotion(dominant_emotion, 2)
         glyphs_str = ' '.join(glyphs)
-        
+
         # Build enriched response
         enriched_response = self._build_enriched_response(
             dominant_emotion,
@@ -103,7 +103,7 @@ class PoetryEnrichment:
             poetry,
             glyphs_str
         )
-        
+
         return {
             'emotions': emotions,
             'dominant_emotion': dominant_emotion,
@@ -112,7 +112,7 @@ class PoetryEnrichment:
             'glyphs': glyphs,
             'enriched_response': enriched_response
         }
-    
+
     def _build_enriched_response(self, emotion: str, strength: int, poetry: str, glyphs: str) -> str:
         """Build a poetic response."""
         responses = {
@@ -172,13 +172,13 @@ class PoetryEnrichment:
                 f"Good energy flows {glyphs}. This builds the world.",
             ],
         }
-        
+
         emotion_responses = responses.get(emotion, [
             f"I sense {emotion} in your words {glyphs}. There is depth here.",
         ])
-        
+
         return random.choice(emotion_responses)
-    
+
     def get_stats(self) -> dict:
         """Get enrichment statistics."""
         return {
@@ -203,17 +203,17 @@ def load_enrichment():
 if __name__ == "__main__":
     # Test
     print("\n🎭 Testing Poetry Enrichment Engine\n")
-    
+
     engine = PoetryEnrichment()
-    
+
     # Show stats
     stats = engine.get_stats()
-    print(f"📊 Enrichment Engine Stats:")
+    print("📊 Enrichment Engine Stats:")
     print(f"  Poetry poems available: {stats['poetry_poems']}")
     print(f"  Emotion categories: {stats['emotions_with_glyphs']}")
     print(f"  NRC vocabulary: {stats['nrc_words']} words")
     print(f"  NRC emotions: {stats['nrc_emotions']}\n")
-    
+
     # Test enrichment
     test_samples = [
         "I'm so happy and grateful for this beautiful day!",
@@ -222,7 +222,7 @@ if __name__ == "__main__":
         "I'm terrified of what might happen.",
         "This makes me incredibly angry!",
     ]
-    
+
     print("🧪 Testing Enrichment:\n")
     for sample in test_samples:
         result = engine.enrich_emotion_analysis(sample)

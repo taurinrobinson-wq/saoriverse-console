@@ -1,9 +1,10 @@
 import json
+import os
 import re
 import sqlite3
-import os
-from typing import List, Dict, Optional
 from datetime import datetime
+from typing import Dict, List, Optional
+
 
 # Load signal lexicon from JSON (base + learned)
 def load_signal_map(base_path: str, learned_path: str = "parser/learned_lexicon.json") -> Dict[str, Dict]:
@@ -121,13 +122,20 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 
     for g in glyphs:
         name = g["glyph_name"].lower()
-        if any(k in name for k in ["grief", "mourning", "collapse", "sorrow"]): themes["grief"] += 1
-        if any(k in name for k in ["ache", "yearning", "longing", "recursive"]): themes["longing"] += 1
-        if any(k in name for k in ["boundary", "contain", "still", "shield"]): themes["containment"] += 1
-        if any(k in name for k in ["joy", "delight", "ecstasy", "bliss"]): themes["joy"] += 1
-        if any(k in name for k in ["devotional", "vow", "exalted", "sacred"]): themes["devotion"] += 1
-        if any(k in name for k in ["recognition", "seen", "witness", "mirror"]): themes["recognition"] += 1
-        if any(k in name for k in ["insight", "clarity", "knowing", "revelation"]): themes["insight"] += 1
+        if any(k in name for k in ["grief", "mourning", "collapse", "sorrow"]):
+            themes["grief"] += 1
+        if any(k in name for k in ["ache", "yearning", "longing", "recursive"]):
+            themes["longing"] += 1
+        if any(k in name for k in ["boundary", "contain", "still", "shield"]):
+            themes["containment"] += 1
+        if any(k in name for k in ["joy", "delight", "ecstasy", "bliss"]):
+            themes["joy"] += 1
+        if any(k in name for k in ["devotional", "vow", "exalted", "sacred"]):
+            themes["devotion"] += 1
+        if any(k in name for k in ["recognition", "seen", "witness", "mirror"]):
+            themes["recognition"] += 1
+        if any(k in name for k in ["insight", "clarity", "knowing", "revelation"]):
+            themes["insight"] += 1
 
     dominant = sorted(themes.items(), key=lambda x: x[1], reverse=True)
     top_themes = [t[0] for t in dominant if t[1] > 0][:2]

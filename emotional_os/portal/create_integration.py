@@ -6,7 +6,6 @@ to your existing Saoriverse conversation flow
 
 import os
 import sys
-from typing import Dict, Optional
 
 # Add the current directory to the path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -15,7 +14,7 @@ def create_enhanced_conversation_demo():
     """
     Enhanced version of your conversation_demo.py that includes auto-evolving glyphs
     """
-    
+
     enhanced_demo_code = '''#!/usr/bin/env python3
 """
 Enhanced Saoriverse Conversation Demo with Auto-Evolving Glyphs
@@ -276,25 +275,23 @@ if __name__ == "__main__":
     else:
         interactive_demo()
 '''
-    
+
     # Write the enhanced demo to a file
     with open('enhanced_conversation_demo.py', 'w') as f:
         f.write(enhanced_demo_code)
-    
+
     print("Created enhanced_conversation_demo.py")
     print("This shows how to integrate the evolving glyph system with your existing conversation flow.")
 
 def create_quick_setup_guide():
     """Create a quick setup guide"""
-    
+
     setup_guide = '''# Quick Setup Guide: Auto-Evolving Glyphs
 
 ## 🚀 Getting Started
 
 ### 1. Install Dependencies
-```bash
 pip install requests  # If not already installed
-```
 
 ### 2. Configure Your Credentials
 1. Copy `config_template.py` to `config.py`
@@ -304,7 +301,6 @@ pip install requests  # If not already installed
    - SUPABASE_FUNCTION_URL
 
 ### 3. Test the System
-```bash
 # Test glyph generation (offline)
 python test_evolving_glyphs.py
 
@@ -313,7 +309,6 @@ python enhanced_conversation_demo.py
 
 # Run batch evolution test
 python enhanced_conversation_demo.py batch
-```
 
 ### 4. Integration Options
 
@@ -321,7 +316,6 @@ python enhanced_conversation_demo.py batch
 Replace your `conversation_demo.py` with `enhanced_conversation_demo.py`
 
 #### Option B: Add to existing code
-```python
 from evolving_glyph_integrator import EvolvingGlyphIntegrator
 
 integrator = EvolvingGlyphIntegrator(
@@ -331,7 +325,6 @@ integrator = EvolvingGlyphIntegrator(
 )
 
 result = integrator.process_conversation_with_evolution(message="user input")
-```
 
 #### Option C: Use as background service
 The system can run alongside your existing setup, monitoring conversations and automatically adding new glyphs to your database.
@@ -371,22 +364,22 @@ The system can run alongside your existing setup, monitoring conversations and a
 
 Your emotional OS will now continuously evolve and become more sophisticated! 🎉
 '''
-    
+
     with open('SETUP_EVOLVING_GLYPHS.md', 'w') as f:
         f.write(setup_guide)
-    
+
     print("Created SETUP_EVOLVING_GLYPHS.md - your quick setup guide!")
 
 if __name__ == "__main__":
     print("🔧 Creating integration examples and setup guides...")
-    
+
     create_enhanced_conversation_demo()
     create_quick_setup_guide()
-    
+
     print("\n✅ Integration files created:")
     print("   - enhanced_conversation_demo.py (replaces your existing demo)")
     print("   - SETUP_EVOLVING_GLYPHS.md (setup guide)")
     print("   - config_template.py (configuration template)")
-    
+
     print("\n🌟 Your auto-evolving glyph system is ready!")
     print("   Follow the setup guide to integrate with your Saoriverse system.")

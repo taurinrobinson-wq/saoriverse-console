@@ -1,9 +1,7 @@
 import json
-import re
 import os
-from typing import Dict, List, Set
-from collections import Counter, defaultdict
-import datetime
+from typing import Dict
+
 
 class LexiconLearner:
 	"""
@@ -53,7 +51,7 @@ class LexiconLearner:
 			],
 			'intensity_modifiers': [
 				r'very (\w+)',
-				r'extremely (\w+)', 
+				r'extremely (\w+)',
 				r'deeply (\w+)',
 				r'slightly (\w+)',
 				r'intensely (\w+)'

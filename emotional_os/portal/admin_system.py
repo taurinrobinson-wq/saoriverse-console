@@ -3,16 +3,15 @@ FirstPerson Admin Portal
 Comprehensive administrative interface for managing the FirstPerson platform
 """
 
-from fastapi import APIRouter, Depends, HTTPException, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
-import requests
+import hashlib
+import json
 import os
 from datetime import datetime, timedelta
-import json
-import hashlib
-import secrets
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
+from fastapi import APIRouter, Depends, Form, HTTPException, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
 # Admin router
@@ -41,7 +40,7 @@ class SystemConfigRequest(BaseModel):
 # Admin Authentication Class
 class AdminAuth:
     """Handle admin authentication and session management"""
-    
+
     ADMIN_USERS = {
         "admin": {
             "password_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",  # "admin"
@@ -52,12 +51,12 @@ class AdminAuth:
             "permissions": ["all"]
         }
     }
-    
+
     @staticmethod
     def hash_password(password: str) -> str:
         """Hash password for secure storage"""
         return hashlib.sha256(password.encode()).hexdigest()
-    
+
     @staticmethod
     def verify_admin_credentials(username: str, password: str) -> bool:
         """Verify admin login credentials"""
@@ -65,7 +64,7 @@ class AdminAuth:
             password_hash = AdminAuth.hash_password(password)
             return password_hash == AdminAuth.ADMIN_USERS[username]["password_hash"]
         return False
-    
+
     @staticmethod
     def create_admin_session(username: str) -> str:
         """Create secure admin session token"""
@@ -79,7 +78,7 @@ class AdminAuth:
         }
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
         return token
-    
+
     @staticmethod
     def validate_admin_session(token: str) -> Dict[str, Any]:
         """Validate admin session token"""
@@ -87,13 +86,12 @@ class AdminAuth:
             import base64
             decoded_data = base64.b64decode(token.encode()).decode()
             session_data = json.loads(decoded_data)
-            
+
             # Check expiration
             expires = datetime.fromisoformat(session_data["expires"])
             if datetime.now() < expires and session_data.get("is_admin"):
                 return {"valid": True, "data": session_data}
-            else:
-                return {"valid": False, "error": "Session expired"}
+            return {"valid": False, "error": "Session expired"}
         except Exception as e:
             return {"valid": False, "error": str(e)}
 
@@ -103,17 +101,17 @@ async def require_admin(request: Request):
     admin_token = request.cookies.get("admin_session")
     if not admin_token:
         raise HTTPException(status_code=401, detail="Admin authentication required")
-    
+
     session_result = AdminAuth.validate_admin_session(admin_token)
     if not session_result["valid"]:
         raise HTTPException(status_code=401, detail="Invalid admin session")
-    
+
     return session_result["data"]
 
 # Database Interface for Admin Operations
 class AdminDatabase:
     """Handle admin database operations"""
-    
+
     @staticmethod
     async def get_all_users() -> List[Dict[str, Any]]:
         """Get all registered users"""
@@ -131,7 +129,7 @@ class AdminDatabase:
                     "conversation_count": 15
                 },
                 {
-                    "id": "user2", 
+                    "id": "user2",
                     "username": "test_user",
                     "email": "test@example.com",
                     "created_at": "2025-10-14T15:30:00",
@@ -143,7 +141,7 @@ class AdminDatabase:
         except Exception as e:
             print(f"Error fetching users: {e}")
             return []
-    
+
     @staticmethod
     async def get_system_stats() -> Dict[str, Any]:
         """Get system statistics"""
@@ -162,7 +160,7 @@ class AdminDatabase:
         except Exception as e:
             print(f"Error fetching stats: {e}")
             return {}
-    
+
     @staticmethod
     async def get_recent_conversations(limit: int = 50) -> List[Dict[str, Any]]:
         """Get recent conversations for moderation"""
@@ -182,7 +180,7 @@ class AdminDatabase:
                 {
                     "id": "conv2",
                     "user_id": "user2",
-                    "username": "test_user", 
+                    "username": "test_user",
                     "timestamp": "2025-10-15T14:15:00",
                     "message": "Had a great day today, feeling optimistic",
                     "response": "That's wonderful to hear! Optimism can be such a powerful force. What made today particularly great?",
@@ -216,18 +214,17 @@ async def admin_login(request: Request, username: str = Form(), password: str = 
             max_age=28800  # 8 hours
         )
         return response
-    else:
-        return templates.TemplateResponse(
-            "admin/login.html", 
-            {"request": request, "error": "Invalid credentials"}
-        )
+    return templates.TemplateResponse(
+        "admin/login.html",
+        {"request": request, "error": "Invalid credentials"}
+    )
 
 @admin_router.get("/dashboard", response_class=HTMLResponse)
 async def admin_dashboard(request: Request, admin_user = Depends(require_admin)):
     """Main admin dashboard"""
     stats = await AdminDatabase.get_system_stats()
     recent_users = await AdminDatabase.get_all_users()
-    
+
     return templates.TemplateResponse("admin/dashboard.html", {
         "request": request,
         "admin_user": admin_user,
@@ -239,7 +236,7 @@ async def admin_dashboard(request: Request, admin_user = Depends(require_admin))
 async def admin_users(request: Request, admin_user = Depends(require_admin)):
     """User management page"""
     users = await AdminDatabase.get_all_users()
-    
+
     return templates.TemplateResponse("admin/users.html", {
         "request": request,
         "admin_user": admin_user,
@@ -250,7 +247,7 @@ async def admin_users(request: Request, admin_user = Depends(require_admin)):
 async def admin_conversations(request: Request, admin_user = Depends(require_admin)):
     """Conversation moderation page"""
     conversations = await AdminDatabase.get_recent_conversations()
-    
+
     return templates.TemplateResponse("admin/conversations.html", {
         "request": request,
         "admin_user": admin_user,
@@ -276,7 +273,7 @@ async def admin_logout():
 
 @admin_router.post("/api/users/{user_id}/moderate")
 async def moderate_user(
-    user_id: str, 
+    user_id: str,
     moderation: UserModerationRequest,
     admin_user = Depends(require_admin)
 ):
@@ -297,7 +294,7 @@ async def export_stats(admin_user = Depends(require_admin)):
         stats = await AdminDatabase.get_system_stats()
         users = await AdminDatabase.get_all_users()
         conversations = await AdminDatabase.get_recent_conversations(1000)
-        
+
         export_data = {
             "export_date": datetime.now().isoformat(),
             "stats": stats,
@@ -305,7 +302,7 @@ async def export_stats(admin_user = Depends(require_admin)):
             "conversation_count": len(conversations),
             "admin": admin_user["username"]
         }
-        
+
         return export_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

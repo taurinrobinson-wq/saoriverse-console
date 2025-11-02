@@ -4,8 +4,9 @@ Poetry Enrichment Diagnostic & Quick Fix
 This helps troubleshoot why enrichment isn't showing up in the UI.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, '.')
 os.chdir('/Users/taurinrobinson/saoriverse-console')
 
@@ -32,7 +33,6 @@ except Exception as e:
 print("\n2️⃣ DATA FILE STATUS")
 print("-" * 70)
 import os
-from pathlib import Path
 
 files = {
     'data/poetry/poetry_database.json': 'Poetry Database',
@@ -61,13 +61,13 @@ for test_text in test_cases:
     result = engine.enrich_emotion_analysis(test_text)
     emotion = result.get('dominant_emotion', 'NONE')
     glyphs = ' '.join(result.get('glyphs', []))
-    
+
     if result.get('dominant_emotion'):
         print(f"✅ '{test_text[:40]}...'")
         print(f"   → {emotion} {glyphs}")
     else:
         print(f"⚠️  '{test_text[:40]}...'")
-        print(f"   → NO EMOTION DETECTED")
+        print("   → NO EMOTION DETECTED")
 
 # Check 4: UI Integration
 print("\n4️⃣ UI INTEGRATION STEPS")
@@ -108,9 +108,9 @@ print(f"\nInput: \"{example_input}\"\n")
 print(f"Emotion Detected: {result.get('dominant_emotion')}")
 print(f"Emotion Strength: {result.get('emotion_strength')}")
 print(f"Glyphs: {' '.join(result.get('glyphs', []))}")
-print(f"\nEnriched Response:")
+print("\nEnriched Response:")
 print(f"{result.get('enriched_response')}\n")
-print(f"Poetry Excerpt:")
+print("Poetry Excerpt:")
 print(f"{result.get('poetry')}\n")
 
 # Summary
