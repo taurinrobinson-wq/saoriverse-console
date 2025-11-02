@@ -20,16 +20,9 @@ def generate_doc(date, time, event, mood, reflections, insights):
     buffer.seek(0)
     return buffer
 # --- End Generate Word Document ---
-"""
-
 
 import streamlit as st
-import requests
-import json
-import time
 import datetime
-import hashlib
-import secrets
 
 # Page configuration
 st.set_page_config(
