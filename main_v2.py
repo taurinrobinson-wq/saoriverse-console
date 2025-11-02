@@ -53,10 +53,6 @@ def main():
             fetch_recent = None
             init_db = None
 
-    # A/B test opt-in (kept in sidebar for experiments, optional)
-    participate_ab = st.sidebar.checkbox("Participate in Limbic A/B test", value=st.session_state.get('ab_participate', False))
-    st.session_state['ab_participate'] = participate_ab
-
     # Sidebar: Conversation history (replace demo panel)
     st.sidebar.markdown("---")
     # Optional persistence toggle (opt-in)
@@ -72,11 +68,11 @@ def main():
         if st.sidebar.button("Confirm persist"):
             st.session_state['persist_confirmed'] = True
             st.session_state['persist_history'] = True
-            st.experimental_rerun()
+            st.rerun()
         if st.sidebar.button("Cancel"):
             st.session_state['persist_confirmed'] = False
             st.session_state['persist_history'] = False
-            st.experimental_rerun()
+            st.rerun()
     else:
         st.session_state['persist_history'] = bool(persist_history and st.session_state.get('persist_confirmed', False))
 
@@ -115,19 +111,19 @@ def main():
             if st.button("Recall", key=f"recall_{orig_idx}"):
                 # Set a recalled message which the main UI will pick up and process
                 st.session_state['recalled_message'] = exch.get('user', '')
-                st.experimental_rerun()
+                st.rerun()
         with cols[1]:
             if st.button("Resend", key=f"resend_{orig_idx}"):
                 # Mark for auto-processing and set recalled text
                 st.session_state['recalled_message'] = exch.get('user', '')
                 st.session_state['auto_process'] = True
-                st.experimental_rerun()
+                st.rerun()
 
     # Compact controls for history export/clear
     st.sidebar.markdown('---')
     if st.sidebar.button('Clear Local History'):
         st.session_state[conversation_key] = []
-        st.experimental_rerun()
+        st.rerun()
     if st.sidebar.button('Download History'):
         try:
             import json as _json
@@ -147,7 +143,7 @@ def main():
     if st.session_state.get('persist_confirmed', False) and st.session_state.get('user_id'):
         if st.sidebar.button('Clear Server History'):
             st.session_state['clear_server_history_pending'] = True
-            st.experimental_rerun()
+            st.rerun()
 
         if st.session_state.get('clear_server_history_pending'):
             st.sidebar.markdown('**Confirm server-side deletion of your persisted conversation history**')
@@ -158,10 +154,10 @@ def main():
                 else:
                     st.sidebar.error(f'Failed to delete server history: {msg}')
                 st.session_state['clear_server_history_pending'] = False
-                st.experimental_rerun()
+                st.rerun()
             if st.sidebar.button('Cancel Delete'):
                 st.session_state['clear_server_history_pending'] = False
-                st.experimental_rerun()
+                st.rerun()
     # Check if user is authenticated
     if st.session_state.get('authenticated', False):
         render_main_app()
