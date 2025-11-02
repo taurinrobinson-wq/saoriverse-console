@@ -480,9 +480,9 @@ def render_main_app():
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
                         response = "Unknown processing mode."
-                    # Before emitting the assistant response, attempt limbic processing
+                    # Before emitting the assistant response, attempt limbic processing if engine is present
                     try:
-                        if st.session_state.get('enable_limbic', False) and 'limbic_engine' in st.session_state:
+                        if 'limbic_engine' in st.session_state:
                             try:
                                 from emotional_os.glyphs.limbic_decorator import decorate_reply
                                 engine = st.session_state['limbic_engine']
