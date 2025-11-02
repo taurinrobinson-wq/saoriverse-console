@@ -496,10 +496,10 @@ def render_main_app():
                     try:
                         resp = requests.post(rest_url, headers=headers, json=payload, timeout=6)
                         if resp.status_code not in (200, 201):
-                            # Non-fatal: warn in UI
-                            st.warning('Failed to persist history to Supabase (non-200 response).')
+                            # Non-fatal: warn in UI (use generic storage wording)
+                            st.warning('Could not save history to secure storage right now.')
                     except Exception:
-                        st.warning('Failed to persist history to Supabase (network error).')
+                        st.warning('Temporary issue saving to secure storage. Your local history is still intact.')
         except Exception:
             # Best-effort: do not break the UI if persistence fails
             pass

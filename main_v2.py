@@ -61,13 +61,13 @@ def main():
         st.markdown(f"**Status:** {status_chip}")
 
         enable_toggle = st.checkbox(
-            "Store my chats to my Supabase",
+            "Securely save my chats",
             value=status_on,
-            help="When enabled, new messages will be saved to your own Supabase project (you control the data)."
+            help="When enabled, new messages will be saved to your private account storage (optional, you control it)."
         )
 
         if enable_toggle and not st.session_state.get('persist_confirmed', False):
-            st.info("To enable storage, please confirm that you're okay with saving your chats to your Supabase project.")
+            st.info("To enable storage, please confirm that you're okay with saving your chats to your private account storage.")
             c1, c2 = st.columns([1, 1])
             with c1:
                 if st.button("I consent"):
@@ -99,7 +99,7 @@ def main():
                         if success:
                             st.success('Server-side history deleted.')
                         else:
-                            st.error(f'Failed to delete server history: {msg}')
+                            st.error('Failed to delete server history. Please try again later.')
                         st.session_state['clear_server_history_pending'] = False
                         st.rerun()
                 with col_b:
