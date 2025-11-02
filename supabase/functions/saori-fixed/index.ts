@@ -1,9 +1,9 @@
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import OpenAI from "npm:openai@4.56.0";
-
-const ALLOWED_ORIGINS = [
-  "https://taurinrobinson-wq.github.io",
-  "https://console.saonyx.com"
+        {
+          role: "user",
+          content: `User message: "${message}"\n\nReturn exactly one JSON object: {"glyphs": [ ... ]}. DO NOT include any explanation or extra text — only return valid JSON. Here are three strict examples you must follow exactly as structure guides (these are examples only):\n\n1) Emotion-focused message example:\n{"glyphs":[{"name":"absence_of_rhythm","description":"Feeling of loss and disconnection when someone important leaves.","response_layer":"inner_reflection","depth":4}]}\n\n2) Physical-sensation example:\n{"glyphs":[{"name":"chest_tightening","description":"Physical tightening of the chest associated with anxiety.","response_layer":"grounding","depth":3}]}\n\n3) No-glyphs example (when nothing clear to extract):\n{"glyphs":[]}\n\nReturn EXACTLY one JSON object with key \"glyphs\`. Do NOT include markdown, commentary, or extra characters.`
+        }
 ];
 
 function getCorsHeaders(req) {
@@ -64,6 +64,9 @@ Deno.serve(async (req) => {
   } catch {
     return new Response(JSON.stringify({ error: "Invalid JSON" }), { status: 400, headers: corsHeaders });
   }
+
+  // Timestamp for simple processing_time logs
+  const startTime = Date.now();
 
   const message = body?.message?.toString?.().trim();
   const mode = body?.mode?.toString?.() || "quick";
@@ -134,13 +137,35 @@ If humor is appropriate, use ${humor} to deepen intimacy or defuse tension.
 Honor ambiguity where it serves connection. Mirror the user's emotional state with care.
 `.trim();
 
+// 6.a Optional limbic cues supplied by a trusted client. If present, summarize them for the generator.
+let fullSystemPrompt = systemPrompt;
+try {
+  const limbic = body?.limbic;
+  if (limbic && typeof limbic === 'object') {
+    const limbicEmotion = String(limbic.emotion ?? 'unknown');
+    const ritualSeq = Array.isArray(limbic.ritual_sequence) ? limbic.ritual_sequence.join(', ') : '';
+    let signalsSummary = '';
+    try {
+      const keys = Object.keys(limbic.system_signals || {}).slice(0, 5);
+      signalsSummary = keys.map(k => `${k}:${(limbic.system_signals[k]?.signal ?? '').slice(0,60)}`).join('; ');
+    } catch(e) {
+      signalsSummary = '';
+    }
+
+    const limbicNote = `Limbic cues: emotion=${limbicEmotion}; rituals=${ritualSeq}; signals=${signalsSummary}. Use these cues to adapt tone and include a brief empathic opener that references the mapped emotion when appropriate.`;
+    fullSystemPrompt = systemPrompt + "\n\n" + limbicNote;
+  }
+} catch (e) {
+  // Non-fatal - continue with base prompt
+}
+
 // 6. Completion call
 let reply = "Saori echoes your words, though the oracle sleeps.";
 try {
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
-      { role: "system", content: systemPrompt },
+      { role: "system", content: fullSystemPrompt },
       { role: "user", content: message }
     ],
     temperature: 0.7
@@ -152,19 +177,21 @@ try {
 
   let parsedGlyphs = [];
   try {
+    // Stronger, stricter extraction instructions to force a valid JSON-only response.
     const extract = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
-          content: "Extract concise 'glyphs' from user messages. A glyph is a named emotional/experiential construct and may include a response layer (inner reflection, grounding, outreach), and a rough depth from 1-5."
+          content: "You are a JSON-only extractor. Given a user's message, you MUST return ONLY a valid JSON object (no surrounding explanation, no markdown) with a single key 'glyphs'. The value of 'glyphs' MUST be an array (possibly empty). Each array element must be an object with keys: name (snake_case string), description (string, <=120 chars), optional response_layer (string), optional depth (integer 1-5), optional glyph_type (string), optional symbolic_pairing (string). If there are no glyphs, return {\"glyphs\": []}."
         },
         {
           role: "user",
-          content: `User message: "${message}". Return JSON with an array 'glyphs', each: { name: string (snake_case), description: string (<=120 chars), response_layer?: string, depth?: number(1-5), glyph_type?: string, symbolic_pairing?: string }.`
+          content: `User message: "${message}"\n\nReturn exactly one JSON object: {"glyphs": [ ... ]}. Example: {"glyphs":[{"name":"chest_tightening","description":"A physical sensation...","response_layer":"inner_reflection","depth":4}]}\nDo NOT include any additional text.`
         }
       ],
-      temperature: 0.3,
+      // Use very low temperature for deterministic extraction
+      temperature: 0.0,
       response_format: { type: "json_object" }
     });
     const raw = extract.choices?.[0]?.message?.content ?? "{}";
@@ -176,4 +203,33 @@ try {
       response_layer: g.response_layer ? String(g.response_layer).slice(0, 80) : undefined,
       depth: Number.isFinite(Number(g.depth)) ? Math.max(1, Math.min(5, Number(g.depth))) : undefined,
       glyph_type: g.glyph_type ? String(g.glyph_type).slice(0, 80) : undefined,
-      symbolic_pairing: g.symbolic_pairing ? String
+      symbolic_pairing: g.symbolic_pairing ? String(g.symbolic_pairing).slice(0, 80) : undefined
+    }));
+  } catch (err) {
+    console.error("Glyph extraction failed:", err);
+    parsedGlyphs = [];
+  }
+
+  // Build response object
+  const processingTime = `${Date.now() - startTime}ms`;
+  const response = {
+    reply,
+    glyph: matchedTag,
+    parsed_glyphs: parsedGlyphs,
+    upserted_glyphs: [],
+    log: {
+      processing_time: processingTime,
+      method: "optimized_with_extraction",
+      emotions_detected: [],
+      user_id: userId || null,
+      learning_active: false,
+      cache_used: false,
+      privacy_mode: "anonymous"
+    }
+  };
+
+  return new Response(JSON.stringify(response), { status: 200, headers: corsHeaders });
+} catch (err) {
+  console.error("Unexpected processing error:", err);
+  return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500, headers: corsHeaders });
+}

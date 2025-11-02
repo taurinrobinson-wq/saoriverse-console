@@ -7,7 +7,11 @@ This module runs entirely in the backend and never exposes glyphs or
 internal system labels to end users. It produces short, companion-like
 augmentations (empathic opener, savoring cue, and a small practical step).
 """
+import logging
 from typing import Dict
+
+# Module logger — controlled by environment or test harness
+logger = logging.getLogger(__name__)
 
 
 def _safe_short(sentence: str) -> str:
@@ -34,6 +38,19 @@ def decorate_reply(baseline_reply: str, limbic_result: Dict, intensity: float = 
         emotion = limbic_result.get('emotion', '') if isinstance(limbic_result, dict) else ''
     except Exception:
         emotion = ''
+
+    # Debug: emit a compact summary of limbic_result when logger is configured
+    try:
+        if logger.isEnabledFor(logging.DEBUG):
+            summary = {
+                'emotion': emotion,
+                'has_system_signals': bool(limbic_result.get('system_signals')) if isinstance(limbic_result, dict) else False,
+                'ritual_len': len(limbic_result.get('ritual_sequence', [])) if isinstance(limbic_result, dict) else 0
+            }
+            logger.debug("decorate_reply() limbic_summary=%s", summary)
+    except Exception:
+        # Non-fatal logging error
+        pass
 
     opener = ''
     savor = ''
@@ -69,7 +86,13 @@ def decorate_reply(baseline_reply: str, limbic_result: Dict, intensity: float = 
         decorated = f"{baseline} {savor} {practical}"
 
     # Final cleanup: avoid runaway whitespace
-    return ' '.join(decorated.split())
+    out = ' '.join(decorated.split())
+    if logger.isEnabledFor(logging.DEBUG):
+        try:
+            logger.debug("decorate_reply() out=%s", out)
+        except Exception:
+            pass
+    return out
 
 
 if __name__ == '__main__':
