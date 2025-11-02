@@ -19,6 +19,8 @@ def test_evolution_trigger():
     print("Conversation count: " + str(conversation_count))
     print("Should evolve: " + str(should_evolve))
 
+    assert should_evolve, "Evolution should be triggered at conversation count 10"
+    
     if should_evolve:
         print("✅ Evolution should be triggered!")
 
@@ -58,9 +60,15 @@ def test_evolution_trigger():
         print("\n=== Message Metadata ===")
         print("is_evolution: " + str(evolution_system_message['metadata']['is_evolution']))
 
-        return evolution_system_message
-    print("❌ Evolution should not trigger")
-    return None
+        assert evolution_system_message['metadata']['is_evolution'] is True, "Message should have is_evolution metadata"
+        assert evolution_system_message['type'] == 'system', "Message type should be 'system'"
+        print("✅ All assertions passed!")
+
+        assert evolution_system_message['metadata']['is_evolution'] is True, "Message should have is_evolution metadata"
+        assert evolution_system_message['type'] == 'system', "Message type should be 'system'"
+        print("✅ All assertions passed!")
+    else:
+        raise AssertionError("Evolution should trigger at conversation count 10")
 
 if __name__ == "__main__":
     result = test_evolution_trigger()

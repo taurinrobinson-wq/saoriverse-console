@@ -104,7 +104,11 @@ def test_glyph_generation_offline():
         for pattern_key, pattern in generator.detected_patterns.items():
             print(f"   • {pattern_key}: {pattern.frequency} occurrences")
 
-    return all_generated_glyphs
+    # Assert that we processed conversations
+    assert len(test_conversations) > 0, "Should have test conversations to process"
+    print(f"\n✅ Test passed: Processed {len(test_conversations)} conversations")
+    print(f"✅ Detected {len(all_detected_patterns)} emotional patterns")
+    print(f"✅ Generated {len(all_generated_glyphs)} new glyphs")
 
 def create_sample_sql_output(glyphs: List):
     """Create sample SQL output to show what would be inserted"""
