@@ -1,7 +1,7 @@
 import streamlit as st
 
 from emotional_os.deploy.modules.auth import SaoynxAuthentication
-from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface
+from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
 
 # Optional limbic integration (safe import)
 try:
@@ -14,23 +14,20 @@ except Exception:
 # Page configuration
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="graphics/FirstPerson-Logo.svg",
+    page_icon="static/graphics/FirstPerson-Logo(black-cropped_notext).svg",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 def main():
-    # Sidebar controls for integrations
-    st.sidebar.markdown("## Integrations")
-    enable_limbic = st.sidebar.checkbox("Enable Limbic-Adjacent Integration", value=st.session_state.get('enable_limbic', False))
-    st.session_state['enable_limbic'] = enable_limbic
-
-    # Initialize limbic engine if requested and available
-    if enable_limbic and HAS_LIMBIC and 'limbic_engine' not in st.session_state:
+    # Initialize limbic engine if available — now enabled by default and not user-toggled
+    st.session_state['enable_limbic'] = True
+    if HAS_LIMBIC and LimbicIntegrationEngine is not None and 'limbic_engine' not in st.session_state:
         try:
             st.session_state['limbic_engine'] = LimbicIntegrationEngine()
-            st.sidebar.success("Limbic engine initialized")
+            # note: we intentionally do not expose a toggle to the user
         except Exception as e:
+            # non-fatal: record error in sidebar for visibility
             st.sidebar.error(f"Failed to initialize limbic engine: {e}")
 
     # Initialize authentication
@@ -56,111 +53,99 @@ def main():
             fetch_recent = None
             init_db = None
 
-    # A/B test opt-in
-    participate_ab = st.sidebar.checkbox("Participate in Limbic A/B test", value=st.session_state.get('ab_participate', False))
-    st.session_state['ab_participate'] = participate_ab
-
-    # Demo input and run button
+    # Sidebar: Privacy & Storage (friendlier UX)
     st.sidebar.markdown("---")
-    st.sidebar.markdown("### Limbic Demo")
-    demo_input = st.sidebar.text_area("Demo input text", value=st.session_state.get('demo_input', "I feel so joyful and alive"))
-    st.session_state['demo_input'] = demo_input
+    with st.sidebar.expander("Privacy & Storage", expanded=False):
+        status_on = bool(st.session_state.get('persist_history', False) and st.session_state.get('persist_confirmed', False))
+        status_chip = "🟢 On" if status_on else "⚪ Off"
+        st.markdown(f"**Status:** {status_chip}")
 
-    # Assign A/B group once per session if participating
-    import json
-    import random
-    import time
-    from datetime import datetime
-    if participate_ab and 'ab_group' not in st.session_state:
-        st.session_state['ab_group'] = 'control' if random.random() < 0.5 else 'treatment'
+        enable_toggle = st.checkbox(
+            "Save my chats",
+            value=status_on,
+            help="Optional: save new messages to your secure account storage. You can turn this off anytime."
+        )
 
-    ab_group = st.session_state.get('ab_group', 'not_participating')
-
-    run_demo = st.sidebar.button("Run Limbic Demo")
-
-    # Load trauma lexicon for simple safety gating if available
-    trauma_terms = set()
-    try:
-        import json
-        import os
-        trauma_path = os.path.join(os.path.dirname(__file__), 'emotional_os', 'safety', 'trauma_lexicon.json')
-        if os.path.exists(trauma_path):
-            with open(trauma_path, 'r', encoding='utf-8') as f:
-                trauma_terms = set(json.load(f))
-    except Exception:
-        trauma_terms = set()
-
-    if run_demo:
-        # Validate limbic availability
-        if not enable_limbic or not HAS_LIMBIC or 'limbic_engine' not in st.session_state:
-            st.sidebar.error('Limbic engine not initialized. Enable it in Integrations first.')
+        if enable_toggle and not st.session_state.get('persist_confirmed', False):
+            st.info("To enable storage, please confirm that you're okay with saving your chats.")
+            c1, c2 = st.columns([1, 1])
+            with c1:
+                if st.button("I consent"):
+                    st.session_state['persist_confirmed'] = True
+                    st.session_state['persist_history'] = True
+                    st.rerun()
+            with c2:
+                if st.button("Not now"):
+                    st.session_state['persist_confirmed'] = False
+                    st.session_state['persist_history'] = False
+                    st.rerun()
         else:
-            engine = st.session_state['limbic_engine']
-            # Simple safety check
-            lowered = demo_input.lower()
-            safety_flag = any(t.lower() in lowered for t in trauma_terms) if trauma_terms else False
+            st.session_state['persist_history'] = bool(enable_toggle and st.session_state.get('persist_confirmed', False))
 
-            # A/B: if participating and in control, do not apply enrichment
-            apply_enrichment = True
-            if participate_ab and ab_group == 'control':
-                apply_enrichment = False
+        st.caption("Stored fields: user_id, username, your message, assistant reply, processing time, mode, timestamp.")
 
-            start_ts = time.time()
-            glyphs_generated = 0
-
-            if safety_flag:
-                st.sidebar.warning('Input matches trauma-sensitive terms. Enrichment will not be applied.')
-                apply_enrichment = False
-
-            if apply_enrichment:
-                # Use emotion mapping (auto-detect by mapping or let engine decide)
-                result = engine.process_emotion_with_limbic_mapping(demo_input)
-                glyphs_generated = sum(len(v.get('glyph_sequences', {})) for v in result.get('limbic_mapping', {}).values())
-                # Prefer visualizer if available
-                try:
-                    diagram = engine.visualizer.create_emotion_chiasmus_diagram(result.get('emotion', 'joy'))
-                except Exception:
-                    diagram = json.dumps(result.get('system_signals', {}), ensure_ascii=False, indent=2)
-                st.sidebar.markdown('**Limbic Chiasmus**')
-                st.sidebar.text_area('Chiasmus output', diagram, height=240)
+        # Group server-side deletion under the same expander
+        if st.session_state.get('persist_confirmed', False) and st.session_state.get('user_id'):
+            if not st.session_state.get('clear_server_history_pending'):
+                if st.button('Delete my server history'):
+                    st.session_state['clear_server_history_pending'] = True
+                    st.rerun()
             else:
-                st.sidebar.markdown('**Baseline (no enrichment applied)**')
-                st.sidebar.text_area('Baseline output', demo_input, height=120)
+                st.warning('This will permanently delete your persisted messages for your account.')
+                col_a, col_b = st.columns([1, 1])
+                with col_a:
+                    if st.button('Confirm delete'):
+                        success, msg = delete_user_history_from_supabase(str(st.session_state.get('user_id', '')))
+                        if success:
+                            st.success('Server-side history deleted.')
+                        else:
+                            st.error('Failed to delete server history. Please try again later.')
+                        st.session_state['clear_server_history_pending'] = False
+                        st.rerun()
+                with col_b:
+                    if st.button('Cancel'):
+                        st.session_state['clear_server_history_pending'] = False
+                        st.rerun()
+    st.sidebar.markdown("### Conversation History")
+    # Use a per-user conversation history key that matches the main UI
+    conversation_key = f"conversation_history_{st.session_state.get('user_id', 'anonymous')}"
+    if conversation_key not in st.session_state:
+        st.session_state[conversation_key] = []
 
-            latency_ms = (time.time() - start_ts) * 1000.0
+    history = st.session_state[conversation_key]
+    max_items = 12
+    # Show the most recent messages (newest first)
+    for i, exch in enumerate(reversed(history[-max_items:])):
+        # Compute the original index in the history list
+        orig_idx = len(history) - 1 - i
+        ts = exch.get('timestamp', '')
+        short_ts = ts[11:19] if ts else ''
+        st.sidebar.markdown(f"**{short_ts}**")
+        st.sidebar.write(f"**You:** {exch.get('user','')[:120]}")
+        cols = st.sidebar.columns([1, 1])
+        with cols[0]:
+            if st.button("Recall", key=f"recall_{orig_idx}"):
+                # Set a recalled message which the main UI will pick up and process
+                st.session_state['recalled_message'] = exch.get('user', '')
+                st.rerun()
+        with cols[1]:
+            if st.button("Resend", key=f"resend_{orig_idx}"):
+                # Mark for auto-processing and set recalled text
+                st.session_state['recalled_message'] = exch.get('user', '')
+                st.session_state['auto_process'] = True
+                st.rerun()
 
-            # Record telemetry
-            if record_event:
-                try:
-                    if callable(init_db):
-                        init_db()
-                    record_event({
-                        'timestamp': datetime.utcnow().isoformat(),
-                        'user_id': st.session_state.get('user_id', 'demo_user'),
-                        'input_text': demo_input,
-                        'emotion': result.get('emotion', '') if apply_enrichment and isinstance(result, dict) else '',
-                        'enrichment_applied': apply_enrichment,
-                        'ab_group': ab_group,
-                        'latency_ms': latency_ms,
-                        'glyphs_generated': glyphs_generated,
-                        'safety_flag': safety_flag
-                    })
-                except Exception as e:
-                    st.sidebar.error(f'Failed to record telemetry: {e}')
-
-    # Show recent telemetry in sidebar (if available)
-    if fetch_recent:
+    # Compact controls for history export/clear
+    st.sidebar.markdown('---')
+    if st.sidebar.button('Clear Local History'):
+        st.session_state[conversation_key] = []
+        st.rerun()
+    if st.sidebar.button('Download History'):
         try:
-            recent = fetch_recent(10)
-            if recent:
-                st.sidebar.markdown('---')
-                st.sidebar.markdown('#### Recent Limbic Demo Events')
-                for ev in recent[:6]:
-                    en = 'Y' if ev.get('enrichment_applied') else 'N'
-                    sf = 'Y' if ev.get('safety_flag') else 'N'
-                    st.sidebar.markdown(f"- {ev['timestamp'][11:19]} | emo:{ev['emotion'] or '-'} | enr:{en} | grp:{ev['ab_group']} | glyphs:{ev['glyphs_generated']} | safe:{sf}")
+            import json as _json
+            st.sidebar.download_button('Download JSON', _json.dumps(st.session_state[conversation_key], indent=2), file_name=f'history_{st.session_state.get("user_id","anon")}.json')
         except Exception:
-            pass
+            st.sidebar.error('Failed to prepare history download')
     # Check if user is authenticated
     if st.session_state.get('authenticated', False):
         render_main_app()
