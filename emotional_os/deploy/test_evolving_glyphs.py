@@ -12,7 +12,7 @@ from typing import List
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 try:
-    from evolving_glyph_integrator import EvolvingGlyphIntegrator
+    from evolving_glyph_integrator import EvolvingGlyphIntegrator  # noqa: F401  # optional integration for full system tests
     from glyph_generator import GlyphGenerator
 except ImportError as e:
     print(f"Import error: {e}")

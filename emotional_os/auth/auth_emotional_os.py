@@ -96,7 +96,7 @@ class AuthenticationManager:
         try:
             expires = datetime.fromisoformat(st.session_state.session_expires)
             return datetime.now() < expires
-        except:
+        except Exception:
             return False
 
     def check_login_attempts(self, username: str) -> bool:

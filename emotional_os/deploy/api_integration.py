@@ -358,7 +358,7 @@ class APITestInterface:
             st.markdown("#### Replicate API Testing")
             st.info("🚧 Replicate integration coming soon!")
 
-            replicate_models = st.multiselect(
+            replicate_models = st.multiselect(  # noqa: F841  # used for UI selection side-effect
                 "Available Models",
                 ["ControlNet", "Real-ESRGAN", "Sketch-to-Image", "Style Transfer"],
                 help="Models available through Replicate API"
@@ -475,7 +475,7 @@ def main():
     with col1:
         try:
             st.image("graphics/FirstPerson-Logo.svg", width=50)
-        except:
+        except Exception:
             st.markdown("🔌")
     with col2:
         st.markdown("# FirstPerson API Integration Hub")

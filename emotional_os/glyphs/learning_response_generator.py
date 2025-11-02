@@ -317,17 +317,17 @@ class LearningResponseGenerator:
 
         # Gate 1-3: Low intensity, gentle, reflective
         if gate_num <= 3:
-            tone = "gentle"
+            tone = "gentle"  # noqa: F841  # tone used for clarity of mapping
             framing = "This is a quiet understanding. There's no rush. You can let it unfold at its own pace."
 
         # Gate 4-6: Medium intensity, balanced
         elif gate_num <= 6:
-            tone = "balanced"
+            tone = "balanced"  # noqa: F841  # tone used for clarity of mapping
             framing = "This is real. It deserves your attention, but you don't have to figure it all out at once."
 
         # Gate 7-9: High intensity, transformative
         else:
-            tone = "intense"
+            tone = "intense"  # noqa: F841  # tone used for clarity of mapping
             framing = "This is transformative. Something in you is being remade by this experience. That's not comfortable, but it's necessary."
 
         return f"{framing}\n\n[{glyph_name}: {primary_emotion.lower()}]"

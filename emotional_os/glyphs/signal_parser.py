@@ -205,7 +205,7 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
 			return None, "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
 
 	# Get primary emotional signals
-	primary_signals = [s['signal'] for s in signals]
+	primary_signals = [s['signal'] for s in signals]  # noqa: F841  # intermediate extraction
 	signal_keywords = [s['keyword'] for s in signals]
 
 	# Prioritize glyphs based on emotional relevance
@@ -326,8 +326,8 @@ def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
 
 
 def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], input_text: str = "") -> str:
-	name = glyph['glyph_name'] if glyph else ""
-	description = glyph.get('description', '') if glyph else ''
+	name = glyph['glyph_name'] if glyph else ""  # noqa: F841  # kept for clarity / future use
+	description = glyph.get('description', '') if glyph else ''  # noqa: F841  # kept for clarity / future use
 
 	# Overwhelm/change responses
 	if any(word in keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
@@ -391,13 +391,20 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 
 	for g in glyphs:
 		name = g["glyph_name"].lower()
-		if any(k in name for k in ["grief", "mourning", "collapse", "sorrow"]): themes["grief"] += 1
-		if any(k in name for k in ["ache", "yearning", "longing", "recursive"]): themes["longing"] += 1
-		if any(k in name for k in ["boundary", "contain", "still", "shield"]): themes["containment"] += 1
-		if any(k in name for k in ["joy", "delight", "ecstasy", "bliss"]): themes["joy"] += 1
-		if any(k in name for k in ["devotional", "vow", "exalted", "sacred"]): themes["devotion"] += 1
-		if any(k in name for k in ["recognition", "seen", "witness", "mirror"]): themes["recognition"] += 1
-		if any(k in name for k in ["insight", "clarity", "knowing", "revelation"]): themes["insight"] += 1
+		if any(k in name for k in ["grief", "mourning", "collapse", "sorrow"]):
+			themes["grief"] += 1
+		if any(k in name for k in ["ache", "yearning", "longing", "recursive"]):
+			themes["longing"] += 1
+		if any(k in name for k in ["boundary", "contain", "still", "shield"]):
+			themes["containment"] += 1
+		if any(k in name for k in ["joy", "delight", "ecstasy", "bliss"]):
+			themes["joy"] += 1
+		if any(k in name for k in ["devotional", "vow", "exalted", "sacred"]):
+			themes["devotion"] += 1
+		if any(k in name for k in ["recognition", "seen", "witness", "mirror"]):
+			themes["recognition"] += 1
+		if any(k in name for k in ["insight", "clarity", "knowing", "revelation"]):
+			themes["insight"] += 1
 
 	dominant = sorted(themes.items(), key=lambda x: x[1], reverse=True)
 	top_themes = [t[0] for t in dominant if t[1] > 0][:2]

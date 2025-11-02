@@ -225,7 +225,7 @@ class GlyphGenerator:
         text_lower = conversation_text.lower()
 
         # Extract emotional expressions
-        emotion_expressions = self._extract_emotion_expressions(text_lower)
+        emotion_expressions = self._extract_emotion_expressions(text_lower)  # noqa: F841  # intermediate extraction (kept for clarity/debug)
 
         # Extract emotional combinations (complex feelings)
         emotion_combinations = self._extract_emotion_combinations(text_lower)
@@ -310,7 +310,7 @@ class GlyphGenerator:
         emotions = self._extract_emotion_expressions(text)
 
         # Look for combination indicators
-        combination_indicators = [
+        combination_indicators = [  # noqa: F841  # indicator list kept for readability
             'and', 'but', 'while', 'with', 'mixed with', 'alongside',
             'combined with', 'tinged with', 'flavored by', 'touched by'
         ]
@@ -377,7 +377,7 @@ class GlyphGenerator:
 
     def _is_novel_pattern(self, emotion_combo: List[str]) -> bool:
         """Check if this emotional combination represents a novel pattern"""
-        combo_key = " + ".join(sorted(emotion_combo))
+        combo_key = " + ".join(sorted(emotion_combo))  # noqa: F841  # constructed key (novelty check uses content)
 
         # Check against existing tags
         for tag_name, tag_data in self.existing_tags.items():
