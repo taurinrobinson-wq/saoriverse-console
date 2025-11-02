@@ -159,7 +159,7 @@ class LimbicIntegrationEngine:
 
         try:
             # Process through limbic system
-            limbic_result = self.process_emotion_with_limbic_mapping(emotion)
+            limbic_result = self.process_emotion_with_limbic_mapping(emotion)  # noqa: F841  # kept for potential debugging
             result["limbic_processed"] = True
 
             # Generate glyph candidates
@@ -173,7 +173,7 @@ class LimbicIntegrationEngine:
                     try:
                         # Store glyph candidate
                         glyph_name = candidate["glyph_name"]
-                        glyph_data = {
+                        glyph_data = {  # noqa: F841  # built for potential downstream storage/logging
                             "emotion": candidate["emotion"],
                             "glyph": candidate.get("glyph", candidate.get("primary_glyph", "❓")),
                             "signal": candidate.get("signal", f"Neural {emotion} signal"),

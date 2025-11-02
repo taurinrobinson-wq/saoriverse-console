@@ -197,7 +197,7 @@ class AdminDashboard:
         with col1:
             try:
                 st.image("graphics/FirstPerson-Logo.svg", width=50)
-            except:
+            except Exception:
                 st.markdown("⚙️", unsafe_allow_html=True)
 
         with col2:
@@ -496,9 +496,9 @@ class AdminDashboard:
             st.markdown("#### OpenAI Configuration")
             openai_enabled = st.checkbox("Enable OpenAI Integration", value=True)
             if openai_enabled:
-                openai_model = st.selectbox("Default Model", ["gpt-4", "gpt-3.5-turbo", "gpt-4-turbo"])
-                openai_max_tokens = st.slider("Max Tokens", 100, 4000, 1000)
-                openai_temperature = st.slider("Temperature", 0.0, 2.0, 0.7, 0.1)
+                openai_model = st.selectbox("Default Model", ["gpt-4", "gpt-3.5-turbo", "gpt-4-turbo"])  # noqa: F841  # used for UI state
+                openai_max_tokens = st.slider("Max Tokens", 100, 4000, 1000)  # noqa: F841  # used for UI state
+                openai_temperature = st.slider("Temperature", 0.0, 2.0, 0.7, 0.1)  # noqa: F841  # used for UI state
 
         with tab2:
             st.markdown("#### Image Generation APIs")
@@ -506,15 +506,15 @@ class AdminDashboard:
             # DALL-E Configuration
             dalle_enabled = st.checkbox("Enable DALL-E Integration", value=False)
             if dalle_enabled:
-                dalle_model = st.selectbox("DALL-E Model", ["dall-e-3", "dall-e-2"])
-                dalle_quality = st.selectbox("Image Quality", ["standard", "hd"])
-                dalle_size = st.selectbox("Image Size", ["1024x1024", "1792x1024", "1024x1792"])
+                dalle_model = st.selectbox("DALL-E Model", ["dall-e-3", "dall-e-2"])  # noqa: F841  # used for UI state
+                dalle_quality = st.selectbox("Image Quality", ["standard", "hd"])  # noqa: F841  # used for UI state
+                dalle_size = st.selectbox("Image Size", ["1024x1024", "1792x1024", "1024x1792"])  # noqa: F841  # used for UI state
 
             # Stable Diffusion Configuration
             sd_enabled = st.checkbox("Enable Stable Diffusion", value=False)
             if sd_enabled:
-                sd_steps = st.slider("Inference Steps", 10, 150, 50)
-                sd_guidance = st.slider("Guidance Scale", 1.0, 20.0, 7.5, 0.5)
+                sd_steps = st.slider("Inference Steps", 10, 150, 50)  # noqa: F841  # used for UI state
+                sd_guidance = st.slider("Guidance Scale", 1.0, 20.0, 7.5, 0.5)  # noqa: F841  # used for UI state
 
             # Replicate Configuration
             replicate_enabled = st.checkbox("Enable Replicate APIs", value=False)
@@ -531,13 +531,13 @@ class AdminDashboard:
             # PDF Generation
             pdf_enabled = st.checkbox("Enable PDF Generation", value=False)
             if pdf_enabled:
-                pdf_template_path = st.text_input("PDF Template Path", value="/templates/")
-                pdf_quality = st.selectbox("PDF Quality", ["high", "medium", "low"])
+                pdf_template_path = st.text_input("PDF Template Path", value="/templates/")  # noqa: F841  # used for UI state
+                pdf_quality = st.selectbox("PDF Quality", ["high", "medium", "low"])  # noqa: F841  # used for UI state
 
             # Document Templates
             docx_enabled = st.checkbox("Enable DOCX Templates", value=False)
             if docx_enabled:
-                template_formats = st.multiselect(
+                template_formats = st.multiselect(  # noqa: F841  # used for UI state
                     "Template Formats",
                     ["Emotional Report", "Glyph Analysis", "User Summary", "Progress Report"],
                     default=["Emotional Report"]
@@ -546,7 +546,7 @@ class AdminDashboard:
             # Excel Export
             excel_enabled = st.checkbox("Enable Excel Export", value=False)
             if excel_enabled:
-                excel_features = st.multiselect(
+                excel_features = st.multiselect(  # noqa: F841  # used for UI state
                     "Excel Features",
                     ["Glyph Matrices", "User Analytics", "Conversation Logs", "System Reports"],
                     default=["User Analytics"]

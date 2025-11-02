@@ -228,9 +228,7 @@ def create_quick_setup_guide():
 ## Getting Started
 
 ### 1. Install Dependencies
-```bash
 pip install requests  # If not already installed
-```
 
 ### 2. Configure Your Credentials
 1. Copy `config_template.py` to `config.py`
@@ -240,13 +238,11 @@ pip install requests  # If not already installed
    - SUPABASE_FUNCTION_URL
 
 ### 3. Test the System
-```bash
 # Test glyph generation (offline)
 python test_evolving_glyphs.py
 
 # Test with your Supabase setup
 python enhanced_conversation_demo.py
-```
 
 ### 4. Integration Options
 
@@ -254,7 +250,6 @@ python enhanced_conversation_demo.py
 Replace your `conversation_demo.py` with `enhanced_conversation_demo.py`
 
 #### Option B: Add to existing code
-```python
 from evolving_glyph_integrator import EvolvingGlyphIntegrator
 
 integrator = EvolvingGlyphIntegrator(
@@ -264,7 +259,6 @@ integrator = EvolvingGlyphIntegrator(
 )
 
 result = integrator.process_conversation_with_evolution(message="user input")
-```
 
 ## How It Works
 
