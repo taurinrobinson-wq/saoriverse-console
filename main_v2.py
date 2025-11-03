@@ -117,6 +117,30 @@ def main():
                     if st.button('Cancel'):
                         st.session_state['clear_server_history_pending'] = False
                         st.rerun()
+    
+    # Learning stats section
+    st.sidebar.markdown("---")
+    with st.sidebar.expander("📚 Learning Progress", expanded=False):
+        try:
+            from emotional_os.learning.hybrid_learner import get_hybrid_learner
+            learner = get_hybrid_learner()
+            stats = learner.get_learning_stats()
+            
+            st.metric("Signals Learned", stats.get("total_signals_known", 0))
+            st.metric("Exchanges Logged", stats.get("learning_log_entries", 0))
+            
+            if stats.get("signals_by_frequency"):
+                st.caption("Top signals by frequency:")
+                sorted_signals = sorted(
+                    stats["signals_by_frequency"].items(),
+                    key=lambda x: x[1],
+                    reverse=True
+                )[:5]
+                for signal, freq in sorted_signals:
+                    st.write(f"• {signal}: {freq} times")
+        except Exception as e:
+            st.caption(f"Learning system not ready: {e}")
+    
     st.sidebar.markdown("### Conversation History")
     # Use a per-user conversation history key that matches the main UI
     conversation_key = f"conversation_history_{st.session_state.get('user_id', 'anonymous')}"
