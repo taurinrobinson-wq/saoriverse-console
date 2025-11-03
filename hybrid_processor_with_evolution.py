@@ -17,6 +17,13 @@ import logging
 from typing import Dict, List, Optional
 from uuid import uuid4
 
+# Import lexicon-aware response generation
+try:
+    from lexicon_aware_response_generator import LexiconAwareResponseGenerator
+    LEXICON_AWARE_AVAILABLE = True
+except ImportError:
+    LEXICON_AWARE_AVAILABLE = False
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -54,6 +61,13 @@ class HybridProcessorWithEvolution:
         self.user_id = user_id
         self.auto_track_conversations = auto_track_conversations
         
+        # Initialize lexicon-aware response generator
+        self.lexicon_aware_generator = None
+        if LEXICON_AWARE_AVAILABLE:
+            self.lexicon_aware_generator = LexiconAwareResponseGenerator(
+                hybrid_learner=hybrid_learner
+            )
+        
         self.conversation_history = []
         self.generated_glyphs = []
         
@@ -61,6 +75,9 @@ class HybridProcessorWithEvolution:
         logger.info(f"  - Hybrid Learner: ready")
         logger.info(f"  - Adaptive Extractor: {adaptive_extractor.__class__.__name__ if adaptive_extractor else 'N/A'}")
         logger.info(f"  - Glyph Evolution: connected")
+        if self.lexicon_aware_generator:
+            logger.info(f"  - Lexicon-Aware Generator: ready")
+            logger.info(f"    → Responses will be personalized based on learned patterns")
     
     def process_user_message(
         self,
@@ -268,6 +285,45 @@ class HybridProcessorWithEvolution:
         except Exception as e:
             logger.error(f"Failed to export glyphs: {e}")
             return {"success": False, "error": str(e)}
+    
+    def enhance_response_with_learned_context(
+        self,
+        user_message: str,
+        user_id: Optional[str] = None,
+        conversation_context: Optional[List[Dict]] = None,
+    ) -> Dict:
+        """
+        Enhance a response using learned lexicon context.
+        
+        This is called BEFORE generating an AI response to get personalization
+        guidance based on what the system has learned about the user.
+        
+        Args:
+            user_message: User's input
+            user_id: User identifier
+            conversation_context: Previous messages for context
+            
+        Returns:
+            Dict with personalized response, associations, and confidence
+        """
+        if user_id is None:
+            user_id = self.user_id
+        
+        if not self.lexicon_aware_generator:
+            logger.warning("Lexicon-aware generator not available")
+            return {}
+        
+        result = self.lexicon_aware_generator.generate_response(
+            user_message=user_message,
+            user_id=user_id,
+            conversation_context=conversation_context,
+        )
+        
+        logger.info(f"[LEXICON-AWARE] Personalization level: {result.get('personalization_level')}")
+        if result.get('trigger_keywords'):
+            logger.info(f"  Learned associations: {result.get('trigger_keywords')}")
+        
+        return result
 
 
 # Factory function for easy setup
