@@ -271,7 +271,7 @@ class HybridLearnerWithUserOverrides:
                     if keyword not in entry["keywords"]:
                         entry["keywords"].append(keyword)
                     entry["examples"].append(user_input)
-                    entry["examples"] = entry["examples"][-10]  # Keep last 10
+                    entry["examples"] = entry["examples"][-10:]  # Keep last 10
                     entry["frequency"] = entry.get("frequency", 0) + 1
     
     def _enrich_lexicon_with_signals(
@@ -381,7 +381,7 @@ class HybridLearnerWithUserOverrides:
                         entry["keywords"].append(keyword)
                     # Only keep 5 community examples per signal (save space)
                     entry["examples"].append(user_input)
-                    entry["examples"] = entry["examples"][-5]
+                    entry["examples"] = entry["examples"][-5:]
                     entry["frequency"] = entry.get("frequency", 0) + 1
             
             # Enrich main lexicon with keywords and word combinations
