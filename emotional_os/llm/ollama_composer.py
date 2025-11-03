@@ -74,9 +74,9 @@ class OllamaComposer:
     def compose_response(
         self,
         user_input: str,
-        emotional_signals: List[Dict] = None,
+        emotional_signals: Optional[List[Dict]] = None,
         glyph_context: Optional[Dict] = None,
-        conversation_history: List[Dict] = None,
+        conversation_history: Optional[List] = None,
         system_prompt: Optional[str] = None,
     ) -> str:
         """
@@ -143,9 +143,9 @@ class OllamaComposer:
     def _build_prompt(
         self,
         user_input: str,
-        emotional_signals: List[Dict] = None,
+        emotional_signals: Optional[List[Dict]] = None,
         glyph_context: Optional[Dict] = None,
-        conversation_history: List[Dict] = None,
+        conversation_history: Optional[List] = None,
         system_prompt: Optional[str] = None,
     ) -> str:
         """Build the prompt for the LLM."""
@@ -190,7 +190,7 @@ Response:"""
 
 Respond naturally, like a trusted friend who truly listens."""
 
-    def _fallback_response(self, user_input: str, emotional_signals: List[Dict] = None) -> str:
+    def _fallback_response(self, user_input: str, emotional_signals: Optional[List[Dict]] = None) -> str:
         """Fallback responses when Ollama is unavailable."""
         if not emotional_signals:
             return "I'm here. Tell me what's on your mind."
