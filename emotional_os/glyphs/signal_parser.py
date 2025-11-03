@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import re
 import sqlite3
 from datetime import datetime
@@ -547,6 +548,35 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 
 # Main parser function
 def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None, user_id: Optional[str] = None) -> Dict:
+	# FIRST: Check if this is just a simple greeting - don't process emotionally
+	simple_greetings = ['hi', 'hello', 'hey', 'hi there', 'hello there', 'hey there', 'howdy', 'greetings']
+	lower_input = input_text.strip().lower()
+	
+	if lower_input in simple_greetings:
+		# Respond warmly but simply, without emotional analysis
+		greeting_responses = [
+			"Hi there. I'm here.",
+			"Hello. What's on your mind?",
+			"Hey. I'm listening.",
+			"Hi. How are you doing?",
+			"Hello. What brings you here?",
+		]
+		response = random.choice(greeting_responses)
+		return {
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Normal emotional processing for non-greeting messages
 	signal_map = load_signal_map(lexicon_path)
 	signals = parse_signals(input_text, signal_map)
 	gates = evaluate_gates(signals)
