@@ -552,22 +552,77 @@ def render_main_app():
         st.session_state[conversation_key].append(entry)
         
         # Learn from hybrid mode conversations to improve local mode
+        # AND generate new glyphs dynamically during dialogue
         if processing_mode == "hybrid":
             try:
                 from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
+                from hybrid_processor_with_evolution import create_integrated_processor
+                from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
+                
                 learner = get_hybrid_learner()
                 user_id = st.session_state.get('user_id', 'anonymous')
-                result = learner.learn_from_exchange(
-                    user_id=user_id,
-                    user_input=user_input,
+                
+                # Initialize dynamic evolution system if not already in session
+                if 'hybrid_processor' not in st.session_state:
+                    adaptive_extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
+                    st.session_state['hybrid_processor'] = create_integrated_processor(
+                        hybrid_learner=learner,
+                        adaptive_extractor=adaptive_extractor,
+                        user_id=user_id,
+                    )
+                
+                # Process through integrated pipeline with dynamic glyph generation
+                processor = st.session_state['hybrid_processor']
+                evolution_result = processor.process_user_message(
+                    user_message=user_input,
                     ai_response=response,
-                    emotional_signals=debug_signals,
+                    user_id=user_id,
+                    conversation_id=st.session_state.get('conversation_id', 'default'),
                     glyphs=debug_glyphs,
                 )
-                if result.get("learned_to_shared"):
+                
+                # Check if new glyphs were generated
+                new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get('new_glyphs_generated', [])
+                if new_glyphs and len(new_glyphs) > 0:
+                    # Store newly generated glyphs in session
+                    if 'new_glyphs_this_session' not in st.session_state:
+                        st.session_state['new_glyphs_this_session'] = []
+                    st.session_state['new_glyphs_this_session'].extend(new_glyphs)
+                    
+                    # Display notification about new glyphs
+                    st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
+                    for glyph in new_glyphs:
+                        glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
+                        st.info(f"  {glyph_dict.get('symbol', '?')} **{glyph_dict.get('name', '?')}** "
+                               f"({' + '.join(glyph_dict.get('core_emotions', []))})")
+                
+                # Log learning results
+                learning_result = evolution_result['pipeline_stages']['hybrid_learning'].get('learning_result', {})
+                if learning_result.get("learned_to_shared"):
                     logger.info(f"User {user_id} contributed to shared lexicon")
-                elif result.get("learned_to_user"):
+                elif learning_result.get("learned_to_user"):
                     logger.info(f"User {user_id} learning to personal lexicon")
+                
+            except ImportError as e:
+                # Fallback if dynamic evolution not available
+                logger.warning(f"Dynamic glyph evolution not available: {e}")
+                try:
+                    from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
+                    learner = get_hybrid_learner()
+                    user_id = st.session_state.get('user_id', 'anonymous')
+                    result = learner.learn_from_exchange(
+                        user_id=user_id,
+                        user_input=user_input,
+                        ai_response=response,
+                        emotional_signals=debug_signals,
+                        glyphs=debug_glyphs,
+                    )
+                    if result.get("learned_to_shared"):
+                        logger.info(f"User {user_id} contributed to shared lexicon")
+                    elif result.get("learned_to_user"):
+                        logger.info(f"User {user_id} learning to personal lexicon")
+                except Exception as fallback_e:
+                    logger.error(f"Fallback learning also failed: {fallback_e}")
             except Exception as e:
                 # Non-fatal: learning should not break the app
                 logger.warning(f"Hybrid learning failed: {e}")
