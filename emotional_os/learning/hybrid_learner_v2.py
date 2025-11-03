@@ -6,6 +6,7 @@ Architecture:
 - Per-user overrides (personal learning)
 - Quality filtering to prevent toxic content from poisoning shared lexicon
 - Trust scoring for contributions
+- Poetry signal mapping to expand emotional vocabulary
 """
 
 import json
@@ -16,6 +17,18 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+# Map poetry signals to existing Greek letter signals
+POETRY_TO_SIGNAL_MAP = {
+    "love": "α",           # Devotion / α
+    "intimacy": "α",       # Devotion / α
+    "vulnerability": "θ",  # Grief / θ
+    "transformation": "ε", # Insight / ε
+    "admiration": "Ω",     # Recognition / Ω
+    "joy": "λ",           # Joy / λ
+    "sensuality": "α",    # Devotion / α (physical/emotional devotion)
+    "nature": "γ",        # Longing / γ
+}
 
 
 class HybridLearnerWithUserOverrides:
@@ -261,6 +274,85 @@ class HybridLearnerWithUserOverrides:
                     entry["examples"] = entry["examples"][-10]  # Keep last 10
                     entry["frequency"] = entry.get("frequency", 0) + 1
     
+    def _enrich_lexicon_with_signals(
+        self,
+        user_input: str,
+        poetic_signals: Optional[List[Dict]] = None,
+    ):
+        """Enrich the signal lexicon with keywords and word combinations.
+        
+        Maps detected signals to Greek letter signals and:
+        - Adds individual keywords to the lexicon
+        - Learns word combinations and phrases
+        - Tracks contextual relationships between words
+        """
+        if not poetic_signals:
+            return
+        
+        try:
+            # Extract meaningful phrases from user input (2-5 word combinations)
+            words = user_input.lower().split()
+            phrases = []
+            
+            # Generate 2-gram and 3-gram phrases
+            for i in range(len(words) - 1):
+                # 2-word phrases
+                phrase2 = f"{words[i]} {words[i+1]}".strip()
+                if len(phrase2) > 3:  # Meaningful length
+                    phrases.append(phrase2)
+                
+                # 3-word phrases
+                if i < len(words) - 2:
+                    phrase3 = f"{words[i]} {words[i+1]} {words[i+2]}".strip()
+                    if len(phrase3) > 5:
+                        phrases.append(phrase3)
+            
+            for signal_dict in poetic_signals:
+                signal_name = signal_dict.get("signal")
+                confidence = signal_dict.get("confidence", 0.5)
+                keywords = signal_dict.get("keywords", [])
+                
+                if not signal_name:
+                    continue
+                
+                # Map signal to Greek letter signal
+                greek_signal = POETRY_TO_SIGNAL_MAP.get(str(signal_name))
+                if not greek_signal:
+                    continue
+                
+                # Add high-confidence keywords to the main lexicon
+                if confidence > 0.4:  # Only add high-confidence keywords
+                    for keyword in keywords:
+                        keyword_lower = keyword.lower().strip()
+                        
+                        # Check if keyword already exists in lexicon
+                        if keyword_lower and keyword_lower not in self.shared_lexicon:
+                            # Add new keyword mapping with metadata
+                            self.shared_lexicon[keyword_lower] = {
+                                "signal": greek_signal,
+                                "voltage": "high" if confidence > 0.65 else "medium",
+                                "tone": str(signal_name),
+                                "source": "learned",
+                                "confidence": confidence,
+                            }
+                            logger.info(f"Added keyword to lexicon: {keyword_lower} → {signal_name}")
+                    
+                    # Also learn phrase combinations (2-3 word expressions)
+                    for phrase in phrases:
+                        if phrase not in self.shared_lexicon and len(phrase.split()) <= 3:
+                            # Only add phrases that don't already exist
+                            self.shared_lexicon[phrase] = {
+                                "signal": greek_signal,
+                                "voltage": "medium" if confidence > 0.5 else "low",
+                                "tone": str(signal_name),
+                                "source": "learned_phrase",
+                                "confidence": confidence * 0.9,  # Slightly lower confidence for phrases
+                                "phrase_length": len(phrase.split())
+                            }
+                            logger.info(f"Added phrase to lexicon: '{phrase}' → {signal_name}")
+        except Exception as e:
+            logger.warning(f"Failed to enrich lexicon with signals: {e}")
+
     def _learn_to_shared_lexicon(
         self,
         user_input: str,
@@ -291,6 +383,9 @@ class HybridLearnerWithUserOverrides:
                     entry["examples"].append(user_input)
                     entry["examples"] = entry["examples"][-5]
                     entry["frequency"] = entry.get("frequency", 0) + 1
+            
+            # Enrich main lexicon with keywords and word combinations
+            self._enrich_lexicon_with_signals(user_input, emotional_signals)
     
     def _save_shared_lexicon(self):
         """Save shared lexicon back to disk."""
