@@ -87,10 +87,6 @@ class HybridLearnerWithUserOverrides:
         Returns:
             (is_quality: bool, reason: str)
         """
-        # Check for minimum quality signals
-        if not emotional_signals or len(emotional_signals) == 0:
-            return False, "no_emotional_signals"
-        
         # Check for excessive length (potential spam/abuse)
         if len(user_input) > 5000:
             return False, "input_too_long"
@@ -113,10 +109,21 @@ class HybridLearnerWithUserOverrides:
             return False, "input_too_short"
         
         # Check for template repetition (indicator of low quality)
-        # The "pause for breath" template should NOT appear multiple times
         template_count = ai_response.lower().count("pause for a breath")
         if template_count > 1:
             return False, "repetitive_template"
+        
+        # Check if response indicates emotional engagement
+        # (even if formal signal detection didn't work)
+        engagement_phrases = [
+            "feel", "emotion", "beautiful", "powerful", "vulnerable",
+            "intimacy", "connection", "love", "poetry", "inspire"
+        ]
+        response_lower = ai_response.lower()
+        has_engagement = any(phrase in response_lower for phrase in engagement_phrases)
+        
+        if not has_engagement and (not emotional_signals or len(emotional_signals) == 0):
+            return False, "no_emotional_engagement"
         
         # Looks good!
         return True, "quality_exchange"
