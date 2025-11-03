@@ -64,26 +64,20 @@ def decorate_reply(baseline_reply: str, limbic_result: Dict, intensity: float = 
 
     opener = _safe_short(opener)
 
-    # Savoring / breath cue (gentle, optional)
-    if intensity > 0.6:
-        savor = "You might try pausing for a breath and noticing what stands out in this moment."
-    else:
-        savor = "Take a steady breath and notice how that feels."
+    # Savoring / breath cue — DISABLED (users found it repetitive)
+    savor = ""
 
-    savor = _safe_short(savor)
-
-    # Practical close — one small, optional suggestion
-    practical = "If you want, name one small thing to carry from this feeling into the next hour."
-    practical = _safe_short(practical)
+    # Practical close — DISABLED (users found it repetitive)
+    practical = ""
 
     # Compose: keep baseline as the core, add opener before and a short suggestion after
     baseline = _safe_short(baseline_reply)
 
     # Merge with light weighting: baseline first, then opener optionally preface if baseline is short
     if len(baseline.split()) < 6:
-        decorated = f"{opener} {baseline} {savor} {practical}"
+        decorated = f"{opener} {baseline}".strip()
     else:
-        decorated = f"{baseline} {savor} {practical}"
+        decorated = f"{baseline}".strip()
 
     # Final cleanup: avoid runaway whitespace
     out = ' '.join(decorated.split())
