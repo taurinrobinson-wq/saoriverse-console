@@ -59,8 +59,9 @@ class GutenbergPoetryFetcher:
     
     def __init__(self):
         self.downloaded_poems = []
-        self.poetry_dir = Path("./gutenberg_poetry")
-        self.poetry_dir.mkdir(exist_ok=True)
+        # Save to external drive
+        self.poetry_dir = Path("/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry")
+        self.poetry_dir.mkdir(parents=True, exist_ok=True)
         
     def get_book_text(self, book_id):
         """Download a book from Project Gutenberg."""
@@ -206,8 +207,9 @@ def process_all_poetry():
     logger.info("Total new lexicon entries: {}".format(all_stats['total_lexicon_entries']))
     logger.info("Quality contributions: {}".format(all_stats['total_quality_contributions']))
     
-    # Save detailed results
-    results_file = Path("gutenberg_processing_results.json")
+    # Save detailed results to external drive
+    results_file = Path("/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json")
+    results_file.parent.mkdir(parents=True, exist_ok=True)
     with open(results_file, 'w') as f:
         json.dump(all_stats, f, indent=2)
     
