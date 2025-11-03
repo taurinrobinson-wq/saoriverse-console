@@ -1,5 +1,6 @@
 import datetime
 import json
+import logging
 import time
 
 try:
@@ -11,6 +12,8 @@ except Exception:
     requests = None
 
 import streamlit as st
+
+logger = logging.getLogger(__name__)
 
 try:
     from .doc_export import generate_doc
@@ -538,6 +541,7 @@ def render_main_app():
                 st.write("**Glyphs Matched:**", debug_glyphs)
                 st.write("**Raw SQL Query:**", debug_sql)
                 st.write("**Glyph Rows (Raw):**", debug_glyph_rows)
+        
         entry = {
             "user": user_input,
             "assistant": response,
@@ -546,6 +550,21 @@ def render_main_app():
             "timestamp": datetime.datetime.now().isoformat()
         }
         st.session_state[conversation_key].append(entry)
+        
+        # Learn from hybrid mode conversations to improve local mode
+        if processing_mode == "hybrid":
+            try:
+                from emotional_os.learning.hybrid_learner import get_hybrid_learner
+                learner = get_hybrid_learner()
+                learner.learn_from_exchange(
+                    user_input=user_input,
+                    ai_response=response,
+                    emotional_signals=debug_signals,
+                    glyphs=debug_glyphs,
+                )
+            except Exception as e:
+                # Non-fatal: learning should not break the app
+                logger.warning(f"Hybrid learning failed: {e}")
 
         # Persist to Supabase if the user opted in and credentials appear available
         try:
