@@ -432,6 +432,20 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
 			return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 	
 	# No feedback detected; proceed to message-driven response generation
+	
+	# CHECK: Does this message include reciprocal elements we should acknowledge first?
+	has_gratitude = any(phrase in lower_input for phrase in ['thank', 'appreciate', 'grateful'])
+	has_reciprocal_interest = any(phrase in lower_input for phrase in ['how are you', 'how\'s your day', 'you doing'])
+	
+	# Prepend relational acknowledgment if message contains both reciprocal AND emotional content
+	relational_prefix = None
+	if has_gratitude or has_reciprocal_interest:
+		if has_gratitude and has_reciprocal_interest:
+			relational_prefix = "Thank you for asking. And thank you for trusting me with this. I'm here with you."
+		elif has_gratitude:
+			relational_prefix = "I appreciate that. Now, let's talk about what you're experiencing."
+		elif has_reciprocal_interest:
+			relational_prefix = "That's kind of you to ask. I'm focused on you right now."
 
 	# MESSAGE-DRIVEN branches using dynamic composer
 	# Build message content features for targeted response
@@ -451,6 +465,9 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
 			glyph=glyph,
 		)
 		if composed:
+			# Prepend relational acknowledgment if present
+			if relational_prefix:
+				composed = f"{relational_prefix} {composed}"
 			return _avoid_repeat(composed, conversation_context, previous_responses), feedback_data
 	
 	# Fall back to dynamic composition for general responses
@@ -465,10 +482,15 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
 	
 	
 	if composed:
+		# Prepend relational acknowledgment if present
+		if relational_prefix:
+			composed = f"{relational_prefix} {composed}"
 		return _avoid_repeat(composed, conversation_context, previous_responses), feedback_data
 	
 	# Ultimate fallback if composer fails
 	base = "I'm here with you. What you're experiencing matters, and I'm listening."
+	if relational_prefix:
+		base = f"{relational_prefix} {base}"
 	return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
 
@@ -547,6 +569,53 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 	return "You're carrying something layered. Let's sit with it and see what wants to be named."
 
 # Main parser function
+def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
+	"""
+	Detect if the message is PRIMARILY conversational/relational (thanking, asking how system is, small talk).
+	Only return early if the entire message is conversational.
+	If there's emotional content mixed in, return None to let normal processing handle it.
+	
+	Returns the response if message is PURELY reciprocal, None if it has emotional content.
+	"""
+	lower_input = input_text.lower()
+	
+	# Check if message has emotional/significant content
+	emotional_keywords = [
+		'burn', 'overwhelm', 'anxious', 'sad', 'frustrated', 'struggling', 'tired',
+		'anxiety', 'anxiety', 'depression', 'grief', 'loss', 'afraid', 'fear',
+		'angry', 'rage', 'shame', 'guilt', 'worry', 'stress', 'pain', 'hurt'
+	]
+	has_emotional = any(keyword in lower_input for keyword in emotional_keywords)
+	
+	# If there's emotional content, let it be processed normally
+	# (it might have reciprocal elements, but the emotional part is primary)
+	if has_emotional:
+		return None  # Process emotionally, don't short-circuit
+	
+	# Pure gratitude only (no emotional content)
+	if any(phrase in lower_input for phrase in ['thank you', 'thanks', 'appreciate', 'grateful']):
+		gratitude_responses = [
+			"You're welcome. I'm here for you.",
+			"Thank you for trusting me with this.",
+			"That means something to me too.",
+			"I appreciate you sharing.",
+		]
+		return random.choice(gratitude_responses)
+	
+	# Pure reciprocal interest only (no emotional content)
+	if any(phrase in lower_input for phrase in ['how are you', 'how are you doing', 'how are you feeling', 'how\'s your day', 'how\'s it going', 'you doing okay', 'you alright']):
+		reciprocal_responses = [
+			"I'm here and present with you. That's what matters. But tell me—how are *you* doing?",
+			"That's kind of you to ask. I'm focused on you right now. What's going on with you?",
+			"I appreciate that. I'm steady. How about you—what's on your mind?",
+			"I'm doing well because you're here. What brings you today?",
+		]
+		return random.choice(reciprocal_responses)
+	
+	# No reciprocal-only content detected
+	return None
+
+
 def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None, user_id: Optional[str] = None) -> Dict:
 	# FIRST: Check if this is just a simple greeting - don't process emotionally
 	simple_greetings = ['hi', 'hello', 'hey', 'hi there', 'hello there', 'hey there', 'howdy', 'greetings']
@@ -577,6 +646,29 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 		}
 	
 	# Normal emotional processing for non-greeting messages
+	
+	# CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
+	# If yes, respond conversationally FIRST before emotional analysis
+	conversational_response = _detect_and_respond_to_reciprocal_message(input_text)
+	if conversational_response:
+		# This is primarily a conversational/relational message
+		# Include it in the response before diving into emotional content
+		return {
+			"timestamp": datetime.now().isoformat(),
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": conversational_response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Normal emotional processing for messages that aren't primarily conversational
 	signal_map = load_signal_map(lexicon_path)
 	signals = parse_signals(input_text, signal_map)
 	gates = evaluate_gates(signals)
