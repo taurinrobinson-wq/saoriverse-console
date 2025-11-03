@@ -151,12 +151,8 @@ class LearningResponseGenerator:
         # 3. Format response with the emotional term
         response = response_template.format(emotional_term=key_term)
 
-        # 4. Add glyph name subtly (training signal)
-        glyph_name = glyph_candidate.get("glyph_name", "")
-        if glyph_name:
-            response += f"\n\n[{glyph_name}]"
-
-        # 5. Add implicit validation prompt (feedback gathering)
+        # 4. Add implicit validation prompt (feedback gathering)
+        # (Removed glyph name from user-facing response - glyphs work invisibly)
         response += self._add_validation_prompt(emotional_tone, original_input)
 
         return response
@@ -172,12 +168,12 @@ class LearningResponseGenerator:
         # Priority: intensity words, then state words
         if emotional_terms.get("intensity_words"):
             term = emotional_terms["intensity_words"][0]
-            if len(term) > 3:
+            if len(term) > 3 and term not in ['feel', 'feeling', 'felt', 'little', 'really']:
                 return term
 
         if emotional_terms.get("state_words"):
             term = emotional_terms["state_words"][0]
-            if len(term) > 3:
+            if len(term) > 3 and term not in ['feel', 'feeling', 'felt', 'little', 'really']:
                 return term
 
         # Fall back to NRC primary emotion
@@ -185,9 +181,18 @@ class LearningResponseGenerator:
             primary = max(nrc_analysis.items(), key=lambda x: x[1])[0]
             return primary.lower()
 
-        # Extract any significant word from input
-        words = [w.lower().strip('.,!?') for w in text.split() if len(w) > 4]
-        return words[0] if words else "what you're feeling"
+        # Extract any significant word from input (excluding generic/modifier words)
+        exclude_words = {'feel', 'feeling', 'felt', 'emotion', 'emotions', 'think', 'thought', 
+                        'little', 'really', 'very', 'quite', 'so', 'just', 'about', 'kind',
+                        'sort', 'like', 'somehow', 'seem', 'seems', 'maybe'}
+        words = [w.lower().strip('.,!?') for w in text.split() 
+                 if len(w) > 4 and w.lower() not in exclude_words]
+        
+        if words:
+            return words[0]
+        
+        # Ultimate fallback
+        return "what you're experiencing"
 
     def _add_validation_prompt(
         self,

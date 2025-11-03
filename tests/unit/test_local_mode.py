@@ -7,12 +7,21 @@ Verifies that NRC Lexicon + spaCy + Signal Parser all work together locally.
 import sys
 import time
 
-from parser.nrc_lexicon_loader import nrc
-from parser.semantic_engine import semantic
+try:
+    from parser.nrc_lexicon_loader import nrc
+    from parser.semantic_engine import semantic
+    LOCAL_MODE_AVAILABLE = True
+except ImportError:
+    LOCAL_MODE_AVAILABLE = False
+    nrc = None
+    semantic = None
 
 
 def test_local_mode():
     """Test complete local emotional processing."""
+    if not LOCAL_MODE_AVAILABLE:
+        print("⚠️ Skipping local mode tests (spaCy or other dependencies unavailable)")
+        return
 
     print("\n" + "="*80)
     print("🧪 FIRSTPERSON LOCAL MODE TESTING")

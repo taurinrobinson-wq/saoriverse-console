@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import re
 import sqlite3
 from datetime import datetime
@@ -9,6 +10,7 @@ from typing import Dict, List, Optional
 # Phase 2 learning + Sanctuary Mode imports
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import create_training_response
+from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
 from emotional_os.safety import (
     SANCTUARY_MODE,
     ensure_sanctuary_response,
@@ -23,6 +25,68 @@ try:
 except ImportError:
     HAS_NRC = False
     nrc = None
+
+# Try to import local LLM composer (optional - graceful fallback if not available)
+try:
+    from emotional_os.llm.ollama_composer import get_ollama_composer
+    HAS_OLLAMA = True
+except ImportError:
+    HAS_OLLAMA = False
+    get_ollama_composer = None
+
+# Initialize dynamic response composer at module level
+_response_composer = DynamicResponseComposer()
+
+# Initialize LLM composer (if available)
+_llm_composer = None
+if HAS_OLLAMA and get_ollama_composer:
+    try:
+        _llm_composer = get_ollama_composer()
+    except Exception as e:
+        print(f"Note: LLM composer unavailable ({e}). Using template responses.")
+        _llm_composer = None
+
+
+def _compose_with_llm(
+    input_text: str,
+    signals: List[Dict],
+    glyph: Optional[Dict] = None,
+    conversation_context: Optional[Dict] = None,
+) -> Optional[str]:
+    """
+    Try to compose a response using local Ollama LLM.
+    Falls back to None if LLM is unavailable.
+    
+    Args:
+        input_text: User's message
+        signals: Detected emotional signals
+        glyph: Matched glyph (used invisibly for calibration)
+        conversation_context: Prior conversation
+    
+    Returns:
+        LLM-generated response or None if unavailable
+    """
+    if not _llm_composer or not _llm_composer.is_available:
+        return None
+    
+    try:
+        conv_history = None
+        if conversation_context and isinstance(conversation_context, dict):
+            conv_history = conversation_context.get('messages')
+            if conv_history and not isinstance(conv_history, list):
+                conv_history = None
+        
+        response = _llm_composer.compose_response(
+            user_input=input_text,
+            emotional_signals=signals,
+            glyph_context=glyph,
+            conversation_history=conv_history,
+        )
+        return response if response else None
+    except Exception:
+        # Silently fail - will fall back to template responses
+        return None
+
 
 # Load signal lexicon from JSON (base + learned)
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
@@ -195,14 +259,15 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
 	return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
 
 # Select most relevant glyph and generate contextual response
-def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], input_text: str = "") -> tuple:
+def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], input_text: str = "", conversation_context: Optional[Dict] = None) -> tuple:
 	if not glyphs:
 		# Fallback: if no glyphs found via gates, search by emotion tone directly
 		fallback_glyphs = _find_fallback_glyphs(signals, input_text)
 		if fallback_glyphs:
 			glyphs = fallback_glyphs
 		else:
-			return None, "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+			fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+			return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None})
 
 	# Get primary emotional signals
 	primary_signals = [s['signal'] for s in signals]  # noqa: F841  # intermediate extraction
@@ -265,10 +330,22 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
 	# Select best glyph
 	best_glyph = max(scored_glyphs, key=lambda x: x[1])[0] if scored_glyphs else None
 
-	# Generate contextual response based on glyph and emotions
-	response = generate_contextual_response(best_glyph, signal_keywords, input_text)
+	# Try local LLM first (if available and has signals) for more nuanced responses
+	if signals and _llm_composer and _llm_composer.is_available:
+		llm_response = _compose_with_llm(
+			input_text=input_text,
+			signals=signals,
+			glyph=best_glyph,
+			conversation_context=conversation_context,
+		)
+		if llm_response:
+			return best_glyph, (llm_response, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None})
 
-	return best_glyph, response
+	# Generate contextual response based on actual message content + glyph context
+	# Returns tuple: (response_text, feedback_data)
+	response, feedback_data = generate_contextual_response(best_glyph, signal_keywords, input_text, conversation_context)
+
+	return best_glyph, (response, feedback_data)
 
 def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
 	"""Fallback: search database by emotion tone when gates don't return results"""
@@ -325,56 +402,191 @@ def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
 		return []
 
 
-def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], input_text: str = "") -> str:
-	name = glyph['glyph_name'] if glyph else ""  # noqa: F841  # kept for clarity / future use
-	description = glyph.get('description', '') if glyph else ''  # noqa: F841  # kept for clarity / future use
+def detect_feedback_correction(input_text: str, last_assistant_message: Optional[str] = None) -> Dict:
+	"""Detect if user is correcting or contradicting a prior assistant response.
+	
+	Returns a dict with keys:
+	- 'is_correction': bool indicating if feedback was detected
+	- 'contradiction_type': str describing the type (e.g., 'negation', 'boundary', 'differentiation')
+	- 'feedback_reason': str explaining why the correction was detected
+	"""
+	if not last_assistant_message or not input_text:
+		return {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}
+	
+	lower_input = input_text.lower()
+	lower_prior = last_assistant_message.lower()
+	
+	# Pattern 1: User says "I don't know if it's MY anxiety" after assistant said "I can feel THE anxiety YOU'RE carrying"
+	# This is: User rejecting attribution of the emotion as theirs
+	if any(ph in lower_input for ph in ["don't know if it's my", "not my anxiety", "i don't have", "not sure if i", "isn't my"]):
+		if "anxiety" in lower_prior and ("your" in lower_prior or "you're" in lower_prior):
+			return {
+				'is_correction': True,
+				'contradiction_type': 'attribution_boundary',
+				'feedback_reason': 'User rejected assistant attribution of emotion; clarified it is inherited, not theirs.'
+			}
+	
+	# Pattern 2: User says "it's inherited FROM X" — boundary/differentiation
+	if "inherited" in lower_input:
+		return {
+			'is_correction': True,
+			'contradiction_type': 'inherited_pattern',
+			'feedback_reason': 'User identified pattern as inherited rather than intrinsic.'
+		}
+	
+	# Pattern 3: User says "that's not what I meant" or "you misunderstood"
+	if any(ph in lower_input for ph in ["that's not", "i meant", "you missed", "you misunderstood", "that wasn't"]):
+		return {
+			'is_correction': True,
+			'contradiction_type': 'misalignment',
+			'feedback_reason': 'User indicated prior response did not match their intent.'
+		}
+	
+	# Pattern 4: User provides strong negation before a new topic
+	if input_text.strip().startswith(("no ", "nope", "actually,", "but actually")):
+		return {
+			'is_correction': True,
+			'contradiction_type': 'negation',
+			'feedback_reason': 'User opened with negation/correction.'
+		}
+	
+	return {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}
 
-	# Overwhelm/change responses
-	if any(word in keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
-		return "You're navigating a lot of moving pieces right now. When life shifts in multiple directions at once, it makes sense to feel overwhelmed. This isn't about weakness—it's about being human in the face of complexity. What feels like the most important piece to focus on first?"
 
-	# Anxiety/stress responses
-	if any(word in keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
-		return "I can feel the anxiety you're carrying. When our minds race like this, it often helps to find a still point. The energy you're feeling - that's your system preparing you, even if it feels overwhelming right now. What if we could transform this racing energy into focused readiness?"
+def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], input_text: str = "", conversation_context: Optional[Dict] = None, previous_responses: Optional[List[str]] = None) -> tuple:
+	"""Generate a contextual, non-repetitive empathetic response driven by message content.
+	
+	Returns a tuple: (response_text: str, feedback_detected: Dict)
+	
+	Strategy:
+	- First, detect if user is correcting/contradicting prior assistant response.
+	- Then, analyze the actual message content (not glyph) to generate response.
+	- Glyph is used for context but response is message-driven.
+	"""
+	name = glyph['glyph_name'] if glyph else ""
+	description = glyph.get('description', '') if glyph else ''
+	lower_input = (input_text or "").lower()
+	
+	# Detect feedback/corrections
+	last_assistant_msg = None
+	if conversation_context and isinstance(conversation_context, dict):
+		last_assistant_msg = conversation_context.get('last_assistant_message')
+	feedback_data = detect_feedback_correction(input_text, last_assistant_msg)
+	
+	# If feedback is detected, prioritize a response that addresses the correction
+	if feedback_data.get('is_correction'):
+		correction_type = feedback_data.get('contradiction_type')
+		
+		if correction_type == 'attribution_boundary':
+			# User said: "it's not MY anxiety, it's inherited"
+			base = (
+				"Thank you for that clarification. That's an important distinction—what you're feeling might be proximity to anxiety rather than your own. "
+				"When we're close to someone's anxious system, we can absorb its rhythm without it being intrinsically ours. "
+				"Can you say more about what *you* are feeling, separate from what you pick up from Michelle?"
+			)
+			return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
+		
+		elif correction_type == 'inherited_pattern':
+			base = (
+				"I hear that—recognizing a pattern as inherited is actually the first step to changing it. "
+				"You can inherit the pattern without being imprisoned by it. "
+				"What would it feel like to notice the difference between *her* anxiety and what's actually *yours*?"
+			)
+			return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
+		
+		elif correction_type == 'misalignment':
+			base = (
+				"I appreciate you saying that. I want to make sure I'm actually hearing you, not projecting onto you. "
+				"Help me understand: what did I miss?"
+			)
+			return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
+	
+	# No feedback detected; proceed to message-driven response generation
+	
+	# CHECK: Does this message include reciprocal elements we should acknowledge first?
+	has_gratitude = any(phrase in lower_input for phrase in ['thank', 'appreciate', 'grateful'])
+	has_reciprocal_interest = any(phrase in lower_input for phrase in ['how are you', 'how\'s your day', 'you doing'])
+	
+	# Prepend relational acknowledgment if message contains both reciprocal AND emotional content
+	relational_prefix = None
+	if has_gratitude or has_reciprocal_interest:
+		if has_gratitude and has_reciprocal_interest:
+			relational_prefix = "Thank you for asking. And thank you for trusting me with this. I'm here with you."
+		elif has_gratitude:
+			relational_prefix = "I appreciate that. Now, let's talk about what you're experiencing."
+		elif has_reciprocal_interest:
+			relational_prefix = "That's kind of you to ask. I'm focused on you right now."
 
-	# Sadness/grief responses
-	if any(word in keywords for word in ['sad', 'grief', 'mourning', 'loss']):
-		return "There's a heaviness you're holding, and it deserves to be witnessed. Grief moves at its own pace - not the pace we think it should. Your sorrow is valid and it's okay to feel the full weight of it."
+	# MESSAGE-DRIVEN branches using dynamic composer
+	# Build message content features for targeted response
+	message_features = {
+		"math_frustration": any(tok in lower_input for tok in ['math', 'not a math', 'mental block', 'math problem', 'maths']),
+		"communication_friction": any(tok in lower_input for tok in ['michelle', 'mother-in-law', 'boss', 'korean', 'korean speaking', 'explains', 'language']),
+		"mental_block": any(tok in lower_input for tok in ['block', 'blocked', 'can\'t', 'cannot', 'difficulty']),
+		"inherited_pattern": 'inherited' in lower_input,
+		"person_involved": "Michelle" if 'michelle' in lower_input else None,
+	}
+	
+	# If any message-specific features detected, use dynamic composer
+	if any(message_features.values()):
+		composed = _response_composer.compose_message_aware_response(
+			input_text=input_text,
+			message_content=message_features,
+			glyph=glyph,
+		)
+		if composed:
+			# Prepend relational acknowledgment if present
+			if relational_prefix:
+				composed = f"{relational_prefix} {composed}"
+			return _avoid_repeat(composed, conversation_context, previous_responses), feedback_data
+	
+	# Fall back to dynamic composition for general responses
+	# Use the dynamic composer to generate non-templated responses
+	composed = _response_composer.compose_response(
+		input_text=input_text,
+		glyph=glyph,
+		feedback_detected=feedback_data.get('is_correction', False),
+		feedback_type=feedback_data.get('contradiction_type'),
+		conversation_context=conversation_context,
+	)
+	
+	
+	if composed:
+		# Prepend relational acknowledgment if present
+		if relational_prefix:
+			composed = f"{relational_prefix} {composed}"
+		return _avoid_repeat(composed, conversation_context, previous_responses), feedback_data
+	
+	# Ultimate fallback if composer fails
+	base = "I'm here with you. What you're experiencing matters, and I'm listening."
+	if relational_prefix:
+		base = f"{relational_prefix} {base}"
+	return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
-	# Anger/frustration responses
-	if any(word in keywords for word in ['angry', 'frustrated', 'rage', 'anger']):
-		return "I can sense the intensity of what you're feeling. Anger often carries important information about our boundaries and values. What is this feeling trying to tell you about what matters to you?"
 
-	# Joy/happiness responses
-	if any(word in keywords for word in ['happy', 'joy', 'excited', 'delight']):
-		return "There's brightness in what you're sharing. Joy deserves to be fully felt and celebrated. Let yourself receive this good feeling completely."
+def _avoid_repeat(base_response: str, conversation_context: Optional[Dict], previous_responses: Optional[List[str]] = None) -> str:
+	"""If the base_response matches the last assistant message, try to vary it slightly.
 
-	# Shame/embarrassment responses
-	if any(word in keywords for word in ['ashamed', 'shame', 'embarrassed', 'humiliated']):
-		return "What you're feeling is deeply human. Shame often carries a message about our worth—but shame is a liar about that. You deserve compassion, especially from yourself. What would it feel like to offer yourself the same grace you'd give to someone you love?"
+	Variation strategy: if a prior identical response is detected in conversation_context['last_assistant_message'] or previous_responses,
+	append a short follow-up question to nudge the user to a concrete next step. This is intentionally simple and deterministic.
+	"""
+	last = None
+	if previous_responses and isinstance(previous_responses, list) and previous_responses:
+		last = previous_responses[-1]
+	if not last and conversation_context and isinstance(conversation_context, dict):
+		last = conversation_context.get('last_assistant_message')
 
-	# Disappointment/failure responses
-	if any(word in keywords for word in ['disappointed', 'failed', 'failure']):
-		return "I can sense the disappointment you're carrying. Unmet expectations can cut deep. But this moment of 'not succeeding' doesn't define your worth or your capability. What do you need to hear right now?"
-
-	# Trapped/stuck responses
-	if any(word in keywords for word in ['trapped', 'trap', 'stuck', 'broken']):
-		return "Feeling trapped is exhausting. That sense of being locked in can feel so heavy. But you're here, you're aware, and you're reaching out—those are already signs of movement. What feels like the smallest possible shift you could make?"
-
-	# Loneliness/misunderstanding responses
-	if any(word in keywords for word in ['lonely', 'alone', 'nobody', 'understand']):
-		return "Loneliness can make us feel so disconnected. But the very fact that you're trying to be understood shows there's a part of you still reaching out. You don't have to be alone in this. I'm here."
-
-	# Strength/resilience doubts
-	if any(word in keywords for word in ['strong', 'doubt', 'doubting']):
-		return "Doubting your strength is actually part of being human. The very fact that you keep showing up despite your doubts? That's strength. You've likely already survived things you didn't think you could handle."
-
-	# Growth/healing responses
-	if any(word in keywords for word in ['learning', 'healing', 'proud', 'grateful', 'come far', 'letting go']):
-		return "There's something beautiful in what you're sharing. Growth isn't linear, but the fact that you're noticing this moment of learning? That matters. You're building something real within yourself."
-
-	# Default empathetic response
-	return "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+	if last and last.strip() == base_response.strip():
+		# Append a gentle, specific follow-up to avoid verbatim repetition
+		followups = [
+			"Can you tell me one specific detail about that?",
+			"Would it help if we tried one small concrete step together?",
+			"If you pick one thing to focus on right now, what would it be?"
+		]
+		# Choose based on length of base response to keep variation deterministic
+		idx = len(base_response) % len(followups)
+		return base_response + " " + followups[idx]
+	return base_response
 
 # Generate ritual prompt
 def generate_simple_prompt(glyph: Dict) -> str:
@@ -427,7 +639,140 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 	return "You're carrying something layered. Let's sit with it and see what wants to be named."
 
 # Main parser function
+def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
+	"""
+	Detect if the message is PRIMARILY conversational/relational (thanking, asking how system is, small talk).
+	Only return early if the entire message is conversational.
+	If there's emotional content mixed in, return None to let normal processing handle it.
+	
+	Returns the response if message is PURELY reciprocal, None if it has emotional content.
+	"""
+	lower_input = input_text.lower()
+	
+	# Check if message has emotional/significant content
+	emotional_keywords = [
+		'burn', 'overwhelm', 'anxious', 'sad', 'frustrated', 'struggling', 'tired',
+		'anxiety', 'anxiety', 'depression', 'grief', 'loss', 'afraid', 'fear',
+		'angry', 'rage', 'shame', 'guilt', 'worry', 'stress', 'pain', 'hurt'
+	]
+	has_emotional = any(keyword in lower_input for keyword in emotional_keywords)
+	
+	# If there's emotional content, let it be processed normally
+	# (it might have reciprocal elements, but the emotional part is primary)
+	if has_emotional:
+		return None  # Process emotionally, don't short-circuit
+	
+	# Pure gratitude only (no emotional content)
+	if any(phrase in lower_input for phrase in ['thank you', 'thanks', 'appreciate', 'grateful']):
+		gratitude_responses = [
+			"You're welcome. I'm here for you.",
+			"Thank you for trusting me with this.",
+			"That means something to me too.",
+			"I appreciate you sharing.",
+		]
+		return random.choice(gratitude_responses)
+	
+	# Pure reciprocal interest only (no emotional content)
+	if any(phrase in lower_input for phrase in ['how are you', 'how are you doing', 'how are you feeling', 'how\'s your day', 'how\'s it going', 'you doing okay', 'you alright']):
+		reciprocal_responses = [
+			"I'm here and present with you. That's what matters. But tell me—how are *you* doing?",
+			"That's kind of you to ask. I'm focused on you right now. What's going on with you?",
+			"I appreciate that. I'm steady. How about you—what's on your mind?",
+			"I'm doing well because you're here. What brings you today?",
+		]
+		return random.choice(reciprocal_responses)
+	
+	# No reciprocal-only content detected
+	return None
+
+
 def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None, user_id: Optional[str] = None) -> Dict:
+	# FIRST: Check if this is just a simple greeting - don't process emotionally
+	simple_greetings = ['hi', 'hello', 'hey', 'hi there', 'hello there', 'hey there', 'howdy', 'greetings']
+	lower_input = input_text.strip().lower()
+	
+	if lower_input in simple_greetings:
+		# Respond warmly but simply, without emotional analysis
+		greeting_responses = [
+			"Hi there. I'm here.",
+			"Hello. What's on your mind?",
+			"Hey. I'm listening.",
+			"Hi. How are you doing?",
+			"Hello. What brings you here?",
+		]
+		response = random.choice(greeting_responses)
+		return {
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# SECOND: Check if this is casual/conversational (wanting to chat, just talking)
+	# These shouldn't trigger emotional analysis
+	casual_phrases = [
+		'i just needed to chat',
+		'i just wanted to talk',
+		'i needed someone to talk to',
+		'just wanted to chat',
+		'just needed to talk',
+		'felt like talking',
+		'wanted to connect',
+		'just checking in',
+	]
+	if any(phrase in lower_input for phrase in casual_phrases):
+		casual_responses = [
+			"I'm here. What's on your mind?",
+			"I'm glad you reached out. Tell me what you're thinking.",
+			"I'm all ears. What's going on?",
+			"I'm here for the conversation. What do you want to talk about?",
+		]
+		response = random.choice(casual_responses)
+		return {
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Normal emotional processing for non-greeting, non-casual messages
+	
+	# CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
+	# If yes, respond conversationally FIRST before emotional analysis
+	conversational_response = _detect_and_respond_to_reciprocal_message(input_text)
+	if conversational_response:
+		# This is primarily a conversational/relational message
+		# Include it in the response before diving into emotional content
+		return {
+			"timestamp": datetime.now().isoformat(),
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": conversational_response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Normal emotional processing for messages that aren't primarily conversational
 	signal_map = load_signal_map(lexicon_path)
 	signals = parse_signals(input_text, signal_map)
 	gates = evaluate_gates(signals)
@@ -442,8 +787,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 			debug_glyph_rows = signal_parser._last_glyphs_debug.get("rows", [])
 	except Exception:
 		pass
-	# Select best glyph and generate contextual response
-	best_glyph, contextual_response = select_best_glyph_and_response(glyphs, signals, input_text)
+	# Select best glyph and generate contextual response (now returns tuple with feedback)
+	best_glyph, (contextual_response, feedback_data) = select_best_glyph_and_response(glyphs, signals, input_text, conversation_context)
 	ritual_prompt = generate_simple_prompt(best_glyph)
 
 	# If no glyph matched, trigger learning pipeline to generate a candidate and craft a training response
@@ -505,7 +850,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 		"glyphs": glyphs,
 		"best_glyph": best_glyph,
 		"ritual_prompt": ritual_prompt,
-		"voltage_response": contextual_response,  # Now contains the smart contextual response
+		"voltage_response": contextual_response,  # Now message-driven, not glyph-driven
+		"feedback": feedback_data,  # NEW: Track if user corrected/contradicted prior response
 		"debug_sql": debug_sql,
 		"debug_glyph_rows": debug_glyph_rows,
 		"learning": learning_payload
