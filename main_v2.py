@@ -122,22 +122,27 @@ def main():
     st.sidebar.markdown("---")
     with st.sidebar.expander("📚 Learning Progress", expanded=False):
         try:
-            from emotional_os.learning.hybrid_learner import get_hybrid_learner
+            from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
             learner = get_hybrid_learner()
-            stats = learner.get_learning_stats()
             
-            st.metric("Signals Learned", stats.get("total_signals_known", 0))
-            st.metric("Exchanges Logged", stats.get("learning_log_entries", 0))
+            col1, col2 = st.sidebar.columns(2)
+            with col1:
+                # User-specific stats
+                user_stats = learner.get_learning_stats(
+                    user_id=st.session_state.get('user_id', 'anonymous')
+                )
+                st.metric("Your Signals", user_stats.get("signals_learned", 0))
+                st.metric("Your Trust", f"{user_stats.get('trust_score', 0.5):.1%}")
             
-            if stats.get("signals_by_frequency"):
-                st.caption("Top signals by frequency:")
-                sorted_signals = sorted(
-                    stats["signals_by_frequency"].items(),
-                    key=lambda x: x[1],
-                    reverse=True
-                )[:5]
-                for signal, freq in sorted_signals:
-                    st.write(f"• {signal}: {freq} times")
+            with col2:
+                # Shared stats
+                shared_stats = learner.get_learning_stats()
+                st.metric("Community Signals", shared_stats.get("signals_in_shared_lexicon", 0))
+                st.metric("Exchanges", shared_stats.get("learning_log_entries", 0))
+            
+            st.caption("💚 Green checkmark = learning contributed to shared lexicon")
+            st.caption("💙 Blue dot = learning only to your personal profile")
+            
         except Exception as e:
             st.caption(f"Learning system not ready: {e}")
     
