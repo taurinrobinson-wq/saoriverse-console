@@ -34,14 +34,8 @@ class GutenbergPoetryFetcher:
         'whitman_leaves': 1322,
         'whitman_drum_taps': 8736,
         
-        # Lord Byron
-        'byron_collected': 6785,
-        
         # John Keats
         'keats_complete': 2350,
-        
-        # Samuel Taylor Coleridge
-        'coleridge_complete': 16800,
         
         # William Wordsworth
         'wordsworth_complete': 8905,
@@ -49,10 +43,57 @@ class GutenbergPoetryFetcher:
         # Percy Bysshe Shelley
         'shelley_complete': 4280,
         
+        # John Milton
+        'milton_paradise_lost': 26,
+        
+        # Alexander Pope
+        'pope_works': 1124,
+        
+        # Robert Browning
+        'browning_poems': 8601,
+        
+        # Alfred Tennyson
+        'tennyson_complete': 10031,
+        
+        # Robert Frost
+        'frost_complete_poems': 59781,
+        
+        # John Donne
+        'donne_poems': 4017,
+        
+        # Samuel Taylor Coleridge (Christabel, Kubla Khan)
+        'coleridge_christabel': 51313,
+        
+        # William Shakespeare (Sonnets)
+        'shakespeare_sonnets': 1041,
+        
+        # Lord Byron (Childe Harold)
+        'byron_childe_harold': 5131,
+        
+        # George Gordon Byron (She Walks in Beauty)
+        'byron_she_walks': 30995,
+        
+        # W.H. Auden Poems
+        'auden_poems': 20643,
+        
+        # Dylan Thomas
+        'dylan_thomas_poems': 2454,
+        
+        # T.S. Eliot (Selected Poems)
+        'ts_eliot_poems': 1567,
+        
+        # W.B. Yeats (Collected Poems)
+        'yeats_poems': 7695,
+        
+        # Andrew Marvell
+        'marvell_poems': 23089,
+        
         # Poems of various authors
         'poems_of_passion': 8801,
         'poems_of_nature': 9662,
         'love_poems': 47096,
+        'victorian_poems': 17190,
+        'romantic_poems': 17191,
     }
     
     BASE_URL = "https://www.gutenberg.org/files"
@@ -206,6 +247,16 @@ def process_all_poetry():
     logger.info("Total signals extracted: {}".format(all_stats['total_signals_extracted']))
     logger.info("Total new lexicon entries: {}".format(all_stats['total_lexicon_entries']))
     logger.info("Quality contributions: {}".format(all_stats['total_quality_contributions']))
+    
+    # Get dimension report from adaptive extractor
+    if hasattr(processor.extractor, 'get_dimension_report'):
+        dimension_report = processor.extractor.get_dimension_report()
+        all_stats['emotional_dimensions'] = dimension_report
+        logger.info("\n[DIMENSIONS] Emotional Dimension Summary:")
+        logger.info("  Base dimensions: {}".format(dimension_report['breakdown']['base_dimensions']))
+        logger.info("  Pre-discovered dimensions: {}".format(dimension_report['breakdown']['pre_discovered_dimensions']))
+        logger.info("  Newly learned dimensions: {}".format(dimension_report['breakdown']['newly_learned_dimensions']))
+        logger.info("  TOTAL: {} emotional dimensions".format(dimension_report['total_dimensions']))
     
     # Save detailed results to external drive
     results_file = Path("/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json")
