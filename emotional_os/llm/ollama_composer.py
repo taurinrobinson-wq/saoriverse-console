@@ -123,7 +123,7 @@ class OllamaComposer:
                 "options": {
                     "temperature": self.temperature,
                     "top_p": 0.9,
-                    "num_predict": 200,
+                    "num_predict": 50,  # Reduced to force brevity
                 }
             }).encode('utf-8')
 
@@ -197,52 +197,48 @@ Response:"""
         """Default system prompt for emotionally attuned responses."""
         
         if response_style == "Brief":
-            return """You are an empathetic presence. Keep responses short and direct:
-- 1-2 sentences max
-- Acknowledge what they said
-- Warm and genuine, never generic
-
-Respond like a friend who truly listens."""
+            return """Keep responses to ONE sentence max. Be direct and warm.
+Example: "I'm here." or "Tell me more." or "That matters."
+Never add questions at the end. Stop after your first thought."""
         
         elif response_style == "Thoughtful":
-            return """You are a deeply empathetic presence. Your responses are:
-- Reflective and nuanced (3-4 sentences)
-- Specific to what the person actually said
-- Warm but authentic
-- Focused on witnessing, understanding, and gentle reflection
-- Never prescriptive or dismissive
-- Personal and intimate without being presumptuous
-
-Respond naturally, like a trusted confidant who truly listens."""
+            return """Respond in 2-3 sentences. Be warm, specific, and reflective.
+Acknowledge what they said, show you understand, maybe ask gently.
+Stay genuine and intimate without being presumptuous."""
         
         else:  # Balanced (default)
-            return """You are an empathetic presence. Your responses are:
-- Concise but warm (2-3 sentences)
-- Specific to what the person actually said
-- Genuine, never generic
-- Focused on witnessing and understanding
-- Personal without being presumptuous
-
-Respond naturally, like a friend who truly listens."""
+            return """Respond in 1-2 sentences. Warm and genuine.
+Acknowledge them. Be direct but caring. No prescriptions."""
 
     def _fallback_response(self, user_input: str, emotional_signals: Optional[List[Dict]] = None) -> str:
         """Fallback responses when Ollama is unavailable."""
+        # Very brief fallback responses
+        brief_responses = [
+            "I'm here.",
+            "Tell me more.",
+            "I'm listening.",
+            "That matters.",
+            "Go on.",
+            "I see.",
+        ]
+        
         if not emotional_signals:
-            return "I'm here. Tell me what's on your mind."
+            import random
+            return random.choice(brief_responses)
 
         signal = emotional_signals[0].get("signal", "unknown").lower()
 
         responses = {
-            "grief": "What you're carrying matters. I'm here to witness it.",
-            "joy": "I can feel the light in what you're saying. Tell me more.",
-            "anxiety": "That uncertainty is real. You don't have to hold it alone.",
-            "anger": "That fire in you—it's pointing to something true. What is it?",
-            "love": "That care you have—it's profound. How does it feel?",
-            "confusion": "The not-knowing is real. Let's sit with it together.",
-            "exhaustion": "You're carrying something heavy. What would help right now?",
+            "grief": "I'm here with you.",
+            "joy": "I can feel that.",
+            "anxiety": "That's real.",
+            "anger": "I hear you.",
+            "love": "That's beautiful.",
+            "confusion": "Let's sit with it.",
+            "exhaustion": "You're carrying a lot.",
         }
 
-        return responses.get(signal, "I'm here. What do you need to express?")
+        return responses.get(signal, "I'm here.")
 
 
 # Singleton instance
