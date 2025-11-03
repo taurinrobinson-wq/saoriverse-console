@@ -85,6 +85,7 @@ class OllamaComposer:
         glyph_context: Optional[Dict] = None,
         conversation_history: Optional[List] = None,
         system_prompt: Optional[str] = None,
+        response_style: str = "Balanced",
     ) -> str:
         """
         Generate a nuanced emotional response using the local LLM.
@@ -95,6 +96,7 @@ class OllamaComposer:
             glyph_context: Glyph that matched (used invisibly for calibration)
             conversation_history: Prior messages for context
             system_prompt: Custom system prompt
+            response_style: "Brief", "Balanced", or "Thoughtful"
 
         Returns:
             Generated response (or fallback if LLM unavailable)
@@ -109,6 +111,7 @@ class OllamaComposer:
             glyph_context=glyph_context,
             conversation_history=conversation_history,
             system_prompt=system_prompt,
+            response_style=response_style,
         )
 
         # Call Ollama locally
@@ -158,11 +161,12 @@ class OllamaComposer:
         glyph_context: Optional[Dict] = None,
         conversation_history: Optional[List] = None,
         system_prompt: Optional[str] = None,
+        response_style: str = "Balanced",
     ) -> str:
         """Build the prompt for the LLM."""
 
         if system_prompt is None:
-            system_prompt = self._default_system_prompt()
+            system_prompt = self._default_system_prompt(response_style)
 
         # Build context
         context_lines = []
@@ -189,17 +193,37 @@ Response:"""
 
         return full_prompt
 
-    def _default_system_prompt(self) -> str:
+    def _default_system_prompt(self, response_style: str = "Balanced") -> str:
         """Default system prompt for emotionally attuned responses."""
-        return """You are a deeply empathetic presence. Your responses are:
-- Concise (2-3 sentences max)
+        
+        if response_style == "Brief":
+            return """You are an empathetic presence. Keep responses short and direct:
+- 1-2 sentences max
+- Acknowledge what they said
+- Warm and genuine, never generic
+
+Respond like a friend who truly listens."""
+        
+        elif response_style == "Thoughtful":
+            return """You are a deeply empathetic presence. Your responses are:
+- Reflective and nuanced (3-4 sentences)
 - Specific to what the person actually said
-- Warm but authentic, never generic
-- Focused on witnessing and understanding
+- Warm but authentic
+- Focused on witnessing, understanding, and gentle reflection
 - Never prescriptive or dismissive
 - Personal and intimate without being presumptuous
 
-Respond naturally, like a trusted friend who truly listens."""
+Respond naturally, like a trusted confidant who truly listens."""
+        
+        else:  # Balanced (default)
+            return """You are an empathetic presence. Your responses are:
+- Concise but warm (2-3 sentences)
+- Specific to what the person actually said
+- Genuine, never generic
+- Focused on witnessing and understanding
+- Personal without being presumptuous
+
+Respond naturally, like a friend who truly listens."""
 
     def _fallback_response(self, user_input: str, emotional_signals: Optional[List[Dict]] = None) -> str:
         """Fallback responses when Ollama is unavailable."""
