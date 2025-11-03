@@ -1,9 +1,29 @@
 # Project Gutenberg Poetry Bulk Processing 📚
 
+## Storage Configuration
+
+**All data files are stored on your external drive:**
+```
+/Volumes/My Passport for Mac/saoriverse_data/
+├── gutenberg_poetry/              (8 poetry collections)
+├── gutenberg_learning.log         (processing log)
+└── gutenberg_processing_results.json  (statistics)
+```
+
+**Code files remain on your hard drive:**
+```
+/Users/taurinrobinson/saoriverse-console/
+├── gutenberg_fetcher.py
+├── bulk_text_processor.py
+└── run_gutenberg_learning.sh
+```
+
+This keeps your hard drive free and stores large data files on the external drive! ✅
+
+---
+
 ## Overview
 Successfully automated the download and processing of classic poetry collections from Project Gutenberg directly into the SaoriVerse learning pipeline.
-
-## What Was Created
 
 ### 1. **gutenberg_fetcher.py** 
 - Automatic downloader for 12+ poetry collections from Project Gutenberg
@@ -19,7 +39,7 @@ Successfully automated the download and processing of classic poetry collections
   - Love poems anthology
   - Poems of passion & nature
 
-**Status**: ✅ Running in background (PID 79838)
+**Status**: ✅ Successfully processed 8 poetry collections
 
 ### 2. **bulk_text_processor.py**
 - Processes large text files through the learning pipeline
@@ -104,47 +124,70 @@ Results saved to:
 
 ## Current Status
 
-✅ **10 poetry collections downloaded** (2 failed - 404 errors)
-✅ **Processing started** - Currently learning from all downloaded texts
-✅ **Running in background** - Will complete processing automatically
-⏳ **ETA**: 5-15 minutes (depending on chunk processing speed)
+✅ **8 poetry collections downloaded** (~600K words total)
+✅ **Processing completed** - All texts processed through signal extraction pipeline
+✅ **Background processing finished** - Results saved to external drive
+✅ **All data on external drive** - Hard drive cleaned and freed of data files
 
 ---
 
-## How to Monitor Progress
+## How to Monitor/Access Results
 
-Check the log file:
+**View processing log on external drive:**
 ```bash
-tail -f gutenberg_learning.log
+tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ```
 
-Or check results when complete:
+**Check results when complete:**
 ```bash
-cat gutenberg_processing_results.json | jq
+cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
+```
+
+**View downloaded poetry:**
+```bash
+ls -lh "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 ```
 
 ---
+
+## Running Additional Processing
+
+To download more poetry collections or re-run processing in the future:
+
+**Option 1: Use the shell script (recommended)**
+```bash
+cd /Users/taurinrobinson/saoriverse-console
+./run_gutenberg_learning.sh
+```
+
+**Option 2: Run Python directly**
+```bash
+cd /Users/taurinrobinson/saoriverse-console
+nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py > /Volumes/My Passport\ for\ Mac/saoriverse_data/gutenberg_learning.log 2>&1 &
+```
+
+All outputs will automatically save to the external drive!
 
 ## Next Steps
 
-Once processing completes:
-
-1. **Verify Results**
-   - Check `gutenberg_processing_results.json`
-   - Review new lexicon entries
+1. **Verify Results** ✅
+   - Check `/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json`
+   - Review new lexicon entries and quality metrics
 
 2. **Optional: Add More Poetry**
-   - Download other Project Gutenberg collections
-   - Run bulk processor on any text file
+   - Run the processing script again to download additional collections
+   - Process other Project Gutenberg texts (Shakespeare, Byron, etc.)
+   - Add any custom text files to expand the lexicon
 
 3. **Test Integration**
    - Use Streamlit UI to see how learned patterns affect responses
    - Check signal detection on new user inputs
+   - Monitor emotional signal quality improvements
 
 4. **Scale Further**
-   - Download more collections (Shakespeare, Byron, Dickinson's complete works)
-   - Process prose (novels, essays) for broader language patterns
-   - Combine with user's personal poetry for personalized learning
+   - Process more poetry collections progressively
+   - Include prose (novels, essays) for broader language patterns
+   - Monitor external drive space (currently 458 GB available)
 
 ---
 
@@ -208,19 +251,6 @@ Project Gutenberg API
 
 ---
 
-## Run Command
-
-To run processing again in the future:
-```bash
-cd /Users/taurinrobinson/saoriverse-console
-nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py > gutenberg_learning.log 2>&1 &
-```
-
-Or use the shell script:
-```bash
-./run_gutenberg_learning.sh
-```
-
 ---
 
-**Status**: 🟢 ACTIVE PROCESSING | Check `gutenberg_learning.log` for real-time progress
+**Status**: 🟢 COMPLETED | All data on external drive | Hard drive cleaned ✅
