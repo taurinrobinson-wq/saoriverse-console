@@ -554,14 +554,20 @@ def render_main_app():
         # Learn from hybrid mode conversations to improve local mode
         if processing_mode == "hybrid":
             try:
-                from emotional_os.learning.hybrid_learner import get_hybrid_learner
+                from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
                 learner = get_hybrid_learner()
-                learner.learn_from_exchange(
+                user_id = st.session_state.get('user_id', 'anonymous')
+                result = learner.learn_from_exchange(
+                    user_id=user_id,
                     user_input=user_input,
                     ai_response=response,
                     emotional_signals=debug_signals,
                     glyphs=debug_glyphs,
                 )
+                if result.get("learned_to_shared"):
+                    logger.info(f"User {user_id} contributed to shared lexicon")
+                elif result.get("learned_to_user"):
+                    logger.info(f"User {user_id} learning to personal lexicon")
             except Exception as e:
                 # Non-fatal: learning should not break the app
                 logger.warning(f"Hybrid learning failed: {e}")
