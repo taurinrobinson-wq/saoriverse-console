@@ -228,19 +228,41 @@ class HybridLearnerWithUserOverrides:
         emotional_signals: Optional[List[Dict]] = None,
         glyphs: Optional[List[Dict]] = None,
     ):
-        """Append exchange to learning log."""
+        """Append exchange to learning log (PRIVACY-SAFE: no raw user_input logged).
+        
+        This implements Option A - Gate-Based Data Masking:
+        - Logs signals, gates, and metadata (safe for sharing)
+        - Does NOT log raw user_input (protects user privacy)
+        - System still learns patterns from signals
+        """
         try:
+            # Extract signal information for logging
+            signal_names = []
+            signal_gates = []
+            if emotional_signals:
+                for signal_dict in emotional_signals:
+                    if "signal" in signal_dict:
+                        signal_names.append(signal_dict.get("signal"))
+                    if "gate" in signal_dict:
+                        signal_gates.append(signal_dict.get("gate"))
+            
+            # Privacy-safe log entry (NO raw user_input)
             log_entry = {
                 "timestamp": datetime.now().isoformat(),
-                "user_id": user_id,
-                "user_input": user_input,
-                "ai_response": ai_response,
-                "emotional_signals": emotional_signals or [],
-                "glyphs": [g.get("glyph_name", "") for g in glyphs] if glyphs else [],
+                "user_id_hash": user_id,  # Already hashed by caller
+                "signals": signal_names,  # Signals only, not the raw text
+                "gates": list(set(signal_gates)),  # Which gates were activated
+                "glyph_names": [g.get("glyph_name", "") for g in glyphs] if glyphs else [],
+                "ai_response_length": len(ai_response),  # Meta info only
+                "exchange_quality": "logged",
+                # REMOVED: "user_input" (raw text - PRIVACY)
+                # REMOVED: "ai_response" (content - PRIVACY)
+                # KEPT: Only derived signals, gates, and metadata
             }
             
             with open(self.learning_log_path, 'a') as f:
                 f.write(json.dumps(log_entry) + '\n')
+            logger.debug(f"Logged privacy-safe exchange for {user_id}: signals={signal_names}, gates={signal_gates}")
         except Exception as e:
             logger.warning(f"Could not log exchange: {e}")
     
@@ -251,7 +273,11 @@ class HybridLearnerWithUserOverrides:
         ai_response: str,
         emotional_signals: Optional[List[Dict]] = None,
     ):
-        """Learn to user's personal lexicon."""
+        """Learn to user's personal lexicon (PRIVACY-SAFE).
+        
+        Stores signal associations and keywords, NOT full user messages.
+        This protects user privacy while still learning emotional patterns.
+        """
         if "signals" not in user_overrides:
             user_overrides["signals"] = {}
         
@@ -263,15 +289,30 @@ class HybridLearnerWithUserOverrides:
                     if signal not in user_overrides["signals"]:
                         user_overrides["signals"][signal] = {
                             "keywords": [],
-                            "examples": [],
+                            "example_contexts": [],  # Stores signal context, not user text
                             "frequency": 0
                         }
                     
                     entry = user_overrides["signals"][signal]
                     if keyword not in entry["keywords"]:
                         entry["keywords"].append(keyword)
-                    entry["examples"].append(user_input)
-                    entry["examples"] = entry["examples"][-10:]  # Keep last 10
+                    
+                    # Store SIGNAL CONTEXT (what emotions appear together)
+                    # NOT the raw user input
+                    signal_context = {
+                        "keyword": keyword,
+                        "associated_signals": [
+                            s.get("signal") for s in emotional_signals 
+                            if s.get("signal") != signal
+                        ],
+                        "gates": list(set([
+                            s.get("gate") for s in emotional_signals 
+                            if s.get("gate")
+                        ])),
+                        # NO user_input stored
+                    }
+                    entry["example_contexts"].append(signal_context)
+                    entry["example_contexts"] = entry["example_contexts"][-10:]  # Keep last 10
                     entry["frequency"] = entry.get("frequency", 0) + 1
     
     def _enrich_lexicon_with_signals(
