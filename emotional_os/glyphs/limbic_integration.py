@@ -11,7 +11,11 @@ This creates the complete chiasmus: neural activation → ritual scaffolding →
 
 import os
 import sys
+import logging
 from typing import Any, Dict, List, Optional
+
+# Optional instrumentation logger. Enable by setting env var SAORIVERSE_LIMBIC_DEBUG
+logger = logging.getLogger(__name__)
 
 # Add the glyphs directory to path for imports
 sys.path.append(os.path.dirname(__file__))
@@ -71,6 +75,17 @@ class LimbicIntegrationEngine:
         chiasmus = self.limbic_system.create_ritual_chiasmus(emotion)
         result["system_signals"] = chiasmus["system_signals"]
         result["ritual_sequence"] = chiasmus["ritual_sequence"]
+
+        # Instrumentation: lightweight logging to help detect when limbic mapping
+        # actually runs and what it produced. Controlled by logger level.
+        try:
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug("process_emotion_with_limbic_mapping emotion=%s -> signals=%d regions=%d",
+                             str(emotion)[:120],
+                             len(result["system_signals"]),
+                             len(result["limbic_mapping"]))
+        except Exception:
+            pass
 
         # Generate glyph sequences for each brain region
         brain_regions = ["insula", "amygdala", "hippocampus", "acc", "vmpfc"]
