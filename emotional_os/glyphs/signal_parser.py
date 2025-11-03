@@ -645,7 +645,41 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 			"learning": None
 		}
 	
-	# Normal emotional processing for non-greeting messages
+	# SECOND: Check if this is casual/conversational (wanting to chat, just talking)
+	# These shouldn't trigger emotional analysis
+	casual_phrases = [
+		'i just needed to chat',
+		'i just wanted to talk',
+		'i needed someone to talk to',
+		'just wanted to chat',
+		'just needed to talk',
+		'felt like talking',
+		'wanted to connect',
+		'just checking in',
+	]
+	if any(phrase in lower_input for phrase in casual_phrases):
+		casual_responses = [
+			"I'm here. What's on your mind?",
+			"I'm glad you reached out. Tell me what you're thinking.",
+			"I'm all ears. What's going on?",
+			"I'm here for the conversation. What do you want to talk about?",
+		]
+		response = random.choice(casual_responses)
+		return {
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Normal emotional processing for non-greeting, non-casual messages
 	
 	# CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
 	# If yes, respond conversationally FIRST before emotional analysis
