@@ -142,7 +142,7 @@ class HybridLearnerWithUserOverrides:
             user_id: User making the exchange
             user_input: What the user said
             ai_response: The AI's response
-            emotional_signals: Detected emotional signals
+            emotional_signals: Detected emotional signals (optional - will be extracted if empty)
             glyphs: Matched glyphs
             
         Returns:
@@ -156,6 +156,15 @@ class HybridLearnerWithUserOverrides:
         }
         
         try:
+            # 0. If no signals detected, try poetry extraction
+            if not emotional_signals or len(emotional_signals) == 0:
+                try:
+                    from emotional_os.learning.poetry_signal_extractor import get_poetry_extractor
+                    extractor = get_poetry_extractor()
+                    emotional_signals = extractor.extract_signals(user_input)
+                except Exception as e:
+                    logger.warning(f"Poetry extraction failed: {e}")
+            
             # 1. Log the exchange
             self._log_exchange(user_id, user_input, ai_response, emotional_signals, glyphs)
             
@@ -190,7 +199,7 @@ class HybridLearnerWithUserOverrides:
             
             result["success"] = True
             result["reason"] = reason
-            logger.info(f"Learned from {user_id}: {reason}")
+            logger.info(f"Learned from {user_id}: {reason} - Signals: {len(emotional_signals) if emotional_signals else 0}")
             
         except Exception as e:
             result["reason"] = str(e)
