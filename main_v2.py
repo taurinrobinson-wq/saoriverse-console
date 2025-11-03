@@ -59,6 +59,17 @@ def main():
         status_on = bool(st.session_state.get('persist_history', False) and st.session_state.get('persist_confirmed', False))
         status_chip = "🟢 On" if status_on else "⚪ Off"
         st.markdown(f"**Status:** {status_chip}")
+        
+        # Response style setting
+        st.markdown("**Response Style:**")
+        response_style = st.radio(
+            "How detailed should responses be?",
+            ["Brief", "Balanced", "Thoughtful"],
+            index=1,
+            label_visibility="collapsed",
+            horizontal=True
+        )
+        st.session_state['response_style'] = response_style
 
         enable_toggle = st.checkbox(
             "Save my chats",
