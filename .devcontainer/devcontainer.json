@@ -5,12 +5,12 @@
     "codespaces": {
       "openFiles": [
         "README.md",
-        "emotional_os_ui_v2.py"
+        "main_v2.py"
       ]
     },
     "vscode": {
       "settings": {
-        "python.defaultInterpreterPath": "/usr/local/bin/python",
+  "python.defaultInterpreterPath": ".venv/bin/python",
         "editor.formatOnSave": true,
         "files.autoSave": "afterDelay",
         "files.autoSaveDelay": 1000
@@ -30,7 +30,7 @@
   },
   "updateContentCommand": "bash .devcontainer/setup.sh",
   "postAttachCommand": {
-    "server": "streamlit run emotional_os_ui_v2.py --server.enableCORS false --server.enableXsrfProtection false"
+    "server": "streamlit run main_v2.py --server.enableCORS false --server.enableXsrfProtection false"
   },
   "portsAttributes": {
     "8501": {
