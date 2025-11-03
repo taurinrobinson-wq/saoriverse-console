@@ -92,25 +92,31 @@ class HybridLearnerWithUserOverrides:
             return False, "no_emotional_signals"
         
         # Check for excessive length (potential spam/abuse)
-        if len(user_input) > 2000:
+        if len(user_input) > 5000:
             return False, "input_too_long"
         
-        if len(ai_response) > 5000:
+        if len(ai_response) > 10000:
             return False, "response_too_long"
         
         # Check for toxic keywords (basic filter)
         toxic_keywords = [
             "hate", "kill", "die", "suicide", "abuse", "assault",
-            "rape", "racist", "sexist", "pedophile"
+            "rape", "racist", "sexist", "pedophile", "harm", "hurt"
         ]
         combined_text = (user_input + " " + ai_response).lower()
         for keyword in toxic_keywords:
             if keyword in combined_text:
                 return False, f"toxic_keyword_{keyword}"
         
-        # Check for repetitive/spam patterns
-        if user_input.count(" ") < 2:  # Too short
+        # Check for meaningful content (at least 3 words)
+        if user_input.count(" ") < 2:  # Less than 3 words
             return False, "input_too_short"
+        
+        # Check for template repetition (indicator of low quality)
+        # The "pause for breath" template should NOT appear multiple times
+        template_count = ai_response.lower().count("pause for a breath")
+        if template_count > 1:
+            return False, "repetitive_template"
         
         # Looks good!
         return True, "quality_exchange"
@@ -165,11 +171,12 @@ class HybridLearnerWithUserOverrides:
                 self._save_shared_lexicon()
                 result["learned_to_shared"] = True
                 
-                # Increase user's trust score
-                user_overrides["trust_score"] = min(1.0, user_overrides.get("trust_score", 0.5) + 0.05)
+                # Increase user's trust score significantly for quality contributions
+                user_overrides["trust_score"] = min(1.0, user_overrides.get("trust_score", 0.5) + 0.10)
             else:
-                # Decrease trust score if low quality
-                user_overrides["trust_score"] = max(0.0, user_overrides.get("trust_score", 0.5) - 0.05)
+                # Only slightly decrease trust for low-quality exchanges
+                # (don't penalize too hard - learning is messy)
+                user_overrides["trust_score"] = max(0.3, user_overrides.get("trust_score", 0.5) - 0.02)
             
             user_overrides["contributions"] = user_overrides.get("contributions", 0) + 1
             self._save_user_overrides(user_id, user_overrides)
