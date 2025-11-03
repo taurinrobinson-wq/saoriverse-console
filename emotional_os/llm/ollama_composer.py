@@ -7,8 +7,9 @@ Generates nuanced emotional responses using a locally-run language model.
 
 import json
 import os
-import requests
 import sys
+import urllib.request
+import urllib.error
 from typing import Dict, List, Optional
 
 # Add project root to path
@@ -49,20 +50,21 @@ class OllamaComposer:
     def _check_availability(self) -> bool:
         """Check if Ollama server is running and model is available."""
         try:
-            response = requests.get(
+            with urllib.request.urlopen(
                 f"{self.ollama_base_url}/api/tags",
                 timeout=5
-            )
-            if response.status_code == 200:
-                models = response.json().get("models", [])
-                model_names = [m.get("name", "").split(":")[0] for m in models]
-                self.is_available = self.model in model_names
-                if self.is_available:
-                    print(f"✓ Ollama available with {self.model} model")
-                else:
-                    print(f"✗ Model '{self.model}' not found. Available: {model_names}")
-                return self.is_available
-        except requests.exceptions.ConnectionError:
+            ) as response:
+                if response.status == 200:
+                    data = json.loads(response.read().decode())
+                    models = data.get("models", [])
+                    model_names = [m.get("name", "").split(":")[0] for m in models]
+                    self.is_available = self.model in model_names
+                    if self.is_available:
+                        print(f"✓ Ollama available with {self.model} model")
+                    else:
+                        print(f"✗ Model '{self.model}' not found. Available: {model_names}")
+                    return self.is_available
+        except urllib.error.URLError:
             print(f"✗ Ollama not running at {self.ollama_base_url}")
             print("  Start with: ollama serve")
         except Exception as e:
@@ -106,31 +108,35 @@ class OllamaComposer:
 
         # Call Ollama locally
         try:
-            response = requests.post(
+            payload = json.dumps({
+                "model": self.model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {
+                    "temperature": self.temperature,
+                    "top_p": 0.9,
+                    "num_predict": 200,
+                }
+            }).encode('utf-8')
+
+            req = urllib.request.Request(
                 f"{self.ollama_base_url}/api/generate",
-                json={
-                    "model": self.model,
-                    "prompt": prompt,
-                    "stream": False,
-                    "options": {
-                        "temperature": self.temperature,
-                        "top_p": 0.9,
-                        "num_predict": 200,  # Max tokens
-                    }
-                },
-                timeout=self.timeout,
+                data=payload,
+                headers={"Content-Type": "application/json"}
             )
 
-            if response.status_code == 200:
-                result = response.json()
-                generated_text = result.get("response", "").strip()
-                if generated_text:
-                    return generated_text
+            with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                if response.status == 200:
+                    result = json.loads(response.read().decode())
+                    generated_text = result.get("response", "").strip()
+                    if generated_text:
+                        return generated_text
 
-        except requests.exceptions.Timeout:
-            print(f"⚠ Ollama timeout (>{self.timeout}s)")
-        except requests.exceptions.ConnectionError:
-            print("⚠ Ollama connection lost")
+        except urllib.error.URLError as e:
+            if "timed out" in str(e):
+                print(f"⚠ Ollama timeout (>{self.timeout}s)")
+            else:
+                print("⚠ Ollama connection lost")
         except Exception as e:
             print(f"⚠ Ollama error: {e}")
 
