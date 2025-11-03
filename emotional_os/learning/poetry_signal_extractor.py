@@ -1,17 +1,28 @@
 """
-Poetry-Aware Signal Extraction
+Creative Language Signal Extraction
 
-Extracts emotional signals and themes from poetry and creative writing.
-Handles metaphorical language, imagery, and emotional subtext.
+Extracts emotional signals and themes from any creative or expressive writing.
+Handles metaphorical language, imagery, emotional subtext, and complex expressions.
+
+Not limited to poetry - works with:
+- Poetry and verse
+- Prose and narrative writing
+- Personal reflections and journal entries
+- Emotional descriptions and metaphors
+- Any expressive language patterns
 """
 
 import re
 from typing import Dict, List, Optional, Tuple
 
 class PoetrySignalExtractor:
-    """Extract emotional signals from poetic and creative content."""
+    """Extract emotional signals from creative and expressive language.
     
-    # Poetry-specific emotional keywords and themes
+    Works with any type of expressive writing - poetry, prose, reflections, etc.
+    Detects keywords, metaphors, and phrase patterns that indicate emotional states.
+    """
+    
+    # Emotional signals that can appear in any creative writing
     POETIC_SIGNALS = {
         "love": {
             "keywords": ["love", "beloved", "darling", "sweet", "tender", "caress", "embrace", "nestled", "breast", "devoted"],
@@ -56,13 +67,16 @@ class PoetrySignalExtractor:
     }
     
     def extract_signals(self, text: str) -> List[Dict]:
-        """Extract emotional signals from poetic text.
+        """Extract emotional signals from expressive text.
+        
+        Works with poetry, prose, personal writing, or any creative expression.
+        Detects keywords, metaphors, and phrase patterns.
         
         Args:
-            text: Poetry or creative writing
+            text: Creative or expressive writing
             
         Returns:
-            List of detected signals with confidence scores
+            List of detected signals with confidence scores and matched keywords
         """
         if not text or len(text.strip()) < 10:
             return []
@@ -89,6 +103,52 @@ class PoetrySignalExtractor:
         # Sort by confidence
         detected_signals.sort(key=lambda x: x["confidence"], reverse=True)
         return detected_signals
+    
+    def extract_phrases_for_signal(self, text: str, signal_name: str, min_confidence: float = 0.4) -> List[str]:
+        """Extract meaningful phrases from text that relate to a signal.
+        
+        Returns 2-3 word phrases that could be learned as signal indicators.
+        Filters out common/generic phrases.
+        """
+        if signal_name not in self.POETIC_SIGNALS:
+            return []
+        
+        signal_data = self.POETIC_SIGNALS[signal_name]
+        keywords = signal_data.get("keywords", [])
+        metaphors = signal_data.get("metaphors", [])
+        
+        # Common words to filter out (articles, prepositions, etc)
+        stop_words = {"the", "a", "an", "is", "are", "be", "on", "in", "at", "to", "for", "of", "and", "or", "it"}
+        
+        words = text.lower().split()
+        phrases = []
+        
+        # Generate 2 and 3-word phrases, prioritizing those with signal keywords
+        for i in range(len(words) - 1):
+            # 2-word phrases
+            phrase2 = f"{words[i]} {words[i+1]}".strip()
+            # Keep if: contains signal keyword/metaphor and not all stop words
+            if (len(phrase2) > 3 and phrase2 not in phrases and 
+                not all(w in stop_words for w in phrase2.split())):
+                # Boost priority if contains signal keywords
+                if any(kw in phrase2 for kw in keywords + metaphors):
+                    phrases.insert(0, phrase2)  # Add to front
+                else:
+                    phrases.append(phrase2)
+            
+            # 3-word phrases
+            if i < len(words) - 2:
+                phrase3 = f"{words[i]} {words[i+1]} {words[i+2]}".strip()
+                if (len(phrase3) > 5 and phrase3 not in phrases and 
+                    not all(w in stop_words for w in phrase3.split())):
+                    # Boost priority if contains signal keywords
+                    if any(kw in phrase3 for kw in keywords + metaphors):
+                        phrases.insert(0, phrase3)  # Add to front
+                    else:
+                        phrases.append(phrase3)
+        
+        # Return top 10 most relevant phrases
+        return phrases[:10]
     
     def _calculate_signal_confidence(
         self,
