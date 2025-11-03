@@ -159,9 +159,13 @@ def render_splash_interface(auth):
         st.markdown('<div class="quick-access">', unsafe_allow_html=True)
         st.markdown('<div class="quick-title">Quick Access</div>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 1, 1])
+        # Quick access: keep login bypass but remove legacy demo-mode trigger for full rollout
         with col2:
-            if st.button("⚡ Demo Mode", help="Try the system instantly"):
-                auth.quick_login_bypass()
+            if st.button("⚡ Quick Login", help="Quick sign-in (developer shortcut)"):
+                try:
+                    auth.quick_login_bypass()
+                except Exception:
+                    pass
         st.markdown('</div>', unsafe_allow_html=True)
 
 def render_main_app():
@@ -315,7 +319,19 @@ def render_main_app():
         except Exception as e:
             st.error(f"Error reading document: {e}")
 
-    user_input = st.chat_input("Share what you're feeling...")
+    # Support 'recall' and 'resend' actions from the sidebar
+    recalled = None
+    auto_process = False
+    if 'recalled_message' in st.session_state:
+        recalled = st.session_state.pop('recalled_message')
+    if 'auto_process' in st.session_state:
+        auto_process = bool(st.session_state.pop('auto_process'))
+
+    if recalled:
+        # If a recalled message exists (from sidebar), process it immediately
+        user_input = recalled
+    else:
+        user_input = st.chat_input("Share what you're feeling...")
     debug_signals = []
     debug_gates = []
     debug_glyphs = []
@@ -453,6 +469,33 @@ def render_main_app():
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
                         response = "Unknown processing mode."
+                    # Before emitting the assistant response, attempt limbic processing if engine is present
+                    try:
+                        if 'limbic_engine' in st.session_state:
+                            try:
+                                from emotional_os.glyphs.limbic_decorator import decorate_reply
+                                engine = st.session_state['limbic_engine']
+                                # Basic safety gating
+                                try:
+                                    from emotional_os.safety.sanctuary import is_sensitive_input
+                                    safety_flag = is_sensitive_input(user_input)
+                                except Exception:
+                                    safety_flag = False
+                                if not safety_flag:
+                                    limbic_result = engine.process_emotion_with_limbic_mapping(user_input)
+                                    try:
+                                        decorated = decorate_reply(response, limbic_result)
+                                        # Only replace response if decoration returns a non-empty string
+                                        if isinstance(decorated, str) and decorated.strip():
+                                            response = decorated
+                                    except Exception:
+                                        pass
+                            except Exception:
+                                # If any limbic import/processing fails, continue with baseline response
+                                pass
+                    except Exception:
+                        pass
+
                     processing_time = time.time() - start_time
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
@@ -464,13 +507,64 @@ def render_main_app():
                 st.write("**Glyphs Matched:**", debug_glyphs)
                 st.write("**Raw SQL Query:**", debug_sql)
                 st.write("**Glyph Rows (Raw):**", debug_glyph_rows)
-        st.session_state[conversation_key].append({
+        entry = {
             "user": user_input,
             "assistant": response,
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
             "timestamp": datetime.datetime.now().isoformat()
-        })
+        }
+        st.session_state[conversation_key].append(entry)
+
+        # Persist to Supabase if the user opted in and credentials appear available
+        try:
+            if st.session_state.get('persist_history', False):
+                sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
+                supabase_url = sup_cfg.get('url') or sup_cfg.get('saori_url') or sup_cfg.get('saori_function_url')
+                supabase_key = sup_cfg.get('key') or sup_cfg.get('anon_key') or sup_cfg.get('apikey')
+                # If function URL was provided instead of base url, try to extract base
+                if supabase_url and supabase_url.endswith('/'): 
+                    supabase_url = supabase_url.rstrip('/')
+                # If the provided value looks like an edge function URL, extract base supabase domain
+                if supabase_url and '/functions/' in supabase_url:
+                    # nothing special, use as-is (best-effort)
+                    base_url = supabase_url.split('/functions/')[0]
+                elif supabase_url and supabase_url.startswith('https://') and '.supabase.' in supabase_url:
+                    base_url = supabase_url.split('/')[2]
+                    base_url = f"https://{base_url}"
+                else:
+                    base_url = supabase_url
+
+                if base_url and supabase_key:
+                    rest_url = f"{base_url}/rest/v1/conversation_history"
+                    headers = {
+                        'Content-Type': 'application/json',
+                        'apikey': supabase_key,
+                        'Authorization': f'Bearer {supabase_key}',
+                        'Prefer': 'return=representation'
+                    }
+                    payload = [
+                        {
+                            'user_id': st.session_state.get('user_id'),
+                            'username': st.session_state.get('username'),
+                            'user_message': user_input,
+                            'assistant_reply': response,
+                            'processing_time': f"{processing_time:.2f}s",
+                            'mode': processing_mode,
+                            'timestamp': entry['timestamp']
+                        }
+                    ]
+                    try:
+                        resp = requests.post(rest_url, headers=headers, json=payload, timeout=6)
+                        if resp.status_code not in (200, 201):
+                            # Non-fatal: warn in UI (use generic storage wording)
+                            st.warning('Could not save history to secure storage right now.')
+                    except Exception:
+                        st.warning('Temporary issue saving to secure storage. Your local history is still intact.')
+        except Exception:
+            # Best-effort: do not break the UI if persistence fails
+            pass
+
         st.rerun()
     if "show_personal_log" not in st.session_state:
         st.session_state.show_personal_log = False
@@ -541,3 +635,73 @@ def render_main_app():
             st.rerun()
         else:
             st.info("You can continue adding to this log.")
+
+
+def delete_user_history_from_supabase(user_id: str):
+    """Best-effort delete of conversation history rows for a given user_id in Supabase.
+
+    Returns a tuple: (success: bool, message: str)
+    """
+    try:
+        if not user_id:
+            return False, "No user_id provided"
+
+        sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
+        supabase_url = sup_cfg.get('url') or sup_cfg.get('saori_url') or sup_cfg.get('saori_function_url')
+        supabase_key = sup_cfg.get('key') or sup_cfg.get('anon_key') or sup_cfg.get('apikey')
+        if not supabase_url or not supabase_key:
+            return False, "Supabase credentials not configured"
+
+        # Normalize base URL
+        if supabase_url.endswith('/'):
+            supabase_url = supabase_url.rstrip('/')
+        if '/functions/' in supabase_url:
+            base_url = supabase_url.split('/functions/')[0]
+        elif supabase_url.startswith('https://') and '.supabase.' in supabase_url:
+            # Derive base from host
+            host = supabase_url.split('/')[2]
+            base_url = f"https://{host}"
+        else:
+            base_url = supabase_url
+
+        # Perform REST delete on conversation_history
+        import urllib.parse
+        encoded = urllib.parse.quote(str(user_id), safe='')
+        rest_url = f"{base_url}/rest/v1/conversation_history"
+        delete_url = f"{rest_url}?user_id=eq.{encoded}"
+        headers = {
+            'apikey': supabase_key,
+            'Authorization': f'Bearer {supabase_key}'
+        }
+        resp = requests.delete(delete_url, headers=headers, timeout=10)
+        success = resp.status_code in (200, 204)
+
+        # Attempt to write a deletion audit row (best-effort)
+        try:
+            audit_url = f"{base_url}/rest/v1/conversation_deletion_audit"
+            audit_headers = {
+                'Content-Type': 'application/json',
+                'apikey': supabase_key,
+                'Authorization': f'Bearer {supabase_key}',
+                'Prefer': 'return=representation'
+            }
+            audit_payload = [{
+                'user_id': user_id,
+                'requested_by': st.session_state.get('user_id') if 'user_id' in st.session_state else None,
+                'method': 'user-requested-via-ui',
+                'details': {
+                    'delete_status': getattr(resp, 'status_code', None),
+                    'delete_text': getattr(resp, 'text', None)
+                }
+            }]
+            requests.post(audit_url, headers=audit_headers, json=audit_payload, timeout=6)
+        except Exception:
+            # Swallow audit failures; do not block the main delete result
+            pass
+
+        if success:
+            return True, 'Deleted server-side history successfully.'
+        else:
+            return False, f'Supabase delete returned {resp.status_code}: {resp.text}'
+    except Exception as e:
+        return False, str(e)
