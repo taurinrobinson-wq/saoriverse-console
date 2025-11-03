@@ -34,16 +34,16 @@ def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "ollama"
-        mode_options = ["ollama", "hybrid", "local", "ai_preferred"]
+            st.session_state.processing_mode = "hybrid"
+        mode_options = ["hybrid", "ai_preferred", "local", "ollama"]
         current_mode = st.session_state.processing_mode
         if current_mode not in mode_options:
-            current_mode = "ollama"
+            current_mode = "hybrid"
         processing_mode = st.selectbox(
             "Processing Mode",
             mode_options,
             index=mode_options.index(current_mode),
-            help="Ollama: Local LLM (best), Hybrid: Balanced, Local: Templates only, AI: Cloud-based",
+            help="Hybrid: Best balance (recommended), AI: Cloud-only, Local: Templates, Ollama: Experimental",
             key="mode_select_row"
         )
         st.session_state.processing_mode = processing_mode
