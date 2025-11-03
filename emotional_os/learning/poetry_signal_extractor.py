@@ -19,33 +19,33 @@ class PoetrySignalExtractor:
             "intensity": 0.9
         },
         "intimacy": {
-            "keywords": ["touch", "skin", "body", "bed", "flesh", "breast", "thigh", "wrapped", "friction"],
-            "metaphors": ["nest", "buffet", "ladder", "climb"],
+            "keywords": ["touch", "skin", "body", "bed", "flesh", "breast", "thigh", "wrapped", "friction", "caught", "nestled", "scoop", "flap"],
+            "metaphors": ["nest", "buffet", "ladder", "climb", "deliver", "drop"],
             "intensity": 0.85
         },
         "vulnerability": {
-            "keywords": ["blind", "fumbling", "bumbling", "sorry", "mistake", "broken", "swept"],
-            "metaphors": ["lost", "darkness", "uncertain"],
+            "keywords": ["blind", "fumbling", "bumbling", "sorry", "mistake", "broken", "swept", "caught", "drop"],
+            "metaphors": ["lost", "darkness", "uncertain", "can't tame", "can't name"],
             "intensity": 0.75
         },
         "transformation": {
-            "keywords": ["renewed", "evolved", "evolution", "scalpel", "healing", "growth", "born"],
-            "metaphors": ["wings", "rebirth", "becoming"],
+            "keywords": ["renewed", "evolved", "evolution", "scalpel", "healing", "growth", "born", "new", "taxonomically"],
+            "metaphors": ["wings", "rebirth", "becoming", "bird", "squiggle"],
             "intensity": 0.8
         },
         "admiration": {
-            "keywords": ["beautiful", "mythic", "divine", "perfect", "wonder", "amazed", "captivated"],
-            "metaphors": ["goddess", "enchanted", "magic"],
+            "keywords": ["beautiful", "mythic", "divine", "perfect", "wonder", "amazed", "captivated", "paradise", "native"],
+            "metaphors": ["goddess", "enchanted", "magic", "stork", "delivery"],
             "intensity": 0.7
         },
         "joy": {
-            "keywords": ["wonderful", "delight", "bliss", "happy", "celebrate", "exhilarating"],
-            "metaphors": ["soaring", "flight", "dance"],
+            "keywords": ["wonderful", "delight", "bliss", "happy", "celebrate", "exhilarating", "paradise", "native"],
+            "metaphors": ["soaring", "flight", "dance", "flap", "squiggle"],
             "intensity": 0.8
         },
         "sensuality": {
-            "keywords": ["taste", "tongue", "rough", "smooth", "texture", "feel", "bristles"],
-            "metaphors": ["crickets", "friction", "tenderized"],
+            "keywords": ["taste", "tongue", "rough", "smooth", "texture", "feel", "bristles", "probes", "lick", "flap", "squiggle"],
+            "metaphors": ["crickets", "friction", "tenderized", "tongue", "tasting"],
             "intensity": 0.75
         },
         "nature": {
