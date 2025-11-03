@@ -25,43 +25,43 @@ class PoetrySignalExtractor:
     # Emotional signals that can appear in any creative writing
     POETIC_SIGNALS = {
         "love": {
-            "keywords": ["love", "beloved", "darling", "sweet", "tender", "caress", "embrace", "nestled", "breast", "devoted"],
-            "metaphors": ["bird", "nest", "stork", "paradise", "muse"],
+            "keywords": ["love", "beloved", "darling", "sweet", "tender", "caress", "embrace", "nestled", "breast", "devoted", "heart", "soul", "forever"],
+            "metaphors": ["bird", "nest", "stork", "paradise", "muse", "feathers", "perches"],
             "intensity": 0.9
         },
         "intimacy": {
-            "keywords": ["touch", "skin", "body", "bed", "flesh", "breast", "thigh", "wrapped", "friction", "caught", "nestled", "scoop", "flap"],
+            "keywords": ["touch", "skin", "body", "bed", "flesh", "breast", "thigh", "wrapped", "friction", "caught", "nestled", "scoop", "flap", "deliver", "drop"],
             "metaphors": ["nest", "buffet", "ladder", "climb", "deliver", "drop"],
             "intensity": 0.85
         },
         "vulnerability": {
-            "keywords": ["blind", "fumbling", "bumbling", "sorry", "mistake", "broken", "swept", "caught", "drop"],
-            "metaphors": ["lost", "darkness", "uncertain", "can't tame", "can't name"],
+            "keywords": ["blind", "fumbling", "bumbling", "sorry", "mistake", "broken", "swept", "caught", "drop", "sense", "madness", "dangerous", "chain"],
+            "metaphors": ["lost", "darkness", "uncertain", "can't tame", "can't name", "funeral", "mourners"],
             "intensity": 0.75
         },
         "transformation": {
-            "keywords": ["renewed", "evolved", "evolution", "scalpel", "healing", "growth", "born", "new", "taxonomically"],
-            "metaphors": ["wings", "rebirth", "becoming", "bird", "squiggle"],
+            "keywords": ["renewed", "evolved", "evolution", "scalpel", "healing", "growth", "born", "new", "taxonomically", "becoming", "change"],
+            "metaphors": ["wings", "rebirth", "becoming", "bird", "squiggle", "breaking", "beating"],
             "intensity": 0.8
         },
         "admiration": {
-            "keywords": ["beautiful", "mythic", "divine", "perfect", "wonder", "amazed", "captivated", "paradise", "native"],
-            "metaphors": ["goddess", "enchanted", "magic", "stork", "delivery"],
+            "keywords": ["beautiful", "mythic", "divine", "perfect", "wonder", "amazed", "captivated", "paradise", "native", "exquisite", "profound"],
+            "metaphors": ["goddess", "enchanted", "magic", "stork", "delivery", "glory"],
             "intensity": 0.7
         },
         "joy": {
-            "keywords": ["wonderful", "delight", "bliss", "happy", "celebrate", "exhilarating", "paradise", "native"],
-            "metaphors": ["soaring", "flight", "dance", "flap", "squiggle"],
+            "keywords": ["wonderful", "delight", "bliss", "happy", "celebrate", "exhilarating", "paradise", "native", "sings", "sweetest", "hope"],
+            "metaphors": ["soaring", "flight", "dance", "flap", "squiggle", "sunshine", "gale"],
             "intensity": 0.8
         },
         "sensuality": {
-            "keywords": ["taste", "tongue", "rough", "smooth", "texture", "feel", "bristles", "probes", "lick", "flap", "squiggle"],
-            "metaphors": ["crickets", "friction", "tenderized", "tongue", "tasting"],
+            "keywords": ["taste", "tongue", "rough", "smooth", "texture", "feel", "bristles", "probes", "lick", "flap", "squiggle", "sings", "drum"],
+            "metaphors": ["crickets", "friction", "tenderized", "tongue", "tasting", "music", "melody"],
             "intensity": 0.75
         },
         "nature": {
-            "keywords": ["raven", "bird", "stork", "hawk", "bat", "gull", "wing", "nest", "flight"],
-            "metaphors": ["sky", "wind", "wild"],
+            "keywords": ["raven", "bird", "stork", "hawk", "bat", "gull", "wing", "nest", "flight", "feathers", "perches", "gale", "storm"],
+            "metaphors": ["sky", "wind", "wild", "soul", "brain", "sense"],
             "intensity": 0.6
         }
     }
