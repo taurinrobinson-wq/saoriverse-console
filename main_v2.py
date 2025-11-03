@@ -146,6 +146,43 @@ def main():
         except Exception as e:
             st.caption(f"Learning system not ready: {e}")
     
+    # Dynamic glyph evolution section
+    st.sidebar.markdown("---")
+    with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
+        try:
+            new_glyphs = st.session_state.get('new_glyphs_this_session', [])
+            
+            if new_glyphs and len(new_glyphs) > 0:
+                st.success(f"🎉 {len(new_glyphs)} new glyph(s) discovered!")
+                
+                for i, glyph in enumerate(new_glyphs, 1):
+                    glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
+                    with st.container(border=True):
+                        col1, col2 = st.columns([1, 3])
+                        with col1:
+                            st.markdown(f"<div style='font-size: 2em;'>{glyph_dict.get('symbol', '?')}</div>", unsafe_allow_html=True)
+                        with col2:
+                            st.markdown(f"**{glyph_dict.get('name', 'Unknown')}**")
+                            emotions = glyph_dict.get('core_emotions', [])
+                            st.caption(f"💭 {' + '.join(emotions)}")
+                            keywords = glyph_dict.get('associated_keywords', [])
+                            st.caption(f"🏷️ {', '.join(keywords)}")
+                
+                # Option to export
+                if st.button("📥 Export Discovered Glyphs"):
+                    if 'hybrid_processor' in st.session_state:
+                        processor = st.session_state['hybrid_processor']
+                        export_file = f"learning/user_{st.session_state.get('user_id', 'anonymous')}_glyphs.json"
+                        result = processor.export_session_glyphs(export_file)
+                        if result.get("success"):
+                            st.success(f"✓ Exported {result['count']} glyphs")
+            else:
+                st.info("No new glyphs discovered yet. Keep exploring your emotions!")
+                st.caption("💡 New glyphs are created when the system detects meaningful emotional patterns in your dialogue.")
+        
+        except Exception as e:
+            st.warning(f"Glyph tracking not available: {e}")
+    
     st.sidebar.markdown("### Conversation History")
     # Use a per-user conversation history key that matches the main UI
     conversation_key = f"conversation_history_{st.session_state.get('user_id', 'anonymous')}"
