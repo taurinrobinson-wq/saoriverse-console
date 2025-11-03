@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 from emotional_os.learning.poetry_signal_extractor import get_poetry_extractor
+from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 
 
 class BulkTextProcessor:
@@ -38,15 +39,34 @@ class BulkTextProcessor:
         db_path: str = "emotional_os/glyphs/glyphs.db",
         learning_log_path: str = "learning/hybrid_learning_log.jsonl",
         user_overrides_dir: str = "learning/user_overrides",
+        use_adaptive_extractor: bool = True,
     ):
-        """Initialize the bulk processor."""
+        """Initialize the bulk processor.
+        
+        Args:
+            shared_lexicon_path: Path to shared lexicon
+            db_path: Path to glyphs database
+            learning_log_path: Path to learning log
+            user_overrides_dir: Directory for user overrides
+            use_adaptive_extractor: If True, use adaptive extractor to discover new dimensions
+        """
         self.learner = HybridLearnerWithUserOverrides(
             shared_lexicon_path=shared_lexicon_path,
             db_path=db_path,
             learning_log_path=learning_log_path,
             user_overrides_dir=user_overrides_dir,
         )
-        self.extractor = get_poetry_extractor()
+        
+        # Use adaptive extractor that discovers new dimensions
+        if use_adaptive_extractor:
+            self.extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
+            logger.info(f"Using ADAPTIVE signal extractor - will discover new emotional dimensions from poetry")
+            logger.info(f"Starting with: {self.extractor.get_all_dimensions()['total']} total emotional dimensions")
+        else:
+            self.extractor = get_poetry_extractor()
+            logger.info(f"Using standard signal extractor (original 8 dimensions)")
+        
+        self.use_adaptive = use_adaptive_extractor
         
     def split_into_chunks(self, text: str, chunk_size: int = 500) -> List[str]:
         """Split text into chunks by word count, respecting sentence boundaries."""
