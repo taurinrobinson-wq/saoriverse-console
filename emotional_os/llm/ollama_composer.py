@@ -22,7 +22,7 @@ class OllamaComposer:
     def __init__(
         self,
         model: str = "mistral",
-        ollama_base_url: str = "http://localhost:11434",
+        ollama_base_url: Optional[str] = None,
         temperature: float = 0.7,
         timeout: int = 30,
         fallback_to_template: bool = True
@@ -32,12 +32,17 @@ class OllamaComposer:
 
         Args:
             model: Model name (must be installed via `ollama pull <model>`)
-            ollama_base_url: URL where Ollama server is running
+            ollama_base_url: URL where Ollama server is running (defaults to env var or localhost)
             temperature: Creativity level (0.0-1.0, higher = more creative)
             timeout: Seconds to wait for response
             fallback_to_template: If Ollama fails, fall back to template responses
         """
         self.model = model
+        
+        # Use provided URL, environment variable, or default to localhost
+        if ollama_base_url is None:
+            ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+        
         self.ollama_base_url = ollama_base_url
         self.temperature = temperature
         self.timeout = timeout
