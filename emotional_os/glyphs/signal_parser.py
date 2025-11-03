@@ -26,8 +26,67 @@ except ImportError:
     HAS_NRC = False
     nrc = None
 
+# Try to import local LLM composer (optional - graceful fallback if not available)
+try:
+    from emotional_os.llm.ollama_composer import get_ollama_composer
+    HAS_OLLAMA = True
+except ImportError:
+    HAS_OLLAMA = False
+    get_ollama_composer = None
+
 # Initialize dynamic response composer at module level
 _response_composer = DynamicResponseComposer()
+
+# Initialize LLM composer (if available)
+_llm_composer = None
+if HAS_OLLAMA and get_ollama_composer:
+    try:
+        _llm_composer = get_ollama_composer()
+    except Exception as e:
+        print(f"Note: LLM composer unavailable ({e}). Using template responses.")
+        _llm_composer = None
+
+
+def _compose_with_llm(
+    input_text: str,
+    signals: List[Dict],
+    glyph: Optional[Dict] = None,
+    conversation_context: Optional[Dict] = None,
+) -> Optional[str]:
+    """
+    Try to compose a response using local Ollama LLM.
+    Falls back to None if LLM is unavailable.
+    
+    Args:
+        input_text: User's message
+        signals: Detected emotional signals
+        glyph: Matched glyph (used invisibly for calibration)
+        conversation_context: Prior conversation
+    
+    Returns:
+        LLM-generated response or None if unavailable
+    """
+    if not _llm_composer or not _llm_composer.is_available:
+        return None
+    
+    try:
+        conv_history = None
+        if conversation_context and isinstance(conversation_context, dict):
+            conv_history = conversation_context.get('messages')
+            if conv_history and not isinstance(conv_history, list):
+                conv_history = None
+        
+        response = _llm_composer.compose_response(
+            user_input=input_text,
+            emotional_signals=signals,
+            glyph_context=glyph,
+            conversation_history=conv_history,
+        )
+        return response if response else None
+    except Exception:
+        # Silently fail - will fall back to template responses
+        return None
+
 
 # Load signal lexicon from JSON (base + learned)
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
@@ -270,6 +329,17 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
 
 	# Select best glyph
 	best_glyph = max(scored_glyphs, key=lambda x: x[1])[0] if scored_glyphs else None
+
+	# Try local LLM first (if available and has signals) for more nuanced responses
+	if signals and _llm_composer and _llm_composer.is_available:
+		llm_response = _compose_with_llm(
+			input_text=input_text,
+			signals=signals,
+			glyph=best_glyph,
+			conversation_context=conversation_context,
+		)
+		if llm_response:
+			return best_glyph, (llm_response, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None})
 
 	# Generate contextual response based on actual message content + glyph context
 	# Returns tuple: (response_text, feedback_data)
