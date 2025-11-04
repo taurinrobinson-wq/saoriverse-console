@@ -38,7 +38,7 @@ def render_controls_row(conversation_key):
     with controls[0]:
         if 'processing_mode' not in st.session_state:
             st.session_state.processing_mode = "hybrid"
-        mode_options = ["hybrid", "ai_preferred", "local", "ollama"]
+        mode_options = ["hybrid", "ai_preferred", "local"]
         current_mode = st.session_state.processing_mode
         if current_mode not in mode_options:
             current_mode = "hybrid"
@@ -46,7 +46,7 @@ def render_controls_row(conversation_key):
             "Processing Mode",
             mode_options,
             index=mode_options.index(current_mode),
-            help="Hybrid: Best balance (recommended), AI: Cloud-only, Local: Templates, Ollama: Experimental",
+            help="Hybrid: Best balance (recommended), AI: Cloud-only, Local: Templates",
             key="mode_select_row"
         )
         st.session_state.processing_mode = processing_mode
@@ -379,32 +379,7 @@ def render_main_app():
                         except Exception:
                             conversation_context['last_assistant_message'] = None
 
-                    if processing_mode == "ollama":
-                        # Use local Ollama LLM for responses
-                        try:
-                            from emotional_os.llm.ollama_composer import get_ollama_composer
-                            composer = get_ollama_composer(model="neural-chat")
-                            response = composer.compose_response(
-                                user_input=user_input,
-                                response_style=response_style
-                            )
-                            glyphs = []
-                            voltage_response = ""
-                            ritual_prompt = ""
-                            debug_signals = []
-                            debug_gates = []
-                            debug_glyphs = []
-                        except Exception as e:
-                            response = f"Ollama error: {e}. Falling back to local mode."
-                            from emotional_os.glyphs.signal_parser import parse_input
-                            local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
-                            glyphs = local_analysis.get("glyphs", [])
-                            voltage_response = local_analysis.get("voltage_response", "")
-                            ritual_prompt = local_analysis.get("ritual_prompt", "")
-                            debug_signals = local_analysis.get("signals", [])
-                            debug_gates = local_analysis.get("gates", [])
-                            debug_glyphs = glyphs
-                    elif processing_mode == "local":
+                    if processing_mode == "local":
                         from emotional_os.glyphs.signal_parser import parse_input
                         local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
                         glyphs = local_analysis.get("glyphs", [])
