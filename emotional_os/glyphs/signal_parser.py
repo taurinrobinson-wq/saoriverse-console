@@ -40,9 +40,44 @@ _response_composer = DynamicResponseComposer()
 # Set up logging
 logger = logging.getLogger(__name__)
 if not logger.handlers:
-    logger.setLevel(logging.INFO)
+	logger.setLevel(logging.INFO)
 
-# Load signal lexicon from JSON (base + learned)
+# Utility function for fuzzy pattern matching
+def fuzzy_contains(input_str: str, patterns: list, threshold: float = 0.6) -> bool:
+	"""Check if input string contains or is similar to any pattern in the list.
+	
+	Priority:
+	1. Exact substring match (highest priority)
+	2. Sequence similarity match
+	3. Token overlap (only if high overlap - at least 80% of pattern tokens match)
+	"""
+	# Exact substring check first (fast and most reliable)
+	for p in patterns:
+		if p in input_str:
+			return True
+	
+	# Sequence similarity on whole string
+	for p in patterns:
+		try:
+			score = SequenceMatcher(None, input_str, p).ratio()
+			if score >= threshold:
+				return True
+		except Exception:
+			continue
+	
+	# Token overlap (strict - require high overlap)
+	# Only use this if we need fuzzy matching beyond exact/similarity
+	input_tokens = set(re.findall(r"\w+", input_str))
+	for p in patterns:
+		p_tokens = set(re.findall(r"\w+", p))
+		if not p_tokens:
+			continue
+		# Require at least 80% of pattern tokens to match (strict)
+		if len(p_tokens) > 0:
+			overlap = len(input_tokens & p_tokens) / len(p_tokens)
+			if overlap >= 0.8:  # Increase from 0.6 to 0.8 for stricter matching
+				return True
+	return False# Load signal lexicon from JSON (base + learned)
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
 	base_lexicon = {}
 	if os.path.exists(base_path):
@@ -790,24 +825,37 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 		]
 		return random.choice(reciprocal_responses)
 
-	# Name-specific patterns (high priority)
-	name_patterns = [
-		'what is your name', 'whats your name', 'what do i call you', 'do you have a name',
-		'what do you go by', 'do you go by a name', 'what should i call you', 'how do i address you',
-		'what are you called', 'whats your name'
+	# FUNCTIONAL QUERIES - Trigger system explanation
+	functional_patterns = [
+		'how do you work', 'what do you do', 'how does this work', 'how does this system work',
+		'explain what you do', 'what are you for', 'tell me how you work', 'what is this for',
+		'how does this operate', 'tell me about your functions', 'what can you do', 'how can you help'
 	]
 	
-	# Check for name questions first
-	if fuzzy_contains(lower_input, name_patterns, threshold=0.5):
-		# Name questions are now handled in parse_input directly
+	if fuzzy_contains(lower_input, functional_patterns, threshold=0.5):
+		return (
+			"I'm a companion designed to listen and help you process feelings. "
+			"I work by analyzing what you share—the emotions, patterns, and context—and responding with empathy and insight. "
+			"I offer emotional support, practical suggestions, and quiet reflection. "
+			"I'm here to help you understand yourself better and process what you're experiencing. "
+			"What matters most is you. Would you like to share what's on your mind?"
+		)
+	
+	# NAME INQUIRY PATTERNS - Asking what name the system goes by (not intending to rename yet)
+	name_inquiry_patterns = [
+		'what is your name', 'whats your name', 'what do you go by', 'do you have a name',
+		'what are you called', 'who are you', 'tell me about yourself', 'tell me about you'
+	]
+	
+	if fuzzy_contains(lower_input, name_inquiry_patterns, threshold=0.5):
+		# Name inquiry questions are now handled in parse_input directly
 		# This is just a fallback - should not normally reach here
 		return None
 	
 	# Profile / curiosity queries about the assistant itself (broader)
 	profile_patterns = [
-		'tell me about yourself', 'tell me about you', 'who are you', 'what are you', 'what can you do', 'who created you',
-		'what is this', 'whats this', 'curious what this is', 'just curious', 'what do you do', 'how does this work',
-		'what is this for', 'how do you work', 'explain what you do', 'what are you for'
+		'what is this', 'whats this', 'curious what this is', 'just curious',
+		'who are you', 'what are you'
 	]
 
 	# Use fuzzy_contains to catch paraphrases and misspellings
@@ -929,40 +977,94 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 					"learning": None
 				}
 	
-	# CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
-	# If yes, respond conversationally FIRST before emotional analysis
-	# BUT: Check for name questions FIRST - these have priority
-	
-	# Name-specific patterns (high priority - check FIRST)
-	name_patterns = [
-		'what is your name', 'whats your name', 'what do i call you', 'do you have a name',
-		'what do you go by', 'do you go by a name', 'what should i call you', 'how do i address you',
-		'what are you called'
+	# CHECK: Explicit naming intent - user wants to name the system NOW
+	# Patterns: "Can I call you X", "I want to name you X", "I'll call you X"
+	explicit_naming_patterns = [
+		r"can i call you (\w+)",
+		r"i want to (call you|name you) (\w+)",
+		r"i'?ll call you (\w+)",
+		r"let me call you (\w+)",
+		r"you can be (\w+)",
+		r"i'm naming you (\w+)",
+		r"call yourself (\w+)"
 	]
 	
-	def fuzzy_contains_local(input_str: str, patterns: list, threshold: float = 0.6) -> bool:
+	import re as regex_module
+	for pattern in explicit_naming_patterns:
+		match = regex_module.search(pattern, lower_input, regex_module.IGNORECASE)
+		if match:
+			# Extract the proposed name from regex groups
+			proposed_name = None
+			if len(match.groups()) >= 1:
+				# Get the last non-empty group as it's the name
+				proposed_name = next((g for g in reversed(match.groups()) if g), None)
+			
+			if proposed_name and len(proposed_name) < 30:
+				# Valid naming submission - lock it in immediately
+				proposed_name_display = proposed_name.capitalize()
+				response = (
+					f"✨ **{proposed_name_display}** — I'll call myself that for you from now on.\n\n"
+					f"There's something special about naming. It creates a small ceremony between us—"
+					f"a moment where you claimed what you want from this space. "
+					f"Thank you for that.\n\n"
+					f"Now, what brings you here today?"
+				)
+				# Store the user's chosen name in conversation_context for future reference
+				if conversation_context and isinstance(conversation_context, dict):
+					conversation_context['user_assigned_name'] = proposed_name_display
+				
+				return {
+					"timestamp": datetime.now().isoformat(),
+					"input": input_text,
+					"signals": [],
+					"gates": [],
+					"glyphs": [],
+					"best_glyph": None,
+					"ritual_prompt": None,
+					"voltage_response": response,
+					"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+					"response_source": 'naming_ritual',
+					"debug_sql": "",
+					"debug_glyph_rows": [],
+					"learning": None
+				}
+	
+	# CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
+	# If yes, respond conversationally FIRST before emotional analysis
+	# BUT: Check for FUNCTIONAL QUERIES and NAME INQUIRY FIRST - these have priority
+	
+	# Guard clause: Check if this is ambiguous or special intent
+	functional_patterns = [
+		'how do you work', 'what do you do', 'how does this work', 'how does this system work',
+		'explain what', 'tell me how', 'what are you for', 'how can you help',
+		'tell me about your functions', 'how can i use'
+	]
+	
+	name_inquiry_patterns = [
+		'what is your name', 'whats your name', 'what do you go by', 'do you have a name',
+		'what are you called', 'what should i call you', 'how do i address you'
+	]
+	
+	# For name inquiry: require EXACT substring or very high sequence similarity (0.85+)
+	# This prevents "what do you do" from matching "what do you go by"
+	def strict_fuzzy_match(input_str: str, patterns: list, min_seq_similarity: float = 0.85) -> bool:
+		"""Strict matching: exact substring OR very high sequence similarity."""
 		for p in patterns:
 			if p in input_str:
 				return True
 		for p in patterns:
 			try:
 				score = SequenceMatcher(None, input_str, p).ratio()
-				if score >= threshold:
+				if score >= min_seq_similarity:
 					return True
 			except Exception:
 				continue
-		input_tokens = set(re.findall(r"\w+", input_str))
-		for p in patterns:
-			p_tokens = set(re.findall(r"\w+", p))
-			if not p_tokens:
-				continue
-			overlap = len(input_tokens & p_tokens) / len(p_tokens)
-			if overlap >= 0.6:
-				return True
 		return False
 	
-	if fuzzy_contains_local(lower_input, name_patterns, threshold=0.5):
-		# Return naming ritual response
+	# Check for name inquiry FIRST (stricter matching)
+	is_name_inquiry = strict_fuzzy_match(lower_input, name_inquiry_patterns, min_seq_similarity=0.85)
+	if is_name_inquiry:
+		# Name inquiry - start naming ritual
 		naming_response = (
 			"I'm **Saori**—that's what I go by.\n\n"
 			"But here's what makes this personal: you get to decide what you want to call me. "
@@ -980,7 +1082,33 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 			"ritual_prompt": None,
 			"voltage_response": naming_response,
 			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-			"response_source": 'name_question',
+			"response_source": 'name_inquiry',
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Check for functional queries (use fuzzy matching)
+	is_functional = fuzzy_contains(lower_input, functional_patterns, threshold=0.55)
+	if is_functional:
+		functional_response = (
+			"I'm a companion designed to listen and help you process feelings. "
+			"I work by analyzing what you share—the emotions, patterns, and context—and responding with empathy and insight. "
+			"I offer emotional support, practical suggestions, and quiet reflection. "
+			"I'm here to help you understand yourself better and process what you're experiencing. "
+			"What matters most is you. Would you like to share what's on your mind?"
+		)
+		return {
+			"timestamp": datetime.now().isoformat(),
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": functional_response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"response_source": 'functional_query',
 			"debug_sql": "",
 			"debug_glyph_rows": [],
 			"learning": None
