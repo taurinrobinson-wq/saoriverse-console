@@ -77,3 +77,23 @@ CREATE TRIGGER conversations_update_updated_at
 BEFORE UPDATE ON public.conversations
 FOR EACH ROW
 EXECUTE FUNCTION update_conversation_updated_at();
+
+-- ============================================================================
+-- SECURITY: Row Level Security (RLS)
+-- ============================================================================
+-- 
+-- IMPORTANT: After creating these tables, you MUST enable Row Level Security (RLS)
+-- to restrict access so users can only view/modify their own conversations.
+--
+-- Run the companion SQL file to enable RLS:
+--   sql/conversations_rls_policies.sql
+--
+-- This ensures that each user can ONLY:
+--   ✓ SELECT their own conversations (WHERE user_id = auth.uid())
+--   ✓ INSERT their own conversations
+--   ✓ UPDATE their own conversations
+--   ✓ DELETE their own conversations
+--
+-- Without RLS, anyone with database access can read all conversations!
+--
+-- ============================================================================
