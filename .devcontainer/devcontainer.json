@@ -22,11 +22,11 @@
       ]
     }
   },
-  "features": {
-    "ghcr.io/devcontainers/features/env-vars:1": {
-      "GLYPH_MODE": "hybrid",
-      "DEFAULT_TONE": "plain"
-    }
+  // Set simple container environment variables instead of using a GHCR-hosted feature
+  // The 'env-vars' feature required GHCR access and failed during Codespaces creation.
+  "containerEnv": {
+    "GLYPH_MODE": "hybrid",
+    "DEFAULT_TONE": "plain"
   },
   "updateContentCommand": "bash .devcontainer/setup.sh",
   "postAttachCommand": {
