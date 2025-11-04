@@ -792,7 +792,9 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
 	# Profile / curiosity queries about the assistant itself
 	profile_patterns = [
-		'tell me about yourself', 'tell me about you', 'who are you', 'what are you', 'what can you do', 'who created you'
+		'tell me about yourself', 'tell me about you', 'who are you', 'what are you', 'what can you do', 'who created you',
+		'what do i call you', 'do you have a name', 'what is your name', 'whats your name', 'what do you go by',
+		'do you go by a name', 'what should i call you', 'how do i address you', 'what are you called'
 	]
 
 	# Use fuzzy_contains to catch paraphrases and misspellings
