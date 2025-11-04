@@ -790,11 +790,24 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 		]
 		return random.choice(reciprocal_responses)
 
-	# Profile / curiosity queries about the assistant itself
+	# Name-specific patterns (high priority)
+	name_patterns = [
+		'what is your name', 'whats your name', 'what do i call you', 'do you have a name',
+		'what do you go by', 'do you go by a name', 'what should i call you', 'how do i address you',
+		'what are you called', 'whats your name'
+	]
+	
+	# Check for name questions first
+	if fuzzy_contains(lower_input, name_patterns, threshold=0.5):
+		# Name questions are now handled in parse_input directly
+		# This is just a fallback - should not normally reach here
+		return None
+	
+	# Profile / curiosity queries about the assistant itself (broader)
 	profile_patterns = [
 		'tell me about yourself', 'tell me about you', 'who are you', 'what are you', 'what can you do', 'who created you',
-		'what do i call you', 'do you have a name', 'what is your name', 'whats your name', 'what do you go by',
-		'do you go by a name', 'what should i call you', 'how do i address you', 'what are you called'
+		'what is this', 'whats this', 'curious what this is', 'just curious', 'what do you do', 'how does this work',
+		'what is this for', 'how do you work', 'explain what you do', 'what are you for'
 	]
 
 	# Use fuzzy_contains to catch paraphrases and misspellings
@@ -876,8 +889,104 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 	
 	# Normal emotional processing for non-greeting, non-casual messages
 	
+	# CHECK: Is this a name submission for the naming ritual?
+	# If user has just been asked "What would you like to call me?", lock in their choice
+	if conversation_context and isinstance(conversation_context, dict):
+		last_assistant_msg = conversation_context.get('last_assistant_message', '').lower()
+		# Check if we EXPLICITLY asked "What would you like to call me?"
+		if 'what would you like to call me' in last_assistant_msg or 'what would you call me' in last_assistant_msg:
+			# This is likely a name submission (not a question)
+			# Don't process things like "Do you have a name?" as submissions
+			proposed_name = input_text.strip()
+			# Check if it looks like a name (not a question mark, short, no question patterns)
+			if (len(proposed_name) < 30 and not any(char in proposed_name for char in ['\n', '\t', '|', '?']) 
+				and not proposed_name.lower().startswith(('what', 'do ', 'how ', 'why ', 'when ', 'where ', 'who ', 'is '))):
+				# Valid name - lock it in
+				response = (
+					f"✨ **{proposed_name}** — I'll call myself that for you from now on.\n\n"
+					f"There's something special about naming. It creates a small ceremony between us—"
+					f"a moment where you claimed what you want from this space. "
+					f"Thank you for that.\n\n"
+					f"Now, what brings you here today?"
+				)
+				# Store the user's chosen name in conversation_context for future reference
+				if isinstance(conversation_context, dict):
+					conversation_context['user_assigned_name'] = proposed_name
+				
+				return {
+					"timestamp": datetime.now().isoformat(),
+					"input": input_text,
+					"signals": [],
+					"gates": [],
+					"glyphs": [],
+					"best_glyph": None,
+					"ritual_prompt": None,
+					"voltage_response": response,
+					"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+					"response_source": 'naming_ritual',
+					"debug_sql": "",
+					"debug_glyph_rows": [],
+					"learning": None
+				}
+	
 	# CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
 	# If yes, respond conversationally FIRST before emotional analysis
+	# BUT: Check for name questions FIRST - these have priority
+	
+	# Name-specific patterns (high priority - check FIRST)
+	name_patterns = [
+		'what is your name', 'whats your name', 'what do i call you', 'do you have a name',
+		'what do you go by', 'do you go by a name', 'what should i call you', 'how do i address you',
+		'what are you called'
+	]
+	
+	def fuzzy_contains_local(input_str: str, patterns: list, threshold: float = 0.6) -> bool:
+		for p in patterns:
+			if p in input_str:
+				return True
+		for p in patterns:
+			try:
+				score = SequenceMatcher(None, input_str, p).ratio()
+				if score >= threshold:
+					return True
+			except Exception:
+				continue
+		input_tokens = set(re.findall(r"\w+", input_str))
+		for p in patterns:
+			p_tokens = set(re.findall(r"\w+", p))
+			if not p_tokens:
+				continue
+			overlap = len(input_tokens & p_tokens) / len(p_tokens)
+			if overlap >= 0.6:
+				return True
+		return False
+	
+	if fuzzy_contains_local(lower_input, name_patterns, threshold=0.5):
+		# Return naming ritual response
+		naming_response = (
+			"I'm **Saori**—that's what I go by.\n\n"
+			"But here's what makes this personal: you get to decide what you want to call me. "
+			"Some people keep it as Saori. Others choose something that feels right to them.\n\n"
+			"**What would you like to call me?** "
+			"(You can change it anytime, but I'll use your choice for our conversations.)"
+		)
+		return {
+			"timestamp": datetime.now().isoformat(),
+			"input": input_text,
+			"signals": [],
+			"gates": [],
+			"glyphs": [],
+			"best_glyph": None,
+			"ritual_prompt": None,
+			"voltage_response": naming_response,
+			"feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+			"response_source": 'name_question',
+			"debug_sql": "",
+			"debug_glyph_rows": [],
+			"learning": None
+		}
+	
+	# Then check for other conversational messages
 	conversational_response = _detect_and_respond_to_reciprocal_message(input_text)
 	if conversational_response:
 		# This is primarily a conversational/relational message
