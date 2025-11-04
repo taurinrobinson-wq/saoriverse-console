@@ -681,6 +681,25 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 			"I'm doing well because you're here. What brings you today?",
 		]
 		return random.choice(reciprocal_responses)
+
+	# Profile / curiosity queries about the assistant itself
+	profile_patterns = [
+		r"tell me (more )?about (you|yourself)",
+		r"who (are|r) you",
+		r"what are you",
+		r"what can you do",
+		r"who created you",
+	]
+	for pat in profile_patterns:
+		try:
+			if re.search(pat, lower_input):
+				return (
+					"I'm a companion designed to listen and help you process feelings. "
+					"I can offer emotional support, practical suggestions, and quiet reflection—whatever you need in the moment. "
+					"If you'd like, I can say more about how I work or keep the focus on you."
+				)
+		except Exception:
+			continue
 	
 	# No reciprocal-only content detected
 	return None
