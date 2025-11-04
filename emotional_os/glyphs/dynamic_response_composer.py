@@ -278,7 +278,20 @@ class DynamicResponseComposer:
         # Extract what they're actually struggling with from the message
         lower_input = input_text.lower()
         
-        if any(word in lower_input for word in ['math', 'anxiety', 'mental block', 'can\'t']):
+        # Nuanced handling: detect mixed or contrasting emotions (e.g., exhausted + joyful)
+        fatigue_words = ['exhaust', 'exhausted', 'tired', 'fatigue', 'weary']
+        joy_words = ['joy', 'joyful', 'happy', 'glad', 'delighted']
+
+        has_fatigue = any(w in lower_input for w in fatigue_words)
+        has_joy = any(w in lower_input for w in joy_words)
+
+        if has_fatigue and has_joy:
+            # Acknowledge complex, co-occurring emotions explicitly
+            parts.append(
+                "It makes sense that you can feel tired and yet also find moments of joy — both can be true at once. "
+                "Holding those together is hard, and it's okay to notice both."
+            )
+        elif any(word in lower_input for word in ['math', 'anxiety', 'mental block', 'can\'t']):
             # They're naming a specific cognitive struggle
             parts.append("That friction you're naming is real. Many people experience genuine resistance in certain domains.")
         elif any(word in lower_input for word in ['inherited', 'from', 'mother', 'parent']):
@@ -429,8 +442,39 @@ class DynamicResponseComposer:
         Returns:
             Dynamically composed response grounded in glyph
         """
-        # Extract linguistic features
-        extracted = self._extract_entities_and_emotions(input_text)
+        # Build a combined text that includes recent user context (if provided)
+        # so the composer can detect mixed or evolving emotions across turns.
+        combined_text = input_text
+        try:
+            if conversation_context and isinstance(conversation_context, dict):
+                # Look for common conversation context shapes used by the UI/parser
+                prev_user = None
+                if 'last_user_message' in conversation_context:
+                    prev_user = conversation_context.get('last_user_message')
+                elif 'previous_user_message' in conversation_context:
+                    prev_user = conversation_context.get('previous_user_message')
+                else:
+                    # Try to extract from messages/history lists
+                    msgs = conversation_context.get('messages') or conversation_context.get('history')
+                    if isinstance(msgs, list) and msgs:
+                        # Find the last user message in the list
+                        for m in reversed(msgs):
+                            if isinstance(m, dict) and m.get('role') in ('user', 'User'):
+                                prev_user = m.get('content') or m.get('text') or m.get('user')
+                                break
+                            # older formats store entries as {'user':..., 'assistant':...}
+                            if isinstance(m, dict) and 'user' in m and m.get('user'):
+                                prev_user = m.get('user')
+                                break
+                if prev_user:
+                    # prepend previous user text to detect cross-turn emotional combinations
+                    combined_text = f"{prev_user.strip()} {input_text.strip()}"
+        except Exception:
+            # Defensive: if context parsing fails, fall back to input_text
+            combined_text = input_text
+
+        # Extract linguistic features from the combined text (captures cross-turn cues)
+        extracted = self._extract_entities_and_emotions(combined_text)
 
         # Build core response anchored in glyph
         response = self._build_glyph_aware_response(
@@ -438,7 +482,7 @@ class DynamicResponseComposer:
             entities=extracted["entities"],
             emotions=extracted["emotions"],
             feedback_type=feedback_type if feedback_detected else None,
-            input_text=input_text,
+            input_text=combined_text,
             extracted=extracted,
         )
 

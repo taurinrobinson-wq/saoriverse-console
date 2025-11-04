@@ -15,5 +15,9 @@
     "https://deno.land": false,
     "https://cdn.skypack.dev": false,
     "https://crux.land": false
-  }
+  },
+  "cSpell.words": [
+    "ollama",
+    "velonix"
+  ]
 }
