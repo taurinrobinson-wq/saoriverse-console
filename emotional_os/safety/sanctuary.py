@@ -6,6 +6,8 @@ from .config import DEFAULT_LOCALE, INCLUDE_CRISIS_RESOURCES
 from .redaction import redact_text
 from .sanctuary_handler import build_consent_prompt, classify_risk, get_crisis_resources
 from .templates import SanctuaryTemplates
+from difflib import SequenceMatcher
+import re
 
 # Load trauma lexicon once
 _TRAUMA_LEXICON_PATH = os.path.join(os.path.dirname(__file__), "trauma_lexicon.json")
@@ -55,7 +57,76 @@ def ensure_sanctuary_response(
     if not base_response:
         return sanctuary + consent_prompt + resources_block
 
-    # Combine sanctuary framing + consent prompt + original response
+    # If the base_response already contains key sanctuary phrases, avoid repeating the full
+    # sanctuary framing. This prevents duplication when dynamic composers already include
+    # compassionate openers or gentle-boundary language.
+
+    # Heuristic 1: exact sentinel phrase match (fast path)
+    sentinel_phrases = [
+        "I'm here with you",
+        "What you're sharing matters",
+        "You get to set the pace",
+        "Your experience deserves care",
+        "If this brings up a lot, we can slow down"
+    ]
+
+    base_lower = base_response.lower() if base_response else ""
+    contains_sanctuary_text = any(phrase.lower() in base_lower for phrase in sentinel_phrases)
+
+    # Heuristic 2: try pattern and token heuristics to catch common paraphrases.
+    # This captures cases like "I'm here for you" (vs "I'm here with you")
+    # or short rephrasings that SequenceMatcher struggles to match.
+    # Use regexes for common patterns and a token-distance fallback.
+    def similar(a: str, b: str) -> float:
+        try:
+            return SequenceMatcher(None, a, b).ratio()
+        except Exception:
+            return 0.0
+
+    fuzzy_match_found = False
+    try:
+        # quick regex-based paraphrase checks
+        # e.g., "i'm here for you", "i am here for you", "i'm here with you"
+        if re.search(r"i('?m| am) here (with|for) you", base_lower):
+            fuzzy_match_found = True
+        # other common compassionate fragments
+        if not fuzzy_match_found and any(phrase.lower() in base_lower for phrase in [
+            "you get to set the pace",
+            "what you're sharing matters",
+            "your experience deserves care",
+            "we can slow down"
+        ]):
+            fuzzy_match_found = True
+        # token proximity fallback: both 'here' and 'you' nearby
+        if not fuzzy_match_found and 'here' in base_lower and 'you' in base_lower:
+            try:
+                idx_here = base_lower.index('here')
+                idx_you = base_lower.index('you')
+                if abs(idx_here - idx_you) < 40:
+                    fuzzy_match_found = True
+            except Exception:
+                pass
+
+        canonical_ack = SanctuaryTemplates.compassionate_acknowledgment(tone)
+        canonical_bound = SanctuaryTemplates.gentle_boundaries()
+        # Compare base response to canonical ack and boundaries; if similar enough, treat as containing sanctuary text
+        # Use lower thresholds because base responses are often much shorter than the canonical blocks.
+        if similar(base_lower, canonical_ack.lower()) > 0.45 or similar(base_lower, canonical_bound.lower()) > 0.45:
+            fuzzy_match_found = True
+        else:
+            # Also compare shorter sentinel fragments with fuzzy threshold
+            for frag in sentinel_phrases:
+                if similar(base_lower, frag.lower()) > 0.5:
+                    fuzzy_match_found = True
+                    break
+    except Exception:
+        fuzzy_match_found = False
+
+    if contains_sanctuary_text or fuzzy_match_found:
+        # The base response already expresses sanctuary posture; append consent/resources only.
+        return f"{base_response}{consent_prompt}{resources_block}"
+
+    # Default: prepend full sanctuary framing to ensure compassionate context
     return f"{sanctuary}{consent_prompt}\n\n{base_response}{resources_block}"
 
 

@@ -13,13 +13,6 @@
 - Favicon updated to black cropped logo
 - All changes committed to `main` branch
 
-### ✅ Local Infrastructure
-- Ollama v0.1.6 installed on external drive: `/Volumes/My Passport for Mac/ollama`
-- OLLAMA_HOME environment variable configured in `~/.zshrc`
-- Models downloaded: neural-chat, llama2
-- Ollama running on port 11435 (custom port due to conflicts)
-- Local setup guide documented in `LOCAL_SETUP_GUIDE.md`
-
 ### ✅ Backend Ready
 - Supabase integration complete (REST API for conversation persistence)
 - Environment variables configured via secrets management
@@ -51,15 +44,12 @@ In the Streamlit Cloud dashboard, go to App settings → Secrets:
 [supabase]
 url = "your-supabase-url"
 key = "your-supabase-anon-key"
-
-[ollama]
-base_url = "http://ollama-service:11434"  # If using external Ollama
 ```
 
 ### 4. That's It!
 The app will:
 - Auto-connect to Supabase for persistence
-- Fall back gracefully if Ollama is unavailable
+- Use built-in response generation
 - Run on Streamlit's infrastructure (Python 3.11+)
 - Scale automatically with traffic
 
@@ -81,10 +71,10 @@ Once you upgrade Python on your Mac:
 python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-OLLAMA_HOME="/Volumes/My Passport for Mac/ollama" streamlit run main_v2.py
+streamlit run main_v2.py
 ```
 
-The app will connect to your local Ollama instance automatically.
+The app will run with built-in response generation.
 
 ---
 
@@ -92,7 +82,6 @@ The app will connect to your local Ollama instance automatically.
 
 - **Entry point**: `main_v2.py`
 - **UI module**: `emotional_os/deploy/modules/ui.py`
-- **Ollama integration**: `emotional_os/llm/ollama_composer.py`
 - **Backend logic**: `emotional_os/glyphs/signal_parser.py`
 - **Persistence**: `emotional_os/supabase/supabase_integration.py`
 
@@ -106,8 +95,6 @@ Streamlit Cloud/Railway
 main_v2.py (Entry point)
     ↓
 Supabase (persistence) ← Conversation history
-    ↓
-Ollama (local or external) ← LLM inference
     ↓
 Signal Parser ← Response generation with learning
     ↓
