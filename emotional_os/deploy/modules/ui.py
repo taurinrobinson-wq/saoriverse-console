@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 import time
+import uuid
 
 try:
     import requests
@@ -21,6 +22,13 @@ except Exception:
     # Allow the module to be imported even if optional doc export dependencies
     # (like python-docx) are not installed
     generate_doc = None
+
+try:
+    from .conversation_manager import ConversationManager, generate_auto_name, load_all_conversations_to_sidebar
+except Exception:
+    ConversationManager = None
+    generate_auto_name = None
+    load_all_conversations_to_sidebar = None
 
 
 def inject_css(css_file_path):
@@ -177,6 +185,48 @@ def render_splash_interface(auth):
 
 def render_main_app():
     # (Simple chat history example removed; only advanced chat/conversation system remains)
+    
+    # ============================================================================
+    # Initialize Conversation Manager & Sidebar
+    # ============================================================================
+    
+    # Initialize conversation manager for persistence
+    if ConversationManager and 'user_id' in st.session_state:
+        if 'conversation_manager' not in st.session_state:
+            st.session_state['conversation_manager'] = ConversationManager(st.session_state['user_id'])
+        
+        # Initialize current conversation ID if not set
+        if 'current_conversation_id' not in st.session_state:
+            st.session_state['current_conversation_id'] = str(uuid.uuid4())
+        
+        # Initialize conversation title if not set
+        if 'conversation_title' not in st.session_state:
+            st.session_state['conversation_title'] = "New Conversation"
+    
+    # Display sidebar with previous conversations
+    with st.sidebar:
+        st.markdown("### Settings")
+        
+        # Persist history toggle
+        persist_default = st.session_state.get('persist_history', True)
+        st.session_state['persist_history'] = st.checkbox(
+            "💾 Save my chats",
+            value=persist_default,
+            help="Automatically save conversations for later retrieval"
+        )
+        
+        # Load and display previous conversations
+        if ConversationManager and st.session_state.get('conversation_manager'):
+            st.markdown("---")
+            load_all_conversations_to_sidebar(st.session_state['conversation_manager'])
+            
+            # New conversation button
+            if st.button("➕ New Conversation", use_container_width=True):
+                st.session_state['current_conversation_id'] = str(uuid.uuid4())
+                st.session_state['conversation_title'] = "New Conversation"
+                st.session_state['conversation_history_' + st.session_state['user_id']] = []
+                st.rerun()
+    
     # Dynamically inject theme CSS
     theme = st.session_state.get("theme_select_row", "Light")
     css_file = "emotional_os/deploy/emotional_os_ui_light.css" if theme == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
@@ -642,7 +692,39 @@ def render_main_app():
                 # Non-fatal: learning should not break the app
                 logger.warning(f"Hybrid learning failed: {e}")
 
-        # Persist to Supabase if the user opted in and credentials appear available
+        # Persist to Supabase if the user opted in using the new conversation manager
+        try:
+            if st.session_state.get('persist_history', False) and st.session_state.get('conversation_manager'):
+                manager = st.session_state['conversation_manager']
+                conversation_id = st.session_state.get('current_conversation_id', 'default')
+                
+                # Auto-name conversation based on first message
+                if len(st.session_state[conversation_key]) == 1:  # Just added first exchange
+                    if generate_auto_name:
+                        title = generate_auto_name(user_input)
+                        st.session_state['conversation_title'] = title
+                    else:
+                        title = "New Conversation"
+                else:
+                    title = st.session_state.get('conversation_title', 'New Conversation')
+                
+                # Save to database with conversation manager
+                messages = st.session_state[conversation_key]
+                success, message = manager.save_conversation(
+                    conversation_id=conversation_id,
+                    title=title,
+                    messages=messages,
+                    processing_mode=processing_mode
+                )
+                
+                if not success:
+                    logger.warning(f"Failed to save conversation: {message}")
+        except Exception as e:
+            # Best-effort: do not break the UI if persistence fails
+            logger.warning(f"Conversation persistence error: {e}")
+            pass
+        
+        # Fallback: Also persist individual messages to old conversation_history table if configured
         try:
             if st.session_state.get('persist_history', False):
                 sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
