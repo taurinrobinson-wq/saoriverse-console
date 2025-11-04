@@ -7,7 +7,13 @@ Free for research use.
 """
 
 import os
+import logging
 from collections import defaultdict
+
+logger = logging.getLogger(__name__)
+if not logger.handlers:
+    # basic fallback config for modules imported outside app runtime
+    logging.basicConfig(level=logging.INFO)
 
 
 class NRCLexicon:
@@ -39,7 +45,14 @@ class NRCLexicon:
                 self._load_lexicon(bootstrap_path)
                 self.source = "bootstrap"
             else:
-                print(f"⚠️ Neither {filepath} nor {bootstrap_path} found")
+                logger.warning(
+                    "NRC lexicon files not found. Expected '%s' or '%s'. "
+                    "Emotion detection will run without the NRC lexicon. "
+                    "To enable full emotion lookup, place the NRC file at the path above. "
+                    "See README.md or SETUP.md for instructions.",
+                    filepath,
+                    bootstrap_path,
+                )
 
     def _load_lexicon(self, filepath: str):
         """Load lexicon from file."""
@@ -48,7 +61,7 @@ class NRCLexicon:
                 lines = f.readlines()
 
             if not lines:
-                print(f"⚠️ Lexicon file is empty: {filepath}")
+                logger.warning("Lexicon file is empty: %s", filepath)
                 return
 
             # Determine header - check if first line is header
@@ -77,9 +90,15 @@ class NRCLexicon:
             self.loaded = True
             word_count = len(self.word_emotions)
             emotion_count = len(self.emotion_words)
-            print(f"✓ NRC Lexicon loaded: {word_count} words across {emotion_count} emotions ({self.source}) [{loaded_count} entries]")
+            logger.info(
+                "NRC Lexicon loaded: %d words across %d emotions (%s) [%d entries]",
+                word_count,
+                emotion_count,
+                self.source,
+                loaded_count,
+            )
         except Exception as e:
-            print(f"⚠️ Error loading NRC lexicon: {e}")
+            logger.warning("Error loading NRC lexicon: %s", e)
             self.loaded = False
 
     def get_emotions(self, word: str) -> list:

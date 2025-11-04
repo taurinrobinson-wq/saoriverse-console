@@ -16,6 +16,7 @@ No user ever gets a templated response.
 import hashlib
 import json
 import sqlite3
+import time
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -430,33 +431,76 @@ class GlyphLearner:
 
     def log_glyph_candidate(self, candidate: Dict) -> bool:
         """Store candidate glyph in database."""
-        try:
-            conn = sqlite3.connect(self.db_path)
-            cursor = conn.cursor()
+        metadata = candidate.get("metadata", {})
 
-            metadata = candidate.get("metadata", {})
+        sql = """
+            INSERT INTO glyph_candidates
+            (glyph_name, description, emotional_signal, gates, source_input, created_by, confidence_score)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(glyph_name) DO UPDATE SET
+                description=excluded.description,
+                emotional_signal=excluded.emotional_signal,
+                gates=excluded.gates,
+                source_input=excluded.source_input,
+                created_by=excluded.created_by,
+                confidence_score=excluded.confidence_score,
+                validation_status='pending',
+                usage_count = usage_count + 1
+        """
 
-            cursor.execute("""
-                INSERT INTO glyph_candidates 
-                (glyph_name, description, emotional_signal, gates, 
-                 source_input, created_by, confidence_score)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (
-                candidate.get("glyph_name"),
-                candidate.get("description"),
-                candidate.get("emotional_signal"),
-                json.dumps(candidate.get("gates", [])),
-                metadata.get("source_input"),
-                metadata.get("created_by"),
-                candidate.get("confidence_score")
-            ))
+        params = (
+            candidate.get("glyph_name"),
+            candidate.get("description"),
+            candidate.get("emotional_signal"),
+            json.dumps(candidate.get("gates", [])),
+            metadata.get("source_input"),
+            metadata.get("created_by"),
+            candidate.get("confidence_score")
+        )
 
-            conn.commit()
-            conn.close()
-            return True
-        except Exception as e:
-            print(f"Error logging glyph candidate: {e}")
-            return False
+        # Retry loop to mitigate transient 'database is locked' errors
+        attempts = 0
+        max_attempts = 3
+        backoff = 0.1
+        conn = None
+        while attempts < max_attempts:
+            try:
+                conn = sqlite3.connect(self.db_path, timeout=10)
+                # Prefer WAL mode to reduce writer contention
+                try:
+                    conn.execute("PRAGMA journal_mode=WAL;")
+                except Exception:
+                    pass
+
+                cursor = conn.cursor()
+                cursor.execute(sql, params)
+                conn.commit()
+                conn.close()
+                return True
+            except sqlite3.OperationalError as e:
+                attempts += 1
+                # If it's a lock, wait and retry a few times
+                if 'locked' in str(e).lower() and attempts < max_attempts:
+                    time.sleep(backoff)
+                    backoff *= 2
+                    continue
+                print(f"Error logging glyph candidate: {e}")
+                try:
+                    if conn:
+                        conn.close()
+                except Exception:
+                    pass
+                return False
+            except Exception as e:
+                print(f"Error logging glyph candidate: {e}")
+                try:
+                    if conn:
+                        conn.close()
+                except Exception:
+                    pass
+                return False
+        # If we exhausted retries, return False
+        return False
 
     def log_glyph_usage(
         self,

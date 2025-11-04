@@ -360,6 +360,25 @@ def render_main_app():
                     response = ""
                     response_style = st.session_state.get('response_style', 'Balanced')
                     
+                    # Build a lightweight conversation_context to help the parser detect feedback/reciprocal messages
+                    conversation_context = {
+                        'last_assistant_message': None,
+                        'messages': []
+                    }
+                    if conversation_key in st.session_state and st.session_state[conversation_key]:
+                        # copy session history into conversation_context.messages (role/content pairs)
+                        conversation_context['messages'] = [
+                            { 'role': m.get('role','user' if i%2==0 else 'assistant'), 'content': m.get('user') if 'user' in m else m.get('assistant') }
+                            for i, m in enumerate(st.session_state[conversation_key])
+                        ]
+                        # last assistant message helpful for correction detection
+                        try:
+                            last_assistant_entry = next((m for m in reversed(st.session_state[conversation_key]) if 'assistant' in m and m.get('assistant')), None)
+                            if last_assistant_entry:
+                                conversation_context['last_assistant_message'] = last_assistant_entry.get('assistant')
+                        except Exception:
+                            conversation_context['last_assistant_message'] = None
+
                     if processing_mode == "ollama":
                         # Use local Ollama LLM for responses
                         try:
@@ -378,7 +397,7 @@ def render_main_app():
                         except Exception as e:
                             response = f"Ollama error: {e}. Falling back to local mode."
                             from emotional_os.glyphs.signal_parser import parse_input
-                            local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db")
+                            local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
                             glyphs = local_analysis.get("glyphs", [])
                             voltage_response = local_analysis.get("voltage_response", "")
                             ritual_prompt = local_analysis.get("ritual_prompt", "")
@@ -387,7 +406,7 @@ def render_main_app():
                             debug_glyphs = glyphs
                     elif processing_mode == "local":
                         from emotional_os.glyphs.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db")
+                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
@@ -446,7 +465,7 @@ def render_main_app():
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
                         from emotional_os.glyphs.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db")
+                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
                         glyphs = local_analysis.get("glyphs", [])
                         voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
