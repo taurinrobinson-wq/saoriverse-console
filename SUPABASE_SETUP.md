@@ -138,7 +138,45 @@ You should see:
 
 ---
 
-## Step 3: Configure Streamlit Secrets (Already Done ✅)
+## Step 4: Enable Row Level Security (RLS) ⚠️ IMPORTANT FOR SECURITY
+
+**This step secures your conversations table so users can only access their own data.**
+
+### Enable RLS
+
+1. Go to Supabase Dashboard → SQL Editor
+2. Create new query
+3. Run this SQL:
+
+```sql
+ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.conversation_metadata ENABLE ROW LEVEL SECURITY;
+```
+
+You should see: `Success - no rows returned`
+
+### Add RLS Policies
+
+1. Create another new query
+2. Copy entire contents of `sql/conversations_rls_policies.sql`
+3. Paste into SQL editor
+4. Click "Run"
+
+You should see multiple `Success` messages (one per policy)
+
+### Verify RLS is Active
+
+Check Authentication → Policies in Supabase dashboard
+
+You should see policies for:
+- `conversations` table (4 policies)
+- `conversation_metadata` table (4 policies)
+
+✅ **RLS is now active!** Users can only access their own conversations.
+
+---
+
+## Step 5: Configure Streamlit Secrets (Already Done ✅)
 
 Your `.streamlit/secrets.toml` is already configured with:
 
@@ -156,40 +194,7 @@ current_saori_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori
 
 ---
 
-## Step 4: Enable Row Level Security (Optional but Recommended)
-
-For added security, enable RLS policies:
-
-1. Go to Supabase Dashboard → Authentication → Policies
-2. Enable RLS for `conversations` table
-3. Add policy: Users can only view their own conversations
-
-```sql
--- Policy: Users can only access their own conversations
-CREATE POLICY "Users can access own conversations"
-ON public.conversations
-FOR SELECT
-USING (auth.uid()::text = user_id);
-
-CREATE POLICY "Users can insert own conversations"
-ON public.conversations
-FOR INSERT
-WITH CHECK (auth.uid()::text = user_id);
-
-CREATE POLICY "Users can update own conversations"
-ON public.conversations
-FOR UPDATE
-USING (auth.uid()::text = user_id);
-
-CREATE POLICY "Users can delete own conversations"
-ON public.conversations
-FOR DELETE
-USING (auth.uid()::text = user_id);
-```
-
----
-
-## Step 5: Restart Your App
+## Step 6: Restart Your App
 
 ```bash
 streamlit run app.py
