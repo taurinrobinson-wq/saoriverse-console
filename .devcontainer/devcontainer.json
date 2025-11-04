@@ -29,6 +29,7 @@
     "DEFAULT_TONE": "plain"
   },
   "updateContentCommand": "bash .devcontainer/setup.sh",
+  "postCreateCommand": "bash .devcontainer/post_create.sh",
   "postAttachCommand": {
     "server": "streamlit run main_v2.py --server.enableCORS false --server.enableXsrfProtection false"
   },
