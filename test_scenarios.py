@@ -51,16 +51,21 @@ class ScenarioTester:
         emotional_terms = {
             # Grief & Loss
             'grief': ['grief', 'loss', 'mourning', 'lost', 'died', 'death', 'bereaved'],
-            'sadness': ['sad', 'sadness', 'depressed', 'blue', 'melancholy', 'down'],
+            'sadness': ['sad', 'sadness', 'depressed', 'blue', 'melancholy', 'down', 
+                       'disappointed', 'dejected'],  # Added NRC variants
+
             'loneliness': ['alone', 'lonely', 'isolated', 'solitary', 'abandoned'],
 
-            # Joy & Connection
-            'joy': ['joy', 'joyful', 'happy', 'blissful', 'elated', 'delighted'],
+            # Joy & Connection (NRC-enriched)
+            'joy': ['joy', 'joyful', 'happy', 'blissful', 'elated', 'delighted',
+                   'excited', 'cheerful', 'content', 'pleased', 'hopeful', 'optimistic',
+                   'peaceful', 'calm', 'serene', 'satisfied', 'grateful'],  # Added 11 NRC words
             'love': ['love', 'beloved', 'caring', 'affection', 'warmth', 'connected'],
-            'gratitude': ['grateful', 'grateful', 'appreciate', 'thank', 'blessed'],
+            'gratitude': ['grateful', 'appreciate', 'thank', 'blessed', 'thankful'],
 
-            # Fear & Anxiety
-            'fear': ['fear', 'afraid', 'scared', 'terrified', 'anxious', 'worry'],
+            # Fear & Anxiety (NRC-enriched)
+            'fear': ['fear', 'afraid', 'scared', 'terrified', 'anxious', 'worry',
+                    'worried', 'nervous', 'panicked'],  # Added 3 NRC variants
             'uncertainty': ['uncertain', 'unsure', 'doubtful', 'unclear', 'confused'],
             'vulnerability': ['vulnerable', 'exposed', 'helpless', 'weak'],
 
@@ -69,9 +74,11 @@ class ScenarioTester:
             'creativity': ['creative', 'create', 'express', 'artistic', 'imagine'],
             'awakening': ['awaken', 'aware', 'conscious', 'realize', 'understand'],
 
-            # Duality & Paradox
+            # Duality & Paradox (anger variants added)
             'paradox': ['paradox', 'contradiction', 'both', 'neither', 'tension'],
             'balance': ['balance', 'equilibrium', 'harmony', 'centered', 'aligned'],
+            'anger': ['anger', 'angry', 'furious', 'rage', 'mad', 'frustrated', 'irritated',
+                     'annoyed', 'hate', 'hostile'],  # Added 6 NRC anger words
 
             # Community & Self
             'belonging': ['belong', 'community', 'tribe', 'connection', 'accepted'],
