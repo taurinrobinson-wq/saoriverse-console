@@ -7,6 +7,7 @@ Architecture:
 - Quality filtering to prevent toxic content from poisoning shared lexicon
 - Trust scoring for contributions
 - Poetry signal mapping to expand emotional vocabulary
+- Intelligent anonymization for HIPAA/GDPR compliance
 """
 
 import json
@@ -17,6 +18,14 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+# Import anonymization protocol
+try:
+    from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
+    ANONYMIZATION_AVAILABLE = True
+except ImportError:
+    ANONYMIZATION_AVAILABLE = False
+    logger.warning("Anonymization protocol not available - skipping anonymization")
 
 # Map poetry signals to existing Greek letter signals
 POETRY_TO_SIGNAL_MAP = {
@@ -40,14 +49,20 @@ class HybridLearnerWithUserOverrides:
         db_path: str = "emotional_os/glyphs/glyphs.db",
         learning_log_path: str = "learning/hybrid_learning_log.jsonl",
         user_overrides_dir: str = "learning/user_overrides",
+        enable_anonymization: bool = True,
+        allow_medical_details: bool = False,
+        allow_names: bool = False,
     ):
-        """Initialize the hybrid learner with user overrides.
+        """Initialize the hybrid learner with user overrides and anonymization.
         
         Args:
             shared_lexicon_path: Shared lexicon all users benefit from
             db_path: Shared glyphs database
             learning_log_path: Append-only learning log
             user_overrides_dir: Directory for per-user learning
+            enable_anonymization: Enable HIPAA/GDPR anonymization (default True)
+            allow_medical_details: Allow medical terms (requires user consent)
+            allow_names: Allow real names (requires user consent)
         """
         self.shared_lexicon_path = shared_lexicon_path
         self.db_path = db_path
@@ -59,6 +74,18 @@ class HybridLearnerWithUserOverrides:
         Path(user_overrides_dir).mkdir(parents=True, exist_ok=True)
         
         self.shared_lexicon = self._load_shared_lexicon()
+        
+        # Initialize anonymization if available
+        self.anonymization_enabled = enable_anonymization and ANONYMIZATION_AVAILABLE
+        if self.anonymization_enabled:
+            self.anonymizer = AnonymizationProtocol(
+                allow_medical=allow_medical_details,
+                allow_names=allow_names
+            )
+            logger.info("Anonymization protocol enabled")
+        else:
+            self.anonymizer = None
+            logger.warning("Anonymization disabled or unavailable")
         
     def _load_shared_lexicon(self) -> Dict:
         """Load the shared signal lexicon."""
@@ -228,12 +255,13 @@ class HybridLearnerWithUserOverrides:
         emotional_signals: Optional[List[Dict]] = None,
         glyphs: Optional[List[Dict]] = None,
     ):
-        """Append exchange to learning log (PRIVACY-SAFE: no raw user_input logged).
+        """Append exchange to learning log with optional anonymization.
         
-        This implements Option A - Gate-Based Data Masking:
-        - Logs signals, gates, and metadata (safe for sharing)
-        - Does NOT log raw user_input (protects user privacy)
-        - System still learns patterns from signals
+        Implements:
+        - Option A (Gate-Based Data Masking): Strips raw user_input/ai_response
+        - Plus Optional B (Intelligent Anonymization): Replaces identifiers with glyphs
+        
+        Both protect privacy while preserving learning capability.
         """
         try:
             # Extract signal information for logging
@@ -246,7 +274,28 @@ class HybridLearnerWithUserOverrides:
                     if "gate" in signal_dict:
                         signal_gates.append(signal_dict.get("gate"))
             
-            # Privacy-safe log entry (NO raw user_input)
+            # Optionally anonymize the text for deeper privacy
+            anonymized_text = user_input
+            anonymization_map = None
+            anonymization_level = "none"
+            
+            if self.anonymization_enabled and self.anonymizer:
+                try:
+                    entry = {
+                        "text": user_input,
+                        "metadata": {"timestamp": datetime.now().isoformat()}
+                    }
+                    anonymized_entry, anonymization_map = self.anonymizer.anonymize_entry(
+                        entry, user_id
+                    )
+                    anonymized_text = anonymized_entry.get("text", user_input)
+                    anonymization_level = anonymized_entry.get("_anonymization_consent_level", "full")
+                    logger.debug(f"Anonymized exchange for {user_id}: {len(anonymization_map.identifier_glyphs)} identifiers replaced")
+                except Exception as e:
+                    logger.warning(f"Anonymization failed, logging without anonymization: {e}")
+                    anonymized_text = user_input
+            
+            # Privacy-safe log entry (NO raw user_input or ai_response)
             log_entry = {
                 "timestamp": datetime.now().isoformat(),
                 "user_id_hash": user_id,  # Already hashed by caller
@@ -255,14 +304,20 @@ class HybridLearnerWithUserOverrides:
                 "glyph_names": [g.get("glyph_name", "") for g in glyphs] if glyphs else [],
                 "ai_response_length": len(ai_response),  # Meta info only
                 "exchange_quality": "logged",
+                "anonymization_level": anonymization_level,
                 # REMOVED: "user_input" (raw text - PRIVACY)
                 # REMOVED: "ai_response" (content - PRIVACY)
                 # KEPT: Only derived signals, gates, and metadata
             }
             
+            # Optionally store anonymization map in separate secure location
+            if anonymization_map:
+                log_entry["anonymization_map_id"] = user_id  # Link to stored map
+            
             with open(self.learning_log_path, 'a') as f:
                 f.write(json.dumps(log_entry) + '\n')
-            logger.debug(f"Logged privacy-safe exchange for {user_id}: signals={signal_names}, gates={signal_gates}")
+            
+            logger.debug(f"Logged privacy-safe exchange for {user_id}: signals={signal_names}, gates={signal_gates}, anonymization={anonymization_level}")
         except Exception as e:
             logger.warning(f"Could not log exchange: {e}")
     

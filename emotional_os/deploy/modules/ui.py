@@ -215,6 +215,15 @@ def render_main_app():
             help="Automatically save conversations for later retrieval"
         )
         
+        # Privacy & Consent settings
+        try:
+            from emotional_os.deploy.modules.consent_ui import render_consent_settings_panel
+            render_consent_settings_panel()
+        except ImportError:
+            pass
+        except Exception as e:
+            st.debug(f"Consent settings error: {e}")
+        
         # Load and display previous conversations
         if ConversationManager and st.session_state.get('conversation_manager'):
             st.markdown("---")
@@ -598,6 +607,19 @@ def render_main_app():
 
                     st.write(response)
                     st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                    
+                    # Show anonymization consent widget
+                    try:
+                        from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
+                        exchange_id = f"exchange_{len(st.session_state.get(conversation_key, []))}"
+                        consent_result = render_anonymization_consent_widget(exchange_id)
+                        
+                        if consent_result:
+                            st.session_state[f"consent_{exchange_id}"] = consent_result
+                    except ImportError:
+                        st.warning("Consent UI unavailable")
+                    except Exception as e:
+                        st.debug(f"Consent UI error: {e}")
         # Always show debug expander if toggled, regardless of mode
         if st.session_state.get("show_debug", False):
             with st.expander("Debug: Emotional OS Activation Details", expanded=True):
