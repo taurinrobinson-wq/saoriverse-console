@@ -30,6 +30,11 @@ except Exception:
     generate_auto_name = None
     load_all_conversations_to_sidebar = None
 
+try:
+    from emotional_os.safety.fallback_protocols import FallbackProtocol
+except Exception:
+    FallbackProtocol = None
+
 
 def inject_css(css_file_path):
     try:
@@ -268,6 +273,14 @@ def render_main_app():
     conversation_key = f"conversation_history_{st.session_state.user_id}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
+    
+    # Initialize Fallback Protocols for tone-aware response handling
+    if "fallback_protocol" not in st.session_state and FallbackProtocol:
+        try:
+            st.session_state["fallback_protocol"] = FallbackProtocol()
+        except Exception:
+            st.session_state["fallback_protocol"] = None
+    
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
     processing_mode = st.session_state.get('processing_mode', 'hybrid')
@@ -585,6 +598,29 @@ def render_main_app():
 
                     processing_time = time.time() - start_time
 
+                    # Run through Fallback Protocols for tone-aware response handling
+                    fallback_result = None
+                    if st.session_state.get("fallback_protocol"):
+                        try:
+                            detected_triggers = []
+                            if 'glyphs' in locals() and glyphs:
+                                detected_triggers = [g.get('glyph_name', '') for g in glyphs if isinstance(g, dict)]
+                            
+                            fallback_result = st.session_state["fallback_protocol"].process_exchange(
+                                user_text=user_input,
+                                detected_triggers=detected_triggers if detected_triggers else None
+                            )
+                            
+                            # If ambiguous tone detected, use companion's clarification request
+                            if fallback_result.get("decisions", {}).get("should_ask_clarification"):
+                                response = fallback_result["companion_behavior"]["message"]
+                            
+                            # Store protocol result in session for debugging
+                            st.session_state[f"protocol_result_{len(st.session_state[conversation_key])}"] = fallback_result
+                        except Exception as e:
+                            logger.debug(f"Fallback protocol error (non-fatal): {e}")
+                            fallback_result = None
+
                     # Prevent verbatim repetition of assistant replies across consecutive turns.
                     # If the new response exactly matches the previous assistant message, append
                     # a gentle, specific follow-up to nudge the conversation forward.
@@ -628,6 +664,15 @@ def render_main_app():
                 st.write("**Glyphs Matched:**", debug_glyphs)
                 st.write("**Raw SQL Query:**", debug_sql)
                 st.write("**Glyph Rows (Raw):**", debug_glyph_rows)
+                
+                # Show Fallback Protocol details if available
+                if fallback_result:
+                    with st.expander("Fallback Protocols Analysis", expanded=False):
+                        st.write("**Tone Ambiguity:**", fallback_result.get("detections", {}).get("ambiguity"))
+                        st.write("**Trigger Misfires:**", fallback_result.get("detections", {}).get("misfires"))
+                        st.write("**Overlapping Triggers:**", fallback_result.get("detections", {}).get("overlapping_triggers"))
+                        st.write("**Glyph Response:**", fallback_result.get("glyph_response"))
+                        st.write("**Protocol Decisions:**", fallback_result.get("decisions"))
         
         entry = {
             "user": user_input,
