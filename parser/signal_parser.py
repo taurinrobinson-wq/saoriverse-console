@@ -1,34 +1,29 @@
-import json
-import os
-import re
-import sqlite3
-from typing import Dict, List
+"""
+BACKWARD COMPATIBILITY STUB
 
+This module re-exports from the canonical parser.
+For new code, use: from emotional_os.core import parse_input
 
-# Load signal lexicon from JSON (enhanced to include learned patterns)
-def load_signal_map(path: str) -> Dict[str, str]:
-    base_lexicon = {}
+Legacy imports still work:
+  from parser.signal_parser import parse_input
+  from emotional_os.parser.signal_parser import parse_input
+  from emotional_os.glyphs.signal_parser import parse_input
 
-    # Load base lexicon
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            base_lexicon = json.load(f)
+All routes now lead to emotional_os.core.signal_parser
+"""
 
-    # Load learned lexicon if it exists
-    learned_lexicon = {}
-    learned_path = "parser/learned_lexicon.json"
-    if os.path.exists(learned_path):
-        try:
-            with open(learned_path, 'r', encoding='utf-8') as f:
-                learned_lexicon = json.load(f)
-        except Exception:
-            pass
+# Re-export everything from canonical parser
+from emotional_os.core.signal_parser import *  # noqa: F401, F403
 
-    # Combine base and learned lexicons
-    combined_lexicon = base_lexicon.copy()
-    combined_lexicon.update(learned_lexicon)
+__doc__ = """
+Legacy parser module - redirects to emotional_os.core.
 
-    return combined_lexicon
+This file exists for backward compatibility. New code should import from:
+  from emotional_os.core import parse_input, load_signal_map, etc.
+
+All functionality is now centralized in emotional_os.core.signal_parser
+for easier maintenance and consistency.
+"""
 
 # Extract signals using fuzzy matching and phrase detection
 def parse_signals(input_text: str, signal_map: Dict[str, str]) -> List[str]:
