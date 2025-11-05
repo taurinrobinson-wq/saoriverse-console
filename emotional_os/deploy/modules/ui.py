@@ -227,7 +227,7 @@ def render_main_app():
         except ImportError:
             pass
         except Exception as e:
-            st.debug(f"Consent settings error: {e}")
+            st.warning(f"Consent settings error: {e}")
         
         # Load and display previous conversations
         if ConversationManager and st.session_state.get('conversation_manager'):
@@ -655,7 +655,7 @@ def render_main_app():
                     except ImportError:
                         st.warning("Consent UI unavailable")
                     except Exception as e:
-                        st.debug(f"Consent UI error: {e}")
+                        st.warning(f"Consent settings error: {e}")
         # Always show debug expander if toggled, regardless of mode
         if st.session_state.get("show_debug", False):
             with st.expander("Debug: Emotional OS Activation Details", expanded=True):
