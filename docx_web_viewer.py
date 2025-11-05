@@ -224,6 +224,20 @@ class DocxViewerHandler(http.server.SimpleHTTPRequestHandler):
             self.send_error(404)
 
 
+def find_available_port(start_port=8765, max_attempts=10):
+    """Find an available port starting from start_port."""
+    import socket
+    for port in range(start_port, start_port + max_attempts):
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.bind(("", port))
+            sock.close()
+            return port
+        except OSError:
+            continue
+    return None
+
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python3 docx_web_viewer.py <docx_file>")
@@ -238,25 +252,36 @@ def main():
     
     handler = DocxViewerHandler
     
-    with socketserver.TCPServer(("", PORT), handler) as httpd:
-        httpd.docx_file = filepath
-        url = f"http://localhost:{PORT}/"
-        
-        print(f"✅ DOCX Viewer started!")
-        print(f"📄 File: {filepath}")
-        print(f"🌐 Open: {url}")
-        print(f"📊 Press Ctrl+C to stop\n")
-        
-        # Try to open browser
-        try:
-            webbrowser.open(url)
-        except:
-            print(f"💡 Copy and paste this URL in your browser: {url}\n")
-        
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\n✅ Server stopped")
+    # Find available port
+    port = find_available_port(8765, 10)
+    if not port:
+        print("❌ Error: Could not find an available port (8765-8774)")
+        sys.exit(1)
+    
+    try:
+        with socketserver.TCPServer(("", port), handler) as httpd:
+            httpd.docx_file = filepath
+            url = f"http://localhost:{port}/"
+            
+            print(f"✅ DOCX Viewer started!")
+            print(f"📄 File: {filepath}")
+            print(f"🌐 Open: {url}")
+            print(f"📊 Press Ctrl+C to stop\n")
+            
+            # Try to open browser
+            try:
+                webbrowser.open(url)
+            except:
+                print(f"💡 Copy and paste this URL in your browser: {url}\n")
+            
+            try:
+                httpd.serve_forever()
+            except KeyboardInterrupt:
+                print("\n✅ Server stopped")
+    except OSError as e:
+        print(f"❌ Error starting server: {e}")
+        print("Try closing other DOCX viewers or wait a moment and try again.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
