@@ -46,6 +46,7 @@ def inject_css(css_file_path):
     except Exception as e:
         st.warning(f"Could not load CSS: {e}")
 
+
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
@@ -64,8 +65,10 @@ def render_controls_row(conversation_key):
         )
         st.session_state.processing_mode = processing_mode
     with controls[1]:
-        theme_default = 0 if st.session_state.get("theme_select_row", "Light") == "Light" else 1
-        st.selectbox("Theme", ["Light", "Dark"], index=theme_default, key="theme_select_row")
+        theme_default = 0 if st.session_state.get(
+            "theme_select_row", "Light") == "Light" else 1
+        st.selectbox("Theme", ["Light", "Dark"],
+                     index=theme_default, key="theme_select_row")
     with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
@@ -97,29 +100,30 @@ def render_controls_row(conversation_key):
 
 # Data management functions
 
+
 def delete_user_history_from_supabase(user_id: str) -> tuple:
     """Delete all persisted conversation history for a user from Supabase.
-    
+
     Args:
         user_id: The user ID whose history should be deleted.
-    
+
     Returns:
         A tuple (success: bool, message: str) indicating whether the deletion succeeded.
     """
     try:
         if requests is None:
             return False, "Network requests not available in this environment."
-        
+
         supabase_url = st.secrets.get("supabase", {}).get("url")
         supabase_key = st.secrets.get("supabase", {}).get("key")
-        
+
         if not supabase_url or not supabase_key:
             return False, "Supabase not configured. Cannot delete server history."
-        
+
         # Call a Supabase function or use the REST API to delete user history
         # For now, we'll attempt a direct REST API call to a hypothetical endpoint
         delete_url = f"{supabase_url}/rest/v1/conversations?user_id=eq.{user_id}"
-        
+
         response = requests.delete(
             delete_url,
             headers={
@@ -129,7 +133,7 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
             },
             timeout=10
         )
-        
+
         if response.status_code in [200, 204, 404]:
             return True, "Server-side history deleted successfully."
         else:
@@ -139,9 +143,11 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
 
 # UI rendering functions
 
+
 def render_splash_interface(auth):
     inject_css("emotional_os/deploy/emotional_os_ui.css")
-    st.markdown('<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: center; margin-bottom: 1rem;">',
+                unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
         try:
@@ -161,23 +167,26 @@ def render_splash_interface(auth):
         st.markdown('<div class="auth-container">', unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-                qcol1, qcol2 = st.columns([1, 1], gap="small")
-                with qcol1:
-                    st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
-                with qcol2:
-                    st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
-                bcol1, bcol2 = st.columns([1, 1], gap="small")
-                with bcol1:
-                    if st.button("Sign In", key="existing_btn"):
-                        st.session_state.show_login = True
-                        st.rerun()
-                with bcol2:
-                    if st.button("Register Now", key="new_btn"):
-                        st.session_state.show_register = True
-                        st.rerun()
+            qcol1, qcol2 = st.columns([1, 1], gap="small")
+            with qcol1:
+                st.markdown(
+                    '<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
+            with qcol2:
+                st.markdown(
+                    '<div class="auth-question">new user?</div>', unsafe_allow_html=True)
+            bcol1, bcol2 = st.columns([1, 1], gap="small")
+            with bcol1:
+                if st.button("Sign In", key="existing_btn"):
+                    st.session_state.show_login = True
+                    st.rerun()
+            with bcol2:
+                if st.button("Register Now", key="new_btn"):
+                    st.session_state.show_register = True
+                    st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
         st.markdown('<div class="quick-access">', unsafe_allow_html=True)
-        st.markdown('<div class="quick-title">Quick Access</div>', unsafe_allow_html=True)
+        st.markdown('<div class="quick-title">Quick Access</div>',
+                    unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 1, 1])
         # Quick access: keep login bypass but remove legacy demo-mode trigger for full rollout
         with col2:
@@ -188,30 +197,32 @@ def render_splash_interface(auth):
                     pass
         st.markdown('</div>', unsafe_allow_html=True)
 
+
 def render_main_app():
     # (Simple chat history example removed; only advanced chat/conversation system remains)
-    
+
     # ============================================================================
     # Initialize Conversation Manager & Sidebar
     # ============================================================================
-    
+
     # Initialize conversation manager for persistence
     if ConversationManager and 'user_id' in st.session_state:
         if 'conversation_manager' not in st.session_state:
-            st.session_state['conversation_manager'] = ConversationManager(st.session_state['user_id'])
-        
+            st.session_state['conversation_manager'] = ConversationManager(
+                st.session_state['user_id'])
+
         # Initialize current conversation ID if not set
         if 'current_conversation_id' not in st.session_state:
             st.session_state['current_conversation_id'] = str(uuid.uuid4())
-        
+
         # Initialize conversation title if not set
         if 'conversation_title' not in st.session_state:
             st.session_state['conversation_title'] = "New Conversation"
-    
+
     # Display sidebar with previous conversations
     with st.sidebar:
         st.markdown("### Settings")
-        
+
         # Persist history toggle
         persist_default = st.session_state.get('persist_history', True)
         st.session_state['persist_history'] = st.checkbox(
@@ -219,7 +230,7 @@ def render_main_app():
             value=persist_default,
             help="Automatically save conversations for later retrieval"
         )
-        
+
         # Privacy & Consent settings
         try:
             from emotional_os.deploy.modules.consent_ui import render_consent_settings_panel
@@ -228,19 +239,184 @@ def render_main_app():
             pass
         except Exception as e:
             st.warning(f"Consent settings error: {e}")
-        
+
         # Load and display previous conversations
         if ConversationManager and st.session_state.get('conversation_manager'):
             st.markdown("---")
-            load_all_conversations_to_sidebar(st.session_state['conversation_manager'])
-            
+            load_all_conversations_to_sidebar(
+                st.session_state['conversation_manager'])
+
             # New conversation button
             if st.button("➕ New Conversation", use_container_width=True):
                 st.session_state['current_conversation_id'] = str(uuid.uuid4())
                 st.session_state['conversation_title'] = "New Conversation"
-                st.session_state['conversation_history_' + st.session_state['user_id']] = []
+                st.session_state['conversation_history_' +
+                                 st.session_state['user_id']] = []
                 st.rerun()
-    
+
+        # Human-in-the-Loop (HIL) feature-flagged placeholder UI
+        # Reacts to escalation signals produced by the local preprocessor.
+        try:
+            enable_default = st.session_state.get(
+                'enable_hil_escalation', False)
+            st.session_state['enable_hil_escalation'] = st.checkbox(
+                "🧑‍⚖️ Enable HIL escalation (dev)",
+                value=enable_default,
+                help="Show Human-in-the-Loop escalation controls for testing"
+            )
+
+            # Preprocessor sensitivity controls (configurable thresholds)
+            conf_default = st.session_state.get(
+                'preproc_confidence_threshold', 0.6)
+            cluster_default = st.session_state.get('preproc_cluster_size', 2)
+            conf = st.slider(
+                "Preprocessor confidence threshold",
+                min_value=0.0,
+                max_value=1.0,
+                value=conf_default,
+                step=0.05,
+                help="If preprocessor confidence falls below this, Tier 2 tags may escalate"
+            )
+            cluster = st.number_input(
+                "Tier-2 cluster size to escalate",
+                min_value=1,
+                max_value=5,
+                value=cluster_default,
+                help="Number of Tier-2 tags required to trigger cluster escalation"
+            )
+            # Persist controls in session state
+            st.session_state['preproc_confidence_threshold'] = float(conf)
+            st.session_state['preproc_cluster_size'] = int(cluster)
+
+            # Update live preprocessor instance if present
+            try:
+                p_inst = st.session_state.get('local_preprocessor')
+                if p_inst:
+                    p_inst.confidence_threshold = st.session_state['preproc_confidence_threshold']
+                    p_inst.cluster_size = st.session_state['preproc_cluster_size']
+            except Exception:
+                pass
+
+            last = st.session_state.get('last_preproc')
+            escalation_action = last.get('escalation_action') if last else None
+            escalation_reason = last.get('escalation_reason') if last else None
+
+            # If a force escalation is detected, surface a prominent prompt even if HIL is disabled
+            if escalation_action == 'force_escalation' and not st.session_state.get('enable_hil_escalation'):
+                st.markdown("---")
+                st.error(
+                    "⚠️ Immediate escalation recommended for the most recent exchange. Enable HIL to review and act.")
+                if st.button("Enable HIL & Review", key="enable_hil_now"):
+                    st.session_state['enable_hil_escalation'] = True
+                    st.rerun()
+
+            # When HIL enabled, show the escalation panel (if applicable)
+            if st.session_state.get('enable_hil_escalation'):
+                st.markdown("---")
+                st.markdown("### Human-in-the-Loop (HIL) Escalation")
+
+                if not last:
+                    st.info("No preprocessing record available for review yet.")
+                else:
+                    # Visual priority: force -> error, conditional -> warning, none -> info
+                    if escalation_action == 'force_escalation':
+                        st.error(
+                            f"Force escalation recommended: {escalation_reason}")
+                    elif escalation_action == 'conditional_escalation':
+                        st.warning(
+                            f"Conditional escalation suggested: {escalation_reason}")
+                    else:
+                        st.info(
+                            "No automatic escalation recommended for this exchange.")
+
+                    # Show a compact summary including escalation metadata
+                    st.write({
+                        'intent': last.get('intent'),
+                        'confidence': last.get('confidence'),
+                        'emotional_tags': last.get('emotional_tags'),
+                        'edit_log': last.get('edit_log'),
+                        'editorial_interventions': last.get('editorial_interventions'),
+                        'escalation_action': escalation_action,
+                        'escalation_reason': escalation_reason,
+                        'taxonomy_source': last.get('taxonomy_source')
+                    })
+
+                    cols = st.columns([1, 1, 1])
+                    if cols[0].button("Escalate to Human", key="escalate_to_human"):
+                        try:
+                            from local_inference.preprocessor import Preprocessor
+                            p = st.session_state.get('local_preprocessor')
+                            audit_payload = {
+                                'action': 'hil_escalate',
+                                'method': 'manual_button',
+                                'escalation_action': escalation_action,
+                                'escalation_reason': escalation_reason,
+                                'preproc_summary': last
+                            }
+                            if p and hasattr(p, 'record_audit'):
+                                p.record_audit(audit_payload)
+                                st.success("Escalation recorded (audit log).")
+                            else:
+                                st.session_state.setdefault('hil_escalation_log', []).append({
+                                    'timestamp': datetime.datetime.now().isoformat(),
+                                    **audit_payload
+                                })
+                                st.success(
+                                    "Escalation recorded (session log).")
+                        except Exception:
+                            st.info("Escalation recorded (local stub).")
+
+                    if cols[1].button("Request Clarification", key="request_clarification"):
+                        try:
+                            # record the clarification request
+                            from local_inference.preprocessor import Preprocessor
+                            p = st.session_state.get('local_preprocessor')
+                            audit_payload = {
+                                'action': 'request_clarification',
+                                'method': 'manual_button',
+                                'escalation_action': escalation_action,
+                                'escalation_reason': escalation_reason,
+                                'preproc_summary': last
+                            }
+                            if p and hasattr(p, 'record_audit'):
+                                p.record_audit(audit_payload)
+                            else:
+                                st.session_state.setdefault('hil_escalation_log', []).append({
+                                    'timestamp': datetime.datetime.now().isoformat(),
+                                    **audit_payload
+                                })
+                            st.info("Clarification requested (logged).")
+                        except Exception:
+                            st.info("Clarification requested (local stub).")
+
+                    if cols[2].button("Escalate to AI (sanitized)", key="escalate_to_ai"):
+                        try:
+                            from local_inference.preprocessor import Preprocessor
+                            p = st.session_state.get('local_preprocessor')
+                            audit_payload = {
+                                'action': 'hil_escalate_ai',
+                                'method': 'manual_button',
+                                'escalation_action': escalation_action,
+                                'escalation_reason': escalation_reason,
+                                'preproc_summary': last
+                            }
+                            if p and hasattr(p, 'record_audit'):
+                                p.record_audit(audit_payload)
+                                st.success(
+                                    "AI escalation requested (audit log).")
+                            else:
+                                st.session_state.setdefault('hil_escalation_log', []).append({
+                                    'timestamp': datetime.datetime.now().isoformat(),
+                                    **audit_payload
+                                })
+                                st.success(
+                                    "AI escalation requested (session log).")
+                        except Exception:
+                            st.info("AI escalation requested (local stub).")
+        except Exception:
+            # Non-fatal: sidebar HIL toggle shouldn't break the UI
+            pass
+
     # Dynamically inject theme CSS
     theme = st.session_state.get("theme_select_row", "Light")
     css_file = "emotional_os/deploy/emotional_os_ui_light.css" if theme == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
@@ -255,10 +431,12 @@ def render_main_app():
         try:
             st.image(logo_path, width=50)
         except Exception:
-            st.markdown('<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
-    st.markdown(f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
+    st.markdown(
+        f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
     st.markdown("*Your private space for emotional processing and growth*")
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
@@ -273,14 +451,14 @@ def render_main_app():
     conversation_key = f"conversation_history_{st.session_state.user_id}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
-    
+
     # Initialize Fallback Protocols for tone-aware response handling
     if "fallback_protocol" not in st.session_state and FallbackProtocol:
         try:
             st.session_state["fallback_protocol"] = FallbackProtocol()
         except Exception:
             st.session_state["fallback_protocol"] = None
-    
+
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
     processing_mode = st.session_state.get('processing_mode', 'hybrid')
@@ -292,7 +470,8 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    st.caption(
+                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
     # 1. Show a single message at the top if a document is uploaded and being processed
     document_analysis = None
     document_title = None
@@ -303,7 +482,8 @@ def render_main_app():
         document_title = "Document" if not first_line else first_line[:60]
 
         st.info(f"📄 Document uploaded: {document_title}")
-        st.info("🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
+        st.info(
+            "🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
 
         # Basic analysis without dependencies
         document_analysis = {
@@ -315,7 +495,8 @@ def render_main_app():
         }
 
     # File upload with multiple formats
-    uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"])
+    uploaded_file = st.file_uploader("📄 Upload a document", type=[
+                                     "txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"])
     if uploaded_file:
         file_text = None
         file_ext = uploaded_file.name.lower().split('.')[-1]
@@ -328,7 +509,8 @@ def render_main_app():
                 try:
                     from docx import Document
                     doc = Document(uploaded_file)
-                    file_text = "\n".join([para.text for para in doc.paragraphs])
+                    file_text = "\n".join(
+                        [para.text for para in doc.paragraphs])
                 except Exception as e:
                     st.error(f"Error reading Word document: {e}")
 
@@ -336,7 +518,8 @@ def render_main_app():
                 try:
                     import pdfplumber
                     with pdfplumber.open(uploaded_file) as pdf:
-                        file_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+                        file_text = "\n".join(
+                            page.extract_text() or "" for page in pdf.pages)
                 except Exception as e:
                     st.error(f"Error reading PDF document: {e}")
 
@@ -391,9 +574,11 @@ def render_main_app():
 
             if file_text:
                 st.session_state["uploaded_text"] = file_text
-                st.success(f"✅ {file_ext.upper()} document uploaded successfully!")
+                st.success(
+                    f"✅ {file_ext.upper()} document uploaded successfully!")
             else:
-                st.warning(f"Could not extract text from {file_ext.upper()} file")
+                st.warning(
+                    f"Could not extract text from {file_ext.upper()} file")
 
         except Exception as e:
             st.error(f"Error reading document: {e}")
@@ -430,8 +615,9 @@ def render_main_app():
                 with st.spinner("Processing your emotional input..."):
                     start_time = time.time()
                     response = ""
-                    response_style = st.session_state.get('response_style', 'Balanced')
-                    
+                    response_style = st.session_state.get(
+                        'response_style', 'Balanced')
+
                     # Build a lightweight conversation_context to help the parser detect feedback/reciprocal messages
                     conversation_context = {
                         'last_assistant_message': None,
@@ -440,53 +626,101 @@ def render_main_app():
                     if conversation_key in st.session_state and st.session_state[conversation_key]:
                         # copy session history into conversation_context.messages (role/content pairs)
                         conversation_context['messages'] = [
-                            { 'role': m.get('role','user' if i%2==0 else 'assistant'), 'content': m.get('user') if 'user' in m else m.get('assistant') }
+                            {'role': m.get('role', 'user' if i % 2 == 0 else 'assistant'), 'content': m.get(
+                                'user') if 'user' in m else m.get('assistant')}
                             for i, m in enumerate(st.session_state[conversation_key])
                         ]
                         # last assistant message helpful for correction detection
                         try:
-                            last_assistant_entry = next((m for m in reversed(st.session_state[conversation_key]) if 'assistant' in m and m.get('assistant')), None)
+                            last_assistant_entry = next((m for m in reversed(
+                                st.session_state[conversation_key]) if 'assistant' in m and m.get('assistant')), None)
                             if last_assistant_entry:
-                                conversation_context['last_assistant_message'] = last_assistant_entry.get('assistant')
+                                conversation_context['last_assistant_message'] = last_assistant_entry.get(
+                                    'assistant')
                         except Exception:
                             conversation_context['last_assistant_message'] = None
 
+                    # --- Local preprocessing / privacy steward ---
+                    preproc_res = None
+                    try:
+                        from local_inference.preprocessor import Preprocessor
+                        if 'local_preprocessor' not in st.session_state:
+                            # default to test_mode=True to avoid heavy model loads in dev
+                            st.session_state['local_preprocessor'] = Preprocessor(
+                                test_mode=True)
+                        p = st.session_state.get('local_preprocessor')
+                        if p:
+                            preproc_res = p.preprocess(
+                                user_input, conversation_context)
+                            # Use sanitized text for downstream processing
+                            sanitized_text = preproc_res.get(
+                                'sanitized_text', user_input)
+                            st.session_state['last_preproc'] = {
+                                'intent': preproc_res.get('intent'),
+                                'confidence': preproc_res.get('confidence'),
+                                'emotional_tags': preproc_res.get('emotional_tags'),
+                                'edit_log': preproc_res.get('edit_log'),
+                                'editorial_interventions': preproc_res.get('editorial_interventions', []),
+                                'escalation_action': preproc_res.get('escalation_action'),
+                                'escalation_reason': preproc_res.get('escalation_reason'),
+                                'taxonomy_source': preproc_res.get('taxonomy_source')
+                            }
+                        else:
+                            sanitized_text = user_input
+                    except Exception:
+                        sanitized_text = user_input
+
+                    # Use the sanitized text if available (from local preprocessor)
+                    effective_input = sanitized_text if 'sanitized_text' in locals(
+                    ) and sanitized_text else user_input
+
                     if processing_mode == "local":
                         from emotional_os.glyphs.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
+                        local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
+                                                     db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
                         glyphs = local_analysis.get("glyphs", [])
-                        voltage_response = local_analysis.get("voltage_response", "")
+                        voltage_response = local_analysis.get(
+                            "voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
-                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
+                        debug_glyph_rows = local_analysis.get(
+                            "debug_glyph_rows", [])
                         best_glyph = local_analysis.get("best_glyph")
                         glyph_display = best_glyph['glyph_name'] if best_glyph else 'None'
                         response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
                     elif processing_mode == "ai_preferred":
                         try:
-                            saori_url = st.secrets.get("supabase", {}).get("saori_function_url")
-                            supabase_key = st.secrets.get("supabase", {}).get("key")
+                            saori_url = st.secrets.get(
+                                "supabase", {}).get("saori_function_url")
+                            supabase_key = st.secrets.get(
+                                "supabase", {}).get("key")
                             if not saori_url or not supabase_key:
                                 response = "AI processing unavailable in demo mode. Your feelings are still valid and important."
                             else:
                                 payload = {
-                                    "message": user_input,
+                                    "message": effective_input,
                                     "mode": processing_mode,
                                     "user_id": st.session_state.user_id
                                 }
                                 if document_analysis:
-                                    glyphs = document_analysis.get("glyphs", [])
-                                    voltage_response = document_analysis.get("voltage_response", "")
-                                    ritual_prompt = document_analysis.get("ritual_prompt", "")
-                                    debug_signals = document_analysis.get("signals", [])
-                                    debug_gates = document_analysis.get("gates", [])
+                                    glyphs = document_analysis.get(
+                                        "glyphs", [])
+                                    voltage_response = document_analysis.get(
+                                        "voltage_response", "")
+                                    ritual_prompt = document_analysis.get(
+                                        "ritual_prompt", "")
+                                    debug_signals = document_analysis.get(
+                                        "signals", [])
+                                    debug_gates = document_analysis.get(
+                                        "gates", [])
                                     debug_glyphs = glyphs
                                     doc_context = "\n".join([
                                         f"Document Insights: {voltage_response}",
-                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs and isinstance(glyphs, list) else "",
+                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs and isinstance(
+                                            glyphs, list) else "",
                                         f"Ritual Prompt: {ritual_prompt}" if ritual_prompt else ""
                                     ])
                                     payload["document_context"] = doc_context
@@ -505,30 +739,36 @@ def render_main_app():
                                 else:
                                     if response_data.status_code == 200:
                                         result = response_data.json()
-                                        response = result.get("reply", "I'm here to listen.")
+                                        response = result.get(
+                                            "reply", "I'm here to listen.")
                                     else:
                                         response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception:
                             response = "I'm having trouble connecting right now, but your feelings are still valid and important."
                     elif processing_mode == "hybrid":
                         from emotional_os.glyphs.signal_parser import parse_input
-                        local_analysis = parse_input(user_input, "emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
+                        local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
+                                                     db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
                         glyphs = local_analysis.get("glyphs", [])
-                        voltage_response = local_analysis.get("voltage_response", "")
+                        voltage_response = local_analysis.get(
+                            "voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
-                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
+                        debug_glyph_rows = local_analysis.get(
+                            "debug_glyph_rows", [])
                         try:
-                            saori_url = st.secrets.get("supabase", {}).get("saori_function_url")
-                            supabase_key = st.secrets.get("supabase", {}).get("key")
+                            saori_url = st.secrets.get(
+                                "supabase", {}).get("saori_function_url")
+                            supabase_key = st.secrets.get(
+                                "supabase", {}).get("key")
                             if not saori_url or not supabase_key:
                                 response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable in demo mode)"
                             else:
                                 payload = {
-                                    "message": user_input,
+                                    "message": effective_input,
                                     "mode": processing_mode,
                                     "user_id": st.session_state.user_id,
                                     "local_voltage_response": voltage_response,
@@ -536,15 +776,21 @@ def render_main_app():
                                     "local_ritual_prompt": ritual_prompt
                                 }
                                 if document_analysis:
-                                    doc_glyphs = document_analysis.get("glyphs", [])
-                                    doc_voltage_response = document_analysis.get("voltage_response", "")
-                                    doc_ritual_prompt = document_analysis.get("ritual_prompt", "")
-                                    debug_signals = document_analysis.get("signals", [])
-                                    debug_gates = document_analysis.get("gates", [])
+                                    doc_glyphs = document_analysis.get(
+                                        "glyphs", [])
+                                    doc_voltage_response = document_analysis.get(
+                                        "voltage_response", "")
+                                    doc_ritual_prompt = document_analysis.get(
+                                        "ritual_prompt", "")
+                                    debug_signals = document_analysis.get(
+                                        "signals", [])
+                                    debug_gates = document_analysis.get(
+                                        "gates", [])
                                     debug_glyphs = doc_glyphs
                                     doc_context = "\n".join([
                                         f"Document Insights: {doc_voltage_response}",
-                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs and isinstance(doc_glyphs, list) else "",
+                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs and isinstance(
+                                            doc_glyphs, list) else "",
                                         f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
                                     ])
                                     payload["document_context"] = doc_context
@@ -562,7 +808,8 @@ def render_main_app():
                                 else:
                                     if response_data.status_code == 200:
                                         result = response_data.json()
-                                        response = result.get("reply", "I'm here to listen.")
+                                        response = result.get(
+                                            "reply", "I'm here to listen.")
                                     else:
                                         response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception as e:
@@ -578,13 +825,16 @@ def render_main_app():
                                 # Basic safety gating
                                 try:
                                     from emotional_os.safety.sanctuary import is_sensitive_input
-                                    safety_flag = is_sensitive_input(user_input)
+                                    safety_flag = is_sensitive_input(
+                                        user_input)
                                 except Exception:
                                     safety_flag = False
                                 if not safety_flag:
-                                    limbic_result = engine.process_emotion_with_limbic_mapping(user_input)
+                                    limbic_result = engine.process_emotion_with_limbic_mapping(
+                                        user_input)
                                     try:
-                                        decorated = decorate_reply(response, limbic_result)
+                                        decorated = decorate_reply(
+                                            response, limbic_result)
                                         # Only replace response if decoration returns a non-empty string
                                         if isinstance(decorated, str) and decorated.strip():
                                             response = decorated
@@ -604,21 +854,23 @@ def render_main_app():
                         try:
                             detected_triggers = []
                             if 'glyphs' in locals() and glyphs:
-                                detected_triggers = [g.get('glyph_name', '') for g in glyphs if isinstance(g, dict)]
-                            
+                                detected_triggers = [
+                                    g.get('glyph_name', '') for g in glyphs if isinstance(g, dict)]
+
                             fallback_result = st.session_state["fallback_protocol"].process_exchange(
                                 user_text=user_input,
                                 detected_triggers=detected_triggers if detected_triggers else None
                             )
-                            
+
                             # If ambiguous tone detected, use companion's clarification request
                             if fallback_result.get("decisions", {}).get("should_ask_clarification"):
                                 response = fallback_result["companion_behavior"]["message"]
-                            
+
                             # Store protocol result in session for debugging
                             st.session_state[f"protocol_result_{len(st.session_state[conversation_key])}"] = fallback_result
                         except Exception as e:
-                            logger.debug(f"Fallback protocol error (non-fatal): {e}")
+                            logger.debug(
+                                f"Fallback protocol error (non-fatal): {e}")
                             fallback_result = None
 
                     # Prevent verbatim repetition of assistant replies across consecutive turns.
@@ -627,7 +879,8 @@ def render_main_app():
                     try:
                         last_assistant = None
                         if st.session_state.get(conversation_key) and len(st.session_state[conversation_key]) > 0:
-                            last_assistant = st.session_state[conversation_key][-1].get('assistant')
+                            last_assistant = st.session_state[conversation_key][-1].get(
+                                'assistant')
                         if last_assistant and last_assistant.strip() == response.strip():
                             followups = [
                                 "Can you tell me one specific detail about that?",
@@ -642,14 +895,16 @@ def render_main_app():
                         pass
 
                     st.write(response)
-                    st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
-                    
+                    st.caption(
+                        f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+
                     # Show anonymization consent widget
                     try:
                         from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
                         exchange_id = f"exchange_{len(st.session_state.get(conversation_key, []))}"
-                        consent_result = render_anonymization_consent_widget(exchange_id)
-                        
+                        consent_result = render_anonymization_consent_widget(
+                            exchange_id)
+
                         if consent_result:
                             st.session_state[f"consent_{exchange_id}"] = consent_result
                     except ImportError:
@@ -664,16 +919,21 @@ def render_main_app():
                 st.write("**Glyphs Matched:**", debug_glyphs)
                 st.write("**Raw SQL Query:**", debug_sql)
                 st.write("**Glyph Rows (Raw):**", debug_glyph_rows)
-                
+
                 # Show Fallback Protocol details if available
                 if fallback_result:
                     with st.expander("Fallback Protocols Analysis", expanded=False):
-                        st.write("**Tone Ambiguity:**", fallback_result.get("detections", {}).get("ambiguity"))
-                        st.write("**Trigger Misfires:**", fallback_result.get("detections", {}).get("misfires"))
-                        st.write("**Overlapping Triggers:**", fallback_result.get("detections", {}).get("overlapping_triggers"))
-                        st.write("**Glyph Response:**", fallback_result.get("glyph_response"))
-                        st.write("**Protocol Decisions:**", fallback_result.get("decisions"))
-        
+                        st.write(
+                            "**Tone Ambiguity:**", fallback_result.get("detections", {}).get("ambiguity"))
+                        st.write(
+                            "**Trigger Misfires:**", fallback_result.get("detections", {}).get("misfires"))
+                        st.write("**Overlapping Triggers:**", fallback_result.get(
+                            "detections", {}).get("overlapping_triggers"))
+                        st.write("**Glyph Response:**",
+                                 fallback_result.get("glyph_response"))
+                        st.write("**Protocol Decisions:**",
+                                 fallback_result.get("decisions"))
+
         entry = {
             "user": user_input,
             "assistant": response,
@@ -682,36 +942,38 @@ def render_main_app():
             "timestamp": datetime.datetime.now().isoformat()
         }
         st.session_state[conversation_key].append(entry)
-        
+
         # Learn from hybrid mode conversations to improve local mode
         # AND generate new glyphs dynamically during dialogue
         if processing_mode == "hybrid":
             try:
                 from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
                 from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
-                
+
                 # Try to import create_integrated_processor from scripts/utilities or directly
                 try:
                     import sys
                     import os
-                    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../../scripts/utilities'))
+                    sys.path.insert(0, os.path.join(os.path.dirname(
+                        __file__), '../../../scripts/utilities'))
                     from hybrid_processor_with_evolution import create_integrated_processor
                 except ImportError:
                     # Fallback if not available
                     create_integrated_processor = None
-                
+
                 learner = get_hybrid_learner()
                 user_id = st.session_state.get('user_id', 'anonymous')
-                
+
                 # Initialize dynamic evolution system if not already in session
                 if 'hybrid_processor' not in st.session_state and create_integrated_processor:
-                    adaptive_extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
+                    adaptive_extractor = AdaptiveSignalExtractor(
+                        adaptive=True, use_discovered=True)
                     st.session_state['hybrid_processor'] = create_integrated_processor(
                         hybrid_learner=learner,
                         adaptive_extractor=adaptive_extractor,
                         user_id=user_id,
                     )
-                
+
                 # Process through integrated pipeline with dynamic glyph generation
                 if 'hybrid_processor' in st.session_state:
                     processor = st.session_state['hybrid_processor']
@@ -719,32 +981,39 @@ def render_main_app():
                         user_message=user_input,
                         ai_response=response,
                         user_id=user_id,
-                        conversation_id=st.session_state.get('conversation_id', 'default'),
+                        conversation_id=st.session_state.get(
+                            'conversation_id', 'default'),
                         glyphs=debug_glyphs,
                     )
-                    
+
                     # Check if new glyphs were generated
-                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get('new_glyphs_generated', [])
+                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
+                        'new_glyphs_generated', [])
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
                         if 'new_glyphs_this_session' not in st.session_state:
                             st.session_state['new_glyphs_this_session'] = []
-                        st.session_state['new_glyphs_this_session'].extend(new_glyphs)
-                        
+                        st.session_state['new_glyphs_this_session'].extend(
+                            new_glyphs)
+
                         # Display notification about new glyphs
-                        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
+                        st.success(
+                            f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
                         for glyph in new_glyphs:
                             glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
                             st.info(f"  {glyph_dict.get('symbol', '?')} **{glyph_dict.get('name', '?')}** "
-                                   f"({' + '.join(glyph_dict.get('core_emotions', []))})")
-                    
+                                    f"({' + '.join(glyph_dict.get('core_emotions', []))})")
+
                     # Log learning results
-                    learning_result = evolution_result['pipeline_stages']['hybrid_learning'].get('learning_result', {})
+                    learning_result = evolution_result['pipeline_stages']['hybrid_learning'].get(
+                        'learning_result', {})
                     if learning_result.get("learned_to_shared"):
-                        logger.info(f"User {user_id} contributed to shared lexicon")
+                        logger.info(
+                            f"User {user_id} contributed to shared lexicon")
                     elif learning_result.get("learned_to_user"):
-                        logger.info(f"User {user_id} learning to personal lexicon")
-                
+                        logger.info(
+                            f"User {user_id} learning to personal lexicon")
+
             except ImportError as e:
                 # Fallback if dynamic evolution not available
                 logger.warning(f"Dynamic glyph evolution not available: {e}")
@@ -760,11 +1029,14 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
                     if result.get("learned_to_shared"):
-                        logger.info(f"User {user_id} contributed to shared lexicon")
+                        logger.info(
+                            f"User {user_id} contributed to shared lexicon")
                     elif result.get("learned_to_user"):
-                        logger.info(f"User {user_id} learning to personal lexicon")
+                        logger.info(
+                            f"User {user_id} learning to personal lexicon")
                 except Exception as fallback_e:
-                    logger.error(f"Fallback learning also failed: {fallback_e}")
+                    logger.error(
+                        f"Fallback learning also failed: {fallback_e}")
             except Exception as e:
                 # Non-fatal: learning should not break the app
                 logger.warning(f"Hybrid learning failed: {e}")
@@ -773,18 +1045,21 @@ def render_main_app():
         try:
             if st.session_state.get('persist_history', False) and st.session_state.get('conversation_manager'):
                 manager = st.session_state['conversation_manager']
-                conversation_id = st.session_state.get('current_conversation_id', 'default')
-                
+                conversation_id = st.session_state.get(
+                    'current_conversation_id', 'default')
+
                 # Auto-name conversation based on first message
-                if len(st.session_state[conversation_key]) == 1:  # Just added first exchange
+                # Just added first exchange
+                if len(st.session_state[conversation_key]) == 1:
                     if generate_auto_name:
                         title = generate_auto_name(user_input)
                         st.session_state['conversation_title'] = title
                     else:
                         title = "New Conversation"
                 else:
-                    title = st.session_state.get('conversation_title', 'New Conversation')
-                
+                    title = st.session_state.get(
+                        'conversation_title', 'New Conversation')
+
                 # Save to database with conversation manager
                 messages = st.session_state[conversation_key]
                 success, message = manager.save_conversation(
@@ -793,22 +1068,25 @@ def render_main_app():
                     messages=messages,
                     processing_mode=processing_mode
                 )
-                
+
                 if not success:
                     logger.warning(f"Failed to save conversation: {message}")
         except Exception as e:
             # Best-effort: do not break the UI if persistence fails
             logger.warning(f"Conversation persistence error: {e}")
             pass
-        
+
         # Fallback: Also persist individual messages to old conversation_history table if configured
         try:
             if st.session_state.get('persist_history', False):
-                sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
-                supabase_url = sup_cfg.get('url') or sup_cfg.get('saori_url') or sup_cfg.get('saori_function_url')
-                supabase_key = sup_cfg.get('key') or sup_cfg.get('anon_key') or sup_cfg.get('apikey')
+                sup_cfg = st.secrets.get('supabase', {}) if hasattr(
+                    st, 'secrets') else {}
+                supabase_url = sup_cfg.get('url') or sup_cfg.get(
+                    'saori_url') or sup_cfg.get('saori_function_url')
+                supabase_key = sup_cfg.get('key') or sup_cfg.get(
+                    'anon_key') or sup_cfg.get('apikey')
                 # If function URL was provided instead of base url, try to extract base
-                if supabase_url and supabase_url.endswith('/'): 
+                if supabase_url and supabase_url.endswith('/'):
                     supabase_url = supabase_url.rstrip('/')
                 # If the provided value looks like an edge function URL, extract base supabase domain
                 if supabase_url and '/functions/' in supabase_url:
@@ -840,12 +1118,15 @@ def render_main_app():
                         }
                     ]
                     try:
-                        resp = requests.post(rest_url, headers=headers, json=payload, timeout=6)
+                        resp = requests.post(
+                            rest_url, headers=headers, json=payload, timeout=6)
                         if resp.status_code not in (200, 201):
                             # Non-fatal: warn in UI (use generic storage wording)
-                            st.warning('Could not save history to secure storage right now.')
+                            st.warning(
+                                'Could not save history to secure storage right now.')
                     except Exception:
-                        st.warning('Temporary issue saving to secure storage. Your local history is still intact.')
+                        st.warning(
+                            'Temporary issue saving to secure storage. Your local history is still intact.')
         except Exception:
             # Best-effort: do not break the UI if persistence fails
             pass
@@ -868,27 +1149,33 @@ def render_main_app():
             key="journal_type_select"
         )
         if journal_type == "Personal Log":
-            st.markdown("Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights.")
+            st.markdown(
+                "Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights.")
             date = st.date_input("Date", value=dt.date.today())
             log_time = st.time_input("Time", value=dt.datetime.now().time())
             event = st.text_area("Event", placeholder="What happened?")
             mood = st.text_input("Mood", placeholder="How did it feel?")
-            reflections = st.text_area("Reflections", placeholder="What’s emerging emotionally?")
-            insights = st.text_area("Insights", placeholder="What truth or clarity surfaced?")
+            reflections = st.text_area(
+                "Reflections", placeholder="What’s emerging emotionally?")
+            insights = st.text_area(
+                "Insights", placeholder="What truth or clarity surfaced?")
             if st.button("Conclude Log"):
                 st.success("Your personal log has been saved.")
                 try:
                     st.download_button(
                         label="Download as Word Doc",
-                        data=generate_doc(date, log_time, event, mood, reflections, insights),
+                        data=generate_doc(
+                            date, log_time, event, mood, reflections, insights),
                         file_name="personal_log.docx"
                     )
                 except Exception as e:
                     st.error(f"Error generating Word document: {e}")
         elif journal_type == "Daily Emotional Check-In":
-            st.markdown("Log your mood, stress level, and a short reflection for today.")
+            st.markdown(
+                "Log your mood, stress level, and a short reflection for today.")
             checkin_date = st.date_input("Date", value=dt.date.today(), key="checkin_date")  # noqa: F841  # used for Streamlit UI side-effect
-            mood = st.selectbox("Mood", ["Calm", "Stressed", "Sad", "Angry", "Joyful", "Fatigued", "Other"], key="checkin_mood")
+            mood = st.selectbox("Mood", [
+                                "Calm", "Stressed", "Sad", "Angry", "Joyful", "Fatigued", "Other"], key="checkin_mood")
             stress = st.slider("Stress Level", 0, 10, 5, key="checkin_stress")  # noqa: F841  # used for Streamlit UI side-effect
             reflection = st.text_area("Reflection", placeholder="What's on your mind today?", key="checkin_reflection")  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Check-In"):
@@ -897,7 +1184,8 @@ def render_main_app():
             st.markdown("Track your self-care activities and routines.")
             activities = st.multiselect(  # noqa: F841  # used for Streamlit UI side-effect
                 "Self-Care Activities",
-                ["Exercise", "Creative Work", "Peer Support", "Rest", "Healthy Meal", "Time Outdoors", "Other"],
+                ["Exercise", "Creative Work", "Peer Support", "Rest",
+                    "Healthy Meal", "Time Outdoors", "Other"],
                 key="selfcare_activities"
             )
             notes = st.text_area("Notes", placeholder="Any details or thoughts about your self-care today?", key="selfcare_notes")  # noqa: F841  # used for Streamlit UI side-effect
@@ -910,7 +1198,8 @@ def render_main_app():
             if st.button("Log Ritual"):
                 st.success("Your boundary ritual has been logged.")
         elif journal_type == "Reflective Journal":
-            st.markdown("Write about your own reactions, growth, and challenges. No client details—just your personal journey.")
+            st.markdown(
+                "Write about your own reactions, growth, and challenges. No client details—just your personal journey.")
             journal_date = st.date_input("Date", value=dt.date.today(), key="reflective_date")  # noqa: F841  # used for Streamlit UI side-effect
             entry = st.text_area("Reflection Entry", placeholder="What's emerging for you emotionally or personally?", key="reflective_entry")  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Reflection"):
@@ -930,13 +1219,16 @@ def delete_user_history_from_supabase(user_id: str):
     try:
         if not requests:
             return False, "Requests library not available"
-        
+
         if not user_id:
             return False, "No user_id provided"
 
-        sup_cfg = st.secrets.get('supabase', {}) if hasattr(st, 'secrets') else {}
-        supabase_url = sup_cfg.get('url') or sup_cfg.get('saori_url') or sup_cfg.get('saori_function_url')
-        supabase_key = sup_cfg.get('key') or sup_cfg.get('anon_key') or sup_cfg.get('apikey')
+        sup_cfg = st.secrets.get('supabase', {}) if hasattr(
+            st, 'secrets') else {}
+        supabase_url = sup_cfg.get('url') or sup_cfg.get(
+            'saori_url') or sup_cfg.get('saori_function_url')
+        supabase_key = sup_cfg.get('key') or sup_cfg.get(
+            'anon_key') or sup_cfg.get('apikey')
         if not supabase_url or not supabase_key:
             return False, "Supabase credentials not configured"
 
@@ -982,7 +1274,8 @@ def delete_user_history_from_supabase(user_id: str):
                     'delete_text': getattr(resp, 'text', None)
                 }
             }]
-            requests.post(audit_url, headers=audit_headers, json=audit_payload, timeout=6)
+            requests.post(audit_url, headers=audit_headers,
+                          json=audit_payload, timeout=6)
         except Exception:
             # Swallow audit failures; do not block the main delete result
             pass

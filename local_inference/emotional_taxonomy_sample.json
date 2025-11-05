@@ -1,0 +1,60 @@
+{
+    "calm": [
+        "calm",
+        "peaceful",
+        "relieved"
+    ],
+    "panic": [
+        "panic",
+        "terrified",
+        "hysterical"
+    ],
+    "conflict": [
+        "fight",
+        "conflict",
+        "argue",
+        "angry"
+    ],
+    "longing": [
+        "longing",
+        "yearn",
+        "miss"
+    ],
+    "confusion": [
+        "confus",
+        "uncertain",
+        "lost"
+    ],
+    "joy": [
+        "joy",
+        "happy",
+        "delight"
+    ],
+    "neutral": [],
+    "escalation_tiers": {
+        "tier_1": {
+            "tags": [
+                "panic",
+                "grave_harm",
+                "betrayal"
+            ],
+            "action": "force_escalation"
+        },
+        "tier_2": {
+            "tags": [
+                "conflict",
+                "longing",
+                "confusion"
+            ],
+            "action": "conditional_escalation"
+        },
+        "tier_3": {
+            "tags": [
+                "calm",
+                "joy",
+                "neutral"
+            ],
+            "action": "no_escalation"
+        }
+    }
+}
