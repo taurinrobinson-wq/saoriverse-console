@@ -20,22 +20,30 @@ logger = logging.getLogger(__name__)
 # Add the glyphs directory to path for imports
 sys.path.append(os.path.dirname(__file__))
 
-from limbic_adjacent_system import SystemType, get_limbic_system
-from limbic_visualizer import LimbicVisualizer
+from .limbic_adjacent_system import SystemType, get_limbic_system
+from .limbic_visualizer import LimbicVisualizer
 
 try:
-    from glyph_learner import GlyphLearner
+    from .glyph_learner import GlyphLearner
     HAS_GLYPH_LEARNER = True
 except ImportError:
-    HAS_GLYPH_LEARNER = False
-    GlyphLearner = None
+    try:
+        from glyph_learner import GlyphLearner
+        HAS_GLYPH_LEARNER = True
+    except ImportError:
+        HAS_GLYPH_LEARNER = False
+        GlyphLearner = None
 
 try:
-    from shared_glyph_manager import SharedGlyphManager
+    from .shared_glyph_manager import SharedGlyphManager
     HAS_SHARED_MANAGER = True
 except ImportError:
-    HAS_SHARED_MANAGER = False
-    SharedGlyphManager = None
+    try:
+        from shared_glyph_manager import SharedGlyphManager
+        HAS_SHARED_MANAGER = True
+    except ImportError:
+        HAS_SHARED_MANAGER = False
+        SharedGlyphManager = None
 
 
 class LimbicIntegrationEngine:
