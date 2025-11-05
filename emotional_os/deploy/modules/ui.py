@@ -621,14 +621,23 @@ def render_main_app():
         if processing_mode == "hybrid":
             try:
                 from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
-                from hybrid_processor_with_evolution import create_integrated_processor
                 from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
+                
+                # Try to import create_integrated_processor from scripts/utilities or directly
+                try:
+                    import sys
+                    import os
+                    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../../scripts/utilities'))
+                    from hybrid_processor_with_evolution import create_integrated_processor
+                except ImportError:
+                    # Fallback if not available
+                    create_integrated_processor = None
                 
                 learner = get_hybrid_learner()
                 user_id = st.session_state.get('user_id', 'anonymous')
                 
                 # Initialize dynamic evolution system if not already in session
-                if 'hybrid_processor' not in st.session_state:
+                if 'hybrid_processor' not in st.session_state and create_integrated_processor:
                     adaptive_extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
                     st.session_state['hybrid_processor'] = create_integrated_processor(
                         hybrid_learner=learner,
@@ -637,36 +646,37 @@ def render_main_app():
                     )
                 
                 # Process through integrated pipeline with dynamic glyph generation
-                processor = st.session_state['hybrid_processor']
-                evolution_result = processor.process_user_message(
-                    user_message=user_input,
-                    ai_response=response,
-                    user_id=user_id,
-                    conversation_id=st.session_state.get('conversation_id', 'default'),
-                    glyphs=debug_glyphs,
-                )
-                
-                # Check if new glyphs were generated
-                new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get('new_glyphs_generated', [])
-                if new_glyphs and len(new_glyphs) > 0:
-                    # Store newly generated glyphs in session
-                    if 'new_glyphs_this_session' not in st.session_state:
-                        st.session_state['new_glyphs_this_session'] = []
-                    st.session_state['new_glyphs_this_session'].extend(new_glyphs)
+                if 'hybrid_processor' in st.session_state:
+                    processor = st.session_state['hybrid_processor']
+                    evolution_result = processor.process_user_message(
+                        user_message=user_input,
+                        ai_response=response,
+                        user_id=user_id,
+                        conversation_id=st.session_state.get('conversation_id', 'default'),
+                        glyphs=debug_glyphs,
+                    )
                     
-                    # Display notification about new glyphs
-                    st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
-                    for glyph in new_glyphs:
-                        glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
-                        st.info(f"  {glyph_dict.get('symbol', '?')} **{glyph_dict.get('name', '?')}** "
-                               f"({' + '.join(glyph_dict.get('core_emotions', []))})")
-                
-                # Log learning results
-                learning_result = evolution_result['pipeline_stages']['hybrid_learning'].get('learning_result', {})
-                if learning_result.get("learned_to_shared"):
-                    logger.info(f"User {user_id} contributed to shared lexicon")
-                elif learning_result.get("learned_to_user"):
-                    logger.info(f"User {user_id} learning to personal lexicon")
+                    # Check if new glyphs were generated
+                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get('new_glyphs_generated', [])
+                    if new_glyphs and len(new_glyphs) > 0:
+                        # Store newly generated glyphs in session
+                        if 'new_glyphs_this_session' not in st.session_state:
+                            st.session_state['new_glyphs_this_session'] = []
+                        st.session_state['new_glyphs_this_session'].extend(new_glyphs)
+                        
+                        # Display notification about new glyphs
+                        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
+                        for glyph in new_glyphs:
+                            glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
+                            st.info(f"  {glyph_dict.get('symbol', '?')} **{glyph_dict.get('name', '?')}** "
+                                   f"({' + '.join(glyph_dict.get('core_emotions', []))})")
+                    
+                    # Log learning results
+                    learning_result = evolution_result['pipeline_stages']['hybrid_learning'].get('learning_result', {})
+                    if learning_result.get("learned_to_shared"):
+                        logger.info(f"User {user_id} contributed to shared lexicon")
+                    elif learning_result.get("learned_to_user"):
+                        logger.info(f"User {user_id} learning to personal lexicon")
                 
             except ImportError as e:
                 # Fallback if dynamic evolution not available
@@ -743,7 +753,7 @@ def render_main_app():
                 else:
                     base_url = supabase_url
 
-                if base_url and supabase_key:
+                if base_url and supabase_key and requests:
                     rest_url = f"{base_url}/rest/v1/conversation_history"
                     headers = {
                         'Content-Type': 'application/json',
@@ -851,6 +861,9 @@ def delete_user_history_from_supabase(user_id: str):
     Returns a tuple: (success: bool, message: str)
     """
     try:
+        if not requests:
+            return False, "Requests library not available"
+        
         if not user_id:
             return False, "No user_id provided"
 
