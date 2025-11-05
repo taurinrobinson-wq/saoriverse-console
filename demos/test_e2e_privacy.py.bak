@@ -12,9 +12,8 @@ import sys
 import os
 
 # Set up path
-sys.path.insert(0, 'str(Path(__file__).resolve().parent)')
-repo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root))
+sys.path.insert(0, '/Users/taurinrobinson/saoriverse-console')
+os.chdir('/Users/taurinrobinson/saoriverse-console')
 
 # Try to import system components
 HybridProcessorWithEvolution = None
