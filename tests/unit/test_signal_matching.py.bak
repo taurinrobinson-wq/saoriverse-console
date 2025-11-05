@@ -6,7 +6,7 @@ Tests the messages from your earlier test run
 
 import sys
 
-sys.path.insert(0, 'str(Path(__file__).resolve().parent)')
+sys.path.insert(0, '/Users/taurinrobinson/saoriverse-console')
 
 from parser.signal_parser import load_signal_map, parse_signals
 

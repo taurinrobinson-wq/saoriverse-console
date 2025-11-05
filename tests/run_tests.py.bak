@@ -19,8 +19,7 @@ from pathlib import Path
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
-repo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root))
+os.chdir(PROJECT_ROOT)
 
 def run_pytest(category=None, verbose=False):
     """Run pytest with appropriate configuration."""

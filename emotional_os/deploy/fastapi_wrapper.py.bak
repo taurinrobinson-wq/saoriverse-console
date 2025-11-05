@@ -13,8 +13,7 @@ app_dir = Path('/home/firscius/public_html')
 sys.path.insert(0, str(app_dir))
 
 # Set up environment
-repo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root)))
+os.chdir(str(app_dir))
 
 # Import and run the FastAPI app
 try:
