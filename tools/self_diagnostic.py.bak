@@ -6,7 +6,7 @@ Usage:
 What it does:
   - Runs pytest (quiet) and captures failures.
   - Scans failure output for common, fixable patterns such as hard-coded absolute
-    paths used in tests (e.g. 'str(Path(__file__).resolve().parent)' macOS paths) that break collection on
+    paths used in tests (e.g. '/Users/...' macOS paths) that break collection on
     other platforms.
   - If --auto-fix is provided, replaces hard-coded paths found inside repository
     test files with a portable repo-root calculation (Path(__file__).resolve().parent).
@@ -55,15 +55,13 @@ def replace_absolute_paths_in_file(path: Path):
     """
     text = path.read_text(encoding='utf-8', errors='ignore')
 
-    # Replace any repo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root)) with dynamic repo root
+    # Replace any os.chdir('/Users/....') with dynamic repo root
     def _repl(match):
-        return "repo_root = Path(__file__).resolve().parent\nrepo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root)))"
+        return "repo_root = Path(__file__).resolve().parent\nos.chdir(str(repo_root))"
 
     new_text, n = RE_CHDIR_CALL.subn(_repl, text)
 
-    # Also replace literal str(Path(__file__).resolve().parent) occurrences in tests (less robust but helpful)
+    # Also replace literal /Users/... occurrences in tests (less robust but helpful)
     new_text2, m = RE_ABSOLUTE_PATH_UNIX.subn("str(Path(__file__).resolve().parent)", new_text)
 
     if n + m > 0 and new_text2 != text:

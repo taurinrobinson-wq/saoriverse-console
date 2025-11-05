@@ -15,7 +15,7 @@ This is Phase 2 of the Emotional OS evolution.
 import sys
 
 # Add paths
-sys.path.insert(0, 'str(Path(__file__).resolve().parent) OS')
+sys.path.insert(0, '/Users/Admin/OneDrive/Desktop/Deleted_Emotional_OS_Folder/Emotional OS')
 
 # For now, mock imports since NRC loader might not be available
 class MockNRC:
