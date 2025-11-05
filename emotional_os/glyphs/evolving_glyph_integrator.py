@@ -12,30 +12,41 @@ from typing import Dict, List, Optional
 
 # Try to import dependencies with fallbacks
 try:
-    from glyph_generator import GlyphGenerator
+    from .glyph_generator import GlyphGenerator
     GLYPH_GENERATOR_AVAILABLE = True
 except ImportError as e:
-    print(f"Warning: GlyphGenerator not available: {e}")
-    GLYPH_GENERATOR_AVAILABLE = False
-    GlyphGenerator = None
+    try:
+        from glyph_generator import GlyphGenerator
+        GLYPH_GENERATOR_AVAILABLE = True
+    except ImportError as e2:
+        print(f"Warning: GlyphGenerator not available: {e2}")
+        GLYPH_GENERATOR_AVAILABLE = False
+        GlyphGenerator = None
 
 try:
-    from supabase_integration import SupabaseIntegrator
+    from ..supabase.supabase_integration import SupabaseIntegrator
     SUPABASE_INTEGRATOR_AVAILABLE = True
 except ImportError as e:
-    print(f"Warning: SupabaseIntegrator not available: {e}")
-    SUPABASE_INTEGRATOR_AVAILABLE = False
-    SupabaseIntegrator = None
+    try:
+        from supabase_integration import SupabaseIntegrator
+        SUPABASE_INTEGRATOR_AVAILABLE = True
+    except ImportError as e2:
+        print(f"Warning: SupabaseIntegrator not available: {e2}")
+        SUPABASE_INTEGRATOR_AVAILABLE = False
+        SupabaseIntegrator = None
 
 # Define a simple SaoriResponse class if not available
 try:
-    from supabase_integration import SaoriResponse
+    from ..supabase.supabase_integration import SaoriResponse
 except ImportError:
-    class SaoriResponse:
-        def __init__(self, reply="", glyph="", parsed_glyphs=None):
-            self.reply = reply
-            self.glyph = glyph
-            self.parsed_glyphs = parsed_glyphs or []
+    try:
+        from supabase_integration import SaoriResponse
+    except ImportError:
+        class SaoriResponse:
+            def __init__(self, reply="", glyph="", parsed_glyphs=None):
+                self.reply = reply
+                self.glyph = glyph
+                self.parsed_glyphs = parsed_glyphs or []
 
 class EvolvingGlyphIntegrator:
     """
