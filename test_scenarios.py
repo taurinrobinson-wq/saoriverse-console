@@ -78,8 +78,8 @@ class ScenarioTester:
             'identity': ['identity', 'self', 'authentic', 'genuine', 'true'],
 
             # Surrender & Transcendence
-            'surrender': ['surrender', 'let go', 'release', 'accept', 'flow'],
-            'transcendence': ['transcend', 'beyond', 'infinite', 'eternal', 'divine'],
+            'surrender': ['surrender', 'let go', 'release', 'accept', 'open'],
+            'transcendence': ['transcend', 'transcendent', 'beyond', 'infinite', 'eternal', 'divine', 'enlighten', 'ultimate'],
         }
 
         text_lower = text.lower()
@@ -94,23 +94,56 @@ class ScenarioTester:
     def find_matching_glyphs(self, keywords: List[str], max_results: int = 5) -> List[Dict]:
         """Find glyphs matching emotional keywords."""
         matching = []
+        
+        def normalize_word(word: str) -> str:
+            """Remove common suffixes for better matching."""
+            word_lower = word.lower()
+            suffixes = ['ence', 'ency', 'ity', 'tion', 'sion', 'ness', 'ment', 'able', 'ible', 'ous']
+            for suffix in suffixes:
+                if word_lower.endswith(suffix):
+                    return word_lower[:-len(suffix)]
+            return word_lower
+        
+        def words_match(keyword: str, signal_text: str) -> bool:
+            """Check if keyword matches signal text with stemming."""
+            keyword_norm = normalize_word(keyword)
+            signal_lower = signal_text.lower()
+            
+            # Direct substring match
+            if keyword.lower() in signal_lower:
+                return True
+            # Normalized match
+            if keyword_norm in signal_lower:
+                return True
+            # Check if any word in signal matches
+            for signal_word in signal_lower.split():
+                if normalize_word(signal_word) == keyword_norm:
+                    return True
+            return False
 
+        # Process all keywords without breaking early
         for keyword in keywords:
             for glyph in self.glyphs:
-                if keyword.lower() in glyph.get('glyph_name', '').lower() or \
-                   keyword.lower() in glyph.get('description', '').lower():
-                    matching.append(glyph)
+                # Check activation_signals first (newly enhanced field)
+                activation_signals = glyph.get('activation_signals', '')
+                if isinstance(activation_signals, str):
+                    activation_signals_text = activation_signals.lower()
+                else:
+                    activation_signals_text = str(activation_signals).lower()
+                
+                # Check glyph name and description as secondary
+                glyph_name = glyph.get('glyph_name', '').lower()
+                description = glyph.get('description', '').lower()
+                
+                # Use smart matching
+                if words_match(keyword, activation_signals_text) or \
+                   words_match(keyword, glyph_name) or \
+                   words_match(keyword, description):
+                    if glyph not in matching:
+                        matching.append(glyph)
 
-        # Deduplicate by ID
-        seen_ids = set()
-        unique = []
-        for g in matching:
-            gid = g.get('id')
-            if gid not in seen_ids:
-                unique.append(g)
-                seen_ids.add(gid)
-
-        return unique[:max_results]
+        # Return limited results per keyword, but all keywords represented
+        return matching[:max_results * len(keywords)]
 
     def analyze_gate_coverage(self, glyphs: List[Dict]) -> Dict:
         """Analyze which gates are represented in matched glyphs."""
@@ -156,7 +189,7 @@ class ScenarioTester:
         print(f"📍 Emotional Keywords Found: {keywords}")
 
         # Find matching glyphs
-        matching_glyphs = self.find_matching_glyphs(keywords, max_results=10)
+        matching_glyphs = self.find_matching_glyphs(keywords, max_results=50)
         print(f"✅ Matching Glyphs: {len(matching_glyphs)} found")
 
         # Analyze gate coverage
