@@ -10,15 +10,26 @@ applications, Streamlit UI, and ritual systems.
 import logging
 from typing import Dict, List, Optional
 
-from .velonix_reaction_engine import (
-    VelonixReactionEngine,
-    get_velonix_engine,
-)
-from .velonix_visualizer import (
-    VelonixVisualizer,
-    RitualPromptSystem,
-    EmotionalArchive,
-)
+try:
+    from .velonix_reaction_engine import (
+        VelonixReactionEngine,
+        get_velonix_engine,
+    )
+    from .velonix_visualizer import (
+        VelonixVisualizer,
+        RitualPromptSystem,
+        EmotionalArchive,
+    )
+except ImportError:
+    from velonix_reaction_engine import (
+        VelonixReactionEngine,
+        get_velonix_engine,
+    )
+    from velonix_visualizer import (
+        VelonixVisualizer,
+        RitualPromptSystem,
+        EmotionalArchive,
+    )
 
 logger = logging.getLogger(__name__)
 
