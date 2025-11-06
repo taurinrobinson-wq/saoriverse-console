@@ -44,8 +44,7 @@ st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
     page_icon=get_page_icon(),
     layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items=None
+    initial_sidebar_state="expanded")
 )
 
 # Configure theme
