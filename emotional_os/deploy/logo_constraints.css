@@ -4,6 +4,8 @@
     height: 50px !important;
     max-width: 50px !important;
     max-height: 50px !important;
+    vertical-align: middle !important;
+    margin-right: 10px !important;
 }
 
 .brand-logo img {
@@ -11,6 +13,15 @@
     height: 50px !important;
     max-width: 50px !important;
     max-height: 50px !important;
+    vertical-align: middle !important;
+    margin-right: 10px !important;
+}
+
+/* Improve header layout */
+.stApp>header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
 }
 
 /* Ensure inline SVGs are properly constrained */
