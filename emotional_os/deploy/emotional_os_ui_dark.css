@@ -253,78 +253,87 @@ button[title*="Start Personal Log"]:hover {
     border: inherit !important;
 }
 
-/* Responsive brand row for top header (dark theme variant) */
-.brand-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+/* Brand container layout - dark theme variant */
+.brand-container {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
     box-sizing: border-box;
 }
 
-/* Logo handling in dark mode */
-.logo-container svg {
-    fill: #f1f1f1 !important;
-}
-
-.brand-logo svg {
-    fill: #f1f1f1 !important;
+.brand-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
 }
 
 .brand-logo {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    width: 50px;
+    height: 50px;
 }
 
-.brand-img {
-    width: 64px;
-    height: auto;
-    max-width: 64px;
+/* Dark mode logo handling */
+.brand-logo svg,
+.logo-container svg {
+    width: 100%;
+    height: 100%;
+    fill: #f1f1f1 !important;
 }
 
 .brand-text {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-width: 0;
-    /* allow text truncation when needed */
 }
 
 .brand-title {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 300;
     margin: 0;
+    padding: 0;
     color: #f1f1f1;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
 }
 
 .brand-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #cccccc;
-    margin-top: 0.1rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
 }
 
 @media (max-width: 640px) {
-    .brand-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
+    .brand-container {
+        padding: 0.5rem;
     }
 
-    .brand-img {
-        width: 48px;
-        max-width: 48px;
+    .brand-inner {
+        gap: 0.5rem;
+    }
+
+    .brand-logo {
+        width: 40px;
+        height: 40px;
     }
 
     .brand-title {
-        font-size: 1.25rem;
-        white-space: normal;
+        font-size: 1.1rem;
     }
 
     .brand-subtitle {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
