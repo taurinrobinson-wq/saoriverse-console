@@ -237,22 +237,62 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
 
 def render_splash_interface(auth):
     inject_css("emotional_os/deploy/emotional_os_ui.css")
-    st.markdown('<div style="text-align: center; margin-bottom: 1rem;">',
-                unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1, 1, 1])
+    
+    # Add custom CSS for splash screen
+    st.markdown("""
+    <style>
+    .splash-logo-container {
+        text-align: center;
+        margin-bottom: 2rem;
+        margin-top: 3rem;
+    }
+    .splash-logo {
+        width: 200px;
+        height: auto;
+        margin-bottom: 1rem;
+    }
+    .splash-title {
+        font-size: 2rem;
+        font-weight: 300;
+        letter-spacing: 0.2em;
+        color: #2E2E2E;
+        margin: 1rem 0 0.5rem 0;
+        text-align: center;
+        line-height: 1.2;
+    }
+    .splash-subtitle {
+        font-size: 1.2rem;
+        color: #666;
+        letter-spacing: 0.1em;
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.5;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Center everything in the page
+    col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        # Use appropriate logo based on theme
-        logo_file = "FirstPerson-Logo-black-cropped_notext.svg"
+        # Logo and text container
+        st.markdown('<div class="splash-logo-container">', unsafe_allow_html=True)
+        
+        # Use the full logo
+        logo_file = "FirstPerson-Logo.svg"
         svg_markup = _load_inline_svg(logo_file)
         try:
             st.markdown(
-                f'<div style="width:120px; margin: 0 auto;" class="logo-container">{svg_markup}</div>', unsafe_allow_html=True)
+                f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
         except Exception:
-            st.markdown('''
-            <div style="font-size: 4rem;">🧠</div>
-            <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">FirstPerson</div>
-            <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">Personal AI<br>Companion</div>
-            ''', unsafe_allow_html=True)
+            st.markdown('<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+        
+        # Add title and subtitle
+        st.markdown("""
+            <div class="splash-title">Personal AI</div>
+            <div class="splash-subtitle">Companion</div>
+        """, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     if st.session_state.get('show_login', False):
         auth.render_login_form()
