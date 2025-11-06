@@ -35,38 +35,56 @@ def get_page_icon():
     return None
 
 
+# Initialize theme in session state if not set
+if 'theme' not in st.session_state:
+    st.session_state['theme'] = 'Light'
+
 # Must be first Streamlit command
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
     page_icon=get_page_icon(),
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    menu_items=None
 )
 
-# Initialize theme if not set
-if 'theme' not in st.session_state:
-    st.session_state['theme'] = 'Light'
+# Configure theme
+theme_config = {
+    "primaryColor": "#FF4B4B",
+    "backgroundColor": "#FFFFFF",
+    "secondaryBackgroundColor": "#F0F2F6",
+    "textColor": "#31333F",
+    "font": "sans serif"
+}
 
-# Basic theme compatibility
+if st.session_state.get('theme') == 'Dark':
+    theme_config.update({
+        "backgroundColor": "#0E1117",
+        "secondaryBackgroundColor": "#262730",
+        "textColor": "#FAFAFA"
+    })
+
+# Apply theme configuration
+st.set_page_config(
+    page_title="FirstPerson - Personal AI Companion",
+    page_icon=get_page_icon(),
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items=None
+)
+
+# Basic theme compatibility and custom styles
 st.markdown("""
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
-    html {
-        background-color: var(--background-color);
-        color: var(--text-color);
+    .stButton>button {
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.2s ease;
     }
     </style>
 """, unsafe_allow_html=True)
-
-# Load theme-specific CSS
-css_file = "emotional_os/deploy/emotional_os_ui_light.css" if st.session_state[
-    'theme'] == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
-try:
-    with open(css_file, "r") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-except Exception:
-    pass
 
 
 def render_header():

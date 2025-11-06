@@ -141,17 +141,25 @@ def render_controls_row(conversation_key):
         )
         st.session_state.processing_mode = processing_mode
     with controls[1]:
-        theme_default = 0 if st.session_state.get(
-            'theme', 'Light') == 'Light' else 1
+        # Theme selection with native Streamlit theme integration
+        current_theme = st.session_state.get('theme', 'Light')
+        theme_options = ["Light", "Dark"]
         selected_theme = st.selectbox(
             "Theme",
-            ["Light", "Dark"],
-            index=theme_default,
-            key="theme_select_row"
+            theme_options,
+            index=theme_options.index(current_theme),
+            key="theme_select"
         )
-        if selected_theme != st.session_state.get('theme'):
+
+        if selected_theme != current_theme:
             st.session_state['theme'] = selected_theme
-            st.rerun()  # Rerun to apply theme changes
+            # Use experimental set_theme for native theme switching
+            try:
+                theme_name = "dark" if selected_theme == "Dark" else "light"
+                st._config.set_option('theme.base', theme_name)
+                st.rerun()
+            except:
+                st.rerun()  # Fallback to regular rerun if experimental feature not available
     with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
