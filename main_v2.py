@@ -58,12 +58,86 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Add custom CSS for header layout
+st.markdown("""
+    <style>
+    .header-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding: 0.5rem 0;
+    }
+    .header-logo {
+        flex: 0 0 auto;
+        width: 50px;
+        height: auto;
+    }
+    .header-title {
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: inherit;
+    }
+    /* Ensure text color matches current theme */
+    [data-testid="stSidebarNav"] {color: inherit;}
+    </style>
+""", unsafe_allow_html=True)
+
+# Create header with logo and title
+try:
+    light_logo = Path(
+        "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+    dark_logo = Path(
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+
+    # Read the appropriate logo based on theme
+    logo_path = light_logo if light_logo.exists() else dark_logo
+    if logo_path.exists():
+        svg_content = logo_path.read_text()
+        # Ensure SVG has proper size constraints
+        if '<svg' in svg_content and not 'class="header-logo"' in svg_content:
+            svg_content = svg_content.replace(
+                '<svg', '<svg class="header-logo"')
+
+        # Render header container with logo and title
+        st.markdown(f'''
+            <div class="header-container">
+                {svg_content}
+                <h1 class="header-title">FirstPerson – Personal AI Companion</h1>
+            </div>
+        ''', unsafe_allow_html=True)
+except Exception:
+    # Fallback to simple title if logo loading fails
+    st.title("FirstPerson – Personal AI Companion")
+
 # Load logo constraints CSS after page config
 try:
     css_path = Path("emotional_os/deploy/logo_constraints.css")
     if css_path.exists():
-        st.markdown(
-            f'<style>{css_path.read_text()}</style>', unsafe_allow_html=True)
+        css_content = css_path.read_text()
+        # Ensure we're only injecting CSS content
+        if '<script' not in css_content.lower():
+            st.markdown(
+                f'<style>{css_content}</style>', unsafe_allow_html=True)
+            # Add a small delay to ensure CSS is applied before theme changes
+            st.markdown("""
+                <script>
+                    setTimeout(function() {
+                        const observer = new MutationObserver(function(mutations) {
+                            mutations.forEach(function(mutation) {
+                                if (mutation.target.classList && mutation.target.classList.contains('stSelectbox')) {
+                                    // Re-apply any necessary styles after theme change
+                                    document.body.style.visibility = 'visible';
+                                }
+                            });
+                        });
+                        observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+                    }, 100);
+                </script>
+            """, unsafe_allow_html=True)
 except Exception:
     pass
 
