@@ -28,16 +28,37 @@ except Exception:
 
 def _build_page_icon_data_uri():
     # Prefer a normalized SVG that has a clean viewBox and no odd offsets.
+    try:
+        # Load logo constraints CSS first
+        css_path = Path("emotional_os/deploy/logo_constraints.css")
+        if css_path.exists():
+            st.markdown(
+                f'<style>{css_path.read_text()}</style>', unsafe_allow_html=True)
+    except Exception:
+        pass
+
     normalized = Path("static/graphics/FirstPerson-Logo-normalized.svg")
     fallback = Path(
         "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+
     try:
         if normalized.exists():
-            raw = normalized.read_bytes()
+            # Create a size-constrained version of the SVG
+            svg_content = normalized.read_text()
+            # Add mandatory size constraints to SVG
+            if '<svg' in svg_content and not 'style="width:50px' in svg_content:
+                svg_content = svg_content.replace(
+                    '<svg', '<svg style="width:50px;height:50px;max-width:50px;max-height:50px;"')
+            raw = svg_content.encode('utf-8')
             b64 = base64.b64encode(raw).decode("ascii")
             return f"data:image/svg+xml;base64,{b64}"
         if fallback.exists():
-            raw = fallback.read_bytes()
+            # Same size constraints for fallback
+            svg_content = fallback.read_text()
+            if '<svg' in svg_content and not 'style="width:50px' in svg_content:
+                svg_content = svg_content.replace(
+                    '<svg', '<svg style="width:50px;height:50px;max-width:50px;max-height:50px;"')
+            raw = svg_content.encode('utf-8')
             b64 = base64.b64encode(raw).decode("ascii")
             return f"data:image/svg+xml;base64,{b64}"
     except Exception:
