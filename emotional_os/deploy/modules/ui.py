@@ -142,9 +142,16 @@ def render_controls_row(conversation_key):
         st.session_state.processing_mode = processing_mode
     with controls[1]:
         theme_default = 0 if st.session_state.get(
-            "theme_select_row", "Light") == "Light" else 1
-        st.selectbox("Theme", ["Light", "Dark"],
-                     index=theme_default, key="theme_select_row")
+            'theme', 'Light') == 'Light' else 1
+        selected_theme = st.selectbox(
+            "Theme",
+            ["Light", "Dark"],
+            index=theme_default,
+            key="theme_select_row"
+        )
+        if selected_theme != st.session_state.get('theme'):
+            st.session_state['theme'] = selected_theme
+            st.rerun()  # Rerun to apply theme changes
     with controls[2]:
         if "show_debug" not in st.session_state:
             st.session_state.show_debug = False
