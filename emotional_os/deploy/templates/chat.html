@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,20 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Arial', sans-serif;
             background: #f8f9fa;
             height: 100vh;
             overflow: hidden;
         }
-        
+
         .app-container {
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
-        
+
         .header {
             background: white;
             padding: 1rem 2rem;
@@ -33,18 +34,18 @@
             align-items: center;
             justify-content: space-between;
         }
-        
+
         .header-left {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .header-logo {
             width: 50px;
             height: auto;
         }
-        
+
         .header-title {
             font-size: 2.2rem;
             font-weight: 300;
@@ -52,24 +53,24 @@
             color: #2E2E2E;
             margin: 0;
         }
-        
+
         .header-subtitle {
             font-style: italic;
             color: #666;
             margin-top: 0.5rem;
         }
-        
+
         .header-right {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .user-info {
             color: #2E2E2E;
             font-weight: 500;
         }
-        
+
         .header-btn {
             background: #2E2E2E;
             color: white;
@@ -80,38 +81,38 @@
             font-size: 0.9rem;
             transition: background-color 0.3s ease;
         }
-        
+
         .header-btn:hover {
             background: #1a1a1a;
         }
-        
+
         .main-content {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
-        
+
         .chat-container {
             flex: 1;
             display: flex;
             flex-direction: column;
             padding: 1rem;
         }
-        
+
         .controls {
             display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
             align-items: center;
         }
-        
+
         .mode-select {
             padding: 0.5rem;
             border: 1px solid #ddd;
             border-radius: 5px;
             background: white;
         }
-        
+
         .clear-btn {
             background: #6c757d;
             color: white;
@@ -120,7 +121,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -130,17 +131,17 @@
             margin-bottom: 1rem;
             border: 1px solid #e0e0e0;
         }
-        
+
         .message {
             margin-bottom: 1.5rem;
             display: flex;
             gap: 1rem;
         }
-        
+
         .message.user {
             justify-content: flex-end;
         }
-        
+
         .message-avatar {
             width: 40px;
             height: 40px;
@@ -151,48 +152,48 @@
             font-size: 1.5rem;
             flex-shrink: 0;
         }
-        
+
         .message.user .message-avatar {
             background: #007bff;
             color: white;
         }
-        
+
         .message.assistant .message-avatar {
             background: #28a745;
             color: white;
         }
-        
+
         .message-content {
             max-width: 70%;
             padding: 1rem;
             border-radius: 15px;
             line-height: 1.5;
         }
-        
+
         .message.user .message-content {
             background: #007bff;
             color: white;
             border-bottom-right-radius: 5px;
         }
-        
+
         .message.assistant .message-content {
             background: #f8f9fa;
             border: 1px solid #e0e0e0;
             border-bottom-left-radius: 5px;
         }
-        
+
         .message-meta {
             font-size: 0.8rem;
             color: #666;
             margin-top: 0.5rem;
         }
-        
+
         .chat-input-container {
             display: flex;
             gap: 1rem;
             align-items: center;
         }
-        
+
         .chat-input {
             flex: 1;
             padding: 1rem;
@@ -203,11 +204,11 @@
             resize: none;
             max-height: 120px;
         }
-        
+
         .chat-input:focus {
             border-color: #007bff;
         }
-        
+
         .send-btn {
             background: #007bff;
             color: white;
@@ -223,16 +224,16 @@
             justify-content: center;
             transition: background-color 0.3s ease;
         }
-        
+
         .send-btn:hover {
             background: #0056b3;
         }
-        
+
         .send-btn:disabled {
             background: #6c757d;
             cursor: not-allowed;
         }
-        
+
         .sidebar {
             width: 300px;
             background: white;
@@ -240,18 +241,18 @@
             padding: 1rem;
             overflow-y: auto;
         }
-        
+
         .sidebar-section {
             margin-bottom: 2rem;
         }
-        
+
         .sidebar-title {
             font-size: 1.2rem;
             font-weight: 500;
             margin-bottom: 1rem;
             color: #2E2E2E;
         }
-        
+
         .metric {
             background: #f8f9fa;
             padding: 1rem;
@@ -259,18 +260,18 @@
             margin-bottom: 1rem;
             text-align: center;
         }
-        
+
         .metric-value {
             font-size: 2rem;
             font-weight: 600;
             color: #007bff;
         }
-        
+
         .metric-label {
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         .privacy-info {
             background: #e3f2fd;
             padding: 1rem;
@@ -278,39 +279,39 @@
             font-size: 0.9rem;
             line-height: 1.5;
         }
-        
+
         .privacy-info div {
             margin-bottom: 0.5rem;
         }
-        
+
         .loading {
             opacity: 0.6;
         }
-        
+
         .typing-indicator {
             display: none;
             padding: 1rem;
             font-style: italic;
             color: #666;
         }
-        
+
         .typing-indicator.active {
             display: block;
         }
-        
+
         @media (max-width: 768px) {
             .sidebar {
                 display: none;
             }
-            
+
             .header {
                 padding: 1rem;
             }
-            
+
             .header-title {
                 font-size: 1.5rem;
             }
-            
+
             .controls {
                 flex-direction: column;
                 align-items: stretch;
@@ -318,12 +319,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="app-container">
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <img src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson" class="header-logo" onerror="this.style.display='none'">
+                <img src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson" class="header-logo"
+                    onerror="this.style.display='none'">
                 <div>
                     <h1 class="header-title">FirstPerson - Personal AI Companion</h1>
                     <div class="header-subtitle">Your private space for emotional processing and growth</div>
@@ -334,7 +337,7 @@
                 <button class="header-btn" onclick="logout()">🚪 Logout</button>
             </div>
         </header>
-        
+
         <!-- Main Content -->
         <div class="main-content">
             <div class="chat-container">
@@ -348,36 +351,35 @@
                     </select>
                     <button class="clear-btn" onclick="clearHistory()">Clear History</button>
                 </div>
-                
+
                 <!-- Chat Messages -->
                 <div class="chat-messages" id="chat-messages">
                     <div class="message assistant">
-                        <div class="message-avatar">🧠</div>
+                        <div class="message-avatar"><img
+                                src="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg" alt="FP"
+                                style="width:24px;height:24px;" onerror="this.style.display='none'"></div>
                         <div class="message-content">
-                            Welcome to FirstPerson! I'm here to listen and help you process your emotions. Share what you're feeling, and I'll provide thoughtful, personalized responses while creating emotional glyphs to track your journey.
+                            Welcome to FirstPerson! I'm here to listen and help you process your emotions. Share what
+                            you're feeling, and I'll provide thoughtful, personalized responses while creating emotional
+                            glyphs to track your journey.
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="typing-indicator" id="typing-indicator">
                     FirstPerson is processing your emotional input...
                 </div>
-                
+
                 <!-- Chat Input -->
                 <div class="chat-input-container">
-                    <textarea 
-                        id="chat-input" 
-                        class="chat-input" 
-                        placeholder="Share what you're feeling..."
-                        rows="1"
-                        onkeydown="handleKeyPress(event)"
-                    ></textarea>
+                    <textarea id="chat-input" class="chat-input" placeholder="Share what you're feeling..." rows="1"
+                        onkeydown="handleKeyPress(event)"></textarea>
                     <button class="send-btn" id="send-btn" onclick="sendMessage()">
                         ➤
                     </button>
                 </div>
             </div>
-            
+
             <!-- Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section">
@@ -391,37 +393,37 @@
                         <div class="metric-label">Last Session</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section">
                     <div class="sidebar-title">Privacy Settings</div>
                     <div class="privacy-info">
                         <div>🔒 Your data is completely isolated</div>
-                        <div>🧠 Learning happens only from your conversations</div>
+                        <div>Learning happens only from your conversations</div>
                         <div>⚡ Optimized for 2-3 second responses</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script>
         // Global variables
         let conversationHistory = [];
         let currentUserId = null;
         let currentUsername = null;
-        
+
         // Initialize app
         window.addEventListener('load', async () => {
             // Check authentication
             const token = localStorage.getItem('firstperson_token');
             const userId = localStorage.getItem('firstperson_user_id');
             const username = localStorage.getItem('firstperson_username');
-            
+
             if (!token || !userId || !username) {
                 window.location.href = '/';
                 return;
             }
-            
+
             // Validate session
             try {
                 const response = await fetch(`/api/validate-session?token=${encodeURIComponent(token)}`);
@@ -433,11 +435,11 @@
                 window.location.href = '/';
                 return;
             }
-            
+
             currentUserId = userId;
             currentUsername = username;
             document.getElementById('username').textContent = username;
-            
+
             // Load conversation history from localStorage
             const savedHistory = localStorage.getItem(`fp_history_${userId}`);
             if (savedHistory) {
@@ -446,7 +448,7 @@
                 updateStats();
             }
         });
-        
+
         // Handle key press in chat input
         function handleKeyPress(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
@@ -454,28 +456,28 @@
                 sendMessage();
             }
         }
-        
+
         // Send message function
         async function sendMessage() {
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
-            
+
             if (!message) return;
-            
+
             // Clear input and disable send button
             input.value = '';
             document.getElementById('send-btn').disabled = true;
             document.getElementById('typing-indicator').classList.add('active');
-            
+
             // Add user message to conversation
             conversationHistory.push({
                 type: 'user',
                 content: message,
                 timestamp: new Date().toISOString()
             });
-            
+
             renderMessages();
-            
+
             try {
                 // Send to API
                 const mode = document.getElementById('processing-mode').value;
@@ -490,9 +492,9 @@
                         user_id: currentUserId
                     })
                 });
-                
+
                 const data = await response.json();
-                
+
                 // Add assistant response
                 conversationHistory.push({
                     type: 'assistant',
@@ -502,7 +504,7 @@
                     processing_time: data.processing_time || 0,
                     mode: mode
                 });
-                
+
             } catch (error) {
                 conversationHistory.push({
                     type: 'assistant',
@@ -511,42 +513,46 @@
                     error: true
                 });
             }
-            
+
             // Re-enable send button and hide typing indicator
             document.getElementById('send-btn').disabled = false;
             document.getElementById('typing-indicator').classList.remove('active');
-            
+
             // Save conversation and update UI
             saveConversation();
             renderMessages();
             updateStats();
         }
-        
+
         // Render messages in chat
         function renderMessages() {
             const messagesContainer = document.getElementById('chat-messages');
             const existingMessages = messagesContainer.querySelectorAll('.message:not(.welcome)');
-            
+
             // Remove existing conversation messages (keep welcome message)
             existingMessages.forEach(msg => msg.remove());
-            
+
             conversationHistory.forEach(exchange => {
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${exchange.type}`;
-                
+
                 const avatar = document.createElement('div');
                 avatar.className = 'message-avatar';
-                avatar.textContent = exchange.type === 'user' ? '👤' : '🧠';
-                
+                if (exchange.type === 'user') {
+                    avatar.textContent = '👤';
+                } else {
+                    avatar.innerHTML = '<img src="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg" style="width:20px;height:20px;" alt="FP" onerror="this.style.display=\'none\'">';
+                }
+
                 const content = document.createElement('div');
                 content.className = 'message-content';
                 content.textContent = exchange.content;
-                
+
                 if (exchange.type === 'assistant' && (exchange.glyph || exchange.processing_time)) {
                     const meta = document.createElement('div');
                     meta.className = 'message-meta';
                     let metaText = '';
-                    
+
                     if (exchange.glyph) {
                         metaText += `✨ Emotional resonance: ${exchange.glyph} • `;
                     }
@@ -554,11 +560,11 @@
                         metaText += `Processed in ${exchange.processing_time.toFixed(2)}s • `;
                     }
                     metaText += `Mode: ${exchange.mode || 'unknown'}`;
-                    
+
                     meta.textContent = metaText;
                     content.appendChild(meta);
                 }
-                
+
                 if (exchange.type === 'user') {
                     messageDiv.appendChild(content);
                     messageDiv.appendChild(avatar);
@@ -566,30 +572,30 @@
                     messageDiv.appendChild(avatar);
                     messageDiv.appendChild(content);
                 }
-                
+
                 messagesContainer.appendChild(messageDiv);
             });
-            
+
             // Scroll to bottom
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
-        
+
         // Save conversation to localStorage
         function saveConversation() {
             localStorage.setItem(`fp_history_${currentUserId}`, JSON.stringify(conversationHistory));
         }
-        
+
         // Update stats in sidebar
         function updateStats() {
             document.getElementById('conversation-count').textContent = conversationHistory.filter(msg => msg.type === 'user').length;
-            
+
             if (conversationHistory.length > 0) {
                 const lastMessage = conversationHistory[conversationHistory.length - 1];
                 const date = new Date(lastMessage.timestamp).toLocaleDateString();
                 document.getElementById('last-session').textContent = date;
             }
         }
-        
+
         // Clear conversation history
         function clearHistory() {
             if (confirm('Are you sure you want to clear your conversation history?')) {
@@ -599,7 +605,7 @@
                 updateStats();
             }
         }
-        
+
         // Logout function
         function logout() {
             localStorage.clear();
@@ -607,4 +613,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -16,6 +16,34 @@ import streamlit as st
 
 logger = logging.getLogger(__name__)
 
+# Simple in-memory cache for inline SVGs to avoid repeated disk reads
+_SVG_CACHE = {}
+
+
+def _load_inline_svg(filename: str) -> str:
+    """Load an SVG file from the static graphics folder and return its raw markup.
+
+    If the file cannot be read, returns a small fallback SVG string.
+    """
+    if filename in _SVG_CACHE:
+        return _SVG_CACHE[filename]
+
+    path = f"static/graphics/{filename}"
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            svg = f.read()
+            _SVG_CACHE[filename] = svg
+            return svg
+    except Exception:
+        # Fallback tiny SVG (simple brain emoji-like circle) to avoid missing markup
+        fallback = (
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">'
+            '<circle cx="32" cy="32" r="30" fill="#FF6B6B"/></svg>'
+        )
+        _SVG_CACHE[filename] = fallback
+        return fallback
+
+
 try:
     from .doc_export import generate_doc
 except Exception:
@@ -150,8 +178,12 @@ def render_splash_interface(auth):
                 unsafe_allow_html=True)
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
+        # Inline the SVG to avoid external asset requests (auth-gated hosts can redirect)
+        svg_markup = _load_inline_svg(
+            "FirstPerson-Logo-black-cropped_notext.svg")
         try:
-            st.image("/static/graphics/FirstPerson-Logo.svg", width=200)
+            st.markdown(
+                f'<div style="width:200px; margin: 0 auto;">{svg_markup}</div>', unsafe_allow_html=True)
         except Exception:
             st.markdown('''
             <div style="font-size: 4rem;">🧠</div>
@@ -449,16 +481,15 @@ def render_main_app():
     inject_css(css_file)
     # Logo switching based on theme
     if theme == "Dark":
-        logo_path = "/static/graphics/FirstPerson-Logo-invert-cropped_notext.svg"
+        svg_name = "FirstPerson-Logo-invert-cropped_notext.svg"
     else:
-        logo_path = "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
-    # Render a responsive brand row (logo + title) using injected CSS
+        svg_name = "FirstPerson-Logo-black-cropped_notext.svg"
+    # Render a responsive brand row (inline SVG + title) using injected CSS
+    svg_markup = _load_inline_svg(svg_name)
     try:
         st.markdown(f"""
         <div class="brand-row">
-          <div class="brand-logo">
-            <img src="{logo_path}" class="brand-img" alt="FirstPerson logo" />
-          </div>
+          <div class="brand-logo">{svg_markup}</div>
           <div class="brand-text">
             <div class="brand-title">FirstPerson - Personal AI Companion</div>
             <div class="brand-subtitle">Your private space for emotional processing and growth</div>
@@ -470,8 +501,10 @@ def render_main_app():
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
             try:
-                st.image(logo_path, width=50)
+                st.markdown(
+                    f'<div style="width:50px">{svg_markup}</div>', unsafe_allow_html=True)
             except Exception:
+                # Render a simple emoji fallback (ensure proper quoting)
                 st.markdown(
                     '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
         with col2:

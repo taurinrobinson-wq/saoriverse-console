@@ -15,7 +15,7 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="Emotional OS",
-    page_icon="🧠",
+    page_icon="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -26,6 +26,7 @@ AUTH_CONFIG = {
     "max_login_attempts": 5,
     "lockout_duration_minutes": 15
 }
+
 
 class AuthenticationManager:
     """Handles user authentication and session management"""
@@ -96,7 +97,8 @@ class AuthenticationManager:
 
         attempts = st.session_state.login_attempts[username]
         if attempts['count'] >= AUTH_CONFIG['max_login_attempts']:
-            lockout_time = attempts['last_attempt'] + timedelta(minutes=AUTH_CONFIG['lockout_duration_minutes'])
+            lockout_time = attempts['last_attempt'] + \
+                timedelta(minutes=AUTH_CONFIG['lockout_duration_minutes'])
             if datetime.now() < lockout_time:
                 return False
             # Reset attempts after lockout period
@@ -120,7 +122,8 @@ class AuthenticationManager:
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
         if username not in st.session_state.login_attempts:
-            st.session_state.login_attempts[username] = {'count': 0, 'last_attempt': datetime.now()}
+            st.session_state.login_attempts[username] = {
+                'count': 0, 'last_attempt': datetime.now()}
 
         if success:
             # Reset attempts on successful login
@@ -128,7 +131,8 @@ class AuthenticationManager:
         else:
             # Increment failed attempts
             st.session_state.login_attempts[username]['count'] += 1
-            st.session_state.login_attempts[username]['last_attempt'] = datetime.now()
+            st.session_state.login_attempts[username]['last_attempt'] = datetime.now(
+            )
 
     def create_user(self, username: str, password: str, email: str = "") -> dict:
         """Create new user account"""
@@ -137,7 +141,8 @@ class AuthenticationManager:
             password_hash, salt = self.hash_password(password)
 
             # Create user via Supabase edge function
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -157,7 +162,8 @@ class AuthenticationManager:
 
             if response.status_code == 200:
                 return {"success": True, "message": "Account created successfully"}
-            error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
+            error_data = response.json() if response.headers.get(
+                'content-type', '').startswith('application/json') else {}
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
 
         except Exception as e:
@@ -171,7 +177,8 @@ class AuthenticationManager:
                 return {"success": False, "message": "Account temporarily locked due to failed attempts"}
 
             # Authenticate via Supabase edge function
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -194,7 +201,8 @@ class AuthenticationManager:
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
                     st.session_state.session_token = data.get("session_token")
-                    st.session_state.session_expires = (datetime.now() + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])).isoformat()
+                    st.session_state.session_expires = (datetime.now(
+                    ) + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])).isoformat()
 
                     self.record_login_attempt(username, True)
                     return {"success": True, "message": "Login successful"}
@@ -237,10 +245,12 @@ class AuthenticationManager:
 
         # Test mode banner
         with st.container():
-            st.warning("⚠️ **Backend Deployment Status**: Authentication functions deployed and ready")
+            st.warning(
+                "⚠️ **Backend Deployment Status**: Authentication functions deployed and ready")
             col1, col2 = st.columns([2, 1])
             with col1:
-                st.info("Full authentication system is active. Try registering or use Test Mode for immediate access.")
+                st.info(
+                    "Full authentication system is active. Try registering or use Test Mode for immediate access.")
             with col2:
                 if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
                     self.create_test_session()
@@ -276,8 +286,10 @@ class AuthenticationManager:
             with st.form("register_form"):
                 new_username = st.text_input("Choose Username")
                 new_email = st.text_input("Email (optional)")
-                new_password = st.text_input("Choose Password", type="password")
-                confirm_password = st.text_input("Confirm Password", type="password")
+                new_password = st.text_input(
+                    "Choose Password", type="password")
+                confirm_password = st.text_input(
+                    "Confirm Password", type="password")
                 register_submitted = st.form_submit_button("Create Account")
 
                 if register_submitted:
@@ -289,17 +301,20 @@ class AuthenticationManager:
                         st.error("Password must be at least 6 characters")
                     else:
                         with st.spinner("Creating account..."):
-                            result = self.create_user(new_username, new_password, new_email)
+                            result = self.create_user(
+                                new_username, new_password, new_email)
 
                         if result["success"]:
                             st.success(result["message"])
-                            st.info("Please use the Login tab to sign in with your new account")
+                            st.info(
+                                "Please use the Login tab to sign in with your new account")
                         else:
                             st.error(result["message"])
 
+
 def render_main_app():
     """Render the main application for authenticated users"""
-    st.title("🧠 Emotional OS - Personal AI Companion")
+    st.title("Emotional OS - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
 
     # User-specific conversation history
@@ -336,7 +351,8 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    st.caption(
+                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
 
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
@@ -384,23 +400,24 @@ def render_main_app():
 
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
-        st.write("🧠 Learning happens only from your conversations")
-        st.write("⚡ Optimized for 2-3 second responses")
+    st.write("Learning happens only from your conversations")
+    st.write("⚡ Optimized for 2-3 second responses")
 
-        if st.button("Download My Data", type="secondary"):
-            # Option to export user's conversation data
-            user_data = {
-                "user_id": st.session_state.user_id,
-                "username": st.session_state.username,
-                "conversations": st.session_state[conversation_key],
-                "export_date": datetime.now().isoformat()
-            }
-            st.download_button(
-                "Download JSON",
-                json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
-            )
+    if st.button("Download My Data", type="secondary"):
+        # Option to export user's conversation data
+        user_data = {
+            "user_id": st.session_state.user_id,
+            "username": st.session_state.username,
+            "conversations": st.session_state[conversation_key],
+            "export_date": datetime.now().isoformat()
+        }
+        st.download_button(
+            "Download JSON",
+            json.dumps(user_data, indent=2),
+            file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
+            mime="application/json"
+        )
+
 
 def main():
     """Main application with authentication"""
@@ -415,6 +432,7 @@ def main():
     # User is authenticated - render main app
     auth_manager.render_user_header()
     render_main_app()
+
 
 if __name__ == "__main__":
     main()
