@@ -1,10 +1,10 @@
-treamlit as st
 import streamlit as st
 from pathlib import Path
 import base64
 
 from emotional_os.deploy.modules.auth import SaoynxAuthentication
 from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
+
 
 # Optional local preprocessor (privacy-first steward)
 try:
