@@ -46,32 +46,37 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-# Configure theme
-theme_config = {
-    "primaryColor": "#FF4B4B",
-    "backgroundColor": "#FFFFFF",
-    "secondaryBackgroundColor": "#F0F2F6",
-    "textColor": "#31333F",
-    "font": "sans serif"
-}
-
+# Apply theme-specific styles
 if st.session_state.get('theme') == 'Dark':
-    theme_config.update({
-        "backgroundColor": "#0E1117",
-        "secondaryBackgroundColor": "#262730",
-        "textColor": "#FAFAFA"
-    })
+    st.markdown("""
+        <style>
+        body, .stApp {
+            background-color: #0E1117;
+            color: #FAFAFA;
+        }
+        .stButton>button {
+            background-color: #262730;
+            color: #FAFAFA;
+            border: 1px solid #555;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+        <style>
+        body, .stApp {
+            background-color: #FFFFFF;
+            color: #31333F;
+        }
+        .stButton>button {
+            background-color: #F0F2F6;
+            color: #31333F;
+            border: 1px solid #E0E0E0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
 
-# Apply theme configuration
-st.set_page_config(
-    page_title="FirstPerson - Personal AI Companion",
-    page_icon=get_page_icon(),
-    layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items=None
-)
-
-# Basic theme compatibility and custom styles
+# Basic theme compatibility
 st.markdown("""
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
