@@ -129,15 +129,68 @@ def main():
                 if st.button("I consent"):
                     st.session_state['persist_confirmed'] = True
                     st.session_state['persist_history'] = True
+                    # Persist preference to server if conversation manager available
+                    try:
+                        mgr = st.session_state.get('conversation_manager')
+                        if not mgr:
+                            try:
+                                from emotional_os.deploy.modules.conversation_manager import ConversationManager
+                                if 'user_id' in st.session_state:
+                                    mgr = ConversationManager(
+                                        st.session_state['user_id'])
+                            except Exception:
+                                mgr = None
+                        if mgr:
+                            mgr.save_user_preferences({
+                                'persist_history': True,
+                                'persist_confirmed': True
+                            })
+                    except Exception:
+                        pass
                     st.rerun()
             with c2:
                 if st.button("Not now"):
                     st.session_state['persist_confirmed'] = False
                     st.session_state['persist_history'] = False
+                    try:
+                        mgr = st.session_state.get('conversation_manager')
+                        if not mgr:
+                            try:
+                                from emotional_os.deploy.modules.conversation_manager import ConversationManager
+                                if 'user_id' in st.session_state:
+                                    mgr = ConversationManager(
+                                        st.session_state['user_id'])
+                            except Exception:
+                                mgr = None
+                        if mgr:
+                            mgr.save_user_preferences({
+                                'persist_history': False,
+                                'persist_confirmed': False
+                            })
+                    except Exception:
+                        pass
                     st.rerun()
         else:
             st.session_state['persist_history'] = bool(
                 enable_toggle and st.session_state.get('persist_confirmed', False))
+            # Attempt to save updated preference when toggled from sidebar
+            try:
+                mgr = st.session_state.get('conversation_manager')
+                if not mgr:
+                    try:
+                        from emotional_os.deploy.modules.conversation_manager import ConversationManager
+                        if 'user_id' in st.session_state:
+                            mgr = ConversationManager(
+                                st.session_state['user_id'])
+                    except Exception:
+                        mgr = None
+                if mgr:
+                    mgr.save_user_preferences({
+                        'persist_history': bool(st.session_state.get('persist_history', False)),
+                        'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
+                    })
+            except Exception:
+                pass
 
         st.caption(
             "Stored fields: user_id, username, your message, assistant reply, processing time, mode, timestamp.")
