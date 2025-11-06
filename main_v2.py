@@ -1,4 +1,6 @@
 import streamlit as st
+from pathlib import Path
+import base64
 
 from emotional_os.deploy.modules.auth import SaoynxAuthentication
 from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
@@ -20,9 +22,33 @@ except Exception:
     HAS_LIMBIC = False
 
 # Page configuration
+# Attempt to inline the SVG as a data URI for the page icon so the icon
+# renders even if static asset requests are auth-gated in some deployments.
+
+
+def _build_page_icon_data_uri():
+    # Prefer a normalized SVG that has a clean viewBox and no odd offsets.
+    normalized = Path("static/graphics/FirstPerson-Logo-normalized.svg")
+    fallback = Path(
+        "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+    try:
+        if normalized.exists():
+            raw = normalized.read_bytes()
+            b64 = base64.b64encode(raw).decode("ascii")
+            return f"data:image/svg+xml;base64,{b64}"
+        if fallback.exists():
+            raw = fallback.read_bytes()
+            b64 = base64.b64encode(raw).decode("ascii")
+            return f"data:image/svg+xml;base64,{b64}"
+    except Exception:
+        # If reading fails, fall back to serving the static path by URL.
+        pass
+    return "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
+
+
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg",
+    page_icon=_build_page_icon_data_uri(),
     layout="wide",
     initial_sidebar_state="expanded"
 )
