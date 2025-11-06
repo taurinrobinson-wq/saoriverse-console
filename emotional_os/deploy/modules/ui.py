@@ -496,11 +496,13 @@ def render_main_app():
     svg_markup = _load_inline_svg(svg_name)
     try:
         st.markdown(f"""
-        <div class="brand-row">
-          <div class="brand-logo">{svg_markup}</div>
-          <div class="brand-text">
-            <div class="brand-title">FirstPerson - Personal AI Companion</div>
-            <div class="brand-subtitle">Your private space for emotional processing and growth</div>
+        <div class="brand-container">
+          <div class="brand-inner">
+            <div class="brand-logo">{svg_markup}</div>
+            <div class="brand-text">
+              <div class="brand-title">FirstPerson - Personal AI Companion</div>
+              <div class="brand-subtitle">Your private space for emotional processing and growth</div>
+            </div>
           </div>
         </div>
         """, unsafe_allow_html=True)
