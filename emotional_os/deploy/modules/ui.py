@@ -66,6 +66,15 @@ except Exception:
 
 def inject_css(css_file_path):
     try:
+        # First inject the logo constraints CSS
+        try:
+            with open("emotional_os/deploy/logo_constraints.css", "r") as f:
+                logo_css = f.read()
+            st.markdown(f"<style>{logo_css}</style>", unsafe_allow_html=True)
+        except Exception:
+            pass  # Non-fatal if logo constraints can't be loaded
+
+        # Then inject the requested CSS file
         with open(css_file_path, "r") as f:
             css = f.read()
         st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
