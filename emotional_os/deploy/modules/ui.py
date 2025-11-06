@@ -151,7 +151,7 @@ def render_splash_interface(auth):
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
         try:
-            st.image("graphics/FirstPerson-Logo.svg", width=200)
+            st.image("/static/graphics/FirstPerson-Logo.svg", width=200)
         except Exception:
             st.markdown('''
             <div style="font-size: 4rem;">🧠</div>
@@ -449,9 +449,9 @@ def render_main_app():
     inject_css(css_file)
     # Logo switching based on theme
     if theme == "Dark":
-        logo_path = "static/graphics/FirstPerson-Logo(invert-cropped_notext).svg"
+        logo_path = "/static/graphics/FirstPerson-Logo(invert-cropped_notext).svg"
     else:
-        logo_path = "static/graphics/FirstPerson-Logo(black-cropped_notext).svg"
+        logo_path = "/static/graphics/FirstPerson-Logo(black-cropped_notext).svg"
     # Render a responsive brand row (logo + title) using injected CSS
     try:
         st.markdown(f"""
