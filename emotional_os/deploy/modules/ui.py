@@ -210,6 +210,22 @@ def render_main_app():
         if 'conversation_manager' not in st.session_state:
             st.session_state['conversation_manager'] = ConversationManager(
                 st.session_state['user_id'])
+            # Attempt to load user preferences (persist settings) from server
+            try:
+                mgr = st.session_state.get('conversation_manager')
+                if mgr:
+                    prefs = mgr.load_user_preferences()
+                    # Only set defaults if session state doesn't already have them
+                    if prefs:
+                        if 'persist_history' not in st.session_state:
+                            st.session_state['persist_history'] = prefs.get(
+                                'persist_history', True)
+                        if 'persist_confirmed' not in st.session_state:
+                            st.session_state['persist_confirmed'] = prefs.get(
+                                'persist_confirmed', False)
+            except Exception:
+                # Best-effort: do not break UI if preferences cannot be loaded
+                pass
 
         # Initialize current conversation ID if not set
         if 'current_conversation_id' not in st.session_state:
@@ -230,6 +246,16 @@ def render_main_app():
             value=persist_default,
             help="Automatically save conversations for later retrieval"
         )
+        # Best-effort: persist the user's preference back to server when available
+        try:
+            mgr = st.session_state.get('conversation_manager')
+            if mgr:
+                mgr.save_user_preferences({
+                    'persist_history': bool(st.session_state.get('persist_history', False)),
+                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
+                })
+        except Exception:
+            pass
 
         # Privacy & Consent settings
         try:
@@ -426,18 +452,32 @@ def render_main_app():
         logo_path = "static/graphics/FirstPerson-Logo(invert-cropped_notext).svg"
     else:
         logo_path = "static/graphics/FirstPerson-Logo(black-cropped_notext).svg"
-    col1, col2 = st.columns([0.5, 8], gap="small")
-    with col1:
-        try:
-            st.image(logo_path, width=50)
-        except Exception:
-            st.markdown(
-                '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
-    with col2:
-        st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
-    st.markdown(
-        f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
-    st.markdown("*Your private space for emotional processing and growth*")
+    # Render a responsive brand row (logo + title) using injected CSS
+    try:
+        st.markdown(f"""
+        <div class="brand-row">
+          <div class="brand-logo">
+            <img src="{logo_path}" class="brand-img" alt="FirstPerson logo" />
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">FirstPerson - Personal AI Companion</div>
+            <div class="brand-subtitle">Your private space for emotional processing and growth</div>
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+    except Exception:
+        # Fallback to previous column layout if raw HTML rendering fails
+        col1, col2 = st.columns([0.5, 8], gap="small")
+        with col1:
+            try:
+                st.image(logo_path, width=50)
+            except Exception:
+                st.markdown(
+                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+        with col2:
+            st.markdown('<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
+        st.markdown(
+            f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
         st.write(f"Welcome back, **{st.session_state.username}**! 👋")
