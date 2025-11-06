@@ -22,6 +22,7 @@ AUTH_CONFIG = {
     "lockout_duration_minutes": 15
 }
 
+
 class AuthenticationManager:
     """Handles user authentication and session management"""
 
@@ -87,7 +88,8 @@ class AuthenticationManager:
 
         attempts = st.session_state.login_attempts[username]
         if attempts['count'] >= AUTH_CONFIG['max_login_attempts']:
-            lockout_time = attempts['last_attempt'] + timedelta(minutes=AUTH_CONFIG['lockout_duration_minutes'])
+            lockout_time = attempts['last_attempt'] + \
+                timedelta(minutes=AUTH_CONFIG['lockout_duration_minutes'])
             if datetime.now() < lockout_time:
                 return False
             # Reset attempts after lockout period
@@ -98,7 +100,8 @@ class AuthenticationManager:
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt"""
         if username not in st.session_state.login_attempts:
-            st.session_state.login_attempts[username] = {'count': 0, 'last_attempt': datetime.now()}
+            st.session_state.login_attempts[username] = {
+                'count': 0, 'last_attempt': datetime.now()}
 
         if success:
             # Reset attempts on successful login
@@ -107,7 +110,8 @@ class AuthenticationManager:
         else:
             # Increment failed attempts
             st.session_state.login_attempts[username]['count'] += 1
-            st.session_state.login_attempts[username]['last_attempt'] = datetime.now()
+            st.session_state.login_attempts[username]['last_attempt'] = datetime.now(
+            )
 
     def create_user(self, username: str, password: str, email: str = None) -> dict:
         """Create new user account"""
@@ -135,7 +139,8 @@ class AuthenticationManager:
 
             if response.status_code == 200:
                 return {"success": True, "message": "Account created successfully"}
-            error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
+            error_data = response.json() if response.headers.get(
+                'content-type', '').startswith('application/json') else {}
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
 
         except Exception as e:
@@ -174,7 +179,8 @@ class AuthenticationManager:
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
                     st.session_state.session_token = self.generate_session_token()
-                    st.session_state.session_expires = datetime.now() + timedelta(minutes=AUTH_CONFIG['session_timeout_minutes'])
+                    st.session_state.session_expires = datetime.now(
+                    ) + timedelta(minutes=AUTH_CONFIG['session_timeout_minutes'])
 
                     return {"success": True, "message": "Login successful", "user_id": data.get("user_id")}
                 # Failed authentication
@@ -203,8 +209,6 @@ class AuthenticationManager:
 
     def render_login_form(self):
         """Render login/registration form"""
-        st.title("🔐 Emotional OS - Secure Access")
-
         tab1, tab2 = st.tabs(["Login", "Register"])
 
         with tab1:
@@ -234,7 +238,8 @@ class AuthenticationManager:
                                 attempts = st.session_state.login_attempts[username]['count']
                                 remaining = AUTH_CONFIG['max_login_attempts'] - attempts
                                 if remaining <= 2:
-                                    st.warning(f"Warning: {remaining} attempts remaining before temporary lockout")
+                                    st.warning(
+                                        f"Warning: {remaining} attempts remaining before temporary lockout")
 
         with tab2:
             st.subheader("Create New Account")
@@ -242,8 +247,10 @@ class AuthenticationManager:
             with st.form("register_form"):
                 new_username = st.text_input("Choose Username")
                 new_email = st.text_input("Email (optional)")
-                new_password = st.text_input("Choose Password", type="password")
-                confirm_password = st.text_input("Confirm Password", type="password")
+                new_password = st.text_input(
+                    "Choose Password", type="password")
+                confirm_password = st.text_input(
+                    "Confirm Password", type="password")
                 register_submitted = st.form_submit_button("Register")
 
                 if register_submitted:
@@ -255,7 +262,8 @@ class AuthenticationManager:
                         st.error("Password must be at least 8 characters long")
                     else:
                         with st.spinner("Creating account..."):
-                            result = self.create_user(new_username, new_password, new_email)
+                            result = self.create_user(
+                                new_username, new_password, new_email)
 
                         if result["success"]:
                             st.success(result["message"])
@@ -292,6 +300,7 @@ class AuthenticationManager:
             if st.button("Logout", type="secondary"):
                 self.logout()
 
+
 def main():
     """Main application with authentication"""
     st.set_page_config(
@@ -317,7 +326,8 @@ def main():
 
     # Initialize conversation processor with user context
     if 'processor' not in st.session_state:
-        st.session_state.processor = create_hybrid_processor(limbic_engine=st.session_state.get('limbic_engine'))
+        st.session_state.processor = create_hybrid_processor(
+            limbic_engine=st.session_state.get('limbic_engine'))
 
     # User-specific conversation history
     conversation_key = f"conversation_history_{st.session_state.user_id}"
@@ -429,6 +439,7 @@ def main():
                 file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
                 mime="application/json"
             )
+
 
 if __name__ == "__main__":
     main()
