@@ -42,6 +42,19 @@ if 'initialized' not in st.session_state:
     st.session_state['theme'] = 'Light'
     st.session_state['theme_loaded'] = False
 
+    # Initialize learning persistence
+    st.session_state['learning_settings'] = {
+        'processing_mode': 'hybrid',  # Default to hybrid mode
+        'enable_learning': True,      # Enable learning by default
+        'persist_learning': True      # Enable persistence by default
+    }
+
+    # Create learning directories if they don't exist
+    import os
+    os.makedirs('learning/user_signals', exist_ok=True)
+    os.makedirs('learning/user_overrides', exist_ok=True)
+    os.makedirs('learning/conversation_glyphs', exist_ok=True)
+
 # Must be first Streamlit command
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
@@ -157,7 +170,8 @@ def main():
                 st.session_state['limbic_engine'] = LimbicIntegrationEngine()
                 st.session_state['limbic_initialized'] = True
             except Exception as e:
-                st.session_state['limbic_initialized'] = True  # Still mark as initialized to prevent retries
+                # Still mark as initialized to prevent retries
+                st.session_state['limbic_initialized'] = True
                 st.sidebar.error(f"Failed to initialize limbic engine: {e}")
 
     # Initialize authentication
