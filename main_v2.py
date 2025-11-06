@@ -34,18 +34,18 @@ def _build_page_icon_data_uri():
     except Exception:
         pass
 
-    normalized = Path("static/graphics/FirstPerson-Logo-normalized.svg")
+    original = Path("static/graphics/FirstPerson-Logo.svg")
     fallback = Path(
         "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
 
     try:
-        if normalized.exists():
+        if original.exists():
             # Create a size-constrained version of the SVG
-            svg_content = normalized.read_text()
-            # Add mandatory size constraints to SVG
+            svg_content = original.read_text()
+            # Add mandatory size constraints to SVG while preserving aspect ratio
             if '<svg' in svg_content and not 'style="width:50px' in svg_content:
                 svg_content = svg_content.replace(
-                    '<svg', '<svg style="width:50px;height:50px;max-width:50px;max-height:50px;"')
+                    '<svg', '<svg style="width:50px;height:auto;min-width:50px;"')
             raw = svg_content.encode('utf-8')
             b64 = base64.b64encode(raw).decode("ascii")
             return f"data:image/svg+xml;base64,{b64}"
