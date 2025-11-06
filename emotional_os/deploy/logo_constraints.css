@@ -1,5 +1,6 @@
 /* Global logo size constraints */
-.brand-logo svg {
+.brand-logo svg,
+.brand-logo img {
     width: 50px !important;
     height: 50px !important;
     max-width: 50px !important;
@@ -8,13 +9,13 @@
     margin-right: 10px !important;
 }
 
-.brand-logo img {
-    width: 50px !important;
-    height: 50px !important;
-    max-width: 50px !important;
-    max-height: 50px !important;
-    vertical-align: middle !important;
-    margin-right: 10px !important;
+/* Theme-specific logo styles */
+[data-theme="light"] .brand-logo svg {
+    filter: none !important;
+}
+
+[data-theme="dark"] .brand-logo svg {
+    filter: invert(1) !important;
 }
 
 /* Improve header layout */

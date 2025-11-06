@@ -27,21 +27,17 @@ except Exception:
 
 
 def _build_page_icon_data_uri():
-    # Prefer a normalized SVG that has a clean viewBox and no odd offsets.
+    # Use the appropriate logo based on theme
     try:
-        # We'll load CSS after page config to avoid Streamlit errors
-        pass
-    except Exception:
-        pass
+        light_mode = Path(
+            "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+        dark_mode = Path(
+            "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
 
-    original = Path("static/graphics/FirstPerson-Logo.svg")
-    fallback = Path(
-        "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
-
-    try:
-        if original.exists():
-            # Create a size-constrained version of the SVG
-            svg_content = original.read_text()
+        # Default to light mode logo
+        logo_path = light_mode if light_mode.exists() else dark_mode
+        if logo_path.exists():
+            svg_content = logo_path.read_text()
             # Add mandatory size constraints to SVG while preserving aspect ratio
             if '<svg' in svg_content and not 'style="width:50px' in svg_content:
                 svg_content = svg_content.replace(
@@ -49,17 +45,8 @@ def _build_page_icon_data_uri():
             raw = svg_content.encode('utf-8')
             b64 = base64.b64encode(raw).decode("ascii")
             return f"data:image/svg+xml;base64,{b64}"
-        if fallback.exists():
-            # Same size constraints for fallback
-            svg_content = fallback.read_text()
-            if '<svg' in svg_content and not 'style="width:50px' in svg_content:
-                svg_content = svg_content.replace(
-                    '<svg', '<svg style="width:50px;height:50px;max-width:50px;max-height:50px;"')
-            raw = svg_content.encode('utf-8')
-            b64 = base64.b64encode(raw).decode("ascii")
-            return f"data:image/svg+xml;base64,{b64}"
     except Exception:
-        # If reading fails, fall back to serving the static path by URL.
+        # If reading fails, fall back to serving the static path by URL for light mode
         pass
     return "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
 
