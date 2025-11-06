@@ -1,37 +1,62 @@
 /* --- Minimal expander and settings area --- */
-.stExpander, .stExpanderHeader {
+.stExpander,
+.stExpanderHeader {
     font-size: 0.92rem !important;
     padding: 0.2rem 0.7rem 0.2rem 0.7rem !important;
 }
+
 .stExpanderContent {
     padding: 0.3rem 0.5rem 0.3rem 0.5rem !important;
 }
-.stExpander .stSelectbox, .stExpander .stCheckbox, .stExpander .stButton, .stExpander .stDownloadButton {
+
+.stExpander .stSelectbox,
+.stExpander .stCheckbox,
+.stExpander .stButton,
+.stExpander .stDownloadButton {
     margin-bottom: 0.2rem !important;
     font-size: 0.92rem !important;
 }
-.stExpander .stCaption, .stExpander .stMarkdown {
+
+.stExpander .stCaption,
+.stExpander .stMarkdown {
     font-size: 0.88rem !important;
     margin-bottom: 0.1rem !important;
 }
+
 .stExpander .stMetric {
     font-size: 0.85rem !important;
     margin-bottom: 0.1rem !important;
 }
-.stExpander .stButton > button {
+
+.stExpander .stButton>button {
     max-width: 120px;
     height: 28px;
     font-size: 0.85rem !important;
     padding: 2px 8px;
 }
-.stExpander .stSelectbox > div > div {
+
+.stExpander .stSelectbox>div>div {
     min-height: 28px !important;
 }
+
 /* Hide Streamlit default elements */
-.stDeployButton {display: none;}
-header[data-testid="stHeader"] {display: none;}
-.stMainBlockContainer {padding-top: 1rem;}
-.main .block-container {padding-top: 1rem; padding-bottom: 1rem;}
+.stDeployButton {
+    display: none;
+}
+
+header[data-testid="stHeader"] {
+    display: none;
+}
+
+.stMainBlockContainer {
+    padding-top: 1rem;
+}
+
+.main .block-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
 /* Main container - professional centering */
 .main-splash {
     position: absolute;
@@ -43,13 +68,15 @@ header[data-testid="stHeader"] {display: none;}
     padding: 2rem;
     text-align: center;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
+
 /* Logo section */
 .logo-section {
     margin-bottom: 1rem;
     width: 100%;
 }
+
 .logo-text {
     font-size: 2rem;
     font-weight: 300;
@@ -59,6 +86,7 @@ header[data-testid="stHeader"] {display: none;}
     font-family: 'Arial', sans-serif;
     text-align: center;
 }
+
 .logo-subtitle {
     font-size: 1rem;
     color: #666;
@@ -68,22 +96,26 @@ header[data-testid="stHeader"] {display: none;}
     line-height: 1.2;
     text-align: center;
 }
+
 /* Auth sections - tight compact layout */
 .auth-container {
     margin: 0.5rem 0;
 }
+
 .auth-question {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 0.3rem;
     text-align: center;
 }
+
 .auth-title {
     font-size: 1.1rem;
     color: #2E2E2E;
     margin-bottom: 1rem;
     font-weight: 300;
 }
+
 /* Form container centering - compact */
 .form-container {
     max-width: 350px;
@@ -91,8 +123,9 @@ header[data-testid="stHeader"] {display: none;}
     padding: 1rem;
     text-align: center;
 }
+
 /* Form styling - ultra tight spacing */
-.stTextInput > div > div > input {
+.stTextInput>div>div>input {
     border-radius: 30px;
     border: 2px solid #ddd;
     padding: 6px 12px;
@@ -101,22 +134,26 @@ header[data-testid="stHeader"] {display: none;}
     height: 30px;
     line-height: 0.6;
 }
+
 /* Minimal form spacing */
 .stTextInput {
     margin-bottom: 0.1rem;
     line-height: 0.6;
 }
+
 /* Compact form layout */
-.stTextInput > label {
+.stTextInput>label {
     margin-bottom: 0.1rem !important;
     line-height: 0.6;
 }
-.stTextInput > div > div > input:focus {
+
+.stTextInput>div>div>input:focus {
     border-color: #666;
     box-shadow: 0 0 0 1px #666;
 }
+
 /* Professional button styling */
-.stButton > button {
+.stButton>button {
     width: 100%;
     max-width: 140px;
     height: 35px;
@@ -132,13 +169,15 @@ header[data-testid="stHeader"] {display: none;}
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-.stButton > button:hover {
+
+.stButton>button:hover {
     background-color: white;
     color: #2E2E2E;
     border-color: #2E2E2E;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(46, 46, 46, 0.2);
 }
+
 /* Quick access - clean divider */
 .quick-access {
     margin-top: 2rem;
@@ -146,6 +185,7 @@ header[data-testid="stHeader"] {display: none;}
     border-top: 1px solid #ddd;
     text-align: center;
 }
+
 .quick-title {
     color: #999;
     font-size: 0.8rem;
@@ -154,3 +194,70 @@ header[data-testid="stHeader"] {display: none;}
     letter-spacing: 1px;
 }
 
+/* Responsive brand row for top header */
+.brand-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.brand-logo {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brand-img {
+    width: 64px;
+    height: auto;
+    max-width: 64px;
+}
+
+.brand-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    /* allow text truncation when needed */
+}
+
+.brand-title {
+    font-size: 1.6rem;
+    font-weight: 300;
+    margin: 0;
+    color: #2E2E2E;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.1rem;
+}
+
+/* Small screens: stack and scale down sensibly */
+@media (max-width: 640px) {
+    .brand-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+
+    .brand-img {
+        width: 48px;
+        max-width: 48px;
+    }
+
+    .brand-title {
+        font-size: 1.25rem;
+        white-space: normal;
+    }
+
+    .brand-subtitle {
+        font-size: 0.85rem;
+    }
+}

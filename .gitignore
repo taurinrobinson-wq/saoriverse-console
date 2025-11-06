@@ -66,3 +66,7 @@ logs/
 htmlcov/
 .pytest_cache/
 coverage.xml
+
+# Packaging artifacts
+*.whl
+pip-ephem-wheel-cache/

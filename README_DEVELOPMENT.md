@@ -41,3 +41,34 @@ streamlit run main_v2.py
 2. **UI Changes**: Make UI modifications in `emotional_os/deploy/modules/ui.py`
 3. **Testing**: Test changes by running through `main_v2.py`
 4. **Documentation**: Update this guide when making architectural changes
+
+## Local preprocessor sample taxonomy and tests
+
+We include a conservative sample taxonomy used by the local preprocessor for development and unit tests:
+
+- `local_inference/emotional_taxonomy_sample.json` — contains a small set of canonical tags and embedded `escalation_tiers` used by tests.
+
+Public audit API:
+
+- `local_inference.preprocessor.Preprocessor.record_audit(payload)` — write a minimal audit entry. The audit entry will include `kind: preprocessor_audit`, the provided payload under `payload`, `taxonomy_source`, and `test_mode`.
+
+How to run tests:
+
+```bash
+# activate the virtualenv in the project root (if present)
+source .venv/bin/activate
+pip install -r requirements.txt  # ensure test deps available
+pytest -q
+```
+
+The tests added here exercise escalation logic and ensure `record_audit` writes a minimal log entry. When you provide the canonical `emotional_taxonomy.json` we can update the taxonomy and expand tests to match the editorial schema.
+
+## CI badge
+
+Fast preprocessor test feedback is available via GitHub Actions. Add the following badge to your repository README (or keep it here) to show the latest status for the focused preprocessor workflow:
+
+```
+![Preprocessor tests](https://github.com/taurinrobinson-wq/saoriverse-console/actions/workflows/preprocessor-tests.yml/badge.svg)
+```
+
+Note: the badge will display correctly once the workflow has run at least once on the repository (e.g., after a PR or a push). The workflow is configured to run on pull requests and executes only `tests/test_preprocessor.py` for fast feedback.
