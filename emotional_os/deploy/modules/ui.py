@@ -66,18 +66,57 @@ except Exception:
 
 def inject_css(css_file_path):
     try:
+        def safely_inject_css(content, source):
+            # Ensure we're only injecting CSS content
+            if '<script' not in content.lower():
+                st.markdown(
+                    f'''
+                    <style>
+                        /* From {source} */
+                        {content}
+                    </style>
+                    ''',
+                    unsafe_allow_html=True
+                )
+                return True
+            return False
+
         # First inject the logo constraints CSS
         try:
             with open("emotional_os/deploy/logo_constraints.css", "r") as f:
                 logo_css = f.read()
-            st.markdown(f"<style>{logo_css}</style>", unsafe_allow_html=True)
+                safely_inject_css(logo_css, "logo_constraints.css")
         except Exception:
             pass  # Non-fatal if logo constraints can't be loaded
 
         # Then inject the requested CSS file
         with open(css_file_path, "r") as f:
             css = f.read()
-        st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+            if not safely_inject_css(css, css_file_path):
+                logger.warning(
+                    f"Skipped injecting CSS from {css_file_path} due to potentially unsafe content")
+
+        # Add theme change observer
+        st.markdown("""
+            <script>
+                window.addEventListener('load', function() {
+                    setTimeout(function() {
+                        const observer = new MutationObserver(function(mutations) {
+                            mutations.forEach(function(mutation) {
+                                if (mutation.target.classList && 
+                                    (mutation.target.classList.contains('stSelectbox') || 
+                                     mutation.target.classList.contains('stMarkdown'))) {
+                                    // Ensure all elements are visible and styled correctly after theme change
+                                    document.body.style.visibility = 'visible';
+                                }
+                            });
+                        });
+                        observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+                    }, 100);
+                });
+            </script>
+        """, unsafe_allow_html=True)
+
     except FileNotFoundError:
         st.warning(f"CSS file not found: {css_file_path}")
     except Exception as e:

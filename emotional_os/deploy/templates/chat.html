@@ -555,8 +555,15 @@
         // Render messages in chat
         function renderMessages() {
             const messagesContainer = document.getElementById('chat-messages');
-            if (!messagesContainer) return; // defensive: nothing to render into
-            const existingMessages = messagesContainer.querySelectorAll('.message:not(.welcome)');
+            if (!messagesContainer) {
+                console.warn('Chat messages container not found');
+                return;
+            }
+            
+            // Delay DOM operations slightly to allow for theme switch completion
+            setTimeout(() => {
+                try {
+                    const existingMessages = messagesContainer.querySelectorAll('.message:not(.welcome)');
 
             // Remove existing conversation messages (keep welcome message)
             existingMessages.forEach(msg => msg.remove());
