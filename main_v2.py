@@ -36,9 +36,11 @@ def get_page_icon():
     return None
 
 
-# Initialize theme in session state if not set
-if 'theme' not in st.session_state:
+# Initialize session state
+if 'initialized' not in st.session_state:
+    st.session_state['initialized'] = True
     st.session_state['theme'] = 'Light'
+    st.session_state['theme_loaded'] = False
 
 # Must be first Streamlit command
 st.set_page_config(
@@ -47,35 +49,31 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-# Apply theme-specific styles
-if st.session_state.get('theme') == 'Dark':
-    st.markdown("""
-        <style>
-        body, .stApp {
-            background-color: #0E1117;
-            color: #FAFAFA;
-        }
-        .stButton>button {
-            background-color: #262730;
-            color: #FAFAFA;
-            border: 1px solid #555;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-        <style>
-        body, .stApp {
-            background-color: #FFFFFF;
-            color: #31333F;
-        }
-        .stButton>button {
-            background-color: #F0F2F6;
-            color: #31333F;
-            border: 1px solid #E0E0E0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+# Apply theme only if not already loaded for this session
+if not st.session_state.get('theme_loaded'):
+    if st.session_state.get('theme') == 'Dark':
+        st.markdown("""
+            <style>
+            body, .stApp {background-color: #0E1117; color: #FAFAFA;}
+            .stButton>button {
+                background-color: #262730;
+                color: #FAFAFA;
+                border: 1px solid #555;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+            <style>
+            body, .stApp {background-color: #FFFFFF; color: #31333F;}
+            .stButton>button {
+                background-color: #F0F2F6;
+                color: #31333F;
+                border: 1px solid #E0E0E0;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+    st.session_state['theme_loaded'] = True
 
 # Basic theme compatibility
 st.markdown("""
@@ -151,15 +149,16 @@ def main():
                 'edit_log': ['preprocessor_failed']
             }
 
-    # Initialize limbic engine if available — now enabled by default and not user-toggled
-    st.session_state['enable_limbic'] = True
-    if HAS_LIMBIC and LimbicIntegrationEngine is not None and 'limbic_engine' not in st.session_state:
-        try:
-            st.session_state['limbic_engine'] = LimbicIntegrationEngine()
-            # note: we intentionally do not expose a toggle to the user
-        except Exception as e:
-            # non-fatal: record error in sidebar for visibility
-            st.sidebar.error(f"Failed to initialize limbic engine: {e}")
+    # Initialize limbic engine if needed and not already done
+    if not st.session_state.get('limbic_initialized'):
+        st.session_state['enable_limbic'] = True
+        if HAS_LIMBIC and LimbicIntegrationEngine is not None and 'limbic_engine' not in st.session_state:
+            try:
+                st.session_state['limbic_engine'] = LimbicIntegrationEngine()
+                st.session_state['limbic_initialized'] = True
+            except Exception as e:
+                st.session_state['limbic_initialized'] = True  # Still mark as initialized to prevent retries
+                st.sidebar.error(f"Failed to initialize limbic engine: {e}")
 
     # Initialize authentication
     auth = SaoynxAuthentication()
