@@ -263,10 +263,11 @@ button[title*="Start Personal Log"]:hover {
 }
 
 .brand-inner {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 1rem;
     margin: 0;
+    white-space: nowrap;
     padding: 0;
 }
 
