@@ -43,33 +43,36 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Simple header with logo and title
-header_left, header_right = st.columns([1, 5])
-
-with header_left:
-    try:
-        logo_path = Path(
-            "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
-        if logo_path.exists():
-            st.image(str(logo_path), width=50)
-    except Exception:
-        pass
-
-with header_right:
-    st.header("FirstPerson – Personal AI Companion")
-
-# Basic theme compatibility (no JavaScript needed)
+# Basic theme compatibility
 st.markdown("""
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
     </style>
 """, unsafe_allow_html=True)
-# Fallback to simple title if logo loading fails
-st.title("FirstPerson – Personal AI Companion")
+
+
+def render_header():
+    """Render the app header with logo and title. Should only be called once."""
+    header_left, header_right = st.columns([1, 5])
+
+    with header_left:
+        try:
+            logo_path = Path(
+                "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+            if logo_path.exists():
+                st.image(str(logo_path), width=50)
+        except Exception:
+            pass
+
+    with header_right:
+        st.header("FirstPerson – Personal AI Companion")
 
 
 def main():
+    # Render header once at the start
+    render_header()
+
     # Initialize local preprocessor if available. Use test_mode=True by default so
     # it won't attempt large model loads in environments without GPU. Change to
     # test_mode=False in production with a GPU-backed host.
