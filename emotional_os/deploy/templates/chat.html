@@ -5,12 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FirstPerson - Personal AI Companion</title>
-    <link rel="icon" type="image/svg+xml" href="/static/graphics/FirstPerson-Logo.svg">
+    <link rel="icon" type="image/svg+xml" href="/static/graphics/FirstPerson-Logo-normalized.svg">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Constrain FirstPerson normalized SVGs to prevent oversized rendering */
+        img[src*="FirstPerson-Logo-normalized.svg"],
+        svg[data-logo="firstperson"],
+        .message-avatar img[src*="FirstPerson-Logo-normalized.svg"] {
+            max-width: 120px !important;
+            width: auto !important;
+            height: auto !important;
+            display: inline-block;
         }
 
         body {
@@ -325,7 +335,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <img src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson" class="header-logo"
+                <img src="/static/graphics/FirstPerson-Logo-normalized.svg" alt="FirstPerson" class="header-logo"
                     onerror="this.style.display='none'">
                 <div>
                     <h1 class="header-title">FirstPerson - Personal AI Companion</h1>
@@ -355,8 +365,7 @@
                 <!-- Chat Messages -->
                 <div class="chat-messages" id="chat-messages">
                     <div class="message assistant">
-                        <div class="message-avatar"><img
-                                src="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg" alt="FP"
+                        <div class="message-avatar"><img src="/static/graphics/FirstPerson-Logo-normalized.svg" alt="FP"
                                 style="width:24px;height:24px;" onerror="this.style.display='none'"></div>
                         <div class="message-content">
                             Welcome to FirstPerson! I'm here to listen and help you process your emotions. Share what
@@ -527,6 +536,7 @@
         // Render messages in chat
         function renderMessages() {
             const messagesContainer = document.getElementById('chat-messages');
+            if (!messagesContainer) return; // defensive: nothing to render into
             const existingMessages = messagesContainer.querySelectorAll('.message:not(.welcome)');
 
             // Remove existing conversation messages (keep welcome message)
@@ -541,7 +551,16 @@
                 if (exchange.type === 'user') {
                     avatar.textContent = '👤';
                 } else {
-                    avatar.innerHTML = '<img src="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg" style="width:20px;height:20px;" alt="FP" onerror="this.style.display=\'none\'">';
+                    // Create image element instead of using innerHTML to avoid
+                    // passing HTML strings into DOM helpers which can cause
+                    // type errors in some runtimes when re-rendering (theme toggle)
+                    const img = document.createElement('img');
+                    img.src = '/static/graphics/FirstPerson-Logo-normalized.svg';
+                    img.alt = 'FP';
+                    img.style.width = '20px';
+                    img.style.height = '20px';
+                    img.onerror = function () { this.style.display = 'none'; };
+                    avatar.appendChild(img);
                 }
 
                 const content = document.createElement('div');

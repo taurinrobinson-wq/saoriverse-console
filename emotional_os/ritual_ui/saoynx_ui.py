@@ -13,7 +13,7 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="SAOYNX - AI Emotional Interfaces",
-    page_icon="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg",
+    page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -293,7 +293,7 @@ class SaoynxAuthentication:
             try:
                 # Prefer using bundled logo; fallback to text if unavailable
                 st.image(
-                    "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg", width=200)
+                    "/static/graphics/FirstPerson-Logo-normalized.svg", width=120)
             except Exception:
                 st.markdown('''
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
@@ -313,8 +313,18 @@ class SaoynxAuthentication:
 
             # Tight, compact button layout
             col1, col2, col3 = st.columns([1, 2, 1])
+
+            # Small logo column (left)
+            with col1:
+                try:
+                    st.image(
+                        "/static/graphics/FirstPerson-Logo-normalized.svg", width=40)
+                except Exception:
+                    st.markdown(
+                        '<div style="font-size: 1.5rem;">🧠</div>', unsafe_allow_html=True)
+
+            # Center column: questions and action buttons
             with col2:
-                # Questions closer together
                 qcol1, qcol2 = st.columns([1, 1], gap="small")
                 with qcol1:
                     st.markdown(

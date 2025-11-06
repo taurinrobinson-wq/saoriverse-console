@@ -20,6 +20,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+
 class AdminAuthentication:
     """Admin-specific authentication system"""
 
@@ -52,7 +53,8 @@ class AdminAuthentication:
                 return {"success": False, "message": "Access denied: Not an admin user"}
 
             # Use the same auth endpoint but check admin status
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -129,17 +131,21 @@ class AdminAuthentication:
             st.subheader("Admin Access Required")
 
             with st.form("admin_login"):
-                username = st.text_input("Admin Username", placeholder="Enter admin username")
-                password = st.text_input("Admin Password", type="password", placeholder="Enter admin password")
+                username = st.text_input(
+                    "Admin Username", placeholder="Enter admin username")
+                password = st.text_input(
+                    "Admin Password", type="password", placeholder="Enter admin password")
 
-                login_submitted = st.form_submit_button("Access Admin Portal", use_container_width=True)
+                login_submitted = st.form_submit_button(
+                    "Access Admin Portal", use_container_width=True)
 
                 if login_submitted:
                     if not username or not password:
                         st.error("Please enter both username and password")
                     else:
                         with st.spinner("Verifying admin credentials..."):
-                            result = self.authenticate_admin(username, password)
+                            result = self.authenticate_admin(
+                                username, password)
 
                         if result["success"]:
                             st.success("Welcome to Admin Portal!")
@@ -152,6 +158,7 @@ class AdminAuthentication:
 
             # Security notice
             st.info("🔒 This portal is restricted to authorized administrators only")
+
 
 class AdminDashboard:
     """Main admin dashboard functionality"""
@@ -184,10 +191,14 @@ class AdminDashboard:
         # This would query your user database
         # Mock data for demonstration
         return [
-            {"username": "john_doe", "created": "2025-10-10", "last_active": "2025-10-15", "conversations": 23, "status": "active"},
-            {"username": "jane_smith", "created": "2025-10-12", "last_active": "2025-10-15", "conversations": 8, "status": "active"},
-            {"username": "demo_user", "created": "2025-10-15", "last_active": "2025-10-15", "conversations": 45, "status": "demo"},
-            {"username": "test_user", "created": "2025-10-13", "last_active": "2025-10-14", "conversations": 2, "status": "inactive"}
+            {"username": "john_doe", "created": "2025-10-10",
+                "last_active": "2025-10-15", "conversations": 23, "status": "active"},
+            {"username": "jane_smith", "created": "2025-10-12",
+                "last_active": "2025-10-15", "conversations": 8, "status": "active"},
+            {"username": "demo_user", "created": "2025-10-15",
+                "last_active": "2025-10-15", "conversations": 45, "status": "demo"},
+            {"username": "test_user", "created": "2025-10-13",
+                "last_active": "2025-10-14", "conversations": 2, "status": "inactive"}
         ]
 
     def render_header(self):
@@ -196,13 +207,15 @@ class AdminDashboard:
 
         with col1:
             try:
-                st.image("graphics/FirstPerson-Logo.svg", width=50)
+                st.image(
+                    "/static/graphics/FirstPerson-Logo-normalized.svg", width=40)
             except Exception:
                 st.markdown("⚙️", unsafe_allow_html=True)
 
         with col2:
             st.markdown("# FirstPerson Admin Portal")
-            st.markdown(f"*Welcome, **{st.session_state.admin_username}** • Role: {st.session_state.admin_role}*")
+            st.markdown(
+                f"*Welcome, **{st.session_state.admin_username}** • Role: {st.session_state.admin_role}*")
 
         with col3:
             if st.button("🚪 Logout", help="Logout from admin portal"):
@@ -223,9 +236,11 @@ class AdminDashboard:
         with col2:
             st.metric("Active Sessions", stats["active_sessions"], delta="+2")
         with col3:
-            st.metric("Conversations Today", stats["conversations_today"], delta="+12%")
+            st.metric("Conversations Today",
+                      stats["conversations_today"], delta="+12%")
         with col4:
-            st.metric("Avg Response Time", f"{stats['avg_response_time']}s", delta="-0.2s")
+            st.metric("Avg Response Time",
+                      f"{stats['avg_response_time']}s", delta="-0.2s")
 
         # Additional stats
         col5, col6, col7, col8 = st.columns(4)
@@ -249,7 +264,8 @@ class AdminDashboard:
             response_times = [2.1, 2.3, 1.9, 2.5, 2.2, 2.0, 2.4, 2.1, 1.8, 2.3]
             hours = list(range(len(response_times)))
 
-            fig = px.line(x=hours, y=response_times, title="Response Time (Last 10 Hours)")
+            fig = px.line(x=hours, y=response_times,
+                          title="Response Time (Last 10 Hours)")
             fig.update_xaxes(title="Hours Ago")
             fig.update_yaxes(title="Response Time (seconds)")
             st.plotly_chart(fig, use_container_width=True)
@@ -258,7 +274,8 @@ class AdminDashboard:
             # Mock conversation volume data
             conversation_data = [12, 18, 25, 31, 28, 35, 42, 38, 29, 33]
 
-            fig = px.bar(x=hours, y=conversation_data, title="Conversation Volume (Last 10 Hours)")
+            fig = px.bar(x=hours, y=conversation_data,
+                         title="Conversation Volume (Last 10 Hours)")
             fig.update_xaxes(title="Hours Ago")
             fig.update_yaxes(title="Conversations")
             st.plotly_chart(fig, use_container_width=True)
@@ -289,17 +306,21 @@ class AdminDashboard:
         col1, col2, col3 = st.columns([2, 1, 1])
 
         with col1:
-            search_term = st.text_input("🔍 Search Users", placeholder="Enter username...")
+            search_term = st.text_input(
+                "🔍 Search Users", placeholder="Enter username...")
         with col2:
-            status_filter = st.selectbox("Status Filter", ["All", "active", "inactive", "demo"])
+            status_filter = st.selectbox(
+                "Status Filter", ["All", "active", "inactive", "demo"])
         with col3:
-            sort_by = st.selectbox("Sort By", ["username", "created", "last_active", "conversations"])
+            sort_by = st.selectbox(
+                "Sort By", ["username", "created", "last_active", "conversations"])
 
         # Filter data
         filtered_df = df.copy()
 
         if search_term:
-            filtered_df = filtered_df[filtered_df['username'].str.contains(search_term, case=False)]
+            filtered_df = filtered_df[filtered_df['username'].str.contains(
+                search_term, case=False)]
 
         if status_filter != "All":
             filtered_df = filtered_df[filtered_df['status'] == status_filter]
@@ -465,10 +486,14 @@ class AdminDashboard:
         st.markdown("### API Service Status")
 
         api_services = [
-            {"name": "Supabase Auth", "status": "operational", "uptime": "99.9%", "last_check": "2 min ago"},
-            {"name": "Saori AI Engine", "status": "operational", "uptime": "99.7%", "last_check": "1 min ago"},
-            {"name": "OpenAI API", "status": "degraded", "uptime": "98.2%", "last_check": "5 min ago"},
-            {"name": "Supabase Database", "status": "operational", "uptime": "99.9%", "last_check": "30 sec ago"}
+            {"name": "Supabase Auth", "status": "operational",
+                "uptime": "99.9%", "last_check": "2 min ago"},
+            {"name": "Saori AI Engine", "status": "operational",
+                "uptime": "99.7%", "last_check": "1 min ago"},
+            {"name": "OpenAI API", "status": "degraded",
+                "uptime": "98.2%", "last_check": "5 min ago"},
+            {"name": "Supabase Database", "status": "operational",
+                "uptime": "99.9%", "last_check": "30 sec ago"}
         ]
 
         for service in api_services:
@@ -490,11 +515,13 @@ class AdminDashboard:
         # API Configuration
         st.markdown("### 🔧 API Configuration")
 
-        tab1, tab2, tab3 = st.tabs(["🤖 AI APIs", "🖼️ Image APIs", "📄 Document APIs"])
+        tab1, tab2, tab3 = st.tabs(
+            ["🤖 AI APIs", "🖼️ Image APIs", "📄 Document APIs"])
 
         with tab1:
             st.markdown("#### OpenAI Configuration")
-            openai_enabled = st.checkbox("Enable OpenAI Integration", value=True)
+            openai_enabled = st.checkbox(
+                "Enable OpenAI Integration", value=True)
             if openai_enabled:
                 openai_model = st.selectbox("Default Model", ["gpt-4", "gpt-3.5-turbo", "gpt-4-turbo"])  # noqa: F841  # used for UI state
                 openai_max_tokens = st.slider("Max Tokens", 100, 4000, 1000)  # noqa: F841  # used for UI state
@@ -504,7 +531,8 @@ class AdminDashboard:
             st.markdown("#### Image Generation APIs")
 
             # DALL-E Configuration
-            dalle_enabled = st.checkbox("Enable DALL-E Integration", value=False)
+            dalle_enabled = st.checkbox(
+                "Enable DALL-E Integration", value=False)
             if dalle_enabled:
                 dalle_model = st.selectbox("DALL-E Model", ["dall-e-3", "dall-e-2"])  # noqa: F841  # used for UI state
                 dalle_quality = st.selectbox("Image Quality", ["standard", "hd"])  # noqa: F841  # used for UI state
@@ -517,11 +545,13 @@ class AdminDashboard:
                 sd_guidance = st.slider("Guidance Scale", 1.0, 20.0, 7.5, 0.5)  # noqa: F841  # used for UI state
 
             # Replicate Configuration
-            replicate_enabled = st.checkbox("Enable Replicate APIs", value=False)
+            replicate_enabled = st.checkbox(
+                "Enable Replicate APIs", value=False)
             if replicate_enabled:
                 st.multiselect(
                     "Available Models",
-                    ["ControlNet", "Real-ESRGAN", "Sketch-to-Image", "Style Transfer"],
+                    ["ControlNet", "Real-ESRGAN",
+                        "Sketch-to-Image", "Style Transfer"],
                     default=["ControlNet"]
                 )
 
@@ -539,7 +569,8 @@ class AdminDashboard:
             if docx_enabled:
                 template_formats = st.multiselect(  # noqa: F841  # used for UI state
                     "Template Formats",
-                    ["Emotional Report", "Glyph Analysis", "User Summary", "Progress Report"],
+                    ["Emotional Report", "Glyph Analysis",
+                        "User Summary", "Progress Report"],
                     default=["Emotional Report"]
                 )
 
@@ -548,7 +579,8 @@ class AdminDashboard:
             if excel_enabled:
                 excel_features = st.multiselect(  # noqa: F841  # used for UI state
                     "Excel Features",
-                    ["Glyph Matrices", "User Analytics", "Conversation Logs", "System Reports"],
+                    ["Glyph Matrices", "User Analytics",
+                        "Conversation Logs", "System Reports"],
                     default=["User Analytics"]
                 )
 
@@ -556,6 +588,7 @@ class AdminDashboard:
         if st.button("💾 Save API Configuration", type="primary"):
             st.success("✅ API configuration saved!")
             st.info("🔄 Some changes may require system restart to take effect")
+
 
 def main():
     """Main admin portal entry point"""
@@ -597,7 +630,8 @@ def main():
 
         page = st.radio(
             "Select Page",
-            ["📊 System Overview", "👥 User Management", "⚙️ System Config", "🔌 API Management"],
+            ["📊 System Overview", "👥 User Management",
+                "⚙️ System Config", "🔌 API Management"],
             label_visibility="collapsed"
         )
 
@@ -631,6 +665,7 @@ def main():
         dashboard.render_system_config()
     elif page == "🔌 API Management":
         dashboard.render_api_management()
+
 
 if __name__ == "__main__":
     main()

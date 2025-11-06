@@ -15,7 +15,7 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="Emotional OS",
-    page_icon="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg",
+    page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
     initial_sidebar_state="expanded"
 )

@@ -40,24 +40,31 @@ def analyze_logo():
             # Find the bounding box of non-transparent pixels
             non_transparent = np.where(alpha_channel > 0)
             if len(non_transparent[0]) > 0:
-                min_y, max_y = non_transparent[0].min(), non_transparent[0].max()
-                min_x, max_x = non_transparent[1].min(), non_transparent[1].max()
-                print(f"📦 Content bounding box: ({min_x}, {min_y}) to ({max_x}, {max_y})")
-                print(f"📦 Content size: {max_x - min_x + 1} x {max_y - min_y + 1}")
+                min_y, max_y = non_transparent[0].min(
+                ), non_transparent[0].max()
+                min_x, max_x = non_transparent[1].min(
+                ), non_transparent[1].max()
+                print(
+                    f"📦 Content bounding box: ({min_x}, {min_y}) to ({max_x}, {max_y})")
+                print(
+                    f"📦 Content size: {max_x - min_x + 1} x {max_y - min_y + 1}")
 
     # Check for common colors
     rgb_array = img_array[:, :, :3]
-    unique_colors = np.unique(rgb_array.reshape(-1, rgb_array.shape[2]), axis=0)
+    unique_colors = np.unique(
+        rgb_array.reshape(-1, rgb_array.shape[2]), axis=0)
     print(f"🎨 Number of unique colors: {len(unique_colors)}")
 
     if len(unique_colors) <= 20:  # Simple logo with few colors
         print("🎯 This appears to be a simple logo suitable for SVG conversion")
         print("🎨 Main colors found:")
         for i, color in enumerate(unique_colors[:10]):  # Show first 10 colors
-            hex_color = '#{:02x}{:02x}{:02x}'.format(color[0], color[1], color[2])
+            hex_color = '#{:02x}{:02x}{:02x}'.format(
+                color[0], color[1], color[2])
             print(f"   Color {i+1}: RGB{tuple(color)} = {hex_color}")
 
     return img
+
 
 def create_simple_svg():
     """Create a simple SVG version based on the FirstPerson branding"""
@@ -121,7 +128,7 @@ def create_simple_svg():
 </svg>'''
 
     # Save the SVG
-    svg_path = "graphics/FirstPerson-Logo.svg"
+    svg_path = "graphics/FirstPerson-Logo-normalized.svg"
     with open(svg_path, 'w', encoding='utf-8') as f:
         f.write(svg_content)
 
@@ -130,6 +137,7 @@ def create_simple_svg():
     print("🎨 Features professional gradient and neural network design")
 
     return svg_path
+
 
 if __name__ == "__main__":
     print("🧠 FirstPerson Logo Conversion Tool")

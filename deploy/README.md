@@ -79,7 +79,7 @@ Step-by-step
    causes 404s.
 
    Fixes:
-   - Use absolute paths for static assets in Streamlit templates, e.g. `/static/graphics/FirstPerson-Logo.svg`.
+  - Use absolute paths for static assets in Streamlit templates, e.g. `/static/graphics/FirstPerson-Logo-normalized.svg`.
      We updated the app to reference `/static/...` so the browser fetches assets from the public root instead of `/app`.
    - Ensure Nginx `location /static/` serves the `static/` folder and has correct MIME types (Nginx does this by default).
    - If SVGs are still served with incorrect content-type, add in the nginx conf inside `http {}`:

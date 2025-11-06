@@ -496,7 +496,7 @@ def main():
     col1, col2 = st.columns([1, 6])
     with col1:
         try:
-            st.image("/static/graphics/FirstPerson-Logo.svg", width=50)
+            st.image("/static/graphics/FirstPerson-Logo-normalized.svg", width=40)
         except Exception:
             st.markdown("🔌")
     with col2:
