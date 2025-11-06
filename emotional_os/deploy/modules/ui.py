@@ -1117,27 +1117,54 @@ def render_main_app():
                 learner = get_hybrid_learner()
                 user_id = st.session_state.get('user_id', 'anonymous')
 
+                # Ensure we have a persistent user ID
+                if 'persistent_user_id' not in st.session_state:
+                    st.session_state['persistent_user_id'] = user_id
+
                 # Initialize dynamic evolution system if not already in session
                 if 'hybrid_processor' not in st.session_state and create_integrated_processor:
+                    # Use adaptive extractor with persistence
                     adaptive_extractor = AdaptiveSignalExtractor(
-                        adaptive=True, use_discovered=True)
+                        adaptive=True,
+                        use_discovered=True,
+                        persistence_path=f"learning/user_signals/{st.session_state['persistent_user_id']}_signals.json"
+                    )
+
+                    # Create processor with persistent user ID
                     st.session_state['hybrid_processor'] = create_integrated_processor(
                         hybrid_learner=learner,
                         adaptive_extractor=adaptive_extractor,
-                        user_id=user_id,
+                        user_id=st.session_state['persistent_user_id'],
                     )
+
+                    # Initialize learning tracking
+                    if 'learning_stats' not in st.session_state:
+                        st.session_state['learning_stats'] = {
+                            'exchanges_processed': 0,
+                            'signals_learned': 0,
+                            'glyphs_generated': 0
+                        }
 
                 # Process through integrated pipeline with dynamic glyph generation
                 if 'hybrid_processor' in st.session_state:
                     processor = st.session_state['hybrid_processor']
+
+                    # Ensure we're using the persistent user ID
                     evolution_result = processor.process_user_message(
                         user_message=user_input,
                         ai_response=response,
-                        user_id=user_id,
+                        user_id=st.session_state['persistent_user_id'],
                         conversation_id=st.session_state.get(
                             'conversation_id', 'default'),
                         glyphs=debug_glyphs,
                     )
+
+                    # Update learning statistics
+                    st.session_state['learning_stats']['exchanges_processed'] += 1
+                    if evolution_result['learning_result'].get('learned_to_user', False):
+                        st.session_state['learning_stats']['signals_learned'] += len(
+                            evolution_result.get('emotional_signals', [])
+                        )
 
                     # Check if new glyphs were generated
                     new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
@@ -1148,6 +1175,19 @@ def render_main_app():
                             st.session_state['new_glyphs_this_session'] = []
                         st.session_state['new_glyphs_this_session'].extend(
                             new_glyphs)
+
+                        # Update learning statistics
+                        st.session_state['learning_stats']['glyphs_generated'] += len(
+                            new_glyphs)
+
+                        # Display learning progress
+                        st.sidebar.markdown("### 📊 Learning Progress")
+                        st.sidebar.text(
+                            f"Exchanges Processed: {st.session_state['learning_stats']['exchanges_processed']}")
+                        st.sidebar.text(
+                            f"Signals Learned: {st.session_state['learning_stats']['signals_learned']}")
+                        st.sidebar.text(
+                            f"Glyphs Generated: {st.session_state['learning_stats']['glyphs_generated']}")
 
                         # Display notification about new glyphs
                         st.success(
