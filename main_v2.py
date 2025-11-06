@@ -21,13 +21,11 @@ except Exception:
     LimbicIntegrationEngine = None
     HAS_LIMBIC = False
 
-# Page configuration
-# Attempt to inline the SVG as a data URI for the page icon so the icon
-# renders even if static asset requests are auth-gated in some deployments.
+# Page configuration helpers
 
 
 def _build_page_icon_data_uri():
-    # Use the appropriate logo based on theme
+    """Build a data URI for the page icon that works with theme changes."""
     try:
         light_mode = Path(
             "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
@@ -46,21 +44,13 @@ def _build_page_icon_data_uri():
             b64 = base64.b64encode(raw).decode("ascii")
             return f"data:image/svg+xml;base64,{b64}"
     except Exception:
-        # If reading fails, fall back to serving the static path by URL for light mode
         pass
     return "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
 
 
-st.set_page_config(
-    page_title="FirstPerson - Personal AI Companion",
-    page_icon=_build_page_icon_data_uri(),
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# Add custom CSS for header layout
-st.markdown("""
-    <style>
+def _get_css_content():
+    """Get all CSS content needed for the app."""
+    css = """
     .header-container {
         display: flex;
         align-items: center;
@@ -81,9 +71,59 @@ st.markdown("""
         font-weight: 600;
         color: inherit;
     }
-    /* Ensure text color matches current theme */
-    [data-testid="stSidebarNav"] {color: inherit;}
-    </style>
+    [data-testid="stSidebarNav"] {
+        color: inherit;
+    }
+    """
+
+    # Add logo constraints CSS if available
+    try:
+        css_path = Path("emotional_os/deploy/logo_constraints.css")
+        if css_path.exists():
+            css_content = css_path.read_text()
+            if '<script' not in css_content.lower():
+                css += "\n" + css_content
+    except Exception:
+        pass
+
+    return css
+
+
+# Must be the first Streamlit command
+st.set_page_config(
+    page_title="FirstPerson - Personal AI Companion",
+    page_icon=_build_page_icon_data_uri(),
+    layout="wide",
+    initial_sidebar_state="expanded",
+    # Include all CSS in initial_sidebar_state to avoid multiple st.markdown calls
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
+)
+
+# Apply all styles at once
+st.markdown(f"<style>{_get_css_content()}</style>", unsafe_allow_html=True)
+
+# Add theme change observer
+st.markdown("""
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.target.classList && 
+                            (mutation.target.classList.contains('stSelectbox') || 
+                             mutation.target.classList.contains('stMarkdown'))) {
+                            document.body.style.visibility = 'visible';
+                        }
+                    });
+                });
+                observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+            }, 100);
+        });
+    </script>
 """, unsafe_allow_html=True)
 
 # Create header with logo and title
@@ -97,7 +137,6 @@ try:
     logo_path = light_logo if light_logo.exists() else dark_logo
     if logo_path.exists():
         svg_content = logo_path.read_text()
-        # Ensure SVG has proper size constraints
         if '<svg' in svg_content and not 'class="header-logo"' in svg_content:
             svg_content = svg_content.replace(
                 '<svg', '<svg class="header-logo"')
@@ -112,34 +151,6 @@ try:
 except Exception:
     # Fallback to simple title if logo loading fails
     st.title("FirstPerson – Personal AI Companion")
-
-# Load logo constraints CSS after page config
-try:
-    css_path = Path("emotional_os/deploy/logo_constraints.css")
-    if css_path.exists():
-        css_content = css_path.read_text()
-        # Ensure we're only injecting CSS content
-        if '<script' not in css_content.lower():
-            st.markdown(
-                f'<style>{css_content}</style>', unsafe_allow_html=True)
-            # Add a small delay to ensure CSS is applied before theme changes
-            st.markdown("""
-                <script>
-                    setTimeout(function() {
-                        const observer = new MutationObserver(function(mutations) {
-                            mutations.forEach(function(mutation) {
-                                if (mutation.target.classList && mutation.target.classList.contains('stSelectbox')) {
-                                    // Re-apply any necessary styles after theme change
-                                    document.body.style.visibility = 'visible';
-                                }
-                            });
-                        });
-                        observer.observe(document.body, { attributes: true, childList: true, subtree: true });
-                    }, 100);
-                </script>
-            """, unsafe_allow_html=True)
-except Exception:
-    pass
 
 
 def main():
