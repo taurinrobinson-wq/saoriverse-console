@@ -95,7 +95,6 @@ st.set_page_config(
     page_icon=_build_page_icon_data_uri(),
     layout="wide",
     initial_sidebar_state="expanded",
-    # Include all CSS in initial_sidebar_state to avoid multiple st.markdown calls
     menu_items={
         'Get Help': None,
         'Report a bug': None,
@@ -103,25 +102,58 @@ st.set_page_config(
     }
 )
 
-# Apply all styles at once
-st.markdown(f"<style>{_get_css_content()}</style>", unsafe_allow_html=True)
+# Create header using native Streamlit components
+col1, col2 = st.columns([1, 4])
 
-# Add theme change observer
+try:
+    light_logo = Path(
+        "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+    dark_logo = Path(
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+
+    # Read the appropriate logo based on theme
+    logo_path = light_logo if light_logo.exists() else dark_logo
+    if logo_path.exists():
+        with col1:
+            # Add padding and sizing using native Streamlit
+            st.image(str(logo_path), width=50, use_column_width=False)
+
+    with col2:
+        st.markdown("### FirstPerson – Personal AI Companion")
+
+except Exception:
+    # Fallback to simple title if logo loading fails
+    st.title("FirstPerson – Personal AI Companion")
+
+# Add minimal required CSS for theme compatibility
+st.markdown("""
+    <style>
+    /* Ensure text colors match current theme */
+    [data-testid="stSidebarNav"] {color: inherit;}
+    .stMarkdown {color: inherit;}
+    
+    /* Adjust header margins */
+    [data-testid="column"] {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    /* Ensure headers use theme colors */
+    h1, h2, h3 {color: inherit !important;}
+    </style>
+""", unsafe_allow_html=True)
+
+# Add theme observer (simplified)
 st.markdown("""
     <script>
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                const observer = new MutationObserver(function(mutations) {
-                    mutations.forEach(function(mutation) {
-                        if (mutation.target.classList && 
-                            (mutation.target.classList.contains('stSelectbox') || 
-                             mutation.target.classList.contains('stMarkdown'))) {
-                            document.body.style.visibility = 'visible';
-                        }
-                    });
-                });
-                observer.observe(document.body, { attributes: true, childList: true, subtree: true });
-            }, 100);
+            const observer = new MutationObserver(function(mutations) {
+                document.body.style.visibility = 'visible';
+            });
+            observer.observe(document.body, { 
+                attributes: true, 
+                attributeFilter: ['class', 'data-theme'] 
+            });
         });
     </script>
 """, unsafe_allow_html=True)
