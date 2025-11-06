@@ -29,11 +29,8 @@ except Exception:
 def _build_page_icon_data_uri():
     # Prefer a normalized SVG that has a clean viewBox and no odd offsets.
     try:
-        # Load logo constraints CSS first
-        css_path = Path("emotional_os/deploy/logo_constraints.css")
-        if css_path.exists():
-            st.markdown(
-                f'<style>{css_path.read_text()}</style>', unsafe_allow_html=True)
+        # We'll load CSS after page config to avoid Streamlit errors
+        pass
     except Exception:
         pass
 
@@ -73,6 +70,15 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Load logo constraints CSS after page config
+try:
+    css_path = Path("emotional_os/deploy/logo_constraints.css")
+    if css_path.exists():
+        st.markdown(
+            f'<style>{css_path.read_text()}</style>', unsafe_allow_html=True)
+except Exception:
+    pass
 
 
 def main():
