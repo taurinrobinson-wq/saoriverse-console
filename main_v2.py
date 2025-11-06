@@ -54,6 +54,9 @@ st.markdown("""
 
 def render_header():
     """Render the app header with logo and title. Should only be called once."""
+    if st.session_state.get('header_rendered'):
+        return
+
     header_left, header_right = st.columns([1, 5])
 
     with header_left:
@@ -67,6 +70,8 @@ def render_header():
 
     with header_right:
         st.header("FirstPerson – Personal AI Companion")
+
+    st.session_state['header_rendered'] = True
 
 
 def main():

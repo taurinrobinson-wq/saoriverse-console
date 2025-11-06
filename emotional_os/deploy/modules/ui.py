@@ -279,7 +279,21 @@ def render_splash_interface(auth):
 
 
 def render_main_app():
-    # (Simple chat history example removed; only advanced chat/conversation system remains)
+    """Main app interface for authenticated users - Full Emotional OS"""
+    # Skip header rendering if it's already been done
+    if not st.session_state.get('header_rendered'):
+        # Render header with logo and title very close together
+        col1, col2 = st.columns([0.5, 8], gap="small")
+        with col1:
+            try:
+                st.image(
+                    "/static/graphics/FirstPerson-Logo-normalized.svg", width=24)
+            except Exception:
+                st.markdown(
+                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+        with col2:
+            st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
+        st.session_state['header_rendered'] = True
 
     # ============================================================================
     # Initialize Conversation Manager & Sidebar
