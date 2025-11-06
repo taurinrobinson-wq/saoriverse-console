@@ -43,13 +43,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Initialize theme if not set
+if 'theme' not in st.session_state:
+    st.session_state['theme'] = 'Light'
+
 # Basic theme compatibility
 st.markdown("""
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
+    html {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
     </style>
 """, unsafe_allow_html=True)
+
+# Load theme-specific CSS
+css_file = "emotional_os/deploy/emotional_os_ui_light.css" if st.session_state[
+    'theme'] == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
+try:
+    with open(css_file, "r") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+except Exception:
+    pass
 
 
 def render_header():
