@@ -31,6 +31,22 @@ See [SETUP.md](SETUP.md) for detailed configuration instructions.
 
 ## 🏗️ Architecture
 
+## Developer install (editable)
+
+For contributors and local development you can install the repository into a virtual environment in "editable" mode. This makes the `emotional_os` package available for imports and lets you iterate without reinstalling:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -e .
+```
+
+The editable install exposes the package name `saoriverse_console` and makes the `emotional_os` package importable (for example: `from emotional_os.supabase.supabase_integration import SupabaseIntegrator`).
+
+The repo already includes a minimal `pyproject.toml` + `setup.cfg` to support this workflow.
+
+
 - **Frontend**: Streamlit chat interface
 - **Processing Engine**: Glyph-based emotional pattern recognition
 - **Backend**: Optional Supabase integration with edge functions
