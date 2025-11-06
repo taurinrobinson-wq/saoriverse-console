@@ -570,16 +570,31 @@
                 if (exchange.type === 'user') {
                     avatar.textContent = '👤';
                 } else {
-                    // Create image element instead of using innerHTML to avoid
-                    // passing HTML strings into DOM helpers which can cause
-                    // type errors in some runtimes when re-rendering (theme toggle)
-                    const img = document.createElement('img');
-                    img.src = '/static/graphics/FirstPerson-Logo-normalized.svg';
-                    img.alt = 'FP';
-                    img.style.width = '20px';
-                    img.style.height = '20px';
-                    img.onerror = function () { this.style.display = 'none'; };
-                    avatar.appendChild(img);
+                    try {
+                        // Create image element with defensive error handling
+                        const img = document.createElement('img');
+                        if (img instanceof HTMLImageElement) {
+                            img.src = '/static/graphics/FirstPerson-Logo-normalized.svg';
+                            img.alt = 'FP';
+                            img.style.width = '20px';
+                            img.style.height = '20px';
+                            img.onerror = function () {
+                                try {
+                                    this.style.display = 'none';
+                                    avatar.textContent = 'FP';
+                                } catch (e) {
+                                    console.warn('Avatar onerror handler failed:', e);
+                                }
+                            };
+                            avatar.appendChild(img);
+                        } else {
+                            // Fallback if img creation fails
+                            avatar.textContent = 'FP';
+                        }
+                    } catch (e) {
+                        console.warn('Avatar creation failed:', e);
+                        avatar.textContent = 'FP';
+                    }
                 }
 
                 const content = document.createElement('div');
