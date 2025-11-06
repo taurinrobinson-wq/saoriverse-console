@@ -449,9 +449,9 @@ def render_main_app():
     inject_css(css_file)
     # Logo switching based on theme
     if theme == "Dark":
-        logo_path = "/static/graphics/FirstPerson-Logo(invert-cropped_notext).svg"
+        logo_path = "/static/graphics/FirstPerson-Logo-invert-cropped_notext.svg"
     else:
-        logo_path = "/static/graphics/FirstPerson-Logo(black-cropped_notext).svg"
+        logo_path = "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
     # Render a responsive brand row (logo + title) using injected CSS
     try:
         st.markdown(f"""
