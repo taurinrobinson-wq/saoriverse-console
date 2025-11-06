@@ -1,5 +1,16 @@
 [server]
 headless = true
+# If you serve the Streamlit app behind a reverse proxy at /app, set baseUrlPath accordingly
+baseUrlPath = "/app"
+port = 8501
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+# Avoid opening a browser on the host when running in headless environments
+gatherUsageStats = false
+[server]
+headless = true
 
 [theme]
 primaryColor = "#FF6B6B"

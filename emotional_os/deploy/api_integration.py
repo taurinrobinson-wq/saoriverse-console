@@ -47,7 +47,8 @@ class ImageGenerationAPI:
             )
 
             image_url = response.data[0].url
-            revised_prompt = getattr(response.data[0], 'revised_prompt', prompt)
+            revised_prompt = getattr(
+                response.data[0], 'revised_prompt', prompt)
 
             return {
                 "success": True,
@@ -87,7 +88,8 @@ class ImageGenerationAPI:
                 "height": kwargs.get("height", 1024),
             }
 
-            response = requests.post(url, headers=headers, json=data, timeout=60)
+            response = requests.post(
+                url, headers=headers, json=data, timeout=60)
 
             if response.status_code == 200:
                 result = response.json()
@@ -119,6 +121,7 @@ class ImageGenerationAPI:
 
         except Exception as e:
             return {"success": False, "error": str(e)}
+
 
 class DocumentGenerationAPI:
     """Handle document generation APIs"""
@@ -259,6 +262,7 @@ class DocumentGenerationAPI:
         except Exception as e:
             return {"success": False, "error": str(e)}
 
+
 class APITestInterface:
     """Interface for testing API integrations"""
 
@@ -287,7 +291,8 @@ class APITestInterface:
 
             with col2:
                 dalle_model = st.selectbox("Model", ["dall-e-3", "dall-e-2"])
-                dalle_size = st.selectbox("Size", ["1024x1024", "1792x1024", "1024x1792"])
+                dalle_size = st.selectbox(
+                    "Size", ["1024x1024", "1792x1024", "1024x1792"])
                 dalle_quality = st.selectbox("Quality", ["standard", "hd"])
 
             if st.button("🎨 Generate DALL-E Image", type="primary"):
@@ -301,7 +306,8 @@ class APITestInterface:
 
                     # Display image
                     try:
-                        st.image(result["image_url"], caption="Generated Image")
+                        st.image(result["image_url"],
+                                 caption="Generated Image")
 
                         # Show details
                         with st.expander("Generation Details"):
@@ -350,7 +356,8 @@ class APITestInterface:
                     st.image(image, caption="Stable Diffusion Generated Image")
 
                     with st.expander("Generation Details"):
-                        st.json({k: v for k, v in result.items() if k != "image_data"})
+                        st.json({k: v for k, v in result.items()
+                                if k != "image_data"})
                 else:
                     st.error(f"❌ Generation failed: {result['error']}")
 
@@ -371,7 +378,8 @@ class APITestInterface:
         """Render document generation testing interface"""
         st.subheader("📄 Document Generation Testing")
 
-        tab1, tab2, tab3 = st.tabs(["PDF Reports", "DOCX Templates", "Excel Export"])
+        tab1, tab2, tab3 = st.tabs(
+            ["PDF Reports", "DOCX Templates", "Excel Export"])
 
         with tab1:
             st.markdown("#### PDF Report Generation")
@@ -387,16 +395,20 @@ class APITestInterface:
                 "username": "test_user",
                 "created_at": "2025-10-01",
                 "conversations": [
-                    {"timestamp": "2025-10-15T10:30:00", "mode": "hybrid", "processing_time": "2.3s"},
-                    {"timestamp": "2025-10-15T14:20:00", "mode": "ai_preferred", "processing_time": "1.8s"},
-                    {"timestamp": "2025-10-15T18:45:00", "mode": "hybrid", "processing_time": "2.1s"}
+                    {"timestamp": "2025-10-15T10:30:00",
+                        "mode": "hybrid", "processing_time": "2.3s"},
+                    {"timestamp": "2025-10-15T14:20:00",
+                        "mode": "ai_preferred", "processing_time": "1.8s"},
+                    {"timestamp": "2025-10-15T18:45:00",
+                        "mode": "hybrid", "processing_time": "2.1s"}
                 ],
                 "preferred_mode": "hybrid"
             }
 
             if st.button("📊 Generate PDF Report", type="primary"):
                 with st.spinner("Generating PDF report..."):
-                    result = self.doc_api.generate_pdf_report(mock_user_data, template_type)
+                    result = self.doc_api.generate_pdf_report(
+                        mock_user_data, template_type)
 
                 if result["success"]:
                     st.success("✅ Report generated!")
@@ -407,7 +419,8 @@ class APITestInterface:
                         st.code(result["html_content"], language="html")
 
                     with st.expander("Generation Details"):
-                        st.json({k: v for k, v in result.items() if k != "html_content"})
+                        st.json({k: v for k, v in result.items()
+                                if k != "html_content"})
 
                     st.info("🔧 PDF conversion integration coming soon!")
                 else:
@@ -418,11 +431,13 @@ class APITestInterface:
 
             template_format = st.selectbox(
                 "Document Format",
-                ["Emotional Report", "Glyph Analysis", "User Summary", "Progress Report"]
+                ["Emotional Report", "Glyph Analysis",
+                    "User Summary", "Progress Report"]
             )
 
             if st.button("📝 Generate DOCX Document"):
-                result = self.doc_api.generate_docx_template({}, template_format)
+                result = self.doc_api.generate_docx_template(
+                    {}, template_format)
                 st.json(result)
                 st.info("🔧 DOCX template integration coming soon!")
 
@@ -431,19 +446,24 @@ class APITestInterface:
 
             export_format = st.selectbox(
                 "Export Type",
-                ["User Analytics", "Glyph Matrices", "Conversation Logs", "System Reports"]
+                ["User Analytics", "Glyph Matrices",
+                    "Conversation Logs", "System Reports"]
             )
 
             # Mock data for Excel export
             mock_excel_data = [
-                {"user": "john_doe", "conversations": 23, "avg_response_time": 2.1, "preferred_mode": "hybrid"},
-                {"user": "jane_smith", "conversations": 8, "avg_response_time": 1.9, "preferred_mode": "ai_preferred"},
-                {"user": "test_user", "conversations": 45, "avg_response_time": 2.3, "preferred_mode": "hybrid"}
+                {"user": "john_doe", "conversations": 23,
+                    "avg_response_time": 2.1, "preferred_mode": "hybrid"},
+                {"user": "jane_smith", "conversations": 8,
+                    "avg_response_time": 1.9, "preferred_mode": "ai_preferred"},
+                {"user": "test_user", "conversations": 45,
+                    "avg_response_time": 2.3, "preferred_mode": "hybrid"}
             ]
 
             if st.button("📊 Generate Excel Export", type="primary"):
                 with st.spinner("Creating Excel file..."):
-                    result = self.doc_api.generate_excel_export(mock_excel_data, export_format)
+                    result = self.doc_api.generate_excel_export(
+                        mock_excel_data, export_format)
 
                 if result["success"]:
                     st.success("✅ Excel file generated!")
@@ -457,9 +477,11 @@ class APITestInterface:
                     )
 
                     with st.expander("Export Details"):
-                        st.json({k: v for k, v in result.items() if k != "excel_data"})
+                        st.json({k: v for k, v in result.items()
+                                if k != "excel_data"})
                 else:
                     st.error(f"❌ Export failed: {result['error']}")
+
 
 def main():
     """Main API testing interface"""
@@ -474,7 +496,7 @@ def main():
     col1, col2 = st.columns([1, 6])
     with col1:
         try:
-            st.image("graphics/FirstPerson-Logo.svg", width=50)
+            st.image("/static/graphics/FirstPerson-Logo.svg", width=50)
         except Exception:
             st.markdown("🔌")
     with col2:
@@ -484,7 +506,8 @@ def main():
     # API Testing Interface
     api_tester = APITestInterface()
 
-    tab1, tab2, tab3 = st.tabs(["🖼️ Image APIs", "📄 Document APIs", "⚙️ Configuration"])
+    tab1, tab2, tab3 = st.tabs(
+        ["🖼️ Image APIs", "📄 Document APIs", "⚙️ Configuration"])
 
     with tab1:
         api_tester.render_image_testing()
@@ -522,6 +545,7 @@ api_key = "your-stability-ai-key"
 [replicate]
 api_token = "your-replicate-token"
         """, language="toml")
+
 
 if __name__ == "__main__":
     main()

@@ -22,7 +22,7 @@ except Exception:
 # Page configuration
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="static/graphics/FirstPerson-Logo(black-cropped_notext).svg",
+    page_icon="/static/graphics/FirstPerson-Logo(black-cropped_notext).svg",
     layout="wide",
     initial_sidebar_state="expanded"
 )
