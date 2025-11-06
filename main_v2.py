@@ -65,41 +65,8 @@ st.markdown("""
     .stMarkdown {color: inherit;}
     </style>
 """, unsafe_allow_html=True)
-                document.body.style.visibility = 'visible';
-            });
-            observer.observe(document.body, { 
-                attributes: true, 
-                attributeFilter: ['class', 'data-theme'] 
-            });
-        });
-    </script>
-""", unsafe_allow_html=True)
-
-# Create header with logo and title
-try:
-    light_logo = Path(
-        "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
-    dark_logo = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
-
-    # Read the appropriate logo based on theme
-    logo_path = light_logo if light_logo.exists() else dark_logo
-    if logo_path.exists():
-        svg_content = logo_path.read_text()
-        if '<svg' in svg_content and not 'class="header-logo"' in svg_content:
-            svg_content = svg_content.replace(
-                '<svg', '<svg class="header-logo"')
-
-        # Render header container with logo and title
-        st.markdown(f'''
-            <div class="header-container">
-                {svg_content}
-                <h1 class="header-title">FirstPerson – Personal AI Companion</h1>
-            </div>
-        ''', unsafe_allow_html=True)
-except Exception:
-    # Fallback to simple title if logo loading fails
-    st.title("FirstPerson – Personal AI Companion")
+# Fallback to simple title if logo loading fails
+st.title("FirstPerson – Personal AI Companion")
 
 
 def main():
