@@ -5,6 +5,8 @@ from modules.auth import SaoynxAuthentication
 from modules.ui import render_splash_interface, render_main_app
 
 # --- Generate Word Document from Personal Log ---
+
+
 def generate_doc(date, time, event, mood, reflections, insights):
     doc = Document()
     doc.add_heading("Personal Log Entry", level=1)
@@ -24,13 +26,15 @@ def generate_doc(date, time, event, mood, reflections, insights):
     return buffer
 # --- End Generate Word Document ---
 
+
 # Page configuration
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="graphics/FirstPerson-Logo.svg",
+    page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
 
 def main():
     auth = SaoynxAuthentication()
@@ -38,6 +42,7 @@ def main():
         render_main_app()
     else:
         render_splash_interface(auth)
+
 
 if __name__ == "__main__":
     main()

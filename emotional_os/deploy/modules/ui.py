@@ -180,10 +180,10 @@ def render_splash_interface(auth):
     with col2:
         # Inline the SVG to avoid external asset requests (auth-gated hosts can redirect)
         svg_markup = _load_inline_svg(
-            "FirstPerson-Logo-black-cropped_notext.svg")
+            "FirstPerson-Logo-normalized.svg")
         try:
             st.markdown(
-                f'<div style="width:200px; margin: 0 auto;">{svg_markup}</div>', unsafe_allow_html=True)
+                f'<div style="width:120px; margin: 0 auto;">{svg_markup}</div>', unsafe_allow_html=True)
         except Exception:
             st.markdown('''
             <div style="font-size: 4rem;">🧠</div>
@@ -480,10 +480,8 @@ def render_main_app():
     css_file = "emotional_os/deploy/emotional_os_ui_light.css" if theme == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
     inject_css(css_file)
     # Logo switching based on theme
-    if theme == "Dark":
-        svg_name = "FirstPerson-Logo-invert-cropped_notext.svg"
-    else:
-        svg_name = "FirstPerson-Logo-black-cropped_notext.svg"
+    # Prefer the normalized SVG asset for consistent rendering
+    svg_name = "FirstPerson-Logo-normalized.svg"
     # Render a responsive brand row (inline SVG + title) using injected CSS
     svg_markup = _load_inline_svg(svg_name)
     try:

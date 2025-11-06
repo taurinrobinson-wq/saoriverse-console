@@ -32,7 +32,7 @@ def generate_doc(date, time, event, mood, reflections, insights):
 # Page configuration
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon="graphics/FirstPerson-Logo.svg",
+    page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -391,7 +391,8 @@ class SaoynxAuthentication:
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
-                st.image("/static/graphics/FirstPerson-Logo.svg", width=200)
+                st.image(
+                    "/static/graphics/FirstPerson-Logo-normalized.svg", width=120)
             except Exception:
                 st.markdown('''
                 <div style="font-size: 4rem;">🧠</div>
@@ -566,7 +567,7 @@ def render_main_app():
     col1, col2 = st.columns([0.5, 8], gap="small")
     with col1:
         try:
-            st.image("/static/graphics/FirstPerson-Logo.svg", width=50)
+            st.image("/static/graphics/FirstPerson-Logo-normalized.svg", width=24)
         except Exception:
             st.markdown(
                 '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
