@@ -21,133 +21,50 @@ except Exception:
     LimbicIntegrationEngine = None
     HAS_LIMBIC = False
 
-# Page configuration helpers
+# Simple page configuration
 
 
-def _build_page_icon_data_uri():
-    """Build a data URI for the page icon that works with theme changes."""
+def get_page_icon():
     try:
-        light_mode = Path(
+        logo_path = Path(
             "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
-        dark_mode = Path(
-            "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
-
-        # Default to light mode logo
-        logo_path = light_mode if light_mode.exists() else dark_mode
         if logo_path.exists():
-            svg_content = logo_path.read_text()
-            # Add mandatory size constraints to SVG while preserving aspect ratio
-            if '<svg' in svg_content and not 'style="width:50px' in svg_content:
-                svg_content = svg_content.replace(
-                    '<svg', '<svg style="width:50px;height:auto;min-width:50px;"')
-            raw = svg_content.encode('utf-8')
-            b64 = base64.b64encode(raw).decode("ascii")
-            return f"data:image/svg+xml;base64,{b64}"
+            return str(logo_path)
     except Exception:
         pass
-    return "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
+    return None
 
 
-def _get_css_content():
-    """Get all CSS content needed for the app."""
-    css = """
-    .header-container {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-        padding: 0.5rem 0;
-    }
-    .header-logo {
-        flex: 0 0 auto;
-        width: 50px;
-        height: auto;
-    }
-    .header-title {
-        flex: 1;
-        margin: 0;
-        padding: 0;
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: inherit;
-    }
-    [data-testid="stSidebarNav"] {
-        color: inherit;
-    }
-    """
-
-    # Add logo constraints CSS if available
-    try:
-        css_path = Path("emotional_os/deploy/logo_constraints.css")
-        if css_path.exists():
-            css_content = css_path.read_text()
-            if '<script' not in css_content.lower():
-                css += "\n" + css_content
-    except Exception:
-        pass
-
-    return css
-
-
-# Must be the first Streamlit command
+# Must be first Streamlit command
 st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
-    page_icon=_build_page_icon_data_uri(),
+    page_icon=get_page_icon(),
     layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': None,
-        'Report a bug': None,
-        'About': None
-    }
+    initial_sidebar_state="expanded"
 )
 
-# Create header using native Streamlit components
-col1, col2 = st.columns([1, 4])
+# Simple header with logo and title
+header_left, header_right = st.columns([1, 5])
 
-try:
-    light_logo = Path(
-        "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
-    dark_logo = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+with header_left:
+    try:
+        logo_path = Path(
+            "static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+        if logo_path.exists():
+            st.image(str(logo_path), width=50)
+    except Exception:
+        pass
 
-    # Read the appropriate logo based on theme
-    logo_path = light_logo if light_logo.exists() else dark_logo
-    if logo_path.exists():
-        with col1:
-            # Add padding and sizing using native Streamlit
-            st.image(str(logo_path), width=50, use_column_width=False)
+with header_right:
+    st.header("FirstPerson – Personal AI Companion")
 
-    with col2:
-        st.markdown("### FirstPerson – Personal AI Companion")
-
-except Exception:
-    # Fallback to simple title if logo loading fails
-    st.title("FirstPerson – Personal AI Companion")
-
-# Add minimal required CSS for theme compatibility
+# Basic theme compatibility (no JavaScript needed)
 st.markdown("""
     <style>
-    /* Ensure text colors match current theme */
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
-    
-    /* Adjust header margins */
-    [data-testid="column"] {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-    
-    /* Ensure headers use theme colors */
-    h1, h2, h3 {color: inherit !important;}
     </style>
 """, unsafe_allow_html=True)
-
-# Add theme observer (simplified)
-st.markdown("""
-    <script>
-        window.addEventListener('load', function() {
-            const observer = new MutationObserver(function(mutations) {
                 document.body.style.visibility = 'visible';
             });
             observer.observe(document.body, { 
