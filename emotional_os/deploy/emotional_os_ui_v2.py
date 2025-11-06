@@ -23,9 +23,12 @@ except ImportError as e:
     EVOLUTION_IMPORT_ERROR = str(e)
     st.warning(f"Auto-evolving glyph system not available - Import error: {e}")
 
-st.set_page_config(page_title="Emotional OS", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Emotional OS", layout="wide",
+                   initial_sidebar_state="expanded")
 
 # Load configuration
+
+
 def load_config():
     """Load configuration from environment variables or .env file"""
     config = {}
@@ -56,6 +59,7 @@ def load_config():
 
     return config
 
+
 # Initialize session state
 if 'conversations' not in st.session_state:
     st.session_state.conversations = {}
@@ -69,9 +73,12 @@ config = load_config()
 if config.get('ui', {}).get('debug_mode', False):
     with st.expander("🔧 Debug Info"):
         st.write("**Configuration Status:**")
-        st.write(f"- Supabase URL: {'✅' if config['supabase']['url'] else '❌'}")
-        st.write(f"- Supabase Key: {'✅' if config['supabase']['anon_key'] else '❌'}")
-        st.write(f"- Function URL: {'✅' if config['supabase']['function_url'] else '❌'}")
+        st.write(
+            f"- Supabase URL: {'✅' if config['supabase']['url'] else '❌'}")
+        st.write(
+            f"- Supabase Key: {'✅' if config['supabase']['anon_key'] else '❌'}")
+        st.write(
+            f"- Function URL: {'✅' if config['supabase']['function_url'] else '❌'}")
         st.write(f"- Processing Mode: {config['processing']['mode']}")
         if config['supabase']['function_url']:
             st.code(config['supabase']['function_url'])
@@ -125,10 +132,14 @@ if 'evolving_integrator' not in st.session_state and EVOLUTION_AVAILABLE:
             match = re.match(r'(https://[^/]+\.supabase\.co)', function_url)
             supabase_url = match.group(1) if match else None
 
-        st.sidebar.error(f"Auto-evolving glyph system failed to initialize: {str(e)}")
-        st.sidebar.info(f"Debug: Function URL available: {'Yes' if config['supabase']['function_url'] else 'No'}")
-        st.sidebar.info(f"Debug: Anon key available: {'Yes' if config['supabase']['anon_key'] else 'No'}")
-        st.sidebar.info(f"Debug: Supabase URL extracted: {'Yes' if supabase_url else 'No'}")
+        st.sidebar.error(
+            f"Auto-evolving glyph system failed to initialize: {str(e)}")
+        st.sidebar.info(
+            f"Debug: Function URL available: {'Yes' if config['supabase']['function_url'] else 'No'}")
+        st.sidebar.info(
+            f"Debug: Anon key available: {'Yes' if config['supabase']['anon_key'] else 'No'}")
+        st.sidebar.info(
+            f"Debug: Supabase URL extracted: {'Yes' if supabase_url else 'No'}")
         if EVOLUTION_IMPORT_ERROR:
             st.sidebar.info(f"Debug: Import error: {EVOLUTION_IMPORT_ERROR}")
         st.session_state.evolving_integrator = None
@@ -194,6 +205,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+
 def generate_conversation_name(first_message: str) -> str:
     """Generate a conversation name based on the first message content"""
     # Extract key emotional words for naming
@@ -205,7 +217,8 @@ def generate_conversation_name(first_message: str) -> str:
     ]
 
     words = first_message.lower().split()
-    found_emotions = [word for word in words if any(emo in word for emo in emotional_keywords)]
+    found_emotions = [word for word in words if any(
+        emo in word for emo in emotional_keywords)]
 
     if found_emotions:
         primary_emotion = found_emotions[0].capitalize()
@@ -213,6 +226,7 @@ def generate_conversation_name(first_message: str) -> str:
     # Fallback: use first few words
     clean_words = [word.strip('.,!?') for word in words[:3]]
     return " ".join(clean_words).title()[:30] + "..."
+
 
 def get_current_conversation() -> Dict:
     """Get the current conversation data for context"""
@@ -229,6 +243,7 @@ def get_current_conversation() -> Dict:
         'conversation_id': conv_id
     }
 
+
 def analyze_for_learning(user_input: str, system_response: str) -> Dict:
     """Analyze conversation for new patterns to add to lexicon"""
     # This is where you'd implement your medium language model learning
@@ -241,7 +256,8 @@ def analyze_for_learning(user_input: str, system_response: str) -> Dict:
     }
 
     # Look for repeated emotional phrases in user input
-    emotional_indicators = ['feel', 'feeling', 'emotion', 'sense', 'experience']
+    emotional_indicators = ['feel', 'feeling',
+                            'emotion', 'sense', 'experience']
     words = user_input.lower().split()
 
     for i, word in enumerate(words):
@@ -259,6 +275,7 @@ def analyze_for_learning(user_input: str, system_response: str) -> Dict:
 
     return patterns
 
+
 def save_conversation(conversation_id: str, conversation_data: Dict):
     """Save conversation to persistent storage"""
     conversations_dir = "conversations"
@@ -267,7 +284,9 @@ def save_conversation(conversation_id: str, conversation_data: Dict):
 
     filepath = os.path.join(conversations_dir, f"{conversation_id}.json")
     with open(filepath, 'w', encoding='utf-8') as f:
-        json.dump(conversation_data, f, ensure_ascii=False, indent=2, default=str)
+        json.dump(conversation_data, f, ensure_ascii=False,
+                  indent=2, default=str)
+
 
 def load_conversations() -> Dict:
     """Load saved conversations"""
@@ -284,6 +303,7 @@ def load_conversations() -> Dict:
                     st.sidebar.error(f"Error loading {filename}: {e}")
     return conversations
 
+
 # Sidebar for conversation management
 with st.sidebar:
     st.title("💭 Conversations")
@@ -293,8 +313,10 @@ with st.sidebar:
         st.success("🧬 Auto-Evolving Glyphs: **Active**")
         if st.session_state.evolving_integrator:
             stats = st.session_state.evolving_integrator.get_evolution_stats()
-            st.caption(f"Conversations processed: {stats.get('conversations_processed', 0)}")
-            st.caption(f"Next evolution check in: {stats.get('next_evolution_check', 'N/A')} conversations")
+            st.caption(
+                f"Conversations processed: {stats.get('conversations_processed', 0)}")
+            st.caption(
+                f"Next evolution check in: {stats.get('next_evolution_check', 'N/A')} conversations")
     else:
         st.info("🧬 Auto-Evolving Glyphs: **Disabled**")
 
@@ -305,7 +327,8 @@ with st.sidebar:
     processing_mode = st.selectbox(
         "Processing Mode",
         ["hybrid", "supabase", "local"],
-        index=["hybrid", "supabase", "local"].index(st.session_state.config['processing']['mode']),
+        index=["hybrid", "supabase", "local"].index(
+            st.session_state.config['processing']['mode']),
         help="Hybrid: Try AI first, fallback to local. Supabase: AI-enhanced only. Local: Privacy-first local only."
     )
 
@@ -329,7 +352,7 @@ with st.sidebar:
     # Update config if settings changed
     if (processing_mode != st.session_state.config['processing']['mode'] or
         privacy_mode != st.session_state.config['processing']['privacy_mode'] or
-        prefer_ai != st.session_state.config['processing']['prefer_ai']):
+            prefer_ai != st.session_state.config['processing']['prefer_ai']):
 
         st.session_state.config['processing']['mode'] = processing_mode
         st.session_state.config['processing']['privacy_mode'] = privacy_mode
@@ -372,12 +395,14 @@ with st.sidebar:
     st.markdown("---")
 
     # Learning insights
-    st.markdown("### 🧠 Learning Insights")
+    st.markdown("### Learning Insights")
     learning_stats = get_learning_insights()
 
     if learning_stats:
-        st.metric("Base Vocabulary", learning_stats.get('base_lexicon_size', 0))
-        st.metric("Learned Words", learning_stats.get('learned_lexicon_size', 0))
+        st.metric("Base Vocabulary", learning_stats.get(
+            'base_lexicon_size', 0))
+        st.metric("Learned Words", learning_stats.get(
+            'learned_lexicon_size', 0))
 
         top_words = learning_stats.get('top_learned_words', [])
         if top_words:
@@ -394,7 +419,8 @@ st.title("🕯 Emotional OS")
 # Get current conversation
 current_conv = None
 if st.session_state.current_conversation_id:
-    current_conv = st.session_state.conversations.get(st.session_state.current_conversation_id)
+    current_conv = st.session_state.conversations.get(
+        st.session_state.current_conversation_id)
 
 # Display conversation or start screen
 if not st.session_state.conversation_started:
@@ -426,10 +452,12 @@ else:
     if current_conv:
         # Display conversation history
         if current_conv['messages']:
-            st.markdown('<div class="conversation-container">', unsafe_allow_html=True)
+            st.markdown('<div class="conversation-container">',
+                        unsafe_allow_html=True)
 
             for message in current_conv['messages']:
-                timestamp = datetime.datetime.fromisoformat(message['timestamp']).strftime("%H:%M")
+                timestamp = datetime.datetime.fromisoformat(
+                    message['timestamp']).strftime("%H:%M")
 
                 if message['type'] == 'user':
                     st.markdown(f"""
@@ -458,7 +486,8 @@ else:
 
     # Input area
     with st.form(key="message_form", clear_on_submit=True):
-        prompt_text = "What are you feeling right now?" if not current_conv or not current_conv['messages'] else "Continue sharing..."
+        prompt_text = "What are you feeling right now?" if not current_conv or not current_conv[
+            'messages'] else "Continue sharing..."
 
         if input_mode == "Quick (Enter to send)":
             user_input = st.text_input(
@@ -485,9 +514,12 @@ else:
         current_conversation = get_current_conversation()
 
         # Add debugging to see what context we're passing
-        print(f"DEBUG: Current conversation has {len(current_conversation.get('messages', []))} messages")
-        print(f"DEBUG: Conversation ID: {current_conversation.get('conversation_id', 'None')}")
-        print(f"DEBUG: Processing mode: {st.session_state.config['processing']['mode']}")
+        print(
+            f"DEBUG: Current conversation has {len(current_conversation.get('messages', []))} messages")
+        print(
+            f"DEBUG: Conversation ID: {current_conversation.get('conversation_id', 'None')}")
+        print(
+            f"DEBUG: Processing mode: {st.session_state.config['processing']['mode']}")
 
         # Process using evolving glyph system if available
         evolution_result = None
@@ -498,8 +530,10 @@ else:
                     message=user_input.strip(),
                     conversation_context=current_conversation
                 )
-                print(f"DEBUG: Evolution result keys: {list(evolution_result.keys())}")
-                print(f"DEBUG: Has saori_response: {evolution_result.get('saori_response') is not None}")
+                print(
+                    f"DEBUG: Evolution result keys: {list(evolution_result.keys())}")
+                print(
+                    f"DEBUG: Has saori_response: {evolution_result.get('saori_response') is not None}")
 
                 if evolution_result.get('saori_response'):
                     result = {
@@ -515,7 +549,8 @@ else:
                 print(f"DEBUG: Evolving glyph system failed with error: {e}")
                 print(f"DEBUG: Error type: {type(e)}")
                 # Don't disable the system, just fall back for this conversation
-                st.sidebar.warning(f"Evolution system error (not disabled): {str(e)}")
+                st.sidebar.warning(
+                    f"Evolution system error (not disabled): {str(e)}")
                 evolution_result = None
 
         # Fallback to hybrid system if evolving system not available
@@ -537,8 +572,10 @@ else:
                         session_metadata=session_meta
                     )
 
-                    print(f"DEBUG: Processing source: {result.get('source', 'unknown')}")
-                    print(f"DEBUG: Processing method: {result.get('processing_method', 'unknown')}")
+                    print(
+                        f"DEBUG: Processing source: {result.get('source', 'unknown')}")
+                    print(
+                        f"DEBUG: Processing method: {result.get('processing_method', 'unknown')}")
 
                 except Exception as e:
                     print(f"DEBUG: Hybrid processing failed: {e}")
@@ -548,7 +585,8 @@ else:
                         "parser/signal_lexicon.json",
                         conversation_context=current_conversation
                     )
-                    result = {"response": result.get("voltage_response", "Processing error"), "source": "local_fallback"}
+                    result = {"response": result.get(
+                        "voltage_response", "Processing error"), "source": "local_fallback"}
             else:
                 # Fallback to original local processing
                 result = parse_input(
@@ -556,7 +594,8 @@ else:
                     "parser/signal_lexicon.json",
                     conversation_context=current_conversation
                 )
-                result = {"response": result.get("voltage_response", "Processing error"), "source": "local_only"}
+                result = {"response": result.get(
+                    "voltage_response", "Processing error"), "source": "local_only"}
 
         # Add user message
         user_message = {
@@ -619,14 +658,16 @@ else:
 
         # Generate conversation name if first message
         if len(current_conv['messages']) == 2:  # First exchange
-            current_conv['name'] = generate_conversation_name(user_input.strip())
+            current_conv['name'] = generate_conversation_name(
+                user_input.strip())
 
         # Learn from this exchange using the enhanced learning system
         learning_results = learn_from_conversation_data(current_conv)
         st.session_state.learned_patterns[st.session_state.current_conversation_id] = learning_results
 
         # Save conversation
-        save_conversation(st.session_state.current_conversation_id, current_conv)
+        save_conversation(
+            st.session_state.current_conversation_id, current_conv)
 
         st.rerun()
 
@@ -643,10 +684,12 @@ else:
 
         with col2:
             # Rename conversation
-            new_name = st.text_input("Rename conversation:", value=current_conv.get('name', ''))
+            new_name = st.text_input(
+                "Rename conversation:", value=current_conv.get('name', ''))
             if st.button("✏️ Rename") and new_name:
                 current_conv['name'] = new_name
-                save_conversation(st.session_state.current_conversation_id, current_conv)
+                save_conversation(
+                    st.session_state.current_conversation_id, current_conv)
                 st.success("Conversation renamed!")
                 st.rerun()
 
@@ -669,4 +712,5 @@ else:
 # Help text
 if st.session_state.conversation_started:
     st.markdown("---")
-    st.markdown("*💡 Press Ctrl+Enter for new lines. Press Enter to send your message.*")
+    st.markdown(
+        "*💡 Press Ctrl+Enter for new lines. Press Enter to send your message.*")

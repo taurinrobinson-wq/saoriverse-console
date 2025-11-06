@@ -13,10 +13,11 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="SAOYNX - AI Emotional Interfaces",
-    page_icon="🧠",
+    page_icon="/static/graphics/FirstPerson-Logo-black-cropped_notext.svg",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
 
 class SaoynxAuthentication:
     """Clean authentication system matching SAOYNX design"""
@@ -46,7 +47,8 @@ class SaoynxAuthentication:
     def authenticate_user(self, username: str, password: str) -> dict:
         """Authenticate user login"""
         try:
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -68,7 +70,8 @@ class SaoynxAuthentication:
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
-                    st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
+                    st.session_state.session_expires = (
+                        datetime.now() + timedelta(hours=8)).isoformat()
 
                     return {"success": True, "message": "Login successful"}
                 error_msg = data.get("error", "Invalid username or password")
@@ -81,7 +84,8 @@ class SaoynxAuthentication:
     def create_user(self, username: str, password: str) -> dict:
         """Create new user account"""
         try:
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -102,7 +106,8 @@ class SaoynxAuthentication:
                 if data.get("success"):
                     return {"success": True, "message": "Account created successfully"}
                 return {"success": False, "message": data.get("error", "Failed to create account")}
-            error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
+            error_data = response.json() if response.headers.get(
+                'content-type', '').startswith('application/json') else {}
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
 
         except Exception as e:
@@ -115,7 +120,8 @@ class SaoynxAuthentication:
         st.session_state.authenticated = True
         st.session_state.user_id = str(uuid.uuid4())
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
+        st.session_state.session_expires = (
+            datetime.now() + timedelta(hours=8)).isoformat()
 
         st.rerun()
 
@@ -279,15 +285,17 @@ class SaoynxAuthentication:
         """, unsafe_allow_html=True)
 
         # Complete logo with text - perfectly centered
-        st.markdown('<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
 
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
-                st.image("Saonyx_Logo.png", width=200)
+                # Prefer using bundled logo; fallback to text if unavailable
+                st.image(
+                    "/static/graphics/FirstPerson-Logo-black-cropped_notext.svg", width=200)
             except Exception:
                 st.markdown('''
-                <div style="font-size: 4rem;">🧠</div>
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
                 <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">AI EMOTIONAL<br>INTERFACES</div>
                 ''', unsafe_allow_html=True)
@@ -309,9 +317,11 @@ class SaoynxAuthentication:
                 # Questions closer together
                 qcol1, qcol2 = st.columns([1, 1], gap="small")
                 with qcol1:
-                    st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
+                    st.markdown(
+                        '<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
                 with qcol2:
-                    st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
+                    st.markdown(
+                        '<div class="auth-question">new user?</div>', unsafe_allow_html=True)
 
                 # Buttons closer together
                 bcol1, bcol2 = st.columns([1, 1], gap="small")
@@ -328,7 +338,8 @@ class SaoynxAuthentication:
 
             # Quick access section
             st.markdown('<div class="quick-access">', unsafe_allow_html=True)
-            st.markdown('<div class="quick-title">Quick Access</div>', unsafe_allow_html=True)
+            st.markdown('<div class="quick-title">Quick Access</div>',
+                        unsafe_allow_html=True)
 
             col1, col2, col3 = st.columns([1, 1, 1])
             with col2:
@@ -348,21 +359,28 @@ class SaoynxAuthentication:
             st.rerun()
 
         # No duplicate logo - just the title
-        st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
 
         # Login form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("login_form"):
                 # Tight spacing labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
-                username = st.text_input("login", label_visibility="collapsed", placeholder="username")
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
+                username = st.text_input(
+                    "login", label_visibility="collapsed", placeholder="username")
 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
-                password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="password")
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
+                password = st.text_input(
+                    "password", label_visibility="collapsed", type="password", placeholder="password")
 
-                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
-                login_submitted = st.form_submit_button("Sign In", use_container_width=True)
+                st.markdown(
+                    '<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
+                login_submitted = st.form_submit_button(
+                    "Sign In", use_container_width=True)
 
                 if login_submitted:
                     if not username or not password:
@@ -391,24 +409,33 @@ class SaoynxAuthentication:
             st.rerun()
 
         # No duplicate logo - just the title
-        st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
 
         # Register form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("register_form"):
                 # Tight spacing labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
-                username = st.text_input("login", label_visibility="collapsed", placeholder="choose username")
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
+                username = st.text_input(
+                    "login", label_visibility="collapsed", placeholder="choose username")
 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
-                password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="choose password")
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
+                password = st.text_input(
+                    "password", label_visibility="collapsed", type="password", placeholder="choose password")
 
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>', unsafe_allow_html=True)
-                confirm_password = st.text_input("confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>', unsafe_allow_html=True)
+                confirm_password = st.text_input(
+                    "confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
 
-                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
-                register_submitted = st.form_submit_button("Register Now", use_container_width=True)
+                st.markdown(
+                    '<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
+                register_submitted = st.form_submit_button(
+                    "Register Now", use_container_width=True)
 
                 if register_submitted:
                     if not username or not password:
@@ -432,9 +459,10 @@ class SaoynxAuthentication:
 
         st.markdown('</div>', unsafe_allow_html=True)
 
+
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
-    st.title("🧠 Emotional OS - Personal AI Companion")
+    st.title("Emotional OS - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
 
     # User header with logout
@@ -486,7 +514,8 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    st.caption(
+                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
 
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
@@ -534,23 +563,24 @@ def render_main_app():
 
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
-        st.write("🧠 Learning happens only from your conversations")
-        st.write("⚡ Optimized for 2-3 second responses")
+    st.write("Learning happens only from your conversations")
+    st.write("⚡ Optimized for 2-3 second responses")
 
-        if st.button("Download My Data", type="secondary"):
-            # Option to export user's conversation data
-            user_data = {
-                "user_id": st.session_state.user_id,
-                "username": st.session_state.username,
-                "conversations": st.session_state[conversation_key],
-                "export_date": datetime.now().isoformat()
-            }
-            st.download_button(
-                "Download JSON",
-                json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
-            )
+    if st.button("Download My Data", type="secondary"):
+        # Option to export user's conversation data
+        user_data = {
+            "user_id": st.session_state.user_id,
+            "username": st.session_state.username,
+            "conversations": st.session_state[conversation_key],
+            "export_date": datetime.now().isoformat()
+        }
+        st.download_button(
+            "Download JSON",
+            json.dumps(user_data, indent=2),
+            file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
+            mime="application/json"
+        )
+
 
 def main():
     """Main application entry point"""
@@ -561,6 +591,7 @@ def main():
         render_main_app()
     else:
         auth.render_splash_interface()
+
 
 if __name__ == "__main__":
     main()
