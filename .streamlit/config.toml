@@ -8,10 +8,9 @@ enableXsrfProtection = true
 
 [browser]
 # Avoid opening a browser on the host when running in headless environments
+# gatherUsageStats = false
 gatherUsageStats = false
-[server]
-headless = true
-
+# Duplicate server section removed from here to avoid TOML parse errors
 [theme]
 primaryColor = "#FF6B6B"
 backgroundColor = "#FFFFFF"
