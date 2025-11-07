@@ -128,18 +128,26 @@ def render_controls_row(conversation_key):
     with controls[0]:
         if 'processing_mode' not in st.session_state:
             st.session_state.processing_mode = "hybrid"
-        mode_options = ["hybrid", "ai_preferred", "local"]
+        # Use compact display labels for the dropdown while preserving
+        # internal values used elsewhere in the app.
+        mode_map = {
+            "Hybrid": "hybrid",
+            "AI": "ai_preferred",
+            "Local": "local",
+        }
         current_mode = st.session_state.processing_mode
-        if current_mode not in mode_options:
-            current_mode = "hybrid"
-        processing_mode = st.selectbox(
-            "Processing Mode",
-            mode_options,
-            index=mode_options.index(current_mode),
-            help="Hybrid: Best balance (recommended), AI: Cloud-only, Local: Templates",
-            key="mode_select_row"
+        # Resolve current display label from the internal value
+        current_display = next(
+            (k for k, v in mode_map.items() if v == current_mode), "Hybrid")
+        selected_display = st.selectbox(
+            "Mode",
+            list(mode_map.keys()),
+            index=list(mode_map.keys()).index(current_display),
+            help="Hybrid: Best balance (recommended). AI: cloud-only. Local: templates.",
+            key="mode_select_row",
         )
-        st.session_state.processing_mode = processing_mode
+        st.session_state.processing_mode = mode_map.get(
+            selected_display, "hybrid")
     with controls[1]:
         # Theme selection with native Streamlit theme integration
         current_theme = st.session_state.get('theme', 'Light')
