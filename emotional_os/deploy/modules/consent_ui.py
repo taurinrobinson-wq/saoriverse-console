@@ -11,6 +11,7 @@ Provides Streamlit UI components for asking users about:
 import streamlit as st
 from typing import Dict, Optional
 from datetime import datetime
+import json
 
 
 def render_anonymization_consent_widget(
@@ -240,6 +241,27 @@ def render_consent_settings_panel():
 
         st.divider()
         st.markdown("**Data Management**")
+
+        # Export / download user's data: show only for authenticated users
+        try:
+            if st.session_state.get('authenticated', False) and st.session_state.get('user_id'):
+                conversation_key = f"conversation_history_{st.session_state.get('user_id')}"
+                user_data = {
+                    "user_id": st.session_state.get('user_id'),
+                    "username": st.session_state.get('username'),
+                    "conversations": st.session_state.get(conversation_key, []),
+                    "export_date": __import__('datetime').datetime.now().isoformat()
+                }
+                st.download_button(
+                    "📥 Export / Download My Data",
+                    json.dumps(user_data, indent=2),
+                    file_name=f"emotional_os_data_{st.session_state.get('username') or 'user'}_{__import__('datetime').datetime.now().strftime('%Y%m%d')}.json",
+                    mime="application/json",
+                    key="download_consent_sidebar"
+                )
+        except Exception:
+            # Non-fatal; don't break the sidebar if export generation fails
+            pass
 
         if st.button("📊 View My Data Privacy Report"):
             st.info("Privacy report generation coming soon")
