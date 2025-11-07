@@ -401,19 +401,6 @@ def render_splash_interface(auth):
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-    # Provide explicit Sign In / Register actions so users can open auth forms
-    # from the splash screen. This ensures the login path is reachable even when
-    # embedding or CSS rules affect other interactive elements.
-    with st.container():
-        cols = st.columns([1, 1, 1])
-        with cols[1]:
-            if st.button("Sign In", key="splash_sign_in"):
-                st.session_state.show_login = True
-                st.rerun()
-            if st.button("Register", key="splash_register"):
-                st.session_state.show_register = True
-                st.rerun()
-
     if st.session_state.get('show_login', False):
         auth.render_login_form()
     elif st.session_state.get('show_register', False):
@@ -423,32 +410,9 @@ def render_splash_interface(auth):
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             qcol1, qcol2 = st.columns([1, 1], gap="small")
-        try:
-            # If the package-local static file exists, prefer that (keeps
-            # assets colocated with the package). Otherwise fall back to the
-            # repo-root static/graphics directory used historically.
-            if os.path.exists(pkg_graphics_path):
-                try:
-                    st.image(pkg_graphics_path, width=140)
-                except Exception:
-                    img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
-                    st.markdown(img_tag, unsafe_allow_html=True)
-            elif os.path.exists(repo_graphics_path):
-                try:
-                    st.image(repo_graphics_path, width=140)
-                except Exception:
-                    img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
-                    st.markdown(img_tag, unsafe_allow_html=True)
-            else:
-                # Fallback: load inline SVG (keeps previous behavior when
-                # the static file is not present). The loader already strips
-                # problematic XML/DOCTYPE lines.
-                svg_markup = _load_inline_svg(logo_file)
-                st.markdown(
-                    f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
-        except Exception:
-            st.markdown(
-                '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+        # Logo already rendered above in the centered splash area. Skip
+        # re-rendering it here to avoid duplicate icons showing on the
+        # splash/login page; keep the auth container open for controls.
         st.markdown('</div>', unsafe_allow_html=True)
 
 
@@ -567,20 +531,8 @@ def render_main_app():
         # Load and display previous conversations
         if ConversationManager and st.session_state.get('conversation_manager'):
             st.markdown("---")
-            # Defensive: the helper may not be importable in minimal environments.
-            # Guard the call so missing conversation helpers don't cause a NameError
-            # that aborts the main UI rendering.
-            try:
-                if callable(load_all_conversations_to_sidebar):
-                    load_all_conversations_to_sidebar(
-                        st.session_state['conversation_manager'])
-                else:
-                    st.info("Conversation list is currently unavailable.")
-            except Exception as _e:
-                # Best-effort: log the issue and continue rendering the UI.
-                logger.exception(
-                    "Failed to load conversations into sidebar: %s", _e)
-                st.info("Could not load saved conversations right now.")
+            load_all_conversations_to_sidebar(
+                st.session_state['conversation_manager'])
 
             # New conversation button
             if st.button("➕ New Conversation", use_container_width=True):
