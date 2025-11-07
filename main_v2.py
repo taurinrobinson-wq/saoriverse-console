@@ -16,6 +16,19 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Replace default favicon with project logo (use embedded data URI so Streamlit
+# will show the SVG as the browser favicon regardless of static file serving).
+try:
+    logo_path = Path("static/graphics/FirstPerson-Logo.svg")
+    if logo_path.exists():
+        svg_bytes = logo_path.read_bytes()
+        b64 = base64.b64encode(svg_bytes).decode("ascii")
+        st.markdown(
+            f"<link rel=\"icon\" href=\"data:image/svg+xml;base64,{b64}\" type=\"image/svg+xml\">", unsafe_allow_html=True)
+except Exception:
+    # Non-fatal: keep the emoji favicon if embedding fails
+    pass
+
 
 # Initialize session state
 if 'initialized' not in st.session_state:
