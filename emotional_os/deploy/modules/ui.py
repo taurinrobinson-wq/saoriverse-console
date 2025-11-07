@@ -21,6 +21,21 @@ except Exception:
     # Allow environments where the safety module isn't available (tests, CI)
     FallbackProtocol = None
 
+# ConversationManager handles persisted conversations; import defensively so
+# UI stays import-safe in environments where conversation management isn't
+# available (tests, minimal CI). Also import generate_auto_name helper if
+# present; fall back to None when unavailable.
+try:
+    from emotional_os.deploy.modules.conversation_manager import (
+        ConversationManager,
+        generate_auto_name,
+        load_all_conversations_to_sidebar,
+    )
+except Exception:
+    ConversationManager = None
+    generate_auto_name = None
+    load_all_conversations_to_sidebar = None
+
 logger = logging.getLogger(__name__)
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
