@@ -6,6 +6,7 @@ import streamlit as st
 from pathlib import Path
 import os
 import base64
+import json
 
 # Must be first Streamlit command
 st.set_page_config(
@@ -52,6 +53,80 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# Remove stacked markdown blocks that only contain <style> tags (they create visible padding).
+# This script hides any element-container whose markdown child contains only a <style> element.
+st.markdown("""
+<script>
+(function(){
+    function removeStyleOnlyMarkdown(){
+        try{
+            const containers = document.querySelectorAll('div[data-testid="stMarkdownContainer"]');
+            containers.forEach(c=>{
+                // If the container has exactly one child and it's a STYLE tag, hide the nearest element-container
+                if(c.children.length === 1 && c.children[0].tagName && c.children[0].tagName.toLowerCase() === 'style'){
+                    // Walk up to find the element-container wrapper
+                    let el = c;
+                    while(el && !el.classList.contains('element-container')){
+                        el = el.parentElement;
+                    }
+                    if(el){
+                        el.style.display = 'none';
+                        el.style.margin = '0';
+                        el.style.padding = '0';
+                    }
+                }
+            });
+        }catch(e){console.warn('removeStyleOnlyMarkdown failed', e)}
+    }
+
+    window.addEventListener('load', function(){
+        removeStyleOnlyMarkdown();
+        // run again shortly after load for dynamic rendering
+        setTimeout(removeStyleOnlyMarkdown, 150);
+    });
+
+    // Observe DOM changes to catch dynamically injected style blocks
+    const observer = new MutationObserver(function(mutations){
+        removeStyleOnlyMarkdown();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+""", unsafe_allow_html=True)
+
+# Hide the top brand row (emoji + H1) when the app is embedded in certain layouts.
+# This prevents the duplicated header/title from rendering in pages where space is limited.
+# Targets the header H1 id and the adjacent emoji block.
+st.markdown("""
+    <style>
+    /* Hide specific header by id */
+    /* Primary: hide the H1 Streamlit generates for the page header */
+    h1#firstperson-personal-ai-companion { display: none !important; }
+
+    /* Fallbacks: hide heading container that may be wrapped by Streamlit test ids */
+    [data-testid="stHeadingWithActionElements"] { display: none !important; }
+    [data-testid="stHeadingWithActionElements"] h1 { display: none !important; }
+
+    /* Also hide any h1 whose id starts with the page slug (defensive) */
+    h1[id^="firstperson"] { display: none !important; }
+
+    /* Hide the small emoji/logo block rendered adjacent to the header */
+    /* This targets the inner markdown container with the inline style font-size: 2.5rem */
+    div[data-testid="stMarkdownContainer"] div[style*="font-size: 2.5rem"] { display: none !important; }
+
+    /* Hide any horizontal block that contains the brand row to avoid layout shift */
+    div[data-testid="stHorizontalBlock"] > div > div > div > div > div > div > div > h1 { display: none !important; }
+    </style>
+""", unsafe_allow_html=True)
+
+# Target specific Streamlit-generated padding block class and reduce its top padding
+st.markdown("""
+    <style>
+    /* Reduce top padding on the large header container that pushes content down */
+    .st-emotion-cache-7tauuy { padding: 0rem 1rem 1rem !important; }
+    </style>
+""", unsafe_allow_html=True)
+
 # Apply theme only if not already loaded for this session
 if not st.session_state.get('theme_loaded'):
     if st.session_state.get('theme') == 'Dark':
@@ -90,6 +165,64 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
+# Reduce font sizes in the sidebar for a denser layout
+st.markdown("""
+    <style>
+    /* Target the Streamlit sidebar container and reduce text sizes */
+    [data-testid="stSidebar"] { font-size: 0.92rem !important; }
+
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] .stMarkdown p,
+    [data-testid="stSidebar"] .stMarkdown div,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] .stWidgetLabel,
+    [data-testid="stSidebar"] .stButton>button,
+    [data-testid="stSidebar"] .stSelectbox,
+    [data-testid="stSidebar"] .stMetric {
+        font-size: 0.92rem !important;
+        line-height: 1.15 !important;
+    }
+
+    /* Slightly larger for small titles if present */
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] .stTitle {
+        font-size: 1rem !important;
+    }
+
+    /* Ensure buttons and inputs remain usable */
+    [data-testid="stSidebar"] .stButton>button {
+        padding: 6px 10px !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Fallback: ensure a download control exists in the sidebar for authenticated users only
+try:
+    # Only show the fallback download when a user is signed in
+    if st.session_state.get('authenticated', False) and st.session_state.get('user_id'):
+        with st.sidebar:
+            try:
+                conversation_key = f"conversation_history_{st.session_state.get('user_id')}"
+                user_data = {
+                    "user_id": st.session_state.get('user_id'),
+                    "username": st.session_state.get('username'),
+                    "conversations": st.session_state.get(conversation_key, []),
+                    "export_date": __import__('datetime').datetime.now().isoformat()
+                }
+                st.download_button(
+                    "Download My Data",
+                    json.dumps(user_data, indent=2),
+                    file_name=f"emotional_os_data_{st.session_state.get('username') or 'user'}_{__import__('datetime').datetime.now().strftime('%Y%m%d')}.json",
+                    mime="application/json",
+                    key="download_fallback_main"
+                )
+            except Exception:
+                # Non-fatal; ensure sidebar rendering doesn't break
+                pass
+except Exception:
+    pass
 
 # Optional local preprocessor (privacy-first steward)
 try:
