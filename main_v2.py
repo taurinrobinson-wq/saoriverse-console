@@ -461,19 +461,24 @@ def main():
     """Main application entry point."""
     # Initialize authentication
     auth = SaoynxAuthentication()
-    # Check if user is authenticated
-    if st.session_state.get('authenticated', False):
-        # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
-        try:
-            if 'render_main_app_safe' in globals() and callable(globals().get('render_main_app_safe')):
-                globals().get('render_main_app_safe')()
-            else:
-                render_main_app()
-        except Exception:
-            # Let the outer __main__ exception handler render a friendly page
-            raise
-    else:
+    # Default to rendering the main app interface immediately. The UI now
+    # supports a demo-first flow: when the user is not authenticated we show
+    # the full interface in demo mode and expose Sign In / Register in the
+    # sidebar. The legacy splash screen can still be shown by setting the
+    # `force_splash` session_state key (useful for QA or debugging).
+    if st.session_state.get('force_splash', False):
         render_splash_interface(auth)
+        return
+
+    # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
+    try:
+        if 'render_main_app_safe' in globals() and callable(globals().get('render_main_app_safe')):
+            globals().get('render_main_app_safe')()
+        else:
+            render_main_app()
+    except Exception:
+        # Let the outer __main__ exception handler render a friendly page
+        raise
 
 
 if __name__ == "__main__":
