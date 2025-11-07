@@ -171,19 +171,9 @@ def render_controls_row(conversation_key):
             st.session_state[conversation_key] = []
             st.rerun()
     with controls[4]:
-        if st.button("Download My Data", type="secondary", key="download_btn_row"):
-            user_data = {
-                "user_id": st.session_state.user_id,
-                "username": st.session_state.username,
-                "conversations": st.session_state[conversation_key],
-                "export_date": datetime.datetime.now().isoformat()
-            }
-            st.download_button(
-                "Download JSON",
-                json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
-            )
+        # Moved 'Download My Data' to the sidebar (related controls)
+        # Keep this slot reserved for future row controls if needed.
+        pass
     with controls[5]:
         if st.button("Start Personal Log", key="start_log_btn"):
             st.session_state.show_personal_log = True
@@ -237,7 +227,7 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
 
 def render_splash_interface(auth):
     inject_css("emotional_os/deploy/emotional_os_ui.css")
-    
+
     # Add custom CSS for splash screen
     st.markdown("""
     <style>
@@ -276,8 +266,9 @@ def render_splash_interface(auth):
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         # Logo and text container
-        st.markdown('<div class="splash-logo-container">', unsafe_allow_html=True)
-        
+        st.markdown('<div class="splash-logo-container">',
+                    unsafe_allow_html=True)
+
         # Use the full logo
         logo_file = "FirstPerson-Logo.svg"
         svg_markup = _load_inline_svg(logo_file)
@@ -285,8 +276,9 @@ def render_splash_interface(auth):
             st.markdown(
                 f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
         except Exception:
-            st.markdown('<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
-        
+            st.markdown(
+                '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+
         # Add title and subtitle
         st.markdown("""
             <div class="splash-title">Personal AI</div>
@@ -591,6 +583,12 @@ def render_main_app():
         except Exception:
             # Non-fatal: sidebar HIL toggle shouldn't break the UI
             pass
+
+        # NOTE: Export / download control intentionally removed from here.
+        # The download/export button now lives inside the Privacy & Consent
+        # sidebar expander (`render_consent_settings_panel`) so it is only
+        # visible within that scoped area. Keeping it here caused duplicate
+        # controls to appear in the main chat UI.
 
     # Dynamically inject theme CSS
     theme = st.session_state.get("theme_select_row", "Light")
