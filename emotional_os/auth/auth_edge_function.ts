@@ -66,7 +66,16 @@ async function ensureUsersTable(admin: any) {
 // Create user account
 async function createUser(data: any, admin: any): Promise<any> {
   try {
-    const { username, password_hash, salt, email, first_name, last_name, created_at } = data;
+    const { username, password_hash, salt, password, email, first_name, last_name, created_at } = data;
+
+    // If client supplied a raw password, hash it server-side so we always store a hash+salt
+    let final_password_hash = password_hash;
+    let final_salt = salt;
+    if (!final_password_hash && password) {
+      const h = hashPassword(password);
+      final_password_hash = h.hash;
+      final_salt = h.salt;
+    }
 
     // Check if username already exists
     const { data: existingUser } = await admin
@@ -85,8 +94,8 @@ async function createUser(data: any, admin: any): Promise<any> {
     // Create new user (include first_name / last_name when provided)
     const insertPayload: any = {
       username,
-      password_hash,
-      salt,
+      password_hash: final_password_hash,
+      salt: final_salt,
       email: email || null,
       created_at,
       last_login: null,
@@ -94,6 +103,9 @@ async function createUser(data: any, admin: any): Promise<any> {
     };
     if (first_name) insertPayload.first_name = first_name;
     if (last_name) insertPayload.last_name = last_name;
+
+    // Debug: log payload being inserted (helps diagnose missing fields after deploy)
+    try { console.log("createUser: insertPayload=", JSON.stringify(insertPayload)); } catch (e) { }
 
     const { data: newUser, error } = await admin
       .from('users')
