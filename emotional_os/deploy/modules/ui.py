@@ -620,6 +620,55 @@ def render_main_app():
     except Exception:
         pass
 
+    # If the sidebar requested to show login/register, render those forms
+    # in the main area so the user can interact with them. We render them
+    # early and return to avoid drawing the rest of the main UI beneath
+    # the auth form.
+    try:
+        if st.session_state.get('show_login', False):
+            if auth:
+                auth.render_login_form()
+            else:
+                st.error("Authentication subsystem unavailable")
+            return
+        if st.session_state.get('show_register', False):
+            if auth:
+                auth.render_register_form()
+            else:
+                st.error("Authentication subsystem unavailable")
+            return
+    except Exception:
+        # Non-fatal: if rendering the forms fails, ensure flags are reset
+        st.session_state['show_login'] = False
+        st.session_state['show_register'] = False
+        pass
+
+    # If the user just authenticated, show a gentle confirmation toast
+    # and then automatically transition into the authenticated UI.
+    try:
+        if st.session_state.get('authenticated') and st.session_state.get('post_login_transition'):
+            msg = st.session_state.get(
+                'post_login_message', 'Signed in successfully')
+            # Center a subtle confirmation card
+            c1, c2, c3 = st.columns([1, 2, 1])
+            with c2:
+                st.markdown(
+                    f"<div style='padding:16px;border-radius:10px;background:#f0fff4;border:1px solid #d1f7d8;text-align:center;font-weight:600;'>✅ {msg}</div>",
+                    unsafe_allow_html=True,
+                )
+            # Small pause to let the user see the confirmation
+            try:
+                time.sleep(1.0)
+            except Exception:
+                pass
+            # Clear transient flags and rerun to render the full authenticated UI
+            st.session_state.pop('post_login_transition', None)
+            st.session_state.pop('post_login_message', None)
+            st.rerun()
+    except Exception:
+        # Non-fatal; proceed to render sidebar normally
+        pass
+
     # Display sidebar with previous conversations
     with st.sidebar:
         # Account panel: show sign-in/register when not authenticated.
