@@ -54,23 +54,23 @@ def replace_absolute_paths_in_file(path: Path):
     Returns True if file changed.
     """
     text = path.read_text(encoding='utf-8', errors='ignore')
+    # Replace any os.chdir(...) occurrences with a portable repo-root chdir
+    new_text, n = RE_CHDIR_CALL.subn(
+        "repo_root = Path(__file__).resolve().parent\nos.chdir(str(repo_root))",
+        text,
+    )
 
-    # Replace any repo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root)) with dynamic repo root
-    def _repl(match):
-        return "repo_root = Path(__file__).resolve().parent\nrepo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root)))"
+    # Also replace literal /Users/... absolute paths with a portable expression
+    new_text2, m = RE_ABSOLUTE_PATH_UNIX.subn(
+        "str(Path(__file__).resolve().parent)", new_text
+    )
 
-    new_text, n = RE_CHDIR_CALL.subn(_repl, text)
-
-    # Also replace literal str(Path(__file__).resolve().parent) occurrences in tests (less robust but helpful)
-    new_text2, m = RE_ABSOLUTE_PATH_UNIX.subn("str(Path(__file__).resolve().parent)", new_text)
-
-    if n + m > 0 and new_text2 != text:
+    if (n + m) > 0 and new_text2 != text:
         backup = path.with_suffix(path.suffix + ".bak")
         path.write_text(new_text2, encoding='utf-8')
         backup.write_text(text, encoding='utf-8')
-        print(f"Patched {path} (replacements: chdir={n}, abs_paths={m}), backup at {backup}")
+        print(
+            f"Patched {path} (replacements: chdir={n}, abs_paths={m}), backup at {backup}")
         return True
 
     return False
@@ -103,14 +103,24 @@ def git_commit(repo_root: Path, message: str) -> bool:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--auto-fix", action="store_true", help="Automatically apply conservative fixes")
-    parser.add_argument("--commit", action="store_true", help="Create a local git commit for fixes (no push)")
+    parser.add_argument("--auto-fix", action="store_true",
+                        help="Automatically apply conservative fixes")
+    parser.add_argument("--commit", action="store_true",
+                        help="Create a local git commit for fixes (no push)")
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
-    venv_python = repo_root / ".venv" / "Scripts" / "python.exe"
-    if not venv_python.exists():
-        print(f"Warning: expected venv python at {venv_python} not found. Falling back to sys.executable")
+    # Try common venv locations for both Unix and Windows
+    possible = [repo_root / ".venv" / "bin" / "python",
+                repo_root / ".venv" / "Scripts" / "python.exe",
+                repo_root / "venv" / "bin" / "python"]
+    venv_python = None
+    for p in possible:
+        if p.exists():
+            venv_python = p
+            break
+    if venv_python is None:
+        print("Warning: expected venv python not found in common locations. Falling back to sys.executable")
         venv_python = Path(sys.executable)
 
     result = run_pytest(venv_python)
@@ -133,7 +143,8 @@ def main():
             patched = auto_fix_absolute_paths(repo_root)
             print(f"Auto-fix applied to {patched} files.")
             if patched and args.commit:
-                git_commit(repo_root, "chore(diagnostics): auto-fix absolute test paths")
+                git_commit(
+                    repo_root, "chore(diagnostics): auto-fix absolute test paths")
             # Re-run pytest once more after fixes
             print("Re-running pytest after auto-fix...")
             rerun = run_pytest(venv_python)
@@ -142,7 +153,8 @@ def main():
             if rerun.returncode == 0:
                 print("Auto-fix resolved the test failures.")
             else:
-                print("Auto-fix did not resolve all failures — please inspect test output.")
+                print(
+                    "Auto-fix did not resolve all failures — please inspect test output.")
         else:
             print("Run with --auto-fix to attempt conservative automated fixes.")
     else:

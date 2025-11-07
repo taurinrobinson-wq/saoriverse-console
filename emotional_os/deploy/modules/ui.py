@@ -14,6 +14,12 @@ except Exception:
 
 import streamlit as st
 
+try:
+    from emotional_os.safety.fallback_protocols import FallbackProtocol
+except Exception:
+    # Allow environments where the safety module isn't available (tests, CI)
+    FallbackProtocol = None
+
 logger = logging.getLogger(__name__)
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
@@ -110,11 +116,47 @@ def _load_inline_svg(filename: str) -> str:
             except Exception:
                 # Diagnostics must never break the page; swallow errors.
                 pass
-    from emotional_os.safety.fallback_protocols import FallbackProtocol
+    except Exception as e:
+        # Log specific failure reasons for diagnostics. Use exc_info to
+        # capture tracebacks in logs where available.
+        try:
+            # Provide a concise reason string depending on the exception type
+            if isinstance(e, FileNotFoundError):
+                reason = f"file_not_found: {path}"
+            else:
+                reason = f"{type(e).__name__}: {str(e)}"
+        except Exception:
+            reason = str(e)
 
+        logger.warning("_load_inline_svg failed for %s: %s",
+                       filename, reason, exc_info=True)
 
-except Exception:
-    FallbackProtocol = None
+        # Create a small, emotionally resonant fallback SVG. Include a
+        # traceable identifier in an HTML comment so it's easy to find in
+        # rendered pages or logs. Cache the fallback so repeated failures
+        # are cheap.
+        trace_id = uuid.uuid4().hex[:8]
+        fallback = (
+            f'<!-- fallback_svg_rendered id={trace_id} -->'
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" '
+            'width="140" height="140" role="img" aria-label="Fallback logo">'
+            '<defs>'
+            '<linearGradient id="g1" x1="0" x2="1">'
+            '<stop offset="0%" stop-color="#7F7FD5"/>'
+            '<stop offset="100%" stop-color="#86A8E7"/>'
+            '</linearGradient>'
+            '</defs>'
+            '<rect width="100%" height="100%" fill="#ffffff"/>'
+            '<g transform="translate(70,70)">'
+            '<circle r="38" fill="url(#g1)" opacity="0.95" />'
+            '<path d="M-18 0 Q 0 -24 18 0" fill="none" stroke="#ffffff" stroke-width="3" '
+            'stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>'
+            '<circle cx="0" cy="0" r="6" fill="#ffffff"/>'
+            '</g>'
+            '</svg>'
+        )
+        _SVG_CACHE[filename] = fallback
+        return fallback
 
 
 def inject_css(css_file_path):

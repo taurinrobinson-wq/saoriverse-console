@@ -14,7 +14,7 @@ sys.path.insert(0, str(app_dir))
 
 # Set up environment
 repo_root = Path(__file__).resolve().parent
-os.chdir(str(repo_root)))
+os.chdir(str(repo_root))
 
 # Import and run the FastAPI app
 try:
