@@ -139,8 +139,11 @@ def render_controls_row(conversation_key):
         # Resolve current display label from the internal value
         current_display = next(
             (k for k, v in mode_map.items() if v == current_mode), "Hybrid")
-        selected_display = st.selectbox(
-            "Mode",
+        # Render a compact inline label + select so the control remains narrow
+        mode_cols = st.columns([0.6, 1])
+        mode_cols[0].markdown("**Mode**")
+        selected_display = mode_cols[1].selectbox(
+            "",
             list(mode_map.keys()),
             index=list(mode_map.keys()).index(current_display),
             help="Hybrid: Best balance (recommended). AI: cloud-only. Local: templates.",
@@ -152,8 +155,11 @@ def render_controls_row(conversation_key):
         # Theme selection with native Streamlit theme integration
         current_theme = st.session_state.get('theme', 'Light')
         theme_options = ["Light", "Dark"]
-        selected_theme = st.selectbox(
-            "Theme",
+        # Compact layout: small label, selectbox, and personal log button inline
+        theme_cols = st.columns([0.6, 1, 1])
+        theme_cols[0].markdown("**T**")
+        selected_theme = theme_cols[1].selectbox(
+            "",
             theme_options,
             index=theme_options.index(current_theme),
             key="theme_select"
@@ -168,8 +174,9 @@ def render_controls_row(conversation_key):
                 st.rerun()
             except:
                 st.rerun()  # Fallback to regular rerun if experimental feature not available
+
         # Start Personal Log moved next to Theme selector for easier access
-        if st.button("Start Personal Log", key="start_log_btn"):
+        if theme_cols[2].button("Start Log", key="start_log_btn"):
             st.session_state.show_personal_log = True
             st.rerun()
     # Removed Debug and Clear History controls — these buttons did not provide
