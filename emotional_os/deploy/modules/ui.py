@@ -277,10 +277,10 @@ def render_splash_interface(auth):
         st.markdown('<div class="splash-logo-container">',
                     unsafe_allow_html=True)
 
-        # Use the full logo
-        logo_file = "FirstPerson-Logo.svg"
-        svg_markup = _load_inline_svg(logo_file)
-        try:
+    # Use the cropped logo (preferred for splash and small placements)
+    logo_file = "FirstPerson-Logo_cropped.svg"
+      svg_markup = _load_inline_svg(logo_file)
+       try:
             st.markdown(
                 f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
         except Exception:
