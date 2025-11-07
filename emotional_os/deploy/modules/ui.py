@@ -3,6 +3,7 @@ import json
 import logging
 import time
 import uuid
+import os
 
 try:
     import requests
@@ -34,95 +35,38 @@ def _load_inline_svg(filename: str) -> str:
     if filename in _SVG_CACHE:
         return _SVG_CACHE[filename]
 
-    path = f"static/graphics/{filename}"
+    # Try package-local graphics folder first, then repo-root static/graphics
+    pkg_path = os.path.join(os.path.dirname(__file__),
+                            "static", "graphics", filename)
+    repo_path = os.path.join("static", "graphics", filename)
+    tried_path = None
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        # Pick the first existing candidate path
+        if os.path.exists(pkg_path):
+            tried_path = pkg_path
+        elif os.path.exists(repo_path):
+            tried_path = repo_path
+        else:
+            tried_path = pkg_path  # will raise when attempting to open
+
+        # Read the SVG file and sanitize/remove XML declaration or DOCTYPE
+        with open(tried_path, "r", encoding="utf-8") as f:
             svg = f.read()
-            # Strip XML declaration / DOCTYPE which can break inline SVG
-            # rendering when injected into an HTML fragment.
-            if svg.lstrip().startswith('<?xml'):
-                # Remove the first line (XML declaration)
-                svg = '\n'.join(svg.splitlines()[1:])
-            if '<!DOCTYPE' in svg:
-                # Remove doctype if present
-                parts = svg.split('<!DOCTYPE')
-                # keep everything after the doctype closing '>'
-                if '>' in parts[1]:
-                    svg = parts[0] + parts[1].split('>', 1)[1]
+        if svg.lstrip().startswith('<?xml'):
+            svg = '\n'.join(svg.splitlines()[1:])
+        if '<!DOCTYPE' in svg:
+            parts = svg.split('<!DOCTYPE')
+            if len(parts) > 1 and '>' in parts[1]:
+                svg = parts[0] + parts[1].split('>', 1)[1]
 
-            _SVG_CACHE[filename] = svg
-            try:
-                # If the static file exists on disk, render it using Streamlit's
-                # image helper which reads the file locally and embeds it. This
-                # avoids relying on the app's HTTP static route which sometimes
-                # returns the SPA HTML instead of the raw asset.
-                import os
-
-                file_path = f"static/graphics/{logo_file}"
-                if os.path.exists(file_path):
-                    try:
-                        st.image(file_path, width=140)
-                    except Exception:
-                        # As a fallback, attempt to emit a regular <img> tag
-                        img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
-                        st.markdown(img_tag, unsafe_allow_html=True)
-                else:
-                    # Fallback: load inline SVG (keeps previous behavior when
-                    # the static file is not present). The loader already strips
-                    # problematic XML/DOCTYPE lines.
-                    svg_markup = _load_inline_svg(logo_file)
-                    st.markdown(
-                        f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
-
-            except Exception:
-                st.markdown(
-                    '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
-
-            # Developer diagnostics: provide an optional expander that shows
-            # whether the file exists, a short preview of its contents, and the
-            # result of an HTTP HEAD to the app's static route. This helps debug
-            # situations where the SPA is returned instead of the raw asset.
-            try:
-                with st.expander("Logo diagnostics (dev)", expanded=False):
-                    import os as _os
-                    file_path = f"static/graphics/{logo_file}"
-                    exists = _os.path.exists(file_path)
-                    st.write("File on disk:", exists, file_path)
-                    if exists:
-                        try:
-                            with open(file_path, "r", encoding="utf-8") as _f:
-                                content = _f.read()
-                            st.write("File size:", len(content), "bytes")
-                            st.code(content[:500])
-                        except Exception as _e:
-                            st.write("Could not read file:", str(_e))
-                    else:
-                        st.write(
-                            "File not present on disk; inline fallback used.")
-
-                    # Try a HEAD request to the app's static URL to see what the
-                    # HTTP layer returns (may be HTML if routing is capturing it).
-                    try:
-                        if requests is not None:
-                            url = f"http://localhost:8501/static/graphics/{logo_file}"
-                            _resp = requests.head(url, timeout=3)
-                            st.write("HTTP HEAD:", _resp.status_code)
-                            st.write(_resp.headers.get("Content-Type"))
-                        else:
-                            st.write(
-                                "requests not available in this environment")
-                    except Exception as _e:
-                        st.write("HTTP check failed:", str(_e))
-            except Exception:
-                # Diagnostics must never break the page; swallow errors.
-                pass
+        # Cache and return raw markup only (no Streamlit calls here)
+        _SVG_CACHE[filename] = svg
+        return svg
     except Exception as e:
-        # Log specific failure reasons for diagnostics. Use exc_info to
-        # capture tracebacks in logs where available.
+        # Log the failure for diagnostics but do not call Streamlit here
         try:
-            # Provide a concise reason string depending on the exception type
             if isinstance(e, FileNotFoundError):
-                reason = f"file_not_found: {path}"
+                reason = f"file_not_found: {tried_path or repo_path}"
             else:
                 reason = f"{type(e).__name__}: {str(e)}"
         except Exception:
@@ -131,10 +75,7 @@ def _load_inline_svg(filename: str) -> str:
         logger.warning("_load_inline_svg failed for %s: %s",
                        filename, reason, exc_info=True)
 
-        # Create a small, emotionally resonant fallback SVG. Include a
-        # traceable identifier in an HTML comment so it's easy to find in
-        # rendered pages or logs. Cache the fallback so repeated failures
-        # are cheap.
+        # Return a small fallback SVG string (cached). No Streamlit calls.
         trace_id = uuid.uuid4().hex[:8]
         fallback = (
             f'<!-- fallback_svg_rendered id={trace_id} -->'
@@ -372,65 +313,71 @@ def render_splash_interface(auth):
         st.markdown('<div class="splash-logo-container">',
                     unsafe_allow_html=True)
 
-        # Use the cropped logo from the static directory to avoid inline SVG
-        # fill/viewBox inconsistencies across browsers. Prefer serving the SVG
-        # as an <img> which ensures correct MIME handling and consistent sizing.
-        logo_file = "FirstPerson-Logo_cropped.svg"
-        static_path = f"/static/graphics/{logo_file}"
+    # Use the cropped logo from the static directory to avoid inline SVG
+    # fill/viewBox inconsistencies across browsers. Prefer serving the SVG
+    # as an <img> which ensures correct MIME handling and consistent sizing.
+    logo_file = "FirstPerson-Logo_cropped.svg"
 
-        # Provide a simple CSS hook for sizing the raster/SVG image
-        st.markdown(
-            """
-            <style>
-            /* Stronger splash CSS: target inline SVG elements and <img> fallbacks. */
-            .splash-logo, .splash-logo img, .splash-logo svg { display: block; margin: 0 auto; width: 140px; height: auto; }
+    # Prefer graphics stored under the package static folder so the asset
+    # lives with the code. Fall back to repository-root `static/graphics`.
+    pkg_graphics_path = os.path.join(os.path.dirname(
+        __file__), "static", "graphics", logo_file)
+    repo_graphics_path = os.path.join("static", "graphics", logo_file)
 
-            /* Force fills and remove strokes inside inline SVGs so white shapes
-               become visible on light backgrounds. Use attribute selectors to
-               catch explicit fill attributes and inline styles. */
-            .splash-logo svg * { fill: #31333F !important; stroke: none !important; }
-            .splash-logo svg [fill="#fff"], .splash-logo svg [fill="#FFFFFF"] { fill: #31333F !important; }
-            .splash-logo svg [style*="fill:#fff"], .splash-logo svg [style*="fill:#FFF"],
-            .splash-logo svg [style*="fill:#ffffff"], .splash-logo svg [style*="fill:#FFFFFF"] { fill: #31333F !important; }
+    static_path = f"/static/graphics/{logo_file}"
 
-            /* Improve rendering quality and ensure inline SVGs respect sizing */
-            .splash-logo svg { shape-rendering: geometricPrecision; image-rendering: optimizeQuality; }
+    # Provide a simple CSS hook for sizing the raster/SVG image
+    st.markdown(
+        """
+        <style>
+        /* Stronger splash CSS: target inline SVG elements and <img> fallbacks. */
+        .splash-logo, .splash-logo img, .splash-logo svg { display: block; margin: 0 auto; width: 140px; height: auto; }
 
-            /* For <img> rendered SVGs (external resource), apply a light drop-shadow
-               so white shapes gain contrast on white backgrounds. */
-            .splash-logo img, img.splash-logo { filter: drop-shadow(0 0 6px rgba(0,0,0,0.25)) !important; background-color: transparent !important; }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        /* Force fills and remove strokes inside inline SVGs so white shapes
+           become visible on light backgrounds. Use attribute selectors to
+           catch explicit fill attributes and inline styles. */
+        .splash-logo svg * { fill: #31333F !important; stroke: none !important; }
+        .splash-logo svg [fill="#fff"], .splash-logo svg [fill="#FFFFFF"] { fill: #31333F !important; }
+        .splash-logo svg [style*="fill:#fff"], .splash-logo svg [style*="fill:#FFF"],
+        .splash-logo svg [style*="fill:#ffffff"], .splash-logo svg [style*="fill:#FFFFFF"] { fill: #31333F !important; }
 
-        try:
-            # If the static file exists on disk, render it as an <img>. This
-            # avoids inline SVG fill inheritance problems and respects the
-            # browser's SVG rendering behavior (viewBox, preserveAspectRatio).
-            import os
+        /* Improve rendering quality and ensure inline SVGs respect sizing */
+        .splash-logo svg { shape-rendering: geometricPrecision; image-rendering: optimizeQuality; }
 
-            if os.path.exists(f"static/graphics/{logo_file}"):
-                # Use Streamlit's image rendering which reads the file directly
-                # and embeds it correctly into the page. This avoids relying
-                # on the app's HTTP static route which can sometimes return
-                # the SPA HTML instead of the asset.
-                try:
-                    st.image(f"static/graphics/{logo_file}", width=140)
-                except Exception:
-                    # As a fallback, attempt to emit a regular <img> tag
-                    img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
-                    st.markdown(img_tag, unsafe_allow_html=True)
-            else:
-                # Fallback: load inline SVG (keeps previous behavior when
-                # the static file is not present). The loader already strips
-                # problematic XML/DOCTYPE lines.
-                svg_markup = _load_inline_svg(logo_file)
-                st.markdown(
-                    f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
-        except Exception:
+        /* For <img> rendered SVGs (external resource), apply a light drop-shadow
+           so white shapes gain contrast on white backgrounds. */
+        .splash-logo img, img.splash-logo { filter: drop-shadow(0 0 6px rgba(0,0,0,0.25)) !important; background-color: transparent !important; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    try:
+        # If the package-local static file exists, prefer that (keeps
+        # assets colocated with the package). Otherwise fall back to the
+        # repo-root static/graphics directory used historically.
+        if os.path.exists(pkg_graphics_path):
+            try:
+                st.image(pkg_graphics_path, width=140)
+            except Exception:
+                img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
+                st.markdown(img_tag, unsafe_allow_html=True)
+        elif os.path.exists(repo_graphics_path):
+            try:
+                st.image(repo_graphics_path, width=140)
+            except Exception:
+                img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
+                st.markdown(img_tag, unsafe_allow_html=True)
+        else:
+            # Fallback: load inline SVG (keeps previous behavior when
+            # the static file is not present). The loader already strips
+            # problematic XML/DOCTYPE lines.
+            svg_markup = _load_inline_svg(logo_file)
             st.markdown(
-                '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+                f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
+    except Exception:
+        st.markdown(
+            '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
 
         # Add title and subtitle
         st.markdown("""
@@ -448,46 +395,75 @@ def render_splash_interface(auth):
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             qcol1, qcol2 = st.columns([1, 1], gap="small")
-            with qcol1:
-                st.markdown(
-                    '<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
-            with qcol2:
-                st.markdown(
-                    '<div class="auth-question">new user?</div>', unsafe_allow_html=True)
-            bcol1, bcol2 = st.columns([1, 1], gap="small")
-            with bcol1:
-                if st.button("Sign In", key="existing_btn"):
-                    st.session_state.show_login = True
-                    st.rerun()
-            with bcol2:
-                if st.button("Register Now", key="new_btn"):
-                    st.session_state.show_register = True
-                    st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown('<div class="quick-access">', unsafe_allow_html=True)
-        st.markdown('<div class="quick-title">Quick Access</div>',
-                    unsafe_allow_html=True)
-        col1, col2, col3 = st.columns([1, 1, 1])
-        # Quick access: keep login bypass but remove legacy demo-mode trigger for full rollout
-        with col2:
-            if st.button("⚡ Quick Login", help="Quick sign-in (developer shortcut)"):
+        try:
+            # If the package-local static file exists, prefer that (keeps
+            # assets colocated with the package). Otherwise fall back to the
+            # repo-root static/graphics directory used historically.
+            if os.path.exists(pkg_graphics_path):
                 try:
-                    auth.quick_login_bypass()
+                    st.image(pkg_graphics_path, width=140)
                 except Exception:
-                    pass
+                    img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
+                    st.markdown(img_tag, unsafe_allow_html=True)
+            elif os.path.exists(repo_graphics_path):
+                try:
+                    st.image(repo_graphics_path, width=140)
+                except Exception:
+                    img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
+                    st.markdown(img_tag, unsafe_allow_html=True)
+            else:
+                # Fallback: load inline SVG (keeps previous behavior when
+                # the static file is not present). The loader already strips
+                # problematic XML/DOCTYPE lines.
+                svg_markup = _load_inline_svg(logo_file)
+                st.markdown(
+                    f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
+        except Exception:
+            st.markdown(
+                '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
 
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
+    # Optional debug overlay: enable by setting the environment variable
+    # FP_DEBUG_UI=1 in the deployment environment or export it locally when
+    # running the app. This prints helpful session_state keys to the UI so
+    # we can see why the post-login view might be empty.
+    try:
+        import os as _os
+        if _os.environ.get('FP_DEBUG_UI') == '1':
+            try:
+                with st.expander('DEBUG: session_state snapshot', expanded=True):
+                    _keys = [
+                        'authenticated', 'user_id', 'username', 'session_expires',
+                        'show_login', 'show_register', 'header_rendered', 'conversation_manager'
+                    ]
+                    _snap = {k: (st.session_state.get(k) if k != 'conversation_manager' else (
+                        'present' if st.session_state.get('conversation_manager') else 'none')) for k in _keys}
+                    st.json(_snap)
+            except Exception:
+                # Best-effort: do not break the main UI when debug overlay fails
+                pass
+    except Exception:
+        pass
     # Skip header rendering if it's already been done
     if not st.session_state.get('header_rendered'):
         # Render header with logo and title very close together
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
             try:
-                st.image(
-                    "/static/graphics/FirstPerson-Logo-normalized.svg", width=24)
+                # Prefer package-local normalized logo if present
+                norm_file = "FirstPerson-Logo-normalized.svg"
+                pkg_norm = os.path.join(os.path.dirname(
+                    __file__), "static", "graphics", norm_file)
+                repo_norm = os.path.join("static", "graphics", norm_file)
+                if os.path.exists(pkg_norm):
+                    st.image(pkg_norm, width=24)
+                elif os.path.exists(repo_norm):
+                    st.image(repo_norm, width=24)
+                else:
+                    raise FileNotFoundError
             except Exception:
                 st.markdown(
                     '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
@@ -1652,3 +1628,38 @@ def delete_user_history_from_supabase(user_id: str):
             return False, f'Supabase delete returned {resp.status_code}: {resp.text}'
     except Exception as e:
         return False, str(e)
+
+
+def render_main_app_safe(*args, **kwargs):
+    """Runtime-safe wrapper around render_main_app.
+
+    Catches exceptions raised during rendering, writes a full traceback to
+    `debug_runtime.log`, attempts to display a minimal error to the user,
+    and then re-raises the exception so host-level logs capture it as well.
+    """
+    try:
+        return render_main_app(*args, **kwargs)
+    except Exception as e:
+        import traceback
+        from pathlib import Path as _Path
+
+        tb = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+        try:
+            _Path('debug_runtime.log').write_text(tb, encoding='utf-8')
+        except Exception:
+            # best-effort write
+            pass
+
+        try:
+            # If Streamlit is usable, show a short excerpt to the user
+            st.error(
+                "A runtime error occurred; details have been written to debug_runtime.log")
+            excerpt = '\n'.join(tb.splitlines()[-12:])
+            st.markdown(
+                f"<pre style='white-space:pre-wrap'>{excerpt}</pre>", unsafe_allow_html=True)
+        except Exception:
+            # If Streamlit can't render, print to stdout for host logs
+            print(tb)
+
+        # Re-raise so hosting environment also records the traceback
+        raise
