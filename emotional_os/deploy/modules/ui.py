@@ -620,28 +620,12 @@ def render_main_app():
     except Exception:
         pass
 
-    # If the sidebar requested to show login/register, render those forms
-    # in the main area so the user can interact with them. We render them
-    # early and return to avoid drawing the rest of the main UI beneath
-    # the auth form.
-    try:
-        if st.session_state.get('show_login', False):
-            if auth:
-                auth.render_login_form()
-            else:
-                st.error("Authentication subsystem unavailable")
-            return
-        if st.session_state.get('show_register', False):
-            if auth:
-                auth.render_register_form()
-            else:
-                st.error("Authentication subsystem unavailable")
-            return
-    except Exception:
-        # Non-fatal: if rendering the forms fails, ensure flags are reset
-        st.session_state['show_login'] = False
-        st.session_state['show_register'] = False
-        pass
+    # We render auth forms inside the sidebar as expanders to keep the
+    # main area focused. Sidebar expanders are controlled by
+    # `sidebar_show_login` and `sidebar_show_register` session flags.
+    # Ensure defaults exist.
+    st.session_state.setdefault('sidebar_show_login', False)
+    st.session_state.setdefault('sidebar_show_register', False)
 
     # If the user just authenticated, show a gentle confirmation toast
     # and then automatically transition into the authenticated UI.
@@ -671,6 +655,23 @@ def render_main_app():
 
     # Display sidebar with previous conversations
     with st.sidebar:
+        # Best-effort CSS to constrain sidebar width so form fields fit.
+        # Streamlit's DOM classnames can change; this is a best-effort
+        # approach that works in many environments.
+        st.markdown(
+            """
+            <style>
+            /* Constrain sidebar width */
+            [data-testid="stSidebar"] > div {
+                min-width: 260px !important;
+                max-width: 400px !important;
+            }
+            /* Hide the vertical resize handle if present (best-effort) */
+            .css-1v3fvcr { resize: none !important; }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
         # Account panel: show sign-in/register when not authenticated.
         if not st.session_state.get('authenticated'):
             # Card-like account panel for a cleaner, welcoming look
@@ -686,11 +687,19 @@ def render_main_app():
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_sign_in"):
-                    st.session_state.show_login = True
+                    # Toggle the sidebar expander for sign-in
+                    st.session_state['sidebar_show_login'] = not st.session_state.get(
+                        'sidebar_show_login', False)
+                    # Ensure the other expander is closed
+                    if st.session_state['sidebar_show_login']:
+                        st.session_state['sidebar_show_register'] = False
                     st.rerun()
             with col_b:
                 if st.button("Register", key="sidebar_register"):
-                    st.session_state.show_register = True
+                    st.session_state['sidebar_show_register'] = not st.session_state.get(
+                        'sidebar_show_register', False)
+                    if st.session_state['sidebar_show_register']:
+                        st.session_state['sidebar_show_login'] = False
                     st.rerun()
 
             # Quick demo entry (uses auth quick_login_bypass when available)
@@ -708,6 +717,24 @@ def render_main_app():
                         st.rerun()
 
             st.markdown("---")
+
+            # Render auth expanders inside the sidebar (keeps main area stable)
+            try:
+                if st.session_state.get('sidebar_show_login'):
+                    with st.expander("Sign in", expanded=True):
+                        if auth:
+                            auth.render_login_form(in_sidebar=True)
+                        else:
+                            st.error("Authentication subsystem unavailable")
+                if st.session_state.get('sidebar_show_register'):
+                    with st.expander("Register", expanded=True):
+                        if auth:
+                            auth.render_register_form(in_sidebar=True)
+                        else:
+                            st.error("Authentication subsystem unavailable")
+            except Exception:
+                # Non-fatal: keep sidebar usable even if auth UI fails
+                pass
         else:
             st.markdown("### Settings")
 
