@@ -13,50 +13,71 @@ import streamlit as st
 class SaoynxAuthentication:
     """Authentication and session management"""
 
-    def render_login_form(self):
+    def render_login_form(self, in_sidebar: bool = False):
+        """Render the login form. If in_sidebar=True use sidebar-scoped keys/flags."""
         st.markdown("## Sign In")
-        username = st.text_input("Username", key="login_username")
-        password = st.text_input(
-            "Password", type="password", key="login_password")
-        if st.button("Login", key="login_btn"):
+        key_user = "sidebar_login_username" if in_sidebar else "login_username"
+        key_pass = "sidebar_login_password" if in_sidebar else "login_password"
+        key_btn = "sidebar_login_btn" if in_sidebar else "login_btn"
+        key_back = "sidebar_login_back_btn" if in_sidebar else "login_back_btn"
+
+        username = st.text_input("Username", key=key_user)
+        password = st.text_input("Password", type="password", key=key_pass)
+        if st.button("Login", key=key_btn):
             result = self.authenticate_user(username, password)
             if result["success"]:
-                # Set a transient post-login transition so the UI can show
-                # a gentle confirmation toast before moving into the main UI.
                 st.session_state['post_login_message'] = result.get(
                     "message", "Signed in")
                 st.session_state['post_login_transition'] = True
-                st.session_state.show_login = False
+                if in_sidebar:
+                    st.session_state['sidebar_show_login'] = False
+                else:
+                    st.session_state.show_login = False
                 st.rerun()
             else:
                 st.error(result["message"])
-        if st.button("Back", key="login_back_btn"):
-            st.session_state.show_login = False
+        if st.button("Back", key=key_back):
+            if in_sidebar:
+                st.session_state['sidebar_show_login'] = False
+            else:
+                st.session_state.show_login = False
             st.rerun()
 
-    def render_register_form(self):
+    def render_register_form(self, in_sidebar: bool = False):
+        """Render the register form. If in_sidebar=True use sidebar-scoped keys/flags."""
         st.markdown("## Register New Account")
-        # Collect first/last name and email to populate user profile
-        first_name = st.text_input("First name", key="register_first_name")
-        last_name = st.text_input("Last name", key="register_last_name")
-        email = st.text_input("Email", key="register_email")
-        username = st.text_input("Username", key="register_username")
-        password = st.text_input(
-            "Password", type="password", key="register_password")
-        if st.button("Register", key="register_btn"):
+        key_fn = "sidebar_register_first_name" if in_sidebar else "register_first_name"
+        key_ln = "sidebar_register_last_name" if in_sidebar else "register_last_name"
+        key_email = "sidebar_register_email" if in_sidebar else "register_email"
+        key_user = "sidebar_register_username" if in_sidebar else "register_username"
+        key_pass = "sidebar_register_password" if in_sidebar else "register_password"
+        key_btn = "sidebar_register_btn" if in_sidebar else "register_btn"
+        key_back = "sidebar_register_back_btn" if in_sidebar else "register_back_btn"
+
+        first_name = st.text_input("First name", key=key_fn)
+        last_name = st.text_input("Last name", key=key_ln)
+        email = st.text_input("Email", key=key_email)
+        username = st.text_input("Username", key=key_user)
+        password = st.text_input("Password", type="password", key=key_pass)
+        if st.button("Register", key=key_btn):
             result = self.create_user(
                 username, password, first_name=first_name, last_name=last_name, email=email)
             if result["success"]:
-                # Trigger the same post-login transition used for login
                 st.session_state['post_login_message'] = result.get(
                     "message", "Account created")
                 st.session_state['post_login_transition'] = True
-                st.session_state.show_register = False
+                if in_sidebar:
+                    st.session_state['sidebar_show_register'] = False
+                else:
+                    st.session_state.show_register = False
                 st.rerun()
             else:
                 st.error(result["message"])
-        if st.button("Back", key="register_back_btn"):
-            st.session_state.show_register = False
+        if st.button("Back", key=key_back):
+            if in_sidebar:
+                st.session_state['sidebar_show_register'] = False
+            else:
+                st.session_state.show_register = False
             st.rerun()
 
     def __init__(self):
