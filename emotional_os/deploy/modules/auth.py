@@ -21,7 +21,11 @@ class SaoynxAuthentication:
         if st.button("Login", key="login_btn"):
             result = self.authenticate_user(username, password)
             if result["success"]:
-                st.success(result["message"])
+                # Set a transient post-login transition so the UI can show
+                # a gentle confirmation toast before moving into the main UI.
+                st.session_state['post_login_message'] = result.get(
+                    "message", "Signed in")
+                st.session_state['post_login_transition'] = True
                 st.session_state.show_login = False
                 st.rerun()
             else:
@@ -38,7 +42,9 @@ class SaoynxAuthentication:
         if st.button("Register", key="register_btn"):
             result = self.create_user(username, password)
             if result["success"]:
-                st.success(result["message"])
+                st.session_state['post_login_message'] = result.get(
+                    "message", "Account created")
+                st.session_state['post_login_transition'] = True
                 st.session_state.show_register = False
                 st.rerun()
             else:
@@ -217,6 +223,9 @@ class SaoynxAuthentication:
             datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
         session_token = self.create_session_token("demo_user", user_id)
         st.query_params["session_token"] = session_token
+        # Indicate a lightweight post-login transition so the UI shows a confirmation
+        st.session_state['post_login_message'] = "Signed in as demo_user"
+        st.session_state['post_login_transition'] = True
         st.rerun()
 
     def logout(self):
