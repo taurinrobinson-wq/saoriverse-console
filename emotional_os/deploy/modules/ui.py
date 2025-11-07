@@ -160,16 +160,13 @@ def render_controls_row(conversation_key):
                 st.rerun()
             except:
                 st.rerun()  # Fallback to regular rerun if experimental feature not available
+    # Removed Debug and Clear History controls — these buttons did not provide
+    # useful functionality and duplicated UI surface area. Slots retained for
+    # layout stability.
     with controls[2]:
-        if "show_debug" not in st.session_state:
-            st.session_state.show_debug = False
-        if st.button("Debug", key="debug_toggle_row"):
-            st.session_state.show_debug = not st.session_state.show_debug
-            st.rerun()
+        pass
     with controls[3]:
-        if st.button("Clear History", type="secondary", key="clear_history_btn_row"):
-            st.session_state[conversation_key] = []
-            st.rerun()
+        pass
     with controls[4]:
         # Moved 'Download My Data' to the sidebar (related controls)
         # Keep this slot reserved for future row controls if needed.
@@ -1102,28 +1099,10 @@ def render_main_app():
                         st.warning("Consent UI unavailable")
                     except Exception as e:
                         st.warning(f"Consent settings error: {e}")
-        # Always show debug expander if toggled, regardless of mode
-        if st.session_state.get("show_debug", False):
-            with st.expander("Debug: Emotional OS Activation Details", expanded=True):
-                st.write("**Signals Detected:**", debug_signals)
-                st.write("**Gates Activated:**", debug_gates)
-                st.write("**Glyphs Matched:**", debug_glyphs)
-                st.write("**Raw SQL Query:**", debug_sql)
-                st.write("**Glyph Rows (Raw):**", debug_glyph_rows)
-
-                # Show Fallback Protocol details if available
-                if fallback_result:
-                    with st.expander("Fallback Protocols Analysis", expanded=False):
-                        st.write(
-                            "**Tone Ambiguity:**", fallback_result.get("detections", {}).get("ambiguity"))
-                        st.write(
-                            "**Trigger Misfires:**", fallback_result.get("detections", {}).get("misfires"))
-                        st.write("**Overlapping Triggers:**", fallback_result.get(
-                            "detections", {}).get("overlapping_triggers"))
-                        st.write("**Glyph Response:**",
-                                 fallback_result.get("glyph_response"))
-                        st.write("**Protocol Decisions:**",
-                                 fallback_result.get("decisions"))
+        # Debug output removed — internal diagnostic panels were removed from
+        # the main UI surface. If you need to inspect internal processing
+        # structures (signals, glyphs, SQL), consider adding a developer-only
+        # diagnostic page or using logging instead.
 
         entry = {
             "user": user_input,
