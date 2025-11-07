@@ -461,7 +461,6 @@ def main():
     """Main application entry point."""
     # Initialize authentication
     auth = SaoynxAuthentication()
-
     # Check if user is authenticated
     if st.session_state.get('authenticated', False):
         # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
