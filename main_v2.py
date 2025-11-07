@@ -38,6 +38,35 @@ except Exception:
         initial_sidebar_state="expanded"
     )
 
+# Quick maintenance mode: when MAINTENANCE_MODE=1 is set in the environment,
+# render a simple friendly maintenance page and stop further app execution.
+# This is a reversible, low-risk change so you can show users a working page
+# while I continue diagnosing the root cause in the background.
+try:
+    if os.environ.get('MAINTENANCE_MODE') == '1':
+        st.markdown(
+            """
+            <div style="display:flex;align-items:center;justify-content:center;height:70vh;">
+              <div style="text-align:center;max-width:720px;padding:28px;border-radius:12px;border:1px solid #E8EDF3;background:linear-gradient(180deg,#FBFDFF,#FFFFFF)">
+                <h2 style="margin:0 0 8px 0;color:#23262A;font-weight:400">FirstPerson — temporarily offline for maintenance</h2>
+                <p style="color:#586069;margin:0 0 12px 0">We're applying a quick fix so the full app will be back shortly. Thank you for your patience.</p>
+                <p style="color:#6B7178;margin:0;font-size:0.9rem">If you signed in and expect to see data, please try again in a few minutes.</p>
+              </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        # Halt further Streamlit execution to keep the page simple and stable
+        try:
+            st.stop()
+        except Exception:
+            # If st.stop is not available for some reason, exit silently
+            import sys as _sys
+            _sys.exit(0)
+except Exception:
+    # Do not allow maintenance-mode logic to block normal startup on errors
+    pass
+
 # Replace default favicon with project logo (use embedded data URI so Streamlit
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
@@ -191,14 +220,14 @@ st.markdown("""
     window.addEventListener('load', function(){
         removeStyleOnlyMarkdown();
         // run again shortly after load for dynamic rendering
-                    def _pkg_ver(n):
-                        try:
-                            return _md.version(n)
-                        except Exception:
-                            return '<no-metadata-or-not-installed>'
+        setTimeout(removeStyleOnlyMarkdown, 150);
+    });
+
+    // Observe DOM changes to catch dynamically injected style blocks
+    const observer = new MutationObserver(function(mutations){
         removeStyleOnlyMarkdown();
-                    def _pkg_ver(n):
-                        return '<no-metadata>'
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
 """, unsafe_allow_html=True)
