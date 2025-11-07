@@ -54,6 +54,67 @@ except Exception:
 # Now import modules that rely on Streamlit being initialized (after page config).
 # Wrap imports in a try/except that prints the full traceback so deployment logs
 # will contain the original error (Streamlit's UI can redact exceptions).
+# Optional env-gated import diagnostic: set RUN_IMPORT_DIAG=1 in the environment
+# (Streamlit Cloud env vars or export on your host) to have the app print a
+# full environment snapshot and attempt imports before normal startup. The
+# output is written to debug_imports.log in the app directory and also printed
+# to stdout so deployment logs capture it.
+try:
+    if os.environ.get('RUN_IMPORT_DIAG') == '1':
+        import platform
+        import importlib
+        import traceback as _traceback
+        from pathlib import Path as _Path
+
+        _out = []
+
+        def _w(s):
+            print(s)
+            _out.append(str(s))
+
+        _w('=== RUN_IMPORT_DIAG ===')
+        _w('Platform: ' + platform.platform())
+        _w('Python: ' + sys.version.replace('\n', ' '))
+        _w('Executable: ' + sys.executable)
+        _w('CWD: ' + str(_Path.cwd()))
+        _w('Sys.path:')
+        for _p in sys.path:
+            _w('  ' + _p)
+
+        try:
+            import importlib.metadata as _md
+
+            def _pkg_ver(n):
+                try:
+                    return _md.version(n)
+                except Exception:
+                    return '<not-installed>'
+        except Exception:
+            def _pkg_ver(n):
+                return '<no-metadata>'
+
+        for _pkg in ('streamlit', 'requests'):
+            _w(f"{_pkg} version: {_pkg_ver(_pkg)}")
+
+        for _mod in ('main_v2', 'emotional_os.deploy.modules.ui'):
+            _w(f"-- import {_mod}")
+            try:
+                importlib.import_module(_mod)
+                _w(f"IMPORT_OK {_mod}")
+            except Exception:
+                _w(f"IMPORT_FAILED {_mod}")
+                for L in _traceback.format_exc().splitlines():
+                    _w('   ' + L)
+
+        try:
+            _logp = _Path('debug_imports.log')
+            _logp.write_text('\n'.join(_out), encoding='utf-8')
+            _w(f'Wrote {_logp}')
+        except Exception as _e:
+            _w('Failed to write debug_imports.log: ' + str(_e))
+except Exception:
+    # Diagnostic must never prevent normal startup
+    pass
 try:
     from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
     from emotional_os.deploy.modules.auth import SaoynxAuthentication
@@ -130,14 +191,14 @@ st.markdown("""
     window.addEventListener('load', function(){
         removeStyleOnlyMarkdown();
         // run again shortly after load for dynamic rendering
-        setTimeout(removeStyleOnlyMarkdown, 150);
-    });
-
-    // Observe DOM changes to catch dynamically injected style blocks
-    const observer = new MutationObserver(function(mutations){
+                    def _pkg_ver(n):
+                        try:
+                            return _md.version(n)
+                        except Exception:
+                            return '<no-metadata-or-not-installed>'
         removeStyleOnlyMarkdown();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+                    def _pkg_ver(n):
+                        return '<no-metadata>'
 })();
 </script>
 """, unsafe_allow_html=True)
