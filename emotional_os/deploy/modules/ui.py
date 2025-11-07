@@ -291,6 +291,19 @@ def render_splash_interface(auth):
         # Use the cropped logo (preferred for splash and small placements)
         logo_file = "FirstPerson-Logo_cropped.svg"
         svg_markup = _load_inline_svg(logo_file)
+
+        # Ensure the inline SVG is visible on both light and dark themes by
+        # overriding any embedded white fills from the source SVG. We set a
+        # sensible default color and sizing for the splash logo here.
+        st.markdown(
+            """
+            <style>
+            .splash-logo svg { width: 140px; height: 140px; }
+            .splash-logo svg .st0 { fill: #31333F !important; }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
         try:
             st.markdown(
                 f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
