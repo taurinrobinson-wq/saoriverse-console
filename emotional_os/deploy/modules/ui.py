@@ -160,6 +160,10 @@ def render_controls_row(conversation_key):
                 st.rerun()
             except:
                 st.rerun()  # Fallback to regular rerun if experimental feature not available
+        # Start Personal Log moved next to Theme selector for easier access
+        if st.button("Start Personal Log", key="start_log_btn"):
+            st.session_state.show_personal_log = True
+            st.rerun()
     # Removed Debug and Clear History controls — these buttons did not provide
     # useful functionality and duplicated UI surface area. Slots retained for
     # layout stability.
@@ -172,9 +176,8 @@ def render_controls_row(conversation_key):
         # Keep this slot reserved for future row controls if needed.
         pass
     with controls[5]:
-        if st.button("Start Personal Log", key="start_log_btn"):
-            st.session_state.show_personal_log = True
-            st.rerun()
+        # Slot kept intentionally empty; 'Start Personal Log' now next to Theme
+        pass
 
 # Data management functions
 
