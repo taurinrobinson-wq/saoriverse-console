@@ -401,6 +401,24 @@ def render_splash_interface(auth):
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+
+    # Make Sign In / Register actions obvious on the splash screen. Placing
+    # these buttons here ensures the auth forms can be opened even when other
+    # interactive elements are hidden by CSS or embedding contexts.
+    try:
+        with st.container():
+            c1, c2, c3 = st.columns([1, 2, 1])
+            with c2:
+                if st.button("Sign In", key="splash_sign_in"):
+                    st.session_state.show_login = True
+                    st.rerun()
+                if st.button("Register", key="splash_register"):
+                    st.session_state.show_register = True
+                    st.rerun()
+    except Exception:
+        # Best-effort: if Streamlit UI isn't fully available, continue silently
+        pass
+
     if st.session_state.get('show_login', False):
         auth.render_login_form()
     elif st.session_state.get('show_register', False):
@@ -462,6 +480,65 @@ def render_main_app():
         with col2:
             st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
         st.session_state['header_rendered'] = True
+    # ------------------------------------------------------------------------
+    # Demo-mode: if the user is not authenticated, provide a lightweight
+    # demo experience so the main interface loads immediately. The sidebar
+    # will expose Sign In / Register controls which open the existing auth
+    # flows. This keeps the previous splash page behaviour reversible.
+    # ------------------------------------------------------------------------
+    try:
+        from .auth import SaoynxAuthentication
+        auth = SaoynxAuthentication()
+    except Exception:
+        # Best-effort: if auth isn't available, proceed in a limited demo mode
+        auth = None
+
+    if not st.session_state.get('authenticated'):
+        # Ensure demo-mode session defaults exist so downstream code that
+        # expects a user_id/username can run without branching everywhere.
+        st.session_state.setdefault('demo_mode', True)
+        # Use a stable demo placeholder id so migration can find demo
+        # conversations later when the user authenticates.
+        if 'demo_placeholder_id' not in st.session_state:
+            st.session_state['demo_placeholder_id'] = f"demo_{uuid.uuid4().hex[:8]}"
+        st.session_state.setdefault(
+            'user_id', st.session_state['demo_placeholder_id'])
+        st.session_state.setdefault('username', 'Demo User')
+        # Informational banner for demo users and a small logo above it
+        try:
+            # Prefer package-local static SVG image for reliable rendering in VS Code/browser
+            pkg_logo = os.path.join(os.path.dirname(
+                __file__), "static", "graphics", "FirstPerson-Logo_cropped.svg")
+            if os.path.exists(pkg_logo):
+                # Center the small logo above the demo info
+                c1, c2, c3 = st.columns([1, 0.6, 1])
+                with c2:
+                    try:
+                        st.image(pkg_logo, width=64)
+                    except Exception:
+                        # Fallback to inline SVG rendering if st.image fails
+                        svg_markup = _load_inline_svg(
+                            "FirstPerson-Logo_cropped.svg")
+                        st.markdown(
+                            f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
+            else:
+                # Fallback: inline SVG if package file missing
+                svg_markup = _load_inline_svg("FirstPerson-Logo_cropped.svg")
+                st.markdown(
+                    f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
+
+            st.info(
+                "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+        except Exception:
+            try:
+                st.info(
+                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+            except Exception:
+                pass
+    else:
+        # Remove demo_mode flag when real user is authenticated
+        if 'demo_mode' in st.session_state:
+            del st.session_state['demo_mode']
 
     # ============================================================================
     # Initialize Conversation Manager & Sidebar
@@ -497,9 +574,93 @@ def render_main_app():
         if 'conversation_title' not in st.session_state:
             st.session_state['conversation_title'] = "New Conversation"
 
+    # If user just transitioned from demo -> authenticated, attempt a
+    # best-effort migration of the ephemeral demo conversation into the
+    # user's persistent storage. This runs before the sidebar renders so
+    # migrated content appears in the sidebar immediately.
+    try:
+        # Migration guard: run only once per session after authentication
+        if st.session_state.get('authenticated') and st.session_state.get('demo_placeholder_id') and not st.session_state.get('demo_migrated'):
+            demo_id = st.session_state.get('demo_placeholder_id')
+            demo_key = f"conversation_history_{demo_id}"
+            # New user id already set by auth flow
+            user_id_now = st.session_state.get('user_id')
+            user_key = f"conversation_history_{user_id_now}"
+            try:
+                # Only migrate if there is demo content and user has no content yet
+                if demo_key in st.session_state and st.session_state.get(demo_key):
+                    demo_messages = st.session_state.get(demo_key)
+                    # Copy into user's session key
+                    if user_key not in st.session_state or not st.session_state.get(user_key):
+                        st.session_state[user_key] = demo_messages
+
+                        # Attempt to persist via ConversationManager if available
+                        try:
+                            if ConversationManager:
+                                mgr = ConversationManager(user_id_now)
+                                # Create a new conversation record for the migrated demo
+                                conv_id = str(uuid.uuid4())
+                                first_msg = demo_messages[0].get('user') if isinstance(
+                                    demo_messages, list) and demo_messages and isinstance(demo_messages[0], dict) else None
+                                title = generate_auto_name(first_msg) if generate_auto_name and first_msg else (
+                                    st.session_state.get('conversation_title') or 'Migrated Conversation')
+                                mgr.save_conversation(
+                                    conv_id, title, demo_messages)
+                                # Set current conversation id to the newly created one
+                                st.session_state['current_conversation_id'] = conv_id
+                        except Exception:
+                            # Swallow persistence failures; session copy is already done
+                            pass
+
+                    # Mark migrated so we don't run again
+                    st.session_state['demo_migrated'] = True
+            except Exception:
+                # Non-fatal; do not block UI if migration fails
+                st.session_state['demo_migrated'] = True
+    except Exception:
+        pass
+
     # Display sidebar with previous conversations
     with st.sidebar:
-        st.markdown("### Settings")
+        # Account panel: show sign-in/register when not authenticated.
+        if not st.session_state.get('authenticated'):
+            # Card-like account panel for a cleaner, welcoming look
+            try:
+                svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
+                svg_markup_side = _load_inline_svg(svg_name_side)
+                st.markdown(
+                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
+            except Exception:
+                st.markdown("### Account")
+            st.markdown(
+                "Create an account or sign in to keep your conversations and enable full features.")
+            col_a, col_b = st.columns([1, 1])
+            with col_a:
+                if st.button("Sign in", key="sidebar_sign_in"):
+                    st.session_state.show_login = True
+                    st.rerun()
+            with col_b:
+                if st.button("Register", key="sidebar_register"):
+                    st.session_state.show_register = True
+                    st.rerun()
+
+            # Quick demo entry (uses auth quick_login_bypass when available)
+            if auth and hasattr(auth, 'quick_login_bypass'):
+                if st.button("Continue in demo", key="sidebar_continue_demo"):
+                    try:
+                        auth.quick_login_bypass()
+                    except Exception:
+                        # Best-effort: fall back to local demo session state
+                        st.session_state.authenticated = False
+                        st.session_state.user_id = st.session_state.get(
+                            'user_id')
+                        st.session_state.username = st.session_state.get(
+                            'username')
+                        st.rerun()
+
+            st.markdown("---")
+        else:
+            st.markdown("### Settings")
 
         # Persist history toggle
         persist_default = st.session_state.get('persist_history', True)
@@ -519,17 +680,18 @@ def render_main_app():
         except Exception:
             pass
 
-        # Privacy & Consent settings
-        try:
-            from emotional_os.deploy.modules.consent_ui import render_consent_settings_panel
-            render_consent_settings_panel()
-        except ImportError:
-            pass
-        except Exception as e:
-            st.warning(f"Consent settings error: {e}")
+        # Privacy & Consent settings - only show when user is authenticated
+        if st.session_state.get('authenticated'):
+            try:
+                from emotional_os.deploy.modules.consent_ui import render_consent_settings_panel
+                render_consent_settings_panel()
+            except ImportError:
+                pass
+            except Exception as e:
+                st.warning(f"Consent settings error: {e}")
 
-        # Load and display previous conversations
-        if ConversationManager and st.session_state.get('conversation_manager'):
+        # Load and display previous conversations - only for authenticated users
+        if st.session_state.get('authenticated') and ConversationManager and st.session_state.get('conversation_manager'):
             st.markdown("---")
             load_all_conversations_to_sidebar(
                 st.session_state['conversation_manager'])
@@ -544,166 +706,172 @@ def render_main_app():
 
         # Human-in-the-Loop (HIL) feature-flagged placeholder UI
         # Reacts to escalation signals produced by the local preprocessor.
-        try:
-            enable_default = st.session_state.get(
-                'enable_hil_escalation', False)
-            st.session_state['enable_hil_escalation'] = st.checkbox(
-                "🧑‍⚖️ Enable HIL escalation (dev)",
-                value=enable_default,
-                help="Show Human-in-the-Loop escalation controls for testing"
-            )
-
-            # Preprocessor sensitivity controls (configurable thresholds)
-            conf_default = st.session_state.get(
-                'preproc_confidence_threshold', 0.6)
-            cluster_default = st.session_state.get('preproc_cluster_size', 2)
-            conf = st.slider(
-                "Preprocessor confidence threshold",
-                min_value=0.0,
-                max_value=1.0,
-                value=conf_default,
-                step=0.05,
-                help="If preprocessor confidence falls below this, Tier 2 tags may escalate"
-            )
-            cluster = st.number_input(
-                "Tier-2 cluster size to escalate",
-                min_value=1,
-                max_value=5,
-                value=cluster_default,
-                help="Number of Tier-2 tags required to trigger cluster escalation"
-            )
-            # Persist controls in session state
-            st.session_state['preproc_confidence_threshold'] = float(conf)
-            st.session_state['preproc_cluster_size'] = int(cluster)
-
-            # Update live preprocessor instance if present
+        if st.session_state.get('authenticated'):
             try:
-                p_inst = st.session_state.get('local_preprocessor')
-                if p_inst:
-                    p_inst.confidence_threshold = st.session_state['preproc_confidence_threshold']
-                    p_inst.cluster_size = st.session_state['preproc_cluster_size']
-            except Exception:
-                pass
+                enable_default = st.session_state.get(
+                    'enable_hil_escalation', False)
+                st.session_state['enable_hil_escalation'] = st.checkbox(
+                    "🧑‍⚖️ Enable HIL escalation (dev)",
+                    value=enable_default,
+                    help="Show Human-in-the-Loop escalation controls for testing"
+                )
 
-            last = st.session_state.get('last_preproc')
-            escalation_action = last.get('escalation_action') if last else None
-            escalation_reason = last.get('escalation_reason') if last else None
+                # Preprocessor sensitivity controls (configurable thresholds)
+                conf_default = st.session_state.get(
+                    'preproc_confidence_threshold', 0.6)
+                cluster_default = st.session_state.get(
+                    'preproc_cluster_size', 2)
+                conf = st.slider(
+                    "Preprocessor confidence threshold",
+                    min_value=0.0,
+                    max_value=1.0,
+                    value=conf_default,
+                    step=0.05,
+                    help="If preprocessor confidence falls below this, Tier 2 tags may escalate"
+                )
+                cluster = st.number_input(
+                    "Tier-2 cluster size to escalate",
+                    min_value=1,
+                    max_value=5,
+                    value=cluster_default,
+                    help="Number of Tier-2 tags required to trigger cluster escalation"
+                )
+                # Persist controls in session state
+                st.session_state['preproc_confidence_threshold'] = float(conf)
+                st.session_state['preproc_cluster_size'] = int(cluster)
 
-            # If a force escalation is detected, surface a prominent prompt even if HIL is disabled
-            if escalation_action == 'force_escalation' and not st.session_state.get('enable_hil_escalation'):
-                st.markdown("---")
-                st.error(
-                    "⚠️ Immediate escalation recommended for the most recent exchange. Enable HIL to review and act.")
-                if st.button("Enable HIL & Review", key="enable_hil_now"):
-                    st.session_state['enable_hil_escalation'] = True
-                    st.rerun()
+                # Update live preprocessor instance if present
+                try:
+                    p_inst = st.session_state.get('local_preprocessor')
+                    if p_inst:
+                        p_inst.confidence_threshold = st.session_state['preproc_confidence_threshold']
+                        p_inst.cluster_size = st.session_state['preproc_cluster_size']
+                except Exception:
+                    pass
 
-            # When HIL enabled, show the escalation panel (if applicable)
-            if st.session_state.get('enable_hil_escalation'):
-                st.markdown("---")
-                st.markdown("### Human-in-the-Loop (HIL) Escalation")
+                last = st.session_state.get('last_preproc')
+                escalation_action = last.get(
+                    'escalation_action') if last else None
+                escalation_reason = last.get(
+                    'escalation_reason') if last else None
 
-                if not last:
-                    st.info("No preprocessing record available for review yet.")
-                else:
-                    # Visual priority: force -> error, conditional -> warning, none -> info
-                    if escalation_action == 'force_escalation':
-                        st.error(
-                            f"Force escalation recommended: {escalation_reason}")
-                    elif escalation_action == 'conditional_escalation':
-                        st.warning(
-                            f"Conditional escalation suggested: {escalation_reason}")
-                    else:
+                # If a force escalation is detected, surface a prominent prompt even if HIL is disabled
+                if escalation_action == 'force_escalation' and not st.session_state.get('enable_hil_escalation'):
+                    st.markdown("---")
+                    st.error(
+                        "⚠️ Immediate escalation recommended for the most recent exchange. Enable HIL to review and act.")
+                    if st.button("Enable HIL & Review", key="enable_hil_now"):
+                        st.session_state['enable_hil_escalation'] = True
+                        st.rerun()
+
+                # When HIL enabled, show the escalation panel (if applicable)
+                if st.session_state.get('enable_hil_escalation'):
+                    st.markdown("---")
+                    st.markdown("### Human-in-the-Loop (HIL) Escalation")
+
+                    if not last:
                         st.info(
-                            "No automatic escalation recommended for this exchange.")
+                            "No preprocessing record available for review yet.")
+                    else:
+                        # Visual priority: force -> error, conditional -> warning, none -> info
+                        if escalation_action == 'force_escalation':
+                            st.error(
+                                f"Force escalation recommended: {escalation_reason}")
+                        elif escalation_action == 'conditional_escalation':
+                            st.warning(
+                                f"Conditional escalation suggested: {escalation_reason}")
+                        else:
+                            st.info(
+                                "No automatic escalation recommended for this exchange.")
 
-                    # Show a compact summary including escalation metadata
-                    st.write({
-                        'intent': last.get('intent'),
-                        'confidence': last.get('confidence'),
-                        'emotional_tags': last.get('emotional_tags'),
-                        'edit_log': last.get('edit_log'),
-                        'editorial_interventions': last.get('editorial_interventions'),
-                        'escalation_action': escalation_action,
-                        'escalation_reason': escalation_reason,
-                        'taxonomy_source': last.get('taxonomy_source')
-                    })
+                        # Show a compact summary including escalation metadata
+                        st.write({
+                            'intent': last.get('intent'),
+                            'confidence': last.get('confidence'),
+                            'emotional_tags': last.get('emotional_tags'),
+                            'edit_log': last.get('edit_log'),
+                            'editorial_interventions': last.get('editorial_interventions'),
+                            'escalation_action': escalation_action,
+                            'escalation_reason': escalation_reason,
+                            'taxonomy_source': last.get('taxonomy_source')
+                        })
 
-                    cols = st.columns([1, 1, 1])
-                    if cols[0].button("Escalate to Human", key="escalate_to_human"):
-                        try:
-                            from local_inference.preprocessor import Preprocessor
-                            p = st.session_state.get('local_preprocessor')
-                            audit_payload = {
-                                'action': 'hil_escalate',
-                                'method': 'manual_button',
-                                'escalation_action': escalation_action,
-                                'escalation_reason': escalation_reason,
-                                'preproc_summary': last
-                            }
-                            if p and hasattr(p, 'record_audit'):
-                                p.record_audit(audit_payload)
-                                st.success("Escalation recorded (audit log).")
-                            else:
-                                st.session_state.setdefault('hil_escalation_log', []).append({
-                                    'timestamp': datetime.datetime.now().isoformat(),
-                                    **audit_payload
-                                })
-                                st.success(
-                                    "Escalation recorded (session log).")
-                        except Exception:
-                            st.info("Escalation recorded (local stub).")
+                        cols = st.columns([1, 1, 1])
+                        if cols[0].button("Escalate to Human", key="escalate_to_human"):
+                            try:
+                                from local_inference.preprocessor import Preprocessor
+                                p = st.session_state.get('local_preprocessor')
+                                audit_payload = {
+                                    'action': 'hil_escalate',
+                                    'method': 'manual_button',
+                                    'escalation_action': escalation_action,
+                                    'escalation_reason': escalation_reason,
+                                    'preproc_summary': last
+                                }
+                                if p and hasattr(p, 'record_audit'):
+                                    p.record_audit(audit_payload)
+                                    st.success(
+                                        "Escalation recorded (audit log).")
+                                else:
+                                    st.session_state.setdefault('hil_escalation_log', []).append({
+                                        'timestamp': datetime.datetime.now().isoformat(),
+                                        **audit_payload
+                                    })
+                                    st.success(
+                                        "Escalation recorded (session log).")
+                            except Exception:
+                                st.info("Escalation recorded (local stub).")
 
-                    if cols[1].button("Request Clarification", key="request_clarification"):
-                        try:
-                            # record the clarification request
-                            from local_inference.preprocessor import Preprocessor
-                            p = st.session_state.get('local_preprocessor')
-                            audit_payload = {
-                                'action': 'request_clarification',
-                                'method': 'manual_button',
-                                'escalation_action': escalation_action,
-                                'escalation_reason': escalation_reason,
-                                'preproc_summary': last
-                            }
-                            if p and hasattr(p, 'record_audit'):
-                                p.record_audit(audit_payload)
-                            else:
-                                st.session_state.setdefault('hil_escalation_log', []).append({
-                                    'timestamp': datetime.datetime.now().isoformat(),
-                                    **audit_payload
-                                })
-                            st.info("Clarification requested (logged).")
-                        except Exception:
-                            st.info("Clarification requested (local stub).")
+                        if cols[1].button("Request Clarification", key="request_clarification"):
+                            try:
+                                # record the clarification request
+                                from local_inference.preprocessor import Preprocessor
+                                p = st.session_state.get('local_preprocessor')
+                                audit_payload = {
+                                    'action': 'request_clarification',
+                                    'method': 'manual_button',
+                                    'escalation_action': escalation_action,
+                                    'escalation_reason': escalation_reason,
+                                    'preproc_summary': last
+                                }
+                                if p and hasattr(p, 'record_audit'):
+                                    p.record_audit(audit_payload)
+                                else:
+                                    st.session_state.setdefault('hil_escalation_log', []).append({
+                                        'timestamp': datetime.datetime.now().isoformat(),
+                                        **audit_payload
+                                    })
+                                st.info("Clarification requested (logged).")
+                            except Exception:
+                                st.info("Clarification requested (local stub).")
 
-                    if cols[2].button("Escalate to AI (sanitized)", key="escalate_to_ai"):
-                        try:
-                            from local_inference.preprocessor import Preprocessor
-                            p = st.session_state.get('local_preprocessor')
-                            audit_payload = {
-                                'action': 'hil_escalate_ai',
-                                'method': 'manual_button',
-                                'escalation_action': escalation_action,
-                                'escalation_reason': escalation_reason,
-                                'preproc_summary': last
-                            }
-                            if p and hasattr(p, 'record_audit'):
-                                p.record_audit(audit_payload)
-                                st.success(
-                                    "AI escalation requested (audit log).")
-                            else:
-                                st.session_state.setdefault('hil_escalation_log', []).append({
-                                    'timestamp': datetime.datetime.now().isoformat(),
-                                    **audit_payload
-                                })
-                                st.success(
-                                    "AI escalation requested (session log).")
-                        except Exception:
-                            st.info("AI escalation requested (local stub).")
-        except Exception:
-            # Non-fatal: sidebar HIL toggle shouldn't break the UI
-            pass
+                        if cols[2].button("Escalate to AI (sanitized)", key="escalate_to_ai"):
+                            try:
+                                from local_inference.preprocessor import Preprocessor
+                                p = st.session_state.get('local_preprocessor')
+                                audit_payload = {
+                                    'action': 'hil_escalate_ai',
+                                    'method': 'manual_button',
+                                    'escalation_action': escalation_action,
+                                    'escalation_reason': escalation_reason,
+                                    'preproc_summary': last
+                                }
+                                if p and hasattr(p, 'record_audit'):
+                                    p.record_audit(audit_payload)
+                                    st.success(
+                                        "AI escalation requested (audit log).")
+                                else:
+                                    st.session_state.setdefault('hil_escalation_log', []).append({
+                                        'timestamp': datetime.datetime.now().isoformat(),
+                                        **audit_payload
+                                    })
+                                    st.success(
+                                        "AI escalation requested (session log).")
+                            except Exception:
+                                st.info("AI escalation requested (local stub).")
+            except Exception:
+                # Non-fatal: sidebar HIL toggle shouldn't break the UI
+                pass
 
         # NOTE: Export / download control intentionally removed from here.
         # The download/export button now lives inside the Privacy & Consent
