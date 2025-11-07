@@ -6,6 +6,11 @@ import os
 import base64
 import json
 
+# Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
+# To enable the friendly maintenance page without editing code, set
+# MAINTENANCE_MODE=1 in your deployment environment. We avoid changing
+# process environment variables in the repository by default.
+
 # Important: don't import modules that use Streamlit until after
 # we call st.set_page_config — Streamlit requires page_config to be the
 # first Streamlit command in the main script. UI/auth modules import
@@ -145,7 +150,13 @@ except Exception:
     # Diagnostic must never prevent normal startup
     pass
 try:
-    from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
+    # Import both the primary renderer and the safe runtime wrapper (if present).
+    from emotional_os.deploy.modules.ui import (
+        render_main_app,
+        render_main_app_safe,
+        render_splash_interface,
+        delete_user_history_from_supabase,
+    )
     from emotional_os.deploy.modules.auth import SaoynxAuthentication
 except Exception:
     import traceback
@@ -453,7 +464,15 @@ def main():
 
     # Check if user is authenticated
     if st.session_state.get('authenticated', False):
-        render_main_app()
+        # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
+        try:
+            if 'render_main_app_safe' in globals() and callable(globals().get('render_main_app_safe')):
+                globals().get('render_main_app_safe')()
+            else:
+                render_main_app()
+        except Exception:
+            # Let the outer __main__ exception handler render a friendly page
+            raise
     else:
         render_splash_interface(auth)
 
