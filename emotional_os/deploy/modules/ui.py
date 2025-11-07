@@ -340,7 +340,23 @@ def render_splash_interface(auth):
         st.markdown(
             """
             <style>
-            .splash-logo { width: 140px; height: auto; display: block; margin: 0 auto; }
+            /* Stronger splash CSS: target inline SVG elements and <img> fallbacks. */
+            .splash-logo, .splash-logo img, .splash-logo svg { display: block; margin: 0 auto; width: 140px; height: auto; }
+
+            /* Force fills and remove strokes inside inline SVGs so white shapes
+               become visible on light backgrounds. Use attribute selectors to
+               catch explicit fill attributes and inline styles. */
+            .splash-logo svg * { fill: #31333F !important; stroke: none !important; }
+            .splash-logo svg [fill="#fff"], .splash-logo svg [fill="#FFFFFF"] { fill: #31333F !important; }
+            .splash-logo svg [style*="fill:#fff"], .splash-logo svg [style*="fill:#FFF"],
+            .splash-logo svg [style*="fill:#ffffff"], .splash-logo svg [style*="fill:#FFFFFF"] { fill: #31333F !important; }
+
+            /* Improve rendering quality and ensure inline SVGs respect sizing */
+            .splash-logo svg { shape-rendering: geometricPrecision; image-rendering: optimizeQuality; }
+
+            /* For <img> rendered SVGs (external resource), apply a light drop-shadow
+               so white shapes gain contrast on white backgrounds. */
+            .splash-logo img, img.splash-logo { filter: drop-shadow(0 0 6px rgba(0,0,0,0.25)) !important; background-color: transparent !important; }
             </style>
             """,
             unsafe_allow_html=True,
