@@ -103,15 +103,16 @@ def inject_css(css_file_path):
                     setTimeout(function() {
                         const observer = new MutationObserver(function(mutations) {
                             mutations.forEach(function(mutation) {
-                                if (mutation.target.classList && 
-                                    (mutation.target.classList.contains('stSelectbox') || 
+                                if (mutation.target.classList &&
+                                    (mutation.target.classList.contains('stSelectbox') ||
                                      mutation.target.classList.contains('stMarkdown'))) {
                                     // Ensure all elements are visible and styled correctly after theme change
                                     document.body.style.visibility = 'visible';
                                 }
                             });
                         });
-                        observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+                        observer.observe(
+                            document.body, { attributes: true, childList: true, subtree: true });
                     }, 100);
                 });
             </script>
@@ -128,38 +129,29 @@ def render_controls_row(conversation_key):
     with controls[0]:
         if 'processing_mode' not in st.session_state:
             st.session_state.processing_mode = "hybrid"
-        # Use compact display labels for the dropdown while preserving
-        # internal values used elsewhere in the app.
-        mode_map = {
-            "Hybrid": "hybrid",
-            "AI": "ai_preferred",
-            "Local": "local",
-        }
+
+        # Use the canonical internal mode values in the selectbox so other
+        # code can rely on the exact strings stored in session_state.
+        mode_options = ["hybrid", "ai_preferred", "local"]
         current_mode = st.session_state.processing_mode
-        # Resolve current display label from the internal value
-        current_display = next(
-            (k for k, v in mode_map.items() if v == current_mode), "Hybrid")
-        # Render a compact inline label + select so the control remains narrow
-        mode_cols = st.columns([0.6, 1])
-        mode_cols[0].markdown("**Mode**")
-        selected_display = mode_cols[1].selectbox(
-            "",
-            list(mode_map.keys()),
-            index=list(mode_map.keys()).index(current_display),
-            help="Hybrid: Best balance (recommended). AI: cloud-only. Local: templates.",
-            key="mode_select_row",
+        if current_mode not in mode_options:
+            current_mode = "hybrid"
+
+        processing_mode = st.selectbox(
+            "Processing Mode",
+            mode_options,
+            index=mode_options.index(current_mode),
+            help="Hybrid: Best balance (recommended), AI: Cloud-only, Local: Templates",
+            key="mode_select_row"
         )
-        st.session_state.processing_mode = mode_map.get(
-            selected_display, "hybrid")
+        st.session_state.processing_mode = processing_mode
+
     with controls[1]:
         # Theme selection with native Streamlit theme integration
         current_theme = st.session_state.get('theme', 'Light')
         theme_options = ["Light", "Dark"]
-        # Compact layout: small label, selectbox, and personal log button inline
-        theme_cols = st.columns([0.6, 1, 1])
-        theme_cols[0].markdown("**T**")
-        selected_theme = theme_cols[1].selectbox(
-            "",
+        selected_theme = st.selectbox(
+            "Theme",
             theme_options,
             index=theme_options.index(current_theme),
             key="theme_select"
@@ -175,15 +167,16 @@ def render_controls_row(conversation_key):
             except:
                 st.rerun()  # Fallback to regular rerun if experimental feature not available
 
-        # Start Personal Log moved next to Theme selector for easier access
-        if theme_cols[2].button("Start Log", key="start_log_btn"):
-            st.session_state.show_personal_log = True
-            st.rerun()
+        # Start Personal Log moved into the narrow column to match the
+        # requested DOM slot (first small column after Theme)
+        # (Button rendered in controls[2] below.)
     # Removed Debug and Clear History controls — these buttons did not provide
     # useful functionality and duplicated UI surface area. Slots retained for
     # layout stability.
     with controls[2]:
-        pass
+        if st.button("Start Personal Log", key="start_log_btn"):
+            st.session_state.show_personal_log = True
+            st.rerun()
     with controls[3]:
         pass
     with controls[4]:
