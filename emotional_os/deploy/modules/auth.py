@@ -36,12 +36,18 @@ class SaoynxAuthentication:
 
     def render_register_form(self):
         st.markdown("## Register New Account")
+        # Collect first/last name and email to populate user profile
+        first_name = st.text_input("First name", key="register_first_name")
+        last_name = st.text_input("Last name", key="register_last_name")
+        email = st.text_input("Email", key="register_email")
         username = st.text_input("Username", key="register_username")
         password = st.text_input(
             "Password", type="password", key="register_password")
         if st.button("Register", key="register_btn"):
-            result = self.create_user(username, password)
+            result = self.create_user(
+                username, password, first_name=first_name, last_name=last_name, email=email)
             if result["success"]:
+                # Trigger the same post-login transition used for login
                 st.session_state['post_login_message'] = result.get(
                     "message", "Account created")
                 st.session_state['post_login_transition'] = True
@@ -179,33 +185,75 @@ class SaoynxAuthentication:
         except Exception as e:
             return {"success": False, "message": f"Login error: {str(e)}"}
 
-    def create_user(self, username: str, password: str) -> dict:
+    def create_user(self, username: str, password: str, first_name: str = None, last_name: str = None, email: str = None) -> dict:
+        # Demo-mode behavior: create and auto-authenticate a demo user
         if not self.supabase_configured:
-            # Demo mode - simulate user creation
             if username and password:
-                return {"success": True, "message": "Demo account created successfully"}
+                user_id = str(uuid.uuid4())
+                st.session_state.authenticated = True
+                st.session_state.user_id = user_id
+                st.session_state.username = username
+                if first_name:
+                    st.session_state['first_name'] = first_name
+                if last_name:
+                    st.session_state['last_name'] = last_name
+                if email:
+                    st.session_state['email'] = email
+                st.session_state.session_expires = (
+                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+                session_token = self.create_session_token(username, user_id)
+                st.query_params["session_token"] = session_token
+                return {"success": True, "message": "Demo account created and signed in"}
             return {"success": False, "message": "Please enter username and password"}
 
         try:
             auth_url = st.secrets.get("supabase", {}).get(
                 "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            payload = {
+                "action": "create_user",
+                "username": username,
+                "password": password,
+                "created_at": datetime.datetime.now().isoformat()
+            }
+            if first_name:
+                payload['first_name'] = first_name
+            if last_name:
+                payload['last_name'] = last_name
+            if email:
+                payload['email'] = email
+
             response = requests.post(
                 auth_url,
                 headers={
                     "Authorization": f"Bearer {self.supabase_key}",
                     "Content-Type": "application/json"
                 },
-                json={
-                    "action": "create_user",
-                    "username": username,
-                    "password": password,
-                    "created_at": datetime.datetime.now().isoformat()
-                },
+                json=payload,
                 timeout=10
             )
             if response.status_code == 200:
                 data = response.json()
                 if data.get("success"):
+                    # If the remote returned a user id/profile, auto-authenticate
+                    user_id = data.get('user_id') or data.get('id')
+                    if user_id:
+                        st.session_state.authenticated = True
+                        st.session_state.user_id = user_id
+                        st.session_state.username = username
+                        if data.get('first_name'):
+                            st.session_state['first_name'] = data.get(
+                                'first_name')
+                        if data.get('last_name'):
+                            st.session_state['last_name'] = data.get(
+                                'last_name')
+                        if data.get('email'):
+                            st.session_state['email'] = data.get('email')
+                        st.session_state.session_expires = (
+                            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+                        session_token = self.create_session_token(
+                            username, user_id)
+                        st.query_params["session_token"] = session_token
+                        return {"success": True, "message": "Account created and signed in"}
                     return {"success": True, "message": "Account created successfully"}
                 return {"success": False, "message": data.get("error", "Failed to create account")}
             error_data = response.json() if response.headers.get(
