@@ -969,7 +969,9 @@ def render_main_app():
             f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
-        st.write(f"Welcome back, **{st.session_state.username}**! 👋")
+        display_name = st.session_state.get(
+            'first_name') or st.session_state.get('username')
+        st.write(f"Welcome back, **{display_name}**! 👋")
     with col2:
         pass  # Settings panel now in sidebar expander
     with col3:
