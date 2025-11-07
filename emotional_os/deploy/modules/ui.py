@@ -45,32 +45,74 @@ def _load_inline_svg(filename: str) -> str:
                     svg = parts[0] + parts[1].split('>', 1)[1]
 
             _SVG_CACHE[filename] = svg
-            return svg
-    except Exception:
-        # Fallback: return an empty transparent SVG to avoid rendering a
-        # distracting placeholder (previously a red dot). This keeps the
-        # layout intact without showing a colored fallback.
-        fallback = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"><rect width="64" height="64" fill="none"/></svg>'
-        _SVG_CACHE[filename] = fallback
-        return fallback
+            try:
+                # If the static file exists on disk, render it using Streamlit's
+                # image helper which reads the file locally and embeds it. This
+                # avoids relying on the app's HTTP static route which sometimes
+                # returns the SPA HTML instead of the raw asset.
+                import os
 
+                file_path = f"static/graphics/{logo_file}"
+                if os.path.exists(file_path):
+                    try:
+                        st.image(file_path, width=140)
+                    except Exception:
+                        # As a fallback, attempt to emit a regular <img> tag
+                        img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
+                        st.markdown(img_tag, unsafe_allow_html=True)
+                else:
+                    # Fallback: load inline SVG (keeps previous behavior when
+                    # the static file is not present). The loader already strips
+                    # problematic XML/DOCTYPE lines.
+                    svg_markup = _load_inline_svg(logo_file)
+                    st.markdown(
+                        f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
 
-try:
-    from .doc_export import generate_doc
-except Exception:
-    # Allow the module to be imported even if optional doc export dependencies
-    # (like python-docx) are not installed
-    generate_doc = None
+            except Exception:
+                st.markdown(
+                    '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
 
-try:
-    from .conversation_manager import ConversationManager, generate_auto_name, load_all_conversations_to_sidebar
-except Exception:
-    ConversationManager = None
-    generate_auto_name = None
-    load_all_conversations_to_sidebar = None
+            # Developer diagnostics: provide an optional expander that shows
+            # whether the file exists, a short preview of its contents, and the
+            # result of an HTTP HEAD to the app's static route. This helps debug
+            # situations where the SPA is returned instead of the raw asset.
+            try:
+                with st.expander("Logo diagnostics (dev)", expanded=False):
+                    import os as _os
+                    file_path = f"static/graphics/{logo_file}"
+                    exists = _os.path.exists(file_path)
+                    st.write("File on disk:", exists, file_path)
+                    if exists:
+                        try:
+                            with open(file_path, "r", encoding="utf-8") as _f:
+                                content = _f.read()
+                            st.write("File size:", len(content), "bytes")
+                            st.code(content[:500])
+                        except Exception as _e:
+                            st.write("Could not read file:", str(_e))
+                    else:
+                        st.write(
+                            "File not present on disk; inline fallback used.")
 
-try:
+                    # Try a HEAD request to the app's static URL to see what the
+                    # HTTP layer returns (may be HTML if routing is capturing it).
+                    try:
+                        if requests is not None:
+                            url = f"http://localhost:8501/static/graphics/{logo_file}"
+                            _resp = requests.head(url, timeout=3)
+                            st.write("HTTP HEAD:", _resp.status_code)
+                            st.write(_resp.headers.get("Content-Type"))
+                        else:
+                            st.write(
+                                "requests not available in this environment")
+                    except Exception as _e:
+                        st.write("HTTP check failed:", str(_e))
+            except Exception:
+                # Diagnostics must never break the page; swallow errors.
+                pass
     from emotional_os.safety.fallback_protocols import FallbackProtocol
+
+
 except Exception:
     FallbackProtocol = None
 
