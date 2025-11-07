@@ -693,14 +693,14 @@ def render_main_app():
                     # Ensure the other expander is closed
                     if st.session_state['sidebar_show_login']:
                         st.session_state['sidebar_show_register'] = False
-                    st.rerun()
+                    # No forced rerun here; allow the current render to show the expander
             with col_b:
                 if st.button("Register", key="sidebar_toggle_register"):
                     st.session_state['sidebar_show_register'] = not st.session_state.get(
                         'sidebar_show_register', False)
                     if st.session_state['sidebar_show_register']:
                         st.session_state['sidebar_show_login'] = False
-                    st.rerun()
+                    # No forced rerun here; allow the current render to show the expander
 
             # Quick demo entry (uses auth quick_login_bypass when available)
             if auth and hasattr(auth, 'quick_login_bypass'):
@@ -717,6 +717,13 @@ def render_main_app():
                         st.rerun()
 
             st.markdown("---")
+
+            # Debug snapshot for sidebar auth flags (helpful during development)
+            try:
+                st.caption(
+                    f"debug: sidebar_show_login={st.session_state.get('sidebar_show_login')} | sidebar_show_register={st.session_state.get('sidebar_show_register')}")
+            except Exception:
+                pass
 
             # Render auth expanders inside the sidebar (keeps main area stable)
             try:
