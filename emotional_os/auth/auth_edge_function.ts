@@ -11,10 +11,10 @@ const ALLOWED_ORIGINS = [
 
 function getCorsHeaders(req: any) {
   const origin = req.headers.get("Origin");
-  
+
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  
+
   let allowOrigin;
   if (ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -23,7 +23,7 @@ function getCorsHeaders(req: any) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0];
   }
-  
+
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -40,7 +40,7 @@ const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? De
 function hashPassword(password: string, salt?: string): { hash: string, salt: string } {
   const saltBuffer = salt ? Buffer.from(salt, 'hex') : randomBytes(32);
   const hash = pbkdf2Sync(password, saltBuffer, 100000, 64, 'sha256');
-  
+
   return {
     hash: hash.toString('hex'),
     salt: saltBuffer.toString('hex')
@@ -66,37 +66,41 @@ async function ensureUsersTable(admin: any) {
 // Create user account
 async function createUser(data: any, admin: any): Promise<any> {
   try {
-    const { username, password_hash, salt, email, created_at } = data;
-    
+    const { username, password_hash, salt, email, first_name, last_name, created_at } = data;
+
     // Check if username already exists
     const { data: existingUser } = await admin
       .from('users')
       .select('id')
       .eq('username', username)
       .single();
-    
+
     if (existingUser) {
       return {
         success: false,
         error: "Username already exists"
       };
     }
-    
-    // Create new user
+
+    // Create new user (include first_name / last_name when provided)
+    const insertPayload: any = {
+      username,
+      password_hash,
+      salt,
+      email: email || null,
+      created_at,
+      last_login: null,
+      is_active: true
+    };
+    if (first_name) insertPayload.first_name = first_name;
+    if (last_name) insertPayload.last_name = last_name;
+
     const { data: newUser, error } = await admin
       .from('users')
-      .insert([{
-        username,
-        password_hash,
-        salt,
-        email,
-        created_at,
-        last_login: null,
-        is_active: true
-      }])
-      .select('id, username, created_at')
+      .insert([insertPayload])
+      .select('id, username, email, first_name, last_name, created_at')
       .single();
-    
+
     if (error) {
       console.error("User creation error:", error);
       return {
@@ -104,12 +108,12 @@ async function createUser(data: any, admin: any): Promise<any> {
         error: "Failed to create user account"
       };
     }
-    
+
     return {
       success: true,
       user: newUser
     };
-    
+
   } catch (err) {
     console.error("Create user exception:", err);
     return {
@@ -123,50 +127,50 @@ async function createUser(data: any, admin: any): Promise<any> {
 async function authenticateUser(data: any, admin: any): Promise<any> {
   try {
     const { username, password } = data;
-    
+
     // Get user by username
     const { data: user, error } = await admin
       .from('users')
       .select('id, username, password_hash, salt, is_active')
       .eq('username', username)
       .single();
-    
+
     if (error || !user) {
       return {
         authenticated: false,
         error: "Invalid credentials"
       };
     }
-    
+
     if (!user.is_active) {
       return {
         authenticated: false,
         error: "Account is deactivated"
       };
     }
-    
+
     // Verify password
     const isValidPassword = verifyPassword(password, user.password_hash, user.salt);
-    
+
     if (!isValidPassword) {
       return {
         authenticated: false,
         error: "Invalid credentials"
       };
     }
-    
+
     // Update last login
     await admin
       .from('users')
       .update({ last_login: new Date().toISOString() })
       .eq('id', user.id);
-    
+
     return {
       authenticated: true,
       user_id: user.id,
       username: user.username
     };
-    
+
   } catch (err) {
     console.error("Authentication exception:", err);
     return {
@@ -184,25 +188,25 @@ async function getUserProfile(userId: string, admin: any): Promise<any> {
       .select('id, username, email, created_at, last_login')
       .eq('id', userId)
       .single();
-    
+
     if (error || !user) {
       return {
         success: false,
         error: "User not found"
       };
     }
-    
+
     // Get user's conversation stats
     const { data: conversationStats } = await admin
       .from('glyph_logs')
       .select('id')
       .eq('user_id', userId);
-    
+
     const { data: glyphStats } = await admin
       .from('glyphs')
       .select('id')
       .eq('user_id', userId);
-    
+
     return {
       success: true,
       profile: {
@@ -211,7 +215,7 @@ async function getUserProfile(userId: string, admin: any): Promise<any> {
         glyph_count: glyphStats?.length || 0
       }
     };
-    
+
   } catch (err) {
     console.error("Get profile exception:", err);
     return {
@@ -223,11 +227,11 @@ async function getUserProfile(userId: string, admin: any): Promise<any> {
 
 Deno.serve(async (req: any) => {
   const corsHeaders = getCorsHeaders(req);
-  
+
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
-  
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
       status: 405, headers: corsHeaders
@@ -244,7 +248,7 @@ Deno.serve(async (req: any) => {
   }
 
   const { action } = body;
-  
+
   if (!action) {
     return new Response(JSON.stringify({ error: "Missing action parameter" }), {
       status: 400, headers: corsHeaders
@@ -255,22 +259,22 @@ Deno.serve(async (req: any) => {
   const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
     auth: { persistSession: false }
   });
-  
+
   // Ensure users table exists
   await ensureUsersTable(admin);
-  
+
   let result;
-  
+
   try {
     switch (action) {
       case "create_user":
         result = await createUser(body, admin);
         break;
-        
+
       case "authenticate":
         result = await authenticateUser(body, admin);
         break;
-        
+
       case "get_profile":
         const { user_id } = body;
         if (!user_id) {
@@ -279,16 +283,16 @@ Deno.serve(async (req: any) => {
           result = await getUserProfile(user_id, admin);
         }
         break;
-        
+
       default:
         result = { error: "Invalid action" };
     }
-    
+
   } catch (err) {
     console.error("Action processing error:", err);
     result = { error: "Internal server error" };
   }
-  
+
   return new Response(JSON.stringify(result), {
     status: 200,
     headers: corsHeaders
