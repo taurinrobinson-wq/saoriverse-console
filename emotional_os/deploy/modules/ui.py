@@ -311,8 +311,16 @@ def render_splash_interface(auth):
             import os
 
             if os.path.exists(f"static/graphics/{logo_file}"):
-                img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
-                st.markdown(img_tag, unsafe_allow_html=True)
+                # Use Streamlit's image rendering which reads the file directly
+                # and embeds it correctly into the page. This avoids relying
+                # on the app's HTTP static route which can sometimes return
+                # the SPA HTML instead of the asset.
+                try:
+                    st.image(f"static/graphics/{logo_file}", width=140)
+                except Exception:
+                    # As a fallback, attempt to emit a regular <img> tag
+                    img_tag = f'<img src="{static_path}" class="splash-logo" alt="FirstPerson logo" />'
+                    st.markdown(img_tag, unsafe_allow_html=True)
             else:
                 # Fallback: load inline SVG (keeps previous behavior when
                 # the static file is not present). The loader already strips
