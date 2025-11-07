@@ -686,7 +686,7 @@ def render_main_app():
                 "Create an account or sign in to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
-                if st.button("Sign in", key="sidebar_sign_in"):
+                if st.button("Sign in", key="sidebar_toggle_sign_in"):
                     # Toggle the sidebar expander for sign-in
                     st.session_state['sidebar_show_login'] = not st.session_state.get(
                         'sidebar_show_login', False)
@@ -695,7 +695,7 @@ def render_main_app():
                         st.session_state['sidebar_show_register'] = False
                     st.rerun()
             with col_b:
-                if st.button("Register", key="sidebar_register"):
+                if st.button("Register", key="sidebar_toggle_register"):
                     st.session_state['sidebar_show_register'] = not st.session_state.get(
                         'sidebar_show_register', False)
                     if st.session_state['sidebar_show_register']:
