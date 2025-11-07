@@ -1,20 +1,42 @@
 """Main entry point for the streamlit FirstPerson app."""
 
-from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
-from emotional_os.deploy.modules.auth import SaoynxAuthentication
 import streamlit as st
 from pathlib import Path
 import os
 import base64
 import json
 
+# Important: don't import modules that use Streamlit until after
+# we call st.set_page_config — Streamlit requires page_config to be the
+# first Streamlit command in the main script. UI/auth modules import
+# streamlit at top-level and can trigger Streamlit runtime behavior when
+# imported.
+
 # Must be first Streamlit command
-st.set_page_config(
-    page_title="FirstPerson - Personal AI Companion",
-    page_icon="🧠",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+# Prefer the project SVG as the page icon if available; fall back to emoji.
+try:
+    _logo_path = Path("static/graphics/FirstPerson-Logo_cropped.svg")
+    _page_icon = None
+    if _logo_path.exists():
+        try:
+            _page_icon = _logo_path.read_bytes()
+        except Exception:
+            _page_icon = None
+    # Use bytes (image) if available, otherwise an emoji
+    st.set_page_config(
+        page_title="FirstPerson - Personal AI Companion",
+        page_icon=_page_icon if _page_icon is not None else "🧠",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+except Exception:
+    # Ensure any failure here doesn't prevent the rest of the app from loading
+    st.set_page_config(
+        page_title="FirstPerson - Personal AI Companion",
+        page_icon="🧠",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
 
 # Replace default favicon with project logo (use embedded data URI so Streamlit
 # will show the SVG as the browser favicon regardless of static file serving).
@@ -28,6 +50,19 @@ try:
 except Exception:
     # Non-fatal: keep the emoji favicon if embedding fails
     pass
+
+# Now import modules that rely on Streamlit being initialized (after page config).
+# Wrap imports in a try/except that prints the full traceback so deployment logs
+# will contain the original error (Streamlit's UI can redact exceptions).
+try:
+    from emotional_os.deploy.modules.ui import render_main_app, render_splash_interface, delete_user_history_from_supabase
+    from emotional_os.deploy.modules.auth import SaoynxAuthentication
+except Exception:
+    import traceback
+    import sys
+    print("Traceback importing UI/auth modules:")
+    traceback.print_exc()
+    raise
 
 
 # Initialize session state
@@ -253,6 +288,73 @@ except Exception:
     LimbicIntegrationEngine = None
     HAS_LIMBIC = False
 
+    def render_error_ui(exc: Exception, tb: str | None = None) -> None:
+        """Render a minimal, centered error page with a soft visual tone.
+
+        Parameters
+        - exc: the exception instance that occurred
+        - tb: optional full traceback string (may be large). We display a short,
+          sanitized excerpt and encourage checking server logs for the full trace.
+        """
+        try:
+            # Soft visual tone and centered box
+            st.markdown(
+                """
+                <style>
+                .fp-error-wrap { display:flex; align-items:center; justify-content:center; height:70vh; }
+                .fp-error-box {
+                    background: linear-gradient(180deg, #FBFDFF, #FFFFFF);
+                    border: 1px solid #E8EDF3;
+                    box-shadow: 0 8px 24px rgba(18,24,31,0.06);
+                    padding: 28px;
+                    border-radius: 12px;
+                    max-width: 720px;
+                    text-align: center;
+                }
+                .fp-error-title { font-size: 1.5rem; margin-bottom: 8px; color: #23262A; }
+                .fp-error-msg { color: #586069; margin-bottom: 12px; }
+                .fp-trace { background:#F6F8FA; color:#1F2933; padding:12px; border-radius:8px; text-align:left; font-family: monospace; white-space: pre-wrap; overflow-x:auto; max-height:240px; }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            st.markdown(
+                '<div class="fp-error-wrap"><div class="fp-error-box">', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="fp-error-title">Something went wrong</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="fp-error-msg">An unexpected error occurred while starting the app. The server logs contain the full traceback.</div>',
+                unsafe_allow_html=True,
+            )
+
+            # Show the exception type and a short message (truncate long messages)
+            short_msg = (str(exc) or type(exc).__name__)[:240]
+            st.markdown(
+                f"<div style='font-size:0.9rem;color:#6B7178;margin-bottom:12px;'>Error: {type(exc).__name__}: {short_msg}</div>", unsafe_allow_html=True)
+
+            # If a traceback was provided, show a short excerpt inside a details block
+            if tb:
+                excerpt = '\n'.join(tb.splitlines()[-8:])
+                st.markdown(
+                    '<details><summary>Show more (sanitized traceback)</summary>', unsafe_allow_html=True)
+                st.markdown(
+                    f"<div class='fp-trace'>{excerpt}</div>", unsafe_allow_html=True)
+                st.markdown('</details>', unsafe_allow_html=True)
+
+            st.markdown('</div></div>', unsafe_allow_html=True)
+        except Exception:
+            # If rendering the nice UI fails, fall back to a minimal Streamlit error and print the traceback
+            try:
+                st.error(
+                    "A critical error occurred during startup. Check the server logs for details.")
+            except Exception:
+                # If Streamlit is completely unusable, at least print to stdout
+                print(
+                    "A critical error occurred during startup. Check the server logs for details.")
+            import traceback as _tb
+            _tb.print_exc()
+
 
 def main():
     """Main application entry point."""
@@ -267,4 +369,20 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        import traceback
+        tb = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+        # Look up the renderer safely to avoid static analysis warnings about
+        # potentially-unbound callables during import-time checks.
+        _renderer = globals().get('render_error_ui')
+        if callable(_renderer):
+            try:
+                _renderer(e, tb)
+            except Exception:
+                # If rendering the error UI fails, at least print the traceback
+                print(tb)
+        else:
+            # No renderer available; print the traceback so logs contain details
+            print(tb)
