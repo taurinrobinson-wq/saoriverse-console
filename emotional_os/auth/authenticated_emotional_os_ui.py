@@ -384,18 +384,50 @@ def main():
                     'ab_group': st.session_state.get('ab_group', 'not_participating')
                 }
 
-                result = st.session_state.processor.process_emotional_input(
-                    user_input,
-                    prefer_ai=(processing_mode == "ai_preferred"),
-                    privacy_mode=(processing_mode == "local"),
-                    session_metadata=session_meta
-                )
+                # Lightweight small-talk filter: short-circuit some common social queries
+                # to avoid long self-descriptive replies from upstream processors.
+                smalltalk_triggers = [
+                    "how are you",
+                    "how're you",
+                    "how are you doing",
+                    "tell me about yourself",
+                    "what do you do",
+                    "who are you",
+                    "tell me more about yourself",
+                ]
 
-                processing_time = time.time() - start_time
+                lowered = user_input.lower().strip()
+                is_smalltalk = any(
+                    trigger in lowered for trigger in smalltalk_triggers)
 
-                response = result.get("response", "I'm here to listen.")
-                st.write(response)
-                st.caption(f"Processed in {processing_time:.2f}s")
+                if is_smalltalk:
+                    # Short, friendly canned replies for brief social prompts
+                    canned = [
+                        "I'm here and present with you. That's what matters — how are you doing?",
+                        "Thanks for asking — I'm here to listen. What's on your mind?",
+                        "I'm steady and ready to listen. Tell me about you."
+                    ]
+                    # Choose deterministic canned reply (first) to keep behavior predictable in tests
+                    response = canned[0]
+                    processing_time = time.time() - start_time
+                    st.write(response)
+                    st.caption(
+                        f"Processed in {processing_time:.2f}s (small-talk)")
+                else:
+                    result = st.session_state.processor.process_emotional_input(
+                        user_input,
+                        prefer_ai=(processing_mode == "ai_preferred"),
+                        privacy_mode=(processing_mode == "local"),
+                        session_metadata=session_meta
+                    )
+
+                    processing_time = time.time() - start_time
+
+                    # Prefer normalized 'response' key; provide safe fallbacks
+                    response = result.get("response") or result.get(
+                        "voltage_response") or "I'm here to listen."
+                    st.write(response)
+                    st.caption(f"Processed in {processing_time:.2f}s")
 
         # Add to conversation history
         st.session_state[conversation_key].append({
@@ -425,20 +457,9 @@ def main():
         st.write("🧠 Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
 
-        if st.button("Download My Data", type="secondary"):
-            # Option to export user's conversation data
-            user_data = {
-                "user_id": st.session_state.user_id,
-                "username": st.session_state.username,
-                "conversations": st.session_state[conversation_key],
-                "export_date": datetime.now().isoformat()
-            }
-            st.download_button(
-                "Download JSON",
-                json.dumps(user_data, indent=2),
-                file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
-            )
+        # NOTE: The export/download control has been removed from this sidebar
+        # to avoid duplication. Use the "Privacy & Consent" sidebar expander
+        # (provided by `render_consent_settings_panel`) to export user data.
 
 
 if __name__ == "__main__":
