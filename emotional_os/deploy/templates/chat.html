@@ -406,6 +406,9 @@
                         ➤
                     </button>
                 </div>
+
+                <!-- Debug panel (hidden by default) -->
+                <!-- debug panel removed: Streamlit main UI (main_v2.py) is the canonical app -->
             </div>
 
             <!-- Sidebar -->
@@ -559,90 +562,99 @@
                 console.warn('Chat messages container not found');
                 return;
             }
-            
+
             // Delay DOM operations slightly to allow for theme switch completion
             setTimeout(() => {
                 try {
                     const existingMessages = messagesContainer.querySelectorAll('.message:not(.welcome)');
 
-            // Remove existing conversation messages (keep welcome message)
-            existingMessages.forEach(msg => msg.remove());
+                    // Remove existing conversation messages (keep welcome message)
+                    existingMessages.forEach(msg => msg.remove());
 
-            conversationHistory.forEach(exchange => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${exchange.type}`;
+                    conversationHistory.forEach(exchange => {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = `message ${exchange.type}`;
 
-                const avatar = document.createElement('div');
-                avatar.className = 'message-avatar';
-                if (exchange.type === 'user') {
-                    avatar.textContent = '👤';
-                } else {
-                    try {
-                        // Create image element with defensive error handling
-                        const img = document.createElement('img');
-                        if (img instanceof HTMLImageElement) {
-                            img.src = '/static/graphics/FirstPerson-Logo-normalized.svg';
-                            img.alt = 'FP';
-                            img.style.width = '20px';
-                            img.style.height = '20px';
-                            img.onerror = function () {
-                                try {
-                                    this.style.display = 'none';
-                                    avatar.textContent = 'FP';
-                                } catch (e) {
-                                    console.warn('Avatar onerror handler failed:', e);
-                                }
-                            };
-                            avatar.appendChild(img);
+                        const avatar = document.createElement('div');
+                        avatar.className = 'message-avatar';
+                        if (exchange.type === 'user') {
+                            avatar.textContent = '👤';
                         } else {
-                            // Fallback if img creation fails
-                            avatar.textContent = 'FP';
+                            try {
+                                // Create image element with defensive error handling
+                                const img = document.createElement('img');
+                                if (img instanceof HTMLImageElement) {
+                                    img.src = '/static/graphics/FirstPerson-Logo-normalized.svg';
+                                    img.alt = 'FP';
+                                    img.style.width = '20px';
+                                    img.style.height = '20px';
+                                    img.onerror = function () {
+                                        try {
+                                            this.style.display = 'none';
+                                            avatar.textContent = 'FP';
+                                        } catch (e) {
+                                            console.warn('Avatar onerror handler failed:', e);
+                                        }
+                                    };
+                                    avatar.appendChild(img);
+                                } else {
+                                    // Fallback if img creation fails
+                                    avatar.textContent = 'FP';
+                                }
+                            } catch (e) {
+                                console.warn('Avatar creation failed:', e);
+                                avatar.textContent = 'FP';
+                            }
                         }
-                    } catch (e) {
-                        console.warn('Avatar creation failed:', e);
-                        avatar.textContent = 'FP';
-                    }
+
+                        const content = document.createElement('div');
+                        content.className = 'message-content';
+                        content.textContent = exchange.content;
+
+                        if (exchange.type === 'assistant' && (exchange.glyph || exchange.processing_time)) {
+                            const meta = document.createElement('div');
+                            meta.className = 'message-meta';
+                            let metaText = '';
+
+                            if (exchange.glyph) {
+                                metaText += `✨ Emotional resonance: ${exchange.glyph} • `;
+                            }
+                            if (exchange.processing_time) {
+                                metaText += `Processed in ${exchange.processing_time.toFixed(2)}s • `;
+                            }
+                            metaText += `Mode: ${exchange.mode || 'unknown'}`;
+
+                            meta.textContent = metaText;
+                            content.appendChild(meta);
+                        }
+
+                        if (exchange.type === 'user') {
+                            messageDiv.appendChild(content);
+                            messageDiv.appendChild(avatar);
+                        } else {
+                            messageDiv.appendChild(avatar);
+                            messageDiv.appendChild(content);
+                        }
+
+                        messagesContainer.appendChild(messageDiv);
+                    });
+
+                    // Scroll to bottom
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    // close try block
+                } catch (e) {
+                    console.warn('Error rendering messages:', e);
                 }
-
-                const content = document.createElement('div');
-                content.className = 'message-content';
-                content.textContent = exchange.content;
-
-                if (exchange.type === 'assistant' && (exchange.glyph || exchange.processing_time)) {
-                    const meta = document.createElement('div');
-                    meta.className = 'message-meta';
-                    let metaText = '';
-
-                    if (exchange.glyph) {
-                        metaText += `✨ Emotional resonance: ${exchange.glyph} • `;
-                    }
-                    if (exchange.processing_time) {
-                        metaText += `Processed in ${exchange.processing_time.toFixed(2)}s • `;
-                    }
-                    metaText += `Mode: ${exchange.mode || 'unknown'}`;
-
-                    meta.textContent = metaText;
-                    content.appendChild(meta);
-                }
-
-                if (exchange.type === 'user') {
-                    messageDiv.appendChild(content);
-                    messageDiv.appendChild(avatar);
-                } else {
-                    messageDiv.appendChild(avatar);
-                    messageDiv.appendChild(content);
-                }
-
-                messagesContainer.appendChild(messageDiv);
-            });
-
-            // Scroll to bottom
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 10);
         }
 
         // Save conversation to localStorage
         function saveConversation() {
-            localStorage.setItem(`fp_history_${currentUserId}`, JSON.stringify(conversationHistory));
+            try {
+                localStorage.setItem(`fp_history_${currentUserId}`, JSON.stringify(conversationHistory));
+            } catch (e) {
+                console.warn('Failed to save conversation to localStorage:', e);
+            }
         }
 
         // Update stats in sidebar
