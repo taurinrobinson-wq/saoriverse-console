@@ -77,21 +77,21 @@ def _load_inline_svg(filename: str) -> str:
         # Cache and return raw markup only (no Streamlit calls here)
         _SVG_CACHE[filename] = svg
         return svg
-    except Exception as e:
-        # Log the failure for diagnostics but do not call Streamlit here
-        try:
-            if isinstance(e, FileNotFoundError):
-                reason = f"file_not_found: {tried_path or repo_path}"
-            else:
-                reason = f"{type(e).__name__}: {str(e)}"
-        except Exception:
-            reason = str(e)
-
-        logger.warning("_load_inline_svg failed for %s: %s",
-                       filename, reason, exc_info=True)
-
-        # Return a small fallback SVG string (cached). No Streamlit calls.
-        trace_id = uuid.uuid4().hex[:8]
+    except Exception:
+        # Fallback to previous column layout if raw HTML rendering fails
+        col1, col2 = st.columns([0.5, 8], gap="small")
+        with col1:
+            try:
+                st.markdown(
+                    f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
+            except Exception:
+                # Render a simple emoji fallback (ensure proper quoting)
+                st.markdown(
+                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+        with col2:
+            st.markdown('<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
+        st.markdown(
+            f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
         fallback = (
             f'<!-- fallback_svg_rendered id={trace_id} -->'
             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" '
@@ -990,7 +990,7 @@ def render_main_app():
         # Fallback to previous column layout if raw HTML rendering fails
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
-                try:
+            try:
                 st.markdown(
                     f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
             except Exception:
