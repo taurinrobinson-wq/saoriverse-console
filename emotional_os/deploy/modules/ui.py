@@ -1463,15 +1463,59 @@ def render_main_app():
                     st.caption(
                         f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
 
-                    # Show anonymization consent widget
+                    # Show anonymization consent widget once per session (or until user interacts)
                     try:
                         from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
                         exchange_id = f"exchange_{len(st.session_state.get(conversation_key, []))}"
-                        consent_result = render_anonymization_consent_widget(
-                            exchange_id)
+                        consent_key = f"consent_{exchange_id}"
 
-                        if consent_result:
-                            st.session_state[f"consent_{exchange_id}"] = consent_result
+                        # Only show the consent widget if it hasn't been seen/interacted with this session
+                        if not st.session_state.get('consent_seen', False):
+                            consent_result = render_anonymization_consent_widget(
+                                exchange_id)
+
+                            # If the render function returned a completed consent dict, store it
+                            if consent_result:
+                                st.session_state[consent_key] = consent_result
+                                st.session_state['consent_seen'] = True
+                                # Log consent choices to debug_chat.log for traceability
+                                try:
+                                    import json as _json
+                                    import datetime as _dt
+                                    log_entry = {
+                                        'ts': _dt.datetime.utcnow().isoformat() + 'Z',
+                                        'user_id': st.session_state.get('user_id'),
+                                        'exchange_id': exchange_id,
+                                        'consent': consent_result
+                                    }
+                                    with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
+                                        _fh.write(_json.dumps(
+                                            log_entry, ensure_ascii=False) + '\n')
+                                except Exception:
+                                    # Non-fatal; do not block the UI
+                                    pass
+
+                            # If the user clicked 'Later', the consent widget stores a session key but returns None
+                            elif consent_key in st.session_state:
+                                # mark seen so we don't prompt again this session
+                                st.session_state['consent_seen'] = True
+                                # also log the stored consent/skipped state
+                                try:
+                                    import json as _json
+                                    import datetime as _dt
+                                    stored = st.session_state.get(consent_key)
+                                    log_entry = {
+                                        'ts': _dt.datetime.utcnow().isoformat() + 'Z',
+                                        'user_id': st.session_state.get('user_id'),
+                                        'exchange_id': exchange_id,
+                                        'consent': stored
+                                    }
+                                    with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
+                                        _fh.write(_json.dumps(
+                                            log_entry, ensure_ascii=False) + '\n')
+                                except Exception:
+                                    pass
+                        # else: already seen in this session; do nothing
                     except ImportError:
                         st.warning("Consent UI unavailable")
                     except Exception as e:
