@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saori Console</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <style>
@@ -13,14 +14,17 @@
       margin: 0;
       padding: 2rem;
     }
+
     h1 {
       font-weight: 400;
       margin-bottom: 1rem;
     }
+
     #chat-box {
       max-width: 600px;
       margin: auto;
     }
+
     #messages {
       border: 1px solid #333;
       padding: 1rem;
@@ -29,19 +33,24 @@
       background: #1a1a1a;
       margin-bottom: 1rem;
     }
+
     .message {
       margin-bottom: 1rem;
     }
+
     .user {
       color: #9cdcfe;
     }
+
     .saori {
       color: #dcdcaa;
     }
+
     form {
       display: flex;
       gap: 0.5rem;
     }
+
     input {
       flex: 1;
       padding: 0.5rem;
@@ -50,6 +59,7 @@
       color: #fff;
       border: 1px solid #555;
     }
+
     button {
       padding: 0.5rem 1rem;
       font-size: 1rem;
@@ -58,9 +68,11 @@
       border: none;
       cursor: pointer;
     }
+
     button:hover {
       background: #666;
     }
+
     .glyph {
       font-size: 0.9rem;
       color: #aaa;
@@ -68,131 +80,244 @@
     }
   </style>
 </head>
+
 <body>
-<div id="chat-box">
-  <div id="auth-box" style="max-width:600px;margin:auto;margin-bottom:2rem;border:1px solid red;">
-    <h2>Login to Access Rituals</h2>
-    <form id="login-form" style="display:flex;gap:0.5rem;margin-bottom:1rem;">
-      <input type="email" id="email" placeholder="Enter your email" required />
-      <button type="submit">Send Magic Link</button>
+  <div id="chat-box">
+    <div id="auth-box" style="max-width:600px;margin:auto;margin-bottom:2rem;border:1px solid red;">
+      <h2>Login to Access Rituals</h2>
+      <form id="login-form" style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+        <input type="email" id="email" placeholder="Enter your email" required />
+        <button type="submit">Send Magic Link</button>
+      </form>
+      <button id="logout-button" style="display:none;">Logout</button>
+      <div id="auth-status" style="margin-top:0.5rem;color:#aaa;"></div>
+    </div>
+
+    <h1>Saori Console</h1>
+    <div id="messages"></div>
+    <form id="chat-form">
+      <input type="text" id="message" placeholder="Speak to Saori..." autocomplete="off" />
+      <button type="submit">Send</button>
     </form>
-    <button id="logout-button" style="display:none;">Logout</button>
-    <div id="auth-status" style="margin-top:0.5rem;color:#aaa;"></div>
+    <div id="sidebar"
+      style="max-width:600px;margin:auto;margin-top:1rem;border:1px solid #333;padding:0.5rem;background:#0b0b0b;">
+      <h3 style="margin:0 0 0.5rem 0;font-weight:400;">Conversations</h3>
+      <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;">
+        <button id="new-convo" type="button">New Conversation</button>
+        <button id="refresh-convos" type="button">Refresh</button>
+      </div>
+      <div id="convo-list" style="max-height:200px;overflow:auto;"></div>
+    </div>
   </div>
 
-  <h1>Saori Console</h1>
-  <div id="messages"></div>
-  <form id="chat-form">
-    <input type="text" id="message" placeholder="Speak to Saori..." autocomplete="off" />
-    <button type="submit">Send</button>
-  </form>
-</div>
+  <!-- Supabase client (UMD build) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script>
+    const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori";
+    const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe";
 
-<!-- Supabase client (UMD build) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script>
-  const EDGE_FUNCTION_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori";
-  const SUPABASE_URL = "https://gyqzyuvuuyfjxnramkfq.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_Tw9QYkd-We06uS1ENnyBAw_fuus2aKe";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Handle magic link redirect
+    (async () => {
+      const { error } = await supabase.auth.getSessionFromUrl();
+      if (error) {
+        console.error("Error completing login:", error.message);
+      } else {
+        console.log("Magic link login completed.");
+        window.history.replaceState({}, document.title, "/saoriverse-console/");
+      }
+    })();
 
-  // Handle magic link redirect
-  (async () => {
-    const { error } = await supabase.auth.getSessionFromUrl();
-    if (error) {
-      console.error("Error completing login:", error.message);
-    } else {
-      console.log("Magic link login completed.");
-      window.history.replaceState({}, document.title, "/saoriverse-console/");
-    }
-  })();
+    const loginForm = document.getElementById("login-form");
+    const emailInput = document.getElementById("email");
+    const logoutButton = document.getElementById("logout-button");
+    const authStatus = document.getElementById("auth-status");
 
-  const loginForm = document.getElementById("login-form");
-  const emailInput = document.getElementById("email");
-  const logoutButton = document.getElementById("logout-button");
-  const authStatus = document.getElementById("auth-status");
+    // Handle login
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (!email) return;
 
-  // Handle login
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = emailInput.value.trim();
-    if (!email) return;
+      const { error } = await supabase.auth.signInWithOtp({ email });
+      if (error) {
+        authStatus.textContent = "Login failed. Try again.";
+        console.error("Login error:", error);
+      } else {
+        authStatus.textContent = "Magic link sent! Check your email.";
+      }
+    });
 
-    const { error } = await supabase.auth.signInWithOtp({ email });
-    if (error) {
-      authStatus.textContent = "Login failed. Try again.";
-      console.error("Login error:", error);
-    } else {
-      authStatus.textContent = "Magic link sent! Check your email.";
-    }
-  });
-
-  // Handle logout
-  logoutButton.addEventListener("click", async () => {
-    await supabase.auth.signOut();
-    authStatus.textContent = "Logged out.";
-    logoutButton.style.display = "none";
-  });
-
-  // Track session
-  supabase.auth.onAuthStateChange((event, session) => {
-    if (session) {
-      authStatus.textContent = `Logged in as ${session.user.email}`;
-      logoutButton.style.display = "inline-block";
-    } else {
-      authStatus.textContent = "Not logged in.";
+    // Handle logout
+    logoutButton.addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      authStatus.textContent = "Logged out.";
       logoutButton.style.display = "none";
+    });
+
+    // Track session
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        authStatus.textContent = `Logged in as ${session.user.email}`;
+        logoutButton.style.display = "inline-block";
+        // Load conversations for this user
+        loadConversations();
+      } else {
+        authStatus.textContent = "Not logged in.";
+        logoutButton.style.display = "none";
+      }
+    });
+
+    // Chat logic
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("message");
+    const messages = document.getElementById("messages");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+      appendMessage("You", userMessage, "user");
+      input.value = "";
+
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+
+      // Ensure we have a conversation id in sessionStorage for the current thread
+      let conversationId = sessionStorage.getItem('currentConversationId');
+      if (!conversationId) {
+        conversationId = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : `conv-${Date.now()}`;
+        sessionStorage.setItem('currentConversationId', conversationId);
+      }
+
+      try {
+        const res = await fetch(EDGE_FUNCTION_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { "Authorization": `Bearer ${token}` })
+          },
+          body: JSON.stringify({ message: userMessage, conversation_id: conversationId, first_name: session?.user?.user_metadata?.first_name })
+        });
+
+        const { reply, glyph } = await res.json();
+        appendMessage("Saori", reply, "saori", glyph);
+        // refresh convo list to show updated counts/start-times
+        loadConversations();
+      } catch (err) {
+        console.error("Error:", err);
+        appendMessage("Saori", "I couldn’t reach the oracle. Try again soon.", "saori");
+      }
+    });
+
+    // New conversation button clears currentConversationId and UI
+    document.getElementById('new-convo').addEventListener('click', () => {
+      sessionStorage.removeItem('currentConversationId');
+      messages.innerHTML = '';
+      appendMessage('Saori', 'New conversation started. Say hello.', 'saori');
+    });
+
+    document.getElementById('refresh-convos').addEventListener('click', () => loadConversations());
+
+    async function loadConversations() {
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      const convoList = document.getElementById('convo-list');
+      convoList.innerHTML = 'Loading...';
+      if (!session) { convoList.innerHTML = 'Log in to view conversations.'; return; }
+
+      try {
+        const { data, error } = await supabase.from('conversation_messages').select('*').eq('user_id', session.user.id).order('timestamp', { ascending: true });
+        if (error) throw error;
+        // Group by conversation_id
+        const groups = {};
+        for (const row of data) {
+          const key = row.conversation_id;
+          if (!groups[key]) groups[key] = [];
+          groups[key].push(row);
+        }
+        convoList.innerHTML = '';
+        const entries = Object.entries(groups).sort((a, b) => new Date(a[1][0].timestamp) - new Date(b[1][0].timestamp));
+        if (entries.length === 0) convoList.innerHTML = '<div style="color:#aaa">No conversations yet.</div>';
+        for (const [convId, rows] of entries) {
+          const start = new Date(rows[0].timestamp).toLocaleString();
+          const count = rows.length;
+          const div = document.createElement('div');
+          div.style.padding = '0.5rem';
+          div.style.borderBottom = '1px solid #222';
+          div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;"><div><strong>Started:</strong> ${start}<br/><small>${count} messages</small></div><div><button class=\"open-convo\" data-id=\"${convId}\">Open</button> <button class=\"export-convo\" data-id=\"${convId}\">Export CSV</button></div></div>`;
+          convoList.appendChild(div);
+        }
+        // attach handlers
+        Array.from(document.getElementsByClassName('open-convo')).forEach(btn => btn.addEventListener('click', (ev) => {
+          const id = ev.currentTarget.getAttribute('data-id');
+          sessionStorage.setItem('currentConversationId', id);
+          // load messages for this conversation into view
+          const rows = groups[id] || [];
+          messages.innerHTML = '';
+          for (const r of rows) appendMessage(r.role === 'user' ? 'You' : 'Saori', r.message, r.role === 'user' ? 'user' : 'saori');
+        }));
+        Array.from(document.getElementsByClassName('export-convo')).forEach(btn => btn.addEventListener('click', async (ev) => {
+          const id = ev.currentTarget.getAttribute('data-id');
+          await exportConversationCSV(id);
+        }));
+      } catch (err) {
+        console.error('Failed to load conversations', err);
+        convoList.innerHTML = '<div style="color:#faa">Failed to load conversations</div>';
+      }
     }
-  });
 
-  // Chat logic
-  const form = document.getElementById("chat-form");
-  const input = document.getElementById("message");
-  const messages = document.getElementById("messages");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const userMessage = input.value.trim();
-    if (!userMessage) return;
-
-    appendMessage("You", userMessage, "user");
-    input.value = "";
-
-    const { data: { session } } = await supabase.auth.getSession();
-    const token = session?.access_token;
-
-    try {
-      const res = await fetch(EDGE_FUNCTION_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token && { "Authorization": `Bearer ${token}` })
-        },
-        body: JSON.stringify({ message: userMessage })
-      });
-
-      const { reply, glyph } = await res.json();
-      appendMessage("Saori", reply, "saori", glyph);
-    } catch (err) {
-      console.error("Error:", err);
-      appendMessage("Saori", "I couldn’t reach the oracle. Try again soon.", "saori");
+    async function exportConversationCSV(conversationId) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return alert('Log in to export.');
+      try {
+        const { data, error } = await supabase.from('conversation_messages').select('user_id, first_name, role, timestamp, message').eq('conversation_id', conversationId).order('timestamp', { ascending: true });
+        if (error) throw error;
+        const rows = data || [];
+        const header = ['UID', 'First Name', 'Role', 'Timestamp', 'Message'];
+        const csvLines = [header.join(',')];
+        for (const r of rows) {
+          const line = [r.user_id, (r.first_name || ''), r.role, new Date(r.timestamp).toISOString(), '"' + (String(r.message).replace(/"/g, '""')) + '"'].join(',');
+          csvLines.push(line);
+        }
+        const csv = csvLines.join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `conversation_${conversationId}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        console.error('Export failed', err);
+        alert('Export failed: ' + err.message);
+      }
     }
-  });
 
-  function appendMessage(sender, text, className, glyph = null) {
-    const div = document.createElement("div");
-    div.classList.add("message", className);
-    div.innerHTML = `<strong>${sender}:</strong> ${text}`;
-    if (glyph?.tag_name) {
-      const glyphDiv = document.createElement("div");
-      glyphDiv.classList.add("glyph");
-      glyphDiv.textContent = `Glyph: ${glyph.tag_name} ${glyph.glyph ? `(${glyph.glyph})` : ""}`;
-      div.appendChild(glyphDiv);
+    // Attempt initial load if already logged in
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) loadConversations();
+    })();
+
+    function appendMessage(sender, text, className, glyph = null) {
+      const div = document.createElement("div");
+      div.classList.add("message", className);
+      div.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      if (glyph?.tag_name) {
+        const glyphDiv = document.createElement("div");
+        glyphDiv.classList.add("glyph");
+        glyphDiv.textContent = `Glyph: ${glyph.tag_name} ${glyph.glyph ? `(${glyph.glyph})` : ""}`;
+        div.appendChild(glyphDiv);
+      }
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
     }
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
-</script>
+  </script>
 </body>
+
 </html>

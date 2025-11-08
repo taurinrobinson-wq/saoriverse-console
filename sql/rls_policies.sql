@@ -5,30 +5,36 @@
 ALTER TABLE IF EXISTS public.conversation_history ENABLE ROW LEVEL SECURITY;
 
 -- Allow authenticated users to insert their own rows (auth.uid() should match user_id)
-CREATE POLICY IF NOT EXISTS "insert_own_conversation" ON public.conversation_history
+CREATE POLICY "insert_own_conversation" ON public.conversation_history
   FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  TO authenticated
+  WITH CHECK (user_id::text = auth.uid());
 
 -- Allow authenticated users to select only their rows
-CREATE POLICY IF NOT EXISTS "select_own_conversation" ON public.conversation_history
-  FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "select_own_conversation" ON public.conversation_history
+  FOR SELECT
+  TO authenticated
+  USING (user_id::text = auth.uid());
 
 -- Allow authenticated users to delete only their rows
-CREATE POLICY IF NOT EXISTS "delete_own_conversation" ON public.conversation_history
-  FOR DELETE USING (auth.uid() = user_id);
+CREATE POLICY "delete_own_conversation" ON public.conversation_history
+  FOR DELETE
+  TO authenticated
+  USING (user_id::text = auth.uid());
 
--- Optionally restrict updates so users cannot modify assistant replies
-CREATE POLICY IF NOT EXISTS "update_own_conversation" ON public.conversation_history
-  FOR UPDATE USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "update_own_conversation" ON public.conversation_history
+  FOR UPDATE
+  TO authenticated
+  USING (user_id::text = auth.uid())
+  WITH CHECK (user_id::text = auth.uid());
 
 -- RLS for deletion audit: allow insert by server role or authenticated services only
 ALTER TABLE IF EXISTS public.conversation_deletion_audit ENABLE ROW LEVEL SECURITY;
 
--- If you want the authenticated user to be able to insert audit rows for their own deletion actions:
-CREATE POLICY IF NOT EXISTS "insert_own_deletion_audit" ON public.conversation_deletion_audit
+CREATE POLICY "insert_own_deletion_audit" ON public.conversation_deletion_audit
   FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  TO authenticated
+  WITH CHECK (user_id::text = auth.uid());
 
 -- Prevent public from selecting audit rows by default (no select policy)
 
