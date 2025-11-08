@@ -975,9 +975,9 @@ def render_main_app():
     try:
         st.markdown(f"""
         <div class="brand-container">
-            <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
                 <div style="flex-shrink: 0;">
-                    <div class="brand-logo" style="width: 60px; height: 60px;">{svg_markup}</div>
+                    <div class="brand-logo" style="width: 36px; height: 36px;">{svg_markup}</div>
                 </div>
                 <div style="flex: 1; white-space: nowrap;">
                     <div class="brand-title" style="margin: 0; font-size: 1.8rem;">FirstPerson – Personal AI Companion</div>
@@ -990,9 +990,9 @@ def render_main_app():
         # Fallback to previous column layout if raw HTML rendering fails
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
-            try:
+                try:
                 st.markdown(
-                    f'<div style="width:50px">{svg_markup}</div>', unsafe_allow_html=True)
+                    f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
             except Exception:
                 # Render a simple emoji fallback (ensure proper quoting)
                 st.markdown(
