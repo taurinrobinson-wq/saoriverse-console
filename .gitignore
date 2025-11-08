@@ -70,3 +70,6 @@ coverage.xml
 # Packaging artifacts
 *.whl
 pip-ephem-wheel-cache/
+
+# Node modules (vendor directory) should not be tracked
+node_modules/
