@@ -438,6 +438,32 @@
     </div>
 
     <script>
+        // Configuration for static deployments:
+        // - The EDGE_FUNCTION_URL should point to your Supabase Edge Function that proxy to AI (or to /api/chat for local dev).
+        // - The VALIDATE_SESSION_URL should point to a small session validation endpoint for local dev (static sites will usually use Supabase auth instead).
+        // These can be provided by embedding a meta tag <meta name="edge-function-url" content="https://..."> in the hosting platform
+        // or by setting a global `window.__FP_CONFIG = { EDGE_FUNCTION_URL: 'https://...' }` before this script runs.
+        const EDGE_FUNCTION_URL = (function () {
+            try {
+                const m = document.querySelector('meta[name="edge-function-url"]');
+                if (m && m.content) return m.content;
+                if (window.__FP_CONFIG && window.__FP_CONFIG.EDGE_FUNCTION_URL) return window.__FP_CONFIG.EDGE_FUNCTION_URL;
+                return '/api/chat';
+            } catch (e) {
+                return '/api/chat';
+            }
+        })();
+
+        const VALIDATE_SESSION_URL = (function () {
+            try {
+                const m = document.querySelector('meta[name="validate-session-url"]');
+                if (m && m.content) return m.content;
+                if (window.__FP_CONFIG && window.__FP_CONFIG.VALIDATE_SESSION_URL) return window.__FP_CONFIG.VALIDATE_SESSION_URL;
+                return '/api/validate-session';
+            } catch (e) {
+                return '/api/validate-session';
+            }
+        })();
         // Global variables
         let conversationHistory = [];
         let currentUserId = null;
@@ -457,7 +483,7 @@
 
             // Validate session
             try {
-                const response = await fetch(`/api/validate-session?token=${encodeURIComponent(token)}`);
+                const response = await fetch(`${VALIDATE_SESSION_URL}?token=${encodeURIComponent(token)}`);
                 if (!response.ok) {
                     throw new Error('Invalid session');
                 }
@@ -512,7 +538,7 @@
             try {
                 // Send to API
                 const mode = document.getElementById('processing-mode').value;
-                const response = await fetch('/api/chat', {
+                const response = await fetch(EDGE_FUNCTION_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

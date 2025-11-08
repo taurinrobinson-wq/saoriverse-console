@@ -40,6 +40,8 @@ app.add_middleware(
 )
 
 # Force HTTPS in production
+
+
 @app.middleware("http")
 async def force_https(request, call_next):
     if request.headers.get("x-forwarded-proto") == "http":
@@ -52,6 +54,8 @@ async def force_https(request, call_next):
 app.include_router(admin_router)
 
 # Debug route to check what routes are registered
+
+
 @app.get("/debug/routes")
 async def debug_routes():
     """Debug endpoint to see all registered routes"""
@@ -63,31 +67,40 @@ templates = Jinja2Templates(directory="templates")
 
 # Configuration - using names from .env file
 SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv("SUPABASE_KEY")  # Support both naming conventions
-SUPABASE_AUTH_URL = os.getenv("SUPABASE_AUTH_URL", f"{SUPABASE_URL}/functions/v1/auth-manager" if SUPABASE_URL else None)
-CURRENT_SAORI_URL = os.getenv("CURRENT_SAORI_URL") or os.getenv("SUPABASE_FUNCTION_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv(
+    "SUPABASE_KEY")  # Support both naming conventions
+SUPABASE_AUTH_URL = os.getenv(
+    "SUPABASE_AUTH_URL", f"{SUPABASE_URL}/functions/v1/auth-manager" if SUPABASE_URL else None)
+CURRENT_SAORI_URL = os.getenv(
+    "CURRENT_SAORI_URL") or os.getenv("SUPABASE_FUNCTION_URL")
 SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(32))
 
 # Pydantic models
+
+
 class LoginRequest(BaseModel):
     username: str
     password: str
+
 
 class RegisterRequest(BaseModel):
     username: str
     password: str
     confirm_password: str
 
+
 class ChatRequest(BaseModel):
     message: str
     mode: str = "hybrid"
     user_id: str
+
 
 class SessionData(BaseModel):
     username: str
     user_id: str
     created: str
     expires: str
+
 
 class FirstPersonAuth:
     """Authentication system for FirstPerson"""
@@ -187,15 +200,25 @@ class FirstPersonAuth:
             return {"success": False, "message": f"Registration error: {str(e)}"}
 
 # Routes
+
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     """Main landing page"""
     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @app.get("/app", response_class=HTMLResponse)
 async def chat_app(request: Request):
     """Main chat application"""
+    # Gate serving the static chat HTML behind an environment flag. For production static-host deployments
+    # prefer serving the static site from a CDN/Netlify/Vercel and keep this FastAPI container for admin/dev only.
+    # Set SERVE_STATIC_CHAT=1 in environments where you want the FastAPI app to serve the static template.
+    if os.environ.get("SERVE_STATIC_CHAT", "0") != "1":
+        # Not serving static chat from this process. Return 404 so production containers don't expose it.
+        raise HTTPException(status_code=404, detail="Not available")
     return templates.TemplateResponse("chat.html", {"request": request})
+
 
 @app.post("/api/login")
 async def login(login_data: LoginRequest):
@@ -219,6 +242,7 @@ async def login(login_data: LoginRequest):
         }
     raise HTTPException(status_code=401, detail=result["message"])
 
+
 @app.post("/api/register")
 async def register(register_data: RegisterRequest):
     """User registration endpoint"""
@@ -226,7 +250,8 @@ async def register(register_data: RegisterRequest):
         raise HTTPException(status_code=400, detail="Passwords do not match")
 
     if len(register_data.password) < 6:
-        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+        raise HTTPException(
+            status_code=400, detail="Password must be at least 6 characters")
 
     result = await FirstPersonAuth.create_user(
         register_data.username,
@@ -237,12 +262,22 @@ async def register(register_data: RegisterRequest):
         return {"success": True, "message": "Account created successfully"}
     raise HTTPException(status_code=400, detail=result["message"])
 
+
 @app.post("/api/chat")
 async def chat(chat_data: ChatRequest):
     """Process chat message with AI"""
-    try:
-        saori_url = CURRENT_SAORI_URL or f"{SUPABASE_URL}/functions/v1/saori-fixed"
+    # Structured tracing/logging for debugging message flows
+    saori_url = CURRENT_SAORI_URL or f"{SUPABASE_URL}/functions/v1/saori-fixed"
+    trace_entry = {
+        "ts": datetime.utcnow().isoformat() + 'Z',
+        "user_id": chat_data.user_id,
+        "mode": chat_data.mode,
+        "message_preview": (chat_data.message[:200] + '...') if len(chat_data.message) > 200 else chat_data.message,
+        "saori_url": saori_url,
+    }
 
+    start = datetime.utcnow()
+    try:
         response = requests.post(
             saori_url,
             headers={
@@ -254,27 +289,65 @@ async def chat(chat_data: ChatRequest):
                 "mode": chat_data.mode,
                 "user_id": chat_data.user_id
             },
-            timeout=15
+            timeout=30
         )
 
-        if response.status_code == 200:
+        duration = (datetime.utcnow() - start).total_seconds()
+        trace_entry.update({
+            "duration_s": duration,
+            "status_code": getattr(response, 'status_code', None)
+        })
+
+        try:
             result = response.json()
+        except Exception:
+            result = None
+
+        trace_entry["response_preview"] = None
+        if isinstance(result, dict):
+            trace_entry["response_preview"] = {
+                "reply": (result.get('reply') or '')[:200],
+                "glyph": result.get('glyph'),
+                "processing_time": result.get('processing_time')
+            }
+
+        # append trace to log file
+        try:
+            with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
+                fh.write(json.dumps(trace_entry, ensure_ascii=False) + "\n")
+        except Exception:
+            pass
+
+        if response.status_code == 200 and isinstance(result, dict):
             return {
                 "success": True,
                 "reply": result.get("reply", "I'm here to listen."),
                 "glyph": result.get("glyph", {}),
                 "processing_time": result.get("processing_time", 0)
             }
+
         return {
             "success": False,
             "reply": "I'm experiencing some technical difficulties, but I'm still here for you."
         }
 
-    except Exception:
+    except Exception as e:
+        duration = (datetime.utcnow() - start).total_seconds()
+        trace_entry.update({
+            "duration_s": duration,
+            "exception": str(e)
+        })
+        try:
+            with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
+                fh.write(json.dumps(trace_entry, ensure_ascii=False) + "\n")
+        except Exception:
+            pass
+
         return {
             "success": False,
             "reply": "I'm having trouble connecting right now, but your feelings are still valid."
         }
+
 
 @app.get("/api/validate-session")
 async def validate_session(token: str):
@@ -283,6 +356,7 @@ async def validate_session(token: str):
     if result["valid"]:
         return {"valid": True, "data": result["data"]}
     raise HTTPException(status_code=401, detail=result["error"])
+
 
 @app.get("/health")
 async def health_check():
