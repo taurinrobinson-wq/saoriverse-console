@@ -1,10 +1,10 @@
 /* Global logo size constraints */
 .brand-logo svg,
 .brand-logo img {
-    width: 50px !important;
-    height: 50px !important;
-    max-width: 50px !important;
-    max-height: 50px !important;
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
     vertical-align: middle !important;
     margin-right: 10px !important;
 }
@@ -27,8 +27,8 @@
 
 /* Ensure inline SVGs are properly constrained */
 svg[data-logo="firstperson"] {
-    width: 120px !important;
-    height: 120px !important;
-    max-width: 120px !important;
-    max-height: 120px !important;
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
 }
