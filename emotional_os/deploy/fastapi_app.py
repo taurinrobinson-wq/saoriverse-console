@@ -30,6 +30,20 @@ app = FastAPI(
     version="2.0.1"  # Force redeploy
 )
 
+
+@app.on_event("startup")
+async def _startup_info():
+    # Print a small banner for deployment logs (Railway / Heroku / Docker logs)
+    try:
+        serve_static = os.environ.get("SERVE_STATIC_CHAT", "0")
+        print(f"[fastapi_app] STARTUP: SERVE_STATIC_CHAT={serve_static}")
+        # Print presence of key environment variables (not values for secrets)
+        print(
+            f"[fastapi_app] STARTUP: SUPABASE_URL={'set' if SUPABASE_URL else 'unset'}; CURRENT_SAORI_URL={'set' if CURRENT_SAORI_URL else 'unset'}")
+    except Exception:
+        # Do not raise on startup logging
+        pass
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
