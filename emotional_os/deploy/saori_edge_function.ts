@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { supabaseRlsClient } from "../../supabase/supabaseRlsClient.ts";
 import OpenAI from "openai";
 // Allow GitHub Pages, console.saonyx.com, and Streamlit Community Cloud domains
 const ALLOWED_ORIGINS = [
@@ -7,13 +8,13 @@ const ALLOWED_ORIGINS = [
 ];
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get("Origin");
-  
+
   // Allow Streamlit Community Cloud domains (*.streamlit.app)
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
-  
+
   // Allow localhost for development
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  
+
   let allowOrigin: string;
   if (origin && ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -22,7 +23,7 @@ function getCorsHeaders(req: Request) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0] || "*";
   }
-  
+
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -78,18 +79,25 @@ Deno.serve(async (req: Request): Promise<Response> => {
       persistSession: false
     }
   });
+  let rlsClient = null;
+  try {
+    rlsClient = token ? supabaseRlsClient(token) : null;
+  } catch (e) {
+    console.error('Failed to create RLS client:', e);
+    rlsClient = null;
+  }
   let userId = null;
   if (token) {
     try {
       // For Supabase JS v2, use getUser
       const { data } = await userClient.auth.getUser();
       if (data?.user) userId = data.user.id;
-    } catch  {}
+    } catch { }
   }
   let body;
   try {
     body = await req.json();
-  } catch  {
+  } catch {
     return new Response(JSON.stringify({
       error: "Invalid JSON"
     }), {
@@ -200,13 +208,13 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
     const parsed = JSON.parse(raw);
     const glyphs = Array.isArray(parsed?.glyphs) ? parsed.glyphs : [];
     parsedGlyphs = glyphs.filter((g: any) => g?.name && typeof g.name === "string").map((g: any) => ({
-        name: String(g.name).slice(0, 80),
-        description: String(g.description ?? "").slice(0, 300),
-        response_layer: g.response_layer ? String(g.response_layer).slice(0, 80) : undefined,
-        depth: Number.isFinite(Number(g.depth)) ? Math.max(1, Math.min(5, Number(g.depth))) : undefined,
-        glyph_type: g.glyph_type ? String(g.glyph_type).slice(0, 80) : undefined,
-        symbolic_pairing: g.symbolic_pairing ? String(g.symbolic_pairing).slice(0, 120) : undefined
-      })).slice(0, 5);
+      name: String(g.name).slice(0, 80),
+      description: String(g.description ?? "").slice(0, 300),
+      response_layer: g.response_layer ? String(g.response_layer).slice(0, 80) : undefined,
+      depth: Number.isFinite(Number(g.depth)) ? Math.max(1, Math.min(5, Number(g.depth))) : undefined,
+      glyph_type: g.glyph_type ? String(g.glyph_type).slice(0, 80) : undefined,
+      symbolic_pairing: g.symbolic_pairing ? String(g.symbolic_pairing).slice(0, 120) : undefined
+    })).slice(0, 5);
   } catch (e) {
     console.error("Glyph extraction failed", e);
   }
@@ -217,13 +225,13 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
       const names = parsedGlyphs.map((g: any) => g.name);
       const { data: existing } = await admin.from("glyphs").select("id, name, description, response_layer, depth, user_id").eq("user_id", userId).in("name", names);
       const existByName = new Map((existing ?? []).map((g: any) => [
-          g.name,
-          g
-        ]));
+        g.name,
+        g
+      ]));
       const now = new Date().toISOString();
       const toInsert = [];
       const toUpdate = [];
-      for (const g of parsedGlyphs){
+      for (const g of parsedGlyphs) {
         const ex = existByName.get(g.name);
         if (!ex) {
           toInsert.push({
@@ -256,11 +264,11 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
         }
       }
       if (toInsert.length) {
-        const { data: ins } = await admin.from("glyphs").insert(toInsert).select("*");
+        const { data: ins } = await glyphDb.from("glyphs").insert(toInsert).select("*");
         if (ins) upsertedGlyphs.push(...ins);
       }
       if (toUpdate.length) {
-        const { data: upd } = await admin.from("glyphs").upsert(toUpdate, {
+        const { data: upd } = await glyphDb.from("glyphs").upsert(toUpdate, {
           onConflict: "id"
         }).select("*");
         if (upd) upsertedGlyphs.push(...upd);
@@ -281,11 +289,92 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
     user_id: userId
   };
   try {
-    await admin.from("glyph_logs").insert([
+    const logsDb = rlsClient ?? admin;
+    await logsDb.from("glyph_logs").insert([
       logEntry
     ]);
   } catch (err) {
     console.error("Log insert failed:", err);
+  }
+  // Persist messages and conversation metadata for authenticated users
+  try {
+    if (userId) {
+      // Allow client to pass a conversation_id to continue an existing thread,
+      // otherwise generate a new UUID for a new conversation.
+      const conversationId = body?.conversation_id || (typeof crypto !== "undefined" && (crypto as any).randomUUID ? (crypto as any).randomUUID() : new Date().toISOString());
+      const nowIso = new Date().toISOString();
+
+      // Insert user message as a row in conversation_messages
+      try {
+        const convDb = rlsClient ?? admin;
+        await convDb.from("conversation_messages").insert([{
+          user_id: userId,
+          conversation_id: conversationId,
+          role: "user",
+          message: message,
+          first_name: body?.first_name ?? null,
+          timestamp: nowIso
+        }]);
+      } catch (e) {
+        console.error("Insert user message failed:", e);
+      }
+
+      // Insert assistant reply as a row in conversation_messages
+      try {
+        const convDb = rlsClient ?? admin;
+        await convDb.from("conversation_messages").insert([{
+          user_id: userId,
+          conversation_id: conversationId,
+          role: "assistant",
+          message: reply,
+          timestamp: new Date().toISOString()
+        }]);
+      } catch (e) {
+        console.error("Insert assistant message failed:", e);
+      }
+
+      // Compute message count for the conversation (exact count)
+      let messageCount: number | null = null;
+      try {
+        const convDb = rlsClient ?? admin;
+        const { count } = await convDb.from("conversation_messages").select("id", { count: "exact" }).eq("user_id", userId).eq("conversation_id", conversationId);
+        messageCount = typeof count === "number" ? count : null;
+      } catch (e) {
+        console.error("Count query failed:", e);
+      }
+
+      // Fetch existing conversation metadata if present
+      let existingConv: any = null;
+      try {
+        const convDb = rlsClient ?? admin;
+        const { data: found } = await convDb.from("conversations").select("id, title, first_message, first_response, message_count, processing_mode, emotional_context, topics, archived").eq("user_id", userId).eq("conversation_id", conversationId).maybeSingle();
+        existingConv = found ?? null;
+      } catch (e) {
+        existingConv = null;
+      }
+
+      const upsertRow = {
+        user_id: userId,
+        conversation_id: conversationId,
+        title: existingConv?.title ?? (body?.title ?? "New Conversation"),
+        first_message: existingConv?.first_message ?? message,
+        first_response: existingConv?.first_response ?? reply,
+        message_count: messageCount ?? ((existingConv?.message_count ?? 0) + 2),
+        updated_at: nowIso,
+        archived: existingConv?.archived ?? false,
+        emotional_context: existingConv?.emotional_context ?? (matchedTag ? { tag: matchedTag.tag_name } : {}),
+        topics: existingConv?.topics ?? []
+      };
+
+      try {
+        const convDb = rlsClient ?? admin;
+        await convDb.from("conversations").upsert([upsertRow], { onConflict: "user_id,conversation_id" }).select();
+      } catch (e) {
+        console.error("Conversation metadata upsert failed:", e);
+      }
+    }
+  } catch (e) {
+    console.error("Conversation persistence error:", e);
   }
   return new Response(JSON.stringify({
     reply,

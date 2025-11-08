@@ -10,10 +10,10 @@ const ALLOWED_ORIGINS = [
 
 function getCorsHeaders(req: any) {
   const origin = req.headers.get("Origin");
-  
+
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  
+
   let allowOrigin;
   if (ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -22,7 +22,7 @@ function getCorsHeaders(req: any) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0];
   }
-  
+
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -46,10 +46,10 @@ async function hashPassword(password: string, salt?: string): Promise<{ hash: st
     // Generate new random salt
     saltBytes = crypto.getRandomValues(new Uint8Array(32));
   }
-  
+
   // Encode password as UTF-8
   const passwordBytes = new TextEncoder().encode(password);
-  
+
   // Import password as key
   const key = await crypto.subtle.importKey(
     'raw',
@@ -58,7 +58,7 @@ async function hashPassword(password: string, salt?: string): Promise<{ hash: st
     false,
     ['deriveBits']
   );
-  
+
   // Derive hash using PBKDF2
   const hashBuffer = await crypto.subtle.deriveBits(
     {
@@ -70,12 +70,12 @@ async function hashPassword(password: string, salt?: string): Promise<{ hash: st
     key,
     512 // 64 bytes = 512 bits
   );
-  
+
   // Convert to hex strings
   const hashArray = new Uint8Array(hashBuffer);
   const hash = Array.from(hashArray).map(b => b.toString(16).padStart(2, '0')).join('');
   const saltHex = Array.from(saltBytes).map(b => b.toString(16).padStart(2, '0')).join('');
-  
+
   return {
     hash,
     salt: saltHex
@@ -109,26 +109,26 @@ async function ensureUsersTable(admin: any) {
 async function createUser(data: any, admin: any): Promise<any> {
   try {
     const { username, password, email, created_at } = data;
-    
+
     console.log("Creating user with custom table approach:", { username });
-    
+
     // Hash the password using our consistent hashing
     const { hash: password_hash, salt } = await hashPassword(password);
-    
+
     // Check if username already exists
     const { data: existingUser } = await admin
       .from('users')
       .select('id')
       .eq('username', username)
       .single();
-    
+
     if (existingUser) {
       return {
         success: false,
         error: "Username already exists"
       };
     }
-    
+
     // Create new user
     const { data: newUser, error } = await admin
       .from('users')
@@ -143,7 +143,7 @@ async function createUser(data: any, admin: any): Promise<any> {
       }])
       .select('id, username, created_at')
       .single();
-    
+
     if (error) {
       console.error("User creation error:", error);
       return {
@@ -151,12 +151,12 @@ async function createUser(data: any, admin: any): Promise<any> {
         error: "Failed to create user account"
       };
     }
-    
+
     return {
       success: true,
       user: newUser
     };
-    
+
   } catch (err) {
     console.error("Create user exception:", err);
     return {
@@ -170,30 +170,30 @@ async function createUser(data: any, admin: any): Promise<any> {
 async function authenticateUser(data: any, admin: any): Promise<any> {
   try {
     const { username, password } = data;
-    
+
     // Get user by username
     const { data: user, error } = await admin
       .from('users')
       .select('id, username, password_hash, salt, is_active')
       .eq('username', username)
       .single();
-    
+
     console.log("Auth lookup result:", { found: !!user, error: error?.message, username });
-    
+
     if (error || !user) {
       return {
         authenticated: false,
         error: "Invalid credentials"
       };
     }
-    
+
     if (!user.is_active) {
       return {
         authenticated: false,
         error: "Account is deactivated"
       };
     }
-    
+
     // Verify password
     let isValidPassword = false;
     try {
@@ -205,26 +205,26 @@ async function authenticateUser(data: any, admin: any): Promise<any> {
         error: "Password verification failed"
       };
     }
-    
+
     if (!isValidPassword) {
       return {
         authenticated: false,
         error: "Invalid credentials"
       };
     }
-    
+
     // Update last login
     await admin
       .from('users')
       .update({ last_login: new Date().toISOString() })
       .eq('id', user.id);
-    
+
     return {
       authenticated: true,
       user_id: user.id,
       username: user.username
     };
-    
+
   } catch (err) {
     console.error("Authentication exception:", err);
     return {
@@ -242,25 +242,25 @@ async function getUserProfile(userId: string, admin: any): Promise<any> {
       .select('id, username, email, created_at, last_login')
       .eq('id', userId)
       .single();
-    
+
     if (error || !user) {
       return {
         success: false,
         error: "User not found"
       };
     }
-    
+
     // Get user's conversation stats
     const { data: conversationStats } = await admin
       .from('glyph_logs')
       .select('id')
       .eq('user_id', userId);
-    
+
     const { data: glyphStats } = await admin
       .from('glyphs')
       .select('id')
       .eq('user_id', userId);
-    
+
     return {
       success: true,
       profile: {
@@ -269,7 +269,7 @@ async function getUserProfile(userId: string, admin: any): Promise<any> {
         glyph_count: glyphStats?.length || 0
       }
     };
-    
+
   } catch (err) {
     console.error("Get profile exception:", err);
     return {
@@ -281,11 +281,11 @@ async function getUserProfile(userId: string, admin: any): Promise<any> {
 
 Deno.serve(async (req: any) => {
   const corsHeaders = getCorsHeaders(req);
-  
+
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
-  
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
       status: 405, headers: corsHeaders
@@ -302,7 +302,7 @@ Deno.serve(async (req: any) => {
   }
 
   const { action } = body;
-  
+
   if (!action) {
     return new Response(JSON.stringify({ error: "Missing action parameter" }), {
       status: 400, headers: corsHeaders
@@ -313,22 +313,22 @@ Deno.serve(async (req: any) => {
   const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
     auth: { persistSession: false }
   });
-  
+
   // Ensure users table exists
   await ensureUsersTable(admin);
-  
+
   let result;
-  
+
   try {
     switch (action) {
       case "create_user":
         result = await createUser(body, admin);
         break;
-        
+
       case "authenticate":
         result = await authenticateUser(body, admin);
         break;
-        
+
       case "get_profile":
         const { user_id } = body;
         if (!user_id) {
@@ -337,7 +337,7 @@ Deno.serve(async (req: any) => {
           result = await getUserProfile(user_id, admin);
         }
         break;
-        
+
       case "fix_password":
         try {
           const { username, new_password } = body;
@@ -345,25 +345,25 @@ Deno.serve(async (req: any) => {
             result = { success: false, error: "Missing username or new_password" };
             break;
           }
-          
+
           console.log(`Fixing password for user: ${username}`);
-          
+
           // Hash the new password consistently
           const { hash: password_hash, salt } = await hashPassword(new_password);
-          
+
           console.log(`Generated hash length: ${password_hash.length}, salt length: ${salt.length}`);
-          
+
           // Update user password in database
           const { data: updatedUser, error: updateError } = await admin
             .from('users')
-            .update({ 
-              password_hash: password_hash, 
+            .update({
+              password_hash: password_hash,
               salt: salt,
               updated_at: new Date().toISOString()
             })
             .eq('username', username)
             .select('id, username');
-          
+
           if (updateError) {
             console.error("Update error:", updateError);
             result = { success: false, error: `Database error: ${updateError.message}` };
@@ -383,12 +383,12 @@ Deno.serve(async (req: any) => {
         try {
           const { password, expected_hash, expected_salt } = body;
           console.log("Hash test params:", { password, has_hash: !!expected_hash, has_salt: !!expected_salt });
-          
+
           if (!password || !expected_hash || !expected_salt) {
             result = { success: false, error: "Missing required parameters" };
             break;
           }
-          
+
           const { hash: computed_hash } = await hashPassword(password, expected_salt);
           result = {
             success: true,
@@ -404,14 +404,14 @@ Deno.serve(async (req: any) => {
           result = { success: false, error: `Hash test failed: ${hashError.message}` };
         }
         break;
-        
+
       case "create_table":
         try {
           console.log("Creating users table...");
-          
+
           // Create users table with proper structure
           const { error: tableError } = await admin.rpc('create_users_table_if_not_exists');
-          
+
           if (tableError) {
             // Fallback: try direct SQL
             const createTableSQL = `
@@ -425,10 +425,10 @@ Deno.serve(async (req: any) => {
               );
               
               ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
-              CREATE POLICY IF NOT EXISTS "Allow all operations" ON public.users FOR ALL USING (true);
+              CREATE POLICY "Allow all operations" ON public.users FOR ALL USING (true);
               GRANT ALL ON public.users TO anon, authenticated, service_role;
             `;
-            
+
             // Try to execute the SQL directly
             console.log("Creating table with direct SQL");
             result = { success: true, message: "Table creation attempted. Please run the SQL manually if needed." };
@@ -440,16 +440,16 @@ Deno.serve(async (req: any) => {
           result = { success: false, error: `Failed to create table: ${createError.message}` };
         }
         break;
-        
+
       default:
         result = { error: "Invalid action" };
     }
-    
+
   } catch (err) {
     console.error("Action processing error:", err);
     result = { error: "Internal server error" };
   }
-  
+
   return new Response(JSON.stringify(result), {
     status: 200,
     headers: corsHeaders

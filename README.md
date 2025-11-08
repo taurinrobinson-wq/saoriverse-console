@@ -125,13 +125,18 @@ ALTER TABLE public.conversation_history ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Insert own rows" ON public.conversation_history
 	FOR INSERT
-	WITH CHECK (auth.uid() = user_id);
+	TO authenticated
+	WITH CHECK (user_id::text = auth.uid());
 
 CREATE POLICY "Select own rows" ON public.conversation_history
-	FOR SELECT USING (auth.uid() = user_id);
+	FOR SELECT
+	TO authenticated
+	USING (user_id::text = auth.uid());
 
 CREATE POLICY "Delete own rows" ON public.conversation_history
-	FOR DELETE USING (auth.uid() = user_id);
+	FOR DELETE
+	TO authenticated
+	USING (user_id::text = auth.uid());
 ```
 
 Deletion & audit
