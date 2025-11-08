@@ -7,6 +7,9 @@ PORT=${PORT:-8000}
 # Enable serving static chat template from this container
 export SERVE_STATIC_CHAT=1
 
+echo "[railway_start] SERVE_STATIC_CHAT=${SERVE_STATIC_CHAT} PORT=${PORT}"
+echo "[railway_start] Starting FastAPI (uvicorn) - serving static chat HTML from templates if enabled"
+
 # Optional: you can set other environment variables here or let Railway provide them via project settings
 # e.g. export SUPABASE_URL=...
 
