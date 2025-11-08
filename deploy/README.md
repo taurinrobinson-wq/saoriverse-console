@@ -95,6 +95,22 @@ Step-by-step
    - Start Streamlit: `streamlit run main_v2.py` (ensure it's using `.streamlit/config.toml`) and check `http://127.0.0.1:8501/app/`.
    - Visit `https://firstperson.chat/` for the static site and `https://firstperson.chat/app/` for the proxied Streamlit app.
 
+   ## Railway-specific notes
+
+   If you deploy on Railway, the repo includes a `railway.json` and a small helper `emotional_os/deploy/railway_start.sh`.
+
+   - By default the Railway start command will run the `railway_start.sh` script which sets `SERVE_STATIC_CHAT=1` and starts Uvicorn.
+   - Make sure to set the following Railway environment variables in the Railway project settings (Settings → Variables):
+      - `SUPABASE_URL` = your Supabase URL
+      - `SUPABASE_KEY` = your Supabase anon or service key (follow least-privilege; prefer anon+Edge Functions)
+      - `SECRET_KEY` = a 32-byte hex string (use `python -c "import secrets; print(secrets.token_hex(32))"`)
+      - (optional) `CURRENT_SAORI_URL` = override for AI function URL
+
+   - The Railway container will serve the static site at `/` (templates/index.html) and `/app` will return `templates/chat.html` as long as `SERVE_STATIC_CHAT=1` is set. This makes Railway act as the public host for the static site. If you prefer to host static files separately (Netlify/Vercel), set `SERVE_STATIC_CHAT=0` and instead publish static assets to your static host, while using Railway for dev/admin APIs.
+
+   Security reminder:
+   - If you keep Streamlit or admin endpoints on Railway, secure them (OAuth, basic auth, or restrict by IP). The static site should use Supabase Auth and Edge Functions for any server-side operations.
+
 Security notes
 --------------
 - Prefer an OAuth proxy (Cloudflare Access, oauth2-proxy) over basic auth for production.
