@@ -27,4 +27,7 @@ COPY . .
 EXPOSE 8000
 
 # Command to run the application
+# By default do not serve the static chat HTML from this container. Static hosting is recommended for the
+# public site; set SERVE_STATIC_CHAT=1 in env to allow this container to serve `templates/chat.html` for dev.
+ENV SERVE_STATIC_CHAT=0
 CMD ["python", "-m", "uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "8000", "--timeout-keep-alive", "30"]
