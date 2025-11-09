@@ -338,7 +338,8 @@ def render_splash_interface(auth):
     # Use the cropped logo from the static directory to avoid inline SVG
     # fill/viewBox inconsistencies across browsers. Prefer serving the SVG
     # as an <img> which ensures correct MIME handling and consistent sizing.
-    logo_file = "FirstPerson-Logo_cropped.svg"
+    # Use the inverted/no-text cropped SVG (more reliable and not corrupted)
+    logo_file = "FirstPerson-Logo-invert-cropped_notext.svg"
 
     # Prefer graphics stored under the package static folder so the asset
     # lives with the code. Fall back to repository-root `static/graphics`.
@@ -515,7 +516,7 @@ def render_main_app():
         try:
             # Prefer package-local static SVG image for reliable rendering in VS Code/browser
             pkg_logo = os.path.join(os.path.dirname(
-                __file__), "static", "graphics", "FirstPerson-Logo_cropped.svg")
+                __file__), "static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg")
             if os.path.exists(pkg_logo):
                 # Center the small logo above the demo info
                 c1, c2, c3 = st.columns([1, 0.6, 1])
@@ -525,12 +526,13 @@ def render_main_app():
                     except Exception:
                         # Fallback to inline SVG rendering if st.image fails
                         svg_markup = _load_inline_svg(
-                            "FirstPerson-Logo_cropped.svg")
+                            "FirstPerson-Logo-invert-cropped_notext.svg")
                         st.markdown(
                             f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
             else:
                 # Fallback: inline SVG if package file missing
-                svg_markup = _load_inline_svg("FirstPerson-Logo_cropped.svg")
+                svg_markup = _load_inline_svg(
+                    "FirstPerson-Logo-invert-cropped_notext.svg")
                 st.markdown(
                     f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
 

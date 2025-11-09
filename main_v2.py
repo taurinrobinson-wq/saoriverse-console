@@ -20,7 +20,8 @@ import json
 # Must be first Streamlit command
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
-    _logo_path = Path("static/graphics/FirstPerson-Logo_cropped.svg")
+    _logo_path = Path(
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
@@ -75,7 +76,8 @@ except Exception:
 # Replace default favicon with project logo (use embedded data URI so Streamlit
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
-    logo_path = Path("static/graphics/FirstPerson-Logo_cropped.svg")
+    logo_path = Path(
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
