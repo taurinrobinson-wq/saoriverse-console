@@ -36,6 +36,13 @@ except Exception:
     generate_auto_name = None
     load_all_conversations_to_sidebar = None
 
+# Document export helper (generates Word docx for personal logs).
+# Import defensively so the UI still loads if python-docx isn't installed.
+try:
+    from emotional_os.deploy.modules.doc_export import generate_doc
+except Exception:
+    generate_doc = None
+
 logger = logging.getLogger(__name__)
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
@@ -1793,12 +1800,31 @@ def render_main_app():
             if st.button("Conclude Log"):
                 st.success("Your personal log has been saved.")
                 try:
-                    st.download_button(
-                        label="Download as Word Doc",
-                        data=generate_doc(
-                            date, log_time, event, mood, reflections, insights),
-                        file_name="personal_log.docx"
-                    )
+                    if callable(generate_doc):
+                        buf = generate_doc(
+                            date, log_time, event, mood, reflections, insights)
+                        # If a BytesIO-like object was returned, get raw bytes
+                        try:
+                            data_bytes = buf.getvalue()
+                        except Exception:
+                            # If it's already bytes or str, pass through
+                            data_bytes = buf
+                        st.download_button(
+                            label="Download as Word Doc",
+                            data=data_bytes,
+                            file_name="personal_log.docx",
+                        )
+                    else:
+                        # Fallback: provide a plain-text download if docx export not available
+                        fallback_text = (
+                            f"Date: {date}\nTime: {log_time}\nEvent: {event}\nMood: {mood}\n\n"
+                            f"Reflections:\n{reflections}\n\nInsights:\n{insights}"
+                        )
+                        st.download_button(
+                            label="Download as TXT",
+                            data=fallback_text.encode("utf-8"),
+                            file_name="personal_log.txt",
+                        )
                 except Exception as e:
                     st.error(f"Error generating Word document: {e}")
         elif journal_type == "Daily Emotional Check-In":
