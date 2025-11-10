@@ -11,7 +11,7 @@ All 6 steps completed successfully! Your FirstPerson emotional AI system now has
 ```
 ┌─ LOCAL MACHINE (245MB) ─────────────────────┐
 │  • /Users/taurinrobinson/saoriverse-console │
-│  • main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) (Streamlit UI)    │
+│  • emotional_os_ui_v2.py (Streamlit UI)    │
 │  • Git repository                           │
 │  • .venv → symlink (points to external)     │
 │  • data → symlink (points to external)      │
@@ -107,7 +107,7 @@ All 6 steps completed successfully! Your FirstPerson emotional AI system now has
 | `test_poetry_enrichment_e2e.py` | E2E test suite | 325+ lines | ✅ Passing |
 | `data/lexicons/nrc_emotion_lexicon.txt` | Full lexicon (6,453 words) | 2.7MB | ✅ Loaded |
 | `data/poetry/poetry_database.json` | Poetry collection | ~50KB | ✅ Active |
-| `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) | Updated UI with enrichment | 800+ lines | ✅ Enhanced |
+| `emotional_os_ui_v2.py` | Updated UI with enrichment | 800+ lines | ✅ Enhanced |
 
 ---
 
@@ -117,7 +117,7 @@ All 6 steps completed successfully! Your FirstPerson emotional AI system now has
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+streamlit run emotional_os_ui_v2.py
 ```
 
 ### Enable Poetry Enrichment
@@ -243,7 +243,7 @@ Display to User
 ### Data Flow Architecture
 
 ```
-main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) (Streamlit UI)
+emotional_os_ui_v2.py (Streamlit UI)
     ├─ poetry_enrichment.py (Main enrichment)
     │  ├─ nrc_lexicon_loader.py (Emotion detection)
     │  │  └─ data/lexicons/nrc_emotion_lexicon.txt (6,453 words)

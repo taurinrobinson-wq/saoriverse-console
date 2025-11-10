@@ -68,7 +68,7 @@ Once external drive is mounted:
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-.venv/bin/streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+.venv/bin/streamlit run emotional_os_ui_v2.py
 ```
 
 Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
@@ -276,7 +276,7 @@ cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 
 # Start FirstPerson
-.venv/bin/streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+.venv/bin/streamlit run emotional_os_ui_v2.py
 
 # Check external drive
 du -sh "/Volumes/My Passport for Mac/FirstPerson"

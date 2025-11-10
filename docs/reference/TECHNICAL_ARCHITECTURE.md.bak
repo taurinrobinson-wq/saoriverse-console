@@ -496,7 +496,7 @@ saoriverse-console/
 │       └── user_learning.py         # NEW: Personalization system
 │
 ├── streamlit_ui/
-│   └── main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)    # Updated with Local Mode toggle
+│   └── emotional_os_ui_v2.py    # Updated with Local Mode toggle
 │
 ├── tests/
 │   ├── test_local_mode.py       # NEW: Comprehensive local testing
@@ -568,7 +568,7 @@ python -m spacy download en_core_web_sm
 # Place in: data/lexicons/nrc_emotion_lexicon.txt
 
 # Run
-streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+streamlit run emotional_os_ui_v2.py
 
 # Select "Local Mode" in sidebar
 ```
@@ -588,7 +588,7 @@ python data_preparation/poetry_downloader.py
 pytest tests/
 
 # Run locally
-streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=debug
+streamlit run emotional_os_ui_v2.py --logger.level=debug
 ```
 
 ---

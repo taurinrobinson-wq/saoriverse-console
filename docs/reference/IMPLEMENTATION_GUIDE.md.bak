@@ -335,7 +335,7 @@ And that place is completely **yours**.
 Plus your existing:
 ```
 /parser/signal_parser.py ........... Core emotional processor
-/main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) ............ Streamlit interface  
+/emotional_os_ui_v2.py ............ Streamlit interface  
 /glyph_lexicon_rows.csv .......... 292 glyphs database
 /requirements.txt ................. Python dependencies
 ```

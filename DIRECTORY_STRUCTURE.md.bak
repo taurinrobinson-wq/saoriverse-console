@@ -86,8 +86,8 @@ This document explains the reorganized directory structure of the Saoriverse Con
 ### UI & Static Assets
 
 - **`src/ui/`** - UI components (legacy)
-  - `emotional_os_ui.py (ARCHIVED)` (ARCHIVED)
-  - `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED)
+  - `emotional_os_ui.py`
+  - `emotional_os_ui_v2.py`
   - `emotional_tag_matcher.py`
 
 - **`static/`** - Static web assets

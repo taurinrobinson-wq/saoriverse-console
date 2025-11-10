@@ -377,7 +377,7 @@ if __name__ == "__main__":
     create_quick_setup_guide()
 
     print("\n✅ Integration files created:")
-    print("   - enhanced_conversation_demo.py (replaces your existing demo)")
+    print("   - enhanced_conversation_demo.py  (replaces your existing demo) (local demo; archived in repo)")
     print("   - SETUP_EVOLVING_GLYPHS.md (setup guide)")
     print("   - config_template.py (configuration template)")
 

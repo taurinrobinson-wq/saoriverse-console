@@ -67,11 +67,11 @@ This guide walks through deploying the complete user authentication system for E
 
 1. **Replace main UI file**
    ```bash
-   # Backup current emotional_os_ui.py (ARCHIVED)
-   cp emotional_os_ui.py (ARCHIVED) emotional_os_ui_backup.py
+   # Backup current emotional_os_ui.py
+   cp emotional_os_ui.py emotional_os_ui_backup.py
    
    # Replace with authenticated version
-   cp authenticated_emotional_os_ui.py emotional_os_ui.py (ARCHIVED)
+   cp authenticated_emotional_os_ui.py emotional_os_ui.py
    ```
 
 2. **Update Streamlit secrets**

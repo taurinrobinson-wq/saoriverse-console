@@ -15,8 +15,8 @@ The main application consists of these key files:
 ## 🚫 Deprecated/Archived Files
 
 Previous versions of the UI have been moved to the `deprecated/` directory:
-- `emotional_os_ui.py (ARCHIVED)` (ARCHIVED) (old version)
-- `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) (old version)
+- `emotional_os_ui.py` (old version)
+- `emotional_os_ui_v2.py` (old version)
 
 Additional archived files exist in:
 - `emotional_os/archive/`

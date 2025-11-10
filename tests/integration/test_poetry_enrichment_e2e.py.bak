@@ -329,7 +329,7 @@ class E2ETestSuite:
 
         print("\n" + "=" * 60)
         print("\nNext steps:")
-        print("1. Launch Streamlit UI: streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)")
+        print("1. Launch Streamlit UI: streamlit run emotional_os_ui_v2.py")
         print("2. Enable 'Poetry Enrichment' in sidebar settings")
         print("3. Start a conversation and observe poetic responses")
         print("4. Check sidebar stats for enrichment metrics")

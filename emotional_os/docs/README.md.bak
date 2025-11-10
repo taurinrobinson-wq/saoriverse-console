@@ -38,7 +38,7 @@ This system is a modular, privacy-focused emotional OS and web platform. It supp
 
 - Install requirements: `pip install -r emotional_os/deploy/requirements.txt`Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
 
-- Run Streamlit UI: `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)`
+- Run Streamlit UI: `streamlit run emotional_os/deploy/emotional_os_ui_v2.py`
 
 - Run FastAPI backend: `uvicorn emotional_os.deploy.fastapi_app:app --reload````bash
 

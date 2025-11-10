@@ -75,7 +75,7 @@
 ### Architecture:
 ```
 📁 Emotional OS/
-├── emotional_os_ui_v2.py          # New user-focused UI
+├── main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)          # New user-focused UI
 ├── conversations/                  # Persistent conversation storage
 ├── learning/
 │   ├── lexicon_learner.py         # Learning engine
