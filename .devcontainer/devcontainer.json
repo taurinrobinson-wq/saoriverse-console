@@ -19,7 +19,8 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "streetsidesoftware.code-spell-checker",
-        "ms-azuretools.vscode-containers"
+        "ms-azuretools.vscode-containers",
+        "DavidAnson.vscode-markdownlint"
       ]
     }
   },
