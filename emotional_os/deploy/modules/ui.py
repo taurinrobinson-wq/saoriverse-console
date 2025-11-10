@@ -193,11 +193,27 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         ai_glyph_display = ai_best['glyph_name'] if ai_best else (
             ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
 
-        composed = (
-            f"{ai_reply}\n\n"
-            f"Local decoding: {ai_voltage}\n"
-            f"Resonant Glyph: {ai_glyph_display}"
-        )
+        # Show local decoding and glyph annotations only when explicitly
+        # enabled. By default we avoid appending internal parsing/debug
+        # details to the user-facing reply. Use the environment variable
+        # `FP_SHOW_LOCAL_DECODING=1` or set the session flag
+        # `st.session_state['show_local_decoding'] = True` to reveal this
+        # additional diagnostic information for developers.
+        try:
+            show_local = os.environ.get('FP_SHOW_LOCAL_DECODING') == '1' or st.session_state.get(
+                'show_local_decoding', False)
+        except Exception:
+            show_local = False
+
+        if show_local:
+            composed = (
+                f"{ai_reply}\n\n"
+                f"Local decoding: {ai_voltage}\n"
+                f"Resonant Glyph: {ai_glyph_display}"
+            )
+        else:
+            # Default: return the raw AI reply without local debug annotations
+            composed = ai_reply
 
         debug = {
             'signals': ai_local.get('signals', []),
@@ -1526,57 +1542,70 @@ def render_main_app():
                         f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
 
                     # Show anonymization consent widget once per session (or until user interacts)
+                    # Gate the full consent UI behind an explicit opt-in flag so it doesn't
+                    # interrupt normal conversation flows. To enable for debugging or
+                    # controlled demos set the environment variable `FP_SHOW_EGS_OVERLAY=1`
+                    # or set `st.session_state['show_egs_overlay']=True` in the session.
                     try:
-                        from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
-                        exchange_id = f"exchange_{len(st.session_state.get(conversation_key, []))}"
-                        consent_key = f"consent_{exchange_id}"
+                        show_overlay = False
+                        try:
+                            show_overlay = os.environ.get(
+                                'FP_SHOW_EGS_OVERLAY') == '1' or st.session_state.get('show_egs_overlay', False)
+                        except Exception:
+                            show_overlay = False
 
-                        # Only show the consent widget if it hasn't been seen/interacted with this session
-                        if not st.session_state.get('consent_seen', False):
-                            consent_result = render_anonymization_consent_widget(
-                                exchange_id)
+                        if show_overlay:
+                            from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
+                            exchange_id = f"exchange_{len(st.session_state.get(conversation_key, []))}"
+                            consent_key = f"consent_{exchange_id}"
 
-                            # If the render function returned a completed consent dict, store it
-                            if consent_result:
-                                st.session_state[consent_key] = consent_result
-                                st.session_state['consent_seen'] = True
-                                # Log consent choices to debug_chat.log for traceability
-                                try:
-                                    import json as _json
-                                    import datetime as _dt
-                                    log_entry = {
-                                        'ts': _dt.datetime.utcnow().isoformat() + 'Z',
-                                        'user_id': st.session_state.get('user_id'),
-                                        'exchange_id': exchange_id,
-                                        'consent': consent_result
-                                    }
-                                    with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
-                                        _fh.write(_json.dumps(
-                                            log_entry, ensure_ascii=False) + '\n')
-                                except Exception:
-                                    # Non-fatal; do not block the UI
-                                    pass
+                            # Only show the consent widget if it hasn't been seen/interacted with this session
+                            if not st.session_state.get('consent_seen', False):
+                                consent_result = render_anonymization_consent_widget(
+                                    exchange_id)
 
-                            # If the user clicked 'Later', the consent widget stores a session key but returns None
-                            elif consent_key in st.session_state:
-                                # mark seen so we don't prompt again this session
-                                st.session_state['consent_seen'] = True
-                                # also log the stored consent/skipped state
-                                try:
-                                    import json as _json
-                                    import datetime as _dt
-                                    stored = st.session_state.get(consent_key)
-                                    log_entry = {
-                                        'ts': _dt.datetime.utcnow().isoformat() + 'Z',
-                                        'user_id': st.session_state.get('user_id'),
-                                        'exchange_id': exchange_id,
-                                        'consent': stored
-                                    }
-                                    with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
-                                        _fh.write(_json.dumps(
-                                            log_entry, ensure_ascii=False) + '\n')
-                                except Exception:
-                                    pass
+                                # If the render function returned a completed consent dict, store it
+                                if consent_result:
+                                    st.session_state[consent_key] = consent_result
+                                    st.session_state['consent_seen'] = True
+                                    # Log consent choices to debug_chat.log for traceability
+                                    try:
+                                        import json as _json
+                                        import datetime as _dt
+                                        log_entry = {
+                                            'ts': _dt.datetime.utcnow().isoformat() + 'Z',
+                                            'user_id': st.session_state.get('user_id'),
+                                            'exchange_id': exchange_id,
+                                            'consent': consent_result
+                                        }
+                                        with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
+                                            _fh.write(_json.dumps(
+                                                log_entry, ensure_ascii=False) + '\n')
+                                    except Exception:
+                                        # Non-fatal; do not block the UI
+                                        pass
+
+                                # If the user clicked 'Later', the consent widget stores a session key but returns None
+                                elif consent_key in st.session_state:
+                                    # mark seen so we don't prompt again this session
+                                    st.session_state['consent_seen'] = True
+                                    # also log the stored consent/skipped state
+                                    try:
+                                        import json as _json
+                                        import datetime as _dt
+                                        stored = st.session_state.get(
+                                            consent_key)
+                                        log_entry = {
+                                            'ts': _dt.datetime.utcnow().isoformat() + 'Z',
+                                            'user_id': st.session_state.get('user_id'),
+                                            'exchange_id': exchange_id,
+                                            'consent': stored
+                                        }
+                                        with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
+                                            _fh.write(_json.dumps(
+                                                log_entry, ensure_ascii=False) + '\n')
+                                    except Exception:
+                                        pass
                         # else: already seen in this session; do nothing
                     except ImportError:
                         st.warning("Consent UI unavailable")
