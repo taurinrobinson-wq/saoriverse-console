@@ -87,6 +87,37 @@ def _load_inline_svg(filename: str) -> str:
         st.warning(f"Could not load CSS: {e}")
 
 
+def inject_css(css_path: str) -> None:
+    """Inject a CSS file into the Streamlit app.
+
+    The function attempts to read the CSS from a package-local path
+    (relative to this module) first, then falls back to the repository
+    root `static` folder. If the file can't be read, the function fails
+    silently (best-effort) to avoid breaking the UI during import.
+    """
+    try:
+        # Try package-local path
+        pkg_path = os.path.join(os.path.dirname(__file__), css_path)
+        repo_path = css_path
+        chosen = None
+        if os.path.exists(pkg_path):
+            chosen = pkg_path
+        elif os.path.exists(repo_path):
+            chosen = repo_path
+
+        if not chosen:
+            return
+
+        with open(chosen, 'r', encoding='utf-8') as f:
+            css = f.read()
+
+        # Inject as a style block
+        st.markdown(f"<style>\n{css}\n</style>", unsafe_allow_html=True)
+    except Exception:
+        # Best-effort: do not raise during UI import
+        return
+
+
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
@@ -717,9 +748,13 @@ def render_main_app():
             st.markdown("---")
 
             # Debug snapshot for sidebar auth flags (helpful during development)
+            # Only show this when explicitly enabled via environment or session flag
             try:
-                st.caption(
-                    f"debug: sidebar_show_login={st.session_state.get('sidebar_show_login')} | sidebar_show_register={st.session_state.get('sidebar_show_register')}")
+                show_debug = os.environ.get(
+                    'FP_DEBUG_UI') == '1' or st.session_state.get('show_sidebar_debug')
+                if show_debug:
+                    st.caption(
+                        f"debug: sidebar_show_login={st.session_state.get('sidebar_show_login')} | sidebar_show_register={st.session_state.get('sidebar_show_register')}")
             except Exception:
                 pass
 
@@ -847,109 +882,139 @@ def render_main_app():
 
                 # When HIL enabled, show the escalation panel (if applicable)
                 if st.session_state.get('enable_hil_escalation'):
+                    # To avoid an intrusive, momentary popup of escalation controls
+                    # require an explicit user action to reveal the full HIL panel.
+                    # This prevents the three-button escalation panel from flashing
+                    # unexpectedly when session state toggles are carried over.
                     st.markdown("---")
                     st.markdown("### Human-in-the-Loop (HIL) Escalation")
 
-                    if not last:
-                        st.info(
-                            "No preprocessing record available for review yet.")
-                    else:
-                        # Visual priority: force -> error, conditional -> warning, none -> info
-                        if escalation_action == 'force_escalation':
-                            st.error(
-                                f"Force escalation recommended: {escalation_reason}")
-                        elif escalation_action == 'conditional_escalation':
-                            st.warning(
-                                f"Conditional escalation suggested: {escalation_reason}")
+                    # Ensure a reveal toggle exists; default is False so panel stays hidden
+                    st.session_state.setdefault('show_hil_controls', False)
+
+                    # Small reveal button to avoid unexpected popup
+                    if not st.session_state.get('show_hil_controls'):
+                        if st.button("Show HIL Controls", key="show_hil_controls_button"):
+                            st.session_state['show_hil_controls'] = True
+                            st.rerun()
+
+                    # Only render the intrusive escalation panel when explicitly revealed
+                    if not st.session_state.get('show_hil_controls'):
+                        # Provide a non-intrusive summary instead
+                        if not last:
+                            st.info(
+                                "HIL escalation available — enable and reveal controls when you're ready.")
                         else:
                             st.info(
-                                "No automatic escalation recommended for this exchange.")
+                                "HIL escalation ready to review recent preprocessing results. Click 'Show HIL Controls' to open the panel.")
+                    else:
+                        if not last:
+                            st.info(
+                                "No preprocessing record available for review yet.")
+                        else:
+                            # Visual priority: force -> error, conditional -> warning, none -> info
+                            if escalation_action == 'force_escalation':
+                                st.error(
+                                    f"Force escalation recommended: {escalation_reason}")
+                            elif escalation_action == 'conditional_escalation':
+                                st.warning(
+                                    f"Conditional escalation suggested: {escalation_reason}")
+                            else:
+                                st.info(
+                                    "No automatic escalation recommended for this exchange.")
 
-                        # Show a compact summary including escalation metadata
-                        st.write({
-                            'intent': last.get('intent'),
-                            'confidence': last.get('confidence'),
-                            'emotional_tags': last.get('emotional_tags'),
-                            'edit_log': last.get('edit_log'),
-                            'editorial_interventions': last.get('editorial_interventions'),
-                            'escalation_action': escalation_action,
-                            'escalation_reason': escalation_reason,
-                            'taxonomy_source': last.get('taxonomy_source')
-                        })
+                            # Show a compact summary including escalation metadata
+                            st.write({
+                                'intent': last.get('intent'),
+                                'confidence': last.get('confidence'),
+                                'emotional_tags': last.get('emotional_tags'),
+                                'edit_log': last.get('edit_log'),
+                                'editorial_interventions': last.get('editorial_interventions'),
+                                'escalation_action': escalation_action,
+                                'escalation_reason': escalation_reason,
+                                'taxonomy_source': last.get('taxonomy_source')
+                            })
 
-                        cols = st.columns([1, 1, 1])
-                        if cols[0].button("Escalate to Human", key="escalate_to_human"):
-                            try:
-                                from local_inference.preprocessor import Preprocessor
-                                p = st.session_state.get('local_preprocessor')
-                                audit_payload = {
-                                    'action': 'hil_escalate',
-                                    'method': 'manual_button',
-                                    'escalation_action': escalation_action,
-                                    'escalation_reason': escalation_reason,
-                                    'preproc_summary': last
-                                }
-                                if p and hasattr(p, 'record_audit'):
-                                    p.record_audit(audit_payload)
-                                    st.success(
-                                        "Escalation recorded (audit log).")
-                                else:
-                                    st.session_state.setdefault('hil_escalation_log', []).append({
-                                        'timestamp': datetime.datetime.now().isoformat(),
-                                        **audit_payload
-                                    })
-                                    st.success(
-                                        "Escalation recorded (session log).")
-                            except Exception:
-                                st.info("Escalation recorded (local stub).")
+                            cols = st.columns([1, 1, 1])
+                            if cols[0].button("Escalate to Human", key="escalate_to_human"):
+                                try:
+                                    from local_inference.preprocessor import Preprocessor
+                                    p = st.session_state.get(
+                                        'local_preprocessor')
+                                    audit_payload = {
+                                        'action': 'hil_escalate',
+                                        'method': 'manual_button',
+                                        'escalation_action': escalation_action,
+                                        'escalation_reason': escalation_reason,
+                                        'preproc_summary': last
+                                    }
+                                    if p and hasattr(p, 'record_audit'):
+                                        p.record_audit(audit_payload)
+                                        st.success(
+                                            "Escalation recorded (audit log).")
+                                    else:
+                                        st.session_state.setdefault('hil_escalation_log', []).append({
+                                            'timestamp': datetime.datetime.now().isoformat(),
+                                            **audit_payload
+                                        })
+                                        st.success(
+                                            "Escalation recorded (session log).")
+                                except Exception:
+                                    st.info(
+                                        "Escalation recorded (local stub).")
 
-                        if cols[1].button("Request Clarification", key="request_clarification"):
-                            try:
-                                # record the clarification request
-                                from local_inference.preprocessor import Preprocessor
-                                p = st.session_state.get('local_preprocessor')
-                                audit_payload = {
-                                    'action': 'request_clarification',
-                                    'method': 'manual_button',
-                                    'escalation_action': escalation_action,
-                                    'escalation_reason': escalation_reason,
-                                    'preproc_summary': last
-                                }
-                                if p and hasattr(p, 'record_audit'):
-                                    p.record_audit(audit_payload)
-                                else:
-                                    st.session_state.setdefault('hil_escalation_log', []).append({
-                                        'timestamp': datetime.datetime.now().isoformat(),
-                                        **audit_payload
-                                    })
-                                st.info("Clarification requested (logged).")
-                            except Exception:
-                                st.info("Clarification requested (local stub).")
+                            if cols[1].button("Request Clarification", key="request_clarification"):
+                                try:
+                                    # record the clarification request
+                                    from local_inference.preprocessor import Preprocessor
+                                    p = st.session_state.get(
+                                        'local_preprocessor')
+                                    audit_payload = {
+                                        'action': 'request_clarification',
+                                        'method': 'manual_button',
+                                        'escalation_action': escalation_action,
+                                        'escalation_reason': escalation_reason,
+                                        'preproc_summary': last
+                                    }
+                                    if p and hasattr(p, 'record_audit'):
+                                        p.record_audit(audit_payload)
+                                    else:
+                                        st.session_state.setdefault('hil_escalation_log', []).append({
+                                            'timestamp': datetime.datetime.now().isoformat(),
+                                            **audit_payload
+                                        })
+                                    st.info(
+                                        "Clarification requested (logged).")
+                                except Exception:
+                                    st.info(
+                                        "Clarification requested (local stub).")
 
-                        if cols[2].button("Escalate to AI (sanitized)", key="escalate_to_ai"):
-                            try:
-                                from local_inference.preprocessor import Preprocessor
-                                p = st.session_state.get('local_preprocessor')
-                                audit_payload = {
-                                    'action': 'hil_escalate_ai',
-                                    'method': 'manual_button',
-                                    'escalation_action': escalation_action,
-                                    'escalation_reason': escalation_reason,
-                                    'preproc_summary': last
-                                }
-                                if p and hasattr(p, 'record_audit'):
-                                    p.record_audit(audit_payload)
-                                    st.success(
-                                        "AI escalation requested (audit log).")
-                                else:
-                                    st.session_state.setdefault('hil_escalation_log', []).append({
-                                        'timestamp': datetime.datetime.now().isoformat(),
-                                        **audit_payload
-                                    })
-                                    st.success(
-                                        "AI escalation requested (session log).")
-                            except Exception:
-                                st.info("AI escalation requested (local stub).")
+                            if cols[2].button("Escalate to AI (sanitized)", key="escalate_to_ai"):
+                                try:
+                                    from local_inference.preprocessor import Preprocessor
+                                    p = st.session_state.get(
+                                        'local_preprocessor')
+                                    audit_payload = {
+                                        'action': 'hil_escalate_ai',
+                                        'method': 'manual_button',
+                                        'escalation_action': escalation_action,
+                                        'escalation_reason': escalation_reason,
+                                        'preproc_summary': last
+                                    }
+                                    if p and hasattr(p, 'record_audit'):
+                                        p.record_audit(audit_payload)
+                                        st.success(
+                                            "AI escalation requested (audit log).")
+                                    else:
+                                        st.session_state.setdefault('hil_escalation_log', []).append({
+                                            'timestamp': datetime.datetime.now().isoformat(),
+                                            **audit_payload
+                                        })
+                                        st.success(
+                                            "AI escalation requested (session log).")
+                                except Exception:
+                                    st.info(
+                                        "AI escalation requested (local stub).")
             except Exception:
                 # Non-fatal: sidebar HIL toggle shouldn't break the UI
                 pass
