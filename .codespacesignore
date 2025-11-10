@@ -1,0 +1,5 @@
+# Ignore archived folders and review area in Codespaces
+archive/
+review_download_before_delete/
+archive/backups/
+archive/full_backups/

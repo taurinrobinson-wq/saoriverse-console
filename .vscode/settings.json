@@ -1,42 +1,12 @@
 {
-  "deno.enable": true,
-  "deno.lint": false,
-  "deno.unstable": true,
-  "typescript.preferences.strict": false,
-  "typescript.suggest.autoImports": false,
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-  "python.testing.pytestEnabled": true,
-  "python.testing.unittestEnabled": false,
-  "python.testing.nosetestsEnabled": false,
-  "python.testing.pytestArgs": [
-    "tests"
-  ],
-  "files.associations": {
-    "*.ts": "typescript"
+  "search.exclude": {
+    "**/archive/**": true,
+    "**/review_download_before_delete/**": true,
+    "**/archive/backups/**": true,
+    "**/archive/full_backups/**": true
   },
-  "typescript.validate.enable": false,
-  "deno.codeLens.implementations": false,
-  "deno.codeLens.references": false,
-  "deno.suggest.imports.hosts": {
-    "https://deno.land": false,
-    "https://cdn.skypack.dev": false,
-    "https://crux.land": false
-  },
-  "cSpell.words": [
-    "apikey",
-    "bcol",
-    "checkin",
-    "firstperson",
-    "ollama",
-    "pdfplumber",
-    "prefs",
-    "preproc",
-    "qcol",
-    "saori",
-    "Saoynx",
-    "selectbox",
-    "selfcare",
-    "supabase",
-    "velonix"
-  ]
+  "files.exclude": {
+    "**/archive/**": true,
+    "**/review_download_before_delete/**": true
+  }
 }
