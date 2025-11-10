@@ -19,9 +19,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+
 class SaoynxAuthentication:
     """Clean authentication system matching SAOYNX design"""
-    
+
     def __init__(self):
         # Use Streamlit secrets
         try:
@@ -30,9 +31,9 @@ class SaoynxAuthentication:
         except KeyError:
             st.error("❌ Supabase configuration not found in secrets")
             st.stop()
-        
+
         self.init_session_state()
-    
+
     def init_session_state(self):
         """Initialize authentication session state"""
         if 'authenticated' not in st.session_state:
@@ -43,11 +44,12 @@ class SaoynxAuthentication:
             st.session_state.username = None
         if 'session_expires' not in st.session_state:
             st.session_state.session_expires = None
-    
+
     def authenticate_user(self, username: str, password: str) -> dict:
         """Authenticate user login"""
         try:
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -61,7 +63,7 @@ class SaoynxAuthentication:
                 },
                 timeout=10
             )
-            
+
             if response.status_code == 200:
                 data = response.json()
                 if data.get("authenticated"):
@@ -69,22 +71,25 @@ class SaoynxAuthentication:
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
-                    st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
-                    
+                    st.session_state.session_expires = (
+                        datetime.now() + timedelta(hours=8)).isoformat()
+
                     return {"success": True, "message": "Login successful"}
                 else:
-                    error_msg = data.get("error", "Invalid username or password")
+                    error_msg = data.get(
+                        "error", "Invalid username or password")
                     return {"success": False, "message": f"Login failed: {error_msg}"}
             else:
                 return {"success": False, "message": f"Authentication service error (HTTP {response.status_code})"}
-                
+
         except Exception as e:
             return {"success": False, "message": f"Login error: {str(e)}"}
-    
+
     def create_user(self, username: str, password: str) -> dict:
         """Create new user account"""
         try:
-            auth_url = st.secrets.get("supabase", {}).get("auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+            auth_url = st.secrets.get("supabase", {}).get(
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
             response = requests.post(
                 auth_url,
                 headers={
@@ -99,7 +104,7 @@ class SaoynxAuthentication:
                 },
                 timeout=10
             )
-            
+
             if response.status_code == 200:
                 data = response.json()
                 if data.get("success"):
@@ -107,23 +112,25 @@ class SaoynxAuthentication:
                 else:
                     return {"success": False, "message": data.get("error", "Failed to create account")}
             else:
-                error_data = response.json() if response.headers.get('content-type', '').startswith('application/json') else {}
+                error_data = response.json() if response.headers.get(
+                    'content-type', '').startswith('application/json') else {}
                 return {"success": False, "message": error_data.get("error", "Failed to create account")}
-                
+
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
-    
+
     def quick_login_bypass(self):
         """Quick demo access"""
         import uuid
-        
+
         st.session_state.authenticated = True
         st.session_state.user_id = str(uuid.uuid4())
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
-        
+        st.session_state.session_expires = (
+            datetime.now() + timedelta(hours=8)).isoformat()
+
         st.rerun()
-    
+
     def logout(self):
         """Logout user and clear session"""
         st.session_state.authenticated = False
@@ -131,10 +138,10 @@ class SaoynxAuthentication:
         st.session_state.username = None
         st.session_state.session_expires = None
         st.rerun()
-    
+
     def render_splash_interface(self):
         """Render the clean SAOYNX splash interface"""
-        
+
         # Custom CSS matching your design
         st.markdown("""
         <style>
@@ -282,10 +289,11 @@ class SaoynxAuthentication:
         }
         </style>
         """, unsafe_allow_html=True)
-        
+
         # Complete logo with text - perfectly centered
-        st.markdown('<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
-        
+        st.markdown(
+            '<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
+
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
@@ -296,9 +304,9 @@ class SaoynxAuthentication:
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">SAOYNX</div>
                 <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">AI EMOTIONAL<br>INTERFACES</div>
                 ''', unsafe_allow_html=True)
-        
+
         st.markdown('</div>', unsafe_allow_html=True)
-        
+
         # Handle different states
         if st.session_state.get('show_login', False):
             self.render_login_form()
@@ -307,17 +315,19 @@ class SaoynxAuthentication:
         else:
             # Main splash screen - professional centered layout
             st.markdown('<div class="auth-container">', unsafe_allow_html=True)
-            
+
             # Tight, compact button layout
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 # Questions closer together
                 qcol1, qcol2 = st.columns([1, 1], gap="small")
                 with qcol1:
-                    st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
+                    st.markdown(
+                        '<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
                 with qcol2:
-                    st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
-                
+                    st.markdown(
+                        '<div class="auth-question">new user?</div>', unsafe_allow_html=True)
+
                 # Buttons closer together
                 bcol1, bcol2 = st.columns([1, 1], gap="small")
                 with bcol1:
@@ -328,93 +338,110 @@ class SaoynxAuthentication:
                     if st.button("Register Now", key="new_btn"):
                         st.session_state.show_register = True
                         st.rerun()
-            
+
             st.markdown('</div>', unsafe_allow_html=True)
-            
+
             # Quick access section
             st.markdown('<div class="quick-access">', unsafe_allow_html=True)
-            st.markdown('<div class="quick-title">Quick Access</div>', unsafe_allow_html=True)
-            
+            st.markdown('<div class="quick-title">Quick Access</div>',
+                        unsafe_allow_html=True)
+
             col1, col2, col3 = st.columns([1, 1, 1])
             with col2:
                 if st.button("⚡ Demo Mode", help="Try the system instantly"):
                     self.quick_login_bypass()
-            
+
             st.markdown('</div>', unsafe_allow_html=True)
-    
+
     def render_login_form(self):
         """Clean login form matching your design"""
-        
+
         st.markdown('<div class="form-container">', unsafe_allow_html=True)
-        
+
         # Back button
         if st.button("← Back", key="back_login"):
             st.session_state.show_login = False
             st.rerun()
-        
+
         # No duplicate logo - just the title
-        st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
-        
+        st.markdown(
+            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
+
         # Login form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("login_form"):
                 # Tight spacing labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
-                username = st.text_input("login", label_visibility="collapsed", placeholder="username")
-                
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
-                password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="password")
-                
-                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
-                login_submitted = st.form_submit_button("Sign In", use_container_width=True)
-                
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
+                username = st.text_input(
+                    "login", label_visibility="collapsed", placeholder="username")
+
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
+                password = st.text_input(
+                    "password", label_visibility="collapsed", type="password", placeholder="password")
+
+                st.markdown(
+                    '<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
+                login_submitted = st.form_submit_button(
+                    "Sign In", use_container_width=True)
+
                 if login_submitted:
                     if not username or not password:
                         st.error("Please enter both username and password")
                     else:
                         with st.spinner("Signing in..."):
                             result = self.authenticate_user(username, password)
-                        
+
                         if result["success"]:
                             st.success("Welcome back!")
                             time.sleep(1)
                             st.rerun()
                         else:
                             st.error(result["message"])
-        
+
         st.markdown('</div>', unsafe_allow_html=True)
-    
+
     def render_register_form(self):
         """Clean registration form"""
-        
+
         st.markdown('<div class="form-container">', unsafe_allow_html=True)
-        
+
         # Back button
         if st.button("← Back", key="back_register"):
             st.session_state.show_register = False
             st.rerun()
-        
+
         # No duplicate logo - just the title
-        st.markdown('<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
-        
+        st.markdown(
+            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
+
         # Register form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             with st.form("register_form"):
                 # Tight spacing labels
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
-                username = st.text_input("login", label_visibility="collapsed", placeholder="choose username")
-                
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
-                password = st.text_input("password", label_visibility="collapsed", type="password", placeholder="choose password")
-                
-                st.markdown('<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>', unsafe_allow_html=True)
-                confirm_password = st.text_input("confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
-                
-                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
-                register_submitted = st.form_submit_button("Register Now", use_container_width=True)
-                
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
+                username = st.text_input(
+                    "login", label_visibility="collapsed", placeholder="choose username")
+
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
+                password = st.text_input(
+                    "password", label_visibility="collapsed", type="password", placeholder="choose password")
+
+                st.markdown(
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>', unsafe_allow_html=True)
+                confirm_password = st.text_input(
+                    "confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
+
+                st.markdown(
+                    '<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
+                register_submitted = st.form_submit_button(
+                    "Register Now", use_container_width=True)
+
                 if register_submitted:
                     if not username or not password:
                         st.error("Username and password are required")
@@ -425,7 +452,7 @@ class SaoynxAuthentication:
                     else:
                         with st.spinner("Creating your account..."):
                             result = self.create_user(username, password)
-                        
+
                         if result["success"]:
                             st.success("Account created! Please sign in.")
                             st.session_state.show_register = False
@@ -434,65 +461,79 @@ class SaoynxAuthentication:
                             st.rerun()
                         else:
                             st.error(result["message"])
-        
+
         st.markdown('</div>', unsafe_allow_html=True)
+
 
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
     st.title("🧠 Emotional OS - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
-    
+
     # User header with logout
     col1, col2, col3 = st.columns([2, 1, 1])
-    
+
     with col1:
         st.write(f"Welcome back, **{st.session_state.username}**! 👋")
-    
+
     with col2:
         if st.button("⚙️ Settings", help="User settings and preferences"):
             st.info("Settings panel coming soon!")
-    
+
     with col3:
         if st.button("🚪 Logout", help="Sign out of your account"):
             auth = SaoynxAuthentication()
             auth.logout()
-    
+
     # User-specific conversation history
     conversation_key = f"conversation_history_{st.session_state.user_id}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
-    
+
     # Main interface
     with st.container():
         # Processing mode selection
         col1, col2 = st.columns([2, 1])
-        
+
+        # Map legacy ai_preferred -> hybrid + prefer_ai
+        if st.session_state.get('processing_mode') == 'ai_preferred':
+            st.session_state.processing_mode = 'hybrid'
+            st.session_state['prefer_ai'] = True
+
         with col1:
+            mode_options = ["hybrid", "local"]
+            current = st.session_state.get('processing_mode', 'hybrid')
+            try:
+                idx = mode_options.index(current)
+            except ValueError:
+                idx = 0
             processing_mode = st.selectbox(
                 "Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
-                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+                mode_options,
+                index=idx,
+                help="Hybrid: Best performance, Local: Maximum privacy"
             )
-        
+
         with col2:
             if st.button("Clear History", type="secondary"):
                 st.session_state[conversation_key] = []
                 st.rerun()
-    
+
     # Chat interface
     chat_container = st.container()
-    
+
     # Display conversation history
     with chat_container:
         for i, exchange in enumerate(st.session_state[conversation_key]):
             with st.chat_message("user"):
                 st.write(exchange["user"])
-            
+
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
-    
+                    st.caption(
+                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
     # Store debug info in session state for reliable rendering
@@ -549,7 +590,8 @@ def render_main_app():
                         cursor = conn.cursor()
                         cursor.execute(
                             "INSERT INTO glyph_lexicon (voltage_pair, glyph_name, description, gate, activation_signals) VALUES (?, ?, ?, ?, ?)",
-                            (new_glyph.glyph_symbol, new_glyph.tag_name, new_glyph.narrative_hook, gates[0] if gates else "Gate 4", ",".join(signals[0]["signal"] if signals else []))
+                            (new_glyph.glyph_symbol, new_glyph.tag_name, new_glyph.narrative_hook,
+                             gates[0] if gates else "Gate 4", ",".join(signals[0]["signal"] if signals else []))
                         )
                         conn.commit()
                         conn.close()
@@ -600,27 +642,30 @@ def render_main_app():
     # Always show debug expander after assistant response
     if st.session_state.get('debug_info'):
         with st.expander("Debug: Emotional OS Activation Details", expanded=False):
-            st.write("**Signals Detected:**", st.session_state['debug_info']['signals'])
-            st.write("**Gates Activated:**", st.session_state['debug_info']['gates'])
-            st.write("**Glyphs Matched:**", st.session_state['debug_info']['glyphs'])
-    
+            st.write("**Signals Detected:**",
+                     st.session_state['debug_info']['signals'])
+            st.write("**Gates Activated:**",
+                     st.session_state['debug_info']['gates'])
+            st.write("**Glyphs Matched:**",
+                     st.session_state['debug_info']['glyphs'])
+
     # Sidebar with user stats and settings
     with st.sidebar:
         st.subheader("Your Emotional Journey")
-        
+
         # User-specific stats
         conversation_count = len(st.session_state[conversation_key])
         st.metric("Conversations", conversation_count)
-        
+
         if conversation_count > 0:
             recent_conversation = st.session_state[conversation_key][-1]
             st.metric("Last Session", recent_conversation["timestamp"][:10])
-        
+
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
         st.write("🧠 Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
-        
+
         if st.button("Download My Data", type="secondary"):
             # Option to export user's conversation data
             user_data = {
@@ -636,15 +681,17 @@ def render_main_app():
                 mime="application/json"
             )
 
+
 def main():
     """Main application entry point"""
     auth = SaoynxAuthentication()
-    
+
     # Check if user is authenticated
     if st.session_state.authenticated:
         render_main_app()
     else:
         auth.render_splash_interface()
+
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,7 @@
   "effectiveness_scores": {},
   "pattern_frequencies": {
     "name": 0.7,
-    "to": 0.94375,
+    "to": 0.971875,
     "t": 0.7999999999999999,
     "that": 0.9249999999999999,
     "quite": 0.7,
@@ -149,7 +149,12 @@
     "emotional": 0.8999999999999999,
     "deeply": 0.8999999999999999,
     "joyful": 0.5,
-    "alive": 0.5
+    "alive": 0.5,
+    "chat": 1.0,
+    "returns": 1.0,
+    "archives": 1.0,
+    "conversation": 1.0,
+    "user": 1.0
   },
-  "last_updated": "2025-11-01T16:09:04.897631"
+  "last_updated": "2025-11-09T23:37:22.378796"
 }

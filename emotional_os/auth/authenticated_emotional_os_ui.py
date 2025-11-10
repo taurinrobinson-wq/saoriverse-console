@@ -14,6 +14,7 @@ import streamlit as st
 
 from emotional_os.deploy.config import SUPABASE_ANON_KEY, SUPABASE_URL
 from emotional_os.supabase.supabase_integration import create_hybrid_processor
+from emotional_os.deploy.modules.ui import render_settings_sidebar
 
 # Authentication configuration
 AUTH_CONFIG = {
@@ -335,16 +336,15 @@ def main():
         st.session_state[conversation_key] = []
 
     # Main interface
+    # Render shared Settings expander in the sidebar for Processing Mode and Theme
+    render_settings_sidebar()
+
     with st.container():
-        # Processing mode selection
         col1, col2 = st.columns([2, 1])
 
         with col1:
-            processing_mode = st.selectbox(
-                "Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
-                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
-            )
+            # Read the processing mode selected from Settings
+            processing_mode = st.session_state.get('processing_mode', 'hybrid')
 
         with col2:
             if st.button("Clear History", type="secondary"):
@@ -416,7 +416,7 @@ def main():
                 else:
                     result = st.session_state.processor.process_emotional_input(
                         user_input,
-                        prefer_ai=(processing_mode == "ai_preferred"),
+                        prefer_ai=st.session_state.get('prefer_ai', True),
                         privacy_mode=(processing_mode == "local"),
                         session_metadata=session_meta
                     )

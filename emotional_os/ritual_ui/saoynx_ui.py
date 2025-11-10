@@ -500,11 +500,23 @@ def render_main_app():
         # Processing mode selection
         col1, col2 = st.columns([2, 1])
 
+        # Map legacy ai_preferred -> hybrid + prefer_ai
+        if st.session_state.get('processing_mode') == 'ai_preferred':
+            st.session_state.processing_mode = 'hybrid'
+            st.session_state['prefer_ai'] = True
+
         with col1:
+            mode_options = ["hybrid", "local"]
+            current = st.session_state.get('processing_mode', 'hybrid')
+            try:
+                idx = mode_options.index(current)
+            except ValueError:
+                idx = 0
             processing_mode = st.selectbox(
                 "Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
-                help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+                mode_options,
+                index=idx,
+                help="Hybrid: Best performance, Local: Maximum privacy"
             )
 
         with col2:

@@ -374,9 +374,10 @@ class AdminDashboard:
         col1, col2 = st.columns(2)
 
         with col1:
+            # Use two-option model; admin UI still allows configuring prefer_ai separately
             default_mode = st.selectbox(
                 "Default Processing Mode",
-                ["hybrid", "local", "ai_preferred"],
+                ["hybrid", "local"],
                 index=0,
                 help="Default AI processing mode for new users"
             )
