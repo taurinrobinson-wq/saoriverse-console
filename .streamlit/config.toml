@@ -12,8 +12,22 @@ enableXsrfProtection = true
 gatherUsageStats = false
 # Duplicate server section removed from here to avoid TOML parse errors
 [theme]
-primaryColor = "#FF6B6B"
+base = "light"
+primaryColor = "#2E2E2E"
 backgroundColor = "#FFFFFF"
 secondaryBackgroundColor = "#F0F2F6"
+textColor = "#31333F"
+
+[theme.dark]
+backgroundColor = "#18191A"
+secondaryBackgroundColor = "#23272F"
+textColor = "#F1F1F1"
+primaryColor = "#F1F1F1"
+
+[theme.light]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#31333F"
+primaryColor = "#2E2E2E"
 
 # Force rebuild - October 14, 2025

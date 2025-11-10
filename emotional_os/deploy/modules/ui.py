@@ -84,7 +84,16 @@ def _load_inline_svg(filename: str) -> str:
         # Cache and return raw markup only (no Streamlit calls here)
         _SVG_CACHE[filename] = svg
     except Exception as e:
-        st.warning(f"Could not load CSS: {e}")
+        # Return an empty string as a safe fallback so callers that
+        # embed this markup into HTML do not pass `None` into
+        # Streamlit's rendering pipeline (which can cause client-side
+        # DOM errors).
+        try:
+            st.warning(f"Could not load SVG: {e}")
+        except Exception:
+            pass
+        _SVG_CACHE[filename] = ""
+    return _SVG_CACHE.get(filename, "")
 
 
 def inject_css(css_path: str) -> None:
@@ -96,7 +105,7 @@ def inject_css(css_path: str) -> None:
     silently (best-effort) to avoid breaking the UI during import.
     """
     try:
-        # Try package-local path
+        # Try package-local path first, then repo-root path
         pkg_path = os.path.join(os.path.dirname(__file__), css_path)
         repo_path = css_path
         chosen = None
@@ -111,8 +120,76 @@ def inject_css(css_path: str) -> None:
         with open(chosen, 'r', encoding='utf-8') as f:
             css = f.read()
 
-        # Inject as a style block
-        st.markdown(f"<style>\n{css}\n</style>", unsafe_allow_html=True)
+        # Inline any @import rules that reference local CSS files to
+        # avoid relative import issues in the browser. This replaces
+        # @import url('file.css'); with the contents of file.css when
+        # available on disk next to the chosen CSS file.
+        try:
+            import re
+
+            def _inline_imports(base_path: str, css_text: str) -> str:
+                def _repl(m):
+                    imp = m.group(1).strip('"\'')
+                    # Resolve relative to base_path
+                    base_dir = os.path.dirname(base_path)
+                    candidate = os.path.join(base_dir, imp)
+                    if os.path.exists(candidate):
+                        try:
+                            return '\n' + open(candidate, 'r', encoding='utf-8').read() + '\n'
+                        except Exception:
+                            return ''
+                    # Try repo-root fallback
+                    if os.path.exists(imp):
+                        try:
+                            return '\n' + open(imp, 'r', encoding='utf-8').read() + '\n'
+                        except Exception:
+                            return ''
+                    return ''
+
+                return re.sub(r"@import\s+url\(['\"]?(.*?)['\"]?\);", _repl, css_text)
+
+            css = _inline_imports(chosen, css)
+        except Exception:
+            # If import inlining fails for any reason, continue with the
+            # raw CSS as a best-effort fallback.
+            pass
+
+        # Inject as a single block but first ensure any previous theme
+        # style element is removed or replaced. We use a small script
+        # that either replaces the textContent of an existing element
+        # with id "fp-theme-css" or creates one and appends it to the
+        # document head. This avoids leaving multiple style/link nodes
+        # behind and reduces DOM-shape races during theme toggles.
+        try:
+            # Use json.dumps to safely encode the CSS into a JS string literal
+            import json as _json
+            _css_js = _json.dumps(css)
+            safe_block = (
+                "<script>\n"
+                "(function(){\n"
+                "  try{\n"
+                "    var css = " + _css_js + ";\n"
+                "    var existing = document.getElementById('fp-theme-css');\n"
+                "    if(existing){\n"
+                "      existing.textContent = css;\n"
+                "    } else {\n"
+                "      var s = document.createElement('style');\n"
+                "      s.id = 'fp-theme-css';\n"
+                "      s.textContent = css;\n"
+                "      (document.head || document.documentElement).appendChild(s);\n"
+                "    }\n"
+                "  }catch(e){console.warn('fp-theme-css inject failed', e);}\n"
+                "})();\n"
+                "</script>"
+            )
+            st.markdown(safe_block, unsafe_allow_html=True)
+        except Exception:
+            # Fallback to the simple style injection if the script construction fails
+            safe_block = f"<style id=\"fp-theme-css\">\n{css}\n</style>"
+            try:
+                st.markdown(safe_block, unsafe_allow_html=True)
+            except Exception:
+                pass
     except Exception:
         # Best-effort: do not raise during UI import
         return
@@ -129,14 +206,27 @@ def render_controls_row(conversation_key):
             st.session_state.processing_mode = os.getenv(
                 'DEFAULT_PROCESSING_MODE', 'hybrid')
 
-        # Display current mode succinctly in the controls row
+        # The interactive controls for changing processing mode are
+        # rendered in the sidebar Settings panel. Keep this top-row
+        # column reserved for future lightweight status badges but
+        # avoid rendering non-interactive Mode selectors inline.
         current_mode = st.session_state.processing_mode
-        st.markdown(f"**Mode:** {current_mode}")
+        # Show only a subtle caption to indicate the active mode (non-interactive)
+        try:
+            st.caption(f"Mode: {current_mode}")
+        except Exception:
+            # Fallback: do nothing if caption rendering fails
+            pass
 
     with controls[1]:
-        # Show current theme (actual selection lives in Settings sidebar)
+        # Show current theme as a subtle caption; theme selection lives
+        # in the Settings sidebar expander to avoid redundant inline
+        # controls in the chat area.
         current_theme = st.session_state.get('theme', 'Light')
-        st.markdown(f"**Theme:** {current_theme}")
+        try:
+            st.caption(f"Theme: {current_theme}")
+        except Exception:
+            pass
 
         # Start Personal Log moved into the narrow column to match the
         # requested DOM slot (first small column after Theme)
@@ -284,6 +374,89 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
 # Data management functions
 
 
+def render_settings_sidebar():
+    """Render the Settings expander in the sidebar.
+
+    This provides the Processing Mode and Theme drop-downs so users can
+    change preferences from a single place (sidebar) similar to the
+    Privacy & Consent expander.
+    """
+    try:
+        # Normalize any legacy keys first
+        try:
+            ensure_processing_prefs()
+        except Exception:
+            pass
+
+        with st.sidebar.expander("⚙️ Settings", expanded=False):
+            st.markdown("**Interface & Processing**")
+
+            # Processing mode: hybrid or local
+            current_mode = st.session_state.get('processing_mode', 'hybrid')
+            try:
+                def _on_mode_change():
+                    # Ensure the session_state key is normalized and trigger a rerun
+                    try:
+                        st.session_state['processing_mode'] = st.session_state.get(
+                            'processing_mode', current_mode)
+                    except Exception:
+                        pass
+                    try:
+                        st.experimental_rerun()
+                    except Exception:
+                        pass
+
+                st.selectbox(
+                    "Processing mode",
+                    options=["hybrid", "local"],
+                    index=0 if current_mode == 'hybrid' else 1,
+                    key='processing_mode',
+                    help='Hybrid: AI + local parsing. Local: only local parsing.',
+                    on_change=_on_mode_change
+                )
+            except Exception:
+                st.session_state.setdefault('processing_mode', current_mode)
+
+            # Theme selection — mirrors to both legacy 'theme' and
+            # 'theme_select_row' used elsewhere in the UI.
+            current_theme = st.session_state.get(
+                'theme_select_row', st.session_state.get('theme', 'Light'))
+            try:
+                def _on_theme_change():
+                    # Mirror selection into legacy key and force a clean rerun
+                    try:
+                        st.session_state['theme'] = st.session_state.get(
+                            'theme_select_row', current_theme)
+                        st.session_state['theme_loaded'] = False
+                    except Exception:
+                        pass
+                    try:
+                        st.experimental_rerun()
+                    except Exception:
+                        pass
+
+                st.selectbox(
+                    "Theme",
+                    options=["Light", "Dark"],
+                    index=0 if current_theme == 'Light' else 1,
+                    key='theme_select_row',
+                    help='Choose the UI theme (Light or Dark)',
+                    on_change=_on_theme_change
+                )
+            except Exception:
+                st.session_state.setdefault('theme_select_row', current_theme)
+
+            # Mirror theme into the older 'theme' key so other modules are
+            # consistent regardless of which key they consult.
+            st.session_state['theme'] = st.session_state.get(
+                'theme_select_row', 'Light')
+            # Mark theme as not loaded so CSS will be re-injected on next render
+            st.session_state['theme_loaded'] = False
+    except Exception:
+        # Best-effort: don't break the app if sidebar rendering fails
+        return
+
+
 def delete_user_history_from_supabase(user_id: str) -> tuple:
     """Delete all persisted conversation history for a user from Supabase.
 
@@ -328,7 +501,30 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
 
 
 def render_splash_interface(auth):
-    inject_css("emotional_os/deploy/emotional_os_ui.css")
+    # Ensure the splash uses the light theme CSS (self-contained).
+    # Historically this injected the base `emotional_os_ui.css` which, when
+    # combined with the later theme injection, produced multiple stylesheet
+    # nodes. Use the light theme file so only `*_light.css` or `*_dark.css`
+    # are injected at any time.
+    # Use Streamlit's native theming (configured in .streamlit/config.toml)
+    # and keep only a few focused overrides needed for consistent logo fills
+    # and a couple of small layout tweaks. Avoid injecting the full theme
+    # CSS here to prevent multiple stylesheet nodes and related runtime
+    # races in the client bundle.
+    try:
+        st.markdown(
+            """
+            <style>
+            /* Ensure inline SVGs in the brand/logo area inherit color from text
+               so Streamlit theme colors drive their appearance. */
+            .brand-logo svg, .logo-container svg { fill: currentColor !important; }
+            .splash-logo svg * { fill: currentColor !important; stroke: none !important; }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+    except Exception:
+        pass
 
     # Add custom CSS for splash screen
     st.markdown("""
@@ -499,6 +695,198 @@ def render_main_app():
             except Exception:
                 # Best-effort: do not break the main UI when debug overlay fails
                 pass
+    except Exception:
+        pass
+    # Defensive client-side guard for third-party DOM libraries (e.g., jQuery)
+    # Some compiled frontend code can call jQuery($) with an undefined or
+    # otherwise-invalid first argument during quick DOM swaps (theme toggles).
+    # That results in the runtime TypeError reported by the user. To harden
+    # the frontend, inject a small script that wraps `window.jQuery` / `window.$`
+    # and falls back to a harmless DocumentFragment when callers pass a
+    # falsy/invalid argument. This is defensive and non-invasive: it does
+    # not change library behavior for valid inputs.
+    try:
+        st.markdown(
+            """
+            <script>
+            (function(){
+                try{
+                    var jq = window.jQuery || window.$;
+                    if(!jq || !jq.fn) return;
+                    // Patch jQuery.fn.init to coerce null/undefined selectors to
+                    // an empty string so Sizzle doesn't throw the TypeError when
+                    // called with invalid arguments during theme toggles.
+                    try{
+                        var _origInit = jq.fn.init;
+                        if(typeof _origInit === 'function'){
+                            jq.fn.init = function(selector, context, root){
+                                try{
+                                    if(selector === null || typeof selector === 'undefined'){
+                                        selector = '';
+                                    }
+                                    return _origInit.call(this, selector, context, root);
+                                }catch(e){
+                                    try{
+                                        return _origInit.call(this, '');
+                                    }catch(e2){
+                                        return _origInit.apply(this, arguments);
+                                    }
+                                }
+                            };
+                        }
+                    }catch(e){/* swallow */}
+                }catch(e){/* swallow */}
+            })();
+            </script>
+            """,
+            unsafe_allow_html=True,
+        )
+    except Exception:
+        pass
+    # Further defensive guards: patch common DOM lookup APIs and jQuery/$ factory
+    # to tolerate unexpected argument types which can surface during theme
+    # toggles or fast re-renders in the compiled frontend.
+    try:
+        st.markdown(
+            """
+            <script>
+            (function(){
+                try{
+                    // Helper to detect DOM node-like objects
+                    function isNode(obj){
+                        return (typeof Node === 'object' ? obj instanceof Node : obj && typeof obj === 'object' && typeof obj.nodeType === 'number' && typeof obj.nodeName==='string');
+                    }
+                    function isNodeList(obj){
+                        return Object.prototype.toString.call(obj) === '[object NodeList]' || Object.prototype.toString.call(obj) === '[object HTMLCollection]';
+                    }
+
+                    // Wrap document.querySelector & querySelectorAll
+                    var _qs = document.querySelector;
+                    var _qsAll = document.querySelectorAll;
+                    document.querySelector = function(sel){
+                        try{
+                            if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
+                                console.warn('Safe-guard: querySelector called with invalid selector', sel);
+                                return null;
+                            }
+                            return _qs.call(document, sel);
+                        }catch(e){
+                            console.warn('Safe-guard: querySelector threw', e);
+                            return null;
+                        }
+                    };
+                    document.querySelectorAll = function(sel){
+                        try{
+                            if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
+                                console.warn('Safe-guard: querySelectorAll called with invalid selector', sel);
+                                // return empty NodeList via a harmless selector on a detached element
+                                return document.createElement('div').querySelectorAll('.fp-no-match');
+                            }
+                            return _qsAll.call(document, sel);
+                        }catch(e){
+                            console.warn('Safe-guard: querySelectorAll threw', e);
+                            return document.createElement('div').querySelectorAll('.fp-no-match');
+                        }
+                    };
+
+                    // Wrap jQuery/$ factory if present
+                    var orig$ = window.$;
+                    var origJQ = window.jQuery;
+                    function safeFactory(factory){
+                        return function(arg){
+                            try{
+                                var isValid = (typeof arg === 'string' || isNode(arg) || isNodeList(arg) || (arg && typeof arg.length === 'number'));
+                                if(isValid){
+                                    return factory(arg);
+                                }
+                                // Log the offending value and a small stack so we can trace where it came from
+                                try{
+                                    console.warn('Safe-guard: jQuery factory called with invalid arg:', arg);
+                                    console.warn('Safe-guard: arg type =', Object.prototype.toString.call(arg), 'typeof=', typeof arg);
+                                    console.warn(new Error('jQuery factory invalid-arg stack').stack);
+                                }catch(_e){}
+                                // fallback to empty selection
+                                return factory(document.createElement('div'));
+                            }catch(e){
+                                try{ return factory(document.createElement('div')); }catch(e2){ return null; }
+                            }
+                        };
+                    }
+                    if(typeof orig$ === 'function'){
+                        try{ window.$ = safeFactory(orig$); }catch(e){}
+                    }
+                    if(typeof origJQ === 'function'){
+                        try{ window.jQuery = safeFactory(origJQ); }catch(e){}
+                    }
+                }catch(e){/* swallow */}
+            })();
+            </script>
+            """,
+            unsafe_allow_html=True,
+        )
+    except Exception:
+        pass
+    # Instrument unhandled client errors with an in-page overlay to help
+    # capture stack traces when theme toggles still throw in the browser.
+    try:
+        st.markdown(
+            """
+            <script>
+            (function(){
+                try{
+                    function showErrorOverlay(msg){
+                        try{
+                            var id = 'fp-client-error-overlay';
+                            var existing = document.getElementById(id);
+                            if(existing) existing.remove();
+                            var el = document.createElement('div');
+                            el.id = id;
+                            el.style.position = 'fixed';
+                            el.style.right = '12px';
+                            el.style.top = '12px';
+                            el.style.zIndex = 999999;
+                            el.style.maxWidth = 'min(90vw,800px)';
+                            el.style.background = 'rgba(255,255,255,0.95)';
+                            el.style.color = '#111';
+                            el.style.border = '1px solid #e33';
+                            el.style.padding = '12px';
+                            el.style.borderRadius = '8px';
+                            el.style.boxShadow = '0 6px 24px rgba(0,0,0,0.2)';
+                            var pre = document.createElement('pre');
+                            pre.style.maxHeight = '40vh';
+                            pre.style.overflow = 'auto';
+                            pre.style.whiteSpace = 'pre-wrap';
+                            pre.style.fontSize = '12px';
+                            pre.textContent = msg;
+                            el.appendChild(pre);
+                            var btn = document.createElement('button');
+                            btn.textContent = 'Dismiss';
+                            btn.style.marginTop = '8px';
+                            btn.onclick = function(){ el.remove(); };
+                            el.appendChild(btn);
+                            document.body.appendChild(el);
+                        }catch(e){/*ignore*/}
+                    }
+
+                    window.addEventListener('error', function(ev){
+                        try{
+                            var m = ev && ev.error && ev.error.stack ? ev.error.stack : (ev && ev.message) || String(ev);
+                            showErrorOverlay(m);
+                        }catch(e){}
+                    }, true);
+
+                    window.addEventListener('unhandledrejection', function(ev){
+                        try{
+                            var m = ev && ev.reason && ev.reason.stack ? ev.reason.stack : JSON.stringify(ev.reason);
+                            showErrorOverlay('UnhandledPromiseRejection: ' + m);
+                        }catch(e){}
+                    }, true);
+                }catch(e){}
+            })();
+            </script>
+            """,
+            unsafe_allow_html=True,
+        )
     except Exception:
         pass
     # Skip header rendering if it's already been done
@@ -855,10 +1243,79 @@ def render_main_app():
         # visible within that scoped area. Keeping it here caused duplicate
         # controls to appear in the main chat UI.
 
-    # Dynamically inject theme CSS
-    theme = st.session_state.get("theme_select_row", "Light")
-    css_file = "emotional_os/deploy/emotional_os_ui_light.css" if theme == "Light" else "emotional_os/deploy/emotional_os_ui_dark.css"
-    inject_css(css_file)
+    # Use Streamlit native theming (via .streamlit/config.toml). Avoid full
+    # CSS file swaps at runtime — instead inject only focused overrides that
+    # Streamlit's theme system cannot reach (e.g., inline SVG fills).
+        try:
+            st.markdown(
+                """
+                        <style>
+                        /* Dark-mode overrides: applied when the user's system or Streamlit
+                             theme uses dark colors. We use prefers-color-scheme and also
+                             target some common Streamlit classnames to improve coverage. */
+                        @media (prefers-color-scheme: dark) {
+                            :root { --accent-color: #A78BFA; }
+                            body, .main, .block-container {
+                                background: linear-gradient(180deg, #18191A 0%, #1F2023 100%) !important;
+                                color: #E5E5E5 !important;
+                            }
+
+                            .stExpander, .stChatMessage, .stTextInput, .stSelectbox, .stTextArea, .stFileUploader {
+                                background-color: rgba(35, 39, 47, 0.85) !important;
+                                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+                                backdrop-filter: blur(6px) !important;
+                                border-radius: 8px !important;
+                                color: #EDEDED !important;
+                            }
+
+                            /* Dropdowns / selectbox panels */
+                            .stSelectbox>div>div, .stSelectbox>div>div>div, div[role="listbox"] {
+                                background: #000 !important;
+                                color: #fff !important;
+                                border-color: var(--accent-color) !important;
+                            }
+
+                            /* Buttons: primary/hover accent */
+                            .stButton>button {
+                                border-color: var(--accent-color) !important;
+                            }
+                            .stButton>button:hover {
+                                background-color: var(--accent-color) !important;
+                                color: #18191A !important;
+                            }
+
+                            /* Logout / prominent secondary actions: white background, black text */
+                            button[title*="Logout"], button[aria-label*="Logout"], button[title*="Log out"] {
+                                background-color: #fff !important;
+                                color: #000 !important;
+                                border: 1px solid rgba(0,0,0,0.08) !important;
+                            }
+
+                            /* Header: dark background with light text for contrast */
+                            header[data-testid="stHeader"], h1[id^="firstperson"], [data-testid="stHeadingWithActionElements"] {
+                                background: #0F1113 !important;
+                                color: #FFFFFF !important;
+                            }
+
+                            /* Typography */
+                            body { font-family: 'Inter', 'Segoe UI', sans-serif !important; font-weight: 400; letter-spacing: 0.2px; }
+                            .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 { font-weight: 500; color: #E5E5E5 !important; }
+
+                            /* Logo glow and invert handling */
+                            .brand-logo svg { filter: drop-shadow(0 0 6px #A78BFA) !important; }
+                            .brand-logo svg path, .brand-logo svg circle { fill: #FFFFFF !important; }
+                        }
+
+                        /* Keep SVG logos theme-aware (fallback) */
+                        .brand-logo svg, .logo-container svg { fill: currentColor !important; }
+                        /* Minor expander/content spacing that streamlit theme can't override reliably */
+                        .stExpander, .stExpanderHeader { font-size: 0.92rem !important; }
+                        </style>
+                        """,
+                unsafe_allow_html=True,
+            )
+        except Exception:
+            pass
     # Logo switching based on theme
     # Use appropriate logo file based on theme
     theme = st.session_state.get("theme_select_row", "Light")
