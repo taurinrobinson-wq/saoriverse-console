@@ -16,7 +16,7 @@ A revolutionary emotional processing system that combines privacy-first glyph en
 ### Local Mode (No Setup Required)
 ```bash
 pip install streamlit requests
-streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+streamlit run emotional_os_ui_v2.py
 ```
 Select "Local" mode in the sidebar for privacy-first processing.
 
@@ -57,7 +57,7 @@ The repo already includes a minimal `pyproject.toml` + `setup.cfg` to support th
 
 ```
 Emotional OS/
-├── main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)          # Main Streamlit interface
+├── emotional_os_ui_v2.py          # Main Streamlit interface
 ├── supabase_integration.py        # Hybrid processing system
 ├── emotional_tag_matcher.py       # Enhanced emotional processing
 ├── parser/

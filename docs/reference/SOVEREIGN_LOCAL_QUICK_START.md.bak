@@ -360,7 +360,7 @@ if __name__ == "__main__":
 
 ## PART 5: UPDATE STREAMLIT UI (20 minutes)
 
-Update `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) to show local mode toggle:
+Update `emotional_os_ui_v2.py` to show local mode toggle:
 
 ```python
 # Add to sidebar:
@@ -475,7 +475,7 @@ def test_local_processing():
     print("Next steps:")
     print("1. Download Project Gutenberg poetry")
     print("2. Run data_preparation/extract_poetry.py")
-    print("3. Start main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) and select 'Local Mode'")
+    print("3. Start emotional_os_ui_v2.py and select 'Local Mode'")
     
     return True
 
@@ -517,7 +517,7 @@ print('✓ Downloaded Emily Dickinson poems')
 
 ## PART 8: VERIFY NO EXTERNAL CALLS (Critical!)
 
-Add this to `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED):
+Add this to `emotional_os_ui_v2.py`:
 
 ```python
 import os
@@ -560,7 +560,7 @@ if mode == "Local Mode (Recommended)":
 
 ```bash
 # Start the app in local mode
-streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+streamlit run emotional_os_ui_v2.py
 
 # Select: "Local Mode (Recommended)"
 # Type: "I feel stuck in this loop of grief"

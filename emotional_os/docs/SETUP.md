@@ -26,7 +26,7 @@ Your Emotional OS now supports three processing modes:
 ## 🔧 Configuration
 
 ### Option 1: Quick Local Setup
-1. Just run `streamlit run emotional_os_ui_v2.py`
+1. Just run `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)`
 2. Select "Local" mode in sidebar
 3. Start conversing with privacy-first processing
 
@@ -38,7 +38,7 @@ Your Emotional OS now supports three processing modes:
    SUPABASE_ANON_KEY=your-anon-key
    SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
    ```
-3. Run `streamlit run emotional_os_ui_v2.py`
+3. Run `streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)`
 4. Select "Hybrid" or "Supabase" mode in sidebar
 
 ## 🎛️ Controls
