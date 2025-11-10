@@ -349,31 +349,12 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Fallback: ensure a download control exists in the sidebar for authenticated users only
-try:
-    # Only show the fallback download when a user is signed in
-    if st.session_state.get('authenticated', False) and st.session_state.get('user_id'):
-        with st.sidebar:
-            try:
-                conversation_key = f"conversation_history_{st.session_state.get('user_id')}"
-                user_data = {
-                    "user_id": st.session_state.get('user_id'),
-                    "username": st.session_state.get('username'),
-                    "conversations": st.session_state.get(conversation_key, []),
-                    "export_date": __import__('datetime').datetime.now().isoformat()
-                }
-                st.download_button(
-                    "Download My Data",
-                    json.dumps(user_data, indent=2),
-                    file_name=f"emotional_os_data_{st.session_state.get('username') or 'user'}_{__import__('datetime').datetime.now().strftime('%Y%m%d')}.json",
-                    mime="application/json",
-                    key="download_fallback_main"
-                )
-            except Exception:
-                # Non-fatal; ensure sidebar rendering doesn't break
-                pass
-except Exception:
-    pass
+# NOTE: the per-session/export download control was intentionally moved into
+# the Privacy & Consent panel (`render_consent_settings_panel`) to avoid
+# showing duplicate download buttons in the sidebar. The fallback button
+# that previously lived here has been removed to simplify the authenticated
+# sidebar. If you need a global download shortcut again, reintroduce it
+# behind a feature-flag.
 
 # Optional local preprocessor (privacy-first steward)
 try:
