@@ -21,7 +21,8 @@ import sys
 from typing import Dict, List, Optional, Tuple
 
 # Add project root to path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
 
 try:
     from parser.semantic_engine import SemanticEngine
@@ -40,7 +41,7 @@ class DynamicResponseComposer:
         """Initialize language resources."""
         self.semantic_engine = SemanticEngine() if SemanticEngine else None
         self.poetry_db = PoetryDatabase() if PoetryDatabase else None
-        
+
         # Linguistic patterns for different emotional contexts
         self.opening_moves = {
             "acknowledgment": [
@@ -166,7 +167,8 @@ class DynamicResponseComposer:
         # Extract named entities if spaCy is available
         if self.semantic_engine and self.semantic_engine.loaded:
             result["entities"] = self.semantic_engine.get_noun_chunks(text)
-            result["people"] = [ent[0] for ent in self.semantic_engine.extract_entities(text) if ent[1] == "PERSON"]
+            result["people"] = [ent[0] for ent in self.semantic_engine.extract_entities(
+                text) if ent[1] == "PERSON"]
             result["actions"] = self.semantic_engine.extract_verbs(text)
 
         # Extract emotions using NRC if available
@@ -209,7 +211,8 @@ class DynamicResponseComposer:
         # Fill entity placeholder if present
         entity = entities[0] if entities else "what you're experiencing"
         opening = opening.replace("{entity}", entity)
-        opening = opening.replace("{emotion}", emotions.get("primary", "what you're feeling"))
+        opening = opening.replace("{emotion}", emotions.get(
+            "primary", "what you're feeling"))
 
         return opening
 
@@ -220,19 +223,20 @@ class DynamicResponseComposer:
 
         # Map detected emotions to poetry categories
         primary_emotion = list(emotions.keys())[0] if emotions else None
-        
+
         if not primary_emotion:
             return None
 
         # Get poetry matching the emotion
-        poetry_lines = self.poetry_db.POETRY_COLLECTION.get(primary_emotion, [])
+        poetry_lines = self.poetry_db.POETRY_COLLECTION.get(
+            primary_emotion, [])
         if not poetry_lines:
             return None
 
         # Select a poem and extract a line
         poem = random.choice(poetry_lines)
         lines = [line.strip() for line in poem.split('\n') if line.strip()]
-        
+
         if not lines:
             return None
 
@@ -240,7 +244,7 @@ class DynamicResponseComposer:
         short_lines = [l for l in lines if 8 < len(l.split()) < 15]
         if short_lines:
             return random.choice(short_lines)
-        
+
         return random.choice(lines[:3]) if len(lines) > 0 else None
 
     def _build_glyph_aware_response(
@@ -254,13 +258,13 @@ class DynamicResponseComposer:
     ) -> str:
         """
         Build response focused on the PERSON'S situation, not the glyph system.
-        
+
         Glyph is used invisibly for:
         - Tone calibration (gate-based intensity)
         - Emotional validation (aligned with emotional_signal)
         - Poetry selection (via emotional category)
         - Entity relationship weighting
-        
+
         But the response should feel like it's about the person's actual situation,
         not about emotional categories or glyph descriptions.
         """
@@ -271,13 +275,14 @@ class DynamicResponseComposer:
         if glyph:
             gate_data = glyph.get("gates") or glyph.get("gate")
             if gate_data:
-                gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
+                gates_list = gate_data if isinstance(
+                    gate_data, list) else [gate_data]
                 intensity_level = len(gates_list)
 
         # 1. Validate the specific struggle the person is naming
         # Extract what they're actually struggling with from the message
         lower_input = input_text.lower()
-        
+
         # Nuanced handling: detect mixed or contrasting emotions (e.g., exhausted + joyful)
         fatigue_words = ['exhaust', 'exhausted', 'tired', 'fatigue', 'weary']
         joy_words = ['joy', 'joyful', 'happy', 'glad', 'delighted']
@@ -293,21 +298,27 @@ class DynamicResponseComposer:
             )
         elif any(word in lower_input for word in ['math', 'anxiety', 'mental block', 'can\'t']):
             # They're naming a specific cognitive struggle
-            parts.append("That friction you're naming is real. Many people experience genuine resistance in certain domains.")
+            parts.append(
+                "That friction you're naming is real. Many people experience genuine resistance in certain domains.")
         elif any(word in lower_input for word in ['inherited', 'from', 'mother', 'parent']):
             # They're recognizing a pattern they carry from someone else
-            parts.append("Recognizing where something comes from—that's a form of clarity. Naming it is the first step to seeing yourself separately from it.")
+            parts.append(
+                "Recognizing where something comes from—that's a form of clarity. Naming it is the first step to seeing yourself separately from it.")
         elif any(word in lower_input for word in ['misunderstood', 'not what i meant', 'explains', 'understands me']):
             # They're describing a relationship or communication mismatch
-            parts.append("When someone explains things in a way that only they can follow, that creates real isolation. That's not a failing on your part.")
+            parts.append(
+                "When someone explains things in a way that only they can follow, that creates real isolation. That's not a failing on your part.")
         else:
             # Generic validation that honors the emotional weight
-            parts.append("What you're sharing matters. There's something real here.")
+            parts.append(
+                "What you're sharing matters. There's something real here.")
 
         # 2. Add feedback-specific response if correcting prior statement
         if feedback_type:
-            bridge = random.choice(self.emotional_bridges.get(feedback_type, []))
-            parts.append(bridge)
+            bridges = self.emotional_bridges.get(feedback_type) or []
+            if bridges:
+                bridge = random.choice(bridges)
+                parts.append(bridge)
 
         # 3. Reflect back the specific people/entities they mentioned
         if extracted:
@@ -316,14 +327,16 @@ class DynamicResponseComposer:
                 person = people[0]
                 # Use appropriate movement language based on glyph intensity
                 movement_category = "through" if intensity_level < 5 else "with"
-                movement = random.choice(self.movement_language[movement_category])
+                movement = random.choice(
+                    self.movement_language[movement_category])
                 parts.append(f"With {person}, {movement.lower()}")
 
         # 4. Poetry weaving (glyph emotion category used invisibly)
         if glyph:
             glyph_name = glyph.get("glyph_name", "")
             poetry_emotion = self._glyph_to_emotion_category(glyph_name)
-            poetry_line = self._weave_poetry(input_text, {poetry_emotion: 0.8} if poetry_emotion else emotions)
+            poetry_line = self._weave_poetry(
+                input_text, {poetry_emotion: 0.8} if poetry_emotion else emotions)
             if poetry_line:
                 parts.append(f"As someone once wrote: \"{poetry_line}\"")
 
@@ -338,7 +351,8 @@ class DynamicResponseComposer:
         entity = entities[0] if entities else "this"
         closing_template = random.choice(self.closing_moves[closing_move])
         closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[0] if emotions else "what you feel")
+        closing = closing.replace("{emotion}", list(emotions.keys())[
+                                  0] if emotions else "what you feel")
         parts.append(closing)
 
         return " ".join(parts)
@@ -346,7 +360,7 @@ class DynamicResponseComposer:
     def _glyph_to_emotion_category(self, glyph_name: str) -> Optional[str]:
         """Map glyph names to poetry emotion categories."""
         glyph_lower = glyph_name.lower() if glyph_name else ""
-        
+
         emotion_map = {
             "still insight": "joy",
             "grief": "sadness",
@@ -370,11 +384,11 @@ class DynamicResponseComposer:
             "recognition": "joy",
             "love": "joy",
         }
-        
+
         for key, emotion in emotion_map.items():
             if key in glyph_lower:
                 return emotion
-        
+
         return None
 
     def _build_contextual_response(
@@ -393,8 +407,10 @@ class DynamicResponseComposer:
 
         # 2. If there's feedback (correction), use bridging language
         if feedback_type:
-            bridge = random.choice(self.emotional_bridges.get(feedback_type, []))
-            parts.append(bridge)
+            bridges = self.emotional_bridges.get(feedback_type) or []
+            if bridges:
+                bridge = random.choice(bridges)
+                parts.append(bridge)
 
         # 3. Build middle: contextual movement language
         if "block" in input_text.lower():
@@ -403,7 +419,7 @@ class DynamicResponseComposer:
             movement = random.choice(self.movement_language["with"])
         else:
             movement = random.choice(list(self.movement_language.values())[0])
-        
+
         parts.append(movement)
 
         # 4. Weave poetry if available
@@ -415,7 +431,8 @@ class DynamicResponseComposer:
         entity = entities[0] if entities else "this"
         closing_template = random.choice(self.closing_moves["question"])
         closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[0] if emotions else "what you feel")
+        closing = closing.replace("{emotion}", list(emotions.keys())[
+                                  0] if emotions else "what you feel")
         parts.append(closing)
 
         return " ".join(parts)
@@ -431,14 +448,14 @@ class DynamicResponseComposer:
         """
         Compose a dynamic response that feels freshly generated, not templated.
         Response is grounded in the glyph's meaning and emotional signal.
-        
+
         Args:
             input_text: User's message
             glyph: Full glyph dict with name, description, emotional_signal, gates
             feedback_detected: Whether user is correcting prior response
             feedback_type: Type of correction (inherited_pattern, misattribution, etc.)
             conversation_context: Prior messages, responses, etc.
-        
+
         Returns:
             Dynamically composed response grounded in glyph
         """
@@ -452,15 +469,18 @@ class DynamicResponseComposer:
                 if 'last_user_message' in conversation_context:
                     prev_user = conversation_context.get('last_user_message')
                 elif 'previous_user_message' in conversation_context:
-                    prev_user = conversation_context.get('previous_user_message')
+                    prev_user = conversation_context.get(
+                        'previous_user_message')
                 else:
                     # Try to extract from messages/history lists
-                    msgs = conversation_context.get('messages') or conversation_context.get('history')
+                    msgs = conversation_context.get(
+                        'messages') or conversation_context.get('history')
                     if isinstance(msgs, list) and msgs:
                         # Find the last user message in the list
                         for m in reversed(msgs):
                             if isinstance(m, dict) and m.get('role') in ('user', 'User'):
-                                prev_user = m.get('content') or m.get('text') or m.get('user')
+                                prev_user = m.get('content') or m.get(
+                                    'text') or m.get('user')
                                 break
                             # older formats store entries as {'user':..., 'assistant':...}
                             if isinstance(m, dict) and 'user' in m and m.get('user'):
@@ -496,10 +516,10 @@ class DynamicResponseComposer:
     ) -> str:
         """
         Compose response addressing the PERSON'S specific content.
-        
+
         Glyph used invisibly to calibrate tone/intensity, but response feels
         personalized to their actual situation, not a glyph category.
-        
+
         Example message_content:
         {
             "math_frustration": True,
@@ -515,7 +535,8 @@ class DynamicResponseComposer:
         if glyph:
             gate_data = glyph.get("gates") or glyph.get("gate")
             if gate_data:
-                gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
+                gates_list = gate_data if isinstance(
+                    gate_data, list) else [gate_data]
                 intensity = len(gates_list)
 
         # Respond to their actual content, not a glyph category
