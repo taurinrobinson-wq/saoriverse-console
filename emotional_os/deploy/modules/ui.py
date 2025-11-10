@@ -83,101 +83,6 @@ def _load_inline_svg(filename: str) -> str:
 
         # Cache and return raw markup only (no Streamlit calls here)
         _SVG_CACHE[filename] = svg
-        return svg
-    except Exception:
-        # Fallback to previous column layout if raw HTML rendering fails
-        col1, col2 = st.columns([0.5, 8], gap="small")
-        with col1:
-            try:
-                st.markdown(
-                    f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
-            except Exception:
-                # Render a simple emoji fallback (ensure proper quoting)
-                st.markdown(
-                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
-        with col2:
-            st.markdown('<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
-        st.markdown(
-            f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
-        fallback = (
-            f'<!-- fallback_svg_rendered id={trace_id} -->'
-            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" '
-            'width="140" height="140" role="img" aria-label="Fallback logo">'
-            '<defs>'
-            '<linearGradient id="g1" x1="0" x2="1">'
-            '<stop offset="0%" stop-color="#7F7FD5"/>'
-            '<stop offset="100%" stop-color="#86A8E7"/>'
-            '</linearGradient>'
-            '</defs>'
-            '<rect width="100%" height="100%" fill="#ffffff"/>'
-            '<g transform="translate(70,70)">'
-            '<circle r="38" fill="url(#g1)" opacity="0.95" />'
-            '<path d="M-18 0 Q 0 -24 18 0" fill="none" stroke="#ffffff" stroke-width="3" '
-            'stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>'
-            '<circle cx="0" cy="0" r="6" fill="#ffffff"/>'
-            '</g>'
-            '</svg>'
-        )
-        _SVG_CACHE[filename] = fallback
-        return fallback
-
-
-def inject_css(css_file_path):
-    try:
-        def safely_inject_css(content, source):
-            # Ensure we're only injecting CSS content
-            if '<script' not in content.lower():
-                st.markdown(
-                    f'''
-                    <style>
-                        /* From {source} */
-                        {content}
-                    </style>
-                    ''',
-                    unsafe_allow_html=True
-                )
-                return True
-            return False
-
-        # First inject the logo constraints CSS
-        try:
-            with open("emotional_os/deploy/logo_constraints.css", "r") as f:
-                logo_css = f.read()
-                safely_inject_css(logo_css, "logo_constraints.css")
-        except Exception:
-            pass  # Non-fatal if logo constraints can't be loaded
-
-        # Then inject the requested CSS file
-        with open(css_file_path, "r") as f:
-            css = f.read()
-            if not safely_inject_css(css, css_file_path):
-                logger.warning(
-                    f"Skipped injecting CSS from {css_file_path} due to potentially unsafe content")
-
-        # Add theme change observer
-        st.markdown("""
-            <script>
-                window.addEventListener('load', function() {
-                    setTimeout(function() {
-                        const observer = new MutationObserver(function(mutations) {
-                            mutations.forEach(function(mutation) {
-                                if (mutation.target.classList &&
-                                    (mutation.target.classList.contains('stSelectbox') ||
-                                     mutation.target.classList.contains('stMarkdown'))) {
-                                    // Ensure all elements are visible and styled correctly after theme change
-                                    document.body.style.visibility = 'visible';
-                                }
-                            });
-                        });
-                        observer.observe(
-                            document.body, { attributes: true, childList: true, subtree: true });
-                    }, 100);
-                });
-            </script>
-        """, unsafe_allow_html=True)
-
-    except FileNotFoundError:
-        st.warning(f"CSS file not found: {css_file_path}")
     except Exception as e:
         st.warning(f"Could not load CSS: {e}")
 
@@ -185,45 +90,22 @@ def inject_css(css_file_path):
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
+        # Ensure a processing mode exists in session state. The actual
+        # interactive controls for changing this are in the Settings
+        # sidebar expander (so both demo and authenticated flows show
+        # a single, consistent place for preferences).
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"
+            st.session_state.processing_mode = os.getenv(
+                'DEFAULT_PROCESSING_MODE', 'hybrid')
 
-        # Use the canonical internal mode values in the selectbox so other
-        # code can rely on the exact strings stored in session_state.
-        mode_options = ["hybrid", "ai_preferred", "local"]
+        # Display current mode succinctly in the controls row
         current_mode = st.session_state.processing_mode
-        if current_mode not in mode_options:
-            current_mode = "hybrid"
-
-        processing_mode = st.selectbox(
-            "Processing Mode",
-            mode_options,
-            index=mode_options.index(current_mode),
-            help="Hybrid: Best balance (recommended), AI: Cloud-only, Local: Templates",
-            key="mode_select_row"
-        )
-        st.session_state.processing_mode = processing_mode
+        st.markdown(f"**Mode:** {current_mode}")
 
     with controls[1]:
-        # Theme selection with native Streamlit theme integration
+        # Show current theme (actual selection lives in Settings sidebar)
         current_theme = st.session_state.get('theme', 'Light')
-        theme_options = ["Light", "Dark"]
-        selected_theme = st.selectbox(
-            "Theme",
-            theme_options,
-            index=theme_options.index(current_theme),
-            key="theme_select"
-        )
-
-        if selected_theme != current_theme:
-            st.session_state['theme'] = selected_theme
-            # Use experimental set_theme for native theme switching
-            try:
-                theme_name = "dark" if selected_theme == "Dark" else "light"
-                st._config.set_option('theme.base', theme_name)
-                st.rerun()
-            except:
-                st.rerun()  # Fallback to regular rerun if experimental feature not available
+        st.markdown(f"**Theme:** {current_theme}")
 
         # Start Personal Log moved into the narrow column to match the
         # requested DOM slot (first small column after Theme)
@@ -244,6 +126,113 @@ def render_controls_row(conversation_key):
     with controls[5]:
         # Slot kept intentionally empty; 'Start Personal Log' now next to Theme
         pass
+
+
+def ensure_processing_prefs():
+    """Normalize legacy processing preferences and ensure keys exist in session_state."""
+    if 'processing_mode' in st.session_state and st.session_state.processing_mode == 'ai_preferred':
+        st.session_state.processing_mode = 'hybrid'
+        st.session_state['prefer_ai'] = True
+
+    if 'processing_mode' not in st.session_state:
+        st.session_state.processing_mode = os.getenv(
+            'DEFAULT_PROCESSING_MODE', 'hybrid')
+
+    if 'prefer_ai' not in st.session_state:
+        st.session_state['prefer_ai'] = True
+
+
+def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
+    """Decode an AI reply using the local parser and return (composed_response, debug_info)."""
+    try:
+        from emotional_os.glyphs.signal_parser import parse_input
+    except Exception:
+        return ai_reply, {}
+
+    try:
+        ai_local = parse_input(
+            ai_reply,
+            "emotional_os/parser/signal_lexicon.json",
+            db_path="emotional_os/glyphs/glyphs.db",
+            conversation_context=conversation_context,
+        )
+        ai_voltage = ai_local.get("voltage_response", "")
+        ai_glyphs = ai_local.get("glyphs", [])
+        ai_best = ai_local.get("best_glyph")
+        ai_glyph_display = ai_best['glyph_name'] if ai_best else (
+            ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
+
+        composed = (
+            f"{ai_reply}\n\n"
+            f"Local decoding: {ai_voltage}\n"
+            f"Resonant Glyph: {ai_glyph_display}"
+        )
+
+        debug = {
+            'signals': ai_local.get('signals', []),
+            'gates': ai_local.get('gates', []),
+            'glyphs': ai_glyphs,
+            'debug_sql': ai_local.get('debug_sql', ''),
+            'debug_glyph_rows': ai_local.get('debug_glyph_rows', [])
+        }
+        return composed, debug
+    except Exception:
+        return ai_reply, {}
+
+
+def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_url: str, supabase_key: str) -> tuple:
+    """Run the full hybrid pipeline: local parse -> AI -> local decode.
+
+    Returns (response_text, debug_info_dict, local_analysis_dict)
+    """
+    try:
+        from emotional_os.glyphs.signal_parser import parse_input
+        local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
+                                     db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
+    except Exception:
+        local_analysis = {}
+
+    glyphs = local_analysis.get('glyphs', [])
+    voltage_response = local_analysis.get('voltage_response', '')
+    ritual_prompt = local_analysis.get('ritual_prompt', '')
+
+    if not saori_url or not supabase_key:
+        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
+        return response, {}, local_analysis
+
+    payload = {
+        "message": effective_input,
+        "mode": st.session_state.get('processing_mode', 'hybrid'),
+        "user_id": st.session_state.user_id,
+        "local_voltage_response": voltage_response,
+        "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
+        "local_ritual_prompt": ritual_prompt
+    }
+    try:
+        response_data = requests.post(
+            saori_url,
+            headers={
+                "Authorization": f"Bearer {supabase_key}",
+                "Content-Type": "application/json"
+            },
+            json=payload,
+            timeout=15
+        )
+    except Exception:
+        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
+        return response, {}, local_analysis
+
+    if requests is None:
+        return "AI processing unavailable (requests library not installed).", {}, local_analysis
+
+    if response_data.status_code != 200:
+        return "I'm experiencing some technical difficulties, but I'm still here for you.", {}, local_analysis
+
+    result = response_data.json()
+    ai_reply = result.get('reply', "I'm here to listen.")
+
+    composed, debug = decode_ai_reply(ai_reply, conversation_context)
+    return composed, debug, local_analysis
 
 # Data management functions
 
@@ -1016,7 +1005,12 @@ def render_main_app():
             'first_name') or st.session_state.get('username')
         st.write(f"Welcome back, **{display_name}**! 👋")
     with col2:
-        pass  # Settings panel now in sidebar expander
+        # Settings panel is rendered in the sidebar expander
+        try:
+            render_settings_sidebar()
+        except Exception:
+            # Fail silently if sidebar rendering isn't available
+            pass
     with col3:
         if st.button("Logout", help="Sign out of your account"):
             from .auth import SaoynxAuthentication
@@ -1265,60 +1259,10 @@ def render_main_app():
                         best_glyph = local_analysis.get("best_glyph")
                         glyph_display = best_glyph['glyph_name'] if best_glyph else 'None'
                         response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
-                    elif processing_mode == "ai_preferred":
-                        try:
-                            saori_url = st.secrets.get(
-                                "supabase", {}).get("saori_function_url")
-                            supabase_key = st.secrets.get(
-                                "supabase", {}).get("key")
-                            if not saori_url or not supabase_key:
-                                response = "AI processing unavailable in demo mode. Your feelings are still valid and important."
-                            else:
-                                payload = {
-                                    "message": effective_input,
-                                    "mode": processing_mode,
-                                    "user_id": st.session_state.user_id
-                                }
-                                if document_analysis:
-                                    glyphs = document_analysis.get(
-                                        "glyphs", [])
-                                    voltage_response = document_analysis.get(
-                                        "voltage_response", "")
-                                    ritual_prompt = document_analysis.get(
-                                        "ritual_prompt", "")
-                                    debug_signals = document_analysis.get(
-                                        "signals", [])
-                                    debug_gates = document_analysis.get(
-                                        "gates", [])
-                                    debug_glyphs = glyphs
-                                    doc_context = "\n".join([
-                                        f"Document Insights: {voltage_response}",
-                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs])}" if glyphs and isinstance(
-                                            glyphs, list) else "",
-                                        f"Ritual Prompt: {ritual_prompt}" if ritual_prompt else ""
-                                    ])
-                                    payload["document_context"] = doc_context
-                                response_data = requests.post(
-                                    saori_url,
-                                    headers={
-                                        "Authorization": f"Bearer {supabase_key}",
-                                        "Content-Type": "application/json"
-                                    },
-                                    json=payload,
-                                    timeout=15
-                                )
-                                if requests is None:
-                                    # requests not available in this runtime
-                                    response = "AI processing unavailable (requests library not installed)."
-                                else:
-                                    if response_data.status_code == 200:
-                                        result = response_data.json()
-                                        response = result.get(
-                                            "reply", "I'm here to listen.")
-                                    else:
-                                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
-                        except Exception:
-                            response = "I'm having trouble connecting right now, but your feelings are still valid and important."
+                    # Note: the previous code supported an "ai_preferred" mode.
+                    # That option has been removed in favor of a simpler
+                    # two-option model: 'hybrid' (default) and 'local'. Any
+                    # unknown mode falls back to hybrid behavior below.
                     elif processing_mode == "hybrid":
                         from emotional_os.glyphs.signal_parser import parse_input
                         local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
@@ -1382,8 +1326,52 @@ def render_main_app():
                                 else:
                                     if response_data.status_code == 200:
                                         result = response_data.json()
-                                        response = result.get(
+                                        ai_reply = result.get(
                                             "reply", "I'm here to listen.")
+
+                                        # SECOND PASS: Run the AI reply back through the
+                                        # local parser so we decode the AI's language into
+                                        # the local glyph/voltage representation and produce
+                                        # a locally-interpreted final response. This preserves
+                                        # the intended hybrid pipeline: local -> AI -> local.
+                                        try:
+                                            ai_local = parse_input(
+                                                ai_reply,
+                                                "emotional_os/parser/signal_lexicon.json",
+                                                db_path="emotional_os/glyphs/glyphs.db",
+                                                conversation_context=conversation_context,
+                                            )
+                                            ai_voltage = ai_local.get(
+                                                "voltage_response", "")
+                                            ai_glyphs = ai_local.get(
+                                                "glyphs", [])
+                                            ai_best = ai_local.get(
+                                                "best_glyph")
+                                            ai_glyph_display = ai_best['glyph_name'] if ai_best else (
+                                                ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
+
+                                            # Compose a final response that includes the AI's reply
+                                            # plus the local decoding/context so the user receives a
+                                            # grounded, locally-interpreted message.
+                                            response = (
+                                                f"{ai_reply}\n\n"
+                                                f"Local decoding: {ai_voltage}\n"
+                                                f"Resonant Glyph: {ai_glyph_display}"
+                                            )
+
+                                            # Update debug variables for downstream features
+                                            debug_signals = ai_local.get(
+                                                "signals", [])
+                                            debug_gates = ai_local.get(
+                                                "gates", [])
+                                            debug_glyphs = ai_glyphs
+                                            debug_sql = ai_local.get(
+                                                "debug_sql", "")
+                                            debug_glyph_rows = ai_local.get(
+                                                "debug_glyph_rows", [])
+                                        except Exception:
+                                            # If local re-parsing fails, fall back to the AI reply
+                                            response = ai_reply
                                     else:
                                         response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception as e:

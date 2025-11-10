@@ -604,18 +604,27 @@ def render_main_app():
     with col1:
         # Set default processing mode if not already set
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+            st.session_state.processing_mode = "hybrid"
 
-        # Render selectbox using session state
+        # Backward-compatibility: map legacy ai_preferred
+        if st.session_state.get('processing_mode') == 'ai_preferred':
+            st.session_state.processing_mode = 'hybrid'
+            st.session_state['prefer_ai'] = True
+
+        # Render selectbox using session state (two-option model)
+        mode_options = ["hybrid", "local"]
+        current = st.session_state.get('processing_mode', 'hybrid')
+        try:
+            idx = mode_options.index(current)
+        except ValueError:
+            idx = 0
         processing_mode = st.selectbox(
             "Processing Mode",
-            ["hybrid", "local", "ai_preferred"],
-            index=["hybrid", "local", "ai_preferred"].index(
-                st.session_state.processing_mode),
-            help="Hybrid: Best performance, Local: Maximum privacy, AI: Most sophisticated responses"
+            mode_options,
+            index=idx,
+            help="Hybrid: Best performance, Local: Maximum privacy"
         )
 
-        # Update session state with selected mode
         st.session_state.processing_mode = processing_mode
 
     with col2:

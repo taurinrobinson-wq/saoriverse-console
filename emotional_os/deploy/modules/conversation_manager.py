@@ -171,6 +171,15 @@ class ConversationManager:
 
             if response.status_code == 200:
                 conversations = response.json()
+                # Backward compatibility shim: translate any legacy "ai_preferred"
+                # processing_mode values into the new representation where
+                # processing_mode='hybrid' and prefer_ai=True.
+                if isinstance(conversations, list):
+                    for c in conversations:
+                        pm = c.get('processing_mode')
+                        if pm == 'ai_preferred':
+                            c['processing_mode'] = 'hybrid'
+                            c['prefer_ai'] = True
                 return conversations if isinstance(conversations, list) else []
             else:
                 return []
@@ -212,6 +221,10 @@ class ConversationManager:
                     # Parse messages JSON string
                     if isinstance(conv.get('messages'), str):
                         conv['messages'] = json.loads(conv['messages'])
+                    # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
+                    if conv.get('processing_mode') == 'ai_preferred':
+                        conv['processing_mode'] = 'hybrid'
+                        conv['prefer_ai'] = True
                     return conv
             return None
 
