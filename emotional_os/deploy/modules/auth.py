@@ -15,7 +15,38 @@ class SaoynxAuthentication:
 
     def render_login_form(self, in_sidebar: bool = False):
         """Render the login form. If in_sidebar=True use sidebar-scoped keys/flags."""
-        st.markdown("## Sign In")
+        # When rendered inside the sidebar expander the expander already
+        # displays the "Sign in" label. Avoid repeating the header in that
+        # case to keep the UI compact.
+        if not in_sidebar:
+            st.markdown("## Sign In")
+
+        # If rendered in the sidebar, apply compact spacing CSS to reduce
+        # vertical whitespace between form fields so the sidebar feels denser.
+        if in_sidebar:
+            try:
+                st.markdown(
+                    """
+                    <style>
+                    /* Compact form spacing for sidebar auth forms */
+                    [data-testid="stSidebar"] .stTextInput, [data-testid="stSidebar"] .stTextArea,
+                    [data-testid="stSidebar"] .stSelectbox, [data-testid="stSidebar"] .stNumberInput,
+                    [data-testid="stSidebar"] .stButton {
+                        margin-bottom: 6px !important;
+                    }
+                    [data-testid="stSidebar"] .stTextInput > div, [data-testid="stSidebar"] .stTextArea > div {
+                        padding: 4px 0 !important;
+                    }
+                    [data-testid="stSidebar"] label {
+                        margin-bottom: 4px !important;
+                        font-size: 0.95rem !important;
+                    }
+                    </style>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            except Exception:
+                pass
         key_user = "sidebar_login_username" if in_sidebar else "login_username"
         key_pass = "sidebar_login_password" if in_sidebar else "login_password"
         key_btn = "sidebar_login_btn" if in_sidebar else "login_btn"
@@ -45,7 +76,37 @@ class SaoynxAuthentication:
 
     def render_register_form(self, in_sidebar: bool = False):
         """Render the register form. If in_sidebar=True use sidebar-scoped keys/flags."""
-        st.markdown("## Register New Account")
+        # When rendered inside the sidebar expander the expander already
+        # displays the "Register" label. Avoid repeating the header in that
+        # case to keep the UI compact.
+        if not in_sidebar:
+            st.markdown("## Register New Account")
+
+        # Apply the same compact spacing when the register form is shown in the sidebar
+        if in_sidebar:
+            try:
+                st.markdown(
+                    """
+                    <style>
+                    /* Compact form spacing for sidebar auth forms */
+                    [data-testid="stSidebar"] .stTextInput, [data-testid="stSidebar"] .stTextArea,
+                    [data-testid="stSidebar"] .stSelectbox, [data-testid="stSidebar"] .stNumberInput,
+                    [data-testid="stSidebar"] .stButton {
+                        margin-bottom: 6px !important;
+                    }
+                    [data-testid="stSidebar"] .stTextInput > div, [data-testid="stSidebar"] .stTextArea > div {
+                        padding: 4px 0 !important;
+                    }
+                    [data-testid="stSidebar"] label {
+                        margin-bottom: 4px !important;
+                        font-size: 0.95rem !important;
+                    }
+                    </style>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            except Exception:
+                pass
         key_fn = "sidebar_register_first_name" if in_sidebar else "register_first_name"
         key_ln = "sidebar_register_last_name" if in_sidebar else "register_last_name"
         key_email = "sidebar_register_email" if in_sidebar else "register_email"
