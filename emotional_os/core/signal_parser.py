@@ -48,6 +48,48 @@ _response_composer = DynamicResponseComposer()
 logger = logging.getLogger(__name__)
 if not logger.handlers:
     logger.setLevel(logging.INFO)
+# Telemetry toggle: set environment variable SAORI_TELEMETRY=1 to enable lightweight telemetry logs
+TELEMETRY_ENABLED = os.getenv(
+    "SAORI_TELEMETRY", "0").lower() in ("1", "true", "yes")
+if TELEMETRY_ENABLED:
+    # Ensure a stream handler exists so telemetry is visible in stdout when enabled
+    try:
+        has_stream = any(isinstance(h, logging.StreamHandler)
+                         for h in logger.handlers)
+    except Exception:
+        has_stream = False
+    if not has_stream:
+        stream_h = logging.StreamHandler()
+        stream_h.setLevel(logging.INFO)
+        stream_h.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s %(message)s'))
+        logger.addHandler(stream_h)
+
+
+def set_telemetry(enabled: bool):
+    """Runtime toggle for telemetry. When enabled, adds a StreamHandler and
+    sets the module-level TELEMETRY_ENABLED flag so other functions log events.
+    This allows UI sessions to turn telemetry on/off without changing env vars.
+    """
+    global TELEMETRY_ENABLED
+    TELEMETRY_ENABLED = bool(enabled)
+    try:
+        if TELEMETRY_ENABLED:
+            has_stream = any(isinstance(h, logging.StreamHandler)
+                             for h in logger.handlers)
+            if not has_stream:
+                stream_h = logging.StreamHandler()
+                stream_h.setLevel(logging.INFO)
+                stream_h.setFormatter(logging.Formatter(
+                    '%(asctime)s %(levelname)s %(message)s'))
+                logger.addHandler(stream_h)
+        else:
+            # remove any StreamHandler instances we added
+            for h in list(logger.handlers):
+                if isinstance(h, logging.StreamHandler):
+                    logger.removeHandler(h)
+    except Exception:
+        pass
 
 # Utility function for fuzzy pattern matching
 
@@ -449,6 +491,17 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     - glyphs_selected: list of glyph dicts augmented with 'score' and 'display_name', sorted by score desc
     response_source is one of: 'llm', 'dynamic_composer', 'fallback_message'
     """
+    if TELEMETRY_ENABLED:
+        try:
+            logger.info(json.dumps({
+                "event": "select_best_start",
+                "glyphs_count": len(glyphs) if glyphs is not None else 0,
+                "signals_count": len(signals) if signals is not None else 0,
+                "input_snippet": (input_text or "")[:160]
+            }, ensure_ascii=False))
+        except Exception:
+            pass
+
     if not glyphs:
         # Fallback: if no glyphs found via gates, search by emotion tone directly
         fallback_glyphs = _find_fallback_glyphs(signals, input_text)
@@ -627,6 +680,24 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     response, feedback_data = generate_contextual_response(
         best_glyph, signal_keywords, input_text, conversation_context)
 
+    # Telemetry: report selection summary
+    if TELEMETRY_ENABLED:
+        try:
+            sel_summary = [
+                {"name": (g.get('glyph_name') if isinstance(g, dict) else None), "score": g.get(
+                    'score') if isinstance(g, dict) else None}
+                for g in glyphs_selected
+            ]
+            logger.info(json.dumps({
+                "event": "select_best_done",
+                "best_glyph": (best_glyph.get('glyph_name') if best_glyph else None),
+                "selected_count": len(glyphs_selected),
+                "selected": sel_summary,
+                "response_source": 'dynamic_composer'
+            }, ensure_ascii=False))
+        except Exception:
+            pass
+
     return best_glyph, (response, feedback_data), 'dynamic_composer', glyphs_selected
 
 
@@ -764,6 +835,18 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
         last_assistant_msg = conversation_context.get('last_assistant_message')
     feedback_data = detect_feedback_correction(input_text, last_assistant_msg)
 
+    # Telemetry: log generation start and feedback detection
+    if TELEMETRY_ENABLED:
+        try:
+            logger.info(json.dumps({
+                "event": "generate_contextual_start",
+                "glyph": (glyph.get('glyph_name') if glyph else None),
+                "feedback_detected": bool(feedback_data.get('is_correction')),
+                "correction_type": feedback_data.get('contradiction_type')
+            }, ensure_ascii=False))
+        except Exception:
+            pass
+
     # If feedback is detected, prioritize a response that addresses the correction
     if feedback_data.get('is_correction'):
         correction_type = feedback_data.get('contradiction_type')
@@ -775,6 +858,15 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
                 "When we're close to someone's anxious system, we can absorb its rhythm without it being intrinsically ours. "
                 "Can you say more about what *you* are feeling, separate from what you pick up from Michelle?"
             )
+            if TELEMETRY_ENABLED:
+                try:
+                    logger.info(json.dumps({
+                        "event": "generate_contextual_feedback",
+                        "type": "attribution_boundary",
+                        "glyph": (glyph.get('glyph_name') if glyph else None)
+                    }, ensure_ascii=False))
+                except Exception:
+                    pass
             return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
         elif correction_type == 'inherited_pattern':
@@ -783,6 +875,15 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
                 "You can inherit the pattern without being imprisoned by it. "
                 "What would it feel like to notice the difference between *her* anxiety and what's actually *yours*?"
             )
+            if TELEMETRY_ENABLED:
+                try:
+                    logger.info(json.dumps({
+                        "event": "generate_contextual_feedback",
+                        "type": "inherited_pattern",
+                        "glyph": (glyph.get('glyph_name') if glyph else None)
+                    }, ensure_ascii=False))
+                except Exception:
+                    pass
             return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
         elif correction_type == 'misalignment':
@@ -790,6 +891,15 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
                 "I appreciate you saying that. I want to make sure I'm actually hearing you, not projecting onto you. "
                 "Help me understand: what did I miss?"
             )
+            if TELEMETRY_ENABLED:
+                try:
+                    logger.info(json.dumps({
+                        "event": "generate_contextual_feedback",
+                        "type": "misalignment",
+                        "glyph": (glyph.get('glyph_name') if glyph else None)
+                    }, ensure_ascii=False))
+                except Exception:
+                    pass
             return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
     # No feedback detected; proceed to message-driven response generation
@@ -831,6 +941,15 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
             # Prepend relational acknowledgment if present
             if relational_prefix:
                 composed = f"{relational_prefix} {composed}"
+            if TELEMETRY_ENABLED:
+                try:
+                    logger.info(json.dumps({
+                        "event": "generate_contextual_composed",
+                        "glyph": (glyph.get('glyph_name') if glyph else None),
+                        "feedback_detected": bool(feedback_data.get('is_correction'))
+                    }, ensure_ascii=False))
+                except Exception:
+                    pass
             return _avoid_repeat(composed, conversation_context, previous_responses), feedback_data
 
     # Fall back to dynamic composition for general responses
@@ -847,6 +966,15 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
         # Prepend relational acknowledgment if present
         if relational_prefix:
             composed = f"{relational_prefix} {composed}"
+        if TELEMETRY_ENABLED:
+            try:
+                logger.info(json.dumps({
+                    "event": "generate_contextual_composed",
+                    "glyph": (glyph.get('glyph_name') if glyph else None),
+                    "feedback_detected": bool(feedback_data.get('is_correction'))
+                }, ensure_ascii=False))
+            except Exception:
+                pass
         return _avoid_repeat(composed, conversation_context, previous_responses), feedback_data
 
     # Ultimate fallback if composer fails
@@ -1418,6 +1546,23 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             voltage_response_template = best_glyph.get('response_template')
     except Exception:
         voltage_response_template = None
+
+    # Telemetry: summarize parse_input activity
+    if TELEMETRY_ENABLED:
+        try:
+            logger.info(json.dumps({
+                "event": "parse_input_summary",
+                "input_snippet": (input_text or "")[:160],
+                "signals_count": len(signals) if signals is not None else 0,
+                "gates": gates,
+                "glyphs_returned": len(glyphs) if glyphs is not None else 0,
+                "best_glyph": (best_glyph.get('glyph_name') if best_glyph else None),
+                "glyphs_selected_count": len(glyphs_selected) if glyphs_selected is not None else 0,
+                "response_source": response_source,
+                "sanctuary_mode": bool(SANCTUARY_MODE or is_sensitive_input(input_text))
+            }, ensure_ascii=False))
+        except Exception:
+            pass
 
     return {
         "timestamp": datetime.now().isoformat(),

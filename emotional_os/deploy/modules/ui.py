@@ -195,6 +195,16 @@ def inject_css(css_path: str) -> None:
         return
 
 
+# Inject repository-scoped auth overrides (best-effort). The CSS file lives
+# in ../static/auth_override.css relative to this modules/ directory. If the
+# file is missing the function is silent so imports remain safe.
+try:
+    inject_css("../static/auth_override.css")
+except Exception:
+    # Keep imports safe in minimal environments
+    pass
+
+
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
@@ -723,6 +733,25 @@ def render_main_app():
                 # Best-effort: do not break the main UI when debug overlay fails
                 pass
     except Exception:
+        pass
+    # Session-level telemetry toggle (lightweight): attach a telemetry handler for this Streamlit session
+    try:
+        from emotional_os.core import signal_parser as _sp
+        # initialize session flag if missing
+        if 'enable_telemetry' not in st.session_state:
+            st.session_state['enable_telemetry'] = False
+        with st.expander('Developer: Telemetry', expanded=False):
+            enable_tel = st.checkbox('Enable Telemetry (show parse/selection events)',
+                                     value=st.session_state.get('enable_telemetry', False))
+            if enable_tel != st.session_state.get('enable_telemetry'):
+                st.session_state['enable_telemetry'] = enable_tel
+                try:
+                    _sp.set_telemetry(bool(enable_tel))
+                except Exception:
+                    # best-effort: do not break the UI if telemetry cannot be toggled
+                    pass
+    except Exception:
+        # If signal_parser isn't available in this environment, skip the UI control
         pass
     # Defensive client-side guard for third-party DOM libraries (e.g., jQuery)
     # Some compiled frontend code can call jQuery($) with an undefined or
