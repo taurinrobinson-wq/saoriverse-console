@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.10, 3.11]
+        python-version: ['3.10', '3.11']
 
     steps:
       - uses: actions/checkout@v4
@@ -28,26 +28,3 @@ jobs:
       - name: Run selected unit tests
         run: |
           pytest -q tests/test_ui_template_usage.py tests/unit/test_multi_glyph_selection.py tests/unit/test_display_name_normalizer.py
-name: Emotional OS CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - name: Install dependencies
-        run: |
-          pip install -r emotional_os/deploy/requirements.txt
-          pip install pytest
-      - name: Run tests
-        run: pytest emotional_os/tests/
