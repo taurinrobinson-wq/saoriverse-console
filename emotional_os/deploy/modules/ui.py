@@ -209,35 +209,39 @@ def render_controls_row(conversation_key):
         # The interactive controls for changing processing mode are
         # rendered in the sidebar Settings panel. Keep this top-row
         # column reserved for future lightweight status badges but
-        # avoid rendering non-interactive Mode selectors inline.
+        # avoid rendering non-interactive Mode selectors inline. The
+        # explicit Mode/Theme captions are intentionally omitted here
+        # to avoid duplicating the Settings controls (they live in
+        # the sidebar expander).
         current_mode = st.session_state.processing_mode
-        # Show only a subtle caption to indicate the active mode (non-interactive)
+        # Place Start Personal Log in the far-left column per layout request
         try:
-            st.caption(f"Mode: {current_mode}")
+            if st.button("Start Personal Log", key="start_log_btn"):
+                st.session_state.show_personal_log = True
+                st.rerun()
         except Exception:
-            # Fallback: do nothing if caption rendering fails
             pass
 
     with controls[1]:
-        # Show current theme as a subtle caption; theme selection lives
-        # in the Settings sidebar expander to avoid redundant inline
-        # controls in the chat area.
+        # Theme selection lives in the Settings sidebar expander; avoid
+        # rendering inline theme captions here to reduce visual clutter.
         current_theme = st.session_state.get('theme', 'Light')
+        # Place Logout in the adjacent (controls[1]) column so it sits
+        # immediately to the right of the Start Personal Log button.
         try:
-            st.caption(f"Theme: {current_theme}")
+            if st.button("Logout", key="controls_logout", help="Sign out of your account"):
+                from .auth import SaoynxAuthentication
+                auth = SaoynxAuthentication()
+                auth.logout()
         except Exception:
             pass
-
-        # Start Personal Log moved into the narrow column to match the
-        # requested DOM slot (first small column after Theme)
-        # (Button rendered in controls[2] below.)
     # Removed Debug and Clear History controls — these buttons did not provide
     # useful functionality and duplicated UI surface area. Slots retained for
     # layout stability.
     with controls[2]:
-        if st.button("Start Personal Log", key="start_log_btn"):
-            st.session_state.show_personal_log = True
-            st.rerun()
+        # Reserved for small additional actions; intentionally empty to
+        # maintain layout stability.
+        pass
     with controls[3]:
         pass
     with controls[4]:
@@ -245,7 +249,7 @@ def render_controls_row(conversation_key):
         # Keep this slot reserved for future row controls if needed.
         pass
     with controls[5]:
-        # Slot kept intentionally empty; 'Start Personal Log' now next to Theme
+        # Reserved for future use; intentionally left empty.
         pass
 
 
@@ -1364,10 +1368,9 @@ def render_main_app():
             # Fail silently if sidebar rendering isn't available
             pass
     with col3:
-        if st.button("Logout", help="Sign out of your account"):
-            from .auth import SaoynxAuthentication
-            auth = SaoynxAuthentication()
-            auth.logout()
+        # Header kept intentionally minimal; logout moved into the
+        # compact controls row rendered by render_controls_row().
+        pass
     conversation_key = f"conversation_history_{st.session_state.user_id}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
@@ -1382,8 +1385,27 @@ def render_main_app():
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
     processing_mode = st.session_state.get('processing_mode', 'hybrid')
-    chat_container = st.container()
+    # Center the chat area so the messages align with the chat input
+    # (which is rendered in a centered column below). Using matching
+    # column widths keeps the chat messages and input visually aligned.
+    cols_center = st.columns([1, 6, 1])
+    chat_container = cols_center[1].container()
     with chat_container:
+        # When there are no messages yet, show a subtle placeholder to
+        # indicate that sent messages will appear in this area.
+        if not st.session_state.get(conversation_key):
+            try:
+                st.markdown(
+                    "<div style='color:var(--jp-ui-font-color2, #6b7280); padding:12px; border-radius:8px; background: rgba(0,0,0,0.02);'>Your conversation will appear here after you send your first message.</div>",
+                    unsafe_allow_html=True,
+                )
+            except Exception:
+                try:
+                    st.info(
+                        "Your conversation will appear here after you send your first message.")
+                except Exception:
+                    pass
+
         for i, exchange in enumerate(st.session_state[conversation_key]):
             with st.chat_message("user"):
                 st.write(exchange["user"])
@@ -1414,94 +1436,11 @@ def render_main_app():
             "gates": []
         }
 
-    # File upload with multiple formats
-    uploaded_file = st.file_uploader("📄 Upload a document", type=[
-                                     "txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"])
-    if uploaded_file:
-        file_text = None
-        file_ext = uploaded_file.name.lower().split('.')[-1]
-
-        try:
-            if file_ext == "txt":
-                file_text = uploaded_file.read().decode("utf-8", errors="ignore")
-
-            elif file_ext == "docx":
-                try:
-                    from docx import Document
-                    doc = Document(uploaded_file)
-                    file_text = "\n".join(
-                        [para.text for para in doc.paragraphs])
-                except Exception as e:
-                    st.error(f"Error reading Word document: {e}")
-
-            elif file_ext == "pdf":
-                try:
-                    import pdfplumber
-                    with pdfplumber.open(uploaded_file) as pdf:
-                        file_text = "\n".join(
-                            page.extract_text() or "" for page in pdf.pages)
-                except Exception as e:
-                    st.error(f"Error reading PDF document: {e}")
-
-            elif file_ext == "md":
-                try:
-                    import markdown
-                    raw_text = uploaded_file.read().decode("utf-8", errors="ignore")
-                    # Convert markdown to HTML then extract text
-                    html = markdown.markdown(raw_text)
-                    from bs4 import BeautifulSoup
-                    soup = BeautifulSoup(html, 'html.parser')
-                    file_text = soup.get_text()
-                except Exception as e:
-                    st.error(f"Error reading Markdown document: {e}")
-
-            elif file_ext in ["html", "htm"]:
-                try:
-                    from bs4 import BeautifulSoup
-                    raw_html = uploaded_file.read().decode("utf-8", errors="ignore")
-                    soup = BeautifulSoup(raw_html, 'html.parser')
-                    file_text = soup.get_text()
-                except Exception as e:
-                    st.error(f"Error reading HTML document: {e}")
-
-            elif file_ext == "csv":
-                try:
-                    import pandas as pd
-                    df = pd.read_csv(uploaded_file)
-                    # Convert CSV to readable text format
-                    file_text = df.to_string(index=False)
-                except Exception as e:
-                    st.error(f"Error reading CSV document: {e}")
-
-            elif file_ext in ["xlsx", "xls"]:
-                try:
-                    import pandas as pd
-                    df = pd.read_excel(uploaded_file)
-                    # Convert Excel to readable text format
-                    file_text = df.to_string(index=False)
-                except Exception as e:
-                    st.error(f"Error reading Excel document: {e}")
-
-            elif file_ext == "json":
-                try:
-                    import json
-                    raw_json = uploaded_file.read().decode("utf-8", errors="ignore")
-                    data = json.loads(raw_json)
-                    # Convert JSON to readable text format
-                    file_text = json.dumps(data, indent=2)
-                except Exception as e:
-                    st.error(f"Error reading JSON document: {e}")
-
-            if file_text:
-                st.session_state["uploaded_text"] = file_text
-                st.success(
-                    f"✅ {file_ext.upper()} document uploaded successfully!")
-            else:
-                st.warning(
-                    f"Could not extract text from {file_ext.upper()} file")
-
-        except Exception as e:
-            st.error(f"Error reading document: {e}")
+    # NOTE: The top-level document uploader was removed to avoid duplicate
+    # "Browse files" buttons. File uploads are handled inline next to the
+    # chat input (see the inline uploader near the chat input area). When
+    # a file is uploaded via the inline uploader it will be processed below
+    # so we avoid rendering two platform browse buttons in the UI.
 
     # Support 'recall' and 'resend' actions from the sidebar
     recalled = None
@@ -1515,8 +1454,123 @@ def render_main_app():
         # If a recalled message exists (from sidebar), process it immediately
         user_input = recalled
     else:
-        user_input = st.chat_input("Share what you're feeling...")
-    debug_signals = []
+        # Render a minimal uploader to the left of the chat input so the
+        # platform "Browse files" button appears adjacent to the input.
+        try:
+            left_col, input_col, right_col = st.columns([1, 6, 1])
+            try:
+                st.markdown(
+                    """
+                    <style>
+                    [data-testid="stFileUploaderDropzone"] {
+                        border: none !important;
+                        background: none !important;
+                        padding: 0 !important;
+                    }
+                    [data-testid="stFileUploaderDropzoneInstructions"] {
+                        display: none !important;
+                    }
+                    </style>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            except Exception:
+                pass
+
+            with left_col:
+                uploaded_file = st.file_uploader(
+                    "Browse Files",
+                    label_visibility="collapsed",
+                    type=["txt", "docx", "pdf", "md", "html",
+                          "htm", "csv", "xlsx", "xls", "json"],
+                    key="inline_uploader",
+                )
+
+            user_input = input_col.chat_input("Share what you're feeling...")
+        except Exception:
+            # Fallback to the simple chat input when columns fail
+            user_input = st.chat_input("Share what you're feeling...")
+            # If a file was uploaded via the inline uploader, process it here so
+            # the app uses a single uploader (inline) and avoids duplicate buttons.
+            try:
+                if 'uploaded_file' in locals() and uploaded_file:
+                    file_text = None
+                    file_ext = uploaded_file.name.lower().split('.')[-1]
+                    try:
+                        if file_ext == "txt":
+                            file_text = uploaded_file.read().decode("utf-8", errors="ignore")
+                        elif file_ext == "docx":
+                            try:
+                                from docx import Document
+                                doc = Document(uploaded_file)
+                                file_text = "\n".join(
+                                    [para.text for para in doc.paragraphs])
+                            except Exception as e:
+                                st.error(f"Error reading Word document: {e}")
+                        elif file_ext == "pdf":
+                            try:
+                                import pdfplumber
+                                with pdfplumber.open(uploaded_file) as pdf:
+                                    file_text = "\n".join(
+                                        page.extract_text() or "" for page in pdf.pages)
+                            except Exception as e:
+                                st.error(f"Error reading PDF document: {e}")
+                        elif file_ext == "md":
+                            try:
+                                import markdown
+                                raw_text = uploaded_file.read().decode("utf-8", errors="ignore")
+                                html = markdown.markdown(raw_text)
+                                from bs4 import BeautifulSoup
+                                soup = BeautifulSoup(html, 'html.parser')
+                                file_text = soup.get_text()
+                            except Exception as e:
+                                st.error(
+                                    f"Error reading Markdown document: {e}")
+                        elif file_ext in ["html", "htm"]:
+                            try:
+                                from bs4 import BeautifulSoup
+                                raw_html = uploaded_file.read().decode("utf-8", errors="ignore")
+                                soup = BeautifulSoup(raw_html, 'html.parser')
+                                file_text = soup.get_text()
+                            except Exception as e:
+                                st.error(f"Error reading HTML document: {e}")
+                        elif file_ext == "csv":
+                            try:
+                                import pandas as pd
+                                df = pd.read_csv(uploaded_file)
+                                file_text = df.to_string(index=False)
+                            except Exception as e:
+                                st.error(f"Error reading CSV document: {e}")
+                        elif file_ext in ["xlsx", "xls"]:
+                            try:
+                                import pandas as pd
+                                df = pd.read_excel(uploaded_file)
+                                file_text = df.to_string(index=False)
+                            except Exception as e:
+                                st.error(f"Error reading Excel document: {e}")
+                        elif file_ext == "json":
+                            try:
+                                import json
+                                raw_json = uploaded_file.read().decode("utf-8", errors="ignore")
+                                data = json.loads(raw_json)
+                                file_text = json.dumps(data, indent=2)
+                            except Exception as e:
+                                st.error(f"Error reading JSON document: {e}")
+
+                        if file_text:
+                            st.session_state["uploaded_text"] = file_text
+                            st.success(
+                                f"✅ {file_ext.upper()} document uploaded successfully!")
+                        else:
+                            st.warning(
+                                f"Could not extract text from {file_ext.upper()} file")
+                    except Exception as e:
+                        st.error(f"Error reading document: {e}")
+            except Exception:
+                # Best-effort: do not let file processing crash the chat flow
+                pass
+
+            debug_signals = []
     debug_gates = []
     debug_glyphs = []
     debug_sql = ""
