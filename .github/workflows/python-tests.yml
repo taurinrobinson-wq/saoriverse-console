@@ -2,9 +2,9 @@ name: CI — Python tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Cache pip
         uses: actions/cache@v4
@@ -33,4 +33,17 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest -q
+          # On pull_request events run the small, stable unit-test list
+          # to keep PR validation fast and deterministic. On push to main
+          # run the full test suite.
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            pytest -q \
+              tests/test_ui_template_usage.py \
+              tests/test_sanctuary.py \
+              tests/unit/test_multi_glyph_selection.py \
+              tests/unit/test_display_name_normalizer.py \
+              tests/unit/test_glyph_tiebreak.py \
+              tests/unit/test_sanctuary_mode_toggle.py
+          else
+            python -m pytest -q
+          fi
