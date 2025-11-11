@@ -11,10 +11,10 @@ const ALLOWED_ORIGINS = [
 
 function getCorsHeaders(req: any) {
   const origin = req.headers.get("Origin");
-  
+
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  
+
   let allowOrigin;
   if (ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -23,7 +23,7 @@ function getCorsHeaders(req: any) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0];
   }
-  
+
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -60,7 +60,7 @@ async function analyzeForLearning(userMessage: string, aiResponse: string, admin
     const emotionalKeywords = extractEmotionalKeywords(userMessage);
     const responsePatterns = extractResponsePatterns(aiResponse);
     const keyPhrases = extractKeyPhrases(aiResponse);
-    
+
     const learningData = {
       timestamp: new Date().toISOString(),
       user_emotions: emotionalKeywords,
@@ -68,10 +68,10 @@ async function analyzeForLearning(userMessage: string, aiResponse: string, admin
       key_phrases: keyPhrases,
       confidence: calculateLearningConfidence(emotionalKeywords, responsePatterns, keyPhrases)
     };
-    
+
     // Store in response_learning table
     await storeLearningData(learningData, admin);
-    
+
     return learningData;
   } catch (err) {
     console.error("Learning analysis failed:", err);
@@ -90,17 +90,17 @@ function extractEmotionalKeywords(message: string): Record<string, string[]> {
     healing: ['healing', 'recovery', 'growth', 'progress', 'transformation', 'journey'],
     vulnerable: ['vulnerable', 'exposed', 'tender', 'raw', 'open', 'fragile', 'sensitive']
   };
-  
+
   const messageLower = message.toLowerCase();
   const foundEmotions: Record<string, string[]> = {};
-  
+
   for (const [emotion, keywords] of Object.entries(emotionCategories)) {
     const matches = keywords.filter(keyword => messageLower.includes(keyword));
     if (matches.length > 0) {
       foundEmotions[emotion] = matches;
     }
   }
-  
+
   return foundEmotions;
 }
 
@@ -114,19 +114,19 @@ function extractResponsePatterns(response: string): Record<string, boolean> {
     question: /\?/,
     metaphor: /(like|as if|imagine|picture|seems like)/i
   };
-  
+
   const foundPatterns: Record<string, boolean> = {};
-  
+
   for (const [patternType, regex] of Object.entries(patterns)) {
     foundPatterns[patternType] = regex.test(response);
   }
-  
+
   return foundPatterns;
 }
 
 function extractKeyPhrases(response: string): string[] {
   const sentences = response.split(/[.!?]+/).filter(s => s.trim().length > 0);
-  
+
   const keyPhrases = sentences
     .filter(sentence => {
       const wordCount = sentence.trim().split(/\s+/).length;
@@ -134,7 +134,7 @@ function extractKeyPhrases(response: string): string[] {
     })
     .map(sentence => sentence.trim())
     .slice(0, 3);
-  
+
   return keyPhrases;
 }
 
@@ -142,7 +142,7 @@ function calculateLearningConfidence(emotions: Record<string, string[]>, pattern
   const emotionCount = Object.keys(emotions).length;
   const patternCount = Object.values(patterns).filter(Boolean).length;
   const phraseCount = phrases.length;
-  
+
   // Higher confidence for clear emotional context + response patterns + useful phrases
   const baseScore = Math.min(0.95, (emotionCount * 0.25 + patternCount * 0.15 + phraseCount * 0.1 + 0.4));
   return Math.round(baseScore * 100) / 100;
@@ -161,7 +161,7 @@ async function storeLearningData(learningData: any, admin: any) {
       created_from_chat: true,
       last_updated: learningData.timestamp
     }], { onConflict: 'id' });
-    
+
     console.log(`Learning stored: ${Object.keys(learningData.user_emotions).length} emotions, confidence ${learningData.confidence}`);
   } catch (err) {
     console.error("Failed to store learning data:", err);
@@ -171,25 +171,25 @@ async function storeLearningData(learningData: any, admin: any) {
 async function getLearnedResponse(userMessage: string, emotions: Record<string, string[]>, admin: any): Promise<string | null> {
   try {
     if (Object.keys(emotions).length === 0) return null;
-    
+
     const { data: learnedData } = await admin
       .from('response_learning')
       .select('key_phrases, confidence_score, emotion_keywords')
       .gte('confidence_score', 0.7)
       .order('confidence_score', { ascending: false })
       .limit(10);
-    
+
     if (learnedData && learnedData.length > 0) {
       for (const learned of learnedData) {
         try {
           const learnedEmotions = JSON.parse(learned.emotion_keywords || '{}');
           const phrases = JSON.parse(learned.key_phrases || '[]');
-          
+
           // Check if current emotions match learned emotions
-          const emotionMatch = Object.keys(emotions).some(emotion => 
+          const emotionMatch = Object.keys(emotions).some(emotion =>
             Object.keys(learnedEmotions).includes(emotion)
           );
-          
+
           if (emotionMatch && phrases.length > 0) {
             console.log(`Using learned response with confidence ${learned.confidence_score}`);
             return phrases[0];
@@ -200,7 +200,7 @@ async function getLearnedResponse(userMessage: string, emotions: Record<string, 
         }
       }
     }
-    
+
     return null;
   } catch (err) {
     console.error("Error fetching learned responses:", err);
@@ -210,7 +210,7 @@ async function getLearnedResponse(userMessage: string, emotions: Record<string, 
 
 function getQuickResponse(message: string): string | null {
   const lowerMessage = message.toLowerCase();
-  
+
   for (const [emotion, response] of Object.entries(QUICK_RESPONSES)) {
     if (lowerMessage.includes(emotion)) {
       return response;
@@ -225,11 +225,11 @@ function generateCacheKey(message: string, mode: string): string {
 
 Deno.serve(async (req: any) => {
   const corsHeaders = getCorsHeaders(req);
-  
+
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
-  
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
       status: 405, headers: corsHeaders
@@ -247,7 +247,7 @@ Deno.serve(async (req: any) => {
 
   const message = body?.message?.toString?.().trim();
   const mode = body?.mode?.toString?.() || "quick";
-  
+
   if (!message) {
     return new Response(JSON.stringify({ error: "Missing 'message'" }), {
       status: 400, headers: corsHeaders
@@ -257,7 +257,7 @@ Deno.serve(async (req: any) => {
   // Check cache first
   const cacheKey = generateCacheKey(message, mode);
   const cached = responseCache.get(cacheKey);
-  
+
   if (cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
     console.log("Cache hit");
     return new Response(JSON.stringify(cached.response), {
@@ -271,10 +271,10 @@ Deno.serve(async (req: any) => {
   const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
   const startTime = Date.now();
-  
+
   // ENHANCED: Extract emotions for learning
   const detectedEmotions = extractEmotionalKeywords(message);
-  
+
   // Try learned responses first (eventual OpenAI replacement)
   const learnedResponse = await getLearnedResponse(message, detectedEmotions, admin);
   if (learnedResponse) {
@@ -283,14 +283,14 @@ Deno.serve(async (req: any) => {
       glyph: null,
       parsed_glyphs: [],
       upserted_glyphs: [],
-      log: { 
-        processing_time: `${Date.now() - startTime}ms`, 
+      log: {
+        processing_time: `${Date.now() - startTime}ms`,
         method: "learned_response",
         emotions_detected: Object.keys(detectedEmotions),
         source: "local_learning"
       }
     };
-    
+
     responseCache.set(cacheKey, { response, timestamp: Date.now() });
     return new Response(JSON.stringify(response), {
       status: 200, headers: corsHeaders
@@ -305,13 +305,13 @@ Deno.serve(async (req: any) => {
       glyph: null,
       parsed_glyphs: [],
       upserted_glyphs: [],
-      log: { 
-        processing_time: `${Date.now() - startTime}ms`, 
+      log: {
+        processing_time: `${Date.now() - startTime}ms`,
         method: "quick_response",
         emotions_detected: Object.keys(detectedEmotions)
       }
     };
-    
+
     responseCache.set(cacheKey, { response, timestamp: Date.now() });
     return new Response(JSON.stringify(response), {
       status: 200, headers: corsHeaders
@@ -323,16 +323,16 @@ Deno.serve(async (req: any) => {
     (async () => {
       const input = message.toLowerCase();
       const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
-      
+
       if (wantsPlain) {
         const { data } = await admin.from("emotional_tags").select("*").eq("tag_name", "plain").single();
         return data;
       }
-      
+
       const { data } = await userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
       return data?.[0] || null;
     })(),
-    
+
     (async () => {
       const systemPrompt = `You are Saori, an emotionally intelligent companion.
 Respond conversationally and supportively. Keep responses concise and under 150 words.
@@ -353,12 +353,30 @@ Focus on emotional resonance rather than lengthy explanations.`;
 
   const matchedTag = tagResult.status === 'fulfilled' ? tagResult.value : null;
   const completion = aiResult.status === 'fulfilled' ? aiResult.value : null;
-  
-  const reply = completion?.choices?.[0]?.message?.content ?? "I'm here to listen.";
+
+  // Build a deterministic choice for short/generic fallbacks so that
+  // responses feel less repetitive across platforms.
+  const _fallbackAlternatives = [
+    "I hear you — tell me more when you're ready.",
+    "I'm listening. What's coming up for you right now?",
+    "Thank you for sharing. I'm here to listen and support you."
+  ];
+
+  function _stableChoice(seed: string, choices: string[]) {
+    let h = 0;
+    for (let i = 0; i < seed.length; i++) {
+      h = (h << 5) - h + seed.charCodeAt(i);
+      h |= 0;
+    }
+    return choices[Math.abs(h) % choices.length];
+  }
+
+  let reply = completion?.choices?.[0]?.message?.content ?? _stableChoice(message || (completion?.id || ''), _fallbackAlternatives);
 
   // ENHANCED: Learn from OpenAI response for future local processing
-  if (completion && reply !== "I'm here to listen.") {
-    analyzeForLearning(message, reply, admin).catch(err => 
+  const genericFallbacks = new Set(["I'm here to listen.", "I'm here to listen and help.", "I'm here to listen and support you."]);
+  if (completion && !genericFallbacks.has(reply)) {
+    analyzeForLearning(message, reply, admin).catch(err =>
       console.error("Learning analysis failed:", err)
     );
   }
@@ -370,7 +388,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
   if (shouldProcessGlyphs) {
     try {
       const glyphPattern = /feeling|emotion|heart|soul|deep|profound|sacred|intense/i;
-      
+
       if (glyphPattern.test(message)) {
         parsedGlyphs.push({
           name: "complex_emotion",
@@ -384,7 +402,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
   }
 
   const processingTime = Date.now() - startTime;
-  
+
   const response = {
     reply,
     glyph: matchedTag,

@@ -12,6 +12,9 @@ from datetime import datetime, timedelta
 import requests
 import streamlit as st
 
+# Parser import
+from emotional_os.core.signal_parser import parse_input
+
 # Page configuration
 st.set_page_config(
     page_title="Emotional OS",
@@ -369,23 +372,64 @@ def render_main_app():
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
 
+    # Debug toggle for glyphs
+    show_glyph_debug = st.sidebar.checkbox(
+        "Show glyph debug", value=False, help="Show selected glyphs and scores for debugging")
+
     if user_input:
         # Add user message to chat
         with chat_container:
             with st.chat_message("user"):
                 st.write(user_input)
 
-        # Process the input
+        # Process the input via parser
         with st.chat_message("assistant"):
             with st.spinner("Processing your emotional input..."):
                 start_time = time.time()
 
-                # Simple response for now (replace with actual processing when available)
-                response = "Thank you for sharing. I'm here to listen and support you through whatever you're experiencing. Your feelings are valid and important."
+                # Build a minimal conversation_context for feedback detection
+                last_assistant = None
+                if st.session_state[conversation_key]:
+                    # find last assistant message if present
+                    for ex in reversed(st.session_state[conversation_key]):
+                        if ex.get('assistant'):
+                            last_assistant = ex.get('assistant')
+                            break
+
+                conversation_context = {
+                    'last_assistant_message': last_assistant}
+
+                result = parse_input(user_input, 'emotional_os/parser/signal_lexicon.json',
+                                     db_path='emotional_os/glyphs/glyphs.db', conversation_context=conversation_context)
                 processing_time = time.time() - start_time
+
+                # Use response template from glyph if present (and debug mode not active)
+                response_template = result.get('voltage_response_template')
+                response_fallback = result.get('voltage_response')
+                if response_template and not show_glyph_debug:
+                    response = response_template
+                else:
+                    response = response_fallback
 
                 st.write(response)
                 st.caption(f"Processed in {processing_time:.2f}s")
+
+                # If debug toggle enabled, render compact glyph table
+                if show_glyph_debug:
+                    glyphs_selected = result.get('glyphs_selected', []) or []
+                    signals = [s.get('keyword')
+                               for s in result.get('signals', [])]
+                    rows = []
+                    for g in glyphs_selected:
+                        rows.append({
+                            'Signal': ', '.join(signals) if signals else '',
+                            'Gate': g.get('gate'),
+                            'Glyph': g.get('display_name') or g.get('glyph_name'),
+                            'Score': g.get('score')
+                        })
+                    if rows:
+                        st.markdown("**Glyphs selected:**")
+                        st.table(rows)
 
         # Add to conversation history
         st.session_state[conversation_key].append({
@@ -393,7 +437,8 @@ def render_main_app():
             "assistant": response,
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
-            "timestamp": datetime.now().isoformat()
+            "timestamp": datetime.now().isoformat(),
+            "parser_result": result
         })
 
         st.rerun()

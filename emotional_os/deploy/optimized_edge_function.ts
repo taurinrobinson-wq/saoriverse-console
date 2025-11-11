@@ -15,11 +15,11 @@ const ALLOWED_ORIGINS = [
 
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get("Origin");
-  
+
   // Allow Streamlit Community Cloud domains (*.streamlit.app)
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  
+
   let allowOrigin;
   if (ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -28,7 +28,7 @@ function getCorsHeaders(req: Request) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0];
   }
-  
+
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -58,7 +58,7 @@ const QUICK_RESPONSES = {
 
 function getQuickResponse(message: string): string | null {
   const lowerMessage = message.toLowerCase();
-  
+
   for (const [emotion, response] of Object.entries(QUICK_RESPONSES)) {
     if (lowerMessage.includes(emotion)) {
       return response;
@@ -74,11 +74,11 @@ function generateCacheKey(message: string, mode: string): string {
 
 Deno.serve(async (req) => {
   const corsHeaders = getCorsHeaders(req);
-  
+
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
-  
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
       status: 405, headers: corsHeaders
@@ -96,7 +96,7 @@ Deno.serve(async (req) => {
 
   const message = body?.message?.toString?.().trim();
   const mode = body?.mode?.toString?.() || "quick";
-  
+
   if (!message) {
     return new Response(JSON.stringify({ error: "Missing 'message'" }), {
       status: 400, headers: corsHeaders
@@ -106,7 +106,7 @@ Deno.serve(async (req) => {
   // PERFORMANCE OPTIMIZATION 1: Check cache first
   const cacheKey = generateCacheKey(message, mode);
   const cached = responseCache.get(cacheKey);
-  
+
   if (cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
     console.log("Cache hit for message");
     return new Response(JSON.stringify(cached.response), {
@@ -124,10 +124,10 @@ Deno.serve(async (req) => {
       upserted_glyphs: [],
       log: { processing_time: "< 0.1s", method: "quick_response" }
     };
-    
+
     // Cache the quick response
     responseCache.set(cacheKey, { response, timestamp: Date.now() });
-    
+
     return new Response(JSON.stringify(response), {
       status: 200, headers: corsHeaders
     });
@@ -140,23 +140,23 @@ Deno.serve(async (req) => {
 
   // PERFORMANCE OPTIMIZATION 3: Parallel processing setup
   const startTime = Date.now();
-  
+
   // Start tag lookup and OpenAI call in parallel
   const [tagResult, aiResult] = await Promise.allSettled([
     // Tag lookup (faster operation)
     (async () => {
       const input = message.toLowerCase();
       const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
-      
+
       if (wantsPlain) {
         const { data } = await admin.from("emotional_tags").select("*").eq("tag_name", "plain").single();
         return data;
       }
-      
+
       const { data } = await userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
       return data?.[0] || null;
     })(),
-    
+
     // OpenAI call (slower operation) - PERFORMANCE: Use faster model
     (async () => {
       const systemPrompt = `You are Saori, an emotionally intelligent companion.
@@ -179,8 +179,26 @@ Focus on emotional resonance rather than lengthy explanations.`;
   // Extract results
   const matchedTag = tagResult.status === 'fulfilled' ? tagResult.value : null;
   const completion = aiResult.status === 'fulfilled' ? aiResult.value : null;
-  
-  const reply = completion?.choices?.[0]?.message?.content ?? "I'm here to listen.";
+
+  const _fallbackAlternatives = [
+    "I hear you — tell me more when you're ready.",
+    "I'm listening. What's coming up for you right now?",
+    "Thank you for sharing. I'm here to listen and support you."
+  ];
+
+  function _stableChoice(seed: string, choices: string[]) {
+    let h = 0;
+    for (let i = 0; i < seed.length; i++) {
+      h = (h << 5) - h + seed.charCodeAt(i);
+      h |= 0;
+    }
+    return choices[Math.abs(h) % choices.length];
+  }
+
+  const rawReply = completion?.choices?.[0]?.message?.content ?? "";
+  const reply = rawReply && rawReply.trim()
+    ? rawReply
+    : _stableChoice(message || (completion?.id || ''), _fallbackAlternatives);
 
   // PERFORMANCE OPTIMIZATION 4: Conditional glyph processing
   // Only do heavy glyph processing for complex messages
@@ -192,7 +210,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
     try {
       // Simplified glyph extraction - much faster
       const glyphPattern = /feeling|emotion|heart|soul|deep|profound|sacred|intense/i;
-      
+
       if (glyphPattern.test(message)) {
         parsedGlyphs = [{
           name: "complex_emotion",
@@ -206,7 +224,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
   }
 
   const processingTime = Date.now() - startTime;
-  
+
   const response = {
     reply,
     glyph: matchedTag,

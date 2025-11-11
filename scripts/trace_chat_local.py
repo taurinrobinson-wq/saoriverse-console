@@ -68,7 +68,7 @@ and ashamed and also oddly numb. Sometimes I cry and don't understand why."
             fake = make_fake_post({"reply": "It's sunny and 72F.", "glyph": {
             }, "processing_time": 0.12}, status=200)
         elif name == 'short_emotional':
-            fake = make_fake_post({"reply": "I'm sorry you're feeling that way. I'm here to listen.", "glyph": {
+            fake = make_fake_post({"reply": "I'm sorry you're feeling that way. I hear you — tell me more when you're ready.", "glyph": {
                                   "tag_name": "sad"}, "processing_time": 0.45}, status=200)
         elif name == 'long_emotional':
             fake = make_fake_post({"reply": "That sounds heavy — thank you for sharing. Let's unpack that together.", "glyph": {

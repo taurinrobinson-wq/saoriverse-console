@@ -11,10 +11,10 @@ const ALLOWED_ORIGINS = [
 
 function getCorsHeaders(req: any) {
   const origin = req.headers.get("Origin");
-  
+
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-  
+
   let allowOrigin;
   if (ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -23,10 +23,10 @@ function getCorsHeaders(req: any) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0];
   }
-  
+
   return {
     "Access-Control-Allow-Origin": allowOrigin,
-    "Access-Control-Allow-Methods": "POST, OPTIONS", 
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Content-Type": "application/json"
   };
@@ -55,19 +55,19 @@ const QUICK_RESPONSES: Record<string, string> = {
 };
 
 // User Authentication Functions
-async function validateUserSession(authHeader: string, admin: any): Promise<{valid: boolean, userId?: string}> {
+async function validateUserSession(authHeader: string, admin: any): Promise<{ valid: boolean, userId?: string }> {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return { valid: false };
   }
-  
+
   try {
     // Extract user info from auth header or session token
     // For now, we'll use a simple session validation
     const sessionToken = authHeader.replace("Bearer ", "");
-    
+
     // In production, validate session token against users table
     // For demo, we'll extract user_id from the token (implement proper JWT later)
-    
+
     return { valid: true, userId: "demo_user" }; // Placeholder
   } catch (err) {
     console.error("Session validation error:", err);
@@ -81,7 +81,7 @@ async function analyzeForLearning(userMessage: string, aiResponse: string, userI
     const emotionalKeywords = extractEmotionalKeywords(userMessage);
     const responsePatterns = extractResponsePatterns(aiResponse);
     const keyPhrases = extractKeyPhrases(aiResponse);
-    
+
     const learningData = {
       timestamp: new Date().toISOString(),
       user_id: userId, // USER ISOLATION: Each user's learning is separate
@@ -90,10 +90,10 @@ async function analyzeForLearning(userMessage: string, aiResponse: string, userI
       key_phrases: keyPhrases,
       confidence: calculateLearningConfidence(emotionalKeywords, responsePatterns, keyPhrases)
     };
-    
+
     // Store user-specific learning data
     await storeUserLearningData(learningData, admin);
-    
+
     return learningData;
   } catch (err) {
     console.error("Learning analysis failed:", err);
@@ -112,17 +112,17 @@ function extractEmotionalKeywords(message: string): Record<string, string[]> {
     healing: ['healing', 'recovery', 'growth', 'progress', 'transformation', 'journey'],
     vulnerable: ['vulnerable', 'exposed', 'tender', 'raw', 'open', 'fragile', 'sensitive']
   };
-  
+
   const messageLower = message.toLowerCase();
   const foundEmotions: Record<string, string[]> = {};
-  
+
   for (const [emotion, keywords] of Object.entries(emotionCategories)) {
     const matches = keywords.filter(keyword => messageLower.includes(keyword));
     if (matches.length > 0) {
       foundEmotions[emotion] = matches;
     }
   }
-  
+
   return foundEmotions;
 }
 
@@ -136,19 +136,19 @@ function extractResponsePatterns(response: string): Record<string, boolean> {
     question: /\?/,
     metaphor: /(like|as if|imagine|picture|seems like)/i
   };
-  
+
   const foundPatterns: Record<string, boolean> = {};
-  
+
   for (const [patternType, regex] of Object.entries(patterns)) {
     foundPatterns[patternType] = regex.test(response);
   }
-  
+
   return foundPatterns;
 }
 
 function extractKeyPhrases(response: string): string[] {
   const sentences = response.split(/[.!?]+/).filter(s => s.trim().length > 0);
-  
+
   const keyPhrases = sentences
     .filter(sentence => {
       const wordCount = sentence.trim().split(/\s+/).length;
@@ -156,7 +156,7 @@ function extractKeyPhrases(response: string): string[] {
     })
     .map(sentence => sentence.trim())
     .slice(0, 3);
-  
+
   return keyPhrases;
 }
 
@@ -164,7 +164,7 @@ function calculateLearningConfidence(emotions: Record<string, string[]>, pattern
   const emotionCount = Object.keys(emotions).length;
   const patternCount = Object.values(patterns).filter(Boolean).length;
   const phraseCount = phrases.length;
-  
+
   const baseScore = Math.min(0.95, (emotionCount * 0.25 + patternCount * 0.15 + phraseCount * 0.1 + 0.4));
   return Math.round(baseScore * 100) / 100;
 }
@@ -183,7 +183,7 @@ async function storeUserLearningData(learningData: any, admin: any) {
       created_from_chat: true,
       last_updated: learningData.timestamp
     }], { onConflict: 'id' });
-    
+
     console.log(`User ${learningData.user_id} learning stored: ${Object.keys(learningData.user_emotions).length} emotions, confidence ${learningData.confidence}`);
   } catch (err) {
     console.error("Failed to store user learning data:", err);
@@ -193,7 +193,7 @@ async function storeUserLearningData(learningData: any, admin: any) {
 async function getUserLearnedResponse(userMessage: string, emotions: Record<string, string[]>, userId: string, admin: any): Promise<string | null> {
   try {
     if (Object.keys(emotions).length === 0) return null;
-    
+
     // USER ISOLATION: Only query this user's learned responses
     const { data: learnedData } = await admin
       .from('response_learning')
@@ -202,18 +202,18 @@ async function getUserLearnedResponse(userMessage: string, emotions: Record<stri
       .gte('confidence_score', 0.7)
       .order('confidence_score', { ascending: false })
       .limit(10);
-    
+
     if (learnedData && learnedData.length > 0) {
       for (const learned of learnedData) {
         try {
           const learnedEmotions = JSON.parse(learned.emotion_keywords || '{}');
           const phrases = JSON.parse(learned.key_phrases || '[]');
-          
+
           // Check if current emotions match learned emotions
-          const emotionMatch = Object.keys(emotions).some(emotion => 
+          const emotionMatch = Object.keys(emotions).some(emotion =>
             Object.keys(learnedEmotions).includes(emotion)
           );
-          
+
           if (emotionMatch && phrases.length > 0) {
             console.log(`Using user ${userId} learned response with confidence ${learned.confidence_score}`);
             return phrases[0];
@@ -223,7 +223,7 @@ async function getUserLearnedResponse(userMessage: string, emotions: Record<stri
         }
       }
     }
-    
+
     return null;
   } catch (err) {
     console.error("Error fetching user learned responses:", err);
@@ -233,7 +233,7 @@ async function getUserLearnedResponse(userMessage: string, emotions: Record<stri
 
 function getQuickResponse(message: string): string | null {
   const lowerMessage = message.toLowerCase();
-  
+
   for (const [emotion, response] of Object.entries(QUICK_RESPONSES)) {
     if (lowerMessage.includes(emotion)) {
       return response;
@@ -248,11 +248,11 @@ function generateUserCacheKey(message: string, mode: string, userId: string): st
 
 Deno.serve(async (req: any) => {
   const corsHeaders = getCorsHeaders(req);
-  
+
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
-  
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method Not Allowed" }), {
       status: 405, headers: corsHeaders
@@ -271,7 +271,7 @@ Deno.serve(async (req: any) => {
   const message = body?.message?.toString?.().trim();
   const mode = body?.mode?.toString?.() || "quick";
   const userId = body?.user_id?.toString?.(); // User context from authenticated session
-  
+
   if (!message) {
     return new Response(JSON.stringify({ error: "Missing 'message'" }), {
       status: 400, headers: corsHeaders
@@ -299,7 +299,7 @@ Deno.serve(async (req: any) => {
   // USER-ISOLATED CACHE: Each user has separate cache
   const cacheKey = generateUserCacheKey(message, mode, authenticatedUserId);
   const cached = userResponseCache.get(cacheKey);
-  
+
   if (cached && (Date.now() - cached.timestamp < CACHE_TTL)) {
     console.log(`Cache hit for user ${authenticatedUserId}`);
     return new Response(JSON.stringify(cached.response), {
@@ -308,10 +308,10 @@ Deno.serve(async (req: any) => {
   }
 
   const startTime = Date.now();
-  
+
   // Extract emotions for learning
   const detectedEmotions = extractEmotionalKeywords(message);
-  
+
   // Try user-specific learned responses first
   const learnedResponse = await getUserLearnedResponse(message, detectedEmotions, authenticatedUserId, admin);
   if (learnedResponse) {
@@ -320,15 +320,15 @@ Deno.serve(async (req: any) => {
       glyph: null,
       parsed_glyphs: [],
       upserted_glyphs: [],
-      log: { 
-        processing_time: `${Date.now() - startTime}ms`, 
+      log: {
+        processing_time: `${Date.now() - startTime}ms`,
         method: "user_learned_response",
         emotions_detected: Object.keys(detectedEmotions),
         user_id: authenticatedUserId,
         source: "personal_learning"
       }
     };
-    
+
     userResponseCache.set(cacheKey, { response, timestamp: Date.now() });
     return new Response(JSON.stringify(response), {
       status: 200, headers: corsHeaders
@@ -343,14 +343,14 @@ Deno.serve(async (req: any) => {
       glyph: null,
       parsed_glyphs: [],
       upserted_glyphs: [],
-      log: { 
-        processing_time: `${Date.now() - startTime}ms`, 
+      log: {
+        processing_time: `${Date.now() - startTime}ms`,
         method: "quick_response",
         emotions_detected: Object.keys(detectedEmotions),
         user_id: authenticatedUserId
       }
     };
-    
+
     userResponseCache.set(cacheKey, { response, timestamp: Date.now() });
     return new Response(JSON.stringify(response), {
       status: 200, headers: corsHeaders
@@ -362,22 +362,22 @@ Deno.serve(async (req: any) => {
     (async () => {
       const input = message.toLowerCase();
       const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
-      
+
       if (wantsPlain) {
         const { data } = await admin.from("emotional_tags").select("*").eq("tag_name", "plain").single();
         return data;
       }
-      
+
       // USER ISOLATION: Query user-specific tags if user is authenticated
       let query = userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
       if (authenticatedUserId !== "anonymous") {
         query = query.or(`user_id.is.null,user_id.eq.${authenticatedUserId}`);
       }
-      
+
       const { data } = await query;
       return data?.[0] || null;
     })(),
-    
+
     (async () => {
       const systemPrompt = `You are Saori, an emotionally intelligent companion for ${authenticatedUserId !== "anonymous" ? "a returning user" : "someone new"}.
 Respond conversationally and supportively. Keep responses concise and under 150 words.
@@ -398,12 +398,31 @@ Focus on emotional resonance rather than lengthy explanations.`;
 
   const matchedTag = tagResult.status === 'fulfilled' ? tagResult.value : null;
   const completion = aiResult.status === 'fulfilled' ? aiResult.value : null;
-  
-  const reply = completion?.choices?.[0]?.message?.content ?? "I'm here to listen.";
+
+  const _fallbackAlternatives = [
+    "I hear you — tell me more when you're ready.",
+    "I'm listening. What's coming up for you right now?",
+    "Thank you for sharing. I'm here to listen and support you."
+  ];
+
+  function _stableChoice(seed: string, choices: string[]) {
+    let h = 0;
+    for (let i = 0; i < seed.length; i++) {
+      h = (h << 5) - h + seed.charCodeAt(i);
+      h |= 0;
+    }
+    return choices[Math.abs(h) % choices.length];
+  }
+
+  const rawReply = completion?.choices?.[0]?.message?.content ?? "";
+  const reply = rawReply && rawReply.trim()
+    ? rawReply
+    : _stableChoice(message || (completion?.id || ''), _fallbackAlternatives);
 
   // USER-SPECIFIC LEARNING: Learn from OpenAI response for this user only
-  if (completion && reply !== "I'm here to listen." && authenticatedUserId !== "anonymous") {
-    analyzeForLearning(message, reply, authenticatedUserId, admin).catch(err => 
+  const genericFallbacks = new Set(["I'm here to listen.", "I'm here to listen and help.", "I'm here to listen and support you."]);
+  if (completion && !genericFallbacks.has(reply) && authenticatedUserId !== "anonymous") {
+    analyzeForLearning(message, reply, authenticatedUserId, admin).catch(err =>
       console.error("Learning analysis failed:", err)
     );
   }
@@ -416,7 +435,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
   if (shouldProcessGlyphs) {
     try {
       const glyphPattern = /feeling|emotion|heart|soul|deep|profound|sacred|intense/i;
-      
+
       if (glyphPattern.test(message)) {
         const newGlyph = {
           name: "complex_emotion",
@@ -428,15 +447,15 @@ Focus on emotional resonance rather than lengthy explanations.`;
           emotional_tone: Object.keys(detectedEmotions).join(", "),
           last_updated: new Date().toISOString()
         };
-        
+
         parsedGlyphs.push(newGlyph);
-        
+
         // Store user-specific glyph
         const { data: insertedGlyph } = await admin
           .from("glyphs")
           .upsert([newGlyph], { onConflict: 'user_id,name' })
           .select("*");
-        
+
         if (insertedGlyph) {
           upsertedGlyphs = insertedGlyph;
         }
@@ -447,7 +466,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
   }
 
   const processingTime = Date.now() - startTime;
-  
+
   const response = {
     reply,
     glyph: matchedTag,
