@@ -1,0 +1,31 @@
+import os
+from pathlib import Path
+
+import pytest
+
+# Smoke test: import the parser and run a trivial parse using a simple greeting
+try:
+    from emotional_os.core.signal_parser import parse_input
+except Exception:
+    parse_input = None
+
+
+def test_parse_input_smoke_creates_response(tmp_path):
+    # Ensure fixture DB exists in expected location (create via script)
+    repo_root = Path(__file__).resolve().parents[3]
+    fixture_script = repo_root / 'scripts' / 'create_sqlite_fixture.py'
+    # Create fixture
+    assert fixture_script.exists(), f"Fixture script missing: {fixture_script}"
+    os.system(f'python3 "{fixture_script}"')
+    fixture_db = repo_root / 'emotional_os' / \
+        'glyphs' / 'glyphs_integration_fixture.db'
+    assert fixture_db.exists(), "Fixture DB was not created"
+
+    assert parse_input is not None, "parse_input import failed"
+
+    # Use a simple greeting which the parser handles without DB dependencies
+    r = parse_input("hi", str(repo_root / 'velonix_lexicon.json'),
+                    db_path=str(fixture_db))
+    assert isinstance(r, dict)
+    assert 'voltage_response' in r
+    assert r['voltage_response'] is not None
