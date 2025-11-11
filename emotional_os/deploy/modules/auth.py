@@ -19,7 +19,77 @@ class SaoynxAuthentication:
         # displays the "Sign in" label. Avoid repeating the header in that
         # case to keep the UI compact.
         if not in_sidebar:
-            st.markdown("## Sign In")
+            # Render a compact header for the auth form so the spacing
+            # between Sign In / Register sections is small (0.2rem).
+            try:
+                st.markdown(
+                    """
+                    <style>
+                    /* Ensure our compact auth headers win over theme defaults */
+                    .fp-auth-header h2 { margin: 0.2rem 0 !important; font-size: 1.25rem; }
+                    .fp-auth-header + * { margin-top: 0.2rem !important; }
+                    /* Reduce the internal gap used by Streamlit emotion containers
+                       which otherwise default to 1rem (theme). Match the user's
+                       requested 0.2rem spacing for auth forms. Scoped selectors
+                       use both attribute-start and the observed concrete class
+                       name to maximise robustness across builds. */
+                    .fp-auth-header + * [class^="st-emotion-cache"] { gap: 0.2rem !important; }
+                    .fp-auth-header + * .st-emotion-cache-1ads5z7 { gap: 0.2rem !important; }
+                    /* Compact the actual form controls (non-sidebar) so margin/padding
+                       between inputs, labels and buttons is reduced. This targets the
+                       Streamlit control wrappers and their inner divs. */
+                    .fp-auth-header + * .stTextInput, .fp-auth-header + * .stTextArea,
+                    .fp-auth-header + * .stSelectbox, .fp-auth-header + * .stNumberInput,
+                    .fp-auth-header + * .stButton {
+                        margin-bottom: 6px !important;
+                    }
+                    .fp-auth-header + * .stTextInput > div, .fp-auth-header + * .stTextArea > div {
+                        padding: 4px 0 !important;
+                    }
+                    .fp-auth-header + * label {
+                        margin-bottom: 4px !important;
+                        font-size: 0.95rem !important;
+                    }
+                    </style>
+                    <div class="fp-auth-header"><h2>Sign In</h2></div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                # Inject a tiny runtime script to forcibly set the gap on the
+                # immediate container following the header. Using a runtime
+                # adjustment avoids specificity wars with Emotion-generated
+                # styles and works across class name changes.
+                try:
+                    st.components.v1.html(
+                        """
+                        <script>
+                        (function(){
+                            try{
+                                const header = document.querySelector('.fp-auth-header');
+                                if(!header) return;
+                                let container = header.parentElement;
+                                while(container && container !== document.body){
+                                    const cs = window.getComputedStyle(container);
+                                    if(cs.display === 'flex' || cs.display === 'grid'){
+                                        container.style.setProperty('gap','0.2rem','important');
+                                        container.style.setProperty('margin-top','0.2rem','important');
+                                        // Also reduce any emotion-generated child gaps
+                                        const child = container.querySelector('[class^="st-emotion-cache"]');
+                                        if(child) child.style.setProperty('gap','0.2rem','important');
+                                        break;
+                                    }
+                                    container = container.parentElement;
+                                }
+                            }catch(e){/* no-op */}
+                        })();
+                        </script>
+                        """,
+                        height=0,
+                    )
+                except Exception:
+                    pass
+            except Exception:
+                st.markdown("## Sign In")
 
         # If rendered in the sidebar, apply compact spacing CSS to reduce
         # vertical whitespace between form fields so the sidebar feels denser.
@@ -45,6 +115,35 @@ class SaoynxAuthentication:
                     """,
                     unsafe_allow_html=True,
                 )
+                # Runtime patch for register form container (same rationale as above)
+                try:
+                    st.components.v1.html(
+                        """
+                        <script>
+                        (function(){
+                            try{
+                                const header = document.querySelector('.fp-auth-header');
+                                if(!header) return;
+                                let container = header.parentElement;
+                                while(container && container !== document.body){
+                                    const cs = window.getComputedStyle(container);
+                                    if(cs.display === 'flex' || cs.display === 'grid'){
+                                        container.style.setProperty('gap','0.2rem','important');
+                                        container.style.setProperty('margin-top','0.2rem','important');
+                                        const child = container.querySelector('[class^="st-emotion-cache"]');
+                                        if(child) child.style.setProperty('gap','0.2rem','important');
+                                        break;
+                                    }
+                                    container = container.parentElement;
+                                }
+                            }catch(e){/* no-op */}
+                        })();
+                        </script>
+                        """,
+                        height=0,
+                    )
+                except Exception:
+                    pass
             except Exception:
                 pass
         key_user = "sidebar_login_username" if in_sidebar else "login_username"
@@ -80,7 +179,38 @@ class SaoynxAuthentication:
         # displays the "Register" label. Avoid repeating the header in that
         # case to keep the UI compact.
         if not in_sidebar:
-            st.markdown("## Register New Account")
+            # Compact header for Register form to reduce vertical spacing
+            try:
+                st.markdown(
+                    """
+                    <style>
+                    /* Ensure our compact auth headers win over theme defaults */
+                    .fp-auth-header h2 { margin: 0.2rem 0 !important; font-size: 1.25rem; }
+                    .fp-auth-header + * { margin-top: 0.2rem !important; }
+                    /* Reduce the internal gap used by Streamlit emotion containers
+                       to keep Register form compact like Sign In. Also compact the
+                       non-sidebar form controls (labels/inputs/buttons). */
+                    .fp-auth-header + * [class^="st-emotion-cache"] { gap: 0.2rem !important; }
+                    .fp-auth-header + * .st-emotion-cache-1ads5z7 { gap: 0.2rem !important; }
+                    .fp-auth-header + * .stTextInput, .fp-auth-header + * .stTextArea,
+                    .fp-auth-header + * .stSelectbox, .fp-auth-header + * .stNumberInput,
+                    .fp-auth-header + * .stButton {
+                        margin-bottom: 6px !important;
+                    }
+                    .fp-auth-header + * .stTextInput > div, .fp-auth-header + * .stTextArea > div {
+                        padding: 4px 0 !important;
+                    }
+                    .fp-auth-header + * label {
+                        margin-bottom: 4px !important;
+                        font-size: 0.95rem !important;
+                    }
+                    </style>
+                    <div class="fp-auth-header"><h2>Register New Account</h2></div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+            except Exception:
+                st.markdown("## Register New Account")
 
         # Apply the same compact spacing when the register form is shown in the sidebar
         if in_sidebar:
