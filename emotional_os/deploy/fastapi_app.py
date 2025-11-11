@@ -333,9 +333,15 @@ async def chat(chat_data: ChatRequest):
             pass
 
         if response.status_code == 200 and isinstance(result, dict):
+            try:
+                from emotional_os.deploy.reply_utils import polish_ai_reply
+            except Exception:
+                def polish_ai_reply(x):
+                    return x or "I hear you — tell me more when you're ready."
+
             return {
                 "success": True,
-                "reply": result.get("reply", "I'm here to listen."),
+                "reply": polish_ai_reply(result.get("reply", "I'm here to listen.")),
                 "glyph": result.get("glyph", {}),
                 "processing_time": result.get("processing_time", 0)
             }

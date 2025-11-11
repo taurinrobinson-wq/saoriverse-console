@@ -554,7 +554,7 @@ def render_main_app():
                 start_time = time.time()
 
                 # Simple response for now (replace with actual processing when available)
-                response = "Thank you for sharing. I'm here to listen and support you through whatever you're experiencing. Your feelings are valid and important."
+                response = "I hear you — tell me more when you're ready."
                 processing_time = time.time() - start_time
 
                 st.write(response)

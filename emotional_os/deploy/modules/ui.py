@@ -286,6 +286,26 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         ai_best = ai_local.get("best_glyph")
         ai_glyph_display = ai_best['glyph_name'] if ai_best else (
             ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
+        # Post-process the AI reply so that short/generic fallbacks are
+        # more varied and opening lines aren't duplicated. This keeps the
+        # user-facing reply natural while preserving the local analysis in
+        # the debug payload. We intentionally avoid writing verbose
+        # parsing/debug text inline unless the developer explicitly opts
+        # into it (via FP_SHOW_LOCAL_DECODING or session flag).
+
+        # Use the shared reply polish util so it's testable and reusable.
+        try:
+            from emotional_os.deploy.reply_utils import polish_ai_reply
+        except Exception:
+            # Local fallback if the util cannot be imported for any reason.
+            def polish_ai_reply(text: str) -> str:
+                t = (text or '').strip()
+                parts = [p.strip() for p in t.split('\n') if p.strip()]
+                if len(parts) > 1 and all(p == parts[0] for p in parts):
+                    t = parts[0]
+                return t
+
+        polished = polish_ai_reply(ai_reply)
 
         # Show local decoding and glyph annotations only when explicitly
         # enabled. By default we avoid appending internal parsing/debug
@@ -300,14 +320,17 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
             show_local = False
 
         if show_local:
+            # Keep debug annotations compact and bracketed so they don't
+            # interrupt the primary reply flow if accidentally enabled.
             composed = (
-                f"{ai_reply}\n\n"
-                f"Local decoding: {ai_voltage}\n"
-                f"Resonant Glyph: {ai_glyph_display}"
+                f"{polished}\n\n"
+                f"[Local decoding: {ai_voltage} | Resonant Glyph: {ai_glyph_display}]"
             )
         else:
-            # Default: return the raw AI reply without local debug annotations
-            composed = ai_reply
+            # Default: return the polished AI reply without local debug
+            # annotations so the user sees a concise, human-friendly
+            # response.
+            composed = polished
 
         debug = {
             'signals': ai_local.get('signals', []),
@@ -1412,8 +1435,15 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(
-                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    try:
+                        show_mode = os.environ.get('FP_SHOW_PROCESSING_MODE') == '1' or st.session_state.get(
+                            'show_processing_mode', False)
+                    except Exception:
+                        show_mode = False
+                    caption_text = f"Processed in {exchange['processing_time']}"
+                    if show_mode:
+                        caption_text += f" • Mode: {exchange.get('mode', 'unknown')}"
+                    st.caption(caption_text)
     # 1. Show a single message at the top if a document is uploaded and being processed
     document_analysis = None
     document_title = None
