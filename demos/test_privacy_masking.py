@@ -23,11 +23,11 @@ def test_privacy_safe_logging():
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir = Path(tmpdir)
 
-        # Initialize learner with test paths
+        # Initialize learner with test paths (pass strings to satisfy type hints)
         learner = HybridLearnerWithUserOverrides(
-            shared_lexicon_path=tmpdir / "shared_lexicon.json",
-            user_overrides_dir=tmpdir / "user_overrides",
-            learning_log_path=tmpdir / "hybrid_learning_log.jsonl"
+            shared_lexicon_path=str(tmpdir / "shared_lexicon.json"),
+            user_overrides_dir=str(tmpdir / "user_overrides"),
+            learning_log_path=str(tmpdir / "hybrid_learning_log.jsonl")
         )
 
         # Create test exchange data
