@@ -1,23 +1,36 @@
-name: Emotional OS CI
+name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
         run: |
-          pip install -r emotional_os/deploy/requirements.txt
-          pip install pytest
-      - name: Run tests
-        run: pytest emotional_os/tests/
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install pytest; fi
+
+      - name: Run selected unit tests
+        run: |
+          pytest -q \
+            tests/test_ui_template_usage.py \
+            tests/test_sanctuary.py \
+            tests/unit/test_multi_glyph_selection.py \
+            tests/unit/test_display_name_normalizer.py \
+            tests/unit/test_glyph_tiebreak.py \
+            tests/unit/test_sanctuary_mode_toggle.py

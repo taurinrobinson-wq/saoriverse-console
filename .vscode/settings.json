@@ -1,4 +1,23 @@
 {
+  // Exclude archived and review folders from editor search and file lists to
+  // reduce noise. These are large/archival and not part of active development.
+  "search.exclude": {
+    "**/archive/**": true,
+    "**/review_download_before_delete/**": true,
+    "**/review_for_deletion/**": true,
+    "**/archive/backups/**": true,
+    "**/archive/full_backups/**": true,
+    "**/review_download_before_delete/archived_ui/**": true
+  },
+  "files.exclude": {
+    "**/archive/**": true,
+    "**/review_download_before_delete/**": true,
+    "**/review_for_deletion/**": true
+  },
+  // Prefer ripgrep for fast searches in large repos
+  "search.useRipgrep": true
+}
+{
   "search.exclude": {
     "**/archive/**": true,
     "**/review_download_before_delete/**": true,

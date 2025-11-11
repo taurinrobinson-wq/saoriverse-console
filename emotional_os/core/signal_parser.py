@@ -287,7 +287,30 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     placeholders = ','.join('?' for _ in gates)
-    query = f"SELECT glyph_name, description, gate FROM glyph_lexicon WHERE gate IN ({placeholders})"
+
+    # Detect schema and ensure optional columns exist (display_name, response_template)
+    try:
+        cursor.execute("PRAGMA table_info(glyph_lexicon)")
+        cols = [r[1] for r in cursor.fetchall()]
+    except Exception:
+        cols = []
+
+    # If optional columns are missing, add them to the table (non-destructive)
+    try:
+        if 'display_name' not in cols:
+            cursor.execute(
+                "ALTER TABLE glyph_lexicon ADD COLUMN display_name TEXT")
+        if 'response_template' not in cols:
+            cursor.execute(
+                "ALTER TABLE glyph_lexicon ADD COLUMN response_template TEXT")
+        conn.commit()
+    except Exception:
+        # Some SQLite flavors in read-only environments may raise here; ignore
+        pass
+
+    select_cols = ['glyph_name', 'description',
+                   'gate', 'display_name', 'response_template']
+    query = f"SELECT {', '.join(select_cols)} FROM glyph_lexicon WHERE gate IN ({placeholders})"
     try:
         print(f"[fetch_glyphs] Gates: {gates}")
         print(f"[fetch_glyphs] SQL: {query}")
@@ -317,16 +340,20 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
             name = r[0]
             desc = r[1] or ''
             gate = r[2] if len(r) > 2 else None
+            display_name = r[3] if len(r) > 3 else None
+            response_template = r[4] if len(r) > 4 else None
             # Truncate long descriptions to a preview (200 chars) to avoid dumping raw documents
             preview = desc if len(desc) <= 200 else desc[:200].rsplit(
                 '\n', 1)[0] + '...'
             debug_rows.append({
                 "glyph_name": name,
+                "display_name": display_name,
+                "response_template": (response_template[:200] + '...') if response_template and len(response_template) > 200 else response_template,
                 "description_preview": preview,
                 "gate": gate
             })
         _last_glyphs_debug = {"sql": query, "rows": debug_rows}
-    return [{"glyph_name": r[0], "description": r[1], "gate": r[2]} for r in rows]
+    return [{"glyph_name": r[0], "description": r[1], "gate": r[2], "display_name": (r[3] if len(r) > 3 else None), "response_template": (r[4] if len(r) > 4 else None)} for r in rows]
 
 
 def _looks_like_artifact(g: Dict) -> bool:
@@ -364,12 +391,44 @@ def _looks_like_artifact(g: Dict) -> bool:
 
     return False
 
+
+def _normalize_display_name(glyph: Dict) -> str:
+    """Return a short display name for the glyph.
+
+    Priority:
+    1. `display_name` field from DB if present and non-empty
+    2. First sentence fragment from `glyph_name` (split on sentence punctuation)
+    3. Truncate `glyph_name` to 40 chars
+    """
+    if not glyph:
+        return ""
+    dn = (glyph.get('display_name') or '')
+    if dn and isinstance(dn, str) and dn.strip():
+        return dn.strip()
+    original = (glyph.get('glyph_name') or '')
+    # Try to extract first sentence-like fragment
+    if '.' in original:
+        frag = original.split('.', 1)[0].strip()
+        if frag:
+            return frag if len(frag) <= 40 else frag[:40].rsplit(' ', 1)[0] + '...'
+    # Also try newline or em-dash
+    for sep in ['\n', '—', '–', ':', ';']:
+        if sep in original:
+            frag = original.split(sep, 1)[0].strip()
+            if frag:
+                return frag if len(frag) <= 40 else frag[:40].rsplit(' ', 1)[0] + '...'
+    # Fallback: truncate
+    if len(original) <= 40:
+        return original
+    return original[:40].rsplit(' ', 1)[0] + '...'
+
 # Select most relevant glyph and generate contextual response
 
 
 def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], input_text: str = "", conversation_context: Optional[Dict] = None) -> tuple:
     """
-    Returns a triple: (best_glyph, (response_text, feedback_data), response_source)
+    Returns a quadruple: (best_glyph, (response_text, feedback_data), response_source, glyphs_selected)
+    - glyphs_selected: list of glyph dicts augmented with 'score' and 'display_name', sorted by score desc
     response_source is one of: 'llm', 'dynamic_composer', 'fallback_message'
     """
     if not glyphs:
@@ -427,6 +486,20 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
         score = 0
         name = glyph['glyph_name'].lower()
         description = glyph.get('description', '').lower()
+
+        # SIGNAL KEYWORD MATCH BOOST: If any extracted signal keyword appears in the
+        # glyph name or description, give a substantial boost. This improves
+        # matching when syntactic NLP isn't available and prevents the system from
+        # being overly conservative (no glyph selected) for clearly related rows.
+        for sk in signal_keywords:
+            try:
+                sk_l = sk.lower()
+            except Exception:
+                sk_l = str(sk)
+            if sk_l and (sk_l in name or sk_l in description):
+                score += 6
+                logger.debug(
+                    f"Signal-keyword boost: '{sk}' in glyph '{glyph['glyph_name']}' (+6)")
 
         # GLYPH MATCHING BOOST: Prioritize glyphs with matching syntactic elements
         if syntactic_elements['verbs']:
@@ -496,21 +569,42 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                 score += 10
 
         # Prefer simpler, more accessible glyphs
-        if any(word in name for word in ['still', 'quiet', 'gentle', 'soft']):
-            score += 5
+        # Removed small unconditional boost for 'still' to avoid over-weighting
+        # short names like 'Still Recognition' when evidence is weak.
+        # (No-op boost retained here for future tuning.)
+        if any(word in name for word in ['quiet', 'gentle', 'soft']):
+            score += 1
 
         scored_glyphs.append((glyph, score))
 
-    # Select best glyph
-    best_glyph = max(scored_glyphs, key=lambda x: x[1])[
-        0] if scored_glyphs else None
+    # Select best glyph and top N glyphs above threshold
+    best_glyph = None
+    glyphs_selected = []
+    if scored_glyphs:
+        # Sort glyphs by score descending
+        scored_sorted = sorted(scored_glyphs, key=lambda x: x[1], reverse=True)
+        MIN_GLYPH_SCORE = 6
+        MIN_GLYPH_SCORE_DELTA = 4
+
+        # Build selected list: any glyph with score >= MIN_GLYPH_SCORE
+        selected = [(g, s) for (g, s) in scored_sorted if s >= MIN_GLYPH_SCORE]
+        # Convert into normalized dicts with score and display_name
+        for g, s in selected[:3]:
+            augmented = dict(g)  # copy
+            augmented['score'] = s
+            augmented['display_name'] = _normalize_display_name(augmented)
+            glyphs_selected.append(augmented)
+
+        # For backward compatibility, best_glyph is the highest-scoring selected glyph (if any)
+        if glyphs_selected:
+            best_glyph = glyphs_selected[0]
 
     # Generate contextual response based on actual message content + glyph context
     # Returns tuple: (response_text, feedback_data)
     response, feedback_data = generate_contextual_response(
         best_glyph, signal_keywords, input_text, conversation_context)
 
-    return best_glyph, (response, feedback_data), 'dynamic_composer'
+    return best_glyph, (response, feedback_data), 'dynamic_composer', glyphs_selected
 
 
 def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
@@ -1227,9 +1321,18 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             debug_glyph_rows = signal_parser._last_glyphs_debug.get("rows", [])
     except Exception:
         pass
-    # Select best glyph and generate contextual response (returns triple with response_source)
-    best_glyph, (contextual_response, feedback_data), response_source = select_best_glyph_and_response(
+    # Select best glyph(s) and generate contextual response (returns quadruple with glyphs_selected)
+    result = select_best_glyph_and_response(
         glyphs, signals, input_text, conversation_context)
+    # Unpack safely (backwards compatible with older triple return)
+    if result and len(result) == 4:
+        best_glyph, (contextual_response,
+                     feedback_data), response_source, glyphs_selected = result
+    else:
+        best_glyph, (contextual_response,
+                     feedback_data), response_source = result
+        glyphs_selected = [best_glyph] if best_glyph else []
+
     ritual_prompt = generate_simple_prompt(best_glyph)
 
     # If no glyph matched, trigger learning pipeline to generate a candidate and craft a training response
@@ -1285,6 +1388,13 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             base_response=contextual_response,
             tone=primary_tone
         )
+    # If best_glyph has a response_template, surface it for UI rendering (do not overwrite contextual_response here)
+    voltage_response_template = None
+    try:
+        if best_glyph and best_glyph.get('response_template'):
+            voltage_response_template = best_glyph.get('response_template')
+    except Exception:
+        voltage_response_template = None
 
     return {
         "timestamp": datetime.now().isoformat(),
@@ -1293,6 +1403,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         "gates": gates,
         "glyphs": glyphs,
         "best_glyph": best_glyph,
+        "glyphs_selected": glyphs_selected,
+        "voltage_response_template": voltage_response_template,
         "ritual_prompt": ritual_prompt,
         # Now message-driven, not glyph-driven
         "voltage_response": contextual_response,

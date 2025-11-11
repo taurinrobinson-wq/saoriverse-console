@@ -6,6 +6,7 @@ creates an `EnhancedSaoriverse` client and calls `.chat()` twice: once
 without a limbic engine and once with `LimbicIntegrationEngine()` so you can
 see the difference when limbic cues are injected into the generation payload.
 """
+from enhanced_conversation_demo import EnhancedSaoriverse
 import json
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -17,7 +18,6 @@ import time
 # Ensure repo root is on sys.path so imports from project root work when running from scripts/
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from enhanced_conversation_demo import EnhancedSaoriverse
 
 try:
     from emotional_os.glyphs.limbic_integration import LimbicIntegrationEngine
@@ -39,10 +39,10 @@ class EchoHandler(BaseHTTPRequestHandler):
         except Exception:
             data = {'raw': body}
 
-        # Simulate generator: if limbic present, include the limbic emotion in reply
-        reply = "I'm here to listen."
-        limbic_used = False
-        if isinstance(data, dict) and data.get('limbic'):
+    # Simulate generator: if limbic present, include the limbic emotion in reply
+    reply = "I hear you — tell me more when you're ready."
+      limbic_used = False
+       if isinstance(data, dict) and data.get('limbic'):
             limbic = data['limbic']
             emotion = limbic.get('emotion', 'unknown')
             reply = f"[LIMBIC USED: emotion={emotion}] I hear you and I'm reflecting that feeling back to you."
@@ -74,7 +74,8 @@ def main():
     SUPABASE_ANON_KEY = 'demo-key'
 
     # Client without limbic engine
-    client_no_limbic = EnhancedSaoriverse(SUPABASE_FUNCTION_URL, SUPABASE_ANON_KEY, enable_evolution=False, limbic_engine=None)
+    client_no_limbic = EnhancedSaoriverse(
+        SUPABASE_FUNCTION_URL, SUPABASE_ANON_KEY, enable_evolution=False, limbic_engine=None)
 
     user_message = "I felt my chest tighten when I saw her walk away"
     print('\n--- Baseline generation (no limbic) ---')
@@ -84,7 +85,8 @@ def main():
 
     # Client with limbic engine
     limbic_engine = LimbicIntegrationEngine() if LimbicIntegrationEngine else None
-    client_with_limbic = EnhancedSaoriverse(SUPABASE_FUNCTION_URL, SUPABASE_ANON_KEY, enable_evolution=False, limbic_engine=limbic_engine)
+    client_with_limbic = EnhancedSaoriverse(
+        SUPABASE_FUNCTION_URL, SUPABASE_ANON_KEY, enable_evolution=False, limbic_engine=limbic_engine)
 
     print('\n--- Generation with limbic engine (injected cues) ---')
     resp2 = client_with_limbic.chat(user_message)

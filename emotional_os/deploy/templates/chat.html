@@ -555,7 +555,7 @@
                 // Add assistant response
                 conversationHistory.push({
                     type: 'assistant',
-                    content: data.reply || "I'm here to listen.",
+                    content: data.reply || "I hear you — tell me more when you're ready.",
                     timestamp: new Date().toISOString(),
                     glyph: data.glyph?.tag_name || null,
                     processing_time: data.processing_time || 0,
