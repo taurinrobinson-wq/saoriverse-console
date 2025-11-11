@@ -12,7 +12,13 @@ except Exception:
 
 def test_parse_input_smoke_creates_response(tmp_path):
     # Ensure fixture DB exists in expected location (create via script)
-    repo_root = Path(__file__).resolve().parents[3]
+    # Find repository root robustly by walking parents until we find a known file
+    p = Path(__file__).resolve()
+    repo_root = p
+    for _ in range(6):  # avoid infinite loops; repo won't be deeper than this
+        if (repo_root / 'velonix_lexicon.json').exists() or (repo_root / 'scripts').exists():
+            break
+        repo_root = repo_root.parent
     fixture_script = repo_root / 'scripts' / 'create_sqlite_fixture.py'
     # Create fixture
     assert fixture_script.exists(), f"Fixture script missing: {fixture_script}"
