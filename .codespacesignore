@@ -3,3 +3,25 @@ archive/
 review_download_before_delete/
 archive/backups/
 archive/full_backups/
+
+# Common workspace artifacts and large data we don't want uploaded into Codespaces
+# (keep sensitive or large generated data local to the repo host)
+learning/
+em_trace/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+venv/
+.venv/
+.cache/
+debug_chat.log
+*.log
+*.sqlite
+*.db
+data/
+*.csv
+*.jsonl
+.vscode/
+.idea/
+.DS_Store
