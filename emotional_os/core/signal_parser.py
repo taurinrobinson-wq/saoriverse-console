@@ -91,8 +91,26 @@ def fuzzy_contains(input_str: str, patterns: list, threshold: float = 0.6) -> bo
 
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
     base_lexicon = {}
-    if os.path.exists(base_path):
-        with open(base_path, 'r', encoding='utf-8') as f:
+    # Resolve base_path robustly: accept absolute paths, or resolve relative to the
+    # project root via the PathManager. This prevents test-order/CWD flakiness.
+    resolved_base = base_path
+    try:
+        if not os.path.isabs(base_path) or not os.path.exists(base_path):
+            # Try resolving relative to the project base_dir
+            pm = get_path_manager()
+            candidate = pm.base_dir / base_path
+            if candidate.exists():
+                resolved_base = str(candidate)
+            else:
+                # Fallback to canonical signal lexicon path from path manager
+                sig_path = signal_lexicon_path()
+                if sig_path and sig_path.exists():
+                    resolved_base = str(sig_path)
+    except Exception:
+        resolved_base = base_path
+
+    if os.path.exists(resolved_base):
+        with open(resolved_base, 'r', encoding='utf-8') as f:
             base_lexicon = json.load(f)
 
     learned_lexicon = {}
@@ -438,7 +456,8 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
             glyphs = fallback_glyphs
         else:
             fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
-            return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message'
+            # Return an empty glyphs_selected list for backward-compatible 4-tuple API
+            return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message', []
 
     # Prune glyph rows that look like document fragments or deprecated artifacts
     def _glyph_is_valid(g: Dict) -> bool:
@@ -588,6 +607,10 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
 
         # Build selected list: any glyph with score >= MIN_GLYPH_SCORE
         selected = [(g, s) for (g, s) in scored_sorted if s >= MIN_GLYPH_SCORE]
+        # Back-compat: if nothing meets the score threshold but glyphs exist,
+        # fall back to choosing the top-scoring glyph so we don't return empty.
+        if not selected and scored_sorted:
+            selected = [scored_sorted[0]]
         # Convert into normalized dicts with score and display_name
         for g, s in selected[:3]:
             augmented = dict(g)  # copy
