@@ -245,14 +245,40 @@ class SaoynxAuthentication:
         key_btn = "sidebar_register_btn" if in_sidebar else "register_btn"
         key_back = "sidebar_register_back_btn" if in_sidebar else "register_back_btn"
 
-        first_name = st.text_input("First name", key=key_fn)
-        last_name = st.text_input("Last name", key=key_ln)
-        email = st.text_input("Email", key=key_email)
-        username = st.text_input("Username", key=key_user)
-        password = st.text_input("Password", type="password", key=key_pass)
+        first_name = st.text_input(
+            "First name *", key=key_fn, help="Required field")
+        last_name = st.text_input(
+            "Last name *", key=key_ln, help="Required field")
+        email = st.text_input("Email *", key=key_email, help="Required field")
+        username = st.text_input(
+            "Username *", key=key_user, help="Required field")
+        password = st.text_input(
+            "Password *", type="password", key=key_pass, help="Required field")
         if st.button("Register", key=key_btn):
+            # Client-side validation for required fields
+            if not first_name or not first_name.strip():
+                st.error("First name is required")
+                return
+            if not last_name or not last_name.strip():
+                st.error("Last name is required")
+                return
+            if not email or not email.strip():
+                st.error("Email is required")
+                return
+            if not username or not username.strip():
+                st.error("Username is required")
+                return
+            if not password or not password.strip():
+                st.error("Password is required")
+                return
+
+            # Basic email validation
+            if "@" not in email or "." not in email:
+                st.error("Please enter a valid email address")
+                return
+
             result = self.create_user(
-                username, password, first_name=first_name, last_name=last_name, email=email)
+                username, password, first_name=first_name.strip(), last_name=last_name.strip(), email=email.strip())
             if result["success"]:
                 st.session_state['post_login_message'] = result.get(
                     "message", "Account created")
@@ -397,7 +423,7 @@ class SaoynxAuthentication:
         except Exception as e:
             return {"success": False, "message": f"Login error: {str(e)}"}
 
-    def create_user(self, username: str, password: str, first_name: str = None, last_name: str = None, email: str = None) -> dict:
+    def create_user(self, username: str, password: str, first_name: str, last_name: str, email: str) -> dict:
         # Demo-mode behavior: create and auto-authenticate a demo user
         if not self.supabase_configured:
             if username and password:
@@ -425,14 +451,11 @@ class SaoynxAuthentication:
                 "action": "create_user",
                 "username": username,
                 "password": password,
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
                 "created_at": datetime.datetime.now().isoformat()
             }
-            if first_name:
-                payload['first_name'] = first_name
-            if last_name:
-                payload['last_name'] = last_name
-            if email:
-                payload['email'] = email
 
             response = requests.post(
                 auth_url,
