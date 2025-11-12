@@ -2066,8 +2066,7 @@ def render_main_app():
                     # Use adaptive extractor with persistence
                     adaptive_extractor = AdaptiveSignalExtractor(
                         adaptive=True,
-                        use_discovered=True,
-                        persistence_path=f"learning/user_signals/{st.session_state['persistent_user_id']}_signals.json"
+                        use_discovered=True
                     )
 
                     # Create processor with persistent user ID
