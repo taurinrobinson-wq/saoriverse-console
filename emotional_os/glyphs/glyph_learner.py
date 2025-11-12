@@ -19,6 +19,7 @@ import sqlite3
 import time
 from datetime import datetime
 from typing import Dict, List, Optional
+import os
 
 try:
     from parser.nrc_lexicon_loader import nrc
@@ -31,7 +32,10 @@ except ImportError:
 class GlyphLearner:
     """Learn and generate new glyphs from emotional input."""
 
-    def __init__(self, db_path: str = "emotional_os/glyphs/glyphs.db"):
+    def __init__(self, db_path: Optional[str] = None):
+        # Use an absolute path inside the package by default to avoid cwd-dependent failures
+        if not db_path:
+            db_path = os.path.join(os.path.dirname(__file__), 'glyphs.db')
         self.db_path = db_path
         self.nrc = nrc if HAS_NRC else None
         self._ensure_learning_tables()
@@ -39,6 +43,10 @@ class GlyphLearner:
     def _ensure_learning_tables(self):
         """Create learning tables if they don't exist."""
         try:
+            # Ensure DB directory exists (mitigates cwd / cleanup race conditions in tests)
+            db_dir = os.path.dirname(self.db_path)
+            if db_dir:
+                os.makedirs(db_dir, exist_ok=True)
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
@@ -161,31 +169,36 @@ class GlyphLearner:
         }
 
         # Intensity indicators
-        intensity = ["so", "very", "deeply", "incredibly", "almost", "barely", "overwhelming", "crushing", "suffocating"]
+        intensity = ["so", "very", "deeply", "incredibly", "almost",
+                     "barely", "overwhelming", "crushing", "suffocating"]
         for word in intensity:
             if word in text_lower:
                 categories["intensity_words"].append(word)
 
         # Emotional states
-        states = ["feel", "felt", "feeling", "seem", "seemed", "appear", "sound", "taste", "smell"]
+        states = ["feel", "felt", "feeling", "seem",
+                  "seemed", "appear", "sound", "taste", "smell"]
         for word in states:
             if word in text_lower:
                 categories["state_words"].append(word)
 
         # Relational words
-        relations = ["with", "without", "toward", "away", "between", "among", "through"]
+        relations = ["with", "without", "toward",
+                     "away", "between", "among", "through"]
         for word in relations:
             if word in text_lower:
                 categories["relation_words"].append(word)
 
         # Temporal markers
-        times = ["now", "always", "never", "before", "after", "during", "while", "when", "yesterday", "tomorrow"]
+        times = ["now", "always", "never", "before", "after",
+                 "during", "while", "when", "yesterday", "tomorrow"]
         for word in times:
             if word in text_lower:
                 categories["time_words"].append(word)
 
         # Body/visceral language
-        body = ["heart", "gut", "breath", "chest", "throat", "hands", "trembling", "aching", "burning", "numb"]
+        body = ["heart", "gut", "breath", "chest", "throat",
+                "hands", "trembling", "aching", "burning", "numb"]
         for word in body:
             if word in text_lower:
                 categories["body_words"].append(word)
@@ -215,7 +228,8 @@ class GlyphLearner:
             cursor = conn.cursor()
 
             # Get all existing glyphs
-            cursor.execute("SELECT glyph_name, description FROM glyph_lexicon LIMIT 50")
+            cursor.execute(
+                "SELECT glyph_name, description FROM glyph_lexicon LIMIT 50")
             existing_glyphs = cursor.fetchall()
             conn.close()
 
@@ -296,7 +310,8 @@ class GlyphLearner:
         gates = self._map_signals_to_gates(signals)
 
         # 4. Determine primary signal
-        primary_signal = signals[0].get("signal", "unknown") if signals else "unknown"
+        primary_signal = signals[0].get(
+            "signal", "unknown") if signals else "unknown"
 
         return {
             "name": name,
@@ -322,7 +337,8 @@ class GlyphLearner:
 
         # Use NRC emotion if available
         if nrc_analysis:
-            primary_emotion = max(nrc_analysis.items(), key=lambda x: x[1])[0].title()
+            primary_emotion = max(nrc_analysis.items(),
+                                  key=lambda x: x[1])[0].title()
         else:
             primary_emotion = ""
 
@@ -576,16 +592,20 @@ class GlyphLearner:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT COUNT(*) FROM glyph_candidates WHERE validation_status = 'pending'")
+            cursor.execute(
+                "SELECT COUNT(*) FROM glyph_candidates WHERE validation_status = 'pending'")
             pending = cursor.fetchone()[0]
 
-            cursor.execute("SELECT COUNT(*) FROM glyph_candidates WHERE promoted_to_production = 1")
+            cursor.execute(
+                "SELECT COUNT(*) FROM glyph_candidates WHERE promoted_to_production = 1")
             promoted = cursor.fetchone()[0]
 
-            cursor.execute("SELECT COUNT(DISTINCT glyph_name) FROM glyph_usage_log")
+            cursor.execute(
+                "SELECT COUNT(DISTINCT glyph_name) FROM glyph_usage_log")
             unique_glyphs_used = cursor.fetchone()[0]
 
-            cursor.execute("SELECT COUNT(DISTINCT user_hash) FROM glyph_usage_log")
+            cursor.execute(
+                "SELECT COUNT(DISTINCT user_hash) FROM glyph_usage_log")
             unique_users = cursor.fetchone()[0]
 
             conn.close()

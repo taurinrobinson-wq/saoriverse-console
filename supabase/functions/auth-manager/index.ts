@@ -108,9 +108,9 @@ async function ensureUsersTable(admin: any) {
 // Create user account - bypass Supabase Auth completely
 async function createUser(data: any, admin: any): Promise<any> {
   try {
-    const { username, password, email, created_at } = data;
+    const { username, password, email, first_name, last_name, created_at } = data;
 
-    console.log("Creating user with custom table approach:", { username });
+    console.log("Creating user with custom table approach:", { username, first_name, last_name, email });
 
     // Hash the password using our consistent hashing
     const { hash: password_hash, salt } = await hashPassword(password);
@@ -137,11 +137,13 @@ async function createUser(data: any, admin: any): Promise<any> {
         password_hash,
         salt,
         email,
+        first_name,
+        last_name,
         created_at,
         last_login: null,
         is_active: true
       }])
-      .select('id, username, created_at')
+      .select('id, username, email, first_name, last_name, created_at')
       .single();
 
     if (error) {
