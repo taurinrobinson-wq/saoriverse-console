@@ -102,6 +102,22 @@ async function createUser(data: any, admin: any): Promise<any> {
       };
     }
 
+    // Check if email already exists (if email is provided)
+    if (email && email.trim()) {
+      const { data: existingEmailUser } = await admin
+        .from('users')
+        .select('id')
+        .eq('email', email.trim())
+        .single();
+
+      if (existingEmailUser) {
+        return {
+          success: false,
+          error: "Email address already exists"
+        };
+      }
+    }
+
     // Create new user (always include first_name / last_name)
     const insertPayload: any = {
       username,
