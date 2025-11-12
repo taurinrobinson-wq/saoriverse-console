@@ -224,37 +224,64 @@ class ConversationManager:
             return False, "Requests library not available"
 
         try:
-            url = f"{self.base_url}/rest/v1/conversations"
-            payload = {
+            # First, save/update conversation metadata in conversations table
+            conv_url = f"{self.base_url}/rest/v1/conversations"
+            conv_payload = {
                 'user_id': self.user_id,
                 'conversation_id': conversation_id,
                 'title': title,
                 'auto_name': auto_name or title,
                 'custom_name': custom_name,
                 'glyphs_triggered': glyphs_triggered or [],
-                'messages': messages,
                 'processing_mode': processing_mode,
                 'message_count': len(messages),
                 'updated_at': datetime.now().isoformat(),
                 'first_message': messages[0]['content'] if messages else None
             }
 
-            # Upsert: insert if new, update if exists
-            response = requests.post(
-                url,
+            # Upsert conversation metadata
+            conv_response = requests.post(
+                conv_url,
                 headers=self._get_headers(),
-                json=[payload],
+                json=[conv_payload],
                 timeout=10
             )
 
-            if response.status_code in (200, 201):
-                return True, "Conversation saved successfully"
-            else:
-                # Include response body for debugging
-                error_detail = response.text if response.text else "No error detail"
+            if conv_response.status_code not in (200, 201):
+                error_detail = conv_response.text if conv_response.text else "No error detail"
                 logger.error(
-                    f"Failed to save conversation: HTTP {response.status_code}, {error_detail}")
-                return False, f"Failed to save conversation (HTTP {response.status_code}): {error_detail}"
+                    f"Failed to save conversation metadata: HTTP {conv_response.status_code}, {error_detail}")
+                return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
+
+            # Then, save individual messages to conversation_messages table
+            msg_url = f"{self.base_url}/rest/v1/conversation_messages"
+            msg_payloads = []
+            for msg in messages:
+                msg_payload = {
+                    'user_id': self.user_id,
+                    'conversation_id': conversation_id,
+                    'role': msg.get('role', ''),
+                    'message': msg.get('content', ''),
+                    'first_name': msg.get('first_name', None),
+                    'timestamp': datetime.now().isoformat()
+                }
+                msg_payloads.append(msg_payload)
+
+            if msg_payloads:
+                msg_response = requests.post(
+                    msg_url,
+                    headers=self._get_headers(),
+                    json=msg_payloads,
+                    timeout=10
+                )
+
+                if msg_response.status_code not in (200, 201):
+                    error_detail = msg_response.text if msg_response.text else "No error detail"
+                    logger.error(
+                        f"Failed to save messages: HTTP {msg_response.status_code}, {error_detail}")
+                    return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+
+            return True, "Conversation saved successfully"
 
         except Exception as e:
             logger.error(f"Error saving conversation: {e}")
@@ -264,7 +291,7 @@ class ConversationManager:
         """
         Load all conversations for the user from Supabase.
 
-        Returns: List of conversations with id, title, updated_at, message_count
+        Returns: List of conversations with id, title, updated_at, message_count, messages
         """
         if not self.base_url or not self.supabase_key:
             return []
@@ -273,50 +300,75 @@ class ConversationManager:
             return []
 
         try:
-            url = f"{self.base_url}/rest/v1/conversations"
-            params = {
-                'select': 'conversation_id,title,auto_name,custom_name,glyphs_triggered,messages,processing_mode,message_count,updated_at,created_at',
+            # First, load conversation metadata
+            conv_url = f"{self.base_url}/rest/v1/conversations"
+            conv_params = {
+                'select': 'conversation_id,title,auto_name,custom_name,glyphs_triggered,processing_mode,message_count,updated_at,created_at',
                 'user_id': f'eq.{self.user_id}',
                 'archived': 'eq.false',
                 'order': 'updated_at.desc',
                 'limit': '100'
             }
 
-            response = requests.get(
-                url,
+            conv_response = requests.get(
+                conv_url,
                 headers=self._get_headers(),
-                params=params,
+                params=conv_params,
                 timeout=10
             )
 
-            if response.status_code == 200:
-                conversations = response.json()
-                # Process conversations for proper data types
-                if isinstance(conversations, list):
-                    for c in conversations:
-                        # Ensure glyphs_triggered is a list
-                        if not isinstance(c.get('glyphs_triggered'), list):
-                            c['glyphs_triggered'] = []
-
-                        # Parse messages if it's stored as JSON string (backward compatibility)
-                        if isinstance(c.get('messages'), str):
-                            try:
-                                c['messages'] = json.loads(c['messages'])
-                            except:
-                                c['messages'] = []
-                        elif not isinstance(c.get('messages'), list):
-                            c['messages'] = []
-
-                        # Backward compatibility shim: translate any legacy "ai_preferred"
-                        # processing_mode values into the new representation where
-                        # processing_mode='hybrid' and prefer_ai=True.
-                        pm = c.get('processing_mode')
-                        if pm == 'ai_preferred':
-                            c['processing_mode'] = 'hybrid'
-                            c['prefer_ai'] = True
-                return conversations if isinstance(conversations, list) else []
-            else:
+            if conv_response.status_code != 200:
                 return []
+
+            conversations = conv_response.json()
+            if not isinstance(conversations, list):
+                return []
+
+            # For each conversation, load its messages
+            for conv in conversations:
+                conv_id = conv['conversation_id']
+                msg_url = f"{self.base_url}/rest/v1/conversation_messages"
+                msg_params = {
+                    'select': 'role,message,first_name,timestamp',
+                    'conversation_id': f'eq.{conv_id}',
+                    'user_id': f'eq.{self.user_id}',
+                    'order': 'timestamp.asc'
+                }
+
+                msg_response = requests.get(
+                    msg_url,
+                    headers=self._get_headers(),
+                    params=msg_params,
+                    timeout=10
+                )
+
+                if msg_response.status_code == 200:
+                    messages = msg_response.json()
+                    # Convert to the expected format
+                    conv['messages'] = [
+                        {
+                            'role': msg['role'],
+                            'content': msg['message'],
+                            'first_name': msg.get('first_name')
+                        }
+                        for msg in messages
+                    ]
+                else:
+                    conv['messages'] = []
+
+                # Ensure glyphs_triggered is a list
+                if not isinstance(conv.get('glyphs_triggered'), list):
+                    conv['glyphs_triggered'] = []
+
+                # Backward compatibility shim: translate any legacy "ai_preferred"
+                # processing_mode values into the new representation where
+                # processing_mode='hybrid' and prefer_ai=True.
+                pm = conv.get('processing_mode')
+                if pm == 'ai_preferred':
+                    conv['processing_mode'] = 'hybrid'
+                    conv['prefer_ai'] = True
+
+            return conversations
 
         except Exception as e:
             logger.debug(f"Error loading conversations: {e}")
@@ -335,39 +387,79 @@ class ConversationManager:
             return None
 
         try:
-            url = f"{self.base_url}/rest/v1/conversations"
-            params = {
+            # Load conversation metadata
+            conv_url = f"{self.base_url}/rest/v1/conversations"
+            conv_params = {
                 'conversation_id': f'eq.{conversation_id}',
                 'user_id': f'eq.{self.user_id}'
             }
 
-            response = requests.get(
-                url,
+            conv_response = requests.get(
+                conv_url,
                 headers=self._get_headers(),
-                params=params,
+                params=conv_params,
                 timeout=10
             )
 
-            if response.status_code == 200:
-                conversations = response.json()
-                if conversations:
-                    conv = conversations[0]
-                    # Ensure glyphs_triggered is a list
-                    if not isinstance(conv.get('glyphs_triggered'), list):
-                        conv['glyphs_triggered'] = []
+            if conv_response.status_code != 200:
+                return None
 
-                    # Parse messages if it's stored as JSON string (backward compatibility)
-                    if isinstance(conv.get('messages'), str):
-                        conv['messages'] = json.loads(conv['messages'])
-                    elif not isinstance(conv.get('messages'), list):
-                        conv['messages'] = []
+            conversations = conv_response.json()
+            if not conversations:
+                return None
 
-                    # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
-                    if conv.get('processing_mode') == 'ai_preferred':
-                        conv['processing_mode'] = 'hybrid'
-                        conv['prefer_ai'] = True
-                    return conv
-            return None
+            conv = conversations[0]
+
+            # Load messages for this conversation
+            msg_url = f"{self.base_url}/rest/v1/conversation_messages"
+            msg_params = {
+                'select': 'role,message,first_name,timestamp',
+                'conversation_id': f'eq.{conversation_id}',
+                'user_id': f'eq.{self.user_id}',
+                'order': 'timestamp.asc'
+            }
+
+            msg_response = requests.get(
+                msg_url,
+                headers=self._get_headers(),
+                params=msg_params,
+                timeout=10
+            )
+
+            if msg_response.status_code == 200:
+                messages = msg_response.json()
+                # Convert to expected format
+                conv['messages'] = [
+                    {
+                        'role': msg['role'],
+                        'content': msg['message'],
+                        'first_name': msg.get('first_name')
+                    }
+                    for msg in messages
+                ]
+            else:
+                conv['messages'] = []
+
+            # Ensure glyphs_triggered is a list
+            if not isinstance(conv.get('glyphs_triggered'), list):
+                conv['glyphs_triggered'] = []
+
+            # Parse messages if it's stored as JSON string (backward compatibility)
+            # (Though now messages come from separate table, this is for legacy)
+            if isinstance(conv.get('messages'), str):
+                try:
+                    conv['messages'] = json.loads(conv['messages'])
+                except:
+                    conv['messages'] = []
+            elif not isinstance(conv.get('messages'), list):
+                conv['messages'] = []
+
+            # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
+            if conv.get('processing_mode') == 'ai_preferred':
+                conv['processing_mode'] = 'hybrid'
+                conv['prefer_ai'] = True
+
+            return conv
 
         except Exception as e:
             logger.debug(f"Error loading conversation: {e}")
