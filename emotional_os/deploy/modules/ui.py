@@ -2090,16 +2090,33 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
 
-                    # Update learning statistics
+                    # Update learning statistics (defensive access to different evolution result shapes)
                     st.session_state['learning_stats']['exchanges_processed'] += 1
-                    if evolution_result['learning_result'].get('learned_to_user', False):
+                    # Support multiple possible shapes: top-level 'learning_result' or
+                    # nested under pipeline_stages.hybrid_learning.learning_result
+                    lr = evolution_result.get('learning_result') if isinstance(
+                        evolution_result, dict) else None
+                    if not lr:
+                        lr = evolution_result.get('pipeline_stages', {}).get('hybrid_learning', {}).get(
+                            'learning_result') if isinstance(evolution_result, dict) else None
+
+                    if lr and lr.get('learned_to_user', False):
                         st.session_state['learning_stats']['signals_learned'] += len(
-                            evolution_result.get('emotional_signals', [])
+                            evolution_result.get('emotional_signals', []) if isinstance(
+                                evolution_result, dict) else []
                         )
 
-                    # Check if new glyphs were generated
-                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
-                        'new_glyphs_generated', [])
+                    # Check if new glyphs were generated (support multiple keys/shapes)
+                    new_glyphs = []
+                    # 1) top-level key used by some implementations
+                    if isinstance(evolution_result, dict) and evolution_result.get('new_glyphs_generated'):
+                        new_glyphs = evolution_result.get(
+                            'new_glyphs_generated', [])
+                    # 2) pipeline_stages glyph_generation -> new_glyphs
+                    if not new_glyphs:
+                        new_glyphs = evolution_result.get('pipeline_stages', {}).get('glyph_generation', {}).get(
+                            'new_glyphs', []) if isinstance(evolution_result, dict) else []
+
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
                         if 'new_glyphs_this_session' not in st.session_state:
@@ -2192,15 +2209,50 @@ def render_main_app():
                     detected_glyphs = st.session_state.get(
                         'conversation_glyphs', [])
 
-                # Save to database with conversation manager including glyph information
-                messages = st.session_state[conversation_key]
+                # Normalize messages into the format ConversationManager expects.
+                # Older UI stored turns as dicts with 'user' and 'assistant' keys
+                # (both in one dict). ConversationManager expects a list of
+                # per-role messages with a 'content' key. Build a normalized
+                # list while preserving order.
+                raw_messages = st.session_state[conversation_key]
+                normalized_messages = []
+                for turn in raw_messages:
+                    # If this entry already looks normalized, use it
+                    if isinstance(turn, dict) and 'content' in turn and 'role' in turn:
+                        normalized_messages.append(turn)
+                        continue
+
+                    # Legacy combined-turn format: {'user': ..., 'assistant': ...}
+                    if isinstance(turn, dict) and 'user' in turn and 'assistant' in turn:
+                        # Append user then assistant as separate messages
+                        normalized_messages.append({'role': 'user', 'content': turn.get(
+                            'user', ''), 'first_name': turn.get('first_name')})
+                        normalized_messages.append(
+                            {'role': 'assistant', 'content': turn.get('assistant', '')})
+                        continue
+
+                    # Fallback: try to map known keys
+                    if isinstance(turn, dict) and 'user' in turn:
+                        normalized_messages.append(
+                            {'role': 'user', 'content': turn.get('user', '')})
+                    elif isinstance(turn, dict) and 'assistant' in turn:
+                        normalized_messages.append(
+                            {'role': 'assistant', 'content': turn.get('assistant', '')})
+                    else:
+                        # Unknown format: stringify and store as user message
+                        try:
+                            txt = str(turn)
+                        except Exception:
+                            txt = ''
+                        normalized_messages.append(
+                            {'role': 'user', 'content': txt})
+
                 success, message = manager.save_conversation(
                     conversation_id=conversation_id,
                     title=title,
-                    messages=messages,
+                    messages=normalized_messages,
                     processing_mode=processing_mode,
-                    auto_name=title if len(
-                        st.session_state[conversation_key]) == 1 else None,
+                    auto_name=title if len(raw_messages) == 1 else None,
                     glyphs_triggered=detected_glyphs
                 )
 
