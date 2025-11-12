@@ -438,6 +438,10 @@ class SaoynxAuthentication:
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
+                    # Store the JWT token for authenticated API calls
+                    if data.get("token") or data.get("access_token"):
+                        st.session_state.user_jwt_token = data.get(
+                            "token") or data.get("access_token")
                     st.session_state.session_expires = (
                         datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
                     session_token = self.create_session_token(
@@ -502,6 +506,10 @@ class SaoynxAuthentication:
                         st.session_state.authenticated = True
                         st.session_state.user_id = user_id
                         st.session_state.username = username
+                        # Store the JWT token for authenticated API calls
+                        if data.get("token") or data.get("access_token"):
+                            st.session_state.user_jwt_token = data.get(
+                                "token") or data.get("access_token")
                         if data.get('first_name'):
                             st.session_state['first_name'] = data.get(
                                 'first_name')
@@ -542,6 +550,7 @@ class SaoynxAuthentication:
         st.session_state.authenticated = False
         st.session_state.user_id = None
         st.session_state.username = None
+        st.session_state.user_jwt_token = None  # Clear JWT token
         st.session_state.session_expires = None
         if "session_token" in st.query_params:
             del st.query_params["session_token"]
