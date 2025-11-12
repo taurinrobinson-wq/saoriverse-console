@@ -125,7 +125,8 @@ async function createUser(data: any, admin: any): Promise<any> {
       .single();
 
     if (error) {
-      console.error("User creation error:", error);
+      console.error("User creation error:", JSON.stringify(error, null, 2));
+      console.error("Insert payload was:", JSON.stringify(insertPayload, null, 2));
       return {
         success: false,
         error: "Failed to create user account"
