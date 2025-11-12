@@ -438,6 +438,9 @@ class SaoynxAuthentication:
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
+                    st.session_state.first_name = data.get("first_name")
+                    st.session_state.last_name = data.get("last_name")
+                    st.session_state.email = data.get("email")
                     # Store the JWT token for authenticated API calls
                     if data.get("token") or data.get("access_token"):
                         st.session_state.user_jwt_token = data.get(

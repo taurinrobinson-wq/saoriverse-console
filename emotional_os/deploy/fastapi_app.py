@@ -11,7 +11,6 @@ from datetime import datetime, timedelta
 
 import requests
 import uvicorn
-from admin_router import admin_router
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -65,7 +64,8 @@ async def force_https(request, call_next):
     return response
 
 # Include routers
-app.include_router(admin_router)
+# Note: admin_router commented out - not needed for main functionality
+# app.include_router(admin_router)
 
 # Debug route to check what routes are registered
 
@@ -73,7 +73,7 @@ app.include_router(admin_router)
 @app.get("/debug/routes")
 async def debug_routes():
     """Debug endpoint to see all registered routes"""
-    return {"admin_router_included": "admin_router" in str(app.routes), "total_routes": len(app.routes)}
+    return {"total_routes": len(app.routes)}
 
 # Static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
