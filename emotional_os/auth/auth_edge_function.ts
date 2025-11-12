@@ -107,9 +107,9 @@ async function createUser(data: any, admin: any): Promise<any> {
       username,
       password_hash: final_password_hash,
       salt: final_salt,
-      email: email || null,
-      first_name: first_name || null,
-      last_name: last_name || null,
+      email: email ?? '',
+      first_name: first_name ?? '',
+      last_name: last_name ?? '',
       created_at,
       last_login: null,
       is_active: true
