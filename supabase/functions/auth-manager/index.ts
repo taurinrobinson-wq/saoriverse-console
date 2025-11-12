@@ -112,6 +112,51 @@ async function createUser(data: any, admin: any): Promise<any> {
 
     console.log("Creating user with custom table approach:", { username, first_name, last_name, email });
 
+    // Validate required fields
+    if (!username || !username.trim()) {
+      return {
+        success: false,
+        error: "Username is required"
+      };
+    }
+
+    if (!password || !password.trim()) {
+      return {
+        success: false,
+        error: "Password is required"
+      };
+    }
+
+    if (!first_name || !first_name.trim()) {
+      return {
+        success: false,
+        error: "First name is required"
+      };
+    }
+
+    if (!last_name || !last_name.trim()) {
+      return {
+        success: false,
+        error: "Last name is required"
+      };
+    }
+
+    if (!email || !email.trim()) {
+      return {
+        success: false,
+        error: "Email is required"
+      };
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      return {
+        success: false,
+        error: "Please enter a valid email address"
+      };
+    }
+
     // Hash the password using our consistent hashing
     const { hash: password_hash, salt } = await hashPassword(password);
 
@@ -129,16 +174,16 @@ async function createUser(data: any, admin: any): Promise<any> {
       };
     }
 
-    // Create new user
+    // Create new user with trimmed values
     const { data: newUser, error } = await admin
       .from('users')
       .insert([{
-        username,
+        username: username.trim(),
         password_hash,
         salt,
-        email,
-        first_name,
-        last_name,
+        email: email.trim(),
+        first_name: first_name.trim(),
+        last_name: last_name.trim(),
         created_at,
         last_login: null,
         is_active: true
@@ -308,6 +353,18 @@ Deno.serve(async (req: any) => {
   if (!action) {
     return new Response(JSON.stringify({ error: "Missing action parameter" }), {
       status: 400, headers: corsHeaders
+    });
+  }
+
+  // Debug: log incoming body for create_user action
+  if (action === "create_user") {
+    console.log("DEBUG: Incoming request body for create_user:", JSON.stringify(body, null, 2));
+    console.log("DEBUG: Extracted fields:", {
+      username: body.username,
+      password: body.password ? "[REDACTED]" : undefined,
+      first_name: body.first_name,
+      last_name: body.last_name,
+      email: body.email
     });
   }
 
