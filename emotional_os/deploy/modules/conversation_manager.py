@@ -15,12 +15,17 @@ import os
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import re
+import base64
 
 try:
     import requests
 except Exception:
     requests = None
 
+# Import Streamlit if available. If not, provide a minimal stub so that
+# static import checks or CLI tools can import this module without having
+# Streamlit installed. The real Streamlit will be used at runtime when
+# the app runs in its proper environment.
 import streamlit as st
 
 logger = logging.getLogger(__name__)
@@ -141,7 +146,7 @@ def generate_auto_name_with_glyphs(first_message: str, max_length: int = 50) -> 
         return fallback_name, []
 
 
-def generate_auto_name(first_message: str, max_length: int = 50) -> str:
+def generate_auto_name(first_message: str, first_name: Optional[str] = None, max_length: int = 50) -> str:
     """
     Generate a conversation name from the first user message using glyph-based naming.
 
@@ -150,6 +155,14 @@ def generate_auto_name(first_message: str, max_length: int = 50) -> str:
     - Top 3 glyphs detected from the first message
     """
     name, _ = generate_auto_name_with_glyphs(first_message, max_length)
+    # If a first_name was provided, prefix possessive form: "Ava's Tuesday Flame"
+    if first_name:
+        # sanitize: only take the first token of the first name
+        try:
+            fn = str(first_name).strip().split()[0]
+            return f"{fn}'s {name}"
+        except Exception:
+            return f"{first_name}'s {name}"
     return name
 
 
@@ -260,6 +273,74 @@ class ConversationManager:
                 'Prefer': 'return=representation'
             }
 
+    def _extract_user_id_from_jwt(self, auth_value: Optional[str]) -> Optional[str]:
+        """Try to extract a user id from a JWT-like token without verification.
+
+        Looks for common claims like 'sub', 'user_id', or 'uid' in the token payload.
+        This is best-effort and used only as a fallback when session user_id
+        isn't available.
+        """
+        try:
+            if not auth_value:
+                return None
+            # Strip Bearer prefix if present
+            token = auth_value.split(
+                ' ', 1)[1] if ' ' in auth_value else auth_value
+            if '.' not in token:
+                return None
+            # JWT payload is the middle segment
+            parts = token.split('.')
+            if len(parts) < 2:
+                return None
+            payload_b64 = parts[1]
+            # Fix padding
+            rem = len(payload_b64) % 4
+            if rem:
+                payload_b64 += '=' * (4 - rem)
+            decoded = base64.urlsafe_b64decode(payload_b64.encode('utf-8'))
+            payload = json.loads(decoded.decode('utf-8'))
+            # Common claim names
+            for k in ('sub', 'user_id', 'uid', 'id'):
+                if k in payload and payload.get(k):
+                    return str(payload.get(k))
+            # Try email as fallback (not ideal but better than nothing)
+            if payload.get('email'):
+                return str(payload.get('email'))
+        except Exception:
+            return None
+        return None
+
+    def _get_effective_user_id(self, headers: Dict) -> Optional[str]:
+        """Resolve the user id to use when saving/loading conversations.
+
+        Priority:
+        1. Explicit `self.user_id` passed to the manager
+        2. `st.session_state['user_id']` if available
+        3. Extract from Authorization/apikey JWT payload (best-effort)
+        """
+        # 1. Explicit
+        if self.user_id:
+            return self.user_id
+
+        # 2. Session state
+        try:
+            if hasattr(st, 'session_state') and st.session_state.get('user_id'):
+                return st.session_state.get('user_id')
+        except Exception:
+            pass
+
+        # 3. Try to extract from headers (Authorization or apikey)
+        try:
+            auth = headers.get('Authorization') or headers.get('apikey')
+            if auth:
+                uid = self._extract_user_id_from_jwt(auth)
+                if uid:
+                    return uid
+        except Exception:
+            pass
+
+        return None
+
     def save_conversation(self, conversation_id: str, title: str, messages: List[Dict],
                           processing_mode: str = "hybrid", auto_name: Optional[str] = None,
                           custom_name: Optional[str] = None, glyphs_triggered: Optional[List[str]] = None) -> Tuple[bool, str]:
@@ -284,13 +365,31 @@ class ConversationManager:
             return False, "Requests library not available"
 
         try:
-            # First, save/update conversation metadata in conversations table
+            # Build headers and determine effective user id before saving
             conv_url = f"{self.base_url}/rest/v1/conversations"
+            headers = self._get_headers()
+            effective_user_id = self._get_effective_user_id(headers)
+            if not effective_user_id:
+                logger.error("No user_id available for conversation save (self.user_id=%s, session=%s)",
+                             self.user_id, getattr(st, 'session_state', {}).get('user_id', None) if hasattr(st, 'session_state') else None)
+                return False, "Failed to save conversation: user_id is missing"
+
+            # Ensure we always provide a non-null title (DB requires title NOT NULL).
+            # Prefer explicit `title`, then `auto_name`, then generate from first message.
+            try:
+                generated_auto = auto_name or (generate_auto_name(messages[0].get('content') if messages else '',
+                                                                  st.session_state.get('first_name') if hasattr(st, 'session_state') else None))
+            except Exception:
+                generated_auto = auto_name or (messages[0].get(
+                    'content')[:50] if messages else 'New Conversation')
+
+            chosen_title = title or generated_auto or 'New Conversation'
+
             conv_payload = {
-                'user_id': self.user_id,
+                'user_id': effective_user_id,
                 'conversation_id': conversation_id,
-                'title': title,
-                'auto_name': auto_name or title,
+                'title': chosen_title,
+                'auto_name': generated_auto,
                 'custom_name': custom_name,
                 'glyphs_triggered': glyphs_triggered or [],
                 'processing_mode': processing_mode,
@@ -300,8 +399,6 @@ class ConversationManager:
             }
 
             # Upsert conversation metadata
-            # Build headers and log masked debug info before calling the API
-            headers = self._get_headers()
             try:
                 logger.info("Saving conversation metadata to %s apikey=%s Authorization=%s",
                             conv_url, _mask_key(headers.get('apikey')), _mask_key(headers.get('Authorization')))
@@ -326,11 +423,13 @@ class ConversationManager:
             msg_payloads = []
             for msg in messages:
                 msg_payload = {
-                    'user_id': self.user_id,
+                    'user_id': effective_user_id,
                     'conversation_id': conversation_id,
                     'role': msg.get('role', ''),
                     'message': msg.get('content', ''),
-                    'first_name': msg.get('first_name', None),
+                    # Prefer an explicit first_name on the message (UI may include it),
+                    # otherwise fall back to session state's first_name or username.
+                    'first_name': msg.get('first_name') or (st.session_state.get('first_name') if hasattr(st, 'session_state') else None) or (st.session_state.get('username') if hasattr(st, 'session_state') else None),
                     'timestamp': datetime.now().isoformat()
                 }
                 msg_payloads.append(msg_payload)
@@ -356,6 +455,23 @@ class ConversationManager:
                     logger.error(
                         f"Failed to save messages: HTTP {msg_response.status_code}, {error_detail}")
                     return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+
+            # On success, update session state so UI can immediately select
+            # and display the newly created conversation without an extra step.
+            try:
+                # Determine display name for UI: prefer custom_name -> auto_name -> title
+                display_name = (custom_name or conv_payload.get(
+                    'auto_name') or conv_payload.get('title') or 'Untitled Conversation')
+                if hasattr(st, 'session_state'):
+                    # Set current conversation identifiers so the sidebar shows selection
+                    st.session_state['current_conversation_id'] = conversation_id
+                    st.session_state['selected_conversation'] = conversation_id
+                    st.session_state['conversation_title'] = display_name
+                    # Mark conversation as named so auto-naming doesn't run again
+                    st.session_state['conversation_named'] = True
+            except Exception:
+                # Non-fatal: if session_state isn't available or writable, continue
+                pass
 
             return True, "Conversation saved successfully"
 
