@@ -195,6 +195,16 @@ def inject_css(css_path: str) -> None:
         return
 
 
+# Inject repository-scoped auth overrides (best-effort). The CSS file lives
+# in ../static/auth_override.css relative to this modules/ directory. If the
+# file is missing the function is silent so imports remain safe.
+try:
+    inject_css("../static/auth_override.css")
+except Exception:
+    # Keep imports safe in minimal environments
+    pass
+
+
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
@@ -724,6 +734,25 @@ def render_main_app():
                 pass
     except Exception:
         pass
+    # Session-level telemetry toggle (lightweight): attach a telemetry handler for this Streamlit session
+    try:
+        from emotional_os.core import signal_parser as _sp
+        # initialize session flag if missing
+        if 'enable_telemetry' not in st.session_state:
+            st.session_state['enable_telemetry'] = False
+        with st.expander('Developer: Telemetry', expanded=False):
+            enable_tel = st.checkbox('Enable Telemetry (show parse/selection events)',
+                                     value=st.session_state.get('enable_telemetry', False))
+            if enable_tel != st.session_state.get('enable_telemetry'):
+                st.session_state['enable_telemetry'] = enable_tel
+                try:
+                    _sp.set_telemetry(bool(enable_tel))
+                except Exception:
+                    # best-effort: do not break the UI if telemetry cannot be toggled
+                    pass
+    except Exception:
+        # If signal_parser isn't available in this environment, skip the UI control
+        pass
     # Defensive client-side guard for third-party DOM libraries (e.g., jQuery)
     # Some compiled frontend code can call jQuery($) with an undefined or
     # otherwise-invalid first argument during quick DOM swaps (theme toggles).
@@ -1019,6 +1048,33 @@ def render_main_app():
                         if 'persist_history' not in st.session_state:
                             st.session_state['persist_history'] = prefs.get(
                                 'persist_history', True)
+
+                    # CONVERSATION CONTINUITY: Auto-load most recent conversation if available
+                    # Only do this if user hasn't explicitly selected a conversation or started a new one
+                    if ('selected_conversation' not in st.session_state and
+                        'conversation_title' not in st.session_state and
+                            'conversation_history' not in st.session_state):
+                        try:
+                            conversations = mgr.load_conversations()
+                            if conversations:
+                                # Load the most recent conversation (first in list)
+                                recent_conv = conversations[0]
+                                st.session_state['selected_conversation'] = recent_conv['conversation_id']
+                                st.session_state['conversation_title'] = recent_conv['title']
+
+                                # Load the conversation messages if available
+                                if recent_conv.get('messages'):
+                                    # Convert the messages to the expected format
+                                    messages = []
+                                    for msg in recent_conv['messages']:
+                                        if isinstance(msg, dict):
+                                            messages.append(msg)
+                                    if messages:
+                                        st.session_state['conversation_history'] = messages
+
+                        except Exception:
+                            # If conversation loading fails, just continue with a new conversation
+                            pass
                         if 'persist_confirmed' not in st.session_state:
                             st.session_state['persist_confirmed'] = prefs.get(
                                 'persist_confirmed', False)
@@ -2129,21 +2185,32 @@ def render_main_app():
                 # Just added first exchange
                 if len(st.session_state[conversation_key]) == 1:
                     if generate_auto_name:
-                        title = generate_auto_name(user_input)
+                        # Import the enhanced function
+                        from emotional_os.deploy.modules.conversation_manager import generate_auto_name_with_glyphs
+                        auto_name, detected_glyphs = generate_auto_name_with_glyphs(
+                            user_input)
+                        title = auto_name
                         st.session_state['conversation_title'] = title
+                        st.session_state['conversation_glyphs'] = detected_glyphs
                     else:
                         title = "New Conversation"
+                        detected_glyphs = []
                 else:
                     title = st.session_state.get(
                         'conversation_title', 'New Conversation')
+                    detected_glyphs = st.session_state.get(
+                        'conversation_glyphs', [])
 
-                # Save to database with conversation manager
+                # Save to database with conversation manager including glyph information
                 messages = st.session_state[conversation_key]
                 success, message = manager.save_conversation(
                     conversation_id=conversation_id,
                     title=title,
                     messages=messages,
-                    processing_mode=processing_mode
+                    processing_mode=processing_mode,
+                    auto_name=title if len(
+                        st.session_state[conversation_key]) == 1 else None,
+                    glyphs_triggered=detected_glyphs
                 )
 
                 if not success:

@@ -1,4 +1,14 @@
-import { createClient } from '@supabase/supabase-js';
+// Dynamically import the Supabase JS client (npm) so this module can run under
+// Deno with npm package resolution. Top-level await is used to fetch the
+// package if available.
+let createClient: any;
+try {
+    const supabasePkg = await import('npm:@supabase/supabase-js');
+    createClient = supabasePkg.createClient;
+} catch (err) {
+    console.error('Failed to import @supabase/supabase-js in supabaseRlsClient:', err);
+    throw err;
+}
 
 function getEnv() {
     // Works both in Deno (Edge Functions) and Node (server)
