@@ -254,7 +254,16 @@ class SaoynxAuthentication:
             "Username *", key=key_user, help="Required field")
         password = st.text_input(
             "Password *", type="password", key=key_pass, help="Required field")
+
+        # Debug: log the st.text_input return values
+        print(
+            f"DEBUG: st.text_input values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}")
+
         if st.button("Register", key=key_btn):
+            # Debug: log the form values before validation
+            print(
+                f"DEBUG: Form values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}")
+
             # Client-side validation for required fields
             if not first_name or not first_name.strip():
                 st.error("First name is required")
@@ -277,8 +286,26 @@ class SaoynxAuthentication:
                 st.error("Please enter a valid email address")
                 return
 
+            # Debug: log values after validation
+            print(
+                f"DEBUG: After validation - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}")
+
+            payload = {
+                "action": "create_user",
+                "username": username,
+                "password": password,
+                "first_name": first_name,
+                "last_name": last_name,
+                "email": email,
+                "created_at": datetime.datetime.now().isoformat()
+            }
+
+            # Debug: log the payload
+            print(f"DEBUG: Payload being sent: {payload}")
+
             result = self.create_user(
                 username, password, first_name=first_name.strip(), last_name=last_name.strip(), email=email.strip())
+
             if result["success"]:
                 st.session_state['post_login_message'] = result.get(
                     "message", "Account created")
