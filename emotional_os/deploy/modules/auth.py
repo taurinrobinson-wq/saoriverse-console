@@ -397,6 +397,53 @@ class SaoynxAuthentication:
                     st.session_state.user_id = data["user_id"]
                     st.session_state.username = data["username"]
                     st.session_state.session_expires = data["expires"]
+                    # If we don't already have the user's first/last name in
+                    # the session (tokens only carry username+user_id), try
+                    # to fetch the profile from Supabase so UI can show the
+                    # proper first name instead of falling back to username.
+                    try:
+                        if (self.supabase_configured
+                                and not st.session_state.get('first_name')):
+                            # Use service key from secrets to read the users table
+                            profile_url = f"{self.supabase_url}/rest/v1/users"
+                            headers = {
+                                'apikey': self.supabase_key,
+                                'Authorization': f'Bearer {self.supabase_key}',
+                                'Accept': 'application/json'
+                            }
+                            # Query by id (exact match). Use select to limit fields.
+                            resp = requests.get(
+                                profile_url,
+                                headers=headers,
+                                params={
+                                    'id': f'eq.{data.get("user_id")}',
+                                    'select': 'first_name,last_name,email,username'
+                                },
+                                timeout=6
+                            )
+                            if resp and resp.status_code == 200:
+                                try:
+                                    rows = resp.json()
+                                    if isinstance(rows, list) and rows:
+                                        profile = rows[0]
+                                        if profile.get('first_name'):
+                                            st.session_state['first_name'] = profile.get(
+                                                'first_name')
+                                        if profile.get('last_name'):
+                                            st.session_state['last_name'] = profile.get(
+                                                'last_name')
+                                        if profile.get('email'):
+                                            st.session_state['email'] = profile.get(
+                                                'email')
+                                        # ensure username is consistent
+                                        if profile.get('username'):
+                                            st.session_state['username'] = profile.get(
+                                                'username')
+                                except Exception:
+                                    pass
+                    except Exception:
+                        # Non-fatal: don't block session init if profile fetch fails
+                        pass
                 else:
                     if "session_token" in st.query_params:
                         del st.query_params["session_token"]

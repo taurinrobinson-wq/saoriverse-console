@@ -1007,10 +1007,451 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-11-12T21:48:40.708850"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Serenity & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "serenity",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and sensuality present here",
+      "narrative_hook": "A story where serenity meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:06:42.486989"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Serenity & Intimacy",
+      "symbol": "\ud83d\udcab\u2764",
+      "core_emotions": [
+        "serenity",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "intimacy",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and intimacy present here",
+      "narrative_hook": "A story where serenity meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:06:42.488752"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Serenity & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "serenity",
+        "longing"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and longing present here",
+      "narrative_hook": "A story where serenity meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:06:42.490854"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_4",
+      "name": "Sensuality & Intimacy",
+      "symbol": "\ud83c\udf39\u2764",
+      "core_emotions": [
+        "sensuality",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and intimacy present here",
+      "narrative_hook": "A story where sensuality meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:06:42.492966"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_5",
+      "name": "Sensuality & Longing",
+      "symbol": "\ud83c\udf39\ud83c\udfbb",
+      "core_emotions": [
+        "sensuality",
+        "longing"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and longing present here",
+      "narrative_hook": "A story where sensuality meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:06:42.495245"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_6",
+      "name": "Intimacy & Longing",
+      "symbol": "\u2764\ud83c\udfbb",
+      "core_emotions": [
+        "intimacy",
+        "longing"
+      ],
+      "associated_keywords": [
+        "intimacy",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the intimacy and longing present here",
+      "narrative_hook": "A story where intimacy meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:06:42.497818"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Longing & Serenity",
+      "symbol": "\ud83c\udfbb\ud83d\udcab",
+      "core_emotions": [
+        "longing",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "longing",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and serenity present here",
+      "narrative_hook": "A story where longing meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:22:10.545988"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Longing & Intimacy",
+      "symbol": "\ud83c\udfbb\u2764",
+      "core_emotions": [
+        "longing",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "longing",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and intimacy present here",
+      "narrative_hook": "A story where longing meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:22:10.547997"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Longing & Sensuality",
+      "symbol": "\ud83c\udfbb\ud83c\udf39",
+      "core_emotions": [
+        "longing",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "longing",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and sensuality present here",
+      "narrative_hook": "A story where longing meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:22:10.550755"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_4",
+      "name": "Serenity & Intimacy",
+      "symbol": "\ud83d\udcab\u2764",
+      "core_emotions": [
+        "serenity",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and intimacy present here",
+      "narrative_hook": "A story where serenity meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:22:10.553878"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_5",
+      "name": "Serenity & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "serenity",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and sensuality present here",
+      "narrative_hook": "A story where serenity meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:22:10.556555"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_6",
+      "name": "Intimacy & Sensuality",
+      "symbol": "\u2764\ud83c\udf39",
+      "core_emotions": [
+        "intimacy",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "intimacy",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the intimacy and sensuality present here",
+      "narrative_hook": "A story where intimacy meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:22:10.559986"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Solitude & Nostalgia",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "solitude",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "solitude",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the solitude and nostalgia present here",
+      "narrative_hook": "A story where solitude meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:43:18.780624"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Solitude & Serenity",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "solitude",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "solitude",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the solitude and serenity present here",
+      "narrative_hook": "A story where solitude meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:43:18.783762"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Nostalgia & Serenity",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "nostalgia",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and serenity present here",
+      "narrative_hook": "A story where nostalgia meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T22:43:18.786689"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Serenity & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "serenity",
+        "longing"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and longing present here",
+      "narrative_hook": "A story where serenity meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T23:43:03.015457"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Serenity & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "serenity",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and sensuality present here",
+      "narrative_hook": "A story where serenity meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T23:43:03.019315"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Serenity & Intimacy",
+      "symbol": "\ud83d\udcab\u2764",
+      "core_emotions": [
+        "serenity",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and intimacy present here",
+      "narrative_hook": "A story where serenity meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T23:43:03.023645"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_4",
+      "name": "Longing & Sensuality",
+      "symbol": "\ud83c\udfbb\ud83c\udf39",
+      "core_emotions": [
+        "longing",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "longing",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and sensuality present here",
+      "narrative_hook": "A story where longing meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T23:43:03.026871"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_5",
+      "name": "Longing & Intimacy",
+      "symbol": "\ud83c\udfbb\u2764",
+      "core_emotions": [
+        "longing",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "longing",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and intimacy present here",
+      "narrative_hook": "A story where longing meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T23:43:03.032243"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_6",
+      "name": "Sensuality & Intimacy",
+      "symbol": "\ud83c\udf39\u2764",
+      "core_emotions": [
+        "sensuality",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and intimacy present here",
+      "narrative_hook": "A story where sensuality meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-12T23:43:03.035235"
     }
   ],
   "metadata": {
-    "total_discovered": 48,
-    "last_updated": "2025-11-12T21:48:40.709395"
+    "total_discovered": 69,
+    "last_updated": "2025-11-12T23:43:03.035420"
   }
 }
