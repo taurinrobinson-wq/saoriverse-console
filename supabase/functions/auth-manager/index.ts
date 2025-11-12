@@ -108,7 +108,18 @@ async function ensureUsersTable(admin: any) {
 // Create user account - bypass Supabase Auth completely
 async function createUser(data: any, admin: any): Promise<any> {
   try {
+    console.log("DEBUG: createUser called with data:", JSON.stringify(data, null, 2));
+
     const { username, password, email, first_name, last_name, created_at } = data;
+
+    console.log("DEBUG: Destructured values:", {
+      username: typeof username + " - " + username,
+      password: typeof password + " - " + (password ? "[REDACTED]" : "null/undefined"),
+      email: typeof email + " - " + email,
+      first_name: typeof first_name + " - " + first_name,
+      last_name: typeof last_name + " - " + last_name,
+      created_at: typeof created_at + " - " + created_at
+    });
 
     console.log("Creating user with custom table approach:", { username, first_name, last_name, email });
 
@@ -175,19 +186,23 @@ async function createUser(data: any, admin: any): Promise<any> {
     }
 
     // Create new user with trimmed values
+    const insertData = {
+      username: username.trim(),
+      password_hash,
+      salt,
+      email: email.trim(),
+      first_name: first_name ? first_name.trim() : null,
+      last_name: last_name ? last_name.trim() : null,
+      created_at,
+      last_login: null,
+      is_active: true
+    };
+
+    console.log("DEBUG: Inserting data:", JSON.stringify(insertData, null, 2));
+
     const { data: newUser, error } = await admin
       .from('users')
-      .insert([{
-        username: username.trim(),
-        password_hash,
-        salt,
-        email: email.trim(),
-        first_name: first_name.trim(),
-        last_name: last_name.trim(),
-        created_at,
-        last_login: null,
-        is_active: true
-      }])
+      .insert([insertData])
       .select('id, username, email, first_name, last_name, created_at')
       .single();
 
