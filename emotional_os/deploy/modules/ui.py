@@ -225,12 +225,14 @@ def render_controls_row(conversation_key):
         # the sidebar expander).
         current_mode = st.session_state.processing_mode
         # Place Start Personal Log in the far-left column per layout request
-        try:
-            if st.button("Start Personal Log", key="start_log_btn"):
-                st.session_state.show_personal_log = True
-                st.rerun()
-        except Exception:
-            pass
+        # Only show for authenticated users (requires data persistence)
+        if st.session_state.get('authenticated'):
+            try:
+                if st.button("Start Personal Log", key="start_log_btn"):
+                    st.session_state.show_personal_log = True
+                    st.rerun()
+            except Exception:
+                pass
 
     with controls[1]:
         # Theme selection lives in the Settings sidebar expander; avoid
@@ -238,13 +240,15 @@ def render_controls_row(conversation_key):
         current_theme = st.session_state.get('theme', 'Light')
         # Place Logout in the adjacent (controls[1]) column so it sits
         # immediately to the right of the Start Personal Log button.
-        try:
-            if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-                from .auth import SaoynxAuthentication
-                auth = SaoynxAuthentication()
-                auth.logout()
-        except Exception:
-            pass
+        # Only show for authenticated users
+        if st.session_state.get('authenticated'):
+            try:
+                if st.button("Logout", key="controls_logout", help="Sign out of your account"):
+                    from .auth import SaoynxAuthentication
+                    auth = SaoynxAuthentication()
+                    auth.logout()
+            except Exception:
+                pass
     # Removed Debug and Clear History controls — these buttons did not provide
     # useful functionality and duplicated UI surface area. Slots retained for
     # layout stability.
@@ -1046,10 +1050,11 @@ def render_main_app():
                 if mgr:
                     prefs = mgr.load_user_preferences()
                     # Only set defaults if session state doesn't already have them
+                    # Default to FALSE for new users - requires explicit consent
                     if prefs:
                         if 'persist_history' not in st.session_state:
                             st.session_state['persist_history'] = prefs.get(
-                                'persist_history', True)
+                                'persist_history', False)
 
                     # CONVERSATION CONTINUITY: Auto-load most recent conversation if available
                     # Only do this if user hasn't explicitly selected a conversation or started a new one
@@ -1266,24 +1271,6 @@ def render_main_app():
                 pass
         else:
             st.markdown("### Settings")
-
-        # Persist history toggle
-        persist_default = st.session_state.get('persist_history', True)
-        st.session_state['persist_history'] = st.checkbox(
-            "💾 Save my chats",
-            value=persist_default,
-            help="Automatically save conversations for later retrieval"
-        )
-        # Best-effort: persist the user's preference back to server when available
-        try:
-            mgr = st.session_state.get('conversation_manager')
-            if mgr:
-                mgr.save_user_preferences({
-                    'persist_history': bool(st.session_state.get('persist_history', False)),
-                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
-                })
-        except Exception:
-            pass
 
         # Privacy & Consent settings - only show when user is authenticated
         if st.session_state.get('authenticated'):
@@ -1806,10 +1793,13 @@ def render_main_app():
                                         f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
                                     ])
                                     payload["document_context"] = doc_context
+                                # Use user's JWT token for authenticated requests, fallback to anon key
+                                auth_token = st.session_state.get(
+                                    'user_jwt_token') or supabase_key
                                 response_data = requests.post(
                                     saori_url,
                                     headers={
-                                        "Authorization": f"Bearer {supabase_key}",
+                                        "Authorization": f"Bearer {auth_token}",
                                         "Content-Type": "application/json"
                                     },
                                     json=payload,

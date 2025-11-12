@@ -19,37 +19,55 @@ function getCorsHeaders(req) {
   };
 }
 
+// Read environment variables (use Deno.env like other functions)
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY");
+const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+
 // User Authentication Functions
 async function validateUserSession(authHeader: string, adminClient: any): Promise<{ valid: boolean, userId?: string }> {
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return { valid: false };
-  }
+  if (!authHeader) return { valid: false };
 
   try {
-    const token = authHeader.replace("Bearer ", "");
+    // Support either raw token or "Bearer <token>" formats; also accept tokens passed
+    // in a custom header like `X-Custom-Token: Bearer <token>`.
+    let token = String(authHeader || "");
+    if (token.toLowerCase().startsWith("bearer ")) token = token.slice(7);
 
     // Parse custom token format: base64payload.signature
     const parts = token.split('.');
-    if (parts.length !== 2) {
+    if (parts.length !== 2) return { valid: false };
+
+    const [payloadB64, signature] = parts;
+    // Fix padding and parse base64 payload
+    const fix = (s: string) => s + '='.repeat((-s.length) & 3);
+    let payloadJson = null;
+    try {
+      payloadJson = JSON.parse(atob(fix(payloadB64)));
+    } catch (e) {
+      console.log('validateUserSession: payload decode failed', e);
       return { valid: false };
     }
 
-    const [payloadB64, signature] = parts;
-    const payload = JSON.parse(atob(payloadB64));
+    const payload = payloadJson;
 
     // Validate token structure
     if (!payload.user_id || !payload.issued_at || !payload.expires_at) {
       return { valid: false };
     }
 
-    // Check expiration
-    if (Date.now() > payload.expires_at) {
+    // Check expiration (allow small clock skew)
+    const now = Date.now();
+    if (!payload.expires_at || now > Number(payload.expires_at) + 10000) {
+      console.log("validateUserSession: token expired or missing expires_at", { now, expires_at: payload.expires_at });
       return { valid: false };
     }
 
     // Validate signature (simple check)
-    const expectedSignature = btoa(payload.user_id + '_' + payload.issued_at);
+    const expectedSignature = btoa(String(payload.user_id) + '_' + String(payload.issued_at));
     if (signature !== expectedSignature) {
+      console.log('validateUserSession: signature mismatch');
       return { valid: false };
     }
 
@@ -60,9 +78,7 @@ async function validateUserSession(authHeader: string, adminClient: any): Promis
       .eq('id', payload.user_id)
       .single();
 
-    if (error || !user) {
-      return { valid: false };
-    }
+    if (error || !user) return { valid: false };
 
     return { valid: true, userId: user.id };
   } catch (err) {
@@ -89,7 +105,9 @@ Deno.serve(async (req) => {
       return new Response(JSON.stringify({ error: "Server misconfiguration: required secrets missing." }), { status: 500, headers: corsHeaders });
     }
 
-    const authHeader = req.headers.get("Authorization") ?? "";
+    // Allow platform anon key in `Authorization` while accepting a custom app token
+    // in `X-Custom-Token` to avoid platform-level JWT validation blocking the request.
+    const authHeader = req.headers.get("X-Custom-Token") ?? req.headers.get("Authorization") ?? "";
     const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
 
     const userClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

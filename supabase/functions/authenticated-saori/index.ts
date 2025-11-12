@@ -37,6 +37,18 @@ const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPA
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 
+// Startup presence log (non-sensitive): prints which required env vars are present
+try {
+  console.log("authenticated-saori env presence:", {
+    SUPABASE_URL: !!SUPABASE_URL,
+    SUPABASE_ANON_KEY: !!SUPABASE_ANON_KEY,
+    SUPABASE_SERVICE_ROLE_KEY: !!SUPABASE_SERVICE_ROLE_KEY,
+    OPENAI_API_KEY: !!OPENAI_API_KEY
+  });
+} catch (e) {
+  // swallow any logging errors
+}
+
 // Performance cache (user-isolated)
 const userResponseCache = new Map();
 const CACHE_TTL = 60000;
@@ -56,12 +68,12 @@ const QUICK_RESPONSES: Record<string, string> = {
 
 // User Authentication Functions
 async function validateUserSession(authHeader: string, adminClient: any): Promise<{ valid: boolean, userId?: string }> {
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return { valid: false };
-  }
+  if (!authHeader) return { valid: false };
 
   try {
-    const token = authHeader.replace("Bearer ", "");
+    // Accept either raw token or "Bearer <token>" formats
+    let token = String(authHeader || "");
+    if (token.toLowerCase().startsWith("bearer ")) token = token.slice(7);
 
     // Parse custom token format: base64payload.signature
     const parts = token.split('.');
@@ -77,8 +89,10 @@ async function validateUserSession(authHeader: string, adminClient: any): Promis
       return { valid: false };
     }
 
-    // Check expiration
-    if (Date.now() > payload.expires_at) {
+    // Check expiration (allow small clock skew)
+    const now = Date.now();
+    if (!payload.expires_at || now > Number(payload.expires_at) + 10000) {
+      console.log("validateUserSession: token expired or missing expires_at", { now, expires_at: payload.expires_at });
       return { valid: false };
     }
 
@@ -317,8 +331,10 @@ Deno.serve(async (req: any) => {
   // Validate user session (if userId provided)
   let authenticatedUserId = userId || "anonymous";
   if (userId) {
-    const authHeader = req.headers.get("Authorization");
-    const sessionValidation = await validateUserSession(authHeader, admin);
+    // Prefer a custom header `X-Custom-Token` for our internal tokens so platform
+    // JWT validation (which expects Supabase-issued tokens) doesn't block requests.
+    const authHeader = req.headers.get("X-Custom-Token") ?? req.headers.get("Authorization");
+    const sessionValidation = await validateUserSession(authHeader ?? "", admin);
     if (!sessionValidation.valid) {
       return new Response(JSON.stringify({ error: "Invalid session" }), {
         status: 401, headers: corsHeaders
