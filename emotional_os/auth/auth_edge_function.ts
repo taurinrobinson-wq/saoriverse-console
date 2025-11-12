@@ -1,5 +1,6 @@
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import { createHash, pbkdf2Sync, randomBytes } from "node:crypto";
+import { Buffer } from "node:buffer";
 
 // Authentication Edge Function for Emotional OS
 // Handles user registration, login, and session management with privacy isolation
