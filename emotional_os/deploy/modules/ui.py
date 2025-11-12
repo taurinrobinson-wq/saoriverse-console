@@ -383,10 +383,12 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         "local_ritual_prompt": ritual_prompt
     }
     try:
+        # Use user's JWT token for authenticated requests, fallback to service key
+        auth_token = st.session_state.get('user_jwt_token') or supabase_key
         response_data = requests.post(
             saori_url,
             headers={
-                "Authorization": f"Bearer {supabase_key}",
+                "Authorization": f"Bearer {auth_token}",
                 "Content-Type": "application/json"
             },
             json=payload,
