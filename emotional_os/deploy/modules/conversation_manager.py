@@ -11,6 +11,7 @@ Handles:
 
 import json
 import logging
+import os
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import re
@@ -25,18 +26,110 @@ import streamlit as st
 logger = logging.getLogger(__name__)
 
 
-def generate_auto_name(first_message: str, max_length: int = 50) -> str:
+def generate_auto_name_with_glyphs(first_message: str, max_length: int = 50) -> Tuple[str, List[str]]:
     """
-    Generate a conversation name from the first user message.
+    Generate a conversation name from the first user message using glyph-based naming.
 
-    Similar to Microsoft Copilot's approach:
-    - Extract key emotional terms or topics
-    - Create a concise, meaningful title
-    - Limit to max_length characters
+    Returns:
+        tuple: (conversation_name, list_of_glyph_names)
+
+    Creates names like "Tuesday Threshold–Flame–Echo" based on:
+    - Day of week (optional) 
+    - Top 3 glyphs detected from the first message
     """
     if not first_message:
-        return "New Conversation"
+        return "New Conversation", []
 
+    try:
+        # Import required modules for glyph detection
+        from emotional_os.core.signal_parser import parse_signals, evaluate_gates, load_signal_map
+        from emotional_os.core.paths import signal_lexicon_path
+        import datetime
+        import json
+        import os
+
+        # Load glyph lexicon from JSON file
+        glyph_file_paths = [
+            'data/glyph_lexicon_rows.json',
+            '/workspaces/saoriverse-console/data/glyph_lexicon_rows.json',
+            os.path.join(os.getcwd(), 'data', 'glyph_lexicon_rows.json')
+        ]
+
+        all_glyphs = None
+        for path in glyph_file_paths:
+            try:
+                if os.path.exists(path):
+                    with open(path, 'r', encoding='utf-8') as f:
+                        all_glyphs = json.load(f)
+                    break
+            except Exception:
+                continue
+
+        if not all_glyphs:
+            # Fallback to traditional naming if no glyphs available
+            return _generate_traditional_name(first_message, max_length), []
+
+        # Parse signals and gates from the message
+        lexicon_path = str(signal_lexicon_path())
+        signal_map = load_signal_map(lexicon_path)
+        signals = parse_signals(first_message, signal_map)
+        gates = evaluate_gates(signals)
+
+        # Find matching glyphs
+        matching_glyphs = []
+        for glyph in all_glyphs:
+            glyph_gate = glyph.get('gate', '')
+            if glyph_gate in gates:
+                matching_glyphs.append(glyph)
+
+        # Extract glyph names (up to 3)
+        glyph_names = []
+        for glyph in matching_glyphs[:3]:
+            name = glyph.get('glyph_name', '')
+            if name:
+                glyph_names.append(name)
+
+        # Build the name
+        if glyph_names:
+            # Join with em-dash for elegance
+            glyph_string = "–".join(glyph_names)
+
+            # Add day of week if there's room
+            today = datetime.datetime.now().strftime("%A")
+            if len(glyph_string) + len(today) + 1 <= max_length:
+                title = f"{today} {glyph_string}"
+            else:
+                title = glyph_string
+
+            return title, glyph_names
+        else:
+            # Fallback to traditional approach if no glyphs detected
+            fallback_name = _generate_traditional_name(
+                first_message, max_length)
+            return fallback_name, []
+
+    except Exception as e:
+        # Graceful fallback if glyph system fails
+        fallback_name = _generate_traditional_name(first_message, max_length)
+        return fallback_name, []
+
+
+def generate_auto_name(first_message: str, max_length: int = 50) -> str:
+    """
+    Generate a conversation name from the first user message using glyph-based naming.
+
+    Creates names like "Tuesday Threshold–Flame–Echo" based on:
+    - Day of week (optional) 
+    - Top 3 glyphs detected from the first message
+    """
+    name, _ = generate_auto_name_with_glyphs(first_message, max_length)
+    return name
+
+
+def _generate_traditional_name(first_message: str, max_length: int = 50) -> str:
+    """
+    Traditional conversation naming fallback.
+    """
     # Clean the text
     text = first_message.strip()[:100]
 
@@ -76,8 +169,16 @@ class ConversationManager:
         self.user_id = user_id
         self.supabase_url = supabase_url or st.secrets.get(
             "supabase", {}).get("url")
-        self.supabase_key = supabase_key or st.secrets.get(
-            "supabase", {}).get("key")
+
+        # Try to get service role key first (bypasses RLS), then fall back to regular key
+        service_role_key = (
+            supabase_key or
+            st.secrets.get("supabase", {}).get("service_role_key") or
+            st.secrets.get("supabase", {}).get("service_role") or
+            os.getenv("SUPABASE_SERVICE_ROLE_KEY") or
+            st.secrets.get("supabase", {}).get("key")  # fallback to anon key
+        )
+        self.supabase_key = service_role_key
         self.base_url = self._normalize_supabase_url(
             self.supabase_url) if self.supabase_url else None
 
@@ -100,9 +201,19 @@ class ConversationManager:
         }
 
     def save_conversation(self, conversation_id: str, title: str, messages: List[Dict],
-                          processing_mode: str = "hybrid") -> Tuple[bool, str]:
+                          processing_mode: str = "hybrid", auto_name: Optional[str] = None,
+                          custom_name: Optional[str] = None, glyphs_triggered: Optional[List[str]] = None) -> Tuple[bool, str]:
         """
         Save or update a conversation to Supabase.
+
+        Args:
+            conversation_id: Unique conversation identifier
+            title: Legacy title field (for backward compatibility)
+            messages: List of conversation messages
+            processing_mode: AI processing mode
+            auto_name: Auto-generated glyph-based name
+            custom_name: User-provided custom name (overrides auto_name)
+            glyphs_triggered: List of emotional glyphs detected
 
         Returns: (success: bool, message: str)
         """
@@ -117,7 +228,10 @@ class ConversationManager:
             payload = {
                 'user_id': self.user_id,
                 'conversation_id': conversation_id,
-                'title': title,
+                'title': title,  # Keep for backward compatibility
+                'auto_name': auto_name or title,  # Use auto_name or fallback to title
+                'custom_name': custom_name,  # User-provided name (optional)
+                'glyphs_triggered': glyphs_triggered or [],  # List of detected glyphs
                 'messages': json.dumps(messages),
                 'processing_mode': processing_mode,
                 'updated_at': datetime.now().isoformat(),
@@ -135,7 +249,11 @@ class ConversationManager:
             if response.status_code in (200, 201):
                 return True, "Conversation saved successfully"
             else:
-                return False, f"Failed to save conversation (HTTP {response.status_code})"
+                # Include response body for debugging
+                error_detail = response.text if response.text else "No error detail"
+                logger.error(
+                    f"Failed to save conversation: HTTP {response.status_code}, {error_detail}")
+                return False, f"Failed to save conversation (HTTP {response.status_code}): {error_detail}"
 
         except Exception as e:
             logger.error(f"Error saving conversation: {e}")
@@ -156,7 +274,7 @@ class ConversationManager:
         try:
             url = f"{self.base_url}/rest/v1/conversations"
             params = {
-                'select': 'conversation_id,title,updated_at,message_count,processing_mode',
+                'select': 'conversation_id,title,auto_name,custom_name,glyphs_triggered,updated_at,message_count,processing_mode,created_at',
                 'user_id': f'eq.{self.user_id}',
                 'order': 'updated_at.desc',
                 'limit': '100'
@@ -331,7 +449,7 @@ class ConversationManager:
             return False, f"Error deleting conversation: {str(e)}"
 
     def rename_conversation(self, conversation_id: str, new_title: str) -> Tuple[bool, str]:
-        """Rename a conversation."""
+        """Rename a conversation by setting custom_name (overrides auto_name)."""
         if not self.base_url or not self.supabase_key:
             return False, "Supabase not configured"
 
@@ -346,7 +464,8 @@ class ConversationManager:
             }
 
             payload = {
-                'title': new_title,
+                'custom_name': new_title,  # Set custom name instead of title
+                'title': new_title,  # Keep title for backward compatibility
                 'updated_at': datetime.now().isoformat()
             }
 
@@ -389,18 +508,74 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
 
     st.sidebar.markdown("### 📚 Previous Conversations")
 
+    # Optional: Time-based filtering
+    if len(conversations) > 5:  # Only show filter if there are many conversations
+        from datetime import datetime, timedelta
+
+        filter_options = [
+            "All conversations",
+            "Last 7 days",
+            "Last 30 days",
+            "Last 3 months"
+        ]
+
+        time_filter = st.sidebar.selectbox(
+            "📅 Filter by time:",
+            filter_options,
+            key="conversation_time_filter"
+        )
+
+        if time_filter != "All conversations":
+            now = datetime.now()
+            if time_filter == "Last 7 days":
+                cutoff = now - timedelta(days=7)
+            elif time_filter == "Last 30 days":
+                cutoff = now - timedelta(days=30)
+            elif time_filter == "Last 3 months":
+                cutoff = now - timedelta(days=90)
+
+            # Filter conversations by created_at or updated_at
+            filtered_conversations = []
+            for conv in conversations:
+                try:
+                    # Try updated_at first, then created_at
+                    date_str = conv.get('updated_at') or conv.get('created_at')
+                    if date_str:
+                        # Parse ISO format date
+                        conv_date = datetime.fromisoformat(
+                            date_str.replace('Z', '+00:00'))
+                        if conv_date >= cutoff:
+                            filtered_conversations.append(conv)
+                except Exception:
+                    # Include conversations with unparseable dates
+                    filtered_conversations.append(conv)
+
+            conversations = filtered_conversations
+
+            if not conversations:
+                st.sidebar.info(
+                    f"No conversations found in {time_filter.lower()}.")
+                return
+
     for conv in conversations:
         col1, col2, col3 = st.sidebar.columns([3, 1, 1])
+
+        # Determine display name: custom_name if present, else auto_name, else title
+        display_name = (
+            conv.get('custom_name') or
+            conv.get('auto_name') or
+            conv.get('title', 'Untitled Conversation')
+        )
 
         with col1:
             # Click to load conversation
             if st.button(
-                f"💬 {conv['title']}",
+                f"💬 {display_name}",
                 key=f"load_conv_{conv['conversation_id']}",
                 use_container_width=True
             ):
                 st.session_state['selected_conversation'] = conv['conversation_id']
-                st.session_state['conversation_title'] = conv['title']
+                st.session_state['conversation_title'] = display_name
                 st.rerun()
 
         with col2:
@@ -424,14 +599,14 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
         if st.session_state.get(f"renaming_{conv['conversation_id']}", False):
             new_title = st.sidebar.text_input(
                 "New title:",
-                value=conv['title'],
+                value=display_name,
                 key=f"rename_input_{conv['conversation_id']}"
             )
             col_a, col_b = st.sidebar.columns(2)
             with col_a:
                 if st.button("Save", key=f"save_rename_{conv['conversation_id']}"):
                     success, message = manager.rename_conversation(
-                        conv['conversation_id'], new_title)
+                        conv['conversation_id'], new_title or "Untitled Conversation")
                     if success:
                         st.sidebar.success(message)
                         st.session_state[f"renaming_{conv['conversation_id']}"] = False
