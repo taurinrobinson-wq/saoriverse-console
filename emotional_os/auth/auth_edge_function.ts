@@ -66,7 +66,18 @@ async function ensureUsersTable(admin: any) {
 // Create user account
 async function createUser(data: any, admin: any): Promise<any> {
   try {
+    console.log("DEBUG: createUser called with data:", JSON.stringify(data, null, 2));
+
     const { username, password_hash, salt, password, email, first_name, last_name, created_at } = data;
+
+    console.log("DEBUG: Destructured values:", {
+      username: typeof username + " - " + username,
+      password: typeof password + " - " + (password ? "[REDACTED]" : "null/undefined"),
+      email: typeof email + " - " + email,
+      first_name: typeof first_name + " - " + first_name,
+      last_name: typeof last_name + " - " + last_name,
+      created_at: typeof created_at + " - " + created_at
+    });
 
     // If client supplied a raw password, hash it server-side so we always store a hash+salt
     let final_password_hash = password_hash;
@@ -91,18 +102,18 @@ async function createUser(data: any, admin: any): Promise<any> {
       };
     }
 
-    // Create new user (include first_name / last_name when provided)
+    // Create new user (always include first_name / last_name)
     const insertPayload: any = {
       username,
       password_hash: final_password_hash,
       salt: final_salt,
       email: email || null,
+      first_name: first_name || null,
+      last_name: last_name || null,
       created_at,
       last_login: null,
       is_active: true
     };
-    if (first_name) insertPayload.first_name = first_name;
-    if (last_name) insertPayload.last_name = last_name;
 
     // Debug: log payload being inserted (helps diagnose missing fields after deploy)
     try { console.log("createUser: insertPayload=", JSON.stringify(insertPayload)); } catch (e) { }
