@@ -228,14 +228,17 @@ class ConversationManager:
             payload = {
                 'user_id': self.user_id,
                 'conversation_id': conversation_id,
-                'title': title,  # Keep for backward compatibility
-                'auto_name': auto_name or title,  # Use auto_name or fallback to title
-                'custom_name': custom_name,  # User-provided name (optional)
-                'glyphs_triggered': glyphs_triggered or [],  # List of detected glyphs
-                'messages': json.dumps(messages),
+                'title': title,
+                'messages': messages,  # Send as JSON array, not string
                 'processing_mode': processing_mode,
+                'message_count': len(messages),
                 'updated_at': datetime.now().isoformat(),
-                'message_count': len(messages)
+                'first_message': messages[0]['content'] if messages else None,
+                'emotional_context': {
+                    'glyphs_triggered': glyphs_triggered or [],
+                    'auto_name': auto_name,
+                    'custom_name': custom_name
+                } if (glyphs_triggered or auto_name or custom_name) else {}
             }
 
             # Upsert: insert if new, update if exists
@@ -274,8 +277,9 @@ class ConversationManager:
         try:
             url = f"{self.base_url}/rest/v1/conversations"
             params = {
-                'select': 'conversation_id,title,auto_name,custom_name,glyphs_triggered,updated_at,message_count,processing_mode,created_at',
+                'select': 'conversation_id,title,messages,processing_mode,message_count,updated_at,created_at,emotional_context',
                 'user_id': f'eq.{self.user_id}',
+                'archived': 'eq.false',
                 'order': 'updated_at.desc',
                 'limit': '100'
             }
@@ -289,11 +293,29 @@ class ConversationManager:
 
             if response.status_code == 200:
                 conversations = response.json()
-                # Backward compatibility shim: translate any legacy "ai_preferred"
-                # processing_mode values into the new representation where
-                # processing_mode='hybrid' and prefer_ai=True.
+                # Process conversations to extract metadata from emotional_context
                 if isinstance(conversations, list):
                     for c in conversations:
+                        # Extract metadata from emotional_context
+                        emotional_ctx = c.get('emotional_context', {})
+                        c['auto_name'] = emotional_ctx.get(
+                            'auto_name', c.get('title', 'New Conversation'))
+                        c['custom_name'] = emotional_ctx.get('custom_name')
+                        c['glyphs_triggered'] = emotional_ctx.get(
+                            'glyphs_triggered', [])
+
+                        # Parse messages if it's stored as JSON string (backward compatibility)
+                        if isinstance(c.get('messages'), str):
+                            try:
+                                c['messages'] = json.loads(c['messages'])
+                            except:
+                                c['messages'] = []
+                        elif not isinstance(c.get('messages'), list):
+                            c['messages'] = []
+
+                        # Backward compatibility shim: translate any legacy "ai_preferred"
+                        # processing_mode values into the new representation where
+                        # processing_mode='hybrid' and prefer_ai=True.
                         pm = c.get('processing_mode')
                         if pm == 'ai_preferred':
                             c['processing_mode'] = 'hybrid'
@@ -336,9 +358,18 @@ class ConversationManager:
                 conversations = response.json()
                 if conversations:
                     conv = conversations[0]
-                    # Parse messages JSON string
+                    # Extract metadata from emotional_context
+                    emotional_ctx = conv.get('emotional_context', {})
+                    conv['auto_name'] = emotional_ctx.get('auto_name', conv.get('title', 'New Conversation'))
+                    conv['custom_name'] = emotional_ctx.get('custom_name')
+                    conv['glyphs_triggered'] = emotional_ctx.get('glyphs_triggered', [])
+                    
+                    # Parse messages if it's stored as JSON string (backward compatibility)
                     if isinstance(conv.get('messages'), str):
                         conv['messages'] = json.loads(conv['messages'])
+                    elif not isinstance(conv.get('messages'), list):
+                        conv['messages'] = []
+                    
                     # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
                     if conv.get('processing_mode') == 'ai_preferred':
                         conv['processing_mode'] = 'hybrid'
