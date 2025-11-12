@@ -26,6 +26,33 @@ import streamlit as st
 logger = logging.getLogger(__name__)
 
 
+def _mask_key(key: Optional[str]) -> str:
+    """Return a masked representation of a key for safe logging.
+
+    Shows only leading/trailing characters with middle elided so logs
+    can help debug which key is being used without revealing secrets.
+    """
+    try:
+        if not key:
+            return "<none>"
+        s = str(key)
+        # If it contains spaces (e.g. 'Bearer <token>'), mask the token part
+        if ' ' in s:
+            parts = s.split(' ', 1)
+            prefix = parts[0]
+            token = parts[1]
+            if len(token) <= 8:
+                tmask = token[:2] + '...' + token[-2:]
+            else:
+                tmask = token[:4] + '...' + token[-4:]
+            return f"{prefix} {tmask}"
+        if len(s) <= 8:
+            return s[:2] + '...' + s[-2:]
+        return s[:4] + '...' + s[-4:]
+    except Exception:
+        return "<masked>"
+
+
 def generate_auto_name_with_glyphs(first_message: str, max_length: int = 50) -> Tuple[str, List[str]]:
     """
     Generate a conversation name from the first user message using glyph-based naming.
@@ -193,12 +220,45 @@ class ConversationManager:
 
     def _get_headers(self) -> Dict:
         """Get headers for Supabase API requests."""
-        return {
-            'Content-Type': 'application/json',
-            'apikey': self.supabase_key,
-            'Authorization': f'Bearer {self.supabase_key}',
-            'Prefer': 'return=representation'
-        }
+        # Prefer using a stable anon/service key for the `apikey` header and
+        # use a service role key for Authorization when available. If only a
+        # user JWT is present in session state, fall back to that for
+        # Authorization while leaving `apikey` as the anon key (that's the
+        # recommended supabase pattern for browser-like requests).
+        try:
+            anon_key = None
+            try:
+                anon_key = st.secrets.get('supabase', {}).get('key')
+            except Exception:
+                anon_key = None
+
+            # Fallback to environment variable if streamlit secrets are not used
+            if not anon_key:
+                anon_key = os.getenv(
+                    'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_KEY')
+
+            # Determine auth token: prefer service role (self.supabase_key),
+            # otherwise fall back to a user JWT in session state, then anon_key.
+            auth_token = self.supabase_key or st.session_state.get(
+                'user_jwt_token') if hasattr(st, 'session_state') else None
+            if not auth_token:
+                auth_token = anon_key
+
+            headers = {
+                'Content-Type': 'application/json',
+                'apikey': anon_key or auth_token,
+                'Authorization': f'Bearer {auth_token}' if auth_token else '',
+                'Prefer': 'return=representation'
+            }
+            return headers
+        except Exception:
+            # Best-effort fallback
+            return {
+                'Content-Type': 'application/json',
+                'apikey': self.supabase_key,
+                'Authorization': f'Bearer {self.supabase_key}',
+                'Prefer': 'return=representation'
+            }
 
     def save_conversation(self, conversation_id: str, title: str, messages: List[Dict],
                           processing_mode: str = "hybrid", auto_name: Optional[str] = None,
@@ -240,9 +300,17 @@ class ConversationManager:
             }
 
             # Upsert conversation metadata
+            # Build headers and log masked debug info before calling the API
+            headers = self._get_headers()
+            try:
+                logger.info("Saving conversation metadata to %s apikey=%s Authorization=%s",
+                            conv_url, _mask_key(headers.get('apikey')), _mask_key(headers.get('Authorization')))
+            except Exception:
+                pass
+
             conv_response = requests.post(
                 conv_url,
-                headers=self._get_headers(),
+                headers=headers,
                 json=[conv_payload],
                 timeout=10
             )
@@ -268,9 +336,17 @@ class ConversationManager:
                 msg_payloads.append(msg_payload)
 
             if msg_payloads:
+                # Masked debug logging to help trace which credentials are used
+                try:
+                    headers_msg = self._get_headers()
+                    logger.info("Saving conversation messages to %s apikey=%s Authorization=%s",
+                                msg_url, _mask_key(headers_msg.get('apikey')), _mask_key(headers_msg.get('Authorization')))
+                except Exception:
+                    pass
+
                 msg_response = requests.post(
                     msg_url,
-                    headers=self._get_headers(),
+                    headers=headers_msg,
                     json=msg_payloads,
                     timeout=10
                 )
