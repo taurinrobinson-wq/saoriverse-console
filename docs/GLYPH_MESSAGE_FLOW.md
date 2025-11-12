@@ -200,6 +200,7 @@ Notes:
 - Session-level debug variables (populated by the UI): `st.session_state['protocol_result_*']`, `debug_sql`, `debug_glyph_rows`.
 - SQLite debug: `emotional_os/glyphs/glyphs.db` contains `glyph_lexicon`, `glyph_candidates`, and `glyph_usage_log`.
 - Local preview/debugging helpers: `_last_glyphs_debug` global in `core/signal_parser.py` contains the last SQL and a preview of rows returned by `fetch_glyphs`.
+- **Telemetry events (NEW)**: Enable via `signal_parser.set_telemetry(True)` or UI toggle to see JSON-formatted events like `select_best_start`, `generate_contextual_start`, `select_best_done` with detailed metrics.
 - Reported artifacts from the cleanup pipeline (outside of runtime): `dev_tools/cleaned_glyphs.json`, `dev_tools/cleaned_glyphs_upsert.csv`, `dev_tools/cleanup_report.md`, and `dev_tools/fragments_to_review.json`.
 
 ---
