@@ -828,7 +828,8 @@ def render_main_app():
                     document.querySelector = function(sel){
                         try{
                             if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
-                                console.warn('Safe-guard: querySelector called with invalid selector', sel);
+                                console.warn(
+                                    'Safe-guard: querySelector called with invalid selector', sel);
                                 return null;
                             }
                             return _qs.call(document, sel);
@@ -840,13 +841,15 @@ def render_main_app():
                     document.querySelectorAll = function(sel){
                         try{
                             if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
-                                console.warn('Safe-guard: querySelectorAll called with invalid selector', sel);
+                                console.warn(
+                                    'Safe-guard: querySelectorAll called with invalid selector', sel);
                                 // return empty NodeList via a harmless selector on a detached element
                                 return document.createElement('div').querySelectorAll('.fp-no-match');
                             }
                             return _qsAll.call(document, sel);
                         }catch(e){
-                            console.warn('Safe-guard: querySelectorAll threw', e);
+                            console.warn(
+                                'Safe-guard: querySelectorAll threw', e);
                             return document.createElement('div').querySelectorAll('.fp-no-match');
                         }
                     };
@@ -863,7 +866,8 @@ def render_main_app():
                                 }
                                 // Log the offending value and a small stack so we can trace where it came from
                                 try{
-                                    console.warn('Safe-guard: jQuery factory called with invalid arg:', arg);
+                                    console.warn(
+                                        'Safe-guard: jQuery factory called with invalid arg:', arg);
                                     console.warn('Safe-guard: arg type =', Object.prototype.toString.call(arg), 'typeof=', typeof arg);
                                     console.warn(new Error('jQuery factory invalid-arg stack').stack);
                                 }catch(_e){}
@@ -940,7 +944,8 @@ def render_main_app():
                     window.addEventListener('unhandledrejection', function(ev){
                         try{
                             var m = ev && ev.reason && ev.reason.stack ? ev.reason.stack : JSON.stringify(ev.reason);
-                            showErrorOverlay('UnhandledPromiseRejection: ' + m);
+                            showErrorOverlay(
+                                'UnhandledPromiseRejection: ' + m);
                         }catch(e){}
                     }, true);
                 }catch(e){}
@@ -1069,6 +1074,16 @@ def render_main_app():
                                 st.session_state['selected_conversation'] = recent_conv['conversation_id']
                                 st.session_state['conversation_title'] = recent_conv['title']
 
+                                # Continue the conversation in-place: set current conversation id
+                                # so subsequent messages append to this conversation rather than
+                                # starting a new one. Mark as already named so we don't re-run
+                                # the auto-naming flow for existing conversations.
+                                try:
+                                    st.session_state['current_conversation_id'] = recent_conv['conversation_id']
+                                    st.session_state['conversation_named'] = True
+                                except Exception:
+                                    pass
+
                                 # Load the conversation messages if available
                                 if recent_conv.get('messages'):
                                     # Convert the messages to the expected format
@@ -1125,7 +1140,7 @@ def render_main_app():
                                 conv_id = str(uuid.uuid4())
                                 first_msg = demo_messages[0].get('user') if isinstance(
                                     demo_messages, list) and demo_messages and isinstance(demo_messages[0], dict) else None
-                                title = generate_auto_name(first_msg) if generate_auto_name and first_msg else (
+                                title = generate_auto_name(first_msg, st.session_state.get('first_name')) if generate_auto_name and first_msg else (
                                     st.session_state.get('conversation_title') or 'Migrated Conversation')
                                 mgr.save_conversation(
                                     conv_id, title, demo_messages)
@@ -1292,8 +1307,12 @@ def render_main_app():
             if st.button("➕ New Conversation", use_container_width=True):
                 st.session_state['current_conversation_id'] = str(uuid.uuid4())
                 st.session_state['conversation_title'] = "New Conversation"
+                # Reset the in-session conversation history for this user so the
+                # next message will be treated as the first message (and trigger
+                # the naming process). Also clear any named flag.
                 st.session_state['conversation_history_' +
                                  st.session_state['user_id']] = []
+                st.session_state['conversation_named'] = False
                 st.rerun()
 
         # Human-in-the-Loop (HIL) controls removed per user request.
@@ -2022,6 +2041,7 @@ def render_main_app():
         entry = {
             "user": user_input,
             "assistant": response,
+            "first_name": st.session_state.get('first_name') or st.session_state.get('username'),
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
             "timestamp": datetime.datetime.now().isoformat()
@@ -2189,9 +2209,10 @@ def render_main_app():
                 conversation_id = st.session_state.get(
                     'current_conversation_id', 'default')
 
-                # Auto-name conversation based on first message
-                # Just added first exchange
-                if len(st.session_state[conversation_key]) == 1:
+                # Auto-name conversation based on first message only once per
+                # conversation. If this conversation has already been named
+                # (`conversation_named`), skip auto-generation.
+                if len(st.session_state[conversation_key]) == 1 and not st.session_state.get('conversation_named', False):
                     if generate_auto_name:
                         # Import the enhanced function
                         from emotional_os.deploy.modules.conversation_manager import generate_auto_name_with_glyphs
@@ -2200,9 +2221,19 @@ def render_main_app():
                         title = auto_name
                         st.session_state['conversation_title'] = title
                         st.session_state['conversation_glyphs'] = detected_glyphs
+                        # Mark this conversation as named so we don't re-run naming
+                        # on subsequent message appends or sessions unless the user
+                        # explicitly starts a new conversation.
+                        st.session_state['conversation_named'] = True
                     else:
                         title = "New Conversation"
                         detected_glyphs = []
+                elif len(st.session_state[conversation_key]) == 1 and st.session_state.get('conversation_named', False):
+                    # Already named (e.g., loaded from previous session); keep stored values
+                    title = st.session_state.get(
+                        'conversation_title', 'New Conversation')
+                    detected_glyphs = st.session_state.get(
+                        'conversation_glyphs', [])
                 else:
                     title = st.session_state.get(
                         'conversation_title', 'New Conversation')
