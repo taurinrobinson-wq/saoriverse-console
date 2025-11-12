@@ -292,8 +292,8 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
             conversation_context=conversation_context,
         )
         ai_voltage = ai_local.get("voltage_response", "")
-        ai_glyphs = ai_local.get("glyphs", [])
-        ai_best = ai_local.get("best_glyph")
+        ai_glyphs = conversation_context.get("glyphs", [])
+        ai_best = conversation_context.get("best_glyph")
         ai_glyph_display = ai_best['glyph_name'] if ai_best else (
             ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
         # Post-process the AI reply so that short/generic fallbacks are
