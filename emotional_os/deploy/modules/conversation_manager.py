@@ -416,7 +416,62 @@ class ConversationManager:
                 error_detail = conv_response.text if conv_response.text else "No error detail"
                 logger.error(
                     f"Failed to save conversation metadata: HTTP {conv_response.status_code}, {error_detail}")
-                return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
+
+                # If we received a 401, try a conservative retry using the user's
+                # JWT (if present) and the anon key as `apikey`. This can help
+                # in deployments where service-role keys are missing but user JWTs
+                # are valid for writes (rare) or where different keys are required.
+                try:
+                    if conv_response.status_code == 401:
+                        user_jwt = None
+                        try:
+                            user_jwt = st.session_state.get('user_jwt_token') if hasattr(
+                                st, 'session_state') else None
+                        except Exception:
+                            user_jwt = None
+
+                        # Only attempt retry if we have a user JWT
+                        if user_jwt:
+                            # Build anon_key fallback
+                            anon_key = None
+                            try:
+                                anon_key = st.secrets.get(
+                                    'supabase', {}).get('key')
+                            except Exception:
+                                anon_key = None
+                            if not anon_key:
+                                anon_key = os.getenv(
+                                    'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_KEY')
+
+                            retry_headers = {
+                                'Content-Type': 'application/json',
+                                'apikey': anon_key or '',
+                                'Authorization': f'Bearer {user_jwt}',
+                                'Prefer': 'return=representation'
+                            }
+                            try:
+                                logger.info("Retrying conversation metadata save with user JWT apikey=%s Authorization=%s",
+                                            _mask_key(retry_headers.get('apikey')), _mask_key(retry_headers.get('Authorization')))
+                                retry_resp = requests.post(
+                                    conv_url, headers=retry_headers, json=[
+                                        conv_payload], timeout=8
+                                )
+                                if retry_resp.status_code in (200, 201):
+                                    logger.info(
+                                        "Retry with user JWT succeeded for conversation metadata")
+                                else:
+                                    logger.error("Retry with user JWT also failed: HTTP %s %s", retry_resp.status_code, getattr(
+                                        retry_resp, 'text', ''))
+                                    return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
+                            except Exception:
+                                # If retry fails at network level, surface original error
+                                return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
+                        else:
+                            return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
+                    else:
+                        return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
+                except Exception:
+                    return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
 
             # Then, save individual messages to conversation_messages table
             msg_url = f"{self.base_url}/rest/v1/conversation_messages"
@@ -454,7 +509,55 @@ class ConversationManager:
                     error_detail = msg_response.text if msg_response.text else "No error detail"
                     logger.error(
                         f"Failed to save messages: HTTP {msg_response.status_code}, {error_detail}")
-                    return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+
+                    # Retry messages on 401 using user JWT if available (best-effort)
+                    try:
+                        if msg_response.status_code == 401:
+                            user_jwt = None
+                            try:
+                                user_jwt = st.session_state.get('user_jwt_token') if hasattr(
+                                    st, 'session_state') else None
+                            except Exception:
+                                user_jwt = None
+
+                            if user_jwt:
+                                anon_key = None
+                                try:
+                                    anon_key = st.secrets.get(
+                                        'supabase', {}).get('key')
+                                except Exception:
+                                    anon_key = None
+                                if not anon_key:
+                                    anon_key = os.getenv(
+                                        'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_KEY')
+
+                                retry_headers_msg = {
+                                    'Content-Type': 'application/json',
+                                    'apikey': anon_key or '',
+                                    'Authorization': f'Bearer {user_jwt}',
+                                    'Prefer': 'return=representation'
+                                }
+                                try:
+                                    logger.info("Retrying message save with user JWT apikey=%s Authorization=%s",
+                                                _mask_key(retry_headers_msg.get('apikey')), _mask_key(retry_headers_msg.get('Authorization')))
+                                    retry_msg_resp = requests.post(
+                                        msg_url, headers=retry_headers_msg, json=msg_payloads, timeout=8
+                                    )
+                                    if retry_msg_resp.status_code in (200, 201):
+                                        logger.info(
+                                            "Retry with user JWT succeeded for conversation messages")
+                                    else:
+                                        logger.error("Retry with user JWT also failed for messages: HTTP %s %s",
+                                                     retry_msg_resp.status_code, getattr(retry_msg_resp, 'text', ''))
+                                        return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+                                except Exception:
+                                    return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+                            else:
+                                return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+                        else:
+                            return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
+                    except Exception:
+                        return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
 
             # On success, update session state so UI can immediately select
             # and display the newly created conversation without an extra step.

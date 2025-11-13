@@ -1,4 +1,4 @@
-Custom Internal Token Usage
+# Custom Internal Token Usage
 
 This project uses a small custom token format for internal edge function authentication.
 The token is intentionally simple (base64 payload + signature) and is NOT a standard JWT.
@@ -21,14 +21,14 @@ Usage (curl)
 
 Anonymous (platform anon key):
 
-curl -X POST "https://<project>.functions.supabase.co/authenticated-saori" \
+curl -X POST "<https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori>" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <PROJECT_ANON_KEY>" \
   -d '{"message":"Hello","mode":"quick"}'
 
 Authenticated (custom token):
 
-curl -X POST "https://<project>.functions.supabase.co/authenticated-saori" \
+curl -X POST "<https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori>" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <PROJECT_ANON_KEY>" \
   -H "X-Custom-Token: Bearer <CUSTOM_TOKEN>" \

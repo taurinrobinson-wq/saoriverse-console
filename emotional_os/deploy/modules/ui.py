@@ -719,6 +719,20 @@ def render_splash_interface(auth):
 
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
+    # Warm up optional NLP libraries early so Streamlit's runtime has a
+    # chance to import and load models once at startup. This helps avoid
+    # spurious "not available" warnings when the environment already has
+    # the packages but the lazy import path wasn't triggered yet.
+    try:
+        from emotional_os.deploy.modules.nlp_init import warmup_nlp
+        try:
+            warmup_nlp()
+        except Exception:
+            # Best-effort: do not break UI if warmup fails
+            pass
+    except Exception:
+        # If the helper isn't present, proceed without warming up.
+        pass
     # Optional debug overlay: enable by setting the environment variable
     # FP_DEBUG_UI=1 in the deployment environment or export it locally when
     # running the app. This prints helpful session_state keys to the UI so
@@ -2199,8 +2213,9 @@ def render_main_app():
                     logger.error(
                         f"Fallback learning also failed: {fallback_e}")
             except Exception as e:
-                # Non-fatal: learning should not break the app
-                logger.warning(f"Hybrid learning failed: {e}")
+                # Non-fatal: learning should not break the app. Log with traceback
+                logger.warning(
+                    f"Hybrid learning failed: {repr(e)}", exc_info=True)
 
         # Persist to Supabase if the user opted in using the new conversation manager
         try:
