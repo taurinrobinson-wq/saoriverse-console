@@ -14,7 +14,6 @@ except Exception:
     requests = None
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 try:
     from emotional_os.safety.fallback_protocols import FallbackProtocol
@@ -45,41 +44,6 @@ except Exception:
     generate_doc = None
 
 logger = logging.getLogger(__name__)
-
-# Enable debug mode for hybrid pipeline troubleshooting when possible.
-# This is guarded so importing the module in non-Streamlit contexts
-# (tests, CI) won't raise. The user requested verbose hybrid-pipeline
-# logging for immediate debugging.
-try:
-    try:
-        # Prefer explicit session flag when available
-        st.session_state.setdefault('debug_mode', True)
-    except Exception:
-        # If session state is not available at import time, ignore.
-        pass
-except Exception:
-    pass
-
-
-def safe_embed_html_local(content: str, height: int | None = None, use_iframe: bool = True) -> None:
-    """Local helper to safely embed HTML/CSS/JS in this module.
-
-    Prefers components.html (iframe) to isolate styles. Falls back to
-    st.markdown(..., unsafe_allow_html=True) when iframe embedding is
-    inappropriate or fails. This mirrors the helper in `main_v2.py`.
-    """
-    try:
-        if use_iframe:
-            components.html(content, height=height or 160, scrolling=True)
-            return
-    except Exception:
-        pass
-
-    try:
-        st.markdown(content, unsafe_allow_html=True)
-    except Exception:
-        print("[safe_embed_html_local] failed to embed content")
-
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
 _SVG_CACHE = {}
@@ -231,16 +195,6 @@ def inject_css(css_path: str) -> None:
         return
 
 
-# Inject repository-scoped auth overrides (best-effort). The CSS file lives
-# in ../static/auth_override.css relative to this modules/ directory. If the
-# file is missing the function is silent so imports remain safe.
-try:
-    inject_css("../static/auth_override.css")
-except Exception:
-    # Keep imports safe in minimal environments
-    pass
-
-
 def render_controls_row(conversation_key):
     controls = st.columns([2, 1, 1, 1, 1, 1])
     with controls[0]:
@@ -261,14 +215,12 @@ def render_controls_row(conversation_key):
         # the sidebar expander).
         current_mode = st.session_state.processing_mode
         # Place Start Personal Log in the far-left column per layout request
-        # Only show for authenticated users (requires data persistence)
-        if st.session_state.get('authenticated'):
-            try:
-                if st.button("Start Personal Log", key="start_log_btn"):
-                    st.session_state.show_personal_log = True
-                    st.rerun()
-            except Exception:
-                pass
+        try:
+            if st.button("Start Personal Log", key="start_log_btn"):
+                st.session_state.show_personal_log = True
+                st.rerun()
+        except Exception:
+            pass
 
     with controls[1]:
         # Theme selection lives in the Settings sidebar expander; avoid
@@ -276,15 +228,13 @@ def render_controls_row(conversation_key):
         current_theme = st.session_state.get('theme', 'Light')
         # Place Logout in the adjacent (controls[1]) column so it sits
         # immediately to the right of the Start Personal Log button.
-        # Only show for authenticated users
-        if st.session_state.get('authenticated'):
-            try:
-                if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-                    from .auth import SaoynxAuthentication
-                    auth = SaoynxAuthentication()
-                    auth.logout()
-            except Exception:
-                pass
+        try:
+            if st.button("Logout", key="controls_logout", help="Sign out of your account"):
+                from .auth import SaoynxAuthentication
+                auth = SaoynxAuthentication()
+                auth.logout()
+        except Exception:
+            pass
     # Removed Debug and Clear History controls — these buttons did not provide
     # useful functionality and duplicated UI surface area. Slots retained for
     # layout stability.
@@ -332,8 +282,8 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
             conversation_context=conversation_context,
         )
         ai_voltage = ai_local.get("voltage_response", "")
-        ai_glyphs = conversation_context.get("glyphs", [])
-        ai_best = conversation_context.get("best_glyph")
+        ai_glyphs = ai_local.get("glyphs", [])
+        ai_best = ai_local.get("best_glyph")
         ai_glyph_display = ai_best['glyph_name'] if ai_best else (
             ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
         # Post-process the AI reply so that short/generic fallbacks are
@@ -410,98 +360,87 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
 
+    # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
+    if os.environ.get('LOCAL_DEV_MODE') == '1':
+        # Simulate a 401 HTTP error to test our improved fallback messages
+        class MockResponse:
+            status_code = 401
+            def json(self):
+                return {"error": "Authentication failed - this is a test"}
+        
+        mock_response = MockResponse()
+        # This will trigger our improved fallback logic
+        try:
+            body = mock_response.json()
+            ai_reply = body.get('reply') or body.get('error') or ''
+        except Exception:
+            ai_reply = ''
+        
+        if ai_reply:
+            composed, debug = decode_ai_reply(ai_reply, conversation_context)
+            return composed, debug, local_analysis
+            
+        fallback = (
+            f"AI service error (HTTP {mock_response.status_code}).\n"
+            f"Local Analysis: {voltage_response}\n"
+            f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+            f"{ritual_prompt}\n(AI enhancement unavailable - local dev mode)"
+        )
+        return fallback, {}, local_analysis
+
     if not saori_url or not supabase_key:
         response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
-        logger.warning(
-            "Hybrid pipeline skipped: missing saori_url or supabase_key")
         return response, {}, local_analysis
 
-    # Build payload defensively and guard session keys
     payload = {
         "message": effective_input,
         "mode": st.session_state.get('processing_mode', 'hybrid'),
-        "user_id": st.session_state.get('user_id', 'unknown-user'),
+        "user_id": st.session_state.user_id,
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
     }
-
-    # Debug toggle (secrets first, then session) to control verbosity
-    DEBUG_MODE = False
-    try:
-        DEBUG_MODE = bool(st.secrets.get('debug_mode', False))
-    except Exception:
-        DEBUG_MODE = bool(st.session_state.get('debug_mode', False))
-
-    # Ensure requests is available
-    if requests is None:
-        logger.error(
-            "Hybrid pipeline requires 'requests' but it is not installed")
-        return "AI processing unavailable (requests library not installed).", {}, local_analysis
-
-    # Use user's JWT token for authenticated requests, fallback to service key
-    auth_token = st.session_state.get('user_jwt_token') or supabase_key
-
-    # Log payload and destination (masked token) when debugging
-    try:
-        if DEBUG_MODE:
-            logger.info("Hybrid pipeline payload: %s", payload)
-            try:
-                logger.info(
-                    "Hybrid pipeline auth token (masked): %s...", str(auth_token)[:10])
-            except Exception:
-                logger.info("Hybrid pipeline auth token: <unavailable>")
-            logger.info("POSTing to: %s", saori_url)
-    except Exception:
-        pass
-
     try:
         response_data = requests.post(
             saori_url,
             headers={
-                "Authorization": f"Bearer {auth_token}",
+                "Authorization": f"Bearer {supabase_key}",
                 "Content-Type": "application/json"
             },
             json=payload,
-            timeout=15,
+            timeout=15
         )
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        logger.exception("Hybrid pipeline POST failed: %s", e)
-        response = (
-            f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
-        )
+    except Exception:
+        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
         return response, {}, local_analysis
 
-    # Log status and body for troubleshooting
-    try:
-        status = getattr(response_data, 'status_code', None)
-        body = getattr(response_data, 'text', None)
-        logger.info("Hybrid pipeline response status: %s", status)
-        if DEBUG_MODE:
-            logger.info("Hybrid pipeline response body: %s", body)
-    except Exception:
-        pass
+    if requests is None:
+        return "AI processing unavailable (requests library not installed).", {}, local_analysis
 
-    # Surface non-200 responses with explicit error text
-    if not getattr(response_data, 'status_code', None) == 200:
+    if response_data.status_code != 200:
+        # Try to surface any helpful text from the AI service response. If
+        # that's not available, fall back to a concise local analysis so the
+        # user still receives useful feedback rather than a generic error.
         try:
-            resp_text = response_data.text if hasattr(
-                response_data, 'text') else '<no body>'
+            body = response_data.json()
+            ai_reply = body.get('reply') or body.get('error') or ''
         except Exception:
-            resp_text = '<no body>'
-        logger.error("Hybrid pipeline non-200 response: %s %s",
-                     getattr(response_data, 'status_code', None), resp_text)
-        return f"AI error: {getattr(response_data, 'status_code', 'unknown')} - {resp_text}", {}, local_analysis
+            ai_reply = (getattr(response_data, 'text', '') or '').strip()
 
-    try:
-        result = response_data.json()
-    except Exception as e:
-        logger.exception(
-            "Failed to decode hybrid pipeline JSON response: %s", e)
-        return f"AI error: could not decode response ({e})", {}, local_analysis
+        if ai_reply:
+            composed, debug = decode_ai_reply(ai_reply, conversation_context)
+            return composed, debug, local_analysis
 
+        # Final fallback: include HTTP status and local parsing summary.
+        fallback = (
+            f"AI service error (HTTP {response_data.status_code}).\n"
+            f"Local Analysis: {voltage_response}\n"
+            f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+            f"{ritual_prompt}\n(AI enhancement unavailable)"
+        )
+        return fallback, {}, local_analysis
+
+    result = response_data.json()
     ai_reply = result.get('reply', "I'm here to listen.")
 
     composed, debug = decode_ai_reply(ai_reply, conversation_context)
@@ -788,8 +727,7 @@ def render_splash_interface(auth):
                 if st.button("Sign In", key="splash_sign_in"):
                     st.session_state.show_login = True
                     st.rerun()
-                # [label patch] changed 'Register' to 'Create An Account' (splash button)
-                if st.button("Create An Account", key="splash_register"):
+                if st.button("Register", key="splash_register"):
                     st.session_state.show_register = True
                     st.rerun()
     except Exception:
@@ -813,20 +751,6 @@ def render_splash_interface(auth):
 
 def render_main_app():
     """Main app interface for authenticated users - Full Emotional OS"""
-    # Warm up optional NLP libraries early so Streamlit's runtime has a
-    # chance to import and load models once at startup. This helps avoid
-    # spurious "not available" warnings when the environment already has
-    # the packages but the lazy import path wasn't triggered yet.
-    try:
-        from emotional_os.deploy.modules.nlp_init import warmup_nlp
-        try:
-            warmup_nlp()
-        except Exception:
-            # Best-effort: do not break UI if warmup fails
-            pass
-    except Exception:
-        # If the helper isn't present, proceed without warming up.
-        pass
     # Optional debug overlay: enable by setting the environment variable
     # FP_DEBUG_UI=1 in the deployment environment or export it locally when
     # running the app. This prints helpful session_state keys to the UI so
@@ -848,25 +772,6 @@ def render_main_app():
                 pass
     except Exception:
         pass
-    # Session-level telemetry toggle (lightweight): attach a telemetry handler for this Streamlit session
-    try:
-        from emotional_os.core import signal_parser as _sp
-        # initialize session flag if missing
-        if 'enable_telemetry' not in st.session_state:
-            st.session_state['enable_telemetry'] = False
-        with st.expander('Developer: Telemetry', expanded=False):
-            enable_tel = st.checkbox('Enable Telemetry (show parse/selection events)',
-                                     value=st.session_state.get('enable_telemetry', False))
-            if enable_tel != st.session_state.get('enable_telemetry'):
-                st.session_state['enable_telemetry'] = enable_tel
-                try:
-                    _sp.set_telemetry(bool(enable_tel))
-                except Exception:
-                    # best-effort: do not break the UI if telemetry cannot be toggled
-                    pass
-    except Exception:
-        # If signal_parser isn't available in this environment, skip the UI control
-        pass
     # Defensive client-side guard for third-party DOM libraries (e.g., jQuery)
     # Some compiled frontend code can call jQuery($) with an undefined or
     # otherwise-invalid first argument during quick DOM swaps (theme toggles).
@@ -876,48 +781,48 @@ def render_main_app():
     # falsy/invalid argument. This is defensive and non-invasive: it does
     # not change library behavior for valid inputs.
     try:
-        # [safe_embed_html_local patch] replaced inline defensive jQuery patch with safe_embed_html_local
-        safe_embed_html_local("""
-        <script>
-        (function(){
-            try{
-                var jq = window.jQuery || window.$;
-                if(!jq || !jq.fn) return;
-                // Patch jQuery.fn.init to coerce null/undefined selectors to
-                // an empty string so Sizzle doesn't throw the TypeError when
-                // called with invalid arguments during theme toggles.
+        st.markdown(
+            """
+            <script>
+            (function(){
                 try{
-                    var _origInit = jq.fn.init;
-                    if(typeof _origInit === 'function'){
-                        jq.fn.init = function(selector, context, root){
-                            try{
-                                if(selector === null || typeof selector === 'undefined'){
-                                    selector = '';
-                                }
-                                return _origInit.call(this, selector, context, root);
-                            }catch(e){
+                    var jq = window.jQuery || window.$;
+                    if(!jq || !jq.fn) return;
+                    // Patch jQuery.fn.init to coerce null/undefined selectors to
+                    // an empty string so Sizzle doesn't throw the TypeError when
+                    // called with invalid arguments during theme toggles.
+                    try{
+                        var _origInit = jq.fn.init;
+                        if(typeof _origInit === 'function'){
+                            jq.fn.init = function(selector, context, root){
                                 try{
-                                    return _origInit.call(this, '');
-                                }catch(e2){
-                                    return _origInit.apply(this, arguments);
+                                    if(selector === null || typeof selector === 'undefined'){
+                                        selector = '';
+                                    }
+                                    return _origInit.call(this, selector, context, root);
+                                }catch(e){
+                                    try{
+                                        return _origInit.call(this, '');
+                                    }catch(e2){
+                                        return _origInit.apply(this, arguments);
+                                    }
                                 }
-                            }
-                        };
-                    }
+                            };
+                        }
+                    }catch(e){/* swallow */}
                 }catch(e){/* swallow */}
-            }catch(e){/* swallow */}
-        })();
-        </script>
-        """, use_iframe=False, height=240)
+            })();
+            </script>
+            """,
+            unsafe_allow_html=True,
+        )
     except Exception:
         pass
     # Further defensive guards: patch common DOM lookup APIs and jQuery/$ factory
     # to tolerate unexpected argument types which can surface during theme
     # toggles or fast re-renders in the compiled frontend.
     try:
-        # [safe_embed_html_local patch] replaced querySelector/querySelectorAll
-        # and jQuery factory wrapper with isolated embed (use_iframe=False)
-        safe_embed_html_local(
+        st.markdown(
             """
             <script>
             (function(){
@@ -936,8 +841,7 @@ def render_main_app():
                     document.querySelector = function(sel){
                         try{
                             if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
-                                console.warn(
-                                    'Safe-guard: querySelector called with invalid selector', sel);
+                                console.warn('Safe-guard: querySelector called with invalid selector', sel);
                                 return null;
                             }
                             return _qs.call(document, sel);
@@ -949,15 +853,13 @@ def render_main_app():
                     document.querySelectorAll = function(sel){
                         try{
                             if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
-                                console.warn(
-                                    'Safe-guard: querySelectorAll called with invalid selector', sel);
+                                console.warn('Safe-guard: querySelectorAll called with invalid selector', sel);
                                 // return empty NodeList via a harmless selector on a detached element
                                 return document.createElement('div').querySelectorAll('.fp-no-match');
                             }
                             return _qsAll.call(document, sel);
                         }catch(e){
-                            console.warn(
-                                'Safe-guard: querySelectorAll threw', e);
+                            console.warn('Safe-guard: querySelectorAll threw', e);
                             return document.createElement('div').querySelectorAll('.fp-no-match');
                         }
                     };
@@ -974,8 +876,7 @@ def render_main_app():
                                 }
                                 // Log the offending value and a small stack so we can trace where it came from
                                 try{
-                                    console.warn(
-                                        'Safe-guard: jQuery factory called with invalid arg:', arg);
+                                    console.warn('Safe-guard: jQuery factory called with invalid arg:', arg);
                                     console.warn('Safe-guard: arg type =', Object.prototype.toString.call(arg), 'typeof=', typeof arg);
                                     console.warn(new Error('jQuery factory invalid-arg stack').stack);
                                 }catch(_e){}
@@ -996,18 +897,14 @@ def render_main_app():
             })();
             </script>
             """,
-            use_iframe=False,
-            height=240,
+            unsafe_allow_html=True,
         )
     except Exception:
         pass
     # Instrument unhandled client errors with an in-page overlay to help
     # capture stack traces when theme toggles still throw in the browser.
     try:
-        # [safe_embed_html_local patch] replaced in-page client error overlay
-        # with isolated embed (use_iframe=False) so handlers run in the
-        # parent document but are managed via the helper for traceability.
-        safe_embed_html_local(
+        st.markdown(
             """
             <script>
             (function(){
@@ -1056,16 +953,14 @@ def render_main_app():
                     window.addEventListener('unhandledrejection', function(ev){
                         try{
                             var m = ev && ev.reason && ev.reason.stack ? ev.reason.stack : JSON.stringify(ev.reason);
-                            showErrorOverlay(
-                                'UnhandledPromiseRejection: ' + m);
+                            showErrorOverlay('UnhandledPromiseRejection: ' + m);
                         }catch(e){}
                     }, true);
                 }catch(e){}
             })();
             </script>
             """,
-            use_iframe=False,
-            height=300,
+            unsafe_allow_html=True,
         )
     except Exception:
         pass
@@ -1168,48 +1063,10 @@ def render_main_app():
                 if mgr:
                     prefs = mgr.load_user_preferences()
                     # Only set defaults if session state doesn't already have them
-                    # Default to FALSE for new users - requires explicit consent
                     if prefs:
                         if 'persist_history' not in st.session_state:
                             st.session_state['persist_history'] = prefs.get(
-                                'persist_history', False)
-
-                    # CONVERSATION CONTINUITY: Auto-load most recent conversation if available
-                    # Only do this if user hasn't explicitly selected a conversation or started a new one
-                    if ('selected_conversation' not in st.session_state and
-                        'conversation_title' not in st.session_state and
-                            'conversation_history' not in st.session_state):
-                        try:
-                            conversations = mgr.load_conversations()
-                            if conversations:
-                                # Load the most recent conversation (first in list)
-                                recent_conv = conversations[0]
-                                st.session_state['selected_conversation'] = recent_conv['conversation_id']
-                                st.session_state['conversation_title'] = recent_conv['title']
-
-                                # Continue the conversation in-place: set current conversation id
-                                # so subsequent messages append to this conversation rather than
-                                # starting a new one. Mark as already named so we don't re-run
-                                # the auto-naming flow for existing conversations.
-                                try:
-                                    st.session_state['current_conversation_id'] = recent_conv['conversation_id']
-                                    st.session_state['conversation_named'] = True
-                                except Exception:
-                                    pass
-
-                                # Load the conversation messages if available
-                                if recent_conv.get('messages'):
-                                    # Convert the messages to the expected format
-                                    messages = []
-                                    for msg in recent_conv['messages']:
-                                        if isinstance(msg, dict):
-                                            messages.append(msg)
-                                    if messages:
-                                        st.session_state['conversation_history'] = messages
-
-                        except Exception:
-                            # If conversation loading fails, just continue with a new conversation
-                            pass
+                                'persist_history', True)
                         if 'persist_confirmed' not in st.session_state:
                             st.session_state['persist_confirmed'] = prefs.get(
                                 'persist_confirmed', False)
@@ -1253,7 +1110,7 @@ def render_main_app():
                                 conv_id = str(uuid.uuid4())
                                 first_msg = demo_messages[0].get('user') if isinstance(
                                     demo_messages, list) and demo_messages and isinstance(demo_messages[0], dict) else None
-                                title = generate_auto_name(first_msg, st.session_state.get('first_name')) if generate_auto_name and first_msg else (
+                                title = generate_auto_name(first_msg) if generate_auto_name and first_msg else (
                                     st.session_state.get('conversation_title') or 'Migrated Conversation')
                                 mgr.save_conversation(
                                     conv_id, title, demo_messages)
@@ -1329,34 +1186,12 @@ def render_main_app():
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
                 svg_markup_side = _load_inline_svg(svg_name_side)
-                # [svg size patch] constrain sidebar svg size to avoid oversized icon
-                svg_markup_side_constrained = svg_markup_side
-                try:
-                    # If the inline svg doesn't declare width/height, inject conservative values.
-                    # This is a simple, robust replacement that edits only the first <svg ...> tag.
-                    import re
-
-                    def _inject_size(match):
-                        tag = match.group(0)
-                        # If width/height already present, leave unchanged
-                        if re.search(r"\bwidth\s*=\b|\bheight\s*=\b", tag, flags=re.IGNORECASE):
-                            return tag
-                        return tag.replace('<svg', '<svg width="120" height="120"')
-
-                    svg_markup_side_constrained = re.sub(
-                        r'<svg[^>]*', _inject_size, svg_markup_side_constrained, count=1, flags=re.IGNORECASE)
-                except Exception:
-                    # Best-effort: if anything fails, fall back to the original markup
-                    svg_markup_side_constrained = svg_markup_side
-
                 st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n<div style=\"max-width:120px; margin:auto; height:120px;\">{svg_markup_side_constrained}</div>\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n</div>", unsafe_allow_html=True)
+                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
             except Exception:
                 st.markdown("### Account")
-            st.markdown("<div style='margin-top:16px;'></div>",
-                        unsafe_allow_html=True)
             st.markdown(
-                "**Create an Account** or **Sign In** to save your conversations and unlock full features.")
+                "Create an account or sign in to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
@@ -1368,8 +1203,7 @@ def render_main_app():
                         st.session_state['sidebar_show_register'] = False
                     # No forced rerun here; allow the current render to show the expander
             with col_b:
-                # [label patch] changed 'Register' to 'Create An Account' (sidebar button)
-                if st.button("Create An Account", key="sidebar_toggle_register"):
+                if st.button("Register", key="sidebar_toggle_register"):
                     st.session_state['sidebar_show_register'] = not st.session_state.get(
                         'sidebar_show_register', False)
                     if st.session_state['sidebar_show_register']:
@@ -1412,8 +1246,7 @@ def render_main_app():
                         else:
                             st.error("Authentication subsystem unavailable")
                 if st.session_state.get('sidebar_show_register'):
-                    # [label patch] changed expander title 'Register' to 'Create An Account' (sidebar expander)
-                    with st.expander("Create An Account", expanded=True):
+                    with st.expander("Register", expanded=True):
                         if auth:
                             auth.render_register_form(in_sidebar=True)
                         else:
@@ -1423,6 +1256,24 @@ def render_main_app():
                 pass
         else:
             st.markdown("### Settings")
+
+        # Persist history toggle
+        persist_default = st.session_state.get('persist_history', True)
+        st.session_state['persist_history'] = st.checkbox(
+            "💾 Save my chats",
+            value=persist_default,
+            help="Automatically save conversations for later retrieval"
+        )
+        # Best-effort: persist the user's preference back to server when available
+        try:
+            mgr = st.session_state.get('conversation_manager')
+            if mgr:
+                mgr.save_user_preferences({
+                    'persist_history': bool(st.session_state.get('persist_history', False)),
+                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
+                })
+        except Exception:
+            pass
 
         # Privacy & Consent settings - only show when user is authenticated
         if st.session_state.get('authenticated'):
@@ -1444,107 +1295,30 @@ def render_main_app():
             if st.button("➕ New Conversation", use_container_width=True):
                 st.session_state['current_conversation_id'] = str(uuid.uuid4())
                 st.session_state['conversation_title'] = "New Conversation"
-                # Reset the in-session conversation history for this user so the
-                # next message will be treated as the first message (and trigger
-                # the naming process). Also clear any named flag.
+                # Ensure any previously-selected conversation is cleared
+                try:
+                    st.session_state.pop('selected_conversation', None)
+                except Exception:
+                    pass
+
                 st.session_state['conversation_history_' +
                                  st.session_state['user_id']] = []
-                st.session_state['conversation_named'] = False
+                # Optimistically add this new conversation to the session cache
+                try:
+                    cid = st.session_state['current_conversation_id']
+                    cached = st.session_state.setdefault('session_cached_conversations', [])
+                    # Avoid duplicates
+                    if not any(c.get('conversation_id') == cid for c in cached):
+                        cached.insert(0, {
+                            'conversation_id': cid,
+                            'title': st.session_state.get('conversation_title', 'New Conversation'),
+                            'updated_at': datetime.datetime.now().isoformat(),
+                            'message_count': 0,
+                            'processing_mode': st.session_state.get('processing_mode', 'hybrid')
+                        })
+                except Exception:
+                    pass
                 st.rerun()
-
-            # [title-edit patch] Offer inline title editing immediately after auto-generation
-            try:
-                # Build the conversation history key for this user
-                _conv_key = f"conversation_history_{st.session_state.get('user_id')}"
-                _curr_title = st.session_state.get(
-                    'conversation_title', 'New Conversation')
-                # Show a compact title row and, if requested, an inline editor
-                if st.session_state.get('offer_title_edit', False):
-                    st.markdown("**Conversation title**")
-                    # Use a dedicated input key to avoid collisions
-                    _edited = st.text_input(
-                        "Edit title", value=_curr_title, key="inline_edit_conversation_title")
-                    c1, c2 = st.columns([1, 1], gap="small")
-                    with c1:
-                        if st.button("Save", key="save_inline_title"):
-                            # Persist the edited title to session state and mark named
-                            st.session_state['conversation_title'] = _edited.strip(
-                            ) or _curr_title
-                            st.session_state['conversation_named'] = True
-                            st.session_state['offer_title_edit'] = False
-                            # Attempt immediate persistence if ConversationManager is present
-                            try:
-                                mgr = st.session_state.get(
-                                    'conversation_manager')
-                                if mgr:
-                                    conv_id = st.session_state.get(
-                                        'current_conversation_id') or str(uuid.uuid4())
-                                    # Normalize messages in-session to the lightweight form expected by the manager
-                                    _raw = st.session_state.get(_conv_key, [])
-                                    _norm = []
-                                    for t in _raw:
-                                        if isinstance(t, dict) and 'role' in t and 'content' in t:
-                                            _norm.append(t)
-                                            continue
-                                        if isinstance(t, dict) and 'user' in t and 'assistant' in t:
-                                            _norm.append(
-                                                {'role': 'user', 'content': t.get('user', '')})
-                                            _norm.append(
-                                                {'role': 'assistant', 'content': t.get('assistant', '')})
-                                            continue
-                                        if isinstance(t, dict) and 'user' in t:
-                                            _norm.append(
-                                                {'role': 'user', 'content': t.get('user', '')})
-                                        elif isinstance(t, dict) and 'assistant' in t:
-                                            _norm.append(
-                                                {'role': 'assistant', 'content': t.get('assistant', '')})
-                                        else:
-                                            try:
-                                                _norm.append(
-                                                    {'role': 'user', 'content': str(t)})
-                                            except Exception:
-                                                _norm.append(
-                                                    {'role': 'user', 'content': ''})
-
-                                    try:
-                                        mgr.save_conversation(
-                                            conversation_id=conv_id,
-                                            title=st.session_state['conversation_title'],
-                                            messages=_norm,
-                                            processing_mode=st.session_state.get(
-                                                'processing_mode', 'hybrid'),
-                                            auto_name=None,
-                                            glyphs_triggered=st.session_state.get(
-                                                'conversation_glyphs', [])
-                                        )
-                                    except Exception:
-                                        # Swallow persistence errors here; the app will still
-                                        # attempt to persist at the normal save points.
-                                        pass
-                            except Exception:
-                                pass
-                            # Refresh UI to reflect saved title
-                            try:
-                                st.experimental_rerun()
-                            except Exception:
-                                pass
-                    with c2:
-                        if st.button("Cancel", key="cancel_inline_title"):
-                            st.session_state['offer_title_edit'] = False
-                            try:
-                                st.experimental_rerun()
-                            except Exception:
-                                pass
-                else:
-                    # Show current title compactly when not editing
-                    try:
-                        st.markdown(
-                            f"**Conversation:** {st.session_state.get('conversation_title', 'New Conversation')}")
-                    except Exception:
-                        pass
-            except Exception:
-                # Best-effort: do not break the sidebar if title UI fails
-                pass
 
         # Human-in-the-Loop (HIL) controls removed per user request.
         # All HIL-related session flags are cleared so the sidebar no longer
@@ -1693,6 +1467,52 @@ def render_main_app():
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
 
+    # If the user selected a conversation from the sidebar, load it now
+    try:
+        selected = st.session_state.get('selected_conversation')
+        mgr = st.session_state.get('conversation_manager')
+        # If manager missing, try to initialize it (best-effort)
+        if not mgr and 'user_id' in st.session_state:
+            try:
+                from emotional_os.deploy.modules.conversation_manager import initialize_conversation_manager
+                mgr = initialize_conversation_manager()
+                if mgr:
+                    st.session_state['conversation_manager'] = mgr
+            except Exception:
+                mgr = None
+
+        # Only attempt load when a selection exists and it's not already the active conversation
+        if selected and mgr and selected != st.session_state.get('current_conversation_id'):
+            try:
+                conv = mgr.load_conversation(selected)
+                if conv:
+                    msgs = conv.get('messages') if isinstance(conv.get('messages'), list) else conv.get('messages', [])
+                    st.session_state[conversation_key] = msgs or []
+                    st.session_state['current_conversation_id'] = conv.get('conversation_id', selected)
+                    st.session_state['conversation_title'] = conv.get('title', st.session_state.get('conversation_title', 'Conversation'))
+                else:
+                    try:
+                        st.sidebar.warning('Could not load the selected conversation (not found).')
+                    except Exception:
+                        pass
+            except Exception as e:
+                logger.warning(f"Failed to load selected conversation {selected}: {e}")
+                try:
+                    st.sidebar.error(f'Error loading conversation: {e}')
+                except Exception:
+                    pass
+            # Clear the transient selection and rerun so the main UI reflects the loaded messages
+            try:
+                st.session_state.pop('selected_conversation', None)
+            except Exception:
+                pass
+            try:
+                st.rerun()
+            except Exception:
+                pass
+    except Exception:
+        # Best-effort: do not block UI if loading fails
+        pass
     # Initialize Fallback Protocols for tone-aware response handling
     if "fallback_protocol" not in st.session_state and FallbackProtocol:
         try:
@@ -2010,6 +1830,7 @@ def render_main_app():
                             "debug_glyph_rows", [])
                         try:
                             saori_url = st.secrets.get(
+                                "supabase", {}).get("current_saori_url") or st.secrets.get(
                                 "supabase", {}).get("saori_function_url")
                             supabase_key = st.secrets.get(
                                 "supabase", {}).get("key")
@@ -2043,13 +1864,10 @@ def render_main_app():
                                         f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
                                     ])
                                     payload["document_context"] = doc_context
-                                # Use user's JWT token for authenticated requests, fallback to anon key
-                                auth_token = st.session_state.get(
-                                    'user_jwt_token') or supabase_key
                                 response_data = requests.post(
                                     saori_url,
                                     headers={
-                                        "Authorization": f"Bearer {auth_token}",
+                                        "Authorization": f"Bearer {supabase_key}",
                                         "Content-Type": "application/json"
                                     },
                                     json=payload,
@@ -2107,7 +1925,21 @@ def render_main_app():
                                             # If local re-parsing fails, fall back to the AI reply
                                             response = ai_reply
                                     else:
-                                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                        # Surface any payload the AI service included when possible,
+                                        # otherwise fall back to a locally-generated summary.
+                                        try:
+                                            body = response_data.json()
+                                            response = body.get('reply') or body.get('error') or ''
+                                        except Exception:
+                                            response = (getattr(response_data, 'text', '') or '').strip()
+
+                                        if not response:
+                                            response = (
+                                                f"AI service error (HTTP {response_data.status_code}).\n"
+                                                f"Local Analysis: {voltage_response}\n"
+                                                f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n"
+                                                f"{ritual_prompt}\n"
+                                            )
                         except Exception as e:
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
@@ -2272,12 +2104,50 @@ def render_main_app():
         entry = {
             "user": user_input,
             "assistant": response,
-            "first_name": st.session_state.get('first_name') or st.session_state.get('username'),
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
             "timestamp": datetime.datetime.now().isoformat()
         }
         st.session_state[conversation_key].append(entry)
+
+        # If this is the first exchange in the conversation, run the auto-naming
+        # logic immediately so the UI reflects a helpful title even when
+        # persistence is disabled or pending.
+        try:
+            if len(st.session_state.get(conversation_key, [])) == 1:
+                if generate_auto_name:
+                    title = generate_auto_name(user_input)
+                    st.session_state['conversation_title'] = title
+                else:
+                    st.session_state['conversation_title'] = st.session_state.get('conversation_title', 'New Conversation')
+        except Exception:
+            pass
+
+        # Optimistically update session-cached conversation metadata so the
+        # sidebar reflects new messages immediately even if server-side save
+        # fails or is pending.
+        try:
+            cid = st.session_state.get('current_conversation_id', 'default')
+            cached = st.session_state.setdefault('session_cached_conversations', [])
+            updated = False
+            if isinstance(cached, list):
+                for c in cached:
+                    if c and c.get('conversation_id') == cid:
+                        c['title'] = st.session_state.get('conversation_title', c.get('title', 'New Conversation'))
+                        c['updated_at'] = datetime.datetime.now().isoformat()
+                        c['message_count'] = len(st.session_state.get(conversation_key, []))
+                        updated = True
+                        break
+                if not updated:
+                    cached.insert(0, {
+                        'conversation_id': cid,
+                        'title': st.session_state.get('conversation_title', 'New Conversation'),
+                        'updated_at': datetime.datetime.now().isoformat(),
+                        'message_count': len(st.session_state.get(conversation_key, [])),
+                        'processing_mode': processing_mode
+                    })
+        except Exception:
+            pass
 
         # Learn from hybrid mode conversations to improve local mode
         # AND generate new glyphs dynamically during dialogue
@@ -2309,7 +2179,8 @@ def render_main_app():
                     # Use adaptive extractor with persistence
                     adaptive_extractor = AdaptiveSignalExtractor(
                         adaptive=True,
-                        use_discovered=True
+                        use_discovered=True,
+                        persistence_path=f"learning/user_signals/{st.session_state['persistent_user_id']}_signals.json"
                     )
 
                     # Create processor with persistent user ID
@@ -2341,33 +2212,16 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
 
-                    # Update learning statistics (defensive access to different evolution result shapes)
+                    # Update learning statistics
                     st.session_state['learning_stats']['exchanges_processed'] += 1
-                    # Support multiple possible shapes: top-level 'learning_result' or
-                    # nested under pipeline_stages.hybrid_learning.learning_result
-                    lr = evolution_result.get('learning_result') if isinstance(
-                        evolution_result, dict) else None
-                    if not lr:
-                        lr = evolution_result.get('pipeline_stages', {}).get('hybrid_learning', {}).get(
-                            'learning_result') if isinstance(evolution_result, dict) else None
-
-                    if lr and lr.get('learned_to_user', False):
+                    if evolution_result['learning_result'].get('learned_to_user', False):
                         st.session_state['learning_stats']['signals_learned'] += len(
-                            evolution_result.get('emotional_signals', []) if isinstance(
-                                evolution_result, dict) else []
+                            evolution_result.get('emotional_signals', [])
                         )
 
-                    # Check if new glyphs were generated (support multiple keys/shapes)
-                    new_glyphs = []
-                    # 1) top-level key used by some implementations
-                    if isinstance(evolution_result, dict) and evolution_result.get('new_glyphs_generated'):
-                        new_glyphs = evolution_result.get(
-                            'new_glyphs_generated', [])
-                    # 2) pipeline_stages glyph_generation -> new_glyphs
-                    if not new_glyphs:
-                        new_glyphs = evolution_result.get('pipeline_stages', {}).get('glyph_generation', {}).get(
-                            'new_glyphs', []) if isinstance(evolution_result, dict) else []
-
+                    # Check if new glyphs were generated
+                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
+                        'new_glyphs_generated', [])
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
                         if 'new_glyphs_this_session' not in st.session_state:
@@ -2430,9 +2284,8 @@ def render_main_app():
                     logger.error(
                         f"Fallback learning also failed: {fallback_e}")
             except Exception as e:
-                # Non-fatal: learning should not break the app. Log with traceback
-                logger.warning(
-                    f"Hybrid learning failed: {repr(e)}", exc_info=True)
+                # Non-fatal: learning should not break the app
+                logger.warning(f"Hybrid learning failed: {e}")
 
         # Persist to Supabase if the user opted in using the new conversation manager
         try:
@@ -2441,87 +2294,41 @@ def render_main_app():
                 conversation_id = st.session_state.get(
                     'current_conversation_id', 'default')
 
-                # Auto-name conversation based on first message only once per
-                # conversation. If this conversation has already been named
-                # (`conversation_named`), skip auto-generation.
-                if len(st.session_state[conversation_key]) == 1 and not st.session_state.get('conversation_named', False):
+                # Auto-name conversation based on first message
+                # Just added first exchange
+                if len(st.session_state[conversation_key]) == 1:
                     if generate_auto_name:
-                        # Import the enhanced function
-                        from emotional_os.deploy.modules.conversation_manager import generate_auto_name_with_glyphs
-                        auto_name, detected_glyphs = generate_auto_name_with_glyphs(
-                            user_input)
-                        title = auto_name
+                        title = generate_auto_name(user_input)
                         st.session_state['conversation_title'] = title
-                        st.session_state['conversation_glyphs'] = detected_glyphs
-                        # Offer an inline title edit once immediately after auto-generation
-                        st.session_state['offer_title_edit'] = True
-                        # Mark this conversation as named so we don't re-run naming
-                        # on subsequent message appends or sessions unless the user
-                        # explicitly starts a new conversation.
-                        st.session_state['conversation_named'] = True
                     else:
                         title = "New Conversation"
-                        detected_glyphs = []
-                elif len(st.session_state[conversation_key]) == 1 and st.session_state.get('conversation_named', False):
-                    # Already named (e.g., loaded from previous session); keep stored values
-                    title = st.session_state.get(
-                        'conversation_title', 'New Conversation')
-                    detected_glyphs = st.session_state.get(
-                        'conversation_glyphs', [])
                 else:
                     title = st.session_state.get(
                         'conversation_title', 'New Conversation')
-                    detected_glyphs = st.session_state.get(
-                        'conversation_glyphs', [])
 
-                # Normalize messages into the format ConversationManager expects.
-                # Older UI stored turns as dicts with 'user' and 'assistant' keys
-                # (both in one dict). ConversationManager expects a list of
-                # per-role messages with a 'content' key. Build a normalized
-                # list while preserving order.
-                raw_messages = st.session_state[conversation_key]
-                normalized_messages = []
-                for turn in raw_messages:
-                    # If this entry already looks normalized, use it
-                    if isinstance(turn, dict) and 'content' in turn and 'role' in turn:
-                        normalized_messages.append(turn)
-                        continue
-
-                    # Legacy combined-turn format: {'user': ..., 'assistant': ...}
-                    if isinstance(turn, dict) and 'user' in turn and 'assistant' in turn:
-                        # Append user then assistant as separate messages
-                        normalized_messages.append({'role': 'user', 'content': turn.get(
-                            'user', ''), 'first_name': turn.get('first_name')})
-                        normalized_messages.append(
-                            {'role': 'assistant', 'content': turn.get('assistant', '')})
-                        continue
-
-                    # Fallback: try to map known keys
-                    if isinstance(turn, dict) and 'user' in turn:
-                        normalized_messages.append(
-                            {'role': 'user', 'content': turn.get('user', '')})
-                    elif isinstance(turn, dict) and 'assistant' in turn:
-                        normalized_messages.append(
-                            {'role': 'assistant', 'content': turn.get('assistant', '')})
-                    else:
-                        # Unknown format: stringify and store as user message
-                        try:
-                            txt = str(turn)
-                        except Exception:
-                            txt = ''
-                        normalized_messages.append(
-                            {'role': 'user', 'content': txt})
-
+                # Save to database with conversation manager
+                messages = st.session_state[conversation_key]
                 success, message = manager.save_conversation(
                     conversation_id=conversation_id,
                     title=title,
-                    messages=normalized_messages,
-                    processing_mode=processing_mode,
-                    auto_name=title if len(raw_messages) == 1 else None,
-                    glyphs_triggered=detected_glyphs
+                    messages=messages,
+                    processing_mode=processing_mode
                 )
-
-                if not success:
+                if success:
+                    # On success, ensure the sidebar shows this conversation immediately
+                    try:
+                        cached = st.session_state.setdefault('session_cached_conversations', [])
+                        if not any(c.get('conversation_id') == conversation_id for c in cached):
+                            cached.insert(0, {
+                                'conversation_id': conversation_id,
+                                'title': title,
+                                'updated_at': datetime.datetime.now().isoformat(),
+                                'message_count': len(messages),
+                                'processing_mode': processing_mode
+                            })
+                    except Exception:
+                        pass
+                else:
                     logger.warning(f"Failed to save conversation: {message}")
         except Exception as e:
             # Best-effort: do not break the UI if persistence fails

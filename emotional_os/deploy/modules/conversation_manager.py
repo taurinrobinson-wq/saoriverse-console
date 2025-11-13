@@ -15,110 +15,29 @@ import os
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import re
-import base64
 
 try:
     import requests
 except Exception:
     requests = None
 
-# Import Streamlit if available. If not, provide a minimal stub so that
-# static import checks or CLI tools can import this module without having
-# Streamlit installed. The real Streamlit will be used at runtime when
-# the app runs in its proper environment.
 import streamlit as st
 
 logger = logging.getLogger(__name__)
 
 
-def _mask_key(key: Optional[str]) -> str:
-    """Return a masked representation of a key for safe logging.
-
-    Shows only leading/trailing characters with middle elided so logs
-    can help debug which key is being used without revealing secrets.
+def generate_auto_name(first_message: str, max_length: int = 50) -> str:
     """
-    try:
-        if not key:
-            return "<none>"
-        s = str(key)
-        # If it contains spaces (e.g. 'Bearer <token>'), mask the token part
-        if ' ' in s:
-            parts = s.split(' ', 1)
-            prefix = parts[0]
-            token = parts[1]
-            if len(token) <= 8:
-                tmask = token[:2] + '...' + token[-2:]
-            else:
-                tmask = token[:4] + '...' + token[-4:]
-            return f"{prefix} {tmask}"
-        if len(s) <= 8:
-            return s[:2] + '...' + s[-2:]
-        return s[:4] + '...' + s[-4:]
-    except Exception:
-        return "<masked>"
+    Generate a conversation name from the first user message.
 
-
-def generate_conversation_title(message: str, max_length: int = 35) -> str:
+    Similar to Microsoft Copilot's approach:
+    - Extract key emotional terms or topics
+    - Create a concise, meaningful title
+    - Limit to max_length characters
     """
-    Simple conversation title: today's date + short summary (<= max_length).
+    if not first_message:
+        return "New Conversation"
 
-    This is intentionally lightweight and deterministic so titles are
-    easy to read and auditable. Used in place of the earlier glyph-based
-    auto-naming.
-    """
-    try:
-        if not message or not isinstance(message, str):
-            return datetime.now().strftime('%Y-%m-%d')
-        # Take first sentence/clause
-        parts = re.split(r'[\.\n\?!]', message.strip(), maxsplit=1)
-        summary = parts[0].strip() if parts else message.strip()
-        summary = re.sub(r"\s+", ' ', summary)
-        if len(summary) > max_length:
-            summary = summary[: max_length - 1].rstrip() + '…'
-        date_str = datetime.now().strftime('%Y-%m-%d')
-        title = f"{date_str} — {summary}"
-
-        # [title-audit patch] Log a masked preview of the original message
-        try:
-            preview = re.sub(r"\s+", ' ', (message or '').strip())
-            if len(preview) > 120:
-                preview = preview[:117].rstrip() + '...'
-            # Avoid logging full user content in raw form; show a preview only
-            logger.info("Generated conversation title: %s | preview: %s",
-                        title, preview)
-        except Exception:
-            # Non-fatal audit logging failure
-            logger.debug(
-                "Generated conversation title (logging preview failed): %s", title)
-
-        return title
-    except Exception:
-        return datetime.now().strftime('%Y-%m-%d')
-
-
-def generate_auto_name_with_glyphs(first_message: str, max_length: int = 50) -> Tuple[str, List[str]]:
-    """
-    Backwards-compatible wrapper: return (date + short summary, []).
-    Glyph detection intentionally disabled; return empty glyph list.
-    """
-    title = generate_conversation_title(first_message, max_length=35)
-    logger.debug("generate_auto_name_with_glyphs -> %s", title)
-    return title, []
-
-
-def generate_auto_name(first_message: str, first_name: Optional[str] = None, max_length: int = 50) -> str:
-    """
-    Simple wrapper that returns the date + short summary title.
-    Signature preserved for compatibility.
-    """
-    title, _ = generate_auto_name_with_glyphs(first_message, max_length)
-    return title
-
-
-def _generate_traditional_name(first_message: str, max_length: int = 50) -> str:
-    """
-    Traditional conversation naming fallback.
-    """
     # Clean the text
     text = first_message.strip()[:100]
 
@@ -156,18 +75,20 @@ class ConversationManager:
 
     def __init__(self, user_id: str, supabase_url: Optional[str] = None, supabase_key: Optional[str] = None):
         self.user_id = user_id
-        self.supabase_url = supabase_url or st.secrets.get(
-            "supabase", {}).get("url")
-
-        # Try to get service role key first (bypasses RLS), then fall back to regular key
-        service_role_key = (
-            supabase_key or
-            st.secrets.get("supabase", {}).get("service_role_key") or
-            st.secrets.get("supabase", {}).get("service_role") or
-            os.getenv("SUPABASE_SERVICE_ROLE_KEY") or
-            st.secrets.get("supabase", {}).get("key")  # fallback to anon key
+        # Prefer explicit args, then environment variables, then Streamlit secrets.
+        self.supabase_url = (
+            supabase_url
+            or os.environ.get("SUPABASE_URL")
+            or st.secrets.get("supabase", {}).get("url")
         )
-        self.supabase_key = service_role_key
+        # Support both a service role key (preferred for server-side writes)
+        # and the regular SUPABASE_KEY used in some deployments.
+        self.supabase_key = (
+            supabase_key
+            or os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+            or os.environ.get("SUPABASE_KEY")
+            or st.secrets.get("supabase", {}).get("key")
+        )
         self.base_url = self._normalize_supabase_url(
             self.supabase_url) if self.supabase_url else None
 
@@ -182,128 +103,17 @@ class ConversationManager:
 
     def _get_headers(self) -> Dict:
         """Get headers for Supabase API requests."""
-        # Prefer using a stable anon/service key for the `apikey` header and
-        # use a service role key for Authorization when available. If only a
-        # user JWT is present in session state, fall back to that for
-        # Authorization while leaving `apikey` as the anon key (that's the
-        # recommended supabase pattern for browser-like requests).
-        try:
-            anon_key = None
-            try:
-                anon_key = st.secrets.get('supabase', {}).get('key')
-            except Exception:
-                anon_key = None
-
-            # Fallback to environment variable if streamlit secrets are not used
-            if not anon_key:
-                anon_key = os.getenv(
-                    'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_KEY')
-
-            # Determine auth token: prefer service role (self.supabase_key),
-            # otherwise fall back to a user JWT in session state, then anon_key.
-            auth_token = self.supabase_key or st.session_state.get(
-                'user_jwt_token') if hasattr(st, 'session_state') else None
-            if not auth_token:
-                auth_token = anon_key
-
-            headers = {
-                'Content-Type': 'application/json',
-                'apikey': anon_key or auth_token,
-                'Authorization': f'Bearer {auth_token}' if auth_token else '',
-                'Prefer': 'return=representation'
-            }
-            return headers
-        except Exception:
-            # Best-effort fallback
-            return {
-                'Content-Type': 'application/json',
-                'apikey': self.supabase_key,
-                'Authorization': f'Bearer {self.supabase_key}',
-                'Prefer': 'return=representation'
-            }
-
-    def _extract_user_id_from_jwt(self, auth_value: Optional[str]) -> Optional[str]:
-        """Try to extract a user id from a JWT-like token without verification.
-
-        Looks for common claims like 'sub', 'user_id', or 'uid' in the token payload.
-        This is best-effort and used only as a fallback when session user_id
-        isn't available.
-        """
-        try:
-            if not auth_value:
-                return None
-            # Strip Bearer prefix if present
-            token = auth_value.split(
-                ' ', 1)[1] if ' ' in auth_value else auth_value
-            if '.' not in token:
-                return None
-            # JWT payload is the middle segment
-            parts = token.split('.')
-            if len(parts) < 2:
-                return None
-            payload_b64 = parts[1]
-            # Fix padding
-            rem = len(payload_b64) % 4
-            if rem:
-                payload_b64 += '=' * (4 - rem)
-            decoded = base64.urlsafe_b64decode(payload_b64.encode('utf-8'))
-            payload = json.loads(decoded.decode('utf-8'))
-            # Common claim names
-            for k in ('sub', 'user_id', 'uid', 'id'):
-                if k in payload and payload.get(k):
-                    return str(payload.get(k))
-            # Try email as fallback (not ideal but better than nothing)
-            if payload.get('email'):
-                return str(payload.get('email'))
-        except Exception:
-            return None
-        return None
-
-    def _get_effective_user_id(self, headers: Dict) -> Optional[str]:
-        """Resolve the user id to use when saving/loading conversations.
-
-        Priority:
-        1. Explicit `self.user_id` passed to the manager
-        2. `st.session_state['user_id']` if available
-        3. Extract from Authorization/apikey JWT payload (best-effort)
-        """
-        # 1. Explicit
-        if self.user_id:
-            return self.user_id
-
-        # 2. Session state
-        try:
-            if hasattr(st, 'session_state') and st.session_state.get('user_id'):
-                return st.session_state.get('user_id')
-        except Exception:
-            pass
-
-        # 3. Try to extract from headers (Authorization or apikey)
-        try:
-            auth = headers.get('Authorization') or headers.get('apikey')
-            if auth:
-                uid = self._extract_user_id_from_jwt(auth)
-                if uid:
-                    return uid
-        except Exception:
-            pass
-
-        return None
+        return {
+            'Content-Type': 'application/json',
+            'apikey': self.supabase_key,
+            'Authorization': f'Bearer {self.supabase_key}',
+            'Prefer': 'return=representation'
+        }
 
     def save_conversation(self, conversation_id: str, title: str, messages: List[Dict],
-                          processing_mode: str = "hybrid", auto_name: Optional[str] = None,
-                          custom_name: Optional[str] = None, glyphs_triggered: Optional[List[str]] = None) -> Tuple[bool, str]:
+                          processing_mode: str = "hybrid") -> Tuple[bool, str]:
         """
         Save or update a conversation to Supabase.
-
-        Args:
-            conversation_id: Unique conversation identifier
-            title: Legacy title field (for backward compatibility)
-            messages: List of conversation messages
-            processing_mode: AI processing mode
-            auto_name: Auto-generated glyph-based name
-            custom_name: User-provided custom name (overrides auto_name)
-            glyphs_triggered: List of emotional glyphs detected
 
         Returns: (success: bool, message: str)
         """
@@ -314,234 +124,29 @@ class ConversationManager:
             return False, "Requests library not available"
 
         try:
-            # Build headers and determine effective user id before saving
-            conv_url = f"{self.base_url}/rest/v1/conversations"
-            headers = self._get_headers()
-            effective_user_id = self._get_effective_user_id(headers)
-            if not effective_user_id:
-                logger.error("No user_id available for conversation save (self.user_id=%s, session=%s)",
-                             self.user_id, getattr(st, 'session_state', {}).get('user_id', None) if hasattr(st, 'session_state') else None)
-                return False, "Failed to save conversation: user_id is missing"
-
-            # Ensure we always provide a non-null title (DB requires title NOT NULL).
-            # Prefer explicit `title`, then `auto_name`, then generate from first message.
-            try:
-                generated_auto = auto_name or (generate_auto_name(messages[0].get('content') if messages else '',
-                                                                  st.session_state.get('first_name') if hasattr(st, 'session_state') else None))
-            except Exception:
-                generated_auto = auto_name or (messages[0].get(
-                    'content')[:50] if messages else 'New Conversation')
-
-            chosen_title = title or generated_auto or 'New Conversation'
-
-            conv_payload = {
-                'user_id': effective_user_id,
+            url = f"{self.base_url}/rest/v1/conversations"
+            payload = {
+                'user_id': self.user_id,
                 'conversation_id': conversation_id,
-                'title': chosen_title,
-                'auto_name': generated_auto,
-                'custom_name': custom_name,
-                'glyphs_triggered': glyphs_triggered or [],
+                'title': title,
+                'messages': json.dumps(messages),
                 'processing_mode': processing_mode,
-                'message_count': len(messages),
                 'updated_at': datetime.now().isoformat(),
-                'first_message': messages[0]['content'] if messages else None
+                'message_count': len(messages)
             }
 
-            # Upsert conversation metadata using Supabase REST `on_conflict`
-            # so that writes are idempotent and avoid 409 duplicate-key errors.
-            try:
-                logger.info("Upserting conversation metadata to %s apikey=%s Authorization=%s",
-                            conv_url, _mask_key(headers.get('apikey')), _mask_key(headers.get('Authorization')))
-            except Exception:
-                pass
+            # Upsert: insert if new, update if exists
+            response = requests.post(
+                url,
+                headers=self._get_headers(),
+                json=[payload],
+                timeout=10
+            )
 
-            # Prepare headers to request merged-duplicate resolution. Combine
-            # return representation with merge instruction so we still get back
-            # the inserted/updated representation when available.
-            headers_upsert = dict(headers)
-            prefer_old = headers_upsert.get('Prefer')
-            if prefer_old:
-                headers_upsert['Prefer'] = f"{prefer_old}, resolution=merge-duplicates"
+            if response.status_code in (200, 201):
+                return True, "Conversation saved successfully"
             else:
-                headers_upsert['Prefer'] = 'return=representation, resolution=merge-duplicates'
-
-            # Use on_conflict to specify the unique key columns for upsert.
-            try:
-                conv_response = requests.post(
-                    conv_url,
-                    headers=headers_upsert,
-                    params={'on_conflict': 'user_id,conversation_id'},
-                    json=[conv_payload],
-                    timeout=10
-                )
-            except Exception as e:
-                logger.exception(
-                    "Network error when upserting conversation metadata: %s", e)
-                return False, f"Failed to save conversation metadata: {str(e)}"
-
-            if conv_response.status_code not in (200, 201):
-                error_detail = conv_response.text if conv_response.text else "No error detail"
-                logger.error(
-                    f"Failed to upsert conversation metadata: HTTP {conv_response.status_code}, {error_detail}")
-
-                # If we received a 401, try a conservative retry using the user's
-                # JWT (if present) and the anon key as `apikey`.
-                try:
-                    if conv_response.status_code == 401:
-                        user_jwt = None
-                        try:
-                            user_jwt = st.session_state.get('user_jwt_token') if hasattr(
-                                st, 'session_state') else None
-                        except Exception:
-                            user_jwt = None
-
-                        # Only attempt retry if we have a user JWT
-                        if user_jwt:
-                            # Build anon_key fallback
-                            anon_key = None
-                            try:
-                                anon_key = st.secrets.get(
-                                    'supabase', {}).get('key')
-                            except Exception:
-                                anon_key = None
-                            if not anon_key:
-                                anon_key = os.getenv(
-                                    'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_KEY')
-
-                            retry_headers = {
-                                'Content-Type': 'application/json',
-                                'apikey': anon_key or '',
-                                'Authorization': f'Bearer {user_jwt}',
-                                'Prefer': 'return=representation'
-                            }
-                            try:
-                                logger.info("Retrying conversation metadata upsert with user JWT apikey=%s Authorization=%s",
-                                            _mask_key(retry_headers.get('apikey')), _mask_key(retry_headers.get('Authorization')))
-                                retry_resp = requests.post(
-                                    conv_url, headers=retry_headers, params={'on_conflict': 'user_id,conversation_id'}, json=[
-                                        conv_payload], timeout=8
-                                )
-                                if retry_resp.status_code in (200, 201):
-                                    logger.info(
-                                        "Retry with user JWT succeeded for conversation metadata")
-                                else:
-                                    logger.error("Retry with user JWT also failed: HTTP %s %s", retry_resp.status_code, getattr(
-                                        retry_resp, 'text', ''))
-                                    return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
-                            except Exception:
-                                # If retry fails at network level, surface original error
-                                return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
-                        else:
-                            return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
-                    else:
-                        return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
-                except Exception:
-                    return False, f"Failed to save conversation metadata (HTTP {conv_response.status_code}): {error_detail}"
-
-            # Then, save individual messages to conversation_messages table
-            msg_url = f"{self.base_url}/rest/v1/conversation_messages"
-            msg_payloads = []
-            for msg in messages:
-                msg_payload = {
-                    'user_id': effective_user_id,
-                    'conversation_id': conversation_id,
-                    'role': msg.get('role', ''),
-                    'message': msg.get('content', ''),
-                    # Prefer an explicit first_name on the message (UI may include it),
-                    # otherwise fall back to session state's first_name or username.
-                    'first_name': msg.get('first_name') or (st.session_state.get('first_name') if hasattr(st, 'session_state') else None) or (st.session_state.get('username') if hasattr(st, 'session_state') else None),
-                    'timestamp': datetime.now().isoformat()
-                }
-                msg_payloads.append(msg_payload)
-
-            if msg_payloads:
-                # Masked debug logging to help trace which credentials are used
-                try:
-                    headers_msg = self._get_headers()
-                    logger.info("Saving conversation messages to %s apikey=%s Authorization=%s",
-                                msg_url, _mask_key(headers_msg.get('apikey')), _mask_key(headers_msg.get('Authorization')))
-                except Exception:
-                    pass
-
-                msg_response = requests.post(
-                    msg_url,
-                    headers=headers_msg,
-                    json=msg_payloads,
-                    timeout=10
-                )
-
-                if msg_response.status_code not in (200, 201):
-                    error_detail = msg_response.text if msg_response.text else "No error detail"
-                    logger.error(
-                        f"Failed to save messages: HTTP {msg_response.status_code}, {error_detail}")
-
-                    # Retry messages on 401 using user JWT if available (best-effort)
-                    try:
-                        if msg_response.status_code == 401:
-                            user_jwt = None
-                            try:
-                                user_jwt = st.session_state.get('user_jwt_token') if hasattr(
-                                    st, 'session_state') else None
-                            except Exception:
-                                user_jwt = None
-
-                            if user_jwt:
-                                anon_key = None
-                                try:
-                                    anon_key = st.secrets.get(
-                                        'supabase', {}).get('key')
-                                except Exception:
-                                    anon_key = None
-                                if not anon_key:
-                                    anon_key = os.getenv(
-                                        'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_KEY')
-
-                                retry_headers_msg = {
-                                    'Content-Type': 'application/json',
-                                    'apikey': anon_key or '',
-                                    'Authorization': f'Bearer {user_jwt}',
-                                    'Prefer': 'return=representation'
-                                }
-                                try:
-                                    logger.info("Retrying message save with user JWT apikey=%s Authorization=%s",
-                                                _mask_key(retry_headers_msg.get('apikey')), _mask_key(retry_headers_msg.get('Authorization')))
-                                    retry_msg_resp = requests.post(
-                                        msg_url, headers=retry_headers_msg, json=msg_payloads, timeout=8
-                                    )
-                                    if retry_msg_resp.status_code in (200, 201):
-                                        logger.info(
-                                            "Retry with user JWT succeeded for conversation messages")
-                                    else:
-                                        logger.error("Retry with user JWT also failed for messages: HTTP %s %s",
-                                                     retry_msg_resp.status_code, getattr(retry_msg_resp, 'text', ''))
-                                        return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
-                                except Exception:
-                                    return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
-                            else:
-                                return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
-                        else:
-                            return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
-                    except Exception:
-                        return False, f"Failed to save messages (HTTP {msg_response.status_code}): {error_detail}"
-
-            # On success, update session state so UI can immediately select
-            # and display the newly created conversation without an extra step.
-            try:
-                # Determine display name for UI: prefer custom_name -> auto_name -> title
-                display_name = (custom_name or conv_payload.get(
-                    'auto_name') or conv_payload.get('title') or 'Untitled Conversation')
-                if hasattr(st, 'session_state'):
-                    # Set current conversation identifiers so the sidebar shows selection
-                    st.session_state['current_conversation_id'] = conversation_id
-                    st.session_state['selected_conversation'] = conversation_id
-                    st.session_state['conversation_title'] = display_name
-                    # Mark conversation as named so auto-naming doesn't run again
-                    st.session_state['conversation_named'] = True
-            except Exception:
-                # Non-fatal: if session_state isn't available or writable, continue
-                pass
-
-            return True, "Conversation saved successfully"
+                return False, f"Failed to save conversation (HTTP {response.status_code})"
 
         except Exception as e:
             logger.error(f"Error saving conversation: {e}")
@@ -551,7 +156,7 @@ class ConversationManager:
         """
         Load all conversations for the user from Supabase.
 
-        Returns: List of conversations with id, title, updated_at, message_count, messages
+        Returns: List of conversations with id, title, updated_at, message_count
         """
         if not self.base_url or not self.supabase_key:
             return []
@@ -560,75 +165,35 @@ class ConversationManager:
             return []
 
         try:
-            # First, load conversation metadata
-            conv_url = f"{self.base_url}/rest/v1/conversations"
-            conv_params = {
-                'select': 'conversation_id,title,auto_name,custom_name,glyphs_triggered,processing_mode,message_count,updated_at,created_at',
+            url = f"{self.base_url}/rest/v1/conversations"
+            params = {
+                'select': 'conversation_id,title,updated_at,message_count,processing_mode',
                 'user_id': f'eq.{self.user_id}',
-                'archived': 'eq.false',
                 'order': 'updated_at.desc',
                 'limit': '100'
             }
 
-            conv_response = requests.get(
-                conv_url,
+            response = requests.get(
+                url,
                 headers=self._get_headers(),
-                params=conv_params,
+                params=params,
                 timeout=10
             )
 
-            if conv_response.status_code != 200:
-                return []
-
-            conversations = conv_response.json()
-            if not isinstance(conversations, list):
-                return []
-
-            # For each conversation, load its messages
-            for conv in conversations:
-                conv_id = conv['conversation_id']
-                msg_url = f"{self.base_url}/rest/v1/conversation_messages"
-                msg_params = {
-                    'select': 'role,message,first_name,timestamp',
-                    'conversation_id': f'eq.{conv_id}',
-                    'user_id': f'eq.{self.user_id}',
-                    'order': 'timestamp.asc'
-                }
-
-                msg_response = requests.get(
-                    msg_url,
-                    headers=self._get_headers(),
-                    params=msg_params,
-                    timeout=10
-                )
-
-                if msg_response.status_code == 200:
-                    messages = msg_response.json()
-                    # Convert to the expected format
-                    conv['messages'] = [
-                        {
-                            'role': msg['role'],
-                            'content': msg['message'],
-                            'first_name': msg.get('first_name')
-                        }
-                        for msg in messages
-                    ]
-                else:
-                    conv['messages'] = []
-
-                # Ensure glyphs_triggered is a list
-                if not isinstance(conv.get('glyphs_triggered'), list):
-                    conv['glyphs_triggered'] = []
-
+            if response.status_code == 200:
+                conversations = response.json()
                 # Backward compatibility shim: translate any legacy "ai_preferred"
                 # processing_mode values into the new representation where
                 # processing_mode='hybrid' and prefer_ai=True.
-                pm = conv.get('processing_mode')
-                if pm == 'ai_preferred':
-                    conv['processing_mode'] = 'hybrid'
-                    conv['prefer_ai'] = True
-
-            return conversations
+                if isinstance(conversations, list):
+                    for c in conversations:
+                        pm = c.get('processing_mode')
+                        if pm == 'ai_preferred':
+                            c['processing_mode'] = 'hybrid'
+                            c['prefer_ai'] = True
+                return conversations if isinstance(conversations, list) else []
+            else:
+                return []
 
         except Exception as e:
             logger.debug(f"Error loading conversations: {e}")
@@ -647,79 +212,32 @@ class ConversationManager:
             return None
 
         try:
-            # Load conversation metadata
-            conv_url = f"{self.base_url}/rest/v1/conversations"
-            conv_params = {
+            url = f"{self.base_url}/rest/v1/conversations"
+            params = {
                 'conversation_id': f'eq.{conversation_id}',
                 'user_id': f'eq.{self.user_id}'
             }
 
-            conv_response = requests.get(
-                conv_url,
+            response = requests.get(
+                url,
                 headers=self._get_headers(),
-                params=conv_params,
+                params=params,
                 timeout=10
             )
 
-            if conv_response.status_code != 200:
-                return None
-
-            conversations = conv_response.json()
-            if not conversations:
-                return None
-
-            conv = conversations[0]
-
-            # Load messages for this conversation
-            msg_url = f"{self.base_url}/rest/v1/conversation_messages"
-            msg_params = {
-                'select': 'role,message,first_name,timestamp',
-                'conversation_id': f'eq.{conversation_id}',
-                'user_id': f'eq.{self.user_id}',
-                'order': 'timestamp.asc'
-            }
-
-            msg_response = requests.get(
-                msg_url,
-                headers=self._get_headers(),
-                params=msg_params,
-                timeout=10
-            )
-
-            if msg_response.status_code == 200:
-                messages = msg_response.json()
-                # Convert to expected format
-                conv['messages'] = [
-                    {
-                        'role': msg['role'],
-                        'content': msg['message'],
-                        'first_name': msg.get('first_name')
-                    }
-                    for msg in messages
-                ]
-            else:
-                conv['messages'] = []
-
-            # Ensure glyphs_triggered is a list
-            if not isinstance(conv.get('glyphs_triggered'), list):
-                conv['glyphs_triggered'] = []
-
-            # Parse messages if it's stored as JSON string (backward compatibility)
-            # (Though now messages come from separate table, this is for legacy)
-            if isinstance(conv.get('messages'), str):
-                try:
-                    conv['messages'] = json.loads(conv['messages'])
-                except:
-                    conv['messages'] = []
-            elif not isinstance(conv.get('messages'), list):
-                conv['messages'] = []
-
-            # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
-            if conv.get('processing_mode') == 'ai_preferred':
-                conv['processing_mode'] = 'hybrid'
-                conv['prefer_ai'] = True
-
-            return conv
+            if response.status_code == 200:
+                conversations = response.json()
+                if conversations:
+                    conv = conversations[0]
+                    # Parse messages JSON string
+                    if isinstance(conv.get('messages'), str):
+                        conv['messages'] = json.loads(conv['messages'])
+                    # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
+                    if conv.get('processing_mode') == 'ai_preferred':
+                        conv['processing_mode'] = 'hybrid'
+                        conv['prefer_ai'] = True
+                    return conv
+            return None
 
         except Exception as e:
             logger.debug(f"Error loading conversation: {e}")
@@ -824,7 +342,7 @@ class ConversationManager:
             return False, f"Error deleting conversation: {str(e)}"
 
     def rename_conversation(self, conversation_id: str, new_title: str) -> Tuple[bool, str]:
-        """Rename a conversation by setting custom_name (overrides auto_name)."""
+        """Rename a conversation."""
         if not self.base_url or not self.supabase_key:
             return False, "Supabase not configured"
 
@@ -839,8 +357,7 @@ class ConversationManager:
             }
 
             payload = {
-                'custom_name': new_title,  # Set custom name
-                'title': new_title,  # Keep title updated for backward compatibility
+                'title': new_title,
                 'updated_at': datetime.now().isoformat()
             }
 
@@ -877,81 +394,68 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
 
     conversations = manager.load_conversations()
 
+    # Merge any optimistic session-cached conversations so newly-created
+    # conversations appear in the sidebar immediately even if server-side
+    # persistence is still pending or failing. Cached items are prepended
+    # and de-duplicated by `conversation_id`.
+    try:
+        cached = st.session_state.get('session_cached_conversations', [])
+        if cached and isinstance(cached, list):
+            seen = {c.get('conversation_id') for c in conversations if isinstance(c, dict) and c.get('conversation_id')}
+            merged = []
+            # Add cached first (fresh items)
+            for c in cached:
+                if not c:
+                    continue
+                cid = c.get('conversation_id')
+                if not cid or cid in seen:
+                    continue
+                merged.append(c)
+                seen.add(cid)
+            # Then extend with server-provided conversations
+            merged.extend([c for c in conversations if isinstance(c, dict)])
+            conversations = merged
+    except Exception:
+        # Best-effort merge; if anything goes wrong, fall back to server list
+        pass
+
     if not conversations:
         st.sidebar.info("No previous conversations yet. Start a new one!")
         return
 
     st.sidebar.markdown("### 📚 Previous Conversations")
 
-    # Optional: Time-based filtering
-    if len(conversations) > 5:  # Only show filter if there are many conversations
-        from datetime import datetime, timedelta
-
-        filter_options = [
-            "All conversations",
-            "Last 7 days",
-            "Last 30 days",
-            "Last 3 months"
-        ]
-
-        time_filter = st.sidebar.selectbox(
-            "📅 Filter by time:",
-            filter_options,
-            key="conversation_time_filter"
-        )
-
-        if time_filter != "All conversations":
-            now = datetime.now()
-            if time_filter == "Last 7 days":
-                cutoff = now - timedelta(days=7)
-            elif time_filter == "Last 30 days":
-                cutoff = now - timedelta(days=30)
-            elif time_filter == "Last 3 months":
-                cutoff = now - timedelta(days=90)
-
-            # Filter conversations by created_at or updated_at
-            filtered_conversations = []
-            for conv in conversations:
-                try:
-                    # Try updated_at first, then created_at
-                    date_str = conv.get('updated_at') or conv.get('created_at')
-                    if date_str:
-                        # Parse ISO format date
-                        conv_date = datetime.fromisoformat(
-                            date_str.replace('Z', '+00:00'))
-                        if conv_date >= cutoff:
-                            filtered_conversations.append(conv)
-                except Exception:
-                    # Include conversations with unparseable dates
-                    filtered_conversations.append(conv)
-
-            conversations = filtered_conversations
-
-            if not conversations:
-                st.sidebar.info(
-                    f"No conversations found in {time_filter.lower()}.")
-                return
-
     for conv in conversations:
         col1, col2, col3 = st.sidebar.columns([3, 1, 1])
-
-        # Determine display name: custom_name if present, else auto_name, else title
-        display_name = (
-            conv.get('custom_name') or
-            conv.get('auto_name') or
-            conv.get('title', 'Untitled Conversation')
-        )
 
         with col1:
             # Click to load conversation
             if st.button(
-                f"💬 {display_name}",
+                f"💬 {conv['title']}",
                 key=f"load_conv_{conv['conversation_id']}",
                 use_container_width=True
             ):
-                st.session_state['selected_conversation'] = conv['conversation_id']
-                st.session_state['conversation_title'] = display_name
-                st.rerun()
+                try:
+                    # Best-effort: load the conversation immediately using the manager
+                    user_id = st.session_state.get('user_id')
+                    conversation_key = f"conversation_history_{user_id}"
+                    loaded = manager.load_conversation(conv['conversation_id'])
+                    if loaded:
+                        msgs = loaded.get('messages') if isinstance(loaded.get('messages'), list) else loaded.get('messages', [])
+                        st.session_state[conversation_key] = msgs or []
+                        st.session_state['current_conversation_id'] = loaded.get('conversation_id', conv['conversation_id'])
+                        st.session_state['conversation_title'] = loaded.get('title', conv['title'])
+                        try:
+                            st.sidebar.success(f"Loaded: {st.session_state['conversation_title']}")
+                        except Exception:
+                            pass
+                        st.rerun()
+
+                except Exception:
+                    # Fallback to the previous behavior if immediate load fails
+                    st.session_state['selected_conversation'] = conv['conversation_id']
+                    st.session_state['conversation_title'] = conv['title']
+                    st.rerun()
 
         with col2:
             # Rename button
@@ -962,6 +466,18 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
         with col3:
             # Delete button
             if st.button("🗑️", key=f"delete_{conv['conversation_id']}", help="Delete"):
+                # If this conversation is an optimistic session-cached item,
+                # remove it from the session cache and avoid calling the
+                # server-side delete API which will fail for unsaved items.
+                try:
+                    cached = st.session_state.get('session_cached_conversations', [])
+                    if isinstance(cached, list) and any(c.get('conversation_id') == conv['conversation_id'] for c in cached):
+                        st.session_state['session_cached_conversations'] = [c for c in cached if c.get('conversation_id') != conv['conversation_id']]
+                        st.sidebar.success('Deleted local conversation')
+                        st.rerun()
+                except Exception:
+                    pass
+
                 success, message = manager.delete_conversation(
                     conv['conversation_id'])
                 if success:
@@ -974,14 +490,14 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
         if st.session_state.get(f"renaming_{conv['conversation_id']}", False):
             new_title = st.sidebar.text_input(
                 "New title:",
-                value=display_name,
+                value=conv['title'],
                 key=f"rename_input_{conv['conversation_id']}"
             )
             col_a, col_b = st.sidebar.columns(2)
             with col_a:
                 if st.button("Save", key=f"save_rename_{conv['conversation_id']}"):
                     success, message = manager.rename_conversation(
-                        conv['conversation_id'], new_title or "Untitled Conversation")
+                        conv['conversation_id'], new_title)
                     if success:
                         st.sidebar.success(message)
                         st.session_state[f"renaming_{conv['conversation_id']}"] = False
