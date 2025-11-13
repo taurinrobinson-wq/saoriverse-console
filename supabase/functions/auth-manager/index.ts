@@ -231,10 +231,43 @@ async function createUser(data: any, admin: any, supabaseClient: any): Promise<a
 
     console.log("User created successfully in custom table");
 
-    return {
-      success: true,
-      user: newUser
-    };
+    // Generate an access token (same simple scheme used in authenticateUser)
+    try {
+      const tokenData = {
+        user_id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        issued_at: Date.now(),
+        expires_at: Date.now() + (24 * 60 * 60 * 1000)
+      };
+      const tokenPayload = btoa(JSON.stringify(tokenData));
+      const signature = btoa((newUser.id || '') + '_' + tokenData.issued_at);
+      const access_token = `${tokenPayload}.${signature}`;
+
+      return {
+        success: true,
+        user_id: newUser.id,
+        id: newUser.id,
+        username: newUser.username,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email,
+        access_token: access_token,
+        token: access_token
+      };
+    } catch (tokErr) {
+      console.error('Token generation error (createUser):', tokErr);
+      // Fallback: return user id but without token
+      return {
+        success: true,
+        user_id: newUser.id,
+        id: newUser.id,
+        username: newUser.username,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email
+      };
+    }
 
   } catch (err) {
     console.error("Create user exception:", err);
@@ -253,7 +286,7 @@ async function authenticateUser(data: any, admin: any, supabaseClient: any): Pro
     // Get user by username
     const { data: user, error } = await admin
       .from('users')
-      .select('id, username, password_hash, salt, is_active')
+      .select('id, username, password_hash, salt, is_active, first_name, last_name, email')
       .eq('username', username)
       .single();
 
@@ -312,6 +345,7 @@ async function authenticateUser(data: any, admin: any, supabaseClient: any): Pro
       // Create a simple signed token (not cryptographically secure but sufficient for our use case)
       const tokenPayload = btoa(JSON.stringify(tokenData));
       const signature = btoa(user.id + '_' + tokenData.issued_at); // Simple signature
+
       const access_token = `${tokenPayload}.${signature}`;
 
       console.log("Custom token generated successfully");
@@ -324,6 +358,7 @@ async function authenticateUser(data: any, admin: any, supabaseClient: any): Pro
         last_name: user.last_name,
         email: user.email,
         access_token: access_token,
+        token: access_token,
         refresh_token: `refresh_${user.id}_${Date.now()}`
       };
 
