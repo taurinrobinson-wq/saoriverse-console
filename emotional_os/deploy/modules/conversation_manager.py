@@ -58,112 +58,61 @@ def _mask_key(key: Optional[str]) -> str:
         return "<masked>"
 
 
+def generate_conversation_title(message: str, max_length: int = 35) -> str:
+    """
+    Simple conversation title: today's date + short summary (<= max_length).
+
+    This is intentionally lightweight and deterministic so titles are
+    easy to read and auditable. Used in place of the earlier glyph-based
+    auto-naming.
+    """
+    try:
+        if not message or not isinstance(message, str):
+            return datetime.now().strftime('%Y-%m-%d')
+        # Take first sentence/clause
+        parts = re.split(r'[\.\n\?!]', message.strip(), maxsplit=1)
+        summary = parts[0].strip() if parts else message.strip()
+        summary = re.sub(r"\s+", ' ', summary)
+        if len(summary) > max_length:
+            summary = summary[: max_length - 1].rstrip() + '…'
+        date_str = datetime.now().strftime('%Y-%m-%d')
+        title = f"{date_str} — {summary}"
+
+        # [title-audit patch] Log a masked preview of the original message
+        try:
+            preview = re.sub(r"\s+", ' ', (message or '').strip())
+            if len(preview) > 120:
+                preview = preview[:117].rstrip() + '...'
+            # Avoid logging full user content in raw form; show a preview only
+            logger.info("Generated conversation title: %s | preview: %s",
+                        title, preview)
+        except Exception:
+            # Non-fatal audit logging failure
+            logger.debug(
+                "Generated conversation title (logging preview failed): %s", title)
+
+        return title
+    except Exception:
+        return datetime.now().strftime('%Y-%m-%d')
+
+
 def generate_auto_name_with_glyphs(first_message: str, max_length: int = 50) -> Tuple[str, List[str]]:
     """
-    Generate a conversation name from the first user message using glyph-based naming.
-
-    Returns:
-        tuple: (conversation_name, list_of_glyph_names)
-
-    Creates names like "Tuesday Threshold–Flame–Echo" based on:
-    - Day of week (optional) 
-    - Top 3 glyphs detected from the first message
+    Backwards-compatible wrapper: return (date + short summary, []).
+    Glyph detection intentionally disabled; return empty glyph list.
     """
-    if not first_message:
-        return "New Conversation", []
-
-    try:
-        # Import required modules for glyph detection
-        from emotional_os.core.signal_parser import parse_signals, evaluate_gates, load_signal_map
-        from emotional_os.core.paths import signal_lexicon_path
-        import datetime
-        import json
-        import os
-
-        # Load glyph lexicon from JSON file
-        glyph_file_paths = [
-            'data/glyph_lexicon_rows.json',
-            '/workspaces/saoriverse-console/data/glyph_lexicon_rows.json',
-            os.path.join(os.getcwd(), 'data', 'glyph_lexicon_rows.json')
-        ]
-
-        all_glyphs = None
-        for path in glyph_file_paths:
-            try:
-                if os.path.exists(path):
-                    with open(path, 'r', encoding='utf-8') as f:
-                        all_glyphs = json.load(f)
-                    break
-            except Exception:
-                continue
-
-        if not all_glyphs:
-            # Fallback to traditional naming if no glyphs available
-            return _generate_traditional_name(first_message, max_length), []
-
-        # Parse signals and gates from the message
-        lexicon_path = str(signal_lexicon_path())
-        signal_map = load_signal_map(lexicon_path)
-        signals = parse_signals(first_message, signal_map)
-        gates = evaluate_gates(signals)
-
-        # Find matching glyphs
-        matching_glyphs = []
-        for glyph in all_glyphs:
-            glyph_gate = glyph.get('gate', '')
-            if glyph_gate in gates:
-                matching_glyphs.append(glyph)
-
-        # Extract glyph names (up to 3)
-        glyph_names = []
-        for glyph in matching_glyphs[:3]:
-            name = glyph.get('glyph_name', '')
-            if name:
-                glyph_names.append(name)
-
-        # Build the name
-        if glyph_names:
-            # Join with em-dash for elegance
-            glyph_string = "–".join(glyph_names)
-
-            # Add day of week if there's room
-            today = datetime.datetime.now().strftime("%A")
-            if len(glyph_string) + len(today) + 1 <= max_length:
-                title = f"{today} {glyph_string}"
-            else:
-                title = glyph_string
-
-            return title, glyph_names
-        else:
-            # Fallback to traditional approach if no glyphs detected
-            fallback_name = _generate_traditional_name(
-                first_message, max_length)
-            return fallback_name, []
-
-    except Exception as e:
-        # Graceful fallback if glyph system fails
-        fallback_name = _generate_traditional_name(first_message, max_length)
-        return fallback_name, []
+    title = generate_conversation_title(first_message, max_length=35)
+    logger.debug("generate_auto_name_with_glyphs -> %s", title)
+    return title, []
 
 
 def generate_auto_name(first_message: str, first_name: Optional[str] = None, max_length: int = 50) -> str:
     """
-    Generate a conversation name from the first user message using glyph-based naming.
-
-    Creates names like "Tuesday Threshold–Flame–Echo" based on:
-    - Day of week (optional) 
-    - Top 3 glyphs detected from the first message
+    Simple wrapper that returns the date + short summary title.
+    Signature preserved for compatibility.
     """
-    name, _ = generate_auto_name_with_glyphs(first_message, max_length)
-    # If a first_name was provided, prefix possessive form: "Ava's Tuesday Flame"
-    if first_name:
-        # sanitize: only take the first token of the first name
-        try:
-            fn = str(first_name).strip().split()[0]
-            return f"{fn}'s {name}"
-        except Exception:
-            return f"{first_name}'s {name}"
-    return name
+    title, _ = generate_auto_name_with_glyphs(first_message, max_length)
+    return title
 
 
 def _generate_traditional_name(first_message: str, max_length: int = 50) -> str:
@@ -398,29 +347,45 @@ class ConversationManager:
                 'first_message': messages[0]['content'] if messages else None
             }
 
-            # Upsert conversation metadata
+            # Upsert conversation metadata using Supabase REST `on_conflict`
+            # so that writes are idempotent and avoid 409 duplicate-key errors.
             try:
-                logger.info("Saving conversation metadata to %s apikey=%s Authorization=%s",
+                logger.info("Upserting conversation metadata to %s apikey=%s Authorization=%s",
                             conv_url, _mask_key(headers.get('apikey')), _mask_key(headers.get('Authorization')))
             except Exception:
                 pass
 
-            conv_response = requests.post(
-                conv_url,
-                headers=headers,
-                json=[conv_payload],
-                timeout=10
-            )
+            # Prepare headers to request merged-duplicate resolution. Combine
+            # return representation with merge instruction so we still get back
+            # the inserted/updated representation when available.
+            headers_upsert = dict(headers)
+            prefer_old = headers_upsert.get('Prefer')
+            if prefer_old:
+                headers_upsert['Prefer'] = f"{prefer_old}, resolution=merge-duplicates"
+            else:
+                headers_upsert['Prefer'] = 'return=representation, resolution=merge-duplicates'
+
+            # Use on_conflict to specify the unique key columns for upsert.
+            try:
+                conv_response = requests.post(
+                    conv_url,
+                    headers=headers_upsert,
+                    params={'on_conflict': 'user_id,conversation_id'},
+                    json=[conv_payload],
+                    timeout=10
+                )
+            except Exception as e:
+                logger.exception(
+                    "Network error when upserting conversation metadata: %s", e)
+                return False, f"Failed to save conversation metadata: {str(e)}"
 
             if conv_response.status_code not in (200, 201):
                 error_detail = conv_response.text if conv_response.text else "No error detail"
                 logger.error(
-                    f"Failed to save conversation metadata: HTTP {conv_response.status_code}, {error_detail}")
+                    f"Failed to upsert conversation metadata: HTTP {conv_response.status_code}, {error_detail}")
 
                 # If we received a 401, try a conservative retry using the user's
-                # JWT (if present) and the anon key as `apikey`. This can help
-                # in deployments where service-role keys are missing but user JWTs
-                # are valid for writes (rare) or where different keys are required.
+                # JWT (if present) and the anon key as `apikey`.
                 try:
                     if conv_response.status_code == 401:
                         user_jwt = None
@@ -450,10 +415,10 @@ class ConversationManager:
                                 'Prefer': 'return=representation'
                             }
                             try:
-                                logger.info("Retrying conversation metadata save with user JWT apikey=%s Authorization=%s",
+                                logger.info("Retrying conversation metadata upsert with user JWT apikey=%s Authorization=%s",
                                             _mask_key(retry_headers.get('apikey')), _mask_key(retry_headers.get('Authorization')))
                                 retry_resp = requests.post(
-                                    conv_url, headers=retry_headers, json=[
+                                    conv_url, headers=retry_headers, params={'on_conflict': 'user_id,conversation_id'}, json=[
                                         conv_payload], timeout=8
                                 )
                                 if retry_resp.status_code in (200, 201):
