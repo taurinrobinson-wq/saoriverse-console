@@ -543,16 +543,21 @@ def integrate_evolution_with_processor(
                 # Preferred modern signature (accepts persistence_path/kwargs)
                 adaptive_extractor = AdaptiveSignalExtractor(
                     adaptive=True, use_discovered=True, persistence_path=None)
-            except TypeError:
-                # Older signature may not accept persistence_path
+            except Exception as ex:
+                # Some environments may expose a different AdaptiveSignalExtractor
+                # signature (older/newer). Try the simpler call as a fallback
+                # and log the original exception for diagnostics.
                 try:
+                    logger.warning(
+                        "AdaptiveSignalExtractor init with persistence_path failed, retrying without it: %s", ex)
                     adaptive_extractor = AdaptiveSignalExtractor(
                         adaptive=True, use_discovered=True)
-                except Exception:
+                except Exception as ex2:
+                    logger.exception(
+                        "AdaptiveSignalExtractor unavailable after fallback: %s", ex2)
                     adaptive_extractor = None
-            except Exception:
-                adaptive_extractor = None
-        except Exception:
+        except Exception as ex:
+            logger.debug("AdaptiveSignalExtractor import failed: %s", ex)
             adaptive_extractor = None
 
     evolution = DynamicGlyphEvolution(
