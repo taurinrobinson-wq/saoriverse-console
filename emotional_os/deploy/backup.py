@@ -697,7 +697,16 @@ def render_main_app():
                             glyph_info = result.get("glyph", {})
                             processing_details = result.get("log", {})  # noqa: F841  # optional debug/logging info
                         else:
-                            response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                            # Attempt to use any message provided by the service; otherwise
+                            # include the HTTP status in the fallback so the UI can show
+                            # a concise diagnostic instead of a generic sentence.
+                            try:
+                                payload = response_data.json()
+                                response = payload.get('reply') or payload.get('error') or (
+                                    f"AI service error (HTTP {response_data.status_code})"
+                                )
+                            except Exception:
+                                response = f"AI service error (HTTP {response_data.status_code})"
                             glyph_info = {}
                             processing_details = {"error": f"HTTP {response_data.status_code}"}  # noqa: F841  # optional debug/logging info
                     except Exception as e:

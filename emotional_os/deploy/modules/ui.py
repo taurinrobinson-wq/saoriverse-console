@@ -360,6 +360,34 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
 
+    # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
+    if os.environ.get('LOCAL_DEV_MODE') == '1':
+        # Simulate a 401 HTTP error to test our improved fallback messages
+        class MockResponse:
+            status_code = 401
+            def json(self):
+                return {"error": "Authentication failed - this is a test"}
+        
+        mock_response = MockResponse()
+        # This will trigger our improved fallback logic
+        try:
+            body = mock_response.json()
+            ai_reply = body.get('reply') or body.get('error') or ''
+        except Exception:
+            ai_reply = ''
+        
+        if ai_reply:
+            composed, debug = decode_ai_reply(ai_reply, conversation_context)
+            return composed, debug, local_analysis
+            
+        fallback = (
+            f"AI service error (HTTP {mock_response.status_code}).\n"
+            f"Local Analysis: {voltage_response}\n"
+            f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+            f"{ritual_prompt}\n(AI enhancement unavailable - local dev mode)"
+        )
+        return fallback, {}, local_analysis
+
     if not saori_url or not supabase_key:
         response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
         return response, {}, local_analysis
@@ -390,7 +418,27 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         return "AI processing unavailable (requests library not installed).", {}, local_analysis
 
     if response_data.status_code != 200:
-        return "I'm experiencing some technical difficulties, but I'm still here for you.", {}, local_analysis
+        # Try to surface any helpful text from the AI service response. If
+        # that's not available, fall back to a concise local analysis so the
+        # user still receives useful feedback rather than a generic error.
+        try:
+            body = response_data.json()
+            ai_reply = body.get('reply') or body.get('error') or ''
+        except Exception:
+            ai_reply = (getattr(response_data, 'text', '') or '').strip()
+
+        if ai_reply:
+            composed, debug = decode_ai_reply(ai_reply, conversation_context)
+            return composed, debug, local_analysis
+
+        # Final fallback: include HTTP status and local parsing summary.
+        fallback = (
+            f"AI service error (HTTP {response_data.status_code}).\n"
+            f"Local Analysis: {voltage_response}\n"
+            f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+            f"{ritual_prompt}\n(AI enhancement unavailable)"
+        )
+        return fallback, {}, local_analysis
 
     result = response_data.json()
     ai_reply = result.get('reply', "I'm here to listen.")
@@ -1247,8 +1295,29 @@ def render_main_app():
             if st.button("➕ New Conversation", use_container_width=True):
                 st.session_state['current_conversation_id'] = str(uuid.uuid4())
                 st.session_state['conversation_title'] = "New Conversation"
+                # Ensure any previously-selected conversation is cleared
+                try:
+                    st.session_state.pop('selected_conversation', None)
+                except Exception:
+                    pass
+
                 st.session_state['conversation_history_' +
                                  st.session_state['user_id']] = []
+                # Optimistically add this new conversation to the session cache
+                try:
+                    cid = st.session_state['current_conversation_id']
+                    cached = st.session_state.setdefault('session_cached_conversations', [])
+                    # Avoid duplicates
+                    if not any(c.get('conversation_id') == cid for c in cached):
+                        cached.insert(0, {
+                            'conversation_id': cid,
+                            'title': st.session_state.get('conversation_title', 'New Conversation'),
+                            'updated_at': datetime.datetime.now().isoformat(),
+                            'message_count': 0,
+                            'processing_mode': st.session_state.get('processing_mode', 'hybrid')
+                        })
+                except Exception:
+                    pass
                 st.rerun()
 
         # Human-in-the-Loop (HIL) controls removed per user request.
@@ -1398,6 +1467,52 @@ def render_main_app():
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
 
+    # If the user selected a conversation from the sidebar, load it now
+    try:
+        selected = st.session_state.get('selected_conversation')
+        mgr = st.session_state.get('conversation_manager')
+        # If manager missing, try to initialize it (best-effort)
+        if not mgr and 'user_id' in st.session_state:
+            try:
+                from emotional_os.deploy.modules.conversation_manager import initialize_conversation_manager
+                mgr = initialize_conversation_manager()
+                if mgr:
+                    st.session_state['conversation_manager'] = mgr
+            except Exception:
+                mgr = None
+
+        # Only attempt load when a selection exists and it's not already the active conversation
+        if selected and mgr and selected != st.session_state.get('current_conversation_id'):
+            try:
+                conv = mgr.load_conversation(selected)
+                if conv:
+                    msgs = conv.get('messages') if isinstance(conv.get('messages'), list) else conv.get('messages', [])
+                    st.session_state[conversation_key] = msgs or []
+                    st.session_state['current_conversation_id'] = conv.get('conversation_id', selected)
+                    st.session_state['conversation_title'] = conv.get('title', st.session_state.get('conversation_title', 'Conversation'))
+                else:
+                    try:
+                        st.sidebar.warning('Could not load the selected conversation (not found).')
+                    except Exception:
+                        pass
+            except Exception as e:
+                logger.warning(f"Failed to load selected conversation {selected}: {e}")
+                try:
+                    st.sidebar.error(f'Error loading conversation: {e}')
+                except Exception:
+                    pass
+            # Clear the transient selection and rerun so the main UI reflects the loaded messages
+            try:
+                st.session_state.pop('selected_conversation', None)
+            except Exception:
+                pass
+            try:
+                st.rerun()
+            except Exception:
+                pass
+    except Exception:
+        # Best-effort: do not block UI if loading fails
+        pass
     # Initialize Fallback Protocols for tone-aware response handling
     if "fallback_protocol" not in st.session_state and FallbackProtocol:
         try:
@@ -1715,6 +1830,7 @@ def render_main_app():
                             "debug_glyph_rows", [])
                         try:
                             saori_url = st.secrets.get(
+                                "supabase", {}).get("current_saori_url") or st.secrets.get(
                                 "supabase", {}).get("saori_function_url")
                             supabase_key = st.secrets.get(
                                 "supabase", {}).get("key")
@@ -1809,7 +1925,21 @@ def render_main_app():
                                             # If local re-parsing fails, fall back to the AI reply
                                             response = ai_reply
                                     else:
-                                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                        # Surface any payload the AI service included when possible,
+                                        # otherwise fall back to a locally-generated summary.
+                                        try:
+                                            body = response_data.json()
+                                            response = body.get('reply') or body.get('error') or ''
+                                        except Exception:
+                                            response = (getattr(response_data, 'text', '') or '').strip()
+
+                                        if not response:
+                                            response = (
+                                                f"AI service error (HTTP {response_data.status_code}).\n"
+                                                f"Local Analysis: {voltage_response}\n"
+                                                f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n"
+                                                f"{ritual_prompt}\n"
+                                            )
                         except Exception as e:
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
@@ -1980,6 +2110,45 @@ def render_main_app():
         }
         st.session_state[conversation_key].append(entry)
 
+        # If this is the first exchange in the conversation, run the auto-naming
+        # logic immediately so the UI reflects a helpful title even when
+        # persistence is disabled or pending.
+        try:
+            if len(st.session_state.get(conversation_key, [])) == 1:
+                if generate_auto_name:
+                    title = generate_auto_name(user_input)
+                    st.session_state['conversation_title'] = title
+                else:
+                    st.session_state['conversation_title'] = st.session_state.get('conversation_title', 'New Conversation')
+        except Exception:
+            pass
+
+        # Optimistically update session-cached conversation metadata so the
+        # sidebar reflects new messages immediately even if server-side save
+        # fails or is pending.
+        try:
+            cid = st.session_state.get('current_conversation_id', 'default')
+            cached = st.session_state.setdefault('session_cached_conversations', [])
+            updated = False
+            if isinstance(cached, list):
+                for c in cached:
+                    if c and c.get('conversation_id') == cid:
+                        c['title'] = st.session_state.get('conversation_title', c.get('title', 'New Conversation'))
+                        c['updated_at'] = datetime.datetime.now().isoformat()
+                        c['message_count'] = len(st.session_state.get(conversation_key, []))
+                        updated = True
+                        break
+                if not updated:
+                    cached.insert(0, {
+                        'conversation_id': cid,
+                        'title': st.session_state.get('conversation_title', 'New Conversation'),
+                        'updated_at': datetime.datetime.now().isoformat(),
+                        'message_count': len(st.session_state.get(conversation_key, [])),
+                        'processing_mode': processing_mode
+                    })
+        except Exception:
+            pass
+
         # Learn from hybrid mode conversations to improve local mode
         # AND generate new glyphs dynamically during dialogue
         if processing_mode == "hybrid":
@@ -2145,8 +2314,21 @@ def render_main_app():
                     messages=messages,
                     processing_mode=processing_mode
                 )
-
-                if not success:
+                if success:
+                    # On success, ensure the sidebar shows this conversation immediately
+                    try:
+                        cached = st.session_state.setdefault('session_cached_conversations', [])
+                        if not any(c.get('conversation_id') == conversation_id for c in cached):
+                            cached.insert(0, {
+                                'conversation_id': conversation_id,
+                                'title': title,
+                                'updated_at': datetime.datetime.now().isoformat(),
+                                'message_count': len(messages),
+                                'processing_mode': processing_mode
+                            })
+                    except Exception:
+                        pass
+                else:
                     logger.warning(f"Failed to save conversation: {message}")
         except Exception as e:
             # Best-effort: do not break the UI if persistence fails
