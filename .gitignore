@@ -73,3 +73,19 @@ pip-ephem-wheel-cache/
 
 # Node modules (vendor directory) should not be tracked
 node_modules/
+
+# Local virtualenvs created for edge tests or CI; avoid committing large binaries
+.venv-edge-tests/
+
+# Common secrets and credentials (prevent accidental new commits)
+# Note: these patterns will not remove files already tracked in git. To
+# stop tracking an already-committed secret file use `git rm --cached <file>`
+# after ensuring you have a backup.
+.env*
+*.key
+*.pem
+secrets.*
+*.secret
+.credentials
+.aws/
+.gcloud/

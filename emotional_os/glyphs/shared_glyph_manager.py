@@ -16,12 +16,13 @@ import json
 import sqlite3
 from datetime import datetime
 from typing import Dict, List, Optional
+import os
 
 
 class SharedGlyphManager:
     """
     Manages the shared glyph database while maintaining per-user segregation.
-    
+
     Database Architecture:
     - glyph_lexicon: Base glyphs (shared across all users)
     - glyph_versions: Track evolution of each glyph over time
@@ -30,13 +31,20 @@ class SharedGlyphManager:
     - glyph_candidates: Candidate glyphs awaiting consensus promotion
     """
 
-    def __init__(self, db_path: str = "emotional_os/glyphs/glyphs.db"):
+    def __init__(self, db_path: Optional[str] = None):
+        # Default to an absolute DB path within the package to avoid test cwd issues
+        if not db_path:
+            db_path = os.path.join(os.path.dirname(__file__), 'glyphs.db')
         self.db_path = db_path
         self._ensure_shared_tables()
 
     def _ensure_shared_tables(self):
         """Create shared glyph management tables."""
         try:
+            # Ensure DB directory exists to avoid sqlite3 'unable to open database file'
+            db_dir = os.path.dirname(self.db_path)
+            if db_dir:
+                os.makedirs(db_dir, exist_ok=True)
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
@@ -117,7 +125,7 @@ class SharedGlyphManager:
         1. Relevant to user's emotional context
         2. Adopted by user or highly consensual
         3. Ranked by adoption and quality
-        
+
         CRITICAL: Different users can see different orderings of the same glyphs
         based on personal adoption history, but all glyphs come from shared DB.
         """
@@ -248,7 +256,7 @@ class SharedGlyphManager:
         """
         Record that a user adopted/used a glyph.
         This is HOW the system learns globally.
-        
+
         When user uses a glyph, they're voting for it.
         High adoption + high ratings = strong consensus.
         """
@@ -306,7 +314,8 @@ class SharedGlyphManager:
             if row:
                 total, pos, neg = row
                 consensus_strength = (pos - neg) / max(total, 1)
-                consensus_strength = max(-1.0, min(1.0, consensus_strength))  # Clamp -1 to 1
+                # Clamp -1 to 1
+                consensus_strength = max(-1.0, min(1.0, consensus_strength))
 
                 cursor.execute("""
                     UPDATE glyph_consensus SET consensus_strength = ?
@@ -334,7 +343,7 @@ class SharedGlyphManager:
         """
         Create a new version of a glyph.
         Glyphs evolve as users refine them.
-        
+
         Returns: version number (1, 2, 3, ...)
         """
         try:
@@ -418,7 +427,7 @@ class SharedGlyphManager:
         """
         Identify emotional territories that are under-served.
         This guides future glyph generation.
-        
+
         Returns dictionary of emotional areas and coverage status.
         """
 
@@ -443,7 +452,8 @@ class SharedGlyphManager:
 
             for territory, keywords in emotional_territories.items():
                 # Count glyphs that touch this territory
-                query_parts = " OR ".join(["description LIKE ?" for _ in keywords])
+                query_parts = " OR ".join(
+                    ["description LIKE ?" for _ in keywords])
                 cursor.execute(
                     f"SELECT COUNT(*) FROM glyph_versions WHERE ({query_parts}) AND is_active = 1",
                     [f"%{k}%" for k in keywords]
@@ -511,11 +521,13 @@ class SharedGlyphManager:
             cursor = conn.cursor()
 
             # Total glyphs
-            cursor.execute("SELECT COUNT(*) FROM glyph_versions WHERE is_active = 1")
+            cursor.execute(
+                "SELECT COUNT(*) FROM glyph_versions WHERE is_active = 1")
             total_glyphs = cursor.fetchone()[0]
 
             # Total users
-            cursor.execute("SELECT COUNT(DISTINCT user_hash) FROM user_glyph_preferences")
+            cursor.execute(
+                "SELECT COUNT(DISTINCT user_hash) FROM user_glyph_preferences")
             total_users = cursor.fetchone()[0]
 
             # Average adoption (glyphs per user)
