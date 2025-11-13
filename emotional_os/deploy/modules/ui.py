@@ -14,6 +14,7 @@ except Exception:
     requests = None
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 try:
     from emotional_os.safety.fallback_protocols import FallbackProtocol
@@ -44,6 +45,41 @@ except Exception:
     generate_doc = None
 
 logger = logging.getLogger(__name__)
+
+# Enable debug mode for hybrid pipeline troubleshooting when possible.
+# This is guarded so importing the module in non-Streamlit contexts
+# (tests, CI) won't raise. The user requested verbose hybrid-pipeline
+# logging for immediate debugging.
+try:
+    try:
+        # Prefer explicit session flag when available
+        st.session_state.setdefault('debug_mode', True)
+    except Exception:
+        # If session state is not available at import time, ignore.
+        pass
+except Exception:
+    pass
+
+
+def safe_embed_html_local(content: str, height: int | None = None, use_iframe: bool = True) -> None:
+    """Local helper to safely embed HTML/CSS/JS in this module.
+
+    Prefers components.html (iframe) to isolate styles. Falls back to
+    st.markdown(..., unsafe_allow_html=True) when iframe embedding is
+    inappropriate or fails. This mirrors the helper in `main_v2.py`.
+    """
+    try:
+        if use_iframe:
+            components.html(content, height=height or 160, scrolling=True)
+            return
+    except Exception:
+        pass
+
+    try:
+        st.markdown(content, unsafe_allow_html=True)
+    except Exception:
+        print("[safe_embed_html_local] failed to embed content")
+
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
 _SVG_CACHE = {}
@@ -376,19 +412,50 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
 
     if not saori_url or not supabase_key:
         response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
+        logger.warning(
+            "Hybrid pipeline skipped: missing saori_url or supabase_key")
         return response, {}, local_analysis
 
+    # Build payload defensively and guard session keys
     payload = {
         "message": effective_input,
         "mode": st.session_state.get('processing_mode', 'hybrid'),
-        "user_id": st.session_state.user_id,
+        "user_id": st.session_state.get('user_id', 'unknown-user'),
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
     }
+
+    # Debug toggle (secrets first, then session) to control verbosity
+    DEBUG_MODE = False
     try:
-        # Use user's JWT token for authenticated requests, fallback to service key
-        auth_token = st.session_state.get('user_jwt_token') or supabase_key
+        DEBUG_MODE = bool(st.secrets.get('debug_mode', False))
+    except Exception:
+        DEBUG_MODE = bool(st.session_state.get('debug_mode', False))
+
+    # Ensure requests is available
+    if requests is None:
+        logger.error(
+            "Hybrid pipeline requires 'requests' but it is not installed")
+        return "AI processing unavailable (requests library not installed).", {}, local_analysis
+
+    # Use user's JWT token for authenticated requests, fallback to service key
+    auth_token = st.session_state.get('user_jwt_token') or supabase_key
+
+    # Log payload and destination (masked token) when debugging
+    try:
+        if DEBUG_MODE:
+            logger.info("Hybrid pipeline payload: %s", payload)
+            try:
+                logger.info(
+                    "Hybrid pipeline auth token (masked): %s...", str(auth_token)[:10])
+            except Exception:
+                logger.info("Hybrid pipeline auth token: <unavailable>")
+            logger.info("POSTing to: %s", saori_url)
+    except Exception:
+        pass
+
+    try:
         response_data = requests.post(
             saori_url,
             headers={
@@ -396,19 +463,45 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
                 "Content-Type": "application/json"
             },
             json=payload,
-            timeout=15
+            timeout=15,
         )
-    except Exception:
-        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        logger.exception("Hybrid pipeline POST failed: %s", e)
+        response = (
+            f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
+        )
         return response, {}, local_analysis
 
-    if requests is None:
-        return "AI processing unavailable (requests library not installed).", {}, local_analysis
+    # Log status and body for troubleshooting
+    try:
+        status = getattr(response_data, 'status_code', None)
+        body = getattr(response_data, 'text', None)
+        logger.info("Hybrid pipeline response status: %s", status)
+        if DEBUG_MODE:
+            logger.info("Hybrid pipeline response body: %s", body)
+    except Exception:
+        pass
 
-    if response_data.status_code != 200:
-        return "I'm experiencing some technical difficulties, but I'm still here for you.", {}, local_analysis
+    # Surface non-200 responses with explicit error text
+    if not getattr(response_data, 'status_code', None) == 200:
+        try:
+            resp_text = response_data.text if hasattr(
+                response_data, 'text') else '<no body>'
+        except Exception:
+            resp_text = '<no body>'
+        logger.error("Hybrid pipeline non-200 response: %s %s",
+                     getattr(response_data, 'status_code', None), resp_text)
+        return f"AI error: {getattr(response_data, 'status_code', 'unknown')} - {resp_text}", {}, local_analysis
 
-    result = response_data.json()
+    try:
+        result = response_data.json()
+    except Exception as e:
+        logger.exception(
+            "Failed to decode hybrid pipeline JSON response: %s", e)
+        return f"AI error: could not decode response ({e})", {}, local_analysis
+
     ai_reply = result.get('reply', "I'm here to listen.")
 
     composed, debug = decode_ai_reply(ai_reply, conversation_context)
@@ -695,7 +788,8 @@ def render_splash_interface(auth):
                 if st.button("Sign In", key="splash_sign_in"):
                     st.session_state.show_login = True
                     st.rerun()
-                if st.button("Register", key="splash_register"):
+                # [label patch] changed 'Register' to 'Create An Account' (splash button)
+                if st.button("Create An Account", key="splash_register"):
                     st.session_state.show_register = True
                     st.rerun()
     except Exception:
@@ -782,48 +876,48 @@ def render_main_app():
     # falsy/invalid argument. This is defensive and non-invasive: it does
     # not change library behavior for valid inputs.
     try:
-        st.markdown(
-            """
-            <script>
-            (function(){
+        # [safe_embed_html_local patch] replaced inline defensive jQuery patch with safe_embed_html_local
+        safe_embed_html_local("""
+        <script>
+        (function(){
+            try{
+                var jq = window.jQuery || window.$;
+                if(!jq || !jq.fn) return;
+                // Patch jQuery.fn.init to coerce null/undefined selectors to
+                // an empty string so Sizzle doesn't throw the TypeError when
+                // called with invalid arguments during theme toggles.
                 try{
-                    var jq = window.jQuery || window.$;
-                    if(!jq || !jq.fn) return;
-                    // Patch jQuery.fn.init to coerce null/undefined selectors to
-                    // an empty string so Sizzle doesn't throw the TypeError when
-                    // called with invalid arguments during theme toggles.
-                    try{
-                        var _origInit = jq.fn.init;
-                        if(typeof _origInit === 'function'){
-                            jq.fn.init = function(selector, context, root){
-                                try{
-                                    if(selector === null || typeof selector === 'undefined'){
-                                        selector = '';
-                                    }
-                                    return _origInit.call(this, selector, context, root);
-                                }catch(e){
-                                    try{
-                                        return _origInit.call(this, '');
-                                    }catch(e2){
-                                        return _origInit.apply(this, arguments);
-                                    }
+                    var _origInit = jq.fn.init;
+                    if(typeof _origInit === 'function'){
+                        jq.fn.init = function(selector, context, root){
+                            try{
+                                if(selector === null || typeof selector === 'undefined'){
+                                    selector = '';
                                 }
-                            };
-                        }
-                    }catch(e){/* swallow */}
+                                return _origInit.call(this, selector, context, root);
+                            }catch(e){
+                                try{
+                                    return _origInit.call(this, '');
+                                }catch(e2){
+                                    return _origInit.apply(this, arguments);
+                                }
+                            }
+                        };
+                    }
                 }catch(e){/* swallow */}
-            })();
-            </script>
-            """,
-            unsafe_allow_html=True,
-        )
+            }catch(e){/* swallow */}
+        })();
+        </script>
+        """, use_iframe=False, height=240)
     except Exception:
         pass
     # Further defensive guards: patch common DOM lookup APIs and jQuery/$ factory
     # to tolerate unexpected argument types which can surface during theme
     # toggles or fast re-renders in the compiled frontend.
     try:
-        st.markdown(
+        # [safe_embed_html_local patch] replaced querySelector/querySelectorAll
+        # and jQuery factory wrapper with isolated embed (use_iframe=False)
+        safe_embed_html_local(
             """
             <script>
             (function(){
@@ -902,14 +996,18 @@ def render_main_app():
             })();
             </script>
             """,
-            unsafe_allow_html=True,
+            use_iframe=False,
+            height=240,
         )
     except Exception:
         pass
     # Instrument unhandled client errors with an in-page overlay to help
     # capture stack traces when theme toggles still throw in the browser.
     try:
-        st.markdown(
+        # [safe_embed_html_local patch] replaced in-page client error overlay
+        # with isolated embed (use_iframe=False) so handlers run in the
+        # parent document but are managed via the helper for traceability.
+        safe_embed_html_local(
             """
             <script>
             (function(){
@@ -966,7 +1064,8 @@ def render_main_app():
             })();
             </script>
             """,
-            unsafe_allow_html=True,
+            use_iframe=False,
+            height=300,
         )
     except Exception:
         pass
@@ -1230,12 +1329,34 @@ def render_main_app():
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
                 svg_markup_side = _load_inline_svg(svg_name_side)
+                # [svg size patch] constrain sidebar svg size to avoid oversized icon
+                svg_markup_side_constrained = svg_markup_side
+                try:
+                    # If the inline svg doesn't declare width/height, inject conservative values.
+                    # This is a simple, robust replacement that edits only the first <svg ...> tag.
+                    import re
+
+                    def _inject_size(match):
+                        tag = match.group(0)
+                        # If width/height already present, leave unchanged
+                        if re.search(r"\bwidth\s*=\b|\bheight\s*=\b", tag, flags=re.IGNORECASE):
+                            return tag
+                        return tag.replace('<svg', '<svg width="120" height="120"')
+
+                    svg_markup_side_constrained = re.sub(
+                        r'<svg[^>]*', _inject_size, svg_markup_side_constrained, count=1, flags=re.IGNORECASE)
+                except Exception:
+                    # Best-effort: if anything fails, fall back to the original markup
+                    svg_markup_side_constrained = svg_markup_side
+
                 st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
+                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n<div style=\"max-width:120px; margin:auto; height:120px;\">{svg_markup_side_constrained}</div>\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n</div>", unsafe_allow_html=True)
             except Exception:
                 st.markdown("### Account")
+            st.markdown("<div style='margin-top:16px;'></div>",
+                        unsafe_allow_html=True)
             st.markdown(
-                "Create an account or sign in to keep your conversations and enable full features.")
+                "**Create an Account** or **Sign In** to save your conversations and unlock full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
@@ -1247,7 +1368,8 @@ def render_main_app():
                         st.session_state['sidebar_show_register'] = False
                     # No forced rerun here; allow the current render to show the expander
             with col_b:
-                if st.button("Register", key="sidebar_toggle_register"):
+                # [label patch] changed 'Register' to 'Create An Account' (sidebar button)
+                if st.button("Create An Account", key="sidebar_toggle_register"):
                     st.session_state['sidebar_show_register'] = not st.session_state.get(
                         'sidebar_show_register', False)
                     if st.session_state['sidebar_show_register']:
@@ -1290,7 +1412,8 @@ def render_main_app():
                         else:
                             st.error("Authentication subsystem unavailable")
                 if st.session_state.get('sidebar_show_register'):
-                    with st.expander("Register", expanded=True):
+                    # [label patch] changed expander title 'Register' to 'Create An Account' (sidebar expander)
+                    with st.expander("Create An Account", expanded=True):
                         if auth:
                             auth.render_register_form(in_sidebar=True)
                         else:
@@ -1328,6 +1451,100 @@ def render_main_app():
                                  st.session_state['user_id']] = []
                 st.session_state['conversation_named'] = False
                 st.rerun()
+
+            # [title-edit patch] Offer inline title editing immediately after auto-generation
+            try:
+                # Build the conversation history key for this user
+                _conv_key = f"conversation_history_{st.session_state.get('user_id')}"
+                _curr_title = st.session_state.get(
+                    'conversation_title', 'New Conversation')
+                # Show a compact title row and, if requested, an inline editor
+                if st.session_state.get('offer_title_edit', False):
+                    st.markdown("**Conversation title**")
+                    # Use a dedicated input key to avoid collisions
+                    _edited = st.text_input(
+                        "Edit title", value=_curr_title, key="inline_edit_conversation_title")
+                    c1, c2 = st.columns([1, 1], gap="small")
+                    with c1:
+                        if st.button("Save", key="save_inline_title"):
+                            # Persist the edited title to session state and mark named
+                            st.session_state['conversation_title'] = _edited.strip(
+                            ) or _curr_title
+                            st.session_state['conversation_named'] = True
+                            st.session_state['offer_title_edit'] = False
+                            # Attempt immediate persistence if ConversationManager is present
+                            try:
+                                mgr = st.session_state.get(
+                                    'conversation_manager')
+                                if mgr:
+                                    conv_id = st.session_state.get(
+                                        'current_conversation_id') or str(uuid.uuid4())
+                                    # Normalize messages in-session to the lightweight form expected by the manager
+                                    _raw = st.session_state.get(_conv_key, [])
+                                    _norm = []
+                                    for t in _raw:
+                                        if isinstance(t, dict) and 'role' in t and 'content' in t:
+                                            _norm.append(t)
+                                            continue
+                                        if isinstance(t, dict) and 'user' in t and 'assistant' in t:
+                                            _norm.append(
+                                                {'role': 'user', 'content': t.get('user', '')})
+                                            _norm.append(
+                                                {'role': 'assistant', 'content': t.get('assistant', '')})
+                                            continue
+                                        if isinstance(t, dict) and 'user' in t:
+                                            _norm.append(
+                                                {'role': 'user', 'content': t.get('user', '')})
+                                        elif isinstance(t, dict) and 'assistant' in t:
+                                            _norm.append(
+                                                {'role': 'assistant', 'content': t.get('assistant', '')})
+                                        else:
+                                            try:
+                                                _norm.append(
+                                                    {'role': 'user', 'content': str(t)})
+                                            except Exception:
+                                                _norm.append(
+                                                    {'role': 'user', 'content': ''})
+
+                                    try:
+                                        mgr.save_conversation(
+                                            conversation_id=conv_id,
+                                            title=st.session_state['conversation_title'],
+                                            messages=_norm,
+                                            processing_mode=st.session_state.get(
+                                                'processing_mode', 'hybrid'),
+                                            auto_name=None,
+                                            glyphs_triggered=st.session_state.get(
+                                                'conversation_glyphs', [])
+                                        )
+                                    except Exception:
+                                        # Swallow persistence errors here; the app will still
+                                        # attempt to persist at the normal save points.
+                                        pass
+                            except Exception:
+                                pass
+                            # Refresh UI to reflect saved title
+                            try:
+                                st.experimental_rerun()
+                            except Exception:
+                                pass
+                    with c2:
+                        if st.button("Cancel", key="cancel_inline_title"):
+                            st.session_state['offer_title_edit'] = False
+                            try:
+                                st.experimental_rerun()
+                            except Exception:
+                                pass
+                else:
+                    # Show current title compactly when not editing
+                    try:
+                        st.markdown(
+                            f"**Conversation:** {st.session_state.get('conversation_title', 'New Conversation')}")
+                    except Exception:
+                        pass
+            except Exception:
+                # Best-effort: do not break the sidebar if title UI fails
+                pass
 
         # Human-in-the-Loop (HIL) controls removed per user request.
         # All HIL-related session flags are cleared so the sidebar no longer
@@ -2236,6 +2453,8 @@ def render_main_app():
                         title = auto_name
                         st.session_state['conversation_title'] = title
                         st.session_state['conversation_glyphs'] = detected_glyphs
+                        # Offer an inline title edit once immediately after auto-generation
+                        st.session_state['offer_title_edit'] = True
                         # Mark this conversation as named so we don't re-run naming
                         # on subsequent message appends or sessions unless the user
                         # explicitly starts a new conversation.
