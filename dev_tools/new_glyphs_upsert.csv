@@ -1,0 +1,8 @@
+name,description,response_layer,depth,glyph_type,symbolic_pairing,user_id,created_from_chat,source_message,emotional_tone,last_updated
+feeling_unmoored,"A sense of instability and lack of direction.",grounding,3,, , ,true,"I feel unmoored and need something to hold onto",dev-extract,2025-11-11T12:00:00Z
+seeking_stability,"The desire for something solid to hold onto.",outreach,4,, , ,true,"I feel unmoored and need something to hold onto",dev-extract,2025-11-11T12:00:00Z
+anger,"Furious feelings about being dismissed at work.",,4,, , ,true,"I'm furious about how they dismissed me at work",dev-extract,2025-11-11T12:00:00Z
+dismissal,"Feeling disregarded and undervalued in a professional setting.","inner reflection",3,, , ,true,"I'm furious about how they dismissed me at work",dev-extract,2025-11-11T12:00:00Z
+heartache,"Emotional pain stemming from missing someone dearly.",grounding,5,, , ,true,"I miss her so much it aches",dev-extract,2025-11-11T12:00:00Z
+quiet_joy,"A serene happiness found in peaceful moments.",inner_reflection,3,, , ,true,"There's a quiet joy in watching them sleep",dev-extract,2025-11-11T12:00:00Z
+overwhelm,"Feeling burdened by excessive responsibilities and emotions.","inner reflection",4,, , ,true,"I'm overwhelmed by everything I'm carrying",dev-extract,2025-11-11T12:00:00Z
