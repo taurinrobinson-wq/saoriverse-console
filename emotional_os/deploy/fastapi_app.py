@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 
 import requests
 import uvicorn
-from admin_router import admin_router
+# from admin_router import admin_router  # Temporarily commented for testing
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -65,7 +65,7 @@ async def force_https(request, call_next):
     return response
 
 # Include routers
-app.include_router(admin_router)
+# app.include_router(admin_router)  # Temporarily commented for testing
 
 # Debug route to check what routes are registered
 
@@ -77,7 +77,7 @@ async def debug_routes():
 
 # Static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="emotional_os/deploy/templates")
 
 # Configuration - using names from .env file
 SUPABASE_URL = os.getenv("SUPABASE_URL")
@@ -348,7 +348,7 @@ async def chat(chat_data: ChatRequest):
 
         return {
             "success": False,
-            "reply": "I'm experiencing some technical difficulties, but I'm still here for you."
+            "reply": f"AI service returned HTTP {response.status_code}. Please try again shortly."
         }
 
     except Exception as e:
@@ -390,6 +390,16 @@ async def health_check():
             "supabase_function_url": "✓" if CURRENT_SAORI_URL else "✗"
         }
     }
+
+# Try to include server-side conversation save router if present.
+# Import guarded to avoid circular import issues during module init.
+try:
+    from emotional_os.deploy.save_conv_api import router as save_conv_router
+
+    app.include_router(save_conv_router)
+    print("[fastapi_app] Included save_conv_api router")
+except Exception as e:
+    print(f"[fastapi_app] Could not include save_conv_api router: {e}")
 
 if __name__ == "__main__":
     import os
