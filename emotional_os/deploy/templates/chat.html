@@ -471,6 +471,24 @@
 
         // Initialize app
         window.addEventListener('load', async () => {
+            // Allow quick local testing by reading token/user info from URL
+            // query params (e.g. ?token=...&user_id=...&username=...). If
+            // present, populate localStorage so the static template can be
+            // tested without a separate login flow.
+            (function populateLocalStorageFromQuery() {
+                try {
+                    const params = new URLSearchParams(window.location.search);
+                    const t = params.get('token');
+                    const uid = params.get('user_id');
+                    const uname = params.get('username');
+                    if (t) localStorage.setItem('firstperson_token', t);
+                    if (uid) localStorage.setItem('firstperson_user_id', uid);
+                    if (uname) localStorage.setItem('firstperson_username', uname);
+                } catch (e) {
+                    // ignore quietly
+                }
+            })();
+
             // Check authentication
             const token = localStorage.getItem('firstperson_token');
             const userId = localStorage.getItem('firstperson_user_id');
