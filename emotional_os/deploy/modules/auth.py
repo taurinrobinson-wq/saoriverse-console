@@ -205,12 +205,13 @@ class SaoynxAuthentication:
                         font-size: 0.95rem !important;
                     }
                     </style>
-                    <div class="fp-auth-header"><h2>Register New Account</h2></div>
+                    <div class="fp-auth-header"><h2>Create An Account</h2></div>
                     """,
                     unsafe_allow_html=True,
                 )
             except Exception:
-                st.markdown("## Register New Account")
+                # [label patch] changed 'Register New Account' to 'Create An Account' (auth form header)
+                st.markdown("## Create An Account")
 
         # Apply the same compact spacing when the register form is shown in the sidebar
         if in_sidebar:
@@ -259,7 +260,8 @@ class SaoynxAuthentication:
         print(
             f"DEBUG: st.text_input values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}")
 
-        if st.button("Register", key=key_btn):
+        # [label patch] changed 'Register' to 'Create An Account' (auth form submit button)
+        if st.button("Create An Account", key=key_btn):
             # Debug: log the form values before validation
             print(
                 f"DEBUG: Form values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}")
