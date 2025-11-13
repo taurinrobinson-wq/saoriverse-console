@@ -11,6 +11,7 @@ Handles:
 
 import json
 import logging
+import os
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import re
@@ -74,10 +75,20 @@ class ConversationManager:
 
     def __init__(self, user_id: str, supabase_url: Optional[str] = None, supabase_key: Optional[str] = None):
         self.user_id = user_id
-        self.supabase_url = supabase_url or st.secrets.get(
-            "supabase", {}).get("url")
-        self.supabase_key = supabase_key or st.secrets.get(
-            "supabase", {}).get("key")
+        # Prefer explicit args, then environment variables, then Streamlit secrets.
+        self.supabase_url = (
+            supabase_url
+            or os.environ.get("SUPABASE_URL")
+            or st.secrets.get("supabase", {}).get("url")
+        )
+        # Support both a service role key (preferred for server-side writes)
+        # and the regular SUPABASE_KEY used in some deployments.
+        self.supabase_key = (
+            supabase_key
+            or os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+            or os.environ.get("SUPABASE_KEY")
+            or st.secrets.get("supabase", {}).get("key")
+        )
         self.base_url = self._normalize_supabase_url(
             self.supabase_url) if self.supabase_url else None
 
@@ -383,6 +394,31 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
 
     conversations = manager.load_conversations()
 
+    # Merge any optimistic session-cached conversations so newly-created
+    # conversations appear in the sidebar immediately even if server-side
+    # persistence is still pending or failing. Cached items are prepended
+    # and de-duplicated by `conversation_id`.
+    try:
+        cached = st.session_state.get('session_cached_conversations', [])
+        if cached and isinstance(cached, list):
+            seen = {c.get('conversation_id') for c in conversations if isinstance(c, dict) and c.get('conversation_id')}
+            merged = []
+            # Add cached first (fresh items)
+            for c in cached:
+                if not c:
+                    continue
+                cid = c.get('conversation_id')
+                if not cid or cid in seen:
+                    continue
+                merged.append(c)
+                seen.add(cid)
+            # Then extend with server-provided conversations
+            merged.extend([c for c in conversations if isinstance(c, dict)])
+            conversations = merged
+    except Exception:
+        # Best-effort merge; if anything goes wrong, fall back to server list
+        pass
+
     if not conversations:
         st.sidebar.info("No previous conversations yet. Start a new one!")
         return
@@ -399,9 +435,27 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
                 key=f"load_conv_{conv['conversation_id']}",
                 use_container_width=True
             ):
-                st.session_state['selected_conversation'] = conv['conversation_id']
-                st.session_state['conversation_title'] = conv['title']
-                st.rerun()
+                try:
+                    # Best-effort: load the conversation immediately using the manager
+                    user_id = st.session_state.get('user_id')
+                    conversation_key = f"conversation_history_{user_id}"
+                    loaded = manager.load_conversation(conv['conversation_id'])
+                    if loaded:
+                        msgs = loaded.get('messages') if isinstance(loaded.get('messages'), list) else loaded.get('messages', [])
+                        st.session_state[conversation_key] = msgs or []
+                        st.session_state['current_conversation_id'] = loaded.get('conversation_id', conv['conversation_id'])
+                        st.session_state['conversation_title'] = loaded.get('title', conv['title'])
+                        try:
+                            st.sidebar.success(f"Loaded: {st.session_state['conversation_title']}")
+                        except Exception:
+                            pass
+                        st.rerun()
+
+                except Exception:
+                    # Fallback to the previous behavior if immediate load fails
+                    st.session_state['selected_conversation'] = conv['conversation_id']
+                    st.session_state['conversation_title'] = conv['title']
+                    st.rerun()
 
         with col2:
             # Rename button
@@ -412,6 +466,18 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
         with col3:
             # Delete button
             if st.button("🗑️", key=f"delete_{conv['conversation_id']}", help="Delete"):
+                # If this conversation is an optimistic session-cached item,
+                # remove it from the session cache and avoid calling the
+                # server-side delete API which will fail for unsaved items.
+                try:
+                    cached = st.session_state.get('session_cached_conversations', [])
+                    if isinstance(cached, list) and any(c.get('conversation_id') == conv['conversation_id'] for c in cached):
+                        st.session_state['session_cached_conversations'] = [c for c in cached if c.get('conversation_id') != conv['conversation_id']]
+                        st.sidebar.success('Deleted local conversation')
+                        st.rerun()
+                except Exception:
+                    pass
+
                 success, message = manager.delete_conversation(
                     conv['conversation_id'])
                 if success:
