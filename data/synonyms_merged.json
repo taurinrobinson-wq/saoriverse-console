@@ -1,0 +1,6000 @@
+{
+  "ache": {
+    "datamuse": [
+      "aching",
+      "hurt",
+      "languish",
+      "long",
+      "pine",
+      "smart",
+      "suffer",
+      "yearn",
+      "yen"
+    ],
+    "wordnet": [
+      "ache",
+      "aching",
+      "hurt",
+      "languish",
+      "pine",
+      "smart",
+      "suffer",
+      "yearn",
+      "yen"
+    ],
+    "merged": [
+      "ache",
+      "aching",
+      "hurt",
+      "languish",
+      "long",
+      "pine",
+      "smart",
+      "suffer",
+      "yearn",
+      "yen"
+    ]
+  },
+  "acheful": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "again": {
+    "datamuse": [
+      "once again",
+      "once more",
+      "over again"
+    ],
+    "wordnet": [
+      "again",
+      "once again",
+      "once more",
+      "over again"
+    ],
+    "merged": [
+      "again",
+      "once again",
+      "once more",
+      "over again"
+    ]
+  },
+  "aggression": {
+    "datamuse": [
+      "aggressiveness",
+      "hostility"
+    ],
+    "wordnet": [
+      "aggression",
+      "aggressiveness",
+      "hostility"
+    ],
+    "merged": [
+      "aggression",
+      "aggressiveness",
+      "hostility"
+    ]
+  },
+  "alone": {
+    "datamuse": [
+      "entirely",
+      "exclusively",
+      "lone",
+      "lonely",
+      "only",
+      "solely",
+      "solitary",
+      "unaccompanied",
+      "unequaled",
+      "unequalled",
+      "unique",
+      "unparalleled"
+    ],
+    "wordnet": [
+      "alone",
+      "entirely",
+      "exclusively",
+      "lone",
+      "lonely",
+      "only",
+      "solely",
+      "solitary",
+      "solo",
+      "unaccompanied",
+      "unequaled",
+      "unequalled",
+      "unique",
+      "unparalleled"
+    ],
+    "merged": [
+      "alone",
+      "entirely",
+      "exclusively",
+      "lone",
+      "lonely",
+      "only",
+      "solely",
+      "solitary",
+      "solo",
+      "unaccompanied",
+      "unequaled",
+      "unequalled",
+      "unique",
+      "unparalleled"
+    ]
+  },
+  "amazing": {
+    "datamuse": [
+      "astonishing",
+      "awe-inspiring",
+      "awesome",
+      "awful",
+      "awing",
+      "impressive",
+      "surprising"
+    ],
+    "wordnet": [
+      "amaze",
+      "amazing",
+      "astonish",
+      "astonishing",
+      "astound",
+      "awe-inspiring",
+      "awesome",
+      "awful",
+      "awing",
+      "baffle",
+      "beat",
+      "bewilder",
+      "dumbfound",
+      "flummox",
+      "get",
+      "gravel",
+      "mystify",
+      "nonplus",
+      "perplex",
+      "pose",
+      "puzzle",
+      "stick",
+      "stupefy",
+      "vex"
+    ],
+    "merged": [
+      "amaze",
+      "amazing",
+      "astonish",
+      "astonishing",
+      "astound",
+      "awe-inspiring",
+      "awesome",
+      "awful",
+      "awing",
+      "baffle",
+      "beat",
+      "bewilder",
+      "dumbfound",
+      "flummox",
+      "get",
+      "gravel",
+      "impressive",
+      "mystify",
+      "nonplus",
+      "perplex",
+      "pose",
+      "puzzle",
+      "stick",
+      "stupefy",
+      "surprising",
+      "vex"
+    ]
+  },
+  "archive": {
+    "datamuse": [
+      "archives",
+      "file away"
+    ],
+    "wordnet": [
+      "archive",
+      "file away"
+    ],
+    "merged": [
+      "archive",
+      "archives",
+      "file away"
+    ]
+  },
+  "asked": {
+    "datamuse": [],
+    "wordnet": [
+      "ask",
+      "call for",
+      "demand",
+      "enquire",
+      "expect",
+      "inquire",
+      "involve",
+      "necessitate",
+      "need",
+      "postulate",
+      "require",
+      "take"
+    ],
+    "merged": [
+      "ask",
+      "call for",
+      "demand",
+      "enquire",
+      "expect",
+      "inquire",
+      "involve",
+      "necessitate",
+      "need",
+      "postulate",
+      "require",
+      "take"
+    ]
+  },
+  "attunement": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "axis": {
+    "datamuse": [
+      "axis of rotation",
+      "axis vertebra",
+      "bloc"
+    ],
+    "wordnet": [
+      "axis",
+      "axis of rotation",
+      "axis vertebra",
+      "bloc"
+    ],
+    "merged": [
+      "axis",
+      "axis of rotation",
+      "axis vertebra",
+      "bloc"
+    ]
+  },
+  "bliss": {
+    "datamuse": [
+      "blissfulness",
+      "cloud nine",
+      "seventh heaven",
+      "walking on air"
+    ],
+    "wordnet": [
+      "bliss",
+      "blissfulness",
+      "cloud nine",
+      "seventh heaven",
+      "walking on air"
+    ],
+    "merged": [
+      "bliss",
+      "blissfulness",
+      "cloud nine",
+      "seventh heaven",
+      "walking on air"
+    ]
+  },
+  "bloom": {
+    "datamuse": [
+      "bloom of youth",
+      "blooming",
+      "blossom",
+      "blush",
+      "efflorescence",
+      "flower",
+      "flush",
+      "heyday",
+      "peak",
+      "prime",
+      "rosiness"
+    ],
+    "wordnet": [
+      "bloom",
+      "bloom of youth",
+      "blooming",
+      "blossom",
+      "blush",
+      "efflorescence",
+      "flower",
+      "flush",
+      "heyday",
+      "peak",
+      "prime",
+      "rosiness",
+      "salad days"
+    ],
+    "merged": [
+      "bloom",
+      "bloom of youth",
+      "blooming",
+      "blossom",
+      "blush",
+      "efflorescence",
+      "flower",
+      "flush",
+      "heyday",
+      "peak",
+      "prime",
+      "rosiness",
+      "salad days"
+    ]
+  },
+  "boundary": {
+    "datamuse": [
+      "bound",
+      "bounds",
+      "edge",
+      "limit"
+    ],
+    "wordnet": [
+      "bound",
+      "boundary",
+      "edge",
+      "limit"
+    ],
+    "merged": [
+      "bound",
+      "boundary",
+      "bounds",
+      "edge",
+      "limit"
+    ]
+  },
+  "breath": {
+    "datamuse": [
+      "breather",
+      "breathing place",
+      "breathing space",
+      "breathing spell",
+      "breathing time",
+      "hint",
+      "intimation"
+    ],
+    "wordnet": [
+      "breath",
+      "breather",
+      "breathing place",
+      "breathing space",
+      "breathing spell",
+      "breathing time",
+      "hint",
+      "intimation"
+    ],
+    "merged": [
+      "breath",
+      "breather",
+      "breathing place",
+      "breathing space",
+      "breathing spell",
+      "breathing time",
+      "hint",
+      "intimation"
+    ]
+  },
+  "burrow": {
+    "datamuse": [
+      "tunnel"
+    ],
+    "wordnet": [
+      "burrow",
+      "tunnel"
+    ],
+    "merged": [
+      "burrow",
+      "tunnel"
+    ]
+  },
+  "card": {
+    "datamuse": [
+      "batting order",
+      "bill",
+      "bill of fare",
+      "board",
+      "calling card",
+      "carte",
+      "carte du jour",
+      "circuit board",
+      "circuit card",
+      "identity card",
+      "lineup",
+      "menu",
+      "notice",
+      "placard",
+      "poster",
+      "scorecard",
+      "tease",
+      "visiting card",
+      "wag",
+      "wit"
+    ],
+    "wordnet": [
+      "add-in",
+      "batting order",
+      "bill",
+      "bill of fare",
+      "board",
+      "calling card",
+      "card",
+      "carte",
+      "carte du jour",
+      "circuit board",
+      "circuit card",
+      "identity card",
+      "lineup",
+      "menu",
+      "notice",
+      "placard",
+      "plug-in",
+      "poster",
+      "posting",
+      "scorecard",
+      "tease",
+      "visiting card",
+      "wag",
+      "wit"
+    ],
+    "merged": [
+      "add-in",
+      "batting order",
+      "bill",
+      "bill of fare",
+      "board",
+      "calling card",
+      "card",
+      "carte",
+      "carte du jour",
+      "circuit board",
+      "circuit card",
+      "identity card",
+      "lineup",
+      "menu",
+      "notice",
+      "placard",
+      "plug-in",
+      "poster",
+      "posting",
+      "scorecard",
+      "tease",
+      "visiting card",
+      "wag",
+      "wit"
+    ]
+  },
+  "celebratory": {
+    "datamuse": [],
+    "wordnet": [
+      "celebratory"
+    ],
+    "merged": [
+      "celebratory"
+    ]
+  },
+  "ceremonial": {
+    "datamuse": [
+      "ceremonial occasion",
+      "ceremony",
+      "formal",
+      "observance",
+      "solemn"
+    ],
+    "wordnet": [
+      "ceremonial",
+      "ceremonial occasion",
+      "ceremony",
+      "observance"
+    ],
+    "merged": [
+      "ceremonial",
+      "ceremonial occasion",
+      "ceremony",
+      "formal",
+      "observance",
+      "solemn"
+    ]
+  },
+  "charge": {
+    "datamuse": [
+      "accusation",
+      "accuse",
+      "agitate",
+      "appoint",
+      "armorial bearing",
+      "bang",
+      "bear down",
+      "bearing",
+      "bill",
+      "billing",
+      "blame",
+      "buck",
+      "burden",
+      "burster",
+      "bursting charge",
+      "care",
+      "cathexis",
+      "charge up",
+      "commission",
+      "commit",
+      "commove",
+      "complaint",
+      "consign",
+      "direction",
+      "electric charge",
+      "excite",
+      "explosive charge",
+      "file",
+      "flush",
+      "guardianship",
+      "heraldic bearing",
+      "institutionalize",
+      "kick",
+      "level",
+      "load",
+      "lodge",
+      "mission",
+      "point",
+      "rouse",
+      "rush",
+      "saddle",
+      "send",
+      "shoot",
+      "shoot down",
+      "tear",
+      "thrill",
+      "tutelage"
+    ],
+    "wordnet": [
+      "accusation",
+      "accuse",
+      "agitate",
+      "appoint",
+      "armorial bearing",
+      "bang",
+      "bear down",
+      "bearing",
+      "bill",
+      "billing",
+      "blame",
+      "boot",
+      "buck",
+      "burden",
+      "burster",
+      "bursting charge",
+      "care",
+      "cathexis",
+      "charge",
+      "charge up",
+      "commission",
+      "commit",
+      "commove",
+      "complaint",
+      "consign",
+      "direction",
+      "electric charge",
+      "excite",
+      "explosive charge",
+      "file",
+      "flush",
+      "guardianship",
+      "heraldic bearing",
+      "institutionalise",
+      "institutionalize",
+      "kick",
+      "level",
+      "load",
+      "lodge",
+      "mission",
+      "point",
+      "rouse",
+      "rush",
+      "saddle",
+      "send",
+      "shoot",
+      "shoot down",
+      "tear",
+      "thrill",
+      "turn on",
+      "tutelage"
+    ],
+    "merged": [
+      "accusation",
+      "accuse",
+      "agitate",
+      "appoint",
+      "armorial bearing",
+      "bang",
+      "bear down",
+      "bearing",
+      "bill",
+      "billing",
+      "blame",
+      "boot",
+      "buck",
+      "burden",
+      "burster",
+      "bursting charge",
+      "care",
+      "cathexis",
+      "charge",
+      "charge up",
+      "commission",
+      "commit",
+      "commove",
+      "complaint",
+      "consign",
+      "direction",
+      "electric charge",
+      "excite",
+      "explosive charge",
+      "file",
+      "flush",
+      "guardianship",
+      "heraldic bearing",
+      "institutionalise",
+      "institutionalize",
+      "kick",
+      "level",
+      "load",
+      "lodge",
+      "mission",
+      "point",
+      "rouse",
+      "rush",
+      "saddle",
+      "send",
+      "shoot",
+      "shoot down",
+      "tear",
+      "thrill",
+      "turn on",
+      "tutelage"
+    ]
+  },
+  "chart": {
+    "datamuse": [],
+    "wordnet": [
+      "chart",
+      "graph"
+    ],
+    "merged": [
+      "chart",
+      "graph"
+    ]
+  },
+  "chat": {
+    "datamuse": [
+      "chaffer",
+      "chatter",
+      "chitchat",
+      "claver",
+      "confab",
+      "confabulate",
+      "confabulation",
+      "gossip",
+      "jaw",
+      "natter",
+      "new world chat",
+      "old world chat",
+      "visit"
+    ],
+    "wordnet": [
+      "chaffer",
+      "chat",
+      "chatter",
+      "chew the fat",
+      "chit-chat",
+      "chitchat",
+      "claver",
+      "confab",
+      "confabulate",
+      "confabulation",
+      "gossip",
+      "jaw",
+      "natter",
+      "new world chat",
+      "old world chat",
+      "schmoose",
+      "schmooze",
+      "shoot the breeze",
+      "visit"
+    ],
+    "merged": [
+      "chaffer",
+      "chat",
+      "chatter",
+      "chew the fat",
+      "chit-chat",
+      "chitchat",
+      "claver",
+      "confab",
+      "confabulate",
+      "confabulation",
+      "gossip",
+      "jaw",
+      "natter",
+      "new world chat",
+      "old world chat",
+      "schmoose",
+      "schmooze",
+      "shoot the breeze",
+      "visit"
+    ]
+  },
+  "chosen": {
+    "datamuse": [
+      "elect",
+      "selected"
+    ],
+    "wordnet": [
+      "choose",
+      "chosen",
+      "elect",
+      "opt",
+      "pick out",
+      "prefer",
+      "select",
+      "take"
+    ],
+    "merged": [
+      "choose",
+      "chosen",
+      "elect",
+      "opt",
+      "pick out",
+      "prefer",
+      "select",
+      "selected",
+      "take"
+    ]
+  },
+  "clarity": {
+    "datamuse": [
+      "clearness",
+      "limpidity",
+      "lucidity",
+      "pellucidity",
+      "uncloudedness"
+    ],
+    "wordnet": [
+      "clarity",
+      "clearness",
+      "limpidity",
+      "lucidity",
+      "lucidness",
+      "pellucidity",
+      "uncloudedness"
+    ],
+    "merged": [
+      "clarity",
+      "clearness",
+      "limpidity",
+      "lucidity",
+      "lucidness",
+      "pellucidity",
+      "uncloudedness"
+    ]
+  },
+  "collapse": {
+    "datamuse": [
+      "break",
+      "break down",
+      "break up",
+      "burst",
+      "cave in",
+      "crack",
+      "crack up",
+      "crash",
+      "crock up",
+      "crumble",
+      "crumple",
+      "fall in",
+      "flop",
+      "founder",
+      "give",
+      "give way",
+      "tumble"
+    ],
+    "wordnet": [
+      "break",
+      "break down",
+      "break up",
+      "burst",
+      "cave in",
+      "collapse",
+      "crack",
+      "crack up",
+      "crash",
+      "crock up",
+      "crumble",
+      "crumple",
+      "fall in",
+      "flop",
+      "founder",
+      "give",
+      "give way",
+      "prostration",
+      "tumble"
+    ],
+    "merged": [
+      "break",
+      "break down",
+      "break up",
+      "burst",
+      "cave in",
+      "collapse",
+      "crack",
+      "crack up",
+      "crash",
+      "crock up",
+      "crumble",
+      "crumple",
+      "fall in",
+      "flop",
+      "founder",
+      "give",
+      "give way",
+      "prostration",
+      "tumble"
+    ]
+  },
+  "community": {
+    "datamuse": [
+      "community of interests",
+      "local",
+      "profession",
+      "public",
+      "residential area",
+      "residential district"
+    ],
+    "wordnet": [
+      "biotic community",
+      "community",
+      "community of interests",
+      "residential area",
+      "residential district"
+    ],
+    "merged": [
+      "biotic community",
+      "community",
+      "community of interests",
+      "local",
+      "profession",
+      "public",
+      "residential area",
+      "residential district"
+    ]
+  },
+  "compromise": {
+    "datamuse": [
+      "via media"
+    ],
+    "wordnet": [
+      "compromise",
+      "via media"
+    ],
+    "merged": [
+      "compromise",
+      "via media"
+    ]
+  },
+  "condition": {
+    "datamuse": [
+      "check",
+      "circumstance",
+      "consideration",
+      "discipline",
+      "experimental condition",
+      "precondition",
+      "qualify",
+      "shape",
+      "specify",
+      "status",
+      "stipulate",
+      "stipulation",
+      "term",
+      "train"
+    ],
+    "wordnet": [
+      "check",
+      "circumstance",
+      "condition",
+      "consideration",
+      "discipline",
+      "experimental condition",
+      "precondition",
+      "qualify",
+      "shape",
+      "specify",
+      "status",
+      "stipulate",
+      "stipulation",
+      "term",
+      "train"
+    ],
+    "merged": [
+      "check",
+      "circumstance",
+      "condition",
+      "consideration",
+      "discipline",
+      "experimental condition",
+      "precondition",
+      "qualify",
+      "shape",
+      "specify",
+      "status",
+      "stipulate",
+      "stipulation",
+      "term",
+      "train"
+    ]
+  },
+  "contained": {
+    "datamuse": [
+      "controlled",
+      "restrained"
+    ],
+    "wordnet": [
+      "arrest",
+      "bear",
+      "carry",
+      "check",
+      "comprise",
+      "contain",
+      "contained",
+      "control",
+      "curb",
+      "hold",
+      "hold back",
+      "hold in",
+      "incorporate",
+      "moderate",
+      "stop",
+      "take",
+      "turn back"
+    ],
+    "merged": [
+      "arrest",
+      "bear",
+      "carry",
+      "check",
+      "comprise",
+      "contain",
+      "contained",
+      "control",
+      "controlled",
+      "curb",
+      "hold",
+      "hold back",
+      "hold in",
+      "incorporate",
+      "moderate",
+      "restrained",
+      "stop",
+      "take",
+      "turn back"
+    ]
+  },
+  "containment": {
+    "datamuse": [],
+    "wordnet": [
+      "containment"
+    ],
+    "merged": [
+      "containment"
+    ]
+  },
+  "continuation": {
+    "datamuse": [
+      "continuance",
+      "sequel"
+    ],
+    "wordnet": [
+      "continuance",
+      "continuation",
+      "good continuation",
+      "law of continuation",
+      "lengthiness",
+      "prolongation",
+      "protraction",
+      "sequel"
+    ],
+    "merged": [
+      "continuance",
+      "continuation",
+      "good continuation",
+      "law of continuation",
+      "lengthiness",
+      "prolongation",
+      "protraction",
+      "sequel"
+    ]
+  },
+  "continuity": {
+    "datamuse": [
+      "persistence"
+    ],
+    "wordnet": [
+      "continuity",
+      "persistence"
+    ],
+    "merged": [
+      "continuity",
+      "persistence"
+    ]
+  },
+  "cost": {
+    "datamuse": [
+      "be",
+      "monetary value",
+      "price",
+      "toll"
+    ],
+    "wordnet": [
+      "be",
+      "cost",
+      "monetary value",
+      "price",
+      "toll"
+    ],
+    "merged": [
+      "be",
+      "cost",
+      "monetary value",
+      "price",
+      "toll"
+    ]
+  },
+  "creation": {
+    "datamuse": [
+      "conception",
+      "cosmos",
+      "existence",
+      "foundation",
+      "founding",
+      "initiation",
+      "instauration",
+      "institution",
+      "macrocosm",
+      "nature",
+      "origination",
+      "universe",
+      "world"
+    ],
+    "wordnet": [
+      "conception",
+      "cosmos",
+      "creation",
+      "creative activity",
+      "existence",
+      "foundation",
+      "founding",
+      "initiation",
+      "innovation",
+      "instauration",
+      "institution",
+      "introduction",
+      "macrocosm",
+      "origination",
+      "universe",
+      "world"
+    ],
+    "merged": [
+      "conception",
+      "cosmos",
+      "creation",
+      "creative activity",
+      "existence",
+      "foundation",
+      "founding",
+      "initiation",
+      "innovation",
+      "instauration",
+      "institution",
+      "introduction",
+      "macrocosm",
+      "nature",
+      "origination",
+      "universe",
+      "world"
+    ]
+  },
+  "dancing": {
+    "datamuse": [
+      "active",
+      "dance",
+      "terpsichore"
+    ],
+    "wordnet": [
+      "dance",
+      "dancing",
+      "saltation",
+      "terpsichore",
+      "trip the light fantastic",
+      "trip the light fantastic toe"
+    ],
+    "merged": [
+      "active",
+      "dance",
+      "dancing",
+      "saltation",
+      "terpsichore",
+      "trip the light fantastic",
+      "trip the light fantastic toe"
+    ]
+  },
+  "decoding": {
+    "datamuse": [
+      "decipherment",
+      "decryption"
+    ],
+    "wordnet": [
+      "decipher",
+      "decipherment",
+      "decode",
+      "decoding",
+      "decrypt",
+      "decryption"
+    ],
+    "merged": [
+      "decipher",
+      "decipherment",
+      "decode",
+      "decoding",
+      "decrypt",
+      "decryption"
+    ]
+  },
+  "deepens": {
+    "datamuse": [],
+    "wordnet": [
+      "change",
+      "compound",
+      "deepen",
+      "heighten",
+      "intensify"
+    ],
+    "merged": [
+      "change",
+      "compound",
+      "deepen",
+      "heighten",
+      "intensify"
+    ]
+  },
+  "design": {
+    "datamuse": [
+      "aim",
+      "blueprint",
+      "conception",
+      "contrive",
+      "designing",
+      "excogitation",
+      "figure",
+      "innovation",
+      "intent",
+      "intention",
+      "invention",
+      "pattern",
+      "plan",
+      "project",
+      "purpose"
+    ],
+    "wordnet": [
+      "aim",
+      "blueprint",
+      "conception",
+      "contrive",
+      "design",
+      "designing",
+      "excogitation",
+      "figure",
+      "innovation",
+      "intent",
+      "intention",
+      "invention",
+      "pattern",
+      "plan",
+      "project",
+      "purpose"
+    ],
+    "merged": [
+      "aim",
+      "blueprint",
+      "conception",
+      "contrive",
+      "design",
+      "designing",
+      "excogitation",
+      "figure",
+      "innovation",
+      "intent",
+      "intention",
+      "invention",
+      "pattern",
+      "plan",
+      "project",
+      "purpose"
+    ]
+  },
+  "devotion": {
+    "datamuse": [
+      "devotedness",
+      "idolatry",
+      "veneration"
+    ],
+    "wordnet": [
+      "cultism",
+      "devotedness",
+      "devotion",
+      "idolatry",
+      "veneration"
+    ],
+    "merged": [
+      "cultism",
+      "devotedness",
+      "devotion",
+      "idolatry",
+      "veneration"
+    ]
+  },
+  "devotional": {
+    "datamuse": [
+      "pious"
+    ],
+    "wordnet": [
+      "devotional"
+    ],
+    "merged": [
+      "devotional",
+      "pious"
+    ]
+  },
+  "diagram": {
+    "datamuse": [
+      "plot"
+    ],
+    "wordnet": [
+      "diagram",
+      "plot"
+    ],
+    "merged": [
+      "diagram",
+      "plot"
+    ]
+  },
+  "duty": {
+    "datamuse": [
+      "obligation",
+      "responsibility",
+      "tariff"
+    ],
+    "wordnet": [
+      "duty",
+      "obligation",
+      "responsibility",
+      "tariff"
+    ],
+    "merged": [
+      "duty",
+      "obligation",
+      "responsibility",
+      "tariff"
+    ]
+  },
+  "echo": {
+    "datamuse": [
+      "recall",
+      "repeat",
+      "resound",
+      "reverberate",
+      "reverberation",
+      "ring",
+      "sound reflection"
+    ],
+    "wordnet": [
+      "echo",
+      "recall",
+      "repeat",
+      "replication",
+      "resound",
+      "reverberate",
+      "reverberation",
+      "ring",
+      "sound reflection"
+    ],
+    "merged": [
+      "echo",
+      "recall",
+      "repeat",
+      "replication",
+      "resound",
+      "reverberate",
+      "reverberation",
+      "ring",
+      "sound reflection"
+    ]
+  },
+  "ecstasy": {
+    "datamuse": [
+      "adam",
+      "exaltation",
+      "mdma",
+      "methylenedioxymethamphetamine",
+      "rapture",
+      "repture",
+      "transport"
+    ],
+    "wordnet": [
+      "adam",
+      "cristal",
+      "disco biscuit",
+      "ecstasy",
+      "exaltation",
+      "go",
+      "hug drug",
+      "rapture",
+      "raptus",
+      "transport",
+      "x",
+      "xtc"
+    ],
+    "merged": [
+      "adam",
+      "cristal",
+      "disco biscuit",
+      "ecstasy",
+      "exaltation",
+      "go",
+      "hug drug",
+      "mdma",
+      "methylenedioxymethamphetamine",
+      "rapture",
+      "raptus",
+      "repture",
+      "transport",
+      "x",
+      "xtc"
+    ]
+  },
+  "ecstatic": {
+    "datamuse": [
+      "enraptured",
+      "joyous",
+      "rapturous",
+      "rhapsodic"
+    ],
+    "wordnet": [
+      "ecstatic",
+      "enraptured",
+      "rapt",
+      "rapturous",
+      "rhapsodic"
+    ],
+    "merged": [
+      "ecstatic",
+      "enraptured",
+      "joyous",
+      "rapt",
+      "rapturous",
+      "rhapsodic"
+    ]
+  },
+  "effectiveness": {
+    "datamuse": [
+      "effectivity",
+      "effectuality",
+      "effectualness",
+      "potency",
+      "strength"
+    ],
+    "wordnet": [
+      "effectiveness",
+      "effectivity",
+      "effectuality",
+      "effectualness",
+      "potency",
+      "strength"
+    ],
+    "merged": [
+      "effectiveness",
+      "effectivity",
+      "effectuality",
+      "effectualness",
+      "potency",
+      "strength"
+    ]
+  },
+  "element": {
+    "datamuse": [
+      "chemical element",
+      "component",
+      "constituent",
+      "factor",
+      "ingredient"
+    ],
+    "wordnet": [
+      "chemical element",
+      "component",
+      "constituent",
+      "element",
+      "factor",
+      "ingredient"
+    ],
+    "merged": [
+      "chemical element",
+      "component",
+      "constituent",
+      "element",
+      "factor",
+      "ingredient"
+    ]
+  },
+  "emotional": {
+    "datamuse": [
+      "affectional",
+      "affective",
+      "agitated",
+      "aroused",
+      "bathetic",
+      "cathartic",
+      "charged",
+      "demonstrative",
+      "effusive",
+      "emotive",
+      "excited",
+      "funky",
+      "gushing",
+      "gushy",
+      "hot-blooded",
+      "latin",
+      "low-down",
+      "lyric",
+      "lyrical",
+      "maudlin",
+      "mawkish",
+      "mind-blowing",
+      "moody",
+      "mushy",
+      "overemotional",
+      "releasing",
+      "schmaltzy",
+      "schmalzy",
+      "sentimental",
+      "slushy",
+      "soulful",
+      "supercharged",
+      "temperamental",
+      "warm-toned"
+    ],
+    "wordnet": [
+      "aroused",
+      "emotional",
+      "excited",
+      "worked up"
+    ],
+    "merged": [
+      "affectional",
+      "affective",
+      "agitated",
+      "aroused",
+      "bathetic",
+      "cathartic",
+      "charged",
+      "demonstrative",
+      "effusive",
+      "emotional",
+      "emotive",
+      "excited",
+      "funky",
+      "gushing",
+      "gushy",
+      "hot-blooded",
+      "latin",
+      "low-down",
+      "lyric",
+      "lyrical",
+      "maudlin",
+      "mawkish",
+      "mind-blowing",
+      "moody",
+      "mushy",
+      "overemotional",
+      "releasing",
+      "schmaltzy",
+      "schmalzy",
+      "sentimental",
+      "slushy",
+      "soulful",
+      "supercharged",
+      "temperamental",
+      "warm-toned",
+      "worked up"
+    ]
+  },
+  "equilibrium": {
+    "datamuse": [
+      "balance",
+      "chemical equilibrium",
+      "counterbalance",
+      "equipoise",
+      "labyrinthine sense",
+      "sense of balance",
+      "sense of equilibrium",
+      "vestibular sense"
+    ],
+    "wordnet": [
+      "balance",
+      "chemical equilibrium",
+      "counterbalance",
+      "equilibrium",
+      "equipoise",
+      "labyrinthine sense",
+      "sense of balance",
+      "sense of equilibrium",
+      "vestibular sense"
+    ],
+    "merged": [
+      "balance",
+      "chemical equilibrium",
+      "counterbalance",
+      "equilibrium",
+      "equipoise",
+      "labyrinthine sense",
+      "sense of balance",
+      "sense of equilibrium",
+      "vestibular sense"
+    ]
+  },
+  "euphoric": {
+    "datamuse": [
+      "euphoriant",
+      "expansive",
+      "happy"
+    ],
+    "wordnet": [
+      "euphoric"
+    ],
+    "merged": [
+      "euphoriant",
+      "euphoric",
+      "expansive",
+      "happy"
+    ]
+  },
+  "ever": {
+    "datamuse": [
+      "always",
+      "ever so",
+      "of all time"
+    ],
+    "wordnet": [
+      "always",
+      "e'er",
+      "ever",
+      "ever so",
+      "of all time"
+    ],
+    "merged": [
+      "always",
+      "e'er",
+      "ever",
+      "ever so",
+      "of all time"
+    ]
+  },
+  "exaltation": {
+    "datamuse": [
+      "apotheosis",
+      "deification",
+      "ecstasy",
+      "rapture",
+      "transport"
+    ],
+    "wordnet": [
+      "apotheosis",
+      "deification",
+      "ecstasy",
+      "exaltation",
+      "rapture",
+      "raptus",
+      "transport"
+    ],
+    "merged": [
+      "apotheosis",
+      "deification",
+      "ecstasy",
+      "exaltation",
+      "rapture",
+      "raptus",
+      "transport"
+    ]
+  },
+  "exalted": {
+    "datamuse": [
+      "high",
+      "high-flown",
+      "high-minded",
+      "idealistic",
+      "lofty",
+      "noble",
+      "noble-minded",
+      "rarefied",
+      "rarified"
+    ],
+    "wordnet": [
+      "animate",
+      "beatify",
+      "elevated",
+      "enliven",
+      "exalt",
+      "exalted",
+      "exhilarate",
+      "extol",
+      "glorify",
+      "grand",
+      "high-flown",
+      "high-minded",
+      "idealistic",
+      "inebriate",
+      "inspire",
+      "invigorate",
+      "laud",
+      "lofty",
+      "noble-minded",
+      "proclaim",
+      "rarefied",
+      "rarified",
+      "sublime",
+      "thrill",
+      "tickle pink"
+    ],
+    "merged": [
+      "animate",
+      "beatify",
+      "elevated",
+      "enliven",
+      "exalt",
+      "exalted",
+      "exhilarate",
+      "extol",
+      "glorify",
+      "grand",
+      "high",
+      "high-flown",
+      "high-minded",
+      "idealistic",
+      "inebriate",
+      "inspire",
+      "invigorate",
+      "laud",
+      "lofty",
+      "noble",
+      "noble-minded",
+      "proclaim",
+      "rarefied",
+      "rarified",
+      "sublime",
+      "thrill",
+      "tickle pink"
+    ]
+  },
+  "expansion": {
+    "datamuse": [
+      "enlargement",
+      "expanding upon"
+    ],
+    "wordnet": [
+      "elaboration",
+      "enlargement",
+      "expanding upon",
+      "expansion"
+    ],
+    "merged": [
+      "elaboration",
+      "enlargement",
+      "expanding upon",
+      "expansion"
+    ]
+  },
+  "expansive": {
+    "datamuse": [
+      "cavernous",
+      "communicative",
+      "communicatory",
+      "distensible",
+      "erectile",
+      "euphoric",
+      "expandable",
+      "expandible",
+      "expansible",
+      "grand",
+      "happy",
+      "impressive",
+      "inflatable",
+      "talkative"
+    ],
+    "wordnet": [
+      "expansive",
+      "grand",
+      "heroic",
+      "talkative"
+    ],
+    "merged": [
+      "cavernous",
+      "communicative",
+      "communicatory",
+      "distensible",
+      "erectile",
+      "euphoric",
+      "expandable",
+      "expandible",
+      "expansible",
+      "expansive",
+      "grand",
+      "happy",
+      "heroic",
+      "impressive",
+      "inflatable",
+      "talkative"
+    ]
+  },
+  "export": {
+    "datamuse": [],
+    "wordnet": [
+      "export",
+      "exportation"
+    ],
+    "merged": [
+      "export",
+      "exportation"
+    ]
+  },
+  "field": {
+    "datamuse": [
+      "airfield",
+      "area",
+      "arena",
+      "athletic field",
+      "battlefield",
+      "battleground",
+      "branch of knowledge",
+      "champaign",
+      "discipline",
+      "domain",
+      "field of battle",
+      "field of force",
+      "field of operation",
+      "field of study",
+      "field of view",
+      "flying field",
+      "force field",
+      "landing field",
+      "line of business",
+      "orbit",
+      "plain",
+      "playing area",
+      "playing field",
+      "sphere",
+      "study",
+      "subject",
+      "subject area",
+      "subject field"
+    ],
+    "wordnet": [
+      "airfield",
+      "area",
+      "arena",
+      "athletic field",
+      "bailiwick",
+      "battlefield",
+      "battleground",
+      "champaign",
+      "discipline",
+      "domain",
+      "field",
+      "field of battle",
+      "field of force",
+      "field of honor",
+      "field of operation",
+      "field of operations",
+      "field of study",
+      "field of view",
+      "flying field",
+      "force field",
+      "landing field",
+      "line of business",
+      "orbit",
+      "plain",
+      "playing area",
+      "playing field",
+      "sphere",
+      "study",
+      "subject",
+      "subject area",
+      "subject field",
+      "theater",
+      "theater of operations",
+      "theatre",
+      "theatre of operations"
+    ],
+    "merged": [
+      "airfield",
+      "area",
+      "arena",
+      "athletic field",
+      "bailiwick",
+      "battlefield",
+      "battleground",
+      "branch of knowledge",
+      "champaign",
+      "discipline",
+      "domain",
+      "field",
+      "field of battle",
+      "field of force",
+      "field of honor",
+      "field of operation",
+      "field of operations",
+      "field of study",
+      "field of view",
+      "flying field",
+      "force field",
+      "landing field",
+      "line of business",
+      "orbit",
+      "plain",
+      "playing area",
+      "playing field",
+      "sphere",
+      "study",
+      "subject",
+      "subject area",
+      "subject field",
+      "theater",
+      "theater of operations",
+      "theatre",
+      "theatre of operations"
+    ]
+  },
+  "firmly": {
+    "datamuse": [
+      "firm",
+      "hard",
+      "securely",
+      "steadfastly",
+      "unwaveringly"
+    ],
+    "wordnet": [
+      "firm",
+      "firmly",
+      "hard",
+      "securely",
+      "steadfastly",
+      "unwaveringly"
+    ],
+    "merged": [
+      "firm",
+      "firmly",
+      "hard",
+      "securely",
+      "steadfastly",
+      "unwaveringly"
+    ]
+  },
+  "fracture": {
+    "datamuse": [
+      "break",
+      "crack",
+      "cracking",
+      "fault",
+      "fault line",
+      "geological fault"
+    ],
+    "wordnet": [
+      "break",
+      "crack",
+      "cracking",
+      "fault",
+      "faulting",
+      "fracture",
+      "geological fault",
+      "shift"
+    ],
+    "merged": [
+      "break",
+      "crack",
+      "cracking",
+      "fault",
+      "fault line",
+      "faulting",
+      "fracture",
+      "geological fault",
+      "shift"
+    ]
+  },
+  "fragment": {
+    "datamuse": [
+      "break up",
+      "fragmentize",
+      "shard",
+      "sherd"
+    ],
+    "wordnet": [
+      "break up",
+      "fragment",
+      "fragmentise",
+      "fragmentize",
+      "shard",
+      "sherd"
+    ],
+    "merged": [
+      "break up",
+      "fragment",
+      "fragmentise",
+      "fragmentize",
+      "shard",
+      "sherd"
+    ]
+  },
+  "fulfillment": {
+    "datamuse": [
+      "fulfilment"
+    ],
+    "wordnet": [
+      "fulfillment",
+      "fulfilment"
+    ],
+    "merged": [
+      "fulfillment",
+      "fulfilment"
+    ]
+  },
+  "gentle": {
+    "datamuse": [
+      "appease",
+      "aristocratic",
+      "aristocratical",
+      "assuage",
+      "blue",
+      "blue-blooded",
+      "conciliate",
+      "docile",
+      "easy",
+      "ennoble",
+      "entitle",
+      "gradual",
+      "gruntle",
+      "kind",
+      "lenify",
+      "light",
+      "mild",
+      "mollify",
+      "noble",
+      "pacify",
+      "patrician",
+      "placate",
+      "soft",
+      "tame",
+      "tamed"
+    ],
+    "wordnet": [
+      "appease",
+      "aristocratic",
+      "aristocratical",
+      "assuage",
+      "blue",
+      "blue-blooded",
+      "conciliate",
+      "docile",
+      "easy",
+      "ennoble",
+      "entitle",
+      "gentle",
+      "gruntle",
+      "lenify",
+      "mollify",
+      "pacify",
+      "patrician",
+      "placate",
+      "soft"
+    ],
+    "merged": [
+      "appease",
+      "aristocratic",
+      "aristocratical",
+      "assuage",
+      "blue",
+      "blue-blooded",
+      "conciliate",
+      "docile",
+      "easy",
+      "ennoble",
+      "entitle",
+      "gentle",
+      "gradual",
+      "gruntle",
+      "kind",
+      "lenify",
+      "light",
+      "mild",
+      "mollify",
+      "noble",
+      "pacify",
+      "patrician",
+      "placate",
+      "soft",
+      "tame",
+      "tamed"
+    ]
+  },
+  "glyph": {
+    "datamuse": [],
+    "wordnet": [
+      "glyph"
+    ],
+    "merged": [
+      "glyph"
+    ]
+  },
+  "glyphwork": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "grief": {
+    "datamuse": [
+      "brokenheartedness",
+      "heartache",
+      "heartbreak",
+      "sorrow"
+    ],
+    "wordnet": [
+      "brokenheartedness",
+      "grief",
+      "heartache",
+      "heartbreak",
+      "sorrow"
+    ],
+    "merged": [
+      "brokenheartedness",
+      "grief",
+      "heartache",
+      "heartbreak",
+      "sorrow"
+    ]
+  },
+  "grief-ful": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "held": {
+    "datamuse": [],
+    "wordnet": [
+      "accommodate",
+      "adjudge",
+      "admit",
+      "agree",
+      "apply",
+      "arrest",
+      "bear",
+      "bind",
+      "book",
+      "carry",
+      "check",
+      "concord",
+      "concur",
+      "confine",
+      "contain",
+      "control",
+      "curb",
+      "declare",
+      "deem",
+      "defend",
+      "defy",
+      "entertain",
+      "give",
+      "go for",
+      "guard",
+      "halt",
+      "harbor",
+      "harbour",
+      "have",
+      "have got",
+      "held",
+      "hold",
+      "hold back",
+      "hold in",
+      "hold up",
+      "keep",
+      "keep back",
+      "maintain",
+      "make",
+      "moderate",
+      "nurse",
+      "obligate",
+      "oblige",
+      "obtain",
+      "prevail",
+      "reserve",
+      "restrain",
+      "retain",
+      "support",
+      "sustain",
+      "take",
+      "take for",
+      "take hold",
+      "throw",
+      "view as",
+      "withstand"
+    ],
+    "merged": [
+      "accommodate",
+      "adjudge",
+      "admit",
+      "agree",
+      "apply",
+      "arrest",
+      "bear",
+      "bind",
+      "book",
+      "carry",
+      "check",
+      "concord",
+      "concur",
+      "confine",
+      "contain",
+      "control",
+      "curb",
+      "declare",
+      "deem",
+      "defend",
+      "defy",
+      "entertain",
+      "give",
+      "go for",
+      "guard",
+      "halt",
+      "harbor",
+      "harbour",
+      "have",
+      "have got",
+      "held",
+      "hold",
+      "hold back",
+      "hold in",
+      "hold up",
+      "keep",
+      "keep back",
+      "maintain",
+      "make",
+      "moderate",
+      "nurse",
+      "obligate",
+      "oblige",
+      "obtain",
+      "prevail",
+      "reserve",
+      "restrain",
+      "retain",
+      "support",
+      "sustain",
+      "take",
+      "take for",
+      "take hold",
+      "throw",
+      "view as",
+      "withstand"
+    ]
+  },
+  "honor": {
+    "datamuse": [
+      "abide by",
+      "accolade",
+      "award",
+      "favor",
+      "favour",
+      "grace",
+      "honour",
+      "laurels",
+      "observe",
+      "purity",
+      "respect",
+      "reward"
+    ],
+    "wordnet": [
+      "abide by",
+      "accolade",
+      "award",
+      "honor",
+      "honour",
+      "laurel",
+      "observe",
+      "pureness",
+      "purity",
+      "respect",
+      "reward"
+    ],
+    "merged": [
+      "abide by",
+      "accolade",
+      "award",
+      "favor",
+      "favour",
+      "grace",
+      "honor",
+      "honour",
+      "laurel",
+      "laurels",
+      "observe",
+      "pureness",
+      "purity",
+      "respect",
+      "reward"
+    ]
+  },
+  "hum": {
+    "datamuse": [
+      "buzz",
+      "humming",
+      "seethe",
+      "thrum"
+    ],
+    "wordnet": [
+      "al faran",
+      "busyness",
+      "buzz",
+      "harkat ul-ansar",
+      "harkat ul-mujahedeen",
+      "harkat-ul-mujahidin",
+      "hua",
+      "hum",
+      "humming",
+      "movement of holy warriors",
+      "seethe",
+      "thrum"
+    ],
+    "merged": [
+      "al faran",
+      "busyness",
+      "buzz",
+      "harkat ul-ansar",
+      "harkat ul-mujahedeen",
+      "harkat-ul-mujahidin",
+      "hua",
+      "hum",
+      "humming",
+      "movement of holy warriors",
+      "seethe",
+      "thrum"
+    ]
+  },
+  "identifier": {
+    "datamuse": [],
+    "wordnet": [
+      "identifier"
+    ],
+    "merged": [
+      "identifier"
+    ]
+  },
+  "ignored": {
+    "datamuse": [
+      "neglected",
+      "unheeded",
+      "unnoticed"
+    ],
+    "wordnet": [
+      "brush aside",
+      "brush off",
+      "cut",
+      "discount",
+      "dismiss",
+      "disregard",
+      "ignore",
+      "ignored",
+      "neglect",
+      "neglected",
+      "push aside",
+      "snub",
+      "unheeded"
+    ],
+    "merged": [
+      "brush aside",
+      "brush off",
+      "cut",
+      "discount",
+      "dismiss",
+      "disregard",
+      "ignore",
+      "ignored",
+      "neglect",
+      "neglected",
+      "push aside",
+      "snub",
+      "unheeded",
+      "unnoticed"
+    ]
+  },
+  "indicator": {
+    "datamuse": [
+      "index",
+      "index number",
+      "indicant"
+    ],
+    "wordnet": [
+      "index",
+      "index number",
+      "indicant",
+      "indicator"
+    ],
+    "merged": [
+      "index",
+      "index number",
+      "indicant",
+      "indicator"
+    ]
+  },
+  "insight": {
+    "datamuse": [
+      "brainstorm",
+      "brainwave",
+      "penetration",
+      "perceptiveness",
+      "perceptivity",
+      "sixth sense"
+    ],
+    "wordnet": [
+      "brainstorm",
+      "brainwave",
+      "insight",
+      "penetration",
+      "perceptiveness",
+      "perceptivity",
+      "sixth sense"
+    ],
+    "merged": [
+      "brainstorm",
+      "brainwave",
+      "insight",
+      "penetration",
+      "perceptiveness",
+      "perceptivity",
+      "sixth sense"
+    ]
+  },
+  "insightful": {
+    "datamuse": [
+      "perceptive"
+    ],
+    "wordnet": [
+      "insightful"
+    ],
+    "merged": [
+      "insightful",
+      "perceptive"
+    ]
+  },
+  "intention": {
+    "datamuse": [
+      "aim",
+      "design",
+      "intent",
+      "purpose"
+    ],
+    "wordnet": [
+      "aim",
+      "design",
+      "intent",
+      "intention",
+      "purpose"
+    ],
+    "merged": [
+      "aim",
+      "design",
+      "intent",
+      "intention",
+      "purpose"
+    ]
+  },
+  "invocation": {
+    "datamuse": [
+      "supplication"
+    ],
+    "wordnet": [
+      "conjuration",
+      "conjuring",
+      "conjury",
+      "invocation",
+      "supplication"
+    ],
+    "merged": [
+      "conjuration",
+      "conjuring",
+      "conjury",
+      "invocation",
+      "supplication"
+    ]
+  },
+  "joy": {
+    "datamuse": [
+      "delight",
+      "gladden",
+      "joyfulness",
+      "joyousness",
+      "pleasure",
+      "rejoice"
+    ],
+    "wordnet": [
+      "delight",
+      "gladden",
+      "joy",
+      "joyfulness",
+      "joyousness",
+      "pleasure",
+      "rejoice"
+    ],
+    "merged": [
+      "delight",
+      "gladden",
+      "joy",
+      "joyfulness",
+      "joyousness",
+      "pleasure",
+      "rejoice"
+    ]
+  },
+  "joyful": {
+    "datamuse": [
+      "beatific",
+      "elated",
+      "gleeful",
+      "happy",
+      "joyous",
+      "jubilant",
+      "overjoyed"
+    ],
+    "wordnet": [
+      "elated",
+      "gleeful",
+      "joyful",
+      "jubilant"
+    ],
+    "merged": [
+      "beatific",
+      "elated",
+      "gleeful",
+      "happy",
+      "joyful",
+      "joyous",
+      "jubilant",
+      "overjoyed"
+    ]
+  },
+  "jubilant": {
+    "datamuse": [
+      "elated",
+      "exultant",
+      "exulting",
+      "gleeful",
+      "joyful",
+      "joyous",
+      "prideful",
+      "rejoicing",
+      "triumphal",
+      "triumphant"
+    ],
+    "wordnet": [
+      "elated",
+      "exultant",
+      "exulting",
+      "gleeful",
+      "joyful",
+      "jubilant",
+      "prideful",
+      "rejoicing",
+      "triumphal",
+      "triumphant"
+    ],
+    "merged": [
+      "elated",
+      "exultant",
+      "exulting",
+      "gleeful",
+      "joyful",
+      "joyous",
+      "jubilant",
+      "prideful",
+      "rejoicing",
+      "triumphal",
+      "triumphant"
+    ]
+  },
+  "justification": {
+    "datamuse": [],
+    "wordnet": [
+      "justification"
+    ],
+    "merged": [
+      "justification"
+    ]
+  },
+  "karmic": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "law": {
+    "datamuse": [
+      "constabulary",
+      "jurisprudence",
+      "law of nature",
+      "legal philosophy",
+      "natural law",
+      "police",
+      "police force",
+      "practice of law"
+    ],
+    "wordnet": [
+      "constabulary",
+      "jurisprudence",
+      "law",
+      "law of nature",
+      "legal philosophy",
+      "natural law",
+      "police",
+      "police force",
+      "practice of law"
+    ],
+    "merged": [
+      "constabulary",
+      "jurisprudence",
+      "law",
+      "law of nature",
+      "legal philosophy",
+      "natural law",
+      "police",
+      "police force",
+      "practice of law"
+    ]
+  },
+  "ledger": {
+    "datamuse": [
+      "account book",
+      "book",
+      "book of account",
+      "daybook",
+      "leger"
+    ],
+    "wordnet": [
+      "account book",
+      "book",
+      "book of account",
+      "daybook",
+      "ledger",
+      "leger"
+    ],
+    "merged": [
+      "account book",
+      "book",
+      "book of account",
+      "daybook",
+      "ledger",
+      "leger"
+    ]
+  },
+  "legacy": {
+    "datamuse": [
+      "bequest"
+    ],
+    "wordnet": [
+      "bequest",
+      "legacy"
+    ],
+    "merged": [
+      "bequest",
+      "legacy"
+    ]
+  },
+  "lens": {
+    "datamuse": [
+      "crystalline lens",
+      "electron lens",
+      "genus lens",
+      "lens system"
+    ],
+    "wordnet": [
+      "crystalline lens",
+      "electron lens",
+      "genus lens",
+      "lens",
+      "lens of the eye",
+      "lens system",
+      "lense"
+    ],
+    "merged": [
+      "crystalline lens",
+      "electron lens",
+      "genus lens",
+      "lens",
+      "lens of the eye",
+      "lens system",
+      "lense"
+    ]
+  },
+  "let": {
+    "datamuse": [
+      "allow",
+      "countenance",
+      "get",
+      "have",
+      "lease",
+      "leave",
+      "net ball",
+      "permit",
+      "rent"
+    ],
+    "wordnet": [
+      "allow",
+      "army of the pure",
+      "army of the righteous",
+      "countenance",
+      "get",
+      "have",
+      "lashkar-e-taiba",
+      "lashkar-e-tayyiba",
+      "lashkar-e-toiba",
+      "lease",
+      "let",
+      "net ball",
+      "permit",
+      "rent"
+    ],
+    "merged": [
+      "allow",
+      "army of the pure",
+      "army of the righteous",
+      "countenance",
+      "get",
+      "have",
+      "lashkar-e-taiba",
+      "lashkar-e-tayyiba",
+      "lashkar-e-toiba",
+      "lease",
+      "leave",
+      "let",
+      "net ball",
+      "permit",
+      "rent"
+    ]
+  },
+  "light": {
+    "datamuse": [
+      "abstemious",
+      "airy",
+      "alight",
+      "bantamweight",
+      "bioluminescent",
+      "bright",
+      "brightness",
+      "buoyant",
+      "candent",
+      "candescent",
+      "casual",
+      "chiffon",
+      "christ within",
+      "clean",
+      "clear",
+      "deficient",
+      "diet",
+      "digestible",
+      "dismount",
+      "easy",
+      "faint",
+      "fall",
+      "fat-free",
+      "fatless",
+      "featherlike",
+      "featherweight",
+      "feathery",
+      "fire up",
+      "flimsy",
+      "floaty",
+      "floodlighted",
+      "floodlit",
+      "fluorescent",
+      "flyweight",
+      "fooling",
+      "friable",
+      "frivolous",
+      "gentle",
+      "get down",
+      "get off",
+      "idle",
+      "ignite",
+      "igniter",
+      "ignitor",
+      "ill",
+      "illume",
+      "illuminate",
+      "illuminated",
+      "illuminating",
+      "illumination",
+      "illumine",
+      "incandescent",
+      "inflamed",
+      "inner light",
+      "insignificant",
+      "insufficient",
+      "lamplit",
+      "leavened",
+      "light source",
+      "light up",
+      "light within",
+      "light-armed",
+      "light-duty",
+      "light-footed",
+      "light-headed",
+      "lighted",
+      "lighter",
+      "lighting",
+      "lightly",
+      "lightly-armed",
+      "lightness",
+      "lightsome",
+      "lightweight",
+      "lit",
+      "lite",
+      "livid",
+      "loose",
+      "low-cal",
+      "luminance",
+      "luminescent",
+      "luminosity",
+      "luminousness",
+      "nonfat",
+      "pale",
+      "palish",
+      "pastel",
+      "perch",
+      "phosphorescent",
+      "powdery",
+      "promiscuous",
+      "pure",
+      "reddened",
+      "sandy",
+      "scant",
+      "shallow",
+      "short",
+      "sick"
+    ],
+    "wordnet": [
+      "abstemious",
+      "alight",
+      "brightness",
+      "brightness level",
+      "calorie-free",
+      "christ within",
+      "clean",
+      "clear",
+      "dismount",
+      "easy",
+      "faint",
+      "fall",
+      "fire up",
+      "get down",
+      "get off",
+      "idle",
+      "ignite",
+      "igniter",
+      "ignitor",
+      "illume",
+      "illuminate",
+      "illumination",
+      "illumine",
+      "inner light",
+      "light",
+      "light source",
+      "light up",
+      "light within",
+      "light-colored",
+      "light-headed",
+      "lighter",
+      "lightheaded",
+      "lighting",
+      "lightly",
+      "lightness",
+      "lightsome",
+      "lite",
+      "loose",
+      "low-cal",
+      "luminance",
+      "luminosity",
+      "luminousness",
+      "perch",
+      "promiscuous",
+      "scant",
+      "short",
+      "sluttish",
+      "spark",
+      "sparkle",
+      "swooning",
+      "tripping",
+      "twinkle",
+      "unaccented",
+      "unclouded",
+      "unhorse",
+      "visible light",
+      "visible radiation",
+      "wakeful",
+      "wanton",
+      "weak"
+    ],
+    "merged": [
+      "abstemious",
+      "airy",
+      "alight",
+      "bantamweight",
+      "bioluminescent",
+      "bright",
+      "brightness",
+      "brightness level",
+      "buoyant",
+      "calorie-free",
+      "candent",
+      "candescent",
+      "casual",
+      "chiffon",
+      "christ within",
+      "clean",
+      "clear",
+      "deficient",
+      "diet",
+      "digestible",
+      "dismount",
+      "easy",
+      "faint",
+      "fall",
+      "fat-free",
+      "fatless",
+      "featherlike",
+      "featherweight",
+      "feathery",
+      "fire up",
+      "flimsy",
+      "floaty",
+      "floodlighted",
+      "floodlit",
+      "fluorescent",
+      "flyweight",
+      "fooling",
+      "friable",
+      "frivolous",
+      "gentle",
+      "get down",
+      "get off",
+      "idle",
+      "ignite",
+      "igniter",
+      "ignitor",
+      "ill",
+      "illume",
+      "illuminate",
+      "illuminated",
+      "illuminating",
+      "illumination",
+      "illumine",
+      "incandescent",
+      "inflamed",
+      "inner light",
+      "insignificant",
+      "insufficient",
+      "lamplit",
+      "leavened",
+      "light",
+      "light source",
+      "light up",
+      "light within",
+      "light-armed",
+      "light-colored",
+      "light-duty",
+      "light-footed",
+      "light-headed",
+      "lighted",
+      "lighter",
+      "lightheaded",
+      "lighting",
+      "lightly",
+      "lightly-armed",
+      "lightness",
+      "lightsome",
+      "lightweight",
+      "lit",
+      "lite",
+      "livid",
+      "loose",
+      "low-cal",
+      "luminance",
+      "luminescent",
+      "luminosity",
+      "luminousness",
+      "nonfat",
+      "pale",
+      "palish",
+      "pastel",
+      "perch",
+      "phosphorescent",
+      "powdery",
+      "promiscuous",
+      "pure",
+      "reddened",
+      "sandy",
+      "scant",
+      "shallow",
+      "short",
+      "sick",
+      "sluttish",
+      "spark",
+      "sparkle",
+      "swooning",
+      "tripping",
+      "twinkle",
+      "unaccented",
+      "unclouded",
+      "unhorse",
+      "visible light",
+      "visible radiation",
+      "wakeful",
+      "wanton",
+      "weak"
+    ]
+  },
+  "lightpath": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "listen": {
+    "datamuse": [
+      "hear",
+      "heed",
+      "mind",
+      "take heed"
+    ],
+    "wordnet": [
+      "hear",
+      "heed",
+      "listen",
+      "mind",
+      "take heed"
+    ],
+    "merged": [
+      "hear",
+      "heed",
+      "listen",
+      "mind",
+      "take heed"
+    ]
+  },
+  "long": {
+    "datamuse": [
+      "abundant",
+      "ache",
+      "agelong",
+      "bimestrial",
+      "daylong",
+      "drawn-out",
+      "durable",
+      "elongate",
+      "elongated",
+      "endless",
+      "eternal",
+      "extendable",
+      "extended",
+      "extendible",
+      "far",
+      "farseeing",
+      "farsighted",
+      "foresighted",
+      "foresightful",
+      "hanker",
+      "interminable",
+      "languish",
+      "lank",
+      "lasting",
+      "lengthened",
+      "lengthy",
+      "lifelong",
+      "long-acting",
+      "long-dated",
+      "long-distance",
+      "long-lasting",
+      "long-lived",
+      "long-range",
+      "long-run",
+      "long-term",
+      "longer",
+      "longest",
+      "longish",
+      "longitudinal",
+      "longsighted",
+      "longstanding",
+      "nightlong",
+      "oblong",
+      "overnight",
+      "perennial",
+      "pine",
+      "polysyllabic",
+      "prolonged",
+      "protracted",
+      "provident",
+      "retentive",
+      "semipermanent",
+      "sesquipedalian",
+      "stressed",
+      "tall",
+      "tenacious",
+      "unsound",
+      "womb-to-tomb",
+      "yearlong",
+      "yearn",
+      "yen"
+    ],
+    "wordnet": [
+      "farseeing",
+      "farsighted",
+      "foresighted",
+      "foresightful",
+      "hanker",
+      "long",
+      "longsighted",
+      "prospicient",
+      "recollective",
+      "retentive",
+      "tenacious",
+      "yearn"
+    ],
+    "merged": [
+      "abundant",
+      "ache",
+      "agelong",
+      "bimestrial",
+      "daylong",
+      "drawn-out",
+      "durable",
+      "elongate",
+      "elongated",
+      "endless",
+      "eternal",
+      "extendable",
+      "extended",
+      "extendible",
+      "far",
+      "farseeing",
+      "farsighted",
+      "foresighted",
+      "foresightful",
+      "hanker",
+      "interminable",
+      "languish",
+      "lank",
+      "lasting",
+      "lengthened",
+      "lengthy",
+      "lifelong",
+      "long",
+      "long-acting",
+      "long-dated",
+      "long-distance",
+      "long-lasting",
+      "long-lived",
+      "long-range",
+      "long-run",
+      "long-term",
+      "longer",
+      "longest",
+      "longish",
+      "longitudinal",
+      "longsighted",
+      "longstanding",
+      "nightlong",
+      "oblong",
+      "overnight",
+      "perennial",
+      "pine",
+      "polysyllabic",
+      "prolonged",
+      "prospicient",
+      "protracted",
+      "provident",
+      "recollective",
+      "retentive",
+      "semipermanent",
+      "sesquipedalian",
+      "stressed",
+      "tall",
+      "tenacious",
+      "unsound",
+      "womb-to-tomb",
+      "yearlong",
+      "yearn",
+      "yen"
+    ]
+  },
+  "longing": {
+    "datamuse": [
+      "yearning"
+    ],
+    "wordnet": [
+      "hanker",
+      "hungriness",
+      "long",
+      "longing",
+      "yearn",
+      "yearning"
+    ],
+    "merged": [
+      "hanker",
+      "hungriness",
+      "long",
+      "longing",
+      "yearn",
+      "yearning"
+    ]
+  },
+  "loop": {
+    "datamuse": [
+      "circuit",
+      "closed circuit",
+      "coil",
+      "cringle",
+      "curl",
+      "eyelet",
+      "grommet",
+      "intertwine"
+    ],
+    "wordnet": [
+      "closed circuit",
+      "coil",
+      "cringle",
+      "curl",
+      "eyelet",
+      "grommet",
+      "grummet",
+      "intertwine",
+      "iteration",
+      "loop",
+      "loop topology",
+      "loop-the-loop"
+    ],
+    "merged": [
+      "circuit",
+      "closed circuit",
+      "coil",
+      "cringle",
+      "curl",
+      "eyelet",
+      "grommet",
+      "grummet",
+      "intertwine",
+      "iteration",
+      "loop",
+      "loop topology",
+      "loop-the-loop"
+    ]
+  },
+  "memory": {
+    "datamuse": [
+      "memory board",
+      "remembering",
+      "retention",
+      "retentiveness",
+      "storage",
+      "store"
+    ],
+    "wordnet": [
+      "computer memory",
+      "computer storage",
+      "memory",
+      "memory board",
+      "remembering",
+      "retention",
+      "retentiveness",
+      "retentivity",
+      "storage",
+      "store"
+    ],
+    "merged": [
+      "computer memory",
+      "computer storage",
+      "memory",
+      "memory board",
+      "remembering",
+      "retention",
+      "retentiveness",
+      "retentivity",
+      "storage",
+      "store"
+    ]
+  },
+  "metaphor": {
+    "datamuse": [],
+    "wordnet": [
+      "metaphor"
+    ],
+    "merged": [
+      "metaphor"
+    ]
+  },
+  "mirror": {
+    "datamuse": [],
+    "wordnet": [
+      "mirror"
+    ],
+    "merged": [
+      "mirror"
+    ]
+  },
+  "mourning": {
+    "datamuse": [
+      "bereaved",
+      "bereavement",
+      "bereft",
+      "grief-stricken",
+      "grieving",
+      "sorrowing"
+    ],
+    "wordnet": [
+      "bereaved",
+      "bereavement",
+      "bereft",
+      "grief-stricken",
+      "grieving",
+      "lamentation",
+      "mourn",
+      "mourning",
+      "sorrowing"
+    ],
+    "merged": [
+      "bereaved",
+      "bereavement",
+      "bereft",
+      "grief-stricken",
+      "grieving",
+      "lamentation",
+      "mourn",
+      "mourning",
+      "sorrowing"
+    ]
+  },
+  "mutual": {
+    "datamuse": [
+      "common",
+      "reciprocal",
+      "shared"
+    ],
+    "wordnet": [
+      "common",
+      "mutual",
+      "reciprocal"
+    ],
+    "merged": [
+      "common",
+      "mutual",
+      "reciprocal",
+      "shared"
+    ]
+  },
+  "myth": {
+    "datamuse": [],
+    "wordnet": [
+      "myth"
+    ],
+    "merged": [
+      "myth"
+    ]
+  },
+  "next": {
+    "datamuse": [
+      "adjacent",
+      "close",
+      "following",
+      "future",
+      "incoming",
+      "side by side",
+      "succeeding"
+    ],
+    "wordnet": [
+      "adjacent",
+      "following",
+      "future",
+      "next",
+      "side by side",
+      "succeeding"
+    ],
+    "merged": [
+      "adjacent",
+      "close",
+      "following",
+      "future",
+      "incoming",
+      "next",
+      "side by side",
+      "succeeding"
+    ]
+  },
+  "nourished": {
+    "datamuse": [
+      "corn-fed",
+      "fostered",
+      "full",
+      "overfed",
+      "saprophagous",
+      "saprophytic",
+      "saprozoic",
+      "stall-fed",
+      "supported",
+      "well-fed",
+      "well-nourished"
+    ],
+    "wordnet": [
+      "aliment",
+      "nourish",
+      "nourished",
+      "nurture",
+      "nutrify",
+      "sustain"
+    ],
+    "merged": [
+      "aliment",
+      "corn-fed",
+      "fostered",
+      "full",
+      "nourish",
+      "nourished",
+      "nurture",
+      "nutrify",
+      "overfed",
+      "saprophagous",
+      "saprophytic",
+      "saprozoic",
+      "stall-fed",
+      "supported",
+      "sustain",
+      "well-fed",
+      "well-nourished"
+    ]
+  },
+  "null": {
+    "datamuse": [
+      "invalid",
+      "nugatory",
+      "void"
+    ],
+    "wordnet": [
+      "aught",
+      "cipher",
+      "cypher",
+      "goose egg",
+      "nada",
+      "naught",
+      "nil",
+      "nix",
+      "nothing",
+      "null",
+      "void",
+      "zero",
+      "zilch",
+      "zip",
+      "zippo"
+    ],
+    "merged": [
+      "aught",
+      "cipher",
+      "cypher",
+      "goose egg",
+      "invalid",
+      "nada",
+      "naught",
+      "nil",
+      "nix",
+      "nothing",
+      "nugatory",
+      "null",
+      "void",
+      "zero",
+      "zilch",
+      "zip",
+      "zippo"
+    ]
+  },
+  "omega": {
+    "datamuse": [
+      "z"
+    ],
+    "wordnet": [
+      "omega",
+      "z"
+    ],
+    "merged": [
+      "omega",
+      "z"
+    ]
+  },
+  "optional": {
+    "datamuse": [
+      "elective",
+      "ex gratia",
+      "facultative",
+      "nonmandatory",
+      "nonobligatory"
+    ],
+    "wordnet": [
+      "optional"
+    ],
+    "merged": [
+      "elective",
+      "ex gratia",
+      "facultative",
+      "nonmandatory",
+      "nonobligatory",
+      "optional"
+    ]
+  },
+  "orbit": {
+    "datamuse": [
+      "ambit",
+      "area",
+      "arena",
+      "compass",
+      "domain",
+      "eye socket",
+      "field",
+      "orbital cavity",
+      "range",
+      "reach",
+      "revolve",
+      "scope",
+      "sphere"
+    ],
+    "wordnet": [
+      "ambit",
+      "area",
+      "arena",
+      "celestial orbit",
+      "compass",
+      "cranial orbit",
+      "domain",
+      "electron orbit",
+      "eye socket",
+      "field",
+      "orb",
+      "orbit",
+      "orbital cavity",
+      "range",
+      "reach",
+      "revolve",
+      "scope",
+      "sphere"
+    ],
+    "merged": [
+      "ambit",
+      "area",
+      "arena",
+      "celestial orbit",
+      "compass",
+      "cranial orbit",
+      "domain",
+      "electron orbit",
+      "eye socket",
+      "field",
+      "orb",
+      "orbit",
+      "orbital cavity",
+      "range",
+      "reach",
+      "revolve",
+      "scope",
+      "sphere"
+    ]
+  },
+  "origin": {
+    "datamuse": [
+      "ancestry",
+      "beginning",
+      "blood",
+      "blood line",
+      "bloodline",
+      "descent",
+      "extraction",
+      "genesis",
+      "inception",
+      "line",
+      "line of descent",
+      "lineage",
+      "origination",
+      "parentage",
+      "pedigree",
+      "root",
+      "source",
+      "stock"
+    ],
+    "wordnet": [
+      "ancestry",
+      "beginning",
+      "blood",
+      "blood line",
+      "bloodline",
+      "descent",
+      "extraction",
+      "inception",
+      "line",
+      "line of descent",
+      "lineage",
+      "origin",
+      "origination",
+      "parentage",
+      "pedigree",
+      "root",
+      "rootage",
+      "source",
+      "stemma",
+      "stock"
+    ],
+    "merged": [
+      "ancestry",
+      "beginning",
+      "blood",
+      "blood line",
+      "bloodline",
+      "descent",
+      "extraction",
+      "genesis",
+      "inception",
+      "line",
+      "line of descent",
+      "lineage",
+      "origin",
+      "origination",
+      "parentage",
+      "pedigree",
+      "root",
+      "rootage",
+      "source",
+      "stemma",
+      "stock"
+    ]
+  },
+  "paradox": {
+    "datamuse": [],
+    "wordnet": [
+      "paradox"
+    ],
+    "merged": [
+      "paradox"
+    ]
+  },
+  "pattern": {
+    "datamuse": [
+      "approach pattern",
+      "blueprint",
+      "convention",
+      "design",
+      "figure",
+      "form",
+      "formula",
+      "model",
+      "normal",
+      "practice",
+      "rule",
+      "shape",
+      "traffic pattern"
+    ],
+    "wordnet": [
+      "approach pattern",
+      "blueprint",
+      "convention",
+      "design",
+      "figure",
+      "form",
+      "formula",
+      "model",
+      "normal",
+      "pattern",
+      "practice",
+      "radiation diagram",
+      "radiation pattern",
+      "rule",
+      "shape",
+      "traffic pattern"
+    ],
+    "merged": [
+      "approach pattern",
+      "blueprint",
+      "convention",
+      "design",
+      "figure",
+      "form",
+      "formula",
+      "model",
+      "normal",
+      "pattern",
+      "practice",
+      "radiation diagram",
+      "radiation pattern",
+      "rule",
+      "shape",
+      "traffic pattern"
+    ]
+  },
+  "posture": {
+    "datamuse": [
+      "attitude",
+      "bearing",
+      "carriage",
+      "model",
+      "pose",
+      "position",
+      "sit"
+    ],
+    "wordnet": [
+      "attitude",
+      "bearing",
+      "carriage",
+      "military capability",
+      "military posture",
+      "military strength",
+      "model",
+      "pose",
+      "position",
+      "posture",
+      "sit",
+      "stance",
+      "strength"
+    ],
+    "merged": [
+      "attitude",
+      "bearing",
+      "carriage",
+      "military capability",
+      "military posture",
+      "military strength",
+      "model",
+      "pose",
+      "position",
+      "posture",
+      "sit",
+      "stance",
+      "strength"
+    ]
+  },
+  "precision": {
+    "datamuse": [
+      "preciseness"
+    ],
+    "wordnet": [
+      "preciseness",
+      "precision"
+    ],
+    "merged": [
+      "preciseness",
+      "precision"
+    ]
+  },
+  "propulsion": {
+    "datamuse": [
+      "actuation"
+    ],
+    "wordnet": [
+      "actuation",
+      "propulsion"
+    ],
+    "merged": [
+      "actuation",
+      "propulsion"
+    ]
+  },
+  "proto": {
+    "datamuse": [],
+    "wordnet": [
+      "proto"
+    ],
+    "merged": [
+      "proto"
+    ]
+  },
+  "pull": {
+    "datamuse": [
+      "attract",
+      "commit",
+      "deplumate",
+      "deplume",
+      "displume",
+      "drag",
+      "draw",
+      "draw in",
+      "drive",
+      "fetch",
+      "force",
+      "get out",
+      "overstretch",
+      "perpetrate",
+      "pluck",
+      "puff",
+      "pull in",
+      "pull out",
+      "pulling",
+      "rend",
+      "rip",
+      "rive",
+      "take out",
+      "tear",
+      "twist",
+      "wrench"
+    ],
+    "wordnet": [
+      "attract",
+      "clout",
+      "commit",
+      "deplumate",
+      "deplume",
+      "displume",
+      "drag",
+      "draw",
+      "draw in",
+      "draw out",
+      "extract",
+      "force",
+      "get out",
+      "overstretch",
+      "perpetrate",
+      "pluck",
+      "puff",
+      "pull",
+      "pull in",
+      "pull out",
+      "pull up",
+      "pulling",
+      "rend",
+      "rip",
+      "rive",
+      "root for",
+      "take out",
+      "tear",
+      "twist",
+      "wrench"
+    ],
+    "merged": [
+      "attract",
+      "clout",
+      "commit",
+      "deplumate",
+      "deplume",
+      "displume",
+      "drag",
+      "draw",
+      "draw in",
+      "draw out",
+      "drive",
+      "extract",
+      "fetch",
+      "force",
+      "get out",
+      "overstretch",
+      "perpetrate",
+      "pluck",
+      "puff",
+      "pull",
+      "pull in",
+      "pull out",
+      "pull up",
+      "pulling",
+      "rend",
+      "rip",
+      "rive",
+      "root for",
+      "take out",
+      "tear",
+      "twist",
+      "wrench"
+    ]
+  },
+  "pulse": {
+    "datamuse": [
+      "beat",
+      "heart rate",
+      "heartbeat",
+      "impulse",
+      "pulsate",
+      "pulsation",
+      "pulsing",
+      "throb"
+    ],
+    "wordnet": [
+      "beat",
+      "heart rate",
+      "heartbeat",
+      "impulse",
+      "pulsate",
+      "pulsation",
+      "pulse",
+      "pulse rate",
+      "pulsing",
+      "throb"
+    ],
+    "merged": [
+      "beat",
+      "heart rate",
+      "heartbeat",
+      "impulse",
+      "pulsate",
+      "pulsation",
+      "pulse",
+      "pulse rate",
+      "pulsing",
+      "throb"
+    ]
+  },
+  "recognition": {
+    "datamuse": [
+      "acknowledgement",
+      "acknowledgment",
+      "credit",
+      "identification",
+      "preferment",
+      "realisation",
+      "realization"
+    ],
+    "wordnet": [
+      "acknowledgement",
+      "acknowledgment",
+      "credit",
+      "identification",
+      "realisation",
+      "realization",
+      "recognition"
+    ],
+    "merged": [
+      "acknowledgement",
+      "acknowledgment",
+      "credit",
+      "identification",
+      "preferment",
+      "realisation",
+      "realization",
+      "recognition"
+    ]
+  },
+  "recognized": {
+    "datamuse": [
+      "accepted",
+      "acknowledged",
+      "established"
+    ],
+    "wordnet": [
+      "accepted",
+      "accredit",
+      "acknowledge",
+      "agnise",
+      "agnize",
+      "discern",
+      "distinguish",
+      "greet",
+      "know",
+      "make out",
+      "pick out",
+      "realise",
+      "realize",
+      "recognise",
+      "recognised",
+      "recognize",
+      "recognized",
+      "spot",
+      "tell apart"
+    ],
+    "merged": [
+      "accepted",
+      "accredit",
+      "acknowledge",
+      "acknowledged",
+      "agnise",
+      "agnize",
+      "discern",
+      "distinguish",
+      "established",
+      "greet",
+      "know",
+      "make out",
+      "pick out",
+      "realise",
+      "realize",
+      "recognise",
+      "recognised",
+      "recognize",
+      "recognized",
+      "spot",
+      "tell apart"
+    ]
+  },
+  "reconnection": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "recovery": {
+    "datamuse": [
+      "convalescence",
+      "recuperation",
+      "retrieval"
+    ],
+    "wordnet": [
+      "convalescence",
+      "recovery",
+      "recuperation",
+      "retrieval"
+    ],
+    "merged": [
+      "convalescence",
+      "recovery",
+      "recuperation",
+      "retrieval"
+    ]
+  },
+  "recursion": {
+    "datamuse": [],
+    "wordnet": [
+      "recursion"
+    ],
+    "merged": [
+      "recursion"
+    ]
+  },
+  "recursive": {
+    "datamuse": [
+      "algorithmic"
+    ],
+    "wordnet": [
+      "recursive"
+    ],
+    "merged": [
+      "algorithmic",
+      "recursive"
+    ]
+  },
+  "redesign": {
+    "datamuse": [],
+    "wordnet": [
+      "redesign"
+    ],
+    "merged": [
+      "redesign"
+    ]
+  },
+  "refuge": {
+    "datamuse": [
+      "asylum",
+      "recourse",
+      "resort",
+      "safety",
+      "sanctuary"
+    ],
+    "wordnet": [
+      "asylum",
+      "recourse",
+      "refuge",
+      "resort",
+      "safety",
+      "sanctuary"
+    ],
+    "merged": [
+      "asylum",
+      "recourse",
+      "refuge",
+      "resort",
+      "safety",
+      "sanctuary"
+    ]
+  },
+  "refusal-coded": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "repair": {
+    "datamuse": [
+      "bushel",
+      "doctor",
+      "fix",
+      "fixing",
+      "furbish up",
+      "hangout",
+      "haunt",
+      "mend",
+      "mending",
+      "reparation",
+      "resort",
+      "restore",
+      "stamping ground",
+      "touch on"
+    ],
+    "wordnet": [
+      "amend",
+      "animate",
+      "bushel",
+      "compensate",
+      "doctor",
+      "fix",
+      "fixing",
+      "fixture",
+      "furbish up",
+      "hangout",
+      "haunt",
+      "indemnify",
+      "mend",
+      "mending",
+      "quicken",
+      "reanimate",
+      "recompense",
+      "recreate",
+      "rectify",
+      "remediate",
+      "remedy",
+      "renovate",
+      "repair",
+      "reparation",
+      "resort",
+      "restore",
+      "revive",
+      "revivify",
+      "stamping ground",
+      "touch on",
+      "vivify"
+    ],
+    "merged": [
+      "amend",
+      "animate",
+      "bushel",
+      "compensate",
+      "doctor",
+      "fix",
+      "fixing",
+      "fixture",
+      "furbish up",
+      "hangout",
+      "haunt",
+      "indemnify",
+      "mend",
+      "mending",
+      "quicken",
+      "reanimate",
+      "recompense",
+      "recreate",
+      "rectify",
+      "remediate",
+      "remedy",
+      "renovate",
+      "repair",
+      "reparation",
+      "resort",
+      "restore",
+      "revive",
+      "revivify",
+      "stamping ground",
+      "touch on",
+      "vivify"
+    ]
+  },
+  "reply": {
+    "datamuse": [
+      "answer",
+      "respond",
+      "response"
+    ],
+    "wordnet": [
+      "answer",
+      "reply",
+      "respond",
+      "response"
+    ],
+    "merged": [
+      "answer",
+      "reply",
+      "respond",
+      "response"
+    ]
+  },
+  "resistance": {
+    "datamuse": [
+      "electric resistance",
+      "electrical resistance",
+      "impedance",
+      "ohmic resistance",
+      "opposition",
+      "resistivity",
+      "resistor",
+      "underground"
+    ],
+    "wordnet": [
+      "electric resistance",
+      "electrical resistance",
+      "immunity",
+      "impedance",
+      "ohmic resistance",
+      "opposition",
+      "resistance",
+      "resistivity",
+      "resistor",
+      "underground"
+    ],
+    "merged": [
+      "electric resistance",
+      "electrical resistance",
+      "immunity",
+      "impedance",
+      "ohmic resistance",
+      "opposition",
+      "resistance",
+      "resistivity",
+      "resistor",
+      "underground"
+    ]
+  },
+  "resonance": {
+    "datamuse": [
+      "plangency",
+      "reverberance",
+      "ringing",
+      "sonority",
+      "sonorousness",
+      "vibrancy"
+    ],
+    "wordnet": [
+      "plangency",
+      "rapport",
+      "resonance",
+      "reverberance",
+      "ringing",
+      "sonority",
+      "sonorousness",
+      "vibrancy"
+    ],
+    "merged": [
+      "plangency",
+      "rapport",
+      "resonance",
+      "reverberance",
+      "ringing",
+      "sonority",
+      "sonorousness",
+      "vibrancy"
+    ]
+  },
+  "response": {
+    "datamuse": [
+      "answer",
+      "reaction",
+      "reception",
+      "reply"
+    ],
+    "wordnet": [
+      "answer",
+      "reaction",
+      "reception",
+      "reply",
+      "response"
+    ],
+    "merged": [
+      "answer",
+      "reaction",
+      "reception",
+      "reply",
+      "response"
+    ]
+  },
+  "reverent": {
+    "datamuse": [
+      "adoring",
+      "awed",
+      "awful",
+      "godly",
+      "pious",
+      "respectful",
+      "reverential",
+      "venerating",
+      "worshipful"
+    ],
+    "wordnet": [
+      "godly",
+      "reverent",
+      "worshipful"
+    ],
+    "merged": [
+      "adoring",
+      "awed",
+      "awful",
+      "godly",
+      "pious",
+      "respectful",
+      "reverent",
+      "reverential",
+      "venerating",
+      "worshipful"
+    ]
+  },
+  "rhythm": {
+    "datamuse": [
+      "beat",
+      "calendar method",
+      "calendar method of birth control",
+      "cycle",
+      "musical rhythm",
+      "regular recurrence",
+      "rhythm method",
+      "rhythm method of birth control",
+      "round",
+      "speech rhythm"
+    ],
+    "wordnet": [
+      "beat",
+      "calendar method",
+      "calendar method of birth control",
+      "cycle",
+      "musical rhythm",
+      "regular recurrence",
+      "rhythm",
+      "rhythm method",
+      "rhythm method of birth control",
+      "round",
+      "speech rhythm"
+    ],
+    "merged": [
+      "beat",
+      "calendar method",
+      "calendar method of birth control",
+      "cycle",
+      "musical rhythm",
+      "regular recurrence",
+      "rhythm",
+      "rhythm method",
+      "rhythm method of birth control",
+      "round",
+      "speech rhythm"
+    ]
+  },
+  "ring": {
+    "datamuse": [
+      "anchor ring",
+      "annulus",
+      "anulus",
+      "band",
+      "call",
+      "call up",
+      "circle",
+      "closed chain",
+      "doughnut",
+      "echo",
+      "encircle",
+      "environ",
+      "gang",
+      "halo",
+      "hoop",
+      "knell",
+      "mob",
+      "pack",
+      "peal",
+      "phone",
+      "resound",
+      "reverberate",
+      "ringing",
+      "round",
+      "surround",
+      "telephone",
+      "tintinnabulation"
+    ],
+    "wordnet": [
+      "anchor ring",
+      "annulus",
+      "band",
+      "border",
+      "call",
+      "call up",
+      "closed chain",
+      "doughnut",
+      "echo",
+      "environ",
+      "gang",
+      "halo",
+      "hoop",
+      "knell",
+      "mob",
+      "pack",
+      "peal",
+      "phone",
+      "resound",
+      "reverberate",
+      "ring",
+      "ringing",
+      "skirt",
+      "surround",
+      "telephone",
+      "tintinnabulation"
+    ],
+    "merged": [
+      "anchor ring",
+      "annulus",
+      "anulus",
+      "band",
+      "border",
+      "call",
+      "call up",
+      "circle",
+      "closed chain",
+      "doughnut",
+      "echo",
+      "encircle",
+      "environ",
+      "gang",
+      "halo",
+      "hoop",
+      "knell",
+      "mob",
+      "pack",
+      "peal",
+      "phone",
+      "resound",
+      "reverberate",
+      "ring",
+      "ringing",
+      "round",
+      "skirt",
+      "surround",
+      "telephone",
+      "tintinnabulation"
+    ]
+  },
+  "ritual": {
+    "datamuse": [
+      "rite"
+    ],
+    "wordnet": [
+      "rite",
+      "ritual"
+    ],
+    "merged": [
+      "rite",
+      "ritual"
+    ]
+  },
+  "room": {
+    "datamuse": [
+      "board",
+      "elbow room",
+      "way"
+    ],
+    "wordnet": [
+      "board",
+      "elbow room",
+      "room",
+      "way"
+    ],
+    "merged": [
+      "board",
+      "elbow room",
+      "room",
+      "way"
+    ]
+  },
+  "sacred": {
+    "datamuse": [
+      "consecrated",
+      "dedicated",
+      "divine",
+      "hallowed",
+      "holy",
+      "ineffable",
+      "inspirational",
+      "inviolable",
+      "inviolate",
+      "numinous",
+      "religious",
+      "revered",
+      "reverenced",
+      "reverend",
+      "sacral",
+      "sacrosanct",
+      "sanctified",
+      "spiritual",
+      "sublime",
+      "taboo",
+      "tabu",
+      "unnameable",
+      "unspeakable",
+      "unutterable",
+      "venerated",
+      "worthy"
+    ],
+    "wordnet": [
+      "consecrated",
+      "hallowed",
+      "sacred",
+      "sanctified"
+    ],
+    "merged": [
+      "consecrated",
+      "dedicated",
+      "divine",
+      "hallowed",
+      "holy",
+      "ineffable",
+      "inspirational",
+      "inviolable",
+      "inviolate",
+      "numinous",
+      "religious",
+      "revered",
+      "reverenced",
+      "reverend",
+      "sacral",
+      "sacred",
+      "sacrosanct",
+      "sanctified",
+      "spiritual",
+      "sublime",
+      "taboo",
+      "tabu",
+      "unnameable",
+      "unspeakable",
+      "unutterable",
+      "venerated",
+      "worthy"
+    ]
+  },
+  "sailed": {
+    "datamuse": [],
+    "wordnet": [
+      "navigate",
+      "sail",
+      "sweep",
+      "voyage"
+    ],
+    "merged": [
+      "navigate",
+      "sail",
+      "sweep",
+      "voyage"
+    ]
+  },
+  "sanctuary": {
+    "datamuse": [
+      "asylum",
+      "bema",
+      "chancel",
+      "refuge"
+    ],
+    "wordnet": [
+      "asylum",
+      "bema",
+      "chancel",
+      "refuge",
+      "sanctuary"
+    ],
+    "merged": [
+      "asylum",
+      "bema",
+      "chancel",
+      "refuge",
+      "sanctuary"
+    ]
+  },
+  "saoynx": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "saturational": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "script": {
+    "datamuse": [
+      "book",
+      "hand",
+      "handwriting",
+      "playscript"
+    ],
+    "wordnet": [
+      "book",
+      "hand",
+      "handwriting",
+      "playscript",
+      "script"
+    ],
+    "merged": [
+      "book",
+      "hand",
+      "handwriting",
+      "playscript",
+      "script"
+    ]
+  },
+  "seduction": {
+    "datamuse": [
+      "conquest"
+    ],
+    "wordnet": [
+      "conquest",
+      "seduction"
+    ],
+    "merged": [
+      "conquest",
+      "seduction"
+    ]
+  },
+  "shield": {
+    "datamuse": [
+      "buckler",
+      "harbor",
+      "harbour",
+      "screen"
+    ],
+    "wordnet": [
+      "buckler",
+      "carapace",
+      "cuticle",
+      "harbor",
+      "harbour",
+      "screen",
+      "shell",
+      "shield"
+    ],
+    "merged": [
+      "buckler",
+      "carapace",
+      "cuticle",
+      "harbor",
+      "harbour",
+      "screen",
+      "shell",
+      "shield"
+    ]
+  },
+  "shielded": {
+    "datamuse": [
+      "protected",
+      "secure"
+    ],
+    "wordnet": [
+      "harbor",
+      "harbour",
+      "screen",
+      "shield",
+      "shielded"
+    ],
+    "merged": [
+      "harbor",
+      "harbour",
+      "protected",
+      "screen",
+      "secure",
+      "shield",
+      "shielded"
+    ]
+  },
+  "shielding": {
+    "datamuse": [
+      "covering",
+      "protective"
+    ],
+    "wordnet": [
+      "harbor",
+      "harbour",
+      "screen",
+      "shield",
+      "shielding"
+    ],
+    "merged": [
+      "covering",
+      "harbor",
+      "harbour",
+      "protective",
+      "screen",
+      "shield",
+      "shielding"
+    ]
+  },
+  "shimmer": {
+    "datamuse": [
+      "play"
+    ],
+    "wordnet": [
+      "play",
+      "shimmer"
+    ],
+    "merged": [
+      "play",
+      "shimmer"
+    ]
+  },
+  "signal": {
+    "datamuse": [
+      "bespeak",
+      "betoken",
+      "impressive",
+      "indicate",
+      "point",
+      "sign",
+      "signaling",
+      "signalize"
+    ],
+    "wordnet": [
+      "bespeak",
+      "betoken",
+      "indicate",
+      "point",
+      "sign",
+      "signal",
+      "signaling",
+      "signalise",
+      "signalize"
+    ],
+    "merged": [
+      "bespeak",
+      "betoken",
+      "impressive",
+      "indicate",
+      "point",
+      "sign",
+      "signal",
+      "signaling",
+      "signalise",
+      "signalize"
+    ]
+  },
+  "silence": {
+    "datamuse": [
+      "burke",
+      "hush",
+      "hush up",
+      "muteness",
+      "quiet",
+      "quieten",
+      "secrecy",
+      "secretiveness",
+      "shut up",
+      "still"
+    ],
+    "wordnet": [
+      "hush",
+      "hush up",
+      "muteness",
+      "quiet",
+      "quieten",
+      "secrecy",
+      "secretiveness",
+      "shut up",
+      "silence",
+      "still"
+    ],
+    "merged": [
+      "burke",
+      "hush",
+      "hush up",
+      "muteness",
+      "quiet",
+      "quieten",
+      "secrecy",
+      "secretiveness",
+      "shut up",
+      "silence",
+      "still"
+    ]
+  },
+  "softened": {
+    "datamuse": [
+      "diffused",
+      "dull",
+      "modulated",
+      "muffled",
+      "muted",
+      "soft"
+    ],
+    "wordnet": [
+      "break",
+      "buffer",
+      "cushion",
+      "damp",
+      "dampen",
+      "dull",
+      "mince",
+      "moderate",
+      "muffled",
+      "muted",
+      "relent",
+      "soften",
+      "softened",
+      "weaken",
+      "yield"
+    ],
+    "merged": [
+      "break",
+      "buffer",
+      "cushion",
+      "damp",
+      "dampen",
+      "diffused",
+      "dull",
+      "mince",
+      "moderate",
+      "modulated",
+      "muffled",
+      "muted",
+      "relent",
+      "soft",
+      "soften",
+      "softened",
+      "weaken",
+      "yield"
+    ]
+  },
+  "speak": {
+    "datamuse": [
+      "address",
+      "mouth",
+      "talk",
+      "utter",
+      "verbalize"
+    ],
+    "wordnet": [
+      "address",
+      "mouth",
+      "speak",
+      "talk",
+      "utter",
+      "verbalise",
+      "verbalize"
+    ],
+    "merged": [
+      "address",
+      "mouth",
+      "speak",
+      "talk",
+      "utter",
+      "verbalise",
+      "verbalize"
+    ]
+  },
+  "spiral": {
+    "datamuse": [
+      "coil",
+      "coiled",
+      "coiling",
+      "corkscrew",
+      "gyrate",
+      "helical",
+      "helix",
+      "spiraling",
+      "turbinate",
+      "volute",
+      "voluted",
+      "whorl",
+      "whorled"
+    ],
+    "wordnet": [
+      "coil",
+      "coiling",
+      "corkscrew",
+      "gyrate",
+      "helical",
+      "helix",
+      "spiral",
+      "spiraling",
+      "turbinate",
+      "volute",
+      "voluted",
+      "whorl",
+      "whorled"
+    ],
+    "merged": [
+      "coil",
+      "coiled",
+      "coiling",
+      "corkscrew",
+      "gyrate",
+      "helical",
+      "helix",
+      "spiral",
+      "spiraling",
+      "turbinate",
+      "volute",
+      "voluted",
+      "whorl",
+      "whorled"
+    ]
+  },
+  "spirit": {
+    "datamuse": [
+      "emotional state",
+      "feel",
+      "feeling",
+      "flavor",
+      "heart",
+      "inspirit",
+      "intent",
+      "life",
+      "liveliness",
+      "look",
+      "purport",
+      "smell",
+      "spirit up",
+      "sprightliness",
+      "tone"
+    ],
+    "wordnet": [
+      "disembodied spirit",
+      "emotional state",
+      "feel",
+      "feeling",
+      "flavor",
+      "flavour",
+      "heart",
+      "inspirit",
+      "intent",
+      "life",
+      "liveliness",
+      "look",
+      "purport",
+      "smell",
+      "spirit",
+      "spirit up",
+      "sprightliness",
+      "tone"
+    ],
+    "merged": [
+      "disembodied spirit",
+      "emotional state",
+      "feel",
+      "feeling",
+      "flavor",
+      "flavour",
+      "heart",
+      "inspirit",
+      "intent",
+      "life",
+      "liveliness",
+      "look",
+      "purport",
+      "smell",
+      "spirit",
+      "spirit up",
+      "sprightliness",
+      "tone"
+    ]
+  },
+  "spoken": {
+    "datamuse": [
+      "expressed",
+      "oral",
+      "unwritten",
+      "uttered",
+      "verbal",
+      "verbalized",
+      "viva-voce",
+      "vocal",
+      "voiced",
+      "word-of-mouth"
+    ],
+    "wordnet": [
+      "address",
+      "mouth",
+      "speak",
+      "spoken",
+      "talk",
+      "utter",
+      "verbalise",
+      "verbalize"
+    ],
+    "merged": [
+      "address",
+      "expressed",
+      "mouth",
+      "oral",
+      "speak",
+      "spoken",
+      "talk",
+      "unwritten",
+      "utter",
+      "uttered",
+      "verbal",
+      "verbalise",
+      "verbalize",
+      "verbalized",
+      "viva-voce",
+      "vocal",
+      "voiced",
+      "word-of-mouth"
+    ]
+  },
+  "stabilizer": {
+    "datamuse": [],
+    "wordnet": [
+      "stabiliser",
+      "stabilizer"
+    ],
+    "merged": [
+      "stabiliser",
+      "stabilizer"
+    ]
+  },
+  "steadiness": {
+    "datamuse": [
+      "firmness"
+    ],
+    "wordnet": [
+      "firmness",
+      "steadiness"
+    ],
+    "merged": [
+      "firmness",
+      "steadiness"
+    ]
+  },
+  "still": {
+    "datamuse": [
+      "all the same",
+      "allay",
+      "at rest",
+      "calm",
+      "calm down",
+      "distillery",
+      "ease",
+      "even",
+      "even so",
+      "however",
+      "hush",
+      "hush up",
+      "inactive",
+      "lull",
+      "motionless",
+      "nevertheless",
+      "noneffervescent",
+      "nonetheless",
+      "nonmoving",
+      "notwithstanding",
+      "placid",
+      "quiet",
+      "quieten",
+      "relieve",
+      "shut up",
+      "silence",
+      "silent",
+      "soundless",
+      "static",
+      "stillness",
+      "stock-still",
+      "tranquil",
+      "tranquilize",
+      "tranquillize",
+      "unmoving",
+      "unruffled",
+      "withal",
+      "yet"
+    ],
+    "wordnet": [
+      "all the same",
+      "allay",
+      "calm",
+      "calm down",
+      "distillery",
+      "ease",
+      "even",
+      "even so",
+      "however",
+      "hush",
+      "hush up",
+      "inactive",
+      "lull",
+      "motionless",
+      "nevertheless",
+      "noneffervescent",
+      "nonetheless",
+      "notwithstanding",
+      "placid",
+      "quiet",
+      "quieten",
+      "relieve",
+      "shut up",
+      "silence",
+      "silent",
+      "smooth",
+      "soundless",
+      "static",
+      "still",
+      "stillness",
+      "stock-still",
+      "tranquil",
+      "tranquilize",
+      "tranquillise",
+      "tranquillize",
+      "unruffled",
+      "withal",
+      "yet"
+    ],
+    "merged": [
+      "all the same",
+      "allay",
+      "at rest",
+      "calm",
+      "calm down",
+      "distillery",
+      "ease",
+      "even",
+      "even so",
+      "however",
+      "hush",
+      "hush up",
+      "inactive",
+      "lull",
+      "motionless",
+      "nevertheless",
+      "noneffervescent",
+      "nonetheless",
+      "nonmoving",
+      "notwithstanding",
+      "placid",
+      "quiet",
+      "quieten",
+      "relieve",
+      "shut up",
+      "silence",
+      "silent",
+      "smooth",
+      "soundless",
+      "static",
+      "still",
+      "stillness",
+      "stock-still",
+      "tranquil",
+      "tranquilize",
+      "tranquillise",
+      "tranquillize",
+      "unmoving",
+      "unruffled",
+      "withal",
+      "yet"
+    ]
+  },
+  "stillness": {
+    "datamuse": [
+      "hush",
+      "motionlessness",
+      "still",
+      "windlessness"
+    ],
+    "wordnet": [
+      "hush",
+      "lifelessness",
+      "motionlessness",
+      "still",
+      "stillness",
+      "windlessness"
+    ],
+    "merged": [
+      "hush",
+      "lifelessness",
+      "motionlessness",
+      "still",
+      "stillness",
+      "windlessness"
+    ]
+  },
+  "support": {
+    "datamuse": [
+      "accompaniment",
+      "affirm",
+      "back",
+      "back up",
+      "backing",
+      "bear out",
+      "bolster",
+      "bolster up",
+      "bread and butter",
+      "confirm",
+      "corroborate",
+      "defend",
+      "documentation",
+      "endorse",
+      "fend for",
+      "financial backing",
+      "financial support",
+      "funding",
+      "hold",
+      "hold up",
+      "keep",
+      "livelihood",
+      "living",
+      "patronage",
+      "patronize",
+      "plump for",
+      "plunk for",
+      "reenforcement",
+      "reinforcement",
+      "see through",
+      "stand",
+      "subscribe",
+      "substantiate",
+      "supporting",
+      "sustain",
+      "sustenance",
+      "underpin"
+    ],
+    "wordnet": [
+      "abide",
+      "accompaniment",
+      "affirm",
+      "back",
+      "back up",
+      "backing",
+      "backup",
+      "bear",
+      "bear out",
+      "bread and butter",
+      "brook",
+      "confirm",
+      "corroborate",
+      "defend",
+      "digest",
+      "documentation",
+      "endorse",
+      "endure",
+      "fend for",
+      "financial backing",
+      "financial support",
+      "funding",
+      "hold",
+      "hold up",
+      "indorse",
+      "keep",
+      "keep going",
+      "livelihood",
+      "living",
+      "musical accompaniment",
+      "patronage",
+      "patronise",
+      "patronize",
+      "plump for",
+      "plunk for",
+      "put up",
+      "reenforcement",
+      "reinforcement",
+      "stand",
+      "stick out",
+      "stomach",
+      "subscribe",
+      "substantiate",
+      "suffer",
+      "support",
+      "supporting",
+      "sustain",
+      "sustenance",
+      "tolerate",
+      "underpin"
+    ],
+    "merged": [
+      "abide",
+      "accompaniment",
+      "affirm",
+      "back",
+      "back up",
+      "backing",
+      "backup",
+      "bear",
+      "bear out",
+      "bolster",
+      "bolster up",
+      "bread and butter",
+      "brook",
+      "confirm",
+      "corroborate",
+      "defend",
+      "digest",
+      "documentation",
+      "endorse",
+      "endure",
+      "fend for",
+      "financial backing",
+      "financial support",
+      "funding",
+      "hold",
+      "hold up",
+      "indorse",
+      "keep",
+      "keep going",
+      "livelihood",
+      "living",
+      "musical accompaniment",
+      "patronage",
+      "patronise",
+      "patronize",
+      "plump for",
+      "plunk for",
+      "put up",
+      "reenforcement",
+      "reinforcement",
+      "see through",
+      "stand",
+      "stick out",
+      "stomach",
+      "subscribe",
+      "substantiate",
+      "suffer",
+      "support",
+      "supporting",
+      "sustain",
+      "sustenance",
+      "tolerate",
+      "underpin"
+    ]
+  },
+  "surrender": {
+    "datamuse": [
+      "capitulation",
+      "cede",
+      "deliver",
+      "deport",
+      "extradite",
+      "fall",
+      "give up",
+      "giving up",
+      "relinquish",
+      "resignation",
+      "yielding"
+    ],
+    "wordnet": [
+      "capitulation",
+      "cede",
+      "deliver",
+      "fall",
+      "give up",
+      "giving up",
+      "resignation",
+      "surrender",
+      "yielding"
+    ],
+    "merged": [
+      "capitulation",
+      "cede",
+      "deliver",
+      "deport",
+      "extradite",
+      "fall",
+      "give up",
+      "giving up",
+      "relinquish",
+      "resignation",
+      "surrender",
+      "yielding"
+    ]
+  },
+  "tender": {
+    "datamuse": [
+      "affectionate",
+      "bid",
+      "caring",
+      "chewable",
+      "crank",
+      "cranky",
+      "crisp",
+      "crispy",
+      "cuttable",
+      "delicate",
+      "flakey",
+      "flaky",
+      "fond",
+      "immature",
+      "legal tender",
+      "lovesome",
+      "loving",
+      "offer",
+      "painful",
+      "pinnace",
+      "protective",
+      "sensitive",
+      "sentimental",
+      "short",
+      "soft",
+      "sore",
+      "supply ship",
+      "tenderize",
+      "tenderized",
+      "tippy",
+      "unstable",
+      "untoughened",
+      "vulnerable",
+      "warm",
+      "young"
+    ],
+    "wordnet": [
+      "affectionate",
+      "attendant",
+      "attender",
+      "bid",
+      "crank",
+      "cranky",
+      "cutter",
+      "fond",
+      "legal tender",
+      "lovesome",
+      "offer",
+      "pinnace",
+      "raw",
+      "sensitive",
+      "ship's boat",
+      "sore",
+      "stamp",
+      "supply ship",
+      "tender",
+      "tenderise",
+      "tenderize",
+      "tippy",
+      "untoughened",
+      "warm"
+    ],
+    "merged": [
+      "affectionate",
+      "attendant",
+      "attender",
+      "bid",
+      "caring",
+      "chewable",
+      "crank",
+      "cranky",
+      "crisp",
+      "crispy",
+      "cuttable",
+      "cutter",
+      "delicate",
+      "flakey",
+      "flaky",
+      "fond",
+      "immature",
+      "legal tender",
+      "lovesome",
+      "loving",
+      "offer",
+      "painful",
+      "pinnace",
+      "protective",
+      "raw",
+      "sensitive",
+      "sentimental",
+      "ship's boat",
+      "short",
+      "soft",
+      "sore",
+      "stamp",
+      "supply ship",
+      "tender",
+      "tenderise",
+      "tenderize",
+      "tenderized",
+      "tippy",
+      "unstable",
+      "untoughened",
+      "vulnerable",
+      "warm",
+      "young"
+    ]
+  },
+  "thread": {
+    "datamuse": [
+      "meander",
+      "ribbon",
+      "screw thread",
+      "string",
+      "train of thought",
+      "weave",
+      "wind",
+      "yarn"
+    ],
+    "wordnet": [
+      "draw",
+      "meander",
+      "ribbon",
+      "screw thread",
+      "string",
+      "thread",
+      "train of thought",
+      "wander",
+      "weave",
+      "wind",
+      "yarn"
+    ],
+    "merged": [
+      "draw",
+      "meander",
+      "ribbon",
+      "screw thread",
+      "string",
+      "thread",
+      "train of thought",
+      "wander",
+      "weave",
+      "wind",
+      "yarn"
+    ]
+  },
+  "time": {
+    "datamuse": [
+      "clip",
+      "clock",
+      "clock time",
+      "fourth dimension",
+      "meter",
+      "prison term",
+      "sentence"
+    ],
+    "wordnet": [
+      "clip",
+      "clock",
+      "clock time",
+      "fourth dimension",
+      "meter",
+      "metre",
+      "prison term",
+      "sentence",
+      "time"
+    ],
+    "merged": [
+      "clip",
+      "clock",
+      "clock time",
+      "fourth dimension",
+      "meter",
+      "metre",
+      "prison term",
+      "sentence",
+      "time"
+    ]
+  },
+  "together": {
+    "datamuse": [
+      "assembled",
+      "collectively",
+      "conjointly",
+      "in agreement",
+      "in collaboration",
+      "in concert",
+      "jointly",
+      "put together",
+      "unitedly",
+      "unneurotic"
+    ],
+    "wordnet": [
+      "in concert",
+      "together",
+      "unitedly"
+    ],
+    "merged": [
+      "assembled",
+      "collectively",
+      "conjointly",
+      "in agreement",
+      "in collaboration",
+      "in concert",
+      "jointly",
+      "put together",
+      "together",
+      "unitedly",
+      "unneurotic"
+    ]
+  },
+  "tracking": {
+    "datamuse": [
+      "trailing"
+    ],
+    "wordnet": [
+      "chase",
+      "chase after",
+      "cover",
+      "cross",
+      "cut across",
+      "cut through",
+      "dog",
+      "get across",
+      "get over",
+      "give chase",
+      "go after",
+      "pass over",
+      "tag",
+      "tail",
+      "track",
+      "tracking",
+      "trail",
+      "trailing",
+      "traverse"
+    ],
+    "merged": [
+      "chase",
+      "chase after",
+      "cover",
+      "cross",
+      "cut across",
+      "cut through",
+      "dog",
+      "get across",
+      "get over",
+      "give chase",
+      "go after",
+      "pass over",
+      "tag",
+      "tail",
+      "track",
+      "tracking",
+      "trail",
+      "trailing",
+      "traverse"
+    ]
+  },
+  "transmission": {
+    "datamuse": [
+      "contagion",
+      "infection",
+      "transmittal",
+      "transmittance",
+      "transmitting"
+    ],
+    "wordnet": [
+      "contagion",
+      "infection",
+      "transmission",
+      "transmission system",
+      "transmittal",
+      "transmittance",
+      "transmitting"
+    ],
+    "merged": [
+      "contagion",
+      "infection",
+      "transmission",
+      "transmission system",
+      "transmittal",
+      "transmittance",
+      "transmitting"
+    ]
+  },
+  "unfolding": {
+    "datamuse": [
+      "flowering"
+    ],
+    "wordnet": [
+      "blossom",
+      "blossom forth",
+      "blossom out",
+      "extend",
+      "flowering",
+      "open",
+      "spread",
+      "spread out",
+      "stretch",
+      "stretch out",
+      "unfold",
+      "unfolding"
+    ],
+    "merged": [
+      "blossom",
+      "blossom forth",
+      "blossom out",
+      "extend",
+      "flowering",
+      "open",
+      "spread",
+      "spread out",
+      "stretch",
+      "stretch out",
+      "unfold",
+      "unfolding"
+    ]
+  },
+  "use": {
+    "datamuse": [
+      "apply",
+      "consumption",
+      "economic consumption",
+      "employ",
+      "employment",
+      "enjoyment",
+      "exercise",
+      "expend",
+      "function",
+      "habit",
+      "manipulation",
+      "practice",
+      "purpose",
+      "role",
+      "usage",
+      "usance",
+      "use of goods and services",
+      "utilisation",
+      "utilise",
+      "utilization",
+      "utilize",
+      "wont"
+    ],
+    "wordnet": [
+      "apply",
+      "consumption",
+      "economic consumption",
+      "employ",
+      "employment",
+      "enjoyment",
+      "exercise",
+      "expend",
+      "function",
+      "habit",
+      "habituate",
+      "manipulation",
+      "practice",
+      "purpose",
+      "role",
+      "usage",
+      "usance",
+      "use",
+      "use of goods and services",
+      "utilisation",
+      "utilise",
+      "utilization",
+      "utilize"
+    ],
+    "merged": [
+      "apply",
+      "consumption",
+      "economic consumption",
+      "employ",
+      "employment",
+      "enjoyment",
+      "exercise",
+      "expend",
+      "function",
+      "habit",
+      "habituate",
+      "manipulation",
+      "practice",
+      "purpose",
+      "role",
+      "usage",
+      "usance",
+      "use",
+      "use of goods and services",
+      "utilisation",
+      "utilise",
+      "utilization",
+      "utilize",
+      "wont"
+    ]
+  },
+  "v10": {
+    "datamuse": [],
+    "wordnet": [],
+    "merged": []
+  },
+  "void": {
+    "datamuse": [
+      "annul",
+      "avoid",
+      "eliminate",
+      "emptiness",
+      "empty",
+      "evacuate",
+      "invalid",
+      "invalidate",
+      "nothingness",
+      "nugatory",
+      "null",
+      "nullify",
+      "nullity",
+      "quash",
+      "vacancy",
+      "vitiate"
+    ],
+    "wordnet": [
+      "annul",
+      "avoid",
+      "emptiness",
+      "empty",
+      "evacuate",
+      "invalidate",
+      "nihility",
+      "nothingness",
+      "null",
+      "nullify",
+      "nullity",
+      "quash",
+      "vacancy",
+      "vacuum",
+      "vitiate",
+      "void"
+    ],
+    "merged": [
+      "annul",
+      "avoid",
+      "eliminate",
+      "emptiness",
+      "empty",
+      "evacuate",
+      "invalid",
+      "invalidate",
+      "nihility",
+      "nothingness",
+      "nugatory",
+      "null",
+      "nullify",
+      "nullity",
+      "quash",
+      "vacancy",
+      "vacuum",
+      "vitiate",
+      "void"
+    ]
+  },
+  "voltage": {
+    "datamuse": [
+      "electromotive force",
+      "emf",
+      "potential difference",
+      "potential drop"
+    ],
+    "wordnet": [
+      "electric potential",
+      "electromotive force",
+      "emf",
+      "potential",
+      "potential difference",
+      "potential drop",
+      "voltage"
+    ],
+    "merged": [
+      "electric potential",
+      "electromotive force",
+      "emf",
+      "potential",
+      "potential difference",
+      "potential drop",
+      "voltage"
+    ]
+  },
+  "wa": {
+    "datamuse": [],
+    "wordnet": [
+      "evergreen state",
+      "wa",
+      "washington"
+    ],
+    "merged": [
+      "evergreen state",
+      "wa",
+      "washington"
+    ]
+  },
+  "wait": {
+    "datamuse": [
+      "await",
+      "delay",
+      "expect",
+      "hold",
+      "hold back",
+      "hold off",
+      "look",
+      "postponement",
+      "time lag",
+      "waiting"
+    ],
+    "wordnet": [
+      "await",
+      "delay",
+      "expect",
+      "hold",
+      "hold back",
+      "hold off",
+      "look",
+      "postponement",
+      "time lag",
+      "wait",
+      "waiting",
+      "waitress"
+    ],
+    "merged": [
+      "await",
+      "delay",
+      "expect",
+      "hold",
+      "hold back",
+      "hold off",
+      "look",
+      "postponement",
+      "time lag",
+      "wait",
+      "waiting",
+      "waitress"
+    ]
+  },
+  "waiting": {
+    "datamuse": [
+      "ready",
+      "ready and waiting",
+      "wait"
+    ],
+    "wordnet": [
+      "await",
+      "expect",
+      "hold back",
+      "hold off",
+      "look",
+      "ready and waiting",
+      "wait",
+      "waiting",
+      "waitress"
+    ],
+    "merged": [
+      "await",
+      "expect",
+      "hold back",
+      "hold off",
+      "look",
+      "ready",
+      "ready and waiting",
+      "wait",
+      "waiting",
+      "waitress"
+    ]
+  },
+  "weave": {
+    "datamuse": [
+      "interweave",
+      "meander",
+      "thread",
+      "tissue",
+      "waver",
+      "wind"
+    ],
+    "wordnet": [
+      "interweave",
+      "meander",
+      "thread",
+      "tissue",
+      "wander",
+      "waver",
+      "weave",
+      "wind"
+    ],
+    "merged": [
+      "interweave",
+      "meander",
+      "thread",
+      "tissue",
+      "wander",
+      "waver",
+      "weave",
+      "wind"
+    ]
+  },
+  "wisdom": {
+    "datamuse": [
+      "sapience",
+      "soundness",
+      "wiseness"
+    ],
+    "wordnet": [
+      "sapience",
+      "soundness",
+      "wisdom",
+      "wisdom of solomon",
+      "wiseness"
+    ],
+    "merged": [
+      "sapience",
+      "soundness",
+      "wisdom",
+      "wisdom of solomon",
+      "wiseness"
+    ]
+  },
+  "witness": {
+    "datamuse": [
+      "attestant",
+      "find",
+      "informant",
+      "see",
+      "spectator",
+      "viewer",
+      "watcher"
+    ],
+    "wordnet": [
+      "attestant",
+      "attestator",
+      "attestor",
+      "find",
+      "informant",
+      "looker",
+      "see",
+      "spectator",
+      "viewer",
+      "watcher",
+      "witness",
+      "witnesser"
+    ],
+    "merged": [
+      "attestant",
+      "attestator",
+      "attestor",
+      "find",
+      "informant",
+      "looker",
+      "see",
+      "spectator",
+      "viewer",
+      "watcher",
+      "witness",
+      "witnesser"
+    ]
+  },
+  "witnessed": {
+    "datamuse": [
+      "attested",
+      "observed",
+      "seen"
+    ],
+    "wordnet": [
+      "find",
+      "see",
+      "witness"
+    ],
+    "merged": [
+      "attested",
+      "find",
+      "observed",
+      "see",
+      "seen",
+      "witness"
+    ]
+  },
+  "yearning": {
+    "datamuse": [
+      "longing",
+      "sad",
+      "wistful"
+    ],
+    "wordnet": [
+      "ache",
+      "hanker",
+      "hungriness",
+      "languish",
+      "long",
+      "longing",
+      "pine",
+      "yearn",
+      "yearning",
+      "yen"
+    ],
+    "merged": [
+      "ache",
+      "hanker",
+      "hungriness",
+      "languish",
+      "long",
+      "longing",
+      "pine",
+      "sad",
+      "wistful",
+      "yearn",
+      "yearning",
+      "yen"
+    ]
+  }
+}
