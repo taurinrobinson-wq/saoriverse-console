@@ -29,7 +29,8 @@ def score_synonyms(input_path="data/synonyms_filtered.json", output_path="data/s
 
     scored = {}
     for seed, sources in data.items():
-        merged = sources.get('merged_filtered', [])
+        # support both 'merged_filtered' (new) and 'merged' (legacy) keys
+        merged = sources.get('merged_filtered', sources.get('merged', []))
         seed_doc = nlp(seed) if nlp else None
         results = []
         for token in merged:

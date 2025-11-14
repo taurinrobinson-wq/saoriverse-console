@@ -3,7 +3,9 @@
     "wordnet": [
       "recursive"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "recursive"
+    ],
     "merged": [
       "recursive"
     ]
@@ -20,7 +22,13 @@
       "yearn",
       "yen"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ache",
+      "aching",
+      "hurt",
+      "suffer",
+      "yen"
+    ],
     "merged": [
       "ache",
       "aching",
@@ -39,7 +47,11 @@
       "reverent",
       "worshipful"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "reverent",
+      "godly",
+      "worshipful"
+    ],
     "merged": [
       "godly",
       "reverent",
@@ -50,7 +62,9 @@
     "wordnet": [
       "euphoric"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "euphoric"
+    ],
     "merged": [
       "euphoric"
     ]
@@ -68,7 +82,13 @@
       "yearning",
       "yen"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "yearning",
+      "longing",
+      "ache",
+      "languish",
+      "hanker"
+    ],
     "merged": [
       "ache",
       "hanker",
@@ -94,7 +114,13 @@
       "sense of equilibrium",
       "vestibular sense"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "equilibrium",
+      "chemical equilibrium",
+      "sense of equilibrium",
+      "balance",
+      "sense of balance"
+    ],
     "merged": [
       "balance",
       "chemical equilibrium",
@@ -127,7 +153,13 @@
       "take",
       "turn back"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "contained",
+      "contain",
+      "curb",
+      "take",
+      "carry"
+    ],
     "merged": [
       "arrest",
       "bear",
@@ -157,7 +189,13 @@
       "yearn",
       "yearning"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "longing",
+      "yearning",
+      "hanker",
+      "yearn",
+      "long"
+    ],
     "merged": [
       "hanker",
       "hungriness",
@@ -177,7 +215,13 @@
       "realization",
       "recognition"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "recognition",
+      "credit",
+      "acknowledgement",
+      "acknowledgment",
+      "realization"
+    ],
     "merged": [
       "acknowledgement",
       "acknowledgment",
@@ -192,7 +236,9 @@
     "wordnet": [
       "devotional"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "devotional"
+    ],
     "merged": [
       "devotional"
     ]
@@ -213,7 +259,13 @@
       "whorl",
       "whorled"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "spiral",
+      "spiraling",
+      "turbinate",
+      "helical",
+      "helix"
+    ],
     "merged": [
       "coil",
       "coiling",
@@ -247,7 +299,13 @@
       "mourning",
       "sorrowing"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "mourning",
+      "grief-stricken",
+      "mourn",
+      "bereaved",
+      "grieving"
+    ],
     "merged": [
       "bereaved",
       "bereavement",
@@ -267,7 +325,12 @@
       "ceremony",
       "observance"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ceremonial",
+      "ceremonial occasion",
+      "observance",
+      "ceremony"
+    ],
     "merged": [
       "ceremonial",
       "ceremonial occasion",
@@ -297,7 +360,13 @@
       "prostration",
       "tumble"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "collapse",
+      "give way",
+      "break down",
+      "break",
+      "fall in"
+    ],
     "merged": [
       "break",
       "break down",
@@ -333,7 +402,13 @@
       "triumphal",
       "triumphant"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "exultant",
+      "exulting",
+      "gleeful",
+      "rejoicing",
+      "triumphal"
+    ],
     "merged": [
       "elated",
       "exultant",
@@ -355,7 +430,13 @@
       "heartbreak",
       "sorrow"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "grief",
+      "sorrow",
+      "heartbreak",
+      "heartache",
+      "brokenheartedness"
+    ],
     "merged": [
       "brokenheartedness",
       "grief",
@@ -373,7 +454,13 @@
       "stillness",
       "windlessness"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "stillness",
+      "lifelessness",
+      "still",
+      "hush",
+      "motionlessness"
+    ],
     "merged": [
       "hush",
       "lifelessness",
@@ -410,7 +497,13 @@
       "untoughened",
       "warm"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "tender",
+      "legal tender",
+      "warm",
+      "raw",
+      "sore"
+    ],
     "merged": [
       "affectionate",
       "attendant",
@@ -446,7 +539,13 @@
       "shield",
       "shielding"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "shielding",
+      "screen",
+      "shield",
+      "harbour",
+      "harbor"
+    ],
     "merged": [
       "harbor",
       "harbour",
@@ -483,7 +582,13 @@
       "thrill",
       "tickle pink"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "exalted",
+      "proclaim",
+      "noble-minded",
+      "rarefied",
+      "lofty"
+    ],
     "merged": [
       "animate",
       "beatify",
@@ -522,7 +627,13 @@
       "pleasure",
       "rejoice"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "joy",
+      "rejoice",
+      "delight",
+      "gladden",
+      "pleasure"
+    ],
     "merged": [
       "delight",
       "gladden",
@@ -537,7 +648,9 @@
     "wordnet": [
       "celebratory"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "celebratory"
+    ],
     "merged": [
       "celebratory"
     ]
@@ -555,7 +668,13 @@
       "seventh heaven",
       "walking on air"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "bliss",
+      "walking on air",
+      "cloud nine",
+      "seventh heaven",
+      "blissfulness"
+    ],
     "merged": [
       "bliss",
       "blissfulness",
@@ -569,7 +688,10 @@
       "fulfillment",
       "fulfilment"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "fulfillment",
+      "fulfilment"
+    ],
     "merged": [
       "fulfillment",
       "fulfilment"
@@ -616,7 +738,13 @@
       "withal",
       "yet"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "still",
+      "even",
+      "even so",
+      "all the same",
+      "shut up"
+    ],
     "merged": [
       "all the same",
       "allay",
@@ -665,7 +793,12 @@
       "joyful",
       "jubilant"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "joyful",
+      "elated",
+      "gleeful",
+      "jubilant"
+    ],
     "merged": [
       "elated",
       "gleeful",
@@ -697,7 +830,13 @@
       "vitiate",
       "void"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "empty",
+      "void",
+      "avoid",
+      "nothingness",
+      "annul"
+    ],
     "merged": [
       "annul",
       "avoid",
@@ -721,7 +860,9 @@
     "wordnet": [
       "containment"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "containment"
+    ],
     "merged": [
       "containment"
     ]
@@ -741,7 +882,13 @@
       "x",
       "xtc"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ecstasy",
+      "hug drug",
+      "go",
+      "disco biscuit",
+      "xtc"
+    ],
     "merged": [
       "adam",
       "cristal",
@@ -764,7 +911,12 @@
       "edge",
       "limit"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "boundary",
+      "edge",
+      "limit",
+      "bound"
+    ],
     "merged": [
       "bound",
       "boundary",
@@ -780,7 +932,13 @@
       "shield",
       "shielded"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "shielded",
+      "screen",
+      "shield",
+      "harbour",
+      "harbor"
+    ],
     "merged": [
       "harbor",
       "harbour",
@@ -796,7 +954,12 @@
       "sacred",
       "sanctified"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "sacred",
+      "consecrated",
+      "sanctified",
+      "hallowed"
+    ],
     "merged": [
       "consecrated",
       "hallowed",
@@ -812,7 +975,13 @@
       "rapturous",
       "rhapsodic"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ecstatic",
+      "rhapsodic",
+      "rapt",
+      "rapturous",
+      "enraptured"
+    ],
     "merged": [
       "ecstatic",
       "enraptured",
@@ -843,7 +1012,13 @@
       "spot",
       "tell apart"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "recognized",
+      "recognised",
+      "make out",
+      "pick out",
+      "know"
+    ],
     "merged": [
       "accepted",
       "accredit",
@@ -872,7 +1047,11 @@
       "mutual",
       "reciprocal"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "mutual",
+      "reciprocal",
+      "common"
+    ],
     "merged": [
       "common",
       "mutual",
@@ -883,7 +1062,9 @@
     "wordnet": [
       "mirror"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "mirror"
+    ],
     "merged": [
       "mirror"
     ]
@@ -896,7 +1077,13 @@
       "idolatry",
       "veneration"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "devotion",
+      "veneration",
+      "idolatry",
+      "cultism",
+      "devotedness"
+    ],
     "merged": [
       "cultism",
       "devotedness",
@@ -915,7 +1102,13 @@
       "raptus",
       "transport"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "exaltation",
+      "apotheosis",
+      "deification",
+      "rapture",
+      "raptus"
+    ],
     "merged": [
       "apotheosis",
       "deification",
@@ -936,7 +1129,13 @@
       "perceptivity",
       "sixth sense"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "insight",
+      "perceptiveness",
+      "sixth sense",
+      "penetration",
+      "brainwave"
+    ],
     "merged": [
       "brainstorm",
       "brainwave",
@@ -962,7 +1161,13 @@
       "pellucidity",
       "uncloudedness"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "clarity",
+      "lucidity",
+      "clearness",
+      "limpidity",
+      "pellucidity"
+    ],
     "merged": [
       "clarity",
       "clearness",
@@ -977,7 +1182,9 @@
     "wordnet": [
       "insightful"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "insightful"
+    ],
     "merged": [
       "insightful"
     ]
@@ -991,7 +1198,13 @@
       "ledger",
       "leger"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ledger",
+      "account book",
+      "book of account",
+      "leger",
+      "book"
+    ],
     "merged": [
       "account book",
       "book",
@@ -1013,7 +1226,13 @@
       "signalise",
       "signalize"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "signal",
+      "indicate",
+      "signaling",
+      "point",
+      "sign"
+    ],
     "merged": [
       "bespeak",
       "betoken",
@@ -1031,7 +1250,10 @@
       "burrow",
       "tunnel"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "burrow",
+      "tunnel"
+    ],
     "merged": [
       "burrow",
       "tunnel"
@@ -1044,7 +1266,12 @@
       "axis vertebra",
       "bloc"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "axis",
+      "axis of rotation",
+      "axis vertebra",
+      "bloc"
+    ],
     "merged": [
       "axis",
       "axis of rotation",
@@ -1058,7 +1285,11 @@
       "aggressiveness",
       "hostility"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "aggression",
+      "aggressiveness",
+      "hostility"
+    ],
     "merged": [
       "aggression",
       "aggressiveness",
@@ -1078,7 +1309,13 @@
       "resistor",
       "underground"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "resistance",
+      "electric resistance",
+      "electrical resistance",
+      "ohmic resistance",
+      "impedance"
+    ],
     "merged": [
       "electric resistance",
       "electrical resistance",
@@ -1108,7 +1345,13 @@
       "stance",
       "strength"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "posture",
+      "stance",
+      "military posture",
+      "pose",
+      "bearing"
+    ],
     "merged": [
       "attitude",
       "bearing",
@@ -1136,7 +1379,13 @@
       "sonorousness",
       "vibrancy"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "resonance",
+      "vibrancy",
+      "rapport",
+      "ringing",
+      "sonority"
+    ],
     "merged": [
       "plangency",
       "rapport",
@@ -1157,7 +1406,13 @@
       "decrypt",
       "decryption"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "decoding",
+      "decryption",
+      "decode",
+      "decrypt",
+      "decipher"
+    ],
     "merged": [
       "decipher",
       "decipherment",
@@ -1171,7 +1426,9 @@
     "wordnet": [
       "optional"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "optional"
+    ],
     "merged": [
       "optional"
     ]
@@ -1186,7 +1443,13 @@
       "lens system",
       "lense"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "lens",
+      "lens system",
+      "electron lens",
+      "crystalline lens",
+      "genus lens"
+    ],
     "merged": [
       "crystalline lens",
       "electron lens",
@@ -1250,7 +1513,13 @@
       "tolerate",
       "underpin"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "hold",
+      "support",
+      "supporting",
+      "financial support",
+      "hold up"
+    ],
     "merged": [
       "abide",
       "accompaniment",
@@ -1318,7 +1587,13 @@
       "round",
       "speech rhythm"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "rhythm",
+      "speech rhythm",
+      "rhythm method",
+      "musical rhythm",
+      "rhythm method of birth control"
+    ],
     "merged": [
       "beat",
       "calendar method",
@@ -1341,7 +1616,13 @@
       "refuge",
       "sanctuary"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "sanctuary",
+      "asylum",
+      "refuge",
+      "chancel",
+      "bema"
+    ],
     "merged": [
       "asylum",
       "bema",
@@ -1359,7 +1640,13 @@
       "safety",
       "sanctuary"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "refuge",
+      "asylum",
+      "sanctuary",
+      "recourse",
+      "safety"
+    ],
     "merged": [
       "asylum",
       "recourse",
@@ -1398,7 +1685,13 @@
       "telephone",
       "tintinnabulation"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "hoop",
+      "ring",
+      "anchor ring",
+      "surround",
+      "closed chain"
+    ],
     "merged": [
       "anchor ring",
       "annulus",
@@ -1433,7 +1726,10 @@
       "archive",
       "file away"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "archive",
+      "file away"
+    ],
     "merged": [
       "archive",
       "file away"
@@ -1455,7 +1751,13 @@
       "rosiness",
       "salad days"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "bloom",
+      "blooming",
+      "blossom",
+      "flower",
+      "bloom of youth"
+    ],
     "merged": [
       "bloom",
       "bloom of youth",
@@ -1477,7 +1779,10 @@
       "rite",
       "ritual"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ritual",
+      "rite"
+    ],
     "merged": [
       "rite",
       "ritual"
@@ -1527,7 +1832,13 @@
       "touch on",
       "vivify"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "repair",
+      "indemnify",
+      "reparation",
+      "mend",
+      "revive"
+    ],
     "merged": [
       "amend",
       "animate",
@@ -1572,7 +1883,13 @@
       "transmittance",
       "transmitting"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "transmission",
+      "transmitting",
+      "transmission system",
+      "infection",
+      "contagion"
+    ],
     "merged": [
       "contagion",
       "infection",
@@ -1590,7 +1907,12 @@
       "recuperation",
       "retrieval"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "recovery",
+      "recuperation",
+      "retrieval",
+      "convalescence"
+    ],
     "merged": [
       "convalescence",
       "recovery",
@@ -1606,7 +1928,13 @@
       "price",
       "toll"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "cost",
+      "price",
+      "monetary value",
+      "toll",
+      "be"
+    ],
     "merged": [
       "be",
       "cost",
@@ -1623,7 +1951,13 @@
       "playscript",
       "script"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "script",
+      "handwriting",
+      "book",
+      "hand",
+      "playscript"
+    ],
     "merged": [
       "book",
       "hand",
@@ -1659,7 +1993,13 @@
       "placate",
       "soft"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "gentle",
+      "docile",
+      "blue",
+      "aristocratic",
+      "patrician"
+    ],
     "merged": [
       "appease",
       "aristocratic",
@@ -1699,7 +2039,13 @@
       "unique",
       "unparalleled"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "alone",
+      "entirely",
+      "solitary",
+      "unique",
+      "only"
+    ],
     "merged": [
       "alone",
       "entirely",
@@ -1726,7 +2072,13 @@
       "side by side",
       "succeeding"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "next",
+      "side by side",
+      "adjacent",
+      "succeeding",
+      "following"
+    ],
     "merged": [
       "adjacent",
       "following",
@@ -1755,7 +2107,13 @@
       "project",
       "purpose"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "design",
+      "plan",
+      "designing",
+      "innovation",
+      "aim"
+    ],
     "merged": [
       "aim",
       "blueprint",
@@ -1780,7 +2138,10 @@
       "compromise",
       "via media"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "compromise",
+      "via media"
+    ],
     "merged": [
       "compromise",
       "via media"
@@ -1791,7 +2152,10 @@
       "play",
       "shimmer"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "shimmer",
+      "play"
+    ],
     "merged": [
       "play",
       "shimmer"
@@ -1801,7 +2165,9 @@
     "wordnet": [
       "redesign"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "redesign"
+    ],
     "merged": [
       "redesign"
     ]
@@ -1824,7 +2190,13 @@
       "term",
       "train"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "condition",
+      "experimental condition",
+      "train",
+      "shape",
+      "specify"
+    ],
     "merged": [
       "check",
       "circumstance",
@@ -1851,7 +2223,13 @@
       "heighten",
       "intensify"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "deepen",
+      "heighten",
+      "intensify",
+      "change",
+      "compound"
+    ],
     "merged": [
       "change",
       "compound",
@@ -1878,7 +2256,13 @@
       "zip",
       "zippo"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "nil",
+      "null",
+      "nix",
+      "zero",
+      "nothing"
+    ],
     "merged": [
       "aught",
       "cipher",
@@ -1951,7 +2335,13 @@
       "turn on",
       "tutelage"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "charge",
+      "charge up",
+      "electric charge",
+      "explosive charge",
+      "bursting charge"
+    ],
     "merged": [
       "accusation",
       "accuse",
@@ -2029,7 +2419,13 @@
       "stemma",
       "stock"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ancestry",
+      "lineage",
+      "origin",
+      "blood",
+      "blood line"
+    ],
     "merged": [
       "ancestry",
       "beginning",
@@ -2069,7 +2465,13 @@
       "snub",
       "unheeded"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ignored",
+      "neglected",
+      "ignore",
+      "push aside",
+      "dismiss"
+    ],
     "merged": [
       "brush aside",
       "brush off",
@@ -2101,7 +2503,13 @@
       "unfold",
       "unfolding"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "unfolding",
+      "spread out",
+      "blossom out",
+      "extend",
+      "open"
+    ],
     "merged": [
       "blossom",
       "blossom forth",
@@ -2126,7 +2534,13 @@
       "shard",
       "sherd"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "fragment",
+      "break up",
+      "shard",
+      "fragmentise",
+      "fragmentize"
+    ],
     "merged": [
       "break up",
       "fragment",
@@ -2149,7 +2563,13 @@
       "silence",
       "still"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "silence",
+      "hush up",
+      "shut up",
+      "hush",
+      "still"
+    ],
     "merged": [
       "hush",
       "hush up",
@@ -2226,7 +2646,13 @@
       "wanton",
       "weak"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "illumination",
+      "light",
+      "inner light",
+      "visible light",
+      "light within"
+    ],
     "merged": [
       "abstemious",
       "alight",
@@ -2296,7 +2722,11 @@
       "see",
       "witness"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "see",
+      "witness",
+      "find"
+    ],
     "merged": [
       "find",
       "see",
@@ -2317,7 +2747,13 @@
       "wind",
       "yarn"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "thread",
+      "screw thread",
+      "train of thought",
+      "meander",
+      "wander"
+    ],
     "merged": [
       "draw",
       "meander",
@@ -2344,7 +2780,13 @@
       "police force",
       "practice of law"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "law",
+      "natural law",
+      "practice of law",
+      "law of nature",
+      "legal philosophy"
+    ],
     "merged": [
       "constabulary",
       "jurisprudence",
@@ -2372,7 +2814,13 @@
       "witness",
       "witnesser"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "witness",
+      "informant",
+      "spectator",
+      "find",
+      "see"
+    ],
     "merged": [
       "attestant",
       "attestator",
@@ -2393,7 +2841,10 @@
       "conquest",
       "seduction"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "seduction",
+      "conquest"
+    ],
     "merged": [
       "conquest",
       "seduction"
@@ -2404,7 +2855,10 @@
       "continuity",
       "persistence"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "continuity",
+      "persistence"
+    ],
     "merged": [
       "continuity",
       "persistence"
@@ -2415,7 +2869,10 @@
       "bequest",
       "legacy"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "legacy",
+      "bequest"
+    ],
     "merged": [
       "bequest",
       "legacy"
@@ -2436,7 +2893,13 @@
       "seethe",
       "thrum"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "hua",
+      "hum",
+      "harkat ul-ansar",
+      "harkat ul-mujahedeen",
+      "harkat-ul-mujahidin"
+    ],
     "merged": [
       "al faran",
       "busyness",
@@ -2479,7 +2942,13 @@
       "wag",
       "wit"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "board",
+      "card",
+      "visiting card",
+      "identity card",
+      "calling card"
+    ],
     "merged": [
       "add-in",
       "batting order",
@@ -2516,7 +2985,13 @@
       "steadfastly",
       "unwaveringly"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "firmly",
+      "steadfastly",
+      "unwaveringly",
+      "hard",
+      "securely"
+    ],
     "merged": [
       "firm",
       "firmly",
@@ -2530,7 +3005,9 @@
     "wordnet": [
       "identifier"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "identifier"
+    ],
     "merged": [
       "identifier"
     ]
@@ -2542,7 +3019,12 @@
       "heroic",
       "talkative"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "expansive",
+      "heroic",
+      "grand",
+      "talkative"
+    ],
     "merged": [
       "expansive",
       "grand",
@@ -2558,7 +3040,13 @@
       "wisdom of solomon",
       "wiseness"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "wisdom",
+      "wisdom of solomon",
+      "wiseness",
+      "sapience",
+      "soundness"
+    ],
     "merged": [
       "sapience",
       "soundness",
@@ -2582,7 +3070,13 @@
       "tenacious",
       "yearn"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "long",
+      "tenacious",
+      "farsighted",
+      "foresighted",
+      "retentive"
+    ],
     "merged": [
       "farseeing",
       "farsighted",
@@ -2611,7 +3105,13 @@
       "storage",
       "store"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "memory",
+      "memory board",
+      "computer memory",
+      "retention",
+      "computer storage"
+    ],
     "merged": [
       "computer memory",
       "computer storage",
@@ -2637,7 +3137,13 @@
       "ring",
       "sound reflection"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "echo",
+      "resound",
+      "recall",
+      "repeat",
+      "sound reflection"
+    ],
     "merged": [
       "echo",
       "recall",
@@ -2663,7 +3169,13 @@
       "pulsing",
       "throb"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "pulse",
+      "pulse rate",
+      "pulsation",
+      "heart rate",
+      "heartbeat"
+    ],
     "merged": [
       "beat",
       "heart rate",
@@ -2688,7 +3200,13 @@
       "verbalise",
       "verbalize"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "spoken",
+      "verbalize",
+      "address",
+      "speak",
+      "utter"
+    ],
     "merged": [
       "address",
       "mouth",
@@ -2705,7 +3223,10 @@
       "diagram",
       "plot"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "diagram",
+      "plot"
+    ],
     "merged": [
       "diagram",
       "plot"
@@ -2737,7 +3258,13 @@
       "scope",
       "sphere"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "orbit",
+      "celestial orbit",
+      "electron orbit",
+      "orbital cavity",
+      "cranial orbit"
+    ],
     "merged": [
       "ambit",
       "area",
@@ -2768,7 +3295,9 @@
     "wordnet": [
       "paradox"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "paradox"
+    ],
     "merged": [
       "paradox"
     ]
@@ -2778,7 +3307,10 @@
       "preciseness",
       "precision"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "precision",
+      "preciseness"
+    ],
     "merged": [
       "preciseness",
       "precision"
@@ -2790,7 +3322,11 @@
       "together",
       "unitedly"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "together",
+      "in concert",
+      "unitedly"
+    ],
     "merged": [
       "in concert",
       "together",
@@ -2801,7 +3337,9 @@
     "wordnet": [
       "metaphor"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "metaphor"
+    ],
     "merged": [
       "metaphor"
     ]
@@ -2827,7 +3365,13 @@
       "sprightliness",
       "tone"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "life",
+      "spirit",
+      "disembodied spirit",
+      "spirit up",
+      "intent"
+    ],
     "merged": [
       "disembodied spirit",
       "emotional state",
@@ -2861,7 +3405,13 @@
       "waiting",
       "waitress"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "waiting",
+      "ready and waiting",
+      "wait",
+      "expect",
+      "look"
+    ],
     "merged": [
       "await",
       "expect",
@@ -2878,7 +3428,9 @@
     "wordnet": [
       "recursion"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "recursion"
+    ],
     "merged": [
       "recursion"
     ]
@@ -2890,7 +3442,12 @@
       "responsibility",
       "tariff"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "duty",
+      "obligation",
+      "tariff",
+      "responsibility"
+    ],
     "merged": [
       "duty",
       "obligation",
@@ -2917,7 +3474,13 @@
       "shape",
       "traffic pattern"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "pattern",
+      "approach pattern",
+      "practice",
+      "radiation pattern",
+      "traffic pattern"
+    ],
     "merged": [
       "approach pattern",
       "blueprint",
@@ -2943,7 +3506,11 @@
       "wa",
       "washington"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "wa",
+      "washington",
+      "evergreen state"
+    ],
     "merged": [
       "evergreen state",
       "wa",
@@ -2961,7 +3528,13 @@
       "weave",
       "wind"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "weave",
+      "interweave",
+      "wander",
+      "meander",
+      "wind"
+    ],
     "merged": [
       "interweave",
       "meander",
@@ -2978,7 +3551,10 @@
       "actuation",
       "propulsion"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "propulsion",
+      "actuation"
+    ],
     "merged": [
       "actuation",
       "propulsion"
@@ -2992,7 +3568,13 @@
       "invocation",
       "supplication"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "invocation",
+      "supplication",
+      "conjuring",
+      "conjuration",
+      "conjury"
+    ],
     "merged": [
       "conjuration",
       "conjuring",
@@ -3010,7 +3592,13 @@
       "trip the light fantastic",
       "trip the light fantastic toe"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "dancing",
+      "trip the light fantastic",
+      "trip the light fantastic toe",
+      "dance",
+      "saltation"
+    ],
     "merged": [
       "dance",
       "dancing",
@@ -3047,7 +3635,13 @@
       "stupefy",
       "vex"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "amazing",
+      "astonishing",
+      "awe-inspiring",
+      "awesome",
+      "awful"
+    ],
     "merged": [
       "amaze",
       "amazing",
@@ -3087,7 +3681,12 @@
       "room",
       "way"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "room",
+      "elbow room",
+      "board",
+      "way"
+    ],
     "merged": [
       "board",
       "elbow room",
@@ -3105,7 +3704,13 @@
       "verbalise",
       "verbalize"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "address",
+      "speak",
+      "verbalize",
+      "talk",
+      "utter"
+    ],
     "merged": [
       "address",
       "mouth",
@@ -3138,7 +3743,13 @@
       "shoot the breeze",
       "visit"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "chat",
+      "chit-chat",
+      "old world chat",
+      "new world chat",
+      "jaw"
+    ],
     "merged": [
       "chaffer",
       "chat",
@@ -3166,7 +3777,10 @@
       "firmness",
       "steadiness"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "steadiness",
+      "firmness"
+    ],
     "merged": [
       "firmness",
       "steadiness"
@@ -3231,7 +3845,13 @@
       "view as",
       "withstand"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "held",
+      "hold back",
+      "keep back",
+      "go for",
+      "take hold"
+    ],
     "merged": [
       "accommodate",
       "adjudge",
@@ -3299,7 +3919,13 @@
       "reply",
       "response"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "response",
+      "reaction",
+      "reply",
+      "answer",
+      "reception"
+    ],
     "merged": [
       "answer",
       "reaction",
@@ -3317,7 +3943,13 @@
       "potency",
       "strength"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "effectiveness",
+      "strength",
+      "potency",
+      "effectivity",
+      "effectuality"
+    ],
     "merged": [
       "effectiveness",
       "effectivity",
@@ -3336,7 +3968,13 @@
       "factor",
       "ingredient"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "element",
+      "chemical element",
+      "component",
+      "factor",
+      "constituent"
+    ],
     "merged": [
       "chemical element",
       "component",
@@ -3357,7 +3995,13 @@
       "geological fault",
       "shift"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "fracture",
+      "shift",
+      "break",
+      "faulting",
+      "geological fault"
+    ],
     "merged": [
       "break",
       "crack",
@@ -3407,7 +4051,13 @@
       "theatre",
       "theatre of operations"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "field",
+      "playing field",
+      "subject field",
+      "force field",
+      "athletic field"
+    ],
     "merged": [
       "airfield",
       "area",
@@ -3451,7 +4101,10 @@
       "chart",
       "graph"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "chart",
+      "graph"
+    ],
     "merged": [
       "chart",
       "graph"
@@ -3490,7 +4143,13 @@
       "twist",
       "wrench"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "pull",
+      "pull out",
+      "pull up",
+      "pull in",
+      "tear"
+    ],
     "merged": [
       "attract",
       "clout",
@@ -3529,7 +4188,10 @@
       "stabiliser",
       "stabilizer"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "stabiliser",
+      "stabilizer"
+    ],
     "merged": [
       "stabiliser",
       "stabilizer"
@@ -3553,7 +4215,13 @@
       "weaken",
       "yield"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "softened",
+      "mince",
+      "muffled",
+      "break",
+      "cushion"
+    ],
     "merged": [
       "break",
       "buffer",
@@ -3589,7 +4257,13 @@
       "permit",
       "rent"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "let",
+      "have",
+      "army of the righteous",
+      "countenance",
+      "army of the pure"
+    ],
     "merged": [
       "allow",
       "army of the pure",
@@ -3612,7 +4286,10 @@
       "export",
       "exportation"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "export",
+      "exportation"
+    ],
     "merged": [
       "export",
       "exportation"
@@ -3622,7 +4299,9 @@
     "wordnet": [
       "glyph"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "glyph"
+    ],
     "merged": [
       "glyph"
     ]
@@ -3637,7 +4316,13 @@
       "potential drop",
       "voltage"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "voltage",
+      "electromotive force",
+      "potential drop",
+      "electric potential",
+      "potential difference"
+    ],
     "merged": [
       "electric potential",
       "electromotive force",
@@ -3674,7 +4359,13 @@
       "utilization",
       "utilize"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "use",
+      "use of goods and services",
+      "employ",
+      "practice",
+      "usage"
+    ],
     "merged": [
       "apply",
       "consumption",
@@ -3713,7 +4404,12 @@
       "sweep",
       "voyage"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "sail",
+      "navigate",
+      "sweep",
+      "voyage"
+    ],
     "merged": [
       "navigate",
       "sail",
@@ -3732,7 +4428,13 @@
       "select",
       "take"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "chosen",
+      "pick out",
+      "prefer",
+      "elect",
+      "choose"
+    ],
     "merged": [
       "choose",
       "chosen",
@@ -3748,7 +4450,9 @@
     "wordnet": [
       "justification"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "justification"
+    ],
     "merged": [
       "justification"
     ]
@@ -3764,7 +4468,13 @@
       "protraction",
       "sequel"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "continuance",
+      "continuation",
+      "good continuation",
+      "law of continuation",
+      "prolongation"
+    ],
     "merged": [
       "continuance",
       "continuation",
@@ -3783,7 +4493,12 @@
       "indicant",
       "indicator"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "index",
+      "indicator",
+      "index number",
+      "indicant"
+    ],
     "merged": [
       "index",
       "index number",
@@ -3803,7 +4518,13 @@
       "sentence",
       "time"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "time",
+      "clock time",
+      "fourth dimension",
+      "prison term",
+      "sentence"
+    ],
     "merged": [
       "clip",
       "clock",
@@ -3823,7 +4544,12 @@
       "expanding upon",
       "expansion"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "expansion",
+      "expanding upon",
+      "enlargement",
+      "elaboration"
+    ],
     "merged": [
       "elaboration",
       "enlargement",
@@ -3838,7 +4564,12 @@
       "once more",
       "over again"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "again",
+      "once again",
+      "once more",
+      "over again"
+    ],
     "merged": [
       "again",
       "once again",
@@ -3861,7 +4592,13 @@
       "require",
       "take"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "expect",
+      "ask",
+      "inquire",
+      "need",
+      "call for"
+    ],
     "merged": [
       "ask",
       "call for",
@@ -3881,7 +4618,9 @@
     "wordnet": [
       "myth"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "myth"
+    ],
     "merged": [
       "myth"
     ]
@@ -3901,7 +4640,13 @@
       "waiting",
       "waitress"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "wait",
+      "look",
+      "expect",
+      "hold back",
+      "waiting"
+    ],
     "merged": [
       "await",
       "delay",
@@ -3925,7 +4670,13 @@
       "ever so",
       "of all time"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "ever",
+      "ever so",
+      "always",
+      "of all time",
+      "e'er"
+    ],
     "merged": [
       "always",
       "e'er",
@@ -3941,7 +4692,12 @@
       "excited",
       "worked up"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "emotional",
+      "excited",
+      "worked up",
+      "aroused"
+    ],
     "merged": [
       "aroused",
       "emotional",
@@ -3968,7 +4724,13 @@
       "universe",
       "world"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "creation",
+      "world",
+      "cosmos",
+      "existence",
+      "universe"
+    ],
     "merged": [
       "conception",
       "cosmos",
@@ -3996,7 +4758,13 @@
       "residential area",
       "residential district"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "community",
+      "community of interests",
+      "biotic community",
+      "residential area",
+      "residential district"
+    ],
     "merged": [
       "biotic community",
       "community",
@@ -4012,7 +4780,12 @@
       "respond",
       "response"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "reply",
+      "response",
+      "answer",
+      "respond"
+    ],
     "merged": [
       "answer",
       "reply",
@@ -4034,7 +4807,13 @@
       "respect",
       "reward"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "honour",
+      "honor",
+      "reward",
+      "accolade",
+      "award"
+    ],
     "merged": [
       "abide by",
       "accolade",
@@ -4060,7 +4839,13 @@
       "hint",
       "intimation"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "breath",
+      "breathing time",
+      "breathing place",
+      "breathing space",
+      "breathing spell"
+    ],
     "merged": [
       "breath",
       "breather",
@@ -4080,7 +4865,13 @@
       "mind",
       "take heed"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "listen",
+      "hear",
+      "mind",
+      "take heed",
+      "heed"
+    ],
     "merged": [
       "hear",
       "heed",
@@ -4094,7 +4885,10 @@
       "omega",
       "z"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "omega",
+      "z"
+    ],
     "merged": [
       "omega",
       "z"
@@ -4108,7 +4902,13 @@
       "intention",
       "purpose"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "intent",
+      "intention",
+      "purpose",
+      "aim",
+      "design"
+    ],
     "merged": [
       "aim",
       "design",
@@ -4126,7 +4926,13 @@
       "nutrify",
       "sustain"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "nourished",
+      "nourish",
+      "sustain",
+      "nurture",
+      "aliment"
+    ],
     "merged": [
       "aliment",
       "nourish",
@@ -4158,7 +4964,13 @@
       "trailing",
       "traverse"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "tracking",
+      "traverse",
+      "pass over",
+      "cross",
+      "tag"
+    ],
     "merged": [
       "chase",
       "chase after",
@@ -4196,7 +5008,13 @@
       "loop topology",
       "loop-the-loop"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "loop",
+      "closed circuit",
+      "loop topology",
+      "loop-the-loop",
+      "coil"
+    ],
     "merged": [
       "closed circuit",
       "coil",
@@ -4216,7 +5034,9 @@
     "wordnet": [
       "proto"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "proto"
+    ],
     "merged": [
       "proto"
     ]
@@ -4232,7 +5052,13 @@
       "shell",
       "shield"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "shield",
+      "buckler",
+      "screen",
+      "cuticle",
+      "shell"
+    ],
     "merged": [
       "buckler",
       "carapace",
@@ -4256,7 +5082,13 @@
       "surrender",
       "yielding"
     ],
-    "spacy_top": [],
+    "spacy_top": [
+      "surrender",
+      "give up",
+      "capitulation",
+      "resignation",
+      "giving up"
+    ],
     "merged": [
       "capitulation",
       "cede",
