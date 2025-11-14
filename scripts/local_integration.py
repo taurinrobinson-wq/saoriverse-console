@@ -57,3 +57,25 @@ def remote_ai_error(msg: str = None):
         "Set PROCESSING_MODE to a non-local value or set ALLOW_REMOTE_AI=1 to opt in."
     )
     raise RuntimeError(msg or default)
+
+
+def enforce_local_mode_guard():
+    """Fail-fast guard: if running in local mode and an OpenAI key is present,
+    raise a RuntimeError. This makes accidental use of remote AI loudly visible.
+
+    Callers: executed at module import to enforce policy early.
+    """
+    try:
+        mode = get_processing_mode()
+    except Exception:
+        mode = os.environ.get('PROCESSING_MODE', 'local')
+
+    if mode == "local" and os.environ.get("OPENAI_API_KEY"):
+        raise RuntimeError(
+            "OPENAI_API_KEY present while PROCESSING_MODE='local'. "
+            "Remove the key or set PROCESSING_MODE to a non-local value to allow remote AI."
+        )
+
+
+# Enforce guard at import time so local-first violations are visible immediately.
+enforce_local_mode_guard()
