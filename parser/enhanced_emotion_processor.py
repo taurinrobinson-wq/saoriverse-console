@@ -7,18 +7,43 @@ import logging
 from typing import Dict, List, Optional, Tuple
 from collections import defaultdict
 
-# Import NLP libraries
+# Import NLP libraries individually so a missing optional dependency
+# (e.g., TextBlob) does not disable the rest of the processor.
+NLP_AVAILABLE = False
+NRC_AVAILABLE = False
+TEXTBLOB_AVAILABLE = False
+SPACY_AVAILABLE = False
+nrc = None
+TextBlob = None
+nlp = None
 try:
     from parser.nrc_lexicon_loader import nrc
+    NRC_AVAILABLE = True
+except Exception as e:
+    logging.debug(f"NRC loader not available: {e}")
+
+try:
     from textblob import TextBlob
+    TEXTBLOB_AVAILABLE = True
+except Exception as e:
+    logging.warning(f"TextBlob not available: {e}")
+
+try:
     import spacy
-    nlp = spacy.load('en_core_web_sm')
-    NLP_AVAILABLE = True
-except ImportError as e:
-    logging.warning(f"NLP libraries not available: {e}")
-    NLP_AVAILABLE = False
+    try:
+        nlp = spacy.load('en_core_web_sm')
+        SPACY_AVAILABLE = True
+    except Exception as e:
+        logging.warning(f"spaCy model 'en_core_web_sm' not available: {e}")
+        SPACY_AVAILABLE = False
+except Exception as e:
+    logging.warning(f"spaCy not available: {e}")
+
+# If any of the components are present we consider enhanced NLP available.
+NLP_AVAILABLE = NRC_AVAILABLE or TEXTBLOB_AVAILABLE or SPACY_AVAILABLE
 
 logger = logging.getLogger(__name__)
+
 
 class EnhancedEmotionProcessor:
     """Enhanced emotion processing using multiple NLP sources for better gate routing."""
@@ -33,11 +58,11 @@ class EnhancedEmotionProcessor:
             'anger': ['Gate 5', 'Gate 4'],    # Anger/Frustration gates
             'joy': ['Gate 5', 'Gate 6'],      # Joy/Creativity gates
             'trust': ['Gate 2', 'Gate 4'],    # Trust/Boundary gates
-            'anticipation': ['Gate 6', 'Gate 5'], # Insight/Creativity
-            'surprise': ['Gate 6', 'Gate 9'], # Insight/Awareness
+            'anticipation': ['Gate 6', 'Gate 5'],  # Insight/Creativity
+            'surprise': ['Gate 6', 'Gate 9'],  # Insight/Awareness
             'disgust': ['Gate 2', 'Gate 5'],  # Boundary/Rejection
-            'positive': ['Gate 5', 'Gate 6'], # General positive
-            'negative': ['Gate 4', 'Gate 10'], # General negative
+            'positive': ['Gate 5', 'Gate 6'],  # General positive
+            'negative': ['Gate 4', 'Gate 10'],  # General negative
         }
 
         # Signal mappings for compatibility with existing system
@@ -57,11 +82,15 @@ class EnhancedEmotionProcessor:
 
         # Polarity-based gate routing for TextBlob integration
         self.polarity_gate_mappings = {
-            'very_negative': ['Gate 4', 'Gate 10'],  # Strong negative → Grief/Loss
+            # Strong negative → Grief/Loss
+            'very_negative': ['Gate 4', 'Gate 10'],
             'negative': ['Gate 4', 'Gate 2'],        # Negative → Grief/Fear
-            'neutral': ['Gate 9', 'Gate 6'],         # Neutral → Awareness/Insight
-            'positive': ['Gate 5', 'Gate 6'],        # Positive → Joy/Creativity
-            'very_positive': ['Gate 5', 'Gate 6'],   # Strong positive → Joy/Creativity
+            # Neutral → Awareness/Insight
+            'neutral': ['Gate 9', 'Gate 6'],
+            # Positive → Joy/Creativity
+            'positive': ['Gate 5', 'Gate 6'],
+            # Strong positive → Joy/Creativity
+            'very_positive': ['Gate 5', 'Gate 6'],
         }
 
     def analyze_emotion_comprehensive(self, text: str) -> Dict:
@@ -95,19 +124,27 @@ class EnhancedEmotionProcessor:
         if nrc and nrc.loaded:
             result['nrc_emotions'] = nrc.analyze_text(text)
 
-        # 2. TextBlob Sentiment Analysis
-        blob = TextBlob(text)
-        result['textblob_sentiment'] = {
-            'polarity': blob.sentiment.polarity,
-            'subjectivity': blob.sentiment.subjectivity
-        }
+        # 2. TextBlob Sentiment Analysis (optional)
+        if TEXTBLOB_AVAILABLE and TextBlob is not None:
+            try:
+                blob = TextBlob(text)
+                result['textblob_sentiment'] = {
+                    'polarity': blob.sentiment.polarity,
+                    'subjectivity': blob.sentiment.subjectivity
+                }
+            except Exception as e:
+                logging.debug(f"TextBlob processing failed: {e}")
 
-        # 3. spaCy Analysis (Entities + Syntax)
-        doc = nlp(text)
-        result['spacy_entities'] = [(ent.text, ent.label_) for ent in doc.ents]
-        
-        # Extract syntactic elements for glyph matching boost
-        result['spacy_syntax'] = self._extract_syntactic_elements(doc)
+        # 3. spaCy Analysis (Entities + Syntax) — optional
+        if SPACY_AVAILABLE and nlp is not None:
+            try:
+                doc = nlp(text)
+                result['spacy_entities'] = [
+                    (ent.text, ent.label_) for ent in doc.ents]
+                # Extract syntactic elements for glyph matching boost
+                result['spacy_syntax'] = self._extract_syntactic_elements(doc)
+            except Exception as e:
+                logging.debug(f"spaCy processing failed: {e}")
 
         # 4. Determine dominant emotion and gates
         dominant_emotion, confidence, gates = self._determine_dominant_emotion(
@@ -155,7 +192,8 @@ class EnhancedEmotionProcessor:
         if nrc_weighted and max(nrc_weighted.values()) > 0.3:  # Strong NRC signal
             dominant_nrc = max(nrc_weighted.items(), key=lambda x: x[1])
             dominant_emotion = dominant_nrc[0]
-            confidence = dominant_nrc[1] * 0.8  # Slightly reduce confidence for combination
+            # Slightly reduce confidence for combination
+            confidence = dominant_nrc[1] * 0.8
         elif polarity_confidence > 0.6:  # Strong polarity signal
             dominant_emotion = polarity_emotion
             confidence = polarity_confidence * 0.7
@@ -178,7 +216,7 @@ class EnhancedEmotionProcessor:
             'verbs': [],
             'adjectives': []
         }
-        
+
         # Emotional word lists for filtering
         emotional_verbs = {
             'feel', 'feeling', 'felt', 'experience', 'experiencing', 'overwhelm', 'overwhelmed',
@@ -191,7 +229,7 @@ class EnhancedEmotionProcessor:
             'hope', 'hoping', 'hopeful', 'despair', 'despairing', 'desperate', 'trust', 'trusting',
             'doubt', 'doubting', 'confuse', 'confusing', 'confused', 'clarity', 'clear', 'clearing'
         }
-        
+
         emotional_adjectives = {
             'overwhelmed', 'overwhelming', 'anxious', 'nervous', 'worried', 'fearful', 'afraid',
             'scared', 'terrified', 'sad', 'sorrowful', 'grieving', 'mournful', 'angry', 'furious',
@@ -201,34 +239,35 @@ class EnhancedEmotionProcessor:
             'exhausted', 'energized', 'drained', 'heavy', 'light', 'burdened', 'free', 'trapped',
             'stuck', 'lost', 'found', 'broken', 'healed', 'wounded', 'scarred', 'vulnerable', 'strong'
         }
-        
+
         for token in doc:
             if token.is_stop or token.is_punct or token.is_space:
                 continue
-                
+
             lemma = token.lemma_.lower()
-            
+
             # Extract nouns (focus on emotional/abstract nouns)
             if token.pos_ in ['NOUN', 'PROPN']:
                 # Include emotional nouns and key abstract concepts
-                if (lemma in emotional_verbs or lemma in emotional_adjectives or 
-                    any(emotion in lemma for emotion in ['pain', 'hurt', 'loss', 'grief', 'joy', 'love', 'fear', 'anger', 'anxiety', 'stress', 'peace', 'calm', 'chaos', 'clarity', 'confusion', 'doubt', 'trust', 'hope', 'despair'])):
+                if (lemma in emotional_verbs or lemma in emotional_adjectives or
+                        any(emotion in lemma for emotion in ['pain', 'hurt', 'loss', 'grief', 'joy', 'love', 'fear', 'anger', 'anxiety', 'stress', 'peace', 'calm', 'chaos', 'clarity', 'confusion', 'doubt', 'trust', 'hope', 'despair'])):
                     syntactic_elements['nouns'].append(lemma)
-            
+
             # Extract verbs (focus on emotional verbs)
             elif token.pos_ == 'VERB':
                 if lemma in emotional_verbs:
                     syntactic_elements['verbs'].append(lemma)
-            
+
             # Extract adjectives (focus on emotional adjectives)
             elif token.pos_ == 'ADJ':
                 if lemma in emotional_adjectives:
                     syntactic_elements['adjectives'].append(lemma)
-        
+
         # Remove duplicates while preserving order
         for key in syntactic_elements:
-            syntactic_elements[key] = list(dict.fromkeys(syntactic_elements[key]))
-        
+            syntactic_elements[key] = list(
+                dict.fromkeys(syntactic_elements[key]))
+
         return syntactic_elements
 
     def _generate_enhanced_signals(self, dominant_emotion: str, confidence: float, text: str) -> List[Dict]:
@@ -252,7 +291,8 @@ class EnhancedEmotionProcessor:
         if confidence > 0.6:
             # Add related emotions with lower confidence
             related_emotions = self._get_related_emotions(dominant_emotion)
-            for related in related_emotions[:2]:  # Limit to 2 secondary signals
+            # Limit to 2 secondary signals
+            for related in related_emotions[:2]:
                 if related in self.emotion_signal_mappings:
                     signal, voltage, tone = self.emotion_signal_mappings[related]
                     signals.append({
@@ -329,7 +369,7 @@ class EnhancedEmotionProcessor:
         existing_count = len(existing_signals)
         nlp_confidence = analysis['confidence']
         has_strong_nrc = bool(analysis['nrc_emotions'] and
-                             max(analysis['nrc_emotions'].values()) > 1)
+                              max(analysis['nrc_emotions'].values()) > 1)
 
         if existing_count == 0 and nlp_confidence > 0.6:
             return 'nlp_primary'  # Use NLP analysis as primary
@@ -344,18 +384,21 @@ class EnhancedEmotionProcessor:
 # Singleton instance
 enhanced_processor = EnhancedEmotionProcessor()
 
+
 def analyze_emotion_enhanced(text: str) -> Dict:
     """Convenience function for enhanced emotion analysis."""
     return enhanced_processor.analyze_emotion_comprehensive(text)
+
 
 def enhance_gate_routing(existing_signals: List[Dict], text: str) -> Dict:
     """Convenience function for enhanced gate routing."""
     return enhanced_processor.enhance_gate_routing(existing_signals, text)
 
+
 def extract_syntactic_elements(text: str) -> Dict[str, List[str]]:
     """Convenience function to extract syntactic elements for glyph matching boost."""
     if not NLP_AVAILABLE:
         return {'nouns': [], 'verbs': [], 'adjectives': []}
-    
+
     doc = nlp(text)
     return enhanced_processor._extract_syntactic_elements(doc)

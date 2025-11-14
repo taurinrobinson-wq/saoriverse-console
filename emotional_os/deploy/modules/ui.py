@@ -365,9 +365,10 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # Simulate a 401 HTTP error to test our improved fallback messages
         class MockResponse:
             status_code = 401
+
             def json(self):
                 return {"error": "Authentication failed - this is a test"}
-        
+
         mock_response = MockResponse()
         # This will trigger our improved fallback logic
         try:
@@ -375,11 +376,11 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
             ai_reply = body.get('reply') or body.get('error') or ''
         except Exception:
             ai_reply = ''
-        
+
         if ai_reply:
             composed, debug = decode_ai_reply(ai_reply, conversation_context)
             return composed, debug, local_analysis
-            
+
         fallback = (
             f"AI service error (HTTP {mock_response.status_code}).\n"
             f"Local Analysis: {voltage_response}\n"
@@ -1186,12 +1187,16 @@ def render_main_app():
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
                 svg_markup_side = _load_inline_svg(svg_name_side)
+                # Constrain the sidebar logo so it cannot render overly large
+                # and keep the account panel concise. Remove the old promotional
+                # sentence and use a compact inline SVG container.
                 st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
+                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n<div style=\"width:96px; margin:0 auto;\">{svg_markup_side}</div>\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n</div>", unsafe_allow_html=True)
             except Exception:
                 st.markdown("### Account")
+            # Preserve an extra leading space as requested for visual spacing
             st.markdown(
-                "Create an account or sign in to keep your conversations and enable full features.")
+                " Create an account or sign in to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
@@ -1306,7 +1311,8 @@ def render_main_app():
                 # Optimistically add this new conversation to the session cache
                 try:
                     cid = st.session_state['current_conversation_id']
-                    cached = st.session_state.setdefault('session_cached_conversations', [])
+                    cached = st.session_state.setdefault(
+                        'session_cached_conversations', [])
                     # Avoid duplicates
                     if not any(c.get('conversation_id') == cid for c in cached):
                         cached.insert(0, {
@@ -1486,17 +1492,22 @@ def render_main_app():
             try:
                 conv = mgr.load_conversation(selected)
                 if conv:
-                    msgs = conv.get('messages') if isinstance(conv.get('messages'), list) else conv.get('messages', [])
+                    msgs = conv.get('messages') if isinstance(
+                        conv.get('messages'), list) else conv.get('messages', [])
                     st.session_state[conversation_key] = msgs or []
-                    st.session_state['current_conversation_id'] = conv.get('conversation_id', selected)
-                    st.session_state['conversation_title'] = conv.get('title', st.session_state.get('conversation_title', 'Conversation'))
+                    st.session_state['current_conversation_id'] = conv.get(
+                        'conversation_id', selected)
+                    st.session_state['conversation_title'] = conv.get(
+                        'title', st.session_state.get('conversation_title', 'Conversation'))
                 else:
                     try:
-                        st.sidebar.warning('Could not load the selected conversation (not found).')
+                        st.sidebar.warning(
+                            'Could not load the selected conversation (not found).')
                     except Exception:
                         pass
             except Exception as e:
-                logger.warning(f"Failed to load selected conversation {selected}: {e}")
+                logger.warning(
+                    f"Failed to load selected conversation {selected}: {e}")
                 try:
                     st.sidebar.error(f'Error loading conversation: {e}')
                 except Exception:
@@ -1929,9 +1940,11 @@ def render_main_app():
                                         # otherwise fall back to a locally-generated summary.
                                         try:
                                             body = response_data.json()
-                                            response = body.get('reply') or body.get('error') or ''
+                                            response = body.get(
+                                                'reply') or body.get('error') or ''
                                         except Exception:
-                                            response = (getattr(response_data, 'text', '') or '').strip()
+                                            response = (
+                                                getattr(response_data, 'text', '') or '').strip()
 
                                         if not response:
                                             response = (
@@ -2119,7 +2132,8 @@ def render_main_app():
                     title = generate_auto_name(user_input)
                     st.session_state['conversation_title'] = title
                 else:
-                    st.session_state['conversation_title'] = st.session_state.get('conversation_title', 'New Conversation')
+                    st.session_state['conversation_title'] = st.session_state.get(
+                        'conversation_title', 'New Conversation')
         except Exception:
             pass
 
@@ -2128,14 +2142,17 @@ def render_main_app():
         # fails or is pending.
         try:
             cid = st.session_state.get('current_conversation_id', 'default')
-            cached = st.session_state.setdefault('session_cached_conversations', [])
+            cached = st.session_state.setdefault(
+                'session_cached_conversations', [])
             updated = False
             if isinstance(cached, list):
                 for c in cached:
                     if c and c.get('conversation_id') == cid:
-                        c['title'] = st.session_state.get('conversation_title', c.get('title', 'New Conversation'))
+                        c['title'] = st.session_state.get(
+                            'conversation_title', c.get('title', 'New Conversation'))
                         c['updated_at'] = datetime.datetime.now().isoformat()
-                        c['message_count'] = len(st.session_state.get(conversation_key, []))
+                        c['message_count'] = len(
+                            st.session_state.get(conversation_key, []))
                         updated = True
                         break
                 if not updated:
@@ -2317,7 +2334,8 @@ def render_main_app():
                 if success:
                     # On success, ensure the sidebar shows this conversation immediately
                     try:
-                        cached = st.session_state.setdefault('session_cached_conversations', [])
+                        cached = st.session_state.setdefault(
+                            'session_cached_conversations', [])
                         if not any(c.get('conversation_id') == conversation_id for c in cached):
                             cached.insert(0, {
                                 'conversation_id': conversation_id,
