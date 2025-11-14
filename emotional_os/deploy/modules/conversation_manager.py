@@ -401,7 +401,8 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
     try:
         cached = st.session_state.get('session_cached_conversations', [])
         if cached and isinstance(cached, list):
-            seen = {c.get('conversation_id') for c in conversations if isinstance(c, dict) and c.get('conversation_id')}
+            seen = {c.get('conversation_id') for c in conversations if isinstance(
+                c, dict) and c.get('conversation_id')}
             merged = []
             # Add cached first (fresh items)
             for c in cached:
@@ -441,12 +442,16 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
                     conversation_key = f"conversation_history_{user_id}"
                     loaded = manager.load_conversation(conv['conversation_id'])
                     if loaded:
-                        msgs = loaded.get('messages') if isinstance(loaded.get('messages'), list) else loaded.get('messages', [])
+                        msgs = loaded.get('messages') if isinstance(
+                            loaded.get('messages'), list) else loaded.get('messages', [])
                         st.session_state[conversation_key] = msgs or []
-                        st.session_state['current_conversation_id'] = loaded.get('conversation_id', conv['conversation_id'])
-                        st.session_state['conversation_title'] = loaded.get('title', conv['title'])
+                        st.session_state['current_conversation_id'] = loaded.get(
+                            'conversation_id', conv['conversation_id'])
+                        st.session_state['conversation_title'] = loaded.get(
+                            'title', conv['title'])
                         try:
-                            st.sidebar.success(f"Loaded: {st.session_state['conversation_title']}")
+                            st.sidebar.success(
+                                f"Loaded: {st.session_state['conversation_title']}")
                         except Exception:
                             pass
                         st.rerun()
@@ -470,9 +475,11 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
                 # remove it from the session cache and avoid calling the
                 # server-side delete API which will fail for unsaved items.
                 try:
-                    cached = st.session_state.get('session_cached_conversations', [])
+                    cached = st.session_state.get(
+                        'session_cached_conversations', [])
                     if isinstance(cached, list) and any(c.get('conversation_id') == conv['conversation_id'] for c in cached):
-                        st.session_state['session_cached_conversations'] = [c for c in cached if c.get('conversation_id') != conv['conversation_id']]
+                        st.session_state['session_cached_conversations'] = [
+                            c for c in cached if c.get('conversation_id') != conv['conversation_id']]
                         st.sidebar.success('Deleted local conversation')
                         st.rerun()
                 except Exception:
@@ -508,3 +515,11 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
                 if st.button("Cancel", key=f"cancel_rename_{conv['conversation_id']}"):
                     st.session_state[f"renaming_{conv['conversation_id']}"] = False
                     st.rerun()
+
+
+# Backwards compatibility shim
+def generate_conversation_title(first_message: str, max_length: int = 50) -> str:
+    """Compatibility wrapper for older tests/modules expecting
+    `generate_conversation_title`. Delegates to `generate_auto_name`.
+    """
+    return generate_auto_name(first_message, max_length)
