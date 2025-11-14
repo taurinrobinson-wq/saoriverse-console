@@ -9,3 +9,9 @@ Quickstart
 
 - Install project dependencies (see `requirements.txt`)
 - Run tests: `pytest -q`
+ 
+Bootstrap local env:
+
+```bash
+cp .env.template .env  # Load safe defaults for local-only mode
+```
