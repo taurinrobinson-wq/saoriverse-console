@@ -6,6 +6,7 @@ import os
 import base64
 import json
 import streamlit.components.v1 as components
+from datetime import datetime
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
@@ -44,6 +45,22 @@ except Exception:
         layout="wide",
         initial_sidebar_state="expanded"
     )
+
+# Temporary dev-only visual cue to verify the running app reflects the
+# workspace files. This prints a timestamp so a hard-refresh confirms
+# the server is serving the updated code. Remove after verification.
+try:
+    st.markdown(f"**DEV RELOAD CHECK — UTC:** {datetime.utcnow().isoformat()}")
+except Exception:
+    # Non-fatal: if Streamlit isn't ready to render yet, ignore.
+    pass
+
+# Also emit a log to stdout so the server logs contain a clear marker
+# that the updated script ran. Streamlit forwards stdout to its log.
+try:
+    print(f"DEV RELOAD CHECK UTC {datetime.utcnow().isoformat()}")
+except Exception:
+    pass
 
 
 def safe_embed_html(content: str, height: int | None = None, use_iframe: bool = True) -> None:
