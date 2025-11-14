@@ -601,6 +601,29 @@ def render_splash_interface(auth):
         )
     except Exception:
         pass
+    # Reduce top padding of the main block so the main content (chat)
+    # aligns more closely with the beginning of the sidebar containers.
+    # This is a conservative CSS tweak that adjusts Streamlit's default
+    # block container padding without modifying structural layout.
+    try:
+        st.markdown(
+            """
+            <style>
+            /* Reduce top spacing so main content aligns with sidebar */
+            .block-container {
+                padding-top: 0.6rem !important;
+            }
+            /* Ensure chat area and inputs sit flush with sidebar headers */
+            .streamlit-expanderHeader, .streamlit-expanderContent {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+    except Exception:
+        pass
 
     # Add custom CSS for splash screen
     st.markdown("""
