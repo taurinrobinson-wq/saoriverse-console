@@ -728,7 +728,7 @@ def render_splash_interface(auth):
                 if st.button("Sign In", key="splash_sign_in"):
                     st.session_state.show_login = True
                     st.rerun()
-                if st.button("Register", key="splash_register"):
+                if st.button("Create an Account", key="splash_register"):
                     st.session_state.show_register = True
                     st.rerun()
     except Exception:
@@ -1195,8 +1195,10 @@ def render_main_app():
             except Exception:
                 st.markdown("### Account")
             # Preserve an extra leading space as requested for visual spacing
+            st.markdown("<div style='margin-top:16px;'></div>",
+                        unsafe_allow_html=True)
             st.markdown(
-                " Create an account or sign in to keep your conversations and enable full features.")
+                "**Create an Account** or **Sign In** to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
@@ -1208,7 +1210,7 @@ def render_main_app():
                         st.session_state['sidebar_show_register'] = False
                     # No forced rerun here; allow the current render to show the expander
             with col_b:
-                if st.button("Register", key="sidebar_toggle_register"):
+                if st.button("Create an Account", key="sidebar_toggle_register"):
                     st.session_state['sidebar_show_register'] = not st.session_state.get(
                         'sidebar_show_register', False)
                     if st.session_state['sidebar_show_register']:
@@ -1251,7 +1253,7 @@ def render_main_app():
                         else:
                             st.error("Authentication subsystem unavailable")
                 if st.session_state.get('sidebar_show_register'):
-                    with st.expander("Register", expanded=True):
+                    with st.expander("Create an Account", expanded=True):
                         if auth:
                             auth.render_register_form(in_sidebar=True)
                         else:
