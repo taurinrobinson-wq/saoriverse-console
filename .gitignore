@@ -100,3 +100,6 @@ data/datamuse_synonyms.json
 data/wordnet_synonyms.json
 data/synonyms_merged.json
 data/datamuse_*.json
+# allow logs directory to be committed
+!logs/
+!logs/enrich.log
