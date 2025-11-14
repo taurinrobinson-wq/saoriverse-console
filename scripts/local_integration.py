@@ -30,3 +30,30 @@ def get_synonyms(seed: str, top_k: int = 5) -> List[Dict]:
         return query_synonyms(seed, top_k)
     except Exception:
         return []
+
+
+def remote_ai_allowed() -> bool:
+    """Return True when remote AI calls are allowed.
+
+    Policy:
+    - If `get_processing_mode()` is not 'local', allow remote AI.
+    - Otherwise only allow if env var `ALLOW_REMOTE_AI` is set to '1'.
+    """
+    mode = get_processing_mode()
+    if mode != "local":
+        return True
+    return os.environ.get("ALLOW_REMOTE_AI", "0") == "1"
+
+
+def remote_ai_error(msg: str = None):
+    """Raise a RuntimeError describing that remote AI is disabled.
+
+    This helper centralizes the error message so callers can raise a consistent
+    error when an API that would call external services is invoked while the
+    repository is configured to run local-only.
+    """
+    default = (
+        "Remote AI calls are disabled (processing mode 'local'). "
+        "Set PROCESSING_MODE to a non-local value or set ALLOW_REMOTE_AI=1 to opt in."
+    )
+    raise RuntimeError(msg or default)
