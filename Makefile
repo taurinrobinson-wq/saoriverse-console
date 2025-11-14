@@ -14,3 +14,6 @@ enrich:
 
 logs:
 	tail -n 20 logs/enrich.log
+
+format:
+	black . && ruff check . --fix
