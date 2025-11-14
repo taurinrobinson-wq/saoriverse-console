@@ -2960,10 +2960,346 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-11-13T02:50:28.572824"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Serenity & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "serenity",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and sensuality present here",
+      "narrative_hook": "A story where serenity meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.536521"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Serenity & Nostalgia",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "serenity",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and nostalgia present here",
+      "narrative_hook": "A story where serenity meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.541525"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Serenity & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "serenity",
+        "longing"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and longing present here",
+      "narrative_hook": "A story where serenity meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.545723"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_4",
+      "name": "Serenity & Solitude",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "serenity",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and solitude present here",
+      "narrative_hook": "A story where serenity meets solitude",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.549908"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_5",
+      "name": "Sensuality & Nostalgia",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and nostalgia present here",
+      "narrative_hook": "A story where sensuality meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.553983"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_6",
+      "name": "Sensuality & Longing",
+      "symbol": "\ud83c\udf39\ud83c\udfbb",
+      "core_emotions": [
+        "sensuality",
+        "longing"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and longing present here",
+      "narrative_hook": "A story where sensuality meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.558053"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_7",
+      "name": "Sensuality & Solitude",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and solitude present here",
+      "narrative_hook": "A story where sensuality meets solitude",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.562378"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_8",
+      "name": "Nostalgia & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "nostalgia",
+        "longing"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and longing present here",
+      "narrative_hook": "A story where nostalgia meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.566528"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_9",
+      "name": "Nostalgia & Solitude",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "nostalgia",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and solitude present here",
+      "narrative_hook": "A story where nostalgia meets solitude",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.571013"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_10",
+      "name": "Longing & Solitude",
+      "symbol": "\ud83c\udfbb\ud83d\udcab",
+      "core_emotions": [
+        "longing",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "longing",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and solitude present here",
+      "narrative_hook": "A story where longing meets solitude",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:09.575326"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Sensuality & Vulnerability",
+      "symbol": "\ud83c\udf39\ud83c\udf31",
+      "core_emotions": [
+        "sensuality",
+        "vulnerability"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "vulnerability"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and vulnerability present here",
+      "narrative_hook": "A story where sensuality meets vulnerability",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:41.208811"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Sensuality & Serenity",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and serenity present here",
+      "narrative_hook": "A story where sensuality meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:41.213589"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Sensuality & Nostalgia",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and nostalgia present here",
+      "narrative_hook": "A story where sensuality meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:41.218373"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_4",
+      "name": "Vulnerability & Serenity",
+      "symbol": "\ud83c\udf31\ud83d\udcab",
+      "core_emotions": [
+        "vulnerability",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "vulnerability"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the vulnerability and serenity present here",
+      "narrative_hook": "A story where vulnerability meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:41.222720"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_5",
+      "name": "Vulnerability & Nostalgia",
+      "symbol": "\ud83c\udf31\ud83d\udcab",
+      "core_emotions": [
+        "vulnerability",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "vulnerability",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the vulnerability and nostalgia present here",
+      "narrative_hook": "A story where vulnerability meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:41.227115"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_6",
+      "name": "Serenity & Nostalgia",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "serenity",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and nostalgia present here",
+      "narrative_hook": "A story where serenity meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-13T22:30:41.231789"
     }
   ],
   "metadata": {
-    "total_discovered": 141,
-    "last_updated": "2025-11-13T02:50:28.573107"
+    "total_discovered": 157,
+    "last_updated": "2025-11-13T22:30:41.232023"
   }
 }
