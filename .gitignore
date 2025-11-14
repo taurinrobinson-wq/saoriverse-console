@@ -92,3 +92,11 @@ secrets.*
 *.bak.*
 streamlit.pid
 streamlit.log
+
+# Caches and large auto-generated artefacts
+cache/
+cache/datamuse/
+data/datamuse_synonyms.json
+data/wordnet_synonyms.json
+data/synonyms_merged.json
+data/datamuse_*.json
