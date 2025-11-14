@@ -24,6 +24,8 @@ class HybridPipelineTests(unittest.TestCase):
         st.session_state.user_id = 'test-user'
         st.session_state.processing_mode = 'hybrid'
         st.session_state.prefer_ai = True
+        # Show local decoding in tests so hybrid composition includes debug annotations
+        st.session_state.show_local_decoding = True
 
     def test_hybrid_composition(self):
         effective_input = "I feel overwhelmed and want the weather in LA"
@@ -73,9 +75,9 @@ class HybridPipelineTests(unittest.TestCase):
         effective_input = "Run in local mode: I want to test privacy."
         conversation_context = {}
 
-        # No AI endpoint
+        # No AI endpoint (privacy mode) - pass empty strings to satisfy type hints
         composed, debug, local = ui.run_hybrid_pipeline(
-            effective_input, conversation_context, None, None)
+            effective_input, conversation_context, '', '')
         self.assertIn('AI enhancement unavailable', composed)
 
     def test_parse_failure_fallback_to_ai_reply(self):
