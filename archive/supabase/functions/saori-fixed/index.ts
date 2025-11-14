@@ -24,6 +24,11 @@ const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPA
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 
+// Remote AI guard for edge functions
+function remoteAiAllowed(): boolean {
+  return (Deno.env.get("PROCESSING_MODE") || "local") !== "local" || Deno.env.get("ALLOW_REMOTE_AI") === "1";
+}
+
 (function assertEnv() {
   const missing = [];
   if (!SUPABASE_URL) missing.push("SUPABASE_URL");
@@ -41,6 +46,11 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: "Server misconfiguration: required secrets missing." }), { status: 500, headers: corsHeaders });
   }
 
+  // Prevent running remote OpenAI calls in local-only mode
+  if (!remoteAiAllowed()) {
+    return new Response(JSON.stringify({ error: "Remote AI disabled in local mode. Set PROCESSING_MODE!=local or ALLOW_REMOTE_AI=1 to enable." }), { status: 403, headers: corsHeaders });
+  }
+
   const authHeader = req.headers.get("Authorization") ?? "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
 
@@ -55,7 +65,7 @@ Deno.serve(async (req) => {
     try {
       const { data } = await userClient.auth.getUser();
       if (data?.user) userId = data.user.id;
-    } catch {}
+    } catch { }
   }
 
   let body;
@@ -71,51 +81,51 @@ Deno.serve(async (req) => {
   if (requestUserId) userId = requestUserId;
   if (!message) return new Response(JSON.stringify({ error: "Missing 'message'" }), { status: 400, headers: corsHeaders });
 
-// 1. Mode-based tone map
-const toneMap = {
-  hybrid: "editorial and private",
-  local: "plain and conversational",
-  ai_preferred: "emotionally attuned and responsive",
-  quick: "regular and grounded"
-};
+  // 1. Mode-based tone map
+  const toneMap = {
+    hybrid: "editorial and private",
+    local: "plain and conversational",
+    ai_preferred: "emotionally attuned and responsive",
+    quick: "regular and grounded"
+  };
 
-// 2. Extract override tone from mode
-const overrideTone = toneMap[mode] ?? null;
+  // 2. Extract override tone from mode
+  const overrideTone = toneMap[mode] ?? null;
 
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+  const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
-const input = message.toLowerCase();
-const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
-const wantsFunny = /make me laugh|be funny|roast me|joke|silly|playful/.test(input);
+  const input = message.toLowerCase();
+  const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
+  const wantsFunny = /make me laugh|be funny|roast me|joke|silly|playful/.test(input);
 
-// 3. Emotional tag matching
-let matchedTag = null;
-try {
-  const tagQuery = wantsPlain
-    ? admin.from("emotional_tags").select("*").eq("tag_name", "plain").single()
-    : wantsFunny
-    ? admin.from("emotional_tags").select("*").eq("tag_name", "playful").single()
-    : userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
-  const { data } = await tagQuery;
-  matchedTag = data ?? null;
-} catch (e) {
-  console.error("Tag lookup failed:", e);
-}
+  // 3. Emotional tag matching
+  let matchedTag = null;
+  try {
+    const tagQuery = wantsPlain
+      ? admin.from("emotional_tags").select("*").eq("tag_name", "plain").single()
+      : wantsFunny
+        ? admin.from("emotional_tags").select("*").eq("tag_name", "playful").single()
+        : userClient.from("emotional_tags").select("*").ilike("tag_name", `%${input}%`);
+    const { data } = await tagQuery;
+    matchedTag = data ?? null;
+  } catch (e) {
+    console.error("Tag lookup failed:", e);
+  }
 
-// 4. Editorial switchboard with mode override taking priority
-const tone = overrideTone ?? matchedTag?.tone_profile ?? "regular and grounded";
-const cadence = matchedTag?.cadence ?? "poetic and flowing";
-const depthTone = matchedTag?.depth_level ?? "emotional excavation";
-const style = matchedTag?.style_variant ?? "oracle";
-const humor = matchedTag?.humor_style ?? "none";
-const voltage = matchedTag?.glyph ?? "γ × γ";
-const domain = matchedTag?.domain ?? "Unspecified";
-const coreEmotion = matchedTag?.core_emotion ?? "Ambiguity";
-const responseType = matchedTag?.response_type ?? "Reflect";
-const hook = matchedTag?.narrative_hook ?? "Saori listens in silence.";
+  // 4. Editorial switchboard with mode override taking priority
+  const tone = overrideTone ?? matchedTag?.tone_profile ?? "regular and grounded";
+  const cadence = matchedTag?.cadence ?? "poetic and flowing";
+  const depthTone = matchedTag?.depth_level ?? "emotional excavation";
+  const style = matchedTag?.style_variant ?? "oracle";
+  const humor = matchedTag?.humor_style ?? "none";
+  const voltage = matchedTag?.glyph ?? "γ × γ";
+  const domain = matchedTag?.domain ?? "Unspecified";
+  const coreEmotion = matchedTag?.core_emotion ?? "Ambiguity";
+  const responseType = matchedTag?.response_type ?? "Reflect";
+  const hook = matchedTag?.narrative_hook ?? "Saori listens in silence.";
 
-// 5. System prompt construction
-const systemPrompt = `
+  // 5. System prompt construction
+  const systemPrompt = `
 You are Saori, an emotionally intelligent companion.
 Avoid mythic, poetic, or ceremonial language. Respond in a grounded, editorial tone.
 
@@ -134,21 +144,21 @@ If humor is appropriate, use ${humor} to deepen intimacy or defuse tension.
 Honor ambiguity where it serves connection. Mirror the user's emotional state with care.
 `.trim();
 
-// 6. Completion call
-let reply = "Saori echoes your words, though the oracle sleeps.";
-try {
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: message }
-    ],
-    temperature: 0.7
-  });
-  reply = completion.choices?.[0]?.message?.content ?? reply;
-} catch (err) {
-  console.error("OpenAI error:", err);
-}
+  // 6. Completion call
+  let reply = "Saori echoes your words, though the oracle sleeps.";
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: message }
+      ],
+      temperature: 0.7
+    });
+    reply = completion.choices?.[0]?.message?.content ?? reply;
+  } catch (err) {
+    console.error("OpenAI error:", err);
+  }
 
   let parsedGlyphs = [];
   try {
