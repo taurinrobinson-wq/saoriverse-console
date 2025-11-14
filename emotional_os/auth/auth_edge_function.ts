@@ -1,5 +1,6 @@
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import { createHash, pbkdf2Sync, randomBytes } from "node:crypto";
+import { Buffer } from "node:buffer";
 
 // Authentication Edge Function for Emotional OS
 // Handles user registration, login, and session management with privacy isolation
@@ -66,7 +67,18 @@ async function ensureUsersTable(admin: any) {
 // Create user account
 async function createUser(data: any, admin: any): Promise<any> {
   try {
+    console.log("DEBUG: createUser called with data:", JSON.stringify(data, null, 2));
+
     const { username, password_hash, salt, password, email, first_name, last_name, created_at } = data;
+
+    console.log("DEBUG: Destructured values:", {
+      username: typeof username + " - " + username,
+      password: typeof password + " - " + (password ? "[REDACTED]" : "null/undefined"),
+      email: typeof email + " - " + email,
+      first_name: typeof first_name + " - " + first_name,
+      last_name: typeof last_name + " - " + last_name,
+      created_at: typeof created_at + " - " + created_at
+    });
 
     // If client supplied a raw password, hash it server-side so we always store a hash+salt
     let final_password_hash = password_hash;
@@ -91,18 +103,34 @@ async function createUser(data: any, admin: any): Promise<any> {
       };
     }
 
-    // Create new user (include first_name / last_name when provided)
+    // Check if email already exists (if email is provided)
+    if (email && email.trim()) {
+      const { data: existingEmailUser } = await admin
+        .from('users')
+        .select('id')
+        .eq('email', email.trim())
+        .single();
+
+      if (existingEmailUser) {
+        return {
+          success: false,
+          error: "Email address already exists"
+        };
+      }
+    }
+
+    // Create new user (always include first_name / last_name)
     const insertPayload: any = {
       username,
       password_hash: final_password_hash,
       salt: final_salt,
-      email: email || null,
+      email: email ?? '',
+      first_name: first_name ?? '',
+      last_name: last_name ?? '',
       created_at,
       last_login: null,
       is_active: true
     };
-    if (first_name) insertPayload.first_name = first_name;
-    if (last_name) insertPayload.last_name = last_name;
 
     // Debug: log payload being inserted (helps diagnose missing fields after deploy)
     try { console.log("createUser: insertPayload=", JSON.stringify(insertPayload)); } catch (e) { }
@@ -114,7 +142,8 @@ async function createUser(data: any, admin: any): Promise<any> {
       .single();
 
     if (error) {
-      console.error("User creation error:", error);
+      console.error("User creation error:", JSON.stringify(error, null, 2));
+      console.error("Insert payload was:", JSON.stringify(insertPayload, null, 2));
       return {
         success: false,
         error: "Failed to create user account"
