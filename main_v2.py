@@ -5,6 +5,8 @@ from pathlib import Path
 import os
 import base64
 import json
+import streamlit.components.v1 as components
+from datetime import datetime
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
@@ -43,6 +45,55 @@ except Exception:
         layout="wide",
         initial_sidebar_state="expanded"
     )
+
+# Temporary dev-only visual cue to verify the running app reflects the
+# workspace files. This prints a timestamp so a hard-refresh confirms
+# the server is serving the updated code. Remove after verification.
+try:
+    st.markdown(f"**DEV RELOAD CHECK — UTC:** {datetime.utcnow().isoformat()}")
+except Exception:
+    # Non-fatal: if Streamlit isn't ready to render yet, ignore.
+    pass
+
+# Also emit a log to stdout so the server logs contain a clear marker
+# that the updated script ran. Streamlit forwards stdout to its log.
+try:
+    print(f"DEV RELOAD CHECK UTC {datetime.utcnow().isoformat()}")
+except Exception:
+    pass
+
+
+def safe_embed_html(content: str, height: int | None = None, use_iframe: bool = True) -> None:
+    """Embed HTML in a safer, isolated way when possible.
+
+    - Prefers `components.html` (iframe) to avoid leaking styles into the
+      parent Streamlit document. Falls back to `st.markdown(..., unsafe...)`
+      when iframe embedding is not appropriate or fails.
+
+    Parameters
+    - content: HTML/CSS/JS string to embed
+    - height: optional pixel height for the iframe. If None, a small
+      default will be used.
+    - use_iframe: when False, force fallback to `st.markdown`.
+    """
+    try:
+        if use_iframe:
+            # components.html isolates injected markup inside an iframe which
+            # prevents global CSS from leaking into the host app. Use scrolling
+            # so long style blocks won't be clipped.
+            components.html(content, height=height or 160, scrolling=True)
+            return
+    except Exception:
+        # If iframe embedding fails for any reason, fall back to markdown.
+        pass
+
+    # Fallback: inject as raw markdown (preserves previous behaviour)
+    try:
+        st.markdown(content, unsafe_allow_html=True)
+    except Exception:
+        # Last resort: print to STDOUT so diagnostics capture the output
+        print("[safe_embed_html] failed to embed content")
+
 
 # Quick maintenance mode: when MAINTENANCE_MODE=1 is set in the environment,
 # render a simple friendly maintenance page and stop further app execution.
@@ -153,13 +204,28 @@ except Exception:
     pass
 try:
     # Import both the primary renderer and the safe runtime wrapper (if present).
-    from emotional_os.deploy.modules.ui import (
-        render_main_app,
-        render_main_app_safe,
-        render_splash_interface,
-        delete_user_history_from_supabase,
-    )
-    from emotional_os.deploy.modules.auth import SaoynxAuthentication
+    # Use module imports + importlib.reload so Streamlit's re-run will pick up
+    # edits to these modules without requiring a full process restart.
+    import importlib
+    import emotional_os.deploy.modules.ui as _ui_module
+    import emotional_os.deploy.modules.auth as _auth_module
+
+    try:
+        importlib.reload(_ui_module)
+    except Exception:
+        # If reload fails, fall back to the already-imported module object.
+        pass
+
+    try:
+        importlib.reload(_auth_module)
+    except Exception:
+        pass
+
+    render_main_app = _ui_module.render_main_app
+    render_main_app_safe = _ui_module.render_main_app_safe
+    render_splash_interface = _ui_module.render_splash_interface
+    delete_user_history_from_supabase = _ui_module.delete_user_history_from_supabase
+    SaoynxAuthentication = _auth_module.SaoynxAuthentication
 except Exception:
     import traceback
     import sys
@@ -188,7 +254,8 @@ if 'initialized' not in st.session_state:
 
 
 # Customize navigation text
-st.markdown("""
+# [safe_embed_html patch] replaced inline block at original location (Customize navigation text)
+safe_embed_html("""
     <style>
     div.st-emotion-cache-j7qwjs span.st-emotion-cache-6tkfeg {
         visibility: hidden;
@@ -202,11 +269,14 @@ st.markdown("""
         left: 0;
     }
     </style>
-""", unsafe_allow_html=True)
+""", height=120)
 
 # Remove stacked markdown blocks that only contain <style> tags (they create visible padding).
 # This script hides any element-container whose markdown child contains only a <style> element.
-st.markdown("""
+# [safe_embed_html patch - global script] replaced inline script block; this script needs to run in the
+# parent page (it manipulates the DOM outside any iframe), so we force the markdown fallback by
+# setting `use_iframe=False` when calling `safe_embed_html` so the behaviour remains unchanged.
+safe_embed_html("""
 <script>
 (function(){
     function removeStyleOnlyMarkdown(){
@@ -243,12 +313,13 @@ st.markdown("""
     observer.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=240)
 
 # Hide the top brand row (emoji + H1) when the app is embedded in certain layouts.
 # This prevents the duplicated header/title from rendering in pages where space is limited.
 # Targets the header H1 id and the adjacent emoji block.
-st.markdown("""
+# [safe_embed_html patch] replaced header-hide CSS block
+safe_embed_html("""
     <style>
     /* Hide specific header by id */
     /* Primary: hide the H1 Streamlit generates for the page header */
@@ -268,20 +339,23 @@ st.markdown("""
     /* Hide any horizontal block that contains the brand row to avoid layout shift */
     div[data-testid="stHorizontalBlock"] > div > div > div > div > div > div > div > h1 { display: none !important; }
     </style>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=140)
 
 # Target specific Streamlit-generated padding block class and reduce its top padding
-st.markdown("""
-    <style>
-    /* Reduce top padding on the large header container that pushes content down */
-    .st-emotion-cache-7tauuy { padding: 0rem 1rem 1rem !important; }
-    </style>
-""", unsafe_allow_html=True)
+# Target specific Streamlit-generated padding block and reduce its top padding
+# [safe_embed_html patch] replaced padding CSS block
+safe_embed_html("""
+            <style>
+            /* Reduce top padding on the large header container that pushes content down */
+            .st-emotion-cache-7tauuy { padding: 0rem 1rem 1rem !important; }
+            </style>
+        """, use_iframe=False, height=80)
 
 # Apply theme only if not already loaded for this session
 if not st.session_state.get('theme_loaded'):
     if st.session_state.get('theme') == 'Dark':
-        st.markdown("""
+        # [safe_embed_html patch] replaced dark-theme CSS block
+        safe_embed_html("""
             <style>
             body, .stApp {background-color: #0E1117; color: #FAFAFA;}
             .stButton>button {
@@ -290,9 +364,10 @@ if not st.session_state.get('theme_loaded'):
                 border: 1px solid #555;
             }
             </style>
-        """, unsafe_allow_html=True)
+        """, use_iframe=False, height=140)
     else:
-        st.markdown("""
+        # [safe_embed_html patch] replaced light-theme CSS block
+        safe_embed_html("""
             <style>
             body, .stApp {background-color: #FFFFFF; color: #31333F;}
             .stButton>button {
@@ -301,11 +376,13 @@ if not st.session_state.get('theme_loaded'):
                 border: 1px solid #E0E0E0;
             }
             </style>
-        """, unsafe_allow_html=True)
+        """, use_iframe=False, height=140)
     st.session_state['theme_loaded'] = True
 
 # Basic theme compatibility
-st.markdown("""
+# Basic theme compatibility
+# [safe_embed_html patch] replaced basic theme compatibility CSS
+safe_embed_html("""
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
@@ -315,10 +392,12 @@ st.markdown("""
         transition: all 0.2s ease;
     }
     </style>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=100)
 
 # Reduce font sizes in the sidebar for a denser layout
-st.markdown("""
+# Reduce font sizes in the sidebar for a denser layout
+# [safe_embed_html patch] replaced sidebar font-size CSS block
+safe_embed_html("""
     <style>
     /* Target the Streamlit sidebar container and reduce text sizes */
     [data-testid="stSidebar"] { font-size: 0.92rem !important; }
@@ -347,7 +426,7 @@ st.markdown("""
         padding: 6px 10px !important;
     }
     </style>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=220)
 
 # NOTE: the per-session/export download control was intentionally moved into
 # the Privacy & Consent panel (`render_consent_settings_panel`) to avoid
