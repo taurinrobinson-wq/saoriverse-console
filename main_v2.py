@@ -187,13 +187,28 @@ except Exception:
     pass
 try:
     # Import both the primary renderer and the safe runtime wrapper (if present).
-    from emotional_os.deploy.modules.ui import (
-        render_main_app,
-        render_main_app_safe,
-        render_splash_interface,
-        delete_user_history_from_supabase,
-    )
-    from emotional_os.deploy.modules.auth import SaoynxAuthentication
+    # Use module imports + importlib.reload so Streamlit's re-run will pick up
+    # edits to these modules without requiring a full process restart.
+    import importlib
+    import emotional_os.deploy.modules.ui as _ui_module
+    import emotional_os.deploy.modules.auth as _auth_module
+
+    try:
+        importlib.reload(_ui_module)
+    except Exception:
+        # If reload fails, fall back to the already-imported module object.
+        pass
+
+    try:
+        importlib.reload(_auth_module)
+    except Exception:
+        pass
+
+    render_main_app = _ui_module.render_main_app
+    render_main_app_safe = _ui_module.render_main_app_safe
+    render_splash_interface = _ui_module.render_splash_interface
+    delete_user_history_from_supabase = _ui_module.delete_user_history_from_supabase
+    SaoynxAuthentication = _auth_module.SaoynxAuthentication
 except Exception:
     import traceback
     import sys
