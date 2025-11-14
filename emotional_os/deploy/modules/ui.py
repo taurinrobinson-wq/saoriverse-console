@@ -1253,7 +1253,19 @@ def render_main_app():
                         else:
                             st.error("Authentication subsystem unavailable")
                 if st.session_state.get('sidebar_show_register'):
-                    with st.expander("Create an Account", expanded=True):
+                    # Use an empty expander title and render a styled header
+                    # inside the expander so we can center and bold the
+                    # "Create an Account" label consistently across themes.
+                    with st.expander("", expanded=True):
+                        try:
+                            st.markdown(
+                                '<div style="text-align:center; font-weight:700; font-size:1.02rem; margin-bottom:8px;">Create an Account</div>',
+                                unsafe_allow_html=True,
+                            )
+                        except Exception:
+                            # Fallback to plain text if markup fails
+                            st.markdown("**Create an Account**")
+
                         if auth:
                             auth.render_register_form(in_sidebar=True)
                         else:
