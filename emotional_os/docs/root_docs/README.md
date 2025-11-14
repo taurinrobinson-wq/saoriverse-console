@@ -5,7 +5,7 @@ A revolutionary emotional processing system that combines privacy-first glyph en
 ## 🌟 Features
 
 - **Privacy-First Architecture**: Emotional content converted to symbolic glyphs for security
-- **Hybrid Processing**: Choose between local-only, AI-enhanced, or intelligent hybrid modes
+- **Hybrid Processing**: Choose between local-only or an intelligent hybrid mode with AI enhancement
 - **Rich Emotional Taxonomy**: Sophisticated emotional tag system with persona selection
 - **Conversational Interface**: Modern chat-like UI with conversation management
 - **Secure AI Integration**: Supabase edge function integration with encrypted processing

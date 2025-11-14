@@ -220,6 +220,41 @@ def render_consent_settings_panel():
     """Render a control panel for managing consent preferences."""
     st.sidebar.markdown("---")
     with st.sidebar.expander("🛡️ Privacy & Consent", expanded=False):
+        st.markdown("**Conversation Storage**")
+
+        # Save my chats toggle - defaults to FALSE for new users
+        # This is the primary consent mechanism for data persistence
+        persist_default = st.session_state.get('persist_history', False)
+        persist_enabled = st.checkbox(
+            "💾 Save my chats",
+            value=persist_default,
+            help="Store conversations on the server for later retrieval. When disabled, chats are only kept locally in this session."
+        )
+
+        # Show explanation when user first enables it
+        if persist_enabled and not st.session_state.get('persist_history_consent_shown', False):
+            st.info("ℹ️ **What this means:**\n\n"
+                    "✓ Your conversations will be saved to secure cloud storage\n\n"
+                    "✓ You can access them across devices and sessions\n\n"
+                    "✓ All data is encrypted and isolated to your account\n\n"
+                    "✓ You can export or delete your data anytime below")
+            st.session_state['persist_history_consent_shown'] = True
+
+        # Update session state
+        st.session_state['persist_history'] = persist_enabled
+
+        # Save preference to server when available
+        try:
+            mgr = st.session_state.get('conversation_manager')
+            if mgr:
+                mgr.save_user_preferences({
+                    'persist_history': bool(persist_enabled),
+                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
+                })
+        except Exception:
+            pass
+
+        st.divider()
         st.markdown("**Default Anonymization Settings**")
 
         col1, col2 = st.columns(2)
