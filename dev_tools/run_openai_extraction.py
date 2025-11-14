@@ -5,6 +5,23 @@ import urllib.request
 import urllib.error
 import re
 
+# Gate remote AI usage
+try:
+    from scripts.local_integration import remote_ai_allowed, remote_ai_error
+except Exception:
+    # Fallback: if helper not available, be conservative and disallow remote AI
+    def remote_ai_allowed():
+        return False
+
+    def remote_ai_error(msg: str = None):
+        raise RuntimeError(
+            msg or "Remote AI usage is not allowed in this environment")
+
+if not remote_ai_allowed():
+    remote_ai_error(
+        "OpenAI calls are disabled by default. Set PROCESSING_MODE!=local or ALLOW_REMOTE_AI=1 to enable."
+    )
+
 OPENAI_KEY = os.environ.get("OPENAI_API_KEY")
 if not OPENAI_KEY:
     raise SystemExit("OPENAI_API_KEY not found in environment")

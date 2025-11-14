@@ -7,6 +7,14 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 import requests
+try:
+    # Use the centralized guard from scripts/local_integration to determine
+    # whether remote AI calls are allowed.
+    from scripts.local_integration import remote_ai_allowed
+except Exception:
+    # If import fails for any reason, conservatively disallow remote AI.
+    def remote_ai_allowed():
+        return False
 
 
 @dataclass
@@ -16,6 +24,7 @@ class SaoriResponse:
     parsed_glyphs: List[Dict]
     upserted_glyphs: List[Dict]
     log: Dict
+
 
 class SupabaseIntegrator:
     """Integration with your Supabase Saori edge function"""
@@ -42,10 +51,10 @@ class SupabaseIntegrator:
         self.session.headers.update(headers)
 
     def process_message(self,
-                       message: str,
-                       mode: str = "quick",
-                       conversation_context: Dict = None,
-                       conversation_style: str = "conversational") -> SaoriResponse:
+                        message: str,
+                        mode: str = "quick",
+                        conversation_context: Dict = None,
+                        conversation_style: str = "conversational") -> SaoriResponse:
         """
         Send message to your Supabase edge function for processing
         This leverages your complete emotional tagging and AI system
@@ -70,7 +79,8 @@ class SupabaseIntegrator:
             payload["conversation_context"] = conversation_context
 
         try:
-            response = self.session.post(self.function_url, json=payload, timeout=30)
+            response = self.session.post(
+                self.function_url, json=payload, timeout=30)
 
             # Log response details for debugging
             logging.info(f"Supabase response status: {response.status_code}")
@@ -129,6 +139,7 @@ class SupabaseIntegrator:
                 log={"error": error_msg}
             )
 
+
 class HybridEmotionalProcessor:
     """
     Hybrid system that can use either:
@@ -156,10 +167,10 @@ class HybridEmotionalProcessor:
             self.local_available = False
 
     def process_emotional_input(self,
-                               message: str,
-                               conversation_context: Dict = None,
-                               prefer_ai: bool = True,
-                               privacy_mode: bool = False) -> Dict:
+                                message: str,
+                                conversation_context: Dict = None,
+                                prefer_ai: bool = True,
+                                privacy_mode: bool = False) -> Dict:
         """
         Process emotional input using hybrid approach
         """
@@ -245,8 +256,26 @@ class HybridEmotionalProcessor:
         return result
 
 # Configuration and factory functions
+
+
 def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrator]:
     """Create Supabase integrator from config or environment variables"""
+    # If remote AI calls are disabled, do not create an integrator.
+    if not remote_ai_allowed():
+        # If user passed an explicit config that would use Supabase, raise
+        # to make misconfiguration explicit. Otherwise return None.
+        if config and (config.get('function_url') or config.get('anon_key') or config.get('user_token')):
+            raise RuntimeError(
+                "Remote AI calls are disabled (processing mode 'local'). "
+                "Set PROCESSING_MODE or ALLOW_REMOTE_AI to opt in."
+            )
+        # Check env-based config and refuse to create an integrator if present.
+        if os.getenv('SUPABASE_FUNCTION_URL') or os.getenv('SUPABASE_ANON_KEY') or os.getenv('SUPABASE_USER_TOKEN'):
+            raise RuntimeError(
+                "Remote AI calls are disabled (processing mode 'local'). "
+                "Set PROCESSING_MODE or ALLOW_REMOTE_AI to opt in."
+            )
+        return None
 
     if config:
         return SupabaseIntegrator(
@@ -269,9 +298,18 @@ def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrat
 
     return None
 
+
 def create_hybrid_processor(supabase_config: Dict = None,
-                           use_local_fallback: bool = True) -> HybridEmotionalProcessor:
+                            use_local_fallback: bool = True) -> HybridEmotionalProcessor:
     """Create hybrid processor with optional Supabase integration"""
+    # If remote AI is disabled, creating a hybrid processor that would call
+    # external services is an explicit opt-in. Detect and refuse creation
+    # unless remote AI is allowed.
+    if not remote_ai_allowed() and supabase_config:
+        raise RuntimeError(
+            "Hybrid processor creation blocked: remote AI disabled (processing mode 'local'). "
+            "Set PROCESSING_MODE or ALLOW_REMOTE_AI to opt in."
+        )
 
     supabase_integrator = create_supabase_integrator(supabase_config)
 

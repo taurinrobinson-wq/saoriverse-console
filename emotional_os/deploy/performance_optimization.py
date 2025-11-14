@@ -116,6 +116,7 @@ class OptimizedResponseHandler:
 
         return None
 
+
 class StreamlitOptimizedUI:
     """
     Optimized Streamlit UI with performance improvements:
@@ -136,7 +137,8 @@ class StreamlitOptimizedUI:
 
     def show_instant_acknowledgment(self, message: str):
         """Show instant acknowledgment while processing"""
-        acknowledgment = self.response_handler.get_instant_acknowledgment(message)
+        acknowledgment = self.response_handler.get_instant_acknowledgment(
+            message)
 
         # Show typing indicator with acknowledgment
         with st.chat_message("assistant"):
@@ -174,7 +176,8 @@ class StreamlitOptimizedUI:
             }
 
             # Cache the pattern response
-            self.response_handler.cache_response(cache_key, {"response": pattern_response})
+            self.response_handler.cache_response(
+                cache_key, {"response": pattern_response})
             return result
 
         # 3. Fallback to full AI processing
@@ -186,14 +189,16 @@ class StreamlitOptimizedUI:
                 'ab_participate': st.session_state.get('ab_participate', False) if 'ab_participate' in st.session_state else False,
                 'ab_group': st.session_state.get('ab_group', 'not_participating') if 'ab_group' in st.session_state else 'not_participating'
             }
-            result = processor.process_emotional_input(message, prefer_ai=True, privacy_mode=False, session_metadata=session_meta)
+            result = processor.process_emotional_input(
+                message, prefer_ai=True, privacy_mode=False, session_metadata=session_meta)
             processing_time = time.time() - start_time
 
             result["processing_time"] = f"{processing_time:.2f}s"
 
             # Cache successful AI responses
             if result.get("response"):
-                self.response_handler.cache_response(cache_key, {"response": result["response"]})
+                self.response_handler.cache_response(
+                    cache_key, {"response": result["response"]})
 
             return result
 
@@ -205,7 +210,8 @@ class StreamlitOptimizedUI:
                     'ab_participate': st.session_state.get('ab_participate', False) if 'ab_participate' in st.session_state else False,
                     'ab_group': st.session_state.get('ab_group', 'not_participating') if 'ab_group' in st.session_state else 'not_participating'
                 }
-                result = processor.process_emotional_input(message, prefer_ai=False, privacy_mode=True, session_metadata=session_meta)
+                result = processor.process_emotional_input(
+                    message, prefer_ai=False, privacy_mode=True, session_metadata=session_meta)
                 result["source"] = "local_fallback"
                 result["processing_time"] = "< 1.0s"
                 return result
@@ -216,13 +222,23 @@ class StreamlitOptimizedUI:
                     "processing_time": "< 0.1s"
                 }
 
+
 def optimize_streamlit_performance():
     """Apply Streamlit-specific performance optimizations"""
 
     # Cache expensive operations
     if 'optimized_processor' not in st.session_state:
         from emotional_os.supabase.supabase_integration import create_hybrid_processor
-        st.session_state.optimized_processor = create_hybrid_processor(limbic_engine=st.session_state.get('limbic_engine'))
+        # Gate hybrid processor creation to avoid accidental remote AI use in local-only mode
+        try:
+            st.session_state.optimized_processor = create_hybrid_processor(
+                limbic_engine=st.session_state.get('limbic_engine'))
+        except RuntimeError as e:
+            # Remote AI disabled; fall back to a local-only processor (None integrator)
+            import logging
+            logging.warning(f"Hybrid processor creation blocked: {e}")
+            st.session_state.optimized_processor = create_hybrid_processor(
+                limbic_engine=st.session_state.get('limbic_engine')) if False else None
 
     # Set up performance monitoring
     if 'performance_stats' not in st.session_state:
@@ -233,6 +249,7 @@ def optimize_streamlit_performance():
             'ai_requests': 0,
             'avg_response_time': 0
         }
+
 
 # Usage in main Streamlit app:
 """

@@ -8,6 +8,18 @@ from typing import Dict, List, Optional
 
 import requests
 
+# Import central guard for remote AI usage
+try:
+    from scripts.local_integration import remote_ai_allowed, remote_ai_error
+except Exception:
+    # Conservative fallback: disallow remote AI if guard can't be imported
+    def remote_ai_allowed():
+        return False
+
+    def remote_ai_error(msg: str = None):
+        raise RuntimeError(
+            msg or "Remote AI usage is not allowed in this environment")
+
 
 @dataclass
 class SaoriResponse:
@@ -16,6 +28,7 @@ class SaoriResponse:
     parsed_glyphs: List[Dict]
     upserted_glyphs: List[Dict]
     log: Dict
+
 
 class SupabaseIntegrator:
     """Integration with your Supabase Saori edge function"""
@@ -42,10 +55,10 @@ class SupabaseIntegrator:
         self.session.headers.update(headers)
 
     def process_message(self,
-                       message: str,
-                       mode: str = "quick",
-                       conversation_context: Dict = None,
-                       conversation_style: str = "conversational") -> SaoriResponse:
+                        message: str,
+                        mode: str = "quick",
+                        conversation_context: Dict = None,
+                        conversation_style: str = "conversational") -> SaoriResponse:
         """
         Send message to your Supabase edge function for processing
         This leverages your complete emotional tagging and AI system
@@ -70,7 +83,8 @@ class SupabaseIntegrator:
             payload["conversation_context"] = conversation_context
 
         try:
-            response = self.session.post(self.function_url, json=payload, timeout=30)
+            response = self.session.post(
+                self.function_url, json=payload, timeout=30)
 
             # Log response details for debugging
             logging.info(f"Supabase response status: {response.status_code}")
@@ -129,6 +143,7 @@ class SupabaseIntegrator:
                 log={"error": error_msg}
             )
 
+
 class HybridEmotionalProcessor:
     """
     Hybrid system that can use either:
@@ -160,15 +175,15 @@ class HybridEmotionalProcessor:
             self.local_available = False
 
     def process_emotional_input(self,
-                               message: str,
-                               conversation_context: Dict = None,
-                               prefer_ai: bool = True,
-                               privacy_mode: bool = False,
-                               session_metadata: Dict = None,
-                               **kwargs) -> Dict:
+                                message: str,
+                                conversation_context: Dict = None,
+                                prefer_ai: bool = True,
+                                privacy_mode: bool = False,
+                                session_metadata: Dict = None,
+                                **kwargs) -> Dict:
         """
         Process emotional input using hybrid approach
-        
+
         Args:
             message: User input
             conversation_context: Previous conversation state
@@ -202,7 +217,8 @@ class HybridEmotionalProcessor:
 
                 # Attempt limbic decoration if available (backend-only)
                 try:
-                    decorated_result = self._attempt_limbic_decoration(message, result, session_metadata=session_metadata)
+                    decorated_result = self._attempt_limbic_decoration(
+                        message, result, session_metadata=session_metadata)
                     return decorated_result
                 except Exception as e:
                     # If decoration fails, return baseline result
@@ -252,7 +268,8 @@ class HybridEmotionalProcessor:
             # Time the limbic engine processing for telemetry
             import time as _time
             _start = _time.time()
-            limbic_result = self.limbic_engine.process_emotion_with_limbic_mapping(message)
+            limbic_result = self.limbic_engine.process_emotion_with_limbic_mapping(
+                message)
             _end = _time.time()
             limbic_latency_ms = int((_end - _start) * 1000)
         except Exception as e:
@@ -264,12 +281,14 @@ class HybridEmotionalProcessor:
         ab_participate = False
         ab_group = 'not_participating'
         if session_metadata and isinstance(session_metadata, dict):
-            ab_participate = bool(session_metadata.get('ab_participate', False))
+            ab_participate = bool(
+                session_metadata.get('ab_participate', False))
             ab_group = session_metadata.get('ab_group', ab_group)
 
         if ab_participate and ab_group == 'control':
             # Explicitly skip enrichment for control group
-            logging.info("A/B control group - skipping limbic decoration per-session")
+            logging.info(
+                "A/B control group - skipping limbic decoration per-session")
             decorated = False
         elif not safety_flag and decorate_reply and limbic_result and isinstance(result, dict):
             try:
@@ -305,7 +324,8 @@ class HybridEmotionalProcessor:
                     glyphs_count = len(glyphs)
                 elif isinstance(glyphs, dict):
                     # If glyphs is a mapping of emotion->list, sum lengths
-                    glyphs_count = sum(len(v) for v in glyphs.values() if isinstance(v, (list, tuple)))
+                    glyphs_count = sum(
+                        len(v) for v in glyphs.values() if isinstance(v, (list, tuple)))
                 else:
                     glyphs_count = 1
             except Exception:
@@ -393,9 +413,11 @@ class HybridEmotionalProcessor:
         try:
             # Use a fresh requests call to avoid interfering with the integrator session state
             import requests
-            resp = requests.post(rest_url, headers=headers, json=payload, timeout=10)
+            resp = requests.post(rest_url, headers=headers,
+                                 json=payload, timeout=10)
             if resp.status_code not in (200, 201):
-                logging.warning(f"Supabase telemetry insert returned {resp.status_code}: {resp.text}")
+                logging.warning(
+                    f"Supabase telemetry insert returned {resp.status_code}: {resp.text}")
         except Exception as e:
             logging.warning(f"Failed to POST telemetry to Supabase: {e}")
 
@@ -447,8 +469,18 @@ class HybridEmotionalProcessor:
         return result
 
 # Configuration and factory functions
+
+
 def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrator]:
     """Create Supabase integrator from config or environment variables"""
+    # If remote AI is globally disallowed, block creation when explicit config exists
+    if not remote_ai_allowed():
+        # If caller passed explicit config, hard-fail
+        if config:
+            remote_ai_error(
+                "Supabase integrator creation blocked: remote AI is disabled by default.")
+        # If no config provided, silently return None to avoid accidental external calls
+        return None
 
     if config:
         return SupabaseIntegrator(
@@ -471,12 +503,22 @@ def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrat
 
     return None
 
-def create_hybrid_processor(supabase_config: Dict = None,
-                           use_local_fallback: bool = True,
-                           limbic_engine=None) -> HybridEmotionalProcessor:
-    """Create hybrid processor with optional Supabase integration"""
 
-    supabase_integrator = create_supabase_integrator(supabase_config)
+def create_hybrid_processor(supabase_config: Dict = None,
+                            use_local_fallback: bool = True,
+                            limbic_engine=None) -> HybridEmotionalProcessor:
+    """Create hybrid processor with optional Supabase integration"""
+    # If remote AI is disallowed, block creation when an explicit supabase_config
+    # is provided (hard-fail). Otherwise return a processor with no supabase integrator.
+    if not remote_ai_allowed():
+        # caller explicitly provided supabase_config → raise
+        if supabase_config or os.getenv('SUPABASE_FUNCTION_URL'):
+            remote_ai_error(
+                "Hybrid processor creation blocked: remote AI is disabled by default.")
+        # No supabase configured; proceed with None integrator (local-only)
+        supabase_integrator = None
+    else:
+        supabase_integrator = create_supabase_integrator(supabase_config)
 
     return HybridEmotionalProcessor(
         supabase_integrator=supabase_integrator,
