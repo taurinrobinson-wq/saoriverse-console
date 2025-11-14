@@ -48,6 +48,18 @@ tail -f logs/enrich.log
 pytest -q
 ```
 
+Makefile (quick shortcuts)
+
+You can use the included `Makefile` to run common developer rituals:
+
+```bash
+make env        # Load safe defaults
+make install    # Create virtualenv and install deps
+make enrich     # Run the enrichment pipeline
+make test       # Run tests
+make logs       # View recent enrichment logs
+```
+
 Processing modes
 
 - `local` — Fully offline. Default. No remote AI calls allowed.
