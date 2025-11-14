@@ -215,10 +215,12 @@ def render_controls_row(conversation_key):
         # the sidebar expander).
         current_mode = st.session_state.processing_mode
         # Place Start Personal Log in the far-left column per layout request
+        # Only show personal-log control when the user is authenticated
         try:
-            if st.button("Start Personal Log", key="start_log_btn"):
-                st.session_state.show_personal_log = True
-                st.rerun()
+            if st.session_state.get('authenticated'):
+                if st.button("Start Personal Log", key="start_log_btn"):
+                    st.session_state.show_personal_log = True
+                    st.rerun()
         except Exception:
             pass
 
@@ -228,11 +230,13 @@ def render_controls_row(conversation_key):
         current_theme = st.session_state.get('theme', 'Light')
         # Place Logout in the adjacent (controls[1]) column so it sits
         # immediately to the right of the Start Personal Log button.
+        # Only show Logout when authenticated
         try:
-            if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-                from .auth import SaoynxAuthentication
-                auth = SaoynxAuthentication()
-                auth.logout()
+            if st.session_state.get('authenticated'):
+                if st.button("Logout", key="controls_logout", help="Sign out of your account"):
+                    from .auth import SaoynxAuthentication
+                    auth = SaoynxAuthentication()
+                    auth.logout()
         except Exception:
             pass
     # Removed Debug and Clear History controls — these buttons did not provide
@@ -600,6 +604,62 @@ def render_splash_interface(auth):
             unsafe_allow_html=True,
         )
     except Exception:
+        pass
+    # --- Page header and demo/banner area ---
+    try:
+        # Top header: logo + title + subtitle (always render at top)
+        with st.container():
+            try:
+                # Try to show image from static folder first
+                repo_graphics_path = os.path.join(
+                    'static', 'graphics', 'FirstPerson-Logo-invert-cropped_notext.svg')
+                if os.path.exists(repo_graphics_path):
+                    try:
+                        st.image(repo_graphics_path, width=68)
+                    except Exception:
+                        svg_markup = _load_inline_svg(
+                            'FirstPerson-Logo-invert-cropped_notext.svg')
+                        st.markdown(
+                            f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>", unsafe_allow_html=True)
+                else:
+                    svg_markup = _load_inline_svg(
+                        'FirstPerson-Logo-invert-cropped_notext.svg')
+                    if svg_markup:
+                        st.markdown(
+                            f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>", unsafe_allow_html=True)
+            except Exception:
+                # Fallback emoji
+                try:
+                    st.markdown(
+                        "<div style='display:inline-block;font-size:2rem;vertical-align:middle'>🧠</div>", unsafe_allow_html=True)
+                except Exception:
+                    pass
+
+            try:
+                st.markdown("# FirstPerson – Personal AI Companion")
+                st.markdown(
+                    "Your private space for emotional processing and growth")
+            except Exception:
+                pass
+
+        # Conditional demo-mode banner for unauthenticated users
+        try:
+            if not st.session_state.get('authenticated'):
+                st.info(
+                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+            else:
+                # Welcome back block for authenticated users
+                uname = st.session_state.get(
+                    'username') or st.session_state.get('user_id')
+                try:
+                    st.success(
+                        f"Welcome back{': ' + str(uname) if uname else ''}")
+                except Exception:
+                    pass
+        except Exception:
+            pass
+    except Exception:
+        # Best-effort: do not block UI if header render fails
         pass
     # Reduce top padding of the main block so the main content (chat)
     # aligns more closely with the beginning of the sidebar containers.
