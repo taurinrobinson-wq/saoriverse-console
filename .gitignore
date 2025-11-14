@@ -88,4 +88,7 @@ secrets.*
 *.secret
 .credentials
 .aws/
-.gcloud/
+.gcloud/main_v2.py.bak*
+*.bak.*
+streamlit.pid
+streamlit.log
