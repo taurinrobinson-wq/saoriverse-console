@@ -486,12 +486,13 @@ def render_settings_sidebar():
                     except Exception:
                         pass
 
+                # Local-first: expose only local processing in the UI by default
                 st.selectbox(
                     "Processing mode",
-                    options=["hybrid", "local"],
-                    index=0 if current_mode == 'hybrid' else 1,
+                    options=["local"],
+                    index=0,
                     key='processing_mode',
-                    help='Hybrid: AI + local parsing. Local: only local parsing.',
+                    help='Local: only local parsing. Remote AI is disabled by default.',
                     on_change=_on_mode_change
                 )
             except Exception:
