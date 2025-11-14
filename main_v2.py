@@ -228,10 +228,20 @@ if 'initialized' not in st.session_state:
     st.session_state['theme_loaded'] = False
 
     # Initialize learning persistence
+    # Default to a local-only processing mode. The `scripts/local_integration`
+    # module exposes `get_processing_mode()` which prefers an environment
+    # override but otherwise returns 'local'. This disables hybrid/OpenAI
+    # behavior by default.
+    try:
+        import scripts.local_integration as local_integration
+        default_mode = getattr(local_integration, 'get_processing_mode')()
+    except Exception:
+        default_mode = 'local'
+
     st.session_state['learning_settings'] = {
-        'processing_mode': 'hybrid',  # Default to hybrid mode
-        'enable_learning': True,      # Enable learning by default
-        'persist_learning': True      # Enable persistence by default
+        'processing_mode': default_mode,
+        'enable_learning': True,
+        'persist_learning': True
     }
 
     # Create learning directories if they don't exist
