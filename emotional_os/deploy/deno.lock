@@ -1,0 +1,19 @@
+{
+  "version": "5",
+  "remote": {
+    "https://cdn.jsdelivr.net/npm/@supabase/auth-js@2.81.0/+esm": "d6d938670a65148eb0101377da7942c0068c9482e961eee55f4af0cfe2485f9c",
+    "https://cdn.jsdelivr.net/npm/@supabase/functions-js@2.81.0/+esm": "ee60fe35fcb92f8c54dd0209a1f8426b99bd8e15fa7676f4cca2e247030a5186",
+    "https://cdn.jsdelivr.net/npm/@supabase/postgrest-js@2.81.0/+esm": "64975051dff6bdd2f27c407189e0b60053621ef6af7808a84b22cc6faac61f0e",
+    "https://cdn.jsdelivr.net/npm/@supabase/realtime-js@2.81.0/+esm": "1c1791a3d934ea09b1d3a7a5c14ed8a740707b83bc16daf1c7d345dd8a6b92dc",
+    "https://cdn.jsdelivr.net/npm/@supabase/storage-js@2.81.0/+esm": "9b193fe54c0ad249a80f8ee4291688b2611ddf030fa491a15ee7c9a7e4abb4c5",
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm": "ac69e022797c569608d5f576e25a4a3cfed17355052d3a766326d2edde380b68",
+    "https://cdn.jsdelivr.net/npm/tslib@2.8.1/+esm": "63dd5e931cca88877daff82bc8424da8e423f07834cb5c15fbfb9e66c84b63d7"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@supabase/supabase-js@^2.58.0"
+      ]
+    }
+  }
+}

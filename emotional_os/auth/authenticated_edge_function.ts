@@ -55,20 +55,51 @@ const QUICK_RESPONSES: Record<string, string> = {
 };
 
 // User Authentication Functions
-async function validateUserSession(authHeader: string, admin: any): Promise<{ valid: boolean, userId?: string }> {
+async function validateUserSession(authHeader: string, adminClient: any): Promise<{ valid: boolean, userId?: string }> {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return { valid: false };
   }
 
   try {
-    // Extract user info from auth header or session token
-    // For now, we'll use a simple session validation
-    const sessionToken = authHeader.replace("Bearer ", "");
+    const token = authHeader.replace("Bearer ", "");
 
-    // In production, validate session token against users table
-    // For demo, we'll extract user_id from the token (implement proper JWT later)
+    // Parse custom token format: base64payload.signature
+    const parts = token.split('.');
+    if (parts.length !== 2) {
+      return { valid: false };
+    }
 
-    return { valid: true, userId: "demo_user" }; // Placeholder
+    const [payloadB64, signature] = parts;
+    const payload = JSON.parse(atob(payloadB64));
+
+    // Validate token structure
+    if (!payload.user_id || !payload.issued_at || !payload.expires_at) {
+      return { valid: false };
+    }
+
+    // Check expiration
+    if (Date.now() > payload.expires_at) {
+      return { valid: false };
+    }
+
+    // Validate signature (simple check)
+    const expectedSignature = btoa(payload.user_id + '_' + payload.issued_at);
+    if (signature !== expectedSignature) {
+      return { valid: false };
+    }
+
+    // Verify user exists in database
+    const { data: user, error } = await adminClient
+      .from('users')
+      .select('id, username')
+      .eq('id', payload.user_id)
+      .single();
+
+    if (error || !user) {
+      return { valid: false };
+    }
+
+    return { valid: true, userId: user.id };
   } catch (err) {
     console.error("Session validation error:", err);
     return { valid: false };
