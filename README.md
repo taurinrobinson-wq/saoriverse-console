@@ -9,7 +9,7 @@ Quickstart
 
 - Install project dependencies (see `requirements.txt`)
 - Run tests: `pytest -q`
- 
+
 Bootstrap local env:
 
 ```bash
