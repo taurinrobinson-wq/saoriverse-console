@@ -688,10 +688,20 @@ def render_splash_interface(auth):
     # Add custom CSS for splash screen
     st.markdown("""
     <style>
+    /* Reduce splash top margin so header and main content sit closer to the top */
     .splash-logo-container {
         text-align: center;
         margin-bottom: 2rem;
-        margin-top: 3rem;
+        margin-top: 0.4rem !important;
+    }
+    /* Sticky top header to anchor the page regardless of other layout blocks */
+    #fp-top-header {
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        background: var(--spacer, transparent);
+        padding: 0.5rem 0;
+        margin-bottom: 0.25rem;
     }
     .splash-logo {
         width: 200px;
@@ -725,6 +735,8 @@ def render_splash_interface(auth):
         # Logo and text container
         st.markdown('<div class="splash-logo-container">',
                     unsafe_allow_html=True)
+
+        # (splash header removed - landing now uses the main header and auth controls)
 
     # Use the cropped logo from the static directory to avoid inline SVG
     # fill/viewBox inconsistencies across browsers. Prefer serving the SVG
@@ -762,7 +774,7 @@ def render_splash_interface(auth):
            so white shapes gain contrast on white backgrounds. */
         .splash-logo img, img.splash-logo { filter: drop-shadow(0 0 6px rgba(0,0,0,0.25)) !important; background-color: transparent !important; }
         </style>
-        """,
+            """,
         unsafe_allow_html=True,
     )
 
@@ -902,87 +914,18 @@ def render_main_app():
         )
     except Exception:
         pass
+
+
+# Top header temporarily removed (debugging client-side TypeError)
     # Further defensive guards: patch common DOM lookup APIs and jQuery/$ factory
     # to tolerate unexpected argument types which can surface during theme
     # toggles or fast re-renders in the compiled frontend.
     try:
-        st.markdown(
-            """
-            <script>
-            (function(){
-                try{
-                    // Helper to detect DOM node-like objects
-                    function isNode(obj){
-                        return (typeof Node === 'object' ? obj instanceof Node : obj && typeof obj === 'object' && typeof obj.nodeType === 'number' && typeof obj.nodeName==='string');
-                    }
-                    function isNodeList(obj){
-                        return Object.prototype.toString.call(obj) === '[object NodeList]' || Object.prototype.toString.call(obj) === '[object HTMLCollection]';
-                    }
-
-                    // Wrap document.querySelector & querySelectorAll
-                    var _qs = document.querySelector;
-                    var _qsAll = document.querySelectorAll;
-                    document.querySelector = function(sel){
-                        try{
-                            if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
-                                console.warn('Safe-guard: querySelector called with invalid selector', sel);
-                                return null;
-                            }
-                            return _qs.call(document, sel);
-                        }catch(e){
-                            console.warn('Safe-guard: querySelector threw', e);
-                            return null;
-                        }
-                    };
-                    document.querySelectorAll = function(sel){
-                        try{
-                            if(typeof sel !== 'string' && !isNode(sel) && !isNodeList(sel)){
-                                console.warn('Safe-guard: querySelectorAll called with invalid selector', sel);
-                                // return empty NodeList via a harmless selector on a detached element
-                                return document.createElement('div').querySelectorAll('.fp-no-match');
-                            }
-                            return _qsAll.call(document, sel);
-                        }catch(e){
-                            console.warn('Safe-guard: querySelectorAll threw', e);
-                            return document.createElement('div').querySelectorAll('.fp-no-match');
-                        }
-                    };
-
-                    // Wrap jQuery/$ factory if present
-                    var orig$ = window.$;
-                    var origJQ = window.jQuery;
-                    function safeFactory(factory){
-                        return function(arg){
-                            try{
-                                var isValid = (typeof arg === 'string' || isNode(arg) || isNodeList(arg) || (arg && typeof arg.length === 'number'));
-                                if(isValid){
-                                    return factory(arg);
-                                }
-                                // Log the offending value and a small stack so we can trace where it came from
-                                try{
-                                    console.warn('Safe-guard: jQuery factory called with invalid arg:', arg);
-                                    console.warn('Safe-guard: arg type =', Object.prototype.toString.call(arg), 'typeof=', typeof arg);
-                                    console.warn(new Error('jQuery factory invalid-arg stack').stack);
-                                }catch(_e){}
-                                // fallback to empty selection
-                                return factory(document.createElement('div'));
-                            }catch(e){
-                                try{ return factory(document.createElement('div')); }catch(e2){ return null; }
-                            }
-                        };
-                    }
-                    if(typeof orig$ === 'function'){
-                        try{ window.$ = safeFactory(orig$); }catch(e){}
-                    }
-                    if(typeof origJQ === 'function'){
-                        try{ window.jQuery = safeFactory(origJQ); }catch(e){}
-                    }
-                }catch(e){/* swallow */}
-            })();
-            </script>
-            """,
-            unsafe_allow_html=True,
-        )
+        # Removed aggressive client-side DOM overrides — Streamlit's frontend
+        # can be sensitive to replacing core DOM APIs. Keep a minimal comment
+        # in the page for traceability.
+        st.markdown('<!-- defensive DOM overrides removed -->',
+                    unsafe_allow_html=True)
     except Exception:
         pass
     # Instrument unhandled client errors with an in-page overlay to help
@@ -1566,67 +1509,9 @@ def render_main_app():
         # Header kept intentionally minimal; logout moved into the
         # compact controls row rendered by render_controls_row().
         pass
-    conversation_key = f"conversation_history_{st.session_state.user_id}"
+    conversation_key = f"conversation_history_{st.session_state.get('user_id', 'anon')}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
-
-    # If the user selected a conversation from the sidebar, load it now
-    try:
-        selected = st.session_state.get('selected_conversation')
-        mgr = st.session_state.get('conversation_manager')
-        # If manager missing, try to initialize it (best-effort)
-        if not mgr and 'user_id' in st.session_state:
-            try:
-                from emotional_os.deploy.modules.conversation_manager import initialize_conversation_manager
-                mgr = initialize_conversation_manager()
-                if mgr:
-                    st.session_state['conversation_manager'] = mgr
-            except Exception:
-                mgr = None
-
-        # Only attempt load when a selection exists and it's not already the active conversation
-        if selected and mgr and selected != st.session_state.get('current_conversation_id'):
-            try:
-                conv = mgr.load_conversation(selected)
-                if conv:
-                    msgs = conv.get('messages') if isinstance(
-                        conv.get('messages'), list) else conv.get('messages', [])
-                    st.session_state[conversation_key] = msgs or []
-                    st.session_state['current_conversation_id'] = conv.get(
-                        'conversation_id', selected)
-                    st.session_state['conversation_title'] = conv.get(
-                        'title', st.session_state.get('conversation_title', 'Conversation'))
-                else:
-                    try:
-                        st.sidebar.warning(
-                            'Could not load the selected conversation (not found).')
-                    except Exception:
-                        pass
-            except Exception as e:
-                logger.warning(
-                    f"Failed to load selected conversation {selected}: {e}")
-                try:
-                    st.sidebar.error(f'Error loading conversation: {e}')
-                except Exception:
-                    pass
-            # Clear the transient selection and rerun so the main UI reflects the loaded messages
-            try:
-                st.session_state.pop('selected_conversation', None)
-            except Exception:
-                pass
-            try:
-                st.rerun()
-            except Exception:
-                pass
-    except Exception:
-        # Best-effort: do not block UI if loading fails
-        pass
-    # Initialize Fallback Protocols for tone-aware response handling
-    if "fallback_protocol" not in st.session_state and FallbackProtocol:
-        try:
-            st.session_state["fallback_protocol"] = FallbackProtocol()
-        except Exception:
-            st.session_state["fallback_protocol"] = None
 
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
@@ -1824,6 +1709,67 @@ def render_main_app():
                 pass
 
             debug_signals = []
+
+    # If the user selected a conversation from the sidebar, load it now
+    try:
+        selected = st.session_state.get('selected_conversation')
+        mgr = st.session_state.get('conversation_manager')
+        # If manager missing, try to initialize it (best-effort)
+        if not mgr and 'user_id' in st.session_state:
+            try:
+                from emotional_os.deploy.modules.conversation_manager import initialize_conversation_manager
+                mgr = initialize_conversation_manager()
+                if mgr:
+                    st.session_state['conversation_manager'] = mgr
+            except Exception:
+                mgr = None
+
+        # Only attempt load when a selection exists and it's not already the active conversation
+        if selected and mgr and selected != st.session_state.get('current_conversation_id'):
+            try:
+                conv = mgr.load_conversation(selected)
+                if conv:
+                    msgs = conv.get('messages') if isinstance(
+                        conv.get('messages'), list) else conv.get('messages', [])
+                    st.session_state[conversation_key] = msgs or []
+                    st.session_state['current_conversation_id'] = conv.get(
+                        'conversation_id', selected)
+                    st.session_state['conversation_title'] = conv.get(
+                        'title', st.session_state.get('conversation_title', 'Conversation'))
+                else:
+                    try:
+                        st.sidebar.warning(
+                            'Could not load the selected conversation (not found).')
+                    except Exception:
+                        pass
+            except Exception as e:
+                logger.warning(
+                    f"Failed to load selected conversation {selected}: {e}")
+                try:
+                    st.sidebar.error(f'Error loading conversation: {e}')
+                except Exception:
+                    pass
+            # Clear the transient selection and rerun so the main UI reflects the loaded messages
+            try:
+                st.session_state.pop('selected_conversation', None)
+            except Exception:
+                pass
+            try:
+                st.rerun()
+            except Exception:
+                pass
+    except Exception:
+        # Best-effort: do not block UI if loading fails
+        pass
+    # Initialize Fallback Protocols for tone-aware response handling
+    if "fallback_protocol" not in st.session_state and FallbackProtocol:
+        try:
+            st.session_state["fallback_protocol"] = FallbackProtocol()
+        except Exception:
+            st.session_state["fallback_protocol"] = None
+
+    # Chat processing logic continues here; expects `chat_container` and
+    # `user_input` to be available from the UI block rendered above.
     debug_gates = []
     debug_glyphs = []
     debug_sql = ""
