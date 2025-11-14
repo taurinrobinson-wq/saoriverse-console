@@ -1196,7 +1196,7 @@ def render_main_app():
                 st.markdown("### Account")
             # Preserve an extra leading space as requested for visual spacing
             st.markdown(
-                "\u00A0Create an account or sign in to keep your conversations and enable full features.")
+                " Create an account or sign in to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
