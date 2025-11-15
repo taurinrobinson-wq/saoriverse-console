@@ -567,15 +567,6 @@
     "alpha_len": 28
   },
   {
-    "phrase": "prejudice and discrimination",
-    "lemmas": "prejudice and discrimination",
-    "pos": "NOUN,CCONJ,NOUN",
-    "example": "Interpersonal topics (those that pertain to dyads and groups) include helping behavior ( Figure 12.2 ), aggression, prejudice and discrimination, attraction and close relationships, and group processes and intergroup relationships.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.667,
-    "alpha_len": 28
-  },
-  {
     "phrase": "commons attribution license",
     "lemmas": "common attribution license",
     "pos": "VERB,NOUN,NOUN",
@@ -592,15 +583,6 @@
     "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
     "noun_score": 0.667,
     "alpha_len": 23
-  },
-  {
-    "phrase": "attribution access for",
-    "lemmas": "attribution access for",
-    "pos": "NOUN,NOUN,ADP",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.667,
-    "alpha_len": 22
   },
   {
     "phrase": "help openstax policies",
@@ -621,15 +603,6 @@
     "alpha_len": 20
   },
   {
-    "phrase": "language models or",
-    "lemmas": "language model or",
-    "pos": "NOUN,NOUN,CCONJ",
-    "example": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.667,
-    "alpha_len": 18
-  },
-  {
     "phrase": "2020 location houston",
     "lemmas": "2020 location houston",
     "pos": "NUM,NOUN,PROPN",
@@ -637,15 +610,6 @@
     "source_urls": "",
     "noun_score": 0.667,
     "alpha_len": 16
-  },
-  {
-    "phrase": "access for free",
-    "lemmas": "access for free",
-    "pos": "NOUN,ADP,ADJ",
-    "example": "Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction © Jul 9, 2025 OpenStax.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.667,
-    "alpha_len": 15
   },
   {
     "phrase": "following attribution",
@@ -664,15 +628,6 @@
     "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
     "noun_score": 0.5,
     "alpha_len": 19
-  },
-  {
-    "phrase": "offerings without",
-    "lemmas": "offering without",
-    "pos": "NOUN,ADP",
-    "example": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 17
   },
   {
     "phrase": "written consent",
@@ -698,15 +653,6 @@
     "pos": "VERB,PROPN,NOUN",
     "example": "Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-introduction Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-introduction Contact Us Support Center FAQ Press Newsletter Careers Accessibility Statement Terms of Use Licensing Privacy Policy 11.1 What Is Personality?",
     "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 13
-  },
-  {
-    "phrase": "prejudice and",
-    "lemmas": "prejudice and",
-    "pos": "NOUN,CCONJ",
-    "example": "Interpersonal topics (those that pertain to dyads and groups) include helping behavior ( Figure 12.2 ), aggression, prejudice and discrimination, attraction and close relationships, and group processes and intergroup relationships.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
     "noun_score": 0.5,
     "alpha_len": 13
   },
@@ -747,105 +693,6 @@
     "alpha_len": 12
   },
   {
-    "phrase": "license and",
-    "lemmas": "license and",
-    "pos": "NOUN,CCONJ",
-    "example": "This book uses the Creative Commons Attribution License and you must attribute OpenStax.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 11
-  },
-  {
-    "phrase": "format then",
-    "lemmas": "format then",
-    "pos": "NOUN,ADV",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.5,
-    "alpha_len": 11
-  },
-  {
-    "phrase": "training of",
-    "lemmas": "training of",
-    "pos": "NOUN,ADP",
-    "example": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 11
-  },
-  {
-    "phrase": "access for",
-    "lemmas": "access for",
-    "pos": "NOUN,ADP",
-    "example": "Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction © Jul 9, 2025 OpenStax.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "people who",
-    "lemmas": "people who",
-    "pos": "NOUN,PRON",
-    "example": "People who have high self-efficacy believe that their goals are within reach, have a positive view of challenges seeing them as tasks to be mastered, develop a deep interest in and strong commitment to the activities in which they are involved, and quickly recover from setbacks.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "subject to",
-    "lemmas": "subject to",
-    "pos": "ADJ,ADP",
-    "example": "The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo are not subject to the Creative Commons license and may not be reproduced without the prior and express written consent of Rice University.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "mission is",
-    "lemmas": "mission be",
-    "pos": "NOUN,AUX",
-    "example": "Introduction Chapter Outline Our mission is to improve educational access and learning for everyone.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "access and",
-    "lemmas": "access and",
-    "pos": "NOUN,CCONJ",
-    "example": "Introduction Chapter Outline Our mission is to improve educational access and learning for everyone.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "models or",
-    "lemmas": "model or",
-    "pos": "NOUN,CCONJ",
-    "example": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 9
-  },
-  {
-    "phrase": "likely to",
-    "lemmas": "likely to",
-    "pos": "ADJ,PART",
-    "example": "In either case, the person may be less likely to imitate those behaviors even though the reasons for not doing so would be different.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 9
-  },
-  {
-    "phrase": "book this",
-    "lemmas": "book this",
-    "pos": "PROPN,PRON",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.5,
-    "alpha_len": 9
-  },
-  {
     "phrase": "book uses",
     "lemmas": "book use",
     "pos": "NOUN,VERB",
@@ -882,78 +729,6 @@
     "alpha_len": 8
   },
   {
-    "phrase": "terms of",
-    "lemmas": "term of",
-    "pos": "NOUN,ADP",
-    "example": "Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-introduction Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-introduction Contact Us Support Center FAQ Press Newsletter Careers Accessibility Statement Terms of Use Licensing Privacy Policy 11.1 What Is Personality?",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 8
-  },
-  {
-    "phrase": "book may",
-    "lemmas": "book may",
-    "pos": "NOUN,AUX",
-    "example": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 8
-  },
-  {
-    "phrase": "share or",
-    "lemmas": "share or",
-    "pos": "NOUN,CCONJ",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.5,
-    "alpha_len": 8
-  },
-  {
-    "phrase": "free at",
-    "lemmas": "free at",
-    "pos": "ADJ,ADP",
-    "example": "Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction © Jul 9, 2025 OpenStax.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 7
-  },
-  {
-    "phrase": "free at https://openstax.org/books/psychology-2e/pages/1-introduction",
-    "lemmas": "free at https://openstax.org/books/psychology-2e/pages/1-introduction",
-    "pos": "ADJ,ADP,NOUN",
-    "example": "Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction © Jul 9, 2025 OpenStax.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 7
-  },
-  {
-    "phrase": "book in",
-    "lemmas": "book in",
-    "pos": "NOUN,ADP",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.5,
-    "alpha_len": 7
-  },
-  {
-    "phrase": "format then you",
-    "lemmas": "format then you",
-    "pos": "NOUN,ADV,PRON",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.333,
-    "alpha_len": 15
-  },
-  {
-    "phrase": "book in a",
-    "lemmas": "book in a",
-    "pos": "NOUN,ADP,PRON",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.333,
-    "alpha_len": 9
-  },
-  {
     "phrase": "date apr 22",
     "lemmas": "date apr 22",
     "pos": "NOUN,VERB,NUM",
@@ -972,33 +747,6 @@
     "alpha_len": 8
   },
   {
-    "phrase": "redistributing all or",
-    "lemmas": "redistribute all or",
-    "pos": "VERB,PRON,CCONJ",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 21
-  },
-  {
-    "phrase": "redistributing all",
-    "lemmas": "redistribute all",
-    "pos": "VERB,PRON",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 18
-  },
-  {
-    "phrase": "include on every",
-    "lemmas": "include on every",
-    "pos": "VERB,ADP,PRON",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 16
-  },
-  {
     "phrase": "help openstax",
     "lemmas": "help openstax",
     "pos": "VERB,VERB",
@@ -1006,132 +754,6 @@
     "source_urls": "",
     "noun_score": 0.0,
     "alpha_len": 13
-  },
-  {
-    "phrase": "ingested into",
-    "lemmas": "ingest into",
-    "pos": "VERB,ADP",
-    "example": "This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 13
-  },
-  {
-    "phrase": "according to",
-    "lemmas": "accord to",
-    "pos": "VERB,ADP",
-    "example": "According to Gall, measuring these distances revealed the sizes of the brain areas underneath, providing information that could be used to determine whether a person was friendly, prideful, murderous, kind, good with languages, and so on.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms",
-    "noun_score": 0.0,
-    "alpha_len": 12
-  },
-  {
-    "phrase": "learning for",
-    "lemmas": "learn for",
-    "pos": "VERB,ADP",
-    "example": "Introduction Chapter Outline Our mission is to improve educational access and learning for everyone.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 12
-  },
-  {
-    "phrase": "modify this",
-    "lemmas": "modify this",
-    "pos": "VERB,PRON",
-    "example": "Want to cite, share, or modify this book?",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 11
-  },
-  {
-    "phrase": "letting go",
-    "lemmas": "letting go",
-    "pos": "AUX,VERB",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.0,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "include on",
-    "lemmas": "include on",
-    "pos": "VERB,ADP",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "found that",
-    "lemmas": "find that",
-    "pos": "VERB,SCONJ",
-    "example": "Seeing them as a reflection of unconscious desires, linguists today have found that slips of the tongue tend to occur when we are tired, nervous, or not at our optimal level of cognitive functioning (Motley, 2002).",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression",
-    "noun_score": 0.0,
-    "alpha_len": 10
-  },
-  {
-    "phrase": "based on",
-    "lemmas": "base on",
-    "pos": "VERB,ADP",
-    "example": "Hippocrates theorized that personality traits and human behaviors are based on four separate temperaments associated with four fluids (“humors”) of the body: choleric temperament (yellow bile from the liver), melancholic temperament (black bile from the kidneys), sanguine temperament (red blood from the heart), and phlegmatic temperament (white phlegm from the lungs) (Clark & Watson, 2008; Eysenck & Eysenck, 1985; Lecci & Magnavita, 2013; Noga, 2007).",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 8
-  },
-  {
-    "phrase": "view the",
-    "lemmas": "view the",
-    "pos": "VERB,PRON",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 8
-  },
-  {
-    "phrase": "uses the",
-    "lemmas": "use the",
-    "pos": "VERB,PRON",
-    "example": "This book uses the Creative Commons Attribution License and you must attribute OpenStax.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 8
-  },
-  {
-    "phrase": "tend to",
-    "lemmas": "tend to",
-    "pos": "VERB,PART",
-    "example": "While we tend to think of a mask as being worn to conceal one’s identity, the theatrical mask was originally used to either represent or project a specific personality trait of a character ( Figure 11.2 ).",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 7
-  },
-  {
-    "phrase": "want to",
-    "lemmas": "want to",
-    "pos": "VERB,PART",
-    "example": "Want to cite, share, or modify this book?",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 7
-  },
-  {
-    "phrase": "use the",
-    "lemmas": "use the",
-    "pos": "VERB,PRON",
-    "example": "If you are redistributing all or part of this book in a print format, then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction If you are redistributing all or part of this book in a digital format, then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction Use the information below to generate a citation.",
-    "source_urls": "https://openstax.org/books/psychology-2e/pages/11-introduction,https://openstax.org/books/psychology-2e/pages/11-1-what-is-personality,https://openstax.org/books/psychology-2e/pages/11-2-freud-and-the-psychodynamic-perspective,https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney,https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches,https://openstax.org/books/psychology-2e/pages/11-5-humanistic-approaches,https://openstax.org/books/psychology-2e/pages/11-6-biological-approaches,https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists,https://openstax.org/books/psychology-2e/pages/11-8-cultural-understandings-of-personality,https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment,https://openstax.org/books/psychology-2e/pages/11-key-terms,https://openstax.org/books/psychology-2e/pages/11-summary,https://openstax.org/books/psychology-2e/pages/12-introduction,https://openstax.org/books/psychology-2e/pages/12-1-what-is-social-psychology,https://openstax.org/books/psychology-2e/pages/12-2-self-presentation,https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion,https://openstax.org/books/psychology-2e/pages/12-4-conformity-compliance-and-obedience,https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination,https://openstax.org/books/psychology-2e/pages/12-6-aggression,https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior,https://openstax.org/books/psychology-2e/pages/12-key-terms,https://openstax.org/books/psychology-2e/pages/12-summary",
-    "noun_score": 0.0,
-    "alpha_len": 7
-  },
-  {
-    "phrase": "let go",
-    "lemmas": "let go",
-    "pos": "AUX,VERB",
-    "example": "",
-    "source_urls": "",
-    "noun_score": 0.0,
-    "alpha_len": 6
   },
   {
     "phrase": "apr 22",
