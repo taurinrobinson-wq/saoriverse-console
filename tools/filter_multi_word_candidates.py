@@ -33,14 +33,27 @@ def main():
     nlp = spacy.load("en_core_web_sm")
     # build stopword blacklist: spaCy defaults plus a conservative custom list
     stop_blacklist = set([w.lower() for w in nlp.Defaults.stop_words])
+    # expand custom blacklist with common prepositions, conjunctions, and weak tokens
     custom = {
+        # articles, demonstratives, basic function words
         'of', 'the', 'in', 'on', 'and', 'or', 'for', 'to', 'by', 'with', 'a', 'an',
-        'this', 'that', 'these', 'those', 'as', 'at', 'from', 'about', 'between',
-        'into', 'through', 'during', 'before', 'after', 'above', 'below', 'up', 'down',
-        'over', 'under', 'again', 'then', 'once', 'here', 'there', 'when', 'where',
-        'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other',
-        'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too',
-        'very', 'can', 'will', 'just', 'now'
+        'this', 'that', 'these', 'those', 'as', 'at', 'from',
+
+        # common prepositions / connectors (expanded)
+        'about', 'above', 'across', 'after', 'against', 'along', 'among', 'around',
+        'before', 'behind', 'below', 'beneath', 'beside', 'between', 'beyond', 'but',
+        'concerning', 'despite', 'during', 'except', 'inside', 'into', 'like', 'near',
+        'of', 'off', 'onto', 'out', 'outside', 'over', 'past', 'regarding', 'since',
+        'through', 'throughout', 'toward', 'towards', 'under', 'underneath', 'until',
+        'up', 'upon', 'via', 'within', 'without',
+
+        # temporal / discourse tokens
+        'again', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how',
+
+        # quantifiers / determiners / modal-like
+        'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such',
+        'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very',
+        'can', 'will', 'just', 'now', 'may', 'might', 'should', 'could'
     }
     stop_blacklist.update(custom)
 
