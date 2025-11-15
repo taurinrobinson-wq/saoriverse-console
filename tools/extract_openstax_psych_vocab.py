@@ -18,6 +18,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 from typing import List
+import argparse
 
 URLS = [
     "https://openstax.org/books/psychology-2e/pages/11-introduction",
@@ -44,17 +45,19 @@ URLS = [
     "https://openstax.org/books/psychology-2e/pages/12-summary",
 ]
 
-OUT_DIR = os.path.join("data", "openstax")
-OUT_CSV = os.path.join("data", "openstax_psych_phrases.csv")
-TMP_DIR = "/tmp/openstax_html"
+DEFAULT_OUT_DIR = os.path.join("data", "openstax")
+DEFAULT_OUT_CSV = os.path.join("data", "openstax_psych_phrases.csv")
+DEFAULT_TMP_DIR = "/tmp/openstax_html"
 
 
-def ensure_packages():
+def ensure_packages(allow_install: bool = True):
     try:
         import requests  # noqa: F401
         from bs4 import BeautifulSoup  # noqa: F401
         import spacy  # noqa: F401
     except Exception:
+        if not allow_install:
+            raise
         print("Installing dependencies: requests, beautifulsoup4, spacy, en_core_web_sm")
         import subprocess
 
@@ -64,12 +67,12 @@ def ensure_packages():
             [sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 
 
-def fetch_url(url: str) -> str:
+def fetch_url(url: str, tmp_dir: str) -> str:
     import requests
 
-    os.makedirs(TMP_DIR, exist_ok=True)
+    os.makedirs(tmp_dir, exist_ok=True)
     safe = re.sub(r"[^0-9a-zA-Z]+", "_", url)[:180]
-    fname = os.path.join(TMP_DIR, safe + ".html")
+    fname = os.path.join(tmp_dir, safe + ".html")
     try:
         r = requests.get(url, timeout=20)
         r.raise_for_status()
@@ -158,7 +161,27 @@ def select_top_with_examples(phrases: List[str], text: str, top_n: int = 300):
 
 
 def main():
-    ensure_packages()
+    parser = argparse.ArgumentParser(
+        description="Extract candidate phrases from OpenStax Psychology pages or existing cleaned files."
+    )
+    parser.add_argument("--no-install", action="store_true",
+                        help="Do not attempt to install missing Python packages")
+    parser.add_argument("--use-local", action="store_true",
+                        help="Use existing cleaned files under out-dir instead of fetching web pages")
+    parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR,
+                        help="Directory to write/read cleaned texts")
+    parser.add_argument("--out-csv", default=DEFAULT_OUT_CSV,
+                        help="Path for output CSV")
+    parser.add_argument("--tmp-dir", default=DEFAULT_TMP_DIR,
+                        help="Temporary directory for downloaded HTML files")
+    parser.add_argument("--top-k", type=int, default=2000,
+                        help="Top-K phrases to consider from frequency ranking")
+    parser.add_argument("--top-n", type=int, default=400,
+                        help="Top-N phrases to output in CSV")
+
+    args = parser.parse_args()
+
+    ensure_packages(allow_install=not args.no_install)
 
     # Reuse the poetry cleaner
     sys.path.insert(0, os.path.join(os.getcwd(), "scripts", "utilities"))
@@ -170,26 +193,48 @@ def main():
 
     cleaner = PoetryTextCleaner()
 
+    OUT_DIR = args.out_dir
+    OUT_CSV = args.out_csv
+    TMP_DIR = args.tmp_dir
+
     os.makedirs(OUT_DIR, exist_ok=True)
 
     cleaned_texts = {}
     combined_corpus_parts = []
     sources_map = defaultdict(list)
 
-    for url in URLS:
-        fname = fetch_url(url)
-        if not fname:
-            continue
-        raw = extract_visible_text(fname)
-        cleaned = cleaner.clean_text(raw)
-        slug = slug_from_url(url)
-        out_path = os.path.join(OUT_DIR, slug + "_cleaned.txt")
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(cleaned)
-        print(f"Saved cleaned text: {out_path}")
-        cleaned_texts[url] = cleaned
-        combined_corpus_parts.append(cleaned)
-        sources_map[url].append(out_path)
+    if args.use_local:
+        # load any existing cleaned files from out-dir
+        print(f"Loading cleaned files from {OUT_DIR}")
+        for fname in sorted(os.listdir(OUT_DIR)):
+            if fname.endswith("_cleaned.txt"):
+                path = os.path.join(OUT_DIR, fname)
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        cleaned = f.read()
+                    # reconstruct a fake source URL from filename
+                    src = fname.replace("_cleaned.txt", "")
+                    cleaned_texts[src] = cleaned
+                    combined_corpus_parts.append(cleaned)
+                    sources_map[src].append(path)
+                    print(f"Loaded {path}")
+                except Exception as e:
+                    print(f"Failed to read {path}: {e}")
+    else:
+        for url in URLS:
+            fname = fetch_url(url, TMP_DIR)
+            if not fname:
+                continue
+            raw = extract_visible_text(fname)
+            cleaned = cleaner.clean_text(raw)
+            slug = slug_from_url(url)
+            out_path = os.path.join(OUT_DIR, slug + "_cleaned.txt")
+            with open(out_path, "w", encoding="utf-8") as f:
+                f.write(cleaned)
+            print(f"Saved cleaned text: {out_path}")
+            cleaned_texts[url] = cleaned
+            combined_corpus_parts.append(cleaned)
+            sources_map[url].append(out_path)
 
     if not combined_corpus_parts:
         print("No texts fetched/cleaned. Exiting.")
@@ -199,10 +244,10 @@ def main():
 
     # Extract candidate phrases
     print("Extracting candidate phrases from combined corpus...")
-    candidates = extract_phrases_from_corpus(combined, top_k=2000)
+    candidates = extract_phrases_from_corpus(combined, top_k=args.top_k)
 
     # Select top with examples and POS/lemmas
-    rows = select_top_with_examples(candidates, combined, top_n=400)
+    rows = select_top_with_examples(candidates, combined, top_n=args.top_n)
 
     # Save CSV
     os.makedirs(os.path.dirname(OUT_CSV), exist_ok=True)
