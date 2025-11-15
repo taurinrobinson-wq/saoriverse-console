@@ -31,6 +31,18 @@ def main():
         raise
 
     nlp = spacy.load("en_core_web_sm")
+    # build stopword blacklist: spaCy defaults plus a conservative custom list
+    stop_blacklist = set([w.lower() for w in nlp.Defaults.stop_words])
+    custom = {
+        'of', 'the', 'in', 'on', 'and', 'or', 'for', 'to', 'by', 'with', 'a', 'an',
+        'this', 'that', 'these', 'those', 'as', 'at', 'from', 'about', 'between',
+        'into', 'through', 'during', 'before', 'after', 'above', 'below', 'up', 'down',
+        'over', 'under', 'again', 'then', 'once', 'here', 'there', 'when', 'where',
+        'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other',
+        'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too',
+        'very', 'can', 'will', 'just', 'now'
+    }
+    stop_blacklist.update(custom)
 
     candidates = []
     with IN_CSV.open("r", encoding="utf-8") as f:
@@ -51,6 +63,10 @@ def main():
             alpha_tokens = [tok for tok in tokens_alpha if re.search(
                 r"[A-Za-z]", tok.text)]
             if len(alpha_tokens) < 1:
+                continue
+            # drop phrases that contain any stopword from the blacklist
+            lower_tokens = [tok.text.lower() for tok in tokens_alpha]
+            if any(t in stop_blacklist for t in lower_tokens):
                 continue
             noun_like = sum(1 for tok in tokens_alpha if tok.pos_ in (
                 "NOUN", "PROPN", "ADJ"))
