@@ -317,3 +317,14 @@ def create_hybrid_processor(supabase_config: Dict = None,
         supabase_integrator=supabase_integrator,
         use_local_fallback=use_local_fallback
     )
+
+
+def create_local_processor(use_local_fallback: bool = True) -> HybridEmotionalProcessor:
+    """Create a local-only emotional processor.
+
+    This factory returns a HybridEmotionalProcessor configured with no
+    Supabase integrator so it will operate entirely with local parsing
+    and local fallbacks. It does not attempt remote calls.
+    """
+    # Do not create or attach a SupabaseIntegrator; operate locally only
+    return HybridEmotionalProcessor(supabase_integrator=None, use_local_fallback=use_local_fallback)
