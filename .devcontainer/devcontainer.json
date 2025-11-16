@@ -21,7 +21,7 @@
         "streetsidesoftware.code-spell-checker",
         "ms-azuretools.vscode-containers",
         "DavidAnson.vscode-markdownlint",
-        "ms-toolsai.jupyter"
+        "GitHub.copilot"
       ]
     }
   },
@@ -40,14 +40,9 @@
     "8501": {
       "label": "Emotional OS UI",
       "onAutoForward": "openPreview"
-    },
-    "8888": {
-      "label": "Jupyter Lab",
-      "onAutoForward": "openBrowser"
     }
   },
   "forwardPorts": [
-    8501,
-    8888
+    8501
   ]
 }
