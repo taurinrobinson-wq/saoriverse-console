@@ -10,7 +10,7 @@
     },
     "vscode": {
       "settings": {
-  "python.defaultInterpreterPath": ".venv/bin/python",
+        "python.defaultInterpreterPath": ".venv/bin/python",
         "editor.formatOnSave": true,
         "files.autoSave": "afterDelay",
         "files.autoSaveDelay": 1000
@@ -20,7 +20,8 @@
         "ms-python.vscode-pylance",
         "streetsidesoftware.code-spell-checker",
         "ms-azuretools.vscode-containers",
-        "DavidAnson.vscode-markdownlint"
+        "DavidAnson.vscode-markdownlint",
+        "ms-toolsai.jupyter"
       ]
     }
   },
@@ -39,9 +40,14 @@
     "8501": {
       "label": "Emotional OS UI",
       "onAutoForward": "openPreview"
+    },
+    "8888": {
+      "label": "Jupyter Lab",
+      "onAutoForward": "openBrowser"
     }
   },
   "forwardPorts": [
-    8501
+    8501,
+    8888
   ]
 }
