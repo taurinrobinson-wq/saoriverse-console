@@ -232,11 +232,10 @@ if 'initialized' not in st.session_state:
     # module exposes `get_processing_mode()` which prefers an environment
     # override but otherwise returns 'local'. This disables hybrid/OpenAI
     # behavior by default.
-    try:
-        import scripts.local_integration as local_integration
-        default_mode = getattr(local_integration, 'get_processing_mode')()
-    except Exception:
-        default_mode = 'local'
+    # Enforce local-only processing for the app frontend. Do not consult
+    # alternate processing modes or remote-AI flags here: the UI and
+    # engine are fixed to local behavior.
+    default_mode = 'local'
 
     st.session_state['learning_settings'] = {
         'processing_mode': default_mode,

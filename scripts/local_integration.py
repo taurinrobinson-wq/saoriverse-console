@@ -4,6 +4,7 @@ Provides small wrappers so the app can use local-only processing without
 depending on remote AI services. This module is safe to import in tests.
 """
 import os
+import types
 from typing import List, Dict
 
 
@@ -39,9 +40,10 @@ def remote_ai_allowed() -> bool:
     - If `get_processing_mode()` is not 'local', allow remote AI.
     - Otherwise only allow if env var `ALLOW_REMOTE_AI` is set to '1'.
     """
-    mode = get_processing_mode()
-    if mode != "local":
-        return True
+    # Enforce local-only policy by default. Return False to indicate
+    # remote AI calls are not allowed unless code explicitly opts in
+    # via `ALLOW_REMOTE_AI` env var. This removes hybrid selection logic
+    # and makes local-only behavior the default.
     return os.environ.get("ALLOW_REMOTE_AI", "0") == "1"
 
 
@@ -79,3 +81,18 @@ def enforce_local_mode_guard():
 
 # Enforce guard at import time so local-first violations are visible immediately.
 enforce_local_mode_guard()
+
+
+def create_local_integration():
+    """Factory that returns a small local-only integration namespace.
+
+    This provides the same basic helpers but makes it explicit that this
+    integration is local-only. Callers can import this factory and use
+    the returned object in place of a hybrid/local selector.
+    """
+    return types.SimpleNamespace(
+        get_processing_mode=get_processing_mode,
+        get_synonyms=get_synonyms,
+        remote_ai_allowed=remote_ai_allowed,
+        remote_ai_error=remote_ai_error,
+    )

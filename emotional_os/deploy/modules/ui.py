@@ -203,8 +203,9 @@ def render_controls_row(conversation_key):
         # sidebar expander (so both demo and authenticated flows show
         # a single, consistent place for preferences).
         if 'processing_mode' not in st.session_state:
+            # Enforce local-only processing by default (no hybrid/remote AI)
             st.session_state.processing_mode = os.getenv(
-                'DEFAULT_PROCESSING_MODE', 'hybrid')
+                'DEFAULT_PROCESSING_MODE', 'local')
 
         # The interactive controls for changing processing mode are
         # rendered in the sidebar Settings panel. Keep this top-row
@@ -264,11 +265,13 @@ def ensure_processing_prefs():
         st.session_state['prefer_ai'] = True
 
     if 'processing_mode' not in st.session_state:
+        # Default to all-local processing model
         st.session_state.processing_mode = os.getenv(
-            'DEFAULT_PROCESSING_MODE', 'hybrid')
+            'DEFAULT_PROCESSING_MODE', 'local')
 
+    # Remote AI is not preferred in the local-only architecture
     if 'prefer_ai' not in st.session_state:
-        st.session_state['prefer_ai'] = True
+        st.session_state['prefer_ai'] = False
 
 
 def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
@@ -471,32 +474,13 @@ def render_settings_sidebar():
         with st.sidebar.expander("⚙️ Settings", expanded=False):
             st.markdown("**Interface & Processing**")
 
-            # Processing mode: hybrid or local
-            current_mode = st.session_state.get('processing_mode', 'hybrid')
+            # Processing mode is fixed to local-only. Remote AI is disabled.
             try:
-                def _on_mode_change():
-                    # Ensure the session_state key is normalized and trigger a rerun
-                    try:
-                        st.session_state['processing_mode'] = st.session_state.get(
-                            'processing_mode', current_mode)
-                    except Exception:
-                        pass
-                    try:
-                        st.experimental_rerun()
-                    except Exception:
-                        pass
-
-                # Local-first: expose only local processing in the UI by default
-                st.selectbox(
-                    "Processing mode",
-                    options=["local"],
-                    index=0,
-                    key='processing_mode',
-                    help='Local: only local parsing. Remote AI is disabled by default.',
-                    on_change=_on_mode_change
-                )
+                st.markdown("**Processing:** Local-only (remote AI disabled)")
+                # Ensure session_state reflects the enforced value
+                st.session_state['processing_mode'] = 'local'
             except Exception:
-                st.session_state.setdefault('processing_mode', current_mode)
+                st.session_state.setdefault('processing_mode', 'local')
 
             # Theme selection — mirrors to both legacy 'theme' and
             # 'theme_select_row' used elsewhere in the UI.
@@ -1848,7 +1832,13 @@ def render_main_app():
                     effective_input = sanitized_text if 'sanitized_text' in locals(
                     ) and sanitized_text else user_input
 
-                    if processing_mode == "local":
+                    # Default: run the all-local pipeline first and call the
+                    # response engine afterwards with the local analysis so we
+                    # avoid redundant parsing and ensure learning/glyph/gate
+                    # processing and anonymization run for every exchange.
+                    handled_by_response_engine = False
+
+                    if not handled_by_response_engine and processing_mode == "local":
                         from emotional_os.glyphs.signal_parser import parse_input
                         local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
                                                      db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
@@ -1862,6 +1852,32 @@ def render_main_app():
                         debug_sql = local_analysis.get("debug_sql", "")
                         debug_glyph_rows = local_analysis.get(
                             "debug_glyph_rows", [])
+                        # Call the local response engine with the local analysis so
+                        # the engine can produce a short, inquisitive, friend-like
+                        # response while avoiding redundant parsing. If the engine
+                        # fails, fall back to the older local/hybrid flow below.
+                        try:
+                            from main_response_engine import process_user_input as _engine_process
+                            start_time = time.time()
+                            ctx = {"local_analysis": local_analysis}
+                            last_pre = st.session_state.get('last_preproc', {})
+                            if isinstance(last_pre, dict):
+                                if last_pre.get('intent'):
+                                    ctx['emotion'] = last_pre.get('intent')
+                                if last_pre.get('confidence'):
+                                    ctx['intensity'] = 'high' if last_pre.get(
+                                        'confidence', 0) > 0.7 else 'gentle'
+                            response = _engine_process(effective_input, ctx)
+                            processing_time = time.time() - start_time
+                            debug_signals = local_analysis.get('signals', [])
+                            debug_glyphs = local_analysis.get('glyphs', [])
+                            debug_sql = local_analysis.get('debug_sql', '')
+                            debug_glyph_rows = local_analysis.get(
+                                'debug_glyph_rows', [])
+                            glyphs = local_analysis.get('glyphs', [])
+                            handled_by_response_engine = True
+                        except Exception:
+                            handled_by_response_engine = False
                         best_glyph = local_analysis.get("best_glyph")
                         glyph_display = best_glyph['glyph_name'] if best_glyph else 'None'
                         response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
@@ -1869,7 +1885,11 @@ def render_main_app():
                     # That option has been removed in favor of a simpler
                     # two-option model: 'hybrid' (default) and 'local'. Any
                     # unknown mode falls back to hybrid behavior below.
-                    elif processing_mode == "hybrid":
+                    elif not handled_by_response_engine and processing_mode == "hybrid":
+                        # For the all-local model, run the same local parsing
+                        # then call the local response engine rather than invoking
+                        # any remote AI endpoint. If the engine fails, fall
+                        # back to a simple local summary.
                         from emotional_os.glyphs.signal_parser import parse_input
                         local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
                                                      db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
@@ -1884,119 +1904,19 @@ def render_main_app():
                         debug_glyph_rows = local_analysis.get(
                             "debug_glyph_rows", [])
                         try:
-                            saori_url = st.secrets.get(
-                                "supabase", {}).get("current_saori_url") or st.secrets.get(
-                                "supabase", {}).get("saori_function_url")
-                            supabase_key = st.secrets.get(
-                                "supabase", {}).get("key")
-                            if not saori_url or not supabase_key:
-                                response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable in demo mode)"
-                            else:
-                                payload = {
-                                    "message": effective_input,
-                                    "mode": processing_mode,
-                                    "user_id": st.session_state.user_id,
-                                    "local_voltage_response": voltage_response,
-                                    "local_glyphs": ', '.join([g['glyph_name'] for g in glyphs]) if glyphs else '',
-                                    "local_ritual_prompt": ritual_prompt
-                                }
-                                if document_analysis:
-                                    doc_glyphs = document_analysis.get(
-                                        "glyphs", [])
-                                    doc_voltage_response = document_analysis.get(
-                                        "voltage_response", "")
-                                    doc_ritual_prompt = document_analysis.get(
-                                        "ritual_prompt", "")
-                                    debug_signals = document_analysis.get(
-                                        "signals", [])
-                                    debug_gates = document_analysis.get(
-                                        "gates", [])
-                                    debug_glyphs = doc_glyphs
-                                    doc_context = "\n".join([
-                                        f"Document Insights: {doc_voltage_response}",
-                                        f"Activated Glyphs: {', '.join([g['glyph_name'] for g in doc_glyphs])}" if doc_glyphs and isinstance(
-                                            doc_glyphs, list) else "",
-                                        f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
-                                    ])
-                                    payload["document_context"] = doc_context
-                                response_data = requests.post(
-                                    saori_url,
-                                    headers={
-                                        "Authorization": f"Bearer {supabase_key}",
-                                        "Content-Type": "application/json"
-                                    },
-                                    json=payload,
-                                    timeout=15
-                                )
-                                if requests is None:
-                                    response = "AI processing unavailable (requests library not installed)."
-                                else:
-                                    if response_data.status_code == 200:
-                                        result = response_data.json()
-                                        ai_reply = result.get(
-                                            "reply", "I'm here to listen.")
-
-                                        # SECOND PASS: Run the AI reply back through the
-                                        # local parser so we decode the AI's language into
-                                        # the local glyph/voltage representation and produce
-                                        # a locally-interpreted final response. This preserves
-                                        # the intended hybrid pipeline: local -> AI -> local.
-                                        try:
-                                            ai_local = parse_input(
-                                                ai_reply,
-                                                "emotional_os/parser/signal_lexicon.json",
-                                                db_path="emotional_os/glyphs/glyphs.db",
-                                                conversation_context=conversation_context,
-                                            )
-                                            ai_voltage = ai_local.get(
-                                                "voltage_response", "")
-                                            ai_glyphs = ai_local.get(
-                                                "glyphs", [])
-                                            ai_best = ai_local.get(
-                                                "best_glyph")
-                                            ai_glyph_display = ai_best['glyph_name'] if ai_best else (
-                                                ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
-
-                                            # Compose a final response that includes the AI's reply
-                                            # plus the local decoding/context so the user receives a
-                                            # grounded, locally-interpreted message.
-                                            response = (
-                                                f"{ai_reply}\n\n"
-                                                f"Local decoding: {ai_voltage}\n"
-                                                f"Resonant Glyph: {ai_glyph_display}"
-                                            )
-
-                                            # Update debug variables for downstream features
-                                            debug_signals = ai_local.get(
-                                                "signals", [])
-                                            debug_gates = ai_local.get(
-                                                "gates", [])
-                                            debug_glyphs = ai_glyphs
-                                            debug_sql = ai_local.get(
-                                                "debug_sql", "")
-                                            debug_glyph_rows = ai_local.get(
-                                                "debug_glyph_rows", [])
-                                        except Exception:
-                                            # If local re-parsing fails, fall back to the AI reply
-                                            response = ai_reply
-                                    else:
-                                        # Surface any payload the AI service included when possible,
-                                        # otherwise fall back to a locally-generated summary.
-                                        try:
-                                            body = response_data.json()
-                                            response = body.get(
-                                                'reply') or body.get('error') or ''
-                                        except Exception:
-                                            response = (
-                                                getattr(response_data, 'text', '') or '').strip()
-
-                                        if not response:
-                                            response = (
-                                                f"AI service error (HTTP {response_data.status_code}).\n"
-                                                f"Local Analysis: {voltage_response}\n"
-                                                f"Activated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n"
-                                                f"{ritual_prompt}\n"
-                                            )
+                            from main_response_engine import process_user_input as _engine_process
+                            start_time = time.time()
+                            ctx = {"local_analysis": local_analysis}
+                            last_pre = st.session_state.get('last_preproc', {})
+                            if isinstance(last_pre, dict):
+                                if last_pre.get('intent'):
+                                    ctx['emotion'] = last_pre.get('intent')
+                                if last_pre.get('confidence'):
+                                    ctx['intensity'] = 'high' if last_pre.get(
+                                        'confidence', 0) > 0.7 else 'gentle'
+                            response = _engine_process(effective_input, ctx)
+                            processing_time = time.time() - start_time
+                            handled_by_response_engine = True
                         except Exception as e:
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
@@ -2212,7 +2132,7 @@ def render_main_app():
 
         # Learn from hybrid mode conversations to improve local mode
         # AND generate new glyphs dynamically during dialogue
-        if processing_mode == "hybrid":
+        if processing_mode in ("local", "hybrid"):
             try:
                 from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
                 from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
