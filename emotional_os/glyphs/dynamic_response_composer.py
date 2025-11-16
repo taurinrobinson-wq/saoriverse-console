@@ -580,6 +580,101 @@ class DynamicResponseComposer:
 
         return None
 
+    def _build_glyph_aware_response(
+        self,
+        glyph: Optional[Dict],
+        entities: List[str],
+        emotions: Dict,
+        feedback_type: Optional[str] = None,
+        input_text: str = "",
+        extracted: Optional[Dict] = None,
+    ) -> str:
+        """
+        Build a response grounded in the glyph's meaning and emotional signal.
+
+        Args:
+            glyph: Full glyph dict with name, description, emotional_signal, gates
+            entities: Extracted entities from user input
+            emotions: Detected emotions from user input
+            feedback_type: Type of user correction if any
+            input_text: User's original or combined input text
+            extracted: Full extraction dict from _extract_entities_and_emotions
+
+        Returns:
+            Dynamically composed response anchored in glyph
+        """
+        parts = []
+
+        # 1. Opening that acknowledges the entity and/or glyph tone
+        opening = self._select_opening(entities, emotions)
+        parts.append(opening)
+
+        # 2. If there's feedback (correction), use bridging language
+        if feedback_type:
+            bridges = self.emotional_bridges.get(feedback_type) or []
+            if bridges:
+                bridge = random.choice(bridges)
+                parts.append(bridge)
+
+        # 3. Build middle: contextual movement language grounded in glyph
+        if glyph:
+            glyph_name = glyph.get('glyph_name', '')
+            glyph_desc = glyph.get('description', '')
+
+            # Use glyph description as inspiration for movement
+            if glyph_desc:
+                parts.append(glyph_desc)
+            elif "block" in input_text.lower():
+                movement = random.choice(self.movement_language["through"])
+                parts.append(movement)
+            elif "inherited" in input_text.lower():
+                movement = random.choice(self.movement_language["with"])
+                parts.append(movement)
+        else:
+            # Fallback when no glyph provided
+            if "block" in input_text.lower():
+                movement = random.choice(self.movement_language["through"])
+            elif "inherited" in input_text.lower():
+                movement = random.choice(self.movement_language["with"])
+            else:
+                movement = random.choice(
+                    list(self.movement_language.values())[0])
+            parts.append(movement)
+
+        # 4. Weave poetry if available
+        poetry_emotion = None
+        if glyph:
+            poetry_emotion = self._glyph_to_emotion_category(
+                glyph.get('glyph_name', ''))
+
+        poetry_emotions = {poetry_emotion: 0.8} if poetry_emotion else emotions
+        poetry_line = self._weave_poetry(input_text, poetry_emotions, [glyph] if glyph else None, extracted or {
+            'entities': entities, 'emotions': emotions})
+        if poetry_line:
+            parts.append(poetry_line)
+
+        # 5. Closing move (question or commitment) calibrated by glyph intensity
+        entity = self._sanitize_entity(entities[0] if entities else "this")
+
+        # Determine closing type from glyph intensity if available
+        closing_type = "question"
+        if glyph:
+            gates = glyph.get('gates') or glyph.get('gate')
+            if gates:
+                intensity = len(gates) if isinstance(gates, list) else 1
+                if intensity <= 2:
+                    closing_type = "permission"
+                elif intensity >= 8:
+                    closing_type = "commitment"
+
+        closing_template = random.choice(self.closing_moves[closing_type])
+        closing = closing_template.replace("{entity}", entity)
+        closing = closing.replace("{emotion}", list(emotions.keys())[
+                                  0] if emotions else "what you feel")
+        parts.append(closing)
+
+        return " ".join(parts)
+
     def _build_contextual_response(
         self,
         entities: List[str],
