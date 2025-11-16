@@ -5,7 +5,8 @@ from scripts import local_integration
 def test_get_processing_mode():
     mode = local_integration.get_processing_mode()
     assert isinstance(mode, str)
-    assert mode in ("local", "hybrid") or mode.isidentifier()
+    # Expect local by default; tests should allow explicit local-only mode
+    assert mode == "local" or mode.isidentifier()
 
 
 def test_get_synonyms_no_error():

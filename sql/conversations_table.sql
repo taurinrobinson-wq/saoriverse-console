@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS public.conversations (
     conversation_id text NOT NULL,
     title text NOT NULL DEFAULT 'New Conversation',
     messages jsonb NOT NULL DEFAULT '[]',
-    processing_mode text DEFAULT 'hybrid',
+    processing_mode text DEFAULT 'local',
     message_count integer DEFAULT 0,
     created_at timestamptz DEFAULT now(),
     updated_at timestamptz DEFAULT now(),
