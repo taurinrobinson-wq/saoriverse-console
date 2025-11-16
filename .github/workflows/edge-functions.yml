@@ -10,6 +10,8 @@ jobs:
   test:
     name: Run edge function tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
