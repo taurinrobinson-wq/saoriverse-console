@@ -388,17 +388,38 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
             composed, debug = decode_ai_reply(ai_reply, conversation_context)
             return composed, debug, local_analysis
 
-        fallback = (
-            f"AI service error (HTTP {mock_response.status_code}).\n"
-            f"Local Analysis: {voltage_response}\n"
-            f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
-            f"{ritual_prompt}\n(AI enhancement unavailable - local dev mode)"
-        )
-        return fallback, {}, local_analysis
+        # Try to compose a local, multi-glyph response when AI enhancement
+        # is unavailable. Fall back to a compact local-analysis string if
+        # the composer cannot be imported or glyphs are not present.
+        try:
+            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            composer = DynamicResponseComposer()
+            if glyphs:
+                response_text = composer.compose_multi_glyph_response(
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+            else:
+                response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+        except Exception:
+            response_text = (
+                f"Local Analysis: {voltage_response}\n"
+                f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+                f"{ritual_prompt}\n(AI enhancement unavailable - local dev mode)"
+            )
+
+        return response_text, {}, local_analysis
 
     if not saori_url or not supabase_key:
-        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
-        return response, {}, local_analysis
+        try:
+            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            composer = DynamicResponseComposer()
+            if glyphs:
+                response_text = composer.compose_multi_glyph_response(
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+            else:
+                response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+        except Exception:
+            response_text = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
+        return response_text, {}, local_analysis
 
     payload = {
         "message": effective_input,
@@ -419,8 +440,17 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
             timeout=15
         )
     except Exception:
-        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
-        return response, {}, local_analysis
+        try:
+            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            composer = DynamicResponseComposer()
+            if glyphs:
+                response_text = composer.compose_multi_glyph_response(
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+            else:
+                response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+        except Exception:
+            response_text = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
+        return response_text, {}, local_analysis
 
     if requests is None:
         return "AI processing unavailable (requests library not installed).", {}, local_analysis
@@ -440,13 +470,23 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
             return composed, debug, local_analysis
 
         # Final fallback: include HTTP status and local parsing summary.
-        fallback = (
-            f"AI service error (HTTP {response_data.status_code}).\n"
-            f"Local Analysis: {voltage_response}\n"
-            f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
-            f"{ritual_prompt}\n(AI enhancement unavailable)"
-        )
-        return fallback, {}, local_analysis
+        # Prefer a composed local response when possible
+        try:
+            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            composer = DynamicResponseComposer()
+            if glyphs:
+                response_text = composer.compose_multi_glyph_response(
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+            else:
+                response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+        except Exception:
+            response_text = (
+                f"AI service error (HTTP {response_data.status_code}).\n"
+                f"Local Analysis: {voltage_response}\n"
+                f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+                f"{ritual_prompt}\n(AI enhancement unavailable)"
+            )
+        return response_text, {}, local_analysis
 
     result = response_data.json()
     ai_reply = result.get('reply', "I'm here to listen.")
