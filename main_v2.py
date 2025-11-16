@@ -1,4 +1,32 @@
-"""Main entry point for the streamlit FirstPerson app."""
+"""Main entry point for the Streamlit FirstPerson app.
+
+High-level runtime flow:
+
+- Startup: the app sets Streamlit `page_config`, injects UI theme/CSS, and
+    loads optional helpers (preprocessor, limbic integration) using safe imports.
+- Authentication: users sign in via `SaoynxAuthentication`; unauthenticated
+    visitors see a demo-mode interface. The splash screen can be forced for QA.
+- Preferences & Persistence: users opt into saving chats via Settings; per-
+    session `learning_settings` (default: local-only) controls whether learning
+    events are persisted locally (append-only JSONL) and whether remote AI is
+    preferred. The UI enforces local-only processing by default.
+- Message handling: when a user submits an emotionally charged message the
+    text is parsed by `parse_input()` to extract signals, gates, glyphs and a
+    voltage-style emotional summary. The `run_hybrid_pipeline()` coordinates
+    local parsing and (optionally) remote AI enhancement while preserving
+    local-first behavior and clear fallbacks.
+- Response composition: replies are produced either by decoding an AI reply
+    via `decode_ai_reply()` or by composing a local, multi-glyph response using
+    `DynamicResponseComposer.compose_multi_glyph_response()` when AI is
+    unavailable. The composer blends the top-N glyphs' tones, voltages and
+    gate activations into a single, grounded reply.
+- Learning & evolution: candidate signals/glyphs may be staged and persisted
+    for later local evolution; deduplication and staging ensure near-duplicates
+    are handled conservatively.
+
+The goal: always return a grounded, private, and human-feeling response that
+prefers local-only processing and preserves auditability of learning events.
+"""
 
 import streamlit as st
 from pathlib import Path
