@@ -78,10 +78,11 @@ SELECT * FROM glyph_lexicon WHERE gate IN (...)
     └─ generate_contextual_response()
         ↓
     emotional_os/glyphs/dynamic_response_composer.py
-        ├─ _build_glyph_aware_response()
-        ├─ Use glyph.description as anchor
-        ├─ Use glyph.gates for intensity
-        └─ Map glyph name to poetry category
+      ├─ _build_glyph_aware_response()
+      ├─ Use glyph.description as anchor
+      ├─ Use glyph.gates / activation_signals for intensity (intensity ~= gate count)
+      ├─ Support multi-glyph composition via `compose_multi_glyph_response()` (default `top_n=5`)
+      └─ Map glyph name to poetry category
     ↓
 [NO GLYPHS FOUND]
     ↓
@@ -98,6 +99,18 @@ emotional_os/glyphs/learning_response_generator.py
     ↓
 Response delivered to user
 ```
+
+## 🟢 Recent Local-only Integration (Nov 16, 2025)
+
+- The UI and main entry now enforce a local-first, local-only processing model by default. Remote/hybrid AI is disabled in the standard app flow; any remote calls are optional and have robust fallbacks.
+- When remote AI is unavailable or configured off, `run_hybrid_pipeline()` will now prefer a locally-composed reply using:
+  - `emotional_os/glyphs/dynamic_response_composer.py:DynamicResponseComposer.compose_multi_glyph_response()`
+  - Default behavior: combine the top-N glyphs (default `top_n=5`) and produce a single layered response that reflects relative intensities and gates.
+- Intensity heuristic: the composer uses gate count and `activation_signals` as a proxy for glyph intensity/voltage. If your glyphs include an explicit numeric `voltage` field, the composer can be tuned to use that instead.
+- Deduplication & staging: candidate glyphs are checked against an existing lexicon and `relational_memory` (when available). Near-duplicates are staged to `learning/near_duplicate_staging.jsonl` (append-only) and the emitted candidate includes `dedup` and `dedup_reason` metadata.
+- Main app docstring now documents the full startup → auth → opt-in persistence → parse → response flow. See `main_v2.py` for the succinct runtime summary.
+
+Use this document as the canonical reference for the response flow while you continue improving the system. If you update selection heuristics (weights, `top_n`, or intensity calculations), update this file so the team's expectations stay aligned.
 
 ---
 
