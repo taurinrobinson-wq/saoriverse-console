@@ -255,43 +255,7 @@ def render_controls_row(conversation_key):
         pass
     with controls[5]:
         # Reserved for future use; intentionally left empty.
-        try:
-            # Persistent status badge showing processing mode and global guard
-            mode_badge = st.session_state.get('processing_mode', os.getenv(
-                'DEFAULT_PROCESSING_MODE', 'local'))
-            force_local_env = os.getenv('FORCE_LOCAL_ONLY', '')
-            force_local = str(force_local_env).lower() in ('1', 'true', 'yes')
-
-            # Choose a color and icon for quick visual scanning
-            if force_local:
-                bg = '#ef5350'  # red
-                icon = '🔒'
-            elif mode_badge == 'hybrid' or mode_badge == 'ai_preferred':
-                bg = '#66bb6a'  # green
-                icon = '🤖'
-            else:
-                bg = '#ffa726'  # orange
-                icon = '📡'
-
-            display_text = f"{mode_badge.upper()}"
-            if force_local:
-                display_text = f"{display_text} · ENFORCED"
-
-            badge_html = (
-                f"<div style=\"display:inline-block; padding:6px 10px; border-radius:14px;"
-                f" background:{bg}; color:#fff; font-weight:600; font-size:12px;"
-                f" box-shadow: 0 1px 3px rgba(0,0,0,0.12);\">{icon} {display_text}</div>"
-            )
-
-            # Render the badge in the reserved slot. Use unsafe HTML intentionally
-            # for this small UI fragment; it's static and contains no user content.
-            st.markdown(badge_html, unsafe_allow_html=True)
-        except Exception:
-            # Never fail the whole UI if badge rendering breaks
-            try:
-                st.write('')
-            except Exception:
-                pass
+        pass
 
 
 def ensure_processing_prefs():
