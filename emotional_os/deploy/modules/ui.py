@@ -427,6 +427,14 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
         except Exception:
             response_text = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
+        # Ensure the local-only branch appends a clear marker so callers
+        # and tests can detect that AI enhancement was not used.
+        try:
+            if isinstance(response_text, str) and '(AI enhancement' not in response_text and "I'm listening" not in response_text:
+                response_text = response_text + \
+                    "\n\n(AI enhancement unavailable)"
+        except Exception:
+            pass
         return response_text, {}, local_analysis
 
     payload = {
