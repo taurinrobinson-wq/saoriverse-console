@@ -6,6 +6,7 @@ Uses gutendex API (Project Gutenberg catalog):
 https://gutendex.com/
 """
 
+from parser.nrc_lexicon_loader import nrc
 import json
 import os
 import sys
@@ -16,7 +17,6 @@ import requests
 
 # Handle imports properly
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from parser.nrc_lexicon_loader import nrc
 
 
 class PoetryExtractor:
@@ -27,11 +27,11 @@ class PoetryExtractor:
         1342,  # Emily Dickinson - Complete Poems
         1661,  # Sherlock Holmes stories (some verse)
         4850,  # William Wordsworth - Complete Poetical Works
-        21379, # William Blake - Complete Poetry
+        21379,  # William Blake - Complete Poetry
         6787,  # John Keats - Complete Poetical Works
-        51013, # Robert Frost - Poetry collection
+        51013,  # Robert Frost - Poetry collection
         1545,  # Edgar Allan Poe - The Raven and Other Poems
-        28421, # Walt Whitman - Leaves of Grass
+        28421,  # Walt Whitman - Leaves of Grass
     ]
 
     def __init__(self, output_dir: str = "data/poetry"):
@@ -44,7 +44,7 @@ class PoetryExtractor:
     def download_project_gutenberg_book(self, book_id: int) -> str:
         """
         Download a book from Project Gutenberg.
-        
+
         Gutendex provides free access to Project Gutenberg catalog.
         """
         try:
@@ -132,7 +132,7 @@ class PoetryExtractor:
     def build_poetry_database(self, use_cache: bool = True) -> dict:
         """
         Build complete poetry database from Project Gutenberg.
-        
+
         Structure:
         {
             'emotion_name': [
@@ -189,7 +189,8 @@ class PoetryExtractor:
             if total_poems > 500:
                 break
 
-        print(f"\n✓ Built poetry database: {total_poems} poems across {len(poetry_db)} emotions")
+        print(
+            f"\n✓ Built poetry database: {total_poems} poems across {len(poetry_db)} emotions")
 
         # Convert defaultdict to regular dict and save
         poetry_db_regular = dict(poetry_db)
