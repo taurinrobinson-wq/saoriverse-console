@@ -406,6 +406,14 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
                 f"{ritual_prompt}\n(AI enhancement unavailable - local dev mode)"
             )
 
+        # Ensure callers can detect that AI enhancement was not available
+        # when we produced a local fallback response.
+        try:
+            if isinstance(response_text, str) and '(AI enhancement' not in response_text:
+                response_text = response_text + \
+                    "\n\n(AI enhancement unavailable)"
+        except Exception:
+            pass
         return response_text, {}, local_analysis
 
     if not saori_url or not supabase_key:
