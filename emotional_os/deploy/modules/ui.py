@@ -1975,6 +1975,50 @@ def render_main_app():
                     effective_input = sanitized_text if 'sanitized_text' in locals(
                     ) and sanitized_text else user_input
 
+                    # Persist user preferences inferred from the input
+                    try:
+                        # Detect brevity requests and persist across session
+                        brevity_patterns = [
+                            'keep it short', 'keep it shorter', 'shorter', 'short please', 'be brief',
+                            'keep it brief', 'shorter please', 'keep it concise', 'make it shorter',
+                            'can you keep it shorter', 'can you keep it short', 'please be brief'
+                        ]
+                        lower_in = (effective_input or '').lower()
+                        if any(p in lower_in for p in brevity_patterns):
+                            st.session_state['prefer_short'] = True
+                            conversation_context['prefer_short'] = True
+
+                        # Detect explicit 'stop saying' requests and persist suppressions
+                        stop_phrases = []
+                        try:
+                            # Matches: stop saying: "phrase" or stop saying 'phrase'
+                            stop_phrases += re.findall(
+                                r"stop saying[:\s]+\"([^\"]+)\"", lower_in)
+                            stop_phrases += re.findall(
+                                r"stop saying[:\s]+'([^']+)'", lower_in)
+                            # fallback: stop saying followed by short phrase
+                            stop_phrases += [g.strip() for g in re.findall(
+                                r"stop saying\s+([a-zA-Z0-9\s]{1,80})", lower_in)]
+                        except Exception:
+                            stop_phrases = []
+                        # Filter and persist
+                        stop_phrases = [s for s in (
+                            stop_phrases or []) if s and len(s) > 1]
+                        if stop_phrases:
+                            # normalize
+                            sp_norm = [s.strip() for s in stop_phrases]
+                            existing = st.session_state.get(
+                                'suppress_phrases', [])
+                            # merge uniquely
+                            merged = existing[:]
+                            for s in sp_norm:
+                                if s not in merged:
+                                    merged.append(s)
+                            st.session_state['suppress_phrases'] = merged
+                            conversation_context['suppress_phrases'] = merged
+                    except Exception:
+                        pass
+
                     # Default: run the all-local pipeline first and call the
                     # response engine afterwards with the local analysis so we
                     # avoid redundant parsing and ensure learning/glyph/gate

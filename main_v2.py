@@ -49,9 +49,10 @@ from datetime import datetime
 
 # Must be first Streamlit command
 # Prefer the project SVG as the page icon if available; fall back to emoji.
-try:
-    _logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+   try:
+        # Prefer the black cropped logo in the package static folder per request
+        _logo_path = Path(
+            "emotional_os/deploy/modules/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
@@ -63,8 +64,6 @@ try:
                 _b64 = base64.b64encode(svg_bytes).decode('ascii')
                 _page_icon = f"data:image/svg+xml;base64,{_b64}"
             except Exception:
-                # If base64 encoding fails for any reason, fall back
-                # to passing raw bytes (previous behavior).
                 _page_icon = svg_bytes
         except Exception:
             _page_icon = None
