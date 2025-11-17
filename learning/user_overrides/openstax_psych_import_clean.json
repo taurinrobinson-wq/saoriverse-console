@@ -1,0 +1,241 @@
+{
+  "signals": {
+    "language": {
+      "frequency": 5,
+      "keywords": [
+        "language",
+        "language models",
+        "language models or",
+        "large language",
+        "large language models"
+      ]
+    },
+    "access": {
+      "frequency": 4,
+      "keywords": [
+        "access",
+        "access for",
+        "access for free",
+        "educational access"
+      ]
+    },
+    "group": {
+      "frequency": 4,
+      "keywords": [
+        "a group",
+        "group",
+        "groups",
+        "the group"
+      ]
+    },
+    "m.": {
+      "frequency": 4,
+      "keywords": [
+        "m. spielman",
+        "m. spielman william",
+        "rose m.",
+        "rose m. spielman"
+      ]
+    },
+    "common": {
+      "frequency": 4,
+      "keywords": [
+        "commons attribution",
+        "creative commons",
+        "creative commons attribution",
+        "the creative commons"
+      ]
+    },
+    "william": {
+      "frequency": 3,
+      "keywords": [
+        "william",
+        "william j.",
+        "william j. jenkins"
+      ]
+    },
+    "texas": {
+      "frequency": 3,
+      "keywords": [
+        "texas",
+        "texas book",
+        "texas book url"
+      ]
+    },
+    "houston": {
+      "frequency": 3,
+      "keywords": [
+        "houston",
+        "houston texas",
+        "houston texas book"
+      ]
+    },
+    "include": {
+      "frequency": 3,
+      "keywords": [
+        "include",
+        "must include",
+        "you must include"
+      ]
+    },
+    "marilyn": {
+      "frequency": 3,
+      "keywords": [
+        "marilyn",
+        "marilyn d.",
+        "marilyn d. lovett"
+      ]
+    },
+    "use": {
+      "frequency": 3,
+      "keywords": [
+        "use",
+        "used",
+        "using"
+      ]
+    },
+    "location": {
+      "frequency": 3,
+      "keywords": [
+        "location",
+        "location houston",
+        "location houston texas"
+      ]
+    },
+    "spielman": {
+      "frequency": 3,
+      "keywords": [
+        "spielman",
+        "spielman william",
+        "spielman william j."
+      ]
+    },
+    "lovett": {
+      "frequency": 3,
+      "keywords": [
+        "lovett",
+        "lovett publisher",
+        "lovett publisher website"
+      ]
+    },
+    "people": {
+      "frequency": 2,
+      "keywords": [
+        "people",
+        "people who"
+      ]
+    },
+    "personality": {
+      "frequency": 2,
+      "keywords": [
+        "personality",
+        "personality traits"
+      ]
+    },
+    "behavior": {
+      "frequency": 2,
+      "keywords": [
+        "behavior",
+        "behaviors"
+      ]
+    },
+    "example": {
+      "frequency": 2,
+      "keywords": [
+        "example",
+        "for example"
+      ]
+    },
+    "person": {
+      "frequency": 2,
+      "keywords": [
+        "a person",
+        "person"
+      ]
+    },
+    "free": {
+      "frequency": 2,
+      "keywords": [
+        "for free",
+        "free"
+      ]
+    },
+    "individual": {
+      "frequency": 2,
+      "keywords": [
+        "individual",
+        "individuals"
+      ]
+    },
+    "follow": {
+      "frequency": 2,
+      "keywords": [
+        "following",
+        "the following"
+      ]
+    },
+    "model": {
+      "frequency": 2,
+      "keywords": [
+        "models",
+        "models or"
+      ]
+    },
+    "culture": {
+      "frequency": 2,
+      "keywords": [
+        "culture",
+        "cultures"
+      ]
+    },
+    "date": {
+      "frequency": 2,
+      "keywords": [
+        "date",
+        "date apr"
+      ]
+    },
+    "situation": {
+      "frequency": 2,
+      "keywords": [
+        "situation",
+        "the situation"
+      ]
+    },
+    "title": {
+      "frequency": 2,
+      "keywords": [
+        "title",
+        "title psychology"
+      ]
+    },
+    "redistribute": {
+      "frequency": 2,
+      "keywords": [
+        "are redistributing",
+        "you are redistributing"
+      ]
+    },
+    "j.": {
+      "frequency": 2,
+      "keywords": [
+        "j. jenkins",
+        "j. jenkins marilyn"
+      ]
+    },
+    "jenkins": {
+      "frequency": 2,
+      "keywords": [
+        "jenkins marilyn",
+        "jenkins marilyn d."
+      ]
+    },
+    "d.": {
+      "frequency": 2,
+      "keywords": [
+        "d. lovett",
+        "d. lovett publisher"
+      ]
+    }
+  }
+}

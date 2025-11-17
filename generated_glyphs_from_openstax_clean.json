@@ -1,0 +1,481 @@
+[
+  {
+    "id": "glyph_poetry_01",
+    "name": "Language & Access",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "access"
+    ],
+    "associated_keywords": [
+      "access for free",
+      "language",
+      "access",
+      "educational access",
+      "access for",
+      "large language",
+      "large language models",
+      "language models or"
+    ],
+    "combined_frequency": 9,
+    "response_cue": "Acknowledge the language and access here",
+    "narrative_hook": "The interplay of language and access",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_02",
+    "name": "Language & Group",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "group"
+    ],
+    "associated_keywords": [
+      "language",
+      "a group",
+      "group",
+      "the group",
+      "large language",
+      "large language models",
+      "groups",
+      "language models or"
+    ],
+    "combined_frequency": 9,
+    "response_cue": "Acknowledge the language and group here",
+    "narrative_hook": "The interplay of language and group",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_03",
+    "name": "Language & M.",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "m."
+    ],
+    "associated_keywords": [
+      "language",
+      "m. spielman william",
+      "large language",
+      "large language models",
+      "m. spielman",
+      "language models or",
+      "rose m. spielman",
+      "language models"
+    ],
+    "combined_frequency": 9,
+    "response_cue": "Acknowledge the language and m. here",
+    "narrative_hook": "The interplay of language and m.",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_04",
+    "name": "Language & Common",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "common"
+    ],
+    "associated_keywords": [
+      "the creative commons",
+      "language",
+      "large language",
+      "large language models",
+      "creative commons attribution",
+      "creative commons",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 9,
+    "response_cue": "Acknowledge the language and common here",
+    "narrative_hook": "The interplay of language and common",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_05",
+    "name": "Language & William",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "william"
+    ],
+    "associated_keywords": [
+      "language",
+      "william j.",
+      "william",
+      "large language",
+      "large language models",
+      "william j. jenkins",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and william here",
+    "narrative_hook": "The interplay of language and william",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_06",
+    "name": "Language & Texas",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "texas"
+    ],
+    "associated_keywords": [
+      "texas book url",
+      "language",
+      "texas",
+      "large language",
+      "large language models",
+      "texas book",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and texas here",
+    "narrative_hook": "The interplay of language and texas",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_07",
+    "name": "Language & Houston",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "houston"
+    ],
+    "associated_keywords": [
+      "houston",
+      "language",
+      "large language",
+      "large language models",
+      "language models or",
+      "houston texas book",
+      "houston texas",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and houston here",
+    "narrative_hook": "The interplay of language and houston",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_08",
+    "name": "Language & Include",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "include"
+    ],
+    "associated_keywords": [
+      "language",
+      "include",
+      "must include",
+      "large language",
+      "large language models",
+      "you must include",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and include here",
+    "narrative_hook": "The interplay of language and include",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_09",
+    "name": "Language & Marilyn",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "marilyn"
+    ],
+    "associated_keywords": [
+      "language",
+      "marilyn d. lovett",
+      "marilyn d.",
+      "large language",
+      "large language models",
+      "language models or",
+      "marilyn",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and marilyn here",
+    "narrative_hook": "The interplay of language and marilyn",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_10",
+    "name": "Language & Use",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "use"
+    ],
+    "associated_keywords": [
+      "language",
+      "using",
+      "used",
+      "large language",
+      "large language models",
+      "language models or",
+      "use",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and use here",
+    "narrative_hook": "The interplay of language and use",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_11",
+    "name": "Language & Location",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "location"
+    ],
+    "associated_keywords": [
+      "location houston texas",
+      "language",
+      "location",
+      "location houston",
+      "large language",
+      "large language models",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and location here",
+    "narrative_hook": "The interplay of language and location",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_12",
+    "name": "Language & Spielman",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "spielman"
+    ],
+    "associated_keywords": [
+      "language",
+      "spielman william j.",
+      "spielman",
+      "spielman william",
+      "large language",
+      "large language models",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and spielman here",
+    "narrative_hook": "The interplay of language and spielman",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_13",
+    "name": "Language & Lovett",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "lovett"
+    ],
+    "associated_keywords": [
+      "language",
+      "lovett publisher website",
+      "large language",
+      "large language models",
+      "language models or",
+      "lovett",
+      "lovett publisher",
+      "language models"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the language and lovett here",
+    "narrative_hook": "The interplay of language and lovett",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_14",
+    "name": "Access & Group",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "access",
+      "group"
+    ],
+    "associated_keywords": [
+      "access for free",
+      "access",
+      "educational access",
+      "a group",
+      "group",
+      "the group",
+      "access for",
+      "groups"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the access and group here",
+    "narrative_hook": "The interplay of access and group",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_15",
+    "name": "Access & M.",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "access",
+      "m."
+    ],
+    "associated_keywords": [
+      "access for free",
+      "access",
+      "educational access",
+      "m. spielman william",
+      "access for",
+      "m. spielman",
+      "rose m. spielman",
+      "rose m."
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the access and m. here",
+    "narrative_hook": "The interplay of access and m.",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_16",
+    "name": "Access & Common",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "access",
+      "common"
+    ],
+    "associated_keywords": [
+      "the creative commons",
+      "access for free",
+      "access",
+      "educational access",
+      "access for",
+      "creative commons attribution",
+      "creative commons",
+      "commons attribution"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the access and common here",
+    "narrative_hook": "The interplay of access and common",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_17",
+    "name": "Group & M.",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "group",
+      "m."
+    ],
+    "associated_keywords": [
+      "a group",
+      "m. spielman william",
+      "group",
+      "the group",
+      "m. spielman",
+      "groups",
+      "rose m. spielman",
+      "rose m."
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the group and m. here",
+    "narrative_hook": "The interplay of group and m.",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_18",
+    "name": "Group & Common",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "group",
+      "common"
+    ],
+    "associated_keywords": [
+      "the creative commons",
+      "a group",
+      "group",
+      "the group",
+      "creative commons attribution",
+      "creative commons",
+      "groups",
+      "commons attribution"
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the group and common here",
+    "narrative_hook": "The interplay of group and common",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_19",
+    "name": "M. & Common",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "m.",
+      "common"
+    ],
+    "associated_keywords": [
+      "the creative commons",
+      "m. spielman william",
+      "m. spielman",
+      "creative commons attribution",
+      "creative commons",
+      "rose m. spielman",
+      "commons attribution",
+      "rose m."
+    ],
+    "combined_frequency": 8,
+    "response_cue": "Acknowledge the m. and common here",
+    "narrative_hook": "The interplay of m. and common",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_20",
+    "name": "Language & People",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "language",
+      "people"
+    ],
+    "associated_keywords": [
+      "people who",
+      "language",
+      "people",
+      "large language",
+      "large language models",
+      "language models or",
+      "language models"
+    ],
+    "combined_frequency": 7,
+    "response_cue": "Acknowledge the language and people here",
+    "narrative_hook": "The interplay of language and people",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  }
+]
