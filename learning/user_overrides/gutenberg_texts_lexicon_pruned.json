@@ -1,0 +1,3944 @@
+{
+  "signals": {
+    "fear": {
+      "frequency": 1385,
+      "keywords": []
+    },
+    "love": {
+      "frequency": 1230,
+      "keywords": []
+    },
+    "the fear": {
+      "frequency": 490,
+      "keywords": []
+    },
+    "no fear": {
+      "frequency": 370,
+      "keywords": []
+    },
+    "my love": {
+      "frequency": 230,
+      "keywords": []
+    },
+    "what": {
+      "frequency": 215,
+      "keywords": []
+    },
+    "who": {
+      "frequency": 165,
+      "keywords": []
+    },
+    "hate": {
+      "frequency": 160,
+      "keywords": []
+    },
+    "other furious creatures": {
+      "frequency": 160,
+      "keywords": []
+    },
+    "the love": {
+      "frequency": 155,
+      "keywords": []
+    },
+    "my fear": {
+      "frequency": 150,
+      "keywords": []
+    },
+    "any fear": {
+      "frequency": 150,
+      "keywords": []
+    },
+    "a calm": {
+      "frequency": 145,
+      "keywords": []
+    },
+    "his love": {
+      "frequency": 140,
+      "keywords": []
+    },
+    "the calm": {
+      "frequency": 140,
+      "keywords": []
+    },
+    "content": {
+      "frequency": 135,
+      "keywords": []
+    },
+    "nothing": {
+      "frequency": 110,
+      "keywords": []
+    },
+    "myself": {
+      "frequency": 105,
+      "keywords": []
+    },
+    "something": {
+      "frequency": 95,
+      "keywords": []
+    },
+    "a little sad myself": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "a monstrous huge and furious beast": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "my former calm, sedate way": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "the honest, grateful creature": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "sheer nervous dread": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "your love": {
+      "frequency": 75,
+      "keywords": []
+    },
+    "a love": {
+      "frequency": 75,
+      "keywords": []
+    },
+    "that love": {
+      "frequency": 75,
+      "keywords": []
+    },
+    "all fear": {
+      "frequency": 75,
+      "keywords": []
+    },
+    "the profound calm": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "his sleepless, excited imagination": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "a calm tropical sea": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "short this sad part": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "the happy view": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "a smooth, calm sea": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "the happy posture": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "a grateful friend": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "while happy, vacuous bursts": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "a self-conscious and satisfied air": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "a calm indifferent voice": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "our peaceful home": {
+      "frequency": 65,
+      "keywords": []
+    },
+    "a happy, cheerful home": {
+      "frequency": 65,
+      "keywords": []
+    },
+    "a happy one": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "sad hearts": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a happy day": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "Happy thought": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "vague fear": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "sad news": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "nervous prostration": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a calm and peaceful mind": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "calm and serene joy": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a nervous fever": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a cheerful accent": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "Happy, happy earth": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a peaceful calm trouble": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "the furious monster": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "the instinctive love": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "calm weather": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "their fear": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "Yet calm, enticing calm, oh, whale": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "the calm reasonings": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a calm morning": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "wild beasts": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "the prodigious number": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "uninhabited country": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "all the happy things": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "the calm weather": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "my sad condition": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "no furious wolves": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "indeed a most furious current": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "all rash and ignorant pilots": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "my mere fear": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "the most desperate, hopeless condition": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "naked, unarmed wretches": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a cheerful work": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "cheerful countenance": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a more furious charge": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a continually disappointed anticipation": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "a sad thing": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "itself": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "yet the most calm": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "His fear": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "her love": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "his calm": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "our fear": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "day": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "what fear": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "all my calm": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "the world": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "the same time": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "Men": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "many, many, happy years": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "the poor fellow": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "some nervous fit": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "such things": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "a serious and satisfied spirit": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "many happy and excellent natures": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "your sad torments": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "the old man": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "a bold and nervous lofty language": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "our first love": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "a rich and thriving man": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "a rash and immoderate desire": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "The little remainder": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "some other use": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "humble and hearty thanks": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "the wicked, cursed, abominable life": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "many very profitable reflections": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "such narrow bounds": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "his simple, unfeigned honesty": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "a barren, uninhabited island": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "” a neat, sad little waltz": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "His unreal and selfish love": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "the happy turn": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "our beautiful happy home": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "whom": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "night": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a very happy wife": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "long, anxious times": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a brave and cheerful appearance": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "so sad a concrete truth": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the holy calm": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a very sad and terrible case": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a few happy words": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "my own hate": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "perfect nervous poise": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "my sad and humble soul": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "terrible fear": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the rest": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the most grateful little creature": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the cheerful faces": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the same happy creature": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a happy and glad welcome": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the calm and heavenly scene": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the sad death": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a few sad hours": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a sad and bitter world": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "additional love": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "calm and mild manners": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a contented and even cheerful countenance": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "satisfied, miserable wretch": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "sad and solemn enthusiasm": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "such serene household joy": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "one single peaceful influence": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "such nervous whiffs": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "some luckless disappointed whale-ship": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the excited old man": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "that proud, sad king": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a strong, nervous arm": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a dead calm bathe": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "The ineffaceable, sad birth-mark": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the strange calm things": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "That glad, happy air": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "any calm and indolent spoutings": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "very calm—frozen calm": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the top": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "our nervous, sporadic games": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "nervous despair": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "pleasant, cheerful snobbery": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a worried, uncertain way": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "his long nervous fingers": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "The same nervous staccato laugh": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "His sudden mad love": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "his calm clear voice": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a happy time": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "himself": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "that a happy thought": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "your great love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a happy change": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "your fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such an excited state": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the old lady’s fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a dreadful fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my mind": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "some terrible fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my terrible fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "some dreamy fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "at all a happy thing": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a dead calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "superstitious fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "personal fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a happy surprise": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a very happy evening": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "as happy a man": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a happy vivacity": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "cheerful spirits": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a deadly fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad sort": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the old fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a terrible fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "Such a sad blow": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "nervous strength": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad world": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a grateful bow": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "happy life": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a very cheerful laugh": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "an angry snarl": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a true love episode": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a greater fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my husband’s great love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a new fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "reason": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "Ah, a sad accident": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a depressed fracture": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a nervous suspense": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his nervous power": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the holiest love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "hate and baffled malignity": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "our grim hate": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad dreaminess": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the sad experience": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such a hopeful basis": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the necessary calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a happy thought": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his highest fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "her sad case": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the man": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a calm sea": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "anxious thoughts": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a calm, settled grief": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "these wild and mysterious regions": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "filial love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "sad trash": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "those dear, dear friends": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the most anxious affection": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my nervous symptoms": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "A serene sky": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the nervous fever": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his serene conscience and guiltless life": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "daily fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "that happy creature": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "furious detestation": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a satisfied conscience": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "depressed spirits": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the greatest fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a more cheerful air": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "more cheerful notes": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "brotherly love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "peaceful dreams": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his peaceful life": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the disappointed fiend": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a more cheerful heart": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "peaceful happiness": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the frowning and angry countenances": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "calm forgetfulness": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "anxious suspense": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "too sincere a love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a little fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my sad tears": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "cheerful auguries": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "her first love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "anxious grapnels": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a nervous man": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the awful fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a quick fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "their calm self-collectedness": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "thou art": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a cheerful look": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a nervous emphasis": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "anxious strides": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the serene weather": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his nervous step": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his calm orders": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such a furious trope": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the cheerful greenness": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "some peaceful valley": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "“A sad business": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "one serene and moonlight night": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "happy hearts": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a furious man": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad deficiency": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the excited seamen": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "any stagnant calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the seemingly harmless rifle": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the fatal powder": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the graceful repose": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "actual play": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "true terror": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "any other aspect": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "this dangerous affair": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the excited headsman": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "An intense copper calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "so intense a calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "this deadly calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the first convenient port": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "furious life": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my cheerful duty": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad pickle": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "her fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    ", hopeful chase": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his vast, mild head": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the divine love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "delighted nostrils": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the thousand cheerful chimneys": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a serene valley lake": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "all peaceful concernments": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "mute calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the long calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "then a love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad mistake": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a complete calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the grateful parties": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the spangled sea calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a devout love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "this peaceful wood": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his angry flukes": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "thy most solitary hours": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "their delighted surprise": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "serene ocean": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his happy home": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "its after calm": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "neither love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "our sad burial": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the peaceful land": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the serene tranquillities": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "furious speed": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the upper and lower part": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the higher or lower part": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the same earnest persuasions": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "some such decreed unavoidable misery": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "two such visible instructions": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the least encouraging prospect": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such dreadful noises": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a quiet, retired life": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a fair and plain pursuit": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my new plantation": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the deepest gulf": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "human misery": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the cause": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my cave": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my ladder": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my wall": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the pieces": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the hill": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "excellent good raisins": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the least sense": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "this solitary condition": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my solitary state": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "human society": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "His eternal presence hereafter": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "this forsaken, solitary condition": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the next rainy season": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my own frightful ideas": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such wonderful experience": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "morrow": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the apprehensions": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the wretched, inhuman custom": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "many other particulars": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a little creek": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "so many hours": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the first years": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "so many thousand dangers": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my little thick grove": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the aptest scholar": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a singular satisfaction": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the best principles": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my full satisfaction": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "mere multitude": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "another poor creature lie": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "so hard neck": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "little life": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such Christian country": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the wooden tools": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "as much land": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "our own food": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "The three poor distressed men": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the first English colony": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the poor man": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such creatures": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a farther distance": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "very long strides": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a strange rate": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a middling gallop": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his own business": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "other times": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the continual fire": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "great odds": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "my good ancient widow": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a cheerful square": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "cheerful sun": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a cheerful word": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "an angry diamond": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the sad things": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "more cheerful carriages": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his nervous circuit": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "nervous gaiety": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the sad horns": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "his eyes": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad time": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the slightest fear": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "secret love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad smile": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "such love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "the awful and beautiful forms": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "white and crimson silk": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a wonderful love": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "that sad face": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "happy marriages": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad truth": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a sad look": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "awful fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "an ever-growing fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "a vague, overmastering fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "the friends": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "we all love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "waste": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "blood": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "no love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "the haunting fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "a woman’s love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "some fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "both": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "all love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "that sweet, sweet, good, good woman": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "a fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "to love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "all your love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "many months": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "afterwards their love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "an innocent, half-painful self-deceit": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "our love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "my hate": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "thou deep and dark blue ocean, roll": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "the serene": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "his hate": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "the soft, curled, hermaphroditical Italian pictures": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "that enchanted calm": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "an exemplary, sulky old soul": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "every calm": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "the last fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "the men": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "that man’s fear": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "their love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "my life": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "what love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "really love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "Some love": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "Women": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "its calm": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "herself": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "man": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a constant sufferer": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a sufficient substitute": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "every possible confidence": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "strange things": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my own soul": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a sort": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "those awful women": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the most resolute men": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my friend": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "whose happiness": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the same habit": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "time": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a dead man": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "your own married life": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the dear soul": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a few seconds": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my dear fellow": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "many things": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "her bloomin’ old teapot": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the other rooms": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "infinite tenderness": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "your poor bleeding heart": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "Devotion": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "how great friends": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the time": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "great loss": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my own part": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "old times": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the red scar": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "death": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the way": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "such times": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "sore trial": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the awful thrall": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the evil eye": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "other travellers": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "only a wild, surging desire": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the tamer scenes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "your early, much-loved friend": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "each vital drop": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "your dear countenances": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "countless tears": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "inexorable fate": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "such various feelings": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "certain signs": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the sea": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the fiery pit": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a man": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the white whale agent": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the white whale principal": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the most part": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the eternal frosted desolateness": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "such vast altitudes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "such inhuman solitudes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a leaky vessel": {
+      "frequency": 20,
+      "keywords": []
+    },
+    ", some really landless latitude": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "his own person": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "long, dismal, uninhabited swamps": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "all the preternatural terrors": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "real delirium": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the ignorant crew": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "practical use": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the incredulous captain": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "unconditional perdition": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "this vast dumb brute": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a small basin": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the mighty, misty monster": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "his incommunicable contemplations": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "that other precious fish": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a beautiful, bounteous, blue day": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "many other fine qualities": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "their own mild, uncontinented seas": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a certain slight but painful appearing yawing": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "life": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "his extended hand": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the precise bearing": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a competent share": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a country free school": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "other friends": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the middle station": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the fewest disasters": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "so many vicissitudes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "so many distempers": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "vicious living": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "hard labour": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "mean or insufficient diet": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the other hand": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my calculation": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "that place": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "that country": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the negroes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "its barrenness": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "tigers": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "lions": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "leopards": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "their hunting": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my own danger": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "wild creatures": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "terrible thunder": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the third shock": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my own ways": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a certain stupidity": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the most hardened, unthinking, wicked creature": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "our common sailors": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my miserable condition": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the best part": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "above two hundred large bunches": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a perfect enclosure": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the biggest creature": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the young trees": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "more mind": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "many goats": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "much more difficulty": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the liberty": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "society": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "all the pleasures": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the deficiencies": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "His presence": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the communications": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "His grace": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my soul": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "His providence": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "all its miserable circumstances": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "all the past part": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my very desires": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "much more convenience": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the particular inconveniences": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a great depth": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "such violence": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my left hand": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a few leagues distance": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "an agreeable surprise": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "small stakes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "scarce room": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the least imagine": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "innumerable fluttering thoughts": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the last degree": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the flood": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "shore": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the more composure": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my great comfort": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a tame flock": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a few days": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the south side": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my great sorrow": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my former thoughts": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "new vigour": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the poor creatures": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "mere amazement": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "no more power": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "their own escape": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a public register": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the same person": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "other gentlemen": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "my man": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "his country": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the wolf": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a bolder man": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the most dismal howling": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a prodigious number": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the bear": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a great stone": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "no more harm": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the blow": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "an evening": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "phase": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "its close": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the moment": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "A celebrated tenor": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a notorious contralto": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "such—such beautiful shirts": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "the latest thing": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "faithful know": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a dainty silver case": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a very lucky fellow": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a beauteous flower": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "a more wonderful thing": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "Some one": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "your husband": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "other young wives": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a rich old gentleman": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such eloquent witness": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "anything": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "her husband": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the whole thing": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his great white moustache": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the broad, full sunlight": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the night": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "that other good fellow": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such curious turns": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such foolish ideas": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a round robin": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "double watch": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a sudden, startled scream": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "all the other open rooms": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "greater and greater degree": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "great and terrible things": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "other physical matters": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the strong young manhood": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "Oh, little miss": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such unknown horrors": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a dim half-remembrance": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "white, sharp teeth": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the foes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "that that poor pretty creature": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his ‘respectful duty": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the junior partner": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "some great wooden boxes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "The poor dear": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "her last illness": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the whole fearful mystery": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a sweet young lady": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "only an earthly token": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his own bright self": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "that last hysterical outburst": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the good, good wishes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "those other strong men": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the window": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his little golden crucifix": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a while": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his brave words": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "all my true, true friends": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "her sweet pity": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "last night": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such terrible memories": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the monster": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the only thing": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such danger": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his constant and deep grief": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the majestic and wondrous scenes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the magnificent appearances": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "A human being": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a transitory desire": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the first time": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "friends": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the better feelings": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "your son": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "your kinsman": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "your sakes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "no thought": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "sense": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "joy": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the air": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "my gentle demeanour and conciliating words": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "different and far deeper emotions": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "their feelings": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "inextinguishable hatred": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "gloomy feelings": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the deep and gloomy wood": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "an old benevolent man": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a dense and frightful darkness": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the irresistible, disastrous future": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the same incoherent manner": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "certain and tangible happiness": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "deep and everlasting regret": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "my right hand": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "my own life": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "whose vast bodies": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such huge troops": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a physical or metaphysical point": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a fine, boisterous something": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "that famous old island": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "soggy, squitchy picture": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "true and faithful repentance": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "greatly superior natural force": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "many long night-watches": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "all nature’s sweet or savage impressions": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "her own virgin voluntary and confiding breast": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "these things": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "stiff and grating joints": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "many a perilous time": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the sight": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "very loath to leave, for good, a ship": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the wide and endless waters": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the whole broad world": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the high and mighty business": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a thing": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "heavy, lumber-like pace": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the old second mate": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "this gnomon-like fin": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a dreamy meditative man": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "all the little detailed conveniences": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "those profound magnetic meditations": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "That inscrutable thing": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "this small black boy": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "various and not unfrequent instances": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "its own mad mark": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "as much their insufferable foe": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "two such opposite emotions": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "hidden rocks": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "that hideous whiteness": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the continual sight": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the mere fancying": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "this strong young colt": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a fresh buffalo robe": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a remarkable and most significant one": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a certain generous knight-errantism": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "their more common, daily appetites": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "other pious perquisites": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "(Strong, strong, boys": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "hearty good-will": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "numerous populous cities": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "Venetianly corrupt and often lawless life": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the vast milky mass": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a few rapid blows": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a universal yellow lotus": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a black and hooded head": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "that hard-scrabble scramble": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "plaintive cries": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his amazing bulk": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the stoutest man": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the peculiar practical virtues": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the green palmy cliffs": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a balmy autumnal morning": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "good time": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "her solemn pauses": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a general lassitude": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the impotent, repentant, admonitory stage": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "his amorous errors": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a weary and perilous chase": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "poor devils": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "tallow candles": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the dry bones": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "aye": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "pop": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "happiness": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "every little untoward circumstance": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "timid untravelled man": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the profound unbounded sea": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "certain little canoes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "those same dark canoes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "any meditative Magian rover": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "an old pike-head": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a moment": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "thou canst": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "mere supernal power": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "thou launchest navies": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "such unfrequented waters": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "some riotous and desperate scene": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "some unknown constitutional reason": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the long central keel": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a bright passionate mouth": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "gay, exciting things": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a dim, hazy cast": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a sharp, joyous moment": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a dignified and indifferent way": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a little white roadster": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a huge black knotted tree": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "That unfamiliar yet recognizable look": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "an invisible but absorbing object": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "this low, sweet fever": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a quality": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the murky yellow cars": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the bored, sprawling, swollen towns": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the reason": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "The formal monotonous ticking": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "others": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a very respectable class": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the best families": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "the sullen answer": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "any one": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "some higher influence": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "a wonderful tragic figure": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "those curious unpictured sins": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "mad wilful rejections": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "certain modern psychologists": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "mad delightful follies": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "my own name": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "our ears": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "your eyes": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "The last eight years": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your fortunes": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your account": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "our mutual relations": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a wonderful thing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some clever man": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your friend": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the chance": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "shoulders": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "Your mind": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your journey": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the kind": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "NORA": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "no cares": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the children": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "talk": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "all these nice things": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my way": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "yourself": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "her dress": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "any great distance": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "little singing-bird": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "most people": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my beautiful land": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some other language": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a long, agonised wailing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the road": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your all too-flattering estimate": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "Transylvanian nobles": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the common dead": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the only living soul": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "main strength": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your first letter": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "this accursed place": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a soft quietude": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "sweet lives": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "their gentle breasts": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a soft whisper": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some time": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "this dreadful thing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a vaporous garment": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the dead eyes": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the castle wall": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some lethal weapon": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a poor fellow": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a good fellow": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a fine fellow": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "old people": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my head": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "sore distress": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a sensitive nature": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a panic": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "good terms": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "quiet persons": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "The whole agglomeration": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the peculiar effect": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "that terrible night": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his dutiful respects": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some fearful shock": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some terrible shock": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his poor brain": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my poor dear": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "any other girl": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the happiest woman": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "all the wide world": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the eyes": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some real cheerfulness": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "our other friend": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "all his great fortune": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his very reticence": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a double supply": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "one good thing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "an eager whisper": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his stalwart proportions": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the not-so-far-off": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "strong man": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the spirit": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the absolute prostration": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the early morning": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "selfish things": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "our inner eyes": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my dear": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "Oh, the terrible struggle": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the dear child": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "present distress": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "then long spells": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a great press": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "insolent smile": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "My own belief": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a suspicious sort": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the elementary conditions": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "four strong men": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the poor child": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "all the moods": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "tenses": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the verb": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his ‘love": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the same cart": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a father": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "your own happiness": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "even his stalwart manhood": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "more harm": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a slight relapse": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the past week": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a strange world": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "those holy men": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the white garments": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the visit": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "some light": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "much favour": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "good life": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "this great learned man": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "pleasure": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "any abstract truth": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "all the dogged argumentativeness": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a considerable time": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "fact": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "one thing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "thorny paths": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my own land": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "that moment": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the remnant": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "loathing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "savage delight": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my own heart": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the foul Thing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the poor lady": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "unequalled sweetness": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "sunshine": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the wasted face": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "form": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "symbol": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the dark": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the other side": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "terrible things": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the vampire’s ultimate triumph": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the old chapel": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "this terrible affair": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his old wound": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "her real death": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "many a long day": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "more esteem": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the first what": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "one so precious life": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "foul things": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his fair places": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "A brave man’s hand": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the first place": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "no other means": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "an idiotic thing": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a strong impulse": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the necessary formalities": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "personal grounds": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "our first night’s work": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "last night’s work": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "much learning": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "that sweet soul": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "our terrible things": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a silly fool": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the usual pace": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "such a way": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "her nerve": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his own ground": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "so resolute a guardian": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a gallant effort": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "his mind": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "this time": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the real injury": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a horrible sinking": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "the face": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "my heart": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "wonderful calmness": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "a studied calmness": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "direct simplicity": {
+      "frequency": 10,
+      "keywords": []
+    }
+  }
+}

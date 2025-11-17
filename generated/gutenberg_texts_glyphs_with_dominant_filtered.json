@@ -1,0 +1,582 @@
+[
+  {
+    "id": "glyph_poetry_01",
+    "title": "Fear & Love",
+    "symbol": "◆♥",
+    "emotions": [
+      "fear",
+      "love"
+    ],
+    "keywords": [
+      "fear",
+      "love"
+    ],
+    "frequency": 4155,
+    "response": "Acknowledge the fear and love here",
+    "narrative": "A story of love through love",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "love"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 1,
+      "fear": 1,
+      "negative": 1,
+      "joy": 1,
+      "positive": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative",
+      "joy",
+      "positive"
+    ],
+    "keywords_lemma": [
+      "fear",
+      "love"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.333,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.333
+  },
+  {
+    "id": "glyph_poetry_03",
+    "title": "Fear & No Fear",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear:absence"
+    ],
+    "keywords": [
+      "fear",
+      "no",
+      "no fear"
+    ],
+    "frequency": 1755,
+    "response": "Acknowledge the fear and no fear here",
+    "narrative": "The interplay of fear and no fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "fear:absence",
+      "absence:absence"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 1,
+      "fear": 1,
+      "negative": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative"
+    ],
+    "keywords_lemma": [
+      "fear",
+      "no",
+      "no fear"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.5,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.5
+  },
+  {
+    "id": "glyph_poetry_07",
+    "title": "Love & No Fear",
+    "symbol": "♥◆",
+    "emotions": [
+      "love",
+      "fear:absence"
+    ],
+    "keywords": [
+      "fear",
+      "love",
+      "no",
+      "no fear"
+    ],
+    "frequency": 1600,
+    "response": "Acknowledge the love and no fear here",
+    "narrative": "A story of love through no fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "love",
+      "fear:absence",
+      "absence:absence"
+    ],
+    "nrc_emotion_counts": {
+      "joy": 1,
+      "positive": 1,
+      "anger": 1,
+      "fear": 1,
+      "negative": 1
+    },
+    "nrc_emotions": [
+      "joy",
+      "positive",
+      "anger",
+      "fear",
+      "negative"
+    ],
+    "keywords_lemma": [
+      "fear",
+      "love",
+      "no",
+      "no fear"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.333,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.333
+  },
+  {
+    "id": "glyph_poetry_09",
+    "title": "Fear & Hate",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "anger"
+    ],
+    "keywords": [
+      "fear",
+      "hate"
+    ],
+    "frequency": 1545,
+    "response": "Acknowledge the fear and hate here",
+    "narrative": "The interplay of fear and hate",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "hate"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 2,
+      "fear": 2,
+      "negative": 2,
+      "disgust": 1,
+      "sadness": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative",
+      "disgust",
+      "sadness"
+    ],
+    "keywords_lemma": [
+      "fear",
+      "hate"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.333,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.333
+  },
+  {
+    "id": "glyph_poetry_10",
+    "title": "Fear & Other Furious Creatures",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "anger"
+    ],
+    "keywords": [
+      "creatures",
+      "fear",
+      "furious",
+      "other furious creatures"
+    ],
+    "frequency": 1545,
+    "response": "Acknowledge the fear and other furious creatures here",
+    "narrative": "The interplay of fear and other furious creatures",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "other furious creatures"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 2,
+      "fear": 1,
+      "negative": 2,
+      "disgust": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative",
+      "disgust"
+    ],
+    "keywords_lemma": [
+      "creature",
+      "fear",
+      "furious",
+      "other furious creature"
+    ],
+    "dominant_emotion_filtered": "anger",
+    "dominant_score_filtered": 0.5,
+    "dominant_emotion": "anger",
+    "dominant_score": 0.5
+  },
+  {
+    "id": "glyph_poetry_14",
+    "title": "Fear & A Calm",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "calm"
+    ],
+    "keywords": [
+      "a calm",
+      "calm",
+      "fear"
+    ],
+    "frequency": 1530,
+    "response": "Acknowledge the fear and a calm here",
+    "narrative": "The interplay of fear and a calm",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "a calm"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 1,
+      "fear": 1,
+      "negative": 1,
+      "positive": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative",
+      "positive"
+    ],
+    "keywords_lemma": [
+      "a calm",
+      "calm",
+      "fear"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.5,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.5
+  },
+  {
+    "id": "glyph_poetry_16",
+    "title": "Fear & The Calm",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "calm"
+    ],
+    "keywords": [
+      "calm",
+      "fear",
+      "the calm"
+    ],
+    "frequency": 1525,
+    "response": "Acknowledge the fear and the calm here",
+    "narrative": "The interplay of fear and the calm",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "the calm"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 1,
+      "fear": 1,
+      "negative": 1,
+      "positive": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative",
+      "positive"
+    ],
+    "keywords_lemma": [
+      "calm",
+      "fear",
+      "the calm"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.5,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.5
+  },
+  {
+    "id": "glyph_poetry_17",
+    "title": "Fear & Content",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "content"
+    ],
+    "keywords": [
+      "content",
+      "fear"
+    ],
+    "frequency": 1520,
+    "response": "Acknowledge the fear and content here",
+    "narrative": "The interplay of fear and content",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry",
+    "emotions_raw": [
+      "fear",
+      "content"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 1,
+      "fear": 1,
+      "negative": 1,
+      "joy": 1,
+      "positive": 1,
+      "trust": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative",
+      "joy",
+      "positive",
+      "trust"
+    ],
+    "keywords_lemma": [
+      "content",
+      "fear"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.25,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.25
+  },
+  {
+    "id": "glyph_refined_fear_self",
+    "title": "Fear & Self",
+    "symbol": "◆◇",
+    "emotions": [
+      "fear",
+      "self"
+    ],
+    "keywords": [
+      "fear",
+      "self"
+    ],
+    "frequency": 11295,
+    "response": "Acknowledge fear and the self",
+    "narrative": "The interplay of fear and the self",
+    "created_from_pattern": true,
+    "source": "refined_merge",
+    "emotions_raw": [
+      "fear",
+      "self"
+    ],
+    "nrc_emotion_counts": {
+      "anger": 1,
+      "fear": 1,
+      "negative": 1
+    },
+    "nrc_emotions": [
+      "anger",
+      "fear",
+      "negative"
+    ],
+    "keywords_lemma": [
+      "fear",
+      "self"
+    ],
+    "dominant_emotion_filtered": "fear",
+    "dominant_score_filtered": 0.5,
+    "dominant_emotion": "fear",
+    "dominant_score": 0.5
+  },
+  {
+    "id": "glyph_seed_infinite_tenderness",
+    "title": "Infinite Tenderness",
+    "symbol": "♥✦",
+    "emotions": [
+      "love",
+      "tenderness"
+    ],
+    "keywords": [
+      "devotion",
+      "infinite",
+      "love",
+      "tenderness"
+    ],
+    "frequency": 200,
+    "response": "Acknowledge tenderness and devotion",
+    "narrative": "A quiet, infinite tenderness",
+    "created_from_pattern": false,
+    "source": "manual_seed",
+    "emotions_raw": [
+      "love",
+      "tenderness"
+    ],
+    "nrc_emotion_counts": {
+      "positive": 3,
+      "joy": 2
+    },
+    "nrc_emotions": [
+      "positive",
+      "joy"
+    ],
+    "keywords_lemma": [
+      "devotion",
+      "infinite",
+      "love",
+      "tenderness"
+    ],
+    "dominant_emotion_filtered": "joy",
+    "dominant_score_filtered": 1.0,
+    "dominant_emotion": "joy",
+    "dominant_score": 1.0
+  },
+  {
+    "id": "glyph_seed_inexorable_fate",
+    "title": "Inexorable Fate",
+    "symbol": "✦◆",
+    "emotions": [
+      "awe",
+      "fate"
+    ],
+    "keywords": [
+      "awe",
+      "destiny",
+      "fate",
+      "inexorable"
+    ],
+    "frequency": 180,
+    "response": "Acknowledge the sense of inexorable fate",
+    "narrative": "When destiny feels inevitable",
+    "created_from_pattern": false,
+    "source": "manual_seed",
+    "emotions_raw": [
+      "awe",
+      "fate"
+    ],
+    "nrc_emotion_counts": {
+      "anticipation": 1,
+      "negative": 1
+    },
+    "nrc_emotions": [
+      "anticipation",
+      "negative"
+    ],
+    "keywords_lemma": [
+      "awe",
+      "destiny",
+      "fate",
+      "inexorable"
+    ],
+    "dominant_emotion_filtered": "anticipation",
+    "dominant_score_filtered": 1.0,
+    "dominant_emotion": "anticipation",
+    "dominant_score": 1.0
+  },
+  {
+    "id": "glyph_seed_deep_regret",
+    "title": "Deep Regret",
+    "symbol": "◆✖",
+    "emotions": [
+      "sadness",
+      "regret"
+    ],
+    "keywords": [
+      "deep",
+      "regret",
+      "remorse",
+      "sadness",
+      "sorrow"
+    ],
+    "frequency": 190,
+    "response": "Acknowledge deep regret and offer compassion",
+    "narrative": "The weight of long regret",
+    "created_from_pattern": false,
+    "source": "manual_seed",
+    "emotions_raw": [
+      "sadness",
+      "regret"
+    ],
+    "nrc_emotion_counts": {
+      "negative": 4,
+      "sadness": 4,
+      "trust": 1,
+      "fear": 1
+    },
+    "nrc_emotions": [
+      "negative",
+      "sadness",
+      "trust",
+      "fear"
+    ],
+    "keywords_lemma": [
+      "deep",
+      "regret",
+      "remorse",
+      "sadness",
+      "sorrow"
+    ],
+    "dominant_emotion_filtered": "sadness",
+    "dominant_score_filtered": 0.667,
+    "dominant_emotion": "sadness",
+    "dominant_score": 0.667
+  },
+  {
+    "id": "glyph_seed_majestic_scenes",
+    "title": "Majestic Scenes",
+    "symbol": "✦♥",
+    "emotions": [
+      "awe"
+    ],
+    "keywords": [
+      "awe",
+      "majestic",
+      "scenes",
+      "sublime",
+      "wonder"
+    ],
+    "frequency": 170,
+    "response": "Acknowledge the majesty and wonder",
+    "narrative": "Awe at majestic scenes",
+    "created_from_pattern": false,
+    "source": "manual_seed",
+    "emotions_raw": [
+      "awe",
+      "wonder"
+    ],
+    "nrc_emotion_counts": {
+      "anticipation": 1,
+      "joy": 1,
+      "positive": 1,
+      "surprise": 1,
+      "trust": 1
+    },
+    "nrc_emotions": [
+      "anticipation",
+      "joy",
+      "positive",
+      "surprise",
+      "trust"
+    ],
+    "keywords_lemma": [
+      "awe",
+      "majestic",
+      "scene",
+      "sublime",
+      "wonder"
+    ],
+    "dominant_emotion_filtered": "joy",
+    "dominant_score_filtered": 0.25,
+    "dominant_emotion": "joy",
+    "dominant_score": 0.25
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "id": "glyph_poetry_01",
+    "name": "Cognitive Dissonance & Tension",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "tension"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 323,
+    "response_cue": "Acknowledge the cognitive dissonance and tension here",
+    "narrative_hook": "The interplay of cognitive dissonance and tension",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_02",
+    "name": "Cognitive Dissonance & Rhythm",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "rhythm"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 273,
+    "response_cue": "Acknowledge the cognitive dissonance and rhythm here",
+    "narrative_hook": "The interplay of cognitive dissonance and rhythm",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_03",
+    "name": "Cognitive Dissonance & Personality Traits",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "personality traits"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 266,
+    "response_cue": "Acknowledge the cognitive dissonance and personality traits here",
+    "narrative_hook": "The interplay of cognitive dissonance and personality traits",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_04",
+    "name": "Cognitive Dissonance & Beginning",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "beginning"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 263,
+    "response_cue": "Acknowledge the cognitive dissonance and beginning here",
+    "narrative_hook": "The interplay of cognitive dissonance and beginning",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_05",
+    "name": "Cognitive Dissonance & Acceptance",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "acceptance"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 263,
+    "response_cue": "Acknowledge the cognitive dissonance and acceptance here",
+    "narrative_hook": "The interplay of cognitive dissonance and acceptance",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_06",
+    "name": "Cognitive Dissonance & Unconscious",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "unconscious"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 263,
+    "response_cue": "Acknowledge the cognitive dissonance and unconscious here",
+    "narrative_hook": "The interplay of cognitive dissonance and unconscious",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_07",
+    "name": "Cognitive Dissonance & Sexuality",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "sexuality"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and sexuality here",
+    "narrative_hook": "The interplay of cognitive dissonance and sexuality",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_08",
+    "name": "Cognitive Dissonance & Aggression",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "aggression"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and aggression here",
+    "narrative_hook": "The interplay of cognitive dissonance and aggression",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_09",
+    "name": "Cognitive Dissonance & Figure",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "figure"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and figure here",
+    "narrative_hook": "The interplay of cognitive dissonance and figure",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_10",
+    "name": "Cognitive Dissonance & Influence",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "influence"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and influence here",
+    "narrative_hook": "The interplay of cognitive dissonance and influence",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_11",
+    "name": "Cognitive Dissonance & Intimacy",
+    "symbol": "\u25c6\u2764",
+    "core_emotions": [
+      "cognitive dissonance",
+      "intimacy"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and intimacy here",
+    "narrative_hook": "The interplay of cognitive dissonance and intimacy",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_12",
+    "name": "Cognitive Dissonance & Passion",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "passion"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and passion here",
+    "narrative_hook": "The interplay of cognitive dissonance and passion",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_13",
+    "name": "Cognitive Dissonance & Childhood",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "childhood"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 253,
+    "response_cue": "Acknowledge the cognitive dissonance and childhood here",
+    "narrative_hook": "The interplay of cognitive dissonance and childhood",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_14",
+    "name": "Cognitive Dissonance & Hidden",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "hidden"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 243,
+    "response_cue": "Acknowledge the cognitive dissonance and hidden here",
+    "narrative_hook": "The interplay of cognitive dissonance and hidden",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_15",
+    "name": "Cognitive Dissonance & Expression",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "expression"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 243,
+    "response_cue": "Acknowledge the cognitive dissonance and expression here",
+    "narrative_hook": "The interplay of cognitive dissonance and expression",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_16",
+    "name": "Cognitive Dissonance & Traits",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "traits"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 243,
+    "response_cue": "Acknowledge the cognitive dissonance and traits here",
+    "narrative_hook": "The interplay of cognitive dissonance and traits",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_17",
+    "name": "Cognitive Dissonance & Vitality",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "vitality"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 233,
+    "response_cue": "Acknowledge the cognitive dissonance and vitality here",
+    "narrative_hook": "The interplay of cognitive dissonance and vitality",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_18",
+    "name": "Cognitive Dissonance & Express",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "express"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 233,
+    "response_cue": "Acknowledge the cognitive dissonance and express here",
+    "narrative_hook": "The interplay of cognitive dissonance and express",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_19",
+    "name": "Cognitive Dissonance & Behaviors",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "behaviors"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 233,
+    "response_cue": "Acknowledge the cognitive dissonance and behaviors here",
+    "narrative_hook": "The interplay of cognitive dissonance and behaviors",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_20",
+    "name": "Cognitive Dissonance & Psychologists",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "cognitive dissonance",
+      "psychologists"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 233,
+    "response_cue": "Acknowledge the cognitive dissonance and psychologists here",
+    "narrative_hook": "The interplay of cognitive dissonance and psychologists",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  }
+]

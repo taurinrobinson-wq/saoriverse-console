@@ -1,0 +1,253 @@
+[
+  {
+    "id": "glyph_poetry_01",
+    "title": "Fear & Love",
+    "symbol": "◆♥",
+    "emotions": [
+      "fear",
+      "love"
+    ],
+    "keywords": [
+      "fear",
+      "love"
+    ],
+    "frequency": 4155,
+    "response": "Acknowledge the fear and love here",
+    "narrative": "A story of love through love",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_03",
+    "title": "Fear & No Fear",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "no fear"
+    ],
+    "keywords": [
+      "fear",
+      "no",
+      "no fear"
+    ],
+    "frequency": 1755,
+    "response": "Acknowledge the fear and no fear here",
+    "narrative": "The interplay of fear and no fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_07",
+    "title": "Love & No Fear",
+    "symbol": "♥◆",
+    "emotions": [
+      "love",
+      "no fear"
+    ],
+    "keywords": [
+      "fear",
+      "love",
+      "no",
+      "no fear"
+    ],
+    "frequency": 1600,
+    "response": "Acknowledge the love and no fear here",
+    "narrative": "A story of love through no fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_09",
+    "title": "Fear & Hate",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "hate"
+    ],
+    "keywords": [
+      "fear",
+      "hate"
+    ],
+    "frequency": 1545,
+    "response": "Acknowledge the fear and hate here",
+    "narrative": "The interplay of fear and hate",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_10",
+    "title": "Fear & Other Furious Creatures",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "other furious creatures"
+    ],
+    "keywords": [
+      "creatures",
+      "fear",
+      "furious",
+      "other furious creatures"
+    ],
+    "frequency": 1545,
+    "response": "Acknowledge the fear and other furious creatures here",
+    "narrative": "The interplay of fear and other furious creatures",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_14",
+    "title": "Fear & A Calm",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "a calm"
+    ],
+    "keywords": [
+      "a calm",
+      "calm",
+      "fear"
+    ],
+    "frequency": 1530,
+    "response": "Acknowledge the fear and a calm here",
+    "narrative": "The interplay of fear and a calm",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_16",
+    "title": "Fear & The Calm",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "the calm"
+    ],
+    "keywords": [
+      "calm",
+      "fear",
+      "the calm"
+    ],
+    "frequency": 1525,
+    "response": "Acknowledge the fear and the calm here",
+    "narrative": "The interplay of fear and the calm",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_17",
+    "title": "Fear & Content",
+    "symbol": "◆◆",
+    "emotions": [
+      "fear",
+      "content"
+    ],
+    "keywords": [
+      "content",
+      "fear"
+    ],
+    "frequency": 1520,
+    "response": "Acknowledge the fear and content here",
+    "narrative": "The interplay of fear and content",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_refined_fear_self",
+    "title": "Fear & Self",
+    "symbol": "◆◇",
+    "emotions": [
+      "fear",
+      "self"
+    ],
+    "keywords": [
+      "fear",
+      "self"
+    ],
+    "frequency": 11295,
+    "response": "Acknowledge fear and the self",
+    "narrative": "The interplay of fear and the self",
+    "created_from_pattern": true,
+    "source": "refined_merge"
+  },
+  {
+    "id": "glyph_seed_infinite_tenderness",
+    "title": "Infinite Tenderness",
+    "symbol": "♥✦",
+    "emotions": [
+      "love",
+      "tenderness"
+    ],
+    "keywords": [
+      "devotion",
+      "infinite",
+      "love",
+      "tenderness"
+    ],
+    "frequency": 200,
+    "response": "Acknowledge tenderness and devotion",
+    "narrative": "A quiet, infinite tenderness",
+    "created_from_pattern": false,
+    "source": "manual_seed"
+  },
+  {
+    "id": "glyph_seed_inexorable_fate",
+    "title": "Inexorable Fate",
+    "symbol": "✦◆",
+    "emotions": [
+      "awe",
+      "fate"
+    ],
+    "keywords": [
+      "awe",
+      "destiny",
+      "fate",
+      "inexorable"
+    ],
+    "frequency": 180,
+    "response": "Acknowledge the sense of inexorable fate",
+    "narrative": "When destiny feels inevitable",
+    "created_from_pattern": false,
+    "source": "manual_seed"
+  },
+  {
+    "id": "glyph_seed_deep_regret",
+    "title": "Deep Regret",
+    "symbol": "◆✖",
+    "emotions": [
+      "sadness",
+      "regret"
+    ],
+    "keywords": [
+      "deep",
+      "regret",
+      "remorse",
+      "sadness",
+      "sorrow"
+    ],
+    "frequency": 190,
+    "response": "Acknowledge deep regret and offer compassion",
+    "narrative": "The weight of long regret",
+    "created_from_pattern": false,
+    "source": "manual_seed"
+  },
+  {
+    "id": "glyph_seed_majestic_scenes",
+    "title": "Majestic Scenes",
+    "symbol": "✦♥",
+    "emotions": [
+      "awe",
+      "wonder"
+    ],
+    "keywords": [
+      "awe",
+      "majestic",
+      "scenes",
+      "sublime",
+      "wonder"
+    ],
+    "frequency": 170,
+    "response": "Acknowledge the majesty and wonder",
+    "narrative": "Awe at majestic scenes",
+    "created_from_pattern": false,
+    "source": "manual_seed"
+  }
+]

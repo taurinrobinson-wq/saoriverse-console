@@ -1,0 +1,302 @@
+[
+  {
+    "id": "glyph_poetry_01",
+    "name": "Fear & Love",
+    "symbol": "\u25c6\u2665",
+    "core_emotions": [
+      "fear",
+      "love"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 2615,
+    "response_cue": "Acknowledge the fear and love here",
+    "narrative_hook": "A story of love through love",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_02",
+    "name": "Fear & The Fear",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "the fear"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1875,
+    "response_cue": "Acknowledge the fear and the fear here",
+    "narrative_hook": "The interplay of fear and the fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_03",
+    "name": "Fear & You",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "you"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1775,
+    "response_cue": "Acknowledge the fear and you here",
+    "narrative_hook": "The interplay of fear and you",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_04",
+    "name": "Fear & No Fear",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "no fear"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1755,
+    "response_cue": "Acknowledge the fear and no fear here",
+    "narrative_hook": "The interplay of fear and no fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_05",
+    "name": "Love & The Fear",
+    "symbol": "\u2665\u25c6",
+    "core_emotions": [
+      "love",
+      "the fear"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1720,
+    "response_cue": "Acknowledge the love and the fear here",
+    "narrative_hook": "A story of love through the fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_06",
+    "name": "Fear & That",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "that"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1695,
+    "response_cue": "Acknowledge the fear and that here",
+    "narrative_hook": "The interplay of fear and that",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_07",
+    "name": "Fear & Him",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "him"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1695,
+    "response_cue": "Acknowledge the fear and him here",
+    "narrative_hook": "The interplay of fear and him",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_08",
+    "name": "Love & You",
+    "symbol": "\u2665\u25c6",
+    "core_emotions": [
+      "love",
+      "you"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1620,
+    "response_cue": "Acknowledge the love and you here",
+    "narrative_hook": "A story of love through you",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_09",
+    "name": "Fear & Which",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "which"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1615,
+    "response_cue": "Acknowledge the fear and which here",
+    "narrative_hook": "The interplay of fear and which",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_10",
+    "name": "Fear & My Love",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "my love"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1615,
+    "response_cue": "Acknowledge the fear and my love here",
+    "narrative_hook": "The interplay of fear and my love",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_11",
+    "name": "Fear & What",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "what"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1600,
+    "response_cue": "Acknowledge the fear and what here",
+    "narrative_hook": "The interplay of fear and what",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_12",
+    "name": "Love & No Fear",
+    "symbol": "\u2665\u25c6",
+    "core_emotions": [
+      "love",
+      "no fear"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1600,
+    "response_cue": "Acknowledge the love and no fear here",
+    "narrative_hook": "A story of love through no fear",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_13",
+    "name": "Fear & Who",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "who"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1550,
+    "response_cue": "Acknowledge the fear and who here",
+    "narrative_hook": "The interplay of fear and who",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_14",
+    "name": "Fear & She",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "she"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1545,
+    "response_cue": "Acknowledge the fear and she here",
+    "narrative_hook": "The interplay of fear and she",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_15",
+    "name": "Fear & Hate",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "hate"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1545,
+    "response_cue": "Acknowledge the fear and hate here",
+    "narrative_hook": "The interplay of fear and hate",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_16",
+    "name": "Fear & Other Furious Creatures",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "other furious creatures"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1545,
+    "response_cue": "Acknowledge the fear and other furious creatures here",
+    "narrative_hook": "The interplay of fear and other furious creatures",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_17",
+    "name": "Fear & They",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "they"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1540,
+    "response_cue": "Acknowledge the fear and they here",
+    "narrative_hook": "The interplay of fear and they",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_18",
+    "name": "Fear & The Love",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "fear",
+      "the love"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1540,
+    "response_cue": "Acknowledge the fear and the love here",
+    "narrative_hook": "The interplay of fear and the love",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_19",
+    "name": "Love & That",
+    "symbol": "\u2665\u25c6",
+    "core_emotions": [
+      "love",
+      "that"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1540,
+    "response_cue": "Acknowledge the love and that here",
+    "narrative_hook": "A story of love through that",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_20",
+    "name": "Love & Him",
+    "symbol": "\u2665\u25c6",
+    "core_emotions": [
+      "love",
+      "him"
+    ],
+    "associated_keywords": [],
+    "combined_frequency": 1540,
+    "response_cue": "Acknowledge the love and him here",
+    "narrative_hook": "A story of love through him",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  }
+]
