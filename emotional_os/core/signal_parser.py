@@ -701,6 +701,53 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     return best_glyph, (response, feedback_data), 'dynamic_composer', glyphs_selected
 
 
+def _determine_dominant_emotion(signals: List[Dict], glyphs: List[Dict]) -> str:
+    """Heuristic: determine a dominant emotion label from signals or glyphs.
+
+    Returns one of: 'sadness','joy','fear','anger','trust','anticipation','awe','disgust','surprise','neutral'
+    """
+    if signals:
+        tone = (signals[0].get('tone') or '').lower()
+        mapping = {
+            'grief': 'sadness',
+            'longing': 'sadness',
+            'joy': 'joy',
+            'devotion': 'trust',
+            'containment': 'fear',
+            'insight': 'awe',
+            'recognition': 'awe',
+            'anger': 'anger',
+            'mourning': 'sadness'
+        }
+        for k, v in mapping.items():
+            if k in tone:
+                return v
+
+    # Fallback: inspect glyph names for emotion keywords
+    if glyphs:
+        text = ' '.join([g.get('glyph_name', '') for g in glyphs]).lower()
+        if any(w in text for w in ['joy', 'bliss', 'delight', 'ecstasy']):
+            return 'joy'
+        if any(w in text for w in ['grief', 'mourning', 'ache', 'sorrow', 'loss']):
+            return 'sadness'
+        if any(w in text for w in ['fear', 'afraid', 'panic']):
+            return 'fear'
+        if any(w in text for w in ['anger', 'rage', 'frustrat']):
+            return 'anger'
+        if any(w in text for w in ['trust', 'devotion', 'vow']):
+            return 'trust'
+        if any(w in text for w in ['anticipat', 'waiting', 'expect']):
+            return 'anticipation'
+        if any(w in text for w in ['awe', 'wonder', 'reverent']):
+            return 'awe'
+        if any(w in text for w in ['disgust', 'repuls']):
+            return 'disgust'
+        if any(w in text for w in ['surprise', 'startle', 'shock']):
+            return 'surprise'
+
+    return 'neutral'
+
+
 def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
     """Fallback: search database by emotion tone when gates don't return results"""
     if not signals:
@@ -1190,6 +1237,9 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
                         'hello there', 'hey there', 'howdy', 'greetings']
     lower_input = input_text.strip().lower()
 
+    # Ensure provenance variable exists regardless of conversation_context
+    applied_provenance = None
+
     if lower_input in simple_greetings:
         # Respond warmly but simply, without emotional analysis
         greeting_responses = [
@@ -1249,6 +1299,47 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "debug_glyph_rows": [],
             "learning": None
         }
+
+    # If a clarification bias is present (from past correction), apply it here
+    if conversation_context and isinstance(conversation_context, dict):
+        bias = conversation_context.get(
+            'clarification_bias') or conversation_context.get('clarification')
+        applied_provenance = None
+        if bias and isinstance(bias, dict):
+            # Bias 'suggestion' is expected to contain the corrected intent/label
+            suggestion_label = bias.get('suggestion') or bias.get(
+                'best') or bias.get('clarified_as')
+            try:
+                suggestion_label = suggestion_label.lower() if isinstance(
+                    suggestion_label, str) else suggestion_label
+            except Exception:
+                pass
+
+            # Build provenance for later auditing and attach a forced intent
+            try:
+                meta = bias.get('meta', {}) if isinstance(
+                    bias.get('meta', {}), dict) else {}
+            except Exception:
+                meta = {}
+
+            applied_provenance = {
+                'trigger': bias.get('trigger'),
+                'suggestion': suggestion_label,
+                'confidence': bias.get('confidence'),
+                'meta': meta,
+                'applied_at': datetime.utcnow().isoformat() + 'Z',
+                'record_id': meta.get('last_seen') or bias.get('trigger')
+            }
+
+            # Attach forced intent and provenance to conversation_context so downstream
+            # handlers can make a deterministic decision about intent routing.
+            if conversation_context is None:
+                conversation_context = {}
+            if isinstance(conversation_context, dict):
+                conversation_context = dict(conversation_context)
+                conversation_context['forced_intent'] = suggestion_label
+                conversation_context['clarification_provenance'] = applied_provenance
+            # Do not early-return here; allow normal processing to run with the forced intent
 
     # Normal emotional processing for non-greeting, non-casual messages
 
@@ -1564,7 +1655,21 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         except Exception:
             pass
 
-    return {
+    # Emit a dedicated clarification telemetry event when a clarification provenance was applied
+    if TELEMETRY_ENABLED and applied_provenance:
+        try:
+            logger.info(json.dumps({
+                "event": "clarification_applied",
+                "record_id": applied_provenance.get('record_id'),
+                "trigger": applied_provenance.get('trigger'),
+                "suggestion": applied_provenance.get('suggestion'),
+                "confidence": applied_provenance.get('confidence'),
+                "applied_at": applied_provenance.get('applied_at')
+            }, ensure_ascii=False))
+        except Exception:
+            pass
+
+    out = {
         "timestamp": datetime.now().isoformat(),
         "input": input_text,
         "signals": signals,
@@ -1582,6 +1687,59 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         "debug_glyph_rows": debug_glyph_rows,
         "learning": learning_payload
     }
+
+    # If a clarification provenance was applied earlier, surface it in the output
+    if applied_provenance:
+        out['clarification_applied'] = True
+        out['clarification_provenance'] = applied_provenance
+
+    # If a forced_intent is present, apply deterministic routing + glyph-emotion overlay
+    forced_intent = None
+    if conversation_context and isinstance(conversation_context, dict):
+        forced_intent = conversation_context.get('forced_intent')
+
+    if forced_intent:
+        # Determine dominant emotion from signals/glyphs
+        dominant_emotion = _determine_dominant_emotion(signals, glyphs)
+
+        # Routing table: forced_intent -> dominant_emotion -> overlay prefix
+        routing_table = {
+            'personal_question': {
+                'sadness': "I hear a quiet sadness in your question — I'll hold that gently.",
+                'joy': "This feels joyful — let's honor that brightness together.",
+                'neutral': "Thanks for asking personally — let me respond with care.",
+            },
+            'functional_query': {
+                'fear': "I'll handle this carefully and clearly so fear doesn't dominate.",
+                'trust': "You can trust this — here's a clear, direct answer.",
+                'neutral': "Here's a clear, practical response.",
+            },
+            'name_inquiry': {
+                'anticipation': "I sense anticipation — let's explore this name together.",
+                'neutral': "Let's consider the name and what it means to you.",
+            },
+            'emotional_checkin': {
+                'anger': "I hear anger — let's ground and channel it constructively.",
+                'awe': "This feels awe-filled — let's pause and honor the wonder.",
+                'neutral': "Thanks for checking in — I'm here with you.",
+            }
+        }
+
+        overlay = None
+        fi_map = routing_table.get(str(forced_intent)) or routing_table.get(
+            str(forced_intent).lower())
+        if fi_map:
+            overlay = fi_map.get(dominant_emotion) or fi_map.get('neutral')
+
+        if overlay:
+            # Prepend overlay to the contextual response, keeping original message intact
+            out['voltage_response'] = f"{overlay} {out.get('voltage_response', '')}"
+            out['tone_overlay'] = overlay
+
+        out['forced_intent'] = forced_intent
+        out['dominant_emotion'] = dominant_emotion
+
+    return out
 
 
 # Example usage

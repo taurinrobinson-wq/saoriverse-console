@@ -8,6 +8,9 @@ from typing import Dict, List, Optional
 
 import requests
 
+# Global hard guard: when set, disallow any remote/OpenAI calls across the process.
+FORCE_LOCAL_ONLY = str(os.getenv('FORCE_LOCAL_ONLY', '')
+                       ).lower() in ('1', 'true', 'yes')
 # Import central guard for remote AI usage
 try:
     from scripts.local_integration import remote_ai_allowed, remote_ai_error
@@ -37,6 +40,10 @@ class SupabaseIntegrator:
                  function_url: str,
                  supabase_anon_key: str = None,
                  user_token: str = None):
+        # Prevent creating a Supabase integrator when global local-only guard is enabled
+        if FORCE_LOCAL_ONLY:
+            raise RuntimeError(
+                "Remote AI integrator creation blocked by FORCE_LOCAL_ONLY environment guard")
         self.function_url = function_url
         self.supabase_anon_key = supabase_anon_key
         self.user_token = user_token
@@ -473,6 +480,16 @@ class HybridEmotionalProcessor:
 
 def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrator]:
     """Create Supabase integrator from config or environment variables"""
+    # If FORCE_LOCAL_ONLY is set, never create an external integrator
+    try:
+        if FORCE_LOCAL_ONLY:
+            logging.info(
+                "FORCE_LOCAL_ONLY enabled: skipping SupabaseIntegrator creation")
+            return None
+    except Exception:
+        # If FORCE_LOCAL_ONLY isn't defined for some reason, fall back to existing guard
+        pass
+
     # If remote AI is globally disallowed, block creation when explicit config exists
     if not remote_ai_allowed():
         # If caller passed explicit config, hard-fail

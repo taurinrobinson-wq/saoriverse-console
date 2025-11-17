@@ -1981,7 +1981,9 @@ def render_main_app():
                         brevity_patterns = [
                             'keep it short', 'keep it shorter', 'shorter', 'short please', 'be brief',
                             'keep it brief', 'shorter please', 'keep it concise', 'make it shorter',
-                            'can you keep it shorter', 'can you keep it short', 'please be brief'
+                            'can you keep it shorter', 'can you keep it short', 'please be brief',
+                            # Common user feedback phrasing indicating replies are too long
+                            'too long', "this response is too long", "that's too long", 'please be shorter'
                         ]
                         lower_in = (effective_input or '').lower()
                         if any(p in lower_in for p in brevity_patterns):

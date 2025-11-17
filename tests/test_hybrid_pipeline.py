@@ -22,8 +22,8 @@ class HybridPipelineTests(unittest.TestCase):
         # Ensure session state keys exist
         st.session_state.clear()
         st.session_state.user_id = 'test-user'
-        # Tests should exercise the local-first flow; set to 'local'
-        st.session_state.processing_mode = 'local'
+        # Tests should exercise hybrid/local paths as needed; default to 'hybrid' for tests
+        st.session_state.processing_mode = 'hybrid'
         st.session_state.prefer_ai = True
         # Show local decoding in tests so hybrid composition includes debug annotations
         st.session_state.show_local_decoding = True

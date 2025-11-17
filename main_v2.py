@@ -49,10 +49,11 @@ from datetime import datetime
 
 # Must be first Streamlit command
 # Prefer the project SVG as the page icon if available; fall back to emoji.
-   try:
-        # Prefer the black cropped logo in the package static folder per request
-        _logo_path = Path(
-            "emotional_os/deploy/modules/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+try:
+    # Prefer the black cropped logo in the package static folder per request
+    _logo_path = Path(
+        "emotional_os/deploy/modules/static/graphics/FirstPerson-Logo-black-cropped_notext.svg"
+    )
     _page_icon = None
     if _logo_path.exists():
         try:
@@ -61,18 +62,19 @@ from datetime import datetime
             # page icon instead of falling back to the emoji.
             svg_bytes = _logo_path.read_bytes()
             try:
-                _b64 = base64.b64encode(svg_bytes).decode('ascii')
+                _b64 = base64.b64encode(svg_bytes).decode("ascii")
                 _page_icon = f"data:image/svg+xml;base64,{_b64}"
             except Exception:
                 _page_icon = svg_bytes
         except Exception:
             _page_icon = None
+
     # Use bytes (image) if available, otherwise an emoji
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
         page_icon=_page_icon if _page_icon is not None else "🧠",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 except Exception:
     # Ensure any failure here doesn't prevent the rest of the app from loading
@@ -80,7 +82,7 @@ except Exception:
         page_title="FirstPerson - Personal AI Companion",
         page_icon="🧠",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 
 # Development reload marker removed. Temporary DEV timestamp and stdout

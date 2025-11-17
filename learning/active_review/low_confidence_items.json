@@ -1,0 +1,193 @@
+{
+  "generated_from": "generated/gutenberg_texts_glyphs_with_dominant.json",
+  "created_at": "2025-11-17T20:47:33.916675Z",
+  "count": 13,
+  "items": [
+    {
+      "id": "glyph_seed_majestic_scenes",
+      "title": "Majestic Scenes",
+      "dominant_emotion": "joy",
+      "dominant_score": 0.25,
+      "confidence": 0.37,
+      "keywords": [
+        "awe",
+        "majestic",
+        "scenes",
+        "sublime",
+        "wonder"
+      ],
+      "frequency": 170,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_17",
+      "title": "Fear & Content",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.25,
+      "confidence": 0.464,
+      "keywords": [
+        "content",
+        "fear"
+      ],
+      "frequency": 1520,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_09",
+      "title": "Fear & Hate",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.333,
+      "confidence": 0.515,
+      "keywords": [
+        "fear",
+        "hate"
+      ],
+      "frequency": 1545,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_07",
+      "title": "Love & No Fear",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.333,
+      "confidence": 0.516,
+      "keywords": [
+        "fear",
+        "love",
+        "no",
+        "no fear"
+      ],
+      "frequency": 1600,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_01",
+      "title": "Fear & Love",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.333,
+      "confidence": 0.557,
+      "keywords": [
+        "fear",
+        "love"
+      ],
+      "frequency": 4155,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_14",
+      "title": "Fear & A Calm",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.5,
+      "confidence": 0.614,
+      "keywords": [
+        "a calm",
+        "calm",
+        "fear"
+      ],
+      "frequency": 1530,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_16",
+      "title": "Fear & The Calm",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.5,
+      "confidence": 0.614,
+      "keywords": [
+        "calm",
+        "fear",
+        "the calm"
+      ],
+      "frequency": 1525,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_10",
+      "title": "Fear & Other Furious Creatures",
+      "dominant_emotion": "anger",
+      "dominant_score": 0.5,
+      "confidence": 0.615,
+      "keywords": [
+        "creatures",
+        "fear",
+        "furious",
+        "other furious creatures"
+      ],
+      "frequency": 1545,
+      "note": ""
+    },
+    {
+      "id": "glyph_poetry_03",
+      "title": "Fear & No Fear",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.5,
+      "confidence": 0.62,
+      "keywords": [
+        "fear",
+        "no",
+        "no fear"
+      ],
+      "frequency": 1755,
+      "note": ""
+    },
+    {
+      "id": "glyph_seed_deep_regret",
+      "title": "Deep Regret",
+      "dominant_emotion": "sadness",
+      "dominant_score": 0.667,
+      "confidence": 0.625,
+      "keywords": [
+        "deep",
+        "regret",
+        "remorse",
+        "sadness",
+        "sorrow"
+      ],
+      "frequency": 190,
+      "note": ""
+    },
+    {
+      "id": "glyph_refined_fear_self",
+      "title": "Fear & Self",
+      "dominant_emotion": "fear",
+      "dominant_score": 0.5,
+      "confidence": 0.7,
+      "keywords": [
+        "fear",
+        "self"
+      ],
+      "frequency": 11295,
+      "note": ""
+    },
+    {
+      "id": "glyph_seed_inexorable_fate",
+      "title": "Inexorable Fate",
+      "dominant_emotion": "anticipation",
+      "dominant_score": 1.0,
+      "confidence": 0.823,
+      "keywords": [
+        "awe",
+        "destiny",
+        "fate",
+        "inexorable"
+      ],
+      "frequency": 180,
+      "note": ""
+    },
+    {
+      "id": "glyph_seed_infinite_tenderness",
+      "title": "Infinite Tenderness",
+      "dominant_emotion": "joy",
+      "dominant_score": 1.0,
+      "confidence": 0.827,
+      "keywords": [
+        "devotion",
+        "infinite",
+        "love",
+        "tenderness"
+      ],
+      "frequency": 200,
+      "note": ""
+    }
+  ]
+}

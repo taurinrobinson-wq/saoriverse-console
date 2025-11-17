@@ -47,6 +47,20 @@ class DynamicResponseComposer:
         self.semantic_engine = SemanticEngine() if SemanticEngine else None
         self.poetry_db = PoetryDatabase() if PoetryDatabase else None
 
+        # Default list of canned phrases we often want to suppress
+        # when users ask for briefer or less-canned replies.
+        self.default_suppressions = [
+            "i'm here with you",
+            "what you're sharing matters",
+            "you get to set the pace",
+            "i notice something that matters to you",
+            "does any of that resonate for you",
+            "i hear you",
+            "i'm listening",
+            "resonant glyph: none",
+            "processed in",
+        ]
+
         # Linguistic patterns for different emotional contexts
         self.opening_moves = {
             "acknowledgment": [
@@ -327,6 +341,119 @@ class DynamicResponseComposer:
         # Capitalize first character
         s = s[0].upper() + s[1:]
         return s
+
+    def _detect_brevity(self, text: str, conversation_context: Optional[Dict] = None) -> bool:
+        """Detect whether the user has requested shorter/briefer replies.
+
+        Checks recent text for common brevity requests and also inspects
+        conversation_context for explicit flags set elsewhere in the app.
+        """
+        try:
+            if conversation_context and isinstance(conversation_context, dict):
+                # session/session-level preferences may use these keys
+                if conversation_context.get('prefer_short') or conversation_context.get('user_brevity'):
+                    return True
+
+            t = (text or '').lower()
+            brevity_patterns = [
+                'keep it short', 'keep it shorter', 'shorter', 'short please', 'be brief',
+                'keep it brief', 'shorter please', 'keep it concise', 'make it shorter',
+                'can you keep it shorter', 'can you keep it short', 'please be brief'
+            ]
+            for p in brevity_patterns:
+                if p in t:
+                    return True
+        except Exception:
+            pass
+        return False
+
+    def _shorten_text(self, text: str, max_sentences: int = 2) -> str:
+        """Return the first up to `max_sentences` sentences from text, removing
+        commonly-repeated reassurance phrases to avoid repetition."""
+        if not text:
+            return text
+        # Remove canned reassurance phrases seen in logs
+        for canned in [
+            "i'm here with you", "what you're sharing matters", "you won't be rejected or shamed for it",
+            "your experience deserves care and gentle attention", "you get to set the pace",
+            "if this brings up a lot, we can slow down or focus on one small piece at a time"
+        ]:
+            try:
+                text = text.replace(canned, '')
+                text = text.replace(canned.capitalize(), '')
+            except Exception:
+                pass
+
+        # Split into sentences conservatively
+        sentences = re.split(r'(?<=[.!?])\s+', text.strip())
+        chosen = [s.strip() for s in sentences if s.strip()][:max_sentences]
+        if not chosen:
+            # fallback: return first 120 chars
+            return (text or '')[:120].strip()
+        result = ' '.join(chosen)
+        # Ensure punctuation at end
+        if result and result[-1] not in '.!?':
+            result = result + '.'
+        return result
+
+    def _apply_suppressions(self, text: str, suppress_list: Optional[List[str]] = None) -> str:
+        """Remove any phrases in `suppress_list` from `text` (case-insensitive),
+        and clean up extra whitespace/punctuation."""
+        if not text or not suppress_list:
+            return text
+        r = text
+        for sp in suppress_list:
+            try:
+                if not sp:
+                    continue
+                # Build a more robust pattern that strips the phrase even
+                # when followed or preceded by punctuation/whitespace.
+                pat = re.compile(r"(?i)\b" + re.escape(sp) +
+                                 r"\b[\s\.,;:!?\-]*")
+                r = pat.sub('', r)
+            except Exception:
+                try:
+                    r = r.replace(sp, '')
+                except Exception:
+                    pass
+        # Remove excessive whitespace and fix repeated punctuation
+        r = re.sub(r'\s{2,}', ' ', r).strip()
+        r = re.sub(r'\s+,', ',', r)
+        # Trim leading/trailing punctuation left behind
+        r = r.strip(' ,;:.')
+        # Ensure sentence punctuation at end
+        if r and r[-1] not in '.!?':
+            r = r + '.'
+        return r
+
+    def _extract_stop_phrases(self, text: str) -> List[str]:
+        """Parse user instructions like 'stop saying: "I'm here with you"' and return phrases to suppress."""
+        if not text:
+            return []
+        t = text.lower()
+        results: List[str] = []
+        # Patterns like: stop saying: "phrase" or stop saying phrase
+        m = re.findall(r"stop saying[:\s]+\"([^\"]+)\"", t)
+        for g in m:
+            results.append(g.strip())
+        m2 = re.findall(r"stop saying[:\s]+'([^']+)'", t)
+        for g in m2:
+            results.append(g.strip())
+        # fallback: 'stop saying X' where X is short phrase up to 6 words
+        m3 = re.findall(r"stop saying\s+([a-zA-Z0-9\s]{1,80})", t)
+        for g in m3:
+            # filter obvious false positives
+            g = g.strip()
+            if len(g.split()) <= 10:
+                results.append(g)
+        # dedupe
+        seen = []
+        out = []
+        for r in results:
+            if r and r not in seen:
+                seen.append(r)
+                out.append(r)
+        return out
 
     def _weave_poetry(self, text: str, emotions: Dict, glyphs: Optional[List[Dict]] = None, extracted: Optional[Dict] = None) -> Optional[str]:
         """Find and weave poetic echoes that match emotional contour."""
@@ -788,6 +915,8 @@ class DynamicResponseComposer:
 
         # Extract linguistic features from the combined text (captures cross-turn cues)
         extracted = self._extract_entities_and_emotions(combined_text)
+        # Detect if user asked for brevity and shorten the final output when appropriate
+        brief = self._detect_brevity(combined_text, conversation_context)
 
         # Build core response anchored in glyph
         response = self._build_glyph_aware_response(
@@ -798,6 +927,63 @@ class DynamicResponseComposer:
             input_text=combined_text,
             extracted=extracted,
         )
+
+        if brief:
+            try:
+                # When a session-level prefer_short is set, enforce stricter
+                # single-sentence behavior so the reply is concise.
+                if conversation_context and isinstance(conversation_context, dict) and conversation_context.get('prefer_short'):
+                    # pick a single short sentence (1) and apply suppressions
+                    brief_resp = self._shorten_text(response, max_sentences=1)
+                    # merge default suppressions + conversation suppressions
+                    supp = list(self.default_suppressions)
+                    try:
+                        sess = conversation_context.get(
+                            'suppress_phrases') or []
+                        if isinstance(sess, list):
+                            supp += [s for s in sess if s]
+                    except Exception:
+                        pass
+                    if supp:
+                        brief_resp = self._apply_suppressions(brief_resp, supp)
+                    return brief_resp
+                return self._shorten_text(response, max_sentences=2)
+            except Exception:
+                return response
+
+        # Respect explicit 'stop saying' requests persisted in conversation_context
+        try:
+            stop_phrases = []
+            # Extract anything said in this message
+            try:
+                stop_phrases += self._extract_stop_phrases(combined_text)
+            except Exception:
+                pass
+
+            # Merge any session/conversation-level suppressions
+            if conversation_context and isinstance(conversation_context, dict):
+                try:
+                    sess_suppress = conversation_context.get(
+                        'suppress_phrases') or []
+                    if isinstance(sess_suppress, list):
+                        stop_phrases += [s for s in sess_suppress if s]
+                except Exception:
+                    pass
+
+            # Deduplicate
+            seen = []
+            merged = []
+            for s in stop_phrases:
+                if s and s not in seen:
+                    seen.append(s)
+                    merged.append(s)
+
+            if merged:
+                # Merge default suppressions too
+                merged_all = list(self.default_suppressions) + merged
+                return self._apply_suppressions(response, merged_all)
+        except Exception:
+            pass
 
         return response
 
@@ -915,6 +1101,41 @@ class DynamicResponseComposer:
         except Exception:
             combined_text = input_text
 
+        # Early strict brevity enforcement: if the session explicitly
+        # requests short replies, return a deterministic single-sentence
+        # reply before composing multi-part responses. This avoids the
+        # composer assembling multiple fragments that are then shortened
+        # and may still include canned lines.
+        try:
+            if conversation_context and isinstance(conversation_context, dict) and conversation_context.get('prefer_short'):
+                # Prefer a glyph-grounded one-line summary when glyphs exist
+                summary_words = []
+                for g in (glyphs or [])[:2]:
+                    try:
+                        summary_words.extend(_glyph_primary_words(g))
+                    except Exception:
+                        pass
+                if summary_words:
+                    reply = f"I hear you. ({', '.join(summary_words[:6])})"
+                else:
+                    reply = "I hear you."
+
+                # Apply default + session suppressions before returning
+                merged = list(self.default_suppressions)
+                try:
+                    sess = conversation_context.get('suppress_phrases') or []
+                    if isinstance(sess, list):
+                        merged += [s for s in sess if s]
+                except Exception:
+                    pass
+
+                if merged:
+                    reply = self._apply_suppressions(reply, merged)
+
+                return self._shorten_text(reply, max_sentences=1)
+        except Exception:
+            pass
+
         # Extract entities/emotions for grounding
         extracted = self._extract_entities_and_emotions(combined_text)
 
@@ -968,6 +1189,52 @@ class DynamicResponseComposer:
             'entities', []), extracted.get('emotions', {}))
         parts.append(opening)
 
+        # If the user requested brevity, produce a concise reply: a short
+        # acknowledgment plus a one-line, glyph-grounded summary.
+        brief = self._detect_brevity(combined_text, conversation_context)
+        if brief:
+            try:
+                summary_words = []
+                for g in ranked[:2]:
+                    summary_words.extend(_glyph_primary_words(g))
+                summary_words = [w for w in summary_words if w]
+                if summary_words:
+                    brief_line = f"I hear you. ({', '.join(summary_words[:6])})"
+                else:
+                    brief_line = "I hear you."
+
+                # Collect stop-phrases from message + session
+                stop_phrases = []
+                try:
+                    stop_phrases += self._extract_stop_phrases(combined_text)
+                except Exception:
+                    pass
+                try:
+                    if conversation_context and isinstance(conversation_context, dict):
+                        sess_suppress = conversation_context.get(
+                            'suppress_phrases') or []
+                        if isinstance(sess_suppress, list):
+                            stop_phrases += [s for s in sess_suppress if s]
+                except Exception:
+                    pass
+
+                bl = brief_line
+                # If session-level prefer_short is set, enforce stricter brevity
+                if conversation_context and isinstance(conversation_context, dict) and conversation_context.get('prefer_short'):
+                    merged = list(self.default_suppressions) + \
+                        list(dict.fromkeys(stop_phrases))
+                    if merged:
+                        bl = self._apply_suppressions(bl, merged)
+                    return self._shorten_text(bl, max_sentences=1)
+
+                # Otherwise, apply only the discovered stop_phrases
+                if stop_phrases:
+                    bl = self._apply_suppressions(
+                        bl, list(dict.fromkeys(stop_phrases)))
+                return self._shorten_text(bl, max_sentences=1)
+            except Exception:
+                return self._shorten_text(opening, max_sentences=1)
+
         # Prefer using the response adapter to translate glyphs into
         # plain-language summary and short snippets. Fallback to older
         # snippet composition if the adapter is not available.
@@ -1002,7 +1269,19 @@ class DynamicResponseComposer:
                 try:
                     processed = self._postprocess_parts(parts)
                     if processed:
-                        return "\n\n".join(processed)
+                        result = "\n\n".join(processed)
+                        # Apply default + session-level suppressions before returning
+                        try:
+                            sess = conversation_context.get('suppress_phrases') if conversation_context and isinstance(
+                                conversation_context, dict) else []
+                            merged = list(
+                                self.default_suppressions) + (sess or [])
+                            if merged:
+                                result = self._apply_suppressions(
+                                    result, merged)
+                        except Exception:
+                            pass
+                        return result
                 except Exception:
                     # If postprocessing fails, continue to fall back to default
                     pass
@@ -1076,4 +1355,19 @@ class DynamicResponseComposer:
         parts.append(closing)
 
         # Join parts into a single composed response
-        return "\n\n".join(parts)
+        result = "\n\n".join(parts)
+        # Apply any conversation/session-level suppressions before returning
+        try:
+            sess = conversation_context.get('suppress_phrases') if conversation_context and isinstance(
+                conversation_context, dict) else []
+            # Always include the curated default suppressions to avoid
+            # frequently-repeated canned lines; merge with any session
+            # suppressions provided by the UI.
+            merged = list(self.default_suppressions) + (sess or [])
+
+            if merged:
+                result = self._apply_suppressions(result, merged)
+        except Exception:
+            pass
+
+        return result
