@@ -337,6 +337,9 @@ class DynamicResponseComposer:
         glyphs = glyphs or []
         extracted = extracted or {}
 
+        # How many top glyph snippets to include in poetry/snippet composition.
+        # Default to a small number to keep composed replies concise.
+        top_n = min(3, max(1, len(glyphs)))
         # Map detected emotions to poetry categories
         primary_emotion = list(emotions.keys())[0] if emotions else None
 
@@ -488,12 +491,17 @@ class DynamicResponseComposer:
             parts.append(snippet)
             snippet_count += 1
 
-        # Optionally weave a single poetic echo from dominant glyph
+        # Optionally include a short poetry echo drawn from the available
+        # `poetry_lines` for the detected primary emotion. We avoid calling
+        # `_weave_poetry` recursively here (which previously caused infinite
+        # recursion) and instead sanitize a candidate poetry line directly.
         if dominant:
-            poetry_emotion = self._glyph_to_emotion_category(
-                dominant.get('glyph_name', ''))
-            poetry_line = self._weave_poetry(combined_text, {
-                                             poetry_emotion: 0.8} if poetry_emotion else extracted.get('emotions', {}), glyphs, extracted)
+            poetry_line = None
+            for candidate in poetry_lines:
+                p = self._sanitize_poetry_line(candidate)
+                if p:
+                    poetry_line = p
+                    break
             if poetry_line:
                 parts.append(poetry_line)
 
