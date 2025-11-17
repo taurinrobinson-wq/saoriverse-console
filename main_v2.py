@@ -55,7 +55,17 @@ try:
     _page_icon = None
     if _logo_path.exists():
         try:
-            _page_icon = _logo_path.read_bytes()
+            # Read the SVG bytes and convert to a base64 data URI so
+            # Streamlit consistently uses the provided image as the
+            # page icon instead of falling back to the emoji.
+            svg_bytes = _logo_path.read_bytes()
+            try:
+                _b64 = base64.b64encode(svg_bytes).decode('ascii')
+                _page_icon = f"data:image/svg+xml;base64,{_b64}"
+            except Exception:
+                # If base64 encoding fails for any reason, fall back
+                # to passing raw bytes (previous behavior).
+                _page_icon = svg_bytes
         except Exception:
             _page_icon = None
     # Use bytes (image) if available, otherwise an emoji
@@ -76,6 +86,53 @@ except Exception:
 
 # Development reload marker removed. Temporary DEV timestamp and stdout
 # print were used during debugging and have been deleted.
+
+
+# Startup safety check: if Supabase credentials are present but a global
+# local-only guard is NOT set, warn loudly so deployments don't accidentally
+# make remote/OpenAI calls. This shows an in-UI warning (when Streamlit is
+# available) and logs a WARNING to stdout/logs. It's intentionally resilient
+# so it won't break import-time behavior in tests or non-Streamlit environments.
+def _startup_remote_ai_safety_check():
+    try:
+        import logging as _logging
+        _logger = _logging.getLogger(__name__)
+    except Exception:
+        _logger = None
+
+    try:
+        force_local = str(os.getenv('FORCE_LOCAL_ONLY', '')
+                          ).lower() in ('1', 'true', 'yes')
+        has_supabase = bool(os.getenv('SUPABASE_FUNCTION_URL') or os.getenv('SUPABASE_URL') or os.getenv(
+            'SUPABASE_ANON_KEY') or os.getenv('SUPABASE_USER_TOKEN') or os.getenv('SUPABASE_KEY'))
+        if has_supabase and not force_local:
+            msg = (
+                "⚠️ Security warning: Supabase/remote AI credentials are present but "
+                "FORCE_LOCAL_ONLY is not enabled. The application may make remote AI calls. "
+                "To enforce local-only operation, set environment variable: FORCE_LOCAL_ONLY=1"
+            )
+            try:
+                if _logger:
+                    _logger.warning(msg)
+            except Exception:
+                pass
+            try:
+                # Prefer Streamlit UI warning when running in the app context
+                import streamlit as _st
+                _st.warning(msg)
+            except Exception:
+                # Fall back to printing so CI/deploy logs still capture it
+                print(msg)
+    except Exception:
+        # Safety check should never raise
+        try:
+            print('Startup remote-AI safety check failed (non-fatal)')
+        except Exception:
+            pass
+
+
+# Run safety check early during startup
+_startup_remote_ai_safety_check()
 
 
 def safe_embed_html(content: str, height: int | None = None, use_iframe: bool = True) -> None:

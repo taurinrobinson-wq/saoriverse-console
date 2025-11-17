@@ -255,7 +255,43 @@ def render_controls_row(conversation_key):
         pass
     with controls[5]:
         # Reserved for future use; intentionally left empty.
-        pass
+        try:
+            # Persistent status badge showing processing mode and global guard
+            mode_badge = st.session_state.get('processing_mode', os.getenv(
+                'DEFAULT_PROCESSING_MODE', 'local'))
+            force_local_env = os.getenv('FORCE_LOCAL_ONLY', '')
+            force_local = str(force_local_env).lower() in ('1', 'true', 'yes')
+
+            # Choose a color and icon for quick visual scanning
+            if force_local:
+                bg = '#ef5350'  # red
+                icon = '🔒'
+            elif mode_badge == 'hybrid' or mode_badge == 'ai_preferred':
+                bg = '#66bb6a'  # green
+                icon = '🤖'
+            else:
+                bg = '#ffa726'  # orange
+                icon = '📡'
+
+            display_text = f"{mode_badge.upper()}"
+            if force_local:
+                display_text = f"{display_text} · ENFORCED"
+
+            badge_html = (
+                f"<div style=\"display:inline-block; padding:6px 10px; border-radius:14px;"
+                f" background:{bg}; color:#fff; font-weight:600; font-size:12px;"
+                f" box-shadow: 0 1px 3px rgba(0,0,0,0.12);\">{icon} {display_text}</div>"
+            )
+
+            # Render the badge in the reserved slot. Use unsafe HTML intentionally
+            # for this small UI fragment; it's static and contains no user content.
+            st.markdown(badge_html, unsafe_allow_html=True)
+        except Exception:
+            # Never fail the whole UI if badge rendering breaks
+            try:
+                st.write('')
+            except Exception:
+                pass
 
 
 def ensure_processing_prefs():
@@ -367,6 +403,37 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
 
+    # Enforce strict local-only processing when session mode is 'local'.
+    try:
+        mode = st.session_state.get('processing_mode', os.getenv(
+            'DEFAULT_PROCESSING_MODE', 'local'))
+    except Exception:
+        mode = os.getenv('DEFAULT_PROCESSING_MODE', 'local')
+
+    if mode == 'local':
+        try:
+            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            composer = DynamicResponseComposer()
+            if glyphs:
+                response_text = composer.compose_multi_glyph_response(
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+            else:
+                response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+        except Exception:
+            response_text = (
+                f"Local Analysis: {voltage_response}\n"
+                f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+                f"{ritual_prompt}\n(AI enhancement unavailable)"
+            )
+
+        try:
+            if isinstance(response_text, str) and '(AI enhancement' not in response_text and "I'm listening" not in response_text:
+                response_text = response_text + \
+                    "\n\n(AI enhancement unavailable)"
+        except Exception:
+            pass
+        return response_text, {}, local_analysis
+
     # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
     if os.environ.get('LOCAL_DEV_MODE') == '1':
         # Simulate a 401 HTTP error to test our improved fallback messages
@@ -445,6 +512,62 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
     }
+    # Attach LLM overrides to help the server-side LLM apply tone/intent guidance
+    try:
+        llm_overrides = {}
+        # Prefer guidance from conversation_context when present
+        if conversation_context and isinstance(conversation_context, dict):
+            if conversation_context.get('forced_intent'):
+                llm_overrides['forced_intent'] = conversation_context.get(
+                    'forced_intent')
+            if conversation_context.get('dominant_emotion'):
+                llm_overrides['dominant_emotion'] = conversation_context.get(
+                    'dominant_emotion')
+            if conversation_context.get('tone_overlay'):
+                llm_overrides['tone_overlay'] = conversation_context.get(
+                    'tone_overlay')
+            prov = conversation_context.get('clarification_provenance')
+            if prov and isinstance(prov, dict):
+                llm_overrides['clarification_record_id'] = prov.get(
+                    'record_id')
+
+        # Fall back to local analysis if conversation_context lacks overlays
+        if not llm_overrides.get('dominant_emotion'):
+            # Try to infer a simple dominant emotion from local glyphs
+            try:
+                names = ' '.join([g.get('glyph_name', '')
+                                 for g in glyphs]).lower()
+                if any(w in names for w in ['joy', 'bliss', 'delight']):
+                    llm_overrides['dominant_emotion'] = 'joy'
+                elif any(w in names for w in ['grief', 'mourning', 'ache', 'sorrow', 'loss']):
+                    llm_overrides['dominant_emotion'] = 'sadness'
+                elif any(w in names for w in ['fear', 'afraid', 'panic']):
+                    llm_overrides['dominant_emotion'] = 'fear'
+                elif any(w in names for w in ['anger', 'rage', 'frustrat']):
+                    llm_overrides['dominant_emotion'] = 'anger'
+            except Exception:
+                pass
+
+        # Build a short prompt prefix to instruct the remote LLM about forced intent and tone
+        if llm_overrides.get('forced_intent') or llm_overrides.get('tone_overlay') or llm_overrides.get('dominant_emotion'):
+            parts = []
+            if llm_overrides.get('forced_intent'):
+                parts.append(
+                    f"Interpret the user's intent as: {llm_overrides['forced_intent']}.")
+            if llm_overrides.get('dominant_emotion'):
+                parts.append(
+                    f"Adopt a tone reflecting {llm_overrides['dominant_emotion']}.")
+            if llm_overrides.get('tone_overlay'):
+                parts.append(f"Tone guidance: {llm_overrides['tone_overlay']}")
+            prompt_prefix = ' '.join(parts)
+            if prompt_prefix:
+                llm_overrides['prompt_prefix'] = prompt_prefix
+
+        if llm_overrides:
+            payload['llm_overrides'] = llm_overrides
+    except Exception:
+        # Non-fatal: do not prevent the request if override construction fails
+        pass
     try:
         response_data = requests.post(
             saori_url,
