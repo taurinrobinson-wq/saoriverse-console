@@ -1,0 +1,482 @@
+[
+  {
+    "id": "glyph_poetry_01",
+    "name": "Book & Attribution",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "attribution"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "of this book",
+      "attribution license",
+      "attribution access for",
+      "book url",
+      "this book",
+      "attribution"
+    ],
+    "combined_frequency": 17,
+    "response_cue": "Acknowledge the book and attribution here",
+    "narrative_hook": "The interplay of book and attribution",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_02",
+    "name": "Book & Openstax",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "openstax"
+    ],
+    "associated_keywords": [
+      "openstax",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "openstax policies",
+      "book url",
+      "this book",
+      "openstax book"
+    ],
+    "combined_frequency": 16,
+    "response_cue": "Acknowledge the book and openstax here",
+    "narrative_hook": "The interplay of book and openstax",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_03",
+    "name": "Attribution & Openstax",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "attribution",
+      "openstax"
+    ],
+    "associated_keywords": [
+      "openstax",
+      "the openstax name",
+      "attribution license",
+      "openstax policies",
+      "openstax book",
+      "openstax cnx",
+      "the following attribution",
+      "openstax book title"
+    ],
+    "combined_frequency": 15,
+    "response_cue": "Acknowledge the attribution and openstax here",
+    "narrative_hook": "The interplay of attribution and openstax",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_04",
+    "name": "Book & Language",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "language"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "of this book",
+      "book url",
+      "this book",
+      "language models or",
+      "large language",
+      "book title"
+    ],
+    "combined_frequency": 14,
+    "response_cue": "Acknowledge the book and language here",
+    "narrative_hook": "The interplay of book and language",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_05",
+    "name": "Book & Access",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "access"
+    ],
+    "associated_keywords": [
+      "book in",
+      "access for free",
+      "book title psychology",
+      "of this book",
+      "access",
+      "book url",
+      "this book",
+      "educational access"
+    ],
+    "combined_frequency": 13,
+    "response_cue": "Acknowledge the book and access here",
+    "narrative_hook": "The interplay of book and access",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_06",
+    "name": "Book & Group",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "group"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "of this book",
+      "the group",
+      "book url",
+      "this book",
+      "group",
+      "book title"
+    ],
+    "combined_frequency": 13,
+    "response_cue": "Acknowledge the book and group here",
+    "narrative_hook": "The interplay of book and group",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_07",
+    "name": "Book & M.",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "m."
+    ],
+    "associated_keywords": [
+      "m. spielman",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "book url",
+      "this book",
+      "book title",
+      "book in a"
+    ],
+    "combined_frequency": 13,
+    "response_cue": "Acknowledge the book and m. here",
+    "narrative_hook": "The interplay of book and m.",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_08",
+    "name": "Book & Common",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "common"
+    ],
+    "associated_keywords": [
+      "the creative commons",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "creative commons",
+      "book url",
+      "this book",
+      "creative commons attribution"
+    ],
+    "combined_frequency": 13,
+    "response_cue": "Acknowledge the book and common here",
+    "narrative_hook": "The interplay of book and common",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_09",
+    "name": "Book & Format",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "format"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "format then you",
+      "of this book",
+      "book url",
+      "this book",
+      "format then",
+      "a digital format"
+    ],
+    "combined_frequency": 13,
+    "response_cue": "Acknowledge the book and format here",
+    "narrative_hook": "The interplay of book and format",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_10",
+    "name": "Attribution & Language",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "attribution",
+      "language"
+    ],
+    "associated_keywords": [
+      "language models",
+      "attribution license",
+      "large language models",
+      "language models or",
+      "large language",
+      "the following attribution",
+      "language",
+      "following attribution"
+    ],
+    "combined_frequency": 13,
+    "response_cue": "Acknowledge the attribution and language here",
+    "narrative_hook": "The interplay of attribution and language",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_11",
+    "name": "Book & William",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "william"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "william j. jenkins",
+      "william",
+      "of this book",
+      "william j.",
+      "book url",
+      "this book"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and william here",
+    "narrative_hook": "The interplay of book and william",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_12",
+    "name": "Book & Texas",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "texas"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "texas",
+      "of this book",
+      "book url",
+      "this book",
+      "texas book url",
+      "book title"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and texas here",
+    "narrative_hook": "The interplay of book and texas",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_13",
+    "name": "Book & Houston",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "houston"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "of this book",
+      "houston texas book",
+      "houston",
+      "book url",
+      "this book",
+      "book title"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and houston here",
+    "narrative_hook": "The interplay of book and houston",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_14",
+    "name": "Book & Section",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "section"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "section url",
+      "of this book",
+      "this section",
+      "book url",
+      "this book",
+      "section"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and section here",
+    "narrative_hook": "The interplay of book and section",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_15",
+    "name": "Book & Include",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "include"
+    ],
+    "associated_keywords": [
+      "book in",
+      "book title psychology",
+      "you must include",
+      "of this book",
+      "book url",
+      "this book",
+      "book title",
+      "book in a"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and include here",
+    "narrative_hook": "The interplay of book and include",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_16",
+    "name": "Book & Author",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "author"
+    ],
+    "associated_keywords": [
+      "authors rose",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "authors rose m.",
+      "book url",
+      "this book",
+      "authors"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and author here",
+    "narrative_hook": "The interplay of book and author",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_17",
+    "name": "Book & Citation",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "citation"
+    ],
+    "associated_keywords": [
+      "book in",
+      "a citation tool",
+      "book title psychology",
+      "of this book",
+      "citation",
+      "book url",
+      "this book",
+      "book title"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and citation here",
+    "narrative_hook": "The interplay of book and citation",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_18",
+    "name": "Book & Marilyn",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "marilyn"
+    ],
+    "associated_keywords": [
+      "marilyn d.",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "marilyn",
+      "book url",
+      "this book",
+      "book title"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and marilyn here",
+    "narrative_hook": "The interplay of book and marilyn",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_19",
+    "name": "Book & Use",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "use"
+    ],
+    "associated_keywords": [
+      "used",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "using",
+      "use",
+      "book url",
+      "this book"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and use here",
+    "narrative_hook": "The interplay of book and use",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  },
+  {
+    "id": "glyph_poetry_20",
+    "name": "Book & Page",
+    "symbol": "\u25c6\u25c6",
+    "core_emotions": [
+      "book",
+      "page"
+    ],
+    "associated_keywords": [
+      "every digital page",
+      "book in",
+      "book title psychology",
+      "of this book",
+      "page",
+      "book url",
+      "this book",
+      "every physical page"
+    ],
+    "combined_frequency": 12,
+    "response_cue": "Acknowledge the book and page here",
+    "narrative_hook": "The interplay of book and page",
+    "created_from_pattern": true,
+    "source": "gutenberg_poetry"
+  }
+]
