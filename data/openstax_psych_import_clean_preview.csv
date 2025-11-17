@@ -1,32 +1,32 @@
-signal,frequency,keywords_sample
+headword,frequency,keywords
 language,5,language; language models; language models or; large language; large language models
 access,4,access; access for; access for free; educational access
+common,4,commons attribution; creative commons; creative commons attribution; the creative commons
 group,4,a group; group; groups; the group
 m.,4,m. spielman; m. spielman william; rose m.; rose m. spielman
-common,4,commons attribution; creative commons; creative commons attribution; the creative commons
-william,3,william; william j.; william j. jenkins
-texas,3,texas; texas book; texas book url
 houston,3,houston; houston texas; houston texas book
 include,3,include; must include; you must include
-marilyn,3,marilyn; marilyn d.; marilyn d. lovett
-use,3,use; used; using
 location,3,location; location houston; location houston texas
-spielman,3,spielman; spielman william; spielman william j.
 lovett,3,lovett; lovett publisher; lovett publisher website
-people,2,people; people who
-personality,2,personality; personality traits
+marilyn,3,marilyn; marilyn d.; marilyn d. lovett
+spielman,3,spielman; spielman william; spielman william j.
+texas,3,texas; texas book; texas book url
+use,3,use; used; using
+william,3,william; william j.; william j. jenkins
 behavior,2,behavior; behaviors
+culture,2,culture; cultures
+d.,2,d. lovett; d. lovett publisher
+date,2,date; date apr
 example,2,example; for example
-person,2,a person; person
+follow,2,following; the following
 free,2,for free; free
 individual,2,individual; individuals
-follow,2,following; the following
-model,2,models; models or
-culture,2,culture; cultures
-date,2,date; date apr
-situation,2,situation; the situation
-title,2,title; title psychology
-redistribute,2,are redistributing; you are redistributing
 j.,2,j. jenkins; j. jenkins marilyn
 jenkins,2,jenkins marilyn; jenkins marilyn d.
-d.,2,d. lovett; d. lovett publisher
+model,2,models; models or
+people,2,people; people who
+person,2,a person; person
+personality,2,personality; personality traits
+redistribute,2,are redistributing; you are redistributing
+situation,2,situation; the situation
+title,2,title; title psychology

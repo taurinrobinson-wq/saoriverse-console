@@ -1,15 +1,4 @@
-Summary
-12.1 What Is Social Psychology?
-12.2 Self-presentation
-12.3 Attitudes and Persuasion
-12.4 Conformity, Compliance, and Obedience
-12.5 Prejudice and Discrimination
-12.6 Aggression
-12.7 Prosocial Behavior
 Our mission is to improve educational access and learning for everyone.
-Help
-OpenStax
-Policies
 Social psychology is the subfield of psychology that studies the power of the situation to influence individuals’ thoughts, feelings, and behaviors. Psychologists categorize the causes of human behavior as those due to internal factors, such as personality, or those due to external factors, such as cultural and other social influences. Behavior is better explained, however, by using both approaches. Lay people tend to over-rely on dispositional explanations for behavior and ignore the power of situational influences, a perspective called the fundamental attribution error. People from individualistic cultures are more likely to display this bias versus people from collectivistic cultures. Our explanations for our own and others behaviors can be biased due to not having enough information about others’ motivations for behaviors and by providing explanations that bolster our self-esteem.
 Human behavior is largely influenced by our social roles, norms, and scripts. In order to know how to act in a given situation, we have shared cultural knowledge of how to behave depending on our role in society. Social norms dictate the behavior that is appropriate or inappropriate for each role. Each social role has scripts that help humans learn the sequence of appropriate behaviors in a given setting. The famous Stanford prison experiment is an example of how the power of the situation can dictate the social roles, norms, and scripts we follow in a given situation, even if this behavior is contrary to our typical behavior.
 Attitudes are our evaluations or feelings toward a person, idea, or object and typically are positive or negative. Our attitudes and beliefs are influenced not only by external forces, but also by internal influences that we control. An internal form of attitude change is cognitive dissonance or the tension we experience when our thoughts, feelings, and behaviors are in conflict. In order to reduce dissonance, individuals can change their behavior, attitudes, or cognitions, or add a new cognition. External forces of persuasion include advertising; the features of advertising that influence our behaviors include the source, message, and audience. There are two primary routes to persuasion. The central route to persuasion uses facts and information to persuade potential consumers. The peripheral route uses positive association with cues such as beauty, fame, and positive emotions.
@@ -17,33 +6,8 @@ The power of the situation can lead people to conform, or go along with the grou
 As diverse individuals, humans can experience conflict when interacting with people who are different from each other. Prejudice, or negative feelings and evaluations, is common when people are from a different social group (i.e., out-group). Negative attitudes toward out-groups can lead to discrimination. Prejudice and discrimination against others can be based on gender, race, ethnicity, social class, sexual orientation, or a variety of other social identities. In-group’s who feel threatened may blame the out-groups for their plight, thus using the out-group as a scapegoat for their frustration.
 Aggression is seeking to cause another person harm or pain. Hostile aggression is motivated by feelings of anger with intent to cause pain, and instrumental aggression is motivated by achieving a goal and does not necessarily involve intent to cause pain. Bullying is an international public health concern that largely affects the adolescent population. Bullying is repeated behaviors that are intended to inflict harm on the victim and can take the form of physical, psychological, emotional, or social abuse. Bullying has negative mental health consequences for youth including suicide. Cyberbullying is a newer form of bullying that takes place in an online environment where bullies can remain anonymous and victims are helpless to address the harassment. Despite the social norm of helping others in need, when there are many bystanders witnessing an emergency, diffusion of responsibility will lead to a lower likelihood of any one person helping.
 Altruism is a pure form of helping others out of empathy, which can be contrasted with egoistic motivations for helping. Forming relationships with others is a necessity for social beings. We typically form relationships with people who are close to us in proximity and people with whom we share similarities. We expect reciprocity and self-disclosure in our relationships. We also want to form relationships with people who are physically attractive, though standards for attractiveness vary by culture and gender. There are many types of love that are determined by various combinations of intimacy, passion, and commitment; consummate love, which is the ideal form of love, contains all three components. When determining satisfaction and whether to maintain a relationship, individuals often use a social exchange approach and weigh the costs and benefits of forming and maintaining a relationship.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/12-summary
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/12-summary
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

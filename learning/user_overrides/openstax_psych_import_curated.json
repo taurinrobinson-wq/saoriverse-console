@@ -1,0 +1,304 @@
+{
+  "signals": {
+    "cognitive dissonance": {
+      "frequency": 183,
+      "keywords": []
+    },
+    "tension": {
+      "frequency": 140,
+      "keywords": []
+    },
+    "rhythm": {
+      "frequency": 90,
+      "keywords": []
+    },
+    "personality traits": {
+      "frequency": 83,
+      "keywords": []
+    },
+    "beginning": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "acceptance": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "unconscious": {
+      "frequency": 80,
+      "keywords": []
+    },
+    "sexuality": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "aggression": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "figure": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "influence": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "intimacy": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "passion": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "childhood": {
+      "frequency": 70,
+      "keywords": []
+    },
+    "hidden": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "expression": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "traits": {
+      "frequency": 60,
+      "keywords": []
+    },
+    "vitality": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "express": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "behaviors": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "psychologists": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "theory": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "change": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "cyberbullying": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "humans": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "differences": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "perspective": {
+      "frequency": 50,
+      "keywords": []
+    },
+    "and discrimination": {
+      "frequency": 45,
+      "keywords": []
+    },
+    "more likely": {
+      "frequency": 45,
+      "keywords": []
+    },
+    "personality": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "individuals": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "prejudice": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "discrimination": {
+      "frequency": 40,
+      "keywords": []
+    },
+    "the situation": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "a group": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "the power": {
+      "frequency": 35,
+      "keywords": []
+    },
+    "witness": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "structure": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "opening": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "foundation": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "emerge": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "accept": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "social": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "information": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "negative": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "positive": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "cultures": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "gender": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "internal": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "american": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "participants": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "commitment": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "cultural": {
+      "frequency": 30,
+      "keywords": []
+    },
+    "a person": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "another person": {
+      "frequency": 25,
+      "keywords": []
+    },
+    "relationships": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "attitudes": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "persuasion": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "control": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "factors": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "culture": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "attitude": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "contrast": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "approach": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "anxiety": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "benefits": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "conflict": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "environment": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "experiences": {
+      "frequency": 20,
+      "keywords": []
+    },
+    "likely to": {
+      "frequency": 15,
+      "keywords": []
+    },
+    "cognitive": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "different": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "important": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "situational": {
+      "frequency": 10,
+      "keywords": []
+    },
+    "common": {
+      "frequency": 10,
+      "keywords": []
+    }
+  }
+}

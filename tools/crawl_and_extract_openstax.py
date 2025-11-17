@@ -17,6 +17,7 @@ import sys
 import json
 from collections import Counter
 from typing import List
+from parser.nrc_lexicon_loader import nrc
 
 from urllib.parse import urljoin
 
@@ -55,6 +56,7 @@ URLS = [
     "https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior",
     "https://openstax.org/books/psychology-2e/pages/12-key-terms",
     "https://openstax.org/books/psychology-2e/pages/12-summary",
+    "https://openstax.org/books/psychology-2e/pages/1-2-history-of-psychology",
 ]
 
 DEFAULT_OUT_DIR = os.path.join("data", "openstax")
@@ -147,6 +149,75 @@ def find_section_links(html_path: str, chapter_prefix: str, base_url: str = "htt
     return out
 
 
+def find_internal_links(html_path: str, base_url: str = "https://openstax.org") -> List[str]:
+    """Return absolute URLs for any internal book pages (psychology-2e) found on page."""
+    from bs4 import BeautifulSoup
+    links = []
+    if not html_path or not os.path.exists(html_path):
+        return links
+    with open(html_path, "rb") as f:
+        raw = f.read()
+    soup = BeautifulSoup(raw, "html.parser")
+    for a in soup.find_all("a", href=True):
+        href = a["href"].strip()
+        if href.startswith("#"):
+            continue
+        full = urljoin(base_url, href)
+        if "openstax.org/books/psychology-2e/pages/" in full:
+            links.append(full.split('#')[0])
+    # unique while preserving order
+    seen = set()
+    out = []
+    for u in links:
+        if u not in seen:
+            seen.add(u)
+            out.append(u)
+    return out
+
+
+def strip_openstax_boilerplate(text: str) -> str:
+    """Remove common OpenStax attribution/license/footer lines to reduce noise.
+
+    This is a conservative stripper based on repeated patterns found in the
+    cleaned page texts. It keeps body paragraphs and headings intact while
+    dropping obvious metadata lines.
+    """
+    if not text:
+        return text
+    lines = []
+    for ln in text.splitlines():
+        s = ln.strip()
+        # skip very short lines that are clearly navigation / footer
+        if not s:
+            lines.append("")
+            continue
+        low = s.lower()
+        if any(tok in low for tok in (
+            "this book may not be used",
+            "creative commons",
+            "access for free at",
+            "publisher/website",
+            "book title",
+            "publication date",
+            "authors:",
+            "contact us",
+            "support center",
+            "terms of use",
+            "licensing",
+            "privacy policy",
+            "openstax cnx",
+            "rice university",
+            "© ",
+            "©",
+        )):
+            continue
+        # drop long lines consisting largely of urls or repeated site chrome
+        if re.match(r"^https?://", s) or len(re.findall(r"\\w+", s)) < 2 and len(s) < 60:
+            continue
+        lines.append(s)
+    return "\n".join(lines)
+
+
 def extract_phrases_from_corpus(corpus_text: str, top_k: int = 500) -> List[str]:
     nlp = get_nlp()
     doc = nlp(corpus_text)
@@ -228,6 +299,12 @@ def main():
     parser.add_argument("--no-install", action="store_true")
     parser.add_argument("--top-k", type=int, default=3000)
     parser.add_argument("--top-n", type=int, default=800)
+    parser.add_argument("--follow-depth", type=int, default=2,
+                        help="Follow internal book links up to this depth (0 = no extra follow)")
+    parser.add_argument("--affective-only", action="store_true",
+                        help="Only save/process pages that show affective/emotional language per NRC scorer")
+    parser.add_argument("--affective-threshold", type=float, default=1.0,
+                        help="Minimum summed NRC score to consider a page affective (default 1.0)")
     args = parser.parse_args()
 
     ensure_packages(allow_install=not args.no_install)
@@ -253,42 +330,56 @@ def main():
     expanded_terms = load_expanded_lexicon()
     print(f"Loaded expanded lexicon terms: {len(expanded_terms)}")
 
+    follow_depth = args.follow_depth
     for top_url in URLS:
-        chapter_match = re.search(r"/pages/(\d+)", top_url)
-        chapter_prefix = f"/pages/{chapter_match.group(1)}" if chapter_match else "/pages/"
         top_slug = slug_from_url(top_url)
         section_dir = os.path.join(OUT_DIR, top_slug)
         os.makedirs(section_dir, exist_ok=True)
 
-        # Fetch main page
-        main_html = fetch_url(top_url, TMP_DIR)
-        main_raw = extract_visible_text(main_html)
-        main_clean = cleaner.clean_text(main_raw)
-        if main_clean:
-            out_path = os.path.join(section_dir, top_slug + "_cleaned.txt")
-            with open(out_path, "w", encoding="utf-8") as f:
-                f.write(main_clean)
-            cleaned_texts[top_url] = main_clean
-            combined_corpus_parts.append(main_clean)
-            print(f"Saved: {out_path}")
-
-        # Find sublinks within same chapter prefix
-        sublinks = find_section_links(main_html, chapter_prefix)
-        # ensure the top_url itself is included as first
-        for sub in sublinks:
-            if sub == top_url:
+        # BFS queue for following internal links up to depth
+        queue = [(top_url, 0)]
+        seen_urls = set()
+        while queue:
+            url, depth = queue.pop(0)
+            if url in seen_urls:
                 continue
-            sub_slug = slug_from_url(sub)
-            sub_html = fetch_url(sub, TMP_DIR)
-            raw = extract_visible_text(sub_html)
-            cleaned = cleaner.clean_text(raw)
+            seen_urls.add(url)
+            html_path = fetch_url(url, TMP_DIR)
+            raw_text = extract_visible_text(html_path)
+            cleaned = cleaner.clean_text(raw_text)
+            # strip repeated OpenStax boilerplate to reduce noise
+            cleaned = strip_openstax_boilerplate(cleaned)
+            # optionally skip pages with minimal affective signal
+            if args.affective_only and cleaned:
+                try:
+                    page_emotions = nrc.analyze_text(cleaned) or {}
+                    page_strength = sum(page_emotions.values())
+                except Exception:
+                    page_strength = 0
+                if page_strength < args.affective_threshold:
+                    print(
+                        f"Skipping page (low affective signal {page_strength}): {url}")
+                    # still mark seen to avoid refetch loops
+                    continue
             if cleaned:
-                out_path = os.path.join(section_dir, sub_slug + "_cleaned.txt")
+                slug = slug_from_url(url)
+                out_path = os.path.join(section_dir, slug + "_cleaned.txt")
                 with open(out_path, "w", encoding="utf-8") as f:
                     f.write(cleaned)
-                cleaned_texts[sub] = cleaned
+                cleaned_texts[url] = cleaned
                 combined_corpus_parts.append(cleaned)
-                print(f"Saved subpage: {out_path}")
+                if depth == 0:
+                    print(f"Saved: {out_path}")
+                else:
+                    print(f"Saved linked page (depth {depth}): {out_path}")
+
+            # if allowed, find additional internal links and enqueue
+            if depth < follow_depth:
+                # include any internal book page links
+                links = find_internal_links(html_path)
+                for l in links:
+                    if l not in seen_urls:
+                        queue.append((l, depth + 1))
 
     if not combined_corpus_parts:
         print("No texts fetched/cleaned. Exiting.")

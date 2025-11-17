@@ -1,19 +1,4 @@
-11.4 Learning Approaches
-Learning Objectives
-The Behavioral Perspective
-The Social-Cognitive Perspective
-Julian Rotter and Locus of Control
-Link to Learning
-Walter Mischel and the Person-Situation Debate
-Link to Learning
 Our mission is to improve educational access and learning for everyone.
-Reciprocal Determinism
-Observational Learning
-Self-Efficacy
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 In contrast to the psychodynamic approaches of Freud and the neo-Freudians, which relate personality to inner (and hidden) processes, the learning approaches focus only on observable behavior. This illustrates one significant advantage of the learning approaches over psychodynamics: Because learning approaches involve observable, measurable phenomena, they can be scientifically tested.
 Behaviorists do not believe in biological determinism: They do not see personality traits as inborn. Instead, they view personality as significantly shaped by the reinforcements and consequences outside of the organism. In other words, people behave in a consistent manner based on prior learning. B. F. Skinner , a strict behaviorist, believed that environment was solely responsible for all behavior, including the enduring, consistent behavior patterns studied by personality theorists.
 As you may recall from your study on the psychology of learning, Skinner proposed that we demonstrate consistent behavior patterns because we have developed certain response tendencies (Skinner, 1953). In other words, we learn to behave in particular ways. We increase the behaviors that lead to positive consequences, and we decrease the behaviors that lead to negative consequences. Skinner disagreed with Freud’s idea that personality is fixed in childhood. He argued that personality develops over our entire life, not only in the first few years. Our responses can change as we come across new situations; therefore, we can expect more variability over time in personality than Freud would anticipate. For example, consider a young woman, Greta, a risk taker. She drives fast and participates in dangerous sports such as hang gliding and kiteboarding. But after she gets married and has children, the system of reinforcements and punishments in her environment changes. Speeding and extreme sports are no longer reinforced, so she no longer engages in those behaviors. In fact, Greta now describes herself as a cautious person.
@@ -32,36 +17,8 @@ One of Mischel’s most notable contributions to personality psychology was his 
 Mischel designed a study to assess self-regulation in young children. In the marshmallow study, Mischel and his colleagues placed a preschool child in a room with one marshmallow on the table. The children were told they could either eat the marshmallow now, or wait until the researcher returned to the room, and then they could have two marshmallows (Mischel, Ebbesen & Raskoff, 1972). This was repeated with hundreds of preschoolers. What Mischel and his team found was that young children differ in their degree of self-control. Mischel and his colleagues continued to follow this group of preschoolers through high school, and what do you think they discovered? The children who had more self-control in preschool (the ones who waited for the bigger reward) were more successful in high school. They had higher SAT scores, had positive peer relationships, and were less likely to have substance abuse issues; as adults, they also had more stable marriages (Mischel, Shoda, & Rodriguez, 1989; Mischel et al., 2010). On the other hand, those children who had poor self-control in preschool (the ones who grabbed the one marshmallow) were not as successful in high school, and they were found to have academic and behavioral problems. A more recent study using a larger and more representative sample found associations between early delay of gratification (Watts, Duncan, & Quan, 2018) and measures of achievement in adolescence. However, researchers also found that the associations were not as strong as those reported during Mischel's initial experiment and were quite sensitive to situational factors such as early measures of cognitive capacity, family background, and home environment. This research suggests that consideration of situational factors is important to better understand behavior.
 Watch Joachim de Posada's TEDTalk about the marshmallow test to learn more and to see the test given to children in Colombia.
 Today, the debate is mostly resolved, and most psychologists consider both the situation and personal factors in understanding behavior. For Mischel (1993), people are situation processors. The children in the marshmallow test each processed, or interpreted, the rewards structure of that situation in their own way. Mischel’s approach to personality stresses the importance of both the situation and the way the person perceives the situation. Instead of behavior being determined by the situation, people use cognitive processes to interpret the situation and then behave in accordance with that interpretation.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Describe the behaviorist perspective on personality
-Describe the cognitive perspective on personality
-Describe the social cognitive perspective on personality
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/11-4-learning-approaches
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

@@ -1,17 +1,4 @@
-12.2 Self-presentation
-Learning Objectives
-Social Roles
-Social Norms
-Connect the Concepts
-Scripts
-Zimbardo’s Stanford Prison Experiment
-Link to Learning
 Our mission is to improve educational access and learning for everyone.
-Tweens, Teens, and Social Norms
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 As you’ve learned, social psychology is the study of how people affect one another’s thoughts, feelings, and behaviors. We have discussed situational perspectives and social psychology’s emphasis on the ways in which a person’s environment, including culture and other social influences, affect behavior. In this section, we examine situational forces that have a strong influence on human behavior including social roles, social norms, and scripts. We discuss how humans use the social environment as a source of information, or cues, on how to behave. Situational influences on our behavior have important consequences, such as whether we will help a stranger in an emergency or how we would behave in an unfamiliar environment.
 One major social determinant of human behavior is our social roles. A social role is a pattern of behavior that is expected of a person in a given setting or group (Hare, 2003). Each one of us has several social roles. You may be, at the same time, a student, a parent, an aspiring teacher, a son or daughter, a spouse, and a lifeguard. How do these social roles influence your behavior? Social roles are defined by culturally shared knowledge. That is, nearly everyone in a given culture knows what behavior is expected of a person in a given role. For example, what is the social role for a student? If you look around a college classroom you will likely see students engaging in studious behavior, taking notes, listening to the professor, reading the textbook, and sitting quietly at their desks ( Figure 12.8 ). Of course you may see students deviating from the expected studious behavior such as texting on their phones or using Facebook on their laptops, but in all cases, the students that you observe are attending class-a part of the social role of students.
 Social roles, and our related behavior, can vary across different settings. How do you behave when you are engaging in the role of a child attending a family function? Now imagine how you behave when you are engaged in the role of employee at your workplace. It is very likely that your behavior will be different. Perhaps you are more relaxed and outgoing with your family, making jokes and doing silly things. But at your workplace you might speak more professionally, and although you may be friendly, you are also serious and focused on getting the work completed. These are examples of how our social roles influence and often dictate our behavior to the extent that identity and personality can vary with context (that is, in different social groups) (Malloy, Albright, Kenny, Agatstein & Winquist, 1997).
@@ -28,37 +15,10 @@ At this point it became clear that we had to end the study. We had created an ov
 The Stanford Prison Experiment has been used as a memorable demonstration of the incredible power that social roles, norms, and scripts have in affecting human behavior. However, multiple aspects of the study have been subject to criticism since its inception. The nature of these criticisms range from ethical concerns to issues of generalizability (Bartels, Milovich, & Moussier, 2016; Griggs, 2014; Le Texier, 2019). One criticism is that the way students were recruited for the experiment may have impacted the outcome (Carnahan & McFarland, 2007). Another criticism questions the conclusions that can be drawn from the study. Zimbardo appears to have provided specific guidelines of the types of behaviors that were expected of the guards (Zimbardo, 2007). Subsequent research suggests that such guidelines likely created an expectation of the types of behavior that Zimbardo reported observing in the Stanford Prison Experiment (Bartels, 2019), and that given these expectations, the guards simply acted as they thought they were expected to act. It has also been problematic that attempts to replicate aspects of the study have not been successful. For example, when no guidelines were presented to the guards, researchers documented different outcomes than those observed by Zimbardo. (Reicher & Haslam, 2006).
 The Stanford Prison Experiment has some parallels with the abuse of prisoners of war by U.S. Army troops and CIA personnel at the Abu Ghraib prison in 2003 and 2004 during the Iraq War. The offenses at Abu Ghraib were documented by photographs of the abuse, some taken by the abusers themselves ( Figure 12.10 ).
 Listen to this NPR interview with Philip Zimbardo where he discusses the parallels between the Stanford prison experiment and the Abu Ghraib prison in Iraq to learn more.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Describe social roles and how they influence behavior
 Explain what social norms are and how they influence behavior
-Define script
 Describe the findings and criticisms of Zimbardo’s Stanford prison experiment
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/12-2-self-presentation
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/12-2-self-presentation
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

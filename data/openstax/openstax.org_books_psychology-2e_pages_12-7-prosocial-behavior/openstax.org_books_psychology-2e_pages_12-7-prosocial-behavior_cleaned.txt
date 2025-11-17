@@ -1,16 +1,4 @@
-12.7 Prosocial Behavior
-Learning Objectives
-Prosocial Behavior and Altruism
-Link to Learning
-Forming Relationships
-Attraction
-Sternberg’s Triangular Theory of Love
-Social Exchange Theory
 Our mission is to improve educational access and learning for everyone.
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 You’ve learned about many of the negative behaviors of social psychology, but the field also studies many positive social interactions and behaviors. What makes people like each other? With whom are we friends? Whom do we date? Researchers have documented several features of the situation that influence whether we form relationships with others. There are also universal traits that humans find attractive in others. In this section we discuss conditions that make forming relationships more likely, what we look for in friendships and romantic relationships, the different types of love, and a theory explaining how our relationships are formed, maintained, and terminated.
 Do you voluntarily help others? Voluntary behavior with the intent to help other people is called prosocial behavior . Why do people help other people? Is personal benefit such as feeling good about oneself the only reason people help one another? Research suggests there are many other reasons. Altruism is people’s desire to help others even if the costs outweigh the benefits of helping. In fact, people acting in altruistic ways may disregard the personal costs associated with helping ( Figure 12.26 ). For example, news accounts of the 9/11 terrorist attacks on the World Trade Center in New York reported an employee in the first tower helped his co-workers make it to the exit stairwell. After helping a co-worker to safety he went back in the burning building to help additional co-workers. In this case the costs of helping were great, and the hero lost his life in the destruction (Stewart, 2002).
 Some researchers suggest that altruism operates on empathy. Empathy is the capacity to understand another person’s perspective, to feel what they feel. An empathetic person makes an emotional connection with others and feels compelled to help (Batson, 1991). Other researchers argue that altruism is a form of selfless helping that is not motivated by benefits or feeling good about oneself. Certainly, after helping, people feel good about themselves, but some researchers argue that this is a consequence of altruism, not a cause. Other researchers argue that helping is always self-serving because our egos are involved, and we receive benefits from helping (Cialdini, Brown, Lewis, Luce, & Neuberg 1997). It is challenging to determine experimentally the true motivation for helping, whether it is largely self-serving (egoism) or selfless (altruism). Thus, a debate on whether pure altruism exists continues.
@@ -25,38 +13,9 @@ We typically love the people with whom we form relationships, but the type of lo
 Sternberg (1986) states that a healthy relationship will have all three components of love-intimacy, passion, and commitment-which is described as consummate love ( Figure 12.29 ). However, different aspects of love might be more prevalent at different life stages. Other forms of love include liking, which is defined as having intimacy but no passion or commitment. Infatuation is the presence of passion without intimacy or commitment. Empty love is having commitment without intimacy or passion. Companionate love , which is characteristic of close friendships and family relationships, consists of intimacy and commitment but no passion. Romantic love is defined by having passion and intimacy, but no commitment. Finally, fatuous love is defined by having passion and commitment, but no intimacy, such as a long term sexual love affair. Can you describe other examples of relationships that fit these different types of love?
 We have discussed why we form relationships, what attracts us to others, and different types of love. But what determines whether we are satisfied with and stay in a relationship? One theory that provides an explanation is social exchange theory. According to social exchange theory , we act as naïve economists in keeping a tally of the ratio of costs and benefits of forming and maintaining a relationship with others ( Figure 12.30 ) (Rusbult & Van Lange, 2003).
 People are motivated to maximize the benefits of social exchanges, or relationships, and minimize the costs. People prefer to have more benefits than costs, or to have nearly equal costs and benefits, but most people are dissatisfied if their social exchanges create more costs than benefits. Let’s discuss an example. If you have ever decided to commit to a romantic relationship, you probably considered the advantages and disadvantages of your decision. What are the benefits of being in a committed romantic relationship? You may have considered having companionship, intimacy, and passion, but also being comfortable with a person you know well. What are the costs of being in a committed romantic relationship? You may think that over time boredom from being with only one person may set in; moreover, it may be expensive to share activities such as attending movies and going to dinner. However, the benefits of dating your romantic partner presumably outweigh the costs, or you wouldn’t continue the relationship.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Describe altruism
 Describe conditions that influence the formation of relationships
-Identify what attracts people to each other
-Describe the triangular theory of love
-Explain social exchange theory in relationships
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/12-7-prosocial-behavior
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

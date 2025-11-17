@@ -1,18 +1,4 @@
-11.3 Neo-Freudians: Adler, Erikson, Jung, and Horney
-Learning Objectives
-Alfred Adler
-Link to Learning
-Erik Erikson
-Carl Jung
-Link to Learning
-Connect the Concepts
-Karen Horney
 Our mission is to improve educational access and learning for everyone.
-Are Archetypes Genetically Based?
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 Freud attracted many followers who modified his ideas to create new theories about personality. These theorists, referred to as neo-Freudians, generally agreed with Freud that childhood experiences matter, but deemphasized sex, focusing more on the social environment and effects of culture on personality. Four notable neo-Freudians include Alfred Adler, Erik Erikson, Carl Jung (pronounced “Yoong”), and Karen Horney (pronounced “HORN-eye”).
 Alfred Adler , a colleague of Freud’s and the first president of the Vienna Psychoanalytical Society (Freud’s inner circle of colleagues), was the first major theorist to break away from Freud ( Figure 11.8 ). He subsequently founded a school of psychology called individual psychology , which focuses on our drive to compensate for feelings of inferiority. Adler (1937, 1956) proposed the concept of the inferiority complex . An inferiority complex refers to a person’s feelings that they lack worth and don’t measure up to the standards of others or of society. Adler’s ideas about inferiority represent a major difference between his thinking and Freud’s. Freud believed that we are motivated by sexual and aggressive urges, but Adler (1930, 1961) believed that feelings of inferiority in childhood are what drive people to attempt to gain superiority and that this striving is the force behind all of our thoughts, emotions, and behaviors.
 Adler also believed in the importance of social connections, seeing childhood development emerging through social development rather than the sexual stages Freud outlined. Adler noted the inter-relatedness of humanity and the need to work together for the betterment of all. He said, “The happiness of mankind lies in working together, in living as if each individual had set himself the task of contributing to the common welfare” (Adler, 1964, p. 255) with the main goal of psychology being “to recognize the equal rights and equality of others” (Adler, 1961, p. 691).
@@ -30,37 +16,11 @@ Jung proposed that human responses to archetypes are similar to instinctual resp
 Karen Horney was one of the first women trained as a Freudian psychoanalyst. During the Great Depression, Horney moved from Germany to the United States, and subsequently moved away from Freud’s teachings. Like Jung, Horney believed that each individual has the potential for self-realization and that the goal of psychoanalysis should be moving toward a healthy self rather than exploring early childhood patterns of dysfunction. Horney also disagreed with the Freudian idea that girls have penis envy and are jealous of male biological features. According to Horney, any jealousy is most likely culturally based, due to the greater privileges that men often have, meaning that the differences between men’s and women’s personalities are culturally based, not biologically based. She further suggested that men have womb envy, because they cannot give birth.
 Horney’s theories focused on the role of unconscious anxiety. She suggested that normal growth can be blocked by basic anxiety stemming from needs not being met, such as childhood experiences of loneliness and/or isolation. How do children learn to handle this anxiety? Horney suggested three styles of coping ( Table 11.4 ). The first coping style, moving toward people , relies on affiliation and dependence. These children become dependent on their parents and other caregivers in an effort to receive attention and affection, which provides relief from anxiety (Burger, 2008). When these children grow up, they tend to use this same coping strategy to deal with relationships, expressing an intense need for love and acceptance (Burger, 2008). The second coping style, moving against people , relies on aggression and assertiveness. Children with this coping style find that fighting is the best way to deal with an unhappy home situation, and they deal with their feelings of insecurity by bullying other children (Burger, 2008). As adults, people with this coping style tend to lash out with hurtful comments and exploit others (Burger, 2008). The third coping style, moving away from people , centers on detachment and isolation. These children handle their anxiety by withdrawing from the world. They need privacy and tend to be self-sufficient. When these children are adults, they continue to avoid such things as love and friendship, and they also tend to gravitate toward careers that require little interaction with others (Burger, 2008).
 Horney believed these three styles are ways in which people typically cope with day-to-day problems; however, the three coping styles can become neurotic strategies if they are used rigidly and compulsively, leading a person to become alienated from others.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Discuss the concept of the inferiority complex
 Discuss the core differences between Erikson’s and Freud’s views on personality
 Discuss Jung’s ideas of the collective unconscious and archetypes
 Discuss the work of Karen Horney, including her revision of Freud’s “penis envy”
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/11-3-neo-freudians-adler-erikson-jung-and-horney
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

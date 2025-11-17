@@ -1,16 +1,4 @@
-12.3 Attitudes and Persuasion
-Learning Objectives
-What is Cognitive Dissonance?
-Persuasion
 Our mission is to improve educational access and learning for everyone.
-The Effect of Initiation
-Yale Attitude Change Approach
-Elaboration Likelihood Model
-Foot-in-the-door Technique
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 Social psychologists have documented how the power of the situation can influence our behaviors. Now we turn to how the power of the situation can influence our attitudes and beliefs. Attitude is our evaluation of a person, an idea, or an object. We have attitudes for many things ranging from products that we might pick up in the supermarket to people around the world to political policies. Typically, attitudes are favorable or unfavorable: positive or negative (Eagly & Chaiken, 1993). And, they have three components: an affective component (feelings), a behavioral component (the effect of the attitude on behavior), and a cognitive component (belief and knowledge) (Rosenberg & Hovland, 1960).
 For example, you may hold a positive attitude toward recycling. This attitude should result in positive feelings toward recycling (such as “It makes me feel good to recycle” or “I enjoy knowing that I make a small difference in reducing the amount of waste that ends up in landfills”). Certainly, this attitude should be reflected in our behavior: You actually recycle as often as you can. Finally, this attitude will be reflected in favorable thoughts (for example, “Recycling is good for the environment” or “Recycling is the responsible thing to do”).
 Our attitudes and beliefs are not only influenced by external forces, but also by internal influences that we control. Like our behavior, our attitudes and thoughts are not always changed by situational pressures, but they can be consciously changed by our own free will. In this section we discuss the conditions under which we would want to change our own attitudes and beliefs.
@@ -35,40 +23,12 @@ The peripheral route is an indirect route that uses peripheral cues to associate
 Researchers have tested many persuasion strategies that are effective in selling products and changing people’s attitude, ideas, and behaviors. One effective strategy is the foot-in-the-door technique (Cialdini, 2001; Pliner, Hart, Kohl, & Saari, 1974). Using the foot-in-the-door technique , the persuader gets a person to agree to bestow a small favor or to buy a small item, only to later request a larger favor or purchase of a bigger item. The foot-in-the-door technique was demonstrated in a study by Freedman and Fraser (1966) in which participants who agreed to post a small sign in their yard or sign a petition were more likely to agree to put a large sign in their yard than people who did not first receive the small request ( Figure 12.16 ). Research on this technique also illustrates the principle of consistency (Cialdini, 2001): Our past behavior often directs our future behavior, and we have a desire to maintain consistency once we have committed to a behavior.
 A common application of foot-in-the-door is when teens ask their parents for a small permission (for example, extending curfew by a half hour) and then asking them for something larger. Having granted the smaller request increases the likelihood that parents will acquiesce to the later, larger request.
 How would a store owner use the foot-in-the-door technique to sell you an expensive product? For example, say that you are buying the latest model smartphone, and the salesperson suggests you purchase the best data plan. You agree to this. The salesperson then suggests a bigger purchase-the three-year extended warranty. After agreeing to the smaller request, you are more likely to also agree to the larger request. You may have encountered this if you have bought a car. When salespeople realize that a buyer intends to purchase a certain model, they might try to get the customer to pay for many or most available options on the car. Another example of the foot-in-the-door technique would be applied to an individual in the market for a used car who decides to buy a fully loaded new car. Why? Because the salesperson convinced the buyer that they need a car that has all of the safety features that were not available in the used car.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Define attitude
 Describe how people’s attitudes are internally changed through cognitive dissonance
 Explain how people’s attitudes are externally changed through persuasion
-Describe the peripheral and central routes to persuasion
-changing our discrepant behavior (e.g., stop smoking),
 changing our cognitions through rationalization or denial (e.g., telling ourselves that health risks can be reduced by smoking filtered cigarettes),
 adding a new cognition (e.g., “Smoking suppresses my appetite so I don’t become overweight, which is good for my health.”).
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/12-3-attitudes-and-persuasion
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

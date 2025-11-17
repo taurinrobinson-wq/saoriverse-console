@@ -1,12 +1,4 @@
-11.7 Trait Theorists
-Learning Objectives
-Link to Learning
-Link to Learning
 Our mission is to improve educational access and learning for everyone.
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 Trait theorists believe personality can be understood via the approach that all people have certain traits , or characteristic ways of behaving. Do you tend to be sociable or shy? Passive or aggressive? Optimistic or pessimistic? Moody or even-tempered? Early trait theorists tried to describe all human personality traits. For example, one trait theorist, Gordon Allport (Allport & Odbert, 1936), found 4,500 words in the English language that could describe people. He organized these personality traits into three categories: cardinal traits, central traits, and secondary traits. A cardinal trait is one that dominates your entire personality, and hence your life-such as Ebenezer Scrooge’s greed and Mother Theresa’s altruism. Cardinal traits are not very common: Few people have personalities dominated by a single trait. Instead, our personalities typically are composed of multiple traits. Central traits are those that make up our personalities (such as loyal, kind, agreeable, friendly, sneaky, wild, and grouchy). Secondary traits are those that are not quite as obvious or as consistent as central traits. They are present under specific circumstances and include preferences and attitudes. For example, one person gets angry when people try to tickle him; another can only sleep on the left side of the bed; and yet another always orders her salad dressing on the side. And you-although not normally an anxious person-feel nervous before making a speech in front of your English class.
 In an effort to make the list of traits more manageable, Raymond Cattell (1946, 1957) narrowed down the list to about 171 traits. However, saying that a trait is either present or absent does not accurately reflect a person’s uniqueness, because all of our personalities are actually made up of the same traits; we differ only in the degree to which each trait is expressed. Cattell (1957) identified 16 factors or dimensions of personality: warmth, reasoning, emotional stability, dominance, liveliness, rule-consciousness, social boldness, sensitivity, vigilance, abstractedness, privateness, apprehension, openness to change, self-reliance, perfectionism, and tension ( Table 11.5 ). He developed a personality assessment based on these 16 factors, called the 16PF. Instead of a trait being present or absent, each dimension is scored over a continuum, from high to low. For example, your level of warmth describes how warm, caring, and nice to others you are. If you score low on this index, you tend to be more distant and cold. A high score on this index signifies you are supportive and comforting.
 Take this assessment based on Cattell's 16PF questionnaire to see which personality traits dominate your personality.
@@ -18,35 +10,9 @@ In the Five Factor Model, each person has each factor, but they occur along a sp
 The Big Five personality factors each represent a range between two extremes. In reality, most of us tend to lie somewhere midway along the continuum of each factor, rather than at polar ends. It’s important to note that the Big Five factors are relatively stable over our lifespan, with some tendency for the factors to increase or decrease slightly. Researchers have found that conscientiousness increases through young adulthood into middle age, as we become better able to manage our personal relationships and careers (Donnellan & Lucas, 2008). Agreeableness also increases with age, peaking between 50 to 70 years (Terracciano, McCrae, Brant, & Costa, 2005). Neuroticism and extroversion tend to decline slightly with age (Donnellan & Lucas; Terracciano et al.). Additionally, The Big Five factors have been shown to exist across ethnicities, cultures, and ages, and may have substantial biological and genetic components (Jang, Livesley, & Vernon, 1996; Jang et al., 2006; McCrae & Costa, 1997; Schmitt et al., 2007).
 Another model of personality traits is the HEXACO model. HEXACO is an acronym for six broad traits: honesty-humility, emotionality, extraversion, agreeableness, conscientiousness, and openness to experience (Anglim & O’Connor, 2018). Table 11.6 provides a brief overview of each trait.
 Take the Big Five Personality test to find out about your personality and where you fall on the Big Five factors.
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Discuss early trait theories of Cattell and Eysenck
 Discuss the Big Five factors and describe someone who is high and low on each of the five factors
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/11-7-trait-theorists
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

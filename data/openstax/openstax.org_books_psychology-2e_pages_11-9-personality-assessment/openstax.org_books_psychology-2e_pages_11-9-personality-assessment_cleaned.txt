@@ -1,12 +1,4 @@
-11.9 Personality Assessment
-Learning Objectives
-Self-Report Inventories
-Projective Tests
 Our mission is to improve educational access and learning for everyone.
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 Roberto, Mikhail, and Nat are college friends and all want to be police officers. Roberto is quiet and shy, lacks self-confidence, and usually follows others. He is a kind person, but lacks motivation. Mikhail is loud and boisterous, a leader. He works hard, but is impulsive and drinks too much on the weekends. Nat is thoughtful and well liked. They are trustworthy, but very methodical and therefore have difficulty making quick decisions. Of these three, who would make the best police officer? What qualities and personality factors make someone a good police officer? What makes someone a bad or dangerous police officer?
 A police officer’s job is very high in stress, and law enforcement agencies want to make sure they hire the right people. Personality testing is often used for this purpose-to screen applicants for employment and job training. Personality tests are also used in criminal cases and custody battles, and to assess psychological disorders. This section explores the best known among the many different types of personality tests.
 Self-report inventories are a kind of objective test used to assess personality. They typically use multiple-choice items or numbered scales, which represent a range from 1 (strongly disagree) to 5 (strongly agree). They are often called Likert scales after their developer, Rensis Likert (1932) ( Figure 11.16 ). Self-report inventories are generally easy to administer and cost effective. There is also an increased likelihood of test takers being inclined to answer in ways that are intentionally or unintentionally more socially desirable, exaggerated, biased, or misleading. For example, someone applying for a job will likely try to present themselves in a positive light, perhaps as an even better candidate than they actually are.
@@ -19,35 +11,9 @@ A second projective test is the Thematic Apperception Test (TAT) , created in th
 A third projective test is the Rotter Incomplete Sentence Blank (RISB) developed by Julian Rotter in 1950 (recall his theory of locus of control, covered earlier in this chapter). There are three forms of this test for use with different age groups: the school form, the college form, and the adult form. The tests include 40 incomplete sentences that people are asked to complete as quickly as possible ( Figure 11.19 ). The average time for completing the test is approximately 20 minutes, as responses are only 1-2 words in length. This test is similar to a word association test, and like other types of projective tests, it is presumed that responses will reveal desires, fears, and struggles. The RISB is used in screening college students for adjustment problems and in career counseling (Holaday, Smith, & Sherry, 2010; Rotter & Rafferty 1950).
 For many decades, these traditional projective tests have been used in cross-cultural personality assessments. However, it was found that test bias limited their usefulness (Hoy-Watkins & Jenkins-Moore, 2008). It is difficult to assess the personalities and lifestyles of members of widely divergent ethnic/cultural groups using personality instruments based on data from a single culture or race (Hoy-Watkins & Jenkins-Moore, 2008). For example, when the TAT was used with African-American test takers, the result was often shorter story length and low levels of cultural identification (Duzant, 2005). Therefore, it was vital to develop other personality assessments that explored factors such as race, language, and level of acculturation (Hoy-Watkins & Jenkins-Moore, 2008). To address this need, Robert Williams developed the first culturally specific projective test designed to reflect the everyday life experiences of African Americans (Hoy-Watkins & Jenkins-Moore, 2008). The updated version of the instrument is the Contemporized-Themes Concerning Blacks Test (C-TCB) (Williams, 1972). The C-TCB contains 20 color images that show scenes of African-American lifestyles. When the C-TCB was compared with the TAT for African Americans, it was found that use of the C-TCB led to increased story length, higher degrees of positive feelings, and stronger identification with the C-TCB (Hoy, 1997; Hoy-Watkins & Jenkins-Moore, 2008).
 The TEMAS Multicultural Thematic Apperception Test is another tool designed to be culturally relevant to minority groups, especially Hispanic youths. TEMAS-standing for “Tell Me a Story” but also a play on the Spanish word temas (themes)-uses images and storytelling cues that relate to minority culture (Constantino, 1982).
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
-Discuss the Minnesota Multiphasic Personality Inventory
 Recognize and describe common projective tests used in personality assessment
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/11-9-personality-assessment
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy

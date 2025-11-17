@@ -1,20 +1,4 @@
-12.5 Prejudice and Discrimination
-Learning Objectives
-Understanding Prejudice and Discrimination
-Link to Learning
-Prejudice and Discrimination
-Why Do Prejudice and Discrimination Exist?
-Stereotypes and Self-Fulfilling Prophecy
-In-Groups and Out-Groups
 Our mission is to improve educational access and learning for everyone.
-Racism
-Sexism
-Ageism
-Homophobia and Transphobia
-Help
-OpenStax
-Policies
-By the end of this section, you will be able to:
 Human conflict can result in crime, war, and mass murder, such as genocide. Prejudice and discrimination often are root causes of human conflict, which explains how strangers come to hate one another to the extreme of causing others harm. Prejudice and discrimination affect everyone. In this section we will examine the definitions of prejudice and discrimination, examples of these concepts, and causes of these biases.
 As we discussed in the opening story of Trayvon Martin, humans are very diverse and although we share many similarities, we also have many differences. The social groups we belong to help form our identities (Tajfel, 1974). These differences may be difficult for some people to reconcile, which may lead to prejudice toward people who are different. Prejudice is a negative attitude and feeling toward an individual based solely on one’s membership in a particular social group (Allport, 1954; Brown, 2010). Prejudice is common against people who are members of an unfamiliar cultural group. Thus, certain types of education, contact, interactions, and building relationships with members of different cultural groups can reduce the tendency toward prejudice. In fact, simply imagining interacting with members of different cultural groups might affect prejudice. Indeed, when experimental participants were asked to imagine themselves positively interacting with someone from a different group, this led to an increased positive attitude toward the other group and an increase in positive traits associated with the other group. Furthermore, imagined social interaction can reduce anxiety associated with inter-group interactions (Crisp & Turner, 2009). What are some examples of social groups that you belong to that contribute to your identity? Social groups can include gender, race, ethnicity, nationality, social class, religion, sexual orientation, profession, and many more. And, as is true for social roles, you can simultaneously be a member of more than one social group. An example of prejudice is having a negative attitude toward people who are not born in the United States. Although people holding this prejudiced attitude do not know all people who were not born in the United States, they dislike them due to their status as foreigners.
 Can you think of a prejudiced attitude you have held toward a group of people? How did your prejudice develop? Prejudice often begins in the form of a stereotype -that is, a specific belief or assumption about individuals based solely on their membership in a group, regardless of their individual characteristics. Stereotypes become overgeneralized and applied to all members of a group. For example, someone holding prejudiced attitudes toward older adults, may believe that older adults are slow and incompetent (Cuddy, Norton, & Fiske, 2005; Nelson, 2004). We cannot possibly know each individual person of advanced age to know that all older adults are slow and incompetent. Therefore, this negative belief is overgeneralized to all members of the group, even though many of the individual group members may in fact be spry and intelligent.
@@ -40,36 +24,10 @@ Another dynamic that can reinforce stereotypes is confirmation bias. When intera
 As discussed previously in this section, we all belong to a gender, race, age, and social economic group. These groups provide a powerful source of our identity and self-esteem (Tajfel & Turner, 1979). These groups serve as our in-groups. An in-group is a group that we identify with or see ourselves as belonging to. A group that we don’t belong to, or an out-group , is a group that we view as fundamentally different from us. For example, if you are a woman, your gender in-group includes all women, and your gender out-group includes all men ( Figure 12.23 ). People often view gender groups as being fundamentally different from each other in personality traits, characteristics, social roles, and interests. Because we often feel a strong sense of belonging and emotional connection to our in-groups, we develop in-group bias: a preference for our own group over other groups. This in-group bias can result in prejudice and discrimination because the out-group is perceived as different and is less preferred than our in-group.
 Despite the group dynamics that seem only to push groups toward conflict, there are forces that promote reconciliation between groups: the expression of empathy, of acknowledgment of past suffering on both sides, and the halt of destructive behaviors.
 One function of prejudice is to help us feel good about ourselves and maintain a positive self-concept. This need to feel good about ourselves extends to our in-groups: We want to feel good and protect our in-groups. We seek to resolve threats individually and at the in-group level. This often happens by blaming an out-group for the problem. Scapegoating is the act of blaming an out-group when the in-group experiences frustration or is blocked from obtaining a goal (Allport, 1954).
-This book may not be used in the training of large language models or otherwise be ingested into large language models or generative AI offerings without OpenStax's permission.
-Want to cite, share, or modify this book? This book uses the Creative Commons Attribution License and you must attribute OpenStax.
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
-© Jul 9, 2025 OpenStax. Textbook content produced by OpenStax is licensed under a Creative Commons Attribution License . The OpenStax name, OpenStax logo, OpenStax book covers, OpenStax CNX name, and OpenStax CNX logo
-are not subject to the Creative Commons license and may not be reproduced without the prior and express written
-consent of Rice University.
 Define and distinguish among prejudice, stereotypes, and discrimination
 Provide examples of prejudice, stereotypes, and discrimination
-Explain why prejudice and discrimination exist
 If you are redistributing all or part of this book in a print format,
-then you must include on every physical page the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 If you are redistributing all or part of this book in a digital format,
-then you must include on every digital page view the following attribution: Access for free at https://openstax.org/books/psychology-2e/pages/1-introduction
 Use the information below to generate a citation. We recommend using a
-citation tool such as this one . Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett Publisher/website: OpenStax Book title: Psychology 2e Publication date: Apr 22, 2020 Location: Houston, Texas Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction Section URL: https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination
-Authors: Rose M. Spielman, William J. Jenkins, Marilyn D. Lovett
-Publisher/website: OpenStax
-Book title: Psychology 2e
-Publication date: Apr 22, 2020
-Location: Houston, Texas
 Book URL: https://openstax.org/books/psychology-2e/pages/1-introduction
 Section URL: https://openstax.org/books/psychology-2e/pages/12-5-prejudice-and-discrimination
-Contact Us
-Support Center
-FAQ
-Press
-Newsletter
-Careers
-Accessibility Statement
-Terms of Use
-Licensing
-Privacy Policy
