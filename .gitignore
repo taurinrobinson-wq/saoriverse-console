@@ -103,3 +103,16 @@ data/datamuse_*.json
 # allow logs directory to be committed
 !logs/
 !logs/enrich.log
+
+# Backup and large archives: avoid committing large binary archives/backup files
+# (If you need to store release artifacts, use a separate storage solution.)
+*.zip
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.bak
+*.old
+*.db.bak*
+backup/
+backups/

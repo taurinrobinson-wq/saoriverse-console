@@ -1,0 +1,33 @@
+name: Enforce large-file limit
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  check-large-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fail on files larger than 5 MB
+        run: |
+          set -e
+          MAX_BYTES=$((5 * 1024 * 1024))
+          oversized=0
+          while IFS= read -r f; do
+            if [ -f "$f" ]; then
+              size=$(wc -c <"$f" || echo 0)
+              if [ "$size" -gt "$MAX_BYTES" ]; then
+                echo "Found large file: $f ($size bytes)"
+                oversized=1
+              fi
+            fi
+          done <<<'$(git ls-files)'
+
+          if [ "$oversized" -eq 1 ]; then
+            echo "::error::One or more files exceed 5 MB. Remove them or use Git LFS."
+            exit 1
+          fi
