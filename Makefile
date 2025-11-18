@@ -17,6 +17,10 @@ test-local:
 	@unset OPENAI_API_KEY TEST_ACCESS_TOKEN LOCAL_DEV_MODE || true
 	@env $(grep -v '^#' .env.local | grep '=' | grep -v '^OPENAI_API_KEY=' | grep -v '^LOCAL_DEV_MODE=' | awk -F= '{if($$2!="") printf "%s=%s ", $$1, $$2}') pytest -q
 
+.PHONY: push-timeout
+push-timeout:
+	@bash scripts/git-push-timeout.sh 120 3
+
 enrich:
 	python3 enrich_runner.py
 

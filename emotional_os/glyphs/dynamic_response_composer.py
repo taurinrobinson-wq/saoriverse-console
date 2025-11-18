@@ -200,6 +200,29 @@ class DynamicResponseComposer:
 
         return result
 
+    def _normalize_emotions(self, emotions) -> dict:
+        """Normalize emotions to a dict mapping emotion->score.
+
+        The rest of the composer expects a mapping (dict). Downstream
+        code may occasionally pass a list (e.g., ['sadness','joy']) so
+        normalize that shape here to avoid AttributeErrors.
+        """
+        if not emotions:
+            return {}
+        if isinstance(emotions, dict):
+            return emotions
+        # If it's a list/iterable of emotion names, convert to a dict with True
+        try:
+            if isinstance(emotions, (list, tuple, set)):
+                return {str(e): 1 for e in emotions}
+        except Exception:
+            pass
+        # Fallback: try to coerce to dict safely
+        try:
+            return dict(emotions)
+        except Exception:
+            return {}
+
     def _select_opening(self, entities: List[str], emotions: Dict) -> str:
         """Select and instantiate an appropriate opening move."""
         # Determine which type of opening fits
@@ -217,7 +240,8 @@ class DynamicResponseComposer:
         entity = entities[0] if entities else None
         entity = self._sanitize_entity(entity)
         opening = opening.replace("{entity}", entity)
-        opening = opening.replace("{emotion}", emotions.get(
+        norm_emotions = self._normalize_emotions(emotions)
+        opening = opening.replace("{emotion}", norm_emotions.get(
             "primary", "what you're feeling"))
 
         return opening
@@ -724,8 +748,9 @@ class DynamicResponseComposer:
         entity = entities[0] if entities else "this"
         closing_template = random.choice(self.closing_moves["question"])
         closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[
-                                  0] if emotions else "what you feel")
+        norm_emotions = self._normalize_emotions(emotions)
+        closing = closing.replace("{emotion}", list(norm_emotions.keys())[
+            0] if norm_emotions else "what you feel")
         parts.append(closing)
 
         return " ".join(parts)

@@ -35,6 +35,99 @@ import base64
 import json
 import streamlit.components.v1 as components
 from datetime import datetime
+import urllib.request
+import shutil
+import logging
+
+logger = logging.getLogger(__name__)
+
+# When running in a fully-local processing mode, remove any remote-AI
+# provider keys from the process environment so downstream import-time
+# guards (and tests) do not accidentally detect them and attempt remote
+# calls. This is a safe, local-only convenience that respects the
+# `PROCESSING_MODE` env var and avoids changing behavior in deployed
+# environments where `PROCESSING_MODE` is not 'local'.
+try:
+    if os.environ.get('PROCESSING_MODE', 'local') == 'local':
+        for _k in ('OPENAI_API_KEY', 'STABILITY_API_KEY', 'REPLICATE_API_TOKEN'):
+            if _k in os.environ:
+                try:
+                    del os.environ[_k]
+                    logger.info(
+                        'Removed %s from environment for local mode', _k)
+                except Exception:
+                    pass
+except Exception:
+    # Defensive: never raise during import/setup
+    pass
+
+# Backwards-compatibility: if a newer Supabase "publishable" key is set,
+# map it to the legacy env var names used throughout the codebase so
+# edge functions and client code continue to find a value.
+try:
+    _pub_key = os.environ.get(
+        "SUPABASE_PUBLISHABLE_KEY") or os.environ.get("PUBLISHABLE_KEY")
+    if _pub_key:
+        if not os.environ.get("SUPABASE_ANON_KEY"):
+            os.environ["SUPABASE_ANON_KEY"] = _pub_key
+        if not os.environ.get("PROJECT_ANON_KEY"):
+            os.environ["PROJECT_ANON_KEY"] = _pub_key
+        try:
+            logger.info(
+                "Mapped SUPABASE_PUBLISHABLE_KEY to SUPABASE_ANON_KEY/PROJECT_ANON_KEY")
+        except Exception:
+            pass
+except Exception:
+    # Defensive: do not allow env-mapping failures to block startup
+    pass
+
+
+def ensure_nrc_lexicon():
+    """Ensure the full NRC lexicon file exists locally.
+
+    Behavior:
+    - If `data/lexicons/nrc_emotion_lexicon.txt` exists, do nothing.
+    - If not, and the environment variable `NRC_LEXICON_URL` is set,
+      attempt a safe download into `data/lexicons/`.
+    - If download fails, log a warning and continue (app still runs).
+    """
+    target = Path("data/lexicons/nrc_emotion_lexicon.txt")
+    bootstrap = Path("data/lexicons/nrc_emotion_lexicon_bootstrap.txt")
+
+    # If full lexicon already present, nothing to do
+    if target.exists():
+        logger.info("NRC lexicon present: %s", target)
+        return
+
+    # If no full lexicon but bootstrap exists, do nothing (loader will use bootstrap)
+    if bootstrap.exists():
+        logger.info("NRC bootstrap lexicon present: %s", bootstrap)
+        return
+
+    url = os.environ.get("NRC_LEXICON_URL")
+    if not url:
+        logger.info(
+            "NRC_LEXICON_URL not set; skipping download of NRC lexicon.")
+        return
+
+    try:
+        logger.info("Attempting to download NRC lexicon from %s", url)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        # Stream download to temporary file then atomically move
+        tmp = target.with_suffix(".tmp")
+        with urllib.request.urlopen(url, timeout=30) as resp, open(tmp, "wb") as out:
+            shutil.copyfileobj(resp, out)
+        tmp.replace(target)
+        logger.info("NRC lexicon downloaded to %s", target)
+    except Exception as e:
+        logger.warning("Failed to download NRC lexicon from %s: %s", url, e)
+        if tmp.exists():
+            try:
+                tmp.unlink()
+            except Exception:
+                pass
+        return
+
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
@@ -162,6 +255,15 @@ except Exception:
 # output is written to debug_imports.log in the app directory and also printed
 # to stdout so deployment logs capture it.
 try:
+    # Try to ensure the NRC lexicon is available before loading modules that
+    # may perform emotion analysis on user messages. This is a no-op when
+    # the lexicon already exists or when `NRC_LEXICON_URL` is not set.
+    try:
+        ensure_nrc_lexicon()
+    except Exception:
+        # Don't allow lexicon download failures to prevent app startup.
+        logger.exception(
+            'ensure_nrc_lexicon() failed; continuing without full NRC lexicon')
     if os.environ.get('RUN_IMPORT_DIAG') == '1':
         import platform
         import importlib
