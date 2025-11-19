@@ -15,6 +15,7 @@ from response_adapter import translate_emotional_response
 from relational_memory import RelationalMemoryCapsule, store_capsule
 from emotional_os.adapter.clarification_trace import ClarificationTrace
 from emotional_os.adapter.comfort_gestures import add_comfort_gesture
+from emotional_os.adapter.closing_prompts import get_closing_prompt
 
 
 # Singleton trace instance for this process
@@ -141,6 +142,39 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
         raw_response = generate_archetypal_response(tone_ctx)
         voltage = "ΔV↔"
         capsule_tags = ["anchoring_signal"]
+
+    # Append a gentle closing prompt when stress-related cues are detected
+    try:
+        is_stress = False
+        # Primary source: explicit intent in context
+        emo = ctx.get('emotion')
+        if isinstance(emo, str) and emo.lower() == 'stress':
+            is_stress = True
+        # Secondary: user text contains stress keywords
+        if not is_stress:
+            ui = (user_input or '').lower()
+            for kw in ('i\'m stressed', "i'm stressed", 'stressed', 'stress', 'feeling overwhelmed', 'overwhelmed', 'work stress'):
+                if kw in ui:
+                    is_stress = True
+                    break
+        # Tertiary: symbolic tags contain stress-like tokens
+        if not is_stress:
+            for t in tags:
+                try:
+                    if isinstance(t, str) and any(k in t.lower() for k in ('stress', 'stressed', 'overwhelm', 'overwhelmed')):
+                        is_stress = True
+                        break
+                except Exception:
+                    continue
+
+        if is_stress:
+            try:
+                closing = get_closing_prompt()
+                raw_response = f"{raw_response} {closing}"
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # Optionally add comfort gestures to certain response types (celebration/encouragement)
     try:
