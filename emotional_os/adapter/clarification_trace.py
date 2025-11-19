@@ -157,7 +157,14 @@ class ClarificationTrace:
                 record["user_id"] = context.get("user_id")
 
             rowid = store.insert(record)
-            return {"stored": True, "rowid": rowid, "inferred_intent": inferred, "needs_confirmation": needs_confirmation}
+            result = {"stored": True, "rowid": rowid, "inferred_intent": inferred,
+                      "needs_confirmation": needs_confirmation}
+            # keep backward compatibility: store last result and return boolean
+            try:
+                self._last_result = result
+            except Exception:
+                pass
+            return True
         except Exception:
             # fallback to file append as legacy behaviour
             try:
@@ -174,7 +181,13 @@ class ClarificationTrace:
                         pass
             except Exception:
                 pass
-            return {"stored": True, "rowid": None, "inferred_intent": None, "needs_confirmation": False}
+            result = {"stored": True, "rowid": None,
+                      "inferred_intent": None, "needs_confirmation": False}
+            try:
+                self._last_result = result
+            except Exception:
+                pass
+            return True
 
     def lookup(self, phrase: str) -> Optional[Dict[str, Any]]:
         """Look for a recent clarification matching `phrase` (normalized).
