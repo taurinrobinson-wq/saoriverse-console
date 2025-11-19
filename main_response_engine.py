@@ -45,8 +45,12 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     # in `context` when available so we can anchor the clarification.
     try:
         ds = _clarify_trace.detect_and_store(user_input, {**ctx})
-        # ds is a dict: {stored:bool, rowid:int, inferred_intent:Optional[str], needs_confirmation:bool}
-        if isinstance(ds, dict) and ds.get("stored"):
+        # Support both the new dict return value and legacy boolean return for compatibility.
+        if not isinstance(ds, dict):
+            ds = getattr(_clarify_trace, "_last_result", {"stored": bool(ds)})
+
+        # ds is expected to be a dict: {stored:bool, rowid:int, inferred_intent:Optional[str], needs_confirmation:bool}
+        if ds.get("stored"):
             # If low-confidence candidate, ask for confirmation instead of proceeding
             inferred = ds.get("inferred_intent")
             needs_conf = ds.get("needs_confirmation")
