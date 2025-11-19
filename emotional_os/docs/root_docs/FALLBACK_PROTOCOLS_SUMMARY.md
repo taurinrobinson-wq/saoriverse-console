@@ -54,7 +54,7 @@ You requested implementation of **Fallback Protocols – Tone Ambiguity & Misfir
 
 ---
 
-## 🧠 How It Works
+## <strong>FP</strong> How It Works
 
 ### Flow Diagram
 ```
