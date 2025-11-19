@@ -30,7 +30,7 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 
 ---
 
-## 🧠 What It Preserves
+## <strong>FP</strong> What It Preserves
 
 | Element | Original | Anonymized | Preserved? |
 |---------|----------|-----------|-----------|

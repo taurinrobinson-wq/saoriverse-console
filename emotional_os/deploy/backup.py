@@ -395,7 +395,7 @@ class SaoynxAuthentication:
                     "/static/graphics/FirstPerson-Logo-normalized.svg", width=120)
             except Exception:
                 st.markdown('''
-                <div style="font-size: 4rem;">🧠</div>
+                <div style="font-size: 4rem;">FP</div>
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">FirstPerson</div>
                 <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">Personal AI<br>Companion</div>
                 ''', unsafe_allow_html=True)
@@ -570,7 +570,7 @@ def render_main_app():
             st.image("/static/graphics/FirstPerson-Logo-normalized.svg", width=24)
         except Exception:
             st.markdown(
-                '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+                '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">FP</div>', unsafe_allow_html=True)
     with col2:
         st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
 
@@ -809,7 +809,7 @@ def render_main_app():
 
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
-        st.write("🧠 Learning happens only from your conversations")
+        st.write("FP Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
 
         if st.button("Download My Data", type="secondary"):
