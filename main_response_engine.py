@@ -11,7 +11,7 @@ import os
 from symbolic_tagger import tag_input
 from phase_modulator import detect_phase
 from tone_adapters import generate_initiatory_response, generate_archetypal_response
-from response_adapter import translate_emotional_response
+from response_adapter import translate_emotional_response, generate_response_from_glyphs
 from relational_memory import RelationalMemoryCapsule, store_capsule
 from emotional_os.adapter.clarification_trace import ClarificationTrace
 from emotional_os.adapter.comfort_gestures import add_comfort_gesture
@@ -203,7 +203,33 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
         "context": ctx.get("context", "conversation"),
         "resonance": ctx.get("resonance", "presence"),
     }
-    adapted_response = translate_emotional_response(system_output)
+
+    # If local_analysis provides glyph overlays or glyphs, surface them
+    try:
+        if local_analysis:
+            # Prefer explicit overlay info if present
+            if isinstance(local_analysis.get("glyph_overlays_info"), list):
+                system_output["glyph_overlays_info"] = local_analysis.get(
+                    "glyph_overlays_info")
+            # Or fall back to a generic `glyphs` list of dicts (map to tag/conf)
+            elif isinstance(local_analysis.get("glyphs"), list):
+                mapped = []
+                for g in local_analysis.get("glyphs", []):
+                    try:
+                        tag = g.get("glyph_name") or g.get(
+                            "tag") or g.get("name")
+                        conf = float(g.get("confidence", 0.5))
+                        if tag:
+                            mapped.append({"tag": tag, "confidence": conf})
+                    except Exception:
+                        continue
+                if mapped:
+                    system_output["glyph_overlays_info"] = mapped
+    except Exception:
+        pass
+
+    # Prefer scaffolded glyph-based responses when overlays are available.
+    adapted_response = generate_response_from_glyphs(system_output)
 
     # 5. Store relational memory capsule
     # Include glyph names from local analysis in the capsule if present
