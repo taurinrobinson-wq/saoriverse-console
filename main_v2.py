@@ -144,7 +144,7 @@ def ensure_nrc_lexicon():
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
     _logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
@@ -236,7 +236,7 @@ except Exception:
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
     logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
