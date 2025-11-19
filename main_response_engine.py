@@ -44,13 +44,25 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     # This expects callers to pass `last_user_input` and `last_system_response`
     # in `context` when available so we can anchor the clarification.
     try:
-        stored = _clarify_trace.detect_and_store(user_input, {**ctx})
-        if stored:
+        ds = _clarify_trace.detect_and_store(user_input, {**ctx})
+        # ds is a dict: {stored:bool, rowid:int, inferred_intent:Optional[str], needs_confirmation:bool}
+        if isinstance(ds, dict) and ds.get("stored"):
+            # If low-confidence candidate, ask for confirmation instead of proceeding
+            inferred = ds.get("inferred_intent")
+            needs_conf = ds.get("needs_confirmation")
+            rowid = ds.get("rowid")
+            if needs_conf and inferred:
+                # Return a confirmation prompt; caller should pass back a confirmation
+                return (
+                    f"Thanks for clarifying—I’m still learning, so I really appreciate that.\n"
+                    f"Do you mean you were asking about '{inferred}'? Reply 'yes' to confirm."
+                )
+            # Otherwise acknowledge the clarification and continue
             prefix = (
                 "Thanks for clarifying—I’m still learning, so I really appreciate that.\n"
             )
     except Exception:
-        stored = False
+        ds = {"stored": False}
 
     # Accept local_analysis when provided to avoid redundant heavy parsing.
     local_analysis = ctx.get("local_analysis")
@@ -66,6 +78,24 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     try:
         if ctx.get("inferred_intent") == "emotional_checkin":
             phase = "initiatory"
+    except Exception:
+        pass
+
+    # Confirmation handling: if the caller sent a confirmation for a prior clarification
+    try:
+        if ctx.get("confirm") and ctx.get("clarification_rowid") and ctx.get("confirm_value") is True:
+            # set corrected_intent on the stored record and bias current request
+            store = None
+            try:
+                from emotional_os.adapter.clarification_store import get_default_store
+                store = get_default_store()
+                store.update_corrected_intent(
+                    int(ctx.get("clarification_rowid")), ctx.get("confirmed_intent"))
+                ctx["inferred_intent"] = ctx.get("confirmed_intent")
+                if ctx.get("confirmed_intent") == "emotional_checkin":
+                    phase = "initiatory"
+            except Exception:
+                pass
     except Exception:
         pass
 
