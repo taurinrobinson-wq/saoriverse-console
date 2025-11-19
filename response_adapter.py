@@ -27,10 +27,17 @@ def translate_emotional_response(system_output: Dict) -> str:
     resonance = system_output.get("resonance") or "a quiet shift"
 
     # Build phrasing while avoiding technical vocabulary
-    if intensity.lower() in ("high", "strong", "intense"):
+    i = (intensity or "").lower()
+    if i in ("high", "strong", "intense"):
         opener = f"This {context} seems to have stirred something deep — {emotion} with some force."
     else:
-        opener = f"There's a gentle{'' if intensity=='subtle' else 'ly ' + intensity} {emotion} here."
+        # Normalize adverb/adjective forms to a simple adjective phrase.
+        if i.endswith("ly"):
+            adj = i[:-2]
+        else:
+            adj = i or "gentle"
+        # Guard against duplicate words (e.g. "gentle gentle") by using a single adjective.
+        opener = f"There's a {adj} {emotion} here."
 
     return f"{opener} It feels like {resonance}. Would you like to reflect on that?"
 
