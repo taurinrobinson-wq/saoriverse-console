@@ -1,34 +1,68 @@
-from typing import Optional
+from typing import Optional, List, Dict
 from clarification_memory import lookup_correction
 
 
-def parse_input(text: str, speaker: Optional[str] = None):
-    """A tiny, deterministic parser used only for tests.
+def _keyword_glyphs(text: str) -> List[str]:
+    """Map simple keywords to glyph overlays (test-only heuristic)."""
+    t = text.lower()
+    overlays = []
+    if any(k in t for k in ("ignore", "ignored", "invisible", "invisibl")):
+        overlays.append("feeling_unseen")
+    if any(k in t for k in ("anger", "angry")):
+        overlays.append("anger")
+    if any(k in t for k in ("sad", "sadness", "stung", "frustrat")):
+        overlays.append("sadness")
+    return overlays
 
-    - Checks clarification memory for forced intents (substring match).
-    - Detects simple keywords for dominant emotion.
-    - Applies a tone overlay for the forced intent `emotional_checkin`.
+
+_routing_table: Dict[str, str] = {
+    "emotional_checkin": "reflective, validating",
+}
+
+
+def parse_input(text: str, speaker: Optional[str] = None) -> Dict:
+    """A more expressive test parser used to mock routing, glyph overlays and provenance.
+
+    Returns a dict with keys:
+      - forced_intent
+      - dominant_emotion
+      - tone_overlay
+      - clarification_provenance
+      - glyph_overlays
     """
     result = {
         "forced_intent": None,
         "dominant_emotion": None,
         "tone_overlay": None,
         "clarification_provenance": None,
+        "glyph_overlays": [],
     }
 
-    # Apply clarification memory if present
+    # Check clarification memory
     rec = lookup_correction(text)
     if rec:
         result["forced_intent"] = rec["suggested_intent"]
-        result["clarification_provenance"] = rec
-        if rec["suggested_intent"] == "emotional_checkin":
-            result["tone_overlay"] = "reflective, validating"
+        # enrich provenance with stable keys expected by tests
+        result["clarification_provenance"] = {
+            "record_id": rec.get("record_id"),
+            "trigger_phrase": rec.get("trigger_phrase"),
+            "suggested_intent": rec.get("suggested_intent"),
+            "confidence": rec.get("confidence"),
+            "timestamp": rec.get("timestamp"),
+        }
+        # Apply routing table to decide tone overlay
+        tone = _routing_table.get(rec["suggested_intent"])
+        if tone:
+            result["tone_overlay"] = tone
 
-    # Very small-rule-based emotion detection
-    t = text.lower()
-    if "anger" in t or "angry" in t:
+    # Glyph overlay inference (returns list of overlay tags)
+    overlays = _keyword_glyphs(text)
+    result["glyph_overlays"] = overlays
+
+    # Dominant emotion selection: if both anger and sadness appear, choose the one explicitly stated
+    if "anger" in overlays:
         result["dominant_emotion"] = "anger"
-    elif any(k in t for k in ("sad", "sadness", "invisible", "ignored", "frustrat")):
+    elif "sadness" in overlays or "feeling_unseen" in overlays:
         result["dominant_emotion"] = "sadness"
 
     return result
