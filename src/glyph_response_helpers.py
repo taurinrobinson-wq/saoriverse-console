@@ -1,4 +1,5 @@
 from typing import List, Dict
+import re
 from glyph_response_templates import pick_template
 
 
@@ -49,9 +50,11 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
         pacing = 0.5
 
     # Choose a template and render a short phrase. Use the primary confidence and tag.
-    template = pick_template(tag or "default", conf)
-    # short_phrase is a concise excerpt we can include; for now use tag and short form
-    short_phrase = tag.replace("_", " ") if tag else "something"
+    # Sanitize tag and short_phrase to avoid leaking internal glyph labels (e.g., VELΩNIX)
+    valid_tag = tag and re.match(r'^[a-z_]+$', tag)
+    safe_tag = tag if valid_tag else "default"
+    short_phrase = tag.replace("_", " ") if valid_tag else "something"
+    template = pick_template(safe_tag or "default", conf)
     response = template.format(short_phrase=short_phrase)
 
     return {"primary_tag": tag, "tone": tone, "pacing": pacing, "details": sorted_overlays, "response": response}
