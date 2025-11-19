@@ -1,5 +1,7 @@
 from typing import List, Dict
 import re
+import os
+import datetime
 from glyph_response_templates import pick_template
 
 
@@ -54,6 +56,20 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
     valid_tag = tag and re.match(r'^[a-z_]+$', tag)
     safe_tag = tag if valid_tag else "default"
     short_phrase = tag.replace("_", " ") if valid_tag else "something"
+
+    # If the tag is unsafe, log it for later curation (do not surface to user)
+    if not valid_tag and tag:
+        try:
+            logdir = os.path.join(os.getcwd(), "logs")
+            os.makedirs(logdir, exist_ok=True)
+            path = os.path.join(logdir, "unsafe_tags.log")
+            ts = datetime.datetime.utcnow().isoformat()
+            with open(path, "a", encoding="utf-8") as fh:
+                fh.write(f"{ts}\t{tag}\t{conf}\t{sorted_overlays}\n")
+        except Exception:
+            # never fail user flows because logging couldn't write
+            pass
+
     template = pick_template(safe_tag or "default", conf)
     response = template.format(short_phrase=short_phrase)
 
