@@ -144,17 +144,19 @@ def ensure_nrc_lexicon():
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
     _logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
-            _page_icon = _logo_path.read_bytes()
+            svg_bytes = _logo_path.read_bytes()
+            import base64 as _base64
+            _page_icon = f"data:image/svg+xml;base64,{_base64.b64encode(svg_bytes).decode('ascii')}"
         except Exception:
             _page_icon = None
-    # Use bytes (image) if available, otherwise an emoji
+    # Use data URI (SVG) if available, otherwise an emoji
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon=_page_icon if _page_icon is not None else "🧠",
+        page_icon=_page_icon if _page_icon is not None else "FP",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -162,7 +164,7 @@ except Exception:
     # Ensure any failure here doesn't prevent the rest of the app from loading
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon="🧠",
+        page_icon="FP",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -236,7 +238,7 @@ except Exception:
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
     logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
@@ -657,6 +659,94 @@ def main():
     if st.session_state.get('force_splash', False):
         render_splash_interface(auth)
         return
+
+    # Offer a small playful control in the main app area to trigger the
+    # Streamlit Dance Mode demo. We import lazily so deployments that don't
+    # include the demo won't fail, and render the controls in a compact
+    # centered column above the main app renderer.
+    try:
+        from demos.streamlit_dance_mode import dance_mode  # type: ignore
+    except Exception:
+        dance_mode = None
+
+    try:
+        ctrl_container = st.container()
+        with ctrl_container:
+            # Helper: show the Dance Mode control only when we detect a
+            # celebratory cue from recent local preprocessing, or when the
+            # environment explicitly allows always-on dance controls.
+            def _is_celebration() -> bool:
+                try:
+                    # Env override to force-show the control (useful for demo/debug)
+                    if os.environ.get('ALLOW_DANCE_ALWAYS') == '1':
+                        return True
+
+                    last_pre = st.session_state.get('last_preproc', {})
+                    if not isinstance(last_pre, dict):
+                        return False
+
+                    intent = (last_pre.get('intent') or '')
+                    if isinstance(intent, str) and intent.lower() in (
+                        'joy', 'joyful', 'happy', 'celebration', 'celebrate', 'excited'
+                    ):
+                        return True
+
+                    tags = last_pre.get('emotional_tags') or []
+                    for t in tags:
+                        try:
+                            if isinstance(t, str) and ('joy' in t.lower() or 'celebr' in t.lower()):
+                                return True
+                        except Exception:
+                            continue
+
+                    # No clear celebratory marker found
+                    return False
+                except Exception:
+                    return False
+
+            show_dance = _is_celebration()
+
+            # Compact centered column for the control (only render when celebratory)
+            if show_dance:
+                cols = st.columns([1, 2, 1])
+                with cols[1]:
+                    st.markdown("### Fun")
+                    try:
+                        gentle_mode = st.checkbox(
+                            "Gentle dance (no flashing)", value=True, key="dance_gentle_main")
+                        cycles = st.slider("Dance cycles", min_value=1,
+                                           max_value=20, value=6, key="dance_cycles_main")
+                        delay_s = st.slider(
+                            "Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5, key="dance_delay_main")
+                    except Exception:
+                        # If Streamlit widget creation fails for any reason, fall back to defaults
+                        gentle_mode = True
+                        cycles = 6
+                        delay_s = 0.5
+
+                    if st.button("Dance Mode 🕺", key="dance_button_main"):
+                        if dance_mode:
+                            try:
+                                dance_mode(cycles=cycles, delay_s=delay_s,
+                                           gentle_mode=gentle_mode)
+                            except Exception:
+                                st.warning(
+                                    "Dance Mode failed to run in this environment.")
+                        else:
+                            st.info(
+                                "Dance Mode demo not available in this deployment.")
+            else:
+                # If the control is hidden, keep a lightweight hint for demoers
+                # when the feature is intentionally suppressed.
+                cols = st.columns([1, 2, 1])
+                with cols[1]:
+                    st.markdown("### Fun")
+                    st.info(
+                        "Dance Mode appears on joyful moments (try saying you're excited)")
+
+    except Exception:
+        # Main-area controls must never block the main app; ignore errors.
+        pass
 
     # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
     try:
