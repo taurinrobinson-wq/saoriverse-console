@@ -142,6 +142,26 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
         voltage = "ΔV↔"
         capsule_tags = ["anchoring_signal"]
 
+    # Optionally add comfort gestures to certain response types (celebration/encouragement)
+    try:
+        enabled = os.environ.get("COMFORT_GESTURES_ENABLED", "true").lower()
+        if enabled not in ("0", "false", "no"):
+            # Decide whether to append or prepend based on emotion
+            emotion_key = (ctx.get("emotion") or system_output.get(
+                "emotion") or "").lower()
+            append_emotions = {"joy", "celebration",
+                               "encouragement", "motivation"}
+            if emotion_key:
+                if emotion_key in append_emotions:
+                    raw_response = add_comfort_gesture(
+                        emotion_key, raw_response, position="append")
+                else:
+                    # default: prepend for soothing/acknowledgement tones
+                    raw_response = add_comfort_gesture(
+                        emotion_key, raw_response, position="prepend")
+    except Exception:
+        pass
+
     # 4. Adapt into emotionally fluent language
     system_output = {
         "emotion": ctx.get("emotion", "connection"),
