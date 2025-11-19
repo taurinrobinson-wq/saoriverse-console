@@ -6,12 +6,19 @@ Public:
 This file demonstrates the end-to-end flow described in the spec.
 """
 from typing import Dict, Optional
+import os
 
 from symbolic_tagger import tag_input
 from phase_modulator import detect_phase
 from tone_adapters import generate_initiatory_response, generate_archetypal_response
 from response_adapter import translate_emotional_response
 from relational_memory import RelationalMemoryCapsule, store_capsule
+from emotional_os.adapter.clarification_trace import ClarificationTrace
+from emotional_os.adapter.comfort_gestures import add_comfort_gesture
+
+
+# Singleton trace instance for this process
+_clarify_trace = ClarificationTrace()
 
 
 def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
@@ -25,6 +32,54 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     5. Store relational memory capsule
     """
     ctx = dict(context or {})
+    prefix = ""
+
+    # Check for prior clarifications that could bias interpretation
+    try:
+        prior = _clarify_trace.lookup(user_input)
+        if prior and prior.get("corrected_intent"):
+            ctx["inferred_intent"] = prior.get("corrected_intent")
+    except Exception:
+        prior = None
+
+    # Detect and store an explicit clarification/correction from the user.
+    # This expects callers to pass `last_user_input` and `last_system_response`
+    # in `context` when available so we can anchor the clarification.
+    try:
+        ds = _clarify_trace.detect_and_store(user_input, {**ctx})
+        # Support both the new dict return value and legacy boolean return for compatibility.
+        if not isinstance(ds, dict):
+            ds = getattr(_clarify_trace, "_last_result", {"stored": bool(ds)})
+
+        # ds is expected to be a dict: {stored:bool, rowid:int, inferred_intent:Optional[str], needs_confirmation:bool}
+        if ds.get("stored"):
+            # If low-confidence candidate, ask for confirmation instead of proceeding
+            inferred = ds.get("inferred_intent")
+            needs_conf = ds.get("needs_confirmation")
+            rowid = ds.get("rowid")
+            if needs_conf and inferred:
+                # Return a confirmation prompt; caller should pass back a confirmation
+                return (
+                    f"Thanks for clarifying—I’m still learning, so I really appreciate that.\n"
+                    f"Do you mean you were asking about '{inferred}'? Reply 'yes' to confirm."
+                )
+            # Otherwise acknowledge the clarification and continue
+            prefix = (
+                "Thanks for clarifying—I’m still learning, so I really appreciate that.\n"
+            )
+    except Exception:
+        ds = {"stored": False}
+
+    # Attach a comfort gesture to the acknowledgement prefix when available
+    try:
+        if prefix:
+            enabled = os.environ.get(
+                "COMFORT_GESTURES_ENABLED", "true").lower()
+            if enabled not in ("0", "false", "no"):
+                emotion_key = ctx.get("emotion") or "calm"
+                prefix = add_comfort_gesture(emotion_key, prefix)
+    except Exception:
+        pass
 
     # Accept local_analysis when provided to avoid redundant heavy parsing.
     local_analysis = ctx.get("local_analysis")
@@ -34,6 +89,32 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
 
     # 2. Phase detection (give detector access to symbolic tags)
     phase = detect_phase(user_input, {"symbolic_tags": tags})
+
+    # If a prior clarification set a corrected intent, bias phase selection
+    # so that clarified intents (for now) map to the initiatory phase.
+    try:
+        if ctx.get("inferred_intent") == "emotional_checkin":
+            phase = "initiatory"
+    except Exception:
+        pass
+
+    # Confirmation handling: if the caller sent a confirmation for a prior clarification
+    try:
+        if ctx.get("confirm") and ctx.get("clarification_rowid") and ctx.get("confirm_value") is True:
+            # set corrected_intent on the stored record and bias current request
+            store = None
+            try:
+                from emotional_os.adapter.clarification_store import get_default_store
+                store = get_default_store()
+                store.update_corrected_intent(
+                    int(ctx.get("clarification_rowid")), ctx.get("confirmed_intent"))
+                ctx["inferred_intent"] = ctx.get("confirmed_intent")
+                if ctx.get("confirmed_intent") == "emotional_checkin":
+                    phase = "initiatory"
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # 3. Tone-adapted response
     # Prepare a lightweight context for tone adapters; prefer values
@@ -89,8 +170,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     )
     store_capsule(capsule)
 
-    # Return combined response: tone + adapted phrasing
-    return f"{raw_response}\n\n{adapted_response}"
+    # Return combined response: optional clarification prefix + tone + adapted phrasing
+    return f"{prefix}{raw_response}\n\n{adapted_response}"
 
 
 if __name__ == "__main__":
