@@ -61,6 +61,14 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     # 2. Phase detection (give detector access to symbolic tags)
     phase = detect_phase(user_input, {"symbolic_tags": tags})
 
+    # If a prior clarification set a corrected intent, bias phase selection
+    # so that clarified intents (for now) map to the initiatory phase.
+    try:
+        if ctx.get("inferred_intent") == "emotional_checkin":
+            phase = "initiatory"
+    except Exception:
+        pass
+
     # 3. Tone-adapted response
     # Prepare a lightweight context for tone adapters; prefer values
     # surfaced by local_analysis when available.
