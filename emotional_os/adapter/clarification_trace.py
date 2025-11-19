@@ -10,10 +10,17 @@ from typing import Optional, Dict, Any
 import os
 import json
 import re
+import fcntl
+import stat
 from pathlib import Path
 
 DEFAULT_STORE = Path(__file__).resolve(
 ).parents[2] / "data" / "disambiguation_memory.jsonl"
+
+# Limits to keep stored records bounded (avoid huge user text in logs)
+MAX_ORIGINAL = 500
+MAX_SYSTEM_RESP = 2000
+MAX_USER_CLAR = 1000
 
 
 class ClarificationTrace:
@@ -27,19 +34,43 @@ class ClarificationTrace:
     ]
 
     def __init__(self, store_path: Optional[Path] = None):
-        self.store_path = Path(store_path or DEFAULT_STORE)
+        # allow overriding the store path via env var
+        env_path = os.environ.get("CLARIFICATION_TRACE_STORE")
+        if store_path:
+            self.store_path = Path(store_path)
+        elif env_path:
+            self.store_path = Path(env_path)
+        else:
+            self.store_path = Path(DEFAULT_STORE)
+
         self.store_path.parent.mkdir(parents=True, exist_ok=True)
-        # ensure file exists
+        # ensure file exists with secure permissions
         if not self.store_path.exists():
-            self.store_path.write_text("")
+            # create file and set owner-only perms where possible
+            open(self.store_path, "a", encoding="utf8").close()
+            try:
+                os.chmod(self.store_path, 0o600)
+            except Exception:
+                # ignore if chmod unsupported
+                pass
 
     def _is_correction(self, user_input: str) -> bool:
         if not user_input:
             return False
         ui = user_input.lower()
-        for p in self.TRIGGER_PATTERNS:
-            if re.search(p, ui):
-                return True
+        # allow override via env var of comma-separated regex patterns
+        patterns = os.environ.get("CLARIFICATION_TRIGGER_PATTERNS")
+        if patterns:
+            pats = [p.strip() for p in patterns.split(",") if p.strip()]
+        else:
+            pats = self.TRIGGER_PATTERNS
+
+        for p in pats:
+            try:
+                if re.search(p, ui):
+                    return True
+            except re.error:
+                continue
         return False
 
     def detect_and_store(self, user_input: str, context: Optional[Dict[str, Any]] = None) -> bool:
@@ -64,17 +95,37 @@ class ClarificationTrace:
             # Nothing to anchor to — still store the raw clarification for future signals
             original = ""
 
+        # truncate fields to safe lengths
+        original = (original or "")[:MAX_ORIGINAL]
+        system_resp = (system_resp or "")[:MAX_SYSTEM_RESP]
+        user_input_trunc = (user_input or "")[:MAX_USER_CLAR]
+
         record = {
             "original_input": original,
-            "system_response": system_resp or "",
-            "user_clarification": user_input,
+            "system_response": system_resp,
+            "user_clarification": user_input_trunc,
             "corrected_intent": context.get("inferred_intent") or None,
-            "trigger": _normalize_trigger(original or user_input),
+            "trigger": _normalize_trigger(original or user_input_trunc),
         }
 
-        # append as JSONL
-        with open(self.store_path, "a", encoding="utf8") as fh:
-            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+        # append as JSONL with advisory file lock for safety
+        try:
+            with open(self.store_path, "a", encoding="utf8") as fh:
+                fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
+                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+                fh.flush()
+                try:
+                    os.fsync(fh.fileno())
+                except Exception:
+                    pass
+                fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+        except Exception:
+            # Best-effort: if locking or write fails, avoid raising to not break UX
+            try:
+                with open(self.store_path, "a", encoding="utf8") as fh:
+                    fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+            except Exception:
+                pass
 
         return True
 
@@ -89,7 +140,15 @@ class ClarificationTrace:
 
         try:
             with open(self.store_path, "r", encoding="utf8") as fh:
+                try:
+                    fcntl.flock(fh.fileno(), fcntl.LOCK_SH)
+                except Exception:
+                    pass
                 lines = fh.read().strip().splitlines()
+                try:
+                    fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+                except Exception:
+                    pass
         except Exception:
             return None
 
