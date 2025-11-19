@@ -14,17 +14,17 @@ import os
 
 # Primary mapping: single preferred gesture per emotion
 ASCII_COMFORT_MAP = {
-    "sadness": ["(っ◕‿◕)っ"],
-    "loneliness": ["(づ｡◕‿‿◕｡)づ"],
-    "joy": ["ヽ(•‿•)ノ"],
-    "celebration": ["✧٩(•́⌄•́๑)و ✧"],
-    "frustration": ["(ง •̀_•́)ง"],
-    "struggle": ["٩(◕‿◕｡)۶"],
-    "calm": ["(˘︶˘).｡*♡"],
-    "reflection": ["(｡•́‿•̀｡)"],
-    "hope": ["✿◕ ‿ ◕✿"],
-    "motivation": ["٩(◕‿◕｡)۶"],
-    "encouragement": ["✧٩(•́⌄•́๑)و ✧"],
+    "sadness": ["(っ◕‿◕)っ", "(つ╯‿╰)つ", "(っ˘̩╭╮˘̩)っ"],
+    "loneliness": ["(づ｡◕‿‿◕｡)づ", "(つ˵•́ ᴗ •̀˵)つ"],
+    "joy": ["ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "(＾▽＾)"],
+    "celebration": ["✧٩(•́⌄•́๑)و ✧", "ヽ(＾Д＾)ﾉ", "\(^o^)/"],
+    "frustration": ["(ง •̀_•́)ง", "(ง'̀-'́)ง", "(ง︡'-'︠)ง"],
+    "struggle": ["٩(◕‿◕｡)۶", "(ง˘̀_˘́)ง"],
+    "calm": ["(˘︶˘).｡*♡", "(¬‿¬)", "(˶ˆ꒳ˆ˶)"],
+    "reflection": ["(｡•́‿•̀｡)", "(｡･ω･｡)", "( ͡ᵔ ͜ʖ ͡ᵔ )"],
+    "hope": ["✿◕ ‿ ◕✿", "(✿◠‿◠)", "(◕‿◕✿)"],
+    "motivation": ["٩(◕‿◕｡)۶", "(ง°ل͜°)ง", "( •̀ᴗ•́ )و"],
+    "encouragement": ["✧٩(•́⌄•́๑)و ✧", "(＾ｰ^)ノ", "(ﾉ･∀･)ﾉ"],
 }
 
 
@@ -36,13 +36,22 @@ def _choose_variant(variants: list[str], seed: Optional[str] = None) -> str:
     if not variants:
         return ""
     if seed is None:
-        return random.choice(variants)
+        # rotate based on a coarse time bucket to vary across sessions
+        try:
+            import datetime
+
+            bucket = datetime.date.today().strftime("%Y%m")
+            seed = bucket
+        except Exception:
+            return random.choice(variants)
     h = hashlib.sha256(seed.encode("utf8")).digest()
     idx = h[0] % len(variants)
     return variants[idx]
 
 
-def add_comfort_gesture(emotion: str, message: str, position: str = "prepend") -> str:
+def add_comfort_gesture(
+    emotion: str, message: str, position: str = "prepend", session_seed: Optional[str] = None
+) -> str:
     """Return `message` with an ASCII comfort gesture added.
 
     - `emotion` is matched case-insensitively to the mapping keys.
@@ -57,9 +66,10 @@ def add_comfort_gesture(emotion: str, message: str, position: str = "prepend") -
 
     key = (emotion or "").strip().lower() or "calm"
     variants = ASCII_COMFORT_MAP.get(key) or ASCII_COMFORT_MAP.get("calm")
-    # Use the message as a seed so repeated calls with the same message
-    # yield deterministic choices and avoid immediate repetition.
-    gesture = _choose_variant(variants, seed=message)
+    # Choose a seed for deterministic rotation: prefer explicit session_seed,
+    # otherwise use the message combined with a monthly bucket inside _choose_variant.
+    seed = session_seed or message
+    gesture = _choose_variant(variants, seed=seed)
     if not gesture:
         return message
 
