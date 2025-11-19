@@ -110,24 +110,71 @@ class ClarificationTrace:
 
         # append as JSONL with advisory file lock for safety
         try:
-            with open(self.store_path, "a", encoding="utf8") as fh:
-                fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
-                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
-                fh.flush()
-                try:
-                    os.fsync(fh.fileno())
-                except Exception:
-                    pass
-                fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+            # Prefer the SQLite-backed store when available
+            store = get_default_store()
+            # attempt to infer intent automatically
+            inferred = None
+            needs_confirmation = False
+            try:
+                diag = tag_input_with_diagnostics(user_input)
+                tags = diag.get("tags", [])
+                matches = diag.get("matches", [])
+                # Map symbolic tags to a simple intent
+                if "initiatory_signal" in tags:
+                    inferred = "emotional_checkin"
+                elif "containment_request" in tags:
+                    inferred = "containment_support"
+                elif "voltage_surge" in tags:
+                    inferred = "voltage_help"
+
+                # Evaluate confidence: any regex match gives high confidence
+                confidence = 0.0
+                for m in matches:
+                    if m.get("match_type") == "regex":
+                        confidence = max(confidence, 1.0)
+                    else:
+                        try:
+                            score = float(m.get("score", 0.0))
+                        except Exception:
+                            score = 0.0
+                        confidence = max(confidence, score)
+
+                if inferred and confidence < 0.85:
+                    # Low-confidence candidate — ask for confirmation instead
+                    needs_confirmation = True
+                else:
+                    # commit corrected_intent when confident
+                    record["corrected_intent"] = inferred
+
+            except Exception:
+                inferred = None
+                needs_confirmation = False
+
+            # attach optional conversation/user identifiers if provided
+            if context.get("conversation_id"):
+                record["conversation_id"] = context.get("conversation_id")
+            if context.get("user_id"):
+                record["user_id"] = context.get("user_id")
+
+            rowid = store.insert(record)
+            return {"stored": True, "rowid": rowid, "inferred_intent": inferred, "needs_confirmation": needs_confirmation}
         except Exception:
-            # Best-effort: if locking or write fails, avoid raising to not break UX
+            # fallback to file append as legacy behaviour
             try:
                 with open(self.store_path, "a", encoding="utf8") as fh:
+                    try:
+                        fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
+                    except Exception:
+                        pass
                     fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+                    fh.flush()
+                    try:
+                        fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+                    except Exception:
+                        pass
             except Exception:
                 pass
-
-        return True
+            return {"stored": True, "rowid": None, "inferred_intent": None, "needs_confirmation": False}
 
     def lookup(self, phrase: str) -> Optional[Dict[str, Any]]:
         """Look for a recent clarification matching `phrase` (normalized).
