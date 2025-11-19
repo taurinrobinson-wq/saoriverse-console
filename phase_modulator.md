@@ -6,7 +6,7 @@ To convert backend outputs (glyphs, signals, gate activations) into emotionally 
 
 ---
 
-🧠 Core Design Principles
+<strong>FP</strong> Core Design Principles
 
 • No backend terms: Avoid “glyph,” “gate,” “trace,” “signal,” etc.
 • Emotion-first language: Use tone, metaphor, and relational cues.
@@ -298,7 +298,7 @@ Perfect. Let’s build out the cue detection logic and simulate how your emotion
 
 ---
 
-🧠 Cue Detection Logic: `phase_modulator.py`
+<strong>FP</strong> Cue Detection Logic: `phase_modulator.py`
 
 🔍 Key Phrase Patterns
 
@@ -395,7 +395,7 @@ Excellent. Let’s build this out in three layers, each one deepening your emoti
 
 ---
 
-1. 🧠 Symbolic Tagging Engine
+1. <strong>FP</strong> Symbolic Tagging Engine
 
 This module assigns symbolic tags to user input based on emotional voltage and relational depth. These tags guide the phase modulator and can also be used for glyph generation, memory indexing, or ritual reflection.
 
@@ -662,7 +662,7 @@ Each user interaction is stored as a capsule with:
 
 ---
 
-🧠 Memory Retrieval Logic
+<strong>FP</strong> Memory Retrieval Logic
 
 When a user refers back to a moment:
 

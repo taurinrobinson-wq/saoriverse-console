@@ -156,7 +156,7 @@ try:
     # Use data URI (SVG) if available, otherwise an emoji
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon=_page_icon if _page_icon is not None else "🧠",
+        page_icon=_page_icon if _page_icon is not None else "FP",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -164,7 +164,7 @@ except Exception:
     # Ensure any failure here doesn't prevent the rest of the app from loading
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon="🧠",
+        page_icon="FP",
         layout="wide",
         initial_sidebar_state="expanded"
     )
