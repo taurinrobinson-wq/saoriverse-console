@@ -96,6 +96,26 @@ def _load_inline_svg(filename: str) -> str:
     return _SVG_CACHE.get(filename, "")
 
 
+def _svg_or_emoji_div(svg_name: str = 'FirstPerson-Logo-black-cropped_notext.svg', style: str = None) -> str:
+    """Return inline SVG markup wrapped in a div if available, otherwise an emoji fallback.
+
+    This centralizes the small fallback logic so callers prefer an inline
+    SVG asset but still render a harmless emoji when the SVG is missing.
+    """
+    try:
+        svg = _load_inline_svg(svg_name)
+    except Exception:
+        svg = ""
+    if svg:
+        if style:
+            return f"<div style=\"{style}\">{svg}</div>"
+        return f"<div>{svg}</div>"
+    # conservative text fallback when no SVG markup is available
+    # Use a bolded 'FP' as a neutral, brand-consistent fallback instead of an emoji
+    safe_style = style or "display:inline-block;font-size:1.25rem;vertical-align:middle;font-weight:700"
+    return f"<div style=\"{safe_style}\"><strong>FP</strong></div>"
+
+
 def inject_css(css_path: str) -> None:
     """Inject a CSS file into the Streamlit app.
 
@@ -669,10 +689,13 @@ def render_splash_interface(auth):
                         st.markdown(
                             f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>", unsafe_allow_html=True)
             except Exception:
-                # Fallback emoji
+                # Fallback emoji (prefer inline SVG when available)
                 try:
                     st.markdown(
-                        "<div style='display:inline-block;font-size:2rem;vertical-align:middle'>🧠</div>", unsafe_allow_html=True)
+                        _svg_or_emoji_div('FirstPerson-Logo-black-cropped_notext.svg',
+                                          "display:inline-block;font-size:2rem;vertical-align:middle"),
+                        unsafe_allow_html=True,
+                    )
                 except Exception:
                     pass
 
@@ -844,7 +867,10 @@ def render_splash_interface(auth):
                 f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
     except Exception:
         st.markdown(
-            '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+            _svg_or_emoji_div('FirstPerson-Logo-black-cropped_notext.svg',
+                              "font-size: 4rem; text-align: center;"),
+            unsafe_allow_html=True,
+        )
 
         # Add title and subtitle
         st.markdown("""
@@ -1051,7 +1077,10 @@ def render_main_app():
                     raise FileNotFoundError
             except Exception:
                 st.markdown(
-                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+                    _svg_or_emoji_div('FirstPerson-Logo-black-cropped_notext.svg',
+                                      "font-size: 2.5rem; margin: 0; line-height: 1;"),
+                    unsafe_allow_html=True,
+                )
         with col2:
             st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
         st.session_state['header_rendered'] = True
@@ -1527,9 +1556,12 @@ def render_main_app():
                 st.markdown(
                     f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
             except Exception:
-                # Render a simple emoji fallback (ensure proper quoting)
+                # Render a simple SVG-first fallback using the helper
                 st.markdown(
-                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+                    _svg_or_emoji_div('FirstPerson-Logo-black-cropped_notext.svg',
+                                      "font-size: 2.5rem; margin: 0; line-height: 1;"),
+                    unsafe_allow_html=True,
+                )
         with col2:
             st.markdown('<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
         st.markdown(

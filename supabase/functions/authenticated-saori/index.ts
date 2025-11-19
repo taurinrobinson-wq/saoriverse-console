@@ -459,7 +459,7 @@ for (const phrase of forbiddenPhrases) {
   }
 }
 
-// 🧠 USER-SPECIFIC LEARNING: Learn from OpenAI response for this user only
+// FP USER-SPECIFIC LEARNING: Learn from OpenAI response for this user only
 const genericFallbacks = new Set(["I'm here to listen.", "I'm here to listen and help.", "I'm here to listen and support you."]);
 if (completion && !genericFallbacks.has(reply) && authenticatedUserId !== "anonymous") {
   analyzeForLearning(message, reply, authenticatedUserId, admin).catch(err =>
