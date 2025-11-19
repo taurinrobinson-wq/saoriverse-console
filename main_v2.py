@@ -658,6 +658,45 @@ def main():
         render_splash_interface(auth)
         return
 
+    # Offer a small playful control in the sidebar to trigger the Streamlit
+    # Dance Mode demo. We import lazily so deployments that don't include
+    # the `streamlit` demo (or where the demo file is absent) won't fail.
+    try:
+        from demos.streamlit_dance_mode import dance_mode  # type: ignore
+    except Exception:
+        dance_mode = None
+
+    try:
+        with st.sidebar:
+            st.markdown("### Fun")
+            try:
+                gentle_mode = st.checkbox(
+                    "Gentle dance (no flashing)", value=True, key="dance_gentle")
+                cycles = st.slider("Dance cycles", min_value=1,
+                                   max_value=20, value=6, key="dance_cycles")
+                delay_s = st.slider(
+                    "Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5, key="dance_delay")
+            except Exception:
+                # If Streamlit widget creation fails for any reason, fall back to defaults
+                gentle_mode = True
+                cycles = 6
+                delay_s = 0.5
+
+            if st.button("Dance Mode 🕺"):
+                if dance_mode:
+                    try:
+                        dance_mode(cycles=cycles, delay_s=delay_s,
+                                   gentle_mode=gentle_mode)
+                    except Exception:
+                        st.warning(
+                            "Dance Mode failed to run in this environment.")
+                else:
+                    st.info("Dance Mode demo not available in this deployment.")
+
+    except Exception:
+        # Sidebar rendering must never block the main app; ignore errors.
+        pass
+
     # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
     try:
         if 'render_main_app_safe' in globals() and callable(globals().get('render_main_app_safe')):
