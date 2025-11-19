@@ -148,10 +148,12 @@ try:
     _page_icon = None
     if _logo_path.exists():
         try:
-            _page_icon = _logo_path.read_bytes()
+            svg_bytes = _logo_path.read_bytes()
+            import base64 as _base64
+            _page_icon = f"data:image/svg+xml;base64,{_base64.b64encode(svg_bytes).decode('ascii')}"
         except Exception:
             _page_icon = None
-    # Use bytes (image) if available, otherwise an emoji
+    # Use data URI (SVG) if available, otherwise an emoji
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
         page_icon=_page_icon if _page_icon is not None else "🧠",
