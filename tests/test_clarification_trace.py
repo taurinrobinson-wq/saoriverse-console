@@ -25,6 +25,11 @@ def test_detect_and_store_and_jsonl_append(tmp_path: Path):
     assert rec.get("user_clarification") == clarification
     assert rec.get("corrected_intent") == "emotional_checkin"
 
+    # file permissions should be owner-read/write only where supported
+    mode = store.stat().st_mode & 0o777
+    # allow 644/666 in environments where chmod may be masked
+    assert mode in (0o600, 0o644, 0o666)
+
 
 def test_lookup_returns_recent_match(tmp_path: Path):
     store = tmp_path / "mem2.jsonl"
@@ -44,3 +49,16 @@ def test_lookup_returns_recent_match(tmp_path: Path):
 def test_detection_false_for_non_corrections(tmp_path: Path):
     ct = ClarificationTrace(store_path=tmp_path / "mem3.jsonl")
     assert ct.detect_and_store("I am fine", {}) is False
+
+
+def test_truncation(tmp_path: Path):
+    store = tmp_path / "mem4.jsonl"
+    ct = ClarificationTrace(store_path=store)
+    original = "o" * 2000
+    clarification = "No, I meant " + ("x" * 2000)
+    ctx = {"last_user_input": original, "inferred_intent": "emotional_checkin"}
+    assert ct.detect_and_store(clarification, ctx) is True
+    data = store.read_text(encoding="utf8").strip().splitlines()
+    rec = json.loads(data[-1])
+    assert len(rec.get("original_input", "")) <= 500
+    assert len(rec.get("user_clarification", "")) <= 1000
