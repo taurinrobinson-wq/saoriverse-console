@@ -1,17 +1,19 @@
 from typing import List, Dict
+from glyph_response_templates import pick_template
 
 
 def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
-    """Simple scaffolding: map glyph overlay confidences to tone and pacing suggestions.
+    """Simple scaffolding: map glyph overlay confidences to tone, pacing and a response string.
 
     Returns a structure with:
       - primary_tag: highest-confidence overlay tag
       - tone: one of ('calm', 'firm', 'empathetic')
       - pacing: float (0.0 slow / 1.0 fast)
       - details: original overlays
+      - response: a short response string selected from templates
     """
     if not glyph_overlays_info:
-        return {"primary_tag": None, "tone": "neutral", "pacing": 0.5, "details": []}
+        return {"primary_tag": None, "tone": "neutral", "pacing": 0.5, "details": [], "response": None}
 
     # Sort overlays by confidence
     sorted_overlays = sorted(
@@ -19,6 +21,16 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
     primary = sorted_overlays[0]
     tag = primary.get("tag")
     conf = float(primary.get("confidence", 0.0))
+
+    # If multiple overlays have similar confidence, treat as a mixed emotion cluster
+    if len(sorted_overlays) > 1:
+        top_conf = float(sorted_overlays[0].get("confidence", 0.0))
+        second_conf = float(sorted_overlays[1].get("confidence", 0.0))
+        if abs(top_conf - second_conf) < 0.2:
+            # classify as a mixed emotion cluster
+            tag = "mixed_emotion"
+            # use average confidence for template selection
+            conf = round((top_conf + second_conf) / 2.0, 4)
 
     # Map tags to a simple tone and pacing heuristic
     tone = "neutral"
@@ -32,5 +44,14 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
     elif tag == "feeling_unseen":
         tone = "validating"
         pacing = 0.45 if conf >= 0.6 else 0.5
+    elif tag == "mixed_emotion":
+        tone = "attentive"
+        pacing = 0.5
 
-    return {"primary_tag": tag, "tone": tone, "pacing": pacing, "details": sorted_overlays}
+    # Choose a template and render a short phrase. Use the primary confidence and tag.
+    template = pick_template(tag or "default", conf)
+    # short_phrase is a concise excerpt we can include; for now use tag and short form
+    short_phrase = tag.replace("_", " ") if tag else "something"
+    response = template.format(short_phrase=short_phrase)
+
+    return {"primary_tag": tag, "tone": tone, "pacing": pacing, "details": sorted_overlays, "response": response}
