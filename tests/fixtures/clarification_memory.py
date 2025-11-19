@@ -25,3 +25,8 @@ def lookup_correction(text: str):
         if trig in text:
             return rec
     return None
+
+
+def all_corrections():
+    """Return all stored corrections (useful for debugging/tests)."""
+    return dict(_corrections)

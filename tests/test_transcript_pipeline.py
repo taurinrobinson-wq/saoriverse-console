@@ -66,19 +66,34 @@ def test_transcript_pipeline():
         print(f"→ Forced Intent: {result.get('forced_intent')}")
         print(f"→ Dominant Emotion: {result.get('dominant_emotion')}")
         print(f"→ Tone Overlay: {result.get('tone_overlay')}")
+        print(f"→ Glyph Overlays: {result.get('glyph_overlays')}")
         print(
             f"→ Clarification Provenance: {result.get('clarification_provenance')}")
 
         # If the line contains the trigger, we should see the forced intent
         if "I feel invisible" in turn["text"]:
+            # forced intent should be applied and provenance should include record_id and confidence
             assert result["forced_intent"] == "emotional_checkin"
-            assert result["clarification_provenance"] is not None
+            prov = result.get("clarification_provenance")
+            assert prov is not None and prov.get("record_id")
+            assert isinstance(prov.get("confidence"), float) or isinstance(
+                prov.get("confidence"), int)
+            # tone overlay should come from routing table
+            assert result.get("tone_overlay") == "reflective, validating"
             seen_forced = True
 
         # If the line mentions emotion words, assert a detected dominant emotion
         if any(k in turn["text"].lower() for k in ("anger", "sad", "frustrat", "invisible", "ignored")):
+            # stricter: ensure glyph overlays exist and dominant_emotion aligns
+            overlays = result.get("glyph_overlays") or []
+            assert len(overlays) > 0
             assert result["dominant_emotion"] in ("anger", "sadness")
             seen_emotion = True
 
     assert seen_forced, "forced intent example was not observed"
     assert seen_emotion, "no emotion-bearing lines were detected"
+    # Additional: confirm that final line includes both anger and sadness overlays
+    final = parse_input(
+        synthetic_transcript[-1]["text"], speaker=synthetic_transcript[-1]["speaker"])
+    assert "anger" in final.get("glyph_overlays", [])
+    assert "sadness" in final.get("glyph_overlays", [])
