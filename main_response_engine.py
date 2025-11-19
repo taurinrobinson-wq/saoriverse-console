@@ -6,6 +6,7 @@ Public:
 This file demonstrates the end-to-end flow described in the spec.
 """
 from typing import Dict, Optional
+import os
 
 from symbolic_tagger import tag_input
 from phase_modulator import detect_phase
@@ -13,6 +14,7 @@ from tone_adapters import generate_initiatory_response, generate_archetypal_resp
 from response_adapter import translate_emotional_response
 from relational_memory import RelationalMemoryCapsule, store_capsule
 from emotional_os.adapter.clarification_trace import ClarificationTrace
+from emotional_os.adapter.comfort_gestures import add_comfort_gesture
 
 
 # Singleton trace instance for this process
@@ -67,6 +69,17 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
             )
     except Exception:
         ds = {"stored": False}
+
+    # Attach a comfort gesture to the acknowledgement prefix when available
+    try:
+        if prefix:
+            enabled = os.environ.get(
+                "COMFORT_GESTURES_ENABLED", "true").lower()
+            if enabled not in ("0", "false", "no"):
+                emotion_key = ctx.get("emotion") or "calm"
+                prefix = add_comfort_gesture(emotion_key, prefix)
+    except Exception:
+        pass
 
     # Accept local_analysis when provided to avoid redundant heavy parsing.
     local_analysis = ctx.get("local_analysis")
