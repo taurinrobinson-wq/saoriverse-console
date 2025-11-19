@@ -670,33 +670,77 @@ def main():
     try:
         ctrl_container = st.container()
         with ctrl_container:
-            cols = st.columns([1, 2, 1])
-            with cols[1]:
-                st.markdown("### Fun")
+            # Helper: show the Dance Mode control only when we detect a
+            # celebratory cue from recent local preprocessing, or when the
+            # environment explicitly allows always-on dance controls.
+            def _is_celebration() -> bool:
                 try:
-                    gentle_mode = st.checkbox(
-                        "Gentle dance (no flashing)", value=True, key="dance_gentle_main")
-                    cycles = st.slider("Dance cycles", min_value=1,
-                                       max_value=20, value=6, key="dance_cycles_main")
-                    delay_s = st.slider(
-                        "Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5, key="dance_delay_main")
-                except Exception:
-                    # If Streamlit widget creation fails for any reason, fall back to defaults
-                    gentle_mode = True
-                    cycles = 6
-                    delay_s = 0.5
+                    # Env override to force-show the control (useful for demo/debug)
+                    if os.environ.get('ALLOW_DANCE_ALWAYS') == '1':
+                        return True
 
-                if st.button("Dance Mode 🕺", key="dance_button_main"):
-                    if dance_mode:
+                    last_pre = st.session_state.get('last_preproc', {})
+                    if not isinstance(last_pre, dict):
+                        return False
+
+                    intent = (last_pre.get('intent') or '')
+                    if isinstance(intent, str) and intent.lower() in (
+                        'joy', 'joyful', 'happy', 'celebration', 'celebrate', 'excited'
+                    ):
+                        return True
+
+                    tags = last_pre.get('emotional_tags') or []
+                    for t in tags:
                         try:
-                            dance_mode(cycles=cycles, delay_s=delay_s,
-                                       gentle_mode=gentle_mode)
+                            if isinstance(t, str) and ('joy' in t.lower() or 'celebr' in t.lower()):
+                                return True
                         except Exception:
-                            st.warning(
-                                "Dance Mode failed to run in this environment.")
-                    else:
-                        st.info(
-                            "Dance Mode demo not available in this deployment.")
+                            continue
+
+                    # No clear celebratory marker found
+                    return False
+                except Exception:
+                    return False
+
+            show_dance = _is_celebration()
+
+            # Compact centered column for the control (only render when celebratory)
+            if show_dance:
+                cols = st.columns([1, 2, 1])
+                with cols[1]:
+                    st.markdown("### Fun")
+                    try:
+                        gentle_mode = st.checkbox(
+                            "Gentle dance (no flashing)", value=True, key="dance_gentle_main")
+                        cycles = st.slider("Dance cycles", min_value=1,
+                                           max_value=20, value=6, key="dance_cycles_main")
+                        delay_s = st.slider(
+                            "Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5, key="dance_delay_main")
+                    except Exception:
+                        # If Streamlit widget creation fails for any reason, fall back to defaults
+                        gentle_mode = True
+                        cycles = 6
+                        delay_s = 0.5
+
+                    if st.button("Dance Mode 🕺", key="dance_button_main"):
+                        if dance_mode:
+                            try:
+                                dance_mode(cycles=cycles, delay_s=delay_s,
+                                           gentle_mode=gentle_mode)
+                            except Exception:
+                                st.warning(
+                                    "Dance Mode failed to run in this environment.")
+                        else:
+                            st.info(
+                                "Dance Mode demo not available in this deployment.")
+            else:
+                # If the control is hidden, keep a lightweight hint for demoers
+                # when the feature is intentionally suppressed.
+                cols = st.columns([1, 2, 1])
+                with cols[1]:
+                    st.markdown("### Fun")
+                    st.info(
+                        "Dance Mode appears on joyful moments (try saying you're excited)")
 
     except Exception:
         # Main-area controls must never block the main app; ignore errors.
