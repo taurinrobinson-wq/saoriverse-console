@@ -12,6 +12,11 @@ from phase_modulator import detect_phase
 from tone_adapters import generate_initiatory_response, generate_archetypal_response
 from response_adapter import translate_emotional_response
 from relational_memory import RelationalMemoryCapsule, store_capsule
+from emotional_os.adapter.clarification_trace import ClarificationTrace
+
+
+# Singleton trace instance for this process
+_clarify_trace = ClarificationTrace()
 
 
 def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
@@ -25,6 +30,27 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     5. Store relational memory capsule
     """
     ctx = dict(context or {})
+    prefix = ""
+
+    # Check for prior clarifications that could bias interpretation
+    try:
+        prior = _clarify_trace.lookup(user_input)
+        if prior and prior.get("corrected_intent"):
+            ctx["inferred_intent"] = prior.get("corrected_intent")
+    except Exception:
+        prior = None
+
+    # Detect and store an explicit clarification/correction from the user.
+    # This expects callers to pass `last_user_input` and `last_system_response`
+    # in `context` when available so we can anchor the clarification.
+    try:
+        stored = _clarify_trace.detect_and_store(user_input, {**ctx})
+        if stored:
+            prefix = (
+                "Thanks for clarifying—I’m still learning, so I really appreciate that.\n"
+            )
+    except Exception:
+        stored = False
 
     # Accept local_analysis when provided to avoid redundant heavy parsing.
     local_analysis = ctx.get("local_analysis")
@@ -34,6 +60,14 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
 
     # 2. Phase detection (give detector access to symbolic tags)
     phase = detect_phase(user_input, {"symbolic_tags": tags})
+
+    # If a prior clarification set a corrected intent, bias phase selection
+    # so that clarified intents (for now) map to the initiatory phase.
+    try:
+        if ctx.get("inferred_intent") == "emotional_checkin":
+            phase = "initiatory"
+    except Exception:
+        pass
 
     # 3. Tone-adapted response
     # Prepare a lightweight context for tone adapters; prefer values
@@ -89,8 +123,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     )
     store_capsule(capsule)
 
-    # Return combined response: tone + adapted phrasing
-    return f"{raw_response}\n\n{adapted_response}"
+    # Return combined response: optional clarification prefix + tone + adapted phrasing
+    return f"{prefix}{raw_response}\n\n{adapted_response}"
 
 
 if __name__ == "__main__":
