@@ -88,6 +88,23 @@ def test_transcript_pipeline():
             overlays = result.get("glyph_overlays") or []
             assert len(overlays) > 0
             assert result["dominant_emotion"] in ("anger", "sadness")
+
+            # Assert confidence thresholds for overlays (sanity floor)
+            infos = result.get("glyph_overlays_info") or []
+            conf_map = {i["tag"]: float(i["confidence"]) for i in infos}
+
+            # If anger present, require a minimum confidence
+            if "anger" in conf_map:
+                assert conf_map["anger"] >= 0.5, f"anger confidence too low: {conf_map['anger']}"
+            # If sadness present, require a minimum confidence
+            if "sadness" in conf_map:
+                assert conf_map[
+                    "sadness"] >= 0.4, f"sadness confidence too low: {conf_map['sadness']}"
+            # If feeling_unseen present, require a reasonable confidence
+            if "feeling_unseen" in conf_map:
+                assert conf_map[
+                    "feeling_unseen"] >= 0.5, f"feeling_unseen confidence too low: {conf_map['feeling_unseen']}"
+
             seen_emotion = True
 
     assert seen_forced, "forced intent example was not observed"
@@ -97,3 +114,9 @@ def test_transcript_pipeline():
         synthetic_transcript[-1]["text"], speaker=synthetic_transcript[-1]["speaker"])
     assert "anger" in final.get("glyph_overlays", [])
     assert "sadness" in final.get("glyph_overlays", [])
+
+    # Also assert confidences on the final combined line
+    infos = final.get("glyph_overlays_info") or []
+    conf_map = {i["tag"]: float(i["confidence"]) for i in infos}
+    assert conf_map.get("anger", 0.0) >= 0.5
+    assert conf_map.get("sadness", 0.0) >= 0.4
