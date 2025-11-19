@@ -9,6 +9,26 @@ import hashlib
 import requests
 
 
+# Conservative, non-destructive environment defaults to keep tests local-only
+# when a developer doesn't have a full .env populated. These use setdefault
+# so real environment values are preserved when present.
+os.environ.setdefault('SUPABASE_URL', 'http://localhost:8000')
+os.environ.setdefault('SUPABASE_AUTH_URL', os.environ.get(
+    'SUPABASE_AUTH_URL') or os.environ.get('SUPABASE_URL') + '/functions/v1/auth-manager')
+os.environ.setdefault('SUPABASE_FUNCTION_URL', os.environ.get(
+    'SUPABASE_FUNCTION_URL') or os.environ.get('SUPABASE_URL') + '/functions/v1')
+os.environ.setdefault('SUPABASE_PUBLISHABLE_KEY', os.environ.get(
+    'SUPABASE_PUBLISHABLE_KEY') or os.environ.get('SUPABASE_ANON_KEY') or 'test_platform_key')
+os.environ.setdefault('SUPABASE_ANON_KEY', os.environ.get(
+    'SUPABASE_ANON_KEY') or os.environ.get('SUPABASE_PUBLISHABLE_KEY'))
+os.environ.setdefault('TEST_CUSTOM_TOKEN', os.environ.get(
+    'TEST_CUSTOM_TOKEN') or 'test_custom_token')
+os.environ.setdefault('TEST_USER_ID', os.environ.get(
+    'TEST_USER_ID') or 'test_user')
+os.environ.setdefault('TEST_ACCESS_TOKEN', os.environ.get(
+    'TEST_ACCESS_TOKEN') or 'test_access_token')
+
+
 def _b64u(b: bytes) -> str:
     return base64.urlsafe_b64encode(b).rstrip(b"=").decode("utf-8")
 
