@@ -1,20 +1,9 @@
 from typing import Optional, List, Dict
 from clarification_memory import lookup_correction
+from rule_engine_helper import analyze_text
 
 
-def _keyword_glyphs(text: str) -> List[str]:
-    """Map simple keywords to glyph overlays (test-only heuristic)."""
-    t = text.lower()
-    overlays = []
-    if any(k in t for k in ("ignore", "ignored", "invisible", "invisibl")):
-        overlays.append("feeling_unseen")
-    if any(k in t for k in ("anger", "angry")):
-        overlays.append("anger")
-    if any(k in t for k in ("sad", "sadness", "stung", "frustrat")):
-        overlays.append("sadness")
-    return overlays
-
-
+# Small routing table used by tests to map forced intents to tone overlays.
 _routing_table: Dict[str, str] = {
     "emotional_checkin": "reflective, validating",
 }
@@ -28,7 +17,8 @@ def parse_input(text: str, speaker: Optional[str] = None) -> Dict:
       - dominant_emotion
       - tone_overlay
       - clarification_provenance
-      - glyph_overlays
+      - glyph_overlays  (list of overlay tags, kept for test compatibility)
+      - glyph_overlays_info (list of {tag, confidence})
     """
     result = {
         "forced_intent": None,
@@ -36,6 +26,7 @@ def parse_input(text: str, speaker: Optional[str] = None) -> Dict:
         "tone_overlay": None,
         "clarification_provenance": None,
         "glyph_overlays": [],
+        "glyph_overlays_info": [],
     }
 
     # Check clarification memory
@@ -55,14 +46,21 @@ def parse_input(text: str, speaker: Optional[str] = None) -> Dict:
         if tone:
             result["tone_overlay"] = tone
 
-    # Glyph overlay inference (returns list of overlay tags)
-    overlays = _keyword_glyphs(text)
-    result["glyph_overlays"] = overlays
+    # Use shared test helper for tokenization/overlay detection
+    analysis = analyze_text(text)
+    result["glyph_overlays_info"] = analysis.get("glyph_overlays_info", [])
+    result["glyph_overlays"] = analysis.get("glyph_overlays", [])
 
-    # Dominant emotion selection: if both anger and sadness appear, choose the one explicitly stated
-    if "anger" in overlays:
+    # Dominant emotion: derive confidences from glyph_overlays_info
+    conf_map = {i["tag"]: float(i.get("confidence", 0.0))
+                for i in result.get("glyph_overlays_info", [])}
+    anger_conf = conf_map.get("anger", 0.0)
+    sad_conf = conf_map.get("sadness", 0.0)
+    unseen_conf = conf_map.get("feeling_unseen", 0.0)
+
+    if anger_conf > max(sad_conf, unseen_conf):
         result["dominant_emotion"] = "anger"
-    elif "sadness" in overlays or "feeling_unseen" in overlays:
+    elif sad_conf >= anger_conf or unseen_conf > 0.0:
         result["dominant_emotion"] = "sadness"
 
     return result
