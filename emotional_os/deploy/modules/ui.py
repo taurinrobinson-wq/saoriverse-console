@@ -294,6 +294,52 @@ def ensure_processing_prefs():
         st.session_state['prefer_ai'] = False
 
 
+def _init_feedback_store():
+    if 'feedback_log' not in st.session_state:
+        st.session_state['feedback_log'] = []
+
+
+def handle_feedback(msg_id: str, direction: str, conversation_key: str = None) -> None:
+    """Record simple per-message feedback (direction = 'up'|'down') into session_state.
+
+    This is intentionally lightweight: feedback is stored in `st.session_state['feedback_log']`
+    as a list of small dicts. The function is defensive and silently returns on any error.
+    """
+    try:
+        _init_feedback_store()
+        entry = {
+            'msg_id': str(msg_id),
+            'direction': direction,
+            'conversation_key': conversation_key,
+            'ts': datetime.datetime.utcnow().isoformat(),
+        }
+        st.session_state['feedback_log'].append(entry)
+        try:
+            # Prefer a lightweight toast when available
+            st.toast("Feedback recorded", icon="✅")
+        except Exception:
+            try:
+                st.success("Feedback recorded")
+            except Exception:
+                pass
+    except Exception:
+        # Swallow errors to avoid breaking the chat flow
+        pass
+
+
+def feedback_counts_for(msg_id: str) -> tuple:
+    """Return (up_count, down_count) for a given msg_id from the session feedback log."""
+    try:
+        _init_feedback_store()
+        up = sum(1 for e in st.session_state['feedback_log'] if e.get(
+            'msg_id') == str(msg_id) and e.get('direction') == 'up')
+        down = sum(1 for e in st.session_state['feedback_log'] if e.get(
+            'msg_id') == str(msg_id) and e.get('direction') == 'down')
+        return up, down
+    except Exception:
+        return 0, 0
+
+
 def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
     """Decode an AI reply using the local parser and return (composed_response, debug_info)."""
     try:
@@ -1571,6 +1617,20 @@ def render_main_app():
         display_name = st.session_state.get(
             'first_name') or st.session_state.get('username')
         st.write(f"Welcome back, **{display_name}**! 👋")
+        try:
+            # Show the current git branch in the UI when available to make
+            # it easy for developers in Codespaces to confirm which branch
+            # they're editing. This is a harmless, best-effort helper and
+            # will silently do nothing if `git` isn't available.
+            import subprocess
+            branch = subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stderr=subprocess.DEVNULL
+            ).decode().strip()
+            if branch:
+                st.caption(f"Branch: {branch}")
+        except Exception:
+            # Ignore any errors (no git in runtime, permission issues, etc.)
+            pass
     with col2:
         # Settings panel is rendered in the sidebar expander
         try:
@@ -1625,6 +1685,28 @@ def render_main_app():
                     if show_mode:
                         caption_text += f" • Mode: {exchange.get('mode', 'unknown')}"
                     st.caption(caption_text)
+                # Thumbs up / down feedback UI (developer-facing, non-blocking)
+                try:
+                    msg_id = exchange.get(
+                        'id') or f"{st.session_state.get('current_conversation_id','')}_{i}"
+                    # Small, tightly-packed columns for feedback buttons
+                    col_up, col_down, col_spacer = st.columns(
+                        [1, 1, 6], gap="small")
+                    with col_up:
+                        if st.button("👍", help="Helpful", key=f"fb_up_{msg_id}"):
+                            handle_feedback(msg_id, "up", conversation_key)
+                    with col_down:
+                        if st.button("👎", help="Needs improvement", key=f"fb_down_{msg_id}"):
+                            handle_feedback(msg_id, "down", conversation_key)
+                    # Show simple aggregate counts
+                    up_ct, down_ct = feedback_counts_for(msg_id)
+                    try:
+                        st.markdown(f"**Feedback:** 👍 {up_ct}   👎 {down_ct}")
+                    except Exception:
+                        pass
+                except Exception:
+                    # Do not let feedback UI interfere with the chat render
+                    pass
     # 1. Show a single message at the top if a document is uploaded and being processed
     document_analysis = None
     document_title = None
