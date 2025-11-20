@@ -644,6 +644,96 @@ def render_settings_sidebar():
         return
 
 
+def render_feedback_sidebar():
+    """Render a lightweight feedback analytics panel in the sidebar.
+
+    - Reads `st.session_state['feedback_log']` (list of dicts with keys
+      'msg_id', 'direction', 'ts', 'conversation_key' etc.).
+    - Groups by `conversation_key` and shows totals for 👍 and 👎.
+    - Highlights messages/conversations where downs > ups.
+    - Visibility controlled by `st.session_state['show_feedback_sidebar']`
+      or environment variable `FP_SHOW_FEEDBACK_SIDEBAR=1`.
+    This function is defensive and returns early if the log is missing.
+    """
+    try:
+        show_flag = os.environ.get('FP_SHOW_FEEDBACK_SIDEBAR') == '1' or st.session_state.get(
+            'show_feedback_sidebar', False)
+    except Exception:
+        show_flag = False
+
+    if not show_flag:
+        return
+
+    try:
+        _init_feedback_store()
+    except Exception:
+        # If init helper isn't available, try to continue; missing store
+        # means nothing to show.
+        if 'feedback_log' not in st.session_state:
+            return
+
+    try:
+        fb = st.session_state.get('feedback_log', [])
+        if not fb:
+            st.info("No feedback recorded this session.")
+            return
+
+        # Aggregate by conversation_key
+        by_conv = {}
+        for e in fb:
+            c = e.get('conversation_key', 'session') or 'session'
+            entry = by_conv.setdefault(c, {'up': 0, 'down': 0, 'examples': []})
+            if e.get('direction') == 'up':
+                entry['up'] += 1
+            elif e.get('direction') == 'down':
+                entry['down'] += 1
+            # keep a short example for context
+            if len(entry['examples']) < 3:
+                entry['examples'].append(
+                    {'msg_id': e.get('msg_id'), 'direction': e.get('direction'), 'ts': e.get('ts')})
+
+        total_up = sum(v['up'] for v in by_conv.values())
+        total_down = sum(v['down'] for v in by_conv.values())
+
+        st.markdown("**Feedback Analytics (session)**")
+        st.markdown(f"- Total 👍: **{total_up}**   - Total 👎: **{total_down}**")
+        st.markdown("---")
+
+        # Show per-conversation summary, highlight negative ones
+        for conv, stats in sorted(by_conv.items(), key=lambda x: (-(x[1]['down'] - x[1]['up']), - (x[1]['up']+x[1]['down']))):
+            up = stats['up']
+            down = stats['down']
+            label = conv if conv != 'session' else 'Current Session'
+            # Highlight when downs exceed ups
+            if down > up:
+                st.markdown(
+                    f"<div style='padding:8px;border-radius:8px;background:#fff6f6;border:1px solid #f5c6cb;'>**{label}** — 👍 {up}  👎 {down}</div>", unsafe_allow_html=True)
+            else:
+                st.markdown(f"**{label}** — 👍 {up}  👎 {down}")
+
+            # show small examples
+            try:
+                with st.expander("Examples", expanded=False):
+                    for ex in stats.get('examples', []):
+                        ts = ex.get('ts') or ''
+                        mid = ex.get('msg_id') or ''
+                        dirc = ex.get('direction') or ''
+                        st.write(f"- {dirc} — {mid} — {ts}")
+            except Exception:
+                pass
+
+        # Quick actions: clear session feedback
+        try:
+            if st.button("Clear session feedback", key="clear_feedback_btn"):
+                st.session_state['feedback_log'] = []
+                st.success("Session feedback cleared")
+        except Exception:
+            pass
+    except Exception:
+        # Do not let analytics break sidebar
+        return
+
+
 def delete_user_history_from_supabase(user_id: str) -> tuple:
     """Delete all persisted conversation history for a user from Supabase.
 
@@ -1433,6 +1523,12 @@ def render_main_app():
                     'persist_history': bool(st.session_state.get('persist_history', False)),
                     'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
                 })
+        except Exception:
+            pass
+
+        # Optional feedback analytics sidebar (developer opt-in)
+        try:
+            render_feedback_sidebar()
         except Exception:
             pass
 
