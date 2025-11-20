@@ -10,7 +10,7 @@
     },
     "vscode": {
       "settings": {
-  "python.defaultInterpreterPath": ".venv/bin/python",
+        "python.defaultInterpreterPath": ".venv/bin/python",
         "editor.formatOnSave": true,
         "files.autoSave": "afterDelay",
         "files.autoSaveDelay": 1000
@@ -20,7 +20,8 @@
         "ms-python.vscode-pylance",
         "streetsidesoftware.code-spell-checker",
         "ms-azuretools.vscode-containers",
-        "DavidAnson.vscode-markdownlint"
+        "DavidAnson.vscode-markdownlint",
+        "GitHub.copilot"
       ]
     }
   },

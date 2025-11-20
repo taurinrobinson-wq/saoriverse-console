@@ -53,6 +53,9 @@ logs/
 *.db
 *.sqlite3
 
+# Local runtime SQLite (explicit)
+/emotional_os/glyphs/glyphs.db
+
 # Environment variables
 .env.local
 .env.production
@@ -73,3 +76,46 @@ pip-ephem-wheel-cache/
 
 # Node modules (vendor directory) should not be tracked
 node_modules/
+
+# Local virtualenvs created for edge tests or CI; avoid committing large binaries
+.venv-edge-tests/
+
+# Common secrets and credentials (prevent accidental new commits)
+# Note: these patterns will not remove files already tracked in git. To
+# stop tracking an already-committed secret file use `git rm --cached <file>`
+# after ensuring you have a backup.
+.env*
+*.key
+*.pem
+secrets.*
+*.secret
+.credentials
+.aws/
+.gcloud/main_v2.py.bak*
+*.bak.*
+streamlit.pid
+streamlit.log
+
+# Caches and large auto-generated artefacts
+cache/
+cache/datamuse/
+data/datamuse_synonyms.json
+data/wordnet_synonyms.json
+data/synonyms_merged.json
+data/datamuse_*.json
+# allow logs directory to be committed
+!logs/
+!logs/enrich.log
+
+# Backup and large archives: avoid committing large binary archives/backup files
+# (If you need to store release artifacts, use a separate storage solution.)
+*.zip
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.bak
+*.old
+*.db.bak*
+backup/
+backups/

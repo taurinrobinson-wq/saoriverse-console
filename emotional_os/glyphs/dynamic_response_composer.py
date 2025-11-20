@@ -33,6 +33,11 @@ except ImportError:
     nrc = None
     PoetryDatabase = None
 
+try:
+    from emotional_os.adapter.response_adapter import translate_system_output
+except Exception:
+    translate_system_output = None
+
 
 class DynamicResponseComposer:
     """Compose responses dynamically from linguistic fragments."""
@@ -45,32 +50,32 @@ class DynamicResponseComposer:
         # Linguistic patterns for different emotional contexts
         self.opening_moves = {
             "acknowledgment": [
-                "I hear {entity}.",
+                "I hear you about {entity}.",
                 "There's something real in what you're saying about {entity}.",
                 "That matters—{entity}.",
-                "I'm listening to {entity}.",
+                "I'm here with you on {entity}.",
                 "You're naming {entity}.",
             ],
             "validation": [
-                "{entity} is real.",
-                "That's true—{entity}.",
+                "What you're describing about {entity} makes sense.",
+                "I can hear how real {entity} feels.",
                 "The {emotion} you're describing is justified.",
                 "What you're feeling makes sense.",
-                "{entity} is a legitimate thing to carry.",
+                "That's a real thing to carry.",
             ],
             "curiosity": [
                 "Tell me more about {entity}.",
-                "What does {entity} feel like?",
-                "When you say {entity}, what does that mean?",
-                "Help me understand {entity}.",
-                "What's the weight of {entity}?",
+                "What does that feel like for you?",
+                "When you say {entity}, what do you mean by that?",
+                "Help me understand a bit more about that.",
+                "What's one small detail of {entity}?",
             ],
             "connection": [
-                "You're not alone in {entity}.",
-                "Many people navigate {entity}.",
-                "The struggle with {entity}—that's deeply human.",
-                "{entity} connects you to something universal.",
-                "Your {emotion} around {entity} is witnessed.",
+                "You're not alone in this.",
+                "Many people navigate things like this.",
+                "What you're naming is deeply human.",
+                "{entity} connects to something important in your life.",
+                "I hear the feeling you're describing.",
             ],
         }
 
@@ -195,6 +200,29 @@ class DynamicResponseComposer:
 
         return result
 
+    def _normalize_emotions(self, emotions) -> dict:
+        """Normalize emotions to a dict mapping emotion->score.
+
+        The rest of the composer expects a mapping (dict). Downstream
+        code may occasionally pass a list (e.g., ['sadness','joy']) so
+        normalize that shape here to avoid AttributeErrors.
+        """
+        if not emotions:
+            return {}
+        if isinstance(emotions, dict):
+            return emotions
+        # If it's a list/iterable of emotion names, convert to a dict with True
+        try:
+            if isinstance(emotions, (list, tuple, set)):
+                return {str(e): 1 for e in emotions}
+        except Exception:
+            pass
+        # Fallback: try to coerce to dict safely
+        try:
+            return dict(emotions)
+        except Exception:
+            return {}
+
     def _select_opening(self, entities: List[str], emotions: Dict) -> str:
         """Select and instantiate an appropriate opening move."""
         # Determine which type of opening fits
@@ -209,18 +237,133 @@ class DynamicResponseComposer:
         opening = random.choice(self.opening_moves[opening_type])
 
         # Fill entity placeholder if present
-        entity = entities[0] if entities else "what you're experiencing"
+        entity = entities[0] if entities else None
+        entity = self._sanitize_entity(entity)
         opening = opening.replace("{entity}", entity)
-        opening = opening.replace("{emotion}", emotions.get(
+        norm_emotions = self._normalize_emotions(emotions)
+        opening = opening.replace("{emotion}", norm_emotions.get(
             "primary", "what you're feeling"))
 
         return opening
 
-    def _weave_poetry(self, text: str, emotions: Dict) -> Optional[str]:
+    def _sanitize_entity(self, entity: Optional[str]) -> str:
+        """Sanitize extracted entity strings for user-facing text.
+
+        Avoid returning pronouns or single-letter tokens like 'I' which create
+        awkward grounding phrases. Return a friendly fallback when input is
+        not meaningful.
+        """
+        if not entity:
+            return "what you're experiencing"
+        e = str(entity).strip()
+        if not e:
+            return "what you're experiencing"
+        low = e.lower()
+        # Avoid single-letter tokens or pronouns
+        if low in {'i', 'me', 'my', 'you', 'your', 'yours', 'we', 'us'} or len(low) <= 2:
+            return "what you're experiencing"
+        return e
+
+    def _postprocess_parts(self, parts: List[str]) -> List[str]:
+        """Clean and normalize parts before joining into final text.
+
+        - Trim whitespace
+        - Remove very short fragments (<=2 words) unless they contain punctuation
+        - Remove fragments that look like templates/placeholders (contain '{' or '}')
+        - Remove fragments that are mostly quotes or start/end with mismatched quotes
+        - Normalize capitalization and punctuation at sentence end
+        - Deduplicate while preserving order
+        """
+        cleaned: List[str] = []
+        seen = set()
+
+        def normalize_sentence(s: str) -> str:
+            s = s.strip()
+            # Remove surrounding quotes if accidental
+            if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+                s = s[1:-1].strip()
+            # Avoid returning empty
+            if not s:
+                return ''
+            # Ensure end punctuation
+            if s[-1] not in '.!?':
+                s = s + '.'
+            # Capitalize first char
+            s = s[0].upper() + s[1:]
+            return s
+
+        for p in parts:
+            if not isinstance(p, str):
+                continue
+            s = p.strip()
+            if not s:
+                continue
+            # Skip placeholder/template-like fragments
+            if '{' in s or '}' in s:
+                continue
+            # Skip fragments that are clearly questions coming from templates
+            if re.search(r'\bwhat does\b|\bwhat would\b', s.lower()) and s.count('?') == 0:
+                # avoid lines that look like prompt fragments
+                continue
+            # Skip lines that are too short (likely artifacts). Allow if contains punctuation
+            word_count = len(re.findall(r"[a-zA-Z]+", s))
+            if word_count <= 2 and not re.search(r'[.!?]', s):
+                continue
+            # Remove lines that are basically single punctuation or stray quotes
+            if all(ch in '"\'\n\r' for ch in s):
+                continue
+
+            s_norm = normalize_sentence(s)
+            if not s_norm:
+                continue
+            if s_norm in seen:
+                continue
+            seen.add(s_norm)
+            cleaned.append(s_norm)
+
+        return cleaned
+
+    def _sanitize_poetry_line(self, line: str) -> Optional[str]:
+        """Return a single clean sentence from poetry if it's suitable.
+
+        Reject lines that look like templates/questions or are too long/fragmented.
+        """
+        if not line:
+            return None
+        s = str(line).strip()
+        # Remove surrounding quotes
+        if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+            s = s[1:-1].strip()
+        # Replace newlines with spaces
+        s = ' '.join(s.split())
+        # Reject if it contains placeholders or braces
+        if '{' in s or '}' in s:
+            return None
+        # Reject if it's clearly a direct question/template
+        if s.lower().startswith(('what ', 'does ', 'is ', 'how ', 'would ')) and s.endswith('?'):
+            return None
+        # Enforce reasonable length
+        if len(s) > 240 or len(s.split()) < 3:
+            return None
+        # Ensure ends with punctuation
+        if not s.endswith(('.', '!', '?')):
+            s = s + '.'
+        # Capitalize first character
+        s = s[0].upper() + s[1:]
+        return s
+
+    def _weave_poetry(self, text: str, emotions: Dict, glyphs: Optional[List[Dict]] = None, extracted: Optional[Dict] = None) -> Optional[str]:
         """Find and weave poetic echoes that match emotional contour."""
         if not self.poetry_db or not emotions:
             return None
 
+        # Ensure glyphs/extracted are usable
+        glyphs = glyphs or []
+        extracted = extracted or {}
+
+        # How many top glyph snippets to include in poetry/snippet composition.
+        # Default to a small number to keep composed replies concise.
+        top_n = min(3, max(1, len(glyphs)))
         # Map detected emotions to poetry categories
         primary_emotion = list(emotions.keys())[0] if emotions else None
 
@@ -233,112 +376,190 @@ class DynamicResponseComposer:
         if not poetry_lines:
             return None
 
-        # Select a poem and extract a line
-        poem = random.choice(poetry_lines)
-        lines = [line.strip() for line in poem.split('\n') if line.strip()]
+        # Helper: map some activation symbols to human words
+        sig_map = {
+            'γ': 'longing', 'θ': 'relief', 'λ': 'tension', 'ζ': 'strain', 'χ': 'tenderness',
+            'η': 'stillness', 'ξ': 'curiosity', 'μ': 'acceptance', 'ν': 'distance', 'β': 'difficulty',
+            'ψ': 'rest', 'φ': 'vigilance', 'τ': 'restlessness', 'ο': 'calm', 'π': 'pressure',
+            'σ': 'softness', 'ρ': 'weight', 'κ': 'constraint', 'δ': 'rupture', 'ω': 'completion',
+            'ι': 'smallness', 'α': 'openness', 'ε': 'confusion'
+        }
 
-        if not lines:
-            return None
+        # Small in-file stopword set to avoid an external NLTK dependency
+        STOPWORDS = {
+            'in', 'of', 'and', 'the', 'a', 'an', 'to', 'for', 'with', 'on', 'at', 'by', 'from',
+            'is', 'are', 'that', 'this', 'it', 'as', 'be', 'was', 'were'
+        }
 
-        # Pick a line that's short and impactful (not too long)
-        short_lines = [l for l in lines if 8 < len(l.split()) < 15]
-        if short_lines:
-            return random.choice(short_lines)
+        def _clean_phrase(phrase: str) -> str:
+            if not phrase:
+                return ''
+            tokens = [t.strip().lower()
+                      for t in re.findall(r"[a-zA-Z]+", phrase)]
+            meaningful = [t for t in tokens if t and t not in STOPWORDS]
+            return ' '.join(meaningful)
 
-        return random.choice(lines[:3]) if len(lines) > 0 else None
+        def _glyph_intensity(g: Dict) -> int:
+            gates = g.get('gates') or g.get('gate')
+            if not gates:
+                acts = g.get('activation_signals') or []
+                return len(acts) if isinstance(acts, list) else (1 if acts else 0)
+            return len(gates) if isinstance(gates, list) else 1
 
-    def _build_glyph_aware_response(
-        self,
-        glyph: Optional[Dict],
-        entities: List[str],
-        emotions: Dict,
-        feedback_type: Optional[str] = None,
-        input_text: str = "",
-        extracted: Optional[Dict] = None,
-    ) -> str:
-        """
-        Build response focused on the PERSON'S situation, not the glyph system.
+        def _glyph_primary_words(g: Dict) -> List[str]:
+            acts = g.get('activation_signals') or []
+            words = []
+            for a in acts:
+                if isinstance(a, str):
+                    for ch in re.split(r'[;,\s]+', a):
+                        if not ch:
+                            continue
+                        mapped = sig_map.get(ch.strip(), None)
+                        if mapped:
+                            words.append(mapped)
+            if not words:
+                name = g.get('glyph_name') or ''
+                words = [t for t in re.findall(r"[a-zA-Z]+", name.lower())][:5]
+            # Clean and dedupe
+            cleaned = []
+            for w in words:
+                cw = _clean_phrase(w)
+                if cw and cw not in cleaned:
+                    cleaned.append(cw)
+            return cleaned[:3]
 
-        Glyph is used invisibly for:
-        - Tone calibration (gate-based intensity)
-        - Emotional validation (aligned with emotional_signal)
-        - Poetry selection (via emotional category)
-        - Entity relationship weighting
+        # Sentence template pools to add variation
+        openers = [
+            "I'm sensing",
+            "There's a feeling of",
+            "It sounds like you're carrying",
+            "I hear",
+            "This feels like"
+        ]
 
-        But the response should feel like it's about the person's actual situation,
-        not about emotional categories or glyph descriptions.
-        """
-        parts = []
+        connectors = [
+            "which seems important.",
+            "and that may be part of what's shaping this.",
+            "which could be worth staying with for a moment.",
+            "and that feels connected to what you're describing.",
+            "which might be tied to your experience right now."
+        ]
 
-        # Determine intensity level from glyph (invisible to user)
-        intensity_level = 1
-        if glyph:
-            gate_data = glyph.get("gates") or glyph.get("gate")
-            if gate_data:
-                gates_list = gate_data if isinstance(
-                    gate_data, list) else [gate_data]
-                intensity_level = len(gates_list)
+        question_closers = [
+            "Does any of that land for you?",
+            "Is that on the right track?",
+            "Does that resonate at all?",
+            "If that feels right, tell me a bit more."
+        ]
 
-        # 1. Validate the specific struggle the person is naming
-        # Extract what they're actually struggling with from the message
-        lower_input = input_text.lower()
+        # Rank glyphs by optional score and intensity
+        ranked = sorted(glyphs, key=lambda g: (
+            g.get('score', 0), _glyph_intensity(g)), reverse=True)
 
-        # Nuanced handling: detect mixed or contrasting emotions (e.g., exhausted + joyful)
-        fatigue_words = ['exhaust', 'exhausted', 'tired', 'fatigue', 'weary']
-        joy_words = ['joy', 'joyful', 'happy', 'glad', 'delighted']
+        parts: List[str] = []
 
-        has_fatigue = any(w in lower_input for w in fatigue_words)
-        has_joy = any(w in lower_input for w in joy_words)
-
-        if has_fatigue and has_joy:
-            # Acknowledge complex, co-occurring emotions explicitly
+        # Optional confidence-based summary using the top glyph
+        dominant = ranked[0] if ranked else None
+        if dominant and dominant.get('glyph_name'):
+            summary_name = _clean_phrase(dominant.get(
+                'glyph_name')) or dominant.get('glyph_name')
             parts.append(
-                "It makes sense that you can feel tired and yet also find moments of joy — both can be true at once. "
-                "Holding those together is hard, and it's okay to notice both."
-            )
-        elif any(word in lower_input for word in ['math', 'anxiety', 'mental block', 'can\'t']):
-            # They're naming a specific cognitive struggle
-            parts.append(
-                "That friction you're naming is real. Many people experience genuine resistance in certain domains.")
-        elif any(word in lower_input for word in ['inherited', 'from', 'mother', 'parent']):
-            # They're recognizing a pattern they carry from someone else
-            parts.append(
-                "Recognizing where something comes from—that's a form of clarity. Naming it is the first step to seeing yourself separately from it.")
-        elif any(word in lower_input for word in ['misunderstood', 'not what i meant', 'explains', 'understands me']):
-            # They're describing a relationship or communication mismatch
-            parts.append(
-                "When someone explains things in a way that only they can follow, that creates real isolation. That's not a failing on your part.")
-        else:
-            # Generic validation that honors the emotional weight
-            parts.append(
-                "What you're sharing matters. There's something real here.")
+                f"It seems the strongest theme here is {summary_name}.")
 
-        # 2. Add feedback-specific response if correcting prior statement
-        if feedback_type:
-            bridges = self.emotional_bridges.get(feedback_type) or []
-            if bridges:
-                bridge = random.choice(bridges)
-                parts.append(bridge)
+        # Opening move: grounded in detected entities/emotions
+        opening = self._select_opening(extracted.get(
+            'entities', []), extracted.get('emotions', {}))
+        parts.append(opening)
 
-        # 3. Reflect back the specific people/entities they mentioned
-        if extracted:
-            people = extracted.get("people", [])
-            if people:
-                person = people[0]
-                # Use appropriate movement language based on glyph intensity
-                movement_category = "through" if intensity_level < 5 else "with"
-                movement = random.choice(
-                    self.movement_language[movement_category])
-                parts.append(f"With {person}, {movement.lower()}")
+        # Snippets from top glyphs with varied templates
+        seen_snippets = set()
+        snippet_count = 0
+        for g in ranked:
+            if snippet_count >= top_n:
+                break
+            gname = g.get('glyph_name') or ''
+            gdesc = g.get('description') or ''
+            intensity = _glyph_intensity(g)
+            primary_words = _glyph_primary_words(g)
 
-        # 4. Poetry weaving (glyph emotion category used invisibly)
-        if glyph:
-            glyph_name = glyph.get("glyph_name", "")
-            poetry_emotion = self._glyph_to_emotion_category(glyph_name)
-            poetry_line = self._weave_poetry(
-                input_text, {poetry_emotion: 0.8} if poetry_emotion else emotions)
+            # Build the phrase representing the glyph's core
+            if primary_words:
+                phrase = ', '.join(primary_words)
+            else:
+                phrase = _clean_phrase(gname) or gname
+
+            # Choose varied opener + connector
+            opener = random.choice(openers)
+            connector = random.choice(connectors)
+
+            # Grounding to entity or neutral 'this'
+            entity = extracted.get('entities', [None])[0]
+            grounding_ref = self._sanitize_entity(entity) or "this"
+
+            # Compose snippet with intensity-aware phrasing
+            if intensity >= 5:
+                snippet = f"{opener} a strong sense of {phrase}, {connector}"
+            else:
+                snippet = f"{opener} {phrase}, {connector}"
+
+            # Append grounding if sensible and not redundant
+            if grounding_ref and grounding_ref.lower() not in snippet.lower():
+                snippet = f"{snippet[:-1]} — that seems connected to {grounding_ref}."
+
+            # Clean up whitespace and capitalization
+            snippet = snippet.strip()
+
+            if snippet in seen_snippets:
+                continue
+            seen_snippets.add(snippet)
+            parts.append(snippet)
+            snippet_count += 1
+
+        # Optionally include a short poetry echo drawn from the available
+        # `poetry_lines` for the detected primary emotion. We avoid calling
+        # `_weave_poetry` recursively here (which previously caused infinite
+        # recursion) and instead sanitize a candidate poetry line directly.
+        if dominant:
+            poetry_line = None
+            for candidate in poetry_lines:
+                p = self._sanitize_poetry_line(candidate)
+                if p:
+                    poetry_line = p
+                    break
             if poetry_line:
-                parts.append(f"As someone once wrote: \"{poetry_line}\"")
+                parts.append(poetry_line)
+
+        # Curious closing question to invite user response
+        closing_q = random.choice(question_closers)
+        parts.append(closing_q)
+
+        # Post-process parts: normalize sentences, dedupe and remove tiny fragments
+        final_parts: List[str] = []
+        seen = set()
+        for p in parts:
+            if not p or not isinstance(p, str):
+                continue
+            s = p.strip()
+            # Normalize spacing
+            s = ' '.join(s.split())
+            # Ensure capitalization and punctuation
+            if s and s[0].islower():
+                s = s[0].upper() + s[1:]
+            if s and not s.endswith(('.', '?', '!')):
+                s = s + '.'
+            # Avoid very short fragments
+            if len(s) < 8:
+                continue
+            if s in seen:
+                continue
+            final_parts.append(s)
+            seen.add(s)
+
+        # If the last part is a generic question repeated, collapse duplicates
+        if len(final_parts) >= 2 and final_parts[-1].lower() == final_parts[-2].lower():
+            final_parts = final_parts[:-1]
+
+        return "\n\n".join(final_parts)
 
         # 5. Closing move informed by glyph intensity, but phrased to person's situation
         if intensity_level <= 2:
@@ -391,6 +612,101 @@ class DynamicResponseComposer:
 
         return None
 
+    def _build_glyph_aware_response(
+        self,
+        glyph: Optional[Dict],
+        entities: List[str],
+        emotions: Dict,
+        feedback_type: Optional[str] = None,
+        input_text: str = "",
+        extracted: Optional[Dict] = None,
+    ) -> str:
+        """
+        Build a response grounded in the glyph's meaning and emotional signal.
+
+        Args:
+            glyph: Full glyph dict with name, description, emotional_signal, gates
+            entities: Extracted entities from user input
+            emotions: Detected emotions from user input
+            feedback_type: Type of user correction if any
+            input_text: User's original or combined input text
+            extracted: Full extraction dict from _extract_entities_and_emotions
+
+        Returns:
+            Dynamically composed response anchored in glyph
+        """
+        parts = []
+
+        # 1. Opening that acknowledges the entity and/or glyph tone
+        opening = self._select_opening(entities, emotions)
+        parts.append(opening)
+
+        # 2. If there's feedback (correction), use bridging language
+        if feedback_type:
+            bridges = self.emotional_bridges.get(feedback_type) or []
+            if bridges:
+                bridge = random.choice(bridges)
+                parts.append(bridge)
+
+        # 3. Build middle: contextual movement language grounded in glyph
+        if glyph:
+            glyph_name = glyph.get('glyph_name', '')
+            glyph_desc = glyph.get('description', '')
+
+            # Use glyph description as inspiration for movement
+            if glyph_desc:
+                parts.append(glyph_desc)
+            elif "block" in input_text.lower():
+                movement = random.choice(self.movement_language["through"])
+                parts.append(movement)
+            elif "inherited" in input_text.lower():
+                movement = random.choice(self.movement_language["with"])
+                parts.append(movement)
+        else:
+            # Fallback when no glyph provided
+            if "block" in input_text.lower():
+                movement = random.choice(self.movement_language["through"])
+            elif "inherited" in input_text.lower():
+                movement = random.choice(self.movement_language["with"])
+            else:
+                movement = random.choice(
+                    list(self.movement_language.values())[0])
+            parts.append(movement)
+
+        # 4. Weave poetry if available
+        poetry_emotion = None
+        if glyph:
+            poetry_emotion = self._glyph_to_emotion_category(
+                glyph.get('glyph_name', ''))
+
+        poetry_emotions = {poetry_emotion: 0.8} if poetry_emotion else emotions
+        poetry_line = self._weave_poetry(input_text, poetry_emotions, [glyph] if glyph else None, extracted or {
+            'entities': entities, 'emotions': emotions})
+        if poetry_line:
+            parts.append(poetry_line)
+
+        # 5. Closing move (question or commitment) calibrated by glyph intensity
+        entity = self._sanitize_entity(entities[0] if entities else "this")
+
+        # Determine closing type from glyph intensity if available
+        closing_type = "question"
+        if glyph:
+            gates = glyph.get('gates') or glyph.get('gate')
+            if gates:
+                intensity = len(gates) if isinstance(gates, list) else 1
+                if intensity <= 2:
+                    closing_type = "permission"
+                elif intensity >= 8:
+                    closing_type = "commitment"
+
+        closing_template = random.choice(self.closing_moves[closing_type])
+        closing = closing_template.replace("{entity}", entity)
+        closing = closing.replace("{emotion}", list(emotions.keys())[
+                                  0] if emotions else "what you feel")
+        parts.append(closing)
+
+        return " ".join(parts)
+
     def _build_contextual_response(
         self,
         entities: List[str],
@@ -423,16 +739,18 @@ class DynamicResponseComposer:
         parts.append(movement)
 
         # 4. Weave poetry if available
-        poetry_line = self._weave_poetry(input_text, emotions)
+        poetry_line = self._weave_poetry(input_text, emotions, None, {
+                                         'entities': entities, 'emotions': emotions})
         if poetry_line:
-            parts.append(f"As someone once wrote: \"{poetry_line}\"")
+            parts.append(poetry_line)
 
         # 5. Closing move (question or commitment)
         entity = entities[0] if entities else "this"
         closing_template = random.choice(self.closing_moves["question"])
         closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[
-                                  0] if emotions else "what you feel")
+        norm_emotions = self._normalize_emotions(emotions)
+        closing = closing.replace("{emotion}", list(norm_emotions.keys())[
+            0] if norm_emotions else "what you feel")
         parts.append(closing)
 
         return " ".join(parts)
@@ -576,3 +894,211 @@ class DynamicResponseComposer:
             parts.append(question)
 
         return " ".join(parts)
+
+    def compose_multi_glyph_response(
+        self,
+        input_text: str,
+        glyphs: List[Dict],
+        feedback_detected: bool = False,
+        feedback_type: Optional[str] = None,
+        conversation_context: Optional[Dict] = None,
+        top_n: int = 5,
+    ) -> str:
+        """
+        Compose a single, nuanced response from multiple glyphs.
+
+        This method accepts a ranked list of glyph dictionaries (preferably the
+        top-N candidates) and weaves their tones, implied voltages, and gate
+        intensities into a single composed reply. It avoids canned single-glyph
+        responses by blending short, focused snippets derived from each glyph
+        and grounding them in the user's input.
+        """
+        # Combine recent context like compose_response does
+        combined_text = input_text
+        try:
+            if conversation_context and isinstance(conversation_context, dict):
+                prev_user = None
+                if 'last_user_message' in conversation_context:
+                    prev_user = conversation_context.get('last_user_message')
+                elif 'previous_user_message' in conversation_context:
+                    prev_user = conversation_context.get(
+                        'previous_user_message')
+                else:
+                    msgs = conversation_context.get(
+                        'messages') or conversation_context.get('history')
+                    if isinstance(msgs, list) and msgs:
+                        for m in reversed(msgs):
+                            if isinstance(m, dict) and m.get('role') in ('user', 'User'):
+                                prev_user = m.get('content') or m.get(
+                                    'text') or m.get('user')
+                                break
+                            if isinstance(m, dict) and 'user' in m and m.get('user'):
+                                prev_user = m.get('user')
+                                break
+                if prev_user:
+                    combined_text = f"{prev_user.strip()} {input_text.strip()}"
+        except Exception:
+            combined_text = input_text
+
+        # Extract entities/emotions for grounding
+        extracted = self._extract_entities_and_emotions(combined_text)
+
+        # Limit glyphs to top_n
+        glyphs = glyphs[:top_n] if glyphs else []
+
+        # Helper: map some activation symbols to human words
+        sig_map = {
+            'γ': 'longing', 'θ': 'relief', 'λ': 'tension', 'ζ': 'strain', 'χ': 'tenderness',
+            'η': 'stillness', 'ξ': 'curiosity', 'μ': 'acceptance', 'ν': 'distance', 'β': 'difficulty',
+            'ψ': 'rest', 'φ': 'vigilance', 'τ': 'restlessness', 'ο': 'calm', 'π': 'pressure',
+            'σ': 'softness', 'ρ': 'weight', 'κ': 'constraint', 'δ': 'rupture', 'ω': 'completion',
+            'ι': 'smallness', 'α': 'openness', 'ε': 'confusion'
+        }
+
+        def _glyph_intensity(g: Dict) -> int:
+            gates = g.get('gates') or g.get('gate')
+            if not gates:
+                # fallback to number of activation signals
+                acts = g.get('activation_signals') or []
+                return len(acts) if isinstance(acts, list) else (1 if acts else 0)
+            return len(gates) if isinstance(gates, list) else 1
+
+        def _glyph_primary_words(g: Dict) -> List[str]:
+            acts = g.get('activation_signals') or []
+            words = []
+            for a in acts:
+                if isinstance(a, str):
+                    # activation signals may be comma-separated
+                    for ch in re.split(r'[;,\s]+', a):
+                        if not ch:
+                            continue
+                        mapped = sig_map.get(ch.strip(), None)
+                        if mapped:
+                            words.append(mapped)
+            # fallback: include glyph name tokens
+            if not words:
+                name = g.get('glyph_name') or ''
+                words = [t for t in re.findall(r"[a-zA-Z]+", name.lower())][:3]
+            return words
+
+        # Rank glyphs by intensity (and optional provided score)
+        ranked = sorted(glyphs, key=lambda g: (
+            g.get('score', 0), _glyph_intensity(g)), reverse=True)
+
+        parts: List[str] = []
+
+        # Opening move: use dominant glyph to pick tone
+        dominant = ranked[0] if ranked else None
+        opening = self._select_opening(extracted.get(
+            'entities', []), extracted.get('emotions', {}))
+        parts.append(opening)
+
+        # Prefer using the response adapter to translate glyphs into
+        # plain-language summary and short snippets. Fallback to older
+        # snippet composition if the adapter is not available.
+        if translate_system_output:
+            try:
+                adapter_input = {
+                    'glyphs': glyphs,
+                    'extracted': extracted,
+                    'context': conversation_context,
+                }
+                adapter_out = translate_system_output(
+                    adapter_input, top_n=top_n, user_context=conversation_context)
+                # summary may be a short phrase like 'recurring ache'
+                summary = adapter_out.get('summary')
+                snippets = adapter_out.get('snippets') or []
+                tone = adapter_out.get('tone') or 'neutral'
+                invitation = adapter_out.get('invitation') or None
+
+                if summary:
+                    parts.append(f"I notice {summary}.")
+
+                for s in snippets:
+                    # Ensure we don't duplicate the summary line
+                    if s and s not in parts:
+                        parts.append(s)
+
+                # Use adapter invitation as a closing move if provided
+                if invitation:
+                    parts.append(invitation)
+
+                # Post-process composed parts (clean fragments, punctuation, dedupe)
+                try:
+                    processed = self._postprocess_parts(parts)
+                    if processed:
+                        return "\n\n".join(processed)
+                except Exception:
+                    # If postprocessing fails, continue to fall back to default
+                    pass
+
+            except Exception:
+                # Adapter failed — fall back to inline snippets below
+                pass
+        else:
+            # Snippets from top glyphs (short, non-redundant)
+            seen_snippets = set()
+            snippet_count = 0
+            for g in ranked:
+                if snippet_count >= top_n:
+                    break
+                gname = g.get('glyph_name') or ''
+                gdesc = g.get('description') or g.get('glyph', '') or ''
+                intensity = _glyph_intensity(g)
+                primary_words = _glyph_primary_words(g)
+
+                # Compose a concise snippet
+                if intensity >= 5:
+                    tone = f"There's a strong sense of {' and '.join(primary_words)} around {gname}."
+                else:
+                    tone = f"I notice a thread of {' and '.join(primary_words)} in what you're describing." if primary_words else f"I notice echoes of {gname}."
+
+                # Ground to user's specific content when possible
+                entity = extracted.get('entities', [None])[0]
+                if entity:
+                    grounding = f"That connects to {entity}."
+                else:
+                    grounding = "That seems connected to what you're carrying."
+
+                snippet = f"{tone} {grounding}"
+
+                # Avoid near-duplicate snippets
+                if snippet in seen_snippets:
+                    continue
+                seen_snippets.add(snippet)
+                parts.append(snippet)
+                snippet_count += 1
+
+        # Optionally weave a single poetic echo from dominant glyph
+        if dominant:
+            poetry_emotion = self._glyph_to_emotion_category(
+                dominant.get('glyph_name', ''))
+            poetry_line = self._weave_poetry(combined_text, {
+                                             poetry_emotion: 0.8} if poetry_emotion else extracted.get('emotions', {}))
+            if poetry_line:
+                parts.append(poetry_line)
+
+        # Final closing calibrated by average intensity
+        if ranked:
+            avg_intensity = int(sum(_glyph_intensity(g)
+                                for g in ranked) / max(1, len(ranked)))
+        else:
+            avg_intensity = 1
+
+        if avg_intensity <= 2:
+            closing_move = "permission"
+        elif avg_intensity >= 8:
+            closing_move = "commitment"
+        else:
+            closing_move = "question"
+
+        raw_entity = extracted.get('entities', [None])[0] or 'this'
+        entity = self._sanitize_entity(raw_entity)
+        closing_template = random.choice(self.closing_moves[closing_move])
+        closing = closing_template.replace("{entity}", entity)
+        closing = closing.replace("{emotion}", list(extracted.get('emotions', {}).keys())[
+                                  0] if extracted.get('emotions') else "what you feel")
+        parts.append(closing)
+
+        # Join parts into a single composed response
+        return "\n\n".join(parts)

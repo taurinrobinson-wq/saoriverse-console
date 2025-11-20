@@ -35,6 +35,16 @@ except ImportError as e:
         SUPABASE_INTEGRATOR_AVAILABLE = False
         SupabaseIntegrator = None
 
+# Remote-AI guard: prevent accidental remote client construction in local-only mode
+try:
+    from scripts.local_integration import remote_ai_allowed, remote_ai_error
+except Exception:
+    def remote_ai_allowed():
+        return False
+
+    def remote_ai_error(msg: str = None):
+        raise RuntimeError(msg or "Remote AI calls are disabled")
+
 # Define a simple SaoriResponse class if not available
 try:
     from ..supabase.supabase_integration import SaoriResponse
@@ -47,6 +57,7 @@ except ImportError:
                 self.reply = reply
                 self.glyph = glyph
                 self.parsed_glyphs = parsed_glyphs or []
+
 
 class EvolvingGlyphIntegrator:
     """
@@ -68,6 +79,11 @@ class EvolvingGlyphIntegrator:
 
         # Initialize components if credentials provided and dependencies available
         if supabase_function_url and supabase_anon_key and SUPABASE_INTEGRATOR_AVAILABLE and SupabaseIntegrator is not None:
+            if not remote_ai_allowed():
+                remote_ai_error(
+                    "Attempt to initialize SupabaseIntegrator while remote AI is disabled. "
+                    "Set PROCESSING_MODE!=local or ALLOW_REMOTE_AI=1 to opt in."
+                )
             try:
                 self.supabase_integrator = SupabaseIntegrator(
                     function_url=supabase_function_url,
@@ -98,9 +114,9 @@ class EvolvingGlyphIntegrator:
         self.logger = logging.getLogger(__name__)
 
     def process_conversation_with_evolution(self,
-                                          message: str,
-                                          mode: str = "quick",
-                                          conversation_context: Optional[Dict] = None) -> Dict:
+                                            message: str,
+                                            mode: str = "quick",
+                                            conversation_context: Optional[Dict] = None) -> Dict:
         """
         Process a conversation through the normal Saoriverse pipeline,
         but also check for new emotional patterns that might need glyphs
@@ -124,7 +140,8 @@ class EvolvingGlyphIntegrator:
                 result['saori_response'] = saori_response
             else:
                 # If no supabase integrator, create a simple response to allow evolution processing
-                print("DEBUG: No supabase integrator available, creating simple response")
+                print(
+                    "DEBUG: No supabase integrator available, creating simple response")
                 result['saori_response'] = SaoriResponse(
                     reply=f"I hear you speaking about {message[:50]}...",
                     glyph="",
@@ -156,17 +173,21 @@ class EvolvingGlyphIntegrator:
                         context=conversation_context or {}
                     )
                 else:
-                    print("DEBUG: No glyph generator available, skipping glyph generation")
+                    print(
+                        "DEBUG: No glyph generator available, skipping glyph generation")
 
                 result['new_glyphs_generated'] = new_glyphs
 
                 # Log evolution activity
                 if new_glyphs:
-                    self.logger.info(f"Evolution triggered: Generated {len(new_glyphs)} new glyphs")
+                    self.logger.info(
+                        f"Evolution triggered: Generated {len(new_glyphs)} new glyphs")
                     for glyph in new_glyphs:
-                        self.logger.info(f"  - {glyph['tag_name']} ({glyph['glyph']}): {glyph['response_cue']}")
+                        self.logger.info(
+                            f"  - {glyph['tag_name']} ({glyph['glyph']}): {glyph['response_cue']}")
                 else:
-                    self.logger.info("Evolution triggered but no new glyphs generated")
+                    self.logger.info(
+                        "Evolution triggered but no new glyphs generated")
 
             return result
 
@@ -197,7 +218,8 @@ class EvolvingGlyphIntegrator:
         Useful for processing particularly rich emotional content
         """
         if not self.glyph_generator:
-            self.logger.warning("Glyph generator not initialized, cannot force evolution")
+            self.logger.warning(
+                "Glyph generator not initialized, cannot force evolution")
             return []
 
         try:
@@ -207,7 +229,8 @@ class EvolvingGlyphIntegrator:
             )
 
             if new_glyphs:
-                self.logger.info(f"Forced evolution generated {len(new_glyphs)} new glyphs")
+                self.logger.info(
+                    f"Forced evolution generated {len(new_glyphs)} new glyphs")
 
             return new_glyphs
 
@@ -225,8 +248,10 @@ class EvolvingGlyphIntegrator:
         }
 
         if self.glyph_generator:
-            stats['detected_patterns_count'] = len(self.glyph_generator.detected_patterns)
-            stats['existing_tags_count'] = len(self.glyph_generator.existing_tags)
+            stats['detected_patterns_count'] = len(
+                self.glyph_generator.detected_patterns)
+            stats['existing_tags_count'] = len(
+                self.glyph_generator.existing_tags)
 
         return stats
 
@@ -253,11 +278,13 @@ class EvolvingGlyphIntegrator:
                         for line in lines:
                             if line.startswith('INSERT INTO'):
                                 # Extract values from SQL INSERT
-                                values_match = re.search(r"VALUES \((.*?)\);", line)
+                                values_match = re.search(
+                                    r"VALUES \((.*?)\);", line)
                                 if values_match:
                                     values_str = values_match.group(1)
                                     # Simple parsing - split by comma and remove quotes
-                                    values = [v.strip().strip("'") for v in values_str.split("', '")]
+                                    values = [v.strip().strip("'")
+                                              for v in values_str.split("', '")]
                                     if len(values) >= 12:
                                         generated_glyphs.append({
                                             'id': values[0],
@@ -297,6 +324,8 @@ class EvolvingGlyphIntegrator:
             return error_msg
 
 # Enhanced conversation demo that includes auto-evolution
+
+
 def conversation_demo_with_evolution():
     """
     Demo showing how the auto-evolving glyph system works
@@ -349,7 +378,8 @@ def conversation_demo_with_evolution():
         if result['evolution_triggered']:
             print("🧬 Evolution check triggered!")
             if result['new_glyphs_generated']:
-                print(f"✨ Generated {len(result['new_glyphs_generated'])} new glyphs:")
+                print(
+                    f"✨ Generated {len(result['new_glyphs_generated'])} new glyphs:")
                 for glyph in result['new_glyphs_generated']:
                     print(f"   • {glyph['tag_name']} ({glyph['glyph']})")
                     print(f"     Response: {glyph['response_cue']}")
@@ -370,6 +400,7 @@ def conversation_demo_with_evolution():
     print("\n💾 Exporting generated glyphs...")
     export_result = integrator.export_generated_glyphs('json')
     print(f"   {export_result}")
+
 
 if __name__ == "__main__":
     conversation_demo_with_evolution()

@@ -1,10 +1,133 @@
-"""Main entry point for the streamlit FirstPerson app."""
+"""Main entry point for the Streamlit FirstPerson app.
+
+High-level runtime flow:
+
+- Startup: the app sets Streamlit `page_config`, injects UI theme/CSS, and
+    loads optional helpers (preprocessor, limbic integration) using safe imports.
+- Authentication: users sign in via `SaoynxAuthentication`; unauthenticated
+    visitors see a demo-mode interface. The splash screen can be forced for QA.
+- Preferences & Persistence: users opt into saving chats via Settings; per-
+    session `learning_settings` (default: local-only) controls whether learning
+    events are persisted locally (append-only JSONL) and whether remote AI is
+    preferred. The UI enforces local-only processing by default.
+- Message handling: when a user submits an emotionally charged message the
+    text is parsed by `parse_input()` to extract signals, gates, glyphs and a
+    voltage-style emotional summary. The `run_hybrid_pipeline()` coordinates
+    local parsing and (optionally) remote AI enhancement while preserving
+    local-first behavior and clear fallbacks.
+- Response composition: replies are produced either by decoding an AI reply
+    via `decode_ai_reply()` or by composing a local, multi-glyph response using
+    `DynamicResponseComposer.compose_multi_glyph_response()` when AI is
+    unavailable. The composer blends the top-N glyphs' tones, voltages and
+    gate activations into a single, grounded reply.
+- Learning & evolution: candidate signals/glyphs may be staged and persisted
+    for later local evolution; deduplication and staging ensure near-duplicates
+    are handled conservatively.
+
+The goal: always return a grounded, private, and human-feeling response that
+prefers local-only processing and preserves auditability of learning events.
+"""
 
 import streamlit as st
 from pathlib import Path
 import os
 import base64
 import json
+import streamlit.components.v1 as components
+from datetime import datetime
+import urllib.request
+import shutil
+import logging
+
+logger = logging.getLogger(__name__)
+
+# When running in a fully-local processing mode, remove any remote-AI
+# provider keys from the process environment so downstream import-time
+# guards (and tests) do not accidentally detect them and attempt remote
+# calls. This is a safe, local-only convenience that respects the
+# `PROCESSING_MODE` env var and avoids changing behavior in deployed
+# environments where `PROCESSING_MODE` is not 'local'.
+try:
+    if os.environ.get('PROCESSING_MODE', 'local') == 'local':
+        for _k in ('OPENAI_API_KEY', 'STABILITY_API_KEY', 'REPLICATE_API_TOKEN'):
+            if _k in os.environ:
+                try:
+                    del os.environ[_k]
+                    logger.info(
+                        'Removed %s from environment for local mode', _k)
+                except Exception:
+                    pass
+except Exception:
+    # Defensive: never raise during import/setup
+    pass
+
+# Backwards-compatibility: if a newer Supabase "publishable" key is set,
+# map it to the legacy env var names used throughout the codebase so
+# edge functions and client code continue to find a value.
+try:
+    _pub_key = os.environ.get(
+        "SUPABASE_PUBLISHABLE_KEY") or os.environ.get("PUBLISHABLE_KEY")
+    if _pub_key:
+        if not os.environ.get("SUPABASE_ANON_KEY"):
+            os.environ["SUPABASE_ANON_KEY"] = _pub_key
+        if not os.environ.get("PROJECT_ANON_KEY"):
+            os.environ["PROJECT_ANON_KEY"] = _pub_key
+        try:
+            logger.info(
+                "Mapped SUPABASE_PUBLISHABLE_KEY to SUPABASE_ANON_KEY/PROJECT_ANON_KEY")
+        except Exception:
+            pass
+except Exception:
+    # Defensive: do not allow env-mapping failures to block startup
+    pass
+
+
+def ensure_nrc_lexicon():
+    """Ensure the full NRC lexicon file exists locally.
+
+    Behavior:
+    - If `data/lexicons/nrc_emotion_lexicon.txt` exists, do nothing.
+    - If not, and the environment variable `NRC_LEXICON_URL` is set,
+      attempt a safe download into `data/lexicons/`.
+    - If download fails, log a warning and continue (app still runs).
+    """
+    target = Path("data/lexicons/nrc_emotion_lexicon.txt")
+    bootstrap = Path("data/lexicons/nrc_emotion_lexicon_bootstrap.txt")
+
+    # If full lexicon already present, nothing to do
+    if target.exists():
+        logger.info("NRC lexicon present: %s", target)
+        return
+
+    # If no full lexicon but bootstrap exists, do nothing (loader will use bootstrap)
+    if bootstrap.exists():
+        logger.info("NRC bootstrap lexicon present: %s", bootstrap)
+        return
+
+    url = os.environ.get("NRC_LEXICON_URL")
+    if not url:
+        logger.info(
+            "NRC_LEXICON_URL not set; skipping download of NRC lexicon.")
+        return
+
+    try:
+        logger.info("Attempting to download NRC lexicon from %s", url)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        # Stream download to temporary file then atomically move
+        tmp = target.with_suffix(".tmp")
+        with urllib.request.urlopen(url, timeout=30) as resp, open(tmp, "wb") as out:
+            shutil.copyfileobj(resp, out)
+        tmp.replace(target)
+        logger.info("NRC lexicon downloaded to %s", target)
+    except Exception as e:
+        logger.warning("Failed to download NRC lexicon from %s: %s", url, e)
+        if tmp.exists():
+            try:
+                tmp.unlink()
+            except Exception:
+                pass
+        return
+
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
@@ -21,17 +144,19 @@ import json
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
     _logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
-            _page_icon = _logo_path.read_bytes()
+            svg_bytes = _logo_path.read_bytes()
+            import base64 as _base64
+            _page_icon = f"data:image/svg+xml;base64,{_base64.b64encode(svg_bytes).decode('ascii')}"
         except Exception:
             _page_icon = None
-    # Use bytes (image) if available, otherwise an emoji
+    # Use data URI (SVG) if available, otherwise an emoji
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon=_page_icon if _page_icon is not None else "🧠",
+        page_icon=_page_icon if _page_icon is not None else "FP",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -39,10 +164,46 @@ except Exception:
     # Ensure any failure here doesn't prevent the rest of the app from loading
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon="🧠",
+        page_icon="FP",
         layout="wide",
         initial_sidebar_state="expanded"
     )
+
+# Development reload marker removed. Temporary DEV timestamp and stdout
+# print were used during debugging and have been deleted.
+
+
+def safe_embed_html(content: str, height: int | None = None, use_iframe: bool = True) -> None:
+    """Embed HTML in a safer, isolated way when possible.
+
+    - Prefers `components.html` (iframe) to avoid leaking styles into the
+      parent Streamlit document. Falls back to `st.markdown(..., unsafe...)`
+      when iframe embedding is not appropriate or fails.
+
+    Parameters
+    - content: HTML/CSS/JS string to embed
+    - height: optional pixel height for the iframe. If None, a small
+      default will be used.
+    - use_iframe: when False, force fallback to `st.markdown`.
+    """
+    try:
+        if use_iframe:
+            # components.html isolates injected markup inside an iframe which
+            # prevents global CSS from leaking into the host app. Use scrolling
+            # so long style blocks won't be clipped.
+            components.html(content, height=height or 160, scrolling=True)
+            return
+    except Exception:
+        # If iframe embedding fails for any reason, fall back to markdown.
+        pass
+
+    # Fallback: inject as raw markdown (preserves previous behaviour)
+    try:
+        st.markdown(content, unsafe_allow_html=True)
+    except Exception:
+        # Last resort: print to STDOUT so diagnostics capture the output
+        print("[safe_embed_html] failed to embed content")
+
 
 # Quick maintenance mode: when MAINTENANCE_MODE=1 is set in the environment,
 # render a simple friendly maintenance page and stop further app execution.
@@ -77,7 +238,7 @@ except Exception:
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
     logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
@@ -96,6 +257,15 @@ except Exception:
 # output is written to debug_imports.log in the app directory and also printed
 # to stdout so deployment logs capture it.
 try:
+    # Try to ensure the NRC lexicon is available before loading modules that
+    # may perform emotion analysis on user messages. This is a no-op when
+    # the lexicon already exists or when `NRC_LEXICON_URL` is not set.
+    try:
+        ensure_nrc_lexicon()
+    except Exception:
+        # Don't allow lexicon download failures to prevent app startup.
+        logger.exception(
+            'ensure_nrc_lexicon() failed; continuing without full NRC lexicon')
     if os.environ.get('RUN_IMPORT_DIAG') == '1':
         import platform
         import importlib
@@ -153,13 +323,28 @@ except Exception:
     pass
 try:
     # Import both the primary renderer and the safe runtime wrapper (if present).
-    from emotional_os.deploy.modules.ui import (
-        render_main_app,
-        render_main_app_safe,
-        render_splash_interface,
-        delete_user_history_from_supabase,
-    )
-    from emotional_os.deploy.modules.auth import SaoynxAuthentication
+    # Use module imports + importlib.reload so Streamlit's re-run will pick up
+    # edits to these modules without requiring a full process restart.
+    import importlib
+    import emotional_os.deploy.modules.ui as _ui_module
+    import emotional_os.deploy.modules.auth as _auth_module
+
+    try:
+        importlib.reload(_ui_module)
+    except Exception:
+        # If reload fails, fall back to the already-imported module object.
+        pass
+
+    try:
+        importlib.reload(_auth_module)
+    except Exception:
+        pass
+
+    render_main_app = _ui_module.render_main_app
+    render_main_app_safe = _ui_module.render_main_app_safe
+    render_splash_interface = _ui_module.render_splash_interface
+    delete_user_history_from_supabase = _ui_module.delete_user_history_from_supabase
+    SaoynxAuthentication = _auth_module.SaoynxAuthentication
 except Exception:
     import traceback
     import sys
@@ -175,10 +360,19 @@ if 'initialized' not in st.session_state:
     st.session_state['theme_loaded'] = False
 
     # Initialize learning persistence
+    # Default to a local-only processing mode. The `scripts/local_integration`
+    # module exposes `get_processing_mode()` which prefers an environment
+    # override but otherwise returns 'local'. This disables hybrid/OpenAI
+    # behavior by default.
+    # Enforce local-only processing for the app frontend. Do not consult
+    # alternate processing modes or remote-AI flags here: the UI and
+    # engine are fixed to local behavior.
+    default_mode = 'local'
+
     st.session_state['learning_settings'] = {
-        'processing_mode': 'hybrid',  # Default to hybrid mode
-        'enable_learning': True,      # Enable learning by default
-        'persist_learning': True      # Enable persistence by default
+        'processing_mode': default_mode,
+        'enable_learning': True,
+        'persist_learning': True
     }
 
     # Create learning directories if they don't exist
@@ -188,7 +382,8 @@ if 'initialized' not in st.session_state:
 
 
 # Customize navigation text
-st.markdown("""
+# [safe_embed_html patch] replaced inline block at original location (Customize navigation text)
+safe_embed_html("""
     <style>
     div.st-emotion-cache-j7qwjs span.st-emotion-cache-6tkfeg {
         visibility: hidden;
@@ -202,11 +397,14 @@ st.markdown("""
         left: 0;
     }
     </style>
-""", unsafe_allow_html=True)
+""", height=120)
 
 # Remove stacked markdown blocks that only contain <style> tags (they create visible padding).
 # This script hides any element-container whose markdown child contains only a <style> element.
-st.markdown("""
+# [safe_embed_html patch - global script] replaced inline script block; this script needs to run in the
+# parent page (it manipulates the DOM outside any iframe), so we force the markdown fallback by
+# setting `use_iframe=False` when calling `safe_embed_html` so the behaviour remains unchanged.
+safe_embed_html("""
 <script>
 (function(){
     function removeStyleOnlyMarkdown(){
@@ -243,12 +441,13 @@ st.markdown("""
     observer.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=240)
 
 # Hide the top brand row (emoji + H1) when the app is embedded in certain layouts.
 # This prevents the duplicated header/title from rendering in pages where space is limited.
 # Targets the header H1 id and the adjacent emoji block.
-st.markdown("""
+# [safe_embed_html patch] replaced header-hide CSS block
+safe_embed_html("""
     <style>
     /* Hide specific header by id */
     /* Primary: hide the H1 Streamlit generates for the page header */
@@ -268,20 +467,23 @@ st.markdown("""
     /* Hide any horizontal block that contains the brand row to avoid layout shift */
     div[data-testid="stHorizontalBlock"] > div > div > div > div > div > div > div > h1 { display: none !important; }
     </style>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=140)
 
 # Target specific Streamlit-generated padding block class and reduce its top padding
-st.markdown("""
-    <style>
-    /* Reduce top padding on the large header container that pushes content down */
-    .st-emotion-cache-7tauuy { padding: 0rem 1rem 1rem !important; }
-    </style>
-""", unsafe_allow_html=True)
+# Target specific Streamlit-generated padding block and reduce its top padding
+# [safe_embed_html patch] replaced padding CSS block
+safe_embed_html("""
+            <style>
+            /* Reduce top padding on the large header container that pushes content down */
+            .st-emotion-cache-7tauuy { padding: 0rem 1rem 1rem !important; }
+            </style>
+        """, use_iframe=False, height=80)
 
 # Apply theme only if not already loaded for this session
 if not st.session_state.get('theme_loaded'):
     if st.session_state.get('theme') == 'Dark':
-        st.markdown("""
+        # [safe_embed_html patch] replaced dark-theme CSS block
+        safe_embed_html("""
             <style>
             body, .stApp {background-color: #0E1117; color: #FAFAFA;}
             .stButton>button {
@@ -290,9 +492,10 @@ if not st.session_state.get('theme_loaded'):
                 border: 1px solid #555;
             }
             </style>
-        """, unsafe_allow_html=True)
+        """, use_iframe=False, height=140)
     else:
-        st.markdown("""
+        # [safe_embed_html patch] replaced light-theme CSS block
+        safe_embed_html("""
             <style>
             body, .stApp {background-color: #FFFFFF; color: #31333F;}
             .stButton>button {
@@ -301,11 +504,13 @@ if not st.session_state.get('theme_loaded'):
                 border: 1px solid #E0E0E0;
             }
             </style>
-        """, unsafe_allow_html=True)
+        """, use_iframe=False, height=140)
     st.session_state['theme_loaded'] = True
 
 # Basic theme compatibility
-st.markdown("""
+# Basic theme compatibility
+# [safe_embed_html patch] replaced basic theme compatibility CSS
+safe_embed_html("""
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
@@ -315,10 +520,12 @@ st.markdown("""
         transition: all 0.2s ease;
     }
     </style>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=100)
 
 # Reduce font sizes in the sidebar for a denser layout
-st.markdown("""
+# Reduce font sizes in the sidebar for a denser layout
+# [safe_embed_html patch] replaced sidebar font-size CSS block
+safe_embed_html("""
     <style>
     /* Target the Streamlit sidebar container and reduce text sizes */
     [data-testid="stSidebar"] { font-size: 0.92rem !important; }
@@ -347,7 +554,7 @@ st.markdown("""
         padding: 6px 10px !important;
     }
     </style>
-""", unsafe_allow_html=True)
+""", use_iframe=False, height=220)
 
 # NOTE: the per-session/export download control was intentionally moved into
 # the Privacy & Consent panel (`render_consent_settings_panel`) to avoid
@@ -452,6 +659,94 @@ def main():
     if st.session_state.get('force_splash', False):
         render_splash_interface(auth)
         return
+
+    # Offer a small playful control in the main app area to trigger the
+    # Streamlit Dance Mode demo. We import lazily so deployments that don't
+    # include the demo won't fail, and render the controls in a compact
+    # centered column above the main app renderer.
+    try:
+        from demos.streamlit_dance_mode import dance_mode  # type: ignore
+    except Exception:
+        dance_mode = None
+
+    try:
+        ctrl_container = st.container()
+        with ctrl_container:
+            # Helper: show the Dance Mode control only when we detect a
+            # celebratory cue from recent local preprocessing, or when the
+            # environment explicitly allows always-on dance controls.
+            def _is_celebration() -> bool:
+                try:
+                    # Env override to force-show the control (useful for demo/debug)
+                    if os.environ.get('ALLOW_DANCE_ALWAYS') == '1':
+                        return True
+
+                    last_pre = st.session_state.get('last_preproc', {})
+                    if not isinstance(last_pre, dict):
+                        return False
+
+                    intent = (last_pre.get('intent') or '')
+                    if isinstance(intent, str) and intent.lower() in (
+                        'joy', 'joyful', 'happy', 'celebration', 'celebrate', 'excited'
+                    ):
+                        return True
+
+                    tags = last_pre.get('emotional_tags') or []
+                    for t in tags:
+                        try:
+                            if isinstance(t, str) and ('joy' in t.lower() or 'celebr' in t.lower()):
+                                return True
+                        except Exception:
+                            continue
+
+                    # No clear celebratory marker found
+                    return False
+                except Exception:
+                    return False
+
+            show_dance = _is_celebration()
+
+            # Compact centered column for the control (only render when celebratory)
+            if show_dance:
+                cols = st.columns([1, 2, 1])
+                with cols[1]:
+                    st.markdown("### Fun")
+                    try:
+                        gentle_mode = st.checkbox(
+                            "Gentle dance (no flashing)", value=True, key="dance_gentle_main")
+                        cycles = st.slider("Dance cycles", min_value=1,
+                                           max_value=20, value=6, key="dance_cycles_main")
+                        delay_s = st.slider(
+                            "Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5, key="dance_delay_main")
+                    except Exception:
+                        # If Streamlit widget creation fails for any reason, fall back to defaults
+                        gentle_mode = True
+                        cycles = 6
+                        delay_s = 0.5
+
+                    if st.button("Dance Mode 🕺", key="dance_button_main"):
+                        if dance_mode:
+                            try:
+                                dance_mode(cycles=cycles, delay_s=delay_s,
+                                           gentle_mode=gentle_mode)
+                            except Exception:
+                                st.warning(
+                                    "Dance Mode failed to run in this environment.")
+                        else:
+                            st.info(
+                                "Dance Mode demo not available in this deployment.")
+            else:
+                # If the control is hidden, keep a lightweight hint for demoers
+                # when the feature is intentionally suppressed.
+                cols = st.columns([1, 2, 1])
+                with cols[1]:
+                    st.markdown("### Fun")
+                    st.info(
+                        "Dance Mode appears on joyful moments (try saying you're excited)")
+
+    except Exception:
+        # Main-area controls must never block the main app; ignore errors.
+        pass
 
     # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
     try:

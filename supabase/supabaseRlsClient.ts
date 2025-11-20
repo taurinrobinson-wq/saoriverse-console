@@ -1,16 +1,26 @@
-import { createClient } from '@supabase/supabase-js';
+// Dynamically import the Supabase JS client (npm) so this module can run under
+// Deno with npm package resolution. Top-level await is used to fetch the
+// package if available.
+let createClient: any;
+try {
+    const supabasePkg = await import('npm:@supabase/supabase-js');
+    createClient = supabasePkg.createClient;
+} catch (err) {
+    console.error('Failed to import @supabase/supabase-js in supabaseRlsClient:', err);
+    throw err;
+}
 
 function getEnv() {
     // Works both in Deno (Edge Functions) and Node (server)
     if (typeof Deno !== 'undefined' && (Deno as any).env) {
         return {
             SUPABASE_URL: Deno.env.get('SUPABASE_URL') || '',
-            SUPABASE_ANON_KEY: Deno.env.get('PROJECT_ANON_KEY') || Deno.env.get('SUPABASE_ANON_KEY') || ''
+            SUPABASE_ANON_KEY: Deno.env.get('SUPABASE_PUBLISHABLE_KEY') ?? Deno.env.get('PUBLISHABLE_KEY') ?? Deno.env.get('PROJECT_ANON_KEY') || Deno.env.get('SUPABASE_ANON_KEY') || ''
         };
     }
     return {
         SUPABASE_URL: process.env.SUPABASE_URL || '',
-        SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
+        SUPABASE_ANON_KEY: process.env.SUPABASE_PUBLISHABLE_KEY || process.env.PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
     };
 }
 

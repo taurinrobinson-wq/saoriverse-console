@@ -1,0 +1,96 @@
+{
+  "experiencing + grief + joy + this": {
+    "emotions": [
+      "experiencing",
+      "grief",
+      "joy",
+      "this"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "profound"
+    ],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.621256+00:00",
+    "last_seen": "2025-11-20T17:46:01.107761+00:00"
+  },
+  "grief + joy": {
+    "emotions": [
+      "joy",
+      "grief"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "profound"
+    ],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.621272+00:00",
+    "last_seen": "2025-11-20T17:46:01.107772+00:00"
+  },
+  "ache + connection + flow": {
+    "emotions": [
+      "ache",
+      "connection",
+      "flow"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "sacred"
+    ],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.626633+00:00",
+    "last_seen": "2025-11-20T17:46:01.108198+00:00"
+  },
+  "clarity + overwhelmed + this": {
+    "emotions": [
+      "clarity",
+      "overwhelmed",
+      "this"
+    ],
+    "intensity": 0.5,
+    "context_words": [],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.627265+00:00",
+    "last_seen": "2025-11-20T17:46:01.108911+00:00"
+  },
+  "feeling + joy + this": {
+    "emotions": [
+      "feeling",
+      "joy",
+      "this"
+    ],
+    "intensity": 0.5,
+    "context_words": [],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.628377+00:00",
+    "last_seen": "2025-11-20T17:46:01.109894+00:00"
+  },
+  "flow + peace + stillness": {
+    "emotions": [
+      "flow",
+      "peace",
+      "stillness"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "flowing"
+    ],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.628949+00:00",
+    "last_seen": "2025-11-20T17:46:01.110364+00:00"
+  },
+  "flow + strength + touched + vulnerability + weakness": {
+    "emotions": [
+      "flow",
+      "strength",
+      "touched",
+      "vulnerability",
+      "weakness"
+    ],
+    "intensity": 0.5,
+    "context_words": [],
+    "frequency": 176,
+    "first_seen": "2025-11-11T07:38:52.629580+00:00",
+    "last_seen": "2025-11-20T17:46:01.110836+00:00"
+  }
+}

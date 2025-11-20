@@ -33,7 +33,8 @@ function getCorsHeaders(req: any) {
 }
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY");
+const SUPABASE_PUBLISHABLE_KEY = Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? Deno.env.get("PUBLISHABLE_KEY");
+const SUPABASE_ANON_KEY = SUPABASE_PUBLISHABLE_KEY ?? (Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY"));
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 
@@ -55,20 +56,51 @@ const QUICK_RESPONSES: Record<string, string> = {
 };
 
 // User Authentication Functions
-async function validateUserSession(authHeader: string, admin: any): Promise<{ valid: boolean, userId?: string }> {
+async function validateUserSession(authHeader: string, adminClient: any): Promise<{ valid: boolean, userId?: string }> {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return { valid: false };
   }
 
   try {
-    // Extract user info from auth header or session token
-    // For now, we'll use a simple session validation
-    const sessionToken = authHeader.replace("Bearer ", "");
+    const token = authHeader.replace("Bearer ", "");
 
-    // In production, validate session token against users table
-    // For demo, we'll extract user_id from the token (implement proper JWT later)
+    // Parse custom token format: base64payload.signature
+    const parts = token.split('.');
+    if (parts.length !== 2) {
+      return { valid: false };
+    }
 
-    return { valid: true, userId: "demo_user" }; // Placeholder
+    const [payloadB64, signature] = parts;
+    const payload = JSON.parse(atob(payloadB64));
+
+    // Validate token structure
+    if (!payload.user_id || !payload.issued_at || !payload.expires_at) {
+      return { valid: false };
+    }
+
+    // Check expiration
+    if (Date.now() > payload.expires_at) {
+      return { valid: false };
+    }
+
+    // Validate signature (simple check)
+    const expectedSignature = btoa(payload.user_id + '_' + payload.issued_at);
+    if (signature !== expectedSignature) {
+      return { valid: false };
+    }
+
+    // Verify user exists in database
+    const { data: user, error } = await adminClient
+      .from('users')
+      .select('id, username')
+      .eq('id', payload.user_id)
+      .single();
+
+    if (error || !user) {
+      return { valid: false };
+    }
+
+    return { valid: true, userId: user.id };
   } catch (err) {
     console.error("Session validation error:", err);
     return { valid: false };

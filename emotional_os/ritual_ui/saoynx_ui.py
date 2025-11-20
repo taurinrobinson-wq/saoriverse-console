@@ -321,7 +321,7 @@ class SaoynxAuthentication:
                         "/static/graphics/FirstPerson-Logo-normalized.svg", width=40)
                 except Exception:
                     st.markdown(
-                        '<div style="font-size: 1.5rem;">🧠</div>', unsafe_allow_html=True)
+                        '<div style="font-size: 1.5rem;">FP</div>', unsafe_allow_html=True)
 
             # Center column: questions and action buttons
             with col2:
@@ -506,8 +506,9 @@ def render_main_app():
             st.session_state['prefer_ai'] = True
 
         with col1:
-            mode_options = ["hybrid", "local"]
-            current = st.session_state.get('processing_mode', 'hybrid')
+            # Local-first: only local processing exposed in the UI by default
+            mode_options = ["local"]
+            current = st.session_state.get('processing_mode', 'local')
             try:
                 idx = mode_options.index(current)
             except ValueError:
@@ -516,7 +517,7 @@ def render_main_app():
                 "Processing Mode",
                 mode_options,
                 index=idx,
-                help="Hybrid: Best performance, Local: Maximum privacy"
+                help="Local: Maximum privacy — remote AI is disabled by default",
             )
 
         with col2:
