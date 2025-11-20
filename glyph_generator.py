@@ -1,15 +1,11 @@
-"""Top-level compatibility shim for the glyph generator.
+"""Compatibility shim for tests and legacy imports.
 
-Some tests and scripts import `glyph_generator` from the repository root. The
-actual implementation lives under `scripts/utilities/`. Re-export the main
-symbols here so legacy imports continue to work in CI/test environments.
+Some tests and modules import `GlyphGenerator` from the top-level
+`glyph_generator` module. The canonical implementation lives in
+`emotional_os.glyphs.glyph_generator`. Re-export the class here to
+avoid NameError regressions and preserve backward compatibility.
 """
-try:
-    from scripts.utilities.glyph_generator import GlyphGenerator, NewGlyph  # type: ignore
-except Exception:
-    # Tests should handle GlyphGenerator being None if the environment
-    # intentionally lacks full dependencies.
-    GlyphGenerator = None
-    NewGlyph = None
 
-__all__ = ["GlyphGenerator", "NewGlyph"]
+from emotional_os.glyphs.glyph_generator import GlyphGenerator  # noqa: F401
+
+__all__ = ["GlyphGenerator"]
