@@ -101,8 +101,8 @@ class LearningResponseGenerator:
             ],
 
             "unknown": [
-                # Pattern 1: Sit with mystery
-                "You're in territory without a map. The {emotional_term} you're feeling—that's what it's like to be in the unknown. It's appropriate.",
+                # Pattern 1: Sit with mystery (simplified)
+                "This feels uncertain — that's okay.",
 
                 # Pattern 2: Trust the process
                 "Not every feeling has a name yet. The {emotional_term} is part of your education. Let it teach you about yourself.",
@@ -125,20 +125,21 @@ class LearningResponseGenerator:
         1. Answers the user
         2. Subtly trains the glyph
         3. Validates emotional language
-        
+
         Args:
             glyph_candidate: The newly generated glyph
             original_input: The user's original input
             emotional_tone: Primary emotional tone detected
             emotional_terms: Extracted emotional language patterns
             nrc_analysis: NRC emotion analysis
-        
+
         Returns:
             A crafted response that trains while responding
         """
 
         # 1. Get base response pattern for this tone
-        patterns = self.response_patterns.get(emotional_tone, self.response_patterns["unknown"])
+        patterns = self.response_patterns.get(
+            emotional_tone, self.response_patterns["unknown"])
         response_template = patterns[0]  # Use first pattern (could randomize)
 
         # 2. Extract key emotional term for insertion
@@ -182,15 +183,15 @@ class LearningResponseGenerator:
             return primary.lower()
 
         # Extract any significant word from input (excluding generic/modifier words)
-        exclude_words = {'feel', 'feeling', 'felt', 'emotion', 'emotions', 'think', 'thought', 
-                        'little', 'really', 'very', 'quite', 'so', 'just', 'about', 'kind',
-                        'sort', 'like', 'somehow', 'seem', 'seems', 'maybe'}
-        words = [w.lower().strip('.,!?') for w in text.split() 
+        exclude_words = {'feel', 'feeling', 'felt', 'emotion', 'emotions', 'think', 'thought',
+                         'little', 'really', 'very', 'quite', 'so', 'just', 'about', 'kind',
+                         'sort', 'like', 'somehow', 'seem', 'seems', 'maybe'}
+        words = [w.lower().strip('.,!?') for w in text.split()
                  if len(w) > 4 and w.lower() not in exclude_words]
-        
+
         if words:
             return words[0]
-        
+
         # Ultimate fallback
         return "what you're experiencing"
 
@@ -215,6 +216,7 @@ class LearningResponseGenerator:
             "unknown": "\n\nCan you sit with the not-knowing for a moment?"
         }
 
+        # Default to a short, open prompt that's easy to read and act on.
         return prompts.get(emotional_tone, "\n\nWhat comes next for you?")
 
     def generate_multi_glyph_response(
@@ -258,7 +260,7 @@ class LearningResponseGenerator:
         """
         When a glyph is insufficient (lacks complete gate mapping),
         generate response that bridges existing glyphs with new territory.
-        
+
         This response trains by:
         1. Validating what IS known (existing glyphs)
         2. Honoring what's NOT (new territory)
@@ -313,7 +315,7 @@ class LearningResponseGenerator:
     ) -> str:
         """
         Generate response where the structure itself teaches gate mapping.
-        
+
         Example: If gate = 4 (high intensity), response will emphasize
         intensity, urgency, and transformative power.
         """
