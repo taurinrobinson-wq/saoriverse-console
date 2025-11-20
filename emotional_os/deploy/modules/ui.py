@@ -54,80 +54,74 @@ def _load_inline_svg(filename: str) -> str:
 
     If the file cannot be read, returns a small fallback SVG string.
     """
-    if filename in _SVG_CACHE:
-        return _SVG_CACHE[filename]
-
-    # Try package-local graphics folder first, then repo-root static/graphics
-    pkg_path = os.path.join(os.path.dirname(__file__),
-                            "static", "graphics", filename)
-    repo_path = os.path.join("static", "graphics", filename)
-    tried_path = None
     try:
-        # Pick the first existing candidate path
-        if os.path.exists(pkg_path):
-            tried_path = pkg_path
-        elif os.path.exists(repo_path):
-            tried_path = repo_path
-        else:
-            tried_path = pkg_path  # will raise when attempting to open
-
-        # Read the SVG file and sanitize/remove XML declaration or DOCTYPE
-        with open(tried_path, "r", encoding="utf-8") as f:
-            svg = f.read()
-        if svg.lstrip().startswith('<?xml'):
-            svg = '\n'.join(svg.splitlines()[1:])
-        if '<!DOCTYPE' in svg:
-            parts = svg.split('<!DOCTYPE')
-            if len(parts) > 1 and '>' in parts[1]:
-                svg = parts[0] + parts[1].split('>', 1)[1]
-
-        # Cache and return raw markup only (no Streamlit calls here)
-        _SVG_CACHE[filename] = svg
-    except Exception as e:
-        # Return an empty string as a safe fallback so callers that
-        # embed this markup into HTML do not pass `None` into
-        # Streamlit's rendering pipeline (which can cause client-side
-        # DOM errors).
+        # Ensure session store exists and handle missing helper gracefully
         try:
-            st.warning(f"Could not load SVG: {e}")
+            _init_feedback_store()
+        except Exception:
+            # If the init helper isn't available, bail out silently
+            if 'feedback_log' not in st.session_state:
+                return
+
+        fb = st.session_state.get('feedback_log', [])
+        if not fb:
+            st.info("No feedback recorded this session.")
+            return
+
+        # Aggregate by conversation_key
+        by_conv = {}
+        for e in fb:
+            c = e.get('conversation_key', 'session') or 'session'
+            entry = by_conv.setdefault(c, {'up': 0, 'down': 0, 'examples': []})
+            if e.get('direction') == 'up':
+                entry['up'] += 1
+            elif e.get('direction') == 'down':
+                entry['down'] += 1
+            # keep a short example for context
+            if len(entry['examples']) < 3:
+                entry['examples'].append(
+                    {'msg_id': e.get('msg_id'), 'direction': e.get('direction'), 'ts': e.get('ts')})
+
+        total_up = sum(v['up'] for v in by_conv.values())
+        total_down = sum(v['down'] for v in by_conv.values())
+
+        st.markdown("**Feedback Analytics (session)**")
+        st.markdown(f"- Total 👍: **{total_up}**   - Total 👎: **{total_down}**")
+        st.markdown("---")
+
+        # Show per-conversation summary, highlight negative ones
+        for conv, stats in sorted(by_conv.items(), key=lambda x: (-(x[1]['down'] - x[1]['up']), - (x[1]['up']+x[1]['down']))):
+            up = stats['up']
+            down = stats['down']
+            label = conv if conv != 'session' else 'Current Session'
+            # Highlight when downs exceed ups
+            if down > up:
+                st.markdown(
+                    f"<div style='padding:8px;border-radius:8px;background:#fff6f6;border:1px solid #f5c6cb;'>**{label}** — 👍 {up}  👎 {down}</div>", unsafe_allow_html=True)
+            else:
+                st.markdown(f"**{label}** — 👍 {up}  👎 {down}")
+
+            # show small examples
+            try:
+                with st.expander("Examples", expanded=False):
+                    for ex in stats.get('examples', []):
+                        ts = ex.get('ts') or ''
+                        mid = ex.get('msg_id') or ''
+                        dirc = ex.get('direction') or ''
+                        st.write(f"- {dirc} — {mid} — {ts}")
+            except Exception:
+                pass
+
+        # Quick actions: clear session feedback
+        try:
+            if st.button("Clear session feedback", key="clear_feedback_btn"):
+                st.session_state['feedback_log'] = []
+                st.success("Session feedback cleared")
         except Exception:
             pass
-        _SVG_CACHE[filename] = ""
-    return _SVG_CACHE.get(filename, "")
-
-
-def _svg_or_emoji_div(svg_name: str = 'FirstPerson-Logo-black-cropped_notext.svg', style: str = None) -> str:
-    """Return inline SVG markup wrapped in a div if available, otherwise an emoji fallback.
-
-    This centralizes the small fallback logic so callers prefer an inline
-    SVG asset but still render a harmless emoji when the SVG is missing.
-    """
-    try:
-        svg = _load_inline_svg(svg_name)
     except Exception:
-        svg = ""
-    if svg:
-        if style:
-            return f"<div style=\"{style}\">{svg}</div>"
-        return f"<div>{svg}</div>"
-    # conservative text fallback when no SVG markup is available
-    # Use a bolded 'FP' as a neutral, brand-consistent fallback instead of an emoji
-    safe_style = style or "display:inline-block;font-size:1.25rem;vertical-align:middle;font-weight:700"
-    return f"<div style=\"{safe_style}\"><strong>FP</strong></div>"
-
-
-def inject_css(css_path: str) -> None:
-    """Inject a CSS file into the Streamlit app.
-
-    The function attempts to read the CSS from a package-local path
-    (relative to this module) first, then falls back to the repository
-    root `static` folder. If the file can't be read, the function fails
-    silently (best-effort) to avoid breaking the UI during import.
-    """
-    try:
-        # Try package-local path first, then repo-root path
-        pkg_path = os.path.join(os.path.dirname(__file__), css_path)
-        repo_path = css_path
+        # Do not let analytics break sidebar
+        return
         chosen = None
         if os.path.exists(pkg_path):
             chosen = pkg_path
@@ -665,12 +659,25 @@ def render_feedback_sidebar():
         return
 
     try:
+
+
+<< << << < HEAD
         # Ensure session store exists
         try:
             _init_feedback_store()
         except Exception:
             pass
 
+== == == =
+        _init_feedback_store()
+    except Exception:
+        # If init helper isn't available, try to continue; missing store
+        # means nothing to show.
+        if 'feedback_log' not in st.session_state:
+            return
+
+    try:
+>>>>>>> feat/ui-minor-20251120-061430
         fb = st.session_state.get('feedback_log', [])
         if not fb:
             st.info("No feedback recorded this session.")
@@ -685,6 +692,10 @@ def render_feedback_sidebar():
                 entry['up'] += 1
             elif e.get('direction') == 'down':
                 entry['down'] += 1
+<<<<<<< HEAD
+=======
+            # keep a short example for context
+>>>>>>> feat/ui-minor-20251120-061430
             if len(entry['examples']) < 3:
                 entry['examples'].append(
                     {'msg_id': e.get('msg_id'), 'direction': e.get('direction'), 'ts': e.get('ts')})
@@ -696,16 +707,29 @@ def render_feedback_sidebar():
         st.markdown(f"- Total 👍: **{total_up}**   - Total 👎: **{total_down}**")
         st.markdown("---")
 
+<<<<<<< HEAD
         for conv, stats in sorted(by_conv.items(), key=lambda x: (-(x[1]['down'] - x[1]['up']), -(x[1]['up']+x[1]['down']))):
             up = stats['up']
             down = stats['down']
             label = conv if conv != 'session' else 'Current Session'
+=======
+        # Show per-conversation summary, highlight negative ones
+        for conv, stats in sorted(by_conv.items(), key=lambda x: (-(x[1]['down'] - x[1]['up']), - (x[1]['up']+x[1]['down']))):
+            up = stats['up']
+            down = stats['down']
+            label = conv if conv != 'session' else 'Current Session'
+            # Highlight when downs exceed ups
+>>>>>>> feat/ui-minor-20251120-061430
             if down > up:
                 st.markdown(
                     f"<div style='padding:8px;border-radius:8px;background:#fff6f6;border:1px solid #f5c6cb;'>**{label}** — 👍 {up}  👎 {down}</div>", unsafe_allow_html=True)
             else:
                 st.markdown(f"**{label}** — 👍 {up}  👎 {down}")
 
+<<<<<<< HEAD
+=======
+            # show small examples
+>>>>>>> feat/ui-minor-20251120-061430
             try:
                 with st.expander("Examples", expanded=False):
                     for ex in stats.get('examples', []):
@@ -716,6 +740,10 @@ def render_feedback_sidebar():
             except Exception:
                 pass
 
+<<<<<<< HEAD
+=======
+        # Quick actions: clear session feedback
+>>>>>>> feat/ui-minor-20251120-061430
         try:
             if st.button("Clear session feedback", key="clear_feedback_btn"):
                 st.session_state['feedback_log'] = []
@@ -723,6 +751,10 @@ def render_feedback_sidebar():
         except Exception:
             pass
     except Exception:
+<<<<<<< HEAD
+=======
+        # Do not let analytics break sidebar
+>>>>>>> feat/ui-minor-20251120-061430
         return
 
 
@@ -1515,6 +1547,12 @@ def render_main_app():
                     'persist_history': bool(st.session_state.get('persist_history', False)),
                     'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
                 })
+        except Exception:
+            pass
+
+        # Optional feedback analytics sidebar (developer opt-in)
+        try:
+            render_feedback_sidebar()
         except Exception:
             pass
 
