@@ -1693,10 +1693,10 @@ def render_main_app():
                     col_up, col_down, col_spacer = st.columns(
                         [1, 1, 6], gap="small")
                     with col_up:
-                        if st.button("👍", key=f"fb_up_{msg_id}"):
+                        if st.button("👍", help="Helpful", key=f"fb_up_{msg_id}"):
                             handle_feedback(msg_id, "up", conversation_key)
                     with col_down:
-                        if st.button("👎", key=f"fb_down_{msg_id}"):
+                        if st.button("👎", help="Needs improvement", key=f"fb_down_{msg_id}"):
                             handle_feedback(msg_id, "down", conversation_key)
                     # Show simple aggregate counts
                     up_ct, down_ct = feedback_counts_for(msg_id)
