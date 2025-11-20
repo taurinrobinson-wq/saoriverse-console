@@ -1571,6 +1571,20 @@ def render_main_app():
         display_name = st.session_state.get(
             'first_name') or st.session_state.get('username')
         st.write(f"Welcome back, **{display_name}**! 👋")
+        try:
+            # Show the current git branch in the UI when available to make
+            # it easy for developers in Codespaces to confirm which branch
+            # they're editing. This is a harmless, best-effort helper and
+            # will silently do nothing if `git` isn't available.
+            import subprocess
+            branch = subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stderr=subprocess.DEVNULL
+            ).decode().strip()
+            if branch:
+                st.caption(f"Branch: {branch}")
+        except Exception:
+            # Ignore any errors (no git in runtime, permission issues, etc.)
+            pass
     with col2:
         # Settings panel is rendered in the sidebar expander
         try:
