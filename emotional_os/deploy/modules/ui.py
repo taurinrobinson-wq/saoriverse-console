@@ -665,14 +665,12 @@ def render_feedback_sidebar():
         return
 
     try:
-        _init_feedback_store()
-    except Exception:
-        # If init helper isn't available, try to continue; missing store
-        # means nothing to show.
-        if 'feedback_log' not in st.session_state:
-            return
+        # Ensure session store exists
+        try:
+            _init_feedback_store()
+        except Exception:
+            pass
 
-    try:
         fb = st.session_state.get('feedback_log', [])
         if not fb:
             st.info("No feedback recorded this session.")
@@ -687,7 +685,6 @@ def render_feedback_sidebar():
                 entry['up'] += 1
             elif e.get('direction') == 'down':
                 entry['down'] += 1
-            # keep a short example for context
             if len(entry['examples']) < 3:
                 entry['examples'].append(
                     {'msg_id': e.get('msg_id'), 'direction': e.get('direction'), 'ts': e.get('ts')})
@@ -699,19 +696,16 @@ def render_feedback_sidebar():
         st.markdown(f"- Total 👍: **{total_up}**   - Total 👎: **{total_down}**")
         st.markdown("---")
 
-        # Show per-conversation summary, highlight negative ones
-        for conv, stats in sorted(by_conv.items(), key=lambda x: (-(x[1]['down'] - x[1]['up']), - (x[1]['up']+x[1]['down']))):
+        for conv, stats in sorted(by_conv.items(), key=lambda x: (-(x[1]['down'] - x[1]['up']), -(x[1]['up']+x[1]['down']))):
             up = stats['up']
             down = stats['down']
             label = conv if conv != 'session' else 'Current Session'
-            # Highlight when downs exceed ups
             if down > up:
                 st.markdown(
                     f"<div style='padding:8px;border-radius:8px;background:#fff6f6;border:1px solid #f5c6cb;'>**{label}** — 👍 {up}  👎 {down}</div>", unsafe_allow_html=True)
             else:
                 st.markdown(f"**{label}** — 👍 {up}  👎 {down}")
 
-            # show small examples
             try:
                 with st.expander("Examples", expanded=False):
                     for ex in stats.get('examples', []):
@@ -722,7 +716,6 @@ def render_feedback_sidebar():
             except Exception:
                 pass
 
-        # Quick actions: clear session feedback
         try:
             if st.button("Clear session feedback", key="clear_feedback_btn"):
                 st.session_state['feedback_log'] = []
@@ -730,7 +723,6 @@ def render_feedback_sidebar():
         except Exception:
             pass
     except Exception:
-        # Do not let analytics break sidebar
         return
 
 
@@ -1523,12 +1515,6 @@ def render_main_app():
                     'persist_history': bool(st.session_state.get('persist_history', False)),
                     'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
                 })
-        except Exception:
-            pass
-
-        # Optional feedback analytics sidebar (developer opt-in)
-        try:
-            render_feedback_sidebar()
         except Exception:
             pass
 
