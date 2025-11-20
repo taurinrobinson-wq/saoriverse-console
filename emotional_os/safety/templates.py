@@ -6,10 +6,10 @@ class SanctuaryTemplates:
 
     @staticmethod
     def compassionate_acknowledgment(tone: Optional[str] = None) -> str:
-        # Minimal acknowledgment retained (short and non-repetitive).
-        # This replaces the previous long paragraph while keeping a
-        # concise framing for non-compassionate responses.
-        return "What you're sharing matters."
+        # Minimal acknowledgment: keep this empty to avoid repeating a
+        # preamble that users found distracting. Specific compassionate
+        # phrasing is handled by dynamic composers when appropriate.
+        return ""
 
     @staticmethod
     def gentle_boundaries() -> str:
