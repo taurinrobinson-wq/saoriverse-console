@@ -23,6 +23,53 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest
 
+      # Download canonical glyph DB artifact so CI can run even when the
+      # database file is .gitignored locally. Preferred options:
+      # - Provide a direct download URL in repository secret `GLYPH_DB_URL` (fast)
+      # - Or upload `glyphs.db` as a GitHub release asset named by `GLYPH_DB_ASSET_NAME`
+      #   and set `GLYPH_DB_RELEASE_TAG` (defaults to 'latest').
+      # To update the canonical DB, replace the release asset or update the secret URL.
+      - name: Fetch canonical glyph DB artifact
+        env:
+          GLYPH_DB_URL: ${{ secrets.GLYPH_DB_URL }}
+          GLYPH_DB_ASSET_NAME: ${{ secrets.GLYPH_DB_ASSET_NAME || 'glyphs.db' }}
+          GLYPH_DB_RELEASE_TAG: ${{ secrets.GLYPH_DB_RELEASE_TAG || 'latest' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p emotional_os/glyphs
+          # If a direct URL is provided via secret, use it (supports signed URLs).
+          if [ -n "${GLYPH_DB_URL:-}" ]; then
+            echo "Downloading glyph DB from secret URL..."
+            curl -fsSL "$GLYPH_DB_URL" -o emotional_os/glyphs/glyphs.db
+            echo "Saved glyph DB to emotional_os/glyphs/glyphs.db"
+            exit 0
+          fi
+
+          # Otherwise attempt to download from this repo's releases using the API.
+          TAG="${GLYPH_DB_RELEASE_TAG:-latest}"
+          ASSET_NAME="${GLYPH_DB_ASSET_NAME:-glyphs.db}"
+          echo "No direct URL provided; attempting to download release asset '$ASSET_NAME' (tag=$TAG)"
+          apt-get update -y && apt-get install -y jq ca-certificates curl >/dev/null
+
+          if [ "$TAG" = "latest" ]; then
+            api_url="https://api.github.com/repos/${{ github.repository }}/releases/latest"
+          else
+            api_url="https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG"
+          fi
+
+          echo "Querying releases API: $api_url"
+          assets_api=$(curl -sS -H "Authorization: token $GITHUB_TOKEN" "$api_url")
+          asset_url=$(echo "$assets_api" | jq -r --arg name "$ASSET_NAME" '.assets[] | select(.name==$name) | .url' )
+          if [ -z "$asset_url" ] || [ "$asset_url" = "null" ]; then
+            echo "No release asset named '$ASSET_NAME' found for tag '$TAG' in ${GITHUB_REPOSITORY:-${{ github.repository }}}"
+            exit 1
+          fi
+
+          echo "Found asset URL; downloading..."
+          curl -sSL -H "Accept: application/octet-stream" -H "Authorization: token $GITHUB_TOKEN" "$asset_url" -o emotional_os/glyphs/glyphs.db
+          echo "Saved glyph DB to emotional_os/glyphs/glyphs.db"
+
       - name: Run glyph DB strict check
         run: |
           python3 scripts/check_glyph_db.py --strict --show-counts
