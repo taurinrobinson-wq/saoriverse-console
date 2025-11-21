@@ -360,6 +360,16 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
 
+    # Respect local guard: avoid accidental external calls when remote AI is disabled
+    try:
+        from emotional_os.local_config import USE_REMOTE_AI
+    except Exception:
+        USE_REMOTE_AI = False
+
+    if not USE_REMOTE_AI:
+        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement disabled by local configuration)"
+        return response, {}, local_analysis
+
     if not saori_url or not supabase_key:
         response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
         return response, {}, local_analysis
