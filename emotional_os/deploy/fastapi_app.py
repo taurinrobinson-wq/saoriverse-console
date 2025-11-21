@@ -8,6 +8,7 @@ import json
 import os
 import secrets
 from datetime import datetime, timedelta
+import uuid
 
 import requests
 import uvicorn
@@ -15,7 +16,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
@@ -88,6 +89,32 @@ SUPABASE_AUTH_URL = os.getenv(
 CURRENT_SAORI_URL = os.getenv(
     "CURRENT_SAORI_URL") or os.getenv("SUPABASE_FUNCTION_URL")
 SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(32))
+# Development debug flag: when set, return more descriptive error messages
+# and include masked response bodies in debug logs. Default is off in prod.
+DEBUG_DEV = os.getenv("FP_DEBUG_UI", os.getenv("DEV", "0")) == "1"
+
+
+def _mask_text(s, max_len=1000):
+    try:
+        if s is None:
+            return None
+        st = str(s)
+        if len(st) > max_len:
+            return st[:max_len] + "..."
+        return st
+    except Exception:
+        return "<unserializable>"
+
+
+def _is_valid_uuid(val: str) -> bool:
+    """Return True if val is a valid UUID string."""
+    if not val:
+        return False
+    try:
+        uuid.UUID(str(val))
+        return True
+    except Exception:
+        return False
 
 # Pydantic models
 
@@ -180,9 +207,18 @@ class FirstPersonAuth:
                         "username": username
                     }
                 return {"success": False, "message": "Invalid credentials"}
+            # include masked response body in debug mode to aid development
+            if DEBUG_DEV:
+                try:
+                    body = response.json()
+                except Exception:
+                    body = _mask_text(getattr(response, 'text', None), 2000)
+                return {"success": False, "message": "Authentication service error", "debug_body": body}
             return {"success": False, "message": "Authentication service error"}
 
         except Exception as e:
+            if DEBUG_DEV:
+                return {"success": False, "message": f"Login error: {str(e)}", "debug_exception": _mask_text(str(e), 2000)}
             return {"success": False, "message": f"Login error: {str(e)}"}
 
     @staticmethod
@@ -208,9 +244,17 @@ class FirstPersonAuth:
             if response.status_code == 200:
                 data = response.json()
                 return {"success": data.get("success"), "message": data.get("error", "Account created")}
+            if DEBUG_DEV:
+                try:
+                    body = response.json()
+                except Exception:
+                    body = _mask_text(getattr(response, 'text', None), 2000)
+                return {"success": False, "message": "Failed to create account", "debug_body": body}
             return {"success": False, "message": "Failed to create account"}
 
         except Exception as e:
+            if DEBUG_DEV:
+                return {"success": False, "message": f"Registration error: {str(e)}", "debug_exception": _mask_text(str(e), 2000)}
             return {"success": False, "message": f"Registration error: {str(e)}"}
 
 # Routes
@@ -254,6 +298,10 @@ async def login(login_data: LoginRequest):
             "user_id": result["user_id"],
             "username": result["username"]
         }
+    # In dev mode return a JSON debug payload, otherwise raise standard HTTP error
+    if DEBUG_DEV:
+        debug_info = result.get("debug_body") or result.get("debug_exception")
+        return JSONResponse(status_code=401, content={"success": False, "message": result["message"], "debug": debug_info})
     raise HTTPException(status_code=401, detail=result["message"])
 
 
@@ -274,6 +322,9 @@ async def register(register_data: RegisterRequest):
 
     if result["success"]:
         return {"success": True, "message": "Account created successfully"}
+    if DEBUG_DEV:
+        debug_info = result.get("debug_body") or result.get("debug_exception")
+        return JSONResponse(status_code=400, content={"success": False, "message": result["message"], "debug": debug_info})
     raise HTTPException(status_code=400, detail=result["message"])
 
 
@@ -282,13 +333,31 @@ async def chat(chat_data: ChatRequest):
     """Process chat message with AI"""
     # Structured tracing/logging for debugging message flows
     saori_url = CURRENT_SAORI_URL or f"{SUPABASE_URL}/functions/v1/saori-fixed"
+    # Build the outgoing payload so we can log/inspect it when debugging
+    payload = {
+        "message": chat_data.message,
+        "mode": chat_data.mode,
+        "user_id": chat_data.user_id
+    }
+
     trace_entry = {
         "ts": datetime.utcnow().isoformat() + 'Z',
         "user_id": chat_data.user_id,
         "mode": chat_data.mode,
         "message_preview": (chat_data.message[:200] + '...') if len(chat_data.message) > 200 else chat_data.message,
         "saori_url": saori_url,
+        "request_payload": _mask_text(json.dumps(payload, ensure_ascii=False), 2000)
     }
+
+    # Quick validation: if user_id is not a UUID, fail fast in debug mode to make the error visible
+    if not _is_valid_uuid(chat_data.user_id):
+        if DEBUG_DEV:
+            return {
+                "success": False,
+                "reply": "Invalid user_id format (expected UUID).",
+                "debug": {"user_id": chat_data.user_id, "request_payload": trace_entry.get("request_payload")}
+            }
+        return {"success": False, "reply": "Invalid request."}
 
     start = datetime.utcnow()
     try:
@@ -298,11 +367,7 @@ async def chat(chat_data: ChatRequest):
                 "Authorization": f"Bearer {SUPABASE_KEY}",
                 "Content-Type": "application/json"
             },
-            json={
-                "message": chat_data.message,
-                "mode": chat_data.mode,
-                "user_id": chat_data.user_id
-            },
+            json=payload,
             timeout=30
         )
 
@@ -315,7 +380,13 @@ async def chat(chat_data: ChatRequest):
         try:
             result = response.json()
         except Exception:
+            # If parsing JSON failed, capture raw text when in debug mode.
             result = None
+            raw_text = None
+            try:
+                raw_text = response.text
+            except Exception:
+                raw_text = None
 
         trace_entry["response_preview"] = None
         if isinstance(result, dict):
@@ -324,6 +395,11 @@ async def chat(chat_data: ChatRequest):
                 "glyph": result.get('glyph'),
                 "processing_time": result.get('processing_time')
             }
+        else:
+            # when no JSON result, include masked raw text in debug mode
+            if DEBUG_DEV:
+                trace_entry["response_preview"] = {
+                    "raw": _mask_text(getattr(response, 'text', None), 2000)}
 
         # append trace to log file
         try:
@@ -346,6 +422,19 @@ async def chat(chat_data: ChatRequest):
                 "processing_time": result.get("processing_time", 0)
             }
 
+        # Non-200 from AI service — return a more descriptive reply in debug mode
+        if DEBUG_DEV:
+            debug_body = None
+            try:
+                debug_body = response.json()
+            except Exception:
+                debug_body = _mask_text(getattr(response, 'text', None), 2000)
+            return {
+                "success": False,
+                "reply": f"AI service returned HTTP {response.status_code}. See debug info.",
+                "debug": {"status_code": response.status_code, "body": debug_body, "request_payload": trace_entry.get("request_payload")}
+            }
+
         return {
             "success": False,
             "reply": f"AI service returned HTTP {response.status_code}. Please try again shortly."
@@ -363,6 +452,15 @@ async def chat(chat_data: ChatRequest):
         except Exception:
             pass
 
+        # On exception, include error message in debug mode to aid development.
+        if DEBUG_DEV:
+            return {
+                "success": False,
+                "reply": "I'm having trouble connecting right now.",
+                "debug_exception": _mask_text(str(e), 2000),
+                "request_payload": trace_entry.get("request_payload")
+            }
+
         return {
             "success": False,
             "reply": "I'm having trouble connecting right now, but your feelings are still valid."
@@ -375,6 +473,9 @@ async def validate_session(token: str):
     result = FirstPersonAuth.validate_session_token(token)
     if result["valid"]:
         return {"valid": True, "data": result["data"]}
+    if DEBUG_DEV:
+        debug_info = result.get("debug_exception")
+        return JSONResponse(status_code=401, content={"valid": False, "error": result["error"], "debug": debug_info})
     raise HTTPException(status_code=401, detail=result["error"])
 
 
