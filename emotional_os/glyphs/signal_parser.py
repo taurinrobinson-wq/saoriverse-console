@@ -24,23 +24,19 @@ def select_best_glyph_and_response(glyphs, signals, input_text="", conversation_
     The canonical implementation returns a 4-tuple:
             (best_glyph, (response_text, feedback_data), response_source, glyphs_selected)
 
-    Some older callers/tests expect a 3-tuple while newer callers expect 4.
-    To be maximally compatible, this wrapper will ensure a 4-tuple is
-    always returned. If the core implementation returns only three items,
-    the wrapper will append an empty list for `glyphs_selected`.
+    Older tests and callers expect a 3-tuple and will unpack only
+    (best_glyph, (response_text, feedback_data), response_source).
+
+    This wrapper calls the core function and returns the first three
+    elements for backward compatibility.
     """
     result = _core_select_best_glyph_and_response(
         glyphs, signals, input_text=input_text, conversation_context=conversation_context
     )
-    # Normalize result into a 4-tuple for callers that expect the full shape.
-    if isinstance(result, tuple):
-        if len(result) == 4:
-            return result
-        if len(result) == 3:
-            # Append an empty selected list when core returned only three items
-            return result[0], result[1], result[2], []
-    # Fallback: not a tuple (unexpected) — wrap into expected shape
-    return result, (None, {}), 'fallback_compat', []
+    # If core returns 4 items, drop the fourth for compatibility.
+    if isinstance(result, tuple) and len(result) == 4:
+        return result[0], result[1], result[2]
+    return result
 
 
 # Re-export underscored helpers at module level so legacy imports work.
