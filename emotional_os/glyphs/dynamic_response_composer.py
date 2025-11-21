@@ -19,6 +19,7 @@ import random
 import re
 import sys
 from typing import Dict, List, Optional, Tuple
+from emotional_os.glyphs import tone as tone_module
 
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(
@@ -46,6 +47,8 @@ class DynamicResponseComposer:
         """Initialize language resources."""
         self.semantic_engine = SemanticEngine() if SemanticEngine else None
         self.poetry_db = PoetryDatabase() if PoetryDatabase else None
+        # Maintain a rolling tone history to adapt clarifiers over turns
+        self.tone_history: List[str] = []
 
         # Linguistic patterns for different emotional contexts
         self.opening_moves = {
@@ -159,10 +162,17 @@ class DynamicResponseComposer:
         }
 
     def _extract_entities_and_emotions(self, text: str) -> Dict:
-        """Extract key entities and emotional content from input."""
+        """Extract key entities and emotional content from input.
+
+        NOTE: historically this returned a list for `emotions` in some code
+        paths. Downstream methods expect a mapping (emotion->score). Ensure
+        we always return a dict here by coercing list results from any
+        external analyzer into a dict where each detected emotion maps to
+        a default weight of 1.0.
+        """
         result = {
             "entities": [],
-            "emotions": [],
+            "emotions": {},
             "emotional_words": [],
             "people": [],
             "actions": [],
@@ -179,8 +189,19 @@ class DynamicResponseComposer:
         # Extract emotions using NRC if available
         if nrc:
             try:
-                result["emotions"] = nrc.analyze_text(text)
-            except:
+                analysis = nrc.analyze_text(text)
+                # Coerce list-style results into a dict of {emotion: weight}
+                if isinstance(analysis, dict):
+                    result["emotions"] = analysis
+                elif isinstance(analysis, list):
+                    # map each listed emotion to a default weight
+                    result["emotions"] = {str(e): 1.0 for e in analysis}
+                else:
+                    # unexpected type: keep default empty dict
+                    pass
+            except Exception:
+                # Keep defensive behaviour: don't let analyzer exceptions
+                # break extraction; downstream code will handle empty dicts.
                 pass
 
         # Extract emotional language patterns
@@ -588,6 +609,216 @@ class DynamicResponseComposer:
 
         return None
 
+    def _glyph_to_plain_summary(self, g: Dict) -> str:
+        """Return a short, plain-language summary of a glyph suitable for user-facing text.
+
+        This translates internal glyph fields (activation signals, glyph_name,
+        description) into a readable fragment like "a recurring ache of nervous
+        energy" or "a quiet, persistent wanting".
+        """
+        if not isinstance(g, dict):
+            return ''
+
+        name = (g.get('glyph_name') or '').strip()
+        desc = (g.get('description') or '').strip()
+
+        # Derive primary words from activation_signals if present
+        acts = g.get('activation_signals') or []
+        if isinstance(acts, str):
+            acts = re.split(r'[;,\s]+', acts)
+        primary_words = []
+        for a in acts:
+            if not a:
+                continue
+            # remove non-letter chars and map if single symbols
+            token = re.sub(r'[^a-zA-Z]', ' ', str(a)).strip().lower()
+            if token:
+                primary_words.extend(token.split())
+
+        # Prefer description when it's human-readable
+        if desc:
+            # Ensure description is a short sentence fragment
+            frag = desc
+            if frag and not frag.endswith(('.', '!', '?')):
+                frag = frag.strip()
+            return frag
+
+        # Otherwise build from primary words or glyph name
+        if primary_words:
+            # pick up to three meaningful words
+            words = [w for w in primary_words if len(w) > 2][:3]
+            if words:
+                return ' '.join(words)
+
+        if name:
+            return name
+
+        return ''
+
+    def _smooth_fragments_to_sentence(self, fragments: List[str]) -> str:
+        """Turn a list of short fragments into one smooth, human sentence.
+
+        Basic rules:
+        - Clean fragments and remove duplicates.
+        - Use commas and an 'and' before the last item.
+        - Prepend articles ('a') for fragments that look like noun phrases.
+        - Ensure sentence starts with a lowercase continuation (caller may
+          prepend a lead-in) or return a full sentence.
+        """
+        if not fragments:
+            return ''
+
+        # Normalize fragments
+        seen = set()
+        clean = []
+        for f in fragments:
+            if not f or not isinstance(f, str):
+                continue
+            s = ' '.join(f.split()).strip()
+            if not s:
+                continue
+            # remove trailing punctuation
+            if s[-1] in '.!?':
+                s = s[:-1]
+            if s in seen:
+                continue
+            seen.add(s)
+            clean.append(s)
+
+        if not clean:
+            return ''
+
+        def _ensure_article(s: str) -> str:
+            # If the fragment starts with an article or 'the' or pronoun, keep it
+            low = s.lower()
+            if low.startswith(('a ', 'an ', 'the ', 'my ', 'your ', 'their ', 'our ')):
+                return s
+            # If fragment looks like verb-first, don't add article
+            if re.match(r'^(is|are|feels|seems|has|have|notice|noticing)\b', low):
+                return s
+            # If fragment starts with an adjective or noun, add 'a'
+            # Simple heuristic: if first token length > 2, prefix 'a '
+            first = low.split()[0]
+            if len(first) > 2:
+                return 'a ' + s
+            return s
+
+        enriched = [_ensure_article(s) for s in clean]
+
+        if len(enriched) == 1:
+            return enriched[0]
+        if len(enriched) == 2:
+            return f"{enriched[0]} and {enriched[1]}"
+        # 3+ fragments
+        return ', '.join(enriched[:-1]) + ', and ' + enriched[-1]
+
+    def _needs_clarifying_question(self, extracted: Dict, fragments: List[str], input_text: str = "") -> bool:
+        """Decide whether we should ask a clarifying question instead of
+        asserting a multi-glyph synthesis.
+
+        Trigger when we lack entities, when fragments are empty or too vague,
+        or when the user's message is short and we need more context.
+        """
+        # If we have at least one good fragment and some emotional words, proceed
+        if fragments and extracted.get('emotional_words'):
+            return False
+
+        # If fragments exist but are single-word tokens only, ask for clarification
+        if fragments:
+            token_counts = [len(re.findall(r"[a-zA-Z]+", f))
+                            for f in fragments]
+            if all(tc <= 1 for tc in token_counts):
+                return True
+
+        # If we have any named entities or people, we can proceed without clarification
+        if extracted.get('entities') or extracted.get('people'):
+            return False
+
+        # If no emotional words detected and no entities, ask a clarifying question
+        if not extracted.get('emotional_words') and not extracted.get('entities'):
+            return True
+
+        # If the user's message is very short (few words) and we lack entities,
+        # ask for clarification to invite more context.
+        try:
+            if input_text and len(input_text.split()) <= 6 and not extracted.get('entities'):
+                return True
+        except Exception:
+            pass
+
+        return False
+
+    def _make_clarifying_question(self, input_text: str, extracted: Dict) -> str:
+        """Build a short rephrase + invitation asking the user to elaborate.
+
+        This implementation updates the composer's tone history and selects a
+        clarifier template from the `tone` module so clarifiers adapt to the
+        user's recent tone within a rolling window.
+        """
+        # Update tone state using the composer's rolling history
+        try:
+            tone_state = tone_module.update_tone_state(
+                self.tone_history, input_text)
+            clarifier = tone_module.get_clarifier(tone_state)
+        except Exception:
+            # Fall back to previous behavior if tone module fails
+            echo = input_text.strip()
+            if len(echo) > 120:
+                echo = echo[:117].rsplit(' ', 1)[0] + '...'
+            emo = ''
+            if extracted.get('emotional_words'):
+                emo = extracted['emotional_words'][0]
+            if emo:
+                clarifier = f"I hear you're feeling {emo}. Do you want to tell me a bit more about that?"
+            else:
+                clarifier = f"I hear you. Do you want to tell me more about what's behind that?"
+
+        # If we have an explicit detected emotion, try to include it in the
+        # clarifier when the template doesn't already mention an emotion.
+        try:
+            if extracted.get('emotional_words'):
+                emo = extracted['emotional_words'][0]
+                if emo and ' ' + emo in clarifier.lower():
+                    # already contains emotion word
+                    pass
+                else:
+                    # Prepend a short acknowledgement if the clarifier is generic
+                    if not any(word in clarifier.lower() for word in (emo.lower(), "you're feeling", "youre feeling")):
+                        clarifier = f"I hear you're feeling {emo}. " + clarifier
+        except Exception:
+            pass
+
+        return clarifier
+
+    def _stage_for_learning(self, extracted: Dict, input_text: str, glyphs: Optional[List[Dict]] = None) -> None:
+        """Append a minimal learning record to `learning/staged_glyphs.jsonl`.
+
+        This is gated by the environment variable `ENABLE_GLYPH_LEARNING`.
+        The record includes timestamp, user input, extracted features and
+        top glyph summaries so later processes can ingest/stage them for
+        lexicon/glyph updates.
+        """
+        if os.environ.get('ENABLE_GLYPH_LEARNING') != '1':
+            return
+
+        try:
+            os.makedirs('learning', exist_ok=True)
+            outp = os.path.join('learning', 'staged_glyphs.jsonl')
+            record = {
+                'ts': __import__('datetime').datetime.utcnow().isoformat() + 'Z',
+                'input_text': input_text,
+                'extracted': extracted,
+                'glyphs': [{
+                    'glyph_name': g.get('glyph_name'),
+                    'description': g.get('description')
+                } for g in (glyphs or [])]
+            }
+            with open(outp, 'a', encoding='utf-8') as fh:
+                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except Exception:
+            # Never raise from learning staging
+            return
+
     def _build_glyph_aware_response(
         self,
         glyph: Optional[Dict],
@@ -968,6 +1199,45 @@ class DynamicResponseComposer:
             'entities', []), extracted.get('emotions', {}))
         parts.append(opening)
 
+        # Prepare readable fragments for the top glyphs so clarifying
+        # heuristics and synthesis can use them consistently.
+        top_glyphs = ranked[:top_n]
+        fragments = []
+        for g in top_glyphs:
+            frag = self._glyph_to_plain_summary(g)
+            if frag:
+                fragments.append(frag)
+
+        # If we lack enough context to synthesize a confident multi-glyph
+        # summary, ask a clarifying question before attempting adapter-based
+        # or fragment-based synthesis. This invites the user to elaborate and
+        # prevents regurgitating low-confidence summaries.
+        try:
+            if self._needs_clarifying_question(extracted, fragments, combined_text):
+                question = self._make_clarifying_question(
+                    combined_text, extracted)
+                reply = f"{opening} {question}"
+                try:
+                    self._stage_for_learning(extracted, combined_text, glyphs)
+                except Exception:
+                    pass
+                return reply
+        except Exception:
+            # Fail-safe: continue into synthesis if clarifying logic errors
+            pass
+
+        # If we have readable fragments, add a smoothed summary early so
+        # downstream adapter processing or the final postprocessor sees a
+        # human-friendly lead sentence.
+        try:
+            if fragments:
+                summary_frag = self._smooth_fragments_to_sentence(fragments)
+                if summary_frag:
+                    parts.append(
+                        f"I'm noticing {summary_frag} in what you're sharing.")
+        except Exception:
+            pass
+
         # Prefer using the response adapter to translate glyphs into
         # plain-language summary and short snippets. Fallback to older
         # snippet composition if the adapter is not available.
@@ -1011,38 +1281,36 @@ class DynamicResponseComposer:
                 # Adapter failed — fall back to inline snippets below
                 pass
         else:
-            # Snippets from top glyphs (short, non-redundant)
-            seen_snippets = set()
-            snippet_count = 0
-            for g in ranked:
-                if snippet_count >= top_n:
-                    break
-                gname = g.get('glyph_name') or ''
-                gdesc = g.get('description') or g.get('glyph', '') or ''
-                intensity = _glyph_intensity(g)
-                primary_words = _glyph_primary_words(g)
+            # Synthesize a cohesive, plain-language summary from the top glyphs.
+            # Aim: produce one short paragraph that translates glyph metadata into
+            # conversational language rather than regurgitating internal tokens.
 
-                # Compose a concise snippet
-                if intensity >= 5:
-                    tone = f"There's a strong sense of {' and '.join(primary_words)} around {gname}."
-                else:
-                    tone = f"I notice a thread of {' and '.join(primary_words)} in what you're describing." if primary_words else f"I notice echoes of {gname}."
+            # Build an overall smoothed summary sentence from fragments
+            if fragments:
+                summary_frag = self._smooth_fragments_to_sentence(fragments)
+                if summary_frag:
+                    parts.append(
+                        f"I'm noticing {summary_frag} in what you're sharing.")
 
-                # Ground to user's specific content when possible
-                entity = extracted.get('entities', [None])[0]
-                if entity:
-                    grounding = f"That connects to {entity}."
-                else:
-                    grounding = "That seems connected to what you're carrying."
+                # Add one-sentence elaborations for the top one or two glyphs (concise)
+                for g in top_glyphs[:2]:
+                    name = g.get('glyph_name') or ''
+                    desc = g.get('description') or ''
+                    if desc:
+                        parts.append(f"For example, {desc.strip()}")
+                    elif name:
+                        parts.append(
+                            f"For example, {name} seems relevant here.")
+            else:
+                # Fallback to a gentle generic opener
+                parts.append(
+                    "I'm noticing some themes in what you're sharing.")
 
-                snippet = f"{tone} {grounding}"
-
-                # Avoid near-duplicate snippets
-                if snippet in seen_snippets:
-                    continue
-                seen_snippets.add(snippet)
-                parts.append(snippet)
-                snippet_count += 1
+            # Optionally stage for learning (env-gated) when we have fragments
+            try:
+                self._stage_for_learning(extracted, input_text, top_glyphs)
+            except Exception:
+                pass
 
         # Optionally weave a single poetic echo from dominant glyph
         if dominant:
@@ -1075,5 +1343,13 @@ class DynamicResponseComposer:
                                   0] if extracted.get('emotions') else "what you feel")
         parts.append(closing)
 
-        # Join parts into a single composed response
+        # Post-process assembled parts for punctuation/capitalization and return
+        try:
+            processed = self._postprocess_parts(parts)
+            if processed:
+                return "\n\n".join(processed)
+        except Exception:
+            pass
+
+        # Fallback: Join parts into a single composed response
         return "\n\n".join(parts)
