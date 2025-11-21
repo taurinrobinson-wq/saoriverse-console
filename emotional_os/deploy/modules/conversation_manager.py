@@ -110,6 +110,18 @@ class ConversationManager:
             'Prefer': 'return=representation'
         }
 
+    def _writes_enabled(self) -> bool:
+        """Determine whether remote writes are allowed in this environment.
+
+        Local development and CI runs should not perform server-side writes
+        unless explicitly enabled. To allow writes set the environment
+        variable `ENABLE_SUPABASE_WRITES=1` in your deployment environment.
+        """
+        try:
+            return os.environ.get('ENABLE_SUPABASE_WRITES') == '1'
+        except Exception:
+            return False
+
     def save_conversation(self, conversation_id: str, title: str, messages: List[Dict],
                           processing_mode: str = "hybrid") -> Tuple[bool, str]:
         """
@@ -117,6 +129,10 @@ class ConversationManager:
 
         Returns: (success: bool, message: str)
         """
+        # Gate writes in local/dev environments unless explicitly enabled
+        if not self._writes_enabled():
+            return False, "Supabase writes disabled (ENABLE_SUPABASE_WRITES!=1)"
+
         if not self.base_url or not self.supabase_key:
             return False, "Supabase not configured"
 
@@ -146,7 +162,12 @@ class ConversationManager:
             if response.status_code in (200, 201):
                 return True, "Conversation saved successfully"
             else:
-                return False, f"Failed to save conversation (HTTP {response.status_code})"
+                # Include response body to aid debugging (caller/UI should mask secrets)
+                try:
+                    body = response.text
+                except Exception:
+                    body = '<unavailable>'
+                return False, f"Failed to save conversation (HTTP {response.status_code}): {body}"
 
         except Exception as e:
             logger.error(f"Error saving conversation: {e}")
@@ -283,6 +304,10 @@ class ConversationManager:
         containing keys like 'persist_history' and 'persist_confirmed'. Returns
         (success: bool, message: str).
         """
+        # Gate writes in local/dev environments unless explicitly enabled
+        if not self._writes_enabled():
+            return False, "Supabase writes disabled (ENABLE_SUPABASE_WRITES!=1)"
+
         if not self.base_url or not self.supabase_key:
             return False, "Supabase not configured"
 
@@ -305,13 +330,21 @@ class ConversationManager:
             if response.status_code in (200, 201):
                 return True, "Preferences saved"
             else:
-                return False, f"Failed to save preferences (HTTP {response.status_code})"
+                try:
+                    body = response.text
+                except Exception:
+                    body = '<unavailable>'
+                return False, f"Failed to save preferences (HTTP {response.status_code}): {body}"
         except Exception as e:
             logger.debug(f"Error saving user preferences: {e}")
             return False, str(e)
 
     def delete_conversation(self, conversation_id: str) -> Tuple[bool, str]:
         """Delete a conversation from Supabase."""
+        # Gate writes in local/dev environments unless explicitly enabled
+        if not self._writes_enabled():
+            return False, "Supabase writes disabled (ENABLE_SUPABASE_WRITES!=1)"
+
         if not self.base_url or not self.supabase_key:
             return False, "Supabase not configured"
 
@@ -335,7 +368,11 @@ class ConversationManager:
             if response.status_code in (200, 204):
                 return True, "Conversation deleted successfully"
             else:
-                return False, f"Failed to delete conversation (HTTP {response.status_code})"
+                try:
+                    body = response.text
+                except Exception:
+                    body = '<unavailable>'
+                return False, f"Failed to delete conversation (HTTP {response.status_code}): {body}"
 
         except Exception as e:
             logger.error(f"Error deleting conversation: {e}")
@@ -343,6 +380,10 @@ class ConversationManager:
 
     def rename_conversation(self, conversation_id: str, new_title: str) -> Tuple[bool, str]:
         """Rename a conversation."""
+        # Gate writes in local/dev environments unless explicitly enabled
+        if not self._writes_enabled():
+            return False, "Supabase writes disabled (ENABLE_SUPABASE_WRITES!=1)"
+
         if not self.base_url or not self.supabase_key:
             return False, "Supabase not configured"
 
@@ -372,7 +413,11 @@ class ConversationManager:
             if response.status_code in (200, 204):
                 return True, "Conversation renamed successfully"
             else:
-                return False, f"Failed to rename conversation (HTTP {response.status_code})"
+                try:
+                    body = response.text
+                except Exception:
+                    body = '<unavailable>'
+                return False, f"Failed to rename conversation (HTTP {response.status_code}): {body}"
 
         except Exception as e:
             logger.error(f"Error renaming conversation: {e}")

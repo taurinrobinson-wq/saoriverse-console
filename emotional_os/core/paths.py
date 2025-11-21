@@ -12,11 +12,11 @@ from typing import Optional
 
 class PathManager:
     """Manages all file paths for the Emotional OS system."""
-    
+
     def __init__(self, base_dir: Optional[str] = None):
         """
         Initialize path manager.
-        
+
         Args:
             base_dir: Base directory for all paths. If None, uses current working directory.
         """
@@ -25,21 +25,28 @@ class PathManager:
             self.base_dir = self._find_project_root()
         else:
             self.base_dir = Path(base_dir)
-    
+
     @staticmethod
     def _find_project_root() -> Path:
         """Find the project root by looking for key markers."""
-        current = Path.cwd()
+        # Prefer resolving from this file's location so tests that change
+        # the working directory don't accidentally initialize the path
+        # manager to a temporary directory. Start from the package file
+        # location and search upward for repository markers.
+        current = Path(__file__).resolve().parent.parent
+        # current now points at the package/`emotional_os` parent; climb one
+        # more level to reach the repository root candidate.
+        current = current.parent
         markers = ['emotional_os', 'parser', 'learning']  # Project markers
-        
+
         # Search up to 5 directories
         for _ in range(5):
             if any((current / marker).exists() for marker in markers):
                 return current
             current = current.parent
-        
+
         return Path.cwd()
-    
+
     # Lexicon files
     def signal_lexicon(self) -> Path:
         """Path to base signal lexicon."""
@@ -48,7 +55,7 @@ class PathManager:
             'data/lexicons/signal_lexicon.json',
             'emotional_os/parser/signal_lexicon.json'
         )
-    
+
     def learned_lexicon(self) -> Path:
         """Path to learned lexicon (gets updated)."""
         return self._resolve_path(
@@ -56,7 +63,7 @@ class PathManager:
             'data/lexicons/learned_lexicon.json',
             'emotional_os/parser/learned_lexicon.json'
         )
-    
+
     def pattern_history(self) -> Path:
         """Path to pattern learning history."""
         return self._resolve_path(
@@ -64,7 +71,7 @@ class PathManager:
             'data/lexicons/pattern_history.json',
             'emotional_os/deploy/learning/pattern_history.json'
         )
-    
+
     # Glyph database
     def glyph_db(self) -> Path:
         """Path to glyph database."""
@@ -72,7 +79,7 @@ class PathManager:
             'glyphs.db',
             'data/glyphs.db'
         )
-    
+
     # Poetry data (for training)
     def poetry_data_dir(self) -> Path:
         """Path to poetry data directory."""
@@ -81,12 +88,12 @@ class PathManager:
             'data/poetry_data',
             'scripts/utilities/poetry_data'
         )
-    
+
     def poetry_index_db(self) -> Path:
         """Path to poetry index database."""
         poetry_dir = self.poetry_data_dir()
         return poetry_dir / 'poetry_index.db'
-    
+
     # Learning system
     def learning_db(self) -> Path:
         """Path to learning system database."""
@@ -94,7 +101,7 @@ class PathManager:
             'data/learning.db',
             'learning/learning.db'
         )
-    
+
     # Safety and configuration
     def safety_config(self) -> Path:
         """Path to safety configuration."""
@@ -102,15 +109,15 @@ class PathManager:
             'emotional_os/safety/config.json',
             'config/safety_config.json'
         )
-    
+
     # Utilities
     def _resolve_path(self, *candidates: str) -> Path:
         """
         Resolve the first existing path from candidates.
-        
+
         Args:
             *candidates: List of path candidates (relative to base_dir)
-        
+
         Returns:
             Path to first existing file, or first candidate if none exist
         """
@@ -118,25 +125,25 @@ class PathManager:
             full_path = self.base_dir / candidate
             if full_path.exists():
                 return full_path
-        
+
         # If none exist, return first candidate (will be created if needed)
         return self.base_dir / candidates[0]
-    
+
     def _resolve_path_dir(self, *candidates: str) -> Path:
         """Resolve the first existing directory from candidates."""
         for candidate in candidates:
             full_path = self.base_dir / candidate
             if full_path.is_dir():
                 return full_path
-        
+
         # If none exist, return first candidate
         return self.base_dir / candidates[0]
-    
+
     def ensure_dir(self, path: Path) -> Path:
         """Ensure directory exists."""
         path.mkdir(parents=True, exist_ok=True)
         return path
-    
+
     def __repr__(self) -> str:
         return f"PathManager(base_dir={self.base_dir})"
 

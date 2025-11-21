@@ -5,6 +5,7 @@ This document describes the new persistent conversation storage system for First
 ## Overview
 
 The system now supports:
+
 1. **Persistent Conversation Storage** - Conversations are saved to Supabase/database
 2. **Auto-Naming** - Conversations are automatically named based on first message context
 3. **Conversation Sidebar** - Previous conversations listed and selectable in sidebar
@@ -51,6 +52,7 @@ supabase db push
 ```
 
 The schema creates:
+
 - `conversations` table - stores full conversations with metadata
 - `conversation_metadata` table - audit trail of changes
 - Automatic triggers for timestamp management
@@ -89,6 +91,7 @@ title = generate_auto_name("I've been feeling anxious about work")
 ### Managing Conversations
 
 In the sidebar:
+
 - 📚 **Previous Conversations** - Lists all saved conversations
 - 💬 - Click to load a conversation
 - ✏️ - Rename a conversation
@@ -159,6 +162,7 @@ success, msg = manager.delete_conversation("conv-id-123")
 ## Session State Management
 
 Key session state variables:
+
 - `current_conversation_id` - Active conversation UUID
 - `conversation_title` - Current conversation title
 - `conversation_manager` - ConversationManager instance
@@ -171,6 +175,7 @@ Key session state variables:
 ### Conversations not saving
 
 1. **Check Supabase configuration**
+
    ```bash
    # Verify secrets are loaded
    python -c "import streamlit as st; print(st.secrets.get('supabase'))"
@@ -193,6 +198,7 @@ Key session state variables:
 ### Auto-naming not working
 
 If `generate_auto_name()` returns "New Conversation":
+
 1. Check if first message is empty
 2. Verify NLP module is available (spaCy, NLTK)
 3. Check logs for errors
@@ -219,6 +225,17 @@ To migrate existing conversation history:
 - Use Supabase Row Level Security (RLS) to enforce access control
 - Supports soft-delete via `archived` flag
 - Audit trail in `conversation_metadata` table
+
+### `user_id` requirements
+
+- The `conversations.user_id` column is stored as a UUID in the database.
+- Callers of `ConversationManager` should supply a UUID-formatted `user_id`.
+   Passing an opaque string (for example `debug_user`) will result in a
+   Supabase/Postgres validation error like: `invalid input syntax for type uuid`.
+
+The in-UI debug write tester automatically generates a UUID for local
+write checks to avoid this error during development. Production callers
+should still provide a stable UUID identifying the authenticated user.
 
 ## Future Enhancements
 

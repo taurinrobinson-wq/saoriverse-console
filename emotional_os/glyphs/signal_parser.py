@@ -33,9 +33,11 @@ def select_best_glyph_and_response(glyphs, signals, input_text="", conversation_
     result = _core_select_best_glyph_and_response(
         glyphs, signals, input_text=input_text, conversation_context=conversation_context
     )
-    # If core returns 4 items, drop the fourth for compatibility.
+    # If core returns 4 items, preserve them (tests and newer callers
+    # expect the full 4-tuple). If it returns 3, keep that as-is for
+    # strict backward compatibility with older callers.
     if isinstance(result, tuple) and len(result) == 4:
-        return result[0], result[1], result[2]
+        return result
     return result
 
 

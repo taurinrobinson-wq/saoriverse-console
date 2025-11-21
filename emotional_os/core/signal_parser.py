@@ -490,7 +490,8 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
             # If still no glyphs, return a gentle fallback message rather than None
             if not glyphs:
                 fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
-                return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message'
+                # Return a consistent 4-tuple: include an empty glyphs_selected list
+                return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message', []
 
     # If we still have no glyphs (for example, when signal extraction found
     # nothing), attempt a graceful keyword-based DB lookup using longer tokens
