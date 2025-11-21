@@ -715,6 +715,14 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                 glyphs_selected.append(augmented)
                 best_glyph = augmented
 
+        # Instrumentation: log candidate counts and chosen glyphs for diagnostics
+        try:
+            sel_names = [g.get('glyph_name') for g in glyphs_selected]
+            logger.info(
+                f"Glyph selection: candidates={len(scored_sorted)} selected={len(glyphs_selected)} best={sel_names[:3]}")
+        except Exception:
+            pass
+
     # Generate contextual response based on actual message content + glyph context
     # Returns tuple: (response_text, feedback_data)
     response, feedback_data = generate_contextual_response(
