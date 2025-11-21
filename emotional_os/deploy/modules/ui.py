@@ -360,6 +360,16 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
 
+    # Respect local guard: avoid accidental external calls when remote AI is disabled
+    try:
+        from emotional_os.local_config import USE_REMOTE_AI
+    except Exception:
+        USE_REMOTE_AI = False
+
+    if not USE_REMOTE_AI:
+        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement disabled by local configuration)"
+        return response, {}, local_analysis
+
     if not saori_url or not supabase_key:
         response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
         return response, {}, local_analysis
@@ -1156,8 +1166,10 @@ def render_main_app():
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
                 svg_markup_side = _load_inline_svg(svg_name_side)
+                # Constrain sidebar logo size so it doesn't inherit splash sizing
+                constrained_svg = f"<div style='width:64px; margin:0 auto; height:auto;'>{svg_markup_side}</div>"
                 st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
+                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{constrained_svg}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
             except Exception:
                 st.markdown("### Account")
             st.markdown(
@@ -1732,12 +1744,20 @@ def render_main_app():
                         debug_glyph_rows = local_analysis.get(
                             "debug_glyph_rows", [])
                         try:
+                            # Respect local guard to avoid accidental external calls
+                            try:
+                                from emotional_os.local_config import USE_REMOTE_AI
+                            except Exception:
+                                USE_REMOTE_AI = False
+
                             saori_url = st.secrets.get(
                                 "supabase", {}).get("saori_function_url")
                             supabase_key = st.secrets.get(
                                 "supabase", {}).get("key")
-                            if not saori_url or not supabase_key:
-                                response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable in demo mode)"
+
+                            # If remote AI is disabled or credentials missing, use local analysis
+                            if not USE_REMOTE_AI or not saori_url or not supabase_key:
+                                response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
                             else:
                                 payload = {
                                     "message": effective_input,
@@ -1766,20 +1786,38 @@ def render_main_app():
                                         f"Ritual Prompt: {doc_ritual_prompt}" if doc_ritual_prompt else ""
                                     ])
                                     payload["document_context"] = doc_context
-                                response_data = requests.post(
-                                    saori_url,
-                                    headers={
-                                        "Authorization": f"Bearer {supabase_key}",
-                                        "Content-Type": "application/json"
-                                    },
-                                    json=payload,
-                                    timeout=15
-                                )
-                                if requests is None:
-                                    response = "AI processing unavailable (requests library not installed)."
+
+                                # Attempt remote call with robust error handling
+                                try:
+                                    response_data = requests.post(
+                                        saori_url,
+                                        headers={
+                                            "Authorization": f"Bearer {supabase_key}",
+                                            "Content-Type": "application/json"
+                                        },
+                                        json=payload,
+                                        timeout=15
+                                    )
+                                except Exception as e:
+                                    logger.warning(
+                                        f"Supabase request failed: {e}")
+                                    response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
+                                    response_data = None
+
+                                if response_data is None:
+                                    pass
                                 else:
-                                    if response_data.status_code == 200:
-                                        result = response_data.json()
+                                    # If requests isn't available or the call returned non-200, fall back to local
+                                    if requests is None:
+                                        response = "AI processing unavailable (requests library not installed)."
+                                    elif response_data.status_code == 200:
+                                        try:
+                                            result = response_data.json()
+                                        except Exception as e:
+                                            logger.warning(
+                                                f"Failed to parse AI response JSON: {e}")
+                                            result = {}
+
                                         ai_reply = result.get(
                                             "reply", "I'm here to listen.")
 
@@ -1827,8 +1865,18 @@ def render_main_app():
                                             # If local re-parsing fails, fall back to the AI reply
                                             response = ai_reply
                                     else:
-                                        response = "I'm experiencing some technical difficulties, but I'm still here for you."
+                                        # Log details for non-200 responses and fall back
+                                        try:
+                                            body = response_data.text
+                                            logger.warning(
+                                                f"Supabase returned status {response_data.status_code}: {body}")
+                                        except Exception:
+                                            logger.warning(
+                                                f"Supabase returned status {response_data.status_code} and body could not be read")
+                                        response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
                         except Exception as e:
+                            logger.exception(
+                                f"Unexpected error in hybrid branch: {e}")
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
                     else:
                         response = "Unknown processing mode."

@@ -3296,10 +3296,31 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-11-13T22:30:41.231789"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Sensuality & Wonder",
+      "symbol": "\ud83c\udf39\u2728",
+      "core_emotions": [
+        "sensuality",
+        "wonder"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "wonder"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and wonder present here",
+      "narrative_hook": "A story where sensuality meets wonder",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-21T04:27:42.826704"
     }
   ],
   "metadata": {
-    "total_discovered": 157,
-    "last_updated": "2025-11-13T22:30:41.232023"
+    "total_discovered": 158,
+    "last_updated": "2025-11-21T04:27:42.826826"
   }
 }
