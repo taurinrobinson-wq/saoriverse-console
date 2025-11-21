@@ -367,7 +367,9 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     payload = {
         "message": effective_input,
         "mode": st.session_state.get('processing_mode', 'hybrid'),
-        "user_id": st.session_state.user_id,
+        # Use .get to avoid AttributeError when tests run outside of
+        # a Streamlit runtime that hasn't initialized session_state.
+        "user_id": st.session_state.get('user_id', ''),
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
