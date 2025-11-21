@@ -1,3 +1,4 @@
 pytest
 requests
 python-dotenv
+streamlit==1.30.0
