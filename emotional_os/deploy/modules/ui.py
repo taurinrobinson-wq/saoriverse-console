@@ -203,8 +203,11 @@ def render_controls_row(conversation_key):
         # sidebar expander (so both demo and authenticated flows show
         # a single, consistent place for preferences).
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = os.getenv(
-                'DEFAULT_PROCESSING_MODE', 'hybrid')
+            _desired = os.getenv('DEFAULT_PROCESSING_MODE', 'local')
+            # Only allow hybrid when an OpenAI key is available or explicit enable flag is set
+            if _desired == 'hybrid' and not os.getenv('OPENAI_API_KEY') and os.getenv('ENABLE_HYBRID', '0') != '1':
+                _desired = 'local'
+            st.session_state.processing_mode = _desired
 
         # The interactive controls for changing processing mode are
         # rendered in the sidebar Settings panel. Keep this top-row
@@ -260,8 +263,10 @@ def ensure_processing_prefs():
         st.session_state['prefer_ai'] = True
 
     if 'processing_mode' not in st.session_state:
-        st.session_state.processing_mode = os.getenv(
-            'DEFAULT_PROCESSING_MODE', 'hybrid')
+        _desired = os.getenv('DEFAULT_PROCESSING_MODE', 'local')
+        if _desired == 'hybrid' and not os.getenv('OPENAI_API_KEY') and os.getenv('ENABLE_HYBRID', '0') != '1':
+            _desired = 'local'
+        st.session_state.processing_mode = _desired
 
     if 'prefer_ai' not in st.session_state:
         st.session_state['prefer_ai'] = True
