@@ -16,6 +16,7 @@ from emotional_os.core.signal_parser import (
     _normalize_display_name,
     select_best_glyph_and_response as _core_select_best_glyph_and_response,
 )
+from emotional_os.compat import ensure_tuple_shape
 
 
 def select_best_glyph_and_response(glyphs, signals, input_text="", conversation_context=None):
@@ -32,15 +33,13 @@ def select_best_glyph_and_response(glyphs, signals, input_text="", conversation_
     result = _core_select_best_glyph_and_response(
         glyphs, signals, input_text=input_text, conversation_context=conversation_context
     )
-    # Normalize result into a 4-tuple for callers that expect the full shape.
-    if isinstance(result, tuple):
-        if len(result) == 4:
-            return result
-        if len(result) == 3:
-            # Append an empty selected list when core returned only three items
-            return result[0], result[1], result[2], []
-    # Fallback: not a tuple (unexpected) — wrap into expected shape
-    return result, (None, {}), 'fallback_compat', []
+
+    # Use centralized compat helper to normalize shapes and handle unexpected forms.
+    try:
+        return ensure_tuple_shape(result)
+    except Exception:
+        # Conservative fallback when normalization fails
+        return None, (None, {}), 'fallback_compat', []
 
 
 # Re-export underscored helpers at module level so legacy imports work.
