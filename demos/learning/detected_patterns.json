@@ -12,7 +12,7 @@
     ],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.621256+00:00",
-    "last_seen": "2025-11-21T19:52:42.120099+00:00"
+    "last_seen": "2025-11-21T20:25:33.943261+00:00"
   },
   "grief + joy": {
     "emotions": [
@@ -25,7 +25,7 @@
     ],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.621272+00:00",
-    "last_seen": "2025-11-21T19:52:42.120110+00:00"
+    "last_seen": "2025-11-21T20:25:33.943270+00:00"
   },
   "ache + connection + flow": {
     "emotions": [
@@ -39,7 +39,7 @@
     ],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.626633+00:00",
-    "last_seen": "2025-11-21T19:52:42.120593+00:00"
+    "last_seen": "2025-11-21T20:25:33.944125+00:00"
   },
   "clarity + overwhelmed + this": {
     "emotions": [
@@ -51,7 +51,7 @@
     "context_words": [],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.627265+00:00",
-    "last_seen": "2025-11-21T19:52:42.121759+00:00"
+    "last_seen": "2025-11-21T20:25:33.944847+00:00"
   },
   "feeling + joy + this": {
     "emotions": [
@@ -63,7 +63,7 @@
     "context_words": [],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.628377+00:00",
-    "last_seen": "2025-11-21T19:52:42.122548+00:00"
+    "last_seen": "2025-11-21T20:25:33.946623+00:00"
   },
   "flow + peace + stillness": {
     "emotions": [
@@ -77,7 +77,7 @@
     ],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.628949+00:00",
-    "last_seen": "2025-11-21T19:52:42.122953+00:00"
+    "last_seen": "2025-11-21T20:25:33.947470+00:00"
   },
   "flow + strength + touched + vulnerability + weakness": {
     "emotions": [
@@ -91,6 +91,6 @@
     "context_words": [],
     "frequency": 179,
     "first_seen": "2025-11-11T07:38:52.629580+00:00",
-    "last_seen": "2025-11-21T19:52:42.123643+00:00"
+    "last_seen": "2025-11-21T20:25:33.948345+00:00"
   }
 }
