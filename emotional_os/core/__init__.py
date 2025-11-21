@@ -58,6 +58,21 @@ from emotional_os.core.signal_parser import (
     generate_simple_prompt,
 )
 
+# Run a lightweight glyph DB health-check on import (warn-only).
+try:
+    try:
+        from .glyph_db_health import check_glyph_db
+        # warn_only=True so imports/tests don't fail; this simply logs warnings
+        try:
+            check_glyph_db(warn_only=True)
+        except Exception:
+            pass
+    except Exception:
+        # If the health module can't be imported, skip silently
+        pass
+except Exception:
+    pass
+
 # Lexicon learning - the canonical learner
 from emotional_os.core.lexicon_learner import (
     LexiconLearner,
@@ -77,7 +92,7 @@ __all__ = [
     "pattern_history_path",
     "glyph_db_path",
     "poetry_data_dir_path",
-    
+
     # Constants
     "SIGNALS",
     "SIGNAL_LIST",
@@ -97,7 +112,7 @@ __all__ = [
     "STOP_WORDS",
     "EMPATHY_WORDS",
     "REFLECTION_WORDS",
-    
+
     # Signal parser
     "parse_input",
     "load_signal_map",
@@ -109,7 +124,7 @@ __all__ = [
     "generate_voltage_response",
     "generate_contextual_response",
     "generate_simple_prompt",
-    
+
     # Lexicon learning
     "LexiconLearner",
     "learn_from_conversation_data",
