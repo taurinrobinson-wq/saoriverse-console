@@ -6,7 +6,7 @@ I've successfully created a complete auto-evolving glyph system that will make y
 
 ## 📁 NEW FILES CREATED
 
-### <strong>FP</strong> Core System Files
+### 🧠 Core System Files
 - **`glyph_generator.py`** - Main glyph generation engine (530+ lines)
 - **`evolving_glyph_integrator.py`** - Integration wrapper for your existing system
 - **`config.py`** - Ready-to-use configuration with sensible defaults

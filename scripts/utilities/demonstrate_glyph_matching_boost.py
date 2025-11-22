@@ -41,7 +41,7 @@ def test_glyph_matching_boost():
         }
     ]
 
-    print("FP Testing Glyph Matching Boost with Syntactic Analysis")
+    print("🧠 Testing Glyph Matching Boost with Syntactic Analysis")
     print("=" * 60)
 
     for i, test_case in enumerate(test_cases, 1):

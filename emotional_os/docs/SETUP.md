@@ -62,7 +62,7 @@ Your system maintains privacy through:
 3. **Local Fallback**: Always works without external calls
 4. **Encrypted API Calls**: When using Supabase, only symbolic data is sent
 
-## <strong>FP</strong> What You've Built
+## 🧠 What You've Built
 
 This is a genuinely innovative **privacy-preserving emotional intelligence system** that:
 

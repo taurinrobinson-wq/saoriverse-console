@@ -1,11 +1,11 @@
-"""Compatibility shim for legacy imports in tests.
+"""Compatibility shim for evolving_glyph_integrator imports.
 
-Some integration tests import `evolving_glyph_integrator` from the
-top-level module. The canonical implementation lives in
-`emotional_os.glyphs.evolving_glyph_integrator`. Re-export the
-primary symbol here to avoid ImportError in tests.
+Re-exports the implementation from `scripts/utilities` so legacy imports in
+tests and examples continue to work.
 """
-
-from emotional_os.glyphs.evolving_glyph_integrator import EvolvingGlyphIntegrator  # noqa: F401
+try:
+    from scripts.utilities.evolving_glyph_integrator import EvolvingGlyphIntegrator  # type: ignore
+except Exception:
+    EvolvingGlyphIntegrator = None
 
 __all__ = ["EvolvingGlyphIntegrator"]

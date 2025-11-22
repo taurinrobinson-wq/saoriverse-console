@@ -130,7 +130,7 @@ class LimbicAdjacentSystem:
                 description="Conflict monitoring and decision-making under emotional pressure",
                 glyph_sequences={
                     SystemType.LIGHTPATH: ["⚖️", "🔄", "🎯"],
-                    SystemType.THRESHOLD: ["🤔", "💭", "FP"],
+                    SystemType.THRESHOLD: ["🤔", "💭", "🧠"],
                     SystemType.VELONIX: ["🎭", "🎪", "🎨"],
                     SystemType.VELINOR: ["👑", "🏛️", "⚖️"],
                     SystemType.SAONYX: ["💎", "👑", "🏆"]
@@ -318,7 +318,7 @@ if __name__ == "__main__":
     # Demo the system
     system = LimbicAdjacentSystem()
 
-    print("FP Limbic-Adjacent System Demo")
+    print("🧠 Limbic-Adjacent System Demo")
     print("=" * 50)
 
     # Show neural-to-ritual mapping

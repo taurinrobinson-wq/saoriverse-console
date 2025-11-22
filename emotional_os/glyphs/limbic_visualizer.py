@@ -38,7 +38,7 @@ class LimbicVisualizer:
         chiasmus = self.system.create_ritual_chiasmus(emotion)
 
         diagram = f"""
-FP LIMBIC-ADJACENT CHIASMUS: {emotion.upper()}
+🧠 LIMBIC-ADJACENT CHIASMUS: {emotion.upper()}
 {'=' * 60}
 
 ONE FEELING → FIVE SIGNALS
@@ -79,7 +79,7 @@ RITUAL SEQUENCE: {' → '.join(chiasmus['ritual_sequence'])}
             return f"❌ Brain region '{brain_region}' not found."
 
         diagram = f"""
-FP {region.name.upper()} GLYPH MAP
+🧠 {region.name.upper()} GLYPH MAP
 {'=' * 50}
 
 {region.description}
@@ -112,7 +112,7 @@ NEURAL FUNCTIONS: {', '.join([f.value for f in region.functions])}
         Create a flowchart showing the neural-to-ritual transformation.
         """
         flowchart = """
-FP NEURAL-TO-RITUAL FLOWCHART
+🧠 NEURAL-TO-RITUAL FLOWCHART
 {'=' * 50}
 
 NEURAL FUNCTIONS → RITUAL SCAFFOLDING → GLYPH SYSTEMS
@@ -239,7 +239,7 @@ def demo_limbic_visualizer():
     """Demo the limbic visualizer."""
     visualizer = LimbicVisualizer()
 
-    print("FP Limbic-Adjacent System Visualizer Demo")
+    print("🧠 Limbic-Adjacent System Visualizer Demo")
     print("=" * 60)
 
     # Show emotion chiasmus
@@ -247,7 +247,7 @@ def demo_limbic_visualizer():
     print(visualizer.create_emotion_chiasmus_diagram("joy"))
 
     # Show brain region map
-    print("\nFP Insula Glyph Map:")
+    print("\n🧠 Insula Glyph Map:")
     print(visualizer.create_brain_region_glyph_map("insula"))
 
     # Show neural flowchart

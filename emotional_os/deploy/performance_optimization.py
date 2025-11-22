@@ -146,7 +146,7 @@ class StreamlitOptimizedUI:
 
             # Show processing indicator
             with st.status("Processing your message...", expanded=False) as status:
-                st.write("FP Analyzing emotional context...")
+                st.write("🧠 Analyzing emotional context...")
                 time.sleep(0.5)
                 st.write("🔍 Generating personalized response...")
                 status.update(label="Thinking...", state="running")

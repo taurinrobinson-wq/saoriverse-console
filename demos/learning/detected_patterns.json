@@ -1,18 +1,18 @@
 {
   "experiencing + grief + joy + this": {
     "emotions": [
-      "experiencing",
-      "grief",
       "joy",
-      "this"
+      "this",
+      "experiencing",
+      "grief"
     ],
     "intensity": 0.5,
     "context_words": [
       "profound"
     ],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.621256+00:00",
-    "last_seen": "2025-11-20T19:24:39.560209+00:00"
+    "last_seen": "2025-11-21T23:38:26.968875+00:00"
   },
   "grief + joy": {
     "emotions": [
@@ -23,9 +23,9 @@
     "context_words": [
       "profound"
     ],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.621272+00:00",
-    "last_seen": "2025-11-20T19:24:39.560219+00:00"
+    "last_seen": "2025-11-21T23:38:26.968888+00:00"
   },
   "ache + connection + flow": {
     "emotions": [
@@ -37,60 +37,60 @@
     "context_words": [
       "sacred"
     ],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.626633+00:00",
-    "last_seen": "2025-11-20T19:24:39.560848+00:00"
+    "last_seen": "2025-11-21T23:38:26.969621+00:00"
   },
   "clarity + overwhelmed + this": {
     "emotions": [
-      "clarity",
+      "this",
       "overwhelmed",
-      "this"
+      "clarity"
     ],
     "intensity": 0.5,
     "context_words": [],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.627265+00:00",
-    "last_seen": "2025-11-20T19:24:39.561398+00:00"
+    "last_seen": "2025-11-21T23:38:26.970249+00:00"
   },
   "feeling + joy + this": {
     "emotions": [
-      "feeling",
       "joy",
-      "this"
+      "this",
+      "feeling"
     ],
     "intensity": 0.5,
     "context_words": [],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.628377+00:00",
-    "last_seen": "2025-11-20T19:24:39.562382+00:00"
+    "last_seen": "2025-11-21T23:38:26.971346+00:00"
   },
   "flow + peace + stillness": {
     "emotions": [
+      "stillness",
       "flow",
-      "peace",
-      "stillness"
+      "peace"
     ],
     "intensity": 0.5,
     "context_words": [
       "flowing"
     ],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.628949+00:00",
-    "last_seen": "2025-11-20T19:24:39.563237+00:00"
+    "last_seen": "2025-11-21T23:38:26.971955+00:00"
   },
   "flow + strength + touched + vulnerability + weakness": {
     "emotions": [
-      "flow",
-      "strength",
       "touched",
       "vulnerability",
+      "strength",
+      "flow",
       "weakness"
     ],
     "intensity": 0.5,
     "context_words": [],
-    "frequency": 179,
+    "frequency": 59,
     "first_seen": "2025-11-11T07:38:52.629580+00:00",
-    "last_seen": "2025-11-20T19:24:39.563787+00:00"
+    "last_seen": "2025-11-21T23:38:26.972523+00:00"
   }
 }

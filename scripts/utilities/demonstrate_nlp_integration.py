@@ -19,7 +19,7 @@ def demonstrate_enhancement():
         "I feel peaceful and content right now"
     ]
 
-    print("FP Enhanced NLP Integration Demonstration")
+    print("🧠 Enhanced NLP Integration Demonstration")
     print("=" * 50)
 
     for i, text in enumerate(test_inputs, 1):

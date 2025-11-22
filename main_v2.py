@@ -35,99 +35,6 @@ import base64
 import json
 import streamlit.components.v1 as components
 from datetime import datetime
-import urllib.request
-import shutil
-import logging
-
-logger = logging.getLogger(__name__)
-
-# When running in a fully-local processing mode, remove any remote-AI
-# provider keys from the process environment so downstream import-time
-# guards (and tests) do not accidentally detect them and attempt remote
-# calls. This is a safe, local-only convenience that respects the
-# `PROCESSING_MODE` env var and avoids changing behavior in deployed
-# environments where `PROCESSING_MODE` is not 'local'.
-try:
-    if os.environ.get('PROCESSING_MODE', 'local') == 'local':
-        for _k in ('OPENAI_API_KEY', 'STABILITY_API_KEY', 'REPLICATE_API_TOKEN'):
-            if _k in os.environ:
-                try:
-                    del os.environ[_k]
-                    logger.info(
-                        'Removed %s from environment for local mode', _k)
-                except Exception:
-                    pass
-except Exception:
-    # Defensive: never raise during import/setup
-    pass
-
-# Backwards-compatibility: if a newer Supabase "publishable" key is set,
-# map it to the legacy env var names used throughout the codebase so
-# edge functions and client code continue to find a value.
-try:
-    _pub_key = os.environ.get(
-        "SUPABASE_PUBLISHABLE_KEY") or os.environ.get("PUBLISHABLE_KEY")
-    if _pub_key:
-        if not os.environ.get("SUPABASE_ANON_KEY"):
-            os.environ["SUPABASE_ANON_KEY"] = _pub_key
-        if not os.environ.get("PROJECT_ANON_KEY"):
-            os.environ["PROJECT_ANON_KEY"] = _pub_key
-        try:
-            logger.info(
-                "Mapped SUPABASE_PUBLISHABLE_KEY to SUPABASE_ANON_KEY/PROJECT_ANON_KEY")
-        except Exception:
-            pass
-except Exception:
-    # Defensive: do not allow env-mapping failures to block startup
-    pass
-
-
-def ensure_nrc_lexicon():
-    """Ensure the full NRC lexicon file exists locally.
-
-    Behavior:
-    - If `data/lexicons/nrc_emotion_lexicon.txt` exists, do nothing.
-    - If not, and the environment variable `NRC_LEXICON_URL` is set,
-      attempt a safe download into `data/lexicons/`.
-    - If download fails, log a warning and continue (app still runs).
-    """
-    target = Path("data/lexicons/nrc_emotion_lexicon.txt")
-    bootstrap = Path("data/lexicons/nrc_emotion_lexicon_bootstrap.txt")
-
-    # If full lexicon already present, nothing to do
-    if target.exists():
-        logger.info("NRC lexicon present: %s", target)
-        return
-
-    # If no full lexicon but bootstrap exists, do nothing (loader will use bootstrap)
-    if bootstrap.exists():
-        logger.info("NRC bootstrap lexicon present: %s", bootstrap)
-        return
-
-    url = os.environ.get("NRC_LEXICON_URL")
-    if not url:
-        logger.info(
-            "NRC_LEXICON_URL not set; skipping download of NRC lexicon.")
-        return
-
-    try:
-        logger.info("Attempting to download NRC lexicon from %s", url)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        # Stream download to temporary file then atomically move
-        tmp = target.with_suffix(".tmp")
-        with urllib.request.urlopen(url, timeout=30) as resp, open(tmp, "wb") as out:
-            shutil.copyfileobj(resp, out)
-        tmp.replace(target)
-        logger.info("NRC lexicon downloaded to %s", target)
-    except Exception as e:
-        logger.warning("Failed to download NRC lexicon from %s: %s", url, e)
-        if tmp.exists():
-            try:
-                tmp.unlink()
-            except Exception:
-                pass
-        return
-
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
@@ -144,19 +51,17 @@ def ensure_nrc_lexicon():
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
     _logo_path = Path(
-        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
-            svg_bytes = _logo_path.read_bytes()
-            import base64 as _base64
-            _page_icon = f"data:image/svg+xml;base64,{_base64.b64encode(svg_bytes).decode('ascii')}"
+            _page_icon = _logo_path.read_bytes()
         except Exception:
             _page_icon = None
-    # Use data URI (SVG) if available, otherwise an emoji
+    # Use bytes (image) if available, otherwise an emoji
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon=_page_icon if _page_icon is not None else "FP",
+        page_icon=_page_icon if _page_icon is not None else "🧠",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -164,10 +69,31 @@ except Exception:
     # Ensure any failure here doesn't prevent the rest of the app from loading
     st.set_page_config(
         page_title="FirstPerson - Personal AI Companion",
-        page_icon="FP",
+        page_icon="🧠",
         layout="wide",
         initial_sidebar_state="expanded"
     )
+
+# Initialize persisted reward model for feedback-driven adaptation.
+# This keeps learned weights on disk so Streamlit UI and the FastAPI feedback
+# endpoint converge on the same persisted state (weights file path).
+try:
+    from emotional_os.feedback.reward_model import RewardModel
+
+    # repo-local persisted weights file; RewardModel will load if present
+    reward_model = RewardModel(
+        dim=128, path="emotional_os/feedback/weights.json", auto_load=True)
+except Exception:
+    reward_model = None
+
+# Optional local composer wired to the persisted reward model so the UI
+# can demonstrate re-ranking of candidate responses when feedback updates
+try:
+    from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+
+    composer = DynamicResponseComposer(reward_model)
+except Exception:
+    composer = None
 
 # Development reload marker removed. Temporary DEV timestamp and stdout
 # print were used during debugging and have been deleted.
@@ -238,7 +164,7 @@ except Exception:
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
     logo_path = Path(
-        "emotional_os/deploy/static/graphics/FirstPerson-Logo-black-cropped_notext.svg")
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
@@ -257,15 +183,6 @@ except Exception:
 # output is written to debug_imports.log in the app directory and also printed
 # to stdout so deployment logs capture it.
 try:
-    # Try to ensure the NRC lexicon is available before loading modules that
-    # may perform emotion analysis on user messages. This is a no-op when
-    # the lexicon already exists or when `NRC_LEXICON_URL` is not set.
-    try:
-        ensure_nrc_lexicon()
-    except Exception:
-        # Don't allow lexicon download failures to prevent app startup.
-        logger.exception(
-            'ensure_nrc_lexicon() failed; continuing without full NRC lexicon')
     if os.environ.get('RUN_IMPORT_DIAG') == '1':
         import platform
         import importlib
@@ -342,6 +259,79 @@ try:
 
     render_main_app = _ui_module.render_main_app
     render_main_app_safe = _ui_module.render_main_app_safe
+
+# Optional feedback widget (visible via sidebar toggle)
+try:
+    import numpy as _np
+    from emotional_os.feedback.feedback_store import FeedbackStore as _FeedbackStore
+    from emotional_os.feedback.reward_model import RewardModel as _RewardModel
+
+    _store = _FeedbackStore("emotional_os/feedback/feedback.jsonl")
+    # reuse reward_model if present, otherwise load a local instance
+    try:
+        _rm = reward_model
+        if _rm is None:
+            raise NameError
+    except Exception:
+        _rm = _RewardModel(dim=128, path="emotional_os/feedback/weights.json")
+
+    if st.sidebar.checkbox("Show Feedback Widget", value=False):
+        st.sidebar.markdown("---")
+        st.header("Feedback Loop Demo")
+        candidate_text = st.text_area(
+            "Candidate Response:", value="This is a sample response.")
+        rating = st.radio("Rate this response:", options=[
+                          +1, -1], format_func=lambda x: "👍 Positive" if x == 1 else "👎 Negative")
+        corrected_text = st.text_input(
+            "Suggest a corrected response (optional):")
+        features_text = st.text_input(
+            "Features (comma-separated, optional):", value="0.5,0.2,-0.1")
+        try:
+            feats = _np.array([float(x.strip())
+                              for x in features_text.split(",") if x.strip() != ''])
+        except Exception:
+            feats = _np.array([0.5, 0.2, -0.1])
+
+        if st.button("Submit Feedback"):
+            entry = {"rating": int(
+                rating), "text": corrected_text, "features": feats.tolist()}
+            _store.append(entry)
+            try:
+                if feats.size:
+                    _rm.update(feats, int(rating))
+            except Exception as e:
+                st.error(f"Failed to update reward model: {e}")
+            st.success("Feedback submitted and reward model updated!")
+            st.json(entry)
+            # Demonstration: build a tiny candidate set and ask the composer
+            try:
+                # ensure we have a usable reward model instance
+                if _rm is not None:
+                    from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer as _DRC
+                    _composer = _DRC(_rm)
+                    # Build three simple candidate feature vectors derived from the provided features
+                    base = _np.zeros(_rm.dim)
+                    if feats.size:
+                        base[: min(feats.size, _rm.dim)] = feats[: _rm.dim]
+
+                    candidates = [
+                        {"text": "Option A", "features": base.tolist()},
+                        {"text": "Option B", "features": (
+                            base * 0.5).tolist()},
+                        {"text": "Option C", "features": (
+                            base * -1.0).tolist()},
+                    ]
+                    try:
+                        sel = _composer.compose(candidates)
+                        st.info(f"Composer selected: {sel}")
+                    except Exception:
+                        # non-fatal: composer demo is optional
+                        pass
+            except Exception:
+                pass
+except Exception:
+    # If feedback modules are not available, silently ignore widget creation
+    pass
     render_splash_interface = _ui_module.render_splash_interface
     delete_user_history_from_supabase = _ui_module.delete_user_history_from_supabase
     SaoynxAuthentication = _auth_module.SaoynxAuthentication
@@ -659,94 +649,6 @@ def main():
     if st.session_state.get('force_splash', False):
         render_splash_interface(auth)
         return
-
-    # Offer a small playful control in the main app area to trigger the
-    # Streamlit Dance Mode demo. We import lazily so deployments that don't
-    # include the demo won't fail, and render the controls in a compact
-    # centered column above the main app renderer.
-    try:
-        from demos.streamlit_dance_mode import dance_mode  # type: ignore
-    except Exception:
-        dance_mode = None
-
-    try:
-        ctrl_container = st.container()
-        with ctrl_container:
-            # Helper: show the Dance Mode control only when we detect a
-            # celebratory cue from recent local preprocessing, or when the
-            # environment explicitly allows always-on dance controls.
-            def _is_celebration() -> bool:
-                try:
-                    # Env override to force-show the control (useful for demo/debug)
-                    if os.environ.get('ALLOW_DANCE_ALWAYS') == '1':
-                        return True
-
-                    last_pre = st.session_state.get('last_preproc', {})
-                    if not isinstance(last_pre, dict):
-                        return False
-
-                    intent = (last_pre.get('intent') or '')
-                    if isinstance(intent, str) and intent.lower() in (
-                        'joy', 'joyful', 'happy', 'celebration', 'celebrate', 'excited'
-                    ):
-                        return True
-
-                    tags = last_pre.get('emotional_tags') or []
-                    for t in tags:
-                        try:
-                            if isinstance(t, str) and ('joy' in t.lower() or 'celebr' in t.lower()):
-                                return True
-                        except Exception:
-                            continue
-
-                    # No clear celebratory marker found
-                    return False
-                except Exception:
-                    return False
-
-            show_dance = _is_celebration()
-
-            # Compact centered column for the control (only render when celebratory)
-            if show_dance:
-                cols = st.columns([1, 2, 1])
-                with cols[1]:
-                    st.markdown("### Fun")
-                    try:
-                        gentle_mode = st.checkbox(
-                            "Gentle dance (no flashing)", value=True, key="dance_gentle_main")
-                        cycles = st.slider("Dance cycles", min_value=1,
-                                           max_value=20, value=6, key="dance_cycles_main")
-                        delay_s = st.slider(
-                            "Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5, key="dance_delay_main")
-                    except Exception:
-                        # If Streamlit widget creation fails for any reason, fall back to defaults
-                        gentle_mode = True
-                        cycles = 6
-                        delay_s = 0.5
-
-                    if st.button("Dance Mode 🕺", key="dance_button_main"):
-                        if dance_mode:
-                            try:
-                                dance_mode(cycles=cycles, delay_s=delay_s,
-                                           gentle_mode=gentle_mode)
-                            except Exception:
-                                st.warning(
-                                    "Dance Mode failed to run in this environment.")
-                        else:
-                            st.info(
-                                "Dance Mode demo not available in this deployment.")
-            else:
-                # If the control is hidden, keep a lightweight hint for demoers
-                # when the feature is intentionally suppressed.
-                cols = st.columns([1, 2, 1])
-                with cols[1]:
-                    st.markdown("### Fun")
-                    st.info(
-                        "Dance Mode appears on joyful moments (try saying you're excited)")
-
-    except Exception:
-        # Main-area controls must never block the main app; ignore errors.
-        pass
 
     # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
     try:
