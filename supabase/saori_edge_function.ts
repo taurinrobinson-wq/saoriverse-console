@@ -7,13 +7,13 @@ const ALLOWED_ORIGINS = [
 ];
 function getCorsHeaders(req) {
   const origin = req.headers.get("Origin");
-
+  
   // Allow Streamlit Community Cloud domains (*.streamlit.app)
   const isStreamlitApp = origin && origin.includes(".streamlit.app");
-
+  
   // Allow localhost for development
   const isLocalhost = origin && (origin.includes("localhost") || origin.includes("127.0.0.1"));
-
+  
   let allowOrigin;
   if (ALLOWED_ORIGINS.includes(origin)) {
     allowOrigin = origin;
@@ -22,7 +22,7 @@ function getCorsHeaders(req) {
   } else {
     allowOrigin = ALLOWED_ORIGINS[0];
   }
-
+  
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -31,8 +31,7 @@ function getCorsHeaders(req) {
   };
 }
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_PUBLISHABLE_KEY = Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? Deno.env.get("PUBLISHABLE_KEY");
-const SUPABASE_ANON_KEY = SUPABASE_PUBLISHABLE_KEY ?? Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY");
+const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 (function assertEnv() {
@@ -43,7 +42,7 @@ const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
   if (!OPENAI_API_KEY) missing.push("OPENAI_API_KEY");
   if (missing.length) console.error(`saori-fixed missing env: ${missing.join(", ")}`);
 })();
-Deno.serve(async (req) => {
+Deno.serve(async (req)=>{
   const corsHeaders = getCorsHeaders(req);
   if (req.method === "OPTIONS") return new Response(null, {
     status: 204,
@@ -85,12 +84,12 @@ Deno.serve(async (req) => {
       // For Supabase JS v2, use getUser
       const { data } = await userClient.auth.getUser();
       if (data?.user) userId = data.user.id;
-    } catch { }
+    } catch  {}
   }
   let body;
   try {
     body = await req.json();
-  } catch {
+  } catch  {
     return new Response(JSON.stringify({
       error: "Invalid JSON"
     }), {
@@ -200,14 +199,14 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
     const raw = extract.choices?.[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(raw);
     const glyphs = Array.isArray(parsed?.glyphs) ? parsed.glyphs : [];
-    parsedGlyphs = glyphs.filter((g) => g?.name && typeof g.name === "string").map((g) => ({
-      name: String(g.name).slice(0, 80),
-      description: String(g.description ?? "").slice(0, 300),
-      response_layer: g.response_layer ? String(g.response_layer).slice(0, 80) : undefined,
-      depth: Number.isFinite(Number(g.depth)) ? Math.max(1, Math.min(5, Number(g.depth))) : undefined,
-      glyph_type: g.glyph_type ? String(g.glyph_type).slice(0, 80) : undefined,
-      symbolic_pairing: g.symbolic_pairing ? String(g.symbolic_pairing).slice(0, 120) : undefined
-    })).slice(0, 5);
+    parsedGlyphs = glyphs.filter((g)=>g?.name && typeof g.name === "string").map((g)=>({
+        name: String(g.name).slice(0, 80),
+        description: String(g.description ?? "").slice(0, 300),
+        response_layer: g.response_layer ? String(g.response_layer).slice(0, 80) : undefined,
+        depth: Number.isFinite(Number(g.depth)) ? Math.max(1, Math.min(5, Number(g.depth))) : undefined,
+        glyph_type: g.glyph_type ? String(g.glyph_type).slice(0, 80) : undefined,
+        symbolic_pairing: g.symbolic_pairing ? String(g.symbolic_pairing).slice(0, 120) : undefined
+      })).slice(0, 5);
   } catch (e) {
     console.error("Glyph extraction failed", e);
   }
@@ -215,16 +214,16 @@ Honor ambiguity where it serves connection. Mirror the user's emotional state wi
   let upsertedGlyphs = [];
   if (parsedGlyphs.length && userId) {
     try {
-      const names = parsedGlyphs.map((g) => g.name);
+      const names = parsedGlyphs.map((g)=>g.name);
       const { data: existing } = await admin.from("glyphs").select("id, name, description, response_layer, depth, user_id").eq("user_id", userId).in("name", names);
-      const existByName = new Map((existing ?? []).map((g) => [
-        g.name,
-        g
-      ]));
+      const existByName = new Map((existing ?? []).map((g)=>[
+          g.name,
+          g
+        ]));
       const now = new Date().toISOString();
       const toInsert = [];
       const toUpdate = [];
-      for (const g of parsedGlyphs) {
+      for (const g of parsedGlyphs){
         const ex = existByName.get(g.name);
         if (!ex) {
           toInsert.push({

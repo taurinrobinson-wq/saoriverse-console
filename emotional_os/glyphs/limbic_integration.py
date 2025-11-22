@@ -62,7 +62,7 @@ class LimbicIntegrationEngine:
         self.glyph_learner = GlyphLearner(db_path) if HAS_GLYPH_LEARNER else None
         self.glyph_manager = SharedGlyphManager(db_path) if HAS_SHARED_MANAGER else None
 
-        print("FP Limbic-Adjacent Integration Engine initialized")
+        print("🧠 Limbic-Adjacent Integration Engine initialized")
 
     def process_emotion_with_limbic_mapping(self, emotion: str, intensity: float = 1.0) -> Dict[str, Any]:
         """
@@ -228,7 +228,7 @@ class LimbicIntegrationEngine:
         Generate a comprehensive report of neural activation for an emotion.
         """
         report = f"""
-FP NEURAL ACTIVATION REPORT: {emotion.upper()}
+🧠 NEURAL ACTIVATION REPORT: {emotion.upper()}
 {'=' * 60}
 
 """
@@ -291,7 +291,7 @@ BRAIN REGION ACTIVATION:
 
 def demo_limbic_integration():
     """Demo the limbic integration engine."""
-    print("FP Limbic-Adjacent Integration Engine Demo")
+    print("🧠 Limbic-Adjacent Integration Engine Demo")
     print("=" * 60)
 
     engine = LimbicIntegrationEngine()

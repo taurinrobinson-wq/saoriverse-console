@@ -16,7 +16,7 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="Emotional OS",
-    page_icon="FP",
+    page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -605,7 +605,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
             with col3:
                 st.markdown("""
-                **FP Smart Learning**
+                **🧠 Smart Learning**
                 - Adapts to your style
                 - Builds personalized vocabulary  
                 - Improves over time
@@ -741,7 +741,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
 def render_main_app():
     """Render the main application for authenticated users"""
-    st.title("FP Emotional OS - Personal AI Companion")
+    st.title("🧠 Emotional OS - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
 
     # User-specific conversation history
@@ -869,7 +869,7 @@ def render_main_app():
 
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
-        st.write("FP Learning happens only from your conversations")
+        st.write("🧠 Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
 
         if st.button("Download My Data", type="secondary"):

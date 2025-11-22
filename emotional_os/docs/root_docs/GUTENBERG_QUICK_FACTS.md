@@ -96,7 +96,7 @@ Yeats (Poems)                ██████████ 98K words
 
 ---
 
-## <strong>FP</strong> Emotional Dimensions Discovered
+## 🧠 Emotional Dimensions Discovered
 
 ### Original 8
 ```

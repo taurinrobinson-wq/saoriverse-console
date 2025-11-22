@@ -321,7 +321,7 @@ class SaoynxAuthentication:
                         "/static/graphics/FirstPerson-Logo-normalized.svg", width=40)
                 except Exception:
                     st.markdown(
-                        '<div style="font-size: 1.5rem;">FP</div>', unsafe_allow_html=True)
+                        '<div style="font-size: 1.5rem;">🧠</div>', unsafe_allow_html=True)
 
             # Center column: questions and action buttons
             with col2:

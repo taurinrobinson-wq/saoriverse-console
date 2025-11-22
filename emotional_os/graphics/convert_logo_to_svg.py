@@ -140,7 +140,7 @@ def create_simple_svg():
 
 
 if __name__ == "__main__":
-    print("FP FirstPerson Logo Conversion Tool")
+    print("🧠 FirstPerson Logo Conversion Tool")
     print("=" * 50)
 
     # Analyze the existing PNG

@@ -15,12 +15,12 @@ function getEnv() {
     if (typeof Deno !== 'undefined' && (Deno as any).env) {
         return {
             SUPABASE_URL: Deno.env.get('SUPABASE_URL') || '',
-            SUPABASE_ANON_KEY: Deno.env.get('SUPABASE_PUBLISHABLE_KEY') ?? Deno.env.get('PUBLISHABLE_KEY') ?? Deno.env.get('PROJECT_ANON_KEY') || Deno.env.get('SUPABASE_ANON_KEY') || ''
+            SUPABASE_ANON_KEY: Deno.env.get('PROJECT_ANON_KEY') || Deno.env.get('SUPABASE_ANON_KEY') || ''
         };
     }
     return {
         SUPABASE_URL: process.env.SUPABASE_URL || '',
-        SUPABASE_ANON_KEY: process.env.SUPABASE_PUBLISHABLE_KEY || process.env.PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
+        SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
     };
 }
 
