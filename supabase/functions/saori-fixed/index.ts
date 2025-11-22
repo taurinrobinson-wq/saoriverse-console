@@ -19,6 +19,11 @@ function getCorsHeaders(req) {
   };
 }
 
+function isValidUUID(v: any): boolean {
+  if (!v || typeof v !== 'string') return false;
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
+}
+
 // Read environment variables (use Deno.env like other functions)
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_PUBLISHABLE_KEY = Deno.env.get("SUPABASE_PUBLISHABLE_KEY") ?? Deno.env.get("PUBLISHABLE_KEY");
@@ -88,22 +93,24 @@ async function validateUserSession(authHeader: string, adminClient: any): Promis
   }
 }
 
-(function assertEnv() {
+function assertEnv() {
   const missing = [];
   if (!SUPABASE_URL) missing.push("SUPABASE_URL");
   if (!SUPABASE_ANON_KEY) missing.push("PROJECT_ANON_KEY|SUPABASE_ANON_KEY");
   if (!SUPABASE_SERVICE_ROLE_KEY) missing.push("PROJECT_SERVICE_ROLE_KEY|SUPABASE_SERVICE_ROLE_KEY");
-  if (!OPENAI_API_KEY) missing.push("OPENAI_API_KEY");
+  // Do NOT require OPENAI_API_KEY at startup; allow the function to operate in
+  // a local-only or supabase-only mode where OpenAI isn't available. OpenAI
+  // calls will be gated at call-time.
   if (missing.length) console.error(`saori-fixed missing env: ${missing.join(", ")}`);
-})();
+} ();
 
 Deno.serve(async (req) => {
   const corsHeaders = getCorsHeaders(req);
   try {
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders });
     if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method Not Allowed" }), { status: 405, headers: corsHeaders });
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !SUPABASE_SERVICE_ROLE_KEY || !OPENAI_API_KEY) {
-      return new Response(JSON.stringify({ error: "Server misconfiguration: required secrets missing." }), { status: 500, headers: corsHeaders });
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !SUPABASE_SERVICE_ROLE_KEY) {
+      return new Response(JSON.stringify({ error: "Server misconfiguration: required Supabase secrets missing." }), { status: 500, headers: corsHeaders });
     }
 
     // Allow platform anon key in `Authorization` while accepting a custom app token
@@ -136,7 +143,13 @@ Deno.serve(async (req) => {
     const message = body?.message?.toString?.().trim();
     const mode = body?.mode?.toString?.() || "quick";
     const requestUserId = body?.user_id?.toString?.();
-    if (requestUserId) userId = requestUserId;
+    // Accept request-supplied user_id only when it's a valid UUID; avoid
+    // assigning arbitrary strings as IDs which can cause DB errors (22P02).
+    if (requestUserId && isValidUUID(requestUserId)) {
+      userId = requestUserId;
+    } else if (requestUserId) {
+      console.log("saori-fixed: received non-UUID request.user_id; ignoring to avoid DB errors", { requestUserId });
+    }
     if (!message) return new Response(JSON.stringify({ error: "Missing 'message'" }), { status: 400, headers: corsHeaders });
 
     // 1. Mode-based tone map
@@ -150,7 +163,10 @@ Deno.serve(async (req) => {
     // 2. Extract override tone from mode
     const overrideTone = toneMap[mode] ?? null;
 
-    const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+    // Only initialize OpenAI when a key is present. Otherwise skip remote AI
+    // calls and return a local fallback reply; this supports local-only
+    // deployments where OpenAI isn't available.
+    const openai = OPENAI_API_KEY ? new OpenAI({ apiKey: OPENAI_API_KEY }) : null;
 
     const input = message.toLowerCase();
     const wantsPlain = /plain|simple|normal|talk normal|conversational|less mythic/.test(input);
@@ -216,17 +232,21 @@ Keep your response focused on emotional support and understanding. Be warm, genu
     // 6. Completion call
     let reply = "Saori echoes your words, though the oracle sleeps.";
     try {
-      console.log("Making OpenAI call with system prompt:", fullSystemPrompt.substring(0, 200) + "...");
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: fullSystemPrompt },
-          { role: "user", content: message }
-        ],
-        temperature: 0.8
-      });
-      reply = completion.choices?.[0]?.message?.content ?? reply;
-      console.log("OpenAI response received:", reply.substring(0, 100) + "...");
+      if (openai) {
+        console.log("Making OpenAI call with system prompt:", fullSystemPrompt.substring(0, 200) + "...");
+        const completion = await openai.chat.completions.create({
+          model: "gpt-4o-mini",
+          messages: [
+            { role: "system", content: fullSystemPrompt },
+            { role: "user", content: message }
+          ],
+          temperature: 0.8
+        });
+        reply = completion.choices?.[0]?.message?.content ?? reply;
+        console.log("OpenAI response received:", (reply || "").substring(0, 100) + "...");
+      } else {
+        console.log("OPENAI_API_KEY not set; skipping OpenAI call and using local fallback reply.");
+      }
     } catch (err) {
       console.error("OpenAI error:", err);
     }
