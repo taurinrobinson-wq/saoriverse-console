@@ -74,6 +74,27 @@ except Exception:
         initial_sidebar_state="expanded"
     )
 
+# Initialize persisted reward model for feedback-driven adaptation.
+# This keeps learned weights on disk so Streamlit UI and the FastAPI feedback
+# endpoint converge on the same persisted state (weights file path).
+try:
+    from emotional_os.feedback.reward_model import RewardModel
+
+    # repo-local persisted weights file; RewardModel will load if present
+    reward_model = RewardModel(
+        dim=128, path="emotional_os/feedback/weights.json", auto_load=True)
+except Exception:
+    reward_model = None
+
+# Optional local composer wired to the persisted reward model so the UI
+# can demonstrate re-ranking of candidate responses when feedback updates
+try:
+    from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+
+    composer = DynamicResponseComposer(reward_model)
+except Exception:
+    composer = None
+
 # Development reload marker removed. Temporary DEV timestamp and stdout
 # print were used during debugging and have been deleted.
 
@@ -238,6 +259,79 @@ try:
 
     render_main_app = _ui_module.render_main_app
     render_main_app_safe = _ui_module.render_main_app_safe
+
+# Optional feedback widget (visible via sidebar toggle)
+try:
+    import numpy as _np
+    from emotional_os.feedback.feedback_store import FeedbackStore as _FeedbackStore
+    from emotional_os.feedback.reward_model import RewardModel as _RewardModel
+
+    _store = _FeedbackStore("emotional_os/feedback/feedback.jsonl")
+    # reuse reward_model if present, otherwise load a local instance
+    try:
+        _rm = reward_model
+        if _rm is None:
+            raise NameError
+    except Exception:
+        _rm = _RewardModel(dim=128, path="emotional_os/feedback/weights.json")
+
+    if st.sidebar.checkbox("Show Feedback Widget", value=False):
+        st.sidebar.markdown("---")
+        st.header("Feedback Loop Demo")
+        candidate_text = st.text_area(
+            "Candidate Response:", value="This is a sample response.")
+        rating = st.radio("Rate this response:", options=[
+                          +1, -1], format_func=lambda x: "👍 Positive" if x == 1 else "👎 Negative")
+        corrected_text = st.text_input(
+            "Suggest a corrected response (optional):")
+        features_text = st.text_input(
+            "Features (comma-separated, optional):", value="0.5,0.2,-0.1")
+        try:
+            feats = _np.array([float(x.strip())
+                              for x in features_text.split(",") if x.strip() != ''])
+        except Exception:
+            feats = _np.array([0.5, 0.2, -0.1])
+
+        if st.button("Submit Feedback"):
+            entry = {"rating": int(
+                rating), "text": corrected_text, "features": feats.tolist()}
+            _store.append(entry)
+            try:
+                if feats.size:
+                    _rm.update(feats, int(rating))
+            except Exception as e:
+                st.error(f"Failed to update reward model: {e}")
+            st.success("Feedback submitted and reward model updated!")
+            st.json(entry)
+            # Demonstration: build a tiny candidate set and ask the composer
+            try:
+                # ensure we have a usable reward model instance
+                if _rm is not None:
+                    from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer as _DRC
+                    _composer = _DRC(_rm)
+                    # Build three simple candidate feature vectors derived from the provided features
+                    base = _np.zeros(_rm.dim)
+                    if feats.size:
+                        base[: min(feats.size, _rm.dim)] = feats[: _rm.dim]
+
+                    candidates = [
+                        {"text": "Option A", "features": base.tolist()},
+                        {"text": "Option B", "features": (
+                            base * 0.5).tolist()},
+                        {"text": "Option C", "features": (
+                            base * -1.0).tolist()},
+                    ]
+                    try:
+                        sel = _composer.compose(candidates)
+                        st.info(f"Composer selected: {sel}")
+                    except Exception:
+                        # non-fatal: composer demo is optional
+                        pass
+            except Exception:
+                pass
+except Exception:
+    # If feedback modules are not available, silently ignore widget creation
+    pass
     render_splash_interface = _ui_module.render_splash_interface
     delete_user_history_from_supabase = _ui_module.delete_user_history_from_supabase
     SaoynxAuthentication = _auth_module.SaoynxAuthentication
