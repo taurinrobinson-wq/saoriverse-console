@@ -20,6 +20,8 @@ import re
 import sys
 from typing import Dict, List, Optional, Tuple
 from emotional_os.glyphs import tone as tone_module
+from emotional_os.feedback.reward_model import RewardModel
+import numpy as np
 
 # Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(
@@ -43,12 +45,19 @@ except Exception:
 class DynamicResponseComposer:
     """Compose responses dynamically from linguistic fragments."""
 
-    def __init__(self):
-        """Initialize language resources."""
+    def __init__(self, reward_model: Optional[RewardModel] = None):
+        """Initialize language resources.
+
+        Args:
+            reward_model: optional `RewardModel` instance used to re-rank
+                candidate responses when available.
+        """
         self.semantic_engine = SemanticEngine() if SemanticEngine else None
         self.poetry_db = PoetryDatabase() if PoetryDatabase else None
         # Maintain a rolling tone history to adapt clarifiers over turns
         self.tone_history: List[str] = []
+        # Optional reward model used for re-ranking candidate responses
+        self.reward_model: Optional[RewardModel] = reward_model
 
         # Linguistic patterns for different emotional contexts
         self.opening_moves = {
@@ -1353,3 +1362,41 @@ class DynamicResponseComposer:
 
         # Fallback: Join parts into a single composed response
         return "\n\n".join(parts)
+
+    def compose(self, candidates: List[Dict]) -> str:
+        """
+        Rank and select from a list of textual candidate responses using the
+        optional `RewardModel`.
+
+        Each candidate is expected to be a dict with keys:
+          - "text": the candidate response string
+          - "features": numeric vector (list or numpy array) representing
+                        features used by the reward model
+
+        If no `RewardModel` is provided, the method falls back to returning
+        the first candidate's text (or an empty string if no candidates).
+        """
+        if not candidates:
+            return ""
+
+        if not self.reward_model:
+            return candidates[0].get("text", "")
+
+        scored = []
+        for c in candidates:
+            try:
+                feats = np.asarray(c.get("features", []), dtype=float)
+            except Exception:
+                feats = np.asarray([], dtype=float)
+
+            try:
+                score = float(self.reward_model.score(
+                    feats)) if feats.size else 0.0
+            except Exception:
+                score = 0.0
+
+            scored.append((c.get("text", ""), score))
+
+        # choose the candidate with the highest score
+        best = max(scored, key=lambda x: x[1])
+        return best[0]
