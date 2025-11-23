@@ -3296,10 +3296,73 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-11-13T22:30:41.231789"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Sensuality & Transformation",
+      "symbol": "\ud83c\udf39\ud83e\udd8b",
+      "core_emotions": [
+        "sensuality",
+        "transformation"
+      ],
+      "associated_keywords": [
+        "transformation",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and transformation present here",
+      "narrative_hook": "A story where sensuality meets transformation",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-23T20:24:32.045976"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Sensuality & Serenity",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "sensuality",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and serenity present here",
+      "narrative_hook": "A story where sensuality meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-23T20:24:32.055123"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Transformation & Serenity",
+      "symbol": "\ud83e\udd8b\ud83d\udcab",
+      "core_emotions": [
+        "transformation",
+        "serenity"
+      ],
+      "associated_keywords": [
+        "transformation",
+        "serenity"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the transformation and serenity present here",
+      "narrative_hook": "A story where transformation meets serenity",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-11-23T20:24:32.064083"
     }
   ],
   "metadata": {
-    "total_discovered": 157,
-    "last_updated": "2025-11-13T22:30:41.232023"
+    "total_discovered": 160,
+    "last_updated": "2025-11-23T20:24:32.064227"
   }
 }

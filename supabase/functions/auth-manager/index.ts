@@ -1,4 +1,4 @@
-import { createClient } from "npm:@supabase/supabase-js@2.45.4";
+import { createClient } from "@supabase/supabase-js";
 
 // Authentication Edge Function for Emotional OS
 // Handles user registration, login, and session management with privacy isolation
@@ -31,9 +31,21 @@ function getCorsHeaders(req: any) {
   };
 }
 
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_ANON_KEY = Deno.env.get("PROJECT_ANON_KEY") ?? Deno.env.get("SUPABASE_ANON_KEY");
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("PROJECT_SERVICE_ROLE_KEY") ?? Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+// Helper to get environment variables in both Deno and Node.js
+function getEnv(key: string): string | undefined {
+  // Check for Deno global in a safe way
+  if (typeof globalThis !== "undefined" && typeof (globalThis as any).Deno !== "undefined" && (globalThis as any).Deno.env && typeof (globalThis as any).Deno.env.get === "function") {
+    return (globalThis as any).Deno.env.get(key);
+  } else if (typeof process !== "undefined" && process.env) {
+    return process.env[key];
+  }
+  return undefined;
+}
+
+const SUPABASE_URL = getEnv("SUPABASE_URL");
+const SUPABASE_PUBLISHABLE_KEY = getEnv("SUPABASE_PUBLISHABLE_KEY") ?? getEnv("PUBLISHABLE_KEY");
+const SUPABASE_ANON_KEY = SUPABASE_PUBLISHABLE_KEY ?? (getEnv("PROJECT_ANON_KEY") ?? getEnv("SUPABASE_ANON_KEY"));
+const SUPABASE_SERVICE_ROLE_KEY = getEnv("PROJECT_SERVICE_ROLE_KEY") ?? getEnv("SUPABASE_SERVICE_ROLE_KEY");
 
 // Deno-compatible password hashing functions using Web Crypto API
 async function hashPassword(password: string, salt?: string): Promise<{ hash: string, salt: string }> {

@@ -1,6 +1,6 @@
 # Enhanced Learning System Deployment Guide
 
-## 🧠 **What This Adds:**
+## <strong>FP</strong> **What This Adds:**
 
 Your optimized edge function now includes:
 
