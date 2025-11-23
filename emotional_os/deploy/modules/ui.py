@@ -1998,6 +1998,205 @@ def render_main_app():
         }
         st.session_state[conversation_key].append(entry)
 
+        # Admin login (sidebar) and Small feedback widget: allow quick rating and attempt to persist via ingest API
+        try:
+            # Admin unlock in sidebar: requires ADMIN_SECRET env var to be set on server.
+            try:
+                import os as _os
+                # Prefer a secret stored in Streamlit secrets (safer) and
+                # fall back to the environment variable when secrets are
+                # not available (local dev or CI).
+                ADMIN_SECRET_ENV = _os.environ.get("ADMIN_SECRET")
+                ADMIN_SECRET_SECRETS = None
+                try:
+                    ADMIN_SECRET_SECRETS = (getattr(st, 'secrets', {}) or {}).get(
+                        'admin', {}).get('secret')
+                except Exception:
+                    ADMIN_SECRET_SECRETS = None
+
+                ADMIN_SECRET = ADMIN_SECRET_SECRETS or ADMIN_SECRET_ENV
+            except Exception:
+                ADMIN_SECRET = None
+
+            if ADMIN_SECRET:
+                if 'is_admin' not in st.session_state:
+                    st.session_state['is_admin'] = False
+                # show simple unlock UI in the sidebar
+                if not st.session_state.get('is_admin'):
+                    token = st.sidebar.text_input(
+                        "Admin token", type="password", key="admin_token_input")
+                    if st.sidebar.button("Unlock admin", key="admin_unlock"):
+                        if token and token == ADMIN_SECRET:
+                            st.session_state['is_admin'] = True
+                            st.sidebar.success("Admin unlocked")
+                        else:
+                            st.sidebar.error("Invalid admin token")
+                else:
+                    if st.sidebar.button("Lock admin", key="admin_lock"):
+                        st.session_state['is_admin'] = False
+                        st.sidebar.info("Admin locked")
+
+            with st.expander("Was this reply helpful?"):
+                cols = st.columns([1, 3])
+                # unique keys so multiple exchanges don't clash
+                idx = len(st.session_state[conversation_key])
+                with cols[0]:
+                    helpful = st.radio(
+                        "Helpful?", ("Yes", "No"), key=f"feedback_choice_{idx}")
+                with cols[1]:
+                    rating = st.slider("Rating", 0, 5, 0,
+                                       key=f"feedback_rating_{idx}")
+
+                # Admin-only helper: allow entering a comma-separated feature vector
+                features_list = None
+                try:
+                    is_admin = bool(st.session_state.get('is_admin'))
+                except Exception:
+                    is_admin = False
+                if is_admin:
+                    feat_input = st.text_input(
+                        "Admin: features (comma-separated)", key=f"features_input_{idx}")
+                    if feat_input:
+                        try:
+                            features_list = [
+                                float(x.strip()) for x in feat_input.split(',') if x.strip()]
+                            st.caption(
+                                f"Parsed features length: {len(features_list)}")
+                        except Exception:
+                            st.warning(
+                                "Could not parse features - ensure comma-separated floats")
+
+                if st.button("Send feedback", key=f"feedback_send_{idx}"):
+                    payload = {
+                        "message": entry.get("assistant"),
+                        "rating": int(rating),
+                        "metadata": {
+                            "user_id": st.session_state.get("user_id"),
+                            "conversation_id": st.session_state.get("current_conversation_id", "default"),
+                            "user_message": entry.get("user"),
+                            "timestamp": entry.get("timestamp"),
+                            "processing_mode": entry.get("mode")
+                        }
+                    }
+                    # If an admin provided an explicit feature vector, include it
+                    # in the persisted payload so the RewardModel can consume it.
+                    try:
+                        if features_list is not None:
+                            payload['features'] = features_list
+                    except Exception:
+                        # Non-fatal: continue without features if parsing failed
+                        pass
+
+                    sent = False
+                    # First try: POST to configured ingest endpoint (env or localhost)
+                    try:
+                        import os as _os
+                        FEEDBACK_API_URL = _os.environ.get(
+                            "FEEDBACK_API_URL", "http://localhost:8000/ingest")
+                        try:
+                            import requests as _requests
+                            resp = _requests.post(
+                                FEEDBACK_API_URL, json=payload, timeout=5)
+                            if resp.status_code == 200:
+                                st.success("Feedback saved via ingest API.")
+                                sent = True
+                                # After successful persist, try synchronous RewardModel update (admin-only)
+                                try:
+                                    import os as _os
+                                    is_admin = bool(st.session_state.get('is_admin')) or _os.environ.get(
+                                        'ADMIN_MODE') == '1' or bool(getattr(st, 'secrets', {}).get('admin_mode', False))
+                                except Exception:
+                                    is_admin = False
+                                try:
+                                    if is_admin:
+                                        # Only update model if features are present in the payload
+                                        features = payload.get('features')
+                                        if features:
+                                            # Use existing model in session if available
+                                            rm = st.session_state.get(
+                                                'reward_model')
+                                            if rm is None:
+                                                from emotional_os.feedback.reward_model import RewardModel
+                                                # build a sane default path near feedback store
+                                                from emotional_os.feedback import store as _fmstore
+                                                weights_path = _os.path.join(
+                                                    _os.path.dirname(_fmstore.__file__), 'weights.json')
+                                                rm = RewardModel(
+                                                    dim=len(features), path=weights_path, auto_load=True)
+                                                st.session_state['reward_model'] = rm
+                                            import numpy as _np
+                                            arr = _np.asarray(
+                                                features, dtype=float)
+                                            rm.update(arr, float(
+                                                payload.get('rating', 0)))
+                                            st.success(
+                                                "RewardModel updated with your feedback.")
+                                except Exception as _e:
+                                    # Non-fatal: log and continue
+                                    try:
+                                        logger.debug(
+                                            f"RewardModel update skipped: {_e}")
+                                    except Exception:
+                                        pass
+                            else:
+                                st.warning(
+                                    f"Ingest API returned {resp.status_code}; will save locally.")
+                        except Exception:
+                            # requests not available or POST failed; will fallback
+                            pass
+                    except Exception:
+                        pass
+
+                    # Fallback: append to local store directly
+                    if not sent:
+                        try:
+                            from emotional_os.feedback import store as _store
+
+                            # store.append_feedback expects a JSON-serializable dict
+                            _store.append_feedback(payload)
+                            st.success("Feedback saved locally.")
+                            sent = True
+
+                            # After local persist, attempt synchronous RewardModel update (admin-only)
+                            try:
+                                import os as _os
+                                is_admin = bool(st.session_state.get('is_admin')) or _os.environ.get(
+                                    'ADMIN_MODE') == '1' or bool(getattr(st, 'secrets', {}).get('admin_mode', False))
+                            except Exception:
+                                is_admin = False
+                            try:
+                                if is_admin:
+                                    features = payload.get('features')
+                                    if features:
+                                        rm = st.session_state.get(
+                                            'reward_model')
+                                        if rm is None:
+                                            from emotional_os.feedback.reward_model import RewardModel
+                                            from emotional_os.feedback import store as _fmstore
+                                            weights_path = _os.path.join(
+                                                _os.path.dirname(_fmstore.__file__), 'weights.json')
+                                            rm = RewardModel(
+                                                dim=len(features), path=weights_path, auto_load=True)
+                                            st.session_state['reward_model'] = rm
+                                        import numpy as _np
+                                        arr = _np.asarray(
+                                            features, dtype=float)
+                                        rm.update(arr, float(
+                                            payload.get('rating', 0)))
+                                        st.success(
+                                            "RewardModel updated with your feedback.")
+                            except Exception as _e:
+                                try:
+                                    logger.debug(
+                                        f"RewardModel update skipped: {_e}")
+                                except Exception:
+                                    pass
+                        except Exception as e:
+                            st.error(f"Failed to persist feedback: {e}")
+        except Exception:
+            # Non-fatal: do not let feedback UI crash the main flow
+            pass
+
         # Learn from hybrid mode conversations to improve local mode
         # AND generate new glyphs dynamically during dialogue
         if processing_mode == "hybrid":
