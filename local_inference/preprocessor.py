@@ -73,11 +73,25 @@ class Preprocessor:
         self.taxonomy_source = "default"
 
         # If taxonomy_path provided or exists at standard location, try to load it
-        if taxonomy_path and os.path.exists(taxonomy_path):
+        if taxonomy_path:
             try:
-                with open(taxonomy_path, "r", encoding="utf-8") as tf:
-                    self.taxonomy = json.load(tf)
-                    self.taxonomy_source = taxonomy_path
+                if os.path.exists(taxonomy_path):
+                    with open(taxonomy_path, "r", encoding="utf-8") as tf:
+                        self.taxonomy = json.load(tf)
+                        self.taxonomy_source = taxonomy_path
+                else:
+                    # Attempt to load taxonomy relative to this module to
+                    # avoid issues when tests change the current working
+                    # directory during a full suite run.
+                    alt = os.path.join(os.path.dirname(
+                        __file__), 'emotional_taxonomy_sample.json')
+                    if os.path.exists(alt):
+                        with open(alt, 'r', encoding='utf-8') as tf:
+                            self.taxonomy = json.load(tf)
+                            self.taxonomy_source = alt
+                    else:
+                        self.taxonomy = DEFAULT_TAXONOMY
+                        self.taxonomy_source = "default"
             except Exception:
                 self.taxonomy = DEFAULT_TAXONOMY
                 self.taxonomy_source = "default"

@@ -1,5 +1,5 @@
-from .feedback_store import FeedbackStore
-from .reward_model import RewardModel
-from .integration import select_best_response
+"""Feedback package for Emotional OS.
 
-__all__ = ["FeedbackStore", "RewardModel", "select_best_response"]
+Provides a small HTTP ingest API and durable JSONL store for feedback entries.
+"""
+__all__ = ["api", "store"]

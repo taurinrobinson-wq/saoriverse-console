@@ -16,7 +16,7 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="Emotional OS",
-    page_icon="🧠",
+    page_icon="FP",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -58,7 +58,8 @@ class AuthenticationManager:
         if 'login_attempts' not in st.session_state:
             st.session_state.login_attempts = {}
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+            # Default to local-only processing to avoid external API calls
+            st.session_state.processing_mode = "local"
 
     def hash_password(self, password: str, salt: str = None) -> tuple:
         """Hash password with salt - matches backend exactly"""
@@ -605,7 +606,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
             with col3:
                 st.markdown("""
-                **🧠 Smart Learning**
+                **FP Smart Learning**
                 - Adapts to your style
                 - Builds personalized vocabulary  
                 - Improves over time
@@ -741,7 +742,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
 def render_main_app():
     """Render the main application for authenticated users"""
-    st.title("🧠 Emotional OS - Personal AI Companion")
+    st.title("FP Emotional OS - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
 
     # User-specific conversation history
@@ -760,19 +761,14 @@ def render_main_app():
             st.session_state['prefer_ai'] = True
 
         with col1:
-            mode_options = ["hybrid", "local"]
-            current = st.session_state.get('processing_mode', 'hybrid')
+            # Hide interactive selector and enforce local-only mode to prevent
+            # outbound API requests from authenticated flows.
             try:
-                idx = mode_options.index(current)
-            except ValueError:
-                idx = 0
-            processing_mode = st.selectbox(
-                "Processing Mode",
-                mode_options,
-                index=idx,
-                help="Hybrid: Best performance, Local: Maximum privacy",
-            )
-            st.session_state.processing_mode = processing_mode
+                st.markdown(
+                    "**Processing Mode:** Local (offline — no external API calls)")
+                st.session_state.processing_mode = 'local'
+            except Exception:
+                st.session_state.setdefault('processing_mode', 'local')
 
         with col2:
             if st.button("Clear History", type="secondary"):
@@ -869,7 +865,7 @@ def render_main_app():
 
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
-        st.write("🧠 Learning happens only from your conversations")
+        st.write("FP Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
 
         if st.button("Download My Data", type="secondary"):

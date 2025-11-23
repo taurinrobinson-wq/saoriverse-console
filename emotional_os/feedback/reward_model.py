@@ -1,105 +1,91 @@
-from __future__ import annotations
 import json
-from pathlib import Path
-from typing import Optional
-import tempfile
 import os
+from typing import Optional
 
-try:
-    import numpy as np
-except Exception:  # pragma: no cover - tests will install numpy
-    np = None
+import numpy as np
 
 
 class RewardModel:
-    """A tiny perceptron-style reward model.
+    """A tiny online reward model (perceptron-like) for demo purposes.
 
-    It keeps a weight vector and supports scoring and simple online updates.
-    We persist weights to a JSON file so learned state survives restarts.
+    Stores weights as a simple list in a JSON file. Methods:
+    - score(features) -> float
+    - update(features, reward) -> None
+    - save()/load()
     """
 
-    def __init__(self, dim: int = 128, path: str | Path = "emotional_os/feedback/weights.json", auto_load: bool = False):
-        if np is None:
-            raise RuntimeError("numpy is required for RewardModel")
+    def __init__(self, dim: int = 128, path: Optional[str] = None, auto_load: bool = True):
         self.dim = int(dim)
-        self.path = Path(path)
-        self.auto_load = bool(auto_load)
-        # initialize weights then attempt to load persisted values
+        self.path = path or os.path.join(
+            os.path.dirname(__file__), "weights.json")
         self.weights = np.zeros(self.dim, dtype=float)
-        # Only load persisted weights when explicitly requested to avoid
-        # surprising test-time interactions with a repository-level weights
-        # file. Callers that want persisted state should pass `auto_load=True`.
-        if self.auto_load:
-            self.load()
+        if auto_load:
+            try:
+                self.load()
+            except Exception:
+                # Best-effort: ignore load errors
+                pass
 
     def score(self, features) -> float:
-        arr = self._ensure(features)
+        arr = np.asarray(features, dtype=float)
+        if arr.shape[0] != self.weights.shape[0]:
+            raise ValueError("Feature length does not match model dimension")
         return float(np.dot(self.weights, arr))
 
-    def update(self, features, label: int = 1) -> None:
-        """Update weights with label {+1, -1} using a perceptron step."""
-        arr = self._ensure(features)
-        if label not in (1, -1):
-            raise ValueError("label must be +1 or -1")
-        self.weights += label * arr
-        # persist immediately to keep state durable
+    def update(self, features, reward: float, lr: float = 0.1) -> None:
+        """Simple online update: weights += lr * reward * features
+
+        `reward` can be positive/negative or a scalar rating; caller controls scaling.
+        Saves weights atomically after update.
+        """
+        arr = np.asarray(features, dtype=float)
+        if arr.shape[0] != self.weights.shape[0]:
+            # If shapes differ, resize conservatively (extend or truncate)
+            new_dim = max(arr.shape[0], self.weights.shape[0])
+            new_w = np.zeros(new_dim, dtype=float)
+            new_w[: self.weights.shape[0]] = self.weights
+            self.weights = new_w
+            if arr.shape[0] > new_dim:
+                # shouldn't happen, but guard
+                arr = arr[:new_dim]
+
+        self.weights += lr * float(reward) * arr
         try:
-            self.save(self.path)
+            self.save()
         except Exception:
-            # don't raise on save failure; log could be added
+            # non-fatal
             pass
 
-    def _ensure(self, features):
-        a = np.asarray(features, dtype=float)
-        if a.shape[0] != self.dim:
-            # simple resize/pad/truncate behavior
-            b = np.zeros(self.dim, dtype=float)
-            b[: min(a.shape[0], self.dim)] = a[: self.dim]
-            return b
-        return a
-
-    def save(self, path: Path | str) -> None:
-        p = Path(path)
-        p.parent.mkdir(parents=True, exist_ok=True)
-        # save atomically: write to temp file then replace
-        data = {"dim": int(self.dim), "weights": self.weights.tolist()}
-        fd, tmp = tempfile.mkstemp(
-            dir=str(p.parent), prefix="weights_", suffix=".json")
-        try:
-            with os.fdopen(fd, "w", encoding="utf-8") as f:
-                json.dump(data, f)
-            # atomic replace
-            os.replace(tmp, str(p))
-        except Exception:
+    def save(self) -> None:
+        tmp = self.path + ".tmp"
+        obj = {"dim": int(self.weights.shape[0]),
+               "weights": self.weights.tolist()}
+        d = os.path.dirname(self.path)
+        if d:
+            os.makedirs(d, exist_ok=True)
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False)
+            f.flush()
             try:
-                if os.path.exists(tmp):
-                    os.remove(tmp)
+                os.fsync(f.fileno())
             except Exception:
                 pass
-            raise
+        os.replace(tmp, self.path)
 
     def load(self) -> None:
-        p = Path(self.path)
-        if not p.exists():
+        if not os.path.exists(self.path):
             return
-        try:
-            data = json.loads(p.read_text(encoding="utf-8"))
-            w = np.asarray(data.get("weights", []), dtype=float)
-            if w.shape[0] == self.dim:
-                self.weights = w
-            else:
-                # if dims differ, pad or truncate
-                b = np.zeros(self.dim, dtype=float)
-                b[: min(w.shape[0], self.dim)] = w[: self.dim]
-                self.weights = b
-        except Exception:
-            # ignore load errors and keep zero weights
+        with open(self.path, "r", encoding="utf-8") as f:
+            obj = json.load(f)
+        w = obj.get("weights")
+        if w is None:
             return
-
-    @classmethod
-    def load_from_file(cls, path: Path | str) -> "RewardModel":
-        p = Path(path)
-        data = json.loads(p.read_text(encoding="utf-8"))
-        rm = cls(dim=int(data.get("dim", 128)), path=path)
-        rm.weights = np.asarray(data.get("weights", []), dtype=float)
-        return rm
+        arr = np.asarray(w, dtype=float)
+        if arr.shape[0] != self.weights.shape[0]:
+            # resize
+            new_dim = max(arr.shape[0], self.weights.shape[0])
+            new_w = np.zeros(new_dim, dtype=float)
+            new_w[: arr.shape[0]] = arr
+            self.weights = new_w
+        else:
+            self.weights = arr

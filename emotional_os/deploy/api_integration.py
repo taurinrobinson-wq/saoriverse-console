@@ -172,7 +172,7 @@ class DocumentGenerationAPI:
             </head>
             <body>
                 <div class="header">
-                    <h1>🧠 FirstPerson Emotional Journey Report</h1>
+                    <h1>FP FirstPerson Emotional Journey Report</h1>
                     <p>Personal AI Companion Analysis</p>
                     <p>Generated: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
                 </div>

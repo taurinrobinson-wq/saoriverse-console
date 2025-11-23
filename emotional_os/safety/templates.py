@@ -6,25 +6,16 @@ class SanctuaryTemplates:
 
     @staticmethod
     def compassionate_acknowledgment(tone: Optional[str] = None) -> str:
-        base = (
-            "I'm here with you. What you're sharing matters, and you won't be rejected or shamed for it. "
-            "Your experience deserves care and gentle attention."
-        )
-        tone_map = {
-            "grief": " It's okay to feel the full weight of this.",
-            "containment": " You don't have to carry it all alone right now.",
-            "insight": " You're noticing something true—go slowly and be kind to yourself.",
-            "joy": " Your joy is welcome here, too.",
-            "longing": " The ache you feel points to what matters most.",
-        }
-        return base + tone_map.get((tone or "").lower(), "")
+        # Minimal acknowledgment retained (short and non-repetitive).
+        # This replaces the previous long paragraph while keeping a
+        # concise framing for non-compassionate responses.
+        return "What you're sharing matters."
 
     @staticmethod
     def gentle_boundaries() -> str:
-        return (
-            "If this brings up a lot, we can slow down or focus on one small piece at a time. "
-            "You get to set the pace."
-        )
+        # Deprecated: suppress the gentle-boundaries sentence so glyph-driven
+        # fallbacks do not emit the long repeated message.
+        return ""
 
     @staticmethod
     def crisis_footer(locale: str = "US") -> str:
