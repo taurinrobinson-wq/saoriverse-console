@@ -58,7 +58,8 @@ class AuthenticationManager:
         if 'login_attempts' not in st.session_state:
             st.session_state.login_attempts = {}
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+            # Default to local-only processing to avoid external API calls
+            st.session_state.processing_mode = "local"
 
     def hash_password(self, password: str, salt: str = None) -> tuple:
         """Hash password with salt - matches backend exactly"""
@@ -760,19 +761,14 @@ def render_main_app():
             st.session_state['prefer_ai'] = True
 
         with col1:
-            mode_options = ["hybrid", "local"]
-            current = st.session_state.get('processing_mode', 'hybrid')
+            # Hide interactive selector and enforce local-only mode to prevent
+            # outbound API requests from authenticated flows.
             try:
-                idx = mode_options.index(current)
-            except ValueError:
-                idx = 0
-            processing_mode = st.selectbox(
-                "Processing Mode",
-                mode_options,
-                index=idx,
-                help="Hybrid: Best performance, Local: Maximum privacy",
-            )
-            st.session_state.processing_mode = processing_mode
+                st.markdown(
+                    "**Processing Mode:** Local (offline — no external API calls)")
+                st.session_state.processing_mode = 'local'
+            except Exception:
+                st.session_state.setdefault('processing_mode', 'local')
 
         with col2:
             if st.button("Clear History", type="secondary"):

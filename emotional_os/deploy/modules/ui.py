@@ -216,9 +216,19 @@ def render_controls_row(conversation_key):
         current_mode = st.session_state.processing_mode
         # Place Start Personal Log in the far-left column per layout request
         try:
-            if st.button("Start Personal Log", key="start_log_btn"):
-                st.session_state.show_personal_log = True
-                st.rerun()
+            # If the user explicitly entered demo mode, replace the personal
+            # log control with Sign In / Register buttons so demo users are
+            # encouraged to create accounts for persistence.
+            demo_active = bool(st.session_state.get('demo_active', False) or (st.session_state.get(
+                'demo_mode', False) and not st.session_state.get('authenticated', False)))
+            if demo_active:
+                if st.button("Sign in", key="main_sign_in"):
+                    st.session_state['sidebar_show_login'] = True
+                    st.experimental_rerun()
+            else:
+                if st.button("Start Personal Log", key="start_log_btn"):
+                    st.session_state.show_personal_log = True
+                    st.rerun()
         except Exception:
             pass
 
@@ -229,10 +239,17 @@ def render_controls_row(conversation_key):
         # Place Logout in the adjacent (controls[1]) column so it sits
         # immediately to the right of the Start Personal Log button.
         try:
-            if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-                from .auth import SaoynxAuthentication
-                auth = SaoynxAuthentication()
-                auth.logout()
+            demo_active = bool(st.session_state.get('demo_active', False) or (st.session_state.get(
+                'demo_mode', False) and not st.session_state.get('authenticated', False)))
+            if demo_active:
+                if st.button("Register", key="main_register"):
+                    st.session_state['sidebar_show_register'] = True
+                    st.experimental_rerun()
+            else:
+                if st.button("Logout", key="controls_logout", help="Sign out of your account"):
+                    from .auth import SaoynxAuthentication
+                    auth = SaoynxAuthentication()
+                    auth.logout()
         except Exception:
             pass
     # Removed Debug and Clear History controls — these buttons did not provide
@@ -260,8 +277,10 @@ def ensure_processing_prefs():
         st.session_state['prefer_ai'] = True
 
     if 'processing_mode' not in st.session_state:
-        st.session_state.processing_mode = os.getenv(
-            'DEFAULT_PROCESSING_MODE', 'hybrid')
+        # Enforce local-only processing by default to avoid external API calls.
+        # This hides the hybrid option in the UI and prevents accidental
+        # outbound requests to OpenAI/remote services.
+        st.session_state.processing_mode = 'local'
 
     if 'prefer_ai' not in st.session_state:
         st.session_state['prefer_ai'] = True
@@ -439,26 +458,15 @@ def render_settings_sidebar():
             # Processing mode: hybrid or local
             current_mode = st.session_state.get('processing_mode', 'hybrid')
             try:
-                def _on_mode_change():
-                    # Ensure the session_state key is normalized and trigger a rerun
-                    try:
-                        st.session_state['processing_mode'] = st.session_state.get(
-                            'processing_mode', current_mode)
-                    except Exception:
-                        pass
-                    try:
-                        st.experimental_rerun()
-                    except Exception:
-                        pass
-
-                st.selectbox(
-                    "Processing mode",
-                    options=["hybrid", "local"],
-                    index=0 if current_mode == 'hybrid' else 1,
-                    key='processing_mode',
-                    help='Hybrid: AI + local parsing. Local: only local parsing.',
-                    on_change=_on_mode_change
-                )
+                # Hide the interactive processing mode selector and present
+                # a static label indicating local-only operation. This prevents
+                # accidental selection of hybrid mode which performs external API calls.
+                try:
+                    st.markdown(
+                        "**Processing mode:** Local (offline — no external API calls)")
+                    st.session_state['processing_mode'] = 'local'
+                except Exception:
+                    st.session_state.setdefault('processing_mode', 'local')
             except Exception:
                 st.session_state.setdefault('processing_mode', current_mode)
 
@@ -1156,12 +1164,19 @@ def render_main_app():
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
                 svg_markup_side = _load_inline_svg(svg_name_side)
-                st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
+                # Constrain the demo logo size so large inline SVGs do not blow out the sidebar.
+                demo_html = (
+                    "<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; "
+                    "background: rgba(250,250,250,0.02); text-align:center;'>"
+                    f"<div class='demo-logo' style='width:64px;height:64px;margin:0 auto; display:block;'>{svg_markup_side}</div>"
+                    "<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>"
+                    "<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p>"
+                    "</div>"
+                )
+                st.markdown(demo_html, unsafe_allow_html=True)
             except Exception:
                 st.markdown("### Account")
-            st.markdown(
-                "Create an account or sign in to keep your conversations and enable full features.")
+            # Account hint intentionally rendered inside the demo card; avoid duplicate messages here.
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
@@ -1183,16 +1198,25 @@ def render_main_app():
             # Quick demo entry (uses auth quick_login_bypass when available)
             if auth and hasattr(auth, 'quick_login_bypass'):
                 if st.button("Continue in demo", key="sidebar_continue_demo"):
+                    # Mark the session as an interactive demo user no matter what
+                    st.session_state['demo_active'] = True
+                    st.session_state.setdefault('demo_mode', True)
+                    # Ensure we remain unauthenticated in demo flow
+                    st.session_state['authenticated'] = False
+                    # Ensure demo user id is present
+                    st.session_state.setdefault(
+                        'user_id', st.session_state.get('demo_placeholder_id'))
+                    st.session_state.setdefault('username', 'Demo User')
+                    # Clear any optimistic server-save flags
+                    st.session_state.pop(
+                        'save_conversation_failed_logged', None)
                     try:
                         auth.quick_login_bypass()
                     except Exception:
-                        # Best-effort: fall back to local demo session state
-                        st.session_state.authenticated = False
-                        st.session_state.user_id = st.session_state.get(
-                            'user_id')
-                        st.session_state.username = st.session_state.get(
-                            'username')
-                        st.rerun()
+                        # If quick bypass fails, we still continue in demo mode
+                        pass
+                    # Rerun to render the main app in demo-active state
+                    st.rerun()
 
             st.markdown("---")
 
@@ -1228,22 +1252,44 @@ def render_main_app():
             st.markdown("### Settings")
 
         # Persist history toggle
-        persist_default = st.session_state.get('persist_history', True)
-        st.session_state['persist_history'] = st.checkbox(
-            "💾 Save my chats",
-            value=persist_default,
-            help="Automatically save conversations for later retrieval"
-        )
-        # Best-effort: persist the user's preference back to server when available
+        # In demo mode we should NOT show the 'Save my chats' checkbox
+        # (demo users cannot persist). Instead show a small 'Learn more'
+        # toggle that explains how saving works and how to register.
         try:
-            mgr = st.session_state.get('conversation_manager')
-            if mgr:
-                mgr.save_user_preferences({
-                    'persist_history': bool(st.session_state.get('persist_history', False)),
-                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
-                })
+            is_demo = bool(st.session_state.get('demo_mode', False))
         except Exception:
-            pass
+            is_demo = False
+
+        if is_demo:
+            # Provide a small learn-more toggle for demo users
+            if 'show_demo_learn_more' not in st.session_state:
+                st.session_state['show_demo_learn_more'] = False
+
+            if st.button("Learn more about saving chats", key="learn_more_toggle"):
+                st.session_state['show_demo_learn_more'] = not st.session_state['show_demo_learn_more']
+
+            if st.session_state.get('show_demo_learn_more'):
+                st.info(
+                    "Register or sign in to securely save your conversations. "
+                    "Saved chats are tied to your account and can be retrieved across devices."
+                )
+        else:
+            persist_default = st.session_state.get('persist_history', True)
+            st.session_state['persist_history'] = st.checkbox(
+                "💾 Save my chats",
+                value=persist_default,
+                help="Automatically save conversations for later retrieval"
+            )
+            # Best-effort: persist the user's preference back to server when available
+            try:
+                mgr = st.session_state.get('conversation_manager')
+                if mgr:
+                    mgr.save_user_preferences({
+                        'persist_history': bool(st.session_state.get('persist_history', False)),
+                        'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
+                    })
+            except Exception:
+                pass
 
         # Privacy & Consent settings - only show when user is authenticated
         if st.session_state.get('authenticated'):
@@ -2260,16 +2306,22 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
 
-                    # Update learning statistics
+                    # Safely access nested keys to avoid KeyError when pipeline is incomplete.
                     st.session_state['learning_stats']['exchanges_processed'] += 1
-                    if evolution_result['learning_result'].get('learned_to_user', False):
+                    pipeline = evolution_result.get('pipeline_stages', {}) if isinstance(
+                        evolution_result, dict) else {}
+                    hybrid_learning = pipeline.get('hybrid_learning', {})
+                    learning_result = hybrid_learning.get(
+                        'learning_result', {}) if isinstance(hybrid_learning, dict) else {}
+                    if learning_result and learning_result.get('learned_to_user', False):
                         st.session_state['learning_stats']['signals_learned'] += len(
-                            evolution_result.get('emotional_signals', [])
+                            evolution_result.get('emotional_signals', []) or []
                         )
 
-                    # Check if new glyphs were generated
-                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
-                        'new_glyphs_generated', [])
+                    # Check if new glyphs were generated in a safe way
+                    glyph_gen = pipeline.get('glyph_generation', {})
+                    new_glyphs = glyph_gen.get('new_glyphs_generated', []) if isinstance(
+                        glyph_gen, dict) else []
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
                         if 'new_glyphs_this_session' not in st.session_state:
@@ -2364,7 +2416,11 @@ def render_main_app():
                 )
 
                 if not success:
-                    logger.warning(f"Failed to save conversation: {message}")
+                    # Avoid flooding logs with repeated 401/permission errors; record once per session.
+                    if not st.session_state.get('save_conversation_failed_logged'):
+                        logger.warning(
+                            f"Failed to save conversation: {message}")
+                        st.session_state['save_conversation_failed_logged'] = True
         except Exception as e:
             # Best-effort: do not break the UI if persistence fails
             logger.warning(f"Conversation persistence error: {e}")
