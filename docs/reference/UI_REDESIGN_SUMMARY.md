@@ -30,7 +30,7 @@
 - **Top Discoveries**: Displays most effective new patterns
 - **Learning Stats**: Detailed analytics for developers
 
-## 🧠 Medium Language Model Approach
+## <strong>FP</strong> Medium Language Model Approach
 
 ### How It Learns:
 1. **Pattern Extraction**: Regex-based emotional phrase detection

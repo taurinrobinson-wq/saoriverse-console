@@ -128,7 +128,7 @@ def test_glyph_generation_offline():
 
     # Show pattern cache
     if generator.detected_patterns:
-        print("🧠 Detected Pattern Cache:")
+        print("FP Detected Pattern Cache:")
         for pattern_key, pattern in generator.detected_patterns.items():
             print(f"   • {pattern_key}: {pattern.frequency} occurrences")
 
