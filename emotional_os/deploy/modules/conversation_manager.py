@@ -87,6 +87,7 @@ class ConversationManager:
             supabase_key
             or os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
             or os.environ.get("SUPABASE_KEY")
+            or st.secrets.get("supabase", {}).get("service_role_key")
             or st.secrets.get("supabase", {}).get("key")
         )
         self.base_url = self._normalize_supabase_url(
@@ -146,7 +147,15 @@ class ConversationManager:
             if response.status_code in (200, 201):
                 return True, "Conversation saved successfully"
             else:
-                return False, f"Failed to save conversation (HTTP {response.status_code})"
+                # Include response body to aid debugging (e.g., 401 Unauthorized from Supabase)
+                try:
+                    body = response.text
+                except Exception:
+                    body = '<unreadable response body>'
+                logger.debug(
+                    f"save_conversation HTTP {response.status_code}: {body}")
+                msg = f"Failed to save conversation (HTTP {response.status_code}): {body}"
+                return False, msg
 
         except Exception as e:
             logger.error(f"Error saving conversation: {e}")
