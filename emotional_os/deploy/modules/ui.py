@@ -1014,11 +1014,11 @@ def render_main_app():
                     f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
 
             st.info(
-                "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+                "Running in demo mode — Sign in or create an account to save your conversations and unlock personalized features.")
         except Exception:
             try:
                 st.info(
-                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+                    "Running in demo mode — Sign in or create an account to save your conversations and unlock personalized features.")
             except Exception:
                 pass
     else:
