@@ -448,6 +448,14 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     - glyphs_selected: list of glyph dicts augmented with 'score' and 'display_name', sorted by score desc
     response_source is one of: 'llm', 'dynamic_composer', 'fallback_message'
     """
+    # If there are no glyph candidates and no extracted signals, prefer a
+    # gentle fallback message rather than attempting composition. This keeps
+    # behavior deterministic for callers and tests that expect a
+    # 'fallback_message' response when no glyphs/signals are available.
+    if not glyphs and not signals:
+        fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+        return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message', []
+
     if not glyphs:
         # Fallback: if no glyphs found via gates, search by emotion tone directly
         fallback_glyphs = _find_fallback_glyphs(signals, input_text)
@@ -488,9 +496,10 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                 pass
 
             # If still no glyphs, return a gentle fallback message rather than None
-            if not glyphs:
-                fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
-                return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message'
+                if not glyphs:
+                    fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
+                    # Return a canonical 4-tuple: include an empty list for `glyphs_selected`
+                    return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message', []
 
     # If we still have no glyphs (for example, when signal extraction found
     # nothing), attempt a graceful keyword-based DB lookup using longer tokens
@@ -536,14 +545,18 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     # missing in this test environment), provide a minimal in-memory fallback
     # set of glyphs so downstream selection still returns a sensible result.
     if not glyphs:
-        glyphs = [
-            {'glyph_name': 'Still Recognition',
-                'description': 'Being seen without reaction. A gaze that receives without grasping.', 'gate': 'Gate 5'},
-            {'glyph_name': 'Still Insight',
-                'description': 'Quiet revelation and noticing.', 'gate': 'Gate 5'},
-            {'glyph_name': 'Still Ache',
-                'description': 'Neutral ache that lingers under activity.', 'gate': 'Gate 5'},
-        ]
+        # Populate an in-memory fallback glyph set only when explicitly enabled.
+        # In test environments we prefer returning a fallback_message instead
+        # so callers can handle the absence of glyph matches deterministically.
+        if os.getenv('ALLOW_INMEMORY_GLYPH_FALLBACK', '0') == '1':
+            glyphs = [
+                {'glyph_name': 'Still Recognition',
+                    'description': 'Being seen without reaction. A gaze that receives without grasping.', 'gate': 'Gate 5'},
+                {'glyph_name': 'Still Insight',
+                    'description': 'Quiet revelation and noticing.', 'gate': 'Gate 5'},
+                {'glyph_name': 'Still Ache',
+                    'description': 'Neutral ache that lingers under activity.', 'gate': 'Gate 5'},
+            ]
 
     def _glyph_is_valid(g: Dict) -> bool:
         name = (g.get('glyph_name') or '')

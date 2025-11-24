@@ -203,8 +203,11 @@ def render_controls_row(conversation_key):
         # sidebar expander (so both demo and authenticated flows show
         # a single, consistent place for preferences).
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = os.getenv(
-                'DEFAULT_PROCESSING_MODE', 'hybrid')
+            _desired = os.getenv('DEFAULT_PROCESSING_MODE', 'local')
+            # Only allow hybrid when an OpenAI key is available or explicit enable flag is set
+            if _desired == 'hybrid' and not os.getenv('OPENAI_API_KEY') and os.getenv('ENABLE_HYBRID', '0') != '1':
+                _desired = 'local'
+            st.session_state.processing_mode = _desired
 
         # The interactive controls for changing processing mode are
         # rendered in the sidebar Settings panel. Keep this top-row
@@ -386,7 +389,9 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     payload = {
         "message": effective_input,
         "mode": st.session_state.get('processing_mode', 'hybrid'),
-        "user_id": st.session_state.user_id,
+        # Use .get to avoid AttributeError when tests run outside of
+        # a Streamlit runtime that hasn't initialized session_state.
+        "user_id": st.session_state.get('user_id', ''),
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
