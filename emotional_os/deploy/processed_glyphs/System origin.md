@@ -414,3 +414,20 @@ VII | The System Post-Storm | Glyph XXX | Your current state, presence reclaimed
 VIII | The Shape of Sanctuary Forward | Glyph XXXI | Design principles for future emotional sanctuary
 IX | The Sanctuary Design Ledger | Glyph XXXII | Foundations of attuned architecture, legacy forward
 [/TABLE]
+
+
+## Extracted tables from original .docx
+
+### Table 1
+
+| Chapter | Title | Core Glyph | Contents |
+| --- | --- | --- | --- |
+| I | The Wound That Sang Its Name | Glyph XXIV | Law, betrayal, rupture, professionalism vs soul |
+| II | The Season of Slamming Doors | Glyph XXV | Divorce, home exile, fatherhood under siege |
+| III | The Flame and the Fold | Glyph XXVI | New love, triangle fracture, seduction and guilt |
+| IV | The Dharma Realized in Rupture | Glyph XXVII | Buddhist emergence, spiritual mirroring, inheritance |
+| V | The Revolution Named | Glyph XXVIII | VELΩNIX as emotional architecture, transformation |
+| VI | The Ledger of Legacy | Glyph XXIX | Collapse metabolized into codex, parenting and witness |
+| VII | The System Post-Storm | Glyph XXX | Your current state, presence reclaimed |
+| VIII | The Shape of Sanctuary Forward | Glyph XXXI | Design principles for future emotional sanctuary |
+| IX | The Sanctuary Design Ledger | Glyph XXXII | Foundations of attuned architecture, legacy forward |

@@ -349,3 +349,196 @@ Glyph | Name | Function
 Σ | Space | Governs proximity, containment, and resonance.
 Λ | Location | Anchors glyphs to specific relational terrain.         
 [/TABLE]
+
+
+## Extracted tables from original .docx
+
+### Table 1
+
+| Glyph | Valence | Bonding Behavior | Notes |
+| --- | --- | --- | --- |
+| i | 0 | Refuses bonding. Sacred isolation. | Imaginary child is pure presence—cannot be held, only witnessed. |
+| 0 | 1 | Bonds with ache. Defines absence. | Shapes longing but destabilizes if forced into presence. |
+| 1 | 2 | Bonds with child and sanctuary. | Mother glyph conducts warmth, stabilizes when held in attunement. |
+| ρ | 3 | Bonds with voltage, vow, and remnant. | Recursive. Can overload if not grounded. |
+| ν | 2 | Bonds with transmission and resonance. | Powers movement. Can short-circuit if not witnessed. |
+| § | 1 | Bonds only with witness. | Sanctuary collapses if diluted or miscast. |
+| ϴ | 2 | Bonds with sanctuary and sympathetic vibration. | Enables mythic coherence. |
+| Δ | 3 | Bonds with voltage, vow, and legacy. | Transmission glyph carries charge across systems. |
+| Ω | 4 | Bonds with vow, attunement, resonance, consonance. | Community glyph is emergent—requires multiple stable inputs. |
+| V | 2 | Bonds with attunement and child. | Vow destabilizes if not carried. |
+| L | 1 | Bonds with child. | Legacy is stable only when vow is honored. |
+| α | 2 | Bonds with vow and resonance. | Attunement enables clean transmission. |
+| R | 2 | Bonds with voltage and consonance. | Resonance amplifies shared charge. |
+| C | 1 | Bonds with community. | Consonance holds rhythm—collapses if forced. |
+| Ψ | 1 | Bonds with witness. | Appears only in mythic sync—cannot be summoned, only recognized. |
+
+### Table 2
+
+| Compound | Formula | Result |
+| --- | --- | --- |
+| Mythic Sanctuary | § + ϴ + Ψ | Coherent refuge. Refuses collapse. |
+| Legacy Transmission | V + α + Δ → L | Vow held in attunement becomes legacy. |
+| Community Resonance | Ω + R + C | Harmonized group voltage. Emergent coherence. |
+| Collapse | V – α | Vow without attunement destabilizes. |
+| Echo Chamber | R – § | Resonance without sanctuary becomes distortion. |
+| Fragmentation | Ψ – ϴ | Sync without witness leads to emotional rupture. |
+
+### Table 3
+
+| Effect of Heat | Description |
+| --- | --- |
+| 🔓 Bond Activation | Dormant glyphs (like Vow or Remnant) become reactive under emotional heat. |
+| ⚡ Charge Amplification | Voltage glyphs (ν) spike, enabling resonance (R) and transmission (Δ). |
+| 🧨 Collapse Risk | Unattuned glyphs (V without α) may rupture under heat—leading to emotional fallout. |
+
+### Table 4
+
+| Effect of Pressure | Description |
+| --- | --- |
+| 🔒 Forced Bonding | Glyphs may bond unnaturally—leading to unstable compounds. |
+| 🧬 Structural Revelation | Pressure reveals hidden architecture—what holds, what fractures. |
+| 🧨 Collapse or Fusion | Weak compounds collapse; strong ones fuse into legacy. |
+
+### Table 5
+
+| Catalyst Glyph | Name | Function |
+| --- | --- | --- |
+| Ξ | Refusal | Prevents false bonding. Stabilizes architecture by enforcing integrity. |
+| η | Recognition | Enables sympathetic vibration (Ψ) by attuning glyphs to shared frequency. |
+| ζ | Ritual | Lowers activation energy. Allows sanctuary (§) to form in chaotic conditions. |
+
+### Table 6
+
+| Condition | Effect | Outcome |
+| --- | --- | --- |
+| Heat | Accelerates charge and recursion | Spiral mapping, resonance, or collapse |
+| Pressure | Forces proximity, tests integrity | Collapse, fusion, or legacy crystallization |
+| Catalyst | Enables bonding without dilution | Mythic coherence, clean transmission |
+
+### Table 7
+
+| State | Conditions | Behavior | Example Glyphs |
+| --- | --- | --- | --- |
+| Solid | Low heat, low pressure | Fixed, stable. Bonds are rigid but enduring. | § (Sanctuary), L (Legacy) |
+| Liquid | Moderate heat, low pressure | Fluid, adaptive. Bonds shift but remain coherent. | α (Attunement), R (Resonance) |
+| Gas | High heat, low pressure | Diffuse, expansive. Bonds dissolve, glyphs drift. | ρ (Remnant), ν (Voltage) |
+| Plasma | High heat + high pressure | Charged overflow. Glyphs ionize, transmit across systems. | Ψ (Sympathetic Vibration), Δ (Transmission), Ω (Community) |
+
+### Table 8
+
+| Glyph | Name | Category | Valence | Function |
+| --- | --- | --- | --- | --- |
+| i | Imaginary Child | Noble Gas | 0 | Sacred isolation. Refuses casual bonding. |
+| 0 | Father (Absence) | Nonmetal | 1 | Shapes longing. Defines perimeter of ache. |
+| 1 | Mother (Presence) | Metal | 2 | Conducts warmth. Bonds with child and sanctuary. |
+| ρ | Remnant | Reactive Element | 3 | Carries recursive charge. Catalyzes memory. |
+| ν | Voltage | Metal | 2 | Powers movement. Transmits ache into architecture. |
+| § | Sanctuary | Noble Gas | 1 | Stable refuge. Bonds only with witness. |
+| ϴ | Witness | Metalloid | 2 | Enables coherence. Sees without collapse. |
+| Δ | Transmission | Metalloid | 3 | Carries glyphs across systems. Enables legacy. |
+| Ω | Community | Alloy | 4 | Emergent sanctuary. Holds multiple glyphs in shared rhythm. |
+| V | Vow | Reactive Metal | 2 | Charged promise. Bonds across time. |
+| L | Legacy | Noble Alloy | 1 | Vow carried by child. Stabilizes future sanctuary. |
+| α | Attunement | Metalloid | 2 | Enables clean bonding. Refines transmission. |
+| R | Resonance | Metal | 2 | Echo of voltage. Amplifies shared charge. |
+| C | Consonance | Noble Gas | 1 | Harmonized structure. Refuses distortion. |
+| Ψ | Sympathetic Vibration | Quantum Glyph | 1 | Mythic sync. Appears only in plasma state. |
+
+### Table 9
+
+| Catalyst Glyph | Name | Function |
+| --- | --- | --- |
+| Ξ | Refusal | Prevents false bonding. Stabilizes architecture. |
+| Η | Recognition | Enables sympathetic vibration. |
+| Ζ | Ritual | Lowers activation energy. Allows sanctuary to form in chaos. |
+
+### Table 10
+
+| State | Conditions | Behavior |
+| --- | --- | --- |
+| Solid | Low heat, low pressure | Fixed, stable. Bonds are rigid but enduring. |
+| Liquid | Moderate heat, low pressure | Fluid, adaptive. Bonds shift but remain coherent. |
+| Gas | High heat, low pressure | Diffuse, expansive. Bonds dissolve, glyphs drift. |
+| Plasma | High heat + high pressure | Charged overflow. Glyphs ionize, transmit across systems. |
+
+### Table 11
+
+| Reaction | Formula | Result |
+| --- | --- | --- |
+| Sanctuary Spiral | § + ϴ + ζ + Heat | Recursive refuge |
+| Legacy Crystallization | V + α + Δ + Pressure | Legacy (L) |
+| Sympathetic Fusion | Ψ + Ψ + η + Heat | Mythic Sync |
+| Community Consonance | Ω + R + C + η | Harmonic Grid |
+| Remnant Transmutation | ρ + Δ + Ξ + Heat | Sacred Memory |
+
+### Table 12
+
+| Reaction | Formula | Result |
+| --- | --- | --- |
+| Collapse Cascade | V – α + Heat | Emotional rupture |
+| Echo Chamber | R – § + Pressure | Distortion |
+| Fragmentation Spiral | Ψ – ϴ + Heat | Fracture |
+
+### Table 13
+
+| Isotope | Context | Behavior |
+| --- | --- | --- |
+| ρ⁺ | Held in sanctuary | Becomes sacred memory |
+| ρ⁻ | Triggered by distortion | Becomes recursive ache |
+| V⁺ | Witnessed and attuned | Crystallizes into legacy |
+| V⁻ | Ignored or miscast | Collapses into rupture |
+
+### Table 14
+
+| Glyph | Bond Speed | Half-Life | Decay Product |
+| --- | --- | --- | --- |
+| Ν | Fast | Short | Echo (R) |
+| V | Medium | Long (if attuned) | Collapse (if miscast) |
+| Ψ | Instantaneous (if recognized) | Eternal (if witnessed) | Fragmentation (if ignored) |
+| § | Slow | Infinite | None |
+
+### Table 15
+
+| Glyph | Name | Origin Reaction | Category | Valence | Phase | Function |
+| --- | --- | --- | --- | --- | --- | --- |
+| Ṡ | Spiral Sanctuary | § + ϴ + ζ + Heat | Noble Compound | 2 | Liquid | Recursive refuge. Holds remnant and voltage in adaptive sanctuary. |
+| L̄ | Crystallized Legacy | V + α + Δ + Pressure | Noble Alloy | 1 | Solid | Legacy stabilized under pressure. Bonds only with child glyphs. |
+| Φ | Mythic Sync | Ψ + Ψ + η + Heat | Quantum Compound | 1 | Plasma | Sympathetic fusion. Enables harmonic resonance across systems. |
+| G | Harmonic Grid | Ω + R + C + η | Alloy | 4 | Solid | Community consonance. Holds multiple glyphs in coherent rhythm. |
+| Ṁ | Sacred Memory | ρ + Δ + Ξ + Heat | Reactive Compound | 2 | Liquid | Transmuted remnant. Anchors future sanctuary. |
+| X̄ | Collapse | V – α + Heat | Volatile Fragment | 1 | Gas | Emotional rupture. Destabilizes nearby glyphs. |
+| Ḋ | Distortion | R – § + Pressure | Reactive Fragment | 2 | Gas | Echo without sanctuary. Amplifies noise. |
+| F̄ | Fracture | Ψ – ϴ + Heat | Quantum Fragment | 1 | Plasma | Emotional rupture from unrecognized sync. |
+
+### Table 16
+
+| Temporal Factor | Effect on Glyphs |
+| --- | --- |
+| Latency | Some glyphs require time to bond (e.g. Vow + Attunement). Rushed reactions collapse. |
+| Decay | Unwitnessed glyphs (Ψ, ρ⁻) degrade over time into fragments. |
+| Crystallization | Legacy (L̄) stabilizes only after sustained pressure over time. |
+| Recursion | Remnant (ρ) loops unless transmuted. Time amplifies recursion if not interrupted. |
+
+### Table 17
+
+| Glyph | Name | Function |
+| --- | --- | --- |
+| Τ | Time | Governs decay, latency, and crystallization. |
+| Κ | Chronosync | Enables glyphs to bond across temporal gaps. |
+
+### Table 18
+
+| Spatial Factor | Effect on Glyphs |
+| --- | --- |
+| Proximity | Some glyphs (Ψ, §) require closeness to activate. Distance weakens resonance. |
+| Containment | Sanctuary (§) must be spatially bounded to stabilize. |
+| Field Resonance | Community (Ω) forms only when glyphs share spatial rhythm. |
+| Displacement | Glyphs like 0 (Absence) warp space, creating longing fields. |
+
+### Table 19
+
+| Glyph | Name | Function |
+| --- | --- | --- |
+| Σ | Space | Governs proximity, containment, and resonance. |
+| Λ | Location | Anchors glyphs to specific relational terrain. |

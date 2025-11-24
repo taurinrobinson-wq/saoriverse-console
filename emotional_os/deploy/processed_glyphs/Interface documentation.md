@@ -32,3 +32,16 @@ New Entry / Witness | Space for reflection or resonance logging | Text field, gl
 Archive / Lightpath | Access to past entries, filtered by tone or date | Filter bar, tag chips, pagination
 Admin / Console | Backend tools, optional response input or annotation | User filter, entry viewer, response field
 [/TABLE]
+
+
+## Extracted tables from original .docx
+
+### Table 1
+
+| Screen Name | Purpose | Core Elements |
+| --- | --- | --- |
+| Welcome / Threshold | Entry point, sets emotional tone | Title glyph, voice prompt, “Begin” button |
+| Dashboard / Vault | Overview of entries or threads | Entry cards, tone glyphs, date markers |
+| New Entry / Witness | Space for reflection or resonance logging | Text field, glyph selector, visibility toggle |
+| Archive / Lightpath | Access to past entries, filtered by tone or date | Filter bar, tag chips, pagination |
+| Admin / Console | Backend tools, optional response input or annotation | User filter, entry viewer, response field |

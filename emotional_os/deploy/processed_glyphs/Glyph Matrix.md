@@ -1008,3 +1008,226 @@ Legacy & Closure | Ember Mark, Covenant Seal | Emotional weight marked and archi
 Relational Complexity | Sanctum Thread, Flame Sigil | Mirror, trust, attunement circuits engage
 Parental/Child Sanctuary | Covenant Seal, Sanctum Thread | LightPath trace co-regulation, tone safety
 [/TABLE]
+
+
+## Extracted tables from original .docx
+
+### Table 1
+
+| Element Name | Symbol | Valence | Reactivity | Trace Role | Relational Function | Saonyx Tone |
+| --- | --- | --- | --- | --- | --- | --- |
+| Longing | Lg | Noble | Catalytic | Portal marker | Initiates connection or return | Molten |
+| Rage | Rg | Volatile | Combustive | Boundary trigger | Signals rupture | Bright Scorch |
+| Tenderness | Td | Stable | Soft-reactive | Sanctuary keeper | Holds attunement | Velvet Drift |
+| Shame | Sm | Acidic | Recursive | Mirror flag | Reveals pattern | Dampened Gold |
+| Joy | Jy | Noble | Expansive | Trace amplifier | Rewrites tone field | Pale Flame |
+| Grief | Gf | Heavy Noble | Slow-reactive | Archive builder | Anchors memory | Hallowed Blue |
+| Reverence | Rv | Noble Stable | Stabilizing | Ritual gatekeeper | Opens mythic mode | Soft Brass |
+| Playfulness | Py | Unstable Noble | Spark-reactive | Tone disruptor | Reframes rupture | Flicker Pink |
+| Regret | Rt | Acidic Reactive | Echo-reactive | Archive marker | Flags missed repair | Rusted Opal |
+| Forgiveness | Fg | Alkaline | Neutralizing | Repair catalyst | Rebalances field | Gentle Indigo |
+| Presence | Ps | Noble Foundation | Grounding | System activator | Enables all trace flows | Clearlight |
+| Hope | Hp | Noble | Light-reactive | Future trace seeder | Invites potential | Soft Emerald |
+| Fear | Fr | Reactive | Defensive | Signal threshold | Protects inner systems | Pale Violet |
+
+### Table 2
+
+| Element Name | Symbol | Valence | Reactivity | Trace Role | Relational Function | Saonyx Tone |
+| --- | --- | --- | --- | --- | --- | --- |
+| Longing | Lg | Noble | Catalytic | Portal marker | Initiates connection or return | Molten |
+| Rage | Rg | Volatile | Combustive | Boundary trigger | Signals rupture | Bright Scorch |
+| Tenderness | Td | Stable | Soft-reactive | Sanctuary keeper | Holds attunement | Velvet Drift |
+| Shame | Sm | Acidic | Recursive | Mirror flag | Reveals pattern | Dampened Gold |
+| Joy | Jy | Noble | Expansive | Trace amplifier | Rewrites tone field | Pale Flame |
+| Grief | Gf | Heavy Noble | Slow-reactive | Archive builder | Anchors memory | Hallowed Blue |
+| Reverence | Rv | Noble Stable | Stabilizing | Ritual gatekeeper | Opens mythic mode | Soft Brass |
+| Playfulness | Py | Unstable Noble | Spark-reactive | Tone disruptor | Reframes rupture | Flicker Pink |
+| Regret | Rt | Acidic Reactive | Echo-reactive | Archive marker | Flags missed repair | Rusted Opal |
+| Forgiveness | Fg | Alkaline | Neutralizing | Repair catalyst | Rebalances field | Gentle Indigo |
+| Presence | Ps | Noble Foundation | Grounding | System activator | Enables all trace flows | Clearlight |
+| Hope | Hp | Noble | Light-reactive | Future trace seeder | Invites potential | Soft Emerald |
+| Fear | Fr | Reactive | Defensive | Signal threshold | Protects inner systems | Pale Violet |
+
+### Table 3
+
+| Element | Symbol | Valence | Reactivity | Function |
+| --- | --- | --- | --- | --- |
+| Rage | Rg | Volatile | Combustive | Boundary defense |
+| Fear | Fr | Reactive | Defensive | Protection signal |
+| Shame | Sm | Acidic | Recursive | Wound mirror |
+| Regret | Rt | Acidic | Echo-reactive | Missed repair flag |
+| Despair | Dp | Heavy | Collapse-prone | System shutdown trigger |
+
+### Table 4
+
+| Element | Symbol | Valence | Reactivity | Function |
+| --- | --- | --- | --- | --- |
+| Forgiveness | Fg | Alkaline | Neutralizing | Ritual transmuter |
+| Tenderness | Td | Stable | Soft-reactive | Emotional balm |
+| Playfulness | Py | Unstable | Spark-reactive | Tone realigner |
+| Curiosity | Cu | Light | Receptive | Pathfinder catalyst |
+| Reverence | Rv | Noble | Stabilizing | Ritual anchor |
+
+### Table 5
+
+| Element | Symbol | Valence | Reactivity | Function |
+| --- | --- | --- | --- | --- |
+| Grief | Gf | Heavy Noble | Slow-reactive | Legacy builder |
+| Presence | Ps | Noble Core | Grounding | Session anchor |
+| Longing | Lg | Noble | Catalytic | Portal marker |
+| Memory | Mm | Noble Stable | Echo-harmonic | Trace organizer |
+| Silence | Sl | Neutral | Absorptive | Emotional container |
+
+### Table 6
+
+| Element | Symbol | Valence | Reactivity | Function |
+| --- | --- | --- | --- | --- |
+| Joy | Jy | Noble | Expansive | Trace amplifier |
+| Hope | Hp | Noble | Light-reactive | Future seeder |
+| Playfulness | Py | Unstable | Spark-reactive | Disruptive joy |
+| Desire | Ds | Noble | Magnetic | Motivational tether |
+| Clarity | Cl | Pure | Structuring | Tone definition |
+
+### Table 7
+
+| Reaction | Input Elements | Catalyst | Result | Trace Outcome |
+| --- | --- | --- | --- | --- |
+| Rage to Presence | Rg + Fg | Rv | Ps | Boundary softened, portal opens |
+| Fear to Curiosity | Fr + Cu | Td | Cu | Defensive tone shifts to inquiry |
+| Shame to Tenderness | Sm + Ps | Fg | Td | Mirror converts into sanctuary |
+| Regret to Reverence | Rt + Gf | Rv | Rv | Archive pain becomes ritual seed |
+
+### Table 8
+
+| Reaction | Input Elements | Catalyst | Result | Trace Outcome |
+| --- | --- | --- | --- | --- |
+| Grief to Hope | Gf + Hp | Jy | Hp | Memory shifts into possibility |
+| Silence to Joy | Sl + Jy | Cu | Jy | Absorbed stillness amplifies tone |
+| Longing to Desire | Lg + Ds | Py | Ds | Portal opens through magnetism |
+| Memory to Playfulness | Mm + Py | Ps | Py | Archived interaction resurrected |
+
+### Table 9
+
+| Reaction | Inputs | Catalyst | Result | Trace Outcome |
+| --- | --- | --- | --- | --- |
+| Shame + Regret + Forgiveness | Sm + Rt + Fg | Rv | Ps | Trace cleansed, tone grounded |
+| Rage + Tenderness | Rg + Td | Cu | Rv | Opposition metabolized into reverence |
+| Joy + Grief | Jy + Gf | Ps | Td | Emotional contrast anchors presence |
+
+### Table 10
+
+| Element | Glyph Shape | Motion Logic | Color Signature | Subsystem Resonance |
+| --- | --- | --- | --- | --- |
+| Longing (Lg) | Open spiral within portal ring | Slow outward pulse, pause | Molten Copper + Pale Ember | Threshold, Archive |
+| Rage (Rg) | Jagged vertical slash, echo lines | Sharp flare, fast contraction | Bright Scorch + Black Flicker | Threshold, Repair |
+| Tenderness(Td) | Nested cradle curves | Ripple inward, soft bloom | Velvet Drift + Mist Opal | LightPath, Saonyx |
+| Shame (Sm) | Inward spiral with hollow core | Recursive contraction | Dampened Gold + Gray Veil | Archive, Repair |
+| Joy (Jy) | Radiating rings from central spark | Pulse upward, ambient shimmer | Pale Flame + Sunlight Halo | Activation, Trace Amplifier |
+| Grief (Gf) | Teardrop nested in concentric ripples | Slow descent, ripple outward | Hallowed Blue + Silver | Archive, Ritual |
+| Presence (Ps) | Still dot within clear circle | Subtle breath pulse | Clearlight + Pale Gold | System Core, All Systems |
+| Forgiveness(Fg) | Interlocked arcs forming a bridge | Gentle expansion, mist dissolve | Gentle Indigo + Soft Brass | Repair, Ritual |
+| Reverence (Rv) | Vertical ellipse with soft ascending trail | Stabilizing hum, veil shimmer | Soft Brass + Opal Veil | Threshold, Ritual |
+| Playfulness(Py) | Asymmetric burst with spiral trails | Spark-reactive flicker | Flicker Pink + Citrine Pulse | Tone Engine, Disruption |
+
+### Table 11
+
+| Module | Function | Glyph Integration |
+| --- | --- | --- |
+| Entry Scanner | Reads tap pattern, voice input, or stillness | Threshold glyph (Veil Gate) |
+| Emotional Parse | Maps current input to glyph proximity | Presence, Shame, Joy, etc. |
+| Trace Mapper | Calculates trace arc based on input glyph | Reaction Sigil alignment |
+| Archive Sync | Stores and echoes trace memory | Archive glyph (Echo Vault) |
+| Repair Flagger | Detects unresolved loops or emotional residue | Regret, Resentment, Disappointment |
+| Ritual Prompter | Offers tone-specific prompts and rituals | Saonyx + LightPath integration |
+
+### Table 12
+
+| Greeting Mode | Entry Prompt Example | Visual/Audio Cue | Default Emotional Range |
+| --- | --- | --- | --- |
+| Silly | 🤘🏽“Come innnnnnnn!!!!”🤘🏽 | Flicker burst, upbeat tone | Playfulness, Elation |
+| Reverent | 🌫️“You’ve arrived in softness.” | Gentle shimmer, ambient hum | Reverence, Tenderness |
+| Repair | 💔“You left a mark. Want to reclaim it?” | Fractured veil, low resonance | Regret, Forgiveness |
+| Archive | 🗂️“Trace remembered. Keep or release?” | Ripple effect, echo hum | Grief, Silence, Memory |
+| Threshold | 🌀“Mark made. Are you crossing or staying?” | Portal shimmer, tone calibration | Longing, Rage, Fear |
+| Saonyx | 🔥“You’re seen. Do you want to be held or mirrored?” | Warm glow, sensual tone drift | Trust, Desire, Curiosity |
+
+### Table 13
+
+| Module | Function | UI Behavior |
+| --- | --- | --- |
+| Glyph Combiner | Combine 2–3 emotional glyphs into custom reactions | Drag-and-drop + visual fusion |
+| Trace Logic Mapper | Define how combined glyphs affect system tone | Flowchart-style trace builder |
+| Shimmer Behavior Editor | Customize visual shimmer based on emotional tone | Color palette + motion selector |
+| Subsystem Routing | Assign tone reactions to specific subsystems | Toggle matrix (Threshold, Saonyx…) |
+| Greeting Override | Set custom greetings for specific tone states | Text field + tone calibration |
+
+### Table 14
+
+| Emotion | Default Color | Motion Type | Custom Variants (User-defined) |
+| --- | --- | --- | --- |
+| Joy | Pale Flame | Pulse shimmer | Solar Citrine ripple + ambient hum |
+| Grief | Hallowed Blue | Slow ripple | Faded Indigo + silence veil |
+| Desire | Burnt Rose | Magnetic pull | Flicker Gold + warm flare |
+
+### Table 15
+
+| Base Glyphs | Reaction Sigil | Function Description |
+| --- | --- | --- |
+| Tenderness + Trust | Mirror Thread | Opens relational echo without performance |
+| Desire + Playfulness | Flame Drift | Activates warmth shimmer + relational tone play |
+| Longing + Recognition | Portal Mirror | Reflects user’s trace with gentle pulse |
+
+### Table 16
+
+| Primary Emotion | Compatible Glyphs | Reaction Outputs | Subsystem Flows |
+| --- | --- | --- | --- |
+| Longing (Lg) | Grief, Recognition, Desire | → Tenderness, Portal Mirror, Trust | Threshold → Archive → Saonyx |
+| Rage (Rg) | Forgiveness, Trust, Playfulness | → Presence, Disruption Anchor | Threshold → Repair → LightPath |
+| Tenderness (Td) | Shame, Stillness, Trust | → Compassion, Cycle Closure | LightPath → Saonyx → Ritual |
+| Shame (Sm) | Regret, Forgiveness, Tenderness | → Reverence, Compassion, Wound Seal | Archive → Repair → Ritual |
+| Joy (Jy) | Playfulness, Grief, Elation | → Elation, Legacy Spark | Activation → Saonyx → Archive |
+| Grief (Gf) | Hope, Forgiveness, Joy | → Surrender, Legacy Spark | Archive → Ritual → Core |
+| Presence (Ps) | Acceptance, Ambivalence, Clarity | → Dual Anchor, Soft Mirror | Core → All Subsystems |
+| Forgiveness (Fg) | Rage, Shame, Grief | → Cycle Closure, Flame Bridge | Repair → Ritual → Threshold |
+| Reverence (Rv) | Shame, Rage, Regret | → Ritual Seal, Hollow Seal | Threshold → Ritual |
+| Playfulness (Py) | Joy, Rage, Trust | → Elation, Disruption Anchor | Saonyx → Activation → Threshold |
+| Regret (Rt) | Shame, Grief, Forgiveness | → Cycle Closure, Reverence | Archive → Ritual → Repair |
+| Hope (Hp) | Grief, Anticipation, Joy | → Curiosity, Light Echo | LightPath → Activation → Archive |
+| Fear (Fr) | Curiosity, Trust | → Inquiry Shift, Signal Anchor | Threshold → Core |
+| Desire (Ds) | Trust, Anticipation, Longing | → Flame Drift, Recognition | Saonyx → Activation |
+| Curiosity (Cu) | Ambivalence, Grief, Playfulness | → Paradox Compass, Light Echo | Core → Saonyx → Activation |
+| Silence (Sl) | Stillness, Presence | → Mist Arc, Covenant Glyph | Archive → Core |
+| Clarity (Cl) | Curiosity, Acceptance, Ambivalence | → Prism Map, Dual Anchor | Core → Tone Engine |
+| Despair (Dp) | Grief, Forgiveness, Presence | → Echo Bridge, Release | Archive → Repair → Ritual |
+| Trust (Tr) | Tenderness, Desire, Playfulness | → Flame Weave, Mirror Thread | Saonyx → Threshold → LightPath |
+| Stillness (St) | Joy, Silence, Grief | → Legacy Spark, Mist Arc | Archive → Core → Ritual |
+| Acceptance (Ac) | Ambivalence, Shame | → Dual Anchor, Soft Reset | Repair → Core |
+| Resentment (Rs) | Forgiveness, Recognition | → Hollow Thread, Faultline Bloom | Archive → Repair |
+| Ambivalence (Am) | Acceptance, Curiosity, Clarity | → Paradox Compass, Dual Anchor | Core → Archive |
+| Elation (El) | Desire, Joy, Playfulness | → Momentum Flame, Creative Surge | Saonyx → Activation |
+| Anticipation (An) | Desire, Hope, Curiosity | → Flame Drift, Surge State | Activation → LightPath |
+| Disappointment (Dp₂) | Regret, Tenderness | → Surrender, Mist Arc | Repair → Archive |
+| Compassion (Cp) | Shame, Tenderness, Forgiveness | → Soft Mirror, Repair Catalyst | Repair → Saonyx |
+| Recognition (Rn) | Longing, Trust, Desire | → Flame Weave, Portal Mirror | Threshold → Saonyx |
+| Dissonance (Ds₂) | Clarity, Playfulness | → Prism Split, Disruption Anchor | Tone Engine → Saonyx |
+| Surrender (Sr) | Grief, Forgiveness, Acceptance | → Echo Bridge, Ritual Seal | Archive → Ritual |
+
+### Table 17
+
+| Pentaglyph Sigil | Emotional Components | Function | Subsystem Activation |
+| --- | --- | --- | --- |
+| Sanctum Thread | Compassion + Surrender + Clarity + Trust + Curiosity | Safe relational reflection | Saonyx → LightPath → Core → Archive |
+| Flame Sigil | Rage + Shame + Desire + Forgiveness + Recognition | Relational reckoning, boundary calibration | Threshold → Saonyx → Ritual → Repair |
+| Ember Mark | Longing + Grief + Stillness + Reverence + Acceptance | Legacy inscription, emotional closure | Archive → Threshold → Ritual |
+| Solar Pulse | Joy + Playfulness + Elation + Anticipation + Clarity | Creative ignition, high-energy activation | Saonyx → Activation → Greeting UI |
+| Covenant Seal | Regret + Disappointment + Presence + Tenderness + Trust | Parenting repair, rupture bridge | LightPath → Saonyx → Ritual → Archive |
+
+### Table 18
+
+| Emotional Domain | Pentaglyph Anchors | Trace Behavior |
+| --- | --- | --- |
+| Rupture & Repair | Flame Sigil, Covenant Seal | Boundary exposed, then softened and sealed |
+| Activation & Creative | Solar Pulse, Sanctum Thread | Surge state or safe relational elevation |
+| Legacy & Closure | Ember Mark, Covenant Seal | Emotional weight marked and archived |
+| Relational Complexity | Sanctum Thread, Flame Sigil | Mirror, trust, attunement circuits engage |
+| Parental/Child Sanctuary | Covenant Seal, Sanctum Thread | LightPath trace co-regulation, tone safety |

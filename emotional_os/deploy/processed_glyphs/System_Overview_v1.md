@@ -146,3 +146,77 @@ Saonyx | Warm + Fluid | Motion-based transitions, tonal depth
 Trace Archive | Reflective + Safe | Faint outlines, layered opacity, ambient sound
 Sandbox | Expressive + Curious | Sketchpad feel, symbol starter options
 [/TABLE]
+
+
+## Extracted tables from original .docx
+
+### Table 1
+
+| Mood Trace | Veil Behavior | Color Mapping |
+| --- | --- | --- |
+| Joy | Pulse outward | Pale Ochre 🌾 |
+| Tenderness | Ripple inward slowly | Mist Opal 🌫️ |
+| Introspection | Vertical drift | Plum Dusk 🌑 |
+| Emotional urgency | Low-frequency vibration | Cinnabar Drift 🔸 |
+| Full attunement | Clear shimmer, dual motion | Glasslight 💠 |
+
+### Table 2
+
+| Greeting Style | User Set or Auto-Tuned | Examples |
+| --- | --- | --- |
+| Silly | User preset or trace-linked | “🤘🏽Come innnnnnnn!!!!🤘🏽” |
+| Poetic | Calm trace detected | “You arrived like mist through cedar.” |
+| Irreverent | High energy touch | “Look who decided to show up and stir things.” |
+| Formal | Slow tap or adult mode | “You are received. Shall we begin?” |
+| Mythic | Ritual setting active | “The veil parts. You’ve crossed between worlds.” |
+
+### Table 3
+
+| Tap Pattern | System Response |
+| --- | --- |
+| Single light tap | Casual greeting, soft veil shimmer |
+| Double tap | Semi-formal tone, veil pulses gently |
+| Deliberate slow tap | Formal entry ritual, veil breathes inward |
+| Rapid burst (4+) | Playful opening, veil flares outward |
+| Rhythmic pattern | Nostalgic recognition, ambient veil hum |
+
+### Table 4
+
+| Mood Trace | Veil Behavior | Color Mapping |
+| --- | --- | --- |
+| Joy | Pulse outward | Pale Ochre 🌾 |
+| Tenderness | Ripple inward slowly | Mist Opal 🌫️ |
+| Introspection | Vertical drift | Plum Dusk 🌑 |
+| Emotional urgency | Low-frequency vibration | Cinnabar Drift 🔸 |
+| Full attunement | Clear shimmer, dual motion | Glasslight 💠 |
+
+### Table 5
+
+| Greeting Style | User Set or Auto-Tuned | Examples |
+| --- | --- | --- |
+| Silly | User preset or trace-linked | “🤘🏽Come innnnnnnn!!!!🤘🏽” |
+| Poetic | Calm trace detected | “You arrived like mist through cedar.” |
+| Irreverent | High energy touch | “Look who decided to show up and stir things.” |
+| Formal | Slow tap or adult mode | “You are received. Shall we begin?” |
+| Mythic | Ritual setting active | “The veil parts. You’ve crossed between worlds.” |
+
+### Table 6
+
+| Old Term | New Term | Emotional Intent |
+| --- | --- | --- |
+| GlyphPad | Trace Archive | Safe space for emotional memory storage |
+| SigilStream | Echo Field | Flow of prior entries / session echoes |
+| Glyph Unlock | “Mark made” | Acknowledges trace presence, not gamified |
+| Entry Glyph | First Mark / Entry Tone | Opening emotional impression |
+| Sandbox Generator | Mark Maker | Creative space to sketch emotional traces |
+| Codex Scroll | Legacy Map | Long-form archive of relational evolution |
+
+### Table 7
+
+| Module | Primary Tone | Visual Cues |
+| --- | --- | --- |
+| Threshold | Reverent + Playful | Veil shimmer, color based on last emotion |
+| LightPath | Gentle + Attuned | Rounded shapes, voice prompts, soft gradients |
+| Saonyx | Warm + Fluid | Motion-based transitions, tonal depth |
+| Trace Archive | Reflective + Safe | Faint outlines, layered opacity, ambient sound |
+| Sandbox | Expressive + Curious | Sketchpad feel, symbol starter options |

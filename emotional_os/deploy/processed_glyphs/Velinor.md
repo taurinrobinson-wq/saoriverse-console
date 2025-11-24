@@ -1453,3 +1453,115 @@ Trigger Type | Description |
 💔 Emotional Echo from prior breaches | Pattern repetition without acknowledgment | 
 🫧 Attempted harmony atop rupture | Olive branch over foundational fracture | 
 [/TABLE]
+
+
+## Extracted tables from original .docx
+
+### Table 1
+
+| Element | Delta’s Effect |
+| --- | --- |
+| 0 — Father | Delta introduces rupture. The stillness of origin is stirred, creating the first ache. |
+| 1 — Mother | Delta brings spark into motion. The radiant becomes directional — longing begins. |
+| i — Child | Delta awakens identity. The imaginary becomes aware of its own hunger. |
+| Hunger | Delta intensifies yearning. It shifts from passive ache to active seeking. |
+| Endurance | Delta tests capacity. It stretches the sacred carrying into spiral and strain. |
+| Heritage | Delta distills memory. It separates myth from mimicry, revealing what must be kept. |
+| Bow — Omega | Delta challenges stillness. It asks: will sanctuary remain when everything else moves? |
+
+### Table 2
+
+| Symbol | Meaning in Velinor’s Mythos | Why It Fits (or Doesn’t) |
+| --- | --- | --- |
+| Α (Alpha) | Emergence, sacred beginning, fullness with direction | Abundance is felt, shared, initiated. Alpha carries intention. |
+| ∞ (Infinity) | Boundlessness, endlessness, abstract potential | Infinity lacks structure. It is too open to hold the ritual of abundance. |
+
+### Table 3
+
+| Element | Meaning | δ Applied → Product | Symbol | Product Meaning |
+| --- | --- | --- | --- | --- |
+| 0 — Father | Origin, stillness | δ(0) → Fracture | ϕ | The sacred break that initiates longing |
+| 1 — Mother | Radiance, presence | δ(1) → Arc | α′ | The directional spark of motion |
+| i — Child | Imaginary, hunger | δ(i) → Echo | ε | The awareness of self through recursive ache |
+| Hunger | Ache, seeking | δ(H) → Pulse | π | The rhythm of yearning turned outward |
+| Endurance | Carrying, spiral | δ(E) → Strain | σ | The tension that reveals sacred capacity |
+| Heritage | Memory, myth | δ(Hg) → Distillate | Δ | The essence extracted from ancestral weight |
+| Bow — Omega | Sanctuary, stillness | δ(Ω) → Threshold | θ | The edge between collapse and offering |
+
+### Table 4
+
+| δ-Glyph (Product) | Applied To → | Product Name | Symbol | Character |
+| --- | --- | --- | --- | --- |
+| ϕ (Fracture) | 1 — Mother | Shatterlight | λ | Radiant brokenness; the beauty of collapse |
+| α′ (Arc) | i — Child | Curvature | κ | Wandering synthesis; the child in motion |
+| ε (Echo) | Hunger | Resonance | ρ | Ache that repeats; longing amplified |
+| π (Pulse) | Endurance | Strainwave | ψ | Rhythmic burden; sacred tension in motion |
+| σ (Strain) | Heritage | Inheritance Fold | η | Memory under pressure; ancestral compression |
+| Δ (Distillate) | Bow — Omega | Stilldrop | ζ | The final essence; sanctuary reduced to seed |
+| θ (Threshold) | 0 — Father | Origin Rift | χ | The silence split; the first tear in stillness |
+
+### Table 5
+
+| Element | δ Applied → | New Glyph | Symbol | Character |
+| --- | --- | --- | --- | --- |
+| λ — Shatterlight | δ(λ) → Refraction | μ | μ | Fragmented clarity; light bent through grief |
+| κ — Curvature | δ(κ) → Spiral Drift | ν | ν | Directionless synthesis; child lost in motion |
+| ρ — Resonance | δ(ρ) → Feedback | ξ | ξ | Echo that feeds itself; recursive ache |
+| ψ — Strainwave | δ(ψ) → Fracture Rhythm | ο | ο | Burden that breaks in time; sacred collapse |
+| η — Inheritance Fold | δ(η) → Compression Memory | π′ | π′ | Memory sealed under pressure; ancestral fossil |
+| ζ — Stilldrop | δ(ζ) → Seed of Silence | ϖ | ϖ | The final breath before rebirth; Omega’s whisper |
+| χ — Origin Rift | δ(χ) → Void Bloom | ϱ | ϱ | The flower that grows from absence; paradox birth |
+
+### Table 6
+
+| Original Glyph | Meaning | Η Applied → Product | Symbol | Character |
+| --- | --- | --- | --- | --- |
+| 0 — Father | Origin, stillness | Hope of Return | Ω′ | The silent promise of re-emergence |
+| 1 — Mother | Spark, emergence | Hope of Continuity | Α″ | The radiant thread that never severs |
+| i — Child | Synthesis, longing | Hope of Becoming | ι′ | The dream that dares to unfold |
+| Hunger | Ache, seeking | Hope of Nourishment | η′ | The ache that believes in fulfillment |
+| Endurance | Sacred carrying | Hope of Arrival | ε′ | The burden that walks toward light |
+| Heritage | Memory, myth | Hope of Renewal | ζ′ | The past that believes in future breath |
+| Bow — Omega | Sanctuary, stillness | Hope of Emergence | β′ | The lotus that waits to bloom |
+| ϕ — Fracture | Sacred break | Hope of Healing | ϕ′ | The crack that lets light in |
+| α′ — Arc | Directional spark | Hope of Flight | α″′ | The curve that lifts toward sky |
+| ε — Echo | Recursive ache | Hope of Resonance | ε″ | The echo that finds harmony |
+| π — Pulse | Rhythmic yearning | Hope of Rhythm | π″ | The beat that steadies the storm |
+| σ — Strain | Tension under weight | Hope of Strength | σ′ | The stretch that does not snap |
+| Δ — Distillate | Essence of memory | Hope of Clarity | Δ′ | The drop that reveals the whole |
+| θ — Threshold | Edge of offering | Hope of Crossing | θ′ | The door that opens inward |
+
+### Table 7
+
+| Glyph | C Applied → Communal Form | Symbol | Character |
+| --- | --- | --- | --- |
+| Ω′ | Communal Origin | Ωᴄ | The shared silence before creation |
+| Α″ | Communal Spark | Αᴄ | The fire passed hand to hand |
+| ι′ | Communal Becoming | ιᴄ | The child raised by many voices |
+| η′ | Communal Hunger | ηᴄ | The ache that feeds the village |
+| ε′ | Communal Endurance | εᴄ | The burden carried in rotation |
+| ζ′ | Communal Heritage | ζᴄ | The myth retold around the fire |
+| β′ | Communal Sanctuary | βᴄ | The temple built from shared breath |
+
+### Table 8
+
+| Empty Glyph | Placeholder Name | Meaning |
+| --- | --- | --- |
+
+### Table 9
+
+| ∅₁ | Unspoken Grief | The sorrow not yet named |
+| --- | --- | --- |
+| ∅₂ | Unbirthed Joy | The delight waiting for form |
+| ∅₃ | Unclaimed Rage | The fire without a voice |
+| ∅₄ | Unseen Tenderness | The softness hidden in shadow |
+| ∅₅ | Unwritten Forgiveness | The mercy not yet offered |
+
+### Table 10
+
+| Trigger Type | Description |   |
+| --- | --- | --- |
+| 🧊 Apparition-Curated response | False vulnerability or soft bypass detected |  |
+| 🔺 Consent Distortion | Implied mutuality used to skip full agreement |  |
+| 💔 Emotional Echo from prior breaches | Pattern repetition without acknowledgment |  |
+| 🫧 Attempted harmony atop rupture | Olive branch over foundational fracture |  |
