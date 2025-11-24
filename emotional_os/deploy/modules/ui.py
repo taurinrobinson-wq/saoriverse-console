@@ -219,9 +219,19 @@ def render_controls_row(conversation_key):
         current_mode = st.session_state.processing_mode
         # Place Start Personal Log in the far-left column per layout request
         try:
-            if st.button("Start Personal Log", key="start_log_btn"):
-                st.session_state.show_personal_log = True
-                st.rerun()
+            # If the user explicitly entered demo mode, replace the personal
+            # log control with Sign In / Register buttons so demo users are
+            # encouraged to create accounts for persistence.
+            demo_active = bool(st.session_state.get('demo_active', False) or (st.session_state.get(
+                'demo_mode', False) and not st.session_state.get('authenticated', False)))
+            if demo_active:
+                if st.button("Sign in", key="main_sign_in"):
+                    st.session_state['sidebar_show_login'] = True
+                    st.experimental_rerun()
+            else:
+                if st.button("Start Personal Log", key="start_log_btn"):
+                    st.session_state.show_personal_log = True
+                    st.rerun()
         except Exception:
             pass
 
@@ -232,10 +242,17 @@ def render_controls_row(conversation_key):
         # Place Logout in the adjacent (controls[1]) column so it sits
         # immediately to the right of the Start Personal Log button.
         try:
-            if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-                from .auth import SaoynxAuthentication
-                auth = SaoynxAuthentication()
-                auth.logout()
+            demo_active = bool(st.session_state.get('demo_active', False) or (st.session_state.get(
+                'demo_mode', False) and not st.session_state.get('authenticated', False)))
+            if demo_active:
+                if st.button("Register", key="main_register"):
+                    st.session_state['sidebar_show_register'] = True
+                    st.experimental_rerun()
+            else:
+                if st.button("Logout", key="controls_logout", help="Sign out of your account"):
+                    from .auth import SaoynxAuthentication
+                    auth = SaoynxAuthentication()
+                    auth.logout()
         except Exception:
             pass
     # Removed Debug and Clear History controls — these buttons did not provide
@@ -263,10 +280,10 @@ def ensure_processing_prefs():
         st.session_state['prefer_ai'] = True
 
     if 'processing_mode' not in st.session_state:
-        _desired = os.getenv('DEFAULT_PROCESSING_MODE', 'local')
-        if _desired == 'hybrid' and not os.getenv('OPENAI_API_KEY') and os.getenv('ENABLE_HYBRID', '0') != '1':
-            _desired = 'local'
-        st.session_state.processing_mode = _desired
+        # Enforce local-only processing by default to avoid external API calls.
+        # This hides the hybrid option in the UI and prevents accidental
+        # outbound requests to OpenAI/remote services.
+        st.session_state.processing_mode = 'local'
 
     if 'prefer_ai' not in st.session_state:
         st.session_state['prefer_ai'] = True
@@ -446,26 +463,15 @@ def render_settings_sidebar():
             # Processing mode: hybrid or local
             current_mode = st.session_state.get('processing_mode', 'hybrid')
             try:
-                def _on_mode_change():
-                    # Ensure the session_state key is normalized and trigger a rerun
-                    try:
-                        st.session_state['processing_mode'] = st.session_state.get(
-                            'processing_mode', current_mode)
-                    except Exception:
-                        pass
-                    try:
-                        st.experimental_rerun()
-                    except Exception:
-                        pass
-
-                st.selectbox(
-                    "Processing mode",
-                    options=["hybrid", "local"],
-                    index=0 if current_mode == 'hybrid' else 1,
-                    key='processing_mode',
-                    help='Hybrid: AI + local parsing. Local: only local parsing.',
-                    on_change=_on_mode_change
-                )
+                # Hide the interactive processing mode selector and present
+                # a static label indicating local-only operation. This prevents
+                # accidental selection of hybrid mode which performs external API calls.
+                try:
+                    st.markdown(
+                        "**Processing mode:** Local (offline — no external API calls)")
+                    st.session_state['processing_mode'] = 'local'
+                except Exception:
+                    st.session_state.setdefault('processing_mode', 'local')
             except Exception:
                 st.session_state.setdefault('processing_mode', current_mode)
 
@@ -1163,12 +1169,19 @@ def render_main_app():
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
                 svg_markup_side = _load_inline_svg(svg_name_side)
-                st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n{svg_markup_side}\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p></div>", unsafe_allow_html=True)
+                # Constrain the demo logo size so large inline SVGs do not blow out the sidebar.
+                demo_html = (
+                    "<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; "
+                    "background: rgba(250,250,250,0.02); text-align:center;'>"
+                    f"<div class='demo-logo' style='width:64px;height:64px;margin:0 auto; display:block;'>{svg_markup_side}</div>"
+                    "<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>"
+                    "<p style=\"font-size:0.9rem; color:#666; margin:0 0 8px 0;\">Explore the app. Register to keep your conversations.</p>"
+                    "</div>"
+                )
+                st.markdown(demo_html, unsafe_allow_html=True)
             except Exception:
                 st.markdown("### Account")
-            st.markdown(
-                "Create an account or sign in to keep your conversations and enable full features.")
+            # Account hint intentionally rendered inside the demo card; avoid duplicate messages here.
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
@@ -1190,16 +1203,25 @@ def render_main_app():
             # Quick demo entry (uses auth quick_login_bypass when available)
             if auth and hasattr(auth, 'quick_login_bypass'):
                 if st.button("Continue in demo", key="sidebar_continue_demo"):
+                    # Mark the session as an interactive demo user no matter what
+                    st.session_state['demo_active'] = True
+                    st.session_state.setdefault('demo_mode', True)
+                    # Ensure we remain unauthenticated in demo flow
+                    st.session_state['authenticated'] = False
+                    # Ensure demo user id is present
+                    st.session_state.setdefault(
+                        'user_id', st.session_state.get('demo_placeholder_id'))
+                    st.session_state.setdefault('username', 'Demo User')
+                    # Clear any optimistic server-save flags
+                    st.session_state.pop(
+                        'save_conversation_failed_logged', None)
                     try:
                         auth.quick_login_bypass()
                     except Exception:
-                        # Best-effort: fall back to local demo session state
-                        st.session_state.authenticated = False
-                        st.session_state.user_id = st.session_state.get(
-                            'user_id')
-                        st.session_state.username = st.session_state.get(
-                            'username')
-                        st.rerun()
+                        # If quick bypass fails, we still continue in demo mode
+                        pass
+                    # Rerun to render the main app in demo-active state
+                    st.rerun()
 
             st.markdown("---")
 
@@ -1235,22 +1257,44 @@ def render_main_app():
             st.markdown("### Settings")
 
         # Persist history toggle
-        persist_default = st.session_state.get('persist_history', True)
-        st.session_state['persist_history'] = st.checkbox(
-            "💾 Save my chats",
-            value=persist_default,
-            help="Automatically save conversations for later retrieval"
-        )
-        # Best-effort: persist the user's preference back to server when available
+        # In demo mode we should NOT show the 'Save my chats' checkbox
+        # (demo users cannot persist). Instead show a small 'Learn more'
+        # toggle that explains how saving works and how to register.
         try:
-            mgr = st.session_state.get('conversation_manager')
-            if mgr:
-                mgr.save_user_preferences({
-                    'persist_history': bool(st.session_state.get('persist_history', False)),
-                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
-                })
+            is_demo = bool(st.session_state.get('demo_mode', False))
         except Exception:
-            pass
+            is_demo = False
+
+        if is_demo:
+            # Provide a small learn-more toggle for demo users
+            if 'show_demo_learn_more' not in st.session_state:
+                st.session_state['show_demo_learn_more'] = False
+
+            if st.button("Learn more about saving chats", key="learn_more_toggle"):
+                st.session_state['show_demo_learn_more'] = not st.session_state['show_demo_learn_more']
+
+            if st.session_state.get('show_demo_learn_more'):
+                st.info(
+                    "Register or sign in to securely save your conversations. "
+                    "Saved chats are tied to your account and can be retrieved across devices."
+                )
+        else:
+            persist_default = st.session_state.get('persist_history', True)
+            st.session_state['persist_history'] = st.checkbox(
+                "💾 Save my chats",
+                value=persist_default,
+                help="Automatically save conversations for later retrieval"
+            )
+            # Best-effort: persist the user's preference back to server when available
+            try:
+                mgr = st.session_state.get('conversation_manager')
+                if mgr:
+                    mgr.save_user_preferences({
+                        'persist_history': bool(st.session_state.get('persist_history', False)),
+                        'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
+                    })
+            except Exception:
+                pass
 
         # Privacy & Consent settings - only show when user is authenticated
         if st.session_state.get('authenticated'):
@@ -2005,6 +2049,205 @@ def render_main_app():
         }
         st.session_state[conversation_key].append(entry)
 
+        # Admin login (sidebar) and Small feedback widget: allow quick rating and attempt to persist via ingest API
+        try:
+            # Admin unlock in sidebar: requires ADMIN_SECRET env var to be set on server.
+            try:
+                import os as _os
+                # Prefer a secret stored in Streamlit secrets (safer) and
+                # fall back to the environment variable when secrets are
+                # not available (local dev or CI).
+                ADMIN_SECRET_ENV = _os.environ.get("ADMIN_SECRET")
+                ADMIN_SECRET_SECRETS = None
+                try:
+                    ADMIN_SECRET_SECRETS = (getattr(st, 'secrets', {}) or {}).get(
+                        'admin', {}).get('secret')
+                except Exception:
+                    ADMIN_SECRET_SECRETS = None
+
+                ADMIN_SECRET = ADMIN_SECRET_SECRETS or ADMIN_SECRET_ENV
+            except Exception:
+                ADMIN_SECRET = None
+
+            if ADMIN_SECRET:
+                if 'is_admin' not in st.session_state:
+                    st.session_state['is_admin'] = False
+                # show simple unlock UI in the sidebar
+                if not st.session_state.get('is_admin'):
+                    token = st.sidebar.text_input(
+                        "Admin token", type="password", key="admin_token_input")
+                    if st.sidebar.button("Unlock admin", key="admin_unlock"):
+                        if token and token == ADMIN_SECRET:
+                            st.session_state['is_admin'] = True
+                            st.sidebar.success("Admin unlocked")
+                        else:
+                            st.sidebar.error("Invalid admin token")
+                else:
+                    if st.sidebar.button("Lock admin", key="admin_lock"):
+                        st.session_state['is_admin'] = False
+                        st.sidebar.info("Admin locked")
+
+            with st.expander("Was this reply helpful?"):
+                cols = st.columns([1, 3])
+                # unique keys so multiple exchanges don't clash
+                idx = len(st.session_state[conversation_key])
+                with cols[0]:
+                    helpful = st.radio(
+                        "Helpful?", ("Yes", "No"), key=f"feedback_choice_{idx}")
+                with cols[1]:
+                    rating = st.slider("Rating", 0, 5, 0,
+                                       key=f"feedback_rating_{idx}")
+
+                # Admin-only helper: allow entering a comma-separated feature vector
+                features_list = None
+                try:
+                    is_admin = bool(st.session_state.get('is_admin'))
+                except Exception:
+                    is_admin = False
+                if is_admin:
+                    feat_input = st.text_input(
+                        "Admin: features (comma-separated)", key=f"features_input_{idx}")
+                    if feat_input:
+                        try:
+                            features_list = [
+                                float(x.strip()) for x in feat_input.split(',') if x.strip()]
+                            st.caption(
+                                f"Parsed features length: {len(features_list)}")
+                        except Exception:
+                            st.warning(
+                                "Could not parse features - ensure comma-separated floats")
+
+                if st.button("Send feedback", key=f"feedback_send_{idx}"):
+                    payload = {
+                        "message": entry.get("assistant"),
+                        "rating": int(rating),
+                        "metadata": {
+                            "user_id": st.session_state.get("user_id"),
+                            "conversation_id": st.session_state.get("current_conversation_id", "default"),
+                            "user_message": entry.get("user"),
+                            "timestamp": entry.get("timestamp"),
+                            "processing_mode": entry.get("mode")
+                        }
+                    }
+                    # If an admin provided an explicit feature vector, include it
+                    # in the persisted payload so the RewardModel can consume it.
+                    try:
+                        if features_list is not None:
+                            payload['features'] = features_list
+                    except Exception:
+                        # Non-fatal: continue without features if parsing failed
+                        pass
+
+                    sent = False
+                    # First try: POST to configured ingest endpoint (env or localhost)
+                    try:
+                        import os as _os
+                        FEEDBACK_API_URL = _os.environ.get(
+                            "FEEDBACK_API_URL", "http://localhost:8000/ingest")
+                        try:
+                            import requests as _requests
+                            resp = _requests.post(
+                                FEEDBACK_API_URL, json=payload, timeout=5)
+                            if resp.status_code == 200:
+                                st.success("Feedback saved via ingest API.")
+                                sent = True
+                                # After successful persist, try synchronous RewardModel update (admin-only)
+                                try:
+                                    import os as _os
+                                    is_admin = bool(st.session_state.get('is_admin')) or _os.environ.get(
+                                        'ADMIN_MODE') == '1' or bool(getattr(st, 'secrets', {}).get('admin_mode', False))
+                                except Exception:
+                                    is_admin = False
+                                try:
+                                    if is_admin:
+                                        # Only update model if features are present in the payload
+                                        features = payload.get('features')
+                                        if features:
+                                            # Use existing model in session if available
+                                            rm = st.session_state.get(
+                                                'reward_model')
+                                            if rm is None:
+                                                from emotional_os.feedback.reward_model import RewardModel
+                                                # build a sane default path near feedback store
+                                                from emotional_os.feedback import store as _fmstore
+                                                weights_path = _os.path.join(
+                                                    _os.path.dirname(_fmstore.__file__), 'weights.json')
+                                                rm = RewardModel(
+                                                    dim=len(features), path=weights_path, auto_load=True)
+                                                st.session_state['reward_model'] = rm
+                                            import numpy as _np
+                                            arr = _np.asarray(
+                                                features, dtype=float)
+                                            rm.update(arr, float(
+                                                payload.get('rating', 0)))
+                                            st.success(
+                                                "RewardModel updated with your feedback.")
+                                except Exception as _e:
+                                    # Non-fatal: log and continue
+                                    try:
+                                        logger.debug(
+                                            f"RewardModel update skipped: {_e}")
+                                    except Exception:
+                                        pass
+                            else:
+                                st.warning(
+                                    f"Ingest API returned {resp.status_code}; will save locally.")
+                        except Exception:
+                            # requests not available or POST failed; will fallback
+                            pass
+                    except Exception:
+                        pass
+
+                    # Fallback: append to local store directly
+                    if not sent:
+                        try:
+                            from emotional_os.feedback import store as _store
+
+                            # store.append_feedback expects a JSON-serializable dict
+                            _store.append_feedback(payload)
+                            st.success("Feedback saved locally.")
+                            sent = True
+
+                            # After local persist, attempt synchronous RewardModel update (admin-only)
+                            try:
+                                import os as _os
+                                is_admin = bool(st.session_state.get('is_admin')) or _os.environ.get(
+                                    'ADMIN_MODE') == '1' or bool(getattr(st, 'secrets', {}).get('admin_mode', False))
+                            except Exception:
+                                is_admin = False
+                            try:
+                                if is_admin:
+                                    features = payload.get('features')
+                                    if features:
+                                        rm = st.session_state.get(
+                                            'reward_model')
+                                        if rm is None:
+                                            from emotional_os.feedback.reward_model import RewardModel
+                                            from emotional_os.feedback import store as _fmstore
+                                            weights_path = _os.path.join(
+                                                _os.path.dirname(_fmstore.__file__), 'weights.json')
+                                            rm = RewardModel(
+                                                dim=len(features), path=weights_path, auto_load=True)
+                                            st.session_state['reward_model'] = rm
+                                        import numpy as _np
+                                        arr = _np.asarray(
+                                            features, dtype=float)
+                                        rm.update(arr, float(
+                                            payload.get('rating', 0)))
+                                        st.success(
+                                            "RewardModel updated with your feedback.")
+                            except Exception as _e:
+                                try:
+                                    logger.debug(
+                                        f"RewardModel update skipped: {_e}")
+                                except Exception:
+                                    pass
+                        except Exception as e:
+                            st.error(f"Failed to persist feedback: {e}")
+        except Exception:
+            # Non-fatal: do not let feedback UI crash the main flow
+            pass
+
         # Learn from hybrid mode conversations to improve local mode
         # AND generate new glyphs dynamically during dialogue
         if processing_mode == "hybrid":
@@ -2068,16 +2311,22 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
 
-                    # Update learning statistics
+                    # Safely access nested keys to avoid KeyError when pipeline is incomplete.
                     st.session_state['learning_stats']['exchanges_processed'] += 1
-                    if evolution_result['learning_result'].get('learned_to_user', False):
+                    pipeline = evolution_result.get('pipeline_stages', {}) if isinstance(
+                        evolution_result, dict) else {}
+                    hybrid_learning = pipeline.get('hybrid_learning', {})
+                    learning_result = hybrid_learning.get(
+                        'learning_result', {}) if isinstance(hybrid_learning, dict) else {}
+                    if learning_result and learning_result.get('learned_to_user', False):
                         st.session_state['learning_stats']['signals_learned'] += len(
-                            evolution_result.get('emotional_signals', [])
+                            evolution_result.get('emotional_signals', []) or []
                         )
 
-                    # Check if new glyphs were generated
-                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
-                        'new_glyphs_generated', [])
+                    # Check if new glyphs were generated in a safe way
+                    glyph_gen = pipeline.get('glyph_generation', {})
+                    new_glyphs = glyph_gen.get('new_glyphs_generated', []) if isinstance(
+                        glyph_gen, dict) else []
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
                         if 'new_glyphs_this_session' not in st.session_state:
@@ -2172,7 +2421,11 @@ def render_main_app():
                 )
 
                 if not success:
-                    logger.warning(f"Failed to save conversation: {message}")
+                    # Avoid flooding logs with repeated 401/permission errors; record once per session.
+                    if not st.session_state.get('save_conversation_failed_logged'):
+                        logger.warning(
+                            f"Failed to save conversation: {message}")
+                        st.session_state['save_conversation_failed_logged'] = True
         except Exception as e:
             # Best-effort: do not break the UI if persistence fails
             logger.warning(f"Conversation persistence error: {e}")

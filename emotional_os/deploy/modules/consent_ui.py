@@ -177,43 +177,68 @@ def render_data_privacy_info(use_expander: bool = True):
             False when calling from within another expander/sidebar to avoid
             nested expanders which Streamlit disallows.
     """
-    content = """
-        ### Data Protection Layers
-        
-        **Layer 1: Gate-Based Masking (Always Active)**
-        - Raw user messages are never stored
-        - Only emotional signals and patterns are logged
-        - AI responses are not retained
-        - ✅ HIPAA-compliant (no PHI storage)
-        
-        **Layer 2: Intelligent Anonymization (When Enabled)**
-        - Names → Glyphs (e.g., "Michelle" → "The Thread")
-        - Dates → Relative time (e.g., "August 2023" → "2 years ago")
-        - Locations → Regions (e.g., "Bell, CA" → "West Coast")
-        - Medical → Abstract (e.g., "IVC filter" → "the Device")
-        
-        **Layer 3: Consent-Based De-Anonymization (You Control)**
-        - You can always choose to keep your identity attached
-        - Share with your therapist by revealing your name
-        - Include in legacy archive with full details
-        - Contribute anonymized data to research
-        
-        ### Your Rights
-        - 🔍 See what data we store (ask anytime)
-        - 🗑️ Delete your data (instant removal)
-        - 📤 Export your data (full JSON export)
-        - 🔄 Update your preferences (change anytime)
-        
-        ### Questions?
-        This system is GDPR-aligned and HIPAA-ready. Your privacy is paramount.
-        """
+    # Compact summary with expandable details to keep the sidebar tidy while
+    # preserving the full privacy information for users who want it.
+    summary = (
+        "**Summary:** We store only anonymized signals (no raw messages or AI replies). "
+        "You control identity, medical detail, and sharing preferences. You can export or delete your data anytime."
+    )
+
+    layer1 = (
+        "**Layer 1 — Gate-Based Masking (Always Active)**\n"
+        "- Raw user messages are never stored\n"
+        "- Only emotional signals and patterns are logged\n"
+        "- AI responses are not retained\n"
+        "- ✅ HIPAA-compliant (no PHI storage)"
+    )
+
+    layer2 = (
+        "**Layer 2 — Intelligent Anonymization (When Enabled)**\n"
+        "- Names → Glyphs (e.g., \"Michelle\" → \"The Thread\")\n"
+        "- Dates → Relative time (e.g., \"August 2023\" → \"2 years ago\")\n"
+        "- Locations → Regions (e.g., \"Bell, CA\" → \"West Coast\")\n"
+        "- Medical → Abstract (e.g., \"IVC filter\" → \"the Device\")"
+    )
+
+    layer3 = (
+        "**Layer 3 — Consent-Based De-Anonymization (You Control)**\n"
+        "- You can always choose to keep your identity attached\n"
+        "- Share with your therapist by revealing your name\n"
+        "- Include in legacy archive with full details\n"
+        "- Contribute anonymized data to research"
+    )
+
+    rights = (
+        "**Your Rights:**\n"
+        "- See what data we store\n"
+        "- Delete your data\n"
+        "- Export your data\n"
+        "- Update your preferences"
+    )
+
+    footer = "This system is GDPR-aligned and HIPAA-ready. Your privacy is paramount."
 
     if use_expander:
         with st.expander("🛡️ How Your Data is Protected", expanded=False):
-            st.markdown(content)
+            st.markdown(summary)
+            # Use nested expanders for each layer so users can drill into details
+            with st.expander("Layer 1 — Masking (always active)", expanded=False):
+                st.markdown(layer1)
+            with st.expander("Layer 2 — Intelligent anonymization", expanded=False):
+                st.markdown(layer2)
+            with st.expander("Layer 3 — Consent & de-anonymization", expanded=False):
+                st.markdown(layer3)
+            st.markdown(rights)
+            st.markdown(footer)
     else:
         st.markdown("### 🛡️ How Your Data is Protected")
-        st.markdown(content)
+        st.markdown(summary)
+        st.markdown("---")
+        st.markdown(layer1)
+        st.markdown(layer2)
+        st.markdown(layer3)
+        st.markdown(rights)
+        st.markdown(footer)
 
 
 def render_consent_settings_panel():
