@@ -1,10 +1,13 @@
+---
 name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   tests:
@@ -20,58 +23,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+          if [ -f requirements-dev.txt ]; then
+            pip install -r requirements-dev.txt
+          fi
 
       - name: Run tests
         run: |
           pytest -q
-name: CI - Edge Functions Tests
-
-on:
-  push:
-    branches: [ main, chore/**, feat/**, fix/** ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    name: Run edge function tests
-    runs-on: ubuntu-latest
-    env:
-      # Supply these as GitHub repository secrets for protected credentials
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      PROJECT_SERVICE_ROLE_KEY: ${{ secrets.PROJECT_SERVICE_ROLE_KEY }}
-      SUPABASE_AUTH_URL: ${{ secrets.SUPABASE_AUTH_URL }}
-      SUPABASE_FUNCTION_URL: ${{ secrets.SUPABASE_FUNCTION_URL }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-- name: Set up Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: '3.11'
-
-- name: Install dependencies
-  run: |
-    python -m pip install --upgrade pip
-    pip install -r requirements-dev.txt
-
-- name: Run pytest
-  env:
-    # Make sure tests pick up secrets from workflow env
-    SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-    SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-    SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-    PROJECT_SERVICE_ROLE_KEY: ${{ secrets.PROJECT_SERVICE_ROLE_KEY }}
-    SUPABASE_AUTH_URL: ${{ secrets.SUPABASE_AUTH_URL }}
-    SUPABASE_FUNCTION_URL: ${{ secrets.SUPABASE_FUNCTION_URL }}
-    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-  run: |
-    # Run only the tests folder to keep the job focused and fast.
-    pytest -q supabase/tests
