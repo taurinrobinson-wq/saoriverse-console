@@ -30,7 +30,8 @@ jobs:
         run: |
           # Run the focused preprocessor unit tests
           pytest -q tests/test_preprocessor.py
-          # Run the user preferences test (mocked requests) to ensure persistence helpers
+            # Run the user preferences test (mocked requests)
+            # to ensure persistence helpers
           pytest -q tests/test_user_preferences.py
           # Run the taxonomy validator; this will be skipped when
           # no canonical taxonomy is present. It will fail the run if
