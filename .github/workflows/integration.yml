@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -46,7 +46,8 @@ jobs:
           python scripts/create_sqlite_fixture.py
 
       - name: (optional) Install NLP deps
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.enable_nlp == 'true' }}
+        if: >
+          ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.enable_nlp == 'true' }}
         run: |
           python -m pip install spacy
           python -m spacy download en_core_web_sm || true

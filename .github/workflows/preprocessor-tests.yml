@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
-            fi
+          fi
           pip install pytest
 
       - name: Run focused preprocessor tests + taxonomy validator + prefs tests
@@ -32,6 +32,7 @@ jobs:
           pytest -q tests/test_preprocessor.py
           # Run the user preferences test (mocked requests) to ensure persistence helpers
           pytest -q tests/test_user_preferences.py
-          # Run the taxonomy validator; this will be skipped when no canonical taxonomy is present,
-          # but will fail the run if a taxonomy exists and does not conform to the schema.
+          # Run the taxonomy validator; this will be skipped when
+          # no canonical taxonomy is present. It will fail the run if
+          # a taxonomy exists and does not conform to the schema.
           pytest -q tests/test_taxonomy_validator.py
