@@ -1,0 +1,76 @@
+[
+    {
+        "key": "C",
+        "base_chord": {
+            "name": "C",
+            "function": "I",
+            "notes": [
+                "c",
+                "e",
+                "g"
+            ]
+        },
+        "transitions": [
+            {
+                "to": {
+                    "name": "Am",
+                    "notes": [
+                        "a",
+                        "c",
+                        "e"
+                    ]
+                },
+                "function": "vi",
+                "shared_notes": [
+                    "a",
+                    "c",
+                    "e"
+                ]
+            },
+            {
+                "to": {
+                    "name": "F",
+                    "notes": [
+                        "f",
+                        "a",
+                        "c"
+                    ]
+                },
+                "function": "IV",
+                "shared_notes": [
+                    "c",
+                    "f"
+                ]
+            },
+            {
+                "to": {
+                    "name": "G",
+                    "notes": [
+                        "g",
+                        "b",
+                        "d"
+                    ]
+                },
+                "function": "V",
+                "shared_notes": [
+                    "g"
+                ]
+            },
+            {
+                "to": {
+                    "name": "Em",
+                    "notes": [
+                        "e",
+                        "g",
+                        "b"
+                    ]
+                },
+                "function": "iii",
+                "shared_notes": [
+                    "e",
+                    "g"
+                ]
+            }
+        ]
+    }
+]
