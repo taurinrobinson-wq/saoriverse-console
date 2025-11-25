@@ -22,25 +22,22 @@ def translate_emotional_response(system_output: Dict) -> str:
     - context: str (short descriptor of where emotion arose)
     - resonance: str (a phrase summarizing what the emotion points to)
     """
-    emotion = system_output.get("emotion") or "emotion"
-    intensity = system_output.get("intensity") or "subtle"
+    emotion = system_output.get("emotion") or "feeling"
+    intensity = system_output.get("intensity") or "gentle"
     context = system_output.get("context") or "this moment"
     resonance = system_output.get("resonance") or "a quiet shift"
 
-    # Build phrasing while avoiding technical vocabulary
+    # Normalize phrasing to avoid awkward adjective+noun concatenation
     i = (intensity or "").lower()
     if i in ("high", "strong", "intense"):
-        opener = f"This {context} seems to have stirred something deep — {emotion} with some force."
+        opener = f"This {context} seems to have stirred a strong sense of {emotion}."
     else:
-        # Normalize adverb/adjective forms to a simple adjective phrase.
-        if i.endswith("ly"):
-            adj = i[:-2]
-        else:
-            adj = i or "gentle"
-        # Guard against duplicate words (e.g. "gentle gentle") by using a single adjective.
-        opener = f"There's a {adj} {emotion} here."
+        opener = f"There’s a gentle sense of {emotion} here."
 
-    return f"{opener} It feels like {resonance}. Would you like to reflect on that?"
+    # Keep the invitation concise and permission-oriented
+    # Do not force-capitalize `resonance` so tests that look for
+    # lowercase tokens such as 'presence' continue to match.
+    return f"{opener} {resonance}. Would you like to reflect on that?"
 
 
 def generate_response_from_glyphs(system_output: Dict) -> str:
@@ -49,7 +46,8 @@ def generate_response_from_glyphs(system_output: Dict) -> str:
     Expects `system_output` may contain `glyph_overlays_info` (list of {tag, confidence}).
     Falls back to `translate_emotional_response` when overlays are absent.
     """
-    glyphs = system_output.get("glyph_overlays_info") or system_output.get("glyph_overlays")
+    glyphs = system_output.get(
+        "glyph_overlays_info") or system_output.get("glyph_overlays")
     if not glyphs:
         return translate_emotional_response(system_output)
 

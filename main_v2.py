@@ -30,6 +30,7 @@ prefers local-only processing and preserves auditability of learning events.
 
 import streamlit as st
 from pathlib import Path
+from typing import Optional, Dict
 import os
 import base64
 import json
@@ -40,6 +41,18 @@ import shutil
 import logging
 
 logger = logging.getLogger(__name__)
+
+# Integration helpers: lightweight first-turn selector and ClarificationTrace logging
+try:
+    from response_selector import select_first_turn_response
+except Exception:
+    select_first_turn_response = None
+
+try:
+    # module-level wrapper we added earlier
+    from emotional_os.adapter.clarification_trace import detect_and_store
+except Exception:
+    detect_and_store = None
 
 # When running in a fully-local processing mode, remove any remote-AI
 # provider keys from the process environment so downstream import-time
@@ -757,6 +770,45 @@ def main():
     except Exception:
         # Let the outer __main__ exception handler render a friendly page
         raise
+
+
+def handle_user_message(user_input: str, context: Optional[Dict] = None, conversation_id: Optional[str] = None, user_id: Optional[str] = None) -> str:
+    """Helper wrapper for UI code: choose first-turn empathy or full pipeline, then log clarifications.
+
+    This helper prefers `select_first_turn_response` for first exchanges (no prior user/system context)
+    and otherwise delegates to `main_response_engine.process_user_input`. After generating a reply it calls
+    `detect_and_store` to persist clarifications using the robust DB+JSONL fallback. This function is
+    intentionally best-effort and will not raise if logging fails.
+    """
+    ctx = dict(context or {})
+    is_first_turn = not (ctx.get("last_user_input")
+                         or ctx.get("last_system_response"))
+
+    reply = None
+    try:
+        if is_first_turn and select_first_turn_response is not None:
+            reply = select_first_turn_response(user_input)
+        else:
+            # delegate to the main response engine
+            from main_response_engine import process_user_input
+            reply = process_user_input(user_input, ctx)
+    except Exception:
+        # best-effort fallback: try main engine even if selector fails
+        try:
+            from main_response_engine import process_user_input
+            reply = process_user_input(user_input, ctx)
+        except Exception:
+            reply = "I'm sorry — something went wrong processing that."
+
+    # Log clarification attempts (best-effort, non-blocking via detect_and_store wrapper)
+    try:
+        if detect_and_store is not None:
+            detect_and_store(user_input, context={
+                             **(ctx or {}), "conversation_id": conversation_id, "user_id": user_id})
+    except Exception:
+        pass
+
+    return reply
 
 
 if __name__ == "__main__":
