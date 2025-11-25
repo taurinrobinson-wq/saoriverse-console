@@ -1,3 +1,4 @@
+---
 name: CI
 
 on:
@@ -16,15 +17,16 @@ jobs:
 
       - name: Install actionlint
         run: |
-          curl -sSL \
-            https://github.com/rhysd/actionlint/releases/download/v1.6.26/actionlint_1.6.26_linux_amd64.tar.gz \
-            -o /tmp/actionlint.tar.gz
+          ACTIONLINT_BASE="https://github.com/rhysd/actionlint/releases/download/v1.6.26/"
+          ACTIONLINT_FILE="actionlint_1.6.26_linux_amd64.tar.gz"
+          ACTIONLINT_URL="${ACTIONLINT_BASE}${ACTIONLINT_FILE}"
+          curl -sSL "$ACTIONLINT_URL" -o /tmp/actionlint.tar.gz
           sudo tar -xzf /tmp/actionlint.tar.gz -C /usr/local/bin actionlint || true
           sudo chmod +x /usr/local/bin/actionlint || true
 
       - name: Run actionlint
         run: |
-          /usr/local/bin/actionlint -color .github/workflows/*.yml
+          actionlint -color .github/workflows/*.yml
 
   tests:
     name: Run tests
@@ -43,11 +45,12 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
+          else
+            echo "No requirements.txt found; skipping install of pinned requirements."
           fi
           if [ -f requirements-dev.txt ]; then
             pip install -r requirements-dev.txt
           fi
 
       - name: Run tests
-        run: |
-          pytest -q
+        run: pytest -q

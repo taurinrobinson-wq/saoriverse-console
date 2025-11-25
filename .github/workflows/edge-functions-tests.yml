@@ -5,9 +5,9 @@ on:
   push:
     branches:
       - main
-      - 'chore/**'
-      - 'feat/**'
-      - 'fix/**'
+      - "chore/**"
+      - "feat/**"
+      - "fix/**"
   pull_request:
     branches:
       - main
@@ -32,7 +32,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
