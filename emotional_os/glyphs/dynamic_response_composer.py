@@ -786,14 +786,27 @@ class DynamicResponseComposer:
         # clarifier when the template doesn't already mention an emotion.
         try:
             if extracted.get('emotional_words'):
-                emo = extracted['emotional_words'][0]
-                if emo and ' ' + emo in clarifier.lower():
-                    # already contains emotion word
-                    pass
-                else:
-                    # Prepend a short acknowledgement if the clarifier is generic
-                    if not any(word in clarifier.lower() for word in (emo.lower(), "you're feeling", "youre feeling")):
-                        clarifier = f"I hear you're feeling {emo}. " + clarifier
+                emo = str(extracted['emotional_words'][0]).strip()
+                if emo:
+                    clar_low = clarifier.lower()
+                    # If the clarifier already mentions the specific emotion, leave it
+                    if emo.lower() in clar_low:
+                        pass
+                    else:
+                        # Prefer to replace vague phrasing like "feeling that way" with the detected emotion
+                        replaced = False
+                        for vague in ("feeling that way", "feeling that", "feeling this", "feeling so", "feeling it"):
+                            if vague in clar_low:
+                                # perform a case-smart replacement
+                                clarifier = re.sub(
+                                    re.escape(vague), f"feeling {emo}", clarifier, flags=re.IGNORECASE)
+                                replaced = True
+                                break
+
+                        # If no vague phrase to replace, and the clarifier doesn't already include an emotion
+                        # then prepend a short acknowledgement to make the detected emotion explicit.
+                        if not replaced:
+                            clarifier = f"I hear you're feeling {emo}. " + clarifier
         except Exception:
             pass
 
