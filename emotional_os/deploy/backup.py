@@ -602,18 +602,18 @@ def render_main_app():
         col1, col2 = st.columns([2, 1])
 
     with col1:
-        # Set default processing mode if not already set
+        # Set default processing mode if not already set (enforce local-only)
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"
+            st.session_state.processing_mode = "local"
 
-        # Backward-compatibility: map legacy ai_preferred
+        # Backward-compatibility: map legacy ai_preferred → local
         if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'hybrid'
-            st.session_state['prefer_ai'] = True
+            st.session_state.processing_mode = 'local'
+            st.session_state['prefer_ai'] = False
 
-        # Render selectbox using session state (two-option model)
-        mode_options = ["hybrid", "local"]
-        current = st.session_state.get('processing_mode', 'hybrid')
+        # Render selectbox using session state (local-only)
+        mode_options = ["local"]
+        current = st.session_state.get('processing_mode', 'local')
         try:
             idx = mode_options.index(current)
         except ValueError:
@@ -622,7 +622,7 @@ def render_main_app():
             "Processing Mode",
             mode_options,
             index=idx,
-            help="Hybrid: Best performance, Local: Maximum privacy"
+            help="Local: Maximum privacy"
         )
 
         st.session_state.processing_mode = processing_mode

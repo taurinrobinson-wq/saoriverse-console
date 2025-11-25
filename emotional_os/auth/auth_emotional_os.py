@@ -58,7 +58,8 @@ class AuthenticationManager:
         if 'login_attempts' not in st.session_state:
             st.session_state.login_attempts = {}
         if 'processing_mode' not in st.session_state:
-            st.session_state.processing_mode = "hybrid"  # or "regular" if that's your label
+            # Default to local-only processing to avoid remote AI costs
+            st.session_state.processing_mode = "local"
 
     def hash_password(self, password: str, salt: str = None) -> tuple:
         """Hash password with salt - matches backend exactly"""
@@ -754,14 +755,16 @@ def render_main_app():
         # Processing mode selection
         col1, col2 = st.columns([2, 1])
 
-        # Backward-compatibility: translate legacy 'ai_preferred' into hybrid+prefer_ai
+        # Backward-compatibility: translate legacy 'ai_preferred' into local
+        # to avoid enabling remote AI automatically.
         if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'hybrid'
-            st.session_state['prefer_ai'] = True
+            st.session_state.processing_mode = 'local'
+            st.session_state['prefer_ai'] = False
 
         with col1:
-            mode_options = ["hybrid", "local"]
-            current = st.session_state.get('processing_mode', 'hybrid')
+            # Hybrid mode removed — default to local-only options.
+            mode_options = ["local"]
+            current = st.session_state.get('processing_mode', 'local')
             try:
                 idx = mode_options.index(current)
             except ValueError:

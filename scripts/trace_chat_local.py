@@ -82,7 +82,7 @@ and ashamed and also oddly numb. Sometimes I cry and don't understand why."
             fake = _err
 
         with patch('requests.post', new=fake):
-            req = ChatRequest(message=message, mode='hybrid',
+            req = ChatRequest(message=message, mode='local',
                               user_id='test-user-123')
             try:
                 result = await chat(req)

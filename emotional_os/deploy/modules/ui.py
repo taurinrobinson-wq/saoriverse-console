@@ -261,8 +261,9 @@ def render_controls_row(conversation_key):
 def ensure_processing_prefs():
     """Normalize legacy processing preferences and ensure keys exist in session_state."""
     if 'processing_mode' in st.session_state and st.session_state.processing_mode == 'ai_preferred':
-        st.session_state.processing_mode = 'hybrid'
-        st.session_state['prefer_ai'] = True
+        # Map legacy ai_preferred to local-only to avoid enabling remote AI
+        st.session_state.processing_mode = 'local'
+        st.session_state['prefer_ai'] = False
 
     if 'processing_mode' not in st.session_state:
         # Default to all-local processing model
@@ -439,7 +440,7 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
 
     payload = {
         "message": effective_input,
-        "mode": st.session_state.get('processing_mode', 'hybrid'),
+        "mode": st.session_state.get('processing_mode', 'local'),
         "user_id": st.session_state.user_id,
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
@@ -1401,7 +1402,7 @@ def render_main_app():
                             'title': st.session_state.get('conversation_title', 'New Conversation'),
                             'updated_at': datetime.datetime.now().isoformat(),
                             'message_count': 0,
-                            'processing_mode': st.session_state.get('processing_mode', 'hybrid')
+                            'processing_mode': st.session_state.get('processing_mode', 'local')
                         })
                 except Exception:
                     pass
@@ -1556,7 +1557,7 @@ def render_main_app():
 
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
-    processing_mode = st.session_state.get('processing_mode', 'hybrid')
+    processing_mode = st.session_state.get('processing_mode', 'local')
     # Center the chat area so the messages align with the chat input
     # (which is rendered in a centered column below). Using matching
     # column widths keeps the chat messages and input visually aligned.

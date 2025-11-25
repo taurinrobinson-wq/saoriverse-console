@@ -500,10 +500,10 @@ def render_main_app():
         # Processing mode selection
         col1, col2 = st.columns([2, 1])
 
-        # Map legacy ai_preferred -> hybrid + prefer_ai
+        # Map legacy ai_preferred -> local (avoid enabling remote AI automatically)
         if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'hybrid'
-            st.session_state['prefer_ai'] = True
+            st.session_state.processing_mode = 'local'
+            st.session_state['prefer_ai'] = False
 
         with col1:
             # Local-first: only local processing exposed in the UI by default

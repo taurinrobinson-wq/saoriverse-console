@@ -1,3 +1,4 @@
+import pytest
 import os
 import time
 import uuid
@@ -9,10 +10,15 @@ load_dotenv(dotenv_path=os.path.join(
     os.path.dirname(__file__), '..', '..', '.env'))
 
 
+# Load important Supabase env vars (may be provided by CI or local .env)
 SUPABASE_AUTH_URL = os.environ.get('SUPABASE_AUTH_URL')
+
 SUPABASE_FUNCTION_URL = os.environ.get('SUPABASE_FUNCTION_URL')
+
 SUPABASE_URL = os.environ.get('SUPABASE_URL')
+
 SUPABASE_ANON_KEY = os.environ.get('SUPABASE_ANON_KEY')
+
 SUPABASE_SERVICE_ROLE_KEY = os.environ.get(
     'SUPABASE_SERVICE_ROLE_KEY') or os.environ.get('PROJECT_SERVICE_ROLE_KEY')
 
@@ -20,6 +26,20 @@ HEADERS_ANON = {
     'Content-Type': 'application/json',
     'Authorization': f'Bearer {SUPABASE_ANON_KEY}'
 }
+
+# Skip these integration tests when required environment variables are not set.
+# This prevents local runs from failing when secrets are intentionally absent.
+required_envs = [
+    "SUPABASE_AUTH_URL",
+    "SUPABASE_FUNCTION_URL",
+    # TEST_CUSTOM_TOKEN may be provided by CI; if absent, the authenticated test
+    # will assert and instruct running the create/authenticate test first.
+    "TEST_CUSTOM_TOKEN",
+]
+missing = [var for var in required_envs if not os.environ.get(var)]
+if missing:
+    pytest.skip(
+        f"Skipping Supabase tests, missing env vars: {', '.join(missing)}", allow_module_level=True)
 
 
 def random_username():
