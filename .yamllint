@@ -2,3 +2,7 @@ extends: default
 
 rules:
   truthy: disable
+  document-start: disable
+  line-length:
+    max: 140
+    level: warning

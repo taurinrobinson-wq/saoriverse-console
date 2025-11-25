@@ -1,13 +1,10 @@
----
 name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   lint-actions:
@@ -22,14 +19,16 @@ jobs:
           curl -sSL \
             https://github.com/rhysd/actionlint/releases/download/v1.6.26/actionlint_1.6.26_linux_amd64.tar.gz \
             -o /tmp/actionlint.tar.gz
-          tar -xzf /tmp/actionlint.tar.gz -C /usr/local/bin actionlint || true
-          chmod +x /usr/local/bin/actionlint || true
+          sudo tar -xzf /tmp/actionlint.tar.gz -C /usr/local/bin actionlint || true
+          sudo chmod +x /usr/local/bin/actionlint || true
 
       - name: Run actionlint
         run: |
-          /usr/local/bin/actionlint -color
+          /usr/local/bin/actionlint -color .github/workflows/*.yml
 
   tests:
+    name: Run tests
+    needs: lint-actions
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,66 +36,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-          if [ -f requirements-dev.txt ]; then
-            pip install -r requirements-dev.txt
-          fi
-
-      - name: Run tests
-        run: |
-          pytest -q
----
-name: CI
-
-on:
-  push:
-    branches:
-      jobs:
-        lint-actions:
-          name: Lint GitHub Actions workflows
-          runs-on: ubuntu-latest
-          steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - name: Install actionlint
-              run: |
-                curl -sSL \
-                  https://github.com/rhysd/actionlint/releases/download/v1.6.26/actionlint_1.6.26_linux_amd64.tar.gz \
-                  -o /tmp/actionlint.tar.gz
-                tar -xzf /tmp/actionlint.tar.gz -C /usr/local/bin actionlint || true
-                chmod +x /usr/local/bin/actionlint || true
-
-            - name: Run actionlint
-              run: |
-                /usr/local/bin/actionlint -color
-
-        tests:
-          runs-on: ubuntu-latest
-          steps:
-            - uses: actions/checkout@v4
-
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                python-version: '3.11'
-
-            - name: Install dependencies
-              run: |
-                python -m pip install --upgrade pip
-                if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-                if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-
-            - name: Run tests
-              run: |
-                pytest -q
             pip install -r requirements.txt
           fi
           if [ -f requirements-dev.txt ]; then
