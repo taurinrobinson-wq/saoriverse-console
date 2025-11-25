@@ -23,7 +23,8 @@ jobs:
           ACTIONLINT_PART="${ACTIONLINT_BASE}${ACTIONLINT_TAG}"
           ACTIONLINT_URL="${ACTIONLINT_PART}/${ACTIONLINT_FILE}"
           curl -sSL "$ACTIONLINT_URL" -o /tmp/actionlint.tar.gz
-          sudo tar -xzf /tmp/actionlint.tar.gz -C /usr/local/bin actionlint || true
+          ATMP=/tmp/actionlint.tar.gz
+          sudo tar -xzf "$ATMP" -C /usr/local/bin actionlint || true
           sudo chmod +x /usr/local/bin/actionlint || true
 
       - name: Run actionlint
