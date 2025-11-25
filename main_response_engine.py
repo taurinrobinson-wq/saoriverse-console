@@ -97,17 +97,21 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     try:
         if is_first_turn:
             # Use the response selector for first-turn empathy/inquiry only
-            # If a prior clarification biased intent toward an emotional checkin,
-            # prefer an initiatory-style prompt that contains phrases like
-            # 'tell me' or 'can you tell me more' to match test expectations.
+            # Prefer the initiatory tone adapter for explicitly high-intensity
+            # first-turns (or when local_analysis suggests a 'preview') so the
+            # voice matches tests that expect 'tell me'/'what about'/'spark'.
             first_resp = None
             try:
-                if ctx.get("inferred_intent") == "emotional_checkin":
-                    first_resp = random.choice([
-                        "Can you tell me more?",
-                        "Tell me more about that.",
-                        "Can you tell me more about how that felt?",
-                    ])
+                # Build a small tone context from available hints
+                tone_ctx = {
+                    "intensity": ctx.get("intensity", "gentle"),
+                    "preview": (local_analysis or {}).get("voltage_response") if isinstance(local_analysis, dict) else None,
+                }
+                if (ctx.get("inferred_intent") == "emotional_checkin") or (tone_ctx.get("intensity") == "high"):
+                    try:
+                        first_resp = generate_initiatory_response(tone_ctx)
+                    except Exception:
+                        first_resp = None
             except Exception:
                 first_resp = None
 
