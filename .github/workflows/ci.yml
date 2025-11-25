@@ -17,9 +17,11 @@ jobs:
 
       - name: Install actionlint
         run: |
-          ACTIONLINT_BASE="https://github.com/rhysd/actionlint/releases/download/v1.6.26/"
+          ACTIONLINT_BASE="https://github.com/rhysd/actionlint/releases/download/"
+          ACTIONLINT_TAG="v1.6.26"
           ACTIONLINT_FILE="actionlint_1.6.26_linux_amd64.tar.gz"
-          ACTIONLINT_URL="${ACTIONLINT_BASE}${ACTIONLINT_FILE}"
+          ACTIONLINT_PART="${ACTIONLINT_BASE}${ACTIONLINT_TAG}"
+          ACTIONLINT_URL="${ACTIONLINT_PART}/${ACTIONLINT_FILE}"
           curl -sSL "$ACTIONLINT_URL" -o /tmp/actionlint.tar.gz
           sudo tar -xzf /tmp/actionlint.tar.gz -C /usr/local/bin actionlint || true
           sudo chmod +x /usr/local/bin/actionlint || true
@@ -46,7 +48,7 @@ jobs:
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           else
-            echo "No requirements.txt found; skipping install of pinned requirements."
+            echo "No requirements.txt found; skipping pinned requirements."
           fi
           if [ -f requirements-dev.txt ]; then
             pip install -r requirements-dev.txt

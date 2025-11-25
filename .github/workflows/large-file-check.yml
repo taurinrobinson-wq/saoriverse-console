@@ -18,6 +18,7 @@ jobs:
           set -e
           MAX_BYTES=$((5 * 1024 * 1024))
           oversized=0
+          FILES="$(git ls-files)"
           while IFS= read -r f; do
             if [ -f "$f" ]; then
               size=$(wc -c <"$f" || echo 0)
@@ -26,9 +27,10 @@ jobs:
                 oversized=1
               fi
             fi
-          done <<<'$(git ls-files)'
+          done <<< "$FILES"
 
           if [ "$oversized" -eq 1 ]; then
-            echo "::error::One or more files exceed 5 MB. Remove them or use Git LFS."
+            echo "::error::One or more files exceed 5 MB."
+            echo "::error::Remove them or use Git LFS."
             exit 1
           fi
