@@ -47,7 +47,8 @@ jobs:
 
       - name: Evaluate enable_nlp
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.enable_nlp }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && \
+            [ "${{ github.event.inputs.enable_nlp }}" = "true" ]; then
             echo "ENABLE_NLP=true" >> $GITHUB_ENV
           else
             echo "ENABLE_NLP=false" >> $GITHUB_ENV
