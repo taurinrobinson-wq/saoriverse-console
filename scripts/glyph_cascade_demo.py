@@ -24,9 +24,8 @@ glyph_map = {
     "🪨": "resolve"
 }
 
-EMOTION_MAP_PATH = Path("Offshoots/emotion_map.json")
-PIVOT_PATHS = [Path("Offshoots/chord_pivot_normalized.json"),
-               Path("Offshoots/chord_pivot.json")]
+EMOTION_MAP_PATH = Path("Offshoots/ToneCore/emotion_map.json")
+PIVOT_PATHS = [Path("Offshoots/ToneCore/chord_pivot_normalized.json")]
 
 
 def load_json(path: Path):

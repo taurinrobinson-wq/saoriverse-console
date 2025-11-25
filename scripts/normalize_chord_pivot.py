@@ -18,7 +18,9 @@ import re
 
 
 IN = Path("Offshoots/chord_pivot.json")
-OUT = Path("Offshoots/chord_pivot_normalized.json")
+# Write normalized canonical pivot into the ToneCore project so the full
+# dataset lives with the ToneCore offshoot (portable, self-contained).
+OUT = Path("Offshoots/ToneCore/chord_pivot_normalized.json")
 
 
 def load_raw(path: Path):
