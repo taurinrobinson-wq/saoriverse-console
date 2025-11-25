@@ -1,3 +1,4 @@
+---
 name: Self-diagnostic and Auto-fix
 
 on:
@@ -29,7 +30,9 @@ jobs:
         run: |
           # Use the runner Python explicitly to ensure packages are installed
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
           # Ensure pytest is available for the self-diagnostic to run tests
           python -m pip install pytest
 
