@@ -1742,7 +1742,30 @@ def render_main_app():
                     effective_input = sanitized_text if 'sanitized_text' in locals(
                     ) and sanitized_text else user_input
 
-                    if processing_mode == "local":
+                    # Optionally delegate to main_v2.handle_user_message for first-turn selection
+                    handled_by_main_v2 = False
+                    try:
+                        from main_v2 import handle_user_message as _handle_user_message
+                        # derive last_user_input from session history if available
+                        last_user = None
+                        if conversation_key in st.session_state and st.session_state[conversation_key]:
+                            last_user_entry = next((m for m in reversed(
+                                st.session_state[conversation_key]) if 'user' in m and m.get('user')), None)
+                            last_user = last_user_entry.get(
+                                'user') if last_user_entry else None
+                        ctx_for_main = {'last_user_input': last_user, 'last_system_response': conversation_context.get(
+                            'last_assistant_message')}
+                        try:
+                            response_override = _handle_user_message(
+                                effective_input, context=ctx_for_main, conversation_id=conversation_key, user_id=st.session_state.get('user_id'))
+                            response = response_override
+                            handled_by_main_v2 = True
+                        except Exception:
+                            handled_by_main_v2 = False
+                    except Exception:
+                        handled_by_main_v2 = False
+
+                    if not handled_by_main_v2 and processing_mode == "local":
                         from emotional_os.glyphs.signal_parser import parse_input
                         local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
                                                      db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
@@ -1763,7 +1786,7 @@ def render_main_app():
                     # That option has been removed in favor of a simpler
                     # two-option model: 'hybrid' (default) and 'local'. Any
                     # unknown mode falls back to hybrid behavior below.
-                    elif processing_mode == "hybrid":
+                    elif not handled_by_main_v2 and processing_mode == "hybrid":
                         from emotional_os.glyphs.signal_parser import parse_input
                         local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
                                                      db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
@@ -1876,7 +1899,7 @@ def render_main_app():
                                         response = "I'm experiencing some technical difficulties, but I'm still here for you."
                         except Exception as e:
                             response = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g['glyph_name'] for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\nAI error: {e}"
-                    else:
+                    elif not handled_by_main_v2:
                         response = "Unknown processing mode."
                     # Before emitting the assistant response, attempt limbic processing if engine is present
                     try:

@@ -19,7 +19,8 @@ class ClarificationStore:
         self._init_db()
 
     def _get_conn(self):
-        return sqlite3.connect(str(self.db_path), timeout=5, check_same_thread=False)
+        # Reduce client-side timeout to avoid long blocking when DB is locked.
+        return sqlite3.connect(str(self.db_path), timeout=0.5, check_same_thread=False)
 
     def _init_db(self):
         sql = """
@@ -36,6 +37,8 @@ class ClarificationStore:
         );
         CREATE INDEX IF NOT EXISTS ix_trigger ON clarifications(trigger);
         CREATE INDEX IF NOT EXISTS ix_convo_trigger ON clarifications(conversation_id, trigger);
+        -- Ensure uniqueness per conversation+trigger to avoid duplicate clarifications
+        CREATE UNIQUE INDEX IF NOT EXISTS ux_convo_trigger ON clarifications(conversation_id, trigger);
         """
         conn = self._get_conn()
         try:
@@ -49,8 +52,9 @@ class ClarificationStore:
         conn = self._get_conn()
         try:
             cur = conn.cursor()
+            # Use INSERT OR IGNORE to avoid violating unique constraint under contention.
             cur.execute(
-                "INSERT INTO clarifications (conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT OR IGNORE INTO clarifications (conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 (
                     record.get("conversation_id"),
                     record.get("user_id"),
@@ -63,7 +67,14 @@ class ClarificationStore:
                 ),
             )
             conn.commit()
-            return cur.lastrowid
+            # If insert was ignored due to uniqueness, fetch existing id
+            if cur.lastrowid:
+                return cur.lastrowid
+            # fallback: select existing row id
+            cur.execute("SELECT id FROM clarifications WHERE conversation_id=? AND trigger=? LIMIT 1",
+                        (record.get("conversation_id"), record.get("trigger")))
+            row = cur.fetchone()
+            return row[0] if row else None
         finally:
             conn.close()
 

@@ -13,6 +13,8 @@ import re
 import fcntl
 import stat
 from pathlib import Path
+import threading
+import queue
 
 DEFAULT_STORE = Path(__file__).resolve(
 ).parents[2] / "data" / "disambiguation_memory.jsonl"
@@ -156,15 +158,44 @@ class ClarificationTrace:
             if context.get("user_id"):
                 record["user_id"] = context.get("user_id")
 
-            rowid = store.insert(record)
-            result = {"stored": True, "rowid": rowid, "inferred_intent": inferred,
-                      "needs_confirmation": needs_confirmation}
-            # keep backward compatibility: store last result and return boolean
+            # Run DB insert in a short-lived thread and wait with timeout.
+            # If insert doesn't complete quickly (DB locked, slow IO), fall back to JSONL append.
+            q = queue.Queue()
+
+            def _worker_insert(q: queue.Queue):
+                try:
+                    rid = store.insert(record)
+                    q.put(("ok", rid))
+                except Exception as e:
+                    q.put(("err", e))
+
+            thread = threading.Thread(
+                target=_worker_insert, args=(q,), daemon=True)
+            thread.start()
             try:
-                self._last_result = result
+                status, payload = q.get(timeout=float(
+                    os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", "0.75")))
+                if status == "ok":
+                    rowid = payload
+                    result = {"stored": True, "rowid": rowid, "inferred_intent": inferred,
+                              "needs_confirmation": needs_confirmation}
+                    try:
+                        self._last_result = result
+                    except Exception:
+                        pass
+                    # If DB insert succeeded, purge any matching fallback JSONL records
+                    try:
+                        self._purge_jsonl_trigger(record.get("trigger"), record.get(
+                            "conversation_id"), record.get("user_id"))
+                    except Exception:
+                        pass
+                    return True
+                else:
+                    # worker raised an exception — re-raise to trigger fallback
+                    raise payload
             except Exception:
-                pass
-            return True
+                # Timeout or worker exception — re-raise to trigger outer fallback handler
+                raise
         except Exception:
             # fallback to file append as legacy behaviour
             try:
@@ -197,6 +228,79 @@ class ClarificationTrace:
         key = _normalize_trigger(phrase)
         if not key:
             return None
+
+            def _purge_jsonl_trigger(self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None) -> int:
+                """Remove any lines from the JSONL fallback that match the given trigger (and optionally conversation/user). Returns number of removed lines."""
+                if not trigger:
+                    return 0
+                try:
+                    if not self.store_path.exists():
+                        return 0
+                    kept = []
+                    removed = 0
+                    with open(self.store_path, "r", encoding="utf8") as fh:
+                        try:
+                            fcntl.flock(fh.fileno(), fcntl.LOCK_SH)
+                        except Exception:
+                            pass
+                        lines = fh.read().splitlines()
+                        try:
+                            fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+                        except Exception:
+                            pass
+
+                    for ln in lines:
+                        ln = ln.strip()
+                        if not ln:
+                            continue
+                        try:
+                            rec = json.loads(ln)
+                        except Exception:
+                            # keep unparsable lines
+                            kept.append(ln)
+                            continue
+                        if rec.get("trigger") == trigger:
+                            # optionally ensure conversation/user matches if provided
+                            if conversation_id and rec.get("conversation_id") != conversation_id:
+                                kept.append(ln)
+                                continue
+                            if user_id and rec.get("user_id") != user_id:
+                                kept.append(ln)
+                                continue
+                            removed += 1
+                        else:
+                            kept.append(ln)
+
+                    if removed:
+                        tmp = str(self.store_path) + ".tmp"
+                        with open(tmp, "w", encoding="utf8") as out:
+                            try:
+                                fcntl.flock(out.fileno(), fcntl.LOCK_EX)
+                            except Exception:
+                                pass
+                            out.write("\n".join(kept) + ("\n" if kept else ""))
+                            out.flush()
+                            try:
+                                fcntl.flock(out.fileno(), fcntl.LOCK_UN)
+                            except Exception:
+                                pass
+                        try:
+                            os.replace(tmp, str(self.store_path))
+                        except Exception:
+                            # best-effort: try rename
+                            try:
+                                os.remove(str(self.store_path))
+                                os.rename(tmp, str(self.store_path))
+                            except Exception:
+                                pass
+                    return removed
+                except Exception:
+                    return 0
+
+        def detect_and_store(user_input: str, context: Optional[Dict[str, Any]] = None, store_path: Optional[Path] = None) -> bool:
+            """Convenience wrapper: create a ClarificationTrace and call `detect_and_store` on it."""
+            ct = ClarificationTrace(store_path=store_path)
+            return ct.detect_and_store(user_input, context=context)
 
         try:
             with open(self.store_path, "r", encoding="utf8") as fh:
