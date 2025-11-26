@@ -1,0 +1,34 @@
+{
+    "longing": {
+        "function": "i",
+        "description": "Minor tonic, introspective and unresolved"
+    },
+    "stress": {
+        "function": "viio",
+        "description": "Diminished leading tone, tense and unstable"
+    },
+    "joy": {
+        "function": "I",
+        "description": "Major tonic, bright and centered"
+    },
+    "calm": {
+        "function": "IV",
+        "description": "Subdominant, open and grounding"
+    },
+    "hope": {
+        "function": "V",
+        "description": "Dominant, forward-moving and expectant"
+    },
+    "melancholy": {
+        "function": "vi",
+        "description": "Relative minor, reflective and soft"
+    },
+    "wonder": {
+        "function": "III",
+        "description": "Mediant, surprising and colorful"
+    },
+    "resolve": {
+        "function": "V7",
+        "description": "Dominant seventh, strong pull to tonic"
+    }
+}

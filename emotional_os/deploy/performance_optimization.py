@@ -69,7 +69,7 @@ class OptimizedResponseHandler:
 
         return None
 
-    def get_cache_key(self, message: str, mode: str = "hybrid") -> str:
+    def get_cache_key(self, message: str, mode: str = "local") -> str:
         """Generate a cache key for the message"""
         # Simple hash-like key based on message content
         return f"{hash(message.lower()[:100])}_{mode}"
@@ -228,17 +228,9 @@ def optimize_streamlit_performance():
 
     # Cache expensive operations
     if 'optimized_processor' not in st.session_state:
-        from emotional_os.supabase.supabase_integration import create_hybrid_processor
-        # Gate hybrid processor creation to avoid accidental remote AI use in local-only mode
-        try:
-            st.session_state.optimized_processor = create_hybrid_processor(
-                limbic_engine=st.session_state.get('limbic_engine'))
-        except RuntimeError as e:
-            # Remote AI disabled; fall back to a local-only processor (None integrator)
-            import logging
-            logging.warning(f"Hybrid processor creation blocked: {e}")
-            st.session_state.optimized_processor = create_hybrid_processor(
-                limbic_engine=st.session_state.get('limbic_engine')) if False else None
+        # Hybrid processor removed to avoid remote AI usage by default.
+        # Keep optimized_processor as None for local-only deployments.
+        st.session_state.optimized_processor = None
 
     # Set up performance monitoring
     if 'performance_stats' not in st.session_state:

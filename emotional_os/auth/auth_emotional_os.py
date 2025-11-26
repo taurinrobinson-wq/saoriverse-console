@@ -16,7 +16,7 @@ import streamlit as st
 # Page configuration
 st.set_page_config(
     page_title="Emotional OS",
-    page_icon="FP",
+    page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -58,7 +58,7 @@ class AuthenticationManager:
         if 'login_attempts' not in st.session_state:
             st.session_state.login_attempts = {}
         if 'processing_mode' not in st.session_state:
-            # Default to local-only processing to avoid external API calls
+            # Default to local-only processing to avoid remote AI costs
             st.session_state.processing_mode = "local"
 
     def hash_password(self, password: str, salt: str = None) -> tuple:
@@ -606,7 +606,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
             with col3:
                 st.markdown("""
-                **FP Smart Learning**
+                **🧠 Smart Learning**
                 - Adapts to your style
                 - Builds personalized vocabulary  
                 - Improves over time
@@ -742,7 +742,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
 def render_main_app():
     """Render the main application for authenticated users"""
-    st.title("FP Emotional OS - Personal AI Companion")
+    st.title("🧠 Emotional OS - Personal AI Companion")
     st.markdown("*Your private space for emotional processing and growth*")
 
     # User-specific conversation history
@@ -755,20 +755,27 @@ def render_main_app():
         # Processing mode selection
         col1, col2 = st.columns([2, 1])
 
-        # Backward-compatibility: translate legacy 'ai_preferred' into hybrid+prefer_ai
+        # Backward-compatibility: translate legacy 'ai_preferred' into local
+        # to avoid enabling remote AI automatically.
         if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'hybrid'
-            st.session_state['prefer_ai'] = True
+            st.session_state.processing_mode = 'local'
+            st.session_state['prefer_ai'] = False
 
         with col1:
-            # Hide interactive selector and enforce local-only mode to prevent
-            # outbound API requests from authenticated flows.
+            # Hybrid mode removed — default to local-only options.
+            mode_options = ["local"]
+            current = st.session_state.get('processing_mode', 'local')
             try:
-                st.markdown(
-                    "**Processing Mode:** Local (offline — no external API calls)")
-                st.session_state.processing_mode = 'local'
-            except Exception:
-                st.session_state.setdefault('processing_mode', 'local')
+                idx = mode_options.index(current)
+            except ValueError:
+                idx = 0
+            processing_mode = st.selectbox(
+                "Processing Mode",
+                mode_options,
+                index=idx,
+                help="Hybrid: Best performance, Local: Maximum privacy",
+            )
+            st.session_state.processing_mode = processing_mode
 
         with col2:
             if st.button("Clear History", type="secondary"):
@@ -865,7 +872,7 @@ def render_main_app():
 
         st.subheader("Privacy Settings")
         st.write("🔒 Your data is completely isolated")
-        st.write("FP Learning happens only from your conversations")
+        st.write("🧠 Learning happens only from your conversations")
         st.write("⚡ Optimized for 2-3 second responses")
 
         if st.button("Download My Data", type="secondary"):
