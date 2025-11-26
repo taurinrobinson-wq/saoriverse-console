@@ -1,0 +1,30 @@
+name: ToneCore smoke tests
+
+on:
+    push:
+        paths:
+            - "Offshoots/**"
+            - "scripts/**"
+            - ".github/workflows/**"
+    pull_request:
+        paths:
+            - "Offshoots/**"
+            - "scripts/**"
+
+jobs:
+    smoke:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.11"
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+                  pip install mido
+            - name: Run ToneCore smoke tests
+              run: |
+                  python3 scripts/ci_smoke_test.py
