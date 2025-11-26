@@ -112,7 +112,7 @@ class ConversationManager:
         }
 
     def save_conversation(self, conversation_id: str, title: str, messages: List[Dict],
-                          processing_mode: str = "hybrid") -> Tuple[bool, str]:
+                          processing_mode: str = "local") -> Tuple[bool, str]:
         """
         Save or update a conversation to Supabase.
 
@@ -193,13 +193,16 @@ class ConversationManager:
                 conversations = response.json()
                 # Backward compatibility shim: translate any legacy "ai_preferred"
                 # processing_mode values into the new representation where
-                # processing_mode='hybrid' and prefer_ai=True.
+                # hybrid mode is removed and we migrate legacy preference to
+                # local-only mode to avoid invoking remote AI by default.
                 if isinstance(conversations, list):
                     for c in conversations:
                         pm = c.get('processing_mode')
                         if pm == 'ai_preferred':
-                            c['processing_mode'] = 'hybrid'
-                            c['prefer_ai'] = True
+                            # Map legacy 'ai_preferred' → 'local' and clear
+                            # 'prefer_ai' to avoid accidental remote AI calls.
+                            c['processing_mode'] = 'local'
+                            c['prefer_ai'] = False
                 return conversations if isinstance(conversations, list) else []
             else:
                 return []
@@ -241,10 +244,11 @@ class ConversationManager:
                     # Parse messages JSON string
                     if isinstance(conv.get('messages'), str):
                         conv['messages'] = json.loads(conv['messages'])
-                    # Backward compatibility: map legacy ai_preferred to hybrid+prefer_ai
+                    # Backward compatibility: map legacy ai_preferred into
+                    # 'local' to avoid invoking remote AI by default.
                     if conv.get('processing_mode') == 'ai_preferred':
-                        conv['processing_mode'] = 'hybrid'
-                        conv['prefer_ai'] = True
+                        conv['processing_mode'] = 'local'
+                        conv['prefer_ai'] = False
                     return conv
             return None
 
