@@ -17,11 +17,27 @@ import sys
 import urllib.request
 import shutil
 import streamlit as st
-from emotional_os.core.signal_parser import parse_input
+# deferred import of parse_input to avoid startup blocking
 import sqlite3
 
+# Enable faulthandler at startup so we can dump Python thread
+# backtraces to stderr/logs by sending SIGUSR1 to the process. This
+# helps diagnose hangs where the server accepts TCP connections but
+# doesn't respond.
+import faulthandler
+import signal
+
+try:
+    faulthandler.enable()
+    # Register SIGUSR1 to dump tracebacks to stderr
+    faulthandler.register(signal.SIGUSR1)
+except Exception:
+    # If faulthandler or signal registration isn't available, continue
+    pass
+
 # Enhanced processor (NRC + TextBlob + spaCy)
-from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
+# Deferred import of EnhancedEmotionProcessor to avoid blocking startup
+# from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
 
 ROOT = Path(__file__).resolve().parents[2]
 TONECORE = ROOT / 'Offshoots' / 'ToneCore'
@@ -94,6 +110,7 @@ if st.button('Generate & Render'):
         # 1) Run the base parser to find glyphs/signals (helps UI transparency)
         with st.spinner('Parsing input (signal parser)...'):
             try:
+                from emotional_os.core.signal_parser import parse_input
                 parsed = parse_input(
                     user_text, 'emotional_os/parser/signal_lexicon.json')
             except Exception as e:
@@ -111,6 +128,8 @@ if st.button('Generate & Render'):
             # 2) Run enhanced NLP analysis (NRC + TextBlob + spaCy)
             with st.spinner('Running enhanced NLP analysis (NRC + TextBlob + spaCy)...'):
                 try:
+                    # Import here to avoid heavy imports at top-level
+                    from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
                     eproc = EnhancedEmotionProcessor()
                     enhanced = eproc.analyze_emotion_comprehensive(user_text)
                 except Exception as e:
