@@ -53,6 +53,9 @@ logs/
 *.db
 *.sqlite3
 
+# Local runtime SQLite (explicit)
+/emotional_os/glyphs/glyphs.db
+
 # Environment variables
 .env.local
 .env.production

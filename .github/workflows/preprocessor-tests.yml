@@ -1,3 +1,4 @@
+---
 name: Preprocessor unit tests (fast)
 
 on:
@@ -15,20 +16,24 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
           pip install pytest
 
       - name: Run focused preprocessor tests + taxonomy validator + prefs tests
         run: |
           # Run the focused preprocessor unit tests
           pytest -q tests/test_preprocessor.py
-          # Run the user preferences test (mocked requests) to ensure persistence helpers
+            # Run the user preferences test (mocked requests)
+            # to ensure persistence helpers
           pytest -q tests/test_user_preferences.py
-          # Run the taxonomy validator; this will be skipped when no canonical taxonomy is present,
-          # but will fail the run if a taxonomy exists and does not conform to the schema.
+          # Run the taxonomy validator; this will be skipped when
+          # no canonical taxonomy is present. It will fail the run if
+          # a taxonomy exists and does not conform to the schema.
           pytest -q tests/test_taxonomy_validator.py

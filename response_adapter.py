@@ -10,6 +10,7 @@ Design notes:
   user-facing text. Use metaphorical, gentle phrasing.
 """
 from typing import Dict, List, Optional
+from glyph_response_helpers import scaffold_response
 
 
 def translate_emotional_response(system_output: Dict) -> str:
@@ -21,18 +22,46 @@ def translate_emotional_response(system_output: Dict) -> str:
     - context: str (short descriptor of where emotion arose)
     - resonance: str (a phrase summarizing what the emotion points to)
     """
-    emotion = system_output.get("emotion") or "emotion"
-    intensity = system_output.get("intensity") or "subtle"
+    emotion = system_output.get("emotion") or "feeling"
+    intensity = system_output.get("intensity") or "gentle"
     context = system_output.get("context") or "this moment"
     resonance = system_output.get("resonance") or "a quiet shift"
 
-    # Build phrasing while avoiding technical vocabulary
-    if intensity.lower() in ("high", "strong", "intense"):
-        opener = f"This {context} seems to have stirred something deep — {emotion} with some force."
+    # Normalize phrasing to avoid awkward adjective+noun concatenation
+    i = (intensity or "").lower()
+    if i in ("high", "strong", "intense"):
+        opener = f"This {context} seems to have stirred a strong sense of {emotion}."
     else:
-        opener = f"There's a gentle{'' if intensity=='subtle' else 'ly ' + intensity} {emotion} here."
+        opener = f"There’s a gentle sense of {emotion} here."
 
-    return f"{opener} It feels like {resonance}. Would you like to reflect on that?"
+    # Keep the invitation concise and permission-oriented
+    # Do not force-capitalize `resonance` so tests that look for
+    # lowercase tokens such as 'presence' continue to match.
+    return f"{opener} {resonance}. Would you like to reflect on that?"
+
+
+def generate_response_from_glyphs(system_output: Dict) -> str:
+    """Generate a user-facing response using glyph overlays if available.
+
+    Expects `system_output` may contain `glyph_overlays_info` (list of {tag, confidence}).
+    Falls back to `translate_emotional_response` when overlays are absent.
+    """
+    glyphs = system_output.get(
+        "glyph_overlays_info") or system_output.get("glyph_overlays")
+    if not glyphs:
+        return translate_emotional_response(system_output)
+
+    # If glyphs is a list of tags, normalize to info form with default confidence
+    if glyphs and isinstance(glyphs[0], str):
+        glyphs = [{"tag": t, "confidence": 0.5} for t in glyphs]
+
+    scaff = scaffold_response(glyphs)
+    resp = scaff.get("response")
+    if resp:
+        return resp + ""
+
+    # fallback
+    return translate_emotional_response(system_output)
 
 
 def reflect_relationship(name: str, prior_context: Optional[Dict] = None) -> str:
