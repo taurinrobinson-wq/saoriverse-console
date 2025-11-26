@@ -1,11 +1,1 @@
-Offshoots/ToneCore/sf2/*.sf2 filter=lfs diff=lfs merge=lfs -text
 Offshoots/ToneCore/sf2/FluidR3_GM.sf2 filter=lfs diff=lfs merge=lfs -text
-emotional_os/deploy/ngrok.exe filter=lfs diff=lfs merge=lfs -text
-emotional_os/deploy/ngrok.zip filter=lfs diff=lfs merge=lfs -text
-emotional_os/deploy/supabase-cli.zip filter=lfs diff=lfs merge=lfs -text
-emotional_os/deploy/supabase.exe filter=lfs diff=lfs merge=lfs -text
-emotional_os/deploy/supabase.tar.gz filter=lfs diff=lfs merge=lfs -text
-emotional_os/glyphs/glyph_lexicon_rows_backup_original_8560.json filter=lfs diff=lfs merge=lfs -text
-emotional_os/parser/signal_lexicon.json filter=lfs diff=lfs merge=lfs -text
-glyph_lexicon_rows_before_phase2.json filter=lfs diff=lfs merge=lfs -text
-learning/hybrid_learning_log.jsonl filter=lfs diff=lfs merge=lfs -text

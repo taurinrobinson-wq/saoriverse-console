@@ -20,12 +20,14 @@ python3 -m pip install -r Offshoots/ToneCore/requirements.txt
 3. Run the app:
 
 ```bash
-streamlit run Offshoots/ToneCore/streamlit_app.py
+# Example: run on port 8502 to avoid conflicts with other apps
+streamlit run Offshoots/ToneCore/streamlit_app.py --server.port 8502
 ```
 
-Open http://localhost:8501 (forward the port if running in a remote container).
+Open <http://localhost:8502> (forward the port if running in a remote container).
 
 Notes:
+
 - The app will try to use a local `Offshoots/ToneCore/sf2/FluidR3_GM.sf2` soundfont if present,
   fall back to common system locations, and otherwise attempt to download a small fallback
   soundfont into `Offshoots/ToneCore/sf2/` at first run.
