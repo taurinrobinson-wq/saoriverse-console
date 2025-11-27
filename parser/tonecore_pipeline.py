@@ -16,12 +16,21 @@ Maintains compatibility with existing gate activation logic.
 
 import concurrent.futures
 import logging
+import os
 import re
 from dataclasses import dataclass, field
 from functools import lru_cache
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+# Configuration defaults (can be overridden via environment variables)
+DEFAULT_SPACY_MODEL = os.environ.get("TONECORE_SPACY_MODEL", "en_core_web_sm")
+DEFAULT_LEXICON_PATH = os.environ.get(
+    "TONECORE_LEXICON_PATH",
+    str(Path(__file__).parent / "signal_lexicon.json")
+)
 
 # Standard output schemas as dataclasses
 @dataclass
@@ -157,13 +166,13 @@ def _load_textblob():
 
 
 def _load_spacy():
-    """Lazy load spaCy."""
+    """Lazy load spaCy with configurable model."""
     global _nlp, SPACY_AVAILABLE
     if _nlp is not None:
         return _nlp
     try:
         import spacy
-        _nlp = spacy.load('en_core_web_sm')
+        _nlp = spacy.load(DEFAULT_SPACY_MODEL)
         SPACY_AVAILABLE = True
     except (ImportError, OSError):
         SPACY_AVAILABLE = False
@@ -251,7 +260,11 @@ class ToneCorePipeline:
         """Run Signal Parser on input text."""
         try:
             from emotional_os.core.signal_parser import load_signal_map, parse_signals
-            lexicon_path = "emotional_os/parser/signal_lexicon.json"
+            # Use configurable lexicon path with fallback to default
+            lexicon_path = DEFAULT_LEXICON_PATH
+            if not os.path.exists(lexicon_path):
+                # Fallback to legacy path for compatibility
+                lexicon_path = "emotional_os/parser/signal_lexicon.json"
             signal_map = load_signal_map(lexicon_path)
             raw_signals = parse_signals(text, signal_map)
 
