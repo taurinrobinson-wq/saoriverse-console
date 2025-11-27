@@ -16,6 +16,26 @@ import shlex
 import sys
 import urllib.request
 import shutil
+import logging
+
+# Configure logging for module path troubleshooting
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
+
+# Add repository root to Python path so emotional_os and other modules can be found
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+    logger.debug("Added repository root to sys.path: %s", REPO_ROOT)
+else:
+    logger.debug("Repository root already in sys.path: %s", REPO_ROOT)
+
+# Log current sys.path for debugging module import issues
+logger.debug("Current sys.path entries (first 5): %s", sys.path[:5])
+
 import streamlit as st
 # deferred import of parse_input to avoid startup blocking
 import sqlite3
@@ -39,9 +59,9 @@ except Exception:
 # Deferred import of EnhancedEmotionProcessor to avoid blocking startup
 # from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
 
-ROOT = Path(__file__).resolve().parents[2]
-TONECORE = ROOT / 'Offshoots' / 'ToneCore'
-OUT = ROOT / 'demo_output'
+# Reuse REPO_ROOT defined above for path consistency
+TONECORE = REPO_ROOT / 'Offshoots' / 'ToneCore'
+OUT = REPO_ROOT / 'demo_output'
 OUT.mkdir(exist_ok=True)
 SF2 = TONECORE / 'sf2' / 'FluidR3_GM.sf2'
 
@@ -51,7 +71,7 @@ FALLBACK_SF2_URL = 'https://github.com/urish/sf2/raw/master/TimGM6mb.sf2'
 
 def run_cmd(cmd):
     st.write('> ' + ' '.join(cmd))
-    res = subprocess.run(cmd, cwd=str(ROOT))
+    res = subprocess.run(cmd, cwd=str(REPO_ROOT))
     return res.returncode
 
 
@@ -111,9 +131,20 @@ if st.button('Generate & Render'):
         with st.spinner('Parsing input (signal parser)...'):
             try:
                 from emotional_os.core.signal_parser import parse_input
+                logger.debug("Successfully imported parse_input from emotional_os.core.signal_parser")
                 parsed = parse_input(
                     user_text, 'emotional_os/parser/signal_lexicon.json')
+            except ModuleNotFoundError as e:
+                logger.error("Module import failed: %s", e)
+                logger.error("Current sys.path: %s", sys.path[:5])
+                st.error(f'Parsing failed: {e}')
+                st.info(
+                    f"Troubleshooting: Ensure the repository root is in Python path. "
+                    f"Expected root: {REPO_ROOT}. Current sys.path[0]: {sys.path[0] if sys.path else 'empty'}"
+                )
+                parsed = None
             except Exception as e:
+                logger.error("Parsing error: %s", e, exc_info=True)
                 st.error(f'Parsing failed: {e}')
                 parsed = None
 
@@ -130,9 +161,20 @@ if st.button('Generate & Render'):
                 try:
                     # Import here to avoid heavy imports at top-level
                     from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
+                    logger.debug("Successfully imported EnhancedEmotionProcessor from parser.enhanced_emotion_processor")
                     eproc = EnhancedEmotionProcessor()
                     enhanced = eproc.analyze_emotion_comprehensive(user_text)
+                except ModuleNotFoundError as e:
+                    logger.error("Module import failed: %s", e)
+                    logger.error("Current sys.path: %s", sys.path[:5])
+                    st.error(f'Enhanced analysis failed: {e}')
+                    st.info(
+                        f"Troubleshooting: Ensure the repository root is in Python path. "
+                        f"Expected root: {REPO_ROOT}. Current sys.path[0]: {sys.path[0] if sys.path else 'empty'}"
+                    )
+                    enhanced = None
                 except Exception as e:
+                    logger.error("Enhanced analysis error: %s", e, exc_info=True)
                     st.error(f'Enhanced analysis failed: {e}')
                     enhanced = None
 
