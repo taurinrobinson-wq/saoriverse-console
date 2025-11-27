@@ -24,6 +24,8 @@ from urllib.parse import urlparse
 import streamlit as st
 import logging
 import time
+import wave
+import math
 # deferred import of parse_input to avoid startup blocking
 import sqlite3
 
@@ -611,6 +613,44 @@ if st.session_state.get('tonecore_parsed'):
                         # Read the WAV bytes and provide an explicit player + download
                         try:
                             wav_bytes = Path(final_wav).read_bytes()
+
+                            # Compute human-friendly file size
+                            try:
+                                size_bytes = Path(final_wav).stat().st_size
+                                size_mb = size_bytes / (1024.0 * 1024.0)
+                                size_str = f"{size_mb:.1f} MB"
+                            except Exception:
+                                size_str = None
+
+                            # Compute WAV duration (seconds) using wave module
+                            duration_str = None
+                            try:
+                                with wave.open(str(final_wav), 'rb') as wf:
+                                    frames = wf.getnframes()
+                                    rate = wf.getframerate()
+                                    duration = frames / \
+                                        float(rate) if rate else 0.0
+                                # format duration as H:MM:SS or M:SS
+                                total = int(math.floor(duration))
+                                hrs = total // 3600
+                                mins = (total % 3600) // 60
+                                secs = total % 60
+                                if hrs:
+                                    duration_str = f"{hrs}:{mins:02d}:{secs:02d}"
+                                else:
+                                    duration_str = f"{mins}:{secs:02d}"
+                            except Exception:
+                                duration_str = None
+
+                            # Present a compact output line before the player
+                            info_parts = []
+                            if size_str:
+                                info_parts.append(size_str)
+                            if duration_str:
+                                info_parts.append(duration_str)
+                            if info_parts:
+                                st.caption('Output: ' + ' • '.join(info_parts))
+
                             st.audio(wav_bytes, format='audio/wav')
                             st.download_button('Download WAV', data=wav_bytes,
                                                file_name=Path(final_wav).name,
