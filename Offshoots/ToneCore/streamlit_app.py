@@ -17,6 +17,8 @@ import shlex
 import sys
 import urllib.request
 import shutil
+import os
+from urllib.parse import urlparse
 import streamlit as st
 import logging
 import time
@@ -70,6 +72,55 @@ logger = logging.getLogger('tonecore')
 # Fallback download URL for a small General MIDI soundfont (TimGM6mb - ~6MB)
 FALLBACK_SF2_URL = 'https://github.com/urish/sf2/raw/master/TimGM6mb.sf2'
 
+# Optional environment variable to point to a hosted SF2 (CDN or GitHub release)
+# Example: export TONECORE_SF2_URL="https://cdn.example.com/FluidR3_GM.sf2"
+SF2_ENV_URL = os.environ.get('TONECORE_SF2_URL')
+
+
+def is_valid_sf2(path: Path) -> bool:
+    """Quick check whether a file looks like a SoundFont (RIFF header).
+
+    It's a lightweight validation used before attempting to call fluidsynth.
+    """
+    try:
+        with open(path, 'rb') as fh:
+            hdr = fh.read(4)
+            return hdr == b'RIFF'
+    except Exception:
+        return False
+
+
+def download_sf2(url: str, dest: Path) -> bool:
+    """Download an SF2 from `url` to `dest`. Returns True on success.
+
+    The function streams the download to avoid using excessive memory and
+    validates the header after download. On failure, the partial file is
+    removed.
+    """
+    logger.info('Attempting to download SF2 from %s to %s', url, dest)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dest.with_suffix('.sf2.downloading')
+    try:
+        with urllib.request.urlopen(url, timeout=30) as resp, open(tmp, 'wb') as out:
+            shutil.copyfileobj(resp, out)
+        # quick validation
+        if not is_valid_sf2(tmp):
+            logger.warning(
+                'Downloaded file does not appear to be a valid SF2: %s', tmp)
+            tmp.unlink(missing_ok=True)
+            return False
+        # move into place
+        tmp.replace(dest)
+        logger.info('Downloaded and stored SF2 at %s', dest)
+        return True
+    except Exception as e:
+        logger.exception('Failed to download SF2 from %s: %s', url, e)
+        try:
+            tmp.unlink(missing_ok=True)
+        except Exception:
+            pass
+        return False
+
 
 def run_cmd(cmd):
     """Run a command and capture output; log start/end and returncode."""
@@ -122,12 +173,29 @@ def ensure_soundfont():
     sf2_dir = SF2.parent
     sf2_dir.mkdir(parents=True, exist_ok=True)
     try:
-        dest = sf2_dir / 'TimGM6mb.sf2'
-        if not dest.exists():
-            st.info(f'Downloading fallback soundfont (~6MB) to {dest}...')
-            with urllib.request.urlopen(FALLBACK_SF2_URL, timeout=30) as resp, open(dest, 'wb') as out:
-                shutil.copyfileobj(resp, out)
-        return dest
+        # Prefer an explicit CDN/release URL if provided via env
+        preferred = SF2_ENV_URL or FALLBACK_SF2_URL
+        dest = SF2
+
+        # If a valid SF2 already exists at the destination, return it
+        if dest.exists() and is_valid_sf2(dest):
+            logger.info('Existing SF2 found and valid at %s', dest)
+            return dest
+
+        # Try to download from preferred URL
+        st.info(f'Downloading fallback soundfont to {dest}...')
+        ok = download_sf2(preferred, dest)
+        if ok:
+            return dest
+
+        # If preferred failed and it wasn't the fallback URL, try the fallback
+        if preferred != FALLBACK_SF2_URL:
+            logger.info('Preferred SF2 URL failed; trying fallback URL')
+            ok2 = download_sf2(FALLBACK_SF2_URL, dest)
+            if ok2:
+                return dest
+
+        return None
     except Exception as e:
         st.warning(f'Could not obtain fallback soundfont: {e}')
         return None
