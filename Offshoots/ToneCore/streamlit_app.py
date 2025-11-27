@@ -18,6 +18,7 @@ import sys
 import urllib.request
 import shutil
 import os
+import hashlib
 from urllib.parse import urlparse
 import streamlit as st
 import logging
@@ -92,18 +93,36 @@ def is_valid_sf2(path: Path) -> bool:
 
 def download_sf2(url: str, dest: Path) -> bool:
     """Download an SF2 from `url` to `dest`. Returns True on success.
-
-    The function streams the download to avoid using excessive memory and
-    validates the header after download. On failure, the partial file is
-    removed.
-    """
-    logger.info('Attempting to download SF2 from %s to %s', url, dest)
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    tmp = dest.with_suffix('.sf2.downloading')
     try:
         with urllib.request.urlopen(url, timeout=30) as resp, open(tmp, 'wb') as out:
             shutil.copyfileobj(resp, out)
+        # If a SHA256 is provided, validate the download before moving into place
+        expected_hash = os.getenv('TONECORE_SF2_SHA256')
+        if expected_hash:
+            # compute actual hash
+            h = hashlib.sha256()
+            with open(tmp, 'rb') as fh:
+                for chunk in iter(lambda: fh.read(8192), b''):
+                    h.update(chunk)
+            actual_hash = h.hexdigest()
+            if actual_hash.lower() != expected_hash.lower():
+                logger.warning(
+                    'SF2 hash mismatch: expected %s, got %s', expected_hash, actual_hash)
+                try:
+                    tmp.unlink(missing_ok=True)
+                except Exception:
+                    pass
+                return False
         # quick validation
+        if not is_valid_sf2(tmp):
+            logger.warning(
+                'Downloaded file does not appear to be a valid SF2: %s', tmp)
+            tmp.unlink(missing_ok=True)
+            return False
+        # move into place
+        tmp.replace(dest)
+        logger.info('Downloaded and stored SF2 at %s', dest)
+        return True
         if not is_valid_sf2(tmp):
             logger.warning(
                 'Downloaded file does not appear to be a valid SF2: %s', tmp)
@@ -207,7 +226,7 @@ sf2_path = ensure_soundfont()
 logger.info('startup: sf2_path=%s', str(sf2_path))
 
 st.markdown("""
-Enter text (multi-line). The app will parse the input using the project's
+Enter text(multi-line). The app will parse the input using the project's
 signal parsers and generate a MIDI progression based on the glyphs found.
 """)
 

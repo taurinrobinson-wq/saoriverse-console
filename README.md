@@ -41,3 +41,24 @@ If you added or updated large files locally, push objects to the remote by runni
 ```bash
 git lfs push --all origin <branch>
 ```
+
+### 🎵 SoundFont Setup
+
+ToneCore requires a valid SF2 soundfont (for example, `FluidR3_GM.sf2`) for MIDI rendering.
+
+By default, the app looks for `Offshoots/ToneCore/sf2/FluidR3_GM.sf2` in the project tree. If missing
+or invalid, the app will attempt to download a fallback soundfont automatically and cache it locally.
+
+You can customize the download source by setting:
+
+```bash
+export TONECORE_SF2_URL="https://your.cdn.com/FluidR3_GM.sf2"
+```
+
+For integrity validation, you may optionally set the expected SHA256 checksum:
+
+```bash
+export TONECORE_SF2_SHA256="your_expected_checksum"
+```
+
+If the downloaded file does not match the checksum, the app will discard it and log a warning.
