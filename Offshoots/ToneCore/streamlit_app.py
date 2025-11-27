@@ -17,6 +17,8 @@ import sys
 import urllib.request
 import shutil
 import streamlit as st
+import logging
+import time
 # deferred import of parse_input to avoid startup blocking
 import sqlite3
 
@@ -45,14 +47,45 @@ OUT = ROOT / 'demo_output'
 OUT.mkdir(exist_ok=True)
 SF2 = TONECORE / 'sf2' / 'FluidR3_GM.sf2'
 
+# Configure a lightweight logger for debugging long-running requests
+LOG_FILE = OUT / 'tonecore_debug.log'
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+    handlers=[
+        logging.FileHandler(str(LOG_FILE)),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger('tonecore')
+
 # Fallback download URL for a small General MIDI soundfont (TimGM6mb - ~6MB)
 FALLBACK_SF2_URL = 'https://github.com/urish/sf2/raw/master/TimGM6mb.sf2'
 
 
 def run_cmd(cmd):
-    st.write('> ' + ' '.join(cmd))
-    res = subprocess.run(cmd, cwd=str(ROOT))
-    return res.returncode
+    """Run a command and capture output; log start/end and returncode."""
+    try:
+        cmd_display = ' '.join(cmd)
+    except Exception:
+        cmd_display = str(cmd)
+    st.write('> ' + cmd_display)
+    logger.info('run_cmd start: %s', cmd_display)
+    start = time.time()
+    try:
+        res = subprocess.run(cmd, cwd=str(
+            ROOT), capture_output=True, text=True)
+        duration = time.time() - start
+        logger.info('run_cmd end: %s rc=%s dur=%.2fs',
+                    cmd_display, res.returncode, duration)
+        if res.stdout:
+            logger.debug('stdout: %s', res.stdout[:400])
+        if res.stderr:
+            logger.debug('stderr: %s', res.stderr[:800])
+        return res.returncode
+    except Exception as e:
+        logger.exception('run_cmd exception: %s', e)
+        return 255
 
 
 def ensure_soundfont():
@@ -95,6 +128,7 @@ def ensure_soundfont():
 st.title('ToneCore Demo Player')
 
 sf2_path = ensure_soundfont()
+logger.info('startup: sf2_path=%s', str(sf2_path))
 
 st.markdown("""
 Enter text (multi-line). The app will parse the input using the project's
@@ -107,6 +141,7 @@ if st.button('Generate & Render'):
     if not user_text.strip():
         st.warning('Please enter some text to analyze.')
     else:
+        logger.info('Generate & Render clicked; input_len=%d', len(user_text))
         # 1) Run the base parser to find glyphs/signals (helps UI transparency)
         with st.spinner('Parsing input (signal parser)...'):
             try:
@@ -127,6 +162,7 @@ if st.button('Generate & Render'):
 
             # 2) Run enhanced NLP analysis (NRC + TextBlob + spaCy)
             with st.spinner('Running enhanced NLP analysis (NRC + TextBlob + spaCy)...'):
+                logger.info('Starting enhanced NLP analysis')
                 try:
                     # Import here to avoid heavy imports at top-level
                     from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
@@ -155,6 +191,8 @@ if st.button('Generate & Render'):
                 'Emotion to use for MIDI generation', value=default_emotion)
 
             if st.button('Confirm and Generate'):
+                logger.info(
+                    'Confirm and Generate clicked; chosen_emotion=%s', chosen_emotion)
                 if not chosen_emotion:
                     st.warning(
                         'Please enter or choose an emotion to generate.')
