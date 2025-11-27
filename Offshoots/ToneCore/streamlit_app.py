@@ -10,6 +10,7 @@ Run locally:
   pip install -r Offshoots/ToneCore/requirements.txt
   streamlit run Offshoots/ToneCore/streamlit_app.py
 """
+import sys as _sys
 from pathlib import Path
 import subprocess
 import shlex
@@ -46,6 +47,13 @@ TONECORE = ROOT / 'Offshoots' / 'ToneCore'
 OUT = ROOT / 'demo_output'
 OUT.mkdir(exist_ok=True)
 SF2 = TONECORE / 'sf2' / 'FluidR3_GM.sf2'
+
+# Ensure the repository root is on sys.path so imports like
+# `from emotional_os.core.signal_parser import parse_input` work when
+# Streamlit runs the script from an isolated working directory.
+if str(ROOT) not in _sys.path:
+    _sys.path.insert(0, str(ROOT))
+
 
 # Configure a lightweight logger for debugging long-running requests
 LOG_FILE = OUT / 'tonecore_debug.log'
