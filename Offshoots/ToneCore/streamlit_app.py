@@ -59,9 +59,9 @@ except Exception:
 # Deferred import of EnhancedEmotionProcessor to avoid blocking startup
 # from parser.enhanced_emotion_processor import EnhancedEmotionProcessor
 
-ROOT = Path(__file__).resolve().parents[2]
-TONECORE = ROOT / 'Offshoots' / 'ToneCore'
-OUT = ROOT / 'demo_output'
+# Reuse REPO_ROOT defined above for path consistency
+TONECORE = REPO_ROOT / 'Offshoots' / 'ToneCore'
+OUT = REPO_ROOT / 'demo_output'
 OUT.mkdir(exist_ok=True)
 SF2 = TONECORE / 'sf2' / 'FluidR3_GM.sf2'
 
@@ -71,7 +71,7 @@ FALLBACK_SF2_URL = 'https://github.com/urish/sf2/raw/master/TimGM6mb.sf2'
 
 def run_cmd(cmd):
     st.write('> ' + ' '.join(cmd))
-    res = subprocess.run(cmd, cwd=str(ROOT))
+    res = subprocess.run(cmd, cwd=str(REPO_ROOT))
     return res.returncode
 
 
