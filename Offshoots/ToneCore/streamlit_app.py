@@ -499,6 +499,12 @@ if st.button('Generate & Render'):
                     st.session_state.get('tonecore_parsed', {}), enhanced or {})
                 st.session_state['tonecore_mapped_emotion'] = mapped
                 st.session_state['tonecore_mapped_rationale'] = rationale
+                # update the chosen emotion input so the UI reflects the latest mapping
+                try:
+                    st.session_state['tonecore_chosen_emotion'] = mapped
+                except Exception:
+                    # graceful fallback if session state can't be updated
+                    pass
             except Exception:
                 st.session_state['tonecore_mapped_emotion'] = None
                 st.session_state['tonecore_mapped_rationale'] = None
@@ -582,17 +588,16 @@ if st.session_state.get('tonecore_parsed'):
                                  str(midi_out), '-F', str(wav_out), '-r', '44100'])
                     if rc == 0 and wav_out.exists():
                         final_wav = wav_out
+
                         # Optional post-processing: apply a subtle reverb using ffmpeg if requested
                         controls = st.session_state.get(
                             'tonecore_music_controls') or {}
                         if controls.get('post_reverb') and shutil.which('ffmpeg'):
                             try:
                                 reverb_amt = int(controls.get('reverb', 48))
-                                # map reverb_amt (0-127) to aecho params
                                 in_wav = str(wav_out)
                                 out_wav = str(OUT / 'parsed_input_reverb.wav')
                                 # aecho parameters: in_gain:out_gain:delays:decays
-                                # use delay proportional to reverb_amt
                                 delay = max(200, int(reverb_amt * 8))
                                 decay = min(0.9, 0.3 + (reverb_amt / 512.0))
                                 ff_cmd = ['ffmpeg', '-y', '-i', in_wav, '-af',
@@ -603,6 +608,20 @@ if st.session_state.get('tonecore_parsed'):
                             except Exception:
                                 final_wav = wav_out
 
-                        st.audio(str(final_wav))
+                        # Read the WAV bytes and provide an explicit player + download
+                        try:
+                            wav_bytes = Path(final_wav).read_bytes()
+                            st.audio(wav_bytes, format='audio/wav')
+                            st.download_button('Download WAV', data=wav_bytes,
+                                               file_name=Path(final_wav).name,
+                                               mime='audio/wav')
+                        except Exception:
+                            # Fallback to file path if reading bytes fails
+                            try:
+                                st.audio(str(final_wav))
+                                st.markdown(f"[Download WAV]({final_wav})")
+                            except Exception:
+                                st.error(
+                                    'Could not play or provide download for generated audio.')
                     else:
                         st.error('Rendering failed')
