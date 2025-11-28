@@ -6,6 +6,9 @@ This is the single source of truth for:
 - Lexicon learning and pattern extraction
 - Path management and configuration
 - Constants and defaults
+- Presence Architecture (attunement, reciprocity, memory, embodiment, poetic)
+- Generative Tension (surprise, challenge, subversion, creation)
+- Saori Layer (mirror, edge, genome, mortality)
 
 All other modules should import from here.
 """
@@ -66,25 +69,38 @@ from emotional_os.core.lexicon_learner import (
     get_learning_insights,
 )
 
-# Poetic Emotional Engine
-from emotional_os.core.poetic_engine import (
-    PoeticEmotionalEngine,
-    LivingPoem,
-    MetaphorStanza,
-    RhythmStanza,
-    SyntaxStanza,
-    AffectiveMemory,
-    RelationalGravity,
-    EthicalCompass,
-    EmotionalValence,
-    RhythmTempo,
-    SyntaxClarity,
-    RelationalVector,
-    get_poetic_engine,
-    reset_poetic_engine,
+# Presence Architecture - emotional presence components
+from emotional_os.core.presence import (
+    AttunementLoop,
+    EmotionalReciprocity,
+    TemporalMemory,
+    EmbodiedSimulation,
+    PoeticConsciousness,
 )
 
-__version__ = "2.0.0"
+# Generative Tension - dynamic interaction components
+from emotional_os.core.tension import (
+    GenerativeTension,
+    SurpriseEngine,
+    ChallengeEngine,
+    SubversionEngine,
+    CreationEngine,
+)
+
+# Saori Layer - advanced emotional framework
+from emotional_os.core.saori import (
+    SaoriLayer,
+    MirrorEngine,
+    EdgeGenerator,
+    EmotionalGenome,
+    MortalityClock,
+    Archetype,
+)
+
+# Unified Emotional Framework
+from emotional_os.core.emotional_framework import EmotionalFramework
+
+__version__ = "2.1.0"
 __all__ = [
     # Path management
     "PathManager",
@@ -134,19 +150,28 @@ __all__ = [
     "get_enhanced_lexicon",
     "get_learning_insights",
     
-    # Poetic Emotional Engine
-    "PoeticEmotionalEngine",
-    "LivingPoem",
-    "MetaphorStanza",
-    "RhythmStanza",
-    "SyntaxStanza",
-    "AffectiveMemory",
-    "RelationalGravity",
-    "EthicalCompass",
-    "EmotionalValence",
-    "RhythmTempo",
-    "SyntaxClarity",
-    "RelationalVector",
-    "get_poetic_engine",
-    "reset_poetic_engine",
+    # Presence Architecture
+    "AttunementLoop",
+    "EmotionalReciprocity",
+    "TemporalMemory",
+    "EmbodiedSimulation",
+    "PoeticConsciousness",
+    
+    # Generative Tension
+    "GenerativeTension",
+    "SurpriseEngine",
+    "ChallengeEngine",
+    "SubversionEngine",
+    "CreationEngine",
+    
+    # Saori Layer
+    "SaoriLayer",
+    "MirrorEngine",
+    "EdgeGenerator",
+    "EmotionalGenome",
+    "MortalityClock",
+    "Archetype",
+    
+    # Unified Framework
+    "EmotionalFramework",
 ]
