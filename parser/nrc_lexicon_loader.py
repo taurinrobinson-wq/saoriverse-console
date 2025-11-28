@@ -22,7 +22,7 @@ class NRCLexicon:
     def __init__(self, filepath: str = "data/lexicons/nrc_emotion_lexicon.txt"):
         """
         Initialize NRC Lexicon loader.
-        
+
         Format of lexicon file:
         word    emotion    association
         good    trust    1
@@ -34,13 +34,27 @@ class NRCLexicon:
         self.loaded = False
         self.source = "bootstrap"
 
-        # Try primary path first
+        # Allow forcing the use of the small bootstrap lexicon via env var.
+        prefer_bootstrap = os.getenv(
+            "NRC_PREFER_BOOTSTRAP", "0").lower() in ("1", "true", "yes")
+        bootstrap_path = "data/lexicons/nrc_emotion_lexicon_bootstrap.txt"
+
+        # If preference is set, try bootstrap first (even if the full lexicon exists).
+        if prefer_bootstrap:
+            if os.path.exists(bootstrap_path):
+                self._load_lexicon(bootstrap_path)
+                self.source = "bootstrap"
+                return
+            else:
+                logger.info(
+                    "NRC_PREFER_BOOTSTRAP set but bootstrap file not found: %s", bootstrap_path)
+
+        # Try primary (full) lexicon path first
         if os.path.exists(filepath):
             self._load_lexicon(filepath)
             self.source = "full"
-        # Then try bootstrap lexicon
+        # Fallback to bootstrap lexicon if full not available
         else:
-            bootstrap_path = "data/lexicons/nrc_emotion_lexicon_bootstrap.txt"
             if os.path.exists(bootstrap_path):
                 self._load_lexicon(bootstrap_path)
                 self.source = "bootstrap"
@@ -66,7 +80,8 @@ class NRCLexicon:
 
             # Determine header - check if first line is header
             first_line_parts = lines[0].strip().split('\t')
-            is_header = len(first_line_parts) >= 3 and first_line_parts[0].lower() == 'word'
+            is_header = len(
+                first_line_parts) >= 3 and first_line_parts[0].lower() == 'word'
             start_idx = 1 if is_header else 0
 
             loaded_count = 0

@@ -105,7 +105,7 @@ class RegisterRequest(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str
-    mode: str = "hybrid"
+    mode: str = "local"
     user_id: str
 
 

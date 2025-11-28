@@ -25,6 +25,15 @@ from emotional_os.safety import (
     sanitize_for_storage,
 )
 
+# Poetic Emotional Engine integration (optional, graceful fallback)
+try:
+    from emotional_os.core.poetic_engine import get_poetic_engine, PoeticEmotionalEngine
+    HAS_POETIC_ENGINE = True
+except ImportError:
+    HAS_POETIC_ENGINE = False
+    get_poetic_engine = None
+    PoeticEmotionalEngine = None
+
 # Try to import NRC lexicon for better emotion detection
 try:
     from parser.nrc_lexicon_loader import nrc
@@ -1067,7 +1076,7 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
     # Pure reciprocal interest only (no emotional content)
     reciprocal_phrases = [
         'how are you', 'how are you doing', 'how are you feeling', "how's your day",
-        "how's it going", 'you doing okay', 'you alright'
+        "how's it going", 'you doing okay', 'you alright', "what's up", 'whats up', 'sup', 'what up'
     ]
 
     # Fuzzy match helper: returns True if input is similar enough to any pattern
@@ -1096,13 +1105,8 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
         return False
 
     if fuzzy_contains(lower_input, reciprocal_phrases, threshold=0.55):
-        reciprocal_responses = [
-            "I'm here and present with you. That's what matters. But tell me—how are *you* doing?",
-            "That's kind of you to ask. I'm focused on you right now. What's going on with you?",
-            "I appreciate that. I'm steady. How about you—what's on your mind?",
-            "I'm doing well because you're here. What brings you today?",
-        ]
-        return random.choice(reciprocal_responses)
+        # Use the micro-variation engine to select a tone-matched reciprocal reply
+        return _choose_reciprocal_response(input_text, lower_input)
 
     # FUNCTIONAL QUERIES - Trigger system explanation
     functional_patterns = [
@@ -1147,6 +1151,73 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
     # No reciprocal-only content detected
     return None
+
+
+def _detect_casual_tone(lower_input: str) -> bool:
+    """Return True if input looks casual/slangy (e.g., 'sup', "what's up")."""
+    casual_markers = ['sup', "what's up", 'whats up', 'what up', 'yo', 'hey', 'hiya', 'howzit']
+    # Use word-boundary matching to avoid accidental substrings (e.g., 'yo' in 'you')
+    for m in casual_markers:
+        try:
+            if re.search(r"\b" + re.escape(m) + r"\b", lower_input):
+                return True
+        except Exception:
+            if m in lower_input:
+                return True
+    return False
+
+
+def _choose_reciprocal_response(raw_input: str, lower_input: str, conversation_context: Optional[Dict] = None) -> str:
+    """Choose a reciprocal response variant based on detected tone and context.
+
+    This is intentionally lightweight and deterministic given a random seed.
+    """
+    # Tone detection
+    is_casual = _detect_casual_tone(lower_input)
+
+    # Small pool of variants for each register. Keep them short and distinct so tests
+    # can assert rotation and register matching.
+    casual_variants = [
+        "Hey—I'm here. What's up with you?",
+        "Sup? I'm listening—what's on your mind?",
+        "Yo! How are you doing?",
+        "Hey there. What's going on for you?",
+    ]
+
+    formal_variants = [
+        "I'm here and present with you. How are you doing today?",
+        "Thank you for asking. I'm focused on you—how are you feeling?",
+        "I appreciate that. I'm steady. How about you—what's on your mind?",
+        "That's kind of you to ask. I'm here for you. How are you?",
+    ]
+
+    # Slight contextual hook: if conversation_context mentions a recent topic, surface it
+    context_hook = ""
+    try:
+        if conversation_context and isinstance(conversation_context, dict):
+            last_user = conversation_context.get(
+                'last_user_message') or conversation_context.get('previous_user_message')
+            if last_user and isinstance(last_user, str):
+                # find a simple noun/topic match (very small heuristic)
+                toks = re.findall(
+                    r"\b(meeting|interview|deadline|project|kids|work|home)\b", last_user.lower())
+                if toks:
+                    context_hook = f" Still thinking about {toks[0]}?"
+    except Exception:
+        context_hook = ""
+
+    pool = casual_variants if is_casual else formal_variants
+
+    chosen = random.choice(pool)
+
+    # Append a short context hook if present
+    if context_hook:
+        # ensure spacing/punctuation
+        if not chosen.endswith('?'):
+            chosen = chosen.rstrip('.') + '.'
+        chosen = chosen + context_hook
+
+    return chosen
 
 
 def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None, user_id: Optional[str] = None) -> Dict:
@@ -1373,6 +1444,30 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "learning": None
         }
 
+    # Then check for other conversational messages EARLY so casual phrases
+    # like "what's up" or "sup" are treated as reciprocal (how-are-you)
+    # rather than matching looser functional/profile patterns.
+    conversational_response = _detect_and_respond_to_reciprocal_message(
+        input_text)
+    if conversational_response:
+        # This is primarily a conversational/relational message
+        # Include it in the response before diving into emotional content
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "input": input_text,
+            "signals": [],
+            "gates": [],
+            "glyphs": [],
+            "best_glyph": None,
+            "ritual_prompt": None,
+            "voltage_response": conversational_response,
+            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
+            "response_source": 'conversational',
+            "debug_sql": "",
+            "debug_glyph_rows": [],
+            "learning": None
+        }
+
     # Check for functional queries (use fuzzy matching)
     is_functional = fuzzy_contains(
         lower_input, functional_patterns, threshold=0.55)
@@ -1395,28 +1490,6 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "voltage_response": functional_response,
             "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
             "response_source": 'functional_query',
-            "debug_sql": "",
-            "debug_glyph_rows": [],
-            "learning": None
-        }
-
-    # Then check for other conversational messages
-    conversational_response = _detect_and_respond_to_reciprocal_message(
-        input_text)
-    if conversational_response:
-        # This is primarily a conversational/relational message
-        # Include it in the response before diving into emotional content
-        return {
-            "timestamp": datetime.now().isoformat(),
-            "input": input_text,
-            "signals": [],
-            "gates": [],
-            "glyphs": [],
-            "best_glyph": None,
-            "ritual_prompt": None,
-            "voltage_response": conversational_response,
-            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-            "response_source": 'conversational',
             "debug_sql": "",
             "debug_glyph_rows": [],
             "learning": None
@@ -1602,6 +1675,34 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     except Exception:
         pass
 
+    # Poetic Engine integration: update the living poem based on interaction
+    poetic_state = None
+    try:
+        if HAS_POETIC_ENGINE and get_poetic_engine is not None:
+            engine = get_poetic_engine()
+            # Build detected emotions from signals
+            detected_emotions = {}
+            for sig in signals:
+                tone = sig.get('tone', 'unknown')
+                voltage = sig.get('voltage', 'medium')
+                intensity = {'low': 0.3, 'medium': 0.6, 'high': 1.0}.get(voltage, 0.5)
+                detected_emotions[tone] = max(detected_emotions.get(tone, 0), intensity)
+
+            poetic_result = engine.process_glyph_response(
+                glyph_data=best_glyph or {},
+                signals=signals,
+                user_input=input_text,
+                user_id=user_id,
+            )
+            poetic_state = {
+                "poem_rendered": poetic_result.get("poem_rendered"),
+                "dominant_emotion": poetic_result.get("dominant_emotion"),
+                "death_occurred": poetic_result.get("death_occurred", False),
+                "mirror_response": poetic_result.get("mirror_response"),
+            }
+    except Exception as e:
+        logger.debug("Poetic engine integration skipped: %s", e)
+
     return {
         "timestamp": datetime.now().isoformat(),
         "input": input_text,
@@ -1618,7 +1719,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         "response_source": response_source,
         "debug_sql": debug_sql,
         "debug_glyph_rows": debug_glyph_rows,
-        "learning": learning_payload
+        "learning": learning_payload,
+        "poetic_state": poetic_state,  # Poetic Emotional Engine state
     }
 
 
