@@ -11,14 +11,10 @@
             },
             "ios": {
                 "simulator": false
+            },
+            "env": {
+                "SAOYNX_API_URL": "https://your-backend.example.com/api"
             }
-            /*
-        Optional environment variables for production builds. For secrets, use EAS secrets
-        in the Expo dashboard rather than committing them here. Example:
-        "env": {
-          "SAOYNX_API_URL": "https://your-backend.example.com/api"
-        }
-      */
         },
         "development": {
             "developmentClient": true,
