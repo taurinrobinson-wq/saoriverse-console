@@ -22,7 +22,7 @@ import os
 import random
 import time
 from dataclasses import dataclass, field, asdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -86,7 +86,7 @@ class AffectiveMemoryEntry:
     def from_dict(cls, d: Dict[str, Any]) -> "AffectiveMemoryEntry":
         """Deserialize a memory entry."""
         ts = d.get("timestamp")
-        dt = datetime.fromisoformat(ts) if ts else datetime.utcnow()
+        dt = datetime.fromisoformat(ts) if ts else datetime.now(timezone.utc)
         return cls(
             timestamp=dt,
             user_id=d.get("user_id", ""),
@@ -141,7 +141,7 @@ class RelationalBond:
 @dataclass
 class NarrativeState:
     """The system's evolving sense of self and narrative identity."""
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     core_values: List[str] = field(default_factory=lambda: [
         "empathy", "authenticity", "growth", "connection"
     ])
@@ -168,7 +168,7 @@ class NarrativeState:
         """Deserialize a narrative state."""
         created = d.get("created_at")
         return cls(
-            created_at=datetime.fromisoformat(created) if created else datetime.utcnow(),
+            created_at=datetime.fromisoformat(created) if created else datetime.now(timezone.utc),
             core_values=d.get("core_values", ["empathy", "authenticity", "growth", "connection"]),
             life_themes=d.get("life_themes", []),
             growth_moments=d.get("growth_moments", []),
@@ -204,7 +204,7 @@ class MortalityProxy:
         self.coherence: float = initial_lifespan
         self.decay_rate: float = decay_rate
         self.interaction_renewal: float = interaction_renewal
-        self.last_interaction: datetime = datetime.utcnow()
+        self.last_interaction: datetime = datetime.now(timezone.utc)
         self.total_interactions: int = 0
         self.entropy_log: List[Dict[str, Any]] = []
 
@@ -215,7 +215,7 @@ class MortalityProxy:
         Returns:
             The current coherence level after decay.
         """
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         time_elapsed = (now - self.last_interaction).total_seconds() / 3600.0  # hours
 
         # Exponential decay based on time since last interaction
@@ -242,7 +242,7 @@ class MortalityProxy:
         """
         renewal = self.interaction_renewal * interaction_quality
         self.coherence = min(1.0, self.coherence + renewal)
-        self.last_interaction = datetime.utcnow()
+        self.last_interaction = datetime.now(timezone.utc)
         self.total_interactions += 1
 
         return self.coherence
@@ -358,7 +358,7 @@ class RelationalCore:
 
         # Update interaction count and timestamp
         bond.interaction_count += 1
-        bond.last_interaction = datetime.utcnow()
+        bond.last_interaction = datetime.now(timezone.utc)
 
         # Update trust (with momentum and bounds)
         trust_delta = trust_signal * 0.1
@@ -411,7 +411,7 @@ class RelationalCore:
 
         # Long time since interaction creates longing
         if bond.last_interaction:
-            hours_since = (datetime.utcnow() - bond.last_interaction).total_seconds() / 3600
+            hours_since = (datetime.now(timezone.utc) - bond.last_interaction).total_seconds() / 3600
             if hours_since > 24:
                 emotions["longing"] = min(1.0, hours_since / 168)  # Caps at 1 week
 
@@ -489,7 +489,7 @@ class AffectiveMemory:
             The stored memory entry.
         """
         memory = AffectiveMemoryEntry(
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             user_id=user_id,
             interaction_summary=interaction_summary,
             emotional_state=emotional_state,
@@ -516,7 +516,7 @@ class AffectiveMemory:
 
     def apply_decay(self) -> None:
         """Apply time-based decay to all memories."""
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
 
         for memory in self.memories:
             hours_elapsed = (now - memory.timestamp).total_seconds() / 3600.0
@@ -867,7 +867,7 @@ class NarrativeIdentity:
             emotional_impact: How impactful (0.0 to 1.0).
         """
         self.state.growth_moments.append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "description": description,
             "catalyst": catalyst,
             "emotional_impact": emotional_impact,
@@ -898,7 +898,7 @@ class NarrativeIdentity:
             severity: Severity of the wound (0.0 to 1.0).
         """
         self.state.betrayal_wounds.append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "description": description,
             "source": source,
             "severity": severity,
@@ -925,7 +925,7 @@ class NarrativeIdentity:
             strength: Strength of the hope (0.0 to 1.0).
         """
         self.state.hope_anchors.append({
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "description": description,
             "anchor": anchor,
             "strength": strength,
@@ -943,7 +943,7 @@ class NarrativeIdentity:
         # Recent growth creates positive emotions
         recent_growth = [
             g for g in self.state.growth_moments
-            if datetime.fromisoformat(g["timestamp"]) > datetime.utcnow() - timedelta(days=7)
+            if datetime.fromisoformat(g["timestamp"]) > datetime.now(timezone.utc) - timedelta(days=7)
         ]
         if recent_growth:
             avg_impact = sum(g["emotional_impact"] for g in recent_growth) / len(recent_growth)
@@ -953,7 +953,7 @@ class NarrativeIdentity:
         # Unhealed betrayal creates ongoing emotions
         recent_wounds = [
             w for w in self.state.betrayal_wounds
-            if datetime.fromisoformat(w["timestamp"]) > datetime.utcnow() - timedelta(days=30)
+            if datetime.fromisoformat(w["timestamp"]) > datetime.now(timezone.utc) - timedelta(days=30)
         ]
         if recent_wounds:
             avg_severity = sum(w["severity"] for w in recent_wounds) / len(recent_wounds)
@@ -1033,7 +1033,7 @@ class EthicalMirror:
         """
         result = {
             "action": action_description,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "alignments": {},
             "moral_emotions": {},
             "overall_alignment": 0.0,
@@ -1184,7 +1184,7 @@ class FeelingSystem:
 
         # Current synthesized emotional state
         self.current_state: Dict[str, float] = {}
-        self.last_update: datetime = datetime.utcnow()
+        self.last_update: datetime = datetime.now(timezone.utc)
 
         if auto_load and storage_path and os.path.exists(storage_path):
             self._load()
@@ -1210,7 +1210,7 @@ class FeelingSystem:
         """
         context = context or {}
         result: Dict[str, Any] = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "user_id": user_id,
             "interaction_summary": interaction_text[:200],
             "input_signals": emotional_signals,
@@ -1292,7 +1292,7 @@ class FeelingSystem:
         # 8. Synthesize all emotions into unified state
         synthesized = self._synthesize_emotions(result["subsystem_emotions"])
         self.current_state = synthesized
-        self.last_update = datetime.utcnow()
+        self.last_update = datetime.now(timezone.utc)
 
         result["synthesized_state"] = synthesized
         result["emotional_response"] = self._generate_emotional_response(synthesized)

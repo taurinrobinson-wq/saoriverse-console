@@ -13,7 +13,7 @@ These tests validate each component of the feeling system:
 
 import os
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 
 import pytest
@@ -48,7 +48,7 @@ class TestMortalityProxy:
         """Test that entropy causes coherence decay over time."""
         proxy = MortalityProxy(initial_lifespan=1.0, decay_rate=0.1)
         # Simulate time passage by setting last_interaction in the past
-        proxy.last_interaction = datetime.utcnow() - timedelta(hours=2)
+        proxy.last_interaction = datetime.now(timezone.utc) - timedelta(hours=2)
 
         new_coherence = proxy.apply_entropy()
         assert new_coherence < 1.0
@@ -69,7 +69,7 @@ class TestMortalityProxy:
         assert proxy.coherence <= 1.0
 
         proxy.coherence = 0.01
-        proxy.last_interaction = datetime.utcnow() - timedelta(hours=100)
+        proxy.last_interaction = datetime.now(timezone.utc) - timedelta(hours=100)
         proxy.decay_rate = 0.1
         proxy.apply_entropy()
         assert proxy.coherence >= 0.0
@@ -153,7 +153,7 @@ class TestRelationalCore:
         """Test that long absence creates longing."""
         core = RelationalCore()
         bond = core.get_or_create_bond("user123")
-        bond.last_interaction = datetime.utcnow() - timedelta(hours=48)
+        bond.last_interaction = datetime.now(timezone.utc) - timedelta(hours=48)
 
         emotions = core.get_relational_emotions("user123")
         assert "longing" in emotions
@@ -195,7 +195,7 @@ class TestAffectiveMemory:
         memory.store_memory("user123", "test", "joy", 1.0, "initial", 0.5)
 
         # Artificially age the memory
-        memory.memories[0].timestamp = datetime.utcnow() - timedelta(hours=2)
+        memory.memories[0].timestamp = datetime.now(timezone.utc) - timedelta(hours=2)
 
         memory.apply_decay()
         assert memory.memories[0].decay_factor < 0.5
