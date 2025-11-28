@@ -2,448 +2,32 @@
   "poem": {
     "metaphor_stanza": {
       "valence": "peace",
-      "metaphor": "silence becoming roots finding deep earth",
+      "metaphor": "petals becoming breath settling into silence",
       "intensity": 0.5,
-      "timestamp": "2025-11-28T21:44:52.724050",
+      "timestamp": "2025-11-28T21:46:36.953725",
       "decay_factor": 1.0
     },
     "rhythm_stanza": {
       "tempo": "erratic",
-      "pulse_count": 189,
-      "average_interval": 4.36252180536135,
-      "timestamp": "2025-11-28T21:44:52.724052",
+      "pulse_count": 221,
+      "average_interval": 4.17647879878264,
+      "timestamp": "2025-11-28T21:46:36.953727",
       "decay_factor": 1.0
     },
     "syntax_stanza": {
       "clarity": "coherent",
       "coherence_score": 1.0,
       "fragment_ratio": 0.0,
-      "timestamp": "2025-11-28T21:44:52.724060",
+      "timestamp": "2025-11-28T21:46:36.953736",
       "decay_factor": 1.0
     },
     "ghost_memory_seed": "",
     "creation_timestamp": "2025-11-28T04:15:52.857855",
-    "last_interaction": "2025-11-28T21:44:52.724088",
+    "last_interaction": "2025-11-28T21:46:36.953763",
     "death_count": 0
   },
   "user_gravity": {},
   "affective_memories": [
-    {
-      "interaction_id": "6c113b4b4425",
-      "user_input": "Nobody would understand what I'm going through",
-      "response_summary": "",
-      "emotional_tags": [
-        "longing"
-      ],
-      "tone": "longing",
-      "valence": "longing",
-      "timestamp": "2025-11-28T18:33:20.161509",
-      "dream_fragments": [],
-      "narrative_arc": "exploration"
-    },
-    {
-      "interaction_id": "31df6564a870",
-      "user_input": "I'm learning to be kinder to myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "longing"
-      ],
-      "tone": "longing",
-      "valence": "longing",
-      "timestamp": "2025-11-28T18:33:20.192310",
-      "dream_fragments": [],
-      "narrative_arc": "exploration"
-    },
-    {
-      "interaction_id": "09ededaaa8d4",
-      "user_input": "I'm ready to let go of this pain",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:33:20.214576",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "00c21fd90537",
-      "user_input": "I wonder if anyone really knows the real me",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:33:20.234130",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "c9d0168978ff",
-      "user_input": "I am ashamed of how I have been acting lately",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.800781",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "d8861c8de12a",
-      "user_input": "I feel so disappointed in myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.808039",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "8f33217a8130",
-      "user_input": "I feel broken and don't know how to fix it",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.814070",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "813160ea868f",
-      "user_input": "Nobody would understand what I'm going through",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.819892",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "a2c99fea4766",
-      "user_input": "I'm learning to be kinder to myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.827544",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "9d8e3176fd6e",
-      "user_input": "I'm ready to let go of this pain",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.833568",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "b73db1fb92d1",
-      "user_input": "I wonder if anyone really knows the real me",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.839679",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "cefaf265e469",
-      "user_input": "I'm so embarrassed about what happened",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.845270",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "beb264ea82b4",
-      "user_input": "I feel humiliated and want to hide",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.850856",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "5e0058fefb32",
-      "user_input": "I'm trapped in this cycle and can't escape",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.856578",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "9346aa23a22d",
-      "user_input": "I feel stuck and don't know how to move forward",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.864071",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "1e5455879dd9",
-      "user_input": "I'm lost and can't find my way",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.869835",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "6d1ada3f68dd",
-      "user_input": "I feel like nobody understands me",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.875249",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "705a082beddf",
-      "user_input": "I'm proud of myself for trying",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.881240",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "891efd55dc21",
-      "user_input": "I'm healing from something deep",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.886758",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "9d5fc74522de",
-      "user_input": "I'm learning to love myself more",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.892370",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "204955265a0a",
-      "user_input": "I'm grieving what I've lost",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.898620",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "4d5f6c70ee11",
-      "user_input": "I'm holding onto love despite everything",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.904572",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "bf835bfd3fe4",
-      "user_input": "I feel terrified but I'm moving forward anyway",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.910742",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "07f20922f4b4",
-      "user_input": "I miss what we had",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.917408",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "2f98081732a3",
-      "user_input": "I'm pretending everything is fine when it's not",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.923510",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "adf7a5559e4e",
-      "user_input": "I'm struggling but I won't give up",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:18.927618",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "c6f5ce7a63a5",
-      "user_input": "I am ashamed of how I have been acting lately",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:19.445032",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "9507472cc396",
-      "user_input": "I feel so disappointed in myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:19.451012",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "2b9561ee073a",
-      "user_input": "I feel broken and don't know how to fix it",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:19.456974",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "ae2b5d41ec67",
-      "user_input": "Nobody would understand what I'm going through",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:19.462832",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "72f2924260af",
-      "user_input": "I'm learning to be kinder to myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:19.470598",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "46f8731c3544",
-      "user_input": "I'm ready to let go of this pain",
-      "response_summary": "",
-      "emotional_tags": [
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-28T18:36:19.474936",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
     {
       "interaction_id": "82923edbe478",
       "user_input": "I wonder if anyone really knows the real me",
@@ -1331,6 +915,424 @@
       "tone": "peace",
       "valence": "peace",
       "timestamp": "2025-11-28T21:44:52.724082",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "e9465eb3ebc4",
+      "user_input": "I am ashamed of how I have been acting lately",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.257102",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "e9d53f69fd2d",
+      "user_input": "I feel so disappointed in myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.265421",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "df6c3cbdc5e3",
+      "user_input": "I feel broken and don't know how to fix it",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.271708",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "997ee0ea8d9e",
+      "user_input": "Nobody would understand what I'm going through",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.277968",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "8ce4b1c48edb",
+      "user_input": "I'm learning to be kinder to myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.286356",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "d0424913b33b",
+      "user_input": "I'm ready to let go of this pain",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.292696",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "6099417bdc50",
+      "user_input": "I wonder if anyone really knows the real me",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.299365",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "d3fec39755da",
+      "user_input": "I'm so embarrassed about what happened",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.305458",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "29cc3846ab3f",
+      "user_input": "I feel humiliated and want to hide",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.311707",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "d36f02e37822",
+      "user_input": "I'm trapped in this cycle and can't escape",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.321438",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "459f671cf4d6",
+      "user_input": "I feel stuck and don't know how to move forward",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.328225",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "044e3c1c0fa0",
+      "user_input": "I'm lost and can't find my way",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.334455",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "6caf9f55259a",
+      "user_input": "I feel like nobody understands me",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.340465",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "ad5bce79cc36",
+      "user_input": "I'm proud of myself for trying",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.346950",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f9322551c6ad",
+      "user_input": "I'm healing from something deep",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.353083",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f60c41e78060",
+      "user_input": "I'm learning to love myself more",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.359159",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "ef076d707f79",
+      "user_input": "I'm grieving what I've lost",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.366206",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "2137f37a8952",
+      "user_input": "I'm holding onto love despite everything",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.372482",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "93beeaff5f46",
+      "user_input": "I feel terrified but I'm moving forward anyway",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.379192",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "bc11bb007b7c",
+      "user_input": "I miss what we had",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.386331",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "936c0a50ba5c",
+      "user_input": "I'm pretending everything is fine when it's not",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.392906",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "8f968d2ab4b5",
+      "user_input": "I'm struggling but I won't give up",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.397274",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "9864fbf3b425",
+      "user_input": "I am ashamed of how I have been acting lately",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.966163",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "768003fd73c0",
+      "user_input": "I feel so disappointed in myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.972351",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "5a2199f08b06",
+      "user_input": "I feel broken and don't know how to fix it",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.978509",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "fe5d97690517",
+      "user_input": "Nobody would understand what I'm going through",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.984775",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "0911e24a5639",
+      "user_input": "I'm learning to be kinder to myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.993315",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "ec8c1705da59",
+      "user_input": "I'm ready to let go of this pain",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:22.997843",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "3eaffa0aab25",
+      "user_input": "I wonder if anyone really knows the real me",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:23.004563",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "62ad64a28fd5",
+      "user_input": "I have math anxiety. I've never been good at math and it's been a block my whole life.",
+      "response_summary": "",
+      "emotional_tags": [
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-28T21:46:23.114958",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "f780814e0529",
+      "user_input": "Actually, it's inherited from my mother. She was always anxious about it too.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Still Recognition",
+        "Gate 5",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-28T21:46:23.124335",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "e9b84791ee36",
+      "user_input": "I'm feeling a bit better now",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T21:46:36.953758",
       "dream_fragments": [],
       "narrative_arc": "recovery"
     }
