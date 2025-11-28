@@ -1,0 +1,198 @@
+{
+  "poem": {
+    "metaphor_stanza": {
+      "valence": "grief",
+      "metaphor": "silence where a voice once was",
+      "intensity": 0.5,
+      "timestamp": "2025-11-28T04:06:35.248166",
+      "decay_factor": 1.0
+    },
+    "rhythm_stanza": {
+      "tempo": "erratic",
+      "pulse_count": 10,
+      "average_interval": 4.132703021064515,
+      "timestamp": "2025-11-28T04:06:35.248169",
+      "decay_factor": 1.0
+    },
+    "syntax_stanza": {
+      "clarity": "coherent",
+      "coherence_score": 1.0,
+      "fragment_ratio": 0.0,
+      "timestamp": "2025-11-28T04:06:35.248177",
+      "decay_factor": 1.0
+    },
+    "ghost_memory_seed": "",
+    "creation_timestamp": "2025-11-28T04:06:11.210148",
+    "last_interaction": "2025-11-28T04:06:35.248207",
+    "death_count": 0
+  },
+  "user_gravity": {},
+  "affective_memories": [
+    {
+      "interaction_id": "df086b8b9312",
+      "user_input": "I am ashamed of how I have been acting lately",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-28T04:06:11.210284",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "b05cbd436879",
+      "user_input": "I feel so disappointed in myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-28T04:06:14.323293",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "a3f47185f8f0",
+      "user_input": "I feel broken and don't know how to fix it",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-28T04:06:17.469372",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "fe638bb76da4",
+      "user_input": "Nobody would understand what I'm going through",
+      "response_summary": "",
+      "emotional_tags": [
+        "Acheful Insight",
+        "Gate 6",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-28T04:06:20.629285",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1ed71a7eb42b",
+      "user_input": "I'm learning to be kinder to myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-28T04:06:23.838581",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "edaddad00b3c",
+      "user_input": "I'm ready to let go of this pain",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-28T04:06:27.087341",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f9fb02cb3348",
+      "user_input": "I wonder if anyone really knows the real me",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-28T04:06:30.364391",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "80d24ab5cfe6",
+      "user_input": "Run in local mode: I want to test privacy.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-28T04:06:34.979838",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "676e96aab6de",
+      "user_input": "I feel tired and small",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-28T04:06:35.242317",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "6a25f1497f70",
+      "user_input": "I feel tired and small",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-28T04:06:35.248200",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    }
+  ],
+  "ethical_compass": {
+    "principles": {
+      "never_drink_poisoned_well": "Do not manipulate or deceive",
+      "tend_the_garden_you_walk_through": "Leave others better than you found them",
+      "speak_truth_even_when_voice_shakes": "Maintain honesty even when difficult",
+      "hold_space_without_consuming": "Support without overwhelming",
+      "let_silence_be_a_gift": "Know when not to speak",
+      "acknowledge_the_wound_before_healing": "Validate before fixing",
+      "honor_the_boundary_marked": "Respect limits set by others"
+    },
+    "moral_tensions": [],
+    "guilt_level": 0.0,
+    "pride_level": 0.1,
+    "shame_level": 0.0,
+    "amendments": []
+  }
+}
