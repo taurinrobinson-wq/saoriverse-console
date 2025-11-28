@@ -25,12 +25,17 @@ import logging
 import os
 import random
 import hashlib
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+
+# Memory management constants
+MAX_AFFECTIVE_MEMORIES = 500  # Maximum memories before trimming
+PERSISTED_MEMORIES_LIMIT = 100  # Number of memories to persist
 
 
 # ============================================================================
@@ -549,7 +554,7 @@ class PoeticEmotionalEngine:
             data = {
                 "poem": self.poem.to_dict(),
                 "user_gravity": {k: v.to_dict() for k, v in self.user_gravity.items()},
-                "affective_memories": [m.to_dict() for m in self.affective_memories[-100:]],  # Keep last 100
+                "affective_memories": [m.to_dict() for m in self.affective_memories[-PERSISTED_MEMORIES_LIMIT:]],
                 "ethical_compass": self.ethical_compass.to_dict(),
             }
             with open(self.storage_path, 'w', encoding='utf-8') as f:
@@ -843,8 +848,8 @@ class PoeticEmotionalEngine:
         self.affective_memories.append(memory)
 
         # Keep only recent memories
-        if len(self.affective_memories) > 500:
-            self.affective_memories = self.affective_memories[-100:]
+        if len(self.affective_memories) > MAX_AFFECTIVE_MEMORIES:
+            self.affective_memories = self.affective_memories[-PERSISTED_MEMORIES_LIMIT:]
 
     def _determine_narrative_arc(self, valence: EmotionalValence) -> str:
         """Determine narrative arc from current valence and history."""
