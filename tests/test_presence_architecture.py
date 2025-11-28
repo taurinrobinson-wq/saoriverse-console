@@ -34,7 +34,8 @@ class TestAttunementLoop:
         loop = AttunementLoop()
         signal = loop.process_message("I'm feeling overwhelmed today...")
         assert signal.word_count > 0
-        assert "vulnerability:overwhelmed" in signal.emotional_markers or len(signal.emotional_markers) >= 0
+        # Check that emotional markers can be extracted (list may be empty for some inputs)
+        assert isinstance(signal.emotional_markers, list)
 
     def test_vulnerability_triggers_tender_tone(self):
         """Test that vulnerability markers trigger tender tone."""

@@ -21,11 +21,10 @@ Documentation:
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple, Callable
+from typing import Dict, List, Optional, Tuple
 from enum import Enum
 import random
 import re
-import hashlib
 
 
 class TensionType(Enum):
