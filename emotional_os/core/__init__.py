@@ -111,7 +111,7 @@ __all__ = [
     "pattern_history_path",
     "glyph_db_path",
     "poetry_data_dir_path",
-    
+
     # Constants
     "SIGNALS",
     "SIGNAL_LIST",
@@ -131,7 +131,7 @@ __all__ = [
     "STOP_WORDS",
     "EMPATHY_WORDS",
     "REFLECTION_WORDS",
-    
+
     # Signal parser
     "parse_input",
     "load_signal_map",
@@ -143,7 +143,7 @@ __all__ = [
     "generate_voltage_response",
     "generate_contextual_response",
     "generate_simple_prompt",
-    
+
     # Lexicon learning
     "LexiconLearner",
     "learn_from_conversation_data",
