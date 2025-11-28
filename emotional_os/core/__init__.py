@@ -66,6 +66,24 @@ from emotional_os.core.lexicon_learner import (
     get_learning_insights,
 )
 
+# Poetic Emotional Engine
+from emotional_os.core.poetic_engine import (
+    PoeticEmotionalEngine,
+    LivingPoem,
+    MetaphorStanza,
+    RhythmStanza,
+    SyntaxStanza,
+    AffectiveMemory,
+    RelationalGravity,
+    EthicalCompass,
+    EmotionalValence,
+    RhythmTempo,
+    SyntaxClarity,
+    RelationalVector,
+    get_poetic_engine,
+    reset_poetic_engine,
+)
+
 __version__ = "2.0.0"
 __all__ = [
     # Path management
@@ -115,4 +133,20 @@ __all__ = [
     "learn_from_conversation_data",
     "get_enhanced_lexicon",
     "get_learning_insights",
+    
+    # Poetic Emotional Engine
+    "PoeticEmotionalEngine",
+    "LivingPoem",
+    "MetaphorStanza",
+    "RhythmStanza",
+    "SyntaxStanza",
+    "AffectiveMemory",
+    "RelationalGravity",
+    "EthicalCompass",
+    "EmotionalValence",
+    "RhythmTempo",
+    "SyntaxClarity",
+    "RelationalVector",
+    "get_poetic_engine",
+    "reset_poetic_engine",
 ]
