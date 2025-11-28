@@ -50,5 +50,6 @@ jobs:
           SUPABASE_AUTH_URL: ${{ secrets.SUPABASE_AUTH_URL }}
           SUPABASE_FUNCTION_URL: ${{ secrets.SUPABASE_FUNCTION_URL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest -q supabase/tests
