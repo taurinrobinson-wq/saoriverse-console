@@ -1,1 +1,96 @@
-{"patterns": [{"pattern": ".*example.*", "frequency": 81}, {"pattern": ".*test.*", "frequency": 81}]}
+{
+  "ache + connection + flow": {
+    "emotions": [
+      "flow",
+      "ache",
+      "connection"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "sacred"
+    ],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.626633+00:00",
+    "last_seen": "2025-11-28T18:36:33.792009+00:00"
+  },
+  "clarity + overwhelmed + this": {
+    "emotions": [
+      "clarity",
+      "overwhelmed",
+      "this"
+    ],
+    "intensity": 0.5,
+    "context_words": [],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.627265+00:00",
+    "last_seen": "2025-11-28T18:36:33.792329+00:00"
+  },
+  "experiencing + grief + joy + this": {
+    "emotions": [
+      "joy",
+      "experiencing",
+      "grief",
+      "this"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "profound"
+    ],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.621256+00:00",
+    "last_seen": "2025-11-28T18:36:33.791583+00:00"
+  },
+  "feeling + joy + this": {
+    "emotions": [
+      "joy",
+      "feeling",
+      "this"
+    ],
+    "intensity": 0.5,
+    "context_words": [],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.628377+00:00",
+    "last_seen": "2025-11-28T18:36:33.792878+00:00"
+  },
+  "flow + peace + stillness": {
+    "emotions": [
+      "flow",
+      "peace",
+      "stillness"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "flowing"
+    ],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.628949+00:00",
+    "last_seen": "2025-11-28T18:36:33.793177+00:00"
+  },
+  "flow + strength + touched + vulnerability + weakness": {
+    "emotions": [
+      "flow",
+      "weakness",
+      "touched",
+      "vulnerability",
+      "strength"
+    ],
+    "intensity": 0.5,
+    "context_words": [],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.629580+00:00",
+    "last_seen": "2025-11-28T18:36:33.793461+00:00"
+  },
+  "grief + joy": {
+    "emotions": [
+      "joy",
+      "grief"
+    ],
+    "intensity": 0.5,
+    "context_words": [
+      "profound"
+    ],
+    "frequency": 203,
+    "first_seen": "2025-11-11T07:38:52.621272+00:00",
+    "last_seen": "2025-11-28T18:36:33.791589+00:00"
+  }
+}
