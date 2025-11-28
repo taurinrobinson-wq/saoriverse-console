@@ -1,0 +1,30 @@
+{
+    "cli": {
+        "version": ">= 3.0.0"
+    },
+    "build": {
+        "production": {
+            "releaseChannel": "production",
+            "distribution": "store",
+            "android": {
+                "buildType": "app-bundle"
+            },
+            "ios": {
+                "simulator": false
+            },
+            "env": {
+                "SAOYNX_API_URL": "https://your-backend.example.com/api"
+            }
+        },
+        "development": {
+            "developmentClient": true,
+            "distribution": "internal",
+            "android": {
+                "buildType": "apk"
+            },
+            "ios": {
+                "simulator": true
+            }
+        }
+    }
+}
