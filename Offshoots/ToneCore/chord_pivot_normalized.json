@@ -1,0 +1,1572 @@
+[
+  {
+    "key": "C",
+    "base_chord": {
+      "name": "C",
+      "function": "I",
+      "notes": [
+        "c",
+        "e",
+        "g"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Am",
+          "notes": [
+            "a",
+            "c",
+            "e"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      {
+        "to": {
+          "name": "F",
+          "notes": [
+            "f",
+            "a",
+            "c"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "c",
+          "f"
+        ]
+      },
+      {
+        "to": {
+          "name": "G",
+          "notes": [
+            "g",
+            "b",
+            "d"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "g"
+        ]
+      },
+      {
+        "to": {
+          "name": "Em",
+          "notes": [
+            "e",
+            "g",
+            "b"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "e",
+          "g"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "G",
+    "base_chord": {
+      "name": "G",
+      "function": "I",
+      "notes": [
+        "g",
+        "b",
+        "d"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Em",
+          "notes": [
+            "e",
+            "g",
+            "b"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "e",
+          "g",
+          "b"
+        ]
+      },
+      {
+        "to": {
+          "name": "C",
+          "notes": [
+            "c",
+            "e",
+            "g"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "c",
+          "g"
+        ]
+      },
+      {
+        "to": {
+          "name": "D",
+          "notes": [
+            "d",
+            "f#",
+            "a"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "d"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bm",
+          "notes": [
+            "b",
+            "d",
+            "f#"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "b",
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "D",
+    "base_chord": {
+      "name": "D",
+      "function": "I",
+      "notes": [
+        "d",
+        "f#",
+        "a"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Bm",
+          "notes": [
+            "b",
+            "d",
+            "f#"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "b",
+          "d",
+          "f#"
+        ]
+      },
+      {
+        "to": {
+          "name": "G",
+          "notes": [
+            "g",
+            "b",
+            "d"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "g",
+          "d"
+        ]
+      },
+      {
+        "to": {
+          "name": "A",
+          "notes": [
+            "a",
+            "c#",
+            "e"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "a"
+        ]
+      },
+      {
+        "to": {
+          "name": "F#m",
+          "notes": [
+            "f#",
+            "a",
+            "c#"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "f#",
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "A",
+    "base_chord": {
+      "name": "A",
+      "function": "I",
+      "notes": [
+        "a",
+        "c#",
+        "e"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "F#m",
+          "notes": [
+            "f#",
+            "a",
+            "c#"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "f#",
+          "a",
+          "c#"
+        ]
+      },
+      {
+        "to": {
+          "name": "D",
+          "notes": [
+            "d",
+            "f#",
+            "a"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "d",
+          "a"
+        ]
+      },
+      {
+        "to": {
+          "name": "E",
+          "notes": [
+            "e",
+            "g#",
+            "b"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "e"
+        ]
+      },
+      {
+        "to": {
+          "name": "C#m",
+          "notes": [
+            "c#",
+            "e",
+            "g#"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "c#",
+          "e"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "E",
+    "base_chord": {
+      "name": "E",
+      "function": "I",
+      "notes": [
+        "e",
+        "g#",
+        "b"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "C#m",
+          "notes": [
+            "c#",
+            "e",
+            "g#"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "c#",
+          "e",
+          "g#"
+        ]
+      },
+      {
+        "to": {
+          "name": "A",
+          "notes": [
+            "a",
+            "c#",
+            "e"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "a",
+          "e"
+        ]
+      },
+      {
+        "to": {
+          "name": "B",
+          "notes": [
+            "b",
+            "d#",
+            "f#"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "b"
+        ]
+      },
+      {
+        "to": {
+          "name": "G#m",
+          "notes": [
+            "g#",
+            "b",
+            "d#"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "g#",
+          "b"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "B",
+    "base_chord": {
+      "name": "B",
+      "function": "I",
+      "notes": [
+        "b",
+        "d#",
+        "f#"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "G#m",
+          "notes": [
+            "g#",
+            "b",
+            "d#"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "g#",
+          "b",
+          "d#"
+        ]
+      },
+      {
+        "to": {
+          "name": "E",
+          "notes": [
+            "e",
+            "g#",
+            "b"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "e",
+          "b"
+        ]
+      },
+      {
+        "to": {
+          "name": "F#",
+          "notes": []
+        },
+        "function": "V",
+        "shared_notes": [
+          "f#"
+        ]
+      },
+      {
+        "to": {
+          "name": "D#m",
+          "notes": []
+        },
+        "function": "iii",
+        "shared_notes": [
+          "d#",
+          "f#"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "F",
+    "base_chord": {
+      "name": "F",
+      "function": "I",
+      "notes": [
+        "f",
+        "a",
+        "c"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Dm",
+          "notes": [
+            "d",
+            "f",
+            "a"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "d",
+          "f",
+          "a"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bb",
+          "notes": [
+            "bb",
+            "d",
+            "f"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "bb",
+          "f"
+        ]
+      },
+      {
+        "to": {
+          "name": "C",
+          "notes": [
+            "c",
+            "e",
+            "g"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "c"
+        ]
+      },
+      {
+        "to": {
+          "name": "Am",
+          "notes": [
+            "a",
+            "c",
+            "e"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "a",
+          "c"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Bb",
+    "base_chord": {
+      "name": "Bb",
+      "function": "I",
+      "notes": [
+        "bb",
+        "d",
+        "f"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Gm",
+          "notes": [
+            "g",
+            "bb",
+            "d"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "g",
+          "bb",
+          "d"
+        ]
+      },
+      {
+        "to": {
+          "name": "Eb",
+          "notes": [
+            "eb",
+            "g",
+            "bb"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "eb",
+          "bb"
+        ]
+      },
+      {
+        "to": {
+          "name": "F",
+          "notes": [
+            "f",
+            "a",
+            "c"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "f"
+        ]
+      },
+      {
+        "to": {
+          "name": "Dm",
+          "notes": [
+            "d",
+            "f",
+            "a"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "d",
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Eb",
+    "base_chord": {
+      "name": "Eb",
+      "function": "I",
+      "notes": [
+        "eb",
+        "g",
+        "bb"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Cm",
+          "notes": [
+            "c",
+            "eb",
+            "g"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "c",
+          "eb",
+          "g"
+        ]
+      },
+      {
+        "to": {
+          "name": "Ab",
+          "notes": [
+            "ab",
+            "c",
+            "eb"
+          ]
+        },
+        "function": "IV",
+        "shared_notes": [
+          "ab",
+          "eb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bb",
+          "notes": [
+            "bb",
+            "d",
+            "f"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "bb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Fm",
+          "notes": [
+            "f",
+            "ab",
+            "c"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "f",
+          "ab"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Ab",
+    "base_chord": {
+      "name": "Ab",
+      "function": "I",
+      "notes": [
+        "ab",
+        "c",
+        "eb"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Fm",
+          "notes": [
+            "f",
+            "ab",
+            "c"
+          ]
+        },
+        "function": "vi",
+        "shared_notes": [
+          "f",
+          "ab",
+          "c"
+        ]
+      },
+      {
+        "to": {
+          "name": "Db",
+          "notes": []
+        },
+        "function": "IV",
+        "shared_notes": [
+          "db",
+          "ab"
+        ]
+      },
+      {
+        "to": {
+          "name": "Eb",
+          "notes": [
+            "eb",
+            "g",
+            "bb"
+          ]
+        },
+        "function": "V",
+        "shared_notes": [
+          "eb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Cm",
+          "notes": [
+            "c",
+            "eb",
+            "g"
+          ]
+        },
+        "function": "iii",
+        "shared_notes": [
+          "c",
+          "eb"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Am",
+    "base_chord": {
+      "name": "Am",
+      "function": "i",
+      "notes": [
+        "a",
+        "c",
+        "e"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "C",
+          "notes": [
+            "c",
+            "e",
+            "g"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "c",
+          "e"
+        ]
+      },
+      {
+        "to": {
+          "name": "Dm",
+          "notes": [
+            "d",
+            "f",
+            "a"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "a",
+          "d"
+        ]
+      },
+      {
+        "to": {
+          "name": "F",
+          "notes": [
+            "f",
+            "a",
+            "c"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "a",
+          "c"
+        ]
+      },
+      {
+        "to": {
+          "name": "G",
+          "notes": [
+            "g",
+            "b",
+            "d"
+          ]
+        },
+        "function": "VII",
+        "shared_notes": [
+          "g"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Em",
+    "base_chord": {
+      "name": "Em",
+      "function": "i",
+      "notes": [
+        "e",
+        "g",
+        "b"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "G",
+          "notes": [
+            "g",
+            "b",
+            "d"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "g",
+          "b"
+        ]
+      },
+      {
+        "to": {
+          "name": "Am",
+          "notes": [
+            "a",
+            "c",
+            "e"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "a",
+          "e"
+        ]
+      },
+      {
+        "to": {
+          "name": "C",
+          "notes": [
+            "c",
+            "e",
+            "g"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "c",
+          "e"
+        ]
+      },
+      {
+        "to": {
+          "name": "D",
+          "notes": [
+            "d",
+            "f#",
+            "a"
+          ]
+        },
+        "function": "VII",
+        "shared_notes": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Bm",
+    "base_chord": {
+      "name": "Bm",
+      "function": "i",
+      "notes": [
+        "b",
+        "d",
+        "f#"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "D",
+          "notes": [
+            "d",
+            "f#",
+            "a"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "d",
+          "f#"
+        ]
+      },
+      {
+        "to": {
+          "name": "Em",
+          "notes": [
+            "e",
+            "g",
+            "b"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "e",
+          "b"
+        ]
+      },
+      {
+        "to": {
+          "name": "G",
+          "notes": [
+            "g",
+            "b",
+            "d"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "g",
+          "b"
+        ]
+      },
+      {
+        "to": {
+          "name": "A",
+          "notes": [
+            "a",
+            "c#",
+            "e"
+          ]
+        },
+        "function": "VII",
+        "shared_notes": [
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "F#m",
+    "base_chord": {
+      "name": "F#m",
+      "function": "i",
+      "notes": [
+        "f#",
+        "a",
+        "c#"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "A",
+          "notes": [
+            "a",
+            "c#",
+            "e"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "a",
+          "c#"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bm",
+          "notes": [
+            "b",
+            "d",
+            "f#"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "b",
+          "f#"
+        ]
+      },
+      {
+        "to": {
+          "name": "D",
+          "notes": [
+            "d",
+            "f#",
+            "a"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "d",
+          "f#"
+        ]
+      },
+      {
+        "to": {
+          "name": "E",
+          "notes": [
+            "e",
+            "g#",
+            "b"
+          ]
+        },
+        "function": "VII",
+        "shared_notes": [
+          "e"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "C#m",
+    "base_chord": {
+      "name": "C#m",
+      "function": "i",
+      "notes": [
+        "c#",
+        "e",
+        "g#"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "E",
+          "notes": [
+            "e",
+            "g#",
+            "b"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "e",
+          "g#"
+        ]
+      },
+      {
+        "to": {
+          "name": "F#m",
+          "notes": [
+            "f#",
+            "a",
+            "c#"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "f#",
+          "c#"
+        ]
+      },
+      {
+        "to": {
+          "name": "A",
+          "notes": [
+            "a",
+            "c#",
+            "e"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "a",
+          "c#"
+        ]
+      },
+      {
+        "to": {
+          "name": "B",
+          "notes": [
+            "b",
+            "d#",
+            "f#"
+          ]
+        },
+        "function": "VII",
+        "shared_notes": [
+          "b"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "G#m",
+    "base_chord": {
+      "name": "G#m",
+      "function": "i",
+      "notes": [
+        "g#",
+        "b",
+        "d#"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "B",
+          "notes": [
+            "b",
+            "d#",
+            "f#"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "b",
+          "d#"
+        ]
+      },
+      {
+        "to": {
+          "name": "C#m",
+          "notes": [
+            "c#",
+            "e",
+            "g#"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "c#",
+          "g#"
+        ]
+      },
+      {
+        "to": {
+          "name": "E",
+          "notes": [
+            "e",
+            "g#",
+            "b"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "e",
+          "g#"
+        ]
+      },
+      {
+        "to": {
+          "name": "F#",
+          "notes": []
+        },
+        "function": "VII",
+        "shared_notes": [
+          "f#"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Dm",
+    "base_chord": {
+      "name": "Dm",
+      "function": "i",
+      "notes": [
+        "d",
+        "f",
+        "a"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "F",
+          "notes": [
+            "f",
+            "a",
+            "c"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "f",
+          "a"
+        ]
+      },
+      {
+        "to": {
+          "name": "Gm",
+          "notes": [
+            "g",
+            "bb",
+            "d"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "d"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bb",
+          "notes": [
+            "bb",
+            "d",
+            "f"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "d",
+          "f"
+        ]
+      },
+      {
+        "to": {
+          "name": "Am",
+          "notes": [
+            "a",
+            "c",
+            "e"
+          ]
+        },
+        "function": "v",
+        "shared_notes": [
+          "a"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Gm",
+    "base_chord": {
+      "name": "Gm",
+      "function": "i",
+      "notes": [
+        "g",
+        "bb",
+        "d"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Bb",
+          "notes": [
+            "bb",
+            "d",
+            "f"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "bb",
+          "d"
+        ]
+      },
+      {
+        "to": {
+          "name": "Cm",
+          "notes": [
+            "c",
+            "eb",
+            "g"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "g"
+        ]
+      },
+      {
+        "to": {
+          "name": "Eb",
+          "notes": [
+            "eb",
+            "g",
+            "bb"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "g",
+          "bb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Dm",
+          "notes": [
+            "d",
+            "f",
+            "a"
+          ]
+        },
+        "function": "v",
+        "shared_notes": [
+          "d"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Cm",
+    "base_chord": {
+      "name": "Cm",
+      "function": "i",
+      "notes": [
+        "c",
+        "eb",
+        "g"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Eb",
+          "notes": [
+            "eb",
+            "g",
+            "bb"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "eb",
+          "g"
+        ]
+      },
+      {
+        "to": {
+          "name": "Fm",
+          "notes": [
+            "f",
+            "ab",
+            "c"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "c"
+        ]
+      },
+      {
+        "to": {
+          "name": "Ab",
+          "notes": [
+            "ab",
+            "c",
+            "eb"
+          ]
+        },
+        "function": "VI",
+        "shared_notes": [
+          "c",
+          "eb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Gm",
+          "notes": [
+            "g",
+            "bb",
+            "d"
+          ]
+        },
+        "function": "v",
+        "shared_notes": [
+          "g"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Fm",
+    "base_chord": {
+      "name": "Fm",
+      "function": "i",
+      "notes": [
+        "f",
+        "ab",
+        "c"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Ab",
+          "notes": [
+            "ab",
+            "c",
+            "eb"
+          ]
+        },
+        "function": "III",
+        "shared_notes": [
+          "ab",
+          "c"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bbm",
+          "notes": [
+            "bb",
+            "db",
+            "f"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "f"
+        ]
+      },
+      {
+        "to": {
+          "name": "Db",
+          "notes": []
+        },
+        "function": "VI",
+        "shared_notes": [
+          "f",
+          "ab"
+        ]
+      },
+      {
+        "to": {
+          "name": "Cm",
+          "notes": [
+            "c",
+            "eb",
+            "g"
+          ]
+        },
+        "function": "v",
+        "shared_notes": [
+          "c"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Bbm",
+    "base_chord": {
+      "name": "Bbm",
+      "function": "i",
+      "notes": [
+        "bb",
+        "db",
+        "f"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Db",
+          "notes": []
+        },
+        "function": "III",
+        "shared_notes": [
+          "db",
+          "f"
+        ]
+      },
+      {
+        "to": {
+          "name": "Ebm",
+          "notes": [
+            "eb",
+            "gb",
+            "bb"
+          ]
+        },
+        "function": "iv",
+        "shared_notes": [
+          "bb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Gb",
+          "notes": []
+        },
+        "function": "VI",
+        "shared_notes": [
+          "bb",
+          "db"
+        ]
+      },
+      {
+        "to": {
+          "name": "Fm",
+          "notes": [
+            "f",
+            "ab",
+            "c"
+          ]
+        },
+        "function": "v",
+        "shared_notes": [
+          "f"
+        ]
+      }
+    ]
+  },
+  {
+    "key": "Ebm",
+    "base_chord": {
+      "name": "Ebm",
+      "function": "i",
+      "notes": [
+        "eb",
+        "gb",
+        "bb"
+      ]
+    },
+    "transitions": [
+      {
+        "to": {
+          "name": "Gb",
+          "notes": []
+        },
+        "function": "III",
+        "shared_notes": [
+          "gb",
+          "bb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Abm",
+          "notes": []
+        },
+        "function": "iv",
+        "shared_notes": [
+          "eb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Cb",
+          "notes": []
+        },
+        "function": "VI",
+        "shared_notes": [
+          "eb",
+          "gb"
+        ]
+      },
+      {
+        "to": {
+          "name": "Bbm",
+          "notes": [
+            "bb",
+            "db",
+            "f"
+          ]
+        },
+        "function": "v",
+        "shared_notes": [
+          "bb"
+        ]
+      }
+    ]
+  }
+]

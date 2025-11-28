@@ -6,6 +6,9 @@ This is the single source of truth for:
 - Lexicon learning and pattern extraction
 - Path management and configuration
 - Constants and defaults
+- Presence Architecture (attunement, reciprocity, memory, embodiment, poetic)
+- Generative Tension (surprise, challenge, subversion, creation)
+- Saori Layer (mirror, edge, genome, mortality)
 
 All other modules should import from here.
 """
@@ -66,7 +69,38 @@ from emotional_os.core.lexicon_learner import (
     get_learning_insights,
 )
 
-__version__ = "2.0.0"
+# Presence Architecture - emotional presence components
+from emotional_os.core.presence import (
+    AttunementLoop,
+    EmotionalReciprocity,
+    TemporalMemory,
+    EmbodiedSimulation,
+    PoeticConsciousness,
+)
+
+# Generative Tension - dynamic interaction components
+from emotional_os.core.tension import (
+    GenerativeTension,
+    SurpriseEngine,
+    ChallengeEngine,
+    SubversionEngine,
+    CreationEngine,
+)
+
+# Saori Layer - advanced emotional framework
+from emotional_os.core.saori import (
+    SaoriLayer,
+    MirrorEngine,
+    EdgeGenerator,
+    EmotionalGenome,
+    MortalityClock,
+    Archetype,
+)
+
+# Unified Emotional Framework
+from emotional_os.core.emotional_framework import EmotionalFramework
+
+__version__ = "2.1.0"
 __all__ = [
     # Path management
     "PathManager",
@@ -115,4 +149,29 @@ __all__ = [
     "learn_from_conversation_data",
     "get_enhanced_lexicon",
     "get_learning_insights",
+    
+    # Presence Architecture
+    "AttunementLoop",
+    "EmotionalReciprocity",
+    "TemporalMemory",
+    "EmbodiedSimulation",
+    "PoeticConsciousness",
+    
+    # Generative Tension
+    "GenerativeTension",
+    "SurpriseEngine",
+    "ChallengeEngine",
+    "SubversionEngine",
+    "CreationEngine",
+    
+    # Saori Layer
+    "SaoriLayer",
+    "MirrorEngine",
+    "EdgeGenerator",
+    "EmotionalGenome",
+    "MortalityClock",
+    "Archetype",
+    
+    # Unified Framework
+    "EmotionalFramework",
 ]

@@ -1,0 +1,227 @@
+Excellent — here’s a **full JSON schema** covering all 12 major and 12 minor keys, with each base chord listing its notes and the smooth transitions (root absorption via shared tones). This gives you a canonical map you can feed directly into Tonecore.
+
+---
+
+```json
+[
+  {
+    "key": "C",
+    "base_chord": {"name": "C", "function": "I", "notes": ["c","e","g"]},
+    "transitions": [
+      {"to":"Am","function":"vi","shared_notes":["a","c","e"]},
+      {"to":"F","function":"IV","shared_notes":["c","f"]},
+      {"to":"G","function":"V","shared_notes":["g"]},
+      {"to":"Em","function":"iii","shared_notes":["e","g"]}
+    ]
+  },
+  {
+    "key": "G",
+    "base_chord": {"name": "G", "function": "I", "notes": ["g","b","d"]},
+    "transitions": [
+      {"to":"Em","function":"vi","shared_notes":["e","g","b"]},
+      {"to":"C","function":"IV","shared_notes":["c","g"]},
+      {"to":"D","function":"V","shared_notes":["d"]},
+      {"to":"Bm","function":"iii","shared_notes":["b","d"]}
+    ]
+  },
+  {
+    "key": "D",
+    "base_chord": {"name": "D", "function": "I", "notes": ["d","f#","a"]},
+    "transitions": [
+      {"to":"Bm","function":"vi","shared_notes":["b","d","f#"]},
+      {"to":"G","function":"IV","shared_notes":["g","d"]},
+      {"to":"A","function":"V","shared_notes":["a"]},
+      {"to":"F#m","function":"iii","shared_notes":["f#","a"]}
+    ]
+  },
+  {
+    "key": "A",
+    "base_chord": {"name": "A", "function": "I", "notes": ["a","c#","e"]},
+    "transitions": [
+      {"to":"F#m","function":"vi","shared_notes":["f#","a","c#"]},
+      {"to":"D","function":"IV","shared_notes":["d","a"]},
+      {"to":"E","function":"V","shared_notes":["e"]},
+      {"to":"C#m","function":"iii","shared_notes":["c#","e"]}
+    ]
+  },
+  {
+    "key": "E",
+    "base_chord": {"name": "E", "function": "I", "notes": ["e","g#","b"]},
+    "transitions": [
+      {"to":"C#m","function":"vi","shared_notes":["c#","e","g#"]},
+      {"to":"A","function":"IV","shared_notes":["a","e"]},
+      {"to":"B","function":"V","shared_notes":["b"]},
+      {"to":"G#m","function":"iii","shared_notes":["g#","b"]}
+    ]
+  },
+  {
+    "key": "B",
+    "base_chord": {"name": "B", "function": "I", "notes": ["b","d#","f#"]},
+    "transitions": [
+      {"to":"G#m","function":"vi","shared_notes":["g#","b","d#"]},
+      {"to":"E","function":"IV","shared_notes":["e","b"]},
+      {"to":"F#","function":"V","shared_notes":["f#"]},
+      {"to":"D#m","function":"iii","shared_notes":["d#","f#"]}
+    ]
+  },
+  {
+    "key": "F",
+    "base_chord": {"name": "F", "function": "I", "notes": ["f","a","c"]},
+    "transitions": [
+      {"to":"Dm","function":"vi","shared_notes":["d","f","a"]},
+      {"to":"Bb","function":"IV","shared_notes":["bb","f"]},
+      {"to":"C","function":"V","shared_notes":["c"]},
+      {"to":"Am","function":"iii","shared_notes":["a","c"]}
+    ]
+  },
+  {
+    "key": "Bb",
+    "base_chord": {"name": "Bb", "function": "I", "notes": ["bb","d","f"]},
+    "transitions": [
+      {"to":"Gm","function":"vi","shared_notes":["g","bb","d"]},
+      {"to":"Eb","function":"IV","shared_notes":["eb","bb"]},
+      {"to":"F","function":"V","shared_notes":["f"]},
+      {"to":"Dm","function":"iii","shared_notes":["d","f"]}
+    ]
+  },
+  {
+    "key": "Eb",
+    "base_chord": {"name": "Eb", "function": "I", "notes": ["eb","g","bb"]},
+    "transitions": [
+      {"to":"Cm","function":"vi","shared_notes":["c","eb","g"]},
+      {"to":"Ab","function":"IV","shared_notes":["ab","eb"]},
+      {"to":"Bb","function":"V","shared_notes":["bb"]},
+      {"to":"Fm","function":"iii","shared_notes":["f","ab"]}
+    ]
+  },
+  {
+    "key": "Ab",
+    "base_chord": {"name": "Ab", "function": "I", "notes": ["ab","c","eb"]},
+    "transitions": [
+      {"to":"Fm","function":"vi","shared_notes":["f","ab","c"]},
+      {"to":"Db","function":"IV","shared_notes":["db","ab"]},
+      {"to":"Eb","function":"V","shared_notes":["eb"]},
+      {"to":"Cm","function":"iii","shared_notes":["c","eb"]}
+    ]
+  },
+  {
+    "key": "Am",
+    "base_chord": {"name": "Am", "function": "i", "notes": ["a","c","e"]},
+    "transitions": [
+      {"to":"C","function":"III","shared_notes":["c","e"]},
+      {"to":"Dm","function":"iv","shared_notes":["a","d"]},
+      {"to":"F","function":"VI","shared_notes":["a","c"]},
+      {"to":"G","function":"VII","shared_notes":["g"]}
+    ]
+  },
+  {
+    "key": "Em",
+    "base_chord": {"name": "Em", "function": "i", "notes": ["e","g","b"]},
+    "transitions": [
+      {"to":"G","function":"III","shared_notes":["g","b"]},
+      {"to":"Am","function":"iv","shared_notes":["a","e"]},
+      {"to":"C","function":"VI","shared_notes":["c","e"]},
+      {"to":"D","function":"VII","shared_notes":["d"]}
+    ]
+  },
+  {
+    "key": "Bm",
+    "base_chord": {"name": "Bm", "function": "i", "notes": ["b","d","f#"]},
+    "transitions": [
+      {"to":"D","function":"III","shared_notes":["d","f#"]},
+      {"to":"Em","function":"iv","shared_notes":["e","b"]},
+      {"to":"G","function":"VI","shared_notes":["g","b"]},
+      {"to":"A","function":"VII","shared_notes":["a"]}
+    ]
+  },
+  {
+    "key": "F#m",
+    "base_chord": {"name": "F#m", "function": "i", "notes": ["f#","a","c#"]},
+    "transitions": [
+      {"to":"A","function":"III","shared_notes":["a","c#"]},
+      {"to":"Bm","function":"iv","shared_notes":["b","f#"]},
+      {"to":"D","function":"VI","shared_notes":["d","f#"]},
+      {"to":"E","function":"VII","shared_notes":["e"]}
+    ]
+  },
+  {
+    "key": "C#m",
+    "base_chord": {"name": "C#m", "function": "i", "notes": ["c#","e","g#"]},
+    "transitions": [
+      {"to":"E","function":"III","shared_notes":["e","g#"]},
+      {"to":"F#m","function":"iv","shared_notes":["f#","c#"]},
+      {"to":"A","function":"VI","shared_notes":["a","c#"]},
+      {"to":"B","function":"VII","shared_notes":["b"]}
+    ]
+  },
+  {
+    "key": "G#m",
+    "base_chord": {"name": "G#m", "function": "i", "notes": ["g#","b","d#"]},
+    "transitions": [
+      {"to":"B","function":"III","shared_notes":["b","d#"]},
+      {"to":"C#m","function":"iv","shared_notes":["c#","g#"]},
+      {"to":"E","function":"VI","shared_notes":["e","g#"]},
+      {"to":"F#","function":"VII","shared_notes":["f#"]}
+    ]
+  },
+  {
+    "key": "Dm",
+    "base_chord": { "name": "Dm", "function": "i", "notes": ["d","f","a"] },
+    "transitions": [
+      { "to": "F",  "function": "III", "shared_notes": ["f","a"] },
+      { "to": "Gm", "function": "iv",  "shared_notes": ["d"] },
+      { "to": "Bb", "function": "VI",  "shared_notes": ["d","f"] },
+      { "to": "Am", "function": "v",   "shared_notes": ["a"] }
+    ]
+  },
+  {
+    "key": "Gm",
+    "base_chord": { "name": "Gm", "function": "i", "notes": ["g","bb","d"] },
+    "transitions": [
+      { "to": "Bb", "function": "III", "shared_notes": ["bb","d"] },
+      { "to": "Cm", "function": "iv",  "shared_notes": ["g"] },
+      { "to": "Eb", "function": "VI",  "shared_notes": ["g","bb"] },
+      { "to": "Dm", "function": "v",   "shared_notes": ["d"] }
+    ]
+  },
+  {
+    "key": "Cm",
+    "base_chord": { "name": "Cm", "function": "i", "notes": ["c","eb","g"] },
+    "transitions": [
+      { "to": "Eb", "function": "III", "shared_notes": ["eb","g"] },
+      { "to": "Fm", "function": "iv",  "shared_notes": ["c"] },
+      { "to": "Ab", "function": "VI",  "shared_notes": ["c","eb"] },
+      { "to": "Gm", "function": "v",   "shared_notes": ["g"] }
+    ]
+  },
+  {
+    "key": "Fm",
+    "base_chord": { "name": "Fm", "function": "i", "notes": ["f","ab","c"] },
+    "transitions": [
+      { "to": "Ab",  "function": "III", "shared_notes": ["ab","c"] },
+      { "to": "Bbm", "function": "iv",  "shared_notes": ["f"] },
+      { "to": "Db",  "function": "VI",  "shared_notes": ["f","ab"] },
+      { "to": "Cm",  "function": "v",   "shared_notes": ["c"] }
+    ]
+  },
+  {
+    "key": "Bbm",
+    "base_chord": { "name": "Bbm", "function": "i", "notes": ["bb","db","f"] },
+    "transitions": [
+      { "to": "Db",  "function": "III", "shared_notes": ["db","f"] },
+      { "to": "Ebm", "function": "iv",  "shared_notes": ["bb"] },
+      { "to": "Gb",  "function": "VI",  "shared_notes": ["bb","db"] },
+      { "to": "Fm",  "function": "v",   "shared_notes": ["f"] }
+    ]
+  },
+  {
+    "key": "Ebm",
+    "base_chord": { "name": "Ebm", "function": "i", "notes": ["eb","gb","bb"] },
+    "transitions": [
+      { "to": "Gb",  "function": "III", "shared_notes": ["gb","bb"] },
+      { "to": "Abm", "function": "iv",  "shared_notes": ["eb"] },
+      { "to": "Cb",  "function": "VI",  "shared_notes": ["eb","gb"] },
+      { "to": "Bbm", "function": "v",   "shared_notes": ["bb"] }
+    ]
+  }
+]
