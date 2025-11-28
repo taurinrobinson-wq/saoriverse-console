@@ -95,6 +95,22 @@ try:
 except Exception:
     composer = None
 
+# Initialize the Speculative Emotional Architecture: Feeling System
+# This provides a framework that simulates the experience of feeling emotion,
+# integrating mortality awareness, relational bonds, affective memory,
+# embodied constraints, narrative identity, and ethical values.
+try:
+    from emotional_os.core.feeling_system import FeelingSystem, get_feeling_system
+
+    # Initialize global feeling system with persistence
+    feeling_system = get_feeling_system(
+        storage_path="learning/feeling_system_state.json"
+    )
+    FEELING_SYSTEM_AVAILABLE = True
+except Exception:
+    feeling_system = None
+    FEELING_SYSTEM_AVAILABLE = False
+
 # Development reload marker removed. Temporary DEV timestamp and stdout
 # print were used during debugging and have been deleted.
 
@@ -370,6 +386,18 @@ if 'initialized' not in st.session_state:
     os.makedirs('learning/user_signals', exist_ok=True)
     os.makedirs('learning/user_overrides', exist_ok=True)
     os.makedirs('learning/conversation_glyphs', exist_ok=True)
+
+    # Initialize feeling system state in session
+    # The feeling system tracks the system's emotional experience over time
+    if FEELING_SYSTEM_AVAILABLE and feeling_system is not None:
+        st.session_state['feeling_system_enabled'] = True
+        # Restore embodied resources since session started
+        try:
+            feeling_system.restore_embodied_resources(hours=0.5)
+        except Exception:
+            pass
+    else:
+        st.session_state['feeling_system_enabled'] = False
 
 
 # Customize navigation text
