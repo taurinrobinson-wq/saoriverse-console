@@ -25,6 +25,15 @@ from emotional_os.safety import (
     sanitize_for_storage,
 )
 
+# Poetic Emotional Engine integration (optional, graceful fallback)
+try:
+    from emotional_os.core.poetic_engine import get_poetic_engine, PoeticEmotionalEngine
+    HAS_POETIC_ENGINE = True
+except ImportError:
+    HAS_POETIC_ENGINE = False
+    get_poetic_engine = None
+    PoeticEmotionalEngine = None
+
 # Try to import NRC lexicon for better emotion detection
 try:
     from parser.nrc_lexicon_loader import nrc
@@ -1666,6 +1675,34 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     except Exception:
         pass
 
+    # Poetic Engine integration: update the living poem based on interaction
+    poetic_state = None
+    try:
+        if HAS_POETIC_ENGINE and get_poetic_engine is not None:
+            engine = get_poetic_engine()
+            # Build detected emotions from signals
+            detected_emotions = {}
+            for sig in signals:
+                tone = sig.get('tone', 'unknown')
+                voltage = sig.get('voltage', 'medium')
+                intensity = {'low': 0.3, 'medium': 0.6, 'high': 1.0}.get(voltage, 0.5)
+                detected_emotions[tone] = max(detected_emotions.get(tone, 0), intensity)
+
+            poetic_result = engine.process_glyph_response(
+                glyph_data=best_glyph or {},
+                signals=signals,
+                user_input=input_text,
+                user_id=user_id,
+            )
+            poetic_state = {
+                "poem_rendered": poetic_result.get("poem_rendered"),
+                "dominant_emotion": poetic_result.get("dominant_emotion"),
+                "death_occurred": poetic_result.get("death_occurred", False),
+                "mirror_response": poetic_result.get("mirror_response"),
+            }
+    except Exception as e:
+        logger.debug("Poetic engine integration skipped: %s", e)
+
     return {
         "timestamp": datetime.now().isoformat(),
         "input": input_text,
@@ -1682,7 +1719,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         "response_source": response_source,
         "debug_sql": debug_sql,
         "debug_glyph_rows": debug_glyph_rows,
-        "learning": learning_payload
+        "learning": learning_payload,
+        "poetic_state": poetic_state,  # Poetic Emotional Engine state
     }
 
 
