@@ -319,6 +319,72 @@ async def chat(chat_data: ChatRequest):
 
     start = datetime.utcnow()
     try:
+        # If the client requests local processing, run the hybrid/local pipeline here
+        if chat_data.mode == 'local' or os.getenv('DEFAULT_PROCESSING_MODE', 'local') == 'local':
+            try:
+                # Prefer the mobile adapter which is expressly designed to
+                # be invoked from FastAPI / React contexts. It wraps the
+                # canonical pipeline and provides a fallback when the full
+                # UI runtime is not available.
+                from emotional_os.deploy.modules.ui_mobile import run_hybrid_pipeline_mobile as run_hybrid_pipeline_mobile
+            except Exception:
+                run_hybrid_pipeline_mobile = None
+
+            if run_hybrid_pipeline_mobile:
+                try:
+                    response_text, debug_info, local_analysis = run_hybrid_pipeline_mobile(
+                        chat_data.message,
+                        {},
+                        saori_url,
+                        SUPABASE_KEY,
+                        user_id=getattr(chat_data, 'user_id', None),
+                        processing_mode=getattr(chat_data, 'mode', 'local')
+                    )
+                    duration = (datetime.utcnow() - start).total_seconds()
+                    trace_entry.update({
+                        "duration_s": duration,
+                        "status_code": 200
+                    })
+                    try:
+                        from emotional_os.deploy.reply_utils import polish_ai_reply
+                    except Exception:
+                        def polish_ai_reply(x):
+                            return x or "I hear you — tell me more when you're ready."
+
+                    glyph_obj = {}
+                    try:
+                        if isinstance(local_analysis, dict):
+                            best = local_analysis.get('best_glyph') or (
+                                local_analysis.get('glyphs') or [None])[0]
+                            if best:
+                                glyph_obj = best
+                    except Exception:
+                        glyph_obj = {}
+
+                    try:
+                        with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
+                            fh.write(json.dumps(
+                                trace_entry, ensure_ascii=False) + "\n")
+                    except Exception:
+                        pass
+
+                    return {
+                        "success": True,
+                        "reply": polish_ai_reply(response_text or "I'm here to listen."),
+                        "glyph": glyph_obj,
+                        "processing_time": debug_info.get('processing_time', 0) if isinstance(debug_info, dict) else 0
+                    }
+                except Exception as e:
+                    trace_entry.update(
+                        {"exception": f"local_pipeline_error: {str(e)}"})
+                    try:
+                        with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
+                            fh.write(json.dumps(
+                                trace_entry, ensure_ascii=False) + "\n")
+                    except Exception:
+                        pass
+
+        # Remote SAORI call (fallback / hybrid mode)
         response = requests.post(
             saori_url,
             headers={
@@ -352,7 +418,6 @@ async def chat(chat_data: ChatRequest):
                 "processing_time": result.get('processing_time')
             }
 
-        # append trace to log file
         try:
             with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
                 fh.write(json.dumps(trace_entry, ensure_ascii=False) + "\n")

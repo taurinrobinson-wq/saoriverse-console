@@ -276,7 +276,25 @@ def ensure_processing_prefs():
 
 
 def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
-    """Decode an AI reply using the local parser and return (composed_response, debug_info)."""
+    """Decode an AI reply using the local parser and return (composed_response, debug_info).
+
+    This function is safe to call from non-Streamlit contexts when the
+    optional `show_local` parameter is provided (True/False). When
+    `show_local` is None the function will attempt to read
+    `st.session_state.get('show_local_decoding')` as before.
+    """
+    def _get_show_local(flag):
+        try:
+            if flag is not None:
+                return bool(flag)
+        except Exception:
+            pass
+        try:
+            return os.environ.get('FP_SHOW_LOCAL_DECODING') == '1' or st.session_state.get(
+                'show_local_decoding', False)
+        except Exception:
+            return False
+
     try:
         from emotional_os.glyphs.signal_parser import parse_input
     except Exception:
@@ -321,11 +339,12 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         # `FP_SHOW_LOCAL_DECODING=1` or set the session flag
         # `st.session_state['show_local_decoding'] = True` to reveal this
         # additional diagnostic information for developers.
-        try:
-            show_local = os.environ.get('FP_SHOW_LOCAL_DECODING') == '1' or st.session_state.get(
-                'show_local_decoding', False)
-        except Exception:
-            show_local = False
+        # Determine whether to show local decoding annotations. Prefer the
+        # environment variable flag; otherwise consult Streamlit session
+        # state when available. Callers may override this by setting the
+        # `show_local` variable in a wrapper prior to invoking
+        # `decode_ai_reply`.
+        show_local = _get_show_local(None)
 
         if show_local:
             # Keep debug annotations compact and bracketed so they don't
@@ -352,7 +371,7 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         return ai_reply, {}
 
 
-def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_url: str, supabase_key: str) -> tuple:
+def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_url: str, supabase_key: str, session_state_override: dict = None) -> tuple:
     """Run the full hybrid pipeline: local parse -> AI -> local decode.
 
     Returns (response_text, debug_info_dict, local_analysis_dict)
@@ -364,9 +383,29 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     except Exception:
         local_analysis = {}
 
+    # Local analysis and helper values
     glyphs = local_analysis.get('glyphs', [])
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
+
+    # Session-safe accessor: prefer provided override (a dict-like or
+    # object with .get), otherwise fall back to Streamlit's session_state
+    # when available. This allows FastAPI callers to provide a minimal
+    # session dict rather than relying on Streamlit runtime.
+    def _session_get(key, default=None):
+        try:
+            if session_state_override is not None:
+                # support dict-like overrides
+                try:
+                    return session_state_override.get(key, default)
+                except Exception:
+                    return getattr(session_state_override, key, default)
+            return st.session_state.get(key, default)
+        except Exception:
+            try:
+                return getattr(st.session_state, key, default)
+            except Exception:
+                return default
 
     # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
     if os.environ.get('LOCAL_DEV_MODE') == '1':
@@ -440,8 +479,11 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
 
     payload = {
         "message": effective_input,
-        "mode": st.session_state.get('processing_mode', 'local'),
-        "user_id": st.session_state.user_id,
+        # Use session override when available, otherwise fall back to
+        # the Streamlit session default. This ensures API callers can
+        # pass processing preferences explicitly.
+        "mode": _session_get('processing_mode', os.getenv('DEFAULT_PROCESSING_MODE', 'local')),
+        "user_id": _session_get('user_id', None),
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
