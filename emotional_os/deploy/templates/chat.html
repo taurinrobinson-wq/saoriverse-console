@@ -437,13 +437,17 @@
         </div>
     </div>
 
-    <script>
-        // Configuration for static deployments:
-        // - The EDGE_FUNCTION_URL should point to your Supabase Edge Function that proxy to AI (or to /api/chat for local dev).
-        // - The VALIDATE_SESSION_URL should point to a small session validation endpoint for local dev (static sites will usually use Supabase auth instead).
-        // These can be provided by embedding a meta tag <meta name="edge-function-url" content="https://..."> in the hosting platform
-        // or by setting a global `window.__FP_CONFIG = { EDGE_FUNCTION_URL: 'https://...' }` before this script runs.
-        const EDGE_FUNCTION_URL = (function () {
+    <!-- Use React (UMD) with in-browser JSX transform for a lightweight SPA without a build step -->
+    <div id="fp-root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    {% raw %}
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const EDGE_FUNCTION_URL = (() => {
             try {
                 const m = document.querySelector('meta[name="edge-function-url"]');
                 if (m && m.content) return m.content;
@@ -454,7 +458,7 @@
             }
         })();
 
-        const VALIDATE_SESSION_URL = (function () {
+        const VALIDATE_SESSION_URL = (() => {
             try {
                 const m = document.querySelector('meta[name="validate-session-url"]');
                 if (m && m.content) return m.content;
@@ -464,270 +468,202 @@
                 return '/api/validate-session';
             }
         })();
-        // Global variables
-        let conversationHistory = [];
-        let currentUserId = null;
-        let currentUsername = null;
 
-        // Initialize app
-        window.addEventListener('load', async () => {
-            // Allow quick local testing by reading token/user info from URL
-            // query params (e.g. ?token=...&user_id=...&username=...). If
-            // present, populate localStorage so the static template can be
-            // tested without a separate login flow.
-            (function populateLocalStorageFromQuery() {
-                try {
-                    const params = new URLSearchParams(window.location.search);
-                    const t = params.get('token');
-                    const uid = params.get('user_id');
-                    const uname = params.get('username');
-                    if (t) localStorage.setItem('firstperson_token', t);
-                    if (uid) localStorage.setItem('firstperson_user_id', uid);
-                    if (uname) localStorage.setItem('firstperson_username', uname);
-                } catch (e) {
-                    // ignore quietly
+        function Header({ username, onLogout }) {
+            return (
+                <header className="header">
+                    <div className="header-left">
+                        <img src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson" className="header-logo" onError={(e) => e.target.style.display = 'none'} />
+                        <div>
+                            <h1 className="header-title">FirstPerson - Personal AI Companion</h1>
+                            <div className="header-subtitle">Your private space for emotional processing and growth</div>
+                        </div>
+                    </div>
+                    <div className="header-right">
+                        <div className="user-info">Welcome back, <span id="username">{username}</span>! 👋</div>
+                        <button className="header-btn" onClick={onLogout}>🚪 Logout</button>
+                    </div>
+                </header>
+            );
+        }
+
+        function Message({ item }) {
+            if (item.type === 'user') {
+                return (
+                    <div className="message user">
+                        <div className="message-content">{item.content}</div>
+                        <div className="message-avatar">👤</div>
+                    </div>
+                );
+            }
+            return (
+                <div className="message assistant">
+                    <div className="message-avatar"><img src="/static/graphics/FirstPerson-Logo.svg" alt="FP" style={{ width: 24, height: 24 }} onError={(e) => e.target.style.display = 'none'} /></div>
+                    <div className="message-content">
+                        {item.content}
+                        {(item.glyph || item.processing_time) && (
+                            <div className="message-meta">{item.glyph ? `✨ Emotional resonance: ${item.glyph} • ` : ''}{item.processing_time ? `Processed in ${item.processing_time.toFixed(2)}s • ` : ''}Mode: {item.mode || 'unknown'}</div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        function ChatApp() {
+            const [messages, setMessages] = useState([]);
+            const [input, setInput] = useState('');
+            const [mode, setMode] = useState('local');
+            const [username, setUsername] = useState('User');
+            const [userId, setUserId] = useState(null);
+            const [sending, setSending] = useState(false);
+            const listRef = useRef(null);
+
+            useEffect(() => {
+                // populate from URL query if present
+                const params = new URLSearchParams(window.location.search);
+                const t = params.get('token');
+                const uid = params.get('user_id');
+                const uname = params.get('username');
+                if (t) localStorage.setItem('firstperson_token', t);
+                if (uid) localStorage.setItem('firstperson_user_id', uid);
+                if (uname) localStorage.setItem('firstperson_username', uname);
+
+                const token = localStorage.getItem('firstperson_token');
+                const uidStored = localStorage.getItem('firstperson_user_id');
+                const unameStored = localStorage.getItem('firstperson_username');
+                if (!token || !uidStored || !unameStored) {
+                    window.location.href = '/';
+                    return;
                 }
-            })();
 
-            // Check authentication
-            const token = localStorage.getItem('firstperson_token');
-            const userId = localStorage.getItem('firstperson_user_id');
-            const username = localStorage.getItem('firstperson_username');
+                // validate session
+                fetch(`${VALIDATE_SESSION_URL}?token=${encodeURIComponent(token)}`).then(r => {
+                    if (!r.ok) {
+                        localStorage.clear();
+                        window.location.href = '/';
+                    }
+                }).catch(() => { localStorage.clear(); window.location.href = '/'; });
 
-            if (!token || !userId || !username) {
-                window.location.href = '/';
-                return;
+                setUsername(unameStored);
+                setUserId(uidStored);
+
+                const saved = localStorage.getItem(`fp_history_${uidStored}`);
+                if (saved) setMessages(JSON.parse(saved));
+            }, []);
+
+            useEffect(() => {
+                // scroll to bottom
+                if (listRef.current) {
+                    listRef.current.scrollTop = listRef.current.scrollHeight;
+                }
+            }, [messages]);
+
+            function saveHistory(newMessages) {
+                if (userId) localStorage.setItem(`fp_history_${userId}`, JSON.stringify(newMessages));
             }
 
-            // Validate session
-            try {
-                const response = await fetch(`${VALIDATE_SESSION_URL}?token=${encodeURIComponent(token)}`);
-                if (!response.ok) {
-                    throw new Error('Invalid session');
+            async function send() {
+                if (!input.trim()) return;
+                const userMsg = { type: 'user', content: input, timestamp: new Date().toISOString() };
+                const next = [...messages, userMsg];
+                setMessages(next);
+                setInput('');
+                setSending(true);
+                try {
+                    const res = await fetch(EDGE_FUNCTION_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: input, mode, user_id: userId })
+                    });
+                    const data = await res.json();
+                    const reply = { type: 'assistant', content: data.reply || "I hear you — tell me more when you're ready.", timestamp: new Date().toISOString(), glyph: data.glyph?.tag_name || data.glyph || null, processing_time: data.processing_time || 0, mode };
+                    const merged = [...next, reply];
+                    setMessages(merged);
+                    saveHistory(merged);
+                } catch (e) {
+                    const err = { type: 'assistant', content: "I'm having trouble connecting right now, but your feelings are still valid.", timestamp: new Date().toISOString(), error: true };
+                    const merged = [...next, err];
+                    setMessages(merged);
+                    saveHistory(merged);
+                } finally {
+                    setSending(false);
                 }
-            } catch (error) {
+            }
+
+            function clearHistory() {
+                if (!confirm('Are you sure you want to clear your conversation history?')) return;
+                setMessages([]);
+                if (userId) localStorage.removeItem(`fp_history_${userId}`);
+            }
+
+            function logout() {
                 localStorage.clear();
                 window.location.href = '/';
-                return;
             }
 
-            currentUserId = userId;
-            currentUsername = username;
-            document.getElementById('username').textContent = username;
+            return (
+                <div className="app-container">
+                    <Header username={username} onLogout={logout} />
+                    <div className="main-content">
+                        <div className="chat-container">
+                            <div className="controls">
+                                <label>Processing Mode:</label>
+                                <select className="mode-select" value={mode} onChange={e => setMode(e.target.value)}>
+                                    <option value="hybrid">Hybrid: Best performance</option>
+                                    <option value="local">Local: Maximum privacy</option>
+                                    <option value="ai_preferred">AI: Most sophisticated responses</option>
+                                </select>
+                                <button className="clear-btn" onClick={clearHistory}>Clear History</button>
+                            </div>
 
-            // Load conversation history from localStorage
-            const savedHistory = localStorage.getItem(`fp_history_${userId}`);
-            if (savedHistory) {
-                conversationHistory = JSON.parse(savedHistory);
-                renderMessages();
-                updateStats();
-            }
-        });
+                            <div className="chat-messages" id="chat-messages" ref={listRef}>
+                                {messages.length === 0 && (
+                                    <div className="message assistant welcome">
+                                        <div className="message-avatar"><img src="/static/graphics/FirstPerson-Logo.svg" alt="FP" style={{ width: 24, height: 24 }} onError={(e) => e.target.style.display = 'none'} /></div>
+                                        <div className="message-content">Welcome to FirstPerson! I'm here to listen and help you process your emotions. Share what you're feeling, and I'll provide thoughtful, personalized responses while creating emotional glyphs to track your journey.</div>
+                                    </div>
+                                )}
+                                {messages.map((m, i) => <Message key={i} item={m} />)}
+                            </div>
 
-        // Handle key press in chat input
-        function handleKeyPress(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                sendMessage();
-            }
+                            <div className="typing-indicator" id="typing-indicator">{sending ? 'FirstPerson is processing your emotional input...' : ''}</div>
+
+                            <div className="chat-input-container">
+                                <textarea className="chat-input" value={input} onChange={e => setInput(e.target.value)} placeholder="Share what you're feeling..." rows={1} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }} />
+                                <button className="send-btn" onClick={send} disabled={sending}>➤</button>
+                            </div>
+                        </div>
+
+                        <div className="sidebar">
+                            <div className="sidebar-section">
+                                <div className="sidebar-title">Your Emotional Journey</div>
+                                <div className="metric">
+                                    <div className="metric-value" id="conversation-count">{messages.filter(m => m.type === 'user').length}</div>
+                                    <div className="metric-label">Conversations</div>
+                                </div>
+                                <div className="metric">
+                                    <div className="metric-value" id="last-session">{messages.length ? new Date(messages[messages.length - 1].timestamp).toLocaleDateString() : '-'}</div>
+                                    <div className="metric-label">Last Session</div>
+                                </div>
+                            </div>
+
+                            <div className="sidebar-section">
+                                <div className="sidebar-title">Privacy Settings</div>
+                                <div className="privacy-info">
+                                    <div>🔒 Your data is completely isolated</div>
+                                    <div>Learning happens only from your conversations</div>
+                                    <div>⚡ Optimized for 2-3 second responses</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
         }
 
-        // Send message function
-        async function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-
-            if (!message) return;
-
-            // Clear input and disable send button
-            input.value = '';
-            document.getElementById('send-btn').disabled = true;
-            document.getElementById('typing-indicator').classList.add('active');
-
-            // Add user message to conversation
-            conversationHistory.push({
-                type: 'user',
-                content: message,
-                timestamp: new Date().toISOString()
-            });
-
-            renderMessages();
-
-            try {
-                // Send to API
-                const mode = document.getElementById('processing-mode').value;
-                const response = await fetch(EDGE_FUNCTION_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        mode: mode,
-                        user_id: currentUserId
-                    })
-                });
-
-                const data = await response.json();
-
-                // Add assistant response
-                conversationHistory.push({
-                    type: 'assistant',
-                    content: data.reply || "I hear you — tell me more when you're ready.",
-                    timestamp: new Date().toISOString(),
-                    glyph: data.glyph?.tag_name || null,
-                    processing_time: data.processing_time || 0,
-                    mode: mode
-                });
-
-            } catch (error) {
-                conversationHistory.push({
-                    type: 'assistant',
-                    content: "I'm having trouble connecting right now, but your feelings are still valid and important.",
-                    timestamp: new Date().toISOString(),
-                    error: true
-                });
-            }
-
-            // Re-enable send button and hide typing indicator
-            document.getElementById('send-btn').disabled = false;
-            document.getElementById('typing-indicator').classList.remove('active');
-
-            // Save conversation and update UI
-            saveConversation();
-            renderMessages();
-            updateStats();
-        }
-
-        // Render messages in chat
-        function renderMessages() {
-            const messagesContainer = document.getElementById('chat-messages');
-            if (!messagesContainer) {
-                console.warn('Chat messages container not found');
-                return;
-            }
-
-            // Delay DOM operations slightly to allow for theme switch completion
-            setTimeout(() => {
-                try {
-                    const existingMessages = messagesContainer.querySelectorAll('.message:not(.welcome)');
-
-                    // Remove existing conversation messages (keep welcome message)
-                    existingMessages.forEach(msg => msg.remove());
-
-                    conversationHistory.forEach(exchange => {
-                        const messageDiv = document.createElement('div');
-                        messageDiv.className = `message ${exchange.type}`;
-
-                        const avatar = document.createElement('div');
-                        avatar.className = 'message-avatar';
-                        if (exchange.type === 'user') {
-                            avatar.textContent = '👤';
-                        } else {
-                            try {
-                                // Create image element with defensive error handling
-                                const img = document.createElement('img');
-                                if (img instanceof HTMLImageElement) {
-                                    img.src = '/static/graphics/FirstPerson-Logo-normalized.svg';
-                                    img.alt = 'FP';
-                                    img.style.width = '20px';
-                                    img.style.height = '20px';
-                                    img.onerror = function () {
-                                        try {
-                                            this.style.display = 'none';
-                                            avatar.textContent = 'FP';
-                                        } catch (e) {
-                                            console.warn('Avatar onerror handler failed:', e);
-                                        }
-                                    };
-                                    avatar.appendChild(img);
-                                } else {
-                                    // Fallback if img creation fails
-                                    avatar.textContent = 'FP';
-                                }
-                            } catch (e) {
-                                console.warn('Avatar creation failed:', e);
-                                avatar.textContent = 'FP';
-                            }
-                        }
-
-                        const content = document.createElement('div');
-                        content.className = 'message-content';
-                        content.textContent = exchange.content;
-
-                        if (exchange.type === 'assistant' && (exchange.glyph || exchange.processing_time)) {
-                            const meta = document.createElement('div');
-                            meta.className = 'message-meta';
-                            let metaText = '';
-
-                            if (exchange.glyph) {
-                                metaText += `✨ Emotional resonance: ${exchange.glyph} • `;
-                            }
-                            if (exchange.processing_time) {
-                                metaText += `Processed in ${exchange.processing_time.toFixed(2)}s • `;
-                            }
-                            metaText += `Mode: ${exchange.mode || 'unknown'}`;
-
-                            meta.textContent = metaText;
-                            content.appendChild(meta);
-                        }
-
-                        if (exchange.type === 'user') {
-                            messageDiv.appendChild(content);
-                            messageDiv.appendChild(avatar);
-                        } else {
-                            messageDiv.appendChild(avatar);
-                            messageDiv.appendChild(content);
-                        }
-
-                        messagesContainer.appendChild(messageDiv);
-                    });
-
-                    // Scroll to bottom
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    // close try block
-                } catch (e) {
-                    console.warn('Error rendering messages:', e);
-                }
-            }, 10);
-        }
-
-        // Save conversation to localStorage
-        function saveConversation() {
-            try {
-                localStorage.setItem(`fp_history_${currentUserId}`, JSON.stringify(conversationHistory));
-            } catch (e) {
-                console.warn('Failed to save conversation to localStorage:', e);
-            }
-        }
-
-        // Update stats in sidebar
-        function updateStats() {
-            document.getElementById('conversation-count').textContent = conversationHistory.filter(msg => msg.type === 'user').length;
-
-            if (conversationHistory.length > 0) {
-                const lastMessage = conversationHistory[conversationHistory.length - 1];
-                const date = new Date(lastMessage.timestamp).toLocaleDateString();
-                document.getElementById('last-session').textContent = date;
-            }
-        }
-
-        // Clear conversation history
-        function clearHistory() {
-            if (confirm('Are you sure you want to clear your conversation history?')) {
-                conversationHistory = [];
-                saveConversation();
-                renderMessages();
-                updateStats();
-            }
-        }
-
-        // Logout function
-        function logout() {
-            localStorage.clear();
-            window.location.href = '/';
-        }
+        ReactDOM.createRoot(document.getElementById('fp-root')).render(<ChatApp />);
     </script>
+    {% endraw %}
 </body>
 
 </html>

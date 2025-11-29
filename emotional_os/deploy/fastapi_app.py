@@ -19,6 +19,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+from typing import Optional
 
 # Load environment variables from .env file
 load_dotenv()
@@ -101,6 +102,10 @@ class RegisterRequest(BaseModel):
     username: str
     password: str
     confirm_password: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    login_id: Optional[str] = None
 
 
 class ChatRequest(BaseModel):
@@ -186,29 +191,47 @@ class FirstPersonAuth:
             return {"success": False, "message": f"Login error: {str(e)}"}
 
     @staticmethod
-    async def create_user(username: str, password: str) -> dict:
-        """Create new user account"""
+    async def create_user(username: str, password: str, first_name: Optional[str] = None,
+                          last_name: Optional[str] = None, email: Optional[str] = None,
+                          login_id: Optional[str] = None) -> dict:
+        """Create new user account (forwards extra metadata when provided)"""
         try:
             auth_url = SUPABASE_AUTH_URL or f"{SUPABASE_URL}/functions/v1/auth-manager"
+            payload = {
+                "action": "create_user",
+                "username": username,
+                "password": password,
+                "created_at": datetime.now().isoformat()
+            }
+            # include optional fields if provided
+            if first_name:
+                payload["first_name"] = first_name
+            if last_name:
+                payload["last_name"] = last_name
+            if email:
+                payload["email"] = email
+            if login_id:
+                payload["login_id"] = login_id
+
             response = requests.post(
                 auth_url,
                 headers={
                     "Authorization": f"Bearer {SUPABASE_KEY}",
                     "Content-Type": "application/json"
                 },
-                json={
-                    "action": "create_user",
-                    "username": username,
-                    "password": password,
-                    "created_at": datetime.now().isoformat()
-                },
+                json=payload,
                 timeout=10
             )
 
             if response.status_code == 200:
                 data = response.json()
                 return {"success": data.get("success"), "message": data.get("error", "Account created")}
-            return {"success": False, "message": "Failed to create account"}
+            # return the response text for better diagnostics
+            try:
+                msg = response.json()
+            except Exception:
+                msg = response.text
+            return {"success": False, "message": f"Failed to create account: {msg}"}
 
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
@@ -269,7 +292,11 @@ async def register(register_data: RegisterRequest):
 
     result = await FirstPersonAuth.create_user(
         register_data.username,
-        register_data.password
+        register_data.password,
+        first_name=register_data.first_name,
+        last_name=register_data.last_name,
+        email=register_data.email,
+        login_id=register_data.login_id
     )
 
     if result["success"]:
