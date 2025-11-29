@@ -181,97 +181,70 @@ def run_hybrid_pipeline_mobile(effective_input: str,
 
         return response_text, {}, local_analysis
     except Exception:
-        return "I'm listening (pipeline error)", {}, {}
-        # Attempt to ensure `st.session_state` contains basic fields
-        # before importing the canonical UI module. Some code paths in
-        # `ui.py` access `st.session_state` during import, so we prefer
-        # to make a best-effort patch early.
+        # When the mobile adapter fails unexpectedly, prefer delegating to
+        # the canonical pipeline while passing an explicit
+        # `session_state_override` so the canonical code does not rely on
+        # a Streamlit session in this process.
         try:
-            import streamlit as st
-            if not hasattr(st, 'session_state'):
-                st.session_state = type('SS', (), {})()
-            if user_id is not None:
+            from emotional_os.deploy.modules.ui import run_hybrid_pipeline
+
+            session_override = {
+                'user_id': user_id,
+                'processing_mode': processing_mode
+            }
+            return run_hybrid_pipeline(
+                effective_input,
+                conversation_context,
+                saori_url,
+                supabase_key,
+                session_state_override=session_override,
+            )
+        except Exception:
+            # If delegation to the canonical pipeline fails, do a
+            # conservative local-only fallback so the caller still
+            # receives a useful reply rather than an exception.
+            try:
                 try:
-                    st.session_state.user_id = user_id
+                    from emotional_os.glyphs.signal_parser import parse_input
                 except Exception:
+                    parse_input = None
+
+                local_analysis = {}
+                if parse_input:
                     try:
-                        st.session_state['user_id'] = user_id
+                        local_analysis = parse_input(
+                            effective_input,
+                            "emotional_os/parser/signal_lexicon.json",
+                            db_path="emotional_os/glyphs/glyphs.db",
+                            conversation_context=conversation_context,
+                        )
                     except Exception:
-                        pass
-            try:
-                st.session_state.processing_mode = processing_mode
-            except Exception:
+                        local_analysis = {}
+
+                glyphs = local_analysis.get('glyphs', [])
+                voltage_response = local_analysis.get('voltage_response', '')
+                ritual_prompt = local_analysis.get('ritual_prompt', '')
+
                 try:
-                    st.session_state['processing_mode'] = processing_mode
+                    from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+                    composer = DynamicResponseComposer()
+                    if glyphs:
+                        response_text = composer.compose_multi_glyph_response(
+                            effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+                    else:
+                        response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
                 except Exception:
-                    pass
-        except Exception:
-            # Streamlit not installed or not mutable in this context.
-            pass
-
-        # Now import the canonical pipeline and invoke it with an explicit
-        # session override to remain robust against Streamlit internals.
-        from emotional_os.deploy.modules.ui import run_hybrid_pipeline
-        session_override = {
-            'user_id': user_id,
-            'processing_mode': processing_mode
-        }
-        return run_hybrid_pipeline(
-            effective_input,
-            conversation_context,
-            saori_url,
-            supabase_key,
-            session_state_override=session_override,
-        )
-    except Exception:
-        # If the main pipeline import fails (e.g., missing optional
-        # dependencies), attempt a conservative local-only path so the
-        # caller still receives meaningful feedback.
-        # Local-only fallback when the canonical pipeline cannot be imported
-        try:
-            try:
-                from emotional_os.glyphs.signal_parser import parse_input
-            except Exception:
-                parse_input = None
-
-            local_analysis = {}
-            if parse_input:
-                try:
-                    local_analysis = parse_input(
-                        effective_input,
-                        "emotional_os/parser/signal_lexicon.json",
-                        db_path="emotional_os/glyphs/glyphs.db",
-                        conversation_context=conversation_context,
+                    response_text = (
+                        f"Local Analysis: {voltage_response}\n"
+                        f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
+                        f"{ritual_prompt}\n(AI enhancement unavailable)"
                     )
+
+                return response_text, {}, local_analysis
+            except Exception:
+                try:
+                    return "I'm listening (local analysis unavailable).", {}, {}
                 except Exception:
-                    local_analysis = {}
-
-            glyphs = local_analysis.get('glyphs', [])
-            voltage_response = local_analysis.get('voltage_response', '')
-            ritual_prompt = local_analysis.get('ritual_prompt', '')
-
-            try:
-                from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
-                composer = DynamicResponseComposer()
-                if glyphs:
-                    response_text = composer.compose_multi_glyph_response(
-                        effective_input, glyphs, conversation_context=conversation_context, top_n=5)
-                else:
-                    response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
-            except Exception:
-                response_text = (
-                    f"Local Analysis: {voltage_response}\n"
-                    f"Activated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n"
-                    f"{ritual_prompt}\n(AI enhancement unavailable)"
-                )
-
-            return response_text, {}, local_analysis
-        except Exception:
-            # If the local-only fallback itself fails, return a minimal
-            # safe response so callers do not receive an exception.
-            try:
-                return "I'm listening (local analysis unavailable).", {}, {}
-            except Exception:
-                return "", {}, {}
+                    return "", {}, {}
 
     # End run_hybrid_pipeline_mobile
