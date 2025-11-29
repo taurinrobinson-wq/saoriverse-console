@@ -388,24 +388,26 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     voltage_response = local_analysis.get('voltage_response', '')
     ritual_prompt = local_analysis.get('ritual_prompt', '')
 
-    # Session-safe accessor: prefer provided override (a dict-like or
-    # object with .get), otherwise fall back to Streamlit's session_state
-    # when available. This allows FastAPI callers to provide a minimal
-    # session dict rather than relying on Streamlit runtime.
-    def _session_get(key, default=None):
-        try:
-            if session_state_override is not None:
-                # support dict-like overrides
-                try:
-                    return session_state_override.get(key, default)
-                except Exception:
-                    return getattr(session_state_override, key, default)
-            return st.session_state.get(key, default)
-        except Exception:
+    # Use a shared session helper so callers (FastAPI) can pass a simple
+    # `session_state_override` while Streamlit continues to use its
+    # `st.session_state`. Import locally to avoid import-time Streamlit
+    # dependency in service processes.
+    try:
+        from emotional_os.deploy.modules.session_utils import get_session_value
+    except Exception:
+        def get_session_value(session_override, key, default=None):
             try:
-                return getattr(st.session_state, key, default)
+                if session_override is not None:
+                    try:
+                        return session_override.get(key, default)
+                    except Exception:
+                        return getattr(session_override, key, default)
+                return st.session_state.get(key, default)
             except Exception:
-                return default
+                try:
+                    return getattr(st.session_state, key, default)
+                except Exception:
+                    return default
 
     # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
     if os.environ.get('LOCAL_DEV_MODE') == '1':
@@ -482,8 +484,8 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # Use session override when available, otherwise fall back to
         # the Streamlit session default. This ensures API callers can
         # pass processing preferences explicitly.
-        "mode": _session_get('processing_mode', os.getenv('DEFAULT_PROCESSING_MODE', 'local')),
-        "user_id": _session_get('user_id', None),
+        "mode": get_session_value(session_state_override, 'processing_mode', os.getenv('DEFAULT_PROCESSING_MODE', 'local')),
+        "user_id": get_session_value(session_state_override, 'user_id', None),
         "local_voltage_response": voltage_response,
         "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
         "local_ritual_prompt": ritual_prompt
