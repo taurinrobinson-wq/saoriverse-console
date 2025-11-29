@@ -9,6 +9,42 @@ except Exception:
 
 import streamlit as st
 
+try:
+    from emotional_os.deploy.modules.session_utils import get_session_value
+except Exception:
+    def get_session_value(session_override, key, default=None):
+        try:
+            return st.session_state.get(key, default)
+        except Exception:
+            try:
+                return getattr(st.session_state, key, default)
+            except Exception:
+                return default
+
+
+def _safe_set_session(key, value):
+    """Set a session value if possible; swallow errors when not running under Streamlit."""
+    try:
+        try:
+            st.session_state[key] = value
+            return
+        except Exception:
+            pass
+        try:
+            setattr(st.session_state, key, value)
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+
+def _safe_del_query_param(key):
+    try:
+        if key in st.query_params:
+            del st.query_params[key]
+    except Exception:
+        pass
+
 
 class SaoynxAuthentication:
     """Authentication and session management"""
@@ -371,18 +407,30 @@ class SaoynxAuthentication:
             return {"valid": False, "error": f"Token validation error: {str(e)}"}
 
     def init_session_state(self):
-        if 'authenticated' not in st.session_state:
-            st.session_state.authenticated = False
-        if 'user_id' not in st.session_state:
-            st.session_state.user_id = None
-        if 'username' not in st.session_state:
-            st.session_state.username = None
-        if 'session_expires' not in st.session_state:
-            st.session_state.session_expires = None
-        if not st.session_state.authenticated:
+        try:
+            if 'authenticated' not in st.session_state:
+                _safe_set_session('authenticated', False)
+            if 'user_id' not in st.session_state:
+                _safe_set_session('user_id', None)
+            if 'username' not in st.session_state:
+                _safe_set_session('username', None)
+            if 'session_expires' not in st.session_state:
+                _safe_set_session('session_expires', None)
+        except Exception:
+            # If session_state isn't usable in this context, continue defensively
+            pass
+
+        try:
+            authenticated_now = get_session_value(None, 'authenticated', False)
+        except Exception:
+            authenticated_now = False
+        if not authenticated_now:
             # Streamlit exposes query params as lists (e.g. {'session_token': ['...']}).
             # Be defensive: accept either a raw string or a single-element list.
-            query_params = st.query_params or {}
+            try:
+                query_params = st.query_params or {}
+            except Exception:
+                query_params = {}
             raw_token = query_params.get("session_token")
             session_token = None
             if isinstance(raw_token, (list, tuple)):
@@ -395,10 +443,10 @@ class SaoynxAuthentication:
                     str(session_token))
                 if session_result["valid"]:
                     data = session_result["data"]
-                    st.session_state.authenticated = True
-                    st.session_state.user_id = data["user_id"]
-                    st.session_state.username = data["username"]
-                    st.session_state.session_expires = data["expires"]
+                    _safe_set_session('authenticated', True)
+                    _safe_set_session('user_id', data.get("user_id"))
+                    _safe_set_session('username', data.get("username"))
+                    _safe_set_session('session_expires', data.get("expires"))
                     # If we don't already have the user's first/last name in
                     # the session (tokens only carry username+user_id), try
                     # to fetch the profile from Supabase so UI can show the
@@ -429,18 +477,18 @@ class SaoynxAuthentication:
                                     if isinstance(rows, list) and rows:
                                         profile = rows[0]
                                         if profile.get('first_name'):
-                                            st.session_state['first_name'] = profile.get(
-                                                'first_name')
+                                            _safe_set_session(
+                                                'first_name', profile.get('first_name'))
                                         if profile.get('last_name'):
-                                            st.session_state['last_name'] = profile.get(
-                                                'last_name')
+                                            _safe_set_session(
+                                                'last_name', profile.get('last_name'))
                                         if profile.get('email'):
-                                            st.session_state['email'] = profile.get(
-                                                'email')
+                                            _safe_set_session(
+                                                'email', profile.get('email'))
                                         # ensure username is consistent
                                         if profile.get('username'):
-                                            st.session_state['username'] = profile.get(
-                                                'username')
+                                            _safe_set_session(
+                                                'username', profile.get('username'))
                                 except Exception:
                                     pass
                     except Exception:
@@ -455,13 +503,16 @@ class SaoynxAuthentication:
             # Demo mode - accept any credentials
             if username and password:
                 user_id = str(uuid.uuid4())
-                st.session_state.authenticated = True
-                st.session_state.user_id = user_id
-                st.session_state.username = username
-                st.session_state.session_expires = (
-                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-                session_token = self.create_session_token(username, user_id)
-                st.query_params["session_token"] = session_token
+                _safe_set_session('authenticated', True)
+                _safe_set_session('user_id', user_id)
+                _safe_set_session('username', username)
+                _safe_set_session('session_expires', (
+                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat())
+                try:
+                    st.query_params["session_token"] = self.create_session_token(
+                        username, user_id)
+                except Exception:
+                    pass
                 return {"success": True, "message": "Demo login successful"}
             return {"success": False, "message": "Please enter username and password"}
 
@@ -484,22 +535,27 @@ class SaoynxAuthentication:
             if response.status_code == 200:
                 data = response.json()
                 if data.get("authenticated"):
-                    st.session_state.authenticated = True
-                    st.session_state.user_id = data.get("user_id")
-                    st.session_state.username = username
-                    st.session_state.first_name = data.get("first_name")
-                    st.session_state.last_name = data.get("last_name")
-                    st.session_state.email = data.get("email")
-                    # Store the JWT token for authenticated API calls
-                    if data.get("token") or data.get("access_token"):
-                        st.session_state.user_jwt_token = data.get(
-                            "token") or data.get("access_token")
-                    st.session_state.session_expires = (
-                        datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-                    session_token = self.create_session_token(
-                        username, data.get("user_id"))
-                    st.query_params["session_token"] = session_token
-                    return {"success": True, "message": "Login successful"}
+                    _safe_set_session('authenticated', True)
+                    _safe_set_session('user_id', data.get("user_id"))
+                    _safe_set_session('username', username)
+                    _safe_set_session('first_name', data.get("first_name"))
+                     _safe_set_session('last_name', data.get("last_name"))
+                      _safe_set_session('email', data.get("email"))
+                       # Store the JWT token for authenticated API calls
+                       try:
+                            if data.get("token") or data.get("access_token"):
+                                _safe_set_session('user_jwt_token', data.get(
+                                    "token") or data.get("access_token"))
+                        except Exception:
+                            pass
+                        _safe_set_session('session_expires', (
+                            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat())
+                        try:
+                            st.query_params["session_token"] = self.create_session_token(
+                                username, data.get("user_id"))
+                        except Exception:
+                            pass
+                        return {"success": True, "message": "Login successful"}
                 error_msg = data.get("error", "Invalid username or password")
                 return {"success": False, "message": f"Login failed: {error_msg}"}
             return {"success": False, "message": f"Authentication service error (HTTP {response.status_code})"}
@@ -511,19 +567,22 @@ class SaoynxAuthentication:
         if not self.supabase_configured:
             if username and password:
                 user_id = str(uuid.uuid4())
-                st.session_state.authenticated = True
-                st.session_state.user_id = user_id
-                st.session_state.username = username
+                _safe_set_session('authenticated', True)
+                _safe_set_session('user_id', user_id)
+                _safe_set_session('username', username)
                 if first_name:
-                    st.session_state['first_name'] = first_name
+                    _safe_set_session('first_name', first_name)
                 if last_name:
-                    st.session_state['last_name'] = last_name
+                    _safe_set_session('last_name', last_name)
                 if email:
-                    st.session_state['email'] = email
-                st.session_state.session_expires = (
-                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-                session_token = self.create_session_token(username, user_id)
-                st.query_params["session_token"] = session_token
+                    _safe_set_session('email', email)
+                _safe_set_session('session_expires', (
+                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat())
+                try:
+                    st.query_params["session_token"] = self.create_session_token(
+                        username, user_id)
+                except Exception:
+                    pass
                 return {"success": True, "message": "Demo account created and signed in"}
             return {"success": False, "message": "Please enter username and password"}
 
@@ -555,26 +614,31 @@ class SaoynxAuthentication:
                     # If the remote returned a user id/profile, auto-authenticate
                     user_id = data.get('user_id') or data.get('id')
                     if user_id:
-                        st.session_state.authenticated = True
-                        st.session_state.user_id = user_id
-                        st.session_state.username = username
+                        _safe_set_session('authenticated', True)
+                        _safe_set_session('user_id', user_id)
+                        _safe_set_session('username', username)
                         # Store the JWT token for authenticated API calls
-                        if data.get("token") or data.get("access_token"):
-                            st.session_state.user_jwt_token = data.get(
-                                "token") or data.get("access_token")
+                        try:
+                            if data.get("token") or data.get("access_token"):
+                                _safe_set_session('user_jwt_token', data.get(
+                                    "token") or data.get("access_token"))
+                        except Exception:
+                            pass
                         if data.get('first_name'):
-                            st.session_state['first_name'] = data.get(
-                                'first_name')
+                            _safe_set_session(
+                                'first_name', data.get('first_name'))
                         if data.get('last_name'):
-                            st.session_state['last_name'] = data.get(
-                                'last_name')
+                            _safe_set_session(
+                                'last_name', data.get('last_name'))
                         if data.get('email'):
-                            st.session_state['email'] = data.get('email')
-                        st.session_state.session_expires = (
-                            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-                        session_token = self.create_session_token(
-                            username, user_id)
-                        st.query_params["session_token"] = session_token
+                            _safe_set_session('email', data.get('email'))
+                        _safe_set_session('session_expires', (
+                            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat())
+                        try:
+                            st.query_params["session_token"] = self.create_session_token(
+                                username, user_id)
+                        except Exception:
+                            pass
                         return {"success": True, "message": "Account created and signed in"}
                     return {"success": True, "message": "Account created successfully"}
                 return {"success": False, "message": data.get("error", "Failed to create account")}
@@ -586,24 +650,32 @@ class SaoynxAuthentication:
 
     def quick_login_bypass(self):
         user_id = str(uuid.uuid4())
-        st.session_state.authenticated = True
-        st.session_state.user_id = user_id
-        st.session_state.username = "demo_user"
-        st.session_state.session_expires = (
-            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-        session_token = self.create_session_token("demo_user", user_id)
-        st.query_params["session_token"] = session_token
+        _safe_set_session('authenticated', True)
+        _safe_set_session('user_id', user_id)
+        _safe_set_session('username', "demo_user")
+        _safe_set_session('session_expires', (
+            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat())
+        try:
+            st.query_params["session_token"] = self.create_session_token(
+                "demo_user", user_id)
+        except Exception:
+            pass
         # Indicate a lightweight post-login transition so the UI shows a confirmation
-        st.session_state['post_login_message'] = "Signed in as demo_user"
-        st.session_state['post_login_transition'] = True
-        st.rerun()
+        _safe_set_session('post_login_message', "Signed in as demo_user")
+        _safe_set_session('post_login_transition', True)
+        try:
+            st.rerun()
+        except Exception:
+            pass
 
     def logout(self):
-        st.session_state.authenticated = False
-        st.session_state.user_id = None
-        st.session_state.username = None
-        st.session_state.user_jwt_token = None  # Clear JWT token
-        st.session_state.session_expires = None
-        if "session_token" in st.query_params:
-            del st.query_params["session_token"]
-        st.rerun()
+        _safe_set_session('authenticated', False)
+        _safe_set_session('user_id', None)
+        _safe_set_session('username', None)
+        _safe_set_session('user_jwt_token', None)  # Clear JWT token
+        _safe_set_session('session_expires', None)
+        _safe_del_query_param('session_token')
+        try:
+            st.rerun()
+        except Exception:
+            pass
