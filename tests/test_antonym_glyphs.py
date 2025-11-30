@@ -197,16 +197,16 @@ class AntonymGlyphsTestSuite:
         emotions = list_antonym_emotions()
         pairings = list_antonym_pairings()
 
-        self.test("All emotions accessible", len(emotions) > 0, f"Emotion count: {len(emotions)}")
+        self.test("All emotions accessible", len(emotions) > 0, "Emotion count: {}".format(len(emotions)))
 
-        self.test("All pairings accessible", len(pairings) > 0, f"Pairing count: {len(pairings)}")
+        self.test("All pairings accessible", len(pairings) > 0, "Pairing count: {}".format(len(pairings)))
 
         # Sample some emotions to ensure they're findable
         sample_emotions = emotions[:5] if emotions else []
         for emotion in sample_emotions:
             antonym = find_antonym_by_emotion(emotion)
             if not antonym:
-                self.test(f"Find emotion '{emotion}'", False, f"Listed but not findable")
+                self.test("Find emotion '{}'".format(emotion), False, "Listed but not findable")
                 break
         else:
             if sample_emotions:
@@ -217,11 +217,11 @@ class AntonymGlyphsTestSuite:
         for pairing in sample_pairings:
             antonym = find_antonym_by_voltage_pair(pairing)
             if not antonym:
-                self.test(f"Find pairing '{pairing}'", False, f"Listed but not findable")
+                self.test("Find pairing '{}'".format(pairing), False, "Listed but not findable")
                 break
         else:
             if sample_pairings:
-                self.test("Sample pairings are findable", True, f"Checked {len(sample_pairings)} sample pairings")
+                self.test("Sample pairings are findable", True, "Checked {} sample pairings".format(len(sample_pairings)))
 
     def print_summary(self):
         """Print test summary."""

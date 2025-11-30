@@ -74,7 +74,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     # Attach a comfort gesture to the acknowledgement prefix when available
     try:
         if prefix:
-            enabled = os.environ.get("COMFORT_GESTURES_ENABLED", "true").lower()
+            enabled = os.environ.get(
+                "COMFORT_GESTURES_ENABLED", "true").lower()
             if enabled not in ("0", "false", "no"):
                 emotion_key = ctx.get("emotion") or "calm"
                 prefix = add_comfort_gesture(emotion_key, prefix)
@@ -91,7 +92,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     phase = detect_phase(user_input, {"symbolic_tags": tags})
 
     # Determine if this is a first-turn (no prior user/system context provided)
-    is_first_turn = not (ctx.get("last_user_input") or ctx.get("last_system_response"))
+    is_first_turn = not (ctx.get("last_user_input")
+                         or ctx.get("last_system_response"))
     try:
         if is_first_turn:
             # Use the response selector for first-turn empathy/inquiry only
@@ -104,7 +106,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
                 tone_ctx = {
                     "intensity": ctx.get("intensity", "gentle"),
                     "preview": (
-                        (local_analysis or {}).get("voltage_response") if isinstance(local_analysis, dict) else None
+                        (local_analysis or {}).get("voltage_response") if isinstance(
+                            local_analysis, dict) else None
                     ),
                 }
                 if (ctx.get("inferred_intent") == "emotional_checkin") or (tone_ctx.get("intensity") == "high"):
@@ -125,7 +128,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
                     if isinstance(local_analysis.get("voltage_response"), str):
                         anchor = local_analysis.get("voltage_response")
                     elif isinstance(local_analysis.get("best_glyph"), dict):
-                        anchor = local_analysis.get("best_glyph", {}).get("glyph_name")
+                        anchor = local_analysis.get(
+                            "best_glyph", {}).get("glyph_name")
                     if anchor:
                         # Append a short anchor phrase so tests and users can see it
                         first_resp = f"{first_resp} {anchor}" if first_resp else anchor
@@ -143,12 +147,14 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
             glyph_names = []
             try:
                 if local_analysis and isinstance(local_analysis.get("glyphs"), list):
-                    glyph_names = [g.get("glyph_name") for g in local_analysis.get("glyphs", []) if isinstance(g, dict)]
+                    glyph_names = [g.get("glyph_name") for g in local_analysis.get(
+                        "glyphs", []) if isinstance(g, dict)]
             except Exception:
                 glyph_names = []
 
             try:
-                capsule.symbolic_tags = ["initiatory_signal"] + tags + glyph_names
+                capsule.symbolic_tags = [
+                    "initiatory_signal"] + tags + glyph_names
                 store_capsule(capsule)
             except Exception:
                 pass
@@ -221,7 +227,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
                 from emotional_os.adapter.clarification_store import get_default_store
 
                 store = get_default_store()
-                store.update_corrected_intent(int(ctx.get("clarification_rowid")), ctx.get("confirmed_intent"))
+                store.update_corrected_intent(
+                    int(ctx.get("clarification_rowid")), ctx.get("confirmed_intent"))
                 ctx["inferred_intent"] = ctx.get("confirmed_intent")
                 if ctx.get("confirmed_intent") == "emotional_checkin":
                     phase = "initiatory"
@@ -301,17 +308,29 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
 
     # Optionally add comfort gestures to certain response types (celebration/encouragement)
     try:
+        # provide a minimal `system_output` for downstream helpers in case it is
+        # referenced earlier in the flow (used below by comfort-gesture logic)
+        system_output = {
+            "emotion": ctx.get("emotion", "connection"),
+            "intensity": ctx.get("intensity", "gentle"),
+            "context": ctx.get("context", "conversation"),
+            "resonance": ctx.get("resonance", "presence"),
+        }
         enabled = os.environ.get("COMFORT_GESTURES_ENABLED", "true").lower()
         if enabled not in ("0", "false", "no"):
             # Decide whether to append or prepend based on emotion
-            emotion_key = (ctx.get("emotion") or system_output.get("emotion") or "").lower()
-            append_emotions = {"joy", "celebration", "encouragement", "motivation"}
+            emotion_key = (ctx.get("emotion") or system_output.get(
+                "emotion") or "").lower()
+            append_emotions = {"joy", "celebration",
+                               "encouragement", "motivation"}
             if emotion_key:
                 if emotion_key in append_emotions:
-                    raw_response = add_comfort_gesture(emotion_key, raw_response, position="append")
+                    raw_response = add_comfort_gesture(
+                        emotion_key, raw_response, position="append")
                 else:
                     # default: prepend for soothing/acknowledgement tones
-                    raw_response = add_comfort_gesture(emotion_key, raw_response, position="prepend")
+                    raw_response = add_comfort_gesture(
+                        emotion_key, raw_response, position="prepend")
     except Exception:
         pass
 
@@ -328,13 +347,15 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
         if local_analysis:
             # Prefer explicit overlay info if present
             if isinstance(local_analysis.get("glyph_overlays_info"), list):
-                system_output["glyph_overlays_info"] = local_analysis.get("glyph_overlays_info")
+                system_output["glyph_overlays_info"] = local_analysis.get(
+                    "glyph_overlays_info")
             # Or fall back to a generic `glyphs` list of dicts (map to tag/conf)
             elif isinstance(local_analysis.get("glyphs"), list):
                 mapped = []
                 for g in local_analysis.get("glyphs", []):
                     try:
-                        tag = g.get("glyph_name") or g.get("tag") or g.get("name")
+                        tag = g.get("glyph_name") or g.get(
+                            "tag") or g.get("name")
                         conf = float(g.get("confidence", 0.5))
                         if tag:
                             mapped.append({"tag": tag, "confidence": conf})
@@ -353,7 +374,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     glyph_names = []
     try:
         if local_analysis and isinstance(local_analysis.get("glyphs"), list):
-            glyph_names = [g.get("glyph_name") for g in local_analysis.get("glyphs", []) if isinstance(g, dict)]
+            glyph_names = [g.get("glyph_name") for g in local_analysis.get(
+                "glyphs", []) if isinstance(g, dict)]
     except Exception:
         glyph_names = []
 
@@ -380,7 +402,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
 
     # Remove formulaic 'it feels like presence' from adapted_response when present
     if adapted_response:
-        adapted_response = re.sub(r"(?i)\bit feels like presence\.?\b", "", adapted_response).strip()
+        adapted_response = re.sub(
+            r"(?i)\bit feels like presence\.?\b", "", adapted_response).strip()
 
     final = ""
     if adapted_response and raw_response:
@@ -392,7 +415,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
             adapt_tokens = set(adapt_norm.split()) if adapt_norm else set()
             overlap = 0.0
             if raw_tokens and adapt_tokens:
-                overlap = len(raw_tokens & adapt_tokens) / float(min(len(raw_tokens), len(adapt_tokens)))
+                overlap = len(raw_tokens & adapt_tokens) / \
+                    float(min(len(raw_tokens), len(adapt_tokens)))
             if overlap > 0.6:
                 final = adapted_response
             else:
@@ -421,7 +445,8 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
         s = re.sub(r"\s*([.!?])\s*", r"\1 ", s).strip()
         # split into sentence-like fragments, drop empties
         parts = re.split(r"(?<=[.!?])\s+", s)
-        parts = [p.strip() for p in parts if p and not re.match(r"^[.!?]+$", p.strip())]
+        parts = [p.strip()
+                 for p in parts if p and not re.match(r"^[.!?]+$", p.strip())]
         cleaned = []
         for p in parts:
             if not re.search(r"[.!?]$", p):
@@ -455,5 +480,6 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
 if __name__ == "__main__":
     # Quick demo when executed as a script
     example = "I just met someone who really sees me."
-    resp = process_user_input(example, {"emotion": "longing", "intensity": "high"})
+    resp = process_user_input(
+        example, {"emotion": "longing", "intensity": "high"})
     print(resp)

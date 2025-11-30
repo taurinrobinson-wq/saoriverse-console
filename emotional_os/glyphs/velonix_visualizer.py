@@ -68,7 +68,8 @@ class VelonixVisualizer:
         Returns:
             SVG string
         """
-        color = element.color_hex or self.COLOR_MAP.get(element.symbol, ("#999999", "Gray"))[0]
+        color = element.color_hex or self.COLOR_MAP.get(
+            element.symbol, ("#999999", "Gray"))[0]
         intensity = element.intensity
 
         # Create a circle with glow effect
@@ -147,37 +148,42 @@ class VelonixVisualizer:
         input_spacing = height / (len(inputs) + 1)
         for i, element in enumerate(inputs):
             y = input_spacing * (i + 1)
-            svg_parts.append(self.generate_svg_element(element, x=100, y=y, size=80))
+            svg_parts.append(self.generate_svg_element(
+                element, x=100, y=y, size=80))
 
         # Draw catalyst in the middle (if present)
         if catalyst:
-            svg_parts.append(self.generate_svg_element(catalyst, x=width // 2, y=height // 2, size=70))
+            svg_parts.append(self.generate_svg_element(
+                catalyst, x=width // 2, y=height // 2, size=70))
             # Arrow from inputs to catalyst
             svg_parts.append(
-                f'<path d="M 150 {height // 2 - 40} Q 350 {height // 2} 450 {height // 2}" '
-                f'stroke="#999" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>'
+                '<path d="M 150 {y1} Q 350 {y2} 450 {y3}" '.format(
+                    y1=height // 2 - 40, y2=height // 2, y3=height // 2)
+                + 'stroke="#999" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>'
             )
 
         # Draw arrow from inputs to result (or from catalyst)
         arrow_start_x = 450 if catalyst else 200
         svg_parts.append(
             "<defs>"
-            f'  <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">'
-            f'    <polygon points="0 0, 10 3, 0 6" fill="#666"/>'
-            f"  </marker>"
-            f"</defs>"
+            "  <marker id=\"arrowhead\" markerWidth=\"10\" markerHeight=\"10\" refX=\"9\" refY=\"3\" orient=\"auto\">"
+            "    <polygon points=\"0 0, 10 3, 0 6\" fill=\"#666\"/>"
+            "  </marker>"
+            "</defs>"
         )
         svg_parts.append(
-            f'<path d="M {arrow_start_x} {height // 2} L {width - 150} {height // 2}" '
-            f'stroke="#666" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>'
+            '<path d="M {x1} {y} L {x2} {y}" '.format(
+                x1=arrow_start_x, x2=width - 150, y=height // 2)
+            + 'stroke="#666" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>'
         )
 
         # Draw result on the right
-        svg_parts.append(self.generate_svg_element(result, x=width - 100, y=height // 2, size=80))
+        svg_parts.append(self.generate_svg_element(
+            result, x=width - 100, y=height // 2, size=80))
 
         # Add title
         svg_parts.append(
-            f'<text x="{width // 2}" y="30" text-anchor="middle" '
+            '<text x="{cx}" y="30" text-anchor="middle" '.format(cx=width // 2)
             f'font-size="24" font-weight="bold" fill="#333">'
             f"Emotional Reaction</text>"
         )
@@ -348,7 +354,8 @@ class RitualPromptSystem:
         """
         symbol = result_element.symbol
         prompts = RitualPromptSystem.RITUAL_TEMPLATES.get(
-            symbol, [f"Sit with {result_element.name}. What does it ask of you?"]
+            symbol, [
+                f"Sit with {result_element.name}. What does it ask of you?"]
         )
 
         import random
