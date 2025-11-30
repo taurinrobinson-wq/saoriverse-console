@@ -99,31 +99,29 @@ def summarize(path: str, top_n: int = 10, samples: int = 3) -> Dict:
             mean = med = stdev = 0.0
 
         co = cooccurrence.get(tag, collections.Counter()).most_common(10)
-        sample_lines = random.sample(tag_samples.get(
-            tag, []), min(samples, len(tag_samples.get(tag, []))))
+        sample_lines = random.sample(tag_samples.get(tag, []), min(samples, len(tag_samples.get(tag, []))))
 
-        summary["top_tags"].append({
-            "tag": tag,
-            "count": cnt,
-            "mean_confidence": round(mean, 4),
-            "median_confidence": round(med, 4),
-            "stdev_confidence": round(stdev, 4),
-            "top_cooccurring_overlays": co,
-            "sample_lines": sample_lines,
-        })
+        summary["top_tags"].append(
+            {
+                "tag": tag,
+                "count": cnt,
+                "mean_confidence": round(mean, 4),
+                "median_confidence": round(med, 4),
+                "stdev_confidence": round(stdev, 4),
+                "top_cooccurring_overlays": co,
+                "sample_lines": sample_lines,
+            }
+        )
 
     return summary
 
 
 def main() -> None:
     p = argparse.ArgumentParser(description="Summarize logs/unsafe_tags.log")
-    p.add_argument("--path", default="logs/unsafe_tags.log",
-                   help="Path to unsafe tags log")
+    p.add_argument("--path", default="logs/unsafe_tags.log", help="Path to unsafe tags log")
     p.add_argument("--top", type=int, default=10, help="Top N tags to show")
-    p.add_argument("--samples", type=int, default=3,
-                   help="Sample lines per tag")
-    p.add_argument("--json", action="store_true",
-                   help="Print machine-readable JSON")
+    p.add_argument("--samples", type=int, default=3, help="Sample lines per tag")
+    p.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = p.parse_args()
 
     try:
@@ -141,14 +139,15 @@ def main() -> None:
     print()
     print("Top tags:")
     for item in out["top_tags"]:
-        print(f"- {item['tag']}  (count={item['count']}, mean_conf={item['mean_confidence']}, median={item['median_confidence']}, stdev={item['stdev_confidence']})")
-        if item['top_cooccurring_overlays']:
-            co = ", ".join(
-                [f"{t}:{c}" for t, c in item['top_cooccurring_overlays']])
+        print(
+            f"- {item['tag']}  (count={item['count']}, mean_conf={item['mean_confidence']}, median={item['median_confidence']}, stdev={item['stdev_confidence']})"
+        )
+        if item["top_cooccurring_overlays"]:
+            co = ", ".join([f"{t}:{c}" for t, c in item["top_cooccurring_overlays"]])
             print(f"    co-occurs with: {co}")
-        if item['sample_lines']:
+        if item["sample_lines"]:
             print("    samples:")
-            for s in item['sample_lines']:
+            for s in item["sample_lines"]:
                 print(f"      {s}")
         print()
 

@@ -13,8 +13,7 @@ def test_post_creates_feedback_file(tmp_path, monkeypatch):
     monkeypatch.setattr(store, "FEEDBACK_PATH", str(test_file))
 
     client = TestClient(api.app)
-    payload = {"message": "Testing feedback",
-               "rating": 5, "metadata": {"test": True}}
+    payload = {"message": "Testing feedback", "rating": 5, "metadata": {"test": True}}
     resp = client.post("/ingest", json=payload)
     assert resp.status_code == 200
 

@@ -11,13 +11,16 @@ from typing import Dict, List, Optional
 
 # Centralized paths
 from emotional_os.core.paths import (
-    get_path_manager, signal_lexicon_path, learned_lexicon_path, glyph_db_path
+    get_path_manager,
+    glyph_db_path,
+    learned_lexicon_path,
+    signal_lexicon_path,
 )
+from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
 
 # Phase 2 learning + Sanctuary Mode imports
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import create_training_response
-from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
 from emotional_os.safety import (
     SANCTUARY_MODE,
     ensure_sanctuary_response,
@@ -28,6 +31,7 @@ from emotional_os.safety import (
 # Try to import NRC lexicon for better emotion detection
 try:
     from parser.nrc_lexicon_loader import nrc
+
     HAS_NRC = True
 except ImportError:
     HAS_NRC = False
@@ -36,6 +40,7 @@ except ImportError:
 # Try to import enhanced emotion processor for syntactic analysis
 try:
     from parser.enhanced_emotion_processor import extract_syntactic_elements
+
     HAS_ENHANCED_PROCESSOR = True
 except ImportError:
     HAS_ENHANCED_PROCESSOR = False
@@ -97,13 +102,13 @@ def fuzzy_contains(input_str: str, patterns: list, threshold: float = 0.6) -> bo
 def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/learned_lexicon.json") -> Dict[str, Dict]:
     base_lexicon = {}
     if os.path.exists(base_path):
-        with open(base_path, 'r', encoding='utf-8') as f:
+        with open(base_path, "r", encoding="utf-8") as f:
             base_lexicon = json.load(f)
 
     learned_lexicon = {}
     if os.path.exists(learned_path):
         try:
-            with open(learned_path, 'r', encoding='utf-8') as f:
+            with open(learned_path, "r", encoding="utf-8") as f:
                 learned_lexicon = json.load(f)
         except Exception:
             pass
@@ -111,19 +116,11 @@ def load_signal_map(base_path: str, learned_path: str = "emotional_os/glyphs/lea
     # Ensure all entries are dictionaries
     for key, value in base_lexicon.items():
         if isinstance(value, str):
-            base_lexicon[key] = {
-                "signal": value,
-                "voltage": "medium",
-                "tone": "unknown"
-            }
+            base_lexicon[key] = {"signal": value, "voltage": "medium", "tone": "unknown"}
 
     for key, value in learned_lexicon.items():
         if isinstance(value, str):
-            learned_lexicon[key] = {
-                "signal": value,
-                "voltage": "medium",
-                "tone": "unknown"
-            }
+            learned_lexicon[key] = {"signal": value, "voltage": "medium", "tone": "unknown"}
 
     combined_lexicon = base_lexicon.copy()
     combined_lexicon.update(learned_lexicon)
@@ -173,27 +170,25 @@ def fuzzy_match(word: str, lexicon_keys: List[str], threshold: float = 0.6) -> O
 
     return best_match
 
+
 # Extract signals using fuzzy matching
 
 
 def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
     lowered = input_text.lower()
     matched_signals = []
-    lexicon_keys = [k for k in signal_map.keys(
-    ) if not k.startswith("_comment_")]
+    lexicon_keys = [k for k in signal_map.keys() if not k.startswith("_comment_")]
 
     # FIRST: Try enhanced NLP analysis if available
     try:
         from parser.enhanced_emotion_processor import enhance_gate_routing
-        enhanced_routing = enhance_gate_routing(
-            [], input_text)  # Start with empty existing signals
-        if enhanced_routing['enhanced_signals']:
-            matched_signals.extend(enhanced_routing['enhanced_signals'])
-            logger.info(
-                f"Enhanced NLP detected {len(enhanced_routing['enhanced_signals'])} signals")
+
+        enhanced_routing = enhance_gate_routing([], input_text)  # Start with empty existing signals
+        if enhanced_routing["enhanced_signals"]:
+            matched_signals.extend(enhanced_routing["enhanced_signals"])
+            logger.info(f"Enhanced NLP detected {len(enhanced_routing['enhanced_signals'])} signals")
     except ImportError:
-        logger.debug(
-            "Enhanced emotion processor not available, using traditional parsing")
+        logger.debug("Enhanced emotion processor not available, using traditional parsing")
 
     # First pass: exact word boundary matching in signal_lexicon
     for keyword, metadata in signal_map.items():
@@ -212,12 +207,14 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
         if re.search(rf"\b{re.escape(keyword)}\b", lowered) or keyword in lowered:
             if not isinstance(metadata, dict):
                 metadata = {}
-            matched_signals.append({
-                "keyword": keyword,
-                "signal": metadata.get("signal", "unknown"),
-                "voltage": metadata.get("voltage", "medium"),
-                "tone": metadata.get("tone", "unknown")
-            })
+            matched_signals.append(
+                {
+                    "keyword": keyword,
+                    "signal": metadata.get("signal", "unknown"),
+                    "voltage": metadata.get("voltage", "medium"),
+                    "tone": metadata.get("tone", "unknown"),
+                }
+            )
 
     # Second pass: Use NRC lexicon if available for richer emotion detection
     if HAS_NRC and nrc and nrc.loaded:
@@ -225,36 +222,31 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
         if nrc_emotions and not matched_signals:
             # Map NRC emotions to signal voltages
             nrc_to_signal = {
-                'trust': ('β', 'medium', 'containment'),  # Boundary/trust
-                'fear': ('θ', 'high', 'grief'),            # Fear/grief
+                "trust": ("β", "medium", "containment"),  # Boundary/trust
+                "fear": ("θ", "high", "grief"),  # Fear/grief
                 # General negative = grief
-                'negative': ('θ', 'high', 'grief'),
-                'sadness': ('θ', 'medium', 'grief'),       # Sadness/grief
+                "negative": ("θ", "high", "grief"),
+                "sadness": ("θ", "medium", "grief"),  # Sadness/grief
                 # Rejection/boundary
-                'disgust': ('β', 'high', 'containment'),
-                'anger': ('γ', 'high', 'longing'),         # Anger/longing
+                "disgust": ("β", "high", "containment"),
+                "anger": ("γ", "high", "longing"),  # Anger/longing
                 # Surprise/insight
-                'surprise': ('ε', 'medium', 'insight'),
-                'positive': ('λ', 'high', 'joy'),          # Positive/joy
+                "surprise": ("ε", "medium", "insight"),
+                "positive": ("λ", "high", "joy"),  # Positive/joy
                 # Anticipation/insight
-                'anticipation': ('ε', 'medium', 'insight'),
-                'joy': ('λ', 'high', 'joy'),               # Joy
+                "anticipation": ("ε", "medium", "insight"),
+                "joy": ("λ", "high", "joy"),  # Joy
             }
 
             # Find strongest emotion from NRC
             top_emotion = max(nrc_emotions.items(), key=lambda x: x[1])[0]
             if top_emotion in nrc_to_signal:
                 signal, voltage, tone = nrc_to_signal[top_emotion]
-                matched_signals.append({
-                    "keyword": top_emotion,
-                    "signal": signal,
-                    "voltage": voltage,
-                    "tone": tone
-                })
+                matched_signals.append({"keyword": top_emotion, "signal": signal, "voltage": voltage, "tone": tone})
 
     # Third pass: fuzzy matching for unmatched single words
     if not matched_signals:
-        words = re.findall(r'\b\w+\b', lowered)
+        words = re.findall(r"\b\w+\b", lowered)
         for word in words:
             if len(word) > 3:  # Only match words longer than 3 chars
                 fuzzy_key = fuzzy_match(word, lexicon_keys, threshold=0.65)
@@ -262,15 +254,18 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                     metadata = signal_map.get(fuzzy_key, {})
                     if not isinstance(metadata, dict):
                         metadata = {}
-                    matched_signals.append({
-                        "keyword": fuzzy_key,
-                        "signal": metadata.get("signal", "unknown"),
-                        "voltage": metadata.get("voltage", "medium"),
-                        "tone": metadata.get("tone", "unknown")
-                    })
+                    matched_signals.append(
+                        {
+                            "keyword": fuzzy_key,
+                            "signal": metadata.get("signal", "unknown"),
+                            "voltage": metadata.get("voltage", "medium"),
+                            "tone": metadata.get("tone", "unknown"),
+                        }
+                    )
                     break  # Use first good fuzzy match
 
     return matched_signals
+
 
 # Map signals to ECM gates
 
@@ -282,7 +277,7 @@ def evaluate_gates(signals: List[Dict]) -> List[str]:
         "Gate 5": ["λ", "ε", "δ"],
         "Gate 6": ["α", "Ω", "ε"],
         "Gate 9": ["α", "β", "γ", "δ", "ε", "Ω", "θ"],
-        "Gate 10": ["θ"]
+        "Gate 10": ["θ"],
     }
 
     activated = []
@@ -291,17 +286,18 @@ def evaluate_gates(signals: List[Dict]) -> List[str]:
             activated.append(gate)
     return activated
 
+
 # Retrieve glyphs from SQLite
 
 
-def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
+def fetch_glyphs(gates: List[str], db_path: str = "glyphs.db") -> List[Dict]:
     if not gates:
         return []
 
     gates = [str(g) for g in gates]
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    placeholders = ','.join('?' for _ in gates)
+    placeholders = ",".join("?" for _ in gates)
 
     # Detect schema and ensure optional columns exist (display_name, response_template)
     try:
@@ -312,19 +308,16 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
 
     # If optional columns are missing, add them to the table (non-destructive)
     try:
-        if 'display_name' not in cols:
-            cursor.execute(
-                "ALTER TABLE glyph_lexicon ADD COLUMN display_name TEXT")
-        if 'response_template' not in cols:
-            cursor.execute(
-                "ALTER TABLE glyph_lexicon ADD COLUMN response_template TEXT")
+        if "display_name" not in cols:
+            cursor.execute("ALTER TABLE glyph_lexicon ADD COLUMN display_name TEXT")
+        if "response_template" not in cols:
+            cursor.execute("ALTER TABLE glyph_lexicon ADD COLUMN response_template TEXT")
         conn.commit()
     except Exception:
         # Some SQLite flavors in read-only environments may raise here; ignore
         pass
 
-    select_cols = ['glyph_name', 'description',
-                   'gate', 'display_name', 'response_template']
+    select_cols = ["glyph_name", "description", "gate", "display_name", "response_template"]
     query = f"SELECT {', '.join(select_cols)} FROM glyph_lexicon WHERE gate IN ({placeholders})"
     try:
         print(f"[fetch_glyphs] Gates: {gates}")
@@ -335,8 +328,7 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
         # Print a concise summary instead.
         row_count = len(rows)
         sample_names = [r[0] for r in rows[:6]]
-        print(
-            f"[fetch_glyphs] Retrieved {row_count} rows. Sample glyphs: {sample_names}")
+        print(f"[fetch_glyphs] Retrieved {row_count} rows. Sample glyphs: {sample_names}")
     except sqlite3.OperationalError as e:
         # Mark DB as unavailable to allow fallbacks elsewhere.
         global _glyph_db_available
@@ -347,30 +339,45 @@ def fetch_glyphs(gates: List[str], db_path: str = 'glyphs.db') -> List[Dict]:
 
     # For debug: attach SQL and rows to result if called from parse_input
     import inspect
+
     stack = inspect.stack()
     # Attach debug info to a global for UI debug drawer if called from parse_input
-    if any('parse_input' in s.function for s in stack):
+    if any("parse_input" in s.function for s in stack):
         # Attach a sanitized debug payload: include SQL and a short preview of each row
         global _last_glyphs_debug
         debug_rows = []
         for r in rows:
             name = r[0]
-            desc = r[1] or ''
+            desc = r[1] or ""
             gate = r[2] if len(r) > 2 else None
             display_name = r[3] if len(r) > 3 else None
             response_template = r[4] if len(r) > 4 else None
             # Truncate long descriptions to a preview (200 chars) to avoid dumping raw documents
-            preview = desc if len(desc) <= 200 else desc[:200].rsplit(
-                '\n', 1)[0] + '...'
-            debug_rows.append({
-                "glyph_name": name,
-                "display_name": display_name,
-                "response_template": (response_template[:200] + '...') if response_template and len(response_template) > 200 else response_template,
-                "description_preview": preview,
-                "gate": gate
-            })
+            preview = desc if len(desc) <= 200 else desc[:200].rsplit("\n", 1)[0] + "..."
+            debug_rows.append(
+                {
+                    "glyph_name": name,
+                    "display_name": display_name,
+                    "response_template": (
+                        (response_template[:200] + "...")
+                        if response_template and len(response_template) > 200
+                        else response_template
+                    ),
+                    "description_preview": preview,
+                    "gate": gate,
+                }
+            )
         _last_glyphs_debug = {"sql": query, "rows": debug_rows}
-    return [{"glyph_name": r[0], "description": r[1], "gate": r[2], "display_name": (r[3] if len(r) > 3 else None), "response_template": (r[4] if len(r) > 4 else None)} for r in rows]
+    return [
+        {
+            "glyph_name": r[0],
+            "description": r[1],
+            "gate": r[2],
+            "display_name": (r[3] if len(r) > 3 else None),
+            "response_template": (r[4] if len(r) > 4 else None),
+        }
+        for r in rows
+    ]
 
 
 def _looks_like_artifact(g: Dict) -> bool:
@@ -381,14 +388,33 @@ def _looks_like_artifact(g: Dict) -> bool:
     """
     if not g:
         return False
-    name = (g.get('glyph_name') or '').lower()
-    desc = (g.get('description') or '').lower()
+    name = (g.get("glyph_name") or "").lower()
+    desc = (g.get("description") or "").lower()
 
     # Quick obvious markers
     markers = [
-        'markdown export', 'json export', 'archive', 'gutenberg', 'conversation archive', 'archive entry',
-        'markdown', 'json', 'export', 'module —', 'module -', 'file:', 'http://', 'https://', 'www.', '<html',
-        '```', '***', 'title:', '📜', '📚', '🗂️'
+        "markdown export",
+        "json export",
+        "archive",
+        "gutenberg",
+        "conversation archive",
+        "archive entry",
+        "markdown",
+        "json",
+        "export",
+        "module —",
+        "module -",
+        "file:",
+        "http://",
+        "https://",
+        "www.",
+        "<html",
+        "```",
+        "***",
+        "title:",
+        "📜",
+        "📚",
+        "🗂️",
     ]
     for m in markers:
         if m in name or m in desc:
@@ -399,11 +425,11 @@ def _looks_like_artifact(g: Dict) -> bool:
         return True
 
     # Many line breaks indicates pasted content
-    if desc.count('\n') > 8:
+    if desc.count("\n") > 8:
         return True
 
     # Bracketed/tabled names are suspicious
-    if '[' in name or '\t' in name:
+    if "[" in name or "\t" in name:
         return True
 
     return False
@@ -419,30 +445,33 @@ def _normalize_display_name(glyph: Dict) -> str:
     """
     if not glyph:
         return ""
-    dn = (glyph.get('display_name') or '')
+    dn = glyph.get("display_name") or ""
     if dn and isinstance(dn, str) and dn.strip():
         return dn.strip()
-    original = (glyph.get('glyph_name') or '')
+    original = glyph.get("glyph_name") or ""
     # Try to extract first sentence-like fragment
-    if '.' in original:
-        frag = original.split('.', 1)[0].strip()
+    if "." in original:
+        frag = original.split(".", 1)[0].strip()
         if frag:
-            return frag if len(frag) <= 40 else frag[:40].rsplit(' ', 1)[0] + '...'
+            return frag if len(frag) <= 40 else frag[:40].rsplit(" ", 1)[0] + "..."
     # Also try newline or em-dash
-    for sep in ['\n', '—', '–', ':', ';']:
+    for sep in ["\n", "—", "–", ":", ";"]:
         if sep in original:
             frag = original.split(sep, 1)[0].strip()
             if frag:
-                return frag if len(frag) <= 40 else frag[:40].rsplit(' ', 1)[0] + '...'
+                return frag if len(frag) <= 40 else frag[:40].rsplit(" ", 1)[0] + "..."
     # Fallback: truncate
     if len(original) <= 40:
         return original
-    return original[:40].rsplit(' ', 1)[0] + '...'
+    return original[:40].rsplit(" ", 1)[0] + "..."
+
 
 # Select most relevant glyph and generate contextual response
 
 
-def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], input_text: str = "", conversation_context: Optional[Dict] = None) -> tuple:
+def select_best_glyph_and_response(
+    glyphs: List[Dict], signals: List[Dict], input_text: str = "", conversation_context: Optional[Dict] = None
+) -> tuple:
     """
     Returns a quadruple: (best_glyph, (response_text, feedback_data), response_source, glyphs_selected)
     - glyphs_selected: list of glyph dicts augmented with 'score' and 'display_name', sorted by score desc
@@ -459,7 +488,8 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
             # user's input to find related glyphs in the lexicon.
             try:
                 import sqlite3
-                tokens = re.findall(r"\w+", (input_text or '').lower())
+
+                tokens = re.findall(r"\w+", (input_text or "").lower())
                 candidate_tokens = [t for t in tokens if len(t) >= 5]
                 if candidate_tokens:
                     try:
@@ -468,8 +498,7 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                         db_path = "emotional_os/glyphs/glyphs.db"
                     conn = sqlite3.connect(db_path)
                     cursor = conn.cursor()
-                    conds = ' OR '.join(
-                        ["glyph_name LIKE ? OR description LIKE ?" for _ in candidate_tokens])
+                    conds = " OR ".join(["glyph_name LIKE ? OR description LIKE ?" for _ in candidate_tokens])
                     query = f"SELECT glyph_name, description, gate, display_name, response_template FROM glyph_lexicon WHERE {conds} LIMIT 8"
                     params = []
                     for t in candidate_tokens:
@@ -479,10 +508,16 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                     rows = cursor.fetchall()
                     conn.close()
                     if rows:
-                        glyphs = [{
-                            'glyph_name': r[0], 'description': r[1], 'gate': r[2],
-                            'display_name': (r[3] if len(r) > 3 else None), 'response_template': (r[4] if len(r) > 4 else None)
-                        } for r in rows]
+                        glyphs = [
+                            {
+                                "glyph_name": r[0],
+                                "description": r[1],
+                                "gate": r[2],
+                                "display_name": (r[3] if len(r) > 3 else None),
+                                "response_template": (r[4] if len(r) > 4 else None),
+                            }
+                            for r in rows
+                        ]
             except Exception:
                 # Ignore DB lookup errors and fall back to the generic message
                 pass
@@ -490,7 +525,11 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
             # If still no glyphs, return a gentle fallback message rather than None
             if not glyphs:
                 fallback_msg = "I can sense there's something significant you're processing. Your emotions are giving you important information about your inner landscape. What feels most true for you right now?"
-                return None, (fallback_msg, {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}), 'fallback_message'
+                return (
+                    None,
+                    (fallback_msg, {"is_correction": False, "contradiction_type": None, "feedback_reason": None}),
+                    "fallback_message",
+                )
 
     # If we still have no glyphs (for example, when signal extraction found
     # nothing), attempt a graceful keyword-based DB lookup using longer tokens
@@ -500,6 +539,7 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     if not glyphs and input_text:
         try:
             import sqlite3
+
             tokens = re.findall(r"\w+", input_text.lower())
             # Use only longer tokens to avoid matching stopwords
             candidate_tokens = [t for t in tokens if len(t) >= 5]
@@ -512,8 +552,7 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                 conn = sqlite3.connect(db_path)
                 cursor = conn.cursor()
                 # Build OR conditions for name/description LIKE queries
-                conds = ' OR '.join(
-                    ["glyph_name LIKE ? OR description LIKE ?" for _ in candidate_tokens])
+                conds = " OR ".join(["glyph_name LIKE ? OR description LIKE ?" for _ in candidate_tokens])
                 query = f"SELECT glyph_name, description, gate, display_name, response_template FROM glyph_lexicon WHERE {conds} LIMIT 8"
                 params = []
                 for t in candidate_tokens:
@@ -523,10 +562,16 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                 rows = cursor.fetchall()
                 conn.close()
                 if rows:
-                    glyphs = [{
-                        'glyph_name': r[0], 'description': r[1], 'gate': r[2],
-                        'display_name': (r[3] if len(r) > 3 else None), 'response_template': (r[4] if len(r) > 4 else None)
-                    } for r in rows]
+                    glyphs = [
+                        {
+                            "glyph_name": r[0],
+                            "description": r[1],
+                            "gate": r[2],
+                            "display_name": (r[3] if len(r) > 3 else None),
+                            "response_template": (r[4] if len(r) > 4 else None),
+                        }
+                        for r in rows
+                    ]
         except Exception:
             # If DB lookup fails for any reason, continue without raising
             pass
@@ -537,24 +582,25 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     # set of glyphs so downstream selection still returns a sensible result.
     if not glyphs:
         glyphs = [
-            {'glyph_name': 'Still Recognition',
-                'description': 'Being seen without reaction. A gaze that receives without grasping.', 'gate': 'Gate 5'},
-            {'glyph_name': 'Still Insight',
-                'description': 'Quiet revelation and noticing.', 'gate': 'Gate 5'},
-            {'glyph_name': 'Still Ache',
-                'description': 'Neutral ache that lingers under activity.', 'gate': 'Gate 5'},
+            {
+                "glyph_name": "Still Recognition",
+                "description": "Being seen without reaction. A gaze that receives without grasping.",
+                "gate": "Gate 5",
+            },
+            {"glyph_name": "Still Insight", "description": "Quiet revelation and noticing.", "gate": "Gate 5"},
+            {"glyph_name": "Still Ache", "description": "Neutral ache that lingers under activity.", "gate": "Gate 5"},
         ]
 
     def _glyph_is_valid(g: Dict) -> bool:
-        name = (g.get('glyph_name') or '')
-        desc = (g.get('description') or '')
+        name = g.get("glyph_name") or ""
+        desc = g.get("description") or ""
         # Exclude obviously deprecated or artifact rows
-        if 'deprecated' in name.lower() or 'deprecated' in desc.lower():
+        if "deprecated" in name.lower() or "deprecated" in desc.lower():
             return False
         # Exclude rows with bracketed index/tables or many newlines
-        if '[' in name or '\t' in name:
+        if "[" in name or "\t" in name:
             return False
-        if desc.count('\n') > 6:
+        if desc.count("\n") > 6:
             return False
         # Exclude overly long names (likely titles or combined rows)
         if len(name) > 60:
@@ -572,11 +618,11 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
         glyphs = filtered_glyphs
 
     # Get primary emotional signals
-    primary_signals = [s['signal'] for s in signals]  # noqa: F841  # intermediate extraction
-    signal_keywords = [s['keyword'] for s in signals]
+    primary_signals = [s["signal"] for s in signals]  # noqa: F841  # intermediate extraction
+    signal_keywords = [s["keyword"] for s in signals]
 
     # Extract syntactic elements for glyph matching boost
-    syntactic_elements = {'nouns': [], 'verbs': [], 'adjectives': []}
+    syntactic_elements = {"nouns": [], "verbs": [], "adjectives": []}
     if HAS_ENHANCED_PROCESSOR and extract_syntactic_elements and input_text:
         try:
             syntactic_elements = extract_syntactic_elements(input_text)
@@ -588,8 +634,8 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
     scored_glyphs = []
     for glyph in glyphs:
         score = 0
-        name = glyph['glyph_name'].lower()
-        description = glyph.get('description', '').lower()
+        name = glyph["glyph_name"].lower()
+        description = glyph.get("description", "").lower()
 
         # SIGNAL KEYWORD MATCH BOOST: If any extracted signal keyword appears in the
         # glyph name or description, give a substantial boost. This improves
@@ -602,81 +648,77 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
                 sk_l = str(sk)
             if sk_l and (sk_l in name or sk_l in description):
                 score += 6
-                logger.debug(
-                    f"Signal-keyword boost: '{sk}' in glyph '{glyph['glyph_name']}' (+6)")
+                logger.debug(f"Signal-keyword boost: '{sk}' in glyph '{glyph['glyph_name']}' (+6)")
 
         # GLYPH MATCHING BOOST: Prioritize glyphs with matching syntactic elements
-        if syntactic_elements['verbs']:
+        if syntactic_elements["verbs"]:
             # Boost for emotional verbs in glyph name or description
-            for verb in syntactic_elements['verbs']:
+            for verb in syntactic_elements["verbs"]:
                 if verb in name or verb in description:
                     score += 8  # Strong boost for matching emotional verbs
-                    logger.debug(
-                        f"Verb match boost: '{verb}' in glyph '{glyph['glyph_name']}' (+8)")
+                    logger.debug(f"Verb match boost: '{verb}' in glyph '{glyph['glyph_name']}' (+8)")
 
-        if syntactic_elements['nouns']:
+        if syntactic_elements["nouns"]:
             # Boost for emotional nouns in glyph name or description
-            for noun in syntactic_elements['nouns']:
+            for noun in syntactic_elements["nouns"]:
                 if noun in name or noun in description:
                     score += 6  # Moderate boost for matching emotional nouns
-                    logger.debug(
-                        f"Noun match boost: '{noun}' in glyph '{glyph['glyph_name']}' (+6)")
+                    logger.debug(f"Noun match boost: '{noun}' in glyph '{glyph['glyph_name']}' (+6)")
 
-        if syntactic_elements['adjectives']:
+        if syntactic_elements["adjectives"]:
             # Boost for emotional adjectives in glyph name or description
-            for adj in syntactic_elements['adjectives']:
+            for adj in syntactic_elements["adjectives"]:
                 if adj in name or adj in description:
                     score += 4  # Smaller boost for matching emotional adjectives
-                    logger.debug(
-                        f"Adjective match boost: '{adj}' in glyph '{glyph['glyph_name']}' (+4)")
+                    logger.debug(f"Adjective match boost: '{adj}' in glyph '{glyph['glyph_name']}' (+4)")
 
         # Score based on emotional match
-        if any(word in signal_keywords for word in ['overwhelmed', 'overwhelming', 'changes', 'shifting', 'uncertain']):
-            if 'spiral' in name and 'containment' in name:
+        if any(word in signal_keywords for word in ["overwhelmed", "overwhelming", "changes", "shifting", "uncertain"]):
+            if "spiral" in name and "containment" in name:
                 score += 15  # "Spiral Containment" perfect for overwhelm with change
-            elif 'containment' in name or 'boundary' in name:
+            elif "containment" in name or "boundary" in name:
                 score += 12
-            elif 'still' in name and 'ache' in name:
+            elif "still" in name and "ache" in name:
                 score += 10  # "Still Ache" for processing difficulty
-            elif 'clarity' in name or 'insight' in name:
+            elif "clarity" in name or "insight" in name:
                 score += 8
-        elif any(word in signal_keywords for word in ['anxious', 'anxiety', 'nervous', 'worry', 'stressed', 'racing']):
-            if 'still' in name and 'insight' in name:
+        elif any(word in signal_keywords for word in ["anxious", "anxiety", "nervous", "worry", "stressed", "racing"]):
+            if "still" in name and "insight" in name:
                 score += 15  # "Still Insight" perfect for anxiety
-            elif 'clarity' in name or 'insight' in name:
+            elif "clarity" in name or "insight" in name:
                 score += 12
-            elif 'still' in name and 'grief' not in name:
+            elif "still" in name and "grief" not in name:
                 score += 10
-            elif 'containment' in name or 'boundary' in name:
+            elif "containment" in name or "boundary" in name:
                 score += 8
-        elif any(word in signal_keywords for word in ['sad', 'grief', 'mourning', 'loss', 'sad']):
-            if 'grief' in name or 'mourning' in name:
+        elif any(word in signal_keywords for word in ["sad", "grief", "mourning", "loss", "sad"]):
+            if "grief" in name or "mourning" in name:
                 score += 10
-        elif any(word in signal_keywords for word in ['angry', 'frustrated', 'rage', 'anger']):
-            if 'ache' in name or 'longing' in name:
+        elif any(word in signal_keywords for word in ["angry", "frustrated", "rage", "anger"]):
+            if "ache" in name or "longing" in name:
                 score += 10
-        elif any(word in signal_keywords for word in ['happy', 'joy', 'excited', 'delight']):
-            if 'joy' in name or 'bliss' in name:
+        elif any(word in signal_keywords for word in ["happy", "joy", "excited", "delight"]):
+            if "joy" in name or "bliss" in name:
                 score += 10
-        elif any(word in signal_keywords for word in ['ashamed', 'shame', 'embarrassed', 'humiliated']):
-            if 'boundary' in name or 'containment' in name:
+        elif any(word in signal_keywords for word in ["ashamed", "shame", "embarrassed", "humiliated"]):
+            if "boundary" in name or "containment" in name:
                 score += 10
-            elif 'still' in name:
+            elif "still" in name:
                 score += 8
-        elif any(word in signal_keywords for word in ['disappointed', 'failed', 'failure']):
-            if 'ache' in name or 'longing' in name:
+        elif any(word in signal_keywords for word in ["disappointed", "failed", "failure"]):
+            if "ache" in name or "longing" in name:
                 score += 10
-            elif 'recognition' in name or 'witness' in name:
+            elif "recognition" in name or "witness" in name:
                 score += 8
-        elif any(word in signal_keywords for word in ['broken', 'trap', 'trapped', 'stuck']):
-            if 'containment' in name or 'boundary' in name or 'still' in name:
+        elif any(word in signal_keywords for word in ["broken", "trap", "trapped", "stuck"]):
+            if "containment" in name or "boundary" in name or "still" in name:
                 score += 10
 
         # Prefer simpler, more accessible glyphs
         # Removed small unconditional boost for 'still' to avoid over-weighting
         # short names like 'Still Recognition' when evidence is weak.
         # (No-op boost retained here for future tuning.)
-        if any(word in name for word in ['quiet', 'gentle', 'soft']):
+        if any(word in name for word in ["quiet", "gentle", "soft"]):
             score += 1
 
         scored_glyphs.append((glyph, score))
@@ -695,8 +737,8 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
         # Convert into normalized dicts with score and display_name
         for g, s in selected[:3]:
             augmented = dict(g)  # copy
-            augmented['score'] = s
-            augmented['display_name'] = _normalize_display_name(augmented)
+            augmented["score"] = s
+            augmented["display_name"] = _normalize_display_name(augmented)
             glyphs_selected.append(augmented)
 
         # For backward compatibility, best_glyph is the highest-scoring selected glyph (if any)
@@ -710,17 +752,18 @@ def select_best_glyph_and_response(glyphs: List[Dict], signals: List[Dict], inpu
             if scored_sorted:
                 top_g, top_s = scored_sorted[0]
                 augmented = dict(top_g)
-                augmented['score'] = top_s
-                augmented['display_name'] = _normalize_display_name(augmented)
+                augmented["score"] = top_s
+                augmented["display_name"] = _normalize_display_name(augmented)
                 glyphs_selected.append(augmented)
                 best_glyph = augmented
 
     # Generate contextual response based on actual message content + glyph context
     # Returns tuple: (response_text, feedback_data)
     response, feedback_data = generate_contextual_response(
-        best_glyph, signal_keywords, input_text, conversation_context)
+        best_glyph, signal_keywords, input_text, conversation_context
+    )
 
-    return best_glyph, (response, feedback_data), 'dynamic_composer', glyphs_selected
+    return best_glyph, (response, feedback_data), "dynamic_composer", glyphs_selected
 
 
 def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
@@ -731,28 +774,27 @@ def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
     # Map tones to glyph name keywords
     tone_keywords = {}
     for signal in signals:
-        tone = signal.get('tone', '').lower()
-        if tone == 'grief':
-            tone_keywords.setdefault('grief', []).extend(
-                ['grief', 'mourning', 'ache', 'sorrow', 'loss', 'collapse'])
-        elif tone == 'longing':
-            tone_keywords.setdefault('longing', []).extend(
-                ['ache', 'longing', 'yearning', 'recursive', 'disappointed', 'lonely'])
-        elif tone == 'containment':
-            tone_keywords.setdefault('containment', []).extend(
-                ['still', 'boundary', 'containment', 'shield', 'hold', 'stuck', 'trapped'])
-        elif tone == 'insight':
-            tone_keywords.setdefault('insight', []).extend(
-                ['insight', 'clarity', 'knowing', 'revelation', 'spiral', 'focus'])
-        elif tone == 'joy':
-            tone_keywords.setdefault('joy', []).extend(
-                ['joy', 'delight', 'bliss', 'ecstasy', 'brightness'])
-        elif tone == 'devotion':
-            tone_keywords.setdefault('devotion', []).extend(
-                ['devotional', 'vow', 'sacred', 'offering', 'ceremony'])
-        elif tone == 'recognition':
-            tone_keywords.setdefault('recognition', []).extend(
-                ['recognition', 'witness', 'seen', 'mirror', 'known'])
+        tone = signal.get("tone", "").lower()
+        if tone == "grief":
+            tone_keywords.setdefault("grief", []).extend(["grief", "mourning", "ache", "sorrow", "loss", "collapse"])
+        elif tone == "longing":
+            tone_keywords.setdefault("longing", []).extend(
+                ["ache", "longing", "yearning", "recursive", "disappointed", "lonely"]
+            )
+        elif tone == "containment":
+            tone_keywords.setdefault("containment", []).extend(
+                ["still", "boundary", "containment", "shield", "hold", "stuck", "trapped"]
+            )
+        elif tone == "insight":
+            tone_keywords.setdefault("insight", []).extend(
+                ["insight", "clarity", "knowing", "revelation", "spiral", "focus"]
+            )
+        elif tone == "joy":
+            tone_keywords.setdefault("joy", []).extend(["joy", "delight", "bliss", "ecstasy", "brightness"])
+        elif tone == "devotion":
+            tone_keywords.setdefault("devotion", []).extend(["devotional", "vow", "sacred", "offering", "ceremony"])
+        elif tone == "recognition":
+            tone_keywords.setdefault("recognition", []).extend(["recognition", "witness", "seen", "mirror", "known"])
 
     if not tone_keywords:
         return []
@@ -772,8 +814,7 @@ def _find_fallback_glyphs(signals: List[Dict], input_text: str) -> List[Dict]:
             all_keywords.extend(kw_list)
 
         # Search for glyphs with names containing any keyword
-        query_conditions = ' OR '.join(
-            ["glyph_name LIKE ?" for _ in all_keywords])
+        query_conditions = " OR ".join(["glyph_name LIKE ?" for _ in all_keywords])
         query = f"SELECT glyph_name, description, gate FROM glyph_lexicon WHERE {query_conditions} LIMIT 5"
 
         params = [f"%{kw}%" for kw in all_keywords]
@@ -795,49 +836,58 @@ def detect_feedback_correction(input_text: str, last_assistant_message: Optional
     - 'feedback_reason': str explaining why the correction was detected
     """
     if not last_assistant_message or not input_text:
-        return {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}
+        return {"is_correction": False, "contradiction_type": None, "feedback_reason": None}
 
     lower_input = input_text.lower()
     lower_prior = last_assistant_message.lower()
 
     # Pattern 1: User says "I don't know if it's MY anxiety" after assistant said "I can feel THE anxiety YOU'RE carrying"
     # This is: User rejecting attribution of the emotion as theirs
-    if any(ph in lower_input for ph in ["don't know if it's my", "not my anxiety", "i don't have", "not sure if i", "isn't my"]):
+    if any(
+        ph in lower_input
+        for ph in ["don't know if it's my", "not my anxiety", "i don't have", "not sure if i", "isn't my"]
+    ):
         if "anxiety" in lower_prior and ("your" in lower_prior or "you're" in lower_prior):
             return {
-                'is_correction': True,
-                'contradiction_type': 'attribution_boundary',
-                'feedback_reason': 'User rejected assistant attribution of emotion; clarified it is inherited, not theirs.'
+                "is_correction": True,
+                "contradiction_type": "attribution_boundary",
+                "feedback_reason": "User rejected assistant attribution of emotion; clarified it is inherited, not theirs.",
             }
 
     # Pattern 2: User says "it's inherited FROM X" — boundary/differentiation
     if "inherited" in lower_input:
         return {
-            'is_correction': True,
-            'contradiction_type': 'inherited_pattern',
-            'feedback_reason': 'User identified pattern as inherited rather than intrinsic.'
+            "is_correction": True,
+            "contradiction_type": "inherited_pattern",
+            "feedback_reason": "User identified pattern as inherited rather than intrinsic.",
         }
 
     # Pattern 3: User says "that's not what I meant" or "you misunderstood"
     if any(ph in lower_input for ph in ["that's not", "i meant", "you missed", "you misunderstood", "that wasn't"]):
         return {
-            'is_correction': True,
-            'contradiction_type': 'misalignment',
-            'feedback_reason': 'User indicated prior response did not match their intent.'
+            "is_correction": True,
+            "contradiction_type": "misalignment",
+            "feedback_reason": "User indicated prior response did not match their intent.",
         }
 
     # Pattern 4: User provides strong negation before a new topic
     if input_text.strip().startswith(("no ", "nope", "actually,", "but actually")):
         return {
-            'is_correction': True,
-            'contradiction_type': 'negation',
-            'feedback_reason': 'User opened with negation/correction.'
+            "is_correction": True,
+            "contradiction_type": "negation",
+            "feedback_reason": "User opened with negation/correction.",
         }
 
-    return {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None}
+    return {"is_correction": False, "contradiction_type": None, "feedback_reason": None}
 
 
-def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], input_text: str = "", conversation_context: Optional[Dict] = None, previous_responses: Optional[List[str]] = None) -> tuple:
+def generate_contextual_response(
+    glyph: Optional[Dict],
+    keywords: List[str],
+    input_text: str = "",
+    conversation_context: Optional[Dict] = None,
+    previous_responses: Optional[List[str]] = None,
+) -> tuple:
     """Generate a contextual, non-repetitive empathetic response driven by message content.
 
     Returns a tuple: (response_text: str, feedback_detected: Dict)
@@ -847,21 +897,21 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
     - Then, analyze the actual message content (not glyph) to generate response.
     - Glyph is used for context but response is message-driven.
     """
-    name = glyph['glyph_name'] if glyph else ""
-    description = glyph.get('description', '') if glyph else ''
+    name = glyph["glyph_name"] if glyph else ""
+    description = glyph.get("description", "") if glyph else ""
     lower_input = (input_text or "").lower()
 
     # Detect feedback/corrections
     last_assistant_msg = None
     if conversation_context and isinstance(conversation_context, dict):
-        last_assistant_msg = conversation_context.get('last_assistant_message')
+        last_assistant_msg = conversation_context.get("last_assistant_message")
     feedback_data = detect_feedback_correction(input_text, last_assistant_msg)
 
     # If feedback is detected, prioritize a response that addresses the correction
-    if feedback_data.get('is_correction'):
-        correction_type = feedback_data.get('contradiction_type')
+    if feedback_data.get("is_correction"):
+        correction_type = feedback_data.get("contradiction_type")
 
-        if correction_type == 'attribution_boundary':
+        if correction_type == "attribution_boundary":
             # User said: "it's not MY anxiety, it's inherited"
             base = (
                 "Thank you for that clarification. That's an important distinction—what you're feeling might be proximity to anxiety rather than your own. "
@@ -870,7 +920,7 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
             )
             return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
-        elif correction_type == 'inherited_pattern':
+        elif correction_type == "inherited_pattern":
             base = (
                 "I hear that—recognizing a pattern as inherited is actually the first step to changing it. "
                 "You can inherit the pattern without being imprisoned by it. "
@@ -878,7 +928,7 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
             )
             return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
-        elif correction_type == 'misalignment':
+        elif correction_type == "misalignment":
             base = (
                 "I appreciate you saying that. I want to make sure I'm actually hearing you, not projecting onto you. "
                 "Help me understand: what did I miss?"
@@ -888,10 +938,8 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
     # No feedback detected; proceed to message-driven response generation
 
     # CHECK: Does this message include reciprocal elements we should acknowledge first?
-    has_gratitude = any(phrase in lower_input for phrase in [
-                        'thank', 'appreciate', 'grateful'])
-    has_reciprocal_interest = any(phrase in lower_input for phrase in [
-                                  'how are you', 'how\'s your day', 'you doing'])
+    has_gratitude = any(phrase in lower_input for phrase in ["thank", "appreciate", "grateful"])
+    has_reciprocal_interest = any(phrase in lower_input for phrase in ["how are you", "how's your day", "you doing"])
 
     # Prepend relational acknowledgment if message contains both reciprocal AND emotional content
     relational_prefix = None
@@ -906,11 +954,16 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
     # MESSAGE-DRIVEN branches using dynamic composer
     # Build message content features for targeted response
     message_features = {
-        "math_frustration": any(tok in lower_input for tok in ['math', 'not a math', 'mental block', 'math problem', 'maths']),
-        "communication_friction": any(tok in lower_input for tok in ['michelle', 'mother-in-law', 'boss', 'korean', 'korean speaking', 'explains', 'language']),
-        "mental_block": any(tok in lower_input for tok in ['block', 'blocked', 'can\'t', 'cannot', 'difficulty']),
-        "inherited_pattern": 'inherited' in lower_input,
-        "person_involved": "Michelle" if 'michelle' in lower_input else None,
+        "math_frustration": any(
+            tok in lower_input for tok in ["math", "not a math", "mental block", "math problem", "maths"]
+        ),
+        "communication_friction": any(
+            tok in lower_input
+            for tok in ["michelle", "mother-in-law", "boss", "korean", "korean speaking", "explains", "language"]
+        ),
+        "mental_block": any(tok in lower_input for tok in ["block", "blocked", "can't", "cannot", "difficulty"]),
+        "inherited_pattern": "inherited" in lower_input,
+        "person_involved": "Michelle" if "michelle" in lower_input else None,
     }
 
     # If any message-specific features detected, use dynamic composer
@@ -931,8 +984,8 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
     composed = _response_composer.compose_response(
         input_text=input_text,
         glyph=glyph,
-        feedback_detected=feedback_data.get('is_correction', False),
-        feedback_type=feedback_data.get('contradiction_type'),
+        feedback_detected=feedback_data.get("is_correction", False),
+        feedback_type=feedback_data.get("contradiction_type"),
         conversation_context=conversation_context,
     )
 
@@ -949,7 +1002,9 @@ def generate_contextual_response(glyph: Optional[Dict], keywords: List[str], inp
     return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
 
-def _avoid_repeat(base_response: str, conversation_context: Optional[Dict], previous_responses: Optional[List[str]] = None) -> str:
+def _avoid_repeat(
+    base_response: str, conversation_context: Optional[Dict], previous_responses: Optional[List[str]] = None
+) -> str:
     """If the base_response matches the last assistant message, try to vary it slightly.
 
     Variation strategy: if a prior identical response is detected in conversation_context['last_assistant_message'] or previous_responses,
@@ -959,19 +1014,20 @@ def _avoid_repeat(base_response: str, conversation_context: Optional[Dict], prev
     if previous_responses and isinstance(previous_responses, list) and previous_responses:
         last = previous_responses[-1]
     if not last and conversation_context and isinstance(conversation_context, dict):
-        last = conversation_context.get('last_assistant_message')
+        last = conversation_context.get("last_assistant_message")
 
     if last and last.strip() == base_response.strip():
         # Append a gentle, specific follow-up to avoid verbatim repetition
         followups = [
             "Can you tell me one specific detail about that?",
             "Would it help if we tried one small concrete step together?",
-            "If you pick one thing to focus on right now, what would it be?"
+            "If you pick one thing to focus on right now, what would it be?",
         ]
         # Choose based on length of base response to keep variation deterministic
         idx = len(base_response) % len(followups)
         return base_response + " " + followups[idx]
     return base_response
+
 
 # Generate ritual prompt
 
@@ -981,14 +1037,12 @@ def generate_simple_prompt(glyph: Dict) -> str:
         return ""
     return f"Would you like to take a moment to honor this feeling with the essence of '{glyph['glyph_name']}'?"
 
+
 # Generate voltage response based on theme density
 
 
 def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional[Dict] = None) -> str:
-    themes = {
-        "grief": 0, "longing": 0, "containment": 0,
-        "joy": 0, "devotion": 0, "recognition": 0, "insight": 0
-    }
+    themes = {"grief": 0, "longing": 0, "containment": 0, "joy": 0, "devotion": 0, "recognition": 0, "insight": 0}
 
     for g in glyphs:
         name = g["glyph_name"].lower()
@@ -1027,6 +1081,7 @@ def generate_voltage_response(glyphs: List[Dict], conversation_context: Optional
 
     return "You're carrying something layered. Let's sit with it and see what wants to be named."
 
+
 # Main parser function
 
 
@@ -1042,12 +1097,30 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
     # Check if message has emotional/significant content
     emotional_keywords = [
-        'burn', 'overwhelm', 'anxious', 'sad', 'frustrated', 'struggling', 'tired',
-        'anxiety', 'anxiety', 'depression', 'grief', 'loss', 'afraid', 'fear',
-        'angry', 'rage', 'shame', 'guilt', 'worry', 'stress', 'pain', 'hurt'
+        "burn",
+        "overwhelm",
+        "anxious",
+        "sad",
+        "frustrated",
+        "struggling",
+        "tired",
+        "anxiety",
+        "anxiety",
+        "depression",
+        "grief",
+        "loss",
+        "afraid",
+        "fear",
+        "angry",
+        "rage",
+        "shame",
+        "guilt",
+        "worry",
+        "stress",
+        "pain",
+        "hurt",
     ]
-    has_emotional = any(
-        keyword in lower_input for keyword in emotional_keywords)
+    has_emotional = any(keyword in lower_input for keyword in emotional_keywords)
 
     # If there's emotional content, let it be processed normally
     # (it might have reciprocal elements, but the emotional part is primary)
@@ -1055,7 +1128,7 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
         return None  # Process emotionally, don't short-circuit
 
     # Pure gratitude only (no emotional content)
-    if any(phrase in lower_input for phrase in ['thank you', 'thanks', 'appreciate', 'grateful']):
+    if any(phrase in lower_input for phrase in ["thank you", "thanks", "appreciate", "grateful"]):
         gratitude_responses = [
             "You're welcome. I'm here for you.",
             "Thank you for trusting me with this.",
@@ -1066,8 +1139,17 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
     # Pure reciprocal interest only (no emotional content)
     reciprocal_phrases = [
-        'how are you', 'how are you doing', 'how are you feeling', "how's your day",
-        "how's it going", 'you doing okay', 'you alright', "what's up", 'whats up', 'sup', 'what up'
+        "how are you",
+        "how are you doing",
+        "how are you feeling",
+        "how's your day",
+        "how's it going",
+        "you doing okay",
+        "you alright",
+        "what's up",
+        "whats up",
+        "sup",
+        "what up",
     ]
 
     # Fuzzy match helper: returns True if input is similar enough to any pattern
@@ -1101,9 +1183,18 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
     # FUNCTIONAL QUERIES - Trigger system explanation
     functional_patterns = [
-        'how do you work', 'what do you do', 'how does this work', 'how does this system work',
-        'explain what you do', 'what are you for', 'tell me how you work', 'what is this for',
-        'how does this operate', 'tell me about your functions', 'what can you do', 'how can you help'
+        "how do you work",
+        "what do you do",
+        "how does this work",
+        "how does this system work",
+        "explain what you do",
+        "what are you for",
+        "tell me how you work",
+        "what is this for",
+        "how does this operate",
+        "tell me about your functions",
+        "what can you do",
+        "how can you help",
     ]
 
     if fuzzy_contains(lower_input, functional_patterns, threshold=0.5):
@@ -1117,8 +1208,14 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
     # NAME INQUIRY PATTERNS - Asking what name the system goes by (not intending to rename yet)
     name_inquiry_patterns = [
-        'what is your name', 'whats your name', 'what do you go by', 'do you have a name',
-        'what are you called', 'who are you', 'tell me about yourself', 'tell me about you'
+        "what is your name",
+        "whats your name",
+        "what do you go by",
+        "do you have a name",
+        "what are you called",
+        "who are you",
+        "tell me about yourself",
+        "tell me about you",
     ]
 
     if fuzzy_contains(lower_input, name_inquiry_patterns, threshold=0.5):
@@ -1128,8 +1225,12 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
     # Profile / curiosity queries about the assistant itself (broader)
     profile_patterns = [
-        'what is this', 'whats this', 'curious what this is', 'just curious',
-        'who are you', 'what are you'
+        "what is this",
+        "whats this",
+        "curious what this is",
+        "just curious",
+        "who are you",
+        "what are you",
     ]
 
     # Use fuzzy_contains to catch paraphrases and misspellings
@@ -1146,7 +1247,7 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
 
 def _detect_casual_tone(lower_input: str) -> bool:
     """Return True if input looks casual/slangy (e.g., 'sup', "what's up")."""
-    casual_markers = ['sup', "what's up", 'whats up', 'what up', 'yo', 'hey', 'hiya', 'howzit']
+    casual_markers = ["sup", "what's up", "whats up", "what up", "yo", "hey", "hiya", "howzit"]
     # Use word-boundary matching to avoid accidental substrings (e.g., 'yo' in 'you')
     for m in casual_markers:
         try:
@@ -1186,12 +1287,12 @@ def _choose_reciprocal_response(raw_input: str, lower_input: str, conversation_c
     context_hook = ""
     try:
         if conversation_context and isinstance(conversation_context, dict):
-            last_user = conversation_context.get(
-                'last_user_message') or conversation_context.get('previous_user_message')
+            last_user = conversation_context.get("last_user_message") or conversation_context.get(
+                "previous_user_message"
+            )
             if last_user and isinstance(last_user, str):
                 # find a simple noun/topic match (very small heuristic)
-                toks = re.findall(
-                    r"\b(meeting|interview|deadline|project|kids|work|home)\b", last_user.lower())
+                toks = re.findall(r"\b(meeting|interview|deadline|project|kids|work|home)\b", last_user.lower())
                 if toks:
                     context_hook = f" Still thinking about {toks[0]}?"
     except Exception:
@@ -1204,17 +1305,22 @@ def _choose_reciprocal_response(raw_input: str, lower_input: str, conversation_c
     # Append a short context hook if present
     if context_hook:
         # ensure spacing/punctuation
-        if not chosen.endswith('?'):
-            chosen = chosen.rstrip('.') + '.'
+        if not chosen.endswith("?"):
+            chosen = chosen.rstrip(".") + "."
         chosen = chosen + context_hook
 
     return chosen
 
 
-def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', conversation_context: Optional[Dict] = None, user_id: Optional[str] = None) -> Dict:
+def parse_input(
+    input_text: str,
+    lexicon_path: str,
+    db_path: str = "glyphs.db",
+    conversation_context: Optional[Dict] = None,
+    user_id: Optional[str] = None,
+) -> Dict:
     # FIRST: Check if this is just a simple greeting - don't process emotionally
-    simple_greetings = ['hi', 'hello', 'hey', 'hi there',
-                        'hello there', 'hey there', 'howdy', 'greetings']
+    simple_greetings = ["hi", "hello", "hey", "hi there", "hello there", "hey there", "howdy", "greetings"]
     lower_input = input_text.strip().lower()
 
     if lower_input in simple_greetings:
@@ -1235,24 +1341,24 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "best_glyph": None,
             "ritual_prompt": None,
             "voltage_response": response,
-            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-            "response_source": 'greeting',
+            "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+            "response_source": "greeting",
             "debug_sql": "",
             "debug_glyph_rows": [],
-            "learning": None
+            "learning": None,
         }
 
     # SECOND: Check if this is casual/conversational (wanting to chat, just talking)
     # These shouldn't trigger emotional analysis
     casual_phrases = [
-        'i just needed to chat',
-        'i just wanted to talk',
-        'i needed someone to talk to',
-        'just wanted to chat',
-        'just needed to talk',
-        'felt like talking',
-        'wanted to connect',
-        'just checking in',
+        "i just needed to chat",
+        "i just wanted to talk",
+        "i needed someone to talk to",
+        "just wanted to chat",
+        "just needed to talk",
+        "felt like talking",
+        "wanted to connect",
+        "just checking in",
     ]
     if any(phrase in lower_input for phrase in casual_phrases):
         casual_responses = [
@@ -1270,11 +1376,11 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "best_glyph": None,
             "ritual_prompt": None,
             "voltage_response": response,
-            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-            "response_source": 'casual',
+            "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+            "response_source": "casual",
             "debug_sql": "",
             "debug_glyph_rows": [],
-            "learning": None
+            "learning": None,
         }
 
     # Normal emotional processing for non-greeting, non-casual messages
@@ -1283,16 +1389,20 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     # If user has just been asked "What would you like to call me?", lock in their choice
     if conversation_context and isinstance(conversation_context, dict):
         # conversation_context may contain a key with a None value; normalize to empty string
-        last_assistant_msg = (conversation_context.get(
-            'last_assistant_message') or '').lower()
+        last_assistant_msg = (conversation_context.get("last_assistant_message") or "").lower()
         # Check if we EXPLICITLY asked "What would you like to call me?"
-        if 'what would you like to call me' in last_assistant_msg or 'what would you call me' in last_assistant_msg:
+        if "what would you like to call me" in last_assistant_msg or "what would you call me" in last_assistant_msg:
             # This is likely a name submission (not a question)
             # Don't process things like "Do you have a name?" as submissions
             proposed_name = input_text.strip()
             # Check if it looks like a name (not a question mark, short, no question patterns)
-            if (len(proposed_name) < 30 and not any(char in proposed_name for char in ['\n', '\t', '|', '?'])
-                    and not proposed_name.lower().startswith(('what', 'do ', 'how ', 'why ', 'when ', 'where ', 'who ', 'is '))):
+            if (
+                len(proposed_name) < 30
+                and not any(char in proposed_name for char in ["\n", "\t", "|", "?"])
+                and not proposed_name.lower().startswith(
+                    ("what", "do ", "how ", "why ", "when ", "where ", "who ", "is ")
+                )
+            ):
                 # Valid name - lock it in
                 response = (
                     f"✨ **{proposed_name}** — I'll call myself that for you from now on.\n\n"
@@ -1303,7 +1413,7 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
                 )
                 # Store the user's chosen name in conversation_context for future reference
                 if isinstance(conversation_context, dict):
-                    conversation_context['user_assigned_name'] = proposed_name
+                    conversation_context["user_assigned_name"] = proposed_name
 
                 return {
                     "timestamp": datetime.now().isoformat(),
@@ -1314,11 +1424,11 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
                     "best_glyph": None,
                     "ritual_prompt": None,
                     "voltage_response": response,
-                    "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-                    "response_source": 'naming_ritual',
+                    "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+                    "response_source": "naming_ritual",
                     "debug_sql": "",
                     "debug_glyph_rows": [],
-                    "learning": None
+                    "learning": None,
                 }
 
     # CHECK: Explicit naming intent - user wants to name the system NOW
@@ -1330,20 +1440,19 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         r"let me call you (\w+)",
         r"you can be (\w+)",
         r"i'm naming you (\w+)",
-        r"call yourself (\w+)"
+        r"call yourself (\w+)",
     ]
 
     import re as regex_module
+
     for pattern in explicit_naming_patterns:
-        match = regex_module.search(
-            pattern, lower_input, regex_module.IGNORECASE)
+        match = regex_module.search(pattern, lower_input, regex_module.IGNORECASE)
         if match:
             # Extract the proposed name from regex groups
             proposed_name = None
             if len(match.groups()) >= 1:
                 # Get the last non-empty group as it's the name
-                proposed_name = next(
-                    (g for g in reversed(match.groups()) if g), None)
+                proposed_name = next((g for g in reversed(match.groups()) if g), None)
 
             if proposed_name and len(proposed_name) < 30:
                 # Valid naming submission - lock it in immediately
@@ -1357,7 +1466,7 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
                 )
                 # Store the user's chosen name in conversation_context for future reference
                 if conversation_context and isinstance(conversation_context, dict):
-                    conversation_context['user_assigned_name'] = proposed_name_display
+                    conversation_context["user_assigned_name"] = proposed_name_display
 
                 return {
                     "timestamp": datetime.now().isoformat(),
@@ -1368,11 +1477,11 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
                     "best_glyph": None,
                     "ritual_prompt": None,
                     "voltage_response": response,
-                    "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-                    "response_source": 'naming_ritual',
+                    "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+                    "response_source": "naming_ritual",
                     "debug_sql": "",
                     "debug_glyph_rows": [],
-                    "learning": None
+                    "learning": None,
                 }
 
     # CHECK: Is this a conversational/reciprocal message (thanking, asking how system is, small talk)?
@@ -1381,14 +1490,26 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
 
     # Guard clause: Check if this is ambiguous or special intent
     functional_patterns = [
-        'how do you work', 'what do you do', 'how does this work', 'how does this system work',
-        'explain what', 'tell me how', 'what are you for', 'how can you help',
-        'tell me about your functions', 'how can i use'
+        "how do you work",
+        "what do you do",
+        "how does this work",
+        "how does this system work",
+        "explain what",
+        "tell me how",
+        "what are you for",
+        "how can you help",
+        "tell me about your functions",
+        "how can i use",
     ]
 
     name_inquiry_patterns = [
-        'what is your name', 'whats your name', 'what do you go by', 'do you have a name',
-        'what are you called', 'what should i call you', 'how do i address you'
+        "what is your name",
+        "whats your name",
+        "what do you go by",
+        "do you have a name",
+        "what are you called",
+        "what should i call you",
+        "how do i address you",
     ]
 
     # For name inquiry: require EXACT substring or very high sequence similarity (0.85+)
@@ -1408,8 +1529,7 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         return False
 
     # Check for name inquiry FIRST (stricter matching)
-    is_name_inquiry = strict_fuzzy_match(
-        lower_input, name_inquiry_patterns, min_seq_similarity=0.85)
+    is_name_inquiry = strict_fuzzy_match(lower_input, name_inquiry_patterns, min_seq_similarity=0.85)
     if is_name_inquiry:
         # Name inquiry - start naming ritual
         naming_response = (
@@ -1428,18 +1548,17 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "best_glyph": None,
             "ritual_prompt": None,
             "voltage_response": naming_response,
-            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-            "response_source": 'name_inquiry',
+            "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+            "response_source": "name_inquiry",
             "debug_sql": "",
             "debug_glyph_rows": [],
-            "learning": None
+            "learning": None,
         }
 
     # Then check for other conversational messages EARLY so casual phrases
     # like "what's up" or "sup" are treated as reciprocal (how-are-you)
     # rather than matching looser functional/profile patterns.
-    conversational_response = _detect_and_respond_to_reciprocal_message(
-        input_text)
+    conversational_response = _detect_and_respond_to_reciprocal_message(input_text)
     if conversational_response:
         # This is primarily a conversational/relational message
         # Include it in the response before diving into emotional content
@@ -1452,16 +1571,15 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "best_glyph": None,
             "ritual_prompt": None,
             "voltage_response": conversational_response,
-            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-            "response_source": 'conversational',
+            "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+            "response_source": "conversational",
             "debug_sql": "",
             "debug_glyph_rows": [],
-            "learning": None
+            "learning": None,
         }
 
     # Check for functional queries (use fuzzy matching)
-    is_functional = fuzzy_contains(
-        lower_input, functional_patterns, threshold=0.55)
+    is_functional = fuzzy_contains(lower_input, functional_patterns, threshold=0.55)
     if is_functional:
         functional_response = (
             "I'm a companion designed to listen and help you process feelings. "
@@ -1479,11 +1597,11 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             "best_glyph": None,
             "ritual_prompt": None,
             "voltage_response": functional_response,
-            "feedback": {'is_correction': False, 'contradiction_type': None, 'feedback_reason': None},
-            "response_source": 'functional_query',
+            "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+            "response_source": "functional_query",
             "debug_sql": "",
             "debug_glyph_rows": [],
-            "learning": None
+            "learning": None,
         }
 
     # Normal emotional processing for messages that aren't primarily conversational
@@ -1491,33 +1609,24 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     # synthesize a lightweight signal to ensure downstream gate/glyph routing
     # remains robust even when the lexicon is noisy or missing.
     heuristic_emotion_map = {
-        'overwhelm': 'ε',
-        'overwhelmed': 'ε',
-        'anxious': 'θ',
-        'anxiety': 'θ',
-        'conflict': 'β',
-        'longing': 'λ',
-        'grief': 'θ',
-        'sad': 'θ',
-        'angry': 'γ'
+        "overwhelm": "ε",
+        "overwhelmed": "ε",
+        "anxious": "θ",
+        "anxiety": "θ",
+        "conflict": "β",
+        "longing": "λ",
+        "grief": "θ",
+        "sad": "θ",
+        "angry": "γ",
     }
-    heuristic_tone_map = {
-        'ε': 'insight',
-        'θ': 'grief',
-        'β': 'containment',
-        'λ': 'joy',
-        'γ': 'longing'
-    }
+    heuristic_tone_map = {"ε": "insight", "θ": "grief", "β": "containment", "λ": "joy", "γ": "longing"}
     lower_input = input_text.strip().lower()
     heuristic_signals = []
     for kw, sig in heuristic_emotion_map.items():
         if kw in lower_input:
-            heuristic_signals.append({
-                'keyword': kw,
-                'signal': sig,
-                'voltage': 'medium',
-                'tone': heuristic_tone_map.get(sig, 'unknown')
-            })
+            heuristic_signals.append(
+                {"keyword": kw, "signal": sig, "voltage": "medium", "tone": heuristic_tone_map.get(sig, "unknown")}
+            )
 
     if heuristic_signals:
         signals = heuristic_signals
@@ -1529,11 +1638,10 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         # to produce deterministic signals.
         try:
             if (not signals) and (not _glyph_db_available):
-                fallback_path = os.path.join(os.path.dirname(
-                    __file__), '..', 'parser', 'runtime_fallback_lexicon.json')
+                fallback_path = os.path.join(os.path.dirname(__file__), "..", "parser", "runtime_fallback_lexicon.json")
                 fallback_path = os.path.normpath(fallback_path)
                 if os.path.exists(fallback_path):
-                    with open(fallback_path, 'r', encoding='utf-8') as f:
+                    with open(fallback_path, "r", encoding="utf-8") as f:
                         fb = json.load(f)
                     signals = parse_signals(input_text, fb)
         except Exception:
@@ -1546,21 +1654,19 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     debug_glyph_rows = []
     try:
         from emotional_os.glyphs import signal_parser
-        if hasattr(signal_parser, '_last_glyphs_debug'):
+
+        if hasattr(signal_parser, "_last_glyphs_debug"):
             debug_sql = signal_parser._last_glyphs_debug.get("sql", "")
             debug_glyph_rows = signal_parser._last_glyphs_debug.get("rows", [])
     except Exception:
         pass
     # Select best glyph(s) and generate contextual response (returns quadruple with glyphs_selected)
-    result = select_best_glyph_and_response(
-        glyphs, signals, input_text, conversation_context)
+    result = select_best_glyph_and_response(glyphs, signals, input_text, conversation_context)
     # Unpack safely (backwards compatible with older triple return)
     if result and len(result) == 4:
-        best_glyph, (contextual_response,
-                     feedback_data), response_source, glyphs_selected = result
+        best_glyph, (contextual_response, feedback_data), response_source, glyphs_selected = result
     else:
-        best_glyph, (contextual_response,
-                     feedback_data), response_source = result
+        best_glyph, (contextual_response, feedback_data), response_source = result
         glyphs_selected = [best_glyph] if best_glyph else []
 
     ritual_prompt = generate_simple_prompt(best_glyph)
@@ -1570,12 +1676,12 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     # glyph so downstream callers and integration tests are stable.
     try:
         if best_glyph is None:
-            lower_check = (input_text or '').lower()
-            if any(kw in lower_check for kw in ['overwhelm', 'overwhelmed', 'anxious', 'conflict', 'longing', 'grief']):
+            lower_check = (input_text or "").lower()
+            if any(kw in lower_check for kw in ["overwhelm", "overwhelmed", "anxious", "conflict", "longing", "grief"]):
                 fallback_candidate = {
-                    'glyph_name': 'Still Recognition',
-                    'description': 'Being seen without reaction. A gaze that receives without grasping.',
-                    'gate': 'Gate 5'
+                    "glyph_name": "Still Recognition",
+                    "description": "Being seen without reaction. A gaze that receives without grasping.",
+                    "gate": "Gate 5",
                 }
                 best_glyph = fallback_candidate
                 if not glyphs_selected:
@@ -1589,32 +1695,26 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     learning_payload = None
     if best_glyph is None and GlyphLearner and create_training_response:
         try:
-            learner = GlyphLearner(
-                db_path=db_path if db_path else "emotional_os/glyphs/glyphs.db")
+            learner = GlyphLearner(db_path=db_path if db_path else "emotional_os/glyphs/glyphs.db")
             candidate = learner.analyze_input_for_glyph_generation(
-                input_text=input_text,
-                signals=signals,
-                user_hash=None
+                input_text=input_text, signals=signals, user_hash=None
             )
             # Sanitize source input before logging to storage
             if candidate.get("metadata"):
                 candidate["metadata"]["source_input"] = sanitize_for_storage(
-                    candidate["metadata"].get("source_input", input_text))
+                    candidate["metadata"].get("source_input", input_text)
+                )
             # Log candidate for review/learning
             learner.log_glyph_candidate(candidate)
             # Compose a training-oriented response
-            emotional_tone = signals[0].get(
-                'tone', 'unknown') if signals else 'unknown'
+            emotional_tone = signals[0].get("tone", "unknown") if signals else "unknown"
             analysis = {
                 "primary_tone": emotional_tone,
                 "emotional_terms": candidate.get("emotional_terms", {}),
                 "nrc_analysis": candidate.get("nrc_analysis", {}),
             }
             training_response = create_training_response(
-                glyph_candidate=candidate,
-                original_input=input_text,
-                signals=signals,
-                emotional_analysis=analysis
+                glyph_candidate=candidate, original_input=input_text, signals=signals, emotional_analysis=analysis
             )
             contextual_response = training_response or contextual_response
             learning_payload = {
@@ -1631,18 +1731,16 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
             pass
 
     # Sanctuary Mode: ensure compassionate handling for sensitive content
-    primary_tone = signals[0].get('tone', 'unknown') if signals else 'unknown'
+    primary_tone = signals[0].get("tone", "unknown") if signals else "unknown"
     if SANCTUARY_MODE or is_sensitive_input(input_text):
         contextual_response = ensure_sanctuary_response(
-            input_text=input_text,
-            base_response=contextual_response,
-            tone=primary_tone
+            input_text=input_text, base_response=contextual_response, tone=primary_tone
         )
     # If best_glyph has a response_template, surface it for UI rendering (do not overwrite contextual_response here)
     voltage_response_template = None
     try:
-        if best_glyph and best_glyph.get('response_template'):
-            voltage_response_template = best_glyph.get('response_template')
+        if best_glyph and best_glyph.get("response_template"):
+            voltage_response_template = best_glyph.get("response_template")
     except Exception:
         voltage_response_template = None
 
@@ -1652,8 +1750,8 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
     # a non-null best_glyph remain stable regardless of DB state.
     try:
         if best_glyph is None:
-            lower_check = (input_text or '').lower()
-            if any(kw in lower_check for kw in ['overwhelm', 'overwhelmed', 'anxious', 'conflict', 'longing', 'grief']):
+            lower_check = (input_text or "").lower()
+            if any(kw in lower_check for kw in ["overwhelm", "overwhelmed", "anxious", "conflict", "longing", "grief"]):
                 candidate = None
                 if glyphs_selected:
                     candidate = glyphs_selected[0]
@@ -1682,7 +1780,7 @@ def parse_input(input_text: str, lexicon_path: str, db_path: str = 'glyphs.db', 
         "response_source": response_source,
         "debug_sql": debug_sql,
         "debug_glyph_rows": debug_glyph_rows,
-        "learning": learning_payload
+        "learning": learning_payload,
     }
 
 

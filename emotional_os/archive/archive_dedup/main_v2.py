@@ -1,8 +1,9 @@
-from docx import Document
 from io import BytesIO
+
 import streamlit as st
+from docx import Document
 from modules.auth import SaoynxAuthentication
-from modules.ui import render_splash_interface, render_main_app
+from modules.ui import render_main_app, render_splash_interface
 
 # --- Generate Word Document from Personal Log ---
 
@@ -24,6 +25,8 @@ def generate_doc(date, time, event, mood, reflections, insights):
     doc.save(buffer)
     buffer.seek(0)
     return buffer
+
+
 # --- End Generate Word Document ---
 
 
@@ -32,7 +35,7 @@ st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
     page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 

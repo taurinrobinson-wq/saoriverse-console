@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Integration example showing how to connect auto-evolving glyphs 
+Integration example showing how to connect auto-evolving glyphs
 to your existing Saoriverse conversation flow
 """
 
@@ -9,6 +9,7 @@ import sys
 
 # Add the current directory to the path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 
 def create_enhanced_conversation_demo():
     """
@@ -277,16 +278,17 @@ if __name__ == "__main__":
 '''
 
     # Write the enhanced demo to a file
-    with open('enhanced_conversation_demo.py', 'w') as f:
+    with open("enhanced_conversation_demo.py", "w") as f:
         f.write(enhanced_demo_code)
 
     print("Created enhanced_conversation_demo.py")
     print("This shows how to integrate the evolving glyph system with your existing conversation flow.")
 
+
 def create_quick_setup_guide():
     """Create a quick setup guide"""
 
-    setup_guide = '''# Quick Setup Guide: Auto-Evolving Glyphs
+    setup_guide = """# Quick Setup Guide: Auto-Evolving Glyphs
 
 ## 🚀 Getting Started
 
@@ -363,12 +365,13 @@ The system can run alongside your existing setup, monitoring conversations and a
 - Start with higher evolution frequency for testing, then reduce for production
 
 Your emotional OS will now continuously evolve and become more sophisticated! 🎉
-'''
+"""
 
-    with open('SETUP_EVOLVING_GLYPHS.md', 'w') as f:
+    with open("SETUP_EVOLVING_GLYPHS.md", "w") as f:
         f.write(setup_guide)
 
     print("Created SETUP_EVOLVING_GLYPHS.md - your quick setup guide!")
+
 
 if __name__ == "__main__":
     print("🔧 Creating integration examples and setup guides...")

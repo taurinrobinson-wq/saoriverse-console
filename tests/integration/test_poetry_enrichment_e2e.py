@@ -13,11 +13,11 @@ try:
     from parser.nrc_lexicon_loader import nrc
     from parser.poetry_database import PoetryDatabase
     from parser.poetry_enrichment import PoetryEnrichment
+
     POETRY_AVAILABLE = True
 except ImportError:
     POETRY_AVAILABLE = False
     print("Warning: Poetry enrichment dependencies not available (optional)")
-
 
 
 class E2ETestSuite:
@@ -29,35 +29,26 @@ class E2ETestSuite:
             print("⚠️ Warning: Poetry enrichment dependencies not available")
             self.available = False
             return
-        
+
         self.available = True
-        self.results = {
-            'tests_passed': 0,
-            'tests_failed': 0,
-            'performance_metrics': {},
-            'test_details': []
-        }
+        self.results = {"tests_passed": 0, "tests_failed": 0, "performance_metrics": {}, "test_details": []}
 
     def log_test(self, name: str, passed: bool, details: str = ""):
         """Log a test result."""
         if not POETRY_AVAILABLE:
             return
-            
+
         status = "✅ PASS" if passed else "❌ FAIL"
         print(f"{status}: {name}")
         if details:
             print(f"       {details}")
 
         if passed:
-            self.results['tests_passed'] += 1
+            self.results["tests_passed"] += 1
         else:
-            self.results['tests_failed'] += 1
+            self.results["tests_failed"] += 1
 
-        self.results['test_details'].append({
-            'name': name,
-            'passed': passed,
-            'details': details
-        })
+        self.results["test_details"].append({"name": name, "passed": passed, "details": details})
 
     # ===== TEST SUITE 1: NRC Lexicon =====
     def test_nrc_lexicon_loading(self):
@@ -65,15 +56,11 @@ class E2ETestSuite:
         if not POETRY_AVAILABLE:
             print("⚠️ Skipping poetry enrichment tests (dependencies unavailable)")
             return True
-        
+
         print("\n📚 TEST 1: NRC Lexicon Loading")
         print("-" * 50)
 
-        passed = (
-            nrc.loaded and
-            len(nrc.word_emotions) >= 6000 and
-            len(nrc.get_all_emotions()) == 10
-        )
+        passed = nrc.loaded and len(nrc.word_emotions) >= 6000 and len(nrc.get_all_emotions()) == 10
 
         details = f"Words: {len(nrc.word_emotions)}, Emotions: {len(nrc.get_all_emotions())}"
         self.log_test("NRC Lexicon loads full dictionary", passed, details)
@@ -86,10 +73,10 @@ class E2ETestSuite:
         print("-" * 50)
 
         test_cases = [
-            ("I love this beautiful day", ['joy', 'positive']),
+            ("I love this beautiful day", ["joy", "positive"]),
             ("I feel so sad and alone", []),  # May not detect sadness directly
-            ("This makes me angry", ['anger']),
-            ("I'm terrified", ['fear']),
+            ("This makes me angry", ["anger"]),
+            ("I'm terrified", ["fear"]),
         ]
 
         all_passed = True
@@ -117,10 +104,7 @@ class E2ETestSuite:
         db = PoetryDatabase()
         stats = db.get_stats()
 
-        passed = (
-            stats['total_poems'] >= 30 and
-            stats['emotions'] >= 10
-        )
+        passed = stats["total_poems"] >= 30 and stats["emotions"] >= 10
 
         details = f"Poems: {stats['total_poems']}, Emotions: {stats['emotions']}"
         self.log_test("Poetry database loaded", passed, details)
@@ -133,17 +117,13 @@ class E2ETestSuite:
         print("-" * 50)
 
         db = PoetryDatabase()
-        test_emotions = ['joy', 'sadness', 'love', 'fear', 'anger']
+        test_emotions = ["joy", "sadness", "love", "fear", "anger"]
 
         all_passed = True
         for emotion in test_emotions:
             poem = db.get_poem(emotion)
 
-            passed = (
-                poem and
-                len(poem.get('text', '')) > 50 and
-                poem.get('emotion') == emotion
-            )
+            passed = poem and len(poem.get("text", "")) > 50 and poem.get("emotion") == emotion
 
             details = f"Retrieved {len(poem.get('text', ''))} chars"
             self.log_test(f"  Poetry retrieval: {emotion}", passed, details)
@@ -162,11 +142,7 @@ class E2ETestSuite:
             engine = PoetryEnrichment()
             stats = engine.get_stats()
 
-            passed = (
-                stats['poetry_poems'] > 0 and
-                stats['emotions_with_glyphs'] > 0 and
-                stats['nrc_words'] > 5000
-            )
+            passed = stats["poetry_poems"] > 0 and stats["emotions_with_glyphs"] > 0 and stats["nrc_words"] > 5000
 
             details = f"Poetry: {stats['poetry_poems']}, Emotions: {stats['emotions_with_glyphs']}, Words: {stats['nrc_words']}"
             self.log_test("Enrichment engine initialized", passed, details)
@@ -195,10 +171,10 @@ class E2ETestSuite:
                 result = engine.enrich_emotion_analysis(text)
 
                 passed = (
-                    result.get('dominant_emotion') and
-                    result.get('enriched_response') and
-                    result.get('glyphs') and
-                    result.get('poetry')
+                    result.get("dominant_emotion")
+                    and result.get("enriched_response")
+                    and result.get("glyphs")
+                    and result.get("poetry")
                 )
 
                 details = f"Emotion: {result.get('dominant_emotion')}, Glyphs: {len(result.get('glyphs', []))}"
@@ -239,11 +215,7 @@ class E2ETestSuite:
             details = f"Avg: {avg_time:.1f}ms, Min: {min_time:.1f}ms, Max: {max_time:.1f}ms"
             self.log_test("Performance (5 iterations)", passed, details)
 
-            self.results['performance_metrics'] = {
-                'avg_ms': avg_time,
-                'min_ms': min_time,
-                'max_ms': max_time
-            }
+            self.results["performance_metrics"] = {"avg_ms": avg_time, "min_ms": min_time, "max_ms": max_time}
 
             return passed
         except Exception as e:
@@ -258,10 +230,10 @@ class E2ETestSuite:
 
         # Check that all data is local
         checks = {
-            'NRC Lexicon': nrc.loaded and nrc.source == 'full',
-            'Poetry Database': os.path.exists('data/poetry/poetry_database.json'),
-            'No HTTP imports': 'requests' not in str(sys.modules) or True,  # They may import but not use
-            'Data on disk': os.path.exists('data/lexicons/nrc_emotion_lexicon.txt'),
+            "NRC Lexicon": nrc.loaded and nrc.source == "full",
+            "Poetry Database": os.path.exists("data/poetry/poetry_database.json"),
+            "No HTTP imports": "requests" not in str(sys.modules) or True,  # They may import but not use
+            "Data on disk": os.path.exists("data/lexicons/nrc_emotion_lexicon.txt"),
         }
 
         all_passed = True
@@ -295,6 +267,7 @@ class E2ETestSuite:
             except Exception as e:
                 print(f"\n❌ Test suite error: {e}")
                 import traceback
+
                 traceback.print_exc()
 
         # Print summary
@@ -306,18 +279,18 @@ class E2ETestSuite:
         print("📊 TEST SUMMARY")
         print("=" * 60)
 
-        total = self.results['tests_passed'] + self.results['tests_failed']
-        pass_rate = (self.results['tests_passed'] / total * 100) if total > 0 else 0
+        total = self.results["tests_passed"] + self.results["tests_failed"]
+        pass_rate = (self.results["tests_passed"] / total * 100) if total > 0 else 0
 
         print(f"\nTests Passed: {self.results['tests_passed']}/{total} ({pass_rate:.1f}%)")
 
-        if self.results['tests_failed'] == 0:
+        if self.results["tests_failed"] == 0:
             print("✅ ALL TESTS PASSED!")
         else:
             print(f"❌ {self.results['tests_failed']} tests failed")
 
         print("\nPerformance:")
-        perf = self.results['performance_metrics']
+        perf = self.results["performance_metrics"]
         if perf:
             print(f"  Average: {perf['avg_ms']:.1f}ms")
             print(f"  Range: {perf['min_ms']:.1f}ms - {perf['max_ms']:.1f}ms")
@@ -348,8 +321,7 @@ def test_poetry_enrichment_e2e():
     if not POETRY_AVAILABLE:
         print("⚠️ Skipping poetry enrichment E2E tests (dependencies unavailable)")
         return  # Skip test gracefully
-    
+
     suite = E2ETestSuite()
     if suite.available:
         suite.run_all_tests()
-

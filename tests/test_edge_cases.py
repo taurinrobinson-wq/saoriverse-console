@@ -1,6 +1,6 @@
+import importlib.util
 import os
 import sys
-import importlib.util
 
 # ensure fixtures are importable
 HERE = os.path.dirname(__file__)
@@ -8,8 +8,7 @@ FIX = os.path.abspath(os.path.join(HERE, "fixtures"))
 if FIX not in sys.path:
     sys.path.insert(0, FIX)
 
-spec_sp = importlib.util.spec_from_file_location(
-    "signal_parser", os.path.join(FIX, "signal_parser.py"))
+spec_sp = importlib.util.spec_from_file_location("signal_parser", os.path.join(FIX, "signal_parser.py"))
 signal_parser = importlib.util.module_from_spec(spec_sp)
 spec_sp.loader.exec_module(signal_parser)
 parse_input = signal_parser.parse_input

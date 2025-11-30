@@ -14,14 +14,15 @@ This is the complete integration point for the full system.
 
 import json
 import logging
-from typing import Dict, List, Optional, Any
-from uuid import uuid4
 import os
 import re
+from typing import Any, Dict, List, Optional
+from uuid import uuid4
 
 # Local-learning primitives
 try:
     from learning.local_learner import LocalLearner
+
     LOCAL_LEARNER_AVAILABLE = True
 except Exception:
     LocalLearner = None
@@ -29,7 +30,7 @@ except Exception:
 
 # optional writer for staging near-duplicates
 try:
-    from learning.writer import append_event, DEFAULT_LEARNING_DIR
+    from learning.writer import DEFAULT_LEARNING_DIR, append_event
 except Exception:
     append_event = None
     DEFAULT_LEARNING_DIR = None
@@ -37,13 +38,13 @@ except Exception:
 # Import lexicon-aware response generation
 try:
     from lexicon_aware_response_generator import LexiconAwareResponseGenerator
+
     LEXICON_AWARE_AVAILABLE = True
 except ImportError:
     LEXICON_AWARE_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 class LocalEvolution:
@@ -59,8 +60,7 @@ class LocalEvolution:
             if LOCAL_LEARNER_AVAILABLE:
                 learner = LocalLearner()
             else:
-                raise RuntimeError(
-                    "No LocalLearner available for LocalEvolution")
+                raise RuntimeError("No LocalLearner available for LocalEvolution")
 
         self.learner = learner
         self.accept_threshold = accept_threshold
@@ -71,8 +71,7 @@ class LocalEvolution:
         # staging file for near-duplicates
         self._near_dup_staging = None
         if DEFAULT_LEARNING_DIR:
-            self._near_dup_staging = os.path.join(
-                DEFAULT_LEARNING_DIR, "near_duplicate_staging.jsonl")
+            self._near_dup_staging = os.path.join(DEFAULT_LEARNING_DIR, "near_duplicate_staging.jsonl")
 
         # pre-load lexicon if available (best-effort)
         try:
@@ -80,7 +79,16 @@ class LocalEvolution:
         except Exception:
             pass
 
-    def process_dialogue_exchange(self, *, user_id: str, conversation_id: str, user_input: str, ai_response: str, emotional_signals: List[Dict], glyphs: Optional[List[Dict]] = None) -> Dict:
+    def process_dialogue_exchange(
+        self,
+        *,
+        user_id: str,
+        conversation_id: str,
+        user_input: str,
+        ai_response: str,
+        emotional_signals: List[Dict],
+        glyphs: Optional[List[Dict]] = None,
+    ) -> Dict:
         """Process a dialogue exchange and persist candidate learning events.
 
         Returns a dict with keys: learning_result, lexicon_updates,
@@ -119,11 +127,11 @@ class LocalEvolution:
                     recent = relational_memory.list_recent(500)
                     for cap in recent or []:
                         text = None
-                        if hasattr(cap, 'text'):
-                            text = getattr(cap, 'text')
-                        elif hasattr(cap, 'payload'):
+                        if hasattr(cap, "text"):
+                            text = getattr(cap, "text")
+                        elif hasattr(cap, "payload"):
                             try:
-                                text = str(getattr(cap, 'payload'))
+                                text = str(getattr(cap, "payload"))
                             except Exception:
                                 text = None
                         else:
@@ -182,8 +190,7 @@ class LocalEvolution:
                 if append_event and self._near_dup_staging:
                     append_event(self._near_dup_staging, staging_evt)
             except Exception:
-                logger.exception(
-                    "Failed to write near-duplicate staging event")
+                logger.exception("Failed to write near-duplicate staging event")
         else:
             # Only create a new glyph when confidence is high and it's not a duplicate
             if confidence is not None and confidence >= self.accept_threshold:
@@ -233,28 +240,25 @@ class LocalEvolution:
             return
         self._lexicon_loaded = True
         try:
-            lexpath = os.path.normpath(os.path.join(os.path.dirname(
-                __file__), "..", "..", "glyph_lexicon_rows_before_phase3.json"))
+            lexpath = os.path.normpath(
+                os.path.join(os.path.dirname(__file__), "..", "..", "glyph_lexicon_rows_before_phase3.json")
+            )
             if os.path.exists(lexpath):
                 try:
-                    with open(lexpath, 'r', encoding='utf-8') as fh:
+                    with open(lexpath, "r", encoding="utf-8") as fh:
                         data = json.load(fh)
                         if isinstance(data, list):
                             for row in data:
                                 # consider name and examples
                                 if isinstance(row, dict):
-                                    name = row.get('name') or row.get(
-                                        'phrase') or ''
+                                    name = row.get("name") or row.get("phrase") or ""
                                     if name:
-                                        self._existing_normalized.add(
-                                            self._normalize(str(name)))
-                                    ex = row.get('examples') or row.get(
-                                        'example') or []
+                                        self._existing_normalized.add(self._normalize(str(name)))
+                                    ex = row.get("examples") or row.get("example") or []
                                     if isinstance(ex, list):
                                         for e in ex:
                                             try:
-                                                self._existing_normalized.add(
-                                                    self._normalize(str(e)))
+                                                self._existing_normalized.add(self._normalize(str(e)))
                                             except Exception:
                                                 continue
                         else:
@@ -306,23 +310,18 @@ class HybridProcessorWithEvolution:
         # Initialize lexicon-aware response generator
         self.lexicon_aware_generator = None
         if LEXICON_AWARE_AVAILABLE:
-            self.lexicon_aware_generator = LexiconAwareResponseGenerator(
-                hybrid_learner=hybrid_learner
-            )
+            self.lexicon_aware_generator = LexiconAwareResponseGenerator(hybrid_learner=hybrid_learner)
 
         self.conversation_history = []
         self.generated_glyphs = []
 
-        logger.info(
-            "[HYBRID PROCESSOR] Initialized with dynamic glyph evolution")
+        logger.info("[HYBRID PROCESSOR] Initialized with dynamic glyph evolution")
         logger.info(f"  - Hybrid Learner: ready")
-        logger.info(
-            f"  - Adaptive Extractor: {adaptive_extractor.__class__.__name__ if adaptive_extractor else 'N/A'}")
+        logger.info(f"  - Adaptive Extractor: {adaptive_extractor.__class__.__name__ if adaptive_extractor else 'N/A'}")
         logger.info(f"  - Glyph Evolution: connected")
         if self.lexicon_aware_generator:
             logger.info(f"  - Lexicon-Aware Generator: ready")
-            logger.info(
-                f"    → Responses will be personalized based on learned patterns")
+            logger.info(f"    → Responses will be personalized based on learned patterns")
 
     def process_user_message(
         self,
@@ -369,17 +368,15 @@ class HybridProcessorWithEvolution:
         try:
             # STAGE 1: Extract signals (adaptive - may discover new dimensions)
             logger.info("[STAGE 1] Signal Extraction (Adaptive)")
-            emotional_signals = self._extract_signals(
-                user_message, ai_response)
-            signal_names = [s.get("signal") or s.get("name")
-                            for s in emotional_signals]
+            emotional_signals = self._extract_signals(user_message, ai_response)
+            signal_names = [s.get("signal") or s.get("name") for s in emotional_signals]
             result["pipeline_stages"]["signal_extraction"] = {
                 "signals_found": len(emotional_signals),
                 "signals": signal_names,
             }
             logger.info(f"  ✓ Extracted {len(emotional_signals)} signals")
             if emotional_signals:
-                signal_str = ', '.join([str(s) for s in signal_names if s])
+                signal_str = ", ".join([str(s) for s in signal_names if s])
                 logger.info(f"    Signals: {signal_str}")
 
             # STAGE 2: Learning (local-first)
@@ -393,16 +390,14 @@ class HybridProcessorWithEvolution:
                 glyphs=glyphs,
             )
             result["pipeline_stages"]["hybrid_learning"] = learning_result
-            logger.info(
-                f"  ✓ Learning complete: {learning_result.get('learning_result', {}).get('success', False)}")
+            logger.info(f"  ✓ Learning complete: {learning_result.get('learning_result', {}).get('success', False)}")
 
             # STAGE 3: Lexicon Updates
             logger.info("[STAGE 3] Lexicon Analysis")
             lexicon_info = learning_result.get("lexicon_updates", {})
             result["pipeline_stages"]["lexicon"] = lexicon_info
             if lexicon_info:
-                logger.info(
-                    f"  ✓ Lexicon contains {lexicon_info.get('signal_count', 0)} signals")
+                logger.info(f"  ✓ Lexicon contains {lexicon_info.get('signal_count', 0)} signals")
 
             # STAGE 4: Pattern Detection & Glyph Generation
             logger.info("[STAGE 4] Pattern Detection & Glyph Generation")
@@ -412,31 +407,31 @@ class HybridProcessorWithEvolution:
             glyph_result = {
                 "new_glyphs_count": len(new_glyphs),
                 "patterns_detected": len(patterns) if patterns else 0,
-                "new_glyphs": [g.to_dict() if hasattr(g, 'to_dict') else g for g in new_glyphs],
+                "new_glyphs": [g.to_dict() if hasattr(g, "to_dict") else g for g in new_glyphs],
             }
             result["pipeline_stages"]["glyph_generation"] = glyph_result
 
             if new_glyphs:
                 logger.info(f"  ✓ Generated {len(new_glyphs)} new glyphs:")
                 for glyph in new_glyphs:
-                    glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
-                    logger.info(
-                        f"    - {glyph_dict.get('symbol', '?')} {glyph_dict.get('name', '?')}")
+                    glyph_dict = glyph.to_dict() if hasattr(glyph, "to_dict") else glyph
+                    logger.info(f"    - {glyph_dict.get('symbol', '?')} {glyph_dict.get('name', '?')}")
                     self.generated_glyphs.append(glyph_dict)
             else:
-                logger.info(
-                    f"  ℹ No new glyphs generated (need more pattern frequency)")
+                logger.info(f"  ℹ No new glyphs generated (need more pattern frequency)")
 
             # Add to conversation history
-            self.conversation_history.append({
-                "conversation_id": conversation_id,
-                "user_id": user_id,
-                "user_message": user_message,
-                "ai_response": ai_response,
-                "signals": emotional_signals,
-                "new_glyphs": new_glyphs,
-                "result": result,
-            })
+            self.conversation_history.append(
+                {
+                    "conversation_id": conversation_id,
+                    "user_id": user_id,
+                    "user_message": user_message,
+                    "ai_response": ai_response,
+                    "signals": emotional_signals,
+                    "new_glyphs": new_glyphs,
+                    "result": result,
+                }
+            )
 
             result["status"] = "success"
 
@@ -462,7 +457,10 @@ class HybridProcessorWithEvolution:
                 signals = self.extractor.extract_signals(combined_text)
             else:
                 # Fallback to poetry extractor
-                from emotional_os.learning.poetry_signal_extractor import get_poetry_extractor
+                from emotional_os.learning.poetry_signal_extractor import (
+                    get_poetry_extractor,
+                )
+
                 extractor = get_poetry_extractor()
                 signals = extractor.extract_signals(combined_text)
 
@@ -480,8 +478,7 @@ class HybridProcessorWithEvolution:
 
     def get_conversation_summary(self, conversation_id: str) -> Dict:
         """Get summary of a specific conversation."""
-        conv_data = [
-            c for c in self.conversation_history if c["conversation_id"] == conversation_id]
+        conv_data = [c for c in self.conversation_history if c["conversation_id"] == conversation_id]
 
         if not conv_data:
             return {"found": False}
@@ -507,8 +504,7 @@ class HybridProcessorWithEvolution:
         print("HYBRID PROCESSOR SESSION SUMMARY")
         print("=" * 80)
 
-        print(
-            f"\nTotal conversations processed: {len(set(c['conversation_id'] for c in self.conversation_history))}")
+        print(f"\nTotal conversations processed: {len(set(c['conversation_id'] for c in self.conversation_history))}")
         print(f"Total turns processed: {len(self.conversation_history)}")
         print(f"Total new glyphs generated: {len(self.generated_glyphs)}")
 
@@ -516,8 +512,7 @@ class HybridProcessorWithEvolution:
             print(f"\nNEW GLYPHS GENERATED:")
             for i, glyph in enumerate(self.generated_glyphs, 1):
                 emotions = " + ".join(glyph.get("core_emotions", []))
-                print(
-                    f"  {i}. {glyph.get('symbol', '?')} {glyph.get('name', '?')} ({emotions})")
+                print(f"  {i}. {glyph.get('symbol', '?')} {glyph.get('name', '?')} ({emotions})")
 
         print("\n" + "=" * 80 + "\n")
 
@@ -530,11 +525,10 @@ class HybridProcessorWithEvolution:
                 "count": len(self.generated_glyphs),
             }
 
-            with open(output_file, 'w') as f:
+            with open(output_file, "w") as f:
                 json.dump(export_data, f, indent=2)
 
-            logger.info(
-                f"✓ Exported {len(self.generated_glyphs)} glyphs to {output_file}")
+            logger.info(f"✓ Exported {len(self.generated_glyphs)} glyphs to {output_file}")
             return {"success": True, "count": len(self.generated_glyphs), "file": output_file}
 
         except Exception as e:
@@ -574,11 +568,9 @@ class HybridProcessorWithEvolution:
             conversation_context=conversation_context,
         )
 
-        logger.info(
-            f"[LEXICON-AWARE] Personalization level: {result.get('personalization_level')}")
-        if result.get('trigger_keywords'):
-            logger.info(
-                f"  Learned associations: {result.get('trigger_keywords')}")
+        logger.info(f"[LEXICON-AWARE] Personalization level: {result.get('personalization_level')}")
+        if result.get("trigger_keywords"):
+            logger.info(f"  Learned associations: {result.get('trigger_keywords')}")
 
         return result
 
@@ -611,12 +603,11 @@ def create_integrated_processor(
             adaptive_extractor=adaptive_extractor,
         )
     except Exception:
-        logger.info(
-            "Dynamic glyph evolution integration not available — using LocalEvolution fallback")
+        logger.info("Dynamic glyph evolution integration not available — using LocalEvolution fallback")
         # Use the provided hybrid_learner if it looks like a LocalLearner,
         # otherwise construct a LocalLearner for persistence.
         try:
-            if hybrid_learner is not None and hasattr(hybrid_learner, 'collect_candidate'):
+            if hybrid_learner is not None and hasattr(hybrid_learner, "collect_candidate"):
                 local_learner = hybrid_learner
             else:
                 local_learner = LocalLearner()

@@ -3,7 +3,7 @@ import importlib
 # Rebind cleaned implementations from tools so imports from the
 # top-level `ritual_capsule_processor` module resolve to the
 # canonical classes in `tools.ritual_capsule_processor`.
-_tools = importlib.import_module('tools.ritual_capsule_processor')
+_tools = importlib.import_module("tools.ritual_capsule_processor")
 
 GlyphObject = _tools.GlyphObject
 RitualCapsuleProcessor = _tools.RitualCapsuleProcessor

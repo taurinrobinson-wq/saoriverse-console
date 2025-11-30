@@ -2,14 +2,17 @@
 
 Provides simple insert and lookup by trigger and optional conversation scope.
 """
-import sqlite3
-from pathlib import Path
-from typing import Optional, Dict, Any, List
-import os
-import time
 
-DEFAULT_DB = Path(os.environ.get("CLARIFICATION_TRACE_DB") or Path(
-    __file__).resolve().parents[2] / "data" / "disambiguation_memory.db")
+import os
+import sqlite3
+import time
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+DEFAULT_DB = Path(
+    os.environ.get("CLARIFICATION_TRACE_DB")
+    or Path(__file__).resolve().parents[2] / "data" / "disambiguation_memory.db"
+)
 
 
 class ClarificationStore:
@@ -71,28 +74,49 @@ class ClarificationStore:
             if cur.lastrowid:
                 return cur.lastrowid
             # fallback: select existing row id
-            cur.execute("SELECT id FROM clarifications WHERE conversation_id=? AND trigger=? LIMIT 1",
-                        (record.get("conversation_id"), record.get("trigger")))
+            cur.execute(
+                "SELECT id FROM clarifications WHERE conversation_id=? AND trigger=? LIMIT 1",
+                (record.get("conversation_id"), record.get("trigger")),
+            )
             row = cur.fetchone()
             return row[0] if row else None
         finally:
             conn.close()
 
-    def lookup(self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    def lookup(
+        self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None
+    ) -> Optional[Dict[str, Any]]:
         conn = self._get_conn()
         try:
             cur = conn.cursor()
             if conversation_id:
-                cur.execute("SELECT conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at FROM clarifications WHERE conversation_id=? AND trigger=? ORDER BY created_at DESC LIMIT 1", (conversation_id, trigger))
+                cur.execute(
+                    "SELECT conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at FROM clarifications WHERE conversation_id=? AND trigger=? ORDER BY created_at DESC LIMIT 1",
+                    (conversation_id, trigger),
+                )
             elif user_id:
-                cur.execute("SELECT conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at FROM clarifications WHERE user_id=? AND trigger=? ORDER BY created_at DESC LIMIT 1", (user_id, trigger))
+                cur.execute(
+                    "SELECT conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at FROM clarifications WHERE user_id=? AND trigger=? ORDER BY created_at DESC LIMIT 1",
+                    (user_id, trigger),
+                )
             else:
-                cur.execute("SELECT conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at FROM clarifications WHERE trigger=? ORDER BY created_at DESC LIMIT 1", (trigger,))
+                cur.execute(
+                    "SELECT conversation_id, user_id, trigger, original_input, system_response, user_clarification, corrected_intent, created_at FROM clarifications WHERE trigger=? ORDER BY created_at DESC LIMIT 1",
+                    (trigger,),
+                )
             row = cur.fetchone()
             if not row:
                 return None
-            keys = ["conversation_id", "user_id", "trigger", "original_input",
-                    "system_response", "user_clarification", "corrected_intent", "created_at"]
+            keys = [
+                "conversation_id",
+                "user_id",
+                "trigger",
+                "original_input",
+                "system_response",
+                "user_clarification",
+                "corrected_intent",
+                "created_at",
+            ]
             return dict(zip(keys, row))
         finally:
             conn.close()
@@ -101,8 +125,7 @@ class ClarificationStore:
         conn = self._get_conn()
         try:
             cur = conn.cursor()
-            cur.execute(
-                "UPDATE clarifications SET corrected_intent=? WHERE id=?", (corrected_intent, rowid))
+            cur.execute("UPDATE clarifications SET corrected_intent=? WHERE id=?", (corrected_intent, rowid))
             conn.commit()
             return cur.rowcount > 0
         finally:

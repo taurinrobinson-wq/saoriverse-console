@@ -20,15 +20,11 @@ st.set_page_config(
     page_title="Emotional OS",
     page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 # Authentication configuration
-AUTH_CONFIG = {
-    "session_timeout_minutes": 480,  # 8 hours
-    "max_login_attempts": 5,
-    "lockout_duration_minutes": 15
-}
+AUTH_CONFIG = {"session_timeout_minutes": 480, "max_login_attempts": 5, "lockout_duration_minutes": 15}  # 8 hours
 
 
 class AuthenticationManager:
@@ -47,17 +43,17 @@ class AuthenticationManager:
 
     def init_session_state(self):
         """Initialize authentication session state"""
-        if 'authenticated' not in st.session_state:
+        if "authenticated" not in st.session_state:
             st.session_state.authenticated = False
-        if 'user_id' not in st.session_state:
+        if "user_id" not in st.session_state:
             st.session_state.user_id = None
-        if 'username' not in st.session_state:
+        if "username" not in st.session_state:
             st.session_state.username = None
-        if 'session_token' not in st.session_state:
+        if "session_token" not in st.session_state:
             st.session_state.session_token = None
-        if 'session_expires' not in st.session_state:
+        if "session_expires" not in st.session_state:
             st.session_state.session_expires = None
-        if 'login_attempts' not in st.session_state:
+        if "login_attempts" not in st.session_state:
             st.session_state.login_attempts = {}
 
     def hash_password(self, password: str, salt: str = None) -> tuple:
@@ -66,10 +62,7 @@ class AuthenticationManager:
             salt = secrets.token_hex(32)
 
         password_hash = hashlib.pbkdf2_hmac(
-            'sha256',
-            password.encode('utf-8'),
-            salt.encode('utf-8'),
-            100000  # iterations
+            "sha256", password.encode("utf-8"), salt.encode("utf-8"), 100000  # iterations
         )
 
         return password_hash.hex(), salt
@@ -99,9 +92,8 @@ class AuthenticationManager:
             return True
 
         attempts = st.session_state.login_attempts[username]
-        if attempts['count'] >= AUTH_CONFIG['max_login_attempts']:
-            lockout_time = attempts['last_attempt'] + \
-                timedelta(minutes=AUTH_CONFIG['lockout_duration_minutes'])
+        if attempts["count"] >= AUTH_CONFIG["max_login_attempts"]:
+            lockout_time = attempts["last_attempt"] + timedelta(minutes=AUTH_CONFIG["lockout_duration_minutes"])
             if datetime.now() < lockout_time:
                 return False
             # Reset attempts after lockout period
@@ -125,17 +117,15 @@ class AuthenticationManager:
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
         if username not in st.session_state.login_attempts:
-            st.session_state.login_attempts[username] = {
-                'count': 0, 'last_attempt': datetime.now()}
+            st.session_state.login_attempts[username] = {"count": 0, "last_attempt": datetime.now()}
 
         if success:
             # Reset attempts on successful login
             del st.session_state.login_attempts[username]
         else:
             # Increment failed attempts
-            st.session_state.login_attempts[username]['count'] += 1
-            st.session_state.login_attempts[username]['last_attempt'] = datetime.now(
-            )
+            st.session_state.login_attempts[username]["count"] += 1
+            st.session_state.login_attempts[username]["last_attempt"] = datetime.now()
 
     def create_user(self, username: str, password: str, email: str = "") -> dict:
         """Create new user account"""
@@ -145,28 +135,27 @@ class AuthenticationManager:
 
             # Create user via Supabase edge function
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
                 json={
                     "action": "create_user",
                     "username": username,
                     "email": email,
                     "password_hash": password_hash,
                     "salt": salt,
-                    "created_at": datetime.now().isoformat()
+                    "created_at": datetime.now().isoformat(),
                 },
-                timeout=10
+                timeout=10,
             )
 
             if response.status_code == 200:
                 return {"success": True, "message": "Account created successfully"}
-            error_data = response.json() if response.headers.get(
-                'content-type', '').startswith('application/json') else {}
+            error_data = (
+                response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+            )
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
 
         except Exception as e:
@@ -181,19 +170,13 @@ class AuthenticationManager:
 
             # Authenticate via Supabase edge function
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "action": "authenticate",
-                    "username": username,
-                    "password": password
-                },
-                timeout=10
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
+                json={"action": "authenticate", "username": username, "password": password},
+                timeout=10,
             )
 
             if response.status_code == 200:
@@ -204,8 +187,9 @@ class AuthenticationManager:
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
                     st.session_state.session_token = data.get("session_token")
-                    st.session_state.session_expires = (datetime.now(
-                    ) + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])).isoformat()
+                    st.session_state.session_expires = (
+                        datetime.now() + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])
+                    ).isoformat()
 
                     self.record_login_attempt(username, True)
                     return {"success": True, "message": "Login successful"}
@@ -248,12 +232,10 @@ class AuthenticationManager:
 
         # Test mode banner
         with st.container():
-            st.warning(
-                "⚠️ **Backend Deployment Status**: Authentication functions deployed and ready")
+            st.warning("⚠️ **Backend Deployment Status**: Authentication functions deployed and ready")
             col1, col2 = st.columns([2, 1])
             with col1:
-                st.info(
-                    "Full authentication system is active. Try registering or use Test Mode for immediate access.")
+                st.info("Full authentication system is active. Try registering or use Test Mode for immediate access.")
             with col2:
                 if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
                     self.create_test_session()
@@ -289,10 +271,8 @@ class AuthenticationManager:
             with st.form("register_form"):
                 new_username = st.text_input("Choose Username")
                 new_email = st.text_input("Email (optional)")
-                new_password = st.text_input(
-                    "Choose Password", type="password")
-                confirm_password = st.text_input(
-                    "Confirm Password", type="password")
+                new_password = st.text_input("Choose Password", type="password")
+                confirm_password = st.text_input("Confirm Password", type="password")
                 register_submitted = st.form_submit_button("Create Account")
 
                 if register_submitted:
@@ -304,13 +284,11 @@ class AuthenticationManager:
                         st.error("Password must be at least 6 characters")
                     else:
                         with st.spinner("Creating account..."):
-                            result = self.create_user(
-                                new_username, new_password, new_email)
+                            result = self.create_user(new_username, new_password, new_email)
 
                         if result["success"]:
                             st.success(result["message"])
-                            st.info(
-                                "Please use the Login tab to sign in with your new account")
+                            st.info("Please use the Login tab to sign in with your new account")
                         else:
                             st.error(result["message"])
 
@@ -331,14 +309,14 @@ def render_main_app():
         col1, col2 = st.columns([2, 1])
 
         # Map legacy ai_preferred -> local (avoid enabling remote AI automatically)
-        if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'local'
-            st.session_state['prefer_ai'] = False
+        if st.session_state.get("processing_mode") == "ai_preferred":
+            st.session_state.processing_mode = "local"
+            st.session_state["prefer_ai"] = False
 
         with col1:
             # Local-first: only local processing exposed in the UI by default
             mode_options = ["local"]
-            current = st.session_state.get('processing_mode', 'local')
+            current = st.session_state.get("processing_mode", "local")
             try:
                 idx = mode_options.index(current)
             except ValueError:
@@ -367,15 +345,15 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(
-                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
 
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
 
     # Debug toggle for glyphs
     show_glyph_debug = st.sidebar.checkbox(
-        "Show glyph debug", value=False, help="Show selected glyphs and scores for debugging")
+        "Show glyph debug", value=False, help="Show selected glyphs and scores for debugging"
+    )
 
     if user_input:
         # Add user message to chat
@@ -393,20 +371,23 @@ def render_main_app():
                 if st.session_state[conversation_key]:
                     # find last assistant message if present
                     for ex in reversed(st.session_state[conversation_key]):
-                        if ex.get('assistant'):
-                            last_assistant = ex.get('assistant')
+                        if ex.get("assistant"):
+                            last_assistant = ex.get("assistant")
                             break
 
-                conversation_context = {
-                    'last_assistant_message': last_assistant}
+                conversation_context = {"last_assistant_message": last_assistant}
 
-                result = parse_input(user_input, 'emotional_os/parser/signal_lexicon.json',
-                                     db_path='emotional_os/glyphs/glyphs.db', conversation_context=conversation_context)
+                result = parse_input(
+                    user_input,
+                    "emotional_os/parser/signal_lexicon.json",
+                    db_path="emotional_os/glyphs/glyphs.db",
+                    conversation_context=conversation_context,
+                )
                 processing_time = time.time() - start_time
 
                 # Use response template from glyph if present (and debug mode not active)
-                response_template = result.get('voltage_response_template')
-                response_fallback = result.get('voltage_response')
+                response_template = result.get("voltage_response_template")
+                response_fallback = result.get("voltage_response")
                 if response_template and not show_glyph_debug:
                     response = response_template
                 else:
@@ -417,30 +398,33 @@ def render_main_app():
 
                 # If debug toggle enabled, render compact glyph table
                 if show_glyph_debug:
-                    glyphs_selected = result.get('glyphs_selected', []) or []
-                    signals = [s.get('keyword')
-                               for s in result.get('signals', [])]
+                    glyphs_selected = result.get("glyphs_selected", []) or []
+                    signals = [s.get("keyword") for s in result.get("signals", [])]
                     rows = []
                     for g in glyphs_selected:
-                        rows.append({
-                            'Signal': ', '.join(signals) if signals else '',
-                            'Gate': g.get('gate'),
-                            'Glyph': g.get('display_name') or g.get('glyph_name'),
-                            'Score': g.get('score')
-                        })
+                        rows.append(
+                            {
+                                "Signal": ", ".join(signals) if signals else "",
+                                "Gate": g.get("gate"),
+                                "Glyph": g.get("display_name") or g.get("glyph_name"),
+                                "Score": g.get("score"),
+                            }
+                        )
                     if rows:
                         st.markdown("**Glyphs selected:**")
                         st.table(rows)
 
         # Add to conversation history
-        st.session_state[conversation_key].append({
-            "user": user_input,
-            "assistant": response,
-            "processing_time": f"{processing_time:.2f}s",
-            "mode": processing_mode,
-            "timestamp": datetime.now().isoformat(),
-            "parser_result": result
-        })
+        st.session_state[conversation_key].append(
+            {
+                "user": user_input,
+                "assistant": response,
+                "processing_time": f"{processing_time:.2f}s",
+                "mode": processing_mode,
+                "timestamp": datetime.now().isoformat(),
+                "parser_result": result,
+            }
+        )
 
         st.rerun()
 
@@ -467,13 +451,13 @@ def render_main_app():
             "user_id": st.session_state.user_id,
             "username": st.session_state.username,
             "conversations": st.session_state[conversation_key],
-            "export_date": datetime.now().isoformat()
+            "export_date": datetime.now().isoformat(),
         }
         st.download_button(
             "Download JSON",
             json.dumps(user_data, indent=2),
             file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
-            mime="application/json"
+            mime="application/json",
         )
 
 

@@ -16,12 +16,24 @@ This script intentionally avoids any external API calls.
 import argparse
 import json
 import re
-from pathlib import Path
 from collections import Counter
+from pathlib import Path
 
 GENERIC_FILTER = {
-    'thing', 'things', 'stuff', 'something', 'anything', 'everything',
-    'item', 'items', 'object', 'objects', 'etc', 'etcetera', 'one', 'ones'
+    "thing",
+    "things",
+    "stuff",
+    "something",
+    "anything",
+    "everything",
+    "item",
+    "items",
+    "object",
+    "objects",
+    "etc",
+    "etcetera",
+    "one",
+    "ones",
 }
 
 
@@ -49,13 +61,13 @@ def filter_syn_list(syns, remove_multiword: bool, min_len: int):
     for s in syns:
         s_norm = s.strip().lower()
         if not s_norm:
-            removed.append((s, 'empty'))
+            removed.append((s, "empty"))
             continue
-        if remove_multiword and ' ' in s_norm:
-            removed.append((s, 'multiword'))
+        if remove_multiword and " " in s_norm:
+            removed.append((s, "multiword"))
             continue
         if is_low_quality(s_norm, min_len):
-            removed.append((s, 'low_quality'))
+            removed.append((s, "low_quality"))
             continue
         kept.append(s_norm)
     # dedupe preserving order
@@ -77,8 +89,8 @@ def main():
     `data/Local_Only_Interface.md` and writes `data/synonyms_filtered.json`.
     """
     import json
-    import re
     import os
+    import re
     from pathlib import Path
 
     STOPWORDS = {"thing", "stuff", "item", "something"}
@@ -105,12 +117,12 @@ def main():
     def filter_synonyms(input_path="data/synonyms_local.json", output_path="data/synonyms_filtered.json"):
         data_p = Path(input_path)
         if not data_p.exists():
-            print('Input file not found:', input_path)
+            print("Input file not found:", input_path)
             return {}
-        data = json.loads(data_p.read_text(encoding='utf-8'))
+        data = json.loads(data_p.read_text(encoding="utf-8"))
         filtered = {}
         for seed, sources in data.items():
-            merged = sources.get('merged', [])
+            merged = sources.get("merged", [])
             clean = []
             for token in merged:
                 token = normalize_token(token)
@@ -119,15 +131,14 @@ def main():
             # dedupe preserving order
             clean = list(dict.fromkeys(clean))
             filtered[seed] = {
-                'merged_filtered': clean,
-                'wordnet': sources.get('wordnet', []),
-                'spacy_top': sources.get('spacy_top', [])
+                "merged_filtered": clean,
+                "wordnet": sources.get("wordnet", []),
+                "spacy_top": sources.get("spacy_top", []),
             }
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        Path(output_path).write_text(json.dumps(
-            filtered, ensure_ascii=False, indent=2), encoding='utf-8')
-        print(f'Filtered synonyms written to {output_path}')
+        Path(output_path).write_text(json.dumps(filtered, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"Filtered synonyms written to {output_path}")
         return filtered
 
-    if __name__ == '__main__':
+    if __name__ == "__main__":
         filter_synonyms()

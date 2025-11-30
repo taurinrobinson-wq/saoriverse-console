@@ -4,9 +4,9 @@ Count labels and print percentages and a 10-turn sample from the middle
 of learning/imported_conversations/parsed_conversation_reclassified.json
 """
 import json
+import sys
 from collections import Counter
 from pathlib import Path
-import sys
 
 P = Path("learning/imported_conversations/parsed_conversation_reclassified.json")
 if not P.exists():
@@ -35,7 +35,7 @@ if "ai" not in counts and "system" in counts:
 start = max(0, total // 2 - 5)
 end = min(total, start + 10)
 print(f"\nShowing turns {start+1}..{end} (10-turn sample from middle):\n")
-for i, m in enumerate(msgs[start:end], start=start+1):
+for i, m in enumerate(msgs[start:end], start=start + 1):
     t = m.get("type")
     c = (m.get("content") or "").replace("\n", " ")[:400]
     print(f"{i:04d}. {t} — {c}")

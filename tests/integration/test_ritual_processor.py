@@ -16,7 +16,7 @@ def test_basic_functionality():
     if RitualCapsuleProcessor is None:
         print("⚠️ Skipping: ritual_capsule_processor not available (optional dependency)")
         return
-    
+
     print("🔮 Testing Ritual Capsule Processor...")
 
     # Initialize processor
@@ -28,7 +28,9 @@ def test_basic_functionality():
     print(f"✓ Emotional signals detected: {signals}")
 
     # Test voltage marker detection
-    voltage_markers, voltage_pair = processor.parse_voltage_markers("The transmission carries ε-δ voltage with strong resonance")
+    voltage_markers, voltage_pair = processor.parse_voltage_markers(
+        "The transmission carries ε-δ voltage with strong resonance"
+    )
     print(f"✓ Voltage markers: {voltage_markers}, Pair: {voltage_pair}")
 
     # Test gate detection
@@ -48,12 +50,13 @@ def test_basic_functionality():
 
     print("✨ Basic functionality tests passed!")
 
+
 def test_file_scanning():
     """Test file scanning functionality"""
     if RitualCapsuleProcessor is None:
         print("⚠️ Skipping: ritual_capsule_processor not available (optional dependency)")
         return
-    
+
     print("\n🔍 Testing file scanning...")
 
     processor = RitualCapsuleProcessor()
@@ -69,12 +72,13 @@ def test_file_scanning():
         text = processor.extract_text_content(sample_file)
         print(f"✓ Sample text from {sample_file.name}: {text[:100]}...")
 
+
 def test_glyph_creation():
     """Test creating a sample glyph object"""
     if GlyphObject is None:
         print("⚠️ Skipping: GlyphObject not available (optional dependency)")
         return
-    
+
     print("\n🎨 Testing glyph object creation...")
 
     glyph = GlyphObject()
@@ -90,6 +94,7 @@ def test_glyph_creation():
     print(f"   Category: {glyph.category}, Valence: {glyph.valence}")
     print(f"   Signals: {glyph.emotional_signals}")
 
+
 if __name__ == "__main__":
     try:
         test_basic_functionality()
@@ -100,4 +105,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"❌ Test failed: {e}")
         import traceback
+
         traceback.print_exc()

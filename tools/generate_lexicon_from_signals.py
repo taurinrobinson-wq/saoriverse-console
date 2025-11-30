@@ -13,22 +13,22 @@ Output structure (example):
 }
 """
 
+import argparse
 import csv
 import json
+from collections import Counter, defaultdict
 from pathlib import Path
-from collections import defaultdict, Counter
-import argparse
 
 
 def build_lexicon(csv_path: Path, out_path: Path, min_freq: int = 1):
     counts = Counter()
     keywords = defaultdict(Counter)
 
-    with csv_path.open('r', encoding='utf-8') as f:
+    with csv_path.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            sig = (row.get('signal') or '').strip()
-            kw = (row.get('keyword') or '').strip()
+            sig = (row.get("signal") or "").strip()
+            kw = (row.get("keyword") or "").strip()
             if not sig:
                 continue
             counts[sig] += 1
@@ -40,15 +40,12 @@ def build_lexicon(csv_path: Path, out_path: Path, min_freq: int = 1):
         if freq < min_freq:
             continue
         kw_list = [k for k, _ in keywords[sig].most_common(12)]
-        signals[sig] = {
-            'frequency': freq,
-            'keywords': kw_list
-        }
+        signals[sig] = {"frequency": freq, "keywords": kw_list}
 
-    lexicon = {'signals': signals}
+    lexicon = {"signals": signals}
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    with out_path.open('w', encoding='utf-8') as f:
+    with out_path.open("w", encoding="utf-8") as f:
         json.dump(lexicon, f, indent=2)
 
     print(f"Wrote lexicon with {len(signals)} signals to {out_path}")
@@ -56,11 +53,9 @@ def build_lexicon(csv_path: Path, out_path: Path, min_freq: int = 1):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--csv', default='data/processed_poetry_signals/openstax_signals.csv')
-    parser.add_argument(
-        '--out', default='learning/user_overrides/openstax_bulk_lexicon.json')
-    parser.add_argument('--min-freq', type=int, default=1)
+    parser.add_argument("--csv", default="data/processed_poetry_signals/openstax_signals.csv")
+    parser.add_argument("--out", default="learning/user_overrides/openstax_bulk_lexicon.json")
+    parser.add_argument("--min-freq", type=int, default=1)
     args = parser.parse_args()
 
     csv_path = Path(args.csv)
@@ -74,5 +69,5 @@ def main():
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

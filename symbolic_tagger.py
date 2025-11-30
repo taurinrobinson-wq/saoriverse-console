@@ -6,6 +6,7 @@ Exports:
 This is intentionally simple and regex-driven so it is easy to tune and
 auditable by non-technical maintainers.
 """
+
 import re
 from difflib import SequenceMatcher
 from typing import List, Tuple
@@ -29,60 +30,78 @@ initiatory_patterns = [
 # Synonym groups: multi-word variants that are emotionally equivalent.
 # These are used for fuzzy multi-word matching in addition to regex.
 _SYNONYM_GROUPS: List[Tuple[str, List[str]]] = [
-    ("felt_seen", [
-        "felt seen",
-        "they see me",
-        "i feel seen",
-        "i feel seen by",
-        "i feel overwhelmed",
-        "i feel swamped",
-        "i feel drowning",
-        "i feel underwater",
-    ]),
-    ("new_connection", [
-        "new connection",
-        "first conversation",
-        "just met someone",
-        "met someone new",
-    ]),
-    ("opened", [
-        "something opened",
-        "what's opening",
-        "an opening opened",
-        "opening in me",
-    ]),
-    ("containment", [
-        "can you help me hold this",
-        "keep this close",
-        "don't let this slip away",
-        "i need to save this moment",
-        "this feels precious",
-        "keep this safe",
-        "i want to remember",
-        "please don't let me forget",
-        "this matters to me",
-    ]),
-    ("legacy_marker", [
-        "this left a mark",
-        "this became part of me",
-        "i carry this forward",
-        "this is etched in me",
-        "this belongs to my lineage",
-        "this changed me",
-        "i want to be remembered",
-        "i'll never forget",
-        "this shaped who i am",
-        "this is part of my story",
-    ]),
-    ("voltage", [
-        "i feel flooded",
-        "i'm buzzing inside",
-        "this hit me hard",
-        "i'm lit up",
-        "i'm surging with feeling",
-        "i feel electric",
-        "i'm overwhelmed and excited",
-    ]),
+    (
+        "felt_seen",
+        [
+            "felt seen",
+            "they see me",
+            "i feel seen",
+            "i feel seen by",
+            "i feel overwhelmed",
+            "i feel swamped",
+            "i feel drowning",
+            "i feel underwater",
+        ],
+    ),
+    (
+        "new_connection",
+        [
+            "new connection",
+            "first conversation",
+            "just met someone",
+            "met someone new",
+        ],
+    ),
+    (
+        "opened",
+        [
+            "something opened",
+            "what's opening",
+            "an opening opened",
+            "opening in me",
+        ],
+    ),
+    (
+        "containment",
+        [
+            "can you help me hold this",
+            "keep this close",
+            "don't let this slip away",
+            "i need to save this moment",
+            "this feels precious",
+            "keep this safe",
+            "i want to remember",
+            "please don't let me forget",
+            "this matters to me",
+        ],
+    ),
+    (
+        "legacy_marker",
+        [
+            "this left a mark",
+            "this became part of me",
+            "i carry this forward",
+            "this is etched in me",
+            "this belongs to my lineage",
+            "this changed me",
+            "i want to be remembered",
+            "i'll never forget",
+            "this shaped who i am",
+            "this is part of my story",
+        ],
+    ),
+    (
+        "voltage",
+        [
+            "i feel flooded",
+            "i'm buzzing inside",
+            "this hit me hard",
+            "i'm lit up",
+            "i'm surging with feeling",
+            "i feel electric",
+            "i'm overwhelmed and excited",
+        ],
+    ),
 ]
 
 # Anchoring: ongoing processes, long-term work, relational labor
@@ -190,7 +209,7 @@ def tag_input(user_input: str) -> List[str]:
             p_len = max(3, len(p_tokens))
             tokens = text.split()
             for i in range(max(1, len(tokens) - p_len + 1)):
-                window = " ".join(tokens[i:i + p_len])
+                window = " ".join(tokens[i : i + p_len])
                 score = SequenceMatcher(None, window, phrase).ratio()
                 if score >= thresh:
                     return True
@@ -235,12 +254,14 @@ def tag_input_with_diagnostics(user_input: str, fuzzy_thresh: float = 0.73) -> d
     matches = []
 
     def _add_match(category: str, pattern: str, match_type: str, score: float, tag: str):
-        matches.append({
-            "category": category,
-            "pattern": pattern,
-            "match_type": match_type,
-            "score": float(score),
-        })
+        matches.append(
+            {
+                "category": category,
+                "pattern": pattern,
+                "match_type": match_type,
+                "score": float(score),
+            }
+        )
         if tag not in tags:
             tags.append(tag)
 
@@ -274,7 +295,7 @@ def tag_input_with_diagnostics(user_input: str, fuzzy_thresh: float = 0.73) -> d
             p_len = max(3, len(p_tokens))
             tokens = text.split()
             for i in range(max(1, len(tokens) - p_len + 1)):
-                window = " ".join(tokens[i:i + p_len])
+                window = " ".join(tokens[i : i + p_len])
                 score = SequenceMatcher(None, window, phrase).ratio()
                 if score > best_score:
                     best_score = score
@@ -292,8 +313,7 @@ def tag_input_with_diagnostics(user_input: str, fuzzy_thresh: float = 0.73) -> d
     }
 
     for name, phrases in _SYNONYM_GROUPS:
-        matched, score, phrase = _fuzzy_group_match_with_score(
-            text, phrases, fuzzy_thresh)
+        matched, score, phrase = _fuzzy_group_match_with_score(text, phrases, fuzzy_thresh)
         if matched and phrase:
             tag = group_tag_map.get(name, "initiatory_signal")
             _add_match("synonym_group", phrase, "fuzzy", score, tag)

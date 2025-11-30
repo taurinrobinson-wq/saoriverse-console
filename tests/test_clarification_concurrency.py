@@ -1,9 +1,9 @@
-import sqlite3
+import concurrent.futures
 import json
 import os
+import sqlite3
 import time
 from pathlib import Path
-import concurrent.futures
 
 import pytest
 
@@ -28,8 +28,7 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
     monkeypatch.setenv("CLARIFICATION_DB_INSERT_TIMEOUT", "0.05")
 
     # ensure the store used by ClarificationTrace is our store
-    monkeypatch.setattr(clarification_trace,
-                        "get_default_store", lambda: store, raising=False)
+    monkeypatch.setattr(clarification_trace, "get_default_store", lambda: store, raising=False)
 
     trace = clarification_trace.ClarificationTrace(store_path=jsonl_path)
 
@@ -55,8 +54,7 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
             results.append(f.result())
 
     # all results should be True (not exceptions)
-    assert all(
-        r is True for r in results), f"Some calls failed: {[r for r in results if r is not True]}"
+    assert all(r is True for r in results), f"Some calls failed: {[r for r in results if r is not True]}"
 
     # give background fallback writes a moment
     time.sleep(0.2)
@@ -64,12 +62,10 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
     # count JSONL lines
     jsonl_count = 0
     if jsonl_path.exists():
-        jsonl_count = len([ln for ln in jsonl_path.read_text(
-            encoding="utf8").splitlines() if ln.strip()])
+        jsonl_count = len([ln for ln in jsonl_path.read_text(encoding="utf8").splitlines() if ln.strip()])
 
     # count DB rows
-    conn = sqlite3.connect(str(store.db_path), timeout=1,
-                           check_same_thread=False)
+    conn = sqlite3.connect(str(store.db_path), timeout=1, check_same_thread=False)
     try:
         cur = conn.cursor()
         cur.execute("SELECT COUNT(1) FROM clarifications")
@@ -93,8 +89,7 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
                     jsonl_triggers.add(rec.get("trigger"))
 
         db_triggers = set()
-        conn = sqlite3.connect(
-            str(store.db_path), timeout=1, check_same_thread=False)
+        conn = sqlite3.connect(str(store.db_path), timeout=1, check_same_thread=False)
         try:
             cur = conn.cursor()
             cur.execute("SELECT trigger FROM clarifications")
@@ -105,5 +100,6 @@ def test_concurrent_inserts_use_fallback_under_timeout(tmp_path, monkeypatch):
             conn.close()
 
         union = jsonl_triggers.union(db_triggers)
-        assert len(
-            union) == N, f"Expected {N} unique stored triggers, found {len(union)} (jsonl={len(jsonl_triggers)}, db={len(db_triggers)})"
+        assert (
+            len(union) == N
+        ), f"Expected {N} unique stored triggers, found {len(union)} (jsonl={len(jsonl_triggers)}, db={len(db_triggers)})"

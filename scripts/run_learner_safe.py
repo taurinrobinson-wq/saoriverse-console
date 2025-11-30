@@ -17,7 +17,10 @@ for p in sys.path[0:5]:
     print("  ", p)
 
 try:
-    from learning.lexicon_learner import learn_from_conversation_data, get_learning_insights
+    from learning.lexicon_learner import (
+        get_learning_insights,
+        learn_from_conversation_data,
+    )
 except Exception as e:
     print("IMPORT ERROR:", e)
     raise
@@ -35,8 +38,7 @@ with IN.open(encoding="utf-8") as f:
 print("Running learner on:", IN)
 results = learn_from_conversation_data(convo)
 
-OUT.write_text(json.dumps(results, ensure_ascii=False,
-               indent=2), encoding="utf-8")
+OUT.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
 print("WROTE:", OUT)
 
 insights = get_learning_insights()

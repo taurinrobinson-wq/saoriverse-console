@@ -9,13 +9,14 @@ Usage:
   python3 scripts/remove_fragment_seeds.py --in data/seeds.filtered.txt --out data/seeds.cleaned.txt
 """
 import argparse
-from pathlib import Path
 import json
+from pathlib import Path
 
 try:
-    from nltk.corpus import wordnet as wn
     import nltk
-    nltk.data.find('corpora/wordnet')
+    from nltk.corpus import wordnet as wn
+
+    nltk.data.find("corpora/wordnet")
 except Exception:
     wn = None
 
@@ -33,10 +34,9 @@ def load_wordnet_lemmas():
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument('--in', dest='infile', default='data/seeds.filtered.txt')
-    p.add_argument('--out', dest='outfile', default='data/seeds.cleaned.txt')
-    p.add_argument('--report', dest='report',
-                   default='data/seeds.cleaned.report.json')
+    p.add_argument("--in", dest="infile", default="data/seeds.filtered.txt")
+    p.add_argument("--out", dest="outfile", default="data/seeds.cleaned.txt")
+    p.add_argument("--report", dest="report", default="data/seeds.cleaned.report.json")
     args = p.parse_args()
 
     infile = Path(args.infile)
@@ -44,11 +44,10 @@ def main():
     reportp = Path(args.report)
 
     if not infile.exists():
-        print('Input file not found:', infile)
+        print("Input file not found:", infile)
         return
 
-    seeds = [l.strip() for l in infile.read_text(
-        encoding='utf-8').splitlines() if l.strip()]
+    seeds = [l.strip() for l in infile.read_text(encoding="utf-8").splitlines() if l.strip()]
 
     lemmas = load_wordnet_lemmas()
     removed = []
@@ -73,14 +72,17 @@ def main():
             kept.append(t)
 
     outfile.parent.mkdir(parents=True, exist_ok=True)
-    outfile.write_text('\n'.join(kept) + '\n', encoding='utf-8')
-    report = {'input_count': len(seeds), 'kept_count': len(
-        kept), 'removed_count': len(removed), 'removed': removed[:200]}
-    reportp.write_text(json.dumps(report, indent=2), encoding='utf-8')
-    print(
-        f'Wrote cleaned seeds to {outfile} ({len(kept)} kept, {len(removed)} removed)')
-    print('Report:', reportp)
+    outfile.write_text("\n".join(kept) + "\n", encoding="utf-8")
+    report = {
+        "input_count": len(seeds),
+        "kept_count": len(kept),
+        "removed_count": len(removed),
+        "removed": removed[:200],
+    }
+    reportp.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    print(f"Wrote cleaned seeds to {outfile} ({len(kept)} kept, {len(removed)} removed)")
+    print("Report:", reportp)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

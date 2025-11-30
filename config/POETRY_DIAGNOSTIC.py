@@ -7,19 +7,20 @@ This helps troubleshoot why enrichment isn't showing up in the UI.
 import os
 import sys
 
-sys.path.insert(0, '.')
+sys.path.insert(0, ".")
 repo_root = Path(__file__).resolve().parent
 os.chdir(str(repo_root))
 
-print("\n" + "="*70)
+print("\n" + "=" * 70)
 print("🔧 POETRY ENRICHMENT DIAGNOSTIC")
-print("="*70)
+print("=" * 70)
 
 # Check 1: Module loading
 print("\n1️⃣ MODULE STATUS")
 print("-" * 70)
 try:
     from parser.poetry_enrichment import PoetryEnrichment
+
     engine = PoetryEnrichment()
     print("✅ Poetry enrichment module loads successfully")
     stats = engine.get_stats()
@@ -36,15 +37,15 @@ print("-" * 70)
 import os
 
 files = {
-    'data/poetry/poetry_database.json': 'Poetry Database',
-    'data/lexicons/nrc_emotion_lexicon.txt': 'NRC Lexicon',
+    "data/poetry/poetry_database.json": "Poetry Database",
+    "data/lexicons/nrc_emotion_lexicon.txt": "NRC Lexicon",
 }
 
 for filepath, name in files.items():
     exists = os.path.exists(filepath)
     size = os.path.getsize(filepath) if exists else 0
     status = "✅" if exists else "❌"
-    size_str = f"{size/(1024*1024):.1f}MB" if size > 1024*1024 else f"{size/1024:.1f}KB"
+    size_str = f"{size/(1024*1024):.1f}MB" if size > 1024 * 1024 else f"{size/1024:.1f}KB"
     print(f"{status} {name}: {size_str}" if exists else f"{status} {name}: MISSING")
 
 # Check 3: Test enrichment
@@ -60,10 +61,10 @@ test_cases = [
 
 for test_text in test_cases:
     result = engine.enrich_emotion_analysis(test_text)
-    emotion = result.get('dominant_emotion', 'NONE')
-    glyphs = ' '.join(result.get('glyphs', []))
+    emotion = result.get("dominant_emotion", "NONE")
+    glyphs = " ".join(result.get("glyphs", []))
 
-    if result.get('dominant_emotion'):
+    if result.get("dominant_emotion"):
         print(f"✅ '{test_text[:40]}...'")
         print(f"   → {emotion} {glyphs}")
     else:
@@ -73,7 +74,8 @@ for test_text in test_cases:
 # Check 4: UI Integration
 print("\n4️⃣ UI INTEGRATION STEPS")
 print("-" * 70)
-print("""
+print(
+    """
 To enable Poetry Enrichment in the Streamlit UI:
 
 1. Launch the app:
@@ -96,7 +98,8 @@ To enable Poetry Enrichment in the Streamlit UI:
    - Poetic commentary
    - Emotional glyphs (✨💕🔥 etc)
    - Metadata with emotion analysis
-""")
+"""
+)
 
 # Check 5: Example enrichment
 print("\n5️⃣ LIVE ENRICHMENT EXAMPLE")
@@ -105,7 +108,7 @@ print("-" * 70)
 example_input = "Right now i'm feeling like i don't have time for other peoples b.s."
 result = engine.enrich_emotion_analysis(example_input)
 
-print(f"\nInput: \"{example_input}\"\n")
+print(f'\nInput: "{example_input}"\n')
 print(f"Emotion Detected: {result.get('dominant_emotion')}")
 print(f"Emotion Strength: {result.get('emotion_strength')}")
 print(f"Glyphs: {' '.join(result.get('glyphs', []))}")
@@ -115,10 +118,11 @@ print("Poetry Excerpt:")
 print(f"{result.get('poetry')}\n")
 
 # Summary
-print("="*70)
+print("=" * 70)
 print("✨ SUMMARY")
-print("="*70)
-print("""
+print("=" * 70)
+print(
+    """
 ✅ Poetry Enrichment System: OPERATIONAL
 ✅ All modules loading correctly
 ✅ All data files present
@@ -135,6 +139,7 @@ WHAT YOU'LL SEE:
    Input: "I'm frustrated"
    Output: "⏰ 📈 Something wonderful awaits... [poetry excerpt]"
            (with glyphs and poetic metaphor)
-""")
+"""
+)
 
-print("="*70 + "\n")
+print("=" * 70 + "\n")

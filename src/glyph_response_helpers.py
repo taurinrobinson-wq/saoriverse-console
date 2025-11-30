@@ -1,7 +1,8 @@
-from typing import List, Dict
-import re
-import os
 import datetime
+import os
+import re
+from typing import Dict, List
+
 from glyph_response_templates import pick_template
 
 
@@ -19,8 +20,7 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
         return {"primary_tag": None, "tone": "neutral", "pacing": 0.5, "details": [], "response": None}
 
     # Sort overlays by confidence
-    sorted_overlays = sorted(
-        glyph_overlays_info, key=lambda o: -o.get("confidence", 0.0))
+    sorted_overlays = sorted(glyph_overlays_info, key=lambda o: -o.get("confidence", 0.0))
     primary = sorted_overlays[0]
     tag = primary.get("tag")
     conf = float(primary.get("confidence", 0.0))
@@ -53,7 +53,7 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
 
     # Choose a template and render a short phrase. Use the primary confidence and tag.
     # Sanitize tag and short_phrase to avoid leaking internal glyph labels (e.g., VELΩNIX)
-    valid_tag = tag and re.match(r'^[a-z_]+$', tag)
+    valid_tag = tag and re.match(r"^[a-z_]+$", tag)
     safe_tag = tag if valid_tag else "default"
     short_phrase = tag.replace("_", " ") if valid_tag else "something"
 

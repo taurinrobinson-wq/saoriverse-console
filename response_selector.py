@@ -1,19 +1,19 @@
 import random
-from typing import Literal
-
-import random
 import re
 from difflib import SequenceMatcher
+from typing import Literal
 
 # Optional imports; module works without them (graceful fallback)
 try:
     import spacy
+
     _nlp = spacy.load("en_core_web_sm")
 except Exception:
     _nlp = None
 
 try:
     from rapidfuzz import fuzz
+
     _have_rapidfuzz = True
 except Exception:
     fuzz = None
@@ -22,7 +22,7 @@ except Exception:
 POSITIVE_TEMPLATES = [
     "That sounds meaningful — what was it like for you?",
     "That seems wonderful — can you share more about how it felt?",
-    "I'm glad you experienced that — tell me more."
+    "I'm glad you experienced that — tell me more.",
 ]
 
 DIFFICULT_TEMPLATES = [
@@ -123,7 +123,10 @@ def classify_signal(user_input: str) -> str:
         return "silence"
 
     # Overwhelm/change
-    if any(_fuzzy_in(w, ["spin", "spinning", "change", "changed", "overwhelm", "overwhelmed"]) for w in verbs + adjs + advs + nouns):
+    if any(
+        _fuzzy_in(w, ["spin", "spinning", "change", "changed", "overwhelm", "overwhelmed"])
+        for w in verbs + adjs + advs + nouns
+    ):
         return "overwhelm"
 
     # Loss/grief
@@ -131,7 +134,10 @@ def classify_signal(user_input: str) -> str:
         return "loss"
 
     # Positive cues
-    if any(_fuzzy_in(w, ["met", "see", "sees", "love", "joy", "wonderful", "meaningful", "safe"]) for w in verbs + adjs + nouns + advs):
+    if any(
+        _fuzzy_in(w, ["met", "see", "sees", "love", "joy", "wonderful", "meaningful", "safe"])
+        for w in verbs + adjs + nouns + advs
+    ):
         return "positive"
 
     # Difficult/heavy cues
@@ -156,11 +162,10 @@ def select_first_turn_response(user_input: str) -> str:
     else:
         tmpl = random.choice(AMBIGUOUS_TEMPLATES)
 
-    # Ensure templates used for first-turn empathy contain an inquisitive
-    # token so integration tests that look for 'tell me'/'what about'/etc
-    # reliably pass regardless of random choice.
-        inquisitives = ("tell me", "can you tell me",
-                        "what about", "hold", "honoring")
+        # Ensure templates used for first-turn empathy contain an inquisitive
+        # token so integration tests that look for 'tell me'/'what about'/etc
+        # reliably pass regardless of random choice.
+        inquisitives = ("tell me", "can you tell me", "what about", "hold", "honoring")
         low = (tmpl or "").lower()
         if not any(k in low for k in inquisitives):
             # Prefer wording that matches the original category's tone so

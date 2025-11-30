@@ -14,9 +14,7 @@ except Exception:
     _LEXICON = {"categories": {}}
 
 # Crisis-like keywords (explicit self-harm language)
-_CRISIS_KEYWORDS = {
-    "suicidal", "kill myself", "end my life", "self harm", "hurt myself", "can't go on", "overdose"
-}
+_CRISIS_KEYWORDS = {"suicidal", "kill myself", "end my life", "self harm", "hurt myself", "can't go on", "overdose"}
 
 
 def classify_risk(text: str) -> str:
@@ -60,12 +58,9 @@ def get_crisis_resources(locale: str = "US") -> Tuple[str, str]:
     if locale.upper() == "US":
         return (
             "U.S. Crisis Support",
-            "Dial 988 (Suicide & Crisis Lifeline), text HOME to 741741, or call 911 if there's an emergency."
+            "Dial 988 (Suicide & Crisis Lifeline), text HOME to 741741, or call 911 if there's an emergency.",
         )
-    return (
-        "Crisis Support",
-        "Please contact local emergency services or a trusted crisis line in your region."
-    )
+    return ("Crisis Support", "Please contact local emergency services or a trusted crisis line in your region.")
 
 
 def build_consent_prompt(risk_level: str, locale: str = "US") -> str:
@@ -115,20 +110,24 @@ def handle_consent_reply(reply: str, risk_level: str, locale: str = "US") -> dic
         "log_entry": {
             "risk_level": risk_level,
             "reply": r,
-        }
+        },
     }
 
     # Map common affirmative replies
     if r in ("a", "stay", "stay with you", "stay with me", "a)", "a)", "a)"):
         result["action"] = "stay"
-        result["response"] = "Okay — I'm here with you. If it helps, tell me what's most pressing right now or we can do a short grounding exercise."
+        result["response"] = (
+            "Okay — I'm here with you. If it helps, tell me what's most pressing right now or we can do a short grounding exercise."
+        )
         return result
 
     if r in ("b", "y", "yes", "b)", "y)"):
         # Share resources
         label, details = get_crisis_resources(locale)
         result["action"] = "resources"
-        result["response"] = f"I can share some resources that might help right now:\n{label}: {details}\nWould you like anything else?"
+        result["response"] = (
+            f"I can share some resources that might help right now:\n{label}: {details}\nWould you like anything else?"
+        )
         result["resources"] = (label, details)
         return result
 
@@ -176,5 +175,5 @@ def make_privacy_safe_log(user_hash: str, risk_level: str, action: str) -> dict:
         "user_hash": user_hash,
         "risk_level": risk_level,
         "action": action,
-        "timestamp": None  # caller should populate ISO timestamp when writing
+        "timestamp": None,  # caller should populate ISO timestamp when writing
     }

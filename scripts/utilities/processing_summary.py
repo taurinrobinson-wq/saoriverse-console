@@ -19,11 +19,11 @@ def generate_processing_summary():
     print()
 
     # Database statistics
-    conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
+    conn = sqlite3.connect("emotional_os/glyphs/glyphs.db")
     cursor = conn.cursor()
 
     # Total count
-    cursor.execute('SELECT COUNT(*) FROM glyph_lexicon')
+    cursor.execute("SELECT COUNT(*) FROM glyph_lexicon")
     total_glyphs = cursor.fetchone()[0]
 
     print("📊 DATABASE STATISTICS:")
@@ -31,7 +31,7 @@ def generate_processing_summary():
     print()
 
     # Gate distribution
-    cursor.execute('SELECT gate, COUNT(*) FROM glyph_lexicon GROUP BY gate ORDER BY gate')
+    cursor.execute("SELECT gate, COUNT(*) FROM glyph_lexicon GROUP BY gate ORDER BY gate")
     gate_results = cursor.fetchall()
 
     print("🚪 GATE DISTRIBUTION:")
@@ -42,7 +42,7 @@ def generate_processing_summary():
 
     # Recent additions (top 10)
     print("✨ RECENT GLYPH SAMPLES:")
-    cursor.execute('SELECT glyph_name, gate FROM glyph_lexicon ORDER BY rowid DESC LIMIT 10')
+    cursor.execute("SELECT glyph_name, gate FROM glyph_lexicon ORDER BY rowid DESC LIMIT 10")
     recent_glyphs = cursor.fetchall()
 
     for i, (name, gate) in enumerate(recent_glyphs, 1):
@@ -99,6 +99,7 @@ def generate_processing_summary():
     print()
     print("   Next Phase: System ready for enhanced signal parsing and contextual")
     print("   glyph selection with the enriched emotional vocabulary.")
+
 
 if __name__ == "__main__":
     generate_processing_summary()

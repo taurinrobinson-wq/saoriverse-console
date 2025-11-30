@@ -3,9 +3,10 @@
 Provides small wrappers so the app can use local-only processing without
 depending on remote AI services. This module is safe to import in tests.
 """
+
 import os
 import types
-from typing import List, Dict
+from typing import Dict, List
 
 
 def get_processing_mode() -> str:
@@ -13,7 +14,7 @@ def get_processing_mode() -> str:
 
     Priority: environment variable `PROCESSING_MODE`, otherwise `local`.
     """
-    return os.environ.get('PROCESSING_MODE', 'local')
+    return os.environ.get("PROCESSING_MODE", "local")
 
 
 def get_synonyms(seed: str, top_k: int = 5) -> List[Dict]:
@@ -70,7 +71,7 @@ def enforce_local_mode_guard():
     try:
         mode = get_processing_mode()
     except Exception:
-        mode = os.environ.get('PROCESSING_MODE', 'local')
+        mode = os.environ.get("PROCESSING_MODE", "local")
 
     if mode == "local" and os.environ.get("OPENAI_API_KEY"):
         raise RuntimeError(

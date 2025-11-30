@@ -8,10 +8,11 @@ Provides Streamlit UI components for asking users about:
 - Whether to keep medical details
 """
 
-import streamlit as st
-from typing import Dict, Optional
-from datetime import datetime
 import json
+from datetime import datetime
+from typing import Dict, Optional
+
+import streamlit as st
 
 
 def render_anonymization_consent_widget(
@@ -40,9 +41,7 @@ def render_anonymization_consent_widget(
     # Container for consent widget
     with st.container(border=True):
         st.markdown("### 🧵 Memory & Sharing")
-        st.markdown(
-            "This moment can be remembered in different ways. How would you like me to hold this?"
-        )
+        st.markdown("This moment can be remembered in different ways. How would you like me to hold this?")
 
         col1, col2, col3 = st.columns([1, 1, 1])
 
@@ -50,13 +49,9 @@ def render_anonymization_consent_widget(
             st.markdown("**Your Identity**")
             identity_choice = st.radio(
                 "How should this be remembered?",
-                [
-                    "With my name",
-                    "Anonymous",
-                    "Private (don't store)"
-                ],
+                ["With my name", "Anonymous", "Private (don't store)"],
                 key=f"identity_{exchange_id}",
-                label_visibility="collapsed"
+                label_visibility="collapsed",
             )
 
         with col2:
@@ -64,13 +59,9 @@ def render_anonymization_consent_widget(
             if show_medical_option:
                 medical_choice = st.radio(
                     "Medical terms:",
-                    [
-                        "Keep as-is",
-                        "Abstract (e.g., 'the Device')",
-                        "Remove"
-                    ],
+                    ["Keep as-is", "Abstract (e.g., 'the Device')", "Remove"],
                     key=f"medical_{exchange_id}",
-                    label_visibility="collapsed"
+                    label_visibility="collapsed",
                 )
             else:
                 medical_choice = "Abstract (e.g., 'the Device')"
@@ -85,10 +76,7 @@ def render_anonymization_consent_widget(
                 sharing_options.append("Therapy (with provider)")
 
             sharing_choice = st.radio(
-                "Can this be shared?",
-                sharing_options,
-                key=f"sharing_{exchange_id}",
-                label_visibility="collapsed"
+                "Can this be shared?", sharing_options, key=f"sharing_{exchange_id}", label_visibility="collapsed"
             )
 
         st.divider()
@@ -122,10 +110,7 @@ def render_anonymization_consent_widget(
         with col3:
             if st.button("⏭️ Later", use_container_width=True, key=f"later_{exchange_id}"):
                 # Silently store "don't ask again this session"
-                st.session_state[consent_key] = {
-                    "completed": False,
-                    "skipped": True
-                }
+                st.session_state[consent_key] = {"completed": False, "skipped": True}
                 st.info("Got it—I'll remember this preference for now.")
                 return None
 
@@ -144,19 +129,11 @@ def render_consent_summary(consent_result: Dict):
 
     with col1:
         identity_emoji = "👤" if consent_result.get("allow_names") else "👁️"
-        st.metric(
-            "Identity",
-            consent_result.get("identity", "Not set"),
-            delta=f"{identity_emoji}"
-        )
+        st.metric("Identity", consent_result.get("identity", "Not set"), delta=f"{identity_emoji}")
 
     with col2:
         medical_emoji = "⚕️" if consent_result.get("allow_medical") else "🔐"
-        st.metric(
-            "Medical Details",
-            consent_result.get("medical_details", "Not set"),
-            delta=f"{medical_emoji}"
-        )
+        st.metric("Medical Details", consent_result.get("medical_details", "Not set"), delta=f"{medical_emoji}")
 
     with col3:
         sharing = consent_result.get("sharing", "Keep private")
@@ -194,10 +171,10 @@ def render_data_privacy_info(use_expander: bool = True):
 
     layer2 = (
         "**Layer 2 — Intelligent Anonymization (When Enabled)**\n"
-        "- Names → Glyphs (e.g., \"Michelle\" → \"The Thread\")\n"
-        "- Dates → Relative time (e.g., \"August 2023\" → \"2 years ago\")\n"
-        "- Locations → Regions (e.g., \"Bell, CA\" → \"West Coast\")\n"
-        "- Medical → Abstract (e.g., \"IVC filter\" → \"the Device\")"
+        '- Names → Glyphs (e.g., "Michelle" → "The Thread")\n'
+        '- Dates → Relative time (e.g., "August 2023" → "2 years ago")\n'
+        '- Locations → Regions (e.g., "Bell, CA" → "West Coast")\n'
+        '- Medical → Abstract (e.g., "IVC filter" → "the Device")'
     )
 
     layer3 = (
@@ -249,33 +226,37 @@ def render_consent_settings_panel():
 
         # Save my chats toggle - defaults to FALSE for new users
         # This is the primary consent mechanism for data persistence
-        persist_default = st.session_state.get('persist_history', False)
+        persist_default = st.session_state.get("persist_history", False)
         persist_enabled = st.checkbox(
             "💾 Save my chats",
             value=persist_default,
-            help="Store conversations on the server for later retrieval. When disabled, chats are only kept locally in this session."
+            help="Store conversations on the server for later retrieval. When disabled, chats are only kept locally in this session.",
         )
 
         # Show explanation when user first enables it
-        if persist_enabled and not st.session_state.get('persist_history_consent_shown', False):
-            st.info("ℹ️ **What this means:**\n\n"
-                    "✓ Your conversations will be saved to secure cloud storage\n\n"
-                    "✓ You can access them across devices and sessions\n\n"
-                    "✓ All data is encrypted and isolated to your account\n\n"
-                    "✓ You can export or delete your data anytime below")
-            st.session_state['persist_history_consent_shown'] = True
+        if persist_enabled and not st.session_state.get("persist_history_consent_shown", False):
+            st.info(
+                "ℹ️ **What this means:**\n\n"
+                "✓ Your conversations will be saved to secure cloud storage\n\n"
+                "✓ You can access them across devices and sessions\n\n"
+                "✓ All data is encrypted and isolated to your account\n\n"
+                "✓ You can export or delete your data anytime below"
+            )
+            st.session_state["persist_history_consent_shown"] = True
 
         # Update session state
-        st.session_state['persist_history'] = persist_enabled
+        st.session_state["persist_history"] = persist_enabled
 
         # Save preference to server when available
         try:
-            mgr = st.session_state.get('conversation_manager')
+            mgr = st.session_state.get("conversation_manager")
             if mgr:
-                mgr.save_user_preferences({
-                    'persist_history': bool(persist_enabled),
-                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
-                })
+                mgr.save_user_preferences(
+                    {
+                        "persist_history": bool(persist_enabled),
+                        "persist_confirmed": bool(st.session_state.get("persist_confirmed", False)),
+                    }
+                )
         except Exception:
             pass
 
@@ -287,7 +268,7 @@ def render_consent_settings_panel():
             allow_names_default = st.checkbox(
                 "Store names by default",
                 value=st.session_state.get("consent_allow_names", False),
-                help="Include real names in stored entries by default"
+                help="Include real names in stored entries by default",
             )
             st.session_state["consent_allow_names"] = allow_names_default
 
@@ -295,7 +276,7 @@ def render_consent_settings_panel():
             allow_medical_default = st.checkbox(
                 "Store medical details",
                 value=st.session_state.get("consent_allow_medical", False),
-                help="Keep medical terminology as-is (instead of abstract forms)"
+                help="Keep medical terminology as-is (instead of abstract forms)",
             )
             st.session_state["consent_allow_medical"] = allow_medical_default
 
@@ -304,20 +285,20 @@ def render_consent_settings_panel():
 
         # Export / download user's data: show only for authenticated users
         try:
-            if st.session_state.get('authenticated', False) and st.session_state.get('user_id'):
+            if st.session_state.get("authenticated", False) and st.session_state.get("user_id"):
                 conversation_key = f"conversation_history_{st.session_state.get('user_id')}"
                 user_data = {
-                    "user_id": st.session_state.get('user_id'),
-                    "username": st.session_state.get('username'),
+                    "user_id": st.session_state.get("user_id"),
+                    "username": st.session_state.get("username"),
                     "conversations": st.session_state.get(conversation_key, []),
-                    "export_date": __import__('datetime').datetime.now().isoformat()
+                    "export_date": __import__("datetime").datetime.now().isoformat(),
                 }
                 st.download_button(
                     "📥 Export / Download My Data",
                     json.dumps(user_data, indent=2),
                     file_name=f"emotional_os_data_{st.session_state.get('username') or 'user'}_{__import__('datetime').datetime.now().strftime('%Y%m%d')}.json",
                     mime="application/json",
-                    key="download_consent_sidebar"
+                    key="download_consent_sidebar",
                 )
         except Exception:
             # Non-fatal; don't break the sidebar if export generation fails
@@ -328,11 +309,9 @@ def render_consent_settings_panel():
 
         if st.button("🗑️ Delete All My Data"):
             if st.checkbox("I understand this cannot be undone"):
-                st.warning(
-                    "⚠️ This would permanently delete all your stored data")
+                st.warning("⚠️ This would permanently delete all your stored data")
                 if st.button("YES, delete everything"):
-                    st.success(
-                        "Deletion request submitted. Check email to confirm.")
+                    st.success("Deletion request submitted. Check email to confirm.")
 
         st.divider()
         st.markdown("**Learn More**")
@@ -346,13 +325,10 @@ def render_consent_settings_panel():
         # Button-based toggle: use a distinct widget key for the button so
         # we avoid widget-type conflicts with previous checkbox implementations.
         def _toggle_privacy():
-            st.session_state[toggle_key] = not st.session_state.get(
-                toggle_key, False)
+            st.session_state[toggle_key] = not st.session_state.get(toggle_key, False)
 
-        label = "Close" if st.session_state.get(
-            toggle_key, False) else "Learn More"
-        st.button(label, key="consent_privacy_toggle_btn",
-                  on_click=_toggle_privacy)
+        label = "Close" if st.session_state.get(toggle_key, False) else "Learn More"
+        st.button(label, key="consent_privacy_toggle_btn", on_click=_toggle_privacy)
 
         if st.session_state.get(toggle_key):
             render_data_privacy_info(use_expander=False)

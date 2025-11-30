@@ -1,32 +1,35 @@
-import pytest
+import base64
+import hashlib
+import hmac
+import json
 import os
 import time
 import uuid
-import json
-import base64
-import hmac
-import hashlib
-import requests
 
+import pytest
+import requests
 
 # Conservative, non-destructive environment defaults to keep tests local-only
 # when a developer doesn't have a full .env populated. These use setdefault
 # so real environment values are preserved when present.
-os.environ.setdefault('SUPABASE_URL', 'http://localhost:8000')
-os.environ.setdefault('SUPABASE_AUTH_URL', os.environ.get(
-    'SUPABASE_AUTH_URL') or os.environ.get('SUPABASE_URL') + '/functions/v1/auth-manager')
-os.environ.setdefault('SUPABASE_FUNCTION_URL', os.environ.get(
-    'SUPABASE_FUNCTION_URL') or os.environ.get('SUPABASE_URL') + '/functions/v1')
-os.environ.setdefault('SUPABASE_PUBLISHABLE_KEY', os.environ.get(
-    'SUPABASE_PUBLISHABLE_KEY') or os.environ.get('SUPABASE_ANON_KEY') or 'test_platform_key')
-os.environ.setdefault('SUPABASE_ANON_KEY', os.environ.get(
-    'SUPABASE_ANON_KEY') or os.environ.get('SUPABASE_PUBLISHABLE_KEY'))
-os.environ.setdefault('TEST_CUSTOM_TOKEN', os.environ.get(
-    'TEST_CUSTOM_TOKEN') or 'test_custom_token')
-os.environ.setdefault('TEST_USER_ID', os.environ.get(
-    'TEST_USER_ID') or 'test_user')
-os.environ.setdefault('TEST_ACCESS_TOKEN', os.environ.get(
-    'TEST_ACCESS_TOKEN') or 'test_access_token')
+os.environ.setdefault("SUPABASE_URL", "http://localhost:8000")
+os.environ.setdefault(
+    "SUPABASE_AUTH_URL",
+    os.environ.get("SUPABASE_AUTH_URL") or os.environ.get("SUPABASE_URL") + "/functions/v1/auth-manager",
+)
+os.environ.setdefault(
+    "SUPABASE_FUNCTION_URL", os.environ.get("SUPABASE_FUNCTION_URL") or os.environ.get("SUPABASE_URL") + "/functions/v1"
+)
+os.environ.setdefault(
+    "SUPABASE_PUBLISHABLE_KEY",
+    os.environ.get("SUPABASE_PUBLISHABLE_KEY") or os.environ.get("SUPABASE_ANON_KEY") or "test_platform_key",
+)
+os.environ.setdefault(
+    "SUPABASE_ANON_KEY", os.environ.get("SUPABASE_ANON_KEY") or os.environ.get("SUPABASE_PUBLISHABLE_KEY")
+)
+os.environ.setdefault("TEST_CUSTOM_TOKEN", os.environ.get("TEST_CUSTOM_TOKEN") or "test_custom_token")
+os.environ.setdefault("TEST_USER_ID", os.environ.get("TEST_USER_ID") or "test_user")
+os.environ.setdefault("TEST_ACCESS_TOKEN", os.environ.get("TEST_ACCESS_TOKEN") or "test_access_token")
 
 
 def _b64u(b: bytes) -> str:
@@ -34,8 +37,7 @@ def _b64u(b: bytes) -> str:
 
 
 def _sign_jwt_hs256(header: dict, payload: dict, secret: str) -> str:
-    unsigned = _b64u(json.dumps(header).encode()) + "." + \
-        _b64u(json.dumps(payload).encode())
+    unsigned = _b64u(json.dumps(header).encode()) + "." + _b64u(json.dumps(payload).encode())
     sig = hmac.new(secret.encode(), unsigned.encode(), hashlib.sha256).digest()
     return unsigned + "." + _b64u(sig)
 
@@ -59,10 +61,8 @@ def _create_admin_user(supabase_url: str, service_key: str, email: str, password
 TEST_ACCESS_TOKEN = os.environ.get("TEST_ACCESS_TOKEN")
 if not TEST_ACCESS_TOKEN:
     SUPABASE_URL = os.environ.get("SUPABASE_URL")
-    SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get(
-        "PROJECT_SERVICE_ROLE_KEY")
-    PUBLISHABLE = os.environ.get(
-        "SUPABASE_PUBLISHABLE_KEY") or os.environ.get("SUPABASE_ANON_KEY")
+    SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("PROJECT_SERVICE_ROLE_KEY")
+    PUBLISHABLE = os.environ.get("SUPABASE_PUBLISHABLE_KEY") or os.environ.get("SUPABASE_ANON_KEY")
     JWT_SECRET = os.environ.get("PROJECT_JWT_SECRET")
 
     if SERVICE_KEY and SUPABASE_URL:
@@ -76,8 +76,12 @@ if not TEST_ACCESS_TOKEN:
         token = None
         try:
             token_url = f"{SUPABASE_URL}/auth/v1/token?grant_type=password"
-            r = requests.post(token_url, headers={"apikey": PUBLISHABLE, "Content-Type": "application/json"}, json={
-                              "email": email, "password": password}, timeout=10)
+            r = requests.post(
+                token_url,
+                headers={"apikey": PUBLISHABLE, "Content-Type": "application/json"},
+                json={"email": email, "password": password},
+                timeout=10,
+            )
             j = r.json()
             token = j.get("access_token")
         except Exception:
@@ -87,8 +91,7 @@ if not TEST_ACCESS_TOKEN:
         if not token and JWT_SECRET and user_id:
             header = {"alg": "HS256", "typ": "JWT"}
             now = int(time.time())
-            payload = {"iss": "supabase", "sub": user_id,
-                       "aud": "authenticated", "iat": now, "exp": now + 86400}
+            payload = {"iss": "supabase", "sub": user_id, "aud": "authenticated", "iat": now, "exp": now + 86400}
             try:
                 token = _sign_jwt_hs256(header, payload, JWT_SECRET)
             except Exception:
@@ -136,55 +139,56 @@ def stub_supabase_functions(monkeypatch):
         # Normalize url
         u = str(url)
         # auth-manager
-        if '/functions/v1/auth-manager' in u:
-            body = kwargs.get('json') or {}
-            action = body.get('action') if isinstance(body, dict) else None
-            if action == 'create_user':
-                user = {
-                    'id': f"{uuid.uuid4()}",
-                    'username': body.get('username'),
-                    'email': body.get('email')
-                }
-                return _DummyResponse(200, {'success': True, 'user': user})
-            if action == 'authenticate':
-                return _DummyResponse(200, {'authenticated': True, 'access_token': os.environ.get('TEST_ACCESS_TOKEN', 'test_access_token')})
-            return _DummyResponse(200, {'ok': True})
+        if "/functions/v1/auth-manager" in u:
+            body = kwargs.get("json") or {}
+            action = body.get("action") if isinstance(body, dict) else None
+            if action == "create_user":
+                user = {"id": f"{uuid.uuid4()}", "username": body.get("username"), "email": body.get("email")}
+                return _DummyResponse(200, {"success": True, "user": user})
+            if action == "authenticate":
+                return _DummyResponse(
+                    200,
+                    {"authenticated": True, "access_token": os.environ.get("TEST_ACCESS_TOKEN", "test_access_token")},
+                )
+            return _DummyResponse(200, {"ok": True})
 
         # saori-fixed and authenticated-saori functions
-        if '/functions/v1/saori-fixed' in u or '/functions/v1/authenticated-saori' in u:
+        if "/functions/v1/saori-fixed" in u or "/functions/v1/authenticated-saori" in u:
             # Inspect headers for tokens (X-Custom-Token or Authorization) and fall back to SUPABASE_ANON_KEY
-            headers = kwargs.get('headers') or {}
+            headers = kwargs.get("headers") or {}
             token = None
-            xcustom = headers.get(
-                'X-Custom-Token') or headers.get('x-custom-token')
-            if isinstance(xcustom, str) and xcustom.lower().startswith('bearer '):
+            xcustom = headers.get("X-Custom-Token") or headers.get("x-custom-token")
+            if isinstance(xcustom, str) and xcustom.lower().startswith("bearer "):
                 token = xcustom.split(None, 1)[1]
-            auth = headers.get('Authorization') or headers.get('authorization')
-            if not token and isinstance(auth, str) and auth.lower().startswith('bearer '):
+            auth = headers.get("Authorization") or headers.get("authorization")
+            if not token and isinstance(auth, str) and auth.lower().startswith("bearer "):
                 token = auth.split(None, 1)[1]
 
-            has_platform_key = bool(os.environ.get(
-                'SUPABASE_ANON_KEY') or os.environ.get('SUPABASE_PUBLISHABLE_KEY'))
+            has_platform_key = bool(os.environ.get("SUPABASE_ANON_KEY") or os.environ.get("SUPABASE_PUBLISHABLE_KEY"))
 
             # authenticated-saori should return a log with user id when a test token/user is present
-            if '/functions/v1/authenticated-saori' in u:
-                if token and token in (os.environ.get('TEST_CUSTOM_TOKEN'), os.environ.get('TEST_ACCESS_TOKEN')):
-                    return _DummyResponse(200, {'reply': 'Test reply', 'log': {'user_id': os.environ.get('TEST_USER_ID')}})
+            if "/functions/v1/authenticated-saori" in u:
+                if token and token in (os.environ.get("TEST_CUSTOM_TOKEN"), os.environ.get("TEST_ACCESS_TOKEN")):
+                    return _DummyResponse(
+                        200, {"reply": "Test reply", "log": {"user_id": os.environ.get("TEST_USER_ID")}}
+                    )
                 if has_platform_key:
-                    return _DummyResponse(200, {'reply': 'Test reply', 'log': {'user_id': os.environ.get('TEST_USER_ID')}})
-                return _DummyResponse(200, {'reply': 'Authentication failed - this is a test'})
+                    return _DummyResponse(
+                        200, {"reply": "Test reply", "log": {"user_id": os.environ.get("TEST_USER_ID")}}
+                    )
+                return _DummyResponse(200, {"reply": "Authentication failed - this is a test"})
 
             # saori-fixed: accept platform key or test access token
-            if token and token in (os.environ.get('TEST_ACCESS_TOKEN'), os.environ.get('TEST_CUSTOM_TOKEN')):
-                return _DummyResponse(200, {'reply': 'Test reply'})
+            if token and token in (os.environ.get("TEST_ACCESS_TOKEN"), os.environ.get("TEST_CUSTOM_TOKEN")):
+                return _DummyResponse(200, {"reply": "Test reply"})
             if has_platform_key:
-                return _DummyResponse(200, {'reply': 'Test reply'})
-            return _DummyResponse(200, {'reply': 'Authentication failed - this is a test'})
+                return _DummyResponse(200, {"reply": "Test reply"})
+            return _DummyResponse(200, {"reply": "Authentication failed - this is a test"})
 
         # Default: fall back to real post for other urls
         try:
             return real_post(url, *args, **kwargs)
         except Exception:
-            return _DummyResponse(502, {'error': 'network unavailable in test'})
+            return _DummyResponse(502, {"error": "network unavailable in test"})
 
-    monkeypatch.setattr(_requests, 'post', _fake_post)
+    monkeypatch.setattr(_requests, "post", _fake_post)

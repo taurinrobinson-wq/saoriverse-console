@@ -156,11 +156,10 @@ class SaoynxAuthentication:
         if st.button("Login", key=key_btn):
             result = self.authenticate_user(username, password)
             if result["success"]:
-                st.session_state['post_login_message'] = result.get(
-                    "message", "Signed in")
-                st.session_state['post_login_transition'] = True
+                st.session_state["post_login_message"] = result.get("message", "Signed in")
+                st.session_state["post_login_transition"] = True
                 if in_sidebar:
-                    st.session_state['sidebar_show_login'] = False
+                    st.session_state["sidebar_show_login"] = False
                 else:
                     st.session_state.show_login = False
                 st.rerun()
@@ -168,7 +167,7 @@ class SaoynxAuthentication:
                 st.error(result["message"])
         if st.button("Back", key=key_back):
             if in_sidebar:
-                st.session_state['sidebar_show_login'] = False
+                st.session_state["sidebar_show_login"] = False
             else:
                 st.session_state.show_login = False
             st.rerun()
@@ -246,25 +245,23 @@ class SaoynxAuthentication:
         key_btn = "sidebar_register_btn" if in_sidebar else "register_btn"
         key_back = "sidebar_register_back_btn" if in_sidebar else "register_back_btn"
 
-        first_name = st.text_input(
-            "First name *", key=key_fn, help="Required field")
-        last_name = st.text_input(
-            "Last name *", key=key_ln, help="Required field")
+        first_name = st.text_input("First name *", key=key_fn, help="Required field")
+        last_name = st.text_input("Last name *", key=key_ln, help="Required field")
         email = st.text_input("Email *", key=key_email, help="Required field")
-        username = st.text_input(
-            "Username *", key=key_user, help="Required field")
-        password = st.text_input(
-            "Password *", type="password", key=key_pass, help="Required field")
+        username = st.text_input("Username *", key=key_user, help="Required field")
+        password = st.text_input("Password *", type="password", key=key_pass, help="Required field")
 
         # Debug: log the st.text_input return values
         print(
-            f"DEBUG: st.text_input values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}")
+            f"DEBUG: st.text_input values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}"
+        )
 
         # [label patch] changed 'Register' to 'Create An Account' (auth form submit button)
         if st.button("Create An Account", key=key_btn):
             # Debug: log the form values before validation
             print(
-                f"DEBUG: Form values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}")
+                f"DEBUG: Form values - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}, username: {repr(username)}"
+            )
 
             # Client-side validation for required fields
             if not first_name or not first_name.strip():
@@ -290,7 +287,8 @@ class SaoynxAuthentication:
 
             # Debug: log values after validation
             print(
-                f"DEBUG: After validation - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}")
+                f"DEBUG: After validation - first_name: {repr(first_name)}, last_name: {repr(last_name)}, email: {repr(email)}"
+            )
 
             payload = {
                 "action": "create_user",
@@ -299,21 +297,21 @@ class SaoynxAuthentication:
                 "first_name": first_name,
                 "last_name": last_name,
                 "email": email,
-                "created_at": datetime.datetime.now().isoformat()
+                "created_at": datetime.datetime.now().isoformat(),
             }
 
             # Debug: log the payload
             print(f"DEBUG: Payload being sent: {payload}")
 
             result = self.create_user(
-                username, password, first_name=first_name.strip(), last_name=last_name.strip(), email=email.strip())
+                username, password, first_name=first_name.strip(), last_name=last_name.strip(), email=email.strip()
+            )
 
             if result["success"]:
-                st.session_state['post_login_message'] = result.get(
-                    "message", "Account created")
-                st.session_state['post_login_transition'] = True
+                st.session_state["post_login_message"] = result.get("message", "Account created")
+                st.session_state["post_login_transition"] = True
                 if in_sidebar:
-                    st.session_state['sidebar_show_register'] = False
+                    st.session_state["sidebar_show_register"] = False
                 else:
                     st.session_state.show_register = False
                 st.rerun()
@@ -321,7 +319,7 @@ class SaoynxAuthentication:
                 st.error(result["message"])
         if st.button("Back", key=key_back):
             if in_sidebar:
-                st.session_state['sidebar_show_register'] = False
+                st.session_state["sidebar_show_register"] = False
             else:
                 st.session_state.show_register = False
             st.rerun()
@@ -341,11 +339,12 @@ class SaoynxAuthentication:
 
     def create_session_token(self, username: str, user_id: str) -> str:
         import base64
+
         session_data = {
             "username": username,
             "user_id": user_id,
             "created": datetime.datetime.now().isoformat(),
-            "expires": (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+            "expires": (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat(),
         }
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
         return token
@@ -353,6 +352,7 @@ class SaoynxAuthentication:
     def validate_session_token(self, token: str) -> dict:
         try:
             import base64
+
             decoded_data = base64.b64decode(token.encode()).decode()
             session_data = json.loads(decoded_data)
             required_fields = ["username", "user_id", "expires"]
@@ -360,8 +360,7 @@ class SaoynxAuthentication:
                 if field not in session_data:
                     return {"valid": False, "error": f"Missing field: {field}"}
             try:
-                expires = datetime.datetime.fromisoformat(
-                    session_data["expires"])
+                expires = datetime.datetime.fromisoformat(session_data["expires"])
                 if datetime.datetime.now() < expires:
                     return {"valid": True, "data": session_data}
                 return {"valid": False, "error": "Session expired"}
@@ -371,13 +370,13 @@ class SaoynxAuthentication:
             return {"valid": False, "error": f"Token validation error: {str(e)}"}
 
     def init_session_state(self):
-        if 'authenticated' not in st.session_state:
+        if "authenticated" not in st.session_state:
             st.session_state.authenticated = False
-        if 'user_id' not in st.session_state:
+        if "user_id" not in st.session_state:
             st.session_state.user_id = None
-        if 'username' not in st.session_state:
+        if "username" not in st.session_state:
             st.session_state.username = None
-        if 'session_expires' not in st.session_state:
+        if "session_expires" not in st.session_state:
             st.session_state.session_expires = None
         if not st.session_state.authenticated:
             # Streamlit exposes query params as lists (e.g. {'session_token': ['...']}).
@@ -391,8 +390,7 @@ class SaoynxAuthentication:
                 session_token = raw_token
 
             if session_token:
-                session_result = self.validate_session_token(
-                    str(session_token))
+                session_result = self.validate_session_token(str(session_token))
                 if session_result["valid"]:
                     data = session_result["data"]
                     st.session_state.authenticated = True
@@ -404,43 +402,38 @@ class SaoynxAuthentication:
                     # to fetch the profile from Supabase so UI can show the
                     # proper first name instead of falling back to username.
                     try:
-                        if (self.supabase_configured
-                                and not st.session_state.get('first_name')):
+                        if self.supabase_configured and not st.session_state.get("first_name"):
                             # Use service key from secrets to read the users table
                             profile_url = f"{self.supabase_url}/rest/v1/users"
                             headers = {
-                                'apikey': self.supabase_key,
-                                'Authorization': f'Bearer {self.supabase_key}',
-                                'Accept': 'application/json'
+                                "apikey": self.supabase_key,
+                                "Authorization": f"Bearer {self.supabase_key}",
+                                "Accept": "application/json",
                             }
                             # Query by id (exact match). Use select to limit fields.
                             resp = requests.get(
                                 profile_url,
                                 headers=headers,
                                 params={
-                                    'id': f'eq.{data.get("user_id")}',
-                                    'select': 'first_name,last_name,email,username'
+                                    "id": f'eq.{data.get("user_id")}',
+                                    "select": "first_name,last_name,email,username",
                                 },
-                                timeout=6
+                                timeout=6,
                             )
                             if resp and resp.status_code == 200:
                                 try:
                                     rows = resp.json()
                                     if isinstance(rows, list) and rows:
                                         profile = rows[0]
-                                        if profile.get('first_name'):
-                                            st.session_state['first_name'] = profile.get(
-                                                'first_name')
-                                        if profile.get('last_name'):
-                                            st.session_state['last_name'] = profile.get(
-                                                'last_name')
-                                        if profile.get('email'):
-                                            st.session_state['email'] = profile.get(
-                                                'email')
+                                        if profile.get("first_name"):
+                                            st.session_state["first_name"] = profile.get("first_name")
+                                        if profile.get("last_name"):
+                                            st.session_state["last_name"] = profile.get("last_name")
+                                        if profile.get("email"):
+                                            st.session_state["email"] = profile.get("email")
                                         # ensure username is consistent
-                                        if profile.get('username'):
-                                            st.session_state['username'] = profile.get(
-                                                'username')
+                                        if profile.get("username"):
+                                            st.session_state["username"] = profile.get("username")
                                 except Exception:
                                     pass
                     except Exception:
@@ -458,8 +451,7 @@ class SaoynxAuthentication:
                 st.session_state.authenticated = True
                 st.session_state.user_id = user_id
                 st.session_state.username = username
-                st.session_state.session_expires = (
-                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+                st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
                 session_token = self.create_session_token(username, user_id)
                 st.query_params["session_token"] = session_token
                 return {"success": True, "message": "Demo login successful"}
@@ -467,19 +459,13 @@ class SaoynxAuthentication:
 
         try:
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "action": "authenticate",
-                    "username": username,
-                    "password": password
-                },
-                timeout=10
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
+                json={"action": "authenticate", "username": username, "password": password},
+                timeout=10,
             )
             if response.status_code == 200:
                 data = response.json()
@@ -492,12 +478,11 @@ class SaoynxAuthentication:
                     st.session_state.email = data.get("email")
                     # Store the JWT token for authenticated API calls
                     if data.get("token") or data.get("access_token"):
-                        st.session_state.user_jwt_token = data.get(
-                            "token") or data.get("access_token")
+                        st.session_state.user_jwt_token = data.get("token") or data.get("access_token")
                     st.session_state.session_expires = (
-                        datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-                    session_token = self.create_session_token(
-                        username, data.get("user_id"))
+                        datetime.datetime.now() + datetime.timedelta(days=2)
+                    ).isoformat()
+                    session_token = self.create_session_token(username, data.get("user_id"))
                     st.query_params["session_token"] = session_token
                     return {"success": True, "message": "Login successful"}
                 error_msg = data.get("error", "Invalid username or password")
@@ -515,13 +500,12 @@ class SaoynxAuthentication:
                 st.session_state.user_id = user_id
                 st.session_state.username = username
                 if first_name:
-                    st.session_state['first_name'] = first_name
+                    st.session_state["first_name"] = first_name
                 if last_name:
-                    st.session_state['last_name'] = last_name
+                    st.session_state["last_name"] = last_name
                 if email:
-                    st.session_state['email'] = email
-                st.session_state.session_expires = (
-                    datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+                    st.session_state["email"] = email
+                st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
                 session_token = self.create_session_token(username, user_id)
                 st.query_params["session_token"] = session_token
                 return {"success": True, "message": "Demo account created and signed in"}
@@ -529,7 +513,8 @@ class SaoynxAuthentication:
 
         try:
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             payload = {
                 "action": "create_user",
                 "username": username,
@@ -537,49 +522,44 @@ class SaoynxAuthentication:
                 "first_name": first_name,
                 "last_name": last_name,
                 "email": email,
-                "created_at": datetime.datetime.now().isoformat()
+                "created_at": datetime.datetime.now().isoformat(),
             }
 
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
                 json=payload,
-                timeout=10
+                timeout=10,
             )
             if response.status_code == 200:
                 data = response.json()
                 if data.get("success"):
                     # If the remote returned a user id/profile, auto-authenticate
-                    user_id = data.get('user_id') or data.get('id')
+                    user_id = data.get("user_id") or data.get("id")
                     if user_id:
                         st.session_state.authenticated = True
                         st.session_state.user_id = user_id
                         st.session_state.username = username
                         # Store the JWT token for authenticated API calls
                         if data.get("token") or data.get("access_token"):
-                            st.session_state.user_jwt_token = data.get(
-                                "token") or data.get("access_token")
-                        if data.get('first_name'):
-                            st.session_state['first_name'] = data.get(
-                                'first_name')
-                        if data.get('last_name'):
-                            st.session_state['last_name'] = data.get(
-                                'last_name')
-                        if data.get('email'):
-                            st.session_state['email'] = data.get('email')
+                            st.session_state.user_jwt_token = data.get("token") or data.get("access_token")
+                        if data.get("first_name"):
+                            st.session_state["first_name"] = data.get("first_name")
+                        if data.get("last_name"):
+                            st.session_state["last_name"] = data.get("last_name")
+                        if data.get("email"):
+                            st.session_state["email"] = data.get("email")
                         st.session_state.session_expires = (
-                            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
-                        session_token = self.create_session_token(
-                            username, user_id)
+                            datetime.datetime.now() + datetime.timedelta(days=2)
+                        ).isoformat()
+                        session_token = self.create_session_token(username, user_id)
                         st.query_params["session_token"] = session_token
                         return {"success": True, "message": "Account created and signed in"}
                     return {"success": True, "message": "Account created successfully"}
                 return {"success": False, "message": data.get("error", "Failed to create account")}
-            error_data = response.json() if response.headers.get(
-                'content-type', '').startswith('application/json') else {}
+            error_data = (
+                response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+            )
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
@@ -589,13 +569,12 @@ class SaoynxAuthentication:
         st.session_state.authenticated = True
         st.session_state.user_id = user_id
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (
-            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+        st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
         session_token = self.create_session_token("demo_user", user_id)
         st.query_params["session_token"] = session_token
         # Indicate a lightweight post-login transition so the UI shows a confirmation
-        st.session_state['post_login_message'] = "Signed in as demo_user"
-        st.session_state['post_login_transition'] = True
+        st.session_state["post_login_message"] = "Signed in as demo_user"
+        st.session_state["post_login_transition"] = True
         st.rerun()
 
     def logout(self):

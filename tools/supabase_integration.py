@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 import requests
+
 try:
     # Use the centralized guard from scripts/local_integration to determine
     # whether remote AI calls are allowed.
@@ -29,10 +30,7 @@ class SaoriResponse:
 class SupabaseIntegrator:
     """Integration with your Supabase Saori edge function"""
 
-    def __init__(self,
-                 function_url: str,
-                 supabase_anon_key: str = None,
-                 user_token: str = None):
+    def __init__(self, function_url: str, supabase_anon_key: str = None, user_token: str = None):
         self.function_url = function_url
         self.supabase_anon_key = supabase_anon_key
         self.user_token = user_token
@@ -40,21 +38,23 @@ class SupabaseIntegrator:
 
         # Set up headers
         headers = {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         }
 
         if user_token:
-            headers['Authorization'] = f'Bearer {user_token}'
+            headers["Authorization"] = f"Bearer {user_token}"
         elif supabase_anon_key:
-            headers['Authorization'] = f'Bearer {supabase_anon_key}'
+            headers["Authorization"] = f"Bearer {supabase_anon_key}"
 
         self.session.headers.update(headers)
 
-    def process_message(self,
-                        message: str,
-                        mode: str = "quick",
-                        conversation_context: Dict = None,
-                        conversation_style: str = "conversational") -> SaoriResponse:
+    def process_message(
+        self,
+        message: str,
+        mode: str = "quick",
+        conversation_context: Dict = None,
+        conversation_style: str = "conversational",
+    ) -> SaoriResponse:
         """
         Send message to your Supabase edge function for processing
         This leverages your complete emotional tagging and AI system
@@ -71,7 +71,7 @@ class SupabaseIntegrator:
             "mode": mode,
             "style": conversation_style,
             "tone": "casual",
-            "response_type": "conversational"
+            "response_type": "conversational",
         }
 
         # Add conversation context if available (could enhance your edge function to use this)
@@ -79,8 +79,7 @@ class SupabaseIntegrator:
             payload["conversation_context"] = conversation_context
 
         try:
-            response = self.session.post(
-                self.function_url, json=payload, timeout=30)
+            response = self.session.post(self.function_url, json=payload, timeout=30)
 
             # Log response details for debugging
             logging.info(f"Supabase response status: {response.status_code}")
@@ -91,11 +90,11 @@ class SupabaseIntegrator:
             data = response.json()
 
             return SaoriResponse(
-                reply=data.get('reply', 'No response received'),
-                glyph=data.get('glyph'),
-                parsed_glyphs=data.get('parsed_glyphs', []),
-                upserted_glyphs=data.get('upserted_glyphs', []),
-                log=data.get('log', {})
+                reply=data.get("reply", "No response received"),
+                glyph=data.get("glyph"),
+                parsed_glyphs=data.get("parsed_glyphs", []),
+                upserted_glyphs=data.get("upserted_glyphs", []),
+                log=data.get("log", {}),
             )
 
         except requests.exceptions.Timeout as e:
@@ -106,7 +105,7 @@ class SupabaseIntegrator:
                 glyph=None,
                 parsed_glyphs=[],
                 upserted_glyphs=[],
-                log={"error": error_msg}
+                log={"error": error_msg},
             )
         except requests.exceptions.ConnectionError as e:
             error_msg = f"Connection error: {e}"
@@ -116,7 +115,7 @@ class SupabaseIntegrator:
                 glyph=None,
                 parsed_glyphs=[],
                 upserted_glyphs=[],
-                log={"error": error_msg}
+                log={"error": error_msg},
             )
         except requests.RequestException as e:
             error_msg = f"Supabase edge function error: {e}"
@@ -126,7 +125,7 @@ class SupabaseIntegrator:
                 glyph=None,
                 parsed_glyphs=[],
                 upserted_glyphs=[],
-                log={"error": error_msg}
+                log={"error": error_msg},
             )
         except json.JSONDecodeError as e:
             error_msg = f"JSON decode error: {e}"
@@ -136,7 +135,7 @@ class SupabaseIntegrator:
                 glyph=None,
                 parsed_glyphs=[],
                 upserted_glyphs=[],
-                log={"error": error_msg}
+                log={"error": error_msg},
             )
 
 
@@ -148,9 +147,7 @@ class HybridEmotionalProcessor:
     3. Intelligent fallback between both
     """
 
-    def __init__(self,
-                 supabase_integrator: Optional[SupabaseIntegrator] = None,
-                 use_local_fallback: bool = True):
+    def __init__(self, supabase_integrator: Optional[SupabaseIntegrator] = None, use_local_fallback: bool = True):
         self.supabase = supabase_integrator
         self.use_local_fallback = use_local_fallback
 
@@ -158,6 +155,7 @@ class HybridEmotionalProcessor:
         if use_local_fallback:
             try:
                 from parser.signal_parser import parse_input
+
                 self.local_parser = parse_input
                 self.local_available = True
             except ImportError:
@@ -166,11 +164,9 @@ class HybridEmotionalProcessor:
         else:
             self.local_available = False
 
-    def process_emotional_input(self,
-                                message: str,
-                                conversation_context: Dict = None,
-                                prefer_ai: bool = True,
-                                privacy_mode: bool = False) -> Dict:
+    def process_emotional_input(
+        self, message: str, conversation_context: Dict = None, prefer_ai: bool = True, privacy_mode: bool = False
+    ) -> Dict:
         """
         Process emotional input using hybrid approach
         """
@@ -183,9 +179,7 @@ class HybridEmotionalProcessor:
             # Try AI-enhanced processing first
             try:
                 saori_response = self.supabase.process_message(
-                    message,
-                    conversation_context=conversation_context,
-                    conversation_style="conversational"
+                    message, conversation_context=conversation_context, conversation_style="conversational"
                 )
 
                 return {
@@ -196,7 +190,7 @@ class HybridEmotionalProcessor:
                     "upserted_glyphs": saori_response.upserted_glyphs,
                     "emotional_metadata": saori_response.log,
                     "privacy_preserved": True,
-                    "processing_method": "encrypted_ai_enhanced"
+                    "processing_method": "encrypted_ai_enhanced",
                 }
 
             except Exception as e:
@@ -215,16 +209,12 @@ class HybridEmotionalProcessor:
             return {
                 "source": "error",
                 "response": "Emotional processing system temporarily unavailable.",
-                "error": "No processing methods available"
+                "error": "No processing methods available",
             }
 
         try:
             # Use your existing local parser
-            result = self.local_parser(
-                message,
-                "parser/signal_lexicon.json",
-                conversation_context=conversation_context
-            )
+            result = self.local_parser(message, "parser/signal_lexicon.json", conversation_context=conversation_context)
 
             return {
                 "source": "local_glyph_system",
@@ -235,16 +225,12 @@ class HybridEmotionalProcessor:
                 "ritual_prompt": result.get("ritual_prompt", ""),
                 "enhanced_data": result.get("enhanced_data"),
                 "privacy_preserved": True,
-                "processing_method": "local_encrypted"
+                "processing_method": "local_encrypted",
             }
 
         except Exception as e:
             logging.error(f"Local processing failed: {e}")
-            return {
-                "source": "error",
-                "response": "Local emotional processing encountered an error.",
-                "error": str(e)
-            }
+            return {"source": "error", "response": "Local emotional processing encountered an error.", "error": str(e)}
 
     def _process_local_fallback(self, message: str, conversation_context: Dict = None, error: str = "") -> Dict:
         """Fallback to local processing with error context"""
@@ -255,6 +241,7 @@ class HybridEmotionalProcessor:
 
         return result
 
+
 # Configuration and factory functions
 
 
@@ -264,13 +251,13 @@ def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrat
     if not remote_ai_allowed():
         # If user passed an explicit config that would use Supabase, raise
         # to make misconfiguration explicit. Otherwise return None.
-        if config and (config.get('function_url') or config.get('anon_key') or config.get('user_token')):
+        if config and (config.get("function_url") or config.get("anon_key") or config.get("user_token")):
             raise RuntimeError(
                 "Remote AI calls are disabled (processing mode 'local'). "
                 "Set PROCESSING_MODE or ALLOW_REMOTE_AI to opt in."
             )
         # Check env-based config and refuse to create an integrator if present.
-        if os.getenv('SUPABASE_FUNCTION_URL') or os.getenv('SUPABASE_ANON_KEY') or os.getenv('SUPABASE_USER_TOKEN'):
+        if os.getenv("SUPABASE_FUNCTION_URL") or os.getenv("SUPABASE_ANON_KEY") or os.getenv("SUPABASE_USER_TOKEN"):
             raise RuntimeError(
                 "Remote AI calls are disabled (processing mode 'local'). "
                 "Set PROCESSING_MODE or ALLOW_REMOTE_AI to opt in."
@@ -279,28 +266,23 @@ def create_supabase_integrator(config: Dict = None) -> Optional[SupabaseIntegrat
 
     if config:
         return SupabaseIntegrator(
-            function_url=config.get('function_url'),
-            supabase_anon_key=config.get('anon_key'),
-            user_token=config.get('user_token')
+            function_url=config.get("function_url"),
+            supabase_anon_key=config.get("anon_key"),
+            user_token=config.get("user_token"),
         )
 
     # Try to get from environment
-    function_url = os.getenv('SUPABASE_FUNCTION_URL')
-    anon_key = os.getenv('SUPABASE_ANON_KEY')
-    user_token = os.getenv('SUPABASE_USER_TOKEN')
+    function_url = os.getenv("SUPABASE_FUNCTION_URL")
+    anon_key = os.getenv("SUPABASE_ANON_KEY")
+    user_token = os.getenv("SUPABASE_USER_TOKEN")
 
     if function_url:
-        return SupabaseIntegrator(
-            function_url=function_url,
-            supabase_anon_key=anon_key,
-            user_token=user_token
-        )
+        return SupabaseIntegrator(function_url=function_url, supabase_anon_key=anon_key, user_token=user_token)
 
     return None
 
 
-def create_hybrid_processor(supabase_config: Dict = None,
-                            use_local_fallback: bool = True) -> HybridEmotionalProcessor:
+def create_hybrid_processor(supabase_config: Dict = None, use_local_fallback: bool = True) -> HybridEmotionalProcessor:
     """Create hybrid processor with optional Supabase integration"""
     # If remote AI is disabled, creating a hybrid processor that would call
     # external services is an explicit opt-in. Detect and refuse creation
@@ -313,10 +295,7 @@ def create_hybrid_processor(supabase_config: Dict = None,
 
     supabase_integrator = create_supabase_integrator(supabase_config)
 
-    return HybridEmotionalProcessor(
-        supabase_integrator=supabase_integrator,
-        use_local_fallback=use_local_fallback
-    )
+    return HybridEmotionalProcessor(supabase_integrator=supabase_integrator, use_local_fallback=use_local_fallback)
 
 
 def create_local_processor(use_local_fallback: bool = True) -> HybridEmotionalProcessor:

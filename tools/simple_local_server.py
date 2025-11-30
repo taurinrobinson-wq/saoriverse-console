@@ -10,9 +10,9 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 class EmotionalOSHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/':
+        if self.path == "/":
             self.send_response(200)
-            self.send_header('Content-type', 'text/html')
+            self.send_header("Content-type", "text/html")
             self.end_headers()
 
             html = """
@@ -202,8 +202,9 @@ Analyzed your emotional patterns for new glyph opportunities. The system is lear
             self.send_response(404)
             self.end_headers()
 
+
 def run_server(port=8080):
-    server_address = ('', port)
+    server_address = ("", port)
     httpd = HTTPServer(server_address, EmotionalOSHandler)
     print("🌟 Emotional OS Local Server starting...")
     print("🌐 Open your browser and go to: http://localhost:" + str(port))
@@ -216,8 +217,10 @@ def run_server(port=8080):
         print("\n🛑 Server stopped")
         httpd.server_close()
 
+
 def main():
     run_server()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

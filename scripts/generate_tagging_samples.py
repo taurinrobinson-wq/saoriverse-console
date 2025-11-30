@@ -4,11 +4,12 @@ Writes `data/tagging_samples.csv` with columns: input, tags, phase
 
 Run: python3 scripts/generate_tagging_samples.py
 """
-import json
-from pathlib import Path
-import importlib.util
+
 import csv
+import importlib.util
+import json
 from difflib import SequenceMatcher
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -26,8 +27,7 @@ phase_mod = _load_module("phase_modulator", ROOT / "phase_modulator.py")
 
 tag_input = sym_mod.tag_input
 detect_phase = phase_mod.detect_phase
-tag_input_with_diagnostics = getattr(
-    sym_mod, 'tag_input_with_diagnostics', None)
+tag_input_with_diagnostics = getattr(sym_mod, "tag_input_with_diagnostics", None)
 
 
 SAMPLES = [
@@ -100,28 +100,30 @@ def _top_fuzzy_candidates(text: str, top_n: int = 3, min_score: float = 0.5):
     """
     candidates = []
     text_tokens = text.split()
-    for group_name, phrases in getattr(sym_mod, '_SYNONYM_GROUPS', []):
+    for group_name, phrases in getattr(sym_mod, "_SYNONYM_GROUPS", []):
         for phrase in phrases:
             p_tokens = phrase.split()
             p_len = max(1, len(p_tokens))
             # sliding window over text tokens
             for i in range(max(1, len(text_tokens) - p_len + 1)):
-                window = " ".join(text_tokens[i:i + p_len])
+                window = " ".join(text_tokens[i : i + p_len])
                 score = SequenceMatcher(None, window, phrase).ratio()
                 if score >= min_score:
-                    candidates.append({
-                        "group": group_name,
-                        "phrase": phrase,
-                        "window": window,
-                        "score": round(float(score), 4),
-                    })
+                    candidates.append(
+                        {
+                            "group": group_name,
+                            "phrase": phrase,
+                            "window": window,
+                            "score": round(float(score), 4),
+                        }
+                    )
     # sort by score desc
     candidates.sort(key=lambda x: x["score"], reverse=True)
     # dedupe by (group, phrase, window) keeping highest score
     seen = set()
     out = []
     for c in candidates:
-        key = (c['group'], c['phrase'], c['window'])
+        key = (c["group"], c["phrase"], c["window"])
         if key in seen:
             continue
         seen.add(key)
@@ -133,15 +135,21 @@ def _top_fuzzy_candidates(text: str, top_n: int = 3, min_score: float = 0.5):
 
 with OUT_PATH.open("w", encoding="utf-8", newline="") as fh:
     writer = csv.writer(fh)
-    writer.writerow(["input", "tags", "phase",
-                    "matches_json", "top_fuzzy_json"])
+    writer.writerow(["input", "tags", "phase", "matches_json", "top_fuzzy_json"])
     for s in EXPANDED:
         diag = tag_input_with_diagnostics(s)
         tags = diag.get("tags", [])
         matches = diag.get("matches", [])
         phase = detect_phase(s, {"symbolic_tags": tags})
         top_fuzzy = _top_fuzzy_candidates(s, top_n=3, min_score=0.5)
-        writer.writerow([s, "|".join(tags), phase, json.dumps(
-            matches, ensure_ascii=False), json.dumps(top_fuzzy, ensure_ascii=False)])
+        writer.writerow(
+            [
+                s,
+                "|".join(tags),
+                phase,
+                json.dumps(matches, ensure_ascii=False),
+                json.dumps(top_fuzzy, ensure_ascii=False),
+            ]
+        )
 
 print(f"Wrote expanded tagging CSV to: {OUT_PATH} (rows: {len(EXPANDED)})")

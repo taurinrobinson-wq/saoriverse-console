@@ -8,11 +8,13 @@ import json
 import os
 import re
 from pathlib import Path
+
 from nltk.corpus import wordnet as wn
 from nltk.stem import WordNetLemmatizer
 
 try:
     import spacy
+
     _HAS_SPACY = True
 except Exception:
     _HAS_SPACY = False
@@ -54,12 +56,12 @@ def get_spacy_top(word, candidates, n=5, nlp=None):
 
 
 def load_seeds():
-    p = Path('data/seeds.cleaned.txt')
+    p = Path("data/seeds.cleaned.txt")
     if p.exists():
-        with p.open('r', encoding='utf-8') as fh:
+        with p.open("r", encoding="utf-8") as fh:
             return [l.strip() for l in fh if l.strip()]
     # fallback
-    return ['joy', 'anger', 'trust']
+    return ["joy", "anger", "trust"]
 
 
 def build_synonyms(seed_words):
@@ -67,34 +69,28 @@ def build_synonyms(seed_words):
     nlp = None
     if _HAS_SPACY:
         try:
-            nlp = spacy.load('en_core_web_md')
+            nlp = spacy.load("en_core_web_md")
         except Exception:
             nlp = None
 
     for w in seed_words:
         try:
             wn_syns = get_wordnet_synonyms(w)
-            spacy_top = get_spacy_top(
-                w, wn_syns, n=5, nlp=nlp) if wn_syns else []
-            merged[w] = {
-                'wordnet': wn_syns,
-                'spacy_top': spacy_top,
-                'merged': sorted(set(wn_syns + spacy_top))
-            }
+            spacy_top = get_spacy_top(w, wn_syns, n=5, nlp=nlp) if wn_syns else []
+            merged[w] = {"wordnet": wn_syns, "spacy_top": spacy_top, "merged": sorted(set(wn_syns + spacy_top))}
         except Exception as e:
-            merged[w] = {'wordnet': [], 'spacy_top': [], 'merged': []}
+            merged[w] = {"wordnet": [], "spacy_top": [], "merged": []}
     return merged
 
 
 def main():
-    os.makedirs('data', exist_ok=True)
+    os.makedirs("data", exist_ok=True)
     seeds = load_seeds()
-    print(f'Building synonyms for {len(seeds)} seeds')
+    print(f"Building synonyms for {len(seeds)} seeds")
     out = build_synonyms(seeds)
-    Path('data/synonyms_local.json').write_text(json.dumps(out,
-                                                           ensure_ascii=False, indent=2), encoding='utf-8')
-    print('Wrote data/synonyms_local.json')
+    Path("data/synonyms_local.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("Wrote data/synonyms_local.json")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
