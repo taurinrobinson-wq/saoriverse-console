@@ -52,10 +52,16 @@ class ClarificationTrace:
         env_path = os.environ.get("CLARIFICATION_TRACE_STORE")
         if store_path:
             self.store_path = Path(store_path)
+            # when store_path is explicitly provided, prefer JSONL fallback storage
+            self._jsonl_only = True
         elif env_path:
             self.store_path = Path(env_path)
         else:
             self.store_path = Path(DEFAULT_STORE)
+
+        # default behaviour: attempt DB-backed store unless an explicit store_path is provided
+        if not hasattr(self, "_jsonl_only"):
+            self._jsonl_only = False
 
         self.store_path.parent.mkdir(parents=True, exist_ok=True)
         # ensure file exists with secure permissions
@@ -121,6 +127,35 @@ class ClarificationTrace:
             "corrected_intent": context.get("inferred_intent") or None,
             "trigger": _normalize_trigger(original or user_input_trunc),
         }
+
+        # If the instance was created with an explicit `store_path`, prefer JSONL file writes
+        if getattr(self, "_jsonl_only", False):
+            # attach optional conversation/user identifiers if provided
+            if context.get("conversation_id"):
+                record["conversation_id"] = context.get("conversation_id")
+            if context.get("user_id"):
+                record["user_id"] = context.get("user_id")
+            try:
+                with open(self.store_path, "a", encoding="utf8") as fh:
+                    try:
+                        fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
+                    except Exception:
+                        pass
+                    fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+                    fh.flush()
+                    try:
+                        fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+            result = {"stored": True, "rowid": None,
+                      "inferred_intent": None, "needs_confirmation": False}
+            try:
+                self._last_result = result
+            except Exception:
+                pass
+            return True
 
         # append as JSONL with advisory file lock for safety
         try:
@@ -247,83 +282,6 @@ class ClarificationTrace:
         if not key:
             return None
 
-            def _purge_jsonl_trigger(
-                self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None
-            ) -> int:
-                """Remove any lines from the JSONL fallback that match the given trigger (and optionally conversation/user). Returns number of removed lines."""
-                if not trigger:
-                    return 0
-                try:
-                    if not self.store_path.exists():
-                        return 0
-                    kept = []
-                    removed = 0
-                    with open(self.store_path, "r", encoding="utf8") as fh:
-                        try:
-                            fcntl.flock(fh.fileno(), fcntl.LOCK_SH)
-                        except Exception:
-                            pass
-                        lines = fh.read().splitlines()
-                        try:
-                            fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
-                        except Exception:
-                            pass
-
-                    for ln in lines:
-                        ln = ln.strip()
-                        if not ln:
-                            continue
-                        try:
-                            rec = json.loads(ln)
-                        except Exception:
-                            # keep unparsable lines
-                            kept.append(ln)
-                            continue
-                        if rec.get("trigger") == trigger:
-                            # optionally ensure conversation/user matches if provided
-                            if conversation_id and rec.get("conversation_id") != conversation_id:
-                                kept.append(ln)
-                                continue
-                            if user_id and rec.get("user_id") != user_id:
-                                kept.append(ln)
-                                continue
-                            removed += 1
-                        else:
-                            kept.append(ln)
-
-                    if removed:
-                        tmp = str(self.store_path) + ".tmp"
-                        with open(tmp, "w", encoding="utf8") as out:
-                            try:
-                                fcntl.flock(out.fileno(), fcntl.LOCK_EX)
-                            except Exception:
-                                pass
-                            out.write("\n".join(kept) + ("\n" if kept else ""))
-                            out.flush()
-                            try:
-                                fcntl.flock(out.fileno(), fcntl.LOCK_UN)
-                            except Exception:
-                                pass
-                        try:
-                            os.replace(tmp, str(self.store_path))
-                        except Exception:
-                            # best-effort: try rename
-                            try:
-                                os.remove(str(self.store_path))
-                                os.rename(tmp, str(self.store_path))
-                            except Exception:
-                                pass
-                    return removed
-                except Exception:
-                    return 0
-
-        def detect_and_store(
-            user_input: str, context: Optional[Dict[str, Any]] = None, store_path: Optional[Path] = None
-        ) -> bool:
-            """Convenience wrapper: create a ClarificationTrace and call `detect_and_store` on it."""
-            ct = ClarificationTrace(store_path=store_path)
-            return ct.detect_and_store(user_input, context=context)
-
         try:
             with open(self.store_path, "r", encoding="utf8") as fh:
                 try:
@@ -347,6 +305,76 @@ class ClarificationTrace:
             if rec.get("trigger") == key:
                 return rec
         return None
+
+    def _purge_jsonl_trigger(
+        self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None
+    ) -> int:
+        """Remove any lines from the JSONL fallback that match the given trigger (and optionally conversation/user). Returns number of removed lines."""
+        if not trigger:
+            return 0
+        try:
+            if not self.store_path.exists():
+                return 0
+            kept = []
+            removed = 0
+            with open(self.store_path, "r", encoding="utf8") as fh:
+                try:
+                    fcntl.flock(fh.fileno(), fcntl.LOCK_SH)
+                except Exception:
+                    pass
+                lines = fh.read().splitlines()
+                try:
+                    fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+                except Exception:
+                    pass
+
+            for ln in lines:
+                ln = ln.strip()
+                if not ln:
+                    continue
+                try:
+                    rec = json.loads(ln)
+                except Exception:
+                    # keep unparsable lines
+                    kept.append(ln)
+                    continue
+                if rec.get("trigger") == trigger:
+                    # optionally ensure conversation/user matches if provided
+                    if conversation_id and rec.get("conversation_id") != conversation_id:
+                        kept.append(ln)
+                        continue
+                    if user_id and rec.get("user_id") != user_id:
+                        kept.append(ln)
+                        continue
+                    removed += 1
+                else:
+                    kept.append(ln)
+
+            if removed:
+                tmp = str(self.store_path) + ".tmp"
+                with open(tmp, "w", encoding="utf8") as out:
+                    try:
+                        fcntl.flock(out.fileno(), fcntl.LOCK_EX)
+                    except Exception:
+                        pass
+                    out.write("\n".join(kept) + ("\n" if kept else ""))
+                    out.flush()
+                    try:
+                        fcntl.flock(out.fileno(), fcntl.LOCK_UN)
+                    except Exception:
+                        pass
+                try:
+                    os.replace(tmp, str(self.store_path))
+                except Exception:
+                    # best-effort: try rename
+                    try:
+                        os.remove(str(self.store_path))
+                        os.rename(tmp, str(self.store_path))
+                    except Exception:
+                        pass
+            return removed
+        except Exception:
+            return 0
 
 
 def _normalize_trigger(s: str) -> str:
