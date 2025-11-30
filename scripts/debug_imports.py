@@ -8,26 +8,27 @@ It will print Python version, sys.path, key package versions, and attempt import
 It also writes output to debug_imports.log in the current directory.
 """
 
+import platform
 import sys
 import traceback
-import platform
 from pathlib import Path
 
-log_path = Path('debug_imports.log')
-with log_path.open('w', encoding='utf-8') as log:
-    def writeln(*parts):
-        line = ' '.join(str(p) for p in parts)
-        print(line)
-        log.write(line + '\n')
+log_path = Path("debug_imports.log")
+with log_path.open("w", encoding="utf-8") as log:
 
-    writeln('=== Diagnostic run ===')
-    writeln('Platform:', platform.platform())
-    writeln('Python:', sys.version.replace('\n', ' '))
-    writeln('Executable:', sys.executable)
-    writeln('CWD:', Path.cwd())
-    writeln('Sys.path:')
+    def writeln(*parts):
+        line = " ".join(str(p) for p in parts)
+        print(line)
+        log.write(line + "\n")
+
+    writeln("=== Diagnostic run ===")
+    writeln("Platform:", platform.platform())
+    writeln("Python:", sys.version.replace("\n", " "))
+    writeln("Executable:", sys.executable)
+    writeln("CWD:", Path.cwd())
+    writeln("Sys.path:")
     for p in sys.path:
-        writeln('  ', p)
+        writeln("  ", p)
 
     # Try to detect versions of key packages
     try:
@@ -37,32 +38,34 @@ with log_path.open('w', encoding='utf-8') as log:
             try:
                 return _md.version(name)
             except Exception:
-                return '<not-installed>'
+                return "<not-installed>"
+
     except Exception:
+
         def pkg_ver(name):
-            return '<no-metadata>'
+            return "<no-metadata>"
 
-    for pkg in ('streamlit', 'requests'):
-        writeln(pkg + ' version:', pkg_ver(pkg))
+    for pkg in ("streamlit", "requests"):
+        writeln(pkg + " version:", pkg_ver(pkg))
 
-    writeln('\nAttempting imports...')
+    writeln("\nAttempting imports...")
 
     def attempt(name):
-        writeln('\n-- import', name)
+        writeln("\n-- import", name)
         try:
             __import__(name)
-            writeln('IMPORT_OK', name)
+            writeln("IMPORT_OK", name)
         except Exception as e:
-            writeln('IMPORT_FAILED', name, type(e).__name__, str(e))
-            writeln('Full traceback:')
+            writeln("IMPORT_FAILED", name, type(e).__name__, str(e))
+            writeln("Full traceback:")
             tb = traceback.format_exc()
             for L in tb.splitlines():
-                writeln('   ', L)
+                writeln("   ", L)
 
     # Try main entry and the UI module specifically
-    attempt('main_v2')
-    attempt('emotional_os.deploy.modules.ui')
+    attempt("main_v2")
+    attempt("emotional_os.deploy.modules.ui")
 
-    writeln('\nFinished. Detailed log written to', log_path)
+    writeln("\nFinished. Detailed log written to", log_path)
 
-print('\nDiagnostic script completed. See debug_imports.log for full output.')
+print("\nDiagnostic script completed. See debug_imports.log for full output.")

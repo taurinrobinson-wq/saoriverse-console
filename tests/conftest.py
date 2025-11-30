@@ -1,6 +1,8 @@
 """Pytest configuration for FirstPerson test suite."""
-import sys
+
 import os
+import sys
+
 import pytest
 
 # Add project root to path so tests can import modules

@@ -1,5 +1,6 @@
 import json
 import re
+
 import pytest
 
 
@@ -44,12 +45,12 @@ def test_streaming_complete_reassembles():
         yield "Here is the result:\n```json\n"
         yield '{"glyphs": ['
         yield '{"name": "streamed_one", "description": "desc"}'
-        yield ']}'
-        yield '\n```\n'
+        yield "]}"
+        yield "\n```\n"
 
     out = assemble_stream_and_extract(lambda: generator())
-    assert 'result' in out
-    assert out['result']['glyphs'][0]['name'] == 'streamed_one'
+    assert "result" in out
+    assert out["result"]["glyphs"][0]["name"] == "streamed_one"
 
 
 def test_streaming_truncated_returns_incomplete():
@@ -58,19 +59,19 @@ def test_streaming_truncated_returns_incomplete():
         yield '{"glyphs": ['
         # partial chunk for the object name
         yield '{"name": "partial'
-        raise TimeoutError('stream timed out')
+        raise TimeoutError("stream timed out")
 
     out = assemble_stream_and_extract(lambda: generator())
-    assert out.get('incomplete') is True
-    assert out.get('buffer', '').startswith('Here is the result')
+    assert out.get("incomplete") is True
+    assert out.get("buffer", "").startswith("Here is the result")
 
 
 def test_streaming_api_error_during_stream():
     def generator():
-        yield 'Beginning of reply...'
+        yield "Beginning of reply..."
         # simulate remote API throwing during streaming
-        raise FakeOpenAIError('internal API error while streaming')
+        raise FakeOpenAIError("internal API error while streaming")
 
     out = assemble_stream_and_extract(lambda: generator())
-    assert out.get('error') == 'api_error'
-    assert 'Beginning of reply' in out.get('buffer', '')
+    assert out.get("error") == "api_error"
+    assert "Beginning of reply" in out.get("buffer", "")

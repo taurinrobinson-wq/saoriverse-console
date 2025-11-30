@@ -59,10 +59,11 @@ MODIFICATION TO signal_parser.py:
 At the top, add imports:
 """
 
+import hashlib
+
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import LearningResponseGenerator
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
-import hashlib
 
 # Initialize managers (once, at module load)
 _glyph_learner = GlyphLearner()

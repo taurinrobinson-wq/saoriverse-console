@@ -4,9 +4,10 @@ This is a lightweight in-memory store suitable for prototyping. It is
 privacy-conscious: stored capsules do not contain backend identifiers and
 are intended to be recalled in emotional language only.
 """
-from dataclasses import dataclass, field, asdict
-from datetime import datetime
+
 import json
+from dataclasses import asdict, dataclass, field
+from datetime import datetime
 from typing import List, Optional
 
 

@@ -38,20 +38,25 @@ def high_non_alnum_ratio(s: str, threshold: float = 0.25) -> bool:
 
 def flag_row(row: sqlite3.Row) -> bool:
     # row is a sequence: (rowid, glyph_name, description, gate)
-    name = (row[1] or '')
-    desc = (row[2] or '')
+    name = row[1] or ""
+    desc = row[2] or ""
 
     if not isinstance(name, str):
         return True
-    if '[DEPRECATED]' in name.upper() or 'DEPRECATED' in desc.upper() or 'deprecated' in name.lower() or 'deprecated' in desc.lower():
+    if (
+        "[DEPRECATED]" in name.upper()
+        or "DEPRECATED" in desc.upper()
+        or "deprecated" in name.lower()
+        or "deprecated" in desc.lower()
+    ):
         return True
     if len(name) > 60:
         return True
     if len(desc) > 1000:
         return True
-    if desc.count('\n') > 6:
+    if desc.count("\n") > 6:
         return True
-    if '[' in name or '\t' in name:
+    if "[" in name or "\t" in name:
         return True
     if high_non_alnum_ratio(name, 0.20) or high_non_alnum_ratio(desc, 0.20):
         return True
@@ -77,7 +82,9 @@ def discover_candidates(db_path: str, limit: int = None):
     for r in rows:
         if flag_row(r):
             # r: (rowid, glyph_name, description, gate)
-            candidates.append({'rowid': r[0], 'glyph_name': r[1], 'gate': r[3], 'description_snippet': (r[2] or '')[:200]})
+            candidates.append(
+                {"rowid": r[0], "glyph_name": r[1], "gate": r[3], "description_snippet": (r[2] or "")[:200]}
+            )
             if limit and len(candidates) >= limit:
                 break
 
@@ -87,13 +94,13 @@ def discover_candidates(db_path: str, limit: int = None):
 
 def archive_and_remove(db_path: str, rowids: list):
     if not rowids:
-        return {'archived': 0, 'deleted': 0}
+        return {"archived": 0, "deleted": 0}
 
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     # Create archival table if not exists (simple schema)
     cursor.execute(
-        '''
+        """
         CREATE TABLE IF NOT EXISTS glyph_lexicon_archived (
             orig_rowid INTEGER,
             glyph_name TEXT,
@@ -101,7 +108,7 @@ def archive_and_remove(db_path: str, rowids: list):
             gate TEXT,
             archived_at TEXT
         )
-        '''
+        """
     )
     conn.commit()
 
@@ -109,13 +116,15 @@ def archive_and_remove(db_path: str, rowids: list):
     deleted = 0
     for rid in rowids:
         try:
-            cursor.execute('SELECT glyph_name, description, gate FROM glyph_lexicon WHERE rowid = ?', (rid,))
+            cursor.execute("SELECT glyph_name, description, gate FROM glyph_lexicon WHERE rowid = ?", (rid,))
             row = cursor.fetchone()
             if not row:
                 continue
-            cursor.execute('INSERT INTO glyph_lexicon_archived (orig_rowid, glyph_name, description, gate, archived_at) VALUES (?, ?, ?, ?, ?)',
-                           (rid, row[0], row[1], row[2], datetime.utcnow().isoformat()))
-            cursor.execute('DELETE FROM glyph_lexicon WHERE rowid = ?', (rid,))
+            cursor.execute(
+                "INSERT INTO glyph_lexicon_archived (orig_rowid, glyph_name, description, gate, archived_at) VALUES (?, ?, ?, ?, ?)",
+                (rid, row[0], row[1], row[2], datetime.utcnow().isoformat()),
+            )
+            cursor.execute("DELETE FROM glyph_lexicon WHERE rowid = ?", (rid,))
             archived += 1
             deleted += 1
         except Exception as e:
@@ -123,15 +132,17 @@ def archive_and_remove(db_path: str, rowids: list):
             conn.rollback()
     conn.commit()
     conn.close()
-    return {'archived': archived, 'deleted': deleted}
+    return {"archived": archived, "deleted": deleted}
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Clean noisy rows from glyph_lexicon')
-    parser.add_argument('--db', '--db-path', dest='db_path', required=True, help='Path to glyphs DB')
-    parser.add_argument('--dry-run', dest='dry_run', action='store_true', default=True, help='Only list candidates (default)')
-    parser.add_argument('--apply', dest='apply', action='store_true', help='Apply archival + deletion (destructive)')
-    parser.add_argument('--limit', dest='limit', type=int, default=200, help='Limit number of candidates to show/apply')
+    parser = argparse.ArgumentParser(description="Clean noisy rows from glyph_lexicon")
+    parser.add_argument("--db", "--db-path", dest="db_path", required=True, help="Path to glyphs DB")
+    parser.add_argument(
+        "--dry-run", dest="dry_run", action="store_true", default=True, help="Only list candidates (default)"
+    )
+    parser.add_argument("--apply", dest="apply", action="store_true", help="Apply archival + deletion (destructive)")
+    parser.add_argument("--limit", dest="limit", type=int, default=200, help="Limit number of candidates to show/apply")
 
     args = parser.parse_args()
 
@@ -151,12 +162,14 @@ def main():
     print(json.dumps(sample, indent=2, ensure_ascii=False))
 
     if args.apply:
-        rowids = [c['rowid'] for c in candidates]
+        rowids = [c["rowid"] for c in candidates]
         result = archive_and_remove(args.db_path, rowids)
         print(f"Archived {result['archived']} rows and deleted {result['deleted']} rows.")
     else:
-        print("Dry-run complete. To remove these rows, run with --apply. Recommended: run a small apply first (limit) to confirm results.")
+        print(
+            "Dry-run complete. To remove these rows, run with --apply. Recommended: run a small apply first (limit) to confirm results."
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -19,6 +19,7 @@ try:
 except ImportError:
     # Fallback for when run from different directory
     import sys
+
     sys.path.append(os.path.dirname(__file__))
     from limbic_adjacent_system import get_limbic_system
 
@@ -49,10 +50,10 @@ Neural Basis: {chiasmus['neural_basis']}
 SYSTEM SIGNALS:
 """
 
-        for system_type, signal_data in chiasmus['system_signals'].items():
-            glyph = signal_data['glyph']
-            signal = signal_data['signal']
-            desc = signal_data['description']
+        for system_type, signal_data in chiasmus["system_signals"].items():
+            glyph = signal_data["glyph"]
+            signal = signal_data["signal"]
+            desc = signal_data["description"]
 
             diagram += f"""
 {system_type.value.upper():>12}: {glyph} {signal}
@@ -88,7 +89,7 @@ GLYPH SEQUENCES BY SYSTEM:
 """
 
         for system_type, glyphs in region.glyph_sequences.items():
-            glyph_sequence = ' → '.join(glyphs)
+            glyph_sequence = " → ".join(glyphs)
             diagram += f"""
 {system_type.value.upper():>12}: {glyph_sequence}"""
 
@@ -202,7 +203,9 @@ INDIVIDUAL CONTRIBUTIONS:
 
         return diagram
 
-    def export_visualizations(self, emotion: str = "joy", output_dir: str = "emotional_os/glyphs/visualizations") -> Dict[str, str]:
+    def export_visualizations(
+        self, emotion: str = "joy", output_dir: str = "emotional_os/glyphs/visualizations"
+    ) -> Dict[str, str]:
         """
         Export all visualizations for a given emotion.
         """
@@ -215,20 +218,20 @@ INDIVIDUAL CONTRIBUTIONS:
                 for region in ["insula", "amygdala", "hippocampus", "acc", "vmpfc"]
             },
             "neural_flowchart": self.create_neural_ritual_flowchart(),
-            "harmonics_diagram": self.create_system_harmonics_diagram(emotion)
+            "harmonics_diagram": self.create_system_harmonics_diagram(emotion),
         }
 
         # Save to files
         for name, content in visualizations.items():
             if isinstance(content, str):
                 filename = f"{output_dir}/{emotion}_{name}.txt"
-                with open(filename, 'w', encoding='utf-8') as f:
+                with open(filename, "w", encoding="utf-8") as f:
                     f.write(content)
                 print(f"✅ Saved {filename}")
             elif isinstance(content, dict):
                 for sub_name, sub_content in content.items():
                     filename = f"{output_dir}/{emotion}_{name}_{sub_name}.txt"
-                    with open(filename, 'w', encoding='utf-8') as f:
+                    with open(filename, "w", encoding="utf-8") as f:
                         f.write(sub_content)
                     print(f"✅ Saved {filename}")
 

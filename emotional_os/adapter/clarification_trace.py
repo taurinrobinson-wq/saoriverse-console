@@ -6,18 +6,18 @@ interpretation toward corrected intents.
 
 Storage: `data/disambiguation_memory.jsonl` (created if missing).
 """
-from typing import Optional, Dict, Any
-import os
-import json
-import re
-import fcntl
-import stat
-from pathlib import Path
-import threading
-import queue
 
-DEFAULT_STORE = Path(__file__).resolve(
-).parents[2] / "data" / "disambiguation_memory.jsonl"
+import fcntl
+import json
+import os
+import queue
+import re
+import stat
+import threading
+from pathlib import Path
+from typing import Any, Dict, Optional
+
+DEFAULT_STORE = Path(__file__).resolve().parents[2] / "data" / "disambiguation_memory.jsonl"
 
 # Limits to keep stored records bounded (avoid huge user text in logs)
 MAX_ORIGINAL = 500
@@ -89,10 +89,8 @@ class ClarificationTrace:
         if not self._is_correction(user_input):
             return False
 
-        original = context.get(
-            "last_user_input") or context.get("original_input")
-        system_resp = context.get(
-            "last_system_response") or context.get("system_response")
+        original = context.get("last_user_input") or context.get("original_input")
+        system_resp = context.get("last_system_response") or context.get("system_response")
         if not original:
             # Nothing to anchor to — still store the raw clarification for future signals
             original = ""
@@ -169,24 +167,27 @@ class ClarificationTrace:
                 except Exception as e:
                     q.put(("err", e))
 
-            thread = threading.Thread(
-                target=_worker_insert, args=(q,), daemon=True)
+            thread = threading.Thread(target=_worker_insert, args=(q,), daemon=True)
             thread.start()
             try:
-                status, payload = q.get(timeout=float(
-                    os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", "0.75")))
+                status, payload = q.get(timeout=float(os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", "0.75")))
                 if status == "ok":
                     rowid = payload
-                    result = {"stored": True, "rowid": rowid, "inferred_intent": inferred,
-                              "needs_confirmation": needs_confirmation}
+                    result = {
+                        "stored": True,
+                        "rowid": rowid,
+                        "inferred_intent": inferred,
+                        "needs_confirmation": needs_confirmation,
+                    }
                     try:
                         self._last_result = result
                     except Exception:
                         pass
                     # If DB insert succeeded, purge any matching fallback JSONL records
                     try:
-                        self._purge_jsonl_trigger(record.get("trigger"), record.get(
-                            "conversation_id"), record.get("user_id"))
+                        self._purge_jsonl_trigger(
+                            record.get("trigger"), record.get("conversation_id"), record.get("user_id")
+                        )
                     except Exception:
                         pass
                     return True
@@ -212,8 +213,7 @@ class ClarificationTrace:
                         pass
             except Exception:
                 pass
-            result = {"stored": True, "rowid": None,
-                      "inferred_intent": None, "needs_confirmation": False}
+            result = {"stored": True, "rowid": None, "inferred_intent": None, "needs_confirmation": False}
             try:
                 self._last_result = result
             except Exception:
@@ -229,7 +229,9 @@ class ClarificationTrace:
         if not key:
             return None
 
-            def _purge_jsonl_trigger(self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None) -> int:
+            def _purge_jsonl_trigger(
+                self, trigger: str, conversation_id: Optional[str] = None, user_id: Optional[str] = None
+            ) -> int:
                 """Remove any lines from the JSONL fallback that match the given trigger (and optionally conversation/user). Returns number of removed lines."""
                 if not trigger:
                     return 0
@@ -297,7 +299,9 @@ class ClarificationTrace:
                 except Exception:
                     return 0
 
-        def detect_and_store(user_input: str, context: Optional[Dict[str, Any]] = None, store_path: Optional[Path] = None) -> bool:
+        def detect_and_store(
+            user_input: str, context: Optional[Dict[str, Any]] = None, store_path: Optional[Path] = None
+        ) -> bool:
             """Convenience wrapper: create a ClarificationTrace and call `detect_and_store` on it."""
             ct = ClarificationTrace(store_path=store_path)
             return ct.detect_and_store(user_input, context=context)

@@ -11,6 +11,7 @@ The animation intentionally uses a relatively slow 500ms frame delay
 and neutral greys for background flashing to reduce photosensitivity
 risk. Consumers may adjust `cycles` or `delay_s` as needed.
 """
+
 from __future__ import annotations
 
 import time
@@ -67,8 +68,7 @@ def main():
 
     gentle_mode = st.checkbox("Gentle mode (no flashing)", value=True)
     cycles = st.slider("Cycles", min_value=1, max_value=20, value=6)
-    delay_s = st.slider("Frame delay (s)", min_value=0.1,
-                        max_value=1.5, value=0.5)
+    delay_s = st.slider("Frame delay (s)", min_value=0.1, max_value=1.5, value=0.5)
 
     if st.button("Dance Mode 🕺"):
         dance_mode(cycles=cycles, delay_s=delay_s, gentle_mode=gentle_mode)

@@ -1,10 +1,11 @@
-from docx import Document
-from io import BytesIO
-import json
-import requests
-import time
-import streamlit as st
 import datetime
+import json
+import time
+from io import BytesIO
+
+import requests
+import streamlit as st
+from docx import Document
 
 # --- Generate Word Document from Personal Log ---
 
@@ -26,6 +27,8 @@ def generate_doc(date, time, event, mood, reflections, insights):
     doc.save(buffer)
     buffer.seek(0)
     return buffer
+
+
 # --- End Generate Word Document ---
 
 
@@ -34,7 +37,7 @@ st.set_page_config(
     page_title="FirstPerson - Personal AI Companion",
     page_icon="/static/graphics/FirstPerson-Logo-normalized.svg",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -55,11 +58,12 @@ class SaoynxAuthentication:
     def create_session_token(self, username: str, user_id: str) -> str:
         """Create a secure session token"""
         import base64
+
         session_data = {
             "username": username,
             "user_id": user_id,
             "created": datetime.datetime.now().isoformat(),
-            "expires": (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+            "expires": (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat(),
         }
         # Simple base64 encoding (in production, use proper JWT)
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
@@ -69,6 +73,7 @@ class SaoynxAuthentication:
         """Validate and decode session token"""
         try:
             import base64
+
             # Decode the token
             decoded_data = base64.b64decode(token.encode()).decode()
             session_data = json.loads(decoded_data)
@@ -81,8 +86,7 @@ class SaoynxAuthentication:
 
             # Check expiration
             try:
-                expires = datetime.datetime.fromisoformat(
-                    session_data["expires"])
+                expires = datetime.datetime.fromisoformat(session_data["expires"])
                 if datetime.datetime.now() < expires:
                     return {"valid": True, "data": session_data}
                 else:
@@ -96,13 +100,13 @@ class SaoynxAuthentication:
     def init_session_state(self):
         """Initialize authentication session state with persistence"""
         # Initialize defaults first
-        if 'authenticated' not in st.session_state:
+        if "authenticated" not in st.session_state:
             st.session_state.authenticated = False
-        if 'user_id' not in st.session_state:
+        if "user_id" not in st.session_state:
             st.session_state.user_id = None
-        if 'username' not in st.session_state:
+        if "username" not in st.session_state:
             st.session_state.username = None
-        if 'session_expires' not in st.session_state:
+        if "session_expires" not in st.session_state:
             st.session_state.session_expires = None
 
         # Only try to restore session if not already authenticated
@@ -129,19 +133,13 @@ class SaoynxAuthentication:
         """Authenticate user login"""
         try:
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "action": "authenticate",
-                    "username": username,
-                    "password": password
-                },
-                timeout=10
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
+                json={"action": "authenticate", "username": username, "password": password},
+                timeout=10,
             )
 
             if response.status_code == 200:
@@ -152,19 +150,18 @@ class SaoynxAuthentication:
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
                     st.session_state.session_expires = (
-                        datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+                        datetime.datetime.now() + datetime.timedelta(days=2)
+                    ).isoformat()
 
                     # Create persistent session token
-                    session_token = self.create_session_token(
-                        username, data.get("user_id"))
+                    session_token = self.create_session_token(username, data.get("user_id"))
 
                     # Add session token to URL for persistence
                     st.query_params["session_token"] = session_token
 
                     return {"success": True, "message": "Login successful"}
                 else:
-                    error_msg = data.get(
-                        "error", "Invalid username or password")
+                    error_msg = data.get("error", "Invalid username or password")
                     return {"success": False, "message": f"Login failed: {error_msg}"}
             else:
                 return {"success": False, "message": f"Authentication service error (HTTP {response.status_code})"}
@@ -176,20 +173,18 @@ class SaoynxAuthentication:
         """Create new user account"""
         try:
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
                 json={
                     "action": "create_user",
                     "username": username,
                     "password": password,
-                    "created_at": datetime.datetime.now().isoformat()
+                    "created_at": datetime.datetime.now().isoformat(),
                 },
-                timeout=10
+                timeout=10,
             )
 
             if response.status_code == 200:
@@ -199,8 +194,9 @@ class SaoynxAuthentication:
                 else:
                     return {"success": False, "message": data.get("error", "Failed to create account")}
             else:
-                error_data = response.json() if response.headers.get(
-                    'content-type', '').startswith('application/json') else {}
+                error_data = (
+                    response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+                )
                 return {"success": False, "message": error_data.get("error", "Failed to create account")}
 
         except Exception as e:
@@ -209,12 +205,12 @@ class SaoynxAuthentication:
     def quick_login_bypass(self):
         """Quick demo access"""
         import uuid
+
         user_id = str(uuid.uuid4())
         st.session_state.authenticated = True
         st.session_state.user_id = user_id
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (
-            datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+        st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
         # Create persistent session token for demo user too
         session_token = self.create_session_token("demo_user", user_id)
         st.query_params["session_token"] = session_token
@@ -237,7 +233,8 @@ class SaoynxAuthentication:
         """Render the clean SAOYNX splash interface"""
 
         # Custom CSS matching your design
-        st.markdown("""
+        st.markdown(
+            """
         <style>
         /* Hide Streamlit default elements */
         .stDeployButton {display: none;}
@@ -382,30 +379,33 @@ class SaoynxAuthentication:
             letter-spacing: 1px;
         }
         </style>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         # Complete logo with text - perfectly centered
-        st.markdown(
-            '<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: center; margin-bottom: 1rem;">', unsafe_allow_html=True)
 
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             try:
-                st.image(
-                    "/static/graphics/FirstPerson-Logo-normalized.svg", width=120)
+                st.image("/static/graphics/FirstPerson-Logo-normalized.svg", width=120)
             except Exception:
-                st.markdown('''
+                st.markdown(
+                    """
                 <div style="font-size: 4rem;">🧠</div>
                 <div style="font-size: 2rem; font-weight: 300; letter-spacing: 4px; color: #2E2E2E; margin: 0.5rem 0 0.2rem 0;">FirstPerson</div>
                 <div style="font-size: 1rem; color: #666; letter-spacing: 2px; font-weight: 300; text-transform: uppercase;">Personal AI<br>Companion</div>
-                ''', unsafe_allow_html=True)
+                """,
+                    unsafe_allow_html=True,
+                )
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
         # Handle different states
-        if st.session_state.get('show_login', False):
+        if st.session_state.get("show_login", False):
             self.render_login_form()
-        elif st.session_state.get('show_register', False):
+        elif st.session_state.get("show_register", False):
             self.render_register_form()
         else:
             # Main splash screen - professional centered layout
@@ -417,11 +417,9 @@ class SaoynxAuthentication:
                 # Questions closer together
                 qcol1, qcol2 = st.columns([1, 1], gap="small")
                 with qcol1:
-                    st.markdown(
-                        '<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="auth-question">existing user?</div>', unsafe_allow_html=True)
                 with qcol2:
-                    st.markdown(
-                        '<div class="auth-question">new user?</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="auth-question">new user?</div>', unsafe_allow_html=True)
 
                 # Buttons closer together
                 bcol1, bcol2 = st.columns([1, 1], gap="small")
@@ -434,19 +432,18 @@ class SaoynxAuthentication:
                         st.session_state.show_register = True
                         st.rerun()
 
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
 
             # Quick access section
             st.markdown('<div class="quick-access">', unsafe_allow_html=True)
-            st.markdown('<div class="quick-title">Quick Access</div>',
-                        unsafe_allow_html=True)
+            st.markdown('<div class="quick-title">Quick Access</div>', unsafe_allow_html=True)
 
             col1, col2, col3 = st.columns([1, 1, 1])
             with col2:
                 if st.button("⚡ Demo Mode", help="Try the system instantly"):
                     self.quick_login_bypass()
 
-            st.markdown('</div>', unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
 
     def render_login_form(self):
         """Clean login form matching your design"""
@@ -460,7 +457,8 @@ class SaoynxAuthentication:
 
         # No duplicate logo - just the title
         st.markdown(
-            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True)
+            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Sign In</div>', unsafe_allow_html=True
+        )
 
         # Login form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
@@ -468,19 +466,21 @@ class SaoynxAuthentication:
             with st.form("login_form"):
                 # Tight spacing labels
                 st.markdown(
-                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
-                username = st.text_input(
-                    "login", label_visibility="collapsed", placeholder="username")
+                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>',
+                    unsafe_allow_html=True,
+                )
+                username = st.text_input("login", label_visibility="collapsed", placeholder="username")
 
                 st.markdown(
-                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>',
+                    unsafe_allow_html=True,
+                )
                 password = st.text_input(
-                    "password", label_visibility="collapsed", type="password", placeholder="password")
+                    "password", label_visibility="collapsed", type="password", placeholder="password"
+                )
 
-                st.markdown(
-                    '<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
-                login_submitted = st.form_submit_button(
-                    "Sign In", use_container_width=True)
+                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
+                login_submitted = st.form_submit_button("Sign In", use_container_width=True)
 
                 if login_submitted:
                     if not username or not password:
@@ -496,7 +496,7 @@ class SaoynxAuthentication:
                         else:
                             st.error(result["message"])
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
     def render_register_form(self):
         """Clean registration form"""
@@ -510,7 +510,9 @@ class SaoynxAuthentication:
 
         # No duplicate logo - just the title
         st.markdown(
-            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>', unsafe_allow_html=True)
+            '<div class="auth-title" style="text-align: center; margin: 1rem 0;">Create Account</div>',
+            unsafe_allow_html=True,
+        )
 
         # Register form - ultra compact
         col1, col2, col3 = st.columns([1, 2, 1])
@@ -518,24 +520,29 @@ class SaoynxAuthentication:
             with st.form("register_form"):
                 # Tight spacing labels
                 st.markdown(
-                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>', unsafe_allow_html=True)
-                username = st.text_input(
-                    "login", label_visibility="collapsed", placeholder="choose username")
+                    '<div style="text-align: left; margin-bottom: 0.1rem; color: #666; font-size: 0.8rem;">login:</div>',
+                    unsafe_allow_html=True,
+                )
+                username = st.text_input("login", label_visibility="collapsed", placeholder="choose username")
 
                 st.markdown(
-                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>', unsafe_allow_html=True)
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">password:</div>',
+                    unsafe_allow_html=True,
+                )
                 password = st.text_input(
-                    "password", label_visibility="collapsed", type="password", placeholder="choose password")
+                    "password", label_visibility="collapsed", type="password", placeholder="choose password"
+                )
 
                 st.markdown(
-                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>', unsafe_allow_html=True)
+                    '<div style="text-align: left; margin-bottom: 0.1rem; margin-top: 0.1rem; color: #666; font-size: 0.8rem;">confirm:</div>',
+                    unsafe_allow_html=True,
+                )
                 confirm_password = st.text_input(
-                    "confirm", label_visibility="collapsed", type="password", placeholder="confirm password")
+                    "confirm", label_visibility="collapsed", type="password", placeholder="confirm password"
+                )
 
-                st.markdown(
-                    '<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
-                register_submitted = st.form_submit_button(
-                    "Register Now", use_container_width=True)
+                st.markdown('<div style="margin: 0.2rem 0 0.1rem 0;"></div>', unsafe_allow_html=True)
+                register_submitted = st.form_submit_button("Register Now", use_container_width=True)
 
                 if register_submitted:
                     if not username or not password:
@@ -557,7 +564,7 @@ class SaoynxAuthentication:
                         else:
                             st.error(result["message"])
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_main_app():
@@ -569,10 +576,12 @@ def render_main_app():
         try:
             st.image("/static/graphics/FirstPerson-Logo-normalized.svg", width=24)
         except Exception:
-            st.markdown(
-                '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+            st.markdown('<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
     with col2:
-        st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
+        st.markdown(
+            '<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>',
+            unsafe_allow_html=True,
+        )
 
     st.markdown("*Your private space for emotional processing and growth*")
 
@@ -603,27 +612,22 @@ def render_main_app():
 
     with col1:
         # Set default processing mode if not already set (enforce local-only)
-        if 'processing_mode' not in st.session_state:
+        if "processing_mode" not in st.session_state:
             st.session_state.processing_mode = "local"
 
         # Backward-compatibility: map legacy ai_preferred → local
-        if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'local'
-            st.session_state['prefer_ai'] = False
+        if st.session_state.get("processing_mode") == "ai_preferred":
+            st.session_state.processing_mode = "local"
+            st.session_state["prefer_ai"] = False
 
         # Render selectbox using session state (local-only)
         mode_options = ["local"]
-        current = st.session_state.get('processing_mode', 'local')
+        current = st.session_state.get("processing_mode", "local")
         try:
             idx = mode_options.index(current)
         except ValueError:
             idx = 0
-        processing_mode = st.selectbox(
-            "Processing Mode",
-            mode_options,
-            index=idx,
-            help="Local: Maximum privacy"
-        )
+        processing_mode = st.selectbox("Processing Mode", mode_options, index=idx, help="Local: Maximum privacy")
 
         st.session_state.processing_mode = processing_mode
 
@@ -643,8 +647,7 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(
-                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
 
     # ✅ Process uploaded document if present
     if "uploaded_text" in st.session_state:
@@ -657,11 +660,9 @@ def render_main_app():
                     st.write(response)
 
     # ✅ Document upload for emotional processing
-    uploaded_file = st.file_uploader(
-        "📄 Upload a document", type=["txt", "docx", "pdf"])
+    uploaded_file = st.file_uploader("📄 Upload a document", type=["txt", "docx", "pdf"])
     if uploaded_file:
-        file_content = uploaded_file.read().decode(
-            "utf-8", errors="ignore")  # Adjust for docx/pdf later
+        file_content = uploaded_file.read().decode("utf-8", errors="ignore")  # Adjust for docx/pdf later
         st.session_state["uploaded_text"] = file_content
         st.success("Document uploaded successfully!")
 
@@ -681,19 +682,14 @@ def render_main_app():
                             saori_url,
                             headers={
                                 "Authorization": f"Bearer {st.secrets['supabase']['key']}",
-                                "Content-Type": "application/json"
+                                "Content-Type": "application/json",
                             },
-                            json={
-                                "message": user_input,
-                                "mode": processing_mode,
-                                "user_id": st.session_state.user_id
-                            },
-                            timeout=15
+                            json={"message": user_input, "mode": processing_mode, "user_id": st.session_state.user_id},
+                            timeout=15,
                         )
                         if response_data.status_code == 200:
                             result = response_data.json()
-                            response = result.get(
-                                "reply", "I'm here to listen.")
+                            response = result.get("reply", "I'm here to listen.")
                             glyph_info = result.get("glyph", {})
                             processing_details = result.get("log", {})  # noqa: F841  # optional debug/logging info
                         else:
@@ -702,15 +698,21 @@ def render_main_app():
                             # a concise diagnostic instead of a generic sentence.
                             try:
                                 payload = response_data.json()
-                                response = payload.get('reply') or payload.get('error') or (
-                                    f"AI service error (HTTP {response_data.status_code})"
+                                response = (
+                                    payload.get("reply")
+                                    or payload.get("error")
+                                    or (f"AI service error (HTTP {response_data.status_code})")
                                 )
                             except Exception:
                                 response = f"AI service error (HTTP {response_data.status_code})"
                             glyph_info = {}
-                            processing_details = {"error": f"HTTP {response_data.status_code}"}  # noqa: F841  # optional debug/logging info
+                            processing_details = {
+                                "error": f"HTTP {response_data.status_code}"
+                            }  # noqa: F841  # optional debug/logging info
                     except Exception as e:
-                        response = "I'm having trouble connecting right now, but your feelings are still valid and important."
+                        response = (
+                            "I'm having trouble connecting right now, but your feelings are still valid and important."
+                        )
                         glyph_info = {}
                         processing_details = {"error": str(e)}  # noqa: F841  # optional debug/logging info
                     processing_time = time.time() - start_time
@@ -718,33 +720,39 @@ def render_main_app():
                     # Show processing details
                     if glyph_info and glyph_info.get("tag_name"):
                         st.caption(
-                            f"✨ Emotional resonance: {glyph_info.get('tag_name')} • Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                            f"✨ Emotional resonance: {glyph_info.get('tag_name')} • Processed in {processing_time:.2f}s • Mode: {processing_mode}"
+                        )
                     else:
-                        st.caption(
-                            f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                        st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
         # Add to conversation history
-        st.session_state[conversation_key].append({
-            "user": user_input,
-            "assistant": response,
-            "processing_time": f"{processing_time:.2f}s",
-            "mode": processing_mode,
-            "glyph": glyph_info.get("tag_name") if glyph_info else None,
-            "timestamp": datetime.datetime.now().isoformat()
-        })
+        st.session_state[conversation_key].append(
+            {
+                "user": user_input,
+                "assistant": response,
+                "processing_time": f"{processing_time:.2f}s",
+                "mode": processing_mode,
+                "glyph": glyph_info.get("tag_name") if glyph_info else None,
+                "timestamp": datetime.datetime.now().isoformat(),
+            }
+        )
         st.rerun()
 
     # Personal Log Button
     if "show_personal_log" not in st.session_state:
         st.session_state.show_personal_log = False
-    if st.button("Start Personal Log", help="Begin a structured emotional entry—date, event, mood, reflections, and insights."):
+    if st.button(
+        "Start Personal Log", help="Begin a structured emotional entry—date, event, mood, reflections, and insights."
+    ):
         st.session_state.show_personal_log = True
         st.rerun()
 
     if st.session_state.show_personal_log:
         import datetime as dt
+
         st.markdown("### 📘 Start Personal Log")
         st.markdown(
-            "Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights.")
+            "Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights."
+        )
 
         # Auto-filled date and time
         date = st.date_input("Date", value=dt.date.today())
@@ -757,17 +765,17 @@ def render_main_app():
         mood = st.text_input("Mood", placeholder="How did it feel?")
 
         # Reflections (freeform or guided)
-        reflections = st.text_area(
-            "Reflections", placeholder="What’s emerging emotionally?")
+        reflections = st.text_area("Reflections", placeholder="What’s emerging emotionally?")
 
         # Insights (symbolic clarity)
-        insights = st.text_area(
-            "Insights", placeholder="What truth or clarity surfaced?")
+        insights = st.text_area("Insights", placeholder="What truth or clarity surfaced?")
 
         # Completion prompt
         def generate_doc(date, log_time, event, mood, reflections, insights):
-            from docx import Document
             import io
+
+            from docx import Document
+
             doc = Document()
             doc.add_heading("Personal Log", 0)
             doc.add_paragraph(f"Date: {date}")
@@ -786,9 +794,8 @@ def render_main_app():
             try:
                 st.download_button(
                     label="Download as Word Doc",
-                    data=generate_doc(date, log_time, event,
-                                      mood, reflections, insights),
-                    file_name="personal_log.docx"
+                    data=generate_doc(date, log_time, event, mood, reflections, insights),
+                    file_name="personal_log.docx",
                 )
             except Exception as e:
                 st.error(f"Error generating Word document: {e}")
@@ -818,13 +825,13 @@ def render_main_app():
                 "user_id": st.session_state.user_id,
                 "username": st.session_state.username,
                 "conversations": st.session_state[conversation_key],
-                "export_date": datetime.datetime.now().isoformat()
+                "export_date": datetime.datetime.now().isoformat(),
             }
             st.download_button(
                 "Download JSON",
                 json.dumps(user_data, indent=2),
                 file_name=f"emotional_os_data_{st.session_state.username}_{datetime.datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
+                mime="application/json",
             )
 
 

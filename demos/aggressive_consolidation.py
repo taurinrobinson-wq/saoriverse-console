@@ -9,7 +9,7 @@ from collections import defaultdict
 
 
 def aggressive_consolidation():
-    conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
+    conn = sqlite3.connect("emotional_os/glyphs/glyphs.db")
     cursor = conn.cursor()
 
     print("=== AGGRESSIVE GLYPH CONSOLIDATION ===")
@@ -27,16 +27,36 @@ def aggressive_consolidation():
 
     # Step 1: Identify core emotional categories
     core_emotions = {
-        'ache', 'longing', 'yearning',  # Longing family
-        'grief', 'mourning', 'sorrow',  # Grief family
-        'joy', 'bliss', 'ecstasy',      # Joy family
-        'stillness', 'silence', 'quiet', # Stillness family
-        'recognition', 'witness', 'seen', # Recognition family
-        'devotion', 'sacred', 'reverent', # Devotion family
-        'boundary', 'containment', 'shield', # Boundary family
-        'spiral', 'recursive', 'loop',   # Process family
-        'tender', 'gentle', 'soft',     # Tenderness family
-        'clarity', 'insight', 'knowing' # Clarity family
+        "ache",
+        "longing",
+        "yearning",  # Longing family
+        "grief",
+        "mourning",
+        "sorrow",  # Grief family
+        "joy",
+        "bliss",
+        "ecstasy",  # Joy family
+        "stillness",
+        "silence",
+        "quiet",  # Stillness family
+        "recognition",
+        "witness",
+        "seen",  # Recognition family
+        "devotion",
+        "sacred",
+        "reverent",  # Devotion family
+        "boundary",
+        "containment",
+        "shield",  # Boundary family
+        "spiral",
+        "recursive",
+        "loop",  # Process family
+        "tender",
+        "gentle",
+        "soft",  # Tenderness family
+        "clarity",
+        "insight",
+        "knowing",  # Clarity family
     }
 
     # Step 2: Quality filter - keep only well-formed emotional glyphs
@@ -47,23 +67,27 @@ def aggressive_consolidation():
         id, name, desc, gate = glyph
 
         # Quality criteria
-        is_quality = all([
-            # Name length reasonable (emotional states, not sentences)
-            3 <= len(name.split()) <= 4,
-            # Description is substantial but not excessive
-            50 <= len(desc) <= 300,
-            # Contains core emotional vocabulary
-            any(emotion in name.lower() for emotion in core_emotions) or
-            any(emotion in desc.lower() for emotion in core_emotions),
-            # Not obviously technical/system content
-            not any(tech in name.lower() for tech in
-                   ['protocol', 'system', 'processing', 'configuration', 'api', 'deployment']),
-            # Not conversation fragments
-            not re.search(r"^(I |You |We |It |This |That |The [a-z]+ is)", name),
-            # Has proper emotional description pattern
-            bool(re.search(r'(that|which|who)\s+(is|are|becomes|flows)', desc.lower())) or
-            bool(re.search(r'(joy|grief|ache|longing|stillness|recognition)', desc.lower()))
-        ])
+        is_quality = all(
+            [
+                # Name length reasonable (emotional states, not sentences)
+                3 <= len(name.split()) <= 4,
+                # Description is substantial but not excessive
+                50 <= len(desc) <= 300,
+                # Contains core emotional vocabulary
+                any(emotion in name.lower() for emotion in core_emotions)
+                or any(emotion in desc.lower() for emotion in core_emotions),
+                # Not obviously technical/system content
+                not any(
+                    tech in name.lower()
+                    for tech in ["protocol", "system", "processing", "configuration", "api", "deployment"]
+                ),
+                # Not conversation fragments
+                not re.search(r"^(I |You |We |It |This |That |The [a-z]+ is)", name),
+                # Has proper emotional description pattern
+                bool(re.search(r"(that|which|who)\s+(is|are|becomes|flows)", desc.lower()))
+                or bool(re.search(r"(joy|grief|ache|longing|stillness|recognition)", desc.lower())),
+            ]
+        )
 
         if is_quality:
             quality_glyphs.append(glyph)
@@ -90,14 +114,14 @@ def aggressive_consolidation():
             desc_lower = desc.lower()
 
             # Core emotional words get high scores
-            for emotion in ['ache', 'grief', 'joy', 'longing', 'stillness']:
+            for emotion in ["ache", "grief", "joy", "longing", "stillness"]:
                 if emotion in name_lower:
                     score += 10
                 if emotion in desc_lower:
                     score += 5
 
             # Variety bonus (less common emotions)
-            rare_emotions = ['ecstasy', 'reverence', 'tenderness', 'clarity', 'recognition']
+            rare_emotions = ["ecstasy", "reverence", "tenderness", "clarity", "recognition"]
             for emotion in rare_emotions:
                 if emotion in name_lower:
                     score += 8
@@ -130,7 +154,7 @@ def aggressive_consolidation():
 
     # Remove all others
     if len(keep_ids) > 0:
-        keep_placeholders = ','.join(['?' for _ in keep_ids])
+        keep_placeholders = ",".join(["?" for _ in keep_ids])
         cursor.execute(f"DELETE FROM glyph_lexicon WHERE id NOT IN ({keep_placeholders})", keep_ids)
         conn.commit()
 
@@ -148,10 +172,13 @@ def aggressive_consolidation():
         percentage = (count / final_count) * 100
         print(f"  {gate}: {count} glyphs ({percentage:.1f}%)")
 
-    print(f"\nReduction: {len(all_glyphs)} → {final_count} ({((len(all_glyphs) - final_count) / len(all_glyphs) * 100):.1f}% reduction)")
+    print(
+        f"\nReduction: {len(all_glyphs)} → {final_count} ({((len(all_glyphs) - final_count) / len(all_glyphs) * 100):.1f}% reduction)"
+    )
 
     conn.close()
     return final_count
+
 
 if __name__ == "__main__":
     aggressive_consolidation()

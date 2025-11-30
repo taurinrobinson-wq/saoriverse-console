@@ -1,9 +1,10 @@
-from response_adapter import generate_response_from_glyphs
-from main_response_engine import process_user_input
-import re
-import os
-import sys
 import importlib.util
+import os
+import re
+import sys
+
+from main_response_engine import process_user_input
+from response_adapter import generate_response_from_glyphs
 
 # Ensure repo root is importable
 HERE = os.path.dirname(__file__)
@@ -75,19 +76,16 @@ def test_replay_conversation_no_glyph_leakage_and_concise_responses():
         adapted = parts[-1] if parts else resp
 
         # adapted response should not leak internal glyph labels or 'Resonant Glyph' lines
-        assert not _contains_internal_glyph_labels(
-            adapted), f"Adapted response leaked glyph labels: {adapted}"
+        assert not _contains_internal_glyph_labels(adapted), f"Adapted response leaked glyph labels: {adapted}"
 
         # also ensure the full response isn't extremely long (sanity cap to encourage concise replies)
-        assert len(
-            resp) <= 800, f"Response too long ({len(resp)} chars): {resp[:200]}..."
+        assert len(resp) <= 800, f"Response too long ({len(resp)} chars): {resp[:200]}..."
 
 
 def test_generate_response_from_weird_glyph_tag_is_safe():
     """Directly test the adapter when given a strange glyph tag; response must not echo the tag."""
     weird_tag = "VELΩNIX"
-    out = generate_response_from_glyphs(
-        {"glyph_overlays_info": [{"tag": weird_tag, "confidence": 0.95}]})
+    out = generate_response_from_glyphs({"glyph_overlays_info": [{"tag": weird_tag, "confidence": 0.95}]})
     assert isinstance(out, str) and out.strip() != ""
     assert weird_tag not in out
     assert "Resonant Glyph" not in out and "Local decoding" not in out

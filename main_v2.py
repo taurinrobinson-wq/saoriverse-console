@@ -28,13 +28,14 @@ The goal: always return a grounded, private, and human-feeling response that
 prefers local-only processing and preserves auditability of learning events.
 """
 
-import streamlit as st
-from pathlib import Path
-import os
 import base64
 import json
-import streamlit.components.v1 as components
+import os
 from datetime import datetime
+from pathlib import Path
+
+import streamlit as st
+import streamlit.components.v1 as components
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
@@ -50,8 +51,7 @@ from datetime import datetime
 # Must be first Streamlit command
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
-    _logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+    _logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
@@ -63,7 +63,7 @@ try:
         page_title="FirstPerson - Personal AI Companion",
         page_icon=_page_icon if _page_icon is not None else "🧠",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 except Exception:
     # Ensure any failure here doesn't prevent the rest of the app from loading
@@ -71,7 +71,7 @@ except Exception:
         page_title="FirstPerson - Personal AI Companion",
         page_icon="🧠",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 
 # Initialize persisted reward model for feedback-driven adaptation.
@@ -81,8 +81,7 @@ try:
     from emotional_os.feedback.reward_model import RewardModel
 
     # repo-local persisted weights file; RewardModel will load if present
-    reward_model = RewardModel(
-        dim=128, path="emotional_os/feedback/weights.json", auto_load=True)
+    reward_model = RewardModel(dim=128, path="emotional_os/feedback/weights.json", auto_load=True)
 except Exception:
     reward_model = None
 
@@ -136,7 +135,7 @@ def safe_embed_html(content: str, height: int | None = None, use_iframe: bool = 
 # This is a reversible, low-risk change so you can show users a working page
 # while I continue diagnosing the root cause in the background.
 try:
-    if os.environ.get('MAINTENANCE_MODE') == '1':
+    if os.environ.get("MAINTENANCE_MODE") == "1":
         st.markdown(
             """
             <div style="display:flex;align-items:center;justify-content:center;height:70vh;">
@@ -155,6 +154,7 @@ try:
         except Exception:
             # If st.stop is not available for some reason, exit silently
             import sys as _sys
+
             _sys.exit(0)
 except Exception:
     # Do not allow maintenance-mode logic to block normal startup on errors
@@ -163,13 +163,13 @@ except Exception:
 # Replace default favicon with project logo (use embedded data URI so Streamlit
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
-    logo_path = Path(
-        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+    logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
         st.markdown(
-            f"<link rel=\"icon\" href=\"data:image/svg+xml;base64,{b64}\" type=\"image/svg+xml\">", unsafe_allow_html=True)
+            f'<link rel="icon" href="data:image/svg+xml;base64,{b64}" type="image/svg+xml">', unsafe_allow_html=True
+        )
 except Exception:
     # Non-fatal: keep the emoji favicon if embedding fails
     pass
@@ -183,9 +183,9 @@ except Exception:
 # output is written to debug_imports.log in the app directory and also printed
 # to stdout so deployment logs capture it.
 try:
-    if os.environ.get('RUN_IMPORT_DIAG') == '1':
-        import platform
+    if os.environ.get("RUN_IMPORT_DIAG") == "1":
         import importlib
+        import platform
         import traceback as _traceback
         from pathlib import Path as _Path
 
@@ -195,14 +195,14 @@ try:
             print(s)
             _out.append(str(s))
 
-        _w('=== RUN_IMPORT_DIAG ===')
-        _w('Platform: ' + platform.platform())
-        _w('Python: ' + sys.version.replace('\n', ' '))
-        _w('Executable: ' + sys.executable)
-        _w('CWD: ' + str(_Path.cwd()))
-        _w('Sys.path:')
+        _w("=== RUN_IMPORT_DIAG ===")
+        _w("Platform: " + platform.platform())
+        _w("Python: " + sys.version.replace("\n", " "))
+        _w("Executable: " + sys.executable)
+        _w("CWD: " + str(_Path.cwd()))
+        _w("Sys.path:")
         for _p in sys.path:
-            _w('  ' + _p)
+            _w("  " + _p)
 
         try:
             import importlib.metadata as _md
@@ -211,15 +211,17 @@ try:
                 try:
                     return _md.version(n)
                 except Exception:
-                    return '<not-installed>'
-        except Exception:
-            def _pkg_ver(n):
-                return '<no-metadata>'
+                    return "<not-installed>"
 
-        for _pkg in ('streamlit', 'requests'):
+        except Exception:
+
+            def _pkg_ver(n):
+                return "<no-metadata>"
+
+        for _pkg in ("streamlit", "requests"):
             _w(f"{_pkg} version: {_pkg_ver(_pkg)}")
 
-        for _mod in ('main_v2', 'emotional_os.deploy.modules.ui'):
+        for _mod in ("main_v2", "emotional_os.deploy.modules.ui"):
             _w(f"-- import {_mod}")
             try:
                 importlib.import_module(_mod)
@@ -227,14 +229,14 @@ try:
             except Exception:
                 _w(f"IMPORT_FAILED {_mod}")
                 for L in _traceback.format_exc().splitlines():
-                    _w('   ' + L)
+                    _w("   " + L)
 
         try:
-            _logp = _Path('debug_imports.log')
-            _logp.write_text('\n'.join(_out), encoding='utf-8')
-            _w(f'Wrote {_logp}')
+            _logp = _Path("debug_imports.log")
+            _logp.write_text("\n".join(_out), encoding="utf-8")
+            _w(f"Wrote {_logp}")
         except Exception as _e:
-            _w('Failed to write debug_imports.log: ' + str(_e))
+            _w("Failed to write debug_imports.log: " + str(_e))
 except Exception:
     # Diagnostic must never prevent normal startup
     pass
@@ -243,8 +245,9 @@ try:
     # Use module imports + importlib.reload so Streamlit's re-run will pick up
     # edits to these modules without requiring a full process restart.
     import importlib
-    import emotional_os.deploy.modules.ui as _ui_module
+
     import emotional_os.deploy.modules.auth as _auth_module
+    import emotional_os.deploy.modules.ui as _ui_module
 
     try:
         importlib.reload(_ui_module)
@@ -263,6 +266,7 @@ try:
     # Optional feedback widget (visible via sidebar toggle)
     try:
         import numpy as _np
+
         from emotional_os.feedback.feedback_store import FeedbackStore as _FeedbackStore
         from emotional_os.feedback.reward_model import RewardModel as _RewardModel
 
@@ -278,23 +282,21 @@ try:
         if st.sidebar.checkbox("Show Feedback Widget", value=False):
             st.sidebar.markdown("---")
             st.header("Feedback Loop Demo")
-            candidate_text = st.text_area(
-                "Candidate Response:", value="This is a sample response.")
-            rating = st.radio("Rate this response:", options=[
-                              +1, -1], format_func=lambda x: "👍 Positive" if x == 1 else "👎 Negative")
-            corrected_text = st.text_input(
-                "Suggest a corrected response (optional):")
-            features_text = st.text_input(
-                "Features (comma-separated, optional):", value="0.5,0.2,-0.1")
+            candidate_text = st.text_area("Candidate Response:", value="This is a sample response.")
+            rating = st.radio(
+                "Rate this response:",
+                options=[+1, -1],
+                format_func=lambda x: "👍 Positive" if x == 1 else "👎 Negative",
+            )
+            corrected_text = st.text_input("Suggest a corrected response (optional):")
+            features_text = st.text_input("Features (comma-separated, optional):", value="0.5,0.2,-0.1")
             try:
-                feats = _np.array([float(x.strip())
-                                  for x in features_text.split(",") if x.strip() != ''])
+                feats = _np.array([float(x.strip()) for x in features_text.split(",") if x.strip() != ""])
             except Exception:
                 feats = _np.array([0.5, 0.2, -0.1])
 
             if st.button("Submit Feedback"):
-                entry = {"rating": int(
-                    rating), "text": corrected_text, "features": feats.tolist()}
+                entry = {"rating": int(rating), "text": corrected_text, "features": feats.tolist()}
                 _store.append(entry)
                 try:
                     if feats.size:
@@ -307,7 +309,10 @@ try:
                 try:
                     # ensure we have a usable reward model instance
                     if _rm is not None:
-                        from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer as _DRC
+                        from emotional_os.glyphs.dynamic_response_composer import (
+                            DynamicResponseComposer as _DRC,
+                        )
+
                         _composer = _DRC(_rm)
                         # Build three simple candidate feature vectors derived from the provided features
                         base = _np.zeros(_rm.dim)
@@ -316,10 +321,8 @@ try:
 
                         candidates = [
                             {"text": "Option A", "features": base.tolist()},
-                            {"text": "Option B", "features": (
-                                base * 0.5).tolist()},
-                            {"text": "Option C", "features": (
-                                base * -1.0).tolist()},
+                            {"text": "Option B", "features": (base * 0.5).tolist()},
+                            {"text": "Option C", "features": (base * -1.0).tolist()},
                         ]
                         try:
                             sel = _composer.compose(candidates)
@@ -337,18 +340,19 @@ try:
     delete_user_history_from_supabase = _ui_module.delete_user_history_from_supabase
     SaoynxAuthentication = _auth_module.SaoynxAuthentication
 except Exception:
-    import traceback
     import sys
+    import traceback
+
     print("Traceback importing UI/auth modules:")
     traceback.print_exc()
     raise
 
 
 # Initialize session state
-if 'initialized' not in st.session_state:
-    st.session_state['initialized'] = True
-    st.session_state['theme'] = 'Light'
-    st.session_state['theme_loaded'] = False
+if "initialized" not in st.session_state:
+    st.session_state["initialized"] = True
+    st.session_state["theme"] = "Light"
+    st.session_state["theme_loaded"] = False
 
     # Initialize learning persistence
     # Default to a local-only processing mode. The `scripts/local_integration`
@@ -358,23 +362,24 @@ if 'initialized' not in st.session_state:
     # Enforce local-only processing for the app frontend. Do not consult
     # alternate processing modes or remote-AI flags here: the UI and
     # engine are fixed to local behavior.
-    default_mode = 'local'
+    default_mode = "local"
 
-    st.session_state['learning_settings'] = {
-        'processing_mode': default_mode,
-        'enable_learning': True,
-        'persist_learning': True
+    st.session_state["learning_settings"] = {
+        "processing_mode": default_mode,
+        "enable_learning": True,
+        "persist_learning": True,
     }
 
     # Create learning directories if they don't exist
-    os.makedirs('learning/user_signals', exist_ok=True)
-    os.makedirs('learning/user_overrides', exist_ok=True)
-    os.makedirs('learning/conversation_glyphs', exist_ok=True)
+    os.makedirs("learning/user_signals", exist_ok=True)
+    os.makedirs("learning/user_overrides", exist_ok=True)
+    os.makedirs("learning/conversation_glyphs", exist_ok=True)
 
 
 # Customize navigation text
 # [safe_embed_html patch] replaced inline block at original location (Customize navigation text)
-safe_embed_html("""
+safe_embed_html(
+    """
     <style>
     div.st-emotion-cache-j7qwjs span.st-emotion-cache-6tkfeg {
         visibility: hidden;
@@ -388,14 +393,17 @@ safe_embed_html("""
         left: 0;
     }
     </style>
-""", height=120)
+""",
+    height=120,
+)
 
 # Remove stacked markdown blocks that only contain <style> tags (they create visible padding).
 # This script hides any element-container whose markdown child contains only a <style> element.
 # [safe_embed_html patch - global script] replaced inline script block; this script needs to run in the
 # parent page (it manipulates the DOM outside any iframe), so we force the markdown fallback by
 # setting `use_iframe=False` when calling `safe_embed_html` so the behaviour remains unchanged.
-safe_embed_html("""
+safe_embed_html(
+    """
 <script>
 (function(){
     function removeStyleOnlyMarkdown(){
@@ -432,13 +440,17 @@ safe_embed_html("""
     observer.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
-""", use_iframe=False, height=240)
+""",
+    use_iframe=False,
+    height=240,
+)
 
 # Hide the top brand row (emoji + H1) when the app is embedded in certain layouts.
 # This prevents the duplicated header/title from rendering in pages where space is limited.
 # Targets the header H1 id and the adjacent emoji block.
 # [safe_embed_html patch] replaced header-hide CSS block
-safe_embed_html("""
+safe_embed_html(
+    """
     <style>
     /* Hide specific header by id */
     /* Primary: hide the H1 Streamlit generates for the page header */
@@ -458,23 +470,31 @@ safe_embed_html("""
     /* Hide any horizontal block that contains the brand row to avoid layout shift */
     div[data-testid="stHorizontalBlock"] > div > div > div > div > div > div > div > h1 { display: none !important; }
     </style>
-""", use_iframe=False, height=140)
+""",
+    use_iframe=False,
+    height=140,
+)
 
 # Target specific Streamlit-generated padding block class and reduce its top padding
 # Target specific Streamlit-generated padding block and reduce its top padding
 # [safe_embed_html patch] replaced padding CSS block
-safe_embed_html("""
+safe_embed_html(
+    """
             <style>
             /* Reduce top padding on the large header container that pushes content down */
             .st-emotion-cache-7tauuy { padding: 0rem 1rem 1rem !important; }
             </style>
-        """, use_iframe=False, height=80)
+        """,
+    use_iframe=False,
+    height=80,
+)
 
 # Apply theme only if not already loaded for this session
-if not st.session_state.get('theme_loaded'):
-    if st.session_state.get('theme') == 'Dark':
+if not st.session_state.get("theme_loaded"):
+    if st.session_state.get("theme") == "Dark":
         # [safe_embed_html patch] replaced dark-theme CSS block
-        safe_embed_html("""
+        safe_embed_html(
+            """
             <style>
             body, .stApp {background-color: #0E1117; color: #FAFAFA;}
             .stButton>button {
@@ -483,10 +503,14 @@ if not st.session_state.get('theme_loaded'):
                 border: 1px solid #555;
             }
             </style>
-        """, use_iframe=False, height=140)
+        """,
+            use_iframe=False,
+            height=140,
+        )
     else:
         # [safe_embed_html patch] replaced light-theme CSS block
-        safe_embed_html("""
+        safe_embed_html(
+            """
             <style>
             body, .stApp {background-color: #FFFFFF; color: #31333F;}
             .stButton>button {
@@ -495,13 +519,17 @@ if not st.session_state.get('theme_loaded'):
                 border: 1px solid #E0E0E0;
             }
             </style>
-        """, use_iframe=False, height=140)
-    st.session_state['theme_loaded'] = True
+        """,
+            use_iframe=False,
+            height=140,
+        )
+    st.session_state["theme_loaded"] = True
 
 # Basic theme compatibility
 # Basic theme compatibility
 # [safe_embed_html patch] replaced basic theme compatibility CSS
-safe_embed_html("""
+safe_embed_html(
+    """
     <style>
     [data-testid="stSidebarNav"] {color: inherit;}
     .stMarkdown {color: inherit;}
@@ -511,12 +539,16 @@ safe_embed_html("""
         transition: all 0.2s ease;
     }
     </style>
-""", use_iframe=False, height=100)
+""",
+    use_iframe=False,
+    height=100,
+)
 
 # Reduce font sizes in the sidebar for a denser layout
 # Reduce font sizes in the sidebar for a denser layout
 # [safe_embed_html patch] replaced sidebar font-size CSS block
-safe_embed_html("""
+safe_embed_html(
+    """
     <style>
     /* Target the Streamlit sidebar container and reduce text sizes */
     [data-testid="stSidebar"] { font-size: 0.92rem !important; }
@@ -545,7 +577,10 @@ safe_embed_html("""
         padding: 6px 10px !important;
     }
     </style>
-""", use_iframe=False, height=220)
+""",
+    use_iframe=False,
+    height=220,
+)
 
 # NOTE: the per-session/export download control was intentionally moved into
 # the Privacy & Consent panel (`render_consent_settings_panel`) to avoid
@@ -557,6 +592,7 @@ safe_embed_html("""
 # Optional local preprocessor (privacy-first steward)
 try:
     from local_inference.preprocessor import Preprocessor
+
     PREPROCESSOR_AVAILABLE = True
 except Exception:
     Preprocessor = None
@@ -565,6 +601,7 @@ except Exception:
 # Optional limbic integration (safe import)
 try:
     from emotional_os.glyphs.limbic_integration import LimbicIntegrationEngine
+
     HAS_LIMBIC = True
 except Exception:
     LimbicIntegrationEngine = None
@@ -601,10 +638,8 @@ except Exception:
                 unsafe_allow_html=True,
             )
 
-            st.markdown(
-                '<div class="fp-error-wrap"><div class="fp-error-box">', unsafe_allow_html=True)
-            st.markdown(
-                '<div class="fp-error-title">Something went wrong</div>', unsafe_allow_html=True)
+            st.markdown('<div class="fp-error-wrap"><div class="fp-error-box">', unsafe_allow_html=True)
+            st.markdown('<div class="fp-error-title">Something went wrong</div>', unsafe_allow_html=True)
             st.markdown(
                 '<div class="fp-error-msg">An unexpected error occurred while starting the app. The server logs contain the full traceback.</div>',
                 unsafe_allow_html=True,
@@ -613,28 +648,27 @@ except Exception:
             # Show the exception type and a short message (truncate long messages)
             short_msg = (str(exc) or type(exc).__name__)[:240]
             st.markdown(
-                f"<div style='font-size:0.9rem;color:#6B7178;margin-bottom:12px;'>Error: {type(exc).__name__}: {short_msg}</div>", unsafe_allow_html=True)
+                f"<div style='font-size:0.9rem;color:#6B7178;margin-bottom:12px;'>Error: {type(exc).__name__}: {short_msg}</div>",
+                unsafe_allow_html=True,
+            )
 
             # If a traceback was provided, show a short excerpt inside a details block
             if tb:
-                excerpt = '\n'.join(tb.splitlines()[-8:])
-                st.markdown(
-                    '<details><summary>Show more (sanitized traceback)</summary>', unsafe_allow_html=True)
-                st.markdown(
-                    f"<div class='fp-trace'>{excerpt}</div>", unsafe_allow_html=True)
-                st.markdown('</details>', unsafe_allow_html=True)
+                excerpt = "\n".join(tb.splitlines()[-8:])
+                st.markdown("<details><summary>Show more (sanitized traceback)</summary>", unsafe_allow_html=True)
+                st.markdown(f"<div class='fp-trace'>{excerpt}</div>", unsafe_allow_html=True)
+                st.markdown("</details>", unsafe_allow_html=True)
 
-            st.markdown('</div></div>', unsafe_allow_html=True)
+            st.markdown("</div></div>", unsafe_allow_html=True)
         except Exception:
             # If rendering the nice UI fails, fall back to a minimal Streamlit error and print the traceback
             try:
-                st.error(
-                    "A critical error occurred during startup. Check the server logs for details.")
+                st.error("A critical error occurred during startup. Check the server logs for details.")
             except Exception:
                 # If Streamlit is completely unusable, at least print to stdout
-                print(
-                    "A critical error occurred during startup. Check the server logs for details.")
+                print("A critical error occurred during startup. Check the server logs for details.")
             import traceback as _tb
+
             _tb.print_exc()
 
 
@@ -647,14 +681,14 @@ def main():
     # the full interface in demo mode and expose Sign In / Register in the
     # sidebar. The legacy splash screen can still be shown by setting the
     # `force_splash` session_state key (useful for QA or debugging).
-    if st.session_state.get('force_splash', False):
+    if st.session_state.get("force_splash", False):
         render_splash_interface(auth)
         return
 
     # Prefer the safe renderer (captures runtime exceptions to debug_runtime.log)
     try:
-        if 'render_main_app_safe' in globals() and callable(globals().get('render_main_app_safe')):
-            globals().get('render_main_app_safe')()
+        if "render_main_app_safe" in globals() and callable(globals().get("render_main_app_safe")):
+            globals().get("render_main_app_safe")()
         else:
             render_main_app()
     except Exception:
@@ -667,10 +701,11 @@ if __name__ == "__main__":
         main()
     except Exception as e:
         import traceback
-        tb = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+
+        tb = "".join(traceback.format_exception(type(e), e, e.__traceback__))
         # Look up the renderer safely to avoid static analysis warnings about
         # potentially-unbound callables during import-time checks.
-        _renderer = globals().get('render_error_ui')
+        _renderer = globals().get("render_error_ui")
         if callable(_renderer):
             try:
                 _renderer(e, tb)

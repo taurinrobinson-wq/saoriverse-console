@@ -12,12 +12,12 @@ print("DEBUGGING MESSAGE 1 (First message)")
 print("=" * 80)
 
 # Simulate first message (no conversation context)
-result1 = parse_input(message1, "parser/signal_lexicon.json", conversation_context={'messages': []})
+result1 = parse_input(message1, "parser/signal_lexicon.json", conversation_context={"messages": []})
 
 print(f"Signals detected: {result1['signals']}")
 print(f"Gates activated: {result1['gates']}")
 print(f"Glyphs found: {len(result1['glyphs'])}")
-for glyph in result1['glyphs']:
+for glyph in result1["glyphs"]:
     print(f"  - {glyph['glyph_name']}: {glyph['description']}")
 print(f"Response: {result1['voltage_response']}")
 
@@ -27,9 +27,9 @@ print("=" * 80)
 
 # Simulate second message (with conversation context)
 fake_conversation = {
-    'messages': [
-        {'type': 'user', 'content': message1, 'timestamp': '2024-01-01T12:00:00'},
-        {'type': 'system', 'content': result1['voltage_response'], 'timestamp': '2024-01-01T12:00:01'}
+    "messages": [
+        {"type": "user", "content": message1, "timestamp": "2024-01-01T12:00:00"},
+        {"type": "system", "content": result1["voltage_response"], "timestamp": "2024-01-01T12:00:01"},
     ]
 }
 
@@ -38,7 +38,7 @@ result2 = parse_input(message2, "parser/signal_lexicon.json", conversation_conte
 print(f"Signals detected: {result2['signals']}")
 print(f"Gates activated: {result2['gates']}")
 print(f"Glyphs found: {len(result2['glyphs'])}")
-for glyph in result2['glyphs']:
+for glyph in result2["glyphs"]:
     print(f"  - {glyph['glyph_name']}: {glyph['description']}")
 print(f"Response: {result2['voltage_response']}")
 

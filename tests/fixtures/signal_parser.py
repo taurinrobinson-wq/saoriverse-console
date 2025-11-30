@@ -1,7 +1,7 @@
-from typing import Optional, List, Dict
+from typing import Dict, List, Optional
+
 from clarification_memory import lookup_correction
 from rule_engine_helper import analyze_text
-
 
 # Small routing table used by tests to map forced intents to tone overlays.
 _routing_table: Dict[str, str] = {
@@ -52,8 +52,7 @@ def parse_input(text: str, speaker: Optional[str] = None) -> Dict:
     result["glyph_overlays"] = analysis.get("glyph_overlays", [])
 
     # Dominant emotion: derive confidences from glyph_overlays_info
-    conf_map = {i["tag"]: float(i.get("confidence", 0.0))
-                for i in result.get("glyph_overlays_info", [])}
+    conf_map = {i["tag"]: float(i.get("confidence", 0.0)) for i in result.get("glyph_overlays_info", [])}
     anger_conf = conf_map.get("anger", 0.0)
     sad_conf = conf_map.get("sadness", 0.0)
     unseen_conf = conf_map.get("feeling_unseen", 0.0)

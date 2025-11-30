@@ -30,7 +30,7 @@ if start < 1 or end < start or end > total:
     print(f"Index range out of bounds: 1..{total} (you passed {start}..{end})")
     sys.exit(2)
 
-for i in range(start-1, end):
+for i in range(start - 1, end):
     msgs[i]["type"] = label
 
 data["messages"] = msgs

@@ -20,6 +20,7 @@ def create_test_session():
 
     return True
 
+
 def bypass_authentication():
     """Temporary function to bypass auth for testing"""
     st.info("🔧 **Testing Mode**: Authentication backend is being deployed. Using temporary session.")
@@ -33,7 +34,8 @@ def bypass_authentication():
                 st.rerun()
 
     with st.expander("ℹ️ About Test Mode"):
-        st.write("""
+        st.write(
+            """
         **What this does:**
         - Creates a temporary user session for testing the authenticated UI
         - All conversations will be local to this browser session
@@ -44,6 +46,8 @@ def bypass_authentication():
         2. Deploy the auth-manager edge function  
         3. Deploy the authenticated-saori edge function
         4. Remove this test bypass
-        """)
+        """
+        )
+
 
 # Add this to your emotional_os_ui.py to enable test mode

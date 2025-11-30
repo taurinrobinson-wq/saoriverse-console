@@ -11,7 +11,7 @@ import streamlit as st
 class OptimizedResponseHandler:
     """
     Handles optimized responses with multiple strategies:
-    1. Instant acknowledgment 
+    1. Instant acknowledgment
     2. Local pattern matching for common responses
     3. Background AI processing
     4. Response streaming
@@ -25,28 +25,28 @@ class OptimizedResponseHandler:
         self.instant_responses = {
             "grief": {
                 "acknowledgment": "I can hear the weight of your grief...",
-                "full_response": "Grief carries its own timeline, and there's no rushing through the waves of loss. Each moment of sorrow is valid and necessary."
+                "full_response": "Grief carries its own timeline, and there's no rushing through the waves of loss. Each moment of sorrow is valid and necessary.",
             },
             "joy": {
                 "acknowledgment": "There's something beautiful in that joy...",
-                "full_response": "Joy has this wonderful way of expanding beyond words, doesn't it? It's one of those feelings that just wants to be celebrated and shared."
+                "full_response": "Joy has this wonderful way of expanding beyond words, doesn't it? It's one of those feelings that just wants to be celebrated and shared.",
             },
             "overwhelm": {
                 "acknowledgment": "That sounds incredibly overwhelming...",
-                "full_response": "When everything feels like too much, sometimes the kindest thing is to focus on just the next breath, the next moment."
+                "full_response": "When everything feels like too much, sometimes the kindest thing is to focus on just the next breath, the next moment.",
             },
             "confusion": {
                 "acknowledgment": "Confusion can feel so disorienting...",
-                "full_response": "It's okay to not have all the answers right now. Sometimes sitting with uncertainty is the only way to find clarity."
+                "full_response": "It's okay to not have all the answers right now. Sometimes sitting with uncertainty is the only way to find clarity.",
             },
             "anxiety": {
                 "acknowledgment": "I can sense that anxious energy...",
-                "full_response": "Anxiety often comes from caring deeply about something. What would it feel like to be gentle with yourself about this concern?"
+                "full_response": "Anxiety often comes from caring deeply about something. What would it feel like to be gentle with yourself about this concern?",
             },
             "love": {
                 "acknowledgment": "Love brings such complexity...",
-                "full_response": "Love has its own language that goes beyond words. What is this feeling teaching you about yourself and what matters most?"
-            }
+                "full_response": "Love has its own language that goes beyond words. What is this feeling teaching you about yourself and what matters most?",
+            },
         }
 
     def detect_primary_emotion(self, message: str) -> Optional[str]:
@@ -60,7 +60,7 @@ class OptimizedResponseHandler:
             "anxiety": ["anxious", "anxiety", "worried", "worry", "panic", "stressed", "stress"],
             "joy": ["joy", "joyful", "happy", "happiness", "celebrate", "excited", "amazing"],
             "love": ["love", "loving", "adore", "cherish", "romantic", "relationship"],
-            "confusion": ["confused", "confusion", "don't understand", "unclear", "lost"]
+            "confusion": ["confused", "confusion", "don't understand", "unclear", "lost"],
         }
 
         for emotion, keywords in patterns.items():
@@ -78,17 +78,14 @@ class OptimizedResponseHandler:
         """Get cached response if it's still valid"""
         if cache_key in self.response_cache:
             cached = self.response_cache[cache_key]
-            if datetime.now() - cached['timestamp'] < self.cache_ttl:
-                return cached['response']
+            if datetime.now() - cached["timestamp"] < self.cache_ttl:
+                return cached["response"]
             del self.response_cache[cache_key]  # Remove expired cache
         return None
 
     def cache_response(self, cache_key: str, response: Dict):
         """Cache a response for future use"""
-        self.response_cache[cache_key] = {
-            'response': response,
-            'timestamp': datetime.now()
-        }
+        self.response_cache[cache_key] = {"response": response, "timestamp": datetime.now()}
 
     def get_instant_acknowledgment(self, message: str) -> Optional[str]:
         """Get instant acknowledgment based on detected emotion"""
@@ -102,7 +99,7 @@ class OptimizedResponseHandler:
             "I hear you...",
             "Thank you for sharing that...",
             "I'm here with you...",
-            "That sounds significant..."
+            "That sounds significant...",
         ]
 
         return fallbacks[hash(message) % len(fallbacks)]
@@ -130,15 +127,14 @@ class StreamlitOptimizedUI:
         self.response_handler = OptimizedResponseHandler()
 
         # Initialize session state for optimized responses
-        if 'processing_status' not in st.session_state:
+        if "processing_status" not in st.session_state:
             st.session_state.processing_status = None
-        if 'instant_response_shown' not in st.session_state:
+        if "instant_response_shown" not in st.session_state:
             st.session_state.instant_response_shown = False
 
     def show_instant_acknowledgment(self, message: str):
         """Show instant acknowledgment while processing"""
-        acknowledgment = self.response_handler.get_instant_acknowledgment(
-            message)
+        acknowledgment = self.response_handler.get_instant_acknowledgment(message)
 
         # Show typing indicator with acknowledgment
         with st.chat_message("assistant"):
@@ -159,25 +155,16 @@ class StreamlitOptimizedUI:
         cached_response = self.response_handler.get_cached_response(cache_key)
 
         if cached_response:
-            return {
-                "response": cached_response["response"],
-                "source": "cache",
-                "processing_time": "< 0.1s"
-            }
+            return {"response": cached_response["response"], "source": "cache", "processing_time": "< 0.1s"}
 
         # 2. Try pattern-based response for speed
         pattern_response = self.response_handler.get_pattern_response(message)
 
         if pattern_response:
-            result = {
-                "response": pattern_response,
-                "source": "pattern_match",
-                "processing_time": "< 0.2s"
-            }
+            result = {"response": pattern_response, "source": "pattern_match", "processing_time": "< 0.2s"}
 
             # Cache the pattern response
-            self.response_handler.cache_response(
-                cache_key, {"response": pattern_response})
+            self.response_handler.cache_response(cache_key, {"response": pattern_response})
             return result
 
         # 3. Fallback to full AI processing
@@ -185,20 +172,26 @@ class StreamlitOptimizedUI:
             start_time = time.time()
             # Pass session-level A/B metadata if available in Streamlit session state
             session_meta = {
-                'user_id': st.session_state.get('user_id') if 'user_id' in st.session_state else None,
-                'ab_participate': st.session_state.get('ab_participate', False) if 'ab_participate' in st.session_state else False,
-                'ab_group': st.session_state.get('ab_group', 'not_participating') if 'ab_group' in st.session_state else 'not_participating'
+                "user_id": st.session_state.get("user_id") if "user_id" in st.session_state else None,
+                "ab_participate": (
+                    st.session_state.get("ab_participate", False) if "ab_participate" in st.session_state else False
+                ),
+                "ab_group": (
+                    st.session_state.get("ab_group", "not_participating")
+                    if "ab_group" in st.session_state
+                    else "not_participating"
+                ),
             }
             result = processor.process_emotional_input(
-                message, prefer_ai=True, privacy_mode=False, session_metadata=session_meta)
+                message, prefer_ai=True, privacy_mode=False, session_metadata=session_meta
+            )
             processing_time = time.time() - start_time
 
             result["processing_time"] = f"{processing_time:.2f}s"
 
             # Cache successful AI responses
             if result.get("response"):
-                self.response_handler.cache_response(
-                    cache_key, {"response": result["response"]})
+                self.response_handler.cache_response(cache_key, {"response": result["response"]})
 
             return result
 
@@ -206,12 +199,19 @@ class StreamlitOptimizedUI:
             # Emergency fallback to local processing
             try:
                 session_meta = {
-                    'user_id': st.session_state.get('user_id') if 'user_id' in st.session_state else None,
-                    'ab_participate': st.session_state.get('ab_participate', False) if 'ab_participate' in st.session_state else False,
-                    'ab_group': st.session_state.get('ab_group', 'not_participating') if 'ab_group' in st.session_state else 'not_participating'
+                    "user_id": st.session_state.get("user_id") if "user_id" in st.session_state else None,
+                    "ab_participate": (
+                        st.session_state.get("ab_participate", False) if "ab_participate" in st.session_state else False
+                    ),
+                    "ab_group": (
+                        st.session_state.get("ab_group", "not_participating")
+                        if "ab_group" in st.session_state
+                        else "not_participating"
+                    ),
                 }
                 result = processor.process_emotional_input(
-                    message, prefer_ai=False, privacy_mode=True, session_metadata=session_meta)
+                    message, prefer_ai=False, privacy_mode=True, session_metadata=session_meta
+                )
                 result["source"] = "local_fallback"
                 result["processing_time"] = "< 1.0s"
                 return result
@@ -219,7 +219,7 @@ class StreamlitOptimizedUI:
                 return {
                     "response": "I'm experiencing some connection issues, but I'm here to listen. Can you tell me more about what you're feeling?",
                     "source": "emergency_fallback",
-                    "processing_time": "< 0.1s"
+                    "processing_time": "< 0.1s",
                 }
 
 
@@ -227,19 +227,19 @@ def optimize_streamlit_performance():
     """Apply Streamlit-specific performance optimizations"""
 
     # Cache expensive operations
-    if 'optimized_processor' not in st.session_state:
+    if "optimized_processor" not in st.session_state:
         # Hybrid processor removed to avoid remote AI usage by default.
         # Keep optimized_processor as None for local-only deployments.
         st.session_state.optimized_processor = None
 
     # Set up performance monitoring
-    if 'performance_stats' not in st.session_state:
+    if "performance_stats" not in st.session_state:
         st.session_state.performance_stats = {
-            'total_requests': 0,
-            'cache_hits': 0,
-            'pattern_matches': 0,
-            'ai_requests': 0,
-            'avg_response_time': 0
+            "total_requests": 0,
+            "cache_hits": 0,
+            "pattern_matches": 0,
+            "ai_requests": 0,
+            "avg_response_time": 0,
         }
 
 

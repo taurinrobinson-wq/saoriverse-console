@@ -2,6 +2,7 @@
 
 Kept purposely minimal and local so tests can run offline.
 """
+
 from __future__ import annotations
 
 import random
@@ -13,7 +14,7 @@ CLOSING_PROMPTS: List[str] = [
     "Want to share more about what's going on?",
     "I'm here if you'd like to unpack it.",
     "Would it help to talk it through?",
-    "I'm listening if you want to continue."
+    "I'm listening if you want to continue.",
 ]
 
 

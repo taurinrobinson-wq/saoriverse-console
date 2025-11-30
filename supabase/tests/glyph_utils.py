@@ -3,6 +3,7 @@
 This mirrors the sanitizer/validation logic used in the TypeScript edge functions
 so tests can assert expected behavior without calling external LLMs.
 """
+
 from typing import Any, Dict, List
 
 
@@ -19,8 +20,8 @@ def normalize_glyphs(raw: Any) -> List[Dict[str, Any]]:
     out = []
     try:
         glyphs = []
-        if isinstance(raw, dict) and 'glyphs' in raw:
-            glyphs = raw.get('glyphs') or []
+        if isinstance(raw, dict) and "glyphs" in raw:
+            glyphs = raw.get("glyphs") or []
         elif isinstance(raw, list):
             glyphs = raw
         else:
@@ -29,21 +30,21 @@ def normalize_glyphs(raw: Any) -> List[Dict[str, Any]]:
 
         for g in glyphs:
             try:
-                name = g.get('name') if isinstance(g, dict) else None
+                name = g.get("name") if isinstance(g, dict) else None
                 if not name or not isinstance(name, str):
                     continue
                 name = name.strip()[:80]
 
-                description = ''
-                if isinstance(g.get('description'), str):
-                    description = g.get('description')[:300]
-                elif g.get('description') is not None:
-                    description = str(g.get('description'))[:300]
+                description = ""
+                if isinstance(g.get("description"), str):
+                    description = g.get("description")[:300]
+                elif g.get("description") is not None:
+                    description = str(g.get("description"))[:300]
 
                 depth = None
-                if 'depth' in g:
+                if "depth" in g:
                     try:
-                        depth = int(g.get('depth'))
+                        depth = int(g.get("depth"))
                         if depth < 1:
                             depth = 1
                         if depth > 5:
@@ -52,14 +53,14 @@ def normalize_glyphs(raw: Any) -> List[Dict[str, Any]]:
                         depth = None
 
                 normalized = {
-                    'name': name,
-                    'description': description,
+                    "name": name,
+                    "description": description,
                 }
                 if depth is not None:
-                    normalized['depth'] = depth
+                    normalized["depth"] = depth
 
                 # optional fields
-                for opt in ('response_layer', 'glyph_type', 'symbolic_pairing'):
+                for opt in ("response_layer", "glyph_type", "symbolic_pairing"):
                     if isinstance(g.get(opt), str):
                         normalized[opt] = g.get(opt)[:80]
 
@@ -75,8 +76,8 @@ def normalize_glyphs(raw: Any) -> List[Dict[str, Any]]:
 
 def is_valid_glyph_shape(obj: Any) -> bool:
     """Quick check whether an object looks like a glyph list or glyph object."""
-    if isinstance(obj, dict) and 'glyphs' in obj:
-        return isinstance(obj['glyphs'], list)
+    if isinstance(obj, dict) and "glyphs" in obj:
+        return isinstance(obj["glyphs"], list)
     if isinstance(obj, list):
         return all(isinstance(i, dict) for i in obj)
     return False

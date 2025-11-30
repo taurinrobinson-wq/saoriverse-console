@@ -17,8 +17,7 @@ import random
 import re
 from pathlib import Path
 
-from mido import Message, MidiFile, MidiTrack, MetaMessage
-
+from mido import Message, MetaMessage, MidiFile, MidiTrack
 
 PIVOT_PATH = Path("Offshoots/chord_pivot.json")
 
@@ -36,7 +35,7 @@ def load_pivot(path: Path):
     end = text.rfind("]")
     if start == -1 or end == -1:
         raise ValueError("No JSON array found in pivot file")
-    core = text[start: end + 1]
+    core = text[start : end + 1]
     data = json.loads(core)
     mapping = {}
     for entry in data:
@@ -158,9 +157,9 @@ def chords_to_midi(chords, filename="tonecore_output.mid", tempo=500000):
     track = MidiTrack()
     mid.tracks.append(track)
     # tempo meta
-    track.append(MetaMessage('set_tempo', tempo=tempo))
+    track.append(MetaMessage("set_tempo", tempo=tempo))
     # program change to a simple piano patch (0)
-    track.append(Message('program_change', program=0, time=0))
+    track.append(Message("program_change", program=0, time=0))
 
     ticks_per_beat = mid.ticks_per_beat
     # Duration: hold each chord for 1 bar (4 beats)
@@ -172,13 +171,12 @@ def chords_to_midi(chords, filename="tonecore_output.mid", tempo=500000):
             continue
         # note_on for each
         for n in notes:
-            track.append(Message('note_on', note=n, velocity=64, time=0))
+            track.append(Message("note_on", note=n, velocity=64, time=0))
         # note_off after chord_ticks
         # we off the first note with time=chord_ticks, then subsequent offs with time=0
-        track.append(
-            Message('note_off', note=notes[0], velocity=64, time=chord_ticks))
+        track.append(Message("note_off", note=notes[0], velocity=64, time=chord_ticks))
         for n in notes[1:]:
-            track.append(Message('note_off', note=n, velocity=64, time=0))
+            track.append(Message("note_off", note=n, velocity=64, time=0))
 
     mid.save(filename)
     print(f"Saved MIDI progression to {filename}")
@@ -186,8 +184,8 @@ def chords_to_midi(chords, filename="tonecore_output.mid", tempo=500000):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--emotion', default='longing')
-    parser.add_argument('--out', default='tonecore_output.mid')
+    parser.add_argument("--emotion", default="longing")
+    parser.add_argument("--out", default="tonecore_output.mid")
     args = parser.parse_args()
 
     chords_by_key = load_pivot(PIVOT_PATH)
@@ -200,11 +198,10 @@ def main():
         "joy": {"key": "A", "scale": "major"},
     }
 
-    prog = get_progression_for_emotion(
-        args.emotion, chords_by_key, emotion_map)
+    prog = get_progression_for_emotion(args.emotion, chords_by_key, emotion_map)
     print(f"Emotion '{args.emotion}' mapped to progression: {prog}")
     chords_to_midi(prog, filename=args.out)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

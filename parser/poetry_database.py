@@ -88,7 +88,7 @@ class PoetryDatabase:
         """Load existing database or create new one."""
         if self.db_path.exists():
             print(f"📚 Loading poetry database from {self.db_path}")
-            with open(self.db_path, 'r', encoding='utf-8') as f:
+            with open(self.db_path, "r", encoding="utf-8") as f:
                 self.database = json.load(f)
         else:
             print("✨ Creating poetry database...")
@@ -107,12 +107,12 @@ class PoetryDatabase:
                 analysis = nrc.analyze_text(poem_text)
 
                 entry = {
-                    'id': f"{emotion}_{i}",
-                    'text': poem_text,
-                    'emotion': emotion,
-                    'analysis': analysis,
-                    'word_count': len(poem_text.split()),
-                    'line_count': len(poem_text.split('\n'))
+                    "id": f"{emotion}_{i}",
+                    "text": poem_text,
+                    "emotion": emotion,
+                    "analysis": analysis,
+                    "word_count": len(poem_text.split()),
+                    "line_count": len(poem_text.split("\n")),
                 }
 
                 self.database[emotion].append(entry)
@@ -121,7 +121,7 @@ class PoetryDatabase:
 
     def _save_database(self):
         """Save database to JSON file."""
-        with open(self.db_path, 'w', encoding='utf-8') as f:
+        with open(self.db_path, "w", encoding="utf-8") as f:
             json.dump(self.database, f, indent=2, ensure_ascii=False)
         print(f"💾 Saved to {self.db_path}")
 
@@ -135,6 +135,7 @@ class PoetryDatabase:
             return {}
 
         import random
+
         return random.choice(poems)
 
     def get_poems(self, emotion: str, count: int = 3) -> list:
@@ -147,6 +148,7 @@ class PoetryDatabase:
             return []
 
         import random
+
         return random.sample(poems, min(count, len(poems)))
 
     def get_all_emotions(self) -> list:
@@ -156,9 +158,9 @@ class PoetryDatabase:
     def get_stats(self) -> dict:
         """Get database statistics."""
         return {
-            'total_poems': sum(len(v) for v in self.database.values()),
-            'emotions': len(self.database),
-            'emotion_breakdown': {emotion: len(poems) for emotion, poems in self.database.items()}
+            "total_poems": sum(len(v) for v in self.database.values()),
+            "emotions": len(self.database),
+            "emotion_breakdown": {emotion: len(poems) for emotion, poems in self.database.items()},
         }
 
 
@@ -184,12 +186,12 @@ if __name__ == "__main__":
     print("\n📊 Poetry Database Stats:")
     print(f"  Total poems: {stats['total_poems']}")
     print(f"  Emotions: {stats['emotions']}")
-    for emotion, count in stats['emotion_breakdown'].items():
+    for emotion, count in stats["emotion_breakdown"].items():
         print(f"    {emotion}: {count}")
 
     # Show samples
     print("\n🎭 Sample Poems by Emotion:\n")
-    for emotion in ['joy', 'sadness', 'love', 'fear', 'anger']:
+    for emotion in ["joy", "sadness", "love", "fear", "anger"]:
         poem = db.get_poem(emotion)
         if poem:
             print(f"📖 {emotion.upper()}:")

@@ -5,13 +5,14 @@ Opens in your default browser for easy viewing
 """
 
 import http.server
-import socketserver
 import json
-import sys
-from pathlib import Path
-from docx_reader import read_docx, docx_to_text
-import webbrowser
 import os
+import socketserver
+import sys
+import webbrowser
+from pathlib import Path
+
+from docx_reader import docx_to_text, read_docx
 
 PORT = 8765
 
@@ -156,70 +157,71 @@ HTML_TEMPLATE = """
 </html>
 """
 
+
 def format_content(data):
     """Format extracted content as HTML"""
     html_parts = []
-    
+
     # Add paragraphs
-    if data['paragraphs']:
-        for para in data['paragraphs']:
-            if para['text'].strip():
-                if 'Heading' in para['style']:
+    if data["paragraphs"]:
+        for para in data["paragraphs"]:
+            if para["text"].strip():
+                if "Heading" in para["style"]:
                     html_parts.append(f"<h3>{para['text']}</h3>")
                 else:
                     html_parts.append(f"<p>{para['text']}</p>")
-    
+
     # Add tables
-    if data['tables']:
-        for table in data['tables']:
+    if data["tables"]:
+        for table in data["tables"]:
             html_parts.append("<div class='table-container'><table>")
-            for row in table['rows']:
+            for row in table["rows"]:
                 html_parts.append("<tr>")
                 for cell in row:
                     html_parts.append(f"<td>{cell['content']}</td>")
                 html_parts.append("</tr>")
             html_parts.append("</table></div>")
-    
+
     return "\n".join(html_parts)
 
 
 class DocxViewerHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/':
+        if self.path == "/":
             self.send_response(200)
-            self.send_header('Content-type', 'text/html; charset=utf-8')
+            self.send_header("Content-type", "text/html; charset=utf-8")
             self.end_headers()
-            
+
             # Get DOCX file from command line
-            filepath = getattr(self.server, 'docx_file', None)
+            filepath = getattr(self.server, "docx_file", None)
             if not filepath:
                 self.wfile.write(b"<h1>No file specified</h1>")
                 return
-            
+
             # Extract content
             data = read_docx(filepath)
-            
-            if 'error' in data:
+
+            if "error" in data:
                 self.wfile.write(f"<h1>Error: {data['error']}</h1>".encode())
                 return
-            
+
             # Format content
             content_html = format_content(data)
             text_content = docx_to_text(filepath)
-            
+
             # Generate HTML
             html = HTML_TEMPLATE.format(
                 filename=Path(filepath).name,
-                title=data['core_properties']['title'],
-                author=data['core_properties']['author'],
-                created=data['core_properties']['created'],
-                modified=data['core_properties']['modified'],
+                title=data["core_properties"]["title"],
+                author=data["core_properties"]["author"],
+                created=data["core_properties"]["created"],
+                modified=data["core_properties"]["modified"],
                 content=content_html,
-                raw_json=json.dumps(data, indent=2).replace('<', '&lt;').replace('>', '&gt;'),
-                text_only=text_content.replace('<', '&lt;').replace('>', '&gt;'),
+                raw_json=json.dumps(data, indent=2).replace("<", "&lt;").replace(">", "&gt;"),
+                text_only=text_content.replace("<", "&lt;").replace(">", "&gt;"),
             )
-            
-            self.wfile.write(html.encode('utf-8'))
+
+            self.wfile.write(html.encode("utf-8"))
         else:
             self.send_error(404)
 
@@ -227,6 +229,7 @@ class DocxViewerHandler(http.server.SimpleHTTPRequestHandler):
 def find_available_port(start_port=8765, max_attempts=10):
     """Find an available port starting from start_port."""
     import socket
+
     for port in range(start_port, start_port + max_attempts):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -243,37 +246,37 @@ def main():
         print("Usage: python3 docx_web_viewer.py <docx_file>")
         print("Example: python3 docx_web_viewer.py document.docx")
         sys.exit(1)
-    
+
     filepath = sys.argv[1]
-    
+
     if not Path(filepath).exists():
         print(f"Error: File not found: {filepath}")
         sys.exit(1)
-    
+
     handler = DocxViewerHandler
-    
+
     # Find available port
     port = find_available_port(8765, 10)
     if not port:
         print("❌ Error: Could not find an available port (8765-8774)")
         sys.exit(1)
-    
+
     try:
         with socketserver.TCPServer(("", port), handler) as httpd:
             httpd.docx_file = filepath
             url = f"http://localhost:{port}/"
-            
+
             print(f"✅ DOCX Viewer started!")
             print(f"📄 File: {filepath}")
             print(f"🌐 Open: {url}")
             print(f"📊 Press Ctrl+C to stop\n")
-            
+
             # Try to open browser
             try:
                 webbrowser.open(url)
             except:
                 print(f"💡 Copy and paste this URL in your browser: {url}\n")
-            
+
             try:
                 httpd.serve_forever()
             except KeyboardInterrupt:

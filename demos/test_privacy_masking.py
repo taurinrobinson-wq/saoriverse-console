@@ -4,10 +4,11 @@ Test that the privacy-safe logging format works correctly.
 This creates a test exchange and verifies the new format is used.
 """
 
-import json
 import hashlib
+import json
 import tempfile
 from pathlib import Path
+
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 
 
@@ -27,21 +28,20 @@ def test_privacy_safe_logging():
         learner = HybridLearnerWithUserOverrides(
             shared_lexicon_path=str(tmpdir / "shared_lexicon.json"),
             user_overrides_dir=str(tmpdir / "user_overrides"),
-            learning_log_path=str(tmpdir / "hybrid_learning_log.jsonl")
+            learning_log_path=str(tmpdir / "hybrid_learning_log.jsonl"),
         )
 
         # Create test exchange data
         user_id = "test_user_1"
         user_input = "I'm feeling deeply moved by the beauty of nature. There's something transcendent about watching the sunset."
-        ai_response = "That's a beautiful observation. The interplay of light and shadow often stirs profound emotions in us."
+        ai_response = (
+            "That's a beautiful observation. The interplay of light and shadow often stirs profound emotions in us."
+        )
 
         emotional_signals = [
-            {"signal": "nature", "keyword": "nature",
-                "confidence": 0.9, "gate": "Gate 6"},
-            {"signal": "transcendence", "keyword": "transcendent",
-                "confidence": 0.85, "gate": "Gate 4"},
-            {"signal": "joy", "keyword": "beauty",
-                "confidence": 0.8, "gate": "Gate 2"},
+            {"signal": "nature", "keyword": "nature", "confidence": 0.9, "gate": "Gate 6"},
+            {"signal": "transcendence", "keyword": "transcendent", "confidence": 0.85, "gate": "Gate 4"},
+            {"signal": "joy", "keyword": "beauty", "confidence": 0.8, "gate": "Gate 2"},
         ]
 
         glyphs = [
@@ -55,11 +55,11 @@ def test_privacy_safe_logging():
             user_input=user_input,
             ai_response=ai_response,
             emotional_signals=emotional_signals,
-            glyphs=glyphs
+            glyphs=glyphs,
         )
 
         # Read back the logged entry
-        with open(tmpdir / "hybrid_learning_log.jsonl", 'r') as f:
+        with open(tmpdir / "hybrid_learning_log.jsonl", "r") as f:
             logged_entry = json.loads(f.readline())
 
         print("✅ TEST: Privacy-Safe Logging Format")
@@ -95,17 +95,13 @@ def test_privacy_safe_logging():
         print("🔍 User Lexicon Privacy Format Test:")
         print("=" * 70)
 
-        user_overrides = {
-            "signals": {},
-            "trust_score": 0.5,
-            "contributions": 0
-        }
+        user_overrides = {"signals": {}, "trust_score": 0.5, "contributions": 0}
 
         learner._learn_to_user_lexicon(
             user_overrides=user_overrides,
             user_input=user_input,
             ai_response=ai_response,
-            emotional_signals=emotional_signals
+            emotional_signals=emotional_signals,
         )
 
         if "nature" in user_overrides.get("signals", {}):
@@ -163,5 +159,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n❌ Test failed with error: {e}")
         import traceback
+
         traceback.print_exc()
         exit(1)

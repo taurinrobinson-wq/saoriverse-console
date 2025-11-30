@@ -11,11 +11,11 @@ Produces `Offshoots/tonecore_chord_pivot.json` where each row is:
 This script reads all sheets and outputs a dict of sheet->rows.
 """
 
-from pathlib import Path
-import pandas as pd
 import json
 import math
+from pathlib import Path
 
+import pandas as pd
 
 SOURCE_XLSX = Path("Offshoots/Chord Pivot.xlsx")
 OUT_JSON = Path("Offshoots/tonecore_chord_pivot.json")
@@ -97,16 +97,13 @@ def main():
         # clean column names
         df.columns = [str(c).strip() for c in df.columns]
         if len(df.columns) < 3:
-            print(
-                f"Skipping sheet '{sheet}' — fewer than 3 columns ({len(df.columns)})")
+            print(f"Skipping sheet '{sheet}' — fewer than 3 columns ({len(df.columns)})")
             continue
         out[sheet] = convert_sheet(df)
 
     # write JSON
-    OUT_JSON.write_text(json.dumps(
-        out, indent=2, ensure_ascii=False), encoding="utf8")
-    print(
-        f"Wrote {sum(len(v) for v in out.values())} rows across {len(out)} sheets to {OUT_JSON}")
+    OUT_JSON.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf8")
+    print(f"Wrote {sum(len(v) for v in out.values())} rows across {len(out)} sheets to {OUT_JSON}")
 
 
 if __name__ == "__main__":

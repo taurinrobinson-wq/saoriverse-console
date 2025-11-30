@@ -11,19 +11,13 @@ from emotional_os.deploy.config import SUPABASE_ANON_KEY, SUPABASE_URL
 
 def quick_test():
     url = f"{SUPABASE_URL}/functions/v1/saori-fixed"
-    headers = {
-        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
-        "Content-Type": "application/json"
-    }
+    headers = {"Authorization": f"Bearer {SUPABASE_ANON_KEY}", "Content-Type": "application/json"}
 
     print("TESTING RE-DEPLOYMENT...")
     start = time.time()
 
     try:
-        response = requests.post(url, headers=headers, json={
-            "message": "grief",
-            "mode": "quick"
-        }, timeout=15)
+        response = requests.post(url, headers=headers, json={"message": "grief", "mode": "quick"}, timeout=15)
 
         elapsed = time.time() - start
 
@@ -47,6 +41,7 @@ def quick_test():
 
     except Exception as e:
         print(f"ERROR: {e}")
+
 
 if __name__ == "__main__":
     quick_test()

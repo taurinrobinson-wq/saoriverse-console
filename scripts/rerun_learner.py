@@ -5,10 +5,11 @@ Load the reclassified conversation and run the lexicon learner on it.
 Writes: learning/imported_conversations/learning_results.json
 Prints: concise learning insights
 """
-from learning.lexicon_learner import learn_from_conversation_data, get_learning_insights
 import json
 import sys
 from pathlib import Path
+
+from learning.lexicon_learner import get_learning_insights, learn_from_conversation_data
 
 # Ensure repo root on sys.path so imports resolve like other scripts
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -28,8 +29,7 @@ with IN.open(encoding="utf-8") as f:
 print("Running learner on:", IN)
 results = learn_from_conversation_data(convo)
 
-OUT.write_text(json.dumps(results, ensure_ascii=False,
-               indent=2), encoding="utf-8")
+OUT.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
 print("WROTE:", OUT)
 
 insights = get_learning_insights()

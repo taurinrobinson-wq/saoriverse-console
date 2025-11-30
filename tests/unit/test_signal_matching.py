@@ -6,7 +6,7 @@ Tests the messages from your earlier test run
 
 import sys
 
-sys.path.insert(0, 'str(Path(__file__).resolve().parent)')
+sys.path.insert(0, "str(Path(__file__).resolve().parent)")
 
 from parser.signal_parser import load_signal_map, parse_signals
 
@@ -28,6 +28,7 @@ test_messages = {
     "light": "I can see the light at the end of the tunnel.",
 }
 
+
 def test_signal_matching():
     print("=" * 70)
     print("GLYPH SIGNAL MATCHING TEST")
@@ -43,7 +44,7 @@ def test_signal_matching():
     for category, message in test_messages.items():
         print(f"\n{'─' * 70}")
         print(f"Category: {category.upper()}")
-        print(f"Message: \"{message}\"")
+        print(f'Message: "{message}"')
         print(f"{'─' * 70}")
 
         # Parse signals
@@ -66,6 +67,7 @@ def test_signal_matching():
             print("  Matched keywords:")
             for keyword, signal in matched_keywords:
                 print(f"    - '{keyword}' → {signal}")
+
 
 if __name__ == "__main__":
     test_signal_matching()

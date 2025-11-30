@@ -17,7 +17,6 @@ test_messages = [
     "I'm learning to be kinder to myself",
     "I'm ready to let go of this pain",
     "I wonder if anyone really knows the real me",
-
     # Additional emotional vocabulary (shame, vulnerability, recognition)
     "I'm so embarrassed about what happened",
     "I feel humiliated and want to hide",
@@ -27,7 +26,6 @@ test_messages = [
     "I feel like nobody understands me",
     "I'm so grateful for this moment",
     "I'm proud of myself for trying",
-
     # Growth and healing vocabulary
     "I'm healing from something deep",
     "I'm learning to love myself more",
@@ -47,14 +45,14 @@ glyphs_found = 0
 glyphs_not_found = []
 
 for i, msg in enumerate(test_messages, 1):
-    lexicon_path = 'emotional_os/parser/signal_lexicon.json'
-    db_path = 'emotional_os/glyphs/glyphs.db'
+    lexicon_path = "emotional_os/parser/signal_lexicon.json"
+    db_path = "emotional_os/glyphs/glyphs.db"
     result = parse_input(msg, lexicon_path=lexicon_path, db_path=db_path)
-    best_glyph = result.get('best_glyph')
-    signals = result.get('signals', [])
-    response = result.get('voltage_response', '')[:80]  # First 80 chars
+    best_glyph = result.get("best_glyph")
+    signals = result.get("signals", [])
+    response = result.get("voltage_response", "")[:80]  # First 80 chars
 
-    glyph_name = best_glyph.get('glyph_name') if best_glyph else None
+    glyph_name = best_glyph.get("glyph_name") if best_glyph else None
     status = "✓" if glyph_name else "✗"
 
     if glyph_name:

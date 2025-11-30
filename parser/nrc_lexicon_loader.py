@@ -6,8 +6,8 @@ Data source: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 Free for research use.
 """
 
-import os
 import logging
+import os
 from collections import defaultdict
 
 logger = logging.getLogger(__name__)
@@ -35,8 +35,7 @@ class NRCLexicon:
         self.source = "bootstrap"
 
         # Allow forcing the use of the small bootstrap lexicon via env var.
-        prefer_bootstrap = os.getenv(
-            "NRC_PREFER_BOOTSTRAP", "0").lower() in ("1", "true", "yes")
+        prefer_bootstrap = os.getenv("NRC_PREFER_BOOTSTRAP", "0").lower() in ("1", "true", "yes")
         bootstrap_path = "data/lexicons/nrc_emotion_lexicon_bootstrap.txt"
 
         # If preference is set, try bootstrap first (even if the full lexicon exists).
@@ -46,8 +45,7 @@ class NRCLexicon:
                 self.source = "bootstrap"
                 return
             else:
-                logger.info(
-                    "NRC_PREFER_BOOTSTRAP set but bootstrap file not found: %s", bootstrap_path)
+                logger.info("NRC_PREFER_BOOTSTRAP set but bootstrap file not found: %s", bootstrap_path)
 
         # Try primary (full) lexicon path first
         if os.path.exists(filepath):
@@ -71,7 +69,7 @@ class NRCLexicon:
     def _load_lexicon(self, filepath: str):
         """Load lexicon from file."""
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
+            with open(filepath, "r", encoding="utf-8") as f:
                 lines = f.readlines()
 
             if not lines:
@@ -79,14 +77,13 @@ class NRCLexicon:
                 return
 
             # Determine header - check if first line is header
-            first_line_parts = lines[0].strip().split('\t')
-            is_header = len(
-                first_line_parts) >= 3 and first_line_parts[0].lower() == 'word'
+            first_line_parts = lines[0].strip().split("\t")
+            is_header = len(first_line_parts) >= 3 and first_line_parts[0].lower() == "word"
             start_idx = 1 if is_header else 0
 
             loaded_count = 0
             for line in lines[start_idx:]:
-                parts = line.strip().split('\t')
+                parts = line.strip().split("\t")
                 if len(parts) >= 3:
                     word = parts[0].lower()
                     emotion = parts[1].lower()
@@ -130,7 +127,7 @@ class NRCLexicon:
         emotions = defaultdict(int)
 
         for word in words:
-            word_clean = word.strip('.,!?;:\'"')
+            word_clean = word.strip(".,!?;:'\"")
             word_emotions = self.get_emotions(word_clean)
             for emotion in word_emotions:
                 emotions[emotion] += 1
@@ -149,7 +146,7 @@ class NRCLexicon:
             "loaded": self.loaded,
             "source": self.source,
             "word_count": len(self.word_emotions),
-            "emotion_count": len(self.emotion_words)
+            "emotion_count": len(self.emotion_words),
         }
 
 

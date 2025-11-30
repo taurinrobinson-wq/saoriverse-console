@@ -13,34 +13,34 @@ def call_openai_with_handling(callable_obj):
     """
     try:
         res = callable_obj()
-        return {'result': res}
+        return {"result": res}
     except TimeoutError:
-        return {'error': 'timeout', 'recoverable': True}
+        return {"error": "timeout", "recoverable": True}
     except FakeOpenAIError:
-        return {'error': 'api_error', 'recoverable': True}
+        return {"error": "api_error", "recoverable": True}
     except Exception:
-        return {'error': 'unknown', 'recoverable': False}
+        return {"error": "unknown", "recoverable": False}
 
 
 def test_openai_timeout_handled():
     def raise_timeout():
-        raise TimeoutError('timed out')
+        raise TimeoutError("timed out")
 
     out = call_openai_with_handling(raise_timeout)
-    assert out['error'] == 'timeout' and out['recoverable'] is True
+    assert out["error"] == "timeout" and out["recoverable"] is True
 
 
 def test_openai_api_error_handled():
     def raise_api_error():
-        raise FakeOpenAIError('rate limit')
+        raise FakeOpenAIError("rate limit")
 
     out = call_openai_with_handling(raise_api_error)
-    assert out['error'] == 'api_error' and out['recoverable'] is True
+    assert out["error"] == "api_error" and out["recoverable"] is True
 
 
 def test_openai_malformed_response_handled():
     def raise_value_error():
-        raise ValueError('malformed response')
+        raise ValueError("malformed response")
 
     out = call_openai_with_handling(raise_value_error)
-    assert out['error'] == 'unknown' and out['recoverable'] is False
+    assert out["error"] == "unknown" and out["recoverable"] is False

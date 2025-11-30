@@ -13,16 +13,13 @@ from emotional_os.deploy.config import SUPABASE_ANON_KEY, SUPABASE_URL
 
 def test_optimized_deployment():
     url = f"{SUPABASE_URL}/functions/v1/saori-fixed"
-    headers = {
-        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
-        "Content-Type": "application/json"
-    }
+    headers = {"Authorization": f"Bearer {SUPABASE_ANON_KEY}", "Content-Type": "application/json"}
 
     # Test messages in order of expected speed
     tests = [
         ("I'm feeling overwhelmed", "Should be <1s with quick response"),
         ("Joy is bubbling up", "Should be <1s with quick response"),
-        ("Complex existential thoughts about meaning", "Should be <3s with optimization")
+        ("Complex existential thoughts about meaning", "Should be <3s with optimization"),
     ]
 
     print("TESTING OPTIMIZED EDGE FUNCTION")
@@ -34,10 +31,7 @@ def test_optimized_deployment():
 
         start = time.time()
         try:
-            response = requests.post(url, headers=headers, json={
-                "message": message,
-                "mode": "hybrid"
-            }, timeout=30)
+            response = requests.post(url, headers=headers, json={"message": message, "mode": "hybrid"}, timeout=30)
 
             elapsed = time.time() - start
 
@@ -68,6 +62,7 @@ def test_optimized_deployment():
     print("\n" + "=" * 50)
     print("If you see SUCCESS/IMPROVED results, the optimization worked!")
     print("If still slow, check edge function deployment or try again in 1-2 minutes")
+
 
 if __name__ == "__main__":
     test_optimized_deployment()

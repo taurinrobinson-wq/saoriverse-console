@@ -14,8 +14,7 @@ from typing import List
 import requests
 import spacy
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -26,7 +25,7 @@ def datamuse_synonyms(term: str, max_results: int = 10) -> List[str]:
         resp = requests.get(url, params=params, timeout=6)
         resp.raise_for_status()
         data = resp.json()
-        return [d['word'] for d in data if 'word' in d]
+        return [d["word"] for d in data if "word" in d]
     except Exception as e:
         logger.debug(f"Datamuse lookup failed for {term}: {e}")
         return []
@@ -69,44 +68,44 @@ def broaden_keywords(keywords: List[str], nlp, synonyms_per_kw: int = 8) -> List
 
 
 def main():
-    src = Path('learning/user_overrides/openstax_bulk_lexicon.json')
-    dst = Path('learning/user_overrides/openstax_bulk_lexicon_expanded.json')
+    src = Path("learning/user_overrides/openstax_bulk_lexicon.json")
+    dst = Path("learning/user_overrides/openstax_bulk_lexicon_expanded.json")
 
     if not src.exists():
         logger.error(f"Source lexicon not found: {src}")
         return 2
 
     logger.info(f"Loading lexicon: {src}")
-    lex = json.loads(src.read_text(encoding='utf-8'))
-    signals = lex.get('signals', {})
+    lex = json.loads(src.read_text(encoding="utf-8"))
+    signals = lex.get("signals", {})
 
     # Load spaCy model
     try:
-        nlp = spacy.load('en_core_web_sm')
+        nlp = spacy.load("en_core_web_sm")
     except Exception:
-        logger.info('spaCy model not found, attempting to download...')
+        logger.info("spaCy model not found, attempting to download...")
         import subprocess
-        subprocess.check_call(
-            ['python3', '-m', 'spacy', 'download', 'en_core_web_sm'])
-        nlp = spacy.load('en_core_web_sm')
 
-    expanded = {'signals': {}}
+        subprocess.check_call(["python3", "-m", "spacy", "download", "en_core_web_sm"])
+        nlp = spacy.load("en_core_web_sm")
+
+    expanded = {"signals": {}}
 
     for sig, data in signals.items():
-        kws = data.get('keywords', [])
+        kws = data.get("keywords", [])
         logger.info(f"Expanding signal '{sig}' ({len(kws)} keywords)")
         new_kws = broaden_keywords(kws, nlp)
         # keep original frequency
-        expanded['signals'][sig] = {
-            'frequency': data.get('frequency', 0),
-            'keywords': new_kws,
+        expanded["signals"][sig] = {
+            "frequency": data.get("frequency", 0),
+            "keywords": new_kws,
         }
 
     dst.parent.mkdir(parents=True, exist_ok=True)
-    dst.write_text(json.dumps(expanded, indent=2), encoding='utf-8')
+    dst.write_text(json.dumps(expanded, indent=2), encoding="utf-8")
     logger.info(f"Wrote expanded lexicon: {dst}")
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

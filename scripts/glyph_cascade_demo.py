@@ -7,9 +7,10 @@ Usage:
   python3 scripts/glyph_cascade_demo.py --glyphs 🌙 🔥 💧 --out demo_glyph.mid
 """
 
-import json
 import argparse
+import json
 from pathlib import Path
+
 from mido import Message, MidiFile, MidiTrack
 
 # Simple glyph -> emotion mapping (expand with your glyph system)
@@ -21,7 +22,7 @@ glyph_map = {
     "🌱": "hope",
     "🌀": "melancholy",
     "⭐": "wonder",
-    "🪨": "resolve"
+    "🪨": "resolve",
 }
 
 EMOTION_MAP_PATH = Path("Offshoots/ToneCore/emotion_map.json")
@@ -34,7 +35,7 @@ def load_json(path: Path):
     start = text.find("[")
     end = text.rfind("]")
     if start != -1 and end != -1:
-        return json.loads(text[start:end+1])
+        return json.loads(text[start : end + 1])
     return json.loads(text)
 
 
@@ -42,8 +43,7 @@ def load_pivot():
     for p in PIVOT_PATHS:
         if p.exists():
             return load_json(p)
-    raise FileNotFoundError(
-        "No pivot JSON found; run converter/normalizer first")
+    raise FileNotFoundError("No pivot JSON found; run converter/normalizer first")
 
 
 def emotion_to_function(emotion, emotion_map):
@@ -72,10 +72,26 @@ def find_best_transition(function, pivot, prev_notes=None):
 
 
 NOTE_MAP = {
-    "c": 60, "c#": 61, "db": 61, "d": 62, "d#": 63, "eb": 63,
-    "e": 64, "fb": 64, "e#": 65, "f": 65, "f#": 66, "gb": 66,
-    "g": 67, "g#": 68, "ab": 68, "a": 69, "a#": 70, "bb": 70,
-    "b": 71, "cb": 71
+    "c": 60,
+    "c#": 61,
+    "db": 61,
+    "d": 62,
+    "d#": 63,
+    "eb": 63,
+    "e": 64,
+    "fb": 64,
+    "e#": 65,
+    "f": 65,
+    "f#": 66,
+    "gb": 66,
+    "g": 67,
+    "g#": 68,
+    "ab": 68,
+    "a": 69,
+    "a#": 70,
+    "bb": 70,
+    "b": 71,
+    "cb": 71,
 }
 
 
@@ -83,7 +99,7 @@ def chords_to_midi(chord_note_lists, filename="glyph_demo.mid"):
     mid = MidiFile()
     track = MidiTrack()
     mid.tracks.append(track)
-    track.append(Message('program_change', program=0, time=0))
+    track.append(Message("program_change", program=0, time=0))
 
     ticks_per_beat = mid.ticks_per_beat
     chord_ticks = ticks_per_beat * 4
@@ -93,13 +109,10 @@ def chords_to_midi(chord_note_lists, filename="glyph_demo.mid"):
             continue
         for n in notes:
             midi_note = NOTE_MAP.get(n.lower(), 60)
-            track.append(
-                Message('note_on', note=midi_note, velocity=64, time=0))
-        track.append(Message('note_off', note=NOTE_MAP.get(
-            notes[0].lower(), 60), velocity=64, time=chord_ticks))
+            track.append(Message("note_on", note=midi_note, velocity=64, time=0))
+        track.append(Message("note_off", note=NOTE_MAP.get(notes[0].lower(), 60), velocity=64, time=chord_ticks))
         for n in notes[1:]:
-            track.append(Message('note_off', note=NOTE_MAP.get(
-                n.lower(), 60), velocity=64, time=0))
+            track.append(Message("note_off", note=NOTE_MAP.get(n.lower(), 60), velocity=64, time=0))
 
     mid.save(filename)
     print(f"Saved MIDI progression to {filename}")
@@ -107,8 +120,7 @@ def chords_to_midi(chord_note_lists, filename="glyph_demo.mid"):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--glyphs", nargs='+',
-                        help="Sequence of glyphs, e.g. 🌙 🔥 💧")
+    parser.add_argument("--glyphs", nargs="+", help="Sequence of glyphs, e.g. 🌙 🔥 💧")
     parser.add_argument("--out", default="glyph_demo.mid")
     args = parser.parse_args()
 
@@ -129,8 +141,7 @@ def main():
         to_chord, shared = find_best_transition(function, pivot, prev_notes)
         if to_chord:
             notes = shared if shared else []
-            print(
-                f"Glyph {glyph} -> Emotion {emotion} -> Function {function} -> Chord {to_chord} (shared {notes})")
+            print(f"Glyph {glyph} -> Emotion {emotion} -> Function {function} -> Chord {to_chord} (shared {notes})")
             if notes:
                 chords.append(notes)
                 prev_notes = notes
@@ -138,8 +149,8 @@ def main():
                 # try to find the chord's base notes
                 found = None
                 for e in pivot:
-                    if e.get('base_chord', {}).get('name') == to_chord:
-                        found = e.get('base_chord', {}).get('notes', [])
+                    if e.get("base_chord", {}).get("name") == to_chord:
+                        found = e.get("base_chord", {}).get("notes", [])
                         break
                 if found:
                     chords.append(found)
@@ -153,5 +164,5 @@ def main():
         chords_to_midi(chords, filename=args.out)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

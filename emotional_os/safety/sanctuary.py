@@ -1,13 +1,13 @@
 import json
 import os
+import re
+from difflib import SequenceMatcher
 from typing import Optional
 
 from .config import DEFAULT_LOCALE, INCLUDE_CRISIS_RESOURCES
 from .redaction import redact_text
 from .sanctuary_handler import build_consent_prompt, classify_risk, get_crisis_resources
 from .templates import SanctuaryTemplates
-from difflib import SequenceMatcher
-import re
 
 # Load trauma lexicon once
 _TRAUMA_LEXICON_PATH = os.path.join(os.path.dirname(__file__), "trauma_lexicon.json")
@@ -29,10 +29,7 @@ def is_sensitive_input(text: str) -> bool:
 
 
 def ensure_sanctuary_response(
-    input_text: str,
-    base_response: str,
-    tone: Optional[str] = None,
-    locale: str = DEFAULT_LOCALE
+    input_text: str, base_response: str, tone: Optional[str] = None, locale: str = DEFAULT_LOCALE
 ) -> str:
     """
     Wrap any response with Sanctuary posture if enabled or if input is sensitive.
@@ -67,7 +64,7 @@ def ensure_sanctuary_response(
         "What you're sharing matters",
         "You get to set the pace",
         "Your experience deserves care",
-        "If this brings up a lot, we can slow down"
+        "If this brings up a lot, we can slow down",
     ]
 
     base_lower = base_response.lower() if base_response else ""
@@ -90,18 +87,21 @@ def ensure_sanctuary_response(
         if re.search(r"i('?m| am) here (with|for) you", base_lower):
             fuzzy_match_found = True
         # other common compassionate fragments
-        if not fuzzy_match_found and any(phrase.lower() in base_lower for phrase in [
-            "you get to set the pace",
-            "what you're sharing matters",
-            "your experience deserves care",
-            "we can slow down"
-        ]):
+        if not fuzzy_match_found and any(
+            phrase.lower() in base_lower
+            for phrase in [
+                "you get to set the pace",
+                "what you're sharing matters",
+                "your experience deserves care",
+                "we can slow down",
+            ]
+        ):
             fuzzy_match_found = True
         # token proximity fallback: both 'here' and 'you' nearby
-        if not fuzzy_match_found and 'here' in base_lower and 'you' in base_lower:
+        if not fuzzy_match_found and "here" in base_lower and "you" in base_lower:
             try:
-                idx_here = base_lower.index('here')
-                idx_you = base_lower.index('you')
+                idx_here = base_lower.index("here")
+                idx_you = base_lower.index("you")
                 if abs(idx_here - idx_you) < 40:
                     fuzzy_match_found = True
             except Exception:

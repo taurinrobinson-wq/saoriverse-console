@@ -16,22 +16,20 @@ def test_parse_input_smoke_creates_response(tmp_path):
     p = Path(__file__).resolve()
     repo_root = p
     for _ in range(6):  # avoid infinite loops; repo won't be deeper than this
-        if (repo_root / 'velonix_lexicon.json').exists() or (repo_root / 'scripts').exists():
+        if (repo_root / "velonix_lexicon.json").exists() or (repo_root / "scripts").exists():
             break
         repo_root = repo_root.parent
-    fixture_script = repo_root / 'scripts' / 'create_sqlite_fixture.py'
+    fixture_script = repo_root / "scripts" / "create_sqlite_fixture.py"
     # Create fixture
     assert fixture_script.exists(), f"Fixture script missing: {fixture_script}"
     os.system(f'python3 "{fixture_script}"')
-    fixture_db = repo_root / 'emotional_os' / \
-        'glyphs' / 'glyphs_integration_fixture.db'
+    fixture_db = repo_root / "emotional_os" / "glyphs" / "glyphs_integration_fixture.db"
     assert fixture_db.exists(), "Fixture DB was not created"
 
     assert parse_input is not None, "parse_input import failed"
 
     # Use a simple greeting which the parser handles without DB dependencies
-    r = parse_input("hi", str(repo_root / 'velonix_lexicon.json'),
-                    db_path=str(fixture_db))
+    r = parse_input("hi", str(repo_root / "velonix_lexicon.json"), db_path=str(fixture_db))
     assert isinstance(r, dict)
-    assert 'voltage_response' in r
-    assert r['voltage_response'] is not None
+    assert "voltage_response" in r
+    assert r["voltage_response"] is not None

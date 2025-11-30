@@ -6,12 +6,12 @@ Usage: python3 scripts/threshold_sweep.py
 Reads `data/tagging_samples.csv` and calls `symbolic_tagger.tag_input_with_diagnostics`
 for each threshold. Prints a table of counts per tag per threshold.
 """
-from collections import defaultdict, OrderedDict
-import json
 import csv
+import importlib.util
+import json
 import os as _os
 import sys
-import importlib.util
+from collections import OrderedDict, defaultdict
 
 # Resolve repo root relative to this script file so imports work regardless
 # of the current working directory used to invoke the script.
@@ -30,8 +30,7 @@ tag_input_with_diagnostics = symbolic_mod.tag_input_with_diagnostics
 CSV_PATH = _os.path.join(repo_root, "data", "tagging_samples.csv")
 
 # thresholds from 0.65 to 0.85 inclusive step 0.02
-thresholds = [round(x, 2) for x in [0.65 + i *
-                                    0.02 for i in range(int((0.85 - 0.65) / 0.02) + 1)]]
+thresholds = [round(x, 2) for x in [0.65 + i * 0.02 for i in range(int((0.85 - 0.65) / 0.02) + 1)]]
 
 inputs = []
 with open(CSV_PATH, newline="", encoding="utf-8") as fh:
@@ -54,15 +53,12 @@ for t in thresholds:
     results[t] = counts
 
 # Sort tags for consistent columns (prefer canonical ordering)
-preferred = ["initiatory_signal", "anchoring_signal",
-             "voltage_surge", "containment_request", "legacy_marker"]
+preferred = ["initiatory_signal", "anchoring_signal", "voltage_surge", "containment_request", "legacy_marker"]
 other_tags = sorted(list(all_tags - set(preferred)))
 columns = [t for t in preferred if t in all_tags] + other_tags
 
 # Print CSV-like table
-print(
-    "threshold," + ",".join(columns)
-)
+print("threshold," + ",".join(columns))
 for t, counts in results.items():
     row = [str(t)] + [str(counts.get(c, 0)) for c in columns]
     print(",".join(row))

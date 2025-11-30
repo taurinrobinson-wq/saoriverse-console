@@ -9,9 +9,9 @@ glyph learning and emotional processing pipeline.
 This creates the complete chiasmus: neural activation → ritual scaffolding → glyph systems.
 """
 
+import logging
 import os
 import sys
-import logging
 from typing import Any, Dict, List, Optional
 
 # Optional instrumentation logger. Enable by setting env var SAORIVERSE_LIMBIC_DEBUG
@@ -25,10 +25,12 @@ from .limbic_visualizer import LimbicVisualizer
 
 try:
     from .glyph_learner import GlyphLearner
+
     HAS_GLYPH_LEARNER = True
 except ImportError:
     try:
         from glyph_learner import GlyphLearner
+
         HAS_GLYPH_LEARNER = True
     except ImportError:
         HAS_GLYPH_LEARNER = False
@@ -36,10 +38,12 @@ except ImportError:
 
 try:
     from .shared_glyph_manager import SharedGlyphManager
+
     HAS_SHARED_MANAGER = True
 except ImportError:
     try:
         from shared_glyph_manager import SharedGlyphManager
+
         HAS_SHARED_MANAGER = True
     except ImportError:
         HAS_SHARED_MANAGER = False
@@ -76,7 +80,7 @@ class LimbicIntegrationEngine:
             "limbic_mapping": {},
             "glyph_sequences": {},
             "system_signals": {},
-            "ritual_sequence": []
+            "ritual_sequence": [],
         }
 
         # Get chiasmus mapping
@@ -88,20 +92,19 @@ class LimbicIntegrationEngine:
         # actually runs and what it produced. Controlled by logger level.
         try:
             if logger.isEnabledFor(logging.DEBUG):
-                logger.debug("process_emotion_with_limbic_mapping emotion=%s -> signals=%d regions=%d",
-                             str(emotion)[:120],
-                             len(result["system_signals"]),
-                             len(result["limbic_mapping"]))
+                logger.debug(
+                    "process_emotion_with_limbic_mapping emotion=%s -> signals=%d regions=%d",
+                    str(emotion)[:120],
+                    len(result["system_signals"]),
+                    len(result["limbic_mapping"]),
+                )
         except Exception:
             pass
 
         # Generate glyph sequences for each brain region
         brain_regions = ["insula", "amygdala", "hippocampus", "acc", "vmpfc"]
         for region in brain_regions:
-            region_data = {
-                "glyph_sequences": {},
-                "ritual_mappings": {}
-            }
+            region_data = {"glyph_sequences": {}, "ritual_mappings": {}}
 
             # Get glyph sequences for each system
             for system in SystemType:
@@ -112,9 +115,7 @@ class LimbicIntegrationEngine:
             # Get ritual mappings
             brain_region = self.limbic_system.get_brain_region(region)
             if brain_region:
-                region_data["ritual_mappings"] = {
-                    ritual: desc for ritual, desc in brain_region.ritual_mappings.items()
-                }
+                region_data["ritual_mappings"] = {ritual: desc for ritual, desc in brain_region.ritual_mappings.items()}
 
             result["limbic_mapping"][region] = region_data
 
@@ -133,16 +134,16 @@ class LimbicIntegrationEngine:
 
         # Create candidates from system signals
         for system_enum, signal_data in limbic_result["system_signals"].items():
-            system_name = system_enum.value if hasattr(system_enum, 'value') else str(system_enum)
+            system_name = system_enum.value if hasattr(system_enum, "value") else str(system_enum)
             candidate = {
                 "glyph_name": f"{emotion}_{system_name}_{signal_data['glyph']}",
                 "emotion": emotion,
                 "system": system_name,
-                "glyph": signal_data['glyph'],
-                "signal": signal_data['signal'],
+                "glyph": signal_data["glyph"],
+                "signal": signal_data["signal"],
                 "intensity": limbic_result["intensity"],
                 "neural_basis": "limbic_adjacent",
-                "user_id": user_id
+                "user_id": user_id,
             }
             candidates.append(candidate)
 
@@ -159,7 +160,7 @@ class LimbicIntegrationEngine:
                         "primary_glyph": glyph_sequence[0],  # Use first glyph as primary
                         "intensity": limbic_result["intensity"],
                         "neural_basis": "limbic_adjacent",
-                        "user_id": user_id
+                        "user_id": user_id,
                     }
                     candidates.append(candidate)
 
@@ -177,12 +178,14 @@ class LimbicIntegrationEngine:
             "limbic_processed": False,
             "glyphs_generated": 0,
             "glyphs_stored": 0,
-            "errors": []
+            "errors": [],
         }
 
         try:
             # Process through limbic system
-            limbic_result = self.process_emotion_with_limbic_mapping(emotion)  # noqa: F841  # kept for potential debugging
+            limbic_result = self.process_emotion_with_limbic_mapping(
+                emotion
+            )  # noqa: F841  # kept for potential debugging
             result["limbic_processed"] = True
 
             # Generate glyph candidates
@@ -202,7 +205,7 @@ class LimbicIntegrationEngine:
                             "signal": candidate.get("signal", f"Neural {emotion} signal"),
                             "system": candidate.get("system", "unknown"),
                             "neural_basis": candidate["neural_basis"],
-                            "intensity": candidate["intensity"]
+                            "intensity": candidate["intensity"],
                         }
 
                         # Use glyph learner to analyze (not store yet)
@@ -241,9 +244,9 @@ INTENSITY: {limbic_result['intensity']}
 
 SYSTEM SIGNALS:
 """
-        for system_name, signal_data in limbic_result['system_signals'].items():
+        for system_name, signal_data in limbic_result["system_signals"].items():
             # Convert SystemType enum to string if needed
-            system_key = system_name.value if hasattr(system_name, 'value') else str(system_name)
+            system_key = system_name.value if hasattr(system_name, "value") else str(system_name)
             report += f"  {system_key.upper()}: {signal_data['glyph']} {signal_data['signal']}\n"
 
         report += f"""
@@ -252,17 +255,17 @@ RITUAL SEQUENCE: {' → '.join(limbic_result['ritual_sequence'])}
 BRAIN REGION ACTIVATION:
 """
 
-        for region_name, region_data in limbic_result['limbic_mapping'].items():
+        for region_name, region_data in limbic_result["limbic_mapping"].items():
             report += f"""
 {region_name.upper()}:
 """
             # Show glyph sequences
-            for system_name, glyphs in region_data['glyph_sequences'].items():
+            for system_name, glyphs in region_data["glyph_sequences"].items():
                 if glyphs:
                     report += f"  {system_name}: {' → '.join(glyphs)}\n"
 
             # Show ritual mappings
-            for ritual, desc in region_data['ritual_mappings'].items():
+            for ritual, desc in region_data["ritual_mappings"].items():
                 report += f"  • {ritual}: {desc}\n"
 
         report += f"""
@@ -280,7 +283,7 @@ BRAIN REGION ACTIVATION:
 
         if output_file:
             try:
-                with open(output_file, 'w', encoding='utf-8') as f:
+                with open(output_file, "w", encoding="utf-8") as f:
                     f.write(visualization)
                 print(f"✅ Neural flow visualization saved to {output_file}")
             except Exception as e:
@@ -306,7 +309,7 @@ def demo_limbic_integration():
 
     # Show system signals
     print("\n🌈 System Signals:")
-    for system, signal in result['system_signals'].items():
+    for system, signal in result["system_signals"].items():
         print(f"  {system.value}: {signal['glyph']} {signal['signal']}")
 
     # Generate neural activation report
@@ -320,7 +323,7 @@ def demo_limbic_integration():
 
     # Show first few candidates
     for i, candidate in enumerate(candidates[:3]):
-        glyph = candidate.get('glyph', candidate.get('primary_glyph', '❓'))
+        glyph = candidate.get("glyph", candidate.get("primary_glyph", "❓"))
         print(f"  {i+1}. {candidate['glyph_name']}: {glyph}")
 
     print("\n✅ Limbic integration demo complete!")

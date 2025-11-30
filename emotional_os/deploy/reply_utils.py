@@ -8,9 +8,9 @@ def polish_ai_reply(text: str) -> str:
     - Collapse duplicated short lines.
     - Replace short generic fallbacks with a deterministic rotated alternative.
     """
-    t = (text or '').strip()
+    t = (text or "").strip()
     # Collapse repeated identical sentences (e.g., "I'm here to listen.")
-    parts = [p.strip() for p in t.split('\n') if p.strip()]
+    parts = [p.strip() for p in t.split("\n") if p.strip()]
     if len(parts) > 1 and all(p == parts[0] for p in parts):
         t = parts[0]
 
@@ -19,12 +19,12 @@ def polish_ai_reply(text: str) -> str:
         alternatives: List[str] = [
             "I hear you — tell me more when you're ready.",
             "I'm listening. What's coming up for you right now?",
-            "Thank you for sharing. I'm here to listen and support you."
+            "Thank you for sharing. I'm here to listen and support you.",
         ]
         if len(t) > 40:
             return t
         try:
-            h = int(hashlib.sha1(t.encode('utf-8')).hexdigest()[:8], 16)
+            h = int(hashlib.sha1(t.encode("utf-8")).hexdigest()[:8], 16)
             return alternatives[h % len(alternatives)]
         except Exception:
             return alternatives[0]

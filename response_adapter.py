@@ -9,7 +9,9 @@ Design notes:
 - Avoid exposing backend terms like 'glyph', 'signal', or 'voltage' in
   user-facing text. Use metaphorical, gentle phrasing.
 """
+
 from typing import Dict, List, Optional
+
 from glyph_response_helpers import scaffold_response
 
 
@@ -46,8 +48,7 @@ def generate_response_from_glyphs(system_output: Dict) -> str:
     Expects `system_output` may contain `glyph_overlays_info` (list of {tag, confidence}).
     Falls back to `translate_emotional_response` when overlays are absent.
     """
-    glyphs = system_output.get(
-        "glyph_overlays_info") or system_output.get("glyph_overlays")
+    glyphs = system_output.get("glyph_overlays_info") or system_output.get("glyph_overlays")
     if not glyphs:
         return translate_emotional_response(system_output)
 
@@ -87,6 +88,4 @@ def suggest_resonance_action(emotion: str, context: str) -> str:
 
     Keep suggestions permission-oriented and optional.
     """
-    return (
-        f"Would you like to explore what this {emotion} might be pointing toward in your {context}?"
-    )
+    return f"Would you like to explore what this {emotion} might be pointing toward in your {context}?"

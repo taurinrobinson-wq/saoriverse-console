@@ -20,16 +20,14 @@ OUT_CSV = os.path.join("data", "nhs_bereavement_phrases.csv")
 def ensure_packages():
     try:
         import requests  # noqa: F401
-        from bs4 import BeautifulSoup  # noqa: F401
         import spacy  # noqa: F401
+        from bs4 import BeautifulSoup  # noqa: F401
     except Exception:
         print("Missing packages; installing requests, beautifulsoup4, spacy, and en_core_web_sm")
         import subprocess
 
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
-        subprocess.check_call(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
+        subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 
 
 def fetch_html():
@@ -85,7 +83,7 @@ def candidate_phrases(text, top_k=200):
     words = [t.text.lower() for t in doc if not t.is_punct and not t.is_space]
     for n in (1, 2, 3):
         for i in range(len(words) - n + 1):
-            ng = " ".join(words[i: i + n])
+            ng = " ".join(words[i : i + n])
             phrases.append(ng)
 
     # Rank by frequency
@@ -110,7 +108,12 @@ def select_top(phrases, text, top_n=50):
             if pat.search(s.text):
                 example = s.text.strip()
                 break
-        results.append((p, example or "",))
+        results.append(
+            (
+                p,
+                example or "",
+            )
+        )
 
     # Deduplicate and take top_n
     seen = set()
@@ -134,16 +137,14 @@ def pos_and_lemma(rows):
         doc = nlp(phrase)
         lemmas = " ".join(tok.lemma_ for tok in doc)
         pos = ",".join(tok.pos_ for tok in doc)
-        out_rows.append({"phrase": phrase, "lemmas": lemmas,
-                        "pos": pos, "example": example, "source": URL})
+        out_rows.append({"phrase": phrase, "lemmas": lemmas, "pos": pos, "example": example, "source": URL})
     return out_rows
 
 
 def write_csv(rows):
     os.makedirs(os.path.dirname(OUT_CSV), exist_ok=True)
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=["phrase", "lemmas", "pos", "example", "source"])
+        writer = csv.DictWriter(f, fieldnames=["phrase", "lemmas", "pos", "example", "source"])
         writer.writeheader()
         for r in rows:
             writer.writerow(r)

@@ -14,13 +14,7 @@ def main():
     print(f"✓ Python executable: {sys.executable}")
 
     # Check critical imports
-    critical_imports = [
-        'streamlit',
-        'requests',
-        'pandas',
-        'numpy',
-        'supabase'
-    ]
+    critical_imports = ["streamlit", "requests", "pandas", "numpy", "supabase"]
 
     print("\n📦 Checking critical imports:")
     missing = []
@@ -38,7 +32,7 @@ def main():
 
     # Check environment variables
     print("\n🔑 Checking environment variables:")
-    env_vars = ['PORT', 'DATABASE_URL', 'RAILWAY_ENVIRONMENT']
+    env_vars = ["PORT", "DATABASE_URL", "RAILWAY_ENVIRONMENT"]
     for var in env_vars:
         val = os.environ.get(var)
         if val:
@@ -51,11 +45,13 @@ def main():
     try:
         print("  Checking main_v2.py imports...")
         import streamlit as st  # noqa: F401
+
         print("    ✓ streamlit imported")
         print("    ✓ Basic imports successful")
     except Exception as e:
         print(f"    ✗ Error: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 
@@ -63,5 +59,6 @@ def main():
     print("\nTo start the app, run:")
     print("  python start.py")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
