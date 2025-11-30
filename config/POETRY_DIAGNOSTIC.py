@@ -35,6 +35,7 @@ except Exception as e:
 print("\n2️⃣ DATA FILE STATUS")
 print("-" * 70)
 import os
+from pathlib import Path
 
 files = {
     "data/poetry/poetry_database.json": "Poetry Database",

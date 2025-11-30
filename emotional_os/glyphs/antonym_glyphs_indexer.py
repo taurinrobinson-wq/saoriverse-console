@@ -192,7 +192,7 @@ class AntonymGlyphIndexer:
             "primary_glyphs": len(self.primary_glyphs),
         }
 
-        print(f"\n✓ Built indexes:")
+        print("\n✓ Built indexes:")
         print(f"  - {indexes['indexed_by_emotion']} by base emotion")
         print(f"  - {indexes['indexed_by_pairing']} by voltage pairing")
         print(f"  - {indexes['indexed_by_name']} by glyph name")

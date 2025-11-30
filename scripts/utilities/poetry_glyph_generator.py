@@ -60,14 +60,14 @@ class PoetryGlyphGenerator:
         # Get dimension names sorted by frequency
         dimensions = sorted(self.signals.keys(), key=lambda d: self.signals[d].get("frequency", 0), reverse=True)
 
-        print(f"\n[GLYPH PATTERN EXTRACTION]")
-        print(f"Dimensions (by frequency):")
+        print("\n[GLYPH PATTERN EXTRACTION]")
+        print("Dimensions (by frequency):")
         for dim in dimensions:
             freq = self.signals[dim].get("frequency", 0)
             print(f"  - {dim}: {freq}")
 
         # Create 2-way combinations
-        print(f"\nExtracting combinations...")
+        print("\nExtracting combinations...")
         for i, dim1 in enumerate(dimensions):
             for dim2 in dimensions[i + 1 :]:
                 signal1 = self.signals[dim1]
@@ -100,7 +100,7 @@ class PoetryGlyphGenerator:
         """Create glyph definitions from patterns."""
         glyphs = []
 
-        print(f"\n[GLYPH CREATION]")
+        print("\n[GLYPH CREATION]")
 
         for i, pattern in enumerate(patterns[:20]):  # Top 20 patterns
             glyph = self._pattern_to_glyph(pattern, i + 1)
@@ -197,9 +197,9 @@ class PoetryGlyphGenerator:
         if "love" in dimensions and "nature" in dimensions:
             return "Celebrate love found in natural beauty"
         elif "transformation" in dimensions:
-            return f"Honor the becoming, the change within"
+            return "Honor the becoming, the change within"
         elif "joy" in dimensions:
-            return f"Welcome the joy that emerges"
+            return "Welcome the joy that emerges"
         else:
             return f"Acknowledge the {' and '.join(dimensions)} here"
 
@@ -209,9 +209,9 @@ class PoetryGlyphGenerator:
         if "love" in dimensions:
             return f"A story of love through {dimensions[-1]}"
         elif "transformation" in dimensions:
-            return f"The journey of becoming"
+            return "The journey of becoming"
         elif "nature" in dimensions:
-            return f"What the earth teaches us"
+            return "What the earth teaches us"
         else:
             return f"The interplay of {' and '.join(dimensions)}"
 

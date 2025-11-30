@@ -306,7 +306,7 @@ class PoetryDataPipeline:
         Returns:
             Export manifest
         """
-        logger.info(f"\nExporting clean poetry for all processing modes...")
+        logger.info("\nExporting clean poetry for all processing modes...")
 
         manifest = self.hub.export_for_processing(export_dir)
 
@@ -353,7 +353,7 @@ class PoetryDataPipeline:
         with open(manifest_path, "w") as f:
             json.dump(combined_manifest, f, indent=2)
 
-        logger.info(f"✓ Exported for all processing modes")
+        logger.info("✓ Exported for all processing modes")
         logger.info(f"  Signal extraction: {signal_manifest['collections']} collections")
         logger.info(f"  Lexicon learning: {lexicon_manifest['collections']} collections")
         logger.info(f"  Glyph generation: {glyph_manifest['collections']} collections")
@@ -404,7 +404,7 @@ def main():
         print(f"Cleaned: {status['pipeline_stats']['cleaned']}")
         print(f"Validated: {status['pipeline_stats']['validated']}")
         print(f"Failed: {status['pipeline_stats']['failed']}")
-        print(f"\nHub Status:")
+        print("\nHub Status:")
         print(f"  Total collections: {hub_status['total_collections']}")
         print(f"  Validated: {hub_status['validated']} ({hub_status['validated_percent']:.1f}%)")
         print(f"  Total words: {hub_status['total_words']:,}")

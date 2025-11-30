@@ -252,7 +252,7 @@ class ScenarioTester:
 
         # Display matched glyphs
         if matching_glyphs:
-            print(f"\n📜 Top Glyphs:")
+            print("\n📜 Top Glyphs:")
             for i, g in enumerate(matching_glyphs[:5], 1):
                 gate_str = g.get("gate", "Unknown")
                 print(f"   {i}. {g.get('glyph_name', 'Unknown')} ({gate_str})")
@@ -416,7 +416,7 @@ class ScenarioTester:
         for result in self.scenario_results:
             all_gates.update(result["found_gates"])
 
-        print(f"\n🗺️  GATE COVERAGE ACROSS ALL SCENARIOS:")
+        print("\n🗺️  GATE COVERAGE ACROSS ALL SCENARIOS:")
         gate_names = {
             1: "Initiation & Emergence",
             2: "Duality & Paradox",
@@ -441,7 +441,7 @@ class ScenarioTester:
         print(f"\n   Total Gates Accessed: {gates_covered}/12 ({100*gates_covered/12:.1f}%)")
 
         # Ritual analysis
-        print(f"\n🔄 RITUAL SEQUENCE COVERAGE:")
+        print("\n🔄 RITUAL SEQUENCE COVERAGE:")
         rituals = {
             "Ascending (1→12)": list(range(1, 13)),
             "Grounding (12→1)": list(range(12, 0, -1)),

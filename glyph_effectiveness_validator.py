@@ -30,7 +30,7 @@ class GlyphEffectivenessValidator:
         self.factorial_glyphs = {g["id"]: g for g in self.glyphs if g.get("is_factorial", False)}
 
         print(f"\n{'='*80}")
-        print(f"GLYPH EFFECTIVENESS VALIDATOR")
+        print("GLYPH EFFECTIVENESS VALIDATOR")
         print(f"{'='*80}")
         print(f"Total glyphs: {len(self.glyphs)}")
         print(f"  - Base glyphs: {len(self.base_glyphs)}")
@@ -163,13 +163,13 @@ class GlyphEffectivenessValidator:
             if (i + 1) % 1000 == 0:
                 print(f"  Processed {i + 1}/{len(self.glyphs)} glyphs...")
 
-        print(f"\n✓ Validation complete")
+        print("\n✓ Validation complete")
         print(f"  Valid glyphs: {len(valid_glyphs)}")
         print(f"  Invalid glyphs: {len(invalid_glyphs)}")
 
         # Show rejection reasons
         if invalid_glyphs:
-            print(f"\nRejection reasons:")
+            print("\nRejection reasons:")
             for reason, count in sorted(self.validation_results["rejection_reasons"].items(), key=lambda x: -x[1]):
                 percentage = (count / len(invalid_glyphs)) * 100
                 print(f"  • {reason}: {count} ({percentage:.1f}%)")
@@ -183,7 +183,7 @@ class GlyphEffectivenessValidator:
 
     def save_pruned_lexicon(self, valid_glyphs: List[Dict]) -> Path:
         """Save pruned lexicon to file."""
-        output_path = self.lexicon_path.parent / f"glyph_lexicon_rows_validated.json"
+        output_path = self.lexicon_path.parent / "glyph_lexicon_rows_validated.json"
 
         with open(output_path, "w") as f:
             json.dump(valid_glyphs, f, indent=2, ensure_ascii=False)
@@ -223,12 +223,12 @@ def main():
     validation_result = validator.validate_all_glyphs()
 
     # Step 2: Save pruned lexicon
-    print(f"\n[STEP 2] Saving validated glyphs...")
+    print("\n[STEP 2] Saving validated glyphs...")
     output_path = validator.save_pruned_lexicon(validation_result["valid_glyphs"])
     print(f"✓ Saved {len(validation_result['valid_glyphs'])} valid glyphs to {output_path.name}")
 
     # Step 3: Generate report
-    print(f"\n[STEP 3] Generating validation report...")
+    print("\n[STEP 3] Generating validation report...")
     report = validator.generate_report()
 
     report_path = Path("GLYPH_VALIDATION_REPORT.json")
@@ -238,20 +238,20 @@ def main():
 
     # Print summary
     print(f"\n{'='*80}")
-    print(f"VALIDATION SUMMARY")
+    print("VALIDATION SUMMARY")
     print(f"{'='*80}")
     print(f"Original glyphs: {report['validation_summary']['total_glyphs_tested']}")
     print(f"Valid glyphs: {report['validation_summary']['total_glyphs_valid']}")
     print(f"Invalid glyphs: {report['validation_summary']['total_glyphs_invalid']}")
     print(f"Validity rate: {report['validation_summary']['validity_rate']}")
-    print(f"\nBreakdown:")
+    print("\nBreakdown:")
     print(f"  Base glyphs: {report['breakdown']['base_glyphs_valid']}/{len(validator.base_glyphs)} valid")
     print(
         f"  Factorial glyphs: {report['breakdown']['factorial_glyphs_valid']}/{len(validator.factorial_glyphs)} valid"
     )
 
     print(f"\n✓ Pruned lexicon ready at: {output_path}")
-    print(f"✓ Use this file to replace your working glyph lexicon")
+    print("✓ Use this file to replace your working glyph lexicon")
 
 
 if __name__ == "__main__":

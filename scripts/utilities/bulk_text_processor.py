@@ -60,11 +60,11 @@ class BulkTextProcessor:
         # Use adaptive extractor that discovers new dimensions
         if use_adaptive_extractor:
             self.extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
-            logger.info(f"Using ADAPTIVE signal extractor - will discover new emotional dimensions from poetry")
+            logger.info("Using ADAPTIVE signal extractor - will discover new emotional dimensions from poetry")
             logger.info(f"Starting with: {self.extractor.get_all_dimensions()['total']} total emotional dimensions")
         else:
             self.extractor = get_poetry_extractor()
-            logger.info(f"Using standard signal extractor (original 8 dimensions)")
+            logger.info("Using standard signal extractor (original 8 dimensions)")
 
         self.use_adaptive = use_adaptive_extractor
 

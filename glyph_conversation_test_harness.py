@@ -207,30 +207,30 @@ class GlyphTestHarness:
         print(f"  - Failed: {self.results['failed_activations']}")
 
         # Glyph activation frequency
-        print(f"\n📊 Glyph activation frequency:")
+        print("\n📊 Glyph activation frequency:")
         print(f"  - Unique base glyphs activated: {len(self.results['activated_base_glyphs'])}")
         print(f"  - Unique factorial glyphs activated: {len(self.results['activated_factorial_glyphs'])}")
 
         if self.results["activated_factorial_glyphs"]:
-            print(f"\n🆕 Sample factorial glyphs that activated:")
+            print("\n🆕 Sample factorial glyphs that activated:")
             for glyph_name in sorted(self.results["activated_factorial_glyphs"])[:5]:
                 print(f"    - {glyph_name}")
 
         # Gate coverage
-        print(f"\n🎯 Gate coverage:")
+        print("\n🎯 Gate coverage:")
         for gate in sorted(self.results["gate_coverage"].keys()):
             count = len(set(self.results["gate_coverage"][gate]))
             print(f"  - {gate}: {count} unique glyphs activated")
 
         # Signal distribution
-        print(f"\n⚡ Signal distribution:")
+        print("\n⚡ Signal distribution:")
         for signal in sorted(self.results["signal_distribution"].keys())[:5]:
             count = len(self.results["signal_distribution"][signal])
             print(f"  - {signal}: {count} activations")
 
         # Top parent pairs
         if self.results["parent_activation_pairs"]:
-            print(f"\n👨‍👩‍👧 Top parent glyph pairs (for factorial glyphs):")
+            print("\n👨‍👩‍👧 Top parent glyph pairs (for factorial glyphs):")
             sorted_pairs = sorted(self.results["parent_activation_pairs"].items(), key=lambda x: x[1], reverse=True)
             for pair, count in sorted_pairs[:5]:
                 print(f"  - {pair}: {count} activations")

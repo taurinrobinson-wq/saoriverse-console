@@ -148,14 +148,14 @@ class GlyphFactorialEngine:
 
             # Fall back to JSON if CSV not available
             elif self.glyph_json_path.exists():
-                logger.warning(f"CSV not found, falling back to JSON")
+                logger.warning("CSV not found, falling back to JSON")
                 with open(self.glyph_json_path, "r", encoding="utf-8") as f:
                     self.primary_glyphs = json.load(f)
                 logger.info(f"✓ Loaded {len(self.primary_glyphs)} glyphs from JSON")
                 return True
 
             else:
-                logger.error(f"Neither CSV nor JSON glyph lexicon found")
+                logger.error("Neither CSV nor JSON glyph lexicon found")
                 return False
 
         except Exception as e:
@@ -409,7 +409,7 @@ class GlyphFactorialEngine:
         for rank, combination in enumerate(self.combinations, 1):
             combination.rank = rank
 
-        logger.info(f"✓ Scored all combinations")
+        logger.info("✓ Scored all combinations")
 
     def _calculate_novelty(self, combination: GlyphCombination) -> float:
         """Calculate how novel this combination is (0-1).
@@ -700,13 +700,13 @@ class GlyphFactorialEngine:
         print(f"✓ Total combinations: {len(self.combinations)}")
 
         if self.combinations:
-            print(f"\n✓ Score statistics:")
+            print("\n✓ Score statistics:")
             scores = [c.combined_score for c in self.combinations]
             print(f"  - Mean score: {sum(scores) / len(scores):.3f}")
             print(f"  - Max score: {max(scores):.3f}")
             print(f"  - Min score: {min(scores):.3f}")
 
-            print(f"\n✓ Top 10 combinations by score:")
+            print("\n✓ Top 10 combinations by score:")
             for combo in self.combinations[:10]:
                 print(f"\n  {combo.rank}. {combo.new_name}")
                 print(f"     Parents: {combo.parent_names[0]} × {combo.parent_names[1]}")

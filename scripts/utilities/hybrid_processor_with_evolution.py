@@ -316,12 +316,12 @@ class HybridProcessorWithEvolution:
         self.generated_glyphs = []
 
         logger.info("[HYBRID PROCESSOR] Initialized with dynamic glyph evolution")
-        logger.info(f"  - Hybrid Learner: ready")
+        logger.info("  - Hybrid Learner: ready")
         logger.info(f"  - Adaptive Extractor: {adaptive_extractor.__class__.__name__ if adaptive_extractor else 'N/A'}")
-        logger.info(f"  - Glyph Evolution: connected")
+        logger.info("  - Glyph Evolution: connected")
         if self.lexicon_aware_generator:
-            logger.info(f"  - Lexicon-Aware Generator: ready")
-            logger.info(f"    → Responses will be personalized based on learned patterns")
+            logger.info("  - Lexicon-Aware Generator: ready")
+            logger.info("    → Responses will be personalized based on learned patterns")
 
     def process_user_message(
         self,
@@ -418,7 +418,7 @@ class HybridProcessorWithEvolution:
                     logger.info(f"    - {glyph_dict.get('symbol', '?')} {glyph_dict.get('name', '?')}")
                     self.generated_glyphs.append(glyph_dict)
             else:
-                logger.info(f"  ℹ No new glyphs generated (need more pattern frequency)")
+                logger.info("  ℹ No new glyphs generated (need more pattern frequency)")
 
             # Add to conversation history
             self.conversation_history.append(
@@ -509,7 +509,7 @@ class HybridProcessorWithEvolution:
         print(f"Total new glyphs generated: {len(self.generated_glyphs)}")
 
         if self.generated_glyphs:
-            print(f"\nNEW GLYPHS GENERATED:")
+            print("\nNEW GLYPHS GENERATED:")
             for i, glyph in enumerate(self.generated_glyphs, 1):
                 emotions = " + ".join(glyph.get("core_emotions", []))
                 print(f"  {i}. {glyph.get('symbol', '?')} {glyph.get('name', '?')} ({emotions})")

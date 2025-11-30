@@ -460,7 +460,7 @@ def main():
             cleaned = cleaner.clean_text(text, verbose=True)
             stats = cleaner.get_stats()
 
-            logger.info(f"\nCleaning statistics:")
+            logger.info("\nCleaning statistics:")
             logger.info(f"  Artifacts removed: {stats['artifacts_removed']}")
             logger.info(f"  Empty lines removed: {stats['empty_lines_removed']}")
             logger.info(f"  Fragmented lines fixed: {stats['fragmented_lines_fixed']}")

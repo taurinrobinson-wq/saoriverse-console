@@ -128,7 +128,7 @@ class IDDeduplicator:
         if len(gates_present) < 12:
             print(f"   ⚠️  Only {len(gates_present)}/12 gates present")
         else:
-            print(f"   ✅ All 12 gates present")
+            print("   ✅ All 12 gates present")
 
         return True
 
@@ -175,7 +175,7 @@ class IDDeduplicator:
         print("\n" + "=" * 80)
         print("DEDUPLICATION COMPLETE")
         print("=" * 80)
-        print(f"\nResults:")
+        print("\nResults:")
         print(f"  Original: {self.fix_results['original_count']} glyphs")
         print(f"  Removed: {self.fix_results['duplicates_removed']} duplicates")
         print(f"  Final: {self.fix_results['unique_count']} glyphs")

@@ -82,7 +82,7 @@ class GlyphFromDataExtractor:
 
         # Get all signal dimensions
         dimensions = list(signals.keys())
-        print(f"\n[PATTERN EXTRACTION]")
+        print("\n[PATTERN EXTRACTION]")
         print(f"Found {len(dimensions)} emotional dimensions")
 
         # Create patterns from dimension combinations
@@ -132,7 +132,7 @@ class GlyphFromDataExtractor:
         patterns.sort(key=lambda p: p.frequency, reverse=True)
 
         print(f"Extracted {len(patterns)} significant patterns")
-        print(f"  Top patterns:")
+        print("  Top patterns:")
         for i, p in enumerate(patterns[:5]):
             print(f"    {i+1}. {' + '.join(p.dimensions)} ({p.frequency} freq, {len(p.keywords)} keywords)")
 
@@ -176,7 +176,7 @@ class GlyphFromDataExtractor:
             print("✗ No patterns available. Run extract_patterns() first.")
             return []
 
-        print(f"\n[GLYPH GENERATION]")
+        print("\n[GLYPH GENERATION]")
         print(f"Generating glyphs from {len(self.patterns)} patterns...")
 
         glyphs = []

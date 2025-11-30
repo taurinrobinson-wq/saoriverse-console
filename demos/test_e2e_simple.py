@@ -117,10 +117,10 @@ def test_privacy_e2e():
                 emotional_signals=exchange["signals"],
             )
 
-            print(f"      ✅ Logged and learned")
+            print("      ✅ Logged and learned")
 
         # Read back and verify
-        print(f"\n3️⃣  Verifying logged entries...")
+        print("\n3️⃣  Verifying logged entries...")
 
         log_path = Path(str(tmpdir / "hybrid_learning_log.jsonl"))
         logged_entries = []
@@ -133,7 +133,7 @@ def test_privacy_e2e():
         print(f"   ✅ Found {len(logged_entries)} entries in log")
 
         # Analyze entries
-        print(f"\n4️⃣  Privacy Analysis:")
+        print("\n4️⃣  Privacy Analysis:")
         print(f"   {'Entry':<8} {'Has Signals':<15} {'Has Gates':<15} {'User_Input':<15} {'AI Response':<15}")
         print(f"   {'-'*70}")
 
@@ -157,25 +157,25 @@ def test_privacy_e2e():
                 all_privacy_safe = False
 
         # Show sample entry
-        print(f"\n5️⃣  Sample Log Entry Structure:")
+        print("\n5️⃣  Sample Log Entry Structure:")
         print(json.dumps(logged_entries[0], indent=2))
 
         # Summary
-        print(f"\n" + "=" * 80)
+        print("\n" + "=" * 80)
         if all_privacy_safe and len(logged_entries) == len(test_exchanges):
             print("✅ ALL PRIVACY CHECKS PASSED")
             print("\n📋 SUMMARY:")
             print(f"  ✅ Processed {len(test_exchanges)} exchanges")
             print(f"  ✅ Logged {len(logged_entries)} entries in privacy-safe format")
-            print(f"  ✅ NO raw user_input fields in any entry")
-            print(f"  ✅ NO raw ai_response fields in any entry")
+            print("  ✅ NO raw user_input fields in any entry")
+            print("  ✅ NO raw ai_response fields in any entry")
             print(
                 f"  ✅ Signals preserved for learning: {sum(len(e.get('signals', [])) for e in logged_entries)} total signals"
             )
             print(
                 f"  ✅ Gates preserved for indexing: {sum(len(e.get('gates', [])) for e in logged_entries)} total gates"
             )
-            print(f"\n✅ System is PRIVACY-SAFE and ready for production")
+            print("\n✅ System is PRIVACY-SAFE and ready for production")
             # Use assertions instead of returning values so pytest sees no return value
             assert all_privacy_safe and len(logged_entries) == len(test_exchanges)
         else:

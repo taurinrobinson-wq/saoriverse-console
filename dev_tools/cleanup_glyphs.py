@@ -706,7 +706,7 @@ def write_outputs(
 
     # report
     with open(report_md, "w", encoding="utf-8") as f:
-        f.write(f"# Glyphs Cleanup Report\n\n")
+        f.write("# Glyphs Cleanup Report\n\n")
         f.write(f"Generated: {datetime.utcnow().isoformat()} UTC\n\n")
         f.write(f"Total cleaned rows: {len(cleaned)}\n\n")
         if fragments:

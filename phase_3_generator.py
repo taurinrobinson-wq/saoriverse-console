@@ -507,7 +507,7 @@ class Phase3Generator:
 
     def save_phase_3_glyphs(self, glyphs: List[Dict], output_path: str):
         """Save Phase 3 glyphs to JSON."""
-        print(f"\n💾 Saving Phase 3 glyphs...")
+        print("\n💾 Saving Phase 3 glyphs...")
 
         with open(output_path, "w") as f:
             json.dump(glyphs, f, indent=2)
@@ -533,10 +533,10 @@ def main():
     print("\n" + "✨" * 40)
     print("✨ PHASE 3 GENERATION COMPLETE!")
     print("✨" * 40)
-    print(f"\n✅ Results:")
+    print("\n✅ Results:")
     print(f"   Generated: {results['total_generated']} glyphs")
-    print(f"   Gates expanded: 6 (Gates 2, 5, 6, 8, 9, 10)")
-    print(f"   Status: Ready for integration")
+    print("   Gates expanded: 6 (Gates 2, 5, 6, 8, 9, 10)")
+    print("   Status: Ready for integration")
 
 
 if __name__ == "__main__":

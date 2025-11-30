@@ -91,7 +91,7 @@ class Phase3Integrator:
 
     def create_backup(self):
         """Create backup before integration."""
-        print(f"\n💾 Creating backup...")
+        print("\n💾 Creating backup...")
         shutil.copy(self.SYSTEM_JSON, self.BACKUP_PATH)
         print(f"   ✅ Backup created: {self.BACKUP_PATH}")
         self.integration_results["backup_created"] = self.BACKUP_PATH
@@ -109,7 +109,7 @@ class Phase3Integrator:
             print(f"   ⚠️  ID conflicts detected: {len(conflicts)} conflicts")
             self.integration_results["id_conflicts"] = list(conflicts)[:10]
         else:
-            print(f"   ✅ No ID conflicts")
+            print("   ✅ No ID conflicts")
             print(f"      Current ID range: {min(current_ids)}-{max(current_ids)}")
             print(f"      Phase 3 ID range: {min(phase_3_ids)}-{max(phase_3_ids)}")
 
@@ -220,20 +220,20 @@ class Phase3Integrator:
         print("\n" + "=" * 80)
         print("INTEGRATION COMPLETE")
         print("=" * 80)
-        print(f"\n📊 SYSTEM METRICS:")
+        print("\n📊 SYSTEM METRICS:")
         print(f"   Previous: {self.integration_results['current_count']} glyphs")
         print(f"   Added: {self.integration_results['phase_3_count']} glyphs")
         print(f"   Total: {self.integration_results['final_count']} glyphs")
 
-        print(f"\n🔄 RITUAL STATUS:")
+        print("\n🔄 RITUAL STATUS:")
         intact_rituals = sum(1 for status in rituals.values() if status)
         print(f"   {intact_rituals}/{len(rituals)} rituals INTACT")
 
-        print(f"\n✨ NEXT STEPS:")
-        print(f"   1. Run validation suite")
-        print(f"   2. Verify gate balance")
-        print(f"   3. Generate Phase 3 completion report")
-        print(f"   4. Prepare Phase 4 (final deployment)")
+        print("\n✨ NEXT STEPS:")
+        print("   1. Run validation suite")
+        print("   2. Verify gate balance")
+        print("   3. Generate Phase 3 completion report")
+        print("   4. Prepare Phase 4 (final deployment)")
 
         print("\n" + "=" * 80)
 
