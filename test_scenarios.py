@@ -21,7 +21,7 @@ class ScenarioTester:
         self.glyph_file = glyph_file
         self.glyphs = self.load_glyphs()
         self.gate_map = self._build_gate_map()
-        self.scenario_results = []
+        self.scenario_results: List[Dict] = []
 
     def load_glyphs(self) -> List[Dict]:
         """Load glyphs from JSON."""
@@ -150,7 +150,8 @@ class ScenarioTester:
         def normalize_word(word: str) -> str:
             """Remove common suffixes for better matching."""
             word_lower = word.lower()
-            suffixes = ["ence", "ency", "ity", "tion", "sion", "ness", "ment", "able", "ible", "ous"]
+            suffixes = ["ence", "ency", "ity", "tion",
+                        "sion", "ness", "ment", "able", "ible", "ous"]
             for suffix in suffixes:
                 if word_lower.endswith(suffix):
                     return word_lower[: -len(suffix)]
@@ -248,7 +249,8 @@ class ScenarioTester:
 
         # Analyze gate coverage
         coverage = self.analyze_gate_coverage(matching_glyphs)
-        print(f"🗺️  Gate Coverage: {coverage['coverage_percentage']:.1f}% ({len(coverage['gates'])}/12 gates)")
+        print(
+            f"🗺️  Gate Coverage: {coverage['coverage_percentage']:.1f}% ({len(coverage['gates'])}/12 gates)")
 
         # Display matched glyphs
         if matching_glyphs:
@@ -264,7 +266,8 @@ class ScenarioTester:
             expected = set(expected_gates)
             if not found_gates.intersection(expected):
                 success = False
-                print(f"\n⚠️  Warning: Expected gates {expected}, found {found_gates}")
+                print(
+                    f"\n⚠️  Warning: Expected gates {expected}, found {found_gates}")
 
         result = {
             "scenario": scenario_name,
@@ -358,7 +361,8 @@ class ScenarioTester:
             (
                 "Letting Go",
                 "I'm learning to surrender and let go of control. There's a peace in accepting what I cannot change.",
-                [8, 10, 11, 12],  # Devotion, consciousness, synchronicity, transcendence
+                # Devotion, consciousness, synchronicity, transcendence
+                [8, 10, 11, 12],
             ),
             (
                 "Sacred Acceptance",
@@ -380,7 +384,8 @@ class ScenarioTester:
             (
                 "Spiritual Crisis",
                 "I'm losing my faith, my identity, my sense of self. Yet somehow in this dissolution, something sacred is emerging.",
-                [3, 9, 10, 12],  # Transformation, selfhood, consciousness, transcendence
+                # Transformation, selfhood, consciousness, transcendence
+                [3, 9, 10, 12],
             ),
             (
                 "Wholeness in Fragmentation",
@@ -404,10 +409,12 @@ class ScenarioTester:
         total = len(self.scenario_results)
         successful = sum(1 for r in self.scenario_results if r["success"])
         total_matches = sum(r["matches"] for r in self.scenario_results)
-        avg_coverage = sum(r["coverage"] for r in self.scenario_results) / total if total > 0 else 0
+        avg_coverage = sum(r["coverage"]
+                           for r in self.scenario_results) / total if total > 0 else 0
 
         print(f"\n✅ Scenarios Tested: {total}")
-        print(f"✅ Successful: {successful}/{total} ({100*successful/total:.1f}%)")
+        print(
+            f"✅ Successful: {successful}/{total} ({100*successful/total:.1f}%)")
         print(f"✅ Total Glyph Matches: {total_matches}")
         print(f"✅ Average Gate Coverage: {avg_coverage:.1f}%")
 
@@ -435,10 +442,12 @@ class ScenarioTester:
         for gate in range(1, 13):
             count = all_gates.get(gate, 0)
             status = "✅" if count > 0 else "⚠️"
-            print(f"   Gate {gate:2d}: {status} {count:3d} matches - {gate_names[gate]}")
+            print(
+                f"   Gate {gate:2d}: {status} {count:3d} matches - {gate_names[gate]}")
 
         gates_covered = len(all_gates)
-        print(f"\n   Total Gates Accessed: {gates_covered}/12 ({100*gates_covered/12:.1f}%)")
+        print(
+            f"\n   Total Gates Accessed: {gates_covered}/12 ({100*gates_covered/12:.1f}%)")
 
         # Ritual analysis
         print("\n🔄 RITUAL SEQUENCE COVERAGE:")
@@ -455,7 +464,8 @@ class ScenarioTester:
             accessed = sum(1 for g in ritual_gates if all_gates.get(g, 0) > 0)
             percentage = 100 * accessed / len(ritual_gates)
             status = "✅" if accessed == len(ritual_gates) else "⚠️"
-            print(f"   {ritual_name:25s}: {status} {accessed}/{len(ritual_gates)} gates ({percentage:.0f}%)")
+            print(
+                f"   {ritual_name:25s}: {status} {accessed}/{len(ritual_gates)} gates ({percentage:.0f}%)")
 
         print("\n" + "=" * 70)
         print("✨ SCENARIO TESTING COMPLETE")
