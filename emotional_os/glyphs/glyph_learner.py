@@ -19,15 +19,18 @@ import os
 import sqlite3
 import time
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
+nrc: Any = None
+HAS_NRC: bool = False
 try:
-    from parser.nrc_lexicon_loader import nrc
+    from parser.nrc_lexicon_loader import nrc as _nrc
 
+    nrc = _nrc
     HAS_NRC = True
-except ImportError:
+except Exception:
+    # Leave `nrc` as Any/None when the optional dependency is unavailable
     HAS_NRC = False
-    nrc = None
 
 
 class GlyphLearner:
@@ -122,7 +125,8 @@ class GlyphLearner:
         nrc_analysis = self._analyze_with_nrc(input_text) if self.nrc else {}
 
         # 2. Find closest existing glyphs
-        similar_glyphs = self._find_similar_glyphs(emotional_terms, nrc_analysis)
+        similar_glyphs = self._find_similar_glyphs(
+            emotional_terms, nrc_analysis)
 
         # 3. Generate glyph candidate
         glyph_candidate = self._generate_glyph_candidate(
@@ -134,7 +138,8 @@ class GlyphLearner:
         )
 
         # 4. Calculate confidence
-        confidence = self._calculate_confidence(glyph_candidate, signals, emotional_terms)
+        confidence = self._calculate_confidence(
+            glyph_candidate, signals, emotional_terms)
 
         return {
             "glyph_name": glyph_candidate.get("name"),
@@ -157,7 +162,7 @@ class GlyphLearner:
         """Extract emotional vocabulary from input."""
         text_lower = text.lower()
 
-        categories = {
+        categories: Dict[str, List[str]] = {
             "intensity_words": [],
             "state_words": [],
             "relation_words": [],
@@ -182,25 +187,29 @@ class GlyphLearner:
                 categories["intensity_words"].append(word)
 
         # Emotional states
-        states = ["feel", "felt", "feeling", "seem", "seemed", "appear", "sound", "taste", "smell"]
+        states = ["feel", "felt", "feeling", "seem",
+                  "seemed", "appear", "sound", "taste", "smell"]
         for word in states:
             if word in text_lower:
                 categories["state_words"].append(word)
 
         # Relational words
-        relations = ["with", "without", "toward", "away", "between", "among", "through"]
+        relations = ["with", "without", "toward",
+                     "away", "between", "among", "through"]
         for word in relations:
             if word in text_lower:
                 categories["relation_words"].append(word)
 
         # Temporal markers
-        times = ["now", "always", "never", "before", "after", "during", "while", "when", "yesterday", "tomorrow"]
+        times = ["now", "always", "never", "before", "after",
+                 "during", "while", "when", "yesterday", "tomorrow"]
         for word in times:
             if word in text_lower:
                 categories["time_words"].append(word)
 
         # Body/visceral language
-        body = ["heart", "gut", "breath", "chest", "throat", "hands", "trembling", "aching", "burning", "numb"]
+        body = ["heart", "gut", "breath", "chest", "throat",
+                "hands", "trembling", "aching", "burning", "numb"]
         for word in body:
             if word in text_lower:
                 categories["body_words"].append(word)
@@ -225,16 +234,19 @@ class GlyphLearner:
             cursor = conn.cursor()
 
             # Get all existing glyphs
-            cursor.execute("SELECT glyph_name, description FROM glyph_lexicon LIMIT 50")
+            cursor.execute(
+                "SELECT glyph_name, description FROM glyph_lexicon LIMIT 50")
             existing_glyphs = cursor.fetchall()
             conn.close()
 
             # Score each glyph by semantic similarity
             scored = []
             for glyph_name, description in existing_glyphs:
-                score = self._semantic_similarity_score(description, emotional_terms, nrc_analysis)
+                score = self._semantic_similarity_score(
+                    description, emotional_terms, nrc_analysis)
                 if score > 0.3:  # Only include if somewhat similar
-                    scored.append({"name": glyph_name, "description": description, "similarity_score": score})
+                    scored.append(
+                        {"name": glyph_name, "description": description, "similarity_score": score})
 
             # Return top K
             scored.sort(key=lambda x: x["similarity_score"], reverse=True)
@@ -274,16 +286,19 @@ class GlyphLearner:
         """Generate a new glyph candidate."""
 
         # 1. Create glyph name from emotional language + existing patterns
-        name = self._generate_glyph_name(input_text, emotional_terms, nrc_analysis, similar_glyphs)
+        name = self._generate_glyph_name(
+            input_text, emotional_terms, nrc_analysis, similar_glyphs)
 
         # 2. Create description
-        description = self._generate_glyph_description(input_text, emotional_terms, nrc_analysis, similar_glyphs)
+        description = self._generate_glyph_description(
+            input_text, emotional_terms, nrc_analysis, similar_glyphs)
 
         # 3. Map signals to gates
         gates = self._map_signals_to_gates(signals)
 
         # 4. Determine primary signal
-        primary_signal = signals[0].get("signal", "unknown") if signals else "unknown"
+        primary_signal = signals[0].get(
+            "signal", "unknown") if signals else "unknown"
 
         return {"name": name, "description": description, "signal": primary_signal, "gates": gates}
 
@@ -300,7 +315,8 @@ class GlyphLearner:
 
         # Use NRC emotion if available
         if nrc_analysis:
-            primary_emotion = max(nrc_analysis.items(), key=lambda x: x[1])[0].title()
+            primary_emotion = max(nrc_analysis.items(),
+                                  key=lambda x: x[1])[0].title()
         else:
             primary_emotion = ""
 
@@ -347,7 +363,8 @@ class GlyphLearner:
         # Reference similar glyphs
         if similar_glyphs:
             similar_names = [g["name"] for g in similar_glyphs[:2]]
-            descriptions.append(f"Kin to {similar_names[0].lower()}, yet distinct in its calling.")
+            descriptions.append(
+                f"Kin to {similar_names[0].lower()}, yet distinct in its calling.")
 
         return " ".join(descriptions)
 
@@ -502,7 +519,8 @@ class GlyphLearner:
 
             # Get candidate
             cursor.execute(
-                "SELECT description, emotional_signal, gates FROM glyph_candidates WHERE glyph_name = ?", (glyph_name,)
+                "SELECT description, emotional_signal, gates FROM glyph_candidates WHERE glyph_name = ?", (
+                    glyph_name,)
             )
             row = cursor.fetchone()
 
@@ -518,11 +536,13 @@ class GlyphLearner:
                 INSERT INTO glyph_lexicon (glyph_name, description, gate)
                 VALUES (?, ?, ?)
             """,
-                (glyph_name, description, gates_list[0] if gates_list else "Gate 5"),
+                (glyph_name, description,
+                 gates_list[0] if gates_list else "Gate 5"),
             )
 
             # Mark candidate as promoted
-            cursor.execute("UPDATE glyph_candidates SET promoted_to_production = 1 WHERE glyph_name = ?", (glyph_name,))
+            cursor.execute(
+                "UPDATE glyph_candidates SET promoted_to_production = 1 WHERE glyph_name = ?", (glyph_name,))
 
             conn.commit()
             conn.close()
@@ -537,16 +557,20 @@ class GlyphLearner:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-            cursor.execute("SELECT COUNT(*) FROM glyph_candidates WHERE validation_status = 'pending'")
+            cursor.execute(
+                "SELECT COUNT(*) FROM glyph_candidates WHERE validation_status = 'pending'")
             pending = cursor.fetchone()[0]
 
-            cursor.execute("SELECT COUNT(*) FROM glyph_candidates WHERE promoted_to_production = 1")
+            cursor.execute(
+                "SELECT COUNT(*) FROM glyph_candidates WHERE promoted_to_production = 1")
             promoted = cursor.fetchone()[0]
 
-            cursor.execute("SELECT COUNT(DISTINCT glyph_name) FROM glyph_usage_log")
+            cursor.execute(
+                "SELECT COUNT(DISTINCT glyph_name) FROM glyph_usage_log")
             unique_glyphs_used = cursor.fetchone()[0]
 
-            cursor.execute("SELECT COUNT(DISTINCT user_hash) FROM glyph_usage_log")
+            cursor.execute(
+                "SELECT COUNT(DISTINCT user_hash) FROM glyph_usage_log")
             unique_users = cursor.fetchone()[0]
 
             conn.close()

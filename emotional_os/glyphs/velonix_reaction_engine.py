@@ -18,7 +18,7 @@ import json
 import logging
 from dataclasses import asdict, dataclass
 from datetime import datetime
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +53,8 @@ class ReactionChain:
     catalyst: Optional[str] = None  # Optional catalyst element
     result: Optional[str] = None  # Result element symbol
     trace_outcome: str = ""  # Narrative description of the transformation
-    conditions: Optional[Dict] = None  # Additional conditions for reaction
+    # Additional conditions for reaction
+    conditions: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> dict:
         """Convert to dictionary representation."""
@@ -310,7 +311,8 @@ class VelonixReactionEngine:
         ]
 
         self.reactions = reactions_data
-        logger.info(f"Initialized {len(self.reactions)} emotional reaction chains")
+        logger.info(
+            f"Initialized {len(self.reactions)} emotional reaction chains")
 
     def react(self, inputs: List[str], catalyst: Optional[str] = None, verbose: bool = False) -> Optional[Dict]:
         """
@@ -345,13 +347,15 @@ class VelonixReactionEngine:
                     self.reaction_history.append(result_dict)
 
                     if verbose:
-                        logger.info(f"Reaction: {inputs} + {catalyst} → {result_symbol}")
+                        logger.info(
+                            f"Reaction: {inputs} + {catalyst} → {result_symbol}")
                         logger.info(f"Outcome: {reaction.trace_outcome}")
 
                     return result_dict
 
         if verbose:
-            logger.warning(f"No reaction found for inputs={inputs}, catalyst={catalyst}")
+            logger.warning(
+                f"No reaction found for inputs={inputs}, catalyst={catalyst}")
 
         return None
 
@@ -403,7 +407,8 @@ class VelonixReactionEngine:
     def add_custom_reaction(self, reaction: ReactionChain) -> None:
         """Add a custom reaction chain."""
         self.reactions.append(reaction)
-        logger.info(f"Added custom reaction: {reaction.inputs} → {reaction.result}")
+        logger.info(
+            f"Added custom reaction: {reaction.inputs} → {reaction.result}")
 
     def export_elements(self) -> Dict:
         """Export all elements as JSON-serializable dict."""
