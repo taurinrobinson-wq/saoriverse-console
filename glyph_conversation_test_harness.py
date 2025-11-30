@@ -13,16 +13,15 @@ Tests:
 5. Signal strength distribution
 """
 
+from emotional_os.glyphs.signal_parser import parse_input
 import json
 import statistics
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, cast
 
 sys.path.insert(0, "/workspaces/saoriverse-console")
-
-from emotional_os.glyphs.signal_parser import parse_input
 
 
 class GlyphTestHarness:
@@ -32,10 +31,12 @@ class GlyphTestHarness:
         """Initialize test harness."""
         self.lexicon_path = Path(lexicon_path)
         self.glyphs = self._load_glyphs()
-        self.base_glyphs = [g for g in self.glyphs if not g.get("is_factorial", False)]
-        self.factorial_glyphs = [g for g in self.glyphs if g.get("is_factorial", True)]
+        self.base_glyphs = [
+            g for g in self.glyphs if not g.get("is_factorial", False)]
+        self.factorial_glyphs = [
+            g for g in self.glyphs if g.get("is_factorial", True)]
 
-        self.results = {
+        self.results: Dict[str, Any] = {
             "total_tests": 0,
             "successful_activations": 0,
             "failed_activations": 0,
@@ -100,10 +101,12 @@ class GlyphTestHarness:
 
         try:
             # Parse the input using existing parser
-            result = parse_input(message, lexicon_path=str(self.lexicon_path))
+            result = cast(Dict[str, Any], parse_input(
+                message, lexicon_path=str(self.lexicon_path)))
 
-            # Extract matched glyphs
-            matched_glyphs = result.get("glyphs", [])
+            # Extract matched glyphs (ensure types for mypy)
+            matched_glyphs = cast(
+                List[Dict[str, Any]], result.get("glyphs", []))
             print(f"\n✓ Matched {len(matched_glyphs)} glyphs")
 
             if matched_glyphs:
@@ -116,12 +119,14 @@ class GlyphTestHarness:
                     score = glyph.get("combined_score", 0)
 
                     marker = "🆕" if is_factorial else "🔹"
-                    print(f"  {marker} {glyph_name} (ID: {glyph_id}, Gate: {gate}, Score: {score:.3f})")
+                    print(
+                        f"  {marker} {glyph_name} (ID: {glyph_id}, Gate: {gate}, Score: {score:.3f})")
 
                     # Track statistics
                     self.results["glyph_activation_counts"][glyph_name] += 1
                     if is_factorial:
-                        self.results["activated_factorial_glyphs"].add(glyph_name)
+                        self.results["activated_factorial_glyphs"].add(
+                            glyph_name)
                     else:
                         self.results["activated_base_glyphs"].add(glyph_name)
 
@@ -129,22 +134,24 @@ class GlyphTestHarness:
                     self.results["gate_coverage"][gate].append(glyph_name)
 
                     # Track signals
-                    signals = result.get("signals", [])
+                    signals = cast(List[str], result.get("signals", []))
                     for signal in signals:
-                        self.results["signal_distribution"][signal].append(glyph_name)
+                        self.results["signal_distribution"][signal].append(
+                            glyph_name)
 
                     # If factorial, track parent relationship
                     if is_factorial and "parent_glyphs" in glyph:
-                        parents = glyph["parent_glyphs"]
+                        parents = cast(Dict[str, Any], glyph["parent_glyphs"])
                         pair_key = f"{parents.get('name1', 'Unknown')} × {parents.get('name2', 'Unknown')}"
                         self.results["parent_activation_pairs"][pair_key] += 1
 
             # Extract emotional signals
-            signals = result.get("signals", [])
-            print(f"\n📊 Emotional signals: {', '.join(signals) if signals else 'None'}")
+            signals = cast(List[str], result.get("signals", []))
+            print(
+                f"\n📊 Emotional signals: {', '.join(signals) if signals else 'None'}")
 
             # Extract response
-            response = result.get("response", "")
+            response = cast(str, result.get("response", ""))
             if response:
                 print(f"\n💬 Response: {response[:150]}...")
 
@@ -198,7 +205,8 @@ class GlyphTestHarness:
 
         # Success rate
         success_rate = (
-            (self.results["successful_activations"] / self.results["total_tests"] * 100)
+            (self.results["successful_activations"] /
+             self.results["total_tests"] * 100)
             if self.results["total_tests"] > 0
             else 0
         )
@@ -208,8 +216,10 @@ class GlyphTestHarness:
 
         # Glyph activation frequency
         print("\n📊 Glyph activation frequency:")
-        print(f"  - Unique base glyphs activated: {len(self.results['activated_base_glyphs'])}")
-        print(f"  - Unique factorial glyphs activated: {len(self.results['activated_factorial_glyphs'])}")
+        print(
+            f"  - Unique base glyphs activated: {len(self.results['activated_base_glyphs'])}")
+        print(
+            f"  - Unique factorial glyphs activated: {len(self.results['activated_factorial_glyphs'])}")
 
         if self.results["activated_factorial_glyphs"]:
             print("\n🆕 Sample factorial glyphs that activated:")
@@ -231,30 +241,35 @@ class GlyphTestHarness:
         # Top parent pairs
         if self.results["parent_activation_pairs"]:
             print("\n👨‍👩‍👧 Top parent glyph pairs (for factorial glyphs):")
-            sorted_pairs = sorted(self.results["parent_activation_pairs"].items(), key=lambda x: x[1], reverse=True)
+            sorted_pairs = sorted(self.results["parent_activation_pairs"].items(
+            ), key=lambda x: x[1], reverse=True)
             for pair, count in sorted_pairs[:5]:
                 print(f"  - {pair}: {count} activations")
 
     def _generate_statistics(self) -> Dict:
         """Generate test statistics."""
-        activation_counts = list(self.results["glyph_activation_counts"].values())
+        activation_counts = list(
+            self.results["glyph_activation_counts"].values())
 
         return {
             "total_tests": self.results["total_tests"],
             "successful_tests": self.results["successful_activations"],
             "failed_tests": self.results["failed_activations"],
             "success_rate_percent": (
-                (self.results["successful_activations"] / self.results["total_tests"] * 100)
+                (self.results["successful_activations"] /
+                 self.results["total_tests"] * 100)
                 if self.results["total_tests"] > 0
                 else 0
             ),
             "unique_base_glyphs_activated": len(self.results["activated_base_glyphs"]),
             "unique_factorial_glyphs_activated": len(self.results["activated_factorial_glyphs"]),
             "total_unique_glyphs_activated": (
-                len(self.results["activated_base_glyphs"]) + len(self.results["activated_factorial_glyphs"])
+                len(self.results["activated_base_glyphs"]) +
+                len(self.results["activated_factorial_glyphs"])
             ),
             "average_glyphs_per_conversation": (
-                sum(activation_counts) / len(activation_counts) if activation_counts else 0
+                sum(activation_counts) /
+                len(activation_counts) if activation_counts else 0
             ),
             "gates_covered": len(self.results["gate_coverage"]),
             "signals_detected": len(self.results["signal_distribution"]),
@@ -265,12 +280,14 @@ class GlyphTestHarness:
         return {
             "gate_distribution": {gate: len(set(glyphs)) for gate, glyphs in self.results["gate_coverage"].items()},
             "factorial_glyph_discovery_rate": (
-                (len(self.results["activated_factorial_glyphs"]) / len(self.factorial_glyphs) * 100)
+                (len(self.results["activated_factorial_glyphs"]
+                     ) / len(self.factorial_glyphs) * 100)
                 if self.factorial_glyphs
                 else 0
             ),
             "base_glyph_coverage": (
-                (len(self.results["activated_base_glyphs"]) / len(self.base_glyphs) * 100) if self.base_glyphs else 0
+                (len(self.results["activated_base_glyphs"]) /
+                 len(self.base_glyphs) * 100) if self.base_glyphs else 0
             ),
             "parent_pair_utilization": len(self.results["parent_activation_pairs"]),
         }
@@ -305,7 +322,8 @@ def main():
     results = harness.run_all_tests()
 
     # Save report
-    harness.save_test_report("/workspaces/saoriverse-console/GLYPH_TEST_REPORT.json")
+    harness.save_test_report(
+        "/workspaces/saoriverse-console/GLYPH_TEST_REPORT.json")
 
     # Print final summary
     stats = results["statistics"]
