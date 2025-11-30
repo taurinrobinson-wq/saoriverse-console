@@ -475,7 +475,7 @@ class GlyphFactorialEngine:
         Higher score = addresses under-represented emotional territory.
         """
         # Count how many times each gate appears
-        gate_counts = defaultdict(int)
+        gate_counts: Dict[int, int] = defaultdict(int)
         for glyph in self.primary_glyphs:
             gate_num = int(glyph["gate"].split()[-1]
                            ) if "gate" in glyph and glyph["gate"] else 5
@@ -522,9 +522,9 @@ class GlyphFactorialEngine:
             f"Removed {before_self_removal - len(self.combinations)} self-combinations")
 
         # Step 2: Remove duplicates and semantic near-duplicates
-        seen_voltages = set()
-        seen_descriptions = {}
-        filtered = []
+        seen_voltages: Set[str] = set()
+        seen_descriptions: Dict[str, GlyphCombination] = {}
+        filtered: List[GlyphCombination] = []
         duplicates = 0
 
         for combo in self.combinations:
