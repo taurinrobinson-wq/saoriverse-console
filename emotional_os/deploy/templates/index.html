@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FirstPerson - Personal AI Companion</title>
-    <link rel="icon" type="image/svg+xml" href="/static/graphics/FirstPerson-Logo-normalized.svg">
+    <link rel="icon" type="image/svg+xml" href="/static/graphics/FirstPerson-Logo.svg">
     <style>
         * {
             margin: 0;
@@ -14,14 +14,14 @@
         }
 
         /* Constrain FirstPerson normalized SVGs to prevent oversized rendering */
-        img[src*="FirstPerson-Logo-normalized.svg"],
+        img[src*="FirstPerson-Logo.svg"],
         svg[data-logo="firstperson"],
-        .logo-section img[src*="FirstPerson-Logo-normalized.svg"],
+        .logo-section img[src*="FirstPerson-Logo.svg"],
         .logo-fallback svg {
-            max-width: 120px !important;
-            max-height: 120px !important;
-            width: 120px !important;
-            height: 120px !important;
+            max-width: 180px !important;
+            max-height: 180px !important;
+            width: 180px !important;
+            height: 180px !important;
             display: inline-block !important;
             overflow: visible !important;
         }
@@ -49,7 +49,7 @@
         }
 
         .logo-section img {
-            width: 120px;
+            width: 180px;
             height: auto;
             margin-bottom: 1rem;
         }
@@ -210,7 +210,7 @@
     <div class="splash-container">
         <!-- Logo Section -->
         <div class="logo-section">
-            <img id="firstperson-logo-img" src="/static/graphics/FirstPerson-Logo-normalized.svg" alt="FirstPerson Logo"
+            <img id="firstperson-logo-img" src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson Logo"
                 onerror="(function(el){try{el.style.display='none'; var fb=document.querySelector('.logo-fallback'); if(fb) fb.style.display='block';}catch(e){console.warn('logo onerror',e);} })(this);">
             <div class="logo-fallback" style="display: none;" aria-hidden="true">
                 <!-- Normalized inline SVG fallback (keeps viewBox clean to avoid scaling issues) -->
@@ -226,7 +226,6 @@
                     </g>
                 </svg>
             </div>
-            <div class="logo-text">FirstPerson</div>
             <div class="logo-subtitle">Personal AI<br>Companion</div>
         </div>
 

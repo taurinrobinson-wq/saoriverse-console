@@ -9,6 +9,42 @@ except Exception:
 
 import streamlit as st
 
+try:
+    from emotional_os.deploy.modules.session_utils import get_session_value
+except Exception:
+    def get_session_value(session_override, key, default=None):
+        try:
+            return st.session_state.get(key, default)
+        except Exception:
+            try:
+                return getattr(st.session_state, key, default)
+            except Exception:
+                return default
+
+
+def _safe_set_session(key, value):
+    """Set a session value if possible; swallow errors when not running under Streamlit."""
+    try:
+        try:
+            st.session_state[key] = value
+            return
+        except Exception:
+            pass
+        try:
+            setattr(st.session_state, key, value)
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+
+def _safe_del_query_param(key):
+    try:
+        if key in st.query_params:
+            del st.query_params[key]
+    except Exception:
+        pass
+
 
 class SaoynxAuthentication:
     """Authentication and session management"""
@@ -381,7 +417,10 @@ class SaoynxAuthentication:
         if not st.session_state.authenticated:
             # Streamlit exposes query params as lists (e.g. {'session_token': ['...']}).
             # Be defensive: accept either a raw string or a single-element list.
-            query_params = st.query_params or {}
+            try:
+                query_params = st.query_params or {}
+            except Exception:
+                query_params = {}
             raw_token = query_params.get("session_token")
             session_token = None
             if isinstance(raw_token, (list, tuple)):
@@ -393,10 +432,10 @@ class SaoynxAuthentication:
                 session_result = self.validate_session_token(str(session_token))
                 if session_result["valid"]:
                     data = session_result["data"]
-                    st.session_state.authenticated = True
-                    st.session_state.user_id = data["user_id"]
-                    st.session_state.username = data["username"]
-                    st.session_state.session_expires = data["expires"]
+                    _safe_set_session('authenticated', True)
+                    _safe_set_session('user_id', data.get("user_id"))
+                    _safe_set_session('username', data.get("username"))
+                    _safe_set_session('session_expires', data.get("expires"))
                     # If we don't already have the user's first/last name in
                     # the session (tokens only carry username+user_id), try
                     # to fetch the profile from Supabase so UI can show the
@@ -496,9 +535,9 @@ class SaoynxAuthentication:
         if not self.supabase_configured:
             if username and password:
                 user_id = str(uuid.uuid4())
-                st.session_state.authenticated = True
-                st.session_state.user_id = user_id
-                st.session_state.username = username
+                _safe_set_session('authenticated', True)
+                _safe_set_session('user_id', user_id)
+                _safe_set_session('username', username)
                 if first_name:
                     st.session_state["first_name"] = first_name
                 if last_name:
@@ -537,9 +576,9 @@ class SaoynxAuthentication:
                     # If the remote returned a user id/profile, auto-authenticate
                     user_id = data.get("user_id") or data.get("id")
                     if user_id:
-                        st.session_state.authenticated = True
-                        st.session_state.user_id = user_id
-                        st.session_state.username = username
+                        _safe_set_session('authenticated', True)
+                        _safe_set_session('user_id', user_id)
+                        _safe_set_session('username', username)
                         # Store the JWT token for authenticated API calls
                         if data.get("token") or data.get("access_token"):
                             st.session_state.user_jwt_token = data.get("token") or data.get("access_token")
@@ -578,11 +617,13 @@ class SaoynxAuthentication:
         st.rerun()
 
     def logout(self):
-        st.session_state.authenticated = False
-        st.session_state.user_id = None
-        st.session_state.username = None
-        st.session_state.user_jwt_token = None  # Clear JWT token
-        st.session_state.session_expires = None
-        if "session_token" in st.query_params:
-            del st.query_params["session_token"]
-        st.rerun()
+        _safe_set_session('authenticated', False)
+        _safe_set_session('user_id', None)
+        _safe_set_session('username', None)
+        _safe_set_session('user_jwt_token', None)  # Clear JWT token
+        _safe_set_session('session_expires', None)
+        _safe_del_query_param('session_token')
+        try:
+            st.rerun()
+        except Exception:
+            pass

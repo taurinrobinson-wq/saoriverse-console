@@ -275,7 +275,25 @@ def ensure_processing_prefs():
 
 
 def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
-    """Decode an AI reply using the local parser and return (composed_response, debug_info)."""
+    """Decode an AI reply using the local parser and return (composed_response, debug_info).
+
+    This function is safe to call from non-Streamlit contexts when the
+    optional `show_local` parameter is provided (True/False). When
+    `show_local` is None the function will attempt to read
+    `st.session_state.get('show_local_decoding')` as before.
+    """
+    def _get_show_local(flag):
+        try:
+            if flag is not None:
+                return bool(flag)
+        except Exception:
+            pass
+        try:
+            return os.environ.get('FP_SHOW_LOCAL_DECODING') == '1' or st.session_state.get(
+                'show_local_decoding', False)
+        except Exception:
+            return False
+
     try:
         from emotional_os.glyphs.signal_parser import parse_input
     except Exception:
@@ -348,7 +366,7 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         return ai_reply, {}
 
 
-def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_url: str, supabase_key: str) -> tuple:
+def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_url: str, supabase_key: str, session_state_override: dict = None) -> tuple:
     """Run the full hybrid pipeline: local parse -> AI -> local decode.
 
     Returns (response_text, debug_info_dict, local_analysis_dict)
@@ -368,6 +386,27 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     glyphs = local_analysis.get("glyphs", [])
     voltage_response = local_analysis.get("voltage_response", "")
     ritual_prompt = local_analysis.get("ritual_prompt", "")
+
+    # Use a shared session helper so callers (FastAPI) can pass a simple
+    # `session_state_override` while Streamlit continues to use its
+    # `st.session_state`. Import locally to avoid import-time Streamlit
+    # dependency in service processes.
+    try:
+        from emotional_os.deploy.modules.session_utils import get_session_value
+    except Exception:
+        def get_session_value(session_override, key, default=None):
+            try:
+                if session_override is not None:
+                    try:
+                        return session_override.get(key, default)
+                    except Exception:
+                        return getattr(session_override, key, default)
+                return st.session_state.get(key, default)
+            except Exception:
+                try:
+                    return getattr(st.session_state, key, default)
+                except Exception:
+                    return default
 
     # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
     if os.environ.get("LOCAL_DEV_MODE") == "1":
