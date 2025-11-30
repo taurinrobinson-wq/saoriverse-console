@@ -34,9 +34,11 @@ class AntonymGlyph:
     pairing: str  # e.g., "ζ × α"
     name: str
     description: str
-    opposite_emotions: List[str] = None  # Emotions this opposes
-    activation_signals: List[str] = None
-    gate: str = None
+    from typing import Any
+
+    opposite_emotions: Optional[List[str]] = None  # Emotions this opposes
+    activation_signals: Optional[List[str]] = None
+    gate: Optional[str] = None
 
     def __post_init__(self):
         if self.opposite_emotions is None:
@@ -67,7 +69,8 @@ class AntonymGlyphsIntegration:
 
         self.antonym_glyphs: List[AntonymGlyph] = []
         self.primary_glyphs: Dict[str, Dict] = {}
-        self.antonym_map: Dict[str, str] = {}  # Maps primary glyph to antonym base emotion
+        # Maps primary glyph to antonym base emotion
+        self.antonym_map: Dict[str, str] = {}
         self.loaded = False
 
     def load_antonym_glyphs(self) -> bool:
@@ -78,7 +81,8 @@ class AntonymGlyphsIntegration:
         """
         try:
             if not self.antonym_source.exists():
-                logger.error(f"Antonym glyphs file not found: {self.antonym_source}")
+                logger.error(
+                    f"Antonym glyphs file not found: {self.antonym_source}")
                 return False
 
             with open(self.antonym_source, "r", encoding="utf-8") as f:
@@ -205,10 +209,12 @@ class AntonymGlyphsIntegration:
 
                 # Direct name match
                 if primary_name.lower() in antonym_base:
-                    self.antonym_map[primary_glyph["glyph_name"]] = antonym.base_emotion
+                    self.antonym_map[primary_glyph["glyph_name"]
+                                     ] = antonym.base_emotion
                     break
 
-        logger.info(f"✓ Built antonym map with {len(self.antonym_map)} mappings")
+        logger.info(
+            f"✓ Built antonym map with {len(self.antonym_map)} mappings")
         return self.antonym_map
 
     def initialize(self) -> bool:
@@ -444,7 +450,8 @@ class AntonymGlyphsIntegration:
             conn.commit()
             conn.close()
 
-            logger.info(f"✓ Inserted {len(self.antonym_glyphs)} antonym glyphs into database")
+            logger.info(
+                f"✓ Inserted {len(self.antonym_glyphs)} antonym glyphs into database")
             return True
 
         except Exception as e:
@@ -503,5 +510,6 @@ def main():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(name)s] - %(message)s")
+    logging.basicConfig(level=logging.INFO,
+                        format="%(asctime)s - [%(name)s] - %(message)s")
     main()
