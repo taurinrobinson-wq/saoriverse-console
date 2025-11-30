@@ -21,7 +21,7 @@ import logging
 import sqlite3
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -34,8 +34,6 @@ class AntonymGlyph:
     pairing: str  # e.g., "ζ × α"
     name: str
     description: str
-    from typing import Any
-
     opposite_emotions: Optional[List[str]] = None  # Emotions this opposes
     activation_signals: Optional[List[str]] = None
     gate: Optional[str] = None

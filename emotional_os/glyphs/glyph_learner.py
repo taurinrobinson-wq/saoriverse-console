@@ -236,11 +236,15 @@ class GlyphLearner:
             # Get all existing glyphs
             cursor.execute(
                 "SELECT glyph_name, description FROM glyph_lexicon LIMIT 50")
-            existing_glyphs = cursor.fetchall()
+            from typing import Tuple
+
+            existing_glyphs: List[Tuple[str, str]] = cursor.fetchall()
             conn.close()
 
             # Score each glyph by semantic similarity
-            scored = []
+            from typing import Any
+
+            scored: List[Dict[str, Any]] = []
             for glyph_name, description in existing_glyphs:
                 score = self._semantic_similarity_score(
                     description, emotional_terms, nrc_analysis)

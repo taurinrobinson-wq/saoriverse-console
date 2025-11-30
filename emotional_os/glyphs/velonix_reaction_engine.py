@@ -77,7 +77,7 @@ class VelonixReactionEngine:
         """Initialize the VELΩNIX engine with elements and reactions."""
         self.elements: Dict[str, EmotionalElement] = {}
         self.reactions: List[ReactionChain] = []
-        self.reaction_history: List[Dict] = []
+        self.reaction_history: List[Dict[str, Any]] = []
 
         # Initialize with default elements
         self._initialize_elements()
@@ -314,7 +314,7 @@ class VelonixReactionEngine:
         logger.info(
             f"Initialized {len(self.reactions)} emotional reaction chains")
 
-    def react(self, inputs: List[str], catalyst: Optional[str] = None, verbose: bool = False) -> Optional[Dict]:
+    def react(self, inputs: List[str], catalyst: Optional[str] = None, verbose: bool = False) -> Optional[Dict[str, Any]]:
         """
         Execute an emotional reaction.
 
@@ -332,14 +332,15 @@ class VelonixReactionEngine:
         for reaction in self.reactions:
             if set(reaction.inputs) == input_set and reaction.catalyst == catalyst:
                 result_symbol = reaction.result
-                result_element = self.elements.get(result_symbol)
+                result_element = self.elements.get(
+                    result_symbol) if result_symbol is not None else None
 
                 if result_element:
-                    result_dict = {
+                    result_dict: Dict[str, Any] = {
                         "result_element": result_element,
                         "trace_outcome": reaction.trace_outcome,
                         "inputs": [self.elements[sym] for sym in inputs],
-                        "catalyst": self.elements.get(catalyst) if catalyst else None,
+                        "catalyst": self.elements.get(catalyst) if catalyst is not None else None,
                         "timestamp": datetime.now().isoformat(),
                     }
 
@@ -379,11 +380,12 @@ class VelonixReactionEngine:
             if reaction_inputs.issubset(available_set):
                 # Check if catalyst is available or not needed
                 if reaction.catalyst is None or reaction.catalyst in available_set:
-                    result_element = self.elements.get(reaction.result)
+                    result_element = self.elements.get(
+                        reaction.result) if reaction.result is not None else None
                     possible.append(
                         {
                             "inputs": [self.elements[sym] for sym in reaction.inputs],
-                            "catalyst": self.elements.get(reaction.catalyst) if reaction.catalyst else None,
+                            "catalyst": self.elements.get(reaction.catalyst) if reaction.catalyst is not None else None,
                             "result": result_element,
                             "trace_outcome": reaction.trace_outcome,
                         }
