@@ -266,10 +266,10 @@ def main():
             httpd.docx_file = filepath
             url = f"http://localhost:{port}/"
 
-            print(f"✅ DOCX Viewer started!")
+            print("✅ DOCX Viewer started!")
             print(f"📄 File: {filepath}")
             print(f"🌐 Open: {url}")
-            print(f"📊 Press Ctrl+C to stop\n")
+            print("📊 Press Ctrl+C to stop\n")
 
             # Try to open browser
             try:

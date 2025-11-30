@@ -21,7 +21,7 @@ try:
     # Verify table was created
     cursor.execute("SELECT COUNT(*) FROM glyph_lexicon;")
     count = cursor.fetchone()[0]
-    print(f"✓ Database initialized successfully")
+    print("✓ Database initialized successfully")
     print(f"✓ glyph_lexicon table has {count} rows")
 
     conn.close()

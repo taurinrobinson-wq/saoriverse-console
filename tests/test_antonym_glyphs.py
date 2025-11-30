@@ -234,7 +234,7 @@ class AntonymGlyphsTestSuite:
         print(f"✗ Failed: {self.failed_tests}")
 
         if self.failed_tests == 0:
-            print(f"\n🎉 ALL TESTS PASSED!")
+            print("\n🎉 ALL TESTS PASSED!")
         else:
             print(f"\n⚠️  {self.failed_tests} test(s) failed")
 

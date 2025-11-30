@@ -190,7 +190,7 @@ class RitualExecutionTester:
             print(f"   ❌ Found {duplicates} duplicate IDs")
 
         if errors == 0:
-            print(f"   ✅ No integrity errors")
+            print("   ✅ No integrity errors")
         if warnings > 0:
             print(f"   ⚠️  {warnings} minor warnings")
 

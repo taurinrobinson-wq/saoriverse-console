@@ -161,7 +161,7 @@ class VelonixVisualizer:
         # Draw arrow from inputs to result (or from catalyst)
         arrow_start_x = 450 if catalyst else 200
         svg_parts.append(
-            f"<defs>"
+            "<defs>"
             f'  <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">'
             f'    <polygon points="0 0, 10 3, 0 6" fill="#666"/>'
             f"  </marker>"
@@ -396,10 +396,10 @@ class EmotionalArchive:
 
     def export_as_narrative(self) -> str:
         """Export archive as a poetic narrative."""
-        narrative = f"═══════════════════════════════════════════════════════════\n"
+        narrative = "═══════════════════════════════════════════════════════════\n"
         narrative += f"           {self.archive_name.upper()}\n"
-        narrative += f"           Legacy of Emotional Transformations\n"
-        narrative += f"═══════════════════════════════════════════════════════════\n\n"
+        narrative += "           Legacy of Emotional Transformations\n"
+        narrative += "═══════════════════════════════════════════════════════════\n\n"
 
         for i, entry in enumerate(self.entries, 1):
             narrative += f"Entry {i}: {entry['timestamp']}\n"

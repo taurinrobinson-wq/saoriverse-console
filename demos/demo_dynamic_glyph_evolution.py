@@ -209,7 +209,7 @@ def demo_dynamic_glyph_evolution():
             with open(export_file, "r") as f:
                 exported = json.load(f)
             print(f"  File size: {Path(export_file).stat().st_size / 1024:.1f} KB")
-            print(f"  Ready for system integration")
+            print("  Ready for system integration")
 
         # Show conversation summary
         print("\n[CONVERSATION ANALYSIS]")

@@ -47,7 +47,7 @@ def _ensure_indexed() -> bool:
 
     try:
         if not ANTONYM_INDEX_PATH.exists():
-            logger.warning(f"Antonym glyphs index not found. Run antonym_glyphs_indexer.py first.")
+            logger.warning("Antonym glyphs index not found. Run antonym_glyphs_indexer.py first.")
             return False
 
         with open(ANTONYM_INDEX_PATH, "r", encoding="utf-8") as f:
@@ -352,7 +352,7 @@ def main():
 
     antonym = find_antonym_by_emotion("joy")
     if antonym:
-        print(f"\n✓ Found antonym for 'joy':")
+        print("\n✓ Found antonym for 'joy':")
         print(f"{format_antonym_for_display(antonym)}")
     else:
         print("\n✗ No antonym found for 'joy'")
@@ -364,7 +364,7 @@ def main():
 
     opposite = suggest_emotional_opposite("grief")
     if opposite:
-        print(f"\n✓ Emotional opposite of 'grief':")
+        print("\n✓ Emotional opposite of 'grief':")
         print(f"{format_antonym_for_display(opposite)}")
 
     print("\n" + "=" * 80)

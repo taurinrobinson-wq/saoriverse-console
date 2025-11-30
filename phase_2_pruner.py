@@ -298,7 +298,7 @@ class Phase2Pruner:
         # Filter glyphs - keep those whose 'id' is not in removed_ids
         new_glyphs = [g for g in self.glyphs if g.get("id") not in removed_ids]
 
-        print(f"   ✅ Filtered glyphs")
+        print("   ✅ Filtered glyphs")
         print(f"   ✅ New total: {len(new_glyphs)} glyphs (removed {len(removed_ids)})")
 
         return new_glyphs
@@ -334,7 +334,7 @@ def main():
     # Initialize pruner
     pruner = Phase2Pruner("/workspaces/saoriverse-console/emotional_os/glyphs/glyph_lexicon_rows.json")
 
-    print(f"\n📊 System Status:")
+    print("\n📊 System Status:")
     print(f"   Total glyphs loaded: {len(pruner.glyphs)}")
     print(f"   Gate 3 glyphs: {len(pruner.gate_glyphs[3])}")
     print(f"   Gate 7 glyphs: {len(pruner.gate_glyphs[7])}")
@@ -356,10 +356,10 @@ def main():
     print("\n" + "✨" * 40)
     print("✨ PHASE 2 PRUNING COMPLETE!")
     print("✨" * 40)
-    print(f"\n✅ Results:")
+    print("\n✅ Results:")
     print(f"   Removed: {pruning_results['total_removed']} glyphs")
     print(f"   New total: {len(new_glyphs)} glyphs")
-    print(f"   System status: Ready for Phase 3")
+    print("   System status: Ready for Phase 3")
 
 
 if __name__ == "__main__":

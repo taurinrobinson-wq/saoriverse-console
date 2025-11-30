@@ -150,7 +150,7 @@ def combined_factorial_and_pruning_pipeline():
     # Get statistics
     stats = pruning_engine.get_pruning_statistics()
 
-    print(f"\n✓ Advanced pruning complete:")
+    print("\n✓ Advanced pruning complete:")
     print(f"  Total evaluated: {stats['total_evaluated']:,}")
     print(f"  Recommended to prune: {stats['total_to_prune']:,} ({stats['prune_percentage']})")
     print(f"  Recommended to keep: {stats['total_to_keep']:,}")
@@ -162,8 +162,8 @@ def combined_factorial_and_pruning_pipeline():
 
     kept_candidates = [c for c in candidates if not c.should_prune]
 
-    print(f"\nExpansion Pipeline Results:")
-    print(f"  Original base glyphs: 64")
+    print("\nExpansion Pipeline Results:")
+    print("  Original base glyphs: 64")
     print(f"  Factorial combinations generated: {len(factorial_engine.combinations):,}")
     print(f"  After basic pruning: {kept:,}")
     print(f"  After advanced 5-layer pruning: {len(kept_candidates):,}")
@@ -171,7 +171,7 @@ def combined_factorial_and_pruning_pipeline():
     print(f"  Expansion ratio: {(64 + len(kept_candidates))/64:.1f}x")
 
     # Show top new glyphs
-    print(f"\nTop 5 New Glyphs (by advanced score):")
+    print("\nTop 5 New Glyphs (by advanced score):")
     top_candidates = sorted(kept_candidates, key=lambda x: x.combined_prune_score, reverse=True)[:5]
     for i, candidate in enumerate(top_candidates, 1):
         print(f"\n  {i}. {candidate.glyph_name}")
@@ -194,7 +194,7 @@ def combined_factorial_and_pruning_pipeline():
     # Create comprehensive report
     report_path = "emotional_os/glyphs/FACTORIAL_PRUNING_REPORT.json"
     report = pruning_engine.create_pruning_report(output_path=report_path)
-    print(f"✓ Created comprehensive pruning report")
+    print("✓ Created comprehensive pruning report")
     print(f"  Location: {report_path}")
 
     # ========== PHASE 6: OPTIONAL - SYNC TO JSON ==========

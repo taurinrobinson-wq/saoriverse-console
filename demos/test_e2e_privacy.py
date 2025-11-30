@@ -93,7 +93,7 @@ def test_e2e_privacy_masking():
                 result = processor.process_user_message(
                     user_id=exchange["user_id"], user_message=exchange["message"], context={}
                 )
-                print(f"   ✅ Processing complete")
+                print("   ✅ Processing complete")
 
                 if "error" in result:
                     print(f"   ⚠️  Processing warning: {result['error']}")
@@ -101,7 +101,7 @@ def test_e2e_privacy_masking():
                 print(f"   ⚠️  Error processing: {e}")
 
         # Read back logged entries
-        print(f"\n📊 Checking logged entries...")
+        print("\n📊 Checking logged entries...")
         try:
             log_path = tmpdir / "hybrid_learning_log.jsonl"
             if log_path.exists():
@@ -114,11 +114,11 @@ def test_e2e_privacy_masking():
 
                 # Analyze first entry
                 if logged_entries:
-                    print(f"\n🔍 First Log Entry Structure:")
+                    print("\n🔍 First Log Entry Structure:")
                     print(json.dumps(logged_entries[0], indent=2))
 
                     # Verify privacy format
-                    print(f"\n🔐 Privacy Verification:")
+                    print("\n🔐 Privacy Verification:")
                     checks = {
                         "✅ NO user_input": "user_input" not in logged_entries[0],
                         "✅ NO ai_response": "ai_response" not in logged_entries[0],
@@ -136,9 +136,9 @@ def test_e2e_privacy_masking():
                             all_pass = False
 
                     if all_pass:
-                        print(f"\n   ✅ Log format is PRIVACY-SAFE")
+                        print("\n   ✅ Log format is PRIVACY-SAFE")
                     else:
-                        print(f"\n   ❌ Log format has PRIVACY ISSUES")
+                        print("\n   ❌ Log format has PRIVACY ISSUES")
 
             else:
                 print(f"   ⚠️  Log file not created at {log_path}")
@@ -147,7 +147,7 @@ def test_e2e_privacy_masking():
             print(f"   ⚠️  Could not read log file: {e}")
 
         # Check user lexicon format
-        print(f"\n📚 User Lexicon Privacy Check:")
+        print("\n📚 User Lexicon Privacy Check:")
         try:
             user_dir = tmpdir / "user_overrides"
             if user_dir.exists():
@@ -167,7 +167,7 @@ def test_e2e_privacy_masking():
 
                             # Verify no raw messages
                             if "example_contexts" in signal_data:
-                                print(f"      ✅ Uses 'example_contexts' (not 'examples')")
+                                print("      ✅ Uses 'example_contexts' (not 'examples')")
 
                                 for ctx in signal_data.get("example_contexts", [])[:1]:
                                     print(f"      Context structure: {list(ctx.keys())}")
@@ -185,25 +185,25 @@ def test_e2e_privacy_masking():
                                         print(f"         {status} {check}")
 
                             elif "examples" in signal_data:
-                                print(f"      ❌ Still uses 'examples' (old format)")
+                                print("      ❌ Still uses 'examples' (old format)")
                                 print(
                                     f"      First example: {signal_data['examples'][0][:60] if signal_data['examples'] else 'N/A'}..."
                                 )
             else:
-                print(f"   ℹ️  No user lexicon files created (may be normal)")
+                print("   ℹ️  No user lexicon files created (may be normal)")
 
         except Exception as e:
             print(f"   ⚠️  Could not check lexicon: {e}")
 
         # Summary
-        print(f"\n" + "=" * 80)
+        print("\n" + "=" * 80)
         print("✅ END-TO-END TEST COMPLETE")
         print("\n📋 RESULTS:")
         print(f"  • Processed {len(test_exchanges)} test exchanges")
         print(f"  • Logged {len(logged_entries)} entries")
-        print(f"  • All entries use privacy-safe format (no raw user_input/ai_response)")
-        print(f"  • Learning capability preserved (signals and gates logged)")
-        print(f"  • System ready for production with privacy protection")
+        print("  • All entries use privacy-safe format (no raw user_input/ai_response)")
+        print("  • Learning capability preserved (signals and gates logged)")
+        print("  • System ready for production with privacy protection")
 
 
 def test_learner_only_privacy(tmpdir):

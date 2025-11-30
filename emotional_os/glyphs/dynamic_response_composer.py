@@ -832,7 +832,7 @@ class DynamicResponseComposer:
             if emo:
                 clarifier = f"I hear you're feeling {emo}. Do you want to tell me a bit more about that?"
             else:
-                clarifier = f"I hear you. Do you want to tell me more about what's behind that?"
+                clarifier = "I hear you. Do you want to tell me more about what's behind that?"
 
         # If we have an explicit detected emotion, try to include it in the
         # clarifier when the template doesn't already mention an emotion.

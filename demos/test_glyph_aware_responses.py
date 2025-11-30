@@ -73,9 +73,9 @@ def test_glyph_aware_responses():
             print(f"  Emotional Signal: {emotional_signal}")
 
             if glyph_desc and glyph_desc.lower() in response.lower():
-                print(f"  ✓✓ GLYPH DESCRIPTION FOUND IN RESPONSE!")
+                print("  ✓✓ GLYPH DESCRIPTION FOUND IN RESPONSE!")
             else:
-                print(f"  ✓ Response is grounded in glyph meaning (compositionally)")
+                print("  ✓ Response is grounded in glyph meaning (compositionally)")
         else:
             print("! WARNING: No glyph matched for this message")
 
