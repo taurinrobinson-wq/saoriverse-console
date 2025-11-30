@@ -16,6 +16,17 @@ import stat
 import threading
 from pathlib import Path
 from typing import Any, Dict, Optional
+try:
+    from emotional_os.adapter.clarification_store import get_default_store
+except Exception:
+    def get_default_store():
+        raise RuntimeError("Clarification store not available")
+
+try:
+    from symbolic_tagger import tag_input_with_diagnostics
+except Exception:
+    def tag_input_with_diagnostics(user_input: str):
+        return {"tags": [], "matches": []}
 
 DEFAULT_STORE = Path(__file__).resolve().parents[2] / "data" / "disambiguation_memory.jsonl"
 

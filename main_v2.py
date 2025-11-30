@@ -31,6 +31,7 @@ prefers local-only processing and preserves auditability of learning events.
 import base64
 import json
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -51,7 +52,8 @@ import streamlit.components.v1 as components
 # Must be first Streamlit command
 # Prefer the project SVG as the page icon if available; fall back to emoji.
 try:
-    _logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+    _logo_path = Path(
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     _page_icon = None
     if _logo_path.exists():
         try:
@@ -81,7 +83,8 @@ try:
     from emotional_os.feedback.reward_model import RewardModel
 
     # repo-local persisted weights file; RewardModel will load if present
-    reward_model = RewardModel(dim=128, path="emotional_os/feedback/weights.json", auto_load=True)
+    reward_model = RewardModel(
+        dim=128, path="emotional_os/feedback/weights.json", auto_load=True)
 except Exception:
     reward_model = None
 
@@ -163,7 +166,8 @@ except Exception:
 # Replace default favicon with project logo (use embedded data URI so Streamlit
 # will show the SVG as the browser favicon regardless of static file serving).
 try:
-    logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+    logo_path = Path(
+        "static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     if logo_path.exists():
         svg_bytes = logo_path.read_bytes()
         b64 = base64.b64encode(svg_bytes).decode("ascii")
@@ -277,26 +281,32 @@ try:
             if _rm is None:
                 raise NameError
         except Exception:
-            _rm = _RewardModel(dim=128, path="emotional_os/feedback/weights.json")
+            _rm = _RewardModel(
+                dim=128, path="emotional_os/feedback/weights.json")
 
         if st.sidebar.checkbox("Show Feedback Widget", value=False):
             st.sidebar.markdown("---")
             st.header("Feedback Loop Demo")
-            candidate_text = st.text_area("Candidate Response:", value="This is a sample response.")
+            candidate_text = st.text_area(
+                "Candidate Response:", value="This is a sample response.")
             rating = st.radio(
                 "Rate this response:",
                 options=[+1, -1],
                 format_func=lambda x: "👍 Positive" if x == 1 else "👎 Negative",
             )
-            corrected_text = st.text_input("Suggest a corrected response (optional):")
-            features_text = st.text_input("Features (comma-separated, optional):", value="0.5,0.2,-0.1")
+            corrected_text = st.text_input(
+                "Suggest a corrected response (optional):")
+            features_text = st.text_input(
+                "Features (comma-separated, optional):", value="0.5,0.2,-0.1")
             try:
-                feats = _np.array([float(x.strip()) for x in features_text.split(",") if x.strip() != ""])
+                feats = _np.array(
+                    [float(x.strip()) for x in features_text.split(",") if x.strip() != ""])
             except Exception:
                 feats = _np.array([0.5, 0.2, -0.1])
 
             if st.button("Submit Feedback"):
-                entry = {"rating": int(rating), "text": corrected_text, "features": feats.tolist()}
+                entry = {"rating": int(
+                    rating), "text": corrected_text, "features": feats.tolist()}
                 _store.append(entry)
                 try:
                     if feats.size:
@@ -321,8 +331,10 @@ try:
 
                         candidates = [
                             {"text": "Option A", "features": base.tolist()},
-                            {"text": "Option B", "features": (base * 0.5).tolist()},
-                            {"text": "Option C", "features": (base * -1.0).tolist()},
+                            {"text": "Option B", "features": (
+                                base * 0.5).tolist()},
+                            {"text": "Option C", "features": (
+                                base * -1.0).tolist()},
                         ]
                         try:
                             sel = _composer.compose(candidates)
@@ -638,8 +650,10 @@ except Exception:
                 unsafe_allow_html=True,
             )
 
-            st.markdown('<div class="fp-error-wrap"><div class="fp-error-box">', unsafe_allow_html=True)
-            st.markdown('<div class="fp-error-title">Something went wrong</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="fp-error-wrap"><div class="fp-error-box">', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="fp-error-title">Something went wrong</div>', unsafe_allow_html=True)
             st.markdown(
                 '<div class="fp-error-msg">An unexpected error occurred while starting the app. The server logs contain the full traceback.</div>',
                 unsafe_allow_html=True,
@@ -655,18 +669,22 @@ except Exception:
             # If a traceback was provided, show a short excerpt inside a details block
             if tb:
                 excerpt = "\n".join(tb.splitlines()[-8:])
-                st.markdown("<details><summary>Show more (sanitized traceback)</summary>", unsafe_allow_html=True)
-                st.markdown(f"<div class='fp-trace'>{excerpt}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    "<details><summary>Show more (sanitized traceback)</summary>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div class='fp-trace'>{excerpt}</div>", unsafe_allow_html=True)
                 st.markdown("</details>", unsafe_allow_html=True)
 
             st.markdown("</div></div>", unsafe_allow_html=True)
         except Exception:
             # If rendering the nice UI fails, fall back to a minimal Streamlit error and print the traceback
             try:
-                st.error("A critical error occurred during startup. Check the server logs for details.")
+                st.error(
+                    "A critical error occurred during startup. Check the server logs for details.")
             except Exception:
                 # If Streamlit is completely unusable, at least print to stdout
-                print("A critical error occurred during startup. Check the server logs for details.")
+                print(
+                    "A critical error occurred during startup. Check the server logs for details.")
             import traceback as _tb
 
             _tb.print_exc()
