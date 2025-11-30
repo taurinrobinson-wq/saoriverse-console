@@ -10,7 +10,7 @@ import json
 import sys
 from collections import Counter
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -22,9 +22,9 @@ class PoetryGlyphGenerator:
     def __init__(self, lexicon_path: str = "learning/user_overrides/gutenberg_bulk_lexicon.json"):
         """Initialize with lexicon data."""
         self.lexicon_path = Path(lexicon_path)
-        self.lexicon = {}
-        self.signals = {}
-        self.glyphs = []
+        self.lexicon: Dict[str, Any] = {}
+        self.signals: Dict[str, Dict[str, Any]] = {}
+        self.glyphs: List[Dict[str, Any]] = []
         self._load_lexicon()
 
     def _load_lexicon(self):
@@ -37,11 +37,13 @@ class PoetryGlyphGenerator:
             with open(self.lexicon_path, "r") as f:
                 self.lexicon = json.load(f)
             self.signals = self.lexicon.get("signals", {})
-            print(f"✓ Loaded lexicon with {len(self.signals)} emotional dimensions")
+            print(
+                f"✓ Loaded lexicon with {len(self.signals)} emotional dimensions")
             for signal_name, signal_data in self.signals.items():
                 freq = signal_data.get("frequency", 0)
                 keywords_count = len(signal_data.get("keywords", []))
-                print(f"  - {signal_name}: {keywords_count} keywords, frequency {freq}")
+                print(
+                    f"  - {signal_name}: {keywords_count} keywords, frequency {freq}")
         except Exception as e:
             print(f"✗ Failed to load lexicon: {e}")
 
@@ -58,7 +60,8 @@ class PoetryGlyphGenerator:
             return []
 
         # Get dimension names sorted by frequency
-        dimensions = sorted(self.signals.keys(), key=lambda d: self.signals[d].get("frequency", 0), reverse=True)
+        dimensions = sorted(self.signals.keys(), key=lambda d: self.signals[d].get(
+            "frequency", 0), reverse=True)
 
         print("\n[GLYPH PATTERN EXTRACTION]")
         print("Dimensions (by frequency):")
@@ -69,7 +72,7 @@ class PoetryGlyphGenerator:
         # Create 2-way combinations
         print("\nExtracting combinations...")
         for i, dim1 in enumerate(dimensions):
-            for dim2 in dimensions[i + 1 :]:
+            for dim2 in dimensions[i + 1:]:
                 signal1 = self.signals[dim1]
                 signal2 = self.signals[dim2]
 
@@ -78,7 +81,8 @@ class PoetryGlyphGenerator:
                 keywords2 = set(signal2.get("keywords", []))
 
                 # Combined frequency
-                freq = signal1.get("frequency", 0) + signal2.get("frequency", 0)
+                freq = signal1.get("frequency", 0) + \
+                    signal2.get("frequency", 0)
 
                 # Only include if frequency >= min_combined_freq
                 if freq >= min_combined_freq:
@@ -230,7 +234,8 @@ class PoetryGlyphGenerator:
             print(f"\n{i}. {glyph['symbol']} {glyph['name']}")
             print(f"   ID: {glyph['id']}")
             print(f"   Emotions: {', '.join(glyph['core_emotions'])}")
-            print(f"   Keywords: {', '.join(glyph['associated_keywords'][:5])}")
+            print(
+                f"   Keywords: {', '.join(glyph['associated_keywords'][:5])}")
             print(f"   Frequency: {glyph['combined_frequency']}")
             print(f"   Response: {glyph['response_cue']}")
 
@@ -257,14 +262,16 @@ def main():
     """Main execution."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Generate glyphs from poetry lexicon")
+    parser = argparse.ArgumentParser(
+        description="Generate glyphs from poetry lexicon")
     parser.add_argument(
         "--lexicon", default="learning/user_overrides/gutenberg_bulk_lexicon.json", help="Path to lexicon file"
     )
     parser.add_argument(
         "--output", default="generated_glyphs_from_poetry.json", help="Output file for generated glyphs"
     )
-    parser.add_argument("--limit", type=int, default=15, help="Number of glyphs to display")
+    parser.add_argument("--limit", type=int, default=15,
+                        help="Number of glyphs to display")
     parser.add_argument(
         "--min-frequency", type=int, default=300, help="Minimum combined frequency to include a pattern (default: 300)"
     )
@@ -281,7 +288,8 @@ def main():
         return 1
 
     # Extract patterns (configurable minimum combined frequency)
-    patterns = generator.extract_glyph_patterns(min_combined_freq=args.min_frequency)
+    patterns = generator.extract_glyph_patterns(
+        min_combined_freq=args.min_frequency)
 
     if not patterns:
         print("✗ No patterns extracted")

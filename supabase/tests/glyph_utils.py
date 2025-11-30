@@ -19,7 +19,7 @@ def normalize_glyphs(raw: Any) -> List[Dict[str, Any]]:
     """
     out = []
     try:
-        glyphs = []
+        glyphs: List[Dict[str, Any]] = []
         if isinstance(raw, dict) and "glyphs" in raw:
             glyphs = raw.get("glyphs") or []
         elif isinstance(raw, list):

@@ -184,8 +184,8 @@ class VelonixVisualizer:
         # Add title
         svg_parts.append(
             '<text x="{cx}" y="30" text-anchor="middle" '.format(cx=width // 2)
-            f'font-size="24" font-weight="bold" fill="#333">'
-            f"Emotional Reaction</text>"
+            + 'font-size="24" font-weight="bold" fill="#333">'
+            + "Emotional Reaction</text>"
         )
 
         svg_parts.append("</svg>")
