@@ -8,7 +8,7 @@ import json
 import logging
 import os
 import re
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 # Try to import dependencies with fallbacks
 try:
@@ -23,7 +23,9 @@ except ImportError as e:
     except ImportError as e2:
         print(f"Warning: GlyphGenerator not available: {e2}")
         GLYPH_GENERATOR_AVAILABLE = False
-        GlyphGenerator = None
+        from typing import Any, Optional
+
+        GlyphGenerator: Optional[Any] = None  # type: ignore
 
 try:
     from ..supabase.supabase_integration import SupabaseIntegrator
@@ -37,7 +39,9 @@ except ImportError as e:
     except ImportError as e2:
         print(f"Warning: SupabaseIntegrator not available: {e2}")
         SUPABASE_INTEGRATOR_AVAILABLE = False
-        SupabaseIntegrator = None
+        from typing import Any, Optional
+
+        SupabaseIntegrator: Optional[Any] = None  # type: ignore
 
 # Remote-AI guard: prevent accidental remote client construction in local-only mode
 try:
@@ -60,10 +64,15 @@ except ImportError:
     except ImportError:
 
         class SaoriResponse:
-            def __init__(self, reply="", glyph="", parsed_glyphs=None):
-                self.reply = reply
-                self.glyph = glyph
-                self.parsed_glyphs = parsed_glyphs or []
+            def __init__(
+                self,
+                reply: str = "",
+                glyph: str = "",
+                parsed_glyphs: Optional[List[Dict]] = None,
+            ) -> None:
+                self.reply: str = reply
+                self.glyph: str = glyph
+                self.parsed_glyphs: List[Dict] = parsed_glyphs or []
 
 
 class EvolvingGlyphIntegrator:
@@ -80,8 +89,11 @@ class EvolvingGlyphIntegrator:
         evolution_frequency: int = 5,
     ):  # Generate new glyphs every N conversations
 
-        self.supabase_integrator = None
-        self.glyph_generator = None
+        # runtime-initialized components (may be None if dependencies missing)
+        self.supabase_integrator: Any = None
+        self.glyph_generator: Any = None
+        # logger initialized by setup_logging()
+        self.logger: Any = None
         self.enable_auto_evolution = enable_auto_evolution
         self.evolution_frequency = evolution_frequency
         self.conversation_count = 0
@@ -114,7 +126,8 @@ class EvolvingGlyphIntegrator:
             and GlyphGenerator is not None
         ):
             try:
-                self.glyph_generator = GlyphGenerator(supabase_url=supabase_url, supabase_key=supabase_anon_key)
+                self.glyph_generator = GlyphGenerator(
+                    supabase_url=supabase_url, supabase_key=supabase_anon_key)
             except Exception as e:
                 print(f"Failed to initialize GlyphGenerator: {e}")
                 self.glyph_generator = None
@@ -123,7 +136,8 @@ class EvolvingGlyphIntegrator:
 
     def setup_logging(self):
         """Setup logging for integration tracking"""
-        logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        logging.basicConfig(
+            level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
         self.logger = logging.getLogger(__name__)
 
     def process_conversation_with_evolution(
@@ -150,7 +164,8 @@ class EvolvingGlyphIntegrator:
                 result["saori_response"] = saori_response
             else:
                 # If no supabase integrator, create a simple response to allow evolution processing
-                print("DEBUG: No supabase integrator available, creating simple response")
+                print(
+                    "DEBUG: No supabase integrator available, creating simple response")
                 result["saori_response"] = SaoriResponse(
                     reply=f"I hear you speaking about {message[:50]}...", glyph="", parsed_glyphs=[]
                 )
@@ -181,17 +196,21 @@ class EvolvingGlyphIntegrator:
                         conversation_text=conversation_text, context=conversation_context or {}
                     )
                 else:
-                    print("DEBUG: No glyph generator available, skipping glyph generation")
+                    print(
+                        "DEBUG: No glyph generator available, skipping glyph generation")
 
                 result["new_glyphs_generated"] = new_glyphs
 
                 # Log evolution activity
                 if new_glyphs:
-                    self.logger.info(f"Evolution triggered: Generated {len(new_glyphs)} new glyphs")
+                    self.logger.info(
+                        f"Evolution triggered: Generated {len(new_glyphs)} new glyphs")
                     for glyph in new_glyphs:
-                        self.logger.info(f"  - {glyph['tag_name']} ({glyph['glyph']}): {glyph['response_cue']}")
+                        self.logger.info(
+                            f"  - {glyph['tag_name']} ({glyph['glyph']}): {glyph['response_cue']}")
                 else:
-                    self.logger.info("Evolution triggered but no new glyphs generated")
+                    self.logger.info(
+                        "Evolution triggered but no new glyphs generated")
 
             return result
 
@@ -236,7 +255,8 @@ class EvolvingGlyphIntegrator:
         Useful for processing particularly rich emotional content
         """
         if not self.glyph_generator:
-            self.logger.warning("Glyph generator not initialized, cannot force evolution")
+            self.logger.warning(
+                "Glyph generator not initialized, cannot force evolution")
             return []
 
         try:
@@ -245,7 +265,8 @@ class EvolvingGlyphIntegrator:
             )
 
             if new_glyphs:
-                self.logger.info(f"Forced evolution generated {len(new_glyphs)} new glyphs")
+                self.logger.info(
+                    f"Forced evolution generated {len(new_glyphs)} new glyphs")
 
             return new_glyphs
 
@@ -263,8 +284,10 @@ class EvolvingGlyphIntegrator:
         }
 
         if self.glyph_generator:
-            stats["detected_patterns_count"] = len(self.glyph_generator.detected_patterns)
-            stats["existing_tags_count"] = len(self.glyph_generator.existing_tags)
+            stats["detected_patterns_count"] = len(
+                self.glyph_generator.detected_patterns)
+            stats["existing_tags_count"] = len(
+                self.glyph_generator.existing_tags)
 
         return stats
 
@@ -291,11 +314,13 @@ class EvolvingGlyphIntegrator:
                         for line in lines:
                             if line.startswith("INSERT INTO"):
                                 # Extract values from SQL INSERT
-                                values_match = re.search(r"VALUES \((.*?)\);", line)
+                                values_match = re.search(
+                                    r"VALUES \((.*?)\);", line)
                                 if values_match:
                                     values_str = values_match.group(1)
                                     # Simple parsing - split by comma and remove quotes
-                                    values = [v.strip().strip("'") for v in values_str.split("', '")]
+                                    values = [v.strip().strip("'")
+                                              for v in values_str.split("', '")]
                                     if len(values) >= 12:
                                         generated_glyphs.append(
                                             {
@@ -349,7 +374,8 @@ def conversation_demo_with_evolution():
     # Initialize the evolving integrator
     # Note: Replace with your actual Supabase credentials
     integrator = EvolvingGlyphIntegrator(
-        enable_auto_evolution=True, evolution_frequency=2  # Check for evolution every 2 conversations
+        # Check for evolution every 2 conversations
+        enable_auto_evolution=True, evolution_frequency=2
     )
 
     # Sample conversations with rich emotional content
@@ -390,7 +416,8 @@ def conversation_demo_with_evolution():
         if result["evolution_triggered"]:
             print("🧬 Evolution check triggered!")
             if result["new_glyphs_generated"]:
-                print(f"✨ Generated {len(result['new_glyphs_generated'])} new glyphs:")
+                print(
+                    f"✨ Generated {len(result['new_glyphs_generated'])} new glyphs:")
                 for glyph in result["new_glyphs_generated"]:
                     print(f"   • {glyph['tag_name']} ({glyph['glyph']})")
                     print(f"     Response: {glyph['response_cue']}")

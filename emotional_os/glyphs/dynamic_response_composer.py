@@ -18,7 +18,7 @@ import os
 import random
 import re
 import sys
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -34,14 +34,16 @@ try:
     from parser.poetry_database import PoetryDatabase
     from parser.semantic_engine import SemanticEngine
 except ImportError:
-    SemanticEngine = None
-    nrc = None
-    PoetryDatabase = None
+    from typing import Any, Optional
+
+    SemanticEngine: Optional[Any] = None  # type: ignore
+    nrc: Optional[Any] = None  # type: ignore
+    PoetryDatabase: Optional[Any] = None  # type: ignore
 
 try:
     from emotional_os.adapter.response_adapter import translate_system_output
 except Exception:
-    translate_system_output = None
+    translate_system_output = None  # type: ignore
 
 
 class DynamicResponseComposer:
@@ -54,8 +56,13 @@ class DynamicResponseComposer:
             reward_model: optional `RewardModel` instance used to re-rank
                 candidate responses when available.
         """
-        self.semantic_engine = SemanticEngine() if SemanticEngine else None
-        self.poetry_db = PoetryDatabase() if PoetryDatabase else None
+        # runtime language resources (may be None when parsers aren't available)
+        self.semantic_engine: Optional[Any] = (
+            SemanticEngine() if (SemanticEngine is not None and callable(SemanticEngine)) else None
+        )
+        self.poetry_db: Optional[Any] = (
+            PoetryDatabase() if (PoetryDatabase is not None and callable(PoetryDatabase)) else None
+        )
         # Maintain a rolling tone history to adapt clarifiers over turns
         self.tone_history: List[str] = []
         # Optional reward model used for re-ranking candidate responses
@@ -198,7 +205,7 @@ class DynamicResponseComposer:
             result["actions"] = self.semantic_engine.extract_verbs(text)
 
         # Extract emotions using NRC if available
-        if nrc:
+        if nrc is not None:
             try:
                 analysis = nrc.analyze_text(text)
                 # Coerce list-style results into a dict of {emotion: weight}
