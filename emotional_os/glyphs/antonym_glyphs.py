@@ -26,7 +26,7 @@ import json
 import logging
 from functools import lru_cache
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ MODULE_DIR = Path(__file__).parent
 ANTONYM_INDEX_PATH = MODULE_DIR / "antonym_glyphs_indexed.json"
 
 # Global indexer instance (lazy loaded)
-_indexer = None
+_indexer: Optional[Dict[str, Any]] = None
 
 
 def _ensure_indexed() -> bool:
@@ -47,13 +47,15 @@ def _ensure_indexed() -> bool:
 
     try:
         if not ANTONYM_INDEX_PATH.exists():
-            logger.warning("Antonym glyphs index not found. Run antonym_glyphs_indexer.py first.")
+            logger.warning(
+                "Antonym glyphs index not found. Run antonym_glyphs_indexer.py first.")
             return False
 
         with open(ANTONYM_INDEX_PATH, "r", encoding="utf-8") as f:
             _indexer = json.load(f)
 
-        logger.info(f"✓ Loaded antonym glyphs index with {len(_indexer.get('antonym_glyphs', []))} entries")
+        logger.info(
+            f"✓ Loaded antonym glyphs index with {len(_indexer.get('antonym_glyphs', []))} entries")
         return True
 
     except Exception as e:
@@ -68,6 +70,7 @@ def get_indexed_antonyms() -> Optional[Dict]:
         dict: Full indexed data or None if not available
     """
     if _ensure_indexed():
+        assert _indexer is not None
         return _indexer
     return None
 
@@ -81,6 +84,7 @@ def get_all_antonym_glyphs() -> List[Dict]:
     if not _ensure_indexed():
         return []
 
+    assert _indexer is not None
     return _indexer.get("antonym_glyphs", [])
 
 
@@ -96,6 +100,7 @@ def find_antonym_by_voltage_pair(voltage_pair: str) -> Optional[Dict]:
     if not _ensure_indexed():
         return None
 
+    assert _indexer is not None
     indexes = _indexer.get("indexes", {})
     by_pairing = indexes.get("by_pairing", {})
 
@@ -114,6 +119,7 @@ def find_antonym_by_emotion(emotion: str) -> Optional[Dict]:
     if not _ensure_indexed():
         return None
 
+    assert _indexer is not None
     indexes = _indexer.get("indexes", {})
     by_emotion = indexes.get("by_base_emotion", {})
 
@@ -132,6 +138,7 @@ def find_antonym_by_name(name: str) -> Optional[Dict]:
     if not _ensure_indexed():
         return None
 
+    assert _indexer is not None
     indexes = _indexer.get("indexes", {})
     by_name = indexes.get("by_name", {})
 
@@ -150,8 +157,9 @@ def search_antonyms(query: str) -> List[Dict]:
     if not _ensure_indexed():
         return []
 
+    assert _indexer is not None
     query_lower = query.lower()
-    results = []
+    results: List[Dict[str, Any]] = []
 
     for antonym in _indexer.get("antonym_glyphs", []):
         base_emotion = antonym.get("Base Emotion", "").lower()
@@ -223,6 +231,7 @@ def get_antonym_metadata() -> Dict:
     if not _ensure_indexed():
         return {}
 
+    assert _indexer is not None
     return _indexer.get("metadata", {})
 
 
@@ -235,6 +244,7 @@ def list_antonym_emotions() -> List[str]:
     if not _ensure_indexed():
         return []
 
+    assert _indexer is not None
     indexes = _indexer.get("indexes", {})
     by_emotion = indexes.get("by_base_emotion", {})
 
@@ -250,6 +260,7 @@ def list_antonym_pairings() -> List[str]:
     if not _ensure_indexed():
         return []
 
+    assert _indexer is not None
     indexes = _indexer.get("indexes", {})
     by_pairing = indexes.get("by_pairing", {})
 
@@ -265,6 +276,7 @@ def list_antonym_names() -> List[str]:
     if not _ensure_indexed():
         return []
 
+    assert _indexer is not None
     indexes = _indexer.get("indexes", {})
     by_name = indexes.get("by_name", {})
 
@@ -283,6 +295,7 @@ def get_antonym_by_id(index: int) -> Optional[Dict]:
     if not _ensure_indexed():
         return None
 
+    assert _indexer is not None
     glyphs = _indexer.get("antonym_glyphs", [])
     if 0 <= index < len(glyphs):
         return glyphs[index]
@@ -299,6 +312,7 @@ def get_total_antonym_count() -> int:
     if not _ensure_indexed():
         return 0
 
+    assert _indexer is not None
     metadata = _indexer.get("metadata", {})
     return metadata.get("total_antonym_glyphs", 0)
 
@@ -373,5 +387,6 @@ def main():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(name)s] - %(message)s")
+    logging.basicConfig(level=logging.INFO,
+                        format="%(asctime)s - [%(name)s] - %(message)s")
     main()
