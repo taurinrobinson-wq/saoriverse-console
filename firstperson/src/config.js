@@ -1,4 +1,23 @@
-const DEFAULT_API = 'http://localhost:8000';
+// Default is localhost, but when running in Expo on a physical device
+// `localhost` refers to the device itself. Try to auto-detect the
+// dev machine IP using `expo-constants` (debuggerHost) when available.
+let DEFAULT_API = 'http://localhost:8000';
+try {
+    // `expo-constants` is available in Expo-managed projects
+    // and provides the `manifest.debuggerHost` value when running
+    // the Metro bundler. It looks like "192.168.1.100:8081".
+    const Constants = require('expo-constants');
+    const manifest = Constants && (Constants.manifest || Constants.manifest2);
+    const debuggerHost = manifest && (manifest.debuggerHost || (manifest.server && manifest.server.url));
+    if (debuggerHost) {
+        const host = String(debuggerHost).split(':')[0];
+        if (host && host !== 'localhost' && host !== '127.0.0.1') {
+            DEFAULT_API = `http://${host}:8000`;
+        }
+    }
+} catch (e) {
+    // ignore — fall back to localhost
+}
 
 export const SAOYNX_API_URL = (typeof process !== 'undefined' && process.env && process.env.REACT_APP_SAOYNX_API_URL)
     ? process.env.REACT_APP_SAOYNX_API_URL
