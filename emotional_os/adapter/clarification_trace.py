@@ -28,7 +28,8 @@ except Exception:
     def tag_input_with_diagnostics(user_input: str):
         return {"tags": [], "matches": []}
 
-DEFAULT_STORE = Path(__file__).resolve().parents[2] / "data" / "disambiguation_memory.jsonl"
+DEFAULT_STORE = Path(__file__).resolve(
+).parents[2] / "data" / "disambiguation_memory.jsonl"
 
 # Limits to keep stored records bounded (avoid huge user text in logs)
 MAX_ORIGINAL = 500
@@ -100,8 +101,10 @@ class ClarificationTrace:
         if not self._is_correction(user_input):
             return False
 
-        original = context.get("last_user_input") or context.get("original_input")
-        system_resp = context.get("last_system_response") or context.get("system_response")
+        original = context.get(
+            "last_user_input") or context.get("original_input")
+        system_resp = context.get(
+            "last_system_response") or context.get("system_response")
         if not original:
             # Nothing to anchor to — still store the raw clarification for future signals
             original = ""
@@ -178,10 +181,12 @@ class ClarificationTrace:
                 except Exception as e:
                     q.put(("err", e))
 
-            thread = threading.Thread(target=_worker_insert, args=(q,), daemon=True)
+            thread = threading.Thread(
+                target=_worker_insert, args=(q,), daemon=True)
             thread.start()
             try:
-                status, payload = q.get(timeout=float(os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", "0.75")))
+                status, payload = q.get(timeout=float(
+                    os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", "0.75")))
                 if status == "ok":
                     rowid = payload
                     result = {
@@ -197,7 +202,8 @@ class ClarificationTrace:
                     # If DB insert succeeded, purge any matching fallback JSONL records
                     try:
                         self._purge_jsonl_trigger(
-                            record.get("trigger"), record.get("conversation_id"), record.get("user_id")
+                            record.get("trigger"), record.get(
+                                "conversation_id"), record.get("user_id")
                         )
                     except Exception:
                         pass
@@ -224,7 +230,8 @@ class ClarificationTrace:
                         pass
             except Exception:
                 pass
-            result = {"stored": True, "rowid": None, "inferred_intent": None, "needs_confirmation": False}
+            result = {"stored": True, "rowid": None,
+                      "inferred_intent": None, "needs_confirmation": False}
             try:
                 self._last_result = result
             except Exception:

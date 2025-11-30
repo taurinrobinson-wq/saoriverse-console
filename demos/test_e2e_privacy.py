@@ -19,6 +19,7 @@ os.chdir(str(repo_root))
 # Try to import system components
 HybridProcessorWithEvolution = None
 HybridLearnerWithUserOverrides = None
+processor = None
 
 try:
     from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
@@ -91,7 +92,8 @@ def test_e2e_privacy_masking():
             try:
                 # Process through full system
                 result = processor.process_user_message(
-                    user_id=exchange["user_id"], user_message=exchange["message"], context={}
+                    user_id=exchange["user_id"], user_message=exchange["message"], context={
+                    }
                 )
                 print("   ✅ Processing complete")
 
@@ -162,15 +164,18 @@ def test_e2e_privacy_masking():
 
                     # Check signal structure
                     if "signals" in lexicon:
-                        for signal_name, signal_data in list(lexicon["signals"].items())[:1]:  # Show first signal
+                        # Show first signal
+                        for signal_name, signal_data in list(lexicon["signals"].items())[:1]:
                             print(f"      Signal: {signal_name}")
 
                             # Verify no raw messages
                             if "example_contexts" in signal_data:
-                                print("      ✅ Uses 'example_contexts' (not 'examples')")
+                                print(
+                                    "      ✅ Uses 'example_contexts' (not 'examples')")
 
                                 for ctx in signal_data.get("example_contexts", [])[:1]:
-                                    print(f"      Context structure: {list(ctx.keys())}")
+                                    print(
+                                        f"      Context structure: {list(ctx.keys())}")
 
                                     privacy_checks = {
                                         "no user_input": "user_input" not in ctx,
@@ -223,8 +228,10 @@ def test_learner_only_privacy(tmpdir):
     ai_response = "That's wonderful. Nature often stirs profound emotions."
 
     emotional_signals = [
-        {"signal": "nature", "keyword": "nature", "confidence": 0.9, "gate": "Gate 6"},
-        {"signal": "joy", "keyword": "inspired", "confidence": 0.85, "gate": "Gate 2"},
+        {"signal": "nature", "keyword": "nature",
+            "confidence": 0.9, "gate": "Gate 6"},
+        {"signal": "joy", "keyword": "inspired",
+            "confidence": 0.85, "gate": "Gate 2"},
     ]
 
     glyphs = [{"glyph_name": "Nature's Touch", "confidence": 0.88}]
