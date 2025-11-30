@@ -6,6 +6,7 @@ This helps troubleshoot why enrichment isn't showing up in the UI.
 
 import os
 import sys
+from pathlib import Path
 
 sys.path.insert(0, ".")
 repo_root = Path(__file__).resolve().parent
@@ -34,8 +35,6 @@ except Exception as e:
 # Check 2: Data files
 print("\n2️⃣ DATA FILE STATUS")
 print("-" * 70)
-import os
-from pathlib import Path
 
 files = {
     "data/poetry/poetry_database.json": "Poetry Database",
@@ -46,7 +45,8 @@ for filepath, name in files.items():
     exists = os.path.exists(filepath)
     size = os.path.getsize(filepath) if exists else 0
     status = "✅" if exists else "❌"
-    size_str = f"{size/(1024*1024):.1f}MB" if size > 1024 * 1024 else f"{size/1024:.1f}KB"
+    size_str = f"{size/(1024*1024):.1f}MB" if size > 1024 * \
+        1024 else f"{size/1024:.1f}KB"
     print(f"{status} {name}: {size_str}" if exists else f"{status} {name}: MISSING")
 
 # Check 3: Test enrichment
