@@ -9,14 +9,6 @@ Comprehensive tests for:
 - UI integration helpers
 """
 
-import json
-import sys
-from pathlib import Path
-
-# Add project root to path
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
-
 from emotional_os.glyphs.antonym_glyphs import (
     find_antonym_by_emotion,
     find_antonym_by_voltage_pair,
@@ -28,6 +20,13 @@ from emotional_os.glyphs.antonym_glyphs import (
     search_antonyms,
     suggest_emotional_opposite,
 )
+import json
+import sys
+from pathlib import Path
+
+# Add project root to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 
 class AntonymGlyphsTestSuite:
@@ -89,12 +88,15 @@ class AntonymGlyphsTestSuite:
         print("\n[LOADING TESTS]")
 
         total = get_total_antonym_count()
-        self.test("Antonym glyphs load", total > 0, f"Loaded {total} antonym glyphs")
+        self.test("Antonym glyphs load", total > 0,
+                  f"Loaded {total} antonym glyphs")
 
-        self.test("Expected count range", 100 <= total <= 150, f"Expected ~122, got {total}")
+        self.test("Expected count range", 100 <= total <=
+                  150, f"Expected ~122, got {total}")
 
         metadata = get_antonym_metadata()
-        self.test("Metadata available", metadata is not None and len(metadata) > 0, f"Metadata: {metadata}")
+        self.test("Metadata available", metadata is not None and len(
+            metadata) > 0, f"Metadata: {metadata}")
 
     def test_basic_lookups(self):
         """Test basic lookup functions."""
@@ -109,7 +111,8 @@ class AntonymGlyphsTestSuite:
         if comfort:
             self.test(
                 "Comfort has required fields",
-                all(k in comfort for k in ["Base Emotion", "Pairing", "Name", "Description"]),
+                all(k in comfort for k in [
+                    "Base Emotion", "Pairing", "Name", "Description"]),
                 f"Fields: {list(comfort.keys())}",
             )
 
@@ -123,7 +126,8 @@ class AntonymGlyphsTestSuite:
 
         # Test nonexistent emotion
         none_result = find_antonym_by_emotion("nonexistent_emotion_xyz")
-        self.test("Nonexistent emotion returns None", none_result is None, "Correct behavior")
+        self.test("Nonexistent emotion returns None",
+                  none_result is None, "Correct behavior")
 
     def test_searches(self):
         """Test search functions."""
@@ -131,37 +135,46 @@ class AntonymGlyphsTestSuite:
 
         # Test simple search
         joy_results = search_antonyms("joy")
-        self.test("Search for 'joy'", len(joy_results) > 0, f"Found {len(joy_results)} results")
+        self.test("Search for 'joy'", len(joy_results) >
+                  0, f"Found {len(joy_results)} results")
 
         # Test case-insensitive search
         peace_results = search_antonyms("PEACE")
-        self.test("Case-insensitive search", len(peace_results) > 0, f"Found {len(peace_results)} results for 'PEACE'")
+        self.test("Case-insensitive search", len(peace_results) > 0,
+                  f"Found {len(peace_results)} results for 'PEACE'")
 
         # Test multi-word search
         gentle_results = search_antonyms("gentle")
-        self.test("Search for 'gentle'", len(gentle_results) > 0, f"Found {len(gentle_results)} results")
+        self.test("Search for 'gentle'", len(gentle_results)
+                  > 0, f"Found {len(gentle_results)} results")
 
         if gentle_results:
             # Check that search results have the query word
             has_match = any(
-                "gentle" in str(r.get("Name", "")).lower() or "gentle" in str(r.get("Description", "")).lower()
+                "gentle" in str(r.get("Name", "")).lower() or "gentle" in str(
+                    r.get("Description", "")).lower()
                 for r in gentle_results[:3]
             )
-            self.test("Search results contain query", has_match, "Results correctly match search query")
+            self.test("Search results contain query", has_match,
+                      "Results correctly match search query")
 
     def test_metadata(self):
         """Test metadata access."""
         print("\n[METADATA TESTS]")
 
         emotions = list_antonym_emotions()
-        self.test("List emotions", len(emotions) > 0, f"Found {len(emotions)} unique emotions")
+        self.test("List emotions", len(emotions) > 0,
+                  f"Found {len(emotions)} unique emotions")
 
         pairings = list_antonym_pairings()
-        self.test("List pairings", len(pairings) > 0, f"Found {len(pairings)} unique pairings")
+        self.test("List pairings", len(pairings) > 0,
+                  f"Found {len(pairings)} unique pairings")
 
-        self.test("Emotions list is sorted", emotions == sorted(emotions), "Emotions are in alphabetical order")
+        self.test("Emotions list is sorted", emotions == sorted(
+            emotions), "Emotions are in alphabetical order")
 
-        self.test("Pairings list is sorted", pairings == sorted(pairings), "Pairings are in sorted order")
+        self.test("Pairings list is sorted", pairings == sorted(
+            pairings), "Pairings are in sorted order")
 
     def test_ui_integration(self):
         """Test UI integration helpers."""
@@ -187,7 +200,8 @@ class AntonymGlyphsTestSuite:
 
         # Test null formatting
         null_formatted = format_antonym_for_display(None)
-        self.test("Format None returns empty", null_formatted == "", "Handles None gracefully")
+        self.test("Format None returns empty", null_formatted ==
+                  "", "Handles None gracefully")
 
     def test_data_integrity(self):
         """Test data integrity and consistency."""
@@ -197,31 +211,37 @@ class AntonymGlyphsTestSuite:
         emotions = list_antonym_emotions()
         pairings = list_antonym_pairings()
 
-        self.test("All emotions accessible", len(emotions) > 0, "Emotion count: {}".format(len(emotions)))
+        self.test("All emotions accessible", len(emotions) >
+                  0, "Emotion count: {}".format(len(emotions)))
 
-        self.test("All pairings accessible", len(pairings) > 0, "Pairing count: {}".format(len(pairings)))
+        self.test("All pairings accessible", len(pairings) >
+                  0, "Pairing count: {}".format(len(pairings)))
 
         # Sample some emotions to ensure they're findable
         sample_emotions = emotions[:5] if emotions else []
         for emotion in sample_emotions:
             antonym = find_antonym_by_emotion(emotion)
             if not antonym:
-                self.test("Find emotion '{}'".format(emotion), False, "Listed but not findable")
+                self.test("Find emotion '{}'".format(emotion),
+                          False, "Listed but not findable")
                 break
         else:
             if sample_emotions:
-                self.test("Sample emotions are findable", True, f"Checked {len(sample_emotions)} sample emotions")
+                self.test("Sample emotions are findable", True,
+                          f"Checked {len(sample_emotions)} sample emotions")
 
         # Sample some pairings
         sample_pairings = pairings[:5] if pairings else []
         for pairing in sample_pairings:
             antonym = find_antonym_by_voltage_pair(pairing)
             if not antonym:
-                self.test("Find pairing '{}'".format(pairing), False, "Listed but not findable")
+                self.test("Find pairing '{}'".format(pairing),
+                          False, "Listed but not findable")
                 break
         else:
             if sample_pairings:
-                self.test("Sample pairings are findable", True, "Checked {} sample pairings".format(len(sample_pairings)))
+                self.test("Sample pairings are findable", True,
+                          "Checked {} sample pairings".format(len(sample_pairings)))
 
     def print_summary(self):
         """Print test summary."""
@@ -268,7 +288,8 @@ def run_integration_tests():
         exists = result is not None
 
         if exists == should_exist:
-            print(f"✓ {emotion}: {'Found' if exists else 'Not found'} (as expected)")
+            print(
+                f"✓ {emotion}: {'Found' if exists else 'Not found'} (as expected)")
         else:
             print(f"✗ {emotion}: {'Found' if exists else 'Not found'} (unexpected)")
 

@@ -26,7 +26,8 @@ from emotional_os.feedback.reward_model import RewardModel
 from emotional_os.glyphs import tone as tone_module
 
 # Add project root to path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
 
 try:
     from parser.nrc_lexicon_loader import nrc
@@ -192,7 +193,8 @@ class DynamicResponseComposer:
         # Extract named entities if spaCy is available
         if self.semantic_engine and self.semantic_engine.loaded:
             result["entities"] = self.semantic_engine.get_noun_chunks(text)
-            result["people"] = [ent[0] for ent in self.semantic_engine.extract_entities(text) if ent[1] == "PERSON"]
+            result["people"] = [ent[0] for ent in self.semantic_engine.extract_entities(
+                text) if ent[1] == "PERSON"]
             result["actions"] = self.semantic_engine.extract_verbs(text)
 
         # Extract emotions using NRC if available
@@ -275,7 +277,8 @@ class DynamicResponseComposer:
         entity = entities[0] if entities else None
         entity = self._sanitize_entity(entity)
         opening = opening.replace("{entity}", entity)
-        opening = opening.replace("{emotion}", emotions.get("primary", "what you're feeling"))
+        opening = opening.replace("{emotion}", emotions.get(
+            "primary", "what you're feeling"))
 
         return opening
 
@@ -406,7 +409,8 @@ class DynamicResponseComposer:
             return None
 
         # Get poetry matching the emotion
-        poetry_lines = self.poetry_db.POETRY_COLLECTION.get(primary_emotion, [])
+        poetry_lines = self.poetry_db.POETRY_COLLECTION.get(
+            primary_emotion, [])
         if not poetry_lines:
             return None
 
@@ -466,7 +470,8 @@ class DynamicResponseComposer:
         def _clean_phrase(phrase: str) -> str:
             if not phrase:
                 return ""
-            tokens = [t.strip().lower() for t in re.findall(r"[a-zA-Z]+", phrase)]
+            tokens = [t.strip().lower()
+                      for t in re.findall(r"[a-zA-Z]+", phrase)]
             meaningful = [t for t in tokens if t and t not in STOPWORDS]
             return " ".join(meaningful)
 
@@ -500,7 +505,8 @@ class DynamicResponseComposer:
             return cleaned[:3]
 
         # Sentence template pools to add variation
-        openers = ["I'm sensing", "There's a feeling of", "It sounds like you're carrying", "I hear", "This feels like"]
+        openers = ["I'm sensing", "There's a feeling of",
+                   "It sounds like you're carrying", "I hear", "This feels like"]
 
         connectors = [
             "which seems important.",
@@ -518,18 +524,22 @@ class DynamicResponseComposer:
         ]
 
         # Rank glyphs by optional score and intensity
-        ranked = sorted(glyphs, key=lambda g: (g.get("score", 0), _glyph_intensity(g)), reverse=True)
+        ranked = sorted(glyphs, key=lambda g: (
+            g.get("score", 0), _glyph_intensity(g)), reverse=True)
 
         parts: List[str] = []
 
         # Optional confidence-based summary using the top glyph
         dominant = ranked[0] if ranked else None
         if dominant and dominant.get("glyph_name"):
-            summary_name = _clean_phrase(dominant.get("glyph_name")) or dominant.get("glyph_name")
-            parts.append(f"It seems the strongest theme here is {summary_name}.")
+            summary_name = _clean_phrase(dominant.get(
+                "glyph_name")) or dominant.get("glyph_name")
+            parts.append(
+                f"It seems the strongest theme here is {summary_name}.")
 
         # Opening move: grounded in detected entities/emotions
-        opening = self._select_opening(extracted.get("entities", []), extracted.get("emotions", {}))
+        opening = self._select_opening(extracted.get(
+            "entities", []), extracted.get("emotions", {}))
         parts.append(opening)
 
         # Snippets from top glyphs with varied templates
@@ -621,22 +631,6 @@ class DynamicResponseComposer:
             final_parts = final_parts[:-1]
 
         return "\n\n".join(final_parts)
-
-        # 5. Closing move informed by glyph intensity, but phrased to person's situation
-        if intensity_level <= 2:
-            closing_move = "permission"
-        elif intensity_level >= 8:
-            closing_move = "commitment"
-        else:
-            closing_move = random.choice(["question", "permission"])
-
-        entity = entities[0] if entities else "this"
-        closing_template = random.choice(self.closing_moves[closing_move])
-        closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[0] if emotions else "what you feel")
-        parts.append(closing)
-
-        return " ".join(parts)
 
     def _glyph_to_emotion_category(self, glyph_name: str) -> Optional[str]:
         """Map glyph names to poetry emotion categories."""
@@ -788,7 +782,8 @@ class DynamicResponseComposer:
 
         # If fragments exist but are single-word tokens only, ask for clarification
         if fragments:
-            token_counts = [len(re.findall(r"[a-zA-Z]+", f)) for f in fragments]
+            token_counts = [len(re.findall(r"[a-zA-Z]+", f))
+                            for f in fragments]
             if all(tc <= 1 for tc in token_counts):
                 return True
 
@@ -819,7 +814,8 @@ class DynamicResponseComposer:
         """
         # Update tone state using the composer's rolling history
         try:
-            tone_state = tone_module.update_tone_state(self.tone_history, input_text)
+            tone_state = tone_module.update_tone_state(
+                self.tone_history, input_text)
             clarifier = tone_module.get_clarifier(tone_state)
         except Exception:
             # Fall back to previous behavior if tone module fails
@@ -850,7 +846,8 @@ class DynamicResponseComposer:
                         for vague in ("feeling that way", "feeling that", "feeling this", "feeling so", "feeling it"):
                             if vague in clar_low:
                                 # perform a case-smart replacement
-                                clarifier = re.sub(re.escape(vague), f"feeling {emo}", clarifier, flags=re.IGNORECASE)
+                                clarifier = re.sub(
+                                    re.escape(vague), f"feeling {emo}", clarifier, flags=re.IGNORECASE)
                                 replaced = True
                                 break
 
@@ -948,13 +945,15 @@ class DynamicResponseComposer:
             elif "inherited" in input_text.lower():
                 movement = random.choice(self.movement_language["with"])
             else:
-                movement = random.choice(list(self.movement_language.values())[0])
+                movement = random.choice(
+                    list(self.movement_language.values())[0])
             parts.append(movement)
 
         # 4. Weave poetry if available
         poetry_emotion = None
         if glyph:
-            poetry_emotion = self._glyph_to_emotion_category(glyph.get("glyph_name", ""))
+            poetry_emotion = self._glyph_to_emotion_category(
+                glyph.get("glyph_name", ""))
 
         poetry_emotions = {poetry_emotion: 0.8} if poetry_emotion else emotions
         poetry_line = self._weave_poetry(
@@ -982,7 +981,8 @@ class DynamicResponseComposer:
 
         closing_template = random.choice(self.closing_moves[closing_type])
         closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[0] if emotions else "what you feel")
+        closing = closing.replace("{emotion}", list(emotions.keys())[
+                                  0] if emotions else "what you feel")
         parts.append(closing)
 
         return " ".join(parts)
@@ -1019,7 +1019,8 @@ class DynamicResponseComposer:
         parts.append(movement)
 
         # 4. Weave poetry if available
-        poetry_line = self._weave_poetry(input_text, emotions, None, {"entities": entities, "emotions": emotions})
+        poetry_line = self._weave_poetry(input_text, emotions, None, {
+                                         "entities": entities, "emotions": emotions})
         if poetry_line:
             parts.append(poetry_line)
 
@@ -1027,7 +1028,8 @@ class DynamicResponseComposer:
         entity = entities[0] if entities else "this"
         closing_template = random.choice(self.closing_moves["question"])
         closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[0] if emotions else "what you feel")
+        closing = closing.replace("{emotion}", list(emotions.keys())[
+                                  0] if emotions else "what you feel")
         parts.append(closing)
 
         return " ".join(parts)
@@ -1064,15 +1066,18 @@ class DynamicResponseComposer:
                 if "last_user_message" in conversation_context:
                     prev_user = conversation_context.get("last_user_message")
                 elif "previous_user_message" in conversation_context:
-                    prev_user = conversation_context.get("previous_user_message")
+                    prev_user = conversation_context.get(
+                        "previous_user_message")
                 else:
                     # Try to extract from messages/history lists
-                    msgs = conversation_context.get("messages") or conversation_context.get("history")
+                    msgs = conversation_context.get(
+                        "messages") or conversation_context.get("history")
                     if isinstance(msgs, list) and msgs:
                         # Find the last user message in the list
                         for m in reversed(msgs):
                             if isinstance(m, dict) and m.get("role") in ("user", "User"):
-                                prev_user = m.get("content") or m.get("text") or m.get("user")
+                                prev_user = m.get("content") or m.get(
+                                    "text") or m.get("user")
                                 break
                             # older formats store entries as {'user':..., 'assistant':...}
                             if isinstance(m, dict) and "user" in m and m.get("user"):
@@ -1127,7 +1132,8 @@ class DynamicResponseComposer:
         if glyph:
             gate_data = glyph.get("gates") or glyph.get("gate")
             if gate_data:
-                gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
+                gates_list = gate_data if isinstance(
+                    gate_data, list) else [gate_data]
                 intensity = len(gates_list)
 
         # Respond to their actual content, not a glyph category
@@ -1194,13 +1200,16 @@ class DynamicResponseComposer:
                 if "last_user_message" in conversation_context:
                     prev_user = conversation_context.get("last_user_message")
                 elif "previous_user_message" in conversation_context:
-                    prev_user = conversation_context.get("previous_user_message")
+                    prev_user = conversation_context.get(
+                        "previous_user_message")
                 else:
-                    msgs = conversation_context.get("messages") or conversation_context.get("history")
+                    msgs = conversation_context.get(
+                        "messages") or conversation_context.get("history")
                     if isinstance(msgs, list) and msgs:
                         for m in reversed(msgs):
                             if isinstance(m, dict) and m.get("role") in ("user", "User"):
-                                prev_user = m.get("content") or m.get("text") or m.get("user")
+                                prev_user = m.get("content") or m.get(
+                                    "text") or m.get("user")
                                 break
                             if isinstance(m, dict) and "user" in m and m.get("user"):
                                 prev_user = m.get("user")
@@ -1270,13 +1279,15 @@ class DynamicResponseComposer:
             return words
 
         # Rank glyphs by intensity (and optional provided score)
-        ranked = sorted(glyphs, key=lambda g: (g.get("score", 0), _glyph_intensity(g)), reverse=True)
+        ranked = sorted(glyphs, key=lambda g: (
+            g.get("score", 0), _glyph_intensity(g)), reverse=True)
 
         parts: List[str] = []
 
         # Opening move: use dominant glyph to pick tone
         dominant = ranked[0] if ranked else None
-        opening = self._select_opening(extracted.get("entities", []), extracted.get("emotions", {}))
+        opening = self._select_opening(extracted.get(
+            "entities", []), extracted.get("emotions", {}))
         parts.append(opening)
 
         # Prepare readable fragments for the top glyphs so clarifying
@@ -1294,7 +1305,8 @@ class DynamicResponseComposer:
         # prevents regurgitating low-confidence summaries.
         try:
             if self._needs_clarifying_question(extracted, fragments, combined_text):
-                question = self._make_clarifying_question(combined_text, extracted)
+                question = self._make_clarifying_question(
+                    combined_text, extracted)
                 reply = f"{opening} {question}"
                 try:
                     self._stage_for_learning(extracted, combined_text, glyphs)
@@ -1312,7 +1324,8 @@ class DynamicResponseComposer:
             if fragments:
                 summary_frag = self._smooth_fragments_to_sentence(fragments)
                 if summary_frag:
-                    parts.append(f"I'm noticing {summary_frag} in what you're sharing.")
+                    parts.append(
+                        f"I'm noticing {summary_frag} in what you're sharing.")
         except Exception:
             pass
 
@@ -1326,7 +1339,8 @@ class DynamicResponseComposer:
                     "extracted": extracted,
                     "context": conversation_context,
                 }
-                adapter_out = translate_system_output(adapter_input, top_n=top_n, user_context=conversation_context)
+                adapter_out = translate_system_output(
+                    adapter_input, top_n=top_n, user_context=conversation_context)
                 # summary may be a short phrase like 'recurring ache'
                 summary = adapter_out.get("summary")
                 snippets = adapter_out.get("snippets") or []
@@ -1366,7 +1380,8 @@ class DynamicResponseComposer:
             if fragments:
                 summary_frag = self._smooth_fragments_to_sentence(fragments)
                 if summary_frag:
-                    parts.append(f"I'm noticing {summary_frag} in what you're sharing.")
+                    parts.append(
+                        f"I'm noticing {summary_frag} in what you're sharing.")
 
                 # Add one-sentence elaborations for the top one or two glyphs (concise)
                 for g in top_glyphs[:2]:
@@ -1375,10 +1390,12 @@ class DynamicResponseComposer:
                     if desc:
                         parts.append(f"For example, {desc.strip()}")
                     elif name:
-                        parts.append(f"For example, {name} seems relevant here.")
+                        parts.append(
+                            f"For example, {name} seems relevant here.")
             else:
                 # Fallback to a gentle generic opener
-                parts.append("I'm noticing some themes in what you're sharing.")
+                parts.append(
+                    "I'm noticing some themes in what you're sharing.")
 
             # Optionally stage for learning (env-gated) when we have fragments
             try:
@@ -1388,16 +1405,19 @@ class DynamicResponseComposer:
 
         # Optionally weave a single poetic echo from dominant glyph
         if dominant:
-            poetry_emotion = self._glyph_to_emotion_category(dominant.get("glyph_name", ""))
+            poetry_emotion = self._glyph_to_emotion_category(
+                dominant.get("glyph_name", ""))
             poetry_line = self._weave_poetry(
-                combined_text, {poetry_emotion: 0.8} if poetry_emotion else extracted.get("emotions", {})
+                combined_text, {poetry_emotion: 0.8} if poetry_emotion else extracted.get(
+                    "emotions", {})
             )
             if poetry_line:
                 parts.append(poetry_line)
 
         # Final closing calibrated by average intensity
         if ranked:
-            avg_intensity = int(sum(_glyph_intensity(g) for g in ranked) / max(1, len(ranked)))
+            avg_intensity = int(sum(_glyph_intensity(g)
+                                for g in ranked) / max(1, len(ranked)))
         else:
             avg_intensity = 1
 
@@ -1413,7 +1433,8 @@ class DynamicResponseComposer:
         closing_template = random.choice(self.closing_moves[closing_move])
         closing = closing_template.replace("{entity}", entity)
         closing = closing.replace(
-            "{emotion}", list(extracted.get("emotions", {}).keys())[0] if extracted.get("emotions") else "what you feel"
+            "{emotion}", list(extracted.get("emotions", {}).keys())[
+                0] if extracted.get("emotions") else "what you feel"
         )
         parts.append(closing)
 
@@ -1455,7 +1476,8 @@ class DynamicResponseComposer:
                 feats = np.asarray([], dtype=float)
 
             try:
-                score = float(self.reward_model.score(feats)) if feats.size else 0.0
+                score = float(self.reward_model.score(
+                    feats)) if feats.size else 0.0
             except Exception:
                 score = 0.0
 
