@@ -13,6 +13,8 @@ Tests:
 5. Signal strength distribution
 """
 
+# mypy: ignore-errors
+
 from emotional_os.glyphs.signal_parser import parse_input
 import json
 import statistics
