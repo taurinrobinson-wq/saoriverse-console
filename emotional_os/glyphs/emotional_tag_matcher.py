@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from dataclasses import dataclass
-from typing import Dict, List
+from typing import Dict, List, Any
 
 
 @dataclass
@@ -30,20 +30,20 @@ class EmotionalTagMatcher:
         """Load emotional tags from database"""
         # For now, we'll use the SQL data you provided
         # Later we can connect this to your Supabase
-        tags = {}
+        tags: Dict[str, EmotionalTag] = {}
 
         # Parse the emotional tags from your SQL data
         # This would normally be a database query to your emotional_tags table
 
         return tags
 
-    def map_glyphs_to_emotional_tags(self, glyphs: List[Dict], conversation_context: Dict = None) -> List[EmotionalTag]:
+    def map_glyphs_to_emotional_tags(self, glyphs: List[Dict[str, Any]], conversation_context: Dict = None) -> List[str]:
         """Map detected glyphs to your sophisticated emotional tag system"""
 
         # Extract glyph names and create pattern matching
         glyph_names = [g["glyph_name"].lower() for g in glyphs]
 
-        matched_tags = []
+        matched_tags: List[str] = []
 
         # Simple pattern matching to start - we'll make this more sophisticated
         for glyph_name in glyph_names:
@@ -78,7 +78,8 @@ class EmotionalTagMatcher:
     def select_optimal_persona(self, emotional_tags: List[str], conversation_context: Dict = None) -> str:
         """Select the best persona (Oracle, Guardian, Companion, etc.) based on emotional state"""
 
-        conversation_depth = len(conversation_context.get("messages", [])) if conversation_context else 0
+        conversation_depth = len(conversation_context.get(
+            "messages", [])) if conversation_context else 0
 
         # Analyze emotional tags to select persona
         if any("grief" in tag.lower() or "mourning" in tag.lower() for tag in emotional_tags):
@@ -156,7 +157,8 @@ class EmotionalTagMatcher:
         # This is where we'd integrate with your OpenAI edge function
         # sending the encrypted emotional pattern rather than raw text
 
-        conversation_depth = len(conversation_context.get("messages", [])) if conversation_context else 0
+        conversation_depth = len(conversation_context.get(
+            "messages", [])) if conversation_context else 0
 
         # For now, create enhanced responses based on your emotional tag system
         if "Recursive Grief" in emotional_tags:
@@ -182,12 +184,15 @@ def enhance_parser_with_emotional_tags(glyphs: List[Dict], conversation_context:
     matcher = EmotionalTagMatcher()
 
     # Map glyphs to emotional tags
-    emotional_tags = matcher.map_glyphs_to_emotional_tags(glyphs, conversation_context)
+    emotional_tags = matcher.map_glyphs_to_emotional_tags(
+        glyphs, conversation_context)
 
     # Select optimal persona
-    persona = matcher.select_optimal_persona(emotional_tags, conversation_context)
+    persona = matcher.select_optimal_persona(
+        emotional_tags, conversation_context)
 
     # Generate contextual response
-    response_data = matcher.generate_contextual_response(emotional_tags, persona, conversation_context)
+    response_data = matcher.generate_contextual_response(
+        emotional_tags, persona, conversation_context)
 
     return response_data

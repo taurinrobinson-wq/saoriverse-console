@@ -26,7 +26,7 @@ from collections import defaultdict
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple, Any
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,8 @@ class GlyphCombination:
     novelty_score: float = 0.0  # How novel vs. existing
     coherence_score: float = 0.0  # How well combined
     coverage_score: float = 0.0  # Fills emotional gap
-    activation_signals: List[str] = field(default_factory=list)  # Combined signals
+    activation_signals: List[str] = field(
+        default_factory=list)  # Combined signals
     gate: str = ""  # Estimated gate
 
     # Status
@@ -143,7 +144,8 @@ class GlyphFactorialEngine:
             if self.glyph_csv_path.exists():
                 logger.info(f"Loading glyphs from CSV: {self.glyph_csv_path}")
                 self.primary_glyphs = self._load_glyphs_from_csv()
-                logger.info(f"✓ Loaded {len(self.primary_glyphs)} glyphs from CSV")
+                logger.info(
+                    f"✓ Loaded {len(self.primary_glyphs)} glyphs from CSV")
                 return True
 
             # Fall back to JSON if CSV not available
@@ -151,7 +153,8 @@ class GlyphFactorialEngine:
                 logger.warning("CSV not found, falling back to JSON")
                 with open(self.glyph_json_path, "r", encoding="utf-8") as f:
                     self.primary_glyphs = json.load(f)
-                logger.info(f"✓ Loaded {len(self.primary_glyphs)} glyphs from JSON")
+                logger.info(
+                    f"✓ Loaded {len(self.primary_glyphs)} glyphs from JSON")
                 return True
 
             else:
@@ -168,7 +171,7 @@ class GlyphFactorialEngine:
         Returns:
             List of glyph dictionaries
         """
-        glyphs = []
+        glyphs: List[Dict[str, Any]] = []
         try:
             with open(self.glyph_csv_path, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
@@ -181,7 +184,8 @@ class GlyphFactorialEngine:
                             "description": row.get("description", ""),
                             "gate": row.get("gate", ""),
                             "activation_signals": (
-                                row.get("activation_signals", "").split(",") if row.get("activation_signals") else []
+                                row.get("activation_signals", "").split(
+                                    ",") if row.get("activation_signals") else []
                             ),
                         }
                         glyphs.append(glyph)
@@ -232,12 +236,14 @@ class GlyphFactorialEngine:
         """
         # Handle both string and list formats
         if isinstance(signals1, list):
-            set1 = set(s.strip() if isinstance(s, str) else str(s) for s in signals1)
+            set1 = set(s.strip() if isinstance(s, str) else str(s)
+                       for s in signals1)
         else:
             set1 = set(s.strip() for s in signals1.split(",") if s.strip())
 
         if isinstance(signals2, list):
-            set2 = set(s.strip() if isinstance(s, str) else str(s) for s in signals2)
+            set2 = set(s.strip() if isinstance(s, str) else str(s)
+                       for s in signals2)
         else:
             set2 = set(s.strip() for s in signals2.split(",") if s.strip())
 
@@ -340,7 +346,8 @@ class GlyphFactorialEngine:
             logger.error("No primary glyphs loaded")
             return []
 
-        logger.info(f"Generating combinations from {len(self.primary_glyphs)} glyphs...")
+        logger.info(
+            f"Generating combinations from {len(self.primary_glyphs)} glyphs...")
 
         combinations = []
         total = len(self.primary_glyphs) ** 2
@@ -358,16 +365,20 @@ class GlyphFactorialEngine:
                 combination = GlyphCombination(
                     parent_ids=(glyph1["id"], glyph2["id"]),
                     parent_names=(glyph1["glyph_name"], glyph2["glyph_name"]),
-                    parent_pairs=(glyph1["voltage_pair"], glyph2["voltage_pair"]),
-                    new_voltage_pair=self.combine_voltage_pairs(glyph1["voltage_pair"], glyph2["voltage_pair"]),
-                    new_name=self.generate_combination_name(glyph1["glyph_name"], glyph2["glyph_name"]),
+                    parent_pairs=(glyph1["voltage_pair"],
+                                  glyph2["voltage_pair"]),
+                    new_voltage_pair=self.combine_voltage_pairs(
+                        glyph1["voltage_pair"], glyph2["voltage_pair"]),
+                    new_name=self.generate_combination_name(
+                        glyph1["glyph_name"], glyph2["glyph_name"]),
                     new_description=self.generate_combination_description(
                         glyph1["description"], glyph2["description"], glyph1["glyph_name"], glyph2["glyph_name"]
                     ),
                     activation_signals=self.combine_activation_signals(
                         glyph1["activation_signals"], glyph2["activation_signals"]
                     ),
-                    gate=self.estimate_gate((glyph1["gate"], glyph2["gate"]), []),
+                    gate=self.estimate_gate(
+                        (glyph1["gate"], glyph2["gate"]), []),
                 )
 
                 combinations.append(combination)
@@ -400,7 +411,8 @@ class GlyphFactorialEngine:
             combination.coverage_score = coverage
 
             # Weight: 40% novelty, 35% coherence, 25% coverage
-            combination.combined_score = (novelty * 0.40) + (coherence * 0.35) + (coverage * 0.25)
+            combination.combined_score = (
+                novelty * 0.40) + (coherence * 0.35) + (coverage * 0.25)
 
         # Sort by score
         self.combinations.sort(key=lambda c: c.combined_score, reverse=True)
@@ -437,13 +449,15 @@ class GlyphFactorialEngine:
             parts1 = combination.parent_pairs[0].split("×")
             symbols1 = [s.strip() for pair in parts1 for s in pair.split("-")]
         else:
-            symbols1 = [s.strip() for s in combination.parent_pairs[0].split("-")]
+            symbols1 = [s.strip()
+                        for s in combination.parent_pairs[0].split("-")]
 
         if "×" in combination.parent_pairs[1]:
             parts2 = combination.parent_pairs[1].split("×")
             symbols2 = [s.strip() for pair in parts2 for s in pair.split("-")]
         else:
-            symbols2 = [s.strip() for s in combination.parent_pairs[1].split("-")]
+            symbols2 = [s.strip()
+                        for s in combination.parent_pairs[1].split("-")]
 
         # Symbols that appear together = high coherence
         overlap = len(set(symbols1) & set(symbols2))
@@ -463,14 +477,17 @@ class GlyphFactorialEngine:
         # Count how many times each gate appears
         gate_counts = defaultdict(int)
         for glyph in self.primary_glyphs:
-            gate_num = int(glyph["gate"].split()[-1]) if "gate" in glyph and glyph["gate"] else 5
+            gate_num = int(glyph["gate"].split()[-1]
+                           ) if "gate" in glyph and glyph["gate"] else 5
             gate_counts[gate_num] += 1
 
         # Get combination's gate
-        combo_gate = int(combination.gate.split()[-1]) if combination.gate else 5
+        combo_gate = int(combination.gate.split()
+                         [-1]) if combination.gate else 5
 
         # Less common gates get higher coverage score
-        gate_frequency = gate_counts[combo_gate] / max(len(self.primary_glyphs), 1)
+        gate_frequency = gate_counts[combo_gate] / \
+            max(len(self.primary_glyphs), 1)
         coverage = 1.0 - gate_frequency  # Inverse of frequency
 
         return max(0.0, min(1.0, coverage))
@@ -499,8 +516,10 @@ class GlyphFactorialEngine:
 
         # Step 1: Remove self-combinations (same parent twice)
         before_self_removal = len(self.combinations)
-        self.combinations = [c for c in self.combinations if c.parent_ids[0] != c.parent_ids[1]]
-        logger.info(f"Removed {before_self_removal - len(self.combinations)} self-combinations")
+        self.combinations = [
+            c for c in self.combinations if c.parent_ids[0] != c.parent_ids[1]]
+        logger.info(
+            f"Removed {before_self_removal - len(self.combinations)} self-combinations")
 
         # Step 2: Remove duplicates and semantic near-duplicates
         seen_voltages = set()
@@ -522,7 +541,8 @@ class GlyphFactorialEngine:
             is_semantic_dup = False
             for prev_desc, prev_combo in seen_descriptions.items():
                 # Calculate simple text similarity
-                similarity = self._text_similarity(combo.new_description, prev_desc)
+                similarity = self._text_similarity(
+                    combo.new_description, prev_desc)
                 if similarity > 0.80:  # 80% similar = duplicate
                     combo.is_duplicate = True
                     combo.duplicate_of = prev_combo.rank
@@ -563,13 +583,16 @@ class GlyphFactorialEngine:
                     self.pruned_combinations.append(combo)
 
             self.combinations = filtered_by_score
-            logger.info(f"Removed {score_removed} low-score combinations (threshold: {threshold:.3f})")
+            logger.info(
+                f"Removed {score_removed} low-score combinations (threshold: {threshold:.3f})")
 
         final_count = len(self.combinations)
         removed_total = original_count - final_count
 
-        logger.info(f"✓ Pruning complete: {original_count} → {final_count} combinations kept")
-        logger.info(f"  Pruning ratio: {(removed_total/original_count*100):.1f}% removed")
+        logger.info(
+            f"✓ Pruning complete: {original_count} → {final_count} combinations kept")
+        logger.info(
+            f"  Pruning ratio: {(removed_total/original_count*100):.1f}% removed")
 
         return (original_count, final_count)
 
@@ -642,7 +665,8 @@ class GlyphFactorialEngine:
             bool: True if sync successful
         """
         try:
-            target_path = Path(output_path) if output_path else self.glyph_json_path
+            target_path = Path(
+                output_path) if output_path else self.glyph_json_path
 
             # Load existing glyphs from JSON
             existing_glyphs = []
@@ -651,7 +675,8 @@ class GlyphFactorialEngine:
                     existing_glyphs = json.load(f)
 
             # Get next ID
-            next_id = max([g.get("id", 0) for g in existing_glyphs], default=0) + 1
+            next_id = max([g.get("id", 0)
+                          for g in existing_glyphs], default=0) + 1
 
             # Add approved combinations as new glyphs
             combos_to_add = approved_combinations if approved_combinations else self.combinations
@@ -709,7 +734,8 @@ class GlyphFactorialEngine:
             print("\n✓ Top 10 combinations by score:")
             for combo in self.combinations[:10]:
                 print(f"\n  {combo.rank}. {combo.new_name}")
-                print(f"     Parents: {combo.parent_names[0]} × {combo.parent_names[1]}")
+                print(
+                    f"     Parents: {combo.parent_names[0]} × {combo.parent_names[1]}")
                 print(f"     Score: {combo.combined_score:.3f}")
                 print(f"     Novelty: {combo.novelty_score:.2f}")
                 print(f"     Coherence: {combo.coherence_score:.2f}")
@@ -730,5 +756,6 @@ def main():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(name)s] - %(message)s")
+    logging.basicConfig(level=logging.INFO,
+                        format="%(asctime)s - [%(name)s] - %(message)s")
     main()
