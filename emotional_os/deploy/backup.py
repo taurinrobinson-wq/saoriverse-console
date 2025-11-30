@@ -7,6 +7,41 @@ import requests
 import streamlit as st
 from docx import Document
 
+try:
+    from emotional_os.deploy.modules.session_utils import get_session_value
+except Exception:
+    def get_session_value(session_override, key, default=None):
+        try:
+            return st.session_state.get(key, default)
+        except Exception:
+            try:
+                return getattr(st.session_state, key, default)
+            except Exception:
+                return default
+
+
+def _safe_set_session(key, value):
+    try:
+        try:
+            st.session_state[key] = value
+            return
+        except Exception:
+            pass
+        try:
+            setattr(st.session_state, key, value)
+        except Exception:
+            pass
+    except Exception:
+        pass
+
+
+def _safe_del_query_param(key):
+    try:
+        if key in st.query_params:
+            del st.query_params[key]
+    except Exception:
+        pass
+
 # --- Generate Word Document from Personal Log ---
 
 
@@ -110,9 +145,16 @@ class SaoynxAuthentication:
             st.session_state.session_expires = None
 
         # Only try to restore session if not already authenticated
-        if not st.session_state.authenticated:
-            # Check for existing session token in query params
-            query_params = st.query_params
+        try:
+            authenticated_now = get_session_value(None, 'authenticated', False)
+        except Exception:
+            authenticated_now = False
+
+        if not authenticated_now:
+            try:
+                query_params = st.query_params
+            except Exception:
+                query_params = {}
             session_token = query_params.get("session_token")
 
             if session_token:
@@ -120,14 +162,13 @@ class SaoynxAuthentication:
                 session_result = self.validate_session_token(session_token)
                 if session_result["valid"]:
                     data = session_result["data"]
-                    st.session_state.authenticated = True
-                    st.session_state.user_id = data["user_id"]
-                    st.session_state.username = data["username"]
-                    st.session_state.session_expires = data["expires"]
+                    _safe_set_session('authenticated', True)
+                    _safe_set_session('user_id', data.get("user_id"))
+                    _safe_set_session('username', data.get("username"))
+                    _safe_set_session('session_expires', data.get("expires"))
                 else:
                     # Invalid token, remove it
-                    if "session_token" in st.query_params:
-                        del st.query_params["session_token"]
+                    _safe_del_query_param('session_token')
 
     def authenticate_user(self, username: str, password: str) -> dict:
         """Authenticate user login"""
@@ -157,7 +198,10 @@ class SaoynxAuthentication:
                     session_token = self.create_session_token(username, data.get("user_id"))
 
                     # Add session token to URL for persistence
-                    st.query_params["session_token"] = session_token
+                    try:
+                        st.query_params["session_token"] = session_token
+                    except Exception:
+                        pass
 
                     return {"success": True, "message": "Login successful"}
                 else:
@@ -212,22 +256,29 @@ class SaoynxAuthentication:
         st.session_state.username = "demo_user"
         st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
         # Create persistent session token for demo user too
-        session_token = self.create_session_token("demo_user", user_id)
-        st.query_params["session_token"] = session_token
-        st.rerun()
+        try:
+            st.query_params["session_token"] = self.create_session_token(
+                "demo_user", user_id)
+        except Exception:
+            pass
+        try:
+            st.rerun()
+        except Exception:
+            pass
 
     def logout(self):
         """Logout user and clear session"""
-        st.session_state.authenticated = False
-        st.session_state.user_id = None
-        st.session_state.username = None
-        st.session_state.session_expires = None
+        _safe_set_session('authenticated', False)
+        _safe_set_session('user_id', None)
+        _safe_set_session('username', None)
+        _safe_set_session('session_expires', None)
 
         # Clear session token from URL
-        if "session_token" in st.query_params:
-            del st.query_params["session_token"]
-
-        st.rerun()
+        _safe_del_query_param('session_token')
+        try:
+            st.rerun()
+        except Exception:
+            pass
 
     def render_splash_interface(self):
         """Render the clean SAOYNX splash interface"""

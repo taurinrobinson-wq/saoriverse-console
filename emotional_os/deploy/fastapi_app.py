@@ -20,6 +20,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+from typing import Optional
 
 # Load environment variables from .env file
 load_dotenv()
@@ -105,6 +106,10 @@ class RegisterRequest(BaseModel):
     username: str
     password: str
     confirm_password: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
+    login_id: Optional[str] = None
 
 
 class ChatRequest(BaseModel):
@@ -179,10 +184,28 @@ class FirstPersonAuth:
             return {"success": False, "message": f"Login error: {str(e)}"}
 
     @staticmethod
-    async def create_user(username: str, password: str) -> dict:
-        """Create new user account"""
+    async def create_user(username: str, password: str, first_name: Optional[str] = None,
+                          last_name: Optional[str] = None, email: Optional[str] = None,
+                          login_id: Optional[str] = None) -> dict:
+        """Create new user account (forwards extra metadata when provided)"""
         try:
             auth_url = SUPABASE_AUTH_URL or f"{SUPABASE_URL}/functions/v1/auth-manager"
+            payload = {
+                "action": "create_user",
+                "username": username,
+                "password": password,
+                "created_at": datetime.now().isoformat()
+            }
+            # include optional fields if provided
+            if first_name:
+                payload["first_name"] = first_name
+            if last_name:
+                payload["last_name"] = last_name
+            if email:
+                payload["email"] = email
+            if login_id:
+                payload["login_id"] = login_id
+
             response = requests.post(
                 auth_url,
                 headers={"Authorization": f"Bearer {SUPABASE_KEY}", "Content-Type": "application/json"},
@@ -198,7 +221,12 @@ class FirstPersonAuth:
             if response.status_code == 200:
                 data = response.json()
                 return {"success": data.get("success"), "message": data.get("error", "Account created")}
-            return {"success": False, "message": "Failed to create account"}
+            # return the response text for better diagnostics
+            try:
+                msg = response.json()
+            except Exception:
+                msg = response.text
+            return {"success": False, "message": f"Failed to create account: {msg}"}
 
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
@@ -268,6 +296,72 @@ async def chat(chat_data: ChatRequest):
 
     start = datetime.utcnow()
     try:
+        # If the client requests local processing, run the hybrid/local pipeline here
+        if chat_data.mode == 'local' or os.getenv('DEFAULT_PROCESSING_MODE', 'local') == 'local':
+            try:
+                # Prefer the mobile adapter which is expressly designed to
+                # be invoked from FastAPI / React contexts. It wraps the
+                # canonical pipeline and provides a fallback when the full
+                # UI runtime is not available.
+                from emotional_os.deploy.modules.ui_mobile import run_hybrid_pipeline_mobile as run_hybrid_pipeline_mobile
+            except Exception:
+                run_hybrid_pipeline_mobile = None
+
+            if run_hybrid_pipeline_mobile:
+                try:
+                    response_text, debug_info, local_analysis = run_hybrid_pipeline_mobile(
+                        chat_data.message,
+                        {},
+                        saori_url,
+                        SUPABASE_KEY,
+                        user_id=getattr(chat_data, 'user_id', None),
+                        processing_mode=getattr(chat_data, 'mode', 'local')
+                    )
+                    duration = (datetime.utcnow() - start).total_seconds()
+                    trace_entry.update({
+                        "duration_s": duration,
+                        "status_code": 200
+                    })
+                    try:
+                        from emotional_os.deploy.reply_utils import polish_ai_reply
+                    except Exception:
+                        def polish_ai_reply(x):
+                            return x or "I hear you — tell me more when you're ready."
+
+                    glyph_obj = {}
+                    try:
+                        if isinstance(local_analysis, dict):
+                            best = local_analysis.get('best_glyph') or (
+                                local_analysis.get('glyphs') or [None])[0]
+                            if best:
+                                glyph_obj = best
+                    except Exception:
+                        glyph_obj = {}
+
+                    try:
+                        with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
+                            fh.write(json.dumps(
+                                trace_entry, ensure_ascii=False) + "\n")
+                    except Exception:
+                        pass
+
+                    return {
+                        "success": True,
+                        "reply": polish_ai_reply(response_text or "I'm here to listen."),
+                        "glyph": glyph_obj,
+                        "processing_time": debug_info.get('processing_time', 0) if isinstance(debug_info, dict) else 0
+                    }
+                except Exception as e:
+                    trace_entry.update(
+                        {"exception": f"local_pipeline_error: {str(e)}"})
+                    try:
+                        with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
+                            fh.write(json.dumps(
+                                trace_entry, ensure_ascii=False) + "\n")
+                    except Exception:
+                        pass
+
+        # Remote SAORI call (fallback / hybrid mode)
         response = requests.post(
             saori_url,
             headers={"Authorization": f"Bearer {SUPABASE_KEY}", "Content-Type": "application/json"},
@@ -291,7 +385,6 @@ async def chat(chat_data: ChatRequest):
                 "processing_time": result.get("processing_time"),
             }
 
-        # append trace to log file
         try:
             with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
                 fh.write(json.dumps(trace_entry, ensure_ascii=False) + "\n")
