@@ -875,7 +875,7 @@ class PoeticEmotionalEngine:
 
     def _check_ethical_implications(self, user_input: str) -> Dict[str, Any]:
         """Check for ethical implications in the interaction."""
-        result = {"tensions": [], "upheld": []}
+        result: Dict[str, Any] = {"tensions": [], "upheld": []}
 
         lower_input = user_input.lower()
 
@@ -1010,7 +1010,7 @@ class PoeticEmotionalEngine:
         with the existing glyph system.
         """
         # Extract emotions from signals
-        detected_emotions = {}
+        detected_emotions: Dict[str, float] = {}
         for signal in signals:
             tone = signal.get("tone", "unknown")
             voltage = signal.get("voltage", "medium")
