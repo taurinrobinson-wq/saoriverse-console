@@ -215,7 +215,8 @@ class EnhancedEmotionProcessor:
         Extract syntactic elements (nouns, verbs, adjectives) for glyph matching boost.
         Focuses on emotional and meaningful terms.
         """
-        syntactic_elements = {"nouns": [], "verbs": [], "adjectives": []}
+        syntactic_elements: Dict[str, List[str]] = {
+            "nouns": [], "verbs": [], "adjectives": []}
 
         # Emotional word lists for filtering
         emotional_verbs = {
