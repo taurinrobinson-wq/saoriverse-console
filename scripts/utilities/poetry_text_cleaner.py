@@ -15,7 +15,8 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO,
+                    format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -239,7 +240,8 @@ class PoetryTextCleaner:
             logger.warning("Very few lines - may be fragmented")
 
         # Remove any remaining control characters
-        text = "".join(char for char in text if ord(char) >= 32 or char in "\n\t")
+        text = "".join(char for char in text if ord(
+            char) >= 32 or char in "\n\t")
 
         return text
 
@@ -335,9 +337,11 @@ class PoetryTextValidator:
 
         # Check 2: Line distribution
         avg_line_length = results["size_bytes"] / max(1, results["size_lines"])
-        results["checks"]["line_length"] = {"pass": 20 < avg_line_length < 200, "avg_length": avg_line_length}
+        results["checks"]["line_length"] = {
+            "pass": 20 < avg_line_length < 200, "avg_length": avg_line_length}
         if not results["checks"]["line_length"]["pass"]:
-            results["issues"].append(f"Unusual average line length: {avg_line_length:.1f}")
+            results["issues"].append(
+                f"Unusual average line length: {avg_line_length:.1f}")
 
         # Check 3: UTF-8 validity
         try:
@@ -348,7 +352,8 @@ class PoetryTextValidator:
             results["issues"].append("Invalid UTF-8 encoding")
 
         # Check 4: No excessive special characters
-        special_count = len(re.findall(r"[^a-zA-Z0-9\s\n\t\'\"-.,;:!?()]", text))
+        special_count = len(re.findall(
+            r"[^a-zA-Z0-9\s\n\t\'\"-.,;:!?()]", text))
         special_ratio = special_count / max(1, len(text))
         results["checks"]["special_chars"] = {
             "pass": special_ratio < 0.1,
@@ -356,13 +361,16 @@ class PoetryTextValidator:
             "ratio": special_ratio,
         }
         if not results["checks"]["special_chars"]["pass"]:
-            results["issues"].append(f"High special character ratio: {special_ratio:.2%}")
+            results["issues"].append(
+                f"High special character ratio: {special_ratio:.2%}")
 
         # Check 5: No excessive fragmentation markers
         frag_markers = len(re.findall(r"\[.*?\]", text))
-        results["checks"]["fragmentation"] = {"pass": frag_markers < 50, "marker_count": frag_markers}
+        results["checks"]["fragmentation"] = {
+            "pass": frag_markers < 50, "marker_count": frag_markers}
         if not results["checks"]["fragmentation"]["pass"]:
-            results["issues"].append(f"Many fragmentation markers: {frag_markers}")
+            results["issues"].append(
+                f"Many fragmentation markers: {frag_markers}")
 
         # Determine overall status
         if results["issues"]:
@@ -389,7 +397,8 @@ class PoetryTextValidator:
             results.append(result)
 
             status_emoji = "✓" if result["status"] == "valid" else "⚠" if result["status"] == "warning" else "✗"
-            logger.info(f"{status_emoji} {result['file']}: {result['size_words']} words, {result['size_lines']} lines")
+            logger.info(
+                f"{status_emoji} {result['file']}: {result['size_words']} words, {result['size_lines']} lines")
 
             if result["issues"]:
                 for issue in result["issues"]:
@@ -400,9 +409,12 @@ class PoetryTextValidator:
     def get_summary(self) -> Dict[str, int]:
         """Get validation summary."""
         total = len(self.validation_results)
-        valid = sum(1 for r in self.validation_results if r["status"] == "valid")
-        warnings = sum(1 for r in self.validation_results if r["status"] == "warning")
-        errors = sum(1 for r in self.validation_results if r["status"] == "error")
+        valid = sum(
+            1 for r in self.validation_results if r["status"] == "valid")
+        warnings = sum(
+            1 for r in self.validation_results if r["status"] == "warning")
+        errors = sum(
+            1 for r in self.validation_results if r["status"] == "error")
 
         return {
             "total_files": total,
@@ -418,11 +430,14 @@ def main():
     """Main execution."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Clean and validate poetry text")
+    parser = argparse.ArgumentParser(
+        description="Clean and validate poetry text")
     parser.add_argument("--file", type=str, help="File to clean")
     parser.add_argument("--dir", type=str, help="Directory to validate")
-    parser.add_argument("--output", type=str, help="Output file for cleaned text")
-    parser.add_argument("--validate-only", action="store_true", help="Only validate, don't clean")
+    parser.add_argument("--output", type=str,
+                        help="Output file for cleaned text")
+    parser.add_argument("--validate-only", action="store_true",
+                        help="Only validate, don't clean")
 
     args = parser.parse_args()
 
@@ -463,9 +478,12 @@ def main():
 
             logger.info("\nCleaning statistics:")
             logger.info(f"  Artifacts removed: {stats['artifacts_removed']}")
-            logger.info(f"  Empty lines removed: {stats['empty_lines_removed']}")
-            logger.info(f"  Fragmented lines fixed: {stats['fragmented_lines_fixed']}")
-            logger.info(f"  Encoding issues fixed: {stats['encoding_issues_fixed']}")
+            logger.info(
+                f"  Empty lines removed: {stats['empty_lines_removed']}")
+            logger.info(
+                f"  Fragmented lines fixed: {stats['fragmented_lines_fixed']}")
+            logger.info(
+                f"  Encoding issues fixed: {stats['encoding_issues_fixed']}")
 
             if args.output:
                 with open(args.output, "w", encoding="utf-8") as f:
@@ -493,7 +511,8 @@ def main():
                     f.write(cleaned)
 
                 logger.info(f"  ✓ Saved to: {output_path.name}")
-                logger.info(f"  Stats: {stats['total_chars_before']} → {stats['total_chars_after']} chars")
+                logger.info(
+                    f"  Stats: {stats['total_chars_before']} → {stats['total_chars_after']} chars")
 
 
 if __name__ == "__main__":

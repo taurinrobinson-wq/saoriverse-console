@@ -5,14 +5,15 @@ Curated poetry collection organized by emotion.
 Sources: Public domain poetry from Project Gutenberg, Emily Dickinson, Rumi, etc.
 """
 
+from parser.nrc_lexicon_loader import nrc
 import json
 import os
 import sys
 from pathlib import Path
+from typing import Any, Dict, List
 
 # Handle imports properly
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from parser.nrc_lexicon_loader import nrc
 
 
 class PoetryDatabase:
@@ -81,7 +82,7 @@ class PoetryDatabase:
         """Initialize poetry database."""
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.database = {}
+        self.database: Dict[str, List[Dict[str, Any]]] = {}
         self.load_or_create()
 
     def load_or_create(self):
@@ -117,7 +118,8 @@ class PoetryDatabase:
 
                 self.database[emotion].append(entry)
 
-        print(f"✓ Created poetry database with {sum(len(v) for v in self.database.values())} poems")
+        print(
+            f"✓ Created poetry database with {sum(len(v) for v in self.database.values())} poems")
 
     def _save_database(self):
         """Save database to JSON file."""
