@@ -9,6 +9,7 @@ Free for research use.
 import logging
 import os
 from collections import defaultdict
+from typing import DefaultDict, Dict, List, Any
 
 logger = logging.getLogger(__name__)
 if not logger.handlers:
@@ -29,13 +30,16 @@ class NRCLexicon:
         good    joy    1
         bad    sadness    1
         """
-        self.word_emotions = defaultdict(list)
-        self.emotion_words = defaultdict(list)
+        # word_emotions maps a word -> list of emotion keywords
+        self.word_emotions: DefaultDict[str, List[str]] = defaultdict(list)
+        # emotion_words maps an emotion -> list of words
+        self.emotion_words: DefaultDict[str, List[str]] = defaultdict(list)
         self.loaded = False
         self.source = "bootstrap"
 
         # Allow forcing the use of the small bootstrap lexicon via env var.
-        prefer_bootstrap = os.getenv("NRC_PREFER_BOOTSTRAP", "0").lower() in ("1", "true", "yes")
+        prefer_bootstrap = os.getenv(
+            "NRC_PREFER_BOOTSTRAP", "0").lower() in ("1", "true", "yes")
         bootstrap_path = "data/lexicons/nrc_emotion_lexicon_bootstrap.txt"
 
         # If preference is set, try bootstrap first (even if the full lexicon exists).
@@ -45,7 +49,8 @@ class NRCLexicon:
                 self.source = "bootstrap"
                 return
             else:
-                logger.info("NRC_PREFER_BOOTSTRAP set but bootstrap file not found: %s", bootstrap_path)
+                logger.info(
+                    "NRC_PREFER_BOOTSTRAP set but bootstrap file not found: %s", bootstrap_path)
 
         # Try primary (full) lexicon path first
         if os.path.exists(filepath):
@@ -78,7 +83,8 @@ class NRCLexicon:
 
             # Determine header - check if first line is header
             first_line_parts = lines[0].strip().split("\t")
-            is_header = len(first_line_parts) >= 3 and first_line_parts[0].lower() == "word"
+            is_header = len(
+                first_line_parts) >= 3 and first_line_parts[0].lower() == "word"
             start_idx = 1 if is_header else 0
 
             loaded_count = 0
@@ -115,16 +121,16 @@ class NRCLexicon:
 
     def get_emotions(self, word: str) -> list:
         """Get emotions for a word."""
-        return self.word_emotions.get(word.lower(), [])
+        return list(self.word_emotions.get(word.lower(), []))
 
     def get_words_for_emotion(self, emotion: str) -> list:
         """Get all words for an emotion."""
-        return self.emotion_words.get(emotion, [])
+        return list(self.emotion_words.get(emotion, []))
 
     def analyze_text(self, text: str) -> dict:
         """Analyze text and return emotion frequencies."""
         words = text.lower().split()
-        emotions = defaultdict(int)
+        emotions: Dict[str, int] = defaultdict(int)
 
         for word in words:
             word_clean = word.strip(".,!?;:'\"")
@@ -138,7 +144,7 @@ class NRCLexicon:
         """Get list of all emotion categories."""
         return list(self.emotion_words.keys())
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         """Export lexicon as dictionary."""
         return {
             "word_emotions": dict(self.word_emotions),
