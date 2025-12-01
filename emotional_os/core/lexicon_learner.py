@@ -3,7 +3,7 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from emotional_os.core.constants import (
     EMOTIONAL_PATTERNS,
@@ -89,7 +89,8 @@ class LexiconLearner:
     def _save_pattern_history(self):
         """Save pattern history"""
         os.makedirs(os.path.dirname(self.pattern_history_path), exist_ok=True)
-        self.pattern_history["last_updated"] = datetime.datetime.now().isoformat()
+        self.pattern_history["last_updated"] = datetime.datetime.now(
+        ).isoformat()
         with open(self.pattern_history_path, "w", encoding="utf-8") as f:
             json.dump(self.pattern_history, f, ensure_ascii=False, indent=2)
 
@@ -112,7 +113,8 @@ class LexiconLearner:
         user_words = set(re.findall(r"\b\w+\b", user_input.lower()))
 
         # Score effectiveness based on response characteristics
-        effectiveness_score = self._score_response_effectiveness(system_response)
+        effectiveness_score = self._score_response_effectiveness(
+            system_response)
 
         associations = {}
         for word in user_words:
@@ -137,12 +139,14 @@ class LexiconLearner:
             score += 0.2
 
         # Responses that acknowledge feelings
-        empathy_words = ["feel", "understand", "see", "hear", "witness", "acknowledge"]
+        empathy_words = ["feel", "understand",
+                         "see", "hear", "witness", "acknowledge"]
         if any(word in response.lower() for word in empathy_words):
             score += 0.2
 
         # Responses that offer reflection
-        reflection_words = ["seems", "sounds like", "appears", "suggests", "indicates"]
+        reflection_words = ["seems", "sounds like",
+                            "appears", "suggests", "indicates"]
         if any(phrase in response.lower() for phrase in reflection_words):
             score += 0.1
 
@@ -150,7 +154,7 @@ class LexiconLearner:
 
     def learn_from_conversation(self, conversation_data: Dict) -> Dict:
         """Learn patterns from a complete conversation"""
-        learning_results = {
+        learning_results: Dict[str, Any] = {
             "new_emotional_words": [],
             "effective_response_patterns": [],
             "word_associations": {},
@@ -175,11 +179,13 @@ class LexiconLearner:
                         learning_results["new_emotional_words"].extend(words)
 
                     # Analyze word associations
-                    associations = self.analyze_word_associations(user_text, system_text)
+                    associations = self.analyze_word_associations(
+                        user_text, system_text)
                     learning_results["word_associations"].update(associations)
 
                     # Track effective response patterns
-                    effectiveness = self._score_response_effectiveness(system_text)
+                    effectiveness = self._score_response_effectiveness(
+                        system_text)
                     if effectiveness > 0.7:  # High effectiveness threshold
                         learning_results["effective_response_patterns"].append(
                             {
@@ -190,7 +196,8 @@ class LexiconLearner:
                         )
 
         # Identify conversation themes
-        all_user_text = " ".join([msg["content"] for msg in messages if msg["type"] == "user"])
+        all_user_text = " ".join([msg["content"]
+                                 for msg in messages if msg["type"] == "user"])
         themes = self._identify_themes(all_user_text)
         learning_results["conversation_themes"] = themes
 
@@ -265,7 +272,8 @@ class LexiconLearner:
             if word in self.pattern_history["pattern_frequencies"]:
                 # Update existing frequency with weighted average
                 old_freq = self.pattern_history["pattern_frequencies"][word]
-                self.pattern_history["pattern_frequencies"][word] = (old_freq + effectiveness) / 2
+                self.pattern_history["pattern_frequencies"][word] = (
+                    old_freq + effectiveness) / 2
             else:
                 self.pattern_history["pattern_frequencies"][word] = effectiveness
 
