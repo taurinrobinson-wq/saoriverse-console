@@ -230,22 +230,28 @@ class EmotionalFramework:
         self._state.last_emotion = primary_emotion
 
         # Step 2: Apply Presence Architecture
-        presence_output = {}
+        presence_output: Dict[str, Any] = {}
         if self._state.attunement_active:
             self._attunement.process_message(message)
-            presence_output["attunement"] = self._attunement.get_current_state().to_dict()
-            presence_output["response_modifiers"] = self._attunement.get_response_modifiers()
+            presence_output["attunement"] = self._attunement.get_current_state(
+            ).to_dict()
+            presence_output["response_modifiers"] = self._attunement.get_response_modifiers(
+            )
 
         if self._state.reciprocity_active:
             emotional_input = self._reciprocity.detect_emotional_input(message)
-            reciprocal = self._reciprocity.generate_reciprocal_response(emotional_input)
+            reciprocal = self._reciprocity.generate_reciprocal_response(
+                emotional_input)
             presence_output["reciprocity"] = reciprocal
-            presence_output["mood_profile"] = self._reciprocity.get_mood_profile().to_dict()
+            presence_output["mood_profile"] = self._reciprocity.get_mood_profile(
+            ).to_dict()
 
         if self._state.temporal_active:
             self._temporal.record_emotion(primary_emotion)
-            recalls = self._temporal.recall_for_context(primary_emotion, user_id)
-            context_phrase = self._temporal.get_emotional_context_phrase(primary_emotion, user_id)
+            recalls = self._temporal.recall_for_context(
+                primary_emotion, user_id)
+            context_phrase = self._temporal.get_emotional_context_phrase(
+                primary_emotion, user_id)
             presence_output["temporal_recalls"] = len(recalls)
             presence_output["context_phrase"] = context_phrase
 
@@ -258,33 +264,37 @@ class EmotionalFramework:
                 requires_holding=intensity > 0.7,
             )
             self._embodiment.process_interaction(load)
-            presence_output["embodiment"] = self._embodiment.get_current_state().to_dict()
+            presence_output["embodiment"] = self._embodiment.get_current_state(
+            ).to_dict()
             presence_output["needs_pause"] = self._embodiment.should_suggest_pause()
 
         if self._state.poetic_active:
             metaphors = self._poetic.perceive(message)
             presence_output["metaphors"] = [m.to_dict() for m in metaphors]
             presence_output["symbolic_context"] = self._poetic.get_symbolic_context()
-            presence_output["poetic_response"] = self._poetic.generate_resonant_response()
+            presence_output["poetic_response"] = self._poetic.generate_resonant_response(
+            )
 
         # Step 3: Apply Generative Tension
-        tension_output = {}
+        tension_output: Dict[str, Any] = {}
         if self._state.tension_active:
             tension_context = {
                 "emotional_intensity": self._estimate_intensity(message, signals),
                 "pattern_repetition": self._detect_pattern_repetition(message),
             }
-            tensions = self._tension.generate_tensions(message, primary_emotion, tension_context)
+            tensions = self._tension.generate_tensions(
+                message, primary_emotion, tension_context)
             tension_output["tensions"] = [t.to_dict() for t in tensions]
 
         # Step 4: Apply Saori Layer
-        saori_output = {}
+        saori_output: Dict[str, Any] = {}
         if self._state.saori_active:
             saori_context = {
                 "emotion": primary_emotion,
                 "intensity": self._estimate_intensity(message, signals),
             }
-            saori_result = self._saori.process_interaction(message, saori_context)
+            saori_result = self._saori.process_interaction(
+                message, saori_context)
             saori_output = saori_result
 
         # Step 5: Generate enhanced response
@@ -296,7 +306,7 @@ class EmotionalFramework:
         )
 
         # Compose final result
-        result = {
+        result: Dict[str, Any] = {
             **base_result,
             "enhanced_response": enhanced_response,
             "presence": presence_output,
@@ -335,7 +345,7 @@ class EmotionalFramework:
         # Check for intensity markers
         lower = message.lower()
         intensity_words = ["so", "very", "extremely", "incredibly", "really",
-                          "completely", "totally", "absolutely", "overwhelmed"]
+                           "completely", "totally", "absolutely", "overwhelmed"]
         for word in intensity_words:
             if word in lower:
                 intensity += 0.1
@@ -354,7 +364,7 @@ class EmotionalFramework:
         """Detect if this message contains repeated patterns."""
         # Simple heuristic: count repeated words
         words = message.lower().split()
-        word_counts = {}
+        word_counts: Dict[str, int] = {}
         for word in words:
             if len(word) > 3:
                 word_counts[word] = word_counts.get(word, 0) + 1
