@@ -247,7 +247,13 @@ class LimbicAdjacentSystem:
         if emotion_key not in base_signals:
             emotion_key = "joy"  # Default to joy
 
-        result = base_signals[emotion_key].copy()
+        # Copy and normalize inner mappings to Dict[str, Any] so we can add
+        # numeric `intensity` and other non-string fields without mypy
+        # complaining about str-only dict values inferred from the literals.
+        raw_result = base_signals[emotion_key].copy()
+        result: Dict[SystemType, Dict[str, Any]] = {
+            system: dict(signal_data) for system, signal_data in raw_result.items()
+        }
 
         # Scale intensity
         for system, signal_data in result.items():
@@ -331,6 +337,7 @@ if __name__ == "__main__":
     print("\n🌈 Emotion Chiasmus (Joy):")
     chiasmus = system.create_ritual_chiasmus("joy")
     for system_type, signal_data in chiasmus["system_signals"].items():
-        print(f"  {system_type.value}: {signal_data['glyph']} {signal_data['signal']}")
+        print(
+            f"  {system_type.value}: {signal_data['glyph']} {signal_data['signal']}")
 
     print("\n✅ Limbic-adjacent system initialized and ready for integration!")
