@@ -77,7 +77,7 @@ class LimbicIntegrationEngine:
 
         Returns neural mappings, glyph sequences, and system signals.
         """
-        result = {
+        result: Dict[str, Any] = {
             "emotion": emotion,
             "intensity": intensity,
             "limbic_mapping": {},
@@ -180,7 +180,7 @@ class LimbicIntegrationEngine:
 
         This creates the complete pipeline from neural activation to glyph storage.
         """
-        result = {
+        result: Dict[str, Any] = {
             "emotion": emotion,
             "user_id": user_id,
             "limbic_processed": False,
