@@ -13,7 +13,7 @@ Not limited to poetry - works with:
 """
 
 import re
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 
 class PoetrySignalExtractor:
@@ -191,7 +191,7 @@ class PoetrySignalExtractor:
             return []
 
         text_lower = text.lower()
-        detected_signals = []
+        detected_signals: List[Dict[str, Any]] = []
 
         for signal_name, signal_data in self.POETIC_SIGNALS.items():
             confidence = self._calculate_signal_confidence(
@@ -293,7 +293,7 @@ class PoetrySignalExtractor:
 
 
 # Singleton
-_poetry_extractor = None
+_poetry_extractor: Optional[PoetrySignalExtractor] = None
 
 
 def get_poetry_extractor() -> PoetrySignalExtractor:
