@@ -164,20 +164,24 @@ class AnonymizationProtocol:
 
         # Anonymize text content
         if "text" in entry:
-            anonymized["text"], anonmap = self._anonymize_text(entry["text"], anonmap)
+            anonymized["text"], anonmap = self._anonymize_text(
+                entry["text"], anonmap)
 
         # Anonymize ritual
         if "ritual" in entry:
-            anonymized["ritual"], anonmap = self._anonymize_text(entry["ritual"], anonmap)
+            anonymized["ritual"], anonmap = self._anonymize_text(
+                entry["ritual"], anonmap)
 
         # Preserve metadata but anonymize sensitive fields
         if "metadata" in entry:
-            anonymized["metadata"] = self._anonymize_metadata(entry["metadata"], anonmap)
+            anonymized["metadata"] = self._anonymize_metadata(
+                entry["metadata"], anonmap)
 
         # Add anonymization flag
         anonymized["_anonymized"] = True
         anonymized["_anonymization_consent_level"] = (
-            "full" if (self.allow_names and self.allow_medical) else "medical" if self.allow_medical else "full"
+            "full" if (
+                self.allow_names and self.allow_medical) else "medical" if self.allow_medical else "full"
         )
 
         # Store map for potential reversal
@@ -198,13 +202,15 @@ class AnonymizationProtocol:
                     pattern = rf"\b{re.escape(actual)}\b"
                     if re.search(pattern, result, re.IGNORECASE):
                         replacement = glyph if self.allow_names is False else actual
-                        result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
+                        result = re.sub(pattern, replacement,
+                                        result, flags=re.IGNORECASE)
                         anonmap.identifier_glyphs[actual.lower()] = replacement
 
         # 2. Handle family roles (preserve relational dynamics)
         for pattern, replacement in IDENTITY_GLYPHS["family_roles"].items():
             if re.search(pattern, result, re.IGNORECASE):
-                result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
+                result = re.sub(pattern, replacement,
+                                result, flags=re.IGNORECASE)
                 anonmap.identifier_glyphs[pattern] = replacement
 
         # 3. Handle locations (generalize, not erase)
@@ -212,8 +218,10 @@ class AnonymizationProtocol:
             if re.search(pattern, result, re.IGNORECASE):
                 match = re.search(pattern, result, re.IGNORECASE)
                 if match:
-                    anonmap.location_generalizations[match.group(0)] = generalization
-                result = re.sub(pattern, generalization, result, flags=re.IGNORECASE)
+                    anonmap.location_generalizations[match.group(
+                        0)] = generalization
+                result = re.sub(pattern, generalization,
+                                result, flags=re.IGNORECASE)
 
         # 4. Handle dates (convert to relative time)
         result, date_shifts = self._anonymize_dates(result)
@@ -223,7 +231,8 @@ class AnonymizationProtocol:
         if not self.allow_medical:
             for pattern, glyph in MEDICAL_GLYPHS.items():
                 if re.search(pattern, result, re.IGNORECASE):
-                    result = re.sub(pattern, glyph, result, flags=re.IGNORECASE)
+                    result = re.sub(pattern, glyph, result,
+                                    flags=re.IGNORECASE)
                     anonmap.identifier_glyphs[pattern] = glyph
 
         return result, anonmap
@@ -238,7 +247,8 @@ class AnonymizationProtocol:
                 r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})\b",
                 self._month_year_to_relative,
             ),
-            (r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})\b", self._numeric_date_to_relative),
+            (r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})\b",
+             self._numeric_date_to_relative),
         ]
 
         for pattern, converter in patterns:
@@ -275,6 +285,8 @@ class AnonymizationProtocol:
             month = months.get(month_str)
             year = int(year_str)
 
+            if not month:
+                return "recently"  # Default if month cannot be parsed
             date = datetime(year, month, 1)
             now = datetime.now()
             delta = now - date
@@ -438,10 +450,10 @@ if __name__ == "__main__":
     print("=" * 80)
 
     print("\n📄 ORIGINAL ENTRY:")
-    print(test_entry["text"].strip())
+    print(str(test_entry["text"]).strip())
 
     print("\n🔐 ANONYMIZED ENTRY:")
-    print(anonymized["text"].strip())
+    print(str(anonymized["text"]).strip())
 
     print("\n📋 ANONYMIZATION REPORT:")
     report = anon.generate_anonymization_report(test_entry, anonmap)
