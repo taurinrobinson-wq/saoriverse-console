@@ -19,7 +19,7 @@ import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from enum import Enum
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -118,10 +118,12 @@ class ToneAnalyzer:
         text_lower = user_text.lower()
 
         # Check for voltage keywords
-        has_voltage = any(keyword in text_lower for keyword in self.voltage_keywords)
+        has_voltage = any(
+            keyword in text_lower for keyword in self.voltage_keywords)
 
         # Check for dismissive phrases
-        has_dismissal = any(phrase in text_lower for phrase in self.sarcasm_markers)
+        has_dismissal = any(
+            phrase in text_lower for phrase in self.sarcasm_markers)
 
         # Contradiction: saying "I'm fine" but showing voltage
         if has_dismissal and has_voltage:
@@ -133,8 +135,10 @@ class ToneAnalyzer:
             first_part = parts[0]
             second_part = parts[1] if len(parts) > 1 else ""
 
-            dismissal_in_first = any(p in first_part for p in self.sarcasm_markers)
-            voltage_in_second = any(v in second_part for v in self.voltage_keywords)
+            dismissal_in_first = any(
+                p in first_part for p in self.sarcasm_markers)
+            voltage_in_second = any(
+                v in second_part for v in self.voltage_keywords)
 
             if dismissal_in_first and voltage_in_second:
                 return True, "Contradiction across 'but' boundary", 0.75
@@ -280,7 +284,8 @@ class GlyphStateManager:
         """Exit holding breath state."""
         duration = None
         if self.post_trigger_silence_start:
-            duration = (datetime.now() - self.post_trigger_silence_start).total_seconds()
+            duration = (datetime.now() -
+                        self.post_trigger_silence_start).total_seconds()
 
         self.post_trigger_silence_start = None
 
@@ -317,7 +322,7 @@ class FallbackProtocol:
         Returns:
             Dict with protocol decisions and companion behavior
         """
-        result = {
+        result: Dict[str, Any] = {
             "user_text": user_text,
             "timestamp": datetime.now().isoformat(),
             "detections": {
@@ -331,7 +336,8 @@ class FallbackProtocol:
         }
 
         # 1. Check for tone ambiguity
-        is_ambiguous, ambiguity_reason, confidence = self.tone_analyzer.detect_ambiguity(user_text, detected_signals)
+        is_ambiguous, ambiguity_reason, confidence = self.tone_analyzer.detect_ambiguity(
+            user_text, detected_signals)
         result["detections"]["ambiguity"] = {
             "detected": is_ambiguous,
             "reason": ambiguity_reason,
@@ -341,7 +347,8 @@ class FallbackProtocol:
         # 2. Check for trigger misfires
         if detected_triggers:
             for trigger in detected_triggers:
-                is_misfire, misfire_reason = self.tone_analyzer.detect_misfire(trigger, user_text)
+                is_misfire, misfire_reason = self.tone_analyzer.detect_misfire(
+                    trigger, user_text)
                 if is_misfire:
                     result["detections"]["misfires"].append(
                         {
@@ -361,11 +368,13 @@ class FallbackProtocol:
         result["glyph_response"] = glyph_response
 
         # 5. Generate companion behavior
-        companion = self._generate_companion_behavior(user_text, is_ambiguous, glyph_response, detected_triggers)
+        companion = self._generate_companion_behavior(
+            user_text, is_ambiguous, glyph_response, detected_triggers)
         result["companion_behavior"] = companion
 
         # 6. Make protocol decisions
-        result["decisions"] = self._make_decisions(is_ambiguous, result["detections"]["misfires"], detected_triggers)
+        result["decisions"] = self._make_decisions(
+            is_ambiguous, result["detections"]["misfires"], detected_triggers)
 
         return result
 
@@ -393,7 +402,8 @@ class FallbackProtocol:
                 "meaning": "False positive detected and canceled",
             }
 
-        if triggers and len(triggers) > 1:
+        triggers_list = triggers or []  # Ensure it's a list for len() calls
+        if triggers_list and len(triggers_list) > 1:
             return {
                 "animation": "holds last confirmed state",
                 "state": "holding",
@@ -402,7 +412,7 @@ class FallbackProtocol:
             }
 
         # Post-trigger silence
-        if triggers and len(triggers) == 1:
+        if triggers_list and len(triggers_list) == 1:
             return {
                 "animation": "holds breath",
                 "state": "breathing",
@@ -424,7 +434,8 @@ class FallbackProtocol:
         glyph_response: Dict,
         triggers: Optional[List[str]],
     ) -> Dict:
-        """Generate companion (AI) response."""
+        """Generate companion behavior response."""
+        triggers_list = triggers or []  # Ensure it's a list
         if is_ambiguous:
             return {
                 "behavior": "ask for clarification",
@@ -480,9 +491,10 @@ class FallbackProtocol:
         if misfires:
             decisions["should_explain_misfire"] = True
             decisions["should_lock_trigger"] = False
-        elif triggers and len(triggers) > 0 and not is_ambiguous:
-            decisions["should_lock_trigger"] = True
-            decisions["should_wait"] = True  # Enter holding breath
+        elif triggers:  # Type narrowed: is list now
+            if len(triggers) > 0 and not is_ambiguous:
+                decisions["should_lock_trigger"] = True
+                decisions["should_wait"] = True  # Enter holding breath
 
         return decisions
 
@@ -557,7 +569,8 @@ if __name__ == "__main__":
     )
     print(f"Glyph: {result3['glyph_response']['visual']}")
     print(f"Companion: {result3['companion_behavior']['message']}")
-    print(f"Decision - Lock Trigger: {result3['decisions']['should_lock_trigger']}")
+    print(
+        f"Decision - Lock Trigger: {result3['decisions']['should_lock_trigger']}")
     print(f"Decision - Wait: {result3['decisions']['should_wait']}")
 
     print("\n" + "=" * 80)
