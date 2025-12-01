@@ -13,7 +13,7 @@ Not limited to poetry - works with:
 """
 
 import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, cast
 
 
 class PoetrySignalExtractor:
@@ -24,7 +24,7 @@ class PoetrySignalExtractor:
     """
 
     # Emotional signals that can appear in any creative writing
-    POETIC_SIGNALS = {
+    POETIC_SIGNALS: Dict[str, Dict[str, Any]] = {
         "love": {
             "keywords": [
                 "love",
@@ -194,8 +194,13 @@ class PoetrySignalExtractor:
         detected_signals: List[Dict[str, Any]] = []
 
         for signal_name, signal_data in self.POETIC_SIGNALS.items():
+            # Narrow/validate expected shapes for static checking
+            keywords = cast(List[str], signal_data.get("keywords", []))
+            metaphors = cast(List[str], signal_data.get("metaphors", []))
+            intensity = float(signal_data.get("intensity", 0.0))
+
             confidence = self._calculate_signal_confidence(
-                text_lower, signal_data["keywords"], signal_data["metaphors"], signal_data["intensity"]
+                text_lower, keywords, metaphors, intensity
             )
 
             if confidence > 0.3:  # Threshold for detection
@@ -203,7 +208,7 @@ class PoetrySignalExtractor:
                     {
                         "signal": signal_name,
                         "confidence": confidence,
-                        "keywords": self._find_matching_keywords(text_lower, signal_data["keywords"]),
+                        "keywords": self._find_matching_keywords(text_lower, keywords),
                         "keyword": signal_name,  # For compatibility with existing system
                     }
                 )
@@ -222,14 +227,15 @@ class PoetrySignalExtractor:
             return []
 
         signal_data = self.POETIC_SIGNALS[signal_name]
-        keywords = signal_data.get("keywords", [])
-        metaphors = signal_data.get("metaphors", [])
+        keywords = cast(List[str], signal_data.get("keywords", []))
+        metaphors = cast(List[str], signal_data.get("metaphors", []))
 
         # Common words to filter out (articles, prepositions, etc)
-        stop_words = {"the", "a", "an", "is", "are", "be", "on", "in", "at", "to", "for", "of", "and", "or", "it"}
+        stop_words = {"the", "a", "an", "is", "are", "be", "on",
+                      "in", "at", "to", "for", "of", "and", "or", "it"}
 
         words = text.lower().split()
-        phrases = []
+        phrases: List[str] = []
 
         # Generate 2 and 3-word phrases, prioritizing those with signal keywords
         for i in range(len(words) - 1):
