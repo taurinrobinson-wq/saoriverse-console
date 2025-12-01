@@ -25,7 +25,8 @@ except Exception:
 try:
     from symbolic_tagger import tag_input_with_diagnostics
 except Exception:
-    def tag_input_with_diagnostics(user_input: str, fuzzy_thresh: float = 0.75) -> dict[Any, Any]:  # type: ignore
+    # type: ignore
+    def tag_input_with_diagnostics(user_input: str, fuzzy_thresh: float = 0.75) -> dict[Any, Any]:
         return {"tags": [], "matches": []}
 
 DEFAULT_STORE = Path(__file__).resolve(
@@ -150,7 +151,7 @@ class ClarificationTrace:
             except Exception:
                 pass
             fallback_result = {"stored": True, "rowid": None,
-                      "inferred_intent": None, "needs_confirmation": False}
+                               "inferred_intent": None, "needs_confirmation": False}
             try:
                 self._last_result = fallback_result
             except Exception:

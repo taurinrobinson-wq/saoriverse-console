@@ -22,7 +22,7 @@ import sqlite3
 from datetime import datetime
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Union
+from typing import Any, Callable, cast, Dict, List, Optional, Union
 
 # Pre-declare optionally-imported symbols with permissive Any to avoid mypy assignment
 # conflicts when falling back to None in ImportError handlers.
@@ -1715,7 +1715,7 @@ def parse_input(
     heuristic_tone_map = {"ε": "insight", "θ": "grief",
                           "β": "containment", "λ": "joy", "γ": "longing"}
     lower_input = input_text.strip().lower()
-    heuristic_signals = []
+    heuristic_signals: List[Dict[str, Any]] = []
     for kw, sig in heuristic_emotion_map.items():
         if kw in lower_input:
             heuristic_signals.append(
@@ -1942,7 +1942,8 @@ def parse_input(
             pass
 
     # Sanctuary Mode: ensure compassionate handling for sensitive content
-    primary_tone = signals[0].get("tone", "unknown") if signals else "unknown"
+    primary_tone: str = str(signals[0].get(
+        "tone", "unknown")) if signals else "unknown"
     if SANCTUARY_MODE or is_sensitive_input(input_text):
         contextual_response = ensure_sanctuary_response(
             input_text=input_text, base_response=contextual_response, tone=primary_tone
@@ -1951,7 +1952,8 @@ def parse_input(
     voltage_response_template = None
     try:
         if best_glyph and best_glyph.get("response_template"):
-            voltage_response_template = best_glyph.get("response_template")
+            voltage_response_template = cast(
+                Union[str, Dict[str, Any]], best_glyph.get("response_template"))
     except Exception:
         voltage_response_template = None
 
@@ -1985,18 +1987,22 @@ def parse_input(
             # ignore here while preserving runtime behavior.
             # type: ignore[assignment]
             detected_emotions: Dict[str, float] = {}
-            for sig in signals:
+            for sig in signals:  # type: ignore[assignment]
                 # Guard: ensure signal items are dict-like before attribute access.
                 # Some legacy code paths may populate signals with non-dict items;
                 # skip those to keep the processing robust and satisfy static checks.
                 if not isinstance(sig, dict):
                     continue
-                tone = sig.get('tone', 'unknown')
-                voltage = sig.get('voltage', 'medium')
+                tone: str = str(sig.get('tone', 'unknown'))
+                # Cast tone to str to satisfy type checking
+                tone_str: str = tone
+                voltage: str = str(sig.get('voltage', 'medium'))
+                # Cast voltage to str to satisfy type checking
+                voltage_str: str = voltage
                 intensity = {'low': 0.3, 'medium': 0.6,
-                             'high': 1.0}.get(voltage, 0.5)
-                detected_emotions[tone] = max(
-                    detected_emotions.get(tone, 0), intensity)
+                             'high': 1.0}.get(voltage_str, 0.5)
+                detected_emotions[tone_str] = max(
+                    detected_emotions.get(tone_str, 0), intensity)
 
             poetic_result = engine.process_glyph_response(
                 glyph_data=best_glyph or {},

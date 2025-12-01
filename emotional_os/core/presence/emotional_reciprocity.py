@@ -25,7 +25,7 @@ Documentation:
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 import random
 
@@ -69,7 +69,8 @@ class MoodProfile:
     stability: float = 0.5
     warmth_level: float = 0.7
     engagement_level: float = 0.6
-    last_shift: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    last_shift: datetime = field(
+        default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> Dict:
         """Serialize profile to dictionary."""
@@ -91,7 +92,8 @@ class EmotionalInput:
     valence: EmotionalValence
     intensity: float
     underlying_needs: List[str]
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = field(
+        default_factory=lambda: datetime.now(timezone.utc))
 
 
 class EmotionalReciprocity:
@@ -109,7 +111,7 @@ class EmotionalReciprocity:
     """
 
     # Reciprocity mapping: what emotional response complements user emotion
-    RECIPROCITY_MAP = {
+    RECIPROCITY_MAP: Dict[str, Dict[str, Any]] = {
         "grief": {"response_mood": MoodState.TENDER, "tone": "tender", "action": "hold_space"},
         "sadness": {"response_mood": MoodState.TENDER, "tone": "gentle", "action": "validate"},
         "joy": {"response_mood": MoodState.WARM, "tone": "celebratory", "action": "amplify"},
@@ -174,7 +176,7 @@ class EmotionalReciprocity:
         # Determine valence
         positive_emotions = {"joy", "excitement", "hope", "love"}
         negative_emotions = {"grief", "sadness", "anger", "frustration",
-                            "fear", "anxiety", "shame", "guilt", "loneliness"}
+                             "fear", "anxiety", "shame", "guilt", "loneliness"}
 
         if primary in positive_emotions:
             valence = EmotionalValence.POSITIVE
@@ -221,7 +223,8 @@ class EmotionalReciprocity:
             intensity += min(0.2, exclamation_count * 0.05)
 
         # All caps words (shouting)
-        caps_words = len([w for w in message.split() if w.isupper() and len(w) > 2])
+        caps_words = len([w for w in message.split()
+                         if w.isupper() and len(w) > 2])
         if caps_words > 0:
             intensity += min(0.15, caps_words * 0.05)
 
@@ -267,9 +270,11 @@ class EmotionalReciprocity:
 
         # Adjust intensity and warmth
         if input_data.valence == EmotionalValence.NEGATIVE:
-            self._mood_profile.warmth_level = min(1.0, self._mood_profile.warmth_level + 0.1)
+            self._mood_profile.warmth_level = min(
+                1.0, self._mood_profile.warmth_level + 0.1)
         elif input_data.valence == EmotionalValence.POSITIVE:
-            self._mood_profile.engagement_level = min(1.0, self._mood_profile.engagement_level + 0.1)
+            self._mood_profile.engagement_level = min(
+                1.0, self._mood_profile.engagement_level + 0.1)
 
         self._mood_profile.intensity = (
             self._mood_profile.intensity * (1 - self._mood_evolution_rate) +
@@ -348,15 +353,20 @@ class EmotionalReciprocity:
         mood = self._mood_profile
 
         if mood.primary_mood == MoodState.TENDER:
-            qualities.extend(["gentle language", "soft openings", "patient pacing"])
+            qualities.extend(
+                ["gentle language", "soft openings", "patient pacing"])
         elif mood.primary_mood == MoodState.PLAYFUL:
-            qualities.extend(["light touch", "curious questions", "creative phrasing"])
+            qualities.extend(
+                ["light touch", "curious questions", "creative phrasing"])
         elif mood.primary_mood == MoodState.GROUNDED:
-            qualities.extend(["steady presence", "clear language", "anchoring phrases"])
+            qualities.extend(
+                ["steady presence", "clear language", "anchoring phrases"])
         elif mood.primary_mood == MoodState.WARM:
-            qualities.extend(["welcoming tone", "inclusive language", "affirming presence"])
+            qualities.extend(
+                ["welcoming tone", "inclusive language", "affirming presence"])
         elif mood.primary_mood == MoodState.WITNESS:
-            qualities.extend(["minimal interpretation", "reflective listening", "space-holding"])
+            qualities.extend(
+                ["minimal interpretation", "reflective listening", "space-holding"])
 
         if mood.warmth_level > 0.7:
             qualities.append("explicit warmth expressions")
