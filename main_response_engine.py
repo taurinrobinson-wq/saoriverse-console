@@ -10,7 +10,7 @@ import os
 import random
 import re
 import string
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 
 from emotional_os.adapter.clarification_trace import ClarificationTrace
 from emotional_os.adapter.closing_prompts import get_closing_prompt
@@ -51,11 +51,16 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     # This expects callers to pass `last_user_input` and `last_system_response`
     # in `context` when available so we can anchor the clarification.
     try:
-        ds = _clarify_trace.detect_and_store(user_input, {**ctx})
-        # Support both the new dict return value and legacy boolean return for compatibility.
-        # If a non-dict (legacy bool) is returned, do not reuse any stale `_last_result`.
-        if not isinstance(ds, dict):
-            ds = {"stored": bool(ds)}
+        trace_result = _clarify_trace.detect_and_store(user_input, {**ctx})
+        # Normalize into a dict `ds` to avoid reusing a variable that may be
+        # statically typed as bool by the ClarificationTrace API. Keep this
+        # behavior-preserving: legacy detect_and_store returned bool, newer
+        # implementations may return a dict with metadata.
+        ds: Dict[str, Any]
+        if isinstance(trace_result, dict):
+            ds = trace_result
+        else:
+            ds = {"stored": bool(trace_result)}
 
         # ds is expected to be a dict: {stored:bool, rowid:int, inferred_intent:Optional[str], needs_confirmation:bool}
         if ds.get("stored"):
