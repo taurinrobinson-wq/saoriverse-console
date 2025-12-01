@@ -1,11 +1,10 @@
-import os
 import json
+import os
 import time
+
 from local_inference.preprocessor import Preprocessor
 
-
-SAMPLE_PATH = os.path.join(
-    os.getcwd(), "local_inference", "emotional_taxonomy_sample.json")
+SAMPLE_PATH = os.path.join(os.getcwd(), "local_inference", "emotional_taxonomy_sample.json")
 
 
 def test_determine_escalation_tier1():
@@ -18,8 +17,7 @@ def test_determine_escalation_tier1():
 def test_determine_escalation_tier2_cluster_and_confidence():
     p = Preprocessor(test_mode=True, taxonomy_path=SAMPLE_PATH)
     # cluster behavior: default cluster_size == 2 in this Preprocessor implementation
-    action_cluster, reason_cluster = p._determine_escalation(
-        ["conflict", "longing"], 0.9, [])
+    action_cluster, reason_cluster = p._determine_escalation(["conflict", "longing"], 0.9, [])
     assert action_cluster == "conditional_escalation"
     assert reason_cluster == "cluster_escalation"
 
@@ -43,8 +41,7 @@ def test_preprocess_and_record_audit_creates_log_entry(tmp_path):
     time.sleep(0.01)
 
     log_path = os.path.join(p.logs_dir, "preprocessor.log")
-    assert os.path.exists(
-        log_path), "preprocessor.log should be created by record_audit"
+    assert os.path.exists(log_path), "preprocessor.log should be created by record_audit"
 
     # Ensure at least one line contains the kind 'preprocessor_audit'
     found = False
@@ -97,5 +94,4 @@ def test_preprocess_end_to_end_sanitization_and_escalation(tmp_path):
 
     # Escalation should be triggered by cluster of tier-2 tags (default cluster_size == 2)
     assert result.get("escalation_action") == "conditional_escalation"
-    assert result.get("escalation_reason") in (
-        "cluster_escalation", "confidence_escalation")
+    assert result.get("escalation_reason") in ("cluster_escalation", "confidence_escalation")

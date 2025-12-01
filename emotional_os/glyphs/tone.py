@@ -9,7 +9,9 @@ Functions:
 - update_tone_state(tone_history, new_text) -> dict
 - get_clarifier(tone_state) -> str
 """
-from typing import List, Dict, Any
+
+from typing import Any, Dict, List
+
 
 def update_tone_state(tone_history: List[str], new_text: str) -> Dict[str, Any]:
     """Update a minimal tone state from rolling history + new input.
@@ -48,6 +50,6 @@ def get_clarifier(tone_state: Dict[str, Any]) -> str:
 
         # short echo + invitation
         echo = last if len(last) <= 80 else last[:77].rsplit(" ", 1)[0] + "..."
-        return f"I hear you: \"{echo}\". Can you tell me a bit more about that?"
+        return f'I hear you: "{echo}". Can you tell me a bit more about that?'
 
     return "I hear you. Would you like to tell me more about what's happening for you?"

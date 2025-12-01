@@ -1,8 +1,7 @@
-import sqlite3
 import json
 import os
+import sqlite3
 import time
-
 from pathlib import Path
 
 import pytest
@@ -22,16 +21,14 @@ def test_db_lock_triggers_jsonl_fallback(tmp_path, monkeypatch):
     store = clarification_store.ClarificationStore(db_path=db_path)
 
     # Create an exclusive lock on the DB in this test process
-    conn_lock = sqlite3.connect(
-        db_path_str, timeout=1, check_same_thread=False)
+    conn_lock = sqlite3.connect(db_path_str, timeout=1, check_same_thread=False)
     try:
         # Acquire exclusive lock by beginning an exclusive transaction
         conn_lock.execute("BEGIN EXCLUSIVE")
 
         # Monkeypatch get_default_store in clarification_trace to return our store instance
         # Allow creating the attribute if it does not exist yet.
-        monkeypatch.setattr(clarification_trace,
-                            "get_default_store", lambda: store, raising=False)
+        monkeypatch.setattr(clarification_trace, "get_default_store", lambda: store, raising=False)
 
         # Instantiate ClarificationTrace with jsonl fallback path
         trace = clarification_trace.ClarificationTrace(store_path=jsonl_path)
@@ -59,8 +56,7 @@ def test_db_lock_triggers_jsonl_fallback(tmp_path, monkeypatch):
         assert len(lines) >= 1
 
         last = json.loads(lines[-1])
-        assert last.get("user_clarification") and "No, I meant" in last.get(
-            "user_clarification")
+        assert last.get("user_clarification") and "No, I meant" in last.get("user_clarification")
         assert last.get("conversation_id") == "test-convo"
         assert last.get("user_id") == "tester"
 

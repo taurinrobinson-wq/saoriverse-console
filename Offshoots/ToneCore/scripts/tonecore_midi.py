@@ -10,8 +10,7 @@ import random
 import re
 from pathlib import Path
 
-from mido import Message, MidiFile, MidiTrack, MetaMessage
-
+from mido import Message, MetaMessage, MidiFile, MidiTrack
 
 BASE = Path(__file__).resolve().parents[1]
 PIVOT_PATH = BASE / "chord_pivot_normalized.json"
@@ -68,10 +67,26 @@ def get_progression_for_emotion(emotion: str, pivot_map: dict, emotion_map: dict
 
 
 NOTE_MAP = {
-    "c": 60, "c#": 61, "db": 61, "d": 62, "d#": 63, "eb": 63,
-    "e": 64, "fb": 64, "e#": 65, "f": 65, "f#": 66, "gb": 66,
-    "g": 67, "g#": 68, "ab": 68, "a": 69, "a#": 70, "bb": 70,
-    "b": 71, "cb": 71
+    "c": 60,
+    "c#": 61,
+    "db": 61,
+    "d": 62,
+    "d#": 63,
+    "eb": 63,
+    "e": 64,
+    "fb": 64,
+    "e#": 65,
+    "f": 65,
+    "f#": 66,
+    "gb": 66,
+    "g": 67,
+    "g#": 68,
+    "ab": 68,
+    "a": 69,
+    "a#": 70,
+    "bb": 70,
+    "b": 71,
+    "cb": 71,
 }
 
 
@@ -86,8 +101,8 @@ def chords_to_midi_from_names(names, pivot_map, filename="tonecore_output.mid"):
     mid = MidiFile()
     track = MidiTrack()
     mid.tracks.append(track)
-    track.append(MetaMessage('set_tempo', tempo=500000))
-    track.append(Message('program_change', program=0, time=0))
+    track.append(MetaMessage("set_tempo", tempo=500000))
+    track.append(Message("program_change", program=0, time=0))
 
     ticks_per_beat = mid.ticks_per_beat
     chord_ticks = ticks_per_beat * 4
@@ -96,21 +111,18 @@ def chords_to_midi_from_names(names, pivot_map, filename="tonecore_output.mid"):
         # resolve name to chord obj
         chord_obj = None
         for e in pivot_map.values():
-            if e.get('base_chord', {}).get('name') == n:
-                chord_obj = e.get('base_chord')
+            if e.get("base_chord", {}).get("name") == n:
+                chord_obj = e.get("base_chord")
                 break
         notes = chord_obj_to_notes(chord_obj)
         if not notes:
             continue
         for note in notes:
             midi_note = NOTE_MAP.get(note.lower(), 60)
-            track.append(
-                Message('note_on', note=midi_note, velocity=64, time=0))
-        track.append(Message('note_off', note=NOTE_MAP.get(
-            notes[0].lower(), 60), velocity=64, time=chord_ticks))
+            track.append(Message("note_on", note=midi_note, velocity=64, time=0))
+        track.append(Message("note_off", note=NOTE_MAP.get(notes[0].lower(), 60), velocity=64, time=chord_ticks))
         for note in notes[1:]:
-            track.append(Message('note_off', note=NOTE_MAP.get(
-                note.lower(), 60), velocity=64, time=0))
+            track.append(Message("note_off", note=NOTE_MAP.get(note.lower(), 60), velocity=64, time=0))
 
     mid.save(filename)
     print(f"Saved MIDI progression to {filename}")
@@ -118,8 +130,8 @@ def chords_to_midi_from_names(names, pivot_map, filename="tonecore_output.mid"):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--emotion', default='longing')
-    parser.add_argument('--out', default='tonecore_output.mid')
+    parser.add_argument("--emotion", default="longing")
+    parser.add_argument("--out", default="tonecore_output.mid")
     args = parser.parse_args()
 
     pivot_map = load_pivot(PIVOT_PATH)
@@ -130,5 +142,5 @@ def main():
     chords_to_midi_from_names(prog, pivot_map, filename=args.out)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

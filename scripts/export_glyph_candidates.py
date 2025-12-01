@@ -7,14 +7,13 @@ in the candidate set. Default chunk size is 1000.
 
 This script is intentionally read-only (dry-run) and will not modify the DB.
 """
-import sqlite3
-import os
-import sys
 import csv
+import os
+import sqlite3
+import sys
 
-
-DB_DEFAULT = 'archive/full_backups/restore_glyphs_20251120T014253Z.db'
-OUT_DIR = 'archive/glyph_exports'
+DB_DEFAULT = "archive/full_backups/restore_glyphs_20251120T014253Z.db"
+OUT_DIR = "archive/glyph_exports"
 CHUNK_SIZE = 1000
 
 
@@ -23,8 +22,7 @@ def ensure_outdir(path):
 
 
 def table_exists(cur, name):
-    cur.execute(
-        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,))
+    cur.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,))
     return cur.fetchone() is not None
 
 
@@ -46,7 +44,7 @@ def build_criteria_and_params(markers):
         marker_clauses.append("LOWER(description) LIKE ?")
         params.append(like)
 
-    marker_sql = " OR ".join(marker_clauses) if marker_clauses else '0'
+    marker_sql = " OR ".join(marker_clauses) if marker_clauses else "0"
 
     # newline count via LENGTH(description) - LENGTH(REPLACE(description, char(10), ''))
     criteria = (
@@ -70,7 +68,7 @@ def export_chunks(conn, cur, cols, criteria, params, outdir, chunk_size):
     if total == 0:
         return []
 
-    select_cols = ', '.join([f'"{c}"' for c in cols])
+    select_cols = ", ".join([f'"{c}"' for c in cols])
     # We'll fetch in ORDER BY rowid to make chunk boundaries stable.
     sql = f"SELECT rowid, {select_cols} FROM glyph_lexicon WHERE {criteria} ORDER BY rowid LIMIT ? OFFSET ?"
 
@@ -85,15 +83,15 @@ def export_chunks(conn, cur, cols, criteria, params, outdir, chunk_size):
         start = offset + 1
         end = offset + len(rows)
         fname = os.path.join(outdir, f"candidates_{start}_{end}.csv")
-        with open(fname, 'w', newline='', encoding='utf-8') as f:
+        with open(fname, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow(['rowid'] + cols)
+            writer.writerow(["rowid"] + cols)
             for r in rows:
                 # r[0] is rowid, r[1:] correspond to cols order
                 # Normalize None -> empty string for CSV readability
-                outrow = [r[0]] + [('' if v is None else v) for v in r[1:]]
+                outrow = [r[0]] + [("" if v is None else v) for v in r[1:]]
                 writer.writerow(outrow)
-        print(f'Wrote {fname} ({len(rows)} rows)')
+        print(f"Wrote {fname} ({len(rows)} rows)")
         written_files.append(fname)
         offset += len(rows)
         seen += len(rows)
@@ -104,37 +102,50 @@ def export_chunks(conn, cur, cols, criteria, params, outdir, chunk_size):
 
 def main(dbpath, outdir=OUT_DIR, chunk_size=CHUNK_SIZE):
     if not os.path.exists(dbpath):
-        print('DB not found:', dbpath)
+        print("DB not found:", dbpath)
         return 2
     ensure_outdir(outdir)
     conn = sqlite3.connect(dbpath)
     cur = conn.cursor()
 
-    if not table_exists(cur, 'glyph_lexicon'):
-        print('No table named glyph_lexicon found. Aborting.')
+    if not table_exists(cur, "glyph_lexicon"):
+        print("No table named glyph_lexicon found. Aborting.")
         conn.close()
         return 2
 
     cols = get_columns(cur)
-    print('Found glyph_lexicon with columns:', cols)
+    print("Found glyph_lexicon with columns:", cols)
 
-    markers = ['markdown export', 'json export', 'archive', 'gutenberg', 'conversation archive',
-               'markdown', 'json', 'export', 'file:', 'http://', 'https://', '<html', '```', 'title:']
+    markers = [
+        "markdown export",
+        "json export",
+        "archive",
+        "gutenberg",
+        "conversation archive",
+        "markdown",
+        "json",
+        "export",
+        "file:",
+        "http://",
+        "https://",
+        "<html",
+        "```",
+        "title:",
+    ]
 
     criteria, params = build_criteria_and_params(markers)
-    print('Using heuristics to select candidates (dry-run). Chunk size:', chunk_size)
+    print("Using heuristics to select candidates (dry-run). Chunk size:", chunk_size)
 
-    files = export_chunks(conn, cur, cols, criteria,
-                          params, outdir, chunk_size)
+    files = export_chunks(conn, cur, cols, criteria, params, outdir, chunk_size)
 
     conn.close()
-    print('\nDry-run export finished. Files created:')
+    print("\nDry-run export finished. Files created:")
     for p in files:
-        print(' -', p)
+        print(" -", p)
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     db = DB_DEFAULT
     chunk = CHUNK_SIZE
     out = OUT_DIR

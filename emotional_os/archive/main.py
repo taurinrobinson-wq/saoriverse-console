@@ -13,20 +13,21 @@ st.write("📍 Entry point confirmed - Loading authentication...")
 try:
     # Import the authentication system
     from auth_emotional_os import main
-    
+
     st.write("✅ Authentication module imported successfully")
-    
+
     # Run the main authentication app
     if __name__ == "__main__":
         main()
-        
+
 except ImportError as e:
     st.error(f"❌ Import Error: {e}")
     st.write("Available files in directory:")
     import os
-    files = [f for f in os.listdir('.') if f.endswith('.py')]
+
+    files = [f for f in os.listdir(".") if f.endswith(".py")]
     st.write(files)
-    
+
 except Exception as e:
     st.error(f"❌ Error loading authentication system: {e}")
     st.write("Falling back to debug mode...")

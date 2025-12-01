@@ -12,10 +12,9 @@ string note lists like "c, e, g" into arrays, and convert null/None/"Nope"
 to proper `null` (`None` in Python).
 """
 
-from pathlib import Path
 import json
 import re
-
+from pathlib import Path
 
 IN = Path("Offshoots/chord_pivot.json")
 # Write normalized canonical pivot into the ToneCore project so the full
@@ -29,7 +28,7 @@ def load_raw(path: Path):
     end = text.rfind("]")
     if start == -1 or end == -1:
         raise ValueError("No JSON array found in pivot file")
-    core = text[start:end+1]
+    core = text[start : end + 1]
     return json.loads(core)
 
 
@@ -95,8 +94,7 @@ def main():
             to_name = t.get("to")
             notes = chord_lookup.get(to_name) or []
             to_obj = {"name": to_name, "notes": notes}
-            newt.append({"to": to_obj, "function": t.get("function"),
-                        "shared_notes": t.get("shared_notes", [])})
+            newt.append({"to": to_obj, "function": t.get("function"), "shared_notes": t.get("shared_notes", [])})
         e["transitions"] = newt
         # also ensure base_chord.notes are present in normalized form
         if not e.get("base_chord", {}).get("notes"):
@@ -104,11 +102,9 @@ def main():
             e["base_chord"]["notes"] = chord_lookup.get(bname, [])
         resolved.append(e)
 
-    OUT.write_text(json.dumps(resolved, indent=2,
-                   ensure_ascii=False), encoding="utf8")
-    print(
-        f"Wrote {len(resolved)} normalized entries (with full chord objects) to {OUT}")
+    OUT.write_text(json.dumps(resolved, indent=2, ensure_ascii=False), encoding="utf8")
+    print(f"Wrote {len(resolved)} normalized entries (with full chord objects) to {OUT}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

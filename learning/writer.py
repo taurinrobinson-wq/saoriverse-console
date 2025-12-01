@@ -21,6 +21,7 @@ Notes:
 This module provides small helper functions to write and read events
 in a consistent, atomic way.
 """
+
 from __future__ import annotations
 
 import json
@@ -29,9 +30,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional
 
-
-DEFAULT_LEARNING_DIR = os.path.join(
-    os.path.dirname(__file__), "..", "learning")
+DEFAULT_LEARNING_DIR = os.path.join(os.path.dirname(__file__), "..", "learning")
 
 
 def ensure_dir(path: str) -> None:

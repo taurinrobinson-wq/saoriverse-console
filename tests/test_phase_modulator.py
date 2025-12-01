@@ -10,7 +10,5 @@ def test_detect_archetypal_by_anchor():
 
 
 def test_detect_by_context_tags():
-    assert detect_phase(
-        "blah", {"symbolic_tags": ["initiatory_signal"]}) == "initiatory"
-    assert detect_phase(
-        "blah", {"symbolic_tags": ["containment_request"]}) == "archetypal"
+    assert detect_phase("blah", {"symbolic_tags": ["initiatory_signal"]}) == "initiatory"
+    assert detect_phase("blah", {"symbolic_tags": ["containment_request"]}) == "archetypal"

@@ -6,6 +6,8 @@ top-level module. The canonical implementation lives in
 primary symbol here to avoid ImportError in tests.
 """
 
-from emotional_os.glyphs.evolving_glyph_integrator import EvolvingGlyphIntegrator  # noqa: F401
+from emotional_os.glyphs.evolving_glyph_integrator import (  # noqa: F401
+    EvolvingGlyphIntegrator,
+)
 
 __all__ = ["EvolvingGlyphIntegrator"]

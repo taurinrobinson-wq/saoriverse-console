@@ -15,52 +15,50 @@ import json
 import logging
 import re
 import sys
-from pathlib import Path
 from collections import Counter, defaultdict
+from pathlib import Path
 
 # Ensure repo root is on sys.path so imports like `emotional_os` resolve
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
 def split_into_chunks(text: str, chunk_size: int = 500):
-    sentences = re.split(r'(?<=[.!?])\s+', text)
+    sentences = re.split(r"(?<=[.!?])\s+", text)
     chunks = []
     current = []
     words = 0
     for s in sentences:
         wc = len(s.split())
         if words + wc > chunk_size and current:
-            chunks.append(' '.join(current))
+            chunks.append(" ".join(current))
             current = [s]
             words = wc
         else:
             current.append(s)
             words += wc
     if current:
-        chunks.append(' '.join(current))
+        chunks.append(" ".join(current))
     return chunks
 
 
 def find_cleaned_files(base_dir: Path):
     # match *_cleaned.txt under data/openstax/<slug>/
-    return sorted(base_dir.rglob('*_cleaned.txt'))
+    return sorted(base_dir.rglob("*_cleaned.txt"))
 
 
 def main():
-    base = Path('data/openstax')
-    out_dir = Path('data/processed_poetry_signals')
+    base = Path("data/openstax")
+    out_dir = Path("data/processed_poetry_signals")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     files = find_cleaned_files(base)
     if not files:
-        logger.error(
-            f"No cleaned OpenStax files found under {base}. Did you run the crawler?")
+        logger.error(f"No cleaned OpenStax files found under {base}. Did you run the crawler?")
         return 1
 
     # Try to import the poetry extractor
@@ -72,13 +70,12 @@ def main():
 
     extractor = get_poetry_extractor()
 
-    csv_path = out_dir / 'openstax_signals.csv'
-    summary_path = out_dir / 'openstax_signals_summary.json'
+    csv_path = out_dir / "openstax_signals.csv"
+    summary_path = out_dir / "openstax_signals_summary.json"
 
     # Prepare CSV
-    with open(csv_path, 'w', newline='', encoding='utf-8') as cf:
-        writer = csv.DictWriter(cf, fieldnames=[
-                                'file', 'chunk_index', 'keyword', 'signal', 'confidence', 'source'])
+    with open(csv_path, "w", newline="", encoding="utf-8") as cf:
+        writer = csv.DictWriter(cf, fieldnames=["file", "chunk_index", "keyword", "signal", "confidence", "source"])
         writer.writeheader()
 
         aggregate = defaultdict(Counter)
@@ -87,7 +84,7 @@ def main():
         for filepath in files:
             total_files += 1
             try:
-                text = filepath.read_text(encoding='utf-8')
+                text = filepath.read_text(encoding="utf-8")
             except Exception as e:
                 logger.warning(f"Skipping {filepath}: {e}")
                 continue
@@ -99,35 +96,36 @@ def main():
                 try:
                     signals = extractor.extract_signals(chunk)
                 except Exception as e:
-                    logger.warning(
-                        f"Extractor failed on chunk {idx} of {filepath}: {e}")
+                    logger.warning(f"Extractor failed on chunk {idx} of {filepath}: {e}")
                     signals = []
 
                 for sig in signals:
-                    keyword = sig.get('keyword') or sig.get('name') or ''
-                    name = sig.get('signal') or sig.get('name') or ''
-                    confidence = sig.get('confidence', '')
-                    source = sig.get('source', '')
+                    keyword = sig.get("keyword") or sig.get("name") or ""
+                    name = sig.get("signal") or sig.get("name") or ""
+                    confidence = sig.get("confidence", "")
+                    source = sig.get("source", "")
 
-                    writer.writerow({
-                        'file': str(filepath),
-                        'chunk_index': idx,
-                        'keyword': keyword,
-                        'signal': name,
-                        'confidence': confidence,
-                        'source': source,
-                    })
+                    writer.writerow(
+                        {
+                            "file": str(filepath),
+                            "chunk_index": idx,
+                            "keyword": keyword,
+                            "signal": name,
+                            "confidence": confidence,
+                            "source": source,
+                        }
+                    )
 
                     aggregate[str(filepath)][name] += 1
 
     # Save summary
     summary = {
-        'files_processed': total_files,
-        'unique_files': len(aggregate),
-        'per_file_counts': {f: dict(cnt) for f, cnt in aggregate.items()},
+        "files_processed": total_files,
+        "unique_files": len(aggregate),
+        "per_file_counts": {f: dict(cnt) for f, cnt in aggregate.items()},
     }
 
-    with open(summary_path, 'w', encoding='utf-8') as sf:
+    with open(summary_path, "w", encoding="utf-8") as sf:
         json.dump(summary, sf, indent=2)
 
     logger.info(f"Wrote CSV: {csv_path}")
@@ -135,5 +133,5 @@ def main():
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

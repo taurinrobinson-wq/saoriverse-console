@@ -1,4 +1,5 @@
 import pytest
+
 from scripts import local_integration
 
 
@@ -15,5 +16,5 @@ def test_get_synonyms_no_error():
     assert isinstance(res, list)
     for item in res:
         assert isinstance(item, dict)
-        assert 'word' in item
-        assert 'source' in item
+        assert "word" in item
+        assert "source" in item

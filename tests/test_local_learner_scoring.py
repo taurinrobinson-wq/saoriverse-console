@@ -31,8 +31,9 @@ def test_score_high_with_fuzzy_and_examples(monkeypatch):
             ],
         }
 
-    monkeypatch.setitem(__import__("sys").modules, "symbolic_tagger", type(
-        "M", (), {"tag_input_with_diagnostics": fake_diag}))
+    monkeypatch.setitem(
+        __import__("sys").modules, "symbolic_tagger", type("M", (), {"tag_input_with_diagnostics": fake_diag})
+    )
 
     c = make_candidate("i feel seen and opened", examples=3)
     score = learner.score_candidate(c)
@@ -44,10 +45,14 @@ def test_voltage_and_prior_boost(monkeypatch):
     learner = LocalLearner()
 
     def fake_diag(text):
-        return {"tags": ["voltage_surge"], "matches": [{"category": "synonym_group", "match_type": "fuzzy", "score": 0.6}]}
+        return {
+            "tags": ["voltage_surge"],
+            "matches": [{"category": "synonym_group", "match_type": "fuzzy", "score": 0.6}],
+        }
 
-    monkeypatch.setitem(__import__("sys").modules, "symbolic_tagger", type(
-        "M", (), {"tag_input_with_diagnostics": fake_diag}))
+    monkeypatch.setitem(
+        __import__("sys").modules, "symbolic_tagger", type("M", (), {"tag_input_with_diagnostics": fake_diag})
+    )
 
     # Patch relational_memory with recent capsules containing the tag
     class Cap:
@@ -55,10 +60,8 @@ def test_voltage_and_prior_boost(monkeypatch):
             self.symbolic_tags = ["voltage_surge"]
             self.voltage_marking = "high"
 
-    fake_rm = type("RM", (), {"list_recent": staticmethod(
-        lambda limit=10: [Cap(), Cap()])})
-    monkeypatch.setitem(__import__("sys").modules,
-                        "relational_memory", fake_rm)
+    fake_rm = type("RM", (), {"list_recent": staticmethod(lambda limit=10: [Cap(), Cap()])})
+    monkeypatch.setitem(__import__("sys").modules, "relational_memory", fake_rm)
 
     c = make_candidate("i'm overwhelmed and buzzing", examples=2)
     score = learner.score_candidate(c)

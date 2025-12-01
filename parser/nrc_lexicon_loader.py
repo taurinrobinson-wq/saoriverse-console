@@ -6,9 +6,10 @@ Data source: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 Free for research use.
 """
 
-import os
 import logging
+import os
 from collections import defaultdict
+from typing import DefaultDict, Dict, List, Any
 
 logger = logging.getLogger(__name__)
 if not logger.handlers:
@@ -29,8 +30,10 @@ class NRCLexicon:
         good    joy    1
         bad    sadness    1
         """
-        self.word_emotions = defaultdict(list)
-        self.emotion_words = defaultdict(list)
+        # word_emotions maps a word -> list of emotion keywords
+        self.word_emotions: DefaultDict[str, List[str]] = defaultdict(list)
+        # emotion_words maps an emotion -> list of words
+        self.emotion_words: DefaultDict[str, List[str]] = defaultdict(list)
         self.loaded = False
         self.source = "bootstrap"
 
@@ -71,7 +74,7 @@ class NRCLexicon:
     def _load_lexicon(self, filepath: str):
         """Load lexicon from file."""
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
+            with open(filepath, "r", encoding="utf-8") as f:
                 lines = f.readlines()
 
             if not lines:
@@ -79,14 +82,14 @@ class NRCLexicon:
                 return
 
             # Determine header - check if first line is header
-            first_line_parts = lines[0].strip().split('\t')
+            first_line_parts = lines[0].strip().split("\t")
             is_header = len(
-                first_line_parts) >= 3 and first_line_parts[0].lower() == 'word'
+                first_line_parts) >= 3 and first_line_parts[0].lower() == "word"
             start_idx = 1 if is_header else 0
 
             loaded_count = 0
             for line in lines[start_idx:]:
-                parts = line.strip().split('\t')
+                parts = line.strip().split("\t")
                 if len(parts) >= 3:
                     word = parts[0].lower()
                     emotion = parts[1].lower()
@@ -118,19 +121,19 @@ class NRCLexicon:
 
     def get_emotions(self, word: str) -> list:
         """Get emotions for a word."""
-        return self.word_emotions.get(word.lower(), [])
+        return list(self.word_emotions.get(word.lower(), []))
 
     def get_words_for_emotion(self, emotion: str) -> list:
         """Get all words for an emotion."""
-        return self.emotion_words.get(emotion, [])
+        return list(self.emotion_words.get(emotion, []))
 
     def analyze_text(self, text: str) -> dict:
         """Analyze text and return emotion frequencies."""
         words = text.lower().split()
-        emotions = defaultdict(int)
+        emotions: Dict[str, int] = defaultdict(int)
 
         for word in words:
-            word_clean = word.strip('.,!?;:\'"')
+            word_clean = word.strip(".,!?;:'\"")
             word_emotions = self.get_emotions(word_clean)
             for emotion in word_emotions:
                 emotions[emotion] += 1
@@ -141,7 +144,7 @@ class NRCLexicon:
         """Get list of all emotion categories."""
         return list(self.emotion_words.keys())
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         """Export lexicon as dictionary."""
         return {
             "word_emotions": dict(self.word_emotions),
@@ -149,7 +152,7 @@ class NRCLexicon:
             "loaded": self.loaded,
             "source": self.source,
             "word_count": len(self.word_emotions),
-            "emotion_count": len(self.emotion_words)
+            "emotion_count": len(self.emotion_words),
         }
 
 

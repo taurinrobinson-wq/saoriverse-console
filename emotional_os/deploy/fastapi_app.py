@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 
 import requests
 import uvicorn
+
 # from admin_router import admin_router  # Temporarily commented for testing
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
@@ -28,7 +29,7 @@ load_dotenv()
 app = FastAPI(
     title="FirstPerson - Personal AI Companion",
     description="Your private space for emotional processing and growth",
-    version="2.0.1"  # Force redeploy
+    version="2.0.1",  # Force redeploy
 )
 
 
@@ -40,10 +41,12 @@ async def _startup_info():
         print(f"[fastapi_app] STARTUP: SERVE_STATIC_CHAT={serve_static}")
         # Print presence of key environment variables (not values for secrets)
         print(
-            f"[fastapi_app] STARTUP: SUPABASE_URL={'set' if SUPABASE_URL else 'unset'}; CURRENT_SAORI_URL={'set' if CURRENT_SAORI_URL else 'unset'}")
+            f"[fastapi_app] STARTUP: SUPABASE_URL={'set' if SUPABASE_URL else 'unset'}; CURRENT_SAORI_URL={'set' if CURRENT_SAORI_URL else 'unset'}"
+        )
     except Exception:
         # Do not raise on startup logging
         pass
+
 
 # Add CORS middleware
 app.add_middleware(
@@ -65,6 +68,7 @@ async def force_https(request, call_next):
     response = await call_next(request)
     return response
 
+
 # Include routers
 # app.include_router(admin_router)  # Temporarily commented for testing
 
@@ -76,18 +80,18 @@ async def debug_routes():
     """Debug endpoint to see all registered routes"""
     return {"admin_router_included": "admin_router" in str(app.routes), "total_routes": len(app.routes)}
 
+
 # Static files and templates
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="emotional_os/deploy/templates")
 
 # Configuration - using names from .env file
 SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv(
-    "SUPABASE_KEY")  # Support both naming conventions
+SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv("SUPABASE_KEY")  # Support both naming conventions
 SUPABASE_AUTH_URL = os.getenv(
-    "SUPABASE_AUTH_URL", f"{SUPABASE_URL}/functions/v1/auth-manager" if SUPABASE_URL else None)
-CURRENT_SAORI_URL = os.getenv(
-    "CURRENT_SAORI_URL") or os.getenv("SUPABASE_FUNCTION_URL")
+    "SUPABASE_AUTH_URL", f"{SUPABASE_URL}/functions/v1/auth-manager" if SUPABASE_URL else None
+)
+CURRENT_SAORI_URL = os.getenv("CURRENT_SAORI_URL") or os.getenv("SUPABASE_FUNCTION_URL")
 SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(32))
 
 # Pydantic models
@@ -131,7 +135,7 @@ class FirstPersonAuth:
             "username": username,
             "user_id": user_id,
             "created": datetime.now().isoformat(),
-            "expires": (datetime.now() + timedelta(days=2)).isoformat()
+            "expires": (datetime.now() + timedelta(days=2)).isoformat(),
         }
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
         return token
@@ -164,26 +168,15 @@ class FirstPersonAuth:
             auth_url = SUPABASE_AUTH_URL or f"{SUPABASE_URL}/functions/v1/auth-manager"
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {SUPABASE_KEY}",
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "action": "authenticate",
-                    "username": username,
-                    "password": password
-                },
-                timeout=10
+                headers={"Authorization": f"Bearer {SUPABASE_KEY}", "Content-Type": "application/json"},
+                json={"action": "authenticate", "username": username, "password": password},
+                timeout=10,
             )
 
             if response.status_code == 200:
                 data = response.json()
                 if data.get("authenticated"):
-                    return {
-                        "success": True,
-                        "user_id": data.get("user_id"),
-                        "username": username
-                    }
+                    return {"success": True, "user_id": data.get("user_id"), "username": username}
                 return {"success": False, "message": "Invalid credentials"}
             return {"success": False, "message": "Authentication service error"}
 
@@ -215,12 +208,14 @@ class FirstPersonAuth:
 
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {SUPABASE_KEY}",
-                    "Content-Type": "application/json"
+                headers={"Authorization": f"Bearer {SUPABASE_KEY}", "Content-Type": "application/json"},
+                json={
+                    "action": "create_user",
+                    "username": username,
+                    "password": password,
+                    "created_at": datetime.now().isoformat(),
                 },
-                json=payload,
-                timeout=10
+                timeout=10,
             )
 
             if response.status_code == 200:
@@ -235,6 +230,7 @@ class FirstPersonAuth:
 
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
+
 
 # Routes
 
@@ -260,23 +256,12 @@ async def chat_app(request: Request):
 @app.post("/api/login")
 async def login(login_data: LoginRequest):
     """User login endpoint"""
-    result = await FirstPersonAuth.authenticate_user(
-        login_data.username,
-        login_data.password
-    )
+    result = await FirstPersonAuth.authenticate_user(login_data.username, login_data.password)
 
     if result["success"]:
         # Create session token
-        token = FirstPersonAuth.create_session_token(
-            result["username"],
-            result["user_id"]
-        )
-        return {
-            "success": True,
-            "token": token,
-            "user_id": result["user_id"],
-            "username": result["username"]
-        }
+        token = FirstPersonAuth.create_session_token(result["username"], result["user_id"])
+        return {"success": True, "token": token, "user_id": result["user_id"], "username": result["username"]}
     raise HTTPException(status_code=401, detail=result["message"])
 
 
@@ -287,17 +272,9 @@ async def register(register_data: RegisterRequest):
         raise HTTPException(status_code=400, detail="Passwords do not match")
 
     if len(register_data.password) < 6:
-        raise HTTPException(
-            status_code=400, detail="Password must be at least 6 characters")
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
 
-    result = await FirstPersonAuth.create_user(
-        register_data.username,
-        register_data.password,
-        first_name=register_data.first_name,
-        last_name=register_data.last_name,
-        email=register_data.email,
-        login_id=register_data.login_id
-    )
+    result = await FirstPersonAuth.create_user(register_data.username, register_data.password)
 
     if result["success"]:
         return {"success": True, "message": "Account created successfully"}
@@ -310,10 +287,10 @@ async def chat(chat_data: ChatRequest):
     # Structured tracing/logging for debugging message flows
     saori_url = CURRENT_SAORI_URL or f"{SUPABASE_URL}/functions/v1/saori-fixed"
     trace_entry = {
-        "ts": datetime.utcnow().isoformat() + 'Z',
+        "ts": datetime.utcnow().isoformat() + "Z",
         "user_id": chat_data.user_id,
         "mode": chat_data.mode,
-        "message_preview": (chat_data.message[:200] + '...') if len(chat_data.message) > 200 else chat_data.message,
+        "message_preview": (chat_data.message[:200] + "...") if len(chat_data.message) > 200 else chat_data.message,
         "saori_url": saori_url,
     }
 
@@ -387,23 +364,13 @@ async def chat(chat_data: ChatRequest):
         # Remote SAORI call (fallback / hybrid mode)
         response = requests.post(
             saori_url,
-            headers={
-                "Authorization": f"Bearer {SUPABASE_KEY}",
-                "Content-Type": "application/json"
-            },
-            json={
-                "message": chat_data.message,
-                "mode": chat_data.mode,
-                "user_id": chat_data.user_id
-            },
-            timeout=30
+            headers={"Authorization": f"Bearer {SUPABASE_KEY}", "Content-Type": "application/json"},
+            json={"message": chat_data.message, "mode": chat_data.mode, "user_id": chat_data.user_id},
+            timeout=30,
         )
 
         duration = (datetime.utcnow() - start).total_seconds()
-        trace_entry.update({
-            "duration_s": duration,
-            "status_code": getattr(response, 'status_code', None)
-        })
+        trace_entry.update({"duration_s": duration, "status_code": getattr(response, "status_code", None)})
 
         try:
             result = response.json()
@@ -413,9 +380,9 @@ async def chat(chat_data: ChatRequest):
         trace_entry["response_preview"] = None
         if isinstance(result, dict):
             trace_entry["response_preview"] = {
-                "reply": (result.get('reply') or '')[:200],
-                "glyph": result.get('glyph'),
-                "processing_time": result.get('processing_time')
+                "reply": (result.get("reply") or "")[:200],
+                "glyph": result.get("glyph"),
+                "processing_time": result.get("processing_time"),
             }
 
         try:
@@ -428,6 +395,7 @@ async def chat(chat_data: ChatRequest):
             try:
                 from emotional_os.deploy.reply_utils import polish_ai_reply
             except Exception:
+
                 def polish_ai_reply(x):
                     return x or "I hear you — tell me more when you're ready."
 
@@ -435,20 +403,17 @@ async def chat(chat_data: ChatRequest):
                 "success": True,
                 "reply": polish_ai_reply(result.get("reply", "I'm here to listen.")),
                 "glyph": result.get("glyph", {}),
-                "processing_time": result.get("processing_time", 0)
+                "processing_time": result.get("processing_time", 0),
             }
 
         return {
             "success": False,
-            "reply": f"AI service returned HTTP {response.status_code}. Please try again shortly."
+            "reply": f"AI service returned HTTP {response.status_code}. Please try again shortly.",
         }
 
     except Exception as e:
         duration = (datetime.utcnow() - start).total_seconds()
-        trace_entry.update({
-            "duration_s": duration,
-            "exception": str(e)
-        })
+        trace_entry.update({"duration_s": duration, "exception": str(e)})
         try:
             with open("/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8") as fh:
                 fh.write(json.dumps(trace_entry, ensure_ascii=False) + "\n")
@@ -457,7 +422,7 @@ async def chat(chat_data: ChatRequest):
 
         return {
             "success": False,
-            "reply": "I'm having trouble connecting right now, but your feelings are still valid."
+            "reply": "I'm having trouble connecting right now, but your feelings are still valid.",
         }
 
 
@@ -479,9 +444,10 @@ async def health_check():
         "environment_check": {
             "supabase_url": "✓" if SUPABASE_URL else "✗",
             "supabase_key": "✓" if SUPABASE_KEY else "✗",
-            "supabase_function_url": "✓" if CURRENT_SAORI_URL else "✗"
-        }
+            "supabase_function_url": "✓" if CURRENT_SAORI_URL else "✗",
+        },
     }
+
 
 # Try to include server-side conversation save router if present.
 # Import guarded to avoid circular import issues during module init.
@@ -495,5 +461,6 @@ except Exception as e:
 
 if __name__ == "__main__":
     import os
+
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)

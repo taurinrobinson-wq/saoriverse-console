@@ -7,7 +7,7 @@ import sqlite3
 
 
 def analyze_database():
-    conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
+    conn = sqlite3.connect("emotional_os/glyphs/glyphs.db")
     cursor = conn.cursor()
 
     # Get all tables

@@ -12,13 +12,13 @@ consistent cleaning.
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import os
 import re
 import sys
 from collections import Counter, defaultdict
 from typing import List
-import argparse
 
 URLS = [
     "https://openstax.org/books/psychology-2e/pages/11-introduction",
@@ -53,18 +53,16 @@ DEFAULT_TMP_DIR = "/tmp/openstax_html"
 def ensure_packages(allow_install: bool = True):
     try:
         import requests  # noqa: F401
-        from bs4 import BeautifulSoup  # noqa: F401
         import spacy  # noqa: F401
+        from bs4 import BeautifulSoup  # noqa: F401
     except Exception:
         if not allow_install:
             raise
         print("Installing dependencies: requests, beautifulsoup4, spacy, en_core_web_sm")
         import subprocess
 
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
-        subprocess.check_call(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
+        subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 
 
 def fetch_url(url: str, tmp_dir: str) -> str:
@@ -123,7 +121,7 @@ def extract_phrases_from_corpus(corpus_text: str, top_k: int = 500) -> List[str]
     words = [t.text.lower() for t in doc if not t.is_punct and not t.is_space]
     for n in (1, 2, 3):
         for i in range(len(words) - n + 1):
-            ng = " ".join(words[i: i + n])
+            ng = " ".join(words[i : i + n])
             phrases.append(ng)
 
     ctr = Counter(phrases)
@@ -152,8 +150,7 @@ def select_top_with_examples(phrases: List[str], text: str, top_n: int = 300):
         docp = nlp(p)
         lemmas = " ".join(tok.lemma_ for tok in docp)
         pos = ",".join(tok.pos_ for tok in docp)
-        out.append({"phrase": p, "lemmas": lemmas,
-                   "pos": pos, "example": example})
+        out.append({"phrase": p, "lemmas": lemmas, "pos": pos, "example": example})
         seen.add(p)
         if len(out) >= top_n:
             break
@@ -164,20 +161,17 @@ def main():
     parser = argparse.ArgumentParser(
         description="Extract candidate phrases from OpenStax Psychology pages or existing cleaned files."
     )
-    parser.add_argument("--no-install", action="store_true",
-                        help="Do not attempt to install missing Python packages")
-    parser.add_argument("--use-local", action="store_true",
-                        help="Use existing cleaned files under out-dir instead of fetching web pages")
-    parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR,
-                        help="Directory to write/read cleaned texts")
-    parser.add_argument("--out-csv", default=DEFAULT_OUT_CSV,
-                        help="Path for output CSV")
-    parser.add_argument("--tmp-dir", default=DEFAULT_TMP_DIR,
-                        help="Temporary directory for downloaded HTML files")
-    parser.add_argument("--top-k", type=int, default=2000,
-                        help="Top-K phrases to consider from frequency ranking")
-    parser.add_argument("--top-n", type=int, default=400,
-                        help="Top-N phrases to output in CSV")
+    parser.add_argument("--no-install", action="store_true", help="Do not attempt to install missing Python packages")
+    parser.add_argument(
+        "--use-local",
+        action="store_true",
+        help="Use existing cleaned files under out-dir instead of fetching web pages",
+    )
+    parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR, help="Directory to write/read cleaned texts")
+    parser.add_argument("--out-csv", default=DEFAULT_OUT_CSV, help="Path for output CSV")
+    parser.add_argument("--tmp-dir", default=DEFAULT_TMP_DIR, help="Temporary directory for downloaded HTML files")
+    parser.add_argument("--top-k", type=int, default=2000, help="Top-K phrases to consider from frequency ranking")
+    parser.add_argument("--top-n", type=int, default=400, help="Top-N phrases to output in CSV")
 
     args = parser.parse_args()
 
@@ -252,13 +246,13 @@ def main():
     # Save CSV
     os.makedirs(os.path.dirname(OUT_CSV), exist_ok=True)
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=["phrase", "lemmas", "pos", "example", "source_urls"])
+        writer = csv.DictWriter(f, fieldnames=["phrase", "lemmas", "pos", "example", "source_urls"])
         writer.writeheader()
         for r in rows:
             # heuristically find sources that contain the phrase
-            matches = [u for u, t in cleaned_texts.items() if re.search(
-                r"\b" + re.escape(r['phrase']) + r"\b", t, flags=re.I)]
+            matches = [
+                u for u, t in cleaned_texts.items() if re.search(r"\b" + re.escape(r["phrase"]) + r"\b", t, flags=re.I)
+            ]
             r_out = {**r, "source_urls": ",".join(matches)}
             writer.writerow(r_out)
 

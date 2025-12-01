@@ -11,13 +11,12 @@ with terms from `lexicon_enhanced.json` to prefer the expanded lexicon.
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import sys
-import json
 from collections import Counter
 from typing import List
-
 from urllib.parse import urljoin
 
 # Lazy-loaded spaCy model cache
@@ -28,6 +27,7 @@ def get_nlp():
     global _NLP
     if _NLP is None:
         import spacy
+
         _NLP = spacy.load("en_core_web_sm")
     return _NLP
 
@@ -65,18 +65,16 @@ DEFAULT_TMP_DIR = "/tmp/openstax_crawl"
 def ensure_packages(allow_install: bool = True):
     try:
         import requests  # noqa: F401
-        from bs4 import BeautifulSoup  # noqa: F401
         import spacy  # noqa: F401
+        from bs4 import BeautifulSoup  # noqa: F401
     except Exception:
         if not allow_install:
             raise
         print("Installing dependencies: requests, beautifulsoup4, spacy, en_core_web_sm")
         import subprocess
 
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
-        subprocess.check_call(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
+        subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 
 
 def fetch_url(url: str, tmp_dir: str) -> str:
@@ -124,6 +122,7 @@ def slug_from_url(url: str) -> str:
 def find_section_links(html_path: str, chapter_prefix: str, base_url: str = "https://openstax.org") -> List[str]:
     """Return absolute URLs for links that match a chapter prefix (e.g., '/pages/11')."""
     from bs4 import BeautifulSoup
+
     links = []
     if not html_path or not os.path.exists(html_path):
         return links
@@ -136,7 +135,7 @@ def find_section_links(html_path: str, chapter_prefix: str, base_url: str = "htt
             continue
         full = urljoin(base_url, href)
         if chapter_prefix in full and "openstax.org/books/psychology-2e/pages/" in full:
-            links.append(full.split('#')[0])
+            links.append(full.split("#")[0])
     # unique while preserving order
     seen = set()
     out = []
@@ -159,7 +158,7 @@ def extract_phrases_from_corpus(corpus_text: str, top_k: int = 500) -> List[str]
     words = [t.text.lower() for t in doc if not t.is_punct and not t.is_space]
     for n in (1, 2, 3):
         for i in range(len(words) - n + 1):
-            ng = " ".join(words[i: i + n])
+            ng = " ".join(words[i : i + n])
             phrases.append(ng)
 
     ctr = Counter(phrases)
@@ -186,8 +185,7 @@ def select_top_with_examples(phrases: List[str], text: str, top_n: int = 400):
         docp = nlp(p)
         lemmas = " ".join(tok.lemma_ for tok in docp)
         pos = ",".join(tok.pos_ for tok in docp)
-        out.append({"phrase": p, "lemmas": lemmas,
-                   "pos": pos, "example": example})
+        out.append({"phrase": p, "lemmas": lemmas, "pos": pos, "example": example})
         seen.add(p)
         if len(out) >= top_n:
             break
@@ -220,8 +218,7 @@ def load_expanded_lexicon(path: str = "lexicon_enhanced.json") -> List[str]:
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(
-        description="Crawl OpenStax Psychology and extract lexicon")
+    parser = argparse.ArgumentParser(description="Crawl OpenStax Psychology and extract lexicon")
     parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR)
     parser.add_argument("--out-csv", default=DEFAULT_OUT_CSV)
     parser.add_argument("--tmp-dir", default=DEFAULT_TMP_DIR)
@@ -311,13 +308,14 @@ def main():
     # Save CSV
     os.makedirs(os.path.dirname(OUT_CSV), exist_ok=True)
     import csv
+
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=["phrase", "lemmas", "pos", "example", "source_urls"])
+        writer = csv.DictWriter(f, fieldnames=["phrase", "lemmas", "pos", "example", "source_urls"])
         writer.writeheader()
         for r in rows:
-            matches = [u for u, t in cleaned_texts.items() if re.search(
-                r"\b" + re.escape(r['phrase']) + r"\b", t, flags=re.I)]
+            matches = [
+                u for u, t in cleaned_texts.items() if re.search(r"\b" + re.escape(r["phrase"]) + r"\b", t, flags=re.I)
+            ]
             r_out = {**r, "source_urls": ",".join(matches)}
             writer.writerow(r_out)
 

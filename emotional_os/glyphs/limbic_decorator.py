@@ -19,8 +19,8 @@ def _safe_short(sentence: str) -> str:
     s = sentence.strip()
     if not s:
         return ""
-    if s[-1] not in '.!?':
-        s = s + '.'
+    if s[-1] not in ".!?":
+        s = s + "."
     return s
 
 
@@ -35,26 +35,28 @@ def decorate_reply(baseline_reply: str, limbic_result: Dict, intensity: float = 
     Returns a single string (no glyphs, no internal labels).
     """
     try:
-        emotion = limbic_result.get('emotion', '') if isinstance(limbic_result, dict) else ''
+        emotion = limbic_result.get("emotion", "") if isinstance(limbic_result, dict) else ""
     except Exception:
-        emotion = ''
+        emotion = ""
 
     # Debug: emit a compact summary of limbic_result when logger is configured
     try:
         if logger.isEnabledFor(logging.DEBUG):
             summary = {
-                'emotion': emotion,
-                'has_system_signals': bool(limbic_result.get('system_signals')) if isinstance(limbic_result, dict) else False,
-                'ritual_len': len(limbic_result.get('ritual_sequence', [])) if isinstance(limbic_result, dict) else 0
+                "emotion": emotion,
+                "has_system_signals": (
+                    bool(limbic_result.get("system_signals")) if isinstance(limbic_result, dict) else False
+                ),
+                "ritual_len": len(limbic_result.get("ritual_sequence", [])) if isinstance(limbic_result, dict) else 0,
             }
             logger.debug("decorate_reply() limbic_summary=%s", summary)
     except Exception:
         # Non-fatal logging error
         pass
 
-    opener = ''
-    savor = ''
-    practical = ''
+    opener = ""
+    savor = ""
+    practical = ""
 
     # Empathic opener (short)
     if emotion:
@@ -80,7 +82,7 @@ def decorate_reply(baseline_reply: str, limbic_result: Dict, intensity: float = 
         decorated = f"{baseline}".strip()
 
     # Final cleanup: avoid runaway whitespace
-    out = ' '.join(decorated.split())
+    out = " ".join(decorated.split())
     if logger.isEnabledFor(logging.DEBUG):
         try:
             logger.debug("decorate_reply() out=%s", out)
@@ -89,8 +91,8 @@ def decorate_reply(baseline_reply: str, limbic_result: Dict, intensity: float = 
     return out
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Simple self-check
     b = "That's wonderful — I'm glad to hear that"
-    fake = {'emotion': 'joy', 'system_signals': {}, 'ritual_sequence': ['blink','breath','brace']}
+    fake = {"emotion": "joy", "system_signals": {}, "ritual_sequence": ["blink", "breath", "brace"]}
     print(decorate_reply(b, fake, intensity=0.8))

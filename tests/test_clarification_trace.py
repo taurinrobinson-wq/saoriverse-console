@@ -12,8 +12,7 @@ def test_detect_and_store_and_jsonl_append(tmp_path: Path):
 
     original = "how are you?"
     clarification = "No, I meant how are you feeling?"
-    ctx = {"last_user_input": original, "last_system_response": "I am fine",
-           "inferred_intent": "emotional_checkin"}
+    ctx = {"last_user_input": original, "last_system_response": "I am fine", "inferred_intent": "emotional_checkin"}
 
     assert ct.detect_and_store(clarification, ctx) is True
 

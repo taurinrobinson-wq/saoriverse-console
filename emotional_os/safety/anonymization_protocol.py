@@ -12,14 +12,13 @@ Intelligent symbolic anonymization that:
 Philosophy: We're not erasing ache—we're honoring it privately.
 """
 
-import json
 import hashlib
+import json
 import re
+from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta
-from typing import Dict, List, Tuple, Optional
-from dataclasses import dataclass, asdict
 from pathlib import Path
-
+from typing import Dict, List, Optional, Tuple
 
 # Symbolic glyph replacements for common identifiers
 IDENTITY_GLYPHS = {
@@ -106,6 +105,7 @@ MEDICAL_GLYPHS = {
 @dataclass
 class AnonymizationMap:
     """Tracks the mapping between original identifiers and glyphs for reversal."""
+
     timestamp: str
     identifier_glyphs: Dict[str, str]  # "actual_name" -> "The Mirror"
     temporal_shifts: Dict[str, str]  # "August 2023" -> "last summer"
@@ -113,11 +113,11 @@ class AnonymizationMap:
     consent_token: str = ""  # UUID for consent-based de-anonymization
     allow_medical: bool = False  # Keep medical details?
     allow_names: bool = False  # Keep names?
-    
+
     def to_json(self) -> str:
         """Serialize for storage."""
         return json.dumps(asdict(self), indent=2)
-    
+
     @classmethod
     def from_json(cls, json_str: str):
         """Deserialize from storage."""
@@ -127,11 +127,11 @@ class AnonymizationMap:
 
 class AnonymizationProtocol:
     """Handles intelligent anonymization and de-anonymization."""
-    
+
     def __init__(self, allow_medical: bool = False, allow_names: bool = False):
         """
         Initialize protocol.
-        
+
         Args:
             allow_medical: If True, preserve medical terms (only if user explicitly consents)
             allow_names: If True, preserve names (only if user explicitly consents)
@@ -139,15 +139,15 @@ class AnonymizationProtocol:
         self.allow_medical = allow_medical
         self.allow_names = allow_names
         self.anonymization_maps: Dict[str, AnonymizationMap] = {}
-    
+
     def anonymize_entry(self, entry: Dict, user_id: str) -> Tuple[Dict, AnonymizationMap]:
         """
         Anonymize a single journal/ritual entry while preserving emotional tone.
-        
+
         Args:
             entry: The entry to anonymize (has 'text', 'ritual', 'metadata' fields)
             user_id: User identifier (for tracking map)
-            
+
         Returns:
             Tuple of (anonymized_entry, anonymization_map)
         """
@@ -159,42 +159,36 @@ class AnonymizationProtocol:
             allow_medical=self.allow_medical,
             allow_names=self.allow_names,
         )
-        
+
         anonymized = entry.copy()
-        
+
         # Anonymize text content
         if "text" in entry:
-            anonymized["text"], anonmap = self._anonymize_text(
-                entry["text"], anonmap
-            )
-        
+            anonymized["text"], anonmap = self._anonymize_text(entry["text"], anonmap)
+
         # Anonymize ritual
         if "ritual" in entry:
-            anonymized["ritual"], anonmap = self._anonymize_text(
-                entry["ritual"], anonmap
-            )
-        
+            anonymized["ritual"], anonmap = self._anonymize_text(entry["ritual"], anonmap)
+
         # Preserve metadata but anonymize sensitive fields
         if "metadata" in entry:
-            anonymized["metadata"] = self._anonymize_metadata(
-                entry["metadata"], anonmap
-            )
-        
+            anonymized["metadata"] = self._anonymize_metadata(entry["metadata"], anonmap)
+
         # Add anonymization flag
         anonymized["_anonymized"] = True
-        anonymized["_anonymization_consent_level"] = "full" if (
-            self.allow_names and self.allow_medical
-        ) else "medical" if self.allow_medical else "full"
-        
+        anonymized["_anonymization_consent_level"] = (
+            "full" if (self.allow_names and self.allow_medical) else "medical" if self.allow_medical else "full"
+        )
+
         # Store map for potential reversal
         self.anonymization_maps[user_id] = anonmap
-        
+
         return anonymized, anonmap
-    
+
     def _anonymize_text(self, text: str, anonmap: AnonymizationMap) -> Tuple[str, AnonymizationMap]:
         """Anonymize a text field intelligently."""
         result = text
-        
+
         # 1. Handle names (if not explicitly allowed)
         if not self.allow_names:
             for category, names in IDENTITY_GLYPHS.items():
@@ -206,13 +200,13 @@ class AnonymizationProtocol:
                         replacement = glyph if self.allow_names is False else actual
                         result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
                         anonmap.identifier_glyphs[actual.lower()] = replacement
-        
+
         # 2. Handle family roles (preserve relational dynamics)
         for pattern, replacement in IDENTITY_GLYPHS["family_roles"].items():
             if re.search(pattern, result, re.IGNORECASE):
                 result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
                 anonmap.identifier_glyphs[pattern] = replacement
-        
+
         # 3. Handle locations (generalize, not erase)
         for pattern, generalization in LOCATION_GENERALIZATION.items():
             if re.search(pattern, result, re.IGNORECASE):
@@ -220,32 +214,33 @@ class AnonymizationProtocol:
                 if match:
                     anonmap.location_generalizations[match.group(0)] = generalization
                 result = re.sub(pattern, generalization, result, flags=re.IGNORECASE)
-        
+
         # 4. Handle dates (convert to relative time)
         result, date_shifts = self._anonymize_dates(result)
         anonmap.temporal_shifts.update(date_shifts)
-        
+
         # 5. Handle medical terms (if not explicitly allowed)
         if not self.allow_medical:
             for pattern, glyph in MEDICAL_GLYPHS.items():
                 if re.search(pattern, result, re.IGNORECASE):
                     result = re.sub(pattern, glyph, result, flags=re.IGNORECASE)
                     anonmap.identifier_glyphs[pattern] = glyph
-        
+
         return result, anonmap
-    
+
     def _anonymize_dates(self, text: str) -> Tuple[str, Dict[str, str]]:
         """Convert absolute dates to relative time references."""
         shifts = {}
-        
+
         # Common date patterns
         patterns = [
-            (r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})\b",
-             self._month_year_to_relative),
-            (r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})\b",
-             self._numeric_date_to_relative),
+            (
+                r"\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})\b",
+                self._month_year_to_relative,
+            ),
+            (r"\b(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})\b", self._numeric_date_to_relative),
         ]
-        
+
         for pattern, converter in patterns:
             matches = re.finditer(pattern, text)
             for match in matches:
@@ -254,9 +249,9 @@ class AnonymizationProtocol:
                 if relative:
                     text = text.replace(original, relative, 1)
                     shifts[original] = relative
-        
+
         return text, shifts
-    
+
     @staticmethod
     def _month_year_to_relative(groups: Tuple) -> Optional[str]:
         """Convert month/year to relative time."""
@@ -264,17 +259,26 @@ class AnonymizationProtocol:
             month_str, year_str = groups
             # Map month names to numbers
             months = {
-                "January": 1, "February": 2, "March": 3, "April": 4,
-                "May": 5, "June": 6, "July": 7, "August": 8,
-                "September": 9, "October": 10, "November": 11, "December": 12
+                "January": 1,
+                "February": 2,
+                "March": 3,
+                "April": 4,
+                "May": 5,
+                "June": 6,
+                "July": 7,
+                "August": 8,
+                "September": 9,
+                "October": 10,
+                "November": 11,
+                "December": 12,
             }
             month = months.get(month_str)
             year = int(year_str)
-            
+
             date = datetime(year, month, 1)
             now = datetime.now()
             delta = now - date
-            
+
             if delta.days < 7:
                 return "lately"
             elif delta.days < 30:
@@ -288,7 +292,7 @@ class AnonymizationProtocol:
                 return f"{years} years ago"
         except:
             return None
-    
+
     @staticmethod
     def _numeric_date_to_relative(groups: Tuple) -> Optional[str]:
         """Convert numeric date to relative time."""
@@ -298,11 +302,11 @@ class AnonymizationProtocol:
             year_int = int(year)
             if year_int < 100:
                 year_int += 2000 if year_int < 50 else 1900
-            
+
             date = datetime(year_int, int(month), int(day))
             now = datetime.now()
             delta = now - date
-            
+
             if delta.days < 7:
                 return "lately"
             elif delta.days < 30:
@@ -316,49 +320,49 @@ class AnonymizationProtocol:
                 return f"{years} years ago"
         except:
             return None
-    
+
     def _anonymize_metadata(self, metadata: Dict, anonmap: AnonymizationMap) -> Dict:
         """Anonymize metadata while preserving structure."""
         result = metadata.copy()
-        
+
         # Strip specific fields that might contain PII
         sensitive_fields = ["email", "phone", "address", "ssn", "health_id"]
         for field in sensitive_fields:
             if field in result:
                 result[field] = "[redacted]"
-        
+
         # Keep location but generalize
         if "location" in result and not self.allow_names:
             for pattern, generalization in LOCATION_GENERALIZATION.items():
                 if re.search(pattern, result["location"], re.IGNORECASE):
                     result["location"] = generalization
                     break
-        
+
         return result
-    
+
     def can_unveil(self, user_id: str, consent_level: str = "full") -> bool:
         """
         Check if user has consented to de-anonymization.
-        
+
         Args:
             user_id: The user
             consent_level: "full", "medical", "none"
-            
+
         Returns:
             True if user can unveil data
         """
         # In production, this would check a consent table
         # For now, return True if anonymization map exists
         return user_id in self.anonymization_maps
-    
+
     def create_consent_request(self, user_id: str, use_case: str) -> Dict:
         """
         Generate a consent request for sharing/legacy purposes.
-        
+
         Args:
             user_id: The user
             use_case: "therapy_sharing", "legacy_archive", "research", "clinical_review"
-            
+
         Returns:
             Consent request with context
         """
@@ -368,7 +372,7 @@ class AnonymizationProtocol:
             "research": "Contribute this (anonymized) to emotional research",
             "clinical_review": "Allow clinical team to access your actual identity for this entry",
         }
-        
+
         return {
             "user_id": user_id,
             "use_case": use_case,
@@ -381,11 +385,11 @@ class AnonymizationProtocol:
             },
             "created_at": datetime.now().isoformat(),
         }
-    
+
     def generate_anonymization_report(self, entry: Dict, anonmap: AnonymizationMap) -> Dict:
         """
         Generate a report showing what was anonymized.
-        
+
         Useful for transparency and regulatory compliance.
         """
         return {
@@ -409,7 +413,7 @@ class AnonymizationProtocol:
 if __name__ == "__main__":
     # Create anonymizer
     anon = AnonymizationProtocol(allow_medical=False, allow_names=False)
-    
+
     # Example entry
     test_entry = {
         "id": "entry_001",
@@ -423,29 +427,29 @@ if __name__ == "__main__":
         "metadata": {
             "location": "Los Angeles, CA",
             "created": "2025-11-05",
-        }
+        },
     }
-    
+
     # Anonymize
     anonymized, anonmap = anon.anonymize_entry(test_entry, "user_123")
-    
+
     print("\n" + "=" * 80)
     print("ANONYMIZATION PROTOCOL TEST")
     print("=" * 80)
-    
+
     print("\n📄 ORIGINAL ENTRY:")
     print(test_entry["text"].strip())
-    
+
     print("\n🔐 ANONYMIZED ENTRY:")
     print(anonymized["text"].strip())
-    
+
     print("\n📋 ANONYMIZATION REPORT:")
     report = anon.generate_anonymization_report(test_entry, anonmap)
     print(json.dumps(report, indent=2))
-    
+
     print("\n🎯 CONSENT REQUEST (for legacy archive):")
     consent = anon.create_consent_request("user_123", "legacy_archive")
     print(json.dumps(consent, indent=2))
-    
+
     print("\n✅ Anonymization protocol demonstration complete")
     print("   Ready to preserve emotional integrity while protecting privacy.")

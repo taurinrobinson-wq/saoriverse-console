@@ -26,17 +26,21 @@ ADMIN_PASSWORD = "firstperson_admin_2025"
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv("SUPABASE_KEY")
 
+
 # Pydantic models
 class AdminLogin(BaseModel):
     username: str
     password: str
 
+
 # Session management
 admin_sessions = {}
+
 
 def verify_admin_password(password: str) -> bool:
     """Verify admin password"""
     return password == ADMIN_PASSWORD
+
 
 def create_admin_session(username: str) -> str:
     """Create admin session token"""
@@ -44,9 +48,10 @@ def create_admin_session(username: str) -> str:
     admin_sessions[token] = {
         "username": username,
         "created": datetime.now(),
-        "expires": datetime.now() + timedelta(hours=24)
+        "expires": datetime.now() + timedelta(hours=24),
     }
     return token
+
 
 def verify_admin_session(token: str) -> bool:
     """Verify admin session token"""
@@ -60,6 +65,7 @@ def verify_admin_session(token: str) -> bool:
 
     return True
 
+
 def get_admin_session(request: Request) -> dict:
     """Get admin session from request"""
     token = request.cookies.get("admin_token")
@@ -67,16 +73,19 @@ def get_admin_session(request: Request) -> dict:
         raise HTTPException(status_code=401, detail="Admin authentication required")
     return admin_sessions[token]
 
+
 # Routes
 @admin_router.get("/test")
 async def admin_test():
     """Test route to verify admin router is working"""
     return {"message": "Admin router is working!"}
 
+
 @admin_router.get("/", response_class=HTMLResponse)
 async def admin_login(request: Request):
     """Admin login page"""
     return templates.TemplateResponse("admin_login.html", {"request": request})
+
 
 @admin_router.post("/login")
 async def admin_login_post(request: Request, username: str = Form(), password: str = Form()):
@@ -86,10 +95,8 @@ async def admin_login_post(request: Request, username: str = Form(), password: s
         response = RedirectResponse(url="/admin/dashboard", status_code=302)
         response.set_cookie(key="admin_token", value=token, httponly=True, max_age=86400)
         return response
-    return templates.TemplateResponse("admin_login.html", {
-        "request": request,
-        "error": "Invalid credentials"
-    })
+    return templates.TemplateResponse("admin_login.html", {"request": request, "error": "Invalid credentials"})
+
 
 @admin_router.get("/dashboard", response_class=HTMLResponse)
 async def admin_dashboard(request: Request, session: dict = Depends(get_admin_session)):
@@ -102,7 +109,7 @@ async def admin_dashboard(request: Request, session: dict = Depends(get_admin_se
         "total_conversations": 156,
         "system_uptime": "2 days, 4 hours",
         "avg_response_time": "2.3s",
-        "error_rate": "0.1%"
+        "error_rate": "0.1%",
     }
 
     # Mock recent activity
@@ -111,28 +118,27 @@ async def admin_dashboard(request: Request, session: dict = Depends(get_admin_se
             "timestamp": "2025-10-15 14:30:15",
             "type": "user_login",
             "user": "demo_user",
-            "description": "User logged in via demo mode"
+            "description": "User logged in via demo mode",
         },
         {
             "timestamp": "2025-10-15 14:25:42",
             "type": "conversation",
             "user": "john_doe",
-            "description": "Started new conversation about stress management"
+            "description": "Started new conversation about stress management",
         },
         {
             "timestamp": "2025-10-15 14:20:33",
             "type": "user_registration",
             "user": "sarah_m",
-            "description": "New user registered"
-        }
+            "description": "New user registered",
+        },
     ]
 
-    return templates.TemplateResponse("admin_dashboard.html", {
-        "request": request,
-        "session": session,
-        "system_stats": system_stats,
-        "recent_activity": recent_activity
-    })
+    return templates.TemplateResponse(
+        "admin_dashboard.html",
+        {"request": request, "session": session, "system_stats": system_stats, "recent_activity": recent_activity},
+    )
+
 
 @admin_router.get("/users", response_class=HTMLResponse)
 async def admin_users(request: Request, session: dict = Depends(get_admin_session)):
@@ -147,7 +153,7 @@ async def admin_users(request: Request, session: dict = Depends(get_admin_sessio
             "created_at": "2025-10-15",
             "last_active": "2025-10-15 14:30:15",
             "total_conversations": 5,
-            "status": "active"
+            "status": "active",
         },
         {
             "id": 2,
@@ -156,7 +162,7 @@ async def admin_users(request: Request, session: dict = Depends(get_admin_sessio
             "created_at": "2025-10-14",
             "last_active": "2025-10-15 14:25:42",
             "total_conversations": 12,
-            "status": "active"
+            "status": "active",
         },
         {
             "id": 3,
@@ -165,15 +171,12 @@ async def admin_users(request: Request, session: dict = Depends(get_admin_sessio
             "created_at": "2025-10-15",
             "last_active": "2025-10-15 14:20:33",
             "total_conversations": 1,
-            "status": "active"
-        }
+            "status": "active",
+        },
     ]
 
-    return templates.TemplateResponse("admin_users.html", {
-        "request": request,
-        "session": session,
-        "users": users
-    })
+    return templates.TemplateResponse("admin_users.html", {"request": request, "session": session, "users": users})
+
 
 @admin_router.get("/system", response_class=HTMLResponse)
 async def admin_system(request: Request, session: dict = Depends(get_admin_session)):
@@ -190,21 +193,14 @@ async def admin_system(request: Request, session: dict = Depends(get_admin_sessi
             {
                 "timestamp": "2025-10-15 14:28:33",
                 "level": "WARNING",
-                "message": "High response time detected for Supabase query"
+                "message": "High response time detected for Supabase query",
             },
-            {
-                "timestamp": "2025-10-15 14:15:22",
-                "level": "INFO",
-                "message": "New deployment successful"
-            }
-        ]
+            {"timestamp": "2025-10-15 14:15:22", "level": "INFO", "message": "New deployment successful"},
+        ],
     }
 
-    return templates.TemplateResponse("admin_system.html", {
-        "request": request,
-        "session": session,
-        "metrics": metrics
-    })
+    return templates.TemplateResponse("admin_system.html", {"request": request, "session": session, "metrics": metrics})
+
 
 @admin_router.get("/settings", response_class=HTMLResponse)
 async def admin_settings(request: Request, session: dict = Depends(get_admin_session)):
@@ -217,14 +213,13 @@ async def admin_settings(request: Request, session: dict = Depends(get_admin_ses
         "session_timeout": 48,  # hours
         "enable_registration": True,
         "enable_demo_mode": True,
-        "maintenance_mode": False
+        "maintenance_mode": False,
     }
 
-    return templates.TemplateResponse("admin_settings.html", {
-        "request": request,
-        "session": session,
-        "settings": settings
-    })
+    return templates.TemplateResponse(
+        "admin_settings.html", {"request": request, "session": session, "settings": settings}
+    )
+
 
 @admin_router.post("/logout")
 async def admin_logout(request: Request):

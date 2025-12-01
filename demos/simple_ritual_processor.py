@@ -5,6 +5,5 @@ Simple Ritual Capsule Processor runner (delegates to tools.simple_ritual_process
 
 from tools.simple_ritual_processor import main
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

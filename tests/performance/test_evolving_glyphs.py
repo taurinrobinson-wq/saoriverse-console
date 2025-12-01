@@ -19,6 +19,7 @@ except ImportError as e:
     print("This is expected if you don't have all dependencies installed.")
     print("The system is designed to work with your Supabase setup.")
 
+
 def test_glyph_generation_offline():
     """
     Test glyph generation without Supabase connection
@@ -27,10 +28,7 @@ def test_glyph_generation_offline():
     print("🌟 Testing Auto-Evolving Glyph Generation (Offline Mode) 🌟\n")
 
     # Initialize without Supabase credentials (offline mode)
-    generator = GlyphGenerator(
-        min_pattern_frequency=1,  # Lower threshold for testing
-        novelty_threshold=0.3
-    )
+    generator = GlyphGenerator(min_pattern_frequency=1, novelty_threshold=0.3)  # Lower threshold for testing
 
     # Test conversations with rich emotional content
     test_conversations = [
@@ -40,7 +38,7 @@ def test_glyph_generation_offline():
         "Sometimes I experience contained wildness - like having a gentle storm inside a sacred vessel, powerful but held with love.",
         "I'm feeling this quiet celebration mixed with deep reverence, like joy that doesn't need to perform to be complete.",
         "This flowing stillness moves through me - not static, but dynamically peaceful, like a river that runs deep and silent.",
-        "I'm touched by this expansive vulnerability - not weakness, but strength that opens like a flower in sunlight."
+        "I'm touched by this expansive vulnerability - not weakness, but strength that opens like a flower in sunlight.",
     ]
 
     all_detected_patterns = []
@@ -54,8 +52,7 @@ def test_glyph_generation_offline():
 
         # Detect emotional patterns
         patterns = generator.detect_new_emotional_patterns(
-            conversation_text=conversation,
-            context={'conversation_id': i}
+            conversation_text=conversation, context={"conversation_id": i}
         )
 
         print(f"Detected patterns: {len(patterns)}")
@@ -110,6 +107,7 @@ def test_glyph_generation_offline():
     print(f"✅ Detected {len(all_detected_patterns)} emotional patterns")
     print(f"✅ Generated {len(all_generated_glyphs)} new glyphs")
 
+
 def create_sample_sql_output(glyphs: List):
     """Create sample SQL output to show what would be inserted"""
     if not glyphs:
@@ -124,11 +122,13 @@ def create_sample_sql_output(glyphs: List):
         print(sql)
         print()
 
+
 def demonstrate_integration():
     """Show how the integration would work with your existing system"""
     print("🔗 Integration with Existing Saoriverse System")
     print("=" * 50)
-    print("""
+    print(
+        """
 How this integrates with your current setup:
 
 1. 📝 CONVERSATION PROCESSING
@@ -160,7 +160,9 @@ To enable this in your system:
 1. Add Supabase credentials to EvolvingGlyphIntegrator
 2. Replace your conversation processing with the evolving version
 3. The system will start learning immediately!
-""")
+"""
+    )
+
 
 if __name__ == "__main__":
     # Run the offline test

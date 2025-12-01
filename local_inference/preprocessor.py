@@ -1,13 +1,14 @@
-import re
 import json
 import os
+import re
 import time
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 
 try:
     # Heavy model imports deferred; optional GPU usage
-    from transformers import AutoTokenizer, AutoModelForCausalLM
     import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
     TRANSFORMERS_AVAILABLE = True
 except Exception:
     TRANSFORMERS_AVAILABLE = False
@@ -20,23 +21,20 @@ DEFAULT_TAXONOMY = {
     "fear": ["afraid", "scared", "fear", "anxious"],
     "trust": ["trust", "safe", "secure"],
     "surprise": ["surpris", "startl"],
-    "neutral": []
+    "neutral": [],
 }
 
 
 DEFAULT_ESCALATION_TIERS = {
     "tier_1": {
         "tags": ["panic", "grief", "boundary_violation", "abandonment", "betrayal"],
-        "action": "force_escalation"
+        "action": "force_escalation",
     },
     "tier_2": {
         "tags": ["conflict", "longing", "confusion", "vulnerability", "rupture"],
-        "action": "conditional_escalation"
+        "action": "conditional_escalation",
     },
-    "tier_3": {
-        "tags": ["curiosity", "joy", "calm", "reunion", "support_seeking"],
-        "action": "no_escalation"
-    }
+    "tier_3": {"tags": ["curiosity", "joy", "calm", "reunion", "support_seeking"], "action": "no_escalation"},
 }
 
 
@@ -51,7 +49,14 @@ class Preprocessor:
     - Returns a dict with intent, confidence, sanitized_text, short_reply, emotional_tags, edit_log
     """
 
-    def __init__(self, model_name: Optional[str] = None, test_mode: bool = False, taxonomy_path: Optional[str] = None, confidence_threshold: float = 0.6, cluster_size: int = 2):
+    def __init__(
+        self,
+        model_name: Optional[str] = None,
+        test_mode: bool = False,
+        taxonomy_path: Optional[str] = None,
+        confidence_threshold: float = 0.6,
+        cluster_size: int = 2,
+    ):
         """If taxonomy_path is provided, load canonical emotional taxonomy from JSON.
 
         Expected taxonomy JSON format (simple):
@@ -83,10 +88,9 @@ class Preprocessor:
                     # Attempt to load taxonomy relative to this module to
                     # avoid issues when tests change the current working
                     # directory during a full suite run.
-                    alt = os.path.join(os.path.dirname(
-                        __file__), 'emotional_taxonomy_sample.json')
+                    alt = os.path.join(os.path.dirname(__file__), "emotional_taxonomy_sample.json")
                     if os.path.exists(alt):
-                        with open(alt, 'r', encoding='utf-8') as tf:
+                        with open(alt, "r", encoding="utf-8") as tf:
                             self.taxonomy = json.load(tf)
                             self.taxonomy_source = alt
                     else:
@@ -97,8 +101,7 @@ class Preprocessor:
                 self.taxonomy_source = "default"
         else:
             # also allow a workspace-level default file
-            default_path = os.path.join(
-                os.getcwd(), "local_inference", "emotional_taxonomy.json")
+            default_path = os.path.join(os.getcwd(), "local_inference", "emotional_taxonomy.json")
             if os.path.exists(default_path):
                 try:
                     with open(default_path, "r", encoding="utf-8") as tf:
@@ -112,16 +115,14 @@ class Preprocessor:
         self.escalation_tiers = DEFAULT_ESCALATION_TIERS.copy()
         try:
             # Allow taxonomy-embedded escalation tiers
-            if isinstance(self.taxonomy, dict) and 'escalation_tiers' in self.taxonomy:
-                self.escalation_tiers = self.taxonomy.get(
-                    'escalation_tiers', self.escalation_tiers)
+            if isinstance(self.taxonomy, dict) and "escalation_tiers" in self.taxonomy:
+                self.escalation_tiers = self.taxonomy.get("escalation_tiers", self.escalation_tiers)
             else:
                 # also look for a standalone escalation file
-                esc_path = os.path.join(
-                    os.getcwd(), 'local_inference', 'escalation_tiers.json')
+                esc_path = os.path.join(os.getcwd(), "local_inference", "escalation_tiers.json")
                 if os.path.exists(esc_path):
                     try:
-                        with open(esc_path, 'r', encoding='utf-8') as ef:
+                        with open(esc_path, "r", encoding="utf-8") as ef:
                             self.escalation_tiers = json.load(ef)
                     except Exception:
                         pass
@@ -137,7 +138,8 @@ class Preprocessor:
                 # prefer fp16 + device_map auto where available
                 self.tokenizer = AutoTokenizer.from_pretrained(model_name)
                 self.model = AutoModelForCausalLM.from_pretrained(
-                    model_name, torch_dtype=torch.float16, device_map="auto")
+                    model_name, torch_dtype=torch.float16, device_map="auto"
+                )
                 self.loaded = True
             except Exception:
                 # Loading may fail in restricted environments; fall back to test mode.
@@ -161,14 +163,14 @@ class Preprocessor:
         """
         try:
             if not isinstance(payload, dict):
-                payload = {'payload': str(payload)}
+                payload = {"payload": str(payload)}
 
             # Normalize keys for traceability
             audit = {
-                'kind': 'preprocessor_audit',
-                'payload': payload,
-                'taxonomy_source': self.taxonomy_source,
-                'test_mode': bool(self.test_mode)
+                "kind": "preprocessor_audit",
+                "payload": payload,
+                "taxonomy_source": self.taxonomy_source,
+                "test_mode": bool(self.test_mode),
             }
             # Preserve existing minimal timestamping and write via internal logger
             self._log(audit)
@@ -244,7 +246,9 @@ class Preprocessor:
         # fallback
         return "unknown", 0.5
 
-    def _determine_escalation(self, emotional_tags: List[str], confidence: float, editorial_interventions: List[str]) -> (str, Optional[str]):
+    def _determine_escalation(
+        self, emotional_tags: List[str], confidence: float, editorial_interventions: List[str]
+    ) -> (str, Optional[str]):
         """Determine escalation action and reason based on configured escalation tiers and rules.
 
         Returns tuple (escalation_action, escalation_reason)
@@ -253,41 +257,37 @@ class Preprocessor:
         try:
             tags_set = set([t for t in emotional_tags if isinstance(t, str)])
             # Build tier sets
-            tier1 = set(self.escalation_tiers.get(
-                'tier_1', {}).get('tags', []))
-            tier2 = set(self.escalation_tiers.get(
-                'tier_2', {}).get('tags', []))
-            tier3 = set(self.escalation_tiers.get(
-                'tier_3', {}).get('tags', []))
+            tier1 = set(self.escalation_tiers.get("tier_1", {}).get("tags", []))
+            tier2 = set(self.escalation_tiers.get("tier_2", {}).get("tags", []))
+            tier3 = set(self.escalation_tiers.get("tier_3", {}).get("tags", []))
 
             # Tier 1 immediate escalation
             if tags_set & tier1:
-                return 'force_escalation', 'tier_1_detected'
+                return "force_escalation", "tier_1_detected"
 
             # Tier 2 conditional rules
             t2_hits = tags_set & tier2
             if t2_hits:
                 # cluster escalation: multiple tier2 tags together (configurable)
                 if len(t2_hits) >= self.cluster_size:
-                    return 'conditional_escalation', 'cluster_escalation'
+                    return "conditional_escalation", "cluster_escalation"
                 # confidence-based escalation (configurable)
                 if confidence < float(self.confidence_threshold):
-                    return 'conditional_escalation', 'confidence_escalation'
+                    return "conditional_escalation", "confidence_escalation"
                 # otherwise do not escalate automatically
-                return 'no_escalation', None
+                return "no_escalation", None
 
             # Tier 3 or none -> no escalation
-            return 'no_escalation', None
+            return "no_escalation", None
         except Exception:
-            return 'no_escalation', None
+            return "no_escalation", None
 
     def _model_generate_guided(self, prompt: str, max_new_tokens: int = 64) -> str:
         # Use HF model if loaded, otherwise return empty
         if not self.loaded or not self.model or not self.tokenizer:
             return ""
         try:
-            inputs = self.tokenizer(
-                prompt, return_tensors="pt").to(self.model.device)
+            inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)
             out = self.model.generate(**inputs, max_new_tokens=max_new_tokens)
             return self.tokenizer.decode(out[0], skip_special_tokens=True)
         except Exception:
@@ -307,19 +307,17 @@ class Preprocessor:
         # try to load the sample taxonomy file from the repo and re-run tagging.
         # This protects against test-order or environment issues where the provided
         # taxonomy_path couldn't be loaded earlier.
-        if emotional_tags == ['neutral']:
+        if emotional_tags == ["neutral"]:
             try:
-                sample_path = os.path.join(
-                    os.getcwd(), 'local_inference', 'emotional_taxonomy_sample.json')
+                sample_path = os.path.join(os.getcwd(), "local_inference", "emotional_taxonomy_sample.json")
                 if os.path.exists(sample_path):
-                    with open(sample_path, 'r', encoding='utf-8') as sf:
+                    with open(sample_path, "r", encoding="utf-8") as sf:
                         sample_tax = json.load(sf)
                     # Only replace if sample_tax looks valid
                     if isinstance(sample_tax, dict) and sample_tax:
                         self.taxonomy = sample_tax
                         self.taxonomy_source = sample_path
-                        emotional_tags = self._lexical_emotional_tags(
-                            sanitized)
+                        emotional_tags = self._lexical_emotional_tags(sanitized)
                         emotional_tags = self._normalize_tags(emotional_tags)
             except Exception:
                 pass
@@ -339,13 +337,12 @@ class Preprocessor:
             if raw:
                 # try to extract JSON from model output
                 try:
-                    jtext = raw[raw.find("{"):]
+                    jtext = raw[raw.find("{") :]
                     parsed = json.loads(jtext)
                     intent = parsed.get("intent", intent)
                     confidence = float(parsed.get("confidence", confidence))
                     short_reply = parsed.get("short_reply")
-                    emotional_tags = parsed.get(
-                        "emotional_tags", emotional_tags)
+                    emotional_tags = parsed.get("emotional_tags", emotional_tags)
                     edit_log.append("model_refined")
                 except Exception:
                     edit_log.append("model_parse_failed")
@@ -359,8 +356,9 @@ class Preprocessor:
 
         # Determine escalation action based on emotional tags and confidence
         escalation_action, escalation_reason = self._determine_escalation(
-            emotional_tags, float(confidence), editorial_interventions)
-        if escalation_action != 'no_escalation':
+            emotional_tags, float(confidence), editorial_interventions
+        )
+        if escalation_action != "no_escalation":
             # ensure the editorial_interventions list contains the escalation reason
             if escalation_reason:
                 editorial_interventions.append(escalation_reason)
@@ -405,7 +403,7 @@ if __name__ == "__main__":
     examples = [
         "Hi, can you summarize my notes and redact john@example.com?",
         "I'm feeling really sad and lonely today.",
-        "Is this urgent? I lost my job and need help."
+        "Is this urgent? I lost my job and need help.",
     ]
     for e in examples:
         print("INPUT:", e)

@@ -64,24 +64,21 @@ EMOTION_KEYWORDS = [
 def ensure_packages():
     try:
         import requests  # noqa: F401
-        from bs4 import BeautifulSoup  # noqa: F401
         import spacy  # noqa: F401
+        from bs4 import BeautifulSoup  # noqa: F401
     except Exception:
         print("Installing dependencies: requests, beautifulsoup4, spacy, en_core_web_sm")
         import subprocess
 
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
-        subprocess.check_call(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "requests", "beautifulsoup4", "spacy"])
+        subprocess.check_call([sys.executable, "-m", "spacy", "download", "en_core_web_sm"])
 
 
 def fetch_url(url: str) -> str:
     import requests
 
     os.makedirs(TMP_DIR, exist_ok=True)
-    fname = os.path.join(TMP_DIR, re.sub(
-        r"[^0-9a-zA-Z]+", "_", url)[:200] + ".html")
+    fname = os.path.join(TMP_DIR, re.sub(r"[^0-9a-zA-Z]+", "_", url)[:200] + ".html")
     try:
         r = requests.get(url, timeout=30)
         r.raise_for_status()
@@ -119,8 +116,7 @@ def sentences_with_emotion(text: str) -> List[str]:
 
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
-    kw_pat = re.compile(r"\b(?:" + "|".join(re.escape(k)
-                        for k in EMOTION_KEYWORDS) + r")\b", flags=re.I)
+    kw_pat = re.compile(r"\b(?:" + "|".join(re.escape(k) for k in EMOTION_KEYWORDS) + r")\b", flags=re.I)
     sents = [s.text.strip() for s in doc.sents if kw_pat.search(s.text)]
     return sents
 
@@ -136,11 +132,10 @@ def phrases_from_sentences(sents: List[str], top_k=500) -> List[str]:
             p = re.sub(r"\s+", " ", chunk.text.strip().lower())
             if 2 <= len(p) <= 100:
                 phrases.append(p)
-        words = [t.text.lower()
-                 for t in doc if not t.is_punct and not t.is_space]
+        words = [t.text.lower() for t in doc if not t.is_punct and not t.is_space]
         for n in (1, 2, 3):
             for i in range(max(0, len(words) - n + 1)):
-                ng = " ".join(words[i: i + n])
+                ng = " ".join(words[i : i + n])
                 phrases.append(ng)
     ctr = Counter(phrases)
     common = [p for p, _ in ctr.most_common(top_k)]
@@ -168,8 +163,7 @@ def select_top_and_tag(phrases: List[str], sentences_text: str, top_n=200):
         docp = nlp(p)
         lemmas = " ".join(tok.lemma_ for tok in docp)
         pos = ",".join(tok.pos_ for tok in docp)
-        rows.append({"phrase": p, "lemmas": lemmas,
-                    "pos": pos, "example": example})
+        rows.append({"phrase": p, "lemmas": lemmas, "pos": pos, "example": example})
         seen.add(p)
         if len(rows) >= top_n:
             break
@@ -205,8 +199,7 @@ def run(urls=DEFAULT_URLS):
 
     os.makedirs(os.path.dirname(OUT_CSV), exist_ok=True)
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f, fieldnames=["phrase", "lemmas", "pos", "example", "source"])
+        writer = csv.DictWriter(f, fieldnames=["phrase", "lemmas", "pos", "example", "source"])
         writer.writeheader()
         for r in tagged:
             writer.writerow(r)

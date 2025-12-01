@@ -5,7 +5,12 @@ PHONE_PATTERN = re.compile(r"\b\+?\d[\d\s().-]{7,}\b")
 
 # Limited sensitive-term redaction to avoid storing explicit details
 SENSITIVE_TERMS = [
-    "assault", "abuse", "coercion", "nonconsensual", "violation", "grooming",
+    "assault",
+    "abuse",
+    "coercion",
+    "nonconsensual",
+    "violation",
+    "grooming",
 ]
 
 REPLACEMENTS = {

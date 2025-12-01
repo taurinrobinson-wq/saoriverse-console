@@ -16,8 +16,7 @@ class RewardModel:
 
     def __init__(self, dim: int = 128, path: Optional[str] = None, auto_load: bool = True):
         self.dim = int(dim)
-        self.path = path or os.path.join(
-            os.path.dirname(__file__), "weights.json")
+        self.path = path or os.path.join(os.path.dirname(__file__), "weights.json")
         self.weights = np.zeros(self.dim, dtype=float)
         if auto_load:
             try:
@@ -58,8 +57,7 @@ class RewardModel:
 
     def save(self) -> None:
         tmp = self.path + ".tmp"
-        obj = {"dim": int(self.weights.shape[0]),
-               "weights": self.weights.tolist()}
+        obj = {"dim": int(self.weights.shape[0]), "weights": self.weights.tolist()}
         d = os.path.dirname(self.path)
         if d:
             os.makedirs(d, exist_ok=True)

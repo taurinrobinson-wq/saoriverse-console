@@ -15,60 +15,63 @@ def test_evolution_trigger():
     conversation_count = 10
     evolution_frequency = 5
 
-    should_evolve = (conversation_count % evolution_frequency == 0)
+    should_evolve = conversation_count % evolution_frequency == 0
     print("Conversation count: " + str(conversation_count))
     print("Should evolve: " + str(should_evolve))
 
     assert should_evolve, "Evolution should be triggered at conversation count 10"
-    
+
     if should_evolve:
         print("✅ Evolution should be triggered!")
 
         # Create a sample evolution result
         evolution_info = {
-            'new_glyphs_count': 2,
-            'new_glyphs': [
+            "new_glyphs_count": 2,
+            "new_glyphs": [
                 {
-                    'tag_name': 'test_mixed_anticipation',
-                    'glyph': 'Ψ × Ω',
-                    'description': 'Mixed excitement and anxiety'
+                    "tag_name": "test_mixed_anticipation",
+                    "glyph": "Ψ × Ω",
+                    "description": "Mixed excitement and anxiety",
                 },
                 {
-                    'tag_name': 'test_hollow_familiarity',
-                    'glyph': 'δ ÷ ε',
-                    'description': 'Familiar yet foreign emotional state'
-                }
-            ]
+                    "tag_name": "test_hollow_familiarity",
+                    "glyph": "δ ÷ ε",
+                    "description": "Familiar yet foreign emotional state",
+                },
+            ],
         }
 
         # Create evolution message
-        evolution_message = "🧬 **Evolution Triggered!** Generated " + str(evolution_info['new_glyphs_count']) + " new glyph(s):\n"
-        for glyph in evolution_info['new_glyphs']:
-            evolution_message += "• **" + glyph.get('tag_name', 'Unknown') + "** (" + glyph.get('glyph', 'N/A') + ")\n"
+        evolution_message = (
+            "🧬 **Evolution Triggered!** Generated " + str(evolution_info["new_glyphs_count"]) + " new glyph(s):\n"
+        )
+        for glyph in evolution_info["new_glyphs"]:
+            evolution_message += "• **" + glyph.get("tag_name", "Unknown") + "** (" + glyph.get("glyph", "N/A") + ")\n"
 
         print("\n=== Evolution Message ===")
         print(evolution_message)
 
         # Test message structure
         evolution_system_message = {
-            'type': 'system',
-            'content': evolution_message,
-            'timestamp': datetime.datetime.now().isoformat(),
-            'metadata': {'source': 'evolution_system', 'is_evolution': True}
+            "type": "system",
+            "content": evolution_message,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "metadata": {"source": "evolution_system", "is_evolution": True},
         }
 
         print("\n=== Message Metadata ===")
-        print("is_evolution: " + str(evolution_system_message['metadata']['is_evolution']))
+        print("is_evolution: " + str(evolution_system_message["metadata"]["is_evolution"]))
 
-        assert evolution_system_message['metadata']['is_evolution'] is True, "Message should have is_evolution metadata"
-        assert evolution_system_message['type'] == 'system', "Message type should be 'system'"
+        assert evolution_system_message["metadata"]["is_evolution"] is True, "Message should have is_evolution metadata"
+        assert evolution_system_message["type"] == "system", "Message type should be 'system'"
         print("✅ All assertions passed!")
 
-        assert evolution_system_message['metadata']['is_evolution'] is True, "Message should have is_evolution metadata"
-        assert evolution_system_message['type'] == 'system', "Message type should be 'system'"
+        assert evolution_system_message["metadata"]["is_evolution"] is True, "Message should have is_evolution metadata"
+        assert evolution_system_message["type"] == "system", "Message type should be 'system'"
         print("✅ All assertions passed!")
     else:
         raise AssertionError("Evolution should trigger at conversation count 10")
+
 
 if __name__ == "__main__":
     result = test_evolution_trigger()

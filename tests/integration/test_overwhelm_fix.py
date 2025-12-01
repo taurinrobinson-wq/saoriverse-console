@@ -11,7 +11,9 @@ def test_overwhelm_processing():
     print(f"Input: '{test_message}'")
     print()
 
-    result = parse_input(test_message, lexicon_path="emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db")
+    result = parse_input(
+        test_message, lexicon_path="emotional_os/parser/signal_lexicon.json", db_path="emotional_os/glyphs/glyphs.db"
+    )
 
     print(f"🔍 Signals Detected: {[s['signal'] + ' (' + s['keyword'] + ')' for s in result['signals']]}")
     print(f"🚪 Gates Activated: {result['gates']}")
@@ -19,6 +21,7 @@ def test_overwhelm_processing():
     print(f"📝 Description: {result['best_glyph']['description']}")
     print(f"💬 Response: {result['voltage_response']}")
     print(f"📊 Total Available Glyphs: {len(result['glyphs'])}")
+
 
 if __name__ == "__main__":
     test_overwhelm_processing()

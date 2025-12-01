@@ -8,16 +8,15 @@ This is intentionally minimal: it provides methods to collect a candidate,
 score it heuristically (placeholder), and persist events to the
 configured JSONL file under `learning/local_learning_log.jsonl`.
 """
+
 from __future__ import annotations
 
 import os
 from typing import Any, Dict, Optional
 
-from .writer import append_event, DEFAULT_LEARNING_DIR
+from .writer import DEFAULT_LEARNING_DIR, append_event
 
-
-DEFAULT_LOGFILE = os.path.join(os.path.dirname(
-    __file__), "local_learning_log.jsonl")
+DEFAULT_LOGFILE = os.path.join(os.path.dirname(__file__), "local_learning_log.jsonl")
 
 
 class LocalLearner:
@@ -82,13 +81,11 @@ class LocalLearner:
             tag_count = len(set(tags)) if tags else 0
 
             # Compute fuzzy_match_score as the max fuzzy score among fuzzy matches
-            fuzzy_scores = [m.get("score", 0.0)
-                            for m in matches if m.get("match_type") == "fuzzy"]
+            fuzzy_scores = [m.get("score", 0.0) for m in matches if m.get("match_type") == "fuzzy"]
             if fuzzy_scores:
                 fuzzy_score = max(fuzzy_scores)
 
-            synonym_hits = sum(1 for m in matches if m.get(
-                "category") == "synonym_group")
+            synonym_hits = sum(1 for m in matches if m.get("category") == "synonym_group")
 
             # Voltage flag if any tag is voltage_surge
             voltage_flag = "voltage_surge" in tags

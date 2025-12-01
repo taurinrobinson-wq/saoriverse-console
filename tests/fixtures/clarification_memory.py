@@ -1,5 +1,5 @@
-import uuid
 import time
+import uuid
 
 # Simple in-memory clarity store for tests
 _corrections = {}

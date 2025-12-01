@@ -10,7 +10,7 @@ from collections import defaultdict
 
 
 def analyze_database():
-    conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
+    conn = sqlite3.connect("emotional_os/glyphs/glyphs.db")
     cursor = conn.cursor()
 
     # Get all tables
@@ -43,8 +43,8 @@ def analyze_database():
     print(f"\nTotal glyphs: {len(rows)}")
 
     # Analyze by gate if gate column exists
-    if 'gate' in column_names:
-        gate_idx = column_names.index('gate')
+    if "gate" in column_names:
+        gate_idx = column_names.index("gate")
         gate_counts = defaultdict(int)
         for row in rows:
             gate_counts[row[gate_idx]] += 1
@@ -54,21 +54,27 @@ def analyze_database():
             print(f"  {gate}: {gate_counts[gate]}")
 
     # Look for similar glyph names
-    if 'glyph_name' in column_names:
-        name_idx = column_names.index('glyph_name')
-        desc_idx = column_names.index('description') if 'description' in column_names else None
+    if "glyph_name" in column_names:
+        name_idx = column_names.index("glyph_name")
+        desc_idx = column_names.index("description") if "description" in column_names else None
 
         print("\nFirst 20 glyphs:")
         for i, row in enumerate(rows[:20]):
             name = row[name_idx]
-            desc = row[desc_idx][:100] + "..." if desc_idx and len(row[desc_idx]) > 100 else (row[desc_idx] if desc_idx else "No description")
-            gate = row[column_names.index('gate')] if 'gate' in column_names else "No gate"
+            desc = (
+                row[desc_idx][:100] + "..."
+                if desc_idx and len(row[desc_idx]) > 100
+                else (row[desc_idx] if desc_idx else "No description")
+            )
+            gate = row[column_names.index("gate")] if "gate" in column_names else "No gate"
             print(f"  {name} ({gate}): {desc}")
 
     conn.close()
 
+
 def main():
     analyze_database()
+
 
 if __name__ == "__main__":
     main()

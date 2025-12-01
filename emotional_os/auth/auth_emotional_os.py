@@ -14,19 +14,10 @@ import requests
 import streamlit as st
 
 # Page configuration
-st.set_page_config(
-    page_title="Emotional OS",
-    page_icon="🧠",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+st.set_page_config(page_title="Emotional OS", page_icon="🧠", layout="wide", initial_sidebar_state="expanded")
 
 # Authentication configuration
-AUTH_CONFIG = {
-    "session_timeout_minutes": 480,  # 8 hours
-    "max_login_attempts": 5,
-    "lockout_duration_minutes": 15
-}
+AUTH_CONFIG = {"session_timeout_minutes": 480, "max_login_attempts": 5, "lockout_duration_minutes": 15}  # 8 hours
 
 
 class AuthenticationManager:
@@ -45,19 +36,19 @@ class AuthenticationManager:
 
     def init_session_state(self):
         """Initialize authentication session state"""
-        if 'authenticated' not in st.session_state:
+        if "authenticated" not in st.session_state:
             st.session_state.authenticated = False
-        if 'user_id' not in st.session_state:
+        if "user_id" not in st.session_state:
             st.session_state.user_id = None
-        if 'username' not in st.session_state:
+        if "username" not in st.session_state:
             st.session_state.username = None
-        if 'session_token' not in st.session_state:
+        if "session_token" not in st.session_state:
             st.session_state.session_token = None
-        if 'session_expires' not in st.session_state:
+        if "session_expires" not in st.session_state:
             st.session_state.session_expires = None
-        if 'login_attempts' not in st.session_state:
+        if "login_attempts" not in st.session_state:
             st.session_state.login_attempts = {}
-        if 'processing_mode' not in st.session_state:
+        if "processing_mode" not in st.session_state:
             # Default to local-only processing to avoid remote AI costs
             st.session_state.processing_mode = "local"
 
@@ -71,11 +62,7 @@ class AuthenticationManager:
 
         # Use 64-byte output to match backend exactly
         password_hash = hashlib.pbkdf2_hmac(
-            'sha256',
-            password.encode('utf-8'),
-            salt_bytes,
-            100000,  # iterations
-            64       # 64-byte output to match backend
+            "sha256", password.encode("utf-8"), salt_bytes, 100000, 64  # iterations  # 64-byte output to match backend
         )
 
         return password_hash.hex(), salt_bytes.hex()
@@ -87,7 +74,7 @@ class AuthenticationManager:
 
     def is_session_valid(self) -> bool:
         """Check if current session is valid"""
-        authenticated = getattr(st.session_state, 'authenticated', False)
+        authenticated = getattr(st.session_state, "authenticated", False)
         st.write(f"🔍 DEBUG - Session check: authenticated={authenticated}")
         if not authenticated:
             return False
@@ -107,9 +94,8 @@ class AuthenticationManager:
             return True
 
         attempts = st.session_state.login_attempts[username]
-        if attempts['count'] >= AUTH_CONFIG['max_login_attempts']:
-            lockout_time = attempts['last_attempt'] + \
-                timedelta(minutes=AUTH_CONFIG['lockout_duration_minutes'])
+        if attempts["count"] >= AUTH_CONFIG["max_login_attempts"]:
+            lockout_time = attempts["last_attempt"] + timedelta(minutes=AUTH_CONFIG["lockout_duration_minutes"])
             if datetime.now() < lockout_time:
                 return False
             # Reset attempts after lockout period
@@ -129,8 +115,7 @@ class AuthenticationManager:
         st.session_state.user_id = str(uuid.uuid4())
         st.session_state.username = "test_user"
         st.session_state.session_token = "test_token_" + str(uuid.uuid4())[:8]
-        st.session_state.session_expires = (
-            datetime.now() + timedelta(hours=8)).isoformat()
+        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
 
         return True
 
@@ -139,17 +124,15 @@ class AuthenticationManager:
         with st.spinner("Testing backend connection..."):
             try:
                 auth_url = st.secrets.get("supabase", {}).get(
-                    "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                    "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+                )
                 st.write(f"Testing URL: {auth_url}")
 
                 response = requests.post(
                     auth_url,
-                    headers={
-                        "Authorization": f"Bearer {self.supabase_key}",
-                        "Content-Type": "application/json"
-                    },
+                    headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
                     json={"action": "test"},
-                    timeout=5
+                    timeout=5,
                 )
 
                 st.write(f"Response status: {response.status_code}")
@@ -173,20 +156,18 @@ class AuthenticationManager:
                 stored_salt = "c4235b1aec307a490c7873ae53a90505aee7453667f623c5b2d3b66ca91a4e48"
 
                 auth_url = st.secrets.get("supabase", {}).get(
-                    "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                    "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+                )
                 response = requests.post(
                     auth_url,
-                    headers={
-                        "Authorization": f"Bearer {self.supabase_key}",
-                        "Content-Type": "application/json"
-                    },
+                    headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
                     json={
                         "action": "test_hash",
                         "password": test_password,
                         "expected_hash": stored_hash,
-                        "expected_salt": stored_salt
+                        "expected_salt": stored_salt,
                     },
-                    timeout=5
+                    timeout=5,
                 )
 
                 if response.status_code == 200:
@@ -209,10 +190,8 @@ class AuthenticationManager:
         # freshtest user ID from database
         st.session_state.user_id = "44004441-f3fe-4e7b-8500-4ee25229cecd"
         st.session_state.username = "freshtest"
-        st.session_state.session_token = "quick_session_" + \
-            str(uuid.uuid4())[:8]
-        st.session_state.session_expires = (
-            datetime.now() + timedelta(hours=8)).isoformat()
+        st.session_state.session_token = "quick_session_" + str(uuid.uuid4())[:8]
+        st.session_state.session_expires = (datetime.now() + timedelta(hours=8)).isoformat()
 
         st.rerun()
 
@@ -224,36 +203,30 @@ class AuthenticationManager:
             with st.spinner("Creating users table..."):
                 try:
                     auth_url = st.secrets.get("supabase", {}).get(
-                        "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                        "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+                    )
                     response = requests.post(
                         auth_url,
-                        headers={
-                            "Authorization": f"Bearer {self.supabase_key}",
-                            "Content-Type": "application/json"
-                        },
-                        json={
-                            "action": "create_table"
-                        },
-                        timeout=10
+                        headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
+                        json={"action": "create_table"},
+                        timeout=10,
                     )
 
                     if response.status_code == 200:
                         result = response.json()
                         if result.get("success"):
-                            st.success(
-                                "✅ Users table created! Try registration now.")
+                            st.success("✅ Users table created! Try registration now.")
                         else:
-                            st.error(
-                                f"❌ {result.get('error', 'Failed to create table')}")
+                            st.error(f"❌ {result.get('error', 'Failed to create table')}")
                     else:
-                        st.error(
-                            f"❌ HTTP {response.status_code}: {response.text}")
+                        st.error(f"❌ HTTP {response.status_code}: {response.text}")
 
                 except Exception as e:
                     st.error(f"❌ Error: {str(e)}")
 
         st.markdown("**Or run this SQL in Supabase Dashboard → SQL Editor:**")
-        st.code("""
+        st.code(
+            """
 CREATE TABLE IF NOT EXISTS public.users (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   username TEXT UNIQUE NOT NULL,
@@ -266,7 +239,9 @@ CREATE TABLE IF NOT EXISTS public.users (
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow all operations" ON public.users FOR ALL USING (true);
 GRANT ALL ON public.users TO anon, authenticated, service_role;
-        """, language="sql")
+        """,
+            language="sql",
+        )
 
     def fix_user_password(self):
         """Fix password for existing user by updating with consistent hashing"""
@@ -282,32 +257,26 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                     try:
                         # Update password directly in database using edge function's hashing
                         auth_url = st.secrets.get("supabase", {}).get(
-                            "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                            "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+                        )
                         response = requests.post(
                             auth_url,
                             headers={
                                 "Authorization": f"Bearer {self.supabase_key}",
-                                "Content-Type": "application/json"
+                                "Content-Type": "application/json",
                             },
-                            json={
-                                "action": "fix_password",
-                                "username": username,
-                                "new_password": new_password
-                            },
-                            timeout=10
+                            json={"action": "fix_password", "username": username, "new_password": new_password},
+                            timeout=10,
                         )
 
                         if response.status_code == 200:
                             result = response.json()
                             if result.get("success"):
-                                st.success(
-                                    "✅ Password fixed! You can now log in normally.")
+                                st.success("✅ Password fixed! You can now log in normally.")
                             else:
-                                st.error(
-                                    f"❌ {result.get('error', 'Failed to fix password')}")
+                                st.error(f"❌ {result.get('error', 'Failed to fix password')}")
                         else:
-                            st.error(
-                                f"❌ HTTP {response.status_code}: {response.text}")
+                            st.error(f"❌ HTTP {response.status_code}: {response.text}")
 
                     except Exception as e:
                         st.error(f"❌ Error: {str(e)}")
@@ -315,16 +284,12 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
     def create_working_account(self):
         """Create an account that definitely works by bypassing password hashing issues"""
         st.subheader("🎯 Create Working Account - Instant Access")
-        st.info(
-            "This creates an account and logs you in immediately - no password verification needed!")
+        st.info("This creates an account and logs you in immediately - no password verification needed!")
 
         with st.form("working_account_form"):
-            username = st.text_input(
-                "Choose Username", help="Pick any username you want")
-            password = st.text_input(
-                "Choose Password", type="password", help="This is stored locally only")
-            create_submitted = st.form_submit_button(
-                "🚀 Create Account & Login Now", type="primary")
+            username = st.text_input("Choose Username", help="Pick any username you want")
+            password = st.text_input("Choose Password", type="password", help="This is stored locally only")
+            create_submitted = st.form_submit_button("🚀 Create Account & Login Now", type="primary")
 
             if create_submitted and username and password:
                 with st.spinner("Creating guaranteed working account..."):
@@ -339,13 +304,10 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                         st.session_state.user_id = user_id
                         st.session_state.username = username
                         st.session_state.session_token = f"working_session_{user_id[:8]}"
-                        st.session_state.session_expires = (
-                            datetime.now() + timedelta(hours=24)).isoformat()
+                        st.session_state.session_expires = (datetime.now() + timedelta(hours=24)).isoformat()
 
-                        st.success(
-                            f"✅ Working account created for '{username}'!")
-                        st.success(
-                            "🚀 You're now logged in! Redirecting to Emotional OS...")
+                        st.success(f"✅ Working account created for '{username}'!")
+                        st.success("🚀 You're now logged in! Redirecting to Emotional OS...")
                         st.balloons()  # Visual feedback
                         time.sleep(2)
                         st.rerun()
@@ -359,49 +321,45 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
     def record_login_attempt(self, username: str, success: bool):
         """Record login attempt for rate limiting"""
         if username not in st.session_state.login_attempts:
-            st.session_state.login_attempts[username] = {
-                'count': 0, 'last_attempt': datetime.now()}
+            st.session_state.login_attempts[username] = {"count": 0, "last_attempt": datetime.now()}
 
         if success:
             # Reset attempts on successful login
             del st.session_state.login_attempts[username]
         else:
             # Increment failed attempts
-            st.session_state.login_attempts[username]['count'] += 1
-            st.session_state.login_attempts[username]['last_attempt'] = datetime.now(
-            )
+            st.session_state.login_attempts[username]["count"] += 1
+            st.session_state.login_attempts[username]["last_attempt"] = datetime.now()
 
     def create_user(self, username: str, password: str, email: str = "") -> dict:
         """Create new user account"""
         try:
             # Let edge function handle all password hashing for consistency
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
                 json={
                     "action": "create_user",
                     "username": username,
                     "email": email,
                     "password": password,  # Send plain password, edge function will hash it
-                    "created_at": datetime.now().isoformat()
+                    "created_at": datetime.now().isoformat(),
                 },
-                timeout=10
+                timeout=10,
             )
 
             if response.status_code == 200:
                 data = response.json()
-                st.write("🔍 DEBUG - Registration response:",
-                         data)  # Debug output
+                st.write("🔍 DEBUG - Registration response:", data)  # Debug output
                 if data.get("success"):
                     return {"success": True, "message": "Account created successfully"}
                 return {"success": False, "message": data.get("error", "Failed to create account")}
-            error_data = response.json() if response.headers.get(
-                'content-type', '').startswith('application/json') else {}
+            error_data = (
+                response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+            )
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
 
         except Exception as e:
@@ -416,19 +374,13 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
             # Authenticate via Supabase edge function
             auth_url = st.secrets.get("supabase", {}).get(
-                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+            )
             response = requests.post(
                 auth_url,
-                headers={
-                    "Authorization": f"Bearer {self.supabase_key}",
-                    "Content-Type": "application/json"
-                },
-                json={
-                    "action": "authenticate",
-                    "username": username,
-                    "password": password
-                },
-                timeout=10
+                headers={"Authorization": f"Bearer {self.supabase_key}", "Content-Type": "application/json"},
+                json={"action": "authenticate", "username": username, "password": password},
+                timeout=10,
             )
 
             if response.status_code == 200:
@@ -440,10 +392,10 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                     st.session_state.authenticated = True
                     st.session_state.user_id = data.get("user_id")
                     st.session_state.username = username
-                    st.session_state.session_token = data.get(
-                        "session_token", f"session_{data.get('user_id')}")
-                    st.session_state.session_expires = (datetime.now(
-                    ) + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])).isoformat()
+                    st.session_state.session_token = data.get("session_token", f"session_{data.get('user_id')}")
+                    st.session_state.session_expires = (
+                        datetime.now() + timedelta(minutes=AUTH_CONFIG["session_timeout_minutes"])
+                    ).isoformat()
 
                     self.record_login_attempt(username, True)
                     return {"success": True, "message": "Login successful"}
@@ -490,7 +442,7 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
         # Main Working Account Interface - Clean and Simple
         with st.container():
             # Show working account form if requested, otherwise show main interface
-            if st.session_state.get('show_working_account_form', False):
+            if st.session_state.get("show_working_account_form", False):
                 self.create_working_account()
 
                 # Back button and quick access option
@@ -506,26 +458,32 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
             # Main interface - Clean and Simple
             st.markdown("### 🎯 **Welcome to Your Personal AI Companion**")
-            st.info(
-                "🚀 **Get started in seconds** - Create your account and begin your emotional journey!")
+            st.info("🚀 **Get started in seconds** - Create your account and begin your emotional journey!")
 
             col1, col2 = st.columns(2)
             with col1:
                 st.markdown("**🚀 BEST OPTION: Instant Working Account**")
                 st.info("Bypasses all password hashing issues completely")
-                if st.button("🎯 Create Working Account Form", type="primary", use_container_width=True, help="Show form to create account"):
+                if st.button(
+                    "🎯 Create Working Account Form",
+                    type="primary",
+                    use_container_width=True,
+                    help="Show form to create account",
+                ):
                     st.session_state.show_working_account_form = True
                     st.rerun()
 
             with col2:
                 st.markdown("**⚡ QUICK ACCESS: Instant Login**")
                 st.info("Skip authentication for immediate system access")
-                if st.button("⚡ Quick Login", type="secondary", use_container_width=True, help="Bypass auth for testing"):
+                if st.button(
+                    "⚡ Quick Login", type="secondary", use_container_width=True, help="Bypass auth for testing"
+                ):
                     self.quick_login_bypass()
                     return
 
             # Show working account form if requested
-            if st.session_state.get('show_working_account_form', False):
+            if st.session_state.get("show_working_account_form", False):
                 self.create_working_account()
                 if st.button("← Back to Main Options"):
                     st.session_state.show_working_account_form = False
@@ -538,13 +496,16 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             col1, col2 = st.columns([2, 1])
             with col1:
                 st.warning(
-                    "⚠️ **Still Debugging** - Try creating the database table first, then test registration/login")
+                    "⚠️ **Still Debugging** - Try creating the database table first, then test registration/login"
+                )
                 if st.button("🗃️ Create Users Table First", type="primary"):
                     self.create_users_table()
             with col2:
                 col2a, col2b = st.columns(2)
                 with col2a:
-                    if st.button("🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"):
+                    if st.button(
+                        "🧪 Test Mode", type="secondary", help="Preview authenticated UI with temporary session"
+                    ):
                         self.create_test_session()
                         st.rerun()
                 with col2b:
@@ -558,7 +519,12 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                         self.fix_user_password()
 
             # Primary create account button
-            if st.button("🎯 Create My Account", type="primary", use_container_width=True, help="Create account and login instantly"):
+            if st.button(
+                "🎯 Create My Account",
+                type="primary",
+                use_container_width=True,
+                help="Create account and login instantly",
+            ):
                 st.session_state.show_working_account_form = True
                 st.rerun()
 
@@ -568,7 +534,9 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             col1, col2 = st.columns(2)
             with col1:
                 st.markdown("**⚡ Try It Now**")
-                if st.button("Quick Demo", type="secondary", use_container_width=True, help="Preview Emotional OS instantly"):
+                if st.button(
+                    "Quick Demo", type="secondary", use_container_width=True, help="Preview Emotional OS instantly"
+                ):
                     self.quick_login_bypass()
                     return
 
@@ -589,35 +557,39 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             col1, col2, col3 = st.columns(3)
 
             with col1:
-                st.markdown("""
+                st.markdown(
+                    """
                 **🚀 Lightning Fast**
                 - 2-3 second responses  
                 - Instant account creation
                 - No delays or waiting
-                """)
+                """
+                )
 
             with col2:
-                st.markdown("""
+                st.markdown(
+                    """
                 **🔒 Complete Privacy**  
                 - Your data stays isolated
                 - Personal conversation history
                 - Secure session management
-                """)
+                """
+                )
 
             with col3:
-                st.markdown("""
+                st.markdown(
+                    """
                 **🧠 Smart Learning**
                 - Adapts to your style
                 - Builds personalized vocabulary  
                 - Improves over time
-                """)
+                """
+                )
 
         # Add login/register tabs with improved authentication
         st.markdown("---")
-        st.markdown(
-            "### 🔐 **Traditional Login/Register** *(Still Debugging...)*")
-        st.info(
-            "💡 **Debug Steps**: 1️⃣ Create table above → 2️⃣ Register new user → 3️⃣ Try login")
+        st.markdown("### 🔐 **Traditional Login/Register** *(Still Debugging...)*")
+        st.info("💡 **Debug Steps**: 1️⃣ Create table above → 2️⃣ Register new user → 3️⃣ Try login")
 
         tab1, tab2 = st.tabs(["Login", "Register"])
 
@@ -635,36 +607,34 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                     else:
                         # Debug: Test the hash for the existing user
                         if username == "testuser12":
-                            st.info(
-                                "🔍 **Debug Mode for testuser12** - Testing password hash...")
+                            st.info("🔍 **Debug Mode for testuser12** - Testing password hash...")
 
                             # Test with known values from database
                             expected_hash = "9a988b9aac65e187977ecbc34e86f807eb28d2385ec88ff9c74b2a40f5e7e209daaa436ef66dfa98ef5fd28cd1959d9cbac1de86d794ef9cbb45b57d0d82fa6d"
                             expected_salt = "ff85422337871d5b3d2ee73276aa17999548e8708524e37145eb77df3e2ed1d6"
 
-                            st.write(
-                                f"🔍 Testing password '{password}' against database values")
-                            st.write(
-                                f"Expected hash: `{expected_hash[:32]}...`")
+                            st.write(f"🔍 Testing password '{password}' against database values")
+                            st.write(f"Expected hash: `{expected_hash[:32]}...`")
                             st.write(f"Expected salt: `{expected_salt}`")
 
                             # Test hash comparison
                             try:
                                 auth_url = st.secrets.get("supabase", {}).get(
-                                    "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager")
+                                    "auth_function_url", f"{self.supabase_url}/functions/v1/auth-manager"
+                                )
                                 response = requests.post(
                                     auth_url,
                                     headers={
                                         "Authorization": f"Bearer {self.supabase_key}",
-                                        "Content-Type": "application/json"
+                                        "Content-Type": "application/json",
                                     },
                                     json={
                                         "action": "test_hash",
                                         "password": password,
                                         "expected_hash": expected_hash,
-                                        "expected_salt": expected_salt
+                                        "expected_salt": expected_salt,
                                     },
-                                    timeout=5
+                                    timeout=5,
                                 )
 
                                 if response.status_code == 200:
@@ -674,29 +644,26 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
 
                                     if hash_result.get("success"):
                                         if hash_result.get("match"):
-                                            st.success(
-                                                "✅ Hash matches! The password is correct.")
+                                            st.success("✅ Hash matches! The password is correct.")
                                         else:
-                                            st.error(
-                                                "❌ Hash mismatch - this explains the login failure")
+                                            st.error("❌ Hash mismatch - this explains the login failure")
 
                                             # Show comparison details
                                             if "full_computed" in hash_result and "full_expected" in hash_result:
                                                 st.write(
-                                                    "**Computed hash:**", hash_result["full_computed"][:64] + "...")
+                                                    "**Computed hash:**", hash_result["full_computed"][:64] + "..."
+                                                )
                                                 st.write(
-                                                    "**Expected hash:**", hash_result["full_expected"][:64] + "...")
+                                                    "**Expected hash:**", hash_result["full_expected"][:64] + "..."
+                                                )
                                     else:
-                                        st.error(
-                                            f"❌ Hash test failed: {hash_result.get('error', 'Unknown error')}")
+                                        st.error(f"❌ Hash test failed: {hash_result.get('error', 'Unknown error')}")
                                 else:
-                                    st.error(
-                                        f"❌ HTTP {response.status_code}: {response.text}")
+                                    st.error(f"❌ HTTP {response.status_code}: {response.text}")
 
                             except Exception as e:
                                 st.error(f"Hash test error: {str(e)}")
-                                st.write("Debug - Exception details:",
-                                         str(type(e)), str(e))
+                                st.write("Debug - Exception details:", str(type(e)), str(e))
 
                         with st.spinner("Authenticating with improved system..."):
                             result = self.authenticate_user(username, password)
@@ -714,10 +681,8 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
             with st.form("register_form"):
                 new_username = st.text_input("Choose Username")
                 new_email = st.text_input("Email (optional)")
-                new_password = st.text_input(
-                    "Choose Password", type="password")
-                confirm_password = st.text_input(
-                    "Confirm Password", type="password")
+                new_password = st.text_input("Choose Password", type="password")
+                confirm_password = st.text_input("Confirm Password", type="password")
                 register_submitted = st.form_submit_button("Create Account")
 
                 if register_submitted:
@@ -729,13 +694,11 @@ GRANT ALL ON public.users TO anon, authenticated, service_role;
                         st.error("Password must be at least 6 characters")
                     else:
                         with st.spinner("Creating account with improved authentication..."):
-                            result = self.create_user(
-                                new_username, new_password, new_email)
+                            result = self.create_user(new_username, new_password, new_email)
 
                         if result["success"]:
                             st.success(result["message"])
-                            st.info(
-                                "✅ Account created! Now try logging in with your credentials above.")
+                            st.info("✅ Account created! Now try logging in with your credentials above.")
                         else:
                             st.error(result["message"])
 
@@ -757,14 +720,14 @@ def render_main_app():
 
         # Backward-compatibility: translate legacy 'ai_preferred' into local
         # to avoid enabling remote AI automatically.
-        if st.session_state.get('processing_mode') == 'ai_preferred':
-            st.session_state.processing_mode = 'local'
-            st.session_state['prefer_ai'] = False
+        if st.session_state.get("processing_mode") == "ai_preferred":
+            st.session_state.processing_mode = "local"
+            st.session_state["prefer_ai"] = False
 
         with col1:
             # Hybrid mode removed — default to local-only options.
             mode_options = ["local"]
-            current = st.session_state.get('processing_mode', 'local')
+            current = st.session_state.get("processing_mode", "local")
             try:
                 idx = mode_options.index(current)
             except ValueError:
@@ -794,8 +757,7 @@ def render_main_app():
             with st.chat_message("assistant"):
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
-                    st.caption(
-                        f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
+                    st.caption(f"Processed in {exchange['processing_time']} • Mode: {exchange.get('mode', 'unknown')}")
 
     # Input area
     user_input = st.chat_input("Share what you're feeling...")
@@ -814,13 +776,14 @@ def render_main_app():
                 # Connect to authenticated Saori backend
                 try:
                     saori_url = st.secrets.get("supabase", {}).get(
-                        "current_saori_url", "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed")
+                        "current_saori_url", "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed"
+                    )
 
                     response_data = requests.post(
                         saori_url,
                         headers={
                             "Authorization": f"Bearer {st.secrets['supabase']['key']}",
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
                         },
                         json={
                             "message": user_input,
@@ -828,14 +791,13 @@ def render_main_app():
                             # Force quick mode for faster responses
                             "mode": "quick" if processing_mode == "hybrid" else processing_mode,
                         },
-                        timeout=10
+                        timeout=10,
                     )
 
                     if response_data.status_code == 200:
                         result = response_data.json()
                         # Edge function returns "reply", not "response"
-                        response = result.get(
-                            "reply", "I apologize, but I couldn't process your message right now.")
+                        response = result.get("reply", "I apologize, but I couldn't process your message right now.")
                     else:
                         response = f"Connection issue (HTTP {response_data.status_code}). Using fallback response: I'm here to listen and support you."
 
@@ -848,13 +810,15 @@ def render_main_app():
                 st.caption(f"Processed in {processing_time:.2f}s")
 
         # Add to conversation history
-        st.session_state[conversation_key].append({
-            "user": user_input,
-            "assistant": response,
-            "processing_time": f"{processing_time:.2f}s",
-            "mode": processing_mode,
-            "timestamp": datetime.now().isoformat()
-        })
+        st.session_state[conversation_key].append(
+            {
+                "user": user_input,
+                "assistant": response,
+                "processing_time": f"{processing_time:.2f}s",
+                "mode": processing_mode,
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
 
         st.rerun()
 
@@ -881,13 +845,13 @@ def render_main_app():
                 "user_id": st.session_state.user_id,
                 "username": st.session_state.username,
                 "conversations": st.session_state[conversation_key],
-                "export_date": datetime.now().isoformat()
+                "export_date": datetime.now().isoformat(),
             }
             st.download_button(
                 "Download JSON",
                 json.dumps(user_data, indent=2),
                 file_name=f"emotional_os_data_{st.session_state.username}_{datetime.now().strftime('%Y%m%d')}.json",
-                mime="application/json"
+                mime="application/json",
             )
 
 
@@ -902,8 +866,7 @@ def main():
         return
 
     # User is authenticated - render main app
-    st.sidebar.success(
-        f"🚀 AUTH SYSTEM ACTIVE - v2.0 - {datetime.now().strftime('%H:%M')}")
+    st.sidebar.success(f"🚀 AUTH SYSTEM ACTIVE - v2.0 - {datetime.now().strftime('%H:%M')}")
     auth_manager.render_user_header()
     render_main_app()
 

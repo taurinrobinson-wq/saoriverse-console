@@ -40,7 +40,7 @@ def find_files_with_string(repo_root: Path, pattern: str):
     matches = []
     for p in repo_root.rglob("*.py"):
         try:
-            text = p.read_text(encoding='utf-8', errors='ignore')
+            text = p.read_text(encoding="utf-8", errors="ignore")
         except Exception:
             continue
         if pattern in text:
@@ -53,7 +53,7 @@ def replace_absolute_paths_in_file(path: Path):
 
     Returns True if file changed.
     """
-    text = path.read_text(encoding='utf-8', errors='ignore')
+    text = path.read_text(encoding="utf-8", errors="ignore")
     # Replace any os.chdir(...) occurrences with a portable repo-root chdir
     new_text, n = RE_CHDIR_CALL.subn(
         "repo_root = Path(__file__).resolve().parent\nos.chdir(str(repo_root))",
@@ -61,16 +61,13 @@ def replace_absolute_paths_in_file(path: Path):
     )
 
     # Also replace literal /Users/... absolute paths with a portable expression
-    new_text2, m = RE_ABSOLUTE_PATH_UNIX.subn(
-        "str(Path(__file__).resolve().parent)", new_text
-    )
+    new_text2, m = RE_ABSOLUTE_PATH_UNIX.subn("str(Path(__file__).resolve().parent)", new_text)
 
     if (n + m) > 0 and new_text2 != text:
         backup = path.with_suffix(path.suffix + ".bak")
-        path.write_text(new_text2, encoding='utf-8')
-        backup.write_text(text, encoding='utf-8')
-        print(
-            f"Patched {path} (replacements: chdir={n}, abs_paths={m}), backup at {backup}")
+        path.write_text(new_text2, encoding="utf-8")
+        backup.write_text(text, encoding="utf-8")
+        print(f"Patched {path} (replacements: chdir={n}, abs_paths={m}), backup at {backup}")
         return True
 
     return False
@@ -81,7 +78,7 @@ def auto_fix_absolute_paths(repo_root: Path) -> int:
     patched = 0
     for p in repo_root.rglob("*.py"):
         try:
-            text = p.read_text(encoding='utf-8', errors='ignore')
+            text = p.read_text(encoding="utf-8", errors="ignore")
         except Exception:
             continue
         if RE_ABSOLUTE_PATH_UNIX.search(text) or RE_CHDIR_CALL.search(text):
@@ -103,17 +100,17 @@ def git_commit(repo_root: Path, message: str) -> bool:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--auto-fix", action="store_true",
-                        help="Automatically apply conservative fixes")
-    parser.add_argument("--commit", action="store_true",
-                        help="Create a local git commit for fixes (no push)")
+    parser.add_argument("--auto-fix", action="store_true", help="Automatically apply conservative fixes")
+    parser.add_argument("--commit", action="store_true", help="Create a local git commit for fixes (no push)")
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
     # Try common venv locations for both Unix and Windows
-    possible = [repo_root / ".venv" / "bin" / "python",
-                repo_root / ".venv" / "Scripts" / "python.exe",
-                repo_root / "venv" / "bin" / "python"]
+    possible = [
+        repo_root / ".venv" / "bin" / "python",
+        repo_root / ".venv" / "Scripts" / "python.exe",
+        repo_root / "venv" / "bin" / "python",
+    ]
     venv_python = None
     for p in possible:
         if p.exists():
@@ -135,7 +132,7 @@ def main():
     print(result.stderr[:1000])
 
     # Simple heuristic: look for absolute path patterns in stderr/stdout
-    combined = (result.stdout + "\n" + result.stderr)
+    combined = result.stdout + "\n" + result.stderr
     abs_paths = RE_ABSOLUTE_PATH_UNIX.findall(combined)
     if abs_paths:
         print(f"Found absolute paths in test output: {abs_paths}")
@@ -143,8 +140,7 @@ def main():
             patched = auto_fix_absolute_paths(repo_root)
             print(f"Auto-fix applied to {patched} files.")
             if patched and args.commit:
-                git_commit(
-                    repo_root, "chore(diagnostics): auto-fix absolute test paths")
+                git_commit(repo_root, "chore(diagnostics): auto-fix absolute test paths")
             # Re-run pytest once more after fixes
             print("Re-running pytest after auto-fix...")
             rerun = run_pytest(venv_python)
@@ -153,8 +149,7 @@ def main():
             if rerun.returncode == 0:
                 print("Auto-fix resolved the test failures.")
             else:
-                print(
-                    "Auto-fix did not resolve all failures — please inspect test output.")
+                print("Auto-fix did not resolve all failures — please inspect test output.")
         else:
             print("Run with --auto-fix to attempt conservative automated fixes.")
     else:

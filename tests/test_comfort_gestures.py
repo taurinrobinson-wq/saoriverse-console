@@ -1,6 +1,6 @@
 import os
 
-from emotional_os.adapter.comfort_gestures import add_comfort_gesture, ASCII_COMFORT_MAP
+from emotional_os.adapter.comfort_gestures import ASCII_COMFORT_MAP, add_comfort_gesture
 
 
 def test_add_comfort_gesture_prepends():
@@ -8,8 +8,7 @@ def test_add_comfort_gesture_prepends():
     out = add_comfort_gesture("sadness", msg)
     # should prepend one of the sadness gestures
     variants = ASCII_COMFORT_MAP["sadness"]
-    assert any(out.startswith(
-        v) for v in variants), f"Output did not start with any sadness variant: {out!r}"
+    assert any(out.startswith(v) for v in variants), f"Output did not start with any sadness variant: {out!r}"
     assert msg in out
 
 

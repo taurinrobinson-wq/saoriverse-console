@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Optional
 
 class SystemType(Enum):
     """The five glyph-encoded systems."""
+
     LIGHTPATH = "lightpath"
     THRESHOLD = "threshold"
     VELONIX = "velonix"
@@ -29,6 +30,7 @@ class SystemType(Enum):
 
 class NeuralFunction(Enum):
     """Core neural functions that map to rituals."""
+
     REFLEX = "reflex"
     MEMORY = "memory"
     REGULATION = "regulation"
@@ -37,6 +39,7 @@ class NeuralFunction(Enum):
 @dataclass
 class BrainRegion:
     """Represents a brain region with its functions and glyph mappings."""
+
     name: str
     functions: List[NeuralFunction]
     description: str
@@ -47,6 +50,7 @@ class BrainRegion:
 @dataclass
 class RitualSignal:
     """A ritual signal that spans multiple systems."""
+
     name: str
     neural_basis: NeuralFunction
     system_signals: Dict[SystemType, str]
@@ -79,15 +83,14 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: ["⚡", "🔥", "🌋"],
                     SystemType.VELONIX: ["🔮", "✨", "🌙"],
                     SystemType.VELINOR: ["🌿", "🌱", "🌳"],
-                    SystemType.SAONYX: ["💎", "🔮", "🌟"]
+                    SystemType.SAONYX: ["💎", "🔮", "🌟"],
                 },
                 ritual_mappings={
                     "blink": "Boundary signal - insula detects threat, triggers protective blink",
                     "breath": "Interoceptive pacing - insula reads bodily rhythm, adjusts breath depth",
-                    "brace": "Somatic preparation - insula anticipates impact, engages core stability"
-                }
+                    "brace": "Somatic preparation - insula anticipates impact, engages core stability",
+                },
             ),
-
             "amygdala": BrainRegion(
                 name="Amygdala",
                 functions=[NeuralFunction.REFLEX, NeuralFunction.MEMORY],
@@ -97,15 +100,14 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: ["🔴", "🚫", "⛔"],
                     SystemType.VELONIX: ["👁️", "🔍", "🕵️"],
                     SystemType.VELINOR: ["🗡️", "⚔️", "🏹"],
-                    SystemType.SAONYX: ["🔒", "🗝️", "💰"]
+                    SystemType.SAONYX: ["🔒", "🗝️", "💰"],
                 },
                 ritual_mappings={
                     "blink": "Threat assessment - amygdala scans for danger during blink",
                     "breath": "Fear regulation - amygdala modulates breath during perceived threat",
-                    "brace": "Fight/flight preparation - amygdala triggers bracing for confrontation"
-                }
+                    "brace": "Fight/flight preparation - amygdala triggers bracing for confrontation",
+                },
             ),
-
             "hippocampus": BrainRegion(
                 name="Hippocampus",
                 functions=[NeuralFunction.MEMORY, NeuralFunction.REGULATION],
@@ -115,15 +117,14 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: ["📚", "📖", "🔍"],
                     SystemType.VELONIX: ["⏰", "🕰️", "⌛"],
                     SystemType.VELINOR: ["🏰", "🏯", "🕌"],
-                    SystemType.SAONYX: ["💾", "💿", "💽"]
+                    SystemType.SAONYX: ["💾", "💿", "💽"],
                 },
                 ritual_mappings={
                     "blink": "Memory checkpoint - hippocampus timestamps blink moments",
                     "breath": "Contextual breathing - hippocampus recalls safe breathing patterns",
-                    "brace": "Situational recall - hippocampus retrieves past bracing experiences"
-                }
+                    "brace": "Situational recall - hippocampus retrieves past bracing experiences",
+                },
             ),
-
             "acc": BrainRegion(
                 name="Anterior Cingulate Cortex (ACC)",
                 functions=[NeuralFunction.REGULATION],
@@ -133,15 +134,14 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: ["🤔", "💭", "FP"],
                     SystemType.VELONIX: ["🎭", "🎪", "🎨"],
                     SystemType.VELINOR: ["👑", "🏛️", "⚖️"],
-                    SystemType.SAONYX: ["💎", "👑", "🏆"]
+                    SystemType.SAONYX: ["💎", "👑", "🏆"],
                 },
                 ritual_mappings={
                     "blink": "Decision blink - ACC weighs options during blink",
                     "breath": "Executive breathing - ACC regulates breath for optimal cognition",
-                    "brace": "Strategic bracing - ACC calculates bracing intensity and timing"
-                }
+                    "brace": "Strategic bracing - ACC calculates bracing intensity and timing",
+                },
             ),
-
             "vmpfc": BrainRegion(
                 name="Ventromedial Prefrontal Cortex (vmPFC)",
                 functions=[NeuralFunction.REGULATION, NeuralFunction.MEMORY],
@@ -151,14 +151,14 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: ["❤️", "💛", "💖"],
                     SystemType.VELONIX: ["🌈", "🎨", "🖼️"],
                     SystemType.VELINOR: ["🌸", "🌺", "🌻"],
-                    SystemType.SAONYX: ["💎", "💍", "👑"]
+                    SystemType.SAONYX: ["💎", "💍", "👑"],
                 },
                 ritual_mappings={
                     "blink": "Value blink - vmPFC assesses emotional value during blink",
                     "breath": "Compassionate breathing - vmPFC softens breath for connection",
-                    "brace": "Supportive bracing - vmPFC braces with care rather than fear"
-                }
-            )
+                    "brace": "Supportive bracing - vmPFC braces with care rather than fear",
+                },
+            ),
         }
 
     def _initialize_ritual_signals(self) -> Dict[str, RitualSignal]:
@@ -172,11 +172,10 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: "⚡ Threat assessment",
                     SystemType.VELONIX: "🔮 Pattern recognition",
                     SystemType.VELINOR: "🌿 Environmental scan",
-                    SystemType.SAONYX: "💎 Value checkpoint"
+                    SystemType.SAONYX: "💎 Value checkpoint",
                 },
-                description="Blink becomes boundary signal - each blink is a micro-ritual of presence"
+                description="Blink becomes boundary signal - each blink is a micro-ritual of presence",
             ),
-
             "breath": RitualSignal(
                 name="breath",
                 neural_basis=NeuralFunction.REGULATION,
@@ -185,11 +184,10 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: "🔥 Capacity calibration",
                     SystemType.VELONIX: "✨ Energy circulation",
                     SystemType.VELINOR: "🌱 Growth pacing",
-                    SystemType.SAONYX: "💎 Resource allocation"
+                    SystemType.SAONYX: "💎 Resource allocation",
                 },
-                description="Breath becomes pacing tool - each breath regulates emotional flow"
+                description="Breath becomes pacing tool - each breath regulates emotional flow",
             ),
-
             "brace": RitualSignal(
                 name="brace",
                 neural_basis=NeuralFunction.REFLEX,
@@ -198,10 +196,10 @@ class LimbicAdjacentSystem:
                     SystemType.THRESHOLD: "⛔ Boundary enforcement",
                     SystemType.VELONIX: "👁️ Vigilance activation",
                     SystemType.VELINOR: "🏹 Readiness positioning",
-                    SystemType.SAONYX: "🔒 Security protocol"
+                    SystemType.SAONYX: "🔒 Security protocol",
                 },
-                description="Brace becomes preparation ritual - each brace builds resilience"
-            )
+                description="Brace becomes preparation ritual - each brace builds resilience",
+            ),
         }
 
     def get_brain_region(self, region_name: str) -> Optional[BrainRegion]:
@@ -226,22 +224,22 @@ class LimbicAdjacentSystem:
                 SystemType.THRESHOLD: {"glyph": "🔥", "signal": "Heat rising"},
                 SystemType.VELONIX: {"glyph": "🔮", "signal": "Crystal clarity"},
                 SystemType.VELINOR: {"glyph": "🌿", "signal": "Root grounding"},
-                SystemType.SAONYX: {"glyph": "💎", "signal": "Diamond focus"}
+                SystemType.SAONYX: {"glyph": "💎", "signal": "Diamond focus"},
             },
             "joy": {
                 SystemType.LIGHTPATH: {"glyph": "🌅", "signal": "Morning light"},
                 SystemType.THRESHOLD: {"glyph": "⚡", "signal": "Electric spark"},
                 SystemType.VELONIX: {"glyph": "✨", "signal": "Star shine"},
                 SystemType.VELINOR: {"glyph": "🌸", "signal": "Flower bloom"},
-                SystemType.SAONYX: {"glyph": "💎", "signal": "Gem brilliance"}
+                SystemType.SAONYX: {"glyph": "💎", "signal": "Gem brilliance"},
             },
             "sadness": {
                 SystemType.LIGHTPATH: {"glyph": "🌊", "signal": "Ocean depth"},
                 SystemType.THRESHOLD: {"glyph": "🌧️", "signal": "Rain fall"},
                 SystemType.VELONIX: {"glyph": "🌙", "signal": "Moon shadow"},
                 SystemType.VELINOR: {"glyph": "🌿", "signal": "Leaf wither"},
-                SystemType.SAONYX: {"glyph": "💎", "signal": "Stone weight"}
-            }
+                SystemType.SAONYX: {"glyph": "💎", "signal": "Stone weight"},
+            },
         }
 
         # Get base mapping or use default
@@ -284,7 +282,7 @@ class LimbicAdjacentSystem:
             "neural_basis": "limbic-adjacent activation",
             "system_signals": system_signals,
             "ritual_sequence": ["blink", "breath", "brace"],
-            "description": f"One {emotion} feeling expressed as five coordinated signals across glyph systems"
+            "description": f"One {emotion} feeling expressed as five coordinated signals across glyph systems",
         }
 
         return chiasmus
@@ -299,7 +297,7 @@ class LimbicAdjacentSystem:
             mapping[region_name] = {
                 "functions": [f.value for f in region.functions],
                 "ritual_mappings": region.ritual_mappings,
-                "description": region.description
+                "description": region.description,
             }
 
         return mapping
@@ -326,13 +324,13 @@ if __name__ == "__main__":
     mapping = system.get_neural_ritual_mapping()
     for region, data in mapping.items():
         print(f"\n{region.upper()}: {data['description']}")
-        for ritual, desc in data['ritual_mappings'].items():
+        for ritual, desc in data["ritual_mappings"].items():
             print(f"  • {ritual} → {desc}")
 
     # Show emotion chiasmus
     print("\n🌈 Emotion Chiasmus (Joy):")
     chiasmus = system.create_ritual_chiasmus("joy")
-    for system_type, signal_data in chiasmus['system_signals'].items():
+    for system_type, signal_data in chiasmus["system_signals"].items():
         print(f"  {system_type.value}: {signal_data['glyph']} {signal_data['signal']}")
 
     print("\n✅ Limbic-adjacent system initialized and ready for integration!")
