@@ -24,7 +24,7 @@ Documentation:
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from enum import Enum
 import re
 
@@ -41,8 +41,8 @@ class ToneQuality(Enum):
     """Tone qualities for emotional coloring."""
     TENDER = "tender"         # Soft, gentle, nurturing
     PRESENT = "present"       # Grounded, attentive, neutral
-    SUPPORTIVE = "supportive" # Encouraging, validating
-    REFLECTIVE = "reflective" # Thoughtful, mirroring back
+    SUPPORTIVE = "supportive"  # Encouraging, validating
+    REFLECTIVE = "reflective"  # Thoughtful, mirroring back
     SPACIOUS = "spacious"     # Open, unhurried, allowing
 
 
@@ -65,7 +65,8 @@ class AttunementState:
     hesitation_level: float = 0.0
     softening_active: bool = False
     holding_space: bool = False
-    last_updated: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    last_updated: datetime = field(
+        default_factory=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> Dict:
         """Serialize state to dictionary."""
@@ -87,7 +88,8 @@ class InteractionSignal:
     word_count: int
     punctuation_intensity: float  # 0-1 based on !?... usage
     emotional_markers: List[str]
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = field(
+        default_factory=lambda: datetime.now(timezone.utc))
     silence_since_last: float = 0.0  # seconds
 
 
@@ -132,7 +134,8 @@ class AttunementLoop:
         # Calculate silence duration since last interaction
         silence_duration = 0.0
         if self._last_interaction_time:
-            silence_duration = (now - self._last_interaction_time).total_seconds()
+            silence_duration = (
+                now - self._last_interaction_time).total_seconds()
 
         # Extract signal from message
         signal = self._extract_signal(message, now, silence_duration)
@@ -176,7 +179,7 @@ class AttunementLoop:
 
         # Intensity markers
         intensity_words = ["overwhelmed", "exhausted", "terrified", "ecstatic",
-                          "devastated", "furious", "elated", "crushed"]
+                           "devastated", "furious", "elated", "crushed"]
         for word in intensity_words:
             if word in lower:
                 markers.append(f"intensity:{word}")
@@ -202,7 +205,8 @@ class AttunementLoop:
         if not self._signal_history:
             return
 
-        recent = self._signal_history[-3:] if len(self._signal_history) >= 3 else self._signal_history
+        recent = self._signal_history[-3:] if len(
+            self._signal_history) >= 3 else self._signal_history
 
         # Analyze rhythm from message timing and length
         avg_length = sum(s.message_length for s in recent) / len(recent)
@@ -222,8 +226,10 @@ class AttunementLoop:
         for s in recent:
             all_markers.extend(s.emotional_markers)
 
-        intensity_count = sum(1 for m in all_markers if m.startswith("intensity:"))
-        vuln_count = sum(1 for m in all_markers if m.startswith("vulnerability:"))
+        intensity_count = sum(
+            1 for m in all_markers if m.startswith("intensity:"))
+        vuln_count = sum(
+            1 for m in all_markers if m.startswith("vulnerability:"))
         proc_count = sum(1 for m in all_markers if m.startswith("processing:"))
 
         if vuln_count > 0:
@@ -256,7 +262,7 @@ class AttunementLoop:
         """Get the current attunement state."""
         return self._state
 
-    def get_response_modifiers(self) -> Dict[str, any]:
+    def get_response_modifiers(self) -> Dict[str, Any]:
         """Get modifiers to apply to response generation.
 
         Returns:

@@ -393,8 +393,12 @@ class EdgeGenerator:
         pattern_data = self.EDGE_PATTERNS[pattern]
         templates = pattern_data["templates"]
 
-        content = dict(templates).get(emotion.lower(),
-                                      dict(templates).get("default", ""))
+        # Cast to dict to use get() method
+        if isinstance(templates, dict):
+            content = templates.get(
+                emotion.lower(), templates.get("default", ""))
+        else:
+            content = ""
 
         self._last_edge_time = datetime.now(timezone.utc)
         self._edge_history.append(pattern)

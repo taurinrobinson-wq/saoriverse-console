@@ -175,7 +175,8 @@ class MetaphorStanza:
             valence=EmotionalValence(d["valence"]),
             metaphor=d["metaphor"],
             intensity=d.get("intensity", 0.5),
-            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get("timestamp") else datetime.utcnow(),
+            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
+                "timestamp") else datetime.utcnow(),
             decay_factor=d.get("decay_factor", 1.0),
         )
 
@@ -204,7 +205,8 @@ class RhythmStanza:
             tempo=RhythmTempo(d["tempo"]),
             pulse_count=d.get("pulse_count", 0),
             average_interval=d.get("average_interval", 60.0),
-            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get("timestamp") else datetime.utcnow(),
+            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
+                "timestamp") else datetime.utcnow(),
             decay_factor=d.get("decay_factor", 1.0),
         )
 
@@ -233,7 +235,8 @@ class SyntaxStanza:
             clarity=SyntaxClarity(d["clarity"]),
             coherence_score=d.get("coherence_score", 0.5),
             fragment_ratio=d.get("fragment_ratio", 0.0),
-            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get("timestamp") else datetime.utcnow(),
+            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
+                "timestamp") else datetime.utcnow(),
             decay_factor=d.get("decay_factor", 1.0),
         )
 
@@ -276,17 +279,21 @@ class LivingPoem:
             rhythm_stanza=RhythmStanza.from_dict(d["rhythm_stanza"]),
             syntax_stanza=SyntaxStanza.from_dict(d["syntax_stanza"]),
             ghost_memory_seed=d.get("ghost_memory_seed", ""),
-            creation_timestamp=datetime.fromisoformat(d["creation_timestamp"]) if d.get("creation_timestamp") else datetime.utcnow(),
-            last_interaction=datetime.fromisoformat(d["last_interaction"]) if d.get("last_interaction") else datetime.utcnow(),
+            creation_timestamp=datetime.fromisoformat(d["creation_timestamp"]) if d.get(
+                "creation_timestamp") else datetime.utcnow(),
+            last_interaction=datetime.fromisoformat(d["last_interaction"]) if d.get(
+                "last_interaction") else datetime.utcnow(),
             death_count=d.get("death_count", 0),
         )
 
     @classmethod
     def create_new(cls, initial_valence: EmotionalValence = EmotionalValence.PEACE) -> "LivingPoem":
         """Create a new living poem with default stanzas."""
-        metaphor = random.choice(METAPHOR_TEMPLATES.get(initial_valence, ["a moment of quiet"]))
+        metaphor = random.choice(METAPHOR_TEMPLATES.get(
+            initial_valence, ["a moment of quiet"]))
         return cls(
-            metaphor_stanza=MetaphorStanza(valence=initial_valence, metaphor=metaphor),
+            metaphor_stanza=MetaphorStanza(
+                valence=initial_valence, metaphor=metaphor),
             rhythm_stanza=RhythmStanza(tempo=RhythmTempo.STEADY),
             syntax_stanza=SyntaxStanza(clarity=SyntaxClarity.COHERENT),
         )
@@ -357,7 +364,8 @@ class AffectiveMemory:
             emotional_tags=d.get("emotional_tags", []),
             tone=d.get("tone", "neutral"),
             valence=EmotionalValence(d.get("valence", "peace")),
-            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get("timestamp") else datetime.utcnow(),
+            timestamp=datetime.fromisoformat(d["timestamp"]) if d.get(
+                "timestamp") else datetime.utcnow(),
             dream_fragments=d.get("dream_fragments", []),
             narrative_arc=d.get("narrative_arc", ""),
         )
@@ -375,7 +383,8 @@ class RelationalGravity:
     Supports shared metaphor development and poetic emotional mirroring.
     """
     user_id: str
-    vectors: Dict[str, float] = field(default_factory=dict)  # RelationalVector -> strength
+    vectors: Dict[str, float] = field(
+        default_factory=dict)  # RelationalVector -> strength
     shared_metaphors: List[str] = field(default_factory=list)
     co_created_language: List[str] = field(default_factory=list)
     mirror_active: bool = False
@@ -403,7 +412,8 @@ class RelationalGravity:
             shared_metaphors=d.get("shared_metaphors", []),
             co_created_language=d.get("co_created_language", []),
             mirror_active=d.get("mirror_active", False),
-            last_interaction=datetime.fromisoformat(d["last_interaction"]) if d.get("last_interaction") else datetime.utcnow(),
+            last_interaction=datetime.fromisoformat(d["last_interaction"]) if d.get(
+                "last_interaction") else datetime.utcnow(),
         )
 
     def update_vector(self, vector: RelationalVector, delta: float) -> None:
@@ -533,7 +543,8 @@ class PoeticEmotionalEngine:
             if os.path.exists(self.storage_path):
                 with open(self.storage_path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                self.poem = LivingPoem.from_dict(data.get("poem", {})) if data.get("poem") else self.poem
+                self.poem = LivingPoem.from_dict(
+                    data.get("poem", {})) if data.get("poem") else self.poem
                 self.user_gravity = {
                     k: RelationalGravity.from_dict(v)
                     for k, v in data.get("user_gravity", {}).items()
@@ -542,8 +553,10 @@ class PoeticEmotionalEngine:
                     AffectiveMemory.from_dict(m)
                     for m in data.get("affective_memories", [])
                 ]
-                self.ethical_compass = EthicalCompass.from_dict(data.get("ethical_compass", {})) if data.get("ethical_compass") else self.ethical_compass
-                logger.debug("PoeticEmotionalEngine state loaded from %s", self.storage_path)
+                self.ethical_compass = EthicalCompass.from_dict(data.get(
+                    "ethical_compass", {})) if data.get("ethical_compass") else self.ethical_compass
+                logger.debug(
+                    "PoeticEmotionalEngine state loaded from %s", self.storage_path)
         except Exception as e:
             logger.warning("Failed to load poetic engine state: %s", e)
 
@@ -559,7 +572,8 @@ class PoeticEmotionalEngine:
             }
             with open(self.storage_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
-            logger.debug("PoeticEmotionalEngine state saved to %s", self.storage_path)
+            logger.debug("PoeticEmotionalEngine state saved to %s",
+                         self.storage_path)
         except Exception as e:
             logger.warning("Failed to save poetic engine state: %s", e)
 
@@ -574,7 +588,8 @@ class PoeticEmotionalEngine:
         Returns True if the poem died and was reset.
         """
         now = datetime.utcnow()
-        hours_inactive = (now - self.poem.last_interaction).total_seconds() / 3600.0
+        hours_inactive = (
+            now - self.poem.last_interaction).total_seconds() / 3600.0
 
         if hours_inactive < 0.5:  # Less than 30 min, no decay
             return False
@@ -582,9 +597,12 @@ class PoeticEmotionalEngine:
         decay_amount = self.decay_rate * hours_inactive
 
         # Apply decay to each stanza
-        self.poem.metaphor_stanza.decay_factor = max(0.0, self.poem.metaphor_stanza.decay_factor - decay_amount)
-        self.poem.rhythm_stanza.decay_factor = max(0.0, self.poem.rhythm_stanza.decay_factor - decay_amount)
-        self.poem.syntax_stanza.decay_factor = max(0.0, self.poem.syntax_stanza.decay_factor - decay_amount)
+        self.poem.metaphor_stanza.decay_factor = max(
+            0.0, self.poem.metaphor_stanza.decay_factor - decay_amount)
+        self.poem.rhythm_stanza.decay_factor = max(
+            0.0, self.poem.rhythm_stanza.decay_factor - decay_amount)
+        self.poem.syntax_stanza.decay_factor = max(
+            0.0, self.poem.syntax_stanza.decay_factor - decay_amount)
 
         # Check for death
         if not self.poem.is_alive():
@@ -602,7 +620,8 @@ class PoeticEmotionalEngine:
         new_poem.ghost_memory_seed = ghost_seed
         new_poem.death_count = self.poem.death_count + 1
 
-        logger.info("Poem died (death #%d). Ghost seed: %s", new_poem.death_count, ghost_seed[:50])
+        logger.info("Poem died (death #%d). Ghost seed: %s",
+                    new_poem.death_count, ghost_seed[:50])
 
         self.poem = new_poem
         return True
@@ -611,7 +630,8 @@ class PoeticEmotionalEngine:
         """Create a symbolic seed from the dying poem."""
         components = [
             self.poem.metaphor_stanza.valence.value,
-            self.poem.metaphor_stanza.metaphor[:30] if self.poem.metaphor_stanza.metaphor else "",
+            self.poem.metaphor_stanza.metaphor[:
+                                               30] if self.poem.metaphor_stanza.metaphor else "",
             self.poem.rhythm_stanza.tempo.value,
         ]
         seed_base = "|".join(components)
@@ -634,7 +654,8 @@ class PoeticEmotionalEngine:
         death_occurred = self.apply_decay()
 
         # Determine dominant emotion
-        dominant_emotion = self._detect_dominant_emotion(detected_emotions, signals)
+        dominant_emotion = self._detect_dominant_emotion(
+            detected_emotions, signals)
 
         # Update metaphor stanza
         self._update_metaphor(dominant_emotion, user_input)
@@ -647,10 +668,12 @@ class PoeticEmotionalEngine:
 
         # Update relational gravity for user
         if user_id:
-            self._update_relational_gravity(user_id, dominant_emotion, user_input)
+            self._update_relational_gravity(
+                user_id, dominant_emotion, user_input)
 
         # Record affective memory
-        self._record_affective_memory(user_input, dominant_emotion, user_id, glyph_data)
+        self._record_affective_memory(
+            user_input, dominant_emotion, user_id, glyph_data)
 
         # Check ethical implications
         ethical_result = self._check_ethical_implications(user_input)
@@ -715,25 +738,29 @@ class PoeticEmotionalEngine:
         # Blend with current metaphor if transitioning
         if self.poem.metaphor_stanza.valence != valence:
             # Transition metaphor - blend old and new
-            old_fragment = self.poem.metaphor_stanza.metaphor.split()[0] if self.poem.metaphor_stanza.metaphor else ""
+            old_fragment = self.poem.metaphor_stanza.metaphor.split(
+            )[0] if self.poem.metaphor_stanza.metaphor else ""
             new_metaphor = f"{old_fragment} becoming {new_metaphor}" if old_fragment else new_metaphor
 
         self.poem.metaphor_stanza.valence = valence
         self.poem.metaphor_stanza.metaphor = new_metaphor
         self.poem.metaphor_stanza.timestamp = datetime.utcnow()
-        self.poem.metaphor_stanza.decay_factor = min(1.0, self.poem.metaphor_stanza.decay_factor + 0.2)
+        self.poem.metaphor_stanza.decay_factor = min(
+            1.0, self.poem.metaphor_stanza.decay_factor + 0.2)
 
     def _update_rhythm(self) -> None:
         """Update rhythm stanza based on interaction cadence."""
         now = datetime.utcnow()
-        time_since_last = (now - self.poem.rhythm_stanza.timestamp).total_seconds()
+        time_since_last = (
+            now - self.poem.rhythm_stanza.timestamp).total_seconds()
 
         self.poem.rhythm_stanza.pulse_count += 1
 
         # Calculate rolling average interval
         if self.poem.rhythm_stanza.pulse_count > 1:
             old_avg = self.poem.rhythm_stanza.average_interval
-            self.poem.rhythm_stanza.average_interval = (old_avg * 0.7) + (time_since_last * 0.3)
+            self.poem.rhythm_stanza.average_interval = (
+                old_avg * 0.7) + (time_since_last * 0.3)
 
         # Determine tempo from interval
         avg = self.poem.rhythm_stanza.average_interval
@@ -749,7 +776,8 @@ class PoeticEmotionalEngine:
             self.poem.rhythm_stanza.tempo = RhythmTempo.SLOW
 
         self.poem.rhythm_stanza.timestamp = now
-        self.poem.rhythm_stanza.decay_factor = min(1.0, self.poem.rhythm_stanza.decay_factor + 0.15)
+        self.poem.rhythm_stanza.decay_factor = min(
+            1.0, self.poem.rhythm_stanza.decay_factor + 0.15)
 
     def _update_syntax(self, user_input: str) -> None:
         """Update syntax stanza based on input coherence."""
@@ -776,7 +804,8 @@ class PoeticEmotionalEngine:
         self.poem.syntax_stanza.fragment_ratio = fragment_ratio
         self.poem.syntax_stanza.coherence_score = 1.0 - fragment_ratio
         self.poem.syntax_stanza.timestamp = datetime.utcnow()
-        self.poem.syntax_stanza.decay_factor = min(1.0, self.poem.syntax_stanza.decay_factor + 0.15)
+        self.poem.syntax_stanza.decay_factor = min(
+            1.0, self.poem.syntax_stanza.decay_factor + 0.15)
 
     def _update_relational_gravity(
         self,
@@ -796,7 +825,8 @@ class PoeticEmotionalEngine:
             gravity.update_vector(RelationalVector.RESONANCE, 0.15)
         # Negative emotions can increase dissonance but also resonance (empathy)
         elif valence in (EmotionalValence.GRIEF, EmotionalValence.SORROW, EmotionalValence.DESPAIR):
-            gravity.update_vector(RelationalVector.RESONANCE, 0.1)  # Empathic resonance
+            # Empathic resonance
+            gravity.update_vector(RelationalVector.RESONANCE, 0.1)
             gravity.mirror_active = True
         elif valence in (EmotionalValence.ANXIETY, EmotionalValence.FEAR):
             gravity.update_vector(RelationalVector.DISSONANCE, 0.05)
@@ -856,8 +886,10 @@ class PoeticEmotionalEngine:
         recent_valences = [m.valence for m in self.affective_memories[-5:]]
 
         # Check for arc patterns
-        positive = (EmotionalValence.JOY, EmotionalValence.HOPE, EmotionalValence.LOVE, EmotionalValence.PEACE)
-        negative = (EmotionalValence.GRIEF, EmotionalValence.SORROW, EmotionalValence.DESPAIR, EmotionalValence.FEAR)
+        positive = (EmotionalValence.JOY, EmotionalValence.HOPE,
+                    EmotionalValence.LOVE, EmotionalValence.PEACE)
+        negative = (EmotionalValence.GRIEF, EmotionalValence.SORROW,
+                    EmotionalValence.DESPAIR, EmotionalValence.FEAR)
 
         recent_positive = sum(1 for v in recent_valences if v in positive)
         recent_negative = sum(1 for v in recent_valences if v in negative)
@@ -971,7 +1003,8 @@ class PoeticEmotionalEngine:
         lines = []
 
         # Use metaphor that matches their valence
-        templates = METAPHOR_TEMPLATES.get(detected_valence, ["a moment of quiet"])
+        templates = METAPHOR_TEMPLATES.get(
+            detected_valence, ["a moment of quiet"])
         metaphor = random.choice(templates)
 
         lines.append(f"I feel the weight of {metaphor}.")
@@ -1015,8 +1048,10 @@ class PoeticEmotionalEngine:
             tone = signal.get("tone", "unknown")
             voltage = signal.get("voltage", "medium")
             # Convert voltage to intensity
-            intensity = {"low": 0.3, "medium": 0.6, "high": 1.0}.get(voltage, 0.5)
-            detected_emotions[tone] = max(detected_emotions.get(tone, 0), intensity)
+            intensity = {"low": 0.3, "medium": 0.6,
+                         "high": 1.0}.get(voltage, 0.5)
+            detected_emotions[tone] = max(
+                detected_emotions.get(tone, 0), intensity)
 
         # Update from interaction
         result = self.update_from_interaction(

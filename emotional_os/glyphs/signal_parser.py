@@ -5,6 +5,7 @@ This module re-exports the canonical implementations from
 internal helpers and a backward-compatible wrapper for
 `select_best_glyph_and_response` that older callers/tests expect.
 """
+# mypy: ignore-errors
 
 # Explicitly import some underscore-prefixed helpers which are intentionally
 # private in the core implementation but were referenced by older callers
@@ -19,6 +20,7 @@ from emotional_os.core.signal_parser import (
 )
 
 
+# type: ignore[no-redef]
 def select_best_glyph_and_response(glyphs, signals, input_text="", conversation_context=None):
     """Compatibility wrapper around core.select_best_glyph_and_response.
 
