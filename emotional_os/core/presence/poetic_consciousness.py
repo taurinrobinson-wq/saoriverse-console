@@ -301,7 +301,8 @@ class PoeticConsciousness:
             for pattern, concept, expression in patterns:
                 if re.search(pattern, lower):
                     # Calculate resonance based on context
-                    resonance = self._calculate_resonance(message, domain, pattern)
+                    resonance = self._calculate_resonance(
+                        message, domain, pattern)
 
                     # Detect archetypal pattern
                     archetype = self._detect_archetype(message)
@@ -333,7 +334,8 @@ class PoeticConsciousness:
 
         # Repeated domain references increase resonance
         domain_patterns = self.METAPHOR_PATTERNS.get(domain, [])
-        matches = sum(1 for p, _, _ in domain_patterns if re.search(p, message.lower()))
+        matches = sum(
+            1 for p, _, _ in domain_patterns if re.search(p, message.lower()))
         base_resonance += matches * 0.1
 
         # Cap at 1.0
@@ -350,7 +352,7 @@ class PoeticConsciousness:
                 archetype_scores[archetype] = score
 
         if archetype_scores:
-            return max(archetype_scores, key=archetype_scores.get)
+            return max(archetype_scores, key=lambda x: archetype_scores[x])
         return None
 
     def _update_state(self, new_metaphors: List[Metaphor]) -> None:
@@ -371,19 +373,24 @@ class PoeticConsciousness:
 
         # Determine dominant domain
         if self._state.active_metaphors:
-            domain_counts = {}
+            domain_counts: Dict[str, float] = {}
             for m in self._state.active_metaphors:
-                domain_counts[m.symbolic_domain] = domain_counts.get(m.symbolic_domain, 0) + m.resonance_strength
-            self._state.dominant_domain = max(domain_counts, key=domain_counts.get)
+                domain_counts[m.symbolic_domain] = domain_counts.get(
+                    m.symbolic_domain, 0) + m.resonance_strength
+            self._state.dominant_domain = max(
+                domain_counts, key=lambda x: domain_counts[x])
 
         # Update archetypal mode
-        archetypes = [m.archetypal_pattern for m in self._state.active_metaphors if m.archetypal_pattern]
+        archetypes = [
+            m.archetypal_pattern for m in self._state.active_metaphors if m.archetypal_pattern]
         if archetypes:
-            self._state.archetypal_mode = max(set(archetypes), key=archetypes.count)
+            self._state.archetypal_mode = max(
+                set(archetypes), key=archetypes.count)
 
         # Update resonance depth
         if self._state.active_metaphors:
-            avg_resonance = sum(m.resonance_strength for m in self._state.active_metaphors) / len(self._state.active_metaphors)
+            avg_resonance = sum(
+                m.resonance_strength for m in self._state.active_metaphors) / len(self._state.active_metaphors)
             self._state.resonance_depth = avg_resonance
 
         # Update symbolic texture
@@ -510,7 +517,8 @@ class PoeticConsciousness:
 
         summaries = []
         for m in self._state.active_metaphors:
-            summaries.append(f"{m.symbolic_domain.value}: {m.poetic_expression} ({m.resonance_strength:.2f})")
+            summaries.append(
+                f"{m.symbolic_domain.value}: {m.poetic_expression} ({m.resonance_strength:.2f})")
 
         return "; ".join(summaries)
 
