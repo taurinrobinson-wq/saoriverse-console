@@ -19,19 +19,19 @@ Architecture:
 
 import json
 import logging
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 @dataclass
 class ConversationGlyph:
     """A glyph discovered through live conversation."""
+
     id: str
     name: str
     symbol: str
@@ -128,7 +128,7 @@ class DynamicGlyphEvolution:
         """Load previously discovered conversation glyphs."""
         try:
             if Path(self.conversation_glyphs_file).exists():
-                with open(self.conversation_glyphs_file, 'r') as f:
+                with open(self.conversation_glyphs_file, "r") as f:
                     return json.load(f)
         except Exception as e:
             logger.warning(f"Could not load conversation glyphs: {e}")
@@ -137,11 +137,9 @@ class DynamicGlyphEvolution:
     def _save_conversation_glyphs(self):
         """Save discovered glyphs to file."""
         try:
-            with open(self.conversation_glyphs_file, 'w') as f:
-                self.conversation_glyphs["metadata"]["last_updated"] = datetime.now(
-                ).isoformat()
-                self.conversation_glyphs["metadata"]["total_discovered"] = len(
-                    self.conversation_glyphs["glyphs"])
+            with open(self.conversation_glyphs_file, "w") as f:
+                self.conversation_glyphs["metadata"]["last_updated"] = datetime.now().isoformat()
+                self.conversation_glyphs["metadata"]["total_discovered"] = len(self.conversation_glyphs["glyphs"])
                 json.dump(self.conversation_glyphs, f, indent=2)
         except Exception as e:
             logger.error(f"Failed to save conversation glyphs: {e}")
@@ -149,7 +147,7 @@ class DynamicGlyphEvolution:
     def _load_lexicon(self) -> Dict:
         """Load current lexicon (includes learned signals)."""
         try:
-            with open(self.lexicon_path, 'r') as f:
+            with open(self.lexicon_path, "r") as f:
                 return json.load(f)
         except Exception as e:
             logger.warning(f"Could not load lexicon: {e}")
@@ -199,8 +197,7 @@ class DynamicGlyphEvolution:
             )
             result["learning_result"] = learning_result
 
-            logger.info(
-                f"[DIALOGUE] User {user_id} in conversation {conversation_id}")
+            logger.info(f"[DIALOGUE] User {user_id} in conversation {conversation_id}")
             logger.info(f"  Input: {user_input[:100]}...")
             logger.info(f"  Learning result: {learning_result}")
 
@@ -208,23 +205,20 @@ class DynamicGlyphEvolution:
             if not emotional_signals or len(emotional_signals) == 0:
                 try:
                     if self.adaptive_extractor:
-                        emotional_signals = self.adaptive_extractor.extract_signals(
-                            user_input + " " + ai_response
-                        )
+                        emotional_signals = self.adaptive_extractor.extract_signals(user_input + " " + ai_response)
                     else:
-                        from emotional_os.learning.poetry_signal_extractor import get_poetry_extractor
-                        extractor = get_poetry_extractor()
-                        emotional_signals = extractor.extract_signals(
-                            user_input + " " + ai_response
+                        from emotional_os.learning.poetry_signal_extractor import (
+                            get_poetry_extractor,
                         )
+
+                        extractor = get_poetry_extractor()
+                        emotional_signals = extractor.extract_signals(user_input + " " + ai_response)
                 except Exception as e:
                     logger.warning(f"Signal extraction failed: {e}")
                     emotional_signals = []
 
             # 3. Analyze for new glyph patterns
-            patterns = self._detect_patterns_in_exchange(
-                user_input, ai_response, emotional_signals
-            )
+            patterns = self._detect_patterns_in_exchange(user_input, ai_response, emotional_signals)
             result["pattern_analysis"] = patterns
 
             # 4. Generate new glyphs if patterns are significant
@@ -238,8 +232,7 @@ class DynamicGlyphEvolution:
 
                 if new_glyphs and len(new_glyphs) > 0:
                     result["new_glyphs_generated"] = new_glyphs
-                    logger.info(
-                        f"[GLYPHS] Generated {len(new_glyphs)} new glyphs from patterns")
+                    logger.info(f"[GLYPHS] Generated {len(new_glyphs)} new glyphs from patterns")
 
                     # Save new glyphs
                     for glyph in new_glyphs:
@@ -254,8 +247,7 @@ class DynamicGlyphEvolution:
                 }
 
         except Exception as e:
-            logger.error(
-                f"Error processing dialogue exchange: {e}", exc_info=True)
+            logger.error(f"Error processing dialogue exchange: {e}", exc_info=True)
             result["error"] = str(e)
 
         return result
@@ -281,28 +273,24 @@ class DynamicGlyphEvolution:
             return patterns
 
         # Extract unique signals
-        signals_found = list(
-            set([s.get("signal") or s.get("name") for s in emotional_signals if s]))
+        signals_found = list(set([s.get("signal") or s.get("name") for s in emotional_signals if s]))
 
         # Find co-occurrence patterns
         if len(signals_found) >= 2:
             for i, signal1 in enumerate(signals_found):
-                for signal2 in signals_found[i+1:]:
+                for signal2 in signals_found[i + 1 :]:
                     pattern = {
                         "signal_pair": [signal1, signal2],
                         "co_occurrence_count": 1,  # Count in this exchange
-                        "keywords": self._extract_pattern_keywords(
-                            signal1, signal2, user_input + " " + ai_response
-                        ),
+                        "keywords": self._extract_pattern_keywords(signal1, signal2, user_input + " " + ai_response),
                         "context": {
                             "user_input": user_input[:200],
                             "ai_response": ai_response[:200],
-                        }
+                        },
                     }
                     patterns.append(pattern)
 
-            logger.info(
-                f"[PATTERNS] Detected {len(patterns)} co-occurrence patterns in exchange")
+            logger.info(f"[PATTERNS] Detected {len(patterns)} co-occurrence patterns in exchange")
 
         return patterns
 
@@ -326,11 +314,9 @@ class DynamicGlyphEvolution:
             ("transformation", "growth"): ["change", "grow", "evolve", "transform", "become"],
         }
 
-        pair_keywords = signal_keywords.get(
-            (signal1, signal2)) or signal_keywords.get((signal2, signal1))
+        pair_keywords = signal_keywords.get((signal1, signal2)) or signal_keywords.get((signal2, signal1))
         if pair_keywords:
-            keywords = [
-                w for w in words if w in pair_keywords and w in text.lower()]
+            keywords = [w for w in words if w in pair_keywords and w in text.lower()]
 
         # Include the signal names as keywords
         keywords.extend([signal1.lower(), signal2.lower()])
@@ -360,8 +346,7 @@ class DynamicGlyphEvolution:
                 name=self._create_pattern_name(signal1, signal2),
                 symbol=self._create_pattern_symbol(signal1, signal2),
                 core_emotions=[signal1, signal2],
-                associated_keywords=pattern.get(
-                    "keywords", [signal1, signal2]),
+                associated_keywords=pattern.get("keywords", [signal1, signal2]),
                 combined_frequency=300,  # Base frequency for conversation-discovered glyphs
                 response_cue=self._create_response_cue(signal1, signal2),
                 narrative_hook=self._create_narrative_hook(signal1, signal2),
@@ -371,8 +356,7 @@ class DynamicGlyphEvolution:
             )
 
             new_glyphs.append(glyph)
-            logger.info(
-                f"[NEW GLYPH] {glyph.name} ({glyph.symbol}) from {signal1} + {signal2}")
+            logger.info(f"[NEW GLYPH] {glyph.name} ({glyph.symbol}) from {signal1} + {signal2}")
 
         return new_glyphs
 
@@ -392,8 +376,7 @@ class DynamicGlyphEvolution:
         }
 
         # Check both orderings
-        name = name_map.get((signal1, signal2)) or name_map.get(
-            (signal2, signal1))
+        name = name_map.get((signal1, signal2)) or name_map.get((signal2, signal1))
 
         if name:
             return name
@@ -438,8 +421,7 @@ class DynamicGlyphEvolution:
         try:
             self.conversation_glyphs["glyphs"].append(glyph.to_dict())
             self._save_conversation_glyphs()
-            logger.info(
-                f"[SAVED] Conversation glyph {glyph.id} for user {glyph.user_id}")
+            logger.info(f"[SAVED] Conversation glyph {glyph.id} for user {glyph.user_id}")
         except Exception as e:
             logger.error(f"Failed to save conversation glyph: {e}")
 
@@ -467,8 +449,7 @@ class DynamicGlyphEvolution:
             glyphs = [g for g in glyphs if g.get("user_id") == user_id]
 
         if conversation_id:
-            glyphs = [g for g in glyphs if g.get(
-                "conversation_id") == conversation_id]
+            glyphs = [g for g in glyphs if g.get("conversation_id") == conversation_id]
 
         # Apply limit
         if limit:
@@ -493,11 +474,10 @@ class DynamicGlyphEvolution:
                 "exported_at": datetime.now().isoformat(),
             }
 
-            with open(output_file, 'w') as f:
+            with open(output_file, "w") as f:
                 json.dump(export_data, f, indent=2)
 
-            logger.info(
-                f"[EXPORT] Exported {len(glyphs)} glyphs to {output_file}")
+            logger.info(f"[EXPORT] Exported {len(glyphs)} glyphs to {output_file}")
             return {"success": True, "count": len(glyphs), "file": output_file}
 
         except Exception as e:
@@ -521,8 +501,7 @@ class DynamicGlyphEvolution:
             print(f"   Created: {glyph.get('created_at', 'unknown')[:10]}")
 
         print("\n" + "=" * 70)
-        print(
-            f"Total conversation-discovered glyphs: {len(self.conversation_glyphs['glyphs'])}")
+        print(f"Total conversation-discovered glyphs: {len(self.conversation_glyphs['glyphs'])}")
         print("=" * 70 + "\n")
 
 
@@ -538,23 +517,24 @@ def integrate_evolution_with_processor(
     # multiple fallbacks and continue gracefully when unavailable.
     if adaptive_extractor is None:
         try:
-            from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
+            from emotional_os.learning.adaptive_signal_extractor import (
+                AdaptiveSignalExtractor,
+            )
+
             try:
                 # Preferred modern signature (accepts persistence_path/kwargs)
-                adaptive_extractor = AdaptiveSignalExtractor(
-                    adaptive=True, use_discovered=True, persistence_path=None)
+                adaptive_extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True, persistence_path=None)
             except Exception as ex:
                 # Some environments may expose a different AdaptiveSignalExtractor
                 # signature (older/newer). Try the simpler call as a fallback
                 # and log the original exception for diagnostics.
                 try:
                     logger.warning(
-                        "AdaptiveSignalExtractor init with persistence_path failed, retrying without it: %s", ex)
-                    adaptive_extractor = AdaptiveSignalExtractor(
-                        adaptive=True, use_discovered=True)
+                        "AdaptiveSignalExtractor init with persistence_path failed, retrying without it: %s", ex
+                    )
+                    adaptive_extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
                 except Exception as ex2:
-                    logger.exception(
-                        "AdaptiveSignalExtractor unavailable after fallback: %s", ex2)
+                    logger.exception("AdaptiveSignalExtractor unavailable after fallback: %s", ex2)
                     adaptive_extractor = None
         except Exception as ex:
             logger.debug("AdaptiveSignalExtractor import failed: %s", ex)

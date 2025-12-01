@@ -11,8 +11,12 @@ class FakeLearner:
 
     def collect_candidate(self, candidate, source="test"):
         # simulate the event object that writer.append_event would receive
-        evt = {"source": source, "event_type": "candidate",
-               "payload": candidate, "confidence": candidate.get("confidence")}
+        evt = {
+            "source": source,
+            "event_type": "candidate",
+            "payload": candidate,
+            "confidence": candidate.get("confidence"),
+        }
         self.staged.append(evt)
 
     def score_candidate(self, candidate):

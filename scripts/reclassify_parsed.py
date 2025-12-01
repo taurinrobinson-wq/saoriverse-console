@@ -29,10 +29,19 @@ explicit_user_phrases = [
     "How is a dialogue like a wire",
 ]
 
-ai_markers = ["in summary", "here are", "you might want",
-              "let’s explore", "validate", "contextual"]
-user_markers = ["cool", "ooo", "haha", "perfect", "see told you",
-                "lol", "uh", "gonna", "my girlfriend", "i know your point"]
+ai_markers = ["in summary", "here are", "you might want", "let’s explore", "validate", "contextual"]
+user_markers = [
+    "cool",
+    "ooo",
+    "haha",
+    "perfect",
+    "see told you",
+    "lol",
+    "uh",
+    "gonna",
+    "my girlfriend",
+    "i know your point",
+]
 
 
 def classify_turn(t: str) -> str:
@@ -75,8 +84,8 @@ OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2))
 
 for i, m in enumerate(new_msgs[:40], start=1):
-    t = m['type']
-    c = m['content'].replace('\n', ' ')[:400]
+    t = m["type"]
+    c = m["content"].replace("\n", " ")[:400]
     print(f"{i:02d}. {t} — {c}")
 
-print('\nWROTE:', OUT)
+print("\nWROTE:", OUT)

@@ -9,8 +9,7 @@ def test_tag_input_initiatory():
 
 
 def test_tag_input_voltage_and_anchoring():
-    tags = tag_input(
-        "Everything just changed. I'm overwhelmed and been talking about it.")
+    tags = tag_input("Everything just changed. I'm overwhelmed and been talking about it.")
     assert "initiatory_signal" in tags or "voltage_surge" in tags
     assert "anchoring_signal" in tags or isinstance(tags, list)
 

@@ -10,9 +10,9 @@
     "context_words": [
       "profound"
     ],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.621256+00:00",
-    "last_seen": "2025-11-28T05:08:31.451517+00:00"
+    "last_seen": "2025-11-30T16:32:38.122510+00:00"
   },
   "grief + joy": {
     "emotions": [
@@ -23,9 +23,9 @@
     "context_words": [
       "profound"
     ],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.621272+00:00",
-    "last_seen": "2025-11-28T05:08:31.451527+00:00"
+    "last_seen": "2025-11-30T16:32:38.122522+00:00"
   },
   "ache + connection + flow": {
     "emotions": [
@@ -37,9 +37,9 @@
     "context_words": [
       "sacred"
     ],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.626633+00:00",
-    "last_seen": "2025-11-28T05:08:31.452055+00:00"
+    "last_seen": "2025-11-30T16:32:38.123266+00:00"
   },
   "clarity + overwhelmed + this": {
     "emotions": [
@@ -49,9 +49,9 @@
     ],
     "intensity": 0.5,
     "context_words": [],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.627265+00:00",
-    "last_seen": "2025-11-28T05:08:31.452444+00:00"
+    "last_seen": "2025-11-30T16:32:38.123885+00:00"
   },
   "feeling + joy + this": {
     "emotions": [
@@ -61,9 +61,9 @@
     ],
     "intensity": 0.5,
     "context_words": [],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.628377+00:00",
-    "last_seen": "2025-11-28T05:08:31.453314+00:00"
+    "last_seen": "2025-11-30T16:32:38.125037+00:00"
   },
   "flow + peace + stillness": {
     "emotions": [
@@ -75,9 +75,9 @@
     "context_words": [
       "flowing"
     ],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.628949+00:00",
-    "last_seen": "2025-11-28T05:08:31.453669+00:00"
+    "last_seen": "2025-11-30T16:32:38.125672+00:00"
   },
   "flow + strength + touched + vulnerability + weakness": {
     "emotions": [
@@ -89,8 +89,8 @@
     ],
     "intensity": 0.5,
     "context_words": [],
-    "frequency": 81,
+    "frequency": 80,
     "first_seen": "2025-11-11T07:38:52.629580+00:00",
-    "last_seen": "2025-11-28T05:08:31.454045+00:00"
+    "last_seen": "2025-11-30T16:32:38.126506+00:00"
   }
 }

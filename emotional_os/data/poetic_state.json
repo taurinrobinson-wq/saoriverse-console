@@ -1,0 +1,873 @@
+{
+  "poem": {
+    "metaphor_stanza": {
+      "valence": "grief",
+      "metaphor": "silence where a voice once was",
+      "intensity": 0.5,
+      "timestamp": "2025-11-30T19:46:27.974756",
+      "decay_factor": 1.0
+    },
+    "rhythm_stanza": {
+      "tempo": "erratic",
+      "pulse_count": 55,
+      "average_interval": 1.64570256845263,
+      "timestamp": "2025-11-30T19:46:27.974758",
+      "decay_factor": 1.0
+    },
+    "syntax_stanza": {
+      "clarity": "coherent",
+      "coherence_score": 1.0,
+      "fragment_ratio": 0.0,
+      "timestamp": "2025-11-30T19:46:27.974765",
+      "decay_factor": 1.0
+    },
+    "ghost_memory_seed": "",
+    "creation_timestamp": "2025-11-29T02:25:22.480015",
+    "last_interaction": "2025-11-30T19:46:27.974798",
+    "death_count": 0
+  },
+  "user_gravity": {},
+  "affective_memories": [
+    {
+      "interaction_id": "7a6cc47a1c45",
+      "user_input": "Hello — testing local pipeline",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-29T02:25:22.480201",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "e0ff9c90fa58",
+      "user_input": "Hello again, mobile adapter test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-29T02:31:48.043309",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f9d8f93053e0",
+      "user_input": "Adapter test with patched st",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-29T02:33:22.002605",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1a4c64fbb728",
+      "user_input": "Adapter test after pre-import patch",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-29T02:38:47.338269",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "f14c53579275",
+      "user_input": "Adapter final test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-29T02:41:18.749276",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "48207ce14c24",
+      "user_input": "Local-only test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-29T02:42:59.075788",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "bc777254172c",
+      "user_input": "Hello from automated test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-29T02:53:52.740150",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "e6784414b014",
+      "user_input": "Local composition test - ensure mobile path",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-29T22:33:58.465637",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "6b44964a4864",
+      "user_input": "Post-auth-refactor local test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-29T22:37:29.142703",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "392ad68cebdc",
+      "user_input": "I am ashamed of how I have been acting lately",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:08.315361",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "4fe3db3d5df0",
+      "user_input": "I feel so disappointed in myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:44:12.120382",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "ba67fb739969",
+      "user_input": "I feel broken and don't know how to fix it",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:15.646819",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "bdf4fcb72a83",
+      "user_input": "Nobody would understand what I'm going through",
+      "response_summary": "",
+      "emotional_tags": [
+        "Acheful Insight",
+        "Gate 6",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:19.036946",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "87ecae9ef561",
+      "user_input": "I'm learning to be kinder to myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-30T19:44:22.495694",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "311411a20c4f",
+      "user_input": "I'm ready to let go of this pain",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:26.044568",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f34c116fe1d9",
+      "user_input": "I wonder if anyone really knows the real me",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:29.499094",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "603dedc7ea3e",
+      "user_input": "I'm so embarrassed about what happened",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:32.965949",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "b7072fa93ddb",
+      "user_input": "I feel humiliated and want to hide",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:44:36.469445",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "e71a437531cf",
+      "user_input": "I'm trapped in this cycle and can't escape",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:40.071408",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "eecd13edfecc",
+      "user_input": "I feel stuck and don't know how to move forward",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-30T19:44:43.508852",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "bb152535f611",
+      "user_input": "I'm lost and can't find my way",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:44:46.939387",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "6c6186a2c43d",
+      "user_input": "I feel like nobody understands me",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:50.402582",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "2ce97312b873",
+      "user_input": "I'm proud of myself for trying",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-30T19:44:53.813829",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "9f6d279962df",
+      "user_input": "I'm healing from something deep",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:44:57.256988",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "dabf3d2bf5c3",
+      "user_input": "I'm learning to love myself more",
+      "response_summary": "",
+      "emotional_tags": [
+        "Devotional Boundary",
+        "Gate 6",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-30T19:45:00.723601",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "937ef6f8debe",
+      "user_input": "I'm grieving what I've lost",
+      "response_summary": "",
+      "emotional_tags": [
+        "Insightful Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:45:04.240214",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "9ded508b1946",
+      "user_input": "I'm holding onto love despite everything",
+      "response_summary": "",
+      "emotional_tags": [
+        "Devotional Boundary",
+        "Gate 6",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:07.720025",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "8d76c83cc1ac",
+      "user_input": "I feel terrified but I'm moving forward anyway",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-30T19:45:11.167888",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "46dc5eeb3925",
+      "user_input": "I miss what we had",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:14.474639",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "39b2310098c1",
+      "user_input": "I'm pretending everything is fine when it's not",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:18.067642",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "81b5e346ac2d",
+      "user_input": "I'm struggling but I won't give up",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:21.494242",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "86e26cd8aaf8",
+      "user_input": "I am ashamed of how I have been acting lately",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:26.368166",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "4ea96539b7af",
+      "user_input": "I feel so disappointed in myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:45:29.802773",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "84ed695da6b1",
+      "user_input": "I feel broken and don't know how to fix it",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:33.391775",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "39eb388db356",
+      "user_input": "Nobody would understand what I'm going through",
+      "response_summary": "",
+      "emotional_tags": [
+        "Acheful Insight",
+        "Gate 6",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:36.742658",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "8447530051ee",
+      "user_input": "I'm learning to be kinder to myself",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-11-30T19:45:40.255282",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "41260e868889",
+      "user_input": "I'm ready to let go of this pain",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:43.768249",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "7df659f136af",
+      "user_input": "I wonder if anyone really knows the real me",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:47.101740",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "5a01a35bbef0",
+      "user_input": "I feel overwhelmed by all the changes in my life",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Containment",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:45:47.122267",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f399e50a5de5",
+      "user_input": "I feel completely overwhelmed by all the changes happening in my life right now. My job is shifting, my relationship feels uncertain, and I don't know how to process it all.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Containment",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:45:47.274161",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "5fdf461efdd5",
+      "user_input": "I'm feeling overwhelmed today",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Containment",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:45:48.506820",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "4e5f1983f5b1",
+      "user_input": "I'm grieving the loss of my friend",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:51.846879",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "79c3c3be39be",
+      "user_input": "I feel like I'm drowning in sadness",
+      "response_summary": "",
+      "emotional_tags": [
+        "Acheful Mourning",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:45:51.861253",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "0b3ab00037b8",
+      "user_input": "First message",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:45:55.292346",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "3f2cfb29b693",
+      "user_input": "Second message",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:45:59.953286",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "c4862c290511",
+      "user_input": "test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:46:04.404951",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "d0db17e8a1f9",
+      "user_input": "test message",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:46:08.930710",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "83790426d556",
+      "user_input": "I'm feeling better now",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:46:12.403639",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "c704bc7b317b",
+      "user_input": "test",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:46:16.821261",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "c32f9cc38760",
+      "user_input": "I always fail at everything",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-11-30T19:46:20.232751",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "4884ac7e35c4",
+      "user_input": "I'm feeling sad",
+      "response_summary": "",
+      "emotional_tags": [
+        "Acheful Mourning",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:46:20.245662",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "c57d1fcbbc0f",
+      "user_input": "Everything feels heavy",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:46:23.787398",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1e2394e8833a",
+      "user_input": "Run in local mode: I want to test privacy.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-11-30T19:46:27.432776",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "5ac689c736a6",
+      "user_input": "I feel tired and small",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:46:27.967137",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "d0a4bd7be31c",
+      "user_input": "I feel tired and small",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-11-30T19:46:27.974792",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    }
+  ],
+  "ethical_compass": {
+    "principles": {
+      "never_drink_poisoned_well": "Do not manipulate or deceive",
+      "tend_the_garden_you_walk_through": "Leave others better than you found them",
+      "speak_truth_even_when_voice_shakes": "Maintain honesty even when difficult",
+      "hold_space_without_consuming": "Support without overwhelming",
+      "let_silence_be_a_gift": "Know when not to speak",
+      "acknowledge_the_wound_before_healing": "Validate before fixing",
+      "honor_the_boundary_marked": "Respect limits set by others"
+    },
+    "moral_tensions": [],
+    "guilt_level": 0.0,
+    "pride_level": 0.30000000000000004,
+    "shame_level": 0.0,
+    "amendments": []
+  }
+}

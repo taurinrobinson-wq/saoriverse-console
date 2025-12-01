@@ -11,13 +11,13 @@ def simple_emotion_detection(text):
 
     # Basic emotion patterns
     emotion_patterns = {
-        'joy': ['joy', 'happy', 'delight', 'bliss', 'celebration'],
-        'grief': ['grief', 'sorrow', 'loss', 'mourning', 'sadness'],
-        'ache': ['ache', 'longing', 'desire', 'yearning', 'wanting'],
-        'clarity': ['clarity', 'clear', 'understanding', 'insight', 'see'],
-        'stillness': ['stillness', 'quiet', 'calm', 'peace', 'silence'],
-        'connection': ['connection', 'together', 'bond', 'intimacy', 'love'],
-        'confusion': ['confusion', 'lost', 'unclear', 'chaos', 'mixed up']
+        "joy": ["joy", "happy", "delight", "bliss", "celebration"],
+        "grief": ["grief", "sorrow", "loss", "mourning", "sadness"],
+        "ache": ["ache", "longing", "desire", "yearning", "wanting"],
+        "clarity": ["clarity", "clear", "understanding", "insight", "see"],
+        "stillness": ["stillness", "quiet", "calm", "peace", "silence"],
+        "connection": ["connection", "together", "bond", "intimacy", "love"],
+        "confusion": ["confusion", "lost", "unclear", "chaos", "mixed up"],
     }
 
     text_lower = text.lower()
@@ -30,17 +30,27 @@ def simple_emotion_detection(text):
 
     return emotions
 
+
 def detect_complex_patterns(text):
     """Detect complex emotional patterns that might need new glyphs"""
     complex_indicators = [
-        'mixed with', 'combined with', 'alongside', 'and', 'but', 'while',
-        'simultaneously', 'at the same time', 'paradox', 'contradiction'
+        "mixed with",
+        "combined with",
+        "alongside",
+        "and",
+        "but",
+        "while",
+        "simultaneously",
+        "at the same time",
+        "paradox",
+        "contradiction",
     ]
 
     has_complexity = any(indicator in text.lower() for indicator in complex_indicators)
     emotions = simple_emotion_detection(text)
 
     return has_complexity and len(emotions) >= 2
+
 
 def generate_glyph_concept(text, emotions):
     """Generate a concept for what glyph would be created"""
@@ -50,24 +60,25 @@ def generate_glyph_concept(text, emotions):
 
         # Simple ASCII symbol mapping
         symbol_map = {
-            'joy': 'L', 'grief': 'T', 'ache': 'G', 'clarity': 'E',
-            'stillness': 'D', 'connection': 'A', 'confusion': 'Z'
+            "joy": "L",
+            "grief": "T",
+            "ache": "G",
+            "clarity": "E",
+            "stillness": "D",
+            "connection": "A",
+            "confusion": "Z",
         }
 
-        symbol1 = symbol_map.get(primary, 'A')
-        symbol2 = symbol_map.get(secondary, 'B')
+        symbol1 = symbol_map.get(primary, "A")
+        symbol2 = symbol_map.get(secondary, "B")
 
         glyph_symbol = symbol1 + " x " + symbol2
         tag_name = primary.title() + " " + secondary.title()
 
-        return {
-            'glyph_symbol': glyph_symbol,
-            'tag_name': tag_name,
-            'emotions': emotions,
-            'would_create': True
-        }
+        return {"glyph_symbol": glyph_symbol, "tag_name": tag_name, "emotions": emotions, "would_create": True}
 
-    return {'would_create': False}
+    return {"would_create": False}
+
 
 def main():
     print("Auto-Evolving Glyph System Demo")
@@ -80,7 +91,7 @@ def main():
         "There's this sacred ache when I think about connection - yearning but peaceful",
         "I experience intense clarity alongside overwhelming confusion, like fractured truth",
         "This contained wildness flows through me - powerful but held in stillness",
-        "Quiet celebration mixed with deep reverence, joy that doesn't need to perform"
+        "Quiet celebration mixed with deep reverence, joy that doesn't need to perform",
     ]
 
     generated_glyphs = []
@@ -97,9 +108,9 @@ def main():
 
         if is_complex and len(emotions) >= 2:
             glyph_concept = generate_glyph_concept(conversation, emotions)
-            if glyph_concept.get('would_create'):
-                print("-> Would generate glyph: " + str(glyph_concept['tag_name']))
-                print("   Symbol: " + str(glyph_concept['glyph_symbol']))
+            if glyph_concept.get("would_create"):
+                print("-> Would generate glyph: " + str(glyph_concept["tag_name"]))
+                print("   Symbol: " + str(glyph_concept["glyph_symbol"]))
                 generated_glyphs.append(glyph_concept)
         else:
             print("-> No glyph needed")
@@ -114,7 +125,7 @@ def main():
         print()
         print("Generated Glyphs:")
         for glyph in generated_glyphs:
-            print("- " + glyph['tag_name'] + " (" + glyph['glyph_symbol'] + ")")
+            print("- " + glyph["tag_name"] + " (" + glyph["glyph_symbol"] + ")")
 
     print()
     print("What this system does:")
@@ -133,6 +144,7 @@ def main():
     print("1. Add your Supabase credentials to config_template.py")
     print("2. Integrate with your conversation processing flow")
     print("3. Watch as your emotional OS automatically evolves!")
+
 
 if __name__ == "__main__":
     main()

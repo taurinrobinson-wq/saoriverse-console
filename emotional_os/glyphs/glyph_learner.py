@@ -15,18 +15,22 @@ No user ever gets a templated response.
 
 import hashlib
 import json
+import os
 import sqlite3
 import time
 from datetime import datetime
-from typing import Dict, List, Optional
-import os
+from typing import Any, Dict, List, Optional
 
+nrc: Any = None
+HAS_NRC: bool = False
 try:
-    from parser.nrc_lexicon_loader import nrc
+    from parser.nrc_lexicon_loader import nrc as _nrc
+
+    nrc = _nrc
     HAS_NRC = True
-except ImportError:
+except Exception:
+    # Leave `nrc` as Any/None when the optional dependency is unavailable
     HAS_NRC = False
-    nrc = None
 
 
 class GlyphLearner:
@@ -35,7 +39,7 @@ class GlyphLearner:
     def __init__(self, db_path: Optional[str] = None):
         # Use an absolute path inside the package by default to avoid cwd-dependent failures
         if not db_path:
-            db_path = os.path.join(os.path.dirname(__file__), 'glyphs.db')
+            db_path = os.path.join(os.path.dirname(__file__), "glyphs.db")
         self.db_path = db_path
         self.nrc = nrc if HAS_NRC else None
         self._ensure_learning_tables()
@@ -51,7 +55,8 @@ class GlyphLearner:
             cursor = conn.cursor()
 
             # Table for candidate glyphs (not yet in production)
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS glyph_candidates (
                     id INTEGER PRIMARY KEY,
                     glyph_name TEXT UNIQUE NOT NULL,
@@ -66,10 +71,12 @@ class GlyphLearner:
                     usage_count INTEGER DEFAULT 0,
                     promoted_to_production BOOLEAN DEFAULT 0
                 )
-            """)
+            """
+            )
 
             # Track which glyphs are system-wide (used across multiple users)
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS glyph_usage_log (
                     id INTEGER PRIMARY KEY,
                     glyph_name TEXT NOT NULL,
@@ -79,10 +86,12 @@ class GlyphLearner:
                     relevance_score REAL,
                     user_validation INTEGER DEFAULT -1
                 )
-            """)
+            """
+            )
 
             # Emotional language patterns (for learning)
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS emotional_patterns (
                     id INTEGER PRIMARY KEY,
                     pattern TEXT UNIQUE NOT NULL,
@@ -92,7 +101,8 @@ class GlyphLearner:
                     frequency_count INTEGER DEFAULT 1,
                     associated_glyphs TEXT
                 )
-            """)
+            """
+            )
 
             conn.commit()
             conn.close()
@@ -100,10 +110,7 @@ class GlyphLearner:
             print(f"Error creating learning tables: {e}")
 
     def analyze_input_for_glyph_generation(
-        self,
-        input_text: str,
-        signals: List[Dict],
-        user_hash: Optional[str] = None
+        self, input_text: str, signals: List[Dict], user_hash: Optional[str] = None
     ) -> Dict:
         """
         Analyze input when no glyph matches found.
@@ -119,9 +126,7 @@ class GlyphLearner:
 
         # 2. Find closest existing glyphs
         similar_glyphs = self._find_similar_glyphs(
-            emotional_terms,
-            nrc_analysis
-        )
+            emotional_terms, nrc_analysis)
 
         # 3. Generate glyph candidate
         glyph_candidate = self._generate_glyph_candidate(
@@ -129,15 +134,12 @@ class GlyphLearner:
             emotional_terms=emotional_terms,
             nrc_analysis=nrc_analysis,
             signals=signals,
-            similar_glyphs=similar_glyphs
+            similar_glyphs=similar_glyphs,
         )
 
         # 4. Calculate confidence
         confidence = self._calculate_confidence(
-            glyph_candidate,
-            signals,
-            emotional_terms
-        )
+            glyph_candidate, signals, emotional_terms)
 
         return {
             "glyph_name": glyph_candidate.get("name"),
@@ -152,15 +154,15 @@ class GlyphLearner:
                 "source_input": input_text,
                 "created_by": user_hash,
                 "created_at": datetime.now().isoformat(),
-                "learning_status": "candidate"
-            }
+                "learning_status": "candidate",
+            },
         }
 
     def _extract_emotional_language(self, text: str) -> Dict[str, List[str]]:
         """Extract emotional vocabulary from input."""
         text_lower = text.lower()
 
-        categories = {
+        categories: Dict[str, List[str]] = {
             "intensity_words": [],
             "state_words": [],
             "relation_words": [],
@@ -169,8 +171,17 @@ class GlyphLearner:
         }
 
         # Intensity indicators
-        intensity = ["so", "very", "deeply", "incredibly", "almost",
-                     "barely", "overwhelming", "crushing", "suffocating"]
+        intensity = [
+            "so",
+            "very",
+            "deeply",
+            "incredibly",
+            "almost",
+            "barely",
+            "overwhelming",
+            "crushing",
+            "suffocating",
+        ]
         for word in intensity:
             if word in text_lower:
                 categories["intensity_words"].append(word)
@@ -216,12 +227,7 @@ class GlyphLearner:
         except Exception:
             return {}
 
-    def _find_similar_glyphs(
-        self,
-        emotional_terms: Dict,
-        nrc_analysis: Dict,
-        top_k: int = 3
-    ) -> List[Dict]:
+    def _find_similar_glyphs(self, emotional_terms: Dict, nrc_analysis: Dict, top_k: int = 3) -> List[Dict]:
         """Find existing glyphs semantically similar to this input."""
         try:
             conn = sqlite3.connect(self.db_path)
@@ -230,23 +236,21 @@ class GlyphLearner:
             # Get all existing glyphs
             cursor.execute(
                 "SELECT glyph_name, description FROM glyph_lexicon LIMIT 50")
-            existing_glyphs = cursor.fetchall()
+            from typing import Tuple
+
+            existing_glyphs: List[Tuple[str, str]] = cursor.fetchall()
             conn.close()
 
             # Score each glyph by semantic similarity
-            scored = []
+            from typing import Any
+
+            scored: List[Dict[str, Any]] = []
             for glyph_name, description in existing_glyphs:
                 score = self._semantic_similarity_score(
-                    description,
-                    emotional_terms,
-                    nrc_analysis
-                )
+                    description, emotional_terms, nrc_analysis)
                 if score > 0.3:  # Only include if somewhat similar
-                    scored.append({
-                        "name": glyph_name,
-                        "description": description,
-                        "similarity_score": score
-                    })
+                    scored.append(
+                        {"name": glyph_name, "description": description, "similarity_score": score})
 
             # Return top K
             scored.sort(key=lambda x: x["similarity_score"], reverse=True)
@@ -255,12 +259,7 @@ class GlyphLearner:
         except Exception:
             return []
 
-    def _semantic_similarity_score(
-        self,
-        glyph_description: str,
-        emotional_terms: Dict,
-        nrc_analysis: Dict
-    ) -> float:
+    def _semantic_similarity_score(self, glyph_description: str, emotional_terms: Dict, nrc_analysis: Dict) -> float:
         """Score how similar a glyph is to the emotional input."""
         score = 0.0
 
@@ -286,25 +285,17 @@ class GlyphLearner:
         emotional_terms: Dict,
         nrc_analysis: Dict,
         signals: List[Dict],
-        similar_glyphs: List[Dict]
+        similar_glyphs: List[Dict],
     ) -> Dict:
         """Generate a new glyph candidate."""
 
         # 1. Create glyph name from emotional language + existing patterns
         name = self._generate_glyph_name(
-            input_text,
-            emotional_terms,
-            nrc_analysis,
-            similar_glyphs
-        )
+            input_text, emotional_terms, nrc_analysis, similar_glyphs)
 
         # 2. Create description
         description = self._generate_glyph_description(
-            input_text,
-            emotional_terms,
-            nrc_analysis,
-            similar_glyphs
-        )
+            input_text, emotional_terms, nrc_analysis, similar_glyphs)
 
         # 3. Map signals to gates
         gates = self._map_signals_to_gates(signals)
@@ -313,27 +304,18 @@ class GlyphLearner:
         primary_signal = signals[0].get(
             "signal", "unknown") if signals else "unknown"
 
-        return {
-            "name": name,
-            "description": description,
-            "signal": primary_signal,
-            "gates": gates
-        }
+        return {"name": name, "description": description, "signal": primary_signal, "gates": gates}
 
     def _generate_glyph_name(
-        self,
-        input_text: str,
-        emotional_terms: Dict,
-        nrc_analysis: Dict,
-        similar_glyphs: List[Dict]
+        self, input_text: str, emotional_terms: Dict, nrc_analysis: Dict, similar_glyphs: List[Dict]
     ) -> str:
         """Generate a meaningful glyph name."""
 
         # Extract key words from input
         key_words = []
         for word in input_text.split():
-            if len(word) > 4 and word.lower() not in ['feel', 'feeling', 'felt']:
-                key_words.append(word.lower().strip('.,!?'))
+            if len(word) > 4 and word.lower() not in ["feel", "feeling", "felt"]:
+                key_words.append(word.lower().strip(".,!?"))
 
         # Use NRC emotion if available
         if nrc_analysis:
@@ -362,11 +344,7 @@ class GlyphLearner:
         return name
 
     def _generate_glyph_description(
-        self,
-        input_text: str,
-        emotional_terms: Dict,
-        nrc_analysis: Dict,
-        similar_glyphs: List[Dict]
+        self, input_text: str, emotional_terms: Dict, nrc_analysis: Dict, similar_glyphs: List[Dict]
     ) -> str:
         """Generate poetic glyph description."""
 
@@ -374,9 +352,7 @@ class GlyphLearner:
         essence = input_text[:100].strip()
 
         # Build description blending user language + existing patterns
-        descriptions = [
-            f"The emotion of: {essence}."
-        ]
+        descriptions = [f"The emotion of: {essence}."]
 
         # Add emotional category from NRC
         if nrc_analysis:
@@ -392,8 +368,7 @@ class GlyphLearner:
         if similar_glyphs:
             similar_names = [g["name"] for g in similar_glyphs[:2]]
             descriptions.append(
-                f"Kin to {similar_names[0].lower()}, yet distinct in its calling."
-            )
+                f"Kin to {similar_names[0].lower()}, yet distinct in its calling.")
 
         return " ".join(descriptions)
 
@@ -424,12 +399,7 @@ class GlyphLearner:
 
         return list(gates) if gates else ["Gate 5"]
 
-    def _calculate_confidence(
-        self,
-        glyph_candidate: Dict,
-        signals: List[Dict],
-        emotional_terms: Dict
-    ) -> float:
+    def _calculate_confidence(self, glyph_candidate: Dict, signals: List[Dict], emotional_terms: Dict) -> float:
         """Calculate confidence in the generated glyph."""
         score = 0.5  # Start at neutral
 
@@ -471,7 +441,7 @@ class GlyphLearner:
             json.dumps(candidate.get("gates", [])),
             metadata.get("source_input"),
             metadata.get("created_by"),
-            candidate.get("confidence_score")
+            candidate.get("confidence_score"),
         )
 
         # Retry loop to mitigate transient 'database is locked' errors
@@ -496,7 +466,7 @@ class GlyphLearner:
             except sqlite3.OperationalError as e:
                 attempts += 1
                 # If it's a lock, wait and retry a few times
-                if 'locked' in str(e).lower() and attempts < max_attempts:
+                if "locked" in str(e).lower() and attempts < max_attempts:
                     time.sleep(backoff)
                     backoff *= 2
                     continue
@@ -518,23 +488,20 @@ class GlyphLearner:
         # If we exhausted retries, return False
         return False
 
-    def log_glyph_usage(
-        self,
-        glyph_name: str,
-        user_hash: str,
-        input_text: str,
-        relevance_score: float = 1.0
-    ) -> bool:
+    def log_glyph_usage(self, glyph_name: str, user_hash: str, input_text: str, relevance_score: float = 1.0) -> bool:
         """Track glyph usage across users."""
         try:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO glyph_usage_log
                 (glyph_name, user_hash, input_text, relevance_score)
                 VALUES (?, ?, ?, ?)
-            """, (glyph_name, user_hash, input_text, relevance_score))
+            """,
+                (glyph_name, user_hash, input_text, relevance_score),
+            )
 
             conn.commit()
             conn.close()
@@ -556,8 +523,8 @@ class GlyphLearner:
 
             # Get candidate
             cursor.execute(
-                "SELECT description, emotional_signal, gates FROM glyph_candidates WHERE glyph_name = ?",
-                (glyph_name,)
+                "SELECT description, emotional_signal, gates FROM glyph_candidates WHERE glyph_name = ?", (
+                    glyph_name,)
             )
             row = cursor.fetchone()
 
@@ -568,16 +535,18 @@ class GlyphLearner:
             gates_list = json.loads(gates) if isinstance(gates, str) else gates
 
             # Insert into production glyph_lexicon
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO glyph_lexicon (glyph_name, description, gate)
                 VALUES (?, ?, ?)
-            """, (glyph_name, description, gates_list[0] if gates_list else "Gate 5"))
+            """,
+                (glyph_name, description,
+                 gates_list[0] if gates_list else "Gate 5"),
+            )
 
             # Mark candidate as promoted
             cursor.execute(
-                "UPDATE glyph_candidates SET promoted_to_production = 1 WHERE glyph_name = ?",
-                (glyph_name,)
-            )
+                "UPDATE glyph_candidates SET promoted_to_production = 1 WHERE glyph_name = ?", (glyph_name,))
 
             conn.commit()
             conn.close()
@@ -614,7 +583,7 @@ class GlyphLearner:
                 "pending_candidates": pending,
                 "promoted_glyphs": promoted,
                 "unique_glyphs_used": unique_glyphs_used,
-                "unique_users": unique_users
+                "unique_users": unique_users,
             }
         except Exception as e:
             return {"error": str(e)}

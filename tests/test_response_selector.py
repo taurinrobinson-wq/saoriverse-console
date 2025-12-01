@@ -1,4 +1,5 @@
 import pytest
+
 from response_selector import classify_signal, select_first_turn_response
 
 
@@ -7,8 +8,7 @@ def test_positive_signal():
     category = classify_signal(user_input)
     assert category == "positive"
     response = select_first_turn_response(user_input)
-    assert any(k in response.lower()
-               for k in ("meaningful", "wonderful", "glad"))
+    assert any(k in response.lower() for k in ("meaningful", "wonderful", "glad"))
 
 
 def test_silence_signal_with_typo():
@@ -24,8 +24,7 @@ def test_overwhelm_signal_with_typo():
     category = classify_signal(user_input)
     assert category == "overwhelm"
     response = select_first_turn_response(user_input)
-    assert any(k in response.lower()
-               for k in ("overwhelm", "take your time", "overwhelming"))
+    assert any(k in response.lower() for k in ("overwhelm", "take your time", "overwhelming"))
 
 
 def test_loss_signal():
@@ -42,5 +41,4 @@ def test_ambiguous_signal():
     category = classify_signal(user_input)
     assert category == "ambiguous"
     response = select_first_turn_response(user_input)
-    assert any(k in response.lower()
-               for k in ("important", "detail", "listen"))
+    assert any(k in response.lower() for k in ("important", "detail", "listen"))

@@ -15,10 +15,7 @@ from emotional_os.deploy.config import SUPABASE_ANON_KEY, SUPABASE_URL
 class PerformanceTester:
     def __init__(self):
         self.url = f"{SUPABASE_URL}/functions/v1/saori-fixed"
-        self.headers = {
-            "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
-            "Content-Type": "application/json"
-        }
+        self.headers = {"Authorization": f"Bearer {SUPABASE_ANON_KEY}", "Content-Type": "application/json"}
         self.results = []
 
     def test_message(self, message, expected_speed="normal"):
@@ -27,17 +24,18 @@ class PerformanceTester:
 
         start_time = time.time()
         try:
-            response = requests.post(self.url, headers=self.headers, json={
-                "message": message,
-                "mode": "hybrid"
-            }, timeout=30)
+            response = requests.post(
+                self.url, headers=self.headers, json={"message": message, "mode": "hybrid"}, timeout=30
+            )
 
             response_time = time.time() - start_time
             success = response.status_code == 200
 
             if success:
                 data = response.json()
-                reply_preview = data.get("reply", "")[:100] + "..." if len(data.get("reply", "")) > 100 else data.get("reply", "")
+                reply_preview = (
+                    data.get("reply", "")[:100] + "..." if len(data.get("reply", "")) > 100 else data.get("reply", "")
+                )
 
                 print(f"✅ {response_time:.2f}s | {reply_preview}")
 
@@ -57,14 +55,16 @@ class PerformanceTester:
                 reply_preview = f"HTTP {response.status_code}"
                 source = "error"
 
-            self.results.append({
-                "message": message,
-                "response_time": response_time,
-                "success": success,
-                "expected_speed": expected_speed,
-                "actual_source": source,
-                "reply_preview": reply_preview
-            })
+            self.results.append(
+                {
+                    "message": message,
+                    "response_time": response_time,
+                    "success": success,
+                    "expected_speed": expected_speed,
+                    "actual_source": source,
+                    "reply_preview": reply_preview,
+                }
+            )
 
             return response_time, success
 
@@ -72,14 +72,16 @@ class PerformanceTester:
             response_time = time.time() - start_time
             print(f"💥 {response_time:.2f}s | Exception: {str(e)}")
 
-            self.results.append({
-                "message": message,
-                "response_time": response_time,
-                "success": False,
-                "expected_speed": expected_speed,
-                "actual_source": "error",
-                "reply_preview": str(e)
-            })
+            self.results.append(
+                {
+                    "message": message,
+                    "response_time": response_time,
+                    "success": False,
+                    "expected_speed": expected_speed,
+                    "actual_source": "error",
+                    "reply_preview": str(e),
+                }
+            )
 
             return response_time, False
 
@@ -96,16 +98,19 @@ class PerformanceTester:
             ("I'm struggling with grief from my loss", "quick"),
             ("Anxiety is taking over my thoughts", "quick"),
             ("I'm so confused about everything", "quick"),
-
             # Pattern matches (should be 1-2s)
             ("Love feels complicated right now", "medium"),
             ("Celebrating this amazing moment", "medium"),
             ("Processing some difficult emotions", "medium"),
-
             # Complex processing (should be <3s with optimization)
-            ("I'm experiencing a complex mix of existential dread and hopeful anticipation about the uncertain future while simultaneously grappling with philosophical questions about the nature of consciousness and meaning", "complex"),
-            ("Tell me about the intricate relationship between temporal awareness and emotional processing in the context of grief work", "complex"),
-
+            (
+                "I'm experiencing a complex mix of existential dread and hopeful anticipation about the uncertain future while simultaneously grappling with philosophical questions about the nature of consciousness and meaning",
+                "complex",
+            ),
+            (
+                "Tell me about the intricate relationship between temporal awareness and emotional processing in the context of grief work",
+                "complex",
+            ),
             # Cache test (repeat a message)
             ("I'm feeling overwhelmed by everything", "cached"),  # Repeat first message
         ]
@@ -174,7 +179,9 @@ class PerformanceTester:
         for i, result in enumerate(self.results, 1):
             status = "✅" if result["success"] else "❌"
             message_preview = result["message"][:50] + "..." if len(result["message"]) > 50 else result["message"]
-            print(f"   {i:2d}. {status} {result['response_time']:5.2f}s | {result['actual_source']:12} | {message_preview}")
+            print(
+                f"   {i:2d}. {status} {result['response_time']:5.2f}s | {result['actual_source']:12} | {message_preview}"
+            )
 
     def test_cache_behavior(self):
         """Test caching behavior specifically"""
@@ -198,6 +205,7 @@ class PerformanceTester:
                 print(f"⚠️  Cache may not be working. Difference: {speedup:.2f}s")
         else:
             print("❌ Cache test failed due to errors")
+
 
 def main():
     """Main test execution"""
@@ -225,6 +233,7 @@ def main():
         print("\n\n⚠️  Test interrupted by user")
     except Exception as e:
         print(f"\n\n💥 Test suite failed: {e}")
+
 
 if __name__ == "__main__":
     main()

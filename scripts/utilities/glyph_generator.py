@@ -19,6 +19,7 @@ import requests
 @dataclass
 class EmotionalPattern:
     """Represents a detected emotional pattern that might need a new glyph"""
+
     emotions: List[str]
     intensity: float
     context_words: List[str]
@@ -26,9 +27,11 @@ class EmotionalPattern:
     first_seen: datetime
     last_seen: datetime
 
+
 @dataclass
 class NewGlyph:
     """Represents a newly generated glyph"""
+
     glyph_symbol: str
     tag_name: str
     core_emotion: str
@@ -42,17 +45,20 @@ class NewGlyph:
     style_variant: str
     humor_style: str
 
+
 class GlyphGenerator:
     """
     Generates new glyphs by analyzing emotional patterns in conversations
     and automatically adds them to the emotional_tags system
     """
 
-    def __init__(self,
-                 supabase_url: Optional[str] = None,
-                 supabase_key: Optional[str] = None,
-                 min_pattern_frequency: int = 3,
-                 novelty_threshold: float = 0.7):
+    def __init__(
+        self,
+        supabase_url: Optional[str] = None,
+        supabase_key: Optional[str] = None,
+        min_pattern_frequency: int = 3,
+        novelty_threshold: float = 0.7,
+    ):
 
         self.supabase_url = supabase_url
         self.supabase_key = supabase_key
@@ -67,46 +73,46 @@ class GlyphGenerator:
         self.detected_patterns = self._load_pattern_cache()
 
         # Base glyph symbols for combinations
-        self.base_symbols = ['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'θ', 'λ', 'Ω']
-        self.combination_operators = ['×', '⊕', '∧', '∨', '⟡']
+        self.base_symbols = ["α", "β", "γ", "δ", "ε", "ζ", "θ", "λ", "Ω"]
+        self.combination_operators = ["×", "⊕", "∧", "∨", "⟡"]
 
         # Emotional domain mappings
         self.emotion_domains = {
-            'joy': 'Joy & Levity',
-            'delight': 'Joy & Levity',
-            'happiness': 'Joy & Levity',
-            'grief': 'Grief & Rupture',
-            'loss': 'Grief & Rupture',
-            'sadness': 'Grief & Rupture',
-            'anger': 'Conflict & Power',
-            'rage': 'Conflict & Power',
-            'boundary': 'Conflict & Power',
-            'longing': 'Longing & Threshold',
-            'desire': 'Longing & Threshold',
-            'ache': 'Longing & Threshold',
-            'confusion': 'Confusion & Clarity',
-            'clarity': 'Clarity & Grounding',
-            'understanding': 'Clarity & Grounding',
-            'stillness': 'Stillness & Peace',
-            'calm': 'Stillness & Peace',
-            'peace': 'Stillness & Peace',
-            'connection': 'Connection & Grounding',
-            'intimacy': 'Longing & Threshold',
-            'vulnerability': 'Longing & Threshold',
-            'devotion': 'Devotion & Containment',
-            'sacred': 'Devotion & Containment'
+            "joy": "Joy & Levity",
+            "delight": "Joy & Levity",
+            "happiness": "Joy & Levity",
+            "grief": "Grief & Rupture",
+            "loss": "Grief & Rupture",
+            "sadness": "Grief & Rupture",
+            "anger": "Conflict & Power",
+            "rage": "Conflict & Power",
+            "boundary": "Conflict & Power",
+            "longing": "Longing & Threshold",
+            "desire": "Longing & Threshold",
+            "ache": "Longing & Threshold",
+            "confusion": "Confusion & Clarity",
+            "clarity": "Clarity & Grounding",
+            "understanding": "Clarity & Grounding",
+            "stillness": "Stillness & Peace",
+            "calm": "Stillness & Peace",
+            "peace": "Stillness & Peace",
+            "connection": "Connection & Grounding",
+            "intimacy": "Longing & Threshold",
+            "vulnerability": "Longing & Threshold",
+            "devotion": "Devotion & Containment",
+            "sacred": "Devotion & Containment",
         }
 
         # Response type mappings
         self.response_types = {
-            'high_energy': 'Disrupt',
-            'supportive': 'Soothe',
-            'reflective': 'Witness',
-            'instructive': 'Guide',
-            'protective': 'Contain',
-            'liberating': 'Release',
-            'welcoming': 'Welcome',
-            'connecting': 'Companion'
+            "high_energy": "Disrupt",
+            "supportive": "Soothe",
+            "reflective": "Witness",
+            "instructive": "Guide",
+            "protective": "Contain",
+            "liberating": "Release",
+            "welcoming": "Welcome",
+            "connecting": "Companion",
         }
 
         self.setup_logging()
@@ -121,13 +127,13 @@ class GlyphGenerator:
             # Add console handler (always available)
             console_handler = logging.StreamHandler()
             console_handler.setLevel(logging.INFO)
-            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
             console_handler.setFormatter(formatter)
             self.logger.addHandler(console_handler)
 
             # Try to add file handler, but don't fail if we can't
             try:
-                file_handler = logging.FileHandler('glyph_generation.log')
+                file_handler = logging.FileHandler("glyph_generation.log")
                 file_handler.setLevel(logging.INFO)
                 file_handler.setFormatter(formatter)
                 self.logger.addHandler(file_handler)
@@ -145,7 +151,7 @@ class GlyphGenerator:
             sql_path = "emotional_tags_rows.sql"
             if os.path.exists(sql_path):
                 # Read with utf-8 and replace undecodable bytes to avoid decode errors
-                with open(sql_path, 'r', encoding='utf-8', errors='replace') as f:
+                with open(sql_path, "r", encoding="utf-8", errors="replace") as f:
                     content = f.read()
                     # Extract tag names and glyphs from SQL INSERT statements
                     pattern = r"'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)'"
@@ -155,11 +161,11 @@ class GlyphGenerator:
                         if len(match) >= 5:
                             tag_id, tag_name, core_emotion, response_cue, glyph = match[:5]
                             existing_tags[tag_name.lower()] = {
-                                'id': tag_id,
-                                'tag_name': tag_name,
-                                'core_emotion': core_emotion,
-                                'glyph': glyph,
-                                'response_cue': response_cue
+                                "id": tag_id,
+                                "tag_name": tag_name,
+                                "core_emotion": core_emotion,
+                                "glyph": glyph,
+                                "response_cue": response_cue,
                             }
 
             self.logger.info(f"Loaded {len(existing_tags)} existing emotional tags")
@@ -174,17 +180,17 @@ class GlyphGenerator:
         cache_path = "learning/detected_patterns.json"
         if os.path.exists(cache_path):
             try:
-                with open(cache_path, 'r') as f:
+                with open(cache_path, "r") as f:
                     data = json.load(f)
                     patterns = {}
                     for key, value in data.items():
                         patterns[key] = EmotionalPattern(
-                            emotions=value['emotions'],
-                            intensity=value['intensity'],
-                            context_words=value['context_words'],
-                            frequency=value['frequency'],
-                            first_seen=datetime.fromisoformat(value['first_seen']),
-                            last_seen=datetime.fromisoformat(value['last_seen'])
+                            emotions=value["emotions"],
+                            intensity=value["intensity"],
+                            context_words=value["context_words"],
+                            frequency=value["frequency"],
+                            first_seen=datetime.fromisoformat(value["first_seen"]),
+                            last_seen=datetime.fromisoformat(value["last_seen"]),
                         )
                     return patterns
             except Exception as e:
@@ -200,26 +206,28 @@ class GlyphGenerator:
             data = {}
             for key, pattern in self.detected_patterns.items():
                 data[key] = {
-                    'emotions': pattern.emotions,
-                    'intensity': pattern.intensity,
-                    'context_words': pattern.context_words,
-                    'frequency': pattern.frequency,
-                    'first_seen': pattern.first_seen.isoformat(),
-                    'last_seen': pattern.last_seen.isoformat()
+                    "emotions": pattern.emotions,
+                    "intensity": pattern.intensity,
+                    "context_words": pattern.context_words,
+                    "frequency": pattern.frequency,
+                    "first_seen": pattern.first_seen.isoformat(),
+                    "last_seen": pattern.last_seen.isoformat(),
                 }
 
-            with open(cache_path, 'w') as f:
+            with open(cache_path, "w") as f:
                 json.dump(data, f, indent=2)
 
         except Exception as e:
             # In Streamlit or restricted environments, file writing might fail
             # Just log the error and continue
-            if hasattr(self, 'logger'):
+            if hasattr(self, "logger"):
                 self.logger.error(f"Error saving pattern cache: {e}")
             else:
                 print(f"Error saving pattern cache: {e}")
 
-    def detect_new_emotional_patterns(self, conversation_text: str, context: Optional[Dict] = None) -> List[EmotionalPattern]:
+    def detect_new_emotional_patterns(
+        self, conversation_text: str, context: Optional[Dict] = None
+    ) -> List[EmotionalPattern]:
         """
         Analyze conversation text to detect new emotional patterns
         that might need new glyphs
@@ -263,7 +271,7 @@ class GlyphGenerator:
                             context_words=context_words,
                             frequency=1,
                             first_seen=now,
-                            last_seen=now
+                            last_seen=now,
                         )
                         self.detected_patterns[pattern_key] = pattern
 
@@ -277,16 +285,16 @@ class GlyphGenerator:
     def _extract_emotion_expressions(self, text: str) -> List[str]:
         """Extract explicit emotion words and expressions"""
         emotion_patterns = [
-            r'i feel (\w+)',
-            r'feeling (\w+)',
-            r'i\'?m (\w+)',
-            r'makes me (\w+)',
-            r'i\'?m experiencing (\w+)',
-            r'sense of (\w+)',
-            r'overwhelmed by (\w+)',
-            r'filled with (\w+)',
-            r'struck by (\w+)',
-            r'consumed by (\w+)'
+            r"i feel (\w+)",
+            r"feeling (\w+)",
+            r"i\'?m (\w+)",
+            r"makes me (\w+)",
+            r"i\'?m experiencing (\w+)",
+            r"sense of (\w+)",
+            r"overwhelmed by (\w+)",
+            r"filled with (\w+)",
+            r"struck by (\w+)",
+            r"consumed by (\w+)",
         ]
 
         emotions = []
@@ -296,10 +304,30 @@ class GlyphGenerator:
 
         # Also look for standalone emotion words
         emotion_words = [
-            'joy', 'sorrow', 'grief', 'bliss', 'ache', 'longing', 'desire',
-            'confusion', 'clarity', 'peace', 'chaos', 'stillness', 'motion',
-            'connection', 'separation', 'vulnerability', 'strength', 'weakness',
-            'devotion', 'detachment', 'expansion', 'contraction', 'flow', 'resistance'
+            "joy",
+            "sorrow",
+            "grief",
+            "bliss",
+            "ache",
+            "longing",
+            "desire",
+            "confusion",
+            "clarity",
+            "peace",
+            "chaos",
+            "stillness",
+            "motion",
+            "connection",
+            "separation",
+            "vulnerability",
+            "strength",
+            "weakness",
+            "devotion",
+            "detachment",
+            "expansion",
+            "contraction",
+            "flow",
+            "resistance",
         ]
 
         for word in emotion_words:
@@ -314,8 +342,16 @@ class GlyphGenerator:
 
         # Look for combination indicators
         combination_indicators = [
-            'and', 'but', 'while', 'with', 'mixed with', 'alongside',
-            'combined with', 'tinged with', 'flavored by', 'touched by'
+            "and",
+            "but",
+            "while",
+            "with",
+            "mixed with",
+            "alongside",
+            "combined with",
+            "tinged with",
+            "flavored by",
+            "touched by",
         ]
 
         combinations = []
@@ -326,11 +362,11 @@ class GlyphGenerator:
 
         # Look for specific combination phrases
         combo_patterns = [
-            r'(\w+) and (\w+)',
-            r'(\w+) but (\w+)',
-            r'(\w+) with (\w+)',
-            r'(\w+) mixed with (\w+)',
-            r'(\w+) tinged with (\w+)'
+            r"(\w+) and (\w+)",
+            r"(\w+) but (\w+)",
+            r"(\w+) with (\w+)",
+            r"(\w+) mixed with (\w+)",
+            r"(\w+) tinged with (\w+)",
         ]
 
         for pattern in combo_patterns:
@@ -344,10 +380,10 @@ class GlyphGenerator:
     def _extract_context_words(self, text: str) -> List[str]:
         """Extract contextual words that might influence glyph generation"""
         context_categories = {
-            'intensity': ['deeply', 'intensely', 'slightly', 'overwhelmingly', 'gently', 'powerfully'],
-            'quality': ['sacred', 'raw', 'pure', 'complex', 'simple', 'nuanced', 'profound'],
-            'movement': ['flowing', 'rushing', 'creeping', 'exploding', 'settling', 'spiraling'],
-            'container': ['held', 'contained', 'overflowing', 'constrained', 'liberated', 'trapped']
+            "intensity": ["deeply", "intensely", "slightly", "overwhelmingly", "gently", "powerfully"],
+            "quality": ["sacred", "raw", "pure", "complex", "simple", "nuanced", "profound"],
+            "movement": ["flowing", "rushing", "creeping", "exploding", "settling", "spiraling"],
+            "container": ["held", "contained", "overflowing", "constrained", "liberated", "trapped"],
         }
 
         context_words = []
@@ -361,13 +397,13 @@ class GlyphGenerator:
     def _calculate_emotional_intensity(self, text: str) -> float:
         """Calculate the emotional intensity of the text"""
         intensity_indicators = {
-            'low': ['slightly', 'gently', 'softly', 'mildly', 'barely'],
-            'medium': ['moderately', 'reasonably', 'fairly', 'quite'],
-            'high': ['deeply', 'intensely', 'powerfully', 'overwhelmingly', 'completely'],
-            'extreme': ['utterly', 'absolutely', 'totally', 'entirely', 'devastatingly']
+            "low": ["slightly", "gently", "softly", "mildly", "barely"],
+            "medium": ["moderately", "reasonably", "fairly", "quite"],
+            "high": ["deeply", "intensely", "powerfully", "overwhelmingly", "completely"],
+            "extreme": ["utterly", "absolutely", "totally", "entirely", "devastatingly"],
         }
 
-        intensity_scores = {'low': 0.25, 'medium': 0.5, 'high': 0.75, 'extreme': 1.0}
+        intensity_scores = {"low": 0.25, "medium": 0.5, "high": 0.75, "extreme": 1.0}
 
         max_intensity = 0.0
         for level, words in intensity_indicators.items():
@@ -384,9 +420,10 @@ class GlyphGenerator:
 
         # Check against existing tags
         for tag_name, tag_data in self.existing_tags.items():
-            if any(emotion.lower() in tag_name.lower() or
-                   emotion.lower() in tag_data.get('core_emotion', '').lower()
-                   for emotion in emotion_combo):
+            if any(
+                emotion.lower() in tag_name.lower() or emotion.lower() in tag_data.get("core_emotion", "").lower()
+                for emotion in emotion_combo
+            ):
                 # Similar pattern already exists
                 return False
 
@@ -395,15 +432,53 @@ class GlyphGenerator:
 
     def _get_all_emotion_words(self) -> Set[str]:
         """Get all known emotion words"""
-        return set([
-            'joy', 'sorrow', 'grief', 'bliss', 'ache', 'longing', 'desire',
-            'confusion', 'clarity', 'peace', 'chaos', 'stillness', 'motion',
-            'connection', 'separation', 'vulnerability', 'strength', 'weakness',
-            'devotion', 'detachment', 'expansion', 'contraction', 'flow', 'resistance',
-            'delight', 'loss', 'anger', 'boundary', 'understanding', 'calm',
-            'intimacy', 'sacred', 'love', 'fear', 'hope', 'despair', 'wonder',
-            'awe', 'contempt', 'disgust', 'surprise', 'anticipation', 'trust'
-        ])
+        return set(
+            [
+                "joy",
+                "sorrow",
+                "grief",
+                "bliss",
+                "ache",
+                "longing",
+                "desire",
+                "confusion",
+                "clarity",
+                "peace",
+                "chaos",
+                "stillness",
+                "motion",
+                "connection",
+                "separation",
+                "vulnerability",
+                "strength",
+                "weakness",
+                "devotion",
+                "detachment",
+                "expansion",
+                "contraction",
+                "flow",
+                "resistance",
+                "delight",
+                "loss",
+                "anger",
+                "boundary",
+                "understanding",
+                "calm",
+                "intimacy",
+                "sacred",
+                "love",
+                "fear",
+                "hope",
+                "despair",
+                "wonder",
+                "awe",
+                "contempt",
+                "disgust",
+                "surprise",
+                "anticipation",
+                "trust",
+            ]
+        )
 
     def generate_new_glyph(self, pattern: EmotionalPattern) -> Optional[NewGlyph]:
         """Generate a new glyph based on an emotional pattern"""
@@ -444,7 +519,7 @@ class GlyphGenerator:
                 cadence=cadence,
                 depth_level=depth_level,
                 style_variant=style_variant,
-                humor_style=humor_style
+                humor_style=humor_style,
             )
 
         except Exception as e:
@@ -457,47 +532,83 @@ class GlyphGenerator:
         if len(pattern.emotions) >= 2:
             # Map emotions to base symbols
             emotion_symbol_map = {
-                'joy': 'λ', 'delight': 'λ', 'happiness': 'λ',
-                'grief': 'θ', 'loss': 'θ', 'sadness': 'θ',
-                'ache': 'γ', 'longing': 'γ', 'desire': 'γ',
-                'clarity': 'ε', 'understanding': 'ε', 'insight': 'ε',
-                'stillness': 'δ', 'peace': 'δ', 'calm': 'δ',
-                'connection': 'α', 'intimacy': 'α', 'love': 'α',
-                'boundary': 'β', 'structure': 'β', 'containment': 'β',
-                'expansion': 'ζ', 'growth': 'ζ', 'motion': 'ζ',
-                'recognition': 'Ω', 'witness': 'Ω', 'mirror': 'Ω'
+                "joy": "λ",
+                "delight": "λ",
+                "happiness": "λ",
+                "grief": "θ",
+                "loss": "θ",
+                "sadness": "θ",
+                "ache": "γ",
+                "longing": "γ",
+                "desire": "γ",
+                "clarity": "ε",
+                "understanding": "ε",
+                "insight": "ε",
+                "stillness": "δ",
+                "peace": "δ",
+                "calm": "δ",
+                "connection": "α",
+                "intimacy": "α",
+                "love": "α",
+                "boundary": "β",
+                "structure": "β",
+                "containment": "β",
+                "expansion": "ζ",
+                "growth": "ζ",
+                "motion": "ζ",
+                "recognition": "Ω",
+                "witness": "Ω",
+                "mirror": "Ω",
             }
 
             # Get symbols for the emotions
             symbols = []
             for emotion in pattern.emotions[:2]:  # Use first two emotions
-                symbol = emotion_symbol_map.get(emotion.lower(), 'α')
+                symbol = emotion_symbol_map.get(emotion.lower(), "α")
                 symbols.append(symbol)
 
             # Combine with operator based on context
-            if 'with' in pattern.context_words or 'and' in pattern.context_words:
-                operator = '×'
-            elif 'but' in pattern.context_words:
-                operator = '⊕'
+            if "with" in pattern.context_words or "and" in pattern.context_words:
+                operator = "×"
+            elif "but" in pattern.context_words:
+                operator = "⊕"
             else:
-                operator = '×'
+                operator = "×"
 
             return f"{symbols[0]} {operator} {symbols[1]}"
 
         # Single emotion - use base symbol
-        emotion = pattern.emotions[0] if pattern.emotions else 'connection'
+        emotion = pattern.emotions[0] if pattern.emotions else "connection"
         emotion_symbol_map = {
-            'joy': 'λ', 'delight': 'λ', 'happiness': 'λ',
-            'grief': 'θ', 'loss': 'θ', 'sadness': 'θ',
-            'ache': 'γ', 'longing': 'γ', 'desire': 'γ',
-            'clarity': 'ε', 'understanding': 'ε', 'insight': 'ε',
-            'stillness': 'δ', 'peace': 'δ', 'calm': 'δ',
-            'connection': 'α', 'intimacy': 'α', 'love': 'α',
-            'boundary': 'β', 'structure': 'β', 'containment': 'β',
-            'expansion': 'ζ', 'growth': 'ζ', 'motion': 'ζ',
-            'recognition': 'Ω', 'witness': 'Ω', 'mirror': 'Ω'
+            "joy": "λ",
+            "delight": "λ",
+            "happiness": "λ",
+            "grief": "θ",
+            "loss": "θ",
+            "sadness": "θ",
+            "ache": "γ",
+            "longing": "γ",
+            "desire": "γ",
+            "clarity": "ε",
+            "understanding": "ε",
+            "insight": "ε",
+            "stillness": "δ",
+            "peace": "δ",
+            "calm": "δ",
+            "connection": "α",
+            "intimacy": "α",
+            "love": "α",
+            "boundary": "β",
+            "structure": "β",
+            "containment": "β",
+            "expansion": "ζ",
+            "growth": "ζ",
+            "motion": "ζ",
+            "recognition": "Ω",
+            "witness": "Ω",
+            "mirror": "Ω",
         }
-        return emotion_symbol_map.get(emotion.lower(), 'α')
+        return emotion_symbol_map.get(emotion.lower(), "α")
 
     def _generate_tag_name(self, pattern: EmotionalPattern) -> str:
         """Generate a descriptive tag name"""
@@ -505,10 +616,25 @@ class GlyphGenerator:
         base_emotions = pattern.emotions[:2] if len(pattern.emotions) >= 2 else pattern.emotions
 
         # Add contextual modifiers
-        modifiers = [word for word in pattern.context_words if word in [
-            'sacred', 'spiral', 'contained', 'expansive', 'quiet', 'deep',
-            'gentle', 'intense', 'flowing', 'still', 'raw', 'pure'
-        ]]
+        modifiers = [
+            word
+            for word in pattern.context_words
+            if word
+            in [
+                "sacred",
+                "spiral",
+                "contained",
+                "expansive",
+                "quiet",
+                "deep",
+                "gentle",
+                "intense",
+                "flowing",
+                "still",
+                "raw",
+                "pure",
+            ]
+        ]
 
         if modifiers and base_emotions:
             return f"{modifiers[0].title()} {base_emotions[0].title()}"
@@ -521,55 +647,55 @@ class GlyphGenerator:
     def _determine_core_emotion(self, pattern: EmotionalPattern) -> str:
         """Determine the core emotion category"""
         emotion_categories = {
-            'Delight': ['joy', 'happiness', 'bliss', 'delight'],
-            'Loss': ['grief', 'sorrow', 'loss', 'sadness'],
-            'Ache': ['longing', 'desire', 'ache', 'yearning'],
-            'Clarity': ['understanding', 'clarity', 'insight', 'recognition'],
-            'Stillness': ['peace', 'calm', 'stillness', 'quiet'],
-            'Connection': ['love', 'intimacy', 'connection', 'unity'],
-            'Boundary': ['anger', 'boundary', 'protection', 'strength'],
-            'Separation': ['detachment', 'distance', 'independence'],
-            'Confusion': ['uncertainty', 'confusion', 'chaos', 'disorder']
+            "Delight": ["joy", "happiness", "bliss", "delight"],
+            "Loss": ["grief", "sorrow", "loss", "sadness"],
+            "Ache": ["longing", "desire", "ache", "yearning"],
+            "Clarity": ["understanding", "clarity", "insight", "recognition"],
+            "Stillness": ["peace", "calm", "stillness", "quiet"],
+            "Connection": ["love", "intimacy", "connection", "unity"],
+            "Boundary": ["anger", "boundary", "protection", "strength"],
+            "Separation": ["detachment", "distance", "independence"],
+            "Confusion": ["uncertainty", "confusion", "chaos", "disorder"],
         }
 
         for category, words in emotion_categories.items():
             if any(emotion.lower() in words for emotion in pattern.emotions):
                 return category
 
-        return 'Clarity'  # Default
+        return "Clarity"  # Default
 
     def _generate_response_cue(self, pattern: EmotionalPattern) -> str:
         """Generate a response cue based on the pattern"""
         templates = {
-            'joy': [
+            "joy": [
                 "Celebrate the emergence of light.",
                 "Honor the bloom within stillness.",
-                "Witness joy without grasping."
+                "Witness joy without grasping.",
             ],
-            'grief': [
+            "grief": [
                 "Hold space for the sacred wound.",
                 "Contain sorrow without fixing.",
-                "Mirror loss with presence."
+                "Mirror loss with presence.",
             ],
-            'ache': [
+            "ache": [
                 "Witness longing without judgment.",
                 "Hold desire as sacred fire.",
-                "Mirror the depth of yearning."
+                "Mirror the depth of yearning.",
             ],
-            'clarity': [
+            "clarity": [
                 "Reflect truth without distortion.",
                 "Guide toward deeper seeing.",
-                "Mirror insight with precision."
+                "Mirror insight with precision.",
             ],
-            'stillness': [
+            "stillness": [
                 "Rest in the sanctuary of quiet.",
                 "Honor the sacred pause.",
-                "Witness peace without disturbing."
-            ]
+                "Witness peace without disturbing.",
+            ],
         }
 
         # Find matching template
-        primary_emotion = pattern.emotions[0].lower() if pattern.emotions else 'clarity'
+        primary_emotion = pattern.emotions[0].lower() if pattern.emotions else "clarity"
 
         for emotion_type, cues in templates.items():
             if primary_emotion in emotion_type or emotion_type in primary_emotion:
@@ -580,71 +706,70 @@ class GlyphGenerator:
     def _determine_domain(self, pattern: EmotionalPattern) -> str:
         """Determine the emotional domain"""
         if not pattern.emotions:
-            return 'Recognition & Mirror'
+            return "Recognition & Mirror"
 
         primary_emotion = pattern.emotions[0].lower()
-        return self.emotion_domains.get(primary_emotion, 'Recognition & Mirror')
+        return self.emotion_domains.get(primary_emotion, "Recognition & Mirror")
 
     def _determine_response_type(self, pattern: EmotionalPattern) -> str:
         """Determine the response type based on pattern characteristics"""
         if pattern.intensity > 0.8:
-            return 'Contain'
+            return "Contain"
         if pattern.intensity > 0.6:
-            return 'Witness'
+            return "Witness"
         if pattern.intensity > 0.4:
-            return 'Guide'
-        return 'Soothe'
+            return "Guide"
+        return "Soothe"
 
     def _determine_style_attributes(self, pattern: EmotionalPattern) -> Tuple[str, str, str, str, str]:
         """Determine tone profile, cadence, depth level, style variant, and humor style"""
         # Tone profile based on emotions
-        if any(emotion in ['grief', 'loss', 'sorrow'] for emotion in pattern.emotions):
-            tone_profile = 'tender and slow'
-        elif any(emotion in ['joy', 'delight', 'happiness'] for emotion in pattern.emotions):
-            tone_profile = 'bright and playful'
-        elif any(emotion in ['clarity', 'understanding'] for emotion in pattern.emotions):
-            tone_profile = 'precise and slow'
+        if any(emotion in ["grief", "loss", "sorrow"] for emotion in pattern.emotions):
+            tone_profile = "tender and slow"
+        elif any(emotion in ["joy", "delight", "happiness"] for emotion in pattern.emotions):
+            tone_profile = "bright and playful"
+        elif any(emotion in ["clarity", "understanding"] for emotion in pattern.emotions):
+            tone_profile = "precise and slow"
         else:
-            tone_profile = 'gentle and affirming'
+            tone_profile = "gentle and affirming"
 
         # Cadence based on intensity
         if pattern.intensity > 0.7:
-            cadence = 'poetic and elliptical'
+            cadence = "poetic and elliptical"
         elif pattern.intensity > 0.4:
-            cadence = 'measured and clear'
+            cadence = "measured and clear"
         else:
-            cadence = 'short and steady'
+            cadence = "short and steady"
 
         # Depth level based on complexity
         if len(pattern.emotions) > 1 or pattern.intensity > 0.6:
-            depth_level = 'emotional excavation'
+            depth_level = "emotional excavation"
         else:
-            depth_level = 'surface reflection'
+            depth_level = "surface reflection"
 
         # Style variant based on emotion type
-        if any(emotion in ['grief', 'loss', 'ache'] for emotion in pattern.emotions):
-            style_variant = 'oracle'
-        elif any(emotion in ['clarity', 'understanding'] for emotion in pattern.emotions):
-            style_variant = 'mentor'
-        elif any(emotion in ['joy', 'delight'] for emotion in pattern.emotions):
-            style_variant = 'friend'
+        if any(emotion in ["grief", "loss", "ache"] for emotion in pattern.emotions):
+            style_variant = "oracle"
+        elif any(emotion in ["clarity", "understanding"] for emotion in pattern.emotions):
+            style_variant = "mentor"
+        elif any(emotion in ["joy", "delight"] for emotion in pattern.emotions):
+            style_variant = "friend"
         else:
-            style_variant = 'companion'
+            style_variant = "companion"
 
         # Humor style
-        if any(emotion in ['joy', 'delight'] for emotion in pattern.emotions):
-            humor_style = 'playful pun'
-        elif 'boundary' in pattern.emotions or 'anger' in pattern.emotions:
-            humor_style = 'dry wit'
+        if any(emotion in ["joy", "delight"] for emotion in pattern.emotions):
+            humor_style = "playful pun"
+        elif "boundary" in pattern.emotions or "anger" in pattern.emotions:
+            humor_style = "dry wit"
         else:
-            humor_style = 'none'
+            humor_style = "none"
 
         return tone_profile, cadence, depth_level, style_variant, humor_style
 
     def should_create_glyph(self, pattern: EmotionalPattern) -> bool:
         """Determine if a pattern should generate a new glyph"""
-        return (pattern.frequency >= self.min_pattern_frequency and
-                self._is_novel_pattern(pattern.emotions))
+        return pattern.frequency >= self.min_pattern_frequency and self._is_novel_pattern(pattern.emotions)
 
     def create_emotional_tag_entry(self, glyph: NewGlyph) -> Dict:
         """Create a new emotional tag entry for insertion into the database"""
@@ -652,20 +777,20 @@ class GlyphGenerator:
         created_at = datetime.now(timezone.utc).isoformat()
 
         return {
-            'id': tag_id,
-            'tag_name': glyph.tag_name,
-            'core_emotion': glyph.core_emotion,
-            'response_cue': glyph.response_cue,
-            'glyph': glyph.glyph_symbol,
-            'domain': glyph.domain,
-            'response_type': glyph.response_type,
-            'narrative_hook': glyph.narrative_hook,
-            'created_at': created_at,
-            'tone_profile': glyph.tone_profile,
-            'cadence': glyph.cadence,
-            'depth_level': glyph.depth_level,
-            'style_variant': glyph.style_variant,
-            'humor_style': glyph.humor_style
+            "id": tag_id,
+            "tag_name": glyph.tag_name,
+            "core_emotion": glyph.core_emotion,
+            "response_cue": glyph.response_cue,
+            "glyph": glyph.glyph_symbol,
+            "domain": glyph.domain,
+            "response_type": glyph.response_type,
+            "narrative_hook": glyph.narrative_hook,
+            "created_at": created_at,
+            "tone_profile": glyph.tone_profile,
+            "cadence": glyph.cadence,
+            "depth_level": glyph.depth_level,
+            "style_variant": glyph.style_variant,
+            "humor_style": glyph.humor_style,
         }
 
     def insert_new_glyph_to_supabase(self, emotional_tag: Dict) -> bool:
@@ -676,9 +801,9 @@ class GlyphGenerator:
 
         try:
             headers = {
-                'apikey': self.supabase_key,
-                'Authorization': f'Bearer {self.supabase_key}',
-                'Content-Type': 'application/json'
+                "apikey": self.supabase_key,
+                "Authorization": f"Bearer {self.supabase_key}",
+                "Content-Type": "application/json",
             }
 
             url = f"{self.supabase_url}/rest/v1/emotional_tags"
@@ -699,13 +824,13 @@ class GlyphGenerator:
             sql_statement = f"""INSERT INTO "public"."emotional_tags" ("id", "tag_name", "core_emotion", "response_cue", "glyph", "domain", "response_type", "narrative_hook", "created_at", "tone_profile", "cadence", "depth_level", "style_variant", "humor_style") VALUES ('{emotional_tag['id']}', '{emotional_tag['tag_name']}', '{emotional_tag['core_emotion']}', '{emotional_tag['response_cue']}', '{emotional_tag['glyph']}', '{emotional_tag['domain']}', '{emotional_tag['response_type']}', '{emotional_tag['narrative_hook']}', '{emotional_tag['created_at']}', '{emotional_tag['tone_profile']}', '{emotional_tag['cadence']}', '{emotional_tag['depth_level']}', '{emotional_tag['style_variant']}', '{emotional_tag['humor_style']}');"""
 
             # Append to generated glyphs file
-            os.makedirs('generated', exist_ok=True)
-            with open('generated/new_glyphs.sql', 'a') as f:
-                f.write(sql_statement + '\n')
+            os.makedirs("generated", exist_ok=True)
+            with open("generated/new_glyphs.sql", "a") as f:
+                f.write(sql_statement + "\n")
         except Exception as e:
             # In Streamlit or restricted environments, file writing might fail
             # Just log the error and continue
-            if hasattr(self, 'logger'):
+            if hasattr(self, "logger"):
                 self.logger.warning(f"Could not save glyph to SQL file: {e}")
             else:
                 print(f"Could not save glyph to SQL file: {e}")
@@ -747,20 +872,18 @@ class GlyphGenerator:
             self.logger.error(f"Error processing conversation for glyphs: {e}")
             return []
 
+
 # Example usage and testing
 if __name__ == "__main__":
     # Initialize the glyph generator
-    generator = GlyphGenerator(
-        min_pattern_frequency=2,  # Lower threshold for testing
-        novelty_threshold=0.5
-    )
+    generator = GlyphGenerator(min_pattern_frequency=2, novelty_threshold=0.5)  # Lower threshold for testing
 
     # Test with sample conversations
     test_conversations = [
         "I'm feeling a deep joy mixed with profound sadness, like witnessing something sacred ending and beginning at the same time.",
         "There's this gentle ache that flows through me when I think about connection - not painful, but yearning and peaceful together.",
         "I experience this intense clarity that comes with overwhelming confusion, like seeing truth through a fractured lens.",
-        "Sometimes I feel contained stillness - not trapped, but held in a sacred quiet that pulses with life."
+        "Sometimes I feel contained stillness - not trapped, but held in a sacred quiet that pulses with life.",
     ]
 
     print("Testing Glyph Generation...")

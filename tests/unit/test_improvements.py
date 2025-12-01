@@ -11,7 +11,7 @@ test_messages = [
     "This is hard but I'm not giving up",
     "I'm learning to be kinder to myself",
     "I'm ready to let go of this pain",
-    "I wonder if anyone really knows the real me"
+    "I wonder if anyone really knows the real me",
 ]
 
 print("Testing improved glyph matching:\n")
@@ -21,10 +21,10 @@ glyphs_found = 0
 glyphs_none = 0
 
 for msg in test_messages:
-    result = parse_input(msg, 'emotional_os/parser/signal_lexicon.json', 'emotional_os/glyphs/glyphs.db')
-    glyph = result['best_glyph']['glyph_name'] if result['best_glyph'] else 'None'
+    result = parse_input(msg, "emotional_os/parser/signal_lexicon.json", "emotional_os/glyphs/glyphs.db")
+    glyph = result["best_glyph"]["glyph_name"] if result["best_glyph"] else "None"
 
-    if glyph != 'None':
+    if glyph != "None":
         glyphs_found += 1
     else:
         glyphs_none += 1
@@ -35,6 +35,8 @@ for msg in test_messages:
     print(f"🎯 Signals: {[s['keyword'] for s in result['signals']]}")
     print("-" * 80)
 
-print(f"\n📊 SUMMARY: {glyphs_found}/{len(test_messages)} messages got glyphs ({glyphs_found*100//len(test_messages)}%)")
+print(
+    f"\n📊 SUMMARY: {glyphs_found}/{len(test_messages)} messages got glyphs ({glyphs_found*100//len(test_messages)}%)"
+)
 print(f"   ✓ With glyphs: {glyphs_found}")
 print(f"   ✗ No glyph: {glyphs_none}")

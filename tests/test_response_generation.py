@@ -1,8 +1,9 @@
-from tests.fixtures.rule_engine_helper import analyze_text
-from response_adapter import generate_response_from_glyphs
+import importlib.util
 import os
 import sys
-import importlib.util
+
+from response_adapter import generate_response_from_glyphs
+from tests.fixtures.rule_engine_helper import analyze_text
 
 # ensure fixtures and src are importable
 HERE = os.path.dirname(__file__)
@@ -17,8 +18,7 @@ if ROOT not in sys.path:
 def test_response_matches_primary_tone():
     # Angry + high confidence
     analysis = analyze_text("I am furious and angry")
-    resp = generate_response_from_glyphs(
-        {"glyph_overlays_info": analysis["glyph_overlays_info"]})
+    resp = generate_response_from_glyphs({"glyph_overlays_info": analysis["glyph_overlays_info"]})
     assert isinstance(resp, str)
     # Be permissive: allow anger-specific phrasing or a mixed-emotion phrasing
     assert len(resp) > 10
@@ -26,8 +26,7 @@ def test_response_matches_primary_tone():
 
 def test_response_blends_for_multiple():
     analysis = analyze_text("I'm angry but also sad")
-    resp = generate_response_from_glyphs(
-        {"glyph_overlays_info": analysis["glyph_overlays_info"]})
+    resp = generate_response_from_glyphs({"glyph_overlays_info": analysis["glyph_overlays_info"]})
     assert isinstance(resp, str)
     # should mention something (not empty) and be human-friendly
     assert len(resp) > 10

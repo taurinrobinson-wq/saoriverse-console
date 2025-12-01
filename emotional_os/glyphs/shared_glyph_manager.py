@@ -13,10 +13,10 @@ not in the storage layer. One unified glyphs.db, but infinite user views.
 """
 
 import json
+import os
 import sqlite3
 from datetime import datetime
 from typing import Dict, List, Optional
-import os
 
 
 class SharedGlyphManager:
@@ -34,7 +34,7 @@ class SharedGlyphManager:
     def __init__(self, db_path: Optional[str] = None):
         # Default to an absolute DB path within the package to avoid test cwd issues
         if not db_path:
-            db_path = os.path.join(os.path.dirname(__file__), 'glyphs.db')
+            db_path = os.path.join(os.path.dirname(__file__), "glyphs.db")
         self.db_path = db_path
         self._ensure_shared_tables()
 
@@ -49,7 +49,8 @@ class SharedGlyphManager:
             cursor = conn.cursor()
 
             # Core: Track glyph versioning
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS glyph_versions (
                     id INTEGER PRIMARY KEY,
                     glyph_name TEXT NOT NULL,
@@ -64,10 +65,12 @@ class SharedGlyphManager:
                     is_active BOOLEAN DEFAULT 0,
                     UNIQUE(glyph_name, version_num)
                 )
-            """)
+            """
+            )
 
             # Track user preferences (which glyph versions they prefer)
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS user_glyph_preferences (
                     id INTEGER PRIMARY KEY,
                     user_hash TEXT NOT NULL,
@@ -79,10 +82,12 @@ class SharedGlyphManager:
                     rating INTEGER DEFAULT -1,
                     UNIQUE(user_hash, glyph_name)
                 )
-            """)
+            """
+            )
 
             # Track glyph quality over time (consensus system)
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS glyph_consensus (
                     id INTEGER PRIMARY KEY,
                     glyph_name TEXT UNIQUE NOT NULL,
@@ -92,10 +97,12 @@ class SharedGlyphManager:
                     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     consensus_strength REAL DEFAULT 0.0
                 )
-            """)
+            """
+            )
 
             # Track emotional territory coverage
-            cursor.execute("""
+            cursor.execute(
+                """
                 CREATE TABLE IF NOT EXISTS emotional_territory (
                     id INTEGER PRIMARY KEY,
                     emotional_area TEXT UNIQUE NOT NULL,
@@ -104,7 +111,8 @@ class SharedGlyphManager:
                     needs_development BOOLEAN DEFAULT 0,
                     last_analyzed TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
-            """)
+            """
+            )
 
             conn.commit()
             conn.close()
@@ -114,11 +122,7 @@ class SharedGlyphManager:
     # ===== USER SEGREGATION (How users see glyphs) =====
 
     def get_glyphs_for_user(
-        self,
-        user_hash: str,
-        emotional_signal: Optional[str] = None,
-        gates: Optional[List[str]] = None,
-        top_k: int = 5
+        self, user_hash: str, emotional_signal: Optional[str] = None, gates: Optional[List[str]] = None, top_k: int = 5
     ) -> List[Dict]:
         """
         Get glyphs that are:
@@ -164,9 +168,7 @@ class SharedGlyphManager:
 
             # Add gate filter if provided
             if gates:
-                gate_conditions = " OR ".join(
-                    ["gv.gates LIKE ?" for _ in gates]
-                )
+                gate_conditions = " OR ".join(["gv.gates LIKE ?" for _ in gates])
                 query += f" AND ({gate_conditions})"
                 params.extend([f"%{g}%" for g in gates])
 
@@ -185,16 +187,18 @@ class SharedGlyphManager:
 
             glyphs = []
             for row in results:
-                glyphs.append({
-                    "name": row[0],
-                    "description": row[1],
-                    "gates": json.loads(row[2]) if row[2] else [],
-                    "created_at": row[3],
-                    "user_adoption": row[4],  # How much THIS user uses it
-                    "global_adoption": row[5],  # How many users total
-                    "consensus_strength": row[6],  # Agreement level
-                    "quality_score": row[7]
-                })
+                glyphs.append(
+                    {
+                        "name": row[0],
+                        "description": row[1],
+                        "gates": json.loads(row[2]) if row[2] else [],
+                        "created_at": row[3],
+                        "user_adoption": row[4],  # How much THIS user uses it
+                        "global_adoption": row[5],  # How many users total
+                        "consensus_strength": row[6],  # Agreement level
+                        "quality_score": row[7],
+                    }
+                )
 
             conn.close()
             return glyphs
@@ -212,7 +216,8 @@ class SharedGlyphManager:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT
                     gv.glyph_name,
                     gv.description,
@@ -225,7 +230,9 @@ class SharedGlyphManager:
                 WHERE gv.is_active = 1
                 ORDER BY gc.consensus_strength DESC, gc.total_users_adopted DESC
                 LIMIT ?
-            """, (top_k,))
+            """,
+                (top_k,),
+            )
 
             results = cursor.fetchall()
             conn.close()
@@ -237,7 +244,7 @@ class SharedGlyphManager:
                     "gates": json.loads(row[2]) if row[2] else [],
                     "adoption": row[3],
                     "consensus": row[4],
-                    "quality": row[5]
+                    "quality": row[5],
                 }
                 for row in results
             ]
@@ -247,12 +254,7 @@ class SharedGlyphManager:
 
     # ===== USER ADOPTION (How to build consensus) =====
 
-    def record_glyph_adoption(
-        self,
-        user_hash: str,
-        glyph_name: str,
-        quality_rating: Optional[int] = None
-    ) -> bool:
+    def record_glyph_adoption(self, user_hash: str, glyph_name: str, quality_rating: Optional[int] = None) -> bool:
         """
         Record that a user adopted/used a glyph.
         This is HOW the system learns globally.
@@ -265,7 +267,8 @@ class SharedGlyphManager:
             cursor = conn.cursor()
 
             # Record in user preferences
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO user_glyph_preferences
                 (user_hash, glyph_name, usage_count, rating)
                 VALUES (?, ?, 1, ?)
@@ -273,42 +276,59 @@ class SharedGlyphManager:
                     usage_count = usage_count + 1,
                     last_used = CURRENT_TIMESTAMP,
                     rating = COALESCE(?, rating)
-            """, (user_hash, glyph_name, quality_rating, quality_rating))
+            """,
+                (user_hash, glyph_name, quality_rating, quality_rating),
+            )
 
             # Update consensus (aggregate usage)
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT COUNT(DISTINCT user_hash) FROM user_glyph_preferences
                 WHERE glyph_name = ?
-            """, (glyph_name,))
+            """,
+                (glyph_name,),
+            )
 
             adoption_count = cursor.fetchone()[0]
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO glyph_consensus
                 (glyph_name, total_users_adopted)
                 VALUES (?, ?)
                 ON CONFLICT(glyph_name) DO UPDATE SET
                     total_users_adopted = ?
-            """, (glyph_name, adoption_count, adoption_count))
+            """,
+                (glyph_name, adoption_count, adoption_count),
+            )
 
             # Update quality score if feedback provided
             if quality_rating is not None:
                 if quality_rating > 0:
-                    cursor.execute("""
+                    cursor.execute(
+                        """
                         UPDATE glyph_consensus SET positive_feedback_count = positive_feedback_count + 1
                         WHERE glyph_name = ?
-                    """, (glyph_name,))
+                    """,
+                        (glyph_name,),
+                    )
                 elif quality_rating < 0:
-                    cursor.execute("""
+                    cursor.execute(
+                        """
                         UPDATE glyph_consensus SET negative_feedback_count = negative_feedback_count + 1
                         WHERE glyph_name = ?
-                    """, (glyph_name,))
+                    """,
+                        (glyph_name,),
+                    )
 
             # Calculate consensus strength
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT total_users_adopted, positive_feedback_count, negative_feedback_count
                 FROM glyph_consensus WHERE glyph_name = ?
-            """, (glyph_name,))
+            """,
+                (glyph_name,),
+            )
 
             row = cursor.fetchone()
             if row:
@@ -317,10 +337,13 @@ class SharedGlyphManager:
                 # Clamp -1 to 1
                 consensus_strength = max(-1.0, min(1.0, consensus_strength))
 
-                cursor.execute("""
+                cursor.execute(
+                    """
                     UPDATE glyph_consensus SET consensus_strength = ?
                     WHERE glyph_name = ?
-                """, (consensus_strength, glyph_name))
+                """,
+                    (consensus_strength, glyph_name),
+                )
 
             conn.commit()
             conn.close()
@@ -333,12 +356,7 @@ class SharedGlyphManager:
     # ===== GLYPH VERSIONING (How to track evolution) =====
 
     def create_glyph_version(
-        self,
-        glyph_name: str,
-        description: str,
-        emotional_signal: str,
-        gates: List[str],
-        created_by: str
+        self, glyph_name: str, description: str, emotional_signal: str, gates: List[str], created_by: str
     ) -> int:
         """
         Create a new version of a glyph.
@@ -351,33 +369,29 @@ class SharedGlyphManager:
             cursor = conn.cursor()
 
             # Get next version number
-            cursor.execute(
-                "SELECT MAX(version_num) FROM glyph_versions WHERE glyph_name = ?",
-                (glyph_name,)
-            )
+            cursor.execute("SELECT MAX(version_num) FROM glyph_versions WHERE glyph_name = ?", (glyph_name,))
             last_version = cursor.fetchone()[0]
             next_version = (last_version or 0) + 1
 
             # Insert new version
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO glyph_versions
                 (glyph_name, version_num, description, emotional_signal, gates, created_by, is_active)
                 VALUES (?, ?, ?, ?, ?, ?, 1)
-            """, (
-                glyph_name,
-                next_version,
-                description,
-                emotional_signal,
-                json.dumps(gates),
-                created_by
-            ))
+            """,
+                (glyph_name, next_version, description, emotional_signal, json.dumps(gates), created_by),
+            )
 
             # Deactivate previous version
             if last_version:
-                cursor.execute("""
+                cursor.execute(
+                    """
                     UPDATE glyph_versions SET is_active = 0
                     WHERE glyph_name = ? AND version_num = ?
-                """, (glyph_name, last_version))
+                """,
+                    (glyph_name, last_version),
+                )
 
             conn.commit()
             conn.close()
@@ -394,12 +408,15 @@ class SharedGlyphManager:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT version_num, description, created_at, created_by, adoption_count, quality_score, is_active
                 FROM glyph_versions
                 WHERE glyph_name = ?
                 ORDER BY version_num ASC
-            """, (glyph_name,))
+            """,
+                (glyph_name,),
+            )
 
             results = cursor.fetchall()
             conn.close()
@@ -412,7 +429,7 @@ class SharedGlyphManager:
                     "created_by": row[3],
                     "adoption": row[4],
                     "quality": row[5],
-                    "active": bool(row[6])
+                    "active": bool(row[6]),
                 }
                 for row in results
             ]
@@ -441,7 +458,7 @@ class SharedGlyphManager:
             "recognition": ["seen", "known", "accepted", "belonging"],
             "shame": ["embarrassment", "humiliation", "exposure", "unworthiness"],
             "fear": ["terror", "anxiety", "dread", "uncertainty"],
-            "love": ["affection", "tenderness", "care", "connection"]
+            "love": ["affection", "tenderness", "care", "connection"],
         }
 
         try:
@@ -452,11 +469,10 @@ class SharedGlyphManager:
 
             for territory, keywords in emotional_territories.items():
                 # Count glyphs that touch this territory
-                query_parts = " OR ".join(
-                    ["description LIKE ?" for _ in keywords])
+                query_parts = " OR ".join(["description LIKE ?" for _ in keywords])
                 cursor.execute(
                     f"SELECT COUNT(*) FROM glyph_versions WHERE ({query_parts}) AND is_active = 1",
-                    [f"%{k}%" for k in keywords]
+                    [f"%{k}%" for k in keywords],
                 )
 
                 glyph_count = cursor.fetchone()[0]
@@ -479,7 +495,7 @@ class SharedGlyphManager:
                     "coverage_quality": quality,
                     "glyph_count": glyph_count,
                     "needs_development": needs_dev,
-                    "keywords": keywords
+                    "keywords": keywords,
                 }
 
             conn.close()
@@ -500,13 +516,15 @@ class SharedGlyphManager:
 
         for territory, info in coverage.items():
             if info["needs_development"]:
-                recommendations.append({
-                    "emotional_territory": territory,
-                    "priority": "CRITICAL" if info["coverage_quality"] == "CRITICAL" else "HIGH",
-                    "current_coverage": info["glyph_count"],
-                    "gap_description": f"Only {info['glyph_count']} glyph(s) cover this territory",
-                    "suggested_keywords": info["keywords"]
-                })
+                recommendations.append(
+                    {
+                        "emotional_territory": territory,
+                        "priority": "CRITICAL" if info["coverage_quality"] == "CRITICAL" else "HIGH",
+                        "current_coverage": info["glyph_count"],
+                        "gap_description": f"Only {info['glyph_count']} glyph(s) cover this territory",
+                        "suggested_keywords": info["keywords"],
+                    }
+                )
 
         return sorted(recommendations, key=lambda x: x["current_coverage"])
 
@@ -521,31 +539,35 @@ class SharedGlyphManager:
             cursor = conn.cursor()
 
             # Total glyphs
-            cursor.execute(
-                "SELECT COUNT(*) FROM glyph_versions WHERE is_active = 1")
+            cursor.execute("SELECT COUNT(*) FROM glyph_versions WHERE is_active = 1")
             total_glyphs = cursor.fetchone()[0]
 
             # Total users
-            cursor.execute(
-                "SELECT COUNT(DISTINCT user_hash) FROM user_glyph_preferences")
+            cursor.execute("SELECT COUNT(DISTINCT user_hash) FROM user_glyph_preferences")
             total_users = cursor.fetchone()[0]
 
             # Average adoption (glyphs per user)
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT AVG(usage_count) FROM user_glyph_preferences
-            """)
+            """
+            )
             avg_adoption = cursor.fetchone()[0] or 0
 
             # Strongest consensus glyphs
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT COUNT(*) FROM glyph_consensus WHERE consensus_strength > 0.5
-            """)
+            """
+            )
             strong_consensus = cursor.fetchone()[0]
 
             # Pending candidates
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT COUNT(*) FROM glyph_candidates WHERE promoted_to_production = 0
-            """)
+            """
+            )
             pending_candidates = cursor.fetchone()[0]
 
             conn.close()
@@ -558,7 +580,7 @@ class SharedGlyphManager:
                 "pending_candidate_glyphs": pending_candidates,
                 "system_coverage": self.analyze_coverage_gaps(),
                 "recommendations": self.recommend_new_glyphs_for_gaps(),
-                "timestamp": datetime.now().isoformat()
+                "timestamp": datetime.now().isoformat(),
             }
 
         except Exception as e:
@@ -567,10 +589,7 @@ class SharedGlyphManager:
 
 # Convenience function
 def get_user_segregated_view(
-    user_hash: str,
-    emotional_signal: str,
-    gates: List[str],
-    manager: Optional[SharedGlyphManager] = None
+    user_hash: str, emotional_signal: str, gates: List[str], manager: Optional[SharedGlyphManager] = None
 ) -> List[Dict]:
     """
     Get glyphs for a user, ordered by their personal adoption history.
@@ -581,9 +600,4 @@ def get_user_segregated_view(
     if not manager:
         manager = SharedGlyphManager()
 
-    return manager.get_glyphs_for_user(
-        user_hash=user_hash,
-        emotional_signal=emotional_signal,
-        gates=gates,
-        top_k=5
-    )
+    return manager.get_glyphs_for_user(user_hash=user_hash, emotional_signal=emotional_signal, gates=gates, top_k=5)

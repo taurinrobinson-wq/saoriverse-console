@@ -2,15 +2,16 @@
 Multi-threaded stress test for glyph candidate logging and parse_input concurrency.
 Usage: python3 dev_tools/stress_log_test.py
 """
+
 import os
+import random
 import sys
 import threading
 import time
-import random
 from collections import Counter
 
 # ensure repo root on path
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath("."))
 
 from emotional_os.glyphs import signal_parser as sp
 
@@ -29,8 +30,10 @@ SCENARIOS = [
     "I can't stop thinking about them",
 ]
 
-LEXICON_PATH = 'velonix_lexicon.json' if os.path.exists('velonix_lexicon.json') else 'emotional_os/glyphs/learned_lexicon.json'
-DB_PATH = 'emotional_os/glyphs/glyphs.db' if os.path.exists('emotional_os/glyphs/glyphs.db') else 'glyphs.db'
+LEXICON_PATH = (
+    "velonix_lexicon.json" if os.path.exists("velonix_lexicon.json") else "emotional_os/glyphs/learned_lexicon.json"
+)
+DB_PATH = "emotional_os/glyphs/glyphs.db" if os.path.exists("emotional_os/glyphs/glyphs.db") else "glyphs.db"
 
 THREADS = 20
 ITERATIONS_PER_THREAD = 25
@@ -47,7 +50,7 @@ def worker(thread_id: int):
         try:
             rdict = sp.parse_input(text, LEXICON_PATH, db_path=DB_PATH, conversation_context=None)
             with lock:
-                responses.append((thread_id, text, rdict.get('response_source'), bool(rdict.get('best_glyph'))))
+                responses.append((thread_id, text, rdict.get("response_source"), bool(rdict.get("best_glyph"))))
         except Exception as e:
             local_errors += 1
             with lock:
@@ -56,7 +59,7 @@ def worker(thread_id: int):
         time.sleep(random.random() * 0.02)
     if local_errors:
         with lock:
-            errors.append((thread_id, 'thread_errors', local_errors))
+            errors.append((thread_id, "thread_errors", local_errors))
 
 
 def main():
@@ -73,7 +76,9 @@ def main():
 
     duration = time.time() - start
 
-    print(f"Ran {THREADS} threads x {ITERATIONS_PER_THREAD} iterations = {THREADS*ITERATIONS_PER_THREAD} calls in {duration:.2f}s")
+    print(
+        f"Ran {THREADS} threads x {ITERATIONS_PER_THREAD} iterations = {THREADS*ITERATIONS_PER_THREAD} calls in {duration:.2f}s"
+    )
 
     if errors:
         print("Errors:")
@@ -103,8 +108,8 @@ def main():
     # Exit code
     if errors:
         sys.exit(2)
-    print('Stress test completed successfully.')
+    print("Stress test completed successfully.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

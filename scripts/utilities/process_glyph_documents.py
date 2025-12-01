@@ -15,16 +15,20 @@ from typing import Any, Dict, List
 
 try:
     from docx import Document
+
     DOCX_AVAILABLE = True
 except ImportError:
     print("python-docx not available. Install with: pip install python-docx")
     DOCX_AVAILABLE = False
 
+
 class GlyphDocumentProcessor:
-    def __init__(self,
-                 unprocessed_dir="emotional_os/deploy/unprocessed_glyphs",
-                 processed_dir="emotional_os/deploy/processed_glyphs",
-                 db_path="emotional_os/glyphs/glyphs.db"):
+    def __init__(
+        self,
+        unprocessed_dir="emotional_os/deploy/unprocessed_glyphs",
+        processed_dir="emotional_os/deploy/processed_glyphs",
+        db_path="emotional_os/glyphs/glyphs.db",
+    ):
         self.unprocessed_dir = Path(unprocessed_dir)
         self.processed_dir = Path(processed_dir)
         self.db_path = Path(db_path)
@@ -88,14 +92,16 @@ class GlyphDocumentProcessor:
                 # Determine gate based on content analysis
                 gate = self.determine_gate(description)
 
-                glyphs.append({
-                    "glyph_name": name,
-                    "description": description,
-                    "gate": gate,
-                    "activation_signals": self.extract_signals(description),
-                    "source_document": doc_path.name,
-                    "extracted_at": datetime.now().isoformat()
-                })
+                glyphs.append(
+                    {
+                        "glyph_name": name,
+                        "description": description,
+                        "gate": gate,
+                        "activation_signals": self.extract_signals(description),
+                        "source_document": doc_path.name,
+                        "extracted_at": datetime.now().isoformat(),
+                    }
+                )
 
         return glyphs
 
@@ -132,7 +138,7 @@ class GlyphDocumentProcessor:
             "ε": ["insight", "clarity", "understanding", "revelation", "truth"],
             "λ": ["joy", "celebration", "delight", "fulfillment", "bliss"],
             "θ": ["grief", "mourning", "loss", "sorrow", "sadness"],
-            "Ω": ["recognition", "seen", "witness", "acknowledge", "mirror"]
+            "Ω": ["recognition", "seen", "witness", "acknowledge", "mirror"],
         }
 
         for signal, keywords in signal_map.items():
@@ -148,16 +154,19 @@ class GlyphDocumentProcessor:
 
         for glyph in glyphs:
             try:
-                cursor.execute("""
+                cursor.execute(
+                    """
                     INSERT INTO glyph_lexicon (voltage_pair, glyph_name, description, gate, activation_signals)
                     VALUES (?, ?, ?, ?, ?)
-                """, (
-                    f"extracted_{glyph['glyph_name'].lower().replace(' ', '_')}",
-                    glyph["glyph_name"],
-                    glyph["description"],
-                    glyph["gate"],
-                    glyph["activation_signals"]
-                ))
+                """,
+                    (
+                        f"extracted_{glyph['glyph_name'].lower().replace(' ', '_')}",
+                        glyph["glyph_name"],
+                        glyph["description"],
+                        glyph["gate"],
+                        glyph["activation_signals"],
+                    ),
+                )
             except sqlite3.IntegrityError:
                 # Glyph might already exist, skip
                 continue
@@ -169,6 +178,7 @@ class GlyphDocumentProcessor:
         """Move processed document to processed folder"""
         dest_path = self.processed_dir / doc_path.name
         shutil.move(str(doc_path), str(dest_path))
+
 
 def main():
     """Main processing function"""
@@ -182,6 +192,7 @@ def main():
 
     processor.process_all_documents()
     print("\n✨ Processing complete!")
+
 
 if __name__ == "__main__":
     main()

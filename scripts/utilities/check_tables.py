@@ -5,7 +5,7 @@ import sqlite3
 
 
 def check_tables():
-    conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
+    conn = sqlite3.connect("emotional_os/glyphs/glyphs.db")
     cursor = conn.cursor()
 
     # List all tables
@@ -22,6 +22,7 @@ def check_tables():
             print(f"  • {col[1]} ({col[2]})")
 
     conn.close()
+
 
 if __name__ == "__main__":
     check_tables()

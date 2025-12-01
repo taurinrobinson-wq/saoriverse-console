@@ -23,19 +23,23 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv("SUPABASE_KEY")
 ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "admin_secret_change_in_production")
 
+
 # Pydantic models
 class AdminLoginRequest(BaseModel):
     username: str
     password: str
+
 
 class UserModerationRequest(BaseModel):
     user_id: str
     action: str  # suspend, activate, delete
     reason: Optional[str] = None
 
+
 class SystemConfigRequest(BaseModel):
     setting_name: str
     setting_value: str
+
 
 # Admin Authentication Class
 class AdminAuth:
@@ -44,12 +48,12 @@ class AdminAuth:
     ADMIN_USERS = {
         "admin": {
             "password_hash": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",  # "admin"
-            "permissions": ["all"]
+            "permissions": ["all"],
         },
         "taurinrobinson": {  # Your admin account
             "password_hash": hashlib.sha256("firstperson2025".encode()).hexdigest(),
-            "permissions": ["all"]
-        }
+            "permissions": ["all"],
+        },
     }
 
     @staticmethod
@@ -69,12 +73,13 @@ class AdminAuth:
     def create_admin_session(username: str) -> str:
         """Create secure admin session token"""
         import base64
+
         session_data = {
             "username": username,
             "is_admin": True,
             "created": datetime.now().isoformat(),
             "expires": (datetime.now() + timedelta(hours=8)).isoformat(),
-            "permissions": AdminAuth.ADMIN_USERS[username]["permissions"]
+            "permissions": AdminAuth.ADMIN_USERS[username]["permissions"],
         }
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
         return token
@@ -84,6 +89,7 @@ class AdminAuth:
         """Validate admin session token"""
         try:
             import base64
+
             decoded_data = base64.b64decode(token.encode()).decode()
             session_data = json.loads(decoded_data)
 
@@ -94,6 +100,7 @@ class AdminAuth:
             return {"valid": False, "error": "Session expired"}
         except Exception as e:
             return {"valid": False, "error": str(e)}
+
 
 # Admin dependency for protected routes
 async def require_admin(request: Request):
@@ -107,6 +114,7 @@ async def require_admin(request: Request):
         raise HTTPException(status_code=401, detail="Invalid admin session")
 
     return session_result["data"]
+
 
 # Database Interface for Admin Operations
 class AdminDatabase:
@@ -126,7 +134,7 @@ class AdminDatabase:
                     "created_at": "2025-10-15T10:00:00",
                     "last_login": "2025-10-15T12:00:00",
                     "status": "active",
-                    "conversation_count": 15
+                    "conversation_count": 15,
                 },
                 {
                     "id": "user2",
@@ -135,8 +143,8 @@ class AdminDatabase:
                     "created_at": "2025-10-14T15:30:00",
                     "last_login": "2025-10-15T09:15:00",
                     "status": "active",
-                    "conversation_count": 8
-                }
+                    "conversation_count": 8,
+                },
             ]
         except Exception as e:
             print(f"Error fetching users: {e}")
@@ -155,7 +163,7 @@ class AdminDatabase:
                 "avg_response_time": 2.3,
                 "system_uptime": "99.8%",
                 "storage_used": "2.4 GB",
-                "api_calls_today": 432
+                "api_calls_today": 432,
             }
         except Exception as e:
             print(f"Error fetching stats: {e}")
@@ -175,7 +183,7 @@ class AdminDatabase:
                     "message": "I'm feeling overwhelmed with work stress lately",
                     "response": "I understand that work stress can feel overwhelming. What specific aspects are weighing on you most?",
                     "sentiment": "negative",
-                    "flagged": False
+                    "flagged": False,
                 },
                 {
                     "id": "conv2",
@@ -185,19 +193,22 @@ class AdminDatabase:
                     "message": "Had a great day today, feeling optimistic",
                     "response": "That's wonderful to hear! Optimism can be such a powerful force. What made today particularly great?",
                     "sentiment": "positive",
-                    "flagged": False
-                }
+                    "flagged": False,
+                },
             ]
         except Exception as e:
             print(f"Error fetching conversations: {e}")
             return []
 
+
 # Admin Routes
+
 
 @admin_router.get("/login", response_class=HTMLResponse)
 async def admin_login_page(request: Request):
     """Admin login page"""
     return templates.TemplateResponse("admin/login.html", {"request": request})
+
 
 @admin_router.post("/login")
 async def admin_login(request: Request, username: str = Form(), password: str = Form()):
@@ -211,56 +222,54 @@ async def admin_login(request: Request, username: str = Form(), password: str = 
             httponly=True,
             secure=True,
             samesite="strict",
-            max_age=28800  # 8 hours
+            max_age=28800,  # 8 hours
         )
         return response
-    return templates.TemplateResponse(
-        "admin/login.html",
-        {"request": request, "error": "Invalid credentials"}
-    )
+    return templates.TemplateResponse("admin/login.html", {"request": request, "error": "Invalid credentials"})
+
 
 @admin_router.get("/dashboard", response_class=HTMLResponse)
-async def admin_dashboard(request: Request, admin_user = Depends(require_admin)):
+async def admin_dashboard(request: Request, admin_user=Depends(require_admin)):
     """Main admin dashboard"""
     stats = await AdminDatabase.get_system_stats()
     recent_users = await AdminDatabase.get_all_users()
 
-    return templates.TemplateResponse("admin/dashboard.html", {
-        "request": request,
-        "admin_user": admin_user,
-        "stats": stats,
-        "recent_users": recent_users[:10]  # Show last 10 users
-    })
+    return templates.TemplateResponse(
+        "admin/dashboard.html",
+        {
+            "request": request,
+            "admin_user": admin_user,
+            "stats": stats,
+            "recent_users": recent_users[:10],  # Show last 10 users
+        },
+    )
+
 
 @admin_router.get("/users", response_class=HTMLResponse)
-async def admin_users(request: Request, admin_user = Depends(require_admin)):
+async def admin_users(request: Request, admin_user=Depends(require_admin)):
     """User management page"""
     users = await AdminDatabase.get_all_users()
 
-    return templates.TemplateResponse("admin/users.html", {
-        "request": request,
-        "admin_user": admin_user,
-        "users": users
-    })
+    return templates.TemplateResponse(
+        "admin/users.html", {"request": request, "admin_user": admin_user, "users": users}
+    )
+
 
 @admin_router.get("/conversations", response_class=HTMLResponse)
-async def admin_conversations(request: Request, admin_user = Depends(require_admin)):
+async def admin_conversations(request: Request, admin_user=Depends(require_admin)):
     """Conversation moderation page"""
     conversations = await AdminDatabase.get_recent_conversations()
 
-    return templates.TemplateResponse("admin/conversations.html", {
-        "request": request,
-        "admin_user": admin_user,
-        "conversations": conversations
-    })
+    return templates.TemplateResponse(
+        "admin/conversations.html", {"request": request, "admin_user": admin_user, "conversations": conversations}
+    )
+
 
 @admin_router.get("/settings", response_class=HTMLResponse)
-async def admin_settings(request: Request, admin_user = Depends(require_admin)):
+async def admin_settings(request: Request, admin_user=Depends(require_admin)):
     """System settings page"""
-    return templates.TemplateResponse("admin/settings.html", {
-        "request": request,
-        "admin_user": admin_user
-    })
+    return templates.TemplateResponse("admin/settings.html", {"request": request, "admin_user": admin_user})
+
 
 @admin_router.post("/logout")
 async def admin_logout():
@@ -269,26 +278,22 @@ async def admin_logout():
     response.delete_cookie("admin_session")
     return response
 
+
 # API endpoints for admin operations
 
+
 @admin_router.post("/api/users/{user_id}/moderate")
-async def moderate_user(
-    user_id: str,
-    moderation: UserModerationRequest,
-    admin_user = Depends(require_admin)
-):
+async def moderate_user(user_id: str, moderation: UserModerationRequest, admin_user=Depends(require_admin)):
     """Moderate user account"""
     try:
         # Implement actual user moderation
-        return {
-            "success": True,
-            "message": f"User {user_id} {moderation.action}ed successfully"
-        }
+        return {"success": True, "message": f"User {user_id} {moderation.action}ed successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @admin_router.get("/api/stats/export")
-async def export_stats(admin_user = Depends(require_admin)):
+async def export_stats(admin_user=Depends(require_admin)):
     """Export system statistics"""
     try:
         stats = await AdminDatabase.get_system_stats()
@@ -300,24 +305,19 @@ async def export_stats(admin_user = Depends(require_admin)):
             "stats": stats,
             "user_count": len(users),
             "conversation_count": len(conversations),
-            "admin": admin_user["username"]
+            "admin": admin_user["username"],
         }
 
         return export_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @admin_router.post("/api/system/config")
-async def update_system_config(
-    config: SystemConfigRequest,
-    admin_user = Depends(require_admin)
-):
+async def update_system_config(config: SystemConfigRequest, admin_user=Depends(require_admin)):
     """Update system configuration"""
     try:
         # Implement actual config updates
-        return {
-            "success": True,
-            "message": f"Setting {config.setting_name} updated successfully"
-        }
+        return {"success": True, "message": f"Setting {config.setting_name} updated successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

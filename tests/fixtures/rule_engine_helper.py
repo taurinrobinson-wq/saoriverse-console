@@ -1,5 +1,5 @@
-from typing import List, Dict
 import re
+from typing import Dict, List
 
 
 def tokenize(text: str) -> List[str]:
@@ -65,7 +65,7 @@ def detect_overlays(tokens: List[str], lexicon: Dict[str, Dict] = None) -> Dict[
     for tag, confs in tag_confidence.items():
         prod = 1.0
         for p in confs:
-            prod *= (1.0 - p)
+            prod *= 1.0 - p
         combined[tag] = round(1.0 - prod, 4)
 
     return combined
@@ -74,7 +74,6 @@ def detect_overlays(tokens: List[str], lexicon: Dict[str, Dict] = None) -> Dict[
 def analyze_text(text: str, lexicon: Dict[str, Dict] = None) -> Dict:
     tokens = tokenize(text)
     combined = detect_overlays(tokens, lexicon=lexicon)
-    infos = [{"tag": t, "confidence": combined[t]}
-             for t in sorted(combined, key=lambda k: -combined[k])]
+    infos = [{"tag": t, "confidence": combined[t]} for t in sorted(combined, key=lambda k: -combined[k])]
     tags = [i["tag"] for i in infos if i["confidence"] > 0.0]
     return {"tokens": tokens, "glyph_overlays_info": infos, "glyph_overlays": tags}

@@ -5,6 +5,7 @@ Exports:
 
 Cue sets are provided for clarity and potential extension.
 """
+
 from typing import List, Optional
 
 # Cue lists (kept intentionally readable so maintainers can edit)

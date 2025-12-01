@@ -21,8 +21,7 @@ def test_acknowledgement_and_biasing(tmp_path: Path):
 
     # Now simulate a system response followed by a user clarification that sets corrected intent
     clarification = "No, I meant how are you feeling?"
-    ctx = {"last_user_input": original, "last_system_response": baseline,
-           "inferred_intent": "emotional_checkin"}
+    ctx = {"last_user_input": original, "last_system_response": baseline, "inferred_intent": "emotional_checkin"}
 
     resp = mre.process_user_input(clarification, ctx)
     # Acknowledgement prefix should be present
@@ -32,5 +31,4 @@ def test_acknowledgement_and_biasing(tmp_path: Path):
     biased = mre.process_user_input(original, {})
     assert biased != baseline
     # initiatory templates include 'tell me' or 'can you tell me more'
-    assert ("tell me" in biased.lower()) or (
-        "can you tell me more" in biased.lower())
+    assert ("tell me" in biased.lower()) or ("can you tell me more" in biased.lower())

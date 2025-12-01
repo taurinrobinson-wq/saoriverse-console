@@ -7,6 +7,7 @@ Exports:
 These functions produce short, evocative prompts suitable for
 post-processing by the response_adapter.
 """
+
 from typing import Dict, Optional
 
 

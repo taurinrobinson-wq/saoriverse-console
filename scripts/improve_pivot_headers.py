@@ -6,10 +6,9 @@ common non-null value in that slot across rows; if it looks like a slot token
 """
 
 import json
-from pathlib import Path
-from collections import Counter
 import re
-
+from collections import Counter
+from pathlib import Path
 
 IN_PATH = Path("Offshoots/tonecore_chord_pivot.json")
 BACKUP = Path("Offshoots/tonecore_chord_pivot.json.bak")
@@ -28,8 +27,7 @@ def looks_like_slot(s: str) -> bool:
 
 def improve():
     data = json.loads(IN_PATH.read_text(encoding="utf8"))
-    Path(BACKUP).write_text(json.dumps(
-        data, indent=2, ensure_ascii=False), encoding="utf8")
+    Path(BACKUP).write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf8")
     changed = False
     for sheet, rows in data.items():
         # collect per-slot values
@@ -44,8 +42,7 @@ def improve():
         for k, vals in slot_values.items():
             if k.startswith("Unnamed") or k.lower().startswith("col"):
                 # find most common non-null value
-                non_nulls = [str(x).strip()
-                             for x in vals if x is not None and str(x).strip()]
+                non_nulls = [str(x).strip() for x in vals if x is not None and str(x).strip()]
                 if not non_nulls:
                     continue
                 mode, freq = Counter(non_nulls).most_common(1)[0]
@@ -68,12 +65,11 @@ def improve():
                         allowed.pop(oldk, None)
 
     if changed:
-        IN_PATH.write_text(json.dumps(
-            data, indent=2, ensure_ascii=False), encoding="utf8")
+        IN_PATH.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf8")
         print(f"Improved headers and wrote updated JSON (backup at {BACKUP})")
     else:
         print("No ambiguous headers detected/changed.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     improve()

@@ -1,4 +1,3 @@
-
 class SaoynxAuthentication:
     # Minimal compatibility stub for tests.
     # Full implementation lives in other modules; this keeps imports working.

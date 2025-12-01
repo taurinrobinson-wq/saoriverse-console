@@ -10,6 +10,7 @@ import time
 try:
     from parser.nrc_lexicon_loader import nrc
     from parser.semantic_engine import semantic
+
     LOCAL_MODE_AVAILABLE = True
 except ImportError:
     LOCAL_MODE_AVAILABLE = False
@@ -23,9 +24,9 @@ def test_local_mode():
         print("⚠️ Skipping local mode tests (spaCy or other dependencies unavailable)")
         return
 
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("🧪 FIRSTPERSON LOCAL MODE TESTING")
-    print("="*80 + "\n")
+    print("=" * 80 + "\n")
 
     # Test 1: Infrastructure
     print("1️⃣ INFRASTRUCTURE CHECK")
@@ -144,12 +145,12 @@ def test_local_mode():
     import os
 
     # Check no API keys
-    if os.environ.get('OPENAI_API_KEY'):
+    if os.environ.get("OPENAI_API_KEY"):
         print("  ❌ WARNING: OpenAI API key detected in environment")
         return False
     print("  ✓ No OpenAI API key (good)")
 
-    if os.environ.get('SUPABASE_URL'):
+    if os.environ.get("SUPABASE_URL"):
         print("  ❌ WARNING: Supabase URL detected")
         return False
     print("  ✓ No cloud service URLs (good)")
@@ -161,9 +162,9 @@ def test_local_mode():
     print("\n✅ Privacy verified\n")
 
     # Summary
-    print("="*80)
+    print("=" * 80)
     print("✅ ALL TESTS PASSED - LOCAL MODE IS READY")
-    print("="*80)
+    print("=" * 80)
 
     print("\n📊 Summary:")
     print(f"  • {len(nrc.word_emotions)} emotion keywords loaded")
@@ -183,6 +184,7 @@ def test_local_mode():
 
     return True
 
+
 if __name__ == "__main__":
     try:
         success = test_local_mode()
@@ -190,5 +192,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n❌ ERROR: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

@@ -19,28 +19,28 @@ Notes:
  - If `glyphs_selected` is empty for a message, the script skips it.
 """
 
-import os
+import csv
 import glob
 import json
-import csv
+import os
 from collections import defaultdict
 
 from emotional_os.core.signal_parser import parse_input
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
-DB_PATH = os.path.join(ROOT, 'emotional_os', 'glyphs', 'glyphs.db')
-LEXICON_PATH = os.path.join(ROOT, 'parser', 'signal_lexicon.json')
+DB_PATH = os.path.join(ROOT, "emotional_os", "glyphs", "glyphs.db")
+LEXICON_PATH = os.path.join(ROOT, "parser", "signal_lexicon.json")
 
-OUT_DIR = os.path.join(os.path.dirname(__file__), 'output')
+OUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 os.makedirs(OUT_DIR, exist_ok=True)
-OUT_CSV = os.path.join(OUT_DIR, 'top_glyphs.csv')
+OUT_CSV = os.path.join(OUT_DIR, "top_glyphs.csv")
 
 # File patterns to search for corpus
 PATTERNS = [
-    os.path.join(ROOT, 'learning', 'imported_conversations', '*.json'),
-    os.path.join(ROOT, 'learning', 'processed_conversations', '*.*'),
-    os.path.join(ROOT, 'conversations', '*.json'),
-    os.path.join(ROOT, 'learning', 'processed_conversations', '*.txt'),
+    os.path.join(ROOT, "learning", "imported_conversations", "*.json"),
+    os.path.join(ROOT, "learning", "processed_conversations", "*.*"),
+    os.path.join(ROOT, "conversations", "*.json"),
+    os.path.join(ROOT, "learning", "processed_conversations", "*.txt"),
 ]
 
 # Limits
@@ -54,23 +54,23 @@ def extract_texts_from_file(path):
     lower = path.lower()
     texts = []
     try:
-        if lower.endswith('.txt'):
-            with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+        if lower.endswith(".txt"):
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
                 content = f.read()
             # Split by blank lines into message-like chunks
-            parts = [p.strip() for p in content.split('\n\n') if p.strip()]
+            parts = [p.strip() for p in content.split("\n\n") if p.strip()]
             texts.extend(parts[:MAX_MESSAGES_PER_FILE])
-        elif lower.endswith('.json'):
-            with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+        elif lower.endswith(".json"):
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
                 data = json.load(f)
             # If it's a dict with conversation content
             if isinstance(data, dict):
                 # Try known keys
-                if 'messages' in data and isinstance(data['messages'], list):
-                    for m in data['messages'][:MAX_MESSAGES_PER_FILE]:
+                if "messages" in data and isinstance(data["messages"], list):
+                    for m in data["messages"][:MAX_MESSAGES_PER_FILE]:
                         if isinstance(m, dict):
                             # common fields
-                            for k in ('text', 'content', 'message', 'input'):
+                            for k in ("text", "content", "message", "input"):
                                 if k in m and isinstance(m[k], str):
                                     texts.append(m[k])
                                     break
@@ -94,7 +94,7 @@ def extract_texts_from_file(path):
                         texts.append(item)
                     elif isinstance(item, dict):
                         # find a text-like field
-                        for k in ('input', 'text', 'message', 'utterance', 'user'):
+                        for k in ("input", "text", "message", "utterance", "user"):
                             if k in item and isinstance(item[k], str):
                                 texts.append(item[k])
                                 break
@@ -105,9 +105,9 @@ def extract_texts_from_file(path):
                     texts.append(s[:1000])
         else:
             # unknown extension: try to read as text
-            with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
                 content = f.read()
-            parts = [p.strip() for p in content.split('\n\n') if p.strip()]
+            parts = [p.strip() for p in content.split("\n\n") if p.strip()]
             texts.extend(parts[:MAX_MESSAGES_PER_FILE])
     except Exception:
         pass
@@ -123,10 +123,12 @@ def main():
     # Deduplicate
     files = sorted(list(set(files)))
     if not files:
-        print('No corpus files found using patterns:', PATTERNS)
+        print("No corpus files found using patterns:", PATTERNS)
         return
 
-    print(f'Found {len(files)} files; sampling up to {TOTAL_MESSAGE_CAP} messages total (max {MAX_MESSAGES_PER_FILE}/file)')
+    print(
+        f"Found {len(files)} files; sampling up to {TOTAL_MESSAGE_CAP} messages total (max {MAX_MESSAGES_PER_FILE}/file)"
+    )
 
     glyph_counts = defaultdict(int)
     glyph_score_sums = defaultdict(float)
@@ -141,7 +143,7 @@ def main():
         texts = extract_texts_from_file(fp)
         if not texts:
             continue
-        print(f'Processing {len(texts)} messages from {os.path.relpath(fp)}')
+        print(f"Processing {len(texts)} messages from {os.path.relpath(fp)}")
         for t in texts:
             if total_processed >= TOTAL_MESSAGE_CAP:
                 break
@@ -150,18 +152,18 @@ def main():
                 out = parse_input(t, LEXICON_PATH, db_path=DB_PATH)
             except Exception:
                 continue
-            glyphs = out.get('glyphs_selected') or []
+            glyphs = out.get("glyphs_selected") or []
             # glyphs_selected is list of dicts with glyph_name, display_name, score, gate
             for g in glyphs:
-                name = g.get('glyph_name') or ''
-                display = g.get('display_name') or name
+                name = g.get("glyph_name") or ""
+                display = g.get("display_name") or name
                 key = display.strip()
-                score = g.get('score') or 0
+                score = g.get("score") or 0
                 glyph_counts[key] += 1
                 glyph_score_sums[key] += float(score)
                 if len(glyph_samples[key]) < 3:
-                    glyph_samples[key].append(t.replace('\n', ' ')[:200])
-                gate = g.get('gate')
+                    glyph_samples[key].append(t.replace("\n", " ")[:200])
+                gate = g.get("gate")
                 if gate:
                     glyph_gates[key][gate] += 1
 
@@ -169,25 +171,24 @@ def main():
     rows = []
     for disp, cnt in glyph_counts.items():
         avg = glyph_score_sums[disp] / cnt if cnt else 0
-        samples = ' | '.join(glyph_samples[disp])
+        samples = " | ".join(glyph_samples[disp])
         # determine top gate
         gates = glyph_gates[disp]
-        top_gate = max(gates.items(), key=lambda x: x[1])[0] if gates else ''
+        top_gate = max(gates.items(), key=lambda x: x[1])[0] if gates else ""
         rows.append((disp, cnt, round(avg, 2), top_gate, samples))
 
     # Sort by count desc
     rows_sorted = sorted(rows, key=lambda x: x[1], reverse=True)
 
     # Write CSV
-    with open(OUT_CSV, 'w', newline='', encoding='utf-8') as csvf:
+    with open(OUT_CSV, "w", newline="", encoding="utf-8") as csvf:
         writer = csv.writer(csvf)
-        writer.writerow(['display_name', 'count', 'avg_score',
-                        'top_gate', 'sample_inputs'])
+        writer.writerow(["display_name", "count", "avg_score", "top_gate", "sample_inputs"])
         for r in rows_sorted:
             writer.writerow(r)
 
-    print(f'Wrote {len(rows_sorted)} rows to {OUT_CSV}')
+    print(f"Wrote {len(rows_sorted)} rows to {OUT_CSV}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

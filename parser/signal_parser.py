@@ -34,7 +34,7 @@ def parse_signals_compat(input_text: str, signal_map):
     out = []
     for item in raw:
         if isinstance(item, dict):
-            sig = item.get('signal')
+            sig = item.get("signal")
             if sig is not None:
                 out.append(sig)
         else:

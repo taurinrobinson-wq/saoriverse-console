@@ -5,12 +5,13 @@ emotion cues. It also exposes a helper to prepend/append the gesture to
 messages and a simple rotation strategy to avoid repeating the same
 gesture each time (deterministic based on the message hash).
 """
+
 from __future__ import annotations
 
-from typing import Optional
 import hashlib
-import random
 import os
+import random
+from typing import Optional
 
 # Primary mapping: single preferred gesture per emotion
 ASCII_COMFORT_MAP = {

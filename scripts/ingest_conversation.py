@@ -5,13 +5,14 @@ This script uses a conservative block-splitting heuristic to separate human
 utterances from assistant responses and then calls learn_from_conversation_data
 to update the learned lexicon and pattern history.
 
-Usage: python3 scripts/ingest_conversation.py 
+Usage: python3 scripts/ingest_conversation.py
 """
-from learning.lexicon_learner import learn_from_conversation_data, get_learning_insights
 import json
 import re
 import sys
 from pathlib import Path
+
+from learning.lexicon_learner import get_learning_insights, learn_from_conversation_data
 
 # Ensure repo root is on PYTHONPATH so local modules can be imported
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -19,8 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path.cwd()))
 
 
-CONVERSATION_PATH = Path(
-    "emotional_os/deploy/Conversation archives - User Returns To Chat.txt")
+CONVERSATION_PATH = Path("emotional_os/deploy/Conversation archives - User Returns To Chat.txt")
 OUT_DIR = Path("learning/imported_conversations")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -42,15 +42,23 @@ def is_human_block(block: str) -> bool:
     """
     head = block.splitlines()[0].strip()
     # markers that strongly imply assistant text
-    assistant_markers = ["let ", "this exchange",
-                         "would you like", "i can help", "🔌", "⚡", "metaphor"]
+    assistant_markers = ["let ", "this exchange", "would you like", "i can help", "🔌", "⚡", "metaphor"]
     lower = block.lower()
     if any(m in lower for m in assistant_markers):
         return False
 
     # markers that imply human utterance
-    human_markers = ["her reply", "my reply", "i said", "i need",
-                     "i found", "my reply:", "i offered", "her replies:", "her reply:"]
+    human_markers = [
+        "her reply",
+        "my reply",
+        "i said",
+        "i need",
+        "i found",
+        "my reply:",
+        "i offered",
+        "her replies:",
+        "her reply:",
+    ]
     if any(m in lower for m in human_markers):
         return True
 
@@ -70,11 +78,10 @@ def build_messages(blocks):
     messages = []
     # We'll label human blocks as 'user' and assistant blocks as 'system'
     for b in blocks:
-        role = 'user' if is_human_block(b) else 'system'
+        role = "user" if is_human_block(b) else "system"
         # collapse internal newlines
-        content = " ".join([line.strip()
-                           for line in b.splitlines() if line.strip()])
-        messages.append({'type': role, 'content': content})
+        content = " ".join([line.strip() for line in b.splitlines() if line.strip()])
+        messages.append({"type": role, "content": content})
     return messages
 
 
@@ -83,25 +90,23 @@ def main():
         print(f"Conversation file not found: {CONVERSATION_PATH}")
         return 1
 
-    text = CONVERSATION_PATH.read_text(encoding='utf-8')
+    text = CONVERSATION_PATH.read_text(encoding="utf-8")
     blocks = split_into_blocks(text)
     messages = build_messages(blocks)
 
-    convo = {'source': str(CONVERSATION_PATH), 'messages': messages}
+    convo = {"source": str(CONVERSATION_PATH), "messages": messages}
 
     # Save parsed conversation for inspection
-    parsed_path = OUT_DIR / 'parsed_conversation.json'
-    parsed_path.write_text(json.dumps(
-        convo, ensure_ascii=False, indent=2), encoding='utf-8')
+    parsed_path = OUT_DIR / "parsed_conversation.json"
+    parsed_path.write_text(json.dumps(convo, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Parsed conversation saved to {parsed_path}")
 
     # Run learner
     learning_results = learn_from_conversation_data(convo)
 
     # Save learning results
-    results_path = OUT_DIR / 'learning_results.json'
-    results_path.write_text(json.dumps(
-        learning_results, ensure_ascii=False, indent=2), encoding='utf-8')
+    results_path = OUT_DIR / "learning_results.json"
+    results_path.write_text(json.dumps(learning_results, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Learning results written to {results_path}")
 
     # Print concise insights
@@ -112,5 +117,5 @@ def main():
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     raise SystemExit(main())

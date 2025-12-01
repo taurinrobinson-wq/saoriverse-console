@@ -5,13 +5,12 @@ Usage: python3 scripts/find_candidate_glyphs.py
 
 Prints top candidates for each missing curated entry using substring matching and difflib.
 """
-import os
-import sqlite3
-import re
 import difflib
+import os
+import re
+import sqlite3
 
-DB_PATH = os.path.normpath(os.path.join(os.path.dirname(
-    __file__), '..', 'emotional_os', 'glyphs', 'glyphs.db'))
+DB_PATH = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "emotional_os", "glyphs", "glyphs.db"))
 
 MISSING = [
     "Resonance fragments without system...",
@@ -30,8 +29,8 @@ def tokens(s):
 
 def score_match(missing_tokens, glyph_name, description):
     # simple token overlap score
-    gn = (glyph_name or '').lower()
-    desc = (description or '').lower()
+    gn = (glyph_name or "").lower()
+    desc = (description or "").lower()
     score = 0
     for t in set(missing_tokens):
         if t in gn:
@@ -51,24 +50,21 @@ def main():
 
     cur.execute("SELECT rowid, glyph_name, description FROM glyph_lexicon")
     rows = cur.fetchall()
-    glyphs = [{'rowid': r[0], 'glyph_name': r[1] or '',
-               'description': r[2] or ''} for r in rows]
+    glyphs = [{"rowid": r[0], "glyph_name": r[1] or "", "description": r[2] or ""} for r in rows]
 
-    all_names = [g['glyph_name'] for g in glyphs]
+    all_names = [g["glyph_name"] for g in glyphs]
 
     for missing in MISSING:
-        print('\n=== Candidates for:')
+        print("\n=== Candidates for:")
         print(missing)
         m_tokens = tokens(missing)
         candidates = []
         for g in glyphs:
-            s = score_match(m_tokens, g['glyph_name'], g['description'])
-            candidates.append(
-                (s, g['glyph_name'], g['description'], g['rowid']))
+            s = score_match(m_tokens, g["glyph_name"], g["description"])
+            candidates.append((s, g["glyph_name"], g["description"], g["rowid"]))
 
         # add difflib close matches to boost
-        close = difflib.get_close_matches(
-            missing, all_names, n=10, cutoff=0.55)
+        close = difflib.get_close_matches(missing, all_names, n=10, cutoff=0.55)
         close_set = set(close)
 
         # sort by score then whether in close_set
@@ -83,25 +79,24 @@ def main():
             if name in seen:
                 continue
             seen.add(name)
-            marker = ''
+            marker = ""
             if name in close_set:
-                marker = ' (difflib-close)'
+                marker = " (difflib-close)"
             if s == 0 and name not in close_set:
                 # skip low-relevance unless we have very few candidates shown
                 continue
-            snippet = (
-                desc[:120] + '...') if desc and len(desc) > 120 else desc
+            snippet = (desc[:120] + "...") if desc and len(desc) > 120 else desc
             print(f" - rowid={rid} score={s}{marker} | {name} | {snippet}")
             shown += 1
 
         # if we had no token-score hits, show pure difflib suggestions
         if shown == 0 and close:
-            print('\n  difflib suggestions:')
+            print("\n  difflib suggestions:")
             for c in close:
                 print(f"   - {c}")
 
     conn.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

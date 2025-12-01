@@ -13,6 +13,7 @@ from ritual_capsule_processor import GlyphObject, RitualCapsuleProcessor
 
 logger = logging.getLogger(__name__)
 
+
 class EnhancedRitualProcessor(RitualCapsuleProcessor):
     """Enhanced processor for structured glyph data"""
 
@@ -22,7 +23,7 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
 
         # Look for glyph entries in structured format
         # Pattern: glyph name followed by description and metadata (escape special chars)
-        glyph_blocks = re.split(r'\n\s*(?=\d+\.|[A-Z][a-z]+(?: [A-Z][a-z]+)*\s*[:—−\-])', text)
+        glyph_blocks = re.split(r"\n\s*(?=\d+\.|[A-Z][a-z]+(?: [A-Z][a-z]+)*\s*[:—−\-])", text)
 
         for block in glyph_blocks:
             if len(block.strip()) < 20:  # Skip short blocks
@@ -36,7 +37,7 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
 
     def parse_ledger_block(self, block: str) -> Optional[GlyphObject]:
         """Parse individual glyph block from ledger"""
-        lines = [line.strip() for line in block.split('\n') if line.strip()]
+        lines = [line.strip() for line in block.split("\n") if line.strip()]
 
         if not lines:
             return None
@@ -47,12 +48,12 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
         first_line = lines[0]
 
         # Extract name (remove numbers, colons, em-dashes)
-        name_match = re.match(r'(?:\d+\.?\s*)?([^:—−\-]+)(?:[:—−\-].*)?', first_line)
+        name_match = re.match(r"(?:\d+\.?\s*)?([^:—−\-]+)(?:[:—−\-].*)?", first_line)
         if name_match:
             glyph.name = name_match.group(1).strip()
 
         # Join all lines for full text analysis
-        full_text = ' '.join(lines)
+        full_text = " ".join(lines)
 
         # Parse content
         glyph.emotional_signals = self.parse_emotional_signals(full_text)
@@ -82,18 +83,18 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
 
         # Skip the first line (name), look for substantive content
         for line in lines[1:]:
-            if len(line) > 20 and not line.startswith(('Category:', 'Gate:', 'Voltage:')):
+            if len(line) > 20 and not line.startswith(("Category:", "Gate:", "Voltage:")):
                 return line
 
         # Fallback: join all lines except first
-        return ' '.join(lines[1:])
+        return " ".join(lines[1:])
 
     def parse_json_export(self, text: str) -> list[GlyphObject]:
         """Parse JSON export format"""
         glyphs = []
 
         # Try to find JSON blocks
-        json_blocks = re.findall(r'\{[^{}]*\}', text, re.MULTILINE | re.DOTALL)
+        json_blocks = re.findall(r"\{[^{}]*\}", text, re.MULTILINE | re.DOTALL)
 
         for block in json_blocks:
             try:
@@ -115,10 +116,10 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
         glyph = GlyphObject()
 
         # Map common JSON fields
-        glyph.name = data.get('name') or data.get('glyph_name') or data.get('title')
-        glyph.description = data.get('description') or data.get('content') or data.get('text')
-        glyph.category = data.get('category') or data.get('type')
-        glyph.voltage_pair = data.get('voltage_pair') or data.get('voltage')
+        glyph.name = data.get("name") or data.get("glyph_name") or data.get("title")
+        glyph.description = data.get("description") or data.get("content") or data.get("text")
+        glyph.category = data.get("category") or data.get("type")
+        glyph.voltage_pair = data.get("voltage_pair") or data.get("voltage")
 
         # Extract signals from various fields
         signals_text = f"{glyph.name or ''} {glyph.description or ''}"
@@ -143,27 +144,27 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
         glyphs = []
 
         # Split on patterns that indicate new glyphs (escape special chars properly)
-        sections = re.split(r'\n\s*(?=[A-Z][^.]*(?::|—|−|[\-]|\n))', text)
+        sections = re.split(r"\n\s*(?=[A-Z][^.]*(?::|—|−|[\-]|\n))", text)
 
         for section in sections:
             if len(section.strip()) < 30:  # Skip short sections
                 continue
 
             glyph = GlyphObject()
-            lines = [line.strip() for line in section.split('\n') if line.strip()]
+            lines = [line.strip() for line in section.split("\n") if line.strip()]
 
             if not lines:
                 continue
 
             # Extract name from first line
             first_line = lines[0]
-            name_match = re.match(r'^([^:—−\-\n]+)', first_line)
+            name_match = re.match(r"^([^:—−\-\n]+)", first_line)
             if name_match:
                 glyph.name = name_match.group(1).strip()
 
             # Use rest as description
             if len(lines) > 1:
-                glyph.description = ' '.join(lines[1:])[:300]
+                glyph.description = " ".join(lines[1:])[:300]
             else:
                 glyph.description = first_line
 
@@ -196,11 +197,11 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
         # Determine file type and use appropriate parser
         filename_lower = file_path.name.lower()
 
-        if 'master' in filename_lower or 'ledger' in filename_lower:
+        if "master" in filename_lower or "ledger" in filename_lower:
             glyphs = self.parse_master_ledger(text)
-        elif 'json' in filename_lower:
+        elif "json" in filename_lower:
             glyphs = self.parse_json_export(text)
-        elif 'fallback' in filename_lower or 'protocol' in filename_lower:
+        elif "fallback" in filename_lower or "protocol" in filename_lower:
             glyphs = self.parse_structured_text(text)
         else:
             # Default structured parsing
@@ -209,7 +210,7 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
         # Set lineage for all glyphs
         for glyph in glyphs:
             glyph.origin_file = file_path.name
-            glyph.timestamp = glyph.timestamp or self.parse_lineage(text, file_path)['timestamp']
+            glyph.timestamp = glyph.timestamp or self.parse_lineage(text, file_path)["timestamp"]
 
         logger.info(f"Extracted {len(glyphs)} glyphs from {file_path.name}")
         return glyphs
@@ -218,17 +219,11 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
         """Enhanced processing workflow that handles multiple glyphs per file"""
         logger.info("🔮 Beginning enhanced ritual capsule processing...")
 
-        stats = {
-            'files_found': 0,
-            'glyphs_created': 0,
-            'glyphs_saved': 0,
-            'files_processed': 0,
-            'errors': 0
-        }
+        stats = {"files_found": 0, "glyphs_created": 0, "glyphs_saved": 0, "files_processed": 0, "errors": 0}
 
         # Scan for files
         files_to_process = self.scan_for_new_files()
-        stats['files_found'] = len(files_to_process)
+        stats["files_found"] = len(files_to_process)
 
         if not files_to_process:
             logger.info("No new ritual capsules found")
@@ -240,14 +235,14 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
                 # Parse file into multiple glyphs
                 glyphs = self.parse_file_into_glyphs(file_path)
 
-                stats['glyphs_created'] += len(glyphs)
+                stats["glyphs_created"] += len(glyphs)
 
                 # Save each glyph
                 saved_count = 0
                 for glyph in glyphs:
                     if self.save_glyph_to_database(glyph):
                         saved_count += 1
-                        stats['glyphs_saved'] += 1
+                        stats["glyphs_saved"] += 1
 
                     # Archive as JSON
                     self.save_glyph_json(glyph)
@@ -255,19 +250,22 @@ class EnhancedRitualProcessor(RitualCapsuleProcessor):
                 # Move file only if we successfully processed some glyphs
                 if saved_count > 0:
                     if self.move_to_processed(file_path):
-                        stats['files_processed'] += 1
+                        stats["files_processed"] += 1
                 else:
                     logger.warning(f"No glyphs saved from {file_path.name}")
-                    stats['errors'] += 1
+                    stats["errors"] += 1
 
             except Exception as e:
                 logger.error(f"Error processing {file_path}: {e}")
-                stats['errors'] += 1
+                stats["errors"] += 1
 
         # Log summary
-        logger.info(f"✨ Enhanced processing complete: {stats['glyphs_saved']} glyphs saved from {stats['files_processed']} files")
+        logger.info(
+            f"✨ Enhanced processing complete: {stats['glyphs_saved']} glyphs saved from {stats['files_processed']} files"
+        )
 
         return stats
+
 
 def main():
     """Run enhanced ritual capsule processor"""
@@ -280,6 +278,7 @@ def main():
     print(f"   Glyphs saved: {results['glyphs_saved']}")
     print(f"   Files processed: {results['files_processed']}")
     print(f"   Errors: {results['errors']}")
+
 
 if __name__ == "__main__":
     main()

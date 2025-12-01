@@ -12,8 +12,9 @@ def similarity(a, b):
     """Calculate similarity between two strings"""
     return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
+
 def analyze_redundancy():
-    conn = sqlite3.connect('emotional_os/glyphs/glyphs.db')
+    conn = sqlite3.connect("emotional_os/glyphs/glyphs.db")
     cursor = conn.cursor()
 
     # Get all glyphs
@@ -30,9 +31,25 @@ def analyze_redundancy():
         # Extract key emotional words
         words = name.lower().split()
         for word in words:
-            if word in ['ache', 'grief', 'mourning', 'joy', 'yearning', 'longing',
-                       'stillness', 'recognition', 'devotion', 'spiral', 'recursive',
-                       'contained', 'boundary', 'ecstasy', 'bliss', 'tender', 'reverent']:
+            if word in [
+                "ache",
+                "grief",
+                "mourning",
+                "joy",
+                "yearning",
+                "longing",
+                "stillness",
+                "recognition",
+                "devotion",
+                "spiral",
+                "recursive",
+                "contained",
+                "boundary",
+                "ecstasy",
+                "bliss",
+                "tender",
+                "reverent",
+            ]:
                 keyword_groups[word].append((id, name, gate, desc[:50] + "..."))
 
     print("\n=== KEYWORD FREQUENCY ANALYSIS ===")
@@ -52,7 +69,7 @@ def analyze_redundancy():
     print("\n=== SIMILAR GLYPH NAMES (>80% similarity) ===")
     similar_pairs = []
     for i, glyph1 in enumerate(glyphs):
-        for j, glyph2 in enumerate(glyphs[i+1:], i+1):
+        for j, glyph2 in enumerate(glyphs[i + 1 :], i + 1):
             id1, name1, desc1, gate1 = glyph1
             id2, name2, desc2, gate2 = glyph2
 
@@ -82,17 +99,17 @@ def analyze_redundancy():
         id, name, desc, gate = glyph
         # Create a key based on main theme + gate
         name_lower = name.lower()
-        if 'ache' in name_lower and 'grief' in name_lower:
+        if "ache" in name_lower and "grief" in name_lower:
             key = f"{gate}_ache_grief"
-        elif 'joy' in name_lower and 'stillness' in name_lower:
+        elif "joy" in name_lower and "stillness" in name_lower:
             key = f"{gate}_joy_stillness"
-        elif 'recognition' in name_lower:
+        elif "recognition" in name_lower:
             key = f"{gate}_recognition"
-        elif 'mourning' in name_lower:
+        elif "mourning" in name_lower:
             key = f"{gate}_mourning"
-        elif 'recursive' in name_lower:
+        elif "recursive" in name_lower:
             key = f"{gate}_recursive"
-        elif 'devotional' in name_lower or 'devotion' in name_lower:
+        elif "devotional" in name_lower or "devotion" in name_lower:
             key = f"{gate}_devotion"
         else:
             continue
@@ -101,12 +118,13 @@ def analyze_redundancy():
 
     for key, group in consolidation_groups.items():
         if len(group) > 2:  # Groups with 3+ similar glyphs
-            gate, theme = key.split('_', 1)
+            gate, theme = key.split("_", 1)
             print(f"\n{theme.upper()} in {gate}: {len(group)} candidates")
             for id, name, desc in group:
                 print(f"    {name}: {desc}")
 
     conn.close()
+
 
 if __name__ == "__main__":
     analyze_redundancy()

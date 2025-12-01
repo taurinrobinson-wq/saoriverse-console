@@ -75,8 +75,22 @@ class SemanticEngine:
 
         similar_words = []
         common_words = [
-            "happy", "sad", "angry", "fear", "love", "hate", "trust", "disgust",
-            "joy", "sorrow", "peace", "chaos", "calm", "anxious", "grateful", "resentful"
+            "happy",
+            "sad",
+            "angry",
+            "fear",
+            "love",
+            "hate",
+            "trust",
+            "disgust",
+            "joy",
+            "sorrow",
+            "peace",
+            "chaos",
+            "calm",
+            "anxious",
+            "grateful",
+            "resentful",
         ]
 
         for other_word in common_words:
@@ -110,12 +124,7 @@ class SemanticEngine:
         doc = self.nlp(text)
         deps = []
         for token in doc:
-            deps.append({
-                "text": token.text,
-                "pos": token.pos_,
-                "dep": token.dep_,
-                "head": token.head.text
-            })
+            deps.append({"text": token.text, "pos": token.pos_, "dep": token.dep_, "head": token.head.text})
         return deps
 
     def analyze_emotional_language(self, text: str) -> Dict:
@@ -126,7 +135,7 @@ class SemanticEngine:
             "adjectives": self.extract_adjectives(text),
             "verbs": self.extract_verbs(text),
             "pos_tags": self.get_pos_tags(text),
-            "tokens": self.tokenize(text)
+            "tokens": self.tokenize(text),
         }
 
 

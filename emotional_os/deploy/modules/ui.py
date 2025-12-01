@@ -1,9 +1,9 @@
 import datetime
 import json
 import logging
+import os
 import time
 import uuid
-import os
 
 try:
     import requests
@@ -58,8 +58,7 @@ def _load_inline_svg(filename: str) -> str:
         return _SVG_CACHE[filename]
 
     # Try package-local graphics folder first, then repo-root static/graphics
-    pkg_path = os.path.join(os.path.dirname(__file__),
-                            "static", "graphics", filename)
+    pkg_path = os.path.join(os.path.dirname(__file__), "static", "graphics", filename)
     repo_path = os.path.join("static", "graphics", filename)
     tried_path = None
     try:
@@ -74,12 +73,12 @@ def _load_inline_svg(filename: str) -> str:
         # Read the SVG file and sanitize/remove XML declaration or DOCTYPE
         with open(tried_path, "r", encoding="utf-8") as f:
             svg = f.read()
-        if svg.lstrip().startswith('<?xml'):
-            svg = '\n'.join(svg.splitlines()[1:])
-        if '<!DOCTYPE' in svg:
-            parts = svg.split('<!DOCTYPE')
-            if len(parts) > 1 and '>' in parts[1]:
-                svg = parts[0] + parts[1].split('>', 1)[1]
+        if svg.lstrip().startswith("<?xml"):
+            svg = "\n".join(svg.splitlines()[1:])
+        if "<!DOCTYPE" in svg:
+            parts = svg.split("<!DOCTYPE")
+            if len(parts) > 1 and ">" in parts[1]:
+                svg = parts[0] + parts[1].split(">", 1)[1]
 
         # Cache and return raw markup only (no Streamlit calls here)
         _SVG_CACHE[filename] = svg
@@ -117,7 +116,7 @@ def inject_css(css_path: str) -> None:
         if not chosen:
             return
 
-        with open(chosen, 'r', encoding='utf-8') as f:
+        with open(chosen, "r", encoding="utf-8") as f:
             css = f.read()
 
         # Inline any @import rules that reference local CSS files to
@@ -129,22 +128,22 @@ def inject_css(css_path: str) -> None:
 
             def _inline_imports(base_path: str, css_text: str) -> str:
                 def _repl(m):
-                    imp = m.group(1).strip('"\'')
+                    imp = m.group(1).strip("\"'")
                     # Resolve relative to base_path
                     base_dir = os.path.dirname(base_path)
                     candidate = os.path.join(base_dir, imp)
                     if os.path.exists(candidate):
                         try:
-                            return '\n' + open(candidate, 'r', encoding='utf-8').read() + '\n'
+                            return "\n" + open(candidate, "r", encoding="utf-8").read() + "\n"
                         except Exception:
-                            return ''
+                            return ""
                     # Try repo-root fallback
                     if os.path.exists(imp):
                         try:
-                            return '\n' + open(imp, 'r', encoding='utf-8').read() + '\n'
+                            return "\n" + open(imp, "r", encoding="utf-8").read() + "\n"
                         except Exception:
-                            return ''
-                    return ''
+                            return ""
+                    return ""
 
                 return re.sub(r"@import\s+url\(['\"]?(.*?)['\"]?\);", _repl, css_text)
 
@@ -163,6 +162,7 @@ def inject_css(css_path: str) -> None:
         try:
             # Use json.dumps to safely encode the CSS into a JS string literal
             import json as _json
+
             _css_js = _json.dumps(css)
             safe_block = (
                 "<script>\n"
@@ -185,7 +185,7 @@ def inject_css(css_path: str) -> None:
             st.markdown(safe_block, unsafe_allow_html=True)
         except Exception:
             # Fallback to the simple style injection if the script construction fails
-            safe_block = f"<style id=\"fp-theme-css\">\n{css}\n</style>"
+            safe_block = f'<style id="fp-theme-css">\n{css}\n</style>'
             try:
                 st.markdown(safe_block, unsafe_allow_html=True)
             except Exception:
@@ -202,10 +202,9 @@ def render_controls_row(conversation_key):
         # interactive controls for changing this are in the Settings
         # sidebar expander (so both demo and authenticated flows show
         # a single, consistent place for preferences).
-        if 'processing_mode' not in st.session_state:
+        if "processing_mode" not in st.session_state:
             # Enforce local-only processing by default (no hybrid/remote AI)
-            st.session_state.processing_mode = os.getenv(
-                'DEFAULT_PROCESSING_MODE', 'local')
+            st.session_state.processing_mode = os.getenv("DEFAULT_PROCESSING_MODE", "local")
 
         # The interactive controls for changing processing mode are
         # rendered in the sidebar Settings panel. Keep this top-row
@@ -218,7 +217,7 @@ def render_controls_row(conversation_key):
         # Place Start Personal Log in the far-left column per layout request
         # Only show personal-log control when the user is authenticated
         try:
-            if st.session_state.get('authenticated'):
+            if st.session_state.get("authenticated"):
                 if st.button("Start Personal Log", key="start_log_btn"):
                     st.session_state.show_personal_log = True
                     st.rerun()
@@ -228,14 +227,15 @@ def render_controls_row(conversation_key):
     with controls[1]:
         # Theme selection lives in the Settings sidebar expander; avoid
         # rendering inline theme captions here to reduce visual clutter.
-        current_theme = st.session_state.get('theme', 'Light')
+        current_theme = st.session_state.get("theme", "Light")
         # Place Logout in the adjacent (controls[1]) column so it sits
         # immediately to the right of the Start Personal Log button.
         # Only show Logout when authenticated
         try:
-            if st.session_state.get('authenticated'):
+            if st.session_state.get("authenticated"):
                 if st.button("Logout", key="controls_logout", help="Sign out of your account"):
                     from .auth import SaoynxAuthentication
+
                     auth = SaoynxAuthentication()
                     auth.logout()
         except Exception:
@@ -260,19 +260,18 @@ def render_controls_row(conversation_key):
 
 def ensure_processing_prefs():
     """Normalize legacy processing preferences and ensure keys exist in session_state."""
-    if 'processing_mode' in st.session_state and st.session_state.processing_mode == 'ai_preferred':
+    if "processing_mode" in st.session_state and st.session_state.processing_mode == "ai_preferred":
         # Map legacy ai_preferred to local-only to avoid enabling remote AI
-        st.session_state.processing_mode = 'local'
-        st.session_state['prefer_ai'] = False
+        st.session_state.processing_mode = "local"
+        st.session_state["prefer_ai"] = False
 
-    if 'processing_mode' not in st.session_state:
+    if "processing_mode" not in st.session_state:
         # Default to all-local processing model
-        st.session_state.processing_mode = os.getenv(
-            'DEFAULT_PROCESSING_MODE', 'local')
+        st.session_state.processing_mode = os.getenv("DEFAULT_PROCESSING_MODE", "local")
 
     # Remote AI is not preferred in the local-only architecture
-    if 'prefer_ai' not in st.session_state:
-        st.session_state['prefer_ai'] = False
+    if "prefer_ai" not in st.session_state:
+        st.session_state["prefer_ai"] = False
 
 
 def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
@@ -310,8 +309,7 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         ai_voltage = ai_local.get("voltage_response", "")
         ai_glyphs = ai_local.get("glyphs", [])
         ai_best = ai_local.get("best_glyph")
-        ai_glyph_display = ai_best['glyph_name'] if ai_best else (
-            ai_glyphs[0]['glyph_name'] if ai_glyphs else 'None')
+        ai_glyph_display = ai_best["glyph_name"] if ai_best else (ai_glyphs[0]["glyph_name"] if ai_glyphs else "None")
         # Post-process the AI reply so that short/generic fallbacks are
         # more varied and opening lines aren't duplicated. This keeps the
         # user-facing reply natural while preserving the local analysis in
@@ -325,8 +323,8 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         except Exception:
             # Local fallback if the util cannot be imported for any reason.
             def polish_ai_reply(text: str) -> str:
-                t = (text or '').strip()
-                parts = [p.strip() for p in t.split('\n') if p.strip()]
+                t = (text or "").strip()
+                parts = [p.strip() for p in t.split("\n") if p.strip()]
                 if len(parts) > 1 and all(p == parts[0] for p in parts):
                     t = parts[0]
                 return t
@@ -339,20 +337,17 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         # `FP_SHOW_LOCAL_DECODING=1` or set the session flag
         # `st.session_state['show_local_decoding'] = True` to reveal this
         # additional diagnostic information for developers.
-        # Determine whether to show local decoding annotations. Prefer the
-        # environment variable flag; otherwise consult Streamlit session
-        # state when available. Callers may override this by setting the
-        # `show_local` variable in a wrapper prior to invoking
-        # `decode_ai_reply`.
-        show_local = _get_show_local(None)
+        try:
+            show_local = os.environ.get("FP_SHOW_LOCAL_DECODING") == "1" or st.session_state.get(
+                "show_local_decoding", False
+            )
+        except Exception:
+            show_local = False
 
         if show_local:
             # Keep debug annotations compact and bracketed so they don't
             # interrupt the primary reply flow if accidentally enabled.
-            composed = (
-                f"{polished}\n\n"
-                f"[Local decoding: {ai_voltage} | Resonant Glyph: {ai_glyph_display}]"
-            )
+            composed = f"{polished}\n\n" f"[Local decoding: {ai_voltage} | Resonant Glyph: {ai_glyph_display}]"
         else:
             # Default: return the polished AI reply without local debug
             # annotations so the user sees a concise, human-friendly
@@ -360,11 +355,11 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
             composed = polished
 
         debug = {
-            'signals': ai_local.get('signals', []),
-            'gates': ai_local.get('gates', []),
-            'glyphs': ai_glyphs,
-            'debug_sql': ai_local.get('debug_sql', ''),
-            'debug_glyph_rows': ai_local.get('debug_glyph_rows', [])
+            "signals": ai_local.get("signals", []),
+            "gates": ai_local.get("gates", []),
+            "glyphs": ai_glyphs,
+            "debug_sql": ai_local.get("debug_sql", ""),
+            "debug_glyph_rows": ai_local.get("debug_glyph_rows", []),
         }
         return composed, debug
     except Exception:
@@ -378,15 +373,19 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     """
     try:
         from emotional_os.glyphs.signal_parser import parse_input
-        local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
-                                     db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
+
+        local_analysis = parse_input(
+            effective_input,
+            "emotional_os/parser/signal_lexicon.json",
+            db_path="emotional_os/glyphs/glyphs.db",
+            conversation_context=conversation_context,
+        )
     except Exception:
         local_analysis = {}
 
-    # Local analysis and helper values
-    glyphs = local_analysis.get('glyphs', [])
-    voltage_response = local_analysis.get('voltage_response', '')
-    ritual_prompt = local_analysis.get('ritual_prompt', '')
+    glyphs = local_analysis.get("glyphs", [])
+    voltage_response = local_analysis.get("voltage_response", "")
+    ritual_prompt = local_analysis.get("ritual_prompt", "")
 
     # Use a shared session helper so callers (FastAPI) can pass a simple
     # `session_state_override` while Streamlit continues to use its
@@ -410,7 +409,7 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
                     return default
 
     # Force AI service failure for local testing (set LOCAL_DEV_MODE=1 in environment)
-    if os.environ.get('LOCAL_DEV_MODE') == '1':
+    if os.environ.get("LOCAL_DEV_MODE") == "1":
         # Simulate a 401 HTTP error to test our improved fallback messages
         class MockResponse:
             status_code = 401
@@ -422,9 +421,9 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # This will trigger our improved fallback logic
         try:
             body = mock_response.json()
-            ai_reply = body.get('reply') or body.get('error') or ''
+            ai_reply = body.get("reply") or body.get("error") or ""
         except Exception:
-            ai_reply = ''
+            ai_reply = ""
 
         if ai_reply:
             composed, debug = decode_ai_reply(ai_reply, conversation_context)
@@ -434,11 +433,15 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # is unavailable. Fall back to a compact local-analysis string if
         # the composer cannot be imported or glyphs are not present.
         try:
-            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            from emotional_os.glyphs.dynamic_response_composer import (
+                DynamicResponseComposer,
+            )
+
             composer = DynamicResponseComposer()
             if glyphs:
                 response_text = composer.compose_multi_glyph_response(
-                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5
+                )
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
         except Exception:
@@ -451,20 +454,23 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # Ensure callers can detect that AI enhancement was not available
         # when we produced a local fallback response.
         try:
-            if isinstance(response_text, str) and '(AI enhancement' not in response_text:
-                response_text = response_text + \
-                    "\n\n(AI enhancement unavailable)"
+            if isinstance(response_text, str) and "(AI enhancement" not in response_text:
+                response_text = response_text + "\n\n(AI enhancement unavailable)"
         except Exception:
             pass
         return response_text, {}, local_analysis
 
     if not saori_url or not supabase_key:
         try:
-            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            from emotional_os.glyphs.dynamic_response_composer import (
+                DynamicResponseComposer,
+            )
+
             composer = DynamicResponseComposer()
             if glyphs:
                 response_text = composer.compose_multi_glyph_response(
-                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5
+                )
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
         except Exception:
@@ -472,41 +478,42 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # Ensure the local-only branch appends a clear marker so callers
         # and tests can detect that AI enhancement was not used.
         try:
-            if isinstance(response_text, str) and '(AI enhancement' not in response_text and "I'm listening" not in response_text:
-                response_text = response_text + \
-                    "\n\n(AI enhancement unavailable)"
+            if (
+                isinstance(response_text, str)
+                and "(AI enhancement" not in response_text
+                and "I'm listening" not in response_text
+            ):
+                response_text = response_text + "\n\n(AI enhancement unavailable)"
         except Exception:
             pass
         return response_text, {}, local_analysis
 
     payload = {
         "message": effective_input,
-        # Use session override when available, otherwise fall back to
-        # the Streamlit session default. This ensures API callers can
-        # pass processing preferences explicitly.
-        "mode": get_session_value(session_state_override, 'processing_mode', os.getenv('DEFAULT_PROCESSING_MODE', 'local')),
-        "user_id": get_session_value(session_state_override, 'user_id', None),
+        "mode": st.session_state.get("processing_mode", "local"),
+        "user_id": st.session_state.user_id,
         "local_voltage_response": voltage_response,
-        "local_glyphs": ', '.join([g.get('glyph_name', '') for g in glyphs]) if glyphs else '',
-        "local_ritual_prompt": ritual_prompt
+        "local_glyphs": ", ".join([g.get("glyph_name", "") for g in glyphs]) if glyphs else "",
+        "local_ritual_prompt": ritual_prompt,
     }
     try:
         response_data = requests.post(
             saori_url,
-            headers={
-                "Authorization": f"Bearer {supabase_key}",
-                "Content-Type": "application/json"
-            },
+            headers={"Authorization": f"Bearer {supabase_key}", "Content-Type": "application/json"},
             json=payload,
-            timeout=15
+            timeout=15,
         )
     except Exception:
         try:
-            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            from emotional_os.glyphs.dynamic_response_composer import (
+                DynamicResponseComposer,
+            )
+
             composer = DynamicResponseComposer()
             if glyphs:
                 response_text = composer.compose_multi_glyph_response(
-                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5
+                )
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
         except Exception:
@@ -522,9 +529,9 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # user still receives useful feedback rather than a generic error.
         try:
             body = response_data.json()
-            ai_reply = body.get('reply') or body.get('error') or ''
+            ai_reply = body.get("reply") or body.get("error") or ""
         except Exception:
-            ai_reply = (getattr(response_data, 'text', '') or '').strip()
+            ai_reply = (getattr(response_data, "text", "") or "").strip()
 
         if ai_reply:
             composed, debug = decode_ai_reply(ai_reply, conversation_context)
@@ -533,11 +540,15 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # Final fallback: include HTTP status and local parsing summary.
         # Prefer a composed local response when possible
         try:
-            from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+            from emotional_os.glyphs.dynamic_response_composer import (
+                DynamicResponseComposer,
+            )
+
             composer = DynamicResponseComposer()
             if glyphs:
                 response_text = composer.compose_multi_glyph_response(
-                    effective_input, glyphs, conversation_context=conversation_context, top_n=5)
+                    effective_input, glyphs, conversation_context=conversation_context, top_n=5
+                )
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
         except Exception:
@@ -550,10 +561,11 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         return response_text, {}, local_analysis
 
     result = response_data.json()
-    ai_reply = result.get('reply', "I'm here to listen.")
+    ai_reply = result.get("reply", "I'm here to listen.")
 
     composed, debug = decode_ai_reply(ai_reply, conversation_context)
     return composed, debug, local_analysis
+
 
 # Data management functions
 
@@ -579,21 +591,20 @@ def render_settings_sidebar():
             try:
                 st.markdown("**Processing:** Local-only (remote AI disabled)")
                 # Ensure session_state reflects the enforced value
-                st.session_state['processing_mode'] = 'local'
+                st.session_state["processing_mode"] = "local"
             except Exception:
-                st.session_state.setdefault('processing_mode', 'local')
+                st.session_state.setdefault("processing_mode", "local")
 
             # Theme selection — mirrors to both legacy 'theme' and
             # 'theme_select_row' used elsewhere in the UI.
-            current_theme = st.session_state.get(
-                'theme_select_row', st.session_state.get('theme', 'Light'))
+            current_theme = st.session_state.get("theme_select_row", st.session_state.get("theme", "Light"))
             try:
+
                 def _on_theme_change():
                     # Mirror selection into legacy key and force a clean rerun
                     try:
-                        st.session_state['theme'] = st.session_state.get(
-                            'theme_select_row', current_theme)
-                        st.session_state['theme_loaded'] = False
+                        st.session_state["theme"] = st.session_state.get("theme_select_row", current_theme)
+                        st.session_state["theme_loaded"] = False
                     except Exception:
                         pass
                     try:
@@ -604,20 +615,19 @@ def render_settings_sidebar():
                 st.selectbox(
                     "Theme",
                     options=["Light", "Dark"],
-                    index=0 if current_theme == 'Light' else 1,
-                    key='theme_select_row',
-                    help='Choose the UI theme (Light or Dark)',
-                    on_change=_on_theme_change
+                    index=0 if current_theme == "Light" else 1,
+                    key="theme_select_row",
+                    help="Choose the UI theme (Light or Dark)",
+                    on_change=_on_theme_change,
                 )
             except Exception:
-                st.session_state.setdefault('theme_select_row', current_theme)
+                st.session_state.setdefault("theme_select_row", current_theme)
 
             # Mirror theme into the older 'theme' key so other modules are
             # consistent regardless of which key they consult.
-            st.session_state['theme'] = st.session_state.get(
-                'theme_select_row', 'Light')
+            st.session_state["theme"] = st.session_state.get("theme_select_row", "Light")
             # Mark theme as not loaded so CSS will be re-injected on next render
-            st.session_state['theme_loaded'] = False
+            st.session_state["theme_loaded"] = False
     except Exception:
         # Best-effort: don't break the app if sidebar rendering fails
         return
@@ -651,9 +661,9 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
             headers={
                 "Authorization": f"Bearer {supabase_key}",
                 "Content-Type": "application/json",
-                "Prefer": "return=minimal"
+                "Prefer": "return=minimal",
             },
-            timeout=10
+            timeout=10,
         )
 
         if response.status_code in [200, 204, 404]:
@@ -662,6 +672,7 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
             return False, f"Failed to delete history (HTTP {response.status_code})."
     except Exception as e:
         return False, f"Error deleting history: {str(e)}"
+
 
 # UI rendering functions
 
@@ -697,49 +708,50 @@ def render_splash_interface(auth):
         with st.container():
             try:
                 # Try to show image from static folder first
-                repo_graphics_path = os.path.join(
-                    'static', 'graphics', 'FirstPerson-Logo-invert-cropped_notext.svg')
+                repo_graphics_path = os.path.join("static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg")
                 if os.path.exists(repo_graphics_path):
                     try:
                         st.image(repo_graphics_path, width=68)
                     except Exception:
-                        svg_markup = _load_inline_svg(
-                            'FirstPerson-Logo-invert-cropped_notext.svg')
+                        svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
                         st.markdown(
-                            f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>", unsafe_allow_html=True)
+                            f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>",
+                            unsafe_allow_html=True,
+                        )
                 else:
-                    svg_markup = _load_inline_svg(
-                        'FirstPerson-Logo-invert-cropped_notext.svg')
+                    svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
                     if svg_markup:
                         st.markdown(
-                            f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>", unsafe_allow_html=True)
+                            f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>",
+                            unsafe_allow_html=True,
+                        )
             except Exception:
                 # Fallback emoji
                 try:
                     st.markdown(
-                        "<div style='display:inline-block;font-size:2rem;vertical-align:middle'>🧠</div>", unsafe_allow_html=True)
+                        "<div style='display:inline-block;font-size:2rem;vertical-align:middle'>🧠</div>",
+                        unsafe_allow_html=True,
+                    )
                 except Exception:
                     pass
 
             try:
                 st.markdown("# FirstPerson – Personal AI Companion")
-                st.markdown(
-                    "Your private space for emotional processing and growth")
+                st.markdown("Your private space for emotional processing and growth")
             except Exception:
                 pass
 
         # Conditional demo-mode banner for unauthenticated users
         try:
-            if not st.session_state.get('authenticated'):
+            if not st.session_state.get("authenticated"):
                 st.info(
-                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features."
+                )
             else:
                 # Welcome back block for authenticated users
-                uname = st.session_state.get(
-                    'username') or st.session_state.get('user_id')
+                uname = st.session_state.get("username") or st.session_state.get("user_id")
                 try:
-                    st.success(
-                        f"Welcome back{': ' + str(uname) if uname else ''}")
+                    st.success(f"Welcome back{': ' + str(uname) if uname else ''}")
                 except Exception:
                     pass
         except Exception:
@@ -772,7 +784,8 @@ def render_splash_interface(auth):
         pass
 
     # Add custom CSS for splash screen
-    st.markdown("""
+    st.markdown(
+        """
     <style>
     /* Reduce splash top margin so header and main content sit closer to the top */
     .splash-logo-container {
@@ -813,14 +826,15 @@ def render_splash_interface(auth):
         line-height: 1.5;
     }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Center everything in the page
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         # Logo and text container
-        st.markdown('<div class="splash-logo-container">',
-                    unsafe_allow_html=True)
+        st.markdown('<div class="splash-logo-container">', unsafe_allow_html=True)
 
         # (splash header removed - landing now uses the main header and auth controls)
 
@@ -832,8 +846,7 @@ def render_splash_interface(auth):
 
     # Prefer graphics stored under the package static folder so the asset
     # lives with the code. Fall back to repository-root `static/graphics`.
-    pkg_graphics_path = os.path.join(os.path.dirname(
-        __file__), "static", "graphics", logo_file)
+    pkg_graphics_path = os.path.join(os.path.dirname(__file__), "static", "graphics", logo_file)
     repo_graphics_path = os.path.join("static", "graphics", logo_file)
 
     static_path = f"/static/graphics/{logo_file}"
@@ -885,19 +898,20 @@ def render_splash_interface(auth):
             # the static file is not present). The loader already strips
             # problematic XML/DOCTYPE lines.
             svg_markup = _load_inline_svg(logo_file)
-            st.markdown(
-                f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
     except Exception:
-        st.markdown(
-            '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+        st.markdown('<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
 
         # Add title and subtitle
-        st.markdown("""
+        st.markdown(
+            """
             <div class="splash-title">Personal AI</div>
             <div class="splash-subtitle">Companion</div>
-        """, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # Make Sign In / Register actions obvious on the splash screen. Placing
     # these buttons here ensures the auth forms can be opened even when other
@@ -916,9 +930,9 @@ def render_splash_interface(auth):
         # Best-effort: if Streamlit UI isn't fully available, continue silently
         pass
 
-    if st.session_state.get('show_login', False):
+    if st.session_state.get("show_login", False):
         auth.render_login_form()
-    elif st.session_state.get('show_register', False):
+    elif st.session_state.get("show_register", False):
         auth.render_register_form()
     else:
         st.markdown('<div class="auth-container">', unsafe_allow_html=True)
@@ -928,7 +942,7 @@ def render_splash_interface(auth):
         # Logo already rendered above in the centered splash area. Skip
         # re-rendering it here to avoid duplicate icons showing on the
         # splash/login page; keep the auth container open for controls.
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_main_app():
@@ -939,15 +953,28 @@ def render_main_app():
     # we can see why the post-login view might be empty.
     try:
         import os as _os
-        if _os.environ.get('FP_DEBUG_UI') == '1':
+
+        if _os.environ.get("FP_DEBUG_UI") == "1":
             try:
-                with st.expander('DEBUG: session_state snapshot', expanded=True):
+                with st.expander("DEBUG: session_state snapshot", expanded=True):
                     _keys = [
-                        'authenticated', 'user_id', 'username', 'session_expires',
-                        'show_login', 'show_register', 'header_rendered', 'conversation_manager'
+                        "authenticated",
+                        "user_id",
+                        "username",
+                        "session_expires",
+                        "show_login",
+                        "show_register",
+                        "header_rendered",
+                        "conversation_manager",
                     ]
-                    _snap = {k: (st.session_state.get(k) if k != 'conversation_manager' else (
-                        'present' if st.session_state.get('conversation_manager') else 'none')) for k in _keys}
+                    _snap = {
+                        k: (
+                            st.session_state.get(k)
+                            if k != "conversation_manager"
+                            else ("present" if st.session_state.get("conversation_manager") else "none")
+                        )
+                        for k in _keys
+                    }
                     st.json(_snap)
             except Exception:
                 # Best-effort: do not break the main UI when debug overlay fails
@@ -1001,8 +1028,7 @@ def render_main_app():
     except Exception:
         pass
 
-
-# Top header temporarily removed (debugging client-side TypeError)
+    # Top header temporarily removed (debugging client-side TypeError)
     # Further defensive guards: patch common DOM lookup APIs and jQuery/$ factory
     # to tolerate unexpected argument types which can surface during theme
     # toggles or fast re-renders in the compiled frontend.
@@ -1010,8 +1036,7 @@ def render_main_app():
         # Removed aggressive client-side DOM overrides — Streamlit's frontend
         # can be sensitive to replacing core DOM APIs. Keep a minimal comment
         # in the page for traceability.
-        st.markdown('<!-- defensive DOM overrides removed -->',
-                    unsafe_allow_html=True)
+        st.markdown("<!-- defensive DOM overrides removed -->", unsafe_allow_html=True)
     except Exception:
         pass
     # Instrument unhandled client errors with an in-page overlay to help
@@ -1078,15 +1103,14 @@ def render_main_app():
     except Exception:
         pass
     # Skip header rendering if it's already been done
-    if not st.session_state.get('header_rendered'):
+    if not st.session_state.get("header_rendered"):
         # Render header with logo and title very close together
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
             try:
                 # Prefer package-local normalized logo if present
                 norm_file = "FirstPerson-Logo-normalized.svg"
-                pkg_norm = os.path.join(os.path.dirname(
-                    __file__), "static", "graphics", norm_file)
+                pkg_norm = os.path.join(os.path.dirname(__file__), "static", "graphics", norm_file)
                 repo_norm = os.path.join("static", "graphics", norm_file)
                 if os.path.exists(pkg_norm):
                     st.image(pkg_norm, width=24)
@@ -1096,10 +1120,14 @@ def render_main_app():
                     raise FileNotFoundError
             except Exception:
                 st.markdown(
-                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True
+                )
         with col2:
-            st.markdown('<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
-        st.session_state['header_rendered'] = True
+            st.markdown(
+                '<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">FirstPerson - Personal AI Companion</h1>',
+                unsafe_allow_html=True,
+            )
+        st.session_state["header_rendered"] = True
     # ------------------------------------------------------------------------
     # Demo-mode: if the user is not authenticated, provide a lightweight
     # demo experience so the main interface loads immediately. The sidebar
@@ -1108,27 +1136,28 @@ def render_main_app():
     # ------------------------------------------------------------------------
     try:
         from .auth import SaoynxAuthentication
+
         auth = SaoynxAuthentication()
     except Exception:
         # Best-effort: if auth isn't available, proceed in a limited demo mode
         auth = None
 
-    if not st.session_state.get('authenticated'):
+    if not st.session_state.get("authenticated"):
         # Ensure demo-mode session defaults exist so downstream code that
         # expects a user_id/username can run without branching everywhere.
-        st.session_state.setdefault('demo_mode', True)
+        st.session_state.setdefault("demo_mode", True)
         # Use a stable demo placeholder id so migration can find demo
         # conversations later when the user authenticates.
-        if 'demo_placeholder_id' not in st.session_state:
-            st.session_state['demo_placeholder_id'] = f"demo_{uuid.uuid4().hex[:8]}"
-        st.session_state.setdefault(
-            'user_id', st.session_state['demo_placeholder_id'])
-        st.session_state.setdefault('username', 'Demo User')
+        if "demo_placeholder_id" not in st.session_state:
+            st.session_state["demo_placeholder_id"] = f"demo_{uuid.uuid4().hex[:8]}"
+        st.session_state.setdefault("user_id", st.session_state["demo_placeholder_id"])
+        st.session_state.setdefault("username", "Demo User")
         # Informational banner for demo users and a small logo above it
         try:
             # Prefer package-local static SVG image for reliable rendering in VS Code/browser
-            pkg_logo = os.path.join(os.path.dirname(
-                __file__), "static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg")
+            pkg_logo = os.path.join(
+                os.path.dirname(__file__), "static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg"
+            )
             if os.path.exists(pkg_logo):
                 # Center the small logo above the demo info
                 c1, c2, c3 = st.columns([1, 0.6, 1])
@@ -1137,63 +1166,58 @@ def render_main_app():
                         st.image(pkg_logo, width=64)
                     except Exception:
                         # Fallback to inline SVG rendering if st.image fails
-                        svg_markup = _load_inline_svg(
-                            "FirstPerson-Logo-invert-cropped_notext.svg")
-                        st.markdown(
-                            f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
+                        svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
+                        st.markdown(f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
             else:
                 # Fallback: inline SVG if package file missing
-                svg_markup = _load_inline_svg(
-                    "FirstPerson-Logo-invert-cropped_notext.svg")
-                st.markdown(
-                    f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
+                svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
+                st.markdown(f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
 
             st.info(
-                "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+                "Running in demo mode — register or sign in in the sidebar to enable persistence and full features."
+            )
         except Exception:
             try:
                 st.info(
-                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features.")
+                    "Running in demo mode — register or sign in in the sidebar to enable persistence and full features."
+                )
             except Exception:
                 pass
     else:
         # Remove demo_mode flag when real user is authenticated
-        if 'demo_mode' in st.session_state:
-            del st.session_state['demo_mode']
+        if "demo_mode" in st.session_state:
+            del st.session_state["demo_mode"]
 
     # ============================================================================
     # Initialize Conversation Manager & Sidebar
     # ============================================================================
 
     # Initialize conversation manager for persistence
-    if ConversationManager and 'user_id' in st.session_state:
-        if 'conversation_manager' not in st.session_state:
-            st.session_state['conversation_manager'] = ConversationManager(
-                st.session_state['user_id'])
+    if ConversationManager and "user_id" in st.session_state:
+        if "conversation_manager" not in st.session_state:
+            st.session_state["conversation_manager"] = ConversationManager(st.session_state["user_id"])
             # Attempt to load user preferences (persist settings) from server
             try:
-                mgr = st.session_state.get('conversation_manager')
+                mgr = st.session_state.get("conversation_manager")
                 if mgr:
                     prefs = mgr.load_user_preferences()
                     # Only set defaults if session state doesn't already have them
                     if prefs:
-                        if 'persist_history' not in st.session_state:
-                            st.session_state['persist_history'] = prefs.get(
-                                'persist_history', True)
-                        if 'persist_confirmed' not in st.session_state:
-                            st.session_state['persist_confirmed'] = prefs.get(
-                                'persist_confirmed', False)
+                        if "persist_history" not in st.session_state:
+                            st.session_state["persist_history"] = prefs.get("persist_history", True)
+                        if "persist_confirmed" not in st.session_state:
+                            st.session_state["persist_confirmed"] = prefs.get("persist_confirmed", False)
             except Exception:
                 # Best-effort: do not break UI if preferences cannot be loaded
                 pass
 
         # Initialize current conversation ID if not set
-        if 'current_conversation_id' not in st.session_state:
-            st.session_state['current_conversation_id'] = str(uuid.uuid4())
+        if "current_conversation_id" not in st.session_state:
+            st.session_state["current_conversation_id"] = str(uuid.uuid4())
 
         # Initialize conversation title if not set
-        if 'conversation_title' not in st.session_state:
-            st.session_state['conversation_title'] = "New Conversation"
+        if "conversation_title" not in st.session_state:
+            st.session_state["conversation_title"] = "New Conversation"
 
     # If user just transitioned from demo -> authenticated, attempt a
     # best-effort migration of the ephemeral demo conversation into the
@@ -1201,11 +1225,15 @@ def render_main_app():
     # migrated content appears in the sidebar immediately.
     try:
         # Migration guard: run only once per session after authentication
-        if st.session_state.get('authenticated') and st.session_state.get('demo_placeholder_id') and not st.session_state.get('demo_migrated'):
-            demo_id = st.session_state.get('demo_placeholder_id')
+        if (
+            st.session_state.get("authenticated")
+            and st.session_state.get("demo_placeholder_id")
+            and not st.session_state.get("demo_migrated")
+        ):
+            demo_id = st.session_state.get("demo_placeholder_id")
             demo_key = f"conversation_history_{demo_id}"
             # New user id already set by auth flow
-            user_id_now = st.session_state.get('user_id')
+            user_id_now = st.session_state.get("user_id")
             user_key = f"conversation_history_{user_id_now}"
             try:
                 # Only migrate if there is demo content and user has no content yet
@@ -1221,23 +1249,30 @@ def render_main_app():
                                 mgr = ConversationManager(user_id_now)
                                 # Create a new conversation record for the migrated demo
                                 conv_id = str(uuid.uuid4())
-                                first_msg = demo_messages[0].get('user') if isinstance(
-                                    demo_messages, list) and demo_messages and isinstance(demo_messages[0], dict) else None
-                                title = generate_auto_name(first_msg) if generate_auto_name and first_msg else (
-                                    st.session_state.get('conversation_title') or 'Migrated Conversation')
-                                mgr.save_conversation(
-                                    conv_id, title, demo_messages)
+                                first_msg = (
+                                    demo_messages[0].get("user")
+                                    if isinstance(demo_messages, list)
+                                    and demo_messages
+                                    and isinstance(demo_messages[0], dict)
+                                    else None
+                                )
+                                title = (
+                                    generate_auto_name(first_msg)
+                                    if generate_auto_name and first_msg
+                                    else (st.session_state.get("conversation_title") or "Migrated Conversation")
+                                )
+                                mgr.save_conversation(conv_id, title, demo_messages)
                                 # Set current conversation id to the newly created one
-                                st.session_state['current_conversation_id'] = conv_id
+                                st.session_state["current_conversation_id"] = conv_id
                         except Exception:
                             # Swallow persistence failures; session copy is already done
                             pass
 
                     # Mark migrated so we don't run again
-                    st.session_state['demo_migrated'] = True
+                    st.session_state["demo_migrated"] = True
             except Exception:
                 # Non-fatal; do not block UI if migration fails
-                st.session_state['demo_migrated'] = True
+                st.session_state["demo_migrated"] = True
     except Exception:
         pass
 
@@ -1245,15 +1280,14 @@ def render_main_app():
     # main area focused. Sidebar expanders are controlled by
     # `sidebar_show_login` and `sidebar_show_register` session flags.
     # Ensure defaults exist.
-    st.session_state.setdefault('sidebar_show_login', False)
-    st.session_state.setdefault('sidebar_show_register', False)
+    st.session_state.setdefault("sidebar_show_login", False)
+    st.session_state.setdefault("sidebar_show_register", False)
 
     # If the user just authenticated, show a gentle confirmation toast
     # and then automatically transition into the authenticated UI.
     try:
-        if st.session_state.get('authenticated') and st.session_state.get('post_login_transition'):
-            msg = st.session_state.get(
-                'post_login_message', 'Signed in successfully')
+        if st.session_state.get("authenticated") and st.session_state.get("post_login_transition"):
+            msg = st.session_state.get("post_login_message", "Signed in successfully")
             # Center a subtle confirmation card
             c1, c2, c3 = st.columns([1, 2, 1])
             with c2:
@@ -1267,8 +1301,8 @@ def render_main_app():
             except Exception:
                 pass
             # Clear transient flags and rerun to render the full authenticated UI
-            st.session_state.pop('post_login_transition', None)
-            st.session_state.pop('post_login_message', None)
+            st.session_state.pop("post_login_transition", None)
+            st.session_state.pop("post_login_message", None)
             st.rerun()
     except Exception:
         # Non-fatal; proceed to render sidebar normally
@@ -1294,7 +1328,7 @@ def render_main_app():
             unsafe_allow_html=True,
         )
         # Account panel: show sign-in/register when not authenticated.
-        if not st.session_state.get('authenticated'):
+        if not st.session_state.get("authenticated"):
             # Card-like account panel for a cleaner, welcoming look
             try:
                 svg_name_side = "FirstPerson-Logo-black-cropped_notext.svg"
@@ -1303,44 +1337,40 @@ def render_main_app():
                 # and keep the account panel concise. Remove the old promotional
                 # sentence and use a compact inline SVG container.
                 st.markdown(
-                    f"<div style='border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;'>\n<div style=\"width:96px; margin:0 auto;\">{svg_markup_side}</div>\n<p style=\"margin:8px 0 6px 0; font-weight:600;\">Demo mode</p>\n</div>", unsafe_allow_html=True)
+                    f'<div style=\'border:1px solid rgba(0,0,0,0.06); padding:12px; border-radius:12px; background: rgba(250,250,250,0.02); text-align:center;\'>\n<div style="width:96px; margin:0 auto;">{svg_markup_side}</div>\n<p style="margin:8px 0 6px 0; font-weight:600;">Demo mode</p>\n</div>',
+                    unsafe_allow_html=True,
+                )
             except Exception:
                 st.markdown("### Account")
             # Preserve an extra leading space as requested for visual spacing
-            st.markdown("<div style='margin-top:16px;'></div>",
-                        unsafe_allow_html=True)
-            st.markdown(
-                "**Create an Account** or **Sign In** to keep your conversations and enable full features.")
+            st.markdown("<div style='margin-top:16px;'></div>", unsafe_allow_html=True)
+            st.markdown("**Create an Account** or **Sign In** to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
                     # Toggle the sidebar expander for sign-in
-                    st.session_state['sidebar_show_login'] = not st.session_state.get(
-                        'sidebar_show_login', False)
+                    st.session_state["sidebar_show_login"] = not st.session_state.get("sidebar_show_login", False)
                     # Ensure the other expander is closed
-                    if st.session_state['sidebar_show_login']:
-                        st.session_state['sidebar_show_register'] = False
+                    if st.session_state["sidebar_show_login"]:
+                        st.session_state["sidebar_show_register"] = False
                     # No forced rerun here; allow the current render to show the expander
             with col_b:
                 if st.button("Create an Account", key="sidebar_toggle_register"):
-                    st.session_state['sidebar_show_register'] = not st.session_state.get(
-                        'sidebar_show_register', False)
-                    if st.session_state['sidebar_show_register']:
-                        st.session_state['sidebar_show_login'] = False
+                    st.session_state["sidebar_show_register"] = not st.session_state.get("sidebar_show_register", False)
+                    if st.session_state["sidebar_show_register"]:
+                        st.session_state["sidebar_show_login"] = False
                     # No forced rerun here; allow the current render to show the expander
 
             # Quick demo entry (uses auth quick_login_bypass when available)
-            if auth and hasattr(auth, 'quick_login_bypass'):
+            if auth and hasattr(auth, "quick_login_bypass"):
                 if st.button("Continue in demo", key="sidebar_continue_demo"):
                     try:
                         auth.quick_login_bypass()
                     except Exception:
                         # Best-effort: fall back to local demo session state
                         st.session_state.authenticated = False
-                        st.session_state.user_id = st.session_state.get(
-                            'user_id')
-                        st.session_state.username = st.session_state.get(
-                            'username')
+                        st.session_state.user_id = st.session_state.get("user_id")
+                        st.session_state.username = st.session_state.get("username")
                         st.rerun()
 
             st.markdown("---")
@@ -1348,23 +1378,23 @@ def render_main_app():
             # Debug snapshot for sidebar auth flags (helpful during development)
             # Only show this when explicitly enabled via environment or session flag
             try:
-                show_debug = os.environ.get(
-                    'FP_DEBUG_UI') == '1' or st.session_state.get('show_sidebar_debug')
+                show_debug = os.environ.get("FP_DEBUG_UI") == "1" or st.session_state.get("show_sidebar_debug")
                 if show_debug:
                     st.caption(
-                        f"debug: sidebar_show_login={st.session_state.get('sidebar_show_login')} | sidebar_show_register={st.session_state.get('sidebar_show_register')}")
+                        f"debug: sidebar_show_login={st.session_state.get('sidebar_show_login')} | sidebar_show_register={st.session_state.get('sidebar_show_register')}"
+                    )
             except Exception:
                 pass
 
             # Render auth expanders inside the sidebar (keeps main area stable)
             try:
-                if st.session_state.get('sidebar_show_login'):
+                if st.session_state.get("sidebar_show_login"):
                     with st.expander("Sign in", expanded=True):
                         if auth:
                             auth.render_login_form(in_sidebar=True)
                         else:
                             st.error("Authentication subsystem unavailable")
-                if st.session_state.get('sidebar_show_register'):
+                if st.session_state.get("sidebar_show_register"):
                     # Use an empty expander title and render a styled header
                     # inside the expander so we can center and bold the
                     # "Create an Account" label consistently across themes.
@@ -1389,27 +1419,30 @@ def render_main_app():
             st.markdown("### Settings")
 
         # Persist history toggle
-        persist_default = st.session_state.get('persist_history', True)
-        st.session_state['persist_history'] = st.checkbox(
-            "💾 Save my chats",
-            value=persist_default,
-            help="Automatically save conversations for later retrieval"
+        persist_default = st.session_state.get("persist_history", True)
+        st.session_state["persist_history"] = st.checkbox(
+            "💾 Save my chats", value=persist_default, help="Automatically save conversations for later retrieval"
         )
         # Best-effort: persist the user's preference back to server when available
         try:
-            mgr = st.session_state.get('conversation_manager')
+            mgr = st.session_state.get("conversation_manager")
             if mgr:
-                mgr.save_user_preferences({
-                    'persist_history': bool(st.session_state.get('persist_history', False)),
-                    'persist_confirmed': bool(st.session_state.get('persist_confirmed', False))
-                })
+                mgr.save_user_preferences(
+                    {
+                        "persist_history": bool(st.session_state.get("persist_history", False)),
+                        "persist_confirmed": bool(st.session_state.get("persist_confirmed", False)),
+                    }
+                )
         except Exception:
             pass
 
         # Privacy & Consent settings - only show when user is authenticated
-        if st.session_state.get('authenticated'):
+        if st.session_state.get("authenticated"):
             try:
-                from emotional_os.deploy.modules.consent_ui import render_consent_settings_panel
+                from emotional_os.deploy.modules.consent_ui import (
+                    render_consent_settings_panel,
+                )
+
                 render_consent_settings_panel()
             except ImportError:
                 pass
@@ -1417,37 +1450,41 @@ def render_main_app():
                 st.warning(f"Consent settings error: {e}")
 
         # Load and display previous conversations - only for authenticated users
-        if st.session_state.get('authenticated') and ConversationManager and st.session_state.get('conversation_manager'):
+        if (
+            st.session_state.get("authenticated")
+            and ConversationManager
+            and st.session_state.get("conversation_manager")
+        ):
             st.markdown("---")
-            load_all_conversations_to_sidebar(
-                st.session_state['conversation_manager'])
+            load_all_conversations_to_sidebar(st.session_state["conversation_manager"])
 
             # New conversation button
             if st.button("➕ New Conversation", use_container_width=True):
-                st.session_state['current_conversation_id'] = str(uuid.uuid4())
-                st.session_state['conversation_title'] = "New Conversation"
+                st.session_state["current_conversation_id"] = str(uuid.uuid4())
+                st.session_state["conversation_title"] = "New Conversation"
                 # Ensure any previously-selected conversation is cleared
                 try:
-                    st.session_state.pop('selected_conversation', None)
+                    st.session_state.pop("selected_conversation", None)
                 except Exception:
                     pass
 
-                st.session_state['conversation_history_' +
-                                 st.session_state['user_id']] = []
+                st.session_state["conversation_history_" + st.session_state["user_id"]] = []
                 # Optimistically add this new conversation to the session cache
                 try:
-                    cid = st.session_state['current_conversation_id']
-                    cached = st.session_state.setdefault(
-                        'session_cached_conversations', [])
+                    cid = st.session_state["current_conversation_id"]
+                    cached = st.session_state.setdefault("session_cached_conversations", [])
                     # Avoid duplicates
-                    if not any(c.get('conversation_id') == cid for c in cached):
-                        cached.insert(0, {
-                            'conversation_id': cid,
-                            'title': st.session_state.get('conversation_title', 'New Conversation'),
-                            'updated_at': datetime.datetime.now().isoformat(),
-                            'message_count': 0,
-                            'processing_mode': st.session_state.get('processing_mode', 'local')
-                        })
+                    if not any(c.get("conversation_id") == cid for c in cached):
+                        cached.insert(
+                            0,
+                            {
+                                "conversation_id": cid,
+                                "title": st.session_state.get("conversation_title", "New Conversation"),
+                                "updated_at": datetime.datetime.now().isoformat(),
+                                "message_count": 0,
+                                "processing_mode": st.session_state.get("processing_mode", "local"),
+                            },
+                        )
                 except Exception:
                     pass
                 st.rerun()
@@ -1456,12 +1493,12 @@ def render_main_app():
         # All HIL-related session flags are cleared so the sidebar no longer
         # exposes HIL toggles or escalation controls during normal use.
         try:
-            st.session_state.pop('enable_hil_escalation', None)
-            st.session_state.pop('show_hil_controls', None)
-            st.session_state.pop('preproc_confidence_threshold', None)
-            st.session_state.pop('preproc_cluster_size', None)
-            st.session_state.pop('hil_escalation_log', None)
-            st.session_state.pop('last_preproc', None)
+            st.session_state.pop("enable_hil_escalation", None)
+            st.session_state.pop("show_hil_controls", None)
+            st.session_state.pop("preproc_confidence_threshold", None)
+            st.session_state.pop("preproc_cluster_size", None)
+            st.session_state.pop("hil_escalation_log", None)
+            st.session_state.pop("last_preproc", None)
         except Exception:
             pass
 
@@ -1471,9 +1508,9 @@ def render_main_app():
         # visible within that scoped area. Keeping it here caused duplicate
         # controls to appear in the main chat UI.
 
-    # Use Streamlit native theming (via .streamlit/config.toml). Avoid full
-    # CSS file swaps at runtime — instead inject only focused overrides that
-    # Streamlit's theme system cannot reach (e.g., inline SVG fills).
+        # Use Streamlit native theming (via .streamlit/config.toml). Avoid full
+        # CSS file swaps at runtime — instead inject only focused overrides that
+        # Streamlit's theme system cannot reach (e.g., inline SVG fills).
         try:
             st.markdown(
                 """
@@ -1547,11 +1584,16 @@ def render_main_app():
     # Logo switching based on theme
     # Use appropriate logo file based on theme
     theme = st.session_state.get("theme_select_row", "Light")
-    svg_name = "FirstPerson-Logo-black-cropped_notext.svg" if theme == "Light" else "FirstPerson-Logo-invert-cropped_notext.svg"
+    svg_name = (
+        "FirstPerson-Logo-black-cropped_notext.svg"
+        if theme == "Light"
+        else "FirstPerson-Logo-invert-cropped_notext.svg"
+    )
     # Render a responsive brand row (inline SVG + title) using injected CSS
     svg_markup = _load_inline_svg(svg_name)
     try:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="brand-container">
                     <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
                 <div style="flex-shrink: 0;">
@@ -1563,26 +1605,29 @@ def render_main_app():
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
     except Exception:
         # Fallback to previous column layout if raw HTML rendering fails
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
             try:
-                st.markdown(
-                    f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
             except Exception:
                 # Render a simple emoji fallback (ensure proper quoting)
                 st.markdown(
-                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True)
+                    '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>', unsafe_allow_html=True
+                )
         with col2:
-            st.markdown('<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>', unsafe_allow_html=True)
-        st.markdown(
-            f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
+            st.markdown(
+                '<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>',
+                unsafe_allow_html=True,
+            )
+        st.markdown(f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
-        display_name = st.session_state.get(
-            'first_name') or st.session_state.get('username')
+        display_name = st.session_state.get("first_name") or st.session_state.get("username")
         st.write(f"Welcome back, **{display_name}**! 👋")
     with col2:
         # Settings panel is rendered in the sidebar expander
@@ -1601,7 +1646,7 @@ def render_main_app():
 
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
-    processing_mode = st.session_state.get('processing_mode', 'local')
+    processing_mode = st.session_state.get("processing_mode", "local")
     # Center the chat area so the messages align with the chat input
     # (which is rendered in a centered column below). Using matching
     # column widths keeps the chat messages and input visually aligned.
@@ -1618,8 +1663,7 @@ def render_main_app():
                 )
             except Exception:
                 try:
-                    st.info(
-                        "Your conversation will appear here after you send your first message.")
+                    st.info("Your conversation will appear here after you send your first message.")
                 except Exception:
                     pass
 
@@ -1630,8 +1674,9 @@ def render_main_app():
                 st.write(exchange["assistant"])
                 if "processing_time" in exchange:
                     try:
-                        show_mode = os.environ.get('FP_SHOW_PROCESSING_MODE') == '1' or st.session_state.get(
-                            'show_processing_mode', False)
+                        show_mode = os.environ.get("FP_SHOW_PROCESSING_MODE") == "1" or st.session_state.get(
+                            "show_processing_mode", False
+                        )
                     except Exception:
                         show_mode = False
                     caption_text = f"Processed in {exchange['processing_time']}"
@@ -1648,8 +1693,7 @@ def render_main_app():
         document_title = "Document" if not first_line else first_line[:60]
 
         st.info(f"📄 Document uploaded: {document_title}")
-        st.info(
-            "🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
+        st.info("🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
 
         # Basic analysis without dependencies
         document_analysis = {
@@ -1657,7 +1701,7 @@ def render_main_app():
             "voltage_response": f"Document content recognized: {len(doc_text)} characters",
             "ritual_prompt": "Document-based emotional processing",
             "signals": [],
-            "gates": []
+            "gates": [],
         }
 
     # NOTE: The top-level document uploader was removed to avoid duplicate
@@ -1669,10 +1713,10 @@ def render_main_app():
     # Support 'recall' and 'resend' actions from the sidebar
     recalled = None
     auto_process = False
-    if 'recalled_message' in st.session_state:
-        recalled = st.session_state.pop('recalled_message')
-    if 'auto_process' in st.session_state:
-        auto_process = bool(st.session_state.pop('auto_process'))
+    if "recalled_message" in st.session_state:
+        recalled = st.session_state.pop("recalled_message")
+    if "auto_process" in st.session_state:
+        auto_process = bool(st.session_state.pop("auto_process"))
 
     if recalled:
         # If a recalled message exists (from sidebar), process it immediately
@@ -1705,8 +1749,7 @@ def render_main_app():
                 uploaded_file = st.file_uploader(
                     "Browse Files",
                     label_visibility="collapsed",
-                    type=["txt", "docx", "pdf", "md", "html",
-                          "htm", "csv", "xlsx", "xls", "json"],
+                    type=["txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"],
                     key="inline_uploader",
                 )
 
@@ -1717,50 +1760,53 @@ def render_main_app():
             # If a file was uploaded via the inline uploader, process it here so
             # the app uses a single uploader (inline) and avoids duplicate buttons.
             try:
-                if 'uploaded_file' in locals() and uploaded_file:
+                if "uploaded_file" in locals() and uploaded_file:
                     file_text = None
-                    file_ext = uploaded_file.name.lower().split('.')[-1]
+                    file_ext = uploaded_file.name.lower().split(".")[-1]
                     try:
                         if file_ext == "txt":
                             file_text = uploaded_file.read().decode("utf-8", errors="ignore")
                         elif file_ext == "docx":
                             try:
                                 from docx import Document
+
                                 doc = Document(uploaded_file)
-                                file_text = "\n".join(
-                                    [para.text for para in doc.paragraphs])
+                                file_text = "\n".join([para.text for para in doc.paragraphs])
                             except Exception as e:
                                 st.error(f"Error reading Word document: {e}")
                         elif file_ext == "pdf":
                             try:
                                 import pdfplumber
+
                                 with pdfplumber.open(uploaded_file) as pdf:
-                                    file_text = "\n".join(
-                                        page.extract_text() or "" for page in pdf.pages)
+                                    file_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
                             except Exception as e:
                                 st.error(f"Error reading PDF document: {e}")
                         elif file_ext == "md":
                             try:
                                 import markdown
+
                                 raw_text = uploaded_file.read().decode("utf-8", errors="ignore")
                                 html = markdown.markdown(raw_text)
                                 from bs4 import BeautifulSoup
-                                soup = BeautifulSoup(html, 'html.parser')
+
+                                soup = BeautifulSoup(html, "html.parser")
                                 file_text = soup.get_text()
                             except Exception as e:
-                                st.error(
-                                    f"Error reading Markdown document: {e}")
+                                st.error(f"Error reading Markdown document: {e}")
                         elif file_ext in ["html", "htm"]:
                             try:
                                 from bs4 import BeautifulSoup
+
                                 raw_html = uploaded_file.read().decode("utf-8", errors="ignore")
-                                soup = BeautifulSoup(raw_html, 'html.parser')
+                                soup = BeautifulSoup(raw_html, "html.parser")
                                 file_text = soup.get_text()
                             except Exception as e:
                                 st.error(f"Error reading HTML document: {e}")
                         elif file_ext == "csv":
                             try:
                                 import pandas as pd
+
                                 df = pd.read_csv(uploaded_file)
                                 file_text = df.to_string(index=False)
                             except Exception as e:
@@ -1768,6 +1814,7 @@ def render_main_app():
                         elif file_ext in ["xlsx", "xls"]:
                             try:
                                 import pandas as pd
+
                                 df = pd.read_excel(uploaded_file)
                                 file_text = df.to_string(index=False)
                             except Exception as e:
@@ -1775,6 +1822,7 @@ def render_main_app():
                         elif file_ext == "json":
                             try:
                                 import json
+
                                 raw_json = uploaded_file.read().decode("utf-8", errors="ignore")
                                 data = json.loads(raw_json)
                                 file_text = json.dumps(data, indent=2)
@@ -1783,11 +1831,9 @@ def render_main_app():
 
                         if file_text:
                             st.session_state["uploaded_text"] = file_text
-                            st.success(
-                                f"✅ {file_ext.upper()} document uploaded successfully!")
+                            st.success(f"✅ {file_ext.upper()} document uploaded successfully!")
                         else:
-                            st.warning(
-                                f"Could not extract text from {file_ext.upper()} file")
+                            st.warning(f"Could not extract text from {file_ext.upper()} file")
                     except Exception as e:
                         st.error(f"Error reading document: {e}")
             except Exception:
@@ -1798,46 +1844,46 @@ def render_main_app():
 
     # If the user selected a conversation from the sidebar, load it now
     try:
-        selected = st.session_state.get('selected_conversation')
-        mgr = st.session_state.get('conversation_manager')
+        selected = st.session_state.get("selected_conversation")
+        mgr = st.session_state.get("conversation_manager")
         # If manager missing, try to initialize it (best-effort)
-        if not mgr and 'user_id' in st.session_state:
+        if not mgr and "user_id" in st.session_state:
             try:
-                from emotional_os.deploy.modules.conversation_manager import initialize_conversation_manager
+                from emotional_os.deploy.modules.conversation_manager import (
+                    initialize_conversation_manager,
+                )
+
                 mgr = initialize_conversation_manager()
                 if mgr:
-                    st.session_state['conversation_manager'] = mgr
+                    st.session_state["conversation_manager"] = mgr
             except Exception:
                 mgr = None
 
         # Only attempt load when a selection exists and it's not already the active conversation
-        if selected and mgr and selected != st.session_state.get('current_conversation_id'):
+        if selected and mgr and selected != st.session_state.get("current_conversation_id"):
             try:
                 conv = mgr.load_conversation(selected)
                 if conv:
-                    msgs = conv.get('messages') if isinstance(
-                        conv.get('messages'), list) else conv.get('messages', [])
+                    msgs = conv.get("messages") if isinstance(conv.get("messages"), list) else conv.get("messages", [])
                     st.session_state[conversation_key] = msgs or []
-                    st.session_state['current_conversation_id'] = conv.get(
-                        'conversation_id', selected)
-                    st.session_state['conversation_title'] = conv.get(
-                        'title', st.session_state.get('conversation_title', 'Conversation'))
+                    st.session_state["current_conversation_id"] = conv.get("conversation_id", selected)
+                    st.session_state["conversation_title"] = conv.get(
+                        "title", st.session_state.get("conversation_title", "Conversation")
+                    )
                 else:
                     try:
-                        st.sidebar.warning(
-                            'Could not load the selected conversation (not found).')
+                        st.sidebar.warning("Could not load the selected conversation (not found).")
                     except Exception:
                         pass
             except Exception as e:
-                logger.warning(
-                    f"Failed to load selected conversation {selected}: {e}")
+                logger.warning(f"Failed to load selected conversation {selected}: {e}")
                 try:
-                    st.sidebar.error(f'Error loading conversation: {e}')
+                    st.sidebar.error(f"Error loading conversation: {e}")
                 except Exception:
                     pass
             # Clear the transient selection and rerun so the main UI reflects the loaded messages
             try:
-                st.session_state.pop('selected_conversation', None)
+                st.session_state.pop("selected_conversation", None)
             except Exception:
                 pass
             try:
@@ -1874,55 +1920,56 @@ def render_main_app():
                 with st.spinner("Processing your emotional input..."):
                     start_time = time.time()
                     response = ""
-                    response_style = st.session_state.get(
-                        'response_style', 'Balanced')
+                    response_style = st.session_state.get("response_style", "Balanced")
 
                     # Build a lightweight conversation_context to help the parser detect feedback/reciprocal messages
-                    conversation_context = {
-                        'last_assistant_message': None,
-                        'messages': []
-                    }
+                    conversation_context = {"last_assistant_message": None, "messages": []}
                     if conversation_key in st.session_state and st.session_state[conversation_key]:
                         # copy session history into conversation_context.messages (role/content pairs)
-                        conversation_context['messages'] = [
-                            {'role': m.get('role', 'user' if i % 2 == 0 else 'assistant'), 'content': m.get(
-                                'user') if 'user' in m else m.get('assistant')}
+                        conversation_context["messages"] = [
+                            {
+                                "role": m.get("role", "user" if i % 2 == 0 else "assistant"),
+                                "content": m.get("user") if "user" in m else m.get("assistant"),
+                            }
                             for i, m in enumerate(st.session_state[conversation_key])
                         ]
                         # last assistant message helpful for correction detection
                         try:
-                            last_assistant_entry = next((m for m in reversed(
-                                st.session_state[conversation_key]) if 'assistant' in m and m.get('assistant')), None)
+                            last_assistant_entry = next(
+                                (
+                                    m
+                                    for m in reversed(st.session_state[conversation_key])
+                                    if "assistant" in m and m.get("assistant")
+                                ),
+                                None,
+                            )
                             if last_assistant_entry:
-                                conversation_context['last_assistant_message'] = last_assistant_entry.get(
-                                    'assistant')
+                                conversation_context["last_assistant_message"] = last_assistant_entry.get("assistant")
                         except Exception:
-                            conversation_context['last_assistant_message'] = None
+                            conversation_context["last_assistant_message"] = None
 
                     # --- Local preprocessing / privacy steward ---
                     preproc_res = None
                     try:
                         from local_inference.preprocessor import Preprocessor
-                        if 'local_preprocessor' not in st.session_state:
+
+                        if "local_preprocessor" not in st.session_state:
                             # default to test_mode=True to avoid heavy model loads in dev
-                            st.session_state['local_preprocessor'] = Preprocessor(
-                                test_mode=True)
-                        p = st.session_state.get('local_preprocessor')
+                            st.session_state["local_preprocessor"] = Preprocessor(test_mode=True)
+                        p = st.session_state.get("local_preprocessor")
                         if p:
-                            preproc_res = p.preprocess(
-                                user_input, conversation_context)
+                            preproc_res = p.preprocess(user_input, conversation_context)
                             # Use sanitized text for downstream processing
-                            sanitized_text = preproc_res.get(
-                                'sanitized_text', user_input)
-                            st.session_state['last_preproc'] = {
-                                'intent': preproc_res.get('intent'),
-                                'confidence': preproc_res.get('confidence'),
-                                'emotional_tags': preproc_res.get('emotional_tags'),
-                                'edit_log': preproc_res.get('edit_log'),
-                                'editorial_interventions': preproc_res.get('editorial_interventions', []),
-                                'escalation_action': preproc_res.get('escalation_action'),
-                                'escalation_reason': preproc_res.get('escalation_reason'),
-                                'taxonomy_source': preproc_res.get('taxonomy_source')
+                            sanitized_text = preproc_res.get("sanitized_text", user_input)
+                            st.session_state["last_preproc"] = {
+                                "intent": preproc_res.get("intent"),
+                                "confidence": preproc_res.get("confidence"),
+                                "emotional_tags": preproc_res.get("emotional_tags"),
+                                "edit_log": preproc_res.get("edit_log"),
+                                "editorial_interventions": preproc_res.get("editorial_interventions", []),
+                                "escalation_action": preproc_res.get("escalation_action"),
+                                "escalation_reason": preproc_res.get("escalation_reason"),
+                                "taxonomy_source": preproc_res.get("taxonomy_source"),
                             }
                         else:
                             sanitized_text = user_input
@@ -1930,8 +1977,7 @@ def render_main_app():
                         sanitized_text = user_input
 
                     # Use the sanitized text if available (from local preprocessor)
-                    effective_input = sanitized_text if 'sanitized_text' in locals(
-                    ) and sanitized_text else user_input
+                    effective_input = sanitized_text if "sanitized_text" in locals() and sanitized_text else user_input
 
                     # Default: run the all-local pipeline first and call the
                     # response engine afterwards with the local analysis so we
@@ -1941,46 +1987,50 @@ def render_main_app():
 
                     if not handled_by_response_engine and processing_mode == "local":
                         from emotional_os.glyphs.signal_parser import parse_input
-                        local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
-                                                     db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
+
+                        local_analysis = parse_input(
+                            effective_input,
+                            "emotional_os/parser/signal_lexicon.json",
+                            db_path="emotional_os/glyphs/glyphs.db",
+                            conversation_context=conversation_context,
+                        )
                         glyphs = local_analysis.get("glyphs", [])
-                        voltage_response = local_analysis.get(
-                            "voltage_response", "")
+                        voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
-                        debug_glyph_rows = local_analysis.get(
-                            "debug_glyph_rows", [])
+                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         # Call the local response engine with the local analysis so
                         # the engine can produce a short, inquisitive, friend-like
                         # response while avoiding redundant parsing. If the engine
                         # fails, fall back to the older local/hybrid flow below.
                         try:
-                            from main_response_engine import process_user_input as _engine_process
+                            from main_response_engine import (
+                                process_user_input as _engine_process,
+                            )
+
                             start_time = time.time()
                             ctx = {"local_analysis": local_analysis}
-                            last_pre = st.session_state.get('last_preproc', {})
+                            last_pre = st.session_state.get("last_preproc", {})
                             if isinstance(last_pre, dict):
-                                if last_pre.get('intent'):
-                                    ctx['emotion'] = last_pre.get('intent')
-                                if last_pre.get('confidence'):
-                                    ctx['intensity'] = 'high' if last_pre.get(
-                                        'confidence', 0) > 0.7 else 'gentle'
+                                if last_pre.get("intent"):
+                                    ctx["emotion"] = last_pre.get("intent")
+                                if last_pre.get("confidence"):
+                                    ctx["intensity"] = "high" if last_pre.get("confidence", 0) > 0.7 else "gentle"
                             response = _engine_process(effective_input, ctx)
                             processing_time = time.time() - start_time
-                            debug_signals = local_analysis.get('signals', [])
-                            debug_glyphs = local_analysis.get('glyphs', [])
-                            debug_sql = local_analysis.get('debug_sql', '')
-                            debug_glyph_rows = local_analysis.get(
-                                'debug_glyph_rows', [])
-                            glyphs = local_analysis.get('glyphs', [])
+                            debug_signals = local_analysis.get("signals", [])
+                            debug_glyphs = local_analysis.get("glyphs", [])
+                            debug_sql = local_analysis.get("debug_sql", "")
+                            debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
+                            glyphs = local_analysis.get("glyphs", [])
                             handled_by_response_engine = True
                         except Exception:
                             handled_by_response_engine = False
                         best_glyph = local_analysis.get("best_glyph")
-                        glyph_display = best_glyph['glyph_name'] if best_glyph else 'None'
+                        glyph_display = best_glyph["glyph_name"] if best_glyph else "None"
                         response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
                     # Note: the previous code supported an "ai_preferred" mode.
                     # That option has been removed in favor of a simpler
@@ -1992,29 +2042,34 @@ def render_main_app():
                         # any remote AI endpoint. If the engine fails, fall
                         # back to a simple local summary.
                         from emotional_os.glyphs.signal_parser import parse_input
-                        local_analysis = parse_input(effective_input, "emotional_os/parser/signal_lexicon.json",
-                                                     db_path="emotional_os/glyphs/glyphs.db", conversation_context=conversation_context)
+
+                        local_analysis = parse_input(
+                            effective_input,
+                            "emotional_os/parser/signal_lexicon.json",
+                            db_path="emotional_os/glyphs/glyphs.db",
+                            conversation_context=conversation_context,
+                        )
                         glyphs = local_analysis.get("glyphs", [])
-                        voltage_response = local_analysis.get(
-                            "voltage_response", "")
+                        voltage_response = local_analysis.get("voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
-                        debug_glyph_rows = local_analysis.get(
-                            "debug_glyph_rows", [])
+                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
                         try:
-                            from main_response_engine import process_user_input as _engine_process
+                            from main_response_engine import (
+                                process_user_input as _engine_process,
+                            )
+
                             start_time = time.time()
                             ctx = {"local_analysis": local_analysis}
-                            last_pre = st.session_state.get('last_preproc', {})
+                            last_pre = st.session_state.get("last_preproc", {})
                             if isinstance(last_pre, dict):
-                                if last_pre.get('intent'):
-                                    ctx['emotion'] = last_pre.get('intent')
-                                if last_pre.get('confidence'):
-                                    ctx['intensity'] = 'high' if last_pre.get(
-                                        'confidence', 0) > 0.7 else 'gentle'
+                                if last_pre.get("intent"):
+                                    ctx["emotion"] = last_pre.get("intent")
+                                if last_pre.get("confidence"):
+                                    ctx["intensity"] = "high" if last_pre.get("confidence", 0) > 0.7 else "gentle"
                             response = _engine_process(effective_input, ctx)
                             processing_time = time.time() - start_time
                             handled_by_response_engine = True
@@ -2024,23 +2079,26 @@ def render_main_app():
                         response = "Unknown processing mode."
                     # Before emitting the assistant response, attempt limbic processing if engine is present
                     try:
-                        if 'limbic_engine' in st.session_state:
+                        if "limbic_engine" in st.session_state:
                             try:
-                                from emotional_os.glyphs.limbic_decorator import decorate_reply
-                                engine = st.session_state['limbic_engine']
+                                from emotional_os.glyphs.limbic_decorator import (
+                                    decorate_reply,
+                                )
+
+                                engine = st.session_state["limbic_engine"]
                                 # Basic safety gating
                                 try:
-                                    from emotional_os.safety.sanctuary import is_sensitive_input
-                                    safety_flag = is_sensitive_input(
-                                        user_input)
+                                    from emotional_os.safety.sanctuary import (
+                                        is_sensitive_input,
+                                    )
+
+                                    safety_flag = is_sensitive_input(user_input)
                                 except Exception:
                                     safety_flag = False
                                 if not safety_flag:
-                                    limbic_result = engine.process_emotion_with_limbic_mapping(
-                                        user_input)
+                                    limbic_result = engine.process_emotion_with_limbic_mapping(user_input)
                                     try:
-                                        decorated = decorate_reply(
-                                            response, limbic_result)
+                                        decorated = decorate_reply(response, limbic_result)
                                         # Only replace response if decoration returns a non-empty string
                                         if isinstance(decorated, str) and decorated.strip():
                                             response = decorated
@@ -2059,13 +2117,11 @@ def render_main_app():
                     if st.session_state.get("fallback_protocol"):
                         try:
                             detected_triggers = []
-                            if 'glyphs' in locals() and glyphs:
-                                detected_triggers = [
-                                    g.get('glyph_name', '') for g in glyphs if isinstance(g, dict)]
+                            if "glyphs" in locals() and glyphs:
+                                detected_triggers = [g.get("glyph_name", "") for g in glyphs if isinstance(g, dict)]
 
                             fallback_result = st.session_state["fallback_protocol"].process_exchange(
-                                user_text=user_input,
-                                detected_triggers=detected_triggers if detected_triggers else None
+                                user_text=user_input, detected_triggers=detected_triggers if detected_triggers else None
                             )
 
                             # If ambiguous tone detected, use companion's clarification request
@@ -2073,10 +2129,11 @@ def render_main_app():
                                 response = fallback_result["companion_behavior"]["message"]
 
                             # Store protocol result in session for debugging
-                            st.session_state[f"protocol_result_{len(st.session_state[conversation_key])}"] = fallback_result
+                            st.session_state[f"protocol_result_{len(st.session_state[conversation_key])}"] = (
+                                fallback_result
+                            )
                         except Exception as e:
-                            logger.debug(
-                                f"Fallback protocol error (non-fatal): {e}")
+                            logger.debug(f"Fallback protocol error (non-fatal): {e}")
                             fallback_result = None
 
                     # Prevent verbatim repetition of assistant replies across consecutive turns.
@@ -2085,14 +2142,13 @@ def render_main_app():
                     try:
                         last_assistant = None
                         if st.session_state.get(conversation_key) and len(st.session_state[conversation_key]) > 0:
-                            last_assistant = st.session_state[conversation_key][-1].get(
-                                'assistant')
+                            last_assistant = st.session_state[conversation_key][-1].get("assistant")
                         if last_assistant and last_assistant.strip() == response.strip():
                             followups = [
                                 "Can you tell me one specific detail about that?",
                                 "Would it help if we tried one small concrete step together?",
                                 "If you pick one thing to focus on right now, what would it be?",
-                                "That's important — would you like a short breathing practice or a practical plan?"
+                                "That's important — would you like a short breathing practice or a practical plan?",
                             ]
                             idx = len(response) % len(followups)
                             response = response + " " + followups[idx]
@@ -2101,8 +2157,7 @@ def render_main_app():
                         pass
 
                     st.write(response)
-                    st.caption(
-                        f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                    st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
 
                     # Show anonymization consent widget once per session (or until user interacts)
                     # Gate the full consent UI behind an explicit opt-in flag so it doesn't
@@ -2112,38 +2167,43 @@ def render_main_app():
                     try:
                         show_overlay = False
                         try:
-                            show_overlay = os.environ.get(
-                                'FP_SHOW_EGS_OVERLAY') == '1' or st.session_state.get('show_egs_overlay', False)
+                            show_overlay = os.environ.get("FP_SHOW_EGS_OVERLAY") == "1" or st.session_state.get(
+                                "show_egs_overlay", False
+                            )
                         except Exception:
                             show_overlay = False
 
                         if show_overlay:
-                            from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
+                            from emotional_os.deploy.modules.consent_ui import (
+                                render_anonymization_consent_widget,
+                            )
+
                             exchange_id = f"exchange_{len(st.session_state.get(conversation_key, []))}"
                             consent_key = f"consent_{exchange_id}"
 
                             # Only show the consent widget if it hasn't been seen/interacted with this session
-                            if not st.session_state.get('consent_seen', False):
-                                consent_result = render_anonymization_consent_widget(
-                                    exchange_id)
+                            if not st.session_state.get("consent_seen", False):
+                                consent_result = render_anonymization_consent_widget(exchange_id)
 
                                 # If the render function returned a completed consent dict, store it
                                 if consent_result:
                                     st.session_state[consent_key] = consent_result
-                                    st.session_state['consent_seen'] = True
+                                    st.session_state["consent_seen"] = True
                                     # Log consent choices to debug_chat.log for traceability
                                     try:
-                                        import json as _json
                                         import datetime as _dt
+                                        import json as _json
+
                                         log_entry = {
-                                            'ts': _dt.datetime.utcnow().isoformat() + 'Z',
-                                            'user_id': st.session_state.get('user_id'),
-                                            'exchange_id': exchange_id,
-                                            'consent': consent_result
+                                            "ts": _dt.datetime.utcnow().isoformat() + "Z",
+                                            "user_id": st.session_state.get("user_id"),
+                                            "exchange_id": exchange_id,
+                                            "consent": consent_result,
                                         }
-                                        with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
-                                            _fh.write(_json.dumps(
-                                                log_entry, ensure_ascii=False) + '\n')
+                                        with open(
+                                            "/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8"
+                                        ) as _fh:
+                                            _fh.write(_json.dumps(log_entry, ensure_ascii=False) + "\n")
                                     except Exception:
                                         # Non-fatal; do not block the UI
                                         pass
@@ -2151,22 +2211,23 @@ def render_main_app():
                                 # If the user clicked 'Later', the consent widget stores a session key but returns None
                                 elif consent_key in st.session_state:
                                     # mark seen so we don't prompt again this session
-                                    st.session_state['consent_seen'] = True
+                                    st.session_state["consent_seen"] = True
                                     # also log the stored consent/skipped state
                                     try:
-                                        import json as _json
                                         import datetime as _dt
-                                        stored = st.session_state.get(
-                                            consent_key)
+                                        import json as _json
+
+                                        stored = st.session_state.get(consent_key)
                                         log_entry = {
-                                            'ts': _dt.datetime.utcnow().isoformat() + 'Z',
-                                            'user_id': st.session_state.get('user_id'),
-                                            'exchange_id': exchange_id,
-                                            'consent': stored
+                                            "ts": _dt.datetime.utcnow().isoformat() + "Z",
+                                            "user_id": st.session_state.get("user_id"),
+                                            "exchange_id": exchange_id,
+                                            "consent": stored,
                                         }
-                                        with open('/workspaces/saoriverse-console/debug_chat.log', 'a', encoding='utf-8') as _fh:
-                                            _fh.write(_json.dumps(
-                                                log_entry, ensure_ascii=False) + '\n')
+                                        with open(
+                                            "/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8"
+                                        ) as _fh:
+                                            _fh.write(_json.dumps(log_entry, ensure_ascii=False) + "\n")
                                     except Exception:
                                         pass
                         # else: already seen in this session; do nothing
@@ -2184,7 +2245,7 @@ def render_main_app():
             "assistant": response,
             "processing_time": f"{processing_time:.2f}s",
             "mode": processing_mode,
-            "timestamp": datetime.datetime.now().isoformat()
+            "timestamp": datetime.datetime.now().isoformat(),
         }
         st.session_state[conversation_key].append(entry)
 
@@ -2195,10 +2256,11 @@ def render_main_app():
             if len(st.session_state.get(conversation_key, [])) == 1:
                 if generate_auto_name:
                     title = generate_auto_name(user_input)
-                    st.session_state['conversation_title'] = title
+                    st.session_state["conversation_title"] = title
                 else:
-                    st.session_state['conversation_title'] = st.session_state.get(
-                        'conversation_title', 'New Conversation')
+                    st.session_state["conversation_title"] = st.session_state.get(
+                        "conversation_title", "New Conversation"
+                    )
         except Exception:
             pass
 
@@ -2206,28 +2268,28 @@ def render_main_app():
         # sidebar reflects new messages immediately even if server-side save
         # fails or is pending.
         try:
-            cid = st.session_state.get('current_conversation_id', 'default')
-            cached = st.session_state.setdefault(
-                'session_cached_conversations', [])
+            cid = st.session_state.get("current_conversation_id", "default")
+            cached = st.session_state.setdefault("session_cached_conversations", [])
             updated = False
             if isinstance(cached, list):
                 for c in cached:
-                    if c and c.get('conversation_id') == cid:
-                        c['title'] = st.session_state.get(
-                            'conversation_title', c.get('title', 'New Conversation'))
-                        c['updated_at'] = datetime.datetime.now().isoformat()
-                        c['message_count'] = len(
-                            st.session_state.get(conversation_key, []))
+                    if c and c.get("conversation_id") == cid:
+                        c["title"] = st.session_state.get("conversation_title", c.get("title", "New Conversation"))
+                        c["updated_at"] = datetime.datetime.now().isoformat()
+                        c["message_count"] = len(st.session_state.get(conversation_key, []))
                         updated = True
                         break
                 if not updated:
-                    cached.insert(0, {
-                        'conversation_id': cid,
-                        'title': st.session_state.get('conversation_title', 'New Conversation'),
-                        'updated_at': datetime.datetime.now().isoformat(),
-                        'message_count': len(st.session_state.get(conversation_key, [])),
-                        'processing_mode': processing_mode
-                    })
+                    cached.insert(
+                        0,
+                        {
+                            "conversation_id": cid,
+                            "title": st.session_state.get("conversation_title", "New Conversation"),
+                            "updated_at": datetime.datetime.now().isoformat(),
+                            "message_count": len(st.session_state.get(conversation_key, [])),
+                            "processing_mode": processing_mode,
+                        },
+                    )
         except Exception:
             pass
 
@@ -2235,120 +2297,120 @@ def render_main_app():
         # AND generate new glyphs dynamically during dialogue
         if processing_mode in ("local", "hybrid"):
             try:
+                from emotional_os.learning.adaptive_signal_extractor import (
+                    AdaptiveSignalExtractor,
+                )
                 from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
-                from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 
                 # Try to import create_integrated_processor from scripts/utilities or directly
                 try:
-                    import sys
                     import os
-                    sys.path.insert(0, os.path.join(os.path.dirname(
-                        __file__), '../../../scripts/utilities'))
-                    from hybrid_processor_with_evolution import create_integrated_processor
+                    import sys
+
+                    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../../scripts/utilities"))
+                    from hybrid_processor_with_evolution import (
+                        create_integrated_processor,
+                    )
                 except ImportError:
                     # Fallback if not available
                     create_integrated_processor = None
 
                 learner = get_hybrid_learner()
-                user_id = st.session_state.get('user_id', 'anonymous')
+                user_id = st.session_state.get("user_id", "anonymous")
 
                 # Ensure we have a persistent user ID
-                if 'persistent_user_id' not in st.session_state:
-                    st.session_state['persistent_user_id'] = user_id
+                if "persistent_user_id" not in st.session_state:
+                    st.session_state["persistent_user_id"] = user_id
 
                 # Initialize dynamic evolution system if not already in session
-                if 'hybrid_processor' not in st.session_state and create_integrated_processor:
+                if "hybrid_processor" not in st.session_state and create_integrated_processor:
                     # Use adaptive extractor with persistence
                     adaptive_extractor = AdaptiveSignalExtractor(
                         adaptive=True,
                         use_discovered=True,
-                        persistence_path=f"learning/user_signals/{st.session_state['persistent_user_id']}_signals.json"
+                        persistence_path=f"learning/user_signals/{st.session_state['persistent_user_id']}_signals.json",
                     )
 
                     # Create processor with persistent user ID
-                    st.session_state['hybrid_processor'] = create_integrated_processor(
+                    st.session_state["hybrid_processor"] = create_integrated_processor(
                         hybrid_learner=learner,
                         adaptive_extractor=adaptive_extractor,
-                        user_id=st.session_state['persistent_user_id'],
+                        user_id=st.session_state["persistent_user_id"],
                     )
 
                     # Initialize learning tracking
-                    if 'learning_stats' not in st.session_state:
-                        st.session_state['learning_stats'] = {
-                            'exchanges_processed': 0,
-                            'signals_learned': 0,
-                            'glyphs_generated': 0
+                    if "learning_stats" not in st.session_state:
+                        st.session_state["learning_stats"] = {
+                            "exchanges_processed": 0,
+                            "signals_learned": 0,
+                            "glyphs_generated": 0,
                         }
 
                 # Process through integrated pipeline with dynamic glyph generation
-                if 'hybrid_processor' in st.session_state:
-                    processor = st.session_state['hybrid_processor']
+                if "hybrid_processor" in st.session_state:
+                    processor = st.session_state["hybrid_processor"]
 
                     # Ensure we're using the persistent user ID
                     evolution_result = processor.process_user_message(
                         user_message=user_input,
                         ai_response=response,
-                        user_id=st.session_state['persistent_user_id'],
-                        conversation_id=st.session_state.get(
-                            'conversation_id', 'default'),
+                        user_id=st.session_state["persistent_user_id"],
+                        conversation_id=st.session_state.get("conversation_id", "default"),
                         glyphs=debug_glyphs,
                     )
 
                     # Update learning statistics
-                    st.session_state['learning_stats']['exchanges_processed'] += 1
-                    if evolution_result['learning_result'].get('learned_to_user', False):
-                        st.session_state['learning_stats']['signals_learned'] += len(
-                            evolution_result.get('emotional_signals', [])
+                    st.session_state["learning_stats"]["exchanges_processed"] += 1
+                    if evolution_result["learning_result"].get("learned_to_user", False):
+                        st.session_state["learning_stats"]["signals_learned"] += len(
+                            evolution_result.get("emotional_signals", [])
                         )
 
                     # Check if new glyphs were generated
-                    new_glyphs = evolution_result['pipeline_stages']['glyph_generation'].get(
-                        'new_glyphs_generated', [])
+                    new_glyphs = evolution_result["pipeline_stages"]["glyph_generation"].get("new_glyphs_generated", [])
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
-                        if 'new_glyphs_this_session' not in st.session_state:
-                            st.session_state['new_glyphs_this_session'] = []
-                        st.session_state['new_glyphs_this_session'].extend(
-                            new_glyphs)
+                        if "new_glyphs_this_session" not in st.session_state:
+                            st.session_state["new_glyphs_this_session"] = []
+                        st.session_state["new_glyphs_this_session"].extend(new_glyphs)
 
                         # Update learning statistics
-                        st.session_state['learning_stats']['glyphs_generated'] += len(
-                            new_glyphs)
+                        st.session_state["learning_stats"]["glyphs_generated"] += len(new_glyphs)
 
                         # Display learning progress
                         st.sidebar.markdown("### 📊 Learning Progress")
                         st.sidebar.text(
-                            f"Exchanges Processed: {st.session_state['learning_stats']['exchanges_processed']}")
-                        st.sidebar.text(
-                            f"Signals Learned: {st.session_state['learning_stats']['signals_learned']}")
-                        st.sidebar.text(
-                            f"Glyphs Generated: {st.session_state['learning_stats']['glyphs_generated']}")
+                            f"Exchanges Processed: {st.session_state['learning_stats']['exchanges_processed']}"
+                        )
+                        st.sidebar.text(f"Signals Learned: {st.session_state['learning_stats']['signals_learned']}")
+                        st.sidebar.text(f"Glyphs Generated: {st.session_state['learning_stats']['glyphs_generated']}")
 
                         # Display notification about new glyphs
-                        st.success(
-                            f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
+                        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
                         for glyph in new_glyphs:
-                            glyph_dict = glyph.to_dict() if hasattr(glyph, 'to_dict') else glyph
-                            st.info(f"  {glyph_dict.get('symbol', '?')} **{glyph_dict.get('name', '?')}** "
-                                    f"({' + '.join(glyph_dict.get('core_emotions', []))})")
+                            glyph_dict = glyph.to_dict() if hasattr(glyph, "to_dict") else glyph
+                            st.info(
+                                f"  {glyph_dict.get('symbol', '?')} **{glyph_dict.get('name', '?')}** "
+                                f"({' + '.join(glyph_dict.get('core_emotions', []))})"
+                            )
 
                     # Log learning results
-                    learning_result = evolution_result['pipeline_stages']['hybrid_learning'].get(
-                        'learning_result', {})
+                    learning_result = evolution_result["pipeline_stages"]["hybrid_learning"].get("learning_result", {})
                     if learning_result.get("learned_to_shared"):
-                        logger.info(
-                            f"User {user_id} contributed to shared lexicon")
+                        logger.info(f"User {user_id} contributed to shared lexicon")
                     elif learning_result.get("learned_to_user"):
-                        logger.info(
-                            f"User {user_id} learning to personal lexicon")
+                        logger.info(f"User {user_id} learning to personal lexicon")
 
             except ImportError as e:
                 # Fallback if dynamic evolution not available
                 logger.warning(f"Dynamic glyph evolution not available: {e}")
                 try:
-                    from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
+                    from emotional_os.learning.hybrid_learner_v2 import (
+                        get_hybrid_learner,
+                    )
+
                     learner = get_hybrid_learner()
-                    user_id = st.session_state.get('user_id', 'anonymous')
+                    user_id = st.session_state.get("user_id", "anonymous")
                     result = learner.learn_from_exchange(
                         user_id=user_id,
                         user_input=user_input,
@@ -2357,58 +2419,52 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
                     if result.get("learned_to_shared"):
-                        logger.info(
-                            f"User {user_id} contributed to shared lexicon")
+                        logger.info(f"User {user_id} contributed to shared lexicon")
                     elif result.get("learned_to_user"):
-                        logger.info(
-                            f"User {user_id} learning to personal lexicon")
+                        logger.info(f"User {user_id} learning to personal lexicon")
                 except Exception as fallback_e:
-                    logger.error(
-                        f"Fallback learning also failed: {fallback_e}")
+                    logger.error(f"Fallback learning also failed: {fallback_e}")
             except Exception as e:
                 # Non-fatal: learning should not break the app
                 logger.warning(f"Hybrid learning failed: {e}")
 
         # Persist to Supabase if the user opted in using the new conversation manager
         try:
-            if st.session_state.get('persist_history', False) and st.session_state.get('conversation_manager'):
-                manager = st.session_state['conversation_manager']
-                conversation_id = st.session_state.get(
-                    'current_conversation_id', 'default')
+            if st.session_state.get("persist_history", False) and st.session_state.get("conversation_manager"):
+                manager = st.session_state["conversation_manager"]
+                conversation_id = st.session_state.get("current_conversation_id", "default")
 
                 # Auto-name conversation based on first message
                 # Just added first exchange
                 if len(st.session_state[conversation_key]) == 1:
                     if generate_auto_name:
                         title = generate_auto_name(user_input)
-                        st.session_state['conversation_title'] = title
+                        st.session_state["conversation_title"] = title
                     else:
                         title = "New Conversation"
                 else:
-                    title = st.session_state.get(
-                        'conversation_title', 'New Conversation')
+                    title = st.session_state.get("conversation_title", "New Conversation")
 
                 # Save to database with conversation manager
                 messages = st.session_state[conversation_key]
                 success, message = manager.save_conversation(
-                    conversation_id=conversation_id,
-                    title=title,
-                    messages=messages,
-                    processing_mode=processing_mode
+                    conversation_id=conversation_id, title=title, messages=messages, processing_mode=processing_mode
                 )
                 if success:
                     # On success, ensure the sidebar shows this conversation immediately
                     try:
-                        cached = st.session_state.setdefault(
-                            'session_cached_conversations', [])
-                        if not any(c.get('conversation_id') == conversation_id for c in cached):
-                            cached.insert(0, {
-                                'conversation_id': conversation_id,
-                                'title': title,
-                                'updated_at': datetime.datetime.now().isoformat(),
-                                'message_count': len(messages),
-                                'processing_mode': processing_mode
-                            })
+                        cached = st.session_state.setdefault("session_cached_conversations", [])
+                        if not any(c.get("conversation_id") == conversation_id for c in cached):
+                            cached.insert(
+                                0,
+                                {
+                                    "conversation_id": conversation_id,
+                                    "title": title,
+                                    "updated_at": datetime.datetime.now().isoformat(),
+                                    "message_count": len(messages),
+                                    "processing_mode": processing_mode,
+                                },
+                            )
                     except Exception:
                         pass
                 else:
@@ -2420,22 +2476,19 @@ def render_main_app():
 
         # Fallback: Also persist individual messages to old conversation_history table if configured
         try:
-            if st.session_state.get('persist_history', False):
-                sup_cfg = st.secrets.get('supabase', {}) if hasattr(
-                    st, 'secrets') else {}
-                supabase_url = sup_cfg.get('url') or sup_cfg.get(
-                    'saori_url') or sup_cfg.get('saori_function_url')
-                supabase_key = sup_cfg.get('key') or sup_cfg.get(
-                    'anon_key') or sup_cfg.get('apikey')
+            if st.session_state.get("persist_history", False):
+                sup_cfg = st.secrets.get("supabase", {}) if hasattr(st, "secrets") else {}
+                supabase_url = sup_cfg.get("url") or sup_cfg.get("saori_url") or sup_cfg.get("saori_function_url")
+                supabase_key = sup_cfg.get("key") or sup_cfg.get("anon_key") or sup_cfg.get("apikey")
                 # If function URL was provided instead of base url, try to extract base
-                if supabase_url and supabase_url.endswith('/'):
-                    supabase_url = supabase_url.rstrip('/')
+                if supabase_url and supabase_url.endswith("/"):
+                    supabase_url = supabase_url.rstrip("/")
                 # If the provided value looks like an edge function URL, extract base supabase domain
-                if supabase_url and '/functions/' in supabase_url:
+                if supabase_url and "/functions/" in supabase_url:
                     # nothing special, use as-is (best-effort)
-                    base_url = supabase_url.split('/functions/')[0]
-                elif supabase_url and supabase_url.startswith('https://') and '.supabase.' in supabase_url:
-                    base_url = supabase_url.split('/')[2]
+                    base_url = supabase_url.split("/functions/")[0]
+                elif supabase_url and supabase_url.startswith("https://") and ".supabase." in supabase_url:
+                    base_url = supabase_url.split("/")[2]
                     base_url = f"https://{base_url}"
                 else:
                     base_url = supabase_url
@@ -2443,32 +2496,29 @@ def render_main_app():
                 if base_url and supabase_key and requests:
                     rest_url = f"{base_url}/rest/v1/conversation_history"
                     headers = {
-                        'Content-Type': 'application/json',
-                        'apikey': supabase_key,
-                        'Authorization': f'Bearer {supabase_key}',
-                        'Prefer': 'return=representation'
+                        "Content-Type": "application/json",
+                        "apikey": supabase_key,
+                        "Authorization": f"Bearer {supabase_key}",
+                        "Prefer": "return=representation",
                     }
                     payload = [
                         {
-                            'user_id': st.session_state.get('user_id'),
-                            'username': st.session_state.get('username'),
-                            'user_message': user_input,
-                            'assistant_reply': response,
-                            'processing_time': f"{processing_time:.2f}s",
-                            'mode': processing_mode,
-                            'timestamp': entry['timestamp']
+                            "user_id": st.session_state.get("user_id"),
+                            "username": st.session_state.get("username"),
+                            "user_message": user_input,
+                            "assistant_reply": response,
+                            "processing_time": f"{processing_time:.2f}s",
+                            "mode": processing_mode,
+                            "timestamp": entry["timestamp"],
                         }
                     ]
                     try:
-                        resp = requests.post(
-                            rest_url, headers=headers, json=payload, timeout=6)
+                        resp = requests.post(rest_url, headers=headers, json=payload, timeout=6)
                         if resp.status_code not in (200, 201):
                             # Non-fatal: warn in UI (use generic storage wording)
-                            st.warning(
-                                'Could not save history to secure storage right now.')
+                            st.warning("Could not save history to secure storage right now.")
                     except Exception:
-                        st.warning(
-                            'Temporary issue saving to secure storage. Your local history is still intact.')
+                        st.warning("Temporary issue saving to secure storage. Your local history is still intact.")
         except Exception:
             # Best-effort: do not break the UI if persistence fails
             pass
@@ -2478,6 +2528,7 @@ def render_main_app():
         st.session_state.show_personal_log = False
     if st.session_state.show_personal_log:
         import datetime as dt
+
         st.markdown("### 📘 Journal & Self-Care Center")
         journal_type = st.selectbox(
             "Choose Journal Type",
@@ -2486,27 +2537,25 @@ def render_main_app():
                 "Daily Emotional Check-In",
                 "Self-Care Tracker",
                 "Micro-Boundary Ritual",
-                "Reflective Journal"
+                "Reflective Journal",
             ],
-            key="journal_type_select"
+            key="journal_type_select",
         )
         if journal_type == "Personal Log":
             st.markdown(
-                "Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights.")
+                "Use this space to record a structured emotional entry. You'll log the date, event, mood, reflections, and insights."
+            )
             date = st.date_input("Date", value=dt.date.today())
             log_time = st.time_input("Time", value=dt.datetime.now().time())
             event = st.text_area("Event", placeholder="What happened?")
             mood = st.text_input("Mood", placeholder="How did it feel?")
-            reflections = st.text_area(
-                "Reflections", placeholder="What’s emerging emotionally?")
-            insights = st.text_area(
-                "Insights", placeholder="What truth or clarity surfaced?")
+            reflections = st.text_area("Reflections", placeholder="What’s emerging emotionally?")
+            insights = st.text_area("Insights", placeholder="What truth or clarity surfaced?")
             if st.button("Conclude Log"):
                 st.success("Your personal log has been saved.")
                 try:
                     if callable(generate_doc):
-                        buf = generate_doc(
-                            date, log_time, event, mood, reflections, insights)
+                        buf = generate_doc(date, log_time, event, mood, reflections, insights)
                         # If a BytesIO-like object was returned, get raw bytes
                         try:
                             data_bytes = buf.getvalue()
@@ -2532,37 +2581,57 @@ def render_main_app():
                 except Exception as e:
                     st.error(f"Error generating Word document: {e}")
         elif journal_type == "Daily Emotional Check-In":
-            st.markdown(
-                "Log your mood, stress level, and a short reflection for today.")
-            checkin_date = st.date_input("Date", value=dt.date.today(), key="checkin_date")  # noqa: F841  # used for Streamlit UI side-effect
-            mood = st.selectbox("Mood", [
-                                "Calm", "Stressed", "Sad", "Angry", "Joyful", "Fatigued", "Other"], key="checkin_mood")
-            stress = st.slider("Stress Level", 0, 10, 5, key="checkin_stress")  # noqa: F841  # used for Streamlit UI side-effect
-            reflection = st.text_area("Reflection", placeholder="What's on your mind today?", key="checkin_reflection")  # noqa: F841  # used for Streamlit UI side-effect
+            st.markdown("Log your mood, stress level, and a short reflection for today.")
+            checkin_date = st.date_input(
+                "Date", value=dt.date.today(), key="checkin_date"
+            )  # noqa: F841  # used for Streamlit UI side-effect
+            mood = st.selectbox(
+                "Mood", ["Calm", "Stressed", "Sad", "Angry", "Joyful", "Fatigued", "Other"], key="checkin_mood"
+            )
+            stress = st.slider(
+                "Stress Level", 0, 10, 5, key="checkin_stress"
+            )  # noqa: F841  # used for Streamlit UI side-effect
+            reflection = st.text_area(
+                "Reflection", placeholder="What's on your mind today?", key="checkin_reflection"
+            )  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Check-In"):
                 st.success("Your daily check-in has been saved.")
         elif journal_type == "Self-Care Tracker":
             st.markdown("Track your self-care activities and routines.")
             activities = st.multiselect(  # noqa: F841  # used for Streamlit UI side-effect
                 "Self-Care Activities",
-                ["Exercise", "Creative Work", "Peer Support", "Rest",
-                    "Healthy Meal", "Time Outdoors", "Other"],
-                key="selfcare_activities"
+                ["Exercise", "Creative Work", "Peer Support", "Rest", "Healthy Meal", "Time Outdoors", "Other"],
+                key="selfcare_activities",
             )
-            notes = st.text_area("Notes", placeholder="Any details or thoughts about your self-care today?", key="selfcare_notes")  # noqa: F841  # used for Streamlit UI side-effect
+            notes = st.text_area(
+                "Notes", placeholder="Any details or thoughts about your self-care today?", key="selfcare_notes"
+            )  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Self-Care Entry"):
                 st.success("Your self-care entry has been saved.")
         elif journal_type == "Micro-Boundary Ritual":
             st.markdown("Mark a transition between work and personal time.")
-            ritual_type = st.selectbox("Ritual Type", ["Change Location", "Wash Hands", "Listen to Music", "Short Walk", "Other"], key="ritual_type")  # noqa: F841  # used for Streamlit UI side-effect
-            ritual_notes = st.text_area("Ritual Notes", placeholder="How did this ritual help you shift gears?", key="ritual_notes")  # noqa: F841  # used for Streamlit UI side-effect
+            ritual_type = st.selectbox(
+                "Ritual Type",
+                ["Change Location", "Wash Hands", "Listen to Music", "Short Walk", "Other"],
+                key="ritual_type",
+            )  # noqa: F841  # used for Streamlit UI side-effect
+            ritual_notes = st.text_area(
+                "Ritual Notes", placeholder="How did this ritual help you shift gears?", key="ritual_notes"
+            )  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Log Ritual"):
                 st.success("Your boundary ritual has been logged.")
         elif journal_type == "Reflective Journal":
             st.markdown(
-                "Write about your own reactions, growth, and challenges. No client details—just your personal journey.")
-            journal_date = st.date_input("Date", value=dt.date.today(), key="reflective_date")  # noqa: F841  # used for Streamlit UI side-effect
-            entry = st.text_area("Reflection Entry", placeholder="What's emerging for you emotionally or personally?", key="reflective_entry")  # noqa: F841  # used for Streamlit UI side-effect
+                "Write about your own reactions, growth, and challenges. No client details—just your personal journey."
+            )
+            journal_date = st.date_input(
+                "Date", value=dt.date.today(), key="reflective_date"
+            )  # noqa: F841  # used for Streamlit UI side-effect
+            entry = st.text_area(
+                "Reflection Entry",
+                placeholder="What's emerging for you emotionally or personally?",
+                key="reflective_entry",
+            )  # noqa: F841  # used for Streamlit UI side-effect
             if st.button("Save Reflection"):
                 st.success("Your reflection has been saved.")
         if st.button("Close Journal Center"):
@@ -2584,36 +2653,31 @@ def delete_user_history_from_supabase(user_id: str):
         if not user_id:
             return False, "No user_id provided"
 
-        sup_cfg = st.secrets.get('supabase', {}) if hasattr(
-            st, 'secrets') else {}
-        supabase_url = sup_cfg.get('url') or sup_cfg.get(
-            'saori_url') or sup_cfg.get('saori_function_url')
-        supabase_key = sup_cfg.get('key') or sup_cfg.get(
-            'anon_key') or sup_cfg.get('apikey')
+        sup_cfg = st.secrets.get("supabase", {}) if hasattr(st, "secrets") else {}
+        supabase_url = sup_cfg.get("url") or sup_cfg.get("saori_url") or sup_cfg.get("saori_function_url")
+        supabase_key = sup_cfg.get("key") or sup_cfg.get("anon_key") or sup_cfg.get("apikey")
         if not supabase_url or not supabase_key:
             return False, "Supabase credentials not configured"
 
         # Normalize base URL
-        if supabase_url.endswith('/'):
-            supabase_url = supabase_url.rstrip('/')
-        if '/functions/' in supabase_url:
-            base_url = supabase_url.split('/functions/')[0]
-        elif supabase_url.startswith('https://') and '.supabase.' in supabase_url:
+        if supabase_url.endswith("/"):
+            supabase_url = supabase_url.rstrip("/")
+        if "/functions/" in supabase_url:
+            base_url = supabase_url.split("/functions/")[0]
+        elif supabase_url.startswith("https://") and ".supabase." in supabase_url:
             # Derive base from host
-            host = supabase_url.split('/')[2]
+            host = supabase_url.split("/")[2]
             base_url = f"https://{host}"
         else:
             base_url = supabase_url
 
         # Perform REST delete on conversation_history
         import urllib.parse
-        encoded = urllib.parse.quote(str(user_id), safe='')
+
+        encoded = urllib.parse.quote(str(user_id), safe="")
         rest_url = f"{base_url}/rest/v1/conversation_history"
         delete_url = f"{rest_url}?user_id=eq.{encoded}"
-        headers = {
-            'apikey': supabase_key,
-            'Authorization': f'Bearer {supabase_key}'
-        }
+        headers = {"apikey": supabase_key, "Authorization": f"Bearer {supabase_key}"}
         resp = requests.delete(delete_url, headers=headers, timeout=10)
         success = resp.status_code in (200, 204)
 
@@ -2621,30 +2685,31 @@ def delete_user_history_from_supabase(user_id: str):
         try:
             audit_url = f"{base_url}/rest/v1/conversation_deletion_audit"
             audit_headers = {
-                'Content-Type': 'application/json',
-                'apikey': supabase_key,
-                'Authorization': f'Bearer {supabase_key}',
-                'Prefer': 'return=representation'
+                "Content-Type": "application/json",
+                "apikey": supabase_key,
+                "Authorization": f"Bearer {supabase_key}",
+                "Prefer": "return=representation",
             }
-            audit_payload = [{
-                'user_id': user_id,
-                'requested_by': st.session_state.get('user_id') if 'user_id' in st.session_state else None,
-                'method': 'user-requested-via-ui',
-                'details': {
-                    'delete_status': getattr(resp, 'status_code', None),
-                    'delete_text': getattr(resp, 'text', None)
+            audit_payload = [
+                {
+                    "user_id": user_id,
+                    "requested_by": st.session_state.get("user_id") if "user_id" in st.session_state else None,
+                    "method": "user-requested-via-ui",
+                    "details": {
+                        "delete_status": getattr(resp, "status_code", None),
+                        "delete_text": getattr(resp, "text", None),
+                    },
                 }
-            }]
-            requests.post(audit_url, headers=audit_headers,
-                          json=audit_payload, timeout=6)
+            ]
+            requests.post(audit_url, headers=audit_headers, json=audit_payload, timeout=6)
         except Exception:
             # Swallow audit failures; do not block the main delete result
             pass
 
         if success:
-            return True, 'Deleted server-side history successfully.'
+            return True, "Deleted server-side history successfully."
         else:
-            return False, f'Supabase delete returned {resp.status_code}: {resp.text}'
+            return False, f"Supabase delete returned {resp.status_code}: {resp.text}"
     except Exception as e:
         return False, str(e)
 
@@ -2662,20 +2727,18 @@ def render_main_app_safe(*args, **kwargs):
         import traceback
         from pathlib import Path as _Path
 
-        tb = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+        tb = "".join(traceback.format_exception(type(e), e, e.__traceback__))
         try:
-            _Path('debug_runtime.log').write_text(tb, encoding='utf-8')
+            _Path("debug_runtime.log").write_text(tb, encoding="utf-8")
         except Exception:
             # best-effort write
             pass
 
         try:
             # If Streamlit is usable, show a short excerpt to the user
-            st.error(
-                "A runtime error occurred; details have been written to debug_runtime.log")
-            excerpt = '\n'.join(tb.splitlines()[-12:])
-            st.markdown(
-                f"<pre style='white-space:pre-wrap'>{excerpt}</pre>", unsafe_allow_html=True)
+            st.error("A runtime error occurred; details have been written to debug_runtime.log")
+            excerpt = "\n".join(tb.splitlines()[-12:])
+            st.markdown(f"<pre style='white-space:pre-wrap'>{excerpt}</pre>", unsafe_allow_html=True)
         except Exception:
             # If Streamlit can't render, print to stdout for host logs
             print(tb)

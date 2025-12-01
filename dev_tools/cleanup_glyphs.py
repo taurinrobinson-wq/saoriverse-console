@@ -28,11 +28,10 @@ import json
 import os
 import re
 import sys
+import unicodedata
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
-import unicodedata
-
 
 SQL_COLS = [
     "id",
@@ -56,7 +55,7 @@ def find_values_section(sql: str) -> str:
     m = re.search(r"\bVALUES\b", sql, flags=re.IGNORECASE)
     if not m:
         raise ValueError("No VALUES keyword found in SQL file")
-    return sql[m.end():]
+    return sql[m.end() :]
 
 
 def iter_tuples(values_section: str):
@@ -96,7 +95,7 @@ def iter_tuples(values_section: str):
                     depth -= 1
                     if depth == 0:
                         # tuple ends at j
-                        raw = values_section[i + 1: j]
+                        raw = values_section[i + 1 : j]
                         yield raw.strip()
                         i = j + 1
                         break
@@ -179,26 +178,28 @@ def to_snake(s: str) -> str:
     return slug[:120]
 
 
-STOPWORDS = set([
-    "the",
-    "and",
-    "or",
-    "of",
-    "in",
-    "on",
-    "a",
-    "an",
-    "to",
-    "with",
-    "that",
-    "this",
-    "is",
-    "it",
-    "as",
-    "for",
-    "be",
-    "are",
-])
+STOPWORDS = set(
+    [
+        "the",
+        "and",
+        "or",
+        "of",
+        "in",
+        "on",
+        "a",
+        "an",
+        "to",
+        "with",
+        "that",
+        "this",
+        "is",
+        "it",
+        "as",
+        "for",
+        "be",
+        "are",
+    ]
+)
 
 
 def generate_triggers(name: Optional[str], description: Optional[str], existing: List[str]) -> List[str]:
@@ -281,21 +282,40 @@ def fix_mojibake(text: Optional[str]) -> Optional[str]:
         s = s.replace(k, v)
     # Attempt a recover-by-decoding heuristic if still odd: try latin1->utf-8
     try:
-        repaired = s.encode('latin1').decode('utf-8')
+        repaired = s.encode("latin1").decode("utf-8")
         # only replace if it looks better (contains more unicode categories)
         if any(ord(c) > 127 for c in repaired):
             s = repaired
     except Exception:
         pass
     # Normalize Unicode canonical composition
-    s = unicodedata.normalize('NFC', s)
+    s = unicodedata.normalize("NFC", s)
     # strip control characters
     s = re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]+", " ", s)
     return s.strip()
 
 
-GENERIC_TRIGGERS = set(["you", "your", "new", "what", "when", "this", "that",
-                       "they", "we", "is", "are", "will", "it", "here", "there", "not", "the"])
+GENERIC_TRIGGERS = set(
+    [
+        "you",
+        "your",
+        "new",
+        "what",
+        "when",
+        "this",
+        "that",
+        "they",
+        "we",
+        "is",
+        "are",
+        "will",
+        "it",
+        "here",
+        "there",
+        "not",
+        "the",
+    ]
+)
 
 # Extend generic trigger set for fragment penalties
 GENERIC_TRIGGERS.update({"being", "let", "wor", "ag"})
@@ -329,11 +349,15 @@ def refine_triggers(triggers: List[str]) -> List[str]:
 
 
 def infer_response_layer(description: Optional[str], emotional_tone: Optional[str]) -> Optional[str]:
-    if description and re.search(r"\b(boundary|shield|surrender|defend|defense|protect|protects)\b", description, flags=re.I):
+    if description and re.search(
+        r"\b(boundary|shield|surrender|defend|defense|protect|protects)\b", description, flags=re.I
+    ):
         return "grounding"
     if description and re.search(r"\b(repair|reconnection|reconnect|outreach|reach|invite)\b", description, flags=re.I):
         return "outreach"
-    if description and re.search(r"\b(longing|ache|grief|mourning|insight|reflection|stillness|quiet)\b", description, flags=re.I):
+    if description and re.search(
+        r"\b(longing|ache|grief|mourning|insight|reflection|stillness|quiet)\b", description, flags=re.I
+    ):
         return "inner_reflection"
     # fallback: if emotional_tone mentions Gate, leave None (don't infer)
     if emotional_tone and re.search(r"gate", emotional_tone, flags=re.I):
@@ -432,8 +456,8 @@ def compute_integrity_score(cleaned_obj: Dict[str, Any], triggers: List[str]) ->
       - metadata completeness (0-1)
     Weighted sum returned.
     """
-    name = (cleaned_obj.get("name") or "")
-    desc = (cleaned_obj.get("description") or "")
+    name = cleaned_obj.get("name") or ""
+    desc = cleaned_obj.get("description") or ""
     symbolic = cleaned_obj.get("symbolic_pairing")
     resp = cleaned_obj.get("response_layer")
     gtype = cleaned_obj.get("glyph_type")
@@ -489,8 +513,7 @@ def compute_integrity_score(cleaned_obj: Dict[str, Any], triggers: List[str]) ->
     meta_score = meta_count / 4.0
 
     # weights
-    score = (0.3 * name_score) + (0.3 * desc_score) + \
-        (0.2 * trig_score) + (0.2 * meta_score)
+    score = (0.3 * name_score) + (0.3 * desc_score) + (0.2 * trig_score) + (0.2 * meta_score)
     return float(max(0.0, min(1.0, score)))
 
 
@@ -520,7 +543,8 @@ def parse_sql_file(path: str) -> List[Dict[str, Any]]:
             # attempt best-effort: pad or trim
             # print a debug warning
             print(
-                f"Warning: tuple had {len(fields)} fields, expected {len(SQL_COLS)}. Skipping tuple prefix: {tup[:80]!r}")
+                f"Warning: tuple had {len(fields)} fields, expected {len(SQL_COLS)}. Skipping tuple prefix: {tup[:80]!r}"
+            )
             continue
         obj: Dict[str, Any] = {}
         for col, raw in zip(SQL_COLS, fields):
@@ -529,7 +553,9 @@ def parse_sql_file(path: str) -> List[Dict[str, Any]]:
     return rows
 
 
-def merge_and_normalize(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], Dict[str, int], List[Dict[str, Any]]]:
+def merge_and_normalize(
+    rows: List[Dict[str, Any]],
+) -> Tuple[List[Dict[str, Any]], Dict[str, int], List[Dict[str, Any]]]:
     groups: Dict[Tuple[Optional[str], str], List[Dict[str, Any]]] = {}
     for r in rows:
         user = r.get("user_id") or "__global__"
@@ -539,8 +565,7 @@ def merge_and_normalize(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]
         groups.setdefault(key, []).append(r)
 
     cleaned: List[Dict[str, Any]] = []
-    stats = {"total_input": len(rows), "groups": len(
-        groups), "merged": 0, "null_name": 0, "null_description": 0}
+    stats = {"total_input": len(rows), "groups": len(groups), "merged": 0, "null_name": 0, "null_description": 0}
     fragments: List[Dict[str, Any]] = []
     for (user, slug), items in groups.items():
         if len(items) > 1:
@@ -566,8 +591,7 @@ def merge_and_normalize(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]
 
         # rehydrate truncated names conservatively
         name_rehydrated = rehydrate_name_from_description(name_norm, desc)
-        final_name = name_rehydrated or (
-            name_norm.strip() if name_norm else None)
+        final_name = name_rehydrated or (name_norm.strip() if name_norm else None)
         # create slug from final name where possible
         slug = to_snake(final_name or slug)
 
@@ -591,16 +615,13 @@ def merge_and_normalize(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]
         except Exception:
             parsed_existing_triggers = normalize_triggers(triggers)
 
-        heur_triggers = generate_triggers(
-            final_name, desc, parsed_existing_triggers)
+        heur_triggers = generate_triggers(final_name, desc, parsed_existing_triggers)
         # refine triggers to drop generic/noisy tokens
         heur_triggers = refine_triggers(heur_triggers)
 
         # attempt to infer missing semantic fields conservatively
-        inferred_glyph_type = infer_glyph_type(
-            final_name, desc, best.get("glyph_type"))
-        inferred_emotional_tone = infer_emotional_tone(
-            desc, heur_triggers, best.get("emotional_tone"))
+        inferred_glyph_type = infer_glyph_type(final_name, desc, best.get("glyph_type"))
+        inferred_emotional_tone = infer_emotional_tone(desc, heur_triggers, best.get("emotional_tone"))
 
         cleaned_obj = {
             "id": best.get("id") or str(uuid.uuid4()),
@@ -629,11 +650,11 @@ def merge_and_normalize(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]
             # tag as fragment candidate (score < 0.5 = candidate for review)
             cleaned_obj["fragment_flag"] = True
             # don't clobber an existing emotional tone if it looks meaningful, otherwise mark discard_candidate
-            if not cleaned_obj.get("emotional_tone") or re.search(r"gate|^\d+", str(cleaned_obj.get("emotional_tone") or ""), flags=re.I):
-                cleaned_obj["emotional_tone"] = cleaned_obj.get(
-                    "emotional_tone") or "discard_candidate"
-            cleaned_obj["glyph_type"] = cleaned_obj.get(
-                "glyph_type") or "fragment"
+            if not cleaned_obj.get("emotional_tone") or re.search(
+                r"gate|^\d+", str(cleaned_obj.get("emotional_tone") or ""), flags=re.I
+            ):
+                cleaned_obj["emotional_tone"] = cleaned_obj.get("emotional_tone") or "discard_candidate"
+            cleaned_obj["glyph_type"] = cleaned_obj.get("glyph_type") or "fragment"
             fragments.append(cleaned_obj.copy())
         else:
             cleaned_obj["fragment_flag"] = False
@@ -644,7 +665,14 @@ def merge_and_normalize(rows: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]
     return cleaned, stats, fragments
 
 
-def write_outputs(cleaned: List[Dict[str, Any]], out_json: str, out_csv: str, report_md: str, sample_n: int = 20, fragments: Optional[List[Dict[str, Any]]] = None):
+def write_outputs(
+    cleaned: List[Dict[str, Any]],
+    out_json: str,
+    out_csv: str,
+    report_md: str,
+    sample_n: int = 20,
+    fragments: Optional[List[Dict[str, Any]]] = None,
+):
     os.makedirs(os.path.dirname(out_json) or ".", exist_ok=True)
     with open(out_json, "w", encoding="utf-8") as f:
         json.dump(cleaned, f, indent=2, ensure_ascii=False)
@@ -678,7 +706,7 @@ def write_outputs(cleaned: List[Dict[str, Any]], out_json: str, out_csv: str, re
 
     # report
     with open(report_md, "w", encoding="utf-8") as f:
-        f.write(f"# Glyphs Cleanup Report\n\n")
+        f.write("# Glyphs Cleanup Report\n\n")
         f.write(f"Generated: {datetime.utcnow().isoformat()} UTC\n\n")
         f.write(f"Total cleaned rows: {len(cleaned)}\n\n")
         if fragments:
@@ -688,80 +716,77 @@ def write_outputs(cleaned: List[Dict[str, Any]], out_json: str, out_csv: str, re
             f.write("- ID: ``" + (r.get("id") or "") + "``\n")
             f.write("  - name: " + (r.get("name") or "<null>") + "\n")
             f.write("  - slug: " + (r.get("slug") or "<null>") + "\n")
-            f.write("  - description: " + (r.get("description")
-                    or "<null>")[:200].replace("\n", " ") + "\n")
-            f.write("  - triggers: " +
-                    json.dumps(r.get("triggers") or []) + "\n\n")
+            f.write("  - description: " + (r.get("description") or "<null>")[:200].replace("\n", " ") + "\n")
+            f.write("  - triggers: " + json.dumps(r.get("triggers") or []) + "\n\n")
     # write fragments file if any
     if fragments is not None:
-        frag_path = os.path.join(os.path.dirname(
-            out_json) or ".", "fragments_to_review.json")
+        frag_path = os.path.join(os.path.dirname(out_json) or ".", "fragments_to_review.json")
         with open(frag_path, "w", encoding="utf-8") as ff:
             json.dump(fragments, ff, indent=2, ensure_ascii=False)
         # Also produce a CSV summary for quick review (lowest integrity first)
         try:
-            csv_path = os.path.join(os.path.dirname(
-                out_json) or ".", "fragments_review.csv")
+            csv_path = os.path.join(os.path.dirname(out_json) or ".", "fragments_review.csv")
             with open(csv_path, "w", encoding="utf-8", newline="") as cf:
-                fieldnames = ["id", "name", "slug",
-                              "integrity_score", "description_short", "triggers"]
+                fieldnames = ["id", "name", "slug", "integrity_score", "description_short", "triggers"]
                 writer = csv.DictWriter(cf, fieldnames=fieldnames)
                 writer.writeheader()
                 # sort fragments ascending by integrity_score
-                frag_sorted = sorted(
-                    fragments, key=lambda x: x.get("integrity_score", 0.0))
+                frag_sorted = sorted(fragments, key=lambda x: x.get("integrity_score", 0.0))
                 for f in frag_sorted:
-                    writer.writerow({
-                        "id": f.get("id"),
-                        "name": f.get("name"),
-                        "slug": f.get("slug"),
-                        "integrity_score": f.get("integrity_score"),
-                        "description_short": (f.get("description") or "")[:200].replace("\n", " "),
-                        "triggers": json.dumps(f.get("triggers") or [])
-                    })
+                    writer.writerow(
+                        {
+                            "id": f.get("id"),
+                            "name": f.get("name"),
+                            "slug": f.get("slug"),
+                            "integrity_score": f.get("integrity_score"),
+                            "description_short": (f.get("description") or "")[:200].replace("\n", " "),
+                            "triggers": json.dumps(f.get("triggers") or []),
+                        }
+                    )
         except Exception:
             # best-effort: if CSV can't be written, continue
             pass
         # Produce a lowest-integrity sample CSV (bottom N), irrespective of fragment threshold
         try:
             sample_n = 50
-            sample_path = os.path.join(os.path.dirname(
-                out_json) or ".", "lowest_integrity_sample.csv")
+            sample_path = os.path.join(os.path.dirname(out_json) or ".", "lowest_integrity_sample.csv")
             with open(sample_path, "w", encoding="utf-8", newline="") as sf:
-                sfieldnames = ["id", "name", "slug",
-                               "integrity_score", "description_short", "triggers"]
+                sfieldnames = ["id", "name", "slug", "integrity_score", "description_short", "triggers"]
                 sw = csv.DictWriter(sf, fieldnames=sfieldnames)
                 sw.writeheader()
                 # sort cleaned rows ascending by integrity score
-                cleaned_sorted = sorted(
-                    cleaned, key=lambda x: x.get("integrity_score", 1.0))
+                cleaned_sorted = sorted(cleaned, key=lambda x: x.get("integrity_score", 1.0))
                 for f in cleaned_sorted[:sample_n]:
-                    sw.writerow({
-                        "id": f.get("id"),
-                        "name": f.get("name"),
-                        "slug": f.get("slug"),
-                        "integrity_score": f.get("integrity_score"),
-                        "description_short": (f.get("description") or "")[:200].replace("\n", " "),
-                        "triggers": json.dumps(f.get("triggers") or [])
-                    })
+                    sw.writerow(
+                        {
+                            "id": f.get("id"),
+                            "name": f.get("name"),
+                            "slug": f.get("slug"),
+                            "integrity_score": f.get("integrity_score"),
+                            "description_short": (f.get("description") or "")[:200].replace("\n", " "),
+                            "triggers": json.dumps(f.get("triggers") or []),
+                        }
+                    )
         except Exception:
             pass
 
 
 def main(argv: Optional[List[str]] = None):
-    p = argparse.ArgumentParser(
-        description="Cleanup glyphs SQL export and produce normalized preview artifacts")
-    p.add_argument("--source", default="glyphs_rows.sql",
-                   help="Path to SQL file containing INSERT INTO glyphs ... VALUES (...)")
+    p = argparse.ArgumentParser(description="Cleanup glyphs SQL export and produce normalized preview artifacts")
+    p.add_argument(
+        "--source", default="glyphs_rows.sql", help="Path to SQL file containing INSERT INTO glyphs ... VALUES (...)"
+    )
     p.add_argument("--out-json", default="dev_tools/cleaned_glyphs.json")
     p.add_argument("--out-csv", default="dev_tools/cleaned_glyphs_upsert.csv")
     p.add_argument("--report-md", default="dev_tools/cleanup_report.md")
-    p.add_argument("--dry-run", dest="dry_run",
-                   action="store_true", default=True)
-    p.add_argument("--no-dry-run", dest="dry_run", action="store_false",
-                   help="Allow writes to Supabase (not implemented in this script)")
-    p.add_argument("--sample", type=int, default=20,
-                   help="Number of sample cleaned rows to include in report")
+    p.add_argument("--dry-run", dest="dry_run", action="store_true", default=True)
+    p.add_argument(
+        "--no-dry-run",
+        dest="dry_run",
+        action="store_false",
+        help="Allow writes to Supabase (not implemented in this script)",
+    )
+    p.add_argument("--sample", type=int, default=20, help="Number of sample cleaned rows to include in report")
     args = p.parse_args(argv)
 
     if not os.path.exists(args.source):
@@ -772,11 +797,9 @@ def main(argv: Optional[List[str]] = None):
     rows = parse_sql_file(args.source)
     print(f"Parsed {len(rows)} input rows")
     cleaned, stats, fragments = merge_and_normalize(rows)
-    print(
-        f"Produced {len(cleaned)} cleaned rows (merged groups: {stats.get('merged')})")
+    print(f"Produced {len(cleaned)} cleaned rows (merged groups: {stats.get('merged')})")
 
-    write_outputs(cleaned, args.out_json, args.out_csv,
-                  args.report_md, sample_n=args.sample, fragments=fragments)
+    write_outputs(cleaned, args.out_json, args.out_csv, args.report_md, sample_n=args.sample, fragments=fragments)
 
     print("Wrote:")
     print(f" - JSON: {args.out_json}")
@@ -785,5 +808,5 @@ def main(argv: Optional[List[str]] = None):
     print("Dry-run mode: no Supabase writes were performed.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

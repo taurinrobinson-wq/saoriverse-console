@@ -27,11 +27,11 @@ class PoetryExtractor:
         1342,  # Emily Dickinson - Complete Poems
         1661,  # Sherlock Holmes stories (some verse)
         4850,  # William Wordsworth - Complete Poetical Works
-        21379, # William Blake - Complete Poetry
+        21379,  # William Blake - Complete Poetry
         6787,  # John Keats - Complete Poetical Works
-        51013, # Robert Frost - Poetry collection
+        51013,  # Robert Frost - Poetry collection
         1545,  # Edgar Allan Poe - The Raven and Other Poems
-        28421, # Walt Whitman - Leaves of Grass
+        28421,  # Walt Whitman - Leaves of Grass
     ]
 
     def __init__(self, output_dir: str = "data/poetry"):
@@ -44,7 +44,7 @@ class PoetryExtractor:
     def download_project_gutenberg_book(self, book_id: int) -> str:
         """
         Download a book from Project Gutenberg.
-        
+
         Gutendex provides free access to Project Gutenberg catalog.
         """
         try:
@@ -58,8 +58,8 @@ class PoetryExtractor:
             data = response.json()
 
             # Find the text format URL
-            formats = data.get('formats', {})
-            text_url = formats.get('text/plain')
+            formats = data.get("formats", {})
+            text_url = formats.get("text/plain")
 
             if not text_url:
                 print(f"  ⚠️ No text format available for book #{book_id}")
@@ -84,7 +84,7 @@ class PoetryExtractor:
         poems = []
 
         # Simple extraction: split by double newlines (poem breaks)
-        sections = text.split('\n\n')
+        sections = text.split("\n\n")
 
         current_poem = []
         for section in sections:
@@ -94,23 +94,19 @@ class PoetryExtractor:
             if len(section) < 50:
                 continue
 
-            if 'Project Gutenberg' in section or '***' in section:
+            if "Project Gutenberg" in section or "***" in section:
                 continue
 
             # Count lines to identify poems (poems are typically 4-200 lines)
-            lines = section.split('\n')
+            lines = section.split("\n")
             if 4 <= len(lines) <= 100:
                 current_poem.append(section)
 
                 # Group 1-3 stanzas together as a poem
                 if len(current_poem) >= 1:
-                    poem_text = '\n\n'.join(current_poem)
+                    poem_text = "\n\n".join(current_poem)
                     if len(poem_text) > 100:
-                        poems.append({
-                            'text': poem_text,
-                            'book_id': book_id,
-                            'lines': len(lines)
-                        })
+                        poems.append({"text": poem_text, "book_id": book_id, "lines": len(lines)})
                         current_poem = []
 
         return poems
@@ -122,17 +118,13 @@ class PoetryExtractor:
         # Calculate dominant emotion
         if emotions:
             dominant = max(emotions.items(), key=lambda x: x[1])
-            return {
-                'emotions': emotions,
-                'dominant': dominant[0],
-                'strength': dominant[1]
-            }
-        return {'emotions': {}, 'dominant': None, 'strength': 0}
+            return {"emotions": emotions, "dominant": dominant[0], "strength": dominant[1]}
+        return {"emotions": {}, "dominant": None, "strength": 0}
 
     def build_poetry_database(self, use_cache: bool = True) -> dict:
         """
         Build complete poetry database from Project Gutenberg.
-        
+
         Structure:
         {
             'emotion_name': [
@@ -151,7 +143,7 @@ class PoetryExtractor:
         # Use cached database if available
         if use_cache and cache_path.exists():
             print("📚 Loading cached poetry database...")
-            with open(cache_path, 'r', encoding='utf-8') as f:
+            with open(cache_path, "r", encoding="utf-8") as f:
                 return json.load(f)
 
         print("📚 Building poetry database from Project Gutenberg...\n")
@@ -171,18 +163,18 @@ class PoetryExtractor:
 
             # Analyze each poem
             for poem in poems:
-                analysis = self.analyze_poem_emotion(poem['text'])
+                analysis = self.analyze_poem_emotion(poem["text"])
 
-                if analysis['dominant']:
+                if analysis["dominant"]:
                     poem_entry = {
-                        'text': poem['text'][:500],  # First 500 chars
-                        'book_id': book_id,
-                        'lines': poem['lines'],
-                        'strength': analysis['strength'],
-                        'emotions': analysis['emotions']
+                        "text": poem["text"][:500],  # First 500 chars
+                        "book_id": book_id,
+                        "lines": poem["lines"],
+                        "strength": analysis["strength"],
+                        "emotions": analysis["emotions"],
                     }
 
-                    poetry_db[analysis['dominant']].append(poem_entry)
+                    poetry_db[analysis["dominant"]].append(poem_entry)
                     total_poems += 1
 
             # Limit total poems for reasonable database size
@@ -196,7 +188,7 @@ class PoetryExtractor:
 
         # Save to JSON
         print(f"💾 Saving to {cache_path}...")
-        with open(cache_path, 'w', encoding='utf-8') as f:
+        with open(cache_path, "w", encoding="utf-8") as f:
             json.dump(poetry_db_regular, f, indent=2, ensure_ascii=False)
 
         return poetry_db_regular
@@ -210,8 +202,9 @@ class PoetryExtractor:
         if emotion in self.poetry_db and self.poetry_db[emotion]:
             # Return a random poem for this emotion
             import random
+
             poem_entry = random.choice(self.poetry_db[emotion])
-            return poem_entry['text']
+            return poem_entry["text"]
 
         return ""
 
@@ -243,7 +236,7 @@ if __name__ == "__main__":
 
     # Test retrieval
     print("\n🎭 Sample Poems by Emotion:")
-    for emotion in ['joy', 'sadness', 'love', 'fear']:
+    for emotion in ["joy", "sadness", "love", "fear"]:
         poem = extractor.get_poem_for_emotion(emotion)
         if poem:
             print(f"\n{emotion.upper()}:")

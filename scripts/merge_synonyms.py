@@ -7,15 +7,15 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / 'data'
-DM_FILE = DATA_DIR / 'datamuse_synonyms.json'
-WN_FILE = DATA_DIR / 'wordnet_synonyms.json'
-OUT_FILE = DATA_DIR / 'synonyms_merged.json'
+DATA_DIR = ROOT / "data"
+DM_FILE = DATA_DIR / "datamuse_synonyms.json"
+WN_FILE = DATA_DIR / "wordnet_synonyms.json"
+OUT_FILE = DATA_DIR / "synonyms_merged.json"
 
 
 def load_optional(path: Path):
     if path.exists():
-        return json.loads(path.read_text(encoding='utf-8'))
+        return json.loads(path.read_text(encoding="utf-8"))
     return {}
 
 
@@ -29,17 +29,12 @@ def main():
         a = sorted(set(dm.get(k, [])))
         b = sorted(set(wn.get(k, [])))
         merged_list = sorted(set(a) | set(b))
-        merged[k] = {
-            'datamuse': a,
-            'wordnet': b,
-            'merged': merged_list
-        }
+        merged[k] = {"datamuse": a, "wordnet": b, "merged": merged_list}
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    OUT_FILE.write_text(json.dumps(
-        merged, ensure_ascii=False, indent=2), encoding='utf-8')
+    OUT_FILE.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Wrote {OUT_FILE} with {len(merged)} seed entries")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
