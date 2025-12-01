@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Tuple
+from typing import Any, Dict, Tuple
 
 # Lightweight, non-intrusive risk classifier and consent prompt builder
 # This module intentionally does NOT perform any automatic routing or external calls.
@@ -14,7 +14,8 @@ except Exception:
     _LEXICON = {"categories": {}}
 
 # Crisis-like keywords (explicit self-harm language)
-_CRISIS_KEYWORDS = {"suicidal", "kill myself", "end my life", "self harm", "hurt myself", "can't go on", "overdose"}
+_CRISIS_KEYWORDS = {"suicidal", "kill myself", "end my life",
+                    "self harm", "hurt myself", "can't go on", "overdose"}
 
 
 def classify_risk(text: str) -> str:
@@ -35,7 +36,8 @@ def classify_risk(text: str) -> str:
         trauma_words.update(words)
 
     trauma_found = any(w in lowered for w in trauma_words)
-    intense_words = any(w in lowered for w in ["overwhelming", "crushing", "suffocating", "panic", "flashback"])
+    intense_words = any(w in lowered for w in [
+                        "overwhelming", "crushing", "suffocating", "panic", "flashback"])
 
     if trauma_found and intense_words:
         return "medium"
@@ -103,7 +105,7 @@ def handle_consent_reply(reply: str, risk_level: str, locale: str = "US") -> dic
     so the UI can ask for explicit permission before any PII is requested.
     """
     r = (reply or "").strip().lower()
-    result = {
+    result: Dict[str, Any] = {
         "action": "unknown",
         "response": "",
         "resources": None,
