@@ -5,7 +5,7 @@ Combines NRC Lexicon, TextBlob, and spaCy for sophisticated emotion-gate routing
 
 import logging
 from collections import defaultdict
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Import NLP libraries individually so a missing optional dependency
 # (e.g., TextBlob) does not disable the rest of the processor.
@@ -13,19 +13,22 @@ NLP_AVAILABLE = False
 NRC_AVAILABLE = False
 TEXTBLOB_AVAILABLE = False
 SPACY_AVAILABLE = False
-nrc = None
-TextBlob = None
-nlp = None
+# Module-level optional references (annotated as Any to satisfy mypy)
+nrc: Any = None
+TextBlobCls: Any = None
+nlp: Any = None
 try:
-    from parser.nrc_lexicon_loader import nrc
+    from parser.nrc_lexicon_loader import nrc as _nrc
 
+    nrc = _nrc
     NRC_AVAILABLE = True
 except Exception as e:
     logging.debug(f"NRC loader not available: {e}")
 
 try:
-    from textblob import TextBlob
+    from textblob import TextBlob as _TextBlob
 
+    TextBlobCls = _TextBlob
     TEXTBLOB_AVAILABLE = True
 except Exception as e:
     logging.warning(f"TextBlob not available: {e}")
@@ -96,7 +99,7 @@ class EnhancedEmotionProcessor:
             "very_positive": ["Gate 5", "Gate 6"],
         }
 
-    def analyze_emotion_comprehensive(self, text: str) -> Dict:
+    def analyze_emotion_comprehensive(self, text: str) -> Dict[str, Any]:
         """
         Comprehensive emotion analysis using multiple NLP sources.
 
@@ -112,7 +115,7 @@ class EnhancedEmotionProcessor:
         if not NLP_AVAILABLE:
             return self._fallback_analysis(text)
 
-        result = {
+        result: Dict[str, Any] = {
             "nrc_emotions": {},
             "textblob_sentiment": {"polarity": 0.0, "subjectivity": 0.0},
             "spacy_entities": [],
@@ -128,9 +131,9 @@ class EnhancedEmotionProcessor:
             result["nrc_emotions"] = nrc.analyze_text(text)
 
         # 2. TextBlob Sentiment Analysis (optional)
-        if TEXTBLOB_AVAILABLE and TextBlob is not None:
+        if TEXTBLOB_AVAILABLE and TextBlobCls is not None:
             try:
-                blob = TextBlob(text)
+                blob = TextBlobCls(text)
                 result["textblob_sentiment"] = {
                     "polarity": blob.sentiment.polarity,
                     "subjectivity": blob.sentiment.subjectivity,
@@ -142,7 +145,8 @@ class EnhancedEmotionProcessor:
         if SPACY_AVAILABLE and nlp is not None:
             try:
                 doc = nlp(text)
-                result["spacy_entities"] = [(ent.text, ent.label_) for ent in doc.ents]
+                result["spacy_entities"] = [
+                    (ent.text, ent.label_) for ent in doc.ents]
                 # Extract syntactic elements for glyph matching boost
                 result["spacy_syntax"] = self._extract_syntactic_elements(doc)
             except Exception as e:
@@ -158,7 +162,8 @@ class EnhancedEmotionProcessor:
         result["recommended_gates"] = gates
 
         # 5. Generate enhanced signals for compatibility
-        result["enhanced_signals"] = self._generate_enhanced_signals(dominant_emotion, confidence, text)
+        result["enhanced_signals"] = self._generate_enhanced_signals(
+            dominant_emotion, confidence, text)
 
         return result
 
@@ -205,7 +210,7 @@ class EnhancedEmotionProcessor:
 
         return dominant_emotion, confidence, gates
 
-    def _extract_syntactic_elements(self, doc) -> Dict[str, List[str]]:
+    def _extract_syntactic_elements(self, doc: Any) -> Dict[str, List[str]]:
         """
         Extract syntactic elements (nouns, verbs, adjectives) for glyph matching boost.
         Focuses on emotional and meaningful terms.
@@ -397,11 +402,12 @@ class EnhancedEmotionProcessor:
 
         # Remove duplicates while preserving order
         for key in syntactic_elements:
-            syntactic_elements[key] = list(dict.fromkeys(syntactic_elements[key]))
+            syntactic_elements[key] = list(
+                dict.fromkeys(syntactic_elements[key]))
 
         return syntactic_elements
 
-    def _generate_enhanced_signals(self, dominant_emotion: str, confidence: float, text: str) -> List[Dict]:
+    def _generate_enhanced_signals(self, dominant_emotion: str, confidence: float, text: str) -> List[Dict[str, Any]]:
         """
         Generate enhanced signal dictionaries compatible with existing system.
         """
@@ -501,7 +507,8 @@ class EnhancedEmotionProcessor:
         """
         existing_count = len(existing_signals)
         nlp_confidence = analysis["confidence"]
-        has_strong_nrc = bool(analysis["nrc_emotions"] and max(analysis["nrc_emotions"].values()) > 1)
+        has_strong_nrc = bool(analysis["nrc_emotions"] and max(
+            analysis["nrc_emotions"].values()) > 1)
 
         if existing_count == 0 and nlp_confidence > 0.6:
             return "nlp_primary"  # Use NLP analysis as primary

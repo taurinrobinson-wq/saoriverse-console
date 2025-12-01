@@ -11,7 +11,12 @@ Run locally:
   streamlit run Offshoots/ToneCore/streamlit_app.py
 """
 
+import streamlit as st
+import sqlite3
+import signal
+import faulthandler
 import logging
+from typing import Any, Dict, Optional
 import shlex
 import shutil
 import subprocess
@@ -41,13 +46,9 @@ logger.debug("Current sys.path entries (first 5): %s", sys.path[:5])
 # backtraces to stderr/logs by sending SIGUSR1 to the process. This
 # helps diagnose hangs where the server accepts TCP connections but
 # doesn't respond.
-import faulthandler
-import signal
 
 # deferred import of parse_input to avoid startup blocking
-import sqlite3
 
-import streamlit as st
 
 try:
     faulthandler.enable()
@@ -127,6 +128,10 @@ signal parsers and generate a MIDI progression based on the glyphs found.
 
 user_text = st.text_area("Input text", value="", height=160)
 
+# Typed containers for parser/enhanced outputs
+parsed: Optional[Dict[str, Any]] = None
+enhanced: Optional[Dict[str, Any]] = None
+
 if st.button("Generate & Render"):
     if not user_text.strip():
         st.warning("Please enter some text to analyze.")
@@ -136,8 +141,10 @@ if st.button("Generate & Render"):
             try:
                 from emotional_os.core.signal_parser import parse_input
 
-                logger.debug("Successfully imported parse_input from emotional_os.core.signal_parser")
-                parsed = parse_input(user_text, "emotional_os/parser/signal_lexicon.json")
+                logger.debug(
+                    "Successfully imported parse_input from emotional_os.core.signal_parser")
+                parsed = parse_input(
+                    user_text, "emotional_os/parser/signal_lexicon.json")
             except ModuleNotFoundError as e:
                 logger.error("Module import failed: %s", e)
                 logger.error("Current sys.path: %s", sys.path[:5])
@@ -183,28 +190,35 @@ if st.button("Generate & Render"):
                     )
                     enhanced = None
                 except Exception as e:
-                    logger.error("Enhanced analysis error: %s", e, exc_info=True)
+                    logger.error("Enhanced analysis error: %s",
+                                 e, exc_info=True)
                     st.error(f"Enhanced analysis failed: {e}")
                     enhanced = None
 
             if enhanced:
                 st.subheader("Enhanced Analysis")
                 st.write("NRC emotions:", enhanced.get("nrc_emotions"))
-                st.write("TextBlob sentiment:", enhanced.get("textblob_sentiment"))
+                st.write("TextBlob sentiment:",
+                         enhanced.get("textblob_sentiment"))
                 st.write("spaCy syntax:", enhanced.get("spacy_syntax"))
                 st.write(
-                    "Dominant emotion:", enhanced.get("dominant_emotion"), "confidence:", enhanced.get("confidence")
+                    "Dominant emotion:", enhanced.get(
+                        "dominant_emotion"), "confidence:", enhanced.get("confidence")
                 )
-                st.write("Recommended gates:", enhanced.get("recommended_gates"))
+                st.write("Recommended gates:",
+                         enhanced.get("recommended_gates"))
                 st.write("Enhanced signals:", enhanced.get("enhanced_signals"))
 
             # Let the user confirm the emotion to use (default to enhanced dominant emotion)
-            default_emotion = enhanced.get("dominant_emotion") if enhanced and enhanced.get("dominant_emotion") else ""
-            chosen_emotion = st.text_input("Emotion to use for MIDI generation", value=default_emotion)
+            default_emotion = enhanced.get(
+                "dominant_emotion") if enhanced and enhanced.get("dominant_emotion") else ""
+            chosen_emotion = st.text_input(
+                "Emotion to use for MIDI generation", value=default_emotion)
 
             if st.button("Confirm and Generate"):
                 if not chosen_emotion:
-                    st.warning("Please enter or choose an emotion to generate.")
+                    st.warning(
+                        "Please enter or choose an emotion to generate.")
                 else:
                     # generate files
                     midi_out = OUT / "parsed_input.mid"
@@ -223,10 +237,12 @@ if st.button("Generate & Render"):
                         st.error("MIDI generation failed")
                     else:
                         if not sf2_path:
-                            st.error("Soundfont not found and fallback download failed")
+                            st.error(
+                                "Soundfont not found and fallback download failed")
                         else:
                             rc = run_cmd(
-                                ["fluidsynth", "-ni", str(sf2_path), str(midi_out), "-F", str(wav_out), "-r", "44100"]
+                                ["fluidsynth", "-ni", str(sf2_path), str(
+                                    midi_out), "-F", str(wav_out), "-r", "44100"]
                             )
                             if rc == 0 and wav_out.exists():
                                 st.audio(str(wav_out))
