@@ -1,4 +1,34 @@
 {
+  // Reduce Pylance/pyright analysis intensity to avoid language-server crashes
+  // Conservative settings: basic checking, fewer library/type lookups, and disabled indexing
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.useLibraryCodeForTypes": false,
+  "python.analysis.autoSearchPaths": false,
+  "python.analysis.packageIndexDepth": 1,
+  "python.analysis.indexing": false,
+  // Exclude very large or generated folders from analysis and file explorer
+  "files.exclude": {
+    "**/.venv": true,
+    "**/.pytest_cache": true,
+    "**/archive": true,
+    "**/dev_tools": true,
+    "**/supabase": true,
+    "**/logs": true,
+    "**/node_modules": true
+  },
+  // Tell the Python analyzer to ignore these folders entirely
+  "python.analysis.exclude": [
+    "**/.venv/**",
+    "**/archive/**",
+    "**/dev_tools/**",
+    "**/supabase/**",
+    "**/logs/**",
+    "**/node_modules/**"
+  ],
+  // Lower logging noise from language server
+  "python.analysis.logLevel": "Error"
+}
+{
   // Exclude archived and review folders from editor search and file lists to
   // reduce noise. These are large/archival and not part of active development.
   "search.exclude": {
