@@ -2049,15 +2049,25 @@ def parse_input(
             return False
 
         if (
-            not SANCTUARY_MODE
-            and not is_sensitive_input(input_text)
+            not is_sensitive_input(input_text)
             and _is_plain_input_local_after(input_text)
             and _is_poetic_response_local_after(contextual_response)
         ):
-            contextual_response = (
+            conversational_alt = (
                 "I hear you — that sounds difficult. "
                 "If you want, you can tell me a bit more about what that feels like for you today."
             )
+            # If Sanctuary Mode is enabled, preserve the compassionate opener
+            # (usually a short preface) and replace the poetic remainder with
+            # a concise conversational alternative so tone matches the user.
+            try:
+                if SANCTUARY_MODE and isinstance(contextual_response, str) and "\n\n" in contextual_response:
+                    opener, _rest = contextual_response.split("\n\n", 1)
+                    contextual_response = f"{opener}\n\n{conversational_alt}"
+                else:
+                    contextual_response = conversational_alt
+            except Exception:
+                contextual_response = conversational_alt
             response_source = f"{response_source}|conversationalized"
     except Exception:
         pass
