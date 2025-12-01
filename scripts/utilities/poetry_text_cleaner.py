@@ -13,7 +13,7 @@ Ensures extracted poetry text is:
 import logging
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -56,7 +56,8 @@ class PoetryTextCleaner:
 
     def __init__(self):
         """Initialize cleaner."""
-        self.stats = {
+        # Narrowly type stats to help static checkers infer expected numeric values
+        self.stats: Dict[str, int] = {
             "total_chars_before": 0,
             "total_chars_after": 0,
             "artifacts_removed": 0,
@@ -242,7 +243,7 @@ class PoetryTextCleaner:
 
         return text
 
-    def get_stats(self) -> Dict:
+    def get_stats(self) -> Dict[str, int]:
         """Get cleaning statistics."""
         return self.stats.copy()
 
@@ -292,7 +293,7 @@ class PoetryTextValidator:
         """Initialize validator."""
         self.validation_results = []
 
-    def validate_file(self, filepath: Path) -> Dict:
+    def validate_file(self, filepath: Path) -> Dict[str, Any]:
         """
         Validate a poetry text file.
 
@@ -372,7 +373,7 @@ class PoetryTextValidator:
         self.validation_results.append(results)
         return results
 
-    def validate_directory(self, dirpath: Path) -> List[Dict]:
+    def validate_directory(self, dirpath: Path) -> List[Dict[str, Any]]:
         """Validate all files in directory."""
         results = []
 
@@ -396,7 +397,7 @@ class PoetryTextValidator:
 
         return results
 
-    def get_summary(self) -> Dict:
+    def get_summary(self) -> Dict[str, int]:
         """Get validation summary."""
         total = len(self.validation_results)
         valid = sum(1 for r in self.validation_results if r["status"] == "valid")
