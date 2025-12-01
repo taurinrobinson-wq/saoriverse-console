@@ -1797,6 +1797,66 @@ def parse_input(
 
     ritual_prompt = generate_simple_prompt(best_glyph)
 
+    # Register guard: for short/plain user inputs, prefer a conversational
+    # mirror instead of potentially poetic/enhanced responses generated
+    # by the poetic engine. This is a conservative, behavior-preserving
+    # change that only activates when the input appears to be casual
+    # first-person/plain language and the current `contextual_response`
+    # looks like a poem or contains poetic markers.
+    def _is_plain_input_local(s: str) -> bool:
+        if not s:
+            return False
+        s_clean = s.strip()
+        # short, single-line, likely first-person statements are considered plain
+        if "\n" in s_clean:
+            return False
+        words = s_clean.split()
+        if len(words) > 40:
+            return False
+        low = s_clean.lower()
+        # common first-person indicators or casual lead-ins
+        if low.startswith("i ") or low.startswith("i'm") or low.startswith("i'm") or low.startswith("im ") or low.startswith("me ") or low.startswith("man "):
+            return True
+        # mostly lowercase with minimal punctuation looks conversational
+        if s_clean == s_clean.lower() and sum(1 for c in s_clean if c in ".,!?;:") <= 1:
+            return True
+        return False
+
+    def _is_poetic_response_local(r: str) -> bool:
+        if not r:
+            return False
+        low = r.lower()
+        # multiline, explicit poem markers, or archaic phrasing likely poetic
+        if "\n" in r and len(r) > 80:
+            return True
+        if "poem" in low or "resonant glyph" in low or "poem_rendered" in low:
+            return True
+        for w in ("thou", "wherefore", "hath", "wail", "woe", "sigh"):
+            if w in low:
+                return True
+        return False
+
+    try:
+        if (
+            not SANCTUARY_MODE
+            and not is_sensitive_input(input_text)
+            and _is_plain_input_local(input_text)
+            and _is_poetic_response_local(contextual_response)
+        ):
+            # Construct a short, conversational alternative that mirrors
+            # the user's register. Keep language neutral and invitational.
+            conversational_alt = (
+                "I hear you — that sounds difficult. "
+                "If you want, you can tell me a bit more about what that feels like for you today."
+            )
+            contextual_response = conversational_alt
+            # Mark the response source lightly so downstream code can surface
+            # that we chose a conversational register over a poetic render.
+            response_source = f"{response_source}|conversationalized"
+    except Exception:
+        # Keep prior behavior on any unexpected failure
+        pass
+
     # Final safeguard: if selection returned no best_glyph but the message
     # contains clear emotional keywords, provide a deterministic fallback
     # glyph so downstream callers and integration tests are stable.
