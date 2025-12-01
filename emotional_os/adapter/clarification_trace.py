@@ -19,13 +19,13 @@ from typing import Any, Dict, Optional
 try:
     from emotional_os.adapter.clarification_store import get_default_store
 except Exception:
-    def get_default_store():
+    def get_default_store() -> Any:  # type: ignore
         raise RuntimeError("Clarification store not available")
 
 try:
     from symbolic_tagger import tag_input_with_diagnostics
 except Exception:
-    def tag_input_with_diagnostics(user_input: str):
+    def tag_input_with_diagnostics(user_input: str, fuzzy_thresh: float = 0.75) -> dict[Any, Any]:  # type: ignore
         return {"tags": [], "matches": []}
 
 DEFAULT_STORE = Path(__file__).resolve(
@@ -149,10 +149,10 @@ class ClarificationTrace:
                         pass
             except Exception:
                 pass
-            result = {"stored": True, "rowid": None,
+            fallback_result = {"stored": True, "rowid": None,
                       "inferred_intent": None, "needs_confirmation": False}
             try:
-                self._last_result = result
+                self._last_result = fallback_result
             except Exception:
                 pass
             return True
@@ -207,7 +207,7 @@ class ClarificationTrace:
 
             # Run DB insert in a short-lived thread and wait with timeout.
             # If insert doesn't complete quickly (DB locked, slow IO), fall back to JSONL append.
-            q = queue.Queue()
+            q: queue.Queue[tuple[str, Any]] = queue.Queue()
 
             def _worker_insert(q: queue.Queue):
                 try:
@@ -224,7 +224,7 @@ class ClarificationTrace:
                     os.environ.get("CLARIFICATION_DB_INSERT_TIMEOUT", "0.75")))
                 if status == "ok":
                     rowid = payload
-                    result = {
+                    result: Dict[str, Any] = {
                         "stored": True,
                         "rowid": rowid,
                         "inferred_intent": inferred,
@@ -236,10 +236,12 @@ class ClarificationTrace:
                         pass
                     # If DB insert succeeded, purge any matching fallback JSONL records
                     try:
-                        self._purge_jsonl_trigger(
-                            record.get("trigger"), record.get(
-                                "conversation_id"), record.get("user_id")
-                        )
+                        trigger = record.get("trigger")
+                        if trigger:  # Guard: ensure trigger is not None
+                            self._purge_jsonl_trigger(
+                                trigger, record.get(
+                                    "conversation_id"), record.get("user_id")
+                            )
                     except Exception:
                         pass
                     return True
