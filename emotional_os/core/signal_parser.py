@@ -2014,6 +2014,54 @@ def parse_input(
     except Exception as e:
         logger.debug("Poetic engine integration skipped: %s", e)
 
+    # Final conversationalization guard: if the poetic engine produced a
+    # poetic/multiline response but the user's input is plain/first-person,
+    # prefer a short conversational mirror. This runs after poetic processing
+    # so it can't be overwritten later in this function.
+    try:
+        def _is_plain_input_local_after(s: str) -> bool:
+            if not s:
+                return False
+            s_clean = s.strip()
+            if "\n" in s_clean:
+                return False
+            words = s_clean.split()
+            if len(words) > 40:
+                return False
+            low = s_clean.lower()
+            if low.startswith("i ") or low.startswith("i'm") or low.startswith("im ") or low.startswith("me ") or low.startswith("man "):
+                return True
+            if s_clean == s_clean.lower() and sum(1 for c in s_clean if c in ".,!?;:") <= 1:
+                return True
+            return False
+
+        def _is_poetic_response_local_after(r: str) -> bool:
+            if not r:
+                return False
+            low = r.lower()
+            if "\n" in r and len(r) > 80:
+                return True
+            if "poem" in low or "resonant glyph" in low or "poem_rendered" in low:
+                return True
+            for w in ("thou", "wherefore", "hath", "wail", "woe", "sigh"):
+                if w in low:
+                    return True
+            return False
+
+        if (
+            not SANCTUARY_MODE
+            and not is_sensitive_input(input_text)
+            and _is_plain_input_local_after(input_text)
+            and _is_poetic_response_local_after(contextual_response)
+        ):
+            contextual_response = (
+                "I hear you — that sounds difficult. "
+                "If you want, you can tell me a bit more about what that feels like for you today."
+            )
+            response_source = f"{response_source}|conversationalized"
+    except Exception:
+        pass
+
     return {
         "timestamp": datetime.now().isoformat(),
         "input": input_text,
