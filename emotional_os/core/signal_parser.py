@@ -1089,10 +1089,10 @@ def _avoid_repeat(
 # Generate ritual prompt
 
 
-def generate_simple_prompt(glyph: Dict) -> str:
+def generate_simple_prompt(glyph: Optional[Dict[str, Any]]) -> str:
     if not glyph:
         return ""
-    return f"Would you like to take a moment to honor this feeling with the essence of '{glyph['glyph_name']}'?"
+    return f"Would you like to take a moment to honor this feeling with the essence of '{glyph.get('glyph_name')}'?"
 
 
 # Generate voltage response based on theme density
@@ -1380,6 +1380,29 @@ def parse_input(
     conversation_context: Optional[Dict] = None,
     user_id: Optional[str] = None,
 ) -> Dict:
+    # Initialize commonly-used variables with explicit types so mypy
+    # can reason about assignments that happen in try/except branches.
+    contextual_response: str = ""
+    feedback_data: Dict[str, Any] = {
+        "is_correction": False, "contradiction_type": None, "feedback_reason": None}
+    response_source: str = "unknown"
+    debug_sql: str = ""
+    debug_glyph_rows: List[Dict[str, Any]] = []
+    learning_payload: Optional[Dict[str, Any]] = None
+    ritual_prompt: Optional[str] = None
+    gates: List[str] = []
+    glyphs: List[Dict[str, Any]] = []
+    best_glyph: Optional[Dict[str, Any]] = None
+    glyphs_selected: List[Dict[str, Any]] = []
+    # Poetic engine state and response template - typed conservatively
+    poetic_state: Optional[Dict[str, Any]] = None
+    poetic_result: Optional[Dict[str, Any]] = None
+    voltage_response_template: Optional[Union[str, Dict[str, Any]]] = None
+    # Candidate placeholder used in learning/fallback branches
+    candidate: Optional[Dict[str, Any]] = None
+    # Predeclare signals so type-checker knows it's a list of dicts
+    signals: List[Dict[str, Any]] = []
+
     # FIRST: Check if this is just a simple greeting - don't process emotionally
     simple_greetings = ["hi", "hello", "hey", "hi there",
                         "hello there", "hey there", "howdy", "greetings"]
@@ -1740,13 +1763,36 @@ def parse_input(
     result = select_best_glyph_and_response(
         glyphs, signals, input_text, conversation_context)
     # Unpack safely (backwards compatible with older triple return)
-    if result and len(result) == 4:
+    if result and isinstance(result, tuple) and len(result) == 4:
         best_glyph, (contextual_response,
                      feedback_data), response_source, glyphs_selected = result
     else:
-        best_glyph, (contextual_response,
-                     feedback_data), response_source = result
-        glyphs_selected = [best_glyph] if best_glyph else []
+        # Older variants returned a triple; handle both safely
+        if isinstance(result, tuple) and len(result) == 3:
+            best_glyph, pair, response_source = result
+            # pair is expected to be a (response, feedback_data) tuple
+            if isinstance(pair, tuple) and len(pair) == 2:
+                contextual_response, feedback_data = pair
+            else:
+                # Defensive fallback
+                contextual_response = str(
+                    pair) if pair is not None else contextual_response
+                feedback_data = feedback_data or {
+                    "is_correction": False, "contradiction_type": None, "feedback_reason": None}
+            glyphs_selected = [best_glyph] if best_glyph else []
+        else:
+            # Unexpected shape — preserve prior defaults conservatively
+            glyphs_selected = glyphs_selected or []
+
+    # Normalize types to satisfy static checker and ensure runtime consistency
+    if not isinstance(contextual_response, str):
+        contextual_response = str(
+            contextual_response) if contextual_response is not None else ""
+    if not isinstance(feedback_data, dict):
+        feedback_data = {"is_correction": False,
+                         "contradiction_type": None, "feedback_reason": None}
+    response_source = str(
+        response_source) if response_source is not None else "unknown"
 
     ritual_prompt = generate_simple_prompt(best_glyph)
 
@@ -1771,7 +1817,6 @@ def parse_input(
         pass
 
     # If no glyph matched, trigger learning pipeline to generate a candidate and craft a training response
-    learning_payload: Optional[Dict[str, Any]] = None
     if best_glyph is None and (GlyphLearner is not None) and (create_training_response is not None):
         try:
             learner = GlyphLearner(
@@ -1846,13 +1891,21 @@ def parse_input(
         pass
 
     # Poetic Engine integration: update the living poem based on interaction
-    poetic_state = None
     try:
         if HAS_POETIC_ENGINE and get_poetic_engine is not None:
             engine = get_poetic_engine()
             # Build detected emotions from signals
+            # The initializer is an empty dict; some mypy versions infer its
+            # internal types differently in complex flows, so use a narrow
+            # ignore here while preserving runtime behavior.
+            # type: ignore[assignment]
             detected_emotions: Dict[str, float] = {}
             for sig in signals:
+                # Guard: ensure signal items are dict-like before attribute access.
+                # Some legacy code paths may populate signals with non-dict items;
+                # skip those to keep the processing robust and satisfy static checks.
+                if not isinstance(sig, dict):
+                    continue
                 tone = sig.get('tone', 'unknown')
                 voltage = sig.get('voltage', 'medium')
                 intensity = {'low': 0.3, 'medium': 0.6,
@@ -1865,13 +1918,14 @@ def parse_input(
                 signals=signals,
                 user_input=input_text,
                 user_id=user_id,
-            )
-            poetic_state = {
-                "poem_rendered": poetic_result.get("poem_rendered"),
-                "dominant_emotion": poetic_result.get("dominant_emotion"),
-                "death_occurred": poetic_result.get("death_occurred", False),
-                "mirror_response": poetic_result.get("mirror_response"),
-            }
+            )  # type: ignore[assignment]
+            if isinstance(poetic_result, dict):
+                poetic_state = {
+                    "poem_rendered": poetic_result.get("poem_rendered"),
+                    "dominant_emotion": poetic_result.get("dominant_emotion"),
+                    "death_occurred": poetic_result.get("death_occurred", False),
+                    "mirror_response": poetic_result.get("mirror_response"),
+                }
     except Exception as e:
         logger.debug("Poetic engine integration skipped: %s", e)
 
