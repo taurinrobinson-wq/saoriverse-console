@@ -18,7 +18,7 @@ import os
 import random
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, cast
 
 import numpy as np
 
@@ -179,7 +179,7 @@ class DynamicResponseComposer:
             ],
         }
 
-    def _extract_entities_and_emotions(self, text: str) -> Dict:
+    def _extract_entities_and_emotions(self, text: str) -> Dict[str, Any]:
         """Extract key entities and emotional content from input.
 
         NOTE: historically this returned a list for `emotions` in some code
@@ -188,7 +188,7 @@ class DynamicResponseComposer:
         external analyzer into a dict where each detected emotion maps to
         a default weight of 1.0.
         """
-        result = {
+        result: Dict[str, Any] = {
             "entities": [],
             "emotions": {},
             "emotional_words": [],
@@ -267,7 +267,7 @@ class DynamicResponseComposer:
 
         return result
 
-    def _select_opening(self, entities: List[str], emotions: Dict) -> str:
+    def _select_opening(self, entities: List[str], emotions: Dict[str, Any]) -> str:
         """Select and instantiate an appropriate opening move."""
         # Determine which type of opening fits
         if "inherited" in str(emotions) or "inherited" in str(entities):
@@ -396,7 +396,11 @@ class DynamicResponseComposer:
         return s
 
     def _weave_poetry(
-        self, text: str, emotions: Dict, glyphs: Optional[List[Dict]] = None, extracted: Optional[Dict] = None
+        self,
+        text: str,
+        emotions: Dict[str, Any],
+        glyphs: Optional[List[Dict[str, Any]]] = None,
+        extracted: Optional[Dict[str, Any]] = None,
     ) -> Optional[str]:
         """Find and weave poetic echoes that match emotional contour."""
         if not self.poetry_db or not emotions:
@@ -408,16 +412,19 @@ class DynamicResponseComposer:
 
         # How many top glyph snippets to include in poetry/snippet composition.
         # Default to a small number to keep composed replies concise.
-        top_n = min(3, max(1, len(glyphs)))
+        glyphs = glyphs or []
+        extracted = extracted or {}
+        top_n: int = min(3, max(1, len(glyphs)))
         # Map detected emotions to poetry categories
-        primary_emotion = list(emotions.keys())[0] if emotions else None
+        primary_emotion: Optional[str] = list(
+            emotions.keys())[0] if emotions else None
 
         if not primary_emotion:
             return None
 
         # Get poetry matching the emotion
-        poetry_lines = self.poetry_db.POETRY_COLLECTION.get(
-            primary_emotion, [])
+        poetry_lines: List[str] = self.poetry_db.POETRY_COLLECTION.get(
+            primary_emotion, []) if (self.poetry_db and hasattr(self.poetry_db, "POETRY_COLLECTION")) else []
         if not poetry_lines:
             return None
 
@@ -474,11 +481,11 @@ class DynamicResponseComposer:
             "were",
         }
 
-        def _clean_phrase(phrase: str) -> str:
+        def _clean_phrase(phrase: Optional[str]) -> str:
             if not phrase:
                 return ""
             tokens = [t.strip().lower()
-                      for t in re.findall(r"[a-zA-Z]+", phrase)]
+                      for t in re.findall(r"[a-zA-Z]+", str(phrase))]
             meaningful = [t for t in tokens if t and t not in STOPWORDS]
             return " ".join(meaningful)
 
@@ -531,7 +538,7 @@ class DynamicResponseComposer:
         ]
 
         # Rank glyphs by optional score and intensity
-        ranked = sorted(glyphs, key=lambda g: (
+        ranked: List[Dict[str, Any]] = sorted(glyphs, key=lambda g: (
             g.get("score", 0), _glyph_intensity(g)), reverse=True)
 
         parts: List[str] = []
@@ -1339,7 +1346,7 @@ class DynamicResponseComposer:
         # Prefer using the response adapter to translate glyphs into
         # plain-language summary and short snippets. Fallback to older
         # snippet composition if the adapter is not available.
-        if translate_system_output:
+        if translate_system_output is not None:
             try:
                 adapter_input = {
                     "glyphs": glyphs,

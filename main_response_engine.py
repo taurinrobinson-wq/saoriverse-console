@@ -149,11 +149,11 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
                 response_summary=first_resp,
             )
             # Include glyph names from local_analysis in the capsule when present
-            glyph_names = []
+            glyph_names: list[str] = []
             try:
                 if local_analysis and isinstance(local_analysis.get("glyphs"), list):
-                    glyph_names = [g.get("glyph_name") for g in local_analysis.get(
-                        "glyphs", []) if isinstance(g, dict)]
+                    glyph_names = [str(g.get("glyph_name")) for g in local_analysis.get(
+                        "glyphs", []) if isinstance(g, dict) and isinstance(g.get("glyph_name"), str)]
             except Exception:
                 glyph_names = []
 
@@ -243,8 +243,10 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
                 from emotional_os.adapter.clarification_store import get_default_store
 
                 store = get_default_store()
-                store.update_corrected_intent(
-                    int(ctx.get("clarification_rowid")), ctx.get("confirmed_intent"))
+                rowid = ctx.get("clarification_rowid")
+                if rowid is not None:
+                    store.update_corrected_intent(
+                        int(rowid), ctx.get("confirmed_intent"))
                 ctx["inferred_intent"] = ctx.get("confirmed_intent")
                 if ctx.get("confirmed_intent") == "emotional_checkin":
                     phase = "initiatory"
@@ -387,16 +389,16 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
 
     # 5. Store relational memory capsule
     # Include glyph names from local analysis in the capsule if present
-    glyph_names = []
+    glyph_names_final: list[str] = []
     try:
         if local_analysis and isinstance(local_analysis.get("glyphs"), list):
-            glyph_names = [g.get("glyph_name") for g in local_analysis.get(
-                "glyphs", []) if isinstance(g, dict)]
+            glyph_names_final = [str(g.get("glyph_name")) for g in local_analysis.get(
+                "glyphs", []) if isinstance(g, dict) and isinstance(g.get("glyph_name"), str)]
     except Exception:
-        glyph_names = []
+        glyph_names_final = []
 
     capsule = RelationalMemoryCapsule(
-        symbolic_tags=capsule_tags + tags + glyph_names,
+        symbolic_tags=capsule_tags + tags + glyph_names_final,
         relational_phase=phase,
         voltage_marking=voltage,
         user_input=user_input,

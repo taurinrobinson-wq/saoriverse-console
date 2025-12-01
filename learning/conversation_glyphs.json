@@ -3485,10 +3485,325 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-12-01T18:38:28.324034"
+    },
+    {
+      "id": "glyph_dialogue_None_default_1",
+      "name": "Sensuality & Nostalgia",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and nostalgia present here",
+      "narrative_hook": "A story where sensuality meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.740486"
+    },
+    {
+      "id": "glyph_dialogue_None_default_2",
+      "name": "Sensual Love",
+      "symbol": "\ud83c\udf39\u2665",
+      "core_emotions": [
+        "sensuality",
+        "love"
+      ],
+      "associated_keywords": [
+        "love",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and love present here",
+      "narrative_hook": "A story where sensuality meets love",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.745602"
+    },
+    {
+      "id": "glyph_dialogue_None_default_3",
+      "name": "Sensuality & Transformation",
+      "symbol": "\ud83c\udf39\ud83e\udd8b",
+      "core_emotions": [
+        "sensuality",
+        "transformation"
+      ],
+      "associated_keywords": [
+        "transformation",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and transformation present here",
+      "narrative_hook": "A story where sensuality meets transformation",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.752511"
+    },
+    {
+      "id": "glyph_dialogue_None_default_4",
+      "name": "Sensuality & Solitude",
+      "symbol": "\ud83c\udf39\ud83d\udcab",
+      "core_emotions": [
+        "sensuality",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "solitude",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and solitude present here",
+      "narrative_hook": "A story where sensuality meets solitude",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.762875"
+    },
+    {
+      "id": "glyph_dialogue_None_default_5",
+      "name": "Sensuality & Longing",
+      "symbol": "\ud83c\udf39\ud83c\udfbb",
+      "core_emotions": [
+        "sensuality",
+        "longing"
+      ],
+      "associated_keywords": [
+        "longing",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the sensuality and longing present here",
+      "narrative_hook": "A story where sensuality meets longing",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.769383"
+    },
+    {
+      "id": "glyph_dialogue_None_default_6",
+      "name": "Nostalgia & Love",
+      "symbol": "\ud83d\udcab\u2665",
+      "core_emotions": [
+        "nostalgia",
+        "love"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "love"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and love present here",
+      "narrative_hook": "A story where nostalgia meets love",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.775211"
+    },
+    {
+      "id": "glyph_dialogue_None_default_7",
+      "name": "Nostalgia & Transformation",
+      "symbol": "\ud83d\udcab\ud83e\udd8b",
+      "core_emotions": [
+        "nostalgia",
+        "transformation"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "transformation"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and transformation present here",
+      "narrative_hook": "A story where nostalgia meets transformation",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.781570"
+    },
+    {
+      "id": "glyph_dialogue_None_default_8",
+      "name": "Nostalgia & Solitude",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "nostalgia",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and solitude present here",
+      "narrative_hook": "A story where nostalgia meets solitude",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.787875"
+    },
+    {
+      "id": "glyph_dialogue_None_default_9",
+      "name": "Nostalgia & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "nostalgia",
+        "longing"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and longing present here",
+      "narrative_hook": "A story where nostalgia meets longing",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.795237"
+    },
+    {
+      "id": "glyph_dialogue_None_default_10",
+      "name": "Love & Transformation",
+      "symbol": "\u2665\ud83e\udd8b",
+      "core_emotions": [
+        "love",
+        "transformation"
+      ],
+      "associated_keywords": [
+        "love",
+        "transformation"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the love and transformation present here",
+      "narrative_hook": "A story where love meets transformation",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.805348"
+    },
+    {
+      "id": "glyph_dialogue_None_default_11",
+      "name": "Love & Solitude",
+      "symbol": "\u2665\ud83d\udcab",
+      "core_emotions": [
+        "love",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "solitude",
+        "love"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the love and solitude present here",
+      "narrative_hook": "A story where love meets solitude",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.813535"
+    },
+    {
+      "id": "glyph_dialogue_None_default_12",
+      "name": "Love & Longing",
+      "symbol": "\u2665\ud83c\udfbb",
+      "core_emotions": [
+        "love",
+        "longing"
+      ],
+      "associated_keywords": [
+        "longing",
+        "love"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the love and longing present here",
+      "narrative_hook": "A story where love meets longing",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.823301"
+    },
+    {
+      "id": "glyph_dialogue_None_default_13",
+      "name": "Transformation & Solitude",
+      "symbol": "\ud83e\udd8b\ud83d\udcab",
+      "core_emotions": [
+        "transformation",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "solitude",
+        "transformation"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the transformation and solitude present here",
+      "narrative_hook": "A story where transformation meets solitude",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.828634"
+    },
+    {
+      "id": "glyph_dialogue_None_default_14",
+      "name": "Transformation & Longing",
+      "symbol": "\ud83e\udd8b\ud83c\udfbb",
+      "core_emotions": [
+        "transformation",
+        "longing"
+      ],
+      "associated_keywords": [
+        "longing",
+        "transformation"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the transformation and longing present here",
+      "narrative_hook": "A story where transformation meets longing",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.835646"
+    },
+    {
+      "id": "glyph_dialogue_None_default_15",
+      "name": "Solitude & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "solitude",
+        "longing"
+      ],
+      "associated_keywords": [
+        "longing",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the solitude and longing present here",
+      "narrative_hook": "A story where solitude meets longing",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T20:24:45.842092"
     }
   ],
   "metadata": {
-    "total_discovered": 166,
-    "last_updated": "2025-12-01T18:38:28.324818"
+    "total_discovered": 181,
+    "last_updated": "2025-12-01T20:24:45.843204"
   }
 }
