@@ -316,12 +316,13 @@ def evaluate_gates(signals: List[Dict]) -> List[str]:
 # Retrieve glyphs from SQLite
 
 
-def fetch_glyphs(gates: List[str], db_path: str = "glyphs.db") -> List[Dict]:
+def fetch_glyphs(gates: List[str], db_path: Union[str, Path] = "glyphs.db") -> List[Dict]:
     if not gates:
         return []
 
     gates = [str(g) for g in gates]
-    conn = sqlite3.connect(db_path)
+    # Normalize path-like inputs to string for sqlite3
+    conn = sqlite3.connect(str(db_path))
     cursor = conn.cursor()
     placeholders = ",".join("?" for _ in gates)
 
@@ -1376,7 +1377,7 @@ def _choose_reciprocal_response(raw_input: str, lower_input: str, conversation_c
 def parse_input(
     input_text: str,
     lexicon_path: str,
-    db_path: str = "glyphs.db",
+    db_path: Union[str, Path] = "glyphs.db",
     conversation_context: Optional[Dict] = None,
     user_id: Optional[str] = None,
 ) -> Dict:
@@ -1819,39 +1820,63 @@ def parse_input(
     # If no glyph matched, trigger learning pipeline to generate a candidate and craft a training response
     if best_glyph is None and (GlyphLearner is not None) and (create_training_response is not None):
         try:
-            learner = GlyphLearner(
-                db_path=db_path if db_path else "emotional_os/glyphs/glyphs.db")
+            # Ensure db_path is a string for underlying learners that expect it
+            learner_db_path = str(
+                db_path) if db_path else "emotional_os/glyphs/glyphs.db"
+            learner = GlyphLearner(db_path=learner_db_path)
             candidate = learner.analyze_input_for_glyph_generation(
                 input_text=input_text, signals=signals, user_hash=None
             )
-            # Sanitize source input before logging to storage
-            if candidate.get("metadata"):
-                candidate["metadata"]["source_input"] = sanitize_for_storage(
-                    candidate["metadata"].get("source_input", input_text)
+            # Only manipulate candidate if it's a dict-like result
+            if candidate and isinstance(candidate, dict):
+                # Sanitize source input before logging to storage
+                if candidate.get("metadata") and isinstance(candidate["metadata"], dict):
+                    candidate["metadata"]["source_input"] = sanitize_for_storage(
+                        candidate["metadata"].get("source_input", input_text)
+                    )
+                # Log candidate for review/learning
+                learner.log_glyph_candidate(candidate)
+                # Compose a training-oriented response
+                emotional_tone = signals[0].get(
+                    "tone", "unknown") if signals else "unknown"
+                analysis = {
+                    "primary_tone": emotional_tone,
+                    "emotional_terms": candidate.get("emotional_terms", {}),
+                    "nrc_analysis": candidate.get("nrc_analysis", {}),
+                }
+                training_response = create_training_response(
+                    glyph_candidate=candidate,
+                    original_input=input_text,
+                    signals=signals,
+                    emotional_analysis=analysis,
                 )
-            # Log candidate for review/learning
-            learner.log_glyph_candidate(candidate)
-            # Compose a training-oriented response
-            emotional_tone = signals[0].get(
-                "tone", "unknown") if signals else "unknown"
-            analysis = {
-                "primary_tone": emotional_tone,
-                "emotional_terms": candidate.get("emotional_terms", {}),
-                "nrc_analysis": candidate.get("nrc_analysis", {}),
-            }
-            training_response = create_training_response(
-                glyph_candidate=candidate, original_input=input_text, signals=signals, emotional_analysis=analysis
-            )
-            contextual_response = training_response or contextual_response
-            learning_payload = {
-                "candidate": {
-                    "glyph_name": candidate.get("glyph_name"),
-                    "description": candidate.get("description"),
-                    "gates": candidate.get("gates"),
-                    "confidence_score": candidate.get("confidence_score"),
-                },
-                "analysis": analysis,
-            }
+                # Ensure `contextual_response` remains a string. Legacy learners
+                # sometimes return dict payloads; normalize by extracting a
+                # sensible text field or falling back to JSON/stringification.
+                if isinstance(training_response, str):
+                    contextual_response = training_response
+                elif isinstance(training_response, dict):
+                    # Prefer common textual keys if present, else serialize.
+                    tr_text = (
+                        training_response.get("response")
+                        or training_response.get("text")
+                        or training_response.get("voltage_response")
+                        or training_response.get("message")
+                    )
+                    contextual_response = str(
+                        tr_text) if tr_text is not None else json.dumps(training_response)
+                else:
+                    contextual_response = str(
+                        training_response) if training_response is not None else contextual_response
+                learning_payload = {
+                    "candidate": {
+                        "glyph_name": candidate.get("glyph_name"),
+                        "description": candidate.get("description"),
+                        "gates": candidate.get("gates"),
+                        "confidence_score": candidate.get("confidence_score"),
+                    },
+                    "analysis": analysis,
+                }
         except Exception:
             # If learning pipeline fails, retain the original contextual response
             pass
