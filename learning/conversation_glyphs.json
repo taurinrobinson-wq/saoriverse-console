@@ -3359,10 +3359,136 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-11-23T20:24:32.064083"
+    },
+    {
+      "id": "glyph_dialogue_None_default_1",
+      "name": "Serenity & Nostalgia",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "serenity",
+        "nostalgia"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "nostalgia"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and nostalgia present here",
+      "narrative_hook": "A story where serenity meets nostalgia",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T18:38:28.197861"
+    },
+    {
+      "id": "glyph_dialogue_None_default_2",
+      "name": "Serenity & Solitude",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "serenity",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and solitude present here",
+      "narrative_hook": "A story where serenity meets solitude",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T18:38:28.213880"
+    },
+    {
+      "id": "glyph_dialogue_None_default_3",
+      "name": "Serenity & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "serenity",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and sensuality present here",
+      "narrative_hook": "A story where serenity meets sensuality",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T18:38:28.251181"
+    },
+    {
+      "id": "glyph_dialogue_None_default_4",
+      "name": "Nostalgia & Solitude",
+      "symbol": "\ud83d\udcab\ud83d\udcab",
+      "core_emotions": [
+        "nostalgia",
+        "solitude"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "solitude"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and solitude present here",
+      "narrative_hook": "A story where nostalgia meets solitude",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T18:38:28.274717"
+    },
+    {
+      "id": "glyph_dialogue_None_default_5",
+      "name": "Nostalgia & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "nostalgia",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "nostalgia",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the nostalgia and sensuality present here",
+      "narrative_hook": "A story where nostalgia meets sensuality",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T18:38:28.295739"
+    },
+    {
+      "id": "glyph_dialogue_None_default_6",
+      "name": "Solitude & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "solitude",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "solitude",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the solitude and sensuality present here",
+      "narrative_hook": "A story where solitude meets sensuality",
+      "created_from_conversation": true,
+      "user_id": null,
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-01T18:38:28.324034"
     }
   ],
   "metadata": {
-    "total_discovered": 160,
-    "last_updated": "2025-11-23T20:24:32.064227"
+    "total_discovered": 166,
+    "last_updated": "2025-12-01T18:38:28.324818"
   }
 }
