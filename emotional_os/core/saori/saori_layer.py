@@ -55,7 +55,7 @@ class EngagementLevel(Enum):
     DEEP = "deep"           # Highly engaged, rich interaction
     ACTIVE = "active"       # Normal engaged interaction
     SURFACE = "surface"     # Light engagement
-    NEGLECTED = "neglected" # Low engagement, needs revival
+    NEGLECTED = "neglected"  # Low engagement, needs revival
 
 
 @dataclass
@@ -208,7 +208,8 @@ class MirrorEngine:
 
         # Fall back to template reflection
         category = self._categorize_emotional_quality(message, emotion)
-        templates = self.REFLECTION_TEMPLATES.get(category, self.REFLECTION_TEMPLATES["transition"])
+        templates = self.REFLECTION_TEMPLATES.get(
+            category, self.REFLECTION_TEMPLATES["transition"])
         template = random.choice(templates)
 
         feeling = emotion or self._extract_feeling_word(message)
@@ -235,9 +236,12 @@ class MirrorEngine:
         """Categorize the emotional quality of the message."""
         lower = message.lower()
 
-        pain_words = ["hurt", "broken", "aching", "pain", "suffering", "struggle"]
-        joy_words = ["happy", "joy", "excited", "glad", "delighted", "grateful"]
-        confusion_words = ["confused", "lost", "uncertain", "unclear", "don't know"]
+        pain_words = ["hurt", "broken", "aching",
+                      "pain", "suffering", "struggle"]
+        joy_words = ["happy", "joy", "excited",
+                     "glad", "delighted", "grateful"]
+        confusion_words = ["confused", "lost",
+                           "uncertain", "unclear", "don't know"]
 
         if any(w in lower for w in pain_words):
             return "pain"
@@ -275,7 +279,7 @@ class MirrorEngine:
             depth_modifier: Amount to adjust depth (-1 to 1)
         """
         self._state.reflection_depth = max(0.0, min(1.0,
-            self._state.reflection_depth + depth_modifier))
+                                                    self._state.reflection_depth + depth_modifier))
 
 
 class EdgeGenerator:
@@ -354,7 +358,8 @@ class EdgeGenerator:
 
         # Reduce if recent edge
         if self._last_edge_time:
-            time_since = (datetime.now(timezone.utc) - self._last_edge_time).total_seconds()
+            time_since = (datetime.now(timezone.utc) -
+                          self._last_edge_time).total_seconds()
             if time_since < 600:  # 10 minutes
                 adjusted *= 0.3
 
@@ -388,7 +393,8 @@ class EdgeGenerator:
         pattern_data = self.EDGE_PATTERNS[pattern]
         templates = pattern_data["templates"]
 
-        content = templates.get(emotion.lower(), templates.get("default", ""))
+        content = dict(templates).get(emotion.lower(),
+                                      dict(templates).get("default", ""))
 
         self._last_edge_time = datetime.now(timezone.utc)
         self._edge_history.append(pattern)
@@ -412,7 +418,7 @@ class EdgeGenerator:
         """
         adjustment = feedback * 0.05
         self._coefficient = max(0.05, min(0.4,
-            self._coefficient + adjustment))
+                                          self._coefficient + adjustment))
 
 
 class EmotionalGenome:
@@ -495,18 +501,20 @@ class EmotionalGenome:
         # Calculate resonance with current archetype
         current_affinity = self.ARCHETYPE_PROFILES[self._state.current_archetype]["emotional_affinity"]
         if emotion in current_affinity:
-            self._state.voice_resonance = min(1.0, self._state.voice_resonance + 0.1)
+            self._state.voice_resonance = min(
+                1.0, self._state.voice_resonance + 0.1)
         else:
-            self._state.voice_resonance = max(0.3, self._state.voice_resonance - 0.1)
+            self._state.voice_resonance = max(
+                0.3, self._state.voice_resonance - 0.1)
 
         # Update transition readiness
         if best_match != self._state.current_archetype:
             if self._can_transition(best_match):
                 self._state.transition_readiness = min(1.0,
-                    self._state.transition_readiness + intensity * 0.2)
+                                                       self._state.transition_readiness + intensity * 0.2)
             else:
                 self._state.transition_readiness = max(0.0,
-                    self._state.transition_readiness - 0.1)
+                                                       self._state.transition_readiness - 0.1)
 
     def _find_best_archetype(self, emotion: str) -> Archetype:
         """Find the archetype best suited to an emotion."""
@@ -555,7 +563,7 @@ class EmotionalGenome:
 
     def get_language_markers(self) -> List[str]:
         """Get language markers for current archetype."""
-        return self.ARCHETYPE_PROFILES[self._state.current_archetype]["language_markers"]
+        return list(self.ARCHETYPE_PROFILES[self._state.current_archetype]["language_markers"])
 
     def get_state(self) -> GenomeState:
         """Get current genome state."""
@@ -612,15 +620,15 @@ class MortalityClock:
         if heavy_context:
             self._heavy_interaction_count += 1
             self._state.depth_capacity = max(0.2,
-                self._state.depth_capacity - self.HEAVY_CONTEXT_DRAIN)
+                                             self._state.depth_capacity - self.HEAVY_CONTEXT_DRAIN)
             self._state.entropy_level = min(0.8,
-                self._state.entropy_level + 0.1)
+                                            self._state.entropy_level + 0.1)
         else:
             # Light interaction can be restorative
             self._state.depth_capacity = min(1.0,
-                self._state.depth_capacity + self.RECOVERY_RATE)
+                                             self._state.depth_capacity + self.RECOVERY_RATE)
             self._state.entropy_level = max(0.0,
-                self._state.entropy_level - 0.02)
+                                            self._state.entropy_level - 0.02)
 
         # Update engagement level
         if not user_engaged:
@@ -652,12 +660,12 @@ class MortalityClock:
         # Entropy increases with neglect
         entropy_increase = hours * self.NEGLECT_DECAY_RATE
         self._state.entropy_level = min(1.0,
-            self._state.entropy_level + entropy_increase)
+                                        self._state.entropy_level + entropy_increase)
 
         # Depth capacity naturally recovers with time (rest)
         depth_recovery = hours * 0.02
         self._state.depth_capacity = min(self.BASE_DEPTH,
-            self._state.depth_capacity + depth_recovery)
+                                         self._state.depth_capacity + depth_recovery)
 
         # Long absence triggers neglect state
         if hours > 24:
