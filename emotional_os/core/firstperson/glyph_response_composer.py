@@ -15,12 +15,67 @@ Example:
 """
 
 from typing import Optional, Dict, Tuple
+import re
 from emotional_os.core.firstperson.glyph_modernizer import (
     get_glyph_for_affect,
 )
 from emotional_os.core.firstperson.response_rotator import (
     create_response_rotator,
 )
+
+
+def normalize_glyph_capitalization(text: str) -> str:
+    """Normalize glyph name capitalization for grammatical correctness.
+
+    Rules:
+    - Glyph names at sentence start: Capitalize (e.g., "Anxiety is...")
+    - Glyph names mid-sentence after conjunctions: lowercase (e.g., "and the anxiety")
+    - Glyph names after "the": lowercase (e.g., "feel the breaking")
+    - Glyph names in parenthetical: lowercase (e.g., "(the loss)")
+    - Glyph names at end of clause before punctuation: title case
+
+    Args:
+        text: Response text with glyph names
+
+    Returns:
+        Text with grammatically correct capitalization
+    """
+    # Known glyph names (modernized)
+    glyphs = [
+        "Loss", "Pain", "Overwhelm", "Grieving", "Breaking", "Pressure",
+        "Seeking", "Resting", "Fire", "Heat", "Frustration", "Resistance",
+        "Held Space", "Joy", "Gratitude", "Wonder", "Confusion", "Doubt",
+        "Ache"
+    ]
+
+    # Pattern 1: "and the Glyph" -> "and the glyph" (mid-sentence)
+    for glyph in glyphs:
+        text = re.sub(
+            rf'\band the {re.escape(glyph)}\b',
+            f'and the {glyph.lower()}',
+            text
+        )
+
+    # Pattern 2: "the Glyph " -> "the glyph " (after articles)
+    for glyph in glyphs:
+        text = re.sub(
+            rf'\bthe {re.escape(glyph)}\b(?![\.\?\!])',
+            f'the {glyph.lower()}',
+            text
+        )
+
+    # Pattern 3: "I hear the Glyph and the Glyph" -> "I hear the glyph and the glyph"
+    for glyph in glyphs:
+        text = re.sub(
+            rf'(\bhear\b.*?\bthe\s+){re.escape(glyph)}(\s+and)',
+            rf'\1{glyph.lower()}\2',
+            text
+        )
+
+    # Pattern 4: Start of sentence should keep capitalization
+    # (handled by keeping natural capitalization at sentence boundaries)
+
+    return text
 
 
 # Glyph-aware response templates that embed modernized glyph names
@@ -193,12 +248,14 @@ def compose_glyph_aware_response(
         # Use glyph-specific response
         import random
         response = random.choice(tone_responses[glyph])
+        response = normalize_glyph_capitalization(response)
         return response, glyph
     elif glyph and tone_responses:
         # Glyph not in specific map, try first available
         first_glyph = list(tone_responses.keys())[0]
         import random
         response = random.choice(tone_responses[first_glyph])
+        response = normalize_glyph_capitalization(response)
         return response, first_glyph
     elif use_rotator:
         # Fallback to ResponseRotator
