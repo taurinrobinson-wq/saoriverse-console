@@ -15,6 +15,10 @@ from typing import Any, Dict, Optional
 from emotional_os.adapter.clarification_trace import ClarificationTrace
 from emotional_os.adapter.closing_prompts import get_closing_prompt
 from emotional_os.adapter.comfort_gestures import add_comfort_gesture
+from emotional_os.core.firstperson.repair_orchestrator import (
+    RepairOrchestrator,
+    GlyphCompositionContext,
+)
 from phase_modulator import detect_phase
 from relational_memory import RelationalMemoryCapsule, store_capsule
 from response_adapter import generate_response_from_glyphs, translate_emotional_response
@@ -38,6 +42,53 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     """
     ctx = dict(context or {})
     prefix = ""
+
+    # Phase 2.3: Initialize and check for glyph correction/repair patterns
+    repair_orchestrator = None
+    repair_analysis = None
+    suggested_glyph_override = None
+
+    try:
+        # Try to get repair orchestrator from session state (Streamlit)
+        try:
+            import streamlit as st
+            if "repair_orchestrator" not in st.session_state:
+                user_id = ctx.get("user_id") or "anonymous"
+                st.session_state.repair_orchestrator = RepairOrchestrator(
+                    user_id=user_id)
+            repair_orchestrator = st.session_state.repair_orchestrator
+        except Exception:
+            # Fallback: create repair orchestrator without session persistence
+            user_id = ctx.get("user_id") or "anonymous"
+            repair_orchestrator = RepairOrchestrator(user_id=user_id)
+
+        # Check if user is correcting/rejecting previous response
+        previous_response = ctx.get("last_system_response")
+        if previous_response and repair_orchestrator:
+            repair_analysis = repair_orchestrator.analyze_for_repair(
+                user_input)
+
+            if repair_analysis.is_rejection and repair_analysis.suggested_alternative:
+                # User rejected previous response, use suggested alternative glyph
+                suggested_glyph_override = repair_analysis.suggested_alternative
+            elif not repair_analysis.is_rejection:
+                # User did not reject previous response - record acceptance
+                try:
+                    last_context = None
+                    try:
+                        import streamlit as st
+                        last_context = st.session_state.get(
+                            "last_glyph_context")
+                    except Exception:
+                        pass
+
+                    if last_context:
+                        repair_orchestrator.record_acceptance(last_context)
+                except Exception:
+                    pass
+    except Exception:
+        # Repair module not available, continue normally
+        pass
 
     # Check for prior clarifications that could bias interpretation
     try:
@@ -123,6 +174,7 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
             if is_simple_checkin or is_stressed_checkin:
                 # Use glyph-aware response composition with modernized glyph names
                 # embedded in conversational responses
+                # If repair detected a rejection, can pass suggested_glyph_override
                 try:
                     from emotional_os.core.firstperson.glyph_response_composer import (
                         compose_glyph_aware_response,
@@ -132,7 +184,34 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
                         user_input,
                         affect_analysis=affect_analysis,
                         use_rotator=True,
+                        # Phase 2.3: Pass suggested glyph if repair detected a better alternative
+                        suggested_glyph=suggested_glyph_override,
                     )
+
+                    # Phase 2.3: Record the response and emotional state for next turn's repair detection
+                    if repair_orchestrator and used_glyph:
+                        try:
+                            # Create context for this response
+                            context_record = GlyphCompositionContext(
+                                tone=tone or "neutral",
+                                arousal=arousal or 0.5,
+                                valence=valence or 0.0,
+                                glyph_name=used_glyph,
+                                user_id=ctx.get("user_id") or "anonymous"
+                            )
+                            # Record that we just generated this response
+                            response_with_prefix = f"{prefix} {brief_response}".strip(
+                            ) if prefix else brief_response
+                            repair_orchestrator.record_response(
+                                response_with_prefix)
+                            # Store context for next turn (if using session state)
+                            try:
+                                import streamlit as st
+                                st.session_state["last_glyph_context"] = context_record
+                            except Exception:
+                                pass
+                        except Exception:
+                            pass
 
                 except Exception:
                     # Fallback to simple ResponseRotator if composer unavailable
