@@ -90,6 +90,82 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
     # Accept local_analysis when provided to avoid redundant heavy parsing.
     local_analysis = ctx.get("local_analysis")
 
+    # AFFECT-BASED SHORT-CIRCUIT: For simple emotional check-ins (negative valence),
+    # return a brief, genuine response without poetic elaboration.
+    # This prevents "I'm exhausted" from getting 10 lines of poetry while still being substantive.
+    try:
+        affect_analysis = (local_analysis or {}).get(
+            "affect_analysis") if isinstance(local_analysis, dict) else None
+        if affect_analysis and isinstance(affect_analysis, dict):
+            tone = affect_analysis.get("tone")
+            arousal = affect_analysis.get("arousal", 0)
+            valence = affect_analysis.get("valence", 0)
+            tone_confidence = affect_analysis.get("tone_confidence", 0)
+
+            # Short check-in patterns for simple emotional states (no poetic elaboration needed):
+            # 1. Low to moderate arousal + negative valence (fatigue, sadness, worry)
+            is_simple_checkin = (
+                valence < 0.1 and
+                tone_confidence > 0.3 and
+                tone in ("sad", "anxious", "angry", "neutral", "confused") and
+                arousal < 0.7
+            )
+
+            # 2. High arousal + negative valence (acute stress, panic, rage)
+            # Note: negative valence means valence < 0, not < 0.2
+            is_stressed_checkin = (
+                arousal > 0.6 and
+                valence < 0 and
+                tone_confidence > 0.3 and
+                tone in ("sad", "anxious", "angry", "confused")
+            )
+
+            if is_simple_checkin or is_stressed_checkin:
+                # Map tone to glyph category for response rotation
+                # This uses conversational, affect-aware responses from the rotator
+                try:
+                    from emotional_os.core.firstperson import create_response_rotator
+
+                    rotator = None
+                    try:
+                        rotator = st.session_state.get("response_rotator")
+                    except Exception:
+                        pass
+
+                    if not rotator:
+                        rotator = create_response_rotator()
+                        try:
+                            st.session_state["response_rotator"] = rotator
+                        except Exception:
+                            pass  # Not in Streamlit context; rotator is temporary
+
+                    # Map affect tone to glyph response category
+                    glyph_category = {
+                        "sad": "sadness" if "sadness" in rotator.rotation_bank else "exhaustion",
+                        "anxious": "anxiety",
+                        "angry": "anger",
+                        "grateful": "joy",
+                        "confused": "neutral",
+                        "neutral": "neutral",
+                    }.get(tone, "neutral")
+
+                    # For "sad" with low arousal (exhaustion), prefer "exhaustion" category
+                    if tone == "sad" and arousal < 0.5:
+                        glyph_category = "exhaustion"
+
+                    brief_response = rotator.get_response(
+                        glyph_category, strategy="weighted")
+
+                except Exception:
+                    # Fallback to simple acknowledge if rotator unavailable
+                    brief_response = "I hear you. Tell me more."
+
+                if prefix:
+                    return f"{prefix} {brief_response}".strip()
+                return brief_response
+    except Exception:
+        pass  # Fall through to full response composition
+
     # 1. Tagging (lightweight symbolic tagging)
     tags = tag_input(user_input)
 
