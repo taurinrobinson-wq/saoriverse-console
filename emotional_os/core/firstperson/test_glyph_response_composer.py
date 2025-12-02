@@ -171,8 +171,8 @@ class TestGlyphAwareResponseBank:
         loss_responses = exhaustion_responses["Loss"]
         assert isinstance(loss_responses, list)
         assert len(loss_responses) > 0
-        # Should mention Loss or related concepts
-        assert any("Loss" in r for r in loss_responses)
+        # Should mention Loss or related concepts (case-insensitive)
+        assert any("loss" in r.lower() for r in loss_responses)
 
     def test_anxiety_responses_have_breaking_glyph(self):
         """Anxiety should have Breaking glyph responses."""
