@@ -76,9 +76,9 @@ class TestGlyphAwareResponseComposition:
         # Should embed glyph if found
         assert response is not None
         assert len(response) > 0
-        # Response should be conversational (not empty)
+        # Response should be conversational with emotional synonyms for loss (heavy, weight, tired)
         assert any(word in response.lower()
-                   for word in ["hear", "exhaust", "tired", "loss"])
+                   for word in ["hear", "exhaust", "tired", "heavy", "weight"])
 
     def test_compose_glyph_aware_response_anxiety(self):
         """Anxiety should produce anxiety-specific responses."""
@@ -165,14 +165,15 @@ class TestGlyphAwareResponseBank:
         assert len(exhaustion_responses) > 0
 
     def test_exhaustion_responses_have_loss_glyph(self):
-        """Exhaustion should have Loss glyph responses."""
+        """Exhaustion should have Loss glyph responses with conversational tone."""
         exhaustion_responses = GLYPH_AWARE_RESPONSES["exhaustion"]
         assert "Loss" in exhaustion_responses
         loss_responses = exhaustion_responses["Loss"]
         assert isinstance(loss_responses, list)
         assert len(loss_responses) > 0
-        # Should mention Loss or related concepts (case-insensitive)
-        assert any("loss" in r.lower() for r in loss_responses)
+        # Should mention emotional synonyms for loss in conversational way (heavy, weight, etc)
+        assert any(word in r.lower() for r in loss_responses
+                   for word in ["heavy", "weight", "hear", "exhaustion"])
 
     def test_anxiety_responses_have_breaking_glyph(self):
         """Anxiety should have Breaking glyph responses."""

@@ -82,118 +82,118 @@ def normalize_glyph_capitalization(text: str) -> str:
 GLYPH_AWARE_RESPONSES = {
     "exhaustion": {
         "Loss": [
-            "I hear the exhaustion in this. You're carrying loss, that deep depletion. How are you holding up?",
-            "I feel the weight. It's loss layered with fatigue. Tell me more about what you're carrying.",
+            "That sounds heavy. I hear the exhaustion in it. What's it like for you right now?",
+            "That's a lot of weight to carry. How are you holding up?",
         ],
         "Pain": [
-            "That sounds draining. There's pain underneath the tiredness. What's at the core for you?",
-            "I hear the exhaustion mixed with pain. That's a lot to hold. Where does it hurt most?",
+            "That sounds painful. I hear the tiredness layered in it. What does that feel like?",
+            "That's draining. Where does it hurt most?",
         ],
         "Overwhelm": [
-            "I hear the exhaustion. There's overwhelm in there too, breaking point territory. What's the heaviest part?",
-            "That sounds like breaking. Exhaustion + overwhelm is a lot. How are you managing it?",
+            "That sounds like too much. I hear the exhaustion. What's the heaviest part?",
+            "That's a lot at once. How are you managing?",
         ],
         "Grieving": [
-            "I hear the deep tiredness. There's grieving underneath. What are you mourning right now?",
-            "That exhaustion sounds like grieving too, like you're mourning something. Tell me?",
+            "That sounds like loss. I hear the grief in the tiredness. What are you missing?",
+            "There's sadness in that exhaustion. What's underneath it?",
         ],
     },
     "anxiety": {
         "Breaking": [
-            "I can feel the worry. There's breaking happening too, like something's fragmenting. What's unraveling?",
-            "I hear the anxiety and the breaking underneath. What's threatening to crack?",
+            "That sounds stressful. I hear the worry in it. What feels most fragile right now?",
+            "That's a lot of tension. What's threatening to crack?",
         ],
         "Overwhelm": [
-            "That sounds uneasy. There's overwhelm in there, too much at once. What feels biggest?",
-            "I hear the anxiety layered with overwhelm. What's piling up the most?",
+            "That sounds like a lot. I hear the anxiety building. What feels biggest?",
+            "That's too much at once. What's piling up?",
         ],
         "Pressure": [
-            "I hear the tension. There's pressure building. What's squeezing the most?",
-            "That anxiety feels pressurized. What's the tightest part for you right now?",
+            "That sounds tight. I hear the pressure in it. What's squeezing you?",
+            "That feels pressurized. What's the tightest part?",
         ],
         "Seeking": [
-            "I hear the confusion in the worry. There's seeking happening, searching for ground. What are you looking for?",
-            "I feel the anxiety and the seeking. What do you need to find right now?",
+            "That sounds uncertain. I hear the worry looking for solid ground. What do you need to know?",
+            "That's confusing. What are you trying to figure out?",
         ],
     },
     "sadness": {
         "Loss": [
-            "I hear the sadness. There's loss here, something deeply mourned. What's been taken?",
-            "I can sense the sorrow and loss. Where's it hitting deepest for you?",
+            "That sounds heavy. I hear the sadness in it. What's been taken from you?",
+            "That's painful. Where's it hitting deepest?",
         ],
         "Grieving": [
-            "I hear the grieving in your sadness. What are you mourning?",
-            "That's real grief. The grieving is showing. Do you want to stay with that?",
+            "That sounds like grief. What are you mourning?",
+            "There's real sadness there. What are you missing?",
         ],
         "Pain": [
-            "I hear the sadness layered with pain. It feels deep and aching. How is it showing up?",
-            "That sadness + pain combination hits hard. What's the ache about for you?",
+            "That sounds like it aches. I hear the sadness and the pain together. How are you managing?",
+            "That hurts. What's the pain about?",
         ],
         "Resting": [
-            "I hear the sadness, and there's rest in it too, like you need to pause. What do you need right now?",
-            "There's sadness here, but it feels more like resting than crisis. Tell me what that's like?",
+            "That sounds like you need to slow down. I hear the sadness in that need. What do you need from yourself right now?",
+            "That's a pause, not a crisis. What would help?",
         ],
     },
     "anger": {
         "Fire": [
-            "That's strong anger. I hear the fire in it, real heat. What's at the heart of it?",
-            "I feel that fire. The anger is burning. What's fueling it most?",
+            "That's heat. I hear the anger burning. What's fueling it most?",
+            "That's strong. What's at the heart of it?",
         ],
         "Heat": [
-            "I hear the intensity. There's heat in your frustration. Where's it burning?",
-            "That's real frustration, heat building. What's underneath for you?",
+            "That's intensity. I hear the frustration building. What's underneath?",
+            "That's real frustration. What needs to shift?",
         ],
         "Frustration": [
-            "I hear the anger and the frustration. What's driving it right now?",
-            "That intensity matters. The frustration is real. What needs to shift?",
+            "That's frustrating. I hear it clearly. What's driving it?",
+            "That's a lot of intensity. What's in the center of it?",
         ],
         "Resistance": [
-            "I hear the fire and the resistance underneath. What are you pushing back against?",
-            "That anger has resistance in it, taking a stand. What are you defending?",
+            "That's a strong stance. I hear you pushing back. What are you defending?",
+            "That's real resistance. What are you saying no to?",
         ],
     },
     "calm": {
         "Stillness": [
-            "I hear the calm. There's stillness in it, like the water settled. What helped?",
-            "That feels grounded. The stillness is real. How are you holding that?",
+            "That sounds grounded. I hear the calm in it. What helped you find that?",
+            "That's peaceful. How are you holding that?",
         ],
         "Resting": [
-            "I hear the ease in your words. That resting feels good. What's supporting it?",
-            "That sounds peaceful. You're resting into it. What made that possible?",
+            "That sounds like ease. I hear you resting. What's supporting that?",
+            "That's a good breath. What made that possible?",
         ],
         "Acceptance": [
-            "I hear the calm and the acceptance. There's peace in letting it be. How did you get there?",
-            "That acceptance comes through. It feels settled. Tell me more about it?",
+            "That sounds settled. I hear the peace in it. How did you get there?",
+            "That's real acceptance. What did that take?",
         ],
     },
     "joy": {
         "Delight": [
-            "I hear the spark in your words. That delight feels alive. What's bringing it up?",
-            "That brightness comes through. The delight is real. What's making it shine?",
+            "That's bright. I hear the spark in it. What's bringing that up?",
+            "That's alive. What's making it shine?",
         ],
         "Connection": [
-            "I hear the joy in that. There's connection underneath, something resonating. What's connecting?",
-            "That energy feels like connection, linking to something bigger. What's that about?",
+            "That sounds good. I hear the connection you're naming. What's resonating?",
+            "That's meaningful. What's connecting for you?",
         ],
         "Satisfaction": [
-            "I hear the joy. There's satisfaction in it, like something's complete. What's fulfilled?",
-            "That feels like real satisfaction. Something's coming together for you. Tell me?",
+            "That sounds complete. I hear the satisfaction. What came together?",
+            "That's real joy. What fulfilled that?",
         ],
     },
     "grateful": {
         "Acceptance": [
-            "I hear the gratitude and the acceptance underneath. What's settled for you?",
-            "That comes through, real acceptance and thanks. What opened that up?",
+            "That's gratitude. I hear it settling in you. What opened that up?",
+            "That's real thanks. What made you feel grateful?",
         ],
         "Connection": [
-            "I hear the gratitude. There's connection in it, linking to what matters. Who or what's that about?",
-            "That gratitude has connection in it. What's connecting for you right now?",
+            "That's connection. I hear the gratitude in it. Who or what matters here?",
+            "That's meaningful. What's connecting for you?",
         ],
     },
     "confused": {
         "Seeking": [
-            "I hear the confusion. There's seeking underneath, looking for ground. What are you trying to understand?",
-            "I feel the uncertainty and the seeking. What's most unclear right now?",
+            "That's uncertain. I hear you looking for ground. What do you need to understand?",
+            "That's unclear. What are you trying to figure out?",
         ],
     },
 }
