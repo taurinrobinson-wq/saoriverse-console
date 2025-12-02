@@ -43,6 +43,27 @@ try:
 except Exception:
     generate_doc = None
 
+# FirstPerson relational AI system: orchestrates story-start detection,
+# frequency reflection, memory rehydration, response templates, and Supabase persistence.
+# Import defensively so the UI still loads if FirstPerson isn't available.
+try:
+    from emotional_os.core.firstperson import FirstPersonOrchestrator, create_orchestrator
+    HAS_FIRSTPERSON = True
+except Exception:
+    FirstPersonOrchestrator = None
+    create_orchestrator = None
+    HAS_FIRSTPERSON = False
+
+# Affect Parser: detects emotional affect dimensions (tone, valence, arousal)
+# Lightweight keyword-based approach for per-message affect analysis.
+try:
+    from emotional_os.core.firstperson import AffectParser, create_affect_parser
+    HAS_AFFECT_PARSER = True
+except Exception:
+    AffectParser = None
+    create_affect_parser = None
+    HAS_AFFECT_PARSER = False
+
 logger = logging.getLogger(__name__)
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
@@ -58,7 +79,8 @@ def _load_inline_svg(filename: str) -> str:
         return _SVG_CACHE[filename]
 
     # Try package-local graphics folder first, then repo-root static/graphics
-    pkg_path = os.path.join(os.path.dirname(__file__), "static", "graphics", filename)
+    pkg_path = os.path.join(os.path.dirname(__file__),
+                            "static", "graphics", filename)
     repo_path = os.path.join("static", "graphics", filename)
     tried_path = None
     try:
@@ -204,7 +226,8 @@ def render_controls_row(conversation_key):
         # a single, consistent place for preferences).
         if "processing_mode" not in st.session_state:
             # Enforce local-only processing by default (no hybrid/remote AI)
-            st.session_state.processing_mode = os.getenv("DEFAULT_PROCESSING_MODE", "local")
+            st.session_state.processing_mode = os.getenv(
+                "DEFAULT_PROCESSING_MODE", "local")
 
         # The interactive controls for changing processing mode are
         # rendered in the sidebar Settings panel. Keep this top-row
@@ -267,7 +290,8 @@ def ensure_processing_prefs():
 
     if "processing_mode" not in st.session_state:
         # Default to all-local processing model
-        st.session_state.processing_mode = os.getenv("DEFAULT_PROCESSING_MODE", "local")
+        st.session_state.processing_mode = os.getenv(
+            "DEFAULT_PROCESSING_MODE", "local")
 
     # Remote AI is not preferred in the local-only architecture
     if "prefer_ai" not in st.session_state:
@@ -309,7 +333,8 @@ def decode_ai_reply(ai_reply: str, conversation_context: dict) -> tuple:
         ai_voltage = ai_local.get("voltage_response", "")
         ai_glyphs = ai_local.get("glyphs", [])
         ai_best = ai_local.get("best_glyph")
-        ai_glyph_display = ai_best["glyph_name"] if ai_best else (ai_glyphs[0]["glyph_name"] if ai_glyphs else "None")
+        ai_glyph_display = ai_best["glyph_name"] if ai_best else (
+            ai_glyphs[0]["glyph_name"] if ai_glyphs else "None")
         # Post-process the AI reply so that short/generic fallbacks are
         # more varied and opening lines aren't duplicated. This keeps the
         # user-facing reply natural while preserving the local analysis in
@@ -455,7 +480,8 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # when we produced a local fallback response.
         try:
             if isinstance(response_text, str) and "(AI enhancement" not in response_text:
-                response_text = response_text + "\n\n(AI enhancement unavailable)"
+                response_text = response_text + \
+                    "\n\n(AI enhancement unavailable)"
         except Exception:
             pass
         return response_text, {}, local_analysis
@@ -483,7 +509,8 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
                 and "(AI enhancement" not in response_text
                 and "I'm listening" not in response_text
             ):
-                response_text = response_text + "\n\n(AI enhancement unavailable)"
+                response_text = response_text + \
+                    "\n\n(AI enhancement unavailable)"
         except Exception:
             pass
         return response_text, {}, local_analysis
@@ -499,7 +526,8 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
     try:
         response_data = requests.post(
             saori_url,
-            headers={"Authorization": f"Bearer {supabase_key}", "Content-Type": "application/json"},
+            headers={"Authorization": f"Bearer {supabase_key}",
+                     "Content-Type": "application/json"},
             json=payload,
             timeout=15,
         )
@@ -597,13 +625,15 @@ def render_settings_sidebar():
 
             # Theme selection — mirrors to both legacy 'theme' and
             # 'theme_select_row' used elsewhere in the UI.
-            current_theme = st.session_state.get("theme_select_row", st.session_state.get("theme", "Light"))
+            current_theme = st.session_state.get(
+                "theme_select_row", st.session_state.get("theme", "Light"))
             try:
 
                 def _on_theme_change():
                     # Mirror selection into legacy key and force a clean rerun
                     try:
-                        st.session_state["theme"] = st.session_state.get("theme_select_row", current_theme)
+                        st.session_state["theme"] = st.session_state.get(
+                            "theme_select_row", current_theme)
                         st.session_state["theme_loaded"] = False
                     except Exception:
                         pass
@@ -625,7 +655,8 @@ def render_settings_sidebar():
 
             # Mirror theme into the older 'theme' key so other modules are
             # consistent regardless of which key they consult.
-            st.session_state["theme"] = st.session_state.get("theme_select_row", "Light")
+            st.session_state["theme"] = st.session_state.get(
+                "theme_select_row", "Light")
             # Mark theme as not loaded so CSS will be re-injected on next render
             st.session_state["theme_loaded"] = False
     except Exception:
@@ -708,18 +739,21 @@ def render_splash_interface(auth):
         with st.container():
             try:
                 # Try to show image from static folder first
-                repo_graphics_path = os.path.join("static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg")
+                repo_graphics_path = os.path.join(
+                    "static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg")
                 if os.path.exists(repo_graphics_path):
                     try:
                         st.image(repo_graphics_path, width=68)
                     except Exception:
-                        svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
+                        svg_markup = _load_inline_svg(
+                            "FirstPerson-Logo-invert-cropped_notext.svg")
                         st.markdown(
                             f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>",
                             unsafe_allow_html=True,
                         )
                 else:
-                    svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
+                    svg_markup = _load_inline_svg(
+                        "FirstPerson-Logo-invert-cropped_notext.svg")
                     if svg_markup:
                         st.markdown(
                             f"<div style='display:inline-block;vertical-align:middle'>{svg_markup}</div>",
@@ -737,7 +771,8 @@ def render_splash_interface(auth):
 
             try:
                 st.markdown("# FirstPerson – Personal AI Companion")
-                st.markdown("Your private space for emotional processing and growth")
+                st.markdown(
+                    "Your private space for emotional processing and growth")
             except Exception:
                 pass
 
@@ -749,9 +784,11 @@ def render_splash_interface(auth):
                 )
             else:
                 # Welcome back block for authenticated users
-                uname = st.session_state.get("username") or st.session_state.get("user_id")
+                uname = st.session_state.get(
+                    "username") or st.session_state.get("user_id")
                 try:
-                    st.success(f"Welcome back{': ' + str(uname) if uname else ''}")
+                    st.success(
+                        f"Welcome back{': ' + str(uname) if uname else ''}")
                 except Exception:
                     pass
         except Exception:
@@ -834,7 +871,8 @@ def render_splash_interface(auth):
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         # Logo and text container
-        st.markdown('<div class="splash-logo-container">', unsafe_allow_html=True)
+        st.markdown('<div class="splash-logo-container">',
+                    unsafe_allow_html=True)
 
         # (splash header removed - landing now uses the main header and auth controls)
 
@@ -846,7 +884,8 @@ def render_splash_interface(auth):
 
     # Prefer graphics stored under the package static folder so the asset
     # lives with the code. Fall back to repository-root `static/graphics`.
-    pkg_graphics_path = os.path.join(os.path.dirname(__file__), "static", "graphics", logo_file)
+    pkg_graphics_path = os.path.join(os.path.dirname(
+        __file__), "static", "graphics", logo_file)
     repo_graphics_path = os.path.join("static", "graphics", logo_file)
 
     static_path = f"/static/graphics/{logo_file}"
@@ -898,9 +937,11 @@ def render_splash_interface(auth):
             # the static file is not present). The loader already strips
             # problematic XML/DOCTYPE lines.
             svg_markup = _load_inline_svg(logo_file)
-            st.markdown(f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
+            st.markdown(
+                f'<div class="splash-logo">{svg_markup}</div>', unsafe_allow_html=True)
     except Exception:
-        st.markdown('<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="font-size: 4rem; text-align: center;">🧠</div>', unsafe_allow_html=True)
 
         # Add title and subtitle
         st.markdown(
@@ -1036,7 +1077,8 @@ def render_main_app():
         # Removed aggressive client-side DOM overrides — Streamlit's frontend
         # can be sensitive to replacing core DOM APIs. Keep a minimal comment
         # in the page for traceability.
-        st.markdown("<!-- defensive DOM overrides removed -->", unsafe_allow_html=True)
+        st.markdown("<!-- defensive DOM overrides removed -->",
+                    unsafe_allow_html=True)
     except Exception:
         pass
     # Instrument unhandled client errors with an in-page overlay to help
@@ -1110,7 +1152,8 @@ def render_main_app():
             try:
                 # Prefer package-local normalized logo if present
                 norm_file = "FirstPerson-Logo-normalized.svg"
-                pkg_norm = os.path.join(os.path.dirname(__file__), "static", "graphics", norm_file)
+                pkg_norm = os.path.join(os.path.dirname(
+                    __file__), "static", "graphics", norm_file)
                 repo_norm = os.path.join("static", "graphics", norm_file)
                 if os.path.exists(pkg_norm):
                     st.image(pkg_norm, width=24)
@@ -1150,13 +1193,15 @@ def render_main_app():
         # conversations later when the user authenticates.
         if "demo_placeholder_id" not in st.session_state:
             st.session_state["demo_placeholder_id"] = f"demo_{uuid.uuid4().hex[:8]}"
-        st.session_state.setdefault("user_id", st.session_state["demo_placeholder_id"])
+        st.session_state.setdefault(
+            "user_id", st.session_state["demo_placeholder_id"])
         st.session_state.setdefault("username", "Demo User")
         # Informational banner for demo users and a small logo above it
         try:
             # Prefer package-local static SVG image for reliable rendering in VS Code/browser
             pkg_logo = os.path.join(
-                os.path.dirname(__file__), "static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg"
+                os.path.dirname(
+                    __file__), "static", "graphics", "FirstPerson-Logo-invert-cropped_notext.svg"
             )
             if os.path.exists(pkg_logo):
                 # Center the small logo above the demo info
@@ -1166,12 +1211,16 @@ def render_main_app():
                         st.image(pkg_logo, width=64)
                     except Exception:
                         # Fallback to inline SVG rendering if st.image fails
-                        svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
-                        st.markdown(f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
+                        svg_markup = _load_inline_svg(
+                            "FirstPerson-Logo-invert-cropped_notext.svg")
+                        st.markdown(
+                            f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
             else:
                 # Fallback: inline SVG if package file missing
-                svg_markup = _load_inline_svg("FirstPerson-Logo-invert-cropped_notext.svg")
-                st.markdown(f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
+                svg_markup = _load_inline_svg(
+                    "FirstPerson-Logo-invert-cropped_notext.svg")
+                st.markdown(
+                    f"<div style='width:64px;margin:0 auto'>{svg_markup}</div>", unsafe_allow_html=True)
 
             st.info(
                 "Running in demo mode — register or sign in in the sidebar to enable persistence and full features."
@@ -1195,7 +1244,8 @@ def render_main_app():
     # Initialize conversation manager for persistence
     if ConversationManager and "user_id" in st.session_state:
         if "conversation_manager" not in st.session_state:
-            st.session_state["conversation_manager"] = ConversationManager(st.session_state["user_id"])
+            st.session_state["conversation_manager"] = ConversationManager(
+                st.session_state["user_id"])
             # Attempt to load user preferences (persist settings) from server
             try:
                 mgr = st.session_state.get("conversation_manager")
@@ -1204,9 +1254,11 @@ def render_main_app():
                     # Only set defaults if session state doesn't already have them
                     if prefs:
                         if "persist_history" not in st.session_state:
-                            st.session_state["persist_history"] = prefs.get("persist_history", True)
+                            st.session_state["persist_history"] = prefs.get(
+                                "persist_history", True)
                         if "persist_confirmed" not in st.session_state:
-                            st.session_state["persist_confirmed"] = prefs.get("persist_confirmed", False)
+                            st.session_state["persist_confirmed"] = prefs.get(
+                                "persist_confirmed", False)
             except Exception:
                 # Best-effort: do not break UI if preferences cannot be loaded
                 pass
@@ -1261,7 +1313,8 @@ def render_main_app():
                                     if generate_auto_name and first_msg
                                     else (st.session_state.get("conversation_title") or "Migrated Conversation")
                                 )
-                                mgr.save_conversation(conv_id, title, demo_messages)
+                                mgr.save_conversation(
+                                    conv_id, title, demo_messages)
                                 # Set current conversation id to the newly created one
                                 st.session_state["current_conversation_id"] = conv_id
                         except Exception:
@@ -1287,7 +1340,8 @@ def render_main_app():
     # and then automatically transition into the authenticated UI.
     try:
         if st.session_state.get("authenticated") and st.session_state.get("post_login_transition"):
-            msg = st.session_state.get("post_login_message", "Signed in successfully")
+            msg = st.session_state.get(
+                "post_login_message", "Signed in successfully")
             # Center a subtle confirmation card
             c1, c2, c3 = st.columns([1, 2, 1])
             with c2:
@@ -1343,20 +1397,24 @@ def render_main_app():
             except Exception:
                 st.markdown("### Account")
             # Preserve an extra leading space as requested for visual spacing
-            st.markdown("<div style='margin-top:16px;'></div>", unsafe_allow_html=True)
-            st.markdown("**Create an Account** or **Sign In** to keep your conversations and enable full features.")
+            st.markdown("<div style='margin-top:16px;'></div>",
+                        unsafe_allow_html=True)
+            st.markdown(
+                "**Create an Account** or **Sign In** to keep your conversations and enable full features.")
             col_a, col_b = st.columns([1, 1])
             with col_a:
                 if st.button("Sign in", key="sidebar_toggle_sign_in"):
                     # Toggle the sidebar expander for sign-in
-                    st.session_state["sidebar_show_login"] = not st.session_state.get("sidebar_show_login", False)
+                    st.session_state["sidebar_show_login"] = not st.session_state.get(
+                        "sidebar_show_login", False)
                     # Ensure the other expander is closed
                     if st.session_state["sidebar_show_login"]:
                         st.session_state["sidebar_show_register"] = False
                     # No forced rerun here; allow the current render to show the expander
             with col_b:
                 if st.button("Create an Account", key="sidebar_toggle_register"):
-                    st.session_state["sidebar_show_register"] = not st.session_state.get("sidebar_show_register", False)
+                    st.session_state["sidebar_show_register"] = not st.session_state.get(
+                        "sidebar_show_register", False)
                     if st.session_state["sidebar_show_register"]:
                         st.session_state["sidebar_show_login"] = False
                     # No forced rerun here; allow the current render to show the expander
@@ -1369,8 +1427,10 @@ def render_main_app():
                     except Exception:
                         # Best-effort: fall back to local demo session state
                         st.session_state.authenticated = False
-                        st.session_state.user_id = st.session_state.get("user_id")
-                        st.session_state.username = st.session_state.get("username")
+                        st.session_state.user_id = st.session_state.get(
+                            "user_id")
+                        st.session_state.username = st.session_state.get(
+                            "username")
                         st.rerun()
 
             st.markdown("---")
@@ -1378,7 +1438,8 @@ def render_main_app():
             # Debug snapshot for sidebar auth flags (helpful during development)
             # Only show this when explicitly enabled via environment or session flag
             try:
-                show_debug = os.environ.get("FP_DEBUG_UI") == "1" or st.session_state.get("show_sidebar_debug")
+                show_debug = os.environ.get(
+                    "FP_DEBUG_UI") == "1" or st.session_state.get("show_sidebar_debug")
                 if show_debug:
                     st.caption(
                         f"debug: sidebar_show_login={st.session_state.get('sidebar_show_login')} | sidebar_show_register={st.session_state.get('sidebar_show_register')}"
@@ -1456,7 +1517,8 @@ def render_main_app():
             and st.session_state.get("conversation_manager")
         ):
             st.markdown("---")
-            load_all_conversations_to_sidebar(st.session_state["conversation_manager"])
+            load_all_conversations_to_sidebar(
+                st.session_state["conversation_manager"])
 
             # New conversation button
             if st.button("➕ New Conversation", use_container_width=True):
@@ -1468,11 +1530,13 @@ def render_main_app():
                 except Exception:
                     pass
 
-                st.session_state["conversation_history_" + st.session_state["user_id"]] = []
+                st.session_state["conversation_history_" +
+                                 st.session_state["user_id"]] = []
                 # Optimistically add this new conversation to the session cache
                 try:
                     cid = st.session_state["current_conversation_id"]
-                    cached = st.session_state.setdefault("session_cached_conversations", [])
+                    cached = st.session_state.setdefault(
+                        "session_cached_conversations", [])
                     # Avoid duplicates
                     if not any(c.get("conversation_id") == cid for c in cached):
                         cached.insert(
@@ -1613,7 +1677,8 @@ def render_main_app():
         col1, col2 = st.columns([0.5, 8], gap="small")
         with col1:
             try:
-                st.markdown(f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
+                st.markdown(
+                    f'<div style="width:36px">{svg_markup}</div>', unsafe_allow_html=True)
             except Exception:
                 # Render a simple emoji fallback (ensure proper quoting)
                 st.markdown(
@@ -1624,10 +1689,12 @@ def render_main_app():
                 '<h1 style="margin: 0; padding-top: 6px; color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 1.8rem;">FirstPerson - Personal AI Companion</h1>',
                 unsafe_allow_html=True,
             )
-        st.markdown(f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
+        st.markdown(
+            f"<div style='font-size: 0.8rem; color: #999;'>Theme: {theme}</div>", unsafe_allow_html=True)
     col1, col2, col3 = st.columns([2, 1, 1])
     with col1:
-        display_name = st.session_state.get("first_name") or st.session_state.get("username")
+        display_name = st.session_state.get(
+            "first_name") or st.session_state.get("username")
         st.write(f"Welcome back, **{display_name}**! 👋")
     with col2:
         # Settings panel is rendered in the sidebar expander
@@ -1643,6 +1710,31 @@ def render_main_app():
     conversation_key = f"conversation_history_{st.session_state.get('user_id', 'anon')}"
     if conversation_key not in st.session_state:
         st.session_state[conversation_key] = []
+
+    # Initialize FirstPerson orchestrator for relational AI (story-start, frequency, memory, templates)
+    # This provides emotional awareness and theme tracking across the conversation.
+    if HAS_FIRSTPERSON and "firstperson_orchestrator" not in st.session_state:
+        try:
+            user_id = st.session_state.get('user_id', 'anon')
+            conversation_id = st.session_state.get(
+                'current_conversation_id', 'default')
+            st.session_state["firstperson_orchestrator"] = create_orchestrator(
+                user_id, conversation_id)
+            # Initialize session (rehydrate memory from prior anchors)
+            st.session_state["firstperson_orchestrator"].initialize_session()
+        except Exception as e:
+            logger.warning(
+                f"FirstPerson orchestrator initialization failed: {e}")
+            st.session_state["firstperson_orchestrator"] = None
+
+    # Initialize Affect Parser for emotional attunement (Phase 2.1)
+    # Detects tone, valence, and arousal from user input
+    if HAS_AFFECT_PARSER and "affect_parser" not in st.session_state:
+        try:
+            st.session_state["affect_parser"] = create_affect_parser()
+        except Exception as e:
+            logger.warning(f"Affect parser initialization failed: {e}")
+            st.session_state["affect_parser"] = None
 
     # Set processing_mode in session and local variable for use below
     render_controls_row(conversation_key)
@@ -1663,7 +1755,8 @@ def render_main_app():
                 )
             except Exception:
                 try:
-                    st.info("Your conversation will appear here after you send your first message.")
+                    st.info(
+                        "Your conversation will appear here after you send your first message.")
                 except Exception:
                     pass
 
@@ -1693,7 +1786,8 @@ def render_main_app():
         document_title = "Document" if not first_line else first_line[:60]
 
         st.info(f"📄 Document uploaded: {document_title}")
-        st.info("🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
+        st.info(
+            "🔧 Advanced document processing (spaCy, NLTK) not available - using basic text analysis")
 
         # Basic analysis without dependencies
         document_analysis = {
@@ -1749,7 +1843,8 @@ def render_main_app():
                 uploaded_file = st.file_uploader(
                     "Browse Files",
                     label_visibility="collapsed",
-                    type=["txt", "docx", "pdf", "md", "html", "htm", "csv", "xlsx", "xls", "json"],
+                    type=["txt", "docx", "pdf", "md", "html",
+                          "htm", "csv", "xlsx", "xls", "json"],
                     key="inline_uploader",
                 )
 
@@ -1771,7 +1866,8 @@ def render_main_app():
                                 from docx import Document
 
                                 doc = Document(uploaded_file)
-                                file_text = "\n".join([para.text for para in doc.paragraphs])
+                                file_text = "\n".join(
+                                    [para.text for para in doc.paragraphs])
                             except Exception as e:
                                 st.error(f"Error reading Word document: {e}")
                         elif file_ext == "pdf":
@@ -1779,7 +1875,8 @@ def render_main_app():
                                 import pdfplumber
 
                                 with pdfplumber.open(uploaded_file) as pdf:
-                                    file_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+                                    file_text = "\n".join(
+                                        page.extract_text() or "" for page in pdf.pages)
                             except Exception as e:
                                 st.error(f"Error reading PDF document: {e}")
                         elif file_ext == "md":
@@ -1793,7 +1890,8 @@ def render_main_app():
                                 soup = BeautifulSoup(html, "html.parser")
                                 file_text = soup.get_text()
                             except Exception as e:
-                                st.error(f"Error reading Markdown document: {e}")
+                                st.error(
+                                    f"Error reading Markdown document: {e}")
                         elif file_ext in ["html", "htm"]:
                             try:
                                 from bs4 import BeautifulSoup
@@ -1831,9 +1929,11 @@ def render_main_app():
 
                         if file_text:
                             st.session_state["uploaded_text"] = file_text
-                            st.success(f"✅ {file_ext.upper()} document uploaded successfully!")
+                            st.success(
+                                f"✅ {file_ext.upper()} document uploaded successfully!")
                         else:
-                            st.warning(f"Could not extract text from {file_ext.upper()} file")
+                            st.warning(
+                                f"Could not extract text from {file_ext.upper()} file")
                     except Exception as e:
                         st.error(f"Error reading document: {e}")
             except Exception:
@@ -1864,19 +1964,24 @@ def render_main_app():
             try:
                 conv = mgr.load_conversation(selected)
                 if conv:
-                    msgs = conv.get("messages") if isinstance(conv.get("messages"), list) else conv.get("messages", [])
+                    msgs = conv.get("messages") if isinstance(
+                        conv.get("messages"), list) else conv.get("messages", [])
                     st.session_state[conversation_key] = msgs or []
-                    st.session_state["current_conversation_id"] = conv.get("conversation_id", selected)
+                    st.session_state["current_conversation_id"] = conv.get(
+                        "conversation_id", selected)
                     st.session_state["conversation_title"] = conv.get(
-                        "title", st.session_state.get("conversation_title", "Conversation")
+                        "title", st.session_state.get(
+                            "conversation_title", "Conversation")
                     )
                 else:
                     try:
-                        st.sidebar.warning("Could not load the selected conversation (not found).")
+                        st.sidebar.warning(
+                            "Could not load the selected conversation (not found).")
                     except Exception:
                         pass
             except Exception as e:
-                logger.warning(f"Failed to load selected conversation {selected}: {e}")
+                logger.warning(
+                    f"Failed to load selected conversation {selected}: {e}")
                 try:
                     st.sidebar.error(f"Error loading conversation: {e}")
                 except Exception:
@@ -1920,10 +2025,12 @@ def render_main_app():
                 with st.spinner("Processing your emotional input..."):
                     start_time = time.time()
                     response = ""
-                    response_style = st.session_state.get("response_style", "Balanced")
+                    response_style = st.session_state.get(
+                        "response_style", "Balanced")
 
                     # Build a lightweight conversation_context to help the parser detect feedback/reciprocal messages
-                    conversation_context = {"last_assistant_message": None, "messages": []}
+                    conversation_context = {
+                        "last_assistant_message": None, "messages": []}
                     if conversation_key in st.session_state and st.session_state[conversation_key]:
                         # copy session history into conversation_context.messages (role/content pairs)
                         conversation_context["messages"] = [
@@ -1944,7 +2051,8 @@ def render_main_app():
                                 None,
                             )
                             if last_assistant_entry:
-                                conversation_context["last_assistant_message"] = last_assistant_entry.get("assistant")
+                                conversation_context["last_assistant_message"] = last_assistant_entry.get(
+                                    "assistant")
                         except Exception:
                             conversation_context["last_assistant_message"] = None
 
@@ -1955,12 +2063,15 @@ def render_main_app():
 
                         if "local_preprocessor" not in st.session_state:
                             # default to test_mode=True to avoid heavy model loads in dev
-                            st.session_state["local_preprocessor"] = Preprocessor(test_mode=True)
+                            st.session_state["local_preprocessor"] = Preprocessor(
+                                test_mode=True)
                         p = st.session_state.get("local_preprocessor")
                         if p:
-                            preproc_res = p.preprocess(user_input, conversation_context)
+                            preproc_res = p.preprocess(
+                                user_input, conversation_context)
                             # Use sanitized text for downstream processing
-                            sanitized_text = preproc_res.get("sanitized_text", user_input)
+                            sanitized_text = preproc_res.get(
+                                "sanitized_text", user_input)
                             st.session_state["last_preproc"] = {
                                 "intent": preproc_res.get("intent"),
                                 "confidence": preproc_res.get("confidence"),
@@ -1977,7 +2088,8 @@ def render_main_app():
                         sanitized_text = user_input
 
                     # Use the sanitized text if available (from local preprocessor)
-                    effective_input = sanitized_text if "sanitized_text" in locals() and sanitized_text else user_input
+                    effective_input = sanitized_text if "sanitized_text" in locals(
+                    ) and sanitized_text else user_input
 
                     # Default: run the all-local pipeline first and call the
                     # response engine afterwards with the local analysis so we
@@ -1995,13 +2107,59 @@ def render_main_app():
                             conversation_context=conversation_context,
                         )
                         glyphs = local_analysis.get("glyphs", [])
-                        voltage_response = local_analysis.get("voltage_response", "")
+                        voltage_response = local_analysis.get(
+                            "voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
-                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
+                        debug_glyph_rows = local_analysis.get(
+                            "debug_glyph_rows", [])
+
+                        # --- FirstPerson relational AI processing ---
+                        # Enhance response with story-start detection, frequency reflection,
+                        # memory rehydration, and response templates via orchestrator
+                        firstperson_response = None
+                        try:
+                            fp_orch = st.session_state.get(
+                                "firstperson_orchestrator")
+                            if fp_orch:
+                                firstperson_response = fp_orch.handle_conversation_turn(
+                                    effective_input)
+                                # Inject FirstPerson insights into context for response engine
+                                if isinstance(firstperson_response, dict):
+                                    local_analysis["firstperson_insights"] = {
+                                        "detected_theme": firstperson_response.get("detected_theme"),
+                                        "theme_frequency": firstperson_response.get("theme_frequency"),
+                                        "memory_context_injected": firstperson_response.get("memory_context_injected"),
+                                        "clarifying_prompt": firstperson_response.get("clarifying_prompt"),
+                                    }
+                        except Exception as e:
+                            logger.debug(
+                                f"FirstPerson orchestrator processing failed: {e}")
+
+                        # --- Affect Parser (Phase 2.1): Emotional Attunement ---
+                        # Detect tone, valence, and arousal to enable response modulation
+                        affect_analysis = None
+                        try:
+                            affect_parser = st.session_state.get(
+                                "affect_parser")
+                            if affect_parser:
+                                affect_analysis = affect_parser.analyze_affect(
+                                    effective_input)
+                                # Inject affect insights into context for response engine
+                                local_analysis["affect_analysis"] = {
+                                    "tone": affect_analysis.tone,
+                                    "tone_confidence": affect_analysis.tone_confidence,
+                                    "valence": affect_analysis.valence,
+                                    "arousal": affect_analysis.arousal,
+                                    "secondary_tones": affect_analysis.secondary_tones,
+                                }
+                        except Exception as e:
+                            logger.debug(
+                                f"Affect parser processing failed: {e}")
+
                         # Call the local response engine with the local analysis so
                         # the engine can produce a short, inquisitive, friend-like
                         # response while avoiding redundant parsing. If the engine
@@ -2018,13 +2176,15 @@ def render_main_app():
                                 if last_pre.get("intent"):
                                     ctx["emotion"] = last_pre.get("intent")
                                 if last_pre.get("confidence"):
-                                    ctx["intensity"] = "high" if last_pre.get("confidence", 0) > 0.7 else "gentle"
+                                    ctx["intensity"] = "high" if last_pre.get(
+                                        "confidence", 0) > 0.7 else "gentle"
                             response = _engine_process(effective_input, ctx)
                             processing_time = time.time() - start_time
                             debug_signals = local_analysis.get("signals", [])
                             debug_glyphs = local_analysis.get("glyphs", [])
                             debug_sql = local_analysis.get("debug_sql", "")
-                            debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
+                            debug_glyph_rows = local_analysis.get(
+                                "debug_glyph_rows", [])
                             glyphs = local_analysis.get("glyphs", [])
                             handled_by_response_engine = True
                         except Exception:
@@ -2050,13 +2210,59 @@ def render_main_app():
                             conversation_context=conversation_context,
                         )
                         glyphs = local_analysis.get("glyphs", [])
-                        voltage_response = local_analysis.get("voltage_response", "")
+                        voltage_response = local_analysis.get(
+                            "voltage_response", "")
                         ritual_prompt = local_analysis.get("ritual_prompt", "")
                         debug_signals = local_analysis.get("signals", [])
                         debug_gates = local_analysis.get("gates", [])
                         debug_glyphs = glyphs
                         debug_sql = local_analysis.get("debug_sql", "")
-                        debug_glyph_rows = local_analysis.get("debug_glyph_rows", [])
+                        debug_glyph_rows = local_analysis.get(
+                            "debug_glyph_rows", [])
+
+                        # --- FirstPerson relational AI processing ---
+                        # Enhance response with story-start detection, frequency reflection,
+                        # memory rehydration, and response templates via orchestrator
+                        firstperson_response = None
+                        try:
+                            fp_orch = st.session_state.get(
+                                "firstperson_orchestrator")
+                            if fp_orch:
+                                firstperson_response = fp_orch.handle_conversation_turn(
+                                    effective_input)
+                                # Inject FirstPerson insights into context for response engine
+                                if isinstance(firstperson_response, dict):
+                                    local_analysis["firstperson_insights"] = {
+                                        "detected_theme": firstperson_response.get("detected_theme"),
+                                        "theme_frequency": firstperson_response.get("theme_frequency"),
+                                        "memory_context_injected": firstperson_response.get("memory_context_injected"),
+                                        "clarifying_prompt": firstperson_response.get("clarifying_prompt"),
+                                    }
+                        except Exception as e:
+                            logger.debug(
+                                f"FirstPerson orchestrator processing failed: {e}")
+
+                        # --- Affect Parser (Phase 2.1): Emotional Attunement ---
+                        # Detect tone, valence, and arousal to enable response modulation
+                        affect_analysis = None
+                        try:
+                            affect_parser = st.session_state.get(
+                                "affect_parser")
+                            if affect_parser:
+                                affect_analysis = affect_parser.analyze_affect(
+                                    effective_input)
+                                # Inject affect insights into context for response engine
+                                local_analysis["affect_analysis"] = {
+                                    "tone": affect_analysis.tone,
+                                    "tone_confidence": affect_analysis.tone_confidence,
+                                    "valence": affect_analysis.valence,
+                                    "arousal": affect_analysis.arousal,
+                                    "secondary_tones": affect_analysis.secondary_tones,
+                                }
+                        except Exception as e:
+                            logger.debug(
+                                f"Affect parser processing failed: {e}")
+
                         try:
                             from main_response_engine import (
                                 process_user_input as _engine_process,
@@ -2069,7 +2275,8 @@ def render_main_app():
                                 if last_pre.get("intent"):
                                     ctx["emotion"] = last_pre.get("intent")
                                 if last_pre.get("confidence"):
-                                    ctx["intensity"] = "high" if last_pre.get("confidence", 0) > 0.7 else "gentle"
+                                    ctx["intensity"] = "high" if last_pre.get(
+                                        "confidence", 0) > 0.7 else "gentle"
                             response = _engine_process(effective_input, ctx)
                             processing_time = time.time() - start_time
                             handled_by_response_engine = True
@@ -2092,13 +2299,16 @@ def render_main_app():
                                         is_sensitive_input,
                                     )
 
-                                    safety_flag = is_sensitive_input(user_input)
+                                    safety_flag = is_sensitive_input(
+                                        user_input)
                                 except Exception:
                                     safety_flag = False
                                 if not safety_flag:
-                                    limbic_result = engine.process_emotion_with_limbic_mapping(user_input)
+                                    limbic_result = engine.process_emotion_with_limbic_mapping(
+                                        user_input)
                                     try:
-                                        decorated = decorate_reply(response, limbic_result)
+                                        decorated = decorate_reply(
+                                            response, limbic_result)
                                         # Only replace response if decoration returns a non-empty string
                                         if isinstance(decorated, str) and decorated.strip():
                                             response = decorated
@@ -2118,7 +2328,8 @@ def render_main_app():
                         try:
                             detected_triggers = []
                             if "glyphs" in locals() and glyphs:
-                                detected_triggers = [g.get("glyph_name", "") for g in glyphs if isinstance(g, dict)]
+                                detected_triggers = [
+                                    g.get("glyph_name", "") for g in glyphs if isinstance(g, dict)]
 
                             fallback_result = st.session_state["fallback_protocol"].process_exchange(
                                 user_text=user_input, detected_triggers=detected_triggers if detected_triggers else None
@@ -2133,7 +2344,8 @@ def render_main_app():
                                 fallback_result
                             )
                         except Exception as e:
-                            logger.debug(f"Fallback protocol error (non-fatal): {e}")
+                            logger.debug(
+                                f"Fallback protocol error (non-fatal): {e}")
                             fallback_result = None
 
                     # Prevent verbatim repetition of assistant replies across consecutive turns.
@@ -2142,7 +2354,8 @@ def render_main_app():
                     try:
                         last_assistant = None
                         if st.session_state.get(conversation_key) and len(st.session_state[conversation_key]) > 0:
-                            last_assistant = st.session_state[conversation_key][-1].get("assistant")
+                            last_assistant = st.session_state[conversation_key][-1].get(
+                                "assistant")
                         if last_assistant and last_assistant.strip() == response.strip():
                             followups = [
                                 "Can you tell me one specific detail about that?",
@@ -2157,7 +2370,8 @@ def render_main_app():
                         pass
 
                     st.write(response)
-                    st.caption(f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
+                    st.caption(
+                        f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
 
                     # Show anonymization consent widget once per session (or until user interacts)
                     # Gate the full consent UI behind an explicit opt-in flag so it doesn't
@@ -2183,7 +2397,8 @@ def render_main_app():
 
                             # Only show the consent widget if it hasn't been seen/interacted with this session
                             if not st.session_state.get("consent_seen", False):
-                                consent_result = render_anonymization_consent_widget(exchange_id)
+                                consent_result = render_anonymization_consent_widget(
+                                    exchange_id)
 
                                 # If the render function returned a completed consent dict, store it
                                 if consent_result:
@@ -2203,7 +2418,8 @@ def render_main_app():
                                         with open(
                                             "/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8"
                                         ) as _fh:
-                                            _fh.write(_json.dumps(log_entry, ensure_ascii=False) + "\n")
+                                            _fh.write(_json.dumps(
+                                                log_entry, ensure_ascii=False) + "\n")
                                     except Exception:
                                         # Non-fatal; do not block the UI
                                         pass
@@ -2217,7 +2433,8 @@ def render_main_app():
                                         import datetime as _dt
                                         import json as _json
 
-                                        stored = st.session_state.get(consent_key)
+                                        stored = st.session_state.get(
+                                            consent_key)
                                         log_entry = {
                                             "ts": _dt.datetime.utcnow().isoformat() + "Z",
                                             "user_id": st.session_state.get("user_id"),
@@ -2227,7 +2444,8 @@ def render_main_app():
                                         with open(
                                             "/workspaces/saoriverse-console/debug_chat.log", "a", encoding="utf-8"
                                         ) as _fh:
-                                            _fh.write(_json.dumps(log_entry, ensure_ascii=False) + "\n")
+                                            _fh.write(_json.dumps(
+                                                log_entry, ensure_ascii=False) + "\n")
                                     except Exception:
                                         pass
                         # else: already seen in this session; do nothing
@@ -2269,14 +2487,17 @@ def render_main_app():
         # fails or is pending.
         try:
             cid = st.session_state.get("current_conversation_id", "default")
-            cached = st.session_state.setdefault("session_cached_conversations", [])
+            cached = st.session_state.setdefault(
+                "session_cached_conversations", [])
             updated = False
             if isinstance(cached, list):
                 for c in cached:
                     if c and c.get("conversation_id") == cid:
-                        c["title"] = st.session_state.get("conversation_title", c.get("title", "New Conversation"))
+                        c["title"] = st.session_state.get(
+                            "conversation_title", c.get("title", "New Conversation"))
                         c["updated_at"] = datetime.datetime.now().isoformat()
-                        c["message_count"] = len(st.session_state.get(conversation_key, []))
+                        c["message_count"] = len(
+                            st.session_state.get(conversation_key, []))
                         updated = True
                         break
                 if not updated:
@@ -2307,7 +2528,8 @@ def render_main_app():
                     import os
                     import sys
 
-                    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../../scripts/utilities"))
+                    sys.path.insert(0, os.path.join(os.path.dirname(
+                        __file__), "../../../scripts/utilities"))
                     from hybrid_processor_with_evolution import (
                         create_integrated_processor,
                     )
@@ -2355,7 +2577,8 @@ def render_main_app():
                         user_message=user_input,
                         ai_response=response,
                         user_id=st.session_state["persistent_user_id"],
-                        conversation_id=st.session_state.get("conversation_id", "default"),
+                        conversation_id=st.session_state.get(
+                            "conversation_id", "default"),
                         glyphs=debug_glyphs,
                     )
 
@@ -2367,26 +2590,32 @@ def render_main_app():
                         )
 
                     # Check if new glyphs were generated
-                    new_glyphs = evolution_result["pipeline_stages"]["glyph_generation"].get("new_glyphs_generated", [])
+                    new_glyphs = evolution_result["pipeline_stages"]["glyph_generation"].get(
+                        "new_glyphs_generated", [])
                     if new_glyphs and len(new_glyphs) > 0:
                         # Store newly generated glyphs in session
                         if "new_glyphs_this_session" not in st.session_state:
                             st.session_state["new_glyphs_this_session"] = []
-                        st.session_state["new_glyphs_this_session"].extend(new_glyphs)
+                        st.session_state["new_glyphs_this_session"].extend(
+                            new_glyphs)
 
                         # Update learning statistics
-                        st.session_state["learning_stats"]["glyphs_generated"] += len(new_glyphs)
+                        st.session_state["learning_stats"]["glyphs_generated"] += len(
+                            new_glyphs)
 
                         # Display learning progress
                         st.sidebar.markdown("### 📊 Learning Progress")
                         st.sidebar.text(
                             f"Exchanges Processed: {st.session_state['learning_stats']['exchanges_processed']}"
                         )
-                        st.sidebar.text(f"Signals Learned: {st.session_state['learning_stats']['signals_learned']}")
-                        st.sidebar.text(f"Glyphs Generated: {st.session_state['learning_stats']['glyphs_generated']}")
+                        st.sidebar.text(
+                            f"Signals Learned: {st.session_state['learning_stats']['signals_learned']}")
+                        st.sidebar.text(
+                            f"Glyphs Generated: {st.session_state['learning_stats']['glyphs_generated']}")
 
                         # Display notification about new glyphs
-                        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
+                        st.success(
+                            f"✨ {len(new_glyphs)} new glyph(s) discovered from this exchange!")
                         for glyph in new_glyphs:
                             glyph_dict = glyph.to_dict() if hasattr(glyph, "to_dict") else glyph
                             st.info(
@@ -2395,11 +2624,14 @@ def render_main_app():
                             )
 
                     # Log learning results
-                    learning_result = evolution_result["pipeline_stages"]["hybrid_learning"].get("learning_result", {})
+                    learning_result = evolution_result["pipeline_stages"]["hybrid_learning"].get(
+                        "learning_result", {})
                     if learning_result.get("learned_to_shared"):
-                        logger.info(f"User {user_id} contributed to shared lexicon")
+                        logger.info(
+                            f"User {user_id} contributed to shared lexicon")
                     elif learning_result.get("learned_to_user"):
-                        logger.info(f"User {user_id} learning to personal lexicon")
+                        logger.info(
+                            f"User {user_id} learning to personal lexicon")
 
             except ImportError as e:
                 # Fallback if dynamic evolution not available
@@ -2419,11 +2651,14 @@ def render_main_app():
                         glyphs=debug_glyphs,
                     )
                     if result.get("learned_to_shared"):
-                        logger.info(f"User {user_id} contributed to shared lexicon")
+                        logger.info(
+                            f"User {user_id} contributed to shared lexicon")
                     elif result.get("learned_to_user"):
-                        logger.info(f"User {user_id} learning to personal lexicon")
+                        logger.info(
+                            f"User {user_id} learning to personal lexicon")
                 except Exception as fallback_e:
-                    logger.error(f"Fallback learning also failed: {fallback_e}")
+                    logger.error(
+                        f"Fallback learning also failed: {fallback_e}")
             except Exception as e:
                 # Non-fatal: learning should not break the app
                 logger.warning(f"Hybrid learning failed: {e}")
@@ -2432,7 +2667,8 @@ def render_main_app():
         try:
             if st.session_state.get("persist_history", False) and st.session_state.get("conversation_manager"):
                 manager = st.session_state["conversation_manager"]
-                conversation_id = st.session_state.get("current_conversation_id", "default")
+                conversation_id = st.session_state.get(
+                    "current_conversation_id", "default")
 
                 # Auto-name conversation based on first message
                 # Just added first exchange
@@ -2443,7 +2679,8 @@ def render_main_app():
                     else:
                         title = "New Conversation"
                 else:
-                    title = st.session_state.get("conversation_title", "New Conversation")
+                    title = st.session_state.get(
+                        "conversation_title", "New Conversation")
 
                 # Save to database with conversation manager
                 messages = st.session_state[conversation_key]
@@ -2453,7 +2690,8 @@ def render_main_app():
                 if success:
                     # On success, ensure the sidebar shows this conversation immediately
                     try:
-                        cached = st.session_state.setdefault("session_cached_conversations", [])
+                        cached = st.session_state.setdefault(
+                            "session_cached_conversations", [])
                         if not any(c.get("conversation_id") == conversation_id for c in cached):
                             cached.insert(
                                 0,
@@ -2477,9 +2715,12 @@ def render_main_app():
         # Fallback: Also persist individual messages to old conversation_history table if configured
         try:
             if st.session_state.get("persist_history", False):
-                sup_cfg = st.secrets.get("supabase", {}) if hasattr(st, "secrets") else {}
-                supabase_url = sup_cfg.get("url") or sup_cfg.get("saori_url") or sup_cfg.get("saori_function_url")
-                supabase_key = sup_cfg.get("key") or sup_cfg.get("anon_key") or sup_cfg.get("apikey")
+                sup_cfg = st.secrets.get("supabase", {}) if hasattr(
+                    st, "secrets") else {}
+                supabase_url = sup_cfg.get("url") or sup_cfg.get(
+                    "saori_url") or sup_cfg.get("saori_function_url")
+                supabase_key = sup_cfg.get("key") or sup_cfg.get(
+                    "anon_key") or sup_cfg.get("apikey")
                 # If function URL was provided instead of base url, try to extract base
                 if supabase_url and supabase_url.endswith("/"):
                     supabase_url = supabase_url.rstrip("/")
@@ -2513,12 +2754,15 @@ def render_main_app():
                         }
                     ]
                     try:
-                        resp = requests.post(rest_url, headers=headers, json=payload, timeout=6)
+                        resp = requests.post(
+                            rest_url, headers=headers, json=payload, timeout=6)
                         if resp.status_code not in (200, 201):
                             # Non-fatal: warn in UI (use generic storage wording)
-                            st.warning("Could not save history to secure storage right now.")
+                            st.warning(
+                                "Could not save history to secure storage right now.")
                     except Exception:
-                        st.warning("Temporary issue saving to secure storage. Your local history is still intact.")
+                        st.warning(
+                            "Temporary issue saving to secure storage. Your local history is still intact.")
         except Exception:
             # Best-effort: do not break the UI if persistence fails
             pass
@@ -2549,13 +2793,16 @@ def render_main_app():
             log_time = st.time_input("Time", value=dt.datetime.now().time())
             event = st.text_area("Event", placeholder="What happened?")
             mood = st.text_input("Mood", placeholder="How did it feel?")
-            reflections = st.text_area("Reflections", placeholder="What’s emerging emotionally?")
-            insights = st.text_area("Insights", placeholder="What truth or clarity surfaced?")
+            reflections = st.text_area(
+                "Reflections", placeholder="What’s emerging emotionally?")
+            insights = st.text_area(
+                "Insights", placeholder="What truth or clarity surfaced?")
             if st.button("Conclude Log"):
                 st.success("Your personal log has been saved.")
                 try:
                     if callable(generate_doc):
-                        buf = generate_doc(date, log_time, event, mood, reflections, insights)
+                        buf = generate_doc(
+                            date, log_time, event, mood, reflections, insights)
                         # If a BytesIO-like object was returned, get raw bytes
                         try:
                             data_bytes = buf.getvalue()
@@ -2581,7 +2828,8 @@ def render_main_app():
                 except Exception as e:
                     st.error(f"Error generating Word document: {e}")
         elif journal_type == "Daily Emotional Check-In":
-            st.markdown("Log your mood, stress level, and a short reflection for today.")
+            st.markdown(
+                "Log your mood, stress level, and a short reflection for today.")
             checkin_date = st.date_input(
                 "Date", value=dt.date.today(), key="checkin_date"
             )  # noqa: F841  # used for Streamlit UI side-effect
@@ -2600,7 +2848,8 @@ def render_main_app():
             st.markdown("Track your self-care activities and routines.")
             activities = st.multiselect(  # noqa: F841  # used for Streamlit UI side-effect
                 "Self-Care Activities",
-                ["Exercise", "Creative Work", "Peer Support", "Rest", "Healthy Meal", "Time Outdoors", "Other"],
+                ["Exercise", "Creative Work", "Peer Support", "Rest",
+                    "Healthy Meal", "Time Outdoors", "Other"],
                 key="selfcare_activities",
             )
             notes = st.text_area(
@@ -2612,7 +2861,8 @@ def render_main_app():
             st.markdown("Mark a transition between work and personal time.")
             ritual_type = st.selectbox(
                 "Ritual Type",
-                ["Change Location", "Wash Hands", "Listen to Music", "Short Walk", "Other"],
+                ["Change Location", "Wash Hands",
+                    "Listen to Music", "Short Walk", "Other"],
                 key="ritual_type",
             )  # noqa: F841  # used for Streamlit UI side-effect
             ritual_notes = st.text_area(
@@ -2653,9 +2903,12 @@ def delete_user_history_from_supabase(user_id: str):
         if not user_id:
             return False, "No user_id provided"
 
-        sup_cfg = st.secrets.get("supabase", {}) if hasattr(st, "secrets") else {}
-        supabase_url = sup_cfg.get("url") or sup_cfg.get("saori_url") or sup_cfg.get("saori_function_url")
-        supabase_key = sup_cfg.get("key") or sup_cfg.get("anon_key") or sup_cfg.get("apikey")
+        sup_cfg = st.secrets.get("supabase", {}) if hasattr(
+            st, "secrets") else {}
+        supabase_url = sup_cfg.get("url") or sup_cfg.get(
+            "saori_url") or sup_cfg.get("saori_function_url")
+        supabase_key = sup_cfg.get("key") or sup_cfg.get(
+            "anon_key") or sup_cfg.get("apikey")
         if not supabase_url or not supabase_key:
             return False, "Supabase credentials not configured"
 
@@ -2677,7 +2930,8 @@ def delete_user_history_from_supabase(user_id: str):
         encoded = urllib.parse.quote(str(user_id), safe="")
         rest_url = f"{base_url}/rest/v1/conversation_history"
         delete_url = f"{rest_url}?user_id=eq.{encoded}"
-        headers = {"apikey": supabase_key, "Authorization": f"Bearer {supabase_key}"}
+        headers = {"apikey": supabase_key,
+                   "Authorization": f"Bearer {supabase_key}"}
         resp = requests.delete(delete_url, headers=headers, timeout=10)
         success = resp.status_code in (200, 204)
 
@@ -2701,7 +2955,8 @@ def delete_user_history_from_supabase(user_id: str):
                     },
                 }
             ]
-            requests.post(audit_url, headers=audit_headers, json=audit_payload, timeout=6)
+            requests.post(audit_url, headers=audit_headers,
+                          json=audit_payload, timeout=6)
         except Exception:
             # Swallow audit failures; do not block the main delete result
             pass
@@ -2736,9 +2991,11 @@ def render_main_app_safe(*args, **kwargs):
 
         try:
             # If Streamlit is usable, show a short excerpt to the user
-            st.error("A runtime error occurred; details have been written to debug_runtime.log")
+            st.error(
+                "A runtime error occurred; details have been written to debug_runtime.log")
             excerpt = "\n".join(tb.splitlines()[-12:])
-            st.markdown(f"<pre style='white-space:pre-wrap'>{excerpt}</pre>", unsafe_allow_html=True)
+            st.markdown(
+                f"<pre style='white-space:pre-wrap'>{excerpt}</pre>", unsafe_allow_html=True)
         except Exception:
             # If Streamlit can't render, print to stdout for host logs
             print(tb)
