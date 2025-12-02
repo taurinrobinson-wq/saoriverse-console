@@ -71,6 +71,19 @@ from .response_rotator import (
     create_response_rotator,
 )
 
+from .glyph_modernizer import (
+    get_modernized_glyph_name,
+    get_glyph_for_affect,
+    CORE_GLYPH_MAPPING,
+    AFFECT_TO_GLYPH,
+)
+
+from .glyph_response_composer import (
+    compose_glyph_aware_response,
+    should_use_glyph_responses,
+    GLYPH_AWARE_RESPONSES,
+)
+
 __all__ = [
     # Story-Start Detection (Phase 1.1)
     "StoryStartDetector",
@@ -109,4 +122,13 @@ __all__ = [
     "ResponseRotator",
     "GLYPH_RESPONSE_BANK",
     "create_response_rotator",
+    # Glyph Modernizer (Phase 2.2.1)
+    "get_modernized_glyph_name",
+    "get_glyph_for_affect",
+    "CORE_GLYPH_MAPPING",
+    "AFFECT_TO_GLYPH",
+    # Glyph Response Composer (Phase 2.2.2)
+    "compose_glyph_aware_response",
+    "should_use_glyph_responses",
+    "GLYPH_AWARE_RESPONSES",
 ]

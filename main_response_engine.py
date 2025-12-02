@@ -121,44 +121,51 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
             )
 
             if is_simple_checkin or is_stressed_checkin:
-                # Map tone to glyph category for response rotation
-                # This uses conversational, affect-aware responses from the rotator
+                # Use glyph-aware response composition with modernized glyph names
+                # embedded in conversational responses
                 try:
-                    from emotional_os.core.firstperson import create_response_rotator
+                    from emotional_os.core.firstperson.glyph_response_composer import (
+                        compose_glyph_aware_response,
+                    )
 
-                    rotator = None
-                    try:
-                        rotator = st.session_state.get("response_rotator")
-                    except Exception:
-                        pass
-
-                    if not rotator:
-                        rotator = create_response_rotator()
-                        try:
-                            st.session_state["response_rotator"] = rotator
-                        except Exception:
-                            pass  # Not in Streamlit context; rotator is temporary
-
-                    # Map affect tone to glyph response category
-                    glyph_category = {
-                        "sad": "sadness" if "sadness" in rotator.rotation_bank else "exhaustion",
-                        "anxious": "anxiety",
-                        "angry": "anger",
-                        "grateful": "joy",
-                        "confused": "neutral",
-                        "neutral": "neutral",
-                    }.get(tone, "neutral")
-
-                    # For "sad" with low arousal (exhaustion), prefer "exhaustion" category
-                    if tone == "sad" and arousal < 0.5:
-                        glyph_category = "exhaustion"
-
-                    brief_response = rotator.get_response(
-                        glyph_category, strategy="weighted")
+                    brief_response, used_glyph = compose_glyph_aware_response(
+                        user_input,
+                        affect_analysis=affect_analysis,
+                        use_rotator=True,
+                    )
 
                 except Exception:
-                    # Fallback to simple acknowledge if rotator unavailable
-                    brief_response = "I hear you. Tell me more."
+                    # Fallback to simple ResponseRotator if composer unavailable
+                    try:
+                        from emotional_os.core.firstperson import create_response_rotator
+
+                        rotator = None
+                        try:
+                            rotator = st.session_state.get("response_rotator")
+                        except Exception:
+                            pass
+
+                        if not rotator:
+                            rotator = create_response_rotator()
+                            try:
+                                st.session_state["response_rotator"] = rotator
+                            except Exception:
+                                pass
+
+                        glyph_category = {
+                            "sad": "exhaustion" if arousal < 0.5 else "sadness",
+                            "anxious": "anxiety",
+                            "angry": "anger",
+                            "grateful": "joy",
+                            "confused": "neutral",
+                            "neutral": "neutral",
+                        }.get(tone, "neutral")
+
+                        brief_response = rotator.get_response(
+                            glyph_category, strategy="weighted")
+
+                    except Exception:
+                        brief_response = "I hear you. Tell me more."
 
                 if prefix:
                     return f"{prefix} {brief_response}".strip()
