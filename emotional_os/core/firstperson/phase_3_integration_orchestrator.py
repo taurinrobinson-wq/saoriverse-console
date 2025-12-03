@@ -8,16 +8,22 @@ Integrates with:
 - RepairOrchestrator (Phase 2.3 repair module)
 - PreferenceManager (Phase 2.4 preferences)
 - TemporalAnalyzer (Phase 2.5 temporal patterns)
+- PerspectiveTaker (Phase 3 perspective-taking)
+- MicroChoiceOffering (Phase 3 micro-choice scaffolding)
+- CircadianGlyphSelector (Phase 3 temporal awareness)
 """
 
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 import logging
 
 from emotional_profile import EmotionalProfileManager, EmotionalTone
 from session_coherence import SessionCoherenceTracker
 from preference_evolution import PreferenceEvolutionTracker, PreferenceType
+from perspective_taker import PerspectiveTaker, PerspectiveReflection
+from micro_choice_offering import MicroChoiceOffering, MicroChoice
+from temporal_patterns import TemporalAnalyzer, CircadianGlyphSelector
 
 
 logger = logging.getLogger(__name__)
@@ -46,6 +52,9 @@ class Phase3IntegrationOrchestrator:
     - Session coherence monitoring
     - Preference evolution tracking
     - Cross-component synchronization
+    - Perspective-taking and relational depth (Phase 3)
+    - Micro-choice scaffolding (Phase 3)
+    - Temporal pattern awareness (Phase 3)
     """
 
     def __init__(self, user_id: str):
@@ -56,10 +65,17 @@ class Phase3IntegrationOrchestrator:
         """
         self.user_id = user_id
 
-        # Initialize Phase 3.1 components
+        # Initialize Phase 1-2 components
         self.profile_manager = EmotionalProfileManager(user_id)
         self.session_trackers: Dict[str, SessionCoherenceTracker] = {}
         self.preference_tracker = PreferenceEvolutionTracker(user_id)
+
+        # Initialize Phase 3 components (Relational Depth)
+        self.perspective_taker = PerspectiveTaker(user_id)
+        self.choice_offering = MicroChoiceOffering(user_id)
+        self.temporal_analyzer = TemporalAnalyzer()
+        self.circadian_selector = CircadianGlyphSelector(
+            self.temporal_analyzer)
 
         # Session tracking
         self._current_session_id: Optional[str] = None
@@ -359,6 +375,171 @@ class Phase3IntegrationOrchestrator:
         }
 
         return comparison
+
+    # ========================================================================
+    # PHASE 3: RELATIONAL DEPTH INTEGRATION
+    # ========================================================================
+
+    def analyze_user_input_for_phase3(
+        self,
+        user_input: str,
+        detected_tone: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Analyze user input using all Phase 3 modules.
+
+        Detects:
+        - Relational contexts (perspective-taking)
+        - Unresolved tensions (micro-choice offering)
+        - Temporal patterns in emotional themes
+
+        Args:
+            user_input: The user's message
+            detected_tone: Optional pre-detected tone
+
+        Returns:
+            Dictionary with Phase 3 analysis results
+        """
+        analysis = {
+            "user_input": user_input,
+            "timestamp": datetime.now().isoformat(),
+            "relational_context": None,
+            "perspective_reflection": None,
+            "unresolved_tension": None,
+            "micro_choice": None,
+            "temporal_insights": None,
+        }
+
+        # Phase 3.1: Perspective-taking detection
+        should_offer_perspective, perspective_context = self.perspective_taker.should_offer_reflection(
+            user_input
+        )
+        if should_offer_perspective and perspective_context:
+            analysis["relational_context"] = perspective_context
+            reflection = self.perspective_taker.generate_reflection(
+                perspective_context)
+            analysis["perspective_reflection"] = {
+                "variation": reflection.variation.value,
+                "text": reflection.reflection_text,
+                "prompt": reflection.prompt_question,
+                "confidence": reflection.confidence,
+            }
+            logger.info(
+                f"Generated perspective reflection for user {self.user_id}")
+
+        # Phase 3.2: Micro-choice offering detection
+        should_offer_choice, tension = self.choice_offering.should_offer_choice(
+            user_input)
+        if should_offer_choice and tension:
+            analysis["unresolved_tension"] = {
+                "type": tension.tension_type,
+                "emotional_state": tension.emotional_state,
+                "implicit_question": tension.implicit_question,
+                "confidence": tension.confidence,
+            }
+            choice = self.choice_offering.offer_choice(tension)
+            if choice:
+                analysis["micro_choice"] = {
+                    "choice_type": choice.choice_type.value,
+                    "path_a": choice.path_a,
+                    "path_b": choice.path_b,
+                    "formatted": self.choice_offering.format_choice_for_response(choice),
+                    "confidence": choice.confidence,
+                }
+                logger.info(f"Generated micro-choice for user {self.user_id}")
+
+        # Phase 3.3: Temporal pattern awareness
+        if detected_tone:
+            temporal_insights = self.temporal_analyzer.get_time_based_insights(
+                self.user_id
+            )
+            analysis["temporal_insights"] = temporal_insights
+
+        return analysis
+
+    def generate_phase3_enriched_response(
+        self,
+        base_response: str,
+        analysis: Dict[str, Any],
+        include_choice: bool = True,
+        include_perspective: bool = True,
+    ) -> str:
+        """Blend Phase 3 elements (perspective, choice, temporal awareness) into response.
+
+        Args:
+            base_response: The base glyph response text
+            analysis: Output from analyze_user_input_for_phase3()
+            include_choice: Whether to include micro-choice element
+            include_perspective: Whether to include perspective element
+
+        Returns:
+            Enriched response combining base response with Phase 3 elements
+        """
+        response_parts = [base_response]
+
+        # Add perspective-taking if available
+        if include_perspective and analysis.get("perspective_reflection"):
+            perspective_data = analysis["perspective_reflection"]
+            response_parts.append(f"\n\n{perspective_data['prompt']}")
+
+        # Add micro-choice if available
+        if include_choice and analysis.get("micro_choice"):
+            choice_data = analysis["micro_choice"]
+            response_parts.append(f"\n\n{choice_data['formatted']}")
+
+        # Note: Temporal insights are used internally for glyph selection,
+        # not typically surfaced directly in response
+
+        return "".join(response_parts)
+
+    def select_best_glyph_for_moment(
+        self,
+        tone: str,
+        current_time: Optional[datetime] = None
+    ) -> Optional[Tuple[str, float]]:
+        """Select best glyph considering circadian patterns (Phase 3.3).
+
+        Uses temporal analyzer to pick glyphs that work best at this time of day.
+
+        Args:
+            tone: Emotional tone/category
+            current_time: Optional current time; uses now() if not provided
+
+        Returns:
+            Tuple of (glyph_name, effectiveness_score) or None
+        """
+        if current_time is None:
+            current_time = datetime.now()
+
+        result = self.circadian_selector.select_glyph_for_moment(
+            self.user_id, tone, current_time
+        )
+        return result
+
+    def build_circadian_profile(self) -> Dict[str, Any]:
+        """Build user's circadian/temporal glyph preference profile.
+
+        Useful for understanding time-of-day patterns in emotional responses.
+
+        Returns:
+            Profile dictionary with temporal patterns
+        """
+        profile = self.circadian_selector.build_user_profile(self.user_id)
+        return profile
+
+    def get_phase3_summary(self) -> Dict[str, Any]:
+        """Get summary of Phase 3 relational depth components.
+
+        Returns:
+            Summary with perspective, choice, and temporal statistics
+        """
+        return {
+            "perspective_reflections_offered": len(self.perspective_taker.reflection_history),
+            "micro_choices_offered": len(self.choice_offering.choice_history),
+            "temporal_patterns_tracked": len(self.temporal_analyzer.patterns),
+            "relational_contexts_detected": len(self.perspective_taker.context_history),
+            "tensions_detected": len(self.choice_offering.tension_history),
+            "temporal_summary": self.temporal_analyzer.get_pattern_summary(),
+        }
 
     # ========================================================================
     # HELPER METHODS
