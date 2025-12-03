@@ -88,6 +88,10 @@ class AffectParser:
                     "hate", "despise", "disgusted", "bitter", "resentment",
                     "yelling", "aggressive", "hostile", "confrontational", "explosive",
                     "enraged", "seething", "boiling", "pissed", "infuriated",
+                    "frustrated", "frustration", "irritated", "annoyed",
+                    # Expletives & high-intensity frustration markers
+                    "bullshit", "shit", "fuck", "fucking", "damn", "hell", "crap",
+                    "freakin", "freakin'", "wtf", "crap",
                 ],
                 "valence": -0.8,
                 "arousal": 0.9,

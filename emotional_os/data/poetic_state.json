@@ -4,26 +4,26 @@
       "valence": "love",
       "metaphor": "a flame that warms but does not burn",
       "intensity": 0.5,
-      "timestamp": "2025-12-03T02:21:34.012385",
+      "timestamp": "2025-12-03T02:49:50.287511",
       "decay_factor": 1.0
     },
     "rhythm_stanza": {
       "tempo": "slow",
-      "pulse_count": 66,
-      "average_interval": 8290.739331552102,
-      "timestamp": "2025-12-03T02:21:34.012388",
+      "pulse_count": 69,
+      "average_interval": 3115.5323664393704,
+      "timestamp": "2025-12-03T02:49:50.287513",
       "decay_factor": 1.0
     },
     "syntax_stanza": {
-      "clarity": "coherent",
-      "coherence_score": 1.0,
-      "fragment_ratio": 0.0,
-      "timestamp": "2025-12-03T02:21:34.012403",
+      "clarity": "fragmented",
+      "coherence_score": 0.0,
+      "fragment_ratio": 1.0,
+      "timestamp": "2025-12-03T02:49:50.287522",
       "decay_factor": 1.0
     },
     "ghost_memory_seed": "",
     "creation_timestamp": "2025-11-29T02:25:22.480015",
-    "last_interaction": "2025-12-03T02:21:34.012452",
+    "last_interaction": "2025-12-03T02:49:50.287574",
     "death_count": 0
   },
   "user_gravity": {
@@ -1027,6 +1027,51 @@
       "tone": "love",
       "valence": "love",
       "timestamp": "2025-12-03T02:21:34.012445",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "2c8c569d4897",
+      "user_input": "this is bullshit",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-12-03T02:47:14.661074",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "b3d9d9e4fadb",
+      "user_input": "this is bullshit",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-12-03T02:47:29.711328",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "0e6a175d3a3b",
+      "user_input": "this is bullshit",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-12-03T02:49:50.287567",
       "dream_fragments": [],
       "narrative_arc": "growth"
     }
