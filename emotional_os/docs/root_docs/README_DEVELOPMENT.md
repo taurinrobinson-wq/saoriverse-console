@@ -15,10 +15,12 @@ The main application consists of these key files:
 ## 🚫 Deprecated/Archived Files
 
 Previous versions of the UI have been moved to the `deprecated/` directory:
+
 - `emotional_os_ui.py (ARCHIVED)` (ARCHIVED) (old version)
 - `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) (old version)
 
 Additional archived files exist in:
+
 - `emotional_os/archive/`
 - `src/ui/` (retired stubs)
 - `archive/previous_uis/`
@@ -46,11 +48,11 @@ streamlit run main_v2.py
 
 We include a conservative sample taxonomy used by the local preprocessor for development and unit tests:
 
-- `local_inference/emotional_taxonomy_sample.json` — contains a small set of canonical tags and embedded `escalation_tiers` used by tests.
+- `local_inference/emotional_taxonomy_sample.json`, contains a small set of canonical tags and embedded `escalation_tiers` used by tests.
 
 Public audit API:
 
-- `local_inference.preprocessor.Preprocessor.record_audit(payload)` — write a minimal audit entry. The audit entry will include `kind: preprocessor_audit`, the provided payload under `payload`, `taxonomy_source`, and `test_mode`.
+- `local_inference.preprocessor.Preprocessor.record_audit(payload)`, write a minimal audit entry. The audit entry will include `kind: preprocessor_audit`, the provided payload under `payload`, `taxonomy_source`, and `test_mode`.
 
 How to run tests:
 

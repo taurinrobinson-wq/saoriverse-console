@@ -33,10 +33,10 @@ Notes:
   soundfont into `Offshoots/ToneCore/sf2/` at first run.
 - For reproducible high-quality rendering in CI, install a soundfont via the system package
   (e.g. `fluid-soundfont-gm` on Debian) or enable Git LFS and add your preferred SF2.
-ToneCore offshoot folder — contains pivot data and Tonecore scripts.
+ToneCore offshoot folder, contains pivot data and Tonecore scripts.
 
 Files:
 
-- `chord_pivot_normalized.json` — normalized canonical pivot (chord objects)
-- `emotion_map.json` — emotion → function map
-- `scripts/` — Tonecore scripts (midi generator, normalizer, demo)
+- `chord_pivot_normalized.json`, normalized canonical pivot (chord objects)
+- `emotion_map.json`, emotion → function map
+- `scripts/`, Tonecore scripts (midi generator, normalizer, demo)

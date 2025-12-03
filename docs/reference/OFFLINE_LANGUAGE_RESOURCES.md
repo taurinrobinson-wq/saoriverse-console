@@ -5,6 +5,7 @@
 Your system is now using **compositional response generation** instead of canned templates. The architecture leverages these offline resources:
 
 ### 1. **spaCy (NLP Library)**
+
 - **Status**: Available but needs installation
 - **Capabilities**:
   - Named Entity Recognition (NER): Extract people, organizations, locations
@@ -21,16 +22,19 @@ python -m spacy download en_core_web_sm
 ```
 
 ### 2. **NRC Emotion Lexicon (Already Integrated)**
+
 - **Status**: Available via `parser/nrc_lexicon_loader.py`
 - **Provides**: 170,000+ words mapped to emotions (joy, sadness, anger, fear, trust, disgust, anticipation, surprise)
 - **Why useful**: More nuanced than keyword matching—"block" might have sadness+fear+surprise compounds
 
 ### 3. **Poetry Database (Already Integrated)**
+
 - **Status**: Available via `parser/poetry_database.py`
 - **Contains**: Public domain poetry (Dickinson, Shakespeare, Rumi) curated by emotion
 - **New capability**: `DynamicResponseComposer` now weaves poetry fragments naturally into responses
 
 ### 4. **NLTK (Already Used)**
+
 - **Status**: Active in your system
 - **Provides**:
   - Tokenization (sentence/word splitting)
@@ -43,6 +47,7 @@ python -m spacy download en_core_web_sm
 ## Next-Level Offline Language Resources
 
 ### **Option A: Add Word Embeddings (Word2Vec)**
+
 **Purpose**: Semantic similarity beyond keyword matching  
 **How it works**: Find emotionally related words without hardcoding patterns
 
@@ -61,6 +66,7 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 ---
 
 ### **Option B: Markov Chains for Linguistic Patterns**
+
 **Purpose**: Learn the *flow* of emotional language from your glyphs
 
 ```python
@@ -82,6 +88,7 @@ next_words = linguistic_patterns.conditional_freq_dist
 ---
 
 ### **Option C: Pre-built Linguistic Rules (Dependency Parsing)**
+
 **Purpose**: Understand *sentence structure* and emotional intensity
 
 ```python
@@ -109,12 +116,14 @@ for token in doc:
 ## Recommended Activation Path (No API Needed)
 
 ### **Phase 1: Current (DONE)**
+
 ✅ Dynamic composition from linguistic fragments  
 ✅ Entity extraction (who, what, relationships)  
 ✅ Poetry weaving  
 ✅ Semantic engine (spaCy basics)  
 
 ### **Phase 2: Next Week (Recommended)**
+
 - [ ] Install spaCy medium model (`en_core_web_md` instead of `sm`)
 - [ ] Add dependency parsing to extract emotional relationships
 - [ ] Enhance `DynamicResponseComposer` to recognize "attribution_boundary" patterns automatically
@@ -129,6 +138,7 @@ if people:
 ```
 
 ### **Phase 3: Optional (If you want learning)**
+
 - [ ] Add Markov chain generator trained on your glyph descriptions
 - [ ] Create response variants by sampling from learned phrase patterns
 - [ ] Result: Each response feels unique, not templated
@@ -137,11 +147,11 @@ if people:
 
 ## Summary: Why Offline is Better for You
 
-1. **No API costs or privacy leaks** — everything stays local
-2. **Can tap into your own voice** — train from existing glyphs/poetry
-3. **Faster inference** — local NLP is instant, not waiting for API
-4. **More control** — you decide which linguistic patterns to reward
-5. **Portable** — can run on laptop, phone, raspberry pi
+1. **No API costs or privacy leaks**, everything stays local
+2. **Can tap into your own voice**, train from existing glyphs/poetry
+3. **Faster inference**, local NLP is instant, not waiting for API
+4. **More control**, you decide which linguistic patterns to reward
+5. **Portable**, can run on laptop, phone, raspberry pi
 
 ---
 
@@ -175,13 +185,15 @@ class DynamicResponseComposer:
 
 ## What This Eliminates
 
-### Before (Template-Based):
+### Before (Template-Based)
+
 ```
 RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 # Every similar input gets the SAME structure filled differently
 ```
 
-### After (Compositional):
+### After (Compositional)
+
 ```
 # Each response randomly selects from multiple opening styles
 # + adds entity-specific context
@@ -194,11 +206,11 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 
 ## Files Already Supporting This
 
-- `parser/semantic_engine.py` — spaCy integration (entity extraction, NLP)
-- `parser/nrc_lexicon_loader.py` — emotion classification
-- `parser/poetry_database.py` — curated public domain poetry
-- `parser/learned_lexicon.json` — learned signal mappings
-- `emotional_os/glyphs/dynamic_response_composer.py` — *new* compositional engine
+- `parser/semantic_engine.py`, spaCy integration (entity extraction, NLP)
+- `parser/nrc_lexicon_loader.py`, emotion classification
+- `parser/poetry_database.py`, curated public domain poetry
+- `parser/learned_lexicon.json`, learned signal mappings
+- `emotional_os/glyphs/dynamic_response_composer.py`, *new* compositional engine
 
 ---
 

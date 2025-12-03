@@ -3,15 +3,17 @@ Summary: RLS-aware wiring and testing
 This project uses Supabase Postgres with Row-Level Security (RLS). The repository now includes:
 
 - A safe RLS example file (`sql/rls_policies.sql`) that compares `user_id::text = auth.uid()` so policies work whether `user_id` columns are UUID or text.
-- An RLS-aware client helper: `supabase/supabaseRlsClient.ts` — use this on server routes when you want RLS enforced for requests executed on behalf of a user.
+- An RLS-aware client helper: `supabase/supabaseRlsClient.ts`, use this on server routes when you want RLS enforced for requests executed on behalf of a user.
 - Updated Edge Function: `emotional_os/deploy/saori_edge_function.ts` now prefers the RLS-aware client (when an access token is present) for user-scoped DB operations, and falls back to the service role client for admin tasks.
 
 Files changed
-- sql/rls_policies.sql — cast `user_id::text = auth.uid()` and include `TO authenticated` where appropriate.
-- supabase/supabaseRlsClient.ts — new helper to create an RLS-aware Supabase client using an access token (works in Deno and Node).
-- emotional_os/deploy/saori_edge_function.ts — now imports and uses the RLS client for user-scoped DB writes; falls back to service_role when no token is present.
+
+- sql/rls_policies.sql, cast `user_id::text = auth.uid()` and include `TO authenticated` where appropriate.
+- supabase/supabaseRlsClient.ts, new helper to create an RLS-aware Supabase client using an access token (works in Deno and Node).
+- emotional_os/deploy/saori_edge_function.ts, now imports and uses the RLS client for user-scoped DB writes; falls back to service_role when no token is present.
 
 How to test in staging (recommended)
+
 1) Preflight checks
    - In the Supabase SQL editor (staging), run:
 
@@ -56,10 +58,12 @@ How to test in staging (recommended)
      - Print a small CSV preview of the thread
 
 Notes and recommended practices
+
 - Never expose the Service Role key in client-side code. Keep it server-only.
 - Use the RLS-aware client (supabaseRlsClient) on trusted server endpoints that forward the user's access token. This ensures RLS policies are applied to server-side DB operations made on behalf of users.
 - For administrative tasks (backups, migrations, cross-user jobs), use the service_role client and implement server-side authorization checks.
 
 If you want, I can:
+
 - Patch more SQL files to use the cast-based comparisons everywhere (I updated the main `sql/rls_policies.sql`).
 - Help run the integration test against your staging project if you paste the output here.

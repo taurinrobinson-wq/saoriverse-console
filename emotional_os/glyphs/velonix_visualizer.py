@@ -300,7 +300,7 @@ class RitualPromptSystem:
     RITUAL_TEMPLATES = {
         "Td": [  # Tenderness
             "Pause and place a hand on your heart. Notice what rises.",
-            "Write a letter to something you're tender toward — no sending required.",
+            "Write a letter to something you're tender toward, no sending required.",
             "Light a candle. Sit with one person you care for in silence.",
         ],
         "Ps": [  # Presence

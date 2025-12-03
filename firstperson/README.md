@@ -1,4 +1,4 @@
-# firstperson (Expo) — minimal scaffold
+# firstperson (Expo), minimal scaffold
 
 This folder contains a minimal Expo React Native app used to test the `firstperson` mobile client against the Python FastAPI backend in this repo.
 
@@ -42,7 +42,7 @@ This project includes a minimal `eas.json` so the command will not fail. Note th
 
 Files of interest
 
-- `src/config.js` — controls the backend URL and provides `postMessage` used by the UI.
-- `App.js` — app entry.
+- `src/config.js`, controls the backend URL and provides `postMessage` used by the UI.
+- `App.js`, app entry.
 
 If you want, I can run a quick smoke test (POST a message to the FastAPI `/api/chat`) from a tiny node script here to verify connectivity to your running backend.

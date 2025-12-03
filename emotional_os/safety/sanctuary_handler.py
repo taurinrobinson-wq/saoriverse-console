@@ -119,7 +119,7 @@ def handle_consent_reply(reply: str, risk_level: str, locale: str = "US") -> dic
     if r in ("a", "stay", "stay with you", "stay with me", "a)", "a)", "a)"):
         result["action"] = "stay"
         result["response"] = (
-            "Okay — I'm here with you. If it helps, tell me what's most pressing right now or we can do a short grounding exercise."
+            "Okay, I'm here with you. If it helps, tell me what's most pressing right now or we can do a short grounding exercise."
         )
         return result
 
@@ -134,7 +134,7 @@ def handle_consent_reply(reply: str, risk_level: str, locale: str = "US") -> dic
         return result
 
     if r in ("c", "c)", "c )", "escalate", "urgent"):
-        # Escalation guidance — ask for explicit permission before collecting any PII
+        # Escalation guidance, ask for explicit permission before collecting any PII
         result["action"] = "escalate"
         result["response"] = (
             "I can help guide you through steps to get urgent help. To do that I may need small details (like your region) —"
@@ -145,13 +145,13 @@ def handle_consent_reply(reply: str, risk_level: str, locale: str = "US") -> dic
     # Handle explicit declines / negative answers
     if r in ("n", "no", "none", "nope"):
         result["action"] = "decline"
-        result["response"] = "That's okay — I can stay with you here. If you want resources later, just say so."
+        result["response"] = "That's okay, I can stay with you here. If you want resources later, just say so."
         return result
 
     # If the user typed a short sentence, try to infer intent
     if r.startswith("stay"):
         result["action"] = "stay"
-        result["response"] = "Okay — I'm staying with you. Tell me more if you want."
+        result["response"] = "Okay, I'm staying with you. Tell me more if you want."
         return result
 
     if r.startswith("yes") or r.startswith("y"):
@@ -163,7 +163,7 @@ def handle_consent_reply(reply: str, risk_level: str, locale: str = "US") -> dic
 
     # Unknown reply
     result["response"] = (
-        "I didn't get that — you can reply with A (stay), B (share resources), or C (guide me to urgent help)."
+        "I didn't get that, you can reply with A (stay), B (share resources), or C (guide me to urgent help)."
     )
     return result
 

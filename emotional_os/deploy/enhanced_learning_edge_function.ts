@@ -358,7 +358,7 @@ Focus on emotional resonance rather than lengthy explanations.`;
   // Build a deterministic choice for short/generic fallbacks so that
   // responses feel less repetitive across platforms.
   const _fallbackAlternatives = [
-    "I hear you — tell me more when you're ready.",
+    "I hear you, tell me more when you're ready.",
     "I'm listening. What's coming up for you right now?",
     "Thank you for sharing. I'm here to listen and support you."
   ];

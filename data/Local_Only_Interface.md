@@ -3,9 +3,9 @@ Here’s a fully formatted **Markdown implementation guide** you can copy direct
 ---
 
 ```markdown
-# Local‑Only Synonym Pipeline — Implementation Guide
+# Local‑Only Synonym Pipeline, Implementation Guide
 
-This guide sets up a local synonym enrichment system using **WordNet (NLTK)** and **SpaCy embeddings**, with filtering, scoring, and SQLite storage. It runs fully offline — no API calls, no costs.
+This guide sets up a local synonym enrichment system using **WordNet (NLTK)** and **SpaCy embeddings**, with filtering, scoring, and SQLite storage. It runs fully offline, no API calls, no costs.
 
 ---
 

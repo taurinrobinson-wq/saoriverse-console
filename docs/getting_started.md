@@ -62,9 +62,9 @@ make logs       # View recent enrichment logs
 
 Processing modes
 
-- `local` — Fully offline. Default. No remote AI calls allowed.
-- `hybrid` — Enables remote AI (OpenAI, Supabase hybrid processors).
-- `premium` — Optional tier for advanced generation tasks.
+- `local`, Fully offline. Default. No remote AI calls allowed.
+- `hybrid`, Enables remote AI (OpenAI, Supabase hybrid processors).
+- `premium`, Optional tier for advanced generation tasks.
 
 Opt-in for remote AI
 --------------------

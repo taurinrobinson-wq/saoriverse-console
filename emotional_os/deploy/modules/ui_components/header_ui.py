@@ -96,14 +96,14 @@ def render_demo_banner():
             )
 
         st.info(
-            "Running in demo mode — register or sign in in the sidebar to enable "
+            "Running in demo mode, register or sign in in the sidebar to enable "
             "persistence and full features."
         )
 
     except Exception as e:
         try:
             st.info(
-                "Running in demo mode — register or sign in in the sidebar to enable "
+                "Running in demo mode, register or sign in in the sidebar to enable "
                 "persistence and full features."
             )
         except Exception:

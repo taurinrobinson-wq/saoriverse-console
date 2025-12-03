@@ -21,7 +21,7 @@ What's implemented
   - Uses adapter outputs to build composed responses (summary + snippets + invitation).
   - Post-processing added to clean fragments, normalize punctuation/capitalization, remove tiny or template-like fragments, and deduplicate lines.
   - Entity sanitization added to avoid pronoun artifacts (e.g., prevents 'I' from being inserted as a grounding entity).
-  - Poetry wrapping removed (no more automatic "As someone once wrote:") — poetry lines are appended raw and then post-processed.
+  - Poetry wrapping removed (no more automatic "As someone once wrote:"), poetry lines are appended raw and then post-processed.
 
 - Template adjustments
   - Opening, connector, and closing templates were tuned to be more conversational and friend-like.
@@ -65,7 +65,7 @@ Remaining / recommended next steps (pick up later)
 Why this matters
 -----------------
 
-The work preserves the system's internal symbolic processing while presenting plain, companion-like language to users — matching the "No backend terms" requirement and improving UX.
+The work preserves the system's internal symbolic processing while presenting plain, companion-like language to users, matching the "No backend terms" requirement and improving UX.
 
 Where to start when you return
 ------------------------------
@@ -79,4 +79,4 @@ Commit note
 
 All current workspace changes (adapter, composer edits, and this progress file) are about to be committed to branch `main`.
 
-If you need any clarifications when you return, open this file and the modified modules first — they contain the most relevant context.
+If you need any clarifications when you return, open this file and the modified modules first, they contain the most relevant context.
