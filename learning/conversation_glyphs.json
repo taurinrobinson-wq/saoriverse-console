@@ -4031,10 +4031,73 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-12-03T02:21:36.148992"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Serenity & Longing",
+      "symbol": "\ud83d\udcab\ud83c\udfbb",
+      "core_emotions": [
+        "serenity",
+        "longing"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "longing"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and longing present here",
+      "narrative_hook": "A story where serenity meets longing",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T02:29:55.992679"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_2",
+      "name": "Serenity & Sensuality",
+      "symbol": "\ud83d\udcab\ud83c\udf39",
+      "core_emotions": [
+        "serenity",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "serenity",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the serenity and sensuality present here",
+      "narrative_hook": "A story where serenity meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T02:29:56.001444"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_3",
+      "name": "Longing & Sensuality",
+      "symbol": "\ud83c\udfbb\ud83c\udf39",
+      "core_emotions": [
+        "longing",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "longing",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and sensuality present here",
+      "narrative_hook": "A story where longing meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T02:29:56.009919"
     }
   ],
   "metadata": {
-    "total_discovered": 192,
-    "last_updated": "2025-12-03T02:21:36.149243"
+    "total_discovered": 195,
+    "last_updated": "2025-12-03T02:29:56.011331"
   }
 }

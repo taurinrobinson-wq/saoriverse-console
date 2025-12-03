@@ -326,6 +326,7 @@ def compose_glyph_aware_response(
         "sad": "exhaustion" if arousal < 0.5 else "sadness",
         "anxious": "anxiety",
         "angry": "anger",
+        "frustrated": "anger",  # Map frustrated → anger category
         "grateful": "grateful",
         "warm": "joy",
         "confused": "confused",

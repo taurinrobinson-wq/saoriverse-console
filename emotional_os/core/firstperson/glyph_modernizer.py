@@ -188,9 +188,13 @@ AFFECT_TO_GLYPH = {
     ("anxious", (0.6, 1.0), (-0.9, -0.3)): "Breaking",
     ("anxious", (0.5, 0.8), (-0.7, -0.2)): "Overwhelm",
     ("anxious", (0.4, 0.7), (-0.6, -0.1)): "Pressure",
-    ("angry", (0.7, 1.0), (-0.8, -0.2)): "Fire",
-    ("angry", (0.6, 0.9), (-0.7, -0.3)): "Heat",
-    ("angry", (0.5, 0.8), (-0.6, -0.2)): "Frustration",
+    ("angry", (0.7, 1.0), (-1.0, -0.1)): "Fire",      # Wider valence range
+    ("angry", (0.6, 0.9), (-0.9, -0.1)): "Heat",      # Wider valence range
+    ("angry", (0.5, 0.8), (-0.8, 0.0)): "Frustration",  # Wider valence range
+    # Frustrated tone mappings (high intensity expletives, etc.)
+    ("frustrated", (0.7, 1.0), (-1.0, -0.1)): "Fire",
+    ("frustrated", (0.6, 0.9), (-0.9, -0.1)): "Heat",
+    ("frustrated", (0.5, 0.8), (-0.8, 0.0)): "Frustration",
     ("neutral", (0.2, 0.5), (-0.3, 0.3)): "Stillness",
     ("neutral", (0.0, 0.3), (-0.1, 0.2)): "Resting",
     ("grateful", (0.4, 0.7), (0.6, 1.0)): "Acceptance",
