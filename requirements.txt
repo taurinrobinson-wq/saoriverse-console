@@ -1,0 +1,4 @@
+# Saoriverse Console Requirements
+# Main requirements file that references the organized config directory
+
+-r config/requirements.txt
