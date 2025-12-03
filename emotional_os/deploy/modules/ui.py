@@ -2240,11 +2240,16 @@ def render_main_app():
                                 "debug_glyph_rows", [])
                             glyphs = local_analysis.get("glyphs", [])
                             handled_by_response_engine = True
-                        except Exception:
+                        except Exception as e:
+                            logger.warning(f"Response engine failed: {e}")
                             handled_by_response_engine = False
-                        best_glyph = local_analysis.get("best_glyph")
-                        glyph_display = best_glyph["glyph_name"] if best_glyph else "None"
-                        response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
+
+                        # Only use voltage_response fallback if response_engine failed
+                        if not handled_by_response_engine:
+                            best_glyph = local_analysis.get("best_glyph")
+                            glyph_display = best_glyph["glyph_name"] if best_glyph else "None"
+                            response = f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
+                        # Otherwise use the response from the response_engine (which includes prosody)
                     # Note: the previous code supported an "ai_preferred" mode.
                     # That option has been removed in favor of a simpler
                     # two-option model: 'hybrid' (default) and 'local'. Any
@@ -2422,7 +2427,11 @@ def render_main_app():
                         # Non-fatal: if anything goes wrong while checking repetition, continue
                         pass
 
-                    st.write(response)
+                    # Strip prosody metadata before displaying to user
+                    display_response = response.split(
+                        '[PROSODY:')[0].strip() if response else ""
+
+                    st.write(display_response)
                     st.caption(
                         f"Processed in {processing_time:.2f}s • Mode: {processing_mode}")
 
