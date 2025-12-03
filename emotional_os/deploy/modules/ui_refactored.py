@@ -253,5 +253,45 @@ def main():
         render_app()
 
 
+def render_main_app():
+    """Main app interface for authenticated users - Full Emotional OS"""
+    render_app()
+
+
+def render_main_app_safe(*args, **kwargs):
+    """Runtime-safe wrapper around render_main_app.
+    
+    Catches exceptions raised during rendering, writes a full traceback to
+    `debug_runtime.log`, attempts to display a minimal error to the user,
+    and then re-raises the exception so host-level logs capture it as well.
+    """
+    try:
+        return render_main_app(*args, **kwargs)
+    except Exception as e:
+        import traceback
+        from pathlib import Path as _Path
+
+        tb = "".join(traceback.format_exception(type(e), e, e.__traceback__))
+        try:
+            _Path("debug_runtime.log").write_text(tb, encoding="utf-8")
+        except Exception:
+            # best-effort write
+            pass
+
+        try:
+            # If Streamlit is usable, show a short excerpt to the user
+            st.error(
+                "A runtime error occurred; details have been written to debug_runtime.log")
+            excerpt = "\n".join(tb.splitlines()[-12:])
+            st.markdown(
+                f"<pre style='white-space:pre-wrap'>{excerpt}</pre>", unsafe_allow_html=True)
+        except Exception:
+            # If Streamlit can't render, print to stdout for host logs
+            print(tb)
+
+        # Re-raise so hosting environment also records the traceback
+        raise
+
+
 if __name__ == "__main__":
     main()

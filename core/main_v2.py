@@ -257,7 +257,7 @@ try:
     import importlib
 
     import emotional_os.deploy.modules.auth as _auth_module
-    import emotional_os.deploy.modules.ui as _ui_module
+    import emotional_os.deploy.modules.ui_refactored as _ui_module
 
     try:
         importlib.reload(_ui_module)
