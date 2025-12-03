@@ -2218,7 +2218,7 @@ def render_main_app():
                         # response while avoiding redundant parsing. If the engine
                         # fails, fall back to the older local/hybrid flow below.
                         try:
-                            from main_response_engine import (
+                            from core.main_response_engine import (
                                 process_user_input as _engine_process,
                             )
 
@@ -2322,7 +2322,7 @@ def render_main_app():
                                 f"Affect parser processing failed: {e}")
 
                         try:
-                            from main_response_engine import (
+                            from core.main_response_engine import (
                                 process_user_input as _engine_process,
                             )
 
