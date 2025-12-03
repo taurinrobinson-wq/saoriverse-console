@@ -2406,6 +2406,10 @@ def render_main_app():
                                 f"Fallback protocol error (non-fatal): {e}")
                             fallback_result = None
 
+                    # Strip prosody metadata before displaying to user (do this EARLY)
+                    display_response = response.split(
+                        '[PROSODY:')[0].strip() if response else ""
+
                     # Prevent verbatim repetition of assistant replies across consecutive turns.
                     # If the new response exactly matches the previous assistant message, append
                     # a gentle, specific follow-up to nudge the conversation forward.
@@ -2414,22 +2418,19 @@ def render_main_app():
                         if st.session_state.get(conversation_key) and len(st.session_state[conversation_key]) > 0:
                             last_assistant = st.session_state[conversation_key][-1].get(
                                 "assistant")
-                        if last_assistant and last_assistant.strip() == response.strip():
+                        if last_assistant and last_assistant.strip() == display_response.strip():
                             followups = [
                                 "Can you tell me one specific detail about that?",
                                 "Would it help if we tried one small concrete step together?",
                                 "If you pick one thing to focus on right now, what would it be?",
                                 "That's important — would you like a short breathing practice or a practical plan?",
                             ]
-                            idx = len(response) % len(followups)
-                            response = response + " " + followups[idx]
+                            idx = len(display_response) % len(followups)
+                            display_response = display_response + \
+                                " " + followups[idx]
                     except Exception:
                         # Non-fatal: if anything goes wrong while checking repetition, continue
                         pass
-
-                    # Strip prosody metadata before displaying to user
-                    display_response = response.split(
-                        '[PROSODY:')[0].strip() if response else ""
 
                     st.write(display_response)
                     st.caption(
