@@ -64,6 +64,26 @@ except Exception:
     create_affect_parser = None
     HAS_AFFECT_PARSER = False
 
+# Sprint 5 Integration: Enhanced response composition with prosody, validation, and logging
+try:
+    from sprint5_integration import (
+        init_sprint5_systems,
+        validate_user_input,
+        enhance_response_with_prosody,
+        log_interaction,
+        get_session_metrics,
+    )
+    from enhanced_response_composer import EnhancedResponseComposer
+    HAS_SPRINT5 = True
+except Exception:
+    HAS_SPRINT5 = False
+    init_sprint5_systems = None
+    validate_user_input = None
+    enhance_response_with_prosody = None
+    log_interaction = None
+    get_session_metrics = None
+    EnhancedResponseComposer = None
+
 logger = logging.getLogger(__name__)
 
 # Simple in-memory cache for inline SVGs to avoid repeated disk reads
@@ -458,17 +478,28 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         # is unavailable. Fall back to a compact local-analysis string if
         # the composer cannot be imported or glyphs are not present.
         try:
-            from emotional_os.glyphs.dynamic_response_composer import (
-                DynamicResponseComposer,
-            )
+            # Use EnhancedResponseComposer (with prosody) if Sprint 5 available, else fallback
+            if HAS_SPRINT5 and EnhancedResponseComposer:
+                composer = EnhancedResponseComposer()
+            else:
+                from emotional_os.glyphs.dynamic_response_composer import (
+                    DynamicResponseComposer,
+                )
+                composer = DynamicResponseComposer()
 
-            composer = DynamicResponseComposer()
             if glyphs:
-                response_text = composer.compose_multi_glyph_response(
+                response_data = composer.compose_multi_glyph_response(
                     effective_input, glyphs, conversation_context=conversation_context, top_n=5
                 )
+                # Handle both tuple (response, prosody) and string returns
+                if isinstance(response_data, tuple):
+                    response_text, prosody_directives = response_data
+                else:
+                    response_text = response_data
+                    prosody_directives = None
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+                prosody_directives = None
         except Exception:
             response_text = (
                 f"Local Analysis: {voltage_response}\n"
@@ -488,17 +519,28 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
 
     if not saori_url or not supabase_key:
         try:
-            from emotional_os.glyphs.dynamic_response_composer import (
-                DynamicResponseComposer,
-            )
+            # Use EnhancedResponseComposer (with prosody) if Sprint 5 available, else fallback
+            if HAS_SPRINT5 and EnhancedResponseComposer:
+                composer = EnhancedResponseComposer()
+            else:
+                from emotional_os.glyphs.dynamic_response_composer import (
+                    DynamicResponseComposer,
+                )
+                composer = DynamicResponseComposer()
 
-            composer = DynamicResponseComposer()
             if glyphs:
-                response_text = composer.compose_multi_glyph_response(
+                response_data = composer.compose_multi_glyph_response(
                     effective_input, glyphs, conversation_context=conversation_context, top_n=5
                 )
+                # Handle both tuple (response, prosody) and string returns
+                if isinstance(response_data, tuple):
+                    response_text, prosody_directives = response_data
+                else:
+                    response_text = response_data
+                    prosody_directives = None
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+                prosody_directives = None
         except Exception:
             response_text = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement unavailable)"
         # Ensure the local-only branch appends a clear marker so callers
@@ -533,17 +575,28 @@ def run_hybrid_pipeline(effective_input: str, conversation_context: dict, saori_
         )
     except Exception:
         try:
-            from emotional_os.glyphs.dynamic_response_composer import (
-                DynamicResponseComposer,
-            )
+            # Use EnhancedResponseComposer (with prosody) if Sprint 5 available, else fallback
+            if HAS_SPRINT5 and EnhancedResponseComposer:
+                composer = EnhancedResponseComposer()
+            else:
+                from emotional_os.glyphs.dynamic_response_composer import (
+                    DynamicResponseComposer,
+                )
+                composer = DynamicResponseComposer()
 
-            composer = DynamicResponseComposer()
             if glyphs:
-                response_text = composer.compose_multi_glyph_response(
+                response_data = composer.compose_multi_glyph_response(
                     effective_input, glyphs, conversation_context=conversation_context, top_n=5
                 )
+                # Handle both tuple (response, prosody) and string returns
+                if isinstance(response_data, tuple):
+                    response_text, prosody_directives = response_data
+                else:
+                    response_text = response_data
+                    prosody_directives = None
             else:
                 response_text = "I'm listening, but I couldn't feel a clear glyphic resonance yet."
+                prosody_directives = None
         except Exception:
             response_text = f"Local Analysis: {voltage_response}\nActivated Glyphs: {', '.join([g.get('glyph_name','') for g in glyphs]) if glyphs else 'None'}\n{ritual_prompt}\n(AI enhancement failed)"
         return response_text, {}, local_analysis
