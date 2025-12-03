@@ -2,28 +2,28 @@
   "poem": {
     "metaphor_stanza": {
       "valence": "love",
-      "metaphor": "a flame that warms but does not burn",
+      "metaphor": "roots entwined beneath the soil",
       "intensity": 0.5,
-      "timestamp": "2025-12-03T02:56:47.337827",
+      "timestamp": "2025-12-03T03:01:47.659100",
       "decay_factor": 1.0
     },
     "rhythm_stanza": {
       "tempo": "slow",
-      "pulse_count": 73,
-      "average_interval": 817.6644471081925,
-      "timestamp": "2025-12-03T02:56:47.337829",
+      "pulse_count": 74,
+      "average_interval": 662.4614948757346,
+      "timestamp": "2025-12-03T03:01:47.659102",
       "decay_factor": 1.0
     },
     "syntax_stanza": {
       "clarity": "fragmented",
       "coherence_score": 0.0,
       "fragment_ratio": 1.0,
-      "timestamp": "2025-12-03T02:56:47.337838",
+      "timestamp": "2025-12-03T03:01:47.659112",
       "decay_factor": 1.0
     },
     "ghost_memory_seed": "",
     "creation_timestamp": "2025-11-29T02:25:22.480015",
-    "last_interaction": "2025-12-03T02:56:47.337882",
+    "last_interaction": "2025-12-03T03:01:47.659154",
     "death_count": 0
   },
   "user_gravity": {
@@ -1132,6 +1132,21 @@
       "tone": "love",
       "valence": "love",
       "timestamp": "2025-12-03T02:56:47.337876",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "95fe49d1bbf2",
+      "user_input": "this is bullshit",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-12-03T03:01:47.659148",
       "dream_fragments": [],
       "narrative_arc": "growth"
     }

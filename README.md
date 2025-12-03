@@ -1,17 +1,34 @@
 # Saoriverse Console
 
-Minimal project README. For developer-oriented configuration details, see the docs.
+Emotional AI companion with local-first processing.
 
-➡️ See [processing_modes.md](./docs/processing_modes.md) for details on local, hybrid, and premium modes.
+## Getting Started
 
-Quickstart
----------
+**New to the project?** Start here:
+- 📖 [`docs/DEVELOPER_QUICKSTART.md`](./docs/DEVELOPER_QUICKSTART.md) - 5-minute developer guide
+- 🗺️ [`docs/QUICK_NAVIGATION.md`](./docs/QUICK_NAVIGATION.md) - Quick reference for finding things
+- 📚 [`docs/INDEX.md`](./docs/INDEX.md) - Complete documentation index
 
-- Install project dependencies (see `requirements.txt`)
-- Run tests: `pytest -q`
-
-Bootstrap local env:
+## Quick Start
 
 ```bash
-cp .env.template .env  # Load safe defaults for local-only mode
+# Install dependencies
+pip install -r requirements.txt
+
+# Setup local environment
+cp .env.template .env
+
+# Start the application
+python core/main_v2.py
 ```
+
+## Documentation
+
+- **[Processing Modes](./docs/processing_modes.md)** - Local, hybrid, and premium modes
+- **[Project Structure](./docs/FILE_ORGANIZATION_GUIDE.md)** - Where everything is located
+- **[Deployment Guide](./docs/DEPLOYMENT_READINESS_REPORT.md)** - Deployment verification
+- **[All Documentation](./docs/INDEX.md)** - Complete navigation guide
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.

@@ -12,7 +12,7 @@ Design notes:
 
 from typing import Dict, List, Optional
 
-from glyph_response_helpers import scaffold_response
+from src.glyph_response_helpers import scaffold_response
 
 
 def translate_emotional_response(system_output: Dict) -> str:
@@ -48,7 +48,8 @@ def generate_response_from_glyphs(system_output: Dict) -> str:
     Expects `system_output` may contain `glyph_overlays_info` (list of {tag, confidence}).
     Falls back to `translate_emotional_response` when overlays are absent.
     """
-    glyphs = system_output.get("glyph_overlays_info") or system_output.get("glyph_overlays")
+    glyphs = system_output.get(
+        "glyph_overlays_info") or system_output.get("glyph_overlays")
     if not glyphs:
         return translate_emotional_response(system_output)
 

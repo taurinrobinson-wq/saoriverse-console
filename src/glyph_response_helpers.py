@@ -3,7 +3,7 @@ import os
 import re
 from typing import Dict, List
 
-from glyph_response_templates import pick_template
+from src.glyph_response_templates import pick_template
 
 
 def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
@@ -20,7 +20,8 @@ def scaffold_response(glyph_overlays_info: List[Dict]) -> Dict:
         return {"primary_tag": None, "tone": "neutral", "pacing": 0.5, "details": [], "response": None}
 
     # Sort overlays by confidence
-    sorted_overlays = sorted(glyph_overlays_info, key=lambda o: -o.get("confidence", 0.0))
+    sorted_overlays = sorted(
+        glyph_overlays_info, key=lambda o: -o.get("confidence", 0.0))
     primary = sorted_overlays[0]
     tag = primary.get("tag")
     conf = float(primary.get("confidence", 0.0))
