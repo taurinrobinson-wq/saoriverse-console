@@ -23,11 +23,16 @@ export async function sendMessage(text, options = {}) {
         mode = 'local',
         conversationId = 'default',
         context = {},
+        timeout = 30000, // 30 second timeout
     } = options;
 
     const url = `${SAOYNX_API_URL}${API_ENDPOINTS.CHAT}`;
 
     try {
+        // Create abort controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+
         const res = await fetch(url, {
             method: 'POST',
             headers: {
@@ -40,7 +45,10 @@ export async function sendMessage(text, options = {}) {
                 conversation_id: conversationId,
                 context,
             }),
+            signal: controller.signal,
         });
+
+        clearTimeout(timeoutId);
 
         if (!res.ok) {
             const txt = await res.text();
