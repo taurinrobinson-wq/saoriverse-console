@@ -6,7 +6,6 @@
   "python.analysis.packageIndexDepth": 1,
   "python.analysis.indexing": false,
   "python.analysis.logLevel": "Error",
-
   // Exclude large/archived folders from analysis and file explorer
   "files.exclude": {
     "**/.venv": true,
@@ -19,7 +18,6 @@
     "**/review_download_before_delete": true,
     "**/review_for_deletion": true
   },
-
   "python.analysis.exclude": [
     "**/.venv/**",
     "**/archive/**",
@@ -28,18 +26,33 @@
     "**/logs/**",
     "**/node_modules/**"
   ],
-
   // Exclude archived folders from search
   "search.exclude": {
     "**/archive/**": true,
     "**/review_download_before_delete/**": true,
     "**/review_for_deletion/**": true
   },
-
   // Prefer ripgrep for fast searches in large repos
   "search.useRipgrep": true,
-
   // File generation preferences
   // New markdown files are created in docs/ by default
-  "files.defaultFolder": "${workspaceFolder}/docs"
+  "files.defaultFolder": "${workspaceFolder}/docs",
+  // Disable extensions that consume significant memory
+  "extensions.ignoreRecommendations": true,
+  // Reduce memory usage for inline code hints
+  "editor.inlayHints.enabled": false,
+  // Disable expensive features
+  "[python]": {
+    "editor.codeActionsOnSave": {}
+  },
+  // Reduce workspace trust prompts
+  "security.workspace.trust.enabled": false,
+  // Limit file watcher
+  "files.watcherExclude": {
+    "**/.git/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.venv/**": true,
+    "**/archive/**": true
+  }
 }
