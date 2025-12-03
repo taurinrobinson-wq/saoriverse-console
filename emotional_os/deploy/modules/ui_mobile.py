@@ -186,19 +186,14 @@ def run_hybrid_pipeline_mobile(effective_input: str,
         # `session_state_override` so the canonical code does not rely on
         # a Streamlit session in this process.
         try:
-            from emotional_os.deploy.modules.ui import run_hybrid_pipeline
+            # Note: run_hybrid_pipeline was in the old monolithic ui.py
+            # Since ui_refactored is now the canonical UI module and doesn't
+            # export this function, we skip this delegation path
+            from emotional_os.deploy.modules.ui_refactored import render_main_app
 
-            session_override = {
-                'user_id': user_id,
-                'processing_mode': processing_mode
-            }
-            return run_hybrid_pipeline(
-                effective_input,
-                conversation_context,
-                saori_url,
-                supabase_key,
-                session_state_override=session_override,
-            )
+            # This path is unreachable since we can't delegate without the function
+            raise ImportError(
+                "run_hybrid_pipeline no longer available after ui.py archival")
         except Exception:
             # If delegation to the canonical pipeline fails, do a
             # conservative local-only fallback so the caller still
