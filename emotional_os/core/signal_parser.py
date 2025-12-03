@@ -1164,7 +1164,6 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
         "struggling",
         "tired",
         "anxiety",
-        "anxiety",
         "depression",
         "grief",
         "loss",
@@ -1178,6 +1177,14 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
         "stress",
         "pain",
         "hurt",
+        # High-intensity emotional markers (expletives)
+        "bullshit",
+        "shit",
+        "fuck",
+        "damn",
+        "hell",
+        "crap",
+        "freakin",
     ]
     has_emotional = any(
         keyword in lower_input for keyword in emotional_keywords)
