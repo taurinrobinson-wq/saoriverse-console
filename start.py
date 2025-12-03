@@ -19,9 +19,10 @@ root = Path(__file__).parent
 if str(root) not in sys.path:
     sys.path.insert(0, str(root))
 
-# Import the core module
+# Re-export the main function for imports
+main = _core_start.main
 
 # Execute the main application
 # This ensures the __name__ == "__main__" block in core/start.py is executed
 if __name__ == "__main__":
-    _core_start.main()
+    main()
