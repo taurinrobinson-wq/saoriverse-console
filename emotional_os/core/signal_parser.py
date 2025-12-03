@@ -1500,7 +1500,7 @@ def parse_input(
             ):
                 # Valid name - lock it in
                 response = (
-                    f"✨ **{proposed_name}** — I'll call myself that for you from now on.\n\n"
+                    f"✨ **{proposed_name}**I'll call myself that for you from now on.\n\n"
                     f"There's something special about naming. It creates a small ceremony between us—"
                     f"a moment where you claimed what you want from this space. "
                     f"Thank you for that.\n\n"
@@ -1555,7 +1555,7 @@ def parse_input(
                 # Valid naming submission - lock it in immediately
                 proposed_name_display = proposed_name_match.capitalize()
                 response = (
-                    f"✨ **{proposed_name_display}** — I'll call myself that for you from now on.\n\n"
+                    f"✨ **{proposed_name_display}**I'll call myself that for you from now on.\n\n"
                     f"There's something special about naming. It creates a small ceremony between us—"
                     f"a moment where you claimed what you want from this space. "
                     f"Thank you for that.\n\n"
@@ -1853,7 +1853,7 @@ def parse_input(
             # Construct a short, conversational alternative that mirrors
             # the user's register. Keep language neutral and invitational.
             conversational_alt = (
-                "I hear you — that sounds difficult. "
+                "I hear you, that sounds difficult. "
                 "If you want, you can tell me a bit more about what that feels like for you today."
             )
             contextual_response = conversational_alt
@@ -2067,7 +2067,7 @@ def parse_input(
             and _is_poetic_response_local_after(contextual_response)
         ):
             conversational_alt = (
-                "I hear you — that sounds difficult. "
+                "I hear you, that sounds difficult. "
                 "If you want, you can tell me a bit more about what that feels like for you today."
             )
             # If Sanctuary Mode is enabled, preserve the compassionate opener

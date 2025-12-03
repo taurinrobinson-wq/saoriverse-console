@@ -24,8 +24,8 @@ def generate_initiatory_response(user_context: Optional[Dict] = None) -> str:
     # Favor short, inquisitive prompts that feel like a treasured friend.
     if intensity in ("high", "strong", "intense"):
         if preview:
-            return f"Wow — what about {preview} feels most alive for you?"
-        return "That sounds intense — can you tell me a bit more about how it feels?"
+            return f"Wow, what about {preview} feels most alive for you?"
+        return "That sounds intense, can you tell me a bit more about how it feels?"
 
     # gentle / default
     if preview:
@@ -46,8 +46,8 @@ def generate_archetypal_response(user_context: Optional[Dict] = None) -> str:
     # Keep archetypal responses short and honoring; prefer curiosity over statements.
     if intensity in ("high", "strong", "intense"):
         if anchor:
-            return f"That matters — what's one small part of {anchor} you'd like to hold on to?"
-        return "That sounds heavy — would you like to say a bit more about it?"
+            return f"That matters, what's one small part of {anchor} you'd like to hold on to?"
+        return "That sounds heavy, would you like to say a bit more about it?"
 
     if anchor:
         return f"That seems meaningful around {anchor}. What feels important to you about it?"

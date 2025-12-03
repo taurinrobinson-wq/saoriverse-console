@@ -7,7 +7,9 @@ and integrate them into the signal parsing and glyph matching system.
 """
 
 # ============================================================================
+
 # 1. DATABASE ARCHITECTURE
+
 # ============================================================================
 
 DATABASE_LOCATIONS = {
@@ -25,7 +27,9 @@ DATABASE_LOCATIONS = {
 }
 
 # ============================================================================
+
 # 2. SIGNAL LEXICON FILES (JSON-based keyword mapping)
+
 # ============================================================================
 
 SIGNAL_LEXICONS = {
@@ -45,7 +49,9 @@ SIGNAL_LEXICONS = {
 }
 
 # ============================================================================
+
 # 3. CODE THAT ACCESSES THE DATABASE
+
 # ============================================================================
 
 DATABASE_ACCESS_CODE = {
@@ -64,7 +70,7 @@ DATABASE_ACCESS_CODE = {
             "Various test scripts"
         ]
     },
-    
+
     "emotional_os/glyphs/signal_parser.py": {
         "location": "/Users/taurinrobinson/saoriverse-console/emotional_os/glyphs/signal_parser.py",
         "key_function": "parse_input(input_text, lexicon_path, db_path='glyphs.db', conversation_context)",
@@ -111,7 +117,9 @@ DATABASE_ACCESS_CODE = {
 }
 
 # ============================================================================
+
 # 4. STREAMLIT UI INTEGRATION
+
 # ============================================================================
 
 STREAMLIT_INTEGRATION = {
@@ -129,7 +137,7 @@ STREAMLIT_INTEGRATION = {
         - Shows processing time and mode
         """
     },
-    
+
     "emotional_os/deploy/modules/ui.py": {
         "location": "/Users/taurinrobinson/saoriverse-console/emotional_os/deploy/modules/ui.py",
         "imports": "from emotional_os.glyphs.signal_parser import parse_input",
@@ -148,7 +156,9 @@ STREAMLIT_INTEGRATION = {
 }
 
 # ============================================================================
+
 # 5. DATABASE QUERY PATTERNS
+
 # ============================================================================
 
 QUERY_PATTERNS = {
@@ -158,7 +168,7 @@ QUERY_PATTERNS = {
         "example_gates": ["Gate 4", "Gate 5", "Gate 6"],
         "typical_results": "2-15 glyphs per gate combination"
     },
-    
+
     "count_total_glyphs": {
         "sql": "SELECT COUNT(*) FROM glyph_lexicon",
         "result": 292
@@ -171,7 +181,9 @@ QUERY_PATTERNS = {
 }
 
 # ============================================================================
+
 # 6. SIGNAL LEXICON ENHANCEMENT SYSTEM
+
 # ============================================================================
 
 LEXICON_ENHANCEMENT = {
@@ -187,7 +199,7 @@ LEXICON_ENHANCEMENT = {
             "create_glyph_name_index": "Create fast lookup index"
         }
     },
-    
+
     "learned_lexicon_system": {
         "file": "parser/learned_lexicon.json",
         "purpose": "Auto-learned keywords from user interactions",
@@ -197,7 +209,9 @@ LEXICON_ENHANCEMENT = {
 }
 
 # ============================================================================
+
 # 7. VOLTAGE SIGNAL SYSTEM (Core Emotional Encoding)
+
 # ============================================================================
 
 VOLTAGE_SIGNALS = {
@@ -252,7 +266,9 @@ VOLTAGE_SIGNALS = {
 }
 
 # ============================================================================
+
 # 8. GATE SYSTEM (Emotional Complexity Levels)
+
 # ============================================================================
 
 GATES = {
@@ -289,7 +305,9 @@ GATES = {
 }
 
 # ============================================================================
+
 # 9. TESTING & VERIFICATION
+
 # ============================================================================
 
 TESTING_SCRIPTS = {
@@ -303,7 +321,7 @@ TESTING_SCRIPTS = {
         ],
         "coverage": "All signal detection working"
     },
-    
+
     "test_glyph_messages.py": {
         "location": "/Users/taurinrobinson/saoriverse-console/test_glyph_messages.py",
         "categories": 15,
@@ -312,11 +330,13 @@ TESTING_SCRIPTS = {
 }
 
 # ============================================================================
+
 # 10. PRODUCTION DEPLOYMENT
+
 # ============================================================================
 
 PRODUCTION_SETUP = {
-    "live_at": "https://firstperson.chat",
+    "live_at": "<https://firstperson.chat>",
     "platform": "Railway",
     "database": "emotional_os/glyphs/glyphs.db (local SQLite)",
     "signal_lexicon": "parser/signal_lexicon.json (152 keywords)",
@@ -329,7 +349,9 @@ PRODUCTION_SETUP = {
 }
 
 # ============================================================================
+
 # SUMMARY
+
 # ============================================================================
 
 """
