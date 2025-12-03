@@ -100,7 +100,7 @@ class EnhancedResponseComposer(DynamicResponseComposer):
                 prosody_directives = self._apply_prosody_to_response(
                     response_text=response_text,
                     emotional_state=emotional_state,
-                    user_input=user_input
+                    user_input=input_text
                 )
             except Exception as e:
                 logger.warning(f"Prosody application failed: {e}")
