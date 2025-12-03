@@ -14,10 +14,11 @@ def polish_ai_reply(text: str) -> str:
     if len(parts) > 1 and all(p == parts[0] for p in parts):
         t = parts[0]
 
-    generic_fallbacks = {"I'm here to listen.", "I'm here to listen and help.", "I'm here to listen and support you."}
+    generic_fallbacks = {"I'm here to listen.",
+                         "I'm here to listen and help.", "I'm here to listen and support you."}
     if t in generic_fallbacks or t.lower().startswith("i'm here to listen"):
         alternatives: List[str] = [
-            "I hear you — tell me more when you're ready.",
+            "I hear you, tell me more when you're ready.",
             "I'm listening. What's coming up for you right now?",
             "Thank you for sharing. I'm here to listen and support you.",
         ]

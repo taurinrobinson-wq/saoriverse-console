@@ -4,10 +4,10 @@
 
 Your local system was generating responses that *felt* templated because:
 
-1. **Response generation was glyph-driven** — "Find the glyph, then fill the template"
-2. **Templates had slots** — `"I hear {entity}. That's {emotion}. You can..."`
-3. **Same structure, different keywords** — Every anxiety response had the same arc
-4. **No message-to-response mapping** — Whether you talked about math, inherited patterns, or communication friction, you got the "Still Insight" template filled with different words
+1. **Response generation was glyph-driven**, "Find the glyph, then fill the template"
+2. **Templates had slots**, `"I hear {entity}. That's {emotion}. You can..."`
+3. **Same structure, different keywords**, Every anxiety response had the same arc
+4. **No message-to-response mapping**, Whether you talked about math, inherited patterns, or communication friction, you got the "Still Insight" template filled with different words
 
 ---
 
@@ -46,12 +46,13 @@ Response (Always unique, never identical)
 ## Side-by-Side Comparison
 
 ### BEFORE: Template-Driven
+
 ```python
 # Old approach
 if 'anxiety' in keywords:
     response = (
         "I can feel the anxiety you're carrying. When our minds race like this, "
-        "it often helps to find a still point. The energy you're feeling — "
+        "it often helps to find a still point. The energy you're feeling, "
         "that's your system preparing you. What if we could transform this "
         "racing energy into focused readiness?"
     )
@@ -64,6 +65,7 @@ if 'anxiety' in keywords:
 ```
 
 ### AFTER: Composition-Driven
+
 ```python
 # New approach
 extracted = extract_entities_and_emotions(input_text)
@@ -111,6 +113,7 @@ response = compose_message_aware_response(
 ## How the New System Works
 
 ### Layer 1: Feedback Detection
+
 ```python
 def detect_feedback_correction(input_text, last_assistant_message):
     # Pattern: "it's inherited FROM Michelle" after assistant said "I can feel YOUR anxiety"
@@ -123,6 +126,7 @@ def detect_feedback_correction(input_text, last_assistant_message):
 ```
 
 ### Layer 2: Message-Driven Features
+
 ```python
 def extract_message_features(input_text):
     features = {
@@ -135,6 +139,7 @@ def extract_message_features(input_text):
 ```
 
 ### Layer 3: Dynamic Composition
+
 ```python
 class DynamicResponseComposer:
     # Multiple opening variants (not one template):
@@ -152,6 +157,7 @@ class DynamicResponseComposer:
 ## The Three-Message Test Results
 
 ### Message 1: Math Frustration
+
 ```
 User: "I'm very mad that I had to do so much math for this brief 
 because I'm not a math person."
@@ -173,6 +179,7 @@ small piece together, or would you rather have a script you can use with Michell
 ```
 
 ### Message 2: Mental Block + Communication Friction
+
 ```
 User: "Yeah it's not that I'm against math. I just have a mental block on it... 
 Michelle being mostly korean speaking and having a chip on her shoulder when it 
@@ -194,6 +201,7 @@ like to approach math frustration differently?"
 ```
 
 ### Message 3: Inherited Pattern Correction
+
 ```
 User: "well I don't know if its my anxiety. If there is any anxiety. 
 its inherited from Michelle because she is very anxious."
@@ -219,14 +227,16 @@ actually *yours*?"
 **Class**: `DynamicResponseComposer`
 
 **Key Methods**:
-- `compose_response()` — Main entry point, orchestrates composition
-- `compose_message_aware_response()` — Responds to specific message features
-- `_extract_entities_and_emotions()` — Uses spaCy + NRC to extract meaning
-- `_select_opening()` — Random variant selection
-- `_weave_poetry()` — Finds/embeds thematic poetry
-- `_build_contextual_response()` — Layers composition
+
+- `compose_response()`, Main entry point, orchestrates composition
+- `compose_message_aware_response()`, Responds to specific message features
+- `_extract_entities_and_emotions()`, Uses spaCy + NRC to extract meaning
+- `_select_opening()`, Random variant selection
+- `_weave_poetry()`, Finds/embeds thematic poetry
+- `_build_contextual_response()`, Layers composition
 
 **Updated File**: `emotional_os/glyphs/signal_parser.py`
+
 - Imports `DynamicResponseComposer`
 - Uses it in `generate_contextual_response()` instead of filling templates
 - Detects feedback corrections first
@@ -236,11 +246,11 @@ actually *yours*?"
 
 ## What Offline Resources Enable This
 
-1. **spaCy** — Extract entities (Michelle, math, block) and relationships
-2. **NRC Lexicon** — Map words to emotions for feature detection
-3. **Poetry Database** — Find thematic poetry to weave in
-4. **NLTK WordNet** — Find synonyms/antonyms for variation
-5. **Semantic similarity** — Avoid repeating phrases
+1. **spaCy**, Extract entities (Michelle, math, block) and relationships
+2. **NRC Lexicon**, Map words to emotions for feature detection
+3. **Poetry Database**, Find thematic poetry to weave in
+4. **NLTK WordNet**, Find synonyms/antonyms for variation
+5. **Semantic similarity**, Avoid repeating phrases
 
 **None require an API.** All run locally, instantly, and don't leak data.
 
@@ -251,4 +261,4 @@ actually *yours*?"
 **Before**: "I got the same response structure three times, just with different keyword fills."  
 **After**: "Each response felt fresh, addressed my actual situation, and picked up on when I was correcting the system."
 
-The difference is **compositional generation instead of template filling** — and it costs nothing beyond local computation.
+The difference is **compositional generation instead of template filling**, and it costs nothing beyond local computation.

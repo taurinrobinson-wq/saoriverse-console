@@ -330,7 +330,7 @@ def _prevent_response_repetition(response: str) -> str:
                 "Can you tell me one specific detail about that?",
                 "Would it help if we tried one small concrete step together?",
                 "If you pick one thing to focus on right now, what would it be?",
-                "That's important — would you like a short breathing practice or a practical plan?",
+                "That's important, would you like a short breathing practice or a practical plan?",
             ]
 
             idx = len(response) % len(followups)

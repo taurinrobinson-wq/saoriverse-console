@@ -1,4 +1,4 @@
-# Shared Core Platform — Emotion Core
+# Shared Core Platform, Emotion Core
 
 Purpose
 

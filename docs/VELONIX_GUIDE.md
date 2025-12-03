@@ -5,6 +5,7 @@ The VELΩNIX (Velonix) system is an emotional alchemy engine that models how emo
 ## Overview
 
 VELΩNIX models emotions as fundamental elements that can be:
+
 - **Combined** with other elements
 - **Catalyzed** by a third element
 - **Transformed** into higher-order emotional states
@@ -16,6 +17,7 @@ VELΩNIX models emotions as fundamental elements that can be:
 ### Emotional Elements
 
 Each element has:
+
 - **Symbol**: Short code (e.g., "Lg" for Longing)
 - **Name**: Full name of the emotion
 - **Valence**: Quality of the emotion (Noble, Heavy Noble, Volatile, etc.)
@@ -27,18 +29,18 @@ Each element has:
 
 ### Available Elements
 
-- **Lg** — Longing (Noble, Molten Pink)
-- **Gf** — Grief (Heavy Noble, Hallowed Blue)
-- **Td** — Tenderness (Stable, Velvet Drift)
-- **Rg** — Rage (Volatile, Crimson Fire)
-- **Fg** — Forgiveness (Luminous, Radiant Gold)
-- **Ps** — Presence (Stable, Deep Green)
-- **Vn** — Vulnerability (Permeable, Soft Pearl)
-- **Rv** — Resilience (Enduring, Burnished Oak)
-- **Jy** — Joy (Effervescent, Sunburst)
-- **St** — Stillness (Profound, Moonlit Silence)
-- **Ac** — Acceptance (Reconciling, Woven Warmth)
-- **Wd** — Wonder (Emergent, Twilight Azure)
+- **Lg**, Longing (Noble, Molten Pink)
+- **Gf**, Grief (Heavy Noble, Hallowed Blue)
+- **Td**, Tenderness (Stable, Velvet Drift)
+- **Rg**, Rage (Volatile, Crimson Fire)
+- **Fg**, Forgiveness (Luminous, Radiant Gold)
+- **Ps**, Presence (Stable, Deep Green)
+- **Vn**, Vulnerability (Permeable, Soft Pearl)
+- **Rv**, Resilience (Enduring, Burnished Oak)
+- **Jy**, Joy (Effervescent, Sunburst)
+- **St**, Stillness (Profound, Moonlit Silence)
+- **Ac**, Acceptance (Reconciling, Woven Warmth)
+- **Wd**, Wonder (Emergent, Twilight Azure)
 
 ### Reaction Chains
 
@@ -203,16 +205,19 @@ EmotionalArchive
 Each resulting element has associated rituals for integration:
 
 **Tenderness:**
+
 - "Pause and place a hand on your heart. Notice what rises."
 - "Write a letter to something you're tender toward."
 - "Light a candle. Sit with one person you care for in silence."
 
 **Presence:**
+
 - "Notice five things you can see, four you can touch..."
 - "Breathe deeply. Feel your feet on the ground."
 - "Set down your device. Be here for ten minutes."
 
 **Forgiveness:**
+
 - "Write the name of someone you're ready to release. Burn the paper."
 - "Speak aloud: 'I release what is not mine to carry.'"
 - "Pour water over your hands while stating what you're releasing."
@@ -220,6 +225,7 @@ Each resulting element has associated rituals for integration:
 ## Visualization
 
 VELΩNIX provides:
+
 - **SVG Element Rendering** - Beautiful visual representation of each element
 - **Reaction Diagrams** - Flow visualization of input → catalyst → result
 - **Motion Signatures** - Animated representations based on reactivity
@@ -244,6 +250,7 @@ python3 emotional_os/glyphs/velonix_demo.py
 ```
 
 This runs:
+
 1. Basic reaction example
 2. Reaction with catalyst
 3. Element listing
@@ -296,6 +303,7 @@ VELΩNIX is based on the principle that emotions are not isolated states but rat
 - Vulnerability + Acceptance = not weakness, but **joy**
 
 The system honors that transformation happens through:
+
 1. **Recognition** - naming the emotions present
 2. **Combination** - exploring how they relate
 3. **Catalysis** - finding what helps the reaction
@@ -305,6 +313,7 @@ The system honors that transformation happens through:
 ## Integration Points
 
 VELΩNIX can be integrated with:
+
 - **Streamlit UI** - Interactive emotion alchemy interface
 - **Glyph Systems** - Emotional elements as visual glyphs
 - **Ritual Systems** - Integration practices for results

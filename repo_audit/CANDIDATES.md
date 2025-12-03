@@ -1,6 +1,6 @@
-# Repository Audit — Candidate Files/Dirs for Archival
+# Repository Audit, Candidate Files/Dirs for Archival
 
-This file is an automated audit listing candidate files and directories that look like developer tools, demos, one-off scripts, or large generated artifacts that are safe to archive (move to an `archive/` folder) if you want a smaller, tidier main tree. This is a non-destructive report only — no files were moved by this audit.
+This file is an automated audit listing candidate files and directories that look like developer tools, demos, one-off scripts, or large generated artifacts that are safe to archive (move to an `archive/` folder) if you want a smaller, tidier main tree. This is a non-destructive report only, no files were moved by this audit.
 
 Use this report as a starting point. After you review, I can either (A) move selected items into `dev_archive/` and commit the move, or (B) create `.gitignore` entries for large/generated artifacts.
 
@@ -42,16 +42,16 @@ Concrete candidate list (examples pulled from a repo scan):
   - glyph_effectiveness_validator.py
 
 - Large tracked artifacts to consider removing from git (or put under LFS)
-  - `emotional_os/glyphs/glyphs.db` — SQLite DB (~MBs); consider moving to `data/` and adding to `.gitignore` or using Git LFS.
-  - `data/lexicons/*.bak*` — backup files; these should be ignored (we removed some during the earlier cleanup).
+  - `emotional_os/glyphs/glyphs.db`, SQLite DB (~MBs); consider moving to `data/` and adding to `.gitignore` or using Git LFS.
+  - `data/lexicons/*.bak*`, backup files; these should be ignored (we removed some during the earlier cleanup).
 
 - Docs scattered in root
   - Several README/notes/other markdown files live in the repo root. Consider consolidating under `docs/` with a top-level `README.md` linking into it.
 
 What I did NOT include as candidates
 
-- `emotional_os/deploy/modules/ui.py` and other `emotional_os` runtime modules — these appear to be required by `main_v2.py` and the Streamlit app.
-- Tests under `tests/` and `supabase/tests/` — keep them as they exercise the codebase.
+- `emotional_os/deploy/modules/ui.py` and other `emotional_os` runtime modules, these appear to be required by `main_v2.py` and the Streamlit app.
+- Tests under `tests/` and `supabase/tests/`, keep them as they exercise the codebase.
 
 Guidance & next steps (safe workflow)
 

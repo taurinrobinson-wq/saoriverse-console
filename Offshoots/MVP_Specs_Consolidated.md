@@ -1,4 +1,4 @@
-# Offshoots — Consolidated MVP Specs
+# Offshoots, Consolidated MVP Specs
 
 This document consolidates and extends the MVP specs in `/Offshoots`. Each offshoot below has a 1-page MVP spec, acceptance criteria, success metrics, a 6–12 week roadmap, key risks, and recommended next actions.
 
@@ -45,8 +45,8 @@ Acceptance criteria
 
 Key risks
 
-- Privacy requirements and accidental PII storage — mitigations: local-first, encryption, strict retention.
-- Model hallucination — mitigations: prompt engineering, guardrail rules, human-review sampling.
+- Privacy requirements and accidental PII storage, mitigations: local-first, encryption, strict retention.
+- Model hallucination, mitigations: prompt engineering, guardrail rules, human-review sampling.
 
 Next actions
 
@@ -91,8 +91,8 @@ Acceptance criteria
 
 Key risks
 
-- Regulatory constraints for minors — require careful legal review.
-- Over-simplification may misrepresent complex emotions — include escalation path.
+- Regulatory constraints for minors, require careful legal review.
+- Over-simplification may misrepresent complex emotions, include escalation path.
 
 Next actions
 
@@ -138,7 +138,7 @@ Acceptance criteria
 Key risks
 
 - False positives causing user frustration; mitigation: conservative thresholds and undo.
-- Platform constraints (keyboard extensions limitations on iOS) — produce webview and native variants.
+- Platform constraints (keyboard extensions limitations on iOS), produce webview and native variants.
 
 Next actions
 
@@ -183,8 +183,8 @@ Acceptance criteria
 
 Key risks
 
-- Legal / compliance burden (HIPAA) — schedule early legal review and infra controls.
-- Data misclassification — include human-in-loop review for flagged cases.
+- Legal / compliance burden (HIPAA), schedule early legal review and infra controls.
+- Data misclassification, include human-in-loop review for flagged cases.
 
 Next actions
 
@@ -225,8 +225,8 @@ Acceptance criteria
 
 Key risks
 
-- Cultural interpretation of music differs — test with diverse user groups.
-- Licensing and quality for synth engines — prefer open-source synth packages initially.
+- Cultural interpretation of music differs, test with diverse user groups.
+- Licensing and quality for synth engines, prefer open-source synth packages initially.
 
 Next actions
 
@@ -270,7 +270,7 @@ Acceptance criteria
 Key risks
 
 - Legal compliance beyond HIPAA (state-level rules); require legal review.
-- Summarization errors with sensitive data — human-in-loop required.
+- Summarization errors with sensitive data, human-in-loop required.
 
 Next actions
 
@@ -312,7 +312,7 @@ Acceptance criteria
 
 Key risks
 
-- False positives leading to unnecessary escalations — conservative thresholds + overrides.
+- False positives leading to unnecessary escalations, conservative thresholds + overrides.
 - Platform integration friction; prefer a single platform initially.
 
 Next actions

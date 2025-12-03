@@ -17,7 +17,7 @@ CSV_PATH = os.path.join(ROOT, "output", "curated_top20_glyphs.csv")
 # Confirmed rowid -> display_name mapping (from user's confirmation)
 ROWID_TO_DISPLAY = {
     62: "Resonance fragments without system...",
-    259: "It entangles it — so that the ache is...",
+    259: "It entangles it, so that the ache is...",
     49: "That’s the quiet scream of coherence in...",
 }
 

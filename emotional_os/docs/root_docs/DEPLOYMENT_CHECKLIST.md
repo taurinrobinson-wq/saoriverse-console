@@ -1,4 +1,4 @@
-Deployment checklist — migrate conversations to row-per-message and enable RLS
+Deployment checklist, migrate conversations to row-per-message and enable RLS
 
 Preflight (local/staging):
 

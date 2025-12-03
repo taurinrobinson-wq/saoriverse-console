@@ -12,7 +12,7 @@ def test_polish_replaces_generic_fallbacks():
     out = polish_ai_reply(s)
     # Should pick one of the alternatives
     assert out in {
-        "I hear you — tell me more when you're ready.",
+        "I hear you, tell me more when you're ready.",
         "I'm listening. What's coming up for you right now?",
         "Thank you for sharing. I'm here to listen and support you.",
     }

@@ -208,7 +208,7 @@ brief_responses = [
 |--------|---------|-----------|
 | **Glyph Comprehension** | Poetic, requires interpretation | Conversational, immediately clear |
 | **Response Layers** | 3 (affect → glyph lookup → response) | 2 (affect → glyph directly) |
-| **User Clarity** | "Recognized Stillness" — what? | "Held Space" — ah, I understand |
+| **User Clarity** | "Recognized Stillness", what? | "Held Space", ah, I understand |
 | **Response Latency** | Multiple lookups | Single lookup |
 | **Glyph Usage** | Underutilized | Direct integration |
 | **Consistency** | Translation errors possible | 1:1 mapping guarantees consistency |

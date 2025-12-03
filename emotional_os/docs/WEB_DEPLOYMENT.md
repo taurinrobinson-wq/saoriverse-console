@@ -7,6 +7,7 @@ Congratulations on securing the firstperson.chat domain! Here's how to deploy yo
 ## 📁 Files Created
 
 Your new web application includes:
+
 - `fastapi_app.py` - Main FastAPI backend server
 - `templates/index.html` - Landing page with authentication
 - `templates/chat.html` - Main chat application
@@ -22,6 +23,7 @@ Your new web application includes:
    - Free tier includes 512MB RAM, $5/month credit
 
 2. **Deploy Steps:**
+
    ```bash
    # Create new GitHub repo for web app
    git init
@@ -49,6 +51,7 @@ Your new web application includes:
 If you prefer a more modern stack:
 
 1. **Convert to Next.js:**
+
    ```bash
    npx create-next-app@latest firstperson-chat
    cd firstperson-chat
@@ -67,6 +70,7 @@ If you prefer a more modern stack:
    - Ubuntu 22.04
 
 2. **Setup:**
+
    ```bash
    # Install dependencies
    sudo apt update
@@ -88,6 +92,7 @@ If you prefer a more modern stack:
    ```
 
 3. **Nginx Configuration:**
+
    ```nginx
    server {
        listen 80;
@@ -102,6 +107,7 @@ If you prefer a more modern stack:
    ```
 
 4. **SSL Certificate:**
+
    ```bash
    sudo certbot --nginx -d firstperson.chat
    ```
@@ -122,7 +128,7 @@ cp env_template.txt .env
 python fastapi_app.py
 ```
 
-Visit http://localhost:8000 to test your app.
+Visit <http://localhost:8000> to test your app.
 
 ## 📊 Benefits of Custom Domain
 
@@ -130,7 +136,7 @@ Visit http://localhost:8000 to test your app.
 ✅ **Better SEO** - Google prefers custom domains
 ✅ **No platform limitations** - Full control over features
 ✅ **SSL certificate** - Secure HTTPS connection
-✅ **Email integration** - Can set up support@firstperson.chat
+✅ **Email integration** - Can set up <support@firstperson.chat>
 ✅ **Scalability** - Can handle more users than Streamlit
 
 ## 🔧 Environment Variables
@@ -154,14 +160,16 @@ SECRET_KEY=generated_32_character_hex_string
 
 ## 📁 Static site + Supabase Edge Functions (recommended production pattern)
 
-This project includes a static HTML frontend (`emotional_os/deploy/templates/chat.html`) that can be deployed as a pure static site (Netlify, Vercel, S3+CloudFront). The static site talks to backend services using Supabase Edge Functions and Supabase Auth — this gives you a fully serverless public site while keeping server-side code private (Streamlit) for development.
+This project includes a static HTML frontend (`emotional_os/deploy/templates/chat.html`) that can be deployed as a pure static site (Netlify, Vercel, S3+CloudFront). The static site talks to backend services using Supabase Edge Functions and Supabase Auth, this gives you a fully serverless public site while keeping server-side code private (Streamlit) for development.
 
 Why use this pattern?
-- No server to manage for the public site — fast, cheap, and reliable hosting.
+
+- No server to manage for the public site, fast, cheap, and reliable hosting.
 - You control which operations happen server-side (Edge Functions) and which run in the browser.
 - Keeps the Streamlit dev/admin UI private.
 
 How to wire it up
+
 1. Deploy the contents of `emotional_os/deploy/templates/chat.html` and the `static/` folder to your static host.
 2. Configure your Supabase Edge Function (example name: `saori-fixed`) to accept requests from your static site. Use CORS or origin checks as needed.
 3. In your static hosting settings, set a meta header or inject a small inline config that points to your Edge Function URL, for example:
@@ -173,18 +181,20 @@ How to wire it up
 
 4. Ensure your Edge Function uses Supabase Auth and RLS correctly. The static site will handle sign-in with Supabase client-side (using anon key or OAuth) and call Edge Functions with user tokens when needed.
 
-5. Keep the Streamlit app for development only (run locally or host internally). The Dockerfile in this repo defaults to not serving the static chat file — see `SERVE_STATIC_CHAT` environment variable.
+5. Keep the Streamlit app for development only (run locally or host internally). The Dockerfile in this repo defaults to not serving the static chat file, see `SERVE_STATIC_CHAT` environment variable.
 
 Verification
+
 - Visit your static site URL. It should connect to your Edge Function when you send a message. If you need to test locally, run the FastAPI server (for local dev) and the static page will fallback to `/api/chat`.
 
 Rollout suggestion
-- Stage the static site in a preview environment (Netlify preview or Vercel preview). Test sign-in and messaging with a test Supabase project before switching DNS.
 
+- Stage the static site in a preview environment (Netlify preview or Vercel preview). Test sign-in and messaging with a test Supabase project before switching DNS.
 
 ## 🎯 Recommended: Railway Deployment
 
 For the fastest setup, I recommend Railway:
+
 - One-click deployment from GitHub
 - Automatic HTTPS
 - Easy custom domain setup
