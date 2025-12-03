@@ -4283,10 +4283,31 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-12-03T02:41:27.402668"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Longing & Sensuality",
+      "symbol": "\ud83c\udfbb\ud83c\udf39",
+      "core_emotions": [
+        "longing",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "longing",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and sensuality present here",
+      "narrative_hook": "A story where longing meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T02:52:11.728449"
     }
   ],
   "metadata": {
-    "total_discovered": 204,
-    "last_updated": "2025-12-03T02:41:27.403151"
+    "total_discovered": 205,
+    "last_updated": "2025-12-03T02:52:11.728599"
   }
 }
