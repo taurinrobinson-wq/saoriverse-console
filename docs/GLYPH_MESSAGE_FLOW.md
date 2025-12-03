@@ -18,7 +18,7 @@ Sections
 ## Overview (quick path)
 
 - User interacts with the web UI served by `main_v2.py` (Streamlit).
-- `main_v2.py` loads the UI renderer from `emotional_os.deploy.modules.ui` (either `render_main_app` or `render_main_app_safe`).
+- `main_v2.py` loads the UI renderer from `emotional_os.deploy.modules.ui_refactored` (either `render_main_app` or `render_main_app_safe`).
 - The main chat input is rendered and when the user sends a message the UI pipeline:
   1. Optionally sanitizes text via `local_inference.preprocessor.Preprocessor` (if available).
   2. Calls the local parser: `emotional_os.glyphs.signal_parser.parse_input` (re-export of `emotional_os.core.signal_parser`).
@@ -39,7 +39,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 
 1) Entry: `main_v2.py` -> `render_main_app()`
    - File: `main_v2.py`
-   - The renderer imported from `emotional_os.deploy.modules.ui` is called.
+   - The renderer imported from `emotional_os.deploy.modules.ui_refactored` is called.
 
 2) UI: render chat input and wait for a submission
    - File: `emotional_os/deploy/modules/ui.py`
