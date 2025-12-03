@@ -135,8 +135,15 @@ class EnhancedResponseComposer(DynamicResponseComposer):
 
         # Check for high-intensity language markers
         intensity_markers = {
-            "freakin'": 0.8,
+            # Expletives & strong expressions
             "fucking": 0.9,
+            "bullshit": 0.85,
+            "freakin'": 0.8,
+            "damn": 0.75,
+            "hell": 0.7,
+            "crap": 0.7,
+            "shit": 0.85,
+            # Intensifiers
             "seriously": 0.7,
             "just": 0.6,
             "really": 0.6,
@@ -147,6 +154,7 @@ class EnhancedResponseComposer(DynamicResponseComposer):
             "completely": 0.7,
             "totally": 0.7,
             "literally": 0.6,
+            # Negative emotions
             "stressful": 0.8,
             "stressed": 0.8,
             "anxious": 0.8,
@@ -157,10 +165,18 @@ class EnhancedResponseComposer(DynamicResponseComposer):
             "furious": 0.9,
             "devastated": 0.9,
             "heartbroken": 0.85,
+            "depressed": 0.85,
+            "miserable": 0.8,
+            "terrible": 0.75,
+            "awful": 0.75,
+            "horrible": 0.75,
+            # Positive emotions
             "thrilled": 0.8,
             "excited": 0.75,
             "amazing": 0.7,
             "wonderful": 0.7,
+            "fantastic": 0.75,
+            "love": 0.7,
         }
 
         input_lower = user_input.lower()
@@ -173,7 +189,9 @@ class EnhancedResponseComposer(DynamicResponseComposer):
                 max_intensity = max(max_intensity, intensity)
 
                 # Infer tone from markers
-                if any(w in marker for w in ["stress", "anxious", "worried", "overwhelm"]):
+                if any(w in marker for w in ["fucking", "bullshit", "shit", "damn", "hell", "crap"]):
+                    detected_tone = "frustrated"  # Expletives usually indicate frustration/anger
+                elif any(w in marker for w in ["stress", "anxious", "worried", "overwhelm"]):
                     detected_tone = "anxious"
                 elif any(w in marker for w in ["angry", "furious", "frustrated"]):
                     detected_tone = "frustrated"
