@@ -49,12 +49,13 @@ export async function sendMessage(text, options = {}) {
 
         const data = await res.json();
 
-        // Parse response and extract prosody metadata
+        // Parse response and extract prosody metadata + multimodal affect
         if (data && data.success) {
             return {
                 success: true,
                 reply: data.reply || '',
                 prosody: parseProsodyMetadata(data),
+                affect: parseMultimodalAffect(data),
                 processingTime: data.processing_time || 0,
                 glyphs: data.glyphs || [],
                 emotion: data.emotion || null,
@@ -181,6 +182,61 @@ function parseProsodyMetadata(response) {
             symbol: g.symbol || '◆',
             description: g.description || '',
         })) : [],
+    };
+}
+
+/**
+ * Parse multimodal affect data from backend response
+ * Extracts voice, facial, text, and fusion affect detection results
+ */
+function parseMultimodalAffect(response) {
+    // Return null if no multimodal data present
+    if (!response.affect && !response.voice_affect && !response.facial_affect && !response.text_affect) {
+        return null;
+    }
+
+    // If affect is already structured, use it; otherwise construct from components
+    if (response.affect) {
+        return {
+            voice: response.affect.voice || null,
+            facial: response.affect.facial || null,
+            text: response.affect.text || null,
+            fusion: response.affect.fusion || null,
+            timestamp: response.affect.timestamp || new Date().toISOString(),
+        };
+    }
+
+    // Construct from individual components if present
+    const hasAnyAffect = response.voice_affect || response.facial_affect || response.text_affect;
+    if (!hasAnyAffect) return null;
+
+    return {
+        voice: response.voice_affect ? {
+            emotion: response.voice_affect.emotion || 'neutral',
+            arousal: response.voice_affect.arousal || 0.5,
+            valence: response.voice_affect.valence || 0.5,
+            confidence: response.voice_affect.confidence || 0.5,
+            prosodic_features: response.voice_affect.prosodic_features || {},
+        } : null,
+        facial: response.facial_affect ? {
+            emotion: response.facial_affect.emotion || 'neutral',
+            intensity: response.facial_affect.intensity || 0.5,
+            confidence: response.facial_affect.confidence || 0.5,
+            detected_features: response.facial_affect.detected_features || [],
+        } : null,
+        text: response.text_affect ? {
+            emotion: response.text_affect.emotion || 'neutral',
+            intensity: response.text_affect.intensity || 0.5,
+            sentiment: response.text_affect.sentiment || 0.5,
+            confidence: response.text_affect.confidence || 0.5,
+        } : null,
+        fusion: response.text_affect ? {
+            primary_emotion: response.text_affect.emotion || 'neutral',
+            confidence: response.text_affect.confidence || 0.5,
+            arousal: response.voice_affect?.arousal || 0.5,
+            valence: response.voice_affect?.valence || 0.5,
+        } : null,
+        timestamp: new Date().toISOString(),
     };
 }
 

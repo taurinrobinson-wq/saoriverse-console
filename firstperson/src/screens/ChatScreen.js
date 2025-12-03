@@ -15,7 +15,7 @@ import {
     ActivityIndicator,
 } from 'react-native';
 import MessageBubble from '../components/MessageBubble';
-import ChatInput from '../components/ChatInput';
+import MultimodalInput from '../components/MultimodalInput';
 import * as ApiService from '../services/ApiService';
 import * as StorageService from '../services/StorageService';
 
@@ -85,7 +85,7 @@ export default function ChatScreen({ route, navigation }) {
                     role: 'assistant',
                     text: result.reply,
                     prosody: result.prosody,
-                    glyphs: result.glyphs,
+                    affect: result.affect,
                     timestamp: new Date().toISOString(),
                 };
 
@@ -143,6 +143,28 @@ export default function ChatScreen({ route, navigation }) {
         }
     };
 
+    const handleMultimodalMessage = async (messageData) => {
+        const { type, content } = messageData;
+
+        switch (type) {
+            case 'text':
+                handleSendMessage(content);
+                break;
+            case 'voice':
+                // Send to voice affect detector backend
+                console.log('Voice message:', content);
+                // TODO: Call ApiService.analyzeVoice(content)
+                break;
+            case 'facial':
+                // Send to facial expression detector backend
+                console.log('Facial message:', content);
+                // TODO: Call ApiService.analyzeFacial(content)
+                break;
+            default:
+                console.warn('Unknown message type:', type);
+        }
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -177,10 +199,9 @@ export default function ChatScreen({ route, navigation }) {
                         ))}
                     </ScrollView>
 
-                    <ChatInput
-                        onSend={handleSendMessage}
-                        loading={loading}
-                        disabled={isLoadingHistory}
+                    <MultimodalInput
+                        onSendMessage={handleMultimodalMessage}
+                        disabled={isLoadingHistory || loading}
                     />
                 </>
             )}

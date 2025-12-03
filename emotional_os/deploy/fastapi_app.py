@@ -345,10 +345,32 @@ async def chat(chat_data: ChatRequest):
                     except Exception:
                         pass
 
+                    # Extract multimodal affect data from local_analysis if available
+                    affect_data = None
+                    if isinstance(local_analysis, dict):
+                        affect_data = local_analysis.get('affect')
+                        if not affect_data:
+                            # Construct affect from individual components
+                            voice_affect = local_analysis.get('voice_affect')
+                            facial_affect = local_analysis.get('facial_affect')
+                            text_affect = local_analysis.get('text_affect')
+                            
+                            if voice_affect or facial_affect or text_affect:
+                                affect_data = {
+                                    'voice': voice_affect,
+                                    'facial': facial_affect,
+                                    'text': text_affect,
+                                    'fusion': local_analysis.get('fusion_affect')
+                                }
+
                     return {
                         "success": True,
                         "reply": polish_ai_reply(response_text or "I'm here to listen."),
                         "glyph": glyph_obj,
+                        "affect": affect_data,
+                        "voice_affect": local_analysis.get('voice_affect') if isinstance(local_analysis, dict) else None,
+                        "facial_affect": local_analysis.get('facial_affect') if isinstance(local_analysis, dict) else None,
+                        "text_affect": local_analysis.get('text_affect') if isinstance(local_analysis, dict) else None,
                         "processing_time": debug_info.get('processing_time', 0) if isinstance(debug_info, dict) else 0
                     }
                 except Exception as e:
@@ -403,6 +425,10 @@ async def chat(chat_data: ChatRequest):
                 "success": True,
                 "reply": polish_ai_reply(result.get("reply", "I'm here to listen.")),
                 "glyph": result.get("glyph", {}),
+                "affect": result.get("affect"),
+                "voice_affect": result.get("voice_affect"),
+                "facial_affect": result.get("facial_affect"),
+                "text_affect": result.get("text_affect"),
                 "processing_time": result.get("processing_time", 0),
             }
 
