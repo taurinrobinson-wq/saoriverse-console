@@ -114,6 +114,147 @@ def _enhance_with_prosody(response_text: str, user_input: str, tone: str, arousa
     return response_text
 
 
+def _is_vague_emotional_input(user_input: str, tone: str, arousal: float) -> bool:
+    """Detect if input is emotionally charged but contextually vague.
+
+    Vague high-emotion input:
+    - Very short (< 20 words typical, sometimes just expletives)
+    - No concrete subject ("this", "it", "that" without context)
+    - High emotional intensity but no object/target
+    - Primary content is emotion/opinion, not specific description
+
+    Examples of VAGUE (trigger curiosity):
+    - "this is bullshit"
+    - "what a freakin day"
+    - "shit"
+    - "what the fuck"
+
+    Examples of NOT VAGUE (use affect response):
+    - "I am so frustrated with the project"
+    - "I hate this situation with my team"
+    - "the meeting yesterday was ridiculous"
+
+    Args:
+        user_input: The user's message
+        tone: Detected emotional tone
+        arousal: Emotional arousal level (0-1)
+
+    Returns:
+        True if input appears emotionally charged but vague/ambiguous
+    """
+    # Only flag high-arousal emotional input as potentially vague
+    if arousal < 0.6 or tone in ("neutral", "warm", "grateful"):
+        return False
+
+    words = user_input.lower().split()
+
+    # Count expletives and intensifiers
+    expletives = {"bullshit", "shit", "fuck", "fucking",
+                  "damn", "hell", "crap", "whatever"}
+    intensifiers = {"really", "so", "very",
+                    "super", "extremely", "absolutely", "freakin", "freakin'", "what"}
+
+    expletive_count = sum(1 for w in words if w.strip('.,!?') in expletives)
+    intensifier_count = sum(
+        1 for w in words if w.strip('.,!?\'') in intensifiers)
+
+    # Short messages with expletives/intensifiers = likely vague
+    # (unless there's a specific subject like a person's name, concrete object, or action)
+    if len(words) <= 5:
+        if expletive_count > 0 or intensifier_count > 1:
+            # Check for specific subjects that ground the complaint
+            # (not just generic words like "day", "time", "it", "this")
+            concrete_subjects = {
+                "work", "project", "situation", "person", "meeting",
+                "team", "boss", "friend", "family", "school", "code", "test",
+                "deadline", "presentation", "system", "app", "feature", "bug",
+                "client", "manager", "user", "rule", "policy", "file", "commit"
+            }
+            has_specific_subject = any(
+                w.strip('.,!?') in concrete_subjects for w in words)
+
+            if not has_specific_subject:
+                return True
+
+    # Vague pronouns without clear referent
+    if any(phrase in user_input.lower() for phrase in ["this is", "that's", "it's all"]):
+        # These are vague unless followed by a specific descriptor
+        if not any(concrete in user_input.lower()
+                   for concrete in ["work", "person", "situation", "problem", "meeting",
+                                    "project", "team", "my", "me", "we", "happening"]):
+            return True
+
+    return False
+
+
+def _get_curiosity_response(user_input: str, tone: str, arousal: float) -> Tuple[str, Optional[str]]:
+    """Generate curiosity-first response for vague high-emotion input.
+
+    When someone says "this is bullshit" without context, ask what they mean
+    instead of assuming. These responses acknowledge the emotion but ask for info.
+
+    Args:
+        user_input: The user's message
+        tone: Detected emotional tone
+        arousal: Emotional arousal level
+
+    Returns:
+        Tuple of (response, glyph) where glyph is None for curiosity responses
+    """
+    # Tone-specific curiosity responses
+    curiosity_responses = {
+        "angry": [
+            "Oh yeah? What's got you heated?",
+            "That's real. What happened?",
+            "I hear the anger. What's going on?",
+            "That's intense. Tell me what's behind it.",
+            "Yeah? What's fueling that?",
+        ],
+        "frustrated": [
+            "What's getting to you?",
+            "I feel that. What's the main thing?",
+            "Yeah, talk to me. What's going on?",
+            "That frustration is clear. What's at the core?",
+            "What's the most frustrating part?",
+        ],
+        "anxious": [
+            "What's worrying you most?",
+            "I hear the stress. What's the pressure about?",
+            "That's real tension. What's driving it?",
+            "What feels most fragile right now?",
+            "Talk to me. What's the concern?",
+        ],
+        "sad": [
+            "That sounds heavy. What's underneath it?",
+            "I hear the sadness. What's the loss?",
+            "What's hurting?",
+            "That pain is real. What's at the core?",
+            "What are you grieving?",
+        ],
+        "confused": [
+            "What's unclear about it?",
+            "Help me understand. What's confusing?",
+            "What do you need to figure out?",
+            "Tell me more. What's the confusion?",
+        ],
+    }
+
+    import random
+    responses = curiosity_responses.get(tone, [
+        "Tell me more. What's happening?",
+        "I'm listening. What's going on?",
+        "Help me understand.",
+        "What do you mean?",
+    ])
+
+    response = random.choice(responses)
+
+    # For curiosity responses, add light prosody but mark as seeking input
+    response = _enhance_with_prosody(response, user_input, tone, arousal, -0.5)
+
+    return response, None
+
+
 def normalize_glyph_capitalization(text: str) -> str:
     """Normalize glyph name capitalization for grammatical correctness.
 
@@ -316,6 +457,11 @@ def compose_glyph_aware_response(
     arousal = affect_analysis.get("arousal", 0)
     valence = affect_analysis.get("valence", 0)
     tone_confidence = affect_analysis.get("tone_confidence", 0)
+
+    # Check for vague high-emotion input (e.g., "this is bullshit" without context)
+    # If detected, use curiosity-first response instead of assuming affect
+    if _is_vague_emotional_input(user_input, tone, arousal):
+        return _get_curiosity_response(user_input, tone, arousal)
 
     # Get modernized glyph for the detected affect
     glyph = suggested_glyph or get_glyph_for_affect(tone, arousal, valence)
