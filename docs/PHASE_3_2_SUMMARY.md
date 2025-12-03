@@ -89,6 +89,7 @@ docs/
 ## Key Features
 
 ### Voice Affect Detection
+
 - **8 Emotional Tones**: Calm, Energetic, Hesitant, Angry, Sad, Excited, Anxious, Confident
 - **Acoustic Features**: Pitch, intensity, speech rate, pauses, variance, formants, MFCCs
 - **VAD Dimensions**: Arousal (calm→excited), Valence (negative→positive), Dominance (submissive→assertive)
@@ -96,6 +97,7 @@ docs/
 - **Text Comparison**: Detects sarcasm/suppression by comparing with text tone
 
 ### Facial Expression Detection
+
 - **7 Expressions**: Happy, Sad, Fearful, Surprised, Angry, Disgusted, Contemptuous + Neutral
 - **FACS Action Units**: 11 units tracked (AU1, AU2, AU4, AU5, AU6, AU7, AU9, AU10, AU12, AU15, AU26)
 - **Eye Metrics**: Openness, dilation, blink rate, gaze direction, fixation duration
@@ -104,6 +106,7 @@ docs/
 - **Attention Tracking**: Engagement level from eye openness and consistency
 
 ### Multimodal Fusion
+
 - **Congruence Assessment**: 6 types (full agreement, partial, conflict, sarcasm, suppression, fake)
 - **Incongruence Detection**: Lists specific inconsistencies found
 - **Confidence Weighting**: Each modality weighted by confidence for dimension fusion
@@ -113,6 +116,7 @@ docs/
 - **Detailed Comparison**: Side-by-side alignment scores for each modality pair
 
 ### Phase 3.1 Integration
+
 - MultimodalAnalysis data flows directly into EmotionalProfileManager
 - All VAD dimensions compatible with existing profile system
 - Stress indicator enhances session coherence tracking
@@ -124,6 +128,7 @@ docs/
 ## Test Results
 
 ### Phase 3.2 Tests (14/14 ✅)
+
 ```
 TestVoiceAffectDetector::
   ✅ test_calm_voice_analysis
@@ -149,6 +154,7 @@ TestPhase32Integration::
 ```
 
 ### Full System Tests (396/396 ✅)
+
 - Phase 1 baseline: 262 tests ✅
 - Phase 2 (2.3-2.5): 98 tests ✅
 - Phase 3.1: 34 tests ✅
@@ -161,19 +167,23 @@ TestPhase32Integration::
 ## Integration Verified
 
 ✅ **Voice → Multimodal Fusion**
+
 - VoiceAffectDetector.analyze() → VoiceAnalysis
 - VoiceAnalysis → MultimodalFusionEngine.fuse()
 
 ✅ **Facial → Multimodal Fusion**
+
 - FacialExpressionDetector.analyze() → FacialAnalysis
 - FacialAnalysis → MultimodalFusionEngine.fuse()
 
 ✅ **Multimodal → Phase 3.1 Profiles**
+
 - MultimodalAnalysis → EmotionalProfileManager.update_profile()
 - Emotional trajectory updated with multimodal confidence
 - Session coherence enhanced with authenticity data
 
 ✅ **Multimodal → Phase 3.5 Glyph Control**
+
 - Confidence scores usable for glyph selection control
 - Incongruences available for special response handling
 - Stress level modulates glyph intensity/presentation
@@ -205,22 +215,26 @@ Input Data:
 ## Impact
 
 ### Emotional Understanding
+
 - **Before**: Text-only emotion detection (~75% accuracy, limited to explicit expressions)
 - **After**: Multi-modal emotion detection (~80%+ accuracy, detects hidden emotions)
 
 ### Incongruence Detection
+
 - **Sarcasm**: Detectable via text positivity + voice/facial negativity
 - **Suppression**: Detectable via calm text + stress indicators in voice/face
 - **Deception**: Detectable via low authenticity scores and AU inconsistency
 - **Authenticity**: Validates genuine emotional expression (Duchenne smile, vocal pattern match)
 
 ### Response Quality
+
 - Can now detect when users say "I'm fine" but clearly aren't (suppression)
 - Can detect sarcastic remarks ("Oh great, just wonderful")
 - Can validate genuine smiles vs. polite smiles
 - Can personalize responses based on actual emotional state, not just stated state
 
 ### Session Coherence
+
 - Tracks emotional trajectory more accurately
 - Detects when user mood changes despite verbal claims
 - Better contextual understanding for therapeutic applications
@@ -258,24 +272,28 @@ Real-time capable (< 50ms per analysis cycle)
 ### User Decision Required
 
 **Option A: Phase 3.5.2 - LoRA Fine-Tuning Pipeline** (Recommended)
+
 - Implement PEFT LoRA training with transformers
 - Build FastAPI inference service
 - Integrate glyph control tokens
 - Est. 6-8 hours, ~700 lines, 15+ tests
 
 **Option B: Phase 3.2.1 - Real-time Streaming**
+
 - Implement sliding window analysis
 - Add temporal smoothing and caching
 - Support continuous voice/video streams
 - Est. 4-6 hours, ~400 lines, 10 tests
 
 **Option C: Phase 3.3 - Emotional Attunement Refinement**
+
 - Fine-tune gesture selection based on multimodal data
 - Add contextual response adaptation
 - Implement user-specific personalization
 - Est. 8-10 hours
 
 **Option D: Phase 3.2.1 UI Integration**
+
 - Real-time audio/video capture
 - Live landmark visualization
 - Multimodal analysis dashboard
@@ -332,6 +350,7 @@ All documentation created and ready:
 ## Session Summary
 
 **What Was Accomplished:**
+
 1. ✅ Voice affect detector fully implemented and tested
 2. ✅ Facial expression detector fully implemented and tested
 3. ✅ Multimodal fusion engine fully implemented and tested
@@ -351,6 +370,7 @@ All documentation created and ready:
 ## Conclusion
 
 Phase 3.2 successfully adds sophisticated multi-modal emotion analysis to Saoriverse, enabling:
+
 - Hidden emotion detection (sarcasm, suppression, authenticity)
 - Cross-modal incongruence identification
 - Enhanced response personalization
