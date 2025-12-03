@@ -3926,10 +3926,73 @@
       "conversation_id": "default",
       "source": "dialogue_evolution",
       "created_at": "2025-12-01T23:58:05.452827"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Longing & Sensuality",
+      "symbol": "\ud83c\udfbb\ud83c\udf39",
+      "core_emotions": [
+        "longing",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "longing",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the longing and sensuality present here",
+      "narrative_hook": "A story where longing meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T01:58:14.359987"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Intimacy & Sensuality",
+      "symbol": "\u2764\ud83c\udf39",
+      "core_emotions": [
+        "intimacy",
+        "sensuality"
+      ],
+      "associated_keywords": [
+        "intimacy",
+        "sensuality"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the intimacy and sensuality present here",
+      "narrative_hook": "A story where intimacy meets sensuality",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T01:59:00.805918"
+    },
+    {
+      "id": "glyph_dialogue_028f0062-f25c-44b6-a9fa-264fa187bf26_default_1",
+      "name": "Vulnerable Closeness",
+      "symbol": "\ud83c\udf31\u2764",
+      "core_emotions": [
+        "vulnerability",
+        "intimacy"
+      ],
+      "associated_keywords": [
+        "vulnerability",
+        "intimacy"
+      ],
+      "combined_frequency": 300,
+      "response_cue": "Acknowledge the vulnerability and intimacy present here",
+      "narrative_hook": "A story where vulnerability meets intimacy",
+      "created_from_conversation": true,
+      "user_id": "028f0062-f25c-44b6-a9fa-264fa187bf26",
+      "conversation_id": "default",
+      "source": "dialogue_evolution",
+      "created_at": "2025-12-03T01:59:35.996468"
     }
   ],
   "metadata": {
-    "total_discovered": 187,
-    "last_updated": "2025-12-01T23:58:05.453204"
+    "total_discovered": 190,
+    "last_updated": "2025-12-03T01:59:35.997047"
   }
 }

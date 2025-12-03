@@ -21,7 +21,7 @@ from .audio_input import (
 
 __all__ = [
     "AudioPipeline",
-    "SpeechToText", 
+    "SpeechToText",
     "AudioProcessor",
     "render_audio_input_widget",
     "render_audio_visualization",
