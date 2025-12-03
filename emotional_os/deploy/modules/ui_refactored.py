@@ -260,7 +260,7 @@ def render_main_app():
 
 def render_main_app_safe(*args, **kwargs):
     """Runtime-safe wrapper around render_main_app.
-    
+
     Catches exceptions raised during rendering, writes a full traceback to
     `debug_runtime.log`, attempts to display a minimal error to the user,
     and then re-raises the exception so host-level logs capture it as well.

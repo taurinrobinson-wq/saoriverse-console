@@ -196,7 +196,7 @@ def _call_response_engine(user_input: str, local_analysis: dict) -> str:
         Response text or empty string if engine fails
     """
     try:
-        from main_response_engine import process_user_input as _engine_process
+        from core.main_response_engine import process_user_input as _engine_process
 
         ctx = {"local_analysis": local_analysis}
 
