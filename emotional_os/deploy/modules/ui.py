@@ -2687,7 +2687,11 @@ def render_main_app():
                             )
 
                     # Log learning results
-                    learning_result = evolution_result["pipeline_stages"]["hybrid_learning"].get(
+                    pipeline_stages = evolution_result.get(
+                        "pipeline_stages", {})
+                    hybrid_learning = pipeline_stages.get(
+                        "hybrid_learning", {})
+                    learning_result = hybrid_learning.get(
                         "learning_result", {})
                     if learning_result.get("learned_to_shared"):
                         logger.info(
