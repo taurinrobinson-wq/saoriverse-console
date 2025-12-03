@@ -119,7 +119,7 @@ STREAMLIT_INTEGRATION = {
         "location": "/Users/taurinrobinson/saoriverse-console/main_v2.py",
         "imports": [
             "from emotional_os.deploy.modules.auth import SaoynxAuthentication",
-            "from emotional_os.deploy.modules.ui import render_main_app"
+            "from emotional_os.deploy.modules.ui_refactored import render_main_app"
         ],
         "how_it_uses_glyphs": """
         Calls render_main_app() which:
