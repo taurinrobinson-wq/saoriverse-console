@@ -77,6 +77,27 @@ class EnhancedResponseComposer(DynamicResponseComposer):
         Returns:
             (response_text, prosody_directives) if include_prosody else (response_text, None)
         """
+        # Detect emotional state from input FIRST
+        emotional_state = self._detect_emotional_intensity(input_text, glyphs)
+
+        # Check if this is vague high-emotion input (e.g., "this is bullshit" without context)
+        if self._is_vague_emotional_input(input_text, emotional_state):
+            # Use curiosity-first response instead of assuming affect
+            response_text = self._get_curiosity_response(
+                input_text, emotional_state)
+            prosody_directives = None
+            if include_prosody and self.prosody_planner:
+                try:
+                    prosody_directives = self._apply_prosody_to_response(
+                        response_text=response_text,
+                        emotional_state=emotional_state,
+                        user_input=input_text
+                    )
+                except Exception as e:
+                    logger.warning(f"Prosody application failed: {e}")
+            self.last_emotional_state = emotional_state
+            return (response_text, prosody_directives)
+
         # Get base response from parent composer (note: parameter is input_text, not user_input)
         try:
             response_text = super().compose_multi_glyph_response(
@@ -89,9 +110,6 @@ class EnhancedResponseComposer(DynamicResponseComposer):
         except Exception as e:
             logger.warning(f"Base composition failed: {e}")
             response_text = "I'm here with you."
-
-        # Detect emotional state from input
-        emotional_state = self._detect_emotional_intensity(input_text, glyphs)
 
         # Apply prosody if we have a planner and high emotion
         prosody_directives = None
@@ -313,6 +331,121 @@ class EnhancedResponseComposer(DynamicResponseComposer):
             best_response = candidates[0].get("text", "") if candidates else ""
 
         return best_response
+
+    def _is_vague_emotional_input(self, user_input: str, emotional_state: Dict[str, Any]) -> bool:
+        """Detect if input is emotionally charged but contextually vague.
+
+        Vague high-emotion input:
+        - Very short (≤5 words) with expletives/intensifiers
+        - No specific subject matter
+        - High emotional intensity but lacks concrete context
+
+        Examples: "this is bullshit", "what a freakin day", "shit"
+        """
+        # Only flag high-emotion input as potentially vague
+        if not emotional_state.get("high_emotion") or emotional_state.get("intensity", 0) < 0.65:
+            return False
+
+        words = user_input.lower().split()
+
+        # Count expletives and intensifiers
+        expletives = {"bullshit", "shit", "fuck", "fucking",
+                      "damn", "hell", "crap", "whatever"}
+        intensifiers = {"really", "so", "very", "super", "extremely",
+                        "absolutely", "freakin", "freakin'", "what"}
+
+        expletive_count = sum(
+            1 for w in words if w.strip('.,!?') in expletives)
+        intensifier_count = sum(
+            1 for w in words if w.strip('.,!?\'') in intensifiers)
+
+        # Short messages with expletives/intensifiers = likely vague
+        if len(words) <= 5 and (expletive_count > 0 or intensifier_count > 1):
+            # Check for specific subjects that ground the complaint
+            concrete_subjects = {
+                "work", "project", "situation", "person", "meeting",
+                "team", "boss", "friend", "family", "school", "code", "test",
+                "deadline", "presentation", "system", "app", "feature", "bug",
+                "client", "manager", "user", "rule", "policy", "file", "commit"
+            }
+            has_specific_subject = any(
+                w.strip('.,!?') in concrete_subjects for w in words)
+
+            if not has_specific_subject:
+                return True
+
+        # Vague pronouns without clear referent
+        if any(phrase in user_input.lower() for phrase in ["this is", "that's", "it's all"]):
+            if not any(concrete in user_input.lower()
+                       for concrete in ["work", "person", "situation", "problem", "meeting",
+                                        "project", "team", "my", "me", "we", "happening"]):
+                return True
+
+        return False
+
+    def _get_curiosity_response(self, user_input: str, emotional_state: Dict[str, Any]) -> str:
+        """Generate curiosity-first response for vague high-emotion input.
+
+        When someone says "this is bullshit" without context, ask what they mean.
+
+        Args:
+            user_input: The user's message
+            emotional_state: Detected emotional state
+
+        Returns:
+            A curiosity-first response acknowledging emotion but asking for context
+        """
+        tone = emotional_state.get("tone", "frustrated")
+
+        # Tone-specific curiosity responses
+        curiosity_responses = {
+            "frustrated": [
+                "What's getting to you?",
+                "I feel that. What's the main thing?",
+                "Yeah, talk to me. What's going on?",
+                "That frustration is clear. What's at the core?",
+                "What's the most frustrating part?",
+                "That's intense. Tell me what's behind it.",
+                "Yeah? What's fueling that?",
+                "Oh yeah? What's got you heated?",
+            ],
+            "anxious": [
+                "What's worrying you most?",
+                "I hear the stress. What's the pressure about?",
+                "That's real tension. What's driving it?",
+                "What feels most fragile right now?",
+                "Talk to me. What's the concern?",
+            ],
+            "angry": [
+                "Oh yeah? What's got you heated?",
+                "That's real. What happened?",
+                "I hear the anger. What's going on?",
+                "That's intense. Tell me what's behind it.",
+                "Yeah? What's fueling that?",
+            ],
+            "sad": [
+                "That sounds heavy. What's underneath it?",
+                "I hear the sadness. What's the loss?",
+                "What's hurting?",
+                "That pain is real. What's at the core?",
+                "What are you grieving?",
+            ],
+            "excited": [
+                "Tell me more! What's the story?",
+                "I love the energy. What's happening?",
+                "What's got you so animated?",
+            ],
+        }
+
+        import random
+        responses = curiosity_responses.get(tone, [
+            "Tell me more. What's happening?",
+            "I'm listening. What's going on?",
+            "Help me understand.",
+            "What do you mean?",
+        ])
+
+        return random.choice(responses)
 
 
 # Convenience function for integrating into existing code
