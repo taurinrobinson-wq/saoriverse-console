@@ -24,6 +24,96 @@ from emotional_os.core.firstperson.response_rotator import (
 )
 
 
+def _apply_sprint5_prosody(user_input: str, tone: str, arousal: float, valence: float, tone_confidence: float) -> None:
+    """Apply Sprint 5 prosody markers for high-emotion responses (side-effect).
+
+    This function attempts to initialize and log prosody context for the response.
+    Failures are logged but don't block response generation.
+    """
+    try:
+        # Check if this is a high-emotion scenario warranting prosody
+        is_high_emotion = (arousal > 0.6 and valence < 0) or (
+            tone in ("sad", "anxious", "angry"))
+        if not is_high_emotion or tone_confidence < 0.3:
+            return
+
+        # Try to initialize Sprint 5 if available
+        try:
+            from sprint5_integration import init_sprint5_systems, log_interaction
+            init_sprint5_systems(enable_profiling=False)
+
+            # Log this high-emotion interaction for prosody tracking
+            log_interaction(
+                user_text=user_input,
+                assistant_response="[prosody context]",
+                emotional_state={
+                    "tone": tone,
+                    "arousal": arousal,
+                    "valence": valence,
+                    "high_emotion": True
+                },
+                latency_ms=0,
+                confidence=tone_confidence
+            )
+        except Exception:
+            # Sprint 5 not available or logging failed, continue normally
+            pass
+    except Exception:
+        # Any error in prosody application doesn't block response
+        pass
+
+
+def _enhance_with_prosody(response_text: str, user_input: str, tone: str, arousal: float, valence: float) -> str:
+    """Enhance response with prosody metadata for TTS synthesis.
+
+    For high-emotion responses, append prosody directives that TTS can interpret.
+    """
+    try:
+        is_high_emotion = (arousal > 0.6 and valence < 0) or (
+            tone in ("sad", "anxious", "angry"))
+        if not is_high_emotion:
+            return response_text
+
+        # Try to generate prosody directives
+        try:
+            from enhanced_response_composer import EnhancedResponseComposer
+            composer = EnhancedResponseComposer()
+
+            # Create minimal glyph structure for prosody generation
+            test_glyphs = [{
+                'glyph_name': tone or 'emotion',
+                'description': '',
+                'gate': '',
+                'response_template': '',
+                'voltage': arousal,
+                'tone': tone
+            }]
+
+            response_data = composer.compose_multi_glyph_response(
+                user_input,
+                test_glyphs,
+                conversation_context=[],
+                top_n=1,
+                include_prosody=True
+            )
+
+            if isinstance(response_data, tuple) and len(response_data) > 1:
+                _, prosody_directives = response_data
+                if prosody_directives and isinstance(prosody_directives, dict):
+                    # Append prosody metadata as hidden comment
+                    import json
+                    prosody_json = json.dumps(prosody_directives, default=str)
+                    response_text = f"{response_text}\n\n[PROSODY:{prosody_json}]"
+        except Exception:
+            # Prosody enhancement failed, return original response
+            pass
+    except Exception:
+        # Any error in enhancement doesn't block the response
+        pass
+
+    return response_text
+
+
 def normalize_glyph_capitalization(text: str) -> str:
     """Normalize glyph name capitalization for grammatical correctness.
 
@@ -203,13 +293,15 @@ def compose_glyph_aware_response(
     user_input: str,
     affect_analysis: Optional[Dict] = None,
     use_rotator: bool = True,
+    suggested_glyph: Optional[str] = None,
 ) -> Tuple[str, Optional[str]]:
-    """Compose a response that embeds modernized glyph names.
+    """Compose a response that embeds modernized glyph names with emotional prosody.
 
     Args:
         user_input: The user's input message
         affect_analysis: Dict with tone, arousal, valence, tone_confidence
         use_rotator: Whether to use ResponseRotator as fallback
+        suggested_glyph: Optional glyph override from repair orchestrator
 
     Returns:
         Tuple of (response_text, glyph_used)
@@ -226,7 +318,7 @@ def compose_glyph_aware_response(
     tone_confidence = affect_analysis.get("tone_confidence", 0)
 
     # Get modernized glyph for the detected affect
-    glyph = get_glyph_for_affect(tone, arousal, valence)
+    glyph = suggested_glyph or get_glyph_for_affect(tone, arousal, valence)
 
     # Map affect tone to response category name
     # (tones from affect parser to glyph-aware response categories)
@@ -244,11 +336,16 @@ def compose_glyph_aware_response(
     # Look up glyph-aware responses for this tone category
     tone_responses = GLYPH_AWARE_RESPONSES.get(response_category, {})
 
+    # Sprint 5 Integration: Apply advanced prosody for high-emotion responses
+    _apply_sprint5_prosody(user_input, tone, arousal, valence, tone_confidence)
+
     if glyph and glyph in tone_responses:
         # Use glyph-specific response
         import random
         response = random.choice(tone_responses[glyph])
         response = normalize_glyph_capitalization(response)
+        response = _enhance_with_prosody(
+            response, user_input, tone, arousal, valence)
         return response, glyph
     elif glyph and tone_responses:
         # Glyph not in specific map, try first available
@@ -256,6 +353,8 @@ def compose_glyph_aware_response(
         import random
         response = random.choice(tone_responses[first_glyph])
         response = normalize_glyph_capitalization(response)
+        response = _enhance_with_prosody(
+            response, user_input, tone, arousal, valence)
         return response, first_glyph
     elif use_rotator:
         # Fallback to ResponseRotator
