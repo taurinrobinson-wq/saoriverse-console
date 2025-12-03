@@ -76,6 +76,12 @@ except Exception:
         initial_sidebar_state="expanded",
     )
 
+# Add workspace root to Python path to enable imports from emotional_os and other modules
+# This is necessary when running from core/ directory
+_workspace_root = str(Path(__file__).parent.parent)
+if _workspace_root not in sys.path:
+    sys.path.insert(0, _workspace_root)
+
 # Initialize persisted reward model for feedback-driven adaptation.
 # This keeps learned weights on disk so Streamlit UI and the FastAPI feedback
 # endpoint converge on the same persisted state (weights file path).

@@ -19,12 +19,12 @@ from emotional_os.core.firstperson.repair_orchestrator import (
     RepairOrchestrator,
     GlyphCompositionContext,
 )
-from phase_modulator import detect_phase
-from relational_memory import RelationalMemoryCapsule, store_capsule
-from response_adapter import generate_response_from_glyphs, translate_emotional_response
-from response_selector import select_first_turn_response
-from symbolic_tagger import tag_input
-from tone_adapters import generate_archetypal_response, generate_initiatory_response
+from core.phase_modulator import detect_phase
+from core.relational_memory import RelationalMemoryCapsule, store_capsule
+from core.response_adapter import generate_response_from_glyphs, translate_emotional_response
+from core.response_selector import select_first_turn_response
+from core.symbolic_tagger import tag_input
+from core.tone_adapters import generate_archetypal_response, generate_initiatory_response
 
 # Singleton trace instance for this process
 _clarify_trace = ClarificationTrace()
