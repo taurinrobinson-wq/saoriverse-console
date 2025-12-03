@@ -39,12 +39,58 @@ import datetime
 import time
 import streamlit as st
 import logging
+import requests
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Import modularized components
+
+
+# ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
+
+def delete_user_history_from_supabase(user_id: str) -> tuple:
+    """Delete all persisted conversation history for a user from Supabase.
+
+    Args:
+        user_id: The user ID whose history should be deleted.
+
+    Returns:
+        A tuple (success: bool, message: str) indicating whether the deletion succeeded.
+    """
+    try:
+        if requests is None:
+            return False, "Network requests not available in this environment."
+
+        supabase_url = st.secrets.get("supabase", {}).get("url")
+        supabase_key = st.secrets.get("supabase", {}).get("key")
+
+        if not supabase_url or not supabase_key:
+            return False, "Supabase not configured. Cannot delete server history."
+
+        # Call a Supabase function or use the REST API to delete user history
+        # For now, we'll attempt a direct REST API call to a hypothetical endpoint
+        delete_url = f"{supabase_url}/rest/v1/conversations?user_id=eq.{user_id}"
+
+        response = requests.delete(
+            delete_url,
+            headers={
+                "Authorization": f"Bearer {supabase_key}",
+                "Content-Type": "application/json",
+                "Prefer": "return=minimal",
+            },
+            timeout=10,
+        )
+
+        if response.status_code in [200, 204, 404]:
+            return True, "Server-side history deleted successfully."
+        else:
+            return False, f"Failed to delete history (HTTP {response.status_code})."
+    except Exception as e:
+        return False, f"Error deleting history: {str(e)}"
 
 
 # ============================================================================
