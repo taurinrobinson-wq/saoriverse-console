@@ -20,40 +20,40 @@ except Exception:
     _have_rapidfuzz = False
 
 POSITIVE_TEMPLATES = [
-    "That sounds meaningful — what was it like for you?",
-    "That seems wonderful — can you share more about how it felt?",
-    "I'm glad you experienced that — tell me more.",
+    "That sounds meaningful, what was it like for you?",
+    "That seems wonderful, can you share more about how it felt?",
+    "I'm glad you experienced that, tell me more.",
 ]
 
 DIFFICULT_TEMPLATES = [
-    "That sounds heavy — I'm here to listen. Can you tell me more about that?",
-    "That sounds heavy — I'm here to listen. What about that feels most present for you?",
-    "That sounds heavy — I'm here to listen. Can you share more about what's hardest right now?",
+    "That sounds heavy, I'm here to listen. Can you tell me more about that?",
+    "That sounds heavy, I'm here to listen. What about that feels most present for you?",
+    "That sounds heavy, I'm here to listen. Can you share more about what's hardest right now?",
     "Take your time, it sounds like a lot. Would you like to hold with that and tell me more?",
-    "I hear the weight in that — what about it feels most important right now?",
+    "I hear the weight in that, what about it feels most important right now?",
 ]
 
 AMBIGUOUS_TEMPLATES = [
     "I'm here to listen. Can you tell me more?",
-    "That seems important — what's been happening? Can you tell me more?",
+    "That seems important, what's been happening? Can you tell me more?",
     "Can you share a bit more detail? Tell me more about that.",
-    "Tell me more about that — what about it stands out? I'm here to listen.",
-    "What about that — can you tell me more? Please share any detail you notice.",
+    "Tell me more about that, what about it stands out? I'm here to listen.",
+    "What about that, can you tell me more? Please share any detail you notice.",
 ]
 
 SILENCE_TEMPLATES = [
     "I'm here to listen. What has he been silent about?",
-    "Silence can mean many things — what kind of silence have you noticed?",
+    "Silence can mean many things, what kind of silence have you noticed?",
 ]
 
 OVERWHELM_TEMPLATES = [
-    "Take your time — it sounds like a lot. Do you want to talk through what has changed recently?",
-    "That seems overwhelming — what part feels hardest to hold right now?",
+    "Take your time, it sounds like a lot. Do you want to talk through what has changed recently?",
+    "That seems overwhelming, what part feels hardest to hold right now?",
 ]
 
 LOSS_TEMPLATES = [
-    "That sounds painful — what feels hardest right now?",
-    "I hear the grief in that — what do you want to share?",
+    "That sounds painful, what feels hardest right now?",
+    "I hear the grief in that, what do you want to share?",
 ]
 
 

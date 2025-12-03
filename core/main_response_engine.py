@@ -120,7 +120,7 @@ def process_user_input(user_input: str, context: Optional[Dict] = None) -> str:
             rowid = ds.get("rowid")
             if needs_conf and inferred:
                 # Short confirmation prompt to reduce verbosity
-                return f"Thanks — did you mean '{inferred}'?"
+                return f"Thanks,did you mean '{inferred}'?"
             # Otherwise acknowledge the clarification succinctly
             # Keep legacy phrasing expected by integration tests
             prefix = "Thanks for clarifying"
