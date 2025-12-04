@@ -81,6 +81,17 @@ from .journal_center import (
     render_journal_center,
 )
 
+# Audio (voice input/output)
+from .audio_ui import (
+    render_voice_mode_toggle,
+    render_audio_recorder,
+    render_audio_playback,
+    render_voice_chat_interface,
+    process_audio_input,
+    synthesize_response_audio,
+    initialize_voice_session,
+)
+
 __all__ = [
     # Session
     "initialize_session_state",
@@ -128,4 +139,12 @@ __all__ = [
     "handle_dynamic_evolution",
     # Journal
     "render_journal_center",
+    # Audio/Voice
+    "render_voice_mode_toggle",
+    "render_audio_recorder",
+    "render_audio_playback",
+    "render_voice_chat_interface",
+    "process_audio_input",
+    "synthesize_response_audio",
+    "initialize_voice_session",
 ]

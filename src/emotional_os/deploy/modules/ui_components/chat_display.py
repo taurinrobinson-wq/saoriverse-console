@@ -162,6 +162,36 @@ def display_assistant_message(response: str) -> st.container:
     container = st.chat_message("assistant")
     with container:
         st.write(response)
+        
+        # Synthesize audio if voice mode is enabled
+        if st.session_state.get("voice_mode_enabled"):
+            try:
+                from .audio_ui import synthesize_response_audio, render_audio_playback
+                from .glyph_handler import get_best_glyph
+                from .response_handler import get_debug_info
+                
+                # Get glyph info for prosody guidance
+                debug_info = get_debug_info()
+                glyphs = debug_info.get("glyphs", [])
+                best_glyph = get_best_glyph(glyphs) if glyphs else None
+                glyph_name = best_glyph.get("glyph_name", "") if best_glyph else ""
+                
+                # Synthesize audio
+                audio_bytes = synthesize_response_audio(
+                    response,
+                    glyph_name=glyph_name,
+                    voice="Default",
+                    speed=1.0
+                )
+                
+                if audio_bytes:
+                    render_audio_playback(audio_bytes, label="🔊 Listen to response")
+                    st.session_state["last_audio_output"] = audio_bytes
+            except Exception as e:
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.debug(f"Audio synthesis error: {e}")
+    
     return container
 
 
