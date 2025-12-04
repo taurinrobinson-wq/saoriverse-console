@@ -1127,6 +1127,8 @@ def generate_contextual_response(
         conversation_context=conversation_context,
     )
 
+    logger.info(f"generate_contextual_response: input='{input_text[:50]}...' -> composed='{composed[:100] if composed else 'EMPTY'}'")
+
     if composed:
         # Prepend relational acknowledgment if present
         if relational_prefix:
@@ -1137,6 +1139,7 @@ def generate_contextual_response(
     base = "I'm here with you. What you're experiencing matters, and I'm listening."
     if relational_prefix:
         base = f"{relational_prefix} {base}"
+    logger.info(f"generate_contextual_response: Using ultimate fallback: '{base[:100]}'")
     return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
 
