@@ -2,21 +2,22 @@
 
 ## What You've Built (In Plain Language)
 
-You've created an **emotional intelligence system** that works like a deeply empathetic listener who never gets tired, never forgets what matters to you, and never exposes what you share.
+You've created an **emotional intelligence system** that works like a deeply empathetic listener who never gets tired, never forgets what matters to you, never exposes what you share, AND can actually speak back with emotional authenticity.
 
 ### The Core Problem It Solves
 
 Most AI systems designed to help with emotional support have a choice to make:
 1. **Be powerful but invasive** (reads every detail, trains on your data, exposes you)
 2. **Be private but generic** (works offline but feels robotic and repetitive)
-3. **Be expensive** (require human staff, unavailable at 3 AM)
+3. **Be text-only** (excludes people who can't type or prefer voice)
+4. **Be expensive** (require human staff, unavailable at 3 AM, or cost $0.01-0.05 per response)
 
-Your system does all three well—powerful, private, AND scalable.
+Your system does all four well—powerful, private, multimodal (text + voice + face-ready), AND scalable with zero per-user costs.
 
 ### How It Works (Simple Version)
 
 ```
-User's emotional experience
+User's emotional experience (text or voice)
      ↓
 Your system recognizes emotional pattern (the "glyph")
      ↓
@@ -24,14 +25,18 @@ System learns what helps THIS person
      ↓
 System generates thoughtful response (not templated)
      ↓
-User feels genuinely understood
+System plans how to SAY it (emotional tone in voice)
+     ↓
+System speaks back with authentic emotion
+     ↓
+User feels genuinely understood AND supported
      ↓
 Data stays private (never sent anywhere unless you approve)
 ```
 
-## The Innovation That Changes Everything
+## The Innovations That Change Everything
 
-### Response Generation Without Templates
+### Innovation #1: Response Generation Without Templates
 
 Most emotional support systems work like this:
 - User says something sad
@@ -47,7 +52,35 @@ Your system works differently:
 - Alternates between questions, reflections, and affirmations (not always asking "how does that make you feel?")
 - User feels genuinely seen
 
-### Privacy as Core Feature (Not Afterthought)
+### Innovation #2: Voice That Sounds Emotionally Authentic
+
+Most text-to-speech systems sound robotic because they always use the same tone.
+
+Your system:
+1. Understands their emotional state (the glyph)
+2. Plans what the voice should sound like:
+   - Calm person? Slower, lower pitch
+   - Excited person? Faster, higher pitch
+   - Uncertain? Questioning tone at the end of sentences
+3. Synthesizes the response WITH that emotional tone
+4. Result: Voice that feels genuinely present, not robotic
+
+**Real Example**:
+```
+Situation: Person says "Maybe we could try talking?"
+         (They sound vulnerable and uncertain)
+
+Regular TTS: "Maybe we could try talking" (neutral, flat tone)
+Result: Feels dismissive, doesn't honor the vulnerability
+
+Your system:
+├─ Recognizes: Vulnerable + uncertain emotional state
+├─ Plans voice: Slightly slower, lower pitch, pause after "try"
+├─ Synthesizes: "Maybe... we could try... talking?"
+└─ Result: Feels like I'm being heard, honored, supported
+```
+
+### Innovation #3: Privacy as Core Feature (Not Afterthought)
 
 Your system converts emotional content to symbolic representations. Think of it like this:
 
@@ -62,10 +95,19 @@ Result: System flags for concern, but the *words* stay private
 
 Users share more deeply when they know their words aren't being read by 100 people.
 
+### Innovation #4: Accessibility Through Voice
+
+Not everyone can type. Your voice interface enables:
+- **Blind users**: Can use the system without screen readers
+- **Motor disabilities**: No typing required
+- **Dyslexia**: Hearing responses is easier than reading
+- **Anxiety-driven typing blocks**: Some people can speak but can't write
+- **Crisis situations**: People in crisis can speak faster than type
+
 ## Why Companies Will Pay For This
 
 ### 1. **Immediate ROI**
-- Current support cost: $5-15 per customer interaction
+- Current support cost: $5-15 per customer interaction (human or API)
 - Your system: Costs drop to $0.10-1.00 per interaction once deployed
 - Savings: 90% reduction in support costs
 - ROI: 100x within first year
