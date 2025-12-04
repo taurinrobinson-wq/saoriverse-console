@@ -73,7 +73,7 @@ def _render_demo_sidebar():
 
         # Quick demo entry if available
         try:
-            from .auth import SaoynxAuthentication
+            from ..auth import SaoynxAuthentication
             auth = SaoynxAuthentication()
             if hasattr(auth, "quick_login_bypass"):
                 if st.button("Continue in demo", key="sidebar_continue_demo"):
@@ -120,7 +120,7 @@ def _render_authenticated_sidebar():
 
         # Consent settings
         try:
-            from emotional_os.deploy.modules.consent_ui import render_consent_settings_panel
+            from ..consent_ui import render_consent_settings_panel
             render_consent_settings_panel()
         except ImportError:
             pass
@@ -139,7 +139,7 @@ def _render_authenticated_sidebar():
 def _render_conversation_list():
     """Render list of previous conversations."""
     try:
-        from emotional_os.deploy.modules.conversation_manager import (
+        from ..conversation_manager import (
             load_all_conversations_to_sidebar,
         )
 
@@ -186,10 +186,11 @@ def _render_auth_expanders():
         if st.session_state.get("sidebar_show_login"):
             with st.expander("Sign in", expanded=True):
                 try:
-                    from .auth import SaoynxAuthentication
+                    from ..auth import SaoynxAuthentication
                     auth = SaoynxAuthentication()
                     auth.render_login_form(in_sidebar=True)
-                except Exception:
+                except Exception as e:
+                    logger.debug(f"Login form error: {e}")
                     st.error("Authentication subsystem unavailable")
 
         if st.session_state.get("sidebar_show_register"):
@@ -204,10 +205,11 @@ def _render_auth_expanders():
                     st.markdown("**Create an Account**")
 
                 try:
-                    from .auth import SaoynxAuthentication
+                    from ..auth import SaoynxAuthentication
                     auth = SaoynxAuthentication()
                     auth.render_register_form(in_sidebar=True)
-                except Exception:
+                except Exception as e:
+                    logger.debug(f"Register form error: {e}")
                     st.error("Authentication subsystem unavailable")
 
     except Exception as e:

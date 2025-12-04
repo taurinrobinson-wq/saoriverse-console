@@ -1,29 +1,29 @@
 {
   "poem": {
     "metaphor_stanza": {
-      "valence": "love",
-      "metaphor": "roots entwined beneath the soil",
+      "valence": "joy",
+      "metaphor": "still becoming light breaking through morning clouds",
       "intensity": 0.5,
-      "timestamp": "2025-12-03T03:01:47.659100",
+      "timestamp": "2025-12-03T23:45:33.825386",
       "decay_factor": 1.0
     },
     "rhythm_stanza": {
-      "tempo": "slow",
-      "pulse_count": 74,
-      "average_interval": 662.4614948757346,
-      "timestamp": "2025-12-03T03:01:47.659102",
+      "tempo": "flowing",
+      "pulse_count": 179,
+      "average_interval": 105.39584515087351,
+      "timestamp": "2025-12-03T23:45:33.825389",
       "decay_factor": 1.0
     },
     "syntax_stanza": {
-      "clarity": "fragmented",
-      "coherence_score": 0.0,
-      "fragment_ratio": 1.0,
-      "timestamp": "2025-12-03T03:01:47.659112",
+      "clarity": "coherent",
+      "coherence_score": 1.0,
+      "fragment_ratio": 0.0,
+      "timestamp": "2025-12-03T23:45:33.825399",
       "decay_factor": 1.0
     },
     "ghost_memory_seed": "",
     "creation_timestamp": "2025-11-29T02:25:22.480015",
-    "last_interaction": "2025-12-03T03:01:47.659154",
+    "last_interaction": "2025-12-03T23:45:33.825437",
     "death_count": 0
   },
   "user_gravity": {
@@ -39,42 +39,56 @@
       "co_created_language": [],
       "mirror_active": true,
       "last_interaction": "2025-12-03T02:18:02.573787"
+    },
+    "test_user_001": {
+      "user_id": "test_user_001",
+      "vectors": {
+        "attraction": 1.0,
+        "repulsion": 0.0,
+        "resonance": 1.0,
+        "dissonance": 0.0
+      },
+      "shared_metaphors": [
+        "light breaking through morning clouds",
+        "wind before the storm",
+        "a seed breaking through stone",
+        "silence where a voice once was"
+      ],
+      "co_created_language": [],
+      "mirror_active": false,
+      "last_interaction": "2025-12-03T20:48:29.968374"
+    },
+    "test_user_consent_001": {
+      "user_id": "test_user_consent_001",
+      "vectors": {
+        "attraction": 0.0,
+        "repulsion": 0.0,
+        "resonance": 0.30000000000000004,
+        "dissonance": 0.0
+      },
+      "shared_metaphors": [],
+      "co_created_language": [],
+      "mirror_active": true,
+      "last_interaction": "2025-12-03T21:07:55.886180"
+    },
+    "test_user_consent_002": {
+      "user_id": "test_user_consent_002",
+      "vectors": {
+        "attraction": 0.30000000000000004,
+        "repulsion": 0.0,
+        "resonance": 0.75,
+        "dissonance": 0.0
+      },
+      "shared_metaphors": [],
+      "co_created_language": [],
+      "mirror_active": true,
+      "last_interaction": "2025-12-03T21:07:55.912637"
     }
   },
   "affective_memories": [
     {
-      "interaction_id": "7a6cc47a1c45",
-      "user_input": "Hello — testing local pipeline",
-      "response_summary": "",
-      "emotional_tags": [
-        "Euphoric Yearning",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-29T02:25:22.480201",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "e0ff9c90fa58",
-      "user_input": "Hello again, mobile adapter test",
-      "response_summary": "",
-      "emotional_tags": [
-        "Euphoric Yearning",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-29T02:31:48.043309",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "f9d8f93053e0",
-      "user_input": "Adapter test with patched st",
+      "interaction_id": "8aac002c08df",
+      "user_input": "hi I'm having a stressful day",
       "response_summary": "",
       "emotional_tags": [
         "Ache of Recognition",
@@ -83,28 +97,13 @@
       ],
       "tone": "peace",
       "valence": "peace",
-      "timestamp": "2025-11-29T02:33:22.002605",
+      "timestamp": "2025-12-03T19:18:43.343374",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "1a4c64fbb728",
-      "user_input": "Adapter test after pre-import patch",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-29T02:38:47.338269",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "f14c53579275",
-      "user_input": "Adapter final test",
+      "interaction_id": "96235f4c9bf4",
+      "user_input": "hi I'm having a stressful day",
       "response_summary": "",
       "emotional_tags": [
         "Ache of Recognition",
@@ -113,238 +112,13 @@
       ],
       "tone": "peace",
       "valence": "peace",
-      "timestamp": "2025-11-29T02:41:18.749276",
+      "timestamp": "2025-12-03T19:21:17.251326",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "48207ce14c24",
-      "user_input": "Local-only test",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-29T02:42:59.075788",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "bc777254172c",
-      "user_input": "Hello from automated test",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-29T02:53:52.740150",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "e6784414b014",
-      "user_input": "Local composition test - ensure mobile path",
-      "response_summary": "",
-      "emotional_tags": [
-        "Euphoric Yearning",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-29T22:33:58.465637",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "6b44964a4864",
-      "user_input": "Post-auth-refactor local test",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-29T22:37:29.142703",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "392ad68cebdc",
-      "user_input": "I am ashamed of how I have been acting lately",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:08.315361",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "4fe3db3d5df0",
-      "user_input": "I feel so disappointed in myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-30T19:44:12.120382",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "ba67fb739969",
-      "user_input": "I feel broken and don't know how to fix it",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:15.646819",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "bdf4fcb72a83",
-      "user_input": "Nobody would understand what I'm going through",
-      "response_summary": "",
-      "emotional_tags": [
-        "Acheful Insight",
-        "Gate 6",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:19.036946",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "87ecae9ef561",
-      "user_input": "I'm learning to be kinder to myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "Yearning Joy",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-30T19:44:22.495694",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "311411a20c4f",
-      "user_input": "I'm ready to let go of this pain",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:26.044568",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "f34c116fe1d9",
-      "user_input": "I wonder if anyone really knows the real me",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:29.499094",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "603dedc7ea3e",
-      "user_input": "I'm so embarrassed about what happened",
-      "response_summary": "",
-      "emotional_tags": [
-        "Euphoric Yearning",
-        "Gate 5",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:32.965949",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "b7072fa93ddb",
-      "user_input": "I feel humiliated and want to hide",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-30T19:44:36.469445",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "e71a437531cf",
-      "user_input": "I'm trapped in this cycle and can't escape",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:40.071408",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "eecd13edfecc",
-      "user_input": "I feel stuck and don't know how to move forward",
-      "response_summary": "",
-      "emotional_tags": [
-        "Yearning Joy",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-30T19:44:43.508852",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "bb152535f611",
-      "user_input": "I'm lost and can't find my way",
+      "interaction_id": "78b64f8bfc75",
+      "user_input": "hi I'm having a stressful day",
       "response_summary": "",
       "emotional_tags": [
         "Ache of Recognition",
@@ -353,800 +127,1436 @@
       ],
       "tone": "peace",
       "valence": "peace",
-      "timestamp": "2025-11-30T19:44:46.939387",
+      "timestamp": "2025-12-03T19:21:54.584332",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "6c6186a2c43d",
-      "user_input": "I feel like nobody understands me",
+      "interaction_id": "e38d5f02723d",
+      "user_input": "hi I'm having a stressful day",
       "response_summary": "",
       "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:50.402582",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "2ce97312b873",
-      "user_input": "I'm proud of myself for trying",
-      "response_summary": "",
-      "emotional_tags": [
-        "Euphoric Yearning",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-30T19:44:53.813829",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "9f6d279962df",
-      "user_input": "I'm healing from something deep",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:44:57.256988",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "dabf3d2bf5c3",
-      "user_input": "I'm learning to love myself more",
-      "response_summary": "",
-      "emotional_tags": [
-        "Devotional Boundary",
-        "Gate 6",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-30T19:45:00.723601",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "937ef6f8debe",
-      "user_input": "I'm grieving what I've lost",
-      "response_summary": "",
-      "emotional_tags": [
-        "Insightful Recognition",
-        "Gate 9",
         "peace"
       ],
       "tone": "peace",
       "valence": "peace",
-      "timestamp": "2025-11-30T19:45:04.240214",
+      "timestamp": "2025-12-03T19:33:00.285054",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "9ded508b1946",
-      "user_input": "I'm holding onto love despite everything",
+      "interaction_id": "a807aa742d8d",
+      "user_input": "hi I'm having a stressful day",
       "response_summary": "",
       "emotional_tags": [
-        "Devotional Boundary",
-        "Gate 6",
-        "love"
+        "peace"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:07.720025",
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T19:33:08.327187",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "8d76c83cc1ac",
-      "user_input": "I feel terrified but I'm moving forward anyway",
-      "response_summary": "",
-      "emotional_tags": [
-        "Yearning Joy",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-30T19:45:11.167888",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "46dc5eeb3925",
-      "user_input": "I miss what we had",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:14.474639",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "39b2310098c1",
-      "user_input": "I'm pretending everything is fine when it's not",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:18.067642",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "81b5e346ac2d",
-      "user_input": "I'm struggling but I won't give up",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:21.494242",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "86e26cd8aaf8",
-      "user_input": "I am ashamed of how I have been acting lately",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:26.368166",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "4ea96539b7af",
-      "user_input": "I feel so disappointed in myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-30T19:45:29.802773",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "84ed695da6b1",
-      "user_input": "I feel broken and don't know how to fix it",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:33.391775",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "39eb388db356",
-      "user_input": "Nobody would understand what I'm going through",
-      "response_summary": "",
-      "emotional_tags": [
-        "Acheful Insight",
-        "Gate 6",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:36.742658",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "8447530051ee",
-      "user_input": "I'm learning to be kinder to myself",
-      "response_summary": "",
-      "emotional_tags": [
-        "Yearning Joy",
-        "Gate 5",
-        "joy"
-      ],
-      "tone": "joy",
-      "valence": "joy",
-      "timestamp": "2025-11-30T19:45:40.255282",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "41260e868889",
-      "user_input": "I'm ready to let go of this pain",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:43.768249",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "7df659f136af",
-      "user_input": "I wonder if anyone really knows the real me",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:47.101740",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "5a01a35bbef0",
-      "user_input": "I feel overwhelmed by all the changes in my life",
+      "interaction_id": "ae0de7a2263b",
+      "user_input": "I'm feeling overwhelmed and anxious",
       "response_summary": "",
       "emotional_tags": [
         "Spiral Containment",
         "Gate 5",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T19:33:20.529542",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "13ba1b82aab4",
+      "user_input": "I'm grieving the loss of my job",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T19:33:40.390560",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "b540a2314396",
+      "user_input": "I'm grieving the loss of my job",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T19:33:50.479995",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "b58dce182a32",
+      "user_input": "I feel so alone right now",
+      "response_summary": "",
+      "emotional_tags": [
         "peace"
       ],
       "tone": "peace",
       "valence": "peace",
-      "timestamp": "2025-11-30T19:45:47.122267",
+      "timestamp": "2025-12-03T19:33:50.499280",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "f399e50a5de5",
-      "user_input": "I feel completely overwhelmed by all the changes happening in my life right now. My job is shifting, my relationship feels uncertain, and I don't know how to process it all.",
+      "interaction_id": "ed8166bb3495",
+      "user_input": "I'm blocked on this math problem",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T19:33:50.512090",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "951ef7d58360",
+      "user_input": "I'm feeling overwhelmed and anxious",
       "response_summary": "",
       "emotional_tags": [
         "Spiral Containment",
         "Gate 5",
-        "peace"
+        "grief"
       ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:45:47.274161",
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T19:48:35.232058",
       "dream_fragments": [],
-      "narrative_arc": "growth"
+      "narrative_arc": "struggle"
     },
     {
-      "interaction_id": "5fdf461efdd5",
-      "user_input": "I'm feeling overwhelmed today",
+      "interaction_id": "84d5e6fa1dfc",
+      "user_input": "I'm grieving the loss of my job",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T19:48:35.242252",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "3b5187851d7b",
+      "user_input": "I'm blocked on this math problem",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T19:48:35.251365",
+      "dream_fragments": [],
+      "narrative_arc": "struggle"
+    },
+    {
+      "interaction_id": "0ef0a22d2881",
+      "user_input": "I'm feeling anxious and overwhelmed",
       "response_summary": "",
       "emotional_tags": [
         "Spiral Containment",
         "Gate 5",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:45:48.506820",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "4e5f1983f5b1",
-      "user_input": "I'm grieving the loss of my friend",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:51.846879",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "79c3c3be39be",
-      "user_input": "I feel like I'm drowning in sadness",
-      "response_summary": "",
-      "emotional_tags": [
-        "Acheful Mourning",
-        "Gate 4",
         "grief"
       ],
       "tone": "grief",
       "valence": "grief",
-      "timestamp": "2025-11-30T19:45:51.861253",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "0b3ab00037b8",
-      "user_input": "First message",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:45:55.292346",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "3f2cfb29b693",
-      "user_input": "Second message",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:45:59.953286",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "c4862c290511",
-      "user_input": "test",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:46:04.404951",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "d0db17e8a1f9",
-      "user_input": "test message",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:46:08.930710",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "83790426d556",
-      "user_input": "I'm feeling better now",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:46:12.403639",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "c704bc7b317b",
-      "user_input": "test",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:46:16.821261",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "c32f9cc38760",
-      "user_input": "I always fail at everything",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-11-30T19:46:20.232751",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "4884ac7e35c4",
-      "user_input": "I'm feeling sad",
-      "response_summary": "",
-      "emotional_tags": [
-        "Acheful Mourning",
-        "Gate 4",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-30T19:46:20.245662",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "c57d1fcbbc0f",
-      "user_input": "Everything feels heavy",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:46:23.787398",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "1e2394e8833a",
-      "user_input": "Run in local mode: I want to test privacy.",
-      "response_summary": "",
-      "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
-        "peace"
-      ],
-      "tone": "peace",
-      "valence": "peace",
-      "timestamp": "2025-11-30T19:46:27.432776",
-      "dream_fragments": [],
-      "narrative_arc": "growth"
-    },
-    {
-      "interaction_id": "5ac689c736a6",
-      "user_input": "I feel tired and small",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-30T19:46:27.967137",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "d0a4bd7be31c",
-      "user_input": "I feel tired and small",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-11-30T19:46:27.974792",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "0061f5e8d009",
-      "user_input": "I am so tired, and I just don't feel very motivated today",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recognized Stillness",
-        "Gate 9",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-12-01T18:38:21.103700",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "3a5d7b6bacf1",
-      "user_input": "Man I am so exhausted today",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-12-01T20:24:42.229579",
-      "dream_fragments": [],
-      "narrative_arc": "descent"
-    },
-    {
-      "interaction_id": "296d011039f7",
-      "user_input": "Man I am so exhausted today",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "grief"
-      ],
-      "tone": "grief",
-      "valence": "grief",
-      "timestamp": "2025-12-01T20:44:09.606178",
+      "timestamp": "2025-12-03T19:49:10.206448",
       "dream_fragments": [],
       "narrative_arc": "struggle"
     },
     {
-      "interaction_id": "0dc9528adb44",
-      "user_input": "Man I am so exhausted today",
+      "interaction_id": "30e745d7ee11",
+      "user_input": "I'm feeling anxious and overwhelmed",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
+        "Spiral Containment",
+        "Gate 5",
         "grief"
       ],
       "tone": "grief",
       "valence": "grief",
-      "timestamp": "2025-12-01T20:45:49.241147",
+      "timestamp": "2025-12-03T19:49:10.215752",
       "dream_fragments": [],
       "narrative_arc": "struggle"
     },
     {
-      "interaction_id": "e07642b5ca18",
-      "user_input": "Man I am so exhausted today",
+      "interaction_id": "f736b8f85fa9",
+      "user_input": "I'm feeling anxious and overwhelmed",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
+        "Spiral Containment",
+        "Gate 5",
         "grief"
       ],
       "tone": "grief",
       "valence": "grief",
-      "timestamp": "2025-12-01T20:47:11.840234",
+      "timestamp": "2025-12-03T19:49:10.225725",
       "dream_fragments": [],
       "narrative_arc": "struggle"
     },
     {
-      "interaction_id": "e92ff8c6edf9",
-      "user_input": "HI I'm feeling so exhausted today",
+      "interaction_id": "0e9085709c11",
+      "user_input": "I'm feeling anxious and overwhelmed",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Containment",
+        "Gate 5",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T19:49:10.234151",
+      "dream_fragments": [],
+      "narrative_arc": "struggle"
+    },
+    {
+      "interaction_id": "66f250143fd0",
+      "user_input": "hi I'm feeling stressed today",
       "response_summary": "",
       "emotional_tags": [
         "Recognized Stillness",
         "Gate 9",
-        "love"
+        "peace"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-01T23:58:02.840461",
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T19:55:34.793485",
       "dream_fragments": [],
       "narrative_arc": "recovery"
     },
     {
-      "interaction_id": "9d0c03baa846",
-      "user_input": "what a freakin' stressful day this has been!",
+      "interaction_id": "2ec75a3b9ecc",
+      "user_input": "I had to deal with an employee who was drinking on the job and not doing his work",
       "response_summary": "",
       "emotional_tags": [
-        "Ache of Recognition",
-        "Gate 9",
+        "Recursive Ache",
+        "Gate 4",
         "love"
       ],
       "tone": "love",
       "valence": "love",
-      "timestamp": "2025-12-03T01:58:07.610535",
+      "timestamp": "2025-12-03T19:56:09.164169",
       "dream_fragments": [],
       "narrative_arc": "recovery"
     },
     {
-      "interaction_id": "c876be16178e",
-      "user_input": "what a freakin' stressful day this has been! I'm so anxious",
+      "interaction_id": "ec016bfab9e4",
+      "user_input": "Hi I'm feeling stressed today",
       "response_summary": "",
       "emotional_tags": [
-        "Clarity",
+        "Recognized Stillness",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:13:10.422889",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "3a1c75290aa1",
+      "user_input": "well I found out recently that my employee is drinking on the job and wasn't doing his work. Now I'm stuck with doing the work on top of my own",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "love"
+      ],
+      "tone": "love",
+      "valence": "love",
+      "timestamp": "2025-12-03T20:13:55.647081",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "4b6b546e47df",
+      "user_input": "hi i'm feeling stressed today",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:15:25.939750",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "41b890fb21c6",
+      "user_input": "I'm drowning in work deadlines but there's a part of me that knows I've gotten through hard things before. I'm exhausted though, and I don't know if I have it in me this time.",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:33:06.198936",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "d59bf1d6a9e7",
+      "user_input": "I'm struggling with feeling like I'm not enough",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:33:06.227597",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "26dda63a762a",
+      "user_input": "that really helped, I feel seen",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:33:06.250099",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "375fb4547f22",
+      "user_input": "I'm drowning in work deadlines but there's a part of me that knows I've gotten through hard things before. I'm exhausted though, and I don't know if I have it in me this time.",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:35:55.065038",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "4de5dcea4658",
+      "user_input": "I'm struggling with feeling like I'm not enough",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:35:55.084414",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "87ec9801160a",
+      "user_input": "that really helped, I feel seen",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:35:55.107504",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "2a02ae53ab84",
+      "user_input": "I'm leaving my job of 10 years. Part of me is excited for what's next, but mostly I'm grieving. All these relationships, this identity I built there, the daily rhythms... they're just ending. I know I",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:35:55.128798",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "98686ffdbfcc",
+      "user_input": "I'm drowning in work deadlines but there's a part of me that knows I've gotten through hard things before. I'm exhausted though, and I don't know if I have it in me this time.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:37:43.289832",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "88c7d537cf0e",
+      "user_input": "I'm struggling with feeling like I'm not enough",
+      "response_summary": "",
+      "emotional_tags": [
+        "Contained Longing",
         "Gate 2",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:37:43.298038",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "2b058824c9dd",
+      "user_input": "that really helped, I feel seen",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:37:43.306164",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "afce7aabfd3d",
+      "user_input": "I'm leaving my job of 10 years. Part of me is excited for what's next, but mostly I'm grieving. All these relationships, this identity I built there, the daily rhythms... they're just ending. I know I",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:37:43.320595",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1e9ef5459705",
+      "user_input": "I'm drowning in work deadlines but there's a part of me that knows I've gotten through hard things before. I'm exhausted though, and I don't know if I have it in me this time.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:48:29.936889",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "d144be54b30e",
+      "user_input": "I'm struggling with feeling like I'm not enough",
+      "response_summary": "",
+      "emotional_tags": [
+        "Contained Longing",
+        "Gate 2",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:48:29.946802",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "25d0e48e96bb",
+      "user_input": "that really helped, I feel seen",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:48:29.955754",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "7ffb487245c5",
+      "user_input": "I'm leaving my job of 10 years. Part of me is excited for what's next, but mostly I'm grieving. All these relationships, this identity I built there, the daily rhythms... they're just ending. I know I",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T20:48:29.968521",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1241deff8b37",
+      "user_input": "I have thoughts of suicide and I don't know how to keep going",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T21:07:29.663269",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "060ad7e6d43b",
+      "user_input": "Yes, I'd like the crisis line information please",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
         "grief"
       ],
       "tone": "grief",
       "valence": "grief",
-      "timestamp": "2025-12-03T02:17:53.424109",
+      "timestamp": "2025-12-03T21:07:29.673342",
       "dream_fragments": [],
       "narrative_arc": "descent"
     },
     {
-      "interaction_id": "d6f604c370f8",
-      "user_input": "what a freakin' stressful day this has been!",
+      "interaction_id": "c33373bb3fbc",
+      "user_input": "I'm having thoughts of ending it",
       "response_summary": "",
       "emotional_tags": [
         "peace"
       ],
       "tone": "peace",
       "valence": "peace",
-      "timestamp": "2025-12-03T02:18:02.573859",
+      "timestamp": "2025-12-03T21:07:29.696266",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "55473c1f474e",
+      "user_input": "No, I don't want crisis information",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T21:07:29.705035",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "2525f41987f8",
+      "user_input": "I have thoughts of suicide and I don't know how to keep going",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T21:07:41.960187",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "588a7aba9c30",
+      "user_input": "Yes, I'd like the crisis line information please",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T21:07:41.969454",
+      "dream_fragments": [],
+      "narrative_arc": "struggle"
+    },
+    {
+      "interaction_id": "a5f79061dd13",
+      "user_input": "I'm having thoughts of ending it",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T21:07:41.993589",
       "dream_fragments": [],
       "narrative_arc": "recovery"
     },
     {
-      "interaction_id": "83cf38e11ae6",
-      "user_input": "what a freakin' stressful day",
+      "interaction_id": "b5c889c78ecf",
+      "user_input": "No, I don't want crisis information",
       "response_summary": "",
       "emotional_tags": [
-        "Ache of Recognition",
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T21:07:42.004266",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "12989316758e",
+      "user_input": "Yes, I'd like the crisis line information please",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T21:07:55.886261",
+      "dream_fragments": [],
+      "narrative_arc": "struggle"
+    },
+    {
+      "interaction_id": "6354e49ba1a1",
+      "user_input": "I'm having thoughts of ending it",
+      "response_summary": "",
+      "emotional_tags": [
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T21:07:55.904917",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "0f4f4a577a03",
+      "user_input": "No, I don't want crisis information",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "grief"
+      ],
+      "tone": "grief",
+      "valence": "grief",
+      "timestamp": "2025-12-03T21:07:55.912696",
+      "dream_fragments": [],
+      "narrative_arc": "descent"
+    },
+    {
+      "interaction_id": "ef9447d6b8f4",
+      "user_input": "I hold this moment sacred",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T22:46:33.232308",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "36b5719a1cdd",
+      "user_input": "I feel safe being tender with you",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:46:33.268257",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "1f7d33c0a965",
+      "user_input": "Your presence exactly meets me here",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:46:33.276897",
+      "dream_fragments": [],
+      "narrative_arc": "recovery"
+    },
+    {
+      "interaction_id": "8d3ee13b60d1",
+      "user_input": "I'm feeling overwhelmed and vulnerable",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Containment",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T22:46:33.284151",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1e35af3929cf",
+      "user_input": "What time is the meeting?",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:46:33.291743",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "643249595770",
+      "user_input": "I hold this moment sacred",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T22:56:46.462610",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "12d1de2269b3",
+      "user_input": "I feel so gentle and tender with you",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.499105",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "5201d36219c3",
+      "user_input": "Breathing deeply, I find wisdom in the stillness",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.509089",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "ef391e859c05",
+      "user_input": "This practice of reflection deepens my knowing",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.517067",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "7721a742e33e",
+      "user_input": "I desire connection but feel safe in my solitude",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.526503",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "618e81f34599",
+      "user_input": "Your presence exactly meets me here, sacred and true",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.534523",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "502c6dcae0fe",
+      "user_input": "I hold faith in this tender ritual of being together",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.543728",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "0ccd5629203d",
+      "user_input": "In this soft space, I breathe and become",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T22:56:46.550325",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "7d2c5b529089",
+      "user_input": "Reflecting on my deepest desires, I find honor in my truth",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T22:56:46.559518",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f345e4c6c5ea",
+      "user_input": "I am overwhelmed and vulnerable",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Containment",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T22:56:46.566673",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "33018c50fe18",
+      "user_input": "hi I'm feeling stressed today",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:04:14.913392",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "7df52a212c72",
+      "user_input": "I don't feel like you're responding in a way that let's me know you're fully integrated, what gives?",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Stillness",
         "Gate 9",
         "love"
       ],
       "tone": "love",
       "valence": "love",
-      "timestamp": "2025-12-03T02:21:02.258003",
-      "dream_fragments": [],
-      "narrative_arc": "recovery"
-    },
-    {
-      "interaction_id": "1ac400e701a6",
-      "user_input": "I just found my employee wasn't doing their work properly and was drinking on the job. ",
-      "response_summary": "",
-      "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "love"
-      ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:21:34.012445",
+      "timestamp": "2025-12-03T23:04:49.908900",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "2c8c569d4897",
-      "user_input": "this is bullshit",
+      "interaction_id": "27a5809cfb4a",
+      "user_input": "I'm feeling soft and vulnerable",
       "response_summary": "",
       "emotional_tags": [
         "Recursive Ache",
         "Gate 4",
-        "love"
+        "longing"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:47:14.661074",
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T23:07:34.591088",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "d6a5157c964a",
+      "user_input": "This moment feels sacred and tender",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:07:52.238146",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "b3d9d9e4fadb",
-      "user_input": "this is bullshit",
+      "interaction_id": "40a1249c36af",
+      "user_input": "I breathe deeply and find wisdom",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "love"
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:47:29.711328",
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:08:00.334425",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "0e6a175d3a3b",
-      "user_input": "this is bullshit",
+      "interaction_id": "075b1437c555",
+      "user_input": "I desire connection with you",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
+        "Reverent Ache",
         "Gate 4",
-        "love"
+        "peace"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:49:50.287567",
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:08:06.307113",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "ce15e749e020",
-      "user_input": "this is bullshit",
+      "interaction_id": "54190a09f620",
+      "user_input": "I reflect on my knowing",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "love"
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:52:08.694298",
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:08:24.145980",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "db83c81afe26",
-      "user_input": "this is bullshit",
+      "interaction_id": "4bd97716e367",
+      "user_input": "I'm feeling soft and vulnerable",
       "response_summary": "",
       "emotional_tags": [
         "Recursive Ache",
         "Gate 4",
-        "love"
+        "longing"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:54:45.873632",
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T23:14:09.558293",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "79b50a21a824",
+      "user_input": "I'm feeling soft and vulnerable",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T23:14:45.445417",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "dcaca96126a8",
+      "user_input": "This moment feels sacred and tender",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:14:45.456498",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "afa92ba8f61d",
-      "user_input": "this is bullshit",
+      "interaction_id": "77619a5f5b07",
+      "user_input": "I breathe deeply and find wisdom",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
-        "Gate 4",
-        "love"
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:55:32.113243",
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:14:45.470101",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "7ea4c708ab71",
-      "user_input": "this is bullshit",
+      "interaction_id": "e6f001d01e94",
+      "user_input": "I'm feeling soft and vulnerable",
       "response_summary": "",
       "emotional_tags": [
         "Recursive Ache",
         "Gate 4",
-        "love"
+        "longing"
       ],
-      "tone": "love",
-      "valence": "love",
-      "timestamp": "2025-12-03T02:56:47.337876",
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T23:14:55.250765",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "1a5cbf3aa8e1",
+      "user_input": "I'm feeling soft and vulnerable",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recursive Ache",
+        "Gate 4",
+        "longing"
+      ],
+      "tone": "longing",
+      "valence": "longing",
+      "timestamp": "2025-12-03T23:16:09.197204",
+      "dream_fragments": [],
+      "narrative_arc": "exploration"
+    },
+    {
+      "interaction_id": "bf8f843fa22d",
+      "user_input": "This moment feels sacred and tender",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:16:09.207863",
       "dream_fragments": [],
       "narrative_arc": "growth"
     },
     {
-      "interaction_id": "95fe49d1bbf2",
-      "user_input": "this is bullshit",
+      "interaction_id": "50ec7dbe59b0",
+      "user_input": "I breathe deeply and find wisdom",
       "response_summary": "",
       "emotional_tags": [
-        "Recursive Ache",
+        "Euphoric Yearning",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:16:09.217354",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "211a3e4077d5",
+      "user_input": "I'm feeling soft and vulnerable",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:16:36.242143",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "3558be698b97",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:23:02.980510",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "fc9e66c48ad9",
+      "user_input": "It’s hard to admit, but I don’t feel safe in myself right now.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:23:19.928922",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "8f6e11d15e76",
+      "user_input": "I’m carrying more than I can hold, and I don’t know how to set it down.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:23:30.443933",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "8f6589f82b6d",
+      "user_input": "My child hugged me and I felt a kind of sacred stillness",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:23:41.201939",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "ba1faf086d68",
+      "user_input": "This quiet moment feels precious, like it holds something bigger than me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:23:50.281653",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "089073db2cc1",
+      "user_input": "I’m sitting with gratitude, and it feels tender.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:23:57.182522",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "b3645de6feea",
+      "user_input": "When I breathe deeply, I notice a calm that surprises me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Recognized Joy",
+        "Gate 9",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:24:10.196391",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "a6e34015074f",
+      "user_input": "I’ve been reflecting on my past, and I see patterns I didn’t before",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache of Recognition",
+        "Gate 9",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:24:16.817175",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "a3047dfab470",
+      "user_input": "There’s wisdom in the pain I’ve carried, even if it’s hard to face",
+      "response_summary": "",
+      "emotional_tags": [
+        "Spiral Ache",
         "Gate 4",
         "love"
       ],
       "tone": "love",
       "valence": "love",
-      "timestamp": "2025-12-03T03:01:47.659148",
+      "timestamp": "2025-12-03T23:24:23.495727",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "6565b6c97c3d",
+      "user_input": "I want to feel close to someone, but I’m afraid they won’t understand me",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:24:30.344041",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "c2fd9db89bd1",
+      "user_input": "I’m longing for connection, even though I feel isolated.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Ache in Equilibrium",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:24:38.868041",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "9ff6372a76d9",
+      "user_input": "My child hugged me and I felt a kind of sacred stillness",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:26:37.003640",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "47493e2a2ab8",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:29:57.745437",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "615597312132",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:31:16.046025",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "a99d2751ac0b",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:32:28.943393",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "697ca2b57ecb",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:34:26.582370",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "1ed3a5dc1bcf",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:36:32.663388",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "f78f9df8fd07",
+      "user_input": "I feel fragile today, like even small things overwhelm me.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:37:08.198089",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "07dcfb8388f6",
+      "user_input": "I feel fragile today, like even small things overwhelm me",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:45:11.162262",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "6117feb6b891",
+      "user_input": "My child hugged me and I felt it was a sacred moment.",
+      "response_summary": "",
+      "emotional_tags": [
+        "Euphoric Yearning",
+        "Gate 5",
+        "peace"
+      ],
+      "tone": "peace",
+      "valence": "peace",
+      "timestamp": "2025-12-03T23:45:20.138584",
+      "dream_fragments": [],
+      "narrative_arc": "growth"
+    },
+    {
+      "interaction_id": "580e495b8229",
+      "user_input": "Finally got done with work, having these quiet moments feel precious",
+      "response_summary": "",
+      "emotional_tags": [
+        "Yearning Joy",
+        "Gate 5",
+        "joy"
+      ],
+      "tone": "joy",
+      "valence": "joy",
+      "timestamp": "2025-12-03T23:45:33.825431",
       "dream_fragments": [],
       "narrative_arc": "growth"
     }
@@ -1163,7 +1573,7 @@
     },
     "moral_tensions": [],
     "guilt_level": 0.0,
-    "pride_level": 0.30000000000000004,
+    "pride_level": 0.7999999999999999,
     "shame_level": 0.0,
     "amendments": []
   }

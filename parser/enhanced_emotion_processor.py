@@ -31,7 +31,7 @@ try:
     TextBlobCls = _TextBlob
     TEXTBLOB_AVAILABLE = True
 except Exception as e:
-    logging.warning(f"TextBlob not available: {e}")
+    logging.debug(f"TextBlob not available: {e}")
 
 try:
     import spacy
@@ -40,10 +40,10 @@ try:
         nlp = spacy.load("en_core_web_sm")
         SPACY_AVAILABLE = True
     except Exception as e:
-        logging.warning(f"spaCy model 'en_core_web_sm' not available: {e}")
+        logging.debug(f"spaCy model 'en_core_web_sm' not available: {e}")
         SPACY_AVAILABLE = False
 except Exception as e:
-    logging.warning(f"spaCy not available: {e}")
+    logging.debug(f"spaCy not available: {e}")
 
 # If any of the components are present we consider enhanced NLP available.
 NLP_AVAILABLE = NRC_AVAILABLE or TEXTBLOB_AVAILABLE or SPACY_AVAILABLE

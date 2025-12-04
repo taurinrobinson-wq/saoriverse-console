@@ -41,7 +41,7 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     except Exception as e:
         NLP_STATE["textblob_available"] = False
         NLP_STATE["textblob_exc"] = repr(e)
-        logger.warning("TextBlob not available: %s", e)
+        logger.debug("TextBlob not available: %s", e)
 
     # spaCy and model
     try:
@@ -57,12 +57,12 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
         except Exception as me:
             NLP_STATE["spacy_model_loaded"] = False
             NLP_STATE["spacy_exc"] = repr(me)
-            logger.warning("spaCy model '%s' could not be loaded: %s", model_name, me)
+            logger.debug("spaCy model '%s' could not be loaded: %s", model_name, me)
     except Exception as e:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
         NLP_STATE["spacy_exc"] = repr(e)
-        logger.warning("spaCy not available: %s", e)
+        logger.debug("spaCy not available: %s", e)
 
     # Record python executable for diagnostics (helps ensure Streamlit uses same env)
     NLP_STATE["python_executable"] = sys.executable

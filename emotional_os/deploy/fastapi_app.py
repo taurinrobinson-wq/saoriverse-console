@@ -161,7 +161,6 @@ class FirstPersonAuth:
             return {"valid": False, "error": f"Token validation error: {str(e)}"}
 
     @staticmethod
-    @staticmethod
     async def authenticate_user(username: str, password: str):
         """Authenticate user with Supabase"""
         try:
