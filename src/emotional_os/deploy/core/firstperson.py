@@ -115,10 +115,18 @@ class ConversationMemory:
         }
     
     def get_frequency_reflection(self, theme: str) -> Optional[str]:
-        """Generate a reflection on a repeatedly mentioned theme."""
+        """Generate a companionable reflection on a repeatedly mentioned theme."""
         if theme in self.themes and self.themes[theme]["frequency"] > 1:
             freq = self.themes[theme]["frequency"]
-            return f"I notice you've mentioned {theme} {freq} times now. That seems to be something that's coming up for you."
+            # Use conversational language that feels like caring attention, not surveillance
+            reflections = {
+                2: f"I'm hearing {theme} come up again. That's important.",
+                3: f"This keeps returning for you—this {theme}. That tells me something.",
+                4: f"I keep hearing {theme} from you. It's sitting with you, isn't it?",
+            }
+            # Default for higher frequencies
+            default = f"You keep returning to {theme}. I'm noticing the weight of that."
+            return reflections.get(freq, default)
         return None
 
 
