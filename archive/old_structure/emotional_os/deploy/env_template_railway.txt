@@ -1,0 +1,16 @@
+# Environment Variables for FirstPerson Deployment
+# Copy these values from your Streamlit secrets configuration
+
+# Supabase Configuration
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your_supabase_anon_key
+
+# Auth Function (usually: https://your-project.supabase.co/functions/v1/auth-manager)  
+SUPABASE_AUTH_URL=https://your-project.supabase.co/functions/v1/auth-manager
+
+# Saori AI Function (usually: https://your-project.supabase.co/functions/v1/saori-fixed)
+CURRENT_SAORI_URL=https://your-project.supabase.co/functions/v1/saori-fixed
+
+# Production Settings
+ENVIRONMENT=production
+DEBUG=false

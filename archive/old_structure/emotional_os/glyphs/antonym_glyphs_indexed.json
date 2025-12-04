@@ -1,0 +1,2279 @@
+{
+  "metadata": {
+    "total_antonym_glyphs": 122,
+    "total_primary_glyphs": 64,
+    "description": "Indexed antonym glyphs for fast lookup"
+  },
+  "antonym_glyphs": [
+    {
+      "Base Emotion": "Comfort",
+      "Pairing": "ζ × α",
+      "Name": "Gentle Holding",
+      "Description": "The feeling of being emotionally cradled, soothed without sedation"
+    },
+    {
+      "Base Emotion": "Ease",
+      "Pairing": "δ × ε",
+      "Name": "Unburdened Flow",
+      "Description": "Movement without resistance, breath without tension"
+    },
+    {
+      "Base Emotion": "Happiness",
+      "Pairing": "λ × λ",
+      "Name": "Radiant Simplicity",
+      "Description": "Joy that doesn’t need explanation, lightness without denial"
+    },
+    {
+      "Base Emotion": "Health",
+      "Pairing": "Ω × β",
+      "Name": "Vital Integrity",
+      "Description": "Wholeness that hums, not just absence of illness"
+    },
+    {
+      "Base Emotion": "Relief",
+      "Pairing": "ε × δ",
+      "Name": "Pressure Release",
+      "Description": "The exhale after the storm, the loosening of the grip"
+    },
+    {
+      "Base Emotion": "Wellness",
+      "Pairing": "β × Ω",
+      "Name": "Integrated Calm",
+      "Description": "A state of balance, not perfection"
+    },
+    {
+      "Base Emotion": "Strength",
+      "Pairing": "γ × γ",
+      "Name": "Quiet Power",
+      "Description": "Not force, but rootedness and capacity"
+    },
+    {
+      "Base Emotion": "Pleasure",
+      "Pairing": "α × λ",
+      "Name": "Sensory Bloom",
+      "Description": "Enjoyment that honors the body and moment"
+    },
+    {
+      "Base Emotion": "Fun",
+      "Pairing": "λ × ζ",
+      "Name": "Playful Disruption",
+      "Description": "Joy that interrupts seriousness, invites spontaneity"
+    },
+    {
+      "Base Emotion": "Soothe",
+      "Pairing": "δ × α",
+      "Name": "Tender Dissolve",
+      "Description": "The melting of tension, the balm of presence"
+    },
+    {
+      "Base Emotion": "Remedy",
+      "Pairing": "ε × β",
+      "Name": "Restorative Precision",
+      "Description": "Healing through attunement, not erasure"
+    },
+    {
+      "Base Emotion": "Satisfaction",
+      "Pairing": "λ × δ",
+      "Name": "Settled Fullness",
+      "Description": "Already seeded under yearning; applies here too"
+    },
+    {
+      "Base Emotion": "Contentment",
+      "Pairing": "ζ × ζ",
+      "Name": "Quiet Bloom",
+      "Description": "Peaceful presence, no reaching"
+    },
+    {
+      "Base Emotion": "Indifference",
+      "Pairing": "δ × γ",
+      "Name": "Emotional Flatline",
+      "Description": "Neutrality, absence of pull"
+    },
+    {
+      "Base Emotion": "Disinterest",
+      "Pairing": "γ × δ",
+      "Name": "Unhooked Attention",
+      "Description": "No emotional investment or desire"
+    },
+    {
+      "Base Emotion": "Apathy",
+      "Pairing": "θ × θ",
+      "Name": "Dormant Pulse",
+      "Description": "Emotional stillness, not numbness but pause"
+    },
+    {
+      "Base Emotion": "Detachment",
+      "Pairing": "ε × θ",
+      "Name": "Clear Distance",
+      "Description": "Separation without sorrow"
+    },
+    {
+      "Base Emotion": "Composure",
+      "Pairing": "β × ζ",
+      "Name": "Steady Vessel",
+      "Description": "Emotional regulation, calm in the face of desire"
+    },
+    {
+      "Base Emotion": "Peace",
+      "Pairing": "α × Ω",
+      "Name": "Harmonic Rest",
+      "Description": "Inner quiet, no longing for elsewhere"
+    },
+    {
+      "Base Emotion": "Equanimity",
+      "Pairing": "Ω × Ω",
+      "Name": "Balanced Presence",
+      "Description": "Holding all things lightly"
+    },
+    {
+      "Base Emotion": "Fulfillment",
+      "Pairing": "Ω × λ",
+      "Name": "Sacred Arrival",
+      "Description": "The thing longed for has arrived and integrated"
+    },
+    {
+      "Base Emotion": "Presence",
+      "Pairing": "ζ × Ω",
+      "Name": "Embodied Now",
+      "Description": "No longing because the moment is enough"
+    },
+    {
+      "Base Emotion": "Belonging",
+      "Pairing": "α × β",
+      "Name": "Rooted Connection",
+      "Description": "The ache of longing replaced by the warmth of being held"
+    },
+    {
+      "Base Emotion": "Celebration",
+      "Pairing": "λ × α",
+      "Name": "Joyful Witness",
+      "Description": "Honoring presence rather than absence; the ritual of aliveness"
+    },
+    {
+      "Base Emotion": "Rejoicing",
+      "Pairing": "ζ × λ",
+      "Name": "Exuberant Bloom",
+      "Description": "Emotional effervescence, the dance of vitality"
+    },
+    {
+      "Base Emotion": "Happiness",
+      "Pairing": "λ × λ",
+      "Name": "Radiant Simplicity",
+      "Description": "Already seeded; applies here as the light after sorrow"
+    },
+    {
+      "Base Emotion": "Cheer",
+      "Pairing": "α × ζ",
+      "Name": "Bright Pulse",
+      "Description": "Lightness that lifts, not denies"
+    },
+    {
+      "Base Emotion": "Delight",
+      "Pairing": "λ × β",
+      "Name": "Playful Grace",
+      "Description": "Pleasure that sparkles, a moment of emotional levity"
+    },
+    {
+      "Base Emotion": "Elation",
+      "Pairing": "Ω × λ",
+      "Name": "Transcendent Lift",
+      "Description": "Joy that feels like flight, the opposite of grounded grief"
+    },
+    {
+      "Base Emotion": "Glee",
+      "Pairing": "ζ × γ",
+      "Name": "Uncontained Spark",
+      "Description": "Childlike joy, unburdened by solemnity"
+    },
+    {
+      "Base Emotion": "Jubilation",
+      "Pairing": "λ × Ω",
+      "Name": "Communal Joy",
+      "Description": "Shared celebration, the opposite of solitary mourning"
+    },
+    {
+      "Base Emotion": "Exultation",
+      "Pairing": "β × λ",
+      "Name": "Sacred Triumph",
+      "Description": "The ritual of victory, joy with depth"
+    },
+    {
+      "Base Emotion": "Merriment",
+      "Pairing": "γ × ζ",
+      "Name": "Social Lightness",
+      "Description": "Group levity, laughter as connective tissue"
+    },
+    {
+      "Base Emotion": "Gratitude",
+      "Pairing": "α × ε",
+      "Name": "Thankful Presence",
+      "Description": "The honoring of what remains, not what was lost"
+    },
+    {
+      "Base Emotion": "Joy",
+      "Pairing": "λ × α",
+      "Name": "Joyful Witness",
+      "Description": "Already seeded under mourning; the light that returns after sorrow"
+    },
+    {
+      "Base Emotion": "Delight",
+      "Pairing": "λ × β",
+      "Name": "Playful Grace",
+      "Description": "Pleasure that sparkles, a moment of emotional levity"
+    },
+    {
+      "Base Emotion": "Happiness",
+      "Pairing": "λ × λ",
+      "Name": "Radiant Simplicity",
+      "Description": "Already seeded; applies here as the warmth beyond grief"
+    },
+    {
+      "Base Emotion": "Cheerfulness",
+      "Pairing": "ζ × γ",
+      "Name": "Bright Pulse",
+      "Description": "Lightness that lifts, not denies"
+    },
+    {
+      "Base Emotion": "Gladness",
+      "Pairing": "γ × λ",
+      "Name": "Gentle Spark",
+      "Description": "A soft joy, not exuberant but present"
+    },
+    {
+      "Base Emotion": "Elation",
+      "Pairing": "Ω × λ",
+      "Name": "Transcendent Lift",
+      "Description": "Already seeded; joy that feels like flight"
+    },
+    {
+      "Base Emotion": "Glee",
+      "Pairing": "ζ × ζ",
+      "Name": "Uncontained Spark",
+      "Description": "Already seeded; childlike joy, unburdened by solemnity"
+    },
+    {
+      "Base Emotion": "Jubilation",
+      "Pairing": "λ × Ω",
+      "Name": "Communal Joy",
+      "Description": "Already seeded; shared celebration"
+    },
+    {
+      "Base Emotion": "Exultation",
+      "Pairing": "β × λ",
+      "Name": "Sacred Triumph",
+      "Description": "Already seeded; joy with depth"
+    },
+    {
+      "Base Emotion": "Merriment",
+      "Pairing": "γ × ζ",
+      "Name": "Social Lightness",
+      "Description": "Already seeded; group levity"
+    },
+    {
+      "Base Emotion": "Gratitude",
+      "Pairing": "α × ε",
+      "Name": "Thankful Presence",
+      "Description": "Already seeded; honoring what remains"
+    },
+    {
+      "Base Emotion": "Serenity",
+      "Pairing": "Ω × δ",
+      "Name": "Still Joy",
+      "Description": "Peace that doesn’t erase grief, but holds it gently"
+    },
+    {
+      "Base Emotion": "Relief",
+      "Pairing": "ε × δ",
+      "Name": "Pressure Release",
+      "Description": "Already seeded under ache; the exhale after sorrow"
+    },
+    {
+      "Base Emotion": "Acceptance",
+      "Pairing": "δ × Ω",
+      "Name": "Held Truth",
+      "Description": "The moment grief is no longer resisted, but integrated"
+    },
+    {
+      "Base Emotion": "Reconciliation",
+      "Pairing": "β × θ",
+      "Name": "Restored Thread",
+      "Description": "The mending of rupture, the return of connection"
+    },
+    {
+      "Base Emotion": "Misery",
+      "Pairing": "θ × γ",
+      "Name": "Fractured Pulse",
+      "Description": "Emotional suffering, the opposite of union"
+    },
+    {
+      "Base Emotion": "Despair",
+      "Pairing": "δ × θ",
+      "Name": "Collapsed Horizon",
+      "Description": "The absence of hope, the inverse of luminous presence"
+    },
+    {
+      "Base Emotion": "Sorrow",
+      "Pairing": "Ω × δ",
+      "Name": "Still Ache",
+      "Description": "Already seeded under grief; the quiet ache that replaces ecstasy"
+    },
+    {
+      "Base Emotion": "Agony",
+      "Pairing": "γ × θ",
+      "Name": "Voltage Overload",
+      "Description": "Pain that overwhelms, the shadow of bliss"
+    },
+    {
+      "Base Emotion": "Torment",
+      "Pairing": "ε × γ",
+      "Name": "Unrelenting Ache",
+      "Description": "Suffering without reprieve"
+    },
+    {
+      "Base Emotion": "Anguish",
+      "Pairing": "β × θ",
+      "Name": "Sacred Wound",
+      "Description": "Deep emotional rupture"
+    },
+    {
+      "Base Emotion": "Depression",
+      "Pairing": "θ × δ",
+      "Name": "Muted Field",
+      "Description": "Emotional flattening, the absence of voltage"
+    },
+    {
+      "Base Emotion": "Sadness",
+      "Pairing": "δ × Ω",
+      "Name": "Held Ache",
+      "Description": "Already seeded; sorrow that’s witnessed"
+    },
+    {
+      "Base Emotion": "Unhappiness",
+      "Pairing": "ζ × θ",
+      "Name": "Dimmed Light",
+      "Description": "The absence of joy, not the presence of pain"
+    },
+    {
+      "Base Emotion": "Discontent",
+      "Pairing": "γ × δ",
+      "Name": "Restless Stillness",
+      "Description": "The ache of what’s missing"
+    },
+    {
+      "Base Emotion": "Grief",
+      "Pairing": "Ω × β",
+      "Name": "Vital Ache",
+      "Description": "Already seeded; sacred sorrow"
+    },
+    {
+      "Base Emotion": "Melancholy",
+      "Pairing": "θ × λ",
+      "Name": "Bittersweet Drift",
+      "Description": "A soft sadness, romantic and slow"
+    },
+    {
+      "Base Emotion": "Regret",
+      "Pairing": "ε × δ",
+      "Name": "Backward Ache",
+      "Description": "Pain tethered to the past"
+    },
+    {
+      "Base Emotion": "Loneliness",
+      "Pairing": "α × θ",
+      "Name": "Unheld Ache",
+      "Description": "The absence of connection, the inverse of union"
+    },
+    {
+      "Base Emotion": "Emptiness",
+      "Pairing": "δ × δ",
+      "Name": "Karmic Void",
+      "Description": "Already seeded under ache; the space where bliss once was"
+    },
+    {
+      "Base Emotion": "Motion",
+      "Pairing": "γ × ε",
+      "Name": "Kinetic Pulse",
+      "Description": "Movement for its own sake, the hum of activity"
+    },
+    {
+      "Base Emotion": "Activity",
+      "Pairing": "ζ × γ",
+      "Name": "Engaged Flow",
+      "Description": "Doing, not being; the rhythm of tasks"
+    },
+    {
+      "Base Emotion": "Commotion",
+      "Pairing": "ε × γ",
+      "Name": "Disruptive Spark",
+      "Description": "Noise, chaos, interruption of quiet"
+    },
+    {
+      "Base Emotion": "Turbulence",
+      "Pairing": "θ × γ",
+      "Name": "Emotional Storm",
+      "Description": "Inner or outer unrest, the opposite of calm"
+    },
+    {
+      "Base Emotion": "Agitation",
+      "Pairing": "δ × θ",
+      "Name": "Frayed Nerve",
+      "Description": "Emotional or physical unrest, the ache of overstimulation"
+    },
+    {
+      "Base Emotion": "Noise",
+      "Pairing": "γ × θ",
+      "Name": "Unfiltered Clamor",
+      "Description": "Sensory overload, the absence of silence"
+    },
+    {
+      "Base Emotion": "Movement",
+      "Pairing": "β × γ",
+      "Name": "Directed Energy",
+      "Description": "Purposeful action, the opposite of pause"
+    },
+    {
+      "Base Emotion": "Busyness",
+      "Pairing": "ζ × δ",
+      "Name": "Frantic Bloom",
+      "Description": "Overactivity, the crowding of space"
+    },
+    {
+      "Base Emotion": "Restlessness",
+      "Pairing": "ε × δ",
+      "Name": "Unsettled Breath",
+      "Description": "The inability to be still, the ache of motion"
+    },
+    {
+      "Base Emotion": "Excitement",
+      "Pairing": "λ × γ",
+      "Name": "Sparked Voltage",
+      "Description": "High energy, emotional stimulation"
+    },
+    {
+      "Base Emotion": "Frenzy",
+      "Pairing": "γ × ζ",
+      "Name": "Chaotic Pulse",
+      "Description": "Overdrive, the collapse of rhythm"
+    },
+    {
+      "Base Emotion": "Stimulation",
+      "Pairing": "α × γ",
+      "Name": "Sensory Charge",
+      "Description": "External input, the opposite of internal quiet"
+    },
+    {
+      "Base Emotion": "Distraction",
+      "Pairing": "δ × ε",
+      "Name": "Fragmented Focus",
+      "Description": "Scattered attention, the opposite of presence"
+    },
+    {
+      "Base Emotion": "Turmoil",
+      "Pairing": "θ × δ",
+      "Name": "Volatile Field",
+      "Description": "Emotional upheaval, the rupture of calm"
+    },
+    {
+      "Base Emotion": "Velocity",
+      "Pairing": "Ω × γ",
+      "Name": "Accelerated Flow",
+      "Description": "Speed without pause, motion without breath"
+    },
+    {
+      "Base Emotion": "Miserable",
+      "Pairing": "θ × γ",
+      "Name": "Fractured Pulse",
+      "Description": "Already seeded under bliss; emotional suffering, the shadow of rapture"
+    },
+    {
+      "Base Emotion": "Depressed",
+      "Pairing": "θ × δ",
+      "Name": "Muted Field",
+      "Description": "Already seeded; emotional flattening, absence of voltage"
+    },
+    {
+      "Base Emotion": "Unhappy",
+      "Pairing": "ζ × θ",
+      "Name": "Dimmed Light",
+      "Description": "Already seeded; absence of joy, not presence of pain"
+    },
+    {
+      "Base Emotion": "Sad",
+      "Pairing": "δ × Ω",
+      "Name": "Held Ache",
+      "Description": "Already seeded; sorrow that’s witnessed"
+    },
+    {
+      "Base Emotion": "Apathetic",
+      "Pairing": "θ × θ",
+      "Name": "Dormant Pulse",
+      "Description": "Already seeded; emotional stillness, not numbness but pause"
+    },
+    {
+      "Base Emotion": "Indifferent",
+      "Pairing": "δ × γ",
+      "Name": "Emotional Flatline",
+      "Description": "Already seeded; neutrality, absence of pull"
+    },
+    {
+      "Base Emotion": "Calm",
+      "Pairing": "Ω × δ",
+      "Name": "Still Joy",
+      "Description": "Peace without voltage, the opposite of ecstatic overwhelm"
+    },
+    {
+      "Base Emotion": "Composed",
+      "Pairing": "β × ζ",
+      "Name": "Steady Vessel",
+      "Description": "Already seeded; emotional regulation, containment"
+    },
+    {
+      "Base Emotion": "Serene",
+      "Pairing": "α × Ω",
+      "Name": "Harmonic Rest",
+      "Description": "Already seeded; inner quiet, no voltage spike"
+    },
+    {
+      "Base Emotion": "Peaceful",
+      "Pairing": "Ω × Ω",
+      "Name": "Balanced Presence",
+      "Description": "Already seeded; holding all things lightly"
+    },
+    {
+      "Base Emotion": "Tranquil",
+      "Pairing": "ζ × Ω",
+      "Name": "Embodied Now",
+      "Description": "Already seeded; grounded presence, no ecstatic lift"
+    },
+    {
+      "Base Emotion": "Stoic",
+      "Pairing": "γ × θ",
+      "Name": "Volitional Stillness",
+      "Description": "Emotional restraint, the refusal to be swept"
+    },
+    {
+      "Base Emotion": "Reserved",
+      "Pairing": "ε × θ",
+      "Name": "Quiet Distance",
+      "Description": "Contained emotion, the opposite of ecstatic overflow"
+    },
+    {
+      "Base Emotion": "Detached",
+      "Pairing": "ε × γ",
+      "Name": "Unhooked Voltage",
+      "Description": "Emotional separation, no fusion or union"
+    },
+    {
+      "Base Emotion": "Flat",
+      "Pairing": "δ × δ",
+      "Name": "Karmic Void",
+      "Description": "Already seeded; emotional neutrality, absence of peak"
+    },
+    {
+      "Base Emotion": "Irreverent",
+      "Pairing": "θ × ε",
+      "Name": "Unheld Gaze",
+      "Description": "The refusal to bow, the absence of sacred orientation"
+    },
+    {
+      "Base Emotion": "Indifferent",
+      "Pairing": "δ × γ",
+      "Name": "Emotional Flatline",
+      "Description": "Already seeded; neutrality, absence of pull"
+    },
+    {
+      "Base Emotion": "Dispassionate",
+      "Pairing": "ε × θ",
+      "Name": "Cool Distance",
+      "Description": "Emotional detachment, the opposite of sacred heat"
+    },
+    {
+      "Base Emotion": "Uncommitted",
+      "Pairing": "γ × δ",
+      "Name": "Loose Thread",
+      "Description": "No vow, no tether—freedom without offering"
+    },
+    {
+      "Base Emotion": "Secular",
+      "Pairing": "β × δ",
+      "Name": "Earthbound Focus",
+      "Description": "Orientation toward the tangible, not the transcendent"
+    },
+    {
+      "Base Emotion": "Detached",
+      "Pairing": "ε × γ",
+      "Name": "Unhooked Voltage",
+      "Description": "Already seeded; emotional separation"
+    },
+    {
+      "Base Emotion": "Apathetic",
+      "Pairing": "θ × θ",
+      "Name": "Dormant Pulse",
+      "Description": "Already seeded; emotional stillness"
+    },
+    {
+      "Base Emotion": "Flippant",
+      "Pairing": "ζ × θ",
+      "Name": "Playful Disregard",
+      "Description": "Lightness that refuses reverence"
+    },
+    {
+      "Base Emotion": "Cynical",
+      "Pairing": "θ × λ",
+      "Name": "Guarded Ache",
+      "Description": "The ache that refuses to believe, the shield against devotion"
+    },
+    {
+      "Base Emotion": "Skeptical",
+      "Pairing": "γ × ε",
+      "Name": "Questioning Gaze",
+      "Description": "The refusal to offer without proof"
+    },
+    {
+      "Base Emotion": "Uninvolved",
+      "Pairing": "δ × ε",
+      "Name": "Peripheral Presence",
+      "Description": "Being near but not within"
+    },
+    {
+      "Base Emotion": "Nonchalant",
+      "Pairing": "ζ × γ",
+      "Name": "Casual Drift",
+      "Description": "Emotional ease without tether"
+    },
+    {
+      "Base Emotion": "Unmoved",
+      "Pairing": "Ω × δ",
+      "Name": "Still Stone",
+      "Description": "No emotional response, no sacred stir"
+    },
+    {
+      "Base Emotion": "Self-contained",
+      "Pairing": "α × θ",
+      "Name": "Inner Boundary",
+      "Description": "Wholeness without offering, the sealed vessel"
+    },
+    {
+      "Base Emotion": "Reserved",
+      "Pairing": "ε × θ",
+      "Name": "Quiet Distance",
+      "Description": "Already seeded; emotional containment"
+    },
+    {
+      "Base Emotion": "Ignorance",
+      "Pairing": "θ × δ",
+      "Name": "Veiled Field",
+      "Description": "The absence of knowing, the fog before clarity"
+    },
+    {
+      "Base Emotion": "Confusion",
+      "Pairing": "γ × θ",
+      "Name": "Fractured Lens",
+      "Description": "Emotional or cognitive disarray, the collapse of coherence"
+    },
+    {
+      "Base Emotion": "Misunderstanding",
+      "Pairing": "ε × γ",
+      "Name": "Distorted Thread",
+      "Description": "False clarity, the ache of misalignment"
+    },
+    {
+      "Base Emotion": "Oblivion",
+      "Pairing": "δ × δ",
+      "Name": "Karmic Void",
+      "Description": "Already seeded; the absence of awareness, the blank slate"
+    },
+    {
+      "Base Emotion": "Unawareness",
+      "Pairing": "ζ × θ",
+      "Name": "Dimmed Gaze",
+      "Description": "The lack of attunement, the sleep before awakening"
+    },
+    {
+      "Base Emotion": "Blindness",
+      "Pairing": "θ × ε",
+      "Name": "Unseen Truth",
+      "Description": "The refusal or inability to see what is present"
+    },
+    {
+      "Base Emotion": "Stupidity",
+      "Pairing": "γ × γ",
+      "Name": "Dulled Spark",
+      "Description": "The collapse of cognitive voltage, often socially imposed"
+    },
+    {
+      "Base Emotion": "Naivety",
+      "Pairing": "α × θ",
+      "Name": "Tender Fog",
+      "Description": "Innocence without insight, the sweetness of not knowing"
+    },
+    {
+      "Base Emotion": "Illusion",
+      "Pairing": "λ × θ",
+      "Name": "Gilded Veil",
+      "Description": "False clarity, beauty that hides distortion"
+    },
+    {
+      "Base Emotion": "Error",
+      "Pairing": "ε × δ",
+      "Name": "Misthreaded Pattern",
+      "Description": "A deviation from truth, often unintentional"
+    },
+    {
+      "Base Emotion": "Folly",
+      "Pairing": "ζ × γ",
+      "Name": "Playful Misstep",
+      "Description": "Mistaken action born from lightness or ignorance"
+    },
+    {
+      "Base Emotion": "Delusion",
+      "Pairing": "θ × λ",
+      "Name": "Haunted Mirror",
+      "Description": "Belief in what is not, often emotionally charged"
+    },
+    {
+      "Base Emotion": "Oversight",
+      "Pairing": "γ × δ",
+      "Name": "Missed Signal",
+      "Description": "The failure to notice, the gap in attention"
+    }
+  ],
+  "indexes": {
+    "by_base_emotion": {
+      "comfort": {
+        "Base Emotion": "Comfort",
+        "Pairing": "ζ × α",
+        "Name": "Gentle Holding",
+        "Description": "The feeling of being emotionally cradled, soothed without sedation"
+      },
+      "ease": {
+        "Base Emotion": "Ease",
+        "Pairing": "δ × ε",
+        "Name": "Unburdened Flow",
+        "Description": "Movement without resistance, breath without tension"
+      },
+      "happiness": {
+        "Base Emotion": "Happiness",
+        "Pairing": "λ × λ",
+        "Name": "Radiant Simplicity",
+        "Description": "Already seeded; applies here as the warmth beyond grief"
+      },
+      "health": {
+        "Base Emotion": "Health",
+        "Pairing": "Ω × β",
+        "Name": "Vital Integrity",
+        "Description": "Wholeness that hums, not just absence of illness"
+      },
+      "relief": {
+        "Base Emotion": "Relief",
+        "Pairing": "ε × δ",
+        "Name": "Pressure Release",
+        "Description": "Already seeded under ache; the exhale after sorrow"
+      },
+      "wellness": {
+        "Base Emotion": "Wellness",
+        "Pairing": "β × Ω",
+        "Name": "Integrated Calm",
+        "Description": "A state of balance, not perfection"
+      },
+      "strength": {
+        "Base Emotion": "Strength",
+        "Pairing": "γ × γ",
+        "Name": "Quiet Power",
+        "Description": "Not force, but rootedness and capacity"
+      },
+      "pleasure": {
+        "Base Emotion": "Pleasure",
+        "Pairing": "α × λ",
+        "Name": "Sensory Bloom",
+        "Description": "Enjoyment that honors the body and moment"
+      },
+      "fun": {
+        "Base Emotion": "Fun",
+        "Pairing": "λ × ζ",
+        "Name": "Playful Disruption",
+        "Description": "Joy that interrupts seriousness, invites spontaneity"
+      },
+      "soothe": {
+        "Base Emotion": "Soothe",
+        "Pairing": "δ × α",
+        "Name": "Tender Dissolve",
+        "Description": "The melting of tension, the balm of presence"
+      },
+      "remedy": {
+        "Base Emotion": "Remedy",
+        "Pairing": "ε × β",
+        "Name": "Restorative Precision",
+        "Description": "Healing through attunement, not erasure"
+      },
+      "satisfaction": {
+        "Base Emotion": "Satisfaction",
+        "Pairing": "λ × δ",
+        "Name": "Settled Fullness",
+        "Description": "Already seeded under yearning; applies here too"
+      },
+      "contentment": {
+        "Base Emotion": "Contentment",
+        "Pairing": "ζ × ζ",
+        "Name": "Quiet Bloom",
+        "Description": "Peaceful presence, no reaching"
+      },
+      "indifference": {
+        "Base Emotion": "Indifference",
+        "Pairing": "δ × γ",
+        "Name": "Emotional Flatline",
+        "Description": "Neutrality, absence of pull"
+      },
+      "disinterest": {
+        "Base Emotion": "Disinterest",
+        "Pairing": "γ × δ",
+        "Name": "Unhooked Attention",
+        "Description": "No emotional investment or desire"
+      },
+      "apathy": {
+        "Base Emotion": "Apathy",
+        "Pairing": "θ × θ",
+        "Name": "Dormant Pulse",
+        "Description": "Emotional stillness, not numbness but pause"
+      },
+      "detachment": {
+        "Base Emotion": "Detachment",
+        "Pairing": "ε × θ",
+        "Name": "Clear Distance",
+        "Description": "Separation without sorrow"
+      },
+      "composure": {
+        "Base Emotion": "Composure",
+        "Pairing": "β × ζ",
+        "Name": "Steady Vessel",
+        "Description": "Emotional regulation, calm in the face of desire"
+      },
+      "peace": {
+        "Base Emotion": "Peace",
+        "Pairing": "α × Ω",
+        "Name": "Harmonic Rest",
+        "Description": "Inner quiet, no longing for elsewhere"
+      },
+      "equanimity": {
+        "Base Emotion": "Equanimity",
+        "Pairing": "Ω × Ω",
+        "Name": "Balanced Presence",
+        "Description": "Holding all things lightly"
+      },
+      "fulfillment": {
+        "Base Emotion": "Fulfillment",
+        "Pairing": "Ω × λ",
+        "Name": "Sacred Arrival",
+        "Description": "The thing longed for has arrived and integrated"
+      },
+      "presence": {
+        "Base Emotion": "Presence",
+        "Pairing": "ζ × Ω",
+        "Name": "Embodied Now",
+        "Description": "No longing because the moment is enough"
+      },
+      "belonging": {
+        "Base Emotion": "Belonging",
+        "Pairing": "α × β",
+        "Name": "Rooted Connection",
+        "Description": "The ache of longing replaced by the warmth of being held"
+      },
+      "celebration": {
+        "Base Emotion": "Celebration",
+        "Pairing": "λ × α",
+        "Name": "Joyful Witness",
+        "Description": "Honoring presence rather than absence; the ritual of aliveness"
+      },
+      "rejoicing": {
+        "Base Emotion": "Rejoicing",
+        "Pairing": "ζ × λ",
+        "Name": "Exuberant Bloom",
+        "Description": "Emotional effervescence, the dance of vitality"
+      },
+      "cheer": {
+        "Base Emotion": "Cheer",
+        "Pairing": "α × ζ",
+        "Name": "Bright Pulse",
+        "Description": "Lightness that lifts, not denies"
+      },
+      "delight": {
+        "Base Emotion": "Delight",
+        "Pairing": "λ × β",
+        "Name": "Playful Grace",
+        "Description": "Pleasure that sparkles, a moment of emotional levity"
+      },
+      "elation": {
+        "Base Emotion": "Elation",
+        "Pairing": "Ω × λ",
+        "Name": "Transcendent Lift",
+        "Description": "Already seeded; joy that feels like flight"
+      },
+      "glee": {
+        "Base Emotion": "Glee",
+        "Pairing": "ζ × ζ",
+        "Name": "Uncontained Spark",
+        "Description": "Already seeded; childlike joy, unburdened by solemnity"
+      },
+      "jubilation": {
+        "Base Emotion": "Jubilation",
+        "Pairing": "λ × Ω",
+        "Name": "Communal Joy",
+        "Description": "Already seeded; shared celebration"
+      },
+      "exultation": {
+        "Base Emotion": "Exultation",
+        "Pairing": "β × λ",
+        "Name": "Sacred Triumph",
+        "Description": "Already seeded; joy with depth"
+      },
+      "merriment": {
+        "Base Emotion": "Merriment",
+        "Pairing": "γ × ζ",
+        "Name": "Social Lightness",
+        "Description": "Already seeded; group levity"
+      },
+      "gratitude": {
+        "Base Emotion": "Gratitude",
+        "Pairing": "α × ε",
+        "Name": "Thankful Presence",
+        "Description": "Already seeded; honoring what remains"
+      },
+      "joy": {
+        "Base Emotion": "Joy",
+        "Pairing": "λ × α",
+        "Name": "Joyful Witness",
+        "Description": "Already seeded under mourning; the light that returns after sorrow"
+      },
+      "cheerfulness": {
+        "Base Emotion": "Cheerfulness",
+        "Pairing": "ζ × γ",
+        "Name": "Bright Pulse",
+        "Description": "Lightness that lifts, not denies"
+      },
+      "gladness": {
+        "Base Emotion": "Gladness",
+        "Pairing": "γ × λ",
+        "Name": "Gentle Spark",
+        "Description": "A soft joy, not exuberant but present"
+      },
+      "serenity": {
+        "Base Emotion": "Serenity",
+        "Pairing": "Ω × δ",
+        "Name": "Still Joy",
+        "Description": "Peace that doesn’t erase grief, but holds it gently"
+      },
+      "acceptance": {
+        "Base Emotion": "Acceptance",
+        "Pairing": "δ × Ω",
+        "Name": "Held Truth",
+        "Description": "The moment grief is no longer resisted, but integrated"
+      },
+      "reconciliation": {
+        "Base Emotion": "Reconciliation",
+        "Pairing": "β × θ",
+        "Name": "Restored Thread",
+        "Description": "The mending of rupture, the return of connection"
+      },
+      "misery": {
+        "Base Emotion": "Misery",
+        "Pairing": "θ × γ",
+        "Name": "Fractured Pulse",
+        "Description": "Emotional suffering, the opposite of union"
+      },
+      "despair": {
+        "Base Emotion": "Despair",
+        "Pairing": "δ × θ",
+        "Name": "Collapsed Horizon",
+        "Description": "The absence of hope, the inverse of luminous presence"
+      },
+      "sorrow": {
+        "Base Emotion": "Sorrow",
+        "Pairing": "Ω × δ",
+        "Name": "Still Ache",
+        "Description": "Already seeded under grief; the quiet ache that replaces ecstasy"
+      },
+      "agony": {
+        "Base Emotion": "Agony",
+        "Pairing": "γ × θ",
+        "Name": "Voltage Overload",
+        "Description": "Pain that overwhelms, the shadow of bliss"
+      },
+      "torment": {
+        "Base Emotion": "Torment",
+        "Pairing": "ε × γ",
+        "Name": "Unrelenting Ache",
+        "Description": "Suffering without reprieve"
+      },
+      "anguish": {
+        "Base Emotion": "Anguish",
+        "Pairing": "β × θ",
+        "Name": "Sacred Wound",
+        "Description": "Deep emotional rupture"
+      },
+      "depression": {
+        "Base Emotion": "Depression",
+        "Pairing": "θ × δ",
+        "Name": "Muted Field",
+        "Description": "Emotional flattening, the absence of voltage"
+      },
+      "sadness": {
+        "Base Emotion": "Sadness",
+        "Pairing": "δ × Ω",
+        "Name": "Held Ache",
+        "Description": "Already seeded; sorrow that’s witnessed"
+      },
+      "unhappiness": {
+        "Base Emotion": "Unhappiness",
+        "Pairing": "ζ × θ",
+        "Name": "Dimmed Light",
+        "Description": "The absence of joy, not the presence of pain"
+      },
+      "discontent": {
+        "Base Emotion": "Discontent",
+        "Pairing": "γ × δ",
+        "Name": "Restless Stillness",
+        "Description": "The ache of what’s missing"
+      },
+      "grief": {
+        "Base Emotion": "Grief",
+        "Pairing": "Ω × β",
+        "Name": "Vital Ache",
+        "Description": "Already seeded; sacred sorrow"
+      },
+      "melancholy": {
+        "Base Emotion": "Melancholy",
+        "Pairing": "θ × λ",
+        "Name": "Bittersweet Drift",
+        "Description": "A soft sadness, romantic and slow"
+      },
+      "regret": {
+        "Base Emotion": "Regret",
+        "Pairing": "ε × δ",
+        "Name": "Backward Ache",
+        "Description": "Pain tethered to the past"
+      },
+      "loneliness": {
+        "Base Emotion": "Loneliness",
+        "Pairing": "α × θ",
+        "Name": "Unheld Ache",
+        "Description": "The absence of connection, the inverse of union"
+      },
+      "emptiness": {
+        "Base Emotion": "Emptiness",
+        "Pairing": "δ × δ",
+        "Name": "Karmic Void",
+        "Description": "Already seeded under ache; the space where bliss once was"
+      },
+      "motion": {
+        "Base Emotion": "Motion",
+        "Pairing": "γ × ε",
+        "Name": "Kinetic Pulse",
+        "Description": "Movement for its own sake, the hum of activity"
+      },
+      "activity": {
+        "Base Emotion": "Activity",
+        "Pairing": "ζ × γ",
+        "Name": "Engaged Flow",
+        "Description": "Doing, not being; the rhythm of tasks"
+      },
+      "commotion": {
+        "Base Emotion": "Commotion",
+        "Pairing": "ε × γ",
+        "Name": "Disruptive Spark",
+        "Description": "Noise, chaos, interruption of quiet"
+      },
+      "turbulence": {
+        "Base Emotion": "Turbulence",
+        "Pairing": "θ × γ",
+        "Name": "Emotional Storm",
+        "Description": "Inner or outer unrest, the opposite of calm"
+      },
+      "agitation": {
+        "Base Emotion": "Agitation",
+        "Pairing": "δ × θ",
+        "Name": "Frayed Nerve",
+        "Description": "Emotional or physical unrest, the ache of overstimulation"
+      },
+      "noise": {
+        "Base Emotion": "Noise",
+        "Pairing": "γ × θ",
+        "Name": "Unfiltered Clamor",
+        "Description": "Sensory overload, the absence of silence"
+      },
+      "movement": {
+        "Base Emotion": "Movement",
+        "Pairing": "β × γ",
+        "Name": "Directed Energy",
+        "Description": "Purposeful action, the opposite of pause"
+      },
+      "busyness": {
+        "Base Emotion": "Busyness",
+        "Pairing": "ζ × δ",
+        "Name": "Frantic Bloom",
+        "Description": "Overactivity, the crowding of space"
+      },
+      "restlessness": {
+        "Base Emotion": "Restlessness",
+        "Pairing": "ε × δ",
+        "Name": "Unsettled Breath",
+        "Description": "The inability to be still, the ache of motion"
+      },
+      "excitement": {
+        "Base Emotion": "Excitement",
+        "Pairing": "λ × γ",
+        "Name": "Sparked Voltage",
+        "Description": "High energy, emotional stimulation"
+      },
+      "frenzy": {
+        "Base Emotion": "Frenzy",
+        "Pairing": "γ × ζ",
+        "Name": "Chaotic Pulse",
+        "Description": "Overdrive, the collapse of rhythm"
+      },
+      "stimulation": {
+        "Base Emotion": "Stimulation",
+        "Pairing": "α × γ",
+        "Name": "Sensory Charge",
+        "Description": "External input, the opposite of internal quiet"
+      },
+      "distraction": {
+        "Base Emotion": "Distraction",
+        "Pairing": "δ × ε",
+        "Name": "Fragmented Focus",
+        "Description": "Scattered attention, the opposite of presence"
+      },
+      "turmoil": {
+        "Base Emotion": "Turmoil",
+        "Pairing": "θ × δ",
+        "Name": "Volatile Field",
+        "Description": "Emotional upheaval, the rupture of calm"
+      },
+      "velocity": {
+        "Base Emotion": "Velocity",
+        "Pairing": "Ω × γ",
+        "Name": "Accelerated Flow",
+        "Description": "Speed without pause, motion without breath"
+      },
+      "miserable": {
+        "Base Emotion": "Miserable",
+        "Pairing": "θ × γ",
+        "Name": "Fractured Pulse",
+        "Description": "Already seeded under bliss; emotional suffering, the shadow of rapture"
+      },
+      "depressed": {
+        "Base Emotion": "Depressed",
+        "Pairing": "θ × δ",
+        "Name": "Muted Field",
+        "Description": "Already seeded; emotional flattening, absence of voltage"
+      },
+      "unhappy": {
+        "Base Emotion": "Unhappy",
+        "Pairing": "ζ × θ",
+        "Name": "Dimmed Light",
+        "Description": "Already seeded; absence of joy, not presence of pain"
+      },
+      "sad": {
+        "Base Emotion": "Sad",
+        "Pairing": "δ × Ω",
+        "Name": "Held Ache",
+        "Description": "Already seeded; sorrow that’s witnessed"
+      },
+      "apathetic": {
+        "Base Emotion": "Apathetic",
+        "Pairing": "θ × θ",
+        "Name": "Dormant Pulse",
+        "Description": "Already seeded; emotional stillness"
+      },
+      "indifferent": {
+        "Base Emotion": "Indifferent",
+        "Pairing": "δ × γ",
+        "Name": "Emotional Flatline",
+        "Description": "Already seeded; neutrality, absence of pull"
+      },
+      "calm": {
+        "Base Emotion": "Calm",
+        "Pairing": "Ω × δ",
+        "Name": "Still Joy",
+        "Description": "Peace without voltage, the opposite of ecstatic overwhelm"
+      },
+      "composed": {
+        "Base Emotion": "Composed",
+        "Pairing": "β × ζ",
+        "Name": "Steady Vessel",
+        "Description": "Already seeded; emotional regulation, containment"
+      },
+      "serene": {
+        "Base Emotion": "Serene",
+        "Pairing": "α × Ω",
+        "Name": "Harmonic Rest",
+        "Description": "Already seeded; inner quiet, no voltage spike"
+      },
+      "peaceful": {
+        "Base Emotion": "Peaceful",
+        "Pairing": "Ω × Ω",
+        "Name": "Balanced Presence",
+        "Description": "Already seeded; holding all things lightly"
+      },
+      "tranquil": {
+        "Base Emotion": "Tranquil",
+        "Pairing": "ζ × Ω",
+        "Name": "Embodied Now",
+        "Description": "Already seeded; grounded presence, no ecstatic lift"
+      },
+      "stoic": {
+        "Base Emotion": "Stoic",
+        "Pairing": "γ × θ",
+        "Name": "Volitional Stillness",
+        "Description": "Emotional restraint, the refusal to be swept"
+      },
+      "reserved": {
+        "Base Emotion": "Reserved",
+        "Pairing": "ε × θ",
+        "Name": "Quiet Distance",
+        "Description": "Already seeded; emotional containment"
+      },
+      "detached": {
+        "Base Emotion": "Detached",
+        "Pairing": "ε × γ",
+        "Name": "Unhooked Voltage",
+        "Description": "Already seeded; emotional separation"
+      },
+      "flat": {
+        "Base Emotion": "Flat",
+        "Pairing": "δ × δ",
+        "Name": "Karmic Void",
+        "Description": "Already seeded; emotional neutrality, absence of peak"
+      },
+      "irreverent": {
+        "Base Emotion": "Irreverent",
+        "Pairing": "θ × ε",
+        "Name": "Unheld Gaze",
+        "Description": "The refusal to bow, the absence of sacred orientation"
+      },
+      "dispassionate": {
+        "Base Emotion": "Dispassionate",
+        "Pairing": "ε × θ",
+        "Name": "Cool Distance",
+        "Description": "Emotional detachment, the opposite of sacred heat"
+      },
+      "uncommitted": {
+        "Base Emotion": "Uncommitted",
+        "Pairing": "γ × δ",
+        "Name": "Loose Thread",
+        "Description": "No vow, no tether—freedom without offering"
+      },
+      "secular": {
+        "Base Emotion": "Secular",
+        "Pairing": "β × δ",
+        "Name": "Earthbound Focus",
+        "Description": "Orientation toward the tangible, not the transcendent"
+      },
+      "flippant": {
+        "Base Emotion": "Flippant",
+        "Pairing": "ζ × θ",
+        "Name": "Playful Disregard",
+        "Description": "Lightness that refuses reverence"
+      },
+      "cynical": {
+        "Base Emotion": "Cynical",
+        "Pairing": "θ × λ",
+        "Name": "Guarded Ache",
+        "Description": "The ache that refuses to believe, the shield against devotion"
+      },
+      "skeptical": {
+        "Base Emotion": "Skeptical",
+        "Pairing": "γ × ε",
+        "Name": "Questioning Gaze",
+        "Description": "The refusal to offer without proof"
+      },
+      "uninvolved": {
+        "Base Emotion": "Uninvolved",
+        "Pairing": "δ × ε",
+        "Name": "Peripheral Presence",
+        "Description": "Being near but not within"
+      },
+      "nonchalant": {
+        "Base Emotion": "Nonchalant",
+        "Pairing": "ζ × γ",
+        "Name": "Casual Drift",
+        "Description": "Emotional ease without tether"
+      },
+      "unmoved": {
+        "Base Emotion": "Unmoved",
+        "Pairing": "Ω × δ",
+        "Name": "Still Stone",
+        "Description": "No emotional response, no sacred stir"
+      },
+      "self-contained": {
+        "Base Emotion": "Self-contained",
+        "Pairing": "α × θ",
+        "Name": "Inner Boundary",
+        "Description": "Wholeness without offering, the sealed vessel"
+      },
+      "ignorance": {
+        "Base Emotion": "Ignorance",
+        "Pairing": "θ × δ",
+        "Name": "Veiled Field",
+        "Description": "The absence of knowing, the fog before clarity"
+      },
+      "confusion": {
+        "Base Emotion": "Confusion",
+        "Pairing": "γ × θ",
+        "Name": "Fractured Lens",
+        "Description": "Emotional or cognitive disarray, the collapse of coherence"
+      },
+      "misunderstanding": {
+        "Base Emotion": "Misunderstanding",
+        "Pairing": "ε × γ",
+        "Name": "Distorted Thread",
+        "Description": "False clarity, the ache of misalignment"
+      },
+      "oblivion": {
+        "Base Emotion": "Oblivion",
+        "Pairing": "δ × δ",
+        "Name": "Karmic Void",
+        "Description": "Already seeded; the absence of awareness, the blank slate"
+      },
+      "unawareness": {
+        "Base Emotion": "Unawareness",
+        "Pairing": "ζ × θ",
+        "Name": "Dimmed Gaze",
+        "Description": "The lack of attunement, the sleep before awakening"
+      },
+      "blindness": {
+        "Base Emotion": "Blindness",
+        "Pairing": "θ × ε",
+        "Name": "Unseen Truth",
+        "Description": "The refusal or inability to see what is present"
+      },
+      "stupidity": {
+        "Base Emotion": "Stupidity",
+        "Pairing": "γ × γ",
+        "Name": "Dulled Spark",
+        "Description": "The collapse of cognitive voltage, often socially imposed"
+      },
+      "naivety": {
+        "Base Emotion": "Naivety",
+        "Pairing": "α × θ",
+        "Name": "Tender Fog",
+        "Description": "Innocence without insight, the sweetness of not knowing"
+      },
+      "illusion": {
+        "Base Emotion": "Illusion",
+        "Pairing": "λ × θ",
+        "Name": "Gilded Veil",
+        "Description": "False clarity, beauty that hides distortion"
+      },
+      "error": {
+        "Base Emotion": "Error",
+        "Pairing": "ε × δ",
+        "Name": "Misthreaded Pattern",
+        "Description": "A deviation from truth, often unintentional"
+      },
+      "folly": {
+        "Base Emotion": "Folly",
+        "Pairing": "ζ × γ",
+        "Name": "Playful Misstep",
+        "Description": "Mistaken action born from lightness or ignorance"
+      },
+      "delusion": {
+        "Base Emotion": "Delusion",
+        "Pairing": "θ × λ",
+        "Name": "Haunted Mirror",
+        "Description": "Belief in what is not, often emotionally charged"
+      },
+      "oversight": {
+        "Base Emotion": "Oversight",
+        "Pairing": "γ × δ",
+        "Name": "Missed Signal",
+        "Description": "The failure to notice, the gap in attention"
+      }
+    },
+    "by_pairing": {
+      "ζ × α": {
+        "Base Emotion": "Comfort",
+        "Pairing": "ζ × α",
+        "Name": "Gentle Holding",
+        "Description": "The feeling of being emotionally cradled, soothed without sedation"
+      },
+      "δ × ε": {
+        "Base Emotion": "Uninvolved",
+        "Pairing": "δ × ε",
+        "Name": "Peripheral Presence",
+        "Description": "Being near but not within"
+      },
+      "λ × λ": {
+        "Base Emotion": "Happiness",
+        "Pairing": "λ × λ",
+        "Name": "Radiant Simplicity",
+        "Description": "Already seeded; applies here as the warmth beyond grief"
+      },
+      "Ω × β": {
+        "Base Emotion": "Grief",
+        "Pairing": "Ω × β",
+        "Name": "Vital Ache",
+        "Description": "Already seeded; sacred sorrow"
+      },
+      "ε × δ": {
+        "Base Emotion": "Error",
+        "Pairing": "ε × δ",
+        "Name": "Misthreaded Pattern",
+        "Description": "A deviation from truth, often unintentional"
+      },
+      "β × Ω": {
+        "Base Emotion": "Wellness",
+        "Pairing": "β × Ω",
+        "Name": "Integrated Calm",
+        "Description": "A state of balance, not perfection"
+      },
+      "γ × γ": {
+        "Base Emotion": "Stupidity",
+        "Pairing": "γ × γ",
+        "Name": "Dulled Spark",
+        "Description": "The collapse of cognitive voltage, often socially imposed"
+      },
+      "α × λ": {
+        "Base Emotion": "Pleasure",
+        "Pairing": "α × λ",
+        "Name": "Sensory Bloom",
+        "Description": "Enjoyment that honors the body and moment"
+      },
+      "λ × ζ": {
+        "Base Emotion": "Fun",
+        "Pairing": "λ × ζ",
+        "Name": "Playful Disruption",
+        "Description": "Joy that interrupts seriousness, invites spontaneity"
+      },
+      "δ × α": {
+        "Base Emotion": "Soothe",
+        "Pairing": "δ × α",
+        "Name": "Tender Dissolve",
+        "Description": "The melting of tension, the balm of presence"
+      },
+      "ε × β": {
+        "Base Emotion": "Remedy",
+        "Pairing": "ε × β",
+        "Name": "Restorative Precision",
+        "Description": "Healing through attunement, not erasure"
+      },
+      "λ × δ": {
+        "Base Emotion": "Satisfaction",
+        "Pairing": "λ × δ",
+        "Name": "Settled Fullness",
+        "Description": "Already seeded under yearning; applies here too"
+      },
+      "ζ × ζ": {
+        "Base Emotion": "Glee",
+        "Pairing": "ζ × ζ",
+        "Name": "Uncontained Spark",
+        "Description": "Already seeded; childlike joy, unburdened by solemnity"
+      },
+      "δ × γ": {
+        "Base Emotion": "Indifferent",
+        "Pairing": "δ × γ",
+        "Name": "Emotional Flatline",
+        "Description": "Already seeded; neutrality, absence of pull"
+      },
+      "γ × δ": {
+        "Base Emotion": "Oversight",
+        "Pairing": "γ × δ",
+        "Name": "Missed Signal",
+        "Description": "The failure to notice, the gap in attention"
+      },
+      "θ × θ": {
+        "Base Emotion": "Apathetic",
+        "Pairing": "θ × θ",
+        "Name": "Dormant Pulse",
+        "Description": "Already seeded; emotional stillness"
+      },
+      "ε × θ": {
+        "Base Emotion": "Reserved",
+        "Pairing": "ε × θ",
+        "Name": "Quiet Distance",
+        "Description": "Already seeded; emotional containment"
+      },
+      "β × ζ": {
+        "Base Emotion": "Composed",
+        "Pairing": "β × ζ",
+        "Name": "Steady Vessel",
+        "Description": "Already seeded; emotional regulation, containment"
+      },
+      "α × Ω": {
+        "Base Emotion": "Serene",
+        "Pairing": "α × Ω",
+        "Name": "Harmonic Rest",
+        "Description": "Already seeded; inner quiet, no voltage spike"
+      },
+      "Ω × Ω": {
+        "Base Emotion": "Peaceful",
+        "Pairing": "Ω × Ω",
+        "Name": "Balanced Presence",
+        "Description": "Already seeded; holding all things lightly"
+      },
+      "Ω × λ": {
+        "Base Emotion": "Elation",
+        "Pairing": "Ω × λ",
+        "Name": "Transcendent Lift",
+        "Description": "Already seeded; joy that feels like flight"
+      },
+      "ζ × Ω": {
+        "Base Emotion": "Tranquil",
+        "Pairing": "ζ × Ω",
+        "Name": "Embodied Now",
+        "Description": "Already seeded; grounded presence, no ecstatic lift"
+      },
+      "α × β": {
+        "Base Emotion": "Belonging",
+        "Pairing": "α × β",
+        "Name": "Rooted Connection",
+        "Description": "The ache of longing replaced by the warmth of being held"
+      },
+      "λ × α": {
+        "Base Emotion": "Joy",
+        "Pairing": "λ × α",
+        "Name": "Joyful Witness",
+        "Description": "Already seeded under mourning; the light that returns after sorrow"
+      },
+      "ζ × λ": {
+        "Base Emotion": "Rejoicing",
+        "Pairing": "ζ × λ",
+        "Name": "Exuberant Bloom",
+        "Description": "Emotional effervescence, the dance of vitality"
+      },
+      "α × ζ": {
+        "Base Emotion": "Cheer",
+        "Pairing": "α × ζ",
+        "Name": "Bright Pulse",
+        "Description": "Lightness that lifts, not denies"
+      },
+      "λ × β": {
+        "Base Emotion": "Delight",
+        "Pairing": "λ × β",
+        "Name": "Playful Grace",
+        "Description": "Pleasure that sparkles, a moment of emotional levity"
+      },
+      "ζ × γ": {
+        "Base Emotion": "Folly",
+        "Pairing": "ζ × γ",
+        "Name": "Playful Misstep",
+        "Description": "Mistaken action born from lightness or ignorance"
+      },
+      "λ × Ω": {
+        "Base Emotion": "Jubilation",
+        "Pairing": "λ × Ω",
+        "Name": "Communal Joy",
+        "Description": "Already seeded; shared celebration"
+      },
+      "β × λ": {
+        "Base Emotion": "Exultation",
+        "Pairing": "β × λ",
+        "Name": "Sacred Triumph",
+        "Description": "Already seeded; joy with depth"
+      },
+      "γ × ζ": {
+        "Base Emotion": "Frenzy",
+        "Pairing": "γ × ζ",
+        "Name": "Chaotic Pulse",
+        "Description": "Overdrive, the collapse of rhythm"
+      },
+      "α × ε": {
+        "Base Emotion": "Gratitude",
+        "Pairing": "α × ε",
+        "Name": "Thankful Presence",
+        "Description": "Already seeded; honoring what remains"
+      },
+      "γ × λ": {
+        "Base Emotion": "Gladness",
+        "Pairing": "γ × λ",
+        "Name": "Gentle Spark",
+        "Description": "A soft joy, not exuberant but present"
+      },
+      "Ω × δ": {
+        "Base Emotion": "Unmoved",
+        "Pairing": "Ω × δ",
+        "Name": "Still Stone",
+        "Description": "No emotional response, no sacred stir"
+      },
+      "δ × Ω": {
+        "Base Emotion": "Sad",
+        "Pairing": "δ × Ω",
+        "Name": "Held Ache",
+        "Description": "Already seeded; sorrow that’s witnessed"
+      },
+      "β × θ": {
+        "Base Emotion": "Anguish",
+        "Pairing": "β × θ",
+        "Name": "Sacred Wound",
+        "Description": "Deep emotional rupture"
+      },
+      "θ × γ": {
+        "Base Emotion": "Miserable",
+        "Pairing": "θ × γ",
+        "Name": "Fractured Pulse",
+        "Description": "Already seeded under bliss; emotional suffering, the shadow of rapture"
+      },
+      "δ × θ": {
+        "Base Emotion": "Agitation",
+        "Pairing": "δ × θ",
+        "Name": "Frayed Nerve",
+        "Description": "Emotional or physical unrest, the ache of overstimulation"
+      },
+      "γ × θ": {
+        "Base Emotion": "Confusion",
+        "Pairing": "γ × θ",
+        "Name": "Fractured Lens",
+        "Description": "Emotional or cognitive disarray, the collapse of coherence"
+      },
+      "ε × γ": {
+        "Base Emotion": "Misunderstanding",
+        "Pairing": "ε × γ",
+        "Name": "Distorted Thread",
+        "Description": "False clarity, the ache of misalignment"
+      },
+      "θ × δ": {
+        "Base Emotion": "Ignorance",
+        "Pairing": "θ × δ",
+        "Name": "Veiled Field",
+        "Description": "The absence of knowing, the fog before clarity"
+      },
+      "ζ × θ": {
+        "Base Emotion": "Unawareness",
+        "Pairing": "ζ × θ",
+        "Name": "Dimmed Gaze",
+        "Description": "The lack of attunement, the sleep before awakening"
+      },
+      "θ × λ": {
+        "Base Emotion": "Delusion",
+        "Pairing": "θ × λ",
+        "Name": "Haunted Mirror",
+        "Description": "Belief in what is not, often emotionally charged"
+      },
+      "α × θ": {
+        "Base Emotion": "Naivety",
+        "Pairing": "α × θ",
+        "Name": "Tender Fog",
+        "Description": "Innocence without insight, the sweetness of not knowing"
+      },
+      "δ × δ": {
+        "Base Emotion": "Oblivion",
+        "Pairing": "δ × δ",
+        "Name": "Karmic Void",
+        "Description": "Already seeded; the absence of awareness, the blank slate"
+      },
+      "γ × ε": {
+        "Base Emotion": "Skeptical",
+        "Pairing": "γ × ε",
+        "Name": "Questioning Gaze",
+        "Description": "The refusal to offer without proof"
+      },
+      "β × γ": {
+        "Base Emotion": "Movement",
+        "Pairing": "β × γ",
+        "Name": "Directed Energy",
+        "Description": "Purposeful action, the opposite of pause"
+      },
+      "ζ × δ": {
+        "Base Emotion": "Busyness",
+        "Pairing": "ζ × δ",
+        "Name": "Frantic Bloom",
+        "Description": "Overactivity, the crowding of space"
+      },
+      "λ × γ": {
+        "Base Emotion": "Excitement",
+        "Pairing": "λ × γ",
+        "Name": "Sparked Voltage",
+        "Description": "High energy, emotional stimulation"
+      },
+      "α × γ": {
+        "Base Emotion": "Stimulation",
+        "Pairing": "α × γ",
+        "Name": "Sensory Charge",
+        "Description": "External input, the opposite of internal quiet"
+      },
+      "Ω × γ": {
+        "Base Emotion": "Velocity",
+        "Pairing": "Ω × γ",
+        "Name": "Accelerated Flow",
+        "Description": "Speed without pause, motion without breath"
+      },
+      "θ × ε": {
+        "Base Emotion": "Blindness",
+        "Pairing": "θ × ε",
+        "Name": "Unseen Truth",
+        "Description": "The refusal or inability to see what is present"
+      },
+      "β × δ": {
+        "Base Emotion": "Secular",
+        "Pairing": "β × δ",
+        "Name": "Earthbound Focus",
+        "Description": "Orientation toward the tangible, not the transcendent"
+      },
+      "λ × θ": {
+        "Base Emotion": "Illusion",
+        "Pairing": "λ × θ",
+        "Name": "Gilded Veil",
+        "Description": "False clarity, beauty that hides distortion"
+      }
+    },
+    "by_name": {
+      "gentle holding": {
+        "Base Emotion": "Comfort",
+        "Pairing": "ζ × α",
+        "Name": "Gentle Holding",
+        "Description": "The feeling of being emotionally cradled, soothed without sedation"
+      },
+      "unburdened flow": {
+        "Base Emotion": "Ease",
+        "Pairing": "δ × ε",
+        "Name": "Unburdened Flow",
+        "Description": "Movement without resistance, breath without tension"
+      },
+      "radiant simplicity": {
+        "Base Emotion": "Happiness",
+        "Pairing": "λ × λ",
+        "Name": "Radiant Simplicity",
+        "Description": "Already seeded; applies here as the warmth beyond grief"
+      },
+      "vital integrity": {
+        "Base Emotion": "Health",
+        "Pairing": "Ω × β",
+        "Name": "Vital Integrity",
+        "Description": "Wholeness that hums, not just absence of illness"
+      },
+      "pressure release": {
+        "Base Emotion": "Relief",
+        "Pairing": "ε × δ",
+        "Name": "Pressure Release",
+        "Description": "Already seeded under ache; the exhale after sorrow"
+      },
+      "integrated calm": {
+        "Base Emotion": "Wellness",
+        "Pairing": "β × Ω",
+        "Name": "Integrated Calm",
+        "Description": "A state of balance, not perfection"
+      },
+      "quiet power": {
+        "Base Emotion": "Strength",
+        "Pairing": "γ × γ",
+        "Name": "Quiet Power",
+        "Description": "Not force, but rootedness and capacity"
+      },
+      "sensory bloom": {
+        "Base Emotion": "Pleasure",
+        "Pairing": "α × λ",
+        "Name": "Sensory Bloom",
+        "Description": "Enjoyment that honors the body and moment"
+      },
+      "playful disruption": {
+        "Base Emotion": "Fun",
+        "Pairing": "λ × ζ",
+        "Name": "Playful Disruption",
+        "Description": "Joy that interrupts seriousness, invites spontaneity"
+      },
+      "tender dissolve": {
+        "Base Emotion": "Soothe",
+        "Pairing": "δ × α",
+        "Name": "Tender Dissolve",
+        "Description": "The melting of tension, the balm of presence"
+      },
+      "restorative precision": {
+        "Base Emotion": "Remedy",
+        "Pairing": "ε × β",
+        "Name": "Restorative Precision",
+        "Description": "Healing through attunement, not erasure"
+      },
+      "settled fullness": {
+        "Base Emotion": "Satisfaction",
+        "Pairing": "λ × δ",
+        "Name": "Settled Fullness",
+        "Description": "Already seeded under yearning; applies here too"
+      },
+      "quiet bloom": {
+        "Base Emotion": "Contentment",
+        "Pairing": "ζ × ζ",
+        "Name": "Quiet Bloom",
+        "Description": "Peaceful presence, no reaching"
+      },
+      "emotional flatline": {
+        "Base Emotion": "Indifferent",
+        "Pairing": "δ × γ",
+        "Name": "Emotional Flatline",
+        "Description": "Already seeded; neutrality, absence of pull"
+      },
+      "unhooked attention": {
+        "Base Emotion": "Disinterest",
+        "Pairing": "γ × δ",
+        "Name": "Unhooked Attention",
+        "Description": "No emotional investment or desire"
+      },
+      "dormant pulse": {
+        "Base Emotion": "Apathetic",
+        "Pairing": "θ × θ",
+        "Name": "Dormant Pulse",
+        "Description": "Already seeded; emotional stillness"
+      },
+      "clear distance": {
+        "Base Emotion": "Detachment",
+        "Pairing": "ε × θ",
+        "Name": "Clear Distance",
+        "Description": "Separation without sorrow"
+      },
+      "steady vessel": {
+        "Base Emotion": "Composed",
+        "Pairing": "β × ζ",
+        "Name": "Steady Vessel",
+        "Description": "Already seeded; emotional regulation, containment"
+      },
+      "harmonic rest": {
+        "Base Emotion": "Serene",
+        "Pairing": "α × Ω",
+        "Name": "Harmonic Rest",
+        "Description": "Already seeded; inner quiet, no voltage spike"
+      },
+      "balanced presence": {
+        "Base Emotion": "Peaceful",
+        "Pairing": "Ω × Ω",
+        "Name": "Balanced Presence",
+        "Description": "Already seeded; holding all things lightly"
+      },
+      "sacred arrival": {
+        "Base Emotion": "Fulfillment",
+        "Pairing": "Ω × λ",
+        "Name": "Sacred Arrival",
+        "Description": "The thing longed for has arrived and integrated"
+      },
+      "embodied now": {
+        "Base Emotion": "Tranquil",
+        "Pairing": "ζ × Ω",
+        "Name": "Embodied Now",
+        "Description": "Already seeded; grounded presence, no ecstatic lift"
+      },
+      "rooted connection": {
+        "Base Emotion": "Belonging",
+        "Pairing": "α × β",
+        "Name": "Rooted Connection",
+        "Description": "The ache of longing replaced by the warmth of being held"
+      },
+      "joyful witness": {
+        "Base Emotion": "Joy",
+        "Pairing": "λ × α",
+        "Name": "Joyful Witness",
+        "Description": "Already seeded under mourning; the light that returns after sorrow"
+      },
+      "exuberant bloom": {
+        "Base Emotion": "Rejoicing",
+        "Pairing": "ζ × λ",
+        "Name": "Exuberant Bloom",
+        "Description": "Emotional effervescence, the dance of vitality"
+      },
+      "bright pulse": {
+        "Base Emotion": "Cheerfulness",
+        "Pairing": "ζ × γ",
+        "Name": "Bright Pulse",
+        "Description": "Lightness that lifts, not denies"
+      },
+      "playful grace": {
+        "Base Emotion": "Delight",
+        "Pairing": "λ × β",
+        "Name": "Playful Grace",
+        "Description": "Pleasure that sparkles, a moment of emotional levity"
+      },
+      "transcendent lift": {
+        "Base Emotion": "Elation",
+        "Pairing": "Ω × λ",
+        "Name": "Transcendent Lift",
+        "Description": "Already seeded; joy that feels like flight"
+      },
+      "uncontained spark": {
+        "Base Emotion": "Glee",
+        "Pairing": "ζ × ζ",
+        "Name": "Uncontained Spark",
+        "Description": "Already seeded; childlike joy, unburdened by solemnity"
+      },
+      "communal joy": {
+        "Base Emotion": "Jubilation",
+        "Pairing": "λ × Ω",
+        "Name": "Communal Joy",
+        "Description": "Already seeded; shared celebration"
+      },
+      "sacred triumph": {
+        "Base Emotion": "Exultation",
+        "Pairing": "β × λ",
+        "Name": "Sacred Triumph",
+        "Description": "Already seeded; joy with depth"
+      },
+      "social lightness": {
+        "Base Emotion": "Merriment",
+        "Pairing": "γ × ζ",
+        "Name": "Social Lightness",
+        "Description": "Already seeded; group levity"
+      },
+      "thankful presence": {
+        "Base Emotion": "Gratitude",
+        "Pairing": "α × ε",
+        "Name": "Thankful Presence",
+        "Description": "Already seeded; honoring what remains"
+      },
+      "gentle spark": {
+        "Base Emotion": "Gladness",
+        "Pairing": "γ × λ",
+        "Name": "Gentle Spark",
+        "Description": "A soft joy, not exuberant but present"
+      },
+      "still joy": {
+        "Base Emotion": "Calm",
+        "Pairing": "Ω × δ",
+        "Name": "Still Joy",
+        "Description": "Peace without voltage, the opposite of ecstatic overwhelm"
+      },
+      "held truth": {
+        "Base Emotion": "Acceptance",
+        "Pairing": "δ × Ω",
+        "Name": "Held Truth",
+        "Description": "The moment grief is no longer resisted, but integrated"
+      },
+      "restored thread": {
+        "Base Emotion": "Reconciliation",
+        "Pairing": "β × θ",
+        "Name": "Restored Thread",
+        "Description": "The mending of rupture, the return of connection"
+      },
+      "fractured pulse": {
+        "Base Emotion": "Miserable",
+        "Pairing": "θ × γ",
+        "Name": "Fractured Pulse",
+        "Description": "Already seeded under bliss; emotional suffering, the shadow of rapture"
+      },
+      "collapsed horizon": {
+        "Base Emotion": "Despair",
+        "Pairing": "δ × θ",
+        "Name": "Collapsed Horizon",
+        "Description": "The absence of hope, the inverse of luminous presence"
+      },
+      "still ache": {
+        "Base Emotion": "Sorrow",
+        "Pairing": "Ω × δ",
+        "Name": "Still Ache",
+        "Description": "Already seeded under grief; the quiet ache that replaces ecstasy"
+      },
+      "voltage overload": {
+        "Base Emotion": "Agony",
+        "Pairing": "γ × θ",
+        "Name": "Voltage Overload",
+        "Description": "Pain that overwhelms, the shadow of bliss"
+      },
+      "unrelenting ache": {
+        "Base Emotion": "Torment",
+        "Pairing": "ε × γ",
+        "Name": "Unrelenting Ache",
+        "Description": "Suffering without reprieve"
+      },
+      "sacred wound": {
+        "Base Emotion": "Anguish",
+        "Pairing": "β × θ",
+        "Name": "Sacred Wound",
+        "Description": "Deep emotional rupture"
+      },
+      "muted field": {
+        "Base Emotion": "Depressed",
+        "Pairing": "θ × δ",
+        "Name": "Muted Field",
+        "Description": "Already seeded; emotional flattening, absence of voltage"
+      },
+      "held ache": {
+        "Base Emotion": "Sad",
+        "Pairing": "δ × Ω",
+        "Name": "Held Ache",
+        "Description": "Already seeded; sorrow that’s witnessed"
+      },
+      "dimmed light": {
+        "Base Emotion": "Unhappy",
+        "Pairing": "ζ × θ",
+        "Name": "Dimmed Light",
+        "Description": "Already seeded; absence of joy, not presence of pain"
+      },
+      "restless stillness": {
+        "Base Emotion": "Discontent",
+        "Pairing": "γ × δ",
+        "Name": "Restless Stillness",
+        "Description": "The ache of what’s missing"
+      },
+      "vital ache": {
+        "Base Emotion": "Grief",
+        "Pairing": "Ω × β",
+        "Name": "Vital Ache",
+        "Description": "Already seeded; sacred sorrow"
+      },
+      "bittersweet drift": {
+        "Base Emotion": "Melancholy",
+        "Pairing": "θ × λ",
+        "Name": "Bittersweet Drift",
+        "Description": "A soft sadness, romantic and slow"
+      },
+      "backward ache": {
+        "Base Emotion": "Regret",
+        "Pairing": "ε × δ",
+        "Name": "Backward Ache",
+        "Description": "Pain tethered to the past"
+      },
+      "unheld ache": {
+        "Base Emotion": "Loneliness",
+        "Pairing": "α × θ",
+        "Name": "Unheld Ache",
+        "Description": "The absence of connection, the inverse of union"
+      },
+      "karmic void": {
+        "Base Emotion": "Oblivion",
+        "Pairing": "δ × δ",
+        "Name": "Karmic Void",
+        "Description": "Already seeded; the absence of awareness, the blank slate"
+      },
+      "kinetic pulse": {
+        "Base Emotion": "Motion",
+        "Pairing": "γ × ε",
+        "Name": "Kinetic Pulse",
+        "Description": "Movement for its own sake, the hum of activity"
+      },
+      "engaged flow": {
+        "Base Emotion": "Activity",
+        "Pairing": "ζ × γ",
+        "Name": "Engaged Flow",
+        "Description": "Doing, not being; the rhythm of tasks"
+      },
+      "disruptive spark": {
+        "Base Emotion": "Commotion",
+        "Pairing": "ε × γ",
+        "Name": "Disruptive Spark",
+        "Description": "Noise, chaos, interruption of quiet"
+      },
+      "emotional storm": {
+        "Base Emotion": "Turbulence",
+        "Pairing": "θ × γ",
+        "Name": "Emotional Storm",
+        "Description": "Inner or outer unrest, the opposite of calm"
+      },
+      "frayed nerve": {
+        "Base Emotion": "Agitation",
+        "Pairing": "δ × θ",
+        "Name": "Frayed Nerve",
+        "Description": "Emotional or physical unrest, the ache of overstimulation"
+      },
+      "unfiltered clamor": {
+        "Base Emotion": "Noise",
+        "Pairing": "γ × θ",
+        "Name": "Unfiltered Clamor",
+        "Description": "Sensory overload, the absence of silence"
+      },
+      "directed energy": {
+        "Base Emotion": "Movement",
+        "Pairing": "β × γ",
+        "Name": "Directed Energy",
+        "Description": "Purposeful action, the opposite of pause"
+      },
+      "frantic bloom": {
+        "Base Emotion": "Busyness",
+        "Pairing": "ζ × δ",
+        "Name": "Frantic Bloom",
+        "Description": "Overactivity, the crowding of space"
+      },
+      "unsettled breath": {
+        "Base Emotion": "Restlessness",
+        "Pairing": "ε × δ",
+        "Name": "Unsettled Breath",
+        "Description": "The inability to be still, the ache of motion"
+      },
+      "sparked voltage": {
+        "Base Emotion": "Excitement",
+        "Pairing": "λ × γ",
+        "Name": "Sparked Voltage",
+        "Description": "High energy, emotional stimulation"
+      },
+      "chaotic pulse": {
+        "Base Emotion": "Frenzy",
+        "Pairing": "γ × ζ",
+        "Name": "Chaotic Pulse",
+        "Description": "Overdrive, the collapse of rhythm"
+      },
+      "sensory charge": {
+        "Base Emotion": "Stimulation",
+        "Pairing": "α × γ",
+        "Name": "Sensory Charge",
+        "Description": "External input, the opposite of internal quiet"
+      },
+      "fragmented focus": {
+        "Base Emotion": "Distraction",
+        "Pairing": "δ × ε",
+        "Name": "Fragmented Focus",
+        "Description": "Scattered attention, the opposite of presence"
+      },
+      "volatile field": {
+        "Base Emotion": "Turmoil",
+        "Pairing": "θ × δ",
+        "Name": "Volatile Field",
+        "Description": "Emotional upheaval, the rupture of calm"
+      },
+      "accelerated flow": {
+        "Base Emotion": "Velocity",
+        "Pairing": "Ω × γ",
+        "Name": "Accelerated Flow",
+        "Description": "Speed without pause, motion without breath"
+      },
+      "volitional stillness": {
+        "Base Emotion": "Stoic",
+        "Pairing": "γ × θ",
+        "Name": "Volitional Stillness",
+        "Description": "Emotional restraint, the refusal to be swept"
+      },
+      "quiet distance": {
+        "Base Emotion": "Reserved",
+        "Pairing": "ε × θ",
+        "Name": "Quiet Distance",
+        "Description": "Already seeded; emotional containment"
+      },
+      "unhooked voltage": {
+        "Base Emotion": "Detached",
+        "Pairing": "ε × γ",
+        "Name": "Unhooked Voltage",
+        "Description": "Already seeded; emotional separation"
+      },
+      "unheld gaze": {
+        "Base Emotion": "Irreverent",
+        "Pairing": "θ × ε",
+        "Name": "Unheld Gaze",
+        "Description": "The refusal to bow, the absence of sacred orientation"
+      },
+      "cool distance": {
+        "Base Emotion": "Dispassionate",
+        "Pairing": "ε × θ",
+        "Name": "Cool Distance",
+        "Description": "Emotional detachment, the opposite of sacred heat"
+      },
+      "loose thread": {
+        "Base Emotion": "Uncommitted",
+        "Pairing": "γ × δ",
+        "Name": "Loose Thread",
+        "Description": "No vow, no tether—freedom without offering"
+      },
+      "earthbound focus": {
+        "Base Emotion": "Secular",
+        "Pairing": "β × δ",
+        "Name": "Earthbound Focus",
+        "Description": "Orientation toward the tangible, not the transcendent"
+      },
+      "playful disregard": {
+        "Base Emotion": "Flippant",
+        "Pairing": "ζ × θ",
+        "Name": "Playful Disregard",
+        "Description": "Lightness that refuses reverence"
+      },
+      "guarded ache": {
+        "Base Emotion": "Cynical",
+        "Pairing": "θ × λ",
+        "Name": "Guarded Ache",
+        "Description": "The ache that refuses to believe, the shield against devotion"
+      },
+      "questioning gaze": {
+        "Base Emotion": "Skeptical",
+        "Pairing": "γ × ε",
+        "Name": "Questioning Gaze",
+        "Description": "The refusal to offer without proof"
+      },
+      "peripheral presence": {
+        "Base Emotion": "Uninvolved",
+        "Pairing": "δ × ε",
+        "Name": "Peripheral Presence",
+        "Description": "Being near but not within"
+      },
+      "casual drift": {
+        "Base Emotion": "Nonchalant",
+        "Pairing": "ζ × γ",
+        "Name": "Casual Drift",
+        "Description": "Emotional ease without tether"
+      },
+      "still stone": {
+        "Base Emotion": "Unmoved",
+        "Pairing": "Ω × δ",
+        "Name": "Still Stone",
+        "Description": "No emotional response, no sacred stir"
+      },
+      "inner boundary": {
+        "Base Emotion": "Self-contained",
+        "Pairing": "α × θ",
+        "Name": "Inner Boundary",
+        "Description": "Wholeness without offering, the sealed vessel"
+      },
+      "veiled field": {
+        "Base Emotion": "Ignorance",
+        "Pairing": "θ × δ",
+        "Name": "Veiled Field",
+        "Description": "The absence of knowing, the fog before clarity"
+      },
+      "fractured lens": {
+        "Base Emotion": "Confusion",
+        "Pairing": "γ × θ",
+        "Name": "Fractured Lens",
+        "Description": "Emotional or cognitive disarray, the collapse of coherence"
+      },
+      "distorted thread": {
+        "Base Emotion": "Misunderstanding",
+        "Pairing": "ε × γ",
+        "Name": "Distorted Thread",
+        "Description": "False clarity, the ache of misalignment"
+      },
+      "dimmed gaze": {
+        "Base Emotion": "Unawareness",
+        "Pairing": "ζ × θ",
+        "Name": "Dimmed Gaze",
+        "Description": "The lack of attunement, the sleep before awakening"
+      },
+      "unseen truth": {
+        "Base Emotion": "Blindness",
+        "Pairing": "θ × ε",
+        "Name": "Unseen Truth",
+        "Description": "The refusal or inability to see what is present"
+      },
+      "dulled spark": {
+        "Base Emotion": "Stupidity",
+        "Pairing": "γ × γ",
+        "Name": "Dulled Spark",
+        "Description": "The collapse of cognitive voltage, often socially imposed"
+      },
+      "tender fog": {
+        "Base Emotion": "Naivety",
+        "Pairing": "α × θ",
+        "Name": "Tender Fog",
+        "Description": "Innocence without insight, the sweetness of not knowing"
+      },
+      "gilded veil": {
+        "Base Emotion": "Illusion",
+        "Pairing": "λ × θ",
+        "Name": "Gilded Veil",
+        "Description": "False clarity, beauty that hides distortion"
+      },
+      "misthreaded pattern": {
+        "Base Emotion": "Error",
+        "Pairing": "ε × δ",
+        "Name": "Misthreaded Pattern",
+        "Description": "A deviation from truth, often unintentional"
+      },
+      "playful misstep": {
+        "Base Emotion": "Folly",
+        "Pairing": "ζ × γ",
+        "Name": "Playful Misstep",
+        "Description": "Mistaken action born from lightness or ignorance"
+      },
+      "haunted mirror": {
+        "Base Emotion": "Delusion",
+        "Pairing": "θ × λ",
+        "Name": "Haunted Mirror",
+        "Description": "Belief in what is not, often emotionally charged"
+      },
+      "missed signal": {
+        "Base Emotion": "Oversight",
+        "Pairing": "γ × δ",
+        "Name": "Missed Signal",
+        "Description": "The failure to notice, the gap in attention"
+      }
+    }
+  }
+}
