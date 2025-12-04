@@ -3,7 +3,12 @@ FirstPerson - Personal AI Companion
 Main Streamlit entry point for post-reorganization deployment
 """
 
+import sys
+import os
+import base64
+from pathlib import Path
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Maintenance mode is controlled by the environment variable MAINTENANCE_MODE.
 # To enable the friendly maintenance page without editing code, set
