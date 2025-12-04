@@ -1,0 +1,410 @@
+{
+  "anonymization_strategy": {
+    "approach": "hybrid_encoding_plus_arx",
+    "description": "Gate system encodes user language immediately on ingestion; sensitive data anonymized before storage; ARX provides secondary k-anonymity verification",
+    "privacy_levels": {
+      "raw": "Original user input (never stored)",
+      "encoded": "Signal-based encoding (what gets stored)",
+      "anonymized": "K-anonymity verified (for analytics)",
+      "deleted": "After retention period expires"
+    }
+  },
+  "data_collection": {
+    "pii_categories": {
+      "direct_identifiers": [
+        "name",
+        "email",
+        "phone_number",
+        "address",
+        "social_security_number",
+        "account_number"
+      ],
+      "quasi_identifiers": [
+        "age",
+        "gender",
+        "location_city",
+        "occupation",
+        "education_level",
+        "relationship_status"
+      ],
+      "sensitive_content": [
+        "medical_information",
+        "mental_health_diagnosis",
+        "suicide_ideation",
+        "self_harm",
+        "substance_use",
+        "trauma_history",
+        "abuse_history",
+        "financial_hardship"
+      ],
+      "behavioral_data": [
+        "chat_patterns",
+        "response_latency",
+        "topic_progression",
+        "emotional_vocabulary_use",
+        "check_in_frequency"
+      ]
+    },
+    "collection_points": {
+      "authentication": {
+        "data": ["user_id", "email_on_signup"],
+        "storage": "Firebase Auth (encrypted)",
+        "retention": "Until account deletion"
+      },
+      "conversation": {
+        "data": ["user_input_text", "system_response", "signals_detected", "glyphs_triggered"],
+        "storage": "Supabase (encoded signals only)",
+        "retention": "Configurable per user (default 90 days)"
+      },
+      "affirmations": {
+        "data": ["affirmed_flow_metadata", "glyph_associations"],
+        "storage": "Supabase (anonymized)",
+        "retention": "Indefinite (for learning, no PII)"
+      },
+      "session_metadata": {
+        "data": ["session_id", "timestamp", "device_type"],
+        "storage": "Supabase",
+        "retention": "90 days"
+      }
+    }
+  },
+  "encoding_pipeline": {
+    "stage_1_input_capture": {
+      "description": "User sends raw message",
+      "stored": false,
+      "example": "I have thoughts of suicide and I'm scared"
+    },
+    "stage_2_signal_detection": {
+      "description": "Signal parser extracts emotional signals without storing raw text",
+      "stored": true,
+      "stored_as": ["SUICIDALITY", "FEAR", "URGENCY"],
+      "raw_text_discarded": true,
+      "example": "signals: ['suicidal_disclosure', 'fear', 'urgency'], gates: [4, 9], voltage: high"
+    },
+    "stage_3_gate_encoding": {
+      "description": "Gates encode signals into abstract emotional categories",
+      "stored": true,
+      "encoding_rules": {
+        "Gate_1": "Existential transitions encoded as phase_change_001",
+        "Gate_2": "Longing encoded as yearning_energy_002",
+        "Gate_4": "Grief encoded as loss_presence_004",
+        "Gate_5": "Presence encoded as embodied_awareness_005",
+        "Gate_9": "Crisis encoded as urgency_high_009"
+      },
+      "example": "encoded_gates: [phase_change_001, loss_presence_004, urgency_high_009]"
+    },
+    "stage_4_glyph_mapping": {
+      "description": "Glyphs referenced by ID, not by user content",
+      "stored": true,
+      "stored_as": ["glyph_id: 42", "glyph_id: 67", "glyph_id: 23"],
+      "lookup_table_only": "Maps glyph_id → glyph_name, user cannot reverse-engineer",
+      "example": "glyphs_triggered: [42, 67, 23] (no glyph names stored with user data)"
+    },
+    "stage_5_storage": {
+      "description": "What is actually stored in Supabase",
+      "storage_table": "conversation_logs_anonymized",
+      "fields": {
+        "user_id_hashed": "SHA-256 hash of user_id (cannot reverse to original)",
+        "session_id": "UUID (no identifying info)",
+        "timestamp": "ISO 8601",
+        "encoded_signals": ["signal_1", "signal_2", "signal_N"],
+        "encoded_gates": ["gate_code_001", "gate_code_004", "gate_code_N"],
+        "glyph_ids": [42, 67, 23],
+        "response_source": "suicidality_protocol",
+        "conversation_turn": 1,
+        "message_length_bucket": "100-200_chars",
+        "response_length_bucket": "500-750_chars"
+      },
+      "not_stored": [
+        "original_user_text",
+        "original_system_response_text",
+        "user_name",
+        "user_email",
+        "user_location",
+        "identifying_phrases"
+      ]
+    }
+  },
+  "arx_integration": {
+    "purpose": "Secondary privacy verification - ensure stored data meets k-anonymity standards",
+    "k_anonymity_threshold": 5,
+    "description": "No group of users can be uniquely identified by combination of quasi-identifiers",
+    "implementation": {
+      "api_endpoint": "https://api.arx.deidentifier.org/v1",
+      "method": "POST /analyze",
+      "frequency": "Monthly batch processing",
+      "dataset_size": "Sample 10,000 records monthly"
+    },
+    "quasi_identifiers_for_arx": [
+      "user_id_hashed (identifier_key: true)",
+      "timestamp (hierarchy: year/month/week/day)",
+      "encoded_signals (list_hierarchy: signal_category/signal_type)",
+      "message_length_bucket",
+      "response_length_bucket",
+      "conversation_turn"
+    ],
+    "sensitive_attributes": [
+      "encoded_gates",
+      "glyph_ids",
+      "response_source"
+    ],
+    "arx_output": {
+      "k_value": "Minimum k across all quasi-identifier groups",
+      "suppression_needed": "Percent of records that need generalization",
+      "risk_assessment": "Individual re-identification risk",
+      "recommendations": "Generalization hierarchy adjustments"
+    },
+    "if_k_below_threshold": {
+      "action": "Generalize quasi-identifiers further",
+      "example": "Change timestamp from day-level to week-level",
+      "rerun_analysis": "Until k >= 5"
+    }
+  },
+  "user_rights": {
+    "right_to_access": {
+      "description": "User can download all their data",
+      "implementation": "API endpoint /user/data-export",
+      "format": "JSON (anonymized signals + metadata only)",
+      "timeline": "Within 30 days of request"
+    },
+    "right_to_deletion": {
+      "description": "User can request permanent deletion",
+      "implementation": "API endpoint /user/data-delete",
+      "effect": [
+        "Delete raw conversation logs",
+        "Delete session metadata",
+        "Delete affirmation logs (user can keep aggregated learnings)",
+        "Retain only hashed user_id for accounting"
+      ],
+      "timeline": "Completed within 30 days"
+    },
+    "right_to_rectification": {
+      "description": "User can correct perceived inaccuracies",
+      "scope": "Limited (cannot change detected signals retroactively)",
+      "implementation": "User submits clarification in new message"
+    },
+    "right_to_portability": {
+      "description": "User can export data in machine-readable format",
+      "format": "CSV, JSON",
+      "timeline": "Within 30 days",
+      "includes": "Conversation metadata, signal patterns, glyph associations"
+    },
+    "right_to_withdraw_consent": {
+      "description": "User can revoke consent to data processing",
+      "effect": "No new data collection; existing data retention policies apply",
+      "implementation": "Account setting toggle"
+    }
+  },
+  "data_retention": {
+    "conversation_logs": {
+      "default_retention": "90 days",
+      "user_customizable": true,
+      "options": ["7 days", "30 days", "90 days", "1 year"],
+      "after_expiration": "Permanent deletion with cryptographic verification"
+    },
+    "affirmation_logs": {
+      "retention": "Indefinite",
+      "reason": "Enables learning from high-quality flows",
+      "privacy_protection": "Only aggregate statistics stored (no user text)"
+    },
+    "session_metadata": {
+      "retention": "90 days",
+      "includes": ["session_id", "timestamp", "device_type"],
+      "excludes": ["message_content", "user_identity"]
+    },
+    "user_account_data": {
+      "retention": "Until deletion request",
+      "includes": ["user_id_hash", "creation_date", "last_login"],
+      "after_deletion": "Anonymized for audit trail (cannot reverse to user)"
+    },
+    "audit_logs": {
+      "retention": "1 year",
+      "purpose": "Regulatory compliance, security investigation",
+      "access": "Authorized personnel only (RBAC)"
+    }
+  },
+  "encryption": {
+    "in_transit": {
+      "protocol": "TLS 1.3",
+      "certificate": "Let's Encrypt",
+      "enforcement": "HSTS headers, no downgrade to HTTP"
+    },
+    "at_rest": {
+      "database": "Supabase encryption (AES-256)",
+      "backups": "Encrypted with separate key",
+      "key_management": "AWS KMS or equivalent"
+    },
+    "user_id_hashing": {
+      "algorithm": "SHA-256",
+      "salt": "Per-installation unique salt (stored securely)",
+      "one_way": "Cannot reverse to original user_id"
+    },
+    "sensitive_fields": {
+      "email": "Encrypted in Firebase Auth",
+      "affirmation_content": "Encrypted separately from signals"
+    }
+  },
+  "access_controls": {
+    "role_based_access": {
+      "user": {
+        "can_access": ["own conversation metadata", "own affirmation feedback"],
+        "cannot_access": ["other users' data", "raw signal database"]
+      },
+      "developer": {
+        "can_access": ["aggregated analytics", "error logs"],
+        "cannot_access": ["individual user data", "identifiable information"]
+      },
+      "researcher": {
+        "can_access": ["k-anonymized dataset", "aggregate glyph effectiveness"],
+        "cannot_access": ["any identifiable data"],
+        "requires": ["IRB approval", "data use agreement"]
+      },
+      "admin": {
+        "can_access": ["audit logs", "user deletion requests"],
+        "cannot_access": ["raw user messages"],
+        "audit_trail": "All admin actions logged"
+      }
+    },
+    "multi_factor_authentication": {
+      "required_for": ["admin", "researcher"],
+      "method": "TOTP or security key",
+      "enforcement": "No exceptions"
+    },
+    "session_management": {
+      "timeout": "30 minutes of inactivity",
+      "max_duration": "8 hours",
+      "concurrent_sessions": "1 per user"
+    }
+  },
+  "vendor_management": {
+    "supabase": {
+      "dpa_status": "Data Processing Agreement signed",
+      "encryption": "Database-level encryption included",
+      "compliance": "GDPR, SOC 2 Type II",
+      "data_residency": "Configurable (EU, US, etc.)"
+    },
+    "firebase_auth": {
+      "dpa_status": "Google DPA applies",
+      "encryption": "TLS in transit, AES-256 at rest",
+      "compliance": "GDPR, CCPA",
+      "user_data_limited": "Email only on signup"
+    },
+    "arx_api": {
+      "dpa_status": "Review required before deployment",
+      "data_sent": "K-anonymized dataset only (no PII)",
+      "compliance": "GDPR-compliant (no data residency outside EU/US)"
+    }
+  },
+  "audit_and_monitoring": {
+    "security_audits": {
+      "frequency": "Quarterly",
+      "scope": ["encryption verification", "access control validation", "data flow verification"],
+      "external_audit": "Annual (GDPR compliance)"
+    },
+    "penetration_testing": {
+      "frequency": "Semi-annual",
+      "scope": ["authentication", "data access", "injection attacks"],
+      "report_timeline": "Within 2 weeks of test"
+    },
+    "logs_maintained": {
+      "access_logs": "All data access with timestamp, user, action",
+      "deletion_logs": "All data deletions with verification",
+      "audit_logs": "All system changes and admin actions",
+      "retention": "1 year minimum"
+    },
+    "incident_response": {
+      "plan": "Documented breach response procedures",
+      "notification_timeline": "72 hours per GDPR",
+      "contact": "Privacy officer email, regulatory body"
+    }
+  },
+  "compliance_checklist": {
+    "GDPR": {
+      "lawful_basis": "Explicit consent + legitimate interest (crisis prevention)",
+      "privacy_notice": "Provided before first message",
+      "data_minimization": "Only signals/gates stored, not raw text",
+      "retention_limits": "90 days default, user-customizable",
+      "user_rights": "Access, deletion, portability implemented",
+      "dpia": "Data Protection Impact Assessment completed",
+      "dpo_contact": "Privacy officer contact provided"
+    },
+    "CCPA": {
+      "consumer_rights": "Access, deletion, opt-out implemented",
+      "sale_prohibition": "Data never sold (committed in policy)",
+      "opt_out_link": "Provided in privacy policy and account settings",
+      "disclosure": "California residents informed of rights",
+      "verification": "Identity verification required for deletion requests"
+    },
+    "HIPAA": {
+      "applicability": "If mental health data collected, HIPAA may apply",
+      "business_associate_agreement": "Required if using covered entities' data",
+      "minimum_necessary": "Only data needed for immediate response collected",
+      "encryption": "AES-256 required",
+      "audit_controls": "Access logs maintained",
+      "breach_notification": "60-day notification requirement"
+    },
+    "state_wiretapping_laws": {
+      "all_party_consent_states": "User informed that conversation may be stored",
+      "one_party_consent_states": "System transparency sufficient",
+      "notice": "Provided in TOS and before first message"
+    }
+  },
+  "privacy_by_design": {
+    "principles": [
+      "Data minimization: Collect only what's necessary",
+      "Purpose limitation: Use data only for stated purposes",
+      "Storage limitation: Retain only as long as needed",
+      "Integrity and confidentiality: Protect against unauthorized access",
+      "Accountability: Document all processing activities"
+    ],
+    "implementation": {
+      "architecture": "Signals/gates encode data; raw text never persisted",
+      "defaults": "Least permissive: shortest retention, minimal collection",
+      "user_control": "Users choose retention policy, data deletion",
+      "transparency": "Privacy policy explains exactly what's stored and why"
+    }
+  },
+  "transparency_artifacts": {
+    "privacy_policy": {
+      "location": "frontend/public/PRIVACY_POLICY.md",
+      "update_frequency": "Any time data practices change",
+      "version_history": "Maintained with dates",
+      "plain_language": "Explained for non-technical users"
+    },
+    "data_processing_agreement": {
+      "location": "legal/DPA.md",
+      "parties": "FirstPerson (controller) and users (subjects)",
+      "includes": "Purposes, lawful basis, retention, rights"
+    },
+    "privacy_notice": {
+      "display": "Before first message",
+      "content": "What data collected, why, how long retained, user rights",
+      "consent": "Explicit opt-in to data collection"
+    }
+  },
+  "implementation_priority": {
+    "phase_1_immediate": [
+      "Stop storing raw user text (encode immediately)",
+      "Implement user_id hashing in Supabase",
+      "Set data retention policy to 90 days default",
+      "Encrypt sensitive fields in transit"
+    ],
+    "phase_2_short_term": [
+      "Implement right to deletion API",
+      "Integrate ARX for monthly k-anonymity checks",
+      "Add RBAC for admin/developer access",
+      "Set up audit logging"
+    ],
+    "phase_3_medium_term": [
+      "User data export API",
+      "Implement all user rights endpoints",
+      "Annual penetration testing",
+      "External GDPR audit"
+    ],
+    "phase_4_long_term": [
+      "Researcher data access with IRB approval",
+      "Continuous monitoring dashboard",
+      "Automated incident response"
+    ]
+  }
+}
