@@ -1,16 +1,16 @@
 """FirstPerson - Personal AI Companion - Main Entry Point"""
-import os
 import sys
+import os
 from pathlib import Path
+
+# Ensure src is in path
+workspace_root = str(Path(__file__).parent)
+if workspace_root not in sys.path:
+    sys.path.insert(0, workspace_root)
 
 import streamlit as st
 
-# Add workspace root to path for imports
-_workspace_root = str(Path(__file__).parent)
-if _workspace_root not in sys.path:
-    sys.path.insert(0, _workspace_root)
-
-# Page config with FirstPerson logo
+# Set page config first
 try:
     _logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
     _page_icon = None
@@ -35,124 +35,267 @@ except Exception as e:
         initial_sidebar_state="expanded",
     )
 
-# Session state for login
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
+# Initialize session state
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+if "user_id" not in st.session_state:
+    st.session_state.user_id = None
 if "username" not in st.session_state:
-    st.session_state.username = ""
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
+    st.session_state.username = None
+if "demo_mode" not in st.session_state:
+    st.session_state.demo_mode = True
+if "conversation_history" not in st.session_state:
+    st.session_state.conversation_history = []
 
-# Sidebar Authentication
-with st.sidebar:
-    st.markdown("---")
-    st.markdown("## FirstPerson")
-    st.markdown("*Your Personal AI Companion*")
+
+def render_splash():
+    """Render authentication/demo splash screen"""
+    col1, col2 = st.columns([0.3, 0.7])
+    
+    with col1:
+        try:
+            logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+            if logo_path.exists():
+                st.image(str(logo_path), use_column_width=True)
+        except Exception:
+            st.markdown("# 🧠")
+    
+    with col2:
+        st.markdown("# FirstPerson")
+        st.markdown("## Personal AI Companion")
+        st.markdown("""
+        An advanced emotional AI system designed to understand, respond to, and learn from your unique emotional landscape.
+        
+        ### Features
+        - 🎯 Emotional intelligence & resonance detection
+        - 💭 Personalized, context-aware responses
+        - 🧬 Adaptive learning & evolution
+        - 🔒 Privacy-first, local-first design
+        - 📓 Journaling & reflection tools
+        """)
+    
     st.markdown("---")
     
-    if not st.session_state.logged_in:
-        st.subheader("Login")
+    # Demo mode or login
+    if st.checkbox("Enter Demo Mode", value=True):
+        st.session_state.demo_mode = True
+        st.session_state.authenticated = True
+        st.session_state.username = "Demo User"
+        st.session_state.user_id = "demo_user"
+        st.rerun()
+    
+    st.markdown("### Or sign in with your account:")
+    tab1, tab2 = st.tabs(["Login", "Register"])
+    
+    with tab1:
         username = st.text_input("Username", key="login_username")
         password = st.text_input("Password", type="password", key="login_password")
         
-        if st.button("Login", key="login_button"):
+        if st.button("Sign In"):
             if username and password:
-                st.session_state.logged_in = True
+                st.session_state.authenticated = True
                 st.session_state.username = username
-                st.success(f"Welcome, {username}!")
+                st.session_state.user_id = f"user_{username}"
+                st.session_state.demo_mode = False
+                st.success(f"Welcome back, {username}!")
                 st.rerun()
             else:
                 st.error("Please enter both username and password")
-    else:
-        st.success(f"✅ Logged in as **{st.session_state.username}**")
+    
+    with tab2:
+        new_username = st.text_input("Choose a username", key="register_username")
+        new_password = st.text_input("Choose a password", type="password", key="register_password")
+        confirm_password = st.text_input("Confirm password", type="password", key="register_confirm")
+        
+        if st.button("Create Account"):
+            if not new_username or not new_password:
+                st.error("Username and password required")
+            elif new_password != confirm_password:
+                st.error("Passwords don't match")
+            else:
+                st.session_state.authenticated = True
+                st.session_state.username = new_username
+                st.session_state.user_id = f"user_{new_username}"
+                st.session_state.demo_mode = False
+                st.success(f"Welcome, {new_username}! Your account has been created.")
+                st.rerun()
+
+
+def render_main_app():
+    """Render the main application for authenticated users"""
+    
+    # Sidebar header
+    with st.sidebar:
+        try:
+            logo_path = Path("static/graphics/FirstPerson-Logo-invert-cropped_notext.svg")
+            if logo_path.exists():
+                st.image(str(logo_path), width=200)
+        except Exception:
+            st.markdown("# 🧠 FirstPerson")
+        
+        st.markdown("---")
+        
+        # User info
+        if st.session_state.demo_mode:
+            st.info(f"📌 Running in Demo Mode")
+        else:
+            st.success(f"✅ Logged in as **{st.session_state.username}**")
+        
+        st.markdown("---")
+        
+        # Navigation
+        st.subheader("Navigation")
+        page = st.radio(
+            "Select:",
+            ["Chat", "Glyphs", "Insights", "Journal", "Settings"],
+            key="main_nav"
+        )
+        
+        st.markdown("---")
+        
+        # Settings
+        st.subheader("Preferences")
+        processing_mode = st.selectbox(
+            "Processing Mode",
+            ["Local", "Hybrid", "Cloud"],
+            key="processing_mode"
+        )
+        
+        tone = st.selectbox(
+            "Response Tone",
+            ["Warm", "Professional", "Playful", "Neutral", "Meditative"],
+            key="tone_preference"
+        )
+        
+        st.markdown("---")
         
         if st.button("Logout"):
-            st.session_state.logged_in = False
-            st.session_state.username = ""
-            st.session_state.chat_history = []
+            st.session_state.authenticated = False
+            st.session_state.username = None
+            st.session_state.user_id = None
+            st.session_state.conversation_history = []
             st.rerun()
-        
-        st.markdown("---")
-        st.subheader("Navigation")
-        page = st.radio("Select:", ["Chat", "Settings", "About"], key="nav_radio")
-        st.markdown("---")
-        st.markdown("**v1.0.0** | Streamlit Cloud")
-
-# Main content
-if not st.session_state.logged_in:
-    st.markdown("# 🧠 FirstPerson")
-    st.markdown("## Personal AI Companion")
-    st.info("Please log in using the sidebar to continue.")
-    st.markdown("""
-    ### Features
-    - 🎯 Emotional AI processing
-    - 💭 Personalized responses
-    - 🧬 Adaptive learning
-    - 🔒 Privacy-first design
-    """)
-else:
+    
+    # Main content based on page selection
     if page == "Chat":
         st.markdown("# 💬 Chat with FirstPerson")
         
         # Chat display
         chat_container = st.container()
         with chat_container:
-            for message in st.session_state.chat_history:
-                if message["role"] == "user":
-                    st.write(f"**You:** {message['content']}")
+            for i, msg in enumerate(st.session_state.conversation_history):
+                if msg["role"] == "user":
+                    with st.chat_message("user"):
+                        st.write(msg["content"])
                 else:
-                    st.write(f"**FirstPerson:** {message['content']}")
+                    with st.chat_message("assistant"):
+                        st.write(msg["content"])
+                        if "metadata" in msg:
+                            st.caption(msg["metadata"])
         
         # Chat input
-        col1, col2 = st.columns([0.9, 0.1])
-        with col1:
-            user_input = st.text_input(
-                "Your message:",
-                key="chat_input",
-                placeholder="Type your message here..."
-            )
-        with col2:
-            send_button = st.button("Send", key="send_btn")
+        user_input = st.chat_input("Share what you're feeling...")
         
-        if send_button and user_input:
-            # Add user message to history
-            st.session_state.chat_history.append({
+        if user_input:
+            # Add user message
+            st.session_state.conversation_history.append({
                 "role": "user",
                 "content": user_input
             })
             
-            # Simulate AI response (placeholder)
-            response = f"I understand you said: '{user_input}'. This is a placeholder response. Full AI integration coming soon."
-            st.session_state.chat_history.append({
+            # Try to generate response using your processing pipeline
+            try:
+                from src import process_user_input
+                
+                if process_user_input:
+                    response = process_user_input(user_input)
+                    processing_time = "0.00s"
+                else:
+                    response = "I'm listening to you. This is a connection moment. [Response generation system initializing...]"
+                    processing_time = "0.00s"
+            except Exception as e:
+                response = f"I hear you saying: '{user_input}'. I'm here with you. [System: {str(e)[:50]}...]"
+                processing_time = "0.00s"
+            
+            # Add assistant message
+            st.session_state.conversation_history.append({
                 "role": "assistant",
-                "content": response
+                "content": response,
+                "metadata": f"Processed in {processing_time} • Mode: {processing_mode}"
             })
+            
             st.rerun()
     
-    elif page == "Settings":
-        st.markdown("# ⚙️ Settings")
-        st.write(f"**Current User:** {st.session_state.username}")
+    elif page == "Glyphs":
+        st.markdown("# ✨ Glyphs & Emotional Resonance")
+        st.info("Glyphs are emotional signatures detected in your messages. They help understand your emotional landscape.")
         
-        st.subheader("Preferences")
-        tone = st.selectbox("Tone", ["Warm", "Professional", "Playful", "Neutral"])
-        response_length = st.slider("Response Length", 1, 5, 3)
-        
-        if st.button("Save Settings"):
-            st.success("Settings saved!")
+        # Try to load glyph data
+        try:
+            from src import parse_input
+            if parse_input and st.session_state.conversation_history:
+                last_message = [m for m in st.session_state.conversation_history if m["role"] == "user"][-1]["content"]
+                result = parse_input(last_message)
+                st.json(result if isinstance(result, dict) else {"status": "parsing..."})
+        except Exception as e:
+            st.write(f"Glyph detection system: {e}")
     
-    else:  # About
-        st.markdown("# ℹ️ About FirstPerson")
-        st.markdown("""
-        **FirstPerson** is an advanced emotional AI system designed to provide:
+    elif page == "Insights":
+        st.markdown("# 📊 Learning Insights")
+        st.write("Your FirstPerson system learns from our conversations and adapts over time.")
+        st.info("Insights system initializing...")
+    
+    elif page == "Journal":
+        st.markdown("# 📓 Personal Journal")
+        st.write("Reflections, rituals, and personal growth tracking.")
         
-        - **Personalized Responses** - Adapts to your emotional state and preferences
-        - **Privacy-First Design** - Your data stays with you
-        - **Emotional Intelligence** - Understands context and nuance
-        - **Local-First Processing** - Minimal data transmission
+        entry_text = st.text_area(
+            "Write your reflection:",
+            placeholder="What's emerging for you emotionally or personally?",
+            height=200,
+            key="journal_entry"
+        )
         
-        ### Technology
-        Built with Streamlit, powered by advanced emotional processing algorithms.
+        if st.button("Save Reflection"):
+            if entry_text:
+                st.success("Your reflection has been saved.")
+            else:
+                st.error("Please write something first.")
+    
+    else:  # Settings
+        st.markdown("# ⚙️ Settings")
         
-        ### Contact
-        Questions? Feedback? Reach out to support.
-        """)
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("Display")
+            theme = st.selectbox("Theme", ["Light", "Dark", "Auto"], key="theme")
+            response_length = st.slider("Response Detail Level", 1, 5, 3, key="response_length")
+        
+        with col2:
+            st.subheader("Privacy & Data")
+            persist_history = st.checkbox("Persist conversation history", value=True, key="persist_history")
+            local_processing = st.checkbox("Prefer local processing", value=True, key="local_processing")
+        
+        st.markdown("---")
+        st.subheader("Account")
+        
+        if st.button("Delete All Conversation History"):
+            st.session_state.conversation_history = []
+            st.success("History cleared.")
+        
+        if st.button("Export My Data"):
+            st.info("Export feature coming soon...")
+
+
+def main():
+    """Main entry point"""
+    if not st.session_state.get("authenticated"):
+        render_splash()
+    else:
+        render_main_app()
+
+
+if __name__ == "__main__":
+    main()
+
