@@ -74,8 +74,8 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
         Response text (may include prosody metadata)
     """
     try:
-        from ..glyphs.signal_parser import parse_input
-        from ...core.paths import get_path_manager
+        from emotional_os.glyphs.signal_parser import parse_input
+        from emotional_os.core.paths import get_path_manager
 
         # Get proper paths using PathManager (handles both local and cloud deployments)
         pm = get_path_manager()
