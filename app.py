@@ -1,4 +1,5 @@
 """FirstPerson - Personal AI Companion"""
+# Force rebuild - December 3, 2025
 import streamlit as st
 
 st.set_page_config(
