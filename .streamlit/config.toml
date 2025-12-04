@@ -1,3 +1,6 @@
+[client]
+mainModuleScript = "app.py"
+
 [server]
 headless = true
 # If you serve the Streamlit app behind a reverse proxy at /app, set baseUrlPath accordingly
