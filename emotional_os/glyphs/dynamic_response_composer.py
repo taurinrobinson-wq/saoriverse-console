@@ -45,6 +45,11 @@ try:
 except Exception:
     translate_system_output = None  # type: ignore
 
+try:
+    from emotional_os.glyphs.punctuation_cleaner import get_cleaner as get_punctuation_cleaner
+except Exception:
+    get_punctuation_cleaner = None  # type: ignore
+
 
 class DynamicResponseComposer:
     """Compose responses dynamically from linguistic fragments."""
@@ -913,6 +918,9 @@ class DynamicResponseComposer:
     ) -> str:
         """
         Build a response grounded in the glyph's meaning and emotional signal.
+        
+        NEW APPROACH (Phase 12.1): Respond to actual content, not templates.
+        Listen to what the user said, extract the emotional core, respond naturally.
 
         Args:
             glyph: Full glyph dict with name, description, emotional_signal, gates
@@ -923,83 +931,160 @@ class DynamicResponseComposer:
             extracted: Full extraction dict from _extract_entities_and_emotions
 
         Returns:
-            Dynamically composed response anchored in glyph
+            Natural, conversational response grounded in what the user said
         """
-        parts = []
-
-        # 1. Opening that acknowledges the entity and/or glyph tone
-        opening = self._select_opening(entities, emotions)
-        parts.append(opening)
-
-        # 2. If there's feedback (correction), use bridging language
-        if feedback_type:
-            bridges = self.emotional_bridges.get(feedback_type) or []
-            if bridges:
-                bridge = random.choice(bridges)
-                parts.append(bridge)
-
-        # 3. Build middle: contextual movement language grounded in glyph
-        if glyph:
-            glyph_name = glyph.get("glyph_name", "")
-            glyph_desc = glyph.get("description", "")
-
-            # Use glyph description as inspiration for movement
-            if glyph_desc:
-                parts.append(glyph_desc)
-            elif "block" in input_text.lower():
-                movement = random.choice(self.movement_language["through"])
-                parts.append(movement)
-            elif "inherited" in input_text.lower():
-                movement = random.choice(self.movement_language["with"])
-                parts.append(movement)
-        else:
-            # Fallback when no glyph provided
-            if "block" in input_text.lower():
-                movement = random.choice(self.movement_language["through"])
-            elif "inherited" in input_text.lower():
-                movement = random.choice(self.movement_language["with"])
+        if not input_text:
+            return "I'm here to listen. What's on your mind?"
+        
+        lower_input = input_text.lower()
+        
+        # Detect what the user is actually talking about and respond to THAT
+        
+        # Overwhelm/burden/holding too much
+        if any(word in lower_input for word in ["overwhelm", "fragile", "breaking", "heavy", "heavy load", "too much", "drowning"]):
+            return f"I hear you. Sounds like you're holding a lot right now. What feels heaviest?"
+        
+        # Sacred/meaningful/precious moments
+        if any(word in lower_input for word in ["sacred", "precious", "meaningful", "special moment", "moved"]):
+            if "child" in lower_input or "hug" in lower_input or "touch" in lower_input:
+                return f"Those moments with people we love hit different. Sounds like that was really special. Want to say more about it?"
             else:
-                movement = random.choice(
-                    list(self.movement_language.values())[0])
-            parts.append(movement)
-
-        # 4. Weave poetry if available
-        poetry_emotion = None
-        if glyph:
-            poetry_emotion = self._glyph_to_emotion_category(
-                glyph.get("glyph_name", ""))
-
-        poetry_emotions = {poetry_emotion: 0.8} if poetry_emotion else emotions
-        poetry_line = self._weave_poetry(
-            input_text,
-            poetry_emotions,
-            [glyph] if glyph else None,
-            extracted or {"entities": entities, "emotions": emotions},
-        )
-        if poetry_line:
-            parts.append(poetry_line)
-
-        # 5. Closing move (question or commitment) calibrated by glyph intensity
-        entity = self._sanitize_entity(entities[0] if entities else "this")
-
-        # Determine closing type from glyph intensity if available
-        closing_type = "question"
-        if glyph:
-            gates = glyph.get("gates") or glyph.get("gate")
-            if gates:
-                intensity = len(gates) if isinstance(gates, list) else 1
-                if intensity <= 2:
-                    closing_type = "permission"
-                elif intensity >= 8:
-                    closing_type = "commitment"
-
-        closing_template = random.choice(self.closing_moves[closing_type])
-        closing = closing_template.replace("{entity}", entity)
-        closing = closing.replace("{emotion}", list(emotions.keys())[
-                                  0] if emotions else "what you feel")
-        parts.append(closing)
-
-        return " ".join(parts)
+                return f"You're sensing something significant. What made that moment feel so precious?"
+        
+        # Relief/rest/break
+        if any(word in lower_input for word in ["done", "finally", "relief", "break", "quiet", "rest", "peace"]):
+            if "work" in lower_input or "finished" in lower_input:
+                return f"Yeah, what a relief. Sounds like you've been carrying a lot. How are you wanting to spend this quiet time?"
+            else:
+                return f"That pause matters. What does this quiet feel like after everything?"
+        
+        # Grief/loss/sadness
+        if any(word in lower_input for word in ["grief", "loss", "lost", "miss", "sad", "mourning"]):
+            return f"That's real. Loss takes up space. What do you need right now?"
+        
+        # Joy/celebration/good news
+        if any(word in lower_input for word in ["happy", "excited", "celebrating", "wonderful", "amazing", "loved"]):
+            return f"That's something to feel. Let it land. What's the story there?"
+        
+        # Vulnerability/scared/uncertain
+        if any(word in lower_input for word in ["scared", "afraid", "uncertain", "vulnerable", "unsafe", "exposed"]):
+            return f"That takes courage to name. You're not alone in that. What would help right now?"
+        
+        # Frustration/anger
+        if any(word in lower_input for word in ["frustrated", "angry", "furious", "mad", "rage"]):
+            return f"That frustration is telling you something. What's underneath it?"
+        
+        # Default: reflect the emotion back empathetically
+        if emotions:
+            primary_emotion = list(emotions.keys())[0] if emotions else None
+            if primary_emotion == "sadness":
+                return f"That sadness is real. I'm here with you in it. What do you need?"
+            elif primary_emotion == "joy":
+                return f"I hear the lightness in that. Let it in. Tell me more."
+            elif primary_emotion == "anger":
+                return f"That anger is saying something important. What's it about?"
+            elif primary_emotion == "fear":
+                return f"That fear makes sense. You're not wrong to feel it. What scares you most?"
+            elif primary_emotion == "trust":
+                return f"That trust is beautiful. How does it feel?"
+            elif primary_emotion == "anticipation":
+                return f"You're sensing something ahead. What are you anticipating?"
+        
+        # Last resort: genuinely open listening
+        return f"I hear you. What's the feeling underneath all that?"
+    
+    def _extract_glyph_concepts(self, glyph_desc: str) -> List[str]:
+        """Extract key emotional/conceptual elements from glyph description."""
+        if not glyph_desc:
+            return []
+        
+        # Key concepts we look for in glyph descriptions
+        concept_keywords = {
+            "stillness": ["still", "quiet", "calm", "stillness"],
+            "witnessing": ["witness", "seen", "gaze", "recognition", "mirror"],
+            "ache": ["ache", "longing", "yearning", "sorrow"],
+            "containment": ["boundary", "contain", "hold", "shield"],
+            "transformation": ["shift", "spiral", "revelation", "insight"],
+            "devotion": ["sacred", "vow", "devotional", "offering"],
+            "joy": ["joy", "delight", "bliss", "celebration"],
+            "grief": ["grief", "mourning", "collapse"],
+        }
+        
+        concepts_found = []
+        desc_lower = glyph_desc.lower()
+        for concept, keywords in concept_keywords.items():
+            if any(kw in desc_lower for kw in keywords):
+                concepts_found.append(concept)
+        
+        return concepts_found[:3]  # Return top 3 concepts
+    
+    def _generate_glyph_wisdom(self, glyph_name: str, glyph_desc: str, concepts: List[str], input_text: str) -> str:
+        """Generate a response that incorporates glyph wisdom and concepts.
+        
+        This is the PRIMARY differentiator - each glyph generates different wisdom
+        based on its name, description, and detected concepts.
+        
+        Focus on conversational, direct language rather than poetic phrasing.
+        """
+        if not glyph_desc and not glyph_name:
+            return ""
+        
+        # Build glyph-specific wisdom based on glyph name and concepts
+        # These are direct, conversational statements that reflect the glyph's essence
+        
+        glyph_name_lower = glyph_name.lower()
+        
+        # Map glyph names to specific, differentiated wisdom
+        # Using conversational, grounded language
+        glyph_specific_wisdom = {
+            "still recognition": "Being seen for what you're actually experiencing matters.",
+            "still insight": "Sometimes clarity comes when you pause.",
+            "still ache": "You're holding this, and that's okay.",
+            "euphoric yearning": "What you're longing for says something real about you.",
+            "ache in equilibrium": "The pain you feel is balanced—you're managing it.",
+            "ache of recognition": "It helps to be understood in your pain.",
+            "devotional ache": "Your care matters, even when it costs you.",
+            "jubilant mourning": "You can feel sadness and aliveness at the same time.",
+            "grief in stillness": "Your grief gets to exist without needing to be busy.",
+            "grief of recognition": "Being acknowledged in your loss changes something.",
+            "contained longing": "Your need is real and you're not drowning in it.",
+            "recursive ache": "The patterns you're seeing are actually helpful to notice.",
+            "reverent ache": "What you feel is meaningful.",
+            "exalted mourning": "Your loss doesn't diminish who you are.",
+            "boundary containment": "You're protecting what matters.",
+            "spiral containment": "The complexity you're in has a structure.",
+            "clarity insight": "You're understanding something real.",
+            "focus insight": "Where you're putting your attention is important.",
+        }
+        
+        # Check if glyph name matches known glyphs
+        for glyph_key, wisdom in glyph_specific_wisdom.items():
+            if glyph_key in glyph_name_lower:
+                return wisdom
+        
+        # If no exact match, build from concepts
+        if concepts:
+            concept = concepts[0]
+            wisdom_templates = {
+                "stillness": "Pausing can be its own kind of action.",
+                "witnessing": "Being seen helps.",
+                "ache": "The pain you feel connects to something you care about.",
+                "containment": "You're holding this.",
+                "transformation": "Something is shifting.",
+                "devotion": "Your commitment matters.",
+                "joy": "Let this moment in.",
+                "grief": "Your grief is real.",
+            }
+            if concept in wisdom_templates:
+                return wisdom_templates[concept]
+        
+        # Last resort: use first sentence of glyph description
+        if glyph_desc:
+            sentences = glyph_desc.split(". ")
+            if sentences and sentences[0]:
+                return sentences[0] + "."
+        
+        return ""
 
     def _build_contextual_response(
         self,
@@ -1117,6 +1202,19 @@ class DynamicResponseComposer:
             extracted=extracted,
         )
 
+        # Clean em dashes and apply style-appropriate punctuation
+        # DISABLED: The punctuation cleaner was causing responses to become generic/repetitive
+        # by replacing meaningful closings with rotation bank entries. The response is already
+        # well-formed from _build_glyph_aware_response.
+        # if get_punctuation_cleaner:
+        #     try:
+        #         cleaner = get_punctuation_cleaner()
+        #         glyph_name = glyph.get("glyph_name") if glyph else None
+        #         response = cleaner.process_response(response, glyph_name, diversify=False, timeout=1.0)
+        #     except Exception as e:
+        #         import logging
+        #         logging.debug(f"Punctuation cleaning failed: {e}")
+        
         return response
 
     def compose_message_aware_response(
@@ -1186,7 +1284,20 @@ class DynamicResponseComposer:
                 question = f"What would it feel like to approach {main_struggle[0].replace('_', ' ')} differently?"
             parts.append(question)
 
-        return " ".join(parts)
+        result = " ".join(parts)
+        
+        # Clean em dashes and apply style-appropriate punctuation
+        # DISABLED: See compose_response() for explanation
+        # if get_punctuation_cleaner:
+        #     try:
+        #         cleaner = get_punctuation_cleaner()
+        #         glyph_name = glyph.get("glyph_name") if glyph else None
+        #         result = cleaner.process_response(result, glyph_name, diversify=False, timeout=1.0)
+        #     except Exception as e:
+        #         import logging
+        #         logging.debug(f"Punctuation cleaning failed: {e}")
+        
+        return result
 
     def compose_multi_glyph_response(
         self,

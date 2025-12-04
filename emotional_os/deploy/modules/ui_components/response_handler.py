@@ -73,23 +73,16 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
     try:
         from emotional_os.glyphs.signal_parser import parse_input
 
-        # Local signal parsing
+        # Local signal parsing with word-centric lexicon
         local_analysis = parse_input(
             user_input,
-            "emotional_os/parser/signal_lexicon.json",
+            "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json",
             db_path="emotional_os/glyphs/glyphs.db",
             conversation_context=conversation_context,
         )
 
-        # FirstPerson orchestration (relational AI)
-        local_analysis = _apply_firstperson_insights(
-            user_input, local_analysis)
-
-        # Affect analysis (emotional tone, valence, arousal)
-        local_analysis = _apply_affect_analysis(user_input, local_analysis)
-
-        # Response engine integration
-        response = _call_response_engine(user_input, local_analysis)
+        # Get the conversational response from the analysis
+        response = _build_conversational_response(user_input, local_analysis)
 
         # Store analysis in session for debug if needed
         st.session_state["last_local_analysis"] = local_analysis
@@ -99,6 +92,56 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
     except Exception as e:
         logger.warning(f"Local processing failed: {e}")
         return "I'm here to listen. Can you tell me more?"
+
+
+def _build_conversational_response(user_input: str, local_analysis: dict) -> str:
+    """Build a natural conversational response from signal analysis.
+    
+    Takes the raw glyph analysis and builds a response that:
+    1. Acknowledges what the user said
+    2. Uses the glyph insights naturally
+    3. Stays conversational and warm
+    
+    Args:
+        user_input: Original user message
+        local_analysis: Analysis dict from parse_input
+        
+    Returns:
+        Conversational response
+    """
+    glyphs = local_analysis.get("glyphs", [])
+    best_glyph = local_analysis.get("best_glyph")
+    voltage_response = local_analysis.get("voltage_response", "")
+    
+    # If we have a voltage response, use that as the primary response
+    if voltage_response and voltage_response.strip():
+        # Clean up any leftover metadata
+        response = voltage_response.strip()
+        if "Resonant Glyph:" in response:
+            response = response.split("Resonant Glyph:")[0].strip()
+        return response
+    
+    # Fallback: build a simple acknowledgment + glyph insight
+    # This is a minimal conversational wrapper
+    glyph_name = best_glyph.get("glyph_name", "") if best_glyph else ""
+    glyph_desc = best_glyph.get("description", "") if best_glyph else ""
+    
+    if glyph_name:
+        # Create a simple conversational response
+        opening = "I hear you. "
+        if len(user_input) < 30:
+            opening += "That sounds important. "
+        else:
+            opening += "That's a lot to carry. "
+        
+        # Use glyph insight as support
+        if glyph_desc:
+            return f"{opening}I'm sensing {glyph_name.lower()} — {glyph_desc.lower()}."
+        else:
+            return opening
+    
+    # Last resort fallback
+    return "I'm here to listen. Can you tell me more?"
 
 
 def _run_hybrid_processing(user_input: str, conversation_context: dict) -> str:
@@ -186,47 +229,32 @@ def _apply_affect_analysis(user_input: str, local_analysis: dict) -> dict:
 
 
 def _call_response_engine(user_input: str, local_analysis: dict) -> str:
-    """Call the main response engine with analysis context.
+    """Build conversational response from local analysis.
+
+    Uses the voltage_response (contextual AI response) as the primary
+    response, with the glyph as supporting metadata.
 
     Args:
         user_input: User message
         local_analysis: Complete analysis dict
 
     Returns:
-        Response text or empty string if engine fails
+        Response text
     """
-    try:
-        from core.main_response_engine import process_user_input as _engine_process
-
-        ctx = {"local_analysis": local_analysis}
-
-        # Add preprocessing insights if available
-        last_preproc = st.session_state.get("last_preproc", {})
-        if isinstance(last_preproc, dict):
-            if last_preproc.get("intent"):
-                ctx["emotion"] = last_preproc.get("intent")
-            if last_preproc.get("confidence"):
-                ctx["intensity"] = "high" if last_preproc.get(
-                    "confidence", 0) > 0.7 else "gentle"
-
-        response = _engine_process(user_input, ctx)
-
-        return response if response else ""
-
-    except Exception as e:
-        logger.warning(f"Response engine call failed: {e}")
-
-        # Fallback: build basic response from local analysis
-        glyphs = local_analysis.get("glyphs", [])
-        voltage_response = local_analysis.get("voltage_response", "")
-        best_glyph = local_analysis.get("best_glyph")
-        glyph_display = best_glyph.get(
-            "glyph_name", "None") if best_glyph else "None"
-
-        if glyphs:
-            return f"{voltage_response}\n\nResonant Glyph: {glyph_display}"
-        else:
-            return voltage_response or "I'm here to listen."
+    # Primary response is the voltage_response (already conversational)
+    voltage_response = local_analysis.get("voltage_response", "")
+    
+    if not voltage_response:
+        # Fallback if no voltage response
+        return "I'm here to listen. Can you tell me more?"
+    
+    # Remove any "Resonant Glyph:" or debug metadata that might be appended
+    if "Resonant Glyph:" in voltage_response:
+        voltage_response = voltage_response.split("Resonant Glyph:")[0].strip()
+    if "Local decoding:" in voltage_response:
+        voltage_response = voltage_response.split("Local decoding:")[0].strip()
+    
+    return voltage_response
 
 
 def _apply_fallback_protocols(user_input: str, response: str) -> str:

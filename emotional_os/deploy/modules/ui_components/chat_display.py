@@ -29,20 +29,19 @@ def render_chat_container(conversation_key: str):
         # Show empty state if no messages yet
         if not st.session_state.get(conversation_key):
             _render_empty_state()
-            return
+        else:
+            # Display all message exchanges
+            for exchange in st.session_state.get(conversation_key, []):
+                if isinstance(exchange, dict):
+                    with st.chat_message("user"):
+                        st.write(exchange.get("user", ""))
 
-        # Display all message exchanges
-        for exchange in st.session_state.get(conversation_key, []):
-            if isinstance(exchange, dict):
-                with st.chat_message("user"):
-                    st.write(exchange.get("user", ""))
+                    with st.chat_message("assistant"):
+                        st.write(exchange.get("assistant", ""))
 
-                with st.chat_message("assistant"):
-                    st.write(exchange.get("assistant", ""))
-
-                    # Show processing metadata if available
-                    if "processing_time" in exchange:
-                        _show_processing_info(exchange)
+                        # Show processing metadata if available
+                        if "processing_time" in exchange:
+                            _show_processing_info(exchange)
 
     return chat_container
 

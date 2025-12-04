@@ -370,7 +370,13 @@ class SaoynxAuthentication:
             self.supabase_url = None
             self.supabase_key = None
             self.supabase_configured = False
-            st.warning("⚠️ Running in demo mode - Supabase not configured")
+            # Don't show warning during init; let render_splash_interface handle it
+            pass
+        except Exception as e:
+            # Catch any other errors (secrets not accessible, etc.)
+            self.supabase_url = None
+            self.supabase_key = None
+            self.supabase_configured = False
         self.init_session_state()
 
     def create_session_token(self, username: str, user_id: str) -> str:
@@ -602,6 +608,39 @@ class SaoynxAuthentication:
             return {"success": False, "message": error_data.get("error", "Failed to create account")}
         except Exception as e:
             return {"success": False, "message": f"Registration error: {str(e)}"}
+
+    def render_splash_interface(self):
+        """Render the splash screen with login/register options."""
+        # Show demo mode banner if Supabase is not configured
+        if not self.supabase_configured:
+            st.info("📌 Running in demo mode — Supabase is not configured. You can use demo login with any username/password.")
+        
+        st.markdown("<h1 style='text-align:center'>FirstPerson</h1>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align:center'>A private space for emotional processing and growth</p>", unsafe_allow_html=True)
+        
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            if st.button("Sign In", key="splash_signin", use_container_width=True):
+                st.session_state["show_login"] = True
+                st.session_state["show_register"] = False
+                st.rerun()
+        with col2:
+            if st.button("Create Account", key="splash_signup", use_container_width=True):
+                st.session_state["show_register"] = True
+                st.session_state["show_login"] = False
+                st.rerun()
+        with col3:
+            if st.button("Demo Mode", key="demo_mode_btn", use_container_width=True):
+                self.quick_login_bypass()
+
+        st.divider()
+
+        if st.session_state.get("show_login"):
+            st.markdown("## Sign In")
+            self.render_login_form()
+        elif st.session_state.get("show_register"):
+            st.markdown("## Create An Account")
+            self.render_register_form()
 
     def quick_login_bypass(self):
         user_id = str(uuid.uuid4())

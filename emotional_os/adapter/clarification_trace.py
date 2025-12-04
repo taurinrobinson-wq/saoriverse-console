@@ -7,7 +7,6 @@ interpretation toward corrected intents.
 Storage: `data/disambiguation_memory.jsonl` (created if missing).
 """
 
-import fcntl
 import json
 import os
 import queue
@@ -16,6 +15,32 @@ import stat
 import threading
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+# fcntl is Unix-only; Windows doesn't need file locking for this use case
+try:
+    import fcntl
+    HAS_FCNTL = True
+except ImportError:
+    HAS_FCNTL = False
+
+
+def _safe_lock(fh, lock_type):
+    """Safely acquire file lock on Unix; no-op on Windows."""
+    if HAS_FCNTL:
+        try:
+            fcntl.flock(fh.fileno(), lock_type)
+        except Exception:
+            pass
+
+
+def _safe_unlock(fh):
+    """Safely release file lock on Unix; no-op on Windows."""
+    if HAS_FCNTL:
+        try:
+            fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
+        except Exception:
+            pass
+
 try:
     from emotional_os.adapter.clarification_store import get_default_store
 except Exception:
@@ -138,16 +163,10 @@ class ClarificationTrace:
                 record["user_id"] = context.get("user_id")
             try:
                 with open(self.store_path, "a", encoding="utf8") as fh:
-                    try:
-                        fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
-                    except Exception:
-                        pass
+                    _safe_lock(fh, fcntl.LOCK_EX if HAS_FCNTL else None)
                     fh.write(json.dumps(record, ensure_ascii=False) + "\n")
                     fh.flush()
-                    try:
-                        fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
-                    except Exception:
-                        pass
+                    _safe_unlock(fh)
             except Exception:
                 pass
             fallback_result = {"stored": True, "rowid": None,
@@ -256,16 +275,10 @@ class ClarificationTrace:
             # fallback to file append as legacy behaviour
             try:
                 with open(self.store_path, "a", encoding="utf8") as fh:
-                    try:
-                        fcntl.flock(fh.fileno(), fcntl.LOCK_EX)
-                    except Exception:
-                        pass
+                    _safe_lock(fh, fcntl.LOCK_EX if HAS_FCNTL else None)
                     fh.write(json.dumps(record, ensure_ascii=False) + "\n")
                     fh.flush()
-                    try:
-                        fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
-                    except Exception:
-                        pass
+                    _safe_unlock(fh)
             except Exception:
                 pass
             result = {"stored": True, "rowid": None,
@@ -287,15 +300,9 @@ class ClarificationTrace:
 
         try:
             with open(self.store_path, "r", encoding="utf8") as fh:
-                try:
-                    fcntl.flock(fh.fileno(), fcntl.LOCK_SH)
-                except Exception:
-                    pass
+                _safe_lock(fh, fcntl.LOCK_SH if HAS_FCNTL else None)
                 lines = fh.read().strip().splitlines()
-                try:
-                    fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
-                except Exception:
-                    pass
+                _safe_unlock(fh)
         except Exception:
             return None
 
@@ -321,15 +328,9 @@ class ClarificationTrace:
             kept = []
             removed = 0
             with open(self.store_path, "r", encoding="utf8") as fh:
-                try:
-                    fcntl.flock(fh.fileno(), fcntl.LOCK_SH)
-                except Exception:
-                    pass
+                _safe_lock(fh, fcntl.LOCK_SH if HAS_FCNTL else None)
                 lines = fh.read().splitlines()
-                try:
-                    fcntl.flock(fh.fileno(), fcntl.LOCK_UN)
-                except Exception:
-                    pass
+                _safe_unlock(fh)
 
             for ln in lines:
                 ln = ln.strip()
@@ -356,16 +357,10 @@ class ClarificationTrace:
             if removed:
                 tmp = str(self.store_path) + ".tmp"
                 with open(tmp, "w", encoding="utf8") as out:
-                    try:
-                        fcntl.flock(out.fileno(), fcntl.LOCK_EX)
-                    except Exception:
-                        pass
+                    _safe_lock(out, fcntl.LOCK_EX if HAS_FCNTL else None)
                     out.write("\n".join(kept) + ("\n" if kept else ""))
                     out.flush()
-                    try:
-                        fcntl.flock(out.fileno(), fcntl.LOCK_UN)
-                    except Exception:
-                        pass
+                    _safe_unlock(out)
                 try:
                     os.replace(tmp, str(self.store_path))
                 except Exception:

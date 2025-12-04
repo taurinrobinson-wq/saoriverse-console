@@ -7,6 +7,7 @@ from emotional_os.safety import (
 from emotional_os.glyphs.learning_response_generator import create_training_response
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.dynamic_response_composer import DynamicResponseComposer
+from emotional_os.lexicon.lexicon_loader import get_lexicon, WordCentricLexicon
 from emotional_os.core.paths import (
     get_path_manager,
     glyph_db_path,
@@ -77,6 +78,19 @@ if not logger.handlers:
 # This is flipped to False if sqlite reports the glyph table is missing,
 # allowing callers to fall back to packaged runtime assets.
 _glyph_db_available = True
+
+# Initialize word-centric lexicon
+_word_centric_lexicon: Optional[WordCentricLexicon] = None
+
+# Store last lexicon analysis for use in signal detection
+_last_lexicon_analysis: Optional[Dict[str, Any]] = None
+
+def get_word_centric_lexicon() -> WordCentricLexicon:
+    """Get or load the word-centric emotional lexicon"""
+    global _word_centric_lexicon
+    if _word_centric_lexicon is None:
+        _word_centric_lexicon = get_lexicon()
+    return _word_centric_lexicon
 
 # Utility function for fuzzy pattern matching
 
@@ -196,12 +210,39 @@ def fuzzy_match(word: str, lexicon_keys: List[str], threshold: float = 0.6) -> O
 
 
 def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
+    global _last_lexicon_analysis
     lowered = input_text.lower()
     matched_signals = []
     lexicon_keys = [k for k in signal_map.keys(
     ) if not k.startswith("_comment_")]
 
-    # FIRST: Try enhanced NLP analysis if available
+    # FIRST: Try word-centric lexicon analysis (fastest, most accurate)
+    if _last_lexicon_analysis and _last_lexicon_analysis.get('has_emotional_content'):
+        try:
+            emotional_words = _last_lexicon_analysis.get('emotional_words', {})
+            for word, word_data in emotional_words.items():
+                # Map lexicon signals to our signal system
+                for signal_name in word_data.get('signals', []):
+                    # Convert lexicon signal names to our signal symbols
+                    # (This will depend on how we want to map them)
+                    gates = word_data.get('gates', [])
+                    if gates:
+                        matched_signals.append({
+                            "keyword": word,
+                            "signal": signal_name,
+                            "voltage": "high" if word_data.get('frequency', 0) > 100 else "medium",
+                            "tone": signal_name,
+                            "frequency": word_data.get('frequency', 0),
+                            "gates": gates,
+                        })
+            
+            if matched_signals:
+                logger.info(f"Lexicon-based signal detection found {len(matched_signals)} signals")
+                return matched_signals
+        except Exception as e:
+            logger.debug(f"Lexicon-based signal detection failed: {e}")
+
+    # SECOND: Try enhanced NLP analysis if available
     try:
         from parser.enhanced_emotion_processor import enhance_gate_routing
 
@@ -215,7 +256,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
         logger.debug(
             "Enhanced emotion processor not available, using traditional parsing")
 
-    # First pass: exact word boundary matching in signal_lexicon
+    # Third pass: exact word boundary matching in signal_lexicon
     for keyword, metadata in signal_map.items():
         if keyword.startswith("_comment_"):
             continue
@@ -241,7 +282,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                 }
             )
 
-    # Second pass: Use NRC lexicon if available for richer emotion detection
+    # Fourth pass: Use NRC lexicon if available for richer emotion detection
     if HAS_NRC and nrc and nrc.loaded:
         nrc_emotions = nrc.analyze_text(input_text)
         if nrc_emotions and not matched_signals:
@@ -270,7 +311,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                 matched_signals.append(
                     {"keyword": top_emotion, "signal": signal, "voltage": voltage, "tone": tone})
 
-    # Third pass: fuzzy matching for unmatched single words
+    # Fifth pass: fuzzy matching for unmatched single words
     if not matched_signals:
         words = re.findall(r"\b\w+\b", lowered)
         for word in words:
@@ -291,6 +332,45 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                     break  # Use first good fuzzy match
 
     return matched_signals
+
+
+# Map human-readable signal names to Greek letter codes for gate evaluation
+SIGNAL_NAME_TO_CODE = {
+    "intimacy": "λ",
+    "vulnerability": "β",
+    "joy": "ε",
+    "transformation": "γ",
+    "sensuality": "α",
+    "admiration": "δ",
+    "love": "Ω",
+    "nature": "θ",
+    # Additional signals from expanded lexicon
+    "wisdom": "λ",
+    "embodiment": "α",
+    "presence": "ε",
+    "sacred": "δ",
+    "grounding": "β",
+    "insight": "λ",
+    "trust": "Ω",
+    "longing": "α",
+}
+
+
+def convert_signal_names_to_codes(signals: List[Dict]) -> List[Dict]:
+    """Convert human-readable signal names to Greek letter codes for gate evaluation."""
+    converted = []
+    for sig in signals:
+        sig_copy = sig.copy()
+        signal_name = sig.get("signal", "")
+        # If the signal is already a Greek letter, keep it
+        if signal_name and signal_name in "αβγδεζηθικλμνξοπρστυφχψω":
+            converted.append(sig_copy)
+        else:
+            # Try to convert human-readable name to Greek code
+            greek_code = SIGNAL_NAME_TO_CODE.get(signal_name.lower(), signal_name)
+            sig_copy["signal"] = greek_code
+            converted.append(sig_copy)
+    return converted
 
 
 # Map signals to ECM gates
@@ -1155,7 +1235,25 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
     lower_input = input_text.lower()
 
     # Check if message has emotional/significant content
+    # FIRST: Try word-centric lexicon (fast, direct lookup)
+    try:
+        lexicon = get_word_centric_lexicon()
+        emotional_analysis = lexicon.analyze_emotional_content(input_text)
+        
+        if emotional_analysis['has_emotional_content']:
+            # Mark that we detected emotional content via lexicon
+            # Store for later use in signal detection
+            _last_lexicon_analysis = emotional_analysis
+            return None  # Process emotionally, don't short-circuit
+    except Exception as e:
+        # Graceful fallback if lexicon fails
+        logger.debug(f"Lexicon lookup failed: {e}")
+        _last_lexicon_analysis = None
+    
+    # FALLBACK: Use original hardcoded emotional keywords
+    # COMPREHENSIVE emotional keywords including mortality, crisis, and complex states
     emotional_keywords = [
+        # Basic emotions
         "burn",
         "overwhelm",
         "anxious",
@@ -1177,6 +1275,98 @@ def _detect_and_respond_to_reciprocal_message(input_text: str) -> Optional[str]:
         "stress",
         "pain",
         "hurt",
+        # From expanded lexicon
+        "gentle", "soft", "tender", "vulnerable",
+        "hold", "support", "contain", "steady",
+        "sacred", "honor", "reverent", "precious",
+        "trust", "faith", "safety", "safe",
+        "echo", "reflect", "mirror", "resonate",
+        "exactly", "lands", "resonates",
+        "depth", "knowing", "wisdom",
+        "breathe", "practice", "ritual",
+        # Feedback/metacognitive
+        "why do you",  # Questions about system behavior (feedback)
+        "why are you",
+        "why keep",
+        "keep saying",
+        # Substance use
+        "drinking",
+        "high",
+        "drunk",
+        "addicted",
+        # Cognitive/emotional blocks
+        "block",
+        "stuck",
+        "trapped",
+        "can't move",
+        # CRITICAL: Mortality/endings (PR#44 framework)
+        "dying",
+        "dead",
+        "death",
+        "ending",
+        "ends",
+        "finished",
+        "over",
+        "closing",
+        "grieving",
+        "mourn",
+        "mourning",
+        "farewell",
+        "goodbye",
+        # CRITICAL: Crisis language
+        "suicidal",
+        "suicide",
+        "kill myself",
+        "kill me",
+        "end it",
+        "ending it",
+        "ending my",
+        "pointless",
+        "no reason",
+        "why am i here",
+        "don't want to",
+        "don't want to be",
+        "want to die",
+        "want it all to end",
+        "self harm",
+        "cutting",
+        # Existential/relational crisis
+        "alone",
+        "lonely",
+        "abandoned",
+        "rejected",
+        "unloved",
+        "unwanted",
+        "not enough",
+        # Intense/overwhelming states
+        "drowning",
+        "suffocating",
+        "breaking",
+        "falling apart",
+        "can't handle",
+        "too much",
+        "unbearable",
+        "can't take",
+        "desperate",
+        "hopeless",
+        "despair",
+        # Relational rupture
+        "betrayed",
+        "betrayal",
+        "hurt by",
+        "broken heart",
+        "heartbroken",
+        # Physical/embodied distress
+        "numb",
+        "empty",
+        "hollow",
+        "ache",
+        "aching",
+        # Agency/power loss
+        "powerless",
+        "helpless",
+        "no control",
+        "no choice",
         # High-intensity emotional markers (expletives)
         "bullshit",
         "shit",
@@ -1411,10 +1601,44 @@ def parse_input(
     # Predeclare signals so type-checker knows it's a list of dicts
     signals: List[Dict[str, Any]] = []
 
+    # SUICIDALITY PROTOCOL (HIGHEST PRIORITY)
+    # Use consent-based, dignity-respecting approach
+    from emotional_os.core.suicidality_handler import get_suicidality_protocol
+    
+    suicidality_protocol = get_suicidality_protocol()
+    lower_input = input_text.strip().lower()
+    
+    if suicidality_protocol.should_use_protocol(lower_input):
+        # Check if this is a return from previous disclosure
+        is_return = suicidality_protocol.check_for_return(user_id)
+        current_state = "ReturnDetected" if is_return else "DisclosureDetected"
+        
+        # Handle through state machine
+        response, state_info = suicidality_protocol.handle_disclosure(
+            user_id=user_id,
+            input_text=input_text,
+            current_state=current_state,
+        )
+        
+        return {
+            "input": input_text,
+            "signals": [{"keyword": "suicidal_disclosure", "signal": "SUICIDALITY", "voltage": "high", "tone": "presence"}],
+            "gates": [],
+            "glyphs": [],
+            "best_glyph": None,
+            "ritual_prompt": None,
+            "voltage_response": response,
+            "feedback": {"is_correction": False, "contradiction_type": None, "feedback_reason": None},
+            "response_source": "suicidality_protocol",
+            "debug_sql": "",
+            "debug_glyph_rows": [],
+            "learning": None,
+            "suicidality_state": state_info,
+        }
+
     # FIRST: Check if this is just a simple greeting - don't process emotionally
     simple_greetings = ["hi", "hello", "hey", "hi there",
                         "hello there", "hey there", "howdy", "greetings"]
-    lower_input = input_text.strip().lower()
 
     if lower_input in simple_greetings:
         # Respond warmly but simply, without emotional analysis
@@ -1733,23 +1957,45 @@ def parse_input(
     if heuristic_signals:
         signals = heuristic_signals
     else:
-        signal_map = load_signal_map(lexicon_path)
-        signals = parse_signals(input_text, signal_map)
-        # If lexicon parsing returned nothing and the glyph DB/table appears
-        # unavailable, attempt to load the packaged runtime fallback lexicon
-        # to produce deterministic signals.
+        # FIRST: Try to use word-centric lexicon signals if available
         try:
-            if (not signals) and (not _glyph_db_available):
-                fallback_path = os.path.join(os.path.dirname(
-                    __file__), "..", "parser", "runtime_fallback_lexicon.json")
-                fallback_path = os.path.normpath(fallback_path)
-                if os.path.exists(fallback_path):
-                    with open(fallback_path, "r", encoding="utf-8") as f:
-                        fb = json.load(f)
-                    signals = parse_signals(input_text, fb)
+            lexicon = get_word_centric_lexicon()
+            emotional_analysis = lexicon.analyze_emotional_content(input_text)
+            
+            if emotional_analysis.get('primary_signals'):
+                # Convert lexicon signals (which are signal names) to the signal dict format
+                signals = []
+                for signal_name, count in emotional_analysis.get('primary_signals', []):
+                    signals.append({
+                        "keyword": signal_name,
+                        "signal": signal_name,  # Will be converted to Greek code later
+                        "voltage": "high" if count > 1 else "medium",
+                        "tone": signal_name
+                    })
         except Exception:
-            pass
+            signals = []
+        
+        # FALLBACK: Use signal_lexicon if no lexicon signals found
+        if not signals:
+            signal_map = load_signal_map(lexicon_path)
+            signals = parse_signals(input_text, signal_map)
+            # If lexicon parsing returned nothing and the glyph DB/table appears
+            # unavailable, attempt to load the packaged runtime fallback lexicon
+            # to produce deterministic signals.
+            try:
+                if (not signals) and (not _glyph_db_available):
+                    fallback_path = os.path.join(os.path.dirname(
+                        __file__), "..", "parser", "runtime_fallback_lexicon.json")
+                    fallback_path = os.path.normpath(fallback_path)
+                    if os.path.exists(fallback_path):
+                        with open(fallback_path, "r", encoding="utf-8") as f:
+                            fb = json.load(f)
+                        signals = parse_signals(input_text, fb)
+            except Exception:
+                pass
 
+    # Convert human-readable signal names to Greek codes for gate evaluation
+    signals = convert_signal_names_to_codes(signals)
     gates = evaluate_gates(signals)
     glyphs = fetch_glyphs(gates, db_path)
     # Pull debug info from global if available
@@ -1843,26 +2089,33 @@ def parse_input(
                 return True
         return False
 
-    try:
-        if (
-            not SANCTUARY_MODE
-            and not is_sensitive_input(input_text)
-            and _is_plain_input_local(input_text)
-            and _is_poetic_response_local(contextual_response)
-        ):
-            # Construct a short, conversational alternative that mirrors
-            # the user's register. Keep language neutral and invitational.
-            conversational_alt = (
-                "I hear you, that sounds difficult. "
-                "If you want, you can tell me a bit more about what that feels like for you today."
-            )
-            contextual_response = conversational_alt
-            # Mark the response source lightly so downstream code can surface
-            # that we chose a conversational register over a poetic render.
-            response_source = f"{response_source}|conversationalized"
-    except Exception:
-        # Keep prior behavior on any unexpected failure
-        pass
+    # NOTE: Conversationalization disabled as of Phase 12 (Glyph Differentiation)
+    # Previously, plain inputs would trigger replacement with generic fallback responses.
+    # Now that we have glyph-aware responses with embedded wisdom, we preserve those
+    # responses even for plain inputs, as they are no longer generic templates but
+    # differentiated based on the specific glyph and its emotional signal.
+    # This ensures "I feel fragile" → vulnerability signals → specific glyph wisdom,
+    # not replaced with generic fallback.
+    # try:
+    #     if (
+    #         not SANCTUARY_MODE
+    #         and not is_sensitive_input(input_text)
+    #         and _is_plain_input_local(input_text)
+    #         and _is_poetic_response_local(contextual_response)
+    #     ):
+    #         # Construct a short, conversational alternative that mirrors
+    #         # the user's register. Keep language neutral and invitational.
+    #         conversational_alt = (
+    #             "I hear you, that sounds difficult. "
+    #             "If you want, you can tell me a bit more about what that feels like for you today."
+    #         )
+    #         contextual_response = conversational_alt
+    #         # Mark the response source lightly so downstream code can surface
+    #         # that we chose a conversational register over a poetic render.
+    #         response_source = f"{response_source}|conversationalized"
+    # except Exception:
+    #     # Keep prior behavior on any unexpected failure
+    #     pass
 
     # Final safeguard: if selection returned no best_glyph but the message
     # contains clear emotional keywords, provide a deterministic fallback
@@ -1949,12 +2202,13 @@ def parse_input(
             pass
 
     # Sanctuary Mode: ensure compassionate handling for sensitive content
-    primary_tone: str = str(signals[0].get(
-        "tone", "unknown")) if signals else "unknown"
-    if SANCTUARY_MODE or is_sensitive_input(input_text):
-        contextual_response = ensure_sanctuary_response(
-            input_text=input_text, base_response=contextual_response, tone=primary_tone
-        )
+    # DISABLED for UI: sanctuary wrapping is handled separately if needed
+    # primary_tone: str = str(signals[0].get(
+    #     "tone", "unknown")) if signals else "unknown"
+    # if SANCTUARY_MODE or is_sensitive_input(input_text):
+    #     contextual_response = ensure_sanctuary_response(
+    #         input_text=input_text, base_response=contextual_response, tone=primary_tone
+    #     )
     # If best_glyph has a response_template, surface it for UI rendering (do not overwrite contextual_response here)
     voltage_response_template = None
     try:
