@@ -971,7 +971,7 @@ class DynamicResponseComposer:
             return f"That takes courage to name. You're not alone in that. What would help right now?"
         
         # Frustration/anger
-        if any(word in lower_input for word in ["frustrated", "angry", "furious", "mad", "rage"]):
+        if any(word in lower_input for word in ["frustrated", "frustrating", "angry", "furious", "mad", "rage"]):
             return f"That frustration is telling you something. What's underneath it?"
         
         # Default: reflect the emotion back empathetically
