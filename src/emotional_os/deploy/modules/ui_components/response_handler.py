@@ -93,6 +93,12 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
             conversation_context=conversation_context,
         )
 
+        # DEBUG: Log what parse_input returned
+        logger.info(f"parse_input returned:")
+        logger.info(f"  voltage_response: {local_analysis.get('voltage_response', 'MISSING')[:200] if local_analysis.get('voltage_response') else 'NONE/EMPTY'}")
+        logger.info(f"  best_glyph: {local_analysis.get('best_glyph', {}).get('glyph_name', 'NONE')}")
+        logger.info(f"  response_source: {local_analysis.get('response_source')}")
+
         # Get the conversational response from the analysis
         response = _build_conversational_response(user_input, local_analysis)
 
