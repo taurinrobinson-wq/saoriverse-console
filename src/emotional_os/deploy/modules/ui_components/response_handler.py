@@ -52,8 +52,11 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         response = _prevent_response_repetition(response)
 
     except Exception as e:
-        logger.warning(f"Response pipeline failed: {e}")
-        response = "I'm here to listen. Can you tell me more?"
+        logger.error(f"Response pipeline FAILED: {type(e).__name__}: {e}", exc_info=True)
+        import traceback
+        tb_str = traceback.format_exc()
+        logger.error(f"Full traceback:\n{tb_str}")
+        response = f"[ERROR] Response pipeline failed: {e}"
 
     processing_time = time.time() - start_time
 
@@ -90,8 +93,11 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
         return response
 
     except Exception as e:
-        logger.warning(f"Local processing failed: {e}")
-        return "I'm here to listen. Can you tell me more?"
+        logger.error(f"Local processing FAILED: {type(e).__name__}: {e}", exc_info=True)
+        import traceback
+        tb_str = traceback.format_exc()
+        logger.error(f"Full traceback:\n{tb_str}")
+        return f"[LOCAL_ERROR] {e}"
 
 
 def _build_conversational_response(user_input: str, local_analysis: dict) -> str:
