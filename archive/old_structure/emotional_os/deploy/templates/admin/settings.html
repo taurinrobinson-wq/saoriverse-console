@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirstPerson Admin - Settings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #2E2E2E;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .admin-logo span {
+            margin-left: 0.5rem;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .admin-nav {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-tab {
+            color: #666;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-tab:hover {
+            background: #f0f4f8;
+            color: #2E2E2E;
+        }
+
+        .admin-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #2E2E2E;
+        }
+
+        .settings-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .settings-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e6ed;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2E2E2E;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f4f8;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-title {
+            font-weight: 600;
+            color: #2E2E2E;
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .setting-control {
+            margin-left: 2rem;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(26px);
+        }
+
+        .setting-input {
+            padding: 8px 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 6px;
+            min-width: 150px;
+        }
+
+        .setting-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .setting-select {
+            padding: 8px 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 6px;
+            min-width: 150px;
+            background: white;
+        }
+
+        .danger-zone {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .danger-zone .section-subtitle {
+            color: #dc2626;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e6ed;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-online {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-maintenance {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-offline {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .backup-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .backup-info {
+            flex: 1;
+        }
+
+        .backup-name {
+            font-weight: 600;
+            color: #2E2E2E;
+        }
+
+        .backup-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .backup-size {
+            color: #666;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="admin-header">
+        <div class="admin-logo">
+            🛡️ <span>FirstPerson Admin</span>
+        </div>
+        <div class="admin-user">
+            <span>Welcome, {{ admin_user.username }}</span>
+            <form method="post" action="/admin/logout" style="display: inline;">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </header>
+
+    <nav class="admin-nav">
+        <div class="nav-tabs">
+            <a href="/admin/dashboard" class="nav-tab">Dashboard</a>
+            <a href="/admin/users" class="nav-tab">Users</a>
+            <a href="/admin/conversations" class="nav-tab">Conversations</a>
+            <a href="/admin/settings" class="nav-tab active">Settings</a>
+        </div>
+    </nav>
+
+    <main class="admin-content">
+        <h1 class="section-title">System Settings</h1>
+
+        <div class="settings-grid">
+            <!-- System Status -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <span class="section-icon">🚀</span>
+                    <h2 class="section-subtitle">System Status</h2>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Current Status</div>
+                        <div class="setting-description">System operational status and health</div>
+                    </div>
+                    <div class="setting-control">
+                        <span class="status-indicator status-online">
+                            🟢 Online
+                        </span>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Maintenance Mode</div>
+                        <div class="setting-description">Temporarily disable user access for maintenance</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this, 'maintenance_mode')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Auto-backup</div>
+                        <div class="setting-description">Automatically backup system data daily</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this, 'auto_backup')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Configuration -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <span class="section-icon">🤖</span>
+                    <h2 class="section-subtitle">AI Configuration</h2>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Response Time Limit</div>
+                        <div class="setting-description">Maximum time allowed for AI responses (seconds)</div>
+                    </div>
+                    <div class="setting-control">
+                        <input type="number" class="setting-input" value="15" min="5" max="60">
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Default Processing Mode</div>
+                        <div class="setting-description">Default mode for new conversations</div>
+                    </div>
+                    <div class="setting-control">
+                        <select class="setting-select">
+                            <option value="local" selected>Local Only</option>
+                            <option value="ai_preferred">AI Preferred (legacy)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Content Filtering</div>
+                        <div class="setting-description">Enable automatic content moderation</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this, 'content_filtering')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Settings -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <span class="section-icon">🔒</span>
+                    <h2 class="section-subtitle">Security & Privacy</h2>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Session Timeout</div>
+                        <div class="setting-description">User session timeout duration (hours)</div>
+                    </div>
+                    <div class="setting-control">
+                        <input type="number" class="setting-input" value="8" min="1" max="24">
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Two-Factor Authentication</div>
+                        <div class="setting-description">Require 2FA for admin accounts</div>
+                    </div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this, 'require_2fa')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Data Retention</div>
+                        <div class="setting-description">How long to keep user conversation data</div>
+                    </div>
+                    <div class="setting-control">
+                        <select class="setting-select">
+                            <option value="30">30 days</option>
+                            <option value="90">90 days</option>
+                            <option value="365" selected>1 year</option>
+                            <option value="forever">Forever</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backup & Recovery -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <span class="section-icon">💾</span>
+                    <h2 class="section-subtitle">Backup & Recovery</h2>
+                </div>
+
+                <div class="setting-item" style="border-bottom: none; padding-bottom: 0;">
+                    <div class="setting-info">
+                        <div class="setting-title">Recent Backups</div>
+                        <div class="setting-description">System backup history</div>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn btn-primary" onclick="createBackup()">Create Backup</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem;">
+                    <div class="backup-item">
+                        <div class="backup-info">
+                            <div class="backup-name">System Backup - October 15, 2025</div>
+                            <div class="backup-date">Created: 2025-10-15 14:30:00</div>
+                        </div>
+                        <div class="backup-size">2.4 MB</div>
+                        <button class="btn btn-secondary"
+                            onclick="downloadBackup('backup-2025-10-15')">Download</button>
+                    </div>
+
+                    <div class="backup-item">
+                        <div class="backup-info">
+                            <div class="backup-name">System Backup - October 14, 2025</div>
+                            <div class="backup-date">Created: 2025-10-14 14:30:00</div>
+                        </div>
+                        <div class="backup-size">2.3 MB</div>
+                        <button class="btn btn-secondary"
+                            onclick="downloadBackup('backup-2025-10-14')">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-section danger-zone">
+                <div class="section-header">
+                    <span class="section-icon">⚠️</span>
+                    <h2 class="section-subtitle">Danger Zone</h2>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Clear All User Data</div>
+                        <div class="setting-description">Permanently delete all user accounts and conversations</div>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn btn-danger" onclick="confirmDangerousAction('clear_all_data')">Clear All
+                            Data</button>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-title">Reset System</div>
+                        <div class="setting-description">Reset system to factory defaults</div>
+                    </div>
+                    <div class="setting-control">
+                        <button class="btn btn-danger" onclick="confirmDangerousAction('reset_system')">Reset
+                            System</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-row">
+            <button class="btn btn-secondary" onclick="resetSettings()">Reset to Defaults</button>
+            <button class="btn btn-success" onclick="saveSettings()">Save Changes</button>
+        </div>
+    </main>
+
+    <script>
+        function toggleSetting(element, settingName) {
+            element.classList.toggle('active');
+            const isActive = element.classList.contains('active');
+            console.log(`Setting ${settingName} changed to:`, isActive);
+
+            // Here you would typically send the setting change to the server
+            // updateSetting(settingName, isActive);
+        }
+
+        function saveSettings() {
+            // Collect all setting values and send to server
+            const settings = {
+                maintenance_mode: document.querySelector('[onclick*="maintenance_mode"]').classList.contains('active'),
+                auto_backup: document.querySelector('[onclick*="auto_backup"]').classList.contains('active'),
+                content_filtering: document.querySelector('[onclick*="content_filtering"]').classList.contains('active'),
+                require_2fa: document.querySelector('[onclick*="require_2fa"]').classList.contains('active'),
+                // Add more settings as needed
+            };
+
+            console.log('Saving settings:', settings);
+            alert('Settings saved successfully!');
+        }
+
+        function resetSettings() {
+            if (confirm('Are you sure you want to reset all settings to their default values?')) {
+                location.reload();
+            }
+        }
+
+        function createBackup() {
+            if (confirm('Create a new system backup? This may take a few minutes.')) {
+                alert('Backup creation started. You will be notified when complete.');
+                // Implement backup creation
+            }
+        }
+
+        function downloadBackup(backupId) {
+            // Implement backup download
+            alert(`Downloading backup: ${backupId}`);
+        }
+
+        function confirmDangerousAction(action) {
+            const messages = {
+                clear_all_data: '⚠️ WARNING: This will permanently delete ALL user data, accounts, and conversations. This action CANNOT be undone. Type "DELETE ALL DATA" to confirm:',
+                reset_system: '⚠️ WARNING: This will reset the entire system to factory defaults. All configurations and data will be lost. Type "RESET SYSTEM" to confirm:'
+            };
+
+            const confirmText = action === 'clear_all_data' ? 'DELETE ALL DATA' : 'RESET SYSTEM';
+            const userInput = prompt(messages[action]);
+
+            if (userInput === confirmText) {
+                alert(`${action} initiated. Please wait...`);
+                // Implement dangerous action
+            } else if (userInput !== null) {
+                alert('Action cancelled. Confirmation text did not match.');
+            }
+        }
+
+        // Auto-save settings on change
+        document.addEventListener('change', function (e) {
+            if (e.target.classList.contains('setting-input') || e.target.classList.contains('setting-select')) {
+                console.log('Setting changed:', e.target.value);
+                // Auto-save individual settings
+            }
+        });
+    </script>
+</body>
+
+</html>

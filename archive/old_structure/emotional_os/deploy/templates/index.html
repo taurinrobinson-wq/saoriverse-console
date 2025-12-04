@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirstPerson - Personal AI Companion</title>
+    <link rel="icon" type="image/svg+xml" href="/static/graphics/FirstPerson-Logo.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Constrain FirstPerson normalized SVGs to prevent oversized rendering */
+        img[src*="FirstPerson-Logo.svg"],
+        svg[data-logo="firstperson"],
+        .logo-section img[src*="FirstPerson-Logo.svg"],
+        .logo-fallback svg {
+            max-width: 180px !important;
+            max-height: 180px !important;
+            width: 180px !important;
+            height: 180px !important;
+            display: inline-block !important;
+            overflow: visible !important;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .splash-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        .logo-section {
+            margin-bottom: 2rem;
+        }
+
+        .logo-section img {
+            width: 180px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .logo-fallback {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #2E2E2E;
+            margin: 0.5rem 0 0.2rem 0;
+        }
+
+        .logo-subtitle {
+            font-size: 1rem;
+            color: #666;
+            letter-spacing: 2px;
+            font-weight: 300;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .auth-section {
+            margin: 2rem 0;
+        }
+
+        .auth-questions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .auth-question {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            width: 140px;
+            height: 35px;
+            border: 2px solid #2E2E2E;
+            background-color: #2E2E2E;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: white;
+            color: #2E2E2E;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 46, 46, 0.2);
+        }
+
+        .quick-access {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .quick-title {
+            color: #999;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-section {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-title {
+            font-size: 1.1rem;
+            color: #2E2E2E;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.2rem;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .form-input {
+            width: 100%;
+            border-radius: 30px;
+            border: 2px solid #ddd;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #666;
+            box-shadow: 0 0 0 1px #666;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="splash-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img id="firstperson-logo-img" src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson Logo"
+                onerror="(function(el){try{el.style.display='none'; var fb=document.querySelector('.logo-fallback'); if(fb) fb.style.display='block';}catch(e){console.warn('logo onerror',e);} })(this);">
+            <div class="logo-fallback" style="display: none;" aria-hidden="true">
+                <!-- Normalized inline SVG fallback (keeps viewBox clean to avoid scaling issues) -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120"
+                    preserveAspectRatio="xMidYMid meet" role="img" data-logo="firstperson"
+                    aria-label="FirstPerson logo">
+                    <title>FirstPerson</title>
+                    <g fill="#2E2E2E" transform="scale(0.3175)">
+                        <path
+                            d="M75.39 363.16c-.93-.87-1.72-3.94-1.71-5.33l.05-146.24c3.5-30.27 28.22-53.58 58.26-56.78 41.9-.86 75.9-1.4 112.09-.04 30.64 2.2 57.5 30.05 59.75 60.49 2.44 33-3.56 65.67-36.41 80.92-24.94 11.58-76.37 5.11-104.93 5.66-4.8.09-7.54 2.46-11.2 5.13-22.61 16.52-43.77 38.29-66.51 54.48-2.42 1.73-6.58 4.36-9.4 1.72z" />
+                        <path
+                            d="M181.19 14c21.79-2.05 43.04 6.74 56.12 24.33 36.75 49.43-14.03 114.53-71.21 92.73-58.55-22.32-47.52-111.19 15.08-117.07z" />
+                    </g>
+                </svg>
+            </div>
+            <div class="logo-subtitle">Personal AI<br>Companion</div>
+        </div>
+
+        <!-- Main Auth Section -->
+        <div id="main-auth" class="auth-section">
+            <div class="auth-questions">
+                <span class="auth-question">existing user?</span>
+                <span class="auth-question">new user?</span>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn" onclick="showLogin()">Sign In</button>
+                <button class="btn" onclick="showRegister()">Register Now</button>
+            </div>
+
+            <div class="quick-access">
+                <div class="quick-title">Quick Access</div>
+                <button class="btn" onclick="demoLogin()">⚡ Demo Mode</button>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="form-section">
+            <button class="back-btn" onclick="showMain()">← Back</button>
+            <div class="form-title">Sign In</div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">login:</label>
+                    <input type="text" class="form-input" id="login-username" placeholder="username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">password:</label>
+                    <input type="password" class="form-input" id="login-password" placeholder="password" required>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+                <div id="login-message"></div>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form" class="form-section">
+            <button class="back-btn" onclick="showMain()">← Back</button>
+            <div class="form-title">Create Account</div>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label class="form-label">login:</label>
+                    <input type="text" class="form-input" id="register-username" placeholder="choose username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">password:</label>
+                    <input type="password" class="form-input" id="register-password" placeholder="choose password"
+                        required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">confirm:</label>
+                    <input type="password" class="form-input" id="register-confirm" placeholder="confirm password"
+                        required>
+                </div>
+                <button type="submit" class="btn">Register Now</button>
+                <div id="register-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functions
+        function showMain() {
+            document.getElementById('main-auth').style.display = 'block';
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.remove('active');
+        }
+
+        function showLogin() {
+            document.getElementById('main-auth').style.display = 'none';
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('register-form').classList.remove('active');
+        }
+
+        function showRegister() {
+            document.getElementById('main-auth').style.display = 'none';
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.add('active');
+        }
+
+        // Authentication functions
+        async function handleLogin(event) {
+            event.preventDefault();
+            const container = document.querySelector('.splash-container');
+            const messageDiv = document.getElementById('login-message');
+
+            container.classList.add('loading');
+            messageDiv.innerHTML = '';
+
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.innerHTML = '<div class="success-message">Welcome back!</div>';
+                    // Store session data
+                    localStorage.setItem('firstperson_token', data.token);
+                    localStorage.setItem('firstperson_user_id', data.user_id);
+                    localStorage.setItem('firstperson_username', data.username);
+
+                    // Redirect to chat app
+                    setTimeout(() => {
+                        window.location.href = '/app';
+                    }, 1000);
+                } else {
+                    messageDiv.innerHTML = `<div class="error-message">${data.detail}</div>`;
+                }
+            } catch (error) {
+                messageDiv.innerHTML = '<div class="error-message">Login failed. Please try again.</div>';
+            } finally {
+                container.classList.remove('loading');
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            const container = document.querySelector('.splash-container');
+            const messageDiv = document.getElementById('register-message');
+
+            container.classList.add('loading');
+            messageDiv.innerHTML = '';
+
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm').value;
+
+            if (password !== confirmPassword) {
+                messageDiv.innerHTML = '<div class="error-message">Passwords do not match</div>';
+                container.classList.remove('loading');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                        confirm_password: confirmPassword
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageDiv.innerHTML = '<div class="success-message">Account created! Please sign in.</div>';
+                    setTimeout(() => {
+                        showLogin();
+                    }, 2000);
+                } else {
+                    messageDiv.innerHTML = `<div class="error-message">${data.detail}</div>`;
+                }
+            } catch (error) {
+                messageDiv.innerHTML = '<div class="error-message">Registration failed. Please try again.</div>';
+            } finally {
+                container.classList.remove('loading');
+            }
+        }
+
+        function demoLogin() {
+            // Create demo session
+            const demoUserId = 'demo_' + Date.now();
+            const demoToken = btoa(JSON.stringify({
+                username: 'demo_user',
+                user_id: demoUserId,
+                created: new Date().toISOString(),
+                expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString()
+            }));
+
+            localStorage.setItem('firstperson_token', demoToken);
+            localStorage.setItem('firstperson_user_id', demoUserId);
+            localStorage.setItem('firstperson_username', 'demo_user');
+
+            window.location.href = '/app';
+        }
+
+        // Check for existing session on page load
+        window.addEventListener('load', () => {
+            const token = localStorage.getItem('firstperson_token');
+            if (token) {
+                // Validate token and redirect if valid
+                fetch(`/api/validate-session?token=${encodeURIComponent(token)}`)
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/app';
+                        }
+                    })
+                    .catch(() => {
+                        // Invalid token, clear storage
+                        localStorage.clear();
+                    });
+            }
+        });
+
+        // Utility: safe-show logo fallback (used by onerror inline handler)
+        function _safeShowLogoFallback() {
+            try {
+                var fb = document.querySelector('.logo-fallback');
+                if (fb) {
+                    fb.style.display = 'block';
+                }
+                var img = document.getElementById('firstperson-logo-img');
+                if (img) img.style.display = 'none';
+            } catch (e) {
+                console.warn('safeShowLogoFallback error', e);
+            }
+        }
+    </script>
+</body>
+
+</html>

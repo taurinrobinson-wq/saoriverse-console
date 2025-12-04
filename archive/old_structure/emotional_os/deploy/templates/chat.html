@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirstPerson - Personal AI Companion</title>
+    <link rel="icon" type="image/svg+xml" href="/static/graphics/FirstPerson-Logo-normalized.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Constrain FirstPerson normalized SVGs to prevent oversized rendering */
+        img[src*="FirstPerson-Logo-normalized.svg"],
+        svg[data-logo="firstperson"],
+        .message-avatar img[src*="FirstPerson-Logo-normalized.svg"],
+        .header-logo {
+            max-width: 120px !important;
+            max-height: 120px !important;
+            width: 120px !important;
+            height: 120px !important;
+            display: inline-block !important;
+            overflow: visible !important;
+        }
+
+        /* Specific size override for header logo */
+        .header-logo {
+            width: 50px !important;
+            height: 50px !important;
+            max-width: 50px !important;
+            max-height: 50px !important;
+        }
+
+        /* Specific size override for message avatar logo */
+        .message-avatar img {
+            width: 24px !important;
+            height: 24px !important;
+            max-width: 24px !important;
+            max-height: 24px !important;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f8f9fa;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-logo {
+            width: 50px;
+            height: auto;
+        }
+
+        .header-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #2E2E2E;
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            color: #2E2E2E;
+            font-weight: 500;
+        }
+
+        .header-btn {
+            background: #2E2E2E;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-btn:hover {
+            background: #1a1a1a;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .mode-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .clear-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: #007bff;
+            color: white;
+        }
+
+        .message.assistant .message-avatar {
+            background: #28a745;
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 1rem;
+            border-radius: 15px;
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: #007bff;
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.assistant .message-content {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-meta {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+            resize: none;
+            max-height: 120px;
+        }
+
+        .chat-input:focus {
+            border-color: #007bff;
+        }
+
+        .send-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: #0056b3;
+        }
+
+        .send-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-left: 1px solid #e0e0e0;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #2E2E2E;
+        }
+
+        .metric {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .privacy-info {
+            background: #e3f2fd;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .privacy-info div {
+            margin-bottom: 0.5rem;
+        }
+
+        .loading {
+            opacity: 0.6;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 1rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .header-title {
+                font-size: 1.5rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <img src="/static/graphics/FirstPerson-Logo-normalized.svg" alt="FirstPerson" class="header-logo"
+                    onerror="this.style.display='none'">
+                <div>
+                    <h1 class="header-title">FirstPerson - Personal AI Companion</h1>
+                    <div class="header-subtitle">Your private space for emotional processing and growth</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">Welcome back, <span id="username">User</span>! 👋</div>
+                <button class="header-btn" onclick="logout()">🚪 Logout</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="chat-container">
+                <!-- Controls -->
+                <div class="controls">
+                    <label>Processing Mode:</label>
+                    <select id="processing-mode" class="mode-select">
+                        <option value="hybrid">Hybrid: Best performance</option>
+                        <option value="local">Local: Maximum privacy</option>
+                        <option value="ai_preferred">AI: Most sophisticated responses</option>
+                    </select>
+                    <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message assistant">
+                        <div class="message-avatar"><img src="/static/graphics/FirstPerson-Logo-normalized.svg" alt="FP"
+                                style="width:24px;height:24px;" onerror="this.style.display='none'"></div>
+                        <div class="message-content">
+                            Welcome to FirstPerson! I'm here to listen and help you process your emotions. Share what
+                            you're feeling, and I'll provide thoughtful, personalized responses while creating emotional
+                            glyphs to track your journey.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typing-indicator">
+                    FirstPerson is processing your emotional input...
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input-container">
+                    <textarea id="chat-input" class="chat-input" placeholder="Share what you're feeling..." rows="1"
+                        onkeydown="handleKeyPress(event)"></textarea>
+                    <button class="send-btn" id="send-btn" onclick="sendMessage()">
+                        ➤
+                    </button>
+                </div>
+
+                <!-- Debug panel (hidden by default) -->
+                <!-- debug panel removed: Streamlit main UI (main_v2.py) is the canonical app -->
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Your Emotional Journey</div>
+                    <div class="metric">
+                        <div class="metric-value" id="conversation-count">0</div>
+                        <div class="metric-label">Conversations</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="last-session">-</div>
+                        <div class="metric-label">Last Session</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">Privacy Settings</div>
+                    <div class="privacy-info">
+                        <div>🔒 Your data is completely isolated</div>
+                        <div>Learning happens only from your conversations</div>
+                        <div>⚡ Optimized for 2-3 second responses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use React (UMD) with in-browser JSX transform for a lightweight SPA without a build step -->
+    <div id="fp-root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    {% raw %}
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const EDGE_FUNCTION_URL = (() => {
+            try {
+                const m = document.querySelector('meta[name="edge-function-url"]');
+                if (m && m.content) return m.content;
+                if (window.__FP_CONFIG && window.__FP_CONFIG.EDGE_FUNCTION_URL) return window.__FP_CONFIG.EDGE_FUNCTION_URL;
+                return '/api/chat';
+            } catch (e) {
+                return '/api/chat';
+            }
+        })();
+
+        const VALIDATE_SESSION_URL = (() => {
+            try {
+                const m = document.querySelector('meta[name="validate-session-url"]');
+                if (m && m.content) return m.content;
+                if (window.__FP_CONFIG && window.__FP_CONFIG.VALIDATE_SESSION_URL) return window.__FP_CONFIG.VALIDATE_SESSION_URL;
+                return '/api/validate-session';
+            } catch (e) {
+                return '/api/validate-session';
+            }
+        })();
+
+        function Header({ username, onLogout }) {
+            return (
+                <header className="header">
+                    <div className="header-left">
+                        <img src="/static/graphics/FirstPerson-Logo.svg" alt="FirstPerson" className="header-logo" onError={(e) => e.target.style.display = 'none'} />
+                        <div>
+                            <h1 className="header-title">FirstPerson - Personal AI Companion</h1>
+                            <div className="header-subtitle">Your private space for emotional processing and growth</div>
+                        </div>
+                    </div>
+                    <div className="header-right">
+                        <div className="user-info">Welcome back, <span id="username">{username}</span>! 👋</div>
+                        <button className="header-btn" onClick={onLogout}>🚪 Logout</button>
+                    </div>
+                </header>
+            );
+        }
+
+        function Message({ item }) {
+            if (item.type === 'user') {
+                return (
+                    <div className="message user">
+                        <div className="message-content">{item.content}</div>
+                        <div className="message-avatar">👤</div>
+                    </div>
+                );
+            }
+            return (
+                <div className="message assistant">
+                    <div className="message-avatar"><img src="/static/graphics/FirstPerson-Logo.svg" alt="FP" style={{ width: 24, height: 24 }} onError={(e) => e.target.style.display = 'none'} /></div>
+                    <div className="message-content">
+                        {item.content}
+                        {(item.glyph || item.processing_time) && (
+                            <div className="message-meta">{item.glyph ? `✨ Emotional resonance: ${item.glyph} • ` : ''}{item.processing_time ? `Processed in ${item.processing_time.toFixed(2)}s • ` : ''}Mode: {item.mode || 'unknown'}</div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        function ChatApp() {
+            const [messages, setMessages] = useState([]);
+            const [input, setInput] = useState('');
+            const [mode, setMode] = useState('local');
+            const [username, setUsername] = useState('User');
+            const [userId, setUserId] = useState(null);
+            const [sending, setSending] = useState(false);
+            const listRef = useRef(null);
+
+            useEffect(() => {
+                // populate from URL query if present
+                const params = new URLSearchParams(window.location.search);
+                const t = params.get('token');
+                const uid = params.get('user_id');
+                const uname = params.get('username');
+                if (t) localStorage.setItem('firstperson_token', t);
+                if (uid) localStorage.setItem('firstperson_user_id', uid);
+                if (uname) localStorage.setItem('firstperson_username', uname);
+
+                const token = localStorage.getItem('firstperson_token');
+                const uidStored = localStorage.getItem('firstperson_user_id');
+                const unameStored = localStorage.getItem('firstperson_username');
+                if (!token || !uidStored || !unameStored) {
+                    window.location.href = '/';
+                    return;
+                }
+
+                // validate session
+                fetch(`${VALIDATE_SESSION_URL}?token=${encodeURIComponent(token)}`).then(r => {
+                    if (!r.ok) {
+                        localStorage.clear();
+                        window.location.href = '/';
+                    }
+                }).catch(() => { localStorage.clear(); window.location.href = '/'; });
+
+                setUsername(unameStored);
+                setUserId(uidStored);
+
+                const saved = localStorage.getItem(`fp_history_${uidStored}`);
+                if (saved) setMessages(JSON.parse(saved));
+            }, []);
+
+            useEffect(() => {
+                // scroll to bottom
+                if (listRef.current) {
+                    listRef.current.scrollTop = listRef.current.scrollHeight;
+                }
+            }, [messages]);
+
+            function saveHistory(newMessages) {
+                if (userId) localStorage.setItem(`fp_history_${userId}`, JSON.stringify(newMessages));
+            }
+
+            async function send() {
+                if (!input.trim()) return;
+                const userMsg = { type: 'user', content: input, timestamp: new Date().toISOString() };
+                const next = [...messages, userMsg];
+                setMessages(next);
+                setInput('');
+                setSending(true);
+                try {
+                    const res = await fetch(EDGE_FUNCTION_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: input, mode, user_id: userId })
+                    });
+                    const data = await res.json();
+                    const reply = { type: 'assistant', content: data.reply || "I hear you — tell me more when you're ready.", timestamp: new Date().toISOString(), glyph: data.glyph?.tag_name || data.glyph || null, processing_time: data.processing_time || 0, mode };
+                    const merged = [...next, reply];
+                    setMessages(merged);
+                    saveHistory(merged);
+                } catch (e) {
+                    const err = { type: 'assistant', content: "I'm having trouble connecting right now, but your feelings are still valid.", timestamp: new Date().toISOString(), error: true };
+                    const merged = [...next, err];
+                    setMessages(merged);
+                    saveHistory(merged);
+                } finally {
+                    setSending(false);
+                }
+            }
+
+            function clearHistory() {
+                if (!confirm('Are you sure you want to clear your conversation history?')) return;
+                setMessages([]);
+                if (userId) localStorage.removeItem(`fp_history_${userId}`);
+            }
+
+            function logout() {
+                localStorage.clear();
+                window.location.href = '/';
+            }
+
+            return (
+                <div className="app-container">
+                    <Header username={username} onLogout={logout} />
+                    <div className="main-content">
+                        <div className="chat-container">
+                            <div className="controls">
+                                <label>Processing Mode:</label>
+                                <select className="mode-select" value={mode} onChange={e => setMode(e.target.value)}>
+                                    <option value="hybrid">Hybrid: Best performance</option>
+                                    <option value="local">Local: Maximum privacy</option>
+                                    <option value="ai_preferred">AI: Most sophisticated responses</option>
+                                </select>
+                                <button className="clear-btn" onClick={clearHistory}>Clear History</button>
+                            </div>
+
+                            <div className="chat-messages" id="chat-messages" ref={listRef}>
+                                {messages.length === 0 && (
+                                    <div className="message assistant welcome">
+                                        <div className="message-avatar"><img src="/static/graphics/FirstPerson-Logo.svg" alt="FP" style={{ width: 24, height: 24 }} onError={(e) => e.target.style.display = 'none'} /></div>
+                                        <div className="message-content">Welcome to FirstPerson! I'm here to listen and help you process your emotions. Share what you're feeling, and I'll provide thoughtful, personalized responses while creating emotional glyphs to track your journey.</div>
+                                    </div>
+                                )}
+                                {messages.map((m, i) => <Message key={i} item={m} />)}
+                            </div>
+
+                            <div className="typing-indicator" id="typing-indicator">{sending ? 'FirstPerson is processing your emotional input...' : ''}</div>
+
+                            <div className="chat-input-container">
+                                <textarea className="chat-input" value={input} onChange={e => setInput(e.target.value)} placeholder="Share what you're feeling..." rows={1} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }} />
+                                <button className="send-btn" onClick={send} disabled={sending}>➤</button>
+                            </div>
+                        </div>
+
+                        <div className="sidebar">
+                            <div className="sidebar-section">
+                                <div className="sidebar-title">Your Emotional Journey</div>
+                                <div className="metric">
+                                    <div className="metric-value" id="conversation-count">{messages.filter(m => m.type === 'user').length}</div>
+                                    <div className="metric-label">Conversations</div>
+                                </div>
+                                <div className="metric">
+                                    <div className="metric-value" id="last-session">{messages.length ? new Date(messages[messages.length - 1].timestamp).toLocaleDateString() : '-'}</div>
+                                    <div className="metric-label">Last Session</div>
+                                </div>
+                            </div>
+
+                            <div className="sidebar-section">
+                                <div className="sidebar-title">Privacy Settings</div>
+                                <div className="privacy-info">
+                                    <div>🔒 Your data is completely isolated</div>
+                                    <div>Learning happens only from your conversations</div>
+                                    <div>⚡ Optimized for 2-3 second responses</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('fp-root')).render(<ChatApp />);
+    </script>
+    {% endraw %}
+</body>
+
+</html>
