@@ -75,12 +75,21 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
     """
     try:
         from ..glyphs.signal_parser import parse_input
+        from ...core.paths import get_path_manager
+
+        # Get proper paths using PathManager (handles both local and cloud deployments)
+        pm = get_path_manager()
+        lexicon_path = str(pm._resolve_path(
+            "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json",
+            "word_centric_emotional_lexicon_expanded.json"
+        ))
+        db_path = str(pm.glyph_db())
 
         # Local signal parsing with word-centric lexicon
         local_analysis = parse_input(
             user_input,
-            "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json",
-            db_path="emotional_os/glyphs/glyphs.db",
+            lexicon_path,
+            db_path=db_path,
             conversation_context=conversation_context,
         )
 
