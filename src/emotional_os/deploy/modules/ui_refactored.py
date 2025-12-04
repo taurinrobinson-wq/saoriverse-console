@@ -94,20 +94,6 @@ def delete_user_history_from_supabase(user_id: str) -> tuple:
 
 
 # ============================================================================
-# PAGE CONFIGURATION
-# ============================================================================
-
-def _configure_page():
-    """Configure Streamlit page settings."""
-    st.set_page_config(
-        page_title="FirstPerson - Personal AI Companion",
-        page_icon="🧠",
-        layout="wide",
-        initial_sidebar_state="expanded",
-    )
-
-
-# ============================================================================
 # AUTHENTICATION & SPLASH SCREEN
 # ============================================================================
 
@@ -290,8 +276,6 @@ def render_app():
 
 def main():
     """Main application entry point."""
-    _configure_page()
-
     # Check authentication status
     if not st.session_state.get("authenticated"):
         render_splash_interface()
