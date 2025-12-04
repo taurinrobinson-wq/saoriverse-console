@@ -941,37 +941,37 @@ class DynamicResponseComposer:
         # Detect what the user is actually talking about and respond to THAT
         
         # Overwhelm/burden/holding too much
-        if any(word in lower_input for word in ["overwhelm", "fragile", "breaking", "heavy", "heavy load", "too much", "drowning"]):
+        if any(word in lower_input for word in ["overwhelm", "overwhelmed", "fragile", "breaking", "heavy", "heavy load", "too much", "drowning", "drowning in"]):
             return f"I hear you. Sounds like you're holding a lot right now. What feels heaviest?"
         
         # Sacred/meaningful/precious moments
-        if any(word in lower_input for word in ["sacred", "precious", "meaningful", "special moment", "moved"]):
+        if any(word in lower_input for word in ["sacred", "precious", "meaningful", "special moment", "moved", "beautiful", "wonder"]):
             if "child" in lower_input or "hug" in lower_input or "touch" in lower_input:
                 return f"Those moments with people we love hit different. Sounds like that was really special. Want to say more about it?"
             else:
                 return f"You're sensing something significant. What made that moment feel so precious?"
         
         # Relief/rest/break
-        if any(word in lower_input for word in ["done", "finally", "relief", "break", "quiet", "rest", "peace"]):
+        if any(word in lower_input for word in ["done", "finally", "relief", "break", "quiet", "rest", "peace", "paused", "pause"]):
             if "work" in lower_input or "finished" in lower_input:
                 return f"Yeah, what a relief. Sounds like you've been carrying a lot. How are you wanting to spend this quiet time?"
             else:
                 return f"That pause matters. What does this quiet feel like after everything?"
         
         # Grief/loss/sadness
-        if any(word in lower_input for word in ["grief", "loss", "lost", "miss", "sad", "mourning"]):
+        if any(word in lower_input for word in ["grief", "grieve", "loss", "lost", "missing", "miss", "sad", "sadness", "mourning", "mourn", "sorrow"]):
             return f"That's real. Loss takes up space. What do you need right now?"
         
         # Joy/celebration/good news
-        if any(word in lower_input for word in ["happy", "excited", "celebrating", "wonderful", "amazing", "loved"]):
+        if any(word in lower_input for word in ["happy", "happiness", "excited", "excited", "celebrating", "celebration", "wonderful", "amazing", "loved", "love", "joy"]):
             return f"That's something to feel. Let it land. What's the story there?"
         
         # Vulnerability/scared/uncertain
-        if any(word in lower_input for word in ["scared", "afraid", "uncertain", "vulnerable", "unsafe", "exposed"]):
+        if any(word in lower_input for word in ["scared", "scaring", "afraid", "fear", "uncertain", "uncertainty", "vulnerable", "vulnerable", "unsafe", "exposed"]):
             return f"That takes courage to name. You're not alone in that. What would help right now?"
         
         # Frustration/anger
-        if any(word in lower_input for word in ["frustrated", "frustrating", "angry", "furious", "mad", "rage"]):
+        if any(word in lower_input for word in ["frustrated", "frustrating", "frustration", "angry", "anger", "furious", "mad", "rage", "raging"]):
             return f"That frustration is telling you something. What's underneath it?"
         
         # Default: reflect the emotion back empathetically
