@@ -1119,15 +1119,20 @@ def generate_contextual_response(
 
     # Fall back to dynamic composition for general responses
     # Use the dynamic composer to generate non-templated responses
-    composed = _response_composer.compose_response(
-        input_text=input_text,
-        glyph=glyph,
-        feedback_detected=feedback_data.get("is_correction", False),
-        feedback_type=feedback_data.get("contradiction_type"),
-        conversation_context=conversation_context,
-    )
+    composed = None
+    try:
+        composed = _response_composer.compose_response(
+            input_text=input_text,
+            glyph=glyph,
+            feedback_detected=feedback_data.get("is_correction", False),
+            feedback_type=feedback_data.get("contradiction_type"),
+            conversation_context=conversation_context,
+        )
+    except Exception as e:
+        logger.error(f"compose_response FAILED: {e}", exc_info=True)
+        composed = None
 
-    logger.info(f"generate_contextual_response: input='{input_text[:50]}...' -> composed='{composed[:100] if composed else 'EMPTY'}'")
+    logger.info(f"generate_contextual_response: input='{input_text[:50] if input_text else ''}' -> composed='{composed[:100] if composed else 'EMPTY/ERROR'}'")
 
     if composed:
         # Prepend relational acknowledgment if present
@@ -1139,7 +1144,7 @@ def generate_contextual_response(
     base = "I'm here with you. What you're experiencing matters, and I'm listening."
     if relational_prefix:
         base = f"{relational_prefix} {base}"
-    logger.info(f"generate_contextual_response: Using ultimate fallback: '{base[:100]}'")
+    logger.info(f"generate_contextual_response: Using ultimate fallback because composed was empty/error")
     return _avoid_repeat(base, conversation_context, previous_responses), feedback_data
 
 
