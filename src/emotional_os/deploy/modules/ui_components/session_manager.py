@@ -28,6 +28,7 @@ def initialize_session_state():
     - FirstPersonOrchestrator for relational AI
     - AffectParser for emotional analysis
     - FallbackProtocol for safety
+    - Voice mode
     - Processing mode and preferences
     - Authentication state
     """
@@ -36,6 +37,7 @@ def initialize_session_state():
     _ensure_processor_instances()
     _ensure_processing_prefs()
     _ensure_fallback_protocol()
+    _ensure_voice_mode()
 
 
 def _ensure_auth_defaults():
@@ -134,6 +136,13 @@ def _ensure_fallback_protocol():
         except Exception as e:
             logger.debug(f"Fallback protocol init failed: {e}")
             st.session_state["fallback_protocol"] = None
+
+
+def _ensure_voice_mode():
+    """Initialize voice mode state."""
+    st.session_state.setdefault("voice_mode_enabled", False)
+    st.session_state.setdefault("last_audio_input", None)
+    st.session_state.setdefault("last_audio_output", None)
 
 
 def load_conversation_manager():
