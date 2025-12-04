@@ -118,19 +118,18 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
 def _build_conversational_response(user_input: str, local_analysis: dict) -> str:
     """Build a natural conversational response from signal analysis.
     
-    Takes the raw glyph analysis and builds a response that:
-    1. Acknowledges what the user said
-    2. Uses the glyph insights naturally
-    3. Stays conversational and warm
+    Uses FirstPerson orchestrator with glyph as constraint (not template):
+    1. Glyph informs tone/depth/emotional grounding
+    2. Response is fresh and specific to THIS user input
+    3. No canned responses - each response is generated for context
     
     Args:
         user_input: Original user message
         local_analysis: Analysis dict from parse_input
         
     Returns:
-        Conversational response
+        Fresh, non-canned conversational response
     """
-    glyphs = local_analysis.get("glyphs", [])
     best_glyph = local_analysis.get("best_glyph")
     voltage_response = local_analysis.get("voltage_response", "")
     
@@ -141,6 +140,17 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         if "Resonant Glyph:" in response:
             response = response.split("Resonant Glyph:")[0].strip()
         return response
+    
+    # Use FirstPerson orchestrator to generate glyph-informed response
+    try:
+        fp_orch = st.session_state.get("firstperson_orchestrator")
+        if fp_orch and best_glyph:
+            # Generate fresh response using glyph as constraint
+            response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
+            logger.debug(f"Generated FirstPerson response using glyph {best_glyph.get('glyph_name')}")
+            return response
+    except Exception as e:
+        logger.debug(f"FirstPerson response generation failed: {e}")
     
     # Fallback: build a simple acknowledgment + glyph insight
     # This is a minimal conversational wrapper
