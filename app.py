@@ -39,7 +39,17 @@ except Exception:
 # Diagnostic: Show which Python executable is being used
 import sys
 with st.sidebar:
-    st.caption(f"Python: {sys.executable}")
+    python_exe = sys.executable
+    python_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    
+    # Check if running Python 3.12
+    if sys.version_info.major == 3 and sys.version_info.minor == 12:
+        st.success(f"✓ Python {python_version}")
+    else:
+        st.warning(f"⚠️ Python {python_version}\n\nFor full functionality, use Python 3.12:\n\n```\npy -3.12 -m streamlit run app.py\n```")
+    
+    with st.expander("Diagnostic Info"):
+        st.code(python_exe, language="text")
 
 # Now import the UI system
 try:
