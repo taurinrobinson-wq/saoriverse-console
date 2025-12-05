@@ -43,6 +43,24 @@ try:
     if __name__ == "__main__":
         main()
         
+except ImportError as e:
+    # Try alternative import path if the main one fails
+    try:
+        import sys
+        from pathlib import Path
+        # Add src to path if it's not already there
+        src_path = str(Path(__file__).parent / "src")
+        if src_path not in sys.path:
+            sys.path.insert(0, src_path)
+        from emotional_os.deploy.modules.ui_refactored import main
+        
+        if __name__ == "__main__":
+            main()
+    except Exception as e2:
+        st.error(f"Failed to load FirstPerson UI: {str(e2)}")
+        import traceback
+        st.error(traceback.format_exc())
+        
 except Exception as e:
     st.error(f"Failed to load FirstPerson UI: {str(e)}")
     import traceback

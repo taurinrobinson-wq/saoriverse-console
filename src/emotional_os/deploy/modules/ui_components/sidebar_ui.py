@@ -121,9 +121,9 @@ def _render_authenticated_sidebar():
         # Voice mode toggle
         try:
             voice_enabled = st.checkbox(
-                "🎙️ Voice Input/Output",
+                "🎙️ Voice Mode",
                 value=st.session_state.get("voice_mode_enabled", False),
-                help="Enable microphone input and audio playback (experimental)"
+                help="Enable voice input transcription and audio output"
             )
             st.session_state["voice_mode_enabled"] = voice_enabled
         except Exception as e:

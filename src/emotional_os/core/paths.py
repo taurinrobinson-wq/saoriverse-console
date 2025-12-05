@@ -41,6 +41,30 @@ class PathManager:
         return Path.cwd()
 
     # Lexicon files
+    def word_lexicon(self) -> Path:
+        """Path to word-centric emotional lexicon."""
+        return self._resolve_path(
+            "data/word_centric_emotional_lexicon_expanded.json",
+            "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json",
+            "src/emotional_os_lexicon/word_centric_emotional_lexicon_expanded.json"
+        )
+
+    def nrc_lexicon(self) -> Path:
+        """Path to NRC emotion lexicon."""
+        return self._resolve_path(
+            "data/lexicons/nrc_emotion_lexicon.txt",
+            "data/lexicons/nrc_lexicon_cleaned.json",
+            "emotional_os/lexicon/nrc_emotion_lexicon.txt"
+        )
+
+    def suicidality_protocol(self) -> Path:
+        """Path to suicidality protocol config."""
+        return self._resolve_path(
+            "emotional_os/core/suicidality_protocol.json",
+            "src/emotional_os/core/suicidality_protocol.json",
+            "data/config/suicidality_protocol.json"
+        )
+
     def signal_lexicon(self) -> Path:
         """Path to base signal lexicon."""
         return self._resolve_path(

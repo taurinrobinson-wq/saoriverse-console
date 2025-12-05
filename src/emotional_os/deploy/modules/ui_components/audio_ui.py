@@ -12,37 +12,46 @@ import streamlit.components.v1 as components
 import logging
 from typing import Optional, Tuple
 import json
+import io
 
 logger = logging.getLogger(__name__)
 
-# Lazy imports to avoid loading heavy audio libraries unnecessarily
-_audio_pipeline = None
-_tts_pipeline = None
+# Lazy imports for audio libraries
+_tts_engine = None
+_recognizer = None
+
+try:
+    import pyttsx3
+    HAS_PYTTSX3 = True
+except ImportError:
+    HAS_PYTTSX3 = False
+
+try:
+    import speech_recognition as sr
+    HAS_SPEECH_RECOGNITION = True
+except ImportError:
+    HAS_SPEECH_RECOGNITION = False
 
 
-def get_audio_pipeline():
-    """Get or create the audio pipeline (lazy initialization)."""
-    global _audio_pipeline
-    if _audio_pipeline is None:
+def get_tts_engine():
+    """Get or create TTS engine."""
+    global _tts_engine
+    if _tts_engine is None and HAS_PYTTSX3:
         try:
-            from .audio_pipeline import AudioPipeline
-            _audio_pipeline = AudioPipeline()
+            _tts_engine = pyttsx3.init()
+            _tts_engine.setProperty('rate', 150)
+            _tts_engine.setProperty('volume', 0.9)
         except Exception as e:
-            logger.warning(f"Failed to initialize AudioPipeline: {e}")
-    return _audio_pipeline
+            logger.warning(f"Failed to initialize TTS: {e}")
+    return _tts_engine
 
 
-def get_tts_pipeline():
-    """Get or create the TTS pipeline (lazy initialization)."""
-    global _tts_pipeline
-    if _tts_pipeline is None:
-        try:
-            from .streaming_tts import StreamingTTSPipeline, TTSConfig
-            config = TTSConfig(gpu=False)
-            _tts_pipeline = StreamingTTSPipeline(config)
-        except Exception as e:
-            logger.warning(f"Failed to initialize StreamingTTSPipeline: {e}")
-    return _tts_pipeline
+def get_speech_recognizer():
+    """Get or create speech recognizer."""
+    global _recognizer
+    if _recognizer is None and HAS_SPEECH_RECOGNITION:
+        _recognizer = sr.Recognizer()
+    return _recognizer
 
 
 def render_voice_mode_toggle():
@@ -68,95 +77,69 @@ def render_voice_mode_toggle():
 
 
 def render_audio_recorder():
-    """Render audio recording widget using custom HTML/JS component.
+    """Record audio from microphone and return transcribed text.
     
     Returns:
-        Dict with recorded audio data or None if not recorded
+        Transcribed text or None if recording failed
     """
-    # Custom HTML/JS for microphone recording without external dependencies
-    recorder_component = components.html(
-        """
-        <div id="recorder-container" style="padding: 20px; text-align: center;">
-            <button id="recordBtn" style="
-                padding: 12px 24px;
-                font-size: 16px;
-                background-color: #ff4b4b;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                margin: 10px;
-            ">🎙️ Start Recording</button>
-            
-            <button id="stopBtn" style="
-                padding: 12px 24px;
-                font-size: 16px;
-                background-color: #4b7bff;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                margin: 10px;
-                display: none;
-            ">⏹️ Stop Recording</button>
-            
-            <div id="status" style="margin-top: 20px; font-size: 14px; color: #666;"></div>
-            <audio id="audioPlayback" style="display: none; margin-top: 20px;"></audio>
-        </div>
-
-        <script>
-            let mediaRecorder;
-            let audioChunks = [];
-            let recordingStartTime = null;
-
-            document.getElementById('recordBtn').onclick = async () => {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
-                    recordingStartTime = Date.now();
-
-                    mediaRecorder.ondataavailable = (event) => {
-                        audioChunks.push(event.data);
-                    };
-
-                    mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                            const base64Audio = reader.result.split(',')[1];
-                            window.parent.postMessage({
-                                type: 'AUDIO_RECORDED',
-                                audioData: base64Audio,
-                                duration: (Date.now() - recordingStartTime) / 1000
-                            }, '*');
-                        };
-                        reader.readAsDataURL(audioBlob);
-                    };
-
-                    mediaRecorder.start();
-                    document.getElementById('recordBtn').style.display = 'none';
-                    document.getElementById('stopBtn').style.display = 'inline-block';
-                    document.getElementById('status').innerText = '🔴 Recording...';
-                } catch (error) {
-                    document.getElementById('status').innerText = '❌ Microphone access denied';
-                    console.error('Error accessing microphone:', error);
-                }
-            };
-
-            document.getElementById('stopBtn').onclick = () => {
-                mediaRecorder.stop();
-                mediaRecorder.stream.getTracks().forEach(track => track.stop());
-                document.getElementById('recordBtn').style.display = 'inline-block';
-                document.getElementById('stopBtn').style.display = 'none';
-                document.getElementById('status').innerText = '✓ Recording saved';
-            };
-        </script>
-        """,
-        height=200
-    )
+    if not HAS_SPEECH_RECOGNITION:
+        st.error("Speech recognition not available")
+        return None
     
-    return None  # Streamlit component returns None for custom components
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        if st.button("🎤 Record Message", use_container_width=True):
+            try:
+                recognizer = get_speech_recognizer()
+                if recognizer is None:
+                    st.error("Speech recognizer not initialized")
+                    return None
+                
+                with st.spinner("🎤 Listening... (10 seconds)"):
+                    try:
+                        with sr.Microphone() as source:
+                            # Adjust for ambient noise
+                            recognizer.adjust_for_ambient_noise(source, duration=0.5)
+                            # Record audio with 10 second timeout
+                            audio_data = recognizer.listen(source, timeout=10, phrase_time_limit=10)
+                    except sr.RequestError as e:
+                        st.error(f"Microphone error: {e}")
+                        return None
+                
+                with st.spinner("📝 Transcribing..."):
+                    # Use Google Speech Recognition (free, requires internet)
+                    try:
+                        text = recognizer.recognize_google(audio_data)
+                        st.session_state["voice_input_text"] = text
+                        st.success(f"✓ Got it: {text}")
+                        return text
+                    except sr.UnknownValueError:
+                        st.warning("Could not understand audio. Please try again.")
+                        return None
+                    except sr.RequestError as e:
+                        st.error(f"Transcription service error: {e}")
+                        return None
+                    
+            except Exception as e:
+                st.error(f"Recording error: {e}")
+                logger.debug(f"Voice recording error: {e}")
+                return None
+    
+    with col2:
+        # Fallback text input option
+        voice_text = st.text_input("Or type:", key="voice_text_input", label_visibility="collapsed")
+        if voice_text:
+            st.session_state["voice_input_text"] = voice_text
+            return voice_text
+    
+    # Check if we have stored voice input from session
+    if st.session_state.get("voice_input_text"):
+        result = st.session_state["voice_input_text"]
+        st.session_state["voice_input_text"] = None  # Clear after use
+        return result
+    
+    return None
 
 
 def render_audio_playback(audio_bytes: bytes, label: str = "🔊 Response Audio"):
@@ -248,51 +231,44 @@ def synthesize_response_audio(
     voice: str = "Default",
     speed: float = 1.0
 ) -> Optional[bytes]:
-    """Synthesize response text to audio with emotional prosody.
+    """Synthesize response text to audio.
     
     Args:
         response_text: Text to synthesize
-        glyph_name: Name of glyph for prosody guidance
+        glyph_name: Name of glyph for prosody guidance (optional)
         voice: Voice option (Default, Warm, Professional, Gentle)
         speed: Speech rate multiplier
         
     Returns:
-        Audio bytes or None if synthesis failed
+        Audio bytes (WAV format) or None if synthesis failed
     """
+    if not HAS_PYTTSX3:
+        return None
+    
     try:
-        pipeline = get_tts_pipeline()
-        if pipeline is None:
-            st.warning("TTS not available. Displaying text response only.")
+        engine = get_tts_engine()
+        if engine is None:
             return None
         
-        with st.spinner("🔄 Synthesizing response audio..."):
-            # Map glyph names to prosody parameters
-            prosody_map = {
-                "I_HEAR_YOU": {"energy": 0.8, "rate": 0.95},
-                "EXACTLY": {"energy": 1.0, "rate": 0.9},
-                "THAT_LANDS": {"energy": 0.9, "rate": 1.0},
-                "RECURSIVE_ACHE": {"energy": 0.7, "rate": 0.85},
-            }
-            
-            prosody = prosody_map.get(glyph_name, {"energy": 0.9, "rate": 1.0})
-            prosody["rate"] *= speed
-            
-            # Generate audio
-            audio_buffer = pipeline.synthesize_with_prosody(
-                response_text,
-                prosody=prosody
-            )
-            
-            if audio_buffer:
-                st.success("✓ Audio synthesized")
-                return audio_buffer
-            else:
-                st.warning("Could not synthesize audio")
-                return None
+        # Adjust speech rate
+        engine.setProperty('rate', int(150 * speed))
+        
+        # Save to bytes buffer
+        audio_buffer = io.BytesIO()
+        engine.save_to_file(response_text, '__temp_audio.wav')
+        engine.runAndWait()
+        
+        # Read the generated file into bytes
+        try:
+            with open('__temp_audio.wav', 'rb') as f:
+                audio_bytes = f.read()
+            return audio_bytes
+        except Exception as e:
+            logger.debug(f"Error reading audio file: {e}")
+            return None
                 
     except Exception as e:
-        logger.warning(f"TTS synthesis error: {e}")
-        logger.debug(f"Error details: {str(e)}")
+        logger.debug(f"TTS synthesis error: {e}")
         return None
 
 

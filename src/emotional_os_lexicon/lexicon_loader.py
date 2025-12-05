@@ -14,9 +14,17 @@ from functools import lru_cache
 class WordCentricLexicon:
     """Load and query the word-centric emotional lexicon"""
     
-    def __init__(self, lexicon_path: str = "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json"):
+    def __init__(self, lexicon_path: Optional[str] = None):
         """Initialize lexicon from JSON file"""
-        self.lexicon_path = lexicon_path
+        if lexicon_path is None:
+            try:
+                from emotional_os.core.paths import get_path_manager
+                pm = get_path_manager()
+                self.lexicon_path = str(pm.word_lexicon())
+            except Exception:
+                self.lexicon_path = "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json"
+        else:
+            self.lexicon_path = lexicon_path
         self.lexicon: Dict[str, Dict[str, Any]] = {}
         self.metadata: Dict[str, Any] = {}
         self.signal_map: Dict[str, List[int]] = {}
