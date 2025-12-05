@@ -14,6 +14,7 @@ Orchestrates the full response pipeline including:
 import time
 import logging
 import streamlit as st
+from src.emotional_os.tier1_foundation import Tier1Foundation
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +35,16 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
     start_time = time.time()
     response = ""
     processing_mode = st.session_state.get("processing_mode", "local")
+    
+    # Initialize Tier 1 Foundation if not already done
+    if "tier1_foundation" not in st.session_state:
+        try:
+            tier1 = Tier1Foundation(conversation_memory=None)
+            st.session_state.tier1_foundation = tier1
+            logger.info("Tier 1 Foundation initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Tier 1 Foundation: {e}")
+            st.session_state.tier1_foundation = None
 
     try:
         # Run appropriate pipeline based on mode
@@ -50,6 +61,25 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
 
         # Prevent verbatim repetition
         response = _prevent_response_repetition(response)
+        
+        # TIER 1: Enhance response with learning and safety wrapping
+        tier1 = st.session_state.get("tier1_foundation")
+        if tier1:
+            try:
+                enhanced_response, tier1_metrics = tier1.process_response(
+                    user_input=user_input,
+                    base_response=response,
+                    context=conversation_context,
+                )
+                # Log performance metrics
+                if tier1_metrics.get("total", 0) > 0.1:
+                    logger.warning(f"Tier 1 pipeline slow: {tier1_metrics['total']:.3f}s")
+                else:
+                    logger.debug(f"Tier 1 metrics: {tier1_metrics}")
+                # Use enhanced response
+                response = enhanced_response
+            except Exception as e:
+                logger.warning(f"Tier 1 enhancement failed: {e}, using base response")
 
     except Exception as e:
         logger.error(f"Response pipeline FAILED: {type(e).__name__}: {e}", exc_info=True)
@@ -93,10 +123,17 @@ def _run_local_processing(user_input: str, conversation_context: dict) -> str:
             conversation_context=conversation_context,
         )
 
+        # Ensure local_analysis is a dict
+        if not isinstance(local_analysis, dict):
+            logger.warning(f"parse_input returned non-dict: {type(local_analysis)}")
+            local_analysis = {}
+
         # DEBUG: Log what parse_input returned
         logger.info(f"parse_input returned:")
         logger.info(f"  voltage_response: {local_analysis.get('voltage_response', 'MISSING')[:200] if local_analysis.get('voltage_response') else 'NONE/EMPTY'}")
-        logger.info(f"  best_glyph: {local_analysis.get('best_glyph', {}).get('glyph_name', 'NONE')}")
+        best_glyph = local_analysis.get('best_glyph')
+        glyph_name = best_glyph.get('glyph_name', 'NONE') if isinstance(best_glyph, dict) else 'NONE'
+        logger.info(f"  best_glyph: {glyph_name}")
         logger.info(f"  response_source: {local_analysis.get('response_source')}")
 
         # Get the conversational response from the analysis
@@ -130,8 +167,8 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
     Returns:
         Fresh, non-canned conversational response
     """
-    best_glyph = local_analysis.get("best_glyph")
-    voltage_response = local_analysis.get("voltage_response", "")
+    best_glyph = local_analysis.get("best_glyph") if local_analysis else None
+    voltage_response = local_analysis.get("voltage_response", "") if local_analysis else ""
     
     # If we have a voltage response, use that as the primary response
     if voltage_response and voltage_response.strip():
@@ -144,7 +181,7 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
     # Use FirstPerson orchestrator to generate glyph-informed response
     try:
         fp_orch = st.session_state.get("firstperson_orchestrator")
-        if fp_orch and best_glyph:
+        if fp_orch and best_glyph and isinstance(best_glyph, dict):
             # Generate fresh response using glyph as constraint
             response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
             logger.debug(f"Generated FirstPerson response using glyph {best_glyph.get('glyph_name')}")
@@ -154,8 +191,8 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
     
     # Fallback: build a simple acknowledgment + glyph insight
     # This is a minimal conversational wrapper
-    glyph_name = best_glyph.get("glyph_name", "") if best_glyph else ""
-    glyph_desc = best_glyph.get("description", "") if best_glyph else ""
+    glyph_name = best_glyph.get("glyph_name", "") if best_glyph and isinstance(best_glyph, dict) else ""
+    glyph_desc = best_glyph.get("description", "") if best_glyph and isinstance(best_glyph, dict) else ""
     
     if glyph_name:
         # Create a simple conversational response
