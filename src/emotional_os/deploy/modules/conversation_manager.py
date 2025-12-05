@@ -401,8 +401,8 @@ def load_all_conversations_to_sidebar(manager: ConversationManager, in_expander:
         col1, col2, col3 = ctx.columns([3, 1, 1])
 
         with col1:
-            # Click to load conversation
-            if st.button(f"💬 {conv['title']}", key=f"load_conv_{conv['conversation_id']}", use_container_width=True):
+            # Click to load conversation - using caption for smaller text
+            if ctx.button(f"💬 {conv['title']}", key=f"load_conv_{conv['conversation_id']}", use_container_width=True, help=conv['title']):
                 try:
                     # Best-effort: load the conversation immediately using the manager
                     user_id = st.session_state.get("user_id")
@@ -432,14 +432,14 @@ def load_all_conversations_to_sidebar(manager: ConversationManager, in_expander:
                     st.rerun()
 
         with col2:
-            # Rename button
-            if st.button("✏️", key=f"rename_{conv['conversation_id']}", help="Rename"):
+            # Rename button - smaller
+            if ctx.button("✏️", key=f"rename_{conv['conversation_id']}", help="Rename", use_container_width=True):
                 st.session_state[f"renaming_{conv['conversation_id']}"] = True
                 st.rerun()
 
         with col3:
-            # Delete button
-            if st.button("🗑️", key=f"delete_{conv['conversation_id']}", help="Delete"):
+            # Delete button - smaller
+            if ctx.button("🗑️", key=f"delete_{conv['conversation_id']}", help="Delete", use_container_width=True):
                 # If this conversation is an optimistic session-cached item,
                 # remove it from the session cache and avoid calling the
                 # server-side delete API which will fail for unsaved items.
