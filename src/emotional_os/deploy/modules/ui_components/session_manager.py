@@ -220,7 +220,7 @@ def load_conversation_manager():
         return st.session_state.get("conversation_manager")
 
     try:
-        from .conversation_manager import ConversationManager
+        from ..conversation_manager import ConversationManager
 
         user_id = st.session_state.get("user_id")
         if not user_id:
@@ -262,7 +262,7 @@ def migrate_demo_to_auth():
         return
 
     try:
-        from .conversation_manager import (
+        from ..conversation_manager import (
             ConversationManager,
             generate_auto_name,
         )
