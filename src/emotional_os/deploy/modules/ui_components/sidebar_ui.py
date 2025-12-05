@@ -146,6 +146,26 @@ def _render_authenticated_sidebar():
         except Exception as e:
             logger.debug(f"Error rendering voice toggle: {e}")
 
+        # Dark mode toggle
+        try:
+            current_theme = st.session_state.get("theme", "Light")
+            is_dark = current_theme == "Dark"
+            
+            dark_mode_enabled = st.checkbox(
+                "🌙 Dark Mode",
+                value=is_dark,
+                help="Toggle between light and dark theme"
+            )
+            
+            if dark_mode_enabled != is_dark:
+                new_theme = "Dark" if dark_mode_enabled else "Light"
+                st.session_state["theme"] = new_theme
+                st.session_state["theme_select_row"] = new_theme
+                st.session_state["theme_loaded"] = False  # Force reload
+                st.rerun()
+        except Exception as e:
+            logger.debug(f"Error rendering dark mode toggle: {e}")
+
         # Consent settings
         try:
             from ..consent_ui import render_consent_settings_panel
