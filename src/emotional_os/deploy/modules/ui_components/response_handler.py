@@ -257,6 +257,20 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         response = voltage_response.strip()
         if "Resonant Glyph:" in response:
             response = response.split("Resonant Glyph:")[0].strip()
+        
+        # IMPORTANT: Check if this is a composite response (analysis + conversational)
+        # separated by blank line or double newline
+        parts = response.split("\n\n")
+        if len(parts) > 1:
+            # Multi-part response: first is analysis/poetic, second+ is conversational
+            # Use ONLY the conversational part (last part) for tier processing
+            conversational_response = parts[-1].strip()
+            # Store the poetic analysis for potential debugging
+            poetic_analysis = parts[0].strip()
+            logger.debug(f"Composite response detected. Analysis: {poetic_analysis[:100]}...")
+            return conversational_response
+        
+        # Single response: use as-is
         return response
     
     # Use FirstPerson orchestrator to generate glyph-informed response
