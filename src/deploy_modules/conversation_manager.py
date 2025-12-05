@@ -352,8 +352,14 @@ def initialize_conversation_manager() -> Optional[ConversationManager]:
     return ConversationManager(st.session_state.user_id)
 
 
-def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
-    """Display all user's previous conversations in sidebar."""
+def load_all_conversations_to_sidebar(manager: ConversationManager, in_expander: bool = True) -> None:
+    """Display all user's previous conversations in sidebar.
+    
+    Args:
+        manager: The ConversationManager instance
+        in_expander: If True (default), uses st.* (for expander context). 
+                     If False, uses st.sidebar.* (for direct sidebar context).
+    """
     if not manager:
         return
 
@@ -384,14 +390,15 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
         # Best-effort merge; if anything goes wrong, fall back to server list
         pass
 
+    # Choose context: expander (st) or sidebar (st.sidebar)
+    ctx = st if in_expander else st.sidebar
+
     if not conversations:
-        st.sidebar.info("No previous conversations yet. Start a new one!")
+        ctx.info("No previous conversations yet. Start a new one!")
         return
 
-    st.sidebar.markdown("### 📚 Previous Conversations")
-
     for conv in conversations:
-        col1, col2, col3 = st.sidebar.columns([3, 1, 1])
+        col1, col2, col3 = ctx.columns([3, 1, 1])
 
         with col1:
             # Click to load conversation
@@ -413,7 +420,7 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
                         )
                         st.session_state["conversation_title"] = loaded.get("title", conv["title"])
                         try:
-                            st.sidebar.success(f"Loaded: {st.session_state['conversation_title']}")
+                            ctx.success(f"Loaded: {st.session_state['conversation_title']}")
                         except Exception:
                             pass
                         st.rerun()
@@ -444,33 +451,33 @@ def load_all_conversations_to_sidebar(manager: ConversationManager) -> None:
                         st.session_state["session_cached_conversations"] = [
                             c for c in cached if c.get("conversation_id") != conv["conversation_id"]
                         ]
-                        st.sidebar.success("Deleted local conversation")
+                        ctx.success("Deleted local conversation")
                         st.rerun()
                 except Exception:
                     pass
 
                 success, message = manager.delete_conversation(conv["conversation_id"])
                 if success:
-                    st.sidebar.success(message)
+                    ctx.success(message)
                     st.rerun()
                 else:
-                    st.sidebar.error(message)
+                    ctx.error(message)
 
         # Handle rename dialog
         if st.session_state.get(f"renaming_{conv['conversation_id']}", False):
-            new_title = st.sidebar.text_input(
+            new_title = ctx.text_input(
                 "New title:", value=conv["title"], key=f"rename_input_{conv['conversation_id']}"
             )
-            col_a, col_b = st.sidebar.columns(2)
+            col_a, col_b = ctx.columns(2)
             with col_a:
                 if st.button("Save", key=f"save_rename_{conv['conversation_id']}"):
                     success, message = manager.rename_conversation(conv["conversation_id"], new_title)
                     if success:
-                        st.sidebar.success(message)
+                        ctx.success(message)
                         st.session_state[f"renaming_{conv['conversation_id']}"] = False
                         st.rerun()
                     else:
-                        st.sidebar.error(message)
+                        ctx.error(message)
             with col_b:
                 if st.button("Cancel", key=f"cancel_rename_{conv['conversation_id']}"):
                     st.session_state[f"renaming_{conv['conversation_id']}"] = False
