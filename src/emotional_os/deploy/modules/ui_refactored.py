@@ -257,8 +257,6 @@ def render_app():
                     except Exception as e:
                         logger.debug(f"Conversation persistence failed: {e}")
 
-            st.rerun()
-
         # ====== JOURNAL CENTER (if active) ======
         try:
             render_journal_center()
@@ -276,6 +274,48 @@ def render_app():
 
 def main():
     """Main application entry point."""
+    # Warmup NLP libraries at startup (TextBlob, spaCy, etc.) - only once per session
+    nlp_status = {}
+    
+    # Check if NLP warmup has already been done in this session
+    if not st.session_state.get("_nlp_warmed_up", False):
+        try:
+            from .nlp_init import warmup_nlp
+            nlp_status = warmup_nlp()
+            
+            # Store in session for debugging if needed
+            st.session_state["nlp_warmup_status"] = nlp_status
+            st.session_state["_nlp_warmed_up"] = True
+        except Exception as e:
+            logger.debug(f"NLP warmup error: {e}")
+            nlp_status = {}
+    else:
+        # Use cached status from previous warmup
+        nlp_status = st.session_state.get("nlp_warmup_status", {})
+    
+    # Show visible status indicator (cached from previous run if available)
+    try:
+        status_items = []
+        if nlp_status.get("textblob_available"):
+            status_items.append("✓ TextBlob")
+        if nlp_status.get("spacy_available"):
+            status_items.append("✓ spaCy")
+        if nlp_status.get("spacy_model_loaded"):
+            status_items.append("✓ spaCy Model")
+        if nlp_status.get("nrc_available"):
+            status_items.append("✓ NRC")
+            
+        if status_items:
+            st.session_state["nlp_status_message"] = " | ".join(status_items)
+        else:
+            st.session_state["nlp_status_message"] = "NLP: Minimal"
+            
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.debug(f"NLP warmup error: {e}")
+        st.session_state["nlp_status_message"] = "NLP: Error"
+    
     # Check authentication status
     if not st.session_state.get("authenticated"):
         render_splash_interface()

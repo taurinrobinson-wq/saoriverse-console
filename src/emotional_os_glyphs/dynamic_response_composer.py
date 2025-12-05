@@ -919,8 +919,8 @@ class DynamicResponseComposer:
         """
         Build a response grounded in the glyph's meaning and emotional signal.
         
-        NEW APPROACH (Phase 12.1): Respond to actual content, not templates.
-        Listen to what the user said, extract the emotional core, respond naturally.
+        ENHANCED APPROACH: Use glyph descriptions to personalize responses.
+        Combine user's actual content + glyph wisdom to generate contextual response.
 
         Args:
             glyph: Full glyph dict with name, description, emotional_signal, gates
@@ -931,14 +931,30 @@ class DynamicResponseComposer:
             extracted: Full extraction dict from _extract_entities_and_emotions
 
         Returns:
-            Natural, conversational response grounded in what the user said
+            Natural, conversational response grounded in glyph and user input
         """
         if not input_text:
             return "I'm here to listen. What's on your mind?"
         
         lower_input = input_text.lower()
         
-        # Detect what the user is actually talking about and respond to THAT
+        # PRIORITY 1: Use glyph wisdom grounded in the user's actual situation
+        # Extract glyph concepts and wisdom to inform response
+        glyph_response = None
+        if glyph:
+            glyph_name = glyph.get("glyph_name", "").lower()
+            glyph_desc = glyph.get("description", "")
+            glyph_response = self._craft_glyph_grounded_response(
+                glyph_name=glyph_name,
+                glyph_desc=glyph_desc,
+                user_input=input_text,
+                emotions=emotions,
+                entities=entities,
+            )
+            if glyph_response:
+                return glyph_response
+        
+        # PRIORITY 2: Detect what the user is actually talking about and respond to THAT
         
         # Overwhelm/burden/holding too much
         if any(word in lower_input for word in ["overwhelm", "overwhelmed", "fragile", "breaking", "heavy", "heavy load", "too much", "drowning", "drowning in"]):
@@ -992,6 +1008,229 @@ class DynamicResponseComposer:
         
         # Last resort: genuinely open listening
         return f"I hear you. What's the feeling underneath all that?"
+    
+    def _craft_glyph_grounded_response(
+        self,
+        glyph_name: str,
+        glyph_desc: str,
+        user_input: str,
+        emotions: Dict,
+        entities: List[str],
+    ) -> Optional[str]:
+        """
+        Craft response DRIVEN BY user's message, with glyph as validator/container.
+        
+        Process:
+        1. Parse user's message semantically (actor, verb, tense, modifiers, temporal)
+        2. Identify what's missing (concrete details, context, temporal specificity)
+        3. Acknowledge the emotional state directly
+        4. Use glyph to validate and deepen the acknowledgment
+        5. Ask clarifying questions that incorporate emotional theme
+        
+        The glyph informs TONE and VALIDATION, not the primary content.
+        
+        Args:
+            glyph_name: Name of selected glyph
+            glyph_desc: Description of selected glyph
+            user_input: User's actual message
+            emotions: Detected emotions
+            entities: Extracted entities
+            
+        Returns:
+            Response driven by user message, validated by glyph, or None
+        """
+        if not user_input or not glyph_desc:
+            return None
+        
+        lower_input = user_input.lower()
+        
+        # STEP 1: Parse message semantically
+        message_analysis = self._analyze_message_semantics(user_input)
+        
+        # STEP 2: Build response driven by USER'S MESSAGE
+        # Acknowledge what they said, briefly and directly
+        
+        # Determine tense/immediacy
+        is_present_tense = any(word in lower_input for word in ["feeling", "am", "is", "are", "being"])
+        has_temporal_qualifier = any(word in lower_input for word in [
+            "today", "right now", "lately", "this week", "this morning", 
+            "tonight", "currently", "at the moment", "just now"
+        ])
+        
+        # Build brief acknowledgment - short and direct
+        if is_present_tense:
+            # They're describing something happening NOW
+            acknowledgment = f"I hear you're feeling {message_analysis['primary_affect']}"
+            if has_temporal_qualifier:
+                acknowledgment += " today."
+            else:
+                acknowledgment += "."
+        else:
+            # Past or continuous
+            acknowledgment = f"I hear you've been experiencing {message_analysis['primary_affect']}."
+        
+        # STEP 3: Identify what's missing - ask directly
+        missing_elements = self._identify_missing_elements(user_input, message_analysis)
+        
+        if missing_elements:
+            # Generate clarifying questions that incorporate emotional theme
+            clarifying_questions = self._generate_emotional_clarifications(
+                missing_elements=missing_elements,
+                primary_affect=message_analysis['primary_affect'],
+                is_emphasized=is_emphasized if 'is_emphasized' in locals() else False
+            )
+            
+            # Simple response: acknowledgment + clarifying question
+            return f"{acknowledgment} {clarifying_questions}"
+        else:
+            # User provided enough detail - just acknowledge
+            return acknowledgment
+    
+    def _analyze_message_semantics(self, user_input: str) -> Dict:
+        """
+        Parse message for semantic elements:
+        - Actor (who is experiencing this)
+        - Verb (what action/state)
+        - Tense (when)
+        - Modifiers (how emphasized, qualifications)
+        - Temporal markers (timeframe)
+        """
+        lower_input = user_input.lower()
+        
+        # Identify actor
+        actor = "you" if any(word in lower_input for word in ["i'm", "i am", "i feel", "i've", "i think"]) else "unspecified"
+        
+        # Identify primary affect/emotion
+        affects = {
+            "stressed": "stress",
+            "anxious": "anxiety",
+            "overwhelmed": "overwhelm",
+            "sad": "sadness",
+            "happy": "happiness",
+            "angry": "anger",
+            "confused": "confusion",
+            "lonely": "loneliness",
+            "scared": "fear",
+            "hopeful": "hope",
+            "frustrated": "frustration",
+        }
+        
+        primary_affect = "something"
+        for affect_word, affect_name in affects.items():
+            if affect_word in lower_input:
+                primary_affect = affect_name
+                break
+        
+        return {
+            "actor": actor,
+            "primary_affect": primary_affect,
+            "raw_input": user_input,
+        }
+    
+    def _identify_missing_elements(self, user_input: str, analysis: Dict) -> List[str]:
+        """
+        Identify what information is missing from the message that would help:
+        - CONTEXT: What triggered this? What's the situation?
+        - MAGNITUDE: How much/how long? (so / really / very could indicate emphasis but not quantity)
+        - PHYSICAL: Where do you feel it? In your body?
+        - RELATIONAL: Is someone involved? Is this about a relationship?
+        - TEMPORAL SPECIFICITY: How long has this been? Just now? All day?
+        - WHAT THEY'VE TRIED: Have they done anything about it?
+        """
+        lower_input = user_input.lower()
+        missing = []
+        
+        # Check for context
+        if not any(word in lower_input for word in ["because", "since", "due to", "it's about", "it's from", "reason"]):
+            missing.append("context")
+        
+        # Check for magnitude/timeline
+        if not any(word in lower_input for word in ["all day", "this morning", "all week", "for hours", "since", "when"]):
+            if not any(word in lower_input for word in ["today", "right now", "just now", "this moment"]):
+                missing.append("temporal_specificity")
+        
+        # Check for physical sensation description
+        if not any(word in lower_input for word in ["chest", "tight", "knot", "weight", "heavy", "racing", "shaking"]):
+            missing.append("somatic_awareness")
+        
+        # Check for relational element
+        if not any(word in lower_input for word in ["someone", "my", "we", "they", "people", "them", "name"]):
+            missing.append("relational_context")
+        
+        # Check for attempted coping
+        if not any(word in lower_input for word in ["tried", "tried to", "i've been", "i did", "i'm trying"]):
+            missing.append("agency_attempt")
+        
+        return missing
+    
+    def _apply_glyph_validation(
+        self,
+        glyph_name: str,
+        glyph_desc: str,
+        primary_affect: str,
+        missing_elements: List[str]
+    ) -> str:
+        """
+        Use glyph as validator/container for the emotion.
+        Glyph doesn't generate response, but validates it.
+        """
+        lower_glyph = glyph_name.lower()
+        lower_desc = glyph_desc.lower()
+        
+        # Match glyph to affect to provide appropriate validation
+        if any(word in lower_glyph for word in ["still", "stillness", "quiet", "calm"]):
+            return f"What you're describing has a quality of {glyph_desc.lower()}"
+        elif any(word in lower_glyph for word in ["ache", "sorrow", "grief"]):
+            return f"This {primary_affect} is real—{glyph_desc.lower()}"
+        elif any(word in lower_glyph for word in ["boundary", "contain"]):
+            return f"That {primary_affect} is asking for something—{glyph_desc.lower()}"
+        elif any(word in lower_glyph for word in ["joy", "jubilant", "celebration"]):
+            return f"There's something alive in what you're describing—{glyph_desc.lower()}"
+        else:
+            return f"What you're naming matters—{glyph_desc.lower()}"
+    
+    def _generate_emotional_clarifications(
+        self,
+        missing_elements: List[str],
+        primary_affect: str,
+        is_emphasized: bool
+    ) -> str:
+        """
+        Generate clarifying questions that incorporate the emotional theme.
+        Not generic "tell me more" but specific to what's missing.
+        """
+        questions = []
+        
+        if "context" in missing_elements:
+            if primary_affect == "stress":
+                questions.append("What's creating this pressure right now?")
+            elif primary_affect == "sadness":
+                questions.append("What's the loss you're sensing?")
+            elif primary_affect == "anxiety":
+                questions.append("What are you worried might happen?")
+            else:
+                questions.append("What triggered this feeling?")
+        
+        if "temporal_specificity" in missing_elements:
+            if is_emphasized:
+                questions.append("Has this been building, or did it hit suddenly?")
+            else:
+                questions.append("How long have you been sitting with this?")
+        
+        if "somatic_awareness" in missing_elements:
+            questions.append("Where in your body do you feel this?")
+        
+        if "relational_context" in missing_elements:
+            questions.append("Is there someone or something else involved?")
+        
+        if "agency_attempt" in missing_elements:
+            questions.append("What have you tried, or what do you think might help?")
+        
+        # Return first appropriate question
+        if questions:
+            return questions[0]
+        else:
+            return "What would be helpful to explore about this?"
     
     def _extract_glyph_concepts(self, glyph_desc: str) -> List[str]:
         """Extract key emotional/conceptual elements from glyph description."""
@@ -1611,3 +1850,149 @@ class DynamicResponseComposer:
         # choose the candidate with the highest score
         best = max(scored, key=lambda x: x[1])
         return best[0]
+    
+    def compose_response_with_memory(
+        self,
+        input_text: str,
+        conversation_memory: Optional[Any] = None,
+        glyph: Optional[Dict] = None,
+    ) -> str:
+        """
+        Compose response enriched by conversation memory.
+        
+        This method enhances response generation by:
+        1. Using memory to understand the user's evolving emotional state
+        2. Building on previous understanding rather than treating each message in isolation
+        3. Acknowledging the causal chain that memory has revealed
+        4. Asking clarifications targeted to critical missing information
+        5. Validating with evolved glyph set
+        
+        Args:
+            input_text: Current user message
+            conversation_memory: ConversationMemory object tracking prior context
+            glyph: Current glyph (if selected by system)
+            
+        Returns:
+            Response informed by full conversation context
+        """
+        if not conversation_memory:
+            # Fall back to standard response composition if no memory available
+            return self.compose_response(input_text=input_text, glyph=glyph)
+        
+        # Get current integrated understanding
+        integrated_state = conversation_memory.integrated_state
+        causal_chain = conversation_memory.causal_understanding
+        
+        if not integrated_state:
+            # Memory not yet initialized
+            return self.compose_response(input_text=input_text, glyph=glyph)
+        
+        # Build response that acknowledges the enriched understanding
+        parts = []
+        
+        # 1. ACKNOWLEDGMENT (informed by full memory context)
+        if len(conversation_memory.turns) == 1:
+            # First turn - straightforward acknowledgment
+            parts.append(self._build_first_turn_acknowledgment(input_text))
+        else:
+            # Subsequent turn - acknowledge both current and causal chain
+            parts.append(self._build_subsequent_turn_acknowledgment(
+                input_text=input_text,
+                integrated_state=integrated_state,
+                causal_chain=causal_chain,
+            ))
+        
+        # 2. GLYPH VALIDATION (using evolved glyph set)
+        evolved_glyphs = conversation_memory.get_glyph_set()
+        if len(evolved_glyphs) > 1 and len(conversation_memory.turns) > 1:
+            # Multiple glyphs indicate deepening understanding
+            validation = self._build_glyph_validation_from_set(evolved_glyphs)
+            if validation:
+                parts.append(validation)
+        
+        # 3. TARGETED CLARIFICATIONS (from memory's critical needs)
+        clarifications = conversation_memory.get_next_clarifications()
+        if clarifications:
+            clarification_text = self._build_targeted_clarifications(clarifications)
+            parts.append(clarification_text)
+        
+        # Combine parts into response
+        response = " ".join([p for p in parts if p])
+        return response if response else self.compose_response(input_text=input_text, glyph=glyph)
+    
+    def _build_first_turn_acknowledgment(self, input_text: str) -> str:
+        """Build acknowledgment for first message in conversation"""
+        analysis = self._analyze_message_semantics(input_text)
+        primary_affect = analysis.get('primary_affect', 'what you\'re feeling')
+        
+        lower_input = input_text.lower()
+        has_temporal = any(word in lower_input for word in [
+            "today", "right now", "lately", "this week", "tonight", "now"
+        ])
+        
+        if has_temporal:
+            return f"I hear you're feeling {primary_affect} today."
+        else:
+            return f"I hear you're feeling {primary_affect}."
+    
+    def _build_subsequent_turn_acknowledgment(
+        self,
+        input_text: str,
+        integrated_state: Any,
+        causal_chain: Any,
+    ) -> str:
+        """Build acknowledgment for later messages, incorporating causal understanding"""
+        # Get primary trigger from causal chain
+        triggers = getattr(causal_chain, 'root_triggers', [])
+        mechanisms = getattr(causal_chain, 'mechanisms', [])
+        
+        if triggers and mechanisms:
+            # We have causal understanding - acknowledge the mechanism
+            trigger = triggers[0]  # primary trigger
+            mechanism = mechanisms[0] if mechanisms else "pressure"
+            
+            if "cognitive" in mechanism.lower() or "flooding" in mechanism.lower():
+                return f"I hear you - work has flooded your mind with so many competing demands that even one step forward feels impossible."
+            else:
+                return f"I hear you - {trigger} has created a situation where {mechanism} is making it hard to move forward."
+        
+        # Fallback: acknowledge primary affects from integrated state
+        primary_affects = getattr(integrated_state, 'primary_affects', [])
+        if primary_affects:
+            affects_str = " and ".join(primary_affects[:2])
+            return f"I hear you're experiencing {affects_str}."
+        
+        return "I hear you."
+    
+    def _build_glyph_validation_from_set(self, glyph_set: List[str]) -> str:
+        """Build validation text from evolved glyph set"""
+        if not glyph_set:
+            return ""
+        
+        if len(glyph_set) >= 3:
+            # Multiple glyphs suggest complexity and insight emerging
+            return "This is complex, and your awareness of it is important."
+        elif "Quiet Revelation" in glyph_set or "Fragmentation" in glyph_set:
+            return "What you're describing contains insight that needs organizing."
+        
+        return ""
+    
+    def _build_targeted_clarifications(self, clarifications: List[str]) -> str:
+        """Build clarification questions from targeted needs"""
+        if not clarifications:
+            return ""
+        
+        # Take the most critical need and form a question
+        most_urgent = clarifications[0]
+        
+        if "specific" in most_urgent.lower() or "distinct" in most_urgent.lower():
+            return "Help me understand: how many distinct things are competing for your mind?"
+        elif "priority" in most_urgent.lower() or "urgent" in most_urgent.lower():
+            return "Which one is most time-critical?"
+        elif "duration" in most_urgent.lower():
+            return "How long has this been building?"
+        elif "attempts" in most_urgent.lower():
+            return "What have you already tried?"
+        
+        # Generic fallback
+        return f"Tell me more about {most_urgent.rstrip('?')}."

@@ -25,6 +25,7 @@ def render_main_header():
             _render_header_logo()
 
         with col2:
+            svg_markup = load_svg("FirstPerson-Logo-black-cropped_notext.svg")
             st.markdown(
                 '<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; '
                 'color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">'

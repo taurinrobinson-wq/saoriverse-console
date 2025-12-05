@@ -90,16 +90,23 @@ def _show_processing_info(exchange: dict):
 
 
 def render_chat_input() -> tuple:
-    """Render chat input area with file uploader.
+    """Render chat input area with file uploader and optional voice input.
 
     Returns:
         Tuple of (user_input, uploaded_file) or (None, None) if no input
     """
     try:
+        # Check if voice mode is enabled
+        voice_mode_enabled = st.session_state.get("voice_mode_enabled", False)
+        
+        # Import voice component
+        from .audio_ui import render_audio_recorder
+        
+        # File uploader
+        uploaded_file = None
         left_col, input_col, right_col = st.columns([1, 6, 1])
 
         # File uploader
-        uploaded_file = None
         with left_col:
             try:
                 st.markdown(
@@ -128,9 +135,16 @@ def render_chat_input() -> tuple:
             except Exception as e:
                 logger.debug(f"Error rendering file uploader: {e}")
 
-        # Chat input
+        # Chat input or voice input
         with input_col:
-            user_input = st.chat_input("Share what you're feeling...")
+            if voice_mode_enabled:
+                st.markdown("**Use voice or type:**")
+                user_input = render_audio_recorder()
+                # If no voice input, fall back to text
+                if user_input is None:
+                    user_input = st.chat_input("Share what you're feeling...")
+            else:
+                user_input = st.chat_input("Share what you're feeling...")
 
         return user_input, uploaded_file
 
@@ -172,9 +186,12 @@ def display_assistant_message(response: str) -> st.container:
                 
                 # Get glyph info for prosody guidance
                 debug_info = get_debug_info()
-                glyphs = debug_info.get("glyphs", [])
-                best_glyph = get_best_glyph(glyphs) if glyphs else None
-                glyph_name = best_glyph.get("glyph_name", "") if best_glyph else ""
+                if debug_info:
+                    glyphs = debug_info.get("glyphs", [])
+                    best_glyph = get_best_glyph(glyphs) if glyphs else None
+                    glyph_name = best_glyph.get("glyph_name", "") if best_glyph and isinstance(best_glyph, dict) else ""
+                else:
+                    glyph_name = ""
                 
                 # Synthesize audio
                 audio_bytes = synthesize_response_audio(

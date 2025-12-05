@@ -17,16 +17,16 @@ Workflow:
 - Over time, system evolves to handle increasingly complex emotional arcs
 """
 
-from emotional_os.learning.conversation_archetype import (
+from .conversation_archetype import (
     ConversationArchetype,
     ArchetypeLibrary,
     get_archetype_library,
 )
-from emotional_os.learning.archetype_response_generator import (
+from .archetype_response_generator import (
     ArchetypeResponseGenerator,
     get_archetype_response_generator,
 )
-from emotional_os.learning.conversation_learner import (
+from .conversation_learner import (
     ConversationLearner,
     get_conversation_learner,
 )

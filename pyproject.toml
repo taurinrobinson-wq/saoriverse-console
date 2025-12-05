@@ -9,4 +9,8 @@ description = "Emotional AI companion with local-first processing"
 requires-python = ">=3.11"
 
 [tool.setuptools]
-packages = ["core", "emotional_os", "tools", "src"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["emotional_os*", "emotional_os_*"]

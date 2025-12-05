@@ -19,7 +19,7 @@ def render_main_header():
         return
 
     try:
-        col1, col2 = st.columns([0.5, 8], gap="small")
+        col1, col2, col3 = st.columns([0.5, 8, 2], gap="small")
 
         with col1:
             _render_header_logo()
@@ -32,6 +32,12 @@ def render_main_header():
                 "</h1>",
                 unsafe_allow_html=True,
             )
+
+        with col3:
+            # Show NLP warmup status
+            nlp_status = st.session_state.get("nlp_status_message", "")
+            if nlp_status:
+                st.caption(nlp_status)
 
         st.session_state["header_rendered"] = True
 

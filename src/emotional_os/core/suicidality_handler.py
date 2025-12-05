@@ -30,9 +30,17 @@ class ConscentBasedSuicidalityProtocol:
     - Continuity: Check-ins recognized as significant
     """
     
-    def __init__(self, protocol_config_path: str = "emotional_os/core/suicidality_protocol.json"):
+    def __init__(self, protocol_config_path: Optional[str] = None):
         """Load protocol configuration."""
-        self.config_path = Path(protocol_config_path)
+        if protocol_config_path is None:
+            try:
+                from emotional_os.core.paths import get_path_manager
+                pm = get_path_manager()
+                self.config_path = pm.suicidality_protocol()
+            except Exception:
+                self.config_path = Path("emotional_os/core/suicidality_protocol.json")
+        else:
+            self.config_path = Path(protocol_config_path)
         self.config = self._load_config()
         self.suicide_disclosures = {}  # Track per-user state
     
