@@ -408,7 +408,7 @@ def load_all_conversations_to_sidebar(manager: ConversationManager, in_expander:
     )
 
     for conv in conversations:
-        col1, col2, col3 = ctx.columns([3, 1, 1])
+        col1, col2, col3 = ctx.columns([3, 1, 1], gap="small")
 
         with col1:
             # Click to load conversation - using caption for smaller text
