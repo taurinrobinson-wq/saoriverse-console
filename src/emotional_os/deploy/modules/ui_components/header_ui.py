@@ -59,19 +59,10 @@ def render_demo_banner():
 
 
 def render_welcome_message():
-    """Render welcome message for authenticated users with logo header."""
+    """Render welcome message for authenticated users."""
     try:
         display_name = st.session_state.get(
             "first_name") or st.session_state.get("username")
-        
-        # Display logo at top
-        st.markdown("---")
-        col1, col2, col3 = st.columns([1, 1, 1])
-        with col2:
-            _render_welcome_logo()
-        st.markdown("---")
-        
-        # Welcome message below logo
         col1, col2, col3 = st.columns([2, 1, 1])
 
         with col1:
@@ -79,41 +70,6 @@ def render_welcome_message():
 
     except Exception as e:
         logger.debug(f"Error rendering welcome message: {e}")
-
-
-def _render_welcome_logo():
-    """Render FirstPerson logo in welcome section."""
-    try:
-        # Try to load logo from the expected location
-        logo_path = os.path.join(
-            os.path.dirname(__file__),
-            "../../../deploy_modules/static/graphics/FirstPerson-Logo_cropped.svg"
-        )
-        
-        # Normalize the path
-        logo_path = os.path.normpath(logo_path)
-        
-        if os.path.exists(logo_path):
-            with open(logo_path, 'r') as f:
-                svg_content = f.read()
-            st.markdown(
-                f"<div style='text-align:center;margin:20px 0;'>"
-                f"<img src='data:image/svg+xml;base64,{__get_base64_svg(svg_content)}' "
-                f"style='height:120px;'/></div>",
-                unsafe_allow_html=True,
-            )
-        else:
-            # Fallback: just show the text
-            logger.debug(f"Logo not found at {logo_path}")
-            
-    except Exception as e:
-        logger.debug(f"Error rendering welcome logo: {e}")
-
-
-def __get_base64_svg(svg_content: str) -> str:
-    """Convert SVG content to base64 for embedding."""
-    import base64
-    return base64.b64encode(svg_content.encode()).decode()
 
 
 def render_post_login_confirmation():
