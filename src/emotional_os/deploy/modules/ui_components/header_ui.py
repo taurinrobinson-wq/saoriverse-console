@@ -25,9 +25,12 @@ def render_main_header():
         with col2:
             _render_header_logo()
         
-        # Remove extra spacing after logo
+        # Hide separator line with CSS
         st.markdown(
-            "<style>div[data-testid='stImage'] { margin-bottom: -20px; }</style>",
+            "<style>"
+            "div[data-testid='column'] { margin-bottom: -30px; } "
+            "div[data-testid='stHorizontalBlock'] { margin-bottom: -30px; }"
+            "</style>",
             unsafe_allow_html=True,
         )
 
