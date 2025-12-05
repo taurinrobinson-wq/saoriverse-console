@@ -18,6 +18,7 @@ import logging
 import streamlit as st
 from src.emotional_os.tier1_foundation import Tier1Foundation
 from src.emotional_os.tier2_aliveness import Tier2Aliveness
+from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +59,16 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
             st.session_state.tier2_aliveness = None
+
+    # Initialize Tier 3 Poetic Consciousness if not already done
+    if "tier3_poetic_consciousness" not in st.session_state:
+        try:
+            tier3 = Tier3PoeticConsciousness()
+            st.session_state.tier3_poetic_consciousness = tier3
+            logger.info("Tier 3 Poetic Consciousness initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Tier 3 Poetic Consciousness: {e}")
+            st.session_state.tier3_poetic_consciousness = None
 
     try:
         # Run appropriate pipeline based on mode
@@ -119,6 +130,35 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
                 response = aliveness_response
             except Exception as e:
                 logger.warning(f"Tier 2 aliveness failed: {e}, using Tier 1 response")
+
+        # TIER 3: Add poetic consciousness through metaphor and aesthetics
+        tier3 = st.session_state.get("tier3_poetic_consciousness")
+        if tier3:
+            try:
+                # Get conversation history and theme for context
+                conversation_history = conversation_context.get("messages", [])
+                theme = conversation_context.get("emotional_theme", "growth")
+                
+                # Process for poetry (metaphor, aesthetics, tension, mythology)
+                poetry_response, tier3_metrics = tier3.process_for_poetry(
+                    response=response,
+                    context={
+                        "messages": conversation_history,
+                        "theme": theme
+                    }
+                )
+                
+                # Log performance metrics
+                tier3_time = tier3_metrics.get("processing_time_ms", 0)
+                if tier3_time > 30:
+                    logger.warning(f"Tier 3 pipeline slow: {tier3_time:.2f}ms")
+                else:
+                    logger.debug(f"Tier 3 metrics: {tier3_metrics}")
+                
+                # Use poetry-enhanced response
+                response = poetry_response
+            except Exception as e:
+                logger.warning(f"Tier 3 poetry enhancement failed: {e}, using Tier 2 response")
 
     except Exception as e:
         logger.error(f"Response pipeline FAILED: {type(e).__name__}: {e}", exc_info=True)

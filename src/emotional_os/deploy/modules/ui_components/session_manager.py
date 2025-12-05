@@ -33,6 +33,7 @@ def initialize_session_state():
     - Authentication state
     - Tier 1 Foundation for enhanced responses
     - Tier 2 Aliveness for emotional presence
+    - Tier 3 Poetic Consciousness for creative depth
     """
     _ensure_auth_defaults()
     _ensure_conversation_defaults()
@@ -42,6 +43,7 @@ def initialize_session_state():
     _ensure_voice_mode()
     _ensure_tier1_foundation()
     _ensure_tier2_aliveness()
+    _ensure_tier3_poetic_consciousness()
 
 
 def _ensure_auth_defaults():
@@ -186,6 +188,26 @@ def _ensure_tier2_aliveness():
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
             st.session_state["tier2_aliveness"] = None
+
+
+def _ensure_tier3_poetic_consciousness():
+    """Initialize Tier 3 Poetic Consciousness for creative depth.
+    
+    Sets up the poetic layer with:
+    - PoetryEngine for metaphor and symbolic language
+    - SaoriLayer for Japanese aesthetic principles
+    - TensionManager for creative exploration
+    - MythologyWeaver for personal narrative building
+    """
+    if "tier3_poetic_consciousness" not in st.session_state:
+        try:
+            from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
+            tier3 = Tier3PoeticConsciousness()
+            st.session_state["tier3_poetic_consciousness"] = tier3
+            logger.info("Tier 3 Poetic Consciousness initialized in session")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Tier 3 Poetic Consciousness: {e}")
+            st.session_state["tier3_poetic_consciousness"] = None
 
 
 def load_conversation_manager():
