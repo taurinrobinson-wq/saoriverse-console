@@ -559,14 +559,22 @@ def _synthesize_with_user_details(user_input: str, base_response: str,
     try:
         import json
         
+        # Get conversation history from multiple possible sources
         history = conversation_context.get("messages", [])
+        
+        # If no messages in context, try session state as fallback
+        if not history:
+            history = st.session_state.get("conversation_history_", [])
+        
+        logger.debug(f"Synthesis: history length = {len(history)}, user_input length = {len(user_input)}")
         
         # Extract themes from entire conversation, not just current input
         conversation_themes = _extract_conversation_themes(history, user_input)
         
         # Only apply synthesis if we have meaningful conversation history
-        if len(history) < 2:
+        if len(history) < 4:  # Need at least 2 exchanges (4 messages)
             # First exchange: keep simple, just acknowledge
+            logger.debug("Synthesis: early in conversation, using base response")
             return base_response
         
         # Check if this is a significant disclosure (divorce/co-parenting revelation)
@@ -574,30 +582,38 @@ def _synthesize_with_user_details(user_input: str, base_response: str,
         
         # Decide response type based on conversation arc
         response_type = _determine_response_type(conversation_themes, history, is_significant_disclosure)
+        logger.debug(f"Synthesis: response_type = {response_type}, themes = {conversation_themes}")
         
         # Generate response appropriate to the conversation stage
         if response_type == "acknowledge_new_context":
             # Something important was just revealed - acknowledge it and connect to earlier themes
+            logger.debug("Synthesis: acknowledge_new_context")
             return _respond_to_significant_disclosure(user_input, conversation_themes, history)
         
         elif response_type == "deepen_exploration":
             # We have enough understanding to ask deeper questions
+            logger.debug("Synthesis: deepen_exploration")
             return _respond_with_deeper_exploration(user_input, conversation_themes, history)
         
         elif response_type == "recognize_pattern":
             # Patterns are emerging - name them and what they might mean
+            logger.debug("Synthesis: recognize_pattern")
             return _respond_with_pattern_recognition(conversation_themes, history)
         
         elif response_type == "integration":
             # Earlier exchanges + new input: help integrate understanding
+            logger.debug("Synthesis: integration")
             return _respond_with_integration(user_input, conversation_themes, history)
         
         else:
             # Generic acknowledgment (fallback)
+            logger.debug("Synthesis: fallback to base response")
             return base_response
             
     except Exception as e:
         logger.debug(f"Response synthesis failed: {e}, using base response")
+        import traceback
+        logger.debug(f"Traceback: {traceback.format_exc()}")
         return base_response
 
 
@@ -615,38 +631,51 @@ def _extract_conversation_themes(history: list, current_input: str) -> dict:
     try:
         current_lower = current_input.lower()
         
-        # Scan all messages for patterns
-        all_text = current_input + " ".join([
-            msg.get("content", "") for msg in history 
-            if msg.get("role") == "user"
-        ]).lower()
+        # Build text from all user messages in history
+        all_text = current_input.lower() + " "
+        
+        # Handle different history formats
+        for item in history:
+            if isinstance(item, dict):
+                # Try different possible field names
+                content = (item.get("content") or 
+                          item.get("message") or 
+                          item.get("user") or 
+                          item.get("assistant") or "")
+                if item.get("role") == "user" or "user" in str(item.get("role", "")).lower():
+                    all_text += " " + str(content).lower()
+            elif isinstance(item, str):
+                all_text += " " + item.lower()
+        
+        logger.debug(f"Theme extraction: total text length = {len(all_text)}")
         
         # Immediate stressors
-        if any(w in all_text for w in ["work", "job", "employee", "task", "deadline"]):
+        if any(w in all_text for w in ["work", "job", "employee", "task", "deadline", "pile"]):
             themes["immediate_stressors"].append("work/responsibility")
-        if any(w in all_text for w in ["divorce", "co-parent", "ex", "kids", "children"]):
+        if any(w in all_text for w in ["divorce", "co-parent", "co parent", "ex", "kids", "children"]):
             themes["longer_term_context"].append("family transitions")
         
         # Emotional patterns
-        if any(w in all_text for w in ["shut down", "avoid", "avoidance", "escape"]):
+        if any(w in all_text for w in ["shut down", "shutdown", "avoid", "avoidance", "escape"]):
             themes["emotional_patterns"].append("avoidance/shutdown response")
-        if any(w in all_text for w in ["overwhelm", "pile on", "relief"]):
+        if any(w in all_text for w in ["overwhelm", "pile on", "relief", "stress"]):
             themes["emotional_patterns"].append("overwhelm cycle")
         if any(w in all_text for w in ["embarrass", "shame", "expose"]):
             themes["emotional_patterns"].append("shame/exposure vulnerability")
         
         # Physical responses
-        if any(w in all_text for w in ["chest", "breathing", "tight", "tense"]):
+        if any(w in all_text for w in ["chest", "breathing", "breath", "tight", "tense"]):
             themes["physical_responses"].append("chest/breathing tension")
-        if any(w in all_text for w in ["jumpy", "anxious", "nervous"]):
+        if any(w in all_text for w in ["jumpy", "jump", "anxious", "nervous"]):
             themes["physical_responses"].append("hypervigilance/jumpiness")
-        if any(w in all_text for w in ["drift", "focus", "distract"]):
+        if any(w in all_text for w in ["drift", "drifts", "focus", "distract", "distraction"]):
             themes["physical_responses"].append("dissociation/difficulty focusing")
         
         # Insights already shared
-        if "shut down" in all_text and "avoid" in all_text:
+        if "shut" in all_text and "avoid" in all_text:
             themes["insights_shared"].append("awareness of shutdown pattern")
         
+        logger.debug(f"Extracted themes: {themes}")
         return themes
     except Exception as e:
         logger.debug(f"Theme extraction failed: {e}")
