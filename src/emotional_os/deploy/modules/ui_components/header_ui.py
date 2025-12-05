@@ -25,12 +25,9 @@ def render_main_header():
         with col2:
             _render_header_logo()
         
-        # Hide separator line with CSS
+        # Reduce spacing within divider
         st.markdown(
-            "<style>"
-            "div[data-testid='column'] { margin-bottom: -30px; } "
-            "div[data-testid='stHorizontalBlock'] { margin-bottom: -30px; }"
-            "</style>",
+            "<style>div[data-testid='stVerticalBlockContainer'] { gap: 0.5rem; }</style>",
             unsafe_allow_html=True,
         )
 
