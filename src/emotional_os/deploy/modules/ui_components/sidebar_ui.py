@@ -173,7 +173,7 @@ def _render_conversation_list():
 
                 mgr = st.session_state.get("conversation_manager")
                 if mgr:
-                    load_all_conversations_to_sidebar(mgr)
+                    load_all_conversations_to_sidebar(mgr, in_expander=True)
             except Exception as e:
                 logger.debug(f"Error loading conversations: {e}")
 
