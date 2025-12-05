@@ -157,9 +157,6 @@ def render_app():
         except Exception:
             pass
 
-        # ====== HEADER ======
-        render_main_header()
-
         # Render demo banner if not authenticated
         if not st.session_state.get("authenticated"):
             render_demo_banner()
