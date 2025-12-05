@@ -9,12 +9,15 @@ Orchestrates the full response pipeline including:
 - Prosody metadata handling
 - Fallback protocol handling
 - Repetition prevention
+- Tier 1: Foundation (learning, safety, wrapping)
+- Tier 2: Aliveness (presence, energy, reciprocity)
 """
 
 import time
 import logging
 import streamlit as st
 from src.emotional_os.tier1_foundation import Tier1Foundation
+from src.emotional_os.tier2_aliveness import Tier2Aliveness
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +48,16 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 1 Foundation: {e}")
             st.session_state.tier1_foundation = None
+
+    # Initialize Tier 2 Aliveness if not already done
+    if "tier2_aliveness" not in st.session_state:
+        try:
+            tier2 = Tier2Aliveness()
+            st.session_state.tier2_aliveness = tier2
+            logger.info("Tier 2 Aliveness initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
+            st.session_state.tier2_aliveness = None
 
     try:
         # Run appropriate pipeline based on mode
@@ -80,6 +93,32 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
                 response = enhanced_response
             except Exception as e:
                 logger.warning(f"Tier 1 enhancement failed: {e}, using base response")
+
+        # TIER 2: Add aliveness and presence through emotional tuning
+        tier2 = st.session_state.get("tier2_aliveness")
+        if tier2:
+            try:
+                # Get conversation history for context
+                conversation_history = conversation_context.get("messages", [])
+                
+                # Process for aliveness (tone, intensity, embodiment, energy)
+                aliveness_response, tier2_metrics = tier2.process_for_aliveness(
+                    user_input=user_input,
+                    base_response=response,
+                    history=conversation_history,
+                )
+                
+                # Log performance metrics
+                tier2_time = tier2_metrics.get("processing_time_ms", 0)
+                if tier2_time > 30:
+                    logger.warning(f"Tier 2 pipeline slow: {tier2_time:.2f}ms")
+                else:
+                    logger.debug(f"Tier 2 metrics: {tier2_metrics}")
+                
+                # Use aliveness-enhanced response
+                response = aliveness_response
+            except Exception as e:
+                logger.warning(f"Tier 2 aliveness failed: {e}, using Tier 1 response")
 
     except Exception as e:
         logger.error(f"Response pipeline FAILED: {type(e).__name__}: {e}", exc_info=True)
