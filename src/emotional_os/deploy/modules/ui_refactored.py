@@ -17,7 +17,6 @@ from .ui_components import (
     add_exchange_to_history,
     load_conversation_manager,
     migrate_demo_to_auth,
-    render_main_header,
     render_demo_banner,
     render_welcome_message,
     render_sidebar,
