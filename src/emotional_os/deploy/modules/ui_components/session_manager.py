@@ -41,6 +41,7 @@ def initialize_session_state():
     _ensure_processing_prefs()
     _ensure_fallback_protocol()
     _ensure_voice_mode()
+    _ensure_theme_defaults()
     _ensure_tier1_foundation()
     _ensure_tier2_aliveness()
     _ensure_tier3_poetic_consciousness()
@@ -430,3 +431,13 @@ def get_session_summary() -> dict:
         "has_affect_parser": st.session_state.get("affect_parser") is not None,
         "persist_history": st.session_state.get("persist_history"),
     }
+
+
+def _ensure_theme_defaults():
+    """Ensure theme and UI defaults persist across reruns."""
+    # Initialize theme if not set
+    st.session_state.setdefault("theme", "Light")
+    st.session_state.setdefault("theme_select_row", "Light")
+    # Mark theme as loaded to prevent unnecessary resets
+    if "theme_loaded" not in st.session_state:
+        st.session_state["theme_loaded"] = False

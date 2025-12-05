@@ -386,7 +386,7 @@ class SaoynxAuthentication:
             "username": username,
             "user_id": user_id,
             "created": datetime.datetime.now().isoformat(),
-            "expires": (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat(),
+            "expires": (datetime.datetime.now() + datetime.timedelta(hours=24)).isoformat(),
         }
         token = base64.b64encode(json.dumps(session_data).encode()).decode()
         return token
@@ -645,7 +645,7 @@ class SaoynxAuthentication:
         st.session_state.authenticated = True
         st.session_state.user_id = user_id
         st.session_state.username = "demo_user"
-        st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(days=2)).isoformat()
+        st.session_state.session_expires = (datetime.datetime.now() + datetime.timedelta(hours=24)).isoformat()
         session_token = self.create_session_token("demo_user", user_id)
         st.query_params["session_token"] = session_token
         # Indicate a lightweight post-login transition so the UI shows a confirmation
