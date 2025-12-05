@@ -611,9 +611,7 @@ class SaoynxAuthentication:
 
     def render_splash_interface(self):
         """Render the splash screen with login/register options."""
-        # Show demo mode banner if Supabase is not configured
-        if not self.supabase_configured:
-            st.info("📌 Running in demo mode — Supabase is not configured. You can use demo login with any username/password.")
+        # Demo mode is normal - don't show warning for missing Supabase
         
         st.markdown("<h1 style='text-align:center'>FirstPerson</h1>", unsafe_allow_html=True)
         st.markdown("<p style='text-align:center'>A private space for emotional processing and growth</p>", unsafe_allow_html=True)
