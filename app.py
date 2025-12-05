@@ -36,6 +36,11 @@ except Exception:
         initial_sidebar_state="expanded",
     )
 
+# Diagnostic: Show which Python executable is being used
+import sys
+with st.sidebar:
+    st.caption(f"Python: {sys.executable}")
+
 # Now import the UI system
 try:
     from emotional_os.deploy.modules.ui_refactored import main
