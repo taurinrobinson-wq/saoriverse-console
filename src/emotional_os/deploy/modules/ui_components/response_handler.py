@@ -132,8 +132,10 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
                 logger.warning(f"Tier 2 aliveness failed: {e}, using Tier 1 response")
 
         # TIER 3: Add poetic consciousness through metaphor and aesthetics
+        # REDUCED APPLICATION: Only apply to longer, more complex responses
+        # to avoid over-enhancement and slowness
         tier3 = st.session_state.get("tier3_poetic_consciousness")
-        if tier3:
+        if tier3 and len(response) > 100:  # Only enhance longer responses
             try:
                 # Get conversation history and theme for context
                 conversation_history = conversation_context.get("messages", [])
