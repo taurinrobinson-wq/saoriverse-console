@@ -1,0 +1,19 @@
+[client]
+showErrorDetails = false
+toolbarMode = "viewer"
+
+[logger]
+level = "info"
+
+[server]
+headless = false
+port = 8501
+runOnSave = true
+enableXsrfProtection = false
+
+[theme]
+primaryColor = "#ff6b9d"
+backgroundColor = "#0a0e27"
+secondaryBackgroundColor = "#16213e"
+textColor = "#ffffff"
+font = "sans serif"
