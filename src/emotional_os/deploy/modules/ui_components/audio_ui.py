@@ -98,6 +98,9 @@ def render_audio_recorder():
     Returns:
         Transcribed text or None if recording failed
     """
+    # Debug logging
+    logger.info(f"Voice dependencies: whisper={HAS_SPEECH_RECOGNITION}, soundfile={HAS_SOUNDFILE}, sounddevice={HAS_SOUNDDEVICE}")
+    
     # Check all required dependencies
     missing_deps = []
     if not HAS_SPEECH_RECOGNITION:
