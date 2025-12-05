@@ -103,15 +103,8 @@ def _render_authenticated_sidebar():
             pkg_path = os.path.join(os.path.dirname(__file__), "..", "static", "graphics", logo_file)
             repo_path = os.path.join("static", "graphics", logo_file)
             
-            try:
-                # Prefer rendering the SVG markup so it can be centered reliably
-                svg_markup = load_svg("FirstPerson-Logo_cropped.svg")
-                st.markdown(
-                    f"<div style='text-align:center;width:120px;margin:0 auto'>{svg_markup}</div>",
-                    unsafe_allow_html=True,
-                )
-            except Exception:
-                # Fallback to local image if SVG loader fails
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
                 if os.path.exists(pkg_path):
                     st.image(pkg_path, width=120)
                 elif os.path.exists(repo_path):
