@@ -14,25 +14,16 @@ logger = logging.getLogger(__name__)
 
 
 def render_main_header():
-    """Render the main page header with logo and title."""
+    """Render the main page header with logo only."""
     if st.session_state.get("header_rendered"):
         return
 
     try:
-        col1, col2 = st.columns([0.5, 8], gap="small")
-
-        with col1:
-            _render_header_logo()
-
+        # Center the logo
+        col1, col2, col3 = st.columns([1, 1, 1])
+        
         with col2:
-            svg_markup = load_svg("FirstPerson-Logo-black-cropped_notext.svg")
-            st.markdown(
-                '<h1 style="margin: 0; margin-left: -35px; padding-top: 10px; '
-                'color: #2E2E2E; font-weight: 300; letter-spacing: 2px; font-size: 2.2rem;">'
-                "FirstPerson - Personal AI Companion"
-                "</h1>",
-                unsafe_allow_html=True,
-            )
+            _render_header_logo()
 
         st.session_state["header_rendered"] = True
 
@@ -41,17 +32,17 @@ def render_main_header():
 
 
 def _render_header_logo():
-    """Render logo in header (package-local or fallback)."""
+    """Render logo in header from FirstPerson-Logo_cropped.svg."""
     try:
-        logo_file = "FirstPerson-Logo-normalized.svg"
+        logo_file = "FirstPerson-Logo_cropped.svg"
         pkg_path = os.path.join(os.path.dirname(
             __file__), "..", "static", "graphics", logo_file)
         repo_path = os.path.join("static", "graphics", logo_file)
 
         if os.path.exists(pkg_path):
-            st.image(pkg_path, width=24)
+            st.image(pkg_path, width=200)
         elif os.path.exists(repo_path):
-            st.image(repo_path, width=24)
+            st.image(repo_path, width=200)
         else:
             raise FileNotFoundError
 
@@ -59,7 +50,7 @@ def _render_header_logo():
         # Fallback to emoji
         try:
             st.markdown(
-                '<div style="font-size: 2.5rem; margin: 0; line-height: 1;">🧠</div>',
+                '<div style="font-size: 3rem; margin: 0 auto; text-align: center; line-height: 1;">🧠</div>',
                 unsafe_allow_html=True,
             )
         except Exception as e:
