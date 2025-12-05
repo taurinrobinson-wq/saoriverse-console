@@ -86,6 +86,10 @@ def handle_response_pipeline(user_input: str, conversation_context: dict) -> str
         # Prevent verbatim repetition
         response = _prevent_response_repetition(response)
         
+        # SYNTHESIS LAYER: Add captured details from user input to make response more specific
+        # This ensures responses show they understood what the user said, not just generic prompts
+        response = _synthesize_with_user_details(user_input, response, conversation_context)
+        
         # TIER 1: Enhance response with learning and safety wrapping
         tier1 = st.session_state.get("tier1_foundation")
         if tier1:
@@ -531,6 +535,94 @@ def _prevent_response_repetition(response: str) -> str:
         logger.debug(f"Repetition prevention failed: {e}")
 
     return response
+
+
+
+def _synthesize_with_user_details(user_input: str, base_response: str, 
+                                 conversation_context: dict) -> str:
+    """Enhance response by incorporating specific details from user input.
+    
+    Transforms generic responses into specific ones by:
+    1. Extracting key details/themes from user input
+    2. Showing those details were understood
+    3. Only then asking exploration questions if appropriate
+    
+    Args:
+        user_input: User's message
+        base_response: Initial response from system
+        conversation_context: Conversation history
+        
+    Returns:
+        Response with captured details woven in
+    """
+    try:
+        # Extract key concepts/details from user input
+        user_lower = user_input.lower()
+        
+        # If response is already asking probing questions, enhance them with captured details
+        probing_questions = [
+            "what comes next",
+            "how does your body",
+            "how long can you stay",
+            "can you tell me more",
+            "what comes",
+        ]
+        
+        is_probing = any(q in base_response.lower() for q in probing_questions)
+        
+        if is_probing and len(user_input) > 50:
+            # Extract key details from user input
+            details = []
+            
+            if "work" in user_lower or "job" in user_lower:
+                if "stress" in user_lower:
+                    details.append("work stress")
+                if "task" in user_lower or "tasks" in user_lower:
+                    details.append("specific tasks")
+                if "avoid" in user_lower or "shut down" in user_lower:
+                    details.append("avoidance pattern")
+                    
+            if "chest" in user_lower or "breath" in user_lower:
+                details.append("physical tension")
+                
+            if "embarrass" in user_lower or "shame" in user_lower:
+                details.append("feeling exposed")
+                
+            if "drifts" in user_lower or "distract" in user_lower:
+                details.append("difficulty focusing")
+            
+            # Build synthesis statement if we captured details
+            if details:
+                synthesis = f"I'm hearing: {', '.join(details)}. "
+                
+                # Check conversation length to decide on follow-up approach
+                history_length = len(conversation_context.get("messages", []))
+                
+                # After several exchanges, suggest synthesis instead of more questions
+                if history_length > 4:
+                    # Time for reflection/synthesis instead of more probing
+                    synthesis += "It sounds like there's a pattern where stress leads to avoidance, which then creates more pressure. "
+                    synthesis += "What do you think would help break that cycle?"
+                    return synthesis
+                else:
+                    # Early in conversation: validate what you heard, then ask focused question
+                    # Replace generic question with one specific to captured details
+                    if "work" in details and history_length > 2:
+                        synthesis += "When you mention the work stress — is it the overwhelming amount, "
+                        synthesis += "or more about the specific task you're avoiding?"
+                    elif "physical" in details and history_length > 1:
+                        synthesis += "The chest tightness and difficulty breathing — have you found anything "
+                        synthesis += "that helps ground you when that happens?"
+                    else:
+                        synthesis += base_response  # Keep original if no match
+                    return synthesis
+        
+        # If response is generic acknowledgment, leave as-is (already appropriate)
+        return base_response
+        
+    except Exception as e:
+        logger.debug(f"Response synthesis failed: {e}, using base response")
+        return base_response
 
 
 def get_debug_info() -> dict:
