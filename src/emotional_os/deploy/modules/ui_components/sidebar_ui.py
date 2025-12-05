@@ -97,6 +97,27 @@ def _render_demo_sidebar():
 def _render_authenticated_sidebar():
     """Render sidebar for authenticated users."""
     try:
+        # Display user info and logout button at top
+        try:
+            username = st.session_state.get("username", "User")
+            st.markdown(f"### 👤 {username}")
+            
+            col1, col2 = st.columns([1, 1])
+            with col1:
+                if st.button("🚪 Logout", use_container_width=True):
+                    try:
+                        from ..auth import SaoynxAuthentication
+                        auth = SaoynxAuthentication()
+                        auth.logout()
+                    except Exception as e:
+                        logger.debug(f"Logout error: {e}")
+                        st.session_state.authenticated = False
+                        st.rerun()
+            
+            st.markdown("---")
+        except Exception as e:
+            logger.debug(f"Error rendering user info: {e}")
+        
         # Display logo at top of sidebar
         try:
             logo_file = "FirstPerson-Logo_cropped.svg"

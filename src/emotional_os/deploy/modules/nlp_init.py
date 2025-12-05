@@ -70,7 +70,11 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
 
     # NRC Lexicon
     try:
-        from parser.nrc_lexicon_loader import nrc  # noqa: F401
+        # Try both import paths for robustness
+        try:
+            from parser.nrc_lexicon_loader import nrc  # noqa: F401
+        except ImportError:
+            from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
         
         NLP_STATE["nrc_available"] = True
         NLP_STATE["nrc_exc"] = None
@@ -78,7 +82,7 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     except Exception as e:
         NLP_STATE["nrc_available"] = False
         NLP_STATE["nrc_exc"] = repr(e)
-        logger.debug("NRC lexicon not available: %s", e)
+        logger.error("NRC lexicon not available: %s", e)
 
     # Record python executable for diagnostics (helps ensure Streamlit uses same env)
     NLP_STATE["python_executable"] = sys.executable
