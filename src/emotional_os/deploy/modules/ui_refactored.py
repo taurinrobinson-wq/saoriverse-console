@@ -210,11 +210,13 @@ def render_app():
 
                     # Store exchange
                     try:
+                        # Convert processing time to milliseconds for consistent display
+                        processing_time_ms = processing_time * 1000
                         add_exchange_to_history(
                             user_input,
                             response,
                             metadata={
-                                "processing_time": f"{processing_time:.2f}s",
+                                "processing_time": f"{processing_time_ms:.1f}ms",
                                 "mode": processing_mode,
                                 "timestamp": datetime.datetime.now().isoformat(),
                             },
