@@ -14,23 +14,11 @@ logger = logging.getLogger(__name__)
 
 
 def render_main_header():
-    """Render the main page header with logo only."""
+    """Render the main page header."""
     if st.session_state.get("header_rendered"):
         return
 
     try:
-        # Center the logo
-        col1, col2, col3 = st.columns([1, 1, 1])
-        
-        with col2:
-            _render_header_logo()
-        
-        # Reduce spacing within divider
-        st.markdown(
-            "<style>div[data-testid='stVerticalBlockContainer'] { gap: 0.5rem; }</style>",
-            unsafe_allow_html=True,
-        )
-
         st.session_state["header_rendered"] = True
 
     except Exception as e:
