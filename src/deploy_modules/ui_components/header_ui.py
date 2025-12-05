@@ -24,6 +24,12 @@ def render_main_header():
         
         with col2:
             _render_header_logo()
+        
+        # Remove extra spacing after logo
+        st.markdown(
+            "<style>div[data-testid='stImage'] { margin-bottom: -20px; }</style>",
+            unsafe_allow_html=True,
+        )
 
         st.session_state["header_rendered"] = True
 
@@ -40,9 +46,9 @@ def _render_header_logo():
         repo_path = os.path.join("static", "graphics", logo_file)
 
         if os.path.exists(pkg_path):
-            st.image(pkg_path, width=200)
+            st.image(pkg_path, width=140)
         elif os.path.exists(repo_path):
-            st.image(repo_path, width=200)
+            st.image(repo_path, width=140)
         else:
             raise FileNotFoundError
 
