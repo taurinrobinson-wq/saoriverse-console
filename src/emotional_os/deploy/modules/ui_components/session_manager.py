@@ -32,6 +32,7 @@ def initialize_session_state():
     - Processing mode and preferences
     - Authentication state
     - Tier 1 Foundation for enhanced responses
+    - Tier 2 Aliveness for emotional presence
     """
     _ensure_auth_defaults()
     _ensure_conversation_defaults()
@@ -40,6 +41,7 @@ def initialize_session_state():
     _ensure_fallback_protocol()
     _ensure_voice_mode()
     _ensure_tier1_foundation()
+    _ensure_tier2_aliveness()
 
 
 def _ensure_auth_defaults():
@@ -164,6 +166,26 @@ def _ensure_tier1_foundation():
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 1 Foundation: {e}")
             st.session_state["tier1_foundation"] = None
+
+
+def _ensure_tier2_aliveness():
+    """Initialize Tier 2 Aliveness for emotional presence and adaptivity.
+    
+    Sets up the aliveness layer with:
+    - AttunementLoop for tone synchronization
+    - EmotionalReciprocity for intensity matching
+    - EmbodiedSimulation for physical presence metaphors
+    - EnergyTracker for conversation pacing
+    """
+    if "tier2_aliveness" not in st.session_state:
+        try:
+            from src.emotional_os.tier2_aliveness import Tier2Aliveness
+            tier2 = Tier2Aliveness()
+            st.session_state["tier2_aliveness"] = tier2
+            logger.info("Tier 2 Aliveness initialized in session")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
+            st.session_state["tier2_aliveness"] = None
 
 
 def load_conversation_manager():
