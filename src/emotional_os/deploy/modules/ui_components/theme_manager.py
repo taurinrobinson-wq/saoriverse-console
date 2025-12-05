@@ -61,7 +61,7 @@ def _inject_light_theme():
         st.markdown(
             """
             <style>
-            :root { --accent-color: #5E60BA; }
+            :root { --accent-color: #ff6b9d; }
             body, .main, .block-container {
                 background: linear-gradient(180deg, #F5F5F5 0%, #FAFAFA 100%);
                 color: #1F1F1F;
@@ -96,7 +96,7 @@ def _inject_dark_theme():
         st.markdown(
             """
             <style>
-            :root { --accent-color: #A78BFA; }
+            :root { --accent-color: #ff6b9d; }
             body, .main, .block-container {
                 background: linear-gradient(180deg, #18191A 0%, #1F2023 100%);
                 color: #E5E5E5;
