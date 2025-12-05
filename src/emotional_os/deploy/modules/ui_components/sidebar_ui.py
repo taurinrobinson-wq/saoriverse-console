@@ -97,6 +97,21 @@ def _render_demo_sidebar():
 def _render_authenticated_sidebar():
     """Render sidebar for authenticated users."""
     try:
+        # Display logo at top of sidebar
+        try:
+            logo_file = "FirstPerson-Logo_cropped.svg"
+            pkg_path = os.path.join(os.path.dirname(__file__), "..", "static", "graphics", logo_file)
+            repo_path = os.path.join("static", "graphics", logo_file)
+            
+            if os.path.exists(pkg_path):
+                st.image(pkg_path, width=120)
+            elif os.path.exists(repo_path):
+                st.image(repo_path, width=120)
+        except Exception as e:
+            logger.debug(f"Error rendering sidebar logo: {e}")
+        
+        st.markdown("<div style='margin-bottom: 16px;'></div>", unsafe_allow_html=True)
+        
         st.markdown("### Settings")
 
         # Persist history toggle
