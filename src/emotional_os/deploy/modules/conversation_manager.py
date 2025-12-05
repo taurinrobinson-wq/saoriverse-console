@@ -397,8 +397,21 @@ def load_all_conversations_to_sidebar(manager: ConversationManager, in_expander:
         ctx.info("No previous conversations yet. Start a new one!")
         return
 
+    # Add CSS to reduce button sizes and spacing for conversations
+    st.markdown(
+        "<style>"
+        "button[kind='secondary']:has-text('💬') { font-size: 0.85em; padding: 0.25rem 0.5rem; }"
+        "button[kind='secondary']:has-text('✏️'), button[kind='secondary']:has-text('🗑️') "
+        "{ font-size: 0.75em; padding: 0.2rem 0.4rem; height: auto; }"
+        ".conversation-row { margin-bottom: 0.25rem !important; }"
+        "</style>",
+        unsafe_allow_html=True,
+    )
+
     for conv in conversations:
-        col1, col2, col3 = ctx.columns([3, 1, 1])
+        with ctx.container():
+            st.markdown("<div class='conversation-row'>", unsafe_allow_html=True)
+            col1, col2, col3 = ctx.columns([3, 1, 1], gap="small")
 
         with col1:
             # Click to load conversation - using caption for smaller text
@@ -462,6 +475,8 @@ def load_all_conversations_to_sidebar(manager: ConversationManager, in_expander:
                     st.rerun()
                 else:
                     ctx.error(message)
+
+            st.markdown("</div>", unsafe_allow_html=True)
 
         # Handle rename dialog
         if st.session_state.get(f"renaming_{conv['conversation_id']}", False):
