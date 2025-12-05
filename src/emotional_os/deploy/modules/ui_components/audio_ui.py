@@ -27,10 +27,16 @@ except ImportError:
     HAS_PYTTSX3 = False
 
 try:
-    import speech_recognition as sr
+    from faster_whisper import WhisperModel
     HAS_SPEECH_RECOGNITION = True
 except ImportError:
     HAS_SPEECH_RECOGNITION = False
+
+try:
+    import soundfile as sf
+    HAS_SOUNDFILE = True
+except ImportError:
+    HAS_SOUNDFILE = False
 
 
 def get_tts_engine():
@@ -47,10 +53,14 @@ def get_tts_engine():
 
 
 def get_speech_recognizer():
-    """Get or create speech recognizer."""
+    """Get or create speech recognizer (Faster Whisper model)."""
     global _recognizer
     if _recognizer is None and HAS_SPEECH_RECOGNITION:
-        _recognizer = sr.Recognizer()
+        try:
+            # Use the base model (lighter weight, ~140MB)
+            _recognizer = WhisperModel("base", device="cpu", compute_type="int8")
+        except Exception as e:
+            logger.warning(f"Failed to load Whisper model: {e}")
     return _recognizer
 
 
@@ -83,7 +93,13 @@ def render_audio_recorder():
         Transcribed text or None if recording failed
     """
     if not HAS_SPEECH_RECOGNITION:
-        st.error("Speech recognition not available")
+        st.error("Speech recognition not available - faster-whisper package required")
+        st.info("Install with: `pip install faster-whisper soundfile`")
+        return None
+    
+    if not HAS_SOUNDFILE:
+        st.error("Audio recording not available - soundfile package required")
+        st.info("Install with: `pip install soundfile`")
         return None
     
     col1, col2 = st.columns([2, 1])
@@ -91,34 +107,58 @@ def render_audio_recorder():
     with col1:
         if st.button("🎤 Record Message", use_container_width=True):
             try:
+                import sounddevice as sd
+                
                 recognizer = get_speech_recognizer()
                 if recognizer is None:
                     st.error("Speech recognizer not initialized")
                     return None
                 
-                with st.spinner("🎤 Listening... (10 seconds)"):
+                # Record 10 seconds of audio
+                sample_rate = 16000
+                duration = 10
+                
+                with st.spinner(f"🎤 Listening... ({duration} seconds)"):
                     try:
-                        with sr.Microphone() as source:
-                            # Adjust for ambient noise
-                            recognizer.adjust_for_ambient_noise(source, duration=0.5)
-                            # Record audio with 10 second timeout
-                            audio_data = recognizer.listen(source, timeout=10, phrase_time_limit=10)
-                    except sr.RequestError as e:
+                        audio_data = sd.rec(int(sample_rate * duration), samplerate=sample_rate, channels=1, dtype='float32')
+                        sd.wait()
+                    except Exception as e:
                         st.error(f"Microphone error: {e}")
                         return None
                 
+                # Save audio temporarily for transcription
                 with st.spinner("📝 Transcribing..."):
-                    # Use Google Speech Recognition (free, requires internet)
                     try:
-                        text = recognizer.recognize_google(audio_data)
-                        st.session_state["voice_input_text"] = text
-                        st.success(f"✓ Got it: {text}")
-                        return text
-                    except sr.UnknownValueError:
-                        st.warning("Could not understand audio. Please try again.")
-                        return None
-                    except sr.RequestError as e:
-                        st.error(f"Transcription service error: {e}")
+                        import tempfile
+                        import os
+                        
+                        # Create a temporary audio file
+                        with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as tmp:
+                            sf.write(tmp.name, audio_data, sample_rate)
+                            tmp_path = tmp.name
+                        
+                        try:
+                            # Transcribe using Whisper
+                            segments, info = recognizer.transcribe(tmp_path)
+                            text = " ".join([segment.text for segment in segments]).strip()
+                            
+                            if text:
+                                st.session_state["voice_input_text"] = text
+                                st.success(f"✓ Got it: {text}")
+                                return text
+                            else:
+                                st.warning("Could not understand audio. Please try again.")
+                                return None
+                        finally:
+                            # Clean up temp file
+                            try:
+                                os.unlink(tmp_path)
+                            except:
+                                pass
+                                
+                    except Exception as e:
+                        st.error(f"Transcription error: {e}")
+                        logger.debug(f"Transcription error: {e}")
                         return None
                     
             except Exception as e:
