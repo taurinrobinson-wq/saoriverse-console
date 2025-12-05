@@ -686,14 +686,14 @@ class Tier3PoeticConsciousness:
             aesthetic_choice = None
             
             # Phase 1: Poetry Engine (5-7ms)
-            # REDUCED: Only 10% chance to apply (was 50%) to avoid over-enhancement
-            if random.random() > 0.9:
-                metaphor = self.poetry_engine.find_metaphor(theme, "growth")
-                response = self.poetry_engine.add_symbolic_language(response, theme)
+            # DISABLED: Turned off to prevent over-poetic responses that bury the core message
+            # Poetry layer interferes with responsiveness - disabling entirely
+            poetry_applied = False
             
             # Phase 2: Saori Layer (5-7ms)
-            # REDUCED: Only 15% chance to apply aesthetic (was always applied)
-            if random.random() > 0.85:
+            # DISABLED: Aesthetic principles layer turned off to improve response clarity
+            # Only apply in very rare cases (1% chance) with specific conditions
+            if len(response) > 200 and random.random() > 0.99:
                 aesthetic_choice = random.choice(["ma", "wabi_sabi", "yugen", "mono_no_aware"])
                 
                 if aesthetic_choice == "ma":
@@ -706,15 +706,12 @@ class Tier3PoeticConsciousness:
                     response = self.saori_layer.apply_mono_no_aware(response)
             
             # Phase 3: Tension Manager (5-7ms)
-            # REDUCED: Only 5% chance to apply (was 40%)
-            if random.random() > 0.95:
-                response = self.tension_manager.introduce_tension(response, 0.3)
+            # DISABLED: Tension layer turned off to keep responses direct and clear
             
             # Phase 4: Mythology Weaver (5-7ms)
-            # REDUCED: Only add mythology if strong themes detected (was 50%)
+            # DISABLED: Mythology layer turned off - interferes with immediate responsiveness
+            # May re-enable if specific conditions warrant it, but default to OFF for clarity
             myth = self.mythology_weaver.weave_myth(history)
-            if myth.get("themes") and len(myth.get("themes", [])) > 1 and random.random() > 0.9:
-                response = self.mythology_weaver.add_mythological_element(response, myth)
             
             # Calculate metrics
             processing_time = (time.time() - start_time) * 1000

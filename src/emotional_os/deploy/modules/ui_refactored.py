@@ -195,8 +195,10 @@ def render_app():
 
                             # Display response
                             st.write(response)
+                            # Convert to milliseconds for better granularity
+                            processing_time_ms = processing_time * 1000
                             st.caption(
-                                f"Processed in {processing_time:.2f}s • Mode: {processing_mode}"
+                                f"Processed in {processing_time_ms:.1f}ms • Mode: {processing_mode}"
                             )
 
                         except Exception as e:
