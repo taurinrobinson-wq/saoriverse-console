@@ -106,9 +106,9 @@ def _render_authenticated_sidebar():
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:
                 if os.path.exists(pkg_path):
-                    st.image(pkg_path, width=200)
+                    st.image(pkg_path, width=160)
                 elif os.path.exists(repo_path):
-                    st.image(repo_path, width=200)
+                    st.image(repo_path, width=160)
         except Exception as e:
             logger.debug(f"Error rendering sidebar logo: {e}")
         
