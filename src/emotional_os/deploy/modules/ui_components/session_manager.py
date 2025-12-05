@@ -31,6 +31,7 @@ def initialize_session_state():
     - Voice mode
     - Processing mode and preferences
     - Authentication state
+    - Tier 1 Foundation for enhanced responses
     """
     _ensure_auth_defaults()
     _ensure_conversation_defaults()
@@ -38,6 +39,7 @@ def initialize_session_state():
     _ensure_processing_prefs()
     _ensure_fallback_protocol()
     _ensure_voice_mode()
+    _ensure_tier1_foundation()
 
 
 def _ensure_auth_defaults():
@@ -143,6 +145,25 @@ def _ensure_voice_mode():
     st.session_state.setdefault("voice_mode_enabled", False)
     st.session_state.setdefault("last_audio_input", None)
     st.session_state.setdefault("last_audio_output", None)
+
+
+def _ensure_tier1_foundation():
+    """Initialize Tier 1 Foundation for response enhancement.
+    
+    Sets up the foundation layer with:
+    - LexiconLearner for vocabulary expansion
+    - Sanctuary safety for compassionate wrapping
+    - Signal detection for emotion understanding
+    """
+    if "tier1_foundation" not in st.session_state:
+        try:
+            from src.emotional_os.tier1_foundation import Tier1Foundation
+            tier1 = Tier1Foundation(conversation_memory=None)
+            st.session_state["tier1_foundation"] = tier1
+            logger.info("Tier 1 Foundation initialized in session")
+        except Exception as e:
+            logger.warning(f"Failed to initialize Tier 1 Foundation: {e}")
+            st.session_state["tier1_foundation"] = None
 
 
 def load_conversation_manager():
