@@ -13,44 +13,6 @@ from ..utils import load_svg
 logger = logging.getLogger(__name__)
 
 
-def render_main_header():
-    """Render the main page header."""
-    if st.session_state.get("header_rendered"):
-        return
-
-    try:
-        st.session_state["header_rendered"] = True
-
-    except Exception as e:
-        logger.debug(f"Error rendering header: {e}")
-
-
-def _render_header_logo():
-    """Render logo in header from FirstPerson-Logo_cropped.svg."""
-    try:
-        logo_file = "FirstPerson-Logo_cropped.svg"
-        pkg_path = os.path.join(os.path.dirname(
-            __file__), "..", "static", "graphics", logo_file)
-        repo_path = os.path.join("static", "graphics", logo_file)
-
-        if os.path.exists(pkg_path):
-            st.image(pkg_path, width=140)
-        elif os.path.exists(repo_path):
-            st.image(repo_path, width=140)
-        else:
-            raise FileNotFoundError
-
-    except Exception:
-        # Fallback to emoji
-        try:
-            st.markdown(
-                '<div style="font-size: 3rem; margin: 0 auto; text-align: center; line-height: 1;">🧠</div>',
-                unsafe_allow_html=True,
-            )
-        except Exception as e:
-            logger.debug(f"Error rendering header logo fallback: {e}")
-
-
 def render_demo_banner():
     """Render informational banner for demo mode users."""
     try:

@@ -19,7 +19,6 @@ from .session_manager import (
 
 # Header and branding
 from .header_ui import (
-    render_main_header,
     render_demo_banner,
     render_welcome_message,
 )
@@ -92,7 +91,6 @@ __all__ = [
     "add_exchange_to_history",
     "get_session_summary",
     # Header
-    "render_main_header",
     "render_demo_banner",
     "render_welcome_message",
     # Sidebar
