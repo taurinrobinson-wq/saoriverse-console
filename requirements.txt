@@ -1,6 +1,8 @@
 # Saoriverse Console / FirstPerson Requirements
 # All-in-one requirements file for the application
-# Python 3.9+ compatible
+# Python 3.11 or 3.12 RECOMMENDED (best compatibility with all packages)
+# Python 3.10 will work, but some packages may have limited support
+# NOT compatible with Python 3.9 or earlier, or 3.13 (missing wheel support)
 
 # ============================================================================
 # CORE STREAMLIT & WEB FRAMEWORK
@@ -35,7 +37,7 @@ numpy>=1.24.0
 # NLP & SENTIMENT ANALYSIS
 # ============================================================================
 textblob>=0.17.1
-# spacy>=3.6.0  # Commented: not yet Python 3.13 compatible
+spacy>=3.6.0  # Fully supported on Python 3.11/3.12
 # Note: spaCy models need to be downloaded separately:
 #   python -m spacy download en_core_web_sm
 # And TextBlob corpora:
@@ -54,13 +56,14 @@ sounddevice>=0.4.5  # Microphone input recording
 scipy>=1.11.0  # Signal processing (VAD, filtering)
 
 # Text-to-Speech (TTS)
-# TTS>=0.21.0  # Commented: not yet Python 3.13 compatible
-# pyttsx3 can be used as an alternative for TTS
-pyttsx3>=2.90
+TTS>=0.21.0  # Coqui TTS for high-quality voice synthesis
 
 # Audio Utilities
 pydub>=0.25.0  # Audio format conversion
 matplotlib>=3.7.0  # Visualization (waveforms, spectrograms)
+
+# TTS Fallback (if Coqui TTS has issues)
+pyttsx3>=2.90
 
 # ============================================================================
 # TESTING & DEVELOPMENT
