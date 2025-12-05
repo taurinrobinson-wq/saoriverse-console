@@ -38,6 +38,12 @@ try:
 except ImportError:
     HAS_SOUNDFILE = False
 
+try:
+    import sounddevice as sd
+    HAS_SOUNDDEVICE = True
+except ImportError:
+    HAS_SOUNDDEVICE = False
+
 
 def get_tts_engine():
     """Get or create TTS engine."""
@@ -92,14 +98,18 @@ def render_audio_recorder():
     Returns:
         Transcribed text or None if recording failed
     """
+    # Check all required dependencies
+    missing_deps = []
     if not HAS_SPEECH_RECOGNITION:
-        st.error("Speech recognition not available - faster-whisper package required")
-        st.info("Install with: `pip install faster-whisper soundfile`")
-        return None
-    
+        missing_deps.append("faster-whisper")
     if not HAS_SOUNDFILE:
-        st.error("Audio recording not available - soundfile package required")
-        st.info("Install with: `pip install soundfile`")
+        missing_deps.append("soundfile")
+    if not HAS_SOUNDDEVICE:
+        missing_deps.append("sounddevice")
+    
+    if missing_deps:
+        st.error(f"Voice recording unavailable - missing: {', '.join(missing_deps)}")
+        st.info(f"Install with: `pip install {' '.join(missing_deps)}`")
         return None
     
     col1, col2 = st.columns([2, 1])
@@ -107,8 +117,6 @@ def render_audio_recorder():
     with col1:
         if st.button("🎤 Record Message", use_container_width=True):
             try:
-                import sounddevice as sd
-                
                 recognizer = get_speech_recognizer()
                 if recognizer is None:
                     st.error("Speech recognizer not initialized")
