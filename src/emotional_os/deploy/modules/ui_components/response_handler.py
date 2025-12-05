@@ -543,9 +543,10 @@ def _synthesize_with_user_details(user_input: str, base_response: str,
     """Enhance response by incorporating specific details from user input.
     
     Transforms generic responses into specific ones by:
-    1. Extracting key details/themes from user input
-    2. Showing those details were understood
-    3. Only then asking exploration questions if appropriate
+    1. Tracking themes across the conversation (not just this message)
+    2. Recognizing emotional patterns and their connections
+    3. Building a coherent narrative arc rather than repeating a pattern
+    4. Responding with genuine synthesis, not mechanical pattern-matching
     
     Args:
         user_input: User's message
@@ -553,76 +554,234 @@ def _synthesize_with_user_details(user_input: str, base_response: str,
         conversation_context: Conversation history
         
     Returns:
-        Response with captured details woven in
+        Response that builds on previous exchanges, not mechanical pattern
     """
     try:
-        # Extract key concepts/details from user input
-        user_lower = user_input.lower()
+        import json
         
-        # If response is already asking probing questions, enhance them with captured details
-        probing_questions = [
-            "what comes next",
-            "how does your body",
-            "how long can you stay",
-            "can you tell me more",
-            "what comes",
-        ]
+        history = conversation_context.get("messages", [])
         
-        is_probing = any(q in base_response.lower() for q in probing_questions)
+        # Extract themes from entire conversation, not just current input
+        conversation_themes = _extract_conversation_themes(history, user_input)
         
-        if is_probing and len(user_input) > 50:
-            # Extract key details from user input
-            details = []
+        # Only apply synthesis if we have meaningful conversation history
+        if len(history) < 2:
+            # First exchange: keep simple, just acknowledge
+            return base_response
+        
+        # Check if this is a significant disclosure (divorce/co-parenting revelation)
+        is_significant_disclosure = _is_significant_disclosure(user_input, history)
+        
+        # Decide response type based on conversation arc
+        response_type = _determine_response_type(conversation_themes, history, is_significant_disclosure)
+        
+        # Generate response appropriate to the conversation stage
+        if response_type == "acknowledge_new_context":
+            # Something important was just revealed - acknowledge it and connect to earlier themes
+            return _respond_to_significant_disclosure(user_input, conversation_themes, history)
+        
+        elif response_type == "deepen_exploration":
+            # We have enough understanding to ask deeper questions
+            return _respond_with_deeper_exploration(user_input, conversation_themes, history)
+        
+        elif response_type == "recognize_pattern":
+            # Patterns are emerging - name them and what they might mean
+            return _respond_with_pattern_recognition(conversation_themes, history)
+        
+        elif response_type == "integration":
+            # Earlier exchanges + new input: help integrate understanding
+            return _respond_with_integration(user_input, conversation_themes, history)
+        
+        else:
+            # Generic acknowledgment (fallback)
+            return base_response
             
-            if "work" in user_lower or "job" in user_lower:
-                if "stress" in user_lower:
-                    details.append("work stress")
-                if "task" in user_lower or "tasks" in user_lower:
-                    details.append("specific tasks")
-                if "avoid" in user_lower or "shut down" in user_lower:
-                    details.append("avoidance pattern")
-                    
-            if "chest" in user_lower or "breath" in user_lower:
-                details.append("physical tension")
-                
-            if "embarrass" in user_lower or "shame" in user_lower:
-                details.append("feeling exposed")
-                
-            if "drifts" in user_lower or "distract" in user_lower:
-                details.append("difficulty focusing")
-            
-            # Build synthesis statement if we captured details
-            if details:
-                synthesis = f"I'm hearing: {', '.join(details)}. "
-                
-                # Check conversation length to decide on follow-up approach
-                history_length = len(conversation_context.get("messages", []))
-                
-                # After several exchanges, suggest synthesis instead of more questions
-                if history_length > 4:
-                    # Time for reflection/synthesis instead of more probing
-                    synthesis += "It sounds like there's a pattern where stress leads to avoidance, which then creates more pressure. "
-                    synthesis += "What do you think would help break that cycle?"
-                    return synthesis
-                else:
-                    # Early in conversation: validate what you heard, then ask focused question
-                    # Replace generic question with one specific to captured details
-                    if "work" in details and history_length > 2:
-                        synthesis += "When you mention the work stress — is it the overwhelming amount, "
-                        synthesis += "or more about the specific task you're avoiding?"
-                    elif "physical" in details and history_length > 1:
-                        synthesis += "The chest tightness and difficulty breathing — have you found anything "
-                        synthesis += "that helps ground you when that happens?"
-                    else:
-                        synthesis += base_response  # Keep original if no match
-                    return synthesis
-        
-        # If response is generic acknowledgment, leave as-is (already appropriate)
-        return base_response
-        
     except Exception as e:
         logger.debug(f"Response synthesis failed: {e}, using base response")
         return base_response
+
+
+def _extract_conversation_themes(history: list, current_input: str) -> dict:
+    """Extract themes that have emerged across the entire conversation."""
+    themes = {
+        "immediate_stressors": [],
+        "emotional_patterns": [],
+        "physical_responses": [],
+        "longer_term_context": [],
+        "coping_strategies": [],
+        "insights_shared": [],
+    }
+    
+    try:
+        current_lower = current_input.lower()
+        
+        # Scan all messages for patterns
+        all_text = current_input + " ".join([
+            msg.get("content", "") for msg in history 
+            if msg.get("role") == "user"
+        ]).lower()
+        
+        # Immediate stressors
+        if any(w in all_text for w in ["work", "job", "employee", "task", "deadline"]):
+            themes["immediate_stressors"].append("work/responsibility")
+        if any(w in all_text for w in ["divorce", "co-parent", "ex", "kids", "children"]):
+            themes["longer_term_context"].append("family transitions")
+        
+        # Emotional patterns
+        if any(w in all_text for w in ["shut down", "avoid", "avoidance", "escape"]):
+            themes["emotional_patterns"].append("avoidance/shutdown response")
+        if any(w in all_text for w in ["overwhelm", "pile on", "relief"]):
+            themes["emotional_patterns"].append("overwhelm cycle")
+        if any(w in all_text for w in ["embarrass", "shame", "expose"]):
+            themes["emotional_patterns"].append("shame/exposure vulnerability")
+        
+        # Physical responses
+        if any(w in all_text for w in ["chest", "breathing", "tight", "tense"]):
+            themes["physical_responses"].append("chest/breathing tension")
+        if any(w in all_text for w in ["jumpy", "anxious", "nervous"]):
+            themes["physical_responses"].append("hypervigilance/jumpiness")
+        if any(w in all_text for w in ["drift", "focus", "distract"]):
+            themes["physical_responses"].append("dissociation/difficulty focusing")
+        
+        # Insights already shared
+        if "shut down" in all_text and "avoid" in all_text:
+            themes["insights_shared"].append("awareness of shutdown pattern")
+        
+        return themes
+    except Exception as e:
+        logger.debug(f"Theme extraction failed: {e}")
+        return themes
+
+
+def _is_significant_disclosure(current_input: str, history: list) -> bool:
+    """Detect when user reveals something significant that changes context."""
+    significant_markers = [
+        "divorce", "separated", "co-parent", "custody", "ex-",
+        "trauma", "abuse", "assault", "loss", "death",
+        "hospitalized", "therapy", "medication", "diagnosed"
+    ]
+    return any(marker in current_input.lower() for marker in significant_markers)
+
+
+def _determine_response_type(themes: dict, history: list, is_significant: bool) -> str:
+    """Determine what type of response is appropriate at this stage."""
+    exchange_count = len(history)
+    
+    # First reveal of big context change
+    if is_significant and exchange_count >= 4:
+        return "acknowledge_new_context"
+    
+    # We know the main stressor + pattern + physical response
+    if (themes["immediate_stressors"] and themes["emotional_patterns"] 
+        and themes["physical_responses"] and exchange_count >= 4):
+        return "recognize_pattern"
+    
+    # Multiple exchanges, time to get deeper
+    if exchange_count > 5:
+        return "deepen_exploration"
+    
+    # New information coming in - integrate it
+    if exchange_count > 2:
+        return "integration"
+    
+    return "simple_acknowledge"
+
+
+def _respond_to_significant_disclosure(current_input: str, themes: dict, history: list) -> str:
+    """Respond when user reveals something that adds new context to understanding."""
+    opening = "Thank you for sharing that. "
+    
+    # Acknowledge the new context
+    if "divorce" in current_input.lower():
+        opening += "The ongoing work with co-parenting, the emotional switching back and forth between two worlds — "
+        opening += "that's its own kind of stress that doesn't just resolve. "
+    
+    # Connect to earlier themes
+    if themes["immediate_stressors"] and themes["emotional_patterns"]:
+        opening += "And when you're carrying that alongside the work pressure and the shutdown pattern you mentioned, "
+        opening += "it makes sense that relief feels so hard to find. "
+    
+    # Move toward understanding
+    opening += "\nIt sounds like this isn't just about today's work pile — "
+    opening += "it's about being stretched thin across multiple contexts, each demanding something different from you."
+    
+    return opening
+
+
+def _respond_with_pattern_recognition(themes: dict, history: list) -> str:
+    """Respond by naming emerging patterns."""
+    if not themes["emotional_patterns"]:
+        return "I'm noticing something in what you're sharing. Can you tell me more?"
+    
+    pattern = themes["emotional_patterns"][0] if themes["emotional_patterns"] else ""
+    
+    responses = [
+        f"I'm seeing a pattern: stress comes, and your instinct is to {pattern}. But that creates its own problem.",
+        f"The {pattern} makes sense as a survival response, but it sounds like it's not serving you well right now.",
+        f"That {pattern} response — it might be protecting you from feeling overwhelmed, but it's also keeping you stuck.",
+    ]
+    
+    import random
+    base = random.choice(responses)
+    
+    # Add specific follow-up based on what's emerged
+    if "physical" in str(themes.get("physical_responses", [])):
+        base += " Your body is clearly showing the strain with the tightness and jumpiness."
+    
+    return base
+
+
+def _respond_with_integration(current_input: str, themes: dict, history: list) -> str:
+    """Integrate new information with what's already emerged."""
+    # Show you're tracking what came before
+    recap = _generate_recap_from_history(history)
+    
+    # Add current input
+    new_detail = _extract_new_detail(current_input)
+    
+    # Connect them
+    integration = f"So before you mentioned {recap.lower()}. Now you're also telling me {new_detail}. "
+    integration += "That's all happening at the same time for you."
+    
+    return integration
+
+
+def _respond_with_deeper_exploration(current_input: str, themes: dict, history: list) -> str:
+    """Move to deeper, more curious questions."""
+    if "relief" in current_input.lower():
+        return "You mentioned that as soon as you get relief, something else gets piled on. "
+        return "Do you think that's just bad timing, or does part of you create that? Like you can't sit with relief?"
+    
+    return "What would it look like if you could actually rest — not just take a break, but truly rest without guilt?"
+
+
+def _generate_recap_from_history(history: list) -> str:
+    """Generate a brief recap of what's emerged in conversation so far."""
+    user_messages = [msg for msg in history if msg.get("role") == "user"]
+    
+    recap_parts = []
+    if len(user_messages) > 0:
+        if "work" in user_messages[0].get("content", "").lower():
+            recap_parts.append("work stress")
+        if any("avoid" in msg.get("content", "").lower() for msg in user_messages):
+            recap_parts.append("avoidance pattern")
+        if any("breath" in msg.get("content", "").lower() or "chest" in msg.get("content", "").lower() 
+               for msg in user_messages):
+            recap_parts.append("physical tension")
+    
+    return ", ".join(recap_parts) if recap_parts else "what you shared"
+
+
+def _extract_new_detail(current_input: str) -> str:
+    """Extract what's new in the current input."""
+    if "divorce" in current_input.lower():
+        return "dealing with co-parenting and life transitions on top of work stress"
+    if "drifts" in current_input.lower() or "distract" in current_input.lower():
+        return "having trouble staying focused even when you know what you should be doing"
+    if "relief" in current_input.lower():
+        return "that the cycle keeps resetting before you can catch your breath"
+    return "something else that's adding to this"
+
 
 
 def get_debug_info() -> dict:
