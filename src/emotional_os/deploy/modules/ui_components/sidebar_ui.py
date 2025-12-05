@@ -155,8 +155,6 @@ def _render_authenticated_sidebar():
         except Exception as e:
             st.warning(f"Consent settings error: {e}")
 
-        st.markdown("---")
-
         # Conversation management
         _render_conversation_list()
 
@@ -165,44 +163,48 @@ def _render_authenticated_sidebar():
 
 
 def _render_conversation_list():
-    """Render list of previous conversations."""
+    """Render list of previous conversations in a collapsible expander."""
     try:
-        from ..conversation_manager import (
-            load_all_conversations_to_sidebar,
-        )
-
-        mgr = st.session_state.get("conversation_manager")
-        if mgr:
-            load_all_conversations_to_sidebar(mgr)
-
-        # New conversation button
-        if st.button("➕ New Conversation", use_container_width=True):
-            st.session_state["current_conversation_id"] = str(uuid.uuid4())
-            st.session_state["conversation_title"] = "New Conversation"
-            st.session_state.pop("selected_conversation", None)
-
-            # Initialize empty history
-            from .session_manager import get_conversation_key
-            key = get_conversation_key()
-            st.session_state[key] = []
-
-            # Cache new conversation
+        with st.sidebar.expander("📚 Previous Conversations", expanded=False):
             try:
-                cid = st.session_state["current_conversation_id"]
-                cached = st.session_state.setdefault(
-                    "session_cached_conversations", [])
-                if not any(c.get("conversation_id") == cid for c in cached):
-                    cached.insert(0, {
-                        "conversation_id": cid,
-                        "title": "New Conversation",
-                        "updated_at": datetime.datetime.now().isoformat(),
-                        "message_count": 0,
-                        "processing_mode": st.session_state.get("processing_mode", "local"),
-                    })
-            except Exception:
-                pass
+                from ..conversation_manager import (
+                    load_all_conversations_to_sidebar,
+                )
 
-            st.rerun()
+                mgr = st.session_state.get("conversation_manager")
+                if mgr:
+                    load_all_conversations_to_sidebar(mgr)
+            except Exception as e:
+                logger.debug(f"Error loading conversations: {e}")
+
+            # New conversation button
+            if st.button("➕ New Conversation", use_container_width=True):
+                st.session_state["current_conversation_id"] = str(uuid.uuid4())
+                st.session_state["conversation_title"] = "New Conversation"
+                st.session_state.pop("selected_conversation", None)
+
+                # Initialize empty history
+                from .session_manager import get_conversation_key
+                key = get_conversation_key()
+                st.session_state[key] = []
+
+                # Cache new conversation
+                try:
+                    cid = st.session_state["current_conversation_id"]
+                    cached = st.session_state.setdefault(
+                        "session_cached_conversations", [])
+                    if not any(c.get("conversation_id") == cid for c in cached):
+                        cached.insert(0, {
+                            "conversation_id": cid,
+                            "title": "New Conversation",
+                            "updated_at": datetime.datetime.now().isoformat(),
+                            "message_count": 0,
+                            "processing_mode": st.session_state.get("processing_mode", "local"),
+                        })
+                except Exception:
+                    pass
+
+                st.rerun()
 
     except Exception as e:
         logger.debug(f"Error rendering conversation list: {e}")
