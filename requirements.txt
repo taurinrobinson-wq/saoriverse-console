@@ -1,4 +1,81 @@
-# Saoriverse Console Requirements
-# Main requirements file that references the organized config directory
+# Saoriverse Console / FirstPerson Requirements
+# All-in-one requirements file for the application
+# Python 3.9+ compatible
 
--r config/requirements.txt
+# ============================================================================
+# CORE STREAMLIT & WEB FRAMEWORK
+# ============================================================================
+streamlit==1.37.1
+python-dotenv==1.0.1
+requests==2.32.3
+supabase==2.6.0
+fastapi==0.104.1
+uvicorn==0.24.0
+jinja2==3.1.2
+python-multipart==0.0.6
+
+# ============================================================================
+# DOCUMENT PROCESSING
+# ============================================================================
+python-docx==1.1.0
+pdfplumber==0.10.3
+openpyxl==3.1.2
+xlrd==2.0.1
+markdown==3.5.2
+beautifulsoup4==4.12.2
+lxml==5.3.0
+
+# ============================================================================
+# DATA PROCESSING & NUMERICAL
+# ============================================================================
+pandas>=2.0.0
+numpy>=1.24.0
+
+# ============================================================================
+# NLP & SENTIMENT ANALYSIS
+# ============================================================================
+textblob>=0.17.1
+# spacy>=3.6.0  # Commented: not yet Python 3.13 compatible
+# Note: spaCy models need to be downloaded separately:
+#   python -m spacy download en_core_web_sm
+# And TextBlob corpora:
+#   python -m textblob.download_corpora
+
+# ============================================================================
+# SPEECH & AUDIO PROCESSING
+# ============================================================================
+# Speech Recognition (Local STT)
+faster-whisper>=0.10.0  # Faster Whisper implementation (CPU-optimized)
+
+# Audio Processing
+librosa>=0.10.0  # Audio feature extraction (pitch, energy, speech rate)
+soundfile>=0.12.0  # WAV/audio file I/O
+sounddevice>=0.4.5  # Microphone input recording
+scipy>=1.11.0  # Signal processing (VAD, filtering)
+
+# Text-to-Speech (TTS)
+# TTS>=0.21.0  # Commented: not yet Python 3.13 compatible
+# pyttsx3 can be used as an alternative for TTS
+pyttsx3>=2.90
+
+# Audio Utilities
+pydub>=0.25.0  # Audio format conversion
+matplotlib>=3.7.0  # Visualization (waveforms, spectrograms)
+
+# ============================================================================
+# TESTING & DEVELOPMENT
+# ============================================================================
+pytest>=8.0.0
+pytest-cov>=4.0.0
+pytest-timeout>=2.1.0
+
+# ============================================================================
+# OPTIONAL: GPU ACCELERATION (uncomment if you have CUDA)
+# ============================================================================
+# torch>=2.0.0
+# torchaudio>=2.0.0
+
+# ============================================================================
+# OPTIONAL: ADVANCED AUDIO PROCESSING
+# ============================================================================
+# noisereduce>=2.0.0  # Advanced noise suppression
