@@ -39,67 +39,71 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - Light Theme
 st.markdown("""
 <style>
-    body { background-color: #0a0e27; color: #e0e0e0; }
-    .stApp { background-color: #0a0e27; }
+    body { background-color: #ffffff; color: #1f2937; }
+    .stApp { background-color: #ffffff; }
     
     /* Main dialogue container */
     .dialogue-container {
-        background: linear-gradient(135deg, #1a1f3a 0%, #0f1523 100%);
+        background: linear-gradient(135deg, #f0f4ff 0%, #f5f8ff 100%);
         border-left: 4px solid #7c3aed;
         padding: 20px;
         border-radius: 8px;
         margin: 15px 0;
         font-size: 16px;
         line-height: 1.6;
+        color: #1f2937;
     }
     
     /* NPC dialogue bubble */
     .npc-dialogue {
-        background: linear-gradient(135deg, #2d1b4e 0%, #1a0f2e 100%);
+        background: linear-gradient(135deg, #ede9fe 0%, #faf5ff 100%);
         border-left: 4px solid #a78bfa;
         padding: 15px;
         border-radius: 8px;
         margin: 10px 0;
         font-style: italic;
+        color: #5b21b6;
     }
     
     /* Clarifying question */
     .clarifying-question {
-        background: linear-gradient(135deg, #1f3a3a 0%, #0f2626 100%);
+        background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
         border-left: 4px solid #34d399;
         padding: 12px;
         border-radius: 6px;
         margin: 10px 0;
         font-size: 14px;
+        color: #065f46;
     }
     
     /* Stats panel */
     .stats-panel {
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        background: linear-gradient(135deg, #f3f4f6 0%, #f9fafb 100%);
         padding: 15px;
         border-radius: 8px;
-        border: 1px solid #374151;
+        border: 1px solid #d1d5db;
+        color: #1f2937;
     }
     
     /* Dice roll result */
     .dice-roll-success {
-        background: linear-gradient(135deg, #065f46 0%, #034e3b 100%);
-        color: #86efac;
+        background: linear-gradient(135deg, #dcfce7 0%, #dcfce7 100%);
+        color: #15803d;
         padding: 12px;
         border-radius: 6px;
-        border: 1px solid #10b981;
+        border: 1px solid #86efac;
         margin: 10px 0;
     }
     
     .dice-roll-failure {
-        background: linear-gradient(135deg, #7c2d12 0%, #5a1e0a 100%);
-        color: #fb7185;
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        color: #991b1b;
         padding: 12px;
         border-radius: 6px;
-        border: 1px solid #f87171;
+        border: 1px solid #fca5a5;
         margin: 10px 0;
     }
     
@@ -107,10 +111,11 @@ st.markdown("""
     .title-section {
         text-align: center;
         padding: 20px;
-        background: linear-gradient(135deg, #1f3a5f 0%, #0a1f3f 100%);
+        background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
         border-radius: 12px;
         border: 2px solid #3b82f6;
         margin-bottom: 20px;
+        color: #1e40af;
     }
 </style>
 """, unsafe_allow_html=True)
