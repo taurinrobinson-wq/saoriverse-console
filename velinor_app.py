@@ -456,7 +456,11 @@ def render_sidebar():
 def start_new_game():
     """Initialize and start a new game."""
     try:
-        engine = VelinorEngine(player_name=st.session_state.player_name)
+        engine = VelinorEngine()
+        engine.create_session(
+            player_name=st.session_state.player_name,
+            multiplayer=st.session_state.is_multiplayer
+        )
         
         story_path = PROJECT_ROOT / "velinor" / "stories" / "sample_story.json"
         if not story_path.exists():
@@ -509,7 +513,8 @@ def render_save_load_menu():
                     save_path = PROJECT_ROOT / "velinor" / "saves" / selected_save
                     # Create orchestrator if needed
                     if not st.session_state.orchestrator:
-                        engine = VelinorEngine(player_name=st.session_state.player_name)
+                        engine = VelinorEngine()
+                        engine.create_session(player_name=st.session_state.player_name)
                         story_path = PROJECT_ROOT / "velinor" / "stories" / "sample_story.json"
                         st.session_state.orchestrator = VelinorTwineOrchestrator(
                             game_engine=engine,

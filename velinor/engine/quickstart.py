@@ -37,7 +37,8 @@ def initialize_game(
     
     # 1. Initialize game engine
     print("[*] Initializing game engine...")
-    game_engine = VelinorEngine(player_name=player_name)
+    game_engine = VelinorEngine()
+    game_engine.create_session(player_name=player_name)
     
     # 2. Initialize NPC dialogue system
     print("[*] Setting up NPC dialogue system...")
