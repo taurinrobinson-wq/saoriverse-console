@@ -21,6 +21,8 @@ from pathlib import Path
 import json
 from datetime import datetime
 import sys
+from PIL import Image
+import io
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
@@ -182,7 +184,77 @@ def display_background(background_name: str):
             st.image(img, use_column_width=True)
 
 
-def display_npc_character(npc_name: str):
+def composite_background_with_npc(background_name: str, npc_name: str):
+    """Composite NPC character on top of background image.
+    
+    Args:
+        background_name: Name of the background image
+        npc_name: Name of the NPC character
+    
+    Returns:
+        PIL Image with NPC composited on background, or None if either image not found
+    """
+    if not background_name or not npc_name:
+        return None
+    
+    # Load background
+    bg_map = {
+        'market_ruins': 'city_market',
+        'monuments': 'city_mountains',
+        'archive_ruins': 'forest_city',
+        'underground_ruins': 'swamp',
+        'bridge_ravine': 'pass',
+        'keeper_sanctuary': 'forest',
+    }
+    
+    bg_filename = bg_map.get(background_name, background_name)
+    bg_path = get_asset_path("backgrounds", bg_filename)
+    background = load_image_safe(bg_path)
+    
+    if not background:
+        return None
+    
+    # Load NPC
+    npc_map = {
+        'Keeper': 'velinor_eyesclosed',
+        'Saori': 'saori',
+        'Sanor': 'sanor',
+        'Irodora': 'irodora',
+        'Tala': 'tala',
+    }
+    
+    npc_filename = npc_map.get(npc_name, npc_name.lower())
+    npc_path = get_asset_path("npcs", npc_filename)
+    npc = load_image_safe(npc_path)
+    
+    if not npc:
+        return None
+    
+    # Convert to RGBA if needed for transparency support
+    if background.mode != 'RGBA':
+        background = background.convert('RGBA')
+    if npc.mode != 'RGBA':
+        npc = npc.convert('RGBA')
+    
+    # Scale NPC to fit on background
+    # NPC should be about 40% of background height, positioned lower-right
+    bg_height = background.height
+    npc_height = int(bg_height * 0.5)  # 50% of background height
+    npc_aspect = npc.width / npc.height
+    npc_width = int(npc_height * npc_aspect)
+    
+    # Resize NPC
+    npc_resized = npc.resize((npc_width, npc_height), Image.Resampling.LANCZOS)
+    
+    # Position NPC on background (right side, lower portion)
+    x_pos = background.width - npc_width - 20  # 20px from right edge
+    y_pos = background.height - npc_height - 10  # 10px from bottom
+    
+    # Composite the images
+    result = background.copy()
+    result.paste(npc_resized, (x_pos, y_pos), npc_resized)  # Use NPC alpha as mask
+    
+    return result.convert('RGB')  # Convert back to RGB for display
     """Display NPC character portrait."""
     if npc_name:
         # Map NPC names to character files
@@ -291,22 +363,28 @@ def render_game_screen():
     
     state = st.session_state.game_state
     
-    # Display background
+    # Display background with NPC composite if both available
     col_bg = st.columns(1)[0]
     with col_bg:
-        display_background(state.get('background_image'))
+        if state.get('background_image') and state.get('npc_name'):
+            # Try to composite NPC on background
+            composite_img = composite_background_with_npc(
+                state.get('background_image'),
+                state.get('npc_name')
+            )
+            if composite_img:
+                st.image(composite_img, use_column_width=True)
+            else:
+                # Fallback to separate display if composite fails
+                display_background(state.get('background_image'))
+        else:
+            # Just display background
+            display_background(state.get('background_image'))
     
     # Main content area
     col_main, col_side = st.columns([3, 1])
     
     with col_main:
-        # NPC Character
-        if state.get('npc_name'):
-            st.subheader(f"👤 {state['npc_name']}")
-            npc_img = display_npc_character(state['npc_name'])
-            if npc_img:
-                st.image(npc_img, width=200)
-        
         # Main dialogue
         if state.get('main_dialogue'):
             render_dialogue_bubble(
