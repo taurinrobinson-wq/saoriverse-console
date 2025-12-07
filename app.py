@@ -24,6 +24,12 @@ if sys.version_info >= (3, 13):
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 import streamlit as st
+import time
+
+# Add a marker file so health checks can detect startup
+_STARTUP_MARKER = Path(__file__).parent / ".streamlit_starting"
+if not _STARTUP_MARKER.exists():
+    _STARTUP_MARKER.touch()
 
 # Set page config first (MUST be before other streamlit calls)
 try:
