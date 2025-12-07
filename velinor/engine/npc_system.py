@@ -139,7 +139,6 @@ class NPCDialogueSystem:
                 caution="Tread carefully.",
                 warning="The path ahead is uncertain.",
                 risk_assessment="There are risks here.",
-                assessment="Think twice.",
                 assessment="Few return.",
                 probe="What's driving this?"
             )
@@ -199,7 +198,9 @@ class NPCDialogueSystem:
         elif dialogue_type == "affirmation":
             dialogue = self.generate_affirmation(npc_name, player_input)
         else:
-            dialogue = f"{self.npc_personalities.get(npc_name.lower(), 'NPC').name} awaits your next word."
+            npc_obj = self.npc_personalities.get(npc_name.lower())
+            npc_display_name = npc_obj.name if npc_obj else "NPC"
+            dialogue = f"{npc_display_name} awaits your next word."
         
         # Adapt for multiplayer if needed
         if group_size > 1:
