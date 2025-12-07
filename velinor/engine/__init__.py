@@ -29,6 +29,18 @@ from .twine_adapter import (
     DialogueChoice,
 )
 
+from .scene_manager import (
+    SceneModule,
+    SceneRenderer,
+    SceneBuilder,
+    SceneState,
+    SceneAssets,
+    DialogueOption,
+    get_scene_renderer,
+    get_current_scene,
+    set_current_scene,
+)
+
 from .orchestrator import VelinorTwineOrchestrator
 
 __all__ = [
