@@ -472,7 +472,15 @@ def process_choice(choice_index: int):
     player_id = st.session_state.player_ids[0] if st.session_state.player_ids else "player_1"
     
     try:
+        # Get the choice text from game state
+        choices = st.session_state.game_state.get('choices', [])
+        if choice_index < len(choices):
+            choice_text = choices[choice_index].get('text', '')
+        else:
+            choice_text = ''
+        
         new_state = orchestrator.process_player_action(
+            player_input=choice_text,
             choice_index=choice_index,
             player_id=player_id
         )
@@ -480,7 +488,8 @@ def process_choice(choice_index: int):
         st.session_state.game_log.append({
             'timestamp': datetime.now().isoformat(),
             'action': 'choice',
-            'choice_index': choice_index
+            'choice_index': choice_index,
+            'choice_text': choice_text
         })
         st.rerun()
     except Exception as e:
