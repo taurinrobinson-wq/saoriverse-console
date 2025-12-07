@@ -81,15 +81,45 @@ from .journal_center import (
 )
 
 # Audio (voice input/output)
-from .audio_ui import (
-    render_voice_mode_toggle,
-    render_audio_recorder,
-    render_audio_playback,
-    render_voice_chat_interface,
-    process_audio_input,
-    synthesize_response_audio,
-    initialize_voice_session,
-)
+try:
+    from .audio_ui import (
+        render_voice_mode_toggle,
+        render_audio_recorder,
+        render_audio_playback,
+        render_voice_chat_interface,
+        process_audio_input,
+        synthesize_response_audio,
+        initialize_voice_session,
+    )
+except (ImportError, OSError) as e:
+    # Audio libraries not available (e.g., PortAudio)
+    # Provide dummy functions that warn users
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.warning(f"Audio components disabled: {e}")
+    
+    def render_voice_mode_toggle():
+        import streamlit as st
+        st.warning("⚠️ Audio features not available in this environment")
+    
+    def render_audio_recorder():
+        return None
+    
+    def render_audio_playback(audio_data=None):
+        pass
+    
+    def render_voice_chat_interface():
+        import streamlit as st
+        st.info("💬 Voice chat requires audio libraries (not installed)")
+    
+    def process_audio_input(audio_data):
+        return None
+    
+    def synthesize_response_audio(text):
+        return None
+    
+    def initialize_voice_session():
+        pass
 
 __all__ = [
     # Session

@@ -41,7 +41,9 @@ except ImportError:
 try:
     import sounddevice as sd
     HAS_SOUNDDEVICE = True
-except ImportError:
+except (ImportError, OSError) as e:
+    # OSError raised when PortAudio library not found
+    logger.warning(f"sounddevice unavailable: {e}. Audio recording disabled.")
     HAS_SOUNDDEVICE = False
 
 
