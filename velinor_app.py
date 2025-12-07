@@ -174,7 +174,7 @@ def load_image_safe(path: str):
 
 
 def display_background(background_name: str):
-    """Display background image."""
+    """Display background image with height constraint for single-page fit."""
     if background_name:
         # Map background names to filenames
         bg_map = {
@@ -191,7 +191,8 @@ def display_background(background_name: str):
         
         img = load_image_safe(path)
         if img:
-            st.image(img, use_column_width=True)
+            # Display with height constraint to fit on one page
+            st.image(img, use_column_width=True, width=800)
 
 
 def composite_background_with_npc(background_name: str, npc_name: str):
@@ -383,7 +384,7 @@ def render_game_screen():
                 state.get('npc_name')
             )
             if composite_img:
-                st.image(composite_img, use_column_width=True)
+                st.image(composite_img, use_column_width=True, width=800)
             else:
                 # Fallback to separate display if composite fails
                 display_background(state.get('background_image'))
