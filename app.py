@@ -1,11 +1,24 @@
 """
 FirstPerson - Personal AI Companion
 Main Streamlit entry point
+
+Requires Python 3.11 or 3.12 (not 3.13+)
 """
 
 import sys
 import os
 from pathlib import Path
+
+# Verify Python version compatibility
+if sys.version_info >= (3, 13):
+    print(f"❌ ERROR: Python {sys.version_info.major}.{sys.version_info.minor} is not supported")
+    print("Please use Python 3.11 or 3.12")
+    print("")
+    print("To fix:")
+    print("  1. Deactivate current venv: deactivate")
+    print("  2. Use workspace venv: source /workspaces/saoriverse-console/.venv/bin/activate")
+    print("  3. Run: streamlit run app.py")
+    sys.exit(1)
 
 # Add src to path so imports work
 sys.path.insert(0, str(Path(__file__).parent / "src"))
