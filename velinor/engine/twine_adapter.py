@@ -226,7 +226,7 @@ class TwineGameSession:
         
         self.context = StoryContext(
             current_passage_id=start.pid,
-            variables={'player_name': self.game_engine.current_session.player.name}
+            variables={'player_name': self.game_engine.session.player.name}
         )
         self.context.mark_visited(start.pid)
         
@@ -285,11 +285,11 @@ class TwineGameSession:
         
         try:
             # Get player personality traits from game engine
-            player_session = self.game_engine.current_session
+            player_session = self.game_engine.session
             tone_modifiers = {
-                'player_count': len(player_session.players) if is_multiplayer else 1,
-                'player_courage': player_session.players[0].stats.courage if player_session.players else 50,
-                'player_empathy': player_session.players[0].stats.empathy if player_session.players else 50,
+                'player_count': len(player_session.other_players) + 1 if is_multiplayer else 1,
+                'player_courage': player_session.player.courage if player_session.player else 50,
+                'player_empathy': player_session.player.empathy if player_session.player else 50,
             }
             
             # Request dialogue variation from FirstPerson
@@ -345,14 +345,14 @@ class TwineGameSession:
     
     def _roll_skill_check(self, choice: DialogueChoice, player_id: Optional[str]) -> Dict[str, Any]:
         """Roll d20 + modifiers for skill check."""
-        player = self.game_engine.current_session.players[0] if self.game_engine.current_session.players else None
+        player = self.game_engine.session.player if self.game_engine.session else None
         
         # Map skill names to player stats
         skill_map = {
-            'courage': player.stats.courage if player else 0,
-            'wisdom': player.stats.wisdom if player else 0,
-            'empathy': player.stats.empathy if player else 0,
-            'resolve': player.stats.resolve if player else 0,
+            'courage': player.courage if player else 0,
+            'wisdom': player.wisdom if player else 0,
+            'empathy': player.empathy if player else 0,
+            'resolve': player.resolve if player else 0,
         }
         
         modifier = skill_map.get(choice.skill_type, 0)

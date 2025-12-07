@@ -249,13 +249,13 @@ class VelinorTwineOrchestrator:
     
     def _apply_stat_changes(self, changes: Dict[str, int], player_id: Optional[str]) -> None:
         """Apply stat changes to player."""
-        if not self.game_engine.current_session or not self.game_engine.current_session.players:
+        if not self.game_engine.session or not self.game_engine.session.player:
             return
         
-        player = self.game_engine.current_session.players[0]
+        player = self.game_engine.session.player
         for stat, delta in changes.items():
-            current = getattr(player.stats, stat, 0)
-            setattr(player.stats, stat, max(0, min(100, current + delta)))
+            current = getattr(player, stat, 0)
+            setattr(player, stat, max(0, min(100, current + delta)))
     
     def _generate_npc_dialogue(
         self,
@@ -313,23 +313,23 @@ class VelinorTwineOrchestrator:
             'is_multiplayer': story_state.get('is_multiplayer', False),
             'dice_roll': story_state.get('last_dice_roll'),
             'game_state': {
-                'current_location': getattr(self.game_engine.current_session, 'current_location', None),
+                'current_location': getattr(self.game_engine.session, 'current_location', None),
                 'player_stats': self._get_player_stats(),
             }
         }
     
     def _get_player_stats(self) -> Dict[str, int]:
         """Extract current player stats."""
-        if not self.game_engine.current_session or not self.game_engine.current_session.players:
+        if not self.game_engine.session or not self.game_engine.session.player:
             return {}
         
-        player = self.game_engine.current_session.players[0]
+        player = self.game_engine.session.player
         return {
-            'courage': player.stats.courage,
-            'wisdom': player.stats.wisdom,
-            'empathy': player.stats.empathy,
-            'resolve': player.stats.resolve,
-            'resonance': player.stats.resonance,
+            'courage': player.courage,
+            'wisdom': player.wisdom,
+            'empathy': player.empathy,
+            'resolve': player.resolve,
+            'resonance': player.resonance,
         }
     
     def _log_event(self, event_type: str, data: Any) -> None:
