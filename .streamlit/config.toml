@@ -6,10 +6,12 @@ toolbarMode = "viewer"
 level = "info"
 
 [server]
-headless = false
+headless = true
 port = 8501
-runOnSave = true
+address = "0.0.0.0"
+runOnSave = false
 enableXsrfProtection = false
+maxUploadSize = 200
 
 [theme]
 primaryColor = "#ff6b9d"
@@ -17,3 +19,6 @@ backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f0f2f6"
 textColor = "#000000"
 font = "sans serif"
+
+[browser]
+gatherUsageStats = false
