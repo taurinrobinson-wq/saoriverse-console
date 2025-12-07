@@ -140,9 +140,11 @@ class VelinorTwineOrchestrator:
             # In multiplayer, might wait for all players or process individually
             # For now, process immediately but tag with player
         
-        # Generate FirstPerson-enhanced dialogue summary if typing
+        # Generate FirstPerson-enhanced emotional analysis if typing
+        player_analysis = None
         if player_input and self.first_person:
-            player_summary = self._summarize_player_intent(player_input, player_id)
+            player_analysis = self._summarize_player_intent(player_input, player_id)
+            player_summary = player_analysis.get('original_input', player_input) if isinstance(player_analysis, dict) else player_input
         else:
             player_summary = player_input
         
@@ -153,42 +155,68 @@ class VelinorTwineOrchestrator:
             player_id=player_id
         )
         
+        # Attach player analysis to state for downstream use
+        if player_analysis:
+            next_state['player_analysis'] = player_analysis
+        next_state['player_input'] = player_input
+        
         # Apply game engine updates (dice rolls, stat changes, etc.)
         updated_state = self._apply_game_mechanics(next_state, player_id)
         
-        # Generate NPC response with FirstPerson if available
-        if self.npc_system and updated_state.get('npc_name'):
+        # Generate NPC response with FirstPerson emotional analysis if available
+        if updated_state.get('npc_name'):
             updated_state['npc_dialogue'] = self._generate_npc_dialogue(
                 npc_name=updated_state['npc_name'],
                 context=updated_state,
                 is_multiplayer=updated_state.get('is_multiplayer', False),
-                player_ids=self.multiplayer_state.player_ids if self.multiplayer_state else [player_id]
+                player_ids=self.multiplayer_state.player_ids if self.multiplayer_state else [player_id] if player_id else []
             )
         
         # Log the interaction
         self._log_event('player_action', {
             'player_id': player_id,
             'input': player_input,
-            'passage': updated_state.get('passage_name')
+            'passage': updated_state.get('passage_name'),
+            'emotional_tone': player_analysis.get('emotional_tone') if isinstance(player_analysis, dict) else None
         })
         
         return self._format_ui_state(updated_state)
     
     def _summarize_player_intent(self, player_input: str, player_id: Optional[str]) -> str:
         """
-        Use FirstPerson to summarize player's intent from typed input.
-        Makes vague responses more specific for story routing.
+        Use FirstPerson to analyze and contextualize player's intent.
+        Extracts emotional tone, themes, and context for nuanced NPC responses.
         """
         if not self.first_person:
             return player_input
         
         try:
-            # Call FirstPerson's intent summarization
-            # This would integrate with your FirstPerson system
-            summary = f"[Intent: {player_input[:50]}...]"
+            # Run FirstPerson analysis on player input
+            analysis = self.first_person.handle_conversation_turn(
+                user_input=player_input,
+                glyph=None  # Can pass glyph data if available
+            )
+            
+            # Extract emotional tone and theme for story routing
+            affect = analysis.get('affect_analysis', {})
+            theme = analysis.get('detected_theme', 'general')
+            tone = affect.get('tone', 'neutral')
+            
+            # Create contextualized summary that preserves original intent
+            # but adds emotional/thematic metadata for NPC responses
+            summary = {
+                'original_input': player_input,
+                'emotional_tone': tone,
+                'detected_theme': theme,
+                'valence': affect.get('valence', 0),
+                'intensity': affect.get('intensity', 0.5),
+                'memory_context': analysis.get('memory_context', {})
+            }
+            
             return summary
-        except Exception:
-            return player_input
+        except Exception as e:
+            # Graceful fallback if FirstPerson unavailable
+            return {'original_input': player_input, 'error': str(e)}
     
     def _apply_game_mechanics(self, story_state: Dict[str, Any], player_id: Optional[str]) -> Dict[str, Any]:
         """
@@ -266,34 +294,142 @@ class VelinorTwineOrchestrator:
     ) -> str:
         """
         Generate dynamic NPC dialogue using FirstPerson orchestrator.
-        Adapts tone based on player choices, personality, and group composition.
+        Adapts tone, empathy, and responsiveness based on:
+        - Player's emotional state (via FirstPerson analysis)
+        - Conversation history and recurring themes
+        - NPC personality and story context
+        - Group dynamics (if multiplayer)
         """
-        if not self.npc_system or not self.first_person:
-            return f"{npc_name}: [dialogue pending]"
+        if not self.first_person:
+            # Fallback if FirstPerson not available
+            if self.npc_system:
+                npc = self.npc_system.get_npc(npc_name)
+                if npc:
+                    return f"{npc_name}: I'm listening. Tell me more."
+            return f"{npc_name}: [awaiting your words]"
         
         try:
-            # Get NPC instance
-            npc = self.npc_system.get_npc(npc_name)
-            if not npc:
-                return f"{npc_name}: I'm not sure how to respond to that."
+            # Get player's emotional analysis from FirstPerson
+            player_context = context.get('player_analysis', {})
+            original_input = context.get('player_input', '')
             
-            # Build context for FirstPerson
-            dialogue_context = {
-                'npc_personality': npc.personality,
-                'player_count': len(player_ids),
-                'player_choices': context.get('last_player_action'),
-                'story_progression': context.get('passage_name'),
-                'dice_roll': context.get('last_dice_roll'),
-            }
+            if isinstance(player_context, dict) and 'emotional_tone' in player_context:
+                emotional_tone = player_context['emotional_tone']
+                theme = player_context['detected_theme']
+                valence = player_context.get('valence', 0)
+                intensity = player_context.get('intensity', 0.5)
+                memory = player_context.get('memory_context', {})
+            else:
+                # Fallback analysis
+                emotional_tone = 'neutral'
+                theme = 'general'
+                valence = 0
+                intensity = 0.5
+                memory = {}
             
-            # Generate dialogue via FirstPerson
-            # This would call your FirstPerson system to generate a response
-            dialogue = f"{npc_name}: I hear what you're saying..."
+            # Get NPC personality if available
+            npc_name_clean = npc_name.lower()
+            npc_personality = None
+            if self.npc_system:
+                npc = self.npc_system.get_npc(npc_name_clean)
+                if npc:
+                    npc_personality = npc.personality
             
-            return dialogue
+            # Build dialogue response using FirstPerson with emotional awareness
+            dialogue_base = self._generate_emotionally_aware_response(
+                npc_name=npc_name,
+                player_input=original_input,
+                emotional_tone=emotional_tone,
+                theme=theme,
+                valence=valence,
+                intensity=intensity,
+                memory=memory,
+                npc_personality=npc_personality,
+                is_multiplayer=is_multiplayer
+            )
+            
+            return dialogue_base
         
         except Exception as e:
-            return f"{npc_name}: [error generating dialogue: {str(e)}]"
+            return f"{npc_name}: [I'm here, but having trouble finding words right now]"
+    
+    def _generate_emotionally_aware_response(
+        self,
+        npc_name: str,
+        player_input: str,
+        emotional_tone: str,
+        theme: str,
+        valence: float,
+        intensity: float,
+        memory: Dict,
+        npc_personality: Optional[Any],
+        is_multiplayer: bool
+    ) -> str:
+        """
+        Generate nuanced NPC response using FirstPerson's emotional analysis.
+        
+        Response adapts based on:
+        - Player's emotional valence (positive/negative)
+        - Intensity of feeling
+        - Detected theme (what they're talking about)
+        - Whether this theme is recurring
+        - Group dynamics if multiplayer
+        """
+        
+        # Base response openings adjusted by emotional state
+        response_openings = {
+            'uplifting': [
+                f"{npc_name}: I feel that brightness too.",
+                f"{npc_name}: That's a light worth holding.",
+            ],
+            'heavy': [
+                f"{npc_name}: I hear the weight in that.",
+                f"{npc_name}: The gravity of it—I feel it too.",
+            ],
+            'reflective': [
+                f"{npc_name}: There's something to sit with there.",
+                f"{npc_name}: That deserves thought.",
+            ],
+            'curious': [
+                f"{npc_name}: Tell me more about that.",
+                f"{npc_name}: I'm curious where that's leading.",
+            ]
+        }
+        
+        # Select opening based on tone
+        opening_options = response_openings.get(emotional_tone, response_openings['curious'])
+        opening = opening_options[0]  # Could randomize
+        
+        # Middle section acknowledges specific themes
+        theme_acknowledgments = {
+            'grief': "Loss shapes us in ways words sometimes can't reach.",
+            'joy': "Joy that's felt this deeply—that matters.",
+            'general': "What you're feeling is real.",
+        }
+        
+        middle = theme_acknowledgments.get(theme, "What you're naming has weight.")
+        
+        # Add memory awareness if conversation history exists
+        if memory.get('has_context') and memory.get('num_turns', 0) > 1:
+            recurring = memory.get('recurring_themes', [])
+            if recurring:
+                middle += f" And I'm noticing {recurring[0]} keeps coming back to you."
+        
+        # Closing invites deeper exploration, adjusts for intensity
+        if intensity > 0.7:
+            closing = "What needs to be said about it?"
+        elif intensity < 0.3:
+            closing = "What's sitting underneath that?"
+        else:
+            closing = "What would help you carry this?"
+        
+        # Build multiplayer awareness if needed
+        response = f"{opening} {middle} {closing}"
+        
+        if is_multiplayer and len(self.multiplayer_state.active_players) > 1:
+            response += "\n(The others are listening too.)"
+        
+        return response
     
     def _format_ui_state(self, story_state: Dict[str, Any]) -> Dict[str, Any]:
         """
