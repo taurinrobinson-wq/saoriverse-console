@@ -456,14 +456,14 @@ def render_game_screen():
                 st.warning("Please enter a response or choose an option.")
     
     with col_side:
-        # Stats panel
+        # Stats panel in collapsible expander
         if state.get('game_state', {}).get('player_stats'):
-            st.markdown("### 📊 Stats")
-            render_stats(state['game_state']['player_stats'])
+            with st.expander("📊 Player Stats", expanded=True):
+                render_stats(state['game_state']['player_stats'])
         
-        # Passage info
-        st.markdown("### 📍 Location")
-        st.text(state.get('passage_name', 'Unknown'))
+        # Location info in collapsible expander
+        with st.expander("📍 Location", expanded=True):
+            st.text(state.get('passage_name', 'Unknown'))
 
 
 def process_choice(choice_index: int):
