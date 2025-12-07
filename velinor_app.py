@@ -392,7 +392,7 @@ def render_game_screen():
             display_background(state.get('background_image'))
     
     # Main content area
-    col_main, col_side = st.columns([3, 1])
+    col_main = st.columns(1)[0]
     
     with col_main:
         # Main dialogue
@@ -454,16 +454,6 @@ def render_game_screen():
                 process_free_text(player_input)
             else:
                 st.warning("Please enter a response or choose an option.")
-    
-    with col_side:
-        # Stats panel in collapsible expander
-        if state.get('game_state', {}).get('player_stats'):
-            with st.expander("📊 Player Stats", expanded=True):
-                render_stats(state['game_state']['player_stats'])
-        
-        # Location info in collapsible expander
-        with st.expander("📍 Location", expanded=True):
-            st.text(state.get('passage_name', 'Unknown'))
 
 
 def process_choice(choice_index: int):
@@ -553,6 +543,19 @@ def render_sidebar():
     
     elif menu_choice == "About":
         render_about_menu()
+    
+    # Stats and location in sidebar expanders
+    st.sidebar.divider()
+    state = st.session_state.game_state
+    if state:
+        # Stats panel in collapsible expander
+        if state.get('game_state', {}).get('player_stats'):
+            with st.sidebar.expander("📊 Player Stats", expanded=True):
+                render_stats(state['game_state']['player_stats'])
+        
+        # Location info in collapsible expander
+        with st.sidebar.expander("📍 Location", expanded=True):
+            st.text(state.get('passage_name', 'Unknown'))
 
 
 def start_new_game():
