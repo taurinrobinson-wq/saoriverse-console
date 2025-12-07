@@ -27,8 +27,10 @@ import io
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
+from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
 # ============================================================================
 # PAGE CONFIGURATION
@@ -40,6 +42,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Initialize FirstPerson orchestrator for emotionally-aware responses
+if 'firstperson_orchestrator' not in st.session_state:
+    st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(
+        user_id='velinor_player',
+        conversation_id='velinor_game'
+    )
+    st.session_state.firstperson_orchestrator.initialize_session()
 
 # Custom CSS - Light Theme
 st.markdown("""
@@ -550,10 +560,20 @@ def start_new_game():
             st.error(f"Story file not found: {story_path}")
             return
         
+        # Get or reinitialize FirstPerson for emotionally-aware NPC responses
+        firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
+        if not firstperson_orchestrator:
+            firstperson_orchestrator = FirstPersonOrchestrator(
+                user_id=st.session_state.player_name,
+                conversation_id='velinor_game'
+            )
+            firstperson_orchestrator.initialize_session()
+            st.session_state.firstperson_orchestrator = firstperson_orchestrator
+        
         orchestrator = VelinorTwineOrchestrator(
             game_engine=engine,
             story_path=str(story_path),
-            first_person_module=None,  # Optional: connect FirstPerson here
+            first_person_module=firstperson_orchestrator,  # Connected: FirstPerson for nuanced responses
             npc_system=None  # Optional: connect NPC system here
         )
         
