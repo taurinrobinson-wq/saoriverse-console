@@ -68,6 +68,7 @@ class TwineStoryLoader:
     
     def __init__(self):
         self.passages: Dict[str, StoryPassage] = {}
+        self.passages_by_name: Dict[str, str] = {}  # Maps passage name to pid
         self.story_data: Optional[Dict[str, Any]] = None
     
     def load_from_json(self, json_path: str) -> Dict[str, StoryPassage]:
@@ -80,9 +81,10 @@ class TwineStoryLoader:
             if 'passages' in self.story_data:
                 for passage_data in self.story_data['passages']:
                     pid = str(passage_data.get('pid', ''))
+                    name = passage_data.get('name', 'Unnamed')
                     passage = StoryPassage(
                         pid=pid,
-                        name=passage_data.get('name', 'Unnamed'),
+                        name=name,
                         text=passage_data.get('text', ''),
                         tags=passage_data.get('tags', []).split() if isinstance(
                             passage_data.get('tags', ''), str) else passage_data.get('tags', []),
@@ -90,6 +92,8 @@ class TwineStoryLoader:
                         size=tuple(passage_data.get('size', (100, 100)))
                     )
                     self.passages[pid] = passage
+                    # Also store by name for easier lookup
+                    self.passages_by_name[name] = pid
             
             return self.passages
         
@@ -99,8 +103,23 @@ class TwineStoryLoader:
             raise ValueError(f"Invalid JSON in story file: {json_path}")
     
     def get_passage(self, pid: str) -> Optional[StoryPassage]:
-        """Retrieve a passage by ID."""
-        return self.passages.get(pid)
+        """Retrieve a passage by ID or name.
+        
+        Supports both:
+        - Direct PID lookup: "1", "2", etc.
+        - Name lookup: "keeper_dialogue_1", "market_entry", etc.
+        """
+        # Try direct pid lookup first
+        if pid in self.passages:
+            return self.passages[pid]
+        
+        # Try name-based lookup
+        if pid in self.passages_by_name:
+            actual_pid = self.passages_by_name[pid]
+            return self.passages[actual_pid]
+        
+        # Not found
+        return None
     
     def get_start_passage(self) -> Optional[StoryPassage]:
         """Get the story's starting passage."""
