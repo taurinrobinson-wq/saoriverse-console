@@ -44,12 +44,13 @@ st.set_page_config(
 )
 
 # Initialize FirstPerson orchestrator for emotionally-aware responses
-if 'firstperson_orchestrator' not in st.session_state:
-    st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(
-        user_id='velinor_player',
-        conversation_id='velinor_game'
-    )
-    st.session_state.firstperson_orchestrator.initialize_session()
+# NOTE: Commented out - Velinor uses its own orchestrator
+# if 'firstperson_orchestrator' not in st.session_state:
+#     st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(
+#         user_id='velinor_player',
+#         conversation_id='velinor_game'
+#     )
+#     st.session_state.firstperson_orchestrator.initialize_session()
 
 # Custom CSS - Light Theme
 st.markdown("""
@@ -830,17 +831,19 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome splash screen - just image with overlay button
-        splash_img_path = str(PROJECT_ROOT / "velinor" / "npcs" / "photo-output.PNG")
+        # Welcome splash screen with button overlay at bottom
+        splash_img_path = str(PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_eyes_closed.png")
         splash_img = load_image_safe(splash_img_path)
         
         if splash_img:
+            # Create a container for the image
             st.image(splash_img, use_column_width=True)
         
-        # Centered button overlay at bottom
-        col1, col2, col3 = st.columns([1, 1, 1])
+        # Button positioned at bottom (centered)
+        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("Start New Game", use_container_width=True, key="welcome_start"):
+            if st.button("Start New Game", use_container_width=True, key="welcome_start", help="Begin your adventure"):
                 start_new_game()
 
 
