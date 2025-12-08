@@ -299,6 +299,142 @@ def render_dialogue_bubble(speaker: str, text: str, is_npc: bool = False):
                    unsafe_allow_html=True)
 
 
+def render_background_with_overlay(background_name: str, npc_path: str, narration: str, choices: list):
+    """Render background image with NPC overlay, narration, and choice buttons.
+    
+    Args:
+        background_name: Name of the background image file
+        npc_path: Full path to NPC character image
+        narration: Italicized narration text
+        choices: List of choice dictionaries with 'text' keys
+    """
+    # Load background image
+    if background_name:
+        bg_map = {
+            'market_ruins': 'city_market(16-9)',
+            'monuments': 'city_mountains',
+            'archive_ruins': 'forest_city',
+            'underground_ruins': 'swamp',
+            'bridge_ravine': 'pass',
+            'keeper_sanctuary': 'forest',
+        }
+        filename = bg_map.get(background_name, background_name)
+        path = get_asset_path("backgrounds", filename)
+        bg_img = load_image_safe(path)
+    else:
+        bg_img = None
+    
+    # Load NPC image
+    npc_img = None
+    if npc_path:
+        npc_img = load_image_safe(npc_path)
+    
+    # Create composite image with background and NPC
+    if bg_img:
+        if npc_img:
+            # Composite NPC onto background (center-bottom)
+            composite = bg_img.copy()
+            if composite.mode != 'RGBA':
+                composite = composite.convert('RGBA')
+            if npc_img.mode != 'RGBA':
+                npc_img = npc_img.convert('RGBA')
+            
+            # Scale NPC to fit
+            bg_height = composite.height
+            npc_height = int(bg_height * 0.6)
+            npc_aspect = npc_img.width / npc_img.height
+            npc_width = int(npc_height * npc_aspect)
+            npc_resized = npc_img.resize((npc_width, npc_height), Image.Resampling.LANCZOS)
+            
+            # Center horizontally, position at bottom
+            x_pos = (composite.width - npc_width) // 2
+            y_pos = composite.height - npc_height - 10
+            
+            composite.paste(npc_resized, (x_pos, y_pos), npc_resized)
+            display_img = composite.convert('RGB')
+        else:
+            display_img = bg_img
+        
+        # Display the composite image
+        st.image(display_img, use_column_width=True)
+    
+    # Narration text (light gray, italicized)
+    st.markdown(
+        f"""<div style='text-align: center; color: #999999; font-style: italic; margin: 20px 0; font-size: 16px;'>
+        {narration}
+        </div>""",
+        unsafe_allow_html=True
+    )
+    
+    # Choice buttons in 2x2 grid
+    if choices:
+        st.markdown("<div style='margin: 30px 0;'><h4 style='color: #666666;'>What do you do?</h4></div>", unsafe_allow_html=True)
+        
+        # Create 2x2 grid (4 buttons)
+        cols = st.columns(2)
+        for i, choice in enumerate(choices[:4]):
+            col_idx = i % 2
+            with cols[col_idx]:
+                btn_text = choice.get('text', f'Option {i+1}')
+                if st.button(
+                    btn_text,
+                    key=f"choice_{i}",
+                    use_container_width=True,
+                    help=choice.get('description', '')
+                ):
+                    # Process choice
+                    orchestrator = st.session_state.get('orchestrator')
+                    if orchestrator:
+                        player_id = st.session_state.get('player_ids', ['player_1'])[0]
+                        try:
+                            new_state = orchestrator.process_player_action(
+                                player_input=btn_text,
+                                choice_index=i,
+                                player_id=player_id
+                            )
+                            st.session_state.game_state = new_state
+                            st.session_state.game_log.append({
+                                'timestamp': datetime.now().isoformat(),
+                                'action': 'choice',
+                                'choice_index': i,
+                                'choice_text': btn_text
+                            })
+                            st.rerun()
+                        except Exception as e:
+                            st.error(f"Error processing choice: {e}")
+    
+    # Free-text input
+    st.markdown("<div style='margin-top: 30px;'><h4 style='color: #666666;'>Or type your response:</h4></div>", unsafe_allow_html=True)
+    player_input = st.text_input(
+        "Your action:",
+        key="player_input_overlay",
+        placeholder="Type what you'd like to do...",
+        label_visibility="collapsed"
+    )
+    
+    if st.button("Submit Response", use_container_width=True):
+        if player_input:
+            orchestrator = st.session_state.get('orchestrator')
+            if orchestrator:
+                player_id = st.session_state.get('player_ids', ['player_1'])[0]
+                try:
+                    new_state = orchestrator.process_player_action(
+                        player_input=player_input,
+                        player_id=player_id
+                    )
+                    st.session_state.game_state = new_state
+                    st.session_state.game_log.append({
+                        'timestamp': datetime.now().isoformat(),
+                        'action': 'free_text',
+                        'text': player_input
+                    })
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Error processing input: {e}")
+        else:
+            st.warning("Please enter a response or choose an option.")
+
+
 def render_stats(stats: dict):
     """Render player stats panel."""
     st.markdown("<div class='stats-panel'>", unsafe_allow_html=True)
@@ -761,6 +897,30 @@ def main():
             
             if st.button("🚀 Start New Game", use_container_width=True, key="welcome_start"):
                 start_new_game()
+            
+            # Test overlay button
+            if st.button("🧪 Test Overlay Scene", use_container_width=True, key="test_overlay"):
+                st.session_state.show_test_overlay = True
+        
+        # Test overlay scene
+        if st.session_state.get('show_test_overlay'):
+            st.divider()
+            st.markdown("### 🧪 Testing Button Overlay")
+            
+            npc_path = str(PROJECT_ROOT / "velinor" / "npcs" / "Ravi_Nima.png")
+            choices = [
+                {'text': 'Approach the couple', 'description': 'Stride forward with purpose'},
+                {'text': 'Shield the baby', 'description': 'Protective instinct'},
+                {'text': 'Explore the stalls', 'description': 'Gather information'},
+                {'text': 'Keep your distance (Wisdom, DC 11)', 'description': 'Cautious approach'},
+            ]
+            
+            render_background_with_overlay(
+                background_name='market_ruins',
+                npc_path=npc_path,
+                narration="They're staring at me. What should I do?",
+                choices=choices
+            )
         
         with col2:
             title_img_path = PROJECT_ROOT / "velinor" / "velinor_title_transparent.png"
