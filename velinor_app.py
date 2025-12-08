@@ -178,7 +178,7 @@ def display_background(background_name: str):
     if background_name:
         # Map background names to filenames
         bg_map = {
-            'market_ruins': 'city_market',
+            'market_ruins': 'city_market(16-9)',
             'monuments': 'city_mountains',
             'archive_ruins': 'forest_city',
             'underground_ruins': 'swamp',
