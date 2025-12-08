@@ -339,9 +339,9 @@ def render_background_with_overlay(background_name: str, npc_path: str, narratio
             if npc_img.mode != 'RGBA':
                 npc_img = npc_img.convert('RGBA')
             
-            # Scale NPC to fit
+            # Scale NPC to fit (50% of background height, reduced by 10%)
             bg_height = composite.height
-            npc_height = int(bg_height * 0.6)
+            npc_height = int(bg_height * 0.54)  # 0.6 * 0.9 = 0.54
             npc_aspect = npc_img.width / npc_img.height
             npc_width = int(npc_height * npc_aspect)
             npc_resized = npc_img.resize((npc_width, npc_height), Image.Resampling.LANCZOS)
@@ -503,94 +503,60 @@ def list_saves():
 # ============================================================================
 
 def render_game_screen():
-    """Render main game play screen."""
+    """Render main game play screen with background overlay."""
     if not st.session_state.orchestrator or not st.session_state.game_state:
         st.error("Game not initialized. Please start a new game.")
         return
     
     state = st.session_state.game_state
     
-    # Display background with NPC composite if both available
-    col_bg = st.columns(1)[0]
-    with col_bg:
-        if state.get('background_image') and state.get('npc_name'):
-            # Try to composite NPC on background
-            composite_img = composite_background_with_npc(
-                state.get('background_image'),
-                state.get('npc_name')
-            )
-            if composite_img:
-                st.image(composite_img, use_column_width=True, width=800)
-            else:
-                # Fallback to separate display if composite fails
-                display_background(state.get('background_image'))
-        else:
-            # Just display background
-            display_background(state.get('background_image'))
+    # Build the narration/dialogue for display
+    narration_parts = []
+    if state.get('main_dialogue'):
+        narration_parts.append(state['main_dialogue'])
+    if state.get('npc_dialogue'):
+        narration_parts.append(state['npc_dialogue'])
+    narration = " ".join(narration_parts) if narration_parts else "What will you do?"
     
-    # Main content area
-    col_main = st.columns(1)[0]
+    # Get NPC image path if NPC exists
+    npc_path = None
+    if state.get('npc_name'):
+        npc_map = {
+            'Keeper': 'velinor_eyesclosed',
+            'Saori': 'saori',
+            'Sanor': 'sanor',
+            'Irodora': 'irodora',
+            'Tala': 'tala',
+            'Ravi': 'Ravi_Nima',
+        }
+        npc_filename = npc_map.get(state.get('npc_name'), state.get('npc_name').lower())
+        npc_path = str(PROJECT_ROOT / "velinor" / "npcs" / f"{npc_filename}.png")
     
-    with col_main:
-        # Main dialogue
-        if state.get('main_dialogue'):
-            render_dialogue_bubble(
-                speaker=None,
-                text=state['main_dialogue'],
-                is_npc=False
-            )
-        
-        # NPC response (if generated)
-        if state.get('npc_dialogue'):
-            render_dialogue_bubble(
-                speaker=state.get('npc_name', 'NPC'),
-                text=state['npc_dialogue'],
-                is_npc=True
-            )
-        
-        # Clarifying question
-        if state.get('has_clarifying_question') and state.get('clarifying_question'):
-            st.markdown(
-                f"<div class='clarifying-question'>💭 {state['clarifying_question']}</div>",
-                unsafe_allow_html=True
-            )
-        
-        # Dice roll result
-        if state.get('dice_roll'):
-            render_dice_roll(state['dice_roll'])
-        
-        st.divider()
-        
-        # Player choices
-        choices = state.get('choices', [])
-        if choices:
-            st.markdown("### Your Options:")
-            
-            # Display as buttons
-            choice_cols = st.columns(len(choices)) if len(choices) <= 3 else None
-            
-            for i, choice in enumerate(choices):
-                if choice_cols:
-                    with choice_cols[i]:
-                        if st.button(choice['text'], key=f"choice_{i}", use_container_width=True):
-                            process_choice(i)
-                else:
-                    if st.button(choice['text'], key=f"choice_{i}", use_container_width=True):
-                        process_choice(i)
-        
-        # Free-text input (optional)
-        st.markdown("### Or type your response:")
-        player_input = st.text_input(
-            "Your response:",
-            key="player_input",
-            placeholder="Type what you'd like to do..."
+    # Get choices
+    choices = state.get('choices', [])
+    
+    # Use the overlay component
+    render_background_with_overlay(
+        background_name=state.get('background_image', ''),
+        npc_path=npc_path,
+        narration=narration,
+        choices=choices
+    )
+    
+    # Additional info sections below overlay
+    if state.get('has_clarifying_question') and state.get('clarifying_question'):
+        st.markdown(
+            f"<div class='clarifying-question'>💭 {state['clarifying_question']}</div>",
+            unsafe_allow_html=True
         )
-        
-        if st.button("Submit Response", use_container_width=True):
-            if player_input:
-                process_free_text(player_input)
-            else:
-                st.warning("Please enter a response or choose an option.")
+    
+    if state.get('dice_roll'):
+        render_dice_roll(state['dice_roll'])
+    
+    # Stats panel
+    if state.get('stats'):
+        st.divider()
+        render_stats(state['stats'])
 
 
 def process_choice(choice_index: int):
@@ -857,14 +823,6 @@ def render_about_menu():
 def main():
     """Main application entry point."""
     
-    # Title section
-    st.markdown("""
-    <div class='title-section'>
-        <h1>🎮 Velinor: Remnants of the Tone</h1>
-        <p>A Living Narrative Adventure</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
     # Sidebar
     render_sidebar()
     
@@ -872,55 +830,18 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome screen
-        col1, col2 = st.columns([2, 1])
+        # Welcome splash screen - just image with overlay button
+        splash_img_path = str(PROJECT_ROOT / "velinor" / "npcs" / "photo-output.PNG")
+        splash_img = load_image_safe(splash_img_path)
         
-        with col1:
-            st.markdown("""
-            # Welcome to Velinor
-            
-            You stand at the threshold of a shattered civilization.
-            
-            The city of Saonyx lies in ruins, reclaimed by nature and time.
-            But within these remnants pulses something ancient: **the Tone**.
-            
-            A faint resonance, a memory of collective emotion still waiting to be heard.
-            
-            Your choices will echo through the ruins.
-            Your courage, wisdom, empathy, and resolve will be tested.
-            And somewhere in the glyphs that remain, the truth of what was lost waits for you.
-            
-            ---
-            
-            **Ready to begin?**
-            """)
-            
-            if st.button("🚀 Start New Game", use_container_width=True, key="welcome_start"):
+        if splash_img:
+            st.image(splash_img, use_column_width=True)
+        
+        # Centered button overlay at bottom
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            if st.button("Start New Game", use_container_width=True, key="welcome_start"):
                 start_new_game()
-            
-            # Test overlay button
-            if st.button("🧪 Test Overlay Scene", use_container_width=True, key="test_overlay"):
-                st.session_state.show_test_overlay = True
-        
-        # Test overlay scene
-        if st.session_state.get('show_test_overlay'):
-            st.divider()
-            st.markdown("### 🧪 Testing Button Overlay")
-            
-            npc_path = str(PROJECT_ROOT / "velinor" / "npcs" / "Ravi_Nima.png")
-            choices = [
-                {'text': 'Approach the couple', 'description': 'Stride forward with purpose'},
-                {'text': 'Shield the baby', 'description': 'Protective instinct'},
-                {'text': 'Explore the stalls', 'description': 'Gather information'},
-                {'text': 'Keep your distance (Wisdom, DC 11)', 'description': 'Cautious approach'},
-            ]
-            
-            render_background_with_overlay(
-                background_name='market_ruins',
-                npc_path=npc_path,
-                narration="They're staring at me. What should I do?",
-                choices=choices
-            )
         
         with col2:
             title_img_path = PROJECT_ROOT / "velinor" / "velinor_title_transparent.png"
