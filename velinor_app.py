@@ -842,12 +842,6 @@ def main():
         with col2:
             if st.button("Start New Game", use_container_width=True, key="welcome_start"):
                 start_new_game()
-        
-        with col2:
-            title_img_path = PROJECT_ROOT / "velinor" / "velinor_title_transparent.png"
-            title_img = load_image_safe(str(title_img_path))
-            if title_img:
-                st.image(title_img, use_column_width=True)
 
 
 if __name__ == "__main__":
