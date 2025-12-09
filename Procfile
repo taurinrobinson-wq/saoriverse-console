@@ -1,1 +1,2 @@
-web: python velinor_api.py
+web: cd velinor-web && npm start
+api: python velinor_api.py
