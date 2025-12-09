@@ -17,8 +17,8 @@ RUN npm run build
 FROM node:20-alpine
 WORKDIR /app
 
-# Install Python and essential build tools
-RUN apk add --no-cache python3 py3-pip curl
+# Install Python and curl
+RUN apk add --no-cache python3 py3-pip curl bash
 
 # Copy Next.js build
 COPY --from=frontend-builder /app/velinor-web/.next ./velinor-web/.next
@@ -37,28 +37,11 @@ COPY velinor/ ./velinor/
 
 EXPOSE 3000 8000
 
-# Create startup script
-RUN cat > /app/start.sh << 'EOF'
-#!/bin/sh
-set -e
-# Start FastAPI in background
-echo "Starting FastAPI backend on port 8000..."
-python3 velinor_api.py &
-API_PID=$!
-sleep 2
-
-# Start Next.js in foreground
-echo "Starting Next.js frontend on port 3000..."
-cd /app/velinor-web
-npm start
-EOF
-RUN chmod +x /app/start.sh
-
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
     CMD curl -f http://localhost:3000 || exit 1
 
-# Run startup script
-CMD ["/app/start.sh"]
+# Start both services
+CMD ["sh", "-c", "python3 velinor_api.py & cd /app/velinor-web && npm start"]
 
 
