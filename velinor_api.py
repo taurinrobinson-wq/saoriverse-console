@@ -105,13 +105,27 @@ class ActionResponse(BaseModel):
 # API ENDPOINTS
 # ============================================================================
 
-@app.get("/")
-def root():
+@app.get("/health")
+def health_check():
     """Health check endpoint."""
     return {
         "status": "ok",
         "service": "Velinor Game API",
         "version": "1.0.0"
+    }
+
+@app.get("/")
+def root():
+    """Serve the Next.js frontend at root."""
+    frontend_file = Path(__file__).parent / "velinor-web" / ".next" / "server" / "app" / "page.html"
+    if frontend_file.exists():
+        return FileResponse(frontend_file)
+    # Fallback to index
+    return {
+        "status": "ok",
+        "service": "Velinor Game API",
+        "version": "1.0.0",
+        "message": "Frontend files not found in build"
     }
 
 

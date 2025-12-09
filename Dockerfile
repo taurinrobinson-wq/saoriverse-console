@@ -9,35 +9,35 @@ COPY velinor-web/public ./public
 COPY velinor-web/*.* ./
 RUN npm run build
 
-# Stage 2: Runtime image with Python backend
-FROM python:3.12-slim
+# Stage 2: Runtime image with both Next.js and Python
+FROM node:20-alpine
 WORKDIR /app
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Install Python and build tools
+RUN apk add --no-cache python3 py3-pip gcc musl-dev python3-dev
 
-# Copy Python dependencies and install
-COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy backend code
-COPY velinor_api.py .
-COPY velinor/ ./velinor/
-
-# Copy Next.js build from frontend builder
+# Copy Next.js build
 COPY --from=frontend-builder /app/velinor-web/public ./velinor-web/public
 COPY --from=frontend-builder /app/velinor-web/.next ./velinor-web/.next
 COPY --from=frontend-builder /app/velinor-web/node_modules ./velinor-web/node_modules
 COPY --from=frontend-builder /app/velinor-web/package.json ./velinor-web/
 
+# Copy Python dependencies and install
+COPY requirements.txt .
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
+
+# Copy backend code
+COPY velinor_api.py .
+COPY velinor/ ./velinor/
+
 # Expose port
-EXPOSE 8000
+EXPOSE 3000
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/docs || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD wget -q -O- http://localhost:3000 || exit 1
 
-# Start the backend (which will serve the frontend through proxying)
-CMD ["python", "velinor_api.py"]
+# Start Next.js (main process)
+CMD ["sh", "-c", "cd velinor-web && npm start"]
+
