@@ -892,7 +892,7 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome splash screen - full size image with button overlay
+        # Welcome splash screen - image with button drawn on it
         splash_img_path = str(PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_eyes_closed.png")
         splash_img = load_image_safe(splash_img_path)
         
@@ -904,21 +904,25 @@ def main():
             col_left, col_img, col_right = st.columns([1, 2, 1])
             with col_img:
                 st.image(splash_with_button, use_column_width=True)
-            
-            # Hidden button for click detection
-            col1, col2, col3 = st.columns([1, 1, 1])
-            with col2:
-                # Use CSS to hide the button visually (the button is now drawn on the image)
+                
+                # Invisible clickable button that overlaps the drawn button
                 st.markdown("""
                     <style>
                     .stButton button {
-                        opacity: 0;
-                        height: 0;
-                        padding: 0;
+                        background-color: transparent !important;
+                        border: none !important;
+                        color: transparent !important;
+                        padding: 0 !important;
+                        margin: -55px auto 0 auto !important;
+                        width: 200px !important;
+                    }
+                    .stButton button:hover {
+                        background-color: transparent !important;
                     }
                     </style>
                 """, unsafe_allow_html=True)
-                if st.button("Start New Game", use_container_width=True, key="welcome_start"):
+                
+                if st.button("Start New Game", use_container_width=False, key="welcome_start"):
                     start_new_game()
 
 
