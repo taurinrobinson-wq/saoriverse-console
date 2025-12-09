@@ -831,7 +831,7 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome splash screen with button overlay at bottom
+        # Welcome splash screen - shrunk image with button below
         splash_img_path = str(PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_eyes_closed.png")
         splash_img = load_image_safe(splash_img_path)
         
@@ -841,36 +841,17 @@ def main():
             new_height = int(splash_img.height * 0.7)
             splash_img_resized = splash_img.resize((new_width, new_height), Image.Resampling.LANCZOS)
             
-            # Create HTML container with image and overlay button
-            st.markdown("""
-            <style>
-            .splash-container {
-                position: relative;
-                width: 100%;
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            .splash-button {
-                position: absolute;
-                bottom: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 10;
-            }
-            </style>
-            """, unsafe_allow_html=True)
-            
-            # Display image
-            col_img = st.columns(1)[0]
+            # Display resized image centered
+            col_left, col_img, col_right = st.columns([1, 1.4, 1])
             with col_img:
                 st.image(splash_img_resized, use_column_width=True)
-            
-            # Button overlay at bottom
-            st.markdown("<div style='margin-top: -80px;'></div>", unsafe_allow_html=True)
-            col1, col2, col3 = st.columns([1, 1, 1])
-            with col2:
-                if st.button("Start New Game", use_container_width=True, key="welcome_start", help="Begin your adventure"):
-                    start_new_game()
+        
+        # Button below image (centered)
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            if st.button("Start New Game", use_container_width=True, key="welcome_start"):
+                start_new_game()
 
 
 if __name__ == "__main__":
