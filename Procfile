@@ -1,1 +1,1 @@
-web: streamlit run app.py
+web: python velinor_api.py

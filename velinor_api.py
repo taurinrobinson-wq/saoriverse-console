@@ -5,12 +5,15 @@ Exposes Velinor orchestrator as REST API endpoints.
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import uuid
 from pathlib import Path
 import sys
 import traceback
+import os
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
@@ -49,6 +52,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount Next.js static files if in production
+NEXT_BUILD_PATH = Path(__file__).parent / "velinor-web" / ".next"
+if NEXT_BUILD_PATH.exists():
+    # Serve Next.js static assets
+    public_path = Path(__file__).parent / "velinor-web" / "public"
+    if public_path.exists():
+        app.mount("/assets", StaticFiles(directory=str(public_path / "assets")), name="assets")
 
 # In-memory session storage (use Redis/database in production)
 SESSIONS: Dict[str, VelinorTwineOrchestrator] = {}
@@ -272,4 +283,6 @@ def list_sessions():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
