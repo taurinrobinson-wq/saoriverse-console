@@ -10,13 +10,26 @@ from typing import List, Optional, Dict, Any
 import uuid
 from pathlib import Path
 import sys
+import traceback
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
+try:
+    from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
+except ImportError as e:
+    print(f"Error importing Velinor engine: {e}")
+    traceback.print_exc()
+    print("\nTrying alternative import...")
+    try:
+        from velinor.engine.orchestrator import VelinorTwineOrchestrator
+        from velinor.engine.core import VelinorEngine
+    except ImportError as e2:
+        print(f"Alternative import also failed: {e2}")
+        traceback.print_exc()
+        raise
 
 # ============================================================================
 # SETUP
@@ -103,8 +116,11 @@ def start_game(request: StartGameRequest):
     try:
         session_id = str(uuid.uuid4())
         
-        # Create game engine
-        engine = VelinorEngine(player_name=request.player_name)
+        # Create game engine (no parameters)
+        engine = VelinorEngine()
+        
+        # Create session with player name
+        engine.create_session(player_name=request.player_name)
         
         # Create orchestrator
         story_path = request.story_path or str(PROJECT_ROOT / "velinor" / "stories" / "sample_story.json")
@@ -125,6 +141,8 @@ def start_game(request: StartGameRequest):
         )
     
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -169,7 +187,19 @@ def get_game_state(session_id: str):
     if session_id not in SESSIONS:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    return {"session_id": session_id}
+    try:
+        orchestrator = SESSIONS[session_id]
+        # Get the current passage rendering if twine_session exists
+        if orchestrator.twine_session:
+            current_state = orchestrator.twine_session._render_passage(
+                orchestrator.twine_session.context.current_passage_id
+            )
+            formatted_state = orchestrator._format_ui_state(current_state)
+            return {"session_id": session_id, "state": formatted_state}
+        else:
+            raise HTTPException(status_code=400, detail="Game session not initialized")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/api/game/{session_id}/save")
