@@ -174,6 +174,67 @@ def load_image_safe(path: str):
     return None
 
 
+def add_button_overlay(image: Image.Image, button_text: str, position: str = "bottom") -> Image.Image:
+    """Draw a button on an image using PIL.
+    
+    Args:
+        image: PIL Image to draw on
+        button_text: Text for the button
+        position: "bottom", "center", or "top"
+    
+    Returns:
+        Image with button drawn on it
+    """
+    from PIL import ImageDraw, ImageFont
+    
+    # Convert to RGBA if needed
+    if image.mode != "RGBA":
+        image = image.convert("RGBA")
+    
+    # Create a copy to draw on
+    img_with_button = image.copy()
+    draw = ImageDraw.Draw(img_with_button)
+    
+    # Button dimensions
+    button_width = 200
+    button_height = 50
+    button_color = (70, 130, 180)  # Steel blue
+    button_text_color = (255, 255, 255)  # White
+    
+    # Calculate position
+    img_width, img_height = img_with_button.size
+    x_center = (img_width - button_width) // 2
+    
+    if position == "bottom":
+        y_pos = img_height - button_height - 30
+    elif position == "center":
+        y_pos = (img_height - button_height) // 2
+    else:  # top
+        y_pos = 30
+    
+    # Draw button rectangle
+    button_box = [x_center, y_pos, x_center + button_width, y_pos + button_height]
+    draw.rectangle(button_box, fill=button_color, outline=(255, 255, 255), width=2)
+    
+    # Draw button text (simple, centered)
+    try:
+        # Try to use a larger font, fall back to default
+        font = ImageFont.truetype("arial.ttf", 18)
+    except:
+        font = ImageFont.load_default()
+    
+    # Center text in button
+    text_bbox = draw.textbbox((0, 0), button_text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_x = x_center + (button_width - text_width) // 2
+    text_y = y_pos + (button_height - text_height) // 2
+    
+    draw.text((text_x, text_y), button_text, fill=button_text_color, font=font)
+    
+    return img_with_button
+
+
 def display_background(background_name: str):
     """Display background image with height constraint for single-page fit."""
     if background_name:
@@ -831,27 +892,34 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome splash screen - shrunk image with button below
+        # Welcome splash screen - full size image with button overlay
         splash_img_path = str(PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_eyes_closed.png")
         splash_img = load_image_safe(splash_img_path)
         
         if splash_img:
-            # Resize image to 70% of original size
-            new_width = int(splash_img.width * 0.7)
-            new_height = int(splash_img.height * 0.7)
-            splash_img_resized = splash_img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            # Add button overlay to image using PIL
+            splash_with_button = add_button_overlay(splash_img, "Start New Game", position="bottom")
             
-            # Display resized image centered
-            col_left, col_img, col_right = st.columns([1, 1.4, 1])
+            # Display image centered
+            col_left, col_img, col_right = st.columns([1, 2, 1])
             with col_img:
-                st.image(splash_img_resized, use_column_width=True)
-        
-        # Button below image (centered)
-        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
-        col1, col2, col3 = st.columns([1, 1, 1])
-        with col2:
-            if st.button("Start New Game", use_container_width=True, key="welcome_start"):
-                start_new_game()
+                st.image(splash_with_button, use_column_width=True)
+            
+            # Hidden button for click detection
+            col1, col2, col3 = st.columns([1, 1, 1])
+            with col2:
+                # Use CSS to hide the button visually (the button is now drawn on the image)
+                st.markdown("""
+                    <style>
+                    .stButton button {
+                        opacity: 0;
+                        height: 0;
+                        padding: 0;
+                    }
+                    </style>
+                """, unsafe_allow_html=True)
+                if st.button("Start New Game", use_container_width=True, key="welcome_start"):
+                    start_new_game()
 
 
 if __name__ == "__main__":
