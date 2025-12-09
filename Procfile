@@ -1,1 +1,1 @@
-web: cd velinor-web && npm start
+web: sh /app/start.sh
