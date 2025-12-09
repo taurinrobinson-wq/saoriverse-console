@@ -6,38 +6,30 @@ COPY velinor-web/package*.json ./
 RUN npm ci
 COPY velinor-web/src ./src
 COPY velinor-web/public ./public
-COPY velinor-web/*.* ./
+COPY velinor-web/tsconfig.json ./
+COPY velinor-web/next.config.ts ./
+COPY velinor-web/postcss.config.mjs ./
+COPY velinor-web/tailwind.config.ts ./
+COPY velinor-web/eslint.config.mjs ./
 RUN npm run build
 
-# Stage 2: Runtime image with both Next.js and Python
+# Stage 2: Runtime with Node.js
 FROM node:20-alpine
 WORKDIR /app
 
-# Install Python and build tools
-RUN apk add --no-cache python3 py3-pip gcc musl-dev python3-dev
-
-# Copy Next.js build
-COPY --from=frontend-builder /app/velinor-web/public ./velinor-web/public
+# Copy Next.js build and dependencies
 COPY --from=frontend-builder /app/velinor-web/.next ./velinor-web/.next
 COPY --from=frontend-builder /app/velinor-web/node_modules ./velinor-web/node_modules
-COPY --from=frontend-builder /app/velinor-web/package.json ./velinor-web/
+COPY --from=frontend-builder /app/velinor-web/public ./velinor-web/public
+COPY velinor-web/package.json ./velinor-web/
 
-# Copy Python dependencies and install
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt
-
-# Copy backend code
-COPY velinor_api.py .
-COPY velinor/ ./velinor/
-
-# Expose port
 EXPOSE 3000
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
     CMD wget -q -O- http://localhost:3000 || exit 1
 
-# Start Next.js (main process)
+# Start Next.js
 CMD ["sh", "-c", "cd velinor-web && npm start"]
+
 
