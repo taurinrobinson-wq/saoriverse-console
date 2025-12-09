@@ -1,6 +1,6 @@
 # Multi-stage build for Velinor Web Game
 # Stage 1: Build Next.js frontend
-FROM node:18-alpine AS frontend-builder
+FROM node:20-alpine AS frontend-builder
 WORKDIR /app/velinor-web
 COPY velinor-web/package*.json ./
 RUN npm ci
@@ -16,15 +16,6 @@ WORKDIR /app
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV NODE_ENV=production
-
-# Install Node.js for running Next.js
-RUN apt-get update && apt-get install -y \
-    curl \
-    gnupg \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/*
 
 # Copy Python dependencies and install
 COPY requirements.txt .
