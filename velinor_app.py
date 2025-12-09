@@ -836,15 +836,41 @@ def main():
         splash_img = load_image_safe(splash_img_path)
         
         if splash_img:
-            # Create a container for the image
-            st.image(splash_img, use_column_width=True)
-        
-        # Button positioned at bottom (centered)
-        st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("Start New Game", use_container_width=True, key="welcome_start", help="Begin your adventure"):
-                start_new_game()
+            # Resize image to 70% of original size
+            new_width = int(splash_img.width * 0.7)
+            new_height = int(splash_img.height * 0.7)
+            splash_img_resized = splash_img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+            
+            # Create HTML container with image and overlay button
+            st.markdown("""
+            <style>
+            .splash-container {
+                position: relative;
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .splash-button {
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+            
+            # Display image
+            col_img = st.columns(1)[0]
+            with col_img:
+                st.image(splash_img_resized, use_column_width=True)
+            
+            # Button overlay at bottom
+            st.markdown("<div style='margin-top: -80px;'></div>", unsafe_allow_html=True)
+            col1, col2, col3 = st.columns([1, 1, 1])
+            with col2:
+                if st.button("Start New Game", use_container_width=True, key="welcome_start", help="Begin your adventure"):
+                    start_new_game()
 
 
 if __name__ == "__main__":
