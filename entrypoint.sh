@@ -6,7 +6,7 @@ echo "[$(date)] Starting Velinor services..."
 # Start Next.js in background
 echo "[$(date)] Starting Next.js frontend on port 3000..."
 cd /app/velinor-web
-npm start > /tmp/frontend.log 2>&1 &
+PORT=3000 npm start > /tmp/frontend.log 2>&1 &
 NEXT_PID=$!
 echo "[$(date)] Next.js PID: $NEXT_PID"
 

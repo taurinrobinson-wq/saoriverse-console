@@ -48,9 +48,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Set FastAPI to run on internal port 8001
-ENV PORT=8001
-
 # Expose port 8000 (Railway default, nginx will listen here)
 EXPOSE 8000
 
