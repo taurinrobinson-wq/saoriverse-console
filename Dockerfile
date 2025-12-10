@@ -44,6 +44,10 @@ COPY --from=frontend-builder /app/velinor-web ./velinor-web
 # Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port 8000 (Railway default, nginx will listen here)
 EXPOSE 8000
 
@@ -51,7 +55,7 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
-# Simple startup: run all 3 services, with nginx in foreground
-CMD ["sh", "-c", "cd velinor-web && npm start > /tmp/frontend.log 2>&1 & python3 velinor_api.py > /tmp/api.log 2>&1 & sleep 3 && sed -i 's/listen 5000/listen 8000/' /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"]
+# Run startup script
+ENTRYPOINT ["/entrypoint.sh"]
 
 
