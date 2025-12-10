@@ -1,0 +1,31 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: /opt/velinor/deploy.sh
+
+      - name: Notify deployment
+        if: success()
+        run: echo "✅ Deployment to ${{ secrets.VPS_HOST }} successful!"
+
+      - name: Notify failure
+        if: failure()
+        run: echo "❌ Deployment failed!"
