@@ -24,7 +24,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install Python, nginx, ffmpeg
-RUN apk add --no-cache python3 py3-pip ffmpeg-dev nginx curl bash
+RUN apk add --no-cache python3 py3-pip ffmpeg-dev nginx curl bash pkgconfig
 
 # Create Python venv
 RUN python3 -m venv /venv
