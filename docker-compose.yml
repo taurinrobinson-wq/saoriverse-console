@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  velinor:
+    build: .
+    image: saoriverse-console:local
+    container_name: saoriverse-console-local
+    ports:
+      - "8080:8000"   # Host 8080 -> container 8000 (nginx listens on 8000 in image)
+    environment:
+      - PORT=8000
+    restart: unless-stopped
+    tty: true
