@@ -47,14 +47,14 @@ COPY velinor-web/package.json ./velinor-web/
 # Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose ports
-EXPOSE 3000 8000 5000
+# Expose only the nginx port (other services run internally)
+EXPOSE 5000
 
-# Health check
+# Health check - check nginx is responding
 HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
     CMD curl -f http://localhost:5000 || exit 1
 
-# Start all services: API, frontend, and nginx reverse proxy
-CMD ["sh", "-c", "python3 velinor_api.py & cd velinor-web && npm start & nginx -g 'daemon off;'"]
+# Start all services: nginx must be last (foreground), others in background
+CMD ["sh", "-c", "cd velinor-web && npm start > /tmp/frontend.log 2>&1 & python3 velinor_api.py > /tmp/api.log 2>&1 & sleep 2 && exec nginx -g 'daemon off;'"]
 
 
