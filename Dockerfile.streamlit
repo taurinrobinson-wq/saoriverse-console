@@ -1,0 +1,37 @@
+# Dockerfile for Streamlit FirstPerson app with Ollama integration
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create Streamlit config directory
+RUN mkdir -p ~/.streamlit
+
+# Streamlit config
+RUN echo '\
+[client]\n\
+logger.level = "info"\n\
+[logger]\n\
+level = "info"\n\
+' > ~/.streamlit/config.toml
+
+# Expose Streamlit port
+EXPOSE 8501
+
+# Run Streamlit
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
