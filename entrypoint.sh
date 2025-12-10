@@ -22,9 +22,9 @@ for i in $(seq 1 30); do
 done
 
 # Start API in background  
-echo "[$(date)] Starting FastAPI backend on port 8000..."
+echo "[$(date)] Starting FastAPI backend on port 8001..."
 cd /app
-python3 velinor_api.py > /tmp/api.log 2>&1 &
+PORT=8001 python3 velinor_api.py > /tmp/api.log 2>&1 &
 API_PID=$!
 echo "[$(date)] API PID: $API_PID"
 
