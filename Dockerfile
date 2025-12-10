@@ -22,8 +22,8 @@ RUN npm run build
 FROM node:20-alpine AS backend
 WORKDIR /app
 
-# Install Python + tools
-RUN apk add --no-cache python3 py3-pip curl bash
+# Install Python + tools + build dependencies for PyAV
+RUN apk add --no-cache python3 py3-pip curl bash pkg-config ffmpeg-dev
 
 # Create virtual environment
 RUN python3 -m venv /venv
