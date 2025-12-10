@@ -48,12 +48,15 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Set FastAPI to run on internal port 8001
+ENV PORT=8001
+
 # Expose port 8000 (Railway default, nginx will listen here)
 EXPOSE 8000
 
-# Health check
+# Health check - check nginx on port 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD curl -f http://localhost:8000/ || exit 1
 
 # Run startup script
 ENTRYPOINT ["/entrypoint.sh"]

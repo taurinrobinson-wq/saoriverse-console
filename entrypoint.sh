@@ -31,7 +31,7 @@ echo "[$(date)] API PID: $API_PID"
 # Wait for API to be ready
 echo "[$(date)] Waiting for FastAPI to be ready (up to 10s)..."
 for i in $(seq 1 10); do
-  if curl -f http://localhost:8000/health > /dev/null 2>&1; then
+  if curl -f http://localhost:8001/health > /dev/null 2>&1; then
     echo "[$(date)] FastAPI is ready"
     break
   fi
