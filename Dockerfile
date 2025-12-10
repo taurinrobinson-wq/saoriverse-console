@@ -22,8 +22,8 @@ RUN npm run build
 FROM node:20-alpine AS backend
 WORKDIR /app
 
-# Install Python + tools + build dependencies
-RUN apk add --no-cache python3 py3-pip curl bash pkgconfig ffmpeg-dev
+# Install Python + tools + build dependencies + nginx
+RUN apk add --no-cache python3 py3-pip curl bash pkgconfig ffmpeg-dev nginx
 
 # Create virtual environment
 RUN python3 -m venv /venv
@@ -44,14 +44,17 @@ COPY --from=frontend-builder /app/velinor-web/public ./velinor-web/public
 COPY --from=frontend-builder /app/velinor-web/node_modules ./velinor-web/node_modules
 COPY velinor-web/package.json ./velinor-web/
 
+# Copy nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # Expose ports
-EXPOSE 3000 8000
+EXPOSE 3000 8000 5000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
-    CMD curl -f http://localhost:3000 || exit 1
+    CMD curl -f http://localhost:5000 || exit 1
 
-# Start both services
-CMD ["sh", "-c", "python3 velinor_api.py & cd velinor-web && npm start"]
+# Start all services: API, frontend, and nginx reverse proxy
+CMD ["sh", "-c", "python3 velinor_api.py & cd velinor-web && npm start & nginx -g 'daemon off;'"]
 
 
