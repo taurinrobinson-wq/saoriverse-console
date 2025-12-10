@@ -10,7 +10,6 @@ Orchestrates scene rendering with:
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Callable, Any
 from enum import Enum
-import streamlit as st
 
 
 class SceneState(Enum):
