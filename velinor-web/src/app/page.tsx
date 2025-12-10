@@ -73,26 +73,28 @@ export default function Home() {
           padding: '12.8px 32px',
           fontSize: '0.96rem',
           fontWeight: 'bold',
-          background: 'rgba(58, 109, 240, 0.8)',
-          color: '#fff',
-          border: '2px solid rgba(58, 109, 240, 1)',
-          borderRadius: '10px',
+          background: '#2e3f2f',
+          color: '#e6d8b4',
+          border: '1px solid #a88f5c',
+          borderRadius: '8px',
           cursor: 'pointer',
           zIndex: 10,
           transition: 'all 0.3s ease',
-          boxShadow: '0 4px 15px rgba(58, 109, 240, 0.5)',
+          boxShadow: '0 0 8px rgba(168, 143, 92, 0.3)',
           backdropFilter: 'blur(4px)',
           textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)',
+          fontFamily: 'serif',
+          letterSpacing: '0.5px',
         }}
         onMouseEnter={(e) => {
-          (e.target as HTMLButtonElement).style.background = 'rgba(37, 99, 235, 0.95)';
-          (e.target as HTMLButtonElement).style.transform = 'translateX(-50%) translateY(-4px) scale(1.05)';
-          (e.target as HTMLButtonElement).style.boxShadow = '0 6px 20px rgba(58, 109, 240, 0.7)';
+          (e.target as HTMLButtonElement).style.background = '#3b4f3b';
+          (e.target as HTMLButtonElement).style.boxShadow = '0 0 12px rgba(168, 143, 92, 0.5)';
+          (e.target as HTMLButtonElement).style.transform = 'translateX(-50%) translateY(-2px)';
         }}
         onMouseLeave={(e) => {
-          (e.target as HTMLButtonElement).style.background = 'rgba(58, 109, 240, 0.8)';
+          (e.target as HTMLButtonElement).style.background = '#2e3f2f';
+          (e.target as HTMLButtonElement).style.boxShadow = '0 0 8px rgba(168, 143, 92, 0.3)';
           (e.target as HTMLButtonElement).style.transform = 'translateX(-50%)';
-          (e.target as HTMLButtonElement).style.boxShadow = '0 4px 15px rgba(58, 109, 240, 0.5)';
         }}
       >
         Start New Game

@@ -115,12 +115,25 @@ export default function GamePage() {
             onClick={() => router.push('/')}
             style={{
               marginTop: '20px',
-              padding: '10px 20px',
-              background: '#3a6df0',
-              color: '#fff',
-              border: 'none',
+              padding: '10px 24px',
+              background: '#2e3f2f',
+              color: '#e6d8b4',
+              border: '1px solid #a88f5c',
               borderRadius: '8px',
               cursor: 'pointer',
+              fontFamily: 'serif',
+              fontSize: '1rem',
+              letterSpacing: '0.5px',
+              boxShadow: '0 0 8px rgba(168, 143, 92, 0.3)',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseOver={(e) => {
+              (e.target as HTMLButtonElement).style.background = '#3b4f3b';
+              (e.target as HTMLButtonElement).style.boxShadow = '0 0 12px rgba(168, 143, 92, 0.5)';
+            }}
+            onMouseOut={(e) => {
+              (e.target as HTMLButtonElement).style.background = '#2e3f2f';
+              (e.target as HTMLButtonElement).style.boxShadow = '0 0 8px rgba(168, 143, 92, 0.3)';
             }}
           >
             Return to Menu
