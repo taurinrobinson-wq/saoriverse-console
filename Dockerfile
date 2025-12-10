@@ -30,13 +30,13 @@ RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
 # Copy backend files
-COPY requirements.txt .
+COPY requirements-game.txt .
 COPY velinor_api.py .
 COPY velinor/ ./velinor/
 
 # Install Python dependencies inside venv
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+    pip install -r requirements-game.txt
 
 # Copy built frontend from previous stage
 COPY --from=frontend-builder /app/velinor-web/.next ./velinor-web/.next
