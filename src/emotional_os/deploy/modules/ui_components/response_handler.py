@@ -11,6 +11,7 @@ Orchestrates the full response pipeline including:
 - Repetition prevention
 - Tier 1: Foundation (learning, safety, wrapping)
 - Tier 2: Aliveness (presence, energy, reciprocity)
+- Ollama LLM fallback for local model inference
 """
 
 import time
@@ -19,6 +20,7 @@ import streamlit as st
 from src.emotional_os.tier1_foundation import Tier1Foundation
 from src.emotional_os.tier2_aliveness import Tier2Aliveness
 from src.emotional_os.tier3_poetic_consciousness import Tier3PoeticConsciousness
+from ..ollama_client import get_ollama_client_singleton
 
 logger = logging.getLogger(__name__)
 
@@ -811,6 +813,83 @@ def _extract_new_detail(current_input: str) -> str:
         return "that the cycle keeps resetting before you can catch your breath"
     return "something else that's adding to this"
 
+
+
+def _get_ollama_fallback_response(user_input: str, conversation_context: dict) -> str:
+    """Generate response using Ollama local LLM as fallback.
+    
+    This is triggered when:
+    1. Local processing fails or returns empty response
+    2. FirstPerson orchestrator unavailable
+    3. Explicitly requested for offline/local-only mode
+    
+    Uses conversation context to maintain coherence and emotional awareness.
+    
+    Args:
+        user_input: User message
+        conversation_context: Conversation history and context
+        
+    Returns:
+        Generated response from Ollama, or fallback text if Ollama unavailable
+    """
+    try:
+        # Get Ollama client singleton
+        ollama = get_ollama_client_singleton()
+        
+        # Check if Ollama is available
+        if not ollama.is_available():
+            logger.warning("Ollama service not available, using default fallback")
+            return "I'm here to listen. Can you tell me more about what's on your mind?"
+        
+        # Get available models
+        models = ollama.get_available_models()
+        if not models:
+            logger.warning("No Ollama models available")
+            return "I'm here to listen. Can you tell me more about what's on your mind?"
+        
+        # Use first available model (usually llama3 if pulled)
+        model = models[0] if models else "llama3"
+        logger.info(f"Using Ollama model: {model}")
+        
+        # Build system prompt for emotional context
+        system_prompt = """You are FirstPerson, a warm, empathetic AI companion for personal growth.
+        
+Respond with:
+- Genuine understanding and emotional attunement
+- Specific, thoughtful engagement with what the user shares
+- Practical support or gentle exploration, not generic advice
+- Your own authentic presence (not pretending to be human)
+- Brief, natural responses (2-4 sentences usually)
+
+Stay focused on understanding the user's experience, not solving problems immediately."""
+        
+        # Extract conversation history for context
+        conversation_history = conversation_context.get("messages", [])[-10:]  # Last 10 exchanges
+        
+        try:
+            # Generate response with context awareness
+            response = ollama.generate_with_context(
+                user_input=user_input,
+                conversation_history=conversation_history,
+                model=model,
+                system_prompt=system_prompt,
+                max_history=10,
+            )
+            
+            if response and response.strip():
+                logger.info(f"Ollama response generated ({len(response)} chars)")
+                return response.strip()
+            else:
+                logger.warning("Ollama returned empty response")
+                return "I'm here. Can you share more?"
+                
+        except Exception as e:
+            logger.error(f"Ollama generation failed: {e}")
+            return "I'm here to listen. What's on your mind?"
+    
+    except Exception as e:
+        logger.error(f"Ollama fallback error: {e}")
+        return "I'm here to listen. Can you tell me more about what's on your mind?"
 
 
 def get_debug_info() -> dict:
