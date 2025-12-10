@@ -115,15 +115,6 @@ def health_check():
         "version": "1.0.0"
     }
 
-@app.get("/")
-def root():
-    """Root endpoint."""
-    return {
-        "status": "ok",
-        "service": "Velinor Game API",
-        "message": "Game engine ready. Frontend is running."
-    }
-
 @app.get("/{path:path}")
 async def catch_all(path: str):
     """Catch-all for frontend routes that aren't handled."""
