@@ -116,16 +116,12 @@ def health_check():
 
 @app.get("/")
 def root():
-    """Serve the Next.js frontend at root."""
-    frontend_file = Path(__file__).parent / "velinor-web" / ".next" / "server" / "app" / "page.html"
-    if frontend_file.exists():
-        return FileResponse(frontend_file)
-    # Fallback to index
+    """Root endpoint - Next.js frontend is served separately on port 3000."""
     return {
         "status": "ok",
         "service": "Velinor Game API",
         "version": "1.0.0",
-        "message": "Frontend files not found in build"
+        "message": "API is running. Frontend is available at http://localhost:3000"
     }
 
 
