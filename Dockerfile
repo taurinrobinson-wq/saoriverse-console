@@ -28,7 +28,7 @@ COPY velinor-web/package.json ./velinor-web/
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt
+    pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 
 # Copy backend code
 COPY velinor_api.py .
