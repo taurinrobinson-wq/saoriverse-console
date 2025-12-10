@@ -9,7 +9,6 @@ COPY velinor-web/public ./public
 COPY velinor-web/tsconfig.json ./
 COPY velinor-web/next.config.ts ./
 COPY velinor-web/postcss.config.mjs ./
-COPY velinor-web/tailwind.config.ts ./
 COPY velinor-web/eslint.config.mjs ./
 RUN npm run build
 
