@@ -1,8 +1,5 @@
 {
   "build": {
     "builder": "dockerfile"
-  },
-  "deploy": {
-    "port": 5000
   }
 }

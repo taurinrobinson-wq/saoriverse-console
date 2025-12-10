@@ -53,13 +53,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount Next.js static files if in production
+# Mount Next.js static files
 NEXT_BUILD_PATH = Path(__file__).parent / "velinor-web" / ".next"
-if NEXT_BUILD_PATH.exists():
-    # Serve Next.js static assets
-    public_path = Path(__file__).parent / "velinor-web" / "public"
-    if public_path.exists():
-        app.mount("/assets", StaticFiles(directory=str(public_path / "assets")), name="assets")
+PUBLIC_PATH = Path(__file__).parent / "velinor-web" / "public"
+
+if PUBLIC_PATH.exists():
+    # Mount public assets
+    app.mount("/_next/static", StaticFiles(directory=str(NEXT_BUILD_PATH / "static")), name="next-static")
+    app.mount("/public", StaticFiles(directory=str(PUBLIC_PATH)), name="public")
 
 # In-memory session storage (use Redis/database in production)
 SESSIONS: Dict[str, VelinorTwineOrchestrator] = {}
@@ -116,13 +117,18 @@ def health_check():
 
 @app.get("/")
 def root():
-    """Root endpoint - Next.js frontend is served separately on port 3000."""
+    """Root endpoint."""
     return {
         "status": "ok",
         "service": "Velinor Game API",
-        "version": "1.0.0",
-        "message": "API is running. Frontend is available at http://localhost:3000"
+        "message": "Game engine ready. Frontend is running."
     }
+
+@app.get("/{path:path}")
+async def catch_all(path: str):
+    """Catch-all for frontend routes that aren't handled."""
+    # Let FastAPI 404 these normally
+    return {"error": "not found"}
 
 
 @app.post("/api/game/start", response_model=GameResponse)
