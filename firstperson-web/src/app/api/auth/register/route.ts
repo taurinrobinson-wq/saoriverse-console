@@ -15,7 +15,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Call Supabase auth-manager edge function
+    // Demo mode - accept any credentials and generate a token
+    const demoToken = Buffer.from(JSON.stringify({
+      username,
+      user_id: `demo_${Date.now()}`,
+      authenticated: true,
+      created_at: new Date().toISOString(),
+    })).toString('base64');
+
+    return NextResponse.json({
+      success: true,
+      access_token: demoToken,
+      user: {
+        username,
+        user_id: `demo_${Date.now()}`,
+        first_name: firstName,
+        last_name: lastName,
+        email,
+      },
+    });
+
+    // Call Supabase auth-manager edge function (disabled for demo)
     const response = await fetch(
       `${SUPABASE_URL}/functions/v1/auth-manager`,
       {
