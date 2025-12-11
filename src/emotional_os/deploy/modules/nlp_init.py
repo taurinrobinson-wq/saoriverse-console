@@ -59,9 +59,23 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
             NLP_STATE["spacy_model_loaded"] = True
             logger.info("spaCy model '%s' loaded", model_name)
         except Exception as me:
-            NLP_STATE["spacy_model_loaded"] = False
-            NLP_STATE["spacy_exc"] = repr(me)
-            logger.error("spaCy model '%s' could not be loaded: %s", model_name, me)
+            # Try to download the model if it's missing
+            logger.debug(f"Model load failed: {me}, attempting to download...")
+            try:
+                import subprocess
+                result = subprocess.run([sys.executable, "-m", "spacy", "download", model_name], 
+                                      capture_output=True, timeout=60)
+                if result.returncode == 0:
+                    # Try loading again after download
+                    _nlp = spacy.load(model_name)
+                    NLP_STATE["spacy_model_loaded"] = True
+                    logger.info("spaCy model '%s' downloaded and loaded successfully", model_name)
+                else:
+                    raise Exception(f"Download failed with code {result.returncode}")
+            except Exception as download_err:
+                NLP_STATE["spacy_model_loaded"] = False
+                NLP_STATE["spacy_exc"] = repr(me)
+                logger.error("spaCy model '%s' could not be loaded or downloaded: %s", model_name, download_err)
     except Exception as e:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
@@ -71,18 +85,40 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     # NRC Lexicon
     try:
         # Try multiple import paths for robustness
+        nrc = None
+        
+        # Try direct import first (works when sys.path includes src)
         try:
             from parser.nrc_lexicon_loader import nrc  # noqa: F401
         except ImportError:
+            pass
+        
+        # Try emotional_os.parser path
+        if nrc is None:
             try:
                 from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
             except ImportError:
-                # If emotional_os.parser doesn't work, try direct path lookup
-                from pathlib import Path
-                nrc_path = Path(__file__).parent.parent.parent.parent / "src" / "parser" / "nrc_lexicon_loader.py"
-                if not nrc_path.exists():
-                    raise ImportError(f"NRC lexicon loader not found at {nrc_path}")
-                raise
+                pass
+        
+        # Try absolute sys.path manipulation
+        if nrc is None:
+            from pathlib import Path
+            # Find the src directory by looking for parser/nrc_lexicon_loader.py
+            current_file = Path(__file__)
+            # nlp_init.py is at: src/emotional_os/deploy/modules/nlp_init.py
+            # We need to find src directory
+            src_dir = None
+            for parent in current_file.parents:
+                if (parent / "parser" / "nrc_lexicon_loader.py").exists():
+                    src_dir = parent
+                    break
+            
+            if src_dir:
+                if str(src_dir) not in sys.path:
+                    sys.path.insert(0, str(src_dir))
+                from parser.nrc_lexicon_loader import nrc  # noqa: F401
+            else:
+                raise ImportError("Could not locate nrc_lexicon_loader.py by searching parent directories")
         
         NLP_STATE["nrc_available"] = True
         NLP_STATE["nrc_exc"] = None
