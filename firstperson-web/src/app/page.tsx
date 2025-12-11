@@ -18,6 +18,9 @@ export default function Home() {
     username: "",
     password: "",
   });
+  const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (view === "splash") {
@@ -30,6 +33,8 @@ export default function Home() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoginError("");
+    setIsLoading(true);
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -41,22 +46,25 @@ export default function Home() {
       });
       const data = await response.json();
       if (response.ok && data.success) {
-        // Store token if provided
         if (data.access_token) {
           localStorage.setItem("authToken", data.access_token);
         }
         window.location.href = "/chat";
       } else {
-        alert(data.error || "Login failed");
+        setLoginError(data.error || "Login failed");
       }
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login error");
+      setLoginError("Connection error. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setRegisterError("");
+    setIsLoading(true);
     try {
       const response = await fetch("/api/auth/register", {
         method: "POST",
@@ -66,19 +74,21 @@ export default function Home() {
       const data = await response.json();
       if (response.ok && data.success) {
         setView("login");
+        setRegisterError("");
         alert("Registration successful! Please log in.");
       } else {
-        alert(data.error || "Registration failed");
+        setRegisterError(data.error || "Registration failed");
       }
     } catch (error) {
       console.error("Registration failed:", error);
-      alert("Registration error");
+      setRegisterError("Connection error. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleDemo = async () => {
     try {
-      // Load saori-fixed edge function
       window.location.href = "/chat?demo=true";
     } catch (error) {
       console.error("Demo load failed:", error);
@@ -86,10 +96,11 @@ export default function Home() {
   };
 
   return (
-    <main style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}>
+    <main className="auth-container">
+      {/* SPLASH SCREEN */}
       {view === "splash" && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '48px' }}>
-          {/* Logo - smaller and centered */}
+        <div className="splash-content">
+          {/* Logo - animated dissolve */}
           <motion.div
             animate={
               logoMoving
@@ -101,13 +112,14 @@ export default function Home() {
                 : { opacity: 1, scale: 1, y: 0 }
             }
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="relative w-24 h-24"
+            className="splash-logo"
           >
             <Image
               src="/graphics/FirstPerson-Logo_cropped.svg"
               alt="FirstPerson Logo"
               fill
               className="object-contain"
+              priority
             />
           </motion.div>
 
@@ -117,34 +129,32 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center"
+              className="splash-text"
             >
-              <h1 className="text-2xl font-light text-slate-900 mb-8">
-                Personal Companion
-              </h1>
+              <h1 className="splash-title">Personal Chat Companion</h1>
 
-              {/* Buttons - white with black text, cleaner style */}
+              {/* Buttons - properly spaced vertically */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-col gap-8 w-72"
+                className="splash-buttons"
               >
                 <button
                   onClick={() => setView("login")}
-                  className="px-8 py-4 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors text-base"
+                  className="btn btn-splash"
                 >
                   Login
                 </button>
                 <button
                   onClick={() => setView("register")}
-                  className="px-8 py-4 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors text-base"
+                  className="btn btn-splash"
                 >
                   Register
                 </button>
                 <button
                   onClick={handleDemo}
-                  className="px-8 py-4 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors text-base"
+                  className="btn btn-splash"
                 >
                   Demo
                 </button>
@@ -154,142 +164,162 @@ export default function Home() {
         </div>
       )}
 
+      {/* LOGIN FORM */}
       {view === "login" && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}
+          className="auth-card"
         >
-          <div style={{ backgroundColor: 'white', padding: '32px', width: '100%', maxWidth: '400px' }}>
-            <h2 className="text-xl font-light text-slate-900 mb-6 text-center">
-              Login
-            </h2>
-
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={loginUsername}
-                  onChange={(e) => setLoginUsername(e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
-                  required
-                />
-              </div>
-
-              <div>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full px-4 py-2 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors mt-6"
-              >
-                Sign In
-              </button>
-            </form>
-
+          <div className="auth-header">
+            <h2 className="auth-title">Sign In</h2>
+          </div>
+          <form onSubmit={handleLogin} className="auth-form">
+            {loginError && (
+              <div className="form-error">{loginError}</div>
+            )}
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="Enter your username"
+                value={loginUsername}
+                onChange={(e) => setLoginUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                required
+              />
+            </div>
             <button
-              onClick={() => setView("splash")}
-              className="w-full mt-4 px-4 py-2 text-slate-500 text-sm font-medium hover:text-slate-700 transition-colors"
+              type="submit"
+              className="btn btn-primary"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign In"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setView("splash");
+                setLoginError("");
+              }}
+              className="btn"
             >
               Back
             </button>
-          </div>
+          </form>
         </motion.div>
       )}
 
+      {/* REGISTER FORM */}
       {view === "register" && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}
+          className="auth-card"
         >
-          <div style={{ backgroundColor: 'white', padding: '32px', width: '100%', maxWidth: '400px' }}>
-            <h2 className="text-xl font-light text-slate-900 mb-6 text-center">
-              Register
-            </h2>
-
-            <form onSubmit={handleRegister} className="space-y-3">
+          <div className="auth-header">
+            <h2 className="auth-title">Create Account</h2>
+          </div>
+          <form onSubmit={handleRegister} className="auth-form">
+            {registerError && (
+              <div className="form-error">{registerError}</div>
+            )}
+            <div className="form-group">
+              <label htmlFor="firstName">First Name</label>
               <input
+                id="firstName"
                 type="text"
-                placeholder="First Name"
+                placeholder="First name"
                 value={registerData.firstName}
                 onChange={(e) =>
                   setRegisterData({ ...registerData, firstName: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                 required
               />
-
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Last Name</label>
               <input
+                id="lastName"
                 type="text"
-                placeholder="Last Name"
+                placeholder="Last name"
                 value={registerData.lastName}
                 onChange={(e) =>
                   setRegisterData({ ...registerData, lastName: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                 required
               />
-
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
               <input
+                id="email"
                 type="email"
-                placeholder="Email"
+                placeholder="your@email.com"
                 value={registerData.email}
                 onChange={(e) =>
                   setRegisterData({ ...registerData, email: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                 required
               />
-
+            </div>
+            <div className="form-group">
+              <label htmlFor="reg-username">Username</label>
               <input
+                id="reg-username"
                 type="text"
-                placeholder="Username"
+                placeholder="Choose a username"
                 value={registerData.username}
                 onChange={(e) =>
                   setRegisterData({ ...registerData, username: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                 required
               />
-
+            </div>
+            <div className="form-group">
+              <label htmlFor="reg-password">Password</label>
               <input
+                id="reg-password"
                 type="password"
-                placeholder="Password"
+                placeholder="Choose a password"
                 value={registerData.password}
                 onChange={(e) =>
                   setRegisterData({ ...registerData, password: e.target.value })
                 }
-                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                 required
               />
-
-              <button
-                type="submit"
-                className="w-full px-4 py-2 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors mt-4"
-              >
-                Create Account
-              </button>
-            </form>
-
+            </div>
             <button
-              onClick={() => setView("splash")}
-              className="w-full mt-4 px-4 py-2 text-slate-500 text-sm font-medium hover:text-slate-700 transition-colors"
+              type="submit"
+              className="btn btn-primary"
+              disabled={isLoading}
+            >
+              {isLoading ? "Creating..." : "Create Account"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setView("splash");
+                setRegisterError("");
+              }}
+              className="btn"
             >
               Back
             </button>
-          </div>
+          </form>
         </motion.div>
       )}
     </main>

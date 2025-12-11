@@ -281,6 +281,57 @@ a:hover {
   }
 }
 
+/* ===== SPLASH SCREEN STYLING ===== */
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  height: 100%;
+}
+
+.splash-logo {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.splash-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.splash-title {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.splash-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 280px;
+}
+
+.btn-splash {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===== CHAT INTERFACE STYLING ===== */
 .chat-container {
   width: 100vw;
@@ -448,6 +499,16 @@ a:hover {
   outline: none;
   border-color: var(--accent-color);
   background: var(--bg-tertiary);
+}
+
+.form-error {
+  padding: 0.75rem;
+  background: #fee;
+  color: #c33;
+  border: 1px solid #fcc;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.875rem;
+  text-align: center;
 }
 
 /* ===== BUTTON STYLING ===== */
