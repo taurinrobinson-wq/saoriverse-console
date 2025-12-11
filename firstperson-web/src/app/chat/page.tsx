@@ -10,12 +10,23 @@ type Message = {
   timestamp: Date;
 };
 
+type Conversation = {
+  conversation_id: string;
+  title: string;
+  updated_at: string;
+  message_count: number;
+};
+
 export default function ChatPage() {
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
 
   useEffect(() => {
     // Check if user is authenticated
@@ -24,9 +35,52 @@ export default function ChatPage() {
       router.push("/");
       return;
     }
-    // TODO: Decode token to get user info
-    setUser({ username: "User" });
+    
+    // Decode token to get user info
+    const userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      const userData = JSON.parse(userInfo);
+      setUser(userData);
+      loadConversations(userData.username);
+    } else {
+      setUser({ username: "User" });
+    }
   }, [router]);
+
+  const loadConversations = async (userId: string) => {
+    try {
+      const response = await fetch(`/api/conversations?userId=${userId}`);
+      const data = await response.json();
+      if (data.success) {
+        setConversations(data.conversations || []);
+      }
+    } catch (error) {
+      console.error("Error loading conversations:", error);
+    }
+  };
+
+  const loadConversation = async (conversationId: string) => {
+    try {
+      const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`);
+      const data = await response.json();
+      
+      if (data.success && data.message) {
+        const conv = JSON.parse(data.message);
+        // Convert messages to the format we use
+        const loadedMessages: Message[] = (conv.messages || []).map((msg: any, idx: number) => ({
+          id: idx.toString(),
+          role: msg.role,
+          content: msg.content,
+          timestamp: new Date(),
+        }));
+        setMessages(loadedMessages);
+        setCurrentConversationId(conversationId);
+        setNewTitle(conv.title || "");
+      }
+    } catch (error) {
+      console.error("Error loading conversation:", error);
+    }
+  };
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,6 +98,10 @@ export default function ChatPage() {
     setIsLoading(true);
 
     try {
+      // Generate conversation ID if this is the first message
+      const isFirstMessage = messages.length === 0;
+      const conversationId = currentConversationId || Math.random().toString(36).substring(7);
+
       // Call our Next.js API which proxies to the Python backend
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -52,7 +110,13 @@ export default function ChatPage() {
         },
         body: JSON.stringify({
           message: userMessage.content,
-          userId: user?.user_id || "demo_user",
+          userId: user?.username || "demo_user",
+          context: {
+            conversation_id: conversationId,
+            is_first_message: isFirstMessage,
+            messages: messages.map(m => ({ role: m.role, content: m.content })),
+            title: newTitle || (isFirstMessage ? userMessage.content.substring(0, 50) : ""),
+          },
         }),
       });
 
@@ -66,6 +130,16 @@ export default function ChatPage() {
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, assistantMessage]);
+
+        // Update conversation ID from response
+        if (data.conversation_id && !currentConversationId) {
+          setCurrentConversationId(data.conversation_id);
+        }
+
+        // Reload conversations to show new one or updates
+        if (user?.username) {
+          loadConversations(user.username);
+        }
       } else {
         throw new Error(data.error || "Failed to get response");
       }
@@ -83,8 +157,57 @@ export default function ChatPage() {
     }
   };
 
+  const handleDeleteConversation = async (conversationId: string) => {
+    if (!confirm("Delete this conversation?")) return;
+
+    try {
+      const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        setConversations((prev) => prev.filter((c) => c.conversation_id !== conversationId));
+        if (currentConversationId === conversationId) {
+          setCurrentConversationId(null);
+          setMessages([]);
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting conversation:", error);
+    }
+  };
+
+  const handleRenameConversation = async (conversationId: string) => {
+    try {
+      const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ new_title: newTitle }),
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        setConversations((prev) =>
+          prev.map((c) => (c.conversation_id === conversationId ? { ...c, title: newTitle } : c))
+        );
+        setIsEditingTitle(false);
+      }
+    } catch (error) {
+      console.error("Error renaming conversation:", error);
+    }
+  };
+
+  const handleNewConversation = () => {
+    setCurrentConversationId(null);
+    setMessages([]);
+    setNewTitle("");
+    setIsEditingTitle(false);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userInfo");
     router.push("/");
   };
 
@@ -104,22 +227,65 @@ export default function ChatPage() {
       <div className="chat-main">
         {/* Sidebar */}
         <div className="chat-sidebar">
-          <h3 style={{ marginBottom: "1rem", color: "var(--text-primary)" }}>
+          <button onClick={handleNewConversation} className="btn btn-sidebar-new">
+            + New Conversation
+          </button>
+          
+          <h3 style={{ marginBottom: "1rem", marginTop: "1rem", color: "var(--text-primary)" }}>
             Conversations
           </h3>
-          <div
-            style={{
-              color: "var(--text-secondary)",
-              fontSize: "0.875rem",
-            }}
-          >
-            New conversation
+          
+          <div className="conversations-list">
+            {conversations.length === 0 ? (
+              <div style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
+                No conversations yet
+              </div>
+            ) : (
+              conversations.map((conv) => (
+                <div
+                  key={conv.conversation_id}
+                  className={`conversation-item ${
+                    currentConversationId === conv.conversation_id ? "active" : ""
+                  }`}
+                  onClick={() => loadConversation(conv.conversation_id)}
+                >
+                  <div className="conv-title">{conv.title}</div>
+                  <div className="conv-meta">
+                    {conv.message_count} messages
+                  </div>
+                  <div className="conv-actions">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentConversationId(conv.conversation_id);
+                        setNewTitle(conv.title);
+                        setIsEditingTitle(true);
+                      }}
+                      className="action-btn"
+                      title="Edit"
+                    >
+                      ✎
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteConversation(conv.conversation_id);
+                      }}
+                      className="action-btn delete"
+                      title="Delete"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
         {/* Messages */}
         <div className="chat-messages">
-          {messages.length === 0 ? (
+          {messages.length === 0 && !currentConversationId ? (
             <div
               style={{
                 textAlign: "center",
@@ -188,6 +354,33 @@ export default function ChatPage() {
         </button>
       </form>
 
+      {/* Rename Modal */}
+      {isEditingTitle && currentConversationId && (
+        <div className="modal-overlay" onClick={() => setIsEditingTitle(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Rename Conversation</h3>
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              placeholder="New title"
+              autoFocus
+            />
+            <div className="modal-buttons">
+              <button
+                onClick={() => handleRenameConversation(currentConversationId)}
+                className="btn btn-primary"
+              >
+                Save
+              </button>
+              <button onClick={() => setIsEditingTitle(false)} className="btn">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         @keyframes pulse {
           0%,
@@ -198,6 +391,144 @@ export default function ChatPage() {
           30% {
             opacity: 1;
           }
+        }
+
+        .btn-sidebar-new {
+          width: 100%;
+          padding: 0.75rem;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 0.875rem;
+          transition: all 0.3s ease;
+        }
+
+        .btn-sidebar-new:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .conversations-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          max-height: 400px;
+          overflow-y: auto;
+        }
+
+        .conversation-item {
+          padding: 0.75rem;
+          background: var(--bg-secondary);
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          border-left: 3px solid transparent;
+          position: relative;
+        }
+
+        .conversation-item:hover {
+          background: var(--bg-tertiary);
+        }
+
+        .conversation-item.active {
+          background: var(--bg-tertiary);
+          border-left-color: #667eea;
+        }
+
+        .conv-title {
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--text-primary);
+          margin-bottom: 0.25rem;
+          word-break: break-word;
+        }
+
+        .conv-meta {
+          font-size: 0.75rem;
+          color: var(--text-secondary);
+          margin-bottom: 0.5rem;
+        }
+
+        .conv-actions {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: flex-end;
+        }
+
+        .action-btn {
+          background: transparent;
+          border: none;
+          color: var(--text-secondary);
+          cursor: pointer;
+          font-size: 0.875rem;
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+          background: var(--bg-secondary);
+          color: var(--text-primary);
+        }
+
+        .action-btn.delete:hover {
+          color: #ef4444;
+        }
+
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+        }
+
+        .modal-content {
+          background: var(--bg-primary);
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          min-width: 300px;
+        }
+
+        .modal-content h3 {
+          margin-top: 0;
+          color: var(--text-primary);
+        }
+
+        .modal-content input {
+          width: 100%;
+          padding: 0.75rem;
+          margin: 1rem 0;
+          border: 1px solid var(--border-color);
+          border-radius: 6px;
+          background: var(--bg-secondary);
+          color: var(--text-primary);
+          font-size: 0.875rem;
+        }
+
+        .modal-content input:focus {
+          outline: none;
+          border-color: #667eea;
+          box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .modal-buttons {
+          display: flex;
+          gap: 0.5rem;
+          margin-top: 1.5rem;
+        }
+
+        .modal-buttons .btn {
+          flex: 1;
         }
       `}</style>
     </div>

@@ -2,12 +2,28 @@
 
 import sys
 import os
+import json
+import uuid
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
+from datetime import datetime
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+# Import conversation manager
+sys.path.insert(0, str(Path(__file__).parent / "src" / "deploy_modules"))
+try:
+    from conversation_manager import ConversationManager, generate_auto_name
+except ImportError:
+    ConversationManager = None
+    def generate_auto_name(msg: str, max_length: int = 50) -> str:
+        """Fallback auto-name generator."""
+        text = msg.strip()[:100]
+        if len(text) > max_length:
+            text = text[:max_length-3] + "..."
+        return text[0].upper() + text[1:] if len(text) > 1 else text.upper()
 
 app = FastAPI(title="FirstPerson Backend", version="1.0.0")
 
@@ -19,6 +35,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Store active conversation managers by user_id (in-memory for now)
+conversation_managers = {}
 
 
 class ChatRequest(BaseModel):
@@ -33,6 +52,46 @@ class ChatResponse(BaseModel):
     success: bool
     message: str
     error: Optional[str] = None
+    conversation_id: Optional[str] = None
+
+
+class ConversationInfo(BaseModel):
+    """Conversation metadata."""
+    conversation_id: str
+    title: str
+    updated_at: str
+    message_count: int
+
+
+class ConversationListResponse(BaseModel):
+    """List of user's conversations."""
+    success: bool
+    conversations: List[ConversationInfo]
+    error: Optional[str] = None
+
+
+class SaveConversationRequest(BaseModel):
+    """Save conversation request."""
+    conversation_id: str
+    title: Optional[str] = None
+    messages: List[dict]
+
+
+class RenameConversationRequest(BaseModel):
+    """Rename conversation request."""
+    conversation_id: str
+    new_title: str
+
+
+def get_conversation_manager(user_id: str) -> Optional[ConversationManager]:
+    """Get or create a conversation manager for a user."""
+    if ConversationManager is None:
+        return None
+    
+    if user_id not in conversation_managers:
+        conversation_managers[user_id] = ConversationManager(user_id)
+    
+    return conversation_managers[user_id]
 
 
 @app.get("/health")
@@ -50,19 +109,174 @@ async def chat(request: ChatRequest) -> ChatResponse:
         
         message = request.message.strip()
         message_lower = message.lower()
+        user_id = request.userId or "demo_user"
         
-        # Analyze the message for specific content
+        # Generate response
         response = generate_empathetic_response(message, message_lower)
+        
+        # Handle conversation saving if conversation_id provided
+        conversation_id = request.context.get("conversation_id") if request.context else None
+        is_first_message = request.context.get("is_first_message", False) if request.context else False
+        
+        if is_first_message or not conversation_id:
+            # Generate a new conversation ID
+            conversation_id = str(uuid.uuid4())[:8]
+        
+        # Auto-generate title from first message
+        title = None
+        if is_first_message:
+            title = generate_auto_name(message)
+        
+        # Try to save conversation if manager is available
+        manager = get_conversation_manager(user_id)
+        if manager:
+            messages = request.context.get("messages", []) if request.context else []
+            
+            # Add current exchange to messages
+            messages.append({"role": "user", "content": message})
+            messages.append({"role": "assistant", "content": response})
+            
+            # Use title from first message or keep existing
+            if not title and request.context:
+                title = request.context.get("title", generate_auto_name(message))
+            
+            manager.save_conversation(conversation_id, title or generate_auto_name(message), messages)
         
         return ChatResponse(
             success=True,
-            message=response
+            message=response,
+            conversation_id=conversation_id
         )
     except Exception as e:
         print(f"Error processing chat: {e}", file=sys.stderr)
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/conversations/{user_id}")
+async def get_conversations(user_id: str) -> ConversationListResponse:
+    """Get all conversations for a user."""
+    try:
+        manager = get_conversation_manager(user_id)
+        if not manager:
+            return ConversationListResponse(
+                success=True,
+                conversations=[],
+                error="Conversation persistence not configured"
+            )
+        
+        conversations = manager.load_conversations()
+        conv_list = [
+            ConversationInfo(
+                conversation_id=c.get("conversation_id", ""),
+                title=c.get("title", "Untitled"),
+                updated_at=c.get("updated_at", ""),
+                message_count=c.get("message_count", 0)
+            )
+            for c in conversations
+        ]
+        
+        return ConversationListResponse(
+            success=True,
+            conversations=conv_list
+        )
+    except Exception as e:
+        print(f"Error loading conversations: {e}", file=sys.stderr)
+        return ConversationListResponse(
+            success=False,
+            conversations=[],
+            error=str(e)
+        )
+
+
+@app.get("/conversation/{user_id}/{conversation_id}")
+async def get_conversation(user_id: str, conversation_id: str) -> ChatResponse:
+    """Load a specific conversation."""
+    try:
+        manager = get_conversation_manager(user_id)
+        if not manager:
+            return ChatResponse(
+                success=False,
+                message="",
+                error="Conversation persistence not configured"
+            )
+        
+        conv = manager.load_conversation(conversation_id)
+        if not conv:
+            return ChatResponse(
+                success=False,
+                message="",
+                error="Conversation not found"
+            )
+        
+        # Return the conversation data as JSON string in message field
+        return ChatResponse(
+            success=True,
+            message=json.dumps(conv),
+            conversation_id=conversation_id
+        )
+    except Exception as e:
+        print(f"Error loading conversation: {e}", file=sys.stderr)
+        return ChatResponse(
+            success=False,
+            message="",
+            error=str(e)
+        )
+
+
+@app.delete("/conversation/{user_id}/{conversation_id}")
+async def delete_conversation(user_id: str, conversation_id: str) -> ChatResponse:
+    """Delete a conversation."""
+    try:
+        manager = get_conversation_manager(user_id)
+        if not manager:
+            return ChatResponse(
+                success=False,
+                message="",
+                error="Conversation persistence not configured"
+            )
+        
+        success, message = manager.delete_conversation(conversation_id)
+        return ChatResponse(
+            success=success,
+            message=message,
+            conversation_id=conversation_id
+        )
+    except Exception as e:
+        print(f"Error deleting conversation: {e}", file=sys.stderr)
+        return ChatResponse(
+            success=False,
+            message="",
+            error=str(e)
+        )
+
+
+@app.patch("/conversation/{user_id}/{conversation_id}")
+async def rename_conversation(user_id: str, conversation_id: str, request: RenameConversationRequest) -> ChatResponse:
+    """Rename a conversation."""
+    try:
+        manager = get_conversation_manager(user_id)
+        if not manager:
+            return ChatResponse(
+                success=False,
+                message="",
+                error="Conversation persistence not configured"
+            )
+        
+        success, message = manager.rename_conversation(conversation_id, request.new_title)
+        return ChatResponse(
+            success=success,
+            message=message,
+            conversation_id=conversation_id
+        )
+    except Exception as e:
+        print(f"Error renaming conversation: {e}", file=sys.stderr)
+        return ChatResponse(
+            success=False,
+            message="",
+            error=str(e)
+        )
 
 
 def generate_empathetic_response(message: str, message_lower: str) -> str:

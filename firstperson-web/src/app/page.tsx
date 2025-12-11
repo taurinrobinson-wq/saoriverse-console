@@ -49,6 +49,11 @@ export default function Home() {
         if (data.access_token) {
           localStorage.setItem("authToken", data.access_token);
         }
+        // Save user info for conversation management
+        localStorage.setItem("userInfo", JSON.stringify({
+          username: loginUsername,
+          user_id: data.user_id || loginUsername,
+        }));
         window.location.href = "/chat";
       } else {
         setLoginError(data.error || "Login failed");
@@ -98,6 +103,11 @@ export default function Home() {
       })).toString('base64');
       
       localStorage.setItem("authToken", demoToken);
+      // Save demo user info
+      localStorage.setItem("userInfo", JSON.stringify({
+        username: "demo_user",
+        user_id: `demo_${Date.now()}`,
+      }));
       window.location.href = "/chat?demo=true";
     } catch (error) {
       console.error("Demo load failed:", error);
