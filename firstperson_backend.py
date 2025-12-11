@@ -12,18 +12,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-# Import conversation manager
-sys.path.insert(0, str(Path(__file__).parent / "src" / "deploy_modules"))
 try:
-    from conversation_manager import ConversationManager, generate_auto_name
+    import requests
 except ImportError:
-    ConversationManager = None
-    def generate_auto_name(msg: str, max_length: int = 50) -> str:
-        """Fallback auto-name generator."""
-        text = msg.strip()[:100]
-        if len(text) > max_length:
-            text = text[:max_length-3] + "..."
-        return text[0].upper() + text[1:] if len(text) > 1 else text.upper()
+    requests = None
 
 app = FastAPI(title="FirstPerson Backend", version="1.0.0")
 
@@ -36,8 +28,50 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Store active conversation managers by user_id (in-memory for now)
-conversation_managers = {}
+# Supabase configuration
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or "https://gyqzyuvuuyfjxnramkfq.supabase.co"
+SUPABASE_KEY = (
+    os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+    or os.environ.get("SUPABASE_KEY")
+    or "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTQ2NzIwMCwiZXhwIjoyMDcxMDQzMjAwfQ.sILcK31ECwM0IUECL0NklBdv4WREIxToqtCdsMYKWqo"
+)
+
+def get_supabase_headers():
+    """Get headers for Supabase API requests."""
+    return {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_KEY,
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+    }
+
+def auto_name_conversation(first_message: str, max_length: int = 50) -> str:
+    """Generate a conversation name from the first user message."""
+    if not first_message:
+        return "New Conversation"
+    
+    import re
+    text = first_message.strip()[:100]
+    
+    # Remove common phrases
+    phrases_to_remove = [
+        r"i\s+(?:feel|think|believe|know|want|need)\s+",
+        r"(?:can|could|would|should|do)\s+you\s+",
+        r"(?:what|how|why|when|where)\s+(?:about|is|are|do|does)\s+",
+    ]
+    
+    for phrase in phrases_to_remove:
+        text = re.sub(phrase, "", text, flags=re.IGNORECASE)
+    
+    # Extract first meaningful sentence
+    sentences = text.split(". ")
+    title = sentences[0] if sentences else text
+    
+    title = title.strip()
+    if len(title) > max_length:
+        title = title[:max_length-3] + "..."
+    
+    title = title[0].upper() + title[1:] if len(title) > 1 else title.upper()
+    return title
 
 
 class ChatRequest(BaseModel):
@@ -83,15 +117,149 @@ class RenameConversationRequest(BaseModel):
     new_title: str
 
 
-def get_conversation_manager(user_id: str) -> Optional[ConversationManager]:
-    """Get or create a conversation manager for a user."""
-    if ConversationManager is None:
+def save_conversation_to_supabase(user_id: str, conversation_id: str, title: str, messages: List[dict]) -> bool:
+    """Save conversation to Supabase."""
+    if not requests or not SUPABASE_URL or not SUPABASE_KEY:
+        return False
+    
+    try:
+        url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/conversations"
+        payload = {
+            "user_id": user_id,
+            "conversation_id": conversation_id,
+            "title": title,
+            "messages": json.dumps(messages),
+            "updated_at": datetime.now().isoformat(),
+            "message_count": len(messages),
+        }
+        
+        response = requests.post(
+            url,
+            headers=get_supabase_headers(),
+            json=[payload],
+            timeout=10
+        )
+        
+        return response.status_code in (200, 201)
+    except Exception as e:
+        print(f"Error saving conversation: {e}")
+        return False
+
+
+def load_conversations_from_supabase(user_id: str) -> List[dict]:
+    """Load all conversations for a user from Supabase."""
+    if not requests or not SUPABASE_URL or not SUPABASE_KEY:
+        return []
+    
+    try:
+        url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/conversations"
+        params = {
+            "select": "conversation_id,title,updated_at,message_count",
+            "user_id": f"eq.{user_id}",
+            "order": "updated_at.desc",
+            "limit": "100",
+        }
+        
+        response = requests.get(
+            url,
+            headers=get_supabase_headers(),
+            params=params,
+            timeout=10
+        )
+        
+        if response.status_code == 200:
+            return response.json() if isinstance(response.json(), list) else []
+        return []
+    except Exception as e:
+        print(f"Error loading conversations: {e}")
+        return []
+
+
+def load_conversation_from_supabase(user_id: str, conversation_id: str) -> Optional[dict]:
+    """Load a specific conversation from Supabase."""
+    if not requests or not SUPABASE_URL or not SUPABASE_KEY:
         return None
     
-    if user_id not in conversation_managers:
-        conversation_managers[user_id] = ConversationManager(user_id)
+    try:
+        url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/conversations"
+        params = {
+            "user_id": f"eq.{user_id}",
+            "conversation_id": f"eq.{conversation_id}",
+        }
+        
+        response = requests.get(
+            url,
+            headers=get_supabase_headers(),
+            params=params,
+            timeout=10
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            if isinstance(data, list) and data:
+                conv = data[0]
+                if isinstance(conv.get("messages"), str):
+                    conv["messages"] = json.loads(conv["messages"])
+                return conv
+        return None
+    except Exception as e:
+        print(f"Error loading conversation: {e}")
+        return None
+
+
+def delete_conversation_from_supabase(user_id: str, conversation_id: str) -> bool:
+    """Delete a conversation from Supabase."""
+    if not requests or not SUPABASE_URL or not SUPABASE_KEY:
+        return False
     
-    return conversation_managers[user_id]
+    try:
+        url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/conversations"
+        params = {
+            "user_id": f"eq.{user_id}",
+            "conversation_id": f"eq.{conversation_id}",
+        }
+        
+        response = requests.delete(
+            url,
+            headers=get_supabase_headers(),
+            params=params,
+            timeout=10
+        )
+        
+        return response.status_code in (200, 204)
+    except Exception as e:
+        print(f"Error deleting conversation: {e}")
+        return False
+
+
+def rename_conversation_in_supabase(user_id: str, conversation_id: str, new_title: str) -> bool:
+    """Rename a conversation in Supabase."""
+    if not requests or not SUPABASE_URL or not SUPABASE_KEY:
+        return False
+    
+    try:
+        url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/conversations"
+        params = {
+            "user_id": f"eq.{user_id}",
+            "conversation_id": f"eq.{conversation_id}",
+        }
+        payload = {
+            "title": new_title,
+            "updated_at": datetime.now().isoformat(),
+        }
+        
+        response = requests.patch(
+            url,
+            headers=get_supabase_headers(),
+            json=payload,
+            params=params,
+            timeout=10
+        )
+        
+        return response.status_code in (200, 204)
+    except Exception as e:
+        print(f"Error renaming conversation: {e}")
+        return False
 
 
 @app.get("/health")
@@ -114,33 +282,28 @@ async def chat(request: ChatRequest) -> ChatResponse:
         # Generate response
         response = generate_empathetic_response(message, message_lower)
         
-        # Handle conversation saving if conversation_id provided
+        # Handle conversation saving
         conversation_id = request.context.get("conversation_id") if request.context else None
         is_first_message = request.context.get("is_first_message", False) if request.context else False
         
         if is_first_message or not conversation_id:
-            # Generate a new conversation ID
             conversation_id = str(uuid.uuid4())[:8]
         
         # Auto-generate title from first message
         title = None
         if is_first_message:
-            title = generate_auto_name(message)
+            title = auto_name_conversation(message)
         
-        # Try to save conversation if manager is available
-        manager = get_conversation_manager(user_id)
-        if manager:
-            messages = request.context.get("messages", []) if request.context else []
-            
-            # Add current exchange to messages
+        # Save conversation to Supabase
+        if request.context:
+            messages = request.context.get("messages", [])
             messages.append({"role": "user", "content": message})
             messages.append({"role": "assistant", "content": response})
             
-            # Use title from first message or keep existing
-            if not title and request.context:
-                title = request.context.get("title", generate_auto_name(message))
+            if not title:
+                title = request.context.get("title", auto_name_conversation(message))
             
-            manager.save_conversation(conversation_id, title or generate_auto_name(message), messages)
+            save_conversation_to_supabase(user_id, conversation_id, title or auto_name_conversation(message), messages)
         
         return ChatResponse(
             success=True,
@@ -158,15 +321,7 @@ async def chat(request: ChatRequest) -> ChatResponse:
 async def get_conversations(user_id: str) -> ConversationListResponse:
     """Get all conversations for a user."""
     try:
-        manager = get_conversation_manager(user_id)
-        if not manager:
-            return ConversationListResponse(
-                success=True,
-                conversations=[],
-                error="Conversation persistence not configured"
-            )
-        
-        conversations = manager.load_conversations()
+        conversations = load_conversations_from_supabase(user_id)
         conv_list = [
             ConversationInfo(
                 conversation_id=c.get("conversation_id", ""),
@@ -194,15 +349,7 @@ async def get_conversations(user_id: str) -> ConversationListResponse:
 async def get_conversation(user_id: str, conversation_id: str) -> ChatResponse:
     """Load a specific conversation."""
     try:
-        manager = get_conversation_manager(user_id)
-        if not manager:
-            return ChatResponse(
-                success=False,
-                message="",
-                error="Conversation persistence not configured"
-            )
-        
-        conv = manager.load_conversation(conversation_id)
+        conv = load_conversation_from_supabase(user_id, conversation_id)
         if not conv:
             return ChatResponse(
                 success=False,
@@ -210,7 +357,6 @@ async def get_conversation(user_id: str, conversation_id: str) -> ChatResponse:
                 error="Conversation not found"
             )
         
-        # Return the conversation data as JSON string in message field
         return ChatResponse(
             success=True,
             message=json.dumps(conv),
@@ -229,18 +375,10 @@ async def get_conversation(user_id: str, conversation_id: str) -> ChatResponse:
 async def delete_conversation(user_id: str, conversation_id: str) -> ChatResponse:
     """Delete a conversation."""
     try:
-        manager = get_conversation_manager(user_id)
-        if not manager:
-            return ChatResponse(
-                success=False,
-                message="",
-                error="Conversation persistence not configured"
-            )
-        
-        success, message = manager.delete_conversation(conversation_id)
+        success = delete_conversation_from_supabase(user_id, conversation_id)
         return ChatResponse(
             success=success,
-            message=message,
+            message="Deleted" if success else "Failed to delete",
             conversation_id=conversation_id
         )
     except Exception as e:
@@ -256,18 +394,10 @@ async def delete_conversation(user_id: str, conversation_id: str) -> ChatRespons
 async def rename_conversation(user_id: str, conversation_id: str, request: RenameConversationRequest) -> ChatResponse:
     """Rename a conversation."""
     try:
-        manager = get_conversation_manager(user_id)
-        if not manager:
-            return ChatResponse(
-                success=False,
-                message="",
-                error="Conversation persistence not configured"
-            )
-        
-        success, message = manager.rename_conversation(conversation_id, request.new_title)
+        success = rename_conversation_in_supabase(user_id, conversation_id, request.new_title)
         return ChatResponse(
             success=success,
-            message=message,
+            message="Renamed" if success else "Failed to rename",
             conversation_id=conversation_id
         )
     except Exception as e:
