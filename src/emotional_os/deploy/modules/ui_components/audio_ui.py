@@ -43,11 +43,9 @@ try:
     HAS_SOUNDDEVICE = True
 except (ImportError, OSError) as e:
     # OSError raised when PortAudio library not found (common on Streamlit Cloud)
-    logger.warning(f"sounddevice unavailable: {e}. Audio recording disabled.")
-    logger.info("Note: Streamlit Cloud doesn't have PortAudio library installed.")
-    logger.info("Audio recording works locally but is disabled on Streamlit Cloud.")
+    # Keep this silent - only inform user if they try to use voice features
+    logger.debug(f"sounddevice unavailable: {e}. Audio recording disabled.")
     HAS_SOUNDDEVICE = False
-
 
 def get_tts_engine():
     """Get or create TTS engine."""
