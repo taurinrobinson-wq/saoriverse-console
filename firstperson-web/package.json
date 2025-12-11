@@ -1,7 +1,7 @@
 {
   "name": "firstperson-web",
   "version": "1.0.0",
-  "description": "FirstPerson audio conversation web app",
+  "description": "FirstPerson - Beautiful audio conversation AI",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3001",
@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "axios": "^1.13.2",
+    "framer-motion": "^11.0.0",
     "next": "^16.0.8",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "zustand": "^5.0.9"
+    "zustand": "^5.0.9",
+    "lucide-react": "^0.294.0",
+    "clsx": "^2.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
