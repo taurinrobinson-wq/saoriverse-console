@@ -70,11 +70,19 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
 
     # NRC Lexicon
     try:
-        # Try both import paths for robustness
+        # Try multiple import paths for robustness
         try:
             from parser.nrc_lexicon_loader import nrc  # noqa: F401
         except ImportError:
-            from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
+            try:
+                from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
+            except ImportError:
+                # If emotional_os.parser doesn't work, try direct path lookup
+                from pathlib import Path
+                nrc_path = Path(__file__).parent.parent.parent.parent / "src" / "parser" / "nrc_lexicon_loader.py"
+                if not nrc_path.exists():
+                    raise ImportError(f"NRC lexicon loader not found at {nrc_path}")
+                raise
         
         NLP_STATE["nrc_available"] = True
         NLP_STATE["nrc_exc"] = None
