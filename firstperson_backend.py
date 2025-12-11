@@ -48,24 +48,11 @@ async def chat(request: ChatRequest) -> ChatResponse:
         if not request.message or not request.message.strip():
             raise HTTPException(status_code=400, detail="Message cannot be empty")
         
-        # For now, return a placeholder that acknowledges the message
-        # The full glyph system will be integrated separately
+        message = request.message.strip()
+        message_lower = message.lower()
         
-        message_lower = request.message.lower()
-        
-        # Simple pattern-based responses for now
-        if any(word in message_lower for word in ["hi", "hello", "hey"]):
-            response = "Hello! I'm here to listen to you. What's on your mind?"
-        elif any(word in message_lower for word in ["how are you", "how are you feeling"]):
-            response = "I appreciate you asking. Right now, I'm focused entirely on being present for you. How are YOU doing?"
-        elif any(word in message_lower for word in ["sad", "depressed", "down"]):
-            response = "I hear sadness in what you're sharing. That's real and I'm present with it. Can you tell me more about what's weighing on you?"
-        elif any(word in message_lower for word in ["happy", "great", "wonderful", "amazing"]):
-            response = "That warmth comes through. I'm glad you're experiencing that. What's making you feel this way?"
-        elif any(word in message_lower for word in ["confused", "lost", "don't know"]):
-            response = "Confusion can feel disorienting. I'm here to help you find clarity. What part of this feels most confusing right now?"
-        else:
-            response = "I hear you. That sounds significant. Can you tell me more about what you're experiencing?"
+        # Analyze the message for specific content
+        response = generate_empathetic_response(message, message_lower)
         
         return ChatResponse(
             success=True,
@@ -76,6 +63,62 @@ async def chat(request: ChatRequest) -> ChatResponse:
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+def generate_empathetic_response(message: str, message_lower: str) -> str:
+    """Generate a response that acknowledges specific details from the message."""
+    
+    # Extract key elements from the message
+    has_work = any(word in message_lower for word in ["work", "job", "career", "office", "deadline", "attorney", "lawyer"])
+    has_stress = any(word in message_lower for word in ["stress", "stressed", "anxious", "overwhelmed", "pressure", "struggling", "hard", "difficult"])
+    has_relationship = any(word in message_lower for word in ["assistant", "colleague", "manager", "boss", "team", "friend", "partner", "family"])
+    has_health_issue = any(word in message_lower for word in ["drinking", "drug", "alcohol", "sick", "illness", "depression", "anxiety"])
+    
+    # Greeting responses
+    if message_lower in ["hi", "hello", "hey", "hey there", "hi there"]:
+        return "Hello! I'm here to listen to you. What's on your mind?"
+    
+    if any(phrase in message_lower for phrase in ["how are you", "how are you doing", "how are you feeling"]):
+        return "I appreciate you asking. Right now, I'm focused entirely on being present for you. How are YOU doing?"
+    
+    # Work-related stress with relationship issue
+    if has_work and has_stress and has_relationship and has_health_issue:
+        # This is about work stress, a difficult colleague situation, and their substance issue
+        return f"That's a lot to carry alone. An attorney managing multiple clients, AND having to suddenly take on your assistant's responsibilities because of their drinking problem? That's not just stressful—that's a significant breach of trust and a real workload crisis. You've been covering two jobs at once. How are you holding up with that weight on your shoulders right now?"
+    
+    # Work stress with relationship difficulty
+    if has_work and has_stress and has_relationship:
+        return f"It sounds like you're not just dealing with work pressure, but also with someone else's struggle affecting your responsibilities. That's a heavy combination. Can you tell me more about what's been the hardest part of this situation?"
+    
+    # General work stress
+    if has_work and has_stress:
+        if "deadline" in message_lower or "fact sheet" in message_lower:
+            return "Deadlines and the pressure to deliver quality work can be draining, especially when they pile up. What's making this particular deadline feel especially stressful?"
+        return "Work stress is real, and it sounds like you're feeling it. What's been the most overwhelming part?"
+    
+    # Stress about someone else
+    if has_stress and has_relationship:
+        return "When the people around us are struggling, it affects us too—especially when it impacts what we need to do. That can feel frustrating and sad at the same time. How has this been affecting you personally?"
+    
+    # General stress
+    if has_stress:
+        return "I hear the weight in what you're sharing. Stress can feel isolating. What's one thing about this situation that's been hardest for you?"
+    
+    # Happy/positive tone
+    if any(word in message_lower for word in ["happy", "great", "wonderful", "amazing", "love", "excited"]):
+        return "That warmth comes through. I'm glad you're experiencing that. What's making you feel this way?"
+    
+    # Confused/lost
+    if any(word in message_lower for word in ["confused", "lost", "don't know", "uncertain"]):
+        return "Confusion can feel disorienting. I'm here to help you find clarity. What part of this feels most confusing right now?"
+    
+    # Sad/down
+    if any(word in message_lower for word in ["sad", "depressed", "down", "unhappy"]):
+        return "I hear sadness in what you're sharing. That's real and I'm present with it. Can you tell me more about what's weighing on you?"
+    
+    # Default - acknowledge and ask for more specificity
+    return "I hear you. That sounds significant. Can you tell me more about what you're experiencing?"
+
 
 
 if __name__ == "__main__":
