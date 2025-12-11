@@ -21,7 +21,7 @@ import time
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import Callable, Optional, List
+from typing import Callable, Optional, List, Tuple, Dict, Any
 
 import numpy as np
 
@@ -146,12 +146,20 @@ class TextToSpeechStreamer:
         self.is_playing = False
         self.playback_thread: Optional[threading.Thread] = None
         
+        # Import prosody planner
+        try:
+            from .prosody_planner import ProsodyPlanner
+            self.prosody_planner = ProsodyPlanner()
+        except ImportError:
+            logger.warning("ProsodyPlanner not available, using plain TTS")
+            self.prosody_planner = None
+        
     def chunk_response(self, text: str, chunk_size: int = 100) -> List[str]:
         """
         Split response text into small chunks for streaming
         
         Args:
-            text: Full response text
+            text: Full response text (may include SSML tags)
             chunk_size: Target characters per chunk
             
         Returns:
@@ -185,7 +193,7 @@ class TextToSpeechStreamer:
         Synthesize a text chunk to audio
         
         Args:
-            text: Text to synthesize
+            text: Text to synthesize (may include SSML)
             
         Returns:
             Audio data as numpy array or None if failed
@@ -198,28 +206,44 @@ class TextToSpeechStreamer:
             engine.setProperty('rate', 150)  # Slower speech for clarity
             
             # Save to temp file
-            temp_path = Path("/tmp/tts_chunk.wav")
-            engine.save_to_file(text, str(temp_path))
-            engine.runAndWait()
-            
-            if temp_path.exists():
-                import scipy.io.wavfile as wavfile
-                _, audio_data = wavfile.read(str(temp_path))
-                temp_path.unlink()
-                return audio_data
+            import tempfile
+            temp_fd, temp_path = tempfile.mkstemp(suffix=".wav")
+            try:
+                engine.save_to_file(text, temp_path)
+                engine.runAndWait()
+                
+                if Path(temp_path).exists():
+                    import scipy.io.wavfile as wavfile
+                    _, audio_data = wavfile.read(temp_path)
+                    return audio_data
+            finally:
+                try:
+                    import os
+                    os.close(temp_fd)
+                    Path(temp_path).unlink(missing_ok=True)
+                except Exception:
+                    pass
         except Exception as e:
             logger.debug(f"pyttsx3 synthesis failed: {e}")
         
         return None
     
-    async def stream_response(self, full_text: str, playback_callback: Callable):
+    async def stream_response(self, full_text: str, playback_callback: Callable, 
+                            glyph_intent: Optional[Dict[str, Any]] = None):
         """
-        Stream response: synthesize chunks and queue for playback
+        Stream response: apply prosody, synthesize chunks, and queue for playback
         
         Args:
             full_text: Full response text
             playback_callback: Callback to play each chunk
+            glyph_intent: Optional glyph intent for prosody control
         """
+        # Apply prosody planning if available
+        if self.prosody_planner and glyph_intent:
+            full_text = self.prosody_planner.plan(full_text, glyph_intent)
+            prosody_summary = self.prosody_planner.get_prosody_summary(glyph_intent)
+            logger.info(f"Prosody applied: {prosody_summary}")
+        
         chunks = self.chunk_response(full_text)
         
         for i, chunk in enumerate(chunks):
@@ -235,7 +259,7 @@ class TextToSpeechStreamer:
                     )
                     self.chunk_queue.put(audio_chunk)
                     
-                    # Callback for UI updates
+                    # Callback for UI updates and playback
                     await playback_callback(audio_chunk)
             except Exception as e:
                 logger.error(f"Failed to synthesize chunk {i}: {e}")
@@ -245,21 +269,36 @@ class AudioConversationOrchestrator:
     """
     Main orchestrator managing the full audio conversation cycle
     
-    Flow:
-    1. Prompt user to record
-    2. Record audio (auto-stop on silence)
-    3. Transcribe with Whisper
-    4. Process through FirstPerson pipeline
-    5. Split response into chunks
-    6. Stream TTS output with seamless chunk queuing
-    7. Loop back to step 1
+    Integrated Flow:
+    1. Prompt user to record → AudioRecorder captures speech
+    2. Transcribe with Whisper (faster-whisper for CPU efficiency)
+    3. Process through FirstPerson pipeline → get (response, glyph_intent)
+    4. Plan prosody from glyph intent (ProsodyPlanner)
+    5. Stream response text to TTS in chunks
+    6. Play audio NON-BLOCKING while next chunk synthesizes
+    7. Seamlessly loop back for next user input
+    
+    Key Features:
+    - Glyph intent drives prosody (voltage → rate/volume, tone → pitch, etc.)
+    - Non-blocking playback allows overlap between synthesis and playback
+    - Automatic silence detection for natural recording stops
+    - State machine for UI coordination
+    - Graceful pause/resume/stop controls
     """
     
-    def __init__(self, response_processor: Callable, max_turns: int = 50):
+    def __init__(self, response_processor: Callable[[str, Dict[str, Any]], Tuple[str, Optional[Dict[str, Any]]]], 
+                 max_turns: int = 50):
         """
         Args:
-            response_processor: Function that takes (user_text, context) and returns response
-            max_turns: Maximum conversation turns
+            response_processor: Function that takes (user_text, context) and returns 
+                              (response_text, glyph_intent) or just response_text.
+                              Glyph intent should have keys:
+                              - voltage: "low" | "medium" | "high"
+                              - tone: "negative" | "neutral" | "positive"
+                              - certainty: "low" | "neutral" | "high"
+                              - energy: float (0.0-1.0)
+                              - hesitation: bool
+            max_turns: Maximum conversation turns before auto-stop
         """
         self.response_processor = response_processor
         self.max_turns = max_turns
@@ -291,7 +330,15 @@ class AudioConversationOrchestrator:
     
     async def run_conversation_loop(self) -> List[ConversationTurn]:
         """
-        Run the main conversation loop
+        Run the main conversation loop with audio I/O orchestration
+        
+        Flow:
+        1. Record user speech
+        2. Transcribe to text
+        3. Process through FirstPerson (get response + glyph intent)
+        4. Plan prosody based on glyph intent
+        5. Stream TTS with non-blocking playback
+        6. Loop back for next input
         
         Returns:
             List of conversation turns
@@ -324,7 +371,7 @@ class AudioConversationOrchestrator:
                 
                 logger.info(f"User: {user_text}")
                 
-                # 3. PROCESS
+                # 3. PROCESS (get response + glyph intent)
                 self._set_state(ConversationState.PROCESSING)
                 start_time = time.time()
                 
@@ -333,17 +380,32 @@ class AudioConversationOrchestrator:
                     "turn_number": turn_count + 1
                 }
                 
-                system_response = self.response_processor(user_text, context)
+                # Response processor should return (text, glyph_intent) or just text
+                response_result = self.response_processor(user_text, context)
+                
+                if isinstance(response_result, tuple):
+                    system_response, glyph_intent = response_result
+                else:
+                    system_response = response_result
+                    glyph_intent = None
+                
                 processing_time = time.time() - start_time
                 
                 logger.info(f"System: {system_response}")
+                if glyph_intent:
+                    logger.info(f"Glyph intent: {glyph_intent}")
                 logger.info(f"Processing time: {processing_time:.2f}s")
                 
-                # 4. STREAM AUDIO RESPONSE
+                # 4. STREAM AUDIO RESPONSE (with prosody planning)
                 self._set_state(ConversationState.SPEAKING)
+                
+                # Add initial buffer before playback begins (200-300ms)
+                await asyncio.sleep(0.25)
+                
                 await self.tts_streamer.stream_response(
                     system_response,
-                    self._playback_callback
+                    self._playback_callback,
+                    glyph_intent=glyph_intent
                 )
                 
                 # Store turn
@@ -390,7 +452,7 @@ class AudioConversationOrchestrator:
     
     async def _playback_callback(self, chunk: AudioChunk):
         """
-        Callback when a TTS chunk is ready for playback
+        Callback when a TTS chunk is ready for playback (NON-BLOCKING)
         
         Args:
             chunk: AudioChunk to play
@@ -398,11 +460,15 @@ class AudioConversationOrchestrator:
         try:
             import sounddevice as sd
             
-            # Play chunk
-            sd.play(chunk.audio_data, samplerate=16000, blocking=True)
+            # Non-blocking playback - starts playing immediately
+            # Next chunk can be synthesized while this one is playing
+            sd.play(chunk.audio_data, samplerate=16000, blocking=False)
             
-            # Optionally queue next chunk while this plays
-            logger.debug(f"Playing chunk {chunk.sequence}, final: {chunk.is_final}")
+            # Wait for chunk duration before callback returns
+            # This gives synthesis time to stay ahead of playback
+            await asyncio.sleep(chunk.duration * 0.9)  # Slight overlap for smoothness
+            
+            logger.debug(f"Playing chunk {chunk.sequence}, final: {chunk.is_final}, duration: {chunk.duration:.2f}s")
         except Exception as e:
             logger.error(f"Playback error: {e}")
     
