@@ -100,18 +100,16 @@ export default function Home() {
       {/* SPLASH SCREEN */}
       {view === "splash" && (
         <div className="splash-content">
-          {/* Logo - animated dissolve */}
+          {/* Logo - stays visible */}
           <motion.div
             animate={
               logoMoving
                 ? {
-                    opacity: 0,
-                    scale: 0.5,
-                    y: -100,
+                    opacity: [1, 0, 1],
                   }
-                : { opacity: 1, scale: 1, y: 0 }
+                : { opacity: 1 }
             }
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             className="splash-logo"
           >
             <Image
@@ -133,28 +131,30 @@ export default function Home() {
             >
               <h1 className="splash-title">Personal Chat Companion</h1>
 
-              {/* Buttons - properly spaced vertically */}
+              {/* Buttons - Login/Register side by side, Demo below */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="splash-buttons"
               >
-                <button
-                  onClick={() => setView("login")}
-                  className="btn btn-splash"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => setView("register")}
-                  className="btn btn-splash"
-                >
-                  Register
-                </button>
+                <div className="splash-buttons-row">
+                  <button
+                    onClick={() => setView("login")}
+                    className="btn btn-splash"
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => setView("register")}
+                    className="btn btn-splash"
+                  >
+                    Register
+                  </button>
+                </div>
                 <button
                   onClick={handleDemo}
-                  className="btn btn-splash"
+                  className="btn btn-splash btn-splash-full"
                 >
                   Demo
                 </button>
