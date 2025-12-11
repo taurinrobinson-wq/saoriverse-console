@@ -89,6 +89,15 @@ export default function Home() {
 
   const handleDemo = async () => {
     try {
+      // Create a demo auth token
+      const demoToken = Buffer.from(JSON.stringify({
+        username: "demo_user",
+        user_id: `demo_${Date.now()}`,
+        authenticated: true,
+        created_at: new Date().toISOString(),
+      })).toString('base64');
+      
+      localStorage.setItem("authToken", demoToken);
       window.location.href = "/chat?demo=true";
     } catch (error) {
       console.error("Demo load failed:", error);
