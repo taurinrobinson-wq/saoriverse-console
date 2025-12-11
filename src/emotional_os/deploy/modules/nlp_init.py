@@ -178,9 +178,16 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
                 import_error = ImportError("Could not find parser/nrc_lexicon_loader.py in parent directories")
         
         if nrc is not None:
-            NLP_STATE["nrc_available"] = True
-            NLP_STATE["nrc_exc"] = None
-            logger.info("NRC lexicon available")
+            # Verify the NRC lexicon has data (not just imported but empty)
+            has_data = nrc.lexicon and len(nrc.lexicon) > 0
+            if has_data:
+                NLP_STATE["nrc_available"] = True
+                NLP_STATE["nrc_exc"] = None
+                logger.info(f"NRC lexicon available with {len(nrc.lexicon)} words")
+            else:
+                logger.warning("NRC lexicon module imported but contains no data. Check data/lexicons/nrc_emotion_lexicon.txt")
+                NLP_STATE["nrc_available"] = False
+                NLP_STATE["nrc_exc"] = "NRC module imported but lexicon data not loaded (file not found?)"
         else:
             raise import_error or ImportError("NRC lexicon import failed with unknown error")
             
