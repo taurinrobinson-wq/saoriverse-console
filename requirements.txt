@@ -44,6 +44,14 @@ spacy>=3.6.0  # Python 3.12: Full support (commented for 3.13 only)
 #   python -m spacy download en_core_web_sm
 
 # ============================================================================
+# LOCAL LLM & AI INTEGRATION
+# ============================================================================
+ollama>=0.0.0  # Ollama Python client for local LLM interaction
+# Note: Requires ollama service running (Docker or local installation)
+#   Docker: docker-compose -f docker-compose.local.yml up -d ollama
+#   Local:  ollama serve
+
+# ============================================================================
 # SPEECH & AUDIO PROCESSING
 # ============================================================================
 # Speech Recognition (Local STT)
