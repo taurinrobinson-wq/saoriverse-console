@@ -2,201 +2,305 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { ArrowRight, Mic, Brain, Lock } from "lucide-react";
+import Image from "next/image";
+
+type View = "splash" | "login" | "register";
 
 export default function Home() {
-  const [showContent, setShowContent] = useState(false);
+  const [view, setView] = useState<View>("splash");
+  const [showLogo, setShowLogo] = useState(true);
+  const [logoMoving, setLogoMoving] = useState(false);
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [registerData, setRegisterData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+  });
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowContent(true), 300);
+    const timer = setTimeout(() => {
+      setLogoMoving(true);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // Call auth.py edge function
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: loginUsername,
+          password: loginPassword,
+        }),
+      });
+      if (response.ok) {
+        // Navigate to authenticated-saori
+        window.location.href = "/chat";
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // Call auth-manager edge function
+      const response = await fetch("/api/auth-manager", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registerData),
+      });
+      if (response.ok) {
+        setView("login");
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
+  };
+
+  const handleDemo = async () => {
+    try {
+      // Load saori-fixed edge function
+      window.location.href = "/chat?demo=true";
+    } catch (error) {
+      console.error("Demo load failed:", error);
+    }
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white overflow-hidden">
-      <motion.div
-        className="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        animate={{
-          x: [0, 50, -50, 0],
-          y: [0, -50, 50, 0],
-        }}
-        transition={{ duration: 20, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        animate={{
-          x: [0, -50, 50, 0],
-          y: [0, 50, -50, 0],
-        }}
-        transition={{ duration: 25, repeat: Infinity }}
-      />
-
-      <motion.div
-        className="container mx-auto px-4 py-12 relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate={showContent ? "visible" : "hidden"}
-      >
-        <motion.div className="text-center mb-16" variants={itemVariants}>
+    <main className="min-h-screen bg-white flex items-center justify-center">
+      {view === "splash" && (
+        <motion.div className="flex flex-col items-center gap-8">
+          {/* Logo */}
           <motion.div
-            className="inline-block mb-6"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
+            animate={
+              logoMoving
+                ? {
+                    opacity: 0.3,
+                    scale: 0.3,
+                    y: -80,
+                  }
+                : { opacity: 1, scale: 1, y: 0 }
+            }
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="relative w-48 h-48"
           >
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 flex items-center justify-center text-4xl shadow-2xl">
-              🧠
-            </div>
+            <Image
+              src="/graphics/FirstPerson-Logo_cropped.svg"
+              alt="FirstPerson Logo"
+              fill
+              className="object-contain"
+            />
           </motion.div>
 
-          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">
-            FirstPerson
-          </h1>
-          <p className="text-2xl text-indigo-200 mb-4">
-            Talk with an emotionally aware AI companion
-          </p>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Experience conversations that understand emotion, respond with personality, and evolve with you.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-          variants={containerVariants}
-        >
-          {[
-            {
-              icon: Mic,
-              title: "Voice First",
-              description:
-                "Record your message and get audio responses with emotional understanding.",
-            },
-            {
-              icon: Brain,
-              title: "Smart Responses",
-              description:
-                "Powered by local LLM with emotional intelligence analysis.",
-            },
-            {
-              icon: Lock,
-              title: "100% Private",
-              description: "All processing happens locally. Your data stays with you.",
-            },
-          ].map((feature, index) => (
+          {/* Text that appears after logo dissolve */}
+          {logoMoving && (
             <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-xl border border-slate-700 hover:border-indigo-500 transition-all duration-300 overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-center"
             >
+              <h1 className="text-3xl font-bold text-slate-900 mb-2">
+                Personal Companion
+              </h1>
+
+              {/* Buttons */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-indigo-600/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                whileHover={{ opacity: 1 }}
-              />
-
-              <div className="relative z-10">
-                <motion.div
-                  className="inline-block mb-4 p-3 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-lg"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <feature.icon className="w-6 h-6 text-white" />
-                </motion.div>
-
-                <h2 className="text-2xl font-bold mb-3">{feature.title}</h2>
-                <p className="text-slate-400 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div variants={itemVariants} className="mb-16">
-          <h3 className="text-3xl font-bold text-center mb-8">
-            Experience the magic
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              "Emotional awareness",
-              "Dance mode",
-              "Memory & context",
-              "Multi-model support",
-              "Real-time transcription",
-              "Voice synthesis",
-              "Glyph visualization",
-              "Settings & preferences",
-            ].map((capability, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center justify-center p-4 bg-slate-800/50 rounded-lg border border-slate-700 hover:border-indigo-500 transition-all"
-                whileHover={{ scale: 1.05, y: -5 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="flex gap-4 mt-12 flex-col sm:flex-row"
               >
-                <span className="text-sm font-medium text-indigo-300">
-                  ✨ {capability}
-                </span>
+                <button
+                  onClick={() => setView("login")}
+                  className="px-8 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => setView("register")}
+                  className="px-8 py-3 bg-slate-200 text-slate-900 rounded-lg font-semibold hover:bg-slate-300 transition-colors"
+                >
+                  Register
+                </button>
+                <button
+                  onClick={handleDemo}
+                  className="px-8 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
+                >
+                  Demo
+                </button>
               </motion.div>
-            ))}
+            </motion.div>
+          )}
+        </motion.div>
+      )}
+
+      {view === "login" && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="w-full max-w-md px-6"
+        >
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Login</h2>
+
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  value={loginUsername}
+                  onChange={(e) => setLoginUsername(e.target.value)}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors mt-6"
+              >
+                Sign In
+              </button>
+            </form>
+
+            <button
+              onClick={() => setView("splash")}
+              className="w-full mt-4 px-4 py-2 text-slate-600 font-medium hover:text-slate-900 transition-colors"
+            >
+              Back
+            </button>
           </div>
         </motion.div>
+      )}
 
-        <motion.div variants={itemVariants} className="text-center">
-          <Link href="/chat">
-            <motion.button
-              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-2xl inline-flex items-center gap-2 group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Start Chatting
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+      {view === "register" && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="w-full max-w-md px-6"
+        >
+          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Register</h2>
+
+            <form onSubmit={handleRegister} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={registerData.firstName}
+                  onChange={(e) =>
+                    setRegisterData({ ...registerData, firstName: e.target.value })
+                  }
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={registerData.lastName}
+                  onChange={(e) =>
+                    setRegisterData({ ...registerData, lastName: e.target.value })
+                  }
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={registerData.email}
+                  onChange={(e) =>
+                    setRegisterData({ ...registerData, email: e.target.value })
+                  }
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  value={registerData.username}
+                  onChange={(e) =>
+                    setRegisterData({ ...registerData, username: e.target.value })
+                  }
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={registerData.password}
+                  onChange={(e) =>
+                    setRegisterData({ ...registerData, password: e.target.value })
+                  }
+                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors mt-6"
               >
-                <ArrowRight className="w-5 h-5" />
-              </motion.span>
-            </motion.button>
-          </Link>
-        </motion.div>
+                Create Account
+              </button>
+            </form>
 
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-indigo-400 rounded-full opacity-50"
-            animate={{
-              x: Math.cos(i) * 200,
-              y: Math.sin(i) * 200,
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: 4 + i,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + i * 10}%`,
-            }}
-          />
-        ))}
-      </motion.div>
+            <button
+              onClick={() => setView("splash")}
+              className="w-full mt-4 px-4 py-2 text-slate-600 font-medium hover:text-slate-900 transition-colors"
+            >
+              Back
+            </button>
+          </div>
+        </motion.div>
+      )}
     </main>
   );
 }
