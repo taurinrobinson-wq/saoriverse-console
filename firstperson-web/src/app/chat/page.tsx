@@ -44,32 +44,30 @@ export default function ChatPage() {
     setIsLoading(true);
 
     try {
-      // Call the saori-fixed edge function via Supabase
-      const response = await fetch(
-        "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-          body: JSON.stringify({
-            message: userMessage.content,
-            conversation_id: "default",
-          }),
-        }
-      );
+      // Call our Next.js API which proxies to the Python backend
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userMessage.content,
+          userId: user?.user_id || "demo_user",
+        }),
+      });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         const assistantMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: "assistant",
-          content: data.response || "I'm listening...",
+          content: data.message || "I'm listening...",
           timestamp: new Date(),
         };
         setMessages((prev) => [...prev, assistantMessage]);
+      } else {
+        throw new Error(data.error || "Failed to get response");
       }
     } catch (error) {
       console.error("Error sending message:", error);
