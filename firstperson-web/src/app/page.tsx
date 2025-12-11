@@ -31,7 +31,7 @@ export default function Home() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/auth", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -39,10 +39,15 @@ export default function Home() {
           password: loginPassword,
         }),
       });
-      if (response.ok) {
+      const data = await response.json();
+      if (response.ok && data.success) {
+        // Store token if provided
+        if (data.access_token) {
+          localStorage.setItem("authToken", data.access_token);
+        }
         window.location.href = "/chat";
       } else {
-        alert("Login failed");
+        alert(data.error || "Login failed");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -53,16 +58,17 @@ export default function Home() {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/auth-manager", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(registerData),
       });
-      if (response.ok) {
+      const data = await response.json();
+      if (response.ok && data.success) {
         setView("login");
         alert("Registration successful! Please log in.");
       } else {
-        alert("Registration failed");
+        alert(data.error || "Registration failed");
       }
     } catch (error) {
       console.error("Registration failed:", error);
@@ -80,9 +86,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white flex items-center justify-center p-4">
+    <main style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}>
       {view === "splash" && (
-        <motion.div className="flex flex-col items-center justify-center gap-12 max-w-md">
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '48px' }}>
           {/* Logo - smaller and centered */}
           <motion.div
             animate={
@@ -95,7 +101,7 @@ export default function Home() {
                 : { opacity: 1, scale: 1, y: 0 }
             }
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="relative w-32 h-32"
+            className="relative w-24 h-24"
           >
             <Image
               src="/graphics/FirstPerson-Logo_cropped.svg"
@@ -122,30 +128,30 @@ export default function Home() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-col gap-3 w-full"
+                className="flex flex-col gap-8 w-72"
               >
                 <button
                   onClick={() => setView("login")}
-                  className="px-6 py-2.5 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors"
+                  className="px-8 py-4 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors text-base"
                 >
                   Login
                 </button>
                 <button
                   onClick={() => setView("register")}
-                  className="px-6 py-2.5 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors"
+                  className="px-8 py-4 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors text-base"
                 >
                   Register
                 </button>
                 <button
                   onClick={handleDemo}
-                  className="px-6 py-2.5 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors"
+                  className="px-8 py-4 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors text-base"
                 >
                   Demo
                 </button>
               </motion.div>
             </motion.div>
           )}
-        </motion.div>
+        </div>
       )}
 
       {view === "login" && (
@@ -153,9 +159,9 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-sm"
+          style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}
         >
-          <div className="bg-white p-8">
+          <div style={{ backgroundColor: 'white', padding: '32px', width: '100%', maxWidth: '400px' }}>
             <h2 className="text-xl font-light text-slate-900 mb-6 text-center">
               Login
             </h2>
@@ -206,9 +212,9 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-sm"
+          style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white' }}
         >
-          <div className="bg-white p-8">
+          <div style={{ backgroundColor: 'white', padding: '32px', width: '100%', maxWidth: '400px' }}>
             <h2 className="text-xl font-light text-slate-900 mb-6 text-center">
               Register
             </h2>
