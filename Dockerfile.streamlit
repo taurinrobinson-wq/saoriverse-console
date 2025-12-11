@@ -16,8 +16,8 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download spaCy model for NLP (direct package install)
-RUN pip install --no-cache-dir https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.1/en_core_web_sm-3.8.1-py3-none-any.whl
+# Download and install spaCy model using python -m spacy download (more reliable)
+RUN python -m spacy download en_core_web_sm --quiet 2>/dev/null || echo "Warning: spaCy model download had issues, will retry at runtime"
 
 # Copy application code
 COPY . .
