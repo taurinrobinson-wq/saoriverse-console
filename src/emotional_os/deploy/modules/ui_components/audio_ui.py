@@ -42,8 +42,10 @@ try:
     import sounddevice as sd
     HAS_SOUNDDEVICE = True
 except (ImportError, OSError) as e:
-    # OSError raised when PortAudio library not found
+    # OSError raised when PortAudio library not found (common on Streamlit Cloud)
     logger.warning(f"sounddevice unavailable: {e}. Audio recording disabled.")
+    logger.info("Note: Streamlit Cloud doesn't have PortAudio library installed.")
+    logger.info("Audio recording works locally but is disabled on Streamlit Cloud.")
     HAS_SOUNDDEVICE = False
 
 
@@ -114,7 +116,16 @@ def render_audio_recorder():
     
     if missing_deps:
         st.error(f"Voice recording unavailable - missing: {', '.join(missing_deps)}")
-        st.info(f"Install with: `pip install {' '.join(missing_deps)}`")
+        
+        # Check if running on Streamlit Cloud
+        if HAS_SOUNDDEVICE is False and "sounddevice" in missing_deps:
+            st.warning(
+                "**Note:** Streamlit Cloud doesn't have PortAudio system library installed. "
+                "Voice recording works when running locally but is unavailable on Streamlit Cloud. "
+                "[Run locally](/docs/deploy/streamlit-community-cloud/deploy-your-app) for voice features."
+            )
+        else:
+            st.info(f"Install with: `pip install {' '.join(missing_deps)}`")
         return None
     
     col1, col2 = st.columns([2, 1])

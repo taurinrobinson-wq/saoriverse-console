@@ -33,6 +33,12 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     Returns a dict describing which components are available and any
     exception messages captured. This function is safe to call repeatedly.
     """
+    # Ensure src is in sys.path for imports
+    from pathlib import Path
+    src_path = str(Path(__file__).parent.parent.parent.parent)  # Navigate to src/
+    if src_path not in sys.path:
+        sys.path.insert(0, src_path)
+    
     # TextBlob
     try:
         from textblob import TextBlob  # noqa: F401
@@ -57,25 +63,49 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
             logger.info(f"Attempting to load spaCy model '{model_name}'...")
             _nlp = spacy.load(model_name)
             NLP_STATE["spacy_model_loaded"] = True
-            logger.info("spaCy model '%s' loaded", model_name)
+            logger.info("spaCy model '%s' loaded successfully", model_name)
         except Exception as me:
             # Try to download the model if it's missing
             logger.debug(f"Model load failed: {me}, attempting to download...")
             try:
                 import subprocess
-                result = subprocess.run([sys.executable, "-m", "spacy", "download", model_name], 
-                                      capture_output=True, timeout=60)
-                if result.returncode == 0:
-                    # Try loading again after download
-                    _nlp = spacy.load(model_name)
-                    NLP_STATE["spacy_model_loaded"] = True
-                    logger.info("spaCy model '%s' downloaded and loaded successfully", model_name)
+                import os
+                
+                # Detect if running on Streamlit Cloud (limited write permissions)
+                is_streamlit_cloud = os.environ.get('STREAMLIT_SERVER_HEADLESS', False) and \
+                                   not os.path.exists('/home/appuser/.cache')
+                
+                if is_streamlit_cloud:
+                    logger.warning(
+                        f"spaCy model '{model_name}' not available on Streamlit Cloud. "
+                        "This is expected - Streamlit Cloud has limited write permissions. "
+                        "NLP features will be partially available. For full NLP, run locally."
+                    )
+                    NLP_STATE["spacy_model_loaded"] = False
+                    NLP_STATE["spacy_exc"] = "Not available on Streamlit Cloud (limited write permissions)"
                 else:
-                    raise Exception(f"Download failed with code {result.returncode}")
+                    # Try downloading on local systems
+                    result = subprocess.run(
+                        [sys.executable, "-m", "spacy", "download", model_name], 
+                        capture_output=True, 
+                        timeout=120
+                    )
+                    if result.returncode == 0:
+                        # Try loading again after download
+                        _nlp = spacy.load(model_name)
+                        NLP_STATE["spacy_model_loaded"] = True
+                        logger.info("spaCy model '%s' downloaded and loaded successfully", model_name)
+                    else:
+                        stderr_msg = result.stderr.decode('utf-8', errors='ignore') if result.stderr else ""
+                        raise Exception(f"Download failed with code {result.returncode}: {stderr_msg}")
             except Exception as download_err:
                 NLP_STATE["spacy_model_loaded"] = False
-                NLP_STATE["spacy_exc"] = repr(me)
-                logger.error("spaCy model '%s' could not be loaded or downloaded: %s", model_name, download_err)
+                NLP_STATE["spacy_exc"] = repr(download_err)
+                logger.error(
+                    "spaCy model '%s' could not be loaded or downloaded: %s", 
+                    model_name, 
+                    download_err
+                )
     except Exception as e:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
