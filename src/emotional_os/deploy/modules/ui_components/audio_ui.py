@@ -78,10 +78,21 @@ def render_voice_mode_toggle():
         st.markdown("---")
         st.subheader("🎙️ Voice Mode")
         
+        # Check if voice features are available
+        has_all_deps = HAS_SPEECH_RECOGNITION and HAS_SOUNDFILE and HAS_SOUNDDEVICE
+        
+        if not has_all_deps:
+            st.warning(
+                "🔇 Voice mode unavailable\n\n"
+                "Missing dependencies or system libraries (e.g., PortAudio on Streamlit Cloud). "
+                "[Run locally](/docs/deploy/streamlit-community-cloud/deploy-your-app) for voice features."
+            )
+            return
+        
         voice_enabled = st.checkbox(
             "Enable Voice Input/Output",
             value=st.session_state.get("voice_mode_enabled", False),
-            help="Enable microphone input and audio playback (experimental)"
+            help="Enable microphone input and audio playback"
         )
         
         st.session_state["voice_mode_enabled"] = voice_enabled
@@ -94,15 +105,13 @@ def render_voice_mode_toggle():
             )
 
 
+
 def render_audio_recorder():
     """Record audio from microphone and return transcribed text.
     
     Returns:
         Transcribed text or None if recording failed
     """
-    # Debug logging
-    logger.info(f"Voice dependencies: whisper={HAS_SPEECH_RECOGNITION}, soundfile={HAS_SOUNDFILE}, sounddevice={HAS_SOUNDDEVICE}")
-    
     # Check all required dependencies
     missing_deps = []
     if not HAS_SPEECH_RECOGNITION:
