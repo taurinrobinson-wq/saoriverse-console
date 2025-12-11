@@ -8,7 +8,6 @@ type View = "splash" | "login" | "register";
 
 export default function Home() {
   const [view, setView] = useState<View>("splash");
-  const [showLogo, setShowLogo] = useState(true);
   const [logoMoving, setLogoMoving] = useState(false);
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -21,16 +20,17 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLogoMoving(true);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
+    if (view === "splash") {
+      const timer = setTimeout(() => {
+        setLogoMoving(true);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [view]);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Call auth.py edge function
       const response = await fetch("/api/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,18 +40,19 @@ export default function Home() {
         }),
       });
       if (response.ok) {
-        // Navigate to authenticated-saori
         window.location.href = "/chat";
+      } else {
+        alert("Login failed");
       }
     } catch (error) {
       console.error("Login failed:", error);
+      alert("Login error");
     }
   };
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Call auth-manager edge function
       const response = await fetch("/api/auth-manager", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -59,9 +60,13 @@ export default function Home() {
       });
       if (response.ok) {
         setView("login");
+        alert("Registration successful! Please log in.");
+      } else {
+        alert("Registration failed");
       }
     } catch (error) {
       console.error("Registration failed:", error);
+      alert("Registration error");
     }
   };
 
@@ -75,22 +80,22 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white flex items-center justify-center">
+    <main className="min-h-screen bg-white flex items-center justify-center p-4">
       {view === "splash" && (
-        <motion.div className="flex flex-col items-center gap-8">
-          {/* Logo */}
+        <motion.div className="flex flex-col items-center justify-center gap-12 max-w-md">
+          {/* Logo - smaller and centered */}
           <motion.div
             animate={
               logoMoving
                 ? {
-                    opacity: 0.3,
-                    scale: 0.3,
-                    y: -80,
+                    opacity: 0,
+                    scale: 0.5,
+                    y: -100,
                   }
                 : { opacity: 1, scale: 1, y: 0 }
             }
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="relative w-48 h-48"
+            className="relative w-32 h-32"
           >
             <Image
               src="/graphics/FirstPerson-Logo_cropped.svg"
@@ -103,37 +108,37 @@ export default function Home() {
           {/* Text that appears after logo dissolve */}
           {logoMoving && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="text-center"
             >
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">
+              <h1 className="text-2xl font-light text-slate-900 mb-8">
                 Personal Companion
               </h1>
 
-              {/* Buttons */}
+              {/* Buttons - white with black text, cleaner style */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex gap-4 mt-12 flex-col sm:flex-row"
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="flex flex-col gap-3 w-full"
               >
                 <button
                   onClick={() => setView("login")}
-                  className="px-8 py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                  className="px-6 py-2.5 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors"
                 >
                   Login
                 </button>
                 <button
                   onClick={() => setView("register")}
-                  className="px-8 py-3 bg-slate-200 text-slate-900 rounded-lg font-semibold hover:bg-slate-300 transition-colors"
+                  className="px-6 py-2.5 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors"
                 >
                   Register
                 </button>
                 <button
                   onClick={handleDemo}
-                  className="px-8 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors"
+                  className="px-6 py-2.5 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors"
                 >
                   Demo
                 </button>
@@ -145,44 +150,42 @@ export default function Home() {
 
       {view === "login" && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-          className="w-full max-w-md px-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="w-full max-w-sm"
         >
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Login</h2>
+          <div className="bg-white p-8">
+            <h2 className="text-xl font-light text-slate-900 mb-6 text-center">
+              Login
+            </h2>
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Username
-                </label>
                 <input
                   type="text"
+                  placeholder="Username"
                   value={loginUsername}
                   onChange={(e) => setLoginUsername(e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Password
-                </label>
                 <input
                   type="password"
+                  placeholder="Password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
                   required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors mt-6"
+                className="w-full px-4 py-2 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors mt-6"
               >
                 Sign In
               </button>
@@ -190,7 +193,7 @@ export default function Home() {
 
             <button
               onClick={() => setView("splash")}
-              className="w-full mt-4 px-4 py-2 text-slate-600 font-medium hover:text-slate-900 transition-colors"
+              className="w-full mt-4 px-4 py-2 text-slate-500 text-sm font-medium hover:text-slate-700 transition-colors"
             >
               Back
             </button>
@@ -200,93 +203,75 @@ export default function Home() {
 
       {view === "register" && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-          className="w-full max-w-md px-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="w-full max-w-sm"
         >
-          <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Register</h2>
+          <div className="bg-white p-8">
+            <h2 className="text-xl font-light text-slate-900 mb-6 text-center">
+              Register
+            </h2>
 
-            <form onSubmit={handleRegister} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  value={registerData.firstName}
-                  onChange={(e) =>
-                    setRegisterData({ ...registerData, firstName: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+            <form onSubmit={handleRegister} className="space-y-3">
+              <input
+                type="text"
+                placeholder="First Name"
+                value={registerData.firstName}
+                onChange={(e) =>
+                  setRegisterData({ ...registerData, firstName: e.target.value })
+                }
+                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
+                required
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  value={registerData.lastName}
-                  onChange={(e) =>
-                    setRegisterData({ ...registerData, lastName: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={registerData.lastName}
+                onChange={(e) =>
+                  setRegisterData({ ...registerData, lastName: e.target.value })
+                }
+                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
+                required
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={registerData.email}
-                  onChange={(e) =>
-                    setRegisterData({ ...registerData, email: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+              <input
+                type="email"
+                placeholder="Email"
+                value={registerData.email}
+                onChange={(e) =>
+                  setRegisterData({ ...registerData, email: e.target.value })
+                }
+                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
+                required
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  value={registerData.username}
-                  onChange={(e) =>
-                    setRegisterData({ ...registerData, username: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+              <input
+                type="text"
+                placeholder="Username"
+                value={registerData.username}
+                onChange={(e) =>
+                  setRegisterData({ ...registerData, username: e.target.value })
+                }
+                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
+                required
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={registerData.password}
-                  onChange={(e) =>
-                    setRegisterData({ ...registerData, password: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  required
-                />
-              </div>
+              <input
+                type="password"
+                placeholder="Password"
+                value={registerData.password}
+                onChange={(e) =>
+                  setRegisterData({ ...registerData, password: e.target.value })
+                }
+                className="w-full px-4 py-2 border border-slate-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-slate-400"
+                required
+              />
 
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors mt-6"
+                className="w-full px-4 py-2 bg-white text-slate-900 border border-slate-300 rounded font-medium hover:bg-slate-50 transition-colors mt-4"
               >
                 Create Account
               </button>
@@ -294,7 +279,7 @@ export default function Home() {
 
             <button
               onClick={() => setView("splash")}
-              className="w-full mt-4 px-4 py-2 text-slate-600 font-medium hover:text-slate-900 transition-colors"
+              className="w-full mt-4 px-4 py-2 text-slate-500 text-sm font-medium hover:text-slate-700 transition-colors"
             >
               Back
             </button>
