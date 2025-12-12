@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 type Message = {
@@ -8,6 +8,7 @@ type Message = {
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
+  glyph_voltage?: string;
 };
 
 type Conversation = {
@@ -27,6 +28,15 @@ export default function ChatPage() {
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+  
+  // Audio state
+  const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [transcript, setTranscript] = useState("");
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Check if user is authenticated
@@ -82,6 +92,86 @@ export default function ChatPage() {
     }
   };
 
+  // Audio Functions
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      chunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (e) => {
+        chunksRef.current.push(e.data);
+      };
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(chunksRef.current, { type: "audio/webm" });
+        await transcribeAudio(audioBlob);
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+    } catch (error) {
+      console.error("Error starting recording:", error);
+      alert("Unable to access microphone. Please check permissions.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  const transcribeAudio = async (audioBlob: Blob) => {
+    setIsTranscribing(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", audioBlob, "audio.webm");
+
+      const response = await fetch("http://localhost:8000/transcribe", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (data.success && data.text) {
+        setTranscript(data.text);
+        setInput(data.text);
+      }
+    } catch (error) {
+      console.error("Error transcribing:", error);
+      alert("Transcription failed. Please try again.");
+    } finally {
+      setIsTranscribing(false);
+    }
+  };
+
+  const playSynthesis = async (text: string) => {
+    setIsSynthesizing(true);
+    try {
+      const response = await fetch("http://localhost:8000/synthesize", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+
+      const data = await response.json();
+      if (data.success && data.audio_url) {
+        if (audioRef.current) {
+          audioRef.current.src = data.audio_url;
+          audioRef.current.play();
+        }
+      }
+    } catch (error) {
+      console.error("Error synthesizing:", error);
+    } finally {
+      setIsSynthesizing(false);
+    }
+  };
+
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -128,8 +218,14 @@ export default function ChatPage() {
           role: "assistant",
           content: data.message || "I'm listening...",
           timestamp: new Date(),
+          glyph_voltage: data.glyph_voltage,
         };
         setMessages((prev) => [...prev, assistantMessage]);
+
+        // Auto-synthesize response to audio
+        if (data.message) {
+          await playSynthesis(data.message);
+        }
 
         // Update conversation ID from response
         if (data.conversation_id && !currentConversationId) {
@@ -349,9 +445,39 @@ export default function ChatPage() {
           placeholder="Share what you're feeling..."
           disabled={isLoading}
         />
-        <button type="submit" className="btn btn-primary" disabled={isLoading}>
+        
+        {/* Audio Controls */}
+        <div className="audio-controls">
+          {isRecording ? (
+            <button
+              type="button"
+              onClick={stopRecording}
+              className="btn btn-recording"
+              title="Stop Recording"
+            >
+              ⏹ Stop
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={startRecording}
+              disabled={isTranscribing || isLoading}
+              className="btn btn-secondary"
+              title="Start Recording"
+            >
+              🎤
+            </button>
+          )}
+          
+          {isTranscribing && <span className="status">Transcribing...</span>}
+          {isSynthesizing && <span className="status">Speaking...</span>}
+        </div>
+
+        <button type="submit" className="btn btn-primary" disabled={isLoading || isRecording}>
           {isLoading ? "..." : "Send"}
         </button>
+        
+        <audio ref={audioRef} hidden />
       </form>
 
       {/* Rename Modal */}
@@ -529,6 +655,43 @@ export default function ChatPage() {
 
         .modal-buttons .btn {
           flex: 1;
+        }
+
+        .chat-input-area {
+          display: flex;
+          gap: 0.5rem;
+          padding: 1rem;
+          background: var(--bg-secondary);
+          border-top: 1px solid var(--border-color);
+          align-items: center;
+        }
+
+        .audio-controls {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .btn-recording {
+          background: #ef4444 !important;
+          animation: pulse-button 1s infinite;
+        }
+
+        @keyframes pulse-button {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+
+        .btn-secondary {
+          background: #667eea !important;
+          color: white !important;
+          border: none !important;
+        }
+
+        .status {
+          font-size: 0.75rem;
+          color: var(--text-secondary);
+          padding: 0 0.5rem;
         }
       `}</style>
     </div>
