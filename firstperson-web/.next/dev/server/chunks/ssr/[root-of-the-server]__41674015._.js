@@ -45,6 +45,18 @@ function ChatPage() {
     const [input, setInput] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [conversations, setConversations] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [currentConversationId, setCurrentConversationId] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isEditingTitle, setIsEditingTitle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [newTitle, setNewTitle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    // Audio state
+    const [isRecording, setIsRecording] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isTranscribing, setIsTranscribing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isSynthesizing, setIsSynthesizing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [transcript, setTranscript] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const mediaRecorderRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const chunksRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])([]);
+    const audioRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         // Check if user is authenticated
         const token = localStorage.getItem("authToken");
@@ -52,13 +64,130 @@ function ChatPage() {
             router.push("/");
             return;
         }
-        // TODO: Decode token to get user info
-        setUser({
-            username: "User"
-        });
+        // Decode token to get user info
+        const userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            const userData = JSON.parse(userInfo);
+            setUser(userData);
+            loadConversations(userData.username);
+        } else {
+            setUser({
+                username: "User"
+            });
+        }
     }, [
         router
     ]);
+    const loadConversations = async (userId)=>{
+        try {
+            const response = await fetch(`/api/conversations?userId=${userId}`);
+            const data = await response.json();
+            if (data.success) {
+                setConversations(data.conversations || []);
+            }
+        } catch (error) {
+            console.error("Error loading conversations:", error);
+        }
+    };
+    const loadConversation = async (conversationId)=>{
+        try {
+            const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`);
+            const data = await response.json();
+            if (data.success && data.message) {
+                const conv = JSON.parse(data.message);
+                // Convert messages to the format we use
+                const loadedMessages = (conv.messages || []).map((msg, idx)=>({
+                        id: idx.toString(),
+                        role: msg.role,
+                        content: msg.content,
+                        timestamp: new Date()
+                    }));
+                setMessages(loadedMessages);
+                setCurrentConversationId(conversationId);
+                setNewTitle(conv.title || "");
+            }
+        } catch (error) {
+            console.error("Error loading conversation:", error);
+        }
+    };
+    // Audio Functions
+    const startRecording = async ()=>{
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true
+            });
+            const mediaRecorder = new MediaRecorder(stream);
+            mediaRecorderRef.current = mediaRecorder;
+            chunksRef.current = [];
+            mediaRecorder.ondataavailable = (e)=>{
+                chunksRef.current.push(e.data);
+            };
+            mediaRecorder.onstop = async ()=>{
+                const audioBlob = new Blob(chunksRef.current, {
+                    type: "audio/webm"
+                });
+                await transcribeAudio(audioBlob);
+                stream.getTracks().forEach((track)=>track.stop());
+            };
+            mediaRecorder.start();
+            setIsRecording(true);
+        } catch (error) {
+            console.error("Error starting recording:", error);
+            alert("Unable to access microphone. Please check permissions.");
+        }
+    };
+    const stopRecording = ()=>{
+        if (mediaRecorderRef.current && isRecording) {
+            mediaRecorderRef.current.stop();
+            setIsRecording(false);
+        }
+    };
+    const transcribeAudio = async (audioBlob)=>{
+        setIsTranscribing(true);
+        try {
+            const formData = new FormData();
+            formData.append("file", audioBlob, "audio.webm");
+            const response = await fetch("http://localhost:8000/transcribe", {
+                method: "POST",
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success && data.text) {
+                setTranscript(data.text);
+                setInput(data.text);
+            }
+        } catch (error) {
+            console.error("Error transcribing:", error);
+            alert("Transcription failed. Please try again.");
+        } finally{
+            setIsTranscribing(false);
+        }
+    };
+    const playSynthesis = async (text)=>{
+        setIsSynthesizing(true);
+        try {
+            const response = await fetch("http://localhost:8000/synthesize", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text
+                })
+            });
+            const data = await response.json();
+            if (data.success && data.audio_url) {
+                if (audioRef.current) {
+                    audioRef.current.src = data.audio_url;
+                    audioRef.current.play();
+                }
+            }
+        } catch (error) {
+            console.error("Error synthesizing:", error);
+        } finally{
+            setIsSynthesizing(false);
+        }
+    };
     const handleSendMessage = async (e)=>{
         e.preventDefault();
         if (!input.trim() || isLoading) return;
@@ -75,6 +204,9 @@ function ChatPage() {
         setInput("");
         setIsLoading(true);
         try {
+            // Generate conversation ID if this is the first message
+            const isFirstMessage = messages.length === 0;
+            const conversationId = currentConversationId || Math.random().toString(36).substring(7);
             // Call our Next.js API which proxies to the Python backend
             const response = await fetch("/api/chat", {
                 method: "POST",
@@ -83,7 +215,16 @@ function ChatPage() {
                 },
                 body: JSON.stringify({
                     message: userMessage.content,
-                    userId: user?.user_id || "demo_user"
+                    userId: user?.username || "demo_user",
+                    context: {
+                        conversation_id: conversationId,
+                        is_first_message: isFirstMessage,
+                        messages: messages.map((m)=>({
+                                role: m.role,
+                                content: m.content
+                            })),
+                        title: newTitle || (isFirstMessage ? userMessage.content.substring(0, 50) : "")
+                    }
                 })
             });
             const data = await response.json();
@@ -92,12 +233,25 @@ function ChatPage() {
                     id: (Date.now() + 1).toString(),
                     role: "assistant",
                     content: data.message || "I'm listening...",
-                    timestamp: new Date()
+                    timestamp: new Date(),
+                    glyph_voltage: data.glyph_voltage
                 };
                 setMessages((prev)=>[
                         ...prev,
                         assistantMessage
                     ]);
+                // Auto-synthesize response to audio
+                if (data.message) {
+                    await playSynthesis(data.message);
+                }
+                // Update conversation ID from response
+                if (data.conversation_id && !currentConversationId) {
+                    setCurrentConversationId(data.conversation_id);
+                }
+                // Reload conversations to show new one or updates
+                if (user?.username) {
+                    loadConversations(user.username);
+                }
             } else {
                 throw new Error(data.error || "Failed to get response");
             }
@@ -117,123 +271,253 @@ function ChatPage() {
             setIsLoading(false);
         }
     };
+    const handleDeleteConversation = async (conversationId)=>{
+        if (!confirm("Delete this conversation?")) return;
+        try {
+            const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
+            if (data.success) {
+                setConversations((prev)=>prev.filter((c)=>c.conversation_id !== conversationId));
+                if (currentConversationId === conversationId) {
+                    setCurrentConversationId(null);
+                    setMessages([]);
+                }
+            }
+        } catch (error) {
+            console.error("Error deleting conversation:", error);
+        }
+    };
+    const handleRenameConversation = async (conversationId)=>{
+        try {
+            const response = await fetch(`/api/conversation/${user?.username}/${conversationId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    new_title: newTitle
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                setConversations((prev)=>prev.map((c)=>c.conversation_id === conversationId ? {
+                            ...c,
+                            title: newTitle
+                        } : c));
+                setIsEditingTitle(false);
+            }
+        } catch (error) {
+            console.error("Error renaming conversation:", error);
+        }
+    };
+    const handleNewConversation = ()=>{
+        setCurrentConversationId(null);
+        setMessages([]);
+        setNewTitle("");
+        setIsEditingTitle(false);
+    };
     const handleLogout = ()=>{
         localStorage.removeItem("authToken");
+        localStorage.removeItem("userInfo");
         router.push("/");
     };
     if (!user) return null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "jsx-2a208ad59eb46efe" + " " + "chat-container",
+        className: "jsx-d35465499a4ca470" + " " + "chat-container",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-2a208ad59eb46efe" + " " + "chat-header",
+                className: "jsx-d35465499a4ca470" + " " + "chat-header",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-2a208ad59eb46efe" + " " + "chat-title",
+                        className: "jsx-d35465499a4ca470" + " " + "chat-title",
                         children: "FirstPerson - Personal Companion"
                     }, void 0, false, {
                         fileName: "[project]/src/app/chat/page.tsx",
-                        lineNumber: 97,
+                        lineNumber: 316,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: handleLogout,
-                        className: "jsx-2a208ad59eb46efe" + " " + "btn",
+                        className: "jsx-d35465499a4ca470" + " " + "btn",
                         children: "Logout"
                     }, void 0, false, {
                         fileName: "[project]/src/app/chat/page.tsx",
-                        lineNumber: 98,
+                        lineNumber: 317,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/chat/page.tsx",
-                lineNumber: 96,
+                lineNumber: 315,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "jsx-2a208ad59eb46efe" + " " + "chat-main",
+                className: "jsx-d35465499a4ca470" + " " + "chat-main",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-2a208ad59eb46efe" + " " + "chat-sidebar",
+                        className: "jsx-d35465499a4ca470" + " " + "chat-sidebar",
                         children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                onClick: handleNewConversation,
+                                className: "jsx-d35465499a4ca470" + " " + "btn btn-sidebar-new",
+                                children: "+ New Conversation"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/chat/page.tsx",
+                                lineNumber: 326,
+                                columnNumber: 11
+                            }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                 style: {
                                     marginBottom: "1rem",
+                                    marginTop: "1rem",
                                     color: "var(--text-primary)"
                                 },
-                                className: "jsx-2a208ad59eb46efe",
+                                className: "jsx-d35465499a4ca470",
                                 children: "Conversations"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/chat/page.tsx",
-                                lineNumber: 107,
+                                lineNumber: 330,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                style: {
-                                    color: "var(--text-secondary)",
-                                    fontSize: "0.875rem"
-                                },
-                                className: "jsx-2a208ad59eb46efe",
-                                children: "New conversation"
+                                className: "jsx-d35465499a4ca470" + " " + "conversations-list",
+                                children: conversations.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        color: "var(--text-secondary)",
+                                        fontSize: "0.875rem"
+                                    },
+                                    className: "jsx-d35465499a4ca470",
+                                    children: "No conversations yet"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/chat/page.tsx",
+                                    lineNumber: 336,
+                                    columnNumber: 15
+                                }, this) : conversations.map((conv)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        onClick: ()=>loadConversation(conv.conversation_id),
+                                        className: "jsx-d35465499a4ca470" + " " + `conversation-item ${currentConversationId === conv.conversation_id ? "active" : ""}`,
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-d35465499a4ca470" + " " + "conv-title",
+                                                children: conv.title
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/chat/page.tsx",
+                                                lineNumber: 348,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-d35465499a4ca470" + " " + "conv-meta",
+                                                children: [
+                                                    conv.message_count,
+                                                    " messages"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/chat/page.tsx",
+                                                lineNumber: 349,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "jsx-d35465499a4ca470" + " " + "conv-actions",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        onClick: (e)=>{
+                                                            e.stopPropagation();
+                                                            setCurrentConversationId(conv.conversation_id);
+                                                            setNewTitle(conv.title);
+                                                            setIsEditingTitle(true);
+                                                        },
+                                                        title: "Edit",
+                                                        className: "jsx-d35465499a4ca470" + " " + "action-btn",
+                                                        children: "✎"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/chat/page.tsx",
+                                                        lineNumber: 353,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                        onClick: (e)=>{
+                                                            e.stopPropagation();
+                                                            handleDeleteConversation(conv.conversation_id);
+                                                        },
+                                                        title: "Delete",
+                                                        className: "jsx-d35465499a4ca470" + " " + "action-btn delete",
+                                                        children: "✕"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/chat/page.tsx",
+                                                        lineNumber: 365,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/chat/page.tsx",
+                                                lineNumber: 352,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, conv.conversation_id, true, {
+                                        fileName: "[project]/src/app/chat/page.tsx",
+                                        lineNumber: 341,
+                                        columnNumber: 17
+                                    }, this))
                             }, void 0, false, {
                                 fileName: "[project]/src/app/chat/page.tsx",
-                                lineNumber: 110,
+                                lineNumber: 334,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/chat/page.tsx",
-                        lineNumber: 106,
+                        lineNumber: 325,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "jsx-2a208ad59eb46efe" + " " + "chat-messages",
+                        className: "jsx-d35465499a4ca470" + " " + "chat-messages",
                         children: [
-                            messages.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            messages.length === 0 && !currentConversationId ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 style: {
                                     textAlign: "center",
                                     color: "var(--text-secondary)",
                                     marginTop: "2rem"
                                 },
-                                className: "jsx-2a208ad59eb46efe",
+                                className: "jsx-d35465499a4ca470",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "jsx-2a208ad59eb46efe",
+                                    className: "jsx-d35465499a4ca470",
                                     children: "Start a conversation by typing below..."
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/chat/page.tsx",
-                                    lineNumber: 130,
+                                    lineNumber: 392,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/chat/page.tsx",
-                                lineNumber: 123,
+                                lineNumber: 385,
                                 columnNumber: 13
                             }, this) : messages.map((msg)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-2a208ad59eb46efe" + " " + `message ${msg.role}`,
+                                    className: "jsx-d35465499a4ca470" + " " + `message ${msg.role}`,
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "jsx-2a208ad59eb46efe" + " " + "message-content",
+                                        className: "jsx-d35465499a4ca470" + " " + "message-content",
                                         children: msg.content
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/chat/page.tsx",
-                                        lineNumber: 135,
+                                        lineNumber: 397,
                                         columnNumber: 17
                                     }, this)
                                 }, msg.id, false, {
                                     fileName: "[project]/src/app/chat/page.tsx",
-                                    lineNumber: 134,
+                                    lineNumber: 396,
                                     columnNumber: 15
                                 }, this)),
                             isLoading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "jsx-2a208ad59eb46efe" + " " + "message assistant",
+                                className: "jsx-d35465499a4ca470" + " " + "message assistant",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "jsx-2a208ad59eb46efe" + " " + "message-content",
+                                    className: "jsx-d35465499a4ca470" + " " + "message-content",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         style: {
                                             display: "flex",
                                             gap: "0.25rem"
                                         },
-                                        className: "jsx-2a208ad59eb46efe",
+                                        className: "jsx-d35465499a4ca470",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 style: {
@@ -243,10 +527,10 @@ function ChatPage() {
                                                     borderRadius: "50%",
                                                     background: "var(--text-secondary)"
                                                 },
-                                                className: "jsx-2a208ad59eb46efe"
+                                                className: "jsx-d35465499a4ca470"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/chat/page.tsx",
-                                                lineNumber: 143,
+                                                lineNumber: 405,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -257,10 +541,10 @@ function ChatPage() {
                                                     borderRadius: "50%",
                                                     background: "var(--text-secondary)"
                                                 },
-                                                className: "jsx-2a208ad59eb46efe"
+                                                className: "jsx-d35465499a4ca470"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/chat/page.tsx",
-                                                lineNumber: 152,
+                                                lineNumber: 414,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -271,43 +555,43 @@ function ChatPage() {
                                                     borderRadius: "50%",
                                                     background: "var(--text-secondary)"
                                                 },
-                                                className: "jsx-2a208ad59eb46efe"
+                                                className: "jsx-d35465499a4ca470"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/chat/page.tsx",
-                                                lineNumber: 161,
+                                                lineNumber: 423,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/chat/page.tsx",
-                                        lineNumber: 142,
+                                        lineNumber: 404,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/chat/page.tsx",
-                                    lineNumber: 141,
+                                    lineNumber: 403,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/chat/page.tsx",
-                                lineNumber: 140,
+                                lineNumber: 402,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/chat/page.tsx",
-                        lineNumber: 121,
+                        lineNumber: 383,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/chat/page.tsx",
-                lineNumber: 104,
+                lineNumber: 323,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                 onSubmit: handleSendMessage,
-                className: "jsx-2a208ad59eb46efe" + " " + "chat-input-area",
+                className: "jsx-d35465499a4ca470" + " " + "chat-input-area",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                         type: "text",
@@ -315,36 +599,157 @@ function ChatPage() {
                         onChange: (e)=>setInput(e.target.value),
                         placeholder: "Share what you're feeling...",
                         disabled: isLoading,
-                        className: "jsx-2a208ad59eb46efe"
+                        className: "jsx-d35465499a4ca470"
                     }, void 0, false, {
                         fileName: "[project]/src/app/chat/page.tsx",
-                        lineNumber: 179,
+                        lineNumber: 441,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "jsx-d35465499a4ca470" + " " + "audio-controls",
+                        children: [
+                            isRecording ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "button",
+                                onClick: stopRecording,
+                                title: "Stop Recording",
+                                className: "jsx-d35465499a4ca470" + " " + "btn btn-recording",
+                                children: "⏹ Stop"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/chat/page.tsx",
+                                lineNumber: 452,
+                                columnNumber: 13
+                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "button",
+                                onClick: startRecording,
+                                disabled: isTranscribing || isLoading,
+                                title: "Start Recording",
+                                className: "jsx-d35465499a4ca470" + " " + "btn btn-secondary",
+                                children: "🎤"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/chat/page.tsx",
+                                lineNumber: 461,
+                                columnNumber: 13
+                            }, this),
+                            isTranscribing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "jsx-d35465499a4ca470" + " " + "status",
+                                children: "Transcribing..."
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/chat/page.tsx",
+                                lineNumber: 472,
+                                columnNumber: 30
+                            }, this),
+                            isSynthesizing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "jsx-d35465499a4ca470" + " " + "status",
+                                children: "Speaking..."
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/chat/page.tsx",
+                                lineNumber: 473,
+                                columnNumber: 30
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/chat/page.tsx",
+                        lineNumber: 450,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         type: "submit",
-                        disabled: isLoading,
-                        className: "jsx-2a208ad59eb46efe" + " " + "btn btn-primary",
+                        disabled: isLoading || isRecording,
+                        className: "jsx-d35465499a4ca470" + " " + "btn btn-primary",
                         children: isLoading ? "..." : "Send"
                     }, void 0, false, {
                         fileName: "[project]/src/app/chat/page.tsx",
-                        lineNumber: 186,
+                        lineNumber: 476,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
+                        ref: audioRef,
+                        hidden: true,
+                        className: "jsx-d35465499a4ca470"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/chat/page.tsx",
+                        lineNumber: 480,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/chat/page.tsx",
-                lineNumber: 178,
+                lineNumber: 440,
                 columnNumber: 7
             }, this),
+            isEditingTitle && currentConversationId && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                onClick: ()=>setIsEditingTitle(false),
+                className: "jsx-d35465499a4ca470" + " " + "modal-overlay",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    onClick: (e)=>e.stopPropagation(),
+                    className: "jsx-d35465499a4ca470" + " " + "modal-content",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                            className: "jsx-d35465499a4ca470",
+                            children: "Rename Conversation"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/chat/page.tsx",
+                            lineNumber: 487,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            type: "text",
+                            value: newTitle,
+                            onChange: (e)=>setNewTitle(e.target.value),
+                            placeholder: "New title",
+                            autoFocus: true,
+                            className: "jsx-d35465499a4ca470"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/chat/page.tsx",
+                            lineNumber: 488,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "jsx-d35465499a4ca470" + " " + "modal-buttons",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>handleRenameConversation(currentConversationId),
+                                    className: "jsx-d35465499a4ca470" + " " + "btn btn-primary",
+                                    children: "Save"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/chat/page.tsx",
+                                    lineNumber: 496,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>setIsEditingTitle(false),
+                                    className: "jsx-d35465499a4ca470" + " " + "btn",
+                                    children: "Cancel"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/chat/page.tsx",
+                                    lineNumber: 502,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/chat/page.tsx",
+                            lineNumber: 495,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/chat/page.tsx",
+                    lineNumber: 486,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/chat/page.tsx",
+                lineNumber: 485,
+                columnNumber: 9
+            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "2a208ad59eb46efe",
-                children: "@keyframes pulse{0%,60%,to{opacity:.3}30%{opacity:1}}"
+                id: "d35465499a4ca470",
+                children: "@keyframes pulse{0%,60%,to{opacity:.3}30%{opacity:1}}.btn-sidebar-new.jsx-d35465499a4ca470{color:#fff;cursor:pointer;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border:none;border-radius:8px;width:100%;padding:.75rem;font-size:.875rem;font-weight:600;transition:all .3s}.btn-sidebar-new.jsx-d35465499a4ca470:hover{transform:translateY(-2px);box-shadow:0 4px 12px #667eea66}.conversations-list.jsx-d35465499a4ca470{flex-direction:column;gap:.5rem;max-height:400px;display:flex;overflow-y:auto}.conversation-item.jsx-d35465499a4ca470{background:var(--bg-secondary);cursor:pointer;border-left:3px solid #0000;border-radius:6px;padding:.75rem;transition:all .2s;position:relative}.conversation-item.jsx-d35465499a4ca470:hover{background:var(--bg-tertiary)}.conversation-item.active.jsx-d35465499a4ca470{background:var(--bg-tertiary);border-left-color:#667eea}.conv-title.jsx-d35465499a4ca470{color:var(--text-primary);word-break:break-word;margin-bottom:.25rem;font-size:.875rem;font-weight:500}.conv-meta.jsx-d35465499a4ca470{color:var(--text-secondary);margin-bottom:.5rem;font-size:.75rem}.conv-actions.jsx-d35465499a4ca470{justify-content:flex-end;gap:.5rem;display:flex}.action-btn.jsx-d35465499a4ca470{color:var(--text-secondary);cursor:pointer;background:0 0;border:none;border-radius:4px;padding:.25rem .5rem;font-size:.875rem;transition:all .2s}.action-btn.jsx-d35465499a4ca470:hover{background:var(--bg-secondary);color:var(--text-primary)}.action-btn.delete.jsx-d35465499a4ca470:hover{color:#ef4444}.modal-overlay.jsx-d35465499a4ca470{z-index:1000;background:#00000080;justify-content:center;align-items:center;display:flex;position:fixed;inset:0}.modal-content.jsx-d35465499a4ca470{background:var(--bg-primary);border-radius:12px;min-width:300px;padding:2rem;box-shadow:0 8px 24px #0003}.modal-content.jsx-d35465499a4ca470 h3.jsx-d35465499a4ca470{color:var(--text-primary);margin-top:0}.modal-content.jsx-d35465499a4ca470 input.jsx-d35465499a4ca470{border:1px solid var(--border-color);background:var(--bg-secondary);width:100%;color:var(--text-primary);border-radius:6px;margin:1rem 0;padding:.75rem;font-size:.875rem}.modal-content.jsx-d35465499a4ca470 input.jsx-d35465499a4ca470:focus{border-color:#667eea;outline:none;box-shadow:0 0 0 3px #667eea1a}.modal-buttons.jsx-d35465499a4ca470{gap:.5rem;margin-top:1.5rem;display:flex}.modal-buttons.jsx-d35465499a4ca470 .btn.jsx-d35465499a4ca470{flex:1}.chat-input-area.jsx-d35465499a4ca470{background:var(--bg-secondary);border-top:1px solid var(--border-color);align-items:center;gap:.5rem;padding:1rem;display:flex}.audio-controls.jsx-d35465499a4ca470{align-items:center;gap:.5rem;display:flex}.btn-recording.jsx-d35465499a4ca470{animation:1s infinite pulse-button;background:#ef4444!important}@keyframes pulse-button{0%,to{opacity:1}50%{opacity:.7}}.btn-secondary.jsx-d35465499a4ca470{color:#fff!important;background:#667eea!important;border:none!important}.status.jsx-d35465499a4ca470{color:var(--text-secondary);padding:0 .5rem;font-size:.75rem}"
             }, void 0, false, void 0, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/chat/page.tsx",
-        lineNumber: 94,
+        lineNumber: 313,
         columnNumber: 5
     }, this);
 }
