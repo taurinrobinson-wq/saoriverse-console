@@ -127,7 +127,7 @@ export const EmotionDetector: React.FC<EmotionDetectorProps> = ({
         const topEmotion = Object.entries(expressions).reduce((a, b) =>
           a[1] > b[1] ? a : b
         )[0];
-        const conf = expressions[topEmotion as keyof typeof expressions];
+        const conf = Number(expressions[topEmotion as keyof typeof expressions]);
 
         // Apply user-specific threshold (default 0.5)
         const threshold = thresholds[topEmotion] ?? 0.5;
