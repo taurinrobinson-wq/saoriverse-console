@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-// Initialize Supabase client with service role (server-side only)
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.SUPABASE_SERVICE_ROLE_KEY as string
-);
+function getSupabaseClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+    process.env.SUPABASE_SERVICE_ROLE_KEY as string
+  );
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,6 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Insert into emotions_log table
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from("emotions_log")
       .insert([
@@ -77,6 +79,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from("emotions_log")
       .select("*")
