@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(
-  request: Request,
-  { params }: { params: { userId: string; conversationId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ userId: string; conversationId: string }> }
 ) {
-  const { userId, conversationId } = params;
+  const { userId, conversationId } = await params;
 
   try {
     const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
@@ -23,10 +23,10 @@ export async function GET(
 }
 
 export async function DELETE(
-  request: Request,
-  { params }: { params: { userId: string; conversationId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ userId: string; conversationId: string }> }
 ) {
-  const { userId, conversationId } = params;
+  const { userId, conversationId } = await params;
 
   try {
     const backendUrl = process.env.BACKEND_URL || "http://localhost:8000";
@@ -46,10 +46,10 @@ export async function DELETE(
 }
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: { userId: string; conversationId: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ userId: string; conversationId: string }> }
 ) {
-  const { userId, conversationId } = params;
+  const { userId, conversationId } = await params;
   const body = await request.json();
 
   try {

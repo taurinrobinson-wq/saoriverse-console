@@ -55,7 +55,7 @@ ollama>=0.0.0  # Ollama Python client for local LLM interaction
 # SPEECH & AUDIO PROCESSING
 # ============================================================================
 # Speech Recognition (Local STT)
-faster-whisper>=0.10.0  # Faster Whisper implementation (CPU-optimized)
+openai-whisper>=20230314  # OpenAI Whisper for speech-to-text
 
 # Audio Processing
 librosa>=0.10.0  # Audio feature extraction (pitch, energy, speech rate)
