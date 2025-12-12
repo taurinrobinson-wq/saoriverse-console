@@ -1,0 +1,63 @@
+# FirstPerson Backend + Frontend in Docker
+
+# ---------- Frontend build stage ----------
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app/firstperson-web
+
+# Install dependencies  
+COPY firstperson-web/package*.json ./
+RUN npm ci --legacy-peer-deps
+
+# Copy source files
+COPY firstperson-web/src ./src
+COPY firstperson-web/public ./public
+COPY firstperson-web/tsconfig.json ./
+COPY firstperson-web/next.config.ts ./
+
+# Build Next.js app
+RUN npm run build
+
+
+# ---------- Runtime stage ----------
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install Python, nginx, curl, etc.
+RUN apk add --no-cache python3 py3-pip ffmpeg-dev nginx curl bash pkgconfig
+
+# Create Python venv
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+# Copy and install Python deps
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copy backend
+COPY firstperson_backend.py .
+COPY src/ ./src/
+COPY emotional_os/ ./emotional_os/
+COPY firstperson/ ./firstperson/
+
+# Copy frontend build
+COPY --from=frontend-builder /app/firstperson-web/.next ./firstperson-web/.next
+COPY --from=frontend-builder /app/firstperson-web/public ./firstperson-web/public
+COPY firstperson-web/package.json ./firstperson-web/
+
+# Copy nginx config
+COPY nginx.firstperson.conf /etc/nginx/nginx.conf
+
+# Copy entrypoint script
+COPY entrypoint.firstperson.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Expose port 8000 (backend) and 3001 (frontend)
+EXPOSE 8000 3001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run startup script
+ENTRYPOINT ["/entrypoint.sh"]
