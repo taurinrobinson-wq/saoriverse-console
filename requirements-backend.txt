@@ -1,0 +1,45 @@
+# Minimal dependencies for FirstPerson Backend
+# Python 3.12 on Debian slim (proper Python base image)
+
+# ============================================================================
+# CORE WEB FRAMEWORK
+# ============================================================================
+fastapi==0.104.1
+uvicorn==0.24.0
+starlette==0.27.0
+pydantic==2.12.5
+
+# ============================================================================
+# DATABASE & API
+# ============================================================================
+supabase==2.6.0
+requests==2.32.3
+
+# ============================================================================
+# SPEECH PROCESSING
+# ============================================================================
+# Speech-to-Text (STT)
+openai-whisper>=20230314
+
+# Text-to-Speech (TTS) - Using ElevenLabs API instead of pyttsx3
+# (ElevenLabs API key configured in environment)
+elevenlabs>=0.2.10
+
+# Audio utilities for processing
+# Using stable numpy version (2.1.2) to avoid network download issues
+numpy==2.1.2
+soundfile>=0.12.0
+librosa>=0.10.0
+
+# ============================================================================
+# UTILITIES
+# ============================================================================
+python-dotenv==1.0.1
+python-multipart==0.0.6
+
+# ============================================================================
+# DEVELOPMENT & TESTING
+# ============================================================================
+pytest==9.0.2
+pytest-cov==7.0.0
+pytest-timeout==2.4.0

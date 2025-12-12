@@ -73,34 +73,49 @@ SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SU
 # Global model caching to avoid repeated initialization
 WHISPER_MODEL = None
 TTS_ENGINE = None
+TTS_CLIENT = None  # ElevenLabs client
 _tts_lock = threading.Lock()
 INTEGRATED_PIPELINE = None  # Global pipeline instance
 
 def init_models():
     """Initialize AI models once at startup."""
-    global WHISPER_MODEL, TTS_ENGINE, INTEGRATED_PIPELINE
+    global WHISPER_MODEL, TTS_ENGINE, TTS_CLIENT, INTEGRATED_PIPELINE
+    
+    # Try faster-whisper first (preferred), then openai-whisper, then skip
     try:
         from faster_whisper import WhisperModel
-        logger.info("Loading Whisper model (tiny)...")
-        # Use 'tiny' for Codespaces - faster and lighter than 'base'
+        logger.info("Loading faster-whisper model (tiny)...")
         WHISPER_MODEL = WhisperModel("tiny", device="cpu", compute_type="int8")
-        logger.info("✓ Whisper model initialized (tiny)")
+        logger.info("✓ faster-whisper model initialized (tiny)")
     except ImportError:
-        logger.warning("faster-whisper not installed. Install with: pip install faster-whisper")
+        try:
+            import whisper
+            logger.info("Loading openai-whisper model (tiny)...")
+            WHISPER_MODEL = whisper.load_model("tiny", device="cpu", in_memory=False)
+            logger.info("✓ openai-whisper model initialized (tiny)")
+        except ImportError:
+            logger.warning("No whisper implementation installed. Install with: pip install faster-whisper OR pip install openai-whisper")
+        except Exception as e:
+            logger.exception(f"Whisper init failed: {e}")
     except Exception as e:
-        logger.exception(f"Whisper init failed: {e}")
+        logger.exception(f"Faster-whisper init failed: {e}")
     
+    # Initialize ElevenLabs TTS (preferred) or fallback to pyttsx3
     try:
-        import pyttsx3
-        logger.info("Loading pyttsx3 engine...")
-        TTS_ENGINE = pyttsx3.init()
-        TTS_ENGINE.setProperty('rate', 140)
-        TTS_ENGINE.setProperty('volume', 1.0)
-        logger.info("✓ pyttsx3 engine initialized")
+        from elevenlabs.client import ElevenLabs
+        elevenlabs_api_key = os.getenv("ELEVENLABS_API_KEY")
+        if elevenlabs_api_key:
+            TTS_CLIENT = ElevenLabs(api_key=elevenlabs_api_key)
+            logger.info("✓ ElevenLabs TTS initialized")
+        else:
+            logger.warning("ELEVENLABS_API_KEY not set, falling back to pyttsx3")
+            _init_pyttsx3()
     except ImportError:
-        logger.warning("pyttsx3 not installed. Install with: pip install pyttsx3")
+        logger.warning("ElevenLabs not installed, falling back to pyttsx3")
+        _init_pyttsx3()
     except Exception as e:
-        logger.exception(f"TTS init failed: {e}")
+        logger.exception(f"ElevenLabs init failed: {e}")
+        _init_pyttsx3()
     
     # Initialize integrated pipeline if available
     if PIPELINE_AVAILABLE:
@@ -112,6 +127,21 @@ def init_models():
             INTEGRATED_PIPELINE = None
     else:
         logger.warning("Integrated pipeline module not available, will use basic response generation")
+
+def _init_pyttsx3():
+    """Fallback TTS initialization using pyttsx3."""
+    global TTS_ENGINE
+    try:
+        import pyttsx3
+        logger.info("Loading pyttsx3 engine (fallback)...")
+        TTS_ENGINE = pyttsx3.init()
+        TTS_ENGINE.setProperty('rate', 140)
+        TTS_ENGINE.setProperty('volume', 1.0)
+        logger.info("✓ pyttsx3 engine initialized")
+    except ImportError:
+        logger.warning("pyttsx3 not installed. Install with: pip install pyttsx3")
+    except Exception as e:
+        logger.exception(f"pyttsx3 init failed: {e}")
 
 def get_supabase_headers():
     """Get headers for Supabase API requests."""
