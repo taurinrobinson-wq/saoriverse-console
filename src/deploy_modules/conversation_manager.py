@@ -21,7 +21,11 @@ try:
 except Exception:
     requests = None
 
-import streamlit as st
+# Streamlit import is optional - only needed for Streamlit apps
+try:
+    import streamlit as st
+except ImportError:
+    st = None
 
 logger = logging.getLogger(__name__)
 
@@ -76,15 +80,15 @@ class ConversationManager:
     def __init__(self, user_id: str, supabase_url: Optional[str] = None, supabase_key: Optional[str] = None):
         self.user_id = user_id
         # Prefer explicit args, then environment variables, then Streamlit secrets.
-        self.supabase_url = supabase_url or os.environ.get("SUPABASE_URL") or st.secrets.get("supabase", {}).get("url")
+        self.supabase_url = supabase_url or os.environ.get("SUPABASE_URL") or (st.secrets.get("supabase", {}).get("url") if st else None)
         # Support both a service role key (preferred for server-side writes)
         # and the regular SUPABASE_KEY used in some deployments.
         self.supabase_key = (
             supabase_key
             or os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
             or os.environ.get("SUPABASE_KEY")
-            or st.secrets.get("supabase", {}).get("service_role_key")
-            or st.secrets.get("supabase", {}).get("key")
+            or (st.secrets.get("supabase", {}).get("service_role_key") if st else None)
+            or (st.secrets.get("supabase", {}).get("key") if st else None)
         )
         self.base_url = self._normalize_supabase_url(self.supabase_url) if self.supabase_url else None
 

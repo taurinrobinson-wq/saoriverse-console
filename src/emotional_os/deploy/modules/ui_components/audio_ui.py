@@ -42,10 +42,10 @@ try:
     import sounddevice as sd
     HAS_SOUNDDEVICE = True
 except (ImportError, OSError) as e:
-    # OSError raised when PortAudio library not found
-    logger.warning(f"sounddevice unavailable: {e}. Audio recording disabled.")
+    # OSError raised when PortAudio library not found (common on Streamlit Cloud)
+    # Keep this silent - only inform user if they try to use voice features
+    logger.debug(f"sounddevice unavailable: {e}. Audio recording disabled.")
     HAS_SOUNDDEVICE = False
-
 
 def get_tts_engine():
     """Get or create TTS engine."""
@@ -78,10 +78,21 @@ def render_voice_mode_toggle():
         st.markdown("---")
         st.subheader("🎙️ Voice Mode")
         
+        # Check if voice features are available
+        has_all_deps = HAS_SPEECH_RECOGNITION and HAS_SOUNDFILE and HAS_SOUNDDEVICE
+        
+        if not has_all_deps:
+            st.warning(
+                "🔇 Voice mode unavailable\n\n"
+                "Missing dependencies or system libraries (e.g., PortAudio on Streamlit Cloud). "
+                "[Run locally](/docs/deploy/streamlit-community-cloud/deploy-your-app) for voice features."
+            )
+            return
+        
         voice_enabled = st.checkbox(
             "Enable Voice Input/Output",
             value=st.session_state.get("voice_mode_enabled", False),
-            help="Enable microphone input and audio playback (experimental)"
+            help="Enable microphone input and audio playback"
         )
         
         st.session_state["voice_mode_enabled"] = voice_enabled
@@ -94,15 +105,13 @@ def render_voice_mode_toggle():
             )
 
 
+
 def render_audio_recorder():
     """Record audio from microphone and return transcribed text.
     
     Returns:
         Transcribed text or None if recording failed
     """
-    # Debug logging
-    logger.info(f"Voice dependencies: whisper={HAS_SPEECH_RECOGNITION}, soundfile={HAS_SOUNDFILE}, sounddevice={HAS_SOUNDDEVICE}")
-    
     # Check all required dependencies
     missing_deps = []
     if not HAS_SPEECH_RECOGNITION:
@@ -114,7 +123,16 @@ def render_audio_recorder():
     
     if missing_deps:
         st.error(f"Voice recording unavailable - missing: {', '.join(missing_deps)}")
-        st.info(f"Install with: `pip install {' '.join(missing_deps)}`")
+        
+        # Check if running on Streamlit Cloud
+        if HAS_SOUNDDEVICE is False and "sounddevice" in missing_deps:
+            st.warning(
+                "**Note:** Streamlit Cloud doesn't have PortAudio system library installed. "
+                "Voice recording works when running locally but is unavailable on Streamlit Cloud. "
+                "[Run locally](/docs/deploy/streamlit-community-cloud/deploy-your-app) for voice features."
+            )
+        else:
+            st.info(f"Install with: `pip install {' '.join(missing_deps)}`")
         return None
     
     col1, col2 = st.columns([2, 1])

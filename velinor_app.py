@@ -27,8 +27,10 @@ import io
 # Add project root to path
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
+from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
 # ============================================================================
 # PAGE CONFIGURATION
@@ -40,6 +42,15 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Initialize FirstPerson orchestrator for emotionally-aware responses
+# NOTE: Commented out - Velinor uses its own orchestrator
+# if 'firstperson_orchestrator' not in st.session_state:
+#     st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(
+#         user_id='velinor_player',
+#         conversation_id='velinor_game'
+#     )
+#     st.session_state.firstperson_orchestrator.initialize_session()
 
 # Custom CSS - Light Theme
 st.markdown("""
@@ -163,12 +174,73 @@ def load_image_safe(path: str):
     return None
 
 
+def add_button_overlay(image: Image.Image, button_text: str, position: str = "bottom") -> Image.Image:
+    """Draw a button on an image using PIL.
+    
+    Args:
+        image: PIL Image to draw on
+        button_text: Text for the button
+        position: "bottom", "center", or "top"
+    
+    Returns:
+        Image with button drawn on it
+    """
+    from PIL import ImageDraw, ImageFont
+    
+    # Convert to RGBA if needed
+    if image.mode != "RGBA":
+        image = image.convert("RGBA")
+    
+    # Create a copy to draw on
+    img_with_button = image.copy()
+    draw = ImageDraw.Draw(img_with_button)
+    
+    # Button dimensions
+    button_width = 200
+    button_height = 50
+    button_color = (70, 130, 180)  # Steel blue
+    button_text_color = (255, 255, 255)  # White
+    
+    # Calculate position
+    img_width, img_height = img_with_button.size
+    x_center = (img_width - button_width) // 2
+    
+    if position == "bottom":
+        y_pos = img_height - button_height - 30
+    elif position == "center":
+        y_pos = (img_height - button_height) // 2
+    else:  # top
+        y_pos = 30
+    
+    # Draw button rectangle
+    button_box = [x_center, y_pos, x_center + button_width, y_pos + button_height]
+    draw.rectangle(button_box, fill=button_color, outline=(255, 255, 255), width=2)
+    
+    # Draw button text (simple, centered)
+    try:
+        # Try to use a larger font, fall back to default
+        font = ImageFont.truetype("arial.ttf", 18)
+    except:
+        font = ImageFont.load_default()
+    
+    # Center text in button
+    text_bbox = draw.textbbox((0, 0), button_text, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_x = x_center + (button_width - text_width) // 2
+    text_y = y_pos + (button_height - text_height) // 2
+    
+    draw.text((text_x, text_y), button_text, fill=button_text_color, font=font)
+    
+    return img_with_button
+
+
 def display_background(background_name: str):
-    """Display background image."""
+    """Display background image with height constraint for single-page fit."""
     if background_name:
         # Map background names to filenames
         bg_map = {
-            'market_ruins': 'city_market',
+            'market_ruins': 'city_market(16-9)',
             'monuments': 'city_mountains',
             'archive_ruins': 'forest_city',
             'underground_ruins': 'swamp',
@@ -181,7 +253,8 @@ def display_background(background_name: str):
         
         img = load_image_safe(path)
         if img:
-            st.image(img, use_column_width=True)
+            # Display with height constraint to fit on one page
+            st.image(img, use_column_width=True, width=800)
 
 
 def composite_background_with_npc(background_name: str, npc_name: str):
@@ -288,6 +361,142 @@ def render_dialogue_bubble(speaker: str, text: str, is_npc: bool = False):
                    unsafe_allow_html=True)
 
 
+def render_background_with_overlay(background_name: str, npc_path: str, narration: str, choices: list):
+    """Render background image with NPC overlay, narration, and choice buttons.
+    
+    Args:
+        background_name: Name of the background image file
+        npc_path: Full path to NPC character image
+        narration: Italicized narration text
+        choices: List of choice dictionaries with 'text' keys
+    """
+    # Load background image
+    if background_name:
+        bg_map = {
+            'market_ruins': 'city_market(16-9)',
+            'monuments': 'city_mountains',
+            'archive_ruins': 'forest_city',
+            'underground_ruins': 'swamp',
+            'bridge_ravine': 'pass',
+            'keeper_sanctuary': 'forest',
+        }
+        filename = bg_map.get(background_name, background_name)
+        path = get_asset_path("backgrounds", filename)
+        bg_img = load_image_safe(path)
+    else:
+        bg_img = None
+    
+    # Load NPC image
+    npc_img = None
+    if npc_path:
+        npc_img = load_image_safe(npc_path)
+    
+    # Create composite image with background and NPC
+    if bg_img:
+        if npc_img:
+            # Composite NPC onto background (center-bottom)
+            composite = bg_img.copy()
+            if composite.mode != 'RGBA':
+                composite = composite.convert('RGBA')
+            if npc_img.mode != 'RGBA':
+                npc_img = npc_img.convert('RGBA')
+            
+            # Scale NPC to fit (50% of background height, reduced by 10%)
+            bg_height = composite.height
+            npc_height = int(bg_height * 0.54)  # 0.6 * 0.9 = 0.54
+            npc_aspect = npc_img.width / npc_img.height
+            npc_width = int(npc_height * npc_aspect)
+            npc_resized = npc_img.resize((npc_width, npc_height), Image.Resampling.LANCZOS)
+            
+            # Center horizontally, position at bottom
+            x_pos = (composite.width - npc_width) // 2
+            y_pos = composite.height - npc_height - 10
+            
+            composite.paste(npc_resized, (x_pos, y_pos), npc_resized)
+            display_img = composite.convert('RGB')
+        else:
+            display_img = bg_img
+        
+        # Display the composite image
+        st.image(display_img, use_column_width=True)
+    
+    # Narration text (light gray, italicized)
+    st.markdown(
+        f"""<div style='text-align: center; color: #999999; font-style: italic; margin: 20px 0; font-size: 16px;'>
+        {narration}
+        </div>""",
+        unsafe_allow_html=True
+    )
+    
+    # Choice buttons in 2x2 grid
+    if choices:
+        st.markdown("<div style='margin: 30px 0;'><h4 style='color: #666666;'>What do you do?</h4></div>", unsafe_allow_html=True)
+        
+        # Create 2x2 grid (4 buttons)
+        cols = st.columns(2)
+        for i, choice in enumerate(choices[:4]):
+            col_idx = i % 2
+            with cols[col_idx]:
+                btn_text = choice.get('text', f'Option {i+1}')
+                if st.button(
+                    btn_text,
+                    key=f"choice_{i}",
+                    use_container_width=True,
+                    help=choice.get('description', '')
+                ):
+                    # Process choice
+                    orchestrator = st.session_state.get('orchestrator')
+                    if orchestrator:
+                        player_id = st.session_state.get('player_ids', ['player_1'])[0]
+                        try:
+                            new_state = orchestrator.process_player_action(
+                                player_input=btn_text,
+                                choice_index=i,
+                                player_id=player_id
+                            )
+                            st.session_state.game_state = new_state
+                            st.session_state.game_log.append({
+                                'timestamp': datetime.now().isoformat(),
+                                'action': 'choice',
+                                'choice_index': i,
+                                'choice_text': btn_text
+                            })
+                            st.rerun()
+                        except Exception as e:
+                            st.error(f"Error processing choice: {e}")
+    
+    # Free-text input
+    st.markdown("<div style='margin-top: 30px;'><h4 style='color: #666666;'>Or type your response:</h4></div>", unsafe_allow_html=True)
+    player_input = st.text_input(
+        "Your action:",
+        key="player_input_overlay",
+        placeholder="Type what you'd like to do...",
+        label_visibility="collapsed"
+    )
+    
+    if st.button("Submit Response", use_container_width=True):
+        if player_input:
+            orchestrator = st.session_state.get('orchestrator')
+            if orchestrator:
+                player_id = st.session_state.get('player_ids', ['player_1'])[0]
+                try:
+                    new_state = orchestrator.process_player_action(
+                        player_input=player_input,
+                        player_id=player_id
+                    )
+                    st.session_state.game_state = new_state
+                    st.session_state.game_log.append({
+                        'timestamp': datetime.now().isoformat(),
+                        'action': 'free_text',
+                        'text': player_input
+                    })
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Error processing input: {e}")
+        else:
+            st.warning("Please enter a response or choose an option.")
+
+
 def render_stats(stats: dict):
     """Render player stats panel."""
     st.markdown("<div class='stats-panel'>", unsafe_allow_html=True)
@@ -356,104 +565,60 @@ def list_saves():
 # ============================================================================
 
 def render_game_screen():
-    """Render main game play screen."""
+    """Render main game play screen with background overlay."""
     if not st.session_state.orchestrator or not st.session_state.game_state:
         st.error("Game not initialized. Please start a new game.")
         return
     
     state = st.session_state.game_state
     
-    # Display background with NPC composite if both available
-    col_bg = st.columns(1)[0]
-    with col_bg:
-        if state.get('background_image') and state.get('npc_name'):
-            # Try to composite NPC on background
-            composite_img = composite_background_with_npc(
-                state.get('background_image'),
-                state.get('npc_name')
-            )
-            if composite_img:
-                st.image(composite_img, use_column_width=True)
-            else:
-                # Fallback to separate display if composite fails
-                display_background(state.get('background_image'))
-        else:
-            # Just display background
-            display_background(state.get('background_image'))
+    # Build the narration/dialogue for display
+    narration_parts = []
+    if state.get('main_dialogue'):
+        narration_parts.append(state['main_dialogue'])
+    if state.get('npc_dialogue'):
+        narration_parts.append(state['npc_dialogue'])
+    narration = " ".join(narration_parts) if narration_parts else "What will you do?"
     
-    # Main content area
-    col_main, col_side = st.columns([3, 1])
+    # Get NPC image path if NPC exists
+    npc_path = None
+    if state.get('npc_name'):
+        npc_map = {
+            'Keeper': 'velinor_eyesclosed',
+            'Saori': 'saori',
+            'Sanor': 'sanor',
+            'Irodora': 'irodora',
+            'Tala': 'tala',
+            'Ravi': 'Ravi_Nima',
+        }
+        npc_filename = npc_map.get(state.get('npc_name'), state.get('npc_name').lower())
+        npc_path = str(PROJECT_ROOT / "velinor" / "npcs" / f"{npc_filename}.png")
     
-    with col_main:
-        # Main dialogue
-        if state.get('main_dialogue'):
-            render_dialogue_bubble(
-                speaker=None,
-                text=state['main_dialogue'],
-                is_npc=False
-            )
-        
-        # NPC response (if generated)
-        if state.get('npc_dialogue'):
-            render_dialogue_bubble(
-                speaker=state.get('npc_name', 'NPC'),
-                text=state['npc_dialogue'],
-                is_npc=True
-            )
-        
-        # Clarifying question
-        if state.get('has_clarifying_question') and state.get('clarifying_question'):
-            st.markdown(
-                f"<div class='clarifying-question'>💭 {state['clarifying_question']}</div>",
-                unsafe_allow_html=True
-            )
-        
-        # Dice roll result
-        if state.get('dice_roll'):
-            render_dice_roll(state['dice_roll'])
-        
-        st.divider()
-        
-        # Player choices
-        choices = state.get('choices', [])
-        if choices:
-            st.markdown("### Your Options:")
-            
-            # Display as buttons
-            choice_cols = st.columns(len(choices)) if len(choices) <= 3 else None
-            
-            for i, choice in enumerate(choices):
-                if choice_cols:
-                    with choice_cols[i]:
-                        if st.button(choice['text'], key=f"choice_{i}", use_container_width=True):
-                            process_choice(i)
-                else:
-                    if st.button(choice['text'], key=f"choice_{i}", use_container_width=True):
-                        process_choice(i)
-        
-        # Free-text input (optional)
-        st.markdown("### Or type your response:")
-        player_input = st.text_input(
-            "Your response:",
-            key="player_input",
-            placeholder="Type what you'd like to do..."
+    # Get choices
+    choices = state.get('choices', [])
+    
+    # Use the overlay component
+    render_background_with_overlay(
+        background_name=state.get('background_image', ''),
+        npc_path=npc_path,
+        narration=narration,
+        choices=choices
+    )
+    
+    # Additional info sections below overlay
+    if state.get('has_clarifying_question') and state.get('clarifying_question'):
+        st.markdown(
+            f"<div class='clarifying-question'>💭 {state['clarifying_question']}</div>",
+            unsafe_allow_html=True
         )
-        
-        if st.button("Submit Response", use_container_width=True):
-            if player_input:
-                process_free_text(player_input)
-            else:
-                st.warning("Please enter a response or choose an option.")
     
-    with col_side:
-        # Stats panel
-        if state.get('game_state', {}).get('player_stats'):
-            st.markdown("### 📊 Stats")
-            render_stats(state['game_state']['player_stats'])
-        
-        # Passage info
-        st.markdown("### 📍 Location")
-        st.text(state.get('passage_name', 'Unknown'))
+    if state.get('dice_roll'):
+        render_dice_roll(state['dice_roll'])
+    
+    # Stats panel
+    if state.get('stats'):
+        st.divider()
+        render_stats(state['stats'])
 
 
 def process_choice(choice_index: int):
@@ -462,7 +627,15 @@ def process_choice(choice_index: int):
     player_id = st.session_state.player_ids[0] if st.session_state.player_ids else "player_1"
     
     try:
+        # Get the choice text from game state
+        choices = st.session_state.game_state.get('choices', [])
+        if choice_index < len(choices):
+            choice_text = choices[choice_index].get('text', '')
+        else:
+            choice_text = ''
+        
         new_state = orchestrator.process_player_action(
+            player_input=choice_text,
             choice_index=choice_index,
             player_id=player_id
         )
@@ -470,7 +643,8 @@ def process_choice(choice_index: int):
         st.session_state.game_log.append({
             'timestamp': datetime.now().isoformat(),
             'action': 'choice',
-            'choice_index': choice_index
+            'choice_index': choice_index,
+            'choice_text': choice_text
         })
         st.rerun()
     except Exception as e:
@@ -534,6 +708,19 @@ def render_sidebar():
     
     elif menu_choice == "About":
         render_about_menu()
+    
+    # Stats and location in sidebar expanders
+    st.sidebar.divider()
+    state = st.session_state.game_state
+    if state:
+        # Stats panel in collapsible expander
+        if state.get('game_state', {}).get('player_stats'):
+            with st.sidebar.expander("📊 Player Stats", expanded=True):
+                render_stats(state['game_state']['player_stats'])
+        
+        # Location info in collapsible expander
+        with st.sidebar.expander("📍 Location", expanded=True):
+            st.text(state.get('passage_name', 'Unknown'))
 
 
 def start_new_game():
@@ -550,10 +737,20 @@ def start_new_game():
             st.error(f"Story file not found: {story_path}")
             return
         
+        # Get or reinitialize FirstPerson for emotionally-aware NPC responses
+        firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
+        if not firstperson_orchestrator:
+            firstperson_orchestrator = FirstPersonOrchestrator(
+                user_id=st.session_state.player_name,
+                conversation_id='velinor_game'
+            )
+            firstperson_orchestrator.initialize_session()
+            st.session_state.firstperson_orchestrator = firstperson_orchestrator
+        
         orchestrator = VelinorTwineOrchestrator(
             game_engine=engine,
             story_path=str(story_path),
-            first_person_module=None,  # Optional: connect FirstPerson here
+            first_person_module=firstperson_orchestrator,  # Connected: FirstPerson for nuanced responses
             npc_system=None  # Optional: connect NPC system here
         )
         
@@ -688,14 +885,6 @@ def render_about_menu():
 def main():
     """Main application entry point."""
     
-    # Title section
-    st.markdown("""
-    <div class='title-section'>
-        <h1>🎮 Velinor: Remnants of the Tone</h1>
-        <p>A Living Narrative Adventure</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
     # Sidebar
     render_sidebar()
     
@@ -703,37 +892,38 @@ def main():
     if st.session_state.orchestrator and st.session_state.game_state:
         render_game_screen()
     else:
-        # Welcome screen
-        col1, col2 = st.columns([2, 1])
+        # Welcome splash screen - image with button drawn on it
+        splash_img_path = str(PROJECT_ROOT / "velinor" / "backgrounds" / "velinor_title_eyes_closed.png")
+        splash_img = load_image_safe(splash_img_path)
         
-        with col1:
-            st.markdown("""
-            # Welcome to Velinor
+        if splash_img:
+            # Add button overlay to image using PIL
+            splash_with_button = add_button_overlay(splash_img, "Start New Game", position="bottom")
             
-            You stand at the threshold of a shattered civilization.
-            
-            The city of Saonyx lies in ruins, reclaimed by nature and time.
-            But within these remnants pulses something ancient: **the Tone**.
-            
-            A faint resonance, a memory of collective emotion still waiting to be heard.
-            
-            Your choices will echo through the ruins.
-            Your courage, wisdom, empathy, and resolve will be tested.
-            And somewhere in the glyphs that remain, the truth of what was lost waits for you.
-            
-            ---
-            
-            **Ready to begin?**
-            """)
-            
-            if st.button("🚀 Start New Game", use_container_width=True, key="welcome_start"):
-                start_new_game()
-        
-        with col2:
-            title_img_path = PROJECT_ROOT / "velinor" / "velinor_title_transparent.png"
-            title_img = load_image_safe(str(title_img_path))
-            if title_img:
-                st.image(title_img, use_column_width=True)
+            # Display image centered
+            col_left, col_img, col_right = st.columns([1, 2, 1])
+            with col_img:
+                st.image(splash_with_button, use_column_width=True)
+                
+                # Invisible clickable button that overlaps the drawn button
+                st.markdown("""
+                    <style>
+                    .stButton button {
+                        background-color: transparent !important;
+                        border: none !important;
+                        color: transparent !important;
+                        padding: 0 !important;
+                        margin: -55px auto 0 auto !important;
+                        width: 200px !important;
+                    }
+                    .stButton button:hover {
+                        background-color: transparent !important;
+                    }
+                    </style>
+                """, unsafe_allow_html=True)
+                
+                if st.button("Start New Game", use_container_width=False, key="welcome_start"):
+                    start_new_game()
 
 
 if __name__ == "__main__":

@@ -58,23 +58,36 @@ class NRCLexicon:
     
     def _load_lexicon(self) -> None:
         """Load NRC lexicon from TSV or JSON file"""
+        import logging
+        logger = logging.getLogger(__name__)
+        
         try:
             # Determine which file to load
             lexicon_file = self.lexicon_path or self._find_lexicon_file()
             
             if not lexicon_file:
-                raise FileNotFoundError("NRC lexicon file not found in any standard location")
+                logger.warning(
+                    "NRC lexicon file not found. Searched: "
+                    + ", ".join(str(p) for p in _NRC_POSSIBLE_PATHS)
+                )
+                self.lexicon = {}
+                self.word_emotions = {}
+                return
             
             lexicon_file = Path(lexicon_file)
+            logger.debug(f"Loading NRC lexicon from: {lexicon_file}")
             
             if lexicon_file.suffix == ".json":
                 self._load_json(lexicon_file)
             else:
                 self._load_tsv(lexicon_file)
                 
+            if self.lexicon:
+                logger.debug(f"NRC lexicon loaded successfully: {len(self.lexicon)} words")
+            else:
+                logger.warning(f"NRC lexicon loaded but is empty: {lexicon_file}")
+                
         except Exception as e:
-            import logging
-            logger = logging.getLogger(__name__)
             logger.debug(f"Failed to load NRC lexicon: {e}")
             self.lexicon = {}
             self.word_emotions = {}

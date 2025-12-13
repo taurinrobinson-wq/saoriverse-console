@@ -33,6 +33,24 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     Returns a dict describing which components are available and any
     exception messages captured. This function is safe to call repeatedly.
     """
+    import os
+    from pathlib import Path
+    
+    # Ensure src is in sys.path for imports - handle both local and Streamlit Cloud
+    current_file = Path(__file__)
+    # Navigate from: src/emotional_os/deploy/modules/nlp_init.py -> src
+    src_path = current_file.parent.parent.parent.parent.resolve()
+    
+    if str(src_path) not in sys.path:
+        sys.path.insert(0, str(src_path))
+        logger.debug(f"Added to sys.path: {src_path}")
+    
+    # Also add the app root to handle absolute imports
+    app_root = current_file.parent.parent.parent.parent.parent.resolve()
+    if str(app_root) not in sys.path:
+        sys.path.insert(0, str(app_root))
+        logger.debug(f"Added to sys.path: {app_root}")
+    
     # TextBlob
     try:
         from textblob import TextBlob  # noqa: F401
@@ -48,6 +66,8 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
     # spaCy and model
     try:
         import spacy
+        import subprocess
+        import os
 
         NLP_STATE["spacy_available"] = True
         NLP_STATE["spacy_exc"] = None
@@ -57,28 +77,120 @@ def warmup_nlp(model_name: str = "en_core_web_sm") -> dict:
             logger.info(f"Attempting to load spaCy model '{model_name}'...")
             _nlp = spacy.load(model_name)
             NLP_STATE["spacy_model_loaded"] = True
-            logger.info("spaCy model '%s' loaded", model_name)
+            logger.info("spaCy model '%s' loaded successfully", model_name)
+        except OSError:
+            # Model not found - try to download
+            logger.debug(f"Model '{model_name}' not found, attempting to download...")
+            
+            # Detect environment - if we can't write to home, probably Streamlit Cloud
+            home_dir = os.path.expanduser("~")
+            can_write = os.access(home_dir, os.W_OK)
+            
+            if not can_write:
+                logger.warning(
+                    f"spaCy model '{model_name}' not available. "
+                    "Running in restricted environment (likely Streamlit Cloud) with limited write permissions. "
+                    "NLP features will be partially available. For full NLP support, run locally."
+                )
+                NLP_STATE["spacy_model_loaded"] = False
+                NLP_STATE["spacy_exc"] = "Model not available in restricted environment"
+            else:
+                # Try downloading on systems with write access
+                try:
+                    result = subprocess.run(
+                        [sys.executable, "-m", "spacy", "download", model_name, "--quiet"], 
+                        capture_output=True, 
+                        timeout=120
+                    )
+                    if result.returncode == 0:
+                        # Try loading again after download
+                        _nlp = spacy.load(model_name)
+                        NLP_STATE["spacy_model_loaded"] = True
+                        logger.info("spaCy model '%s' downloaded and loaded successfully", model_name)
+                    else:
+                        stderr = result.stderr.decode('utf-8', errors='ignore') if result.stderr else ""
+                        logger.warning(f"spaCy model download failed: {stderr}")
+                        NLP_STATE["spacy_model_loaded"] = False
+                        NLP_STATE["spacy_exc"] = f"Download failed (code {result.returncode})"
+                except subprocess.TimeoutExpired:
+                    logger.warning(f"spaCy model download timed out after 120 seconds")
+                    NLP_STATE["spacy_model_loaded"] = False
+                    NLP_STATE["spacy_exc"] = "Download timeout"
+                except Exception as download_err:
+                    logger.warning(f"spaCy model download error: {download_err}")
+                    NLP_STATE["spacy_model_loaded"] = False
+                    NLP_STATE["spacy_exc"] = str(download_err)
         except Exception as me:
+            logger.warning(f"spaCy model load error: {me}")
             NLP_STATE["spacy_model_loaded"] = False
-            NLP_STATE["spacy_exc"] = repr(me)
-            logger.error("spaCy model '%s' could not be loaded: %s", model_name, me)
+            NLP_STATE["spacy_exc"] = str(me)
     except Exception as e:
         NLP_STATE["spacy_available"] = False
         NLP_STATE["spacy_model_loaded"] = False
         NLP_STATE["spacy_exc"] = repr(e)
         logger.error("spaCy import failed: %s", e)
 
-    # NRC Lexicon
+    # NRC Lexicon - try multiple import strategies
     try:
-        # Try both import paths for robustness
+        nrc = None
+        import_error = None
+        
+        # Strategy 1: Direct import (works when sys.path includes src)
         try:
             from parser.nrc_lexicon_loader import nrc  # noqa: F401
-        except ImportError:
-            from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
+            logger.debug("NRC loaded via parser.nrc_lexicon_loader")
+        except ImportError as e:
+            import_error = e
         
-        NLP_STATE["nrc_available"] = True
-        NLP_STATE["nrc_exc"] = None
-        logger.info("NRC lexicon available")
+        # Strategy 2: Full module path
+        if nrc is None:
+            try:
+                from emotional_os.parser.nrc_lexicon_loader import nrc  # noqa: F401
+                logger.debug("NRC loaded via emotional_os.parser.nrc_lexicon_loader")
+            except ImportError as e:
+                import_error = e
+        
+        # Strategy 3: Search filesystem and add path
+        if nrc is None:
+            from pathlib import Path
+            current_file = Path(__file__)
+            src_dir = None
+            
+            # Search up to find parser/nrc_lexicon_loader.py
+            for parent in current_file.parents:
+                candidate = parent / "parser" / "nrc_lexicon_loader.py"
+                if candidate.exists():
+                    src_dir = parent
+                    logger.debug(f"Found NRC at: {candidate}")
+                    break
+            
+            if src_dir:
+                if str(src_dir) not in sys.path:
+                    sys.path.insert(0, str(src_dir))
+                    logger.debug(f"Added {src_dir} to sys.path")
+                
+                try:
+                    from parser.nrc_lexicon_loader import nrc  # noqa: F401
+                    logger.debug("NRC loaded after filesystem search")
+                except ImportError as e:
+                    import_error = e
+            else:
+                import_error = ImportError("Could not find parser/nrc_lexicon_loader.py in parent directories")
+        
+        if nrc is not None:
+            # Verify the NRC lexicon has data (not just imported but empty)
+            has_data = nrc.lexicon and len(nrc.lexicon) > 0
+            if has_data:
+                NLP_STATE["nrc_available"] = True
+                NLP_STATE["nrc_exc"] = None
+                logger.info(f"NRC lexicon available with {len(nrc.lexicon)} words")
+            else:
+                logger.warning("NRC lexicon module imported but contains no data. Check data/lexicons/nrc_emotion_lexicon.txt")
+                NLP_STATE["nrc_available"] = False
+                NLP_STATE["nrc_exc"] = "NRC module imported but lexicon data not loaded (file not found?)"
+        else:
+            raise import_error or ImportError("NRC lexicon import failed with unknown error")
+            
     except Exception as e:
         NLP_STATE["nrc_available"] = False
         NLP_STATE["nrc_exc"] = repr(e)
