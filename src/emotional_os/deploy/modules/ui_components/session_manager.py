@@ -34,6 +34,7 @@ def initialize_session_state():
     - Tier 1 Foundation for enhanced responses
     - Tier 2 Aliveness for emotional presence
     - Tier 3 Poetic Consciousness for creative depth
+    - Ollama LLM client for local model inference
     """
     _ensure_auth_defaults()
     _ensure_conversation_defaults()
@@ -45,6 +46,7 @@ def initialize_session_state():
     _ensure_tier1_foundation()
     _ensure_tier2_aliveness()
     _ensure_tier3_poetic_consciousness()
+    _ensure_ollama_client()
 
 
 def _ensure_auth_defaults():
@@ -441,3 +443,38 @@ def _ensure_theme_defaults():
     # Mark theme as loaded to prevent unnecessary resets
     if "theme_loaded" not in st.session_state:
         st.session_state["theme_loaded"] = False
+
+
+def _ensure_ollama_client():
+    """Initialize Ollama LLM client for local model inference.
+    
+    Sets up:
+    - Ollama HTTP client for local LLM service
+    - Health check and model availability detection
+    - Fallback response generation capability
+    - Status tracking for UI display
+    """
+    if "ollama_client" not in st.session_state:
+        try:
+            from ..ollama_client import get_ollama_client_singleton
+            
+            client = get_ollama_client_singleton()
+            st.session_state["ollama_client"] = client
+            
+            # Check availability and models in background
+            is_available = client.is_available()
+            models = client.get_available_models() if is_available else []
+            
+            st.session_state["ollama_available"] = is_available
+            st.session_state["ollama_models"] = models
+            
+            if is_available:
+                logger.info(f"Ollama initialized: {len(models)} models available")
+            else:
+                logger.debug("Ollama service not available (will use FirstPerson pipeline)")
+                
+        except Exception as e:
+            logger.debug(f"Ollama client init failed: {e}")
+            st.session_state["ollama_client"] = None
+            st.session_state["ollama_available"] = False
+            st.session_state["ollama_models"] = []

@@ -1,0 +1,43 @@
+# Dockerfile for Streamlit FirstPerson app with Ollama integration
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    gcc \
+    portaudio19-dev \
+    libsndfile1 \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Download and install spaCy model using python -m spacy download (more reliable)
+RUN python -m spacy download en_core_web_sm --quiet 2>/dev/null || echo "Warning: spaCy model download had issues, will retry at runtime"
+
+# Copy application code
+COPY . .
+
+# Create Streamlit config directory
+RUN mkdir -p ~/.streamlit
+
+# Streamlit config
+RUN echo '\
+[client]\n\
+logger.level = "info"\n\
+[logger]\n\
+level = "info"\n\
+' > ~/.streamlit/config.toml
+
+# Expose Streamlit port
+EXPOSE 8501
+
+# Run Streamlit
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
