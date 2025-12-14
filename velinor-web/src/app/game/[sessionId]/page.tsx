@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import GameScene from '@/components/GameScene';
+import ToneStatsDisplay from '@/components/ToneStatsDisplay';
+import { useGameStore } from '@/lib/gameStore';
 
 interface GameState {
   session_id: string;
@@ -35,16 +37,16 @@ export default function GamePage() {
     const initGame = async () => {
       try {
         const playerName = searchParams.get('player') || 'Traveler';
-        
+
         // Start a new game session
         const response = await fetch('/api/game/start', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ player_name: playerName }),
         });
-        
+
         if (!response.ok) throw new Error('Failed to start game');
-        
+
         const data = await response.json();
         setSessionId(data.session_id);
         setGameState(data.state);
@@ -161,11 +163,11 @@ export default function GamePage() {
   }
 
   return (
-    <div style={{ 
-      width: '100%', 
+    <div style={{
+      width: '100%',
       minHeight: '100vh',
-      padding: '20px', 
-      background: '#000' 
+      padding: '20px',
+      background: '#000'
     }}>
       <GameScene
         backgroundImage={gameState.background_image || '/assets/backgrounds/velhara_market.png'}
@@ -174,7 +176,10 @@ export default function GamePage() {
         choices={gameState.choices.map(c => ({ text: c.text, id: c.index.toString() }))}
         onChoiceClick={handleChoiceClick}
       />
-      
+
+      {/* TONE Stats Display Dev Console */}
+      <ToneStatsDisplay />
+
       {/* Debug info - shows variable count */}
       {gameState.game_state && (
         <div style={{
