@@ -183,12 +183,12 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
    - Role: Offers fragment recovery in exchange for intel
 
 10. **Drossel** (Thieves' Gang Leader)
-    - Appearance: Smooth movements, Slavic-French accent blend
-    - Location: Swamp hideout (Mire of Echoes)
-    - Trait: Charismatic yet brusk, unpredictable
-    - Visual Mechanic: Alternates screen sides with each dialogue line
-    - Boss Encounter: Not combat - negotiation/resonance challenge
-    - Resolution: Recover stolen fragments, player choice on returning items
+   - Appearance: Smooth movements, Slavic-French accent blend
+   - Location: Swamp hideout (Mire of Echoes)
+   - Trait: Charismatic yet brusque, unpredictable
+   - Visual Mechanic: Alternates screen sides with each dialogue line
+   - Boss Encounter: Not combat - negotiation/resonance challenge
+   - Resolution: Recover stolen fragments, player choice on returning items
 
 ### Relationship Mechanics
 
