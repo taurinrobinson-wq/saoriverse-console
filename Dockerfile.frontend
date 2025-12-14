@@ -5,8 +5,8 @@ WORKDIR /app
 # Copy package files
 COPY firstperson/package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies (use npm install to generate lock file)
+RUN npm install --legacy-peer-deps
 
 # Copy frontend code
 COPY firstperson/src ./src
