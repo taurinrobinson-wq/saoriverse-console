@@ -25,20 +25,48 @@ Configure voice settings in the sidebar when running app.py
 
 ---
 
+## 📂 Project Organization
+
+This project uses a clean folder structure to prevent clutter:
+- **`src/`** — Main source code
+- **`scripts/`** — Development utilities (see `scripts/RUN_WEB_DEV.sh`)
+- **`docs/`** — Intentional, curated documentation only
+- **`scratch/`** — Auto-generated notes (not tracked in git)
+- **`velinor/`** — Velinor game implementation (Streamlit)
+- **`velinor-web/`** — Velinor web version (Next.js)
+
+👉 **[See Full Structure Guide](./docs/PROJECT_STRUCTURE.md)**
+
+## 🚀 Quick Commands
+
+```bash
+# Start Velinor web game (dev mode)
+./scripts/RUN_WEB_DEV.sh
+
+# Start full stack (frontend + backend)
+./scripts/RUN_FULL_STACK.sh
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run Streamlit app
+streamlit run app.py
+```
+
 ## Documentation
 
 ### Start Here
+- **[Project Structure](./docs/PROJECT_STRUCTURE.md)** - How folders are organized
 - **[Architecture Guide](./docs/ARCHITECTURE.md)** - How the system is organized
-- **[Testing Guide](./docs/TESTING_GUIDE.md)** - How to run and write tests
-- **[API Reference](./docs/API_REFERENCE.md)** - All public APIs
+- **[Quick References](./docs/)** - One-page guides (QUICK_REFERENCE_*.md)
 
-### Quick Navigation
-| Need... | Go to... |
-|---------|----------|
-| Code structure | `docs/ARCHITECTURE.md` |
-| Run tests | `docs/TESTING_GUIDE.md` |
-| API documentation | `docs/API_REFERENCE.md` |
-| Full docs index | `docs/INDEX.md` |
+### By System
+| System | Go to... |
+|--------|----------|
+| **Velinor Game** | `docs/VELINOR_*.md` |
+| **FirstPerson AI** | `docs/FIRSTPERSON_*.md` |
+| **Deployment** | `docs/DEPLOYMENT_*.md` |
+| **Code structure** | `docs/ARCHITECTURE.md` |
 
 ---
 

@@ -138,3 +138,13 @@ demo_output/
 # Poetic engine state (generated at runtime)
 emotional_os/data/poetic_state.json
 *.zip
+
+# Project organization: auto-generated clutter goes here (not tracked)
+scratch/
+*.scratch.md
+*.tmp.md
+notes/
+
+# Build artifacts
+.next/
+
