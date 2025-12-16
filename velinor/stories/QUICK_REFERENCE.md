@@ -13,6 +13,7 @@ story.add_passage(
 )
 ```
 
+
 ## Add a Choice
 
 ```python
@@ -23,12 +24,13 @@ story.add_choice(
 )
 ```
 
+
 ## Complete Example
 
 ```python
 def build_velinor_story():
     story = StoryBuilder("Velinor: Remnants of the Tone")
-    
+
     # Opening scene
     story.add_passage(
         name="market_arrival",
@@ -37,7 +39,7 @@ def build_velinor_story():
         is_start=True,
         tags=["act1"]
     )
-    
+
     # NPC encounter
     story.add_passage(
         name="meet_ravi",
@@ -46,16 +48,17 @@ def build_velinor_story():
         npcs=["Ravi"],
         tags=["act1", "ravi_path"]
     )
-    
+
     # Connect them
     story.add_choice(
         from_passage_name="market_arrival",
         choice_text="Greet the figure",
         to_passage_name="meet_ravi"
     )
-    
+
     return story
 ```
+
 
 ## Key Parameters
 
@@ -89,6 +92,7 @@ def build_velinor_story():
 ## Common Patterns
 
 ### Solo scene
+
 ```python
 story.add_passage(
     name="alone",
@@ -97,7 +101,9 @@ story.add_passage(
 )
 ```
 
+
 ### Group scene
+
 ```python
 story.add_passage(
     name="group",
@@ -106,7 +112,9 @@ story.add_passage(
 )
 ```
 
+
 ### Location only
+
 ```python
 story.add_passage(
     name="explore",
@@ -116,8 +124,11 @@ story.add_passage(
 )
 ```
 
+
 ### Branching
+
 ```python
+
 # Choice point
 story.add_choice(
     from_passage_name="fork",
@@ -140,9 +151,11 @@ story.add_choice(
 )
 ```
 
+
 ## Build Commands
 
 ```bash
+
 # Build (Python → JSON)
 python build_story.py
 
@@ -156,25 +169,19 @@ python build_story.py --watch
 python build_story.py --parse-markdown
 ```
 
+
 ## Tips
 
-✓ Use snake_case for passage names (`market_arrival`, not `MarketArrival`)  
-✓ Use proper case for NPC names (`Ravi`, not `ravi`)  
-✓ Use snake_case for backgrounds (`market_ruins`, not `MarketRuins`)  
-✓ Keep text short but descriptive  
-✓ Use tags for organization (act, location, npc_path, etc.)  
-✓ Multi-line text works fine in `"""..."""`  
+✓ Use snake_case for passage names (`market_arrival`, not `MarketArrival`) ✓ Use proper case for NPC
+names (`Ravi`, not `ravi`) ✓ Use snake_case for backgrounds (`market_ruins`, not `MarketRuins`) ✓
+Keep text short but descriptive ✓ Use tags for organization (act, location, npc_path, etc.) ✓
+Multi-line text works fine in `"""..."""`
 
 ## Next Steps
 
-1. Open `story_definitions.py`
-2. Edit the story content
-3. Add backgrounds/npcs to each scene
-4. Run `python build_story.py`
-5. Run `python build_story.py --validate`
-6. Test in game
-
----
+1. Open `story_definitions.py` 2. Edit the story content 3. Add backgrounds/npcs to each scene 4.
+Run `python build_story.py` 5. Run `python build_story.py --validate` 6. Test in game
+## 
 
 **Full Guides:**
 - [README.md](README.md) - Complete story system guide

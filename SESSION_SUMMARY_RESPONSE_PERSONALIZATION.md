@@ -59,6 +59,7 @@ All tests passing ✅:
 ```json
 ```
 
+
 [✓] Direct method works (_craft_glyph_grounded_response) [✓] Full pipeline integration
 (compose_response) [✓] Multiple glyphs produce unique responses [✓] Glyph descriptions incorporated
 in all responses [✓] User context acknowledged appropriately [✓] Edge cases handled gracefully [✓]
@@ -72,8 +73,10 @@ No breaking changes [✓] No database modifications required
 
 ### Example 1: Stress + Still Insight
 ```text
+
 ```text
 ```
+
 
 Input: "I'm feeling stressed about work piling up" Before: "I hear you. What's the feeling
 underneath all that?" After:  "That's a real thing you're carrying. Even in what feels active or
@@ -92,6 +95,7 @@ What's the next small step for you?"
 ### Example 2: Grief + Ache of Recognition
 
 ```text
+
 ```
 
 Input: "I've been feeling this deep sadness"
@@ -101,6 +105,7 @@ After:  "I'm here with you on that. The ache you're feeling—sorrow witnessed.
         What's the next small step for you?"
 
 ```
+
 
 
 ✓ Uses "ache" concept from glyph ✓ References "sorrow witnessed" directly ✓ "being truly seen"

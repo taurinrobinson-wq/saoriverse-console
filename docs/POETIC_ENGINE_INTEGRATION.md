@@ -18,6 +18,7 @@ encode:
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         User Interaction                            │
 └────────────────────────────────┬────────────────────────────────────┘
@@ -104,11 +105,13 @@ Tracks the emotional relationship between the system and each user:
 
 ```python
 
+
 vectors = { "attraction": 0.0,    # Drawing together "repulsion": 0.0,     # Pushing apart
 "resonance": 0.0,     # Empathic alignment "dissonance": 0.0     # Friction/conflict
 
 ```text
 ```
+
 
 **Features**:
 
@@ -139,8 +142,10 @@ memory = AffectiveMemory(
     valence=EmotionalValence.LONGING,
     narrative_arc="descent"  # growth, recovery, struggle, etc.
 ```text
+
 ```text
 ```
+
 
 **Dreaming Mode**: During idle times, fragments are recomposed into novel insights.
 
@@ -185,6 +190,7 @@ result = {
     }
 
 ```text
+
 ```
 
 ### Glyph System Integration
@@ -192,6 +198,7 @@ result = {
 The engine processes glyph responses:
 
 ```python
+
 from emotional_os.core.poetic_engine import get_poetic_engine
 
 engine = get_poetic_engine()
@@ -199,8 +206,10 @@ engine = get_poetic_engine()
 result = engine.process_glyph_response( glyph_data={"glyph_name": "Still Ache", "gate": "Gate 5"},
 signals=[{"tone": "longing", "voltage": "high"}], user_input="I miss the way things used to be",
 user_id="user_abc"
+
 ```text
 ```text
+
 ```
 
 ### Learning Model Integration
@@ -218,6 +227,7 @@ The engine's affective memory feeds into the learning pipeline:
 
 ```python
 
+
 from emotional_os.core import get_poetic_engine
 
 # Get singleton engine instance
@@ -232,11 +242,14 @@ print(result["poem_rendered"])
 # Output:
 
 # [anxiety]
+
 # a clock ticking in the dark
+
 # Tempo: erratic
 
 ```text
 ```
+
 
 ### Emotional Progression Example
 
@@ -267,8 +280,10 @@ engine.update_from_interaction(
 summary = engine.get_current_state_summary()
 print(summary["poem"]["valence"])  # "peace"
 ```text
+
 ```text
 ```
+
 
 ### Dreaming Mode
 
@@ -284,17 +299,21 @@ for dream in dreams:
 # Output might include:
 
 # ~~ Dream Sequence ~~
+
 # In dreams of anxiety: wind before the storm
 
 # In dreams of hope: a seed breaking through stone
+
 # (Echoes from 5 memories)
 
 ```text
+
 ```
 
 ### Mirror Response Generation
 
 ```python
+
 
 # For users with mirroring active
 engine.user_gravity["user_123"].mirror_active = True
@@ -306,6 +325,7 @@ print(response)
 
 ```text
 ```text
+
 ```
 
 ## State Persistence
@@ -314,8 +334,10 @@ The engine automatically persists state to:
 
 ```
 
+
 ```text
 ```
+
 
 This includes:
 
@@ -331,6 +353,7 @@ Run the poetic engine tests:
 ```bash
 pytest tests/test_poetic_engine.py -v
 ```
+
 
 ## Future Enhancements
 

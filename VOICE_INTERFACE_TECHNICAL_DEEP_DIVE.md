@@ -17,6 +17,7 @@ You've built something fundamentally different:
 ```text
 ```
 
+
 Voice Input (User speaks) ↓ STT: Transcribe to emotional signal (not just text) ↓ Parse: Extract
 emotion, themes, and relational context ↓ Generate: Create response grounded in their actual words ↓
 Prosody Planning: Map emotional state → voice characteristics ↓ TTS: Synthesize response WITH
@@ -45,6 +46,7 @@ emotional prosody applied ↓ Voice Output (System sounds emotionally congruent)
 
 ```python
 
+
 class AudioProcessor: """Preprocesses audio for optimal transcription"""
 
 def load_audio(audio_bytes, sr=16000):
@@ -65,6 +67,7 @@ def trim_silence(audio, sr=16000, threshold_ms=500):
 ```text
 ```
 
+
 **Example Usage**:
 
 ```python
@@ -82,8 +85,10 @@ transcription_result = pipeline.transcribe(audio_bytes)
     "confidence": 0.96,
     "duration": 3.2,
 ```text
+
 ```text
 ```
+
 
 **Performance**:
 
@@ -137,11 +142,13 @@ class ProsodyPlanner:
             - terminal_contour: RISING/MID/FALLING
 
 ```text
+
 ```
 
 **Emotion → Prosody Mappings**:
 
 ```
+
 VOLTAGE (Arousal) → Speaking Rate
 ├─ 0.2 (calm, withdrawn) → 0.85x (slow, thoughtful)
 ├─ 0.5 (engaged) → 1.0x (normal)
@@ -162,13 +169,16 @@ ATTUNEMENT (Relational Presence) → Word Emphasis
 CERTAINTY → Terminal Contour
 ├─ Uncertain (<0.4) → RISING (sounds questioning)
 ├─ Mixed (0.4-0.6) → MID (neutral)
+
 ```text
 ```text
+
 ```
 
 **Guardrails** (Prevents jarring transitions):
 
 ```python
+
 
 class ProsodyGuardrails: """Ensures smooth, natural transitions"""
 
@@ -185,6 +195,7 @@ class ProsodyGuardrails: """Ensures smooth, natural transitions"""
 
 ```text
 ```
+
 
 **Real Example Flow**:
 
@@ -208,8 +219,10 @@ ProsodyPlan generated:
 └─ terminal_contour: RISING (inviting, not prescriptive)
 
 ```text
+
 ```text
 ```
+
 
 **Tests** (24/24 passing):
 
@@ -304,11 +317,13 @@ class ProsodyApplier:
         # Insert silence after emphasized words
 
 ```text
+
 ```
 
 **Synthesis Pipeline Flow**:
 
 ```
+
 Response text: "I hear the weight of that" Prosody: [rate=0.90x, pitch=-1.2, energy=0.85,
 emphasis=[2,3]]
 
@@ -332,13 +347,16 @@ Step 6: Chunk for Streaming Input: Full synthesized audio (~3 seconds) Output: 5
 Start playback at chunk 1, synthesize rest in background
 
 Result: User hears: "I hear the" (100ms) Pause: 200ms User hears: "weight of that" (200ms)
+
 ```text
 ```text
+
 ```
 
 **Performance Metrics**:
 
 ```
+
 
 Synthesis:
 ├─ Text→speech: 100-200ms (text-length dependent)
@@ -355,6 +373,7 @@ Model Details:
 
 ```text
 ```
+
 
 **Why This Matters**:
 
@@ -403,8 +422,10 @@ class VoiceUIState:
         self.prosody_session = None
         self.tts_session = None
 ```text
+
 ```text
 ```
+
 
 **Integration Pattern**:
 
@@ -435,6 +456,7 @@ if transcription:
     # Render voice output
 
 ```text
+
 ```
 
 **UI Features**:
@@ -458,6 +480,7 @@ if transcription:
 **Components** (in `spoken_interface/performance_profiler.py`):
 
 ```python
+
 class PerformanceProfiler: """Profiles each operation for latency"""
 
 def measure(operation_name, callable, *args):
@@ -482,13 +505,16 @@ class LatencyOptimizer: """Suggests optimizations"""
 
     # Parallel processing: STT + Response generation overlap
     # Streaming: Don't wait for full response before TTS starts
+
 ```text
 ```text
+
 ```
 
 **Current Performance**:
 
 ```
+
 
 Full Round-Trip (User Speaks → Hears Response):
 ├─ User speaking: 3-10 seconds (natural length)
@@ -502,6 +528,7 @@ Privacy compliance (local processing)? YES ✓
 
 ```text
 ```
+
 
 ##
 
@@ -523,6 +550,7 @@ Analysis:
 ├─ Consensus: Masking/suppression detected
 └─ Response: "Something in your voice suggests maybe that's not the whole story?"
 ```
+
 
 **Market Advantage**: Detects suppression that ChatGPT and Claude can't. Unique for mental health and abuse support.
 

@@ -87,6 +87,7 @@ Sample Size         Generated    After Pruning    Removal Rate
 150×150            ~11,000      ~1,800           estimated
 ```
 
+
 ##
 
 ## 🔧 Technical Implementation Details
@@ -97,6 +98,7 @@ Sample Size         Generated    After Pruning    Removal Rate
 id, voltage_pair, glyph_name, description, gate, activation_signals
 1, α-β, Recursive Ache, Longing that loops inward..., Gate 4, γ, θ
 ```
+
 
 ### New Glyph Structure (factorial combinations)
 
@@ -116,6 +118,7 @@ id, voltage_pair, glyph_name, description, gate, activation_signals
 }
 ```
 
+
 ### Scoring Formula
 
 ```
@@ -125,6 +128,7 @@ novelty:    How unique vs existing (0-0.6 based on description length)
 coherence:  How well parents blend (0-1 based on symbol overlap + diversity)
 coverage:   Gap filling potential (0-1 based on gate frequency)
 ```
+
 
 ### Pruning Logic
 
@@ -183,6 +187,7 @@ engine.sync_to_json(
     output_path="emotional_os/glyphs/glyph_lexicon_rows.json"
 )
 ```
+
 
 **Expected runtime:** 10-15 minutes total
 **Expected result:** JSON updated with 6,000-8,000 new factorial glyphs

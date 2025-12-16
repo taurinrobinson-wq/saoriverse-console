@@ -30,6 +30,7 @@ Instead of glyphs generating responses, glyphs **inform** response generation:
 ```text
 ```
 
+
 User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator → Fresh Response ↓ Glyph
 provides constraints:
                                           - Emotional tone
@@ -50,6 +51,7 @@ Analyzes emotional tone, intensity, and valence of user input.
 
 ```python
 
+
 affect = parser.analyze_affect("I'm grieving the loss of my job")
 
 # Returns: {
@@ -60,6 +62,7 @@ affect = parser.analyze_affect("I'm grieving the loss of my job")
 
 ```text
 ```
+
 
 **What it detects:**
 
@@ -121,8 +124,10 @@ closing = "There's no rush. Move at your own pace."  (theme="grief" specific)
 
 FINAL: "I hear the weight of grief. What's underneath? What do you need?
 ```text
+
 ```text
 ```
+
 
 **Why this works:**
 
@@ -146,6 +151,7 @@ orchestrator = create_orchestrator(user_id, conversation_id)
 orchestrator.initialize_session()
 
 ```text
+
 ```
 
 ### Response Generation
@@ -153,9 +159,12 @@ orchestrator.initialize_session()
 `response_handler.py` uses it in `_build_conversational_response()`:
 
 ```python
+
 fp_orch = st.session_state.get("firstperson_orchestrator") if fp_orch and best_glyph:
+
 ```text
 ```text
+
 ```
 
 ##
@@ -250,6 +259,7 @@ This implementation restores your **original vision** for the glyph system:
 ## Architecture Diagram
 
 ```
+
 
 ┌─────────────────────────────────────────────────────────────┐
 │ User Input: "I'm grieving the loss of my job"             │

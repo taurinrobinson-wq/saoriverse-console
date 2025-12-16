@@ -32,6 +32,7 @@ to maintain, test, and modify.
 ```text
 ```
 
+
 emotional_os/deploy/modules/
 ├── ui.py (REFACTORED - entry point & orchestration, ~300 lines)
 ├── ui_components/
@@ -324,6 +325,7 @@ emotional_os/deploy/modules/
 
 ```python
 
+
 """ Main UI entry point and orchestration.
 
 Handles page routing, session initialization, and high-level flow control. Delegates specific
@@ -370,6 +372,7 @@ if __name__ == "__main__":
 
 ```text
 ```
+
 
 ##
 
@@ -466,6 +469,7 @@ utils/
 ├─ css_injector
 └─ styling_utils
 ```
+
 
 ##
 

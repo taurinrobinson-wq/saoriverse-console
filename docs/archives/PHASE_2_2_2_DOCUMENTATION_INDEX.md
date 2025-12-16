@@ -121,6 +121,7 @@ if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affe
     print(response)  # "I feel the weight. It's Loss layered with fatigue..."
 ```
 
+
 See `PHASE_2_2_2_QUICK_REFERENCE.md` for complete API reference.
 
 ##
@@ -150,6 +151,7 @@ pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 # Run full FirstPerson suite
 pytest emotional_os/core/firstperson/test_*.py -v
 ```
+
 
 ##
 
@@ -276,6 +278,7 @@ tests to verify
 │
 └── [other files - unchanged]
 ```
+
 
 ##
 

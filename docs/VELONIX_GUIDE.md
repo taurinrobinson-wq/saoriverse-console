@@ -51,6 +51,7 @@ Reactions transform input elements into results:
 ```text
 ```
 
+
 Longing + Grief → Tenderness "The ache of missing becomes the softness of cherishing"
 
 Rage + Forgiveness (catalyst: Resilience) → Presence "Anger dissolves when held in strength and
@@ -68,6 +69,7 @@ Vulnerability + Acceptance → Joy "Courage to be seen becomes freedom to celebr
 
 ```python
 
+
 from emotional_os.glyphs.velonix_reaction_engine import get_velonix_engine
 
 engine = get_velonix_engine()
@@ -82,6 +84,7 @@ reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
 
 ```text
 ```
+
 
 ### Full Integration
 
@@ -118,8 +121,10 @@ archive.log_reaction(
     ritual_prompt=ritual,
     user_notes="I'm finding tenderness in my grief..."
 ```text
+
 ```text
 ```
+
 
 ### Find Possible Reactions
 
@@ -133,16 +138,20 @@ possible = engine.find_possible_reactions(current_elements)
 for p in possible:
 
 ```text
+
 ```
 
 ### Streamlit Integration
 
 ```python
+
 from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 
 # In your Streamlit app
+
 ```text
 ```text
+
 ```
 
 ## Architecture
@@ -157,6 +166,7 @@ from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 ### Class Structure
 
 ```
+
 
 VelonixReactionEngine
 ├── Elements Registry
@@ -180,6 +190,7 @@ EmotionalArchive
 
 ```text
 ```
+
 
 ## Reaction Catalog
 
@@ -255,8 +266,10 @@ All reactions are automatically logged to create a "legacy capsule" of emotional
 # Export archive
 archive_json = archive.export_as_json()
 ```text
+
 ```text
 ```
+
 
 ## Demo
 
@@ -265,6 +278,7 @@ Run the demo to see VELΩNIX in action:
 ```bash
 
 ```text
+
 ```
 
 This runs:
@@ -281,6 +295,7 @@ This runs:
 ### Add Custom Element
 
 ```python
+
 from emotional_os.glyphs.velonix_reaction_engine import EmotionalElement
 
 custom = EmotionalElement( name="Serenity", symbol="Sr", valence="Tranquil",
@@ -289,11 +304,13 @@ tone="Golden Calm", color_hex="#FFD700" )
 
 ```text
 ```text
+
 ```
 
 ### Add Custom Reaction
 
 ```python
+
 
 from emotional_os.glyphs.velonix_reaction_engine import ReactionChain
 

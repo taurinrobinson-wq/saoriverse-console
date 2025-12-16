@@ -11,6 +11,7 @@
 ```text
 ```
 
+
 Digital Ocean VPS:
 ├── velinor.firstperson.chat (Next.js 16 + FastAPI backend)
 │   ├── Port 8000: FastAPI (velinor_api.py)
@@ -34,8 +35,10 @@ Digital Ocean VPS:
 
 ### Proposed Setup
 ```text
+
 ```text
 ```
+
 
 firstperson.chat (NEW subdomain):
 ├── Frontend (Next.js)
@@ -71,6 +74,7 @@ firstperson.chat (NEW subdomain):
 ### Docker Compose Structure (Updated)
 
 ```yaml
+
 services:
   # Existing
 velinor_api: image: velinor_prod ports: [8000:8000]
@@ -85,13 +89,16 @@ ollama: image: ollama/ollama ports: [11434:11434]  # Local only
   # Reverse proxy (routes both domains)
 nginx_ssl: image: nginx:alpine ports: [80:80, 443:443] depends_on:
       - velinor_api
+
 ```text
 ```text
+
 ```
 
 ### Nginx Configuration (Updated)
 
 ```nginx
+
 
 
 # Existing
@@ -102,6 +109,7 @@ server_name firstperson.chat;
 
 ```text
 ```
+
 
 ## Implementation Roadmap
 
@@ -168,8 +176,10 @@ from emotional_os.deploy.modules.audio_conversation_orchestrator import AudioCon
 from emotional_os.deploy.modules.prosody_planner import ProsodyPlanner
 from emotional_os.deploy.modules.nlp_init import warmup_nlp
 ```sql
+
 ```sql
 ```
+
 
 ### Architecture Pattern (Copy from Velinor)
 
@@ -184,6 +194,7 @@ FastAPI app
 └── Integration logic
 
 ```text
+
 ```
 
 ## Key Endpoints
@@ -191,6 +202,7 @@ FastAPI app
 ### Simple (HTTP Request/Response)
 
 ```bash
+
 
 # Transcribe audio
 POST /api/transcribe Content-Type: multipart/form-data { audio: <wav_blob> } → { text: "hello",
@@ -202,13 +214,16 @@ audio_url: "..." }
 
 # Synthesize audio
 POST /api/synthesize { text: "...", glyph_intent: {...} }
+
 ```text
 ```text
+
 ```
 
 ### Streaming (WebSocket)
 
 ```javascript
+
 
 // Real-time conversation ws.send({ type: 'transcribe_start' }) // User speaks... ws.send({ type:
 'audio_chunk', data: <chunk> }) ws.send({ type: 'transcribe_end' }) ← { type: 'transcript', text:
@@ -216,6 +231,7 @@ POST /api/synthesize { text: "...", glyph_intent: {...} }
 
 ```text
 ```
+
 
 ## Digital Ocean Setup Checklist
 
@@ -286,6 +302,7 @@ saoriverse-console/
 ├── nginx.prod.conf                # UPDATED - dual domain routing
 └── [existing files]
 ```
+
 
 ## Next Steps
 

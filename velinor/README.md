@@ -12,8 +12,10 @@ Run the tests with:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 # 🎮 Velinor: Remnants of the Tone
 
@@ -49,11 +51,13 @@ cd saoriverse-console
 # Install dependencies
 
 ```text
+
 ```
 
 ### Run Sample Game
 
 ```python
+
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
 # Initialize
@@ -66,8 +70,10 @@ state = orchestrator.start_game()
 # Process player input
 state = orchestrator.process_player_action( choice_index=0,  # Select first choice
 player_id="player_1"
+
 ```text
 ```text
+
 ```
 
 See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, etc.)
@@ -77,6 +83,7 @@ See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, et
 ## Architecture
 
 ```
+
 
 TWINE STORY (JSON) ↓ [TwineAdapter] → Loads passages, parses markup ↓ [Orchestrator] → Main game
 loop
@@ -91,6 +98,7 @@ loop
 
 ```text
 ```
+
 
 ### Key Components
 
@@ -120,8 +128,10 @@ You emerge into the Market District...
 [[Ask about the Tone->keeper_dialogue]]
 [[Explore alone->market_exploration]]
 ```text
+
 ```text
 ```
+
 
 **Syntax:**
 
@@ -158,6 +168,7 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
     'resonance': 100,  # Hear the Tone, collect glyphs
 
 ```text
+
 ```
 
 ### Dice Rolls
@@ -170,9 +181,12 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
 Example:
 
 ```
+
 Player chooses: "Persuade the guard" DC: 12, Player Courage: +3 Roll: 14 + 3 = 17 ✅ Success
+
 ```text
 ```text
+
 ```
 
 ### Glyphs
@@ -199,16 +213,20 @@ Player chooses: "Persuade the guard" DC: 12, Player Courage: +3 Roll: 14 + 3 = 1
 
 ```
 
+
 ```text
 ```
+
 
 **Multiplayer Mode:**
 
 ```
 NPC: "Together, your courage strengthens. The mist bends
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -244,6 +262,7 @@ velinor/
 ├── markdowngameinstructions/   # Design docs
 
 ```text
+
 ```
 
 ##
@@ -292,6 +311,7 @@ velinor/
 
 ```python
 
+
 # Initialize
 orchestrator = VelinorTwineOrchestrator( game_engine=engine,
 story_path="velinor/stories/sample_story.json" )
@@ -312,8 +332,10 @@ print(state['npc_dialogue']) print("New location:", state['game_state']['current
 orchestrator.save_game("saves/game_001.json")
 
 # Load
+
 ```text
 ```text
+
 ```
 
 ##
@@ -326,11 +348,13 @@ Velinor loads Twine 2 JSON export format:
 
 ```json
 
+
 { "name": "Story Title", "startnode": "1", "passages": [ { "pid": "1", "name": "start", "text":
 "Story content...", "tags": [], "position": [0, 0], "size": [100, 100] } ]
 
 ```text
 ```
+
 
 ### Game State Structure
 
@@ -359,6 +383,7 @@ Velinor loads Twine 2 JSON export format:
   }
 }
 ```
+
 
 ##
 

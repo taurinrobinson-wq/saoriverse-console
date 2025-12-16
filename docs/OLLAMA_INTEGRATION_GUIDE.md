@@ -21,8 +21,10 @@ docker-compose -f docker-compose.local.yml up -d
 # Streamlit available at: http://localhost:8501
 
 ```text
+
 ```text
 ```
+
 
 ### Pull a Language Model
 
@@ -40,11 +42,13 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull mistral      
 docker-compose -f docker-compose.local.yml exec ollama ollama pull neural-chat  # ~4.1GB
 
 ```text
+
 ```
 
 ### Test Ollama Directly
 
 ```bash
+
 
 # Check service health
 curl http://localhost:11434/api/tags
@@ -52,8 +56,10 @@ curl http://localhost:11434/api/tags
 # Generate a response (replace llama3 with your model)
 curl -X POST http://localhost:11434/api/generate -d '{ "model": "llama3", "prompt": "Why is the sky
 blue?", "stream": false
+
 ```text
 ```text
+
 ```
 
 ## Architecture
@@ -98,12 +104,14 @@ Key methods:
 
 ```python
 
+
 ollama = get_ollama_client_singleton() ollama.is_available()                                    #
 Check if service running ollama.get_available_models()                            # List pulled
 models ollama.generate(prompt, model="llama3")                  # Generate response
 
 ```text
 ```
+
 
 #### 2. Response Handler Integration (`response_handler.py`)
 
@@ -121,8 +129,10 @@ System prompt sets FirstPerson personality:
 ```
 You are FirstPerson, a warm, empathetic AI companion for personal growth.
 ```text
+
 ```text
 ```
+
 
 #### 3. Session State (`session_manager.py`)
 
@@ -164,6 +174,7 @@ Strip prosody metadata + prevent repetition
     ↓
 
 ```text
+
 ```
 
 ## Model Recommendations
@@ -190,6 +201,7 @@ In docker-compose or .env:
 
 ```bash
 
+
 # Base URL for Ollama API (auto-configured in container)
 OLLAMA_BASE_URL=http://ollama:11434
 
@@ -200,6 +212,7 @@ STREAMLIT_LOGGER_LEVEL=info
 
 ```text
 ```text
+
 ```
 
 ### Customizing System Prompt
@@ -208,11 +221,13 @@ Edit `_get_ollama_fallback_response()` in `response_handler.py`:
 
 ```python
 
+
 system_prompt = """You are FirstPerson, a warm, empathetic AI companion... [customize personality
 and behavior here]
 
 ```text
 ```
+
 
 ## Troubleshooting
 
@@ -231,8 +246,10 @@ docker network ls | grep firstperson_network
 
 # Restart services
 ```text
+
 ```text
 ```
+
 
 ### "No models available"
 
@@ -245,6 +262,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # Verify
 
 ```text
+
 ```
 
 ### Slow responses
@@ -259,6 +277,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 ```bash
 
+
 # Clean up old containers/images
 docker-compose -f docker-compose.local.yml down docker system prune -a
 
@@ -266,6 +285,7 @@ docker-compose -f docker-compose.local.yml down docker system prune -a
 
 ```text
 ```text
+
 ```
 
 ## Production Considerations
@@ -282,12 +302,14 @@ For NVIDIA GPU support, uncomment in docker-compose.local.yml:
 
 ```yaml
 
+
 deploy: resources: reservations: devices:
         - driver: nvidia
 count: 1
 
 ```bash
 ```
+
 
 Requires: `nvidia-docker` installed and NVIDIA GPU available.
 
@@ -324,8 +346,10 @@ response = client.generate_with_context(
 
 # Health status
 ```text
+
 ```text
 ```
+
 
 ### Environment Detection
 
@@ -351,6 +375,7 @@ print(client.get_available_models())
 response = client.generate("Hello! How can I help?", model="llama3")
 
 ```text
+
 ```
 
 ### Debugging Responses
@@ -358,14 +383,18 @@ response = client.generate("Hello! How can I help?", model="llama3")
 Enable debug logging:
 
 ```python
+
 import logging logging.basicConfig(level=logging.DEBUG)
+
 ```text
 ```text
+
 ```
 
 Check session state in Streamlit:
 
 ```python
+
 
 import streamlit as st st.write("Ollama Available:", st.session_state.get("ollama_available"))
 st.write("Models:", st.session_state.get("ollama_models"))

@@ -11,8 +11,10 @@ python check-docker-requirements.py
 
 # macOS/Linux
 ```text
+
 ```text
 ```
+
 
 Expected output: All checks ✅
 
@@ -29,23 +31,28 @@ docker build -f Dockerfile.firstperson -t firstperson:latest .
 # macOS/Linux
 
 ```text
+
 ```
 
 **Option B: Resilient Build** (If Option A times out)
 
 ```powershell
 
+
 # Windows PowerShell
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 # macOS/Linux
+
 ```text
 ```text
+
 ```
 
 **Option C: Automated Test** (Validates build)
 
 ```powershell
+
 
 
 # Windows PowerShell
@@ -55,6 +62,7 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 ```text
 ```
+
 
 ### Step 3: Verify Build Success
 
@@ -72,8 +80,10 @@ sleep 5
 curl http://localhost:8000/health
 docker stop firstperson-test
 ```text
+
 ```text
 ```
+
 
 Expected: `{"status":"healthy"}`
 
@@ -103,15 +113,19 @@ PIP_TIMEOUT: 60 seconds (was 15s)
 PIP_RETRIES: 5 attempts (was 1)
 
 ```text
+
 ```
 
 ### Optimization
 
 ```
+
 --no-cache-dir: Saves disk space
 --retries 5: Handles network hiccups
+
 ```text
 ```text
+
 ```
 
 ##
@@ -143,6 +157,7 @@ PIP_RETRIES: 5 attempts (was 1)
 ```bash
 
 
+
 # Verify you're in correct directory
 pwd  # or cd d:\saoriverse-console
 
@@ -153,6 +168,7 @@ ls Dockerfile.firstperson
 
 ```text
 ```
+
 
 ### Build takes too long
 
@@ -187,8 +203,10 @@ ls Dockerfile.firstperson
 ```
 Successfully tagged firstperson:latest
 ```text
+
 ```text
 ```
+
 
 ### Container Runs ✅
 
@@ -199,15 +217,18 @@ docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 # No errors, container starts
 
 ```text
+
 ```
 
 ### Frontend Loads ✅
 
 ```
+
 curl http://localhost:3001
 
 ```text
 ```text
+
 ```
 
 ##
@@ -218,18 +239,22 @@ curl http://localhost:3001
 
 ```bash
 
+
 docker tag firstperson:latest your-registry/firstperson:v1.0.0
 
 ```text
 ```
+
 
 ### 2. Push to Registry
 
 ```bash
 docker push your-registry/firstperson:v1.0.0
 ```text
+
 ```text
 ```
+
 
 ### 3. Deploy to Server
 
@@ -248,6 +273,7 @@ docker run -d \
   -e SUPABASE_URL=https://... \
 
 ```text
+
 ```
 
 ##
@@ -281,12 +307,14 @@ If you need to force a clean rebuild:
 
 ```powershell
 
+
 # Windows PowerShell
 docker system prune -a  # Remove all images/containers docker build --no-cache -f
 Dockerfile.firstperson -t firstperson:latest .
 
 # macOS/Linux
 docker system prune -a docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
+
 ```
 
 **Warning:** This will remove all Docker images/containers!

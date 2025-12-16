@@ -358,9 +358,9 @@ database grows stronger with each user. The system learns through authentic emot
 Phase 1: Fixed the matching (56% → 100% coverage) ✓ Phase 2: Made it intelligent (learning from
 every interaction) ✓ Phase 3: Let it evolve (patterns emerging organically) """
 
-print(""" ╔════════════════════════════════════════════════════════════════════════════╗ ║
-EMOTIONAL OS PHASE 2: QUICK REFERENCE CARD                    ║ ║                   Real-Time Glyph
-Learning System                          ║
+print(""" ╔════════════════════════════════════════════════════════════════════════════╗ ║ EMOTIONAL
+OS PHASE 2: QUICK REFERENCE CARD                    ║ ║                   Real-Time Glyph Learning
+System                          ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 
 THE SYSTEM IN ONE LINE: No matching glyph? Generate new one + craft response that trains + log

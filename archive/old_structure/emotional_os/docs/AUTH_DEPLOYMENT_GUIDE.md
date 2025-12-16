@@ -144,12 +144,14 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 OPENAI_API_KEY=your-openai-key
 ```
 
+
 ### Supabase Function URLs
 
 ```
 Authentication: https://your-project.supabase.co/functions/v1/auth-manager
 Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ```
+
 
 ### Security Headers
 
@@ -159,6 +161,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE'
 ```
+
 
 ## Security Features
 

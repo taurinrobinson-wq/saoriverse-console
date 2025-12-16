@@ -1,6 +1,7 @@
 # Story Scene Composition Guide
 
-When writing scenes in `story_definitions.py`, you can now specify the background and NPCs for each scene.
+When writing scenes in `story_definitions.py`, you can now specify the background and NPCs for each
+scene.
 
 ## Quick Example
 
@@ -14,6 +15,7 @@ story.add_passage(
 )
 ```
 
+
 ## How It Works
 
 ### Backgrounds
@@ -26,6 +28,7 @@ background="shelter_interior"  # Indoor shelter
 background="shrine_ruins"      # Temple/shrine area
 background="thieves_cache"     # Underground market
 ```
+
 
 The game engine uses this to:
 - Load background images/visuals
@@ -52,6 +55,7 @@ npcs=["Ravi", "Nima"]      # Multiple NPCs
 npcs=["Ravi", "Nima", "Kaelen"]  # Even more
 ```
 
+
 The game engine uses this to:
 - Render character portraits/models
 - Trigger dialogue from specific NPCs
@@ -67,6 +71,7 @@ The game engine uses this to:
 ## Usage Patterns
 
 ### Scene with Multiple NPCs
+
 ```python
 story.add_passage(
     name="marketplace_meeting",
@@ -77,7 +82,9 @@ story.add_passage(
 )
 ```
 
+
 ### Solo Dialogue Scene
+
 ```python
 story.add_passage(
     name="ravi_alone",
@@ -88,7 +95,9 @@ story.add_passage(
 )
 ```
 
+
 ### Location-Only Scene
+
 ```python
 story.add_passage(
     name="shelter_rest",
@@ -99,8 +108,11 @@ story.add_passage(
 )
 ```
 
+
 ### Optional Presence
+
 ```python
+
 # If you want to skip specifying these:
 story.add_passage(
     name="exploration",
@@ -110,11 +122,13 @@ story.add_passage(
 )
 ```
 
+
 ## Metadata Storage
 
 Both background and NPCs are stored in two ways in the JSON:
 
 **1. In the passage text (for parsing):**
+
 ```
 {background: market_ruins}
 {npc: Ravi}
@@ -123,7 +137,9 @@ Both background and NPCs are stored in two ways in the JSON:
 Your story text here...
 ```
 
+
 **2. In _metadata field (for structured access):**
+
 ```json
 "_metadata": {
   "background": "market_ruins",
@@ -131,13 +147,16 @@ Your story text here...
 }
 ```
 
-This allows the game engine to use either the parsed text tags or the structured metadata, depending on its parsing strategy.
+
+This allows the game engine to use either the parsed text tags or the structured metadata, depending
+on its parsing strategy.
 
 ## Editing Examples
 
 ### Change the NPCs in a scene
 
 Before:
+
 ```python
 story.add_passage(
     name="meeting",
@@ -146,7 +165,9 @@ story.add_passage(
 )
 ```
 
+
 After:
+
 ```python
 story.add_passage(
     name="meeting",
@@ -155,9 +176,11 @@ story.add_passage(
 )
 ```
 
+
 ### Add a background to a placeholder
 
 Before:
+
 ```python
 story.add_passage(
     name="shrine_visit",
@@ -165,7 +188,9 @@ story.add_passage(
 )
 ```
 
+
 After:
+
 ```python
 story.add_passage(
     name="shrine_visit",
@@ -175,9 +200,11 @@ story.add_passage(
 )
 ```
 
+
 ### Multi-location story branch
 
 ```python
+
 # Market scene
 story.add_passage(
     name="market_decision",
@@ -202,6 +229,7 @@ story.add_passage(
     npcs=["Saori"]
 )
 ```
+
 
 ## Naming Conventions
 
@@ -244,12 +272,10 @@ The game engine (velinor-web) reads these fields to:
 
 ## Workflow
 
-1. **Write your story** in `story_definitions.py`
-2. **Add background/npcs** for each scene
-3. **Run build**: `python build_story.py`
-4. **Validate**: `python build_story.py --validate`
-5. **Test in game**: Play through to verify characters/locations load correctly
-6. **Iterate**: Edit, rebuild, test
+1. **Write your story** in `story_definitions.py` 2. **Add background/npcs** for each scene 3. **Run
+build**: `python build_story.py` 4. **Validate**: `python build_story.py --validate` 5. **Test in
+game**: Play through to verify characters/locations load correctly 6. **Iterate**: Edit, rebuild,
+test
 
 ## Next Steps
 
@@ -258,17 +284,17 @@ The game engine (velinor-web) reads these fields to:
 - [ ] Test scene composition in game
 - [ ] Verify NPC dialogue triggers correctly
 - [ ] Expand to Acts 2-4 with new locations/NPCs
-
----
+## 
 
 **Example: Complete Market Scene**
 
 ```python
+
 # Marketplace opening
 story.add_passage(
     name="market_arrival",
     text="""You emerge from the collapsed underpass into the Market District.
-    The air is thick with silence. Dust hangs in the air as two figures 
+    The air is thick with silence. Dust hangs in the air as two figures
     move across the plaza.""",
     is_start=True,
     background="market_ruins",
@@ -290,12 +316,13 @@ story.add_passage(
 # Ravi path
 story.add_passage(
     name="ravi_dialogue",
-    text="""You move toward Ravi. His expression softens. "I've learned to 
+    text="""You move toward Ravi. His expression softens. "I've learned to
     recognize it. People who listen." He extends a weathered hand.""",
     background="market_ruins",
     npcs=["Ravi", "Nima"],
     tags=["marketplace", "act1", "ravi_path"]
 )
 ```
+
 
 This gives the game engine everything it needs to render a complete, immersive scene composition!

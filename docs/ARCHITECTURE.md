@@ -18,6 +18,7 @@ development and testing.
 ```text
 ```
 
+
 saoriverse-console/
 ├── app.py                    # Single Streamlit entry point
 ├── requirements.txt          # Python dependencies
@@ -95,11 +96,13 @@ saoriverse-console/
 
 ### Text-to-Response Pipeline
 ```text
+
 ```text
 ```
 
-user_input (text) ↓ symbolic_tagger.py          Tag input (symbolic tags) ↓ signal_parser.py
-Extract emotional signals ↓ response_generator.py       Main orchestrator
+
+user_input (text) ↓ symbolic_tagger.py          Tag input (symbolic tags) ↓ signal_parser.py Extract
+emotional signals ↓ response_generator.py       Main orchestrator
     ├─→ phase_modulator.py          Detect phase
     ├─→ tone_adapters.py            Generate tone-adapted response
     ├─→ response_selector.py        Select response type
@@ -115,6 +118,7 @@ Extract emotional signals ↓ response_generator.py       Main orchestrator
 ### Voice Pipeline
 
 ```text
+
 ```
 
 audio_input (mp3/wav)
@@ -135,9 +139,12 @@ audio_output (mp3/wav)
 
 
 
+
 ### Learning Pipeline
+
 ```text
 ```text
+
 ```
 
 user_input + response + feedback
@@ -149,6 +156,7 @@ local_learner.py            Store learned patterns
 relational_memory.py        Persist patterns
 
 ```
+
 
 
 
@@ -193,8 +201,10 @@ from src import (
     DynamicResponseComposer,
     VoiceInterface,
 ```text
+
 ```text
 ```
+
 
 ### In internal modules
 
@@ -203,6 +213,7 @@ from src import (
 from src.signal_parser import parse_input
 
 ```text
+
 ```
 
 ### Key Constraint
@@ -241,13 +252,16 @@ from src.signal_parser import parse_input
 ### Single Streamlit Entry Point
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### Environment Setup
 
 ```bash
+
 
 python3 -m venv venv source venv/bin/activate pip install -r requirements.txt streamlit run app.py
 

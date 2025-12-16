@@ -31,6 +31,7 @@ Before: "That's kind of you to ask. I'm here for you. How are you?"
 After: "I hear that you're in real pain right now... 988 Crisis Line... professional support..."
 ```
 
+
 **Fix Applied:**
 
 - Added 50+ crisis/mortality keywords to emotional detection
@@ -74,6 +75,7 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 "eventually", "precious", "tender", "finite", "fragile", "ends", "fades"
 ```
 
+
 **Problem:** Responses don't contain these words
 
 - "I hear that you're in real pain" ← contains "now"? No
@@ -97,6 +99,7 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 [fetch_glyphs] Gates: ['Gate 4', 'Gate 5', 'Gate 9']
 [fetch_glyphs] SQL: SELECT glyph_name ... FROM glyph_lexicon WHERE gate IN (?,?,?)
 ```
+
 
 But then: `glyphs: []`
 

@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        LAYER 1: ARCHETYPE LIBRARY                   │
 │                    conversation_archetype.py (315 lines)            │
@@ -110,8 +111,10 @@
 
 ## Data Flow: From User Input to System Response
 ```text
+
 ```text
 ```
+
 
 USER INPUT ↓ ┌─────────────────────────────────────────┐
 │  ArchetypeResponseGenerator (Layer 2)   │
@@ -160,6 +163,7 @@ USER INPUT ↓ ┌────────────────────�
 ### Archetype 1: ReliefToGratitude
 
 ```sql
+
 ```
 
 Purpose: Handle transitions from burden to connection
@@ -187,9 +191,12 @@ Status: ✓ Working, tested
 
 
 
+
 ### Archetype 2: OverwhelmToReflection
+
 ```text
 ```text
+
 ```
 
 Purpose: Navigate work overwhelm to existential meaning-seeking
@@ -226,10 +233,12 @@ Status: ✓ Verified with 6-turn dialogue
 
 
 
+
 ### Archetype 3: GratitudeToOverwhelm (Auto-Learned)
 
 ```sql
 ```
+
 
 Purpose: Transition from mixed emotions to deeper complexity Entry Cues: but, hug, heavy,
 familial_connection, ... Learned From: Automatically extracted by ConversationLearner Response
@@ -258,8 +267,10 @@ Status: ✓ Auto-learned, working
 
 ### User Input
 ```text
+
 ```text
 ```
+
 
 "I feel fragile today, like even small things overwhelm me. Work has been relentless lately—this
 week alone I've felt pummeled by back-to-back client meetings and impossible deadlines."
@@ -272,6 +283,7 @@ week alone I've felt pummeled by back-to-back client meetings and impossible dea
 ### Layer 1: Archetype Matching
 
 ```text
+
 ```
 
 Library.get_best_match(user_input):
@@ -287,11 +299,14 @@ Library.get_best_match(user_input):
 
 
 
+
 ### Layer 2: Response Generation
 
 **Phase 1: Opening**
+
 ```text
 ```text
+
 ```
 
 Archetype principles: ["Validate overwhelm", "Gentle scaffolding", ...]
@@ -307,10 +322,12 @@ Generate opening: "I hear you. Sounds like you're holding a lot right now."
 
 
 
+
 **Phase 2: Continuity Bridge**
 
 ```text
 ```
+
 
 Prior context: (None - first turn) No bridge needed (but would apply if this were turn 3+)
 
@@ -320,8 +337,10 @@ Prior context: (None - first turn) No bridge needed (but would apply if this wer
 
 **Phase 3: Closing**
 ```text
+
 ```text
 ```
+
 
 Archetype tone: ["Curious, non-prescriptive", ...] Generate closing: "What's one thing about that
 you want to sit with?"
@@ -338,6 +357,7 @@ you want to sit with?"
 **Assemble Response**
 
 ```text
+
 ```
 
 opening = "I hear you. Sounds like you're holding a lot right now."
@@ -352,9 +372,12 @@ response = opening + closing
 
 
 
+
 ### Layer 3: Optional Learning
+
 ```text
 ```text
+
 ```
 
 If conversation is marked successful:
@@ -371,6 +394,7 @@ If conversation is marked successful:
 
 
 
+
 ##
 
 ## Why This Architecture Works
@@ -379,6 +403,7 @@ If conversation is marked successful:
 
 ```text
 ```
+
 
 OLD SYSTEM:
 
@@ -394,8 +419,10 @@ and unnatural
 
 ### Solution: Principle-Driven Generation (NEW)
 ```text
+
 ```text
 ```
+
 
 NEW SYSTEM:
 
@@ -425,6 +452,7 @@ want to sit with?" Feels coherent, contextual, genuinely responsive
 
 ```python
 
+
 # In signal_parser.py response generation:
 def generate_response(user_input, prior_context):
     # Try archetype first
@@ -433,13 +461,16 @@ prior_context=prior_context ) if archetype_response: return archetype_response  
 principles
 
     # Fallback to glyph system if no archetype match
+
 ```text
 ```text
+
 ```
 
 ### With Learning Pipeline
 
 ```python
+
 
 
 # After successful conversation:

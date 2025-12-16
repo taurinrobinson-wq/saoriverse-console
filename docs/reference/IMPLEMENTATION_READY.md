@@ -45,8 +45,8 @@ appropriate initial response..."*
 1. **PHASE_2_README.md** - Main overview and quick start 2. **PHASE_2_QUICK_REFERENCE.md** -
 One-page developer cheatsheet (print this!) 3. **PHASE_2_LEARNING_SYSTEM_ARCHITECTURE.md** -
 Complete architecture with database schema 4. **INTEGRATION_GUIDE_PHASE_2.md** - Exact code changes
-needed to signal_parser.py 5. **PHASE_2_VISUAL_DIAGRAMS.md**- 8 detailed ASCII architecture
-diagrams 6.**PHASE_2_IMPLEMENTATION_CHECKLIST.md** - 9-part step-by-step implementation plan 7.
+needed to signal_parser.py 5. **PHASE_2_VISUAL_DIAGRAMS.md**- 8 detailed ASCII architecture diagrams
+6.**PHASE_2_IMPLEMENTATION_CHECKLIST.md** - 9-part step-by-step implementation plan 7.
 **PHASE_2_DELIVERY_SUMMARY.md**- Complete delivery overview 8.**PHASE_2_DELIVERABLES_MANIFEST.md**
 
 - This inventory
@@ -60,6 +60,7 @@ diagrams 6.**PHASE_2_IMPLEMENTATION_CHECKLIST.md** - 9-part step-by-step impleme
 ```text
 ```
 
+
 User Input (no matching glyph) ↓ Extract emotional language patterns Analyze with NRC Emotion
 Lexicon Find similar existing glyphs Generate new glyph candidate Map signals to gates (1-9)
 Calculate confidence score ↓ Return: Complete glyph candidate with metadata
@@ -70,8 +71,10 @@ Calculate confidence score ↓ Return: Complete glyph candidate with metadata
 
 **Layer 2: Learning Response Generator** (learning_response_generator.py)
 ```text
+
 ```text
 ```
+
 
 New glyph candidate ↓ Select response template by emotional tone (8 tones) Insert key emotional
 terms (reinforcement) Add validation prompt (feedback gathering) Reference glyph name (training
@@ -86,6 +89,7 @@ teaching the system)
 **Layer 3: Shared Glyph Manager** (shared_glyph_manager.py)
 
 ```text
+
 ```
 
 Record adoption in shared database
@@ -103,14 +107,17 @@ Per-user queries return DIFFERENT ORDERING from SAME database
 
 
 
+
 ### Key Innovation: Shared Database + User Segregation
 
 **Problem You Identified:**
 > "I need to store glyph data where it builds the system overall, not just for that user. But I don't know how to keep the user experience segregated while also building up the system overall."
 
 **Solution Implemented:**
+
 ```text
 ```text
+
 ```
 
 ONE SHARED DATABASE (all users contribute):
@@ -140,6 +147,7 @@ Result:
   DIFFERENT ranking per user (personal experience)
 
 ```
+
 
 
 
@@ -174,8 +182,10 @@ from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
 ```text
+
 ```text
 ```
+
 
 ### Step 2: Modify parse_input() Function
 
@@ -194,14 +204,18 @@ else:
     response = _learning_response_gen.generate_learning_response(...)
 
 ```text
+
 ```
 
 ### Step 3: Add Helper Function
 
 ```python
+
 def _determine_emotional_tone(signals): tone_map = {...}
+
 ```text
 ```text
+
 ```
 
 **Total integration time: 30 minutes** (exact steps in INTEGRATION_GUIDE_PHASE_2.md)
@@ -225,6 +239,7 @@ No modifications to existing tables. Pure additive.
 **Output shows:**
 
 ```
+
 
 [Test 1] Identity fragmentation → Glyph: "Fractured Identity" (Confidence: 75%) → Response:
 [empathetic, trains without being obvious] → Adoption recorded in shared database

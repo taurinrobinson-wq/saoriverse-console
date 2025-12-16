@@ -15,6 +15,7 @@ When you have a DOCX file selected or open:
    ✅ Export DOCX to JSON        → Extract all data
 ```
 
+
 ## 🌐 Web Viewer Features
 
 The browser viewer shows:
@@ -51,6 +52,7 @@ Try this on any DOCX file:
 ```bash
 python3 docx_reader.py "your_file.docx"
 ```
+
 
 You'll see:
 

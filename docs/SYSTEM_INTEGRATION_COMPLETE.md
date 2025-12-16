@@ -44,6 +44,7 @@ Your system now has **three distinct layers** working together:
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │                       app.py (Entry)                         │
 └──────────────────────┬──────────────────────────────────────┘
@@ -69,8 +70,7 @@ Your system now has **three distinct layers** working together:
                            │
 ┌──────────────────┴──────────────────┐
         │                                     │
-▼                                     ▼ ┌──────────────────────────────┐
-┌────────────────────────┐
+▼                                     ▼ ┌──────────────────────────────┐ ┌────────────────────────┐
 │  core/firstperson.py         │   │ ui_components/audio/   │
 │                              │   │                        │
 │ - FirstPersonOrchestrator    │   │ - audio_pipeline.py    │
@@ -91,8 +91,10 @@ Your system now has **three distinct layers** working together:
 
 ## 🔄 Response Flow (With Voice)
 ```text
+
 ```text
 ```
+
 
 1. USER SENDS MESSAGE ↓ 2. session_manager.initialize_session_state()
    ├─ FirstPersonOrchestrator created
@@ -129,6 +131,7 @@ Your system now has **three distinct layers** working together:
 ## 🗂️ File Structure
 
 ```text
+
 ```
 
 src/emotional_os/deploy/
@@ -161,6 +164,7 @@ src/emotional_os/deploy/
 ```
 
 
+
 ##
 
 ## 🚀 How to Deploy
@@ -170,15 +174,18 @@ src/emotional_os/deploy/
 ```bash
 
 ```text
+
 ```
 
 ### Step 2: Deploy to Streamlit Cloud
 
 ```bash
 
+
 # Streamlit Cloud will use your repository automatically
 
 # No additional setup needed
+
 ```
 
 ### Step 3: Test

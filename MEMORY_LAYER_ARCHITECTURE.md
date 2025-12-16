@@ -18,6 +18,7 @@ building a coherent, evolving understanding of the user's emotional state across
 ```text
 ```
 
+
 actor: I primary_affects: [stress] tense: present emphasis: so (high intensity) temporal_scope:
 today glyph: Still Insight
 
@@ -38,12 +39,14 @@ today glyph: Still Insight
 
 ```json
 
+
 { "primary_affects": ["stress"], "intensity": "medium", "temporal_scope": "today", "confidence":
 0.7, "next_clarifications": [ "What triggered this?", "How does it manifest?", "What have you
 tried?" ]
 
 ```text
 ```
+
 
 ##
 
@@ -58,8 +61,10 @@ secondary_affects: [paralysis, immobility] <- NEW MANIFESTATIONS
 thought_patterns: [flooding, incomplete thinking]
 action_capacity: paralyzed <- CRITICAL: unable to move forward
 ```text
+
 ```text
 ```
+
 
 **The causal chain emerges:**
 
@@ -70,6 +75,7 @@ Work demands
   → cannot prioritize (fragmentation)
 
 ```text
+
 ```
 
 **What memory learns:**
@@ -90,14 +96,17 @@ Work demands
 **Memory now stores:**
 
 ```json
+
 { "primary_affects": ["stress", "cognitive_overload"], "secondary_affects": ["paralysis",
 "immobility"], "intensity": "high", "domains": ["work"], "temporal_scope": "today (acute) + ongoing
 (chronic)", "causal_chain": { "trigger": "work", "mechanism": "cognitive flooding", "manifestation":
 "paralysis", "agency_state": "paralyzed" }, "confidence": 0.85, "glyph_set": ["Still Insight",
 "Quiet Revelation", "Fragmentation"], "next_clarifications": [ "How many distinct things compete?",
 "Which is most time-critical?", "How long has this been building?" ]
+
 ```text
 ```text
+
 ```
 
 ##
@@ -108,11 +117,13 @@ Work demands
 
 ```
 
+
 specificity: 5 projects (QUANTIFIED) priority: client presentation (TIME-CRITICAL: Thursday) state:
 unstarted deck (BLOCKING FACTOR) domains: work + client work (CLIENT WORK IS PRIMARY)
 
 ```text
 ```
+
 
 **The picture completes:**
 
@@ -122,8 +133,10 @@ unstarted deck (BLOCKING FACTOR) domains: work + client work (CLIENT WORK IS PRI
   → Deck not started yet (blocking progress)
   → Cannot prioritize/act (cognitive paralysis)
 ```text
+
 ```text
 ```
+
 
 **Confidence: 0.95** (specificity provided, clear picture)
 
@@ -162,6 +175,7 @@ unstarted deck (BLOCKING FACTOR) domains: work + client work (CLIENT WORK IS PRI
   ]
 
 ```text
+
 ```
 
 ##
@@ -173,16 +187,20 @@ unstarted deck (BLOCKING FACTOR) domains: work + client work (CLIENT WORK IS PRI
 **WITHOUT Memory (isolated message handling):**
 
 ```
+
 Turn 1: "I'm stressed" Response: "What's causing that stress?" Turn 2: "Too much on my mind"
 Response: "That sounds overwhelming. What's the main thing?" Turn 3: "5 projects, Thursday deadline"
 Response: "Have you prioritized them?"
+
 ```text
 ```text
+
 ```
 
 **WITH Memory (contextual understanding):**
 
 ```
+
 
 Turn 1: "I'm stressed" Response: "I hear you're feeling stress today." Memory: Confidence 0.7, needs
 causation
@@ -197,6 +215,7 @@ potentially wait?"
 
 ```sql
 ```
+
 
 ### Response Composition from Memory
 
@@ -250,8 +269,10 @@ class SystemKnowledge:
     high_confidence_needs: List[str]  # What we need to know most
     low_confidence_needs: List[str]  # What would be nice to know
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -323,6 +344,7 @@ class DynamicResponseComposer:
         # 5. Combine
 
 ```text
+
 ```
 
 ##
@@ -332,20 +354,25 @@ class DynamicResponseComposer:
 ### Information Multiplier
 
 ```
+
 Turn 1: 1 fact (stressed) Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete
 thinking)
+
 ```text
 ```text
+
 ```
 
 ### Confidence Progression
 
 ```
 
+
 0.7 (isolated emotion) → 0.85 (causal mechanism revealed)
 
 ```text
 ```
+
 
 ### Glyph Enrichment
 
@@ -354,8 +381,10 @@ Still Insight (stress is emerging/becoming clear)
   → Add Quiet Revelation (thoughts arriving without organization)
   → Add Fragmentation (unable to prioritize/integrate)
 ```text
+
 ```text
 ```
+
 
 ### Response Quality Jump
 
@@ -366,6 +395,7 @@ Still Insight (stress is emerging/becoming clear)
   → "Which of these 5 could we push back?"
 
 ```
+
 
 ##
 

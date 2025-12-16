@@ -14,8 +14,10 @@ If you have `supabase-cli` installed:
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 ### Option B: Manual Setup via Supabase Dashboard
 
@@ -120,6 +122,7 @@ BEFORE UPDATE ON public.conversations
 FOR EACH ROW
 
 ```text
+
 ```
 
 ##
@@ -129,19 +132,24 @@ FOR EACH ROW
 After running the SQL, verify the tables were created:
 
 ```bash
+
 cd /workspaces/saoriverse-console
+
 ```text
 ```text
+
 ```
 
 You should see:
 
 ```
 
+
 ✅ conversations table EXISTS ✅ conversation_metadata table EXISTS
 
 ```text
 ```
+
 
 ##
 
@@ -156,8 +164,10 @@ You should see:
 ```sql
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
 ```text
+
 ```text
 ```
+
 
 You should see: `Success - no rows returned`
 
@@ -195,6 +205,7 @@ auth_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth-
 saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori"
 
 ```text
+
 ```
 
 ✅ **No changes needed** - everything is ready!
@@ -204,8 +215,10 @@ saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth
 ## Step 6: Restart Your App
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 You should now see:
@@ -238,6 +251,7 @@ You should now see:
 Run the migration script again:
 
 ```bash
+
 
 python3 scripts/migrate_supabase.py --verify
 

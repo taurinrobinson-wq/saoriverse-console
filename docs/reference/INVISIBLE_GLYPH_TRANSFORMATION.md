@@ -33,6 +33,7 @@ Complete refactor to make glyphs work **invisibly**.
 ```text
 ```
 
+
 There's something in what you're describing—boundaries that hold without pressure. a sanctuary of
 quiet care. You're not alone—many brilliant people have genuine friction...
 
@@ -45,8 +46,10 @@ quiet care. You're not alone—many brilliant people have genuine friction...
 
 **AFTER (Invisible Glyph):**
 ```text
+
 ```text
 ```
+
 
 You're not alone—many brilliant people have genuine friction with math, especially when it's
 presented in a way that doesn't match how their mind naturally works...
@@ -64,12 +67,14 @@ presented in a way that doesn't match how their mind naturally works...
 **BOTH architectures handle feedback well:**
 
 ```text
+
 ```
 
 I appreciate you saying that. I want to make sure I'm actually hearing you,
 not projecting onto you. Help me understand: what did I miss?
 
 ```
+
 
 
 ✓ Detects misalignment feedback (glyph system working) ✓ Responds with genuine curiosity (not about
@@ -104,6 +109,7 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
     # They're recognizing a pattern they carry
 
 ```text
+
 ```
 
 **Result:** Response addresses their actual content, not glyph category
@@ -113,6 +119,7 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
 **KEY CHANGE:** Removed glyph description anchor, made intensity invisible
 
 ```python
+
 
 # BEFORE
 if glyph and glyph.get("description"): opening = f"There's something in what you're
@@ -129,8 +136,10 @@ if message_content.get("math_frustration"): parts.append("You're not alone...")
 
 # Closing calibrated by intensity (invisible to user)
 if intensity >= 8: question = f"I'm here to work through {struggle} with you." else:
+
 ```text
 ```text
+
 ```
 
 **Result:** Glyph informs tone without appearing in response
@@ -143,12 +152,14 @@ if intensity >= 8: question = f"I'm here to work through {struggle} with you." e
 
 ```
 
+
 Glyph selected: Still Containment Gates: [Gate 2]  ← LOW intensity ↓ Intensity = 1  (used
 internally) ↓ Closing choice: "permission" (gentle approach) ↓ User sees: "You get to take this at
 your own pace"
 
 ```text
 ```
+
 
 ### 2. Emotional Signal → Bridge Language (Invisible)
 
@@ -159,8 +170,10 @@ Selects bridge language from emotional_bridges["containment"]
   ↓
 User sees: "When someone explains in a way only they can follow..."
 ```text
+
 ```text
 ```
+
 
 ### 3. Glyph Name → Poetry Category (Invisible)
 
@@ -175,15 +188,19 @@ Poetry selection searches joy/stability themed poems
 User sees: Beautiful poem about stability/presence
 
 ```text
+
 ```
 
 ### 4. Gate-Based Movement Language (Invisible)
 
 ```
+
 Gate count: 1 (low intensity) ↓ Choose movement_language["with"] (gentler) ↓ "You're carrying this
 with presence"
+
 ```text
 ```text
+
 ```
 
 ##
@@ -216,6 +233,7 @@ User feels:
 ### Data Flow (Invisible Glyph System)
 
 ```
+
 
 User Input ↓ Parse Signals ↓ Fetch Matching Glyphs [GLYPH SYSTEM BEGINS - INVISIBLE TO USER]
   ├─ Extract glyph_name

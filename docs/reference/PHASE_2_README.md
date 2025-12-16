@@ -75,6 +75,7 @@ signal, gates) 5. Calculates confidence score (0.5-0.95) 6. Logs to database wit
 ```text
 ```
 
+
 Input: "I feel caught between who I pretend to be and who I really am" Output: Candidate glyph
 "Fractured Identity" Signal: β (boundary) Gates: [Gate 4, Gate 5] (high + medium intensity)
 Confidence: 0.75
@@ -94,8 +95,10 @@ Crafts responses that simultaneously:
 
 **Response Template Example (Containment tone):**
 ```text
+
 ```text
 ```
+
 
 "You're doing something quiet but powerful: holding space for complexity. That tension—it's evidence
 of your integrity, even when it aches.
@@ -125,6 +128,7 @@ Solves the "shared learning + personal experience" problem:
 **Architecture:**
 
 ```text
+
 ```
 
 SHARED DATABASE (one for all users)
@@ -153,6 +157,7 @@ KEY: Different ordering per user, but SAME database
      System learns globally, feels personal
 
 ```
+
 
 
 ##
@@ -196,6 +201,7 @@ _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
 
 ```text
+
 ```
 
 ### Step 2: Modify parse_input()
@@ -204,6 +210,7 @@ When glyphs found → return existing glyph (current behavior)
 When NO glyphs found → NEW learning pipeline:
 
 ```python
+
 else: candidate = _glyph_learner.analyze_input_for_glyph_generation(text, signals, user_hash)
 _glyph_learner.log_glyph_candidate(candidate) glyph_name = candidate.get("glyph_name")
 
@@ -211,13 +218,16 @@ _shared_glyph_manager.create_glyph_version(...)
 _shared_glyph_manager.record_glyph_adoption(user_hash, glyph_name, quality_rating=1)
 
 response = _learning_response_gen.generate_learning_response(...)
+
 ```text
 ```text
+
 ```
 
 ### Step 3: Add Helper
 
 ```python
+
 
 def _determine_emotional_tone(signals): tone_map = { "grief": "grief", "longing": "longing",
 "containment": "containment", "insight": "insight", "joy": "joy", "devotion": "devotion",
@@ -225,6 +235,7 @@ def _determine_emotional_tone(signals): tone_map = { "grief": "grief", "longing"
 
 ```text
 ```
+
 
 **Total modification time: 30 minutes**
 
@@ -263,8 +274,10 @@ emotional_territory
 ├─ primary_glyphs
 ├─ coverage_quality (CRITICAL, POOR, FAIR, STRONG)
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -308,6 +321,7 @@ git commit -m "Phase 2: Real-time glyph learning system"
 git push
 
 ```
+
 
 ##
 

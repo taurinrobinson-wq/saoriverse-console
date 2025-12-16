@@ -65,6 +65,7 @@ Response Recording
 User Output
 ```
 
+
 ##
 
 ## Key Integration Points
@@ -84,6 +85,7 @@ elif not repair_analysis.is_rejection:
         repair_orchestrator.record_acceptance(last_context)
 ```
 
+
 ### 2. Glyph Override (Line 180)
 
 ```python
@@ -96,6 +98,7 @@ brief_response, used_glyph = compose_glyph_aware_response(
     suggested_glyph=suggested_glyph_override,  # Phase 2.3
 )
 ```
+
 
 ### 3. Response Recording (Lines 185-205)
 
@@ -114,6 +117,7 @@ if repair_orchestrator and used_glyph:
     st.session_state["last_glyph_context"] = context_record
 ```
 
+
 ##
 
 ## Session State Management
@@ -124,6 +128,7 @@ The repair system uses Streamlit session state to maintain:
 st.session_state.repair_orchestrator      # RepairOrchestrator instance
 st.session_state.last_glyph_context       # GlyphCompositionContext
 ```
+
 
 This enables:
 
@@ -146,6 +151,7 @@ System: "That sounds like pressure building. What's bearing down on you?"
   - Stored in session state for next turn
 ```
 
+
 ### Turn 2: User Rejects
 
 ```
@@ -158,6 +164,7 @@ System learns: "Pressure" ineffective for this user's anxiety
 Suggested alternative: Next glyph to try
 ```
 
+
 ### Turn 3: System Adapts
 
 ```
@@ -169,6 +176,7 @@ Uses: Alternative glyph that was more accepted
 ↓
 Response: "I hear the [learned alternative]. What's happening?"
 ```
+
 
 ##
 
@@ -206,6 +214,7 @@ Response: "I hear the [learned alternative]. What's happening?"
         - Wired glyph override capability
         - All tests passing, zero regressions
 ```
+
 
 All changes pushed to: `chore/mypy-triage` branch
 
@@ -274,6 +283,7 @@ User Input
   ↓
 User Output + Context Ready for Next Turn
 ```
+
 
 ##
 

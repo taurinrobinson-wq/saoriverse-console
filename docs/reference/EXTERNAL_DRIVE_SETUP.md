@@ -14,6 +14,7 @@ drive to conserve local storage.
 ```text
 ```
 
+
 /Users/taurinrobinson/saoriverse-console
 ├── parser/                    (code - ~245MB)
 ├── .venv → symlink to external ↓
@@ -26,8 +27,10 @@ drive to conserve local storage.
 
 ### External Drive: "My Passport for Mac"
 ```text
+
 ```text
 ```
+
 
 /Volumes/My Passport for Mac/FirstPerson
 ├── venv/                      (~1.2GB Python environment)
@@ -58,20 +61,24 @@ drive to conserve local storage.
 The external drive should auto-mount when connected. To verify:
 
 ```bash
+
 ls /Volumes/
 
 ```text
 ```text
+
 ```
 
 ### 2. Run Setup Script (if needed)
 
 ```bash
 
+
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
+
 
 This script:
 
@@ -87,8 +94,10 @@ Once external drive is mounted:
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```sql
+
 ```sql
 ```
+
 
 Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
 
@@ -99,6 +108,7 @@ Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
+
 ```
 
 ##
@@ -109,13 +119,16 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 
 ```bash
 
+
 # Local machine
 /Users/taurinrobinson/saoriverse-console/.venv → Points to external drive /Volumes/My Passport for
 Mac/FirstPerson/venv
 
 /Users/taurinrobinson/saoriverse-console/data → Points to external drive
+
 ```text
 ```text
+
 ```
 
 **Benefits:**
@@ -129,10 +142,12 @@ Mac/FirstPerson/venv
 
 ```bash
 
+
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
+
 
 ##
 
@@ -149,8 +164,10 @@ cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 
 ```text
+
 ```text
 ```
+
 
 **Solution**: Connect external drive, it will auto-mount.
 
@@ -162,6 +179,7 @@ If it doesn't auto-mount:
 # Manual mount command
 
 ```text
+
 ```
 
 ### Python Paths Are Fixed
@@ -177,9 +195,12 @@ The Python environment on the external drive has **absolute paths** baked in. Th
 The `.git` folder is still on your local machine, so Git works normally:
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console git status git add . git commit -m "message"
+
 ```text
 ```text
+
 ```
 
 All code changes sync to Git regardless of external storage.
@@ -193,11 +214,13 @@ All code changes sync to Git regardless of external storage.
 ```bash
 
 
+
 # Fix permissions on external drive
 chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
 
 ```text
 ```
+
 
 ### Symlinks broken
 
@@ -212,8 +235,10 @@ diskutil mount "/Volumes/My Passport for Mac"
 # Verify symlinks
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 ### Still can't run?
 
@@ -224,6 +249,7 @@ cd /Users/taurinrobinson/saoriverse-console
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
+
 ```
 
 ##
@@ -242,12 +268,15 @@ Since your data is now on an external drive:
 
 ```bash
 
+
 # All FirstPerson data
 cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstPerson-backup
 
 # Just data
+
 ```text
 ```text
+
 ```
 
 ##
@@ -274,6 +303,7 @@ For quick testing, you can:
 ```bash
 
 
+
 # Copy venv locally (1.2GB)
 cp -r "/Volumes/My Passport for Mac/FirstPerson/venv" /Users/taurinrobinson/saoriverse-console/.venv
 
@@ -285,13 +315,16 @@ cd /Users/taurinrobinson/saoriverse-console rm .venv
 ```text
 ```
 
+
 Then move it back to external:
 
 ```bash
 rm -rf .venv
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -345,6 +378,7 @@ ls -la .venv data
 mount | grep "My Passport"
 
 ```
+
 
 ##
 

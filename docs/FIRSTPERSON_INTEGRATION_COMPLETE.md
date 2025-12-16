@@ -28,6 +28,7 @@ emotional state through the integrated FirstPerson orchestrator.
 ```text
 ```
 
+
 Player Input ↓ FirstPerson Orchestrator
     ├─ AffectParser: Extracts tone, valence, intensity
     ├─ Theme Extraction: Detects what they're talking about
@@ -76,8 +77,10 @@ Player Input ↓ FirstPerson Orchestrator
 
 **Your Input:** "I'm feeling overwhelmed by everything"
 ```text
+
 ```text
 ```
+
 
 Analysis: { tone: 'heavy', valence: -0.8, intensity: 0.9 } NPC:      "I hear the weight in that. The
 gravity of what you're carrying—I feel it too. What needs to be said about it?"
@@ -90,6 +93,7 @@ gravity of what you're carrying—I feel it too. What needs to be said about it?
 **Your Input:** "I'm curious about what comes next"
 
 ```text
+
 ```
 
 Analysis: { tone: 'curious', valence: 0.3, intensity: 0.4 }
@@ -100,11 +104,14 @@ NPC:      "Tell me more about that. I'm curious where that
 
 
 
+
 ### Based on Recurring Themes
 
 **Turn 1:** "I keep thinking about loss"
+
 ```text
 ```text
+
 ```
 
 Analysis: { theme: 'grief', frequency: 1 }
@@ -115,10 +122,12 @@ NPC:      "Loss shapes us in ways words can't reach..."
 
 
 
+
 **Turn 3:** "The grief is still with me"
 
 ```text
 ```
+
 
 Analysis: { theme: 'grief', frequency: 2, is_recurring: true } NPC:      "I hear the weight in that.
 And I'm noticing grief keeps coming back to you. That tells me something."
@@ -131,8 +140,10 @@ And I'm noticing grief keeps coming back to you. That tells me something."
 
 **Turns 1-2:** Valence: -0.8 → -0.9 (worsening)
 ```text
+
 ```text
 ```
+
 
 NPC:      "I'm noticing the weight increasing. What's happening?"
 
@@ -144,11 +155,13 @@ NPC:      "I'm noticing the weight increasing. What's happening?"
 **Turns 2-3:** Valence: -0.9 → -0.2 (improving)
 
 ```text
+
 ```
 
 NPC:      "I'm also noticing a shift. What's helping?"
 
 ```
+
 
 
 
@@ -174,6 +187,7 @@ NPC:      "I'm also noticing a shift. What's helping?"
 ```bash
 
 ```text
+
 ```
 
 That's it! FirstPerson integration is automatic. Just play normally and notice how NPCs respond to your emotions.
@@ -181,8 +195,10 @@ That's it! FirstPerson integration is automatic. Just play normally and notice h
 ### Validate the Integration
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 All 5 tests should pass:
@@ -274,11 +290,13 @@ All pushed to GitHub main branch ✅
 
 ```
 
+
 { emotional_tone: 'reflective', detected_theme: 'general', valence: -0.3, intensity: 0.5,
 memory_context: { has_context: false,  // First turn emotional_trend: 'stable' }
 
 ```text
 ```
+
 
 **Keeper (NPC) Responds:**
 "There's something to sit with there. That deserves thought. Tell me more about what you've been
@@ -306,8 +324,10 @@ reflecting on."
     }
   }
 ```text
+
 ```text
 ```
+
 
 **Keeper Responds:**
 "I hear the weight in that. Loss shapes us in ways words sometimes can't reach. And I'm noticing the
@@ -338,6 +358,7 @@ weight deepening. What do you need in this moment?"
   }
 
 ```text
+
 ```
 
 **Keeper Responds:**
@@ -385,15 +406,18 @@ weight deepening. What do you need in this moment?"
 ### Local Development
 
 ```bash
+
 streamlit run velinor_app.py
 
 ```text
 ```text
+
 ```
 
 ### Validation
 
 ```bash
+
 
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 

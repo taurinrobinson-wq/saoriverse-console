@@ -22,6 +22,7 @@
 ```text
 ```
 
+
 firstperson/
 ├── App.js                          # Main entry point with navigation setup
 ├── index.js                        # Expo app entry
@@ -72,8 +73,10 @@ Manages all local data using `@react-native-async-storage/async-storage`.
 
 **Storage Keys:**
 ```text
+
 ```text
 ```
+
 
 fp_conversations         # All conversations and messages
 fp_memory_capsules      # Relational context snapshots
@@ -106,6 +109,7 @@ Handles all backend communication with prosody parsing and offline detection.
 **Prosody Structure:**
 
 ```javascript
+
 {
   emotion: "melancholy",         // e.g., joy, sadness, anger, etc
   confidence: 0.87,              // 0.0 - 1.0
@@ -115,8 +119,10 @@ Handles all backend communication with prosody parsing and offline detection.
     { name: "Ember", score: 0.92, symbol: "🔥", description: "..." },
     { name: "Echo", score: 0.78, symbol: "📍", description: "..." }
   ]
+
 ```text
 ```text
+
 ```
 
 ##
@@ -210,6 +216,7 @@ Displays individual messages with optional prosody metadata.
 
 ```javascript
 
+
 {
   message: {
     role: "user" | "assistant",
@@ -221,6 +228,7 @@ Displays individual messages with optional prosody metadata.
 
 ```text
 ```
+
 
 **Rendering:**
 
@@ -264,8 +272,10 @@ ChatScreen.handleSendMessage()
 ├─ Display assistant response with prosody
 ├─ Store assistant message locally
 ```text
+
 ```text
 ```
+
 
 ### Offline Sync Flow
 
@@ -290,6 +300,7 @@ SyncService.performSync() triggered
     ↓
 
 ```text
+
 ```
 
 ##
@@ -300,6 +311,7 @@ SyncService.performSync() triggered
 
 ```bash
 
+
 # Install Node.js 18+
 node --version
 
@@ -307,13 +319,16 @@ node --version
 npm install -g expo-cli
 
 # Install EAS CLI (for building)
+
 ```text
 ```text
+
 ```
 
 ### Quick Start
 
 ```bash
+
 
 cd /workspaces/saoriverse-console/firstperson
 
@@ -338,6 +353,7 @@ npm start
 ```text
 ```
 
+
 ### Environment Setup
 
 ```bash
@@ -348,8 +364,10 @@ REACT_APP_SAOYNX_API_URL=http://192.168.1.100:8000  # Replace with your IP
 # Or in environment:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -373,6 +391,7 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
   "react-navigation-stack": "^6.3.20"                        // Stack navigation
 
 ```text
+
 ```
 
 ##
@@ -446,6 +465,7 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 
 ```bash
 
+
 # Check backend is running
 curl http://localhost:8000/health
 
@@ -453,13 +473,16 @@ curl http://localhost:8000/health
 
 # For device on same WiFi: use computer's LAN IP, not localhost
 ipconfig getifaddr en0  # macOS
+
 ```text
 ```text
+
 ```
 
 **"AsyncStorage not working"**
 
 ```bash
+
 
 
 # Ensure package is installed
@@ -471,6 +494,7 @@ rm -rf node_modules
 ```text
 ```
 
+
 **"Navigation not working"**
 
 ```bash
@@ -481,6 +505,7 @@ npm install @react-navigation/native @react-navigation/bottom-tabs
 # Clear Expo cache
 expo start -c
 ```
+
 
 ##
 

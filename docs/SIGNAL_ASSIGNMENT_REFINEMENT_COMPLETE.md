@@ -74,6 +74,7 @@ were previously unmapped:
 ```text
 ```
 
+
 breathe   ✓ MAPPED  2 signals, 2 gates depth     ✓ MAPPED  2 signals, 2 gates desire    ✓ MAPPED  2
 signals, 2 gates echo      ✓ MAPPED  1 signal,  2 gates exactly   ✓ MAPPED  1 signal,  2 gates faith
 ✓ MAPPED  2 signals, 2 gates gentle    ✓ MAPPED  2 signals, 2 gates hold      ✓ MAPPED  1 signal,  2

@@ -75,6 +75,7 @@ frequently in poetry. Example frequencies:
 ```text
 ```
 
+
 Project Gutenberg Poetry (1.1M words) ↓ Extract Emotional Signals (18+ dimensions) ↓ Learn Keywords
 & Patterns (136K entries) ↓ Analyze Co-occurrence Patterns
         ├─ love + intimacy: 1,391 times
@@ -148,6 +149,7 @@ This isn't arbitrary—it's **emergent from the data itself**.
 **Format**: JSON array with complete glyph definitions including:
 
 ```json
+
 
 { "id": "glyph_poetry_01", "name": "Deep Connection", "symbol": "♥❤", "core_emotions": ["love",
 "intimacy"], "associated_keywords": ["intimacy", "love"], "combined_frequency": 1391,

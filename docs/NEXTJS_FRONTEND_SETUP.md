@@ -9,14 +9,17 @@
 # In the root of your repo or new folder
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 ```text
+
 ```text
 ```
+
 
 ### 2. Install Dependencies
 
 ```bash
 
 ```text
+
 ```
 
 - **axios** - HTTP client for API calls
@@ -27,16 +30,20 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 Create `.env.local`:
 
 ```
+
 ```text
 ```text
+
 ```
 
 For production (Railway):
 
 ```
 
+
 ```text
 ```
+
 
 ### 4. Project Structure
 
@@ -65,8 +72,10 @@ velinor-web/
 │       └── npcs/               # Character images
 └── styles/
 ```text
+
 ```text
 ```
+
 
 ### 5. Key Files to Create
 
@@ -94,6 +103,7 @@ cd velinor-web
 npm run dev
 
 ```text
+
 ```
 
 ### 7. Deployment to Railway
@@ -104,11 +114,13 @@ TL;DR:
 
 ```bash
 
+
 # Already have Procfile and railway.json
 git add . git commit -m "feat: Add Next.js frontend for Velinor" git push origin main
 
 ```text
 ```text
+
 ```
 
 ## API Contract
@@ -117,11 +129,13 @@ git add . git commit -m "feat: Add Next.js frontend for Velinor" git push origin
 
 ```
 
+
 POST /api/game/start { "player_name": "Traveler" } → { "session_id": "uuid", "state": { ...game
 state... }
 
 ```text
 ```
+
 
 ### Take Action
 
@@ -133,8 +147,10 @@ POST /api/game/{session_id}/action
   "player_input": "I approach cautiously"
 }
 ```text
+
 ```text
 ```
+
 
 ### Game State Structure
 
@@ -157,6 +173,7 @@ POST /api/game/{session_id}/action
   }
 
 ```text
+
 ```
 
 ## Frontend Architecture
@@ -172,6 +189,7 @@ POST /api/game/{session_id}/action
 ### Positioning Example
 
 ```jsx
+
 <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%' }}> {/* 16:9 aspect ratio
 container */} <img src="/backgrounds/market.png" style={{ position: 'absolute', top: 0, left: 0,
 width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -186,6 +204,7 @@ background: 'rgba(0,0,0,0.7)', padding: '16px', color: '#fff', borderRadius: '8p
 {/* Buttons */} <button style={{ position: 'absolute', bottom: '20px', left: '50%', transform:
 'translateX(-50%)', padding: '12px 24px', background: '#3a6df0', color: 'white', border: 'none',
 borderRadius: '8px', cursor: 'pointer' }}> Choice </button> </div>
+
 ```
 
 ## Customization

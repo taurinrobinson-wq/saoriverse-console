@@ -13,8 +13,10 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # 3. Open Streamlit
 
 ```text
+
 ```text
 ```
+
 
 ## Architecture
 
@@ -30,6 +32,7 @@ Tier Processing (learning, aliveness, poetry)
     ↓
 
 ```text
+
 ```
 
 ## Key Files
@@ -47,6 +50,7 @@ Tier Processing (learning, aliveness, poetry)
 ## Ollama Client API
 
 ```python
+
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 
 client = get_ollama_client_singleton()
@@ -65,13 +69,16 @@ num_predict=512 ) print(response)
 response = client.generate_with_context( user_input="I'm feeling overwhelmed",
 conversation_history=[ {"role": "user", "content": "I've been stressed"}, {"role": "assistant",
 "content": "That sounds challenging"}, ], model="llama3" )
+
 ```text
 ```text
+
 ```
 
 ## Docker Commands
 
 ```bash
+
 
 
 # Start services
@@ -103,6 +110,7 @@ docker-compose -f docker-compose.local.yml rm
 ```text
 ```
 
+
 ## Environment Variables
 
 ```bash
@@ -112,8 +120,10 @@ OLLAMA_BASE_URL=http://ollama:11434
 
 # Local development (laptop, desktop)
 ```text
+
 ```text
 ```
+
 
 ## Model Guide
 
@@ -124,6 +134,7 @@ neural-chat → Medium (4.1GB), good for chat
 mistral     → Medium (4.1GB), well-rounded
 
 ```text
+
 ```
 
 ## Common Tasks
@@ -132,21 +143,26 @@ mistral     → Medium (4.1GB), well-rounded
 
 ```bash
 
+
 # Check health
 curl http://localhost:11434/api/tags
 
 # Generate response
 curl -X POST http://localhost:11434/api/generate \
+
 ```text
 ```text
+
 ```
 
 ### Run integration tests
 
 ```bash
 
+
 ```text
 ```
+
 
 Expected: All 5 checks pass ✅
 
@@ -164,8 +180,10 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 response = client.generate("Test", model="llama3")
 ```text
+
 ```text
 ```
+
 
 ### View service logs in real-time
 
@@ -181,11 +199,13 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 # Both
 
 ```text
+
 ```
 
 ## Fallback Flow
 
 ```
+
 User message arrives ↓ Try local Glyph parsing
     ├─ Success (has voltage_response) → Use + Tier processing → Display
     └─ Fail (empty/null) ↓
@@ -196,8 +216,10 @@ User message arrives ↓ Try local Glyph parsing
     ├─ Available → HTTP call + Tier processing → Display
     └─ Unavailable ↓
 ↓
+
 ```text
 ```text
+
 ```
 
 ## Performance Notes
@@ -211,12 +233,14 @@ User message arrives ↓ Try local Glyph parsing
 
 ```
 
+
 docker-compose.local.yml          (72 lines) Dockerfile.streamlit               (29 lines)
 ollama_client.py                   (347 lines) OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
 OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
 
 ```text
 ```
+
 
 ## Files Modified
 
@@ -225,8 +249,10 @@ response_handler.py                (Added import + function)
 session_manager.py                 (Added init function)
 ui_refactored.py                   (Already imports everything)
 ```text
+
 ```text
 ```
+
 
 ## Verification Checklist
 
@@ -273,6 +299,7 @@ src/emotional_os/deploy/modules/ui_components/response_handler.py
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 
 ```
+
 
 ## What's Different from Velinor Deployment
 

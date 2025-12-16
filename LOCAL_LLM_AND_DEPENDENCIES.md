@@ -134,6 +134,7 @@ gen = get_firstperson_generator()
 print(f"FirstPerson available: {gen.is_available()}")  # Currently: False (Phase 1 pending)
 ```
 
+
 ##
 
 ## Performance Impact

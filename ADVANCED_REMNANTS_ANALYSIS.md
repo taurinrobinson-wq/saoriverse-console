@@ -1,6 +1,7 @@
 # Advanced REMNANTS Analysis: Ripple Matrices, Trait Stability & Tool Resonance
 
-Based on the AI feedback, I've implemented three advanced analysis tools to understand the REMNANTS system's emergent behavior:
+Based on the AI feedback, I've implemented three advanced analysis tools to understand the REMNANTS
+system's emergent behavior:
 
 ## 1. **Ripple Matrix Analysis** 🌊
 Shows how one NPC's trait changes cascade through the influence network.
@@ -34,7 +35,7 @@ Measures which traits resist change (RIGID) vs. which shift easily (FLUID).
 - **Insight:** Aggressive play hits authority hardest; empathy/need untouched
 
 **Cautious Play:**
-- **RIGID:** Resolve (75%), Empathy (75%), Need (75%)  
+- **RIGID:** Resolve (75%), Empathy (75%), Need (75%)
 - **STABLE:** Trust (31%)
 - **FLUID:** Nuance (19%) ← Most affected
 - **Insight:** Wisdom/observation overwhelmingly shifts nuance; core resolve stable
@@ -87,7 +88,7 @@ When incompatible traits clash, NPCs show internal conflict:
 ### Discovery 3: NPC Vulnerability Windows
 Certain trait combinations create "tool unlock" moments:
 - Kaelen with empathy >0.6 and trust >0.4 = READY for redemption tool
-- Nima with skepticism >0.8 and memory >0.8 = READY for truth tool  
+- Nima with skepticism >0.8 and memory >0.8 = READY for truth tool
 - Dalen with authority >0.7 and resolve >0.8 = READY for leadership tool
 
 **UI Possibility:** Show which tools are "unlocking" based on current NPC state.
@@ -95,6 +96,7 @@ Certain trait combinations create "tool unlock" moments:
 ## 5. **Usage in Story Design** 📝
 
 ### Unlock Gating Example:
+
 ```python
 def check_tool_unlock(npc, tool_name):
     """Check if NPC is ready for a specific tool."""
@@ -104,16 +106,18 @@ def check_tool_unlock(npc, tool_name):
             return True  # Unlock available
         elif npc.remnants["empathy"] > 0.6 and npc.remnants["trust"] > 0.6:
             return True  # Alternative unlock (both very high)
-    
+
     elif tool_name == "Scales of Balance":
         # Nuance must be developed
         if npc.remnants["nuance"] > 0.7 and npc.remnants["wisdom"] > 0.6:
             return True
-    
+
     return False
 ```
 
+
 ### Dialogue Branching Example:
+
 ```python
 if player_playstyle == "aggressive":
     # Authority-focused NPCs respond well
@@ -126,13 +130,15 @@ else:
     dialogue = get_dialogue_for_playstyle(npc, player_playstyle)
 ```
 
+
 ### Ripple Event Trigger:
+
 ```python
 def apply_tool_gift(npc_name, tool):
     """Give tool to NPC and trigger ripple."""
     npc = manager.get_npc(npc_name)
     npc.receive_tool(tool)  # Boosts relevant traits
-    
+
     # Ripple to allies
     allies = influence_map.get(npc_name, {})
     for ally_name in allies:
@@ -140,19 +146,21 @@ def apply_tool_gift(npc_name, tool):
         ally.hear_about_tool(tool)  # Secondary trait boost
 ```
 
+
 ## 6. **Running the Advanced Tests** 🧪
 
 ### Full Advanced Analysis:
+
 ```bash
 python velinor/stories/test_remnants_advanced.py
 ```
 
+
 **Output includes:**
-1. Ripple matrices for Aggressive & Cautious playstyles
-2. Trait stability analysis showing which traits are rigid/fluid
-3. Tool resonance mapping (example: Compass → Observation ripples)
-4. Playstyle comparison (System stability by strategy)
-5. Kaelen cascade demonstration (redemption arc example)
+1. Ripple matrices for Aggressive & Cautious playstyles 2. Trait stability analysis showing which
+traits are rigid/fluid 3. Tool resonance mapping (example: Compass → Observation ripples) 4.
+Playstyle comparison (System stability by strategy) 5. Kaelen cascade demonstration (redemption arc
+example)
 
 ### Customize Analysis:
 Edit `test_remnants_advanced.py` to:
@@ -165,6 +173,7 @@ Edit `test_remnants_advanced.py` to:
 
 ### Idea 1: "Stability Decay"
 Traits under a certain stability threshold (FLUID) could drift toward neutral over time:
+
 ```python
 def apply_stability_decay(npc, playstyle_matrix):
     """Highly volatile traits drift if not reinforced."""
@@ -175,8 +184,10 @@ def apply_stability_decay(npc, playstyle_matrix):
             npc.remnants[trait] += (0.5 - current) * 0.02  # 2% drift/turn
 ```
 
+
 ### Idea 2: "Contradiction Events"
 When internal conflicts reach critical mass, trigger special scenes:
+
 ```python
 conflicts = [
     ("Kaelen", "empathy", 0.6, "skepticism", 0.8),  # Compassionate thief
@@ -186,15 +197,17 @@ if npc.has_contradiction(conflicts):
     trigger_internal_conflict_scene(npc)
 ```
 
+
 ### Idea 3: "Tool Synergy"
 Multiple tools can amplify each other on same NPC:
+
 ```python
 if "Mirror of Selfhood" in npc.tools and "Scales of Balance" in npc.tools:
     # Both empathy AND wisdom tools = unlock "wise healer" dialogue tree
     npc.unlock_synergy_tree("wise_healer")
 ```
 
----
+## 
 
 **Test Files:**
 - [test_remnants_simulation.py](velinor/stories/test_remnants_simulation.py) - Basic 4 playstyle tests

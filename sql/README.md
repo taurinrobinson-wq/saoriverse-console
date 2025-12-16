@@ -24,6 +24,7 @@ supabase db remote set $YOUR_DB_CONNECTION_URL
 psql $YOUR_DB_CONNECTION_URL -f sql/create_user_preferences_table.sql
 ```
 
+
 Notes:
 
 - This migration is intentionally minimal. If you prefer, create the table via

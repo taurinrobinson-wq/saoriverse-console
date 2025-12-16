@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 saoriverse-console/
 │
 ├── README.md                 # Main project README (start here)
@@ -98,6 +99,7 @@ saoriverse-console/
 ```bash
 
 
+
 # Run just the web dev server
 ./scripts/RUN_WEB_DEV.sh
 
@@ -106,12 +108,15 @@ saoriverse-console/
 ```text
 ```
 
+
 ### Install Dependencies
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### Find What You Need
 
@@ -156,6 +161,7 @@ rm scratch/old_summary.md
 # Verify .gitignore is working
 
 ```text
+
 ```
 
 ### Adding New Code
@@ -172,6 +178,7 @@ rm scratch/old_summary.md
 ### Before (Root Chaos)
 
 ```
+
 saoriverse-console/
 ├── PHASE_1_COMPLETE.md
 ├── IMPLEMENTATION_SUMMARY.md
@@ -179,8 +186,10 @@ saoriverse-console/
 ├── ANALYSIS_COMPLETE.md
 ├── ... 40+ more .md files
 ├── src/
+
 ```text
 ```text
+
 ```
 
 ❌ Hard to find what you need
@@ -190,6 +199,7 @@ saoriverse-console/
 ### After (Clean Organization)
 
 ```
+
 
 saoriverse-console/
 ├── README.md  (main entry point)

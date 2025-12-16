@@ -11,6 +11,7 @@ principle-driven, adaptive conversation.
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. ARCHETYPE LIBRARY                                        │
 │    Stores learned conversation patterns extracted from      │
@@ -59,8 +60,10 @@ principle-driven, adaptive conversation.
 ### Phase 1: Playwright (You Write Dialogue)
 You create a conversational scene showing how the system should respond:
 ```text
+
 ```text
 ```
+
 
 User: Yesterday was so heavy, but today my child hugged me and I felt like everything melted away
 for a moment.
@@ -79,13 +82,16 @@ User: Maybe even more so. I don't know sometimes I don't feel like I'm doing eno
 The learner automatically extracts principles:
 
 ```json
+
 { "archetype": "ReliefToGratitude", "entry_cues": ["relief", "grateful", "hug", "melted away"],
 "response_principles": [ "Validate positive moment warmly", "Balance empathy across mixed emotions",
 "Invite elaboration with gentle questions" ], "continuity_bridges": [ "Connect gratitude to prior
 overwhelm", "Carry forward themes into deeper exploration" ], "tone_guidelines": [ "Warm and
 embracing language", "Gentle pacing with validation first", "Mirror user's metaphors" ]
+
 ```text
 ```text
+
 ```
 
 ### Phase 3: Application (System Uses Principles)
@@ -120,6 +126,7 @@ System records whether user found response helpful, updates archetype success we
 
 ```python
 
+
 from emotional_os.learning import ( get_archetype_library, get_archetype_response_generator,
 get_conversation_learner, )
 
@@ -136,6 +143,7 @@ learner = get_conversation_learner() new_archetype = learner.learn_from_conversa
 
 ```text
 ```
+
 
 ### Checking the Library
 
@@ -154,8 +162,10 @@ best_match = library.get_best_match(
 
 # Record success for learning
 ```text
+
 ```text
 ```
+
 
 ## Why This Matters
 
@@ -204,6 +214,7 @@ python test_learning_module.py
 cat emotional_os/learning/archetype_library.json | python -m json.tool
 
 ```
+
 
 ## Architecture Strengths
 

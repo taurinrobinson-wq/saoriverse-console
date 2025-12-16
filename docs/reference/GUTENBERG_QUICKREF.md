@@ -7,14 +7,17 @@
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 Or directly:
 
 ```bash
 
 ```text
+
 ```
 
 ##
@@ -22,8 +25,10 @@ Or directly:
 ## 📊 Monitor Progress
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ##
@@ -32,8 +37,10 @@ Or directly:
 
 ```bash
 
+
 ```text
 ```
+
 
 ##
 
@@ -46,8 +53,10 @@ Or directly:
 ├── gutenberg_poetry/          (8 collections)
 ├── gutenberg_learning.log     (processing log)
 ```text
+
 ```text
 ```
+
 
 **Code (Hard Drive)**
 
@@ -59,6 +68,7 @@ Or directly:
 ├── run_gutenberg_learning.sh
 
 ```text
+
 ```
 
 ##
@@ -77,7 +87,9 @@ Or directly:
 Edit `gutenberg_fetcher.py` line ~50 and add URLs:
 
 ```python
+
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
+
 ```
 
 Then run the fetcher again.

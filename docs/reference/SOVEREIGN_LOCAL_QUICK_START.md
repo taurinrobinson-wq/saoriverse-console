@@ -15,8 +15,10 @@ pip install spacy
 
 # Download English model for NER, tokenization, etc.
 ```text
+
 ```text
 ```
+
 
 ### 1.2 Download NRC Emotion Lexicon
 
@@ -33,19 +35,23 @@ mkdir -p data/lexicons
 # File: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
 
 ```text
+
 ```
 
 ### 1.3 Verify NLTK is loaded
 
 ```python
 
+
 # Your code already has this! Just verify:
 import nltk from nltk.sentiment import SentimentIntensityAnalyzer
 
 # Should work - NLTK already integrated
 sia = SentimentIntensityAnalyzer()
+
 ```text
 ```text
+
 ```
 
 ##
@@ -55,6 +61,7 @@ sia = SentimentIntensityAnalyzer()
 Create a new file: `parser/nrc_lexicon_loader.py`
 
 ```python
+
 
 """ Load NRC Emotion Lexicon for local emotional processing. 14,182 words mapped to 10 emotion
 categories + sentiment.
@@ -112,6 +119,7 @@ emotions)
 
 ```text
 ```
+
 
 ##
 
@@ -174,8 +182,10 @@ def enhanced_parse_signals(text: str) -> dict:
         'signal_strength': len(voltage_signals),
         'primary_emotions': list(nrc_emotions.keys())
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -338,6 +348,7 @@ def populate_poetry():
 if __name__ == "__main__":
 
 ```text
+
 ```
 
 ##
@@ -347,6 +358,7 @@ if __name__ == "__main__":
 Update `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) to show local mode toggle:
 
 ```python
+
 
 # Add to sidebar:
 st.sidebar.markdown("---") st.sidebar.subheader("🔐 Processing Mode")
@@ -373,8 +385,10 @@ response_data = parse_input(user_message) glyph = response_data['best_glyph']
 try: poetry = get_glyph_poetry(glyph) st.markdown(f"✨ **{glyph}**") st.info(poetry) except:
 st.markdown(f"✨ **{glyph}**") else:
     # Hybrid/Cloud mode (existing code)
+
 ```text
 ```text
+
 ```
 
 ##
@@ -384,6 +398,7 @@ st.markdown(f"✨ **{glyph}**") else:
 Create: `test_local_mode.py`
 
 ```python
+
 
 """ Test that local mode works end-to-end with no external API calls. """
 
@@ -398,8 +413,8 @@ print("1. Loading spaCy model...") nlp = spacy.load("en_core_web_sm") print("   
 
     # Load NRC lexicon
 print("2. Loading NRC Emotion Lexicon...") if not nrc.loaded: print("   ✗ NRC not loaded! Download
-from:") print("   http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm") return False print(f"
-✓ Loaded ({len(nrc.word_emotions)} words)\n")
+from:") print("   http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm") return False print(f" ✓
+Loaded ({len(nrc.word_emotions)} words)\n")
 
     # Test messages
 test_messages = [ "I keep replaying that moment over and over, and it hurts", "I feel so grateful
@@ -435,12 +450,15 @@ if __name__ == "__main__": success = test_local_processing()
 ```text
 ```
 
+
 Run it:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -468,6 +486,7 @@ urllib.request.urlretrieve(url, 'data/poetry/dickinson.txt')
 print('✓ Downloaded Emily Dickinson poems')
 
 ```text
+
 ```
 
 ##
@@ -477,6 +496,7 @@ print('✓ Downloaded Emily Dickinson poems')
 Add this to `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED):
 
 ```python
+
 import os
 
 # DISABLE external API calls in local mode
@@ -493,8 +513,10 @@ LOCAL MODE")):
         # Process user message
 response_data = parse_input(user_message)
         # If we get here without exception, we're truly local!
+
 ```text
 ```text
+
 ```
 
 ##
@@ -519,6 +541,7 @@ response_data = parse_input(user_message)
 ```bash
 
 
+
 # Start the app in local mode
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
@@ -528,6 +551,7 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 ```text
 ```
+
 
 ##
 
@@ -583,6 +607,7 @@ except:
 print('✅ Local mode verified - no external API calls possible')
 "
 ```
+
 
 ##
 

@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 User in Crisis
     │
     ├─ Types: "I can't do this anymore"
@@ -87,8 +88,10 @@ recognize the significance of that."
 
 ### State Machine (Your Logic Made Executable)
 ```text
+
 ```text
 ```
+
 
 ┌──────────────────────┐
                 │ DisclosureDetected   │
@@ -145,6 +148,7 @@ recognize the significance of that."
 ### In `suicidality_protocol.json`:
 
 ```json
+
 { "suicide_disclosure": {
 
 "acknowledgment": [ "You named thoughts of suicide. That is heavy.", "I hear the intensity in your
@@ -155,8 +159,10 @@ love you", // Can add more... ] },
 
 "crisis_resources_detailed": [ "National Suicide Prevention Lifeline: 988", "Crisis Text Line: Text
 HOME to 741741", // Can add more or localize... ] }
+
 ```text
 ```text
+
 ```
 
 You can change every response, add new ones, customize for different cultures, all without touching Python code.
@@ -168,6 +174,7 @@ You can change every response, add new ones, customize for different cultures, a
 ### In Your Code (`signal_parser.py`)
 
 ```python
+
 
 
 # At the top of parse_input():
@@ -185,6 +192,7 @@ suicidality_protocol.handle_disclosure( user_id=user_id, input_text=input_text, 
 ```text
 ```
 
+
 **That's it.** One import, one check, one call. Everything else is configuration.
 
 ##
@@ -195,8 +203,10 @@ suicidality_protocol.handle_disclosure( user_id=user_id, input_text=input_text, 
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### Try it interactively
 
@@ -214,6 +224,7 @@ result = parse_input(
 print(result['voltage_response'])
 
 ```text
+
 ```
 
 ##
@@ -223,14 +234,17 @@ print(result['voltage_response'])
 Your system randomly picks from different responses, so the same scenario never gets the same response twice:
 
 ```
+
 First time someone disclosures: "You named thoughts of suicide. That is heavy."
 
 If they return and disclose again: "I hear the intensity in your words. Naming it here is a real act
 of courage."
 
 If they return again: "You are allowed to be here with what you feel.
+
 ```text
 ```text
+
 ```
 
 Rotation prevents template feel. Keeps it real.
@@ -275,6 +289,7 @@ Example:
 
 ```
 
+
 User: "I'm having suicidal thoughts"
 
 System: "Thank you for trusting me with this. I'm not a substitute for professional help, but I can
@@ -288,6 +303,7 @@ System: "That's okay. I'm still here.
 
 ```text
 ```
+
 
 Notice: No resource push. No guilt. Just presence.
 
@@ -308,8 +324,10 @@ Your system first message:
 "Thank you for coming back. Your check-in matters.
 You chose to return and connect. I recognize
 ```text
+
 ```text
 ```
+
 
 That recognition? That's the difference between "the system remembered me" and "the system sees me
 as human."
@@ -356,13 +374,16 @@ User: "I'm suicidal"
 System: WARNING! CRISIS! HERE'S THE HOTLINE!
 
 ```text
+
 ```
 
 ### Your Protocol
 
 ```
+
 User: "I'm suicidal" System: "You named this. That took courage. I'm here to listen. What do you
 want to happen next?" Result: User feels witnessed, has agency, heard
+
 ```
 
 **The difference:** One treats suicidality as an emergency to escape.

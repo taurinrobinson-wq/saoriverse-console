@@ -18,6 +18,7 @@ New emotional patterns → Can trigger glyph creation
 ```text
 ```
 
+
 Poetry Processing ↓ Adaptive Signal Extraction (18+ dimensions) ↓ Lexicon Learning (keywords +
 phrases) ↓ Shared Lexicon Expansion ↓ [Could trigger] → Glyph Generator ↓ New Glyphs Created
 
@@ -39,6 +40,7 @@ glyphs ARE created through the `GlyphGenerator` which watches for:
 
 ### Before (Limited to 8 dimensions):
 ```text
+
 ```
 
 Poetry Input
@@ -55,9 +57,12 @@ Glyphs: Can only represent 8-dimension combinations
 
 
 
+
 ### After (18+ adaptive dimensions):
+
 ```text
 ```
+
 
 Poetry Input ↓ Extract: [Love, Nature, Transformation, Melancholy, Transcendence, Wonder] (18+
 possible) ↓ Learn: Keywords + new dimension-specific patterns ↓ Lexicon grows across 18+ dimensions
@@ -83,6 +88,7 @@ Example glyphs in your system:
 
 ### How Glyphs Are Generated:
 ```text
+
 ```
 
 GlyphGenerator watches for:
@@ -104,9 +110,12 @@ When conditions met:
 
 
 
+
 ### Example Glyph Creation Flow:
+
 ```text
 ```
+
 
 Detect pattern: [Melancholy + Nostalgia + Memory] ↓ Seen 5 times in poetry processing ↓ Not in
 current glyph library ↓ Create glyph: symbol: ⌛ (or similar) tag_name: "yearning_memory"
@@ -122,6 +131,7 @@ narrative_hook: "times that shaped us"
 
 ### Before (Constrained):
 ```text
+
 ```
 
 8 Dimensions
@@ -136,9 +146,12 @@ System can represent ~50-100 glyph concepts
 
 
 
+
 ### After (Adaptive):
+
 ```text
 ```
+
 
 18+ Dimensions ↓ Many more keyword combinations (18-choose-2 = 153 pairs + higher orders) ↓ MANY
 more unique glyphs possible ↓ System can represent 200-500+ glyph concepts
@@ -152,6 +165,7 @@ more unique glyphs possible ↓ System can represent 200-500+ glyph concepts
 
 ### Step 1: Expand Dimensions
 ```text
+
 ```
 
 discover_new_dimensions_from_corpus()
@@ -164,9 +178,12 @@ discover_new_dimensions_from_corpus()
 
 
 
+
 ### Step 2: Extract from Poetry
+
 ```text
 ```
+
 
 Processing Shelley poem: "I ache for thee in endless night, The stars mock my forgotten dreams..."
 
@@ -183,6 +200,7 @@ NEW: All three extracted as separate signals BEFORE: Only one or two would be de
 
 ### Step 3: Learn Keywords
 ```text
+
 ```
 
 Lexicon learns:
@@ -198,9 +216,12 @@ Lexicon learns:
 
 
 
+
 ### Step 4: Enable Glyph Creation
+
 ```text
 ```
+
 
 GlyphGenerator sees pattern: [longing + melancholy + nostalgia] appearing frequently
 
@@ -243,6 +264,7 @@ This glyph would NOT have been possible with only 8 dimensions!
 Currently, the bulk processor learns to lexicons but doesn't trigger glyph creation. We could enhance it to:
 
 ```python
+
 def process_text(self, text, ...):
     # ... existing code ...
 
@@ -252,8 +274,10 @@ emotional_patterns = self._track_patterns(signals)
     # NEW: Check if new glyphs should be created
 if hasattr(self, 'glyph_generator'): for pattern in emotional_patterns: if pattern.frequency >= 3
 and pattern.is_novel(): glyph = self.glyph_generator.create_glyph_from_pattern(pattern) if glyph:
+
 ```text
 ```
+
 
 This would make the relationship **explicit and automatic**.
 
@@ -287,6 +311,7 @@ NEW GLYPHS CREATED: 12
     ├─ "Transcendent Solitude" (Shelley influence)
     ├─ "Melancholic Memory" (Dickinson influence)
 ```text
+
 ```
 
 ##
@@ -294,6 +319,7 @@ NEW GLYPHS CREATED: 12
 ## Your System's Evolution Path
 
 ```
+
 November 3, 2025 (NOW)
 ├─ 8 dimensions → 18+ dimensions
 ├─ Lexicon expands ~3x
@@ -312,6 +338,7 @@ Future (Full Vision)
 ├─ Poet-specific glyph libraries
 ├─ Era-specific emotional vocabularies
 └─ Self-improving emotional understanding
+
 ```
 
 ##

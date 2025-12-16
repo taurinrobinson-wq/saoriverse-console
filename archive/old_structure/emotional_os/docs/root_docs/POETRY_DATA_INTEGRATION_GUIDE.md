@@ -21,6 +21,7 @@ cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
 
+
 This will:
 
 - Download 8+ major poetry collections from Project Gutenberg
@@ -35,6 +36,7 @@ This will:
 python poetry_data_pipeline.py --status
 ```
 
+
 Shows:
 
 - Downloads completed
@@ -48,6 +50,7 @@ Shows:
 ```bash
 python poetry_data_pipeline.py --export poetry_export
 ```
+
 
 Creates export directory with:
 
@@ -97,6 +100,7 @@ Processing Modes (ProcessingModeAdapter)
   └── Ritual Processing
 ```
 
+
 ### Database Schema
 
 The pipeline creates SQLite database with three tables:
@@ -131,6 +135,7 @@ adapter = ProcessingModeAdapter(hub)
 signal_data = adapter.for_signal_extraction()  # Returns {name: text}
 ```
 
+
 ### Lexicon Learning
 
 ```python
@@ -138,6 +143,7 @@ signal_data = adapter.for_signal_extraction()  # Returns {name: text}
 # Get clean text for learning emotions from poetry
 lexicon_data = adapter.for_lexicon_learning()  # Returns {name: text}
 ```
+
 
 ### Glyph Generation
 
@@ -147,6 +153,7 @@ lexicon_data = adapter.for_lexicon_learning()  # Returns {name: text}
 glyph_data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 ```
 
+
 ### Ritual Processing
 
 ```python
@@ -154,6 +161,7 @@ glyph_data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 # Get coherence-checked text
 ritual_data = adapter.for_ritual_processing()  # Returns {name: text}
 ```
+
 
 ## Integration with Existing Systems
 
@@ -174,6 +182,7 @@ for name, text in poetry_texts.items():
     process_poetry(name, text)  # Your existing processing
 ```
 
+
 ### Updating Other Processing Systems
 
 Same pattern - all processing modes can access via `ProcessingModeAdapter`:
@@ -191,6 +200,7 @@ elif processing_mode == 'glyphs':
 elif processing_mode == 'ritual':
     data = adapter.for_ritual_processing()
 ```
+
 
 ## Text Cleaning Details
 
@@ -279,6 +289,7 @@ For each collection, pipeline records:
     ├── *.txt                           # Individual cleaned texts
     └── processing_manifest.json        # Processing mode manifests
 ```
+
 
 ## Troubleshooting
 

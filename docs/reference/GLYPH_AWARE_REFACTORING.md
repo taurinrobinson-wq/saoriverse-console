@@ -22,8 +22,10 @@ def compose_response(
     glyph_name: str = "",  # Just a string label
     ...
 ```text
+
 ```text
 ```
+
 
 **After:**
 
@@ -36,6 +38,7 @@ def compose_response(
     ...
 
 ```text
+
 ```
 
 Both `compose_response()` and `compose_message_aware_response()` now accept full glyph dicts.
@@ -45,6 +48,7 @@ Both `compose_response()` and `compose_message_aware_response()` now accept full
 Added new method `_build_glyph_aware_response()` that uses glyph metadata to scaffold responses:
 
 ```python
+
 def _build_glyph_aware_response(self, glyph, entities, emotions, ...):
     # Layer 1: Glyph description as emotional anchor
 opening = f"There's something in what you're describing—{glyph_description.lower()}"
@@ -52,8 +56,10 @@ opening = f"There's something in what you're describing—{glyph_description.low
     # Layer 2: Message-specific bridges (for feedback/corrections)
     # Layer 3: Entity-specific contextualization
     # Layer 4: Poetry weaving based on glyph's emotional category
+
 ```text
 ```text
+
 ```
 
 ### 3. **Made Message-Aware Responses Glyph-Grounded**
@@ -63,12 +69,14 @@ Updated `compose_message_aware_response()` to start with glyph description ancho
 ```python
 
 
+
 # Now starts with glyph context before message-specific content
 if glyph and glyph.get("description"): opening = f"There's something in what you're
 describing—{glyph_description.lower()}"
 
 ```text
 ```
+
 
 ### 4. **Updated Call Sites in signal_parser.py**
 
@@ -82,8 +90,10 @@ composed = _response_composer.compose_response(
     glyph_name=name,  # Just string
     ...
 ```text
+
 ```text
 ```
+
 
 **After:**
 
@@ -95,6 +105,7 @@ composed = _response_composer.compose_response(
     ...
 
 ```text
+
 ```
 
 ### 5. **Fixed Database Field Mapping**
@@ -110,6 +121,7 @@ Normalized glyph database fields:
 ### Message 1: Math Anxiety (Base Case)
 
 ```
+
 Input: "I have math anxiety. I've never been good at math and it's been a block my whole life."
 
 Glyph Selected: Still Containment Description: "Boundaries that hold without pressure. A sanctuary
@@ -121,11 +133,13 @@ especially when it's presented in a way that doesn't match how their mind natura
 
 ```text
 ```text
+
 ```
 
 ### Message 3: Feedback Correction (Misalignment Detected)
 
 ```
+
 
 Input: "That's not quite what I meant. Michelle is my mother-in-law and my boss, and she always
 explains things in a way that only makes sense to her."
@@ -139,6 +153,7 @@ projecting onto you. Help me understand: what did I miss?"
 
 ```text
 ```
+
 
 ## Architecture Now
 
@@ -163,8 +178,10 @@ Dynamic Response Composer [GLYPH-AWARE]
         └─ Start with glyph anchor
         └─ Layer message-specific content
 ```text
+
 ```text
 ```
+
 
 ## Key Benefits
 
@@ -185,11 +202,13 @@ Glyph: Still Containment (used for label only)
 Response: "You're not alone—many brilliant people have genuine friction with math..."
 
 ```text
+
 ```
 
 **After Refactoring:**
 
 ```
+
 Glyph: Still Containment
        - description: "Boundaries that hold without pressure. A sanctuary of quiet care."
        - gate: "Gate 2"
@@ -198,6 +217,7 @@ Glyph: Still Containment
 Response: "There's something in what you're describing—boundaries that hold without pressure. a
 sanctuary of quiet care. You're not alone—many brilliant people have genuine friction with math..."
 [Glyph description directly embedded; intensity informed by gates]
+
 ```
 
 ## Files Modified

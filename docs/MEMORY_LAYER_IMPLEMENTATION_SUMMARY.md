@@ -44,6 +44,7 @@ New methods added to DynamicResponseComposer:
 ```text
 ```
 
+
 Input:  "I'm feeling so stressed today" Parse:  stress, present-tense, today-bound, emphasis "so"
 Store:  primary_affect=[stress], confidence=0.7 Glyph:  Still Insight Ask:    "What triggered this?"
 
@@ -53,8 +54,10 @@ Store:  primary_affect=[stress], confidence=0.7 Glyph:  Still Insight Ask:    "W
 
 ### Turn 2: User reveals root cause & mechanism
 ```text
+
 ```text
 ```
+
 
 Input:  "I have so much on my mind at work that I can't make one step forward" Parse:
 cognitive_overload, work-domain, paralysis, thought-flooding Store:  + cognitive_overload, +
@@ -70,6 +73,7 @@ specific!)
 ### Turn 3: User provides specificity
 
 ```text
+
 ```
 
 Input:  "5 projects due this week, client presentation Thursday, deck not started"
@@ -81,6 +85,7 @@ Glyphs: Add The Threshold
 Ask:    "Which of these 5 could wait?"  (now action-oriented!)
 
 ```
+
 
 
 ##
@@ -103,8 +108,10 @@ Ask:    "Which of these 5 could wait?"  (now action-oriented!)
 ## Response Quality Progression
 
 **Without Memory** (isolated responses):
+
 ```text
 ```text
+
 ```
 
 "What's causing that stress?"
@@ -117,10 +124,12 @@ Problem: Redundant, doesn't build on prior messages
 
 
 
+
 **With Memory** (contextual responses):
 
 ```text
 ```
+
 
 Turn 1: "I hear you're feeling stress today." Turn 2: "I hear you - work has flooded your mind with
 competing demands that even one step feels impossible." Turn 3: "Which of these 5 could we push
@@ -135,8 +144,10 @@ back?" Benefit: Each response builds, gets smarter and more actionable
 
 The memory layer builds understanding of the causal chain:
 ```text
+
 ```text
 ```
+
 
 Root Trigger ↓ Work demands (5 projects, client deadline, multiple stakeholders) ↓ Mechanism ↓
 Cognitive flooding (too much to organize/prioritize) ↓ Manifestation ↓ Decision paralysis (cannot
@@ -190,15 +201,19 @@ System responses evolve to acknowledge each level of this chain.
 ### ConversationMemory
 
 ```python
+
 turns: List[MessageTurn] integrated_state: IntegratedEmotionalState causal_understanding:
 CausalUnderstanding system_knowledge: SystemKnowledge
+
 ```text
 ```text
+
 ```
 
 ### IntegratedEmotionalState
 
 ```python
+
 
 primary_affects: List[str]  # ["stress", "cognitive_overload", "pressure"] secondary_affects:
 List[str]  # ["paralysis", "anxiety", "overwhelm"] intensity: str  # "high" primary_domains:
@@ -207,6 +222,7 @@ List[str]  # ["work", "client work"] temporal_scope: str  # "today (acute) + ong
 ```text
 ```
 
+
 ### CausalUnderstanding
 
 ```python
@@ -214,8 +230,10 @@ root_triggers: List[str]  # ["work", "client work"]
 mechanisms: List[str]  # ["cognitive flooding"]
 manifestations: List[str]  # ["paralysis", "anxiety"]
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -304,6 +322,7 @@ response = composer.compose_response_with_memory(
     glyph=glyph
 
 ```text
+
 ```
 
 ##
@@ -354,6 +373,7 @@ response = composer.compose_response_with_memory(
 ### Test Run Summary
 
 ```
+
 TURN 1: "I'm feeling so stressed today" → Response: "I hear you're feeling stress today."
 → Confidence: 0.7 | Glyphs: [Still Insight]
 
@@ -366,6 +386,7 @@ TURN 3: "5 projects due this week, client presentation Thursday, deck not starte
 hear you - work has flooded your mind... Which of these 5 could potentially wait?"
 → Confidence: 0.95 | Glyphs: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
 → Next Need: "Which could wait?" (action-oriented)
+
 ```
 
 ##

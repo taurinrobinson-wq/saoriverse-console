@@ -18,8 +18,10 @@ located
 python core/main_v2.py        # Start Streamlit dev app
 bash scripts/run_local.sh      # Run with full setup
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -115,6 +117,7 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 ```bash
 
 ```text
+
 ```
 
 **Find where a specific feature is**
@@ -132,16 +135,20 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 **Deploy to production**
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 **Set up locally**
 
 ```bash
 
+
 ```text
 ```
+
 
 **Add a new feature**
 → See `DEVELOPER_QUICKSTART.md` New Developer Checklist
@@ -171,8 +178,10 @@ saoriverse-console/
 ├── tools/                    ← Analysis and testing tools
 ├── tests/                    ← Test suites
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -200,6 +209,7 @@ print('✅ All systems operational!')
 "
 
 ```
+
 
 ##
 

@@ -66,8 +66,10 @@ export function GameScene({
     </div>
   );
 ```sql
+
 ```sql
 ```
+
 
 ### Data You'll Receive From Backend
 
@@ -98,6 +100,7 @@ export function GameScene({
   discovered_glyphs: string[]
 
 ```text
+
 ```
 
 ##
@@ -112,6 +115,7 @@ export function GameScene({
 Create a custom React hook to manage game state and backend calls:
 
 ```typescript
+
 // useGame.ts import { useCallback, useState } from 'react'; import axios from 'axios';
 
 const API_BASE = 'http://localhost:8000';
@@ -138,13 +142,16 @@ response = await axios.post(
 response.data; } finally { setLoading(false); } }, [sessionId]);
 
 return { gameState, loading, sessionId, startGame, processChoice, processFreeInput };
+
 ```text
 ```text
+
 ```
 
 ### Wire It Into GameScene
 
 ```tsx
+
 
 import { useGame } from '@/hooks/useGame';
 
@@ -154,6 +161,7 @@ return ( // Use gameState.story_text, gameState.choices, etc. );
 
 ```text
 ```
+
 
 ##
 
@@ -177,8 +185,10 @@ return ( // Use gameState.story_text, gameState.choices, etc. );
     </button>
   ))}
 ```text
+
 ```text
 ```
+
 
 ### Free Text Input
 
@@ -211,6 +221,7 @@ const [input, setInput] = useState('');
   </button>
 
 ```text
+
 ```
 
 ##
@@ -223,6 +234,7 @@ const [input, setInput] = useState('');
 ### Display NPC Info
 
 ```tsx
+
 {gameState.npc_info && ( <div className="flex items-end gap-4"> {/* NPC Portrait */} <img
 src={`/assets/npcs/${gameState.npc_info.image}`} alt={gameState.npc_info.name} className="h-96
 object-contain" />
@@ -233,8 +245,10 @@ className="text-purple-100"> {gameState.npc_info.dialogue} </p> {/* Trust indica
 className="mt-4 flex gap-1"> {Array(5).fill(0).map((_, i) => ( <div key={i} className={`h-2 flex-1
 rounded ${ i < gameState.npc_info.trust_level * 5 ? 'bg-amber-400' : 'bg-gray-600' }`} /> ))} </div>
 </div> </div>
+
 ```text
 ```text
+
 ```
 
 ##
@@ -248,6 +262,7 @@ rounded ${ i < gameState.npc_info.trust_level * 5 ? 'bg-amber-400' : 'bg-gray-60
 
 ```tsx
 
+
 export function StatsPanel({ stats: PlayerStats }) { return ( <div className="bg-slate-900 p-4
 rounded space-y-3"> <h3 className="text-lg font-bold text-white">Stats</h3>
 {Object.entries(stats).map(([name, value]) => ( <div key={name}> <div className="flex
@@ -259,12 +274,15 @@ className="bg-gradient-to-r from-pink-500 to-purple-500 h-2 rounded-full" style=
 ```text
 ```
 
+
 ### Usage
 
 ```tsx
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -308,6 +326,7 @@ const loadGame = useCallback(async (saveId: string) => {
   setGameState(response.data);
 
 ```text
+
 ```
 
 ##
@@ -338,6 +357,7 @@ const loadGame = useCallback(async (saveId: string) => {
 ### New Files Needed
 
 ```
+
 velinor-web/
 ├── src/
 │   ├── hooks/
@@ -350,13 +370,16 @@ velinor-web/
 │   ├── types/
 │   │   └── game.ts                 ← CREATE (type definitions)
 │   └── lib/
+
 ```text
 ```text
+
 ```
 
 ### Files to Modify
 
 ```
+
 
 velinor-web/
 ├── src/

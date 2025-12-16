@@ -3,8 +3,10 @@
 ## System Overview
 
 <!-- md013:ignore -->
+
 ```text
 ```
+
 
 ┌─────────────────────────────────────────────────────────────────┐
 │                     FIRSTPERSON LOCAL MODE                      │
@@ -82,12 +84,15 @@
 
 <!-- md013:ignore -->
 ```text
+
 "I keep replaying that moment over and over, and it hurts"
+
 ```
 
 ### Stage 1: Tokenization & POS Tagging
 
 ```python
+
 Using NLTK (already integrated):
 
 Tokens: ["I", "keep", "replaying", "that", "moment", "over", "and", "over", "and", "it", "hurts"]
@@ -96,6 +101,7 @@ POS Tags: ["PRP", "VBP", "VBG", "DT", "NN", "RB", "CC", "RB", "CC", "PRP", "VBZ"
 
 ```text
 ```
+
 
 ### Stage 2: NRC Emotion Lexicon Lookup
 
@@ -107,11 +113,13 @@ replaying → [negative, sadness] moment → [negative, sadness] hurts → [nega
 
 Result Emotions: { 'sadness': 4, 'negative': 5, 'fear': 1
 ```text
+
 ```
 
 ### Stage 3: Entity Extraction (spaCy)
 
 ```
+
 Named Entity Recognition:
 - No proper nouns, dates, or locations mentioned
 - But: "that moment" = key noun chunk (trigger)
@@ -121,8 +129,10 @@ Noun Chunks: ["that moment", "over and over", "it"]
 Context Interpretation:
 - Past event (temporal focus)
 - Repetitive pattern (recursive signal)
+
 ```text
 ```
+
 
 ### Stage 4: Semantic Analysis
 
@@ -144,11 +154,13 @@ WordNet (semantic relationships):
 - replaying → repetition → cycles → recursion
 - hurt → pain → ache → suffering
 ```text
+
 ```
 
 ### Stage 5: Signal Mapping
 
 ```
+
 Emotion → Voltage Signal Mapping:
 
 Emotion: sadness → NRC score: 4 → Map to voltage: γ (ache/grief) → Intensity: 4
@@ -160,6 +172,7 @@ Fear component: → Could be β (anticipatory fear) → But context suggests pai
 
 ```text
 ```
+
 
 ### Stage 6: Gate Activation
 
@@ -173,11 +186,13 @@ Candidate glyphs by gate:
 - Gate 4: Recursive Ache, Spiral Ache, Loop Ache
 - Gate 5: Depth Ache, Layered Ache
 ```text
+
 ```
 
 ### Stage 7: Glyph Scoring & Selection
 
 ```
+
 Scoring Algorithm:
 
 Recursive Ache:
@@ -202,6 +217,7 @@ Recognized Ache:
 ```text
 ```
 
+
 ### Stage 8: Poetry & Metaphor Enrichment
 
 ```
@@ -223,11 +239,13 @@ Rituals for acknowledgment:
   - "Let us hold this ache together in silence"
   - "This pattern deserves witnessing"
 ```text
+
 ```
 
 ### Stage 9: Response Generation
 
 ```
+
 Template: [Validation] + [Glyph] + [Poetry] + [Metaphor] + [Ritual]
 
 Validation: "That moment keeps spiraling back—not because you're trapped, but because it's teaching
@@ -250,8 +268,10 @@ Emily Dickinson knew this spiral: 'The Ache remains, returning again and again.'
 return a kind of knowing.
 
 What if, instead of trying to escape the loop, we honored what each return reveals?"
+
 ```text
 ```
+
 
 ### Stage 10: Learning & Personalization
 
@@ -271,6 +291,7 @@ Over time (100+ interactions):
 - System learns: This user values validation first
 
 ```text
+
 ```
 
 ##
@@ -280,6 +301,7 @@ Over time (100+ interactions):
 ### Core Tables (Existing)
 
 ```sql
+
 -- 292 Glyphs from VELŌNIX system
 CREATE TABLE glyph_lexicon ( id INTEGER PRIMARY KEY, voltage_pair TEXT,  -- e.g., "γ-δ" glyph_name
 TEXT,    -- e.g., "Recursive Ache" description TEXT, gate INTEGER, activation_signals TEXT  --
@@ -292,8 +314,10 @@ CREATE TABLE signal_lexicon ( id INTEGER PRIMARY KEY, keyword TEXT, voltage_sign
 -- User interaction history (local only)
 CREATE TABLE interactions ( id INTEGER PRIMARY KEY, timestamp DATETIME, user_input TEXT, glyph_id
 INTEGER, response TEXT, feedback TEXT, processing_time_ms INTEGER
+
 ```text
 ```
+
 
 ### Enrichment Tables (New)
 
@@ -322,6 +346,7 @@ CREATE TABLE user_patterns ( id INTEGER PRIMARY KEY, pattern_name TEXT,  -- e.g.
 frequency INTEGER, associated_glyphs TEXT,  -- comma-separated most_helpful_metaphor TEXT,
 most_helpful_poetry TEXT, effectiveness_score FLOAT
 ```text
+
 ```
 
 ##
@@ -332,12 +357,15 @@ most_helpful_poetry TEXT, effectiveness_score FLOAT
 
 ```python
 
+
 # Tier 1 - Built-in, already working
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 sia = SentimentIntensityAnalyzer()
+
 ```text
 ```
+
 
 ### Layer 2: Linguistic Understanding (1-5ms)
 
@@ -349,11 +377,13 @@ from parser.nrc_lexicon_loader import nrc
 emotions = nrc.analyze_text(text)  # 14,182 word database
 
 ```text
+
 ```
 
 ### Layer 3: Semantic Understanding (5-20ms)
 
 ```python
+
 
 # Entity extraction + semantic relationships
 import spacy
@@ -361,8 +391,10 @@ import spacy
 nlp = spacy.load("en_core_web_sm") doc = nlp(text)
 
 entities = [(ent.text, ent.label_) for ent in doc.ents]
+
 ```text
 ```
+
 
 ### Layer 4: Signal Mapping (1-2ms)
 
@@ -381,17 +413,21 @@ signals = parse_input(text)
 #   'glyphs': ['Recursive Ache', 'Spiral Ache']
 
 ```text
+
 ```
 
 ### Layer 5: Enrichment (5-10ms)
 
 ```python
 
+
 # Fetch poetry, metaphors, rituals
 glyph_id = fetch_glyph_id("Recursive Ache") poetry = fetch_glyph_poetry(glyph_id) metaphors =
 fetch_glyph_metaphors(glyph_id)
+
 ```text
 ```
+
 
 ### Layer 6: Response Generation (10-50ms)
 
@@ -401,6 +437,7 @@ fetch_glyph_metaphors(glyph_id)
 response = generate_response( glyph_name="Recursive Ache", poetry=poetry, metaphors=metaphors,
 rituals=rituals, user_message=text
 ```text
+
 ```
 
 **Total Latency: 25-100ms (typically 50-80ms)**
@@ -411,6 +448,7 @@ rituals=rituals, user_message=text
 ## File Structure
 
 ```
+
 saoriverse-console/
 │
 ├── parser/
@@ -454,8 +492,10 @@ saoriverse-console/
 ├── SOVEREIGN_LOCAL_STRATEGY.md      # NEW: Vision & architecture
 ├── SOVEREIGN_LOCAL_QUICK_START.md   # NEW: Implementation guide
 ├── FIRSTPERSON_MANIFESTO.md         # NEW: Values & principles
+
 ```text
 ```
+
 
 ##
 
@@ -525,11 +565,13 @@ pip install -r requirements.txt python -m spacy download en_core_web_sm
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 ```text
+
 ```
 
 ### For Developers
 
 ```bash
+
 
 # Setup dev environment
 python -m venv venv source venv/bin/activate pip install -r requirements.txt pip install -r
@@ -543,6 +585,7 @@ pytest tests/
 
 # Run locally
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=debug
+
 ```
 
 ##

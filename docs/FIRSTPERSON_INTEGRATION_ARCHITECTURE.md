@@ -8,6 +8,7 @@ your emotional state through FirstPerson integration.
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    VELINOR GAME                             │
 │                  Streamlit Web UI                           │
@@ -95,6 +96,7 @@ your emotional state through FirstPerson integration.
 ```python
 
 
+
 # Lines 28-30
 from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
@@ -104,6 +106,7 @@ FirstPersonOrchestrator( user_id='velinor_player', conversation_id='velinor_game
 
 ```text
 ```
+
 
 ### 2️⃣ Game Initialization (`start_new_game()`)
 
@@ -121,8 +124,10 @@ orchestrator = VelinorTwineOrchestrator(
     first_person_module=firstperson_orchestrator,  # ← Connected here
     npc_system=None
 ```text
+
 ```text
 ```
+
 
 ### 3️⃣ Player Input Processing (`orchestrator.py`)
 
@@ -136,11 +141,13 @@ def _summarize_player_intent(self, player_input, player_id):
     analysis = self.first_person.handle_conversation_turn(player_input)
 
 ```text
+
 ```
 
 ### 4️⃣ NPC Response Generation (`orchestrator.py`)
 
 ```python
+
 
 # Lines 289-340
 def _generate_emotionally_aware_response(self, npc_name, player_input, emotional_tone, theme,
@@ -149,13 +156,16 @@ valence, intensity, memory, ...):
     # - Emotional tone
     # - Theme + memory context
     # - Intensity level
+
 ```text
 ```text
+
 ```
 
 ### 5️⃣ State Flow (`process_player_action()`)
 
 ```python
+
 
 
 # Lines 140-150
@@ -168,6 +178,7 @@ npc_name=updated_state['npc_name'], context=updated_state,  # ← Contains playe
 
 ```text
 ```
+
 
 ## Features Implemented
 
@@ -194,8 +205,10 @@ Analysis: { tone: 'heavy', theme: 'general', valence: -0.7, intensity: 0.6 }
 Memory:   { turns: 1, emotional_trajectory: [-0.7], themes: {'general': 1} }
 NPC:      "I hear the weight in that. What you're naming has weight.
 ```text
+
 ```text
 ```
+
 
 ### Turn 2
 
@@ -207,18 +220,22 @@ Memory:   { turns: 2, emotional_trajectory: [-0.7, -0.8], themes: {'general': 1,
 NPC:      "I hear the weight in that. Loss shapes us in ways words
 
 ```text
+
 ```
 
 ### Turn 3
 
 ```
+
 Input:    "But maybe there's something I can learn from this" Analysis: { tone: 'reflective', theme:
 'grief', valence: -0.1, intensity: 0.3 } Memory:   { turns: 3, emotional_trajectory: [-0.7, -0.8,
 -0.1], themes: {'general': 1, 'grief': 2}, emotional_trend: 'improving', recurring_themes: ['grief']
 } NPC:      "There's something to sit with there. I'm noticing grief keeps coming back to you—that
 tells me something. And I'm
+
 ```text
 ```text
+
 ```
 
 ## Documentation Created
@@ -235,11 +252,13 @@ tells me something. And I'm
 
 ```
 
+
 f90cccf - Feat: FirstPerson integration for emotionally-aware NPC responses a3de8fe - Docs: Add
 FirstPerson + Velinor quick reference guide
 
 ```text
 ```
+
 
 ## Performance Notes
 
@@ -275,6 +294,7 @@ python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 # - Or use FastAPI backend from main branch
 ```
+
 
 ## What's Next
 

@@ -27,6 +27,7 @@ ReliefToGratitude archetype contains:
 └─ Tone Guidelines: ["Warm language", "Gentle pacing", "Mirror metaphors", ...]
 ```
 
+
 **Key Classes**:
 
 - `ConversationArchetype`: Single pattern (name, cues, principles, bridges, tone)
@@ -61,6 +62,7 @@ Extracts principles:
 Generates: "That moment with your child sounds genuinely special.
            What does that connection feel like for you?"
 ```
+
 
 **Key Classes**:
 
@@ -111,6 +113,7 @@ Extracts:
 
 New or refined archetype added to library
 ```
+
 
 **Key Classes**:
 
@@ -190,6 +193,7 @@ Sample Results:
 ## API Summary
 
 ```python
+
 
 
 
@@ -325,6 +329,7 @@ The playwright/organizer workflow (you write scenes, system extracts rules) keep
 ## Testing the System
 
 ```bash
+
 
 
 

@@ -28,6 +28,7 @@ railway variables set SUPABASE_AUTH_URL="your_supabase_url/functions/v1/auth-man
 railway variables set CURRENT_SAORI_URL="your_supabase_url/functions/v1/saori-fixed"
 ```
 
+
 ## Step 3: Deploy Your Application
 
 After setting the environment variables:
@@ -35,6 +36,7 @@ After setting the environment variables:
 ```powershell
 railway up
 ```
+
 
 ## Step 4: Add Your Custom Domain
 
@@ -64,6 +66,7 @@ key = "eyJ..."
 auth_function_url = "https://yourproject.supabase.co/functions/v1/auth-manager"
 current_saori_url = "https://yourproject.supabase.co/functions/v1/saori-fixed"
 ```
+
 
 ##
 

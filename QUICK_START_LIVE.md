@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 🟢 OPERATIONAL - Backend running on <http://127.0.0.1:8000> ✅ All endpoints tested and responding ✅
 Theme detection working (grief, joy, stress, isolation, etc.) ✅ Empathetic response generation
 active ✅ 3-tier pipeline processing all responses
@@ -19,11 +20,13 @@ active ✅ 3-tier pipeline processing all responses
 
 ```powershell
 
+
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/health" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
 
 ```text
 ```
+
 
 ### 2. Send a Message (5-second timeout)
 
@@ -42,8 +45,10 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
   -Method Post -ContentType "application/json" `
   -Body $body -UseBasicParsing -TimeoutSec 5 | `
 ```text
+
 ```text
 ```
+
 
 ### 3. Get User Conversations (2-second timeout)
 
@@ -53,17 +58,20 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/conversations/robinson1234" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
 
 ```text
+
 ```
 
 ## How It Works
 
 ```
+
 User Message ↓ Theme Detection (grief, joy, stress, isolation, fatigue, work, health) ↓ Base
 Response Generation (empathetic templates) ↓ 3-Tier Enhancement Pipeline:
   ├─ Tier 1: Foundation (safety, signals, learning)
   ├─ Tier 2: Aliveness (emotional attunement, energy)
   └─ Tier 3: Poetic Consciousness (aesthetics, narrative)
 ↓ Glyph-Informed Composition ↓ Return Response to Client ↓ Save to Database (async, non-blocking)
+
 ```
 
 ## Response Examples

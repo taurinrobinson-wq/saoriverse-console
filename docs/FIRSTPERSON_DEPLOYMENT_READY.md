@@ -47,8 +47,10 @@ python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; pr
 
 # 3. Verify Supabase connection (if applicable)
 ```text
+
 ```text
 ```
+
 
 ## Staging Deployment
 
@@ -64,11 +66,13 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 # 3. Monitor metrics for 24 hours
 
 ```text
+
 ```
 
 ## Production Deployment
 
 ```bash
+
 
 # 1. Create feature branch for release
 git checkout -b release/firstperson-phase-1-2
@@ -82,8 +86,10 @@ DeploymentMonitor(); m.start_monitoring()"
 
 # 4. Commit deployment
 git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
+
 ```text
 ```text
+
 ```
 
 ##
@@ -93,6 +99,7 @@ git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 ## Unit Tests (All Modules)
 
 ```bash
+
 
 
 # Story-start detection
@@ -110,6 +117,7 @@ emotional_os/core/firstperson/test_repair_orchestrator.py -v
 ```text
 ```
 
+
 ## Integration Tests
 
 ```bash
@@ -119,8 +127,10 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestInteg
 
 # Phase 2.3 repair detection
 ```text
+
 ```text
 ```
+
 
 ## Manual Testing (Recommended)
 
@@ -137,11 +147,13 @@ response = orch.handle_conversation_turn("They were fighting again.")
 print(response.response_text)
 
 ```text
+
 ```
 
 ### Scenario 2: Frequency Reflection
 
 ```python
+
 
 # Three turns with same theme should trigger reflection
 inputs = [ "The kids were fighting.", "More fighting today.", "Still fighting over the same thing."
@@ -152,11 +164,13 @@ orch.handle_conversation_turn(input_text) print(f"Turn {turn_num}: {response.det
 
 ```text
 ```text
+
 ```
 
 ### Scenario 3: Repair Detection
 
 ```python
+
 
 from emotional_os.core.firstperson.repair_orchestrator import RepairOrchestrator
 
@@ -167,6 +181,7 @@ is_rejection = repair.detect_rejection("No, that's not what I meant.") print(is_
 
 ```text
 ```
+
 
 ##
 
@@ -211,8 +226,10 @@ watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 
 # Generate health report
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -240,6 +257,7 @@ pytest emotional_os/core/firstperson/test_*.py -q
 # Issue tracking system: [fill in]
 
 ```
+
 
 ##
 

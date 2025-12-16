@@ -23,8 +23,10 @@ grep -l "emotional_os" *.py 2>/dev/null || echo "No imports in root"
 # Create backup branch
 git checkout -b refactor/reorganization-master
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -57,6 +59,7 @@ touch scripts/data/__init__.py
 touch scripts/setup/__init__.py
 
 ```text
+
 ```
 
 ##
@@ -81,6 +84,7 @@ touch scripts/setup/__init__.py
 
 ```bash
 
+
 # Move all test_*.py from root to tests/
 mv test_*.py tests/ 2>/dev/null || true
 
@@ -90,11 +94,13 @@ mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 
 ```text
 ```text
+
 ```
 
 ### Data Files
 
 ```bash
+
 
 
 # Consolidate data
@@ -108,6 +114,7 @@ mv *glyph*.json data/ 2>/dev/null || true
 
 ```text
 ```
+
 
 ### Scripts Organization
 
@@ -126,8 +133,10 @@ mv scripts/seed*.py scripts/setup/ 2>/dev/null || true
 mv scripts/inspect*.py scripts/debug/ 2>/dev/null || true
 mv scripts/debug*.py scripts/debug/ 2>/dev/null || true
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -186,13 +195,16 @@ if __name__ == "__main__":
     sys.exit(0 if check() else 1)
 
 ```text
+
 ```
 
 Run it:
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ##
@@ -202,6 +214,7 @@ Run it:
 Create `app.py`:
 
 ```bash
+
 
 cat > app.py << 'EOF' """ SaoriVerse Console - FirstPerson Streamlit entry point.
 
@@ -227,6 +240,7 @@ if __name__ == "__main__": main()
 ```text
 ```
 
+
 ##
 
 ## Phase 6: Test Everything
@@ -246,8 +260,10 @@ pytest tests/integration/ -v --tb=short
 streamlit run app.py
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -273,6 +289,7 @@ for file in *.md; do
     fi
 
 ```text
+
 ```
 
 ##
@@ -280,6 +297,7 @@ for file in *.md; do
 ## Phase 8: Commit
 
 ```bash
+
 
 # Stage everything
 git add -A
@@ -299,8 +317,10 @@ git commit -m "refactor: Complete codebase reorganization
 - Ready for efficient development and deployment"
 
 # Push to GitHub
+
 ```text
 ```text
+
 ```
 
 ##
@@ -339,6 +359,7 @@ git commit -m "refactor: Complete codebase reorganization
 After everything is organized:
 
 ```bash
+
 
 
 # Run all tests

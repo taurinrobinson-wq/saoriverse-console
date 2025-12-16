@@ -87,6 +87,7 @@ Enhanced main orchestrator with prosody support and non-blocking playback.
 ```text
 ```
 
+
 Record Audio (AudioRecorder) ↓ Transcribe (Whisper via faster-whisper) ↓ Process (FirstPerson
 pipeline) → (text, glyph_intent) ↓ Plan Prosody (ProsodyPlanner) ↓ Chunk Text (sentence/phrase
 boundaries) ↓ Synthesize (pyttsx3, local TTS) ↓ Play Non-Blocking (sounddevice) ↓ Store Turn
@@ -104,11 +105,13 @@ PortAudio support now included for audio recording:
 ```dockerfile
 
 
+
 # Audio dependencies
 portaudio19-dev  # PortAudio development headers libsndfile1      # Sound file I/O
 
 ```text
 ```
+
 
 ## 4. Documentation
 
@@ -145,8 +148,10 @@ portaudio19-dev  # PortAudio development headers libsndfile1      # Sound file I
 Chunk 1: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 Chunk 2: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 ```text
+
 ```text
 ```
+
 
 **After** (Non-Blocking with 0.9x overlap):
 
@@ -160,6 +165,7 @@ Chunk 2:                    Synthesize (1.0s)
                            └─ Sleep (1.8s)
 
 ```text
+
 ```
 
 ## Prosody Planning (Why It's Essential)
@@ -184,6 +190,7 @@ FirstPerson's glyph signals (voltage, tone, certainty) now directly influence sp
 **Example: High-Voltage Positive Response**
 
 ```python
+
 glyph_intent = { "voltage": "high",         # Aroused, energetic "tone": "positive",        # Happy,
 encouraging "certainty": "high",       # Confident "energy": 0.85,            # Very intense
 "hesitation": False,       # Fluent, no pauses }
@@ -193,13 +200,16 @@ encouraging "certainty": "high",       # Confident "energy": 0.85,            # 
 # <prosody rate='fast' pitch='high' volume='loud'>Let's do this!</prosody>
 
 # Result: Fast speech, high pitch, loud volume →
+
 ```text
 ```text
+
 ```
 
 **Example: Low-Voltage Negative Response**
 
 ```python
+
 
 glyph_intent = { "voltage": "low",          # Subdued, introspective "tone": "negative",        #
 Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,             # Minimal intensity

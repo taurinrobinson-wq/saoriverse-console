@@ -20,6 +20,7 @@
 ```text
 ```
 
+
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (6.5 MB - 8 poetry collections)
 ├── gutenberg_learning.log         (4.8 MB - processing log, 59,796 lines)
@@ -33,8 +34,10 @@ Total: 8.0 MB used | 458 GB available
 
 ### Hard Drive Location (Code Only)
 ```text
+
 ```text
 ```
+
 
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py           (210 lines - Gutenberg downloader)
@@ -116,24 +119,30 @@ From processing 8 collections:
 ### Monitor Current Processing
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### View Processing Results
 
 ```bash
 
+
 ```text
 ```
+
 
 ### Run More Processing (Option 1 - Shell Script)
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 ### Run More Processing (Option 2 - Direct Python)
 
@@ -142,13 +151,16 @@ cd /Users/taurinrobinson/saoriverse-console
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
+
 ```
 
 ### Check External Drive Space
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ##
@@ -156,6 +168,7 @@ cd /Users/taurinrobinson/saoriverse-console
 ## 📈 Processing Pipeline
 
 ```
+
 
 Project Gutenberg API ↓ gutenberg_fetcher.py (downloads poetry) ↓ bulk_text_processor.py (chunks
 text) ↓ poetry_signal_extractor.py (extracts 8 signals) ↓ hybrid_learner_v2.py (learns patterns) ↓
@@ -168,6 +181,7 @@ Updated Lexicons
 
 ```text
 ```
+
 
 ##
 
@@ -184,8 +198,10 @@ Lexicon Entries Added: ~2,000-5,000
 Processing Log Size: 4.8 MB (59,796 lines)
 Quality Score Average: 0.75-0.85 (good)
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -265,6 +281,7 @@ Edit `gutenberg_fetcher.py` (lines 35-70) to add URLs:
 "milton_paradise_lost": "https://www.gutenberg.org/ebooks/26",
 
 ```text
+
 ```
 
 ### Processing Custom Text Files
@@ -272,10 +289,13 @@ Edit `gutenberg_fetcher.py` (lines 35-70) to add URLs:
 Use the bulk processor directly:
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console venv/bin/python -c " from bulk_text_processor import
 BulkTextProcessor processor = BulkTextProcessor('your_file.txt') results = processor.process()
+
 ```text
 ```text
+
 ```
 
 ### Monitoring Real-Time Output
@@ -284,8 +304,10 @@ Watch the log while processing runs:
 
 ```bash
 
+
 ```text
 ```
+
 
 ##
 
@@ -313,8 +335,10 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 # Keep the processing results and lexicon updates
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -353,6 +377,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 ```bash
 
 ```text
+
 ```
 
 ### External drive not visible
@@ -370,8 +395,10 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 **Solution**: Add execute permission
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### Disk full (shouldn't happen, but...)
@@ -380,6 +407,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 **Solution**: Check available space
 
 ```bash
+
 
 df -h "/Volumes/My Passport for Mac"
 

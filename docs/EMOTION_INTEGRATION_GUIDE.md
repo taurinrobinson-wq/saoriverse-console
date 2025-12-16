@@ -18,8 +18,10 @@ interface EmotionDetectorProps {
   conversationContext?: string; // Context tag (e.g., "grief_support", default: "default")
   isActive?: boolean;          // Enable/disable detection (default: true)
 ```text
+
 ```text
 ```
+
 
 ### Example Usage
 
@@ -47,6 +49,7 @@ export default function ChatPage() {
   );
 
 ```text
+
 ```
 
 ##
@@ -58,6 +61,7 @@ export default function ChatPage() {
 Display emotion detector in a fixed sidebar next to your chat:
 
 ```tsx
+
 // app/chat/page.tsx import { EmotionDetector } from "@/components/EmotionDetector"; import {
 ChatInterface } from "@/components/ChatInterface"; import { useSession } from "@/hooks/useSession";
 
@@ -73,8 +77,10 @@ shadow-lg"> <div className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 tex
 className="font-bold">Emotion Detection</h2> <p className="text-sm text-purple-100">Privacy: Local
 browser only</p> </div> <EmotionDetector userId={user.id} conversationContext="sanctuary_chat"
 isActive={true} /> </div> </div> );
+
 ```text
 ```text
+
 ```
 
 ##
@@ -84,6 +90,7 @@ isActive={true} /> </div> </div> );
 Show emotion detector as a modal dialog:
 
 ```tsx
+
 
 // components/EmotionDetectorModal.tsx import { EmotionDetector } from
 "@/components/EmotionDetector"; import { useState } from "react";
@@ -107,6 +114,7 @@ isActive={true} /> </div> </div> )} </> );
 
 ```text
 ```
+
 
 ##
 
@@ -152,8 +160,10 @@ export function ChatWithTabs({ userId }: { userId: string }) {
     </div>
   );
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -225,6 +235,7 @@ const [error, setError] = useState<string | null>(null);
   );
 
 ```text
+
 ```
 
 ### Graceful Degradation
@@ -238,13 +249,16 @@ If webcam is unavailable, emotion detection simply doesn't run. The chat interfa
 Control detection with the `isActive` prop:
 
 ```tsx
+
 // Disable during video calls or when not needed <EmotionDetector userId={user.id}
 isActive={isInChat} // Only detect while in chat />
 
 // Disable for privacy-focused users <EmotionDetector userId={user.id}
 isActive={user.preferences.enableEmotionTracking}
+
 ```text
 ```text
+
 ```
 
 ##
@@ -255,12 +269,14 @@ isActive={user.preferences.enableEmotionTracking}
 
 ```sql
 
+
 -- View recent emotion logs for a user
 SELECT emotion, confidence, timestamp, conversation_context FROM emotions_log WHERE user_id =
 'user_123' ORDER BY timestamp DESC
 
 ```text
 ```
+
 
 ### Via API
 
@@ -273,8 +289,10 @@ async function getEmotionHistory(userId: string) {
   const { data } = await response.json();
   return data;
 ```text
+
 ```text
 ```
+
 
 ### Create a Dashboard Component
 
@@ -318,6 +336,7 @@ export function EmotionHistory({ userId }: { userId: string }) {
   );
 
 ```text
+
 ```
 
 ##
@@ -364,8 +383,10 @@ isActive={isActiveChatOpen}
 Run the training script weekly to refine thresholds:
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### Monthly Analysis
@@ -374,8 +395,10 @@ Check which emotions are most frequently detected:
 
 ```bash
 
+
 ```text
 ```
+
 
 ### Continuous Improvement
 
@@ -464,5 +487,6 @@ export default function ConversationPage({
   );
 }
 ```
+
 
 That's it! Your emotion detection system is integrated and ready to learn.

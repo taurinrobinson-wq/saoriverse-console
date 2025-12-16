@@ -155,8 +155,10 @@ git commit -m "feat: add production VPS deployment infrastructure"
 git push origin main
 
 ```text
+
 ```text
 ```
+
 
 ✅ **Done!** Files are now on GitHub
 
@@ -192,6 +194,7 @@ DOCUMENTATION (Pick your style)
 ├─ PUSH_TO_GITHUB.md          → Git instructions
 
 ```text
+
 ```
 
 ##
@@ -261,27 +264,34 @@ Your deployment is successful when:
 ### Pattern 1: Deploy and Forget
 
 ```
+
 1. Push to GitHub → 2. Set up DigitalOcean → 3. Deploy → 4. Done!
+
 ```text
 ```text
+
 ```
 
 ### Pattern 2: Continuous Deployment
 
 ```
 
+
 1. Push to GitHub → Auto-triggers GitHub Actions → 2. VPS auto-updates
 
 ```text
 ```
+
 
 ### Pattern 3: Testing First
 
 ```
 1. Deploy to local Docker → 2. Test → 3. Push to GitHub → 4. Auto-deploys
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -367,6 +377,7 @@ START ───→ Deploy Velinor on Railway ─→ Fix 502 Errors
              DigitalOcean VPS Live 🎉
 
 ```
+
 
 ##
 

@@ -7,6 +7,7 @@
 ```text
 ```
 
+
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (8 poetry collections)
 ├── gutenberg_learning.log         (processing log)
@@ -18,8 +19,10 @@
 
 **Code files remain on your hard drive:**
 ```text
+
 ```text
 ```
+
 
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
@@ -110,10 +113,12 @@ From our test run with Emily Dickinson poetry:
 ### 1. Download Phase
 
 ```python
+
 fetcher = GutenbergPoetryFetcher() downloaded = fetcher.download_all_collections()
 
 ```text
 ```text
+
 ```
 
 ### 2. Processing Phase
@@ -152,21 +157,26 @@ Results saved to:
 
 ```bash
 
+
 ```text
 ```
+
 
 **Check results when complete:**
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 **View downloaded poetry:**
 
 ```bash
 
 ```text
+
 ```
 
 ##
@@ -178,19 +188,24 @@ To download more poetry collections or re-run processing in the future:
 **Option 1: Use the shell script (recommended)**
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```text
+
 ```
 
 **Option 2: Run Python directly**
 
 ```bash
 
+
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
+
 
 All outputs will automatically save to the external drive!
 
@@ -266,6 +281,7 @@ Project Gutenberg API
    ├─ signal_lexicon.json
    └─ learned_lexicon.json
 ```
+
 
 ##
 

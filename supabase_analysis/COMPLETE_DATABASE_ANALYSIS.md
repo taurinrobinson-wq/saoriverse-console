@@ -266,6 +266,7 @@ Interaction tracking 8. **emotional_tags** - Tag definitions (needs population)
 ```text
 ```
 
+
 id, username, email, password_hash, salt, created_at, last_login, is_active, updated_at, first_name,
 last_name
 
@@ -280,8 +281,10 @@ last_name
 
 Expected columns from local `glyphs.db`:
 ```text
+
 ```text
 ```
+
 
 id, voltage_pair, glyph_name, description, gate, activation_signals, display_name, response_template
 

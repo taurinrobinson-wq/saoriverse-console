@@ -15,6 +15,7 @@ All 7 renamed graphics are now in the web version:
 ```text
 ```
 
+
 velinor-web/public/assets/
 ├── overlays/
 │   ├── left_page_curl.png          (2.1 MB) - Journal UI left
@@ -47,6 +48,7 @@ The system tracks 4 hidden stats (0-100 range):
 
 ```typescript
 
+
 // Modify stats applyToneAction(stats, action)           // Add/subtract from a stat
 applyToneActions(stats, actions)         // Apply multiple changes
 
@@ -60,6 +62,7 @@ endings
 
 ```text
 ```
+
 
 ### 3. Game State Management
 
@@ -85,8 +88,10 @@ updateToneStats({
   delta: 5,
   description: 'Showed emotional understanding'
 ```text
+
 ```text
 ```
+
 
 ### 4. Developer Console
 
@@ -144,18 +149,22 @@ choice.toneChanges.forEach(action => {
 });
 
 ```text
+
 ```
 
 ### Example: Gated Dialogue (Only if Trust ≥ 60)
 
 ```typescript
+
 const { toneStats } = useGameStore();
 
 // Show vulnerable dialogue only if player has earned trust if (toneStats.trust >= 60) {
 showDialog('I trust you enough to share this...'); } else { showDialog('I... don\'t know you well
 enough yet.');
+
 ```text
 ```text
+
 ```
 
 ## Next Steps: Phase 2 (Dialogue Integration)
@@ -172,6 +181,7 @@ To continue implementation:
 
 ```typescript
 
+
 // In a dialogue component import { useGameStore } from '@/lib/gameStore';
 
 export default function DialogueScene() { const { toneStats, updateToneStats } = useGameStore();
@@ -186,6 +196,7 @@ return ( <div> {/* Render dialogue choices */} {/* Each choice applies TONE chan
 
 ```text
 ```
+
 
 ## Testing the System
 
@@ -217,6 +228,7 @@ velinor-web/
 │           └── [sessionId]/
 │               └── page.tsx     (Updated - Integrated TONE display)
 ```
+
 
 ## Key Metrics
 

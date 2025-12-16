@@ -8,8 +8,10 @@ Copy-paste commands to get Velinor running on DigitalOcean.
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 Save the public key output - you'll paste it into DigitalOcean.
 
@@ -48,6 +50,7 @@ Click **Save** and wait 5-10 minutes.
 ```bash
 
 ```text
+
 ```
 
 Replace `YOUR_DROPLET_IP` with your actual IP.
@@ -55,6 +58,7 @@ Replace `YOUR_DROPLET_IP` with your actual IP.
 Then copy-paste this entire block:
 
 ```bash
+
 #!/bin/bash
 set -e
 
@@ -91,6 +95,7 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 
 ```text
 ```text
+
 ```
 
 ##
@@ -99,8 +104,10 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 
 ```bash
 
+
 ```text
 ```
+
 
 Or visit: **<https://velinor.firstperson.chat>** in your browser
 
@@ -116,8 +123,10 @@ To deploy automatically on `git push main`:
 ssh root@YOUR_DROPLET_IP
 ssh-keygen -t ed25519 -f /root/.ssh/velinor_deploy -C "velinor-deploy" -N ""
 ```text
+
 ```text
 ```
+
 
 Copy the output.
 
@@ -156,6 +165,7 @@ fi
 EOF
 
 ```text
+
 ```
 
 ### D. Add GitHub Secrets
@@ -174,9 +184,12 @@ The `.github/workflows/deploy.yml` file is already in your repo and will auto-tr
 ## 📊 Check Status
 
 ```bash
+
 ssh root@YOUR_DROPLET_IP
+
 ```text
 ```text
+
 ```
 
 ##
@@ -191,14 +204,17 @@ ssh root@YOUR_DROPLET_IP
 
 ```bash
 
+
 ```text
 ```
+
 
 **SSL certificate issue**:
 
 ```bash
 ls /etc/letsencrypt/live/velinor.firstperson.chat/
 ```
+
 
 If empty, domain name might be wrong - verify DNS is working first.
 

@@ -41,8 +41,10 @@ create index if not exists emotions_log_user_time_idx
 -- Create index for conversation context queries
 create index if not exists emotions_log_context_idx
 ```text
+
 ```text
 ```
+
 
 ### How to apply
 
@@ -73,6 +75,7 @@ create table if not exists public.emotion_thresholds (
 create index if not exists emotion_thresholds_user_idx
 
 ```text
+
 ```
 
 ### How to apply
@@ -106,6 +109,7 @@ The frontend EmotionDetector component uses Supabase Realtime to automatically u
 Restrict access so users can only see their own data:
 
 ```sql
+
 -- Enable RLS on emotions_log
 alter table public.emotions_log enable row level security;
 
@@ -123,8 +127,10 @@ alter table public.emotion_thresholds enable row level security;
 -- Create policy: authenticated users can view their own thresholds
 create policy "Users can view own emotion thresholds" on public.emotion_thresholds for select with
 check ( auth.uid()::text = user_id
+
 ```text
 ```text
+
 ```
 
 **Note:** If you're not using Supabase Auth, you can skip this section and manage access at the API layer.
@@ -147,6 +153,7 @@ Ensure your backend has these environment variables set:
 ```bash
 
 
+
 # .env.local (Next.js)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Keep
@@ -157,6 +164,7 @@ export SUPABASE_URL="https://your-project.supabase.co"
 
 ```text
 ```
+
 
 ##
 
@@ -192,21 +200,26 @@ insert 5. Frontend automatically receives updates via Realtime
 ```sql
 insert into public.emotions_log (user_id, emotion, confidence, conversation_context)
 ```text
+
 ```text
 ```
+
 
 ### Test 2: Verify frontend can fetch thresholds
 
 ```bash
 
 ```text
+
 ```
 
 ### Test 3: Run training script
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ##
@@ -217,11 +230,13 @@ insert into public.emotions_log (user_id, emotion, confidence, conversation_cont
 
 ```sql
 
+
 select emotion, confidence, timestamp from public.emotions_log where user_id = 'your_user_id' order
 by timestamp desc
 
 ```text
 ```
+
 
 ### View user's thresholds
 
@@ -230,8 +245,10 @@ select emotion, threshold, updated_at
 from public.emotion_thresholds
 where user_id = 'your_user_id'
 ```text
+
 ```text
 ```
+
 
 ### Delete old logs (optional cleanup)
 
@@ -241,6 +258,7 @@ delete from public.emotions_log
 where timestamp < now() - interval '90 days';
 
 ```
+
 
 ##
 

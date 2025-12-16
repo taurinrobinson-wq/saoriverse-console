@@ -16,8 +16,10 @@ cd "/Volumes/My Passport for Mac/saoriverse-console"
 
 # Run the dev server
 ```text
+
 ```text
 ```
+
 
 Or manually:
 
@@ -26,6 +28,7 @@ Or manually:
 cd velinor-web
 
 ```text
+
 ```
 
 The dev server will start at **<http://localhost:3000>**
@@ -44,6 +47,7 @@ The dev server will start at **<http://localhost:3000>**
 ## 📁 Project Structure
 
 ```
+
 velinor-web/
 ├── src/
 │   ├── app/
@@ -65,8 +69,10 @@ velinor-web/
 ├── package.json
 ├── next.config.ts
 ├── tsconfig.json
+
 ```text
 ```text
+
 ```
 
 ##
@@ -112,6 +118,7 @@ The dev server automatically reloads when you save files—just edit and refresh
 ```bash
 
 
+
 # Start dev server (3000)
 npm run dev
 
@@ -126,6 +133,7 @@ npm start
 ```text
 ```
 
+
 ### Tailwind CSS
 
 Styling uses Tailwind CSS v4. Add classes directly to JSX elements:
@@ -134,8 +142,10 @@ Styling uses Tailwind CSS v4. Add classes directly to JSX elements:
 <div className="bg-slate-900 text-white p-8 rounded-lg">
   <h1 className="text-3xl font-bold">Game Title</h1>
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -202,18 +212,22 @@ export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 
 ```text
+
 ```
 
 ### Port 3000 already in use
 
 ```bash
 
+
 # Kill the existing process
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 # Or use a different port
+
 ```text
 ```text
+
 ```
 
 ### TypeScript errors
@@ -258,11 +272,13 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 ```tsx
 
+
 <img src="/assets/backgrounds/city_market(16-9).png" alt="Market Ruins" className="w-full h-96
 object-cover rounded-lg"
 
 ```text
 ```
+
 
 ### Show NPC portrait
 
@@ -272,8 +288,10 @@ object-cover rounded-lg"
   alt="Keeper"
   className="h-96 object-contain"
 ```text
+
 ```text
 ```
+
 
 ### Create choice buttons
 
@@ -289,15 +307,18 @@ object-cover rounded-lg"
   </button>
 
 ```text
+
 ```
 
 ### Call the backend
 
 ```typescript
+
 const makeAction = async (input: string) => { try { const response = await axios.post(
       `http://localhost:8000/sessions/${sessionId}/actions`,
 { player_input: input }, { headers: { 'Content-Type': 'application/json' } } ); console.log('Game
 response:', response.data); } catch (error) { console.error('Error:', error); } };
+
 ```
 
 ##

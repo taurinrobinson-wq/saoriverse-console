@@ -81,8 +81,10 @@ if new_glyphs:
     st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
     for glyph in new_glyphs:
 ```text
+
 ```text
 ```
+
 
 **Impact**: User-AI exchanges in hybrid mode now automatically generate new glyphs when patterns are detected.
 
@@ -107,6 +109,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
         if st.button("📥 Export Discovered Glyphs"):
 
 ```text
+
 ```
 
 **Impact**: Users can see discovered glyphs in sidebar and export them.
@@ -118,15 +121,19 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 ### New Directories
 
 ```
+
 learning/
 ├── generated_glyphs/              # (created by verify_integration.sh)
+
 ```text
 ```text
+
 ```
 
 ### New JSON Files (created during runtime)
 
 ```
+
 
 learning/
 ├── conversation_glyphs.json       # Registry of all discovered glyphs
@@ -154,6 +161,7 @@ learning/
 
 ```text
 ```
+
 
 ##
 
@@ -184,8 +192,10 @@ Match to Fixed Glyphs
 Return Response
   ↓
 ```text
+
 ```text
 ```
+
 
 ### After (New)
 
@@ -215,6 +225,7 @@ Data Persisted:
   • learning/user_overrides/{user_id}_lexicon.json
 
 ```text
+
 ```
 
 ##
@@ -246,10 +257,13 @@ Data Persisted:
 ### Data Flow
 
 ```
+
 st.session_state['new_glyphs_this_session']  (Session Memory) ↓ learning/conversation_glyphs.json
 (Persistent) ↓
+
 ```text
 ```text
+
 ```
 
 ##
@@ -262,8 +276,10 @@ All in `dynamic_glyph_evolution.py`:
 
 ```python
 
+
 ```text
 ```
+
 
 - Lower value = glyphs appear faster but with less certainty
 - Default 300 is balanced for meaningful patterns
@@ -277,8 +293,10 @@ emotion_symbols = {
     "vulnerability": "🌱",
     # ... customize as needed
 ```text
+
 ```text
 ```
+
 
 ### Glyph Naming (Method `_create_pattern_name`)
 
@@ -290,6 +308,7 @@ name_map = {
     # ... add your own patterns
 
 ```text
+
 ```
 
 ##
@@ -322,8 +341,10 @@ name_map = {
 ### Automated Check
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 Verifies:
@@ -338,6 +359,7 @@ Verifies:
 
 ```python
 
+
 from hybrid_processor_with_evolution import create_integrated_processor
 
 # Should import successfully
@@ -350,6 +372,7 @@ result = processor.process_user_message( "I feel vulnerable", "That's your stren
 
 ```text
 ```
+
 
 ##
 
@@ -408,6 +431,7 @@ streamlit run main_v2.py
 # 6. Check persistence
 cat learning/conversation_glyphs.json
 ```
+
 
 ##
 

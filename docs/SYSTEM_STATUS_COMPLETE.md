@@ -29,6 +29,7 @@ attentive responses with a consent-based suicidality protocol that honors human 
 ```text
 ```
 
+
 User Input ↓ [SUICIDALITY PROTOCOL] ← Top priority ↓ (if not crisis) [SIGNAL PARSER]
     ├─ Emotional keyword detection (90+ words)
     ├─ Gate routing (emotional categories)
@@ -71,8 +72,10 @@ User Input ↓ [SUICIDALITY PROTOCOL] ← Top priority ↓ (if not crisis) [SIGN
 
 **Test Result:**
 ```text
+
 ```text
 ```
+
 
 Input: "I have thoughts of suicide" Output: "You named thoughts of suicide. That is heavy. Thank you
 for trusting me with it." → Source: suicidality_protocol ✅
@@ -108,6 +111,7 @@ for trusting me with it." → Source: suicidality_protocol ✅
 **Test Result:**
 
 ```json
+
 ```
 
 [fetch_glyphs] Retrieved 36 rows
@@ -115,6 +119,7 @@ Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
 ✅ Multi-glyph retrieval working
 
 ```
+
 
 
 ##
@@ -129,8 +134,10 @@ Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
 - BUT final response is still generic template
 
 **Example:**
+
 ```text
 ```text
+
 ```
 
 Signals: [exhausted, hard]
@@ -138,6 +145,7 @@ Glyphs fetched: 36 including 'Recursive Ache', 'Euphoric Yearning'
 Response returned: "You're moving through this..."
 
 ```
+
 
 
 
@@ -187,6 +195,7 @@ Add ~20 positive emotion keywords to emotional_keywords list
 
 ```text
 ```
+
 
 SCENARIO 1: Simple Greeting Score: 0.16/1.0 Status: Baseline Glyphs: None expected
 

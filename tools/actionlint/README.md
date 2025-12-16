@@ -48,8 +48,10 @@ jobs:
           key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
         if: ${{ github.repository.permissions.admin == true }}
 ```text
+
 ```text
 ```
+
 
 **actionlint reports 7 errors:**
 
@@ -84,6 +86,7 @@ test.yaml:22:17: receiver of object dereference "permissions" must be type of ob
 22 |         if: ${{ github.repository.permissions.admin == true }}
 
 ```text
+
 ```
 
 ## Why?
@@ -105,8 +108,10 @@ Install `actionlint` command by downloading [the released binary][releases] or b
 or run via Docker container.
 
 ```sh
+
 ```text
 ```text
+
 ```
 
 Basically all you need to do is run the `actionlint` command in your repository. actionlint automatically detects workflows and
@@ -114,6 +119,7 @@ checks errors. actionlint focuses on finding out mistakes. It tries to catch err
 as minimal as possible.
 
 ```sh
+
 
 actionlint
 

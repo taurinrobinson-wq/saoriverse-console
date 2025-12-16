@@ -16,6 +16,7 @@ Extract linguistic elements:
 ```text
 ```
 
+
 User Input: "I'm feeling so stressed today"
 
 1. ACTOR: "I" → personal, visceral, felt 2. VERB: "feeling" → present participle (action happening
@@ -31,8 +32,10 @@ anxiety
 
 System identifies gaps in the message:
 ```text
+
 ```text
 ```
+
 
 User said "I'm feeling so stressed today" but didn't say:
 
@@ -52,6 +55,7 @@ User said "I'm feeling so stressed today" but didn't say:
 **Acknowledgment** → Glyph Validation → Clarifying Question
 
 ```text
+
 ```
 
 Acknowledgment:
@@ -70,11 +74,14 @@ Clarifying Question:
 
 
 
+
 ### 4. Generate Targeted Clarification
 
 Questions are specific to what's missing, not generic:
+
 ```text
 ```text
+
 ```
 
 Missing Element                  Clarifying Question
@@ -90,12 +97,14 @@ Agency/attempt                  "What have you tried?"
 
 
 
+
 ## Examples
 
 ### Example 1: Minimal Information
 
 ```text
 ```
+
 
 User: "I'm sad"
 
@@ -116,8 +125,10 @@ user's message) ✓ Asks specific question about missing context (what's the los
 
 ### Example 2: Present Tense + Emphasis + Temporal
 ```text
+
 ```text
 ```
+
 
 User: "I'm feeling so stressed today"
 
@@ -143,6 +154,7 @@ to validate (not generate) ✓ Asks about missing context
 ### Example 3: Continuous Past + No Specifics
 
 ```text
+
 ```
 
 User: "I've been feeling anxious lately"
@@ -167,9 +179,12 @@ Why this works:
 
 
 
+
 ### Example 4: Rich Context
+
 ```text
 ```text
+
 ```
 
 User: "I feel really overwhelmed with all the work and family responsibilities right now"
@@ -193,6 +208,7 @@ Why this works:
   ✓ Still asks clarifications (but about different missing elements)
 
 ```
+
 
 
 
@@ -256,6 +272,7 @@ Why this works:
 ```json
 ```
 
+
 {acknowledgment}. {glyph_validation}. {clarifying_question}
 
 ```
@@ -264,8 +281,10 @@ Why this works:
 
 Example breakdown:
 ```text
+
 ```text
 ```
+
 
 "You're feeling stress right now—and you're emphasizing how much this is present. What you're
 describing has a quality of quiet revelation. What's creating this pressure?"
@@ -304,9 +323,12 @@ Methods:
 Run tests to verify:
 
 ```bash
+
 python test_user_driven_responses.py           # Basic test python SEMANTIC_PARSING_WALKTHROUGH.py
+
 # Detailed walkthrough python test_semantic_parsing.py                # Multiple cases python
 test_full_e2e_user_driven.py           # Full pipeline
+
 ```
 
 All tests demonstrate:

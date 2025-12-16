@@ -26,6 +26,7 @@ trigger)
 ```text
 ```
 
+
 web: python core/start.py
 
 ```
@@ -34,8 +35,10 @@ web: python core/start.py
 
 **After:**
 ```text
+
 ```text
 ```
+
 
 web: streamlit run app.py
 
@@ -58,6 +61,7 @@ That's the only deployment file change needed.
 
 ```bash
 
+
 # Test that the new structure works locally
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console streamlit run app.py
 
@@ -65,16 +69,19 @@ cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console streamlit run app.py
 
 ```text
 ```text
+
 ```
 
 ### Step 2: Verify Procfile
 
 ```bash
 
+
 cat Procfile
 
 ```text
 ```
+
 
 ### Step 3: Commit & Push
 
@@ -87,8 +94,10 @@ git commit -m "deployment: Update Procfile for reorganized structure
 - Ready for Railway deployment"
 
 ```text
+
 ```text
 ```
+
 
 ### Step 4: Deploy to Railway
 
@@ -110,6 +119,7 @@ Wait for deployment to complete (~2-3 min)
 # If you have railway CLI installed
 
 ```text
+
 ```
 
 ### Step 5: Verify Deployment
@@ -156,11 +166,13 @@ If something goes wrong:
 
 ```bash
 
+
 # Revert to previous deployment
 git revert HEAD git push origin refactor/reorganization-master
 
 ```text
 ```text
+
 ```
 
 ##
@@ -224,6 +236,7 @@ The `.streamlit/config.toml` already has correct settings:
 ### Before Deployment (Local)
 
 ```bash
+
 
 streamlit run app.py
 

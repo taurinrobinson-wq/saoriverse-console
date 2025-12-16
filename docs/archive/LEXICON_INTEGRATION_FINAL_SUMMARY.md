@@ -353,6 +353,7 @@ Response Generation
 User
 ```
 
+
 ### Component Status
 
 - **Lexicon:** 484 words, 100% signal coverage ✓

@@ -12,8 +12,9 @@
 ```text
 ```
 
-README.md                      Project overview & getting started CONTRIBUTING.md
-Contribution guidelines
+
+README.md                      Project overview & getting started CONTRIBUTING.md Contribution
+guidelines
 
 ```
 
@@ -26,8 +27,10 @@ Contribution guidelines
 
 **Purpose**: All essential Python files that power the application
 ```text
+
 ```text
 ```
+
 
 core/
 ├── start.py                   Railway deployment entry point
@@ -56,6 +59,7 @@ core/
 ### guides/ - Design & Reference Documents
 
 ```text
+
 ```
 
 docs/guides/
@@ -74,12 +78,15 @@ docs/guides/
 
 
 
+
 **Total**: 10 comprehensive guides
 **Purpose**: Architecture, design, and project references
 
 ### reports/ - Analysis & Reports
+
 ```text
 ```text
+
 ```
 
 docs/reports/
@@ -102,6 +109,7 @@ docs/reports/
 
 
 
+
 **Total**: 13 analysis and test reports
 **Purpose**: Test results, analysis outputs, audit trails
 
@@ -109,6 +117,7 @@ docs/reports/
 
 ```text
 ```
+
 
 docs/archives/
 ├── FIRSTPERSON_PHASE_1_6_INTEGRATION.md
@@ -140,8 +149,10 @@ docs/archives/
 
 ### INDEX.md - Navigation Guide
 ```text
+
 ```text
 ```
+
 
 docs/INDEX.md                 ⭐ START HERE - Complete documentation index & navigation
 
@@ -159,6 +170,7 @@ docs/INDEX.md                 ⭐ START HERE - Complete documentation index & na
 ### glyphs/ - Glyph Generation & Validation
 
 ```text
+
 ```
 
 data/glyphs/
@@ -177,12 +189,15 @@ data/glyphs/
 
 
 
+
 **Total**: 10 glyph data files + 1 SQL file
 **Purpose**: Glyph generation, validation, and database
 
 ### lexicons/ - NLP Lexicon Data
+
 ```text
 ```text
+
 ```
 
 data/lexicons/
@@ -196,6 +211,7 @@ data/lexicons/
 
 
 
+
 **Total**: 4 lexicon files
 **Purpose**: NLP processing and antonym mapping
 
@@ -203,6 +219,7 @@ data/lexicons/
 
 ```text
 ```
+
 
 data/analysis/
 └── [Analysis output files go here]
@@ -215,8 +232,10 @@ data/analysis/
 
 ### exports/ - Export Files
 ```text
+
 ```text
 ```
+
 
 data/exports/
 └── [Export files go here]
@@ -232,6 +251,7 @@ data/exports/
 ## ⚙️ Configuration (config/)
 
 ```text
+
 ```
 
 config/
@@ -247,13 +267,16 @@ config/
 
 
 
+
 **Total**: 7 configuration files
 **Purpose**: Dependency management and environment setup
 ##
 
 ## 📜 Scripts (scripts/)
+
 ```text
 ```text
+
 ```
 
 scripts/
@@ -261,6 +284,7 @@ scripts/
 └── run_local.sh             Local development script
 
 ```
+
 
 
 
@@ -273,6 +297,7 @@ scripts/
 
 ```text
 ```
+
 
 logs/
 ├── debug_chat.log
@@ -291,8 +316,10 @@ logs/
 
 ## 🎨 Frontend (frontend/)
 ```text
+
 ```text
 ```
+
 
 frontend/
 └── test.js                   Frontend test file
@@ -311,6 +338,7 @@ frontend/
 ### emotional_os/utils/
 
 ```text
+
 ```
 
 emotional_os/utils/
@@ -322,11 +350,14 @@ emotional_os/utils/
 
 
 
+
 **Purpose**: Shared utility functions
 
 ### emotional_os/session/
+
 ```text
 ```text
+
 ```
 
 emotional_os/session/
@@ -337,12 +368,14 @@ emotional_os/session/
 
 
 
+
 **Purpose**: User session handling
 
 ### emotional_os/ui/
 
 ```text
 ```
+
 
 emotional_os/ui/
 ├── ui_refactored.py          Consolidated UI module (~200 lines)
@@ -358,8 +391,10 @@ emotional_os/ui/
 
 ### emotional_os/response/
 ```text
+
 ```text
 ```
+
 
 emotional_os/response/
 ├── response_handler.py
@@ -375,6 +410,7 @@ emotional_os/response/
 ### emotional_os/features/
 
 ```text
+
 ```
 
 emotional_os/features/
@@ -387,11 +423,14 @@ emotional_os/features/
 
 
 
+
 **Purpose**: Optional feature modules
 
 ### emotional_os/glyphs/
+
 ```text
 ```text
+
 ```
 
 emotional_os/glyphs/
@@ -405,12 +444,14 @@ emotional_os/glyphs/
 
 
 
+
 **Purpose**: Glyph system implementation
 
 ### emotional_os/parser/
 
 ```text
 ```
+
 
 emotional_os/parser/
 └── [NLP parsing modules]
@@ -423,8 +464,10 @@ emotional_os/parser/
 
 ### emotional_os/learning/
 ```text
+
 ```text
 ```
+
 
 emotional_os/learning/
 └── [Learning system modules]
@@ -439,6 +482,7 @@ emotional_os/learning/
 ### emotional_os/core/
 
 ```text
+
 ```
 
 emotional_os/core/
@@ -448,14 +492,17 @@ emotional_os/core/
 
 
 
+
 **Purpose**: Core application logic
 ##
 
 ## 🗜️ Organized Tools (tools/)
 
 ### tools/analysis/
+
 ```text
 ```text
+
 ```
 
 tools/analysis/
@@ -469,12 +516,14 @@ tools/analysis/
 
 
 
+
 **Purpose**: Analysis and reporting utilities
 
 ### tools/document_processing/
 
 ```text
 ```
+
 
 tools/document_processing/
 ├── docx_reader.py
@@ -490,8 +539,10 @@ tools/document_processing/
 
 ### tools/glyph_testing/
 ```text
+
 ```text
 ```
+
 
 tools/glyph_testing/
 ├── glyph_conversation_test_harness.py
@@ -511,6 +562,7 @@ tools/glyph_testing/
 ### archive/phase_infrastructure/
 
 ```text
+
 ```
 
 archive/phase_infrastructure/
@@ -527,12 +579,15 @@ archive/phase_infrastructure/
 
 
 
+
 **Purpose**: Historical phase infrastructure (preserved for reference)
 ##
 
 ## 🧪 Tests (tests/)
+
 ```text
 ```text
+
 ```
 
 tests/
@@ -544,6 +599,7 @@ tests/
 └── [Other test modules]
 
 ```
+
 
 
 

@@ -29,6 +29,7 @@ This is represented through:
 ```text
 ```
 
+
 Before Collapse:   marketplace_intact.png
                    - Open stalls, clear pathways
                    - Buildings stand, mostly whole
@@ -48,8 +49,10 @@ After Collapse:    marketplace_collapsed.png
 
 #### Map Overlay Integration
 ```sql
+
 ```sql
 ```
+
 
 Sidebar Map Update:
 
@@ -71,6 +74,7 @@ This is the FIRST TIME the map appears in gameplay.
 **Behavior**: Foreground image unchanged, NPCs remain motionless
 
 ```markdown
+
 **Visual**: Nima stands exactly as before, no flinch
 
 **Dialogue Response**:
@@ -80,6 +84,7 @@ This is the FIRST TIME the map appears in gameplay.
 
 ```text
 ```text
+
 ```
 
 **Variants (Choose Based on NPC Personality)**:
@@ -94,6 +99,7 @@ This is the FIRST TIME the map appears in gameplay.
 
 ```markdown
 
+
 **Visual**: Ravi's eyes widen, hand goes to chest
 
 **Dialogue Response**:
@@ -103,6 +109,7 @@ This is the FIRST TIME the map appears in gameplay.
 
 ```text
 ```
+
 
 **Variants**:
 
@@ -133,8 +140,10 @@ Option C: [Remain silent]
 - Glyph: [Aelitḧ] (stillness, witness)
 - Shows: Player is absorbing, not panicking
 ```text
+
 ```text
 ```
+
 
 ### NPC Closing Line (All Paths Converge)
 
@@ -150,6 +159,7 @@ The only constant here is change."
 - Paying attention matters
 
 ```text
+
 ```
 
 **Tone Variants**:
@@ -169,6 +179,7 @@ This collapse event is the **first time the player sees the map**. It's not just
 ### Map Visual Elements
 
 ```
+
 ┌─────────────────────────────────────┐
 │   MARKETPLACE SECTORS               │
 ├─────────────────────────────────────┤
@@ -179,13 +190,16 @@ This collapse event is the **first time the player sees the map**. It's not just
 └─────────────────────────────────────┘
 
 Legend: ● = Player position (glowing) ❌ = Collapsed/blocked area (red)
+
 ```text
 ```text
+
 ```
 
 ### Map Introduction Dialogue
 
 ```markdown
+
 
 **NPC Points to Map**:
 "She points to a worn cloth map, worn at the edges. A red mark appears where the collapse occurred.

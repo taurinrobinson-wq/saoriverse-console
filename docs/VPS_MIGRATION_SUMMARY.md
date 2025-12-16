@@ -38,8 +38,10 @@ git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml \
         DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
 ```text
+
 ```text
 ```
+
 
 See **`PUSH_TO_GITHUB.md`** for full commands.
 
@@ -69,6 +71,7 @@ https://velinor.firstperson.chat
 # Check API
 
 ```text
+
 ```
 
 ### Step 4 (Optional): Enable Auto-Deploy (10 minutes)
@@ -87,6 +90,7 @@ After this, every `git push origin main` auto-deploys to your VPS! 🚀
 ## 📊 Architecture Overview
 
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                     Your Local Machine                       │
 │                                                               │
@@ -153,6 +157,7 @@ After this, every `git push origin main` auto-deploys to your VPS! 🚀
 │       https://velinor.firstperson.chat                      │
 │  (Namecheap DNS → DigitalOcean IP → Nginx → Services)      │
 └─────────────────────────────────────────────────────────────┘
+
 ```
 
 ##

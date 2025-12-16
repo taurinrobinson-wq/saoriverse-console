@@ -55,6 +55,7 @@ response flow.** 🎯 **Easy to fix. High payoff.**
 ```text
 ```
 
+
 User Input ↓ [signal_parser] ✅ ACTIVE ↓ [parse_input + glyph lookup] ✅ WORKS ↓ [response_composer] ✅
 WORKS ↓ Response to User
 
@@ -96,8 +97,10 @@ MISSING:
 
 **Before:**
 ```text
+
 ```text
 ```
+
 
 User: "I'm stressed" System: "Tell me about the stress."
 
@@ -111,6 +114,7 @@ User: "My work is overwhelming" System: "Tell me about work." ← REPEATED PATTE
 **After:**
 
 ```text
+
 ```
 
 User: "I'm stressed"
@@ -120,6 +124,7 @@ User: "My work is overwhelming"
 System: "Work has flooded your mind with competing demands..." ← CONTEXT AWARE
 
 ```
+
 
 
 
@@ -134,8 +139,10 @@ System: "Work has flooded your mind with competing demands..." ← CONTEXT AWARE
 ### TIER 2: Presence Layer (2-3 hours)
 
 **Before:**
+
 ```text
 ```text
+
 ```
 
 System always responds with same tone/energy
@@ -148,10 +155,12 @@ System never seems "tired" or "engaged"
 
 
 
+
 **After:**
 
 ```text
 ```
+
 
 System adapts to user's pacing (fast/slow/paused) Responses vary in energy (crisp when engaged,
 sparse when tired) System feels alive and responsive Different emotional modes come through
@@ -172,8 +181,10 @@ sparse when tired) System feels alive and responsive Different emotional modes c
 
 **Before:**
 ```text
+
 ```text
 ```
+
 
 Single consistent voice Literal acknowledgment Predictable response patterns
 
@@ -185,6 +196,7 @@ Single consistent voice Literal acknowledgment Predictable response patterns
 **After:**
 
 ```text
+
 ```
 
 Multiple archetypal voices (Witness, Trickster, Oracle)
@@ -193,6 +205,7 @@ Surprise and productive tension
 Feels genuinely creative
 
 ```
+
 
 
 
@@ -293,8 +306,10 @@ When integration is working:
 ##
 
 ## Estimated Timeline
+
 ```text
 ```text
+
 ```
 
 NOW
@@ -320,6 +335,7 @@ NOW
    └─ Deployment + monitoring
 
 ```
+
 
 
 

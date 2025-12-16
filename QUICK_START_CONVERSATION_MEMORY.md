@@ -13,6 +13,7 @@
 ```text
 ```
 
+
 User: "I'm stressed about work" System: "Tell me more about work." User: "I have 5 projects due
 Thursday" System: "Tell me more about your projects." ← REPEATED!
 
@@ -22,8 +23,10 @@ Thursday" System: "Tell me more about your projects." ← REPEATED!
 
 **After:**
 ```text
+
 ```text
 ```
+
 
 User: "I'm stressed about work" System: "I hear the weight of that stress." User: "I have 5 projects
 due Thursday" System: "So 5 competing priorities with one hard deadline... Which of these is most
@@ -46,13 +49,16 @@ urgent?" ← SPECIFIC, NO REPEAT
 **Add this code after the existing session state initializations:**
 
 ```python
+
     # Initialize conversation memory for multi-turn context
 if "conversation_memory" not in st.session_state: try: from emotional_os_glyphs.conversation_memory
 import ConversationMemory st.session_state.conversation_memory = ConversationMemory() logger.info("✅
 ConversationMemory initialized") except ImportError as e: logger.warning(f"⚠️  ConversationMemory
 import failed: {e}")
+
 ```text
 ```text
+
 ```
 
 ##
@@ -66,6 +72,7 @@ import failed: {e}")
 **Replace the beginning of the function with:**
 
 ```python
+
 
 def _build_conversational_response(user_input: str, local_analysis: dict) -> str: """Build response
 using conversation memory for context awareness."""
@@ -102,6 +109,7 @@ Glyph:" in response: response = response.split("Resonant Glyph:")[0].strip() ret
 
 ```text
 ```
+
 
 ##
 
@@ -219,8 +227,10 @@ def test_memory_integration():
 if __name__ == "__main__":
     success = test_memory_integration()
 ```text
+
 ```text
 ```
+
 
 **Run the test:**
 
@@ -229,6 +239,7 @@ if __name__ == "__main__":
 cd d:\saoriverse-console
 
 ```text
+
 ```
 
 **Expected output:**
@@ -262,6 +273,7 @@ Passed: 3/3
 🎉 INTEGRATION SUCCESSFUL!
 
 ```
+
 ##
 
 ### Step 4: Test in Live UI (5 min)
@@ -363,6 +375,7 @@ embodiment)
 Test-Path src/emotional_os_glyphs/conversation_memory.py
 
 ```text
+
 ```
 
 ### Issue: "compose_response_with_memory() not found"
@@ -372,9 +385,12 @@ Test-Path src/emotional_os_glyphs/conversation_memory.py
 ```powershell
 
 
+
 taskkill /F /IM streamlit.exe streamlit run app.py
+
 ```text
 ```text
+
 ```
 
 ### Issue: "Memory confidence stays at 0.7"
@@ -395,12 +411,14 @@ Just in case you want a quick revert:
 
 
 
+
 # Backup the files you're modifying
 Copy-Item "src/emotional_os/deploy/modules/ui_refactored.py" "ui_refactored.py.backup" Copy-Item
 "src/emotional_os/deploy/modules/ui_components/response_handler.py" "response_handler.py.backup"
 
 ```text
 ```
+
 
 Then if anything goes wrong:
 
@@ -411,6 +429,7 @@ Copy-Item "ui_refactored.py.backup" "src/emotional_os/deploy/modules/ui_refactor
 Copy-Item "response_handler.py.backup" "src/emotional_os/deploy/modules/ui_components/response_handler.py"
 
 ```
+
 
 ##
 

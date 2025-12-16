@@ -34,6 +34,7 @@ their entire network.
 ```text
 ```
 
+
 Ravi (0.8) ← → Nima /  \              /  \ (0.4)/    \(0.2)    (0.5)/   \(0.3) /        \          /
 \ Merchants    Shrine Keepers    Merchants (0.4 ripple)   (0.5 ripple)     (0.3 ripple)
               |              |                |

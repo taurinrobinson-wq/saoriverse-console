@@ -84,4 +84,5 @@ Activate it and install: `pip install -r requirements.txt` 4. Run: `streamlit ru
 streamlit run app.py
 ```
 
+
 The app will be available at: <http://localhost:8502>

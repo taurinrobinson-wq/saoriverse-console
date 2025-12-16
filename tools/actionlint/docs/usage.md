@@ -8,21 +8,26 @@ With no argument, actionlint finds all workflow files in the current repository 
 
 ```sh
 ```text
+
 ```text
 ```
+
 
 When paths to YAML workflow files are given as arguments, actionlint checks them.
 
 ```sh
 
 ```sql
+
 ```
 
 When `-` argument is given, actionlint reads inputs from stdin and checks it as workflow source.
 
 ```sh
+
 ```text
 ```text
+
 ```
 
 To know all flags and options, see an output of `actionlint -h` or [the online command manual][cmd-manual].
@@ -34,8 +39,10 @@ The regular expression syntax is the same as [RE2][re2].
 
 ```sh
 
+
 ```text
 ```
+
 
 `-shellcheck` and `-pyflakes` specifies file paths of executables. Setting empty string to them disables `shellcheck` and
 `pyflakes` rules. As a bonus, disabling them makes actionlint much faster Since these external linter integrations spawn many
@@ -43,8 +50,10 @@ processes.
 
 ```sh
 ```text
+
 ```text
 ```
+
 
 <a name="format"></a>
 
@@ -59,21 +68,26 @@ Before explaining the formatting details, let's see some examples.
 ```sh
 
 ```text
+
 ```
 
 Output:
 
 ```
+
 ```text
 ```text
+
 ```
 
 #### Example: Markdown
 
 ````sh
 
+
 ````text
 ````
+
 
 Output:
 
@@ -83,19 +97,23 @@ Output:
 
 property "platform" is not defined in object type {os: string}
 ```text
+
 ```text
 ```
+
 
 
 key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }} ^~~~~~~~~~~~~~~
 
 ````text
 ````text
+
 ````
 
 #### Example: Serialized in [JSON Lines][jsonl]
 
 ```sh
+
 
 actionlint -format '{{range $err := .}}{{json $err}}{{end}}'
 
@@ -105,6 +123,7 @@ Output:
 
 ```
 
+
 {"message":"unexpected key \"branch\" for ... {"message":"character '\\' is invalid for branch ...
 {"message":"label \"linux-latest\" is unknown. ...
 
@@ -113,6 +132,7 @@ Output:
 #### Example: [Error annotation][ga-annotate-error] on GitHub Actions
 
 ````sh
+
 
 actionlint -format '{{range $err := .}}::error
 file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace
@@ -147,6 +167,7 @@ objects.
 The sequence can be traversed with `range` action, which is like `for ... = range ... {}` in Go.
 
 ```
+
 
 {{range $err := .}} this part iterates error objects with the iteration variable $err {{end}}
 
@@ -187,6 +208,7 @@ For example, the following simple iteration body
 
 ```
 
+
 line is {{$err.Line}}, col is {{$err.Column}}, message is {{$err.Message | printf "%q"}}
 
 ```
@@ -194,6 +216,7 @@ line is {{$err.Line}}, col is {{$err.Column}}, message is {{$err.Message | print
 will produce output like below.
 
 ```
+
 
 line is 21, col is 20, message is "property \"platform\" is not defined in object type {os: string}"
 
@@ -228,6 +251,7 @@ shell for Windows runners is `pwsh`.
 
 ```yaml
 
+
 name: Lint GitHub Actions workflows on: [push, pull_request]
 
 jobs: actionlint: runs-on: ubuntu-latest steps:
@@ -244,6 +268,7 @@ run: ${{ steps.get_actionlint.outputs.executable }} -color shell: bash
 Or simply download the executable and run it in one step:
 
 ```yaml
+
 
 - name: Check workflow files
   run: |
@@ -265,6 +290,7 @@ If you want to [annotate errors][ga-annotate-error] from actionlint on GitHub, c
 If you prefer Docker image to running a downloaded executable, using [actionlint Docker image](#docker) is another option.
 
 ```yaml
+
 
 name: Lint GitHub Actions workflows on: [push, pull_request]
 
@@ -301,6 +327,7 @@ Just run the image with `docker run`:
 
 ```sh
 
+
 docker run --rm rhysd/actionlint:latest -version
 
 ```
@@ -310,6 +337,7 @@ directory. When you are at a root directory of your repository:
 
 ```sh
 
+
 docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
 
 ```
@@ -318,6 +346,7 @@ To check a file with actionlint in a Docker container, pass the file content via
 
 ```sh
 
+
 cat /path/to/workflow.yml | docker run --rm -i rhysd/actionlint:latest -color -
 
 ```
@@ -325,6 +354,7 @@ cat /path/to/workflow.yml | docker run --rm -i rhysd/actionlint:latest -color -
 Or mount the workflows directory and pass the paths as arguments:
 
 ```sh
+
 
 docker run --rm -v /path/to/workflows:/workflows rhysd/actionlint:latest -color /workflows/ci.yml
 
@@ -347,6 +377,7 @@ The usage is easy. Run `reviewdog/action-actionlint` action in your workflow as 
 
 ```yaml
 
+
 name: reviewdog on: [pull_request] jobs: actionlint: runs-on: ubuntu-latest steps:
       - uses: actions/checkout@v3
       - uses: reviewdog/action-actionlint@v1
@@ -364,6 +395,7 @@ Copy [actionlint-matcher.json][actionlint-matcher] to `.github/actionlint-matche
 Then enable the matcher using `add-matcher` command before running `actionlint` in the step of your workflow.
 
 ```yaml
+
 
 - name: Check workflow files
   run: |
@@ -404,6 +436,7 @@ repos:
 ```
 
 
+
 As alternatives to `actionlint` hook, `actionlint-docker` or `actionlint-system` hooks are
 available.
 
@@ -439,6 +472,7 @@ trunk check enable actionlint
 
 ```
 
+
 or if you'd like a specific version:
 
 ```bash
@@ -447,6 +481,7 @@ or if you'd like a specific version:
 trunk check enable actionlint@1.6.23
 
 ```
+
 
 or modify `.trunk/trunk.yaml` in your repo to contain:
 
@@ -459,6 +494,7 @@ lint:
 
 ```
 
+
 Then just run:
 
 ```bash
@@ -467,6 +503,7 @@ Then just run:
 trunk check
 
 ```
+
 
 and it will check your modified files via actionlint, if applicable, and show you the results. Trunk
 also will detect preexisting issues and highlight only the newly added actionlint issues. For more
@@ -480,9 +517,10 @@ extension][trunk-vscode].
 [Checks](checks.md) | [Installation](install.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)
 
 [reviewdog-actionlint]: <https://github.com/reviewdog/action-actionlint> [reviewdog]:
-<https://github.com/reviewdog/reviewdog> [cmd-manual]: <https://rhysd.github.io/actionlint/usage.html>
-[re2]: <https://golang.org/s/re2syntax> [go-template]: <https://pkg.go.dev/text/template> [jsonl]:
-<https://jsonlines.org/> [ga-annotate-error]:
+<https://github.com/reviewdog/reviewdog> [cmd-manual]:
+<https://rhysd.github.io/actionlint/usage.html> [re2]: <https://golang.org/s/re2syntax>
+[go-template]: <https://pkg.go.dev/text/template> [jsonl]: <https://jsonlines.org/>
+[ga-annotate-error]:
 <https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-error-message>
 [sarif]: <https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html> [problem-matchers]:
 <https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md> [super-linter]:
@@ -492,9 +530,10 @@ extension][trunk-vscode].
 [preinstall-ubuntu]:
 <https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md>
 [pre-commit]: <https://pre-commit.com> [go-install]: <https://go.dev/doc/install> [docker]:
-<https://www.docker.com/> [docker-image]: <https://hub.docker.com/r/rhysd/actionlint> [vsc-extension]:
-<https://marketplace.visualstudio.com/items?itemName=arahata.linter-actionlint> [vscode]:
-<https://code.visualstudio.com/> [nova-extension]:
-<https://extensions.panic.com/extensions/org.netwrk/org.netwrk.actionlint/> [nova]: <https://nova.app>
-[trunk-io]: <https://docs.trunk.io/docs> [trunk-docs]: <https://docs.trunk.io/docs/check>
-[trunk-vscode]: <https://marketplace.visualstudio.com/items?itemName=trunk.io>
+<https://www.docker.com/> [docker-image]: <https://hub.docker.com/r/rhysd/actionlint>
+[vsc-extension]: <https://marketplace.visualstudio.com/items?itemName=arahata.linter-actionlint>
+[vscode]: <https://code.visualstudio.com/> [nova-extension]:
+<https://extensions.panic.com/extensions/org.netwrk/org.netwrk.actionlint/> [nova]:
+<https://nova.app> [trunk-io]: <https://docs.trunk.io/docs> [trunk-docs]:
+<https://docs.trunk.io/docs/check> [trunk-vscode]:
+<https://marketplace.visualstudio.com/items?itemName=trunk.io>

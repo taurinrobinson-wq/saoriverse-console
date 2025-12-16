@@ -2,16 +2,16 @@
 
 ## 🎯 What Was Built
 
-A **procedural dialogue system** that generates NPC dialogue and player choices based on the REMNANTS personality engine. Instead of hand-scripting thousands of dialogue branches, each NPC has:
+A **procedural dialogue system** that generates NPC dialogue and player choices based on the
+REMNANTS personality engine. Instead of hand-scripting thousands of dialogue branches, each NPC has:
 
-1. **Lexicon Pool** — Vocabulary tied to their traits (nature words for Sera, code-switching for Drossel)
-2. **Temperament Decorator** — Stylistic wrapper giving unique voice ("like herbs, it blooms softly" for Sera)
-3. **Trait-Driven Variation** — High/low trait values pull from different word pools
-4. **Context Sensitivity** — Same NPC speaks differently in greeting vs. conflict scenes
+1. **Lexicon Pool** — Vocabulary tied to their traits (nature words for Sera, code-switching for
+Drossel) 2. **Temperament Decorator** — Stylistic wrapper giving unique voice ("like herbs, it
+blooms softly" for Sera) 3. **Trait-Driven Variation** — High/low trait values pull from different
+word pools 4. **Context Sensitivity** — Same NPC speaks differently in greeting vs. conflict scenes
 
 **Result:** Every playthrough feels authored, but no two runs are identical.
-
----
+## 
 
 ## 📁 New Files Created
 
@@ -38,8 +38,7 @@ A **procedural dialogue system** that generates NPC dialogue and player choices 
 ### Documentation
 - **`DIALOGUE_GENERATION_GUIDE.md`** — Complete architecture & design guide
 - **`DIALOGUE_SYSTEM_QUICK_START.md`** — Integration patterns & usage examples
-
----
+## 
 
 ## 🧩 Core Architecture
 
@@ -55,6 +54,7 @@ Each NPC has trait-mapped vocabulary:
     "need_low": ["close", "withdraw", "retreat", "hesitate"],
 }
 ```
+
 
 **Mapping Rule:**
 - If trait value > 0.7 → use `_high` pool (confident language)
@@ -72,6 +72,7 @@ temperaments = {
 }
 ```
 
+
 **Result:**
 - Base: `"My empathy feels bloom"`
 - Sera: `"My empathy feels bloom.... like herbs, it blooms so softly."`
@@ -84,23 +85,24 @@ temperaments = {
 def generate_dialogue(npc_name, remnants, context):
     # 1. Find dominant trait (highest REMNANTS value)
     dominant_trait, value = max(remnants.items(), key=lambda x: x[1])
-    
+
     # 2. Choose lexicon pool (high/low threshold = 0.7)
     pool = lexicons[npc_name][f"{dominant_trait}_{'high' if value > 0.7 else 'low'}"]
-    
+
     # 3. Pick random word from pool
     word = random.choice(pool)
-    
+
     # 4. Build context-specific template
     templates = {
         "greeting": f"I see {word} in you.",
         "conflict": f"I feel {word} between us now.",
         "resolution": f"Maybe we've found {word} in each other."
     }
-    
+
     # 5. Apply temperament decorator
     return temperaments[npc_name](templates[context])
 ```
+
 
 ### 4. Choice Generation
 
@@ -110,11 +112,11 @@ Player menu adapts to NPC's dominant traits:
 def generate_choices(npc_name, remnants, num_choices=3):
     # Sort traits by value (highest first)
     traits_sorted = sorted(remnants.items(), key=lambda x: x[1], reverse=True)
-    
+
     choices = []
     for trait, value in traits_sorted[:num_choices]:
         pool = CHOICE_POOLS[trait]
-        
+
         # Confidence-based phrasing
         if value > 0.7:
             text = random.choice(pool)  # "Show compassion."
@@ -122,76 +124,84 @@ def generate_choices(npc_name, remnants, num_choices=3):
             text = f"Perhaps {random.choice(pool).lower()}"  # "Perhaps show compassion."
         else:
             text = f"Consider: {random.choice(pool).lower()}"  # "Consider: show compassion."
-        
+
         choices.append({"trait": trait, "value": value, "text": text})
-    
+
     return choices
 ```
 
----
+## 
 
 ## 🎮 Example Outputs
 
 ### Sera (High Empathy, High Need)
 
 **Dialogue:**
+
 ```
 I see sprout in you.... like herbs, it blooms so softly.
 ```
 
+
 **Choices:**
+
 ```
 1. [EMPATHY] [########--] Listen deeply.
 2. [NEED] [########--] Ask for help.
 3. [NUANCE] [######----] Perhaps find middle ground.
 ```
 
+
 ### Drossel (High Skepticism, Low Trust)
 
 **Dialogue:**
+
 ```
 I see shadow in you., mon cher — but shadows linger.
 ```
 
+
 **Choices:**
+
 ```
 1. [SKEPTICISM] [#########-] Doubt openly.
 2. [RESOLVE] [########--] Hold your ground.
 3. [MEMORY] [########--] Remind them of the past.
 ```
 
+
 ### Kaelen Redemption Arc
 
 **Initial (Low Empathy, Low Trust):**
+
 ```
 I see a path in you.... said with a sly, calculating grin.
 [SKEPTICISM] Question their motives.
 ```
 
+
 **After Growth (High Empathy, High Trust):**
+
 ```
 I see redeem in you.... said with genuine remorse.
 [EMPATHY] Listen deeply.
 ```
 
----
+## 
 
 ## 📊 Test Suite Results
 
 **8 Comprehensive Tests:**
 
-1. ✅ **Dialogue Variety** — Same NPC, different traits = different lexicon
-2. ✅ **Full Encounters** — Intro + dialogue + choices formatted correctly
-3. ✅ **Scene Generation** — All 9 NPCs generate simultaneously
-4. ✅ **Playstyle Evolution** — Aggressive vs. Empathetic playstyles produce distinct dialogue
-5. ✅ **Choice Reflection** — Player options adapt to NPC personality
-6. ✅ **Encounter Sequence** — Multi-turn dialogue shows progression
-7. ✅ **Lexicon Consistency** — Each NPC maintains recognizable voice
-8. ✅ **Context Variations** — Same NPC, different contexts = different templates
+1. ✅ **Dialogue Variety** — Same NPC, different traits = different lexicon 2. ✅ **Full Encounters**
+— Intro + dialogue + choices formatted correctly 3. ✅ **Scene Generation** — All 9 NPCs generate
+simultaneously 4. ✅ **Playstyle Evolution** — Aggressive vs. Empathetic playstyles produce distinct
+dialogue 5. ✅ **Choice Reflection** — Player options adapt to NPC personality 6. ✅ **Encounter
+Sequence** — Multi-turn dialogue shows progression 7. ✅ **Lexicon Consistency** — Each NPC maintains
+recognizable voice 8. ✅ **Context Variations** — Same NPC, different contexts = different templates
 
 **All tests passing.**
-
----
+## 
 
 ## 🔗 Integration Points
 
@@ -212,6 +222,7 @@ manager.apply_tone_effects({"empathy": 0.15})
 new_dialogue = generate_dialogue("Sera", sera.remnants, context="alliance")
 ```
 
+
 ### Game Loop Hook
 
 ```python
@@ -220,13 +231,13 @@ class GameEngine:
         encounter = generate_encounter(npc_name, manager.get_npc(npc_name).remnants, 1)
         print_encounter(encounter)
         return encounter
-    
+
     def player_chooses(self, choice_trait):
         manager.apply_tone_effects({choice_trait: 0.15})
         # Next encounter will have updated dialogue
 ```
 
----
+## 
 
 ## 💡 Design Principles
 
@@ -249,12 +260,12 @@ class GameEngine:
 - Dialogue always reflects current REMNANTS state
 - Changes immediately when traits adjust
 - No desynchronization between personality & speech
-
----
+## 
 
 ## 🚀 Usage Examples
 
 ### Simple: Generate Dialogue
+
 ```python
 from velinor.engine.npc_dialogue import generate_dialogue
 
@@ -262,7 +273,9 @@ dialogue = generate_dialogue("Sera", {"empathy": 0.8, "need": 0.7, ...})
 print(dialogue)
 ```
 
+
 ### Medium: Full Encounter
+
 ```python
 from velinor.engine.npc_encounter import generate_encounter, print_encounter
 
@@ -270,7 +283,9 @@ encounter = generate_encounter("Sera", npc.remnants, 1, context="greeting")
 print_encounter(encounter, full_details=True)
 ```
 
+
 ### Advanced: Dialogue Sequence
+
 ```python
 for i, tone_effect in enumerate(player_choices):
     manager.apply_tone_effects(tone_effect)
@@ -279,7 +294,7 @@ for i, tone_effect in enumerate(player_choices):
     print_encounter(encounter)
 ```
 
----
+## 
 
 ## 📋 All 9 NPCs — Lexicon Overview
 
@@ -294,29 +309,33 @@ for i, tone_effect in enumerate(player_choices):
 | **Mariel** | Memory | Remember/Forget | Woven history |
 | **Korrin** | Nuance | Whisper/Plain | Alley gossip |
 | **Drossel** | Trust | Deals/Shadows | Code-switched charm |
-
----
+## 
 
 ## 🔧 Customization
 
 ### Add New Trait Entry
+
 ```python
 LEXICONS["Sera"]["authority_high"] = ["guide", "lead", "inspire"]
 ```
 
+
 ### Modify Temperament
+
 ```python
 temperaments["Sera"] = lambda text: f"Sera whispers: {text}"
 ```
 
+
 ### Add Context
+
 ```python
 ENCOUNTER_CONTEXTS["mystery"] = {
     "templates": ["There's {npc}, emerging from shadows."]
 }
 ```
 
----
+## 
 
 ## 📈 Performance
 
@@ -326,32 +345,27 @@ ENCOUNTER_CONTEXTS["mystery"] = {
 - **Scaling:** O(1) per NPC regardless of lexicon size
 
 **No bottleneck for real-time game use.**
-
----
+## 
 
 ## 🎯 Next Steps
 
 ### Immediate
-1. ✅ Integrate into game engine loop
-2. ✅ Connect to TTS (text-to-speech)
-3. ✅ Build story beats using encounters
+1. ✅ Integrate into game engine loop 2. ✅ Connect to TTS (text-to-speech) 3. ✅ Build story beats
+using encounters
 
 ### Short-term
-1. Add dialogue persistence (save/load NPC state)
-2. Implement ripple-based dialogue (NPCs reference each other)
-3. Add memory-driven dialogue (Mariel recalls past events)
+1. Add dialogue persistence (save/load NPC state) 2. Implement ripple-based dialogue (NPCs reference
+each other) 3. Add memory-driven dialogue (Mariel recalls past events)
 
 ### Medium-term
-1. TTS prosody mapping (Trait → speech rate/pitch)
-2. Dynamic lexicon learning (NPCs learn words from player)
-3. Trait contradiction dialogue ("I doubt... but maybe")
+1. TTS prosody mapping (Trait → speech rate/pitch) 2. Dynamic lexicon learning (NPCs learn words
+from player) 3. Trait contradiction dialogue ("I doubt... but maybe")
 
 ### Long-term
-1. Multi-NPC conversation (dialogue between NPCs, not just player)
-2. NPC reputation system (dialogue changes based on actions)
-3. Tool-based dialogue unlocks (certain tools enable new conversations)
-
----
+1. Multi-NPC conversation (dialogue between NPCs, not just player) 2. NPC reputation system
+(dialogue changes based on actions) 3. Tool-based dialogue unlocks (certain tools enable new
+conversations)
+## 
 
 ## 📚 Documentation
 
@@ -361,21 +375,18 @@ ENCOUNTER_CONTEXTS["mystery"] = {
 - Test suite with 8 demonstrations
 
 All code fully documented with docstrings and inline comments.
-
----
+## 
 
 ## ✨ Why This Works
 
-✅ **Replayability** — Every trait change generates new dialogue  
-✅ **Personality Fidelity** — Each NPC sounds like themselves  
-✅ **Emergent Narrative** — Traits drive story, not branch trees  
-✅ **Scalable** — Add NPCs by adding 5-line lexicon  
-✅ **TTS Ready** — Pure text output, easy for speech synthesis  
-✅ **Testable** — Deterministic given same traits + seed  
+✅ **Replayability** — Every trait change generates new dialogue ✅ **Personality Fidelity** — Each
+NPC sounds like themselves ✅ **Emergent Narrative** — Traits drive story, not branch trees ✅
+**Scalable** — Add NPCs by adding 5-line lexicon ✅ **TTS Ready** — Pure text output, easy for speech
+synthesis ✅ **Testable** — Deterministic given same traits + seed
 
-The system transforms REMNANTS trait vectors into **authored-feeling dialogue** that evolves with the game state.
-
----
+The system transforms REMNANTS trait vectors into **authored-feeling dialogue** that evolves with
+the game state.
+## 
 
 ## 📦 Files Summary
 
@@ -388,16 +399,11 @@ The system transforms REMNANTS trait vectors into **authored-feeling dialogue** 
 | `DIALOGUE_SYSTEM_QUICK_START.md` | 350+ | Integration examples |
 
 **Total: 1815 lines of production code + 800 lines of documentation**
-
----
+## 
 
 ## 🎬 Ready for Production
 
-✅ All 9 NPCs have complete lexicons  
-✅ Test suite passes  
-✅ Integration examples provided  
-✅ Documentation complete  
-✅ PowerShell compatible (fixed unicode)  
-✅ Zero performance concerns  
+✅ All 9 NPCs have complete lexicons ✅ Test suite passes ✅ Integration examples provided ✅
+Documentation complete ✅ PowerShell compatible (fixed unicode) ✅ Zero performance concerns
 
 **The dialogue system is production-ready for story engine integration.**

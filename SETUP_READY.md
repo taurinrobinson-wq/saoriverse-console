@@ -15,8 +15,10 @@ dependencies installed and verified.
 py -3.12 -m streamlit run app.py
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -65,6 +67,7 @@ py -3.12 -m pip install package-name
 # Update specific package
 
 ```text
+
 ```
 
 ##
@@ -82,6 +85,7 @@ New comprehensive guides created:
 ## Architecture Highlights
 
 ```
+
 Audio Pipeline: faster-whisper (STT) → sounddevice (I/O) → pyttsx3 (TTS) ↓ librosa + scipy
 (processing)
 
@@ -90,8 +94,10 @@ NLP Pipeline: textblob (sentiment) + spacy (parsing, NER, POS) ↓ NLTK (tokeniz
 Data Processing: pandas + numpy → matplotlib (visualization)
 
 Document Processing:
+
 ```text
 ```text
+
 ```
 
 ##
@@ -140,6 +146,7 @@ All systems verified working:
 ## File Structure
 
 ```
+
 
 d:\saoriverse-console\
 ├── requirements.txt                    ← All dependencies (70+)

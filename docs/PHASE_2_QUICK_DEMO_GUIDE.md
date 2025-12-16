@@ -6,8 +6,10 @@
 cd firstperson-web
 npm install --legacy-peer-deps
 ```text
+
 ```text
 ```
+
 
 Then visit `http://localhost:3000`
 
@@ -22,6 +24,7 @@ Time: 0-3 seconds
 Show: Animated beautiful homepage
 
 ```text
+
 ```
 
 **Visual Elements**:
@@ -36,9 +39,12 @@ Show: Animated beautiful homepage
 ### 2. Chat Interface
 
 ```
+
 URL: http://localhost:3000/chat Time: Interactive experience
+
 ```text
 ```text
+
 ```
 
 **Try These Actions**:
@@ -84,10 +90,12 @@ URL: http://localhost:3000/chat Time: Interactive experience
 
 ```
 
+
 URL: http://localhost:3000/settings Time: Configuration interface
 
 ```text
 ```
+
 
 **Try These Controls**:
 
@@ -197,8 +205,10 @@ computed styles change
    → Button scales (0.95x) briefly
    → Message bubble appears
 ```text
+
 ```text
 ```
+
 
 ### Recording Process
 
@@ -223,19 +233,23 @@ computed styles change
    → Your message bubble appears
 
 ```text
+
 ```
 
 ### Excitement Detection
 
 ```
+
 1. Get response with keyword like "amazing" 2. Response appears in chat 3. Check for celebration 🎉
 4. Watch for:
    - Confetti emojis
    - Floating hearts
    - Pulsing rings
    - "That's Amazing!" text
+
 ```text
 ```text
+
 ```
 
 ## Settings Customization
@@ -272,18 +286,22 @@ computed styles change
 
 ```
 
+
 User: "Tell me something amazing!"
 
 ```text
 ```
+
 
 ### Scenario 2: Curious Question
 
 ```
 User: "How does AI work?"
 ```text
+
 ```text
 ```
+
 
 ### Scenario 3: Excited Reaction
 
@@ -292,14 +310,18 @@ User: "How does AI work?"
 User: "That's fantastic!"
 
 ```text
+
 ```
 
 ### Scenario 4: Voice Testing
 
 ```
+
 1. Use microphone to record 2. Check transcription accuracy 3. Verify emotion detection
+
 ```text
 ```text
+
 ```
 
 ## Performance Checklist
@@ -319,6 +341,7 @@ User: "That's fantastic!"
 
 ```
 
+
 ┌─────────────┐
 │   HOME      │
 │  Beautiful  │
@@ -337,6 +360,7 @@ v        v ┌──────────────  ┌──────�
 
 ```text
 ```
+
 
 ### Component Relationships
 
@@ -384,8 +408,10 @@ App Root
         ├── Pitch
         ├── Rate
 ```text
+
 ```text
 ```
+
 
 ## Fun Things to Try
 
@@ -458,6 +484,7 @@ Watch the beautiful animations as I interact:
 6. Customizable settings for voice and behavior"
 
 ```
+
 
 ## Next Steps
 

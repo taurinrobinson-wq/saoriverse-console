@@ -30,6 +30,7 @@ create personalized responses.
 ```text
 ```
 
+
 "I hear you. What's the feeling underneath all that?"
 
 ```
@@ -38,8 +39,10 @@ create personalized responses.
 
 **After**: Personalized response unique to selected glyph
 ```text
+
 ```text
 ```
+
 
 "That's a real thing you're carrying. Even in what feels active or chaotic, there's often a still
 place underneath. Quiet revelation. Truth that arrives without noise. What's the next small step for

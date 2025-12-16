@@ -60,6 +60,7 @@
 ```text
 ```
 
+
 Pipeline Stages: Stage 1 (Memory):           0-3ms ✅ Stage 2 (Safety):           3-8ms ✅ Stage 3
 (Signals):          8-13ms ✅ Stage 4 (Generation):       13-13ms ✅ (skipped) Stage 5 (Learning):
 13-25ms ✅ Stage 6 (Wrapping):         25-35ms ✅ Stage 7 (Final Memory):     35-38ms ✅
@@ -72,8 +73,10 @@ TOTAL: <40ms (62% under budget)
 
 ### Test Results
 ```text
+
 ```text
 ```
+
 
 tests/test_tier1_foundation.py::TestTier1Foundation::test_initialization PASSED
 tests/test_tier1_foundation.py::TestTier1Foundation::test_process_response_basic PASSED
@@ -103,6 +106,7 @@ tests/test_tier1_foundation.py::TestTier1ComponentIntegration::test_sanctuary_av
 
 ```python
 
+
 # 1. Add import at top
 from src.emotional_os.tier1_foundation import Tier1Foundation
 
@@ -115,6 +119,7 @@ base_response=generated_response, context={"user_id": user_id, "turn_count": tur
 
 ```sql
 ```sql
+
 ```
 
 ### Task 2: Update ui_refactored.py session (20 min)
@@ -126,6 +131,7 @@ base_response=generated_response, context={"user_id": user_id, "turn_count": tur
 ```python
 
 
+
 # In session initialization:
 if "tier1_foundation" not in st.session_state: tier1 = Tier1Foundation(
 conversation_memory=st.session_state.get("conversation_memory") ) st.session_state.tier1_foundation
@@ -135,6 +141,7 @@ conversation_memory=st.session_state.get("conversation_memory") ) st.session_sta
 
 ```text
 ```
+
 
 ### Task 3: Local testing (30 min)
 
@@ -297,6 +304,7 @@ TIER 4 (Memory, Optional)  : 95ms  [█████████████░�
 
 BUFFER: 5-10ms for spikes and edge cases
 ```
+
 
 ##
 

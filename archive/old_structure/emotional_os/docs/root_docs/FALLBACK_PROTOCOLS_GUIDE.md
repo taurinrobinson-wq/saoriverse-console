@@ -34,6 +34,7 @@ is_misfire, reason = analyzer.detect_misfire(
 # Returns: (True, "Sarcasm detected around 'stay'...")
 ```
 
+
 ### 2. GlyphStateManager
 
 Manages state transitions and voice modulation.
@@ -62,6 +63,7 @@ manager.hold_breath()
 
 # Glyph: minimal animation, companion waits
 ```
+
 
 ### 3. FallbackProtocol (Main Orchestrator)
 
@@ -107,6 +109,7 @@ result = protocol.process_exchange(
     }
 }
 ```
+
 
 ## Glyph States & Voice Profiles
 
@@ -189,6 +192,7 @@ class UIController:
         )
 ```
 
+
 ### Streamlit Integration
 
 ```python
@@ -216,6 +220,7 @@ with st.expander("Protocol Details"):
     st.json(result["detections"])
     st.json(result["decisions"])
 ```
+
 
 ## Key Behaviors
 
@@ -266,6 +271,7 @@ User: "I'm fine, but honestly I feel so alone right now"
 → Awaits user clarification
 ```
 
+
 ### Scenario 2: Sarcastic Rejection
 
 ```
@@ -276,6 +282,7 @@ User: "Yeah sure, 'stay' with me because that's worked so well before"
 → Respects user's actual boundary
 ```
 
+
 ### Scenario 3: Multiple Signals
 
 ```
@@ -285,6 +292,7 @@ User: "I'm struggling but I need to heal and move forward"
 → Companion: "I hear the strongest signal. Moving there."
 → Prioritizes highest emotional intensity
 ```
+
 
 ### Scenario 4: Confirmed Trigger + Silence
 
@@ -297,6 +305,7 @@ User: "I need to stay."
 → No prompting, no performance - just presence
 ```
 
+
 ## Testing
 
 Run comprehensive test suite:
@@ -304,6 +313,7 @@ Run comprehensive test suite:
 ```bash
 python3 -m pytest tests/test_fallback_protocols.py -v
 ```
+
 
 Tests cover:
 

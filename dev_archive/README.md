@@ -35,8 +35,10 @@ export PROJECT_JWT_SECRET="your-jwt-secret"
 # (optional) override other test vars
 export TEST_CUSTOM_TOKEN="..."
 ```text
+
 ```text
 ```
+
 
 When the real env vars are present, the tests will use them instead of the fallbacks and perform
 real network calls against your Supabase instance.

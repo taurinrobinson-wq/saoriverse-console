@@ -30,6 +30,7 @@ result = profiler.measure("stt", transcribe_audio, audio)
 print(profiler.get_summary())
 ```
 
+
 ### 2. Advanced Prosody
 
 ```python
@@ -42,6 +43,7 @@ plan = planner.plan_advanced_prosody(
 )
 ```
 
+
 ### 3. Session Logging
 
 ```python
@@ -53,6 +55,7 @@ logger.log_assistant_message("Hello!", emotional_state={...})
 logger.save_session()
 ```
 
+
 ### 4. Edge Case Handling
 
 ```python
@@ -62,6 +65,7 @@ ui = VoiceUIEnhancements()
 is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
 is_valid, error = ui.handle_transcription_edge_cases(text, confidence)
 ```
+
 
 ##
 
@@ -117,6 +121,7 @@ def on_assistant_response(response_text, emotional_state):
     logger.log_assistant_message(response_text, emotional_state=emotional_state)
 ```
 
+
 ##
 
 ## 📈 Testing
@@ -127,6 +132,7 @@ Run all Sprint 5 tests:
 cd /workspaces/saoriverse-console
 python -m pytest spoken_interface/test_sprint5_enhancements.py -v
 ```
+
 
 Result: ✅ **24/24 tests passing (100%)**
 
@@ -176,6 +182,7 @@ result = profiler.measure("my_operation", my_function, arg1, arg2)
 print(profiler.get_summary())
 ```
 
+
 ### I want dynamic prosody for emotional responses
 
 ```python
@@ -187,6 +194,7 @@ plan = planner.plan_advanced_prosody(
 # Use plan.pitch_contour, emphasis_points, breath_style, etc.
 ```
 
+
 ### I want to log conversations
 
 ```python
@@ -197,6 +205,7 @@ metrics = logger.calculate_session_metrics()
 logger.save_session()
 ```
 
+
 ### I want to validate audio
 
 ```python
@@ -205,6 +214,7 @@ is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
 if not is_valid:
     print(f"Error: {error}")
 ```
+
 
 ##
 
@@ -227,6 +237,7 @@ if not is_valid:
 ```bash
 python -m pytest spoken_interface/test_sprint5_enhancements.py -v
 ```
+
 
 Expected: All 24 tests pass ✅
 

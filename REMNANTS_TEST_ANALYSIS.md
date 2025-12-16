@@ -1,7 +1,9 @@
 # REMNANTS Simulation Test Analysis
 
 ## Overview
-The test suite (`test_remnants_simulation.py`) demonstrates how different player playstyles reshape NPC personality traits through the REMNANTS system. Each test runs 5 decision encounters with a specific emotional strategy.
+The test suite (`test_remnants_simulation.py`) demonstrates how different player playstyles reshape
+NPC personality traits through the REMNANTS system. Each test runs 5 decision encounters with a
+specific emotional strategy.
 
 ## Key Findings
 
@@ -20,8 +22,7 @@ The test suite (`test_remnants_simulation.py`) demonstrates how different player
 - **Sera:** resolve increases 0.30→0.75 (+0.45) but stays less than others
 
 **Pattern:** Aggressive play makes NPCs more resolute and authority-focused. Traits like empathy and trust become secondary.
-
----
+## 
 
 ### Test 2: Cautious Playstyle
 **Player Strategy:** Wisdom +0.2/0.15, Observation emphasis
@@ -38,8 +39,7 @@ The test suite (`test_remnants_simulation.py`) demonstrates how different player
 - **Drossel:** memory 0.80→0.90 (+0.10), nuance 0.80→0.90 (+0.10)
 
 **Pattern:** Cautious play makes NPCs more thoughtful and observant. Memory and nuance become dominant. Authority traits reduce.
-
----
+## 
 
 ### Test 3: Empathetic Playstyle
 **Player Strategy:** Empathy +0.2/0.15, Trust emphasis
@@ -56,8 +56,7 @@ The test suite (`test_remnants_simulation.py`) demonstrates how different player
 - **Drossel:** empathy 0.20→0.90 (+0.70), need 0.30→0.90 (+0.60), trust becomes 0.90
 
 **Pattern:** Empathetic play dramatically increases empathy across all NPCs, especially thieves (Kaelen, Korrin) and merchants. Even hardened Drossel becomes more trusting.
-
----
+## 
 
 ### Test 4: Mixed Playstyle
 **Player Strategy:** Balanced blend of courage, wisdom, and empathy
@@ -74,8 +73,7 @@ The test suite (`test_remnants_simulation.py`) demonstrates how different player
 - **Drossel:** memory 0.80→0.90, nuance 0.80→0.90, trust becomes 0.90
 
 **Pattern:** Mixed strategy creates balanced NPC profiles without extreme shifts. Results are more nuanced than pure strategies.
-
----
+## 
 
 ## System Mechanics Demonstrated
 
@@ -107,18 +105,20 @@ All traits are clamped to [0.1, 0.9] range:
 - **Adventurers** (Dalen): Respond moderately across strategies
 - **Thieves** (Kaelen, Drossel): Respond dramatically to empathy
 - **Bridges** (Mariel): Stable across all strategies
-
----
+## 
 
 ## Usage of Test Suite
 
 ### Run Full Suite
+
 ```bash
 python velinor/stories/test_remnants_simulation.py
 ```
 
+
 ### Modify Test Encounters
 Edit the `encounters` list in each test function to try different decision sequences:
+
 ```python
 encounters = [
     {"courage": 0.2, "empathy": 0.15},
@@ -127,16 +127,17 @@ encounters = [
 ]
 ```
 
+
 ### Key Variables to Adjust
 - **Magnitude:** Increase 0.2→0.3 for stronger changes
 - **Duration:** Add more encounter dicts for longer stories
 - **Mix:** Combine multiple TONE stats for complex strategies
-
----
+## 
 
 ## Integration Points
 
 ### 1. Story Building
+
 ```python
 from velinor.engine.npc_manager import NPCManager
 from velinor.stories.test_remnants_simulation import *
@@ -147,8 +148,11 @@ npcs = create_marketplace_npcs()
 manager.add_npcs_batch(npcs)
 ```
 
+
 ### 2. Game Engine Hook
+
 ```python
+
 # When player makes a choice:
 tone_effects = {"courage": 0.2, "empathy": -0.1}
 manager.simulate_encounters([tone_effects])
@@ -158,8 +162,11 @@ npc = manager.npcs["Ravi"]
 print(npc.remnants)  # Shows updated traits
 ```
 
+
 ### 3. Dialogue Triggers
+
 ```python
+
 # Make NPC dialogue depend on their current state:
 if manager.npcs["Kaelen"].remnants["empathy"] > 0.7:
     # Play "redeemed Kaelen" dialogue
@@ -167,7 +174,7 @@ else:
     # Play "cynical Kaelen" dialogue
 ```
 
----
+## 
 
 ## Test Results Summary
 
@@ -177,17 +184,13 @@ else:
 | **Cautious** | Dalen | High-impact | Nuance +0.55 |
 | **Empathetic** | Kaelen/Drossel | Dramatic | Empathy +0.60-0.70 |
 | **Mixed** | Variable | Moderate | Balanced shifts |
-
----
+## 
 
 ## No Permanent State Changes
-✅ Each test creates a fresh NPCManager instance  
-✅ All NPC modifications are isolated to the test  
-✅ Running tests multiple times produces identical results  
-✅ Main NPC system remains unmodified  
+✅ Each test creates a fresh NPCManager instance ✅ All NPC modifications are isolated to the test ✅
+Running tests multiple times produces identical results ✅ Main NPC system remains unmodified
+## 
 
----
-
-**Test File:** [velinor/stories/test_remnants_simulation.py](velinor/stories/test_remnants_simulation.py)  
-**System Core:** [velinor/engine/npc_manager.py](velinor/engine/npc_manager.py)  
+**Test File:** [velinor/stories/test_remnants_simulation.py](velinor/stories/test_remnants_simulation.py)
+**System Core:** [velinor/engine/npc_manager.py](velinor/engine/npc_manager.py)
 **Documentation:** [REMNANTS_SYSTEM_GUIDE.md](REMNANTS_SYSTEM_GUIDE.md)

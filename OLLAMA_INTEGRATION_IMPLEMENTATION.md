@@ -60,14 +60,17 @@ client.generate(prompt, model, temperature)    # Generate response
 client.generate_with_context(user_input, history, model)  # With context
 client.pull_model(model_name)                   # Download a model
 ```text
+
 ```text
 ```
+
 
 **Singleton Pattern**:
 
 ```python
 
 ```text
+
 ```
 
 ### 4. Response Handler Integration (`ui_components/response_handler.py`)
@@ -91,9 +94,12 @@ client.pull_model(model_name)                   # Download a model
 **System Prompt** (customizable):
 
 ```
+
 You are FirstPerson, a warm, empathetic AI companion for personal growth.
+
 ```text
 ```text
+
 ```
 
 ### 5. Session State Initialization (`ui_components/session_manager.py`)
@@ -133,6 +139,7 @@ You are FirstPerson, a warm, empathetic AI companion for personal growth.
 
 ```
 
+
 User Input ↓ Local Glyph Parsing (primary)
     ├─ Success → Use Glyph + Tier Processing
     └─ Fail/Empty ↓
@@ -144,6 +151,7 @@ Consciousness (optional) ↓
 
 ```text
 ```
+
 
 ## Files Created/Modified
 
@@ -167,8 +175,10 @@ needed functions
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### 2. Pull a Language Model
 
@@ -181,21 +191,26 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # Or try smaller models for faster iteration
 
 ```text
+
 ```
 
 ### 3. Open Streamlit
 
 ```
+
 ```text
 ```text
+
 ```
 
 ### 4. Test Integration
 
 ```bash
 
+
 ```text
 ```
+
 
 ## Model Recommendations
 
@@ -232,8 +247,10 @@ OLLAMA_BASE_URL=http://ollama:11434        # Endpoint for Ollama API
 STREAMLIT_SERVER_HEADLESS=true              # Headless mode
 STREAMLIT_SERVER_PORT=8501                  # Streamlit port
 ```bash
+
 ```bash
 ```
+
 
 Override in docker-compose.local.yml:
 
@@ -243,6 +260,7 @@ environment:
   - OLLAMA_BASE_URL=http://ollama:11434
 
 ```text
+
 ```
 
 ## Development Workflow
@@ -250,19 +268,23 @@ environment:
 ### Run locally with Ollama
 
 ```bash
+
 docker-compose -f docker-compose.local.yml up -d
 
 # Watch logs
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
 # Stop
+
 ```text
 ```text
+
 ```
 
 ### Test Ollama directly
 
 ```bash
+
 
 
 # Check health
@@ -278,6 +300,7 @@ curl -X POST http://localhost:11434/api/generate -d '{ "model": "llama3", "promp
 ```text
 ```
 
+
 ### Debug FirstPerson integration
 
 ```python
@@ -290,8 +313,10 @@ client = get_ollama_client_singleton()
 print("Available:", client.is_available())
 print("Models:", client.get_available_models())
 ```text
+
 ```text
 ```
+
 
 ## Testing
 
@@ -300,16 +325,20 @@ print("Models:", client.get_available_models())
 ```bash
 
 ```text
+
 ```
 
 Expected output:
 
 ```
+
 ✅ Docker Compose File ✅ Ollama Service ✅ Available Models ✅ Response Generation ✅ FirstPerson Client
 
 5/5 checks passed
+
 ```text
 ```text
+
 ```
 
 ### Manual Testing in Streamlit
@@ -333,10 +362,12 @@ Expected output:
 ```bash
 
 
+
 # Would need to update production docker-compose to include Ollama
 
 ```text
 ```
+
 
 ## Troubleshooting
 
@@ -352,8 +383,10 @@ docker-compose -f docker-compose.local.yml logs ollama
 
 # Restart
 ```text
+
 ```text
 ```
+
 
 ### "No models found"
 
@@ -367,6 +400,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 docker-compose -f docker-compose.local.yml exec ollama ollama list
 
 ```
+
 
 ### Slow responses
 

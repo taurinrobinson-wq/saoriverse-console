@@ -19,6 +19,7 @@ All tests passing:
 ```text
 ```
 
+
 ✓ Core modules compile without errors ✓ Integration functional ✓ End-to-end response generation
 working
 
@@ -42,8 +43,10 @@ working
 
 ```bash
 
+
 ```text
 ```
+
 
 **Use in your application:**
 
@@ -52,8 +55,10 @@ from emotional_os.glyphs.signal_parser import parse_input
 
 result = parse_input("I feel overwhelmed", "emotional_os/glyphs/lexicon.db")
 ```text
+
 ```text
 ```
+
 
 ## Architecture
 
@@ -68,6 +73,7 @@ Generate Response (fallback templates)
 Return response to user
 
 ```
+
 
 ## Privacy & Security
 

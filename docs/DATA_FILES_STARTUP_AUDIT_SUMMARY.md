@@ -54,8 +54,10 @@ But they're actually in:
 # Line 73-74 - Will fail:
 glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
+
 ```text
 ```
+
 
 ### 2. Antonym System ❌
 
@@ -68,6 +70,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 # Line 27 - Will fail:
 
 ```text
+
 ```
 
 ### 3. Advanced Pruning ❌
@@ -77,9 +80,12 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 ```python
 
+
 # Line 89 - Will fail:
+
 ```text
 ```text
+
 ```
 
 ### 4. Word-Centric Lexicon ❌
@@ -90,10 +96,12 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```python
 
 
+
 # Line 18 - Will fail:
 
 ```text
 ```
+
 
 ### 5. Suicidality Protocol ⚠️
 
@@ -104,8 +112,10 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 # Line 33 - Will fail unless running from src/ directory:
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -137,6 +147,7 @@ ls -la emotional_os/glyphs/
 ls -la emotional_os/core/
 
 ```text
+
 ```
 
 **After this, system SHOULD start.**
@@ -171,12 +182,15 @@ Refactor all hardcoded paths to use the PathManager system. See example in `CODE
 ## 🔍 Affected Startup Flow
 
 ```
+
 START APP ↓ Load NRC Lexicon ↓ ✅ Works Load Glyph Lexicon (JSON) ↓ ❌ FAILS - File not at expected
 path Load Glyph Lexicon (CSV) ↓ ❌ FAILS - File not at expected path Load Suicidality Protocol ↓ ⚠️
 PARTIAL - Path works from src/ only Load Word Lexicon ↓ ❌ FAILS - File not at expected path Load
 Antonym Index ↓ ❌ FAILS - File not at expected path ↓
+
 ```text
 ```text
+
 ```
 
 ##
@@ -186,6 +200,7 @@ Antonym Index ↓ ❌ FAILS - File not at expected path ↓
 ### Data Directory (`data/`)
 
 ```
+
 
 data/
 ├── glyph_lexicon_rows.json         ← Code expects in emotional_os/glyphs/
@@ -197,6 +212,7 @@ data/
 
 ```text
 ```
+
 
 ### Source Directory (`src/`)
 
@@ -226,8 +242,10 @@ src/
 └── emotional_os_safety/
     ├── trauma_lexicon.json               ✅ Works (relative path)
 ```text
+
 ```text
 ```
+
 
 ### What Code Expects (`emotional_os/` - MISSING)
 
@@ -250,6 +268,7 @@ emotional_os/                            ← DOESN'T EXIST
 └── safety/
 
 ```text
+
 ```
 
 ##
@@ -260,6 +279,7 @@ Before starting the app, run this check:
 
 ```bash
 
+
 # Check if critical files exist at code's expected paths
 test -f "emotional_os/glyphs/glyph_lexicon_rows.json" && echo "✅ Glyph JSON found" || echo "❌ Glyph JSON MISSING"
 test -f "emotional_os/glyphs/glyph_lexicon_rows.csv" && echo "✅ Glyph CSV found" || echo "❌ Glyph CSV MISSING"
@@ -267,6 +287,7 @@ test -f "emotional_os/core/suicidality_protocol.json" && echo "✅ Protocol foun
 test -f "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json" && echo "✅ Lexicon found" || echo "❌ Lexicon MISSING"
 test -f "emotional_os/glyphs/antonym_glyphs_indexed.json" && echo "✅ Antonym index found" || echo "❌ Antonym index MISSING"
 test -f "data/lexicons/nrc_emotion_lexicon.txt" && echo "✅ NRC lexicon found" || echo "❌ NRC lexicon MISSING"
+
 ```
 
 If all show ✅, system should start. If any show ❌, apply one of the fixes above.

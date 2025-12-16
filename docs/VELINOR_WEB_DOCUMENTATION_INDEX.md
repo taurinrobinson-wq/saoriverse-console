@@ -44,6 +44,7 @@ Start here based on what you need:
 ```text
 ```
 
+
 Frontend (<http://localhost:3000>) ↓ (HTTP) FastAPI Backend (<http://localhost:8000>) ↓ (Python)
 Velinor Game Engine
 
@@ -58,18 +59,22 @@ Velinor Game Engine
 
 ```bash
 
+
 cd d:\saoriverse-console
 
 ```text
 ```
+
 
 **Terminal 2:**
 
 ```bash
 cd d:\saoriverse-console\velinor-web
 ```text
+
 ```text
 ```
+
 
 **Browser:** Open `http://localhost:3000`
 
@@ -121,6 +126,7 @@ d:\saoriverse-console\
     ├── VELINOR_WEB_SETUP_COMPLETE.md      ← Full status
 
 ```text
+
 ```
 
 ##
@@ -175,7 +181,9 @@ d:\saoriverse-console\
 `.env.local` (in `velinor-web/`)
 
 ```
+
 NEXT_PUBLIC_API_URL=http://localhost:8000
+
 ```
 
 Change this to your Railway backend domain for production.

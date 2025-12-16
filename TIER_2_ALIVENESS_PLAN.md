@@ -35,8 +35,10 @@ class AttunementLoop:
     def detect_tone_shift(user_input: str, history: list) -> str
     def get_current_attunement() -> dict
 ```text
+
 ```text
 ```
+
 
 **Performance:** ~5-7ms
 
@@ -63,6 +65,7 @@ class EmotionalReciprocity:
     def match_intensity(response: str, target_intensity: float) -> str
 
 ```text
+
 ```
 
 **Performance:** ~5-7ms
@@ -83,10 +86,13 @@ class EmotionalReciprocity:
 **Key Methods:**
 
 ```python
+
 class EmbodiedSimulation: def __init__(self) def suggest_presence(context: dict) -> str def
 add_embodied_language(response: str) -> str
+
 ```text
 ```text
+
 ```
 
 **Performance:** ~3-5ms
@@ -108,11 +114,13 @@ add_embodied_language(response: str) -> str
 
 ```python
 
+
 class EnergyTracker: def __init__(self) def get_conversation_phase(history: list) -> str def
 detect_fatigue(history: list) -> bool def calculate_optimal_pacing(phase: str) -> dict
 
 ```text
 ```
+
 
 **Performance:** ~3-5ms
 
@@ -132,8 +140,10 @@ EmbodiedSimulation (add presence) → 3-5ms
 EnergyTracker (maintain pacing) → 3-5ms
     ↓
 ```text
+
 ```text
 ```
+
 
 **Total Tier 2 Processing:** ~17-27ms
 **Tier 1 + Tier 2 Total:** ~40ms + 20ms = ~60ms ✅
@@ -178,6 +188,7 @@ class Tier2Aliveness:
     def __init__(self): ...
 
 ```text
+
 ```
 
 **Target:** ~420 lines total
@@ -208,11 +219,14 @@ class Tier2Aliveness:
 
 ```python
 
+
 # After Tier 1 processing:
 tier2 = st.session_state.get("tier2_aliveness") if tier2: response, metrics =
 tier2.process_for_aliveness( user_input, response, history
+
 ```text
 ```text
+
 ```
 
 ### Step 4: Add to session manager (20 min)
@@ -223,6 +237,7 @@ tier2.process_for_aliveness( user_input, response, history
 
 ```python
 
+
 def _ensure_tier2_aliveness(): """Initialize Tier 2 Aliveness components.""" if "tier2_aliveness"
 not in st.session_state: try: from src.emotional_os.tier2_aliveness import Tier2Aliveness tier2 =
 Tier2Aliveness() st.session_state["tier2_aliveness"] = tier2 except Exception as e:
@@ -230,6 +245,7 @@ logger.warning(f"Tier 2 initialization failed: {e}")
 
 ```text
 ```
+
 
 ### Step 5: Test and validate (30 min)
 
@@ -248,8 +264,10 @@ Tier 2 (New):          ~20ms  │██░░░░░░░░░░░░░�
 ─────────────────────────────────
 Total:                 ~60ms  │██████░░░░░░░░░░░│ 60%
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -303,18 +321,22 @@ def test_embodied_language():
 def test_energy_tracking():
 
 ```text
+
 ```
 
 ### Integration Tests
 
 ```python
+
 def test_tier2_with_tier1():
     # Test Tier 1 + Tier 2 combined
     # Verify performance <100ms
 
 def test_aliveness_improves_responses():
+
 ```text
 ```text
+
 ```
 
 ### Manual Tests
@@ -372,6 +394,7 @@ def test_aliveness_improves_responses():
 
 ```bash
 
+
 git commit -m "feat: Tier 2 Aliveness - AttunementLoop, Reciprocity, Embodiment
 
 - Implement AttunementLoop for tone synchronization
@@ -384,6 +407,7 @@ git commit -m "feat: Tier 2 Aliveness - AttunementLoop, Reciprocity, Embodiment
 ```text
 ```
 
+
 **Commit 2:** Integration into response handler and session manager
 
 ```bash
@@ -395,6 +419,7 @@ git commit -m "feat: Integrate Tier 2 Aliveness into response pipeline
 - Test combined Tier 1+2 pipeline
 - Performance <70ms for full pipeline"
 ```
+
 
 ##
 

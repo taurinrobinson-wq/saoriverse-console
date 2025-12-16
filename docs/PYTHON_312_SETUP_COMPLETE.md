@@ -45,36 +45,45 @@ successfully installed.
 
 ```powershell
 ```text
+
 ```text
 ```
+
 
 ### Install spaCy Model (if needed - already done!)
 
 ```powershell
 
 ```text
+
 ```
 
 ### Download TextBlob Corpora (optional - improves accuracy)
 
 ```powershell
+
 ```text
 ```text
+
 ```
 
 ### Install Additional Packages
 
 ```powershell
 
+
 ```text
 ```
+
 
 ### Run Tests
 
 ```powershell
 ```text
+
 ```text
 ```
+
 
 ### Access the App
 
@@ -112,6 +121,7 @@ d:\saoriverse-console\
 │   └── emotional_os_safety/     ← Safety variant
 
 ```text
+
 ```
 
 ##
@@ -177,23 +187,29 @@ d:\saoriverse-console\
 ### If port 8501 is in use
 
 ```powershell
+
 ```text
 ```text
+
 ```
 
 ### If you need to reinstall packages
 
 ```powershell
 
+
 ```text
 ```
+
 
 ### To check installed packages
 
 ```powershell
 ```text
+
 ```text
 ```
+
 
 ### To verify specific package
 
@@ -202,6 +218,7 @@ d:\saoriverse-console\
 py -3.12 -c "import package_name; print(package_name.__version__)"
 
 ```
+
 
 ##
 

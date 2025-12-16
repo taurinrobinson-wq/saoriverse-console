@@ -48,6 +48,7 @@ cognitive overhead.
 ```text
 ```
 
+
 User Input: "I'm exhausted" ↓ AffectParser: tone=sad, arousal=0.3, valence=-0.9 ↓ ResponseRotator:
 "sadness" category → "I hear the sadness in this. It feels heavy." ↓ Glyph System: "Which glyph
 represents this?" (System doesn't know - needs manual interpretation)
@@ -102,8 +103,10 @@ Benefits:
 
 New flow (2 layers instead of 3):
 ```text
+
 ```text
 ```
+
 
 User Input: "I'm exhausted" ↓ AffectParser: tone=sad, arousal=0.3, valence=-0.9 ↓ ResponseRotator +
 Glyph System (integrated):
@@ -169,14 +172,17 @@ Glyph System (integrated):
 Create a lookup table in Python:
 
 ```python
+
 AFFECT_TO_GLYPH = { ("sad", 0.2, -0.8): "Grief",        # Low arousal + very negative ("sad", 0.5,
 -0.8): "Deep Wound",   # Medium arousal + very negative ("anxious", 0.8, -0.6): "Overwhelm", # High
 arousal + negative ("angry", 0.8, -0.4): "Breaking",   # High arousal, moderate negative ("anxious",
 0.6, -0.3): "Pressure", # Moderate arousal + unease ("neutral", 0.3, 0.1): "Stillness", # Low
 arousal + slightly positive ("warm", 0.7, 0.8): "Connection",   # High arousal + positive
 ("grateful", 0.4, 0.9): "Acceptance", # Low-medium + very positive
+
 ```text
 ```text
+
 ```
 
 ### 3. Response Template With Glyphs
@@ -185,11 +191,13 @@ arousal + slightly positive ("warm", 0.7, 0.8): "Connection",   # High arousal +
 
 ```python
 
+
 brief_responses = [ "I hear the sadness in this. It feels heavy.", "I can sense the sorrow. It's
 real.",
 
 ```text
 ```
+
 
 **After** (with glyphs):
 
@@ -200,6 +208,7 @@ brief_responses = [
     "That's real *Loss*. Where does it land for you?",
 ]
 ```
+
 
 ##
 

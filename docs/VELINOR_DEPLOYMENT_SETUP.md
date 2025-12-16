@@ -8,8 +8,10 @@
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 bash setup.sh
 ```text
+
 ```text
 ```
+
 
 **Game opens at:** <http://localhost:8501>
 
@@ -28,6 +30,7 @@ pip install streamlit pillow
 # Run the game
 
 ```text
+
 ```
 
 ##
@@ -50,6 +53,7 @@ Modify the game initialization section to import and connect FirstPerson:
 
 ```python
 
+
 # Around line 540-560 in velinor_app.py
 from src.emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
@@ -57,8 +61,10 @@ from src.emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, Af
 orchestrator = VelinorTwineOrchestrator( game_engine=engine, story_path=str(story_path),
 first_person_module=FirstPersonOrchestrator("game_npc", "velinor_session"),  # ← Add this
 npc_system=npc_system
+
 ```text
 ```text
+
 ```
 
 #### Step 2: Environment Variables (Secrets)
@@ -66,6 +72,7 @@ npc_system=npc_system
 For Streamlit Cloud deployment, add to `.streamlit/secrets.toml`:
 
 ```toml
+
 
 
 # .streamlit/secrets.toml
@@ -79,6 +86,7 @@ enable_affect_analysis = true
 
 ```text
 ```
+
 
 #### Step 3: Session Secrets (for Streamlit Cloud)
 
@@ -108,8 +116,10 @@ streamlit run velinor_app.py
 # App runs at http://localhost:8501
 
 ```text
+
 ```text
 ```
+
 
 ### With FirstPerson Connected
 
@@ -119,6 +129,7 @@ streamlit run velinor_app.py
 # If FirstPerson is enabled, additional debug info will show
 
 ```text
+
 ```
 
 ##
@@ -168,9 +179,12 @@ streamlit run velinor_app.py
 **Dockerfile already compatible:**
 
 ```bash
+
 docker build -t velinor-game .
+
 ```text
 ```text
+
 ```
 
 ##
@@ -204,6 +218,7 @@ Add to `.streamlit/secrets.toml`:
 ```toml
 
 
+
 # Glyph persistence
 [glyph] supabase_url = "https://your-project.supabase.co" supabase_key = "your-anon-key"
 
@@ -215,6 +230,7 @@ Add to `.streamlit/secrets.toml`:
 
 ```text
 ```
+
 
 ##
 
@@ -267,8 +283,10 @@ saoriverse-console/
         └── deploy/
             └── core/
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -298,6 +316,7 @@ rm -rf ~/.streamlit
 # Deactivate venv
 
 ```text
+
 ```
 
 ##
@@ -306,6 +325,7 @@ rm -rf ~/.streamlit
 
 ```bash
 
+
 # Check if Python dependencies installed
 pip list | grep -E "streamlit|pillow"
 
@@ -313,8 +333,10 @@ pip list | grep -E "streamlit|pillow"
 ls -la velinor/engine/ ls -la velinor/backgrounds/ ls -la velinor/npcs/
 
 # Test game imports
+
 ```text
 ```text
+
 ```
 
 ##
@@ -356,6 +378,7 @@ When ready to integrate your emotional resonance system:
 **To Start Playing Right Now:**
 
 ```bash
+
 
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console bash setup.sh bash run.sh
 

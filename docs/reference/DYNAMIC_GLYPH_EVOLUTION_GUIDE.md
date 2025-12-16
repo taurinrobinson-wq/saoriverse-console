@@ -10,6 +10,7 @@ processor. This document explains how the components work together.
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────────┐
 │                    USER-AI DIALOGUE                              │
 └────────────────────────┬────────────────────────────────────────┘
@@ -49,6 +50,7 @@ The main integration layer that orchestrates the entire pipeline:
 
 ```python
 
+
 from hybrid_processor_with_evolution import create_integrated_processor
 
 processor = create_integrated_processor( hybrid_learner=learner, adaptive_extractor=extractor,
@@ -67,6 +69,7 @@ terrifying", ai_response="That vulnerability is the doorway...", )
 
 ```text
 ```
+
 
 ### 2. **DynamicGlyphEvolution** (`dynamic_glyph_evolution.py`)
 
@@ -101,8 +104,10 @@ Discovers new emotional dimensions:
 ```
 User: "I feel deeply seen and yet exposed"
 ```text
+
 ```text
 ```
+
 
 ### Step 2: Signal Extraction (Adaptive)
 
@@ -115,11 +120,13 @@ signals = extractor.extract_signals(combined_text)
 #   {"signal": "vulnerability", "strength": 0.8},
 
 ```text
+
 ```
 
 ### Step 3: Hybrid Learning
 
 ```python
+
 learner.learn_from_exchange( user_id="user_123", user_input="...", ai_response="...",
 emotional_signals=signals, )
 
@@ -131,11 +138,13 @@ emotional_signals=signals, )
 
 ```text
 ```text
+
 ```
 
 ### Step 4: Pattern Detection
 
 ```python
+
 
 patterns = evolution._detect_patterns_in_exchange( user_input, ai_response, signals )
 
@@ -148,6 +157,7 @@ patterns = evolution._detect_patterns_in_exchange( user_input, ai_response, sign
 
 ```text
 ```
+
 
 ### Step 5: Glyph Generation
 
@@ -167,8 +177,10 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 #   "created_from_conversation": true,
 
 ```text
+
 ```text
 ```
+
 
 ### Step 6: Glyph Integration
 
@@ -184,6 +196,7 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 # - Exported to system database
 
 ```text
+
 ```
 
 ## Usage Examples
@@ -191,6 +204,7 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 ### Basic Integration
 
 ```python
+
 from hybrid_processor_with_evolution import create_integrated_processor from
 emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides from
 emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
@@ -209,13 +223,16 @@ ai_response="Grief is love with nowhere to go...", )
 
 # Check results
 print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
+
 ```text
 ```text
+
 ```
 
 ### Processing Multiple Turns
 
 ```python
+
 
 conversation_id = "conv_session_001"
 
@@ -232,6 +249,7 @@ summary = processor.get_conversation_summary(conversation_id)
 
 ```text
 ```
+
 
 ### Accessing Generated Glyphs
 
@@ -252,8 +270,10 @@ user_glyphs = processor.evolution.get_conversation_glyphs(
 
 # Print recent glyphs
 ```text
+
 ```text
 ```
+
 
 ### Exporting Glyphs for System Use
 
@@ -272,11 +292,13 @@ export_result = processor.evolution.export_glyphs_for_system(
     output_file="/path/to/all_glyphs.json"
 
 ```text
+
 ```
 
 ### Session Summary
 
 ```python
+
 
 # Print comprehensive summary
 processor.print_session_summary()
@@ -288,19 +310,24 @@ processor.print_session_summary()
 # HYBRID PROCESSOR SESSION SUMMARY
 
 # ════════════════════════════════════════════════════════════════════════════════
+
 # Total conversations processed: 3
 
 # Total turns processed: 8
 
 # Total new glyphs generated: 5
+
 # NEW GLYPHS GENERATED:
 #   1. ♥❤ Intimate Connection (love + intimacy)
 #   2. ♥🌱 Open-Hearted Love (love + vulnerability)
 #   3. ♥🌹 Sensual Devotion (love + sensuality)
 #   4. 🌱✨ Vulnerable Wonder (vulnerability + wonder)
+
 # 5. 🌿🎻 Natural Longing (nature + longing)
+
 ```text
 ```text
+
 ```
 
 ## Configuration
@@ -309,11 +336,13 @@ processor.print_session_summary()
 
 ```python
 
+
 evolution = DynamicGlyphEvolution( hybrid_learner=learner, min_frequency_for_glyph=300,  # Default:
 300 co-occurrences
 
 ```text
 ```
+
 
 ### Emotion-Symbol Mapping
 
@@ -327,8 +356,10 @@ evolution.emotion_symbols = {
     "joy": "☀",
     # ... add more
 ```text
+
 ```text
 ```
+
 
 ### Pattern Detection Tuning
 
@@ -344,6 +375,7 @@ signal_keywords = {
     # ... customize for your use case
 
 ```text
+
 ```
 
 ## Lexicon Expansion
@@ -358,9 +390,12 @@ The system automatically expands the lexicon through:
 Example progression:
 
 ```
+
 Initial: 8 hardcoded dimensions After poetry processing: 18+ adaptive dimensions
+
 ```text
 ```text
+
 ```
 
 ## Quality & Safety
@@ -377,10 +412,12 @@ The hybrid learner applies quality checks:
 
 ```python
 
+
 is_quality, reason = learner._is_quality_exchange( user_input, ai_response, signals )
 
 ```text
 ```
+
 
 ### User Trust Scoring
 
@@ -411,8 +448,10 @@ learning/
 ├── generated_glyphs/
 │   └── session_glyphs.json       # Exported for system
 ```text
+
 ```text
 ```
+
 
 ## Metrics & Monitoring
 
@@ -443,6 +482,7 @@ top_glyphs = sorted(
 for glyph in top_glyphs:
 
 ```text
+
 ```
 
 ## Next Steps
@@ -497,6 +537,7 @@ for glyph in top_glyphs:
 Create custom glyph generation logic:
 
 ```python
+
 class CustomGlyphEvolution(DynamicGlyphEvolution): def _create_pattern_name(self, signal1, signal2):
         # Your custom naming logic
 return f"Custom: {signal1} meets {signal2}"
@@ -508,6 +549,7 @@ return "✨🔮"
 # Use it
 evolution = CustomGlyphEvolution(hybrid_learner) processor = HybridProcessorWithEvolution(...,
 evolution)
+
 ```
 
 ## References

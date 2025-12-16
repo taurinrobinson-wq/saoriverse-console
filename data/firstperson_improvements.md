@@ -62,8 +62,10 @@ Response Orchestration Layer
 Output Layer
 ├─ Empathy Rituals (practices for users)
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -438,6 +440,7 @@ create index idx_conversations_user_created on conversations(user_id, created_at
 create index idx_conversations_theme on conversations(theme);
 
 ```text
+
 ```
 
 ### Sample Queries
@@ -445,21 +448,26 @@ create index idx_conversations_theme on conversations(theme);
 **Fetch recent anchors on sign-in:**
 
 ```sql
+
 select anchor, summary, theme, clarifier, created_at from conversations where user_id = $1 order by
 created_at desc
+
 ```text
 ```text
+
 ```
 
 **Count theme frequency:**
 
 ```sql
 
+
 select theme, count(*) as frequency from conversations where user_id = $1 and created_at > now() -
 interval '30 days' group by theme
 
 ```text
 ```
+
 
 **Find time-of-day patterns:**
 
@@ -469,8 +477,10 @@ from conversations
 where user_id = $1
 group by hour_of_day
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -508,13 +518,16 @@ export function useConversationMemory(userId) {
   return memory;
 
 ```text
+
 ```
 
 ### Parser Context Integration
 
 ```javascript
+
 function handleUserInput(input, memory) { const response = firstPersonParser.generateResponse(input,
 memory); saveToConversations(response, input); displayResponse(response); }
+
 ```
 
 ##

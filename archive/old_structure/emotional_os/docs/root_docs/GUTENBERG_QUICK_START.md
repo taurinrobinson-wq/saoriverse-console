@@ -26,6 +26,7 @@ python scripts/utilities/integrate_glyph_lexicons.py \
     --output emotional_os/glyphs/glyph_lexicon_integrated.json
 ```
 
+
 ## What This Pipeline Does
 
 | Phase | Script | What It Does | Time |
@@ -85,6 +86,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 └── ... [27 more]
 ```
 
+
 ### Generated Outputs
 
 ```
@@ -96,6 +98,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
     └── gutenberg_bulk_lexicon.json            (processed lexicon)
 ```
 
+
 ## Common Commands
 
 ### Process Everything from Scratch
@@ -106,11 +109,13 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 ./scripts/utilities/run_full_gutenberg_pipeline.sh
 ```
 
+
 ### Just Download Poetry
 
 ```bash
 python scripts/utilities/gutenberg_fetcher.py
 ```
+
 
 ### Process Existing Poetry Files
 
@@ -118,11 +123,13 @@ python scripts/utilities/gutenberg_fetcher.py
 python scripts/utilities/bulk_text_processor.py --dir /path/to/poetry/ --chunk-size 500
 ```
 
+
 ### Generate Glyphs Only (if processing already done)
 
 ```bash
 python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overrides/gutenberg_bulk_lexicon.json
 ```
+
 
 ### Check Processing Status
 
@@ -134,6 +141,7 @@ tail -f learning/hybrid_learning_log.jsonl
 # View results
 cat bulk_processing_results.json | jq '.'
 ```
+
 
 ## Expected Results
 
@@ -153,6 +161,7 @@ After full pipeline execution:
   "status": "✓ COMPLETE"
 }
 ```
+
 
 ## Troubleshooting
 
@@ -188,6 +197,7 @@ After full pipeline execution:
 cat generated_glyphs_from_poetry.json | jq '.[] | {name, symbol, core_emotions, frequency}'
 ```
 
+
 ### Add to Saoriverse
 
 ```python
@@ -208,6 +218,7 @@ for glyph in new_glyphs:
 lexicon.save()
 ```
 
+
 ### Create Custom Poetry Collections
 
 Edit `scripts/utilities/gutenberg_fetcher.py` and add poets to `POETRY_BOOKS`:
@@ -218,6 +229,7 @@ POETRY_BOOKS = {
     'your_poet_name': PROJECT_GUTENBERG_ID  # e.g., 12345
 }
 ```
+
 
 ## Documentation
 

@@ -84,8 +84,10 @@ reference them.
     "ripple": {"Nima": -0.1}
   }
 ```text
+
 ```text
 ```
+
 
 ### Example resonance application (Python stub)
 
@@ -101,6 +103,7 @@ def apply_tone_to_remnants(npc_profile: dict, tone_effects: dict, correlation: d
     return npc_profile
 
 ```
+
 
 ##
 

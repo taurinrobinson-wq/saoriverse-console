@@ -53,8 +53,10 @@ Run the SQL migration in Supabase:
 
 # Option B: Via Supabase CLI (if installed)
 ```text
+
 ```text
 ```
+
 
 The schema creates:
 
@@ -74,13 +76,16 @@ Ensure `st.secrets` contains Supabase credentials:
 url = "https://your-project.supabase.co"
 
 ```text
+
 ```
 
 ### 3. Run the Application
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ## Features
@@ -91,6 +96,7 @@ Conversations are automatically named from the first message:
 
 ```python
 
+
 from emotional_os.deploy.modules.conversation_manager import generate_auto_name
 
 # Example
@@ -98,6 +104,7 @@ title = generate_auto_name("I've been feeling anxious about work")
 
 ```text
 ```
+
 
 ### Managing Conversations
 
@@ -137,8 +144,10 @@ success, msg = manager.rename_conversation("conv-id-123", "New Title")
 
 # Delete conversation
 ```text
+
 ```text
 ```
+
 
 ## Data Structure
 
@@ -171,6 +180,7 @@ success, msg = manager.rename_conversation("conv-id-123", "New Title")
   "archived": false
 
 ```text
+
 ```
 
 ## Session State Management
@@ -225,9 +235,11 @@ To migrate existing conversation history:
 
 ```python
 
+
 # This would require custom migration script
 
 # Contact development team for migration support
+
 ```
 
 ## Performance Considerations

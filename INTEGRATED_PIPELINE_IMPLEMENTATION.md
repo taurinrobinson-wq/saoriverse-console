@@ -15,6 +15,7 @@ A new orchestrator that wires ALL your built response systems together:
 ```text
 ```
 
+
 User Input ↓ [Tier 1: Foundation]
 ├─ Safety checking (Sanctuary)
 ├─ Signal detection (emotional parsing)
@@ -63,8 +64,10 @@ User Input ↓ [Tier 1: Foundation]
 
 ### BEFORE (Current)
 ```text
+
 ```text
 ```
+
 
 /chat endpoint → generate_empathetic_response() → return response
 
@@ -78,6 +81,7 @@ User Input ↓ [Tier 1: Foundation]
 ### AFTER (New)
 
 ```text
+
 ```
 
 /chat endpoint
@@ -90,6 +94,7 @@ User Input ↓ [Tier 1: Foundation]
     → return enhanced response
 
 ```
+
 
 
 
@@ -189,16 +194,20 @@ composition 4. Entire pipeline fails → Return original base response 5. Pipeli
 # Then start fresh:
 
 ```text
+
 ```
 
 **Step 2: Watch for Startup Messages**
 
 ```
+
 ✓ Whisper model initialized (tiny) ✓ pyttsx3 engine initialized ✓ Tier 1 Foundation initialized ✓
 Tier 2 Aliveness initialized ✓ Tier 3 Poetic Consciousness initialized ✓ Response Templates
 initialized ✓ Affect Parser initialized ✓ Context Selector initialized
+
 ```text
 ```text
+
 ```
 
 **Step 3: Send Test Messages**
@@ -275,6 +284,7 @@ AFTER (Context-Aware + Aliveness):
 ## Files Modified
 
 ```
+
 
 d:\saoriverse-console\
 ├── src/

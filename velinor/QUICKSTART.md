@@ -5,8 +5,10 @@
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 Then open your browser to the provided URL (usually `http://localhost:8501`).
 
@@ -161,6 +163,7 @@ def get_sequence() -> List[SceneModule]:
         MarketplaceSceneSequence.build_my_new_scene(),  # ADD HERE
 
 ```text
+
 ```
 
 Then restart the test app and navigate to your new scene!
@@ -280,7 +283,9 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
 Everything is built and committed to git. Just:
 
 ```bash
+
 streamlit run velinor_scenes_test.py
+
 ```
 
 Have fun exploring the marketplace! 🎮

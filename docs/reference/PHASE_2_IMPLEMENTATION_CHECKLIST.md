@@ -370,9 +370,9 @@ tail -f railway_logs.txt | grep -i glyph
 
 # ============================================================================
 
-print(""" ╔════════════════════════════════════════════════════════════════════════════╗ ║
-EMOTIONAL OS PHASE 2 IMPLEMENTATION PLAN                  ║ ║                   Real-Time Glyph
-Learning System                          ║
+print(""" ╔════════════════════════════════════════════════════════════════════════════╗ ║ EMOTIONAL
+OS PHASE 2 IMPLEMENTATION PLAN                  ║ ║                   Real-Time Glyph Learning
+System                          ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 
 FILES CREATED: ✓ glyph_learner.py                     (350+ lines) ✓ learning_response_generator.py

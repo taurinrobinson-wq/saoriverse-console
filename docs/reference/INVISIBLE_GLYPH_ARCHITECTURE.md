@@ -17,6 +17,7 @@ The glyph system should work **invisibly**—informing quality without appearing
 ```text
 ```
 
+
 User: "I have math anxiety" ↓ Glyph Selected: Still Containment ↓ Response: "There's something in
 what you're describing—boundaries that hold without pressure. a sanctuary of quiet care. You're not
 alone—many brilliant people..."
@@ -29,8 +30,10 @@ alone—many brilliant people..."
 
 ### ✅ NEW ARCHITECTURE (Invisible Glyph System)
 ```text
+
 ```text
 ```
+
 
 User: "I have math anxiety" ↓ Glyph Selected: Still Containment [INVISIBLE TO USER] ↓ Glyph Informs
 (behind the scenes):
@@ -90,6 +93,7 @@ User never sees "Gate 2". They just experience:
 
 ```python
 
+
 # EXTRACT glyph data invisibly
 intensity_level = len(gates)  # Used for tone, never shown to user poetry_emotion =
 _glyph_to_emotion_category(glyph_name)  # Used for poetry selection
@@ -104,8 +108,10 @@ if intensity_level <= 2: closing = "permission_based"  # Gentle else: closing = 
 More engaging
 
 # OUTPUT feels personal, not categorical
+
 ```text
 ```text
+
 ```
 
 ### Message-Aware Composition
@@ -113,6 +119,7 @@ More engaging
 **compose_message_aware_response():**
 
 ```python
+
 
 
 # Direct response to message features (math_frustration, inherited_pattern, etc.)
@@ -124,6 +131,7 @@ if intensity >= 8: parts.append("I'm here to work through this with you.") else:
 
 ```text
 ```
+
 
 No glyph descriptions. Just person-to-person response calibrated by glyph.
 
@@ -157,8 +165,10 @@ especially when it's presented in a way that doesn't match how their mind natura
 Mental blocks are usually where the concept structure doesn't match your natural thinking pattern.
 That's not fixed—it's just a mismatch to navigate.
 ```text
+
 ```text
 ```
+
 
 ✓ Addresses **their specific struggle** (math, mental blocks) ✓ Validates **their experience** (not
 alone, it's real) ✓ Offers **reframe** (mismatch, not failure) ✓ Zero glyph terminology visible
@@ -174,6 +184,7 @@ alone, it's real) ✓ Offers **reframe** (mismatch, not failure) ✓ Zero glyph 
 I appreciate you saying that. I want to make sure I'm actually hearing you,
 
 ```text
+
 ```
 
 ✓ Shows **they're being heard** (calibrated to feedback)
@@ -211,6 +222,7 @@ I appreciate you saying that. I want to make sure I'm actually hearing you,
 ### User's Perspective
 
 ```
+
 Day 1: "I have anxiety about math" → Response feels understanding, not categorical ✓
 
 Day 2: "It's from my mom" → Response acknowledges the pattern origin ✓
@@ -219,11 +231,13 @@ Day 3: "That's not what I meant about Michelle" → Response shows they're actua
 
 ```text
 ```text
+
 ```
 
 ### System's Perspective
 
 ```
+
 
 Day 1: Glyph=Still Containment, Gates=[Gate 2] → tone: gentle, closing: permission Day 2:
 Glyph=None, fallback → generic validation Day 3: Glyph=Still Containment, feedback=misalignment →

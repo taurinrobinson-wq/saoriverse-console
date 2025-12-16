@@ -37,6 +37,7 @@ The response pipeline is a **narrow path**:
 ```text
 ```
 
+
 Input → signal_parser → glyph_lookup → compose_response → Output
 
 ```
@@ -69,8 +70,10 @@ Everything else exists but sits beside this path, unused.
 ### ConversationMemory (Tier 1)
 **Problem:** System treats each message in isolation
 ```text
+
 ```text
 ```
+
 
 User: "I'm stressed" System: "Tell me about the stress." User: "It's work" System: "Tell me about
 work." ← REPEATED!
@@ -83,6 +86,7 @@ work." ← REPEATED!
 **Solution:** Track context across turns
 
 ```text
+
 ```
 
 User: "I'm stressed"
@@ -91,6 +95,7 @@ User: "It's work"
 System: "Work has flooded your mind..." ← INTEGRATED!
 
 ```
+
 
 
 
@@ -123,8 +128,10 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ## Integration Roadmap
 
 ### Week 1: Tier 1 (45 min)
+
 ```text
 ```text
+
 ```
 
 ✅ ConversationMemory
@@ -135,12 +142,14 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 
+
 **Result:** Context-aware responses, no repeated questions
 
 ### Week 2: Tier 2 (3-4 hrs)
 
 ```text
 ```
+
 
 ✅ AttunementLoop ✅ EmbodiedSimulation ✅ EmotionalReciprocity ✅ Integration with response pipeline
 
@@ -151,8 +160,10 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 ### Week 3-4: Tier 3 (6-8 hrs)
 ```text
+
 ```text
 ```
+
 
 ✅ SaoriLayer ✅ GenerativeTension ✅ Full integration testing
 
@@ -165,12 +176,14 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ### Week 5+: Optional (2-3 hrs)
 
 ```text
+
 ```
 
 ✅ TemporalMemory
 ✅ Cross-session persistence
 
 ```
+
 
 
 **Result:** System remembers users emotionally over time
@@ -265,8 +278,10 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ## Expected Outcomes
 
 ### After Tier 1 (45 min)
+
 ```text
 ```text
+
 ```
 
 ✅ Context builds across turns
@@ -280,10 +295,12 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 
+
 ### After Tier 2 (3-4 hours)
 
 ```text
 ```
+
 
 ✅ Responses vary in tone ✅ System matches user pacing ✅ Energy/fatigue cycles work ✅ Emotional
 reciprocity active ✅ User feels "system is alive"
@@ -294,8 +311,10 @@ reciprocity active ✅ User feels "system is alive"
 
 ### After Tier 3 (6-8 hours)
 ```text
+
 ```text
 ```
+
 
 ✅ Multiple archetypal voices ✅ Creative reframing visible ✅ Surprise managed well ✅ System has
 personality ✅ User feels "deeply understood"
@@ -308,6 +327,7 @@ personality ✅ User feels "deeply understood"
 ### After Tier 4 (2-3 hours)
 
 ```text
+
 ```
 
 ✅ Cross-session memory works
@@ -316,6 +336,7 @@ personality ✅ User feels "deeply understood"
 ✅ Long-term growth visible
 
 ```
+
 
 
 ##

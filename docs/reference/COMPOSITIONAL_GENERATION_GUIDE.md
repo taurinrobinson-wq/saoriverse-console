@@ -21,6 +21,7 @@ Instead of **fill-the-template**, use **compose-from-fragments**:
 ```text
 ```
 
+
 User Message ↓ ┌─────────────────────────────────────────────────┐
 │  EXTRACTION LAYER                               │
 │  • Entities (spaCy NER): Michelle, math, block  │
@@ -51,6 +52,7 @@ User Message ↓ ┌────────────────────
 ```python
 
 
+
 # Old approach
 if 'anxiety' in keywords: response = ( "I can feel the anxiety you're carrying. When our minds race
 like this, " "it often helps to find a still point. The energy you're feeling, " "that's your system
@@ -65,6 +67,7 @@ preparing you. What if we could transform this " "racing energy into focused rea
 
 ```text
 ```
+
 
 ### AFTER: Composition-Driven
 
@@ -105,8 +108,10 @@ response = compose_message_aware_response(
 # concept structure doesn't match your natural thinking pattern. That's not fixed—it's just a
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -138,22 +143,27 @@ def detect_feedback_correction(input_text, last_assistant_message):
     # → is_correction: True, contradiction_type: "negation"
 
 ```text
+
 ```
 
 ### Layer 2: Message-Driven Features
 
 ```python
+
 def extract_message_features(input_text): features = { "math_frustration": "math" in text and
 ("block" or "can't" or "frustrated") in text, "communication_friction": "michelle" in text and
 ("explain" or "language") in text, "inherited_pattern": "inherited from" in text, "person_involved":
 extract_people(text),  # spaCy NER }
+
 ```text
 ```text
+
 ```
 
 ### Layer 3: Dynamic Composition
 
 ```python
+
 
 class DynamicResponseComposer:
     # Multiple opening variants (not one template):
@@ -163,6 +173,7 @@ about {entity}.", "What does {entity} feel like?", ...], }
 
 ```text
 ```
+
 
 ##
 
@@ -188,8 +199,10 @@ naturally works... We can absolutely break this into tiny, concrete steps,
 or I can walk through one problem with you... Would you want to tackle one
 small piece together, or would you rather have a script you can use with Michelle?"
 ```text
+
 ```text
 ```
+
 
 ### Message 2: Mental Block + Communication Friction
 
@@ -213,11 +226,13 @@ pattern. That's not fixed—it's just a mismatch to navigate. What would it feel
 like to approach math frustration differently?"
 
 ```text
+
 ```
 
 ### Message 3: Inherited Pattern Correction
 
 ```
+
 User: "well I don't know if its my anxiety. If there is any anxiety. its inherited from Michelle
 because she is very anxious."
 
@@ -228,6 +243,7 @@ NEW (Composition-Driven): "I hear that—recognizing a pattern as inherited is a
 to changing it. You can inherit the pattern without being imprisoned by it. What would it feel like
 to notice the difference between *her* anxiety and what's actually *yours*?" → Detects feedback
 correction (attribution_boundary) and addresses it directly
+
 ```
 
 ##

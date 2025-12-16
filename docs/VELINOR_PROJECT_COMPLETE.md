@@ -65,8 +65,10 @@ Streamlit UI and all graphics integrated.
 ```bash
 bash setup.sh
 ```text
+
 ```text
 ```
+
 
 ### Quick Start (Windows)
 
@@ -77,6 +79,7 @@ venv\Scripts\activate.bat
 pip install streamlit pillow
 
 ```text
+
 ```
 
 **Game opens at:** <http://localhost:8501>
@@ -86,6 +89,7 @@ pip install streamlit pillow
 ## Architecture Complete
 
 ```
+
 velinor_app.py (Streamlit UI) ↓ [VelinorTwineOrchestrator] (Game Loop)
         ├─ Twine Story Loading
         ├─ Dice & Mechanics
@@ -94,8 +98,10 @@ velinor_app.py (Streamlit UI) ↓ [VelinorTwineOrchestrator] (Game Loop)
 ↓ [Game Engine + NPC System]
         ├─ Player Stats
         ├─ Event System
+
 ```text
 ```text
+
 ```
 
 ### Core Modules
@@ -168,6 +174,7 @@ velinor_app.py (Streamlit UI) ↓ [VelinorTwineOrchestrator] (Game Loop)
 
 ```
 
+
 saoriverse-console/
 ├── velinor_app.py              🎮 Main game UI
 ├── setup.sh                    ⚙️ Installation
@@ -198,6 +205,7 @@ saoriverse-console/
 
 ```text
 ```
+
 
 ##
 
@@ -287,8 +295,10 @@ bash run.sh
 # Then in browser: http://localhost:8501
 
 ```text
+
 ```text
 ```
+
 
 ### For Developers
 
@@ -515,6 +525,7 @@ bash setup.sh
 bash run.sh
 
 ```
+
 
 ### What's Next
 

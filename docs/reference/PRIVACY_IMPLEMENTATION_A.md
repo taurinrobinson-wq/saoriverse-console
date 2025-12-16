@@ -22,8 +22,10 @@ Saoriverse Console while preserving learning capability.
   "emotional_signals": [...],
   "glyphs": [...]
 ```text
+
 ```text
 ```
+
 
 **Issues:**
 
@@ -48,6 +50,7 @@ Saoriverse Console while preserving learning capability.
   "exchange_quality": "logged"
 
 ```text
+
 ```
 
 **What Changed:**
@@ -71,16 +74,21 @@ Saoriverse Console while preserving learning capability.
 **Before (Privacy Violation):**
 
 ```python
+
 log_entry = { "timestamp": datetime.now().isoformat(), "user_id": user_id, "user_input": user_input,
+
 # ❌ RAW TEXT "ai_response": ai_response,  # ❌ RAW CONTENT "emotional_signals": emotional_signals,
 "glyphs": glyphs,
+
 ```text
 ```text
+
 ```
 
 **After (Privacy Safe):**
 
 ```python
+
 
 log_entry = { "timestamp": datetime.now().isoformat(), "user_id_hash": user_id,  # Already hashed
 "signals": signal_names,  # Only signal names, not text "gates": signal_gates,  # Gate activation
@@ -91,6 +99,7 @@ only "exchange_quality": "logged",
 
 ```text
 ```
+
 
 **Impact:** New exchanges will log only signals, gates, and metadata.
 
@@ -103,8 +112,10 @@ only "exchange_quality": "logged",
 ```python
 entry = user_overrides["signals"][signal]
 ```text
+
 ```text
 ```
+
 
 **After (Privacy Safe):**
 
@@ -118,6 +129,7 @@ entry["example_contexts"].append({
     # NO user_input stored
 
 ```text
+
 ```
 
 **Impact:** User lexicon learns signal co-occurrence patterns, not raw messages.
@@ -138,13 +150,16 @@ entry["example_contexts"].append({
 **Usage:**
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 **Example Output:**
 
 ```
+
 
 
 # 📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
@@ -155,6 +170,7 @@ entry["example_contexts"].append({
 
 ```text
 ```
+
 
 ### Test Verification: `test_privacy_masking.py`
 
@@ -179,8 +195,10 @@ entry["example_contexts"].append({
 ✅ example_contexts have keyword field
 ✅ example_contexts have associated_signals
 ```text
+
 ```text
 ```
+
 
 ## Privacy Protection: What's Preserved vs What's Removed
 
@@ -218,15 +236,17 @@ User Input → Extracted Signals → LOGGED RAW → Hybrid Learning
                            plaintext         (with messages)
 
 ```text
+
 ```
 
 ### After (Gate-Based Data Masking)
 
 ```
-User Input → Extracted Signals → LOGGED SAFE → Hybrid Learning ↓           ↓
-(Signals)      ↓ "I'm         "struggle"  →       Log Entry:    User lexicon depressed"
-"vulnerability"     signals,      (signal contexts "melancholy"        gates,        only) metadata
-✅ PRIVACY SAFE
+
+User Input → Extracted Signals → LOGGED SAFE → Hybrid Learning ↓           ↓ (Signals)      ↓ "I'm
+"struggle"  →       Log Entry:    User lexicon depressed" "vulnerability"     signals,      (signal
+contexts "melancholy"        gates,        only) metadata ✅ PRIVACY SAFE
+
 ```
 
 ## Security Model

@@ -89,6 +89,7 @@ personalization-vs-privacy dilemma:
 ```text
 ```
 
+
 User Login ↓ (password-derived key) Decrypt Profile & Load History ↓ "Welcome back, Taurin!" ↓ User
 Conversation ↓ Store Encrypted (TTL: 7/30/90/365 days) ↓ Daily Dreams (patterns, summaries) ↓
 Long-term Memory (90+ days)
@@ -160,6 +161,7 @@ Long-term Memory (90+ days)
 ```bash
 
 
+
 # 1. Install dependencies
 pip install cryptography pytest
 
@@ -169,6 +171,7 @@ pip install cryptography pytest
 
 ```text
 ```
+
 
 ### This Week (12-16 hours)
 
@@ -317,8 +320,10 @@ Conversation: "You said what about your work stress?"
 History: None
 Memory: None
 ```text
+
 ```text
 ```
+
 
 **After (New System):**
 
@@ -331,6 +336,7 @@ Memory: "Your most effective glyph this month: GROUNDING (85% effectiveness)"
 Personalization: Full (knows name, remembers patterns, suggests relevant glyphs)
 
 ```
+
 
 ### What FirstPerson Gets
 

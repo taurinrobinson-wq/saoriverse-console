@@ -21,8 +21,10 @@ architecture leverages these offline resources:
 # Install (one-time)
 pip install spacy
 ```text
+
 ```text
 ```
+
 
 ### 2. **NRC Emotion Lexicon (Already Integrated)**
 
@@ -65,6 +67,7 @@ vectors = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin'
 similar_words = vectors.most_similar('anxiety', topn=5)
 
 ```text
+
 ```
 
 **Benefit**: Responses could adapt based on semantic relationships, not just exact keywords
@@ -76,6 +79,7 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 **Purpose**: Learn the *flow* of emotional language from your glyphs
 
 ```python
+
 from nltk.text import TextCollection
 
 # Build from all your glyph descriptions + poetry + prior responses
@@ -83,8 +87,10 @@ linguistic_patterns = TextCollection([ list_of_glyph_descriptions, list_of_poetr
 list_of_prior_responses ])
 
 # Generate realistic-sounding next phrases based on learned patterns
+
 ```sql
 ```sql
+
 ```
 
 **Benefit**: Prevents repetitive phrasing by learning *your actual voice* from existing glyphs
@@ -96,6 +102,7 @@ list_of_prior_responses ])
 **Purpose**: Understand *sentence structure* and emotional intensity
 
 ```python
+
 
 import spacy
 
@@ -117,6 +124,7 @@ for token in doc: print(f"{token.text} -> {token.dep_} ({token.head.text})")
 
 ```text
 ```
+
 
 **Benefit**: Understand the *structure* of emotional statements and respond to the actual complaint (communication friction) not just keywords
 
@@ -143,8 +151,10 @@ people = extracted["people"]  # ["Michelle"]
 if people:
     person = people[0]
 ```text
+
 ```text
 ```
+
 
 ### **Phase 3: Optional (If you want learning)**
 
@@ -189,6 +199,7 @@ class DynamicResponseComposer:
         # Return composed response (never identical)
 
 ```text
+
 ```
 
 ##
@@ -198,15 +209,18 @@ class DynamicResponseComposer:
 ### Before (Template-Based)
 
 ```
+
 RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 
 ```text
 ```text
+
 ```
 
 ### After (Compositional)
 
 ```
+
 
 
 # Each response randomly selects from multiple opening styles

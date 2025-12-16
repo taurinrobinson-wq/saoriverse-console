@@ -52,8 +52,10 @@ In the Streamlit Cloud dashboard, go to App settings → Secrets:
 [supabase]
 url = "your-supabase-url"
 ```text
+
 ```text
 ```
+
 
 ### 4. That's It
 
@@ -84,6 +86,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 ```text
+
 ```
 
 The app will run with built-in response generation.
@@ -102,8 +105,10 @@ The app will run with built-in response generation.
 ## Architecture
 
 ```
+
 Streamlit Cloud/Railway ↓ main_v2.py (Entry point) ↓ Supabase (persistence) ← Conversation history ↓
 Signal Parser ← Response generation with learning ↓ Glyph System ← Emotional response composition
+
 ```
 
 ##

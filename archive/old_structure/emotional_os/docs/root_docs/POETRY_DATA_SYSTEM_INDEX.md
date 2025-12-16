@@ -18,11 +18,13 @@ cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
 
+
 ### 2. Verify It Worked
 
 ```bash
 python poetry_data_pipeline.py --status
 ```
+
 
 ### 3. Use in Your Code
 
@@ -33,6 +35,7 @@ hub = PoetryDataHub("poetry_data")
 adapter = ProcessingModeAdapter(hub)
 data = adapter.for_signal_extraction()  # or your mode
 ```
+
 
 ##
 
@@ -201,6 +204,7 @@ data = adapter.for_signal_extraction()
 # Returns: {collection_name: clean_text}
 ```
 
+
 ### Mode 2: Lexicon Learning
 
 ```python
@@ -208,6 +212,7 @@ data = adapter.for_lexicon_learning()
 
 # Returns: {collection_name: clean_text}
 ```
+
 
 ### Mode 3: Glyph Generation
 
@@ -217,6 +222,7 @@ data = adapter.for_glyph_generation()
 # Returns: [(collection_name, clean_text), ...]
 ```
 
+
 ### Mode 4: Ritual Processing
 
 ```python
@@ -224,6 +230,7 @@ data = adapter.for_ritual_processing()
 
 # Returns: {collection_name: clean_text}
 ```
+
 
 ##
 
@@ -255,6 +262,7 @@ POETRY_IMPLEMENTATION_MANIFEST.md      Technical specs (13 KB)
 POETRY_DATA_SYSTEM_INDEX.md            This file
 ```
 
+
 ### Implementation
 
 ```
@@ -265,6 +273,7 @@ scripts/utilities/
   └── poetry_glyph_generator.py        Glyph generation (11 KB)
 ```
 
+
 ### Generated Data
 
 ```
@@ -274,6 +283,7 @@ poetry_data/
   ├── clean/                           Cleaned texts
   └── validated/                       Validated texts
 ```
+
 
 ##
 
@@ -311,6 +321,7 @@ for collection_name, text in data.items():
     your_processing_function(text)  # Guaranteed clean input
 ```
 
+
 ##
 
 ## 🚀 Getting Started
@@ -323,6 +334,7 @@ for collection_name, text in data.items():
 cat POETRY_QUICK_REFERENCE.md
 ```
 
+
 ### Step 2: Process Poetry (5-10 minutes)
 
 ```bash
@@ -330,17 +342,20 @@ cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
 
+
 ### Step 3: Verify (10 seconds)
 
 ```bash
 python poetry_data_pipeline.py --status
 ```
 
+
 ### Step 4: Integrate (copy-paste from examples)
 
 ```bash
 cat /workspaces/saoriverse-console/POETRY_INTEGRATION_EXAMPLES.md
 ```
+
 
 ##
 

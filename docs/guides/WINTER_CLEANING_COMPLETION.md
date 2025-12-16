@@ -20,6 +20,7 @@ reference:
 ```text
 ```
 
+
 archive/phase_infrastructure/
 ├── __init__.py
 ├── phase_1_generator.py
@@ -44,8 +45,10 @@ archive/phase_infrastructure/
 
 Specialized analysis and reporting utilities:
 ```text
+
 ```text
 ```
+
 
 tools/analysis/
 ├── __init__.py
@@ -64,6 +67,7 @@ tools/analysis/
 Document handling utilities:
 
 ```text
+
 ```
 
 tools/document_processing/
@@ -76,11 +80,14 @@ tools/document_processing/
 
 
 
+
 ### ✅ Glyph Testing Tools → `tools/glyph_testing/` (2 files)
 
 Glyph testing and validation:
+
 ```text
 ```text
+
 ```
 
 tools/glyph_testing/
@@ -93,6 +100,7 @@ tools/glyph_testing/
 
 
 
+
 **Note**: `glyph_response_helpers.py` and `glyph_response_templates.py` already exist in `src/` as the canonical versions. The duplicates were removed.
 
 ### ✅ Test Files → `tests/integration/` (3 files)
@@ -101,6 +109,7 @@ Integration and temporary test files:
 
 ```text
 ```
+
 
 tests/integration/
 ├── test_scenarios.py
@@ -185,8 +194,10 @@ Files now available in new locations:
 
 ## Directory Structure - Final State
 ```text
+
 ```text
 ```
+
 
 /workspaces/saoriverse-console/
 ├── start.py                          (Railroad entry)

@@ -27,6 +27,7 @@ genuine engagement. Crime wave context creates tension that impacts all encounte
 ```sql
 ```
 
+
 NPC: "You're not from here. Outsiders take more than they give."
 
 Player Options: A) "I've lost too much to take more."  → Shows vulnerability B) "I'll prove I can
@@ -64,8 +65,10 @@ caution
 
 ### Dialogue Pattern: First Encounter
 ```text
+
 ```text
 ```
+
 
 NPC: "I'd welcome you with open arms, but too many hands here have stolen."
 
@@ -114,6 +117,7 @@ slowly."                → Respects their process
 ## Trust Meter (Optional Implementation)
 
 ```text
+
 ```
 
 Per NPC:
@@ -131,6 +135,7 @@ Actions:
 ```
 
 
+
 ##
 
 ## Social Dynamics: The Marketplace Web
@@ -142,8 +147,10 @@ Actions:
 - Trust is not isolated; it propagates through the marketplace community
 
 ### Example:
+
 ```text
 ```text
+
 ```
 
 Player helps Nima (mistrusting guard) find stolen goods
@@ -152,6 +159,7 @@ Player helps Nima (mistrusting guard) find stolen goods
 → But Nima's rival, a black market trader, becomes wary
 
 ```
+
 
 
 

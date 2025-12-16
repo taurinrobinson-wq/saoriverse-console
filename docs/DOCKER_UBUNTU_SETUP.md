@@ -37,8 +37,10 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Verify installation
 ```text
+
 ```text
 ```
+
 
 ### Step 1b: Post-Installation Setup (Optional but Recommended)
 
@@ -54,11 +56,13 @@ newgrp docker
 # Verify you can run docker without sudo
 
 ```text
+
 ```
 
 ### Step 1c: Start Docker Service
 
 ```bash
+
 
 # Enable Docker to start on boot
 sudo systemctl enable docker
@@ -67,8 +71,10 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # Check status
+
 ```text
 ```text
+
 ```
 
 ##
@@ -76,6 +82,7 @@ sudo systemctl start docker
 ## Part 2: Install Docker Compose (if not included)
 
 ```bash
+
 
 
 # Check if docker-compose already installed
@@ -89,6 +96,7 @@ sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-
 
 ```text
 ```
+
 
 ##
 
@@ -130,8 +138,10 @@ EXPOSE 8000
 
 # Run FastAPI server
 ```text
+
 ```text
 ```
+
 
 #### 3b. Create `Dockerfile.frontend` (Frontend - React/Expo)
 
@@ -158,11 +168,13 @@ EXPOSE 3000
 # Start Expo
 
 ```bash
+
 ```
 
 #### 3c. Create `docker-compose.yml`
 
 ```yaml
+
 version: '3.8'
 
 services: backend: build: context: . dockerfile: Dockerfile ports:
@@ -198,13 +210,16 @@ networks:
       - saoriverse
 
 networks: saoriverse:
+
 ```text
 ```text
+
 ```
 
 #### 3d. Create `.dockerignore`
 
 ```
+
 
 .git .gitignore .venv venv __pycache__
 *.pyc
@@ -212,6 +227,7 @@ networks: saoriverse:
 
 ```text
 ```
+
 
 ##
 
@@ -227,8 +243,10 @@ ssh root@161.35.227.49
 # Clone the repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
+
 ```text
 ```
+
 
 ### 4b: Configure Environment Variables
 
@@ -241,11 +259,13 @@ cp .env.example .env
 # Edit with your settings
 
 ```sql
+
 ```
 
 Add/update these variables:
 
 ```env
+
 
 # API Configuration
 API_HOST=0.0.0.0 API_PORT=8000 API_URL=http://161.35.227.49:8000
@@ -258,11 +278,13 @@ DATABASE_URL=sqlite:///./data_local/app.db
 
 ```text
 ```text
+
 ```
 
 ### 4c: Build and Start Containers
 
 ```bash
+
 
 
 # Build images
@@ -285,6 +307,7 @@ docker compose logs -f backend
 ```text
 ```
 
+
 ### 4d: Verify Deployment
 
 ```bash
@@ -297,8 +320,10 @@ curl http://161.35.227.49:3000
 
 # Check container health
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -341,6 +366,7 @@ server {
     }
 
 ```text
+
 ```
 
 ##
@@ -348,6 +374,7 @@ server {
 ## Part 6: Common Docker Commands
 
 ```bash
+
 
 # View all containers
 docker ps -a
@@ -383,8 +410,10 @@ docker compose logs -f
 docker compose exec backend bash
 
 # Check resource usage
+
 ```text
 ```text
+
 ```
 
 ##
@@ -394,6 +423,7 @@ docker compose exec backend bash
 ### Update Application Code
 
 ```bash
+
 
 
 # Pull latest changes
@@ -407,6 +437,7 @@ docker compose build
 ```text
 ```
 
+
 ### View Application Logs
 
 ```bash
@@ -416,8 +447,10 @@ docker compose logs -f
 
 # Last 100 lines
 ```text
+
 ```text
 ```
+
 
 ### Backup Data
 
@@ -431,6 +464,7 @@ docker compose exec backend cp data_local/app.db data_local/app.db.backup
 docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
 
 ```text
+
 ```
 
 ##
@@ -441,18 +475,22 @@ docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
 
 ```bash
 
+
 # Check logs
 docker compose logs backend
 
 # Rebuild and restart
 docker compose down
+
 ```text
 ```text
+
 ```
 
 ### Port conflicts
 
 ```bash
+
 
 
 # Check what's using port 8000
@@ -462,6 +500,7 @@ sudo netstat -tlnp | grep 8000
 
 ```text
 ```
+
 
 ### Network issues
 
@@ -474,8 +513,10 @@ docker network inspect saoriverse-console_saoriverse
 # Rebuild network
 docker compose down
 ```text
+
 ```text
 ```
+
 
 ### Out of disk space
 
@@ -488,6 +529,7 @@ docker system df
 # Clean up unused images/containers/networks
 
 ```text
+
 ```
 
 ##
@@ -498,6 +540,7 @@ docker system df
 
 ```bash
 
+
 # Install Certbot
 sudo apt install -y certbot python3-certbot-nginx
 
@@ -507,6 +550,7 @@ sudo certbot certonly --standalone -d 161.35.227.49
 # Update nginx.conf with SSL
 
 # Then: docker compose restart nginx
+
 ```
 
 ##

@@ -19,29 +19,36 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 
 ```powershell
 ```text
+
 ```text
 ```
+
 
 **Option 2: Custom interval (e.g., every 15 minutes)**
 
 ```powershell
 
 ```text
+
 ```
 
 **Option 3: Custom commit message**
 
 ```powershell
+
 ```text
 ```text
+
 ```
 
 **Option 4: Stop anytime**
 
 ```
 
+
 ```text
 ```
+
 
 ### macOS/Linux
 
@@ -49,21 +56,26 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 **Option 2: Custom interval (e.g., every 10 minutes)**
 
 ```bash
 
 ```text
+
 ```
 
 **Option 3: Stop anytime**
 
 ```
+
 ```text
 ```text
+
 ```
 
 ##
@@ -81,6 +93,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 
 ```
 
+
 🔄 Starting automatic git commit & push service... Interval: every 30 minutes Press Ctrl+C to stop
 
 [2025-12-12 14:05:23] Found 3 modified file(s) ✓ Staged changes ✓ Committed: auto: periodic commit
@@ -90,6 +103,7 @@ and push (2025-12-12 14:05:23) ✓ Pushed to remote Waiting 30 minutes until nex
 
 ```text
 ```
+
 
 ##
 
@@ -123,8 +137,10 @@ The auto-commit scripts work alongside manual commits:
 git add src/specific-file.ts
 git commit -m "feat: implement specific feature"
 ```text
+
 ```text
 ```
+
 
 ### 4. Handle Conflicts
 
@@ -149,6 +165,7 @@ $trigger = New-ScheduledTaskTrigger -AtStartup -RepetitionInterval (New-TimeSpan
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\path\to\scripts\auto-commit.ps1"
 
 ```text
+
 ```
 
 ### macOS/Linux (Cron)
@@ -157,12 +174,15 @@ Create a cron job to run every 30 minutes:
 
 ```bash
 
+
 # Edit crontab
 crontab -e
 
 # Add this line (runs every 30 minutes)
+
 ```text
 ```text
+
 ```
 
 ##
@@ -173,8 +193,10 @@ crontab -e
 
 ```bash
 
+
 ```text
 ```
+
 
 ### "Git command not found"
 
@@ -183,8 +205,10 @@ Ensure git is in your PATH:
 ```bash
 which git  # macOS/Linux
 ```text
+
 ```text
 ```
+
 
 ### "Push failed (may require PR)"
 
@@ -200,6 +224,7 @@ Check if there are actual changes:
 ```bash
 
 ```text
+
 ```
 
 If empty, everything is already committed.
@@ -212,10 +237,13 @@ If you prefer manual one-off commits:
 
 ```bash
 
+
 # Quick single commit
 cd d:\saoriverse-console git add -A git commit -m "feat: implement emotion learning system"
+
 ```text
 ```text
+
 ```
 
 ##
@@ -228,8 +256,10 @@ cd d:\saoriverse-console git add -A git commit -m "feat: implement emotion learn
 
 ```powershell
 
+
 ```text
 ```
+
 
 **To remove cron job (macOS/Linux):**
 
@@ -238,6 +268,7 @@ crontab -e
 
 # Remove the line you added earlier
 ```
+
 
 ##
 

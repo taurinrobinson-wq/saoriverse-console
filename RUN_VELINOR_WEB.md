@@ -15,14 +15,17 @@ frontend).
 ```bash
 cd d:\saoriverse-console
 ```text
+
 ```text
 ```
+
 
 Expected output:
 
 ```
 
 ```text
+
 ```
 
 The API will be available at:
@@ -33,14 +36,18 @@ The API will be available at:
 ## Terminal 2: Start Frontend (Next.js)
 
 ```bash
+
 cd d:\saoriverse-console\velinor-web
+
 ```text
 ```text
+
 ```
 
 Expected output:
 
 ```
+
 
 > velinor-web@0.1.0 dev
 > next dev
@@ -49,6 +56,7 @@ Expected output:
 
 ```text
 ```
+
 
 ## Open in Browser
 
@@ -91,8 +99,10 @@ The frontend looks for the API at the URL in `.env.local`:
 
 ```
 ```text
+
 ```text
 ```
+
 
 For production deployment, change this to your Railway domain.
 
@@ -107,5 +117,6 @@ git commit -m "Velinor web stack complete"
 git push origin main
 
 ```
+
 
 Railway auto-deploys on push.

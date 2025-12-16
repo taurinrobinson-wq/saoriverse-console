@@ -47,6 +47,7 @@ Main game loop controller connecting story, engine, and dialogue.
 ```text
 ```
 
+
 Player Input → FirstPerson Intent Summary → Twine Processing → Game Mechanics → NPC Dialogue
 Generation → UI State Formatting → Response
 
@@ -102,8 +103,10 @@ Full integration guide covering:
 
 ### Data Flow
 ```text
+
 ```text
 ```
+
 
 Twine Story (JSON) ↓ [TwineStoryLoader] → Passages & Links ↓ [User Input: Type or Choice] ↓
 [VelinorTwineOrchestrator]
@@ -139,6 +142,7 @@ Twine Story (JSON) ↓ [TwineStoryLoader] → Passages & Links ↓ [User Input: 
 **3. Story Commands**
 
 ```json
+
 ```
 
 {background: location}      # UI shows background image
@@ -147,6 +151,7 @@ Twine Story (JSON) ↓ [TwineStoryLoader] → Passages & Links ↓ [User Input: 
 {multiplayer: true}        # Adapt dialogue for group
 
 ```
+
 
 
 
@@ -263,11 +268,13 @@ python3 velinor/engine/quickstart.py
 # Run with Streamlit (UI layer to be created)
 
 ```text
+
 ```
 
 ## Architecture Diagram
 
 ```
+
 ┌──────────────────────────────────────────────────────────────┐
 │                    Velinor: Remnants of the Tone             │
 └──────────────────────────────────────────────────────────────┘
@@ -321,6 +328,7 @@ python3 velinor/engine/quickstart.py
         │ - Mobile App      │
         │ - CLI Terminal    │
         └───────────────────┘
+
 ```
 
 ##

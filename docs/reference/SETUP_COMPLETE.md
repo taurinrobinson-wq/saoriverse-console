@@ -30,8 +30,10 @@ cd /workspaces/saoriverse-console
 python3 scripts/migrate_supabase.py
 
 ```text
+
 ```text
 ```
+
 
 ### ✅ Step 2: Verify & Start Using
 
@@ -40,22 +42,28 @@ After creating tables, verify they were created:
 ```bash
 
 ```text
+
 ```
 
 You should see:
 
 ```
+
 ✅ conversations table EXISTS ✅ conversation_metadata table EXISTS
+
 ```text
 ```text
+
 ```
 
 Then start your app:
 
 ```bash
 
+
 ```text
 ```
+
 
 ##
 
@@ -68,8 +76,10 @@ Then start your app:
 url = "https://gyqzyuvuuyfjxnramkfq.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```text
+
 ```text
 ```
+
 
 **Status**: ✅ Active and ready to use
 
@@ -89,6 +99,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 └── ➕ New Conversation
 
 ```text
+
 ```
 
 ### How It Works
@@ -107,6 +118,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 
 ```bash
 
+
 # 1. Start the app
 streamlit run app.py
 
@@ -118,6 +130,7 @@ streamlit run app.py
 
 ```text
 ```text
+
 ```
 
 ### Full Test
@@ -139,6 +152,7 @@ streamlit run app.py
 
 ```
 
+
 saoriverse-console/
 ├── .streamlit/
 │   └── secrets.toml                    ✅ Configured with your Supabase credentials
@@ -156,6 +170,7 @@ saoriverse-console/
 ```text
 ```
 
+
 ##
 
 ## Troubleshooting
@@ -172,8 +187,10 @@ python3 scripts/migrate_supabase.py
 # Paste into Supabase SQL editor
 
 ```text
+
 ```text
 ```
+
 
 ### Conversations not saving
 
@@ -221,26 +238,32 @@ Store: {
     created_at: "2024-11-04T23:20:00Z"
 
 ```text
+
 ```
 
 ### On Page Refresh
 
 ```
+
 User refreshes browser (F5) ↓ App loads ↓ ConversationManager queries Supabase ↓ Loads all
 conversations for this user ↓ Displays in sidebar ↓ Session state restored from Supabase ↓
+
 ```text
 ```text
+
 ```
 
 ### On Rename
 
 ```
 
+
 User clicks ✏️ pencil icon ↓ Inline input appears ↓ User types new title ↓ Clicks "Save" ↓
 ConversationManager.rename_conversation() called ↓ Supabase updates row ↓ Sidebar refreshes ↓
 
 ```text
 ```
+
 
 ##
 
@@ -308,8 +331,10 @@ python3 scripts/migrate_supabase.py --verify
 
 # View recent commits
 ```text
+
 ```text
 ```
+
 
 ### View Data in Supabase
 
@@ -331,6 +356,7 @@ python3 -c "from emotional_os.deploy.modules.conversation_manager import Convers
 git status
 
 ```text
+
 ```
 
 ##
@@ -358,7 +384,9 @@ Your setup is complete when you can:
 Your persistent conversation storage is now live. **Start the app and begin saving your conversations!**
 
 ```bash
+
 streamlit run app.py
+
 ```
 
 **Enjoy seamless conversation persistence! 🚀**

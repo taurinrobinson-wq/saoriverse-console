@@ -75,6 +75,7 @@ User Input → AffectParser
         User receives brief, emotionally grounded response
 ```
 
+
 ##
 
 ## Key Features
@@ -103,6 +104,7 @@ warm → joy category
 confused → confused category
 neutral → calm category
 ```
+
 
 ### 4. Response Diversity
 
@@ -188,6 +190,7 @@ neutral → calm category
 ✓ Fallback mechanisms working
 ```
 
+
 ##
 
 ## Response Examples
@@ -202,6 +205,7 @@ Response: "I feel the weight. It's Loss layered with fatigue. Tell me more about
 Length: 91 chars (conversational)
 ```
 
+
 ### Example 2: Anxiety
 
 ```
@@ -212,6 +216,7 @@ Response: "I hear the Anxiety and the Breaking underneath. What's threatening to
 Length: 82 chars
 ```
 
+
 ### Example 3: Anger
 
 ```
@@ -221,6 +226,7 @@ Glyph: Fire
 Response: "I feel that Fire. The anger is burning. What's fueling it most?"
 Length: 65 chars
 ```
+
 
 ##
 
@@ -310,6 +316,7 @@ Length: 65 chars
    - 21 new tests, all passing
    - Total: 219/219 tests passing
 ```
+
 
 ##
 

@@ -30,14 +30,17 @@ Make sure `.streamlit/secrets.toml` has:
 [supabase]
 url = "https://your-project.supabase.co"
 ```text
+
 ```text
 ```
+
 
 ### 3. Restart Your App
 
 ```bash
 
 ```text
+
 ```
 
 ## Using the New Features
@@ -47,13 +50,16 @@ url = "https://your-project.supabase.co"
 On the left sidebar, you'll see:
 
 ```
+
 📚 Previous Conversations
 ├── 💬 "Feeling anxious about work"    ← Click to load
 │   ├── ✏️                             ← Click to rename
 │   └── 🗑️                             ← Click to delete
 ├── 💬 "Weekend plans"
+
 ```text
 ```text
+
 ```
 
 ### Saving Conversations
@@ -70,10 +76,12 @@ When you start a new conversation, the first message is used to auto-generate a 
 
 ```
 
+
 You: "I've been feeling really overwhelmed lately" ↓
 
 ```text
 ```
+
 
 You can rename it anytime by clicking ✏️
 
@@ -116,8 +124,10 @@ Example:
   "created_at": "2024-01-15T10:30:00Z",
   "updated_at": "2024-01-15T10:35:00Z"
 ```text
+
 ```text
 ```
+
 
 ## Troubleshooting
 
@@ -168,6 +178,7 @@ browser console (F12) for errors 4. Verify `sql/conversations_table.sql` was run
 # Check Supabase:
 
 ```text
+
 ```
 
 ### Monitoring
@@ -180,6 +191,7 @@ Check Supabase dashboard:
 ### API Usage
 
 ```python
+
 from emotional_os.deploy.modules.conversation_manager import ConversationManager
 
 manager = ConversationManager(user_id="user123")
@@ -194,8 +206,10 @@ conv = manager.load_conversation("conv-uuid") print(conv['messages'])
 success, msg = manager.rename_conversation("conv-uuid", "New Title")
 
 # Delete
+
 ```text
 ```text
+
 ```
 
 ## Documentation
@@ -211,6 +225,7 @@ For more details, see:
 These features are in commit `4b1c501`:
 
 ```
+
 
 feat: implement persistent conversation storage with auto-naming
 

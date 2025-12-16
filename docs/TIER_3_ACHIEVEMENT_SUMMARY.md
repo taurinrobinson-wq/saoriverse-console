@@ -123,6 +123,7 @@ and paradox balancing 4. **MythologyWeaver** - Personal narrative and conversati
 ```text
 ```
 
+
 User Input ↓ Tier 1: Foundation (40ms)
 ├─ LexiconLearner: Learn new vocabulary
 ├─ Sanctuary: Apply safety wrapping with compassion
@@ -323,8 +324,10 @@ Easy to extend:
 
 ### **Performance Allocation**
 ```text
+
 ```text
 ```
+
 
 Tier 1: 40ms (Foundation) Tier 2: 20ms (Aliveness) Tier 3: 10ms (Poetry) Tier 4: 20ms (Consciousness
 Bridging) - planned Buffer: 10ms Total: 100ms

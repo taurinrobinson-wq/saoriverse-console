@@ -7,6 +7,7 @@ Organized test suite for the FirstPerson / Emotional OS system.
 ```text
 ```
 
+
 tests/
 ├── conftest.py                 # Pytest configuration (shared fixtures)
 ├── run_tests.py               # Test runner script
@@ -38,6 +39,7 @@ tests/
 ```bash
 
 
+
 # Run all tests
 python tests/run_tests.py
 
@@ -54,6 +56,7 @@ python tests/run_tests.py performance
 
 ```text
 ```
+
 
 ### Using pytest directly
 
@@ -78,8 +81,10 @@ pytest -v tests/
 
 # Run with markers
 ```text
+
 ```text
 ```
+
 
 ## Test Categories
 
@@ -119,14 +124,18 @@ Tests focused on system evolution and performance:
 pip install -r requirements.txt
 
 ```text
+
 ```
 
 ### First Run
 
 ```bash
+
 cd /workspaces/saoriverse-console
+
 ```text
 ```text
+
 ```
 
 ## Expected Results
@@ -162,10 +171,12 @@ Some integration tests require local database setup:
 ```bash
 
 
+
 # Initialize glyphs database
 
 ```text
 ```
+
 
 ### Missing Modules
 
@@ -186,8 +197,10 @@ def test_something():
     from emotional_os.glyphs import some_function
     result = some_function()
 ```text
+
 ```text
 ```
+
 
 5. Run: `pytest tests/unit/test_my_feature.py`
 
@@ -201,6 +214,7 @@ For GitHub Actions or other CI systems:
   run: python tests/run_tests.py
 
 ```
+
 
 ## Continuous Integration Setup
 

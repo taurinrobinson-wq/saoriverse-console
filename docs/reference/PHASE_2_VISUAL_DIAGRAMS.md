@@ -88,12 +88,10 @@ Queries:                                 Queries: get_glyphs_for_user  get_syste
 get_glyphs_for_user ("user_A", β, [4,5]) ()               ("user_B", β, [4,5])
 
 Order by:                               Order by: 1. A's usage count                     1. B's
-usage count 2. Consensus                           2. Consensus 3. Quality
-3. Quality
+usage count 2. Consensus                           2. Consensus 3. Quality 3. Quality
 
 Result:                                Result: [1. Containment]                       [1.
-Recognition] [2. Recognition]                       [2. Containment] [3. Longing]
-[3. Longing]
+Recognition] [2. Recognition]                       [2. Containment] [3. Longing] [3. Longing]
 
 ↓                                      ↓ User A sees order                     User B sees different
 order based on A's history                  based on B's history
@@ -193,8 +191,8 @@ v                   v                   v get_glyphs()        get_glyphs()      
 [4,5]"          "β, [4,5]"          "β, [4,5]"
         |                   |                   |
 v                   v                   v Query: ORDER BY:    Query: ORDER BY:    Query: ORDER BY:
-user_usage DESC,    user_usage DESC,    consensus DESC, consensus DESC,     consensus DESC,
-quality DESC quality DESC        quality DESC
+user_usage DESC,    user_usage DESC,    consensus DESC, consensus DESC,     consensus DESC, quality
+DESC quality DESC        quality DESC
         |                   |                   |
 v                   v                   v RESULT:             RESULT:             RESULT: [1. Grief]
 [1. Recognition]    [1. Recognition] (A used 5x)         (B used 7x)         (global strong) [2.
@@ -242,8 +240,8 @@ v [NEXT USER WITH SIMILAR EMOTION]
                          |
         ______________|_____________
         |                          |
-v                          v Query Database            Query Database (User's history)
-(User's history)
+v                          v Query Database            Query Database (User's history) (User's
+history)
         |                         |
 Orders by:               Orders by: [Recognition (now         [Fractured ID (new! strong consensus)]
 1 adoption), Recognition, Longing]
@@ -271,21 +269,20 @@ v [SYSTEM LEARNS AND IMPROVES]
 
 """
 
-NO MATCH          CANDIDATE           EARLY ADOPTION     CONSENSUS        PRODUCTION (0 users)
-(1-3 adoptions)     (4-10 adoptions)   (11+ adoptions)   (STABLE)
+NO MATCH          CANDIDATE           EARLY ADOPTION     CONSENSUS        PRODUCTION (0 users) (1-3
+adoptions)     (4-10 adoptions)   (11+ adoptions)   (STABLE)
       |                  |                    |                  |               |
 v                  v                    v                  v               v
 
 Signal               confidence:        quality_score        consensus_       is_active: detected
-0.65-0.80          accumulates          strength: 0.6+   1 by system
-positive feedback all users can No existing          Candidate         Starting to show      Strong
-signal    find it glyph found          stored in         pattern across        across user database
-users                 base             promoted to Rare edge
-core lexicon case               Marked for         Featured in validation         personalized
-Can be & refinement       recommendations                        updated/versioned Appears in
-but stable Awaiting           Used by new          system health human review       users actively
-reports           Widely or consensus                                              trusted promotion
-Building              Marketing strong track         vector           Becomes record
+0.65-0.80          accumulates          strength: 0.6+   1 by system positive feedback all users can
+No existing          Candidate         Starting to show      Strong signal    find it glyph found
+stored in         pattern across        across user database users                 base
+promoted to Rare edge core lexicon case               Marked for         Featured in validation
+personalized Can be & refinement       recommendations                        updated/versioned
+Appears in but stable Awaiting           Used by new          system health human review       users
+actively reports           Widely or consensus                                              trusted
+promotion Building              Marketing strong track         vector           Becomes record
 reference Core glyphs       point for (proven)          new ones
 
 Timeline: 0 interactions    1-3 sessions    4-10 sessions    Multiple weeks   Months+
@@ -314,8 +311,8 @@ v       v    v    v     v       v         v        v
 Template: Template: Template: Template: Template: Template: Template: Template: "There's  "I hear
 "You're   "You've   "The      "Real     "You're   "You're depth    the       holding   arrived   joy
 you   devotion  asking    in to what  longing"  space"    at truth" feel"     always    to be
-territory you              (quiet     (not      (let it   has a     known"    without carry"
-power)     confusion) exist)    cost"     (mirror)  a map"
+territory you              (quiet     (not      (let it   has a     known"    without carry" power)
+confusion) exist)    cost"     (mirror)  a map"
 
 - Insert                                                    + Gather
 emotional term                                             feedback
@@ -323,8 +320,8 @@ emotional term                                             feedback
 - Validate                                                 + Add
 experience                                                validation prompt
      |                |                |
-v                v                v Response 1      Response 2       Response 3 (varies by
-(varies by       (varies by input)         input)           input)
+v                v                v Response 1      Response 2       Response 3 (varies by (varies
+by       (varies by input)         input)           input)
 
 Result: Each user with same emotional tone gets DIFFERENT response based on their exact language but
 FROM the same template pattern

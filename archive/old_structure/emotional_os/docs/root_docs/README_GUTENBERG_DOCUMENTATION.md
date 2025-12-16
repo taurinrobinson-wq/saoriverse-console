@@ -90,6 +90,7 @@ python scripts/utilities/poetry_glyph_generator.py && \
 python scripts/utilities/glyph_generator_from_extracted_data.py --use-cached
 ```
 
+
 ### Option 2: Understand First
 
 Read [GUTENBERG_QUICK_FACTS.md](./GUTENBERG_QUICK_FACTS.md) (5 minutes)
@@ -112,6 +113,7 @@ OUTPUT:
 ├─ 98% ritual coverage
 └─ Production-ready system ✅
 ```
+
 
 ##
 
@@ -174,6 +176,7 @@ PHASE 3: Generate        (<5 min)
   └─ Integrate into system (50-80 final glyphs)
 ```
 
+
 ##
 
 ## ✨ Key Discoveries
@@ -219,6 +222,7 @@ SYSTEM (existing):
 ├─ parser/                               (Signal parser)
 └─ scripts/                              (Utilities)
 ```
+
 
 ##
 
@@ -283,6 +287,7 @@ PROJECT STATS:
 └─ Status: ✅ Production-Ready
 ```
 
+
 ##
 
 ## ✅ What's Documented
@@ -332,6 +337,7 @@ cd /workspaces/saoriverse-console
 cat GUTENBERG_QUICK_START.md
 ```
 
+
 ### To Learn More
 
 Read any of the documentation files based on your needs:
@@ -358,6 +364,7 @@ python scripts/utilities/gutenberg_fetcher.py
 # View results
 cat bulk_processing_results.json | jq '.'
 ```
+
 
 ##
 

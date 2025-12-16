@@ -124,8 +124,10 @@ All other user-data tables need RLS policies applied:
 # Run the script
 
 ```text
+
 ```text
 ```
+
 
 ### 2. Run Final Cleanup
 
@@ -135,21 +137,25 @@ All other user-data tables need RLS policies applied:
 # Copy final_cleanup.sql to Supabase SQL Editor
 
 ```text
+
 ```
 
 ### 3. Populate emotional_tags (Optional)
 
 ```bash
 
+
 # Find emotional_tags_rows.sql or create tags
 
 ```text
 ```text
+
 ```
 
 ### 4. Test the System
 
 ```bash
+
 
 
 # Start your application
@@ -163,6 +169,7 @@ All other user-data tables need RLS policies applied:
 
 ```text
 ```
+
 
 ### 5. Evaluate Unclear Tables
 
@@ -186,6 +193,7 @@ SUPABASE_SERVICE_ROLE_KEY=configured
 CURRENT_SAORI_URL=configured (demo mode)
 OPENAI_API_KEY=configured
 ```
+
 
 ### ✅ Edge Functions
 

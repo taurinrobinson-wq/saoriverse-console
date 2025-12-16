@@ -34,6 +34,7 @@ SupabaseManager (persist everything)
 User Response
 ```
 
+
 **Key Classes:**
 
 - **FirstPersonOrchestrator:** Main orchestrator coordinating all modules
@@ -121,6 +122,7 @@ if has_ambiguity:
     # Add to response
 ```
 
+
 ### 2. Frequency Reflector Integration
 
 ```python
@@ -134,6 +136,7 @@ if should_reflect:
     # Add to response
 ```
 
+
 ### 3. Memory Manager Integration
 
 ```python
@@ -146,6 +149,7 @@ self.memory_rehydrated = memory_context.get("anchor_count") > 0
 top_themes = self.memory_manager.get_top_themes()
 memory_summary = self.memory_manager.get_memory_summary()
 ```
+
 
 ### 4. Response Templates Integration
 
@@ -161,6 +165,7 @@ if not response_parts:
         )
     response_parts.append(acknowledgment)
 ```
+
 
 ### 5. Supabase Manager Integration
 
@@ -183,6 +188,7 @@ def _persist_turn(self, user_input, response_text, theme, turn):
     return True
 ```
 
+
 ##
 
 ## Test Results
@@ -201,6 +207,7 @@ Phase 1.6: Integration Orchestrator      26 tests ✅
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 TOTAL:                                  137 tests ✅
 ```
+
 
 ### Key Test Validations
 
@@ -254,6 +261,7 @@ metrics = orchestrator.get_response_variety_metrics()
 print(f"Variety ratio: {metrics['variety_ratio']:.2%}")
 ```
 
+
 ### Factory Function Usage
 
 ```python
@@ -266,6 +274,7 @@ orchestrator = create_orchestrator(user_id="user_789")
 orchestrator.initialize_session()
 response = orchestrator.handle_conversation_turn("Hello, I need to talk.")
 ```
+
 
 ### Accessing Module Data
 
@@ -282,6 +291,7 @@ summary = orchestrator.get_conversation_summary()
 print(f"Themes: {summary['unique_themes']}")
 print(f"Reflections triggered: {summary['reflections_triggered']}")
 ```
+
 
 ##
 
@@ -313,6 +323,7 @@ class ResponseEngine:
         )
 ```
 
+
 ### For Signal Parser Integration
 
 Memory can be injected into signal parser context:
@@ -325,6 +336,7 @@ memory_signals = orchestrator.memory_manager.format_memory_for_parser()
 # Inject into parser
 parser.inject_context(memory_signals)
 ```
+
 
 ##
 
@@ -373,6 +385,7 @@ FirstPerson Orchestrator Architecture (Phase 1.6)
          │   - metadata                │
          └─────────────────────────────┘
 ```
+
 
 ##
 

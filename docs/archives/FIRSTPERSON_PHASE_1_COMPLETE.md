@@ -44,6 +44,7 @@ User Input
 User Response (with metadata)
 ```
 
+
 ### Key Features
 
 ✅ **Lightweight Design** - No heavy NLP, fast startup ✅ **Modular Architecture** - Each module
@@ -89,6 +90,7 @@ resp6 = orch.handle_conversation_turn("I want to help her more.")
 
 # → (different framing, no repetition, persisted to Supabase)
 ```
+
 
 ### Code Inventory
 

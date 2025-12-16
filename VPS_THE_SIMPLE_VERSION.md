@@ -26,6 +26,7 @@ Think of it like this:
 ```text
 ```
 
+
 Railway = Rental apartment where the landlord keeps breaking things DigitalOcean = Renting a small
 VPS where YOU have full control
 
@@ -83,8 +84,10 @@ VPS where YOU have full control
 
 When you click "Play" at `https://velinor.firstperson.chat`, here's what happens:
 ```text
+
 ```text
 ```
+
 
 1. Your browser sends request to velinor.firstperson.chat ↓ 2. DNS says "that's 123.45.67.89" (your
 DigitalOcean IP) ↓ 3. Browser connects to port 443 (HTTPS) ↓ 4. Nginx (reverse proxy) catches it
@@ -148,6 +151,7 @@ FastAPI ↓ 7. FastAPI runs the Velinor game engine ↓ 8. You play! 🎮
 **How it works**:
 
 ```text
+
 ```
 
 You make a change to Velinor code
@@ -165,6 +169,7 @@ Pull latest code, rebuild Docker, restart
 Your site is updated!
 
 ```
+
 
 
 
@@ -277,8 +282,10 @@ A:
 - Peace of mind 😊
 
 **Comparison**:
+
 ```text
 ```text
+
 ```
 
 Option       | Cost/mo | Reliability | Control | Support
@@ -286,6 +293,7 @@ Railway      | $5-50+  | 😢😢😢      | 😞     | 😞
 DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
 
 ```
+
 
 
 
@@ -300,8 +308,10 @@ cd d:\saoriverse-console
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
 ```text
+
 ```text
 ```
+
 
 ### 2. Create DigitalOcean Account (5 min)
 
@@ -351,18 +361,22 @@ You went from:
 ```
 
 ```text
+
 ```
 
 To:
 
 ```
+
 ```text
 ```text
+
 ```
 
 With:
 
 ```
+
 
 ✅ Production Docker setup (verified working) ✅ SSL/HTTPS (encrypted and secure) ✅ Auto-deployment
 (push code → site updates automatically) ✅ Full documentation (5 different guides) ✅ Peace of mind

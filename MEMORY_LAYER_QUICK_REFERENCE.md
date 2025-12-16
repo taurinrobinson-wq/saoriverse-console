@@ -7,6 +7,7 @@ Tracks user's emotional state across multiple messages and builds understanding.
 ```text
 ```
 
+
 Message 1: "I'm stressed" ↓ Message 2: "Too much on my mind at work" ↓ Message 3: "5 projects,
 Thursday deadline" ↓ SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
 
@@ -21,6 +22,7 @@ Thursday deadline" ↓ SYSTEM UNDERSTANDS: Work demands → cognitive flooding �
 
 ```python
 
+
 memory = ConversationMemory()
 
 # After each user message:
@@ -34,6 +36,7 @@ memory.get_next_clarifications()  # ["What triggered?", "How many things?"]
 
 ```text
 ```
+
 
 ### SemanticParsing (Input)
 
@@ -50,8 +53,10 @@ parsed = SemanticParsing(
     action_capacity="paralyzed",
     raw_input="...",
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -99,6 +104,7 @@ response = composer.compose_response_with_memory(
 )
 
 ```text
+
 ```
 
 ##
@@ -108,6 +114,7 @@ response = composer.compose_response_with_memory(
 ### With Memory
 
 ```python
+
 def compose_response_with_memory( input_text, conversation_memory, glyph=None, ):
     # 1. Get integrated state
 integrated_state = memory.integrated_state causal_chain = memory.causal_understanding
@@ -122,8 +129,10 @@ if len(glyph_set) > 1: validation = "This needs organizing."
 clarifications = memory.get_next_clarifications() question = "Which of these could wait?"
 
     # 5. Combine
+
 ```text
 ```text
+
 ```
 
 ##
@@ -148,11 +157,13 @@ clarifications = memory.get_next_clarifications() question = "Which of these cou
 
 ```
 
+
 Turn 1: 0.7 (emotion stated, cause unknown) Turn 2: 0.85 (mechanism revealed: work → flooding →
 paralysis)
 
 ```text
 ```
+
 
 ##
 
@@ -162,8 +173,10 @@ paralysis)
 Turn 1: [Still Insight]
 Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -231,6 +244,7 @@ SYSTEM (full context):
   stored: confident in specifics, confidence 0.95
 
 ```text
+
 ```
 
 ##
@@ -260,6 +274,7 @@ SYSTEM (full context):
 
 ```python
 
+
 # 1. Import
 from conversation_memory import ConversationMemory, SemanticParsing
 
@@ -279,6 +294,7 @@ triggered this?"], )
 # 5. Use memory in response
 response = composer.compose_response_with_memory( input_text=user_input, conversation_memory=memory,
 )
+
 ```
 
 ##

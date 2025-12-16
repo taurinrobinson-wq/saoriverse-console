@@ -2,16 +2,14 @@
 
 ## 🎯 Mission Accomplished
 
-You asked for a way to make **NPC dialogue emerge from personality**, and you've now got a complete, production-ready system that:
+You asked for a way to make **NPC dialogue emerge from personality**, and you've now got a complete,
+production-ready system that:
 
-✅ Generates dialogue dynamically from REMNANTS traits  
-✅ Creates player choice menus adapted to NPC state  
-✅ Maintains consistent NPC voice across all encounters  
-✅ Scales to unlimited NPCs without branching explosion  
-✅ Integrates seamlessly with your existing REMNANTS engine  
-✅ Works perfectly for TTS (text-to-speech) integration  
-
----
+✅ Generates dialogue dynamically from REMNANTS traits ✅ Creates player choice menus adapted to NPC
+state ✅ Maintains consistent NPC voice across all encounters ✅ Scales to unlimited NPCs without
+branching explosion ✅ Integrates seamlessly with your existing REMNANTS engine ✅ Works perfectly for
+TTS (text-to-speech) integration
+## 
 
 ## 📦 What Was Delivered
 
@@ -29,8 +27,7 @@ You asked for a way to make **NPC dialogue emerge from personality**, and you've
 - **`DIALOGUE_STORY_EXAMPLES.md`** — 7 real-world story scenarios
 
 **Total: 2243 lines of production + documentation code**
-
----
+## 
 
 ## 🧠 How It Works (The 30-Second Version)
 
@@ -54,8 +51,7 @@ Each NPC has three things:
    ```
 
 **Result:** Same base message, completely different flavor per NPC per playthrough.
-
----
+## 
 
 ## 🎮 Real-World Example
 
@@ -64,6 +60,7 @@ Each NPC has three things:
 **Player asks for help in marketplace**
 
 **Run 1 (Player: High Empathy + Wisdom)**
+
 ```
 Sera: "I see bloom in you.... like herbs, it blooms so softly."
 [EMPATHY] Listen deeply.
@@ -78,7 +75,9 @@ Drossel: "I see mon ami in you., mon cher — a deal is a deal."
 [AUTHORITY] Lead decisively.
 ```
 
+
 **Run 2 (Player: High Courage + Skepticism)**
+
 ```
 Sera: "I see fragile in you.... like herbs, it fades to shadow."
 [NEED] Perhaps ask for help.
@@ -93,9 +92,9 @@ Drossel: "I see shadow in you., mon cher — but shadows linger."
 [AUTHORITY] Perhaps lead decisively.
 ```
 
-**Same 9 NPCs, same scene, completely different dialogue.**
 
----
+**Same 9 NPCs, same scene, completely different dialogue.**
+## 
 
 ## 🎯 Key Features
 
@@ -125,6 +124,7 @@ Same NPC, different contexts = different templates:
 
 ### Feature 5: Zero Scaling Problems
 Add new NPC = 10-minute job:
+
 ```python
 LEXICONS["NewNPC"] = {
     "empathy_high": ["word1", "word2", ...],
@@ -135,9 +135,9 @@ LEXICONS["NewNPC"] = {
 temperaments["NewNPC"] = lambda text: f"{text}, their unique voice here."
 ```
 
-Done. No branching tree explosion.
 
----
+Done. No branching tree explosion.
+## 
 
 ## 📚 Documentation Structure
 
@@ -153,14 +153,14 @@ Done. No branching tree explosion.
 - Integrating into your engine → Read Quick Start
 - Understanding principles → Read Implementation Complete
 - Seeing it in action → Run the tests or read Story Examples
-
----
+## 
 
 ## 🔗 Integration Points
 
 ### Direct Hook Into Your Game Loop
 
 ```python
+
 # 1. Player enters scene with Sera
 encounter = generate_encounter("Sera", manager.get_npc("Sera").remnants, 1)
 
@@ -178,9 +178,9 @@ manager.apply_tone_effects({"empathy": 0.15})
 new_encounter = generate_encounter("Sera", manager.get_npc("Sera").remnants, 2)
 ```
 
-**That's it. Five lines to integrate into your game engine.**
 
----
+**That's it. Five lines to integrate into your game engine.**
+## 
 
 ## 📊 Test Results
 
@@ -197,12 +197,14 @@ new_encounter = generate_encounter("Sera", manager.get_npc("Sera").remnants, 2)
 ✓ Context Variations      — Same NPC, different contexts = different dialogue
 ```
 
+
 Run them yourself:
+
 ```bash
 python velinor/stories/test_dialogue_generation.py
 ```
 
----
+## 
 
 ## 💡 Design Philosophy
 
@@ -216,32 +218,26 @@ Better to have 100 carefully chosen words per trait than infinite random generat
 
 **Insight 3: Authored Emergence**
 Generated dialogue that *feels* hand-written because it's driven by personality, not dice rolls.
-
----
+## 
 
 ## 🚀 Next Steps
 
 ### Immediate (Integration)
-1. Hook dialogue generation into your game engine
-2. Add TTS to voice the generated lines
-3. Build first story scene using examples in `DIALOGUE_STORY_EXAMPLES.md`
+1. Hook dialogue generation into your game engine 2. Add TTS to voice the generated lines 3. Build
+first story scene using examples in `DIALOGUE_STORY_EXAMPLES.md`
 
 ### Short-term (Enhancement)
-1. Add dialogue persistence (save/load NPC state between sessions)
-2. Implement NPC-to-NPC dialogue (not just player-to-NPC)
-3. Add memory-driven lines (Mariel recalls specific past events)
+1. Add dialogue persistence (save/load NPC state between sessions) 2. Implement NPC-to-NPC dialogue
+(not just player-to-NPC) 3. Add memory-driven lines (Mariel recalls specific past events)
 
 ### Medium-term (Advanced)
-1. Trait contradiction dialogue ("I doubt... but maybe I believe")
-2. Ripple-aware dialogue ("Sera mentioned you were kind")
-3. Tool-unlock dialogue ("Now that you have the Compass...")
+1. Trait contradiction dialogue ("I doubt... but maybe I believe") 2. Ripple-aware dialogue ("Sera
+mentioned you were kind") 3. Tool-unlock dialogue ("Now that you have the Compass...")
 
 ### Long-term (Emergent)
-1. Dialogue affects gameplay (some choices lock other conversations)
-2. NPC reputation system (others treat you based on past actions)
-3. Dynamic lexicon learning (NPCs learn words from player)
-
----
+1. Dialogue affects gameplay (some choices lock other conversations) 2. NPC reputation system
+(others treat you based on past actions) 3. Dynamic lexicon learning (NPCs learn words from player)
+## 
 
 ## ✨ Why This Actually Works
 
@@ -257,12 +253,12 @@ Generated dialogue that *feels* hand-written because it's driven by personality,
 - Scales from 9 NPCs to 90 NPCs without multiplying workload
 
 **Result:** Feels hand-written, but generated from personality vectors.
-
----
+## 
 
 ## 📋 Files at a Glance
 
 ### Production Code
+
 ```
 velinor/engine/
   ├── npc_dialogue.py          (470 lines) - Lexicons, generation functions
@@ -272,7 +268,9 @@ velinor/stories/
   └── test_dialogue_generation.py (280 lines) - Comprehensive test suite
 ```
 
+
 ### Documentation
+
 ```
 DIALOGUE_GENERATION_GUIDE.md           (1200+ lines) - Full system guide
 DIALOGUE_SYSTEM_QUICK_START.md         (400+ lines)  - Integration examples
@@ -280,58 +278,62 @@ DIALOGUE_SYSTEM_IMPLEMENTATION_COMPLETE.md (400+ lines) - Implementation details
 DIALOGUE_STORY_EXAMPLES.md             (475+ lines) - 7 story scenarios
 ```
 
----
+## 
 
 ## 🎬 You're Ready
 
-✅ System is production-complete  
-✅ All code is tested and documented  
-✅ Integration is straightforward (5-line hook)  
-✅ Scaling is unlimited (no performance concern)  
-✅ Extensibility is built-in (add NPCs = 10 minutes)  
+✅ System is production-complete ✅ All code is tested and documented ✅ Integration is straightforward
+(5-line hook) ✅ Scaling is unlimited (no performance concern) ✅ Extensibility is built-in (add NPCs
+= 10 minutes)
 
 **Time to integrate into your game engine and start telling emergent stories.**
-
----
+## 
 
 ## 🎤 The Philosophy
 
 > "Good game dialogue isn't infinite randomness or rigid branches — it's personality expressing itself through consistent voice. When NPCs speak, they should sound like themselves. When they change, it should because they've become different people, not because the plot requires it."
 
 This system makes that philosophy **executable code**.
-
----
+## 
 
 ## 📞 Quick Reference
 
 **Want dialogue?**
+
 ```python
 dialogue = generate_dialogue("Sera", npc.remnants, context="greeting")
 ```
 
+
 **Want choices?**
+
 ```python
 choices = generate_choices("Sera", npc.remnants, num_choices=3)
 ```
 
+
 **Want full encounter?**
+
 ```python
 encounter = generate_encounter("Sera", npc.remnants, encounter_id=1, context="greeting")
 ```
 
+
 **Want all 9 NPCs?**
+
 ```python
 scene = generate_scene(npcs_dict, encounter_id=1, context="greeting")
 ```
 
+
 **Want to integrate?**
 See `DIALOGUE_SYSTEM_QUICK_START.md` → Pattern D (Game Engine Hook)
-
----
+## 
 
 ## 🎉 Final Thought
 
-You've built something that transforms a personality vector into **authored-feeling dialogue** that evolves with the game state.
+You've built something that transforms a personality vector into **authored-feeling dialogue** that
+evolves with the game state.
 
 That's not just a feature. That's the foundation of a truly reactive story engine.
 

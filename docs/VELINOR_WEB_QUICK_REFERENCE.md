@@ -26,8 +26,10 @@ cd velinor-web
 npm run dev
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -88,6 +90,7 @@ npm run dev
          │ ...continues
 
 ```text
+
 ```
 
 ##
@@ -110,13 +113,16 @@ npm run dev
 ### Development (`.env.local`)
 
 ```
+
 ```text
 ```text
+
 ```
 
 ### Production (Railway Dashboard)
 
 ```
+
 
 NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
 

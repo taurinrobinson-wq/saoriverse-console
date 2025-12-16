@@ -18,6 +18,7 @@ story.add_choice(
 )
 ```
 
+
 ## Complete Choice Example
 
 ```python
@@ -35,6 +36,7 @@ story.add_choice(
     }
 )
 ```
+
 
 ## Parameters
 
@@ -57,6 +59,7 @@ story.add_choice(
 ## Common Effect Values
 
 ```python
+
 # Small (minor/neutral)
 0.05    # 5% change
 
@@ -72,36 +75,48 @@ story.add_choice(
 -0.15   # -15% change
 ```
 
+
 ## Usage Patterns
 
 ### Aggressive Choice
+
 ```python
 tone_effects={"courage": 0.2, "narrative_presence": 0.15},
 npc_resonance={"Ravi": 0.1, "Nima": -0.1}
 ```
 
+
 ### Cautious Choice
+
 ```python
 tone_effects={"wisdom": 0.2, "courage": -0.1},
 npc_resonance={"Nima": 0.15, "Ravi": -0.1}
 ```
 
+
 ### Social/Empathetic Choice
+
 ```python
 tone_effects={"empathy": 0.15},
 npc_resonance={"Ravi": 0.15, "Nima": 0.1}
 ```
 
+
 ### Observant Choice
+
 ```python
 tone_effects={"observation": 0.2, "wisdom": 0.1},
 npc_resonance={"Nima": 0.15}
 ```
 
+
 ### Neutral/Transition
+
 ```python
+
 # No parameters - pure navigation
 ```
+
 
 ## How Resonance Works
 
@@ -118,19 +133,19 @@ npc_resonance={"Nima": 0.15}
 - Can lead to alternative story paths
 
 **Threshold gating:**
+
 ```
 Resonance < 0.0  → Hostile path
 Resonance 0-0.2  → Neutral path
 Resonance > 0.2  → Friendly path
 ```
 
+
 ## Current Story: Act 1 Mapping
 
 ### Market Arrival → 4 Choices
-1. Aggressive (Ravi+, Nima-) → courage+
-2. Cautious (Nima+, Ravi-) → wisdom+
-3. Social (Both+) → empathy+
-4. Observant (Nima+) → observation+
+1. Aggressive (Ravi+, Nima-) → courage+ 2. Cautious (Nima+, Ravi-) → wisdom+ 3. Social (Both+) →
+empathy+ 4. Observant (Nima+) → observation+
 
 ### Relationship Paths
 - **Ravi path:** Build through directness, empathy
@@ -165,41 +180,34 @@ All choice data is stored:
 }
 ```
 
+
 ## Tips
 
-✓ Make effects match the choice narrative  
-✓ Balance positive and negative effects  
-✓ Use NPC preferences for consistency  
-✓ Compound effects across multiple choices  
-✓ Create meaningful trade-offs (courage vs wisdom)  
+✓ Make effects match the choice narrative ✓ Balance positive and negative effects ✓ Use NPC
+preferences for consistency ✓ Compound effects across multiple choices ✓ Create meaningful
+trade-offs (courage vs wisdom)
 
-✗ Don't make all choices balance perfectly  
-✗ Avoid effects without narrative reason  
-✗ Don't ignore NPC personality in effects  
-✗ Keep numbers reasonable (0.05 to 0.25)  
+✗ Don't make all choices balance perfectly ✗ Avoid effects without narrative reason ✗ Don't ignore
+NPC personality in effects ✗ Keep numbers reasonable (0.05 to 0.25)
 
 ## Workflow
 
-1. Write the choice text
-2. Identify the narrative meaning
-3. What tone does this reveal?
-4. How does each NPC feel?
-5. Assign appropriate values
-6. Test the cumulative effect
+1. Write the choice text 2. Identify the narrative meaning 3. What tone does this reveal? 4. How
+does each NPC feel? 5. Assign appropriate values 6. Test the cumulative effect
 
 ## Full Guides
 
 - [CHOICE_CONSEQUENCES_GUIDE.md](CHOICE_CONSEQUENCES_GUIDE.md) - Deep dive
 - [SCENE_COMPOSITION_GUIDE.md](SCENE_COMPOSITION_GUIDE.md) - Backgrounds/NPCs
 - [README.md](README.md) - Complete system
-
----
+## 
 
 **Example: Three Paths, Different Consequences**
 
 Same narrative point, three different choices:
 
 ```python
+
 # Path 1: Trust immediately (Ravi)
 story.add_choice(
     from_passage_name="meet_ravi",
@@ -224,5 +232,6 @@ story.add_choice(
     npc_resonance={"Ravi": -0.15, "Nima": -0.1, "Kaelen": 0.1}
 )
 ```
+
 
 Each leads to different story progression based on resonance!

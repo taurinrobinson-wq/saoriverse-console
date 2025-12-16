@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │                  YOUR DOCKER SETUP IS READY                 │
 └─────────────────────────────────────────────────────────────┘
@@ -46,11 +47,13 @@
 
 ```bash
 
+
 ssh root@161.35.227.49 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git cd
 saoriverse-console chmod +x docker-setup.sh
 
 ```text
 ```
+
 
 **What it does automatically:**
 
@@ -65,8 +68,10 @@ all services 5. Verifies everything works 6. Shows you the URLs
 
 # Follow the step-by-step instructions in:
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -79,6 +84,7 @@ all services 5. Verifies everything works 6. Shows you the URLs
 🔧 DOCKER_UBUNTU_SETUP.md
 
 ```text
+
 ```
 
 ##
@@ -86,10 +92,13 @@ all services 5. Verifies everything works 6. Shows you the URLs
 ## After Deployment: Your App Lives Here
 
 ```
+
 🌐 Frontend:    http://161.35.227.49:3000 ⚙️  API:         http://161.35.227.49:8000 💚 Health:
 http://161.35.227.49:8000/health
+
 ```text
 ```text
+
 ```
 
 ##
@@ -97,6 +106,7 @@ http://161.35.227.49:8000/health
 ## Container Architecture
 
 ```
+
 
 ┌─────────────────────────────────────────────────────┐
 │                  NGINX (Port 80)                     │
@@ -116,6 +126,7 @@ Both services on same Docker network (saoriverse)
 
 ```text
 ```
+
 
 ##
 
@@ -141,8 +152,10 @@ Both services on same Docker network (saoriverse)
 ☐ 5. Wait 5-10 minutes
 ☐ 6. Open browser to http://161.35.227.49:3000
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -168,6 +181,7 @@ docker compose stop
 # Update code and restart
 
 ```text
+
 ```
 
 ##
@@ -184,17 +198,21 @@ docker compose stop
 
 ```bash
 
+
 # Check the error
 docker compose logs
 
 # Usually just need to retry
+
 ```text
 ```text
+
 ```
 
 ### Problem 3: Services won't start
 
 ```bash
+
 
 
 # See what's wrong
@@ -205,6 +223,7 @@ docker compose down docker compose build --no-cache
 
 ```sql
 ```
+
 
 ### Problem 4: Can't access from browser
 
@@ -217,8 +236,10 @@ curl http://localhost:8000/health
 # Then from your machine (replace IP if different)
 curl http://161.35.227.49:3000
 ```text
+
 ```text
 ```
+
 
 See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
 
@@ -259,6 +280,7 @@ Infrastructure:
 Deployment:
 
 ```text
+
 ```
 
 ##
@@ -266,6 +288,7 @@ Deployment:
 ## Architecture Diagram
 
 ```
+
 ┌─ User's Browser ──────────────────────┐
 │                                       │
 │  http://161.35.227.49:3000           │
@@ -293,6 +316,7 @@ Deployment:
 
 ```text
 ```text
+
 ```
 
 ##
@@ -303,6 +327,7 @@ After running `./docker-setup.sh`, you should see:
 
 ```bash
 
+
 ✓ Setup Complete!
 
 Running containers: NAME                      STATUS saoriverse-backend        Up (healthy)
@@ -312,6 +337,7 @@ Your application is now running on: Frontend:  http://161.35.227.49:3000
 
 ```text
 ```
+
 
 ##
 
@@ -336,6 +362,7 @@ CONFIG TEMPLATE:   .env.example
 DOCKER COMPOSE:    docker-compose.yml
 DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 ```
+
 
 ##
 

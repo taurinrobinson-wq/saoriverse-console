@@ -130,6 +130,7 @@ cp env_template.txt .env
 python fastapi_app.py
 ```
 
+
 Visit <http://localhost:8000> to test your app.
 
 ## 📊 Benefits of Custom Domain
@@ -150,6 +151,7 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_KEY=your_anon_key_here
 SECRET_KEY=generated_32_character_hex_string
 ```
+
 
 ## 📈 Next Steps
 
@@ -180,6 +182,7 @@ How to wire it up
 <meta name="edge-function-url" content="https://<REGION>.functions.supabase.co/saori-fixed">
 <meta name="validate-session-url" content="https://admin.firstperson.chat/api/validate-session">
 ```
+
 
 4. Ensure your Edge Function uses Supabase Auth and RLS correctly. The static site will handle sign-in with Supabase client-side (using anon key or OAuth) and call Edge Functions with user tokens when needed.
 

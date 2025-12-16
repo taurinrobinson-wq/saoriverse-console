@@ -35,6 +35,7 @@ added:
 ```text
 ```
 
+
 USER DIALOGUE ↓ [hybrid mode in ui.py line 573] ↓
 HybridProcessorWithEvolution.process_user_message()
     ├─ Signal Extraction (adaptive - discovers new dimensions)
@@ -58,6 +59,7 @@ HybridProcessorWithEvolution.process_user_message()
 
 ```python
 
+
 if processing_mode == "hybrid":
     # NEW: Initialize processor once per session
 if 'hybrid_processor' not in st.session_state: processor = create_integrated_processor(learner,
@@ -74,6 +76,7 @@ new_glyphs: st.session_state['new_glyphs_this_session'].extend(new_glyphs)
 ```text
 ```
 
+
 ### 2. **Sidebar Display** (`main_v2.py`, lines 131-181)
 
 ```python
@@ -83,8 +86,10 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
         st.success(f"🎉 {len(new_glyphs)} new glyph(s) discovered!")
         for glyph in new_glyphs:
 ```text
+
 ```text
 ```
+
 
 ### 3. **Conversation ID Tracking**
 
@@ -93,14 +98,18 @@ The system tracks conversations with unique IDs:
 ```python
 
 ```text
+
 ```
 
 Add this to `main_v2.py` initialization if not present:
 
 ```python
+
 if 'conversation_id' not in st.session_state: from uuid import uuid4
+
 ```text
 ```text
+
 ```
 
 ## What Gets Stored
@@ -109,11 +118,13 @@ if 'conversation_id' not in st.session_state: from uuid import uuid4
 
 ```python
 
+
 st.session_state['hybrid_processor']        # The processor instance
 st.session_state['new_glyphs_this_session'] # Glyphs generated this session
 
 ```text
 ```
+
 
 ### Persistent Files (survives session restarts)
 
@@ -123,8 +134,10 @@ learning/
 ├── user_overrides/
 │   └── user_{id}_lexicon.json        # User's personal vocabulary
 ```text
+
 ```text
 ```
+
 
 ## Pattern Detection Threshold
 
@@ -142,15 +155,19 @@ Turn 2: love (1) + vulnerability (1) = 2
 ...
 
 ```text
+
 ```
 
 For faster glyph creation in testing, you can reduce this threshold:
 
 ```python
+
 evolution = DynamicGlyphEvolution( hybrid_learner=learner, min_frequency_for_glyph=50,  # Lower
 threshold for testing
+
 ```text
 ```text
+
 ```
 
 ## Example Flow: Real Conversation
@@ -158,6 +175,7 @@ threshold for testing
 ### Turn 1
 
 ```
+
 
 User: "I want to let someone in, but the fear is overwhelming" AI:   "That exposed feeling is the
 threshold of intimacy itself..."
@@ -167,6 +185,7 @@ Signals detected: love, vulnerability, fear, intimacy Patterns found: (love + vu
 
 ```text
 ```
+
 
 ### Turn 2
 
@@ -178,8 +197,10 @@ Signals detected: love, transformation, joy, becoming
 Patterns found: (love + transformation), (love + joy)
 Lexicon update: vulnerability frequency +1, transformation frequency +1
 ```text
+
 ```text
 ```
+
 
 ### Turn 10 (after similar themed exchanges)
 
@@ -197,6 +218,7 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
   ├─ Response cue: "Recognize the deep closeness being shared"
 
 ```text
+
 ```
 
 ## Configuration
@@ -204,16 +226,20 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
 ### In `ui.py` (emotion-symbol mapping)
 
 ```python
+
 emotion_symbols = { "love": "♥", "intimacy": "❤", "sensuality": "🌹", "transformation": "🦋",
 "admiration": "⭐", "joy": "☀", "vulnerability": "🌱", "nature": "🌿",
     # Add more...
+
 ```text
 ```text
+
 ```
 
 ### In `dynamic_glyph_evolution.py` (glyph naming)
 
 ```python
+
 
 name_map = { ("love", "intimacy"): "Intimate Connection", ("love", "vulnerability"): "Open-Hearted
 Love", ("joy", "celebration"): "Pure Celebration",
@@ -221,6 +247,7 @@ Love", ("joy", "celebration"): "Pure Celebration",
 
 ```text
 ```
+
 
 ## Performance Considerations
 
@@ -248,8 +275,10 @@ To reduce processing:
 # Only process evolution every N turns instead of every turn
 if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
 ```text
+
 ```text
 ```
+
 
 ## Testing the Integration
 
@@ -281,6 +310,7 @@ result = processor.process_user_message(
 )
 
 ```text
+
 ```
 
 ### In Streamlit
@@ -322,10 +352,13 @@ result = processor.process_user_message(
 
 ```python
 
+
 # In main_v2.py, add debug
 if 'new_glyphs_this_session' in st.session_state:
+
 ```text
 ```text
+
 ```
 
 ### Learning Not Happening
@@ -343,10 +376,12 @@ if 'new_glyphs_this_session' in st.session_state:
 ```python
 
 
+
 # In ui.py, enable debug mode to see signals
 
 ```text
 ```
+
 
 ## Next Steps
 
@@ -422,6 +457,7 @@ if 'new_glyphs_this_session' in st.session_state:
     │  "✨ Glyphs Discovered..."      │
     └────────────────────────────────┘
 ```
+
 
 ## Files Reference
 

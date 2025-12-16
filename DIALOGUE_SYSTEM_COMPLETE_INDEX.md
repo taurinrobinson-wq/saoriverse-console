@@ -1,8 +1,8 @@
 # Complete REMNANTS + Dialogue System Index
 
-A comprehensive index of all REMNANTS personality engine and auto-generated dialogue system documentation and code.
-
----
+A comprehensive index of all REMNANTS personality engine and auto-generated dialogue system
+documentation and code.
+## 
 
 ## 🎯 Quick Navigation
 
@@ -21,16 +21,17 @@ A comprehensive index of all REMNANTS personality engine and auto-generated dial
 → Read: [DIALOGUE_GENERATION_GUIDE.md](DIALOGUE_GENERATION_GUIDE.md) (complete guide)
 
 **...run tests and see it in action**
+
 ```bash
 python velinor/stories/test_dialogue_generation.py
 python velinor/stories/test_remnants_simulation.py
 python velinor/stories/test_remnants_advanced.py
 ```
 
+
 **...understand REMNANTS trait system**
 → Read: [ADVANCED_REMNANTS_ANALYSIS.md](ADVANCED_REMNANTS_ANALYSIS.md)
-
----
+## 
 
 ## 📁 Complete File Structure
 
@@ -129,8 +130,7 @@ python velinor/stories/test_remnants_advanced.py
 - **`LEARNING_INTEGRATION_GUIDE.md`** — Learning module integration
 - **`QUICK_REFERENCE_ANTI_DASH.md`** — Anti-dash system reference
 - **`PRIVACY_QUICK_REFERENCE.md`** — Privacy layer reference
-
----
+## 
 
 ## 🧬 The 9 Marketplace NPCs
 
@@ -151,20 +151,17 @@ All NPCs have:
 | **Mariel** | Wise Bridge | Memory | Woven history |
 | **Korrin** | Informant | Nuance | Alley whispers |
 | **Drossel** | Thieves' Leader | Trust/Authority | Code-switched charm |
-
----
+## 
 
 ## 🔄 How Player Choices Cascade
 
-1. **Player makes a choice** (e.g., empathy-based)
-2. **Choice translates to TONE effect** (empathy: 0.15)
-3. **TONE reshapes all NPC traits** (correlation map applies)
-4. **NPCs generate new dialogue** (from updated traits)
-5. **Player sees ripple effects** (changes cascade through influence network)
+1. **Player makes a choice** (e.g., empathy-based) 2. **Choice translates to TONE effect** (empathy:
+0.15) 3. **TONE reshapes all NPC traits** (correlation map applies) 4. **NPCs generate new
+dialogue** (from updated traits) 5. **Player sees ripple effects** (changes cascade through
+influence network)
 
 **Result:** Every choice visibly transforms the world.
-
----
+## 
 
 ## 📊 Key Metrics
 
@@ -184,13 +181,14 @@ All NPCs have:
 - **Context templates** — 4 contexts per NPC (greeting, conflict, alliance, resolution)
 - **Choice generation** — 3 player options per encounter (trait-weighted)
 - **Replayability** — 100-500 unique dialogue lines per playthrough
-
----
+## 
 
 ## 🚀 Getting Started
 
 ### Step 1: Understand the Foundation
+
 ```bash
+
 # Read the system overview
 cat DIALOGUE_SYSTEM_READY_TO_SHIP.md
 
@@ -198,8 +196,11 @@ cat DIALOGUE_SYSTEM_READY_TO_SHIP.md
 python velinor/stories/test_dialogue_generation.py
 ```
 
+
 ### Step 2: Learn the Architecture
+
 ```bash
+
 # Read the complete guide
 cat DIALOGUE_GENERATION_GUIDE.md
 
@@ -207,20 +208,29 @@ cat DIALOGUE_GENERATION_GUIDE.md
 cat DIALOGUE_SYSTEM_QUICK_START.md
 ```
 
+
 ### Step 3: Integrate Into Your Engine
+
 ```python
+
 # See Pattern D in DIALOGUE_SYSTEM_QUICK_START.md
+
 # Or read DIALOGUE_STORY_EXAMPLES.md for real scenarios
 ```
 
+
 ### Step 4: Customize for Your Story
+
 ```python
+
 # Add new NPC lexicon
+
 # Modify encounter contexts
+
 # Create custom choice pools
 ```
 
----
+## 
 
 ## 💾 Recent Commits
 
@@ -232,32 +242,29 @@ b105849 Add 7 detailed story scene examples demonstrating dialogue system
 22536f7 Add comprehensive advanced REMNANTS analysis documentation with emergent system insights
 ```
 
-All code committed and pushed to `main` branch.
 
----
+All code committed and pushed to `main` branch.
+## 
 
 ## 📚 Reading Order (Recommended)
 
 ### For Quick Understanding (15 minutes)
-1. [DIALOGUE_SYSTEM_READY_TO_SHIP.md](DIALOGUE_SYSTEM_READY_TO_SHIP.md) — Overview
-2. Run tests: `python velinor/stories/test_dialogue_generation.py`
+1. [DIALOGUE_SYSTEM_READY_TO_SHIP.md](DIALOGUE_SYSTEM_READY_TO_SHIP.md) — Overview 2. Run tests:
+`python velinor/stories/test_dialogue_generation.py`
 
 ### For Integration (30 minutes)
-1. [DIALOGUE_SYSTEM_QUICK_START.md](DIALOGUE_SYSTEM_QUICK_START.md) — Code examples
-2. [DIALOGUE_STORY_EXAMPLES.md](DIALOGUE_STORY_EXAMPLES.md) — Real scenarios
+1. [DIALOGUE_SYSTEM_QUICK_START.md](DIALOGUE_SYSTEM_QUICK_START.md) — Code examples 2.
+[DIALOGUE_STORY_EXAMPLES.md](DIALOGUE_STORY_EXAMPLES.md) — Real scenarios
 
 ### For Deep Understanding (1-2 hours)
-1. [DIALOGUE_GENERATION_GUIDE.md](DIALOGUE_GENERATION_GUIDE.md) — Complete architecture
-2. [ADVANCED_REMNANTS_ANALYSIS.md](ADVANCED_REMNANTS_ANALYSIS.md) — Emergent patterns
-3. Source code: `velinor/engine/npc_dialogue.py` and `npc_encounter.py`
+1. [DIALOGUE_GENERATION_GUIDE.md](DIALOGUE_GENERATION_GUIDE.md) — Complete architecture 2.
+[ADVANCED_REMNANTS_ANALYSIS.md](ADVANCED_REMNANTS_ANALYSIS.md) — Emergent patterns 3. Source code:
+`velinor/engine/npc_dialogue.py` and `npc_encounter.py`
 
 ### For Extending (2+ hours)
-1. Read all of the above
-2. Study customization sections
-3. Run tests with modifications
-4. Create new NPCs and lexicons
-
----
+1. Read all of the above 2. Study customization sections 3. Run tests with modifications 4. Create
+new NPCs and lexicons
+## 
 
 ## 🎮 System At a Glance
 
@@ -283,7 +290,7 @@ PLAYER PICKS CHOICE
 (LOOP BACK)
 ```
 
----
+## 
 
 ## ✅ Production Checklist
 
@@ -299,35 +306,41 @@ PLAYER PICKS CHOICE
 - ✅ PowerShell compatible (Unicode fixed)
 
 **Ready to ship.** 🚀
-
----
+## 
 
 ## 🔧 Common Tasks
 
 **Generate single dialogue:**
+
 ```python
 from velinor.engine.npc_dialogue import generate_dialogue
 dialogue = generate_dialogue("Sera", npc.remnants, context="greeting")
 ```
 
+
 **Generate full encounter:**
+
 ```python
 from velinor.engine.npc_encounter import generate_encounter
 encounter = generate_encounter("Sera", npc.remnants, 1, context="greeting")
 ```
 
+
 **Apply player choice:**
+
 ```python
 manager.apply_tone_effects({"empathy": 0.15})
 ```
 
+
 **Get all NPCs' reactions:**
+
 ```python
 from velinor.engine.npc_encounter import generate_scene
 scene = generate_scene(npcs_dict, 1, context="greeting")
 ```
 
----
+## 
 
 ## 📖 Documentation by Topic
 
@@ -342,8 +355,7 @@ scene = generate_scene(npcs_dict, 1, context="greeting")
 | Debugging | DIALOGUE_SYSTEM_QUICK_START.md | Debugging section |
 | Performance | DIALOGUE_GENERATION_GUIDE.md | Performance section |
 | TTS Integration | DIALOGUE_GENERATION_GUIDE.md | Future Enhancements |
-
----
+## 
 
 ## 🎯 Next Milestones
 
@@ -366,8 +378,7 @@ scene = generate_scene(npcs_dict, 1, context="greeting")
 - TTS prosody mapping
 - Contradiction detection
 - Tool-based unlocks
-
----
+## 
 
 ## 💬 System Philosophy
 
@@ -375,15 +386,12 @@ The entire system is built on one core belief:
 
 > **Personality should drive dialogue.**
 
-Rather than writing thousands of branching dialogue trees, we:
-1. Define each NPC's personality (8 traits [0.1, 0.9])
-2. Define their vocabulary (trait-mapped word pools)
-3. Define their voice (temperament decorator)
-4. Let the system generate emergent dialogue from state
+Rather than writing thousands of branching dialogue trees, we: 1. Define each NPC's personality (8
+traits [0.1, 0.9]) 2. Define their vocabulary (trait-mapped word pools) 3. Define their voice
+(temperament decorator) 4. Let the system generate emergent dialogue from state
 
 Result: Feels hand-written, scales infinitely, changes with player choices.
-
----
+## 
 
 ## 📞 Quick Links
 
@@ -399,8 +407,7 @@ Result: Feels hand-written, scales infinitely, changes with player choices.
 
 **Tests:**
 - `velinor/stories/test_dialogue_generation.py` ← Run this
-
----
+## 
 
 **Status: ✅ PRODUCTION READY**
 

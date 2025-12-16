@@ -40,6 +40,7 @@ You requested implementation of **Fallback Protocols – Tone Ambiguity & Misfir
   - 6 FallbackProtocol integration tests
 ```
 
+
 ### 3. Main UI Integration
 
 **File**: `emotional_os/deploy/modules/ui.py`
@@ -83,6 +84,7 @@ Display to User
     ↓
 Store Protocol Result
 ```
+
 
 ### Example: Ambiguous Tone
 
@@ -136,6 +138,7 @@ Detection: Mixed signals (dismissal + voltage)
 → Ask clarification, don't assume
 ```
 
+
 ### 2. Trigger Misfire ✅
 
 ```
@@ -143,6 +146,7 @@ Input: "Yeah sure, 'stay' with me because that's worked so well"
 Detection: Sarcasm (trigger + voltage keywords)
 → Respect boundary, don't lock trigger
 ```
+
 
 ### 3. Overlapping Triggers ✅
 
@@ -152,6 +156,7 @@ Detection: Multiple triggers (heal, move)
 → Prioritize highest intensity (voltage overrides ritual)
 ```
 
+
 ### 4. Valid Trigger ✅
 
 ```
@@ -159,6 +164,7 @@ Input: "I need to stay."
 Detection: Valid trigger, no misfire, no ambiguity
 → Lock trigger, enter silence protocol
 ```
+
 
 ##
 
@@ -195,6 +201,7 @@ FallbackProtocol (6/6):
   ✅ test_no_triggers_exchange
   ✅ test_result_structure
 ```
+
 
 ##
 
@@ -257,6 +264,7 @@ FallbackProtocol (6/6):
 6c615fe - Implement Fallback Protocols - tone detection & glyph state management
 ```
 
+
 ##
 
 ## 🎓 Philosophy Implemented
@@ -298,6 +306,7 @@ result = protocol.process_exchange(
 # - decisions: should_lock_trigger, should_wait, etc.
 ```
 
+
 ### In Streamlit UI
 
 - Automatically initialized in session state
@@ -310,6 +319,7 @@ result = protocol.process_exchange(
 ```bash
 pytest tests/test_fallback_protocols.py -v
 ```
+
 
 ##
 

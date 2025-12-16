@@ -8,8 +8,10 @@
 bash setup.sh
 source venv/bin/activate
 ```text
+
 ```text
 ```
+
 
 ### Windows
 
@@ -20,6 +22,7 @@ venv\Scripts\activate.bat
 pip install streamlit pillow
 
 ```text
+
 ```
 
 The game will open at: **<http://localhost:8501>**
@@ -83,6 +86,7 @@ Your graphics files are fully integrated:
 ## File Structure
 
 ```
+
 saoriverse-console/
 ├── velinor_app.py              ← START HERE! Main game UI
 ├── setup.sh                    ← Run once: bash setup.sh
@@ -118,8 +122,10 @@ saoriverse-console/
     ├── README.md               # Project overview
     ├── STATUS.md               # Current status
     ├── TWINE_INTEGRATION_GUIDE.md
+
 ```text
 ```text
+
 ```
 
 ##
@@ -138,6 +144,7 @@ saoriverse-console/
 
 ```python
 
+
 from velinor.engine import StoryBuilder
 
 story = StoryBuilder("My Adventure") story.add_passage("start", "You awake in a strange place...",
@@ -146,6 +153,7 @@ forward", "walk")
 
 ```text
 ```
+
 
 ### Story Markup Syntax
 
@@ -156,8 +164,10 @@ forward", "walk")
 {multiplayer: true}      # Adapt for group
 [[Choice text->passage]] # Link to next passage
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -172,6 +182,7 @@ forward", "walk")
 cd /path/to/saoriverse-console
 
 ```text
+
 ```
 
 ### Images not loading
@@ -179,9 +190,12 @@ cd /path/to/saoriverse-console
 **Check paths:**
 
 ```bash
+
 ls velinor/backgrounds/    # Should see 15+ images ls velinor/npcs/           # Should see 7+ images
+
 ```text
 ```text
+
 ```
 
 ### Port 8501 already in use
@@ -190,8 +204,10 @@ ls velinor/backgrounds/    # Should see 15+ images ls velinor/npcs/           # 
 
 ```bash
 
+
 ```text
 ```
+
 
 ### Virtual environment issues
 
@@ -201,8 +217,10 @@ ls velinor/backgrounds/    # Should see 15+ images ls velinor/npcs/           # 
 deactivate  # if in a venv
 rm -rf venv/
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -216,22 +234,28 @@ conda create -n velinor python=3.11
 conda activate velinor
 
 ```text
+
 ```
 
 ### Docker (Optional)
 
 ```dockerfile
+
 FROM python:3.11-slim WORKDIR /app COPY . . RUN pip install streamlit pillow
+
 ```text
 ```text
+
 ```
 
 ```bash
+
 
 docker build -t velinor .
 
 ```text
 ```
+
 
 ### Cloud Deployment
 
@@ -244,6 +268,7 @@ docker build -t velinor .
 ```bash
 git push heroku main
 ```
+
 
 ##
 
