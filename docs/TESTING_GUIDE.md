@@ -1,6 +1,7 @@
 # Testing Guide - SaoriVerse Console
 
 **Date**: December 3, 2025
+
 ##
 
 ## Quick Start
@@ -12,17 +13,12 @@
 ```text
 ```
 
-
-
 ### Run Only Unit Tests
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### Run Only Integration Tests
 
@@ -31,17 +27,12 @@
 ```text
 ```
 
-
-
 ### Run Specific Test File
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### Run with Coverage
 
@@ -52,51 +43,61 @@ pytest tests/ --cov=src --cov-report=html
 ```text
 ```
 
-
 ##
 
 ## Test Organization
 
 ### tests/unit/ (26 test files)
+
 Unit tests for individual modules. Each test file focuses on one `src/` module.
 
 **Examples:**
+
 - `test_signal_parser.py` → Tests `src/signal_parser.py`
 - `test_response_generator.py` → Tests `src/response_generator.py`
 - `test_voice_interface.py` → Tests `src/voice_interface.py`
 
 **Characteristics:**
+
 - Fast (< 100ms per test)
 - Isolated (mock external dependencies)
 - Comprehensive coverage of individual functions
 - No I/O operations (use fixtures)
 
 ### tests/integration/ (11 test files)
+
 Integration tests for module interactions and end-to-end flows.
 
 **Examples:**
+
 - `test_e2e_integration.py` → Full text-to-response pipeline
 - `test_voice_to_response.py` → Full audio-to-response pipeline
 - `test_learning_integration.py` → Learning system with persistence
 
 **Characteristics:**
+
 - Slower (can take seconds)
 - Test real module interactions
 - May use real files or fixture data
 - Validate contracts between modules
+
 ##
 
 ## Pytest Configuration
 
 ### pytest.ini
+
 Located at project root. Controls:
+
 - Test discovery: `tests/` directory
 - Test naming: Files `test_*.py`, functions `test_*`
 - Output verbosity: `-v` flag for detailed output
 - Error display: `--tb=short` for readable tracebacks
 
 ### tests/conftest.py
+
 Shared pytest configuration:
+
 - Fixtures for common test data
 - Project root setup (sys.path)
 - CWD management for test isolation
@@ -119,9 +120,6 @@ def sample_user_input():
 ```text
 ```
 
-
-
-
 **Usage in tests:**
 
 ```python
@@ -130,7 +128,6 @@ def test_parser(sample_user_input):
 ```text
 ```text
 ```
-
 
 ##
 
@@ -166,9 +163,6 @@ class TestMyFunction:
 ```text
 ```
 
-
-
-
 ### Integration Test Template
 
 ```python
@@ -194,7 +188,6 @@ def test_full_pipeline():
 ```text
 ```
 
-
 ##
 
 ## Common Test Patterns
@@ -214,9 +207,6 @@ def test_with_mock():
 ```text
 ```
 
-
-
-
 ### Fixture Usage
 
 ```python
@@ -231,8 +221,6 @@ def test_file_operations(temp_data_dir):
 ```text
 ```text
 ```
-
-
 
 ### Parametrized Tests
 
@@ -249,8 +237,6 @@ def test_emotion_detection(input, expected):
 ```text
 ```
 
-
-
 ##
 
 ## Running Tests in Different Ways
@@ -263,8 +249,6 @@ pytest tests/unit/              # All unit tests
 ```text
 ```
 
-
-
 ### By Module
 
 ```bash
@@ -273,9 +257,6 @@ pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
 
 ```text
 ```
-
-
-
 
 ### By Marker
 
@@ -287,8 +268,6 @@ pytest tests/ -m slow           # Only marked tests
 ```text
 ```
 
-
-
 ### Specific Test
 
 ```bash
@@ -296,19 +275,20 @@ pytest tests/ -m slow           # Only marked tests
 ```text
 ```
 
-
-
 ##
 
 ## Continuous Integration
 
 ### GitHub Actions Workflow
+
 `.github/workflows/tests.yml` runs:
+
 1. `pytest tests/unit/` - Fast unit test suite
 2. `pytest tests/integration/` - Integration tests
 3. Coverage report generation
 
 **Triggered on:**
+
 - Push to `refactor/*` branches
 - Pull requests to `main`
 
@@ -324,7 +304,6 @@ pytest tests/unit/ --tb=short
 ```text
 ```
 
-
 ##
 
 ## Debugging Tests
@@ -339,9 +318,6 @@ pytest tests/ -vv               # Even more detail
 ```text
 ```
 
-
-
-
 ### Print Debug Info
 
 ```python
@@ -352,8 +328,6 @@ def test_something():
 ```text
 ```
 
-
-
 Run with:
 
 ```bash
@@ -363,9 +337,6 @@ pytest tests/ -s                # Show print() output
 ```text
 ```
 
-
-
-
 ### Show Local Variables
 
 ```bash
@@ -373,7 +344,6 @@ pytest tests/ -l                # Show locals on failure
 ```text
 ```text
 ```
-
 
 ##
 
@@ -386,9 +356,6 @@ pytest tests/ -l                # Show locals on failure
 ```text
 ```
 
-
-
-
 ### View HTML Report
 
 ```bash
@@ -396,8 +363,6 @@ pytest tests/ --cov=src --cov-report=html
 ```text
 ```text
 ```
-
-
 
 ### Coverage by Module
 
@@ -407,26 +372,30 @@ pytest tests/ --cov=src.response_generator
 
 ```
 
-
 ##
 
 ## Common Issues and Solutions
 
 ### Import Errors
+
 **Problem**: `ModuleNotFoundError: No module named 'src'`
 **Solution**: Ensure pytest.ini is in project root and conftest.py adds project to sys.path
 
 ### Fixture Not Found
+
 **Problem**: `fixture 'my_fixture' not found`
 **Solution**: Check fixture is defined in conftest.py or same test file
 
 ### Tests Pass Locally but Fail in CI
+
 **Problem**: Different environment or missing dependencies
 **Solution**: Check requirements.txt includes all test dependencies
 
 ### Slow Tests
+
 **Problem**: Tests taking too long
 **Solution**: Use @pytest.mark.slow to mark slow tests, run with -m "not slow"
+
 ##
 
 ## Best Practices
@@ -436,6 +405,7 @@ pytest tests/ --cov=src.response_generator
    - Easier to debug
 
 2. **Descriptive test names**
+
    ```python
    # Good:
    def test_parser_extracts_emotional_signal_from_text():
@@ -445,6 +415,7 @@ pytest tests/ --cov=src.response_generator
    ```
 
 3. **Arrange-Act-Assert pattern**
+
    ```python
    def test_something():
        # Arrange
@@ -458,6 +429,7 @@ pytest tests/ --cov=src.response_generator
    ```
 
 4. **Use fixtures for common setup**
+
    ```python
    # Instead of repeating in every test:
    @pytest.fixture
@@ -466,6 +438,7 @@ pytest tests/ --cov=src.response_generator
    ```
 
 5. **Test both happy path and errors**
+
    ```python
    def test_happy_path():
        # Normal operation
@@ -475,15 +448,18 @@ pytest tests/ --cov=src.response_generator
        # Error conditions
        pass
    ```
+
 ##
 
 ## Test Metrics Target
 
 After reorganization:
+
 - **Unit tests**: 26 test files
 - **Integration tests**: 11 test files
 - **Target coverage**: > 80% of src/
 - **Test execution time**: < 30 seconds for unit tests
+
 ##
 
 ## Quick Reference
@@ -498,6 +474,7 @@ After reorganization:
 | `pytest tests/ --cov=src` | Show coverage |
 | `pytest tests/ -m slow` | Run only slow tests |
 | `pytest tests/ -x` | Stop on first failure |
+
 ##
 
 **For architecture information, see**: `docs/ARCHITECTURE.md`

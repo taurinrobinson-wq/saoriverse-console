@@ -13,8 +13,6 @@ This document describes how to install [actionlint](../docs).
 ```text
 ```
 
-
-
 ### [Scoop](https://scoop.sh/)
 
 [`actionlint` package][scoop] is available in the main bucket:
@@ -24,9 +22,6 @@ This document describes how to install [actionlint](../docs).
 ```text
 ```
 
-
-
-
 ### [Winget](https://learn.microsoft.com/en-us/windows/package-manager/)
 
 [`actionlint` package][winget] is available in the winget-pkgs repo:
@@ -35,8 +30,6 @@ This document describes how to install [actionlint](../docs).
 ```text
 ```text
 ```
-
-
 
 ## Linux
 
@@ -49,9 +42,6 @@ This document describes how to install [actionlint](../docs).
 ```text
 ```
 
-
-
-
 ### [Nix](https://nixos.wiki/)
 
 [`actionlint` package][nixpkgs] is available in the Nix ecosystem:
@@ -63,17 +53,12 @@ On NixOS:
 ```text
 ```
 
-
-
 On Non NixOS:
 
 ```sh
 
 ```text
 ```
-
-
-
 
 ## macOS
 
@@ -86,8 +71,6 @@ On Non NixOS:
 ```text
 ```
 
-
-
 And rhysd/actionlint repository also provides its own Homebrew package, which is automatically updated on new release.
 If you prefer it, tap the repository before running `brew install`.
 
@@ -97,9 +80,6 @@ brew tap "rhysd/actionlint" "https://github.com/rhysd/actionlint"
 
 ```text
 ```
-
-
-
 
 ## Prebuilt binaries
 
@@ -128,8 +108,6 @@ directory automatically. This is a recommended way if you install actionlint in 
 ```text
 ```
 
-
-
 When you need to install specific version of actionlint, please give the version to the 1st command line argument. The following
 example installs v1.6.17.
 
@@ -137,9 +115,6 @@ example installs v1.6.17.
 
 ```text
 ```
-
-
-
 
 This script downloads `actionlint` (or `actionlint.exe` on Windows) binary to the current working directory. When you need to put
 the downloaded binary to some other directory, please give the directory path to the 2nd command line argument. The following
@@ -149,8 +124,6 @@ example installs the latest version to `/usr/bin`.
 ```text
 ```text
 ```
-
-
 
 For the usage of actionlint on GitHub Actions, see [the usage document](usage.md#on-github-actions).
 
@@ -181,9 +154,6 @@ asdf install actionlint latest
 ```sql
 ```
 
-
-
-
 ## Build from source
 
 Recent [Go][] toolchain is necessary to build actionlint from source. Use Go 1.16 or later.
@@ -196,8 +166,6 @@ go install github.com/rhysd/actionlint/cmd/actionlint@latest
 # Install the head of main branch
 go install github.com/rhysd/actionlint/cmd/actionlint
 ```
-
-
 
 ##
 

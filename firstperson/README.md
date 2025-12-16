@@ -12,17 +12,12 @@ cd firstperson
 ```text
 ```
 
-
-
 2. Start the Expo dev server
 
 ```bash
 
 ```text
 ```
-
-
-
 
 3. Open on device or emulator
 
@@ -37,8 +32,6 @@ Backend configuration
 ```text
 ```
 
-
-
 EAS (optional)
 
 - If you plan to use EAS Build / Submit, run:
@@ -49,8 +42,6 @@ cd firstperson
 eas build:configure
 
 ```
-
-
 
 This project includes a minimal `eas.json` so the command will not fail. Note that EAS requires an Expo account and `eas-cli` to be installed and logged in.
 

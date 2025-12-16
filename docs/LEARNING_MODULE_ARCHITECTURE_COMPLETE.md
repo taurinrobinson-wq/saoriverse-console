@@ -24,7 +24,7 @@
 │  ├─ add_archetype(archetype)                                        │
 │  ├─ get_best_match(user_input, prior_context) → archetype          │
 │  ├─ matches_context(user_input) → float (0-1 score)                │
-│  ├─ _save_to_disk()  / _load_from_disk()                           │
+│  ├─ _save_to_disk()  /_load_from_disk()                           │
 │  └─ record_usage(success)  [for adaptive weighting]                │
 │                                                                       │
 │  Pre-loaded Archetypes:                                             │
@@ -45,7 +45,7 @@
 │  ├─ generate_archetype_aware_response(user_input, prior_context)  │
 │  │  └─ Return: Unique response following archetype principles      │
 │  │                                                                   │
-│  └─ _apply_archetype_principles()                                  │
+│  └─_apply_archetype_principles()                                  │
 │     ├─ PHASE 1: _build_opening_from_principles()                  │
 │     │  ├─ Detect emotional pattern (overwhelm? relief? existential?)│
 │     │  ├─ Generate opening that validates/acknowledges            │
@@ -65,7 +65,7 @@
 │     │     - Type 5: Advocacy values ↔ meaning                     │
 │     │     - Type 6: Multiple roles/values complexity              │
 │     │                                                               │
-│     └─ PHASE 3: _build_closing_from_tone()                       │
+│     └─ PHASE 3:_build_closing_from_tone()                       │
 │        ├─ Generate closing question guided by tone rules           │
 │        ├─ Reflection-specific vs. validation-specific             │
 │        └─ Examples:                                                 │
@@ -96,11 +96,11 @@
 │     └─ Ready for use in future similar contexts                    │
 │                                                                       │
 │  Automatic Pattern Extraction:                                     │
-│  ├─ _extract_emotional_arc()   → Emotional journey detection      │
+│  ├─_extract_emotional_arc()   → Emotional journey detection      │
 │  ├─ _extract_entry_cues()       → Keywords that triggered match    │
-│  ├─ _extract_response_principles() → How we responded well        │
+│  ├─_extract_response_principles() → How we responded well        │
 │  ├─ _extract_continuity_bridges() → Context linking patterns      │
-│  └─ _extract_tone_guidelines()   → Style patterns observed        │
+│  └─_extract_tone_guidelines()   → Style patterns observed        │
 │                                                                       │
 │  Feedback Loop: System improves from every successful conversation │
 │                                                                       │
@@ -114,6 +114,7 @@
 ```text
 ```text
 ```
+
 USER INPUT
     ↓
 ┌─────────────────────────────────────────┐
@@ -173,20 +174,21 @@ Purpose: Handle transitions from burden to connection
 Entry Cues: relief, gratitude, hug, melted away, wonderful feeling, ...
 Learned From: User dialogue about child hug dissolving overwhelm
 Response Principles:
-  - Validate positive moment warmly
-  - Balance empathy across mixed emotions
-  - Invite elaboration with gentle questions
-  - Avoid judgment
-  - Hold space for joy
+
+- Validate positive moment warmly
+- Balance empathy across mixed emotions
+- Invite elaboration with gentle questions
+- Avoid judgment
+- Hold space for joy
 Continuity Bridges:
-  - Connect gratitude to prior overwhelm
-  - Tie new disclosures into ongoing context
-  - Carry themes forward
+- Connect gratitude to prior overwhelm
+- Tie new disclosures into ongoing context
+- Carry themes forward
 Tone:
-  - Warm and embracing
-  - Gentle pacing
-  - Mirror metaphors
-  - Proportional empathy
+- Warm and embracing
+- Gentle pacing
+- Mirror metaphors
+- Proportional empathy
 Status: ✓ Working, tested
 
 ```
@@ -197,33 +199,36 @@ Status: ✓ Working, tested
 ```text
 ```text
 ```
+
 Purpose: Navigate work overwhelm to existential meaning-seeking
 Entry Cues: fragile, overwhelmed, drowning, purpose, advocacy, grind, ...
 Learned From: User dialogue about work stress leading to meaning questions
 Response Principles:
-  - Validate overwhelm without dismissal
-  - Gentle scaffolding (with retraction option)
-  - Invite reflection on deeper meaning
-  - Mirror values and identity
-  - Explore alternative fulfillment
-  - Connect values to actions
-  - Move from immediate to existential
+
+- Validate overwhelm without dismissal
+- Gentle scaffolding (with retraction option)
+- Invite reflection on deeper meaning
+- Mirror values and identity
+- Explore alternative fulfillment
+- Connect values to actions
+- Move from immediate to existential
 Continuity Bridges:
-  - Work stress → existential questioning
-  - Purpose/identity theme tracking
-  - Professional ↔ personal interests
-  - Metaphor mirroring (anchor, grind, drowning)
-  - Meaning maintenance in stress
-  - Complexity holding (multiple roles)
+- Work stress → existential questioning
+- Purpose/identity theme tracking
+- Professional ↔ personal interests
+- Metaphor mirroring (anchor, grind, drowning)
+- Meaning maintenance in stress
+- Complexity holding (multiple roles)
 Tone:
-  - Gentle, validating
-  - Self-correcting
-  - Strategic pacing (validate → probe → reflect → expand)
-  - Metaphorical resonance
-  - Curious, non-prescriptive
-  - Existential honoring
-  - Dual identity acknowledgment
+- Gentle, validating
+- Self-correcting
+- Strategic pacing (validate → probe → reflect → expand)
+- Metaphorical resonance
+- Curious, non-prescriptive
+- Existential honoring
+- Dual identity acknowledgment
 Status: ✓ Verified with 6-turn dialogue
+
 ```
 
 
@@ -238,19 +243,20 @@ Purpose: Transition from mixed emotions to deeper complexity
 Entry Cues: but, hug, heavy, familial_connection, ...
 Learned From: Automatically extracted by ConversationLearner
 Response Principles:
-  - Balance mixed emotions
-  - Create space for deeper disclosure
-  - Validate emotion first
-  - Invite elaboration with open questions
+
+- Balance mixed emotions
+- Create space for deeper disclosure
+- Validate emotion first
+- Invite elaboration with open questions
 Continuity Bridges:
-  - Reference prior emotional state
-  - Connect current moment to prior load
-  - Carry forward key themes
+- Reference prior emotional state
+- Connect current moment to prior load
+- Carry forward key themes
 Tone:
-  - Mirror user's metaphorical language
-  - Gentle pacing (validate then pause)
-  - Warm, embracing language
-  - Reflect feelings back empathetically
+- Mirror user's metaphorical language
+- Gentle pacing (validate then pause)
+- Warm, embracing language
+- Reflect feelings back empathetically
 Status: ✓ Auto-learned, working
 
 ```
@@ -263,9 +269,11 @@ Status: ✓ Auto-learned, working
 ```text
 ```text
 ```
+
 "I feel fragile today, like even small things overwhelm me.
 Work has been relentless lately—this week alone I've felt
 pummeled by back-to-back client meetings and impossible deadlines."
+
 ```
 
 
@@ -295,12 +303,15 @@ Library.get_best_match(user_input):
 ```text
 ```text
 ```
+
 Archetype principles: ["Validate overwhelm", "Gentle scaffolding", ...]
 Detect pattern: Overwhelm + pummeled + fragile → OVERWHELM pattern
 Generate opening: "I hear you. Sounds like you're holding a lot right now."
-  - Validates with "I hear you"
-  - Mirrors weight with "holding a lot"
-  - Gentle, not prescriptive
+
+- Validates with "I hear you"
+- Mirrors weight with "holding a lot"
+- Gentle, not prescriptive
+
 ```
 
 
@@ -322,11 +333,14 @@ No bridge needed (but would apply if this were turn 3+)
 ```text
 ```text
 ```
+
 Archetype tone: ["Curious, non-prescriptive", ...]
 Generate closing: "What's one thing about that you want to sit with?"
-  - Invites reflection
-  - Open-ended
-  - Honors user's process
+
+- Invites reflection
+- Open-ended
+- Honors user's process
+
 ```
 
 
@@ -353,6 +367,7 @@ response = opening + closing
 ```text
 ```text
 ```
+
 If conversation is marked successful:
   ConversationLearner.analyze_conversation(full_dialogue)
     - Extract emotional arc
@@ -362,6 +377,7 @@ If conversation is marked successful:
 
   Create new archetype or refine existing
   Add to library for future use
+
 ```
 
 
@@ -376,6 +392,7 @@ If conversation is marked successful:
 ```
 
 OLD SYSTEM:
+
 - Randomly select: opening + movement + closing
 - Result: Feels mechanical, unpredictable variation, incoherent
 
@@ -390,13 +407,16 @@ Example: Response could be "I understand" + "Have you tried..." + "Let me know!"
 ```text
 ```text
 ```
+
 NEW SYSTEM:
+
 - Match archetype → Extract principles → Generate response
 - Result: Each response unique but follows learned rules, feels natural
 
 Example: "I hear you. Sounds like you're holding a lot right now.
           What's one thing about that you want to sit with?"
          Feels coherent, contextual, genuinely responsive
+
 ```
 
 
@@ -432,8 +452,6 @@ def generate_response(user_input, prior_context):
 ```text
 ```
 
-
-
 ### With Learning Pipeline
 
 ```python
@@ -456,12 +474,12 @@ def log_successful_interaction(dialogue, feedback):
 
 ```
 
-
 ##
 
 ## Test Coverage
 
 ### Automated Tests (100% Passing)
+
 - ✓ Library initialization
 - ✓ Archetype matching/scoring
 - ✓ Response generation
@@ -470,15 +488,18 @@ def log_successful_interaction(dialogue, feedback):
 - ✓ 6-turn dialogue scenario
 
 ### Ready for Real-World Testing
+
 - [ ] Live user conversations
 - [ ] Archetype effectiveness feedback
 - [ ] Success rate monitoring
 - [ ] Adaptive weight refinement
+
 ##
 
 ## Status: COMPLETE AND VERIFIED ✓
 
 The three-layer learning architecture is now:
+
 - ✓ Fully implemented
 - ✓ Comprehensively tested
 - ✓ Principle-driven response generation working

@@ -7,6 +7,7 @@
 ## What You Got
 
 A **fully integrated dynamic glyph generation system** that automatically creates new glyphs during user-AI conversations.
+
 ##
 
 ## Implementation Overview
@@ -14,6 +15,7 @@ A **fully integrated dynamic glyph generation system** that automatically create
 ### Core Components
 
 #### **1. Dynamic Glyph Evolution Engine** (`dynamic_glyph_evolution.py`)
+
 - 512 lines of production code
 - Pattern detection from co-occurring emotions
 - Automatic glyph creation and naming
@@ -21,10 +23,12 @@ A **fully integrated dynamic glyph generation system** that automatically create
 - User-specific and shared glyph tracking
 
 **Key Classes:**
+
 - `ConversationGlyph` - Dataclass for glyph objects
 - `DynamicGlyphEvolution` - Main engine for pattern → glyphs
 
 **Key Methods:**
+
 - `process_dialogue_exchange()` - Main entry point
 - `_detect_patterns_in_exchange()` - Finds emotional co-occurrences
 - `_generate_glyphs_from_patterns()` - Creates glyph definitions
@@ -34,6 +38,7 @@ A **fully integrated dynamic glyph generation system** that automatically create
 - `_create_narrative_hook()` - Creates narrative context
 
 #### **2. Hybrid Processor Integration** (`hybrid_processor_with_evolution.py`)
+
 - 368 lines of orchestration code
 - Connects dialogue flow to glyph generation
 - Manages signal extraction, learning, pattern detection, glyph creation
@@ -41,9 +46,11 @@ A **fully integrated dynamic glyph generation system** that automatically create
 - Results aggregation and reporting
 
 **Key Classes:**
+
 - `HybridProcessorWithEvolution` - Main orchestrator
 
 **Key Methods:**
+
 - `process_user_message()` - Full pipeline
 - `_extract_signals()` - Adaptive signal extraction
 - `get_all_generated_glyphs()` - Access discovered glyphs
@@ -51,6 +58,7 @@ A **fully integrated dynamic glyph generation system** that automatically create
 - `print_session_summary()` - Display results
 
 #### **3. UI Integration** (Modified Files)
+
 - **`emotional_os/deploy/modules/ui.py`** (lines 573-640)
   - Detects hybrid mode conversations
   - Initializes processor per session
@@ -63,6 +71,7 @@ A **fully integrated dynamic glyph generation system** that automatically create
   - Displays glyph symbols, emotions, keywords
   - Export button for discovered glyphs
   - Seamless integration with existing UI
+
 ##
 
 ## How It Works
@@ -106,6 +115,7 @@ New Glyph Available
 ```text
 ```text
 ```
+
 Turn 1: love (0.9) + intimacy (0.8) = co-occurrence
 Turn 2: love (0.85) + intimacy (0.7) = co-occurrence
 Turn 3: vulnerability (0.8) + love (0.9) = co-occurrence
@@ -117,6 +127,7 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
     Emotions: love + intimacy
     Response: "Recognize the deep closeness being shared"
     Story: "A story of two souls finding each other"
+
 ```
 
 
@@ -136,6 +147,7 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
    ```
 
 2. **Data Persistence** (Automatic)
+
    ```
    learning/conversation_glyphs.json
    └─ All discovered glyphs (survives session restart)
@@ -148,6 +160,7 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
    ```
 
 3. **Session State** (Streamlit)
+
    ```python
    st.session_state['hybrid_processor']        # Processor instance
    st.session_state['new_glyphs_this_session'] # Glyphs from current session
@@ -155,10 +168,12 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
    ```
 
 4. **Sidebar Display** (`main_v2.py` line 131)
+
    ```python
    with st.sidebar.expander("✨ Glyphs Discovered This Session"):
        # Shows all discovered glyphs with symbols, emotions, keywords
    ```
+
 ##
 
 ## Files Delivered
@@ -267,9 +282,6 @@ evolution = DynamicGlyphEvolution(
 ```text
 ```
 
-
-
-
 ### Customize Glyph Symbols
 
 ```python
@@ -283,8 +295,6 @@ self.emotion_symbols = {
 ```text
 ```
 
-
-
 ### Customize Glyph Names
 
 ```python
@@ -297,8 +307,6 @@ name_map = {
 
 ```text
 ```
-
-
 
 ##
 
@@ -321,8 +329,6 @@ streamlit run main_v2.py
 ```text
 ```text
 ```
-
-
 
 ### Accessing Glyphs Programmatically
 
@@ -349,9 +355,6 @@ processor.export_session_glyphs("output.json")
 ```text
 ```
 
-
-
-
 ### Checking Persistent Storage
 
 ```bash
@@ -367,7 +370,6 @@ cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 ```text
 ```
 
-
 ##
 
 ## Testing & Verification
@@ -379,10 +381,8 @@ cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 ```text
 ```
 
-
-
-
 Checks:
+
 - ✅ All files exist
 - ✅ UI integration points correct
 - ✅ Python imports work
@@ -411,31 +411,37 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 ```text
 ```
 
-
 ##
 
 ## Troubleshooting
 
 ### Issue: No Glyphs Generated
+
 **Cause:** Pattern frequency not reaching threshold
 **Fix:**
+
 1. Have longer conversations with consistent themes
 2. Lower threshold: `min_frequency_for_glyph=50`
 3. Check `learning/hybrid_learning_log.jsonl` for activity
 
 ### Issue: Glyphs Not Displayed in Sidebar
+
 **Cause:** Session not initialized or no glyphs generated
 **Fix:**
+
 1. Ensure processing mode is "hybrid"
 2. Check sidebar expansion
 3. Enable debug to see signal extraction
 
 ### Issue: Import Errors
+
 **Cause:** Missing files or dependencies
 **Fix:**
+
 1. Run `bash verify_integration.sh`
 2. Check all files are in root directory
 3. Verify dependencies installed
+
 ##
 
 ## Architecture Diagram
@@ -489,29 +495,31 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 ```text
 ```
 
-
-
 ##
 
 ## What This Enables
 
 ### Immediate
+
 - ✅ Real-time glyph discovery during conversations
 - ✅ Per-user emotional vocabulary evolution
 - ✅ Visual feedback of system learning
 - ✅ Session-based glyph tracking
 
 ### Short-term (Next Steps)
+
 - Database integration of discovered glyphs
 - User glyph recommendations
 - Cross-user pattern analysis
 - Glyph visualizations
 
 ### Long-term (Future)
+
 - Community glyph discovery
 - Emergent emotional territories
 - Glyph marketplace
 - Multi-user pattern learning
+
 ##
 
 ## Success Indicators
@@ -525,6 +533,7 @@ You'll know it's working when:
 ✅ Each glyph has symbol, name, emotions, keywords
 ✅ Glyphs are user-specific
 ✅ Export button saves glyphs
+
 ##
 
 ## Documentation
@@ -536,6 +545,7 @@ You'll know it's working when:
 | `DYNAMIC_GLYPH_EVOLUTION_GUIDE.md` | Complete technical reference |
 | `demo_dynamic_glyph_evolution.py` | Working example |
 | `verify_integration.sh` | Automated verification |
+
 ##
 
 ## The Result
@@ -550,6 +560,7 @@ You now have a **fully functional dynamic glyph generation system** that:
 6. **Persists** glyphs for future sessions and integration
 
 This transforms Saoriverse from a static system with predefined glyphs into a **living, learning system** that grows and evolves with each conversation.
+
 ##
 
 ## Ready to Run
@@ -560,8 +571,5 @@ streamlit run main_v2.py        # ← Then run this
 
 # Select "hybrid" mode and start chatting!
 ```
-
-
-
 
 Enjoy your dynamically evolving glyph system! 🌟

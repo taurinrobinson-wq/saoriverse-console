@@ -3,6 +3,7 @@
 ## What Is Tier 2?
 
 Tier 2 adds **emotional presence** to the response pipeline. It makes responses feel more alive by:
+
 - Matching the user's emotional tone
 - Adjusting energy based on intensity
 - Adding subtle physical presence metaphors
@@ -11,6 +12,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ## The 4 Components
 
 ### 1️⃣ AttunementLoop
+
 **What it does:** Detects emotional tone and adjusts response energy
 
 ```python
@@ -23,18 +25,19 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```text
 ```
 
-
-
 **Tones detected:**
+
 - 😊 Joyful: happy, excited, wonderful, amazing, love
 - 😰 Anxious: worried, afraid, nervous, unsure
 - 😢 Sad: sad, depressed, hurt, lonely, miserable
 - 😠 Angry: angry, frustrated, furious, disgusted
 - 🤔 Reflective: think, wonder, question, consider
 - ❓ Uncertain: maybe, perhaps, not sure, confused
+
 ##
 
 ### 2️⃣ EmotionalReciprocity
+
 **What it does:** Measures intensity (0.0 to 1.0) and matches response
 
 ```python
@@ -53,18 +56,18 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```text
 ```
 
-
-
-
 **Intensity factors:**
+
 - `!` marks: +0.1 each (up to 0.3)
 - `?` marks: +0.05 each (shows engagement)
 - ALL CAPS: +0.05 each (emphasis)
 - Message length: shorter (-0.05), longer (+0.1)
 - Special markers: high/medium/low impact
+
 ##
 
 ### 3️⃣ EmbodiedSimulation
+
 **What it does:** Adds subtle physical presence to responses
 
 ```python
@@ -81,18 +84,19 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```text
 ```
 
-
-
 **When added:** To responses >100 characters, ~40% of the time
 
 **Phrases used:**
+
 - "I'm here with you"
 - "I'm holding space for..."
 - "I reach toward..."
 - "breathing with you"
+
 ##
 
 ### 4️⃣ EnergyTracker
+
 **What it does:** Manages conversation energy and prevents fatigue
 
 ```python
@@ -116,8 +120,6 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```text
 ```
-
-
 
 ##
 
@@ -157,9 +159,7 @@ print(metrics)
 ```text
 ```
 
-
-
-### Already Integrated!
+### Already Integrated
 
 If you're using the response pipeline:
 
@@ -179,13 +179,12 @@ If you're using the response pipeline:
 ```text
 ```
 
-
-
 ##
 
 ## How It Works Internally
 
 ### Pipeline Order
+
 1. **Attunement** (detect tone) → 6ms
 2. **Reciprocity** (measure/match intensity) → 6ms
 3. **Embodiment** (add presence phrases) → 4ms
@@ -194,6 +193,7 @@ If you're using the response pipeline:
 **Total: ~20ms per response** ✅
 
 ### Error Handling
+
 Each component has try-catch:
 
 ```python
@@ -205,9 +205,8 @@ except Exception as e:
 ```text
 ```
 
-
-
 If entire Tier 2 fails, returns base response (no crash).
+
 ##
 
 ## Performance
@@ -227,12 +226,10 @@ If entire Tier 2 fails, returns base response (no crash).
 ```text
 ```
 
-
-
-
 Each component: **<10ms** ✅
 Combined pipeline: **<70ms** ✅
 Well under 100ms budget: **✅**
+
 ##
 
 ## Testing
@@ -244,13 +241,13 @@ Tier 1: 10/10 tests passing ✅
 ```text
 ```
 
-
-
 Each component has:
+
 - ✅ Initialization test
 - ✅ Basic functionality tests
 - ✅ Edge case tests
 - ✅ Performance benchmarks
+
 ##
 
 ## Key Insights
@@ -270,6 +267,7 @@ Each component has:
 - ❌ Not requiring ML models
 - ❌ Not adding latency (only +20ms)
 - ❌ Not breaking existing functionality
+
 ##
 
 ## Session Integration
@@ -287,12 +285,10 @@ def _ensure_tier2_aliveness():
 ```text
 ```
 
-
-
-
 ✅ Initialized once per user session
 ✅ Optional (graceful if fails)
 ✅ Accessible anywhere in app via `st.session_state["tier2_aliveness"]`
+
 ##
 
 ## Metrics Available
@@ -312,27 +308,30 @@ metrics = {
 ```text
 ```
 
-
-
 Use for logging, monitoring, debugging.
+
 ##
 
 ## Troubleshooting
 
 ### "Response seems off-tone"
+
 - Check if Tier 2 failed (check logs)
 - May be fallback to base response
 - Verify conversation history is passed correctly
 
 ### "Processing is slow"
+
 - Shouldn't be, only +20ms
 - Check if other layers are slow
 - Review performance logs
 
 ### "Embodied language seems forced"
+
 - It's random (40% probability)
 - Only on long responses (>100 chars)
 - Can disable by removing `add_embodied_language()` call
+
 ##
 
 ## Customization
@@ -356,16 +355,16 @@ pacing = tracker.calculate_optimal_pacing("deepening")
 ```text
 ```
 
-
-
-
 All fully customizable without retraining!
+
 ##
 
 ## Next Steps
 
 ### Tier 3: Poetic Consciousness
+
 Coming Week 3-4:
+
 - Poetic generation (metaphor, symbolism)
 - Saori layer (Japanese aesthetics)
 - Personal mythology
@@ -380,8 +379,6 @@ Tier 3: ~20ms (estimate)
 Total: ~80ms (still under 100ms budget!)
 ```
 
-
-
 ##
 
 ## Related Files
@@ -391,6 +388,7 @@ Total: ~80ms (still under 100ms budget!)
 - `src/emotional_os/deploy/modules/ui_components/response_handler.py` - Integration
 - `src/emotional_os/deploy/modules/ui_components/session_manager.py` - Session setup
 - `TIER_2_COMPLETION_REPORT.md` - Full technical report
+
 ##
 
 ## Summary

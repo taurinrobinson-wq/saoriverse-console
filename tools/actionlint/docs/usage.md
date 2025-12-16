@@ -11,8 +11,6 @@ With no argument, actionlint finds all workflow files in the current repository 
 ```text
 ```
 
-
-
 When paths to YAML workflow files are given as arguments, actionlint checks them.
 
 ```sh
@@ -20,17 +18,12 @@ When paths to YAML workflow files are given as arguments, actionlint checks them
 ```sql
 ```
 
-
-
-
 When `-` argument is given, actionlint reads inputs from stdin and checks it as workflow source.
 
 ```sh
 ```text
 ```text
 ```
-
-
 
 To know all flags and options, see an output of `actionlint -h` or [the online command manual][cmd-manual].
 
@@ -44,9 +37,6 @@ The regular expression syntax is the same as [RE2][re2].
 ```text
 ```
 
-
-
-
 `-shellcheck` and `-pyflakes` specifies file paths of executables. Setting empty string to them disables `shellcheck` and
 `pyflakes` rules. As a bonus, disabling them makes actionlint much faster Since these external linter integrations spawn many
 processes.
@@ -55,8 +45,6 @@ processes.
 ```text
 ```text
 ```
-
-
 
 <a name="format"></a>
 
@@ -73,9 +61,6 @@ Before explaining the formatting details, let's see some examples.
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -83,17 +68,12 @@ Output:
 ```text
 ```
 
-
-
 #### Example: Markdown
 
 ````sh
 
 ````text
 ````
-
-
-
 
 Output:
 
@@ -114,8 +94,6 @@ property "platform" is not defined in object type {os: string}
 ````text
 ````
 
-
-
 #### Example: Serialized in [JSON Lines][jsonl]
 
 ```sh
@@ -123,8 +101,6 @@ property "platform" is not defined in object type {os: string}
 actionlint -format '{{range $err := .}}{{json $err}}{{end}}'
 
 ```
-
-
 
 Output:
 
@@ -136,8 +112,6 @@ Output:
 
 ```
 
-
-
 #### Example: [Error annotation][ga-annotate-error] on GitHub Actions
 
 ````sh
@@ -145,8 +119,6 @@ Output:
 actionlint -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace $err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' -ignore 'SC2016:'
 
 ````
-
-
 
 Output:
 
@@ -180,14 +152,12 @@ The sequence can be traversed with `range` action, which is like `for ... = rang
 
 ```
 
-
-
 The error object has the following fields.
 
 | Field                | Description                                           | Example                                                          |
 |----------------------|-------------------------------------------------------|------------------------------------------------------------------|
 | `{{$err.Message}}`   | Body of error message                                 | `property "platform" is not defined in object type {os: string}` |
-| `{{$err.Snippet}}`   | Code snippet to indicate error position               | `          node_version: 16.x\n          ^~~~~~~~~~~~~`          |
+| `{{$err.Snippet}}`   | Code snippet to indicate error position               | `node_version: 16.x\n          ^~~~~~~~~~~~~`          |
 | `{{$err.Kind}}`      | Name of rule the error belongs to                     | `expression`                                                     |
 | `{{$err.Filepath}}`  | Canonical relative file path of the error position    | `.github/workflows/ci.yaml`                                      |
 | `{{$err.Line}}`      | Line number of the error position (1-based)           | `9`                                                              |
@@ -221,8 +191,6 @@ line is {{$err.Line}}, col is {{$err.Column}}, message is {{$err.Message | print
 
 ```
 
-
-
 will produce output like below.
 
 ```
@@ -230,8 +198,6 @@ will produce output like below.
 line is 21, col is 20, message is "property \"platform\" is not defined in object type {os: string}"
 
 ```
-
-
 
 In `{{ }}` placeholder, input can be piped and action can be used to transform texts. In above example, the message is piped with
 `|` and transformed with `printf "%q"`.
@@ -280,8 +246,6 @@ jobs:
 
 ```
 
-
-
 Or simply download the executable and run it in one step:
 
 ```yaml
@@ -293,8 +257,6 @@ Or simply download the executable and run it in one step:
   shell: bash
 
 ```
-
-
 
 The download script allows to specify the version of actionlint and the download directory. Try to give `--help` argument
 to the script for more usage details.
@@ -324,13 +286,11 @@ jobs:
 
 ```
 
-
-
 ## Online playground
 
 Thanks to WebAssembly, actionlint playground is available on your browser. It never sends any data to outside of your browser.
 
-https://rhysd.github.io/actionlint/
+<https://rhysd.github.io/actionlint/>
 
 Paste your workflow content to the code editor at left pane. It automatically shows the results at right pane. When editing
 the workflow content in the code editor, the results will be updated on the fly. Clicking an error message in the results
@@ -356,8 +316,6 @@ docker run --rm rhysd/actionlint:latest -version
 
 ```
 
-
-
 To check all workflows in your repository, mount your repository's root directory as a volume and run actionlint in the mounted
 directory. When you are at a root directory of your repository:
 
@@ -367,8 +325,6 @@ docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color
 
 ```
 
-
-
 To check a file with actionlint in a Docker container, pass the file content via stdin and use `-` argument:
 
 ```sh
@@ -376,8 +332,6 @@ To check a file with actionlint in a Docker container, pass the file content via
 cat /path/to/workflow.yml | docker run --rm -i rhysd/actionlint:latest -color -
 
 ```
-
-
 
 Or mount the workflows directory and pass the paths as arguments:
 
@@ -387,12 +341,9 @@ docker run --rm -v /path/to/workflows:/workflows rhysd/actionlint:latest -color 
 
 ```
 
-
-
 ## Using actionlint from Go program
 
 Go APIs are available. See [the Go API document](api.md) for more details.
-
 
 <a name="tools-integ"></a>
 
@@ -418,8 +369,6 @@ jobs:
 
 ```
 
-
-
 <a name="problem-matchers"></a>
 
 ### Problem Matchers
@@ -441,8 +390,6 @@ Then enable the matcher using `add-matcher` command before running `actionlint` 
 
 ```
 
-
-
 When you change your workflow and the changed line causes a new error, CI will annotate the diff with the extracted error message.
 
 <img src="https://github.com/rhysd/ss/blob/master/actionlint/problem-matcher.png?raw=true" alt="annotation by Problem Matchers" width="715" height="221"/>
@@ -463,11 +410,13 @@ pre-commit hook to check workflow files in `.github/workflows/` directory.
 Add this to your `.pre-commit-config.yaml` in your repository:
 
 ## ```yaml
+
 repos:
-  - repo: https://github.com/rhysd/actionlint
+
+- repo: <https://github.com/rhysd/actionlint>
     rev: main
     hooks:
-      - id: actionlint
+  - id: actionlint
 
 ```
 
@@ -505,7 +454,6 @@ trunk check enable actionlint
 
 ```
 
-
 or if you'd like a specific version:
 
 ```bash
@@ -514,7 +462,6 @@ or if you'd like a specific version:
 trunk check enable actionlint@1.6.23
 
 ```
-
 
 or modify `.trunk/trunk.yaml` in your repo to contain:
 
@@ -527,7 +474,6 @@ lint:
 
 ```
 
-
 Then just run:
 
 ```bash
@@ -537,11 +483,11 @@ trunk check
 
 ```
 
-
 and it will check your modified files via actionlint, if applicable, and show you the results. Trunk also will detect preexisting
 issues and highlight only the newly added actionlint issues. For more information, check the [trunk docs][trunk-docs].
 
 You can also see actionlint issues inline in VS Code via the [Trunk VS Code extension][trunk-vscode].
+
 ##
 
 [Checks](checks.md) | [Installation](install.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)

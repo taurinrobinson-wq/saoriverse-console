@@ -15,11 +15,13 @@ Status: Implementation Ready
 # ============================================================================
 
 ## 1. ProsodyPlanner Class
+
 **File**: `src/emotional_os/deploy/modules/prosody_planner.py`
 
 Converts FirstPerson glyph signals into SSML prosody directives for natural speech.
 
 **Glyph-to-Prosody Mappings**:
+
 - **Voltage** (arousal) → Rate + Volume
   - "low" → slow speech, soft volume
   - "medium" → normal rate, normal volume
@@ -45,12 +47,14 @@ Converts FirstPerson glyph signals into SSML prosody directives for natural spee
   - false → continuous, natural flow
 
 **Key Methods**:
+
 - `plan(text, glyph_intent)` → SSML-marked text
 - `plan_for_chunks(chunks, glyph_intent)` → Apply prosody to list
 - `adjust_prosody_for_emphasis(text, emphasis_indices)` → Highlight specific words
 - `get_prosody_summary(glyph_intent)` → Human-readable summary
 
 ## 2. AudioConversationOrchestrator Improvements
+
 **File**: `src/emotional_os/deploy/modules/audio_conversation_orchestrator.py`
 
 Enhanced main orchestrator with prosody support and non-blocking playback.
@@ -121,13 +125,12 @@ libsndfile1      # Sound file I/O
 ```text
 ```
 
-
-
-
 ## 4. Documentation
+
 **Two comprehensive guides created**:
 
 ### `AUDIO_CONVERSATION_INTEGRATION_GUIDE.md`
+
 - Architecture diagrams
 - Component responsibilities
 - Data flow (turn-by-turn)
@@ -136,6 +139,7 @@ libsndfile1      # Sound file I/O
 - Troubleshooting guide
 
 ### `AUDIO_CONVERSATION_IMPLEMENTATION_CHECKLIST.md`
+
 - Phase-by-phase implementation plan
 - 6 phases: Dependencies → Modules → Integration → Optimization → UX → Deployment
 - Testing checklist
@@ -159,8 +163,6 @@ Chunk 2: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 ```text
 ```
 
-
-
 **After** (Non-Blocking with 0.9x overlap):
 
 ```
@@ -175,17 +177,16 @@ Chunk 2:                    Synthesize (1.0s)
 ```text
 ```
 
-
-
-
 ## Prosody Planning (Why It's Essential)
 
 **Without Prosody**:
+
 - All responses sound the same regardless of emotional intent
 - User loses emotional context of FirstPerson's state
 - Conversation feels robotic
 
 **With Prosody**:
+
 - Response about joy: fast, high-pitched, loud → "I'm excited!"
 - Response about sadness: slow, low-pitched, soft → "I'm concerned..."
 - Response about uncertainty: rising intonation, hesitation pauses → "I'm not sure..."
@@ -215,8 +216,6 @@ glyph_intent = {
 ```text
 ```
 
-
-
 **Example: Low-Voltage Negative Response**
 
 ```python
@@ -244,8 +243,6 @@ glyph_intent = {
 
 ```
 
-
-
 # ============================================================================
 
 # FILES CHANGED
@@ -253,11 +250,13 @@ glyph_intent = {
 # ============================================================================
 
 **Created**:
+
 - `src/emotional_os/deploy/modules/prosody_planner.py` (177 lines)
 - `AUDIO_CONVERSATION_INTEGRATION_GUIDE.md` (950+ lines)
 - `AUDIO_CONVERSATION_IMPLEMENTATION_CHECKLIST.md` (450+ lines)
 
 **Modified**:
+
 - `src/emotional_os/deploy/modules/audio_conversation_orchestrator.py`
   - Added glyph_intent parameter to stream_response()
   - Changed playback from blocking to non-blocking
@@ -306,24 +305,28 @@ glyph_intent = {
 # ============================================================================
 
 ✅ **Production-Ready Components**:
+
 1. ProsodyPlanner - fully functional, tested conceptually
 2. AudioRecorder - silence detection, automatic stop
 3. TextToSpeechStreamer - chunking logic, prosody integration
 4. AudioConversationOrchestrator - state machine, control flow
 
 ✅ **Infrastructure**:
+
 1. Docker image with all audio dependencies
 2. Docker Compose with Streamlit + Ollama running
 3. All Python packages installed
 4. NLP pipeline (spacy, TextBlob, NRC) functional
 
 ✅ **Documentation**:
+
 1. Integration guide with examples
 2. Implementation checklist (step-by-step)
 3. Architecture diagrams and data flow
 4. Troubleshooting guide
 
 ⏳ **Next Steps (For You)**:
+
 1. Integrate audio UI into Streamlit app
 2. Extract glyph intent from FirstPerson pipeline
 3. Test end-to-end with real conversation
@@ -337,29 +340,34 @@ glyph_intent = {
 # ============================================================================
 
 **1. Non-Blocking Playback is Game-Changing**
-   - Enables seamless, natural-feeling conversations
-   - Reduces latency by overlapping operations
-   - No waiting between audio chunks
+
+- Enables seamless, natural-feeling conversations
+- Reduces latency by overlapping operations
+- No waiting between audio chunks
 
 **2. Glyph Signals as First-Class Citizens**
-   - Prosody isn't an afterthought, it's core to emotion expression
-   - Glyph intent dict is the natural carrier of this information
-   - ProsodyPlanner acts as "emotional voicing" layer
+
+- Prosody isn't an afterthought, it's core to emotion expression
+- Glyph intent dict is the natural carrier of this information
+- ProsodyPlanner acts as "emotional voicing" layer
 
 **3. Streaming Architecture**
-   - Instead of: record → process → synthesize → play (serial)
-   - Now: synthesize chunk N while playing chunk N-1 (parallel)
-   - Result: User experiences responsive, fluid conversation
+
+- Instead of: record → process → synthesize → play (serial)
+- Now: synthesize chunk N while playing chunk N-1 (parallel)
+- Result: User experiences responsive, fluid conversation
 
 **4. Silence Detection is Essential**
-   - Microphone always on feels invasive
-   - Auto-stop on silence makes recording feel natural
-   - User just speaks naturally, no "stop recording" button needed
+
+- Microphone always on feels invasive
+- Auto-stop on silence makes recording feel natural
+- User just speaks naturally, no "stop recording" button needed
 
 **5. State Machine for UI Coherence**
-   - Clear state progression helps users understand what's happening
-   - State callbacks enable reactive UI updates
-   - Pause/Resume/Stop give users full control
+
+- Clear state progression helps users understand what's happening
+- State callbacks enable reactive UI updates
+- Pause/Resume/Stop give users full control
 
 # ============================================================================
 
@@ -368,21 +376,25 @@ glyph_intent = {
 # ============================================================================
 
 **PHASE 3 (UI Integration)** - 2-3 hours
+
 - Add audio conversation UI to ui_refactored.py
 - Create Streamlit buttons and state display
 - Connect orchestrator to UI
 
 **PHASE 4 (Glyph Extraction)** - 2-4 hours
+
 - Extract glyph signals from Tier 2/3
 - Map glyph values to intent dict format
 - Test prosody with actual FirstPerson responses
 
 **PHASE 5 (Testing & Tuning)** - 4-6 hours
+
 - End-to-end testing (record → transcribe → respond → play)
 - Latency profiling and optimization
 - Prosody tuning (adjust SSML mappings)
 
 **PHASE 6 (Production)** - 2-3 hours
+
 - Error handling & fallbacks
 - Performance monitoring
 - Deployment verification

@@ -3,6 +3,7 @@
 **Status**: ✅ **IMPLEMENTED** (Intelligent Symbolic Anonymization)
 **Date**: November 5, 2025
 **Purpose**: Dramatically reduce HIPAA/GDPR burden while preserving emotional integrity
+
 ##
 
 ## 🧬 What It Does
@@ -26,6 +27,7 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
    - GDPR-aligned (easier deletion/portability)
    - Consent-based de-anonymization for sharing
    - Trackable anonymization maps for audits
+
 ##
 
 ## <strong>FP</strong> What It Preserves
@@ -40,6 +42,7 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 | **Name** | "Michelle" | "The Thread" | ❌ Removed |
 | **Specific location** | "Bell, CA" | "West Coast" | ❌ Generalized |
 | **Exact date** | "August 2023" | "2 years ago" | ❌ Abstracted |
+
 ##
 
 ## 🔐 Symbolic Glyphs
@@ -68,6 +71,7 @@ friend/companion     → the Companion
 ```text
 ```text
 ```
+
 depression           → the Depths
 anxiety              → the Tightness
 trauma/PTSD          → the Rupture
@@ -77,6 +81,7 @@ chronic illness      → the Shadow
 medical device       → the Device
 medication           → the Medicine
 diagnosis            → the Recognition
+
 ```
 
 
@@ -152,9 +157,6 @@ print(anonymized["text"])
 ```text
 ```
 
-
-
-
 ### With Consent (Medical Details Preserved)
 
 ```python
@@ -169,8 +171,6 @@ print(anonymized["text"])
 ```text
 ```text
 ```
-
-
 
 ### Consent Request for Sharing
 
@@ -194,9 +194,6 @@ print(consent["options"])
 ```text
 ```
 
-
-
-
 ### Transparency Report
 
 ```python
@@ -210,18 +207,19 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ```text
 ```
 
-
 ##
 
 ## 🔐 Benefits
 
 ### Privacy (Regulatory)
+
 - ✅ **HIPAA-safe**: No Protected Health Information (PHI) stored
 - ✅ **GDPR-aligned**: Easier to offer deletion, portability, consent flows
 - ✅ **CCPA-ready**: PII stripped from searchable/analyzable data
 - ✅ **Clinical-safe**: Can be shared with providers without re-identification risk
 
 ### Emotional (User Experience)
+
 - ✅ Users still feel seen and honored
 - ✅ Narratives remain coherent and meaningful
 - ✅ Relationships preserved symbolically
@@ -229,11 +227,13 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 - ✅ Rituals still trigger correctly
 
 ### Technical (System)
+
 - ✅ Scalable (no encryption overhead)
 - ✅ Analyzable (can study emotional patterns)
 - ✅ Reversible (map allows de-anonymization with consent)
 - ✅ Auditable (timestamps and maps recorded)
 - ✅ Transparent (users see what changed)
+
 ##
 
 ## 🧶 Consent-Based De-Anonymization
@@ -250,9 +250,6 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ```text
 ```
 
-
-
-
 **2. Legacy Archive**
 
 ```
@@ -261,8 +258,6 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ```text
 ```text
 ```
-
-
 
 **3. Research Contribution**
 
@@ -274,9 +269,6 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ```text
 ```
 
-
-
-
 **4. Clinical Review**
 
 ```
@@ -285,7 +277,6 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ```text
 ```text
 ```
-
 
 ##
 
@@ -323,8 +314,6 @@ User Entry (Raw)
 ```text
 ```
 
-
-
 ##
 
 ## 📊 Anonymization Report Example
@@ -361,7 +350,6 @@ User Entry (Raw)
 ```text
 ```
 
-
 ##
 
 ## 🚀 Integration Points
@@ -391,9 +379,6 @@ _log_exchange(anonymized)
 ```text
 ```
 
-
-
-
 ### 2. Streamlit UI (main_v2.py)
 
 ```python
@@ -419,8 +404,6 @@ with col3:
 ```text
 ```
 
-
-
 ### 3. Export/Archive (emotional_os/glyphs/velonix_reaction_engine.py)
 
 ```python
@@ -440,7 +423,6 @@ with col3:
 
 ```
 
-
 ##
 
 ## 🛠️ Next Steps
@@ -453,6 +435,7 @@ with col3:
 - [ ] Document for HIPAA/GDPR compliance report
 - [ ] Set up audit logging for de-anonymization requests
 - [ ] Add differential privacy for signal frequency analysis
+
 ##
 
 ## 🎯 Philosophy
@@ -466,6 +449,7 @@ with col3:
 > feels the emotion, but cannot re-identify the person.
 >
 > That's the power of this design: privacy without loss of presence.
+
 ##
 
 **Implementation Status**: ✅ Ready for production integration

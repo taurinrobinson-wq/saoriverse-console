@@ -3,6 +3,7 @@
 ## The Core Insight
 
 People coming with emotional struggles don't need to know about glyphs. They need to:
+
 - Feel **heard and understood**
 - Know someone grasps their **specific situation**
 - Receive help that feels **personal, not categorical**
@@ -33,15 +34,17 @@ a sanctuary of quiet care. You're not alone—many brilliant people..."
 ```text
 ```text
 ```
+
 User: "I have math anxiety"
      ↓
 Glyph Selected: Still Containment [INVISIBLE TO USER]
      ↓
 Glyph Informs (behind the scenes):
-  - Tone: Calm, containing
-  - Intensity: Gate 2 = gentle approach
-  - Poetry: Joy-category poems for stability
-  - Entity weighting: People mentioned get appropriate focus
+
+- Tone: Calm, containing
+- Intensity: Gate 2 = gentle approach
+- Poetry: Joy-category poems for stability
+- Entity weighting: People mentioned get appropriate focus
      ↓
 Response: "You're not alone—many brilliant people have genuine friction with math,
 especially when it's presented in a way that doesn't match how their mind naturally works..."
@@ -49,6 +52,7 @@ especially when it's presented in a way that doesn't match how their mind natura
 ✓ User feels heard about their actual situation
 ✓ Glyph system works invisibly in background
 ✓ Response is compositionally fresh but coherent
+
 ```
 
 
@@ -114,8 +118,6 @@ else:
 ```text
 ```
 
-
-
 ### Message-Aware Composition
 
 **compose_message_aware_response():**
@@ -135,20 +137,19 @@ else:
 ```text
 ```
 
-
-
-
 No glyph descriptions. Just person-to-person response calibrated by glyph.
 
 ## Why This Matters
 
-### Before (Visible Glyphs):
+### Before (Visible Glyphs)
+
 - "Let me analyze which emotion category you are..."
 - "I identified your pattern as Still Containment..."
 - "Your glyph is Boundary of Recognition..."
 - Feels like filling in a form, not having a conversation
 
-### After (Invisible Glyphs):
+### After (Invisible Glyphs)
+
 - "You're not alone with this struggle..."
 - "I hear that you're navigating something real..."
 - "Let me make sure I'm actually understanding you..."
@@ -157,6 +158,7 @@ No glyph descriptions. Just person-to-person response calibrated by glyph.
 ## Test Results: User Experience Impact
 
 ### Message 1: Math Anxiety
+
 **Input:** "I have math anxiety. I've never been good at math and it's been a block my whole life."
 
 **Response:**
@@ -170,14 +172,13 @@ That's not fixed—it's just a mismatch to navigate.
 ```text
 ```
 
-
-
 ✓ Addresses **their specific struggle** (math, mental blocks)
 ✓ Validates **their experience** (not alone, it's real)
 ✓ Offers **reframe** (mismatch, not failure)
 ✓ Zero glyph terminology visible
 
 ### Message 3: Feedback + Relationship
+
 **Input:** "That's not quite what I meant. Michelle is my mother-in-law and my boss, and she always explains things in a way that only makes sense to her."
 
 **Response:**
@@ -188,9 +189,6 @@ I appreciate you saying that. I want to make sure I'm actually hearing you,
 
 ```text
 ```
-
-
-
 
 ✓ Shows **they're being heard** (calibrated to feedback)
 ✓ Addresses **their specific person** (Michelle context)
@@ -209,12 +207,14 @@ I appreciate you saying that. I want to make sure I'm actually hearing you,
 ## Technical Details
 
 ### Glyph Usage (All Invisible)
+
 - `glyph.description` → NOT in response; informs tone only
 - `glyph.emotional_signal` → Selects bridge/movement language
 - `glyph.gates` → Determines closing intensity (permission/question/commitment)
 - `glyph.glyph_name` → Maps to poetry emotion category
 
 ### Response Generation (All User-Focused)
+
 - Extract actual message content (math_frustration, inherited_pattern, etc.)
 - Validate the **person's struggle**, not the glyph category
 - Apply glyph calibration behind scenes
@@ -222,7 +222,7 @@ I appreciate you saying that. I want to make sure I'm actually hearing you,
 
 ## User Experience Timeline
 
-### User's Perspective:
+### User's Perspective
 
 ```
 Day 1: "I have anxiety about math"
@@ -238,9 +238,7 @@ Day 3: "That's not what I meant about Michelle"
 ```text
 ```
 
-
-
-### System's Perspective:
+### System's Perspective
 
 ```
 
@@ -251,8 +249,6 @@ Day 3: Glyph=Still Containment, feedback=misalignment → tone: corrective, clos
 Overall: Glyph system provided coherence without being visible
 
 ```
-
-
 
 ## Success Metrics
 
@@ -273,6 +269,7 @@ Overall: Glyph system provided coherence without being visible
 ## Conclusion
 
 The glyph system is most powerful when **invisible**. It provides:
+
 - Internal coherence
 - Calibrated intensity
 - Thematic poetry selection

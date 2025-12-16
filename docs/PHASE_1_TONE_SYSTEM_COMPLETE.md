@@ -61,9 +61,6 @@ getToneTier(value)                       // "Poor", "Weak", "Good", "Strong", "E
 ```text
 ```
 
-
-
-
 ### 3. Game State Management
 
 **Location:** `velinor-web/src/lib/gameStore.ts`
@@ -90,8 +87,6 @@ updateToneStats({
 ```text
 ```text
 ```
-
-
 
 ### 4. Developer Console
 
@@ -153,9 +148,6 @@ choice.toneChanges.forEach(action => {
 ```text
 ```
 
-
-
-
 ### Example: Gated Dialogue (Only if Trust ≥ 60)
 
 ```typescript
@@ -169,8 +161,6 @@ if (toneStats.trust >= 60) {
 ```text
 ```text
 ```
-
-
 
 ## Next Steps: Phase 2 (Dialogue Integration)
 
@@ -214,9 +204,6 @@ export default function DialogueScene() {
 ```text
 ```
 
-
-
-
 ## Testing the System
 
 To verify everything works:
@@ -249,9 +236,6 @@ velinor-web/
 │           └── [sessionId]/
 │               └── page.tsx     (Updated - Integrated TONE display)
 ```
-
-
-
 
 ## Key Metrics
 

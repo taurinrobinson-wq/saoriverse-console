@@ -5,6 +5,7 @@
 The conversation memory layer transforms the system from responding to isolated messages into building a coherent, evolving understanding of the user's emotional state across multiple messages.
 
 **Key Principle**: Information adds up. Each message contributes new data that enriches rather than replaces prior understanding.
+
 ##
 
 ## Information Extraction & Integration
@@ -54,8 +55,6 @@ glyph: Still Insight
 ```text
 ```
 
-
-
 ##
 
 ### Turn 2: "I don't I just feel like I have so much on my mind at work that I can't even make one step forward."
@@ -72,8 +71,6 @@ action_capacity: paralyzed <- CRITICAL: unable to move forward
 ```text
 ```
 
-
-
 **The causal chain emerges:**
 
 ```
@@ -85,10 +82,8 @@ Work demands
 ```text
 ```
 
-
-
-
 **What memory learns:**
+
 - Root trigger: WORK
 - Mechanism: COGNITIVE FLOODING (too many things at once)
 - Manifestation: DECISION PARALYSIS
@@ -97,6 +92,7 @@ Work demands
 **Confidence: 0.85** (increased by +0.15 due to causal clarity)
 
 **Glyph evolution:**
+
 - Turn 1: Still Insight (stress is emerging)
 - Turn 2: Add Quiet Revelation (thoughts arriving but disorganized)
 - Turn 2: Add Fragmentation (unable to integrate thoughts)
@@ -127,7 +123,6 @@ Work demands
 ```text
 ```
 
-
 ##
 
 ### Turn 3: "There are like 5 projects due this week - the client presentation is Thursday and I haven't even started the deck yet."
@@ -144,9 +139,6 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
 ```text
 ```
 
-
-
-
 **The picture completes:**
 
 ```
@@ -158,11 +150,10 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
 ```text
 ```
 
-
-
 **Confidence: 0.95** (specificity provided, clear picture)
 
 **Glyph evolution:**
+
 - Previous: Still Insight, Quiet Revelation, Fragmentation
 - Add: The Threshold (decision point where action must be taken)
 
@@ -198,8 +189,6 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
 ```text
 ```
 
-
-
 ##
 
 ## How Memory Informs Response Generation
@@ -218,8 +207,6 @@ Turn 3: "5 projects, Thursday deadline"
 ```text
 ```text
 ```
-
-
 
 **WITH Memory (contextual understanding):**
 
@@ -243,23 +230,24 @@ Turn 3: "5 projects, Thursday deadline"
 ```sql
 ```
 
-
-
-
 ### Response Composition from Memory
 
 **Acknowledgment layer** (informed by causal chain):
+
 - Without memory: "Tell me more about what you're feeling"
 - With memory: "Work has flooded your mind with competing demands"
 
 **Validation layer** (informed by glyph evolution):
+
 - 1 glyph: No validation needed (too early)
 - 3+ glyphs: "What you're describing contains insight that needs organizing"
 
 **Clarification layer** (targeted to missing elements):
+
 - Turn 1 need: "What triggered this?"
 - Turn 2 need: "How many distinct things?"
 - Turn 3 need: "Which could wait?" (action-oriented)
+
 ##
 
 ## Memory Data Model
@@ -297,35 +285,40 @@ class SystemKnowledge:
 ```text
 ```
 
-
 ##
 
 ## Benefits of Memory Layer
 
 ### 1. **Deeper Comprehension**
+
 - System understands not just the emotion, but WHY
 - Builds causal chains across turns
 - Recognizes patterns and connections
 
 ### 2. **Smarter Clarifications**
+
 - Asks different, more specific questions
 - Doesn't repeat questions
 - Targets critical missing information
 
 ### 3. **Better Validation**
+
 - Glyph set evolves as understanding deepens
 - Multiple glyphs indicate complexity recognized
 - Wisdom of glyphs applied appropriately
 
 ### 4. **User Experience**
+
 - Feels less repetitive (new questions each turn)
 - Feels more understood (responses acknowledge root causes)
 - Feels progressive (towards resolution, not circles)
 
 ### 5. **Actionable Responses**
+
 - Turn 1: Acknowledgment ("I hear you're stressed")
 - Turn 2: Understanding ("Here's what I understand about WHY")
 - Turn 3: Action-oriented ("What's the one thing we should tackle?")
+
 ##
 
 ## Implementation in Dynamic Response Composer
@@ -364,8 +357,6 @@ class DynamicResponseComposer:
 ```text
 ```
 
-
-
 ##
 
 ## Key Insights from Example Conversation
@@ -379,8 +370,6 @@ Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinki
 ```text
 ```
 
-
-
 ### Confidence Progression
 
 ```
@@ -390,9 +379,6 @@ Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinki
 
 ```text
 ```
-
-
-
 
 ### Glyph Enrichment
 
@@ -404,8 +390,6 @@ Still Insight (stress is emerging/becoming clear)
 ```text
 ```
 
-
-
 ### Response Quality Jump
 
 ```
@@ -416,46 +400,55 @@ Still Insight (stress is emerging/becoming clear)
 
 ```
 
-
 ##
 
 ## Use Cases
 
 ### 1. Multi-turn support conversations
+
 User comes back multiple times with same stress.
 Memory recognizes pattern, goes deeper.
 
 ### 2. Progressive disclosure
+
 User reveals more detail over time.
 System follows, building complete picture.
 
 ### 3. Problem decomposition
+
 Abstract stress → concrete cause → specific action
 System helps break problem into manageable pieces.
 
 ### 4. Validation and affirmation
+
 System demonstrates understanding grew.
 User feels truly heard, not just acknowledged.
+
 ##
 
 ## Future Extensions
 
 ### 1. Cross-session memory
+
 Persist memory across multiple conversations.
 Recognize recurring patterns.
 
 ### 2. Glyph-guided intervention
+
 Use evolved glyph wisdom to suggest specific practices.
 "The Threshold suggests action is needed now."
 
 ### 3. Contextual reminders
+
 "Last time you were in this situation, you..."
 Build personal historical context.
 
 ### 4. Relational memory
+
 Track interactions between domains.
 "Work stress is affecting sleep, which increases work anxiety..."
 
 ### 5. Agency amplification
+
 Track what helps them regain control.
 "You previously found X helpful in this situation."

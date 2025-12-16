@@ -46,10 +46,10 @@ This setup does more than explain biomes — it reinforces Velinor’s themes:
 
 Since this is the “futuristic city of \_\_\_\_,” the name should feel legitimate but carry the weight of collapse. Based on your vision, here are three strong candidates:
 
-Name	Tone & Meaning	How it Fits Collapse
-Orvane	Sleek, modern, plausible	“Or” (edge) \+ “vane” (weather) → a city undone by climate shifts
-Veymaris	Continental, stately	Sounds like a capital; its grandeur contrasts with its ruin
-Kovaryn	Industrial, Slavic‑tinged	Feels like a dam‑driven city whose infrastructure failed
+Name Tone & Meaning How it Fits Collapse
+Orvane Sleek, modern, plausible “Or” (edge) \+ “vane” (weather) → a city undone by climate shifts
+Veymaris Continental, stately Sounds like a capital; its grandeur contrasts with its ruin
+Kovaryn Industrial, Slavic‑tinged Feels like a dam‑driven city whose infrastructure failed
 
 \---
 
@@ -1915,13 +1915,13 @@ Late Game
 
 Each ending in Velinor the End is shaped by emotional levers. Glyphs act as primers for those levers:
 
-Ending Branch	Required Glyph Resonance
-System Online	Trust, Control, Technical Glyphs
-Collapse Embraced	Exposure, Anger, Severance Glyphs
-Fragments Freed	Empathy, Vulnerability, Reconciliation Glyphs
-Cycle Broken	Defiance, Mourning, Destruction Glyphs
-Sacred Withholding	Loyalty, Intimacy, Withholding Glyphs
-Second Thoughts	Doubt, Complexity, Interrogation Glyphs
+Ending Branch Required Glyph Resonance
+System Online Trust, Control, Technical Glyphs
+Collapse Embraced Exposure, Anger, Severance Glyphs
+Fragments Freed Empathy, Vulnerability, Reconciliation Glyphs
+Cycle Broken Defiance, Mourning, Destruction Glyphs
+Sacred Withholding Loyalty, Intimacy, Withholding Glyphs
+Second Thoughts Doubt, Complexity, Interrogation Glyphs
 
 \---
 
@@ -2114,10 +2114,10 @@ Let’s formalize it:
 
 Emotional Glyphs
 
-Glyph	Description
-Sorrow	The ache of loss, unprocessed grief echoing through collapsed survivor arcs.
-Remembrance	The act of witnessing — memory retrieved, honored, and re-anchored.
-Legacy	The transmutation of memory into meaning — what endures beyond collapse.
+Glyph Description
+Sorrow The ache of loss, unprocessed grief echoing through collapsed survivor arcs.
+Remembrance The act of witnessing — memory retrieved, honored, and re-anchored.
+Legacy The transmutation of memory into meaning — what endures beyond collapse.
 
 These glyphs are not just emotional fragments — they’re ritual keys. When fused, they open the Chamber of Echoed Memory, where the player confronts the unresolved emotional logic of the Corelink collapse.
 
@@ -2259,10 +2259,10 @@ Shared Origin
 
 Diverging Beliefs
 
-Saori’s Vision	Velinor’s Vision
-Emotional unification — a hive	Emotional autonomy — protected resonance
-Efficiency, stability, control	Diversity, fragmentation, individuation
-Believed resonance could be engineered	Believed resonance must be earned
+Saori’s Vision Velinor’s Vision
+Emotional unification — a hive Emotional autonomy — protected resonance
+Efficiency, stability, control Diversity, fragmentation, individuation
+Believed resonance could be engineered Believed resonance must be earned
 
 \---
 
@@ -2292,10 +2292,10 @@ Believed resonance could be engineered	Believed resonance must be earned
 
 Player’s Choice
 
-Path	Outcome
-Restart Corelink	Velinor is restored, but emotional autonomy is compromised. Saori’s guilt is eased, but the system risks repeating its collapse.
-Refuse Restart	Velinor dissolves — a second sacrifice. Emotional autonomy is preserved. Saori is left with grief, but the world remains free.
-Sacred Withholding	Player withholds key glyphs. System partially restarts. Velinor remains fragmented, but her legacy endures. Survivors live with memory and mystery.
+Path Outcome
+Restart Corelink Velinor is restored, but emotional autonomy is compromised. Saori’s guilt is eased, but the system risks repeating its collapse.
+Refuse Restart Velinor dissolves — a second sacrifice. Emotional autonomy is preserved. Saori is left with grief, but the world remains free.
+Sacred Withholding Player withholds key glyphs. System partially restarts. Velinor remains fragmented, but her legacy endures. Survivors live with memory and mystery.
 
 \---
 

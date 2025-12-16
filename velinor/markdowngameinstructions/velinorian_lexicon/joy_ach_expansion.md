@@ -1,9 +1,11 @@
 # Velinorian Glyphic Dictionary (Joy & Ache Expansion)
+
 ##
 
 ## Joy Glyphs
 
 ### Seren̈
+
 - **Phonetic Rendering**: /ˈsɛ.rɛn/ → ineah
 - **Literal Meaning**: Song, harmony
 - **Emotional Voltage**: Communal joy, resonance, celebration
@@ -14,6 +16,7 @@
 - **Lore Fragment**: “Seren̈ was sung in plazas, weaving voices into one breath.”
 
 ### Halorä
+
 - **Phonetic Rendering**: /ˈha.lo.ra/ → ah-ha
 - **Literal Meaning**: Radiant embrace
 - **Emotional Voltage**: Warmth, intimacy, shared joy
@@ -24,6 +27,7 @@
 - **Lore Fragment**: “Halorä was spoken when arms opened, when collapse was forgotten for a moment.”
 
 ### Veylï
+
 - **Phonetic Rendering**: /ˈveɪ.li/ → hsii
 - **Literal Meaning**: Spark, laughter
 - **Emotional Voltage**: Playfulness, delight, renewal
@@ -34,6 +38,7 @@
 - **Lore Fragment**: “Veylï was the spark of laughter, a reminder that collapse could not silence joy.”
 
 ### Lumirä
+
 - **Phonetic Rendering**: /luː.mi.ra/ → ah-ha
 - **Literal Meaning**: Light of memory
 - **Emotional Voltage**: Hope, remembrance, renewal
@@ -44,6 +49,7 @@
 - **Lore Fragment**: “Lumirä was spoken at dawn, when fragments floated like fireflies.”
 
 ### Aven̈
+
 - **Phonetic Rendering**: /ˈa.vɛn/ → ineah
 - **Literal Meaning**: Gift, offering
 - **Emotional Voltage**: Generosity, joy, devotion
@@ -52,11 +58,13 @@
 - **Resonance Category**: Joy / Trust
 - **Gameplay Function**: Unlocks gifting mechanics, glows when players share glyphs in co-play
 - **Lore Fragment**: “Aven̈ was the word of giving, spoken when memory was shared freely.”
+
 ##
 
 ## Ache Glyphs
 
 ### Thalen̈
+
 - **Phonetic Rendering**: /ˈθa.lɛn/ → ah-ha
 - **Literal Meaning**: Ache, longing
 - **Emotional Voltage**: Desire, incompletion, yearning
@@ -67,6 +75,7 @@
 - **Lore Fragment**: “Thalen̈ was the sigh of lovers parted, the ache that built Saonyx’s towers.”
 
 ### Moraï
+
 - **Phonetic Rendering**: /ˈmo.raɪ/ → ah-ha-ah
 - **Literal Meaning**: Sorrow, grief
 - **Emotional Voltage**: Loss, mourning, remembrance
@@ -77,6 +86,7 @@
 - **Lore Fragment**: “Moraï was spoken at funerals, when memory was laid to rest.”
 
 ### Elen̈
+
 - **Phonetic Rendering**: /ˈɛ.lɛn/ → ineah
 - **Literal Meaning**: Absence, emptiness
 - **Emotional Voltage**: Ache, void, yearning for presence
@@ -87,6 +97,7 @@
 - **Lore Fragment**: “Elen̈ was the word of absence, spoken when silence replaced memory.”
 
 ### Sorrä
+
 - **Phonetic Rendering**: /ˈso.ra/ → ah-ha
 - **Literal Meaning**: Wound, scar
 - **Emotional Voltage**: Pain, endurance, survival
@@ -97,6 +108,7 @@
 - **Lore Fragment**: “Sorrä was carved into stone, scars that remembered what was lost.”
 
 ### Veytḧ
+
 - **Phonetic Rendering**: /veɪθ/ → ah-ha
 - **Literal Meaning**: Regret, hesitation
 - **Emotional Voltage**: Ache, doubt, remorse

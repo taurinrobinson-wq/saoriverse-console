@@ -15,6 +15,7 @@ FirstPerson is an empathetic conversational system designed to:
 > "ChatGPT and Copilot help you get things done. FirstPerson helps you feel seen—and teaches you how to see others."
 
 FirstPerson's invisible complexity (distributed module architecture, memory integration, affect detection) produces simple, relational responses that feel like a friend who remembers, reflects, and cares.
+
 ##
 
 ## Architecture Overview
@@ -61,7 +62,6 @@ Output Layer
 ```text
 ```text
 ```
-
 
 ##
 
@@ -112,6 +112,7 @@ Output Layer
 - Clarifiers firing too often
 - Memory not persisting across sessions
 - RNG collisions (same phrasing twice in a row)
+
 ##
 
 ### Phase 2: Emotional Attunement
@@ -153,6 +154,7 @@ Output Layer
 - Affect misclassification (sarcasm taken literally, tiredness labeled as sadness)
 - Repair loops (system apologizing repeatedly)
 - Tone mismatch (responding softly when urgency needed)
+
 ##
 
 ### Phase 3: Relational Depth
@@ -197,6 +199,7 @@ Output Layer
 - Perspective reflections sounding forced or judgmental
 - Temporal false positives (one late-night input marked as pattern)
 - Perspective-taking missing relational context
+
 ##
 
 ### Phase 4: Integration & Continuity
@@ -240,6 +243,7 @@ Output Layer
 - Calming responses sounding dismissive or minimizing
 - Thread weaving becoming too dense or verbose
 - Contextual resonance too aggressive (surfacing false positives)
+
 ##
 
 ### Phase 5: Advanced Modeling
@@ -289,6 +293,7 @@ Output Layer
 - Ritual prompts feeling intrusive or condescending
 - Adaptive loop drifting off-tone (optimizing toward wrong target)
 - Response composer losing voice or becoming generic
+
 ##
 
 ## QA Strategy
@@ -387,6 +392,7 @@ Each module gets:
 4. **Edge Case Tests**: Stress-test with sarcasm, fragments, contradictions, multi-anchor narratives
 5. **User Simulation Runs**: Personas with different tones, loops, and interaction styles
 6. **Feedback Logging**: Capture corrections and missed attunements for refinement
+
 ##
 
 ## Module × Edge Case Responsibility Matrix
@@ -403,6 +409,7 @@ Each module gets:
 | Long Narrative + Anchors | ✅ Clarify | ✅ Detect repeat | ✅ Tone | ✅ If corrected | ✅ Reflect | ✅ Offer choices | ✅ Timestamp | ✅ Recall | ✅ Scaffold | ✅ Weave | ✅ Blend all | ✅ Ritual |
 
 **How to Read**: ✅ means module is responsible; blank means not directly involved.
+
 ##
 
 ## Supabase Schema Extension
@@ -432,9 +439,6 @@ create index idx_conversations_theme on conversations(theme);
 ```text
 ```
 
-
-
-
 ### Sample Queries
 
 **Fetch recent anchors on sign-in:**
@@ -448,8 +452,6 @@ order by created_at desc
 ```text
 ```
 
-
-
 **Count theme frequency:**
 
 ```sql
@@ -462,9 +464,6 @@ group by theme
 ```text
 ```
 
-
-
-
 **Find time-of-day patterns:**
 
 ```sql
@@ -475,7 +474,6 @@ group by hour_of_day
 ```text
 ```text
 ```
-
 
 ##
 
@@ -515,9 +513,6 @@ export function useConversationMemory(userId) {
 ```text
 ```
 
-
-
-
 ### Parser Context Integration
 
 ```javascript
@@ -527,8 +522,6 @@ function handleUserInput(input, memory) {
   displayResponse(response);
 }
 ```
-
-
 
 ##
 
@@ -555,6 +548,7 @@ function handleUserInput(input, memory) {
 - **Contextual recall**: Surfaces at >0.7 semantic similarity
 - **Response freshness**: <5% phrasing repetition across 50+ responses
 - **User feedback**: Positive sentiment on attunement, memory, and empathy modeling
+
 ##
 
 ## References
@@ -574,6 +568,7 @@ function handleUserInput(input, memory) {
 - **Emotion regulation frameworks**: Inform escalation detection and calming scaffolds
 - **Perspective-taking neuroscience**: Brain regions involved in Theory of Mind
 - **Narrative psychology**: Memory anchoring and story continuity
+
 ##
 
 **Last Updated**: December 1, 2025

@@ -10,6 +10,7 @@
 - [x] Create test suite
 
 **Status:** Foundation complete, ready for testing
+
 ##
 
 ## ⏳ Phase 2: Dependencies & Database (NEXT - 1 hour)
@@ -25,17 +26,11 @@ pip install cryptography
 pip install pytest
 ```
 
-
-
-
 **Verify installation:**
 
 ```bash
 python -c "from cryptography.fernet import Fernet; print('Cryptography installed ✓')"
 ```
-
-
-
 
 ### Step 2: Create Database Tables (25 minutes)
 
@@ -110,9 +105,6 @@ CREATE TABLE daily_dream_batch (
 );
 ```
 
-
-
-
 **Verify tables created:**
 
 ```bash
@@ -130,9 +122,6 @@ CREATE TABLE daily_dream_batch (
 # - daily_dream_batch
 ```
 
-
-
-
 ### Step 3: Run Encryption Tests (15 minutes)
 
 ```bash
@@ -143,10 +132,8 @@ pytest test_privacy_layer.py::TestEncryptionManager -v
 # Expected output: 6 tests passed
 ```
 
-
-
-
 **If tests fail:**
+
 - Verify cryptography installed: `pip install cryptography --upgrade`
 - Check Python version: `python --version` (requires 3.8+)
 
@@ -159,8 +146,6 @@ pytest test_privacy_layer.py::TestDreamEngine -v
 
 # Expected output: 5 tests passed
 ```
-
-
 
 ##
 
@@ -200,9 +185,6 @@ class UserAuthenticationManager:
         }
 ```
 
-
-
-
 **See:** `PRIVACY_LAYER_INTEGRATION_GUIDE.md` Section 1
 
 ### Step 2: Update Conversation Storage (1 hour)
@@ -231,9 +213,6 @@ class ConversationStorageManager:
 
         return True
 ```
-
-
-
 
 **See:** `PRIVACY_LAYER_INTEGRATION_GUIDE.md` Section 2
 
@@ -265,8 +244,6 @@ def test_login_and_store():
     # Can't read it without password
 ```
 
-
-
 ##
 
 ## ⏳ Phase 4: Scheduled Tasks (1-2 hours)
@@ -292,9 +269,6 @@ def generate_daily_dreams():
     #   - Clear batch
 ```
 
-
-
-
 ### Step 2: Create Cleanup Task
 
 ```python
@@ -308,9 +282,6 @@ def cleanup_deleted_users():
     # DELETE FROM conversations_encrypted WHERE user marked deleted 30+ days ago
 ```
 
-
-
-
 ### Step 3: Set Up Scheduler
 
 **Option A: APScheduler (simple)**
@@ -323,9 +294,6 @@ scheduler.add_job(generate_daily_dreams, 'cron', hour=3, minute=0)
 scheduler.add_job(cleanup_expired_conversations, 'cron', hour=4, minute=0)
 scheduler.start()
 ```
-
-
-
 
 **Option B: Celery (production)**
 
@@ -346,8 +314,6 @@ app.conf.beat_schedule = {
     }
 }
 ```
-
-
 
 ##
 
@@ -395,8 +361,6 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
     return [...]
 ```
 
-
-
 ##
 
 ## ✅ Phase 6: Testing & Launch (2-3 hours)
@@ -404,12 +368,14 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
 ### Manual End-to-End Test
 
 1. **User signs up**
+
    ```
    POST /api/auth/signup
    → user_id hashed, profile encrypted, retention pref stored
    ```
 
 2. **User logs in**
+
    ```
    POST /api/auth/login
    → profile decrypted, conversations loaded
@@ -417,6 +383,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 3. **User has conversation**
+
    ```
    POST /api/conversation
    → signals extracted, glyphs generated
@@ -425,12 +392,14 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 4. **Check encryption (Query DB directly)**
+
    ```sql
    SELECT encrypted_content FROM conversations_encrypted LIMIT 1;
    -- Returns: \x80236f...d4f (binary, unreadable)
    ```
 
 5. **End of day - Generate dream**
+
    ```
    TRIGGER: 3 AM scheduled task
    → retrieves daily_dream_batch
@@ -440,6 +409,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 6. **User browses history**
+
    ```
    GET /api/user/conversation-history
    → recent encrypted conversations (metadata)
@@ -447,6 +417,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 7. **User changes retention to 7 days**
+
    ```
    POST /api/user/retention-settings
    → new conversations expire in 7 days
@@ -454,6 +425,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 8. **User exports data**
+
    ```
    GET /api/user/data-export
    → download ZIP with encrypted conversations
@@ -461,6 +433,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 9. **User deletes account**
+
    ```
    DELETE /api/user/data-delete
    → marked for deletion, grace period 30 days
@@ -477,10 +450,8 @@ pytest test_privacy_layer.py::TestPerformance -v
 # Expected: encrypt/decrypt <100ms per 10KB conversation
 ```
 
-
-
-
 ### Security Review
+
 - [ ] Review encryption_manager.py for key material leaks
 - [ ] Verify keys never written to logs/disk
 - [ ] Check HTTPS everywhere
@@ -500,10 +471,8 @@ git commit -m "feat: privacy layer with encryption + retention + dreams"
 git push origin privacy-layer
 ```
 
-
-
-
 ### User Acceptance Testing
+
 - [ ] Test with real users (staging)
 - [ ] Verify personalization working ("Welcome back, [name]!")
 - [ ] Verify retention settings working
@@ -512,11 +481,13 @@ git push origin privacy-layer
 - [ ] Gather feedback
 
 ### Deploy to Production
+
 - [ ] Run migration on production DB
 - [ ] Update API with new endpoints
 - [ ] Start scheduled task runner
 - [ ] Monitor encryption/decryption performance
 - [ ] Monitor audit logs
+
 ##
 
 ## 📊 Implementation Metrics
@@ -529,6 +500,7 @@ git push origin privacy-layer
 | Integration Guide | ✅ | 400 | - |
 | Test Suite | ✅ | 400 | 15 |
 | **Total** | | **1850** | **26** |
+
 ##
 
 ## 📋 Pre-Launch Verification
@@ -552,6 +524,7 @@ Before going live, verify:
 - [ ] HTTPS everywhere
 - [ ] GDPR documentation updated
 - [ ] Privacy policy updated
+
 ##
 
 ## 🎯 Success Criteria
@@ -564,11 +537,13 @@ Before going live, verify:
 ✅ **Compliance:** GDPR export/deletion working
 ✅ **Security:** No plaintext in database, keys never stored
 ✅ **Performance:** Encryption/decryption <100ms
+
 ##
 
 ## 💡 Tips & Troubleshooting
 
 ### Issue: "ImportError: No module named cryptography"
+
 **Solution:**
 
 ```bash
@@ -576,10 +551,8 @@ pip install cryptography
 python -c "from cryptography.fernet import Fernet; print('OK')"
 ```
 
-
-
-
 ### Issue: Database constraints failing
+
 **Solution:** Ensure user_retention_preferences rows exist before inserting conversations
 
 ```sql
@@ -587,13 +560,12 @@ INSERT INTO user_retention_preferences (user_id_hashed)
 VALUES (?) ON CONFLICT DO NOTHING;
 ```
 
-
-
-
 ### Issue: Decrypt failing after password change
+
 **Solution:** Intentional. New password = new key = old data inaccessible. User should export before password reset.
 
 ### Issue: Daily dreams not generating
+
 **Solution:** Check scheduled task is running
 
 ```python
@@ -602,10 +574,8 @@ VALUES (?) ON CONFLICT DO NOTHING;
 scheduler.print_jobs()
 ```
 
-
-
-
 ### Issue: Audit logs not showing
+
 **Solution:** Ensure audit_log calls aren't catching exceptions
 
 ```python
@@ -614,8 +584,6 @@ try:
 except Exception as e:
     logger.error(f"Audit log failed: {e}")  # Don't silently fail
 ```
-
-
 
 ##
 

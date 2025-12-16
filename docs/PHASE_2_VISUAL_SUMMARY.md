@@ -36,6 +36,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 ```text
 ```text
 ```
+
 ┌──────────────────────────────────────────┐
 │  🧠 FirstPerson Chat  [Settings] [≡]   │
 ├──────────────────────────────────────────┤
@@ -56,6 +57,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 │  [🎤 Start Recording] (animated pulse)  │
 │  Recording Status: 📝 Transcribing...   │
 └──────────────────────────────────────────┘
+
 ```
 
 
@@ -137,6 +139,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 ```text
 ```text
 ```
+
 Frontend:
 ├── Next.js 16 (Framework)
 ├── React 19 (UI Library)
@@ -152,6 +155,7 @@ Backend (Coming Next):
 ├── Faster-Whisper (Transcription)
 ├── pyttsx3 (Text-to-Speech)
 └── FirstPerson (Orchestrator)
+
 ```
 
 
@@ -176,19 +180,23 @@ Backend (Coming Next):
 ```
 
 Primary Colors:
+
 - Indigo-600: from-indigo-600 (#4F46E5)
 - Blue-600: to-blue-600 (#2563EB)
 
 Background:
+
 - Slate-900: from-slate-900 (#0F172A)
 - Indigo-900: via-indigo-900 (#312E81)
 
 Accents:
+
 - Cyan, Purple, Yellow (for celebrations)
 - Red (#DC2626) for recording state
 - Green (#16A34A) for confirmation
 
 Text:
+
 - White: Primary text
 - Indigo-400: Headings (gradient)
 - Slate-400: Secondary text
@@ -231,6 +239,7 @@ Text:
 ```text
 ```text
 ```
+
 User speaks:
 ┌─────────────────────────────┐
 │  Recording starts           │
@@ -275,6 +284,7 @@ User speaks:
 │  Ready for next message     │
 │  Smooth scroll to bottom    │
 └─────────────────────────────┘
+
 ```
 
 

@@ -15,9 +15,6 @@ emotional_keywords = ["burn", "overwhelm", "anxious", ...]
 has_emotional = any(keyword in lower_input for keyword in emotional_keywords)
 ```
 
-
-
-
 **AFTER:** Uses word-centric lexicon as PRIMARY method, with fallback
 
 ```python
@@ -35,10 +32,8 @@ except Exception as e:
 # Fallback: Original hardcoded keywords (still available)
 ```
 
-
-
-
 **Benefits:**
+
 - ✅ Direct word lookups (extremely fast)
 - ✅ Actual emotional vocabulary from your conversations (not generic)
 - ✅ Graceful fallback if lexicon fails
@@ -68,10 +63,8 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                 })
 ```
 
-
-
-
 **Fallback Chain:**
+
 1. Word-centric lexicon analysis (fastest, most accurate)
 2. Enhanced NLP processor (if available)
 3. Signal lexicon word boundary matching
@@ -86,9 +79,6 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 from emotional_os.lexicon.lexicon_loader import get_lexicon, WordCentricLexicon
 ```
 
-
-
-
 **Added module variables:**
 
 ```python
@@ -102,9 +92,6 @@ def get_word_centric_lexicon() -> WordCentricLexicon:
         _word_centric_lexicon = get_lexicon()
     return _word_centric_lexicon
 ```
-
-
-
 
 ## Lexicon Data Structure
 
@@ -191,9 +178,6 @@ intimacy_words = lexicon.words_for_signal('intimacy')
 gate_7_11_words = lexicon.words_for_gates([7, 11])
 ```
 
-
-
-
 ### In signal_parser.py
 
 ```python
@@ -213,18 +197,17 @@ signals = parse_signals("I hold this moment sacred", signal_map)
 # ]
 ```
 
-
-
-
 ## Performance Characteristics
 
 ### Before Integration
+
 - ~50 hardcoded keywords checked via iteration
 - False positives (partial matches like "hold" → "old")
 - Limited emotional vocabulary
 - No gate activation mapping
 
 ### After Integration
+
 - **Direct dict lookups** (457+ words)
 - **Word boundary matching** (no false positives)
 - **Gate activation patterns** included
@@ -250,9 +233,6 @@ except Exception as e:
     _last_lexicon_analysis = None
     # Falls back to hardcoded keywords
 ```
-
-
-
 
 ## Files Modified
 
@@ -280,6 +260,7 @@ except Exception as e:
 ### Immediate (Recommended)
 
 1. **Test with real input:**
+
    ```python
    parse_input("I'm feeling vulnerable and tender right now")
    parse_input("This moment feels sacred to me")
@@ -340,15 +321,13 @@ Emotional intensity: 1.00
 ✓ Integration test complete!
 ```
 
-
-
-
 ## Questions for Next Session
 
 1. Should we assign gates to expanded words (gentle, safe, depth, etc.)?
 2. How should we handle multi-word emotional phrases?
 3. Should we track which emotional words trigger specific glyphs?
 4. Ready to integrate privacy layer + scheduled cleanup?
+
 ##
 
 **Integration Date:** [Current Date]

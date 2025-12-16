@@ -7,6 +7,7 @@
 **NOT supported:** Python 3.9 or earlier, or 3.13 (limited wheel support)
 
 ### Why Python 3.11 or 3.12?
+
 - ✅ All packages have pre-built wheels (faster installation)
 - ✅ Full support for `spacy`, `TTS`, and audio packages
 - ✅ Best performance and stability
@@ -18,9 +19,8 @@
 ```text
 ```
 
-
-
 ### Switching Python Versions
+
 If you have multiple Python versions installed:
 
 **Windows (using py launcher):**
@@ -37,9 +37,6 @@ py -3.12 -m pip install -r requirements.txt
 ```text
 ```
 
-
-
-
 **Or use pyenv/conda:**
 
 ```bash
@@ -54,8 +51,6 @@ conda activate firstperson
 ```text
 ```text
 ```
-
-
 
 ## Single Requirements File
 
@@ -76,9 +71,6 @@ pip-compile requirements.txt
 ```text
 ```
 
-
-
-
 ### Post-Installation Setup
 
 Some packages require additional setup:
@@ -90,8 +82,6 @@ Some packages require additional setup:
 ```text
 ```
 
-
-
 #### TextBlob Corpora
 
 ```bash
@@ -99,18 +89,18 @@ Some packages require additional setup:
 ```text
 ```
 
-
-
-
 #### Faster-Whisper Models
+
 Models are downloaded automatically on first use (~140MB for "base" model).
 
 #### Coqui TTS Models
+
 Models are downloaded automatically on first use (~200MB for English).
 
 ### Optional Dependencies
 
 #### GPU Support (NVIDIA CUDA)
+
 If you have CUDA installed, uncomment these lines in `requirements.txt`:
 
 ```
@@ -119,9 +109,8 @@ torch>=2.0.0
 ```text
 ```
 
-
-
 #### Advanced Audio Processing
+
 For noise suppression, uncomment:
 
 ```
@@ -129,12 +118,10 @@ For noise suppression, uncomment:
 ```text
 ```
 
-
-
-
 ## Legacy Config Files
 
 The following files in `config/` are now **deprecated** and can be removed:
+
 - `config/requirements.txt`
 - `config/requirements-nlp.txt`
 - `config/requirements-voice.txt`
@@ -145,6 +132,7 @@ All their contents have been consolidated into the root `requirements.txt`.
 ## Troubleshooting
 
 ### Package Not Loaded in Streamlit
+
 If a package shows as "not available" in the Streamlit console:
 
 1. **Check Python version:** `python --version` (should be 3.11 or 3.12)
@@ -153,6 +141,7 @@ If a package shows as "not available" in the Streamlit console:
 4. **Restart Streamlit:** Kill the process and run `streamlit run app.py` again
 
 ### "No module named X"
+
 This usually means the package isn't installed in your Python environment.
 
 1. Check which Python Streamlit is using (shown in the sidebar)
@@ -160,6 +149,7 @@ This usually means the package isn't installed in your Python environment.
 3. Restart Streamlit
 
 ### Virtual Environment Issues
+
 If using a virtual environment:
 
 ```bash

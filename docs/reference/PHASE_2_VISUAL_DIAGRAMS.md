@@ -66,7 +66,6 @@ This file contains ASCII diagrams showing how all the pieces fit together.
 
 """
 
-
 # ============================================================================
 
 # DIAGRAM 2: Shared Database vs User Segregation
@@ -120,7 +119,6 @@ This file contains ASCII diagrams showing how all the pieces fit together.
     User A's adoption helps User B!
 
 """
-
 
 # ============================================================================
 
@@ -202,7 +200,6 @@ This file contains ASCII diagrams showing how all the pieces fit together.
 
 """
 
-
 # ============================================================================
 
 # DIAGRAM 4: User Segregation Mechanism
@@ -252,14 +249,14 @@ This file contains ASCII diagrams showing how all the pieces fit together.
     A's history          B's history         history over time)
 
 KEY INSIGHT:
-  - Same database
-  - Different queries per user
-  - Results ordered by personal adoption first
-  - Falls back to consensus for new users
-  - Personal and global learning happen simultaneously
+
+- Same database
+- Different queries per user
+- Results ordered by personal adoption first
+- Falls back to consensus for new users
+- Personal and global learning happen simultaneously
 
 """
-
 
 # ============================================================================
 
@@ -324,7 +321,6 @@ KEY INSIGHT:
 
 """
 
-
 # ============================================================================
 
 # DIAGRAM 6: From No-Glyph to Production (Glyph Lifecycle)
@@ -363,7 +359,6 @@ KEY INSIGHT:
 
 """
 
-
 # ============================================================================
 
 # DIAGRAM 7: Response Template Selection (Tone-Based)
@@ -391,10 +386,10 @@ KEY INSIGHT:
    you              (quiet     (not      (let it   has a     known"    without
    carry"           power)     confusion) exist)    cost"     (mirror)  a map"
 
-   + Insert                                                    + Gather
+- Insert                                                    + Gather
    emotional term                                             feedback
 
-   + Validate                                                 + Add
+- Validate                                                 + Add
    experience                                                validation
                                                              prompt
      |                |                |
@@ -413,7 +408,6 @@ KEY INSIGHT:
   → Training happens through language
 
 """
-
 
 # ============================================================================
 

@@ -9,9 +9,6 @@ cd /Users/taurinrobinson/saoriverse-console
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```
 
-
-
-
 Your browser will automatically open to `http://localhost:8501`
 
 ### Step 2️⃣: Enable Poetry Enrichment in Sidebar
@@ -36,6 +33,7 @@ You'll receive a **poetic, enriched response** like:
 >
 > *As the poets knew: 'O world, I cannot hold thee close enough!
 > Thy winds, thy wide grey skies! Thy mists that roll and rise!'*"
+
 ##
 
 ## What You're Getting
@@ -48,24 +46,29 @@ You'll receive a **poetic, enriched response** like:
 | **Glyphs** | 292+ emotional symbols (✨💕🔥🌹 etc) |
 | **Speed** | 0.1ms per enrichment (instant) |
 | **Privacy** | 100% local (0 external API calls) |
+
 ##
 
 ## Example Conversations
 
 ### Example 1: Joy
+
 **You**: "I'm so happy! I just got great news!"
 **Saori**: "✨ 🌟 Your joy resonates ✨ 🌟. Throughout history, joy has inspired such beauty."
 **Emotion**: positive (strength: 3) | **Poetry**: Dickinson excerpt
 
 ### Example 2: Love
+
 **You**: "I love you more than words can express."
 **Saori**: "💕 💖 Love flows through these words 💕 💖. The great poets echo this tenderness."
 **Emotion**: joy (strength: 2) | **Poetry**: Shakespeare sonnet
 
 ### Example 3: Thoughtfulness
+
 **You**: "I'm contemplating my future and it feels uncertain."
 **Saori**: "⏰ 🔮 Something wonderful awaits ⏰ 🔮. Your hope is radiant even in uncertainty."
 **Emotion**: anticipation (strength: 2) | **Poetry**: Frost poem
+
 ##
 
 ## Settings & Controls
@@ -73,19 +76,23 @@ You'll receive a **poetic, enriched response** like:
 ### Processing Settings (in Sidebar)
 
 **Processing Mode**: Choose how responses are generated
+
 - `hybrid` - Try AI first, fallback to local (default)
 - `supabase` - Use AI-enhanced processing only
 - `local` - Privacy-first local-only processing
 
 **Privacy Mode**: Toggle for 100% local processing
+
 - When enabled: No external API calls
 - Works perfectly with Poetry Enrichment
 - Recommended: Keep ON for maximum privacy
 
 **Poetry Enrichment**: Toggle enrichment feature
+
 - When ON: All responses enriched with poetry
 - Shows live stats
 - 0 external API calls
+
 ##
 
 ## Tips & Tricks
@@ -100,6 +107,7 @@ You'll receive a **poetic, enriched response** like:
 ### Monitor System Health
 
 Check the sidebar metrics:
+
 - **Poems**: Should always show 33
 - **Emotions**: Should always show 11
 - **Words**: Should always show 6,453
@@ -114,34 +122,41 @@ If numbers are lower, check external drive connection.
 | Responses not enriched | Refresh browser page (Ctrl/Cmd + R) |
 | Slow enrichment | Check external drive performance |
 | Stats not showing | Ensure data/poetry/poetry_database.json exists |
+
 ##
 
 ## System Requirements
 
 ✅ **What You Have**:
+
 - Python 3.8+ (already installed)
 - All packages installed (.venv)
 - Poetry database ready (33 poems)
 - NRC Lexicon loaded (6,453 words)
 
 ✅ **What You Need**:
+
 - External drive connected and mounted
 - Streamlit running (`streamlit run...`)
 - Web browser
 
 ✅ **Performance**:
+
 - CPU: Minimal (0.1ms per enrichment)
 - RAM: ~200MB for system
 - Disk: 1.7GB on external drive
 - Network: None required (100% local)
+
 ##
 
 ## Learn More
 
 For detailed documentation, see:
+
 - `POETRY_ENRICHMENT_COMPLETE.md` - Full system documentation
 - `EXTERNAL_DRIVE_SETUP.md` - External drive setup
 - `test_poetry_enrichment_e2e.py` - Test suite with detailed results
+
 ##
 
 ## Enjoy! 🎭✨

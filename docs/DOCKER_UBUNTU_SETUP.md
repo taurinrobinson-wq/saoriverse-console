@@ -1,6 +1,7 @@
 # Docker Setup & Deploy Guide for Ubuntu (DigitalOcean 161.35.227.49)
 
 This guide walks you through setting up Docker on your fresh Ubuntu installation and deploying the FirstPerson web build to your DigitalOcean droplet.
+
 ##
 
 ## Part 1: Install Docker Desktop on Ubuntu
@@ -38,8 +39,6 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```text
 ```
 
-
-
 ### Step 1b: Post-Installation Setup (Optional but Recommended)
 
 ```bash
@@ -56,9 +55,6 @@ newgrp docker
 ```text
 ```
 
-
-
-
 ### Step 1c: Start Docker Service
 
 ```bash
@@ -73,7 +69,6 @@ sudo systemctl start docker
 ```text
 ```text
 ```
-
 
 ##
 
@@ -93,8 +88,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ```text
 ```
-
-
 
 ##
 
@@ -139,8 +132,6 @@ EXPOSE 8000
 ```text
 ```
 
-
-
 #### 3b. Create `Dockerfile.frontend` (Frontend - React/Expo)
 
 ```dockerfile
@@ -167,9 +158,6 @@ EXPOSE 3000
 
 ```bash
 ```
-
-
-
 
 #### 3c. Create `docker-compose.yml`
 
@@ -230,8 +218,6 @@ networks:
 ```text
 ```
 
-
-
 #### 3d. Create `.dockerignore`
 
 ```
@@ -252,8 +238,6 @@ node_modules
 ```text
 ```
 
-
-
 ##
 
 ## Part 4: Deploy to Your DigitalOcean Droplet (161.35.227.49)
@@ -271,8 +255,6 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
 ```
 
-
-
 ### 4b: Configure Environment Variables
 
 ```bash
@@ -285,9 +267,6 @@ cp .env.example .env
 
 ```sql
 ```
-
-
-
 
 Add/update these variables:
 
@@ -307,8 +286,6 @@ DATABASE_URL=sqlite:///./data_local/app.db
 ```text
 ```text
 ```
-
-
 
 ### 4c: Build and Start Containers
 
@@ -335,9 +312,6 @@ docker compose logs -f backend
 ```text
 ```
 
-
-
-
 ### 4d: Verify Deployment
 
 ```bash
@@ -352,7 +326,6 @@ curl http://161.35.227.49:3000
 ```text
 ```text
 ```
-
 
 ##
 
@@ -396,8 +369,6 @@ server {
 
 ```text
 ```
-
-
 
 ##
 
@@ -443,7 +414,6 @@ docker compose exec backend bash
 ```text
 ```
 
-
 ##
 
 ## Part 7: Maintenance & Updates
@@ -464,9 +434,6 @@ docker compose build
 ```text
 ```
 
-
-
-
 ### View Application Logs
 
 ```bash
@@ -478,8 +445,6 @@ docker compose logs -f
 ```text
 ```text
 ```
-
-
 
 ### Backup Data
 
@@ -494,8 +459,6 @@ docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
 
 ```text
 ```
-
-
 
 ##
 
@@ -514,8 +477,6 @@ docker compose down
 ```text
 ```
 
-
-
 ### Port conflicts
 
 ```bash
@@ -528,9 +489,6 @@ sudo netstat -tlnp | grep 8000
 
 ```text
 ```
-
-
-
 
 ### Network issues
 
@@ -546,8 +504,6 @@ docker compose down
 ```text
 ```
 
-
-
 ### Out of disk space
 
 ```bash
@@ -560,8 +516,6 @@ docker system df
 
 ```text
 ```
-
-
 
 ##
 
@@ -582,8 +536,6 @@ sudo certbot certonly --standalone -d 161.35.227.49
 # Then: docker compose restart nginx
 ```
 
-
-
 ##
 
 ## Quick Reference Summary
@@ -598,6 +550,7 @@ sudo certbot certonly --standalone -d 161.35.227.49
 | Stop everything | `docker compose down` |
 | Test API | `curl http://161.35.227.49:8000/health` |
 | Test frontend | `curl http://161.35.227.49:3000` |
+
 ##
 
 ## Support & Next Steps

@@ -3,6 +3,7 @@
 ## Overview
 
 This guide shows how to integrate the `EmotionDetector` component into your First Person chat interface. The emotion learning system provides real-time facial emotion detection that feeds back into user experience and system learning.
+
 ##
 
 ## Component API
@@ -17,8 +18,6 @@ interface EmotionDetectorProps {
 ```text
 ```text
 ```
-
-
 
 ### Example Usage
 
@@ -47,8 +46,6 @@ export default function ChatPage() {
 
 ```text
 ```
-
-
 
 ##
 
@@ -96,7 +93,6 @@ export default function ChatPage() {
 ```text
 ```
 
-
 ##
 
 ### Pattern 2: Modal or Overlay
@@ -142,8 +138,6 @@ export function EmotionDetectorModal({ userId }: { userId: string }) {
 
 ```text
 ```
-
-
 
 ##
 
@@ -192,7 +186,6 @@ export function ChatWithTabs({ userId }: { userId: string }) {
 ```text
 ```
 
-
 ##
 
 ## Data Flow
@@ -232,6 +225,7 @@ export function ChatWithTabs({ userId }: { userId: string }) {
    - Updates thresholds based on user's emotion patterns
    - Frontend receives updates instantly via Realtime subscription
    - Detector adapts without page reload
+
 ##
 
 ## Handling User Permissions
@@ -264,12 +258,10 @@ const [error, setError] = useState<string | null>(null);
 ```text
 ```
 
-
-
-
 ### Graceful Degradation
 
 If webcam is unavailable, emotion detection simply doesn't run. The chat interface continues to work normally.
+
 ##
 
 ## Enabling/Disabling Detection
@@ -291,7 +283,6 @@ Control detection with the `isActive` prop:
 ```text
 ```
 
-
 ##
 
 ## Viewing Emotion Logs
@@ -309,9 +300,6 @@ ORDER BY timestamp DESC
 ```text
 ```
 
-
-
-
 ### Via API
 
 ```typescript
@@ -325,8 +313,6 @@ async function getEmotionHistory(userId: string) {
 ```text
 ```text
 ```
-
-
 
 ### Create a Dashboard Component
 
@@ -372,8 +358,6 @@ export function EmotionHistory({ userId }: { userId: string }) {
 ```text
 ```
 
-
-
 ##
 
 ## Privacy Considerations
@@ -383,11 +367,13 @@ export function EmotionHistory({ userId }: { userId: string }) {
 ✓ **No storage of images** - Zero video/photo storage anywhere
 ✓ **User control** - Can disable anytime via `isActive={false}`
 ✓ **Transparent** - Component displays "Privacy: Video stays local"
+
 ##
 
 ## Performance Tips
 
 1. **Limit detection to active chats**
+
    ```tsx
    isActive={isActiveChatOpen}
    ```
@@ -404,6 +390,7 @@ export function EmotionHistory({ userId }: { userId: string }) {
 4. **Batch database writes**
    - Only sends emotion if confidence ≥ threshold
    - Reduces database writes by ~70%
+
 ##
 
 ## Training & Improvement Loop
@@ -417,8 +404,6 @@ Run the training script weekly to refine thresholds:
 ```text
 ```
 
-
-
 ### Monthly Analysis
 
 Check which emotions are most frequently detected:
@@ -428,33 +413,36 @@ Check which emotions are most frequently detected:
 ```text
 ```
 
-
-
-
 ### Continuous Improvement
 
 As more data accumulates:
+
 - Detector becomes more accurate for that user
 - Thresholds adapt to user's baseline
 - System becomes lighter (less CPU) and smarter (higher accuracy)
+
 ##
 
 ## Troubleshooting
 
 ### Emotion detection not working
+
 1. Check if models loaded: Open browser DevTools Console, look for model loading errors
 2. Check webcam permission: Browser → Settings → Site Permissions → Camera
 3. Check lighting: Better lighting = better detection
 
 ### No emotion logs appearing
+
 1. Verify `/api/emotions` endpoint is responding: `curl http://localhost:3000/api/emotions?user_id=test`
 2. Check SUPABASE_SERVICE_ROLE_KEY is set in backend environment
 3. Verify `emotions_log` table exists in Supabase
 
 ### Thresholds not updating
+
 1. Check if training script ran: `python train_emotion_model.py --user_id user_123`
 2. Verify Realtime is enabled on `emotion_thresholds` table in Supabase
 3. Check browser console for Realtime subscription errors
+
 ##
 
 ## Next Steps
@@ -465,6 +453,7 @@ As more data accumulates:
 4. ✅ Test emotion detection with your camera
 5. ✅ Run training script to create adaptive thresholds
 6. ✅ Monitor emotion patterns in Supabase dashboard
+
 ##
 
 ## Example: Complete Chat + Emotion Page
@@ -513,8 +502,5 @@ export default function ConversationPage({
   );
 }
 ```
-
-
-
 
 That's it! Your emotion detection system is integrated and ready to learn.

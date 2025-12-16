@@ -23,8 +23,6 @@ pip install spacy
 ```text
 ```
 
-
-
 ### 2. **NRC Emotion Lexicon (Already Integrated)**
 
 - **Status**: Available via `parser/nrc_lexicon_loader.py`
@@ -45,6 +43,7 @@ pip install spacy
   - Stopwords (filter "the", "a", "is")
   - WordNet (synonym/antonym relationships)
   - VADER sentiment analyzer
+
 ##
 
 ## Next-Level Offline Language Resources
@@ -67,10 +66,8 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 ```text
 ```
 
-
-
-
 **Benefit**: Responses could adapt based on semantic relationships, not just exact keywords
+
 ##
 
 ### **Option B: Markov Chains for Linguistic Patterns**
@@ -92,9 +89,8 @@ linguistic_patterns = TextCollection([
 ```sql
 ```
 
-
-
 **Benefit**: Prevents repetitive phrasing by learning *your actual voice* from existing glyphs
+
 ##
 
 ### **Option C: Pre-built Linguistic Rules (Dependency Parsing)**
@@ -125,10 +121,8 @@ for token in doc:
 ```text
 ```
 
-
-
-
 **Benefit**: Understand the *structure* of emotional statements and respond to the actual complaint (communication friction) not just keywords
+
 ##
 
 ## Recommended Activation Path (No API Needed)
@@ -157,13 +151,12 @@ if people:
 ```text
 ```
 
-
-
 ### **Phase 3: Optional (If you want learning)**
 
 - [ ] Add Markov chain generator trained on your glyph descriptions
 - [ ] Create response variants by sampling from learned phrase patterns
 - [ ] Result: Each response feels unique, not templated
+
 ##
 
 ## Summary: Why Offline is Better for You
@@ -173,6 +166,7 @@ if people:
 3. **Faster inference**, local NLP is instant, not waiting for API
 4. **More control**, you decide which linguistic patterns to reward
 5. **Portable**, can run on laptop, phone, raspberry pi
+
 ##
 
 ## Current Integration in Your Code
@@ -203,8 +197,6 @@ class DynamicResponseComposer:
 ```text
 ```
 
-
-
 ##
 
 ## What This Eliminates
@@ -217,8 +209,6 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 ```text
 ```text
 ```
-
-
 
 ### After (Compositional)
 
@@ -237,7 +227,6 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 
 ```
 
-
 ##
 
 ## Files Already Supporting This
@@ -247,6 +236,7 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 - `parser/poetry_database.py`, curated public domain poetry
 - `parser/learned_lexicon.json`, learned signal mappings
 - `emotional_os/glyphs/dynamic_response_composer.py`, *new* compositional engine
+
 ##
 
 ## Next Step Recommendation

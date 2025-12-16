@@ -7,6 +7,7 @@ Phase 3.2 works great but your app is text-only Streamlit. Users can't upload vi
 ## The Solution: Optional Multimodal Sidebar
 
 Add a **collapsible sidebar section** for users who want to provide voice/facial context alongside text.
+
 ##
 
 ## Architecture Overview
@@ -60,9 +61,11 @@ When user sends:
 ```text
 ```text
 ```
+
 Text: "I'm doing great!"
 Voice: Low pitch, slow rate, high pauses
 Face: Inner brows raised, lip corners down
+
 ```
 
 
@@ -162,9 +165,6 @@ def render_multimodal_sidebar():
 ```text
 ```
 
-
-
-
 ### Step 2: Integrate with Message Processing (~50 lines)
 
 **File**: `emotional_os/deploy/modules/ui.py` (modify `render_main_app`)
@@ -210,8 +210,6 @@ if user_message:
 ```text
 ```
 
-
-
 ### Step 3: Use in Response Generation (~30 lines)
 
 **File**: `main_response_engine.py` (modify response generation)
@@ -252,8 +250,6 @@ def generate_response(user_message, text_tone, multimodal_result=None):
 ```text
 ```
 
-
-
 ##
 
 ## User Journey
@@ -266,8 +262,6 @@ User: "I'm having a rough day"
 ```text
 ```text
 ```
-
-
 
 ### Scenario 2: Power User with Webcam (10%)
 
@@ -283,8 +277,6 @@ User: "I'm doing fine" + Voice sample + Facial snap
 ```text
 ```
 
-
-
 ##
 
 ## Implementation Complexity
@@ -295,6 +287,7 @@ User: "I'm doing fine" + Voice sample + Facial snap
 | Integration | 30 min | 50 | Modify existing message handling |
 | Response gen | 20 min | 30 | Enhance prompt context |
 | **Total** | **~2 hours** | **~280** | Low complexity, high impact |
+
 ##
 
 ## Technical Requirements
@@ -317,8 +310,6 @@ extract_acoustic_features(audio_bytes) → AcousticFeatures
 ```text
 ```
 
-
-
 These are lightweight, standard libraries:
 
 ```bash
@@ -326,7 +317,6 @@ These are lightweight, standard libraries:
 pip install librosa mediaipe
 
 ```
-
 
 ##
 
@@ -350,6 +340,7 @@ pip install librosa mediaipe
 - Voice processing: 2-5ms (fast)
 - Facial processing: 1-2ms (fast)
 - Won't slow down text-only chat
+
 ##
 
 ## Why This Matters
@@ -370,6 +361,7 @@ You'd be the **first general-purpose AI chatbot** to offer:
 - Claude: Text only
 - Copilot: Text only
 - **FirstPerson: Text + Voice + Facial + Understands emotion beyond words**
+
 ##
 
 ## Next: Which To Build First?

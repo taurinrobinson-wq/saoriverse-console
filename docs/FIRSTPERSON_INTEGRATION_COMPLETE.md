@@ -9,12 +9,14 @@ Your Velinor game is now **emotionally intelligent**. NPC responses adapt in rea
 ### Core Changes
 
 **1. Velinor App (`velinor_app.py`)**
+
 - Added FirstPerson and AffectParser imports
 - Initialize FirstPerson orchestrator at app startup
 - Pass orchestrator to game engine
 - Automatic initialization on every new game
 
 **2. Game Orchestrator (`velinor/engine/orchestrator.py`)**
+
 - Enhanced `_summarize_player_intent()` to extract emotional analysis
 - New `_generate_emotionally_aware_response()` method
 - Updated `_generate_npc_dialogue()` to use emotional context
@@ -80,10 +82,12 @@ Chat Display (Light Theme)
 ```text
 ```text
 ```
+
 Analysis: { tone: 'heavy', valence: -0.8, intensity: 0.9 }
 NPC:      "I hear the weight in that. The gravity of what
            you're carrying—I feel it too. What needs to be
            said about it?"
+
 ```
 
 
@@ -108,8 +112,10 @@ NPC:      "Tell me more about that. I'm curious where that
 ```text
 ```text
 ```
+
 Analysis: { theme: 'grief', frequency: 1 }
 NPC:      "Loss shapes us in ways words can't reach..."
+
 ```
 
 
@@ -134,7 +140,9 @@ NPC:      "I hear the weight in that. And I'm noticing grief
 ```text
 ```text
 ```
+
 NPC:      "I'm noticing the weight increasing. What's happening?"
+
 ```
 
 
@@ -175,9 +183,6 @@ NPC:      "I'm also noticing a shift. What's helping?"
 ```text
 ```
 
-
-
-
 That's it! FirstPerson integration is automatic. Just play normally and notice how NPCs respond to your emotions.
 
 ### Validate the Integration
@@ -187,9 +192,8 @@ That's it! FirstPerson integration is automatic. Just play normally and notice h
 ```text
 ```
 
-
-
 All 5 tests should pass:
+
 - ✓ FirstPerson imports
 - ✓ Orchestrator initialization
 - ✓ Emotional analysis on inputs
@@ -257,11 +261,13 @@ All pushed to GitHub main branch ✅
 ## 🔒 Privacy & Security
 
 ✅ **No external calls required**
+
 - All emotional analysis happens locally
 - Conversation memory stored in session only
 - No data sent to servers (unless explicitly configured)
 
 ✅ **Optional cloud integration**
+
 - If you deploy with Streamlit Cloud, add secrets only if needed
 - Works perfectly offline
 
@@ -288,11 +294,9 @@ All pushed to GitHub main branch ✅
 ```text
 ```
 
-
-
-
 **Keeper (NPC) Responds:**
 "There's something to sit with there. That deserves thought. Tell me more about what you've been reflecting on."
+
 ##
 
 **You:** "It's like I've lost parts of who I was"
@@ -318,10 +322,9 @@ All pushed to GitHub main branch ✅
 ```text
 ```
 
-
-
 **Keeper Responds:**
 "I hear the weight in that. Loss shapes us in ways words sometimes can't reach. And I'm noticing the weight deepening. What do you need in this moment?"
+
 ##
 
 **You:** "Maybe learning to carry it differently will help"
@@ -349,15 +352,13 @@ All pushed to GitHub main branch ✅
 ```text
 ```
 
-
-
-
 **Keeper Responds:**
 "There's something to sit with there. I'm noticing grief keeps coming back to you, and something's shifting in how you're holding it. What's helping you see it differently?"
 
 ## 🎯 Key Benefits
 
 ### For Players
+
 - NPC dialogue feels personalized and understanding
 - Emotions are acknowledged and reflected back
 - Recurring themes are recognized
@@ -365,6 +366,7 @@ All pushed to GitHub main branch ✅
 - Deeper immersion and emotional connection
 
 ### For Game Design
+
 - Template for emotionally-aware game dialogue
 - Pattern recognition in narrative games
 - Real-time player emotional tracking
@@ -372,6 +374,7 @@ All pushed to GitHub main branch ✅
 - Integration point for glyph system
 
 ### For Development
+
 - Clean separation: emotional analysis ↔ game logic
 - Graceful fallback if FirstPerson unavailable
 - Easy to extend with new themes/tones
@@ -400,8 +403,6 @@ streamlit run velinor_app.py
 ```text
 ```
 
-
-
 ### Validation
 
 ```bash
@@ -412,9 +413,8 @@ python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 ```
 
-
-
 ### Production
+
 - Streamlit Cloud: Works as-is (no config needed for basic)
 - Docker: `docker build -t velinor . && docker run -p 8501:8501 velinor`
 - FastAPI Backend: Available from merged main branch

@@ -7,6 +7,7 @@
 ## The Solution Implemented
 
 Your system **now automatically creates new glyphs during every user-AI conversation** when running in hybrid mode.
+
 ##
 
 ## What Actually Happens During a Conversation
@@ -34,6 +35,7 @@ Return response
 ```text
 ```text
 ```
+
 User: "I feel vulnerable with you"
 AI: "That vulnerability is your greatest strength"
   ↓
@@ -63,6 +65,7 @@ AI: "That vulnerability is your greatest strength"
   ├─ Available for next dialogue turn
   ├─ Saved persistently to learning/conversation_glyphs.json
   └─ Ready for export/integration
+
 ```
 
 
@@ -79,8 +82,6 @@ User clicks send in Streamlit chat
 ```text
 ```text
 ```
-
-
 
 ### **2. Processing in Hybrid Mode** (`emotional_os/deploy/modules/ui.py`, line 573)
 
@@ -110,9 +111,6 @@ if processing_mode == "hybrid":
 ```text
 ```
 
-
-
-
 ### **3. Sidebar Display** (`main_v2.py`, lines 131-181)
 
 ```python
@@ -132,8 +130,6 @@ User sees in sidebar:
 ```text
 ```text
 ```
-
-
 
 ### **4. Data Persistence** (Automatic)
 
@@ -166,8 +162,6 @@ learning/
 ```text
 ```
 
-
-
 ##
 
 ## The Components Added
@@ -190,9 +184,8 @@ class DynamicGlyphEvolution:
 ```text
 ```
 
-
-
 **Key Methods:**
+
 - `_detect_patterns_in_exchange()` - Finds co-occurring emotions
 - `_generate_glyphs_from_patterns()` - Creates glyph objects
 - `_create_pattern_name()` - Generates meaningful names
@@ -224,9 +217,6 @@ class HybridProcessorWithEvolution:
 ```text
 ```
 
-
-
-
 **Factory Function:**
 
 ```python
@@ -238,19 +228,20 @@ def create_integrated_processor(hybrid_learner, adaptive_extractor, user_id):
 ```text
 ```
 
-
-
 ### **3. UI Integration**
 
 **In `ui.py`:**
+
 - Line 573-640: Hybrid mode processing with evolution
 - Detects new glyphs and displays notifications
 - Stores glyphs in session state
 
 **In `main_v2.py`:**
+
 - Lines 131-181: Sidebar section for discovered glyphs
 - Shows glyph symbols, emotions, keywords
 - Provides export button
+
 ##
 
 ## Configuration & Customization
@@ -270,9 +261,6 @@ evolution = DynamicGlyphEvolution(
 ```text
 ```
 
-
-
-
 ### **Custom Glyph Naming**
 
 In `dynamic_glyph_evolution.py`, `_create_pattern_name()`:
@@ -286,8 +274,6 @@ name_map = {
 ```text
 ```text
 ```
-
-
 
 ### **Custom Emotion Symbols**
 
@@ -303,8 +289,6 @@ self.emotion_symbols = {
 
 ```text
 ```
-
-
 
 ##
 
@@ -331,8 +315,6 @@ glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 ```text
 ```
 
-
-
 ### **In Streamlit**
 
 1. `streamlit run main_v2.py`
@@ -341,6 +323,7 @@ glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 4. Have several meaningful conversations with emotional content
 5. Watch the sidebar "✨ Glyphs Discovered This Session" populate
 6. Click "📥 Export Discovered Glyphs" to save
+
 ##
 
 ## What Happens Behind the Scenes
@@ -357,9 +340,6 @@ User: "I feel vulnerable"
 ```text
 ```
 
-
-
-
 ### **Second Turn (Same Emotional Theme)**
 
 ```
@@ -371,8 +351,6 @@ User: "Being with them makes me feel safe despite my fear"
 ```text
 ```text
 ```
-
-
 
 ### **After 50-150 Similar Themed Turns**
 
@@ -390,8 +368,6 @@ User: "This safe place with them is where I'm most myself"
 ```text
 ```
 
-
-
 ##
 
 ## File Changes Summary
@@ -405,6 +381,7 @@ User: "This safe place with them is where I'm most myself"
 | `INTEGRATION_SUMMARY.md` | Integration guide | **New** |
 | `DYNAMIC_GLYPH_EVOLUTION_GUIDE.md` | Comprehensive documentation | **New** |
 | `verify_integration.sh` | Verification script | **New** |
+
 ##
 
 ## Success Metrics
@@ -418,6 +395,7 @@ You'll know it's working when:
 - ✅ Each glyph has symbol, name, emotions, keywords
 - ✅ Glyphs are user-specific (tied to user_id)
 - ✅ Export button saves glyphs to file
+
 ##
 
 ## Architecture at a Glance
@@ -447,7 +425,6 @@ main_v2.py sidebar displays:
 ```text
 ```
 
-
 ##
 
 ## Next: Running It
@@ -469,8 +446,7 @@ streamlit run main_v2.py
 
 ```
 
-
-
 Questions? Check the comprehensive guides:
+
 - `INTEGRATION_SUMMARY.md` - How it's integrated
 - `DYNAMIC_GLYPH_EVOLUTION_GUIDE.md` - Full documentation

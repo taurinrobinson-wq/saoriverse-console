@@ -16,8 +16,6 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```text
 ```
 
-
-
 ## Architecture
 
 ```
@@ -33,9 +31,6 @@ Tier Processing (learning, aliveness, poetry)
 
 ```text
 ```
-
-
-
 
 ## Key Files
 
@@ -86,8 +81,6 @@ response = client.generate_with_context(
 ```text
 ```
 
-
-
 ## Docker Commands
 
 ```bash
@@ -122,9 +115,6 @@ docker-compose -f docker-compose.local.yml rm
 ```text
 ```
 
-
-
-
 ## Environment Variables
 
 ```bash
@@ -137,8 +127,6 @@ OLLAMA_BASE_URL=http://ollama:11434
 ```text
 ```
 
-
-
 ## Model Guide
 
 ```
@@ -149,9 +137,6 @@ mistral     → Medium (4.1GB), well-rounded
 
 ```text
 ```
-
-
-
 
 ## Common Tasks
 
@@ -168,17 +153,12 @@ curl -X POST http://localhost:11434/api/generate \
 ```text
 ```
 
-
-
 ### Run integration tests
 
 ```bash
 
 ```text
 ```
-
-
-
 
 Expected: All 5 checks pass ✅
 
@@ -199,8 +179,6 @@ response = client.generate("Test", model="llama3")
 ```text
 ```
 
-
-
 ### View service logs in real-time
 
 ```bash
@@ -216,9 +194,6 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 
 ```text
 ```
-
-
-
 
 ## Fallback Flow
 
@@ -241,8 +216,6 @@ Try Ollama fallback
 ```text
 ```
 
-
-
 ## Performance Notes
 
 - **llama3 on 1 vCPU**: 10-30s per response (slow but works)
@@ -263,9 +236,6 @@ OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
 ```text
 ```
 
-
-
-
 ## Files Modified
 
 ```
@@ -275,8 +245,6 @@ ui_refactored.py                   (Already imports everything)
 ```text
 ```text
 ```
-
-
 
 ## Verification Checklist
 
@@ -288,7 +256,7 @@ ui_refactored.py                   (Already imports everything)
 - [ ] `test_ollama_integration.py` runs without errors
 - [ ] Streamlit starts: `docker-compose -f docker-compose.local.yml up -d`
 - [ ] Model pulls: `docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3`
-- [ ] http://localhost:8501 accessible
+- [ ] <http://localhost:8501> accessible
 - [ ] Chat works in Streamlit
 
 ## Troubleshooting
@@ -324,15 +292,13 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 
 ```
 
-
-
 ## What's Different from Velinor Deployment
 
 | Aspect | Velinor (VPS) | FirstPerson (Local) |
 |--------|---------------|-------------------|
 | Deployment | DigitalOcean Droplet | Docker Compose locally |
 | LLM | FirstPerson local processing | FirstPerson + Ollama fallback |
-| Network | Public internet (https://velinor.firstperson.chat) | localhost:8501 |
+| Network | Public internet (<https://velinor.firstperson.chat>) | localhost:8501 |
 | Ports | 80, 443 (nginx proxy) | 8501 (Streamlit) |
 | CPU | 1 vCPU (constrained) | Your laptop (flexible) |
 | Performance | Fast for game, okay for AI | Depends on hardware |
@@ -341,7 +307,7 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 
 1. **Test Locally**: Run docker-compose.local.yml
 2. **Pull Model**: Get llama3 or orca-mini
-3. **Chat**: Open http://localhost:8501 and converse
+3. **Chat**: Open <http://localhost:8501> and converse
 4. **Monitor**: Watch logs to see Ollama being called
 5. **Tune**: Adjust system prompt or model parameters
 6. **Share**: Share responses and feedback
@@ -350,9 +316,10 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 
 - **Full Guide**: `OLLAMA_INTEGRATION_GUIDE.md`
 - **Implementation Details**: `OLLAMA_INTEGRATION_IMPLEMENTATION.md`
-- **Ollama Repo**: https://github.com/ollama/ollama
-- **Docker Docs**: https://docs.docker.com/compose/
+- **Ollama Repo**: <https://github.com/ollama/ollama>
+- **Docker Docs**: <https://docs.docker.com/compose/>
 - **FirstPerson**: See `LEARNING_QUICK_REFERENCE.md`
+
 ##
 
 **Updated**: 2025 | **Status**: ✅ Ready to Use

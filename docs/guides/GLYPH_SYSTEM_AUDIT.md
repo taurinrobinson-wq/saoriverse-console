@@ -5,6 +5,7 @@
 Your glyph system contains **6,434 glyphs** organized across **63 primary categories**, making it one of the most comprehensive emotional-semantic systems built. However, the current architecture requires **translation layers** (glyph → affect → conversational tone) that create friction and cognitive overhead.
 
 **Key Finding**: The system is *underutilized* because glyphs are too poetic/abstract to use directly in conversational responses. Modernizing them would eliminate translation layers and allow direct glyph→response mapping.
+
 ##
 
 ## Current State Analysis
@@ -34,6 +35,7 @@ Your glyph system contains **6,434 glyphs** organized across **63 primary catego
 - "Recursive Ache" - layered abstraction
 
 **Problem**: User says "I'm exhausted" → System detects *sadness* → Maps to... which glyph? "Drain"? "Surrender"? "Collapse"?
+
 ##
 
 ## The Translation Problem
@@ -105,6 +107,7 @@ New flow (2 layers instead of 3):
 ```text
 ```text
 ```
+
 User Input: "I'm exhausted"
     ↓
 AffectParser: tone=sad, arousal=0.3, valence=-0.9
@@ -114,6 +117,7 @@ ResponseRotator + Glyph System (integrated):
     - Response: "I hear the *grief* in this. It feels heavy."
     - Glyph anchors available: Grief, Loss, Mourning, Ache
     - Response can use glyph directly: "That's real *grief*."
+
 ```
 
 
@@ -184,8 +188,6 @@ AFFECT_TO_GLYPH = {
 ```text
 ```
 
-
-
 ### 3. Response Template With Glyphs
 
 **Before** (current):
@@ -199,9 +201,6 @@ brief_responses = [
 ```text
 ```
 
-
-
-
 **After** (with glyphs):
 
 ```python
@@ -211,8 +210,6 @@ brief_responses = [
     "That's real *Loss*. Where does it land for you?",
 ]
 ```
-
-
 
 ##
 
@@ -226,6 +223,7 @@ brief_responses = [
 | **Response Latency** | Multiple lookups | Single lookup |
 | **Glyph Usage** | Underutilized | Direct integration |
 | **Consistency** | Translation errors possible | 1:1 mapping guarantees consistency |
+
 ##
 
 ## Risk Assessment
@@ -248,6 +246,7 @@ brief_responses = [
 - Create migration script with rollback
 - Test with subset first (top 100 glyphs)
 - Keep both systems running in parallel during transition
+
 ##
 
 ## Next Steps
@@ -257,6 +256,7 @@ brief_responses = [
 3. **Create mapping** - Build affect→glyph lookup table
 4. **Test on subset** - Run against Phase 1-2.2 test suite
 5. **Full deployment** - Migrate all 6,434 glyphs over 2-3 weeks
+
 ##
 
 ## Questions for You

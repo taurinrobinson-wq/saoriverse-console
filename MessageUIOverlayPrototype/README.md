@@ -21,11 +21,13 @@ A React Native / Expo prototype demonstrating the core UI components for the Mes
 ### Installation
 
 1. Navigate to the prototype directory:
+
    ```bash
    cd MessageUIOverlayPrototype
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -33,6 +35,7 @@ A React Native / Expo prototype demonstrating the core UI components for the Mes
 ### Running the Prototype
 
 1. Start the Expo development server:
+
    ```bash
    npx expo start
    ```
@@ -54,8 +57,6 @@ You can also run the prototype in a web browser:
 ```text
 ```
 
-
-
 ## 📁 Project Structure
 
 ```
@@ -72,18 +73,20 @@ MessageUIOverlayPrototype/
 
 ```
 
-
-
 ## 🧩 Components
 
 ### HeatmapOverlay
+
 Displays text with color-coded highlights indicating manipulation severity:
+
 - 🔴 **High severity**: Red highlighting (e.g., gaslighting, denial)
 - 🟠 **Medium severity**: Orange highlighting (e.g., guilt-tripping)
 - 🟡 **Low severity**: Yellow highlighting (e.g., minor manipulation)
 
 ### ReframeButton
+
 An inline button component that appears when highlighted text is tapped:
+
 - Shows a suggested healthier alternative phrase
 - "Apply Reframe" replaces the manipulative text with the suggestion
 - "Dismiss" hides the suggestion

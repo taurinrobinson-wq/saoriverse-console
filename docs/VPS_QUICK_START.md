@@ -1,6 +1,7 @@
 # 🚀 Velinor VPS Quick Start
 
 Copy-paste commands to get Velinor running on DigitalOcean.
+
 ##
 
 ## 1️⃣ Local: Generate SSH Key (One-Time)
@@ -10,9 +11,8 @@ Copy-paste commands to get Velinor running on DigitalOcean.
 ```text
 ```
 
-
-
 Save the public key output - you'll paste it into DigitalOcean.
+
 ##
 
 ## 2️⃣ DigitalOcean: Create Droplet
@@ -26,6 +26,7 @@ Save the public key output - you'll paste it into DigitalOcean.
 - **Hostname**: `velinor-server`
 
 **📝 Save the Droplet IP when it's created** (e.g., `123.45.67.89`)
+
 ##
 
 ## 3️⃣ Namecheap: Add DNS Record
@@ -33,11 +34,13 @@ Save the public key output - you'll paste it into DigitalOcean.
 **firstperson.chat → Advanced DNS**
 
 Add A Record:
+
 - **Host**: `velinor`
 - **Value**: Your Droplet IP
 - **TTL**: 30 min
 
 Click **Save** and wait 5-10 minutes.
+
 ##
 
 ## 4️⃣ VPS: Run Setup Script
@@ -46,9 +49,6 @@ Click **Save** and wait 5-10 minutes.
 
 ```text
 ```
-
-
-
 
 Replace `YOUR_DROPLET_IP` with your actual IP.
 
@@ -97,7 +97,6 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 ```text
 ```
 
-
 ##
 
 ## 5️⃣ Test It
@@ -107,17 +106,15 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 ```text
 ```
 
+Or visit: **<https://velinor.firstperson.chat>** in your browser
 
-
-
-Or visit: **https://velinor.firstperson.chat** in your browser
 ##
 
 ## 6️⃣ Auto-Deploy (Optional)
 
 To deploy automatically on `git push main`:
 
-### A. Create deploy key on VPS:
+### A. Create deploy key on VPS
 
 ```bash
 ssh root@YOUR_DROPLET_IP
@@ -126,18 +123,17 @@ ssh-keygen -t ed25519 -f /root/.ssh/velinor_deploy -C "velinor-deploy" -N ""
 ```text
 ```
 
-
-
 Copy the output.
 
-### B. Add to GitHub:
+### B. Add to GitHub
 
 **Repo → Settings → Deploy Keys → Add deploy key**
+
 - **Title**: `Velinor VPS Deploy`
 - **Key**: Paste from above
 - ✅ **Allow write access**
 
-### C. Create deploy script on VPS:
+### C. Create deploy script on VPS
 
 ```bash
 
@@ -166,18 +162,17 @@ EOF
 ```text
 ```
 
-
-
-
-### D. Add GitHub Secrets:
+### D. Add GitHub Secrets
 
 **Repo → Settings → Secrets and variables → Actions**
 
 Add two secrets:
+
 - **VPS_HOST**: Your Droplet IP (e.g., `123.45.67.89`)
 - **VPS_SSH_KEY**: Content of `/root/.ssh/velinor_deploy` (the **private** key)
 
 The `.github/workflows/deploy.yml` file is already in your repo and will auto-trigger on push! 🚀
+
 ##
 
 ## 📊 Check Status
@@ -187,7 +182,6 @@ ssh root@YOUR_DROPLET_IP
 ```text
 ```text
 ```
-
 
 ##
 
@@ -204,19 +198,14 @@ ssh root@YOUR_DROPLET_IP
 ```text
 ```
 
-
-
-
 **SSL certificate issue**:
 
 ```bash
 ls /etc/letsencrypt/live/velinor.firstperson.chat/
 ```
 
-
-
-
 If empty, domain name might be wrong - verify DNS is working first.
+
 ##
 
 **Total time**: ~15 minutes ⏱️

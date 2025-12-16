@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """
 Integration Guide: Adding Phase 2 Learning to signal_parser.py
 
@@ -70,6 +70,7 @@ from emotional_os.glyphs.learning_response_generator import LearningResponseGene
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 
 # Initialize managers (once, at module load)
+
 _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
 _shared_glyph_manager = SharedGlyphManager()
@@ -79,7 +80,6 @@ def _get_user_hash(user_id: str = None) -> str:
     if not user_id:
         user_id = "anonymous"
     return hashlib.sha256(user_id.encode()).hexdigest()[:16]
-
 
 # ============================================================================
 
@@ -187,7 +187,6 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
             "metadata": glyph_candidate.get("metadata", {})
         }
 
-
 def _determine_emotional_tone(signals: List[Dict]) -> str:
     """
     Determine primary emotional tone from signals.
@@ -213,7 +212,6 @@ def _determine_emotional_tone(signals: List[Dict]) -> str:
 
     return tone_map.get(primary_tone, "unknown")
 
-
 # ============================================================================
 
 # BONUS: Admin Dashboard Helpers
@@ -225,7 +223,7 @@ def get_system_learning_status() -> Dict:
     Get current system learning status.
     Useful for admin dashboard.
     """
-    health = _shared_glyph_manager.get_system_health_report()
+health =_shared_glyph_manager.get_system_health_report()
 
     return {
         "active_glyphs": health.get("total_active_glyphs", 0),
@@ -236,7 +234,6 @@ def get_system_learning_status() -> Dict:
         "system_health": "GOOD" if health.get("total_active_glyphs", 0) > 100 else "DEVELOPING"
     }
 
-
 def get_glyph_recommendations() -> List[Dict]:
     """
     Get recommendations for next glyphs to generate.
@@ -244,14 +241,12 @@ def get_glyph_recommendations() -> List[Dict]:
     """
     return _shared_glyph_manager.recommend_new_glyphs_for_gaps()
 
-
 def promote_candidate_glyph(glyph_name: str) -> bool:
     """
     Move a candidate glyph from candidates → production.
     Called after human review/validation.
     """
-    return _glyph_learner.promote_candidate_to_production(glyph_name)
-
+return_glyph_learner.promote_candidate_to_production(glyph_name)
 
 # ============================================================================
 

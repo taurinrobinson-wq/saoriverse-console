@@ -34,12 +34,15 @@ System identifies gaps in the message:
 ```text
 ```text
 ```
+
 User said "I'm feeling so stressed today" but didn't say:
+
 - CONTEXT: What triggered this? What's the situation?
 - SOMATIC: Where do you feel it? Chest? Thoughts racing?
 - RELATIONAL: Is someone/something involved?
 - AGENCY: What have you tried? What might help?
 - TEMPORAL SPECIFICITY: How long? All day? Just now?
+
 ```
 
 
@@ -74,6 +77,7 @@ Questions are specific to what's missing, not generic:
 ```text
 ```text
 ```
+
 Missing Element                  Clarifying Question
 ─────────────────────────────────────────────────────
 Context                          "What's creating this pressure?"
@@ -81,6 +85,7 @@ Temporal specificity             "Has this been building, or did it hit suddenly
 Somatic awareness               "Where in your body do you feel this?"
 Relational context              "Is there someone or something involved?"
 Agency/attempt                  "What have you tried?"
+
 ```
 
 
@@ -96,8 +101,9 @@ Agency/attempt                  "What have you tried?"
 User: "I'm sad"
 
 System Analysis:
-  - Present tense (immediate)
-  - Missing: context, temporal, somatic, relational, agency
+
+- Present tense (immediate)
+- Missing: context, temporal, somatic, relational, agency
 
 Response:
   "You've been experiencing sadness. This sadness is real—sorrow witnessed.
@@ -116,13 +122,15 @@ Why this works:
 ```text
 ```text
 ```
+
 User: "I'm feeling so stressed today"
 
 System Analysis:
-  - Present tense (NOW, not past)
-  - Emphasized (so)
-  - Temporal marker (today, not chronic/future)
-  - Missing: context about what triggered it
+
+- Present tense (NOW, not past)
+- Emphasized (so)
+- Temporal marker (today, not chronic/future)
+- Missing: context about what triggered it
 
 Response:
   "You're feeling stress right now—and you're emphasizing how much this is present.
@@ -134,6 +142,7 @@ Why this works:
   ✓ Acknowledges emphasis explicitly
   ✓ Uses glyph to validate (not generate)
   ✓ Asks about missing context
+
 ```
 
 
@@ -147,9 +156,10 @@ Why this works:
 User: "I've been feeling anxious lately"
 
 System Analysis:
-  - Continuous past (ongoing)
-  - Temporal qualifier (lately = recent)
-  - Missing: context, somatic, relational, what's triggering it
+
+- Continuous past (ongoing)
+- Temporal qualifier (lately = recent)
+- Missing: context, somatic, relational, what's triggering it
 
 Response:
   "You're experiencing anxiety in this moment. That anxiety is asking for
@@ -169,14 +179,16 @@ Why this works:
 ```text
 ```text
 ```
+
 User: "I feel really overwhelmed with all the work and family responsibilities right now"
 
 System Analysis:
-  - Present tense (immediate)
-  - Emphasized (really)
-  - Temporal (right now)
-  - Context provided (work + family) → already knows triggers
-  - Missing: somatic, what they've tried
+
+- Present tense (immediate)
+- Emphasized (really)
+- Temporal (right now)
+- Context provided (work + family) → already knows triggers
+- Missing: somatic, what they've tried
 
 Response:
   "You're feeling overwhelm right now—and you're emphasizing how much this is
@@ -187,6 +199,7 @@ Why this works:
   ✓ Acknowledges the multiple domains (work + family)
   ✓ Uses glyph about complexity/patterns
   ✓ Still asks clarifications (but about different missing elements)
+
 ```
 
 
@@ -261,8 +274,10 @@ Example breakdown:
 ```text
 ```text
 ```
+
 "You're feeling stress right now—and you're emphasizing how much this is present.
 What you're describing has a quality of quiet revelation. What's creating this pressure?"
+
 ```
 
 
@@ -303,15 +318,14 @@ python test_semantic_parsing.py                # Multiple cases
 python test_full_e2e_user_driven.py           # Full pipeline
 ```
 
-
-
-
 All tests demonstrate:
+
 - ✅ User's message is primary driver
 - ✅ Glyph validates but doesn't generate
 - ✅ System identifies missing information
 - ✅ Clarifications are specific and emotionally themed
 - ✅ Responses vary based on user input, not glyph
+
 ##
 
 **Status**: ✅ CORRECTED - System now uses user-driven responses with glyph validation

@@ -6,30 +6,37 @@
 **Timeline:** 4 weeks, incremental rollout
 **Response Target:** < 100ms (local only, no API calls)
 **Architecture:** Caring + Dynamic + Presient + Relevant
+
 ##
 
 ## PHASE OVERVIEW & TIMELINE
 
 ### WEEK 1: Tier 1 - Foundation (3-5 hours)
+
 **Goal:** Fast foundation enabling context + compassionate openings
 **Modules:** ConversationMemory, LexiconLearner, basic Sanctuary
 
 ### WEEK 2: Tier 2 - Aliveness (4-6 hours)
+
 **Goal:** Dynamic presence enabling adaptive tone + energy cycles
 **Modules:** Presence layer, emotional reciprocity, signal enrichment
 
 ### WEEK 3-4: Tier 3 - Depth (6-8 hours)
+
 **Goal:** Poetic understanding with multiple voices and managed surprise
 **Modules:** Saori layer, generative tension, archetype generation
 
 ### Optional: Tier 4 - Memory (2-3 hours)
+
 **Goal:** Cross-session emotional memory and pattern tracking
 **Modules:** Temporal memory, dream engine, session persistence
+
 ##
 
 ## WEEK 1: TIER 1 - FOUNDATION (45 min to 3 hours)
 
 ### Core Objective
+
 - Add context tracking across turns
 - Eliminate repeated questions
 - Introduce basic compassionate posture
@@ -38,9 +45,11 @@
 ### Modules to Integrate
 
 #### 1. ConversationMemory (PRIORITY: HIGHEST)
+
 **File:** `src/emotional_os_glyphs/conversation_memory.py`
 
 **What it does:**
+
 - Tracks emotional state across conversation
 - Builds emotional profile from signals
 - Detects shifts in emotional tone
@@ -87,15 +96,16 @@ def handle_response_pipeline(user_input, session):
 ```text
 ```
 
-
-
 **Performance Impact:** +2-3ms (negligible)
+
 ##
 
 #### 2. LexiconLearner (PRIORITY: HIGH)
+
 **File:** `src/emotional_os_learning/lexicon_learner.py`
 
 **What it does:**
+
 - Learns user's emotional vocabulary over time
 - Expands signal detection from user input
 - Personalizes emotional understanding
@@ -120,16 +130,16 @@ learner.learn_from_exchange(
 ```text
 ```
 
-
-
-
 **Performance Impact:** +1-2ms (async optional)
+
 ##
 
 #### 3. Basic Sanctuary Wrapper (PRIORITY: MEDIUM)
+
 **File:** `src/emotional_os_safety/sanctuary.py`
 
 **What it does:**
+
 - Detects sensitive/crisis content
 - Wraps response with compassionate framing
 - Offers consent flow if high-risk
@@ -164,9 +174,8 @@ if is_sensitive_input(user_input):
 ```text
 ```
 
-
-
 **Performance Impact:** +3-5ms (trauma lexicon lookup)
+
 ##
 
 ### Week 1 Implementation Steps
@@ -258,9 +267,6 @@ def handle_response_pipeline(user_input, context, session):
 ```sql
 ```
 
-
-
-
 **Step 2: Update ui_refactored.py** (10 min)
 
 ```python
@@ -280,8 +286,6 @@ class SessionState:
 ```text
 ```text
 ```
-
-
 
 **Step 3: Create test file** (15 min)
 
@@ -356,9 +360,6 @@ def test_response_time():
 ```text
 ```
 
-
-
-
 **Step 4: Test & Verify** (10 min)
 
 ```bash
@@ -381,18 +382,19 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 ```text
 ```
 
-
-
 **Step 5: Deploy Tier 1** (5 min)
+
 - Merge to main
 - Test in staging
 - Monitor response times
 - Enable for all users
+
 ##
 
 ## WEEK 2: TIER 2 - ALIVENESS (4-6 hours)
 
 ### Core Objective
+
 - Add emotional tone variation (not single robotic voice)
 - Enable energy/fatigue cycles (detect and match pacing)
 - Implement emotional reciprocity (system responds to emotion, not just content)
@@ -401,9 +403,11 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 ### Modules to Integrate
 
 #### 1. Presence Layer - Attunement (PRIORITY: HIGHEST)
+
 **File:** `src/emotional_os/core/presence_integration.py`
 
 **What it does:**
+
 - Detects user's emotional pacing
 - Matches system response pace to user
 - Varies tone based on energy level
@@ -435,16 +439,16 @@ def handle_response_pipeline(user_input, context, session):
 ```text
 ```
 
-
-
-
 **Performance Impact:** +2-3ms (profile-based, not model call)
+
 ##
 
 #### 2. Emotional Reciprocity (PRIORITY: HIGH)
+
 **File:** `src/emotional_os/core/emotional_reciprocity.py`
 
 **What it does:**
+
 - Detects user's emotional state
 - Generates emotionally complementary response (not echoing)
 - Balances validation + exploration
@@ -478,15 +482,16 @@ def handle_response_pipeline(user_input, context, session):
 ```text
 ```
 
-
-
 **Performance Impact:** +1-2ms (heuristic-based, no ML)
+
 ##
 
 #### 3. Embodied Simulation - Energy Cycles (PRIORITY: MEDIUM)
+
 **File:** `src/emotional_os/core/embodied_simulation.py`
 
 **What it does:**
+
 - Simulates system's "energy" state (fresh vs. fatigued)
 - Varies response detail based on cycle
 - Creates rhythm to conversation
@@ -531,10 +536,8 @@ def handle_response_pipeline(user_input, context, session):
 ```text
 ```
 
-
-
-
 **Performance Impact:** +1ms (state machine, not model)
+
 ##
 
 ### Week 2 Implementation Steps
@@ -597,8 +600,6 @@ class PresenceIntegration:
 ```text
 ```
 
-
-
 **Step 2: Create EmotionalReciprocity** (30 min)
 
 ```python
@@ -657,9 +658,6 @@ class EmotionalReciprocity:
 ```text
 ```
 
-
-
-
 **Step 3: Create EmbodiedSimulation** (30 min)
 
 ```python
@@ -704,8 +702,6 @@ class EmbodiedSimulation:
 ```sql
 ```sql
 ```
-
-
 
 **Step 4: Update response_handler.py with Tier 2** (20 min)
 
@@ -752,9 +748,6 @@ def handle_response_pipeline(user_input, context, session):
 
 ```text
 ```
-
-
-
 
 **Step 5: Create test file** (20 min)
 
@@ -811,18 +804,19 @@ def test_tier2_response_time():
 ```text
 ```
 
-
-
 **Step 6: Deploy Tier 2** (Incremental)
+
 - Test locally first
 - Deploy to canary (10% users)
 - Monitor metrics
 - Scale gradually
+
 ##
 
 ## WEEK 3-4: TIER 3 - DEPTH (6-8 hours)
 
 ### Core Objective
+
 - Enable poetic understanding (metaphor-aware responses)
 - Implement multiple archetypal voices
 - Add managed surprise (dynamic variation)
@@ -831,27 +825,33 @@ def test_tier2_response_time():
 ### Modules to Integrate
 
 #### 1. Poetic Consciousness (PRIORITY: HIGHEST)
+
 **File:** `src/emotional_os/core/poetic_consciousness.py`
 
 **What it does:**
+
 - Detects metaphorical language in user input
 - Understands symbolic meaning, not just literal
 - Responds poetically (reframes with imagery)
 - Treats language as creative, not just informational
 
 #### 2. Saori Layer (PRIORITY: HIGH)
+
 **File:** `src/emotional_os/core/saori_integration.py`
 
 **What it does:**
+
 - Multiple archetypal voices (Mirror, Guardian, Witness, etc.)
 - Creative response reframing
 - Manages death/mortality themes compassionately
 - Adds personality and depth
 
 #### 3. Generative Tension (PRIORITY: MEDIUM)
+
 **File:** `src/emotional_os/core/tension_integration.py`
 
 **What it does:**
+
 - Introduces managed surprise
 - Challenges assumptions gently
 - Creates dynamic variation
@@ -860,17 +860,21 @@ def test_tier2_response_time():
 ### Implementation Strategy (Save detailed steps for when ready)
 
 **Core principle:** Keep all local, fast, heuristic-based (no heavy ML)
+
 ##
 
 ## OPTIONAL: TIER 4 - LONG-TERM MEMORY (2-3 hours)
 
 ### Modules
+
 - Temporal Memory (track patterns over time)
 - Dream Engine (daily summaries)
 - Cross-session persistence
 
 ### Implementation timing
+
 After all Tiers 1-3 stable and tested
+
 ##
 
 ## ARCHITECTURE DECISIONS FOR PERFORMANCE
@@ -893,9 +897,6 @@ After all Tiers 1-3 stable and tested
 ```text
 ```
 
-
-
-
 ### Decision 2: Heuristic-Based, Not ML-Based
 
 ```python
@@ -912,8 +913,6 @@ After all Tiers 1-3 stable and tested
 ```text
 ```text
 ```
-
-
 
 ### Decision 3: Pre-computation & Caching
 
@@ -932,9 +931,6 @@ After all Tiers 1-3 stable and tested
 ```text
 ```
 
-
-
-
 ### Decision 4: Simple > Complex
 
 ```python
@@ -950,7 +946,6 @@ After all Tiers 1-3 stable and tested
 ```text
 ```text
 ```
-
 
 ##
 
@@ -977,9 +972,6 @@ metrics = {
 ```text
 ```
 
-
-
-
 **Per-Session:**
 
 ```python
@@ -992,8 +984,6 @@ session_metrics = {
 ```text
 ```text
 ```
-
-
 
 ### Instrumentation Code
 
@@ -1046,8 +1036,6 @@ def handle_response_pipeline(user_input, context, session):
 ```text
 ```
 
-
-
 ##
 
 ## TESTING STRATEGY
@@ -1061,8 +1049,6 @@ pytest test_tier1_foundation.py -v
 ```text
 ```
 
-
-
 ### Tier 2 Tests (Week 2)
 
 ```bash
@@ -1071,9 +1057,6 @@ pytest test_tier2_aliveness.py -v
 
 ```text
 ```
-
-
-
 
 ### Tier 3 Tests (Week 3-4)
 
@@ -1084,8 +1067,6 @@ pytest test_tier3_depth.py -v
 ```text
 ```
 
-
-
 ### Integration Test (All Tiers)
 
 ```bash
@@ -1095,9 +1076,6 @@ pytest test_integration_full_pipeline.py -v
 ```text
 ```
 
-
-
-
 ### Performance Test (Each Tier)
 
 ```bash
@@ -1106,13 +1084,12 @@ pytest test_performance.py -v
 # Verify: All responses < 100ms
 ```
 
-
-
 ##
 
 ## ROLLOUT STRATEGY
 
 ### Week 1 (Tier 1)
+
 - Merge to main
 - Deploy to staging
 - Test for 24 hours
@@ -1121,35 +1098,42 @@ pytest test_performance.py -v
 - Deploy to 100%
 
 ### Week 2 (Tier 2)
+
 - Same rollout sequence
 - Can run in parallel with Tier 1 fixes if needed
 
 ### Week 3-4 (Tier 3)
+
 - Same rollout sequence
 - More thorough testing due to complexity
 
 ### Post-launch
+
 - Monitor metrics daily
 - Collect user feedback
 - Fix issues discovered
 - Plan optional Tier 4
+
 ##
 
 ## SUCCESS CRITERIA
 
 ### Tier 1: Foundation
+
 - ✅ Context builds across turns (no repeated questions)
 - ✅ All responses < 100ms
 - ✅ No errors in learning
 - ✅ Users report improved understanding
 
 ### Tier 2: Aliveness
+
 - ✅ Responses vary in tone and pacing
 - ✅ System matches user energy
 - ✅ All responses < 100ms
 - ✅ Users report system feels "more alive"
 
 ### Tier 3: Depth
+
 - ✅ System understands metaphors
 - ✅ Multiple voices active
 - ✅ Managed surprise works
@@ -1157,25 +1141,32 @@ pytest test_performance.py -v
 - ✅ Users report feeling "deeply understood"
 
 ### Overall
+
 - ✅ Zero performance regressions
 - ✅ No external API calls
 - ✅ Fully local processing
 - ✅ Compassionate + Dynamic + Presient + Relevant
+
 ##
 
 ## RISK MITIGATION
 
 ### Risk: Performance Degradation
+
 **Mitigation:** Continuous monitoring, quick rollback per tier
 
 ### Risk: Learning Produces Bad Data
+
 **Mitigation:** Quality filtering, user opt-in for learning
 
 ### Risk: Safety Wrapper Breaks Response
+
 **Mitigation:** Careful testing, graceful fallbacks
 
 ### Risk: Multiple Systems Conflict
+
 **Mitigation:** Clear integration points, minimal interdependency
+
 ##
 
 ## NEXT STEPS (TODAY)

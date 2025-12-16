@@ -1,7 +1,9 @@
 # Test Messages & Responses: Anti-Dash System Verification
 
 ## Overview
+
 This document contains all test messages used to verify the anti-dash system, along with actual responses generated and analysis.
+
 ##
 
 ## Test Message Set 1: Core Emotional States
@@ -35,6 +37,7 @@ Analysis:
 ```text
 ```text
 ```
+
 Input: "I'm grieving the loss of my job"
 Time: 0.010s
 Source: dynamic_composer
@@ -50,6 +53,7 @@ Analysis:
 ✅ Period separators (clean, reflective)
 ✅ Warm and present ("I'm here with you")
 ✅ Acknowledges depth ("traversing something real")
+
 ```
 
 
@@ -92,6 +96,7 @@ Analysis:
 ```text
 ```text
 ```
+
 Input (repeated 4 times): "I'm feeling anxious and overwhelmed"
 
 Run 1:
@@ -118,6 +123,7 @@ Uniqueness Analysis:
 ✅ Different closings (pace, rush, name, movement valid)
 ✅ No "There's no wrong way..." repetition
 ✅ Rotation bank actively providing variety
+
 ```
 
 
@@ -152,6 +158,7 @@ Analysis:
 ```text
 ```text
 ```
+
 Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining
 things in a way I don't understand and it's creating real isolation in my
 family and I'm starting to doubt myself"
@@ -173,6 +180,7 @@ Analysis:
 ✅ Focused on core issue (communication mismatch)
 ✅ Reframed as solvable problem
 ✅ Offered exploratory direction
+
 ```
 
 
@@ -207,14 +215,16 @@ Analysis:
 ```text
 ```text
 ```
+
 Tone Pool: Grounded
 Glyph: Spiral Containment
 
 Before: "You're moving through this—you can rest here"
 After: "You're moving through this. You can rest here."
 
-Rule Applied: `. ` (period + space)
+Rule Applied: `.` (period + space)
 Status: ✅ CORRECT
+
 ```
 
 
@@ -231,7 +241,7 @@ Glyph: Recursive Ache
 Before: "The ache you're naming—that deserves recognition"
 After: "The ache you're naming: that deserves recognition."
 
-Rule Applied: `: ` (colon + space)
+Rule Applied: `:` (colon + space)
 Status: ✅ CORRECT
 Emotional Effect: More contemplative, layered
 
@@ -243,15 +253,17 @@ Emotional Effect: More contemplative, layered
 ```text
 ```text
 ```
+
 Tone Pool: Empathetic
 Glyph: Still Recognition
 
 Before: "The alone you feel—it belongs to the unknown"
 After: "The alone you feel, it belongs to the unknown."
 
-Rule Applied: `, ` (comma + space)
+Rule Applied: `,` (comma + space)
 Status: ✅ CORRECT
 Emotional Effect: Warmer, more connective
+
 ```
 
 
@@ -268,7 +280,7 @@ Emotional Effect: Warmer, more connective
 Glyph Name: "Spiral Containment"
 Keyword Match: "containment"
 Mapped Pool: Grounded
-Punctuation Style: Sentence split (`. `)
+Punctuation Style: Sentence split (`.`)
 Status: ✅ CORRECT
 
 ```
@@ -279,11 +291,13 @@ Status: ✅ CORRECT
 ```text
 ```text
 ```
+
 Glyph Name: "Recursive Ache"
 Keyword Match: "ache"
 Mapped Pool: Reflective
-Punctuation Style: Colon emphasis (`: `)
+Punctuation Style: Colon emphasis (`:`)
 Status: ✅ CORRECT
+
 ```
 
 
@@ -297,7 +311,7 @@ Status: ✅ CORRECT
 Glyph Name: "Still Recognition"
 Keyword Match: "recognition"
 Mapped Pool: Empathetic
-Punctuation Style: Comma join (`, `)
+Punctuation Style: Comma join (`,`)
 Status: ✅ CORRECT
 
 ```
@@ -308,12 +322,14 @@ Status: ✅ CORRECT
 ```text
 ```text
 ```
+
 Glyph Name: "Grief of Recognition"
 Keywords Found: "grief" (Reflective), "recognition" (Empathetic)
 Priority Mapping: "grief" checked first
 Mapped Pool: Reflective
-Punctuation Style: Colon emphasis (`: `)
+Punctuation Style: Colon emphasis (`:`)
 Status: ✅ CORRECT (first match wins)
+
 ```
 
 
@@ -341,6 +357,7 @@ Status: ✅ ACCEPTABLE (cold start is expected)
 ```text
 ```text
 ```
+
 Call 1: 0.043s (cold start)
 Call 2: 0.010s
 Call 3: 0.009s
@@ -349,6 +366,7 @@ Call 5: 0.011s
 
 Average (excluding cold start): 0.010s
 Status: ✅ EXCELLENT (consistent sub-15ms)
+
 ```
 
 
@@ -377,12 +395,14 @@ Status: ✅ NEGLIGIBLE (undetectable to user)
 ```text
 ```text
 ```
+
 Scenario: style_matrix.json deleted
 Behavior: System loads minimal defaults
 Response Generated: Yes
 Quality: Normal (defaults used)
 
 Status: ✅ PASS (graceful degradation)
+
 ```
 
 
@@ -408,10 +428,12 @@ Status: ✅ PASS (defensive handling)
 ```text
 ```text
 ```
+
 Scenario: Hypothetical cleaner exception
 Behavior: Original response returned unchanged
 User Experience: No disruption
 Status: ✅ PASS (error caught, logged, handled)
+
 ```
 
 
@@ -428,10 +450,11 @@ Status: ✅ PASS (error caught, logged, handled)
 Input: "I need to hold steady through this difficult time"
 Detected Tone Pool: Grounded
 Response Characteristics:
-  - Stable, reassuring language
-  - Period separators (declarative)
-  - Supportive but not overly warm
-  - Grounded in present reality
+
+- Stable, reassuring language
+- Period separators (declarative)
+- Supportive but not overly warm
+- Grounded in present reality
 
 Status: ✅ CORRECT TONE MATCH
 
@@ -443,15 +466,18 @@ Status: ✅ CORRECT TONE MATCH
 ```text
 ```text
 ```
+
 Input: "I'm carrying something that feels heavy"
 Detected Tone Pool: Reflective
 Response Characteristics:
-  - Contemplative language
-  - Colon separators (layered thought)
-  - Acknowledges depth and weight
-  - Invites reflection
+
+- Contemplative language
+- Colon separators (layered thought)
+- Acknowledges depth and weight
+- Invites reflection
 
 Status: ✅ CORRECT TONE MATCH
+
 ```
 
 
@@ -465,10 +491,11 @@ Status: ✅ CORRECT TONE MATCH
 Input: "I feel so alone and unseen"
 Detected Tone Pool: Empathetic
 Response Characteristics:
-  - Warm, connective language
-  - Comma separators (flowing)
-  - Affirms feelings and worth
-  - Builds connection
+
+- Warm, connective language
+- Comma separators (flowing)
+- Affirms feelings and worth
+- Builds connection
 
 Status: ✅ CORRECT TONE MATCH
 

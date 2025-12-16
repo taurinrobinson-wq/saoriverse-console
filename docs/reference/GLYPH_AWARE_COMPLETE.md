@@ -5,6 +5,7 @@
 Successfully refactored the response generation system to be **glyph-aware** instead of **glyph-labeled**. The system now uses glyph metadata (description, gates, emotional_signal) as scaffolding for compositional response generation, directly addressing the user's insight that "it doesn't really connect to my glyph system in that structure."
 
 **Status: ✓ COMPLETE & TESTED**
+
 ##
 
 ## The Journey: From Problem to Solution
@@ -18,6 +19,7 @@ Then evolved to:
 > "okay but it doesn't really connect to my glyph system in that structure. Am I right?"
 
 **Root Cause Analysis:**
+
 - Glyph system contained rich metadata: name, description, emotional_signal, gates
 - Response composer accepted `glyph_name` but never used this metadata
 - Responses were generic/compositional but not grounded in glyph meaning
@@ -26,6 +28,7 @@ Then evolved to:
 ### Phase 2: Architectural Disconnect Investigation
 
 **Key Findings:**
+
 1. Database returns glyphs with: `{"glyph_name": str, "description": str, "gate": str}`
 2. Composer only checked if glyph_name was provided, never accessed metadata
 3. Message-aware responses ignored glyph entirely
@@ -48,9 +51,8 @@ def compose_response(self, input_text: str, glyph_name: str = "", ...)
 ```text
 ```
 
-
-
 **Both methods updated:**
+
 - `compose_response(glyph: Optional[Dict])`
 - `compose_message_aware_response(glyph: Optional[Dict])`
 
@@ -84,14 +86,12 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, 
 ```text
 ```
 
-
-
-
 #### Step 3: Create Glyph-to-Emotion Mapping
 
 **Added `_glyph_to_emotion_category()` helper:**
 
 Maps glyph names to poetry emotion categories:
+
 - "still insight" → joy
 - "grief", "ache", "loss" → sadness
 - "anger", "rage" → anger
@@ -110,8 +110,6 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
 ```text
 ```
 
-
-
 **After:**
 
 ```python
@@ -127,9 +125,6 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
 
 ```sql
 ```
-
-
-
 
 #### Step 5: Update Signal Parser Call Sites
 
@@ -153,9 +148,8 @@ composed = _response_composer.compose_response(
 ```text
 ```
 
-
-
 Updated both:
+
 1. `compose_response()` call
 2. `compose_message_aware_response()` call
 
@@ -175,9 +169,6 @@ return None, ("I can sense there's something...",
 ```text
 ```
 
-
-
-
 #### Step 7: Handle Database Field Variations
 
 **Fixed gate field handling:**
@@ -193,7 +184,6 @@ gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
 ```text
 ```
 
-
 ##
 
 ## Test Validation Results
@@ -207,10 +197,8 @@ gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
 ```text
 ```
 
-
-
-
 **Glyph Detected:** Still Containment
+
 - Description: "Boundaries that hold without pressure. A sanctuary of quiet care."
 - Gate: Gate 2
 
@@ -225,8 +213,6 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 ```text
 ```text
 ```
-
-
 
 **Validation Results:**
 ✓ Glyph description present in response
@@ -243,10 +229,8 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 ```text
 ```
 
-
-
-
 **Outcome:**
+
 - Glyph lookup failed (edge case - "actually" keyword unusual)
 - Fallback response generated
 - *(Note: inherited_pattern feature in message_features but glyph lookup failed)*
@@ -261,8 +245,6 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 ```text
 ```
 
-
-
 **Feedback Detected:** 'misalignment' (user starting with "That's not quite what I meant")
 
 **Glyph Detected:** Still Containment
@@ -276,14 +258,12 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 ```text
 ```
 
-
-
-
 **Validation Results:**
 ✓ Feedback correction detected (misalignment type)
 ✓ Correction-specific response generated
 ✓ Response grounded in glyph
 ✓ Message-specific context (Michelle relationship)
+
 ##
 
 ## Architecture: Before vs. After
@@ -306,8 +286,6 @@ DynamicResponseComposer
 ```text
 ```text
 ```
-
-
 
 ### After: Glyph-Aware Architecture
 
@@ -337,34 +315,40 @@ DynamicResponseComposer [GLYPH-AWARE]
 
 ```
 
-
 ##
 
 ## Key Improvements
 
 ### 1. Meaning Grounding
+
 - **Before:** Glyph served as database lookup key only
 - **After:** Glyph's description directly scaffolds response opening
 
 ### 2. Emotional Accuracy
+
 - **Before:** Generic compassionate responses
 - **After:** Responses grounded in glyph's emotional signal and gates
 
 ### 3. Compositional Variety
+
 - **Before:** Template-filling with variation
 - **After:** Fresh composition on glyph foundation + message specifics
 
 ### 4. Intensity Awareness
+
 - **Before:** No intensity scaling
 - **After:** Gate count informs closing move (permission vs. commitment vs. question)
 
 ### 5. Feedback Integration
+
 - **Before:** Basic feedback detection, generic response
 - **After:** Feedback layered on glyph-aware foundation
 
 ### 6. Poetry Integration
+
 - **Before:** Poetry selected by generic emotion extraction
 - **After:** Poetry selected by glyph's emotional category mapping
+
 ##
 
 ## Code Changes Summary
@@ -372,6 +356,7 @@ DynamicResponseComposer [GLYPH-AWARE]
 ### File: `emotional_os/glyphs/dynamic_response_composer.py`
 
 **Changes:**
+
 1. Line 392-430: Updated `compose_response()` signature and routing
 2. Line 246-312: Added `_build_glyph_aware_response()` method (~70 lines)
 3. Line 315-345: Added `_glyph_to_emotion_category()` helper (~30 lines)
@@ -383,16 +368,19 @@ DynamicResponseComposer [GLYPH-AWARE]
 ### File: `emotional_os/glyphs/signal_parser.py`
 
 **Changes:**
+
 1. Line 449: Updated `compose_message_aware_response()` call (glyph_name → glyph)
 2. Line 456: Updated `compose_response()` call (glyph_name → glyph)
 3. Line 210: Fixed fallback return to consistent tuple format
 
 **Total modifications:** 3 call sites + 1 consistency fix
+
 ##
 
 ## Testing & Validation
 
 ### Test Framework Created
+
 - File: `test_glyph_aware_responses.py`
 - Tests three-message conversation flow
 - Validates:
@@ -403,16 +391,19 @@ DynamicResponseComposer [GLYPH-AWARE]
   - Glyph grounding consistent ✓
 
 ### Database Initialization
+
 - File: `init_db.py`
 - Initializes `glyphs.db` from `glyph_lexicon_rows.sql`
 - Loads 64 glyphs with full metadata
 - Verified table structure and data integrity ✓
 
 ### Compilation Status
+
 - ✓ No syntax errors in signal_parser.py
 - ✓ No syntax errors in dynamic_response_composer.py
 - ✓ All imports functional
 - ✓ Method signatures consistent across codebase
+
 ##
 
 ## User's Question Answered
@@ -436,6 +427,7 @@ The refactoring ensures glyph-awareness through:
 5. **Message Integration**: Glyph scaffold supports message-specific content (math_frustration, inherited_pattern, communication_friction)
 
 The system now generates responses that feel like they emerge *from* the glyph's meaning, not *about* the glyph's label.
+
 ##
 
 ## Performance Notes
@@ -443,6 +435,7 @@ The system now generates responses that feel like they emerge *from* the glyph's
 - **Composition Time**: ~20-50ms per response (includes spaCy NER, poetry selection, entity extraction)
 - **Memory**: Glyph dicts are small (~2KB each), negligible overhead
 - **Scalability**: Approach scales with glyph lexicon size; currently 64 glyphs
+
 ##
 
 ## Future Enhancement Opportunities
@@ -453,6 +446,7 @@ The system now generates responses that feel like they emerge *from* the glyph's
 4. **Poetry Curation**: Expand poetry database with more glyph-specific selections
 5. **Feedback Learning**: Remember which glyph+message+feedback combinations work best
 6. **Multi-Turn Coherence**: Use glyph consistency across conversation turns
+
 ##
 
 ## Conclusion

@@ -5,18 +5,22 @@
 This is your complete guide to migrating Velinor from Streamlit to a proper web stack.
 
 ### **START HERE** ⭐
+
 - **[VELINOR_WEB_COMPLETE.md](VELINOR_WEB_COMPLETE.md)** - Complete overview & migration summary
 
 ### **Then Read** (In Order)
+
 1. **[VELINOR_WEB_MIGRATION.md](VELINOR_WEB_MIGRATION.md)** - 6-phase step-by-step setup guide
 2. **[NEXTJS_FRONTEND_SETUP.md](NEXTJS_FRONTEND_SETUP.md)** - Detailed Next.js configuration
 3. **[RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)** - Production deployment to Railway
 4. **[VELINOR_WEB_QUICK_REFERENCE.md](VELINOR_WEB_QUICK_REFERENCE.md)** - Command reference & troubleshooting
 
 ### **Reference** (As Needed)
+
 - **[velinor/TWINE_INTEGRATION_GUIDE.md](velinor/TWINE_INTEGRATION_GUIDE.md)** - Velinor game engine API
 - **[velinor/README.md](velinor/README.md)** - Game engine overview
 - **[velinor/QUICKSTART.md](velinor/QUICKSTART.md)** - Scene examples
+
 ##
 
 ## 🛠️ Files Created for You
@@ -39,6 +43,7 @@ velinor_api.py          FastAPI server that wraps Velinor engine
 ```text
 ```text
 ```
+
 frontend_lib_api.ts     TypeScript API client for axios
                         - Game start
                         - Action processing
@@ -50,6 +55,7 @@ frontend_GameScene.tsx  React component for game scenes
                         - Narration box
                         - Choice buttons (absolutely positioned)
                         - Custom input
+
 ```
 
 
@@ -108,8 +114,6 @@ git commit -m "Velinor web game"
 ```text
 ```
 
-
-
 ##
 
 ## 📊 Architecture
@@ -139,7 +143,6 @@ git commit -m "Velinor web game"
 ```text
 ```
 
-
 ##
 
 ## 🎯 What You Get
@@ -151,6 +154,7 @@ git commit -m "Velinor web game"
 ✅ **Easy to Expand** - Add scenes, change overlays, customize styling
 ✅ **One-Click Deploy** - Push to GitHub, Railway auto-deploys
 ✅ **No More Streamlit Limitations** - Full CSS, animations, z-index control
+
 ##
 
 ## 📖 Reading Map
@@ -167,8 +171,6 @@ Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
 
 ```text
 ```
-
-
 
 ##
 
@@ -193,7 +195,6 @@ cd velinor-web && npm run dev
 ```text
 ```
 
-
 ##
 
 ## 📋 Checklist
@@ -207,6 +208,7 @@ cd velinor-web && npm run dev
 - [ ] Test locally (backend + frontend)
 - [ ] Deploy to Railway
 - [ ] Verify at your Railway domain
+
 ##
 
 ## 🆘 Troubleshooting
@@ -218,14 +220,16 @@ cd velinor-web && npm run dev
 | Backend slow to start | It initializes on first request | Normal! |
 | Button doesn't respond | Check browser console for errors | Dev tools F12 |
 | CORS errors | Already handled in code | velinor_api.py |
+
 ##
 
 ## 🎓 Learning Resources
 
-- **Next.js**: https://nextjs.org/docs
-- **FastAPI**: https://fastapi.tiangolo.com/
-- **Railway**: https://docs.railway.app/
-- **React**: https://react.dev/
+- **Next.js**: <https://nextjs.org/docs>
+- **FastAPI**: <https://fastapi.tiangolo.com/>
+- **Railway**: <https://docs.railway.app/>
+- **React**: <https://react.dev/>
+
 ##
 
 ## 💡 Tips
@@ -235,6 +239,7 @@ cd velinor-web && npm run dev
 3. **Browser DevTools** - F12 to check network requests & errors
 4. **Test on mobile** - The game should work on phones too
 5. **Version control** - Commit frequently so you can revert if needed
+
 ##
 
 ## 🎮 What's Next
@@ -242,21 +247,25 @@ cd velinor-web && npm run dev
 After you get the basic setup working:
 
 ### Immediate
+
 - Add more backgrounds to `public/assets/backgrounds/`
 - Create overlay PNGs (dust, fog, glyphs)
 - Flesh out game scenes
 
 ### Soon
+
 - Add animations (Framer Motion)
 - Add sound (Howler.js)
 - Add glyph rendering
 - Add stats panel
 
 ### Later
+
 - Multiplayer support
 - Save/load with database
 - Settings menu
 - Achievements system
+
 ##
 
 ## 📞 Documentation Map
@@ -274,18 +283,19 @@ Test locally → Deploy → Live!
 
 ```
 
-
 ##
 
-## ✨ You're All Set!
+## ✨ You're All Set
 
 You have:
+
 - ✅ FastAPI backend (`velinor_api.py`)
 - ✅ React components (`frontend_*.tsx`)
 - ✅ Complete documentation
 - ✅ Deployment configured (Railway)
 
 **Next step:** Open `VELINOR_WEB_COMPLETE.md` and start Phase 1!
+
 ##
 
 **Questions?** Check the relevant documentation file or the game engine guide.

@@ -28,10 +28,7 @@ All packages are installed in Python 3.12. You just need to start Streamlit with
 ```text
 ```
 
-
-
-
-Then open http://localhost:8501
+Then open <http://localhost:8501>
 
 ### Option 2: Batch File
 
@@ -44,13 +41,12 @@ Double-click `run_app.bat` in the project directory.
 ```text
 ```
 
-
-
 ### Option 4: VS Code Task (Recommended if using VS Code)
 
 1. Press `Ctrl+Shift+B` in VS Code
 2. Select "Streamlit: Run with Python 3.12"
 3. Streamlit will start with the correct Python version
+
 ##
 
 ## How to Verify You're Using Python 3.12
@@ -59,6 +55,7 @@ When the app starts, check the sidebar:
 
 - ✅ **Shows "✓ Python 3.12.x"** - Correct! Voice mode will work
 - ⚠️ **Shows "⚠️ Python 3.13.x"** or other - Wrong! Use the command above
+
 ##
 
 ## Quick Reference
@@ -71,6 +68,7 @@ When the app starts, check the sidebar:
 | List installed packages | `py -3.12 -m pip list` |
 | Run tests | `py -3.12 -m pytest` |
 | Install new package | `py -3.12 -m pip install package-name` |
+
 ##
 
 ## Why This Matters
@@ -83,6 +81,7 @@ The development machine has multiple Python versions:
 When you run `streamlit run app.py`, it uses the default Python, which is often 3.13. But the audio packages (faster-whisper, sounddevice) are only installed in 3.12.
 
 By using `py -3.12 -m streamlit run app.py`, you explicitly tell it to use Python 3.12.
+
 ##
 
 ## Permanent Fix (Optional)
@@ -101,9 +100,8 @@ py --version
 
 ```
 
-
-
 For now, just use the `py -3.12` prefix to ensure you're using the correct version.
+
 ##
 
 ## Testing Voice Mode
@@ -118,6 +116,7 @@ Once running with Python 3.12:
 6. Response will be synthesized using pyttsx3
 
 If you still see the missing packages error, the app is not using Python 3.12. Kill it and restart with the correct command.
+
 ##
 
 ## Files Created

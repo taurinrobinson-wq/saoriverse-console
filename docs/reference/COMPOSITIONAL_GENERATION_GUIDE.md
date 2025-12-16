@@ -8,6 +8,7 @@ Your local system was generating responses that *felt* templated because:
 2. **Templates had slots**, `"I hear {entity}. That's {emotion}. You can..."`
 3. **Same structure, different keywords**, Every anxiety response had the same arc
 4. **No message-to-response mapping**, Whether you talked about math, inherited patterns, or communication friction, you got the "Still Insight" template filled with different words
+
 ##
 
 ## The Solution: Compositional Generation
@@ -72,9 +73,6 @@ if 'anxiety' in keywords:
 ```text
 ```
 
-
-
-
 ### AFTER: Composition-Driven
 
 ```python
@@ -117,7 +115,6 @@ response = compose_message_aware_response(
 ```text
 ```
 
-
 ##
 
 ## Key Differences
@@ -131,6 +128,7 @@ response = compose_message_aware_response(
 | **Feedback Loop** | Hard to detect when response misses mark | Detects contradictions → addresses them |
 | **Poetry** | Optional footer | Woven naturally into response |
 | **Feeling** | Canned, predictable | Fresh, contextual |
+
 ##
 
 ## How the New System Works
@@ -149,9 +147,6 @@ def detect_feedback_correction(input_text, last_assistant_message):
 ```text
 ```
 
-
-
-
 ### Layer 2: Message-Driven Features
 
 ```python
@@ -165,8 +160,6 @@ def extract_message_features(input_text):
 ```text
 ```text
 ```
-
-
 
 ### Layer 3: Dynamic Composition
 
@@ -182,8 +175,6 @@ class DynamicResponseComposer:
 
 ```text
 ```
-
-
 
 ##
 
@@ -212,8 +203,6 @@ small piece together, or would you rather have a script you can use with Michell
 ```text
 ```
 
-
-
 ### Message 2: Mental Block + Communication Friction
 
 ```
@@ -238,9 +227,6 @@ like to approach math frustration differently?"
 ```text
 ```
 
-
-
-
 ### Message 3: Inherited Pattern Correction
 
 ```
@@ -258,8 +244,6 @@ would it feel like to notice the difference between *her* anxiety and what's
 actually *yours*?"
 → Detects feedback correction (attribution_boundary) and addresses it directly
 ```
-
-
 
 ##
 
@@ -284,6 +268,7 @@ actually *yours*?"
 - Uses it in `generate_contextual_response()` instead of filling templates
 - Detects feedback corrections first
 - Routes to appropriate composition layer
+
 ##
 
 ## What Offline Resources Enable This
@@ -295,6 +280,7 @@ actually *yours*?"
 5. **Semantic similarity**, Avoid repeating phrases
 
 **None require an API.** All run locally, instantly, and don't leak data.
+
 ##
 
 ## Why This Matters

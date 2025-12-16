@@ -8,6 +8,7 @@ You now have two automated commit & push scripts that periodically save your wor
 - **Bash** (macOS/Linux): `scripts/auto-commit.sh`
 
 Both scripts monitor your workspace and commit/push changes at regular intervals.
+
 ##
 
 ## Quick Start
@@ -21,17 +22,12 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 ```text
 ```
 
-
-
 **Option 2: Custom interval (e.g., every 15 minutes)**
 
 ```powershell
 
 ```text
 ```
-
-
-
 
 **Option 3: Custom commit message**
 
@@ -40,17 +36,12 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 ```text
 ```
 
-
-
 **Option 4: Stop anytime**
 
 ```
 
 ```text
 ```
-
-
-
 
 ### macOS/Linux
 
@@ -61,8 +52,6 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 ```text
 ```
 
-
-
 **Option 2: Custom interval (e.g., every 10 minutes)**
 
 ```bash
@@ -70,16 +59,12 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 ```text
 ```
 
-
-
-
 **Option 3: Stop anytime**
 
 ```
 ```text
 ```text
 ```
-
 
 ##
 
@@ -113,25 +98,27 @@ Press Ctrl+C to stop
 ```text
 ```
 
-
-
 ##
 
 ## Best Practices
 
 ### 1. Choose Appropriate Interval
+
 - **Development**: 15-30 minutes (frequent changes)
 - **Documentation**: 30-60 minutes (less frequent updates)
 - **Production**: 60+ minutes (minimal changes)
 
 ### 2. Monitor the Console
+
 The script outputs status for each commit cycle so you can see:
+
 - How many files changed
 - Whether commit succeeded
 - Whether push succeeded
 - When next check happens
 
 ### 3. Combine with Manual Commits
+
 The auto-commit scripts work alongside manual commits:
 
 ```bash
@@ -146,13 +133,14 @@ git commit -m "feat: implement specific feature"
 ```text
 ```
 
-
-
 ### 4. Handle Conflicts
+
 If you have conflicts or issues:
+
 1. **Stop the auto-commit script** (Ctrl+C)
 2. **Resolve conflicts manually** in git
 3. **Restart the script** when ready
+
 ##
 
 ## Running in the Background
@@ -171,9 +159,6 @@ $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfil
 ```text
 ```
 
-
-
-
 ### macOS/Linux (Cron)
 
 Create a cron job to run every 30 minutes:
@@ -188,7 +173,6 @@ crontab -e
 ```text
 ```
 
-
 ##
 
 ## Troubleshooting
@@ -200,10 +184,8 @@ crontab -e
 ```text
 ```
 
-
-
-
 ### "Git command not found"
+
 Ensure git is in your PATH:
 
 ```bash
@@ -212,16 +194,17 @@ which git  # macOS/Linux
 ```text
 ```
 
-
-
 ### "Push failed (may require PR)"
+
 This is expected if your repo has branch protection rules. The script will:
+
 1. Commit locally ✓
 2. Attempt push ⚠
 3. Warn you in console
 4. Continue next cycle (manual push needed)
 
 ### Script keeps running but nothing commits
+
 Check if there are actual changes:
 
 ```bash
@@ -229,10 +212,8 @@ Check if there are actual changes:
 ```text
 ```
 
-
-
-
 If empty, everything is already committed.
+
 ##
 
 ## Manual Commit Alternative
@@ -249,7 +230,6 @@ git commit -m "feat: implement emotion learning system"
 ```text
 ```
 
-
 ##
 
 ## Stopping the Auto-Commit
@@ -263,9 +243,6 @@ git commit -m "feat: implement emotion learning system"
 ```text
 ```
 
-
-
-
 **To remove cron job (macOS/Linux):**
 
 ```bash
@@ -273,8 +250,6 @@ crontab -e
 
 # Remove the line you added earlier
 ```
-
-
 
 ##
 
@@ -286,6 +261,7 @@ crontab -e
 | Start auto-commit (15 min) | `.\scripts\auto-commit.ps1 -IntervalMinutes 15` |
 | Stop auto-commit | Ctrl+C |
 | Manual single commit | `git add -A && git commit -m "msg" && git push` |
+
 ##
 
 **Your changes are now automatically backed up to GitHub!** 🎉

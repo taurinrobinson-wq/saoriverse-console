@@ -21,6 +21,7 @@ Your complete production deployment package is **ready to deploy** to DigitalOce
 ```text
 ```text
 ```
+
 ✅ VPS_THE_SIMPLE_VERSION.md      - Beginner-friendly (start here)
 ✅ DEPLOYMENT_VPS.md              - Complete step-by-step guide
 ✅ VPS_QUICK_START.md             - Copy-paste commands
@@ -29,6 +30,7 @@ Your complete production deployment package is **ready to deploy** to DigitalOce
 ✅ VPS_MIGRATION_SUMMARY.md       - Big picture overview
 ✅ PUSH_TO_GITHUB.md              - Git commands
 ✅ VPS_DEPLOYMENT_INDEX.md        - This file (file navigation)
+
 ```
 
 
@@ -65,11 +67,10 @@ Enables self-hosted reliable deployment with auto-scaling capabilities."
 ```text
 ```
 
-
-
 Done! ✅
 
 ### 2. Then What?
+
 After pushing, choose your path:
 
 **Option A: Read First** (5 min)
@@ -80,6 +81,7 @@ After pushing, choose your path:
 
 **Option C: Track Progress** (ongoing)
 → Use `VPS_MIGRATION_CHECKLIST.md`
+
 ##
 
 ## 📊 What's Inside Each File
@@ -97,6 +99,7 @@ After pushing, choose your path:
 | docker-compose.prod.yml | Production config | - | 🔧 Don't edit yet |
 | nginx.prod.conf | SSL config | - | 🔧 Don't edit yet |
 | .github/workflows/deploy.yml | Auto-deploy | - | 🔧 Don't edit yet |
+
 ##
 
 ## ⚡ Quick Start (For the Impatient)
@@ -139,10 +142,8 @@ https://velinor.firstperson.chat
 ```text
 ```
 
-
-
-
 **Total time: ~30 minutes**
+
 ##
 
 ## 🎯 The Big Picture
@@ -164,32 +165,37 @@ Now (DigitalOcean) ✅
 ```text
 ```
 
-
 ##
 
 ## 📋 Files Summary
 
 ### Infrastructure (Production Ready)
+
 **docker-compose.prod.yml** (42 lines)
+
 - Orchestrates Next.js (3000), FastAPI (8001), Nginx (8000)
 - Health checks every 30s
 - Auto-restart on crash
 - Production environment variables
 
 **nginx.prod.conf** (77 lines)
+
 - HTTP → HTTPS redirect
 - TLS 1.2+
 - Let's Encrypt support
 - Routes to frontend & backend
 
 **.github/workflows/deploy.yml** (32 lines)
+
 - Triggers on git push to main
 - SSH to VPS, runs deploy script
 - Auto-updates your site
 - No manual deployment needed
 
 ### Documentation (User Guides)
+
 **VPS_THE_SIMPLE_VERSION.md** (300 lines)
+
 - What is DigitalOcean? (plain English)
 - 7-step simple process
 - What each service does
@@ -197,6 +203,7 @@ Now (DigitalOcean) ✅
 - Next steps clear
 
 **DEPLOYMENT_VPS.md** (400 lines)
+
 - Complete step-by-step
 - Screenshots where helpful
 - Every command explained
@@ -204,18 +211,21 @@ Now (DigitalOcean) ✅
 - Maintenance guide
 
 **VPS_QUICK_START.md** (150 lines)
+
 - 6 numbered sections
 - Copy-paste commands
 - Minimal explanation
 - Speed optimized
 
 **VPS_MIGRATION_CHECKLIST.md** (250 lines)
+
 - 7 phases to complete
 - 50+ checkpoints
 - Track progress
 - Success criteria
 
 **VPS_REFERENCE_CARD.md** (150 lines)
+
 - ASCII diagrams
 - Port reference
 - SSH commands
@@ -223,6 +233,7 @@ Now (DigitalOcean) ✅
 - Print-friendly
 
 **VPS_MIGRATION_SUMMARY.md** (400 lines)
+
 - Architecture diagram
 - File-by-file breakdown
 - Cost analysis
@@ -230,19 +241,23 @@ Now (DigitalOcean) ✅
 - Performance expectations
 
 **PUSH_TO_GITHUB.md** (80 lines)
+
 - Exact git commands
 - Verification checklist
 - After-push steps
 
 **VPS_DEPLOYMENT_INDEX.md** (200 lines)
+
 - File navigation
 - Quick selection guide
 - Troubleshooting router
+
 ##
 
 ## 🔄 Your Timeline
 
 **Next 30 minutes**:
+
 1. Push to GitHub (5 min)
 2. Create DigitalOcean account (5 min)
 3. Create Droplet (2 min)
@@ -257,10 +272,12 @@ Now (DigitalOcean) ✅
 10. Watch it auto-deploy
 
 **After deployment**:
+
 - Monitor logs
 - Keep system updated
 - Scale if needed
 - Watch your game thrive 🎮
+
 ##
 
 ## ✅ Success Looks Like
@@ -280,8 +297,6 @@ Now (DigitalOcean) ✅
 ```text
 ```
 
-
-
 ##
 
 ## 🆘 If Something Goes Wrong
@@ -297,9 +312,11 @@ Now (DigitalOcean) ✅
    - SSH key issue (verify deploy key)
 
 3. **Last**: SSH into VPS and check logs
+
    ```bash
    docker compose -f docker-compose.prod.yml logs
    ```
+
 ##
 
 ## 🎓 Learning Path
@@ -310,6 +327,7 @@ Want to learn as you go?
 2. Read **DEPLOYMENT_VPS.md** (understand each step)
 3. Follow **DEPLOYMENT_VPS.md** (execute step-by-step)
 4. Bookmark **VPS_REFERENCE_CARD.md** (for future reference)
+
 ##
 
 ## 💡 Pro Tips
@@ -323,6 +341,7 @@ Want to learn as you go?
 ✨ **Tip 4**: Set up GitHub 2FA before deploying sensitive code
 
 ✨ **Tip 5**: Use the `workflow_dispatch` button in GitHub Actions to manually redeploy anytime
+
 ##
 
 ## 📞 Quick Reference
@@ -333,13 +352,14 @@ Want to learn as you go?
 **SSL**: Let's Encrypt (free, auto-renews)
 **Deployment**: GitHub Actions (auto on push)
 **Status**: Ready to launch 🚀
+
 ##
 
-## 🚀 You're Ready!
+## 🚀 You're Ready
 
 Everything is created, tested, documented, and ready to go.
 
-### Pick Your Next Step:
+### Pick Your Next Step
 
 **I want to understand first**
 → Read `VPS_THE_SIMPLE_VERSION.md`
@@ -352,6 +372,7 @@ Everything is created, tested, documented, and ready to go.
 
 **I want to find something**
 → Check `VPS_DEPLOYMENT_INDEX.md`
+
 ##
 
 ## ✨ Final Thoughts
@@ -362,8 +383,6 @@ You just went from:
 ```text
 ```text
 ```
-
-
 
 To:
 
@@ -378,16 +397,16 @@ To:
 
 ```
 
-
-
 **All in one session.** 🎉
 
 Now it's time to make it live.
+
 ##
 
 **Next action**: Push to GitHub and start your DigitalOcean journey!
 
 🚀 **Let's launch Velinor!** ⚔️✨
+
 ##
 
 *Created: Just now*

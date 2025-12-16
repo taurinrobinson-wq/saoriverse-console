@@ -3,6 +3,7 @@
 ## 🚀 TODAY: Get Core Infrastructure Running
 
 This guide gets you from idea to working sovereign local system in hours, not weeks.
+
 ##
 
 ## PART 1: INSTALL LOCAL DEPENDENCIES (15 minutes)
@@ -16,8 +17,6 @@ pip install spacy
 ```text
 ```text
 ```
-
-
 
 ### 1.2 Download NRC Emotion Lexicon
 
@@ -36,9 +35,6 @@ mkdir -p data/lexicons
 ```text
 ```
 
-
-
-
 ### 1.3 Verify NLTK is loaded
 
 ```python
@@ -52,7 +48,6 @@ sia = SentimentIntensityAnalyzer()
 ```text
 ```text
 ```
-
 
 ##
 
@@ -150,8 +145,6 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
 ##
 
 ## PART 3: ENHANCE SIGNAL PARSER (30 minutes)
@@ -215,7 +208,6 @@ def enhanced_parse_signals(text: str) -> dict:
 ```text
 ```text
 ```
-
 
 ##
 
@@ -380,8 +372,6 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
 ##
 
 ## PART 5: UPDATE STREAMLIT UI (20 minutes)
@@ -433,7 +423,6 @@ else:
 ```text
 ```text
 ```
-
 
 ##
 
@@ -515,16 +504,12 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
-
 Run it:
 
 ```bash
 ```text
 ```text
 ```
-
 
 ##
 
@@ -554,8 +539,6 @@ print('✓ Downloaded Emily Dickinson poems')
 ```text
 ```
 
-
-
 ##
 
 ## PART 8: VERIFY NO EXTERNAL CALLS (Critical!)
@@ -583,7 +566,6 @@ if mode == "Local Mode (Recommended)":
 ```text
 ```
 
-
 ##
 
 ## ✅ VERIFICATION CHECKLIST
@@ -598,6 +580,7 @@ if mode == "Local Mode (Recommended)":
 - [ ] `test_local_mode.py` passes all tests
 - [ ] Verified no external API calls in Local Mode
 - [ ] User can process messages with full poetry/metaphor enrichment
+
 ##
 
 ## 🚀 NEXT: Try It
@@ -615,25 +598,26 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```text
 ```
 
-
-
 ##
 
 ## 📊 PERFORMANCE EXPECTATIONS
 
 **Local Mode:**
+
 - First message: ~0.5-1.0s (models load)
 - Subsequent messages: ~0.1-0.3s
 - Network latency: **0.0s** (everything local)
 - Data transmitted: **0 bytes**
 
 **Hybrid Mode (Old):**
+
 - First message: ~1-2s
 - Subsequent messages: ~1-2s
 - Network latency: ~0.5-1.5s
 - Data transmitted: Full message → API → Full response
 
 **Result: Local is 4-10x faster + 100% private**
+
 ##
 
 ## 🔐 PRIVACY VERIFICATION
@@ -668,8 +652,6 @@ except:
 print('✅ Local mode verified - no external API calls possible')
 "
 ```
-
-
 
 ##
 

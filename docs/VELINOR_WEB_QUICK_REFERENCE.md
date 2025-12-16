@@ -8,6 +8,7 @@
 | Frontend | Next.js + React/TypeScript | UI with full overlay control |
 | Deployment | Railway | Automatic CI/CD |
 | Game Engine | Velinor (Twine/Python) | Narrative logic, dice rolls, NPC dialogue |
+
 ##
 
 ## Local Development Commands
@@ -28,7 +29,6 @@ npm run dev
 ```text
 ```
 
-
 ##
 
 ## Files Created
@@ -41,11 +41,13 @@ npm run dev
 | `NEXTJS_FRONTEND_SETUP.md` | Detailed Next.js setup guide |
 | `RAILWAY_DEPLOYMENT.md` | Railway deployment instructions |
 | `VELINOR_WEB_MIGRATION.md` | Complete step-by-step migration guide |
+
 ##
 
 ## Setup Checklist
 
 ### One-Time Setup
+
 - [ ] Run `npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git`
 - [ ] Copy `frontend_lib_api.ts` → `velinor-web/lib/api.ts`
 - [ ] Copy `frontend_GameScene.tsx` → `velinor-web/components/GameScene.tsx`
@@ -54,9 +56,11 @@ npm run dev
 - [ ] Test locally
 
 ### Deployment
+
 - [ ] `git add .` && `git commit -m "..."` && `git push origin main`
 - [ ] Railway auto-deploys (~3-5 minutes)
 - [ ] Visit your Railway domain
+
 ##
 
 ## Game Flow
@@ -86,8 +90,6 @@ npm run dev
 ```text
 ```
 
-
-
 ##
 
 ## API Endpoints
@@ -100,6 +102,7 @@ npm run dev
 | POST | `/api/game/{id}/save` | Save progress |
 | POST | `/api/game/{id}/load` | Load saved game |
 | DELETE | `/api/game/{id}` | End session |
+
 ##
 
 ## Environment Variables
@@ -111,8 +114,6 @@ npm run dev
 ```text
 ```
 
-
-
 ### Production (Railway Dashboard)
 
 ```
@@ -121,7 +122,6 @@ NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
 
 ```
 
-
 ##
 
 ## Styling
@@ -129,14 +129,17 @@ NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
 All components use inline styles for portability. To customize:
 
 **Colors:**
+
 - Primary: `#3a6df0` (blue)
 - Success: `#4aa96c` (green)
 - Dark bg: `#191b1e`
 
 **Positioning:**
+
 - Use `position: absolute` for overlays
 - Use `position: relative` for containers
 - Use flexbox for layouts
+
 ##
 
 ## Troubleshooting
@@ -152,6 +155,7 @@ All components use inline styles for portability. To customize:
 
 **CORS errors**
 → Already handled in `velinor_api.py`. For production, restrict to your domain.
+
 ##
 
 ## Key Advantages Over Streamlit
@@ -162,6 +166,7 @@ All components use inline styles for portability. To customize:
 ✅ Better performance
 ✅ Easy to customize styling
 ✅ Full React ecosystem available
+
 ##
 
 ## Resources
@@ -170,6 +175,7 @@ All components use inline styles for portability. To customize:
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Railway Docs](https://docs.railway.app/)
 - [Velinor Engine](./velinor/TWINE_INTEGRATION_GUIDE.md)
+
 ##
 
 **Ready to deploy?**

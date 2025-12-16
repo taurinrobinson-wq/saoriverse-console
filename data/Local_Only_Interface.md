@@ -1,4 +1,5 @@
 Here’s a fully formatted **Markdown implementation guide** you can copy directly into a `.md` file. It includes all the code scaffolding you need for the local‑only synonym pipeline, filtering, scoring, SQLite storage, and background enrichment runner. Since you already have `spacy`, `nltk`, and `textblob` installed, you’re set on dependencies.
+
 ##
 
 ```markdown
@@ -82,6 +83,7 @@ if __name__ == "__main__":
 ```text
 ```text
 ```
+
 ##
 
 ### `scripts/filter_synonyms.py`
@@ -189,6 +191,7 @@ if __name__ == "__main__":
 ```text
 ```text
 ```
+
 ##
 
 ### `scripts/synonym_db.py`
@@ -296,6 +299,7 @@ if __name__ == "__main__":
 ```text
 ```text
 ```
+
 ##
 
 ## 3. Workflow
@@ -305,6 +309,7 @@ if __name__ == "__main__":
 3. Run `score_synonyms.py` → produces `data/synonyms_scored.json`.
 4. Run `synonym_db.py` → builds `data/synonyms.db`.
 5. Schedule `enrich_runner.py` with cron/Task Scheduler for automatic refresh.
+
 ##
 
 ## 4. Integration Example

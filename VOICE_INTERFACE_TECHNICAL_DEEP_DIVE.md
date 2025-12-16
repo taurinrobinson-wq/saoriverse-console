@@ -5,6 +5,7 @@
 ## What Makes This Voice System Unique
 
 Most voice AI systems do one of two things:
+
 1. **Transcribe + Feed to Generic LLM** (ChatGPT with voice) → Generic responses, no emotional awareness
 2. **Call Commercial TTS API** ($0.001-0.05 per word) → Expensive at scale, generic prosody
 
@@ -73,9 +74,6 @@ class AudioProcessor:
 ```text
 ```
 
-
-
-
 **Example Usage**:
 
 ```python
@@ -96,15 +94,15 @@ transcription_result = pipeline.transcribe(audio_bytes)
 ```text
 ```
 
-
-
 **Performance**:
+
 - Latency: ~200-300ms per audio segment on CPU
 - Model size: ~140MB (one-time download)
 - Languages: 99 (auto-detected)
 - Accuracy: 95%+ on clear audio
 
 **Key Innovation**: Whisper is fast enough locally that you never need to send audio to servers. This is huge for privacy and compliance (HIPAA, GDPR).
+
 ##
 
 ### **Sprint 2: Prosody Planning Engine**
@@ -112,11 +110,13 @@ transcription_result = pipeline.transcribe(audio_bytes)
 **What it does**: Converts emotional state into voice characteristics (rate, pitch, energy, emphasis)
 
 **The Problem It Solves**:
+
 - Text-to-speech usually sounds the same every time (neutral prosody)
 - Real human speech varies based on emotional state
 - TTS needs those variations to feel authentic
 
 **Technology Stack**:
+
 - **librosa**: Audio DSP for time-stretching, pitch-shifting
 - **numpy**: Signal processing calculations
 - **Custom DSP**: Emphasis pause insertion, contour application
@@ -148,9 +148,6 @@ class ProsodyPlanner:
 ```text
 ```
 
-
-
-
 **Emotion → Prosody Mappings**:
 
 ```
@@ -178,8 +175,6 @@ CERTAINTY → Terminal Contour
 ```text
 ```
 
-
-
 **Guardrails** (Prevents jarring transitions):
 
 ```python
@@ -200,9 +195,6 @@ class ProsodyGuardrails:
 
 ```text
 ```
-
-
-
 
 **Real Example Flow**:
 
@@ -229,9 +221,8 @@ ProsodyPlan generated:
 ```text
 ```
 
-
-
 **Tests** (24/24 passing):
+
 - Signal bucketing (7 tests)
 - Prosody mapping (4 tests)
 - Full planning workflow (3 tests)
@@ -239,6 +230,7 @@ ProsodyPlan generated:
 - Explanation generation (1 test)
 - Valence inference (3 tests)
 - Style consistency (2 tests)
+
 ##
 
 ### **Sprint 3: Streaming Text-to-Speech**
@@ -246,11 +238,13 @@ ProsodyPlan generated:
 **What it does**: Converts response text + prosody plan into streaming audio with emotional expression
 
 **Why Streaming Matters**:
+
 - Normal TTS: Wait for entire response to synthesize, then play
 - Streaming TTS: Start playing first words while rest is still being generated
 - User perceives faster response (doesn't wait 2-3 seconds in silence)
 
 **Technology Stack**:
+
 - **Coqui TTS**: High-quality open-source text-to-speech
 - **librosa**: Audio DSP (time-stretching, pitch-shifting)
 - **soundfile**: Audio file I/O
@@ -322,9 +316,6 @@ class ProsodyApplier:
 ```text
 ```
 
-
-
-
 **Synthesis Pipeline Flow**:
 
 ```
@@ -369,8 +360,6 @@ Result: User hears: "I hear the" (100ms)
 ```text
 ```
 
-
-
 **Performance Metrics**:
 
 ```
@@ -391,14 +380,13 @@ Model Details:
 ```text
 ```
 
-
-
-
 **Why This Matters**:
+
 - Commercial TTS: $0.001-0.05 per word → prohibitive at scale
 - Your TTS: $0 (local processing) → scales infinitely
 - Most TTS: Static prosody (always sounds the same)
 - Your TTS: Dynamic prosody (emotional expression varies)
+
 ##
 
 ### **Sprint 4: Voice UI Integration**
@@ -442,8 +430,6 @@ class VoiceUIState:
 ```text
 ```
 
-
-
 **Integration Pattern**:
 
 ```python
@@ -475,10 +461,8 @@ if transcription:
 ```text
 ```
 
-
-
-
 **UI Features**:
+
 - 🎤 **Microphone input** with real-time transcription
 - 📊 **Audio visualization** (waveform display)
 - ⚙️ **Settings**:
@@ -488,6 +472,7 @@ if transcription:
 - 🔇 **Audio output** with streaming playback
 - 📝 **Transcription preview** with metadata
 - 🔍 **Debug info** (latency, model status, buffer level)
+
 ##
 
 ### **Sprint 5: Performance Optimization**
@@ -528,8 +513,6 @@ class LatencyOptimizer:
 ```text
 ```
 
-
-
 **Current Performance**:
 
 ```
@@ -547,8 +530,6 @@ Privacy compliance (local processing)? YES ✓
 
 ```text
 ```
-
-
 
 ##
 
@@ -571,10 +552,8 @@ Analysis:
 └─ Response: "Something in your voice suggests maybe that's not the whole story?"
 ```
 
-
-
-
 **Market Advantage**: Detects suppression that ChatGPT and Claude can't. Unique for mental health and abuse support.
+
 ##
 
 ## Why This Implementation Is Production-Ready
@@ -587,6 +566,7 @@ Analysis:
 ✅ **Emotional Expression**: Prosody mapping creates authentic emotional tone
 ✅ **Crisis-Ready**: Voice enables crisis support (people call, they don't type)
 ✅ **Unique**: No competitor has this combination (emotional OS + prosody + voice + privacy)
+
 ##
 
 ## Deployment Checklist
@@ -599,6 +579,7 @@ Analysis:
 - ✅ Tests passing
 - ✅ Documentation complete
 - ⏳ Multimodal fusion (architecture ready, implementation when needed)
+
 ##
 
 ## Next Steps
@@ -611,6 +592,7 @@ Analysis:
 6. **Monetize**: License voice interface to platforms
 
 This voice system is your unfair advantage. No competitor has:
+
 - Emotional OS driving prosody planning
 - Streaming voice for real-time latency
 - Zero API costs at scale

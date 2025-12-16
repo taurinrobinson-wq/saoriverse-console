@@ -53,8 +53,10 @@ Nuanced Response that feels personal, not canned
 ```text
 ```text
 ```
+
 User: "I'm struggling with something"
 Response: "That lands somewhere real for you. What does it feel like when you say that?"
+
 ```
 
 
@@ -83,11 +85,13 @@ There's something connecting them in your experience. What would change if this 
 ```text
 ```text
 ```
+
 User: "I'm struggling with Michelle but also feeling like I inherited this block"
 Response: "I recognize that when you mention 'Michelle', it touches frustration and communication_gap.
 The fact that 'michelle' and 'inherited' appear together for you—that's a real pattern.
 There's something connecting them in your experience. When you feel this frustration about 'Michelle'—
 what part of it asks for something from you?"
+
 ```
 
 
@@ -122,8 +126,6 @@ print(personalization_data)
 ```text
 ```
 
-
-
 ### 2. In Local Response Generation
 
 For **local mode** (no API calls), use the lexicon-aware generator directly:
@@ -150,9 +152,6 @@ print(result["personalization_level"])  # How personalized is it?
 
 ```text
 ```
-
-
-
 
 ### 3. In Streamlit UI
 
@@ -185,8 +184,6 @@ if user_message:
 ```text
 ```
 
-
-
 ## Data Persistence
 
 ### User Lexicon Structure
@@ -217,9 +214,6 @@ Stored in `learning/user_overrides/{user_id}_lexicon.json`:
 ```text
 ```
 
-
-
-
 ### Response Quality Log
 
 Stored in `learning/response_quality_log.jsonl`:
@@ -235,8 +229,6 @@ Stored in `learning/response_quality_log.jsonl`:
 ```text
 ```text
 ```
-
-
 
 ## Key Features
 
@@ -270,9 +262,6 @@ System: Generic response (no learned data)
 ```text
 ```
 
-
-
-
 ### Session 2
 
 ```
@@ -282,8 +271,6 @@ System: Generates personalized response acknowledging pattern
 ```text
 ```text
 ```
-
-
 
 ### Session 3+
 
@@ -296,9 +283,6 @@ System learns: These two are connected for this user
 
 ```text
 ```
-
-
-
 
 ## Customization
 
@@ -320,8 +304,6 @@ generator = LexiconAwareResponseGenerator()
 ```text
 ```
 
-
-
 ### Custom Response Templates
 
 Override `_build_acknowledgment`, `_build_exploration`, `_build_question`:
@@ -334,9 +316,6 @@ class CustomLexiconGenerator(LexiconAwareResponseGenerator):
 
 ```text
 ```
-
-
-
 
 ### Track Custom Metrics
 
@@ -357,16 +336,16 @@ print(f"Average response quality: {stats['average_quality_score']}")
 ```text
 ```
 
-
-
 ## Why This Matters for Local Mode
 
 **Before**: System learned, but responses stayed canned
+
 - Felt generic
 - Didn't reflect what system knew about user
 - No sense of deepening understanding
 
 **After**: System learns, and responses get progressively more nuanced
+
 - Feels personal and contextual
 - Reflects learned patterns in every response
 - User feels genuinely understood
@@ -407,7 +386,6 @@ print(f"Level: {result['personalization_level']}")  # "medium" or "high"
 print(f"Response: {result['response']}")  # Shows learned pattern
 
 ```
-
 
 ##
 

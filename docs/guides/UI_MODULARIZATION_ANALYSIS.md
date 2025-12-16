@@ -3,6 +3,7 @@
 ## Current State: `ui.py` (3,068 lines)
 
 The current `ui.py` is a monolithic module handling ~12 major responsibilities, making it difficult to maintain, test, and modify.
+
 ##
 
 ## File Size & Responsibility Breakdown
@@ -22,6 +23,7 @@ The current `ui.py` is a monolithic module handling ~12 major responsibilities, 
 | **Document Processing** | 200+ | LOW | Lines 2000-2150 |
 | **Learning & Evolution** | 300+ | LOW | Lines 2800+ |
 | **Utility Functions** | 150+ | LOW | Lines 93-140 |
+
 ##
 
 ## Proposed Modularization Structure
@@ -381,8 +383,6 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
 ##
 
 ## Migration Path
@@ -426,6 +426,7 @@ if __name__ == "__main__":
 1. Simplify `ui.py` to ~300 lines
 2. Add comprehensive docstrings
 3. Test all flows
+
 ##
 
 ## Benefits of This Refactoring
@@ -465,6 +466,7 @@ if __name__ == "__main__":
 - Easy to add new UI components
 - Can build alternative UIs (mobile, API, etc.)
 - Better extensibility
+
 ##
 
 ## Import Dependencies Map
@@ -487,8 +489,6 @@ utils/
 ├─ css_injector
 └─ styling_utils
 ```
-
-
 
 ##
 
@@ -517,6 +517,7 @@ utils/
 - Add integration tests for orchestration
 - Unit tests for each component
 - E2E tests for critical flows
+
 ##
 
 ## Estimated Implementation Time
@@ -530,6 +531,7 @@ utils/
 | 5 | Extract optional | 5 hours |
 | 6 | Refactor main + test | 4 hours |
 | **Total** | **All phases** | **~25 hours** |
+
 ##
 
 ## Success Criteria

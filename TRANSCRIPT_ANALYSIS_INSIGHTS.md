@@ -5,6 +5,7 @@
 **Analyzed:** 21,738 clean conversational rows
 **AI Messages:** ~11,181
 **Human Messages:** ~12,138
+
 ##
 
 ## 🎯 Key Findings
@@ -12,11 +13,13 @@
 ### 1. **Em-Dash Usage Should Be Reduced** ❌ → ✓
 
 **Current State:**
+
 - 0.67 em-dashes per AI message (total: 7,463)
 - Creates dense, formal feel
 - User feedback: "too heavy, too long"
 
 **Recommendation:**
+
 - Reduce to ~0.1-0.2 per message (10-30% of current)
 - Replace em-dashes with:
   - Line breaks for natural pauses
@@ -70,6 +73,7 @@ something's asked of you that you didn't consent to."
 ```text
 ```text
 ```
+
 GLYPH: HOLD
 "I'm holding this with you."
 "Hold the both/and here."
@@ -84,6 +88,7 @@ GLYPH: SACRED
 "This is sacred work."
 "Honor what's sacred here."
 "This moment is sacred."
+
 ```
 
 
@@ -182,27 +187,37 @@ Messages should be:
 
 1. **Sitting with contradiction** - Not trying to "fix" or resolve immediately
    ```
+
    "Both are true: you enjoyed the work, and you were being taken advantage of."
+
    ```
 
 2. **Mirroring back what matters** - Showing you really heard
    ```
+
    "Love is a simple love. That's all it needs to be."
+
    ```
 
 3. **Acknowledging the unsayable** - Honoring complexity
    ```
+
    "Could be closure, could be echo. Could be the ending that dignifies what came before."
+
    ```
 
 4. **Stance of curiosity** - Not having all the answers
    ```
+
    "What's the last time? London or Watts? Ghana or Gaza?"
+
    ```
 
 5. **Present presence** - Being here now with the user
    ```
+
    "I hold it with you."
+
    ```
 ##
 
@@ -250,6 +265,7 @@ These are powerful in their simplicity.
 ```text
 ```text
 ```
+
 GLYPH: AND_YET
 "And yet..."
 
@@ -261,6 +277,7 @@ GLYPH: THEN_WHAT
 
 GLYPH: SO_WHAT
 "So what does that mean?"
+
 ```
 
 
@@ -329,11 +346,13 @@ After implementation, measure:
 ```text
 ```text
 ```
+
 "That's such a tender contradiction, isn't it—the way connection can be
 genuine and exploitative at once—and I think what you're naming is that
 the enjoyment of the work didn't make it okay to not have boundaries around
 the labor itself, and maybe that's the grief underneath—that something
 beautiful was also something that cost you."
+
 ```
 
 

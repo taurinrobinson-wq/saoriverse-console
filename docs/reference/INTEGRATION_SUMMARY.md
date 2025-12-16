@@ -83,9 +83,6 @@ if processing_mode == "hybrid":
 ```text
 ```
 
-
-
-
 ### 2. **Sidebar Display** (`main_v2.py`, lines 131-181)
 
 ```python
@@ -98,8 +95,6 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 ```text
 ```
 
-
-
 ### 3. **Conversation ID Tracking**
 
 The system tracks conversations with unique IDs:
@@ -109,9 +104,6 @@ The system tracks conversations with unique IDs:
 ```text
 ```
 
-
-
-
 Add this to `main_v2.py` initialization if not present:
 
 ```python
@@ -120,8 +112,6 @@ if 'conversation_id' not in st.session_state:
 ```text
 ```text
 ```
-
-
 
 ## What Gets Stored
 
@@ -135,9 +125,6 @@ st.session_state['new_glyphs_this_session'] # Glyphs generated this session
 ```text
 ```
 
-
-
-
 ### Persistent Files (survives session restarts)
 
 ```
@@ -148,8 +135,6 @@ learning/
 ```text
 ```text
 ```
-
-
 
 ## Pattern Detection Threshold
 
@@ -168,9 +153,6 @@ Turn 2: love (1) + vulnerability (1) = 2
 ```text
 ```
 
-
-
-
 For faster glyph creation in testing, you can reduce this threshold:
 
 ```python
@@ -180,8 +162,6 @@ evolution = DynamicGlyphEvolution(
 ```text
 ```text
 ```
-
-
 
 ## Example Flow: Real Conversation
 
@@ -198,9 +178,6 @@ Patterns found: (love + vulnerability), (love + intimacy), (vulnerability + fear
 ```text
 ```
 
-
-
-
 ### Turn 2
 
 ```
@@ -213,8 +190,6 @@ Lexicon update: vulnerability frequency +1, transformation frequency +1
 ```text
 ```text
 ```
-
-
 
 ### Turn 10 (after similar themed exchanges)
 
@@ -233,9 +208,6 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
 
 ```text
 ```
-
-
-
 
 ## Configuration
 
@@ -256,8 +228,6 @@ emotion_symbols = {
 ```text
 ```
 
-
-
 ### In `dynamic_glyph_evolution.py` (glyph naming)
 
 ```python
@@ -270,9 +240,6 @@ name_map = {
 
 ```text
 ```
-
-
-
 
 ## Performance Considerations
 
@@ -302,8 +269,6 @@ if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
 ```text
 ```text
 ```
-
-
 
 ## Testing the Integration
 
@@ -337,9 +302,6 @@ result = processor.process_user_message(
 ```text
 ```
 
-
-
-
 ### In Streamlit
 
 1. Start the app: `streamlit run main_v2.py`
@@ -355,11 +317,13 @@ result = processor.process_user_message(
 **Problem**: Many conversations but no new glyphs.
 
 **Check**:
+
 1. Are you in "hybrid" mode? (Only hybrid mode processes evolution)
 2. Is the pattern frequency high enough? (Default: 300)
 3. Are similar emotions appearing together?
 
 **Solutions**:
+
 - Lower threshold: `min_frequency_for_glyph=50` in dynamic_glyph_evolution.py
 - Have longer conversations with consistent emotional themes
 - Check logs: `tail -f learning/hybrid_learning_log.jsonl`
@@ -369,6 +333,7 @@ result = processor.process_user_message(
 **Problem**: System generates glyphs but they don't show in UI.
 
 **Check**:
+
 1. Is `st.session_state['new_glyphs_this_session']` being populated?
 2. Is the sidebar section expanded?
 
@@ -382,13 +347,12 @@ if 'new_glyphs_this_session' in st.session_state:
 ```text
 ```
 
-
-
 ### Learning Not Happening
 
 **Problem**: No lexicon updates, no pattern detection.
 
 **Check**:
+
 1. Verify `hybrid_learner` initializes: check logs
 2. Verify signals are extracted: check `debug_signals` in UI
 3. Verify learning functions are called
@@ -403,28 +367,29 @@ if 'new_glyphs_this_session' in st.session_state:
 ```text
 ```
 
-
-
-
 ## Next Steps
 
 ### Phase 1: Validation (Already Done)
+
 - ✅ Poetry processing created base glyphs
 - ✅ Adaptive dimensions working
 - ✅ Hybrid processor integrated
 
 ### Phase 2: Live Testing (Current)
+
 - 🔄 Real conversations generating glyphs
 - 🔄 User feedback on glyph quality
 - 🔄 Pattern threshold tuning
 
 ### Phase 3: Enhancement (Upcoming)
+
 - Database persistence of glyphs
 - Per-user glyph recommendations
 - Glyph usage analytics
 - Visual glyph exploration interface
 
 ### Phase 4: Scale (Future)
+
 - Community glyph discovery
 - Cross-user pattern learning
 - Glyph marketplace/sharing
@@ -476,9 +441,6 @@ if 'new_glyphs_this_session' in st.session_state:
     │  "✨ Glyphs Discovered..."      │
     └────────────────────────────────┘
 ```
-
-
-
 
 ## Files Reference
 

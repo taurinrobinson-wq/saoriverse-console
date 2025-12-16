@@ -14,6 +14,7 @@
 ✅ **Offline-First Sync** - Messages queue when offline, auto-sync when online
 ✅ **Settings Dashboard** - Preferences, conversation management, privacy controls
 ✅ **Streamlined UI** - Bottom tab navigation (Chat, Settings) with minimal cognitive load
+
 ##
 
 ## Project Structure
@@ -73,11 +74,13 @@ Manages all local data using `@react-native-async-storage/async-storage`.
 ```text
 ```text
 ```
+
 fp_conversations         # All conversations and messages
 fp_memory_capsules      # Relational context snapshots
 fp_user_prefs           # User preferences (theme, notifications, etc)
 fp_sync_queue           # Messages queued during offline
 fp_onboarding_complete  # Onboarding completion marker
+
 ```
 
 
@@ -116,7 +119,6 @@ Handles all backend communication with prosody parsing and offline detection.
 ```text
 ```
 
-
 ##
 
 #### `SyncService.js`
@@ -132,6 +134,7 @@ Implements offline-first sync with listener pattern for UI updates.
 - `getSyncStatus()` - Current sync state
 - `onSyncStatusChange(callback)` - Subscribe to sync events
   - Fires: `{ syncing, syncedCount, errors?, queuedMessages }`
+
 ##
 
 ### 2. **Screen Components**
@@ -158,6 +161,7 @@ Main chat interface with real-time message display and prosody rendering.
 4. Response displayed with prosody metadata
 5. Memory capsule created (every 5 messages)
 6. All persisted to AsyncStorage
+
 ##
 
 #### `OnboardingScreen.js`
@@ -178,6 +182,7 @@ Main chat interface with real-time message display and prosody rendering.
 - Stores preferences to AsyncStorage
 - Marks onboarding complete
 - Navigates to main app on completion
+
 ##
 
 #### `SettingsScreen.js`
@@ -192,6 +197,7 @@ User preferences, conversation management, and privacy controls.
 4. **Privacy & Security** - Info card, links to policies
 5. **About** - Version, backend info
 6. **Danger Zone** - Clear all data (with confirmation)
+
 ##
 
 ### 3. **Component Components**
@@ -216,15 +222,13 @@ Displays individual messages with optional prosody metadata.
 ```text
 ```
 
-
-
-
 **Rendering:**
 
 - User messages: right-aligned, green background
 - Assistant messages: left-aligned, gray background
 - Prosody metadata: emotion emoji + confidence, glyph symbols, tone
 - Timestamp in subtle text below message
+
 ##
 
 #### `ChatInput.js`
@@ -238,6 +242,7 @@ Enhanced message input with multi-line support and sending state.
 - Disabled state management
 - Auto-focus optimizations
 - Accessibility support
+
 ##
 
 ## Data Flow Architecture
@@ -261,8 +266,6 @@ ChatScreen.handleSendMessage()
 ```text
 ```text
 ```
-
-
 
 ### Offline Sync Flow
 
@@ -289,8 +292,6 @@ SyncService.performSync() triggered
 ```text
 ```
 
-
-
 ##
 
 ## Installation & Setup
@@ -309,8 +310,6 @@ npm install -g expo-cli
 ```text
 ```text
 ```
-
-
 
 ### Quick Start
 
@@ -339,9 +338,6 @@ npm start
 ```text
 ```
 
-
-
-
 ### Environment Setup
 
 ```bash
@@ -354,7 +350,6 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 ```text
 ```text
 ```
-
 
 ##
 
@@ -379,8 +374,6 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 
 ```text
 ```
-
-
 
 ##
 
@@ -412,6 +405,7 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 - [ ] **Share Feature** - Share conversations securely
 - [ ] **Accessibility** - Full VoiceOver/TalkBack support
 - [ ] **Performance** - Optimize list rendering, reduce bundle size
+
 ##
 
 ## Testing Checklist
@@ -441,6 +435,7 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 - [ ] App backgrounded during sync
 - [ ] Device offline for extended period
 - [ ] Low storage conditions
+
 ##
 
 ## Troubleshooting
@@ -462,8 +457,6 @@ ipconfig getifaddr en0  # macOS
 ```text
 ```
 
-
-
 **"AsyncStorage not working"**
 
 ```bash
@@ -478,9 +471,6 @@ rm -rf node_modules
 ```text
 ```
 
-
-
-
 **"Navigation not working"**
 
 ```bash
@@ -492,8 +482,6 @@ npm install @react-navigation/native @react-navigation/bottom-tabs
 expo start -c
 ```
 
-
-
 ##
 
 ## Developer Notes
@@ -504,6 +492,7 @@ expo start -c
 - **Accessibility**: Components designed with VoiceOver compatibility
 - **Performance**: Message list virtualization ready (FlatList)
 - **Privacy**: No analytics by default; all data local unless explicitly shared
+
 ##
 
 ## Files Modified/Created This Session
@@ -525,6 +514,7 @@ expo start -c
 **Existing Files Updated:**
 
 - None breaking; legacy `MessageOverlay.js` preserved
+
 ##
 
 ## Deployment Guide (Coming Next Phase)
@@ -539,6 +529,7 @@ See `Offshoots/FirstPerson-Mobile/FirstPerson-Mobile.md` for MVP spec.
 4. Submit to TestFlight / Play Store
 5. Monitor for crash reports
 6. Iterate on user feedback
+
 ##
 
 **Status**: ✅ MVP Core Complete - Ready for Alpha Testing

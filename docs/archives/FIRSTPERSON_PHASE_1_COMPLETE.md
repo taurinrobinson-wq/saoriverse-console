@@ -42,9 +42,6 @@ User Input
 User Response (with metadata)
 ```
 
-
-
-
 ### Key Features
 
 ✅ **Lightweight Design** - No heavy NLP, fast startup
@@ -93,9 +90,6 @@ resp6 = orch.handle_conversation_turn("I want to help her more.")
 # → (different framing, no repetition, persisted to Supabase)
 ```
 
-
-
-
 ### Code Inventory
 
 **Modules (6 files, ~1,980 lines)**
@@ -139,6 +133,7 @@ With Phase 1 complete, the next phase (Emotional Attunement) can:
 - **Phase 2.3: Repair Module** - Correct misunderstandings
 
 Each will integrate into the orchestrator following the same lightweight pattern.
+
 ##
 
 **Status:** Phase 1 = COMPLETE ✅

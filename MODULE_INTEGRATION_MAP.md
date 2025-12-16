@@ -24,12 +24,11 @@ def handle_response_pipeline(user_input, context):
 ```text
 ```
 
-
 ##
 
 ## Imports Needed (Exact)
 
-### In response_handler.py or new integrated_pipeline.py:
+### In response_handler.py or new integrated_pipeline.py
 
 ```python
 
@@ -62,8 +61,6 @@ from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtoco
 
 ```text
 ```
-
-
 
 ##
 
@@ -104,7 +101,6 @@ class SessionState:
 ```text
 ```
 
-
 ##
 
 ## Method Call Chain (Data Flow)
@@ -127,9 +123,6 @@ consent_prompt = build_consent_prompt(risk_level)
 
 ```text
 ```
-
-
-
 
 ### 2. SIGNAL DETECTION
 
@@ -154,8 +147,6 @@ poetry_signals = poetry_extractor.extract_signals(user_input)
 ```text
 ```
 
-
-
 ### 3. ARCHETYPE MATCHING
 
 ```python
@@ -176,9 +167,6 @@ best_archetype = archetype_library.get_best_match(
 ```text
 ```
 
-
-
-
 ### 4. RESPONSE GENERATION
 
 ```python
@@ -198,8 +186,6 @@ if not response:
 ```text
 ```
 
-
-
 ### 5. SAFETY WRAPPING
 
 ```python
@@ -215,9 +201,6 @@ if is_sensitive:
 
 ```text
 ```
-
-
-
 
 ### 6. PRIVACY ENCODING
 
@@ -237,8 +220,6 @@ encoded = encoding.encode_conversation(
 ```text
 ```text
 ```
-
-
 
 ### 7. LEARNING
 
@@ -273,8 +254,6 @@ if is_end_of_day:
 ```text
 ```
 
-
-
 ##
 
 ## File Locations (Import Paths)
@@ -297,6 +276,7 @@ if is_end_of_day:
 | Anonymization | `src/emotional_os_safety/anonymization_protocol.py` | `from emotional_os_safety.anonymization_protocol import AnonymizationProtocol` |
 | Risk Classification | `src/emotional_os_safety/sanctuary_handler.py` | `from emotional_os_safety.sanctuary_handler import classify_risk` |
 | Conversation Memory | `src/emotional_os_glyphs/conversation_memory.py` | `from emotional_os_glyphs.conversation_memory import ConversationMemory` |
+
 ##
 
 ## Database Schema Changes Needed
@@ -366,7 +346,6 @@ ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
 ```text
 ```
 
-
 ##
 
 ## Configuration Needed
@@ -415,8 +394,6 @@ ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
 ```text
 ```
 
-
-
 ##
 
 ## Error Handling & Fallbacks
@@ -449,7 +426,6 @@ except Exception as e:
 ```text
 ```text
 ```
-
 
 ##
 
@@ -491,8 +467,6 @@ def test_full_request_pipeline(): ...
 ```text
 ```
 
-
-
 ##
 
 ## Deployment Checklist
@@ -509,11 +483,12 @@ def test_full_request_pipeline(): ...
 - [ ] Deploy to canary (10% users)
 - [ ] Monitor metrics
 - [ ] Scale to 100%
+
 ##
 
 ## Monitoring & Metrics
 
-### Track These Per-Session:
+### Track These Per-Session
 
 ```python
 metrics = {
@@ -531,9 +506,7 @@ metrics = {
 ```text
 ```
 
-
-
-### Track These Per-Day:
+### Track These Per-Day
 
 ```python
 

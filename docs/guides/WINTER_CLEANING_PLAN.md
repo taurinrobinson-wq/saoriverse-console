@@ -3,6 +3,7 @@
 ## Status: IN PROGRESS
 
 This document outlines the comprehensive reorganization of root-level Python files into appropriate directories for better project maintainability.
+
 ##
 
 ## Analysis of Root Python Files (30 files)
@@ -13,6 +14,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `main_v2.py` - Primary Streamlit app entry point (~736 lines)
 
 **Action**: Keep in root. These are the application entry points.
+
 ##
 
 ### Category 2: CORE GLYPH SYSTEM (moved to emotional_os/glyphs/) ✅ **SHIMS EXIST**
@@ -27,6 +29,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 
 - `glyph_generator.py` - Already a shim, leave as-is ✅
 - Move others to: `tools/glyph_testing/` or `emotional_os/glyphs/`
+
 ##
 
 ### Category 3: GLYPH GENERATION PHASES (Legacy phase infrastructure)
@@ -40,6 +43,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `phase_modulator.py`
 
 **Action**: Move to `archive/phase_infrastructure/` (historical but referenced in code)
+
 ##
 
 ### Category 4: ANALYSIS & REPORTING TOOLS
@@ -50,6 +54,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `evolving_glyph_integrator.py` - Glyph evolution analysis
 
 **Action**: Move to `tools/analysis/`
+
 ##
 
 ### Category 5: DOCUMENT PROCESSING & VIEWERS
@@ -59,6 +64,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `docx_web_viewer.py` - Web-based DOCX viewer
 
 **Action**: Move to `tools/document_processing/` or keep in root if used frequently
+
 ##
 
 ### Category 6: RESPONSE SYSTEM (Likely refactored into modules/)
@@ -70,6 +76,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `tone_adapters.py` - Tone adaptation
 
 **Action**: These should be imported from `emotional_os/` modularization or moved to `src/response_system/`
+
 ##
 
 ### Category 7: RELATIONAL & MEMORY SYSTEMS
@@ -77,6 +84,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `relational_memory.py` - Relational memory implementation
 
 **Action**: Move to `src/memory_systems/` or integrate into main modules
+
 ##
 
 ### Category 8: TESTING & DEBUGGING
@@ -86,6 +94,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `sprint5_integration.py` - Sprint integration testing
 
 **Action**: Move to `tests/integration/`
+
 ##
 
 ## Reorganization Plan
@@ -112,11 +121,13 @@ archive/phase_infrastructure/
 ```text
 ```text
 ```
+
 tools/analysis/
 ├── gate_distribution_analyzer.py
 ├── generate_scenario_report.py
 ├── symbolic_tagger.py
 └── evolving_glyph_integrator.py
+
 ```
 
 
@@ -140,11 +151,13 @@ tools/document_processing/
 ```text
 ```text
 ```
+
 tools/glyph_testing/
 ├── glyph_response_helpers.py
 ├── glyph_response_templates.py
 ├── glyph_conversation_test_harness.py
 ├── glyph_effectiveness_validator.py
+
 ```
 
 

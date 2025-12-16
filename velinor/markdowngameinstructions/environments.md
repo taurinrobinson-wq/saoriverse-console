@@ -1,6 +1,7 @@
 # Velinor Environments
 
 ## Natural Zones
+
 - **Desert of Forgotten Resonance**
   Sand dunes bury empathy pylons and glyph stones. Heat haze shimmers with faint echoes.
 - **Swamp of Soft Remembrance**
@@ -13,6 +14,7 @@
   Nature overtakes ruins, trees sprouting through collapsed towers. Pollution has faded, life thrives.
 
 ## Urban/Man-Made Zones
+
 - **Ruined Market District**
   Collapsed stalls and leaning skyscrapers frame the player’s entry into Saonyx.
 - **Military Base Ruins**

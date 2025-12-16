@@ -9,8 +9,6 @@ npm install --legacy-peer-deps
 ```text
 ```
 
-
-
 Then visit `http://localhost:3000`
 
 ## What You'll See
@@ -26,10 +24,8 @@ Show: Animated beautiful homepage
 ```text
 ```
 
-
-
-
 **Visual Elements**:
+
 - 🌊 Animated background orbs (floating in and out)
 - 🧠 Bouncing brain emoji in circle
 - ✨ Gradient text "FirstPerson"
@@ -46,11 +42,10 @@ Time: Interactive experience
 ```text
 ```
 
-
-
 **Try These Actions**:
 
 #### A. Record Voice Message
+
 1. Click "🎤 Start Recording" button
 2. Button pulses with animation
 3. Speak your message
@@ -59,6 +54,7 @@ Time: Interactive experience
 6. Message appears in chat
 
 #### B. Type Message
+
 1. Click text input field
 2. Input smoothly scales (1.02x) on focus
 3. Type your message
@@ -68,6 +64,7 @@ Time: Interactive experience
 7. Response appears as gray bubble
 
 #### C. Dance Mode (If Excited)
+
 1. Talk about something amazing/exciting
 2. If response contains: amazing, awesome, wonderful, fantastic, love, beautiful...
 3. 🎉 Celebration animations trigger!
@@ -78,6 +75,7 @@ Time: Interactive experience
 8. Duration: ~2-3 seconds then fades
 
 #### D. Play Response Audio
+
 1. Look for "🔊 Play" button below responses
 2. Click it
 3. Audio plays (if synthesized)
@@ -93,28 +91,29 @@ Time: Configuration interface
 ```text
 ```
 
-
-
-
 **Try These Controls**:
 
 #### Model Selection
+
 - Click each button: orca-mini, llama2, mistral, neural-chat
 - Selected model highlighted in indigo/blue gradient
 - Your selection persists
 
 #### Dance Mode Toggle
+
 - Click toggle button on right side
 - Switches between on/off state
 - Shows confirmation message
 
 #### Voice Sliders
+
 - Drag "Pitch" slider: 0.5x to 2.0x (affects voice tone)
 - Drag "Rate" slider: 100-300 WPM (speech speed)
 - Drag "Volume" slider: 0-100% (output level)
 - All sliders smooth and interactive
 
 ### 4. Navigation
+
 - Click back arrow in settings → returns to chat
 - Click settings icon in chat header → goes to settings
 - Link to home from header (FirstPerson text)
@@ -122,12 +121,14 @@ Time: Configuration interface
 ## Animation Effects to Watch
 
 ### 🎬 Page Animations
+
 - [ ] Landing page fades in with staggered elements
 - [ ] Feature cards slide up one by one
 - [ ] Button arrow bounces continuously
 - [ ] Particles float gently around edges
 
 ### 💬 Chat Animations
+
 - [ ] Your message bubble slides up and fades in
 - [ ] AI response bubble appears smoothly
 - [ ] Loading dots bounce in sequence
@@ -135,12 +136,14 @@ Time: Configuration interface
 - [ ] Send button scale on click
 
 ### 🎙️ Recording Animation
+
 - [ ] Recording button pulses while active
 - [ ] Status text updates smoothly
 - [ ] Input disabled during processing
 - [ ] Completion feedback smooth
 
 ### 💃 Dance Mode (The Wow Factor!)
+
 - [ ] 12 confetti emojis burst in circles
 - [ ] Hearts float upward and fade
 - [ ] 3 rings pulse outward simultaneously
@@ -161,22 +164,26 @@ Time: Configuration interface
 ## Browser DevTools Tips
 
 ### View Animations
+
 1. Open DevTools (F12)
 2. Go to Animations panel
 3. Interact with UI to see all animations
 
 ### Inspect Components
+
 1. Open Elements tab
 2. Hover over animated elements
 3. See Tailwind classes applied
 4. Watch computed styles change
 
 ### Performance Monitor
+
 1. Open Console
 2. Type: `performance.measure()`
 3. Check Frame rate (should be 60fps)
 
 ### Network Tab
+
 - Watch API calls in real-time
 - Check response times
 - See message payload structure
@@ -200,8 +207,6 @@ Time: Configuration interface
 ```text
 ```text
 ```
-
-
 
 ### Recording Process
 
@@ -228,9 +233,6 @@ Time: Configuration interface
 ```text
 ```
 
-
-
-
 ### Excitement Detection
 
 ```
@@ -246,28 +248,30 @@ Time: Configuration interface
 ```text
 ```
 
-
-
 ## Settings Customization
 
 ### Try These Configurations
 
 **Configuration 1: High Pitched, Fast**
+
 - Pitch: 2.0x (very high)
 - Rate: 300 WPM (very fast)
 - Volume: 100% (loudest)
 
 **Configuration 2: Deep, Slow**
+
 - Pitch: 0.5x (very low)
 - Rate: 100 WPM (slow)
 - Volume: 50% (moderate)
 
 **Configuration 3: Default**
+
 - Pitch: 1.0x (normal)
 - Rate: 150 WPM (medium)
 - Volume: 90% (good volume)
 
 **Configuration 4: Whisper**
+
 - Pitch: 1.2x (slightly high)
 - Rate: 120 WPM (slow, deliberate)
 - Volume: 40% (quiet, intimate)
@@ -283,9 +287,6 @@ User: "Tell me something amazing!"
 ```text
 ```
 
-
-
-
 ### Scenario 2: Curious Question
 
 ```
@@ -293,8 +294,6 @@ User: "How does AI work?"
 ```text
 ```text
 ```
-
-
 
 ### Scenario 3: Excited Reaction
 
@@ -305,9 +304,6 @@ User: "That's fantastic!"
 ```text
 ```
 
-
-
-
 ### Scenario 4: Voice Testing
 
 ```
@@ -317,8 +313,6 @@ User: "That's fantastic!"
 ```text
 ```text
 ```
-
-
 
 ## Performance Checklist
 
@@ -357,9 +351,6 @@ User: "That's fantastic!"
 
 ```text
 ```
-
-
-
 
 ### Component Relationships
 
@@ -410,8 +401,6 @@ App Root
 ```text
 ```
 
-
-
 ## Fun Things to Try
 
 1. **Rainbow Messages**: Type long paragraphs to see word-wrapping
@@ -428,24 +417,28 @@ App Root
 ## Troubleshooting
 
 ### Animation Not Smooth?
+
 - Close other browser tabs
 - Check Frame rate in DevTools
 - Try Chrome instead of Firefox
 - Disable browser extensions
 
 ### Buttons Not Responding?
+
 - Check DevTools console for errors
 - Clear browser cache (Ctrl+Shift+Del)
 - Hard refresh page (Ctrl+Shift+R)
 - Check microphone permissions
 
 ### Animations Not Playing?
+
 - Check browser compatibility (Chrome v90+)
 - Verify GPU acceleration is enabled
 - Try incognito/private browsing
 - Check DevTools performance tab
 
 ### Text Input Lag?
+
 - Close DevTools (can slow things down)
 - Check CPU usage
 - Clear browser history
@@ -454,12 +447,14 @@ App Root
 ## Share & Show Off
 
 ### Screenshots
+
 - Home page with animations stopped
 - Chat with message bubbles
 - Settings with all controls
 - Dance mode in action (capture sequence)
 
 ### Screen Recording
+
 - Show the landing page entrance
 - Record a full chat interaction
 - Capture dance mode celebration
@@ -481,16 +476,16 @@ Watch the beautiful animations as I interact:
 
 ```
 
-
-
 ## Next Steps
 
 After exploring the UI:
+
 1. Start Phase 3 - Backend integration
 2. Connect to FastAPI server
 3. Test with real AI responses
 4. Integrate emotion analysis
 5. Deploy to Digital Ocean
+
 ##
 
 **Enjoy exploring the beautiful FirstPerson web app!** 🎉✨

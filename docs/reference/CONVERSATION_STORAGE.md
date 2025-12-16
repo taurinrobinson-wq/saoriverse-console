@@ -5,6 +5,7 @@ This document describes the new persistent conversation storage system for First
 ## Overview
 
 The system now supports:
+
 1. **Persistent Conversation Storage** - Conversations are saved to Supabase/database
 2. **Auto-Naming** - Conversations are automatically named based on first message context
 3. **Conversation Sidebar** - Previous conversations listed and selectable in sidebar
@@ -55,9 +56,8 @@ Run the SQL migration in Supabase:
 ```text
 ```
 
-
-
 The schema creates:
+
 - `conversations` table - stores full conversations with metadata
 - `conversation_metadata` table - audit trail of changes
 - Automatic triggers for timestamp management
@@ -76,17 +76,12 @@ url = "https://your-project.supabase.co"
 ```text
 ```
 
-
-
-
 ### 3. Run the Application
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ## Features
 
@@ -104,12 +99,10 @@ title = generate_auto_name("I've been feeling anxious about work")
 ```text
 ```
 
-
-
-
 ### Managing Conversations
 
 In the sidebar:
+
 - 📚 **Previous Conversations** - Lists all saved conversations
 - 💬 - Click to load a conversation
 - ✏️ - Rename a conversation
@@ -147,8 +140,6 @@ success, msg = manager.rename_conversation("conv-id-123", "New Title")
 ```text
 ```
 
-
-
 ## Data Structure
 
 ### Conversation Storage Format
@@ -182,12 +173,10 @@ success, msg = manager.rename_conversation("conv-id-123", "New Title")
 ```text
 ```
 
-
-
-
 ## Session State Management
 
 Key session state variables:
+
 - `current_conversation_id` - Active conversation UUID
 - `conversation_title` - Current conversation title
 - `conversation_manager` - ConversationManager instance
@@ -200,6 +189,7 @@ Key session state variables:
 ### Conversations not saving
 
 1. **Check Supabase configuration**
+
    ```bash
    # Verify secrets are loaded
    python -c "import streamlit as st; print(st.secrets.get('supabase'))"
@@ -222,6 +212,7 @@ Key session state variables:
 ### Auto-naming not working
 
 If `generate_auto_name()` returns "New Conversation":
+
 1. Check if first message is empty
 2. Verify NLP module is available (spaCy, NLTK)
 3. Check logs for errors
@@ -236,9 +227,6 @@ To migrate existing conversation history:
 
 # Contact development team for migration support
 ```
-
-
-
 
 ## Performance Considerations
 

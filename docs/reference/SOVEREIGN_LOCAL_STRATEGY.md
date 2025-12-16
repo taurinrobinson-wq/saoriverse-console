@@ -751,6 +751,7 @@ SOVEREIGN LOCAL MODE - COMPLETE IMPLEMENTATION
 SOVEREIGNTY & SAFETY
 
 When people share vulnerable moments about their life:
+
 - Their losses, their fears, their shame
 - Their broken relationships, health struggles
 - Their suicidal ideation, their trauma

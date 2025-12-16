@@ -14,6 +14,7 @@ This document outlines what you need to build to complete the web version.
 | Stats Display | ❌ Not Started | 🟠 Medium | 30 min |
 | Glyph System | ❌ Not Started | 🟡 Low | 2-3 hrs |
 | Save/Load | ❌ Not Started | 🟡 Low | 1-2 hrs |
+
 ##
 
 ## 🎯 Task 1: Implement GameScene Component (HIGH PRIORITY)
@@ -23,7 +24,9 @@ This document outlines what you need to build to complete the web version.
 **Estimated Time**: 1-2 hours
 
 ### What It Should Do
+
 Display the current game state with:
+
 1. **Background Image** - Story location visual
 2. **Story Text** - Current passage text from backend
 3. **NPC Section** - Portrait + dialogue
@@ -32,6 +35,7 @@ Display the current game state with:
 6. **Stats Panel** - Player stats display
 
 ### Reference Implementation
+
 See `velinor_app.py` (Streamlit version) for how these are laid out.
 
 ### Suggested Structure
@@ -68,8 +72,6 @@ export function GameScene({
 ```sql
 ```
 
-
-
 ### Data You'll Receive From Backend
 
 ```typescript
@@ -100,8 +102,6 @@ export function GameScene({
 
 ```text
 ```
-
-
 
 ##
 
@@ -189,8 +189,6 @@ export function useGame() {
 ```text
 ```
 
-
-
 ### Wire It Into GameScene
 
 ```tsx
@@ -206,8 +204,6 @@ export function GameScene() {
 
 ```text
 ```
-
-
 
 ##
 
@@ -233,8 +229,6 @@ export function GameScene() {
 ```text
 ```text
 ```
-
-
 
 ### Free Text Input
 
@@ -268,8 +262,6 @@ const [input, setInput] = useState('');
 
 ```text
 ```
-
-
 
 ##
 
@@ -317,7 +309,6 @@ const [input, setInput] = useState('');
 ```text
 ```
 
-
 ##
 
 ## 🎯 Task 5: Stats Display (MEDIUM PRIORITY)
@@ -353,16 +344,12 @@ export function StatsPanel({ stats: PlayerStats }) {
 ```text
 ```
 
-
-
-
 ### Usage
 
 ```tsx
 ```text
 ```text
 ```
-
 
 ##
 
@@ -372,13 +359,16 @@ export function StatsPanel({ stats: PlayerStats }) {
 **Estimated Time**: 2-3 hours
 
 ### What It Shows
+
 - Grid of unlocked glyphs
 - Emotional resonance for each
 - Interactive glyph details
 - "Glyph Journal" view
 
 ### Reference
+
 See FirstPerson system output in backend responses - includes glyph data.
+
 ##
 
 ## 🎯 Task 7: Save/Load System (LOW PRIORITY)
@@ -405,8 +395,6 @@ const loadGame = useCallback(async (saveId: string) => {
 ```text
 ```
 
-
-
 ##
 
 ## 📦 Implementation Order
@@ -427,6 +415,7 @@ const loadGame = useCallback(async (saveId: string) => {
    - [ ] Task 6: Glyph system (if desired)
    - [ ] Task 7: Save/load (if desired)
    - [ ] Bug fixes & optimization
+
 ##
 
 ## 🔧 Files to Create/Modify
@@ -450,8 +439,6 @@ velinor-web/
 ```text
 ```
 
-
-
 ### Files to Modify
 
 ```
@@ -468,7 +455,6 @@ velinor-web/
 
 ```
 
-
 ##
 
 ## 💡 Development Tips
@@ -478,19 +464,22 @@ velinor-web/
 3. **Use React DevTools** - Debug state and props
 4. **Reference Streamlit** - The Streamlit version is your visual guide
 5. **Commit often** - Push to git frequently
+
 ##
 
 ## 🆘 If You Get Stuck
 
-1. **Backend issues**: Check `/velinor_api.py` and FastAPI docs at http://localhost:8000/docs
+1. **Backend issues**: Check `/velinor_api.py` and FastAPI docs at <http://localhost:8000/docs>
 2. **Component issues**: Reference `/velinor_app.py` for UI logic
 3. **Data structure**: Check `/velinor/engine/core.py` for state format
 4. **Story data**: See `/velinor/stories/sample_story.json` for structure
+
 ##
 
 ## ✅ Definition of Done
 
 When all tasks are complete, you should have:
+
 - ✅ A playable Next.js web version
 - ✅ Full feature parity with Streamlit version
 - ✅ Connected to Python backend
@@ -503,6 +492,7 @@ When all tasks are complete, you should have:
 
 **Total Estimated Work**: 8-12 hours for core features
 **With polish & extras**: 15-20 hours
+
 ##
 
 Ready to start? Open `velinor-web/src/components/GameScene.tsx` and begin! 🚀

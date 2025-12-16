@@ -17,9 +17,6 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
 }
 ```
 
-
-
-
 ### New Structure (Word-Centric)
 
 ```json
@@ -40,9 +37,6 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
   }
 }
 ```
-
-
-
 
 ## Benefits
 
@@ -72,9 +66,6 @@ if word_data:
     # Direct lookup!
 ```
 
-
-
-
 ### 2. Update parse_input() function
 
 ```python
@@ -90,9 +81,6 @@ def parse_input(user_message: str):
 
             # Use this data to select appropriate glyph/voltage
 ```
-
-
-
 
 ### 3. Create Query Functions
 
@@ -115,9 +103,6 @@ def top_emotional_words(n=20):
                   reverse=True)[:n]
 ```
 
-
-
-
 ## File Locations
 
 - **New lexicon**: `emotional_os/lexicon/word_centric_emotional_lexicon.json`
@@ -138,9 +123,11 @@ def top_emotional_words(n=20):
 **Total words in lexicon**: 457
 
 **From transcript**: 457 words
+
 - HOLD (568x), SACRED (373x), EXACTLY (367x), PRESENT (317x), ECHO (212x), etc.
 
 **From Gutenberg**: 0 words
+
 - Classic emotional language with deep literary examples
 
 **Top 10 words**:
@@ -162,6 +149,7 @@ def top_emotional_words(n=20):
 2. Check TRANSCRIPT_ANALYSIS_INSIGHTS.md for emotional vocabulary recommendations
 3. Integrate new Glyphs that leverage high-frequency emotional words
 4. A/B test response quality with word-centric emotional recognition
+
 ##
 
 Generated:

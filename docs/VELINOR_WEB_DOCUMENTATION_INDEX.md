@@ -5,27 +5,34 @@
 Start here based on what you need:
 
 ### 🚀 I Just Want to Run It
+
 → **`VELINOR_WEB_QUICK_START.md`** - 3 steps, 5 minutes
 
 ### 📋 I Want Detailed Setup Instructions
+
 → **`RUN_VELINOR_WEB.md`** - Full guide with troubleshooting
 
 ### ✅ I Want to Know What Was Built
+
 → **`VELINOR_WEB_SETUP_COMPLETE.md`** - Architecture, checklist, status
 
 ### 🏗️ I Want Architecture Details
+
 → **`VELINOR_WEB_MIGRATION.md`** - Why we switched, how it works
+
 ##
 
 ## What's in This Stack?
 
 ### Backend: FastAPI (`velinor_api.py`)
+
 - REST API for game management
 - Session handling
 - Wraps VelinorTwineOrchestrator
 - Runs on `http://localhost:8000`
 
 ### Frontend: Next.js (`velinor-web/`)
+
 - React 18 + TypeScript
 - Splash screen with player name input
 - Game scene with overlays on background images
@@ -37,9 +44,9 @@ Start here based on what you need:
 ```text
 ```
 
-Frontend (http://localhost:3000)
+Frontend (<http://localhost:3000>)
     ↓ (HTTP)
-FastAPI Backend (http://localhost:8000)
+FastAPI Backend (<http://localhost:8000>)
     ↓ (Python)
 Velinor Game Engine
 
@@ -59,9 +66,6 @@ cd d:\saoriverse-console
 ```text
 ```
 
-
-
-
 **Terminal 2:**
 
 ```bash
@@ -70,11 +74,10 @@ cd d:\saoriverse-console\velinor-web
 ```text
 ```
 
-
-
 **Browser:** Open `http://localhost:3000`
 
 That's it! You should see the splash screen.
+
 ##
 
 ## Why This Works Better Than Streamlit
@@ -84,6 +87,7 @@ That's it! You should see the splash screen.
 ✅ **Animations** - Smooth hover effects, transitions
 ✅ **Custom Layout** - Not constrained to columns/expanders
 ✅ **Performance** - Lightweight React vs heavy Streamlit
+
 ##
 
 ## File Structure
@@ -124,8 +128,6 @@ d:\saoriverse-console\
 ```text
 ```
 
-
-
 ##
 
 ## Next Actions
@@ -134,6 +136,7 @@ d:\saoriverse-console\
 2. **Add Your Game Assets** - Copy images to `velinor-web/public/assets/`
 3. **Deploy to Production** - Push to git, Railway auto-deploys
 4. **Optional: Fix Linting Warnings** - Move inline styles to CSS files
+
 ##
 
 ## Key Endpoints
@@ -153,6 +156,7 @@ d:\saoriverse-console\
 
 - `/` - Splash screen (enter player name)
 - `/game/[sessionId]` - Game scene (play the game)
+
 ##
 
 ## Troubleshooting Quick Links
@@ -168,6 +172,7 @@ d:\saoriverse-console\
 
 **Button overlays not working?**
 → Check browser console (F12) for JavaScript errors
+
 ##
 
 ## Environment Configuration
@@ -178,10 +183,8 @@ d:\saoriverse-console\
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-
-
-
 Change this to your Railway backend domain for production.
+
 ##
 
 ## You're All Set! 🎉

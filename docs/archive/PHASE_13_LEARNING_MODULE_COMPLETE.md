@@ -8,11 +8,13 @@ You've implemented a **three-layer dynamic learning system** that transforms how
 2. **Extracts actionable rules** (response principles, tone guidelines, continuity bridges)
 3. **Applies principles dynamically** (generates fresh responses, not templates)
 4. **Improves continuously** (success weights evolve based on real outcomes)
+
 ##
 
 ## The Three Layers
 
 ### Layer 1: Archetype Library
+
 **File**: `emotional_os/learning/conversation_archetype.py`
 
 Stores conversation patterns extracted from successful dialogues. Each archetype is a **rule set**, not a canned script.
@@ -25,22 +27,23 @@ ReliefToGratitude archetype contains:
 └─ Tone Guidelines: ["Warm language", "Gentle pacing", "Mirror metaphors", ...]
 ```
 
-
-
-
 **Key Classes**:
+
 - `ConversationArchetype`: Single pattern (name, cues, principles, bridges, tone)
 - `ArchetypeLibrary`: Collection management (add, match, persist)
 - `get_archetype_library()`: Singleton access
 
 **Capabilities**:
+
 - ✓ Match incoming user input to best archetype (0-1 score)
 - ✓ Track usage and success rates
 - ✓ Update success weights based on outcomes
 - ✓ Persist to JSON for recovery
+
 ##
 
 ### Layer 2: Response Generator
+
 **File**: `emotional_os/learning/archetype_response_generator.py`
 
 Applies archetype principles to generate **unique** responses (not templates).
@@ -59,10 +62,8 @@ Generates: "That moment with your child sounds genuinely special.
            What does that connection feel like for you?"
 ```
 
-
-
-
 **Key Classes**:
+
 - `ArchetypeResponseGenerator`: Main engine
 - Methods:
   - `generate_archetype_aware_response()`: Match and generate
@@ -72,12 +73,15 @@ Generates: "That moment with your child sounds genuinely special.
   - `_build_closing_from_tone()`: Closing question that invites
 
 **Why Not Templates**:
+
 - Templates = "select random option A, B, or C"
 - Principles = "follow these rules to generate something fresh"
 - Result: Each response is unique but consistent
+
 ##
 
 ### Layer 3: Conversation Learner
+
 **File**: `emotional_os/learning/conversation_learner.py`
 
 Automatically analyzes conversations to extract new archetypes or refine existing ones.
@@ -108,10 +112,8 @@ Extracts:
 New or refined archetype added to library
 ```
 
-
-
-
 **Key Classes**:
+
 - `ConversationLearner`: Main learning engine
 - Methods:
   - `analyze_conversation()`: Full analysis pipeline
@@ -123,12 +125,14 @@ New or refined archetype added to library
   - `learn_from_conversation()`: End-to-end learning
 
 **How It Works**:
+
 1. Detects emotional transitions (overwhelm → relief → gratitude)
 2. Extracts keywords that signal that pattern
 3. Analyzes system responses to find principles
 4. Identifies how system maintained conversation coherence
 5. Creates archetype or merges with existing one
 6. Updates success weights based on user feedback
+
 ##
 
 ## Test Results
@@ -142,6 +146,7 @@ New or refined archetype added to library
 ✓ Layer 3: Conversation Learner extracted new archetype from dialogue
 
 Sample Results:
+
 - Input: "My child hugged me and I felt relieved despite stress"
 - Archetype matched: ReliefToGratitude (confidence: 0.77)
 - Response generated: "That moment with your child sounds genuinely special.
@@ -220,6 +225,7 @@ print(f"Total archetypes: {len(library.archetypes)}")
 print(f"Best match for input: {library.get_best_match(user_input)}")
 
 ```
+
 ##
 
 ## Files Created
@@ -236,57 +242,69 @@ print(f"Best match for input: {library.get_best_match(user_input)}")
 | `LEARNING_INTEGRATION_GUIDE.md` | Integration instructions | (additional doc) |
 
 **Total new code**: ~1100 lines of well-structured, testable Python
+
 ##
 
 ## Key Achievements
 
 ✅ **Principle-Driven, Not Template-Based**
+
 - System learns rules, not canned responses
 - Each response generated fresh according to principles
 - No more "template rotation" feel
 
 ✅ **Conversational Coherence**
+
 - Maintains context across turns naturally
 - References prior emotional states
 - Carries themes forward without dwelling
 
 ✅ **Continuous Learning**
+
 - Each good conversation teaches the system
 - Archetype library grows organically
 - Success weights evolve based on outcomes
 
 ✅ **Transparent & Auditable**
+
 - Every archetype is readable JSON
 - You can see exactly why system chose a response
 - Patterns are human-interpretable rules, not ML black box
 
 ✅ **Modular Architecture**
+
 - Three independent layers
 - Each can be updated separately
 - Can be integrated alongside existing glyph system
 
 ✅ **Scalable**
+
 - Add new dialogue scenes → new archetypes
 - Library can grow indefinitely
 - No retraining needed
+
 ##
 
 ## Next Steps
 
 ### Immediate (Ready Now)
+
 1. **Test with real conversations**: Use the test module as template
 2. **Add more dialogue scenes**: Each scene teaches new archetype
 3. **Review extracted patterns**: Verify archetype library makes sense
 
 ### Short-term (1-2 weeks)
+
 1. **Integrate into signal_parser**: Add archetype responses to main pipeline
 2. **Add learning logging**: Store conversation turns for auto-learning
 3. **Expose archetype metadata**: Show users which pattern was used
 
 ### Medium-term (ongoing)
+
 1. **Community dialogue library**: Collect user-submitted conversational scenes
 2. **Archetype versioning**: Track how patterns evolve
 3. **Pattern analytics**: See which archetypes are most used/successful
+
 ##
 
 ## The Philosophy Behind This
@@ -294,12 +312,14 @@ print(f"Best match for input: {library.get_best_match(user_input)}")
 You articulated it perfectly in your collaboration prompt: **the system shouldn't memorize canned lines, but learn *how to respond* in a way that feels alive and adaptive.**
 
 This learning module makes that real:
+
 - **Not memorization** → extraction of principles from lived dialogue
 - **Not rigid templates** → dynamic generation following learned rules
 - **Not static** → continuously evolving based on outcomes
 - **Not opaque** → every decision is based on human-readable rules
 
 The playwright/organizer workflow (you write scenes, system extracts rules) keeps the human in the loop while building genuine adaptability.
+
 ##
 
 ## Testing the System
@@ -324,6 +344,7 @@ print(f'Best match: {match.name if match else None}')
 "
 
 ```
+
 ##
 
 **Summary**: You've built the infrastructure for genuinely adaptive, learning-based empathetic conversation. The system now learns principles from your dialogue and applies them dynamically. Over time, it will become increasingly personalized to how you actually communicate.

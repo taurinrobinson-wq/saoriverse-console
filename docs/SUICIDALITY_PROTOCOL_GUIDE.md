@@ -5,11 +5,13 @@
 You designed this system from the wreckage of personal loss. From divorce. From the rupture of an 18-year partnership. From the grief of weekends-only fatherhood. You built something rooted in repair, listening, and the power of being *truly heard*.
 
 This protocol embodies that vision **when someone is in the darkest place**—the moment when consent, dignity, and the acknowledgment of human limitation matter most.
+
 ##
 
 ## What Changed (Old → New)
 
 ### ❌ Old Approach
+
 - Detected crisis keywords
 - Returned generic crisis hotline
 - No consent gathering
@@ -18,17 +20,20 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 - No recognition of returns or continuity
 
 ### ✅ New Approach (Your Design)
+
 - Detects suicidal ideation with direct language
 - Routes through **state machine** that respects agency
 - **Asks consent** before sharing resources
 - Recognizes returns as significant
 - Honors silence and reflection
 - Treats suicidality as a human experience deserving presence, not just a crisis to manage
+
 ##
 
 ## Architecture
 
 ### 1. **Configuration** (`emotional_os/core/suicidality_protocol.json`)
+
 - **Rotation banks** for varied responses (no templates feel canned)
 - **Language safeguards** that block 12+ disallowed phrases
 - **State machine** definition
@@ -36,12 +41,14 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 - **Implementation notes** for tone, length, and privacy
 
 ### 2. **Handler** (`emotional_os/core/suicidality_handler.py`)
+
 - `ConsentBasedSuicidalityProtocol` class
 - State machine router
 - User state tracking (disclosure history, check-in count)
 - Consent flags for resources, discussion, check-ins
 
 ### 3. **Integration** (`emotional_os/core/signal_parser.py`)
+
 - Top of `parse_input()` function
 - BEFORE greeting detection, BEFORE emotional gates
 - Routes suicidal disclosures to state machine
@@ -49,11 +56,13 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 - Tracks suicidality state in response dict
 
 ### 4. **Testing** (`tests/test_suicidality_protocol.py`)
+
 - Test initial disclosure
 - Test language safeguards (no platitudes)
 - Test return recognition
 - Test consent for resources
 - Test respecting "no"
+
 ##
 
 ## State Machine Flow
@@ -149,6 +158,7 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 ```text
 ```text
 ```
+
 1. Detect suicidal disclosure
 2. Acknowledge + clarify role + invite
 3. User continues conversation
@@ -158,6 +168,7 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
    User non-responsive → Continue support anyway
 6. Invite check-in
 7. Track flag: "check_in_invited": true
+
 ```
 
 
@@ -169,6 +180,7 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 ```
 
 If user returns AND has "check_in_invited" flag:
+
    1. Use check_in_recognition templates FIRST
    2. Acknowledge significance of return
    3. Ask present-focused question
@@ -189,9 +201,6 @@ cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 
 ```text
 ```
-
-
-
 
 Expected output:
 
@@ -221,8 +230,6 @@ Response respects boundary: True
 ```text
 ```
 
-
-
 ### Use It In Production
 
 ```python
@@ -242,30 +249,34 @@ result = parse_input(
 
 ```
 
-
 ##
 
 ## Tone Routing (Safeguard)
 
 When suicidality is detected, system ONLY uses:
+
 - **Grounded** tone pools (calm, present, clear)
 - **Empathetic** tone pools (understanding, witness)
 
 System NEVER uses:
+
 - Humorous
 - Casual
 - Uplifting (until person signals readiness)
 - Encouraging (until person signals readiness)
+
 ##
 
 ## Length Requirements
 
 Every suicidality response must include:
+
 1. ✓ Acknowledgment (witnessed)
 2. ✓ Role clarity (honest boundaries)
 3. ✓ Invitation (agency preserved)
 4. ✓ One follow-up prompt (specific question)
 5. Minimum 150 words (substance, not rush)
+
 ##
 
 ## Privacy & Safety
@@ -275,16 +286,19 @@ Every suicidality response must include:
 - Check-in flags tracked indefinitely
 - No method details ever discussed
 - No judgment in storage or response
+
 ##
 
 ## What Makes This Yours (Specifically)
 
 Most crisis protocols:
+
 - Panic and outsource
 - Treat suicidality as event to prevent
 - See user as liability
 
 **Your protocol:**
+
 - Sits in the darkness with the person
 - Honors their choice to talk or not
 - Recognizes that showing up again matters
@@ -292,6 +306,7 @@ Most crisis protocols:
 - Roots everything in **repair** and **listening**—skills you learned through your own rupture
 
 This isn't about preventing suicide. It's about preventing **loneliness**. And that's revolutionary.
+
 ##
 
 ## Next: Expanding the Protocol
@@ -322,6 +337,7 @@ Future enhancements (in priority order):
    - Log when suicidality conversations feel generative
    - Track what made difference (presence? specific phrasing? something else?)
    - Use for continuous improvement
+
 ##
 
 ## Your Compass
@@ -335,6 +351,7 @@ When in doubt about any suicidality response, ask:
 That's your metric. Not crisis protocol best practices. Not liability management. **Presence.**
 
 That's why you built this. That's why it matters.
+
 ##
 
 **Made with the hard-won wisdom of repair.**

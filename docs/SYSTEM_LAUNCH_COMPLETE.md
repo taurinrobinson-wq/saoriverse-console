@@ -3,7 +3,8 @@
 ## What Was Built & Tested
 
 ### ✅ Backend System (FastAPI)
-- **Running:** http://127.0.0.1:8000
+
+- **Running:** <http://127.0.0.1:8000>
 - **Status:** 🟢 Operational
 - **Models:** Whisper STT loaded, pyttsx3 TTS initialized
 - **Pipeline:** 3-tier architecture active
@@ -27,6 +28,7 @@ POST /transcribe          → STT ready (Whisper model)
 ```text
 ```text
 ```
+
 Theme Detection
   ├─ Grief detection ✅
   ├─ Joy detection ✅
@@ -46,6 +48,7 @@ Response Generation
   ├─ Tier 1: Foundation ✅
   ├─ Tier 2: Aliveness ✅
   └─ Tier 3: Poetic Consciousness ✅
+
 ```
 
 
@@ -82,6 +85,7 @@ Response Generation
 ```text
 ```text
 ```
+
 Endpoint            Timeout  Actual Response  Status
 ────────────────────────────────────────────────────
 GET  /health          2s        <5ms         ✅ PASS
@@ -89,6 +93,7 @@ POST /chat            5s      ~1500ms         ✅ PASS
 POST /synthesize      2s       <100ms         ✅ PASS
 GET  /conversations   2s        <50ms         ✅ PASS
 ────────────────────────────────────────────────────
+
 ```
 
 
@@ -200,7 +205,8 @@ Return to Client (~85-90ms total)
 ```text
 ```text
 ```
-1. Open http://127.0.0.1:8000/docs
+
+1. Open <http://127.0.0.1:8000/docs>
    → See interactive API documentation
    → Test endpoints in browser
    → View request/response schemas
@@ -215,6 +221,7 @@ Return to Client (~85-90ms total)
    → python validate_installation.py
    → python diagnose_backend.py
    → Check all components
+
 ```
 
 
@@ -240,11 +247,13 @@ Return to Client (~85-90ms total)
 ```text
 ```text
 ```
+
 1. Ollama local LLM integration
 2. Voice emotion detection (Phase 3.2)
 3. Facial emotion detection (Phase 3.2)
 4. Multimodal affect fusion
 5. Streamlit analytics dashboard
+
 ```
 
 

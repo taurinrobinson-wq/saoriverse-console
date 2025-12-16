@@ -3,6 +3,7 @@
 ## Overview
 
 The marketplace is the living heart of Velinor—a dynamic, interconnected community where every NPC is part of a larger sphere of influence. These eight characters form the emotional and mechanical foundation of NPC interaction in the early to mid-game.
+
 ##
 
 ## The Eight NPCs
@@ -43,6 +44,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Trust**: Shares memory of pre-collapse life, offers guardianship.
 - **High Observation**: Player notices his limp; he reveals an old injury from collapse.
 - **High Empathy**: He opens about losing family members, shares grief fragments.
+
 ##
 
 ### 2. Nima — The Guarded Flame
@@ -81,6 +83,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Empathy + Trust**: Reveals her child was lost to the Corelink collapse. This is her deepest wound.
 - **High Observation**: Player notices a locket she wears; it contains the face of a young child.
 - **Fractured Empathy**: She closes entirely. Her sphere (Sera, shrine keepers) becomes inaccessible.
+
 ##
 
 ### 3. Tovren the Cartwright
@@ -117,6 +120,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Observation**: He teaches player to read the market's rhythm, predicting shifts.
 - **Low Trust**: He dismisses the player as soft, cuts off help.
 - **High Empathy**: Unexpectedly, softens. Shares story of his family.
+
 ##
 
 ### 4. Sera the Herb Novice
@@ -153,6 +157,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Empathy**: She opens quickly, offers guidance, becomes an ally.
 - **Low Empathy**: She remains polite but distant, limits help.
 - **Pairing with Nima**: Their resonance amplifies. Treat Nima well, Sera softens further.
+
 ##
 
 ### 5. Dalen the Rusted Guide
@@ -190,6 +195,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Observation**: He respects caution, adjusts his approach.
 - **Low Narrative Presence**: He dismisses the player as timid, offers nothing.
 - **Pairing with Ravi/Nima**: Tension. Ravi fears Dalen's recklessness, Nima distrusts boldness.
+
 ##
 
 ### 6. Mariel the Weaver
@@ -226,6 +232,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Trust + Empathy**: She becomes guide to all other NPCs. Her sphere expands.
 - **High Resonance**: She reveals deep lore about Velinor and the Corelink.
 - **Betrayal of her trust**: She withdraws, but never harshly—just with disappointment.
+
 ##
 
 ### 7. Korrin the Gossip
@@ -262,6 +269,7 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 - **High Observation**: He shares real intelligence, becomes useful.
 - **High Trust**: Almost impossible with Korrin—he fundamentally doubts loyalty.
 - **Fractured with Merchants**: His rumors can damage NPC trust spheres.
+
 ##
 
 ### 8. Kaelen the Cloaked
@@ -310,6 +318,7 @@ Kaelen is the moral crossroads. The player can:
 - Kaelen is Drossel's lieutenant/scout.
 - Earning Kaelen's trust opens the path to Drossel's lair.
 - Defeating Drossel and recovering items allows player to restore item holders' trust.
+
 ##
 
 ## Dynamic Marketplace Mechanics
@@ -336,6 +345,7 @@ Each marketplace visit can feel fresh:
   - High Observation → Korrin shares intelligence
   - High Empathy → Sera offers ritual teaching
   - High Narrative Presence → Dalen proposes bold quest
+
 ##
 
 ## Marketplace Sphere Map (Visual Reference)

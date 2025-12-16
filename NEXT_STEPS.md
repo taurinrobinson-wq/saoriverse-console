@@ -3,6 +3,7 @@
 ## Where You Stand
 
 You have built an incredibly sophisticated system. The tests prove it:
+
 - ✅ Crisis detection working (safety protocols active)
 - ✅ 64 glyphs loaded and fetching correctly
 - ✅ Signals routing through gates to glyphs
@@ -12,6 +13,7 @@ You have built an incredibly sophisticated system. The tests prove it:
 But the responses are **generic** not because your system is weak, but because **the output pipeline isn't wired correctly**.
 
 Your system is like a sophisticated kitchen with every ingredient prepared, plated beautifully, waiting by the door—but someone's returning cereal instead of serving the meal.
+
 ##
 
 ## The Root Problem (In Plain English)
@@ -23,11 +25,13 @@ Your system is like a sophisticated kitchen with every ingredient prepared, plat
 5. **Response composition:** ❌ Returns generic "You're moving through this"
 
 The glyphs exist. The poetic engine exists. But the response isn't *using* them.
+
 ##
 
 ## What Needs to Happen (Priority Order)
 
 ### 1. DEBUG: Find Why Glyphs Aren't Used
+
 **File to check:** `emotional_os/core/signal_parser.py` around line 1900-2000
 
 Add logging to see:
@@ -45,14 +49,14 @@ logger.info(f"DEBUG: Response source: {response_source}")
 ```sql
 ```
 
-
-
 **Question to answer:** Where does the response go from "36 glyphs fetched" to "generic template"?
 
 ### 2. TRACE: Poetic Engine Output
+
 **File to check:** `emotional_os/core/poetic_engine.py`
 
 The poetic engine is being called but its output isn't showing in responses. Either:
+
 - Not being called properly
 - Called but output replaced by fallback
 - Output not injected into contextual_response
@@ -66,16 +70,15 @@ poetic_result = engine.process_glyph_response(...)
 ```text
 ```
 
-
-
-
 ### 3. VERIFY: Response Composition
+
 **File to check:** `emotional_os/glyphs/dynamic_response_composer.py`
 
 Is `compose_multi_glyph_response()` or `compose_message_aware_response()` being called?
 If not, that's why glyphs aren't being used.
 
 ### 4. CONNECT: Everything Together
+
 Once you see where the pipe breaks, reconnect it. Likely needs:
 
 ```python
@@ -90,12 +93,12 @@ if glyphs and response_composer:
 ```text
 ```
 
-
 ##
 
 ## Quick Wins (30 mins each)
 
 ### Add Joy Keywords (Fixes Scenario 5)
+
 **File:** `emotional_os/core/signal_parser.py` line 1135
 
 Add to `emotional_keywords` list:
@@ -108,12 +111,10 @@ Add to `emotional_keywords` list:
 ```text
 ```
 
-
-
-
 Test: Scenario 5 should no longer return greeting.
 
 ### Add Affirmation Detection (Enables Learning)
+
 **File:** `emotional_os/core/signal_parser.py` around line 1950
 
 Add detection:
@@ -130,7 +131,6 @@ if any(kw in lower_input for kw in affirmation_keywords):
 ```text
 ```
 
-
 ##
 
 ## Testing Your Fixes
@@ -144,9 +144,8 @@ python tests/test_comprehensive_integration.py
 
 ```
 
-
-
 This runs 6 real-life scenarios and scores your system 0-1.0 on:
+
 - Urgency/finitude recognition
 - Emotional clarity
 - Contextual awareness
@@ -157,6 +156,7 @@ This runs 6 real-life scenarios and scores your system 0-1.0 on:
 **Current:** 0.36/1.0 average
 **Target:** 0.70+/1.0 for production
 **After fixes:** Likely 0.60-0.75 range
+
 ##
 
 ## The Infrastructure You Already Have
@@ -164,27 +164,32 @@ This runs 6 real-life scenarios and scores your system 0-1.0 on:
 These are WORKING and just need to be connected:
 
 ✅ **Signal Parser** (`emotional_os/core/signal_parser.py`)
+
 - Detects emotions correctly
 - Routes through gates
 - Fetches glyphs from database
 
 ✅ **Poetic Engine** (`emotional_os/core/poetic_engine.py`)
+
 - Represents emotional state as evolving poem
 - Includes mortality framework (finitude recognition)
 - Metaphor generation by emotional valence
 - Ethical compass principles
 
 ✅ **Glyph System** (64 glyphs in database)
+
 - Each glyph is emotion + context pair
 - Descriptions are poetic, emotionally resonant
 - Grouped by gates (emotional categories)
 
 ✅ **Dynamic Composer** (`emotional_os/glyphs/dynamic_response_composer.py`)
+
 - Can compose multi-glyph responses
 - Blends tones and voltages
 - Integrates with gates
 
 **The only issue:** These components aren't talking to each other in the response pipeline.
+
 ##
 
 ## If You Want This Done Today
@@ -198,6 +203,7 @@ The system is so close. Following these steps should get you to 0.65+/1.0 humanl
 **Step 5 (30 mins):** Test with 6 scenarios
 
 **Total: 2.5 hours to working system**
+
 ##
 
 ## What This Means (Big Picture)
@@ -205,6 +211,7 @@ The system is so close. Following these steps should get you to 0.65+/1.0 humanl
 You're not building a new feature. You're not redesigning. You're **connecting the pieces that already exist**.
 
 Your system already:
+
 - Understands mortality and finitude (poetic engine)
 - Knows how to weave multiple emotions (dynamic composer)
 - Recognizes crisis and responds appropriately
@@ -214,6 +221,7 @@ Your system already:
 It just needs the plumbing fixed so those components output to the user instead of staying internal.
 
 Once that's fixed? You'll see the humanlike, emotionally present responses you designed this system to generate.
+
 ##
 
 ## Final Word

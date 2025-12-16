@@ -1,11 +1,13 @@
 # Velinor NPCs
 
 ## NPC Roles
+
 - **Mini-DMs**: Each NPC guides the player through dialogue, summarizing intent and asking clarifying questions.
 - **Tone Adaptation**: NPCs shift phrasing depending on solo vs. group play.
 - **Resonance Anchors**: NPCs embody fragments of Saonyx’s emotional infrastructure.
 
 ## Example NPC Personalities
+
 - **The Archivist**
   Speaks in riddles, summarizes player choices, asks: “Do you feel prepared for what you’ll uncover?”
 - **The Guard**

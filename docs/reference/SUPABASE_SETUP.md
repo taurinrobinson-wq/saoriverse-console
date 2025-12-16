@@ -16,12 +16,10 @@ cd /workspaces/saoriverse-console
 ```text
 ```
 
-
-
 ### Option B: Manual Setup via Supabase Dashboard
 
 1. **Go to Supabase Dashboard**
-   - URL: https://app.supabase.com/project/gyqzyuvuuyfjxnramkfq/sql/new
+   - URL: <https://app.supabase.com/project/gyqzyuvuuyfjxnramkfq/sql/new>
 
 2. **Create New Query**
    - Click "SQL Editor" in the left sidebar
@@ -34,6 +32,7 @@ cd /workspaces/saoriverse-console
 4. **Run the Query**
    - Click the "Run" button (play icon)
    - You should see "Success" message
+
 ##
 
 ## SQL Schema (Paste into Supabase SQL Editor)
@@ -122,8 +121,6 @@ FOR EACH ROW
 ```text
 ```
 
-
-
 ##
 
 ## Step 2: Verify Installation
@@ -136,8 +133,6 @@ cd /workspaces/saoriverse-console
 ```text
 ```
 
-
-
 You should see:
 
 ```
@@ -147,8 +142,6 @@ You should see:
 
 ```text
 ```
-
-
 
 ##
 
@@ -168,8 +161,6 @@ ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
 ```text
 ```
 
-
-
 You should see: `Success - no rows returned`
 
 ### Add RLS Policies
@@ -186,10 +177,12 @@ You should see multiple `Success` messages (one per policy)
 Check Authentication → Policies in Supabase dashboard
 
 You should see policies for:
+
 - `conversations` table (4 policies)
 - `conversation_metadata` table (4 policies)
 
 ✅ **RLS is now active!** Users can only access their own conversations.
+
 ##
 
 ## Step 5: Configure Streamlit Secrets (Already Done ✅)
@@ -208,10 +201,8 @@ saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth
 ```text
 ```
 
-
-
-
 ✅ **No changes needed** - everything is ready!
+
 ##
 
 ## Step 6: Restart Your App
@@ -221,13 +212,13 @@ saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth
 ```text
 ```
 
-
-
 You should now see:
+
 - ✅ Sidebar with "Previous Conversations"
 - ✅ "💾 Save my chats" toggle
 - ✅ Conversations auto-save when you check the toggle
 - ✅ Data persists across page refreshes!
+
 ##
 
 ## Troubleshooting
@@ -256,9 +247,8 @@ python3 scripts/migrate_supabase.py --verify
 
 ```
 
-
-
 If it says tables don't exist, go back to Step 1 and run the SQL.
+
 ##
 
 ## Testing the Setup
@@ -286,6 +276,7 @@ If it says tables don't exist, go back to Step 1 and run the SQL.
 3. Click "Save"
 4. Name should update immediately
 5. Refresh browser - new name persists!
+
 ##
 
 ## Next Steps
@@ -296,6 +287,7 @@ Now that the database is set up:
 2. ⏳ **Start using the app** - conversations will auto-save
 3. ⏳ **Monitor Supabase dashboard** - see data flowing in
 4. ⏳ **Test all features** - sidebar, rename, delete
+
 ##
 
 ## Files & Documentation
@@ -305,6 +297,7 @@ Now that the database is set up:
 - **`CONVERSATION_STORAGE.md`** - Complete documentation
 - **`QUICKSTART_CONVERSATION_STORAGE.md`** - Quick start guide
 - **`scripts/migrate_supabase.py`** - Migration helper script
+
 ##
 
 ## Need Help?

@@ -5,7 +5,7 @@
 ```text
 ```
 
-🟢 OPERATIONAL - Backend running on http://127.0.0.1:8000
+🟢 OPERATIONAL - Backend running on <http://127.0.0.1:8000>
 ✅ All endpoints tested and responding
 ✅ Theme detection working (grief, joy, stress, isolation, etc.)
 ✅ Empathetic response generation active
@@ -27,9 +27,6 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/health" `
 ```text
 ```
 
-
-
-
 ### 2. Send a Message (5-second timeout)
 
 ```powershell
@@ -50,8 +47,6 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
 ```text
 ```
 
-
-
 ### 3. Get User Conversations (2-second timeout)
 
 ```powershell
@@ -61,9 +56,6 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/conversations/robinson1234" `
 
 ```text
 ```
-
-
-
 
 ## How It Works
 
@@ -85,9 +77,6 @@ Return Response to Client
     ↓
 Save to Database (async, non-blocking)
 ```
-
-
-
 
 ## Response Examples
 

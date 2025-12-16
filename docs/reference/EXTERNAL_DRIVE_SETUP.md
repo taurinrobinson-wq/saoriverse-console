@@ -3,6 +3,7 @@
 ## ✅ Status: Configured for External Storage
 
 Your FirstPerson local emotional processing system has been successfully moved to your external hard drive to conserve local storage.
+
 ##
 
 ## 📍 Location Setup
@@ -26,10 +27,12 @@ Your FirstPerson local emotional processing system has been successfully moved t
 ```text
 ```text
 ```
+
 /Volumes/My Passport for Mac/FirstPerson
 ├── venv/                      (~1.2GB Python environment)
 ├── data/                      (~500MB, grows with data)
 └── saoriverse-console/        (backup copy)
+
 ```
 
 
@@ -60,8 +63,6 @@ ls /Volumes/
 ```text
 ```
 
-
-
 ### 2. Run Setup Script (if needed)
 
 ```bash
@@ -71,10 +72,8 @@ cd /Users/taurinrobinson/saoriverse-console
 ```text
 ```
 
-
-
-
 This script:
+
 - Verifies external drive is mounted
 - Checks all symlinks are in place
 - Shows system status
@@ -90,8 +89,6 @@ cd /Users/taurinrobinson/saoriverse-console
 ```sql
 ```
 
-
-
 Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
 
 ### 4. Run Tests
@@ -102,8 +99,6 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
-
-
 
 ##
 
@@ -124,9 +119,8 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 ```text
 ```
 
-
-
 **Benefits:**
+
 - ✅ Code changes sync automatically
 - ✅ Works transparently (you don't notice the symlink)
 - ✅ External drive storage for large files
@@ -140,8 +134,6 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
-
-
 
 ##
 
@@ -161,8 +153,6 @@ cd /Users/taurinrobinson/saoriverse-console
 ```text
 ```
 
-
-
 **Solution**: Connect external drive, it will auto-mount.
 
 If it doesn't auto-mount:
@@ -175,12 +165,10 @@ If it doesn't auto-mount:
 ```text
 ```
 
-
-
-
 ### Python Paths Are Fixed
 
 The Python environment on the external drive has **absolute paths** baked in. This means:
+
 - ✅ Works fine as long as external drive path stays the same
 - ⚠️ If you move the folder on external drive, symlinks break
 - ⚠️ If you change external drive names, update symlinks
@@ -198,9 +186,8 @@ git commit -m "message"
 ```text
 ```
 
-
-
 All code changes sync to Git regardless of external storage.
+
 ##
 
 ## 🔧 Troubleshooting
@@ -215,9 +202,6 @@ chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
 
 ```text
 ```
-
-
-
 
 ### Symlinks broken
 
@@ -235,8 +219,6 @@ cd /Users/taurinrobinson/saoriverse-console
 ```text
 ```
 
-
-
 ### Still can't run?
 
 ```bash
@@ -248,8 +230,6 @@ cd /Users/taurinrobinson/saoriverse-console
 ```text
 ```
 
-
-
 ##
 
 ## 📊 Backup Considerations
@@ -257,6 +237,7 @@ cd /Users/taurinrobinson/saoriverse-console
 Since your data is now on an external drive:
 
 ### Data to Backup
+
 - `data/lexicons/` - Your emotion keywords
 - `data/poetry/` - Your poetry enrichment
 - `parser/learned_lexicon.json` - Learned patterns
@@ -273,22 +254,25 @@ cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstP
 ```text
 ```
 
-
 ##
 
 ## 🌍 Using From Different Locations
 
 ### Home (Local Machine)
+
 Everything works as-is since external drive is mounted.
 
 ### Work (Different Mac)
+
 You'll need to:
+
 1. Connect external drive to work Mac
 2. Clone the repo: `git clone [repo-url]`
 3. Create symlinks pointing to external drive
 4. Run: `./setup_external.sh`
 
 ### Without External Drive
+
 For quick testing, you can:
 
 ```bash
@@ -306,9 +290,6 @@ rm .venv
 ```text
 ```
 
-
-
-
 Then move it back to external:
 
 ```bash
@@ -317,12 +298,12 @@ rm -rf .venv
 ```text
 ```
 
-
 ##
 
 ## 📈 What's on External Drive
 
 ### Virtual Environment (~1.2GB)
+
 - Python 3.8
 - spaCy + models
 - NLTK + corpora
@@ -330,6 +311,7 @@ rm -rf .venv
 - Binary files (cannot easily compress)
 
 ### Data Directory (~500MB now, grows)
+
 - `lexicons/nrc_emotion_lexicon_bootstrap.txt` - Current
 - Space for full NRC lexicon (14,182 words)
 - Poetry database (when added)
@@ -337,8 +319,10 @@ rm -rf .venv
 - Metaphor database (when added)
 
 ### Backup Copy (~245MB)
+
 - Original project code
 - Useful for recovery
+
 ##
 
 ## 🎯 Quick Commands Reference
@@ -366,7 +350,6 @@ ls -la .venv data
 mount | grep "My Passport"
 
 ```
-
 
 ##
 

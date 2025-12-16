@@ -17,8 +17,6 @@
 ```text
 ```
 
-
-
 ### Find an Emotional Opposite
 
 ```python
@@ -30,9 +28,6 @@ antonym = find_antonym_by_emotion("comfort")
 ```text
 ```
 
-
-
-
 ### Search for Related Emotions
 
 ```python
@@ -43,8 +38,6 @@ for r in results:
 ```text
 ```text
 ```
-
-
 
 ## Common Tasks
 
@@ -64,9 +57,6 @@ if opposite:
 ```text
 ```
 
-
-
-
 ### Task 2: List All Available Emotions
 
 ```python
@@ -78,8 +68,6 @@ for e in emotions[:10]:
 ```text
 ```text
 ```
-
-
 
 ### Task 3: Build an Emotion Selector
 
@@ -95,9 +83,6 @@ st.write(f"**Name**: {antonym['Name']}")
 
 ```text
 ```
-
-
-
 
 ## All Available Functions
 
@@ -137,8 +122,6 @@ st.write(f"**Name**: {antonym['Name']}")
 ```text
 ```
 
-
-
 ## Run Tests
 
 ```bash
@@ -148,18 +131,12 @@ cd /workspaces/saoriverse-console
 ```text
 ```
 
-
-
-
 Expected output:
 
 ```
 🎉 ALL TESTS PASSED!
 Pass Rate: 100.0%
 ```
-
-
-
 
 ## Example Antonym Glyphs
 
@@ -192,11 +169,13 @@ A: Edit `antonym_glyphs.txt`, then run the indexer to regenerate.
 ## More Information
 
 See `docs/ANTONYM_GLYPHS_INTEGRATION.md` for:
+
 - Complete API reference
 - Advanced examples
 - Development notes
 - Data format specs
 - Integration checklist
+
 ##
 
 **Ready to use!** Import `emotional_os.glyphs.antonym_glyphs` and start exploring emotional opposites.

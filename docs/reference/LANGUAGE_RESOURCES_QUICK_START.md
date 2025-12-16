@@ -28,6 +28,7 @@
 | OpenAI GPT | Costs, latency, privacy |
 | Claude | Same issues |
 | HuggingFace API | Better to run locally |
+
 ##
 
 ## Installation Path (5 Minutes)
@@ -45,7 +46,6 @@ python -m spacy download en_core_web_md
 ```text
 ```text
 ```
-
 
 ##
 
@@ -78,10 +78,8 @@ word2 = nlp("worry")
 ```text
 ```
 
-
-
-
 **Use in Saoriverse**: Extract what the user is *actually talking about* (entities, relationships) instead of just keywords.
+
 ##
 
 ### 2. NRC Emotion Lexicon (170,000+ Words)
@@ -102,9 +100,8 @@ nrc.analyze_text("I have a mental block on math")
 ```text
 ```
 
-
-
 **Use in Saoriverse**: Richer emotion detection than keyword matching. "Block" has sadness+fear compound, not just "negative."
+
 ##
 
 ### 3. Poetry Database (Public Domain)
@@ -121,10 +118,8 @@ poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
 ```text
 ```
 
-
-
-
 **Use in Saoriverse**: Thematic poetry fragments that resonate without being corny.
+
 ##
 
 ### 4. VADER Sentiment (Built-in)
@@ -145,9 +140,8 @@ scores = sia.polarity_scores("I'm FURIOUS about the math requirement!!!")
 ```text
 ```
 
-
-
 **Use in Saoriverse**: Detect emotional intensity to calibrate response tone (angry=direct, sad=gentle).
+
 ##
 
 ## Comparison: Old vs. New
@@ -163,9 +157,6 @@ if 'block' in keywords:
 
 ```text
 ```
-
-
-
 
 **Problem**: Same response structure every time.
 
@@ -186,9 +177,8 @@ features = {
 ```text
 ```
 
-
-
 **Benefit**: Each response is unique, contextual, addresses what the user actually said.
+
 ##
 
 ## Real Example: What Changed
@@ -202,9 +192,6 @@ features = {
 ```text
 ```
 
-
-
-
 ### OLD System (Keyword-Based)
 
 ```
@@ -213,8 +200,6 @@ features = {
 ```text
 ```text
 ```
-
-
 
 ### NEW System (Feature-Based Composition)
 
@@ -239,26 +224,28 @@ features = {
 ```text
 ```
 
-
-
 ##
 
 ## Next Steps for You
 
 ### This Week
+
 1. ✅ Test the compositional system with your three-message flow
 2. ✅ Verify responses feel non-templated
 3. ✅ Read `COMPOSITIONAL_GENERATION_GUIDE.md` to understand the shift
 
 ### Next Week (Optional)
+
 1. Upgrade to spaCy medium model (better accuracy)
 2. Add intensity detection (VADER) to calibrate response tone
 3. Test with more complex messages
 
 ### Later (If Interested)
+
 1. Train Markov chains on your glyph descriptions
 2. Add semantic similarity to find related glyphs
 3. Implement response logging to detect patterns
+
 ##
 
 ## Why This Matters
@@ -267,17 +254,20 @@ features = {
 > "I don't like how the system seems to have encoded canned responses when glyphs are triggered."
 
 **The Solution**:
+
 - Don't match glyph → fill template
 - Instead: Extract message features → compose response dynamically
 - Result: No two responses identical, even for similar emotions
 
 **The Tech Behind It**:
+
 - spaCy for understanding *what* the user is saying (entities, relationships)
 - NRC for understanding *how* they feel about it (emotions)
 - Poetry DB for resonant language
 - Composition logic for building unique responses
 
 **All offline. All free. No API needed.**
+
 ##
 
 ## File Reference
@@ -291,6 +281,7 @@ features = {
 | `parser/poetry_database.py` | Poetry collection |
 | `COMPOSITIONAL_GENERATION_GUIDE.md` | Full architecture explanation |
 | `OFFLINE_LANGUAGE_RESOURCES.md` | Detailed resource guide |
+
 ##
 
 ## Quick Verification
@@ -318,10 +309,8 @@ for i, msg in enumerate(messages, 1):
 PY
 ```
 
-
-
-
 Each response should be **uniquely tailored to the message**, not a template structure with different keywords filled in.
+
 ##
 
 ## Summary

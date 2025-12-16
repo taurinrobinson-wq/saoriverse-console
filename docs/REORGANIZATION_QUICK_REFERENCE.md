@@ -1,6 +1,7 @@
 # Reorganization Quick Reference
 
 **Use this during reorganization to track progress and run commands.**
+
 ##
 
 ## Phase 1: Analysis Commands
@@ -24,7 +25,6 @@ git checkout -b refactor/reorganization-master
 ```text
 ```text
 ```
-
 
 ##
 
@@ -59,13 +59,12 @@ touch scripts/setup/__init__.py
 ```text
 ```
 
-
-
 ##
 
 ## Phase 3: Move Files Checklist
 
 ### Core Source Files (Create in src/)
+
 - [ ] src/emotional_os.py (from emotional_os/)
 - [ ] src/signal_parser.py (from parser/ or emotional_os/core/)
 - [ ] src/response_generator.py (from main_response_engine.py)
@@ -93,8 +92,6 @@ mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 ```text
 ```
 
-
-
 ### Data Files
 
 ```bash
@@ -112,9 +109,6 @@ mv *glyph*.json data/ 2>/dev/null || true
 
 ```text
 ```
-
-
-
 
 ### Scripts Organization
 
@@ -135,7 +129,6 @@ mv scripts/debug*.py scripts/debug/ 2>/dev/null || true
 ```text
 ```text
 ```
-
 
 ##
 
@@ -196,16 +189,12 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
-
 Run it:
 
 ```bash
 ```text
 ```text
 ```
-
 
 ##
 
@@ -257,8 +246,6 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
 ##
 
 ## Phase 6: Test Everything
@@ -280,7 +267,6 @@ streamlit run app.py
 ```text
 ```text
 ```
-
 
 ##
 
@@ -307,8 +293,6 @@ for file in *.md; do
 
 ```text
 ```
-
-
 
 ##
 
@@ -338,31 +322,35 @@ git commit -m "refactor: Complete codebase reorganization
 ```text
 ```
 
-
 ##
 
 ## Troubleshooting
 
 ### "ModuleNotFoundError: No module named 'src'"
+
 - Solution: Make sure you're running from the project root
 - Run: `pwd` to verify location
 - Fix: `cd /path/to/saoriverse-console` then retry
 
 ### "ImportError: cannot import name 'X' from 'src'"
+
 - Solution: X doesn't exist in src/ yet or import path is wrong
 - Fix: Check `src/__init__.py` has `from src.module import X`
 - Verify: `python tools/import_checker.py` to diagnose
 
 ### "pytest: no tests found"
+
 - Solution: Tests aren't in right location or pytest.ini is wrong
 - Fix: Ensure `tests/conftest.py` exists
 - Verify: `ls tests/test_*.py` shows test files
 - Run: `pytest tests/ -v` (not `pytest` alone)
 
 ### "streamlit run app.py" hangs
+
 - Solution: Import error or circular dependency
 - Fix: Run `python tools/import_checker.py` first
 - Debug: Run `python -c "from src import *"` to see errors
+
 ##
 
 ## One-Command Workflow After Reorganization
@@ -391,23 +379,25 @@ git push origin feature/name
 
 ```
 
-
-
 No more juggling between different directories or hunting for imports!
+
 ##
 
 ## File Count Before & After
 
 **Before (Messy)**
-- Root: 100+ files (test_*.py, main_*.py, *.md, *.py)
+
+- Root: 100+ files (test_*.py, main_*.py,*.md, *.py)
 - Difficult to find anything
 
 **After (Clean)**
+
 - Root: ~20 files (app.py, requirements.txt, .gitignore, etc.)
 - All code in src/
 - All tests in tests/
 - All scripts in scripts/
 - All docs in docs/
+
 ##
 
 ## Quick Links During Work
@@ -418,6 +408,7 @@ No more juggling between different directories or hunting for imports!
 - Run tests: `pytest tests/`
 - Launch app: `streamlit run app.py`
 - Commit work: Git commands in Phase 8
+
 ##
 
 **Ready to start? Begin with Phase 1 commands and work through sequentially.**

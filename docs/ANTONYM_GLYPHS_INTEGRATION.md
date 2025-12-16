@@ -51,6 +51,7 @@ Grief (Ω × β) - "Vital Ache"
 ```text
 ```text
 ```
+
 antonym_glyphs.txt
     ↓
 antonym_glyphs_indexer.py (loads and indexes)
@@ -60,6 +61,7 @@ antonym_glyphs_indexed.json (generated index)
 antonym_glyphs.py (provides API)
     ↓
 [Your Code] (uses via simple function calls)
+
 ```
 
 
@@ -88,8 +90,6 @@ results = search_antonyms("joy")
 ```text
 ```
 
-
-
 ### API Reference
 
 #### Core Lookup Functions
@@ -99,9 +99,11 @@ results = search_antonyms("joy")
 Find antonym glyph by base emotion name.
 
 **Args:**
+
 - `emotion`: Emotion name (case-insensitive, e.g., "comfort", "joy")
 
 **Returns:**
+
 - Dictionary with antonym glyph data if found
 - None if not found
 
@@ -116,17 +118,16 @@ if comfort:
 ```text
 ```
 
-
-
-
 ##### `find_antonym_by_voltage_pair(voltage_pair: str) -> Optional[Dict]`
 
 Find antonym by voltage pair notation.
 
 **Args:**
+
 - `voltage_pair`: Notation like "γ × γ", "λ × λ"
 
 **Returns:**
+
 - Dictionary with antonym glyph data if found
 - None if not found
 
@@ -139,16 +140,16 @@ if antonym:
 ```text
 ```
 
-
-
 ##### `search_antonyms(query: str) -> List[Dict]`
 
 Search antonym glyphs by any text field (emotion, name, description, pairing).
 
 **Args:**
+
 - `query`: Search string (case-insensitive, partial matching)
 
 **Returns:**
+
 - List of matching antonym glyphs (empty list if no matches)
 
 **Example:**
@@ -160,9 +161,6 @@ for antonym in results:
 
 ```text
 ```
-
-
-
 
 #### Discovery Functions
 
@@ -178,8 +176,6 @@ if opposite:
 ```text
 ```text
 ```
-
-
 
 #### Listing Functions
 
@@ -222,9 +218,11 @@ Get metadata about the antonym glyphs index.
 Format an antonym glyph for UI display.
 
 **Args:**
+
 - `antonym`: Antonym glyph dictionary
 
 **Returns:**
+
 - Formatted markdown string for display
 - Empty string if antonym is None
 
@@ -237,9 +235,6 @@ display_text = format_antonym_for_display(antonym)
 
 ```text
 ```
-
-
-
 
 ## Integration Examples
 
@@ -269,8 +264,6 @@ if antonym:
 ```text
 ```
 
-
-
 ### Example 2: Search for Related Emotions
 
 ```python
@@ -286,9 +279,6 @@ if search_query:
 
 ```text
 ```
-
-
-
 
 ### Example 3: Suggest Emotional Complements
 
@@ -309,8 +299,6 @@ if opposite:
 ```text
 ```
 
-
-
 ### Example 4: Build an Antonym Glyph Browser
 
 ```python
@@ -330,9 +318,6 @@ if selected_emotion:
 
 ```text
 ```
-
-
-
 
 ## Current Coverage
 
@@ -361,8 +346,6 @@ if selected_emotion:
 ```text
 ```text
 ```
-
-
 
 ### Test Results
 
@@ -395,9 +378,6 @@ All 22 tests passing (100% pass rate):
 ```text
 ```
 
-
-
-
 ## Development Notes
 
 ### Index Generation
@@ -409,8 +389,6 @@ cd /workspaces/saoriverse-console
 ```text
 ```text
 ```
-
-
 
 This creates `/workspaces/saoriverse-console/emotional_os/glyphs/antonym_glyphs_indexed.json`.
 
@@ -428,9 +406,6 @@ Antonym glyphs are stored in JSON with this structure:
 
 ```text
 ```
-
-
-
 
 ### Adding New Antonym Glyphs
 
@@ -474,8 +449,6 @@ cd /workspaces/saoriverse-console
 ```text
 ```
 
-
-
 ### Tests Failing
 
 Run the test suite to diagnose issues:
@@ -485,10 +458,8 @@ Run the test suite to diagnose issues:
 ```text
 ```
 
-
-
-
 All 22 tests should pass. If not, check that:
+
 - `antonym_glyphs.txt` is in `/workspaces/saoriverse-console/`
 - `antonym_glyphs_indexed.json` exists in `emotional_os/glyphs/`
 - All dependent modules are accessible
@@ -496,6 +467,7 @@ All 22 tests should pass. If not, check that:
 ### Searching Returns No Results
 
 Make sure:
+
 - Search query is spelled correctly (searches are case-insensitive)
 - The emotion exists in the system
 - Try broader searches (e.g., "joy" instead of "joyful")
@@ -518,12 +490,10 @@ results = search_antonyms("sorrow")
 emotions = list_antonym_emotions()
 ```
 
-
-
-
 ## License & Attribution
 
 The antonym glyphs system is part of the Saoriverse Console project and represents a comprehensive emotional vocabulary mapping. All 122 antonym glyphs are original conceptual work designed to deepen emotional understanding and expression.
+
 ##
 
 **Created**: 2025-11-05

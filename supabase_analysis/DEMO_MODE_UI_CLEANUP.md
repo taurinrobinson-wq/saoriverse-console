@@ -30,8 +30,6 @@ except Exception:
 ```text
 ```
 
-
-
 **After**:
 
 ```python
@@ -47,9 +45,6 @@ if st.session_state.get('authenticated'):
 
 ```text
 ```
-
-
-
 
 #### 2. Logout Button
 
@@ -68,8 +63,6 @@ except Exception:
 ```text
 ```
 
-
-
 **After**:
 
 ```python
@@ -86,9 +79,6 @@ if st.session_state.get('authenticated'):
 
 ```text
 ```
-
-
-
 
 #### 3. Save My Chats Checkbox
 
@@ -108,8 +98,6 @@ st.session_state['persist_history'] = st.checkbox(
 ```text
 ```
 
-
-
 **After**:
 
 ```python
@@ -127,8 +115,6 @@ if st.session_state.get('authenticated'):
     )
 
 ```
-
-
 
 ## User Experience Impact
 

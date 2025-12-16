@@ -3,6 +3,7 @@
 ## Overview
 
 Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the narrative framework, integrated with:
+
 - **Game Engine** (`core.py`) - State management, dice rolls, player stats
 - **NPC System** (`npc_system.py`) - Dialogue generation using FirstPerson orchestrator
 - **Twine Adapter** (`twine_adapter.py`) - Bridges narrative and game mechanics
@@ -111,9 +112,6 @@ Velinor uses Twine 2 JSON export format:
 ```text
 ```
 
-
-
-
 ### Twine Markup Syntax (SugarCube)
 
 **Choices (Links):**
@@ -124,17 +122,12 @@ Velinor uses Twine 2 JSON export format:
 ```text
 ```
 
-
-
 **Skill Checks:**
 
 ```
 
 ```text
 ```
-
-
-
 
 **Commands (Special Markers):**
 
@@ -145,8 +138,6 @@ Velinor uses Twine 2 JSON export format:
 ```text
 ```text
 ```
-
-
 
 **Example Passage:**
 
@@ -163,9 +154,6 @@ A figure approaches: "Welcome, Traveler."
 
 ```text
 ```
-
-
-
 
 ## Creating Stories
 
@@ -192,8 +180,6 @@ story.add_choice("intro", "Go alone", "alone_path")
 ```text
 ```
 
-
-
 ### Option 2: Create in Twine 2 UI
 
 1. Download [Twine 2](https://twinery.org/)
@@ -204,6 +190,7 @@ story.add_choice("intro", "Go alone", "alone_path")
 ### Option 3: Edit Sample Story
 
 See `/velinor/stories/sample_story.json` for a working example with:
+
 - Market District opening
 - Multiple dialogue paths
 - Skill check choices
@@ -232,9 +219,6 @@ orchestrator = VelinorTwineOrchestrator(
 ```text
 ```
 
-
-
-
 ### Process Player Input
 
 ```python
@@ -252,8 +236,6 @@ next_state = orchestrator.process_player_action(
 ```text
 ```text
 ```
-
-
 
 ### Game State Structure
 
@@ -286,9 +268,6 @@ next_state = orchestrator.process_player_action(
 
 ```text
 ```
-
-
-
 
 ## UI Integration Examples
 
@@ -333,8 +312,6 @@ if st.button("Submit"):
 ```text
 ```
 
-
-
 ### FastAPI Web Backend
 
 ```python
@@ -375,9 +352,6 @@ def save_game(session_id: str):
 ```text
 ```
 
-
-
-
 ## Multiplayer Support
 
 ### Enabling Multiplayer
@@ -398,8 +372,6 @@ orchestrator.process_player_action(
 ```text
 ```
 
-
-
 ### Multiplayer Features
 
 1. **Sidebar tracking** - See other players' inputs
@@ -416,9 +388,6 @@ Solo: "You steady yourself as the mist parts."
 ```text
 ```
 
-
-
-
 ## Dice Mechanics
 
 ### Automatic Skill Checks
@@ -430,9 +399,8 @@ If a choice includes skill check notation:
 ```text
 ```
 
-
-
 The system automatically:
+
 1. Rolls d20
 2. Applies player's Courage modifier
 3. Compares against DC 12
@@ -449,9 +417,6 @@ In passages:
 ```text
 ```
 
-
-
-
 System processes and determines outcome, potentially branching story.
 
 ## Save/Load
@@ -466,9 +431,8 @@ orchestrator.save_game("saves/game_001.json")
 ```text
 ```
 
-
-
 Save files contain:
+
 - Current passage ID
 - Visited passages list
 - Dialogue history
@@ -518,33 +482,35 @@ velinor/
 
 ```
 
-
-
 ## Troubleshooting
 
 **Issue: Story not loading**
+
 - Check JSON path is correct
 - Verify JSON is valid (use `json -l` checker)
 - Ensure passages have unique names
 
 **Issue: Choices not appearing**
+
 - Verify `[[text->target]]` syntax
 - Ensure target passage exists
 - Check for typos in passage names
 
 **Issue: Dice rolls not working**
+
 - Verify `{dice: d20+stat}` syntax
 - Check player stat exists
 - Ensure DC is reasonable (1-20)
 
 **Issue: NPCs not generating dialogue**
+
 - Verify FirstPerson module is available
 - Check NPC registry has the NPC
 - Ensure passage has `{npc: Name}` tag
 
 ## Resources
 
-- **Twine 2**: https://twinery.org/
-- **SugarCube Manual**: https://www.motoslave.net/sugarcube/2/docs/
-- **Ink by Inkle**: https://github.com/inkle/ink
+- **Twine 2**: <https://twinery.org/>
+- **SugarCube Manual**: <https://www.motoslave.net/sugarcube/2/docs/>
+- **Ink by Inkle**: <https://github.com/inkle/ink>
 - **Velinor Game Docs**: `/velinor/markdowngameinstructions/`

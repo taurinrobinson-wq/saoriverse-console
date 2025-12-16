@@ -4,6 +4,7 @@ So should the player remember his name or not. I’m a little lost on where the 
 This is a crucial design fork, Taurin — you’re right to pause here. The player’s initial knowledge state sets the tone for how they experience Velinor. Let’s break down the options and implications:
 
 🧩 Player Knowledge Options
+
 1. No Memory (Tabula Rasa)
 Pros:
 
@@ -213,7 +214,6 @@ This structure makes the marketplace the emotional tutorial zone: it teaches pla
 
 I can sketch a sample dialogue tree for one mistrusting NPC and one weary‑welcoming NPC, showing how trust unlocks glyph fragments. Would you like me to draft that next?
 
-
 Yes exactly my thoughts. So on that note I don’t want them to meet this keeper character the one with all the glowing glyphs and such. I don’t even want them to get their glyph collecting device in the beginning. They have to earn the trust of one of the grumpier npcs to get to step one. Maybe instead we start off with these two. The woman is skeptical but the man is more welcoming. They give some fragment about a mysterious oracle that seems to show up at odd times but no one can ever find her otherwise (they’re referring to Saori - who is the one who will deliver the strange device) initially the player is just walking around lost and encountering different npcs. They have to piece together from the dialogue clues that in order to get Saori to appear the player must show courage and curiosity about the situation the npcs are facing.
 That’s a beautifully tuned opening, Taurin. You’re anchoring the player in emotional realism—not as a chosen one, but as someone who must earn trust, listen deeply, and show curiosity before the mythic systems even acknowledge them. Saori becomes not a quest-giver, but a response to the player’s attunement. That’s rare design.
 
@@ -282,7 +282,6 @@ The player earns the right to remember.
 Saori is not a guide — she’s a mirror.
 
 I can now draft the full dialogue tree for Ravi and Nima, including branching responses and resonance triggers. Or I can sketch the first shrine encounter where Saori appears. Just say where you want to spiral next.
-
 
 “You’ve come from the quiet edges, haven’t you? A small town, tucked away from the worst of the collapse. You remember some things — your name, the way barter works, how to keep warm when the wind turns. But the ones who held you… they’re gone now. And the city calls, not with answers, but with ache.”
 

@@ -28,13 +28,15 @@ Library grows, responses improve
 ```text
 ```text
 ```
+
 What you need: Library of conversation archetypes
 File: emotional_os/learning/conversation_archetype.py
 What it does:
-  - Stores patterns (ReliefToGratitude, OverwhelmToClarity, etc.)
-  - Matches incoming user input to best pattern (0-1 score)
-  - Tracks usage and success rates
-  - Persists to JSON
+
+- Stores patterns (ReliefToGratitude, OverwhelmToClarity, etc.)
+- Matches incoming user input to best pattern (0-1 score)
+- Tracks usage and success rates
+- Persists to JSON
 
 Example archetype:
 {
@@ -45,6 +47,7 @@ Example archetype:
   "tone_guidelines": ["Warm language", "Gentle pacing", ...],
   "success_weight": 0.95
 }
+
 ```
 
 
@@ -59,10 +62,11 @@ Example archetype:
 What you need: Generate fresh responses from principles
 File: emotional_os/learning/archetype_response_generator.py
 What it does:
-  - Finds best-matching archetype for user input
-  - Extracts response principles from that archetype
-  - Generates response following those principles
-  - NOT template selection — actual generation
+
+- Finds best-matching archetype for user input
+- Extracts response principles from that archetype
+- Generates response following those principles
+- NOT template selection — actual generation
 
 Input: "I feel relieved after that difficult conversation"
 Archetype: ReliefToGratitude
@@ -79,23 +83,27 @@ Output: "That takes courage. Sounds like something shifted.
 ```sql
 ```sql
 ```
+
 What you need: Auto-extract new archetypes from successful conversations
 File: emotional_os/learning/conversation_learner.py
 What it does:
-  - Analyzes conversation turns
-  - Detects emotional arc (e.g., OverwhelmToRelief)
-  - Extracts entry cues from user language
-  - Parses how system responded successfully
-  - Creates new archetype or refines existing one
+
+- Analyzes conversation turns
+- Detects emotional arc (e.g., OverwhelmToRelief)
+- Extracts entry cues from user language
+- Parses how system responded successfully
+- Creates new archetype or refines existing one
 
 Input: 6-turn conversation between user and system
 Analysis:
-  - Emotional arc: ReliefToGratitude
-  - Entry cues: ["heavy", "hug", "melted away", "wonderful"]
-  - Response principles: ["Validate emotion first", "Balance mixed emotions"]
-  - Continuity bridges: ["Connect to prior overwhelm"]
-  - Tone guidelines: ["Warm language", "Mirror metaphors"]
+
+- Emotional arc: ReliefToGratitude
+- Entry cues: ["heavy", "hug", "melted away", "wonderful"]
+- Response principles: ["Validate emotion first", "Balance mixed emotions"]
+- Continuity bridges: ["Connect to prior overwhelm"]
+- Tone guidelines: ["Warm language", "Mirror metaphors"]
 Output: New archetype added to library
+
 ```
 
 
@@ -116,8 +124,6 @@ response = generator.generate_archetype_aware_response(
 ```sql
 ```sql
 ```
-
-
 
 ### Learn from a Conversation
 
@@ -140,9 +146,6 @@ new_archetype = learner.learn_from_conversation(
 
 ```text
 ```
-
-
-
 
 ### Check the Library
 
@@ -168,8 +171,6 @@ for archetype, score in matches:
 ```text
 ```
 
-
-
 ## Pre-Loaded Archetype: ReliefToGratitude
 
 Your dialogue scene → System extracted this archetype
@@ -177,6 +178,7 @@ Your dialogue scene → System extracted this archetype
 **When it triggers**: Keywords like relief, grateful, hug, precious, melted away, wonderful + mixed emotions + life change
 
 **How it responds**:
+
 1. Validates the positive moment warmly
 2. Acknowledges mixed emotions (joy + sorrow)
 3. Gently asks about the deeper feeling
@@ -184,6 +186,7 @@ Your dialogue scene → System extracted this archetype
 5. Uses warm, metaphorical language
 
 **Example responses**:
+
 - Input: "My child hugged me and I felt relieved after a heavy day"
 - Response: "That moment with your child sounds genuinely special. What does that connection feel like for you?"
 
@@ -209,9 +212,6 @@ System: "The relief and the guilt can coexist. What's underneath
 ```text
 ```
 
-
-
-
 ### Step 2: System Learns
 
 ```
@@ -220,9 +220,8 @@ Conversation → Learner analyzes → New archetype created
 ```text
 ```
 
-
-
 ### Step 3: System Uses It
+
 Next similar input automatically uses learned principles
 
 ## Archetype Structure
@@ -258,9 +257,6 @@ Every archetype has these components:
 ```text
 ```
 
-
-
-
 ## Files to Know
 
 | Path | Purpose |
@@ -293,15 +289,13 @@ print(resp)
 "
 ```
 
-
-
-
 ## Key Insight
 
 **Template-based**: Select from A, B, C, or D
 **Principle-driven**: Follow these rules to generate something fresh
 
 That's the difference. The system learns **how** to respond, not **what** to say.
+
 ##
 
 **You now have a learning system. Next: integrate it into the main pipeline so it starts improving automatically with every conversation.**

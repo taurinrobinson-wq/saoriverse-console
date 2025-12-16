@@ -177,10 +177,12 @@ Successfully resolved all import path issues and completed the transition from m
 ```text
 ```text
 ```
+
 235507c Fix root-level shims to re-export main function
 44d7af3 Fix utils exports and add delete_user_history_from_supabase to ui_refactored
 043b9e2 Fix remaining import paths and add backward compatibility shim
 2f6e21f Add render_main_app and render_main_app_safe functions to ui_refactored
+
 ```
 
 

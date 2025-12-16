@@ -2,6 +2,7 @@
 
 **Date:** December 4, 2025
 **Status:** ⚠️ **CRITICAL ISSUES FOUND - SYSTEM WILL NOT START FULLY**
+
 ##
 
 ## 🎯 The Problem in 30 Seconds
@@ -9,10 +10,12 @@
 **Your system expects files to be in `emotional_os/` directory at the repo root.**
 
 But they're actually in:
+
 - `data/` (for glyph files)
 - `src/emotional_os_*/` (for config files)
 
 **Result:** When you try to start the app, it will fail to load critical data files.
+
 ##
 
 ## 📊 Full Audit Results
@@ -36,11 +39,13 @@ But they're actually in:
 | `word_centric_emotional_lexicon_expanded.json` | `emotional_os/lexicon/` | `data/` | **CRITICAL** - Lexicon system breaks |
 | `antonym_glyphs_indexed.json` | `emotional_os/glyphs/` | `data/` | **HIGH** - Antonym system fails |
 | `runtime_fallback_lexicon.json` | `emotional_os/parser/` | `src/emotional_os_parser/` | **MEDIUM** - Fallback fails |
+
 ##
 
 ## 🔴 Critical Modules That Will Fail
 
 ### 1. Glyph System ❌
+
 **File:** `src/emotional_os_glyphs/glyph_factorial_engine.py`
 **Impact:** No glyphs load, responses become generic
 
@@ -52,9 +57,8 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
 ```
 
-
-
 ### 2. Antonym System ❌
+
 **File:** `src/emotional_os_glyphs/antonym_glyphs_indexer.py`
 **Impact:** Can't find opposite emotions
 
@@ -66,10 +70,8 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
 ```
 
-
-
-
 ### 3. Advanced Pruning ❌
+
 **File:** `src/emotional_os_glyphs/advanced_pruning_engine.py`
 **Impact:** Glyph selection doesn't work
 
@@ -80,9 +82,8 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
 ```
 
-
-
 ### 4. Word-Centric Lexicon ❌
+
 **File:** `src/emotional_os_lexicon/lexicon_loader.py`
 **Impact:** Word emotional mappings fail
 
@@ -94,10 +95,8 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
 ```
 
-
-
-
 ### 5. Suicidality Protocol ⚠️
+
 **File:** `src/emotional_os/core/suicidality_handler.py`
 **Impact:** Crisis handling won't activate
 
@@ -108,12 +107,12 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
 ```
 
-
 ##
 
 ## 🛠️ Immediate Action Required
 
 ### Option 1: Create Missing Directory (5 minutes) ⚡
+
 This is the **FASTEST FIX** - just create the directory structure code expects:
 
 ```bash
@@ -140,9 +139,6 @@ ls -la emotional_os/core/
 ```text
 ```
 
-
-
-
 **After this, system SHOULD start.**
 
 ### Option 2: Update Code to Use Correct Paths (30 minutes) 📝
@@ -152,6 +148,7 @@ See `CODE_LOCATIONS_NEEDING_FIXES.md` for exact file locations and suggested cod
 ### Option 3: Use PathManager (1-2 hours) 🏗️
 
 Refactor all hardcoded paths to use the PathManager system. See example in `CODE_LOCATIONS_NEEDING_FIXES.md`.
+
 ##
 
 ## 📋 All Files Needing Startup
@@ -168,6 +165,7 @@ Refactor all hardcoded paths to use the PathManager system. See example in `CODE
 | **MEDIUM** | `learned_lexicon.json` | `src/emotional_os_parser/` | ~5KB | Learned words |
 | **MEDIUM** | `runtime_fallback_lexicon.json` | `src/emotional_os_parser/` | ~10KB | Fallback patterns |
 | **MEDIUM** | `trauma_lexicon.json` | `src/emotional_os_safety/` | ~3KB | Safety keywords |
+
 ##
 
 ## 🔍 Affected Startup Flow
@@ -192,7 +190,6 @@ Load Antonym Index
 ```text
 ```
 
-
 ##
 
 ## 📍 File Locations: Complete Map
@@ -211,9 +208,6 @@ data/
 
 ```text
 ```
-
-
-
 
 ### Source Directory (`src/`)
 
@@ -246,8 +240,6 @@ src/
 ```text
 ```
 
-
-
 ### What Code Expects (`emotional_os/` - MISSING)
 
 ```
@@ -271,8 +263,6 @@ emotional_os/                            ← DOESN'T EXIST
 ```text
 ```
 
-
-
 ##
 
 ## ✅ Verification Checklist
@@ -290,10 +280,8 @@ test -f "emotional_os/glyphs/antonym_glyphs_indexed.json" && echo "✅ Antonym i
 test -f "data/lexicons/nrc_emotion_lexicon.txt" && echo "✅ NRC lexicon found" || echo "❌ NRC lexicon MISSING"
 ```
 
-
-
-
 If all show ✅, system should start. If any show ❌, apply one of the fixes above.
+
 ##
 
 ## 📚 Related Documentation
@@ -301,6 +289,7 @@ If all show ✅, system should start. If any show ❌, apply one of the fixes ab
 1. **DATA_FILES_AND_STARTUP_PATHS_AUDIT.md** - Detailed audit with every file analyzed
 2. **QUICK_REFERENCE_DATA_PATHS.md** - Quick reference table and diagnostic script
 3. **CODE_LOCATIONS_NEEDING_FIXES.md** - Exact code locations and suggested fixes
+
 ##
 
 ## 🎯 Next Steps
@@ -309,6 +298,7 @@ If all show ✅, system should start. If any show ❌, apply one of the fixes ab
 2. **Testing (Today):** Verify app starts and loads all modules
 3. **Proper Fix (This week):** Refactor to use PathManager or update paths
 4. **Documentation (This week):** Update README with startup requirements
+
 ##
 
 ## 📞 Questions?

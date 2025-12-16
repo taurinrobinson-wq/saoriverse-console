@@ -27,13 +27,11 @@ ctrl+c
 ```text
 ```
 
-
-
 Notes:
+
 - The backend runs with `--reload` so Python code changes are reflected immediately.
 - The frontend runs Next.js in dev mode (fast), so edits to `velinor-web` reflect immediately.
 - The compose file mounts the repository into both containers using volumes; this speeds iteration.
-
 
 2) Production-like test (build the same Docker image Railway will build)
 
@@ -58,9 +56,6 @@ ctrl+c
 ```text
 ```
 
-
-
-
 Tips to speed up cycles
 
 - Use `docker-compose.dev.yml` while developing - it's much faster than building the whole image.
@@ -79,8 +74,5 @@ docker logs -f saoriverse-console-local
 # or for dev containers
 docker logs -f <container_name>
 ```
-
-
-
 
 If you want, I can also add a small `Makefile` or PowerShell script to wrap these commands.

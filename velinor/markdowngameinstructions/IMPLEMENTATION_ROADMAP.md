@@ -3,6 +3,7 @@
 ## Document Structure Overview
 
 This roadmap outlines a complete development path for Velinor: Remnants of the Tone, organized into phases with clear deliverables, technical requirements, and narrative integration points.
+
 ##
 
 ## Phase 1: Core Systems Foundation (Weeks 1-3)
@@ -34,6 +35,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify stat changes persist across sessions
 - Test threshold logic for NPC dialogue triggers
 - Validate stat calculations in dev console
+
 ##
 
 ### 1.2 NPC Resonance System
@@ -62,6 +64,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify resonance changes affect dialogue
 - Test memory persistence across encounters
 - Validate NPC state changes persist in saves
+
 ##
 
 ### 1.3 Dialogue System with Branching
@@ -91,6 +94,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Test all dialogue branches for Ravi (first NPC)
 - Verify TONE impacts are calculated correctly
 - Test dialogue memory (NPC references past choices)
+
 ##
 
 ## Phase 2: Marketplace Foundation (Weeks 4-5)
@@ -122,6 +126,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify NPC appear in correct locations
 - Test path blockage visibility and function
 - Validate navigation feels smooth
+
 ##
 
 ### 2.2 The Eight NPCs: Core Implementation
@@ -162,6 +167,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Test each NPC's full dialogue tree
 - Verify tool gifting works correctly
 - Test Kaelen's theft logic (should fail at high Observation)
+
 ##
 
 ### 2.3 NPC Sphere of Influence System
@@ -191,6 +197,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Fracture trust with Ravi, verify Nima's suspicion rises
 - Earn Nima's trust, verify Sera softens
 - Test full cascade (change one NPC, watch ripples)
+
 ##
 
 ## Phase 3: Kaelen & Thieves' Arc (Weeks 6-7)
@@ -222,6 +229,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - High Observation → theft fails, dialogue varies
 - Low Observation + high Trust → theft succeeds
 - Test both choice consequences (report vs. protect)
+
 ##
 
 ### 3.2 Captain Veynar Implementation
@@ -251,6 +259,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify reporting Kaelen returns items
 - Test Veynar's dialogue variations
 - Validate Veynar-Kaelen sphere relationship works
+
 ##
 
 ### 3.3 Drossel the Cloaked Leader
@@ -280,6 +289,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Test side-flip animation timing
 - Verify optional quest only appears with high Kaelen trust
 - Validate Drossel dialogue feels threateningyet charming
+
 ##
 
 ## Phase 4: Glyph & Chamber Systems (Weeks 8-10)
@@ -313,6 +323,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify glyph fusion works (combines 3 into 1)
 - Test chamber entrance restriction (requires 3 glyphs)
 - Validate unified glyph appears and tracks correctly
+
 ##
 
 ### 4.2 Octoglyph System (8-stage emotional progression)
@@ -344,6 +355,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify honeycomb panel displays correctly
 - Test glyph placement and removal
 - Validate unified glyph creation on completion
+
 ##
 
 ## Phase 5: Journal System (Weeks 11-12)
@@ -380,6 +392,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Test page turn animation smoothness
 - Validate sound plays on curl click
 - Test with 1-10 pages (boundary testing)
+
 ##
 
 ### 5.2 Journal Entry Generator
@@ -410,6 +423,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify entries generate after each NPC encounter
 - Test red highlighting for key facts
 - Validate entries persist across saves
+
 ##
 
 ## Phase 6: Ending Systems (Weeks 13-14)
@@ -443,6 +457,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify environment loads correctly
 - Test console UI functionality
 - Validate lighting feels mystical and intimate
+
 ##
 
 ### 6.2 Six Ending Paths Implementation
@@ -476,6 +491,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify emotional lever changes NPC reactions
 - Validate final glyphs scatter/dissolve correctly
 - Test save completion state
+
 ##
 
 ## Phase 7: Integration & Polish (Weeks 15-16)
@@ -512,6 +528,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify ambient loops seamlessly repeat
 - Test voice tone cues match character personalities
 - Validate sound levels don't overwhelm dialogue
+
 ##
 
 ### 7.2 Full Integration Testing
@@ -543,6 +560,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Full playthrough for each ending
 - Save/load from each phase point
 - Edge case testing (rapid stat changes, missing items, etc.)
+
 ##
 
 ## Phase 8: Optional Content & Deep Dives (Weeks 17-18)
@@ -575,6 +593,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify secret triggers only fire at correct thresholds
 - Test secret scene dialogue flow
 - Validate rewards are received correctly
+
 ##
 
 ### 8.2 Boss Chamber Variants
@@ -603,6 +622,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 - Verify hard mode unlocks correctly
 - Test bonus glyph acquisition
 - Balance difficulty vs. standard mode
+
 ##
 
 ## Development Timeline Summary
@@ -618,6 +638,7 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 | Phase 7: Integration | Weeks 15-16 | Audio, full testing |
 | Phase 8: Polish | Weeks 17-18 | Secrets, variants, balance |
 | **Total** | **~4.5 months** | **Complete game** |
+
 ##
 
 ## Critical Path Dependencies

@@ -1,18 +1,22 @@
 # Marketplace NPC System: Trust, Dynamics & Dialogue
 
 ## Overview
+
 The marketplace is a **trust economy** where NPCs vary in openness, but all require patience and genuine engagement. Crime wave context creates tension that impacts all encounters.
+
 ##
 
 ## NPC Archetype 1: Mistrusting NPCs
 
 ### Behavior Profile
+
 - **Stance**: Guarded, suspicious, terse
 - **Motivation**: Outsiders historically exploit; locals protect resources
 - **Trigger**: Player is visibly new, unfamiliar with city rhythms
 - **Barrier**: High initial trust cost; requires multiple proof points
 
 ### Example NPCs
+
 - **Nima** (Market Guard): Sharp, assessing, protective of community
 - **Older Trader**: Weathered, reluctant to share, tests through challenge
 - **Shrine Keeper**: Skeptical of outsiders seeking sacred knowledge
@@ -62,12 +66,14 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 ```text
 ```text
 ```
+
 NPC: "I'd welcome you with open arms, but too many hands here have stolen."
 
 Player Options:
 A) "I'm not here to steal. I'm here to listen."   → Shows purpose alignment
 B) "I know what it's like to lose trust."        → Mirrors their experience
 C) "Then let me earn it, slowly."                → Respects their process
+
 ```
 
 
@@ -116,6 +122,7 @@ Per NPC:
 [======    ] Welcoming NPC (8 points to unlock mid-tier dialogue)
 
 Actions:
+
 - Fair barter: +1 point
 - Listen to full story: +2 points
 - Help with task: +3 points
@@ -139,10 +146,12 @@ Actions:
 ```text
 ```text
 ```
+
 Player helps Nima (mistrusting guard) find stolen goods
 → Nima tells Ravi (welcoming NPC) the player is reliable
 → Ravi becomes even more welcoming
 → But Nima's rival, a black market trader, becomes wary
+
 ```
 
 

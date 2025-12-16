@@ -3,6 +3,7 @@
 ## Overview
 
 The NPC Sphere of Influence System models how relationships ripple across Velinor's communities. Each NPC belongs to a sphere—a web of emotional connections, family ties, and shared resonance. When the player fractures trust or deepens empathy with one NPC, it affects not just that character, but their entire network.
+
 ##
 
 ## Core Mechanics
@@ -20,6 +21,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 | **0.7–1.0 (Strong)** | Immediate, noticeable impact | Ravi ↔ Nima (partners), Parent ↔ Child |
 | **0.4–0.6 (Medium)** | Subtle shifts in dialogue, glyph access | Ravi ↔ Merchants, Nima ↔ Shrine Keepers |
 | **0.1–0.3 (Weak)** | Background changes, NPC tone | Merchants ↔ Wanderers (minimal overlap) |
+
 ##
 
 ## Marketplace Sphere of Influence
@@ -40,7 +42,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
         Mariel (Weaver)      [Others]        [Others]
         Kaelen (Cloaked)*
 
-* Hidden sphere: Thieves' Gang (0.6 counter-sphere with Veynar)
+- Hidden sphere: Thieves' Gang (0.6 counter-sphere with Veynar)
 
 ```
 

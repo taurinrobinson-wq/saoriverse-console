@@ -1,6 +1,7 @@
 # Response Improvement Summary
 
 ## The Problem
+
 The backend was returning a generic, template-based response that didn't acknowledge the user's specific emotional experience:
 
 ```text
@@ -50,9 +51,6 @@ requests_presence = any(phrase in message_lower for phrase in
 ```text
 ```
 
-
-
-
 ### 2. **Provide Glyph-Aware, Context-Specific Response**
 
 ```python
@@ -74,19 +72,20 @@ if (has_exhaustion or themes["fatigue"]) and has_momentum_loss and requests_pres
 ```text
 ```
 
-
-
 ### 3. **Honor the User's Stated Need**
+
 - ✅ Acknowledges the heaviness WITHOUT rushing to fix it
 - ✅ Validates the experience ("that's not small")
 - ✅ Recognizes their emotional intelligence ("you can name what you need")
 - ✅ SITS WITH them ("I'm sitting with you in this")
 - ✅ Only then asks a gentle, curious question (doesn't immediately try to solve)
+
 ##
 
 ## What Changed
 
 ### Before
+
 - Generic opening: "I hear you saying..."
 - Echo back the entire message
 - Ask for MORE information
@@ -94,11 +93,13 @@ if (has_exhaustion or themes["fatigue"]) and has_momentum_loss and requests_pres
 - Same response template for every emotion/glyph
 
 ### After
+
 - **Specific recognition**: "The heaviness you're describing..."
 - **Direct reference to their language**: "waking up already depleted," "body carry weight"
 - **Validation of their need**: "presence, not solutions"
 - **Holding space**: "I'm sitting with you in this"
 - **Contextual closing**: Asks about their BODY experience (grounded, sensory, present-focused)
+
 ##
 
 ## Glyph Intent Updated
@@ -116,25 +117,26 @@ The response now returns a more accurate glyph_intent:
 ```text
 ```
 
-
-
-
 This informs TTS synthesis to use:
+
 - Lower speech rate (slower, more present)
 - Softer volume
 - Longer pauses (space for them to breathe)
 - Warm but not cheerful tone
+
 ##
 
 ## Tested Patterns
 
 The new response handler detects:
+
 1. **Exhaustion patterns**: "exhausted," "tired," "weight," "burden," "heavy," "carrying," "drained," "weary"
 2. **Momentum loss patterns**: "stuck," "stalled," "frozen," "watching," "rushing by," "can't move"
 3. **Presence requests**: "without trying to fix," "just sit," "hear," "presence"
 4. **Theme detection**: Fatigue, grief, joy, stress, isolation
 
 When multiple patterns are present (exhaustion + momentum loss + explicit presence request), it triggers the **holding_space** attunement response.
+
 ##
 
 ## Other Response Improvements
@@ -142,6 +144,7 @@ When multiple patterns are present (exhaustion + momentum loss + explicit presen
 The function was also updated to handle:
 
 ### First Message - Non-Exhaustion
+
 **Grief detection:**
 
 ```
@@ -150,8 +153,6 @@ taken from you. I'm here with that. Not to make it better, but to acknowledge
 ```text
 ```text
 ```
-
-
 
 **Joy detection:**
 
@@ -162,17 +163,12 @@ taken from you. I'm here with that. Not to make it better, but to acknowledge
 ```text
 ```
 
-
-
-
 **Fallback (still specific):**
 
 ```
 "I hear the significance in what you just shared. There's something real there.
 What's the most important part of that for you to tell me about?"
 ```
-
-
 
 ##
 

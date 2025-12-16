@@ -3,6 +3,7 @@
 ## What Changed
 
 You're ditching **Streamlit** and moving to a proper **web stack** because Streamlit's rendering model can't handle the layered overlays and interactive positioning you want for Velinor.
+
 ##
 
 ## New Architecture
@@ -15,11 +16,11 @@ Your Computer (Dev)          Railway Server (Production)
 
 Backend:                     Backend:
 python velinor_api.py        FastAPI (auto-deployed)
-http://localhost:8000        https://your-domain.up.railway.app
+<http://localhost:8000>        <https://your-domain.up.railway.app>
 
 Frontend:                    Frontend:
 npm run dev                  Next.js (auto-deployed)
-http://localhost:3000        https://your-domain.up.railway.app
+<http://localhost:3000>        <https://your-domain.up.railway.app>
 
 Game Engine:                 Game Engine:
 Velinor (Python)             Velinor (Python) - embedded in backend
@@ -67,9 +68,6 @@ cd velinor-web
 ```text
 ```
 
-
-
-
 ### Step 2: Copy Components
 
 ```bash
@@ -80,9 +78,8 @@ cp frontend_lib_api.ts velinor-web/lib/api.ts
 ```text
 ```
 
-
-
 ### Step 3: Create Pages
+
 - `velinor-web/app/page.tsx` - Splash screen (see `VELINOR_WEB_MIGRATION.md`)
 - `velinor-web/app/game/[sessionId]/page.tsx` - Game scene
 
@@ -100,9 +97,6 @@ cd velinor-web && npm run dev
 ```text
 ```
 
-
-
-
 ### Step 5: Deploy
 
 ```bash
@@ -113,7 +107,6 @@ git push origin main
 ```text
 ```text
 ```
-
 
 ##
 
@@ -128,6 +121,7 @@ git push origin main
 | **Mobile** | ⚠️ Not optimized | ✅ Responsive by default |
 | **Animations** | ❌ Not supported | ✅ Framer Motion, CSS |
 | **Customization** | ⚠️ Limited | ✅ Unlimited |
+
 ##
 
 ## File Organization
@@ -167,8 +161,6 @@ saoriverse-console/
 ```text
 ```
 
-
-
 ##
 
 ## Key Differences from Streamlit
@@ -185,8 +177,6 @@ st.button("Start")    # Shows below, not on top
 ```text
 ```
 
-
-
 ### After (Next.js - Works)
 
 ```jsx
@@ -200,8 +190,6 @@ st.button("Start")    # Shows below, not on top
 ```text
 ```
 
-
-
 ##
 
 ## What Happens When You Push
@@ -213,6 +201,7 @@ st.button("Start")    # Shows below, not on top
    - `velinor-web/` (Next.js frontend)
 4. Your game is live in ~3-5 minutes
 5. Users visit `https://your-railway-domain.up.railway.app`
+
 ##
 
 ## Next Phase
@@ -220,26 +209,31 @@ st.button("Start")    # Shows below, not on top
 Once you have it running locally:
 
 ### Phase A: Add Scene Styling
+
 - Add background images to `velinor-web/public/assets/backgrounds/`
 - Create overlay PNGs for dust/fog/glyphs
 - Update `GameScene.tsx` to load them dynamically
 
 ### Phase B: Enhance UI
+
 - Add animations with Framer Motion
 - Add sound with Howler.js
 - Add glyph rendering
 - Add stats panel
 
 ### Phase C: Mobile Optimization
+
 - Test on phone (might need `--host 0.0.0.0` locally)
 - Adjust button sizes for touch
 - Responsive image sizing
 
 ### Phase D: Advanced Features
+
 - Save/load system with database
 - Multiplayer sessions
 - Settings panel
 - Achievements/progress tracking
+
 ##
 
 ## Documentation Map
@@ -252,7 +246,6 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
 ```text
 ```text
 ```
-
 
 ##
 
@@ -282,12 +275,12 @@ git push origin main
 
 ```
 
-
 ##
 
 ## Success Criteria
 
 You'll know it's working when:
+
 - ✅ You can start a game and see the splash screen
 - ✅ You can enter a player name
 - ✅ You can click "Start New Game"
@@ -295,6 +288,7 @@ You'll know it's working when:
 - ✅ You can click a choice and the scene updates
 - ✅ Custom text input works
 - ✅ It's responsive on mobile
+
 ##
 
 ## Troubleshooting
@@ -306,6 +300,7 @@ You'll know it's working when:
 | `Images not loading` | Ensure files are in `velinor-web/public/assets/` |
 | `Slow to start` | Backend initializes - takes 1-2 seconds |
 | `Button doesn't work` | Check browser console for errors |
+
 ##
 
 ## What's Next for You
@@ -317,6 +312,7 @@ You'll know it's working when:
 5. **Step 4**: Test locally (backend + frontend)
 6. **Step 5**: Deploy to Railway
 7. **Done**: Your Velinor game is live!
+
 ##
 
 **Total time to first deployment:** ~30-45 minutes
@@ -324,14 +320,17 @@ You'll know it's working when:
 **Estimated effort:** Low (most work is already scaffolded)
 
 **Complexity**: Medium (setting up two services, but well-documented)
+
 ##
 
 ## Questions?
 
 Check the documentation files or the Velinor game engine guide:
+
 - `VELINOR_WEB_MIGRATION.md` - Complete step-by-step
 - `velinor/TWINE_INTEGRATION_GUIDE.md` - Game engine API
 - `RAILWAY_DEPLOYMENT.md` - Production specifics
+
 ##
 
 **Ready to build the web version of Velinor?**

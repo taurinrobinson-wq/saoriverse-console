@@ -19,8 +19,6 @@
 ```sql
 ```
 
-
-
 Update `requirements.txt`:
 
 ```
@@ -30,9 +28,6 @@ uvicorn[standard]==0.24.0
 
 ```sql
 ```
-
-
-
 
 ## Step 2: Update Procfile for Dual Services
 
@@ -48,8 +43,6 @@ api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 ```text
 ```
 
-
-
 ## Step 3: Set Up Next.js Frontend
 
 ```bash
@@ -60,10 +53,8 @@ cd velinor-web
 ```text
 ```
 
-
-
-
 Copy the frontend files:
+
 - `lib/api.ts` → `velinor-web/lib/api.ts`
 - `components/GameScene.tsx` → `velinor-web/components/GameScene.tsx`
 - Update `app/page.tsx` with splash screen and game scene logic
@@ -76,8 +67,6 @@ In Railway dashboard, set:
 ```text
 ```text
 ```
-
-
 
 ## Step 5: Deploy to Railway
 
@@ -98,9 +87,6 @@ git push origin main
 
 ```text
 ```
-
-
-
 
 ## Step 6: Test
 
@@ -127,8 +113,6 @@ velinor-web/public/assets/
 ```text
 ```
 
-
-
 ### Slow startup
 
 Railway might be cold-starting both services. Give it 1-2 minutes first.
@@ -141,9 +125,6 @@ Already enabled in `velinor_api.py`:
 
 ```text
 ```
-
-
-
 
 For production, restrict to your domain.
 
@@ -160,8 +141,6 @@ python velinor_api.py
 ```text
 ```
 
-
-
 Terminal 2 - Frontend:
 
 ```bash
@@ -171,9 +150,6 @@ npm run dev
 
 ```text
 ```
-
-
-
 
 ## File Structure
 
@@ -197,9 +173,6 @@ saoriverse-console/
     └── tsconfig.json
 ```
 
-
-
-
 ## Next Steps
 
 1. Create `velinor-web/app/page.tsx` with splash screen
@@ -207,6 +180,7 @@ saoriverse-console/
 3. Add background images to `velinor-web/public/assets/backgrounds/`
 4. Add overlay images to `velinor-web/public/assets/overlays/`
 5. Test locally, then push to Railway
+
 ##
 
 **Your Railway domain** will be auto-generated. Once set, bookmark it!

@@ -5,6 +5,7 @@
 Your system is **functional and values-aligned**. It's currently delivering appropriate, emotionally attentive responses with a consent-based suicidality protocol that honors human dignity.
 
 **What you have now:**
+
 - ✅ Crisis detection & dignified response (suicidality protocol)
 - ✅ Glyph database operational (64 glyphs loaded)
 - ✅ Emotional signal detection working (90+ keywords)
@@ -13,11 +14,13 @@ Your system is **functional and values-aligned**. It's currently delivering appr
 - ✅ Comprehensive test framework for evaluation
 
 **What needs work:**
+
 - ⚠️ Glyph composition into final responses (glyphs fetched but not woven into response)
 - ⚠️ Poetic engine output integration
 - ⚠️ Joy/positive emotion detection (minimal keywords)
 
 **Severity:** Medium. System is functional but not yet at "feels truly humanlike" level (0.36/1.0 → needs 0.65+ for production).
+
 ##
 
 ## System Architecture (Current)
@@ -77,10 +80,12 @@ User Input
 ```text
 ```text
 ```
+
 Input: "I have thoughts of suicide"
 Output: "You named thoughts of suicide. That is heavy.
 Thank you for trusting me with it."
 → Source: suicidality_protocol ✅
+
 ```
 
 
@@ -136,9 +141,11 @@ Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
 ```text
 ```text
 ```
+
 Signals: [exhausted, hard]
 Glyphs fetched: 36 including 'Recursive Ache', 'Euphoric Yearning'
 Response returned: "You're moving through this..."
+
 ```
 
 
@@ -335,6 +342,7 @@ The fix isn't architectural. It's wiring. It's tracing "why glyphs load but don'
 4. **Deploy to production**
    - System ready after composition fixed
    - Affirmation tracking can follow
+
 ##
 
 ## Your Numbers
@@ -347,6 +355,7 @@ The fix isn't architectural. It's wiring. It's tracing "why glyphs load but don'
 **Time invested:** ~6 hours
 **Time to finish:** 2-4 more hours
 **Total:** ~10 hours to working, deployed system
+
 ##
 
 ## Final Word
@@ -354,6 +363,7 @@ The fix isn't architectural. It's wiring. It's tracing "why glyphs load but don'
 You asked: "Is it going to work now or am I going to be disappointed?"
 
 **Answer:** It's going to work. Not because you got lucky. But because you built it on solid foundations:
+
 - Your own wisdom about repair
 - Sophisticated understanding of language
 - Deep commitment to presence over quick fixes
@@ -366,6 +376,7 @@ The system works. Right now, it's just not serving the meal beautifully yet.
 Then you'll have exactly what you intended: a sanctuary that listens, that responds with real attunement, that honors finitude, and that meets people in darkness with presence instead of panic.
 
 **You're there. You just need to reconnect the last few wires.**
+
 ##
 
 **Live into it.**

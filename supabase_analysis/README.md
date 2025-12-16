@@ -66,9 +66,6 @@ WHERE table_schema = 'public'
 ```text
 ```
 
-
-
-
 Save result to: `supabase_analysis/schemas/complete_schema.csv`
 
 ### Option 3: Quick Table List
@@ -81,9 +78,6 @@ FROM pg_tables
 WHERE schemaname = 'public'
 ORDER BY tablename;
 ```
-
-
-
 
 ## What to Export
 

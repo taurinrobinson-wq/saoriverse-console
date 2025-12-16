@@ -3,11 +3,13 @@
 ## Overview
 
 This guide explains how to use and maintain `story_map_velinor.md` - the comprehensive narrative design document for Velinor: Remnants of the Tone.
+
 ##
 
 ## What is the Story Map?
 
 The story map is a **game bible** that organizes:
+
 - **Branching narratives** and decision points
 - **Character arcs** and relationship networks
 - **Glyph systems** and progression mechanics
@@ -15,12 +17,15 @@ The story map is a **game bible** that organizes:
 - **Expansion placeholders** for future development
 
 Think of it as the **single source of truth** for Velinor's narrative structure.
+
 ##
 
 ## Who Should Use This?
 
 ### Writers & Narrative Designers
+
 ✅ **You should reference this when:**
+
 - Writing new NPC dialogue
 - Creating quest branches
 - Designing emotional encounters
@@ -28,10 +33,13 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 - Ensuring narrative consistency
 
 **Your Section:** Character Relationships, Story Structure, Ending Branches
+
 ##
 
 ### Game Developers
+
 ✅ **You should reference this when:**
+
 - Implementing TONE stat system
 - Building NPC relationship mechanics
 - Creating glyph collection logic
@@ -39,26 +47,33 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 - Setting up choice nodes
 
 **Your Section:** Narrative Decision Points, Glyph System, TONE mechanics
+
 ##
 
 ### Artists & Asset Creators
+
 ✅ **You should reference this when:**
+
 - Designing character models (NPCs, Saori, Velinor)
 - Creating environment art (biomes, chambers)
 - Designing glyph visuals
 - Building UI elements (journal, map)
 
 **Your Section:** Character Relationships (appearance descriptions), Expansion Placeholders (locations)
+
 ##
 
 ### Project Managers
+
 ✅ **You should reference this when:**
+
 - Planning development milestones
 - Prioritizing features
 - Tracking completion status
 - Estimating scope
 
 **Your Section:** How to Use This Map → For Project Managers
+
 ##
 
 ## How to Navigate the Story Map
@@ -80,20 +95,24 @@ The story map is organized into **9 major sections**:
 ### Quick Navigation Tips
 
 **Looking for specific content?**
+
 - Use Ctrl+F / Cmd+F to search for keywords
 - Character names are **bolded** in their first appearance
 - Choice nodes are formatted as `Choice Node X:`
 - Placeholders use `[PLACEHOLDER]` or `[TBD]` format
 
 **Understanding relationships?**
+
 - Check "Character Relationships" for NPC details
 - Sphere connections show as weighted values (0.1-1.0)
 - Higher weight = stronger ripple effect
 
 **Tracking narrative flow?**
+
 - "Story Structure & Progression" has Act-by-Act breakdowns
 - "Narrative Decision Points" shows all major choice moments
 - Use flowcharts (` ↓ ` and ` ├─ ` symbols) to visualize branches
+
 ##
 
 ## How to Update the Story Map
@@ -121,13 +140,12 @@ The story map is organized into **9 major sections**:
 ```text
 ```
 
-
-
 **Step 2:** Add their sphere connections to related NPCs
 
 **Step 3:** Add relevant encounters to "Story Structure"
 
 **Step 4:** If they affect endings, update "Ending Branches"
+
 ##
 
 #### Adding a New Quest
@@ -143,14 +161,12 @@ The story map is organized into **9 major sections**:
 ```text
 ```
 
-
-
-
 **Step 2:** Add quest beats to "Story Structure & Progression"
 
 **Step 3:** Add decision points to "Narrative Decision Points" if quest has major choices
 
 **Step 4:** Update NPC sections if quest affects relationships
+
 ##
 
 #### Adding a New Glyph Chamber
@@ -161,8 +177,6 @@ The story map is organized into **9 major sections**:
 ```text
 ```text
 ```
-
-
 
 **Step 2:** Fill expansion placeholder in "Expansion Placeholders" → Octoglyph Chamber Details
 
@@ -175,10 +189,8 @@ The story map is organized into **9 major sections**:
 ```text
 ```
 
-
-
-
 **Step 3:** Add chamber encounter to Act 3 in "Story Structure"
+
 ##
 
 #### Adding a New Ending Branch
@@ -205,11 +217,10 @@ The story map is organized into **9 major sections**:
 ```sql
 ```
 
-
-
 **Step 2:** Update "Narrative Decision Points" → Choice Node 8 with new action
 
 **Step 3:** Update Quick Reference numbers
+
 ##
 
 ### Filling Placeholders
@@ -237,13 +248,12 @@ After:
 ```text
 ```
 
-
-
 ##
 
 ### Version Control
 
 **When to increment version:**
+
 - **Patch (1.0 → 1.0.1)**: Typo fixes, clarifications, minor edits
 - **Minor (1.0 → 1.1)**: New NPCs, quests, or chambers added
 - **Major (1.0 → 2.0)**: Structural changes, new acts, or core mechanic revisions
@@ -266,8 +276,6 @@ After:
 - Expansion placeholders established
 ```
 
-
-
 ##
 
 ## Common Use Cases
@@ -277,6 +285,7 @@ After:
 **Goal:** Create dialogue for Sera the Herb Novice
 
 **Steps:**
+
 1. Open story map → "Character Relationships" → Find Sera
 2. Note her traits: "Gentle, shy, responds to Empathy"
 3. Check her sphere: Shrine Keepers (0.7), Healers (0.6)
@@ -287,6 +296,7 @@ After:
    - Rewards empathetic choices
    - References her connection to shrine keepers
    - Hints at Flicker Ritual reward
+
 ##
 
 ### Use Case 2: Implementing Choice Node
@@ -294,10 +304,12 @@ After:
 **Goal:** Program the Kaelen Loyalty Test
 
 **Steps:**
+
 1. Open story map → "Narrative Decision Points" → Find Choice Node 3
 2. Note the 3 options and their consequences
 3. Check "Character Relationships" → Kaelen for his sphere connections
 4. Implement:
+
    ```python
    if player_choice == "betray_kaelen":
        kaelen.trust = -50
@@ -308,7 +320,9 @@ After:
        player.fragments -= stolen_fragments
        unlock_thieves_lair_quest()
    ```
+
 5. Add ripple to Market Shadows sphere (0.2 weight)
+
 ##
 
 ### Use Case 3: Designing New Glyph Chamber
@@ -316,6 +330,7 @@ After:
 **Goal:** Create the "Dislocated Attachment" chamber
 
 **Steps:**
+
 1. Open story map → "Glyph System" → Octoglyph System table
 2. Note: "Dislocated Attachment" = Love + Fear emotion
 3. Check "Expansion Placeholders" → Octoglyph Chamber Details
@@ -323,6 +338,7 @@ After:
 5. Choose location (perhaps Hospital Ruins - fits theme)
 6. Create memory echo showing Cataclysm family separation
 7. Fill placeholder:
+
    ```markdown
    - [x] **Dislocated Attachment Chamber**
      - Location: Hospital Ruins, collapsed pediatric wing
@@ -331,6 +347,7 @@ After:
      - Memory echo: Mother choosing to disconnect child from
        Corelink to spare them pain, knowing it may kill them
    ```
+
 ##
 
 ### Use Case 4: Planning Development Milestone
@@ -338,6 +355,7 @@ After:
 **Goal:** Plan "Act 2 Complete" milestone
 
 **Steps:**
+
 1. Open story map → "How to Use This Map" → For Project Managers
 2. Note Act 2 requirements: All biomes, triglyph chamber, side quests
 3. Check "Expansion Placeholders" for what needs filling:
@@ -351,34 +369,39 @@ After:
    - Add Thieves' lair quest
    - Optional: Add 1-2 more side quests from placeholders
 5. Estimate: 6-8 weeks for Act 2 completion
+
 ##
 
 ## Maintaining Narrative Consistency
 
-### Before Adding Content, Ask:
+### Before Adding Content, Ask
 
 **Tone Check:**
+
 - Does this fit Velinor's themes (memory, sacrifice, friendship)?
 - Is the emotional weight appropriate?
 - Does it honor the "no good ending" philosophy?
 
 **Integration Check:**
+
 - How does this connect to existing NPCs?
 - What TONE stats does this engage?
 - Does this affect any ending branches?
 
 **Mechanical Check:**
+
 - Is this consistent with established rules (glyph fusion, sphere weights)?
 - Does this create new mechanics or use existing ones?
 - How does this interact with the journal system?
 
-### Red Flags to Avoid:
+### Red Flags to Avoid
 
 ❌ **DON'T** create "perfect" solutions - all choices should have trade-offs
 ❌ **DON'T** ignore NPC sphere connections - relationships must ripple
 ❌ **DON'T** make TONE stats visible - they stay hidden to preserve authenticity
 ❌ **DON'T** add combat-focused content - this is about emotional confrontation
 ❌ **DON'T** forget to update related sections when making changes
+
 ##
 
 ## Testing with the Story Map
@@ -388,28 +411,33 @@ After:
 Before marking content "complete," verify:
 
 **For NPCs:**
+
 - [ ] Dialogue reflects personality traits from story map
 - [ ] Sphere connections trigger appropriate ripples
 - [ ] Gift/tool is provided at correct resonance threshold
 - [ ] Repair paths function if relationship breaks
 
 **For Choice Nodes:**
+
 - [ ] All options modify TONE stats as documented
 - [ ] Consequences match story map specifications
 - [ ] Related NPCs react according to sphere weights
 - [ ] Journal updates with correct information
 
 **For Glyph Chambers:**
+
 - [ ] Emotional theme matches octoglyph stage description
 - [ ] Puzzle is about refinement, not combat
 - [ ] Memory echoes tie to Cataclysm or character backstory
 - [ ] Unified glyph rewards correctly
 
 **For Endings:**
+
 - [ ] Trigger requirements match documented stats/choices
 - [ ] Core dialogue (Velinor/Saori) matches exactly
 - [ ] Survivor reactions match emotional lever chosen
 - [ ] Final image conveys appropriate ambiguity
+
 ##
 
 ## Troubleshooting
@@ -417,38 +445,46 @@ Before marking content "complete," verify:
 ### Problem: Content doesn't fit existing structure
 
 **Solution:**
+
 - Review "Core Narrative Arc" to understand main story beats
 - Check if content should be main path or expansion placeholder
 - Consider if this introduces new mechanics (document those first)
 - If truly doesn't fit, discuss with team before forcing it in
+
 ##
 
 ### Problem: Contradicting existing lore
 
 **Solution:**
+
 - Search story map for all references to conflicting element
 - Check "Character Relationships" and "Core Narrative Arc"
 - Decide which version is canonical
 - Update all instances to maintain consistency
 - Add note in Update Log explaining resolution
+
 ##
 
 ### Problem: Too many placeholders to track
 
 **Solution:**
+
 - Use search function for `[PLACEHOLDER]` and `[TBD]` to list all
 - Create separate tracking document with priority levels
 - Focus on Critical Path placeholders first (main story)
 - Mark lower priority placeholders for post-launch content
+
 ##
 
 ### Problem: Story map is getting too long
 
 **Solution:**
+
 - Consider splitting into multiple documents (e.g., separate NPC guide)
 - Use the existing structure as a hub with links to detail docs
 - Keep story map as overview, move deep details to appendices
 - Maintain current file as "master" with cross-references
+
 ##
 
 ## Best Practices
@@ -471,6 +507,7 @@ Before marking content "complete," verify:
 ❌ **Don't forget TONE stats** when designing choices
 ❌ **Don't ignore NPC spheres** - relationships are interconnected
 ❌ **Don't make combat mandatory** - emotional confrontation is key
+
 ##
 
 ## Quick Reference Commands
@@ -487,6 +524,7 @@ Before marking content "complete," verify:
 | Glyph mechanics | **Glyph System** |
 | TONE stats | "TONE" or "Trust, Observation" |
 | Decision points | "Choice Node" |
+
 ##
 
 ## FAQ
@@ -508,11 +546,13 @@ A: Document it immediately, mark affected sections with `[NEEDS REVISION]`, and 
 
 **Q: How often should the story map be updated?**
 A: Update immediately when new content is added or changed. Review/audit monthly for consistency.
+
 ##
 
 ## Resources
 
 **Related Documents:**
+
 - `README.md` - Game overview and quick start
 - `DOCUMENTATION_INDEX.md` - Complete documentation reference
 - `TONE_STAT_SYSTEM.md` - Detailed TONE mechanics
@@ -520,29 +560,35 @@ A: Update immediately when new content is added or changed. Review/audit monthly
 - `VELINOR_SAORI_FINAL_ARC.md` - Final encounter details
 
 **Story Map Sections:**
+
 - Core Narrative Arc → Understanding main story
 - Character Relationships → NPC details
 - Glyph System → Collection mechanics
 - Ending Branches → All possible conclusions
 - Narrative Decision Points → Choice nodes
+
 ##
 
 ## Contact
 
 **Questions about the story map?**
+
 - Narrative Lead: [Contact info]
 - Project Manager: [Contact info]
 - Development Team: [Contact info]
 
 **Reporting issues with the story map?**
 Create an issue with:
+
 - Section name
 - Description of problem
 - Suggested fix (if any)
 - Priority level
+
 ##
 
 **Remember:** The story map is a living document. It should evolve as Velinor evolves. Keep it updated, keep it consistent, and let it guide the creation of this emotionally resonant world.
+
 ##
 
 **Last Updated:** December 14, 2025

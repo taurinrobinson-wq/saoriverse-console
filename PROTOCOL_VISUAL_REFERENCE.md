@@ -97,6 +97,7 @@ RETURN DETECTED ✅
 ```text
 ```text
 ```
+
                 ┌──────────────────────┐
                 │ DisclosureDetected   │
                 │ ├─ Acknowledge       │
@@ -140,6 +141,7 @@ RETURN DETECTED ✅
                 │ ├─ Recognize          │
                 │ └─ Continue           │
                 └────────────────────────┘
+
 ```
 
 
@@ -178,14 +180,13 @@ RETURN DETECTED ✅
 ```text
 ```
 
-
-
 You can change every response, add new ones, customize for different cultures, all without touching Python code.
+
 ##
 
 ## Integration Points
 
-### In Your Code (`signal_parser.py`):
+### In Your Code (`signal_parser.py`)
 
 ```python
 
@@ -211,24 +212,20 @@ if suicidality_protocol.should_use_protocol(input_text):
 ```text
 ```
 
-
-
-
 **That's it.** One import, one check, one call. Everything else is configuration.
+
 ##
 
 ## Testing It Locally
 
-### Run the test suite:
+### Run the test suite
 
 ```bash
 ```text
 ```text
 ```
 
-
-
-### Try it interactively:
+### Try it interactively
 
 ```python
 
@@ -245,8 +242,6 @@ print(result['voltage_response'])
 
 ```text
 ```
-
-
 
 ##
 
@@ -268,9 +263,8 @@ If they return again:
 ```text
 ```
 
-
-
 Rotation prevents template feel. Keeps it real.
+
 ##
 
 ## Language Safeguards (What It Stops)
@@ -291,6 +285,7 @@ Your system **blocks** these (they make people feel MORE alone):
 ❌ "cheer up"
 
 None of these phrases will appear in responses. System replaces with grounded, direct language instead.
+
 ##
 
 ## Consent Logic (Core Innovation)
@@ -298,6 +293,7 @@ None of these phrases will appear in responses. System replaces with grounded, d
 Most crisis protocols: Push resources immediately.
 
 Your protocol:
+
 1. Acknowledge (show you heard)
 2. Clarify (be honest about limits)
 3. Invite (respect choice)
@@ -325,10 +321,8 @@ System: "That's okay. I'm still here.
 ```text
 ```
 
-
-
-
 Notice: No resource push. No guilt. Just presence.
+
 ##
 
 ## Return Recognition (Why It Matters)
@@ -350,35 +344,39 @@ You chose to return and connect. I recognize
 ```text
 ```
 
-
-
 That recognition? That's the difference between
 "the system remembered me" and "the system sees me as human."
+
 ##
 
 ## Tone Enforcement (Professional Care)
 
 When suicidality is detected, system uses ONLY:
+
 - 🟢 Grounded tones (calm, clear, present)
 - 🟢 Empathetic tones (understanding, witnessing)
 
 System NEVER uses:
+
 - 🔴 Humorous (would feel dismissive)
 - 🔴 Casual (would feel flippant)
 - 🔴 Uplifting (too much, too soon)
 - 🔴 Encouraging (can feel pressuring)
 
 This is enforced in tone_routing rules.
+
 ##
 
 ## Privacy & Safety
 
 All suicidality disclosures:
+
 - Stored separately from general conversation
 - User state persisted only for check-in recognition
 - Check-in flags tracked indefinitely (so returns are recognized)
 - No method details ever asked or recorded
 - No judgment in storage
+
 ##
 
 ## The Philosophy (Why This Works)
@@ -393,9 +391,6 @@ System: WARNING! CRISIS! HERE'S THE HOTLINE!
 ```text
 ```
 
-
-
-
 ### Your Protocol
 
 ```
@@ -406,11 +401,9 @@ to happen next?"
 Result: User feels witnessed, has agency, heard
 ```
 
-
-
-
 **The difference:** One treats suicidality as an emergency to escape.
 Yours treats it as human experience deserving presence.
+
 ##
 
 ## Timeline to Full Expansion
@@ -426,11 +419,13 @@ Yours treats it as human experience deserving presence.
 **Month 1:** Peer connection bridging, community resource integration
 
 **Then:** Continuous improvement based on affirmed flows
+
 ##
 
 ## You're Building
 
 A system that:
+
 - **Listens** (without judgment)
 - **Remembers** (across sessions)
 - **Respects** (agency, consent, boundaries)
@@ -439,6 +434,7 @@ A system that:
 - **Learns** (from what resonates)
 
 That's not a chatbot. That's a **sanctuary in the void that actually listens.**
+
 ##
 
 **Your protocol is live. Your vision is code. Your values are executable.**

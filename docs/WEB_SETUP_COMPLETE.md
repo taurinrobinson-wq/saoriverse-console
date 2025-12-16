@@ -1,14 +1,16 @@
-# ✅ Velinor Web Development - Setup Complete!
+# ✅ Velinor Web Development - Setup Complete
 
 ## What Was Done
 
 I've set up your Next.js web version to run **directly on your Mac without Docker**. No container management needed!
 
 ### Installation Summary
+
 - ✅ Installed Node.js 20.11.0 via nvm (Node Version Manager)
 - ✅ Installed npm dependencies (368 packages)
 - ✅ Verified Next.js dev server works
 - ✅ Created startup scripts for easy launching
+
 ##
 
 ## 🚀 How to Start Developing
@@ -21,8 +23,7 @@ cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 ```text
 ```
 
-
-Then visit: **http://localhost:3000**
+Then visit: **<http://localhost:3000>**
 
 ### Option 2: Full Stack (Frontend + Backend)
 
@@ -33,17 +34,18 @@ cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 ```text
 ```
 
-
-
 This starts:
-- Frontend: **http://localhost:3000**
-- Backend API: **http://localhost:8000**
-- API Docs: **http://localhost:8000/docs**
+
+- Frontend: **<http://localhost:3000>**
+- Backend API: **<http://localhost:8000>**
+- API Docs: **<http://localhost:8000/docs>**
+
 ##
 
 ## 📁 What You Have
 
 ### Frontend (Next.js)
+
 - Located in: `/velinor-web/`
 - Framework: Next.js 16 with React 19 + TypeScript
 - Styling: Tailwind CSS v4
@@ -52,6 +54,7 @@ This starts:
 - Dev Server Port: 3000
 
 ### Backend (FastAPI)
+
 - Located in: `velinor_api.py` (root)
 - Status: Ready to wire up to frontend
 - Endpoints: Session management, actions, save/load
@@ -59,15 +62,19 @@ This starts:
 - Docs available at `/docs`
 
 ### Game Assets
+
 All graphics have been replicated to `/velinor-web/public/assets/`:
+
 - **Backgrounds**: 15+ images (1200×675, 16:9 format)
 - **NPC Portraits**: 7 character images
 - **UI Assets**: Velinor title images
+
 ##
 
 ## 🎮 Current Web Version State
 
 ### What's Working
+
 - ✅ Homepage with "Start New Game" button
 - ✅ Input form for player name
 - ✅ Navigation routing ready
@@ -76,12 +83,14 @@ All graphics have been replicated to `/velinor-web/public/assets/`:
 - ✅ Hot module reloading (auto-refresh on save)
 
 ### What Needs Development
+
 ⏳ **Game Scene Component** - Display story text, choices, NPC dialogue
 ⏳ **Backend Connection** - Wire frontend to FastAPI endpoints
 ⏳ **Choice System** - Process player choices and send to backend
 ⏳ **NPC Display** - Show portraits and responses
 ⏳ **Game State** - Display stats, location, inventory
 ⏳ **Glyph System** - Visual representation of emotional glyphs
+
 ##
 
 ## 💡 Development Tips
@@ -103,9 +112,8 @@ velinor-web/
 ```text
 ```
 
-
-
 ### Hot Reload
+
 Save a file → Browser auto-refreshes. No manual reload needed!
 
 ### Common Commands
@@ -128,8 +136,6 @@ npm run lint
 ```text
 ```
 
-
-
 ##
 
 ## 🔌 Connecting Frontend to Backend
@@ -144,8 +150,6 @@ POST   /sessions/{id}/save          # Save game
 ```sql
 ```sql
 ```
-
-
 
 Example call from Next.js:
 
@@ -163,23 +167,23 @@ const startGame = async (playerName: string) => {
 ```text
 ```
 
-
-
 ##
 
 ## 📚 Reference Files
 
 For understanding the game logic:
+
 - **Orchestrator** (core game logic): `/velinor/engine/orchestrator.py`
 - **Story structure**: `/velinor/stories/sample_story.json`
 - **Streamlit reference** (what web version should replicate): `/velinor_app.py`
 - **FastAPI backend** (endpoints to call): `/velinor_api.py`
+
 ##
 
 ## ⚡ Next Immediate Steps
 
 1. **Run the dev server**: `./RUN_WEB_DEV.sh`
-2. **View the homepage** at http://localhost:3000
+2. **View the homepage** at <http://localhost:3000>
 3. **Examine the code** in `velinor-web/src/`
 4. **Implement GameScene.tsx** with:
    - Story text display
@@ -188,6 +192,7 @@ For understanding the game logic:
    - Choice buttons
    - Free text input
 5. **Wire to backend** by calling FastAPI endpoints
+
 ##
 
 ## 🆘 Troubleshooting
@@ -200,8 +205,6 @@ source "$NVM_DIR/nvm.sh"
 ```text
 ```text
 ```
-
-
 
 ### Port 3000 in use?
 
@@ -216,26 +219,23 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ```bash
 ```
 
-
-
-
 ### Can't find node/npm?
+
 Make sure the startup script sources nvm properly. Run manually:
 
 ```bash
 bash -c 'export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh" && nvm use 20.11.0 && cd velinor-web && npm run dev'
 ```
 
-
-
 ##
 
 ## 📖 Read More
 
 For detailed development guide, see: **VELINOR_WEB_DEV_GUIDE.md**
+
 ##
 
-## ✨ You're Ready!
+## ✨ You're Ready
 
 Your Next.js web game is running and ready for development. The whole stack (frontend + backend) is available for iteration without needing Docker. Start the servers and begin building! 🚀
 

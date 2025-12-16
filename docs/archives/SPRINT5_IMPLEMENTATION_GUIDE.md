@@ -24,9 +24,6 @@ if glyphs:
     response_text = composer.compose_multi_glyph_response(...)
 ```
 
-
-
-
 **New code**:
 
 ```python
@@ -62,9 +59,6 @@ if glyphs:
     else:
         response_text = result
 ```
-
-
-
 
 ### 2. Add Session Logging to Chat Flow
 
@@ -109,9 +103,6 @@ def on_user_message(user_text, confidence=0.95):
             st.metric("Quality", f"{metrics.get('quality_score', 0):.0%}")
 ```
 
-
-
-
 ### 3. Add Edge Case Validation
 
 **File**: `emotional_os/deploy/modules/ui.py` (before processing user input)
@@ -129,8 +120,6 @@ if not is_valid:
     st.error(f"⚠️ {error_msg}")
     st.stop()  # Don't process this input
 ```
-
-
 
 ##
 
@@ -231,8 +220,6 @@ def render_main_app_safe():
         st.session_state.messages.append({"role": "assistant", "content": response_text})
 ```
 
-
-
 ##
 
 ## Testing the Integration
@@ -265,8 +252,6 @@ if prosody:
 "
 ```
 
-
-
 ##
 
 ## Expected Behavior After Integration
@@ -278,9 +263,6 @@ User: what a freakin' stressful day this has been!
 System: Thank you for asking. I'm focused on you—how are you feeling?
 System: I'm steady. How about you—what's on your mind?
 ```
-
-
-
 
 **After Integration**:
 
@@ -295,9 +277,6 @@ System: [Emotionally matched response reflecting frustration/stress]
   - Attunement: 94% (highly engaged)
 ```
 
-
-
-
 The system now:
 
 1. ✅ Detects high emotion (stressful → intensity 0.8)
@@ -306,6 +285,7 @@ The system now:
 4. ✅ Adds micro-pauses for reflection
 5. ✅ Logs interaction for learning
 6. ✅ Shows session metrics
+
 ##
 
 ## Files to Modify
@@ -322,6 +302,7 @@ The system now:
 3. **New files** (already created):
    - `sprint5_integration.py` - Central integration bridge
    - `enhanced_response_composer.py` - Enhanced composer with prosody
+
 ##
 
 ## Performance Impact
@@ -331,6 +312,7 @@ The system now:
 - **Edge Case Validation**: ~2-5ms (subsecond)
 - **Advanced Prosody**: ~5-10ms (negligible vs TTS)
 - **Total**: <50ms overhead (unnoticeable to user)
+
 ##
 
 ## Rollback Plan
@@ -344,10 +326,8 @@ composer = DynamicResponseComposer()  # Use original
 response_text = composer.compose_multi_glyph_response(...)
 ```
 
-
-
-
 No other code needs to change - enhanced_response_composer is a drop-in replacement.
+
 ##
 
 ## Next Steps

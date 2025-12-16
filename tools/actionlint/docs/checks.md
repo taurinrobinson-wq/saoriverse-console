@@ -63,8 +63,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -79,9 +77,6 @@ test.yaml:12:9: unexpected key "Shell" for "step" section. expected one of "cont
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJw9jEEOwyAMBO95xX4AcecbfQEkTkmLMMK2ov6+ATU92d6ZNdeAZpKXFycJC6AkOibQrYrji1uyquZKHGyijfZo5edN816Bk/v7qE+3HZ1W5f4J8C1q9sr+yqYnSk3uipt90JoZmUrh/6vHOANSlPwFtPsxjA==)
 
@@ -114,8 +109,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -130,9 +123,6 @@ test.yaml:8:9: key "version_name" is duplicated in "matrix" section. previously 
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtuJSUChJLS4B0QoKxSVFiSWp6ZUQnoJCbmJJUWYFjKegUJZaVJyZnxefl5ibaqUQXWaoo1BmFAuXDnMNCvb094v3c/R1BUqHAaXDoNLFJakFxTCDdBWKSoGOSE3OyFdQz0jNyclXBwA2byiy)
 
@@ -155,8 +145,6 @@ on: push
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -167,9 +155,6 @@ test.yaml:2:6: "jobs" section should not be empty. please remove this section if
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtgIAJQsE6g==)
 
@@ -201,8 +186,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -221,9 +204,6 @@ test.yaml:13:26: expecting a single ${{...}} expression or float number literal,
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJw1jssNAjEMRO9bxTQQtCBxSTdeyYGg/BTbArongXCy5o395Fo8msl9e9RD/AYoi84JiHZSvr1/CQgUkws0atQQFsz0co06pcTJ43y6fnm3Iq4OtR1W1FyiqV1WbvJXurnpIYm54bLvC48vYuZq6nIsNk499FmxwgdsuTVm)
 
@@ -256,8 +236,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -280,9 +258,6 @@ test.yaml:13:38: unexpected end of input while parsing object property dereferen
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJx1jTEOwjAMRfeewoqQUgptxZoDMHCLJLJwIYor7LBUvTsNrHT48pfekz9nB3MRah4cxDUAiqL1ArxKlp43XkLJWvrkK/siUZzlZwH01XSAkRjsYVnAEKbEBtbV7ikXOG35L5gqKN+Ec0te6DollNZ23Zg4Pu0Zao0+Eo72uP0weyP3SamEAd+YdahjH8ffRDM=)
 
@@ -333,8 +308,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -358,9 +331,6 @@ test.yaml:13:20: object, array, and null values should not be evaluated in templ
 ```json
 ```
 
-
-
-
 [Playground](https://rhysd.github.io/actionlint#eJx9jrEKAjEQRPv7iimEqxKs8yticTkWE5FsyO4qcty/m2jtVVO8N8xwCagmabpzlDABSqIjgWZFHHdu0YqaeyyDfZEoVflZgBtmAK2JMZ+2DVSel/MV+z7/M/qYX7nokgs1z3Lk3rImi75RZcnK7e351VtHlX5g4A+nCkLw)
 
 Type checks for expression syntax in `${{ }}` are done by semantics checker. Note that actual type checks by GitHub Actions
@@ -376,8 +346,6 @@ object or array, use `toJSON()` function.
 ```text
 ```text
 ```
-
-
 
 There are two types of object types internally. One is an object which is strict for properties, which causes a type error
 when trying to access unknown properties. And another is an object which is not strict for properties, which allows to access
@@ -413,9 +381,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -425,8 +390,6 @@ test.yaml:19:14: type of expression at "env" must be object but found type strin
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJydkM0KgzAQhO8+xSCCp/QBAj20h0JPFm89lUSCP7SJmE1pEd+9SVWseOtp2WHm20mM5midraLGSMsjgJSlMAFLnSBVvscNeAjq6te8AUo/b95T63LRAIb0lGX74yFPt+rlfM3SFcDIRhW0BngnhwdsxZD/qp3Tlhnf3UmnybG7CL2n2qq1M5AFJ4cqKoM48Yz49zpH0vfTu3ZLGwzDf/HxN3z8A4EEWVQ=)
 
@@ -463,9 +426,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -495,8 +455,6 @@ test.yaml:20:24: format string "{0}{1}" does not contain placeholder {2}. remove
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJydkNGKwjAQRd/9ikGEuJIWdd/6Iz5KWmeNazojnYkKpf9uorAorH3wKYR7zs0lTBWcovjJL9dSTQAURfMJ0EWSglMe60gai+Bydo9E8SQPCqDIZAXYeAYz63uIdCS+0LZhUrwqDIN5h+4P6mNd4hlJ5Q04zaCo63ST6LnxGAJbuHAXdsaCSRfzldzpqCv/yJ9Z9mX1aEf+AXcg+WD0n/r8WBlcjUHKRUmuxVSD5B012KZsvO6Hu9bp3PTLoV8NacHKwtrC9126AZ31neg=)
 
@@ -548,9 +506,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -564,8 +519,6 @@ test.yaml:22:24: property "get_value" is not defined in object type {} [expressi
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJytkEsOglAMRees4g5MGD0W0MS1GMAqGHwltHVC2Ls+Pg6MiTE66uCec9tUIqF3bbKLVEoZYKyWJjB41CCP3CuP5qErUzZH4ta76cIBJxFCvhtHqHGvxZntcCs752IFi1heGdOUz8IMbW5IewhcN/JFxYtHpGxhIZHAfTqJ5oJNANoj4dn7z/XvvFpi3bm2EldLrOHh42d/+80ddrSUCw==)
 
@@ -604,9 +557,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -620,8 +570,6 @@ test.yaml:18:23: property "cache_hit" is not defined in object type {cache-hit: 
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyNTksKwjAQ3fcUbyFUC0nBZVauvIakMZjY0gRnokjp3W3TUl26Gt53XugVYiJXFPfQkCoAtsTzBR6pJxEmQ2pSz0l0etayRGwjLS5AIJElBW3Yh55qo42zp+dxlQF/Vcjkxrw8O7UhoLVvhd0wwGlyZ99Z2pdVVVeyC6YtDxjHH3PUUxiyjtq0+mZpmzENVrDGhVyVN8r8V4bEMfGKhPP8bfw7dlliH1xHWso=)
 
@@ -649,9 +597,6 @@ runs:
 ```text
 ```
 
-
-
-
 Example input:
 
 ```yaml
@@ -673,8 +618,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -689,9 +632,6 @@ test.yaml:15:23: property "some-value" is not defined in object type {some_value
 
 ```text
 ```
-
-
-
 
 The 'My action with output' action defines one output `some_value`. The property is typed at `steps.my_action.outputs` object
 so that actionlint can check incorrect property accesses like a typo in the output name.
@@ -740,8 +680,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -760,9 +698,6 @@ test.yaml:34:24: property "os" is not defined in object type {} [expression]
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyNUstuwyAQvOcr5lCJRIotpUpUCalfUvVAbJzQ2oBYSFql+fdCHOo8XLUntMsMOzuD0Rw20HbyZtbEJ4CX5NMJkHfCy81nXwGd8E595AowxPES1kH7ULQi8ebYK12bPZ3r1x+sNrWM6MVyjsVqaFtRvYuNHN4ECmjRRSxrjGEX/TjPemW0aDm8C3KMshbuN0ojWho4SldtqG/nnjQuVlcvaNtxPJWrcnlqu6CpMNGzh8PhbEhpCMfj2TFpKT9aJDCHrLYG7AJuozeNcV0ksb+gvT1lLXf36K8LnT0zBXKri92h0prYSUfqZo/TxRgjp4QRacn5SMI0W/08Asp3ETgb3Tm6nCVBEcjKSjVK1oMW1fTjK6O9UJqmWbTt5mAxIDbrU0j/7pFfh3X1Sf+fVG/gN6xO5N4=)
 
@@ -791,8 +726,6 @@ steps:
 ```text
 ```text
 ```
-
-
 
 <a name="check-contextual-needs-object"></a>
 
@@ -838,9 +771,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -862,8 +792,6 @@ test.yaml:33:24: property "build" is not defined in object type {} [expression]
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJylUs1uwjAMvvMUPiD1QvMAeRU0oZZ4S6cujmpHHBDvTh1CKjY0EBwiJfHn78cJBQsxsV99U892BTAElm4cdQtASWISvhxqDZ2FxhjT5OspBW5ppkl9CpLasRNkySUWjLW5VaQF3HuCpjAB0w+KH8KXcsUJYzfhXelSe19ZWXTdSv+BrY9HCIiOTVE2xdD17OB00s4+DaO7KGW8hW0Jt7ma/rgXSPvk7TRZfYkCh0E8LN6Lk+q9PuBsHrrg4OmY/wzot8gn0eMmtbyb/1xBknic7OtzWIjzRKqXPGXVOAPMHOsV)
 
@@ -898,9 +826,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -914,8 +839,6 @@ test.yaml:14:9: shellcheck reported issue in this script: SC2086:info:1:6: Doubl
 ```json
 ```json
 ```
-
-
 
 [shellcheck][] is a famous linter for ShellScript. actionlint runs shellcheck for scripts at `run:` step in a workflow.
 For installing shellcheck, see [the official installation document][shellcheck-install].
@@ -956,9 +879,6 @@ steps:
 ```text
 ```
 
-
-
-
 The 'Show file content' script is only run by `pwsh` due to `matrix.os == 'windows-latest'` guard. However actionlint does not
 know that. It checks the script with shellcheck and it'd probably cause a false-positive (due to file separator). This kind of
 false positives can be avoided by showing the shell name explicitly. It is also better in terms of maintenance of the workflow.
@@ -970,8 +890,6 @@ false positives can be avoided by showing the shell name explicitly. It is also 
 ```text
 ```text
 ```
-
-
 
 <a name="check-pyflakes-integ"></a>
 
@@ -1009,9 +927,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1029,8 +944,6 @@ test.yaml:23:9: pyflakes reported issue in this script: 1:1: 'time.sleep' import
 ```text
 ```text
 ```
-
-
 
 Python script can be written in `run:` when `shell: python` is configured.
 
@@ -1082,9 +995,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1103,8 +1013,6 @@ test.yaml:22:31: object filter extracts potentially untrusted properties "github
 ```json
 ```
 
-
-
 [Playground](https://rhysd.github.io/actionlint#eJyFkUFLAzEQhe/9FXMQ2gqJF085eRFBoRXsvWSzQ3drNrNmJi1S+t9NdkupSvUUknnzvcdLsB0aWCHLhIKBPnm/jviRysNkSxWbCYDkWzkBYgqsijBVKUhS3pbZMGLBnkcVgIIwgF9jG2SgwokK0orHk2wAGkDXEExvDgfYtNKkSuMOg+jLMHpYg+NxenZIjGzAOmkp8B2L9fiwuz+T9xllzrfshD0poXfMhsWK0UUU1qvly+Migy+kA0v1UXXIbDc4LvyfDfaWwXlirK+kHBmKXWx7+SvtqDDg8hZ51J42s98NNWjrtaOua0XbJA1FXXovNc1//MQTChRlXuNr7Qs9vy0Xs28Wt7qi+nNekF/IR69F)
 
 Since `${{ }}` placeholders are evaluated and replaced directly by GitHub Actions runtime, you need to use them carefully in
@@ -1114,9 +1022,6 @@ inline scripts at `run:`. For example, if we have step as follows,
 
 ```text
 ```
-
-
-
 
 an attacker can create a new issue with the title `'; malicious_command ...`, and the inline script will run
 `echo 'issue'; malicious_command ...` in your workflow. The remediation of such script injection is passing potentially untrusted
@@ -1128,8 +1033,6 @@ inputs via environment variables. See [the official document][security-doc] for 
 ```text
 ```text
 ```
-
-
 
 actionlint recognizes the following inputs as potentially untrusted and checks your inline scripts at `run:`. When they are used
 directly in a script, actionlint will report it as an error.
@@ -1166,9 +1069,6 @@ of `github.event` as array. Those properties include untrusted inputs like `gith
 ```text
 ```
 
-
-
-
 Instead, you should store the JSON string in an environment variable:
 
 ```sh
@@ -1177,8 +1077,6 @@ Instead, you should store the JSON string in an environment variable:
 ```text
 ```text
 ```
-
-
 
 At last, the popular action [actions/github-script][github-script] has the same issue in its `script` input. actionlint also
 checks the input.
@@ -1211,9 +1109,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1223,8 +1118,6 @@ test.yaml:8:3: cyclic dependencies in "needs" configurations of jobs are detecte
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyljjEOxCAMBPu8YjsqPsBXTikgsZREyCBs/z+Bo0mdzvJ4Z104oJocy1WShAWojWps1EeAiXYJ+CU7876OVTMWX56UJWM1n6OS6ECiVOUfBHy/DKDtKHBT6h52smjM+e2f/EPD1PaG8ezbP+kH/5C6G78nW+Q=)
 
@@ -1252,9 +1145,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1268,8 +1158,6 @@ test.yaml:8:3: job "bar" needs job "unknown" which does not exist in this workfl
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyljD0OgiEQRHtOMR2NXIDO7wi2xgJ0v+BPdgnLxusLWFlbTfJm5glHVNPiHpI1OmAXmQEw0U0jzjm1A7bj6bJoM9Yg42TZuFt4pU7aV6Wdqn6/QJjLCLoWgS93P/AQ/ZqNnyxv/k/8AXoNOHs=)
 
@@ -1299,9 +1187,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1319,8 +1204,6 @@ test.yaml:12:13: "platform" in "exclude" section does not exist in matrix. avail
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxtkMEOgjAQRO9+xRw80gbUU3/FeACsooEu6bYJhvDvtqGgJBw2zezOvOyWjELvuTm8qWJ1AJxmF1+AnS2dfn5mBXSls69hUYChu1a4FnmG4hTqEuu2jonD0FfeOC/aMmKzgKiJk/o59VC3PrDWBiASvTj/NWfmBrkXyTeRPhgfZLu9oPWGBYUfOI5jOk8SY5rS/brnZSkRzQq6bghSyi9UwlNB)
 
@@ -1362,9 +1245,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1390,8 +1270,6 @@ test.yaml:15:3: unknown Webhook event "pullreq". see https://docs.github.com/en/
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxdjkEOAyEIRfeegnUTnb23UUvHaYxYwCa9fdWZTRsWH3g/H6h6A9C65KkAkUNN2cODaM0taBa/ZFPaftb22Csx/tNDpKOccfppo4XEGBTvY8VYMAheNOwDvm9u1PqiFMaXN+ZJcQUoip5W7lUsVQ899qrdljDZQqLYrnMAdjo9YMoEzrkvdVRCRg==)
 
@@ -1471,9 +1349,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1516,8 +1391,6 @@ test.yaml:39:24: property "massage" is not defined in object type {age: string; 
 ```json
 ```
 
-
-
 [Playground](https://rhysd.github.io/actionlint#eJyNkcFugzAMQO98hVX1Ch+Q68697TZNUwIuZICNYoeuqvrvA5qtmrJVuznPz07sMJkC4MShPw58emu8TFbrboUAnqaocouXU/MVAeh5QgOKH5pQ7ylL1x37GhMkO+JDAYAn9UxytwBKeLaj/QEOvr+XNHi0cVADTx07n/CIIrbNbhMNntoEZwyOJXMc84CW8v5nlAR/6UxxdBjyIkWkonhnt82kKHqrDJGkZDIQXSSN5WDX3JYSxel7A+VqGsBlT7DbXy7pQ6rRbgPC9br7y0SaX5KdRn39p740fqi2XrvoKpyRtMof9AmbKqYK)
 
 [`workflow_dispatch`][workflow-dispatch-event] is an event to trigger a workflow manually. The event can have parameters called
@@ -1554,9 +1427,6 @@ inputs:
 ```sql
 ```
 
-
-
-
 `inputs` is typed as follows from these definitions:
 
 ```
@@ -1570,8 +1440,6 @@ inputs:
 ```text
 ```text
 ```
-
-
 
 `github.event.inputs` is typed as follows since all properties of it are strings unlike `inputs`:
 
@@ -1587,9 +1455,6 @@ inputs:
 
 ```text
 ```
-
-
-
 
 <a name="check-glob-pattern"></a>
 
@@ -1618,8 +1483,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -1638,9 +1501,6 @@ test.yaml:11:14: invalid glob pattern. unexpected character '1' while checking c
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxNjEEKAjEQBO95Rd8CygQ8mq+IQrJEg8jMsjPj+3Wzl5yaoooWzgFYXfu+QN0KL73pQQAhPp4iFAdbec3mezrHiW5XutxjCG+po7KmdtSbs5Jwhldnc/qU3Q2l1tbp819mtKULUko/10snvA==)
 
@@ -1679,8 +1539,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -1695,9 +1553,6 @@ test.yaml:6:13: scheduled job runs too frequently. it runs once per 60 seconds. 
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxVjEEKgDAMBO99xd6EQKvgrb/RGhAprTTN/zWKB2/LzuzWEh0gaedNM1sGPFKrJWKYQOMMAg3/nr7eiDvqKjbsLP09aFrEm6mrlq4+L8YeJJ1PeS07vM0ITntFCOEChKgjxA==)
 
@@ -1744,8 +1599,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -1764,9 +1617,6 @@ test.yaml:23:14: label "macos-10.13" is unknown. available labels are "windows-l
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyFj8EKgzAQRO/5ijn0aEJtxUN+pfSQ2lQtNpFsAhbx36skUgKFnpbZnR3mWSMxBurY095IMsBr8tsEyDvldfuOCngp7/ppV4ALxmj31QBfPY0lPqgtJTsMvQnTr8OF9PDgnSWv70W0FZjq6pq5lHvVVbZpx8BSC+J2pTjMc6ooYjMsS+LQI+01+fYgoZvOQgjBEvFJ5mGRozyK8vw34wNI+VUQ)
 
@@ -1796,8 +1646,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -1808,9 +1656,6 @@ test.yaml:4:30: label "windows-latest" conflicts with label "ubuntu-latest" defi
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJwti0EOgCAMBO+8Yh8gPICvGA+iJEhMS2wbvq+op81mZpgimklxlZNEB2gWHQtcRuL54bMlIzV/rgNO6Aft3OX/yyuL5iZfB/jRRuStMEIIN17iHww=)
 
@@ -1840,8 +1685,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -1864,9 +1707,6 @@ test.yaml:13:15: specifying action ".github/my-actions/do-something" in invalid 
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxdzTEOgzAMBdCdU3hjSi119NSrJKlFUkqMsF2pty8UsWTy139fsjSC1bUML0lKA4Cx2nEBNm8aZHdP3szDOx72JzVe9VwBBHBlJYjZqjTFXDjP4tbxVT8+907Gp+SZN0KsS5yYxs5vOFUrnvD6sHzDGX98DjoH)
 
@@ -1910,8 +1750,6 @@ runs:
 ```text
 ```
 
-
-
 Example input:
 
 ```yaml
@@ -1932,9 +1770,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1948,8 +1783,6 @@ test.yaml:13:11: input "additions" is not defined in action "My action" defined 
 ```text
 ```text
 ```
-
-
 
 When a local action is run in `uses:` of `step:`, actionlint reads `action.yml` file in the local action directory and
 validates inputs at `with:` in the workflow are correct. Missing required inputs and unexpected inputs can be detected.
@@ -1978,9 +1811,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -1994,8 +1824,6 @@ test.yaml:9:11: input "keys" is not defined in action "actions/cache@v3". availa
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyFj0EKwjAQRfc9xV8I1UJbcJmVK+8xDYOpqUlwEkVq725apYgbV8PMe/Dne6cQkpiiOPtOVAFEljhP4Jqc1D4LqUsupnqgmS1IIgd5W0CNJCwKpGPvnbSatOHDbf/BwL2PRq0bYPmR9efXBdiMIwyJOfYDy7asqrZqBq9tucM0/TWXyF81UI5F0wbSlk4s67u5mMKFLL8A+h9EEw==)
 
@@ -2055,9 +1883,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2083,8 +1908,6 @@ test.yaml:30:16: shell name "sh" is invalid on Windows. available names are "bas
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJylkLsKwzAMRfd8hbZMhs7+GydWcIpqGcsihdJ/r52GUjz1sUm6R48rjhaSShjOPIkdAGiNem0BQNYohiugk8aihlxBKbskBZM8KQDTSAs4B4YxIBGPh1LBllvwrq74mE68Yd7jH3subu4s1ArLuwOPi1MqLxNtQT9zWY+rv7U7JswEt9O9KdsaPW/SHXRU/3mqhAdbk36k)
 
@@ -2119,9 +1942,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2135,8 +1955,6 @@ test.yaml:12:3: key "TEST" is duplicated in "jobs" section. previously defined a
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtuJSUChJLS4B0QoKRaV5xbr5QPnSpNK8klLdnESQHFiquCS1oBiiSkFBF6TSSiE1OSNfQT0jNScnXx0qo6CQmWIFVhyfmYJNdVJlKqra4BDXgHhPF6BYiGtwCE3cAQCKgUNq)
 
@@ -2173,9 +1991,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2189,8 +2004,6 @@ test.yaml:17:21: "password" section in "redis" service should be specified via s
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJx1kLEOwyAMRPd8hTemNDt/4xCroQKMMDT9/AJNUYd0wrp357PgoCEW2acHr6IngEyS2wuQSpCZKy9rCbnMDhvryHDIaAOljxPAeryTBkUv9NHRzbBf+KiGpRN12kyijUK26OSbBChCKaCv8TYNOaLIwWnTfepyxU9raGTrNvuz6Dyiq0O8rPxbel2bKY7w3P5FA5mdQe3kHKs3Uktdww==)
 
@@ -2218,9 +2031,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2234,8 +2044,6 @@ test.yaml:7:7: environment variable name "FOO BAR" is invalid. '&', '=' and spac
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtuJSUChJLS4B0QoKRaV5xbr5QPnSpNK8klLdnESQHFgqNa8MokZBwc3f39bJMchKIS0/HyGkgCJUXJJaUAzToAsy2EohNTkjX0E9IzUnJ18dAPhYJMc=)
 
@@ -2270,9 +2078,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2290,8 +2095,6 @@ test.yaml:13:15: "readable" is invalid for permission of scope "issues". availab
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxNjd0NwyAMhN89xS3AAmwDxBK0FCOMlfUDiVr16aTv/qR5dNNM1Hl8imqRph7nKJOJXhLVEzBZ51ZgWFMnq2TR2jRXw/Zu63/gBkDKnN7ftQethPF6GByOEOuDdXL/ldw+8eCUBZlrlQvntjLp)
 
@@ -2356,9 +2159,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2376,8 +2176,6 @@ test.yaml:25:18: input "path" of workflow_call event has the default value "", b
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJx9kctuwyAQRff9ilFUKSsn6mPFN3TRh7quMB4XUswQGJRGkf+9JjiR5dbdwZnhzmUuOXEDcKDw1Vo6fChpbQYAxvnEsZwBotLY4eUG0GBUwXg25AS8nYtALby/Pk1aWpksC9DMPl4xHz0KiByM+xyhpsji9zv8lp23uFHU/ffaU+AFY89DadHWWtzdPzyuZ9IudTWGEe4ThuOC9kuuzcWLBtU7VHyxJ1kv2RtKc4WA+2QCNgI4JPzD9dzwuIsd1eewGirDQnKxykNSnRynykrGWDxFRn8Ntsqdw66VJljdnk5j7psSOPS92G4nOEeV4QTl/Q9oSvK/+n71A7U5rsA=)
 
@@ -2412,9 +2210,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2436,8 +2231,6 @@ test.yaml:19:11: could not read reusable workflow file for "./.github/workflows/
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJyFjkESwiAMRfeeIhdomaorVl4FOmlBKWFIEL29bRkdV7r6Wfz38ilqSIXd4UqW9QFgzWFLgMLIGqhGzCpjIpWMOCWkKuXbFKj2zyVc7sNeziVyR6us2BKldMEIsjTf8dvXq3724or9aFiNflctxsdGnBpR12K7ACYiDdbk398AWDDxG+q2pgYcHYHDEKjpz/8GRZIOH57Fx3mb9gJtJVzI)
 
@@ -2484,9 +2277,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2500,8 +2290,6 @@ test.yaml:23:22: property "credentials" is not defined in object type {credentia
 ```json
 ```json
 ```
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJx9UD1PwzAQ3fMr3oCUKVGFmLwzgUAqMFeOfSDT9BzZZ6qo6n/HjUNSMXS7e/c+7s6zqoCjD/vP3h93Rvf9BQAcD0liqYEU+r8SsBRNcIM4zwr16FPAx/a5XuYyDqQQJTj+msE+mf2443ToKNw0mogoxP+OBZ3ASCbQul5uLLE4fXvLlVZX1bfvJr1QlKIKiWNzYacusaTmftNuHkqc0LCENWB9yOu8EVtYLXqJzAYKJv8Kd6fT/ME2BYfzGY29Bq//kaeLA/HPegHw/vr0+KIm4Xxxu94Qs/AXqVaEog==)
 
@@ -2525,9 +2313,6 @@ jobs:
 ```text
 ```
 
-
-
-
 This means that actionlint cannot know whether the workflow inherits secrets or not when checking a reusable workflow.
 To solve this issue, actionlint assumes that
 
@@ -2549,8 +2334,6 @@ jobs:
 ```text
 ```
 
-
-
 this workflow causes no error. And
 
 ```yaml
@@ -2567,9 +2350,6 @@ jobs:
 
 ```text
 ```
-
-
-
 
 this workflow causes 'no such secret' error at `secrets.FOO`.
 
@@ -2596,8 +2376,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -2608,9 +2386,6 @@ test.yaml:6:20: property "imagetag" is not defined in object type {image_tag: st
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJx1j0EOgyAQRfc9xcR0C92z7j0M6tRSKRgYdGG8ex1Rkqbpkp/Hf3+8UxeA2YfhYf1ct9paDgB8ojFRzA8A89Y9iglDNN6dIUCHsQ1mJA6huvt2wJBZONiqsJO2CRVclwVevomyRye+auXhlHtKuod1vTDKvh86jwjJRcHy1CRHSVhNGOnvBfXWug3lDZFw5BHEWVFnax69E+d3wSoF8pbJutTJ+Cwnmk7B0fgB2ORuYw==)
 
@@ -2647,8 +2422,6 @@ jobs:
 ```text
 ```
 
-
-
 Example input:
 
 ```yaml
@@ -2682,9 +2455,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Output:
 
 ```
@@ -2714,8 +2484,6 @@ test.yaml:24:16: input "message" is typed as string by reusable workflow "./.git
 ```text
 ```text
 ```
-
-
 
 Reusable workflows can define required/optional inputs and secrets. When they are missing or some undefined input is used in a
 workflow call, actionlint reports an error.
@@ -2752,9 +2520,6 @@ jobs:
 ```text
 ```
 
-
-
-
 Example input:
 
 ```yaml
@@ -2774,8 +2539,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -2786,9 +2549,6 @@ test.yaml:13:24: property "tag" is not defined in object type {version: string} 
 
 ```text
 ```
-
-
-
 
 Outputs of workflow call are set to the job's outputs object. They can be accessed by downstream jobs specified with `needs:`.
 What outputs are set is defined in the reusable workflow. actionlint types outputs objects from workflow calls and check the
@@ -2829,8 +2589,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -2853,9 +2611,6 @@ test.yaml:17:3: invalid job ID "2d-game". job ID must start with a letter or _ a
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJylzTEOwyAMheGdU7wtkyM13Zi79BhJIYWKYoQhuX5Cyw0yWv70P44aqYpT6sOLaAWszLTdxmm8twvINQrxyepSY6kU5mKl/F5SbJK/AqhJDftyjOGM4fnA7ovDZrN4jkN3gDedrZzRY+RsCEw752DowjBzkrY0GXrPX3u1dACDIlSH)
 
@@ -2898,8 +2653,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -2918,9 +2671,6 @@ test.yaml:24:33: calling function "success" is not allowed here. "success" is on
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJx9jkEOgjAURPc9xSxM1AUcoBvjwqVuPAGUr6DQkv5flRDvLhVRExO7aWbmTTvOarSBS6XIXrQCduvtRsOXHRdKnVzO0RRiiTfA4jOhYzcqoMnEV7dJAUXlyYjz3ccCEsz6HsdKypCnV+fPh9pdcb//ID5YSz4VatopHixO3LAy5MFKSOosjnlGr8XxjKvjE4OZRjX1WajlCUu+O/97r781yJQO830whphXT5ZHsVgO8PxNVwf9SR5WsV7P)
 
@@ -2965,8 +2715,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -2977,9 +2725,6 @@ test.yaml:8:14: workflow command "set-output" was deprecated. use `echo "{name}=
 
 ```json
 ```
-
-
-
 
 [Playground](https://rhysd.github.io/actionlint#eJxtyjEOgkAQRuGeU/zZmFDtBSaBwkatMBFqs4ujaHCHsDOeX9CW6hXvk0SYLA9F8ZKYqQCUs64FZkvZywIsWlLzY1jfb2XlKf8V4FdJ4H4QlESZ1YvpZIoU3lzdRYhimMsN7pZZLc+hruF2h1N77PbXpmvPXeu2PNGNoz2ILqzQgdH0Kn1QfML8DHFk9wXMjT7o)
 
@@ -3029,8 +2774,6 @@ jobs:
 ```text
 ```
 
-
-
 Output:
 
 ```
@@ -3050,9 +2793,6 @@ test.yaml:26:13: if: condition "${{ github.event_name == 'push' }} && ${{ github
 ```json
 ```
 
-
-
-
 [Playground](https://rhysd.github.io/actionlint#eJy1j00OgjAQhfec4oUYusIDNGHlQQzoIDW2JXTqBrm7FP8wJogaV5PJ+/K9GWskau+qKNrbwskIYHIcJtB441LbA77whn16yEM2RI6pdhcKSAMpQZvKQqys1oqh3KClrbhCgColFm2LneLKF0s6kuG1yTUhyyACLdB1nztP9w1T7t/E/zg8fi9FPEcLttC5Ms/6KXOS3OKGykc4lnzROOOfvnhEvZb3zBmiAMLK)
 
 Evaluation of `${{ }}` at `if:` condition is tricky. When the expression in `${{ }}` is evaluated to boolean value and there is
@@ -3068,17 +2808,12 @@ if: |
 ```text
 ```
 
-
-
 is equivalent to
 
 ```yaml
 
 ```text
 ```
-
-
-
 
 Unlike using `${{ }}`, putting an expression directly ignores white spaces around it. It's the reason why
 
@@ -3087,13 +2822,11 @@ if: |
   false
 ```
 
-
-
-
 works as intended.
 
 actionlint checks all `if:` conditions in workflow and reports error when some condition is always evaluated to true due to extra
 characters around `${{ }}`.
+
 ##
 
 [Installation](install.md) | [Usage](usage.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)

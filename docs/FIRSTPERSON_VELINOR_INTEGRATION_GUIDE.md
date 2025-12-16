@@ -74,9 +74,11 @@ When a player types a message, FirstPerson extracts:
 ```text
 ```text
 ```
+
 NPC: I feel that brightness too.
 That's a light worth holding.
 Tell me more about what that feels like.
+
 ```
 
 
@@ -99,9 +101,11 @@ What needs to be said about it?
 ```text
 ```text
 ```
+
 NPC: There's something to sit with there.
 That deserves thought.
 What's sitting underneath that?
+
 ```
 
 
@@ -129,8 +133,10 @@ If emotions are **worsening** (getting more negative):
 ```text
 ```text
 ```
+
 NPC: I'm noticing the weight increasing.
 What's happening?
+
 ```
 
 
@@ -165,9 +171,6 @@ if 'firstperson_orchestrator' not in st.session_state:
 ```text
 ```
 
-
-
-
 ### 2. **Game Initialization** (`start_new_game()`)
 
 ```python
@@ -183,8 +186,6 @@ orchestrator = VelinorTwineOrchestrator(
 ```text
 ```text
 ```
-
-
 
 ### 3. **Player Input Processing** (`orchestrator.py`)
 
@@ -210,9 +211,6 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
 ```text
 ```
 
-
-
-
 ### 4. **NPC Response Generation** (`_generate_npc_dialogue()`)
 
 ```python
@@ -232,8 +230,6 @@ dialogue = self._generate_emotionally_aware_response(
 ```text
 ```
 
-
-
 ## 📝 Response Generation Logic
 
 The `_generate_emotionally_aware_response()` method constructs responses in three parts:
@@ -249,9 +245,6 @@ reflective:  "There's something to sit with there"
 ```text
 ```
 
-
-
-
 ### 2. **Middle** (acknowledges theme + memory)
 
 ```
@@ -265,8 +258,6 @@ Theme acknowledgment:
 ```text
 ```
 
-
-
 ### 3. **Closing** (invites deeper exploration, adjusted for intensity)
 
 ```
@@ -277,14 +268,12 @@ Low intensity (<0.3):   "What's sitting underneath that?"
 ```text
 ```
 
-
-
-
 ## 🧠 Conversation Memory System
 
 FirstPerson maintains memory across turns:
 
 ### Tracked Elements
+
 - **Turns**: Each turn records input, affect analysis, detected theme
 - **Themes**: Tracks frequency, recency, intensity history
 - **Entities**: People, relationships, work situations mentioned
@@ -302,8 +291,6 @@ frequency_reflection = orchestrator.memory.get_frequency_reflection("grief")
 ```text
 ```
 
-
-
 **Emotional trend detection:**
 
 ```python
@@ -317,9 +304,6 @@ elif trend == 'improving':
 
 ```text
 ```
-
-
-
 
 ## 🚀 How to Run
 
@@ -335,8 +319,6 @@ source venv/bin/activate
 ```text
 ```
 
-
-
 The integration works automatically—no configuration needed!
 
 ### Testing the Integration
@@ -349,10 +331,8 @@ The integration works automatically—no configuration needed!
 ```text
 ```
 
-
-
-
 Output shows:
+
 - ✓ FirstPerson imports successful
 - ✓ Orchestrator initialized
 - ✓ Emotional analysis on sample inputs
@@ -378,8 +358,6 @@ NPC Response:
 ```text
 ```
 
-
-
 ### Turn 2: Player mentions same theme
 
 ```
@@ -404,9 +382,6 @@ coming back to you. That tells me something. What needs
 ```text
 ```
 
-
-
-
 ### Turn 3: Player expresses slight improvement
 
 ```
@@ -429,8 +404,6 @@ a shift. What's helping? Tell me more about what you're
 ```text
 ```text
 ```
-
-
 
 ## 🎯 Features
 
@@ -458,9 +431,6 @@ enable_affect_analysis = true
 
 ```text
 ```
-
-
-
 
 ## 📚 Code Changes Summary
 
@@ -499,6 +469,7 @@ enable_affect_analysis = true
 **Player:** "I'm not sure if I can handle the responsibility of collecting glyphs. It feels overwhelming."
 
 **FirstPerson Analysis:**
+
 - Tone: `heavy`
 - Theme: `general` (responsibility/burden)
 - Valence: -0.6
@@ -506,11 +477,13 @@ enable_affect_analysis = true
 
 **NPC (Keeper) Response:**
 "I hear the weight in that. The path of a glyph-seeker isn't without its burdens. What needs to be said about it? Sometimes the weight lessens when shared."
+
 ##
 
 **Player:** "Maybe you're right. I think I just needed someone to acknowledge how hard this is."
 
 **FirstPerson Analysis:**
+
 - Tone: `reflective`
 - Theme: `general`
 - Valence: -0.2 ← (Improving!)
@@ -531,13 +504,12 @@ export PYTHONPATH="${PYTHONPATH}:/path/to/saoriverse-console/src"
 streamlit run velinor_app.py
 ```
 
-
-
-
 ### "AttributeError on emotional_tone"
+
 This means the emotional analysis didn't complete. The game gracefully falls back to basic responses. Check the terminal for errors.
 
 ### "Memory context empty"
+
 This is expected on first turn. Memory builds up after multiple player inputs.
 
 ## 📖 Next Steps
@@ -551,10 +523,12 @@ This is expected on first turn. Memory builds up after multiple player inputs.
 ## 📞 Support
 
 If you need to:
+
 - **Debug emotional analysis**: Check `FirstPersonOrchestrator.affect_parser` output
 - **Adjust response tone**: Modify `_generate_emotionally_aware_response()` templates
 - **Change themes detected**: Update `_extract_theme()` in FirstPerson module
 - **Add new NPCs**: Use same response generation pattern with different personality templates
+
 ##
 
 **Status:** ✅ **FirstPerson + Velinor Integration Complete**

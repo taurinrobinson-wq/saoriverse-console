@@ -17,9 +17,6 @@ You can run the same linter before committing to catch issues early:
 ./tools/actionlint/actionlint .github/workflows/*.yml
 ```
 
-
-
-
 Running the command above mirrors what CI runs and helps ensure consistent workflow quality.
 
 If you prefer using a system package or a different release of `actionlint`, make sure to run the same (or a compatible) version as the CI job to avoid false positives/negatives.

@@ -1,9 +1,11 @@
 # Velinorian Glyphic Dictionary (Sovereignty & Collapse Expansion)
+
 ##
 
 ## Sovereignty Glyphs
 
 ### Kaeth̄
+
 - **Phonetic Rendering**: /kaeθ/ → da-hah
 - **Literal Meaning**: Authority, command
 - **Emotional Voltage**: Power, sovereignty, control
@@ -14,6 +16,7 @@
 - **Lore Fragment**: “Kaeth̄ was carved into banners, the breath of command in Saonyx’s armies.”
 
 ### Orun̈
+
 - **Phonetic Rendering**: /ˈo.run/ → roo-ineah
 - **Literal Meaning**: Throne, dominion
 - **Emotional Voltage**: Sovereignty, legacy, burden
@@ -24,6 +27,7 @@
 - **Lore Fragment**: “Orun̈ was spoken in halls of power, where memory was bound to rule.”
 
 ### Valetḧ
+
 - **Phonetic Rendering**: /ˈva.lɛθ/ → ah-ha
 - **Literal Meaning**: Oath, decree
 - **Emotional Voltage**: Duty, law, sacred promise
@@ -34,6 +38,7 @@
 - **Lore Fragment**: “Valetḧ was spoken in courts, binding memory to law.”
 
 ### Tyran̈
+
 - **Phonetic Rendering**: /ˈtaɪ.ran/ → ineah
 - **Literal Meaning**: Rule by force
 - **Emotional Voltage**: Domination, fear, collapse
@@ -42,11 +47,13 @@
 - **Resonance Category**: Sovereignty / Shadow
 - **Gameplay Function**: Glows when player chooses coercion, unlocks destructive branches
 - **Lore Fragment**: “Tyran̈ was feared, the breath of rulers who silenced dissent.”
+
 ##
 
 ## Collapse Glyphs
 
 ### Drenn̄
+
 - **Phonetic Rendering**: /drɛn/ → da-hah
 - **Literal Meaning**: Break, fracture
 - **Emotional Voltage**: Collapse, destruction, entropy
@@ -57,6 +64,7 @@
 - **Lore Fragment**: “Drenn̄ was the word of fracture, spoken when bridges fell.”
 
 ### Veyrä
+
 - **Phonetic Rendering**: /ˈveɪ.ra/ → ah-ha
 - **Literal Meaning**: Silence, void
 - **Emotional Voltage**: Collapse, emptiness, cessation
@@ -67,6 +75,7 @@
 - **Lore Fragment**: “Veyrä was the last breath of Saonyx, spoken when memory dissolved into void.”
 
 ### Korrü
+
 - **Phonetic Rendering**: /ˈko.ru/ → hsii
 - **Literal Meaning**: Ruin, decay
 - **Emotional Voltage**: Collapse, erosion, inevitability
@@ -77,6 +86,7 @@
 - **Lore Fragment**: “Korrü was whispered in ruins, the hiss of walls crumbling.”
 
 ### Faleth̄
+
 - **Phonetic Rendering**: /ˈfa.lɛθ/ → da-hah
 - **Literal Meaning**: End, cessation
 - **Emotional Voltage**: Collapse, finality, inevitability

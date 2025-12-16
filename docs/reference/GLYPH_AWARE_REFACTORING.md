@@ -23,8 +23,6 @@ def compose_response(
 ```text
 ```
 
-
-
 **After:**
 
 ```python
@@ -37,9 +35,6 @@ def compose_response(
 
 ```text
 ```
-
-
-
 
 Both `compose_response()` and `compose_message_aware_response()` now accept full glyph dicts.
 
@@ -59,8 +54,6 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, ...):
 ```text
 ```
 
-
-
 ### 3. **Made Message-Aware Responses Glyph-Grounded**
 
 Updated `compose_message_aware_response()` to start with glyph description anchor:
@@ -74,9 +67,6 @@ if glyph and glyph.get("description"):
 
 ```text
 ```
-
-
-
 
 ### 4. **Updated Call Sites in signal_parser.py**
 
@@ -93,8 +83,6 @@ composed = _response_composer.compose_response(
 ```text
 ```
 
-
-
 **After:**
 
 ```python
@@ -107,12 +95,10 @@ composed = _response_composer.compose_response(
 ```text
 ```
 
-
-
-
 ### 5. **Fixed Database Field Mapping**
 
 Normalized glyph database fields:
+
 - Database returns `"gate"` (singular string, e.g., `"Gate 2"`)
 - Code now handles both `"gate"` and `"gates"` (list) formats
 - Intensity scaling works properly with gate information
@@ -137,8 +123,6 @@ naturally works..."
 ```text
 ```
 
-
-
 ### Message 3: Feedback Correction (Misalignment Detected)
 
 ```
@@ -156,9 +140,6 @@ not projecting onto you. Help me understand: what did I miss?"
 
 ```text
 ```
-
-
-
 
 ## Architecture Now
 
@@ -186,8 +167,6 @@ Dynamic Response Composer [GLYPH-AWARE]
 ```text
 ```
 
-
-
 ## Key Benefits
 
 1. **Glyph Grounding**: Responses now open with the glyph's description, immediately establishing meaning context
@@ -208,9 +187,6 @@ Response: "You're not alone—many brilliant people have genuine friction with m
 ```text
 ```
 
-
-
-
 **After Refactoring:**
 
 ```
@@ -224,9 +200,6 @@ pressure. a sanctuary of quiet care. You're not alone—many brilliant people ha
 friction with math..."
 [Glyph description directly embedded; intensity informed by gates]
 ```
-
-
-
 
 ## Files Modified
 
@@ -263,6 +236,7 @@ friction with math..."
 **Q: "It doesn't really connect to my glyph system in that structure. Am I right?"**
 
 **A**: Yes, but now it does! The refactoring ensures:
+
 - Glyph descriptions scaffold response openings
 - Glyph emotional signals inform tone and poetry selection
 - Glyph gates inform response intensity

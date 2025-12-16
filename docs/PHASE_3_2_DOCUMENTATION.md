@@ -103,11 +103,13 @@ Detects emotional expression from facial landmarks using Facial Action Coding Sy
 ```text
 ```text
 ```
+
 FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification
                  ↓
                 [Arousal, Valence, Dominance] ← AU combinations
                  ↓
                 Authenticity (AU consistency) & Attention (eye openness)
+
 ```
 
 
@@ -205,9 +207,6 @@ print(f"Valence: {analysis.valence:.2f}")         # ~0.63
 ```text
 ```
 
-
-
-
 ### Facial Expression Analysis
 
 ```python
@@ -234,8 +233,6 @@ print(f"AU6 (cheek): {analysis.action_units.intensities['AU6_cheek_raiser']:.2f}
 ```text
 ```text
 ```
-
-
 
 ### Multimodal Fusion
 
@@ -271,9 +268,6 @@ print(f"Fused valence: {dims.valence:.2f} (from {dims.valence_source})")
 ```text
 ```
 
-
-
-
 ## Integration with Phase 3.1
 
 Phase 3.2 data flows directly into Phase 3.1's emotional profiling:
@@ -290,8 +284,6 @@ Text + Voice + Facial (Phase 3.2)
 ```text
 ```text
 ```
-
-
 
 **Key inputs to Phase 3.1**:
 
@@ -316,9 +308,6 @@ Result: TEXT_POSITIVE_VOICE_NEGATIVE
 ```text
 ```
 
-
-
-
 ### Emotional Suppression
 
 ```
@@ -330,8 +319,6 @@ Result: SUPPRESSION
 ```text
 ```text
 ```
-
-
 
 ### Consistent Authenticity
 
@@ -347,8 +334,6 @@ Primary emotion: happy
 Confidence: 0.88
 
 ```
-
-
 
 ## Test Coverage (14 tests)
 
@@ -450,6 +435,7 @@ Confidence: 0.88
 - Russell (1980): A circumplex model of affect (VAD)
 - Juslin & Scherer (2005): Vocal expression of emotion
 - Williams, Massaro & Peterson (2017): Multimodal emotion recognition
+
 ##
 
 **Status**: Phase 3.2 complete and production-ready.
