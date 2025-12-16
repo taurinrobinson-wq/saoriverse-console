@@ -1,6 +1,7 @@
 # Privacy Integration Checklist
 
 Use this checklist to track your integration progress.
+
 ##
 
 ## Pre-Integration (Before You Start)
@@ -11,11 +12,13 @@ Use this checklist to track your integration progress.
 - [ ] Review IMPLEMENTATION_GUIDE.md data retention section (10 min)
 
 **Estimated Time:** 35 minutes
+
 ##
 
 ## Phase 1: Preparation (Day 1)
 
 ### 1.1 Identify Storage Points
+
 - [ ] Search signal_parser.py for `db.table(` or database operations
 - [ ] Search for Supabase insert operations in API layer
 - [ ] Document locations where conversations are stored
@@ -29,11 +32,9 @@ grep -r "supabase\." emotional_os/
 grep -r "conversation" emotional_os/core/signal_parser.py
 ```
 
-
-
-
 - [ ] Create a list: `STORAGE_LOCATIONS.txt`
 - [ ] Example format:
+
   ```
   File: emotional_os/core/signal_parser.py
   Line: 1234
@@ -47,6 +48,7 @@ grep -r "conversation" emotional_os/core/signal_parser.py
 **Estimated Time:** 30 minutes
 
 ### 1.2 Verify You Have All Files
+
 - [ ] Confirm `emotional_os/privacy/data_encoding.py` exists
 - [ ] Confirm `emotional_os/privacy/signal_parser_integration.py` exists
 - [ ] Confirm `emotional_os/privacy/arx_integration.py` exists
@@ -55,6 +57,7 @@ grep -r "conversation" emotional_os/core/signal_parser.py
 **Estimated Time:** 5 minutes
 
 ### 1.3 Set Up Test Environment
+
 - [ ] Clone or create test branch: `git checkout -b privacy-integration`
 - [ ] Or create snapshot: backup existing code
 - [ ] Plan where to test: staging database recommended
@@ -62,6 +65,7 @@ grep -r "conversation" emotional_os/core/signal_parser.py
 **Estimated Time:** 10 minutes
 
 **Phase 1 Total Time:** ~45 minutes
+
 ##
 
 ## Phase 2: Code Integration (Day 1-2)
@@ -72,6 +76,7 @@ For the **first** location you identified:
 
 - [ ] Open the file containing the storage operation
 - [ ] Add import at top of file:
+
   ```python
   from emotional_os.privacy.signal_parser_integration import encode_and_store_conversation
   ```
@@ -90,9 +95,6 @@ db.table("conversations").insert({
     "signals": result["signals"],
 }).execute()
 ```
-
-
-
 
 **After:**
 
@@ -116,14 +118,12 @@ else:
     logger.info(f"Stored encoded conversation: {record_id}")
 ```
 
-
-
-
 - [ ] Test locally with `python -m pytest emotional_os/privacy/test_data_encoding.py`
 
 **Estimated Time:** 20-30 minutes
 
 ### 2.2 Repeat for Other Storage Locations
+
 - [ ] For **each additional** storage location found in Phase 1.1:
   - [ ] Repeat 2.1 process
   - [ ] Test after each change
@@ -131,6 +131,7 @@ else:
 **Estimated Time:** 15-20 minutes per location
 
 ### 2.3 Verify No Regressions
+
 - [ ] Run existing test suite: `python -m pytest emotional_os/` (if available)
 - [ ] Test crisis response still works
 - [ ] Test glyph selection still works
@@ -139,6 +140,7 @@ else:
 **Estimated Time:** 15 minutes
 
 **Phase 2 Total Time:** ~1 hour + 15-20 min per additional storage location
+
 ##
 
 ## Phase 3: Database Schema (Day 2)
@@ -187,9 +189,6 @@ CREATE POLICY "Users can view own conversations"
   ));
 ```
 
-
-
-
 - [ ] Execute SQL
 - [ ] Verify table created: Check "Tables" in Supabase dashboard
 - [ ] Confirm indexes created: Check "Indexes" section
@@ -217,9 +216,6 @@ VALUES (
 );
 ```
 
-
-
-
 - [ ] Execute SQL if you have existing conversations table
 - [ ] Verify: Check that old table is renamed
 - [ ] Backup: Ensure you have database backup before this step
@@ -227,12 +223,14 @@ VALUES (
 **Estimated Time:** 5 minutes
 
 ### 3.3 Update Connection String
+
 - [ ] Verify your Supabase connection is set to `conversation_logs_anonymized` table
 - [ ] Or: Code already uses dynamic table names (check in Phase 2)
 
 **Estimated Time:** 5 minutes
 
 **Phase 3 Total Time:** ~20 minutes
+
 ##
 
 ## Phase 4: Testing (Day 2)
@@ -245,9 +243,6 @@ VALUES (
 python emotional_os/privacy/verify_privacy_encoding.py
 ```
 
-
-
-
 Expected output:
 
 ```
@@ -256,9 +251,6 @@ Expected output:
 ✓ All required fields present
 READY FOR INTEGRATION
 ```
-
-
-
 
 - [ ] Verify all tests pass
 
@@ -305,9 +297,6 @@ if encoded:
         print("✓ PASS: No raw text in encoded record")
 ```
 
-
-
-
 - [ ] Run test script
 - [ ] Verify: Success = True
 - [ ] Verify: No raw text in output
@@ -338,9 +327,6 @@ report = verifier.run_monthly_compliance_check(db_staging)
 # Check report.k_value >= 5
 ```
 
-
-
-
 - [ ] Set up for 7 days in staging
 - [ ] Verify k ≥ 5 daily
 - [ ] Check no errors in logs
@@ -349,11 +335,13 @@ report = verifier.run_monthly_compliance_check(db_staging)
 **Estimated Time:** 5 min setup, then automated
 
 **Phase 4 Total Time:** ~50 minutes + 7 days staging verification
+
 ##
 
 ## Phase 5: Production Deployment (Day 5+)
 
 ### 5.1 Pre-Deployment Checklist
+
 - [ ] All staging tests passed for 7 days ✓
 - [ ] K-anonymity verified (k ≥ 5) ✓
 - [ ] No errors in staging logs ✓
@@ -389,9 +377,6 @@ python emotional_os/privacy/verify_privacy_encoding.py
 # Verify no errors
 ```
 
-
-
-
 - [ ] Code deployed
 - [ ] Database table created in production
 - [ ] Verification test passed
@@ -419,9 +404,6 @@ python emotional_os/privacy/verify_privacy_encoding.py
 # 4. Alert if any issues
 ```
 
-
-
-
 - [ ] No errors ✓
 - [ ] Rows being added ✓
 - [ ] K-anonymity verified ✓
@@ -429,6 +411,7 @@ python emotional_os/privacy/verify_privacy_encoding.py
 **Estimated Time:** 30 minutes daily for 1-3 days
 
 **Phase 5 Total Time:** ~1.5 hours + monitoring
+
 ##
 
 ## Phase 6: Ongoing Operations (Monthly)
@@ -444,9 +427,6 @@ python emotional_os/privacy/arx_integration.py  # Or your runner
 
 # Generates: compliance_reports/[YYYY-MM-DD]_compliance_report.json
 ```
-
-
-
 
 - [ ] Set up scheduled job
 - [ ] Review report
@@ -466,6 +446,7 @@ python emotional_os/privacy/arx_integration.py  # Or your runner
 **Estimated Time:** 30 minutes quarterly
 
 **Phase 6 Total Time:** ~10 min/month + 30 min/quarter
+
 ##
 
 ## Troubleshooting Checklist
@@ -483,9 +464,6 @@ assert "gates" in result
 assert "glyphs" in result
 ```
 
-
-
-
 - [ ] Verify parse_input returns expected keys
 - [ ] Check signal format
 
@@ -501,9 +479,6 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 -- Verify table name in code
 ```
 
-
-
-
 - [ ] Verify table exists in Supabase
 - [ ] Verify db_connection parameter passed
 - [ ] Check logs for errors
@@ -511,6 +486,7 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 ### Issue: K-Anonymity Below 5
 
 **Possible causes:**
+
 1. Too few users in test environment
 2. Too specific quasi-identifiers
 3. Bucket sizes too small
@@ -525,9 +501,6 @@ SELECT COUNT(*) FROM conversation_logs_anonymized;
 
 # Or increase k_threshold for testing only
 ```
-
-
-
 
 - [ ] Check test data volume
 - [ ] Review bucket configuration
@@ -544,13 +517,11 @@ SELECT * FROM conversation_logs_anonymized
 WHERE user_id_hashed LIKE '%@%' OR encoded_signals LIKE '%I%';
 ```
 
-
-
-
 - [ ] Stop all writes immediately
 - [ ] Check encoding pipeline
 - [ ] Review recent code changes
 - [ ] Rollback if needed
+
 ##
 
 ## Success Verification Checklist
@@ -571,6 +542,7 @@ Final verification that everything is working:
 - [ ] ✓ Monthly compliance report generated
 - [ ] ✓ Users can export data
 - [ ] ✓ Users can delete data
+
 ##
 
 ## Time Estimate Summary
@@ -584,6 +556,7 @@ Final verification that everything is working:
 | 5 | Production Deployment | 1.5 hours |
 | 6 | Ongoing (Monthly) | 10 min/month |
 | **TOTAL** | **Setup** | **~4-5 hours** |
+
 ##
 
 ## Emergency Rollback (If Needed)
@@ -605,13 +578,11 @@ git revert <commit>
 git push origin main
 ```
 
-
-
-
 - [ ] Code reverted
 - [ ] Database reverted
 - [ ] Monitoring resumed
 - [ ] Incident documented
+
 ##
 
 ## Sign-Off
@@ -629,9 +600,11 @@ When complete, sign off:
 **Completed By:** _______________
 
 **Verified By:** _______________
+
 ##
 
 **Remember:**
+
 - Start with Phase 1 (Preparation)
 - Follow phases in order
 - Don't skip testing

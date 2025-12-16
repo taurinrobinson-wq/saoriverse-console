@@ -1,6 +1,7 @@
 # 📟 Velinor VPS - Quick Reference Card
 
 Print this and keep it handy! 📋
+
 ##
 
 ## 🎯 Your Deployment Path
@@ -22,7 +23,7 @@ DOCKER CONTAINERS
     └─ Nginx (port 8000)
     ↓
 INTERNET PUBLIC
-    https://velinor.firstperson.chat ✨
+    <https://velinor.firstperson.chat> ✨
 
 ```
 
@@ -52,9 +53,6 @@ ssh-keygen -t ed25519 -f ~/.ssh/velinor
 ```text
 ```
 
-
-
-
 ### DNS Setup (Namecheap)
 
 ```
@@ -64,8 +62,6 @@ A Record:
 ```text
 ```text
 ```
-
-
 
 ### VPS Setup (One-liner)
 
@@ -88,9 +84,6 @@ ssh root@[DROPLET_IP]
 ```text
 ```
 
-
-
-
 ### Test Deployment
 
 ```bash
@@ -111,7 +104,6 @@ https://velinor.firstperson.chat
 ```text
 ```
 
-
 ##
 
 ## 📊 Port Reference
@@ -124,9 +116,11 @@ https://velinor.firstperson.chat
 | Let's Encrypt | (socket) | 80 / 443 | SSL termination |
 
 **Important**:
+
 - Port 8000 is what's exposed from container
 - On DigitalOcean: 80→443 via nginx, 443→services
 - Local docker: map 8080→8000
+
 ##
 
 ## 🔑 SSH Commands Cheat Sheet
@@ -160,8 +154,6 @@ docker compose -f docker-compose.prod.yml ps
 ```text
 ```
 
-
-
 ##
 
 ## 🌐 DNS & Domain Reference
@@ -173,6 +165,7 @@ docker compose -f docker-compose.prod.yml ps
 | A Record Value | YOUR_DROPLET_IP | Namecheap DNS |
 | SSL Provider | Let's Encrypt | certbot on VPS |
 | SSL Auto-Renew | Yes | certbot renewal service |
+
 ##
 
 ## 📁 File Structure (What to Keep)
@@ -193,7 +186,6 @@ Your VPS (/opt/velinor):
 ```text
 ```
 
-
 ##
 
 ## 🆘 Emergency Commands
@@ -205,9 +197,6 @@ Your VPS (/opt/velinor):
 ```text
 ```
 
-
-
-
 ### Docker network issue? Reset
 
 ```bash
@@ -216,17 +205,12 @@ docker compose -f docker-compose.prod.yml down
 ```text
 ```
 
-
-
 ### Nginx won't start? Check config
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### SSL cert expired? Renew now
 
@@ -235,8 +219,6 @@ certbot renew --force-renewal
 ```text
 ```text
 ```
-
-
 
 ### Check if DNS is working
 
@@ -247,9 +229,6 @@ nslookup velinor.firstperson.chat
 ```text
 ```
 
-
-
-
 ### Check SSL certificate
 
 ```bash
@@ -259,12 +238,12 @@ curl -I https://velinor.firstperson.chat
 ```text
 ```
 
-
 ##
 
 ## 📊 Monitoring Checklist
 
 **Daily** (automated):
+
 - [ ] Containers auto-restart if crashed
 - [ ] SSL certificate renewed automatically (if expiring soon)
 
@@ -277,9 +256,6 @@ docker compose -f docker-compose.prod.yml ps
 ```text
 ```
 
-
-
-
 **Monthly**:
 
 ```bash
@@ -291,7 +267,6 @@ apt-get update && apt-get upgrade -y
 ```text
 ```text
 ```
-
 
 ##
 
@@ -315,9 +290,6 @@ git push origin main
 ```sql
 ```
 
-
-
-
 ### Scenario 2: Update configuration
 
 ```bash
@@ -330,8 +302,6 @@ git push origin main
 ```text
 ```text
 ```
-
-
 
 ### Scenario 3: Manual emergency fix
 
@@ -351,8 +321,6 @@ docker compose -f docker-compose.prod.yml down
 ```text
 ```
 
-
-
 ##
 
 ## 💡 Pro Tips
@@ -368,8 +336,6 @@ docker compose -f docker-compose.prod.yml down
 ```text
 ```
 
-
-
 ✨ **Tip 2**: Set up DigitalOcean Cloud Firewall
 
 ```
@@ -382,10 +348,8 @@ Inbound Rules (Allow):
 ```text
 ```
 
-
-
-
 ✨ **Tip 3**: Monitor with DigitalOcean Dashboard
+
 - CPU usage (should be < 30% idle)
 - Memory usage (2GB total, usually 70-80% used)
 - Bandwidth (track for growth)
@@ -399,8 +363,6 @@ Inbound Rules (Allow):
 /opt/velinor/deploy.sh --dry-run  # Test without deploying
 ```
 
-
-
 ##
 
 ## 🎯 Success Checklist
@@ -413,12 +375,13 @@ Inbound Rules (Allow):
 - [ ] Docker image built
 - [ ] Containers running
 - [ ] SSL certificate issued
-- [ ] https://velinor.firstperson.chat loads
+- [ ] <https://velinor.firstperson.chat> loads
 - [ ] Game is playable
 - [ ] Auto-deploy configured (optional)
 - [ ] Railway decommissioned
 
 **If all checked**: You're done! 🎉
+
 ##
 
 ## 📞 Help Resources
@@ -430,6 +393,7 @@ Inbound Rules (Allow):
 | "What's my status?" | Track progress | VPS_MIGRATION_CHECKLIST.md |
 | "Push to GitHub?" | Git commands | PUSH_TO_GITHUB.md |
 | "Overall summary?" | Big picture | VPS_MIGRATION_SUMMARY.md |
+
 ##
 
 ## 🚀 Estimated Costs (12 months)
@@ -445,9 +409,11 @@ Inbound Rules (Allow):
 **vs Heroku**: Shutdown 😞
 **vs AWS**: Complex setup, $10+/month 😕
 **DigitalOcean**: Simple, $6/month, rock solid ✨
+
 ##
 
 **Print this card | Keep it safe | Refer to it often**
+
 ##
 
 *Last Updated: Now*

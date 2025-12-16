@@ -11,9 +11,11 @@ Fixed the critical issue where the system was generating **generic, templated re
 ## What Was Changed
 
 ### File Modified
+
 - `src/emotional_os_glyphs/dynamic_response_composer.py`
 
 ### Methods Enhanced
+
 1. **`_build_glyph_aware_response`** - Now prioritizes glyph-aware responses
 2. **`_craft_glyph_grounded_response` (NEW)** - Core improvement that weaves glyph wisdom + user context
 
@@ -51,9 +53,11 @@ All responses were generic and interchangeable:
 ```text
 ```text
 ```
+
 "I hear you. What's the feeling underneath all that?"
 "That sadness is real. I'm here with you in it. What do you need?"
 "I hear you about that. That's important."
+
 ```
 
 
@@ -84,9 +88,11 @@ without noise. What's the next small step for you?"
 ```text
 ```text
 ```
+
 "I'm here with you on that. The ache you're feeling—sorrow witnessed.
 the pain of being truly seen.—that's actually meaningful.
 What's the next small step for you?"
+
 ```
 
 
@@ -145,8 +151,6 @@ python FINAL_VALIDATION.py
 
 ```
 
-
-
 ## Key Benefits
 
 1. **Demonstrates Comprehension** - System now shows it understands what glyph was selected and why
@@ -159,6 +163,7 @@ python FINAL_VALIDATION.py
 ## Next Steps (Optional)
 
 Future enhancements:
+
 1. Populate response_template column with pre-written templates for specific glyphs
 2. Add more sophisticated concept-to-wisdom matching
 3. Collect user feedback to improve wisdom application
@@ -171,6 +176,7 @@ The system now demonstrates **genuine comprehension** instead of generic respons
 > "Even in what feels active or chaotic, there's often a still place underneath. Quiet revelation. Truth that arrives without noise."
 
 They can see the system actually selected "Still Insight" glyph for a reason and understands what it means. This is exactly what the user demanded - responses that **acknowledge the user's specific message and demonstrate comprehension of their situation**.
+
 ##
 
 **Status**: ✅ COMPLETE AND VALIDATED

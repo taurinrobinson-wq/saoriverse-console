@@ -20,10 +20,12 @@
 ```text
 ```text
 ```
+
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
 ├── bulk_text_processor.py
 └── run_gutenberg_learning.sh
+
 ```
 
 
@@ -115,10 +117,10 @@ downloaded = fetcher.download_all_collections()
 ```text
 ```
 
-
-
 ### 2. Processing Phase
+
 For each file:
+
 - Split into 500-word chunks (respecting sentence boundaries)
 - Extract emotional signals from each chunk
 - Learn keywords and phrases
@@ -126,11 +128,14 @@ For each file:
 - Track quality metrics
 
 ### 3. Results
+
 Results saved to:
+
 - `gutenberg_processing_results.json` - Statistics and metadata
 - `gutenberg_learning.log` - Full processing log
 - Updated `parser/signal_lexicon.json` - Expanded lexicon
 - Updated `parser/learned_lexicon.json` - Learned patterns
+
 ##
 
 ## Current Status
@@ -139,6 +144,7 @@ Results saved to:
 ✅ **Processing completed** - All texts processed through signal extraction pipeline
 ✅ **Background processing finished** - Results saved to external drive
 ✅ **All data on external drive** - Hard drive cleaned and freed of data files
+
 ##
 
 ## How to Monitor/Access Results
@@ -150,9 +156,6 @@ Results saved to:
 ```text
 ```
 
-
-
-
 **Check results when complete:**
 
 ```bash
@@ -160,16 +163,12 @@ Results saved to:
 ```text
 ```
 
-
-
 **View downloaded poetry:**
 
 ```bash
 
 ```text
 ```
-
-
 
 ##
 
@@ -185,8 +184,6 @@ cd /Users/taurinrobinson/saoriverse-console
 ```text
 ```
 
-
-
 **Option 2: Run Python directly**
 
 ```bash
@@ -195,9 +192,6 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
-
-
-
 
 All outputs will automatically save to the external drive!
 
@@ -221,24 +215,29 @@ All outputs will automatically save to the external drive!
    - Process more poetry collections progressively
    - Include prose (novels, essays) for broader language patterns
    - Monitor external drive space (currently 458 GB available)
+
 ##
 
 ## Technical Details
 
 ### Files Modified/Created
+
 - ✅ `gutenberg_fetcher.py` - NEW (210 lines)
 - ✅ `bulk_text_processor.py` - NEW (300 lines)
 - ✅ `run_gutenberg_learning.sh` - NEW
 - Committed to GitHub (commit 1233d41)
 
 ### Dependencies
+
 - `requests` - HTTP library for downloading (installed)
 - Existing: `hybrid_learner_v2.py`, `poetry_signal_extractor.py`, `signal_parser.py`
 
 ### Performance
+
 - Downloads: ~2 seconds per book
 - Processing: ~10-20ms per 500-word chunk
 - Total estimated time: 10-20 minutes for all 10 collections
+
 ##
 
 ## System Architecture
@@ -269,8 +268,6 @@ Project Gutenberg API
    └─ learned_lexicon.json
 ```
 
-
-
 ##
 
 ## Key Innovations
@@ -281,7 +278,9 @@ Project Gutenberg API
 4. **Dual Lexicon System** - Personal + shared learning
 5. **Quality Scoring** - Tracks exchange quality for training value
 6. **Metadata Tracking** - Records source, confidence, phrase_length for each entry
+
 ##
+
 ##
 
 **Status**: 🟢 COMPLETED | All data on external drive | Hard drive cleaned ✅

@@ -5,14 +5,17 @@
 Your project is now organized with a clean, professional structure that prevents clutter and keeps your git history sane.
 
 ### Folders Created
+
 - ✅ **`docs/`** — Curated documentation (PROJECT_STRUCTURE.md guide added)
 - ✅ **`scripts/`** — Development utilities (RUN_WEB_DEV.sh, RUN_FULL_STACK.sh moved here)
 - ✅ **`scratch/`** — Auto-generated clutter (ignored by git)
 
 ### Configuration Updated
+
 - ✅ **.gitignore** — Added rules for `scratch/`, `*.tmp.md`, `.next/`
 - ✅ **README.md** — Updated with new structure navigation and quick commands
 - ✅ **Git commit** — All changes tracked (db51477)
+
 ##
 
 ## New Quick Commands
@@ -31,7 +34,6 @@ From the root directory:
 ```text
 ```text
 ```
-
 
 ##
 
@@ -75,8 +77,6 @@ saoriverse-console/
 ```text
 ```
 
-
-
 ##
 
 ## Git Hygiene Benefits
@@ -95,8 +95,6 @@ Commit 5: Fix actual issue
 ```text
 ```
 
-
-
 ### After
 
 ```
@@ -111,13 +109,12 @@ Commit 4: Chore: Organize project structure
 ```text
 ```
 
-
-
 ##
 
 ## What Goes Where?
 
 ### ✅ docs/ (Curated)
+
 - Important guides you'll reference repeatedly
 - Deployment procedures
 - Architecture decisions
@@ -125,6 +122,7 @@ Commit 4: Chore: Organize project structure
 - Quick reference sheets
 
 ### ⚠️ scratch/ (Temporary, Auto-Ignored)
+
 - AI-generated summaries
 - Temporary analysis notes
 - Working documents
@@ -132,6 +130,7 @@ Commit 4: Chore: Organize project structure
 - Anything that might be deleted later
 
 ### 📝 Root (Minimal)
+
 - README.md (entry point)
 - requirements.txt (dependencies)
 - setup.py (package config)
@@ -139,20 +138,24 @@ Commit 4: Chore: Organize project structure
 - Nothing else (keep it clean)
 
 ### 📁 scripts/ (Utilities)
+
 - Dev startup scripts
 - Automation helpers
 - One-off utilities
 - Build tools
+
 ##
 
 ## How to Use This
 
 ### When Starting a Coding Session
+
 1. Read the root **README.md** (2 minutes)
 2. Use a quick command: `./scripts/RUN_WEB_DEV.sh`
 3. Find docs via **docs/PROJECT_STRUCTURE.md**
 
 ### When AI Creates Documentation
+
 1. AI outputs go to **scratch/** by default
 2. You review and decide:
    - **Important?** → Move to `docs/`
@@ -161,10 +164,12 @@ Commit 4: Chore: Organize project structure
 3. Git automatically ignores `scratch/` (no clutter in history)
 
 ### When Adding Code
+
 1. Put source code in **src/** or appropriate subfolder
 2. Create tests in **tests/**
 3. Document important stuff in **docs/** only
 4. Keep root clean
+
 ##
 
 ## Verification
@@ -194,8 +199,6 @@ ls docs/PROJECT_STRUCTURE.md
 # Should exist ✅
 ```
 
-
-
 ##
 
 ## Next Steps
@@ -208,6 +211,7 @@ ls docs/PROJECT_STRUCTURE.md
    - Monthly: Review `scratch/`, delete old temp files
    - Every commit: Verify root is clean (`git status`)
    - Never create .md files in root (use `docs/` instead)
+
 ##
 
 ## Key Takeaway
@@ -217,6 +221,7 @@ ls docs/PROJECT_STRUCTURE.md
 🎯 **Keep root minimal** (only config and entry points)
 
 Result: **Clean code, sane history, happy collaborators.** ✨
+
 ##
 
 ## Commit Information
@@ -227,6 +232,7 @@ Result: **Clean code, sane history, happy collaborators.** ✨
 - **Type**: Organizational improvement (no breaking changes)
 
 All existing code remains functional. This is purely structural reorganization.
+
 ##
 
 ## Questions?

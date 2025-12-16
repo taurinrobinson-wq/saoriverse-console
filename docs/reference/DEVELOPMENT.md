@@ -16,8 +16,6 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
 ```
 
-
-
 ### 2. Set up Python environment
 
 ```bash
@@ -36,17 +34,12 @@ source .venv/bin/activate
 ```text
 ```
 
-
-
-
 ### 3. Install dependencies
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ### 4. Set up pre-commit hooks (optional but recommended)
 
@@ -56,9 +49,6 @@ pip install pre-commit
 
 ```text
 ```
-
-
-
 
 This will automatically run checks before each commit.
 
@@ -71,8 +61,6 @@ This will automatically run checks before each commit.
 ```text
 ```
 
-
-
 ### Run specific test category
 
 ```bash
@@ -83,9 +71,6 @@ python tests/run_tests.py integration
 ```text
 ```
 
-
-
-
 ### Generate coverage report
 
 ```bash
@@ -95,8 +80,6 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 ```text
 ```
 
-
-
 ### Run with more verbose output
 
 ```bash
@@ -104,17 +87,12 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 ```text
 ```
 
-
-
-
 ### Run specific test file
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ## Pre-commit Hooks
 
@@ -125,9 +103,6 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 ```text
 ```
 
-
-
-
 ### Run specific hook
 
 ```bash
@@ -135,8 +110,6 @@ pre-commit run ruff --all-files
 ```text
 ```text
 ```
-
-
 
 ### Run tests as a pre-commit hook
 
@@ -150,9 +123,6 @@ pre-commit run ruff --all-files
 ```text
 ```
 
-
-
-
 ## Code Quality
 
 ### Linting with Ruff
@@ -162,8 +132,6 @@ pre-commit run ruff --all-files
 ```text
 ```
 
-
-
 ### Format code
 
 ```bash
@@ -171,17 +139,12 @@ pre-commit run ruff --all-files
 ```text
 ```
 
-
-
-
 ### Type checking with mypy (manual)
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ## Common Workflows
 
@@ -191,9 +154,6 @@ pre-commit run ruff --all-files
 
 ```text
 ```
-
-
-
 
 ### Commit changes
 
@@ -205,17 +165,12 @@ git add .
 ```text
 ```
 
-
-
 ### Push to remote
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### Create pull request
 
@@ -228,10 +183,11 @@ git add .
 ## Continuous Integration
 
 Tests run automatically on:
+
 - Push to `main` or `develop` branches
 - All pull requests
 
-View results in GitHub Actions: https://github.com/taurinrobinson-wq/saoriverse-console/actions
+View results in GitHub Actions: <https://github.com/taurinrobinson-wq/saoriverse-console/actions>
 
 ## Troubleshooting
 
@@ -247,8 +203,6 @@ cd /path/to/saoriverse-console
 ```text
 ```
 
-
-
 ### Tests failing with import errors
 
 ```bash
@@ -262,9 +216,6 @@ pip install -r requirements.txt
 ```text
 ```
 
-
-
-
 ### Pre-commit hooks not running
 
 ```bash
@@ -273,8 +224,6 @@ pip install -r requirements.txt
 ```text
 ```text
 ```
-
-
 
 ### Coverage report not generating
 
@@ -288,8 +237,6 @@ pip install pytest-cov
 pytest tests/ --cov=emotional_os --cov-report=html
 
 ```
-
-
 
 ## Questions?
 

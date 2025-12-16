@@ -46,9 +46,6 @@ All tests passing:
 ```text
 ```
 
-
-
-
 **Use in your application:**
 
 ```python
@@ -58,8 +55,6 @@ result = parse_input("I feel overwhelmed", "emotional_os/glyphs/lexicon.db")
 ```text
 ```text
 ```
-
-
 
 ## Architecture
 
@@ -75,11 +70,10 @@ Return response to user
 
 ```
 
-
-
 ## Privacy & Security
 
 ✅ **Private:**
+
 - No external API calls
 - No cloud dependencies
 - No data leaves your machine
@@ -92,6 +86,7 @@ Return response to user
 
 1. **Test the integration** with `python emotional_os/main_v2.py`
 2. **Deploy with confidence** - system now works in any Python environment
+
 ##
 
 **Status:** Ready for deployment ✓

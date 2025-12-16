@@ -61,6 +61,7 @@ You create a conversational scene showing how the system should respond:
 ```text
 ```text
 ```
+
 User: Yesterday was so heavy, but today my child hugged me
       and I felt like everything melted away for a moment.
 
@@ -69,6 +70,7 @@ System: That moment with your child sounds genuinely special.
 
 User: Maybe even more so. I don't know sometimes I don't
       feel like I'm doing enough for my kids...
+
 ```
 
 
@@ -99,12 +101,12 @@ The learner automatically extracts principles:
 ```text
 ```
 
-
-
 ### Phase 3: Application (System Uses Principles)
+
 When user sends: *"I'm stressed but my friend just made me laugh"`
 
 System:
+
 1. Matches to `ReliefToGratitude` archetype
 2. Applies principles: validate warmly + balance emotions + gentle question
 3. Generates: *"That's the kind of moment that cuts through the weight. What did their humor touch in you?"*
@@ -112,6 +114,7 @@ System:
 Each response is **unique** because it's generated from principles, not templates.
 
 ### Phase 4: Continuous Learning
+
 System records whether user found response helpful, updates archetype success weights, and learns from outcomes.
 
 ## Key Files
@@ -157,9 +160,6 @@ new_archetype = learner.learn_from_conversation(
 ```text
 ```
 
-
-
-
 ### Checking the Library
 
 ```python
@@ -180,11 +180,10 @@ best_match = library.get_best_match(
 ```text
 ```
 
-
-
 ## Why This Matters
 
 ### Before (Template-Based)
+
 - System selects from 5+ template banks randomly
 - Response rotation: opening_moves → movement_language → poetry_line → closing_moves
 - Even "personalized" variations were still template bits assembled randomly
@@ -192,6 +191,7 @@ best_match = library.get_best_match(
 - System couldn't learn from what worked
 
 ### After (Principle-Driven Learning)
+
 - System learns rules from lived dialogue
 - Each response generated fresh according to principles, not templates
 - Responses maintain conversational coherence across turns
@@ -226,8 +226,6 @@ cat emotional_os/learning/archetype_library.json | python -m json.tool
 
 ```
 
-
-
 ## Architecture Strengths
 
 ✓ **Modular**: Each layer is independent, can be updated separately
@@ -236,6 +234,7 @@ cat emotional_os/learning/archetype_library.json | python -m json.tool
 ✓ **Personalized**: Learns from YOUR dialogue, your communication style
 ✓ **Transparent**: You can see exactly why system chose a response
 ✓ **Adaptive**: Success weights evolve based on real outcomes
+
 ##
 
 **This is the foundation for truly adaptive, learning-based empathetic conversation.**

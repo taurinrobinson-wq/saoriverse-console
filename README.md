@@ -3,6 +3,7 @@
 A private, local-first emotional AI companion with integrated voice interface.
 
 **Status**: Post-reorganization (Phase 9) - Clean, modular architecture
+
 ##
 
 ## Quick Start
@@ -14,8 +15,6 @@ A private, local-first emotional AI companion with integrated voice interface.
 ```text
 ```
 
-
-
 ### 2. Run the Application
 
 ```bash
@@ -23,18 +22,18 @@ A private, local-first emotional AI companion with integrated voice interface.
 ```text
 ```
 
-
-
-
 Opens automatically in your browser at `http://localhost:8501`
 
 ### 3. (Optional) Enable Voice
+
 Configure voice settings in the sidebar when running app.py
+
 ##
 
 ## 📂 Project Organization
 
 This project uses a clean folder structure to prevent clutter:
+
 - **`src/`** — Main source code
 - **`scripts/`** — Development utilities (see `scripts/RUN_WEB_DEV.sh`)
 - **`docs/`** — Intentional, curated documentation only
@@ -62,22 +61,23 @@ pip install -r requirements.txt
 ```text
 ```
 
-
-
 ## Documentation
 
 ### Start Here
+
 - **[Project Structure](./docs/PROJECT_STRUCTURE.md)** - How folders are organized
 - **[Architecture Guide](./docs/ARCHITECTURE.md)** - How the system is organized
 - **[Quick References](./docs/)** - One-page guides (QUICK_REFERENCE_*.md)
 
 ### By System
+
 | System | Go to... |
 |--------|----------|
 | **Velinor Game** | `docs/VELINOR_*.md` |
 | **FirstPerson AI** | `docs/FIRSTPERSON_*.md` |
 | **Deployment** | `docs/DEPLOYMENT_*.md` |
 | **Code structure** | `docs/ARCHITECTURE.md` |
+
 ##
 
 ## Project Structure (Post-Reorganization)
@@ -98,10 +98,8 @@ saoriverse-console/
 ```text
 ```
 
-
-
-
 **Key Change**: Flat `src/` directory with no deep nesting, single `app.py` entry point.
+
 ##
 
 ## Running Tests
@@ -122,7 +120,6 @@ pytest tests/integration/
 ```text
 ```
 
-
 ##
 
 ## Architecture
@@ -134,9 +131,6 @@ pytest tests/integration/
 ```text
 ```
 
-
-
-
 ### Voice Pipeline (Optional)
 
 ```
@@ -144,16 +138,12 @@ pytest tests/integration/
 ```text
 ```
 
-
-
 ### Learning System
 
 ```
 
 ```text
 ```
-
-
 
 ##
 
@@ -170,21 +160,25 @@ pytest tests/integration/
 | `src/relational_memory.py` | Memory/persistence |
 
 See `docs/ARCHITECTURE.md` for complete module reference.
+
 ##
 
 ## Development
 
 ### Add a New Feature
+
 1. Create code in `src/`
 2. Add tests to `tests/unit/` or `tests/integration/`
 3. Run `pytest tests/` to verify
 4. Update documentation if needed
 
 ### Fix a Bug
+
 1. Write a test that reproduces the bug
 2. Fix the code
 3. Verify test passes: `pytest tests/`
 4. Commit with test
+
 ##
 
 ## Privacy & Local-First
@@ -193,11 +187,13 @@ See `docs/ARCHITECTURE.md` for complete module reference.
 - ✅ No data leaves your computer
 - ✅ No cloud dependencies
 - ✅ Optional: Connect to remote AI (disabled by default)
+
 ##
 
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
 ##
 
 ## Documentation Index
@@ -206,6 +202,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 - **[Testing Guide](./docs/TESTING_GUIDE.md)** - How to test
 - **[API Reference](./docs/API_REFERENCE.md)** - Public APIs for all modules
 - **[Full Index](./docs/INDEX.md)** - All documentation
+
 ##
 
 ## Troubleshooting
@@ -223,8 +220,6 @@ kill -9 <PID>
 ```text
 ```
 
-
-
 ### Import Errors
 
 ```bash
@@ -241,9 +236,6 @@ python -c "import sys; print(sys.path)"
 ```text
 ```
 
-
-
-
 ### Tests Not Running
 
 ```bash
@@ -255,18 +247,18 @@ python -m pytest --version
 pytest tests/ -v
 ```
 
-
-
 ##
 
 ## Version History
 
 **Post-Reorganization (Dec 3, 2025)**
+
 - Phases 1-9 complete
 - Flat src/ structure (25 modules)
 - 26 unit tests + 11 integration tests
 - Single app.py entry point
 - Ready for production
+
 ##
 
 **Questions?** See `docs/INDEX.md` for the complete documentation index.

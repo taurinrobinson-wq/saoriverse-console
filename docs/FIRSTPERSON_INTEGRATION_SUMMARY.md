@@ -22,6 +22,7 @@ NPC:    "I see. What would you like to do?"
 ```text
 ```text
 ```
+
 Player: "I'm overwhelmed"
          ↓ [FirstPerson Analysis]
          ├─ Tone: heavy
@@ -32,6 +33,7 @@ Player: "I'm overwhelmed"
 NPC:    "I hear the weight in that. The burden you're carrying—
          I feel it. What needs to be said about it? Sometimes
          the weight lessens when we name it."
+
 ```
 
 
@@ -100,9 +102,6 @@ memory.record_turn(input, affect, theme)
 ```text
 ```
 
-
-
-
 ### 3. Game Engine Routes
 
 ```python
@@ -112,8 +111,6 @@ orchestrator.process_player_action(player_input)
 ```text
 ```text
 ```
-
-
 
 ### 4. NPC Response
 
@@ -130,9 +127,6 @@ _generate_emotionally_aware_response(
 ```text
 ```
 
-
-
-
 ### 5. Display in Chat
 
 ```
@@ -141,36 +135,40 @@ NPC: "I hear the weight in that. The path of responsibility
 ```text
 ```
 
-
-
 ## 💎 Key Features
 
 ### ✅ Real-Time Emotional Analysis
+
 - Analyzes every player input instantly
 - Extracts emotional tone, theme, intensity
 - No delay or latency
 
 ### ✅ Conversation Memory
+
 - Tracks all turns with emotional context
 - Detects recurring themes
 - Measures emotional trajectory (improving/worsening/stable)
 
 ### ✅ Adaptive NPC Responses
+
 - Opening adjusts to emotional tone
 - Middle acknowledges themes and patterns
 - Closing invites appropriate depth of exploration
 
 ### ✅ Pattern Recognition
+
 - Notices when you mention same theme repeatedly
 - Acknowledges the pattern: "I'm noticing grief keeps coming back"
 - Adapts responses accordingly
 
 ### ✅ Emotional Growth Awareness
+
 - Detects when emotions shift from negative to positive
 - Affirms improvements: "I'm noticing a shift. What's helping?"
 - Supports ongoing emotional journey
 
 ### ✅ No Configuration Needed
+
 - Works immediately on local play
 - All analysis happens client-side
 - No external API calls required
@@ -187,9 +185,6 @@ NPC:   "I hear the uncertainty in that. That's real.
 ```text
 ```
 
-
-
-
 ### Moment 2: Recurring Theme Recognition
 
 ```
@@ -199,8 +194,6 @@ NPC:   "I'm hearing doubt come up again. That tells me
 ```text
 ```text
 ```
-
-
 
 ### Moment 3: Emotional Shift
 
@@ -213,9 +206,6 @@ NPC:   "There's something to sit with there. I'm also
 
 ```text
 ```
-
-
-
 
 ## 📈 Impact on Player Experience
 
@@ -230,11 +220,13 @@ NPC:   "There's something to sit with there. I'm also
 ## 🔐 Privacy & Security
 
 ✅ **All processing is local**
+
 - Emotional analysis happens on your device
 - Conversation history stored in session memory only
 - No data sent to external servers (by default)
 
 ✅ **No configuration required**
+
 - Works immediately
 - No secrets, keys, or authentication needed
 - Optional integration with external systems if desired
@@ -256,8 +248,6 @@ streamlit run velinor_app.py
 ```text
 ```
 
-
-
 ### Validating the Integration
 
 ```bash
@@ -267,12 +257,10 @@ python3 FIRSTPERSON_INTEGRATION_TEST.py
 ```text
 ```
 
-
-
-
 ## 📚 Documentation
 
 Read more:
+
 - **Quick Start**: `FIRSTPERSON_QUICK_REFERENCE.md`
 - **Technical Details**: `FIRSTPERSON_VELINOR_INTEGRATION_GUIDE.md`
 - **Deployment**: `VELINOR_DEPLOYMENT_SETUP.md`
@@ -281,18 +269,21 @@ Read more:
 ## 🎯 What This Enables
 
 ### For Players
+
 - Deeper emotional connection to NPCs
 - Responses that acknowledge your emotional state
 - Recognition of recurring themes in your journey
 - Affirmation of emotional growth
 
 ### For Developers
+
 - Template for FirstPerson integration in games
 - Example of real-time emotional analysis
 - Pattern in conversational game design
 - Foundation for glyph system integration
 
 ### For Future Enhancement
+
 - Store emotional trajectories for player profiles
 - Use patterns to unlock special story branches
 - Integrate with glyph system (emotional resonance)
@@ -322,8 +313,6 @@ NPC responds with personalized, emotionally-aware dialogue →
 Conversation memory tracks themes and patterns →
 Your emotional journey is reflected and honored in the game
 ```
-
-
 
 ##
 

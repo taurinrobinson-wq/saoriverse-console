@@ -5,6 +5,7 @@ This document outlines the complete audio conversation pipeline for FirstPerson,
 including the orchestrator, prosody planning, and Streamlit integration.
 
 Table of Contents:
+
 1. Architecture Overview
 2. Components & Responsibilities
 3. Data Flow
@@ -176,7 +177,7 @@ TURN-BY-TURN DATA FLOW:
    │  ├─ Save to temp WAV file
    │  ├─ Read audio data: np.ndarray
    │  └─ Create AudioChunk object
-   ├─ Callback: _playback_callback(chunk)
+├─ Callback:_playback_callback(chunk)
    └─ Returns: None (async generator pattern)
 
 8. NON-BLOCKING PLAYBACK
@@ -236,16 +237,19 @@ def your_response_processor(user_text: str, context: dict) -> Union[str, Tuple[s
 
     return response_text, glyph_intent
 
-# Then instantiate orchestrator:
+# Then instantiate orchestrator
+
 orchestrator = AudioConversationOrchestrator(
     response_processor=your_response_processor,
     max_turns=50
 )
 
-# Run conversation (from Streamlit or elsewhere):
+# Run conversation (from Streamlit or elsewhere)
+
 turns = asyncio.run(orchestrator.run_conversation_loop())
 
-# Access results:
+# Access results
+
 for turn in turns:
     print(f"User: {turn.user_text}")
     print(f"System: {turn.system_response}")
@@ -270,7 +274,7 @@ from src.emotional_os.deploy.modules.audio_conversation_orchestrator import (
 from emotional_os.deploy.modules.response_handler import handle_response_pipeline
 
 def my_response_processor(user_text, context):
-    response, _ = handle_response_pipeline(user_text, context)
+response,_ = handle_response_pipeline(user_text, context)
 
     # Extract glyph-based intent (from your Glyph signals)
     glyph_intent = {
@@ -285,15 +289,18 @@ def my_response_processor(user_text, context):
 orchestrator = AudioConversationOrchestrator(my_response_processor, max_turns=10)
 
 # Add state callback for logging
+
 def on_state_change(state):
     print(f"[State] {state.value.upper()}")
 
 orchestrator.register_state_callback(on_state_change)
 
 # Run conversation
+
 turns = asyncio.run(orchestrator.run_conversation_loop())
 
 # Print transcript
+
 for i, turn in enumerate(turns, 1):
     print(f"\\n=== Turn {i} ===")
     print(f"You: {turn.user_text}")
@@ -317,7 +324,7 @@ st.title("FirstPerson Audio Conversation")
 
 def response_processor(user_text, context):
     # Your FirstPerson processing here
-    response, _ = handle_response_pipeline(user_text, context)
+    response, _= handle_response_pipeline(user_text, context)
 
     # Build glyph intent based on response analysis
     glyph_intent = {
@@ -330,6 +337,7 @@ def response_processor(user_text, context):
     return response, glyph_intent
 
 # Initialize session state
+
 if "orchestrator" not in st.session_state:
     st.session_state.orchestrator = AudioConversationOrchestrator(
         response_processor,
@@ -339,6 +347,7 @@ if "orchestrator" not in st.session_state:
 orchestrator = st.session_state.orchestrator
 
 # UI Layout
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -354,6 +363,7 @@ with col3:
         orchestrator.stop()
 
 # State display
+
 state_colors = {
     "idle": "🟢",
     "recording": "🔴",
@@ -369,12 +379,14 @@ col_status.write(f"{state_colors.get(orchestrator.state.value, '❓')} " +
                 f"**State**: {orchestrator.state.value.upper()}")
 
 # Run conversation if active
+
 if st.session_state.get("conversation_running", False):
     with st.spinner("Listening..."):
         turns = asyncio.run(orchestrator.run_conversation_loop())
         st.session_state.conversation_running = False
 
 # Display history
+
 if orchestrator.conversation_history:
     st.subheader("Conversation Transcript")
     for i, turn in enumerate(orchestrator.conversation_history, 1):
@@ -388,7 +400,8 @@ if orchestrator.conversation_history:
 EXAMPLE 3: Pause/Resume During Conversation
 ──────────────────────────────────────────────
 
-# In a background thread or event handler:
+# In a background thread or event handler
+
 import time
 
 def monitor_user_input():
@@ -407,7 +420,8 @@ def monitor_user_input():
 
         time.sleep(0.1)
 
-# Run in separate thread:
+# Run in separate thread
+
 import threading
 monitor_thread = threading.Thread(target=monitor_user_input, daemon=True)
 monitor_thread.start()

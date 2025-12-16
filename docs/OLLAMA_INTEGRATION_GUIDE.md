@@ -5,6 +5,7 @@ FirstPerson Streamlit app now integrates with Ollama for local LLM inference. Th
 ## Quick Start
 
 ### Prerequisites
+
 - Docker and Docker Compose installed
 - ~5-13GB disk space (for LLM models)
 - Reasonable CPU/RAM (Ollama works but is slow on weak hardware)
@@ -21,8 +22,6 @@ docker-compose -f docker-compose.local.yml up -d
 ```text
 ```text
 ```
-
-
 
 ### Pull a Language Model
 
@@ -42,9 +41,6 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull neural-chat  
 ```text
 ```
 
-
-
-
 ### Test Ollama Directly
 
 ```bash
@@ -61,13 +57,12 @@ curl -X POST http://localhost:11434/api/generate -d '{
 ```text
 ```
 
-
-
 ## Architecture
 
 ### Services (docker-compose.local.yml)
 
 **`streamlit` service:**
+
 - Builds from current Dockerfile.streamlit
 - Runs FirstPerson Streamlit app on port 8501
 - Environment variable: `OLLAMA_BASE_URL=http://ollama:11434`
@@ -75,21 +70,25 @@ curl -X POST http://localhost:11434/api/generate -d '{
 - Health check via Streamlit endpoint
 
 **`ollama` service:**
+
 - Official Ollama Docker image
 - API endpoint on port 11434
 - Models stored in persistent volume `ollama_data`
 - Health check via `/api/tags` endpoint
 
 **Network:**
+
 - Both services on `firstperson_network` bridge
 - Streamlit can reach Ollama via hostname `ollama`
 
 ### Code Integration
 
 #### 1. Ollama Client (`ollama_client.py`)
+
 Location: `src/emotional_os/deploy/modules/ollama_client.py`
 
 Core class: `OllamaClient`
+
 - HTTP interface to Ollama `/api/generate` endpoint
 - Blocking and streaming generation modes
 - Model availability detection
@@ -108,13 +107,12 @@ ollama.generate(prompt, model="llama3")                  # Generate response
 ```text
 ```
 
-
-
-
 #### 2. Response Handler Integration (`response_handler.py`)
+
 Location: `src/emotional_os/deploy/modules/ui_components/response_handler.py`
 
 New function: `_get_ollama_fallback_response(user_input, conversation_context)`
+
 - Triggered when FirstPerson processing fails or returns empty response
 - Uses Ollama for local LLM inference
 - Maintains conversational coherence via system prompt
@@ -128,12 +126,12 @@ You are FirstPerson, a warm, empathetic AI companion for personal growth.
 ```text
 ```
 
-
-
 #### 3. Session State (`session_manager.py`)
+
 Location: `src/emotional_os/deploy/modules/ui_components/session_manager.py`
 
 New initialization: `_ensure_ollama_client()`
+
 - Called during `initialize_session_state()`
 - Sets up singleton OllamaClient
 - Stores availability and model list in session state
@@ -170,9 +168,6 @@ Strip prosody metadata + prevent repetition
 ```text
 ```
 
-
-
-
 ## Model Recommendations
 
 ### For FirstPerson Conversations
@@ -185,6 +180,7 @@ Strip prosody metadata + prevent repetition
 | orca-mini | 1.3GB | Fast | Fair | Best for resource-constrained setups |
 
 ### Recommended for Local Dev
+
 - Start with **orca-mini** for fast iteration
 - Upgrade to **llama3** for production-quality responses
 
@@ -208,8 +204,6 @@ STREAMLIT_LOGGER_LEVEL=info
 ```text
 ```
 
-
-
 ### Customizing System Prompt
 
 Edit `_get_ollama_fallback_response()` in `response_handler.py`:
@@ -221,9 +215,6 @@ system_prompt = """You are FirstPerson, a warm, empathetic AI companion...
 
 ```text
 ```
-
-
-
 
 ## Troubleshooting
 
@@ -245,8 +236,6 @@ docker network ls | grep firstperson_network
 ```text
 ```
 
-
-
 ### "No models available"
 
 ```bash
@@ -260,10 +249,8 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```text
 ```
 
-
-
-
 ### Slow responses
+
 - **Cause**: CPU-only inference on weak hardware
 - **Solution**:
   - Use smaller model (orca-mini)
@@ -284,16 +271,16 @@ docker system prune -a
 ```text
 ```
 
-
-
 ## Production Considerations
 
 ### For Self-Hosted VPS (like Velinor deployment)
+
 - **CPU Limitation**: 1 vCPU Droplets can run Ollama but response times will be 10-30s
 - **Recommendation**: Use FirstPerson's local processing as primary, Ollama as optional fallback
 - **Better Option**: Keep Ollama on local dev machine, use FirstPerson pipeline in production
 
 ### GPU Acceleration (Local Dev)
+
 For NVIDIA GPU support, uncomment in docker-compose.local.yml:
 
 ```yaml
@@ -307,9 +294,6 @@ deploy:
 
 ```bash
 ```
-
-
-
 
 Requires: `nvidia-docker` installed and NVIDIA GPU available.
 
@@ -349,11 +333,10 @@ response = client.generate_with_context(
 ```text
 ```
 
-
-
 ### Environment Detection
 
 Ollama base URL is auto-detected:
+
 - **Docker Compose**: Uses `http://ollama:11434` (container hostname)
 - **Local dev**: Falls back to `http://localhost:11434`
 - **Override**: Set `OLLAMA_BASE_URL` environment variable
@@ -376,9 +359,6 @@ response = client.generate("Hello! How can I help?", model="llama3")
 ```text
 ```
 
-
-
-
 ### Debugging Responses
 
 Enable debug logging:
@@ -390,8 +370,6 @@ logging.basicConfig(level=logging.DEBUG)
 ```text
 ```
 
-
-
 Check session state in Streamlit:
 
 ```python
@@ -402,18 +380,18 @@ st.write("Models:", st.session_state.get("ollama_models"))
 
 ```
 
-
-
 ## Contributing
 
 To improve Ollama integration:
+
 1. Test with different models and conversation styles
 2. Tune system prompt for better FirstPerson personality
 3. Optimize context window for longer conversations
 4. Add model-specific parameter tuning
 5. Submit PRs to `src/emotional_os/deploy/modules/ollama_client.py`
+
 ##
 
 **Last Updated**: 2025
-**Ollama Docs**: https://github.com/ollama/ollama
+**Ollama Docs**: <https://github.com/ollama/ollama>
 **FirstPerson Version**: Modularized UI system with Tier processing

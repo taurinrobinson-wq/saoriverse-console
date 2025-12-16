@@ -3,9 +3,11 @@
 ## What Was Built
 
 ### 1. **Twine Story Adapter** (`twine_adapter.py`) - 500+ lines
+
 Complete bridge between Twine narrative system and Velinor game engine.
 
 **Key Components:**
+
 - `TwineStoryLoader` - Loads Twine 2 JSON export format
 - `DialogueParser` - Extracts choices, skills checks, and commands from SugarCube markup
 - `TwineGameSession` - Session state management with story progression tracking
@@ -13,6 +15,7 @@ Complete bridge between Twine narrative system and Velinor game engine.
 - `DialogueChoice` - Type-safe choice representation with skill check support
 
 **Features:**
+
 - Parses `[[text->target]]` choice syntax
 - Extracts skill checks: `[[Persuade (Courage, DC 12)->target]]`
 - Processes special commands: `{background: location}`, `{dice: d20+stat}`, `{npc: Name}`
@@ -21,14 +24,17 @@ Complete bridge between Twine narrative system and Velinor game engine.
 - Dynamically adapts responses based on player personality and group composition
 
 ### 2. **Game Orchestrator** (`orchestrator.py`) - 400+ lines
+
 Main game loop controller connecting story, engine, and dialogue.
 
 **Key Components:**
+
 - `VelinorTwineOrchestrator` - Central game controller
 - `MultiplayerState` - Tracks multiplayer sessions and player inputs
 - Game event processing (dice rolls, stat changes, background changes)
 
 **Features:**
+
 - Processes typed input and choice selection
 - Applies game mechanics (dice rolls with modifiers, stat adjustments)
 - Generates FirstPerson-enhanced NPC dialogue
@@ -98,6 +104,7 @@ Full integration guide covering:
 ```text
 ```text
 ```
+
 Twine Story (JSON)
     ↓
 [TwineStoryLoader] → Passages & Links
@@ -118,6 +125,7 @@ Twine Story (JSON)
     └─ Background image
     ↓
 [UI Layer] → Player sees result
+
 ```
 
 
@@ -272,9 +280,6 @@ python3 velinor/engine/quickstart.py
 ```text
 ```
 
-
-
-
 ## Architecture Diagram
 
 ```
@@ -332,8 +337,6 @@ python3 velinor/engine/quickstart.py
         │ - CLI Terminal    │
         └───────────────────┘
 ```
-
-
 
 ##
 

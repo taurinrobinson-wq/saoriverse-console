@@ -7,6 +7,7 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
 ## What Was Implemented
 
 ### 1. Docker Compose Setup (`docker-compose.local.yml`)
+
 - **Streamlit Service**
   - Builds from `Dockerfile.streamlit`
   - Runs on port 8501
@@ -26,6 +27,7 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
   - Both services can communicate via hostname (e.g., `http://ollama:11434`)
 
 ### 2. Dockerfile for Streamlit (`Dockerfile.streamlit`)
+
 - Python 3.11 slim base
 - System dependencies: curl, git, gcc
 - Installs requirements.txt
@@ -34,9 +36,11 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
 - Runs `streamlit run app.py`
 
 ### 3. Ollama Client Module (`src/emotional_os/deploy/modules/ollama_client.py`)
+
 **Main Class**: `OllamaClient` - HTTP interface to Ollama API
 
 **Key Features**:
+
 - Service availability detection
 - Model listing and pulling
 - Blocking and streaming generation modes
@@ -57,8 +61,6 @@ client.pull_model(model_name)                   # Download a model
 ```text
 ```
 
-
-
 **Singleton Pattern**:
 
 ```python
@@ -66,18 +68,18 @@ client.pull_model(model_name)                   # Download a model
 ```text
 ```
 
-
-
-
 ### 4. Response Handler Integration (`ui_components/response_handler.py`)
+
 **New Function**: `_get_ollama_fallback_response(user_input, conversation_context)`
 
 **Triggers When**:
+
 - Local Glyph processing fails
 - FirstPerson orchestrator unavailable
 - Explicitly requested for offline mode
 
 **Features**:
+
 - Maintains FirstPerson personality via system prompt
 - Uses conversation context for coherence
 - Graceful fallback if Ollama unavailable
@@ -92,12 +94,12 @@ You are FirstPerson, a warm, empathetic AI companion for personal growth.
 ```text
 ```
 
-
-
 ### 5. Session State Initialization (`ui_components/session_manager.py`)
+
 **New Function**: `_ensure_ollama_client()`
 
 **Initializes**:
+
 - Ollama client singleton
 - Availability flag: `st.session_state["ollama_available"]`
 - Model list: `st.session_state["ollama_models"]`
@@ -108,6 +110,7 @@ You are FirstPerson, a warm, empathetic AI companion for personal growth.
 ### 6. Documentation & Testing
 
 **OLLAMA_INTEGRATION_GUIDE.md**:
+
 - Quick start instructions
 - Model recommendations
 - Troubleshooting guide
@@ -116,6 +119,7 @@ You are FirstPerson, a warm, empathetic AI companion for personal growth.
 - GPU acceleration setup
 
 **test_ollama_integration.py**:
+
 - Automated integration tests
 - Checks docker-compose setup
 - Tests Ollama connectivity
@@ -147,12 +151,10 @@ Tier 3 Poetic Consciousness (optional)
 ```text
 ```
 
-
-
-
 ## Files Created/Modified
 
 ### Created
+
 ✅ `docker-compose.local.yml` - Local dev environment with Ollama
 ✅ `Dockerfile.streamlit` - Streamlit container
 ✅ `src/emotional_os/deploy/modules/ollama_client.py` - Ollama HTTP client
@@ -160,6 +162,7 @@ Tier 3 Poetic Consciousness (optional)
 ✅ `test_ollama_integration.py` - Integration tests
 
 ### Modified
+
 ✅ `src/emotional_os/deploy/modules/ui_components/response_handler.py` - Added Ollama fallback + import
 ✅ `src/emotional_os/deploy/modules/ui_components/session_manager.py` - Added Ollama initialization
 ✅ `src/emotional_os/deploy/modules/ui_components/__init__.py` - Already exports all needed functions
@@ -172,8 +175,6 @@ Tier 3 Poetic Consciousness (optional)
 ```text
 ```text
 ```
-
-
 
 ### 2. Pull a Language Model
 
@@ -188,9 +189,6 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```text
 ```
 
-
-
-
 ### 3. Open Streamlit
 
 ```
@@ -198,17 +196,12 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```text
 ```
 
-
-
 ### 4. Test Integration
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ## Model Recommendations
 
@@ -224,6 +217,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ## Architecture Benefits
 
 ### Advantages
+
 ✅ **Privacy**: All processing local, no external API calls
 ✅ **Offline**: Works without internet connection
 ✅ **Cost**: No per-token LLM costs
@@ -232,6 +226,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ✅ **Fallback**: FirstPerson local processing remains primary
 
 ### Considerations
+
 ⚠️ **Performance**: Slow on weak hardware (1 vCPU will take 10-30s per response)
 ⚠️ **Memory**: Models need 4-13GB disk, some RAM during inference
 ⚠️ **Quality**: Local models generally less capable than GPT-4/Claude
@@ -249,8 +244,6 @@ STREAMLIT_SERVER_PORT=8501                  # Streamlit port
 ```bash
 ```
 
-
-
 Override in docker-compose.local.yml:
 
 ```yaml
@@ -260,9 +253,6 @@ environment:
 
 ```text
 ```
-
-
-
 
 ## Development Workflow
 
@@ -278,8 +268,6 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 ```text
 ```text
 ```
-
-
 
 ### Test Ollama directly
 
@@ -301,9 +289,6 @@ curl -X POST http://localhost:11434/api/generate -d '{
 ```text
 ```
 
-
-
-
 ### Debug FirstPerson integration
 
 ```python
@@ -319,8 +304,6 @@ print("Models:", client.get_available_models())
 ```text
 ```
 
-
-
 ## Testing
 
 ### Run Integration Tests
@@ -329,9 +312,6 @@ print("Models:", client.get_available_models())
 
 ```text
 ```
-
-
-
 
 Expected output:
 
@@ -347,10 +327,9 @@ Expected output:
 ```text
 ```
 
-
-
 ### Manual Testing in Streamlit
-1. Open http://localhost:8501
+
+1. Open <http://localhost:8501>
 2. Enter a message in the chat
 3. If FirstPerson processing succeeds → See glyph-aware response
 4. If it fails → Ollama fallback kicks in
@@ -359,6 +338,7 @@ Expected output:
 ## Production Deployment
 
 ### VPS Considerations (e.g., DigitalOcean)
+
 - **Not Recommended**: Ollama on 1 vCPU is too slow (10-30s per response)
 - **Better Option**: Keep Ollama for local dev, use FirstPerson pipeline in production
 - **Alternative**: Deploy Ollama on beefier VPS if you want local LLM
@@ -372,9 +352,6 @@ Expected output:
 
 ```text
 ```
-
-
-
 
 ## Troubleshooting
 
@@ -393,8 +370,6 @@ docker-compose -f docker-compose.local.yml logs ollama
 ```text
 ```
 
-
-
 ### "No models found"
 
 ```bash
@@ -408,9 +383,8 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 
 ```
 
-
-
 ### Slow responses
+
 - Use smaller model (orca-mini)
 - Increase timeout if needed
 - Check CPU usage: `docker stats`
@@ -420,16 +394,17 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 1. **Test the Setup**: Run `python test_ollama_integration.py`
 2. **Start Docker Compose**: `docker-compose -f docker-compose.local.yml up -d`
 3. **Pull a Model**: `docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3`
-4. **Open Streamlit**: http://localhost:8501
+4. **Open Streamlit**: <http://localhost:8501>
 5. **Have Conversations**: Interact with FirstPerson app
 6. **Check Logs**: Monitor how Ollama is being called
 
 ## References
 
-- Ollama Docs: https://github.com/ollama/ollama
-- Docker Compose: https://docs.docker.com/compose/
-- Streamlit: https://docs.streamlit.io/
+- Ollama Docs: <https://github.com/ollama/ollama>
+- Docker Compose: <https://docs.docker.com/compose/>
+- Streamlit: <https://docs.streamlit.io/>
 - FirstPerson Architecture: See LEARNING_QUICK_REFERENCE.md
+
 ##
 
 **Implementation Date**: 2025

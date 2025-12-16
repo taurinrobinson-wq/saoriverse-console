@@ -45,9 +45,6 @@ memory.get_next_clarifications()  # ["What triggered?", "How many things?"]
 ```text
 ```
 
-
-
-
 ### SemanticParsing (Input)
 
 ```python
@@ -65,7 +62,6 @@ parsed = SemanticParsing(
 ```text
 ```text
 ```
-
 
 ##
 
@@ -115,8 +111,6 @@ response = composer.compose_response_with_memory(
 ```text
 ```
 
-
-
 ##
 
 ## Response Composition
@@ -149,7 +143,6 @@ def compose_response_with_memory(
 ```text
 ```
 
-
 ##
 
 ## Data Structure Summary
@@ -165,6 +158,7 @@ def compose_response_with_memory(
 | **Glyphs** | Wisdom layers | Still Insight, Quiet Revelation |
 | **Confidence** | Understanding level | 0.7 → 0.85 → 0.95 |
 | **Needs** | Missing information | "What triggered?", "Which is urgent?" |
+
 ##
 
 ## Confidence Progression
@@ -177,8 +171,6 @@ Turn 2: 0.85 (mechanism revealed: work → flooding → paralysis)
 ```text
 ```
 
-
-
 ##
 
 ## Glyph Evolution
@@ -189,7 +181,6 @@ Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
 ```text
 ```text
 ```
-
 
 ##
 
@@ -205,11 +196,13 @@ Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
 | - | ↓ |
 | "Have you prioritized?" | "Which of 5 could wait?" |
 | Generic suggestion | Action-oriented |
+
 ##
 
 ## Method Reference
 
 ### ConversationMemory
+
 - `add_turn()` - Add message and integrate
 - `get_emotional_profile_brief()` - Human-readable affect summary
 - `get_causal_narrative()` - Trigger → Mechanism → Manifestation chain
@@ -218,11 +211,13 @@ Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
 - `get_conversation_summary()` - Full JSON snapshot
 
 ### DynamicResponseComposer
+
 - `compose_response_with_memory()` - Generate memory-informed response
 - `_build_first_turn_acknowledgment()` - Initial response
 - `_build_subsequent_turn_acknowledgment()` - Mechanism-aware response
 - `_build_glyph_validation_from_set()` - Multi-glyph validation text
 - `_build_targeted_clarifications()` - Smart question from gaps
+
 ##
 
 ## Example Conversation
@@ -255,25 +250,27 @@ SYSTEM (full context):
 ```text
 ```
 
-
-
 ##
 
 ## Files
 
 ### Core Implementation
+
 - `src/emotional_os_glyphs/conversation_memory.py` - Memory layer
 - `src/emotional_os_glyphs/dynamic_response_composer.py` - Response methods
 
 ### Tests
+
 - `test_memory_layer.py` - Full integration test
 - `test_memory_informed_logic.py` - Logic simulation
 
 ### Documentation
+
 - `MEMORY_LAYER_ARCHITECTURE.md` - Full design
 - `MEMORY_LAYER_VISUAL_ARCHITECTURE.md` - Diagrams
 - `MEMORY_LAYER_IMPLEMENTATION_SUMMARY.md` - Status
 - `MEMORY_LAYER_QUICK_REFERENCE.md` - This file
+
 ##
 
 ## Quick Start
@@ -316,13 +313,12 @@ response = composer.compose_response_with_memory(
 )
 ```
 
-
-
 ##
 
 ## Status: READY FOR INTEGRATION ✓
 
 All components implemented and tested:
+
 - ✅ Memory layer stores and integrates information
 - ✅ Response composer uses memory for better responses
 - ✅ Confidence scores track understanding

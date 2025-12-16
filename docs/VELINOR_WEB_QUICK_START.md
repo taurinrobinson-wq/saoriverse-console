@@ -11,6 +11,7 @@ The complete Velinor web stack (FastAPI + Next.js) is ready to test. No more Str
 - **Full Button Overlays**: Absolute positioned buttons on background images (Streamlit couldn't do this)
 - **Responsive Design**: 16:9 aspect ratio, Tailwind CSS styling
 - **Local Testing**: Ready to run on localhost
+
 ##
 
 ## How to Test (3 Simple Steps)
@@ -23,17 +24,12 @@ cd d:\saoriverse-console
 ```text
 ```
 
-
-
 You should see:
 
 ```
 
 ```text
 ```
-
-
-
 
 ✅ Backend is live at `http://localhost:8000`
 
@@ -45,8 +41,6 @@ cd d:\saoriverse-console\velinor-web
 ```text
 ```
 
-
-
 You should see:
 
 ```
@@ -56,9 +50,6 @@ You should see:
 ```text
 ```
 
-
-
-
 ✅ Frontend is live at `http://localhost:3000`
 
 ### Step 3: Open Browser
@@ -66,11 +57,13 @@ You should see:
 Go to: **`http://localhost:3000`**
 
 You should see:
+
 1. **Splash Screen** - Dark theme with "Velinor" title
 2. **Input Field** - "Enter your name"
 3. **"Start New Game" Button** - Blue button
 
 Enter a name and click the button. The game scene should load!
+
 ##
 
 ## What's Happening Behind the Scenes
@@ -107,7 +100,6 @@ Returns new game state
 ```text
 ```
 
-
 ##
 
 ## Key Differences from Streamlit
@@ -119,21 +111,25 @@ Returns new game state
 | **Animations** | ❌ Limited | ✅ Smooth hover effects |
 | **Layout Control** | ❌ Columns & expanders only | ✅ Custom CSS/Tailwind |
 | **Visual Design** | ⚠️ Constrained | ✅ Full creative control |
+
 ##
 
 ## Troubleshooting
 
 ### "Failed to start game. Is the API running?"
+
 - Make sure Terminal 1 (backend) is still running
 - Check it shows `INFO: Uvicorn running on http://127.0.0.1:8000`
 - If it crashed, check the error message and scroll up
 
 ### "Cannot GET /game/[sessionId]"
+
 - The page exists but the game state isn't loading
 - Check Terminal 1 - is the API returning an error?
 - Open your browser's Developer Tools (F12) and check Console tab
 
 ### "Loading game... (Did you start a game first?)"
+
 - This message appears while the page is loading state
 - If it stays forever, the API call is failing
 - Check browser Console (F12) for error details
@@ -155,8 +151,6 @@ npm run dev
 
 ```text
 ```
-
-
 
 ##
 
@@ -180,11 +174,10 @@ git push origin main
 ```text
 ```
 
-
-
 ### To Add Game Assets
 
 Copy your game images to:
+
 - `velinor-web/public/assets/backgrounds/` - Background images
 - `velinor-web/public/assets/overlays/` - Overlay PNGs
 - `velinor-web/public/assets/npcs/` - NPC character images
@@ -200,15 +193,14 @@ The `<GameScene>` component references them as:
 ```text
 ```
 
-
-
-
 ### To Improve Styling
 
 All inline styles currently show linting warnings. To fix:
+
 - Create `velinor-web/app/globals.css` (or component CSS modules)
 - Move inline `style={{}}` props to classes
 - This is optional—code works fine as-is, but best practices suggest external CSS
+
 ##
 
 ## Files You Now Have
@@ -233,8 +225,6 @@ d:\saoriverse-console\
 │   └── ...other Next.js config
 └── [other game files]
 ```
-
-
 
 ##
 

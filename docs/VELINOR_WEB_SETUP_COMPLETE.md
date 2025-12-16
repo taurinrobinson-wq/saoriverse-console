@@ -7,6 +7,7 @@ All scaffolding is complete. The full web stack is ready for local testing and d
 ### What Was Built
 
 **Backend: FastAPI REST API** (`velinor_api.py`)
+
 - ✅ Complete REST endpoints for game management
 - ✅ Session management with in-memory storage
 - ✅ CORS enabled for frontend communication
@@ -20,6 +21,7 @@ All scaffolding is complete. The full web stack is ready for local testing and d
   - `GET /api/sessions` - List active sessions
 
 **Frontend: Next.js + React** (`velinor-web/`)
+
 - ✅ `app/page.tsx` - Splash screen with player name input
 - ✅ `app/game/[sessionId]/page.tsx` - Game scene page
 - ✅ `components/GameScene.tsx` - Full game scene with overlays, narration, choices
@@ -109,9 +111,6 @@ cd d:\saoriverse-console
 ```text
 ```
 
-
-
-
 Terminal 2 (Frontend):
 
 ```bash
@@ -119,8 +118,6 @@ cd d:\saoriverse-console\velinor-web
 ```text
 ```text
 ```
-
-
 
 Then open: `http://localhost:3000`
 
@@ -136,8 +133,6 @@ git commit -m "Velinor web stack complete - ready for production"
 git push origin main
 
 ```
-
-
 
 Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend domain.
 
@@ -161,6 +156,7 @@ Railway auto-deploys on push. Update the API URL in `.env.local` to point to you
 | Custom Layout | ❌ Column/expander only | ✅ Full CSS/Tailwind |
 | Performance | ⚠️ Heavy Python/Streamlit | ✅ Lightweight React |
 | Deployment | 📦 Streamlit Cloud | 🚀 Railway, Vercel, AWS, etc. |
+
 ##
 
 **Ready to test!** See `RUN_VELINOR_WEB.md` for how to start both servers and play the game.

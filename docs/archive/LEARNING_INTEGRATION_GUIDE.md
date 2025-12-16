@@ -21,9 +21,6 @@ from emotional_os.learning import (
 )
 ```
 
-
-
-
 ## Step 2: Create a Wrapper Function
 
 Add this function to `signal_parser.py`:
@@ -67,9 +64,6 @@ def _compose_response_with_learning(
     return None, None
 ```
 
-
-
-
 ## Step 3: Update Response Building Logic
 
 In the `_respond_to_emotional_input` function, modify where responses are generated:
@@ -102,9 +96,6 @@ else:
     response_source = "glyph_composer"
 ```
 
-
-
-
 ## Step 4: Add Learning Logging
 
 After a response is generated, log it for automatic learning:
@@ -123,9 +114,6 @@ def _log_response_for_learning(
     # TODO: Store turn history and call learn_from_conversation()
     # when conversation ends or after N turns
 ```
-
-
-
 
 ## Step 5: Store Conversation History for Learning
 
@@ -149,9 +137,6 @@ learned = learner.learn_from_conversation(
 if learned:
     print(f"System learned new archetype: {learned}")
 ```
-
-
-
 
 ## Step 6: Expose Archetype Information (Optional)
 
@@ -177,23 +162,23 @@ def get_response_metadata(archetype_name: Optional[str] = None) -> Dict[str, Any
     }
 ```
 
-
-
-
 ## Integration Points
 
 ### Option A: Minimal Integration (Start Here)
+
 - Just add archetype response generation as fallback
 - Don't worry about learning initially
 - See if responses improve just from the pre-loaded `ReliefToGratitude` archetype
 
 ### Option B: Full Integration
+
 - Add learning logging after each conversation
 - Store turns in session
 - Call learner.learn_from_conversation() at conversation end
 - System auto-improves over time
 
 ### Option C: Advanced Integration
+
 - Real-time turn logging
 - Expose archetype name in UI responses
 - Let users rate whether archetype response was good
@@ -214,25 +199,26 @@ print(f'Source: {result.get(\"response_source\")}')
 "
 ```
 
-
-
-
 ## Expected Behavior After Integration
 
 **First Turn**:
+
 - User: "I feel overwhelmed today"
 - System: Uses existing `ReliefToGratitude` or falls back to glyph
 - Response: "I hear you. What feels heaviest?"
 
 **Following Turns**:
+
 - User: "But my partner just surprised me with something kind"
 - System: Matches to `ReliefToGratitude` archetype (mixed emotions detected)
 - Response: "That kindness cuts through the weight. How did that land for you?"
 
 **Over Time**:
+
 - Each good conversation teaches the system new archetypes
 - Library grows with patterns from your actual conversations
 - System becomes increasingly personalized to how you actually talk
+
 ##
 
 **Key Insight**: The learning system amplifies what already works. It doesn't replace glyphs — it adds another layer that learns from lived dialogue.

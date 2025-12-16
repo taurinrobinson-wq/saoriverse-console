@@ -2,6 +2,7 @@
 
 **Generated:** November 12, 2025
 **Project:** Emotional OS / Saoriverse Console
+
 ##
 
 ## Executive Summary
@@ -12,6 +13,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 - ⚠️ **glyph_lexicon** (64 rows) - Has data but may need sync with local DB (6,434 glyphs)
 
 **11 tables are empty** and may be safe to delete or need data migration.
+
 ##
 
 ## Table Analysis
@@ -41,6 +43,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
   - `emotional_os/glyphs/glyph_learner.py` - References for learning
 - **Recommendation:** ⚠️ **KEEP BUT UPDATE** - Sync from `glyph_lexicon_rows_validated.json` (6,434 glyphs)
 - **RLS Needed:** YES - Read-only for users, service_role can write
+
 ##
 
 ### ⚠️ EMPTY TABLES (11) - Need Action
@@ -147,6 +150,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 - **Code Usage:** Not found in active codebase
 - **Recommendation:** ❓ **EVALUATE** - May be future feature or legacy
 - **RLS Needed:** YES - Read-only for users
+
 ##
 
 ### 🗑️ BACKUP TABLES (1)
@@ -157,6 +161,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 - **Purpose:** Backup from November 8, 2025
 - **Recommendation:** ❌ **DELETE** - No longer needed, can be dropped safely
 - **SQL:** `DROP TABLE IF EXISTS conversations_backup_20251108;`
+
 ##
 
 ## Critical Issues Found
@@ -174,6 +179,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 - **Expected:** Tag definitions for emotional processing
 - **Impact:** Tag-based processing won't work
 - **Fix:** Need to populate from `emotional_tags_rows.sql` or similar source
+
 ##
 
 ## Recommendations Summary
@@ -203,6 +209,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 ### ❌ DELETE (1 table)
 
 14. **conversations_backup_20251108** - Old backup
+
 ##
 
 ## Action Plan
@@ -255,6 +262,7 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
    CREATE INDEX idx_glyph_logs_user_id ON glyph_logs(user_id);
    CREATE INDEX idx_glyphs_user_id ON glyphs(user_id);
    ```
+
 ##
 
 ## Column Analysis
@@ -280,8 +288,10 @@ Expected columns from local `glyphs.db`:
 ```text
 ```text
 ```
+
 id, voltage_pair, glyph_name, description, gate,
 activation_signals, display_name, response_template
+
 ```
 
 

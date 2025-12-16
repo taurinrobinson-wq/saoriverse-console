@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """
 PHASE 2 IMPLEMENTATION CHECKLIST
 
@@ -371,9 +371,11 @@ Mark off items as you complete them.
 """
 
 # Run tests
+
 python test_glyph_learning_pipeline.py
 
 # Check system health
+
 python -c "
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 mgr = SharedGlyphManager()
@@ -381,6 +383,7 @@ print(mgr.get_system_health_report())
 "
 
 # Test signal parser
+
 python -c "
 from emotional_os.parser.signal_parser import parse_input
 result = parse_input('I feel caught between...')
@@ -388,18 +391,21 @@ print(result['best_glyph'], result['source'])
 "
 
 # View database
+
 sqlite3 emotional_os/glyphs/glyphs.db
   SELECT count(*) FROM glyph_candidates;
   SELECT count(*) FROM glyph_versions;
-  SELECT * FROM glyph_consensus ORDER BY consensus_strength DESC LIMIT 5;
+SELECT* FROM glyph_consensus ORDER BY consensus_strength DESC LIMIT 5;
   SELECT * FROM user_glyph_preferences WHERE user_hash = 'xxx';
 
 # Deploy
+
 git add emotional_os/glyphs/ emotional_os/parser/signal_parser.py
 git commit -m "Phase 2: Real-time glyph learning"
 git push
 
 # Monitor logs
+
 tail -f railway_logs.txt | grep -i glyph
 """
 
@@ -432,10 +438,11 @@ CORE INNOVATION:
   Phase 2: Never standardized → Always learning (READY ✓)
 
   System now generates new glyphs in real-time when:
-  - Signal detected but no existing glyph matches
-  - Crafts responses that train without being obvious
-  - Shares learning globally while personalizing locally
-  - Builds system knowledge from every user interaction
+
+- Signal detected but no existing glyph matches
+- Crafts responses that train without being obvious
+- Shares learning globally while personalizing locally
+- Builds system knowledge from every user interaction
 
 TIME TO IMPLEMENT:
   □ Signal parser integration: 30 minutes
@@ -444,6 +451,7 @@ TIME TO IMPLEMENT:
   TOTAL: ~75 minutes to full production
 
 NEXT STEPS:
+
   1. Review PHASE_2_LEARNING_SYSTEM_ARCHITECTURE.md
   2. Review INTEGRATION_GUIDE_PHASE_2.md
   3. Run test_glyph_learning_pipeline.py

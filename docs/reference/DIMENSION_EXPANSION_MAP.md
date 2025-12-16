@@ -26,6 +26,7 @@
 ```text
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │  ENHANCED DIMENSIONS (Poetry Canon Analysis)            │
 ├─────────────────────────────────────────────────────────┤
@@ -40,6 +41,7 @@
 │  17. Resilience  - strength, endurance, persistence    │
 │  18. Solitude    - isolation, loneliness, being apart  │
 └─────────────────────────────────────────────────────────┘
+
 ```
 
 
@@ -70,6 +72,7 @@
 ```text
 ```text
 ```
+
 November 3, 2025
 ├─ Started: 8 dimensions (your poem)
 │
@@ -81,6 +84,7 @@ November 3, 2025
     - Poet-specific dimensions identified
     - Era-specific themes extracted
     - Semantic relationships mapped
+
 ```
 
 
@@ -112,6 +116,7 @@ When extracted from Romantic poetry:
 ```text
 ```text
 ```
+
 Transcendence (11)
     + Wonder (16)
     + Transformation (4)
@@ -122,6 +127,7 @@ Transcendence (11)
 When extracted from Shelley:
 "The vast luminous sphere,
  Where infinite consciousness dwells"
+
 ```
 
 
@@ -180,6 +186,7 @@ System now understands poetry at deeper level
 ```text
 ```text
 ```
+
 Emotional Dimensions Report:
 ├─ Base Dimensions: 8
 ├─ Pre-discovered: 10
@@ -191,6 +198,7 @@ Emotional Dimensions Report:
 │
 └─ Total Dimensions: 23
    (vs. 8 at start)
+
 ```
 
 

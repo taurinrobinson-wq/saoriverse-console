@@ -1,9 +1,11 @@
 # Velinorian Glyphic Dictionary (Presence & Shadow Glyphs)
+
 ##
 
 ## Presence Glyphs
 
 ### Aelitḧ
+
 - **Phonetic Rendering**: /ˈae.lɪθ/ → ah-ha
 - **Literal Meaning**: Stillness, witness
 - **Emotional Voltage**: Calm, clarity, sacred observation
@@ -14,6 +16,7 @@
 - **Lore Fragment**: “Aelitḧ was spoken in shrines where silence itself was devotion.”
 
 ### Nivrä
+
 - **Phonetic Rendering**: /ˈni.vra/ → ah-ha
 - **Literal Meaning**: Shelter, sanctuary
 - **Emotional Voltage**: Safety, refuge, continuity
@@ -24,6 +27,7 @@
 - **Lore Fragment**: “Nivrä was the word of refuge, spoken when survivors gathered in hidden places.”
 
 ### Oshen̈
+
 - **Phonetic Rendering**: /ˈo.ʃɛn/ → ineah
 - **Literal Meaning**: Flow, tide
 - **Emotional Voltage**: Continuity, patience, rhythm
@@ -32,11 +36,13 @@
 - **Resonance Category**: Presence / Ache
 - **Gameplay Function**: Unlocks dialogue tied to patience, glows in water-based environments
 - **Lore Fragment**: “Oshen̈ was sung by riverbanks, a breath that carried memory downstream.”
+
 ##
 
 ## Shadow Glyphs
 
 ### Mirrö
+
 - **Phonetic Rendering**: /ˈmɪr.o/ → ah-ha
 - **Literal Meaning**: Reflection, doubt
 - **Emotional Voltage**: Suspicion, agency, self-questioning
@@ -47,6 +53,7 @@
 - **Lore Fragment**: “Mirrö was the word of suspicion, spoken when trust faltered.”
 
 ### Querrä
+
 - **Phonetic Rendering**: /ˈkwɛr.a/ → ah-ha
 - **Literal Meaning**: Question, inquiry
 - **Emotional Voltage**: Curiosity, suspicion
@@ -57,6 +64,7 @@
 - **Lore Fragment**: “Querrä was the breath of curiosity, the wind that unsettled silence.”
 
 ### Shyrä
+
 - **Phonetic Rendering**: /ˈʃaɪ.ra/ → ah-ha-ah
 - **Literal Meaning**: Concealment, secrecy
 - **Emotional Voltage**: Hidden truth, intimacy, suspicion
@@ -67,6 +75,7 @@
 - **Lore Fragment**: “Shyrä was whispered in secrecy, a vow to keep memory hidden.”
 
 ### Veyth̄
+
 - **Phonetic Rendering**: /veɪθ/ → da-hah
 - **Literal Meaning**: Mask, performance
 - **Emotional Voltage**: Deception, illusion, agency

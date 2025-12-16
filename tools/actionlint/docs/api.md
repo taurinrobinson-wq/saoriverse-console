@@ -1,4 +1,5 @@
 # Go API
+
 [![API Document][api-badge]][apidoc]
 
 This document describes how to use [actionlint](..) as Go library.
@@ -38,6 +39,7 @@ Followings are unexhaustive list of interesting APIs.
 
 Note that the version of this repository is for command line tool `actionlint`. So it does not represent version of the
 library. It means that patch version bump may introduce some breaking changes.
+
 ##
 
 [Checks](checks.md) | [Installation](install.md) | [Usage](usage.md) | [Configuration](config.md) | [References](reference.md)

@@ -1,9 +1,11 @@
 # Response Generation Improvement Checklist (ArchetypeResponseGenerator V2)
 
 ## Goal
+
 Ensure generated responses feel relational, warm, and conversational — not like survey questions.
 
 ## Principles to Enforce
+
 1. **Alternate cadence**
    - Do not end every turn with a question.
    - Pattern: Validation → Reflection → Gentle Inquiry → Affirmation.
@@ -36,10 +38,12 @@ Ensure generated responses feel relational, warm, and conversational — not lik
    - Ensure user’s response logically follows the system’s prompt.
 
 ## Implementation Notes
+
 - Add variation logic so only ~50% of turns end with a question.
 - Introduce a “reflection response type” that outputs a statement instead of a question.
 - Track user metaphors/keywords and only reuse them when present.
 - Add a check: if closing is a question, ensure the prior sentence is a reflection/validation.
 - Enforce max one metaphor per response, grounded in user input.
 - Add a “no premature arc” rule: don’t introduce archetype themes until user signals them.
+
 ##

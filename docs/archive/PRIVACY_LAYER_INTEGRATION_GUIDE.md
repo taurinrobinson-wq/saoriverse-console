@@ -36,8 +36,6 @@ End of Day
 
 ```
 
-
-
 ##
 
 ## 1. User Login Flow (Encryption Setup)
@@ -202,8 +200,6 @@ class UserAuthenticationManager:
         return decrypted
 ```
 
-
-
 ##
 
 ## 2. Conversation Storage Flow (Encryption on Save)
@@ -311,8 +307,6 @@ class ConversationStorageManager:
         except Exception as e:
             logger.warning(f"Failed to log audit: {e}")
 ```
-
-
 
 ##
 
@@ -443,8 +437,6 @@ class PrivacyMaintenanceTasks:
             logger.info(f"Permanently deleted all data for user {user_id_hashed}")
 ```
 
-
-
 ##
 
 ## 4. Alternative: Dream Summary from Live Data
@@ -515,9 +507,6 @@ class ConversationStorageManager:
             }).execute()
 ```
 
-
-
-
 Then in scheduled task:
 
 ```python
@@ -564,8 +553,6 @@ def generate_daily_dreams(self):
         "date", yesterday.isoformat()
     ).execute()
 ```
-
-
 
 ##
 
@@ -660,8 +647,6 @@ async def get_conversation_history(
     ]
 ```
 
-
-
 ##
 
 ## 6. Integration Checklist
@@ -680,6 +665,7 @@ async def get_conversation_history(
 - [ ] Deploy encryption layer to staging
 - [ ] Test with real users
 - [ ] Deploy to production
+
 ##
 
 ## 7. Key Differences from Old System
@@ -694,11 +680,13 @@ async def get_conversation_history(
 | **User Control** | None | Can set retention, export, delete |
 | **Compliance** | ✓ GDPR/CCPA | ✓ GDPR/CCPA/HIPAA |
 | **Decryption** | N/A | In-memory only, never at rest |
+
 ##
 
 ## Questions?
 
 See:
+
 - `encryption_manager.py` - AES-256 implementation
 - `dream_engine.py` - Daily summary logic
 - `PRIVACY_LAYER_DATABASE_SCHEMA.md` - Database design

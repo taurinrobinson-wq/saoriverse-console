@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """
 PHASE 2 QUICK REFERENCE CARD
 
@@ -17,6 +17,7 @@ Print this out or pin it in your IDE.
 """
 When signal_parser finds no matching glyph, instead of returning None or a
 generic message, the learning pipeline:
+
 1. Analyzes the emotional language patterns
 2. Generates a new glyph candidate (name, description, gates)
 3. Logs it to the database
@@ -34,6 +35,7 @@ The database grows from every interaction.
 # ============================================================================
 
 """
+
 1. GLYPH LEARNER (glyph_learner.py)
    ─────────────────────────────────
    When: No matching glyph found
@@ -76,7 +78,6 @@ _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
 _shared_glyph_manager = SharedGlyphManager()
 
-
 STEP 2: Modify parse_input() function
 ──────────────────────────────────────
 def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
@@ -112,7 +113,6 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
         )
 
         return {"best_glyph": glyph_name, "voltage_response": response, ...}
-
 
 STEP 3: Add helper function
 ────────────────────────────
@@ -212,7 +212,6 @@ learner.log_glyph_usage(glyph_name, user_hash, input_text, relevance_score)
 learner.promote_candidate_to_production(glyph_name)
   → Move candidate to glyph_lexicon after validation
 
-
 LEARNING RESPONSE GENERATOR:
 ────────────────────────────
 response_gen.generate_learning_response(candidate, text, tone, terms, nrc)
@@ -223,7 +222,6 @@ response_gen.generate_multi_glyph_response(candidates, text, emotions)
 
 response_gen.craft_insufficient_glyph_response(partial_glyph, similar, input)
   → When glyph is incomplete, bridge with existing
-
 
 SHARED GLYPH MANAGER:
 ─────────────────────
@@ -278,6 +276,7 @@ UNKNOWN:
   "You're in territory without a map. The {{term}} is appropriate. Let it teach you."
 
 Key pattern:
+
   1. Select template for detected tone
   2. Insert key emotional term from user input (reinforcement)
   3. Add validation prompt at end (feedback gathering)
@@ -325,7 +324,7 @@ DATABASE CHECK:
 sqlite3 emotional_os/glyphs/glyphs.db
   SELECT count(*) FROM glyph_candidates;  # New candidates
   SELECT count(*) FROM glyph_versions;    # Versioned glyphs
-  SELECT * FROM glyph_consensus ORDER BY consensus_strength DESC LIMIT 5;
+SELECT* FROM glyph_consensus ORDER BY consensus_strength DESC LIMIT 5;
   SELECT * FROM user_glyph_preferences LIMIT 5;
 """
 
@@ -357,9 +356,10 @@ sqlite3 emotional_os/glyphs/glyphs.db
   git push
 
 □ Monitor
-  - Check error logs
-  - Verify glyphs generated (not None)
-  - Confirm adoptions recorded
+
+- Check error logs
+- Verify glyphs generated (not None)
+- Confirm adoptions recorded
 """
 
 # ============================================================================
@@ -403,6 +403,7 @@ SOLUTION: Run analyze_coverage_gaps()
 """
 
 # Check system health
+
 python -c "
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 mgr = SharedGlyphManager()
@@ -410,6 +411,7 @@ print(mgr.get_system_health_report())
 "
 
 # Get recommendations
+
 python -c "
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 mgr = SharedGlyphManager()
@@ -418,15 +420,18 @@ for rec in mgr.recommend_new_glyphs_for_gaps():
 "
 
 # View database size
+
 ls -lh emotional_os/glyphs/glyphs.db
 
 # Count candidates vs production
+
 sqlite3 emotional_os/glyphs/glyphs.db \
   "SELECT 'Candidates', count(*) FROM glyph_candidates
    UNION ALL
    SELECT 'Production', count(*) FROM glyph_versions WHERE is_active=1;"
 
 # View top glyphs by adoption
+
 sqlite3 emotional_os/glyphs/glyphs.db \
   "SELECT glyph_name, total_users_adopted, consensus_strength
    FROM glyph_consensus
@@ -494,21 +499,24 @@ THE SYSTEM IN ONE LINE:
   adoption → Every interaction teaches system → User never knows
 
 3 MODULES:
+
   1. GlyphLearner: Generate new glyphs
   2. LearningResponseGenerator: Craft training responses
   3. SharedGlyphManager: Track adoption + user segregation
 
 INTEGRATION: 3 steps (30 minutes)
+
   1. Add imports to signal_parser.py
   2. Modify parse_input() to use learning pipeline
   3. Add helper functions
 
 DATABASE: 5 new tables (auto-created)
-  - glyph_candidates (new ideas)
-  - glyph_versions (evolution)
-  - user_glyph_preferences (personal history)
-  - glyph_consensus (global agreement)
-  - emotional_territory (coverage map)
+
+- glyph_candidates (new ideas)
+- glyph_versions (evolution)
+- user_glyph_preferences (personal history)
+- glyph_consensus (global agreement)
+- emotional_territory (coverage map)
 
 KEY BENEFIT: Every user interaction teaches system
              But every user sees personal response

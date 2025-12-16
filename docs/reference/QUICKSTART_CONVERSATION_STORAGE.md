@@ -18,6 +18,7 @@ Run this SQL in your Supabase dashboard:
 4. Paste it and click **Run**
 
 This creates:
+
 - `conversations` table (stores your full conversations)
 - `conversation_metadata` table (tracks changes)
 - Automatic timestamp updates
@@ -33,17 +34,12 @@ url = "https://your-project.supabase.co"
 ```text
 ```
 
-
-
 ### 3. Restart Your App
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ## Using the New Features
 
@@ -61,11 +57,10 @@ On the left sidebar, you'll see:
 ```text
 ```
 
-
-
 ### Saving Conversations
 
 Check the **"💾 Save my chats"** box in the sidebar to:
+
 - ✅ Automatically save all conversations
 - ✅ Persist across page refreshes
 - ✅ Remember this preference next time you log in
@@ -81,9 +76,6 @@ You: "I've been feeling really overwhelmed lately"
 
 ```text
 ```
-
-
-
 
 You can rename it anytime by clicking ✏️
 
@@ -101,6 +93,7 @@ You can rename it anytime by clicking ✏️
 ## Data Structure
 
 Each conversation stores:
+
 - All messages (user + assistant)
 - Processing time
 - Mode used (hybrid/ai/local)
@@ -128,13 +121,12 @@ Example:
 ```text
 ```
 
-
-
 ## Troubleshooting
 
 ### Q: Sidebar not showing previous conversations?
 
 **A:**
+
 1. Check "💾 Save my chats" is toggled ON
 2. Refresh the page
 3. Wait a moment for sidebar to load
@@ -142,6 +134,7 @@ Example:
 ### Q: Conversations disappeared after refresh?
 
 **A:**
+
 1. Make sure "💾 Save my chats" is checked
 2. Verify Supabase credentials in secrets.toml
 3. Check browser console (F12) for errors
@@ -150,6 +143,7 @@ Example:
 ### Q: Auto-name shows "New Conversation" instead of smart title?
 
 **A:**
+
 1. Make sure first message is not empty
 2. Try restarting the app
 3. Check logs for NLP errors
@@ -184,12 +178,10 @@ Example:
 ```text
 ```
 
-
-
-
 ### Monitoring
 
 Check Supabase dashboard:
+
 - **Conversations table** → See all saved conversations
 - **Conversation metadata** → Audit trail of changes
 
@@ -216,11 +208,10 @@ success, msg = manager.rename_conversation("conv-uuid", "New Title")
 ```text
 ```
 
-
-
 ## Documentation
 
 For more details, see:
+
 - **`CONVERSATION_STORAGE.md`** - Complete setup & API guide
 - **`IMPLEMENTATION_SUMMARY.md`** - Technical architecture
 - **`sql/conversations_table.sql`** - Database schema
@@ -241,17 +232,17 @@ feat: implement persistent conversation storage with auto-naming
 
 ```
 
-
-
 ## What Changed
 
 ### New Files
+
 - `emotional_os/deploy/modules/conversation_manager.py` - Main implementation
 - `sql/conversations_table.sql` - Database schema
 - `CONVERSATION_STORAGE.md` - Setup guide
 - `IMPLEMENTATION_SUMMARY.md` - Architecture
 
 ### Modified Files
+
 - `emotional_os/deploy/modules/ui.py` - Added sidebar, persistence
 
 ## Next Steps

@@ -5,6 +5,7 @@
 ## Overview
 
 Successfully reorganized the root directory from **30 Python files** down to **11 core files**. This cleanup significantly improves project maintainability and clarity while maintaining 100% backward compatibility.
+
 ##
 
 ## Files Reorganized
@@ -42,12 +43,14 @@ Specialized analysis and reporting utilities:
 ```text
 ```text
 ```
+
 tools/analysis/
 ├── __init__.py
 ├── evolving_glyph_integrator.py
 ├── gate_distribution_analyzer.py
 ├── generate_scenario_report.py
 └── symbolic_tagger.py
+
 ```
 
 
@@ -76,10 +79,12 @@ Glyph testing and validation:
 ```text
 ```text
 ```
+
 tools/glyph_testing/
 ├── __init__.py
 ├── glyph_conversation_test_harness.py
 └── glyph_effectiveness_validator.py
+
 ```
 
 
@@ -179,6 +184,7 @@ Files now available in new locations:
 ```text
 ```text
 ```
+
 /workspaces/saoriverse-console/
 ├── start.py                          (Railroad entry)
 ├── main_v2.py                        (Streamlit entry)
@@ -219,6 +225,7 @@ Files now available in new locations:
 │       └── sprint5_integration.py
 │
 └── [existing structure...]
+
 ```
 
 

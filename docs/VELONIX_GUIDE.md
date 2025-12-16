@@ -83,9 +83,6 @@ reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
 ```text
 ```
 
-
-
-
 ### Full Integration
 
 ```python
@@ -124,8 +121,6 @@ archive.log_reaction(
 ```text
 ```
 
-
-
 ### Find Possible Reactions
 
 ```python
@@ -140,9 +135,6 @@ for p in possible:
 ```text
 ```
 
-
-
-
 ### Streamlit Integration
 
 ```python
@@ -152,8 +144,6 @@ from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 ```text
 ```text
 ```
-
-
 
 ## Architecture
 
@@ -190,9 +180,6 @@ EmotionalArchive
 
 ```text
 ```
-
-
-
 
 ## Reaction Catalog
 
@@ -271,8 +258,6 @@ archive_json = archive.export_as_json()
 ```text
 ```
 
-
-
 ## Demo
 
 Run the demo to see VELΩNIX in action:
@@ -281,9 +266,6 @@ Run the demo to see VELΩNIX in action:
 
 ```text
 ```
-
-
-
 
 This runs:
 
@@ -316,8 +298,6 @@ custom = EmotionalElement(
 ```text
 ```
 
-
-
 ### Add Custom Reaction
 
 ```python
@@ -334,8 +314,6 @@ custom_reaction = ReactionChain(
 engine.add_custom_reaction(custom_reaction)
 
 ```
-
-
 
 ## Philosophy
 

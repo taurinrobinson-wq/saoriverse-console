@@ -2,6 +2,7 @@
 
 **Version**: Phase 10 Documentation Update
 **Date**: December 3, 2025
+
 ##
 
 ## 📊 Complete Project File Map
@@ -27,6 +28,7 @@ CONTRIBUTING.md                Contribution guidelines
 ```text
 ```text
 ```
+
 core/
 ├── start.py                   Railway deployment entry point
 ├── main_v2.py                 Streamlit web application
@@ -39,6 +41,7 @@ core/
 ├── relational_memory.py       Relational memory system
 ├── glyph_generator.py        Compatibility shim
 └── phase_modulator.py        Compatibility shim
+
 ```
 
 
@@ -78,6 +81,7 @@ docs/guides/
 ```text
 ```text
 ```
+
 docs/reports/
 ├── FACTORIAL_EXPANSION_REPORT.json
 ├── GATE_DISTRIBUTION_ANALYSIS.json
@@ -92,6 +96,7 @@ docs/reports/
 ├── legacy_update_summary.txt
 ├── review_summary.txt
 └── GATE_IMBALANCE_VISUAL.txt
+
 ```
 
 
@@ -137,7 +142,9 @@ docs/archives/
 ```text
 ```text
 ```
+
 docs/INDEX.md                 ⭐ START HERE - Complete documentation index & navigation
+
 ```
 
 
@@ -177,11 +184,13 @@ data/glyphs/
 ```text
 ```text
 ```
+
 data/lexicons/
 ├── lexicon_enhanced.json
 ├── nrc_lexicon_cleaned.json
 ├── antonym_glyphs.txt
 └── antonym_glyphs_indexed.json
+
 ```
 
 
@@ -208,8 +217,10 @@ data/analysis/
 ```text
 ```text
 ```
+
 data/exports/
 └── [Export files go here]
+
 ```
 
 
@@ -244,9 +255,11 @@ config/
 ```text
 ```text
 ```
+
 scripts/
 ├── deploy.sh                 Production deployment script
 └── run_local.sh             Local development script
+
 ```
 
 
@@ -280,8 +293,10 @@ logs/
 ```text
 ```text
 ```
+
 frontend/
 └── test.js                   Frontend test file
+
 ```
 
 
@@ -313,8 +328,10 @@ emotional_os/utils/
 ```text
 ```text
 ```
+
 emotional_os/session/
 └── session_manager.py        Session state management
+
 ```
 
 
@@ -343,9 +360,11 @@ emotional_os/ui/
 ```text
 ```text
 ```
+
 emotional_os/response/
 ├── response_handler.py
 └── glyph_handler.py
+
 ```
 
 
@@ -374,11 +393,13 @@ emotional_os/features/
 ```text
 ```text
 ```
+
 emotional_os/glyphs/
 ├── glyph_generator.py
 ├── glyph_lexicon_rows.sql
 ├── glyph_lexicon_rows.json
 └── glyph_lexicon_rows_validated.json
+
 ```
 
 
@@ -404,8 +425,10 @@ emotional_os/parser/
 ```text
 ```text
 ```
+
 emotional_os/learning/
 └── [Learning system modules]
+
 ```
 
 
@@ -434,11 +457,13 @@ emotional_os/core/
 ```text
 ```text
 ```
+
 tools/analysis/
 ├── gate_distribution_analyzer.py
 ├── generate_scenario_report.py
 ├── evolving_glyph_integrator.py
 └── __init__.py
+
 ```
 
 
@@ -467,10 +492,12 @@ tools/document_processing/
 ```text
 ```text
 ```
+
 tools/glyph_testing/
 ├── glyph_conversation_test_harness.py
 ├── glyph_effectiveness_validator.py
 └── __init__.py
+
 ```
 
 
@@ -507,6 +534,7 @@ archive/phase_infrastructure/
 ```text
 ```text
 ```
+
 tests/
 ├── test_*.py                 Comprehensive test files
 ├── integration/
@@ -514,6 +542,7 @@ tests/
 │   ├── tmp_run_mre.py
 │   └── sprint5_integration.py
 └── [Other test modules]
+
 ```
 
 

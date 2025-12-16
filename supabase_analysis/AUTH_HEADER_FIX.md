@@ -19,17 +19,12 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ
 ```text
 ```
 
-
-
 **AFTER** (correct - single-line strings):
 
 ```toml
 
 ```text
 ```
-
-
-
 
 ### 2. `.env`
 
@@ -39,8 +34,6 @@ Also wrapped the keys in quotes to ensure proper parsing:
 ```text
 ```text
 ```
-
-
 
 ## Technical Details
 
@@ -70,8 +63,6 @@ print('Has newlines:', '\\n' in key)  # Should print: False
 "
 
 ```
-
-
 
 Result: ✓ No newlines detected in keys
 

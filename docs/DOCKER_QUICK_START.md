@@ -2,6 +2,7 @@
 
 **DigitalOcean IP**: 161.35.227.49
 **Status**: Ready to deploy!
+
 ##
 
 ## One-Liner Deployment
@@ -10,7 +11,6 @@
 ```text
 ```text
 ```
-
 
 ##
 
@@ -36,8 +36,6 @@ docker compose ps
 ```text
 ```
 
-
-
 ##
 
 ## Access Your App
@@ -48,6 +46,7 @@ docker compose ps
 | `http://161.35.227.49:8000` | ⚙️ API Server |
 | `http://161.35.227.49:80` | 🔄 Nginx Proxy |
 | `http://161.35.227.49:8000/health` | 💚 Health Check |
+
 ##
 
 ## Most Common Commands
@@ -83,7 +82,6 @@ docker compose exec backend bash
 ```text
 ```
 
-
 ##
 
 ## What Got Deployed
@@ -109,8 +107,6 @@ saoriverse-console/
 ```text
 ```
 
-
-
 ##
 
 ## If Something Goes Wrong
@@ -127,8 +123,6 @@ docker compose build --no-cache
 ```text
 ```
 
-
-
 ### Port already in use
 
 ```bash
@@ -140,9 +134,6 @@ sudo kill -9 <PID>
 
 ```sql
 ```
-
-
-
 
 ### Can't connect to backend from frontend
 
@@ -158,8 +149,6 @@ docker compose ps
 ```text
 ```
 
-
-
 ### Disk full
 
 ```bash
@@ -168,7 +157,6 @@ docker system df
 docker system prune -a
 
 ```
-
 
 ##
 
@@ -184,6 +172,7 @@ docker system prune -a
 - [ ] Data directory created: `/app/data_local`
 - [ ] Logs are clean: `docker compose logs`
 - [ ] (Optional) SSL/HTTPS configured with certbot
+
 ##
 
 ## Next: Advanced Setup
@@ -193,6 +182,7 @@ See these guides for more:
 - **Full Docker Setup**: `DOCKER_UBUNTU_SETUP.md`
 - **Detailed Deployment**: `DIGITALOCEAN_DEPLOYMENT_GUIDE.md`
 - **Troubleshooting**: `DIGITALOCEAN_DEPLOYMENT_GUIDE.md#troubleshooting`
+
 ##
 
 ## File Reference
@@ -207,19 +197,22 @@ See these guides for more:
 | `deploy/nginx.conf` | Reverse proxy routing |
 | `requirements.txt` | Python dependencies |
 | `firstperson/package.json` | Node.js dependencies |
+
 ##
 
 ## Key URLs
 
-- GitHub: https://github.com/taurinrobinson-wq/saoriverse-console
+- GitHub: <https://github.com/taurinrobinson-wq/saoriverse-console>
 - DigitalOcean IP: 161.35.227.49
-- Frontend: http://161.35.227.49:3000
-- API: http://161.35.227.49:8000
+- Frontend: <http://161.35.227.49:3000>
+- API: <http://161.35.227.49:8000>
+
 ##
 
 **Total setup time**: ~5 minutes
 **Complexity**: Easy (just run the script!)
 **Risk level**: Very low
+
 ##
 
 💡 **Pro Tip**: Bookmark `docker compose logs -f` as your best friend for debugging!

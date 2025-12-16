@@ -1,6 +1,7 @@
 # Privacy Layer Quick Reference
 
 ## One-Sentence Summary
+
 **All raw conversation text is encoded immediately, never stored in Supabase.**
 
 ## The Problem You Had
@@ -13,9 +14,6 @@ Raw messages in database ❌
 → User privacy violation
 ```
 
-
-
-
 ## The Solution
 
 ```
@@ -25,9 +23,6 @@ Raw messages → Encoded immediately → Stored encoded only ✓
 → HIPAA compliant
 → User privacy protected
 ```
-
-
-
 
 ## How It Works (5 Stages)
 
@@ -53,9 +48,6 @@ Raw messages → Encoded immediately → Stored encoded only ✓
 }
 ```
 
-
-
-
 ## What Does NOT Get Stored
 
 ```
@@ -67,9 +59,6 @@ Raw messages → Encoded immediately → Stored encoded only ✓
 ❌ Exact message length (150 chars)  (use bucket instead)
 ❌ Exact timestamp (13:24:28)        (use week instead)
 ```
-
-
-
 
 ## Implementation: 3 Simple Steps
 
@@ -84,9 +73,6 @@ db.table("conversations").insert({
     ...
 }).execute()
 ```
-
-
-
 
 ### Step 2: Replace With Encoding
 
@@ -104,9 +90,6 @@ success, record_id = encode_and_store_conversation(
 )
 ```
 
-
-
-
 ### Step 3: Create New Table
 
 ```sql
@@ -121,9 +104,6 @@ CREATE TABLE conversation_logs_anonymized (
     -- NO raw text fields allowed
 );
 ```
-
-
-
 
 ## Compliance Status
 
@@ -163,9 +143,6 @@ python verify_privacy_encoding.py
 # ✓ PASS: All critical privacy checks passed
 ```
 
-
-
-
 ## Key Concepts
 
 ### User ID Hashing
@@ -177,9 +154,6 @@ Cannot be reversed ✓
 Same user = same hash ✓
 Different salt for different deployments ✓
 ```
-
-
-
 
 ### K-Anonymity
 
@@ -195,9 +169,6 @@ Quasi-identifiers (generalized):
 Result: Individual cannot be uniquely identified ✓
 ```
 
-
-
-
 ### Data Minimization
 
 ```
@@ -208,9 +179,6 @@ Not needed: ❌ Raw words
 Not needed: ❌ User identifiers
 Not needed: ❌ Exact timestamps
 ```
-
-
-
 
 ## Common Questions
 
@@ -274,6 +242,7 @@ If raw text appears in database:
 7. Run compliance check
 8. Deploy to production
 9. Monitor with monthly compliance reports
+
 ##
 
 **Bottom Line:** FirstPerson now protects user privacy from day one. Raw text never reaches the database. ✓

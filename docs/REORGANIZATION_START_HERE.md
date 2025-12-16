@@ -4,6 +4,7 @@
 **Location**: `docs/REORGANIZATION_MASTER_PLAN.md` and `docs/REORGANIZATION_QUICK_REFERENCE.md`
 **Commit**: 5459443 pushed to GitHub
 **Ready to start**: When you're home
+
 ##
 
 ## What You Now Have
@@ -11,6 +12,7 @@
 ### 1. **REORGANIZATION_MASTER_PLAN.md** (450+ lines)
 
 Comprehensive strategic guide covering:
+
 - **Current state analysis** - 5 major problems identified in your codebase
 - **Target structure** - Clean, logical directory layout that will work forever
 - **9 detailed phases** - Step-by-step instructions with rationale
@@ -32,6 +34,7 @@ Comprehensive strategic guide covering:
 ### 2. **REORGANIZATION_QUICK_REFERENCE.md** (300+ lines)
 
 During-work companion with:
+
 - **All bash commands** ready to copy/paste
 - **Phase-by-phase checklist** for progress tracking
 - **Directory creation commands**
@@ -40,17 +43,20 @@ During-work companion with:
 - **Troubleshooting guide** for common issues
 - **One-command workflows** for after reorganization
 - **Before/after comparison** showing the improvement
+
 ##
 
 ## The Problem You Have (Will Be Solved)
 
 ### Root Directory Issues
+
 - 15+ test files scattered in root
 - 5+ competing entry points (main_v2.py, main_v2_simple.py, start.py)
 - 100+ documentation files cluttering workspace
 - Every cleanup run breaks dependencies because imports rewire
 
 ### Module Structure Issues
+
 - `emotional_os/` deep and nested
 - `parser/` has 3 files scattered
 - `src/` has 2 files
@@ -58,16 +64,19 @@ During-work companion with:
 - Unclear which module is canonical
 
 ### Test Issues
+
 - Tests scattered across root and tests/
 - pytest confused about where tests live
 - 60+ test files in tests/ alone
 - No clear organization by module
 
 ### Entry Point Issues
+
 - main_v2.py is a wrapper that redirects
 - main_v2_simple.py is an emergency bypass
 - Streamlit doesn't know which one to use
 - Voice systems built but unreachable
+
 ##
 
 ## The Solution (What You Get)
@@ -98,6 +107,7 @@ src/
 ```text
 ```text
 ```
+
 tests/
 ├── conftest.py
 ├── unit/
@@ -108,6 +118,7 @@ tests/
 └── integration/
     ├── test_full_e2e.py
     └── test_voice_to_response.py
+
 ```
 
 
@@ -119,6 +130,7 @@ tests/
 ```
 
 app.py (30 lines)
+
 - Imports from src/
 - No wrappers or redirects
 - Streamlit run app.py ← That's it
@@ -131,10 +143,12 @@ app.py (30 lines)
 ```text
 ```text
 ```
+
 scripts/
 ├── data/           (Data processing)
 ├── setup/          (One-time setup)
 └── debug/          (Debugging tools)
+
 ```
 
 
@@ -194,9 +208,6 @@ streamlit run main_v2_simple.py   # This is a bypass
 ```text
 ```
 
-
-
-
 ### After Reorganization
 
 ```bash
@@ -223,21 +234,18 @@ streamlit run app.py               # That's the only option
 ```text
 ```
 
-
 ##
 
 ## Recommended Workflow When You Get Home
 
 ### Step 1: Review (15 min)
+
 Read the master plan to understand the scope:
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### Step 2: Backup (5 min)
 
@@ -248,10 +256,10 @@ git checkout -b refactor/reorganization-master
 ```text
 ```
 
-
-
 ### Step 3: Execute (6-8 hours)
+
 Follow the phases in order:
+
 - Use the master plan for detailed instructions
 - Use the quick reference for commands
 - Test at each phase before moving to next
@@ -272,9 +280,6 @@ pytest tests/ -v
 ```text
 ```
 
-
-
-
 ### Step 5: Commit (5 min)
 
 ```bash
@@ -284,16 +289,17 @@ git commit -m "refactor: Complete codebase reorganization"
 ```text
 ```
 
-
-
 ### Step 6: Create PR (5 min)
+
 Go to GitHub, create PR from `refactor/reorganization-master` → `main`
 Merge when you're confident everything works
+
 ##
 
 ## Why This Matters
 
 ### Current State (Broken)
+
 - ❌ Can't find code easily
 - ❌ Tests fail mysteriously
 - ❌ Cleanup runs break things
@@ -302,12 +308,14 @@ Merge when you're confident everything works
 - ❌ Every PR is risky
 
 ### After Reorganization (Working)
+
 - ✅ Code is organized by concern
 - ✅ Tests are discoverable and pass consistently
 - ✅ No cleanup runs ever needed
 - ✅ New developer ready in 10 minutes
 - ✅ Voice features fully integrated
 - ✅ Each PR is safe and verifiable
+
 ##
 
 ## Key Principles in This Plan
@@ -320,6 +328,7 @@ Merge when you're confident everything works
 6. **Backward compatible** - Archive old code instead of deleting
 7. **Testable at each phase** - Verify nothing broke before moving on
 8. **Easy rollback** - If something goes wrong, just reset to tag
+
 ##
 
 ## Files to Reference During Work
@@ -330,11 +339,13 @@ Merge when you're confident everything works
 | REORGANIZATION_QUICK_REFERENCE.md | Command reference | While executing phases |
 | docs/ | After phase 7 | For final documentation |
 | tools/import_checker.py | Verification | After phase 5, 7 |
+
 ##
 
 ## Timeline
 
 **When ready to start**:
+
 - Allocate 6-8 hours of uninterrupted work
 - Best done all at once (don't split across days)
 - Have tea/coffee ready
@@ -342,9 +353,11 @@ Merge when you're confident everything works
 - Follow the plan step by step
 
 **If you get stuck**:
+
 - Check troubleshooting section in quick reference
 - Don't panic - you have a rollback plan
 - Step back and re-read the relevant phase
+
 ##
 
 ## Success = These Exact Things Working
@@ -386,9 +399,8 @@ python -c "from src import VoiceInterface; print('✅ Voice ready')"
 
 ```
 
-
-
 When all 6 are passing, you're done. ✨
+
 ##
 
 ## Questions Before You Start?

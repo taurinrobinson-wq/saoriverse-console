@@ -114,10 +114,12 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
 ```text
 ```text
 ```
+
 Voltage (0-1)              → Speaking Rate (0.8x - 1.3x)
 Tone + Valence            → Pitch Shift (-2 to +2 semitones)
 Emotional Attunement      → Word Emphasis Placement
 Certainty                 → Terminal Contour (rising/mid/falling)
+
 ```
 
 
@@ -255,8 +257,6 @@ glyph_signals = generate_response_with_glyphs(response_text)
 ```text
 ```
 
-
-
 ## Deployment Checklist
 
 ✅ **All Sprints Complete**
@@ -332,9 +332,6 @@ spoken_interface/
 ```text
 ```
 
-
-
-
 ## Dependencies
 
 **Required:**
@@ -349,8 +346,6 @@ scipy>=1.7.0              # Signal processing
 ```text
 ```
 
-
-
 **Optional:**
 
 ```
@@ -360,8 +355,6 @@ matplotlib>=3.4.0         # Visualization (optional)
 streamlit>=1.0.0          # Web UI (required only for Streamlit deployment)
 
 ```
-
-
 
 ## Next Steps: Sprint 5 (In Progress)
 
@@ -446,6 +439,7 @@ Remaining tasks:
 - **Text-to-Speech**: Coqui TTS (<https://github.com/coqui-ai/TTS>)
 - **Prosody Science**: Fundamental frequency, spectral flux, energy representations
 - **Web Framework**: Streamlit (<https://streamlit.io>)
+
 ##
 
 **Overall Status: 🟢 READY FOR DEPLOYMENT**

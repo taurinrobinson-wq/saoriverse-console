@@ -4,6 +4,7 @@
 **Goal**: Create a clean, modular structure that enables efficient testing, clear imports, and seamless Streamlit deployment
 **Effort**: ~6-8 hours of reorganization
 **Expected Outcome**: Zero import errors, all tests passing, single clear Streamlit entry point
+
 ##
 
 ## CURRENT STATE ANALYSIS
@@ -41,6 +42,7 @@
    - Never integrated into entry points
    - Tests exist but scattered
    - Result: Voice features exist but unreachable
+
 ##
 
 ## TARGET STATE
@@ -175,9 +177,6 @@ grep -l "if __name__ == '__main__'" *.py
 ```text
 ```
 
-
-
-
 ### 1.2 Create Backup
 
 ```bash
@@ -190,15 +189,16 @@ git checkout -b refactor/reorganization-master
 ```text
 ```
 
-
-
 ### 1.3 Document Dependencies
+
 Create a dependency map showing:
+
 - What imports what
 - Where each module actually lives
 - Which modules are used by Streamlit
 - Which modules are voice-specific
 - Which modules are privacy-specific
+
 ##
 
 ## PHASE 2: CREATE TARGET STRUCTURE (1-2 hours)
@@ -227,9 +227,6 @@ touch src/privacy_layer.py         # Privacy/encryption
 ```text
 ```
 
-
-
-
 ### 2.2 Create Test Structure
 
 ```bash
@@ -245,8 +242,6 @@ touch tests/conftest.py             # Pytest configuration
 ```text
 ```text
 ```
-
-
 
 ### 2.3 Organize Data
 
@@ -264,9 +259,6 @@ mv glyphs.db data/
 ```text
 ```
 
-
-
-
 ### 2.4 Organize Documentation
 
 ```bash
@@ -283,7 +275,6 @@ touch docs/TESTING_GUIDE.md
 ```text
 ```text
 ```
-
 
 ##
 
@@ -307,69 +298,77 @@ find . -type f -name "*response*" -o -name "*generator*" | grep -v __pycache__
 ```text
 ```
 
-
-
-
 ### 3.2 Consolidate into src/
 
 For each major component:
 
 **emotional_os.py**
+
 - Source: Merge from `emotional_os/core/`, `emotional_os/glyphs/`
 - Keep: Glyph definitions, Gate system, emotional state representation
 - Remove: Test code, debug code, old iterations
 - Size target: < 500 lines (core logic only)
 
 **signal_parser.py**
+
 - Source: `emotional_os/core/signal_parser.py` (if exists) or `parser/signal_parser.py`
 - Keep: Text → Signal conversion
 - Add: Error handling, edge cases
 - Size target: < 300 lines
 
 **response_generator.py**
+
 - Source: `main_response_engine.py`, `emotional_os/deploy/response_*.py`
 - Keep: Core response generation logic (not templates, not UI)
 - Remove: Streamlit code, UI logic
 - Size target: < 400 lines
 
 **archetype_response_v2.py**
+
 - Source: ArchetypeResponseGeneratorV2 class and helpers
 - Keep: Response type alternation, principle-based generation
 - Remove: Streamlit integration
 - Size target: < 300 lines
 
 **prosody_planner.py**
+
 - Source: `spoken_interface/prosody_planner.py`
 - Keep: Glyph → Prosody mapping, guardrails
 - Size target: < 400 lines
 
 **streaming_tts.py**
+
 - Source: `spoken_interface/streaming_tts.py`
 - Keep: Full TTS pipeline with streaming
 - Size target: < 600 lines
 
 **voice_interface.py** (NEW - orchestration)
+
 - Source: `spoken_interface/voice_ui.py` + new code
 - Keep: High-level voice API for Streamlit
 - Include: STT orchestration, TTS orchestration, error handling
 - Size target: < 300 lines
 
 **audio_pipeline.py**
+
 - Source: `spoken_interface/audio_pipeline.py`
 - Keep: STT pipeline, audio processing
 - Size target: < 400 lines
 
 **privacy_layer.py**
+
 - Source: `emotional_os/privacy/`, `emotional_os/core/privacy*`
 - Keep: Glyph encryption, privacy protocols, sanctuary mode
 - Size target: < 300 lines
 
 **learning.py**
+
 - Source: `emotional_os/learning/`, learning module code
 - Keep: Pattern learning, effectiveness tracking, reward model
 - Size target: < 300 lines
 
 **multimodal_fusion.py**
+
 - Source: `emotional_os/core/multimodal*` if exists, new code
 - Keep: Text+voice+facial congruence analysis
 - Size target: < 250 lines
@@ -408,7 +407,6 @@ __all__ = [
 ```text
 ```
 
-
 ##
 
 ## PHASE 4: CONSOLIDATE TESTS (1-2 hours)
@@ -422,9 +420,6 @@ __all__ = [
 
 ```text
 ```
-
-
-
 
 ### 4.2 Organize by Module
 
@@ -445,8 +440,6 @@ tests/unit/
 ```text
 ```text
 ```
-
-
 
 ### 4.3 Create conftest.py
 
@@ -482,9 +475,6 @@ def sample_signal():
 ```sql
 ```
 
-
-
-
 ### 4.4 Update pytest.ini
 
 ```ini
@@ -498,7 +488,6 @@ python_functions = test_*
 ```text
 ```text
 ```
-
 
 ##
 
@@ -573,9 +562,6 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
-
 ### 5.2 Delete Competing Entry Points
 
 ```bash
@@ -586,7 +572,6 @@ rm main_v2_simple.py
 ```text
 ```text
 ```
-
 
 ##
 
@@ -612,9 +597,6 @@ python -m setup.init_db
 ```text
 ```
 
-
-
-
 ### 6.2 Reorganize scripts/
 
 ```bash
@@ -638,7 +620,6 @@ mv scripts/inspect_glyphs.py scripts/debug/
 ```text
 ```text
 ```
-
 
 ##
 
@@ -671,17 +652,12 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
-
 Run it:
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ### 7.2 Run Unit Tests
 
@@ -699,9 +675,6 @@ pytest tests/unit/ -v
 ```text
 ```
 
-
-
-
 ### 7.3 Run Integration Tests
 
 ```bash
@@ -713,8 +686,6 @@ pytest tests/integration/test_full_e2e.py -v
 ```text
 ```text
 ```
-
-
 
 ### 7.4 Launch Streamlit
 
@@ -728,8 +699,6 @@ streamlit run app.py
 
 ```text
 ```
-
-
 
 ##
 
@@ -754,8 +723,6 @@ mv *.md archive/old_docs/ 2>/dev/null || true
 ```sql
 ```
 
-
-
 ### 8.2 Update Root Files
 
 **requirements.txt** - Clean list of all dependencies:
@@ -771,9 +738,6 @@ python-dotenv>=1.0
 
 ```text
 ```
-
-
-
 
 **.gitignore** - Ensure it ignores build artifacts:
 
@@ -792,17 +756,12 @@ dist/
 ```text
 ```
 
-
-
 ### 8.3 Verify No Broken Imports
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### 8.4 Commit Reorganization
 
@@ -823,7 +782,6 @@ git commit -m "refactor: Complete codebase reorganization
 ```text
 ```
 
-
 ##
 
 ## PHASE 9: DOCUMENTATION UPDATE (30 min)
@@ -831,6 +789,7 @@ git commit -m "refactor: Complete codebase reorganization
 ### 9.1 Create ARCHITECTURE.md
 
 Document:
+
 - How modules relate to each other
 - Data flow through the system
 - Import dependencies
@@ -839,6 +798,7 @@ Document:
 ### 9.2 Create TESTING_GUIDE.md
 
 Document:
+
 - How to run tests
 - How to write new tests
 - Test organization
@@ -847,6 +807,7 @@ Document:
 ### 9.3 Create API_REFERENCE.md
 
 Document:
+
 - Public APIs for each module
 - Function signatures
 - Error handling
@@ -854,14 +815,17 @@ Document:
 ### 9.4 Update README.md
 
 Add:
+
 - Quick start (one command to run: `streamlit run app.py`)
 - Project structure overview
 - Link to docs/
+
 ##
 
 ## FINAL CHECKLIST
 
 ### Structure ✓
+
 - [ ] `src/` contains all core logic (flat, no nesting)
 - [ ] `tests/` contains all tests (unit/ and integration/)
 - [ ] `data/` contains all data files
@@ -870,29 +834,34 @@ Add:
 - [ ] `app.py` is single Streamlit entry point
 
 ### Imports ✓
+
 - [ ] `from src import ...` works everywhere
 - [ ] No circular dependencies
 - [ ] All tests import successfully
 - [ ] Streamlit imports work
 
 ### Tests ✓
+
 - [ ] All unit tests passing
 - [ ] All integration tests passing
 - [ ] Test discovery works: `pytest tests/`
 - [ ] Coverage report available: `pytest --cov=src`
 
 ### Streamlit ✓
+
 - [ ] `streamlit run app.py` launches without errors
 - [ ] Can import all core modules
 - [ ] Voice interface available if enabled
 - [ ] No warnings about missing modules
 
 ### Documentation ✓
+
 - [ ] ARCHITECTURE.md written
 - [ ] TESTING_GUIDE.md written
 - [ ] API_REFERENCE.md written
 - [ ] README.md updated
 - [ ] Old docs archived but accessible
+
 ##
 
 ## ROLLBACK PLAN
@@ -911,7 +880,6 @@ git branch -D refactor/reorganization-master
 
 ```
 
-
 ##
 
 ## ESTIMATED TIMELINE
@@ -928,6 +896,7 @@ git branch -D refactor/reorganization-master
 | 8 | Cleanup & Commit | 30 min | Pending |
 | 9 | Documentation | 30 min | Pending |
 | **Total** | | **6-8 hrs** | |
+
 ##
 
 ## SUCCESS METRICS
@@ -944,6 +913,7 @@ After reorganization, you should be able to:
 8. ✅ Deploy to cloud with single command
 9. ✅ No "cleanup" runs needed anymore
 10. ✅ Root directory has < 20 files (app.py, requirements.txt, docs/, src/, tests/, etc.)
+
 ##
 
 ## NEXT STEPS
@@ -954,6 +924,7 @@ After reorganization, you should be able to:
 4. **Test at each phase** - Verify imports and tests work
 5. **Commit frequently** - Don't lose work if something breaks
 6. **Update CI/CD** - Ensure GitHub Actions uses new structure
+
 ##
 
 ## QUESTIONS TO ANSWER BEFORE STARTING

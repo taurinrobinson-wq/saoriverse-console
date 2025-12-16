@@ -1,6 +1,7 @@
 # DigitalOcean Deployment Guide (IP: 161.35.227.49)
 
 This is your complete step-by-step guide to deploy the FirstPerson web application on your DigitalOcean droplet running Ubuntu.
+
 ##
 
 ## Prerequisites
@@ -8,6 +9,7 @@ This is your complete step-by-step guide to deploy the FirstPerson web applicati
 ✓ Ubuntu 22.04 LTS or later on your DigitalOcean droplet (161.35.227.49)
 ✓ SSH access to your droplet
 ✓ GitHub repository cloned locally
+
 ##
 
 ## Quick Start (5 minutes)
@@ -22,8 +24,6 @@ ssh root@161.35.227.49
 ```text
 ```text
 ```
-
-
 
 ### Step 2: Run the Automated Setup Script
 
@@ -42,10 +42,8 @@ chmod +x docker-setup.sh
 ```text
 ```
 
-
-
-
 This script will:
+
 - ✓ Install Docker & Docker Compose
 - ✓ Clone your repository
 - ✓ Create .env file
@@ -67,7 +65,6 @@ curl http://161.35.227.49:8000/health
 ```text
 ```text
 ```
-
 
 ##
 
@@ -113,9 +110,6 @@ newgrp docker
 ```text
 ```
 
-
-
-
 ### Clone & Configure Your Project
 
 ```bash
@@ -139,8 +133,6 @@ nano .env
 ```text
 ```text
 ```
-
-
 
 ### Build and Start Services
 
@@ -167,8 +159,6 @@ docker compose logs -f backend
 ```text
 ```
 
-
-
 ##
 
 ## Access Your Application
@@ -177,10 +167,11 @@ Once everything is running:
 
 | Service | URL | Purpose |
 |---------|-----|---------|
-| Frontend | http://161.35.227.49:3000 | React/Expo web app |
-| API Backend | http://161.35.227.49:8000 | FastAPI server |
-| Nginx Proxy | http://161.35.227.49:80 | Reverse proxy |
-| Health Check | http://161.35.227.49:8000/health | API health status |
+| Frontend | <http://161.35.227.49:3000> | React/Expo web app |
+| API Backend | <http://161.35.227.49:8000> | FastAPI server |
+| Nginx Proxy | <http://161.35.227.49:80> | Reverse proxy |
+| Health Check | <http://161.35.227.49:8000/health> | API health status |
+
 ##
 
 ## Common Operations
@@ -208,8 +199,6 @@ docker compose logs --tail 100
 ```text
 ```
 
-
-
 ### Stop Services
 
 ```bash
@@ -229,9 +218,6 @@ docker compose down
 ```text
 ```
 
-
-
-
 ### Restart Individual Services
 
 ```bash
@@ -246,8 +232,6 @@ docker compose restart frontend
 ```text
 ```text
 ```
-
-
 
 ### Execute Commands in Containers
 
@@ -265,9 +249,6 @@ docker compose exec backend python -c "import sys; print(sys.version)"
 ```text
 ```
 
-
-
-
 ### View Resource Usage
 
 ```bash
@@ -282,7 +263,6 @@ docker system df
 ```text
 ```text
 ```
-
 
 ##
 
@@ -307,9 +287,6 @@ docker compose up -d
 ```sql
 ```
 
-
-
-
 ### Update Specific Service
 
 ```bash
@@ -321,7 +298,6 @@ docker compose up -d --build backend
 ```text
 ```text
 ```
-
 
 ##
 
@@ -347,9 +323,6 @@ sudo lsof -i :3000
 ```text
 ```
 
-
-
-
 ### Out of Disk Space
 
 ```bash
@@ -364,8 +337,6 @@ docker system prune -a
 ```text
 ```text
 ```
-
-
 
 ### Network Issues
 
@@ -383,9 +354,6 @@ docker compose down
 
 ```sql
 ```
-
-
-
 
 ### Can't Connect to Backend from Frontend
 
@@ -405,7 +373,6 @@ docker compose exec frontend env | grep API_URL
 ```text
 ```text
 ```
-
 
 ##
 
@@ -427,9 +394,6 @@ docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 ```sql
 ```
 
-
-
-
 ### Restore from Backup
 
 ```bash
@@ -444,7 +408,6 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 ```text
 ```text
 ```
-
 
 ##
 
@@ -469,9 +432,6 @@ sudo certbot certonly --standalone -d 161.35.227.49
 ```sql
 ```
 
-
-
-
 ### Update nginx.conf for HTTPS
 
 Add to your nginx.conf:
@@ -491,7 +451,6 @@ server {
 ```text
 ```text
 ```
-
 
 ##
 
@@ -522,9 +481,6 @@ echo "=== Disk Usage ==="
 ```text
 ```
 
-
-
-
 Run it regularly:
 
 ```bash
@@ -537,28 +493,28 @@ crontab -e
 # Add: 0 * * * * /root/saoriverse-console/check-health.sh >> /var/log/saoriverse-health.log 2>&1
 ```
 
-
-
 ##
 
 ## Next Steps
 
 1. ✅ Run `./docker-setup.sh` to get everything started
 2. ✅ Verify all services are running: `docker compose ps`
-3. ✅ Check your app works: Visit http://161.35.227.49:3000
+3. ✅ Check your app works: Visit <http://161.35.227.49:3000>
 4. ✅ Monitor logs: `docker compose logs -f`
 5. ✅ Set up SSL (optional): Use Let's Encrypt
 6. ✅ Configure backups if needed
 7. ✅ Set up monitoring/health checks
+
 ##
 
 ## Support & Documentation
 
-- **Docker Docs**: https://docs.docker.com/
-- **Docker Compose Docs**: https://docs.docker.com/compose/
-- **Nginx Docs**: https://nginx.org/en/docs/
-- **FastAPI Docs**: https://fastapi.tiangolo.com/
-- **React Docs**: https://react.dev/
+- **Docker Docs**: <https://docs.docker.com/>
+- **Docker Compose Docs**: <https://docs.docker.com/compose/>
+- **Nginx Docs**: <https://nginx.org/en/docs/>
+- **FastAPI Docs**: <https://fastapi.tiangolo.com/>
+- **React Docs**: <https://react.dev/>
+
 ##
 
 **Your deployment is ready! 🚀**

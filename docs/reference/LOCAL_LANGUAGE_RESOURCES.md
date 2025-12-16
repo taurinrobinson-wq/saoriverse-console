@@ -346,7 +346,7 @@ RECOMMENDED_SETUP = {
     "IMMEDIATE (5 minutes)": {
         "1": "pip install spacy",
         "2": "python -m spacy download en_core_web_sm",
-        "3": "Download NRC Emotion Lexicon from http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm",
+        "3": "Download NRC Emotion Lexicon from <http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm>",
         "benefit": "Instant emotion detection without any API calls"
     },
 
@@ -492,8 +492,7 @@ class NRCLexiconLoader:
 
         return signals
 
-
-# In signal_parser.py - MODIFY parse_input():
+# In signal_parser.py - MODIFY parse_input()
 
 def parse_input_with_nrc(input_text: str, nrc_loader: NRCLexiconLoader) -> Dict:
     '''Enhanced parsing using NRC lexicon + local resources'''
@@ -546,6 +545,7 @@ BEST FOR YOUR SYSTEM:
 → Can replace 90% of OpenAI API calls
 
 NEXT STEPS:
+
 1. Download NRC Emotion Lexicon
 2. Install spaCy & gensim
 3. Create NRC lexicon loader

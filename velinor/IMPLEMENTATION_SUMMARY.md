@@ -1,21 +1,26 @@
 # Velinor Marketplace Scene Implementation - Complete Summary
 
 ## Overview
+
 Successfully segmented design documentation and implemented a **modular scene system** for the Velinor game. The system enables developers to build, test, and iterate on narrative encounters with visual layering, dialogue branching, and trust mechanics.
+
 ##
 
 ## 📋 What Was Created
 
 ### 1. Segmented Design Documentation
+
 Five focused markdown files replacing the original two large design docs:
 
 #### `01_player_backstory.md`
+
 - Player memory state: what they remember vs. don't remember
 - Survivor backstory: small town → grief → journey to city
 - Narrative framing and emotional resonance
 - Design philosophy: wounded survivor, not chosen one
 
 #### `02_marketplace_npc_system.md`
+
 - **Mistrusting NPCs** (e.g., Nima): high initial friction, slow trust building, dialogue patterns
 - **Welcoming NPCs** (e.g., Ravi): faster engagement but still cautious, emotional resonance
 - Crime wave context: worldbuilding that affects all encounters
@@ -24,6 +29,7 @@ Five focused markdown files replacing the original two large design docs:
 - Social dynamics: NPCs talk about player, trust propagates
 
 #### `03_scene_modules.md`
+
 - Reusable scene template structure with metadata
 - Three-stage scene progression:
   - Scene 1: Distant Presence (NPC far, mystery)
@@ -34,6 +40,7 @@ Five focused markdown files replacing the original two large design docs:
 - Streamlit implementation guide (pseudo-code)
 
 #### `04_collapse_mechanics.md`
+
 - Collapse event architecture: triggers, visual changes, NPC reactions
 - Background image swaps with matched perspectives
 - Map overlay integration and first-time introduction
@@ -43,6 +50,7 @@ Five focused markdown files replacing the original two large design docs:
 - Collapse effects on gameplay and glyph resonance
 
 #### `05_npc_reaction_library.md`
+
 - **Reusable dialogue banks** for NPC reactions:
   - Static NPC tones: resigned, wry/dark humor, ritualized
   - Reactive NPC tones: fearful, empathetic, determined
@@ -55,9 +63,11 @@ Five focused markdown files replacing the original two large design docs:
 ### 2. Velinor Engine Enhancement
 
 #### `velinor/engine/scene_manager.py`
+
 Core scene system with:
 
 **Classes:**
+
 - `SceneState`: Enum for scene progression (distant → approach → close → dialogue → choices → complete)
 - `SceneAssets`: Container for background/foreground assets with state-aware loading
 - `DialogueOption`: Single player choice with glyph triggers, NPC response, trust modifier
@@ -66,6 +76,7 @@ Core scene system with:
 - `SceneBuilder`: Helper for constructing common scenes
 
 **Features:**
+
 - Automatic state progression with Continue buttons
 - Proper z-index layering (background → foreground in columns)
 - Glyph resonance display tied to emotional states
@@ -73,6 +84,7 @@ Core scene system with:
 - Session state management helpers
 
 #### `velinor/engine/marketplace_scenes.py`
+
 Pre-built marketplace sequence with 5 connected scenes:
 
 1. **marketplace_intro_arrival**
@@ -109,9 +121,11 @@ Pre-built marketplace sequence with 5 connected scenes:
 ### 3. Testing Interface
 
 #### `velinor_scenes_test.py`
+
 Streamlit app for interactive scene testing:
 
 **Features:**
+
 - Welcome screen with player name input
 - Full scene rendering with proper CSS styling
 - Automatic or manual scene progression
@@ -148,6 +162,7 @@ Streamlit app for interactive scene testing:
 ```text
 ```text
 ```
+
 Scene.DISTANT
     ↓ [Continue button]
 Scene.APPROACH
@@ -159,6 +174,7 @@ Scene.DIALOGUE (NPC speaks)
 Scene.CHOICES (Player selects dialogue)
     ↓ [Choice selected]
 → Next Scene or End
+
 ```
 
 
@@ -189,10 +205,12 @@ Player Option Buttons
 ```text
 ```text
 ```
+
 Each NPC has trust value: 0.0 → 1.0
 Each dialogue option has trust_modifier: 0.05 → 0.25
 Player choice adds modifier to relevant NPC's trust
 Trust gates deeper dialogue and future interactions
+
 ```
 
 
@@ -204,6 +222,7 @@ Trust gates deeper dialogue and future interactions
 ```
 
 Each scene has:
+
 - glyph_distant: glyphs triggered in Scene.DISTANT
 - glyph_close: glyphs triggered in Scene.APPROACH/CLOSE/DIALOGUE
 - Player choices can trigger additional glyphs
@@ -250,9 +269,6 @@ scene = SceneModule(
 ```text
 ```
 
-
-
-
 Then add to sequence:
 
 ```python
@@ -260,12 +276,12 @@ Then add to sequence:
 ```text
 ```
 
-
 ##
 
 ## 📊 What's Implemented vs. Pending
 
 ### ✅ Completed
+
 - Modular scene architecture (code + structure)
 - 5 marketplace scenes (dialogue written, glyphs defined)
 - Scene renderer with visual layering
@@ -278,11 +294,13 @@ Then add to sequence:
 - Scene navigation controls
 
 ### 🟡 Partially Complete
+
 - Background images: paths referenced but assets may need generation
 - Foreground images: NPC sprites referenced but assets may need creation
 - Map overlay: mentioned in dialogue but not yet visual
 
 ### ⏳ Pending Implementation
+
 - Actual background/foreground image assets (you'll handle with art)
 - Map visual component (grid-based or custom)
 - Collapse aftermath: showing blocked paths on map
@@ -291,17 +309,20 @@ Then add to sequence:
 - Save/load functionality for scenes
 - Accessibility features (alt text, keyboard navigation)
 - Audio layer (ambient sounds referenced but not integrated)
+
 ##
 
 ## 🚀 Next Steps
 
 ### Immediate (Ready to Test)
+
 1. Run the test interface: `streamlit run velinor_scenes_test.py`
 2. Verify scene flow and dialogue makes sense
 3. Test player choice branching and trust updates
 4. Check styling and layout in browser
 
 ### Short Term (For You)
+
 1. Create background image assets:
    - `velinor/backgrounds/marketplace_intact_distant.png`
    - `velinor/backgrounds/marketplace_intact_close.png`
@@ -317,6 +338,7 @@ Then add to sequence:
 3. Create map visual component (integrate into scene renderer or sidebar)
 
 ### Medium Term
+
 1. Build additional scene sequences (shrine discovery, archive caves, etc.)
 2. Implement NPC memory: track encounters and relationship progression
 3. Add collapse aftermath: dynamically update map, block paths, reveal new areas
@@ -324,11 +346,13 @@ Then add to sequence:
 5. Integrate with main `velinor_app.py` UI
 
 ### Long Term
+
 1. Story branching: major choice points that diverge narrative
 2. Multiplayer scenes: multiple players making simultaneous or sequential choices
 3. Save/load: persist player progress across sessions
 4. Achievements: track player choices and unlock content
 5. Procedural generation: randomized NPC encounters, dynamic map changes
+
 ##
 
 ## 📁 File Structure
@@ -365,14 +389,13 @@ Root:
 ```text
 ```
 
-
-
 ##
 
 ## 💾 Git Commits
 
 **Commit 1: `ee35813`**
 "feat(velinor): segment design docs and implement modular scene system"
+
 - 5 new markdown documentation files
 - scene_manager.py with core classes
 - marketplace_scenes.py with 5 scenes
@@ -380,15 +403,18 @@ Root:
 
 **Commit 2: `47c83a0`**
 "feat(velinor): create marketplace scene testing UI"
+
 - velinor_scenes_test.py with Streamlit interface
 - Full scene rendering pipeline
 - Player stats and trust tracking
 - Scene navigation and dialogue history
+
 ##
 
 ## 🎓 Design Philosophy
 
 **Core Principles:**
+
 1. **Modularity**: Each scene is independent, reusable, testable
 2. **Clarity**: Scene structure is obvious and easy to understand
 3. **Extensibility**: Adding new scenes requires minimal boilerplate
@@ -397,11 +423,13 @@ Root:
 6. **Accessibility**: Dialogue choices are clear and have distinct outcomes
 
 **Narrative Approach:**
+
 - Player is **not** a hero; they're a **survivor learning**
 - NPCs are **not** quest-givers; they're **peers with stories**
 - Trust is **earned through presence**, not tasks
 - The **city itself** is a character (collapse, decay, rebirth)
 - **Glyphs** connect emotion to memory (both individual and collective)
+
 ##
 
 ## 🤝 Contributing to This System
@@ -445,7 +473,6 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 ```text
 ```
 
-
 ##
 
 ## ✨ Example: Adding a New NPC Scene
@@ -486,9 +513,6 @@ def build_healer_encounter() -> SceneModule:
 ```text
 ```
 
-
-
-
 Then add to `MarketplaceSceneSequence.get_sequence()`:
 
 ```python
@@ -498,10 +522,8 @@ sequence = [
 ]
 ```
 
-
-
-
 Run `velinor_scenes_test.py` and navigate to test!
+
 ##
 
 ## 🎯 Success Criteria Met

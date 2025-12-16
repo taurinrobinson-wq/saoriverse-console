@@ -13,6 +13,7 @@ Your FirstPerson app is now configured with **persistent conversation storage**!
 5. **🗑️ Delete Conversations** - Remove old chats
 6. **🎯 Auto-Naming** - Conversations named from first message
 7. **⚙️ Save Preference** - "Save my chats" toggle remembered
+
 ##
 
 ## Quick Start (2 Steps)
@@ -21,7 +22,7 @@ Your FirstPerson app is now configured with **persistent conversation storage**!
 
 **Option A: Via Supabase Dashboard (Easiest)**
 
-1. Go to: https://app.supabase.com/project/gyqzyuvuuyfjxnramkfq/sql/new
+1. Go to: <https://app.supabase.com/project/gyqzyuvuuyfjxnramkfq/sql/new>
 2. Create new SQL query
 3. Copy & paste from `sql/conversations_table.sql`
 4. Click "Run"
@@ -36,8 +37,6 @@ python3 scripts/migrate_supabase.py
 ```text
 ```
 
-
-
 ### ✅ Step 2: Verify & Start Using
 
 After creating tables, verify they were created:
@@ -46,9 +45,6 @@ After creating tables, verify they were created:
 
 ```text
 ```
-
-
-
 
 You should see:
 
@@ -59,16 +55,12 @@ You should see:
 ```text
 ```
 
-
-
 Then start your app:
 
 ```bash
 
 ```text
 ```
-
-
 
 ##
 
@@ -84,9 +76,8 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```text
 ```
 
-
-
 **Status**: ✅ Active and ready to use
+
 ##
 
 ## Using the New Features
@@ -105,9 +96,6 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```text
 ```
 
-
-
-
 ### How It Works
 
 1. **Check "💾 Save my chats"** in sidebar
@@ -115,6 +103,7 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 3. **Continue chatting** - all messages accumulate
 4. **Refresh browser** - conversation is preserved!
 5. **Load old conversation** - click on it in sidebar
+
 ##
 
 ## Testing the Setup
@@ -136,8 +125,6 @@ streamlit run app.py
 ```text
 ```
 
-
-
 ### Full Test
 
 1. ✅ Check "Save my chats"
@@ -150,6 +137,7 @@ streamlit run app.py
 7. ✅ Click ✏️ - rename it to "Happy Day"
 8. ✅ Refresh - new name persists
 9. ✅ Click 🗑️ - delete it (optional)
+
 ##
 
 ## File Structure
@@ -173,8 +161,6 @@ saoriverse-console/
 ```text
 ```
 
-
-
 ##
 
 ## Troubleshooting
@@ -194,11 +180,10 @@ python3 scripts/migrate_supabase.py
 ```text
 ```
 
-
-
 ### Conversations not saving
 
 **Solution**:
+
 1. Make sure "💾 Save my chats" checkbox is **checked**
 2. Check browser console (F12) for errors
 3. Verify `.streamlit/secrets.toml` has correct credentials
@@ -207,6 +192,7 @@ python3 scripts/migrate_supabase.py
 ### Sidebar not showing previous conversations
 
 **Solution**:
+
 1. Check "💾 Save my chats" is enabled
 2. Wait a moment for sidebar to load
 3. Try refreshing page (F5)
@@ -215,9 +201,11 @@ python3 scripts/migrate_supabase.py
 ### Error: "API key not found"
 
 **Solution**:
+
 - Your `.streamlit/secrets.toml` is already configured
 - If deleted, re-add the `[supabase]` section from above
 - Restart the app
+
 ##
 
 ## What Happens Behind the Scenes
@@ -244,9 +232,6 @@ Store: {
 ```text
 ```
 
-
-
-
 ### On Page Refresh
 
 ```
@@ -265,8 +250,6 @@ Session state restored from Supabase
 ```text
 ```text
 ```
-
-
 
 ### On Rename
 
@@ -290,8 +273,6 @@ Sidebar refreshes
 ```text
 ```
 
-
-
 ##
 
 ## Performance Notes
@@ -301,21 +282,25 @@ Sidebar refreshes
 - **Auto-name**: <10ms
 - **Sidebar render**: ~50ms
 - **Page refresh**: Same as initial load
+
 ##
 
 ## Security
 
 ✅ **Best Practices Applied**:
+
 - User-scoped queries (only see your own conversations)
 - Credentials stored in `.streamlit/secrets.toml` (not in code)
 - Ready for Row Level Security (RLS) policies
 - Audit trail via `conversation_metadata` table
 - Soft delete support (don't hard-delete data)
+
 ##
 
 ## Next Steps
 
 ### Immediate
+
 1. ✅ Run SQL schema (see Step 1 above)
 2. ✅ Verify: `python3 scripts/migrate_supabase.py --verify`
 3. ✅ Start app: `streamlit run app.py`
@@ -323,12 +308,14 @@ Sidebar refreshes
 5. ✅ Refresh browser to verify persistence
 
 ### Future Enhancements (Coming Soon)
+
 - 🔍 Search conversations
 - 📊 Emotional trend analysis
 - 📤 Bulk export conversations
 - 🔗 Share conversations securely
 - 🤖 Auto-summarization
 - 📌 Conversation bookmarks
+
 ##
 
 ## Documentation
@@ -340,6 +327,7 @@ For more information, see:
 - **`QUICKSTART_CONVERSATION_STORAGE.md`** - Quick reference
 - **`IMPLEMENTATION_SUMMARY.md`** - Technical deep dive
 - **`scripts/migrate_supabase.py`** - Automation script
+
 ##
 
 ## Support
@@ -356,10 +344,9 @@ python3 scripts/migrate_supabase.py --verify
 ```text
 ```
 
-
-
 ### View Data in Supabase
-1. Go to: https://app.supabase.com
+
+1. Go to: <https://app.supabase.com>
 2. Select project: `gyqzyuvuuyfjxnramkfq`
 3. Click "Table Editor" in sidebar
 4. Select "conversations" table
@@ -382,8 +369,6 @@ git status
 ```text
 ```
 
-
-
 ##
 
 ## Success Criteria ✅
@@ -401,17 +386,15 @@ Your setup is complete when you can:
 - ✅ Click 🗑️ to delete (optional)
 
 **If all above work → You're ready! 🎉**
+
 ##
 
-## Ready to Go!
+## Ready to Go
 
 Your persistent conversation storage is now live. **Start the app and begin saving your conversations!**
 
 ```bash
 streamlit run app.py
 ```
-
-
-
 
 **Enjoy seamless conversation persistence! 🚀**

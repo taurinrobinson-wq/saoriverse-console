@@ -3,18 +3,23 @@
 ## The Journey
 
 ### Phase 1: User's Critical Realization
+
 > "If a person is coming to a site with an emotionally charged problem, do they care about glyphs and glyph descriptions or are they just wanting to feel understood and heard?"
 
 **Answer:** They want to feel heard. Period.
 
 ### Phase 2: The Problem with Visible Glyphs
+
 Even though we had made glyphs "work" in responses, they were still visible:
+
 - "There's something in what you're describing—boundaries that hold without pressure"
 - This tells the user: "I identified what emotional category you are"
 - Instead of: "I understand your specific situation"
 
 ### Phase 3: Architectural Transformation
+
 Complete refactor to make glyphs work **invisibly**.
+
 ##
 
 ## What Changed
@@ -42,8 +47,10 @@ a sanctuary of quiet care. You're not alone—many brilliant people have genuine
 ```text
 ```text
 ```
+
 You're not alone—many brilliant people have genuine friction with math, especially
 when it's presented in a way that doesn't match how their mind naturally works...
+
 ```
 
 
@@ -100,9 +107,6 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
 ```text
 ```
 
-
-
-
 **Result:** Response addresses their actual content, not glyph category
 
 #### Method 2: `compose_message_aware_response()`
@@ -135,9 +139,8 @@ else:
 ```text
 ```
 
-
-
 **Result:** Glyph informs tone without appearing in response
+
 ##
 
 ## How Glyphs Work Invisibly Now
@@ -158,9 +161,6 @@ User sees: "You get to take this at your own pace"
 ```text
 ```
 
-
-
-
 ### 2. Emotional Signal → Bridge Language (Invisible)
 
 ```
@@ -172,8 +172,6 @@ User sees: "When someone explains in a way only they can follow..."
 ```text
 ```text
 ```
-
-
 
 ### 3. Glyph Name → Poetry Category (Invisible)
 
@@ -190,9 +188,6 @@ User sees: Beautiful poem about stability/presence
 ```text
 ```
 
-
-
-
 ### 4. Gate-Based Movement Language (Invisible)
 
 ```
@@ -205,19 +200,21 @@ Choose movement_language["with"] (gentler)
 ```text
 ```
 
-
 ##
 
 ## User Experience Results
 
 ### The Perception
+
 User feels:
+
 - ✓ **Heard**: "You understand my specific situation"
 - ✓ **Not categorized**: "I'm not being put in a box"
 - ✓ **Supported**: "This person gets me"
 - ✓ **Respected**: "They're responding to me, not a system"
 
 ### What's Actually Happening
+
 - Glyph matched: ✓ (internal)
 - Glyph intensity calculated: ✓ (internal)
 - Emotional signal used for tone: ✓ (internal)
@@ -225,6 +222,7 @@ User feels:
 - Message content extracted: ✓ (external in response)
 - Specific struggles validated: ✓ (visible in response)
 - Personalized closing: ✓ (visible in response)
+
 ##
 
 ## Technical Architecture
@@ -261,7 +259,6 @@ Output Response (Person feels heard, not categorized)
 
 ```
 
-
 ##
 
 ## Comparison: Then vs. Now
@@ -275,6 +272,7 @@ Output Response (Person feels heard, not categorized)
 | **Poetry Selection** | By glyph emotion | By glyph emotion (invisible) |
 | **Entity Focus** | Generic | Specific to people mentioned |
 | **Coherence** | Good (but felt robotic) | Good AND feels human |
+
 ##
 
 ## Key Insight
@@ -286,6 +284,7 @@ The **best system is invisible**.
 - **Both can be equally sophisticated**, but only invisible systems feel warm
 
 A glyph system is only as good as the **quality of human connection it enables**, not the **sophistication of its categorization**.
+
 ##
 
 ## Files Modified
@@ -297,6 +296,7 @@ A glyph system is only as good as the **quality of human connection it enables**
 
 2. **Documentation Created**
    - `INVISIBLE_GLYPH_ARCHITECTURE.md`: Complete guide to invisible glyph system
+
 ##
 
 ## Validation
@@ -308,6 +308,7 @@ A glyph system is only as good as the **quality of human connection it enables**
 ✓ **Feedback detection still working**
 ✓ **Poetry weaving still happening (invisibly)**
 ✓ **User never sees glyph terminology**
+
 ##
 
 ## The Bottom Line
@@ -315,6 +316,7 @@ A glyph system is only as good as the **quality of human connection it enables**
 A person with an emotionally charged problem doesn't want to know they're in a system. They want to feel **understood**.
 
 By making glyphs invisible, we transformed from:
+
 - "Here's my sophisticated emotion categorization system"
 - To: "I hear you. I get what you're going through."
 

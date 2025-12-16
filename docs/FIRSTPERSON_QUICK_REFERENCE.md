@@ -10,15 +10,16 @@ Your Velinor game now uses FirstPerson to make NPC dialogue **emotionally respon
 You type: "I'm overwhelmed by all of this"
            ↓
 FirstPerson analyzes:
-  - Tone: "heavy" (negative emotion)
-  - Theme: "general" (burden/overwhelm)
-  - Valence: -0.7 (quite negative)
-  - Intensity: 0.8 (strong emotion)
+
+- Tone: "heavy" (negative emotion)
+- Theme: "general" (burden/overwhelm)
+- Valence: -0.7 (quite negative)
+- Intensity: 0.8 (strong emotion)
            ↓
 NPC adapts response:
-  - Opening acknowledges weight: "I hear the weight in that"
-  - Connects to theme: "The burden can feel immense"
-  - Invites exploration: "What needs to be said about it?"
+- Opening acknowledges weight: "I hear the weight in that"
+- Connects to theme: "The burden can feel immense"
+- Invites exploration: "What needs to be said about it?"
 
 ```
 
@@ -57,12 +58,14 @@ FirstPerson tracks across turns:
 ```text
 ```text
 ```
+
 Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6
 Turn 2: "It's like I've lost them" → Theme: grief, Valence: -0.8
 Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
 
 → Detects: 'grief' is recurring
 → Emotional trend: Improving (from -0.8 to -0.1)
+
 ```
 
 
@@ -116,9 +119,6 @@ orchestrator = VelinorTwineOrchestrator(
 ```text
 ```
 
-
-
-
 ### In `velinor/engine/orchestrator.py`
 
 ```python
@@ -135,8 +135,6 @@ npc_dialogue = self._generate_npc_dialogue(
 ```text
 ```text
 ```
-
-
 
 ## 🎮 Real Example
 
@@ -163,9 +161,6 @@ I feel it too. What needs to be said about it? Sometimes naming it
 ```text
 ```
 
-
-
-
 ### Scenario 2: Recurring Theme (After 3rd mention of loss)
 
 ```
@@ -191,8 +186,6 @@ back to you—it's sitting heavy. That tells me something. What do
 ```text
 ```
 
-
-
 ### Scenario 3: Emotional Improvement
 
 ```
@@ -216,9 +209,6 @@ Keeper's Response:
 ```text
 ```
 
-
-
-
 ## 🚀 How to Use It
 
 ### Local Play
@@ -230,11 +220,10 @@ Keeper's Response:
 ```text
 ```
 
-
-
 No configuration needed. FirstPerson analysis happens client-side.
 
 ### Observing the Analysis
+
 The terminal shows debug info (if logging enabled):
 
 ```
@@ -245,10 +234,8 @@ The terminal shows debug info (if logging enabled):
 ```text
 ```
 
-
-
-
 ### Customizing Responses
+
 Edit `_generate_emotionally_aware_response()` in `orchestrator.py`:
 
 ```python
@@ -267,8 +254,6 @@ theme_acknowledgments = {
 ```text
 ```text
 ```
-
-
 
 ## 📈 What Improves Player Experience
 
@@ -299,9 +284,6 @@ self.memory.record_turn(
 ```text
 ```
 
-
-
-
 ### Recurring Theme Detection
 
 ```python
@@ -317,8 +299,6 @@ memory.repeated_patterns = ['grief']
 ```text
 ```
 
-
-
 ### Emotional Trajectory
 
 ```python
@@ -329,8 +309,6 @@ Valence history: [-0.8, -0.7, -0.6, -0.4, -0.2]
 NPC: "I'm also noticing a shift. What's helping?"
 
 ```
-
-
 
 ## 🎯 Key Features
 
@@ -377,6 +355,7 @@ A: Entire conversation is tracked in session memory. Clears on new game.
 
 **Q: Can I export emotional analysis data?**
 A: Not yet, but the infrastructure is there. See `memory.get_memory_context()`
+
 ##
 
 **Status:** ✅ **Ready to Play**

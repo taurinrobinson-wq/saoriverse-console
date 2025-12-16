@@ -3,6 +3,7 @@
 **Date**: December 4, 2025
 **Status**: ✅ PRODUCTION READY (Text mode) | 🧪 EXPERIMENTAL (Voice mode)
 **Commits**: ff5926a, 76dacb4, fe59162, 8ac34ca, 29f29ec
+
 ##
 
 ## 🎯 What Was Built
@@ -10,11 +11,13 @@
 Your system now has **three distinct layers** working together:
 
 ### Layer 1: Glyph System ✅
+
 - **Status**: Active & deployed
 - **What**: 21 emotional signals that inform responses
 - **How**: Glyphs select the emotional framework but don't generate responses
 
 ### Layer 2: FirstPerson Orchestrator ✅
+
 - **Status**: Fully integrated
 - **What**: Glyph-informed response generation engine
 - **How**:
@@ -25,6 +28,7 @@ Your system now has **three distinct layers** working together:
   - NOT template-based—responses are composed for each turn
 
 ### Layer 3: Voice Interface 🧪
+
 - **Status**: Integrated but optional
 - **What**: Speech-to-text and text-to-speech capabilities
 - **How**:
@@ -32,6 +36,7 @@ Your system now has **three distinct layers** working together:
   - Transcription via Whisper (local, private)
   - Synthesis via Coqui TTS (glyph-informed)
   - Toggleable in sidebar: "🎙️ Voice Input/Output"
+
 ##
 
 ## 📊 Integration Architecture
@@ -89,6 +94,7 @@ Your system now has **three distinct layers** working together:
 ```text
 ```text
 ```
+
 1. USER SENDS MESSAGE
    ↓
 2. session_manager.initialize_session_state()
@@ -119,6 +125,7 @@ Your system now has **three distinct layers** working together:
 5. CONVERSATION CONTINUES
    └─ Memory grows with each turn
       └─ Responses become more contextually aware
+
 ```
 
 
@@ -171,9 +178,6 @@ src/emotional_os/deploy/
 ```text
 ```
 
-
-
-
 ### Step 2: Deploy to Streamlit Cloud
 
 ```bash
@@ -183,18 +187,18 @@ src/emotional_os/deploy/
 # No additional setup needed
 ```
 
-
-
-
 ### Step 3: Test
+
 1. Go to: `https://firstperson3.streamlit.app` (or your deployment URL)
 2. Try text-only mode first (no dependencies needed)
 3. Enable voice if you want audio (optional dependencies)
+
 ##
 
 ## 📋 What Works
 
 ### ✅ Text Mode (Always Works)
+
 - User sends text message
 - FirstPerson orchestrator analyzes with glyph guidance
 - Fresh, context-aware response generated
@@ -203,15 +207,18 @@ src/emotional_os/deploy/
 - Emotional trajectory detected
 
 ### ✅ Voice Mode (If Dependencies Installed)
+
 - User can toggle voice in sidebar
 - Text-to-speech synthesizes responses
 - Audio playback widget shown
 - Glyph informs prosody (tone/speed/energy)
 
 ### ⚠️ Voice Input (Ready But Not UI-Integrated)
+
 - Recording component built with Web Audio API
 - Transcription pipeline ready
 - Could be added to UI with one more integration point
+
 ##
 
 ## ⚡ Performance Notes
@@ -225,6 +232,7 @@ src/emotional_os/deploy/
 | STT (if enabled) | Lazy | ~2-3s* | ~1-2s | Model download on first use |
 
 *First run downloads models (~500MB total to local cache)
+
 ##
 
 ## 🔒 Privacy & Safety
@@ -234,11 +242,13 @@ src/emotional_os/deploy/
 - ✅ ConversationMemory stored in session only (not persisted by default)
 - ✅ Glyph system has fallback protocols for safety
 - ✅ All processing local to Streamlit environment
+
 ##
 
 ## 🧪 Testing Checklist
 
 Before going live:
+
 - [ ] Deploy to Streamlit Cloud without TTS/Whisper dependencies → text works
 - [ ] Enable voice dependencies → audio synthesis works
 - [ ] Sidebar voice toggle appears and functions
@@ -248,24 +258,31 @@ Before going live:
 - [ ] Emotional trajectory detected across multiple turns
 - [ ] Audio playback widget displays and plays correctly
 - [ ] Glyphs inform response tone (test by comparing glyphs)
+
 ##
 
 ## 🛠️ Troubleshooting Guide
 
 ### Issue: "FirstPerson orchestrator not found"
+
 **Solution**: Check that `core/firstperson.py` exists in `emotional_os/deploy/core/`
 
 ### Issue: Audio synthesis fails
+
 **Solution**: Install TTS: `pip install TTS librosa soundfile`
 
 ### Issue: Recording not working
+
 **Solution**: Browser microphone access required; use HTTPS (Streamlit Cloud has this)
 
 ### Issue: Responses feel canned/repetitive
+
 **Solution**: Check that memory layer is working:
+
 1. Send same message twice
 2. Second response should include: "I'm hearing X come up again..."
 3. If not, check ConversationMemory is being updated in response_handler.py
+
 ##
 
 ## 📖 Documentation Files Created
@@ -274,6 +291,7 @@ Before going live:
 2. **FIRSTPERSON_INTEGRATION_AUDIT.md** - Audit of what was integrated vs left out
 3. **VOICE_AUDIO_INTEGRATION_COMPLETE.md** - Voice integration guide
 4. **This file** - Complete summary
+
 ##
 
 ## 🎓 Key Architectural Lessons
@@ -298,25 +316,30 @@ Before going live:
    - Put in `ui_components/audio/` (clean imports)
    - Wrap with `audio_ui.py` for Streamlit-specific concerns
    - Avoid external JS files (Streamlit caching + path issues)
+
 ##
 
 ## 🎯 What's Next?
 
 ### Short Term (Ready to deploy now)
+
 - ✅ Text mode with FirstPerson orchestrator
 - ✅ Voice output (if TTS installed)
 
 ### Medium Term (Future enhancements)
+
 - Voice input UI integration
 - Streaming audio output (real-time feel)
 - Emotion-aware prosody (affect → voice tone)
 - Voice settings panel (speaker selection, speed control)
 
 ### Long Term (Vision)
+
 - Multi-turn voice conversations
 - Audio history/replay
 - Podcast-style export
 - Real-time emotion detection from speech
+
 ##
 
 ## 💡 Summary

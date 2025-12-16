@@ -5,14 +5,17 @@
 Your system has been improved:
 
 ### ✅ Fixed: Warning Log Cleanup
+
 - **Before:** Console filled with warnings: `WARNING:root:TextBlob not available`, `WARNING:root:spaCy not available`
 - **After:** Demoted to debug level (only shown if debugging enabled)
 - **Reason:** These are optional dependencies for NLP enhancement - system works perfectly fine with just NRC lexicon
 
 ### ✅ Status: FirstPerson Relational AI System Ready
+
 Your codebase has a sophisticated **FirstPerson** system with a comprehensive 5-phase rollout plan:
 
 **Phases:**
+
 - **Phase 1** (Core Foundations): Story-start detection, frequency reflection, memory anchors, RNG variation
 - **Phase 2** (Emotional Attunement): Affect parser, response modulation, repair module
 - **Phase 3** (Relational Depth): Perspective-taking, micro-choice offering, temporal tracking
@@ -22,10 +25,13 @@ Your codebase has a sophisticated **FirstPerson** system with a comprehensive 5-
 **Location:** `/data/firstperson_improvements.md` (comprehensive 568-line roadmap)
 
 ### ✅ New: FirstPerson Integration Layer
+
 Created: `emotional_os/llm/firstperson_integration.py`
+
 - Provides unified interface to FirstPerson modules
 - Implements placeholder structure for all 7 core modules
 - Ready for phase-by-phase implementation
+
 ##
 
 ## Optional Dependencies Status
@@ -36,11 +42,13 @@ Created: `emotional_os/llm/firstperson_integration.py`
 | **TextBlob** | ⚠️ Optional | Sentiment analysis, subjectivity | Graceful fallback - system works |
 | **spaCy** | ⚠️ Optional | POS tagging, entity extraction | Graceful fallback - system works |
 | **FirstPerson** | 🔧 Phase 1-5 | Emotional attunement, memory, scaffolding | Advanced features (can rollout incrementally) |
+
 ##
 
 ## What's Currently Being Used
 
-### Response Generation Pipeline:
+### Response Generation Pipeline
+
 1. **Signal Parsing** → Emotional keywords detection
 2. **Glyph Matching** → Find relevant glyphs from database
 3. **Dynamic Response Composer** → Compose contextual responses
@@ -49,15 +57,17 @@ Created: `emotional_os/llm/firstperson_integration.py`
    - Poetry weaving
    - Closing (question/permission/commitment)
 
-### Emotion Detection Sources:
+### Emotion Detection Sources
+
 1. **NRC Lexicon** (Primary) - 6,453 words across 10 emotions ✅
 2. **Enhanced Emotion Processor** - Multi-source routing (if TextBlob/spaCy available)
 3. **Heuristic Detection** - Built-in keyword mapping (always available)
+
 ##
 
 ## FirstPerson System Architecture
 
-### Core Modules (From Roadmap):
+### Core Modules (From Roadmap)
 
 | Phase | Module | Purpose |
 |---|---|---|
@@ -76,11 +86,13 @@ Created: `emotional_os/llm/firstperson_integration.py`
 | 5 | Dynamic Scaffolding | Blend all elements |
 | 5 | Adaptive Learning | Refine from corrections |
 | 5 | Empathy Rituals | Teach-as-you-go practices |
+
 ##
 
 ## Implementation Roadmap
 
-### Immediate Next Steps:
+### Immediate Next Steps
+
 1. **Phase 1** (~2-3 weeks)
    - [ ] Story-start detection (pronoun ambiguity, temporal markers)
    - [ ] Frequency reflection (count repeated themes)
@@ -95,6 +107,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 
 3. **Phase 3-5** (Ongoing)
    - See `/data/firstperson_improvements.md` for detailed tasks
+
 ##
 
 ## Files Modified & Created
@@ -103,6 +116,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 2. `emotional_os/deploy/modules/nlp_init.py` - Demoted warnings to debug
 3. `emotional_os/llm/firstperson_integration.py` - NEW: FirstPerson bridge layer
 4. `LOCAL_LLM_AND_DEPENDENCIES.md` - This file (updated)
+
 ##
 
 ## Verification
@@ -121,8 +135,6 @@ gen = get_firstperson_generator()
 print(f"FirstPerson available: {gen.is_available()}")  # Currently: False (Phase 1 pending)
 ```
 
-
-
 ##
 
 ## Performance Impact
@@ -130,31 +142,41 @@ print(f"FirstPerson available: {gen.is_available()}")  # Currently: False (Phase
 - **Response Time:** 0.01-0.04s (unaffected by optional dependencies)
 - **Memory:** Slightly lower with TextBlob/spaCy disabled
 - **Accuracy:** Unaffected (NRC lexicon provides excellent emotion detection)
+
 ##
 
 ## Key Concepts from FirstPerson Roadmap
 
 ### "Friend-Like Memory"
+
 System remembers themes across time through Supabase anchors, detecting patterns like:
+
 - "I notice this theme comes up when you're tired"
 - "This connects with when you mentioned feeling belittled"
 
 ### "Emotional Attunement"
+
 System detects and matches emotional tone:
+
 - Intense input → shorter, calmer response
 - Tired input → softer, flowing response
 - Urgent input → direct, action-oriented response
 
 ### "Relational Scaffolding"
+
 System helps users practice empathy:
+
 - "How might your boss see this situation?"
 - "Would you like to explore what keeps bringing this back, or how you usually respond?"
 - Micro-choices that offer agency
 
 ### "Repair & Trust"
+
 System detects misattunement and repairs:
+
 - User: "No, that's not what I meant"
 - System: "Thanks for clarifying—I want to get closer to what you mean"
+
 ##
 
 ## Questions?

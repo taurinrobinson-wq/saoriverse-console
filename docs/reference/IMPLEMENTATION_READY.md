@@ -76,6 +76,7 @@ Return: Complete glyph candidate with metadata
 ```text
 ```text
 ```
+
 New glyph candidate
   ↓
 Select response template by emotional tone (8 tones)
@@ -85,6 +86,7 @@ Reference glyph name (training signal)
   ↓
 Return: Response that answers user emotionally AND trains system
          (User never knows they're teaching the system)
+
 ```
 
 
@@ -119,6 +121,7 @@ Per-user queries return DIFFERENT ORDERING from SAME database
 ```text
 ```text
 ```
+
 ONE SHARED DATABASE (all users contribute):
 ├─ glyph_versions (all glyphs from all users)
 ├─ user_glyph_preferences (adoption history)
@@ -144,6 +147,7 @@ Result:
   User B sees glyphs ordered by B's history
   SAME glyphs in database (global learning)
   DIFFERENT ranking per user (personal experience)
+
 ```
 
 
@@ -182,8 +186,6 @@ _learning_response_gen = LearningResponseGenerator()
 ```text
 ```
 
-
-
 ### Step 2: Modify parse_input() Function
 
 ```python
@@ -203,9 +205,6 @@ else:
 ```text
 ```
 
-
-
-
 ### Step 3: Add Helper Function
 
 ```python
@@ -215,13 +214,12 @@ def _determine_emotional_tone(signals):
 ```text
 ```
 
-
-
 **Total integration time: 30 minutes** (exact steps in INTEGRATION_GUIDE_PHASE_2.md)
 
 ## Database: What Gets Created
 
 5 new tables (auto-created on first run):
+
 - `glyph_candidates` - Candidate glyphs awaiting consensus
 - `glyph_versions` - Track how each glyph evolves
 - `user_glyph_preferences` - Track personal adoption history
@@ -257,8 +255,6 @@ No modifications to existing tables. Pure additive.
 
 ```
 
-
-
 ## Deployment Timeline
 
 | Step | Time |
@@ -280,12 +276,14 @@ No modifications to existing tables. Pure additive.
 ## What's Different From Phase 1
 
 **Phase 1 (Completed):**
+
 - Fixed 56% failure rate
 - Expanded signal vocabulary
 - Integrated NRC lexicon
 - Result: 100% glyph coverage (all inputs get matched glyphs)
 
 **Phase 2 (This Delivery):**
+
 - Dynamic glyph generation when no match found
 - Training responses that subtly teach the system
 - Shared database with user segregation
@@ -308,6 +306,7 @@ No modifications to existing tables. Pure additive.
 ## The Vision Realized
 
 You wanted a system where:
+
 - ✅ User input is parsed for emotional language in real-time
 - ✅ System checks for existing glyphs
 - ✅ If none exist, system builds new glyph and maps gates
@@ -322,6 +321,7 @@ Every user interaction teaches the system.
 Every response is personal and appropriate.
 No user ever sees a standardized message.
 The system evolves organically from authentic emotional communication.
+
 ##
 
 **Start with:** PHASE_2_README.md

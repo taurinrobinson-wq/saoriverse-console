@@ -27,9 +27,6 @@ Use Python 3.12 to run the app. Choose one of these methods:
 ```text
 ```
 
-
-
-
 ### Method 2: Use Launcher Script
 
 ```powershell
@@ -37,10 +34,10 @@ Use Python 3.12 to run the app. Choose one of these methods:
 ```text
 ```
 
-
-
 ### Method 3: VS Code Task
+
 Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
+
 ##
 
 ## How to Verify It's Working
@@ -56,11 +53,13 @@ Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
    - It should transcribe successfully
 
 3. **Check Logs** - Should show:
+
    ```
    INFO:emotional_os.deploy.modules.nlp_init:TextBlob available: True
    INFO:emotional_os.deploy.modules.nlp_init:spaCy import successful
    INFO:emotional_os.deploy.modules.nlp_init:spaCy model 'en_core_web_sm' loaded
    ```
+
 ##
 
 ## What Was Created
@@ -72,6 +71,7 @@ New files to make this easier:
 3. **`.vscode/tasks.json`** - VS Code task configuration
 4. **`PYTHON_312_RUNTIME_GUIDE.md`** - Detailed setup guide
 5. **Enhanced diagnostics** in `app.py` sidebar
+
 ##
 
 ## Technical Details
@@ -84,6 +84,7 @@ New files to make this easier:
 | **spacy** | ✅ Installed | Python 3.12 site-packages |
 | **App diagnostics** | ✅ Updated | Shows which Python version running |
 | **Launcher scripts** | ✅ Created | Easy-to-use app starters |
+
 ##
 
 ## Command Reference
@@ -107,8 +108,6 @@ py -3.12 --version
 
 ```text
 ```
-
-
 
 ##
 
@@ -139,7 +138,6 @@ Streamlit App Launches:
 ```text
 ```
 
-
 ##
 
 ## Troubleshooting
@@ -163,9 +161,6 @@ Use alternate port:
 ```text
 ```
 
-
-
-
 ### Still getting import errors?
 
 Verify packages are installed in Python 3.12:
@@ -176,8 +171,6 @@ py -3.12 -m pip list | grep faster-whisper
 ```text
 ```
 
-
-
 If missing, reinstall:
 
 ```powershell
@@ -185,7 +178,6 @@ If missing, reinstall:
 py -3.12 -m pip install faster-whisper sounddevice
 
 ```
-
 
 ##
 

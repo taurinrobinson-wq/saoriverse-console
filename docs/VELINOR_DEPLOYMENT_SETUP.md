@@ -11,9 +11,7 @@ bash setup.sh
 ```text
 ```
 
-
-
-**Game opens at:** http://localhost:8501
+**Game opens at:** <http://localhost:8501>
 
 ### Option 2: Manual Setup
 
@@ -32,14 +30,14 @@ pip install streamlit pillow
 ```text
 ```
 
-
-
 ##
 
 ## Integration with Your Glyph System
 
 ### Current Integration Status
+
 ✅ **FirstPerson hooks already in place** (line 556 of velinor_app.py)
+
 - Game engine ready for FirstPerson orchestrator connection
 - NPC system prepared for emotional analysis
 - Glyph system placeholders ready
@@ -47,6 +45,7 @@ pip install streamlit pillow
 ### To Enable FirstPerson Integration
 
 #### Step 1: Update velinor_app.py
+
 Modify the game initialization section to import and connect FirstPerson:
 
 ```python
@@ -64,9 +63,8 @@ orchestrator = VelinorTwineOrchestrator(
 ```text
 ```
 
-
-
 #### Step 2: Environment Variables (Secrets)
+
 For Streamlit Cloud deployment, add to `.streamlit/secrets.toml`:
 
 ```toml
@@ -89,20 +87,21 @@ environment = "production"  # or "development"
 ```text
 ```
 
-
-
-
 #### Step 3: Session Secrets (for Streamlit Cloud)
+
 1. Go to your app's Settings on Streamlit Cloud
 2. Click "Secrets"
 3. Add the same TOML content above
 
 ### For Local Development (No Secrets Needed)
+
 The game works perfectly without FirstPerson/Glyph integration:
+
 - Full game playable standalone
 - All story functionality works
 - Stats and mechanics fully functional
 - Perfect for testing before integration
+
 ##
 
 ## Running Velinor
@@ -120,8 +119,6 @@ streamlit run velinor_app.py
 ```text
 ```
 
-
-
 ### With FirstPerson Connected
 
 ```bash
@@ -132,24 +129,27 @@ streamlit run velinor_app.py
 ```text
 ```
 
-
-
 ##
 
 ## Deployment Options
 
 ### Option A: Local Only (Recommended for Development)
+
 **Pros:**
+
 - No secrets needed
 - Fast iteration
 - Full offline gameplay
 - Can integrate FirstPerson locally
 
 **Setup:** Run `bash run.sh`
+
 ##
 
 ### Option B: Streamlit Cloud (Free)
+
 **Steps:**
+
 1. Push to GitHub (already done - `feature/velinor-remnants-of-tone` merged to main)
 2. Go to share.streamlit.io
 3. Create new app from GitHub
@@ -158,17 +158,21 @@ streamlit run velinor_app.py
 6. Add secrets if integrating FirstPerson
 
 **Pros:**
+
 - Free hosting
 - Easy updates (auto-sync from GitHub)
 - Public URL sharing
 
 **Cons:**
+
 - Limited compute resources
 - Slow cold starts
 - Need secrets for FirstPerson
+
 ##
 
 ### Option C: Docker Deployment
+
 **Dockerfile already compatible:**
 
 ```bash
@@ -176,7 +180,6 @@ docker build -t velinor-game .
 ```text
 ```text
 ```
-
 
 ##
 
@@ -193,7 +196,9 @@ docker build -t velinor-game .
 | Production with Glyphs | ✅ Yes | Database, auth, persistence |
 
 ### Current Status
+
 ✅ **Game is fully playable WITHOUT secrets**
+
 - All mechanics work
 - Save/load works
 - Graphics display
@@ -223,13 +228,12 @@ session_scope = "velinor_game"
 ```text
 ```
 
-
-
 ##
 
 ## What's Already Configured
 
 ✅ **Streamlit Config** (`.streamlit/config.toml`):
+
 - Port: 8501
 - Theme: Light mode with pink accent (#ff6b9d)
 - Error details: Hidden for clean UI
@@ -237,6 +241,7 @@ session_scope = "velinor_game"
 - Max upload: 200MB
 
 ✅ **Game Configuration**:
+
 - 15 background locations
 - 7 NPC characters
 - Dice mechanics (d20 system)
@@ -245,9 +250,11 @@ session_scope = "velinor_game"
 - Multiplayer support (2-4 players)
 
 ✅ **Assets**:
+
 - All images in `velinor/backgrounds/` and `velinor/npcs/`
 - Story in `velinor/stories/sample_story.json`
 - Complete UI with light theme
+
 ##
 
 ## File Locations
@@ -274,7 +281,6 @@ saoriverse-console/
 ```text
 ```text
 ```
-
 
 ##
 
@@ -306,8 +312,6 @@ rm -rf ~/.streamlit
 ```text
 ```
 
-
-
 ##
 
 ## Status Check
@@ -327,7 +331,6 @@ ls -la velinor/npcs/
 ```text
 ```
 
-
 ##
 
 ## For FirstPerson/Glyph Integration
@@ -340,11 +343,13 @@ When ready to integrate your emotional resonance system:
 4. **Emotional analysis** - FirstPerson can analyze player choices via `player_input`
 
 ### Integration Points Ready
+
 - ✅ FirstPerson import location (line 556)
 - ✅ NPC system accepts FirstPerson module
 - ✅ Game engine has hooks for external analysis
 - ✅ Player stats include glyph tracking
 - ✅ Session management ready for persistence
+
 ##
 
 ## Troubleshooting
@@ -357,6 +362,7 @@ When ready to integrate your emotional resonance system:
 | Game crashes on start | Clear cache: `rm -rf ~/.streamlit` |
 | FirstPerson import error | Update import path in velinor_app.py |
 | Secrets not loading | Ensure `.streamlit/secrets.toml` is in .gitignore |
+
 ##
 
 ## Summary
@@ -370,8 +376,6 @@ bash setup.sh
 bash run.sh
 
 ```
-
-
 
 **Secrets Required?** Only if integrating with FirstPerson/Glyph system
 

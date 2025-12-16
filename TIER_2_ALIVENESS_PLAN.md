@@ -4,19 +4,23 @@
 **Date:** December 4, 2025
 **Duration:** 4-6 hours
 **Target Performance:** <100ms total (Tier 1+2 combined)
+
 ##
 
 ## Overview
 
 Tier 2 adds **emotional presence and adaptivity** to responses. While Tier 1 focuses on context and learning, Tier 2 makes the system feel alive by adapting tone, energy, and presence in real-time.
+
 ##
 
 ## Components to Build
 
 ### 1. AttunementLoop
+
 **Purpose:** Real-time emotional synchronization with user
 
 **What it does:**
+
 - Detects shifts in user's emotional tone
 - Adjusts response energy to match
 - Creates sense of being "with" the user
@@ -33,15 +37,16 @@ class AttunementLoop:
 ```text
 ```
 
-
-
 **Performance:** ~5-7ms
+
 ##
 
 ### 2. EmotionalReciprocity
+
 **Purpose:** Mirror and build on user's emotional intensity
 
 **What it does:**
+
 - Reflects user's emotional patterns
 - Builds conversational momentum
 - Shows genuine emotional engagement
@@ -59,16 +64,16 @@ class EmotionalReciprocity:
 ```text
 ```
 
-
-
-
 **Performance:** ~5-7ms
+
 ##
 
 ### 3. EmbodiedSimulation
+
 **Purpose:** Create sense of physical presence and embodied interaction
 
 **What it does:**
+
 - Uses presence metaphors (sitting, breathing, reaching)
 - Creates spatial awareness
 - Suggests physical attention and care
@@ -85,15 +90,16 @@ class EmbodiedSimulation:
 ```text
 ```
 
-
-
 **Performance:** ~3-5ms
+
 ##
 
 ### 4. EnergyTracker
+
 **Purpose:** Maintain and adapt conversation energy levels
 
 **What it does:**
+
 - Tracks conversation phase (opening, deepening, closing)
 - Monitors user fatigue or engagement
 - Suggests pacing changes
@@ -112,10 +118,8 @@ class EnergyTracker:
 ```text
 ```
 
-
-
-
 **Performance:** ~3-5ms
+
 ##
 
 ## Architecture
@@ -135,15 +139,15 @@ EnergyTracker (maintain pacing) → 3-5ms
 ```text
 ```
 
-
-
 **Total Tier 2 Processing:** ~17-27ms
 **Tier 1 + Tier 2 Total:** ~40ms + 20ms = ~60ms ✅
+
 ##
 
 ## Implementation Steps
 
 ### Step 1: Create tier2_aliveness.py (2-3 hours)
+
 **File:** `src/emotional_os/tier2_aliveness.py`
 
 **Structure:**
@@ -180,15 +184,14 @@ class Tier2Aliveness:
 ```text
 ```
 
-
-
-
 **Target:** ~420 lines total
 
 ### Step 2: Create test_tier2_aliveness.py (1-2 hours)
+
 **File:** `tests/test_tier2_aliveness.py`
 
 **Test Coverage:**
+
 - [ ] Tone shift detection
 - [ ] Intensity matching
 - [ ] Embodied language addition
@@ -200,7 +203,9 @@ class Tier2Aliveness:
 **Target:** ~200 lines, 8-10 tests
 
 ### Step 3: Integrate into response handler (30 min)
+
 **Files:**
+
 - `src/emotional_os/deploy/modules/ui_components/response_handler.py`
 
 **Changes:**
@@ -216,9 +221,8 @@ if tier2:
 ```text
 ```
 
-
-
 ### Step 4: Add to session manager (20 min)
+
 **File:** `src/emotional_os/deploy/modules/ui_components/session_manager.py`
 
 **Changes:**
@@ -238,14 +242,13 @@ def _ensure_tier2_aliveness():
 ```text
 ```
 
-
-
-
 ### Step 5: Test and validate (30 min)
+
 - Run pytest: `tests/test_tier2_aliveness.py`
 - Run manual tests with real conversations
 - Verify <100ms total time
 - Check for no new errors
+
 ##
 
 ## Performance Budget
@@ -259,34 +262,38 @@ Total:                 ~60ms  │██████░░░░░░░░░�
 ```text
 ```
 
-
 ##
 
 ## Key Design Decisions
 
 ### 1. Non-Intrusive
+
 - Adjustments should feel natural
 - No weird tone shifts
 - Subtle energy matching
 - Imperceptible to user
 
 ### 2. Context-Aware
+
 - Uses conversation history
 - Considers session history
 - Respects user preferences
 - Adapts to individual patterns
 
 ### 3. Graceful Degradation
+
 - Each component has fallback
 - Missing dependencies don't break system
 - Can disable Tier 2, system still works
 - Performance doesn't degrade
 
 ### 4. Fast & Efficient
+
 - All heuristic-based (no ML models)
 - <30ms per component
 - <100ms combined with Tier 1
 - Minimal memory overhead
+
 ##
 
 ## Testing Strategy
@@ -309,9 +316,6 @@ def test_energy_tracking():
 ```text
 ```
 
-
-
-
 ### Integration Tests
 
 ```python
@@ -324,46 +328,53 @@ def test_aliveness_improves_responses():
 ```text
 ```
 
-
-
 ### Manual Tests
+
 1. Have natural conversation (10+ exchanges)
 2. Notice if responses feel more "alive"
 3. Check for tone consistency
 4. Verify energy pacing
 5. Look for embodied language
+
 ##
 
 ## Success Metrics
 
 ### Performance
+
 - [ ] Each component <7ms
 - [ ] Total Tier 2 <30ms
 - [ ] Tier 1+2 <70ms (10ms headroom)
 - [ ] No performance degradation
 
 ### Quality
+
 - [ ] Responses feel more present
 - [ ] Tone shifts are natural
 - [ ] Energy matching improves engagement
 - [ ] Embodied language feels authentic
 
 ### Testing
+
 - [ ] 8-10 tests all passing
 - [ ] >90% code coverage
 - [ ] Full error handling
 - [ ] Graceful fallbacks
+
 ##
 
 ## Files to Create/Modify
 
 ### New Files
+
 - `src/emotional_os/tier2_aliveness.py` (420 lines)
 - `tests/test_tier2_aliveness.py` (200 lines)
 
 ### Modified Files
+
 - `src/emotional_os/deploy/modules/ui_components/response_handler.py` (+20 lines)
 - `src/emotional_os/deploy/modules/ui_components/session_manager.py` (+20 lines)
+
 ##
 
 ## Git Strategy
@@ -384,9 +395,6 @@ git commit -m "feat: Tier 2 Aliveness - AttunementLoop, Reciprocity, Embodiment
 ```text
 ```
 
-
-
-
 **Commit 2:** Integration into response handler and session manager
 
 ```bash
@@ -399,8 +407,6 @@ git commit -m "feat: Integrate Tier 2 Aliveness into response pipeline
 - Performance <70ms for full pipeline"
 ```
 
-
-
 ##
 
 ## Timeline
@@ -412,15 +418,18 @@ git commit -m "feat: Integrate Tier 2 Aliveness into response pipeline
 - **Hour 5-6:** Manual testing and validation
 
 **Total: 4-6 hours**
+
 ##
 
 ## Rollback Plan
 
 If Tier 2 causes issues:
+
 1. Comment out Tier 2 call in response_handler.py
 2. System reverts to Tier 1 only
 3. Performance returns to ~50ms
 4. No data loss or user impact
+
 ##
 
 ## What's After Tier 2
@@ -428,14 +437,17 @@ If Tier 2 causes issues:
 Once Tier 2 is complete and integrated:
 
 ### Tier 3 (Week 3-4)
+
 - Poetic Consciousness
 - Saori Layer
 - Generative Tension
 
 ### Tier 4 (Optional Week 5+)
+
 - Dream Engine
 - Temporal Memory
 - Long-term Learning
+
 ##
 
 ## Ready to Begin?
@@ -446,6 +458,7 @@ Once Tier 2 is complete and integrated:
 ✓ Next step: Build tier2_aliveness.py
 
 **Let's start!**
+
 ##
 
 Date: December 4, 2025

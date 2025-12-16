@@ -1,9 +1,11 @@
 # Velinorian Glyphic Dictionary (Expanded)
+
 ##
 
 ## Ache Glyphs
 
 ### Thalen̈
+
 - **Phonetic Rendering**: /ˈθa.lɛn/ → ah-ha
 - **Literal Meaning**: Ache, longing
 - **Emotional Voltage**: Desire, incompletion, yearning
@@ -14,6 +16,7 @@
 - **Lore Fragment**: “Thalen̈ was the sigh of lovers parted, the ache that built Saonyx’s towers.”
 
 ### Moraï
+
 - **Phonetic Rendering**: /ˈmo.raɪ/ → ah-ha-ah
 - **Literal Meaning**: Sorrow, grief
 - **Emotional Voltage**: Loss, mourning, remembrance
@@ -22,11 +25,13 @@
 - **Resonance Category**: Ache / Collapse
 - **Gameplay Function**: Unlocks sorrow-driven dialogue, glows in ruins overtaken by silence
 - **Lore Fragment**: “Moraï was spoken at funerals, when memory was laid to rest.”
+
 ##
 
 ## Joy Glyphs
 
 ### Solen̈
+
 - **Phonetic Rendering**: /ˈso.lɛn/ → ah-ha
 - **Literal Meaning**: Radiance, celebration
 - **Emotional Voltage**: Joy, communal light
@@ -37,6 +42,7 @@
 - **Lore Fragment**: “Solen̈ was sung at festivals, when Saonyx’s plazas shone with laughter.”
 
 ### Elirä
+
 - **Phonetic Rendering**: /ˈɛ.li.ra/ → ah-ha
 - **Literal Meaning**: Hope, dawn
 - **Emotional Voltage**: Renewal, optimism
@@ -45,11 +51,13 @@
 - **Resonance Category**: Joy
 - **Gameplay Function**: Glows when player chooses reconciliation, boosts persuasion rolls
 - **Lore Fragment**: “Elirä was whispered at sunrise, a vow that collapse would not be final.”
+
 ##
 
 ## Sovereignty Glyphs
 
 ### Kaeth̄
+
 - **Phonetic Rendering**: /kaeθ/ → da-hah
 - **Literal Meaning**: Authority, command
 - **Emotional Voltage**: Power, sovereignty, control
@@ -60,6 +68,7 @@
 - **Lore Fragment**: “Kaeth̄ was carved into banners, the breath of command in Saonyx’s armies.”
 
 ### Orun̈
+
 - **Phonetic Rendering**: /ˈo.run/ → roo-ineah
 - **Literal Meaning**: Throne, dominion
 - **Emotional Voltage**: Sovereignty, legacy, burden
@@ -68,11 +77,13 @@
 - **Resonance Category**: Sovereignty / Collapse
 - **Gameplay Function**: Unlocks dialogue tied to rulership, glows in council ruins
 - **Lore Fragment**: “Orun̈ was spoken in halls of power, where memory was bound to rule.”
+
 ##
 
 ## Collapse Glyphs
 
 ### Drenn̄
+
 - **Phonetic Rendering**: /drɛn/ → da-hah
 - **Literal Meaning**: Break, fracture
 - **Emotional Voltage**: Collapse, destruction, entropy
@@ -83,6 +94,7 @@
 - **Lore Fragment**: “Drenn̄ was the word of fracture, spoken when bridges fell.”
 
 ### Veyrä
+
 - **Phonetic Rendering**: /ˈveɪ.ra/ → ah-ha
 - **Literal Meaning**: Silence, void
 - **Emotional Voltage**: Collapse, emptiness, cessation

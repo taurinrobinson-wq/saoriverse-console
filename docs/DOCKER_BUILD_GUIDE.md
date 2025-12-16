@@ -14,8 +14,6 @@ python check-docker-requirements.py
 ```text
 ```
 
-
-
 Expected output: All checks ✅
 
 ### Step 2: Build Docker Image
@@ -33,9 +31,6 @@ docker build -f Dockerfile.firstperson -t firstperson:latest .
 ```text
 ```
 
-
-
-
 **Option B: Resilient Build** (If Option A times out)
 
 ```powershell
@@ -47,8 +42,6 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 ```text
 ```text
 ```
-
-
 
 **Option C: Automated Test** (Validates build)
 
@@ -62,9 +55,6 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 ```text
 ```
-
-
-
 
 ### Step 3: Verify Build Success
 
@@ -85,9 +75,8 @@ docker stop firstperson-test
 ```text
 ```
 
-
-
 Expected: `{"status":"healthy"}`
+
 ##
 
 ## 📊 Build Information
@@ -101,6 +90,7 @@ Expected: `{"status":"healthy"}`
 | ElevenLabs | Latest | ✅ |
 | Node | 20-alpine | ✅ Frontend |
 | Nginx | Latest | ✅ Reverse proxy |
+
 ##
 
 ## ⚙️ Build Configuration
@@ -115,9 +105,6 @@ PIP_RETRIES: 5 attempts (was 1)
 ```text
 ```
 
-
-
-
 ### Optimization
 
 ```
@@ -127,25 +114,29 @@ PIP_RETRIES: 5 attempts (was 1)
 ```text
 ```
 
-
 ##
 
 ## 🐛 Troubleshooting
 
 ### Error: "Name or service not known"
+
 **Cause:** Docker cannot reach PyPI
 **Fix:**
+
 1. Check network: `docker run --rm alpine ping 8.8.8.8`
 2. Use resilient build: `docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .`
 3. Increase timeout: `docker build ... --build-arg PIP_TIMEOUT=180 .`
 
 ### Error: "Connection broken"
+
 **Cause:** Network interrupted during download
 **Fix:** Automatic retry is enabled (will retry 5 times)
+
 - If still failing, try building on different network
 - Or pre-download packages locally
 
 ### Error: "Dockerfile not found"
+
 **Cause:** Wrong working directory or filename
 **Fix:**
 
@@ -163,21 +154,22 @@ ls Dockerfile.firstperson
 ```text
 ```
 
-
-
-
 ### Build takes too long
+
 **Normal:** 5-10 minutes for first build
 **If >20 minutes:** Network issues, try resilient build
+
 ##
 
 ## 📦 Files Updated/Created
 
 ### Updated
+
 - ✅ `requirements-backend.txt` — Pinned numpy to 2.1.2
 - ✅ `Dockerfile.firstperson` — Added timeout/retry config
 
 ### Created
+
 - ✅ `Dockerfile.firstperson.resilient` — Extra robust version
 - ✅ `test-docker-build.ps1` — Windows test script
 - ✅ `test-docker-build.sh` — Linux test script
@@ -185,6 +177,7 @@ ls Dockerfile.firstperson
 - ✅ `DOCKER_NETWORK_TROUBLESHOOTING.md` — Complete guide
 - ✅ `DOCKER_FIX_SUMMARY.md` — Quick summary
 - ✅ This file — Build guide
+
 ##
 
 ## 🎯 Success Indicators
@@ -197,8 +190,6 @@ Successfully tagged firstperson:latest
 ```text
 ```
 
-
-
 ### Container Runs ✅
 
 ```bash
@@ -210,9 +201,6 @@ docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 ```text
 ```
 
-
-
-
 ### Frontend Loads ✅
 
 ```
@@ -221,7 +209,6 @@ curl http://localhost:3001
 ```text
 ```text
 ```
-
 
 ##
 
@@ -236,9 +223,6 @@ docker tag firstperson:latest your-registry/firstperson:v1.0.0
 ```text
 ```
 
-
-
-
 ### 2. Push to Registry
 
 ```bash
@@ -246,8 +230,6 @@ docker push your-registry/firstperson:v1.0.0
 ```text
 ```text
 ```
-
-
 
 ### 3. Deploy to Server
 
@@ -268,27 +250,29 @@ docker run -d \
 ```text
 ```
 
-
-
 ##
 
 ## 📋 Checklist
 
 Pre-build:
+
 - [ ] `check-docker-requirements.py` passes all checks
 - [ ] All required files exist
 - [ ] Docker is installed and running
 - [ ] Internet connectivity verified
 
 Build:
+
 - [ ] Standard build OR Resilient build completes
 - [ ] No errors in build output
 - [ ] Image created: `docker images | grep firstperson`
 
 Post-build:
+
 - [ ] FastAPI import works: `docker run --rm firstperson:latest python -c "import fastapi"`
 - [ ] Health check responds: `curl http://localhost:8000/health`
 - [ ] Container can start: `docker run ... firstperson:latest`
+
 ##
 
 ## 🔄 Rebuild Without Cache
@@ -306,10 +290,8 @@ docker system prune -a
 docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 ```
 
-
-
-
 **Warning:** This will remove all Docker images/containers!
+
 ##
 
 ## 📞 Quick Reference
@@ -325,11 +307,13 @@ docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 | Check logs | `docker logs <container-id>` |
 | Stop container | `docker stop <container-id>` |
 | Remove image | `docker rmi firstperson:latest` |
+
 ##
 
 ## ✅ Current Status
 
 **Fixed Issues:**
+
 - ✅ Network timeout during numpy download
 - ✅ Pip retry configuration added
 - ✅ Stable numpy version (2.1.2) specified
@@ -338,6 +322,7 @@ docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 - ✅ Troubleshooting guide available
 
 **Ready to:** Build Docker image with confidence 🚀
+
 ##
 
 **Next Step:** Run `python check-docker-requirements.py` to verify everything is in place, then build!

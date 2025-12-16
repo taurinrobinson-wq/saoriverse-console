@@ -170,8 +170,6 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-
-
 ##
 
 ## Fallback Paths
@@ -206,8 +204,6 @@
     │ Return response     │
     └─────────────────────┘
 ```
-
-
 
 ##
 
@@ -272,8 +268,6 @@
                         └────────────┘
 ```
 
-
-
 ##
 
 ## Glyph System Integration
@@ -287,9 +281,6 @@ Affect  →  Glyph Name  →  Response
                           (500+ chars)
 ```
 
-
-
-
 **Problem**: 3 translation layers created friction, responses too poetic
 
 ### After Phase 2.2.2 (2-Layer Direct Pipeline - EFFICIENT)
@@ -300,10 +291,8 @@ Affect  →  Response with Glyph Embedded
           (91 chars, glyph name in conversation)
 ```
 
-
-
-
 **Solution**: Direct affect→response pipeline, glyph names conversational
+
 ##
 
 ## Response Categories & Tone Routing
@@ -321,8 +310,6 @@ confused         (any)            → confused
 neutral          (any)            → calm
 ```
 
-
-
 ##
 
 ## Example Response Cascade
@@ -339,9 +326,6 @@ Input: "I'm so tired today"
 └─ Output: 82 chars ✓
 ```
 
-
-
-
 ### Scenario 2: Acute Anxiety
 
 ```
@@ -354,9 +338,6 @@ Input: "I'm really anxious about tomorrow's presentation"
 └─ Output: 82 chars ✓
 ```
 
-
-
-
 ### Scenario 3: Complex Emotion (Fallback)
 
 ```
@@ -368,8 +349,6 @@ Input: "I don't know what I'm feeling"
 ├─ Response: "That confusion is real. Let's sit with it together."
 └─ Output: 48 chars (generic but safe) ✓
 ```
-
-
 
 ##
 
@@ -390,8 +369,6 @@ Database calls: 0 (all in-memory)
 Network calls: 0 (pure Python)
 File I/O: 0 (preloaded)
 ```
-
-
 
 ##
 
@@ -423,6 +400,7 @@ File I/O: 0 (preloaded)
 - Pushed to remote ✓
 - Backward compatible ✓
 - Fallback mechanisms ✓
+
 ##
 
 **Phase 2.2.2: Glyph-Aware Response Composition is fully deployed and operational.**

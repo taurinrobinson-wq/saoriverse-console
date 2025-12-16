@@ -5,7 +5,6 @@
 ```text
 ```
 
-
 # USER INPUT FLOW
 
 Turn 1: "I'm feeling so stressed today"
@@ -34,7 +33,6 @@ Turn 1: "I'm feeling so stressed today"
         |
         v
     USER: "Response acknowledged"
-
 
 Turn 2: "I have so much on my mind at work that I can't take a step"
         |
@@ -72,7 +70,6 @@ Turn 2: "I have so much on my mind at work that I can't take a step"
         |
         v
     USER: "Yes, exactly! 5 projects..."
-
 
 Turn 3: "5 projects due this week, client presentation Thursday, deck not started"
         |
@@ -129,7 +126,6 @@ Turn 3: specificity provided (5 projects, Thursday, deck)
         Confidence: 0.95 (95% confident)
         ▓▓▓▓▓▓▓▓▓░
 
-
 # GLYPH EVOLUTION
 
 Turn 1:
@@ -146,7 +142,6 @@ Turn 3:
     Quiet Revelation
     Fragmentation
     The Threshold  ←─ decision point
-
 
 # INFORMATION ACCUMULATION
 
@@ -173,7 +168,6 @@ Turn 3:
     • manifestation: paralysis + inability to start critical item
     • specifics: client deck Thursday, unstarted, most urgent
     • next action: identify which can wait
-
 
 # CAUSAL CHAIN EMERGENCE
 
@@ -203,7 +197,6 @@ Turn 3:
          └─ Results in stuck state
             (cannot make one step forward)
 
-
 # RESPONSE QUALITY FLOW
 
 Without Memory (Isolated):
@@ -218,7 +211,6 @@ Without Memory (Isolated):
              (generic solution suggestion)
 
     Problem: Circular, repetitive, non-specific
-
 
 With Memory (Progressive):
 
@@ -235,6 +227,7 @@ With Memory (Progressive):
              (specific, action-oriented, informed)
 
     Benefit: Progressive, specific, builds understanding
+
 ```
 
 
@@ -245,7 +238,6 @@ With Memory (Progressive):
 
 ```text
 ```
-
 
 # CONVERSATION MEMORY LAYER
 
@@ -342,6 +334,7 @@ With Memory (Progressive):
 ```text
 ```text
 ```
+
 INCOMING MESSAGE                MEMORY STATE (before)
         │                               │
         │                               v
@@ -404,6 +397,7 @@ INCOMING MESSAGE                MEMORY STATE (before)
       manifestations: [paralysis],
       ...
     }
+
 ```
 
 
@@ -476,6 +470,7 @@ TURN 3+ (Later messages)
 ```text
 ```text
 ```
+
 Response Quality Baseline: WITHOUT Memory
     • Generic (same questions for different contexts)
     • Isolated (doesn't reference prior messages)

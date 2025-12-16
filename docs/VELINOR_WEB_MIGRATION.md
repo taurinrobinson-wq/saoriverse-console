@@ -11,6 +11,7 @@ You're moving from Streamlit (with overlay limitations) to a proper web stack:
 ## Current Status
 
 ✅ **Done:**
+
 - FastAPI backend created (`velinor_api.py`)
 - Next.js setup guide (`NEXTJS_FRONTEND_SETUP.md`)
 - Core components scaffolded (`frontend_GameScene.tsx`, `frontend_lib_api.ts`)
@@ -30,8 +31,6 @@ cd velinor-web
 ```text
 ```
 
-
-
 ### Phase 2: Copy Component Files
 
 From the root, copy the prepared files into the Next.js project:
@@ -44,9 +43,6 @@ cp frontend_lib_api.ts velinor-web/lib/api.ts
 
 ```text
 ```
-
-
-
 
 ### Phase 3: Create App Pages
 
@@ -144,8 +140,6 @@ export default function Home() {
 ```text
 ```
 
-
-
 #### Game Scene (`velinor-web/app/game/[sessionId]/page.tsx`)
 
 ```typescript
@@ -224,9 +218,6 @@ export default function GamePage({ params }: { params: { sessionId: string } }) 
 ```text
 ```
 
-
-
-
 ### Phase 4: Copy Game Assets
 
 Copy your game assets into the Next.js public folder:
@@ -244,8 +235,6 @@ cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 ```text
 ```
 
-
-
 ### Phase 5: Test Locally
 
 **Terminal 1 - Backend:**
@@ -260,9 +249,6 @@ python velinor_api.py
 ```text
 ```
 
-
-
-
 **Terminal 2 - Frontend:**
 
 ```bash
@@ -273,10 +259,9 @@ npm run dev
 ```text
 ```
 
-
-
 Test the game flow:
-1. Open http://localhost:3000
+
+1. Open <http://localhost:3000>
 2. Enter player name
 3. Click "Start New Game"
 4. Make a choice
@@ -297,12 +282,10 @@ git push origin main
 ```text
 ```
 
-
-
-
 ## API Reference
 
 ### POST /api/game/start
+
 Start a new game session.
 
 **Request:**
@@ -311,8 +294,6 @@ Start a new game session.
 ```text
 ```text
 ```
-
-
 
 **Response:**
 
@@ -333,10 +314,8 @@ Start a new game session.
 ```text
 ```
 
-
-
-
 ### POST /api/game/{session_id}/action
+
 Process player action.
 
 **Request:**
@@ -347,8 +326,6 @@ Process player action.
 ```text
 ```text
 ```
-
-
 
 **Response:** Updated game state (same structure as start)
 
@@ -389,8 +366,6 @@ Process player action.
 
 ```
 
-
-
 ## What You Get
 
 ✅ **Full overlay control** - Position buttons, text, images anywhere
@@ -418,9 +393,11 @@ Process player action.
 - **Mobile optimized**: Responsive touch controls
 - **Multiplayer**: Extend API to handle multiple players
 - **Save system**: Persist game progress to database
+
 ##
 
 Questions? Check:
+
 - `NEXTJS_FRONTEND_SETUP.md` - Detailed setup guide
 - `RAILWAY_DEPLOYMENT.md` - Deployment specifics
 - `velinor/TWINE_INTEGRATION_GUIDE.md` - Game engine API

@@ -16,8 +16,6 @@ git pull origin main
 ```text
 ```
 
-
-
 2. Install NLP deps (if needed):
 
 ```bash
@@ -27,17 +25,12 @@ python3 -m pip install requests beautifulsoup4 spacy
 ```text
 ```
 
-
-
-
 3. Re-run extraction (if you want to refresh the outputs):
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 4. Preview CSV results:
 
@@ -46,8 +39,6 @@ python3 -m pip install requests beautifulsoup4 spacy
 head -n 50 data/openstax_psych_phrases.csv
 
 ```
-
-
 
 Notes
 

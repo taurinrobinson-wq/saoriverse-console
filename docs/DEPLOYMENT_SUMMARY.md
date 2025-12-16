@@ -7,6 +7,7 @@
 ✅ **Comprehensive documentation**
 ✅ **Environment configuration** templates
 ✅ **Production-ready** Nginx reverse proxy setup
+
 ##
 
 ## Files Created/Updated
@@ -35,6 +36,7 @@
 |------|---------|
 | `.env.example` | ✅ Updated - Environment variables template |
 | `deploy/nginx.conf` | ✅ Updated - Reverse proxy configuration |
+
 ##
 
 ## What This Setup Provides
@@ -66,6 +68,7 @@
 ✅ Resource limits configured
 ✅ Logging support
 ✅ Easy scaling
+
 ##
 
 ## How to Deploy
@@ -80,8 +83,6 @@ chmod +x docker-setup.sh
 ```text
 ```text
 ```
-
-
 
 **Time**: ~5 minutes
 **Difficulty**: Easy
@@ -114,11 +115,9 @@ docker compose ps
 ```text
 ```
 
-
-
-
 **Time**: ~10 minutes
 **Difficulty**: Moderate
+
 ##
 
 ## Accessing Your App
@@ -135,8 +134,6 @@ Health Check:      http://161.35.227.49:8000/health
 ```text
 ```
 
-
-
 ### Test the API
 
 ```bash
@@ -151,8 +148,6 @@ curl -X POST http://161.35.227.49:8000/api/chat \
 
 ```text
 ```
-
-
 
 ##
 
@@ -177,7 +172,6 @@ docker compose build --no-cache     # Rebuild images
 ```text
 ```text
 ```
-
 
 ##
 
@@ -212,8 +206,6 @@ LOG_LEVEL=info
 ```text
 ```
 
-
-
 ##
 
 ## Project Structure
@@ -241,8 +233,6 @@ saoriverse-console/
 └── deploy/nginx.conf       # Reverse proxy config
 ```
 
-
-
 ##
 
 ## Troubleshooting Quick Links
@@ -255,6 +245,7 @@ saoriverse-console/
 | Can't reach API | `curl http://161.35.227.49:8000/health` |
 | Frontend won't load | `docker compose logs frontend` |
 | Disk full | `docker system prune -a` |
+
 ##
 
 ## Next Steps
@@ -271,13 +262,14 @@ saoriverse-console/
 3. **Verify Deployment**
    - Check: `docker compose ps`
    - Test: `curl http://161.35.227.49:8000/health`
-   - Visit: http://161.35.227.49:3000 in your browser
+   - Visit: <http://161.35.227.49:3000> in your browser
 
 4. **Optional: Advanced Setup**
    - Enable HTTPS with Let's Encrypt
    - Set up monitoring/backups
    - Configure log aggregation
    - See `DIGITALOCEAN_DEPLOYMENT_GUIDE.md`
+
 ##
 
 ## Key Files to Reference
@@ -290,14 +282,16 @@ saoriverse-console/
 | Environment config | `.env.example` |
 | Reverse proxy setup | `deploy/nginx.conf` |
 | Automated setup | `docker-setup.sh` |
+
 ##
 
 ## Support Resources
 
-- **Docker Documentation**: https://docs.docker.com/
-- **FastAPI**: https://fastapi.tiangolo.com/
-- **React/Expo**: https://expo.dev/
-- **DigitalOcean**: https://www.digitalocean.com/docs/
+- **Docker Documentation**: <https://docs.docker.com/>
+- **FastAPI**: <https://fastapi.tiangolo.com/>
+- **React/Expo**: <https://expo.dev/>
+- **DigitalOcean**: <https://www.digitalocean.com/docs/>
+
 ##
 
 ## Summary
@@ -314,6 +308,7 @@ You now have:
 **You're ready to deploy!** 🚀
 
 **Next action**: Run `./docker-setup.sh` on your DigitalOcean droplet.
+
 ##
 
 ### Quick Deployment Checklist
@@ -325,8 +320,9 @@ You now have:
 - [ ] Wait for setup to complete (~5-10 minutes)
 - [ ] Verify: `docker compose ps`
 - [ ] Test API: `curl http://161.35.227.49:8000/health`
-- [ ] Visit frontend: http://161.35.227.49:3000
+- [ ] Visit frontend: <http://161.35.227.49:3000>
 - [ ] Monitor logs: `docker compose logs -f`
+
 ##
 
 **Status**: ✅ READY FOR DEPLOYMENT

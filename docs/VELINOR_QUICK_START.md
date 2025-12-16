@@ -11,8 +11,6 @@ source venv/bin/activate
 ```text
 ```
 
-
-
 ### Windows
 
 ```cmd
@@ -24,28 +22,31 @@ pip install streamlit pillow
 ```text
 ```
 
+The game will open at: **<http://localhost:8501>**
 
-
-
-The game will open at: **http://localhost:8501**
 ##
 
 ## What's New
 
 ### ✨ Graphics Integration
+
 Your graphics files are fully integrated:
 
 **Backgrounds** (15 locations):
+
 - City Market, Mountains, Forest, Desert, Lake, Swamp, Underground, Bridge Pass
 - 5 unique desert variations for different moments
 
 **NPC Characters** (7 NPCs):
+
 - Keeper, Saori, Sanor, Irodora, Tala, Safi & Rumi, Velinor (2 poses)
 
 **UI Elements**:
+
 - Transparent Velinor title logo for welcome screen
 
 ### 🎮 Streamlit UI Features
+
 - **Full-screen backgrounds** for immersion
 - **NPC portraits** that appear during conversations
 - **Chat-style dialogue** with npc/player distinction
@@ -54,6 +55,7 @@ Your graphics files are fully integrated:
 - **Save/Load system** with timestamped saves
 - **Multiplayer support** with player customization
 - **Responsive layout** - main story area + sidebar stats
+
 ##
 
 ## How to Play
@@ -75,6 +77,7 @@ Your graphics files are fully integrated:
 | Load game | Menu → Save/Load → Load |
 | New game | Menu → Settings → Start New Game |
 | Multiplayer | Menu → Settings → Enable, set player names |
+
 ##
 
 ## File Structure
@@ -119,12 +122,12 @@ saoriverse-console/
 ```text
 ```
 
-
 ##
 
 ## Creating Custom Stories
 
 ### Option 1: Twine 2 Editor (Recommended)
+
 1. Download [Twine 2](https://twinery.org/)
 2. Create story with visual editor
 3. Export as JSON
@@ -145,9 +148,6 @@ story.add_choice("start", "Move forward", "walk")
 ```text
 ```
 
-
-
-
 ### Story Markup Syntax
 
 ```
@@ -160,12 +160,12 @@ story.add_choice("start", "Move forward", "walk")
 ```text
 ```
 
-
 ##
 
 ## Troubleshooting
 
 ### "ModuleNotFoundError: No module named 'velinor'"
+
 **Fix:** Run from project root:
 
 ```bash
@@ -175,10 +175,8 @@ cd /path/to/saoriverse-console
 ```text
 ```
 
-
-
-
 ### Images not loading
+
 **Check paths:**
 
 ```bash
@@ -188,9 +186,8 @@ ls velinor/npcs/           # Should see 7+ images
 ```text
 ```
 
-
-
 ### Port 8501 already in use
+
 **Try different port:**
 
 ```bash
@@ -198,10 +195,8 @@ ls velinor/npcs/           # Should see 7+ images
 ```text
 ```
 
-
-
-
 ### Virtual environment issues
+
 **Fresh start:**
 
 ```bash
@@ -210,7 +205,6 @@ rm -rf venv/
 ```text
 ```text
 ```
-
 
 ##
 
@@ -226,9 +220,6 @@ conda activate velinor
 ```text
 ```
 
-
-
-
 ### Docker (Optional)
 
 ```dockerfile
@@ -240,8 +231,6 @@ RUN pip install streamlit pillow
 ```text
 ```
 
-
-
 ```bash
 
 docker build -t velinor .
@@ -249,12 +238,10 @@ docker build -t velinor .
 ```text
 ```
 
-
-
-
 ### Cloud Deployment
 
 **Streamlit Cloud (Free):**
+
 1. Push to GitHub
 2. Go to share.streamlit.io
 3. Deploy from repo
@@ -265,8 +252,6 @@ docker build -t velinor .
 ```bash
 git push heroku main
 ```
-
-
 
 ##
 
@@ -281,11 +266,13 @@ git push heroku main
 | **Resonance** | Connection to the Tone | Find glyphs, hear echoes, understand story |
 
 All stats start at 50 (neutral) and can go 0-100.
+
 ##
 
 ## Multiplayer
 
 ### Enable Multiplayer
+
 1. Menu → Settings
 2. Check "Multiplayer Mode"
 3. Set number of players (2-4)
@@ -293,11 +280,13 @@ All stats start at 50 (neutral) and can go 0-100.
 5. Start game
 
 ### How It Works
+
 - Each player contributes to dialogue
 - NPCs address the group collectively
 - Responses adapt to group composition
 - See other players' choices in sidebar
 - Shared story progression
+
 ##
 
 ## First Session Tips
@@ -307,22 +296,26 @@ All stats start at 50 (neutral) and can go 0-100.
 3. **Pay attention to stats** - They affect dice rolls
 4. **Save often** - Especially before major choices
 5. **Play with multiplayer** - Different story with friends
+
 ##
 
 ## Next Steps
 
 ### For Players
+
 1. ✅ Install and play sample story
 2. Create custom stories in Twine 2
 3. Invite friends for multiplayer
 4. Deploy game online
 
 ### For Developers
+
 1. Connect FirstPerson orchestrator for dynamic dialogue
 2. Implement inventory system
 3. Add quest tracking UI
 4. Create achievement system
 5. Build community features
+
 ##
 
 ## Important Files
@@ -336,6 +329,7 @@ All stats start at 50 (neutral) and can go 0-100.
 | `velinor/engine/twine_adapter.py` | Story loader |
 | `velinor/engine/orchestrator.py` | Game loop |
 | `velinor/stories/sample_story.json` | Example story |
+
 ##
 
 ## Support & Documentation
@@ -344,6 +338,7 @@ All stats start at 50 (neutral) and can go 0-100.
 - 🏗️ **Architecture:** `velinor/TWINE_IMPLEMENTATION_COMPLETE.md`
 - 📊 **Project Status:** `velinor/STATUS.md`
 - 🎮 **Game Overview:** `velinor/README.md`
+
 ##
 
 ## System Requirements
@@ -353,6 +348,7 @@ All stats start at 50 (neutral) and can go 0-100.
 - **RAM:** 512MB minimum
 - **Disk:** 100MB for installation + saves
 - **Browser:** Any modern browser (Chrome, Firefox, Safari, Edge)
+
 ##
 
 ## Performance Notes
@@ -361,18 +357,21 @@ All stats start at 50 (neutral) and can go 0-100.
 - Session state: Game state persists during session
 - Save files: Stored as JSON in `velinor/saves/`
 - Large stories: 100+ passages work fine
+
 ##
 
 ## License
 
 [Your License Here]
+
 ##
 
 **Created:** December 6, 2025
 **Status:** 🟢 Ready to Play!
 **Version:** 1.0 - Streamlit UI Edition
+
 ##
 
-## Enjoy!
+## Enjoy
 
 Welcome to Velinor. May you find truth in the Tone. ✨

@@ -4,19 +4,23 @@
 **Date:** December 4, 2025
 **Duration:** 4-6 hours
 **Target Performance:** <100ms total (Tier 1+2+3 combined)
+
 ##
 
 ## Overview
 
 Tier 3 adds **poetic consciousness and creative depth** to responses. While Tier 1 provides learning/safety and Tier 2 provides emotional presence, Tier 3 makes the system feel genuinely creative through poetic generation, aesthetic principles, generative tension, and emergent personality.
+
 ##
 
 ## Components to Build
 
 ### 1. PoetryEngine
+
 **Purpose:** Generate poetic language with metaphor and symbolism
 
 **What it does:**
+
 - Creates metaphorical bridges between concepts
 - Adds symbolic language to responses
 - Generates novel poetic expressions
@@ -34,15 +38,16 @@ class PoetryEngine:
 ```text
 ```
 
-
-
 **Performance:** ~5-7ms
+
 ##
 
 ### 2. SaoriLayer
+
 **Purpose:** Apply Japanese aesthetic principles (Saori = weaving/aesthetics)
 
 **What it does:**
+
 - Ma (negative space): Knowing when NOT to speak
 - Yohaku (emptiness): Simplicity and essence
 - Wabi-sabi: Finding beauty in imperfection
@@ -62,16 +67,16 @@ class SaoriLayer:
 ```text
 ```
 
-
-
-
 **Performance:** ~5-7ms
+
 ##
 
 ### 3. TensionManager
+
 **Purpose:** Create generative tension for creative exploration
 
 **What it does:**
+
 - Introduces productive uncertainty
 - Creates conversational momentum
 - Balances resolution and opening
@@ -89,15 +94,16 @@ class TensionManager:
 ```text
 ```
 
-
-
 **Performance:** ~5-7ms
+
 ##
 
 ### 4. MythologyWeaver
+
 **Purpose:** Create and maintain personal conversational mythology
 
 **What it does:**
+
 - Tracks conversation themes and patterns
 - Builds recurring symbols and metaphors
 - Creates personal conversation mythology
@@ -116,10 +122,8 @@ class MythologyWeaver:
 ```text
 ```
 
-
-
-
 **Performance:** ~5-7ms
+
 ##
 
 ## Architecture
@@ -139,10 +143,9 @@ MythologyWeaver (build narrative) → 6ms
 ```text
 ```
 
-
-
 **Total Tier 3 Processing:** ~24ms
 **Tier 1+2+3 Total:** ~40ms + 20ms + 24ms = ~84ms ✅
+
 ##
 
 ## Implementation Steps
@@ -183,9 +186,6 @@ class Tier3PoeticConsciousness:
 ```text
 ```
 
-
-
-
 **Target:** ~610 lines total
 
 ### Step 2: Create test_tier3_poetic_consciousness.py (1-2 hours)
@@ -193,6 +193,7 @@ class Tier3PoeticConsciousness:
 **File:** `tests/test_tier3_poetic_consciousness.py`
 
 **Test Coverage:**
+
 - [ ] Metaphor generation
 - [ ] Symbolic language
 - [ ] Poetic expression
@@ -223,8 +224,6 @@ if tier3:
 ```text
 ```
 
-
-
 ### Step 4: Add to session manager (20 min)
 
 **File:** `src/emotional_os/deploy/modules/ui_components/session_manager.py`
@@ -241,14 +240,12 @@ def _ensure_tier3_poetic_consciousness():
 ```text
 ```
 
-
-
-
 ### Step 5: Test and validate (30 min)
 
 - Run pytest: `tests/test_tier3_poetic_consciousness.py`
 - Verify <100ms total time (Tier 1+2+3)
 - Check for no new errors
+
 ##
 
 ## Performance Budget
@@ -262,7 +259,6 @@ Total:            ~84ms  │████████░░░░░░│ 84%
 ```text
 ```text
 ```
-
 
 ##
 
@@ -290,9 +286,6 @@ metaphors = {
 ```text
 ```
 
-
-
-
 **Symbolic Language:**
 
 ```python
@@ -305,35 +298,40 @@ symbols = {
 ```text
 ```
 
-
 ##
 
 ### SaoriLayer: Aesthetic Principles
 
 **Ma (Negative Space):**
+
 - Respond with appropriate brevity
 - Leave space for silence
 - Don't over-explain
 
 **Yohaku (Emptiness/Simplicity):**
+
 - Strip to essence
 - Remove unnecessary words
 - Find elegance in simplicity
 
 **Wabi-Sabi (Imperfect Beauty):**
+
 - Accept incompleteness
 - Embrace asymmetry
 - Find beauty in flaws
 
 **Yūgen (Subtle Profundity):**
+
 - Add depth without explanation
 - Create mystery
 - Suggest more than state
 
 **Mono no Aware (Pathos of Things):**
+
 - Acknowledge transience
 - Gentle melancholy
 - Beauty in impermanence
+
 ##
 
 ### TensionManager: Creative Possibility
@@ -350,9 +348,6 @@ symbols = {
 ```text
 ```
 
-
-
-
 **Exploration Openings:**
 
 ```python
@@ -363,8 +358,6 @@ symbols = {
 ```text
 ```text
 ```
-
-
 
 **Generative Tension:**
 
@@ -378,8 +371,6 @@ symbols = {
 
 ```text
 ```
-
-
 
 ##
 
@@ -402,8 +393,6 @@ symbols = {
 ```text
 ```
 
-
-
 **Personal Identity:**
 
 ```python
@@ -416,8 +405,6 @@ symbols = {
 
 ```text
 ```
-
-
 
 ##
 
@@ -452,8 +439,6 @@ def test_mythology_weaving():
 ```text
 ```
 
-
-
 ### Integration Tests
 
 ```python
@@ -467,9 +452,6 @@ def test_poetic_response_quality():
 
 ```text
 ```
-
-
-
 
 ### Performance Tests
 
@@ -485,18 +467,19 @@ def test_tier3_total_performance():
 ```text
 ```
 
-
 ##
 
 ## Success Metrics
 
 ### Performance
+
 - [ ] Each component <10ms
 - [ ] Total Tier 3 <30ms
 - [ ] Tier 1+2+3 <100ms
 - [ ] No performance degradation
 
 ### Quality
+
 - [ ] Responses have poetic elements
 - [ ] Metaphors feel natural
 - [ ] Saori principles evident
@@ -504,37 +487,44 @@ def test_tier3_total_performance():
 - [ ] Creativity without incoherence
 
 ### Testing
+
 - [ ] 10-12 tests all passing
 - [ ] >90% code coverage
 - [ ] Full error handling
 - [ ] Graceful fallbacks
+
 ##
 
 ## Key Design Decisions
 
 ### 1. Heuristic-Based Poetry
+
 - Uses pattern matching, not ML generation
 - Maintains transparency and control
 - Fast processing
 - Fully customizable
 
 ### 2. Aesthetic Principles from Japan
+
 - Saori weaving = bringing threads together
 - Five principles of Zen aesthetics
 - Deep cultural wisdom
 - Universal human appeal
 
 ### 3. Optional Creativity
+
 - Doesn't force poetry on every response
 - Applies creatively when appropriate
 - Respects conversation flow
 - User-centered design
 
 ### 4. Personal Mythology
+
 - Tracks conversation over time
 - Builds unique narrative
 - Creates coherent voice
 - Emergent personality
+
 ##
 
 ## Git Strategy
@@ -555,9 +545,6 @@ git commit -m "feat: Tier 3 Poetic Consciousness
 ```text
 ```
 
-
-
-
 **Commit 2:** Integration into response handler and session manager
 
 ```bash
@@ -571,7 +558,6 @@ git commit -m "feat: Integrate Tier 3 into response pipeline
 ```text
 ```
 
-
 ##
 
 ## Timeline
@@ -583,20 +569,24 @@ git commit -m "feat: Integrate Tier 3 into response pipeline
 - **Hour 5-6:** Manual testing and validation
 
 **Total: 4-6 hours**
+
 ##
 
 ## Rollback Plan
 
 If Tier 3 causes issues:
+
 1. Comment out Tier 3 call in response_handler.py
 2. System reverts to Tier 1+2 responses
 3. Performance returns to ~60ms
 4. No data loss or user impact
+
 ##
 
 ## What's After Tier 3
 
 ### Optional Tier 4 (Week 5+)
+
 - Dream Engine (conversational dreams)
 - Temporal Memory (long-term learning)
 - Emergent Narrative (story generation)
@@ -614,7 +604,6 @@ Total: 100ms (exactly at budget!)
 
 ```
 
-
 ##
 
 ## Ready to Begin?
@@ -625,6 +614,7 @@ Total: 100ms (exactly at budget!)
 ✓ Next step: Build tier3_poetic_consciousness.py
 
 **Let's create Tier 3!**
+
 ##
 
 Date: December 4, 2025

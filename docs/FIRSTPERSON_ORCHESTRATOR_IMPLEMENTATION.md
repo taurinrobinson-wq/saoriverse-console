@@ -3,6 +3,7 @@
 **Status:** ✅ COMPLETE
 **Commit:** ff5926a
 **Branch:** main
+
 ##
 
 ## What Was Built
@@ -12,6 +13,7 @@ The **FirstPerson Orchestrator** - a glyph-constrained response generation syste
 ### The Problem We Solved
 
 Before: The system would select the correct glyph (signal parsing was working perfectly), but then the response generation would either:
+
 - Return the glyph description directly (too poetic/template-like)
 - Use keyword matching rules (still canned, just more variable)
 - Apply rotation banks (made responses generic by replacing meaningful endings)
@@ -58,25 +60,26 @@ affect = parser.analyze_affect("I'm grieving the loss of my job")
 ```text
 ```
 
-
-
-
 **What it detects:**
+
 - **Valence:** emotional direction (positive/negative)
 - **Intensity:** emotional arousal level
 - **Tone:** overall emotional quality
 - **Arousal:** how activated/energized the user is
 
 ### 2. **FirstPersonOrchestrator**
+
 Orchestrates conversation turns and generates glyph-informed responses.
 
 **Key methods:**
+
 - `handle_conversation_turn()` - Tracks turn metadata, themes, frequency
 - `generate_response_with_glyph()` - Creates fresh response using glyph constraints
 - `_extract_theme()` - Identifies primary emotional theme (grief, joy, fear, overwhelm, etc.)
 - `_compose_glyph_constrained_response()` - Builds response from components
 
 **How it works:**
+
 1. Analyzes user input for affect (tone, intensity, valence)
 2. Extracts primary theme (grief, joy, fear, etc.)
 3. Uses glyph as calibration constraint:
@@ -86,6 +89,7 @@ Orchestrates conversation turns and generates glyph-informed responses.
    - Opens by acknowledging what they said (specific to input)
    - Moves through the emotional space (calibrated by glyph)
    - Closes with agency/permission (consistent with tone)
+
 ##
 
 ## Response Generation Process
@@ -93,14 +97,17 @@ Orchestrates conversation turns and generates glyph-informed responses.
 ### Example: User says "I'm grieving the loss of my job"
 
 **Step 1: Affect Analysis**
+
 - Valence: -0.6 (negative but not extreme)
 - Intensity: 0.8 (emotionally activated)
 - Tone: "heavy"
 
 **Step 2: Theme Extraction**
+
 - Primary theme: "grief"
 
 **Step 3: Glyph Constraint**
+
 - Glyph selected by signal parser: "Recursive Ache"
 - Emotional signal: ache, layering, recursion
 - Implied tone: reflective, witness-like, present
@@ -117,19 +124,20 @@ FINAL: "I hear the weight of grief. What's underneath? What do you need?
 ```text
 ```
 
-
-
 **Why this works:**
+
 - ✅ Specific to their input (acknowledges job loss + grief)
 - ✅ Fresh generation (not from a template or rotation bank)
 - ✅ Calibrated by glyph (tone matches "Recursive Ache")
 - ✅ Respects emotional intensity (goes deep because intensity is high)
 - ✅ Different every time (even same input gets variations)
+
 ##
 
 ## Integration Points
 
 ### Session Initialization
+
 `session_manager.py` initializes the orchestrator:
 
 ```python
@@ -140,10 +148,8 @@ orchestrator.initialize_session()
 ```text
 ```
 
-
-
-
 ### Response Generation
+
 `response_handler.py` uses it in `_build_conversational_response()`:
 
 ```python
@@ -153,29 +159,33 @@ if fp_orch and best_glyph:
 ```text
 ```
 
-
 ##
 
 ## What This Solves
 
 ### ❌ BEFORE
+
 - Glyph selected correctly ✓
 - But response was canned/templated ✗
 - Same input → same response ✗
 - Response didn't feel connected to actual user input ✗
 
 ### ✅ AFTER
+
 - Glyph selected correctly ✓
 - Response is freshly generated for THIS input ✓
 - Same input can get different responses ✓
 - Response is grounded in what the user actually said ✓
 - Glyph informs tone/depth/calibration without being visible ✓
+
 ##
 
 ## Technical Details
 
 ### Theme Detection
+
 Identifies primary emotional domain:
+
 - `grief` - loss, death, mourning
 - `joy` - happiness, celebration, excitement
 - `fear` - anxiety, scared, worried
@@ -183,16 +193,21 @@ Identifies primary emotional domain:
 - `general` - fallback
 
 ### Affect Calibration
+
 Response depth adjusts based on intensity:
+
 - `intensity > 0.7` → Deep exploration ("What's underneath?")
 - `intensity < 0.3` → Light affirmation ("I'm here with you")
 - `0.3-0.7` → Balanced ("Tell me more about that")
 
 ### Valence-Based Opening
+
 Opening acknowledges emotional direction:
+
 - `valence < -0.5` → "I hear the weight..."
 - `valence > 0.5` → "That's something to feel..."
 - `-0.5 to 0.5` → "You're naming something real..."
+
 ##
 
 ## Why This Matters
@@ -204,20 +219,24 @@ This implementation restores your **original vision** for the glyph system:
 3. **Emotionally Grounded:** Response intensity/tone matches user's actual state
 4. **Context-Aware:** Responses reference what the user actually said
 5. **Non-Repetitive:** Same input can generate different responses naturally
+
 ##
 
 ## Next Steps
 
 ### Immediate
+
 - Test deployed system with real emotional input
 - Verify responses feel fresh and non-canned
 - Adjust affect calibration if needed
 
 ### Future Enhancements
+
 - Add memory anchoring (reference prior conversation themes)
 - Implement perspective-taking (reflect other-side views)
 - Add micro-choice offering (agency scaffolds)
 - Integrate repair module (handle misattunements)
+
 ##
 
 ## Files Modified
@@ -226,6 +245,7 @@ This implementation restores your **original vision** for the glyph system:
 2. **Created:** `src/emotional_os/deploy/core/__init__.py` (1 line)
 3. **Modified:** `src/emotional_os/deploy/modules/ui_components/response_handler.py`
    - Updated `_build_conversational_response()` to use `fp_orch.generate_response_with_glyph()`
+
 ##
 
 ## Architecture Diagram
@@ -271,7 +291,6 @@ This implementation restores your **original vision** for the glyph system:
 └─────────────────────────────────────────────────────────────┘
 
 ```
-
 
 ##
 

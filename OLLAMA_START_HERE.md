@@ -15,6 +15,7 @@ I have **fully implemented Ollama local LLM integration** for the FirstPerson St
 ## 📦 What Was Created
 
 ### Core Integration Files
+
 | File | Purpose | Lines |
 |------|---------|-------|
 | `docker-compose.local.yml` | Streamlit + Ollama in Docker | 72 |
@@ -22,6 +23,7 @@ I have **fully implemented Ollama local LLM integration** for the FirstPerson St
 | `ollama_client.py` | HTTP client for Ollama API | 347 |
 
 ### Documentation
+
 | File | Purpose |
 |------|---------|
 | `OLLAMA_INTEGRATION_GUIDE.md` | Full reference guide |
@@ -30,11 +32,13 @@ I have **fully implemented Ollama local LLM integration** for the FirstPerson St
 | `OLLAMA_INTEGRATION_IMPLEMENTATION.md` | What was built and why |
 
 ### Testing
+
 | File | Purpose |
 |------|---------|
 | `test_ollama_integration.py` | Automated integration tests |
 
 ### Files Modified
+
 - `response_handler.py` - Added Ollama fallback function
 - `session_manager.py` - Added Ollama initialization
 
@@ -58,8 +62,6 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```text
 ```
 
-
-
 Done! That's it. Three commands.
 
 ## 🏗️ How It Works
@@ -80,9 +82,6 @@ Try Ollama Local LLM
 ```text
 ```
 
-
-
-
 ## 📋 What's Included
 
 ### Ollama Client API
@@ -97,9 +96,8 @@ client.get_available_models()            # List models
 ```text
 ```
 
-
-
 ### Docker Services
+
 - **Streamlit**: Runs on port 8501 (UI)
 - **Ollama**: Runs on port 11434 (API)
 - Both on shared Docker network (`firstperson_network`)
@@ -107,6 +105,7 @@ client.get_available_models()            # List models
 - Both have health checks
 
 ### Session State
+
 Automatically initialized on app load:
 
 ```python
@@ -117,9 +116,6 @@ st.session_state["ollama_available"]  # True/False
 ```text
 ```
 
-
-
-
 ## 🎓 Model Recommendations
 
 For testing, use **orca-mini** (1.3GB, fast):
@@ -129,17 +125,12 @@ For testing, use **orca-mini** (1.3GB, fast):
 ```text
 ```
 
-
-
 For best quality, use **llama3** (4.7GB):
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ## 🔧 Common Tasks
 
@@ -150,8 +141,6 @@ For best quality, use **llama3** (4.7GB):
 ```text
 ```
 
-
-
 ### View logs
 
 ```bash
@@ -161,17 +150,12 @@ docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
 ```text
 ```
 
-
-
-
 ### List models
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ### Stop services
 
@@ -180,17 +164,12 @@ docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
 ```bash
 ```
 
-
-
-
 ### Test directly (curl)
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 ## ✅ Integration Tests
 
@@ -200,9 +179,6 @@ Run the test suite:
 
 ```text
 ```
-
-
-
 
 Expected output:
 
@@ -218,22 +194,23 @@ Expected output:
 ```text
 ```
 
-
-
 ## 📚 Documentation Files
 
 **Start with**: `OLLAMA_QUICK_REFERENCE.md`
+
 - TL;DR format
 - Commands cheatsheet
 - Common tasks table
 
 **For details**: `OLLAMA_INTEGRATION_GUIDE.md`
+
 - Full setup guide
 - Model comparisons
 - Troubleshooting
 - Production deployment
 
 **For architecture**: `OLLAMA_ARCHITECTURE_COMPLETE.md`
+
 - Detailed diagrams
 - Data flows
 - Integration points
@@ -243,8 +220,8 @@ Expected output:
 
 | Service | URL | Purpose |
 |---------|-----|---------|
-| Streamlit | http://localhost:8501 | Chat UI |
-| Ollama API | http://localhost:11434 | LLM endpoint (testing) |
+| Streamlit | <http://localhost:8501> | Chat UI |
+| Ollama API | <http://localhost:11434> | LLM endpoint (testing) |
 
 ## 🔍 Troubleshooting
 
@@ -272,6 +249,7 @@ Expected output:
 - **With GPU**: <1 second per response
 
 Local CPU is fine for development/testing. For production, consider:
+
 - Beefier VPS (4+ vCPU) for reasonable speed
 - GPU setup for fast inference
 - Smaller models for resource-constrained setups
@@ -286,6 +264,7 @@ Local CPU is fine for development/testing. For production, consider:
 ## 📖 What Each File Does
 
 ### docker-compose.local.yml
+
 - Defines `streamlit` service → runs your app
 - Defines `ollama` service → runs LLM backend
 - Creates shared network → services can talk to each other
@@ -293,12 +272,14 @@ Local CPU is fine for development/testing. For production, consider:
 - Includes health checks → automatic failure recovery
 
 ### Dockerfile.streamlit
+
 - Builds container for FirstPerson Streamlit app
 - Installs dependencies from requirements.txt
 - Sets up Streamlit in headless mode
 - Exposes port 8501 for web access
 
 ### ollama_client.py
+
 - HTTP wrapper around Ollama REST API
 - Handles authentication, errors, retries
 - Supports streaming and blocking modes
@@ -306,12 +287,14 @@ Local CPU is fine for development/testing. For production, consider:
 - Provides singleton for thread-safety
 
 ### response_handler.py (modified)
+
 - Added `_get_ollama_fallback_response()` function
 - Triggers when local Glyph processing fails
 - Maintains FirstPerson personality via system prompt
 - Integrates with Tier 1/2/3 processing pipeline
 
 ### session_manager.py (modified)
+
 - Added `_ensure_ollama_client()` function
 - Called during app initialization
 - Stores Ollama client in session state
@@ -321,7 +304,7 @@ Local CPU is fine for development/testing. For production, consider:
 
 1. **Try it out**: Run `docker-compose -f docker-compose.local.yml up -d`
 2. **Pull a model**: `docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3`
-3. **Open Streamlit**: Visit http://localhost:8501
+3. **Open Streamlit**: Visit <http://localhost:8501>
 4. **Chat**: Try having a conversation
 5. **Monitor**: Check logs to see Ollama being called
 6. **Tune**: Experiment with different models/parameters
@@ -376,9 +359,8 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 ```
 
-
-
 Enjoy conversing with FirstPerson powered by local LLMs! 🚀
+
 ##
 
 **Implementation**: ✅ Complete

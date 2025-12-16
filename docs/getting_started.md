@@ -17,17 +17,12 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
 ```
 
-
-
 2. Load safe defaults
 
 ```bash
 
 ```text
 ```
-
-
-
 
 3. (Optional) Install Python deps
 
@@ -38,17 +33,12 @@ pip install -r requirements.txt      # runtime deps
 ```text
 ```
 
-
-
 4. Run the enrichment pipeline (example)
 
 ```bash
 
 ```text
 ```
-
-
-
 
 5. View logs
 
@@ -57,17 +47,12 @@ pip install -r requirements.txt      # runtime deps
 ```text
 ```
 
-
-
 6. Run tests
 
 ```bash
 
 ```text
 ```
-
-
-
 
 Makefile (quick shortcuts)
 
@@ -81,8 +66,6 @@ make test       # Run tests
 ```text
 ```text
 ```
-
-
 
 Processing modes
 
@@ -100,8 +83,6 @@ export PROCESSING_MODE=hybrid
 export ALLOW_REMOTE_AI=1
 
 ```
-
-
 
 CI & guard enforcement
 

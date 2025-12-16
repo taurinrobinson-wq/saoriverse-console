@@ -106,9 +106,6 @@ saoriverse-console/
 ```text
 ```
 
-
-
-
 ### Install Dependencies
 
 ```bash
@@ -116,14 +113,14 @@ saoriverse-console/
 ```text
 ```
 
-
-
 ### Find What You Need
+
 - **Game logic?** → Check `velinor/engine/` or `velinor-web/src/`
 - **API endpoints?** → See `velinor_api.py` or `firstperson_api.py`
 - **Story content?** → `velinor/stories/sample_story.json`
 - **Setup instructions?** → Read `docs/QUICK_REFERENCE_*.md`
 - **Deployment?** → See `docs/DEPLOYMENT_*.md`
+
 ##
 
 ## 📚 Key Documentation Files
@@ -135,11 +132,13 @@ saoriverse-console/
 | `docs/FIRSTPERSON_*.md` | Emotional analysis system docs |
 | `docs/DEPLOYMENT_*.md` | Production deployment guides |
 | `scratch/auto_summaries.md` | AI-generated overviews (temporary) |
+
 ##
 
 ## 🛠️ Development Workflow
 
 ### When AI Generates New Documentation
+
 1. **Good docs** → Move to `docs/`
 2. **Auto-summaries/clutter** → Stays in `scratch/` (auto-ignored by git)
 3. **Temporary notes** → Keep in `scratch/` for reference, delete later
@@ -160,14 +159,13 @@ rm scratch/old_summary.md
 ```text
 ```
 
-
-
-
 ### Adding New Code
+
 - Create files in `src/` or appropriate subfolder
 - Add to `tests/` if it's a module with logic
 - Update `requirements.txt` if adding dependencies
 - Document in `docs/` (not root)
+
 ##
 
 ## 🌳 Why This Structure Matters
@@ -185,8 +183,6 @@ saoriverse-console/
 ```text
 ```text
 ```
-
-
 
 ❌ Hard to find what you need
 ❌ Git history cluttered with auto-generated files
@@ -206,27 +202,29 @@ saoriverse-console/
 
 ```
 
-
-
 ✅ Clear hierarchy
 ✅ Git tracks only what matters
 ✅ Easy to navigate and find things
 ✅ AI clutter contained
+
 ##
 
 ## 🔄 Maintenance Checklist
 
 **Monthly:**
+
 - [ ] Review `docs/` — keep it curated
 - [ ] Clean `scratch/` — delete old temp notes
 - [ ] Update root `README.md` if needed
 - [ ] Run `git status` to verify no surprises
 
 **Before Pushing:**
+
 - [ ] No uncommitted changes in `src/`
 - [ ] New dependencies added to `requirements.txt`
 - [ ] Important docs moved to `docs/` (not root)
 - [ ] `.gitignore` catches your junk
+
 ##
 
 ## 📖 Next Steps
@@ -235,6 +233,7 @@ saoriverse-console/
 2. **Read the quick references**: `docs/QUICK_REFERENCE_*.md`
 3. **Start development**: `./scripts/RUN_WEB_DEV.sh`
 4. **Keep it clean**: Use this structure as your guide
+
 ##
 
 **Key Takeaway:** Treat `docs/` like a museum (curated, intentional) and `scratch/` like a junk drawer (temporary, disposable). Your git history stays clean. Your project stays sane. 🎯

@@ -3,6 +3,7 @@
 **Date**: December 4, 2025
 **Status**: Voice components reorganized and integrated into UI
 **Integration Type**: Gradual enhancement (voice mode can be toggled on/off)
+
 ##
 
 ## 📁 File Structure
@@ -65,6 +66,7 @@ src/emotional_os/deploy/modules/ui_components/
 ```text
 ```text
 ```
+
 User sends message
   ↓
 Response generated with glyph
@@ -84,6 +86,7 @@ IF voice_mode_enabled:
         └─ Display st.audio() widget with response audio
   ↓
 Message displayed with audio player
+
 ```
 
 
@@ -131,18 +134,18 @@ pip install TTS
 ```text
 ```
 
-
-
-
 **If not installed**:
+
 - Voice features gracefully degrade to text-only
 - User gets helpful error messages
 - Text responses still work normally
+
 ##
 
 ## 🚀 Usage
 
 ### For End Users
+
 1. Enable voice in sidebar: "🎙️ Voice Input/Output"
 2. Send a message (text or voice)
 3. Response will include audio playback option
@@ -172,12 +175,12 @@ audio_bytes = synthesize_response_audio(
 ```text
 ```
 
-
 ##
 
 ## ⚙️ Architecture Decisions
 
 ### Why Not Use External JS Files?
+
 - ✅ Streamlit caches work better with inline HTML
 - ✅ No CSS specificity issues
 - ✅ Recording component uses Web Audio API (no plugins needed)
@@ -199,8 +202,6 @@ def get_audio_pipeline():
 ```text
 ```
 
-
-
 - ✅ Avoids loading heavy models (Whisper ~140MB, TTS ~300MB) on startup
 - ✅ Faster app startup time
 - ✅ Models only load if voice mode enabled
@@ -216,11 +217,10 @@ prosody_map = {
 }
 ```
 
-
-
 - Glyph metadata → audio characteristics
 - Same glyph metadata used for response tone also used for voice tone
 - Consistent emotional presentation across text + audio
+
 ##
 
 ## 🔍 Testing Checklist
@@ -234,29 +234,35 @@ prosody_map = {
 - [ ] With voice dependencies: Audio synthesis generates on response
 - [ ] Audio playback widget displays correctly
 - [ ] Glyph metadata influences audio prosody
+
 ##
 
 ## 🐛 Troubleshooting
 
 ### "Audio synthesis failed"
+
 - Dependencies not installed: `pip install TTS librosa`
 - GPU issues: Try `TTSConfig(gpu=False)` in audio_ui.py
 - Model download timeout: Check internet connection
 
 ### "Microphone access denied"
+
 - Browser permission issue: Grant microphone access when prompted
 - HTTPS required: Streamlit Cloud has this by default
 - Localhost: Some browsers require HTTPS even for localhost
 
 ### "No speech detected"
+
 - Speak clearly and loud enough
 - Check microphone works in browser (test site like webrtc-test.com)
 - Check audio levels in browser console
 
 ### Audio widget not showing
+
 - Voice mode not enabled in sidebar
 - Dependencies missing (but should see warning message)
 - Check browser console for JS errors
+
 ##
 
 ## 🎯 Future Enhancements
@@ -285,6 +291,7 @@ prosody_map = {
    - Save audio responses
    - Replay past conversations with audio
    - Export conversations as podcasts
+
 ##
 
 ## 📝 Notes
@@ -293,11 +300,13 @@ prosody_map = {
 - **Privacy**: All audio processing is local (Whisper.cpp, no cloud APIs)
 - **Performance**: First run downloads models (~500MB total), subsequent runs use cache
 - **Browser Support**: Chrome/Firefox/Safari with Web Audio API support
+
 ##
 
 ## Summary
 
 Voice/audio components are now:
+
 - ✅ Properly organized in modular folders
 - ✅ Integrated into UI with toggle control
 - ✅ Glyph-informed for emotional consistency

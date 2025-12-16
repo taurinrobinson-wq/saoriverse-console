@@ -22,9 +22,8 @@ class ConversationManager:
 ```text
 ```
 
-
-
 **Features:**
+
 - Automatic Supabase configuration from `st.secrets`
 - JSON message serialization/deserialization
 - Timestamp tracking for each save
@@ -41,10 +40,8 @@ generate_auto_name("I've been feeling anxious about work")
 ```text
 ```
 
-
-
-
 **Features:**
+
 - Removes common filler phrases
 - Extracts meaningful content
 - Limits to 50 characters
@@ -66,9 +63,8 @@ New sidebar features:
 ```text
 ```
 
-
-
 **Features:**
+
 - Lists all user's previous conversations
 - Click to load any conversation
 - Inline rename with save/cancel
@@ -81,6 +77,7 @@ New sidebar features:
 New Supabase tables:
 
 **`conversations` table:**
+
 - `id` (uuid, primary key)
 - `user_id` (text) - Link to user
 - `conversation_id` (text) - Unique per conversation
@@ -94,14 +91,17 @@ New Supabase tables:
 - `archived` (boolean) - Soft delete
 
 **`conversation_metadata` table:**
+
 - Audit trail of conversation operations
 - Tracks: created, renamed, deleted, archived, restored
 
 **Indexes:**
+
 - `(user_id, conversation_id)` unique constraint
 - Indexes on `user_id`, `updated_at`, `created_at`, `archived`
 
 **Triggers:**
+
 - Auto-update `updated_at` on modifications
 
 ### 5. **UI Integration** (modified `ui.py`)
@@ -109,6 +109,7 @@ New Supabase tables:
 Changes to `render_main_app()`:
 
 1. **Initialization**
+
    ```python
    # Create ConversationManager instance
    manager = ConversationManager(user_id)
@@ -118,6 +119,7 @@ Changes to `render_main_app()`:
    ```
 
 2. **Sidebar Setup**
+
    ```python
    with st.sidebar:
        # Persist toggle
@@ -132,6 +134,7 @@ Changes to `render_main_app()`:
    ```
 
 3. **Auto-Naming on First Message**
+
    ```python
    if len(messages) == 1:  # First exchange
        title = generate_auto_name(first_user_input)
@@ -139,6 +142,7 @@ Changes to `render_main_app()`:
    ```
 
 4. **Persistence After Each Exchange**
+
    ```python
    if persist_history and manager:
        manager.save_conversation(
@@ -179,9 +183,6 @@ Page refresh
 ```text
 ```
 
-
-
-
 ### Load Previous Conversation
 
 ```
@@ -198,8 +199,6 @@ Chat history displayed
 ```text
 ```text
 ```
-
-
 
 ## Session State Variables
 
@@ -225,9 +224,6 @@ st.session_state = {
 ```text
 ```
 
-
-
-
 ## Backward Compatibility
 
 - Old `conversation_history` table still supported
@@ -238,12 +234,14 @@ st.session_state = {
 ## Setup Required
 
 1. **Run SQL Migration**
+
    ```bash
    # In Supabase SQL editor, run:
    sql/conversations_table.sql
    ```
 
 2. **Verify Supabase Secrets**
+
    ```yaml
    # .streamlit/secrets.toml
    [supabase]
@@ -252,6 +250,7 @@ st.session_state = {
    ```
 
 3. **Restart App**
+
    ```bash
    streamlit run app.py
    ```
@@ -318,8 +317,6 @@ Documentation/
 ```text
 ```
 
-
-
 ## Commit Reference
 
 ```
@@ -338,8 +335,6 @@ feat: implement persistent conversation storage with auto-naming
 
 ```
 
-
-
 ## Notes for Developer
 
 1. **Error Handling**: All Supabase operations are best-effort to prevent UI breakage
@@ -351,6 +346,7 @@ feat: implement persistent conversation storage with auto-naming
 ## User Impact
 
 Users will now experience:
+
 1. ✅ Conversations persist across page refreshes
 2. ✅ "Save my chats" preference remembered
 3. ✅ Automatic, intelligent conversation naming

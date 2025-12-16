@@ -1,6 +1,7 @@
 # face-api.js Models Setup
 
 ## Overview
+
 The `EmotionDetector.tsx` component requires pre-trained models from `face-api.js` library. These models must be downloaded and placed in your Next.js `public/models` directory.
 
 ## Step 1: Download Models
@@ -17,8 +18,6 @@ cd firstperson-web
 ```sql
 ```
 
-
-
 Then copy models from node_modules:
 
 ```bash
@@ -32,13 +31,10 @@ Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recur
 ```text
 ```
 
-
-
-
 ### Option B: Manual Download
 
 1. Clone or download the face-api.js repository:
-   - GitHub: https://github.com/vladmandic/face-api
+   - GitHub: <https://github.com/vladmandic/face-api>
 
 2. Navigate to `dist/models` folder
 
@@ -60,9 +56,7 @@ public/models/
 ```text
 ```
 
-
-
-### Check via file system:
+### Check via file system
 
 ```bash
 
@@ -75,10 +69,8 @@ Get-ChildItem -Path "firstperson-web/public/models" -File
 ```text
 ```
 
-
-
-
 You should see at least:
+
 - `tiny_face_detector_model.*` (3 files)
 - `face_expression_model.*` (3 files)
 
@@ -97,8 +89,6 @@ const nextConfig = {
 ```text
 ```text
 ```
-
-
 
 Usually this is already configured by default in Next.js 13+.
 
@@ -130,17 +120,12 @@ export default async function handler(req: any, res: any) {
 ```text
 ```
 
-
-
-
 Then test:
 
 ```bash
 ```text
 ```text
 ```
-
-
 
 Expected response:
 
@@ -152,9 +137,6 @@ Expected response:
 
 ```text
 ```
-
-
-
 
 ## Step 5: Optimize Model Loading (Optional)
 
@@ -189,32 +171,38 @@ export function areModelsLoaded() {
 ```text
 ```
 
-
-
 ## Troubleshooting
 
 ### Problem: "Failed to load face detection models"
+
 **Solutions:**
+
 1. Verify files exist in `public/models/` directory
 2. Check browser console for 404 errors (path might be wrong)
 3. Ensure models are in the correct location (case-sensitive on Linux/Mac)
 4. Try clearing browser cache and rebuilding Next.js
 
 ### Problem: CORS errors when loading models
+
 **Solution:** The models should be served from the same domain (already configured in `public/`). If you get CORS errors, check:
+
 1. Models are in `public/models/` (not elsewhere)
 2. Next.js development server is running
 3. You're accessing via `http://localhost:3000` (not `127.0.0.1`)
 
 ### Problem: Models load but detection doesn't work
+
 **Solutions:**
+
 1. Check browser console for errors in face detection
 2. Verify video element has a valid stream (check browser permissions)
 3. Ensure video dimensions are >= 100x100 pixels
 4. Test with better lighting conditions
 
 ### Problem: High memory usage or slow detection
+
 **Solutions:**
+
 1. Use `TinyFaceDetector` (already done in EmotionDetector.tsx) — it's optimized for mobile
 2. Reduce detection frequency: change `setInterval(analyzeFrame, 1000)` to 2000 or higher
 3. Reduce video dimensions: set `{ video: { width: 320, height: 240 } }`
@@ -223,12 +211,14 @@ export function areModelsLoaded() {
 ## Model Details
 
 ### TinyFaceDetector
+
 - **Size:** ~500 KB
 - **Inference time:** ~20-50ms per frame (CPU)
 - **Accuracy:** Good for real-time detection
 - **License:** MIT
 
 ### FaceExpressionNet
+
 - **Size:** ~250 KB
 - **Detects:** happy, sad, angry, fearful, disgusted, surprised, neutral
 - **Confidence:** 0-1 per emotion
@@ -253,11 +243,10 @@ if ('serviceWorker' in navigator) {
 
 ```
 
-
-
 ## Privacy Note
 
 ⚠️ **Important:** All models run locally in the browser. No facial data, emotions, or video frames are transmitted to any server. Only emotion metadata (`{emotion, confidence}`) is sent to your backend.
+
 ##
 
 ## Summary

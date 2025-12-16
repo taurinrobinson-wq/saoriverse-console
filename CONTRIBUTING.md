@@ -17,9 +17,6 @@ make test       # Run tests
 make format     # Format code
 ```
 
-
-
-
 ## Processing Modes
 
 See [processing_modes.md](./processing_modes.md) for details on local, hybrid, and premium modes.

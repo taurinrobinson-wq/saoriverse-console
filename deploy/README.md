@@ -4,10 +4,12 @@ This document describes a simple deployment pattern that keeps the public static
 at the root of `firstperson.chat` while proxying the Streamlit application to `/app/`.
 
 Files added in this repo:
+
 - `deploy/nginx.conf` — Nginx server block template (adjust paths and enable on your server)
 - `.streamlit/config.toml` — Streamlit config (already added) with `baseUrlPath = "/app"` recommended
 
 Goals:
+
 - Public site (static) served at `https://firstperson.chat/` (no Streamlit UI controls exposed)
 - Streamlit app served at `https://firstperson.chat/app/` behind Basic Auth (optional)
 
@@ -77,23 +79,24 @@ Goals:
    causes 404s.
 
    Fixes:
-  - Use absolute paths for static assets in Streamlit templates, e.g. `/static/graphics/FirstPerson-Logo-normalized.svg`.
+
+- Use absolute paths for static assets in Streamlit templates, e.g. `/static/graphics/FirstPerson-Logo-normalized.svg`.
      We updated the app to reference `/static/...` so the browser fetches assets from the public root instead of `/app`.
-   - Ensure Nginx `location /static/` serves the `static/` folder and has correct MIME types (Nginx does this by default).
-   - If SVGs are still served with incorrect content-type, add in the nginx conf inside `http {}`:
+- Ensure Nginx `location /static/` serves the `static/` folder and has correct MIME types (Nginx does this by default).
+- If SVGs are still served with incorrect content-type, add in the nginx conf inside `http {}`:
 
      ```nginx
      types { image/svg+xml svg; }
      ```
 
-   - Check browser devtools network tab for 404 or other errors and validate the requested URL.
+- Check browser devtools network tab for 404 or other errors and validate the requested URL.
 
 8) Final checks
 
    - Start Streamlit: `streamlit run main_v2.py` (ensure it's using `.streamlit/config.toml`) and check `http://127.0.0.1:8501/app/`.
    - Visit `https://firstperson.chat/` for the static site and `https://firstperson.chat/app/` for the proxied Streamlit app.
 
-   ## Railway-specific notes
+## Railway-specific notes
 
    If you deploy on Railway, the repo includes a `railway.json` and a small helper `emotional_os/deploy/railway_start.sh`.
 
@@ -110,5 +113,6 @@ Goals:
    - If you keep Streamlit or admin endpoints on Railway, secure them (OAuth, basic auth, or restrict by IP). The static site should use Supabase Auth and Edge Functions for any server-side operations.
 
 ## Security notes
+
 - Prefer an OAuth proxy (Cloudflare Access, oauth2-proxy) over basic auth for production.
 - Ensure TLS/HTTPS termination at Nginx (Let's Encrypt / Certbot) before exposing the site publicly.

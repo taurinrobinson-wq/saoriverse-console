@@ -36,7 +36,6 @@ Replaces unreliable Railway deployment."
 ```text
 ```
 
-
 ##
 
 ## 📋 Files Summary
@@ -51,6 +50,7 @@ Replaces unreliable Railway deployment."
 | `VPS_MIGRATION_CHECKLIST.md` | Progress tracking | ~200 lines |
 
 **Total**: 6 new/modified files, ~800 lines of configuration and documentation
+
 ##
 
 ## ✅ Verification Before Pushing
@@ -73,8 +73,6 @@ cat nginx.prod.conf | head -5
 ```text
 ```
 
-
-
 ##
 
 ## 🚀 After Pushing
@@ -83,11 +81,12 @@ cat nginx.prod.conf | head -5
 2. **Check Actions**: Click Actions tab - workflow should be visible
 3. **Clone on VPS**: During VPS setup, you'll run: `git clone https://github.com/YOUR_USERNAME/saoriverse-console.git`
 4. **Auto-deploy**: Future pushes will automatically trigger deployment
+
 ##
 
 ## 🔄 Working with These Files Going Forward
 
-### When you want to deploy:
+### When you want to deploy
 
 ```bash
 
@@ -105,9 +104,7 @@ docker compose -f docker-compose.prod.yml build
 ```text
 ```
 
-
-
-### When you want to make changes:
+### When you want to make changes
 
 ```bash
 
@@ -122,10 +119,7 @@ git push origin main
 ```text
 ```
 
-
-
-
-### Emergency rollback:
+### Emergency rollback
 
 ```bash
 
@@ -143,7 +137,6 @@ docker compose -f docker-compose.prod.yml build
 ```text
 ```
 
-
 ##
 
 ## 📝 Commit Message Template
@@ -159,7 +152,6 @@ chore: update [docker-compose.prod.yml|nginx.prod.conf|etc]
 - Any manual steps needed after deploy
 
 ```
-
 
 ##
 

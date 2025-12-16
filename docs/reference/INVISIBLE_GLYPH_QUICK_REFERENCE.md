@@ -1,13 +1,16 @@
 # QUICK REFERENCE: How the System Works Now
 
 ## For Users of the System
+
 They see personalized responses about their specific situation. They never see:
+
 - Glyph names
 - Glyph descriptions
 - Emotional categories
 - System terminology
 
 **They see:** "I understand your specific struggle with math anxiety and communication mismatch with your boss"
+
 ##
 
 ## For Developers
@@ -15,12 +18,14 @@ They see personalized responses about their specific situation. They never see:
 ### The Two-Layer Architecture
 
 #### Layer 1: VISIBLE (User-Facing)
+
 - **Responds to**: Actual message content (math_frustration, inherited_pattern, communication_friction)
 - **Extracts**: Specific people mentioned (Michelle), specific problems (math anxiety)
 - **Validates**: The person's real struggle, not a category
 - **Shows**: Personalized response addressing their situation
 
 #### Layer 2: INVISIBLE (Internal)
+
 - **Glyphs**: Selected and analyzed
 - **Intensity**: Calculated from gates, informs closing type
 - **Poetry**: Selected via glyph emotional category mapping
@@ -30,11 +35,13 @@ They see personalized responses about their specific situation. They never see:
 ### Code Locations
 
 **Response Building:** `emotional_os/glyphs/dynamic_response_composer.py`
+
 - `compose_response()` - Main response builder
 - `_build_glyph_aware_response()` - Message-content focused, glyph-invisible
 - `compose_message_aware_response()` - Message-feature focused, glyph-invisible
 
 **Orchestration:** `emotional_os/glyphs/signal_parser.py`
+
 - `parse_input()` - Fetches glyphs, calls composer
 - `select_best_glyph_and_response()` - Glyph selection logic
 - `generate_contextual_response()` - Feedback detection + response routing
@@ -54,8 +61,6 @@ They see personalized responses about their specific situation. They never see:
 ```text
 ```
 
-
-
 #### `compose_message_aware_response(message_content, glyph, ...)`
 
 ```python
@@ -69,16 +74,16 @@ They see personalized responses about their specific situation. They never see:
 ```text
 ```
 
-
-
 ##
 
 ## Response Examples
 
 ### Example 1: Math Anxiety
+
 **User:** "I have math anxiety. I've never been good at math and it's been a block my whole life."
 
 **Glyph System (Invisible):**
+
 - Glyph: Still Containment
 - Gates: [Gate 2] = low intensity
 - emotional_signal: containment
@@ -92,9 +97,11 @@ They see personalized responses about their specific situation. They never see:
 ✓ Feels personal
 
 ### Example 2: Inherited Pattern
+
 **User:** "Actually, it's inherited from my mother. She was always anxious about it too."
 
 **Glyph System (Invisible):**
+
 - Glyph: None (lookup failed - fallback logic)
 - Fallback validation applied
 
@@ -106,9 +113,11 @@ They see personalized responses about their specific situation. They never see:
 ✓ No system terminology
 
 ### Example 3: Feedback Correction
+
 **User:** "That's not quite what I meant. Michelle is my mother-in-law and my boss, and she always explains things in a way that only makes sense to her."
 
 **Glyph System (Invisible):**
+
 - Feedback detected: "misalignment" type
 - Glyph: Still Containment
 - intensity-based closing calibration
@@ -120,11 +129,13 @@ They see personalized responses about their specific situation. They never see:
 ✓ Addresses the relationship (Michelle)
 ✓ Feedback detected and handled
 ✓ All glyph logic invisible
+
 ##
 
 ## How to Extend This System
 
 ### Adding New Message Features
+
 In `signal_parser.py`, in message_features dict:
 
 ```python
@@ -135,8 +146,6 @@ message_features = {
 ```text
 ```
 
-
-
 Then handle in `compose_message_aware_response()`:
 
 ```python
@@ -146,10 +155,8 @@ if message_content.get("new_feature"):
 ```text
 ```
 
-
-
-
 ### Adding New Glyph Categories
+
 Update `_glyph_to_emotion_category()` in `dynamic_response_composer.py`:
 
 ```python
@@ -160,10 +167,10 @@ emotion_map = {
 ```text
 ```
 
-
-
 ### Adding New Poetry Themes
+
 Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you add emotion types, poetry database will need expansion.
+
 ##
 
 ## Testing the System
@@ -175,10 +182,8 @@ Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you 
 ```text
 ```
 
-
-
-
 This runs three messages through the conversation and shows:
+
 - Glyph matched
 - Response generated
 - Validates that glyph descriptions do NOT appear in responses
@@ -201,8 +206,6 @@ print(result["best_glyph"]["glyph_name"])
 print(result["voltage_response"])
 ```
 
-
-
 ##
 
 ## Performance Notes
@@ -211,6 +214,7 @@ print(result["voltage_response"])
 - **Glyph matching**: ~10-20ms database query
 - **Memory**: Minimal (glyph dicts are ~2KB each)
 - **Scalability**: Linear with glyph lexicon size (currently 64 glyphs)
+
 ##
 
 ## Architecture Decision: Why Invisible?
@@ -218,12 +222,14 @@ print(result["voltage_response"])
 **Question:** Why not show glyphs to users?
 
 **Answer:**
+
 - Visible systems feel mechanical ("I identified your emotional category")
 - Invisible systems feel human ("I understand what you're going through")
 - Both can be equally sophisticated
 - Users with emotional problems don't want categorization, they want understanding
 
 **Principle:** The best system is the one the user doesn't know is there.
+
 ##
 
 ## Documentation Files
@@ -232,11 +238,13 @@ print(result["voltage_response"])
 - **INVISIBLE_GLYPH_TRANSFORMATION.md** - How we transformed from visible to invisible
 - **GLYPH_AWARE_REFACTORING.md** - Original glyph-aware refactoring (for reference)
 - **GLYPH_AWARE_COMPLETE.md** - Initial completion status (for reference)
+
 ##
 
 ## Next Frontier
 
 Ideas for enhancement:
+
 1. **Multi-turn coherence**: Remember calibrations that worked
 2. **Feedback learning**: Track which glyph+message combinations produce good outcomes
 3. **Entity relationship mapping**: Remember how this person relates to mentioned people
@@ -244,6 +252,7 @@ Ideas for enhancement:
 5. **Depth progression**: Responses can get deeper as conversation progresses
 
 All while keeping glyphs **completely invisible** to users.
+
 ##
 
 ## The Philosophy

@@ -1,14 +1,17 @@
 # Quick Summary: Response Personalization Fix
 
 ## The Problem
+
 User challenged: "how can you determine its functional that is such a generic response it doesn't acknowledge any part of the user's message"
 
 **Root cause**: All 1844 glyphs were generating identical generic responses despite being correctly selected.
 
 ## The Solution
+
 Enhanced response generation to use glyph **descriptions** (the wisdom/insight of each glyph) to create personalized responses.
 
 ## What Changed
+
 **File**: `src/emotional_os_glyphs/dynamic_response_composer.py`
 
 - Modified `_build_glyph_aware_response` to prioritize glyph wisdom
@@ -35,9 +38,11 @@ Enhanced response generation to use glyph **descriptions** (the wisdom/insight o
 ```text
 ```text
 ```
+
 "That's a real thing you're carrying. Even in what feels active or chaotic,
 there's often a still place underneath. Quiet revelation. Truth that arrives
 without noise. What's the next small step for you?"
+
 ```
 
 

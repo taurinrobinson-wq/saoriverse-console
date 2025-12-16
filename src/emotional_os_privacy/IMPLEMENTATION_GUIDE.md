@@ -9,6 +9,7 @@ This guide explains how to integrate the privacy-first encoding pipeline into Fi
 **Current State:** Raw user messages and system responses may be persisted in the database unencoded.
 
 **Desired State:**
+
 1. Raw text received but never persisted
 2. Only encoded signals/gates/glyphs stored
 3. User ID hashed one-way
@@ -103,10 +104,8 @@ grep -r "supabase\." emotional_os/
 ```text
 ```
 
-
-
-
 Typical locations:
+
 - REST API endpoints (FastAPI/Flask)
 - Background workers
 - Logging functions
@@ -128,8 +127,6 @@ db.table("conversations").insert({
 ```text
 ```text
 ```
-
-
 
 **After Encoding (Correct - PRIVACY-FIRST):**
 
@@ -156,9 +153,6 @@ if not success:
 
 ```text
 ```
-
-
-
 
 ### Step 3: Modify Supabase Schema
 
@@ -193,8 +187,6 @@ CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
 ```text
 ```
 
-
-
 **Migrate existing data (if needed):**
 
 ```sql
@@ -217,9 +209,6 @@ VALUES (
 
 ```text
 ```
-
-
-
 
 ### Step 4: Test Encoding Pipeline
 
@@ -295,8 +284,6 @@ class TestDataEncoding(unittest.TestCase):
 ```text
 ```
 
-
-
 ### Step 5: Verify K-Anonymity
 
 **Monthly compliance check:**
@@ -311,9 +298,6 @@ verifier.run_monthly_compliance_check(db_connection)
 
 ```text
 ```
-
-
-
 
 ## Data Minimization: What Gets Stored vs. Discarded
 
@@ -331,8 +315,6 @@ verifier.run_monthly_compliance_check(db_connection)
 ```text
 ```
 
-
-
 ### STORED (Encoded/Generalized)
 
 ```
@@ -347,9 +329,6 @@ verifier.run_monthly_compliance_check(db_connection)
 ```text
 ```
 
-
-
-
 ## Encryption & Security
 
 ### In Transit (TLS 1.3)
@@ -359,8 +338,6 @@ User Client ─────[TLS 1.3]────→ FirstPerson API ────
 ```text
 ```text
 ```
-
-
 
 ### At Rest (AES-256)
 
@@ -376,9 +353,6 @@ Database: Supabase
 
 ```text
 ```
-
-
-
 
 ## User Rights Implementation
 
@@ -406,8 +380,6 @@ def export_user_data(user_id: str):
 ```text
 ```
 
-
-
 ### User Data Deletion
 
 ```python
@@ -429,14 +401,12 @@ def delete_user_data(user_id: str):
 ```text
 ```
 
-
-
-
 ## Audit & Compliance
 
 ### Monthly Compliance Report
 
 The system automatically generates:
+
 1. K-anonymity verification (k >= 5)
 2. Data retention audit
 3. User rights requests processed
@@ -460,29 +430,31 @@ All data access is logged:
 ```text
 ```
 
-
-
 ## Rollout Plan
 
 ### Phase 1: Development (This Week)
+
 - [ ] Integrate encoding pipeline into signal_parser.py
 - [ ] Create new Supabase table (conversation_logs_anonymized)
 - [ ] Test with sample conversations
 - [ ] Verify no raw text leakage
 
 ### Phase 2: Staging (Week 2)
+
 - [ ] Deploy to staging environment
 - [ ] Run 7-day compliance check
 - [ ] Verify ARX k-anonymity (k >= 5)
 - [ ] User acceptance testing
 
 ### Phase 3: Production (Week 3)
+
 - [ ] Migrate existing data (archive old table)
 - [ ] Deploy encoding pipeline to prod
 - [ ] Verify compliance reports
 - [ ] Set up monitoring alerts
 
 ### Phase 4: Post-Launch (Week 4)
+
 - [ ] Monthly compliance reports running
 - [ ] Audit logging active
 - [ ] User rights endpoints live
@@ -491,6 +463,7 @@ All data access is logged:
 ## Compliance Checklist
 
 ### GDPR
+
 - [x] Lawful basis: Consent (users opt into system)
 - [x] Privacy notice: Displayed on first use
 - [x] Data minimization: Only encoded signals stored
@@ -500,11 +473,13 @@ All data access is logged:
 - [x] DPO contact: In system documentation
 
 ### CCPA
+
 - [x] Consumer rights: Access/deletion/opt-out available
 - [x] Non-sale commitment: Data never sold
 - [x] Disclosure: Privacy policy covers encoding
 
 ### HIPAA
+
 - [x] BAA: Required if handling health data
 - [x] Minimum necessary: Only signals stored
 - [x] Encryption: TLS 1.3 + AES-256
@@ -535,12 +510,10 @@ python emotional_os/privacy/verify_compliance.py
 ```text
 ```
 
-
-
-
 ## Monitoring & Alerts
 
 ### Alert Conditions
+
 1. K-value drops below 5 (over-identification risk)
 2. Raw text field inserted (policy violation)
 3. Unencrypted data access attempt
@@ -558,8 +531,6 @@ User Message → parse_input() → Response
 ```text
 ```
 
-
-
 **After Integration:**
 
 ```
@@ -575,9 +546,8 @@ User Message → parse_input() → Response
 
 ```
 
-
-
 **Privacy Achievement:**
+
 - ✅ No raw text in database
 - ✅ User IDs hashed one-way
 - ✅ Timestamps generalized

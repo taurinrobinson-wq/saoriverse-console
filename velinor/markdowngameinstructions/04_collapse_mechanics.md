@@ -1,17 +1,21 @@
 # Collapse Mechanics: Dynamic Environment & World Events
 
 ## Overview
+
 The marketplace is in **constant flux** — buildings collapse, paths open, areas become inaccessible. This is represented through:
+
 - Background image swaps (intact → collapsed)
 - Map overlay updates with red X markers
 - NPC reactions (static vs. reactive)
 - Glyph resonance tied to collapse events
 - First-time map introduction during collapse
+
 ##
 
 ## Collapse Event Structure
 
 ### Trigger Conditions
+
 - **Scripted Events**: Happen at specific story beats
 - **Dice Rolls**: Random chance during exploration (optional)
 - **Resonance Spikes**: Certain glyph combinations trigger environmental response
@@ -45,13 +49,16 @@ After Collapse:    marketplace_collapsed.png
 ```sql
 ```sql
 ```
+
 Sidebar Map Update:
+
 1. Player position marked with glowing dot
 2. Red ❌ appears on collapsed sector(s)
 3. Optional: Green ✧ appears where new path opens
 4. Affected areas gray out or become visibly blocked
 
 This is the FIRST TIME the map appears in gameplay.
+
 ```
 
 
@@ -77,9 +84,8 @@ You get used to it. We barely notice it now."
 ```text
 ```
 
-
-
 **Variants (Choose Based on NPC Personality)**:
+
 - Resigned: "Another wall falls, another path closes. We've stopped counting."
 - Wry: "The city exhales. We breathe with it."
 - Ritualized: "Collapse is just another rhythm."
@@ -101,13 +107,12 @@ It still shakes me every time."
 ```text
 ```
 
-
-
-
 **Variants**:
+
 - Fearful: "I thought that was it. I thought we were finally coming down."
 - Empathetic: "Are you alright? New arrivals always find this unsettling."
 - Determined: "Another collapse means new opportunities. Stay alert."
+
 ##
 
 ## Player Dialogue Options During Collapse
@@ -134,8 +139,6 @@ Option C: [Remain silent]
 ```text
 ```
 
-
-
 ### NPC Closing Line (All Paths Converge)
 
 ```markdown
@@ -152,18 +155,18 @@ The only constant here is change."
 ```text
 ```
 
-
-
-
 **Tone Variants**:
+
 - Ominous: "The city devours itself. Best not to be caught in its mouth."
 - Hopeful: "Collapse opens doors. Keep your eyes sharp for what emerges."
 - Ritualized: "The city remembers. We walk the broken paths. You will learn."
+
 ##
 
 ## Map Appearance & First Introduction
 
 ### Context
+
 This collapse event is the **first time the player sees the map**. It's not just a UI element — it's a world-building moment.
 
 ### Map Visual Elements
@@ -185,8 +188,6 @@ Legend:
 ```text
 ```
 
-
-
 ### Map Introduction Dialogue
 
 ```markdown
@@ -202,46 +203,53 @@ But here, where the dust settles — a new passage, maybe.'
 
 ```
 
-
 ##
 
 ## Collapse Effects on Gameplay
 
 ### Accessibility Changes
+
 - **Closed Areas**: Certain NPCs or items no longer accessible until area rebuilds
 - **New Routes**: Alternative paths emerge, leading to new encounters
 - **Temporary Blocks**: Some areas reopen after time/player action
 - **Permanent Shifts**: Major collapses reshape the map for rest of game
 
 ### Glyph Impact
+
 - **[Ruuñ] (Collapse)**: Glyphs associated with destruction, endings, letting go
 - **[Sha'rú] (Repair)**: Glyphs associated with rebuilding, finding new paths
 - **[Querrä] (Inquiry)**: Glyphs that trigger when player questions the city's changes
 - **Combination Effects**: [Ruuñ] + [Sha'rú] together trigger resonance with NPCs who understand both loss and rebuilding
 
 ### NPC Behavior Shifts
+
 - **Before Collapse**: NPCs in one area, dialogue about that sector
 - **After Collapse**: NPCs may relocate or adopt new dialogue
 - **Trust Implications**: If player helped an NPC before collapse, that NPC remembers (trust carries forward)
+
 ##
 
 ## Optional: Collapse Frequency & Progression
 
 ### Early Game (Rare)
+
 - 1-2 major collapse events
 - NPCs not yet accustomed to player's presence
 - Collapse feels shocking to all
 
 ### Mid Game (Occasional)
+
 - Collapses happen during key story beats
 - Some NPCs show resignation, others still react
 - Player begins to understand the pattern
 
 ### Late Game (Constant)
+
 - Marketplace is visibly more unstable
 - Most NPCs barely react anymore
 - Map shows larger blocked areas
 - New paths become crucial to navigation
+
 ##
 
 ## Implementation Checklist

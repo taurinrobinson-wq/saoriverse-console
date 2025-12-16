@@ -1,21 +1,24 @@
 # Emotion Learning System - Supabase Setup Guide
 
 ## Overview
+
 This guide walks you through setting up the privacy-first emotion learning system in Supabase. The system consists of two tables:
 
 1. **emotions_log** - Stores emotion metadata detected by the browser
 2. **emotion_thresholds** - Stores per-user adaptive thresholds calculated by the training script
 
 ## Prerequisites
+
 - Access to your Supabase project dashboard
 - Service role key (for backend operations)
+
 ##
 
 ## Step 1: Create the `emotions_log` Table
 
 This table stores emotion detection metadata. **No images, videos, or biometric data** — only emotion labels and confidence scores.
 
-### SQL to create the table:
+### SQL to create the table
 
 ```sql
 -- Create emotions_log table
@@ -39,21 +42,21 @@ create index if not exists emotions_log_context_idx
 ```text
 ```
 
+### How to apply
 
-
-### How to apply:
 1. Go to **SQL Editor** in Supabase Dashboard
 2. Click **New Query**
 3. Paste the SQL above
 4. Click **Run**
 5. You should see: `Success. No rows returned`
+
 ##
 
 ## Step 2: Create the `emotion_thresholds` Table
 
 This table stores per-user emotion detection thresholds calculated by `train_emotion_model.py`.
 
-### SQL to create the table:
+### SQL to create the table
 
 ```sql
 
@@ -73,22 +76,22 @@ create index if not exists emotion_thresholds_user_idx
 ```text
 ```
 
+### How to apply
 
-
-
-### How to apply:
 1. Go to **SQL Editor** in Supabase Dashboard
 2. Click **New Query**
 3. Paste the SQL above
 4. Click **Run**
 5. You should see: `Success. No rows returned`
+
 ##
 
 ## Step 3: Enable Realtime on `emotion_thresholds`
 
 The frontend EmotionDetector component uses Supabase Realtime to automatically update thresholds when the training script modifies them.
 
-### How to enable:
+### How to enable
+
 1. Go to **Table Editor** in Supabase Dashboard
 2. Click on **emotion_thresholds** table
 3. Click **Realtime** button in the top right
@@ -96,6 +99,7 @@ The frontend EmotionDetector component uses Supabase Realtime to automatically u
    - ✓ INSERT
    - ✓ UPDATE
    - ✓ DELETE
+
 ##
 
 ## Step 4: Set Up Row Level Security (Optional but Recommended)
@@ -132,9 +136,8 @@ create policy "Users can view own emotion thresholds"
 ```text
 ```
 
-
-
 **Note:** If you're not using Supabase Auth, you can skip this section and manage access at the API layer.
+
 ##
 
 ## Step 5: Verify Tables Were Created
@@ -143,6 +146,7 @@ create policy "Users can view own emotion thresholds"
 2. You should see both tables in the left sidebar:
    - `emotions_log` (with columns: id, user_id, emotion, confidence, timestamp, conversation_context, created_at)
    - `emotion_thresholds` (with columns: id, user_id, emotion, threshold, updated_at)
+
 ##
 
 ## Step 6: Configure Environment Variables
@@ -163,13 +167,12 @@ export SUPABASE_URL="https://your-project.supabase.co"
 ```text
 ```
 
-
-
 ##
 
 ## Workflow Summary
 
 ### Frontend (EmotionDetector.tsx)
+
 1. Detects emotion using face-api.js (browser-side, no video transmission)
 2. Fetches thresholds from `/api/emotion-thresholds` via GET request
 3. Subscribes to Supabase Realtime for threshold updates
@@ -177,17 +180,20 @@ export SUPABASE_URL="https://your-project.supabase.co"
 5. Payload: `{emotion, confidence, timestamp, user_id, conversation_context}`
 
 ### Backend (Next.js API Routes)
+
 1. `/api/emotions` (POST): Receives emotion metadata, validates, stores in `emotions_log`
 2. `/api/emotions` (GET): Retrieves recent emotion logs for a user
 3. `/api/emotion-thresholds` (GET): Fetches user's thresholds for frontend
 4. `/api/emotion-thresholds` (POST): Updates thresholds (called by training script)
 
 ### Training Script (train_emotion_model.py)
+
 1. Queries `emotions_log` for a user over N days
 2. Analyzes emotion patterns: frequency and average confidence
 3. Calculates adaptive thresholds: lower for frequently detected emotions, higher for rare ones
 4. Updates `emotion_thresholds` table via `/api/emotion-thresholds` or direct Supabase insert
 5. Frontend automatically receives updates via Realtime
+
 ##
 
 ## Testing the System
@@ -200,17 +206,12 @@ insert into public.emotions_log (user_id, emotion, confidence, conversation_cont
 ```text
 ```
 
-
-
 ### Test 2: Verify frontend can fetch thresholds
 
 ```bash
 
 ```text
 ```
-
-
-
 
 ### Test 3: Run training script
 
@@ -219,12 +220,11 @@ insert into public.emotions_log (user_id, emotion, confidence, conversation_cont
 ```text
 ```
 
-
 ##
 
 ## Monitoring and Optimization
 
-### Check emotion logs by user:
+### Check emotion logs by user
 
 ```sql
 
@@ -236,10 +236,7 @@ order by timestamp desc
 ```text
 ```
 
-
-
-
-### View user's thresholds:
+### View user's thresholds
 
 ```sql
 select emotion, threshold, updated_at
@@ -249,9 +246,7 @@ where user_id = 'your_user_id'
 ```text
 ```
 
-
-
-### Delete old logs (optional cleanup):
+### Delete old logs (optional cleanup)
 
 ```sql
 
@@ -259,7 +254,6 @@ delete from public.emotions_log
 where timestamp < now() - interval '90 days';
 
 ```
-
 
 ##
 
@@ -271,6 +265,7 @@ where timestamp < now() - interval '90 days';
 ✓ **User-specific thresholds** - Each user gets personalized detection sensitivity
 ✓ **Row-level security** - (Optional) Restricts data access by authenticated user
 ✓ **Service role key** - Keep private; only expose anon key to frontend
+
 ##
 
 ## Troubleshooting
@@ -286,6 +281,7 @@ where timestamp < now() - interval '90 days';
 
 **Problem:** `SUPABASE_SERVICE_ROLE_KEY not found`
 **Solution:** Set environment variables in `.env.local` or `export` before running train_emotion_model.py.
+
 ##
 
 ## Next Steps

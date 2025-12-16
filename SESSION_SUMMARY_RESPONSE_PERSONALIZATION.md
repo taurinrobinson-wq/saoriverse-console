@@ -6,6 +6,7 @@ User challenged the system's functionality:
 > "how can you determine its functional that is such a generic response it doesn't acknowledge any part of the user's message"
 
 They were correct. The app was selecting glyphs but generating generic responses:
+
 - Response: "I hear you. What's the feeling underneath all that?"
 - Applied to: ANY glyph, ANY emotion
 - Result: System appeared non-functional
@@ -13,6 +14,7 @@ They were correct. The app was selecting glyphs but generating generic responses
 ## Investigation
 
 Discovered root causes:
+
 1. All 1844 glyphs in database had NULL `response_template` column
 2. JSON source file never included response templates - only metadata
 3. `DynamicResponseComposer` had generic emotion-based response logic
@@ -21,6 +23,7 @@ Discovered root causes:
 ## Solution Strategy
 
 Instead of trying to populate 1844 response templates:
+
 - Use existing glyph **descriptions** which already contain wisdom
 - Weave descriptions into personalized responses
 - Match glyph concepts to user content for intelligent application
@@ -29,9 +32,11 @@ Instead of trying to populate 1844 response templates:
 ## Implementation
 
 ### File Modified
+
 `src/emotional_os_glyphs/dynamic_response_composer.py`
 
 ### Changes
+
 1. **Priority reordering in `_build_glyph_aware_response`**
    - Glyph wisdom now checked FIRST before generic fallbacks
 
@@ -74,11 +79,13 @@ All tests passing ✅:
 ```text
 ```text
 ```
+
 Input: "I'm feeling stressed about work piling up"
 Before: "I hear you. What's the feeling underneath all that?"
 After:  "That's a real thing you're carrying. Even in what feels active or
         chaotic, there's often a still place underneath. Quiet revelation.
         Truth that arrives without noise. What's the next small step for you?"
+
 ```
 
 

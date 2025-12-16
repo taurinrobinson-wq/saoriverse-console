@@ -52,16 +52,15 @@ bridge = engine.bridge_concepts("growth", "challenge")
 ```text
 ```
 
-
-
-
 **Key Methods:**
+
 - `find_metaphor(concept, emotion)` - Get emotion-appropriate metaphor
 - `add_symbolic_language(response, theme)` - Enhance with symbols
 - `generate_poetic_expression(topic, style)` - Create poetic phrases
 - `bridge_concepts(concept1, concept2)` - Create metaphorical bridges
 
 ### 2. SaoriLayer
+
 **Purpose:** Apply Japanese aesthetic principles
 
 ```python
@@ -87,9 +86,8 @@ transient = saori.apply_mono_no_aware("This moment")
 ```text
 ```
 
-
-
 **Principles:**
+
 - **Ma**: Knowing when not to speak (empty space)
 - **Yohaku**: Emptiness and simplicity
 - **Wabi-sabi**: Imperfect, incomplete, transient beauty
@@ -97,6 +95,7 @@ transient = saori.apply_mono_no_aware("This moment")
 - **Mono no aware**: Pathos of things, gentle sadness
 
 ### 3. TensionManager
+
 **Purpose:** Create generative tension for creative exploration
 
 ```python
@@ -119,16 +118,15 @@ paradox = tension.balance_paradox("strength", "vulnerability")
 ```text
 ```
 
-
-
-
 **Applications:**
+
 - Question-based tension (low level)
 - Paradox-based tension (medium level)
 - Opening-based tension (high level)
 - Paradox balancing (both/and thinking)
 
 ### 4. MythologyWeaver
+
 **Purpose:** Create and maintain personal conversational mythology
 
 ```python
@@ -159,15 +157,15 @@ narrative = weaver.build_personal_narrative(history)
 ```text
 ```
 
-
-
 **Key Methods:**
+
 - `weave_myth(history)` - Extract themes from history
 - `add_mythological_element(response, myth)` - Add theme elements
 - `track_symbols(response, history)` - Track recurring symbols
 - `build_personal_narrative(history)` - Create narrative summary
 
 ### 5. Tier3PoeticConsciousness (Orchestrator)
+
 **Purpose:** Coordinate all components
 
 ```python
@@ -199,9 +197,6 @@ print(metrics)
 ```text
 ```
 
-
-
-
 ## Integration Points
 
 ### In response_handler.py
@@ -225,8 +220,6 @@ if tier3:
 ```text
 ```
 
-
-
 ### In session_manager.py
 
 ```python
@@ -246,9 +239,6 @@ def _ensure_tier3_poetic_consciousness():
 
 ```text
 ```
-
-
-
 
 ## Processing Pipeline
 
@@ -277,8 +267,6 @@ Output: enhanced response string, metrics dict
 ```text
 ```text
 ```
-
-
 
 ## Performance Targets
 
@@ -320,9 +308,6 @@ pytest tests/test_tier3_poetic_consciousness.py --tb=no -q
 ```text
 ```
 
-
-
-
 ## Configuration & Tuning
 
 ### Probability Controls
@@ -349,8 +334,6 @@ if myth.get("themes"):  # Only if themes extracted
 ```text
 ```
 
-
-
 ### Adjusting Behavior
 
 To increase poetry intensity (in any component):
@@ -364,9 +347,6 @@ if random.random() > 0.3:  # was 0.5
 ```text
 ```
 
-
-
-
 To decrease poetry intensity:
 
 ```python
@@ -376,8 +356,6 @@ if random.random() > 0.8:  # was 0.5
 ```text
 ```text
 ```
-
-
 
 ## Error Handling
 
@@ -397,9 +375,6 @@ If Tier 3 processing fails:
 ```text
 ```
 
-
-
-
 ### Component Resilience
 
 Each component has try-catch blocks:
@@ -414,8 +389,6 @@ except Exception as e:
 ```text
 ```
 
-
-
 ## Usage Patterns
 
 ### Pattern 1: Simple Enhancement
@@ -429,9 +402,6 @@ poetic, _ = tier3.process_for_poetry(response)
 ```text
 ```
 
-
-
-
 ### Pattern 2: With Monitoring
 
 ```python
@@ -441,8 +411,6 @@ if metrics.get("processing_time_ms", 0) > 15:
 ```text
 ```text
 ```
-
-
 
 ### Pattern 3: Full Context Awareness
 
@@ -458,9 +426,6 @@ logger.info(f"Applied {metrics['aesthetic_applied']} aesthetic")
 ```text
 ```
 
-
-
-
 ## Troubleshooting
 
 ### Issue: Tier 3 not enhancing responses
@@ -474,8 +439,6 @@ if "tier3_poetic_consciousness" in st.session_state:
 ```text
 ```
 
-
-
 ### Issue: Performance degradation
 
 **Solution:** Check metrics
@@ -488,9 +451,6 @@ print(f"Time: {metrics.get('processing_time_ms')}ms")
 ```text
 ```
 
-
-
-
 ### Issue: Inconsistent enhancements
 
 **Solution:** This is by design (probabilistic). To make it consistent:
@@ -502,9 +462,6 @@ import random
 random.seed(42)
 poetic, _ = tier3.process_for_poetry(response)
 ```
-
-
-
 
 ## Files Reference
 
@@ -525,20 +482,25 @@ poetic, _ = tier3.process_for_poetry(response)
 ## Key Concepts
 
 ### Ma (間)
+
 "Negative space" - knowing when not to speak, letting silence and emptiness speak
 
 ### Wabi-sabi (侘寂)
+
 Finding beauty in imperfection, incompleteness, and transience
 
 ### Yūgen (幽玄)
+
 Subtle, profound grace - the unspoken part where truth lives
 
 ### Mono no aware (物の哀れ)
+
 The pathos of things - gentle melancholy in transience and impermanence
 
 ## Performance Philosophy
 
 **Target**: <100ms total response pipeline (all tiers)
+
 - Tier 1: 40ms (learning + safety)
 - Tier 2: 20ms (presence + adaptivity)
 - Tier 3: 10ms (poetry + aesthetics)
@@ -549,6 +511,7 @@ The pathos of things - gentle melancholy in transience and impermanence
 ## Future Enhancements
 
 Potential additions to Tier 3:
+
 1. **User Preferences** - Customize poetry intensity per user
 2. **Caching** - Cache common metaphors for faster retrieval
 3. **A/B Testing** - Measure impact on user satisfaction
@@ -558,12 +521,14 @@ Potential additions to Tier 3:
 ## Summary
 
 Tier 3 Poetic Consciousness adds creative depth through:
+
 1. **Metaphor generation** (PoetryEngine)
 2. **Aesthetic principles** (SaoriLayer)
 3. **Creative tension** (TensionManager)
 4. **Personal mythology** (MythologyWeaver)
 
 All integrated into a <10ms enhancement that keeps the full pipeline under 100ms and responses feeling instant.
+
 ##
 
 **Last Updated:** 2024 (Tier 3 Complete)

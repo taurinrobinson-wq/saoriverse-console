@@ -1,6 +1,7 @@
 # API Reference - SaoriVerse Console
 
 **Date**: December 3, 2025
+
 ##
 
 ## Core Modules
@@ -10,15 +11,18 @@
 **Main orchestrator for the emotional response pipeline.**
 
 #### `process_user_input(user_input: str, context: dict = None) -> str`
+
 Orchestrate the entire response pipeline from user input to response text.
 
 **Parameters:**
+
 - `user_input`: User's text input
 - `context`: Optional context dict with metadata
 
 **Returns:** Response text (str)
 
 **Steps:**
+
 1. Tag input (symbolic tags)
 2. Detect phase
 3. Generate tone-adapted response
@@ -37,7 +41,6 @@ response = process_user_input("I'm feeling overwhelmed")
 ```text
 ```
 
-
 ##
 
 ### src.signal_parser
@@ -45,12 +48,15 @@ response = process_user_input("I'm feeling overwhelmed")
 **Convert text to emotional signals.**
 
 #### `parse_input(user_input: str) -> dict`
+
 Extract emotional signals from user text.
 
 **Parameters:**
+
 - `user_input`: User's text input
 
 **Returns:** Signal dict with keys:
+
 - `voltage`: Intensity (0.0-1.0)
 - `tone`: Emotional tone (str)
 - `attunement`: Connection level (0.0-1.0)
@@ -76,13 +82,12 @@ print(signal)
 ```text
 ```
 
-
-
-
 #### `extract_themes(user_input: str) -> list`
+
 Extract semantic themes from text.
 
 **Parameters:**
+
 - `user_input`: User's text input
 
 **Returns:** List of theme strings
@@ -96,7 +101,6 @@ themes = extract_themes("Work is stressful and relationships are complicated")
 ```text
 ```
 
-
 ##
 
 ### src.enhanced_response_composer
@@ -104,18 +108,23 @@ themes = extract_themes("Work is stressful and relationships are complicated")
 **Compose multi-glyph responses.**
 
 #### `class DynamicResponseComposer`
+
 Blend multiple glyphs into coherent responses.
 
 ##### `__init__(reward_model=None)`
+
 Initialize composer with optional reward model.
 
 **Parameters:**
+
 - `reward_model`: Optional reward model for response ranking
 
 ##### `compose_multi_glyph_response(signal: dict, glyphs: list) -> str`
+
 Compose response from multiple glyphs.
 
 **Parameters:**
+
 - `signal`: Emotional signal dict
 - `glyphs`: List of glyph dicts
 
@@ -132,8 +141,6 @@ composer = DynamicResponseComposer()
 ```text
 ```
 
-
-
 ##
 
 ### src.voice_interface
@@ -141,15 +148,19 @@ composer = DynamicResponseComposer()
 **High-level voice I/O API.**
 
 #### `class VoiceInterface`
+
 Orchestrate voice input/output for Streamlit app.
 
 ##### `__init__()`
+
 Initialize voice interface with TTS/STT engines.
 
 ##### `transcribe_audio(audio_path: str) -> str`
+
 Transcribe audio file to text (STT).
 
 **Parameters:**
+
 - `audio_path`: Path to audio file (mp3, wav, etc.)
 
 **Returns:** Transcribed text
@@ -164,12 +175,12 @@ voice = VoiceInterface()
 ```text
 ```
 
-
-
 ##### `synthesize_speech(text: str, glyph: dict) -> bytes`
+
 Synthesize text to speech with glyph prosody (TTS).
 
 **Parameters:**
+
 - `text`: Text to synthesize
 - `glyph`: Glyph dict with emotional context
 
@@ -182,8 +193,6 @@ Synthesize text to speech with glyph prosody (TTS).
 ```text
 ```
 
-
-
 ##
 
 ### src.relational_memory
@@ -191,9 +200,11 @@ Synthesize text to speech with glyph prosody (TTS).
 **Persist interaction memories for learning.**
 
 #### `class RelationalMemoryCapsule`
+
 Represent a single interaction memory.
 
 **Attributes:**
+
 - `user_input`: Original user input
 - `signal`: Extracted emotional signal
 - `response`: Generated response
@@ -202,9 +213,11 @@ Represent a single interaction memory.
 - `session_id`: Session identifier
 
 #### `store_capsule(capsule: RelationalMemoryCapsule) -> bool`
+
 Store memory capsule to disk.
 
 **Parameters:**
+
 - `capsule`: RelationalMemoryCapsule instance
 
 **Returns:** True if stored successfully
@@ -224,15 +237,16 @@ capsule = RelationalMemoryCapsule(
 ```text
 ```
 
-
-
 #### `query_capsules(session_id: str) -> list`
+
 Retrieve memories for a session.
 
 **Parameters:**
+
 - `session_id`: Session identifier
 
 **Returns:** List of RelationalMemoryCapsule instances
+
 ##
 
 ### src.prosody_planner
@@ -240,19 +254,24 @@ Retrieve memories for a session.
 **Map emotional context to speech prosody.**
 
 #### `class ProsodyPlanner`
+
 Plan prosody parameters based on glyph.
 
 ##### `__init__()`
+
 Initialize prosody planner with glyph-to-prosody mappings.
 
 ##### `plan_prosody(glyph: dict, text: str) -> dict`
+
 Generate prosody parameters for text.
 
 **Parameters:**
+
 - `glyph`: Glyph dict with emotional context
 - `text`: Text to generate prosody for
 
 **Returns:** Prosody dict with:
+
 - `pitch`: Pitch range (0.5-2.0)
 - `rate`: Speaking rate (0.5-2.0)
 - `energy`: Volume/intensity (0.0-1.0)
@@ -269,8 +288,6 @@ planner = ProsodyPlanner()
 ```text
 ```
 
-
-
 ##
 
 ### src.streaming_tts
@@ -278,15 +295,19 @@ planner = ProsodyPlanner()
 **Streaming Text-to-Speech engine.**
 
 #### `class StreamingTTS`
+
 Manage text-to-speech synthesis.
 
 ##### `__init__()`
+
 Initialize TTS engine.
 
 ##### `synthesize(text: str, prosody: dict = None) -> bytes`
+
 Synthesize text to audio.
 
 **Parameters:**
+
 - `text`: Text to synthesize
 - `prosody`: Optional prosody parameters
 
@@ -302,7 +323,6 @@ tts = StreamingTTS()
 ```text
 ```
 
-
 ##
 
 ### src.audio_pipeline
@@ -310,15 +330,19 @@ tts = StreamingTTS()
 **Speech-to-Text (STT) pipeline.**
 
 #### `class AudioPipeline`
+
 Manage audio input and transcription.
 
 ##### `__init__()`
+
 Initialize audio pipeline with STT engine.
 
 ##### `transcribe(audio_path: str) -> str`
+
 Transcribe audio file to text.
 
 **Parameters:**
+
 - `audio_path`: Path to audio file
 
 **Returns:** Transcribed text
@@ -336,8 +360,6 @@ pipeline = AudioPipeline()
 ```text
 ```
 
-
-
 ##
 
 ### src.lexicon_learner
@@ -345,15 +367,19 @@ pipeline = AudioPipeline()
 **Learn from interactions to improve lexicon.**
 
 #### `class LexiconLearner`
+
 Learn emotional patterns from user interactions.
 
 ##### `__init__()`
+
 Initialize lexicon learner.
 
 ##### `extract_patterns(user_input: str, signal: dict) -> list`
+
 Extract learnable patterns from interaction.
 
 **Parameters:**
+
 - `user_input`: User's text
 - `signal`: Extracted emotional signal
 
@@ -368,7 +394,6 @@ learner = LexiconLearner()
 ```text
 ```text
 ```
-
 
 ##
 
@@ -385,13 +410,12 @@ learner = LexiconLearner()
 ```text
 ```
 
-
-
-
 **Environment:**
+
 - Port: 8501 (default Streamlit)
 - Browser: Opens automatically
 - Auth: Optional (configured in app)
+
 ##
 
 ## Common Workflows
@@ -405,8 +429,6 @@ response = process_user_input("I'm feeling lost")
 ```text
 ```text
 ```
-
-
 
 ### Audio-to-Audio (Voice Chat)
 
@@ -427,9 +449,6 @@ response = process_user_input(text)
 
 ```text
 ```
-
-
-
 
 ### Learning System
 
@@ -456,7 +475,6 @@ capsule = RelationalMemoryCapsule(
 ```text
 ```
 
-
 ##
 
 ## Error Handling
@@ -476,8 +494,6 @@ except Exception as e:
 ```text
 ```
 
-
-
 ##
 
 ## Data Structures
@@ -495,8 +511,6 @@ except Exception as e:
 ```text
 ```
 
-
-
 ### Glyph Dict
 
 ```python
@@ -512,9 +526,6 @@ except Exception as e:
 ```text
 ```
 
-
-
-
 ### Prosody Dict
 
 ```python
@@ -529,7 +540,6 @@ except Exception as e:
 ```text
 ```text
 ```
-
 
 ##
 
@@ -555,7 +565,6 @@ src.lexicon_learner
     └── src.relational_memory
 
 ```
-
 
 ##
 

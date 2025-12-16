@@ -3,22 +3,26 @@
 **Date:** December 6, 2025
 **Branch:** `feature/velinor-remnants-of-tone`
 **Status:** 🟢 **TWINE INTEGRATION COMPLETE**
+
 ##
 
 ## Project Overview
 
 Velinor is a text-based narrative game with innovative mechanics:
+
 - **Free-text input** + structured choices (hybrid dialogue)
 - **Dice roll mechanics** (D&D-inspired, stat-based)
 - **Emotional resonance system** (glyphs, the Tone)
 - **Dynamic dialogue** (FirstPerson orchestrator integration)
 - **Multiplayer support** (collaborative storytelling)
 - **Background images** (location-based immersion)
+
 ##
 
 ## Completed Work (Phase 1: Framework & Engine)
 
 ### ✅ Game Engine (`engine/core.py`)
+
 - Game state management (7 states: MENU, LOADING, IN_GAME, DIALOGUE, CHOICE, TRANSITION, GAME_OVER)
 - Player stats system (Courage, Wisdom, Empathy, Resolve, Resonance)
 - Dice rolling with stat modifiers
@@ -27,6 +31,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 - Session management with multiplayer support
 
 ### ✅ NPC System (`engine/npc_system.py`)
+
 - NPC personality system (role, base_tone, dialogue_templates)
 - FirstPerson orchestrator integration
 - Dialogue history tracking
@@ -35,6 +40,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 - NPC registry and management
 
 ### ✅ Twine Story Adapter (`engine/twine_adapter.py`)
+
 - Twine 2 JSON format loading
 - SugarCube markup parsing (`[[text->target]]`)
 - Skill check parsing (`[[text (Skill, DC N)->target]]`)
@@ -44,6 +50,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 - Story progression tracking
 
 ### ✅ Game Orchestrator (`engine/orchestrator.py`)
+
 - Main game loop controller
 - Player input processing (typed + choices)
 - Game mechanics application
@@ -53,6 +60,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 - State serialization for UI
 
 ### ✅ Sample Story (`stories/sample_story.json`)
+
 - 20+ story passages
 - Market District opening scene
 - Multiple branching paths
@@ -62,9 +70,11 @@ Velinor is a text-based narrative game with innovative mechanics:
 - Glyph collection mechanics
 
 ### ✅ Documentation
+
 - `TWINE_INTEGRATION_GUIDE.md` - Full integration reference
 - `TWINE_IMPLEMENTATION_COMPLETE.md` - Implementation summary
 - `quickstart.py` - Integration examples (Streamlit, FastAPI)
+
 ##
 
 ## Architecture
@@ -155,6 +165,7 @@ UI LAYER (Streamlit, Web, CLI, etc.)
 ```text
 ```text
 ```
+
 velinor/
 ├── engine/
 │   ├── core.py                    # Game engine (state, dice, events)
@@ -185,6 +196,7 @@ velinor/
 ├── TWINE_INTEGRATION_GUIDE.md    # Full reference
 ├── TWINE_IMPLEMENTATION_COMPLETE.md  # Implementation summary
 └── STATUS.md                      # This file
+
 ```
 
 
@@ -208,8 +220,6 @@ orchestrator = VelinorTwineOrchestrator(
 ```text
 ```
 
-
-
 ### Process Input
 
 ```python
@@ -229,9 +239,6 @@ state = orchestrator.process_player_action(
 ```text
 ```
 
-
-
-
 ### Save/Load
 
 ```python
@@ -239,34 +246,37 @@ orchestrator.save_game("saves/game_001.json")
 orchestrator.load_game("saves/game_001.json")
 ```
 
-
-
 ##
 
 ## Integration Points
 
 ### With FirstPerson Orchestrator
+
 - Import from `src.emotional_os.deploy.core.firstperson`
 - Used for dynamic dialogue generation
 - Affect parsing for intent classification
 - Clarifying questions from FirstPerson patterns
 
 ### With Game Engine
+
 - Query player stats for dice roll modifiers
 - Update stats based on story outcomes
 - Track location changes
 - Trigger events for UI callbacks
 
 ### With NPC System
+
 - Query NPC personalities and templates
 - Apply FirstPerson-enhanced dialogue
 - Track NPC relationships
 - Adapt responses for group composition
+
 ##
 
 ## Next Session Priorities
 
 ### Immediate (Can start today)
+
 1. **Create Streamlit UI** (`app.py`)
    - Import orchestrator and engine
    - Render game state
@@ -281,6 +291,7 @@ orchestrator.load_game("saves/game_001.json")
    - Validate save/load
 
 ### Short-term (This week)
+
 1. Flesh out story passages (currently 20, target 50+)
 2. Create background images (6+ locations)
 3. Refine NPC personalities
@@ -288,16 +299,19 @@ orchestrator.load_game("saves/game_001.json")
 5. Balance stat modifiers and DCs
 
 ### Medium-term (Next 2 weeks)
+
 1. Implement inventory system
 2. Add quest tracking
 3. Create achievement system
 4. Test with multiple players
 5. Polish UI/UX
+
 ##
 
 ## Key Decisions Made
 
 **Framework:** Twine 2 + SugarCube (vs. Streamlit-only, web framework, or engine)
+
 - ✅ Purpose-built for branching narrative
 - ✅ Visual editor available for non-developers
 - ✅ Easy to export/import
@@ -305,16 +319,19 @@ orchestrator.load_game("saves/game_001.json")
 - ✅ Community support
 
 **Architecture:** Engine → Adapter → Orchestrator → UI
+
 - ✅ UI-agnostic game engine
 - ✅ Twine-specific bridge layer
 - ✅ Orchestrator coordinates everything
 - ✅ Clean separation of concerns
 
 **Multiplayer:** Input buffering + persona awareness
+
 - ✅ Players contribute to same dialogue
 - ✅ NPCs address group vs. individual
 - ✅ Sidebar shows other players
 - ✅ Scalable for 2-4 players
+
 ##
 
 ## Success Criteria - Met ✅
@@ -329,6 +346,7 @@ orchestrator.load_game("saves/game_001.json")
 ✅ Documentation complete
 ✅ Sample story with working passages
 ✅ Ready for UI integration
+
 ##
 
 ## Technical Debt & Considerations
@@ -339,6 +357,7 @@ orchestrator.load_game("saves/game_001.json")
 - **Story content** is scaffolding (20 passages need to become 50+)
 - **Performance** not yet tested with large stories (should scale well)
 - **Mobile support** not yet considered (responsive UI needed)
+
 ##
 
 ## Contact & Updates
@@ -348,7 +367,9 @@ Branch: `feature/velinor-remnants-of-tone`
 Status: 🟢 Core system complete, ready for UI layer
 
 For questions about architecture or integration, see:
+
 - `TWINE_INTEGRATION_GUIDE.md` - Full reference
 - `quickstart.py` - Code examples
 - `orchestrator.py` - Main game loop implementation
+
 ##

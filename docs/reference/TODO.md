@@ -30,8 +30,6 @@ Set-Location -Path "C:\Users\Admin\OneDrive\Desktop\Deleted_Emotional_OS_Folder\
 ```text
 ```
 
-
-
 3. If tests fail, run the single failing test to iterate faster:
 
 ```powershell
@@ -39,8 +37,6 @@ Set-Location -Path "C:\Users\Admin\OneDrive\Desktop\Deleted_Emotional_OS_Folder\
 & ".\.venv\Scripts\python.exe" -m pytest -q test_ritual_processor.py::test_glyph_creation -k test_glyph_creation -q
 
 ```
-
-
 
 4. When making small fixes, commit and push with a clear message and re-run pytest.
 

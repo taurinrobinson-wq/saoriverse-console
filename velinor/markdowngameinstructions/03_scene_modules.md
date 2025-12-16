@@ -1,12 +1,15 @@
 # Scene Module Template: Reusable NPC Encounters
 
 ## Overview
+
 A standardized structure for building **modular NPC encounter scenes** with:
+
 - Background/foreground asset layering
 - Multi-stage presence (distant → near)
 - Glyph resonance triggers
 - Dialogue bubble progression
 - Player choice architecture
+
 ##
 
 ## Template Structure
@@ -53,14 +56,13 @@ NPC Name:             Primary character in scene
 ```text
 ```
 
-
-
-
 **Design Notes**:
+
 - Foreground opacity: 40-60%
 - Foreground scale: 0.6-0.7x normal
 - Narration tone: Observational, not yet intimate
 - Glyph is *passive* — just awareness beginning
+
 ##
 
 ### Scene 2: Approach
@@ -89,13 +91,13 @@ NPC Name:             Primary character in scene
 ```text
 ```
 
-
-
 **Design Notes**:
+
 - Foreground opacity: 100%
 - Foreground scale: 1.0x (full size) or 1.1x (commanding presence)
 - Dialogue is the **first interaction** — tone is crucial
 - Glyphs now *active* — resonance responding to moment
+
 ##
 
 ### Scene 3: Player Response (Optional Multi-Stage)
@@ -124,14 +126,13 @@ NPC Name:             Primary character in scene
 ```text
 ```
 
-
-
-
 **Design Notes**:
+
 - Each option should feel **meaningfully different**
 - NPC responses vary not just in content but in **tone and pacing**
 - Glyphs reflect player's internal state, not just NPC action
 - One path can lead to faster trust; others preserve mystery
+
 ##
 
 ## Example: Velinor's First Encounter
@@ -148,8 +149,6 @@ Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈
 ```text
 ```text
 ```
-
-
 
 ### Scene 1: Distant Presence
 
@@ -172,9 +171,6 @@ She appears to be some kind of priestess… or something older.
 
 ```text
 ```
-
-
-
 
 ### Scene 2: Approach
 
@@ -201,8 +197,6 @@ Before you have a chance to speak, she does.
 ```text
 ```
 
-
-
 ### Player Options
 
 ```
@@ -223,8 +217,6 @@ Before you have a chance to speak, she does.
 
 ```text
 ```
-
-
 
 ##
 
@@ -263,13 +255,12 @@ if st.button("Continue"):
         st.write("Velinor Response: 'A question for another day...'")
 ```
 
-
-
 ##
 
 ## Reuse Across NPCs
 
 This template is **standardized** so you can quickly create encounters for:
+
 - Nima (Mistrusting Guard)
 - Ravi (Welcoming Guide)
 - Shrine Keepers

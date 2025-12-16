@@ -1,4 +1,5 @@
 # actionlint
+
 [![CI Badge][]][CI]
 [![API Document][api-badge]][apidoc]
 
@@ -49,8 +50,6 @@ jobs:
 ```text
 ```
 
-
-
 **actionlint reports 7 errors:**
 
 ```
@@ -86,9 +85,6 @@ test.yaml:22:17: receiver of object dereference "permissions" must be type of ob
 ```text
 ```
 
-
-
-
 ## Why?
 
 - **Running a workflow is time consuming.** You need to push the changes and wait until the workflow runs on GitHub even if
@@ -112,8 +108,6 @@ or run via Docker container.
 ```text
 ```
 
-
-
 Basically all you need to do is run the `actionlint` command in your repository. actionlint automatically detects workflows and
 checks errors. actionlint focuses on finding out mistakes. It tries to catch errors as much as possible and make false positives
 as minimal as possible.
@@ -123,8 +117,6 @@ as minimal as possible.
 actionlint
 
 ```
-
-
 
 Another option to try actionlint is [the online playground][playground]. Your browser can run actionlint through WebAssembly.
 

@@ -36,6 +36,7 @@ Digital Ocean VPS:
 ```text
 ```text
 ```
+
 firstperson.chat (NEW subdomain):
 ├── Frontend (Next.js)
 │   ├── Audio UI components
@@ -61,6 +62,7 @@ firstperson.chat (NEW subdomain):
         ├── Faster-Whisper (transcription)
         ├── pyttsx3 + ProsodyPlanner (TTS)
         └── Audio processing (scipy, librosa)
+
 ```
 
 
@@ -97,8 +99,6 @@ services:
 ```text
 ```
 
-
-
 ### Nginx Configuration (Updated)
 
 ```nginx
@@ -114,12 +114,10 @@ server_name firstperson.chat;
 ```text
 ```
 
-
-
-
 ## Implementation Roadmap
 
 ### Phase 1: Scaffold (2 hours)
+
 - [ ] Create `/firstperson-web/` directory (Next.js app)
 - [ ] Copy tailwind/eslint setup from velinor-web
 - [ ] Create `/firstperson_api.py` FastAPI backend
@@ -128,6 +126,7 @@ server_name firstperson.chat;
 - [ ] Update `nginx.prod.conf` for dual-domain routing
 
 ### Phase 2: Frontend (4-6 hours)
+
 - [ ] Audio recorder component (Web Audio API)
   - Capture microphone input
   - Send to backend for transcription
@@ -140,6 +139,7 @@ server_name firstperson.chat;
 - [ ] Settings panel (model selection, voice settings)
 
 ### Phase 3: Backend (6-8 hours)
+
 - [ ] FastAPI endpoints
   - POST `/api/transcribe` - audio blob → text
   - POST `/api/chat` - text → response
@@ -154,6 +154,7 @@ server_name firstperson.chat;
 - [ ] Error handling & graceful degradation
 
 ### Phase 4: Deployment (2-3 hours)
+
 - [ ] Build Docker image for firstperson_api
 - [ ] Deploy to Digital Ocean
 - [ ] SSL certificate for firstperson.chat
@@ -161,6 +162,7 @@ server_name firstperson.chat;
 - [ ] Performance optimization
 
 ### Phase 5: Polish (2-3 hours)
+
 - [ ] UI refinements
 - [ ] Response latency optimization
 - [ ] Audio quality tuning
@@ -180,8 +182,6 @@ from emotional_os.deploy.modules.nlp_init import warmup_nlp
 ```sql
 ```
 
-
-
 ### Architecture Pattern (Copy from Velinor)
 
 ```python
@@ -196,9 +196,6 @@ FastAPI app
 
 ```text
 ```
-
-
-
 
 ## Key Endpoints
 
@@ -224,8 +221,6 @@ POST /api/synthesize
 ```text
 ```
 
-
-
 ### Streaming (WebSocket)
 
 ```javascript
@@ -242,12 +237,10 @@ ws.send({ type: 'transcribe_end' })
 ```text
 ```
 
-
-
-
 ## Digital Ocean Setup Checklist
 
 ### Pre-Deployment
+
 - [ ] Clone repo on VPS
 - [ ] Create DNS A record for firstperson.chat → VPS IP
 - [ ] Request SSL certificate for firstperson.chat (Let's Encrypt)
@@ -255,12 +248,14 @@ ws.send({ type: 'transcribe_end' })
 - [ ] Update nginx.prod.conf
 
 ### Deployment
+
 - [ ] Build Docker image: `docker-compose build`
 - [ ] Start services: `docker-compose up -d`
 - [ ] Verify health: Check both velinor.firstperson.chat and firstperson.chat
 - [ ] Monitor logs: `docker-compose logs -f firstperson_api`
 
 ### Post-Deployment
+
 - [ ] Test audio recording → transcription
 - [ ] Test chat → FirstPerson response
 - [ ] Test audio synthesis
@@ -312,9 +307,6 @@ saoriverse-console/
 └── [existing files]
 ```
 
-
-
-
 ## Next Steps
 
 1. **Get Digital Ocean details from you:**
@@ -338,9 +330,11 @@ saoriverse-console/
    - Add error handling
 
 5. **Deploy & test**
+
 ##
 
 **Benefits of this approach:**
+
 - ✅ Proper audio I/O (no Streamlit limitations)
 - ✅ Real-time WebSocket support
 - ✅ Production-grade architecture

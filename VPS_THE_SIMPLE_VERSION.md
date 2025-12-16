@@ -1,6 +1,7 @@
 # 🎮 Velinor on DigitalOcean - The Simple Version
 
 **TL;DR**: You're moving your game from Railway (unreliable) to DigitalOcean (simple, $6/month). Here's what's happening in plain English.
+
 ##
 
 ## What Just Happened?
@@ -10,10 +11,12 @@ You had a problem: **Railway keeps breaking**
 The solution: **You now have everything to move to a better platform**
 
 What I created:
+
 - ✅ Production Docker setup (`docker-compose.prod.yml`)
 - ✅ SSL configuration (`nginx.prod.conf`)
 - ✅ Auto-deployment on code changes (`.github/workflows/deploy.yml`)
 - ✅ 5 guides/checklists to walk you through it
+
 ##
 
 ## What is DigitalOcean?
@@ -82,6 +85,7 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 ```text
 ```text
 ```
+
 1. Your browser sends request to velinor.firstperson.chat
    ↓
 2. DNS says "that's 123.45.67.89" (your DigitalOcean IP)
@@ -99,6 +103,7 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 7. FastAPI runs the Velinor game engine
    ↓
 8. You play! 🎮
+
 ```
 
 
@@ -286,9 +291,11 @@ A:
 ```text
 ```text
 ```
+
 Option       | Cost/mo | Reliability | Control | Support
 Railway      | $5-50+  | 😢😢😢      | 😞     | 😞
 DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
+
 ```
 
 
@@ -307,32 +314,37 @@ git commit -m "feat: add production VPS deployment infrastructure"
 ```text
 ```
 
-
-
 ### 2. Create DigitalOcean Account (5 min)
-Go to https://digitalocean.com
+
+Go to <https://digitalocean.com>
 Sign up with email
 Verify email
 
 ### 3. Create Droplet (5 min)
+
 Follow the simple steps on DigitalOcean dashboard
 Save the IP address
 
 ### 4. Configure DNS (2 min)
+
 Go to Namecheap
 Add A Record: `velinor` → your IP
 
 ### 5. Run Setup Script (10 min)
+
 SSH into droplet
 Copy-paste the setup commands
 Wait for it to finish
 
 ### 6. Test (5 min)
-Visit https://velinor.firstperson.chat
+
+Visit <https://velinor.firstperson.chat>
 Confirm it works
 
 ### 7. Celebrate! (∞)
+
 You just deployed a game on production infrastructure! 🚀
+
 ##
 
 ## What Could Go Wrong (And How to Fix It)
@@ -347,6 +359,7 @@ You just deployed a game on production infrastructure! 🚀
 | Auto-deploy not working | SSH key issue | Verify GitHub secrets (VPS_HOST, VPS_SSH_KEY) |
 
 All of these are in the full guides with detailed solutions!
+
 ##
 
 ## The Bottom Line
@@ -358,17 +371,12 @@ You went from:
 ```text
 ```
 
-
-
-
 To:
 
 ```
 ```text
 ```text
 ```
-
-
 
 With:
 
@@ -382,9 +390,8 @@ With:
 
 ```
 
-
-
 **All for $6/month.**
+
 ##
 
 ## When You're Ready

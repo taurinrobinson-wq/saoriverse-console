@@ -42,6 +42,7 @@ Unique conversations:   1 (one amazing long thread)
 ```text
 ```text
 ```
+
 1. Add 3 new Glyphs:
    - THAT_LANDS ("That lands.")
    - EXACTLY ("Exactly, Taurin.")
@@ -50,6 +51,7 @@ Unique conversations:   1 (one amazing long thread)
 2. Remove em-dashes from 5 existing Glyphs
 3. Test with 3-5 users
 4. Measure: Response feel, engagement time, follow-ups
+
 ```
 
 
@@ -79,9 +81,11 @@ Unique conversations:   1 (one amazing long thread)
 ```text
 ```text
 ```
+
 8. Full Glyph lexicon rebuild with new standards
 9. A/B test old vs. new voice
 10. Gather user feedback and iterate
+
 ```
 
 

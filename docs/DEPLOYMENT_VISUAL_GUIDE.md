@@ -54,16 +54,15 @@ chmod +x docker-setup.sh
 ```text
 ```
 
-
-
-
 **What it does automatically:**
+
 1. Installs Docker & Docker Compose
 2. Creates environment file
 3. Builds all containers
 4. Starts all services
 5. Verifies everything works
 6. Shows you the URLs
+
 ##
 
 ### 🟡 Way 2: Guided (10 minutes)
@@ -74,7 +73,6 @@ chmod +x docker-setup.sh
 ```text
 ```text
 ```
-
 
 ##
 
@@ -89,8 +87,6 @@ chmod +x docker-setup.sh
 ```text
 ```
 
-
-
 ##
 
 ## After Deployment: Your App Lives Here
@@ -102,7 +98,6 @@ chmod +x docker-setup.sh
 ```text
 ```text
 ```
-
 
 ##
 
@@ -129,8 +124,6 @@ chmod +x docker-setup.sh
 ```text
 ```
 
-
-
 ##
 
 ## What Gets Deployed
@@ -142,6 +135,7 @@ chmod +x docker-setup.sh
 | **Proxy** | Nginx | Route traffic |
 | **Database** | SQLite | Store app data |
 | **Network** | Docker Bridge | Internal communication |
+
 ##
 
 ## The Simplest Checklist
@@ -156,7 +150,6 @@ chmod +x docker-setup.sh
 ```text
 ```text
 ```
-
 
 ##
 
@@ -184,13 +177,12 @@ docker compose stop
 ```text
 ```
 
-
-
 ##
 
 ## If Anything Goes Wrong
 
 ### Problem 1: Can't SSH
+
 - Check you're using: `ssh root@161.35.227.49`
 - Verify IP address is correct
 - Check you have network access
@@ -207,8 +199,6 @@ docker compose logs
 ```text
 ```
 
-
-
 ### Problem 3: Services won't start
 
 ```bash
@@ -224,9 +214,6 @@ docker compose build --no-cache
 ```sql
 ```
 
-
-
-
 ### Problem 4: Can't access from browser
 
 ```bash
@@ -241,9 +228,8 @@ curl http://161.35.227.49:3000
 ```text
 ```
 
-
-
 See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
+
 ##
 
 ## File Guide: "Which File Do I Read?"
@@ -255,6 +241,7 @@ See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
 | "I need to install Docker manually" | 🔧 DOCKER_UBUNTU_SETUP.md |
 | "Something broke, help!" | 📖 DIGITALOCEAN_DEPLOYMENT_GUIDE.md → Troubleshooting |
 | "I want to understand the setup" | 📋 DEPLOYMENT_SUMMARY.md |
+
 ##
 
 ## Technologies Used
@@ -281,8 +268,6 @@ Deployment:
 
 ```text
 ```
-
-
 
 ##
 
@@ -318,7 +303,6 @@ Deployment:
 ```text
 ```
 
-
 ##
 
 ## Success Criteria
@@ -341,8 +325,6 @@ Frontend:  http://161.35.227.49:3000
 ```text
 ```
 
-
-
 ##
 
 ## Next 5 Steps
@@ -351,9 +333,10 @@ Frontend:  http://161.35.227.49:3000
 2. **SSH to your droplet**: `ssh root@161.35.227.49`
 3. **Clone the repo**: `git clone https://github.com/taurinrobinson-wq/saoriverse-console.git && cd saoriverse-console`
 4. **Run setup**: `chmod +x docker-setup.sh && ./docker-setup.sh`
-5. **Wait & verify**: `docker compose ps` then visit http://161.35.227.49:3000
+5. **Wait & verify**: `docker compose ps` then visit <http://161.35.227.49:3000>
 
 **Total time: ~10 minutes**
+
 ##
 
 ## Key Files Summary
@@ -367,19 +350,18 @@ DOCKER COMPOSE:    docker-compose.yml
 DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 ```
 
-
-
 ##
 
 ## Quick Links
 
 | Resource | URL |
 |----------|-----|
-| GitHub Repo | https://github.com/taurinrobinson-wq/saoriverse-console |
-| DigitalOcean | https://www.digitalocean.com/ |
-| Docker Docs | https://docs.docker.com/ |
-| FastAPI Docs | https://fastapi.tiangolo.com/ |
-| Expo Docs | https://expo.dev/ |
+| GitHub Repo | <https://github.com/taurinrobinson-wq/saoriverse-console> |
+| DigitalOcean | <https://www.digitalocean.com/> |
+| Docker Docs | <https://docs.docker.com/> |
+| FastAPI Docs | <https://fastapi.tiangolo.com/> |
+| Expo Docs | <https://expo.dev/> |
+
 ##
 
 ## Deployment Timeline
@@ -391,8 +373,9 @@ DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 | **3** | 30 sec | Make script executable |
 | **4** | 5-8 min | Run setup script |
 | **5** | 1 min | Verify (docker compose ps) |
-| **6** | 1 min | Visit http://161.35.227.49:3000 |
+| **6** | 1 min | Visit <http://161.35.227.49:3000> |
 | **TOTAL** | **~10 min** | **App is live!** |
+
 ##
 
 ## You're All Set! 🎉
@@ -404,6 +387,7 @@ Everything you need is in this repository.
 - **FASTEST**: Run `./docker-setup.sh`
 - **GUIDED**: Read `DOCKER_QUICK_START.md` then deploy
 - **THOROUGH**: Read `DIGITALOCEAN_DEPLOYMENT_GUIDE.md` first
+
 ##
 
 **Status**: ✅ DEPLOYMENT READY
@@ -411,11 +395,13 @@ Everything you need is in this repository.
 **Target**: 161.35.227.49 (DigitalOcean, Ubuntu)
 **Time to Deploy**: ~10 minutes
 **Difficulty**: Easy 🟢
+
 ##
 
 ### Questions?
 
 Check the relevant guide:
+
 - **Quick start**: `DOCKER_QUICK_START.md`
 - **Detailed**: `DIGITALOCEAN_DEPLOYMENT_GUIDE.md`
 - **Troubleshooting**: Section "Troubleshooting" in guide above

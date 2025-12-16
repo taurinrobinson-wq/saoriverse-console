@@ -4,11 +4,13 @@
 **Transcript Period:** July-August 2025
 **Raw File:** `copilot-activity-history.csv` (39,811 lines)
 **Cleaned File:** `copilot-activity-history-cleaned.csv` (21,738 lines)
+
 ##
 
 ## ✅ What Was Done
 
 ### 1. **Removed Sensitive Legal Content** 🔒
+
 - **Identified:** 1,581 rows containing legal/song content
 - **Removed:** All legal case references, rap lyrics, sensitive material
 - **Preserved:** 21,738 rows of pure conversational gold
@@ -16,6 +18,7 @@
 - **File:** `copilot-activity-history-cleaned.csv` (safe to share, analyze, learn from)
 
 ### 2. **Analyzed Conversational Patterns** 📊
+
 - Extracted 11,181 AI messages
 - Extracted 12,138 human messages
 - Identified emotional vocabulary usage
@@ -23,22 +26,26 @@
 - Documented AI voice characteristics
 
 ### 3. **Quantified AI Voice Characteristics** 🗣️
+
 - **Em-dash density:** 0.67 per message (too high, should be 0.1-0.2)
 - **Average response length:** 101 characters (good, but structured poorly)
 - **Most used emotional words:** hold (568x), sacred (373x), present (317x)
 - **Most effective validation:** "exactly" (367x), "i hear you" (54x), "that lands" (46x)
 
 ### 4. **Generated Implementation Recommendations** 💡
+
 - 10 new Glyphs to add to your system
 - Updated voice guidelines
 - Em-dash reduction strategy
 - Response length standards
 - Priority implementation plan
+
 ##
 
 ## 🎯 Key Insights
 
 ### **Em-Dash Problem Solved**
+
 Your transcript revealed: Heavy em-dash usage (0.67/message) creates dense, formal feel.
 
 **Solution:** Replace with line breaks. Replace em-dashes with pauses and separate sentences.

@@ -28,22 +28,22 @@ CREATE TABLE conversations_encrypted (
 );
 ```
 
-
-
-
 **Purpose:** Store full conversations with all context, encrypted so only the authenticated user can read them.
 
 **Access Pattern:**
+
 - On user login: Decrypt recent conversations for context
 - On conversation storage: Encrypt and save with user's retention period
 - On daily cleanup: Delete where `expires_at < NOW()`
 - On GDPR deletion: Delete all rows where `user_id_hashed = X`
 
 **Retention Examples:**
+
 - expires_at = created_at + 7 days → Recent support (keep 1 week)
 - expires_at = created_at + 30 days → Default (keep 1 month)
 - expires_at = created_at + 90 days → Extended (keep 3 months)
 - expires_at = created_at + 365 days → Long-term (keep 1 year)
+
 ##
 
 ## Table: `dream_summaries`
@@ -74,9 +74,6 @@ CREATE TABLE dream_summaries (
 );
 ```
 
-
-
-
 **Purpose:** Store lightweight daily summaries that survive longer than full conversations.
 
 **Summary Contents (all encrypted):**
@@ -104,14 +101,13 @@ CREATE TABLE dream_summaries (
 }
 ```
 
-
-
-
 **Why Separate?**
+
 - Size: Summary is ~1KB vs full conversation ~10-50KB
 - Retention: Summaries kept 90-180 days, full conversations 7-30 days
 - Performance: Can load patterns without decrypting months of data
 - Privacy: Summaries can't reconstruct exact words, only patterns
+
 ##
 
 ## Table: `user_retention_preferences`
@@ -139,17 +135,16 @@ CREATE TABLE user_retention_preferences (
 );
 ```
 
-
-
-
 **Purpose:** User configuration for privacy and retention. Single record per user.
 
 **Retention Options:**
+
 - `7`: Short-term (week) - for highly sensitive users
 - `30`: Default (month) - standard personalization
 - `90`: Extended (quarter) - long-term pattern recognition
 - `365`: Long-term (year) - comprehensive history
 - `custom_N`: User-specified days (documented in field or separate table)
+
 ##
 
 ## Table: `audit_log_privacy`
@@ -181,21 +176,21 @@ CREATE TABLE audit_log_privacy (
 );
 ```
 
-
-
-
 **Purpose:** Compliance auditing for privacy operations.
 
 **Examples:**
+
 - "decrypt_conversation" - User read a past conversation
 - "delete_all" - User exercised right to be forgotten
 - "export_data" - User downloaded their data
 - "set_retention" - User changed retention preference
+
 ##
 
 ## Integration with Existing Tables
 
 ### `users` or `auth_users`
+
 When creating/updating a user, ensure `user_retention_preferences` is created:
 
 ```sql
@@ -203,9 +198,6 @@ INSERT INTO user_retention_preferences (user_id_hashed)
 VALUES (PBKDF2_HASH(user_id))
 ON CONFLICT DO NOTHING;
 ```
-
-
-
 
 ### Relationship Diagram
 
@@ -223,13 +215,12 @@ user_retention_preferences (retention settings, one per user)
 └── audit_log_privacy (all encryption/deletion events)
 ```
 
-
-
 ##
 
 ## Migration Path (From Current System)
 
 ### Phase 1: Add New Tables
+
 1. Create `conversations_encrypted` table
 2. Create `dream_summaries` table
 3. Create `user_retention_preferences` table
@@ -244,57 +235,65 @@ FROM conversations_encrypted
 WHERE user_id_hashed NOT IN (SELECT user_id_hashed FROM user_retention_preferences);
 ```
 
-
-
-
 ### Phase 3: Migrate Existing Conversations
+
 For each existing conversation:
+
 1. Decrypt current storage (if any)
 2. Re-encrypt with `EncryptionManager.encrypt_conversation()`
 3. Insert into `conversations_encrypted` with calculated `expires_at`
 4. Delete from old table after verification
 
 ### Phase 4: Enable Dream Engine
+
 1. Start daily summary generation at end-of-day
 2. Store summaries in `dream_summaries`
 3. Use summaries for context instead of loading all conversations
 
 ### Phase 5: Clean Up Old Storage
+
 1. Once all conversations migrated and verified
 2. Drop old conversation storage table
 3. Keep audit logs forever for compliance
+
 ##
 
 ## Privacy & Compliance Notes
 
 ### GDPR Compliance
+
 - **Right to Access:** User can export all decrypted data via `/user/data-export`
 - **Right to Deletion:** User can delete all data via `/user/data-delete`, triggers cleanup of all tables and creates audit record
 - **Data Minimization:** Only store what's needed for personalization + required retention
 - **Lawful Basis:** User consent (through retention settings), necessity (for service)
 
 ### CCPA Compliance
+
 - **Consumer Rights:** Delete request removes all rows with user_id_hashed
 - **Opt-Out:** User can set retention_days to 0 (immediate deletion after processing)
 - **Sale Prohibition:** Never sell user data
 - **Transparency:** Privacy policy explains storage and encryption
 
 ### HIPAA (if applicable)
+
 - **Encryption at Rest:** AES-256 with Fernet
 - **Encryption in Transit:** HTTPS only
 - **Access Controls:** Only user can decrypt with their password
 - **Audit Trail:** All access logged in audit_log_privacy
 
 ### State Wiretapping Laws
+
 - **Consent:** User opted-in to storage during onboarding
 - **Notice:** Privacy policy discloses storage and monitoring
 - **Termination:** User can delete at any time
 - **No Interception:** Data only stored after user submits, not intercepted
+
 ##
 
 ## Performance Considerations
 
 ### Indexing Strategy
+
 - Index on `(user_id_hashed, expires_at)` for cleanup queries
 - Index on `(user_id_hashed, date)` for dream summary retrieval
 - Index on `(user_id_hashed, action)` for audit queries
@@ -321,10 +320,8 @@ ORDER BY date DESC
 LIMIT 30;
 ```
 
-
-
-
 ### Storage Estimates
+
 - Full conversation: ~20KB encrypted (grows with length)
 - Dream summary: ~2KB encrypted (fixed size)
 - Per user per year:

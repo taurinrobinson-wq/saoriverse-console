@@ -73,9 +73,6 @@ result = processor.process_user_message(
 ```text
 ```
 
-
-
-
 ### 2. **DynamicGlyphEvolution** (`dynamic_glyph_evolution.py`)
 
 Handles the core glyph generation logic:
@@ -112,8 +109,6 @@ User: "I feel deeply seen and yet exposed"
 ```text
 ```
 
-
-
 ### Step 2: Signal Extraction (Adaptive)
 
 ```python
@@ -126,9 +121,6 @@ signals = extractor.extract_signals(combined_text)
 
 ```text
 ```
-
-
-
 
 ### Step 3: Hybrid Learning
 
@@ -150,8 +142,6 @@ learner.learn_from_exchange(
 ```text
 ```
 
-
-
 ### Step 4: Pattern Detection
 
 ```python
@@ -169,9 +159,6 @@ patterns = evolution._detect_patterns_in_exchange(
 
 ```text
 ```
-
-
-
 
 ### Step 5: Glyph Generation
 
@@ -194,8 +181,6 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 ```text
 ```
 
-
-
 ### Step 6: Glyph Integration
 
 ```python
@@ -211,9 +196,6 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 
 ```text
 ```
-
-
-
 
 ## Usage Examples
 
@@ -247,8 +229,6 @@ print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyp
 ```text
 ```
 
-
-
 ### Processing Multiple Turns
 
 ```python
@@ -275,9 +255,6 @@ summary = processor.get_conversation_summary(conversation_id)
 ```text
 ```
 
-
-
-
 ### Accessing Generated Glyphs
 
 ```python
@@ -300,8 +277,6 @@ user_glyphs = processor.evolution.get_conversation_glyphs(
 ```text
 ```
 
-
-
 ### Exporting Glyphs for System Use
 
 ```python
@@ -320,9 +295,6 @@ export_result = processor.evolution.export_glyphs_for_system(
 
 ```text
 ```
-
-
-
 
 ### Session Summary
 
@@ -359,8 +331,6 @@ processor.print_session_summary()
 ```text
 ```
 
-
-
 ## Configuration
 
 ### Minimum Frequency for Glyph Creation
@@ -373,9 +343,6 @@ evolution = DynamicGlyphEvolution(
 
 ```text
 ```
-
-
-
 
 ### Emotion-Symbol Mapping
 
@@ -392,8 +359,6 @@ evolution.emotion_symbols = {
 ```text
 ```
 
-
-
 ### Pattern Detection Tuning
 
 Adjust keywords and thresholds in `_detect_patterns_in_exchange()`:
@@ -409,9 +374,6 @@ signal_keywords = {
 
 ```text
 ```
-
-
-
 
 ## Lexicon Expansion
 
@@ -430,8 +392,6 @@ After poetry processing: 18+ adaptive dimensions
 ```text
 ```text
 ```
-
-
 
 ## Quality & Safety
 
@@ -453,9 +413,6 @@ is_quality, reason = learner._is_quality_exchange(
 
 ```text
 ```
-
-
-
 
 ### User Trust Scoring
 
@@ -489,8 +446,6 @@ learning/
 ```text
 ```
 
-
-
 ## Metrics & Monitoring
 
 Track evolution progress:
@@ -522,9 +477,6 @@ for glyph in top_glyphs:
 ```text
 ```
 
-
-
-
 ## Next Steps
 
 1. **Database Integration**: Export glyphs to system database
@@ -541,11 +493,13 @@ for glyph in top_glyphs:
 **Problem**: Running many conversations but no new glyphs are created.
 
 **Causes**:
+
 - Patterns not meeting frequency threshold (default: 300)
 - Signals not being extracted properly
 - Same signal pairs repeating (need new combinations)
 
 **Solutions**:
+
 - Lower `min_frequency_for_glyph` threshold
 - Check signal extraction: `processor.evolution._load_lexicon()`
 - Add more diverse conversation topics
@@ -555,6 +509,7 @@ for glyph in top_glyphs:
 **Problem**: Glyphs generated but not persisting.
 
 **Check**:
+
 - Verify `learning/` directory exists and is writable
 - Check logs: `tail -f learning/hybrid_learning_log.jsonl`
 - Ensure JSON serialization: `processor.export_session_glyphs("test.json")`
@@ -564,6 +519,7 @@ for glyph in top_glyphs:
 **Problem**: Signals not matching user input.
 
 **Solutions**:
+
 - Verify adaptive extractor is initialized
 - Check lexicon has signal definitions
 - Test extraction: `extractor.extract_signals("your text")`
@@ -586,9 +542,6 @@ class CustomGlyphEvolution(DynamicGlyphEvolution):
 evolution = CustomGlyphEvolution(hybrid_learner)
 processor = HybridProcessorWithEvolution(..., evolution)
 ```
-
-
-
 
 ## References
 

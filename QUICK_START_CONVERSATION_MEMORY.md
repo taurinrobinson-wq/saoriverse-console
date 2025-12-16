@@ -3,6 +3,7 @@
 **Effort:** 45 minutes
 **Impact:** Huge (context-aware responses, no repeated questions)
 **Risk:** Very low (backward compatible, can revert easily)
+
 ##
 
 ## The Problem It Solves
@@ -25,11 +26,13 @@ System: "Tell me more about your projects." ← REPEATED!
 ```text
 ```text
 ```
+
 User: "I'm stressed about work"
 System: "I hear the weight of that stress."
 User: "I have 5 projects due Thursday"
 System: "So 5 competing priorities with one hard deadline...
          Which of these is most urgent?" ← SPECIFIC, NO REPEAT
+
 ```
 
 
@@ -58,7 +61,6 @@ System: "So 5 competing priorities with one hard deadline...
 ```text
 ```text
 ```
-
 
 ##
 
@@ -123,8 +125,6 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
 
 ```text
 ```
-
-
 
 ##
 
@@ -245,8 +245,6 @@ if __name__ == "__main__":
 ```text
 ```
 
-
-
 **Run the test:**
 
 ```powershell
@@ -255,9 +253,6 @@ cd d:\saoriverse-console
 
 ```text
 ```
-
-
-
 
 **Expected output:**
 
@@ -276,9 +271,11 @@ cd d:\saoriverse-console
 📝 TURN 3: 'I have 5 projects due Thursday'
    Confidence: 0.95
    Response: Work has flooded your mind with 5 distinct priorities...
+
 #
 
 # VALIDATION
+
 ✅ Confidence increased from T1 to T2
 ✅ Memory-aware response generated
 ✅ Response references context
@@ -308,11 +305,13 @@ Passed: 3/3
    - ✅ Response #3 mentions specific projects
 
 4. **Watch the logs** (check terminal output):
+
    ```
    Memory turn added. Confidence: 0.70
    Memory turn added. Confidence: 0.85
    ✅ Used memory-informed response
    ```
+
 ##
 
 ## Rollback Plan (If Something Goes Wrong)
@@ -320,6 +319,7 @@ Passed: 3/3
 If memory integration causes issues:
 
 1. **Comment out memory code** in `_build_conversational_response()`:
+
    ```python
    # if memory and memory._state.emotional_profile.confidence > 0.75:
    #     try:
@@ -327,16 +327,19 @@ If memory integration causes issues:
    ```
 
 2. **Or remove from session init** in `ui_refactored.py`:
+
    ```python
    # st.session_state.conversation_memory = ConversationMemory()
    ```
 
 The app will fall back to the original behavior (voltage response).
+
 ##
 
 ## How to Know It's Working
 
 ### Signs of Success ✅
+
 - Console shows: `Memory turn added. Confidence: 0.XX`
 - Console shows: `✅ Used memory-informed response`
 - User sees context-aware responses (not generic)
@@ -344,19 +347,23 @@ The app will fall back to the original behavior (voltage response).
 - Response quality improves turn-by-turn
 
 ### Signs of Problems ❌
+
 - Console shows errors from `conversation_memory` module
 - Responses look the same as before
 - Questions repeat across turns
 - App crashes or times out
+
 ##
 
 ## What This Integration Enables
 
 Once working, you unlock:
+
 1. **ConversationMemory** - Multi-turn context ✅
 2. **Implicit Learning** - Can add `LexiconLearner` feedback next (20 min)
 3. **Presence Layer** - Can integrate Attunement + Embodiment (2-3 hours)
 4. **Saori + Tension** - Advanced features (4-6 hours)
+
 ##
 
 ## Next Steps After This Works
@@ -364,12 +371,15 @@ Once working, you unlock:
 1. ✅ **Celebrate** - You just connected your first advanced module!
 2. ⏭️ **Add LexiconLearner** (20 min extra) - Implicit learning feedback
 3. ⏭️ **Then Tier 2** - Presence layer (attunement, embodiment)
+
 ##
 
 ## Troubleshooting
 
 ### Issue: "ConversationMemory not found"
+
 **Solution:** Make sure module is in `src/emotional_os_glyphs/conversation_memory.py`
+
 ```powershell
 
 
@@ -379,8 +389,8 @@ Test-Path src/emotional_os_glyphs/conversation_memory.py
 ```text
 ```
 
-
 ### Issue: "compose_response_with_memory() not found"
+
 **Solution:** Module might need reload. Restart Streamlit:
 
 ```powershell
@@ -393,9 +403,12 @@ streamlit run app.py
 ```
 
 ### Issue: "Memory confidence stays at 0.7"
+
 **Solution:** Confidence only increases if new information is detected. Try:
+
 - "I'm stressed" → "It's about work specifically" (adds domain)
 - "Work is busy" → "5 projects, all due Thursday" (adds specificity)
+
 ##
 
 ## Files to Backup Before Starting
@@ -413,7 +426,6 @@ Copy-Item "src/emotional_os/deploy/modules/ui_components/response_handler.py" "r
 
 ```text
 ```
-
 
 Then if anything goes wrong:
 

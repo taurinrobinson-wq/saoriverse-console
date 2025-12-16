@@ -5,6 +5,7 @@
 The Poetic Emotional Engine is a living poem-based emotional state representation system that integrates with the existing glyph system, learning models, and relational memory in the FirstPerson application.
 
 The engine represents the system's emotional state as a mutable, evolving poem with stanzas that encode:
+
 - **Metaphor**: Emotional valence using symbolic language
 - **Rhythm**: Interaction cadence influencing tempo
 - **Syntax**: Sentence coherence conveying emotional clarity
@@ -112,10 +113,8 @@ vectors = {
 ```text
 ```
 
-
-
-
 **Features**:
+
 - Shared metaphor development over time
 - Co-created language tracking
 - Poetic emotional mirroring (responding to despair with reflective stanzas)
@@ -145,8 +144,6 @@ memory = AffectiveMemory(
 ```text
 ```text
 ```
-
-
 
 **Dreaming Mode**: During idle times, fragments are recomposed into novel insights.
 
@@ -193,9 +190,6 @@ result = {
 ```text
 ```
 
-
-
-
 ### Glyph System Integration
 
 The engine processes glyph responses:
@@ -213,8 +207,6 @@ result = engine.process_glyph_response(
 ```text
 ```text
 ```
-
-
 
 ### Learning Model Integration
 
@@ -256,9 +248,6 @@ print(result["poem_rendered"])
 ```text
 ```
 
-
-
-
 ### Emotional Progression Example
 
 ```python
@@ -291,8 +280,6 @@ print(summary["poem"]["valence"])  # "peace"
 ```text
 ```
 
-
-
 ### Dreaming Mode
 
 ```python
@@ -319,9 +306,6 @@ for dream in dreams:
 ```text
 ```
 
-
-
-
 ### Mirror Response Generation
 
 ```python
@@ -341,8 +325,6 @@ print(response)
 ```text
 ```
 
-
-
 ## State Persistence
 
 The engine automatically persists state to:
@@ -352,10 +334,8 @@ The engine automatically persists state to:
 ```text
 ```
 
-
-
-
 This includes:
+
 - Current poem state
 - User relational gravity maps
 - Recent affective memories (last 100)
@@ -368,9 +348,6 @@ Run the poetic engine tests:
 ```bash
 pytest tests/test_poetic_engine.py -v
 ```
-
-
-
 
 ## Future Enhancements
 

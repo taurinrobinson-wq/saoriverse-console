@@ -1,6 +1,7 @@
 # SYSTEM STATUS: Visual Summary
 
 **Your Emotional OS System Architecture - December 4, 2025**
+
 ##
 
 ## 🏗️ CURRENT ARCHITECTURE
@@ -18,7 +19,7 @@
 │  ┌──────────────────────────────────────────────────────┐  │
 │  │ handle_response_pipeline()                           │  │
 │  │                                                      │  │
-│  │  ✅ _run_local_processing()                         │  │
+│  │  ✅_run_local_processing()                         │  │
 │  │     ├─ signal_parser.parse_input()                  │  │
 │  │     │  └─ Detect signals + lookup glyph            │  │
 │  │     │                                                │  │
@@ -28,7 +29,7 @@
 │  │                                                      │  │
 │  │  ✅ _apply_fallback_protocols() [safety]            │  │
 │  │  ✅ strip_prosody_metadata()                        │  │
-│  │  ✅ _prevent_response_repetition()                  │  │
+│  │  ✅_prevent_response_repetition()                  │  │
 │  └──────────────────────────────────────────────────────┘  │
 └────────────────────────┬────────────────────────────────────┘
                          │
@@ -46,7 +47,9 @@
 ```text
 ```text
 ```
+
 Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Output
+
 ```
 
 
@@ -91,6 +94,7 @@ GenerativeTension ❌
 ```text
 ```text
 ```
+
 ┌────────────────────────────────────┐
 │  ConversationMemory                │  ⭐ Huge impact
 │  ├─ Multi-turn context tracking    │     Low risk
@@ -104,6 +108,7 @@ GenerativeTension ❌
 │  ├─ User vocabulary expansion      │
 │  └─ Improved accuracy over time    │
 └────────────────────────────────────┘
+
 ```
 
 
@@ -130,6 +135,7 @@ GenerativeTension ❌
 ```text
 ```text
 ```
+
 ┌────────────────────────────────────┐
 │  Saori Layer                       │  ⭐ Poetic understanding
 │  ├─ MirrorEngine (creative invert) │     Higher complexity
@@ -144,6 +150,7 @@ GenerativeTension ❌
 │  ├─ SubversionEngine               │
 │  └─ CreationEngine                 │
 └────────────────────────────────────┘
+
 ```
 
 
@@ -170,13 +177,13 @@ GenerativeTension ❌
 ```text
 ```text
 ```
+
 TIER 1 (After 45 min)
 ──────────────────────────────────────────────────
 User feels: ✅ Understood (context builds)
            ❌ Not yet "alive"
 Response quality: Good → Better
 Example: "Work has flooded your mind..."
-
 
 TIER 2 (After 3-4 hrs)
 ──────────────────────────────────────────────────
@@ -185,7 +192,6 @@ User feels: ✅ Understood + Adaptive
 Response quality: Better → Excellent
 Example: Response tone/texture varies with pacing
 
-
 TIER 3 (After 6-8 hrs)
 ──────────────────────────────────────────────────
 User feels: ✅ Deeply understood + Dynamic + Personal
@@ -193,13 +199,13 @@ User feels: ✅ Deeply understood + Dynamic + Personal
 Response quality: Excellent → Exceptional
 Example: "Broken? That's your opening..." (creative reframe)
 
-
 TIER 4 (After 2-3 hrs + backend)
 ──────────────────────────────────────────────────
 User feels: ✅ Remembered across sessions
            ✅ System knows emotional journey
 Response quality: Exceptional (with continuity)
 Example: "Last time we spoke, you were struggling with..."
+
 ```
 
 
@@ -241,6 +247,7 @@ NOW (Today)
 ```text
 ```text
 ```
+
 IMPACT
   │
   │     ⭐ Tier 3
@@ -252,6 +259,7 @@ IMPACT
   │         \/        \/─────────
   └────────────────────────────────── EFFORT
         0h    2h    4h    6h    8h
+
 ```
 
 
@@ -287,8 +295,10 @@ IMPACT
 ```text
 ```text
 ```
+
 ⚠️  ConversationMemory (methods exist but not used)
 ⚠️  LexiconLearner (methods exist but not used)
+
 ```
 
 
@@ -312,6 +322,7 @@ IMPACT
 ```text
 ```text
 ```
+
 EASY TO CONNECT                   HARD TO CONNECT
 ├─ ConversationMemory             ├─ SaoriLayer
 ├─ LexiconLearner                 ├─ Temporal Memory
@@ -328,6 +339,7 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 │                     │                     │
 ├─ Tier 2             └─ Tier 3+            └─ Full system refactor
 │  (optional)
+
 ```
 
 
@@ -361,6 +373,7 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 ```
 
 IMMEDIATE (Today)
+
 1. EVALUATION_SUMMARY.md         ⭐⭐⭐ START HERE
 2. QUICK_START_CONVERSATION_MEMORY.md  ⭐⭐⭐
 
@@ -389,8 +402,10 @@ REFERENCE (As Needed)
 ```text
 ```text
 ```
+
 Read: EVALUATION_SUMMARY.md
 Then: Know what to do next
+
 ```
 
 
@@ -413,9 +428,11 @@ Test: Verify it works
 ```text
 ```text
 ```
+
 Read: EVALUATION_SUMMARY.md
 Code: CODE_CHANGES_READY_TO_COPY.md
 Test: Run test_quick_integration.py
+
 ```
 
 
@@ -459,6 +476,7 @@ Test: Run full test
 ```sql
 ```sql
 ```
+
 TODAY                          4 WEEKS FROM NOW
 
 Single voice          →        Multiple archetypal modes
@@ -469,6 +487,7 @@ Forgetful             →        Emotionally remembering
 Analytical            →        Poetically understood
 Static energy         →        Dynamic presence with cycles
 No learning           →        Learns user's language
+
 ```
 
 

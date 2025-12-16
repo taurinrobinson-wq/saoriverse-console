@@ -12,17 +12,12 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 ```text
 ```
 
-
-
 ### 2. Install Dependencies
 
 ```bash
 
 ```text
 ```
-
-
-
 
 - **axios** - HTTP client for API calls
 - **zustand** - State management (lightweight alternative to Redux)
@@ -36,17 +31,12 @@ Create `.env.local`:
 ```text
 ```
 
-
-
 For production (Railway):
 
 ```
 
 ```text
 ```
-
-
-
 
 ### 4. Project Structure
 
@@ -78,11 +68,10 @@ velinor-web/
 ```text
 ```
 
-
-
 ### 5. Key Files to Create
 
 See the companion files:
+
 - `app.tsx` - Root component
 - `GameScene.tsx` - Main game UI with overlays
 - `api.ts` - API client hooks
@@ -107,9 +96,6 @@ npm run dev
 ```text
 ```
 
-
-
-
 ### 7. Deployment to Railway
 
 See `RAILWAY_DEPLOYMENT.md` for full setup.
@@ -126,8 +112,6 @@ git push origin main
 ```text
 ```text
 ```
-
-
 
 ## API Contract
 
@@ -146,9 +130,6 @@ POST /api/game/start
 ```text
 ```
 
-
-
-
 ### Take Action
 
 ```
@@ -161,8 +142,6 @@ POST /api/game/{session_id}/action
 ```text
 ```text
 ```
-
-
 
 ### Game State Structure
 
@@ -187,12 +166,10 @@ POST /api/game/{session_id}/action
 ```text
 ```
 
-
-
-
 ## Frontend Architecture
 
 ### Layers
+
 1. **Background** - Full-width scene image
 2. **Overlays** - Dust, fog, glyphs (semi-transparent PNGs)
 3. **Narration Box** - Text overlay at top
@@ -255,27 +232,30 @@ POST /api/game/{session_id}/action
 </div>
 ```
 
-
-
-
 ## Customization
 
 ### Change Colors/Fonts
+
 Edit `styles/globals.css` and component styles.
 
 ### Add New Overlays
+
 1. Create PNG with transparency
 2. Place in `public/assets/overlays/`
 3. Reference in scene JSON: `"overlay": "dust.png"`
 
 ### Adjust Button Positions
+
 Modify `ChoiceButtons.tsx` - use `style={{ bottom: '...', left: '...' }}` to position.
 
 ### Add Sound/Music
+
 Use HTML5 `<audio>` or `Howler.js` library.
+
 ##
 
 **Next Steps:**
+
 1. Run `npm install` and `npm run dev`
 2. See `GameScene.tsx` for rendering logic
 3. Modify `styles/globals.css` for theme

@@ -8,9 +8,8 @@ cd /workspaces/saoriverse-console
 ```text
 ```
 
-
-
 Then open your browser to the provided URL (usually `http://localhost:8501`).
+
 ##
 
 ## 📖 What You'll See
@@ -43,34 +42,42 @@ Then open your browser to the provided URL (usually `http://localhost:8501`).
    - Learn to navigate the marketplace
    - Map mechanics explained
    - Final dialogue choice
+
 ##
 
 ## 🎮 Controls
 
 **In-Scene:**
+
 - **Continue** button: advances through scene states
 - **Dialogue Option buttons**: select your response
 - **Next/Previous buttons** (sidebar): skip between scenes
 
 **Sidebar:**
+
 - **Player Stats**: name and NPC trust percentages
 - **Scene Navigation**: current position in sequence
 - **Dialogue History**: expandable, shows all choices made
+
 ##
 
 ## 📊 Understanding the System
 
 ### Scene States
+
 Each scene progresses through: **DISTANT** → **APPROACH** → **CLOSE** → **DIALOGUE** → **CHOICES**
 
 ### Trust System
+
 - **Initial**: Ravi starts at 0%, Nima at 0%
 - **Per Choice**: +5% to +25% depending on option
 - **Maximum**: 100%
 - **Effect**: (Higher trust unlocks deeper dialogue later)
 
 ### Glyphs
+
 Emotional resonance indicators that appear below narration:
+
 - `[Esḧ]` = Sacred witness
 - `[Cinarä̈]` = Invoked beloved
 - `[Brethielï̈]` = Breath as guide
@@ -79,23 +86,28 @@ Emotional resonance indicators that appear below narration:
 - `[Querrä]` = Inquiry
 - `[Ruuñ]` = Collapse
 - `[Sha'rú]` = Repair/Adaptation
+
 ##
 
 ## 🖼️ What You Need to Add
 
 ### Background Images
+
 Create these in `velinor/backgrounds/`:
+
 - `marketplace_intact_distant.png` - Far view of marketplace
 - `marketplace_intact_close.png` - Close-up of marketplace
 - `marketplace_collapsed_close.png` - After collapse
 
 ### Foreground Images (NPCs)
+
 - `ravi_distant.png` - Ravi far away (small, low opacity)
 - `ravi_close.png` - Ravi nearby (larger, full opacity)
 - `nima_distant.png` - Nima far away
 - `nima_close.png` - Nima nearby
 
 **Note:** Right now the app uses placeholder paths. Images are optional for testing the flow.
+
 ##
 
 ## 🔧 Adding New Scenes
@@ -151,10 +163,8 @@ def get_sequence() -> List[SceneModule]:
 ```text
 ```
 
-
-
-
 Then restart the test app and navigate to your new scene!
+
 ##
 
 ## 📚 Documentation Files
@@ -168,26 +178,32 @@ After running scenes, check these design docs to understand the system deeper:
 - **05_npc_reaction_library.md** - Reusable dialogue banks
 
 Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
+
 ##
 
 ## 🐛 Troubleshooting
 
 **"Image not found" warnings:**
+
 - This is normal if you haven't created the PNG assets yet
 - The app still works; it just shows text
 
 **Scenes not advancing:**
+
 - Click "Continue" button to move between states
 - Once at "CHOICES" state, click a dialogue option
 
 **Trust not updating:**
+
 - Trust only updates when you select a dialogue option
 - Check sidebar stats after making a choice
 - Different NPCs have different trust modifiers
 
 **Dialogue history empty:**
+
 - History only records choices from dialogue options
 - Auto-advance scenes (intro) don't add to history
+
 ##
 
 ## 📖 Next Steps
@@ -216,29 +232,35 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
    - Import scene system into `velinor_app.py`
    - Create marketplace chapter/quest that uses scenes
    - Display player choices' effects on later story
+
 ##
 
 ## 💡 Pro Tips
 
 **For Quick Testing:**
+
 - Use `Previous/Next` buttons in sidebar to jump between scenes
 - Check sidebar stats to see real-time trust changes
 - Review dialogue history to see all your choices
 
 **For Content Development:**
+
 - Write multiple dialogue variants for each NPC response
 - Use trust modifiers strategically (high trust for insight, low for testing)
 - Glyphs should match emotional tone of the scene
 
 **For Visual Design:**
+
 - Keep background perspectives consistent between distant/close
 - Show clear depth (distance) in distant images, detail in close
 - Use lighting/atmosphere to set mood
 
 **For Story Design:**
+
 - Each scene should have 2-4 player options (not 1, too linear; not 5+, overwhelming)
 - Options should feel meaningfully different
 - Consequences (trust changes) should be visible and matter
+
 ##
 
 ## 🎯 Quick Reference
@@ -250,17 +272,15 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
 | `velinor/engine/marketplace_scenes.py` | 5-scene marketplace sequence |
 | `velinor/markdowngameinstructions/01-05_*.md` | Design documentation |
 | `velinor/IMPLEMENTATION_SUMMARY.md` | Full technical documentation |
+
 ##
 
-## ✨ You're Ready!
+## ✨ You're Ready
 
 Everything is built and committed to git. Just:
 
 ```bash
 streamlit run velinor_scenes_test.py
 ```
-
-
-
 
 Have fun exploring the marketplace! 🎮

@@ -8,10 +8,12 @@
 ### The Core Innovation
 
 Instead of returning standardized fallback messages when no glyph matches, the system now:
+
 1. **Detects** that emotional territory is unmapped
 2. **Generates** appropriate new glyphs in real-time
 3. **Trains** through responses that subtly reinforce patterns
 4. **Learns** globally (shared database) while maintaining per-user experience segregation
+
 ##
 
 ## Architecture: Three Core Layers
@@ -21,6 +23,7 @@ Instead of returning standardized fallback messages when no glyph matches, the s
 **Purpose**: Generate new glyphs when signal detection finds no existing match
 
 **What it does**:
+
 - Analyzes emotional language patterns in user input
 - Finds semantically similar existing glyphs
 - Generates candidate glyph with name, description, signal mapping, gates
@@ -48,8 +51,6 @@ promote_candidate_to_production(glyph_name)
 ```text
 ```
 
-
-
 **Example Flow**:
 
 ```
@@ -69,8 +70,6 @@ GlyphLearner.analyze_input_for_glyph_generation()
 ```text
 ```
 
-
-
 ##
 
 ### Layer 2: Learning Response Generator (`learning_response_generator.py`)
@@ -80,6 +79,7 @@ GlyphLearner.analyze_input_for_glyph_generation()
 **The Key Insight**: Responses ARE the training. Users never know they're teaching the system.
 
 **What it does**:
+
 - Selects emotional tone-appropriate response template
 - Inserts key emotional terms to reinforce language patterns
 - Adds implicit validation prompts (subtle feedback gathering)
@@ -101,8 +101,6 @@ GlyphLearner.analyze_input_for_glyph_generation()
 ```text
 ```text
 ```
-
-
 
 **Example Response**:
 
@@ -127,9 +125,6 @@ What this does:
 ```text
 ```
 
-
-
-
 **Key Functions**:
 
 ```python
@@ -147,7 +142,6 @@ create_training_response(glyph_candidate, original_input, signals, emotional_ana
 ```text
 ```
 
-
 ##
 
 ### Layer 3: Shared Glyph Manager (`shared_glyph_manager.py`)
@@ -155,6 +149,7 @@ create_training_response(glyph_candidate, original_input, signals, emotional_ana
 **Purpose**: Manage global glyph learning while maintaining user segregation
 
 **The Architecture Problem Solved**:
+
 - All users contribute to ONE shared glyph database
 - Each user sees a personalized experience
 - No user gets the same standardized response
@@ -162,7 +157,7 @@ create_training_response(glyph_candidate, original_input, signals, emotional_ana
 
 **How It Works**:
 
-#### Database Schema:
+#### Database Schema
 
 ```
 
@@ -199,10 +194,7 @@ emotional_territory (coverage mapping)
 ```text
 ```
 
-
-
-
-#### User Segregation (The Key Innovation):
+#### User Segregation (The Key Innovation)
 
 **NOT per-user databases. ONE shared database, but different query results per user.**
 
@@ -225,8 +217,6 @@ get_glyphs_for_user(user_hash="user_002", emotional_signal="β", gates=["Gate 4"
 ```text
 ```text
 ```
-
-
 
 **Key Functions**:
 
@@ -258,13 +248,11 @@ get_system_health_report()
 ```text
 ```
 
-
-
 ##
 
 ## Integration with Existing System
 
-### Current Flow (Phase 1):
+### Current Flow (Phase 1)
 
 ```
 User Input
@@ -277,9 +265,7 @@ User Input
 ```text
 ```
 
-
-
-### New Flow (Phase 2):
+### New Flow (Phase 2)
 
 ```
 
@@ -311,8 +297,6 @@ User Input
 ```text
 ```
 
-
-
 ##
 
 ## How It Trains Without Being Obvious
@@ -330,6 +314,7 @@ User Input
 ### Pattern 2: Implicit Feedback Gathering
 
 Responses end with validation prompts:
+
 - "Does that land?" → Gathering validation
 - "What would it feel like to..." → Gathering depth
 - "When you feel known, what opens?" → Gathering relevance
@@ -340,12 +325,14 @@ System learns which responses lead to user engagement
 ### Pattern 3: Response Structure as Training
 
 Gate mapping (voltage intensity) is encoded in response tone:
+
 - Gate 1-3 (low intensity) → gentle, reflective language
 - Gate 4-6 (medium) → balanced, honest language
 - Gate 7-9 (high intensity) → transformative, necessary language
 
 User receives response calibrated to emotional intensity
 Over time, system learns which intensity levels match which glyphs
+
 ##
 
 ## Database Updates During Learning
@@ -392,8 +379,6 @@ UPDATE emotional_territory
 ```text
 ```
 
-
-
 Later, when User 002 experiences similar emotion:
 
 ```python
@@ -417,8 +402,6 @@ promote_candidate_to_production("Fractured Identity")
 ```text
 ```
 
-
-
 ##
 
 ## Coverage Gap Identification
@@ -441,9 +424,8 @@ Recommendations:
 ```text
 ```
 
-
-
 This guides the next round of glyph generation.
+
 ##
 
 ## User Experience Segregation (Concrete Example)
@@ -479,8 +461,6 @@ SYSTEM'S EXPERIENCE:
 ```text
 ```
 
-
-
 ##
 
 ## Next Immediate Steps
@@ -507,12 +487,10 @@ def parse_input(text, user_hash):
         return response
 ```
 
-
-
-
 ### 2. Test with Previously-Unmapped Messages
 
 Use test_glyph_learning_pipeline.py to validate:
+
 - ✅ New glyphs generate correctly
 - ✅ Responses train without being obvious
 - ✅ Shared database records properly
@@ -521,6 +499,7 @@ Use test_glyph_learning_pipeline.py to validate:
 ### 3. Build Admin Dashboard
 
 Show:
+
 - Coverage map (which territories are weak)
 - Recommendations for next glyphs
 - Adoption patterns (which glyphs spreading fastest)
@@ -529,10 +508,12 @@ Show:
 ### 4. Implement User Feedback Loop
 
 Implicit feedback gathering through:
+
 - Response engagement metrics
 - Follow-up message analysis
 - Emotional tone escalation/de-escalation
 - Glyph quality rating (thumbs up/down if UI allows)
+
 ##
 
 ## Philosophy
@@ -543,6 +524,7 @@ Implicit feedback gathering through:
 **The system learns through authentic emotional communication.**
 
 This is how a system evolves from "finding answers" to "learning from experience."
+
 ##
 
 ## Files Created
@@ -553,6 +535,7 @@ This is how a system evolves from "finding answers" to "learning from experience
 4. **test_glyph_learning_pipeline.py** - Full pipeline demonstration
 
 All integrate with existing:
+
 - signal_parser.py (signal detection)
 - signal_lexicon.json (emotional vocabulary)
 - glyphs.db (glyph database)
