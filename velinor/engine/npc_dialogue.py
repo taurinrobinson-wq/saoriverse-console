@@ -45,6 +45,8 @@ LEXICONS = {
         "description": "Thief + Potential Redeemer — cunning but conflicted",
         "empathy_high": ["redeem", "listen", "share", "connect", "heal"],
         "empathy_low": ["scheme", "trick", "steal", "deceive", "exploit"],
+        "skepticism_high": ["doubt", "whisper", "hidden", "mask", "shadow"],
+        "skepticism_low": ["open", "plain", "clear", "direct", "honest"],
         "need_high": ["help", "support", "understand", "accept", "belong"],
         "need_low": ["survive alone", "take what's mine", "trust no one", "self-reliant"],
         "trust_high": ["faith", "belief", "alliance", "bond"],
@@ -109,6 +111,18 @@ LEXICONS = {
         "authority_low": ["defer to", "bow to", "follow orders", "take direction"],
         "memory_high": ["never forget a favor", "remember every debt", "hold grudges long"],
         "memory_low": ["let it pass", "forgive", "move on", "forget"]
+    },
+    
+    "Captain Veynar": {
+        "description": "Guard Captain — weary authority, scarred by justice",
+        "authority_high": ["law", "duty", "command", "justice", "order"],
+        "authority_low": ["doubt", "strain", "weariness", "shadow", "burden"],
+        "resolve_high": ["stand firm", "unyielding", "steel", "guard", "defend"],
+        "resolve_low": ["hesitate", "fragile", "uncertain", "crack", "falter"],
+        "memory_high": ["never forget", "learned hard", "know the cost", "recall"],
+        "memory_low": ["lose track", "overlook", "forget", "miss"],
+        "empathy_high": ["understand", "shoulder", "recognize", "honor"],
+        "empathy_low": ["dismiss", "overlook", "ignore", "pass by"]
     }
 }
 
@@ -167,6 +181,12 @@ def apply_temperament(npc_name: str, text: str, remnants: Dict[str, float]) -> s
             return f"{text}, mon cher — a deal is a deal."
         else:
             return f"{text}, mon cher — but shadows linger."
+    
+    elif npc_name == "Captain Veynar":
+        if remnants.get("resolve", 0.8) > 0.75:
+            return f"{text}. His voice is steady, scarred by years of duty."
+        else:
+            return f"{text}. His voice carries the weight of impossible choices."
     
     else:
         return text
