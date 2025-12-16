@@ -145,7 +145,9 @@ User (Browser) ↓ Frontend: Next.js
 4. **Deploy to Production**
 
    ```bash
+
 git add . git commit -m "Velinor web stack complete" git push origin main
+
    ```
 
    - Railway auto-deploys on push

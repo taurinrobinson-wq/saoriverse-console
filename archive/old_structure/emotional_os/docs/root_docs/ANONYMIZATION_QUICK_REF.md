@@ -3,6 +3,7 @@
 ## What Was Built
 
 **3-Layer Privacy Protection System**:
+
 1. **Gate-Based Masking** (Always active) - Raw data never stored, signals only
 2. **Intelligent Anonymization** (When enabled) - Names/dates/locations/medical → glyphs
 3. **Consent-Based De-Anonymization** (You control) - User chooses sharing preferences
@@ -40,9 +41,6 @@ docs/INTEGRATION_COMPLETE.md (NEW)
 └─ Integration guide & deployment checklist
 ```
 
-
-
-
 ## How to Use
 
 ### In Code (Python)
@@ -68,9 +66,6 @@ result = learner.learn_from_exchange(
 # Stored as: "The Thread said I'm the Depths"
 ```
 
-
-
-
 ### In UI (Streamlit)
 
 ```python
@@ -86,10 +81,8 @@ if consent:
     print(f"Sharing: {consent['sharing']}")
 ```
 
-
-
-
 ### User Experience
+
 1. Type message in chat
 2. Get response
 3. **Consent widget appears:**
@@ -111,6 +104,7 @@ if consent:
 ## What Gets Stored
 
 ### ✅ YES (Safe to Store)
+
 - Emotional signals: `["struggle", "vulnerability"]`
 - Gates: `["Gate 4", "Gate 6"]`
 - Glyphs: `["Recursive Grief"]`
@@ -119,6 +113,7 @@ if consent:
 - Anonymization map ID: (for reversal if needed)
 
 ### ❌ NO (Never Stored)
+
 - Raw user input
 - AI response content
 - Real names
@@ -149,18 +144,12 @@ HybridLearnerWithUserOverrides(
 )
 ```
 
-
-
-
 ### Per-User Override (in Streamlit)
 
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
 ```
-
-
-
 
 ## Troubleshooting
 
@@ -191,18 +180,12 @@ streamlit run main_v2.py
 # Make a query and look for consent widget
 ```
 
-
-
-
 ## Key Commits
 
 ```
 23abf3d - Full integration of anonymization protocol
 4be4a05 - Intelligent anonymization protocol implementation
 ```
-
-
-
 
 ## Documentation Links
 
@@ -217,6 +200,7 @@ streamlit run main_v2.py
 >
 > This system preserves emotional truth while protecting personal truth.
 > The glyphs aren't abstractions; they're doors to deeper feeling.
+
 ##
 
 **Status**: ✅ Production Ready | **Version**: 1.0 | **Compliant**: HIPAA, GDPR, CCPA

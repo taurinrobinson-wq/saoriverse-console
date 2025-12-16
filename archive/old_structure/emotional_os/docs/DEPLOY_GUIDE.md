@@ -8,17 +8,11 @@
 npm install -g @railway/cli
 ```
 
-
-
-
 ### 2. Login to Railway
 
 ```powershell
 railway login
 ```
-
-
-
 
 ### 3. Initialize Project
 
@@ -29,9 +23,6 @@ railway init
 # Project name: firstperson-chat
 ```
 
-
-
-
 ### 4. Set Environment Variables
 
 ```powershell
@@ -41,19 +32,14 @@ railway variables set SUPABASE_AUTH_URL="your_auth_function_url"
 railway variables set CURRENT_SAORI_URL="your_saori_url"
 ```
 
-
-
-
 ### 5. Deploy
 
 ```powershell
 railway up
 ```
 
-
-
-
 ### 6. Add Custom Domain
+
 1. Go to [Railway Dashboard](https://railway.app/dashboard)
 2. Click your project → Settings → Domains
 3. Add custom domain: `firstperson.chat`
@@ -61,6 +47,7 @@ railway up
    - **Type**: CNAME
    - **Name**: @ (root domain) or www
    - **Value**: [Railway will provide this]
+
 ##
 
 ## Alternative: Deploy with Vercel
@@ -71,25 +58,17 @@ railway up
 npm install -g vercel
 ```
 
-
-
-
 ### 2. Deploy
 
 ```powershell
 vercel --prod
 ```
 
-
-
-
 ### 3. Add Domain
 
 ```powershell
 vercel domains add firstperson.chat
 ```
-
-
 
 ##
 
@@ -114,6 +93,7 @@ vercel domains add firstperson.chat
 ## Environment Variables Needed
 
 Your Supabase configuration from `main_v2.py`:
+
 - `SUPABASE_URL`
 - `SUPABASE_KEY`
 - `SUPABASE_AUTH_URL` (auth function endpoint)

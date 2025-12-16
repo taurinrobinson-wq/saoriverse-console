@@ -1,4 +1,5 @@
 # !/usr/bin/env python3
+
 """ PHASE 2 QUICK REFERENCE CARD
 
 One-page summary of everything you need to know to integrate and use the real-time glyph learning
@@ -73,7 +74,7 @@ best_glyph, response = select_best_glyph_and_response(glyphs, signals, text)
 _shared_glyph_manager.record_glyph_adoption(user_hash, best_glyph) return {"best_glyph": best_glyph,
 "voltage_response": response, ...} else:
         # NEW: Learning pipeline
-candidate = _glyph_learner.analyze_input_for_glyph_generation(text, signals, user_hash)
+candidate =_glyph_learner.analyze_input_for_glyph_generation(text, signals, user_hash)
 _glyph_learner.log_glyph_candidate(candidate)
 
 glyph_name = candidate.get("glyph_name") _shared_glyph_manager.create_glyph_version( glyph_name,

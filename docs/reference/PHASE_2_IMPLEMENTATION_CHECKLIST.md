@@ -1,4 +1,5 @@
 # !/usr/bin/env python3
+
 """ PHASE 2 IMPLEMENTATION CHECKLIST
 
 Quick reference for implementing the real-time glyph learning system. Mark off items as you complete
@@ -74,7 +75,7 @@ GlyphLearner from emotional_os.glyphs.learning_response_generator import Learnin
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 
 □ [2.2] Initialize managers at module level _glyph_learner = GlyphLearner() _learning_response_gen =
-LearningResponseGenerator() _shared_glyph_manager = SharedGlyphManager()
+LearningResponseGenerator()_shared_glyph_manager = SharedGlyphManager()
 
 □ [2.3] Add _get_user_hash() helper
 

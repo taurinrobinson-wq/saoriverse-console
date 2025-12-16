@@ -337,7 +337,9 @@ export function EmotionHistory({ userId }: { userId: string }) {
 1. **Limit detection to active chats**
 
    ```tsx
+
 isActive={isActiveChatOpen}
+
    ```
 
 2. **Use smaller video dimensions**

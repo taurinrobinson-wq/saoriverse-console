@@ -112,10 +112,13 @@ Changes to `render_main_app()`:
 
    ```python
    # Create ConversationManager instance
+
 manager = ConversationManager(user_id)
 
-   # Initialize current conversation ID (UUID)
+# Initialize current conversation ID (UUID)
+
 current_conversation_id = str(uuid.uuid4())
+
    ```
 
 2. **Sidebar Setup**
@@ -136,8 +139,10 @@ if st.button("➕ New Conversation"):
 3. **Auto-Naming on First Message**
 
    ```python
+
 if len(messages) == 1:  # First exchange title = generate_auto_name(first_user_input)
 session_state['conversation_title'] = title
+
    ```
 
 4. **Persistence After Each Exchange**
@@ -215,7 +220,9 @@ st.session_state = {
 
    ```bash
    # In Supabase SQL editor, run:
+
 sql/conversations_table.sql
+
    ```
 
 2. **Verify Supabase Secrets**
@@ -228,7 +235,9 @@ sql/conversations_table.sql
 3. **Restart App**
 
    ```bash
+
 streamlit run app.py
+
    ```
 
 ## Key Improvements Over Previous System
@@ -278,6 +287,7 @@ streamlit run app.py
 ## Files Changed
 
 ```
+
 emotional_os/deploy/modules/
   ├── ui.py                          (modified - integrate manager, sidebar)
   └── conversation_manager.py         (new - main implementation)
@@ -289,6 +299,7 @@ Documentation/
   ├── CONVERSATION_STORAGE.md         (new - setup & usage guide)
 
 .git/
+
 ```text
 ```text
 ```

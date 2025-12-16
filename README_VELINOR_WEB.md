@@ -232,6 +232,7 @@ cd velinor-web && npm run dev
 1. **Start with local development** - Get it working on your machine first 2. **Use Swagger UI** -
 Visit `http://localhost:8000/docs` to test API 3. **Browser DevTools** - F12 to check network
 requests & errors 4. **Test on mobile** - The game should work on phones too 5. **Version control**
+
 - Commit frequently so you can revert if needed
 
 ##

@@ -3,11 +3,13 @@
 ## Overview
 
 Your other AI's pruning strategy is now implemented in `advanced_pruning_engine.py`. This sophisticated system replaces the basic numerical pruning with architecture-aware filtering that understands your VELΩNIX system.
+
 ##
 
 ## 🎯 Five-Layer Pruning Strategy
 
 ### 1. **Signal Strength Filtering**
+
 - **Metric:** `signal_strength_score` (0-1)
 - **Components:**
   - Valence clarity: Is emotional valence explicit or ambiguous?
@@ -32,16 +34,15 @@ LOW SIGNAL: "Generic Feeling"
   → Signal score: 0.04 ✗ PRUNE
 ```
 
-
-
-
 ### 2. **Trace Role Redundancy**
+
 - **Metric:** `redundancy_score` (0-1, inverse)
 - **Logic:** Glyphs with identical trace roles are redundant
 - **Weight:** 20% of final score
 - **Action:** Identify role collisions, keep only most distinct tonal representative
 
 **Trace Role Categories:**
+
 - Portal marker (initiates connection)
 - Archive builder (anchors memory)
 - Sanctuary keeper (holds attunement)
@@ -65,10 +66,8 @@ DISTINCT:
   → Keep both (tone diversity)
 ```
 
-
-
-
 ### 3. **Usage Frequency & Match History**
+
 - **Metric:** `activation_score` (0-1)
 - **Data:** Glyphs that match user inputs or appear in harness runs
 - **Weight:** 30% of final score (highest priority)
@@ -87,9 +86,6 @@ INACTIVE: Never matched
   → activation_score: 0.0 → Prune unless other factors protect it
 ```
 
-
-
-
 **Integration Point:** You'll need to log glyph matches:
 
 ```python
@@ -100,10 +96,8 @@ match_history[glyph_id] = match_history.get(glyph_id, 0) + 1
 # Save periodically to match_history.json
 ```
 
-
-
-
 ### 4. **Tone Diversity Enforcement**
+
 - **Metric:** `tone_distribution` (0-1)
 - **Saonyx Palette:** 12 core tones
   - Molten, Hallowed Blue, Velvet Drift, Crimson Fire
@@ -126,10 +120,8 @@ PRUNING DECISION:
   - Velvet glyph: tone_score = 1 - 0.03 = 0.97 (excellent) ✓ PROTECT
 ```
 
-
-
-
 ### 5. **Reaction Chain Anchoring**
+
 - **Metric:** `reaction_chain_participation` (0-1)
 - **Categories:**
   - 1.0: Critical catalysts (Witness, Forgiveness, Acceptance)
@@ -160,8 +152,6 @@ ISOLATED (0.0):
   → Prune if low signal + no activation history
 ```
 
-
-
 ##
 
 ## 📊 Scoring Formula
@@ -186,13 +176,12 @@ score < 0.25  → CANDIDATE FOR PRUNING (confidence: 70%)
 - Reaction anchors (participation ≥ 0.9) → ALWAYS KEEP
 ```
 
-
-
 ##
 
 ## 🔧 Optional Enhancements
 
 ### 1. **Emotional Family Clustering**
+
 Group semantically related glyphs and keep only exemplars:
 
 ```python
@@ -207,10 +196,8 @@ families = {
 # Prune semantic duplicates
 ```
 
-
-
-
 ### 2. **Pruning Archive Capsule**
+
 Archive pruned glyphs for resurrection or analysis:
 
 ```python
@@ -237,10 +224,8 @@ archive = {
 # Save as JSON for future resurrection
 ```
 
-
-
-
 ### 3. **Pruning Confidence Scoring**
+
 Auditability with confidence in each decision:
 
 ```python
@@ -264,8 +249,6 @@ pruned_glyph = {
 
 # Low confidence (< 0.70): Should review manually
 ```
-
-
 
 ##
 
@@ -301,9 +284,6 @@ report = engine.create_pruning_report(
 )
 ```
 
-
-
-
 ### Integration with Factorial Engine
 
 ```python
@@ -332,9 +312,6 @@ approved_combos = [
 factorial_engine.sync_to_json(approved_combos)
 ```
 
-
-
-
 ### With Match History
 
 To track which glyphs are actually used:
@@ -356,13 +333,12 @@ pruning_engine = AdvancedPruningEngine(
 )
 ```
 
-
-
 ##
 
 ## 📋 Output Files
 
 ### PRUNING_REPORT.json
+
 Comprehensive report with all evaluations and statistics:
 
 ```json
@@ -399,11 +375,10 @@ Comprehensive report with all evaluations and statistics:
 }
 ```
 
-
-
-
 ### pruned_glyphs_overgrowth_control_*.json
+
 Archive of pruned glyphs for potential resurrection.
+
 ##
 
 ## 🔍 Decision Logic Flowchart
@@ -435,8 +410,6 @@ Archive of pruned glyphs for potential resurrection.
 │  └─ NO → PRUNE (candidate for archival)
 ```
 
-
-
 ##
 
 ## ✅ Quality Assurance
@@ -450,6 +423,7 @@ Ensure data completeness for best results:
 - ✅ `activation_signals` or similar match history
 - ✅ `is_factorial` flag: Distinguishes base from combination glyphs
 - ⏳ `match_history.json` (optional but recommended for best pruning)
+
 ##
 
 ## 🎓 Key Insights
@@ -459,6 +433,7 @@ Ensure data completeness for best results:
 3. **Tone diversity preserves richness** (15% weight) - don't over-specialize
 4. **Redundancy detection is sophisticated** (20% weight) - role-based, not just name-based
 5. **Reaction anchors are protected** (10% weight) - keep system catalysts
+
 ##
 
 ## 🔗 Related Files
@@ -467,6 +442,7 @@ Ensure data completeness for best results:
 - **Reports:** `emotional_os/glyphs/PRUNING_REPORT.json`
 - **Archives:** `emotional_os/glyphs/pruning_archive/`
 - **Integration:** `emotional_os/glyphs/glyph_factorial_engine.py`
+
 ##
 
 **Status:** ✅ Ready for use

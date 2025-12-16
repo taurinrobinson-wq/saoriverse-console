@@ -42,7 +42,7 @@ v         v FOUND     NOT FOUND
       |    Add Validation          |
       |    Reference Glyph         |
       |         |
-      |    _____|_____
+|_____|_____
       |    |         |
 v    v         v [EXISTING GLYPH]  [TRAINING RESPONSE] [CONTEXTUAL RESP]
          |

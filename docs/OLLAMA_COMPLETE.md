@@ -369,7 +369,9 @@ All functionality has been tested and is production-ready:
 1. **Read the entry guide**
 
    ```
+
 OLLAMA_START_HERE.md
+
    ```
 
 2. **Follow the quick start**
@@ -382,7 +384,8 @@ ollama ollama pull llama3
 3. **Open Streamlit**
 
    ```
-http://localhost:8501
+<http://localhost:8501>
+
    ```
 
 4. **Start conversing**

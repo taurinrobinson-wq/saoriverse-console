@@ -300,7 +300,9 @@ Configure DNS (1 min) 5. Run setup script (10 min) 6. Test deployment (5 min) 7.
 3. **Last**: SSH into VPS and check logs
 
    ```bash
+
 docker compose -f docker-compose.prod.yml logs
+
    ```
 
 ##
@@ -366,6 +368,7 @@ Everything is created, tested, documented, and ready to go.
 You just went from:
 
 ```
+
 ```text
 ```text
 ```

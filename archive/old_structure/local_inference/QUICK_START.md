@@ -13,9 +13,6 @@ from safety_post_processor import SafetyPostProcessor, create_safe_response
 from training_corpus import TrainingCorpusBuilder, TrainingExample
 ```
 
-
-
-
 ### 2. Select Glyphs & Gates
 
 ```python
@@ -41,9 +38,6 @@ style = StyleDirective(
 )
 ```
 
-
-
-
 ### 3. Render Control Prefix
 
 ```python
@@ -64,9 +58,6 @@ prefix = ControlTagRenderer.render_control_prefix(glyphs, gate, style)
 # </SYS>
 ```
 
-
-
-
 ### 4. Add to LLM Prompt
 
 ```python
@@ -77,9 +68,6 @@ full_prompt = f"""{prefix}
 User: {user_input}
 Assistant:"""
 ```
-
-
-
 
 ### 5. Generate & Post-Process
 
@@ -111,9 +99,6 @@ print(f"Issues fixed: {result.safety_violations_fixed}")
 # Output: "Issues fixed: 2"
 ```
 
-
-
-
 ### 6. Capture Training Data
 
 ```python
@@ -133,9 +118,6 @@ example = builder.add_from_interaction(
 # Export later
 builder.export_to_jsonl("training_data.jsonl")
 ```
-
-
-
 
 ## Common Glyphs
 
@@ -161,9 +143,6 @@ gate = GatePolicy(
 )
 ```
 
-
-
-
 ### Balanced & Poetic
 
 ```python
@@ -175,9 +154,6 @@ gate = GatePolicy(
 )
 ```
 
-
-
-
 ### Slightly Experimental
 
 ```python
@@ -188,9 +164,6 @@ gate = GatePolicy(
     metaphor_density_max=0.8
 )
 ```
-
-
-
 
 ## Common Styles
 
@@ -204,9 +177,6 @@ style = StyleDirective(
 )
 ```
 
-
-
-
 ### Cool & Direct
 
 ```python
@@ -216,9 +186,6 @@ style = StyleDirective(
     metaphor_density=0.3
 )
 ```
-
-
-
 
 ### Poetic & Contemplative
 
@@ -230,9 +197,6 @@ style = StyleDirective(
 )
 ```
 
-
-
-
 ## Running Tests
 
 ```bash
@@ -241,9 +205,6 @@ python -m pytest test_phase_3_5.py -v
 
 # 31 tests pass in ~0.4 seconds
 ```
-
-
-
 
 ## What Each Layer Does
 
@@ -286,9 +247,6 @@ User Input
 [User Sees Response]
 ```
 
-
-
-
 ## Next Steps
 
 1. **Integrate with Local LLM**: Hook `llama.cpp` or Ollama
@@ -306,9 +264,6 @@ registry = GlyphRegistry()
 print(registry.list_by_family("Ache"))
 ```
 
-
-
-
 ### See what control tags look like
 
 ```python
@@ -317,9 +272,6 @@ print(ControlTagRenderer.render_gates(gate))
 print(ControlTagRenderer.render_style(style))
 ```
 
-
-
-
 ### Trace post-processing changes
 
 ```python
@@ -327,9 +279,6 @@ processor = SafetyPostProcessor(gate, style)
 result = processor.process(text)
 print(result.detailed_changes)  # See all modifications
 ```
-
-
-
 
 ### Check corpus statistics
 
@@ -340,9 +289,6 @@ print(f"Avg satisfaction: {stats['avg_user_satisfaction']:.2f}")
 print(f"Glyphs used: {len(stats['glyphs_by_frequency'])}")
 ```
 
-
-
-
 ## Resources
 
 - **Full Documentation**: `PHASE_3_5_DOCS.md`
@@ -350,6 +296,7 @@ print(f"Glyphs used: {len(stats['glyphs_by_frequency'])}")
 - **Glyph Schema**: Core code in `glyph_lm_control.py`
 - **Safety Logic**: `safety_post_processor.py`
 - **Training Pipeline**: `training_corpus.py`
+
 ##
 
 **Ready to generate emotionally coherent responses with local LLMs?** 🌟

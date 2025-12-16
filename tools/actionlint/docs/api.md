@@ -46,7 +46,7 @@ changes.
 
 [Checks](checks.md) | [Installation](install.md) | [Usage](usage.md) | [Configuration](config.md) | [References](reference.md)
 
-[api-badge]: https://pkg.go.dev/badge/github.com/rhysd/actionlint.svg [apidoc]:
-https://pkg.go.dev/github.com/rhysd/actionlint [go-yaml]: https://github.com/go-yaml/yaml
+[api-badge]: <https://pkg.go.dev/badge/github.com/rhysd/actionlint.svg> [apidoc]:
+<https://pkg.go.dev/github.com/rhysd/actionlint> [go-yaml]: <https://github.com/go-yaml/yaml>
 [filter-pattern-doc]:
-https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+<https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet>

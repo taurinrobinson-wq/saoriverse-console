@@ -1,14 +1,10 @@
 # Emotional OS Documentation# Supabase CLI
 
-
-
 ## Overview[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=main)](https://coveralls.io/github/supabase/cli?branch=main) [![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/supabase-cli/setup-cli/master?style=flat-square&label=Bitbucket%20Canary)](https://bitbucket.org/supabase-cli/setup-cli/pipelines) [![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/sweatybridge%2Fsetup-cli?label=Gitlab%20Canary)
 
-This system is a modular, privacy-focused emotional OS and web platform. It supports Streamlit, FastAPI, local and cloud deployment, and auto-evolving emotional lexicons.](https://gitlab.com/sweatybridge/setup-cli/-/pipelines)
+This system is a modular, privacy-focused emotional OS and web platform. It supports Streamlit, FastAPI, local and cloud deployment, and auto-evolving emotional lexicons.](<https://gitlab.com/sweatybridge/setup-cli/-/pipelines>)
 
-
-
-## Folder Structure[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools.
+## Folder Structure[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools
 
 - `deploy/`: Deployment scripts, configs, environment files
 
@@ -64,8 +60,6 @@ When installing with yarn 4, you need to disable experimental fetch with the fol
 
 ```
 
-
-
 NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 
 ```
@@ -94,6 +88,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   ```sh
   brew upgrade supabase
   ```
+
 </details>
 
 <details>
@@ -111,6 +106,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   ```powershell
   scoop update supabase
   ```
+
 </details>
 
 <details>
@@ -118,7 +114,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
 
   Available via [Homebrew](https://brew.sh) and Linux packages.
 
-  #### via Homebrew
+#### via Homebrew
 
   To install:
 
@@ -132,7 +128,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   brew upgrade supabase
   ```
 
-  #### via Linux packages
+#### via Linux packages
 
   Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
 
@@ -151,6 +147,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   ```sh
   sudo pacman -U <...>.pkg.tar.zst
   ```
+
 </details>
 
 <details>

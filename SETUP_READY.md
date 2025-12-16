@@ -183,7 +183,9 @@ If you encounter any issues:
 1. **Check if port is in use:**
 
    ```powershell
+
 py -3.12 -m streamlit run app.py --server.port 8502
+
    ```
 
 2. **Verify packages:**
@@ -195,7 +197,9 @@ py -3.12 -m streamlit run app.py --server.port 8502
 3. **Reinstall if needed:**
 
    ```powershell
+
 py -3.12 -m pip install -r requirements.txt --force-reinstall
+
    ```
 
 ##

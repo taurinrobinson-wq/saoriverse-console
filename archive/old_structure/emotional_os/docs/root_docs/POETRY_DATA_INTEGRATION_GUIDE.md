@@ -21,10 +21,8 @@ cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
 
-
-
-
 This will:
+
 - Download 8+ major poetry collections from Project Gutenberg
 - Clean each text (remove artifacts, fix encoding, detect fragmentation)
 - Validate quality (size, line distribution, completeness)
@@ -37,10 +35,8 @@ This will:
 python poetry_data_pipeline.py --status
 ```
 
-
-
-
 Shows:
+
 - Downloads completed
 - Texts cleaned
 - Collections validated
@@ -53,10 +49,8 @@ Shows:
 python poetry_data_pipeline.py --export poetry_export
 ```
 
-
-
-
 Creates export directory with:
+
 - Individual cleaned poetry files
 - Processing mode manifests (signal extraction, lexicon learning, glyph generation)
 - Quality metrics for each collection
@@ -103,22 +97,22 @@ Processing Modes (ProcessingModeAdapter)
   └── Ritual Processing
 ```
 
-
-
-
 ### Database Schema
 
 The pipeline creates SQLite database with three tables:
 
 **collections** - Poetry metadata
+
 - id, name, gutenberg_id, poet, period, description
 - status (registered → cleaned → validated)
 - timestamps
 
 **processing_log** - All operations recorded
+
 - collection, stage, status, details, timestamp
 
 **quality_metrics** - Text quality tracking
+
 - collection, metric name, metric value
 
 ## Processing Modes
@@ -137,9 +131,6 @@ adapter = ProcessingModeAdapter(hub)
 signal_data = adapter.for_signal_extraction()  # Returns {name: text}
 ```
 
-
-
-
 ### Lexicon Learning
 
 ```python
@@ -147,9 +138,6 @@ signal_data = adapter.for_signal_extraction()  # Returns {name: text}
 # Get clean text for learning emotions from poetry
 lexicon_data = adapter.for_lexicon_learning()  # Returns {name: text}
 ```
-
-
-
 
 ### Glyph Generation
 
@@ -159,9 +147,6 @@ lexicon_data = adapter.for_lexicon_learning()  # Returns {name: text}
 glyph_data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 ```
 
-
-
-
 ### Ritual Processing
 
 ```python
@@ -169,9 +154,6 @@ glyph_data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 # Get coherence-checked text
 ritual_data = adapter.for_ritual_processing()  # Returns {name: text}
 ```
-
-
-
 
 ## Integration with Existing Systems
 
@@ -192,9 +174,6 @@ for name, text in poetry_texts.items():
     process_poetry(name, text)  # Your existing processing
 ```
 
-
-
-
 ### Updating Other Processing Systems
 
 Same pattern - all processing modes can access via `ProcessingModeAdapter`:
@@ -213,20 +192,19 @@ elif processing_mode == 'ritual':
     data = adapter.for_ritual_processing()
 ```
 
-
-
-
 ## Text Cleaning Details
 
 ### What Gets Cleaned
 
 **OCR Artifacts** (removed):
+
 - Page markers: "page 42", "[Page 42]"
 - Illustration markers: "[Illustration]"
 - Brackets/artifacts: "[***]", "---"
 - Multiple dashes normalized
 
 **Encoding Issues** (fixed):
+
 - CRLF → LF line endings
 - CR → LF line endings
 - Null bytes removed
@@ -235,11 +213,13 @@ elif processing_mode == 'ritual':
 - Em dashes normalized
 
 **Fragmentation** (detected & fixed):
+
 - Hyphenation detection (e.g., "com-\nplete" → "complete")
 - Sentence continuation (line ends mid-word)
 - Excessive blank lines (preserved formatting, removed excess)
 
 **Whitespace** (normalized):
+
 - Multiple spaces → single space
 - Trailing spaces removed
 - Preserved poetry stanza formatting
@@ -300,9 +280,6 @@ For each collection, pipeline records:
     └── processing_manifest.json        # Processing mode manifests
 ```
 
-
-
-
 ## Troubleshooting
 
 ### Poetry text is too short after cleaning
@@ -350,6 +327,7 @@ Expected times (single-threaded):
 ## Support
 
 All three components have:
+
 - Full docstrings
 - Error logging
 - Data validation

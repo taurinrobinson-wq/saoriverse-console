@@ -1,6 +1,7 @@
 # Authentication System Deployment Guide
 
 ## Overview
+
 This guide walks through deploying the complete user authentication system for Emotional OS, ensuring individual conversation privacy and data isolation while maintaining the 2.65s response performance.
 
 ## Deployment Steps
@@ -12,6 +13,7 @@ This guide walks through deploying the complete user authentication system for E
    - Navigate to SQL Editor
 
 2. **Run Database Schema**
+
    ```sql
    -- Execute the entire database_schema.sql file
    -- This creates users table, adds user_id columns, sets up RLS policies
@@ -25,22 +27,26 @@ This guide walks through deploying the complete user authentication system for E
 ### 2. Deploy Authentication Edge Function
 
 1. **Navigate to Edge Functions**
+
    ```bash
    cd your-supabase-project/supabase/functions
    ```
 
 2. **Create auth-manager directory**
+
    ```bash
    mkdir auth-manager
    ```
 
 3. **Copy auth_edge_function.ts**
+
    ```bash
    # Copy the auth_edge_function.ts content to:
    # supabase/functions/auth-manager/index.ts
    ```
 
 4. **Deploy the function**
+
    ```bash
    supabase functions deploy auth-manager
    ```
@@ -48,17 +54,20 @@ This guide walks through deploying the complete user authentication system for E
 ### 3. Deploy Authenticated Processing Edge Function
 
 1. **Create authenticated-saori directory**
+
    ```bash
    mkdir authenticated-saori
    ```
 
 2. **Copy authenticated_edge_function.ts**
+
    ```bash
    # Copy the authenticated_edge_function.ts content to:
    # supabase/functions/authenticated-saori/index.ts
    ```
 
 3. **Deploy the function**
+
    ```bash
    supabase functions deploy authenticated-saori
    ```
@@ -66,6 +75,7 @@ This guide walks through deploying the complete user authentication system for E
 ### 4. Update Streamlit Application
 
 1. **Replace main UI file**
+
    ```bash
    # Backup current emotional_os_ui.py (ARCHIVED)
    cp emotional_os_ui.py (ARCHIVED) emotional_os_ui_backup.py
@@ -75,6 +85,7 @@ This guide walks through deploying the complete user authentication system for E
    ```
 
 2. **Update Streamlit secrets**
+
    ```toml
    # Add to .streamlit/secrets.toml
    [supabase]
@@ -105,6 +116,7 @@ This guide walks through deploying the complete user authentication system for E
 ### 6. Performance Validation
 
 1. **Response Time Check**
+
    ```bash
    # Test authenticated endpoint response time
    curl -w "@curl-format.txt" -X POST \
@@ -132,18 +144,12 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 OPENAI_API_KEY=your-openai-key
 ```
 
-
-
-
 ### Supabase Function URLs
 
 ```
 Authentication: https://your-project.supabase.co/functions/v1/auth-manager
 Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ```
-
-
-
 
 ### Security Headers
 
@@ -154,22 +160,22 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE'
 ```
 
-
-
-
 ## Security Features
 
 ### Password Security
+
 - **PBKDF2 Hashing**: 100,000 iterations with random salt
 - **Salt Storage**: Unique salt per user stored separately
 - **Session Management**: 480-minute timeout with automatic renewal
 
 ### Data Isolation
+
 - **Row Level Security**: Database-enforced user data separation
 - **User-specific Caches**: Isolated processing memory
 - **Private Learning**: Individual vocabulary building per user
 
 ### Rate Limiting
+
 - **Login Attempts**: 5 attempts per 15-minute window
 - **Session Validation**: Token-based authentication
 - **Automatic Lockout**: Temporary account suspension
@@ -179,6 +185,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ### From Anonymous to Authenticated
 
 1. **Backup Existing Data**
+
    ```sql
    -- Export current anonymous data
    SELECT * FROM emotional_tags WHERE user_id IS NULL;
@@ -191,6 +198,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
    - Preserve system learning patterns
 
 3. **User Data Migration**
+
    ```sql
    -- Option: Assign existing data to admin user
    UPDATE glyphs SET user_id = 'admin-uuid' WHERE user_id IS NULL;
@@ -202,6 +210,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ### Common Issues
 
 1. **Function Deployment Fails**
+
    ```bash
    # Check function logs
    supabase functions logs auth-manager
@@ -209,6 +218,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
    ```
 
 2. **Database Permission Errors**
+
    ```sql
    -- Verify RLS policies
    SELECT * FROM pg_policies WHERE tablename = 'users';
@@ -222,6 +232,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ### Performance Monitoring
 
 1. **Response Time Tracking**
+
    ```javascript
    // Add timing logs to edge functions
    const startTime = Date.now();
@@ -230,6 +241,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
    ```
 
 2. **Memory Usage**
+
    ```javascript
    // Monitor cache sizes
    console.log(`Cache entries: ${Object.keys(cache).length}`);

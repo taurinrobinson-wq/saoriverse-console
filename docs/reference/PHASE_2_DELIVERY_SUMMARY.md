@@ -1,4 +1,5 @@
 # !/usr/bin/env python3
+
 """ PHASE 2 DELIVERY SUMMARY
 
 This file provides a complete overview of what has been delivered for the real-time glyph learning

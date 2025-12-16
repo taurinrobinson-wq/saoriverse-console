@@ -277,6 +277,7 @@ down?", "I want to preserve this moment" ]
 🧭 Routing Function
 
 def detect_phase(user_input: str) -> str: if any(phrase in user_input for phrase in initiatory_cues
+
 + voltage_surge_indicators): return "initiatory" elif any(phrase in user_input for phrase in
 anchoring_cues + containment_requests): return "archetypal" else: return "archetypal" # default to
 containment unless surge is clear

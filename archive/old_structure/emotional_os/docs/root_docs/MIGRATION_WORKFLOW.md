@@ -46,9 +46,6 @@ head -10 dev_tools/lowest_integrity_sample.csv
 ls -la dev_tools/fragments_to_review.json  # Should be empty (no fragments found)
 ```
 
-
-
-
 **Key Findings:**
 
 - 1,722 cleaned rows produced from SQL export
@@ -66,9 +63,6 @@ python3 dev_tools/supabase_backup_and_plan.py --no-backup --cleaned dev_tools/cl
 # Test upsert runner in dry-run mode
 python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_<timestamp>.json
 ```
-
-
-
 
 **Results:**
 
@@ -90,9 +84,6 @@ sp.set_telemetry(False)
 "
 ```
 
-
-
-
 **Telemetry Events Available:**
 
 - `select_best_start` - Entry point with input/glyph counts
@@ -108,9 +99,6 @@ sp.set_telemetry(False)
 # Run full test suite
 python3 -m pytest tests/ -v
 ```
-
-
-
 
 **Results:** 109/110 tests passed (1 skipped as expected)
 
@@ -128,9 +116,6 @@ export SUPABASE_KEY=your-service-role-key
 python3 dev_tools/supabase_backup_and_plan.py --table glyphs
 ```
 
-
-
-
 #### 5.2 Review Plan
 
 ```bash
@@ -140,9 +125,6 @@ cat dev_tools/supabase_upsert_plan_*.json
 head -20 dev_tools/supabase_upsert_plan_*_inserts.csv
 head -20 dev_tools/supabase_upsert_plan_*_updates.csv
 ```
-
-
-
 
 #### 5.3 Apply Migration (CAUTION)
 
@@ -155,9 +137,6 @@ python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_pla
 python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_*.json --apply --batch-size 200
 ```
 
-
-
-
 ## 🔧 Using Telemetry
 
 ### Environment Variable Toggle
@@ -167,9 +146,6 @@ export SAORI_TELEMETRY=1  # Enable
 export SAORI_TELEMETRY=0  # Disable
 ```
 
-
-
-
 ### Runtime Toggle
 
 ```python
@@ -177,9 +153,6 @@ from emotional_os.core import signal_parser
 signal_parser.set_telemetry(True)   # Enable for session
 signal_parser.set_telemetry(False)  # Disable for session
 ```
-
-
-
 
 ### UI Toggle
 
@@ -197,9 +170,6 @@ All events are logged as JSON to facilitate parsing:
   "input_snippet": "I feel overwhelmed and anxious"
 }
 ```
-
-
-
 
 ## 🛡️ Safety Features
 
@@ -251,9 +221,6 @@ All events are logged as JSON to facilitate parsing:
 python3 dev_tools/cleanup_glyphs.py --source path/to/your/export.sql
 ```
 
-
-
-
 **Backup script authentication errors:**
 
 ```bash
@@ -265,9 +232,6 @@ echo $SUPABASE_KEY
 # Ensure using service role key, not anon key
 ```
 
-
-
-
 **Telemetry not showing:**
 
 ```bash
@@ -278,9 +242,6 @@ from emotional_os.core import signal_parser as sp
 print('Telemetry enabled:', hasattr(sp, 'TELEMETRY_ENABLED') and sp.TELEMETRY_ENABLED)
 "
 ```
-
-
-
 
 **Upsert failures:**
 
@@ -311,9 +272,6 @@ sp.set_telemetry(True)
 "
 ```
 
-
-
-
 ## 📈 Next Steps
 
 ### Recommended Follow-ups
@@ -328,6 +286,7 @@ sp.set_telemetry(True)
 - **Grafana/monitoring** - Parse JSON telemetry events for dashboards
 - **A/B testing** - Use telemetry to compare glyph selection strategies
 - **Data quality** - Track integrity scores over time to identify degradation
+
 ##
 
 ## ✅ Summary

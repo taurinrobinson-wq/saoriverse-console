@@ -17,9 +17,6 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 ```
 
-
-
-
 ### 2. Set Up Python Environment
 
 ```bash
@@ -34,17 +31,11 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-
-
-
 ### 3. Run the App
 
 ```bash
 streamlit run app.py
 ```
-
-
-
 
 **That's it!** The app runs locally with built-in response generation.
 
@@ -64,14 +55,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-
-
-
 ## File Structure
 
 Key files for local development:
+
 - `app.py` - Main Streamlit app entry point
 - `emotional_os/glyphs/signal_parser.py` - Core response generation
+
 ##
 
 **That's all you need!** The system is designed to work seamlessly locally.

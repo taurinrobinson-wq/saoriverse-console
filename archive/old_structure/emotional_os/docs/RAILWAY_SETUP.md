@@ -28,9 +28,6 @@ railway variables set SUPABASE_AUTH_URL="your_supabase_url/functions/v1/auth-man
 railway variables set CURRENT_SAORI_URL="your_supabase_url/functions/v1/saori-fixed"
 ```
 
-
-
-
 ## Step 3: Deploy Your Application
 
 After setting the environment variables:
@@ -39,15 +36,13 @@ After setting the environment variables:
 railway up
 ```
 
-
-
-
 ## Step 4: Add Your Custom Domain
 
-1. Go to https://railway.com/project/0b1980c1-3144-4369-9b61-778c89a66727
+1. Go to <https://railway.com/project/0b1980c1-3144-4369-9b61-778c89a66727>
 2. Click Settings → Domains
 3. Add custom domain: firstperson.chat
 4. Update your DNS records as instructed by Railway
+
 ##
 
 ## Where to Find Your Credentials
@@ -69,8 +64,6 @@ key = "eyJ..."
 auth_function_url = "https://yourproject.supabase.co/functions/v1/auth-manager"
 current_saori_url = "https://yourproject.supabase.co/functions/v1/saori-fixed"
 ```
-
-
 
 ##
 

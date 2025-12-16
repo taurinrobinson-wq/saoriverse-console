@@ -68,6 +68,7 @@ New files to make this easier:
 
 1. **`run_app.bat`** - Windows batch script (double-click to run) 2. **`run_app.ps1`** - PowerShell
 script 3. **`.vscode/tasks.json`** - VS Code task configuration 4. **`PYTHON_312_RUNTIME_GUIDE.md`**
+
 - Detailed setup guide 5. **Enhanced diagnostics** in `app.py` sidebar
 
 ##

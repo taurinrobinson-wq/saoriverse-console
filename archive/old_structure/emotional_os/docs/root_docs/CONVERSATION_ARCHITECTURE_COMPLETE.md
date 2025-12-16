@@ -54,9 +54,6 @@ class ConversationManager:
     def load_conversations(self) -> List[Dict]
 ```
 
-
-
-
 #### 2. Glyph Detection System (`signal_parser.py`)
 
 ```python
@@ -64,9 +61,6 @@ def parse_input(input_text: str, lexicon_path: str, ...) -> Dict
 def parse_signals(input_text: str, signal_map: Dict) -> List[str]
 def evaluate_gates(signals: List[str], gates: Dict) -> Dict[str, float]
 ```
-
-
-
 
 #### 3. UI Integration (`ui.py`)
 
@@ -108,9 +102,6 @@ CREATE TABLE conversation_messages (
   timestamp TIMESTAMP DEFAULT NOW()
 );
 ```
-
-
-
 
 );
 
