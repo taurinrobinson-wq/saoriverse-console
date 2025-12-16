@@ -62,6 +62,8 @@ saoriverse-console/
 └── firstperson_api.py    # FirstPerson API
 ```
 
+
+
 ## 🎯 Guiding Principles
 
 ### 1. **Intentional Documentation**
@@ -84,13 +86,14 @@ saoriverse-console/
 - scratch/ is in .gitignore (won't clutter history)
 - .next/ build folders ignored
 - Only committed files: source code, important docs, configs
-
----
+##
 
 ## 🚀 Quick Start
 
 ### Start Development Servers
+
 ```bash
+
 # Run just the web dev server
 ./scripts/RUN_WEB_DEV.sh
 
@@ -98,10 +101,15 @@ saoriverse-console/
 ./scripts/RUN_FULL_STACK.sh
 ```
 
+
+
 ### Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
+
+
 
 ### Find What You Need
 - **Game logic?** → Check `velinor/engine/` or `velinor-web/src/`
@@ -109,8 +117,7 @@ pip install -r requirements.txt
 - **Story content?** → `velinor/stories/sample_story.json`
 - **Setup instructions?** → Read `docs/QUICK_REFERENCE_*.md`
 - **Deployment?** → See `docs/DEPLOYMENT_*.md`
-
----
+##
 
 ## 📚 Key Documentation Files
 
@@ -121,8 +128,7 @@ pip install -r requirements.txt
 | `docs/FIRSTPERSON_*.md` | Emotional analysis system docs |
 | `docs/DEPLOYMENT_*.md` | Production deployment guides |
 | `scratch/auto_summaries.md` | AI-generated overviews (temporary) |
-
----
+##
 
 ## 🛠️ Development Workflow
 
@@ -132,7 +138,9 @@ pip install -r requirements.txt
 3. **Temporary notes** → Keep in `scratch/` for reference, delete later
 
 ### Keeping It Clean
+
 ```bash
+
 # Check what's in scratch (for cleanup decisions)
 ls -la scratch/
 
@@ -143,17 +151,19 @@ rm scratch/old_summary.md
 git status  # scratch/ files should NOT appear here
 ```
 
+
+
 ### Adding New Code
 - Create files in `src/` or appropriate subfolder
 - Add to `tests/` if it's a module with logic
 - Update `requirements.txt` if adding dependencies
 - Document in `docs/` (not root)
-
----
+##
 
 ## 🌳 Why This Structure Matters
 
 ### Before (Root Chaos)
+
 ```
 saoriverse-console/
 ├── PHASE_1_COMPLETE.md
@@ -165,11 +175,14 @@ saoriverse-console/
 └── velinor/
 ```
 
+
+
 ❌ Hard to find what you need
 ❌ Git history cluttered with auto-generated files
 ❌ Can't tell important docs from summaries
 
 ### After (Clean Organization)
+
 ```
 saoriverse-console/
 ├── README.md  (main entry point)
@@ -180,12 +193,13 @@ saoriverse-console/
 └── velinor/   (game assets)
 ```
 
+
+
 ✅ Clear hierarchy
 ✅ Git tracks only what matters
 ✅ Easy to navigate and find things
 ✅ AI clutter contained
-
----
+##
 
 ## 🔄 Maintenance Checklist
 
@@ -200,8 +214,7 @@ saoriverse-console/
 - [ ] New dependencies added to `requirements.txt`
 - [ ] Important docs moved to `docs/` (not root)
 - [ ] `.gitignore` catches your junk
-
----
+##
 
 ## 📖 Next Steps
 
@@ -209,7 +222,6 @@ saoriverse-console/
 2. **Read the quick references**: `docs/QUICK_REFERENCE_*.md`
 3. **Start development**: `./scripts/RUN_WEB_DEV.sh`
 4. **Keep it clean**: Use this structure as your guide
-
----
+##
 
 **Key Takeaway:** Treat `docs/` like a museum (curated, intentional) and `scratch/` like a junk drawer (temporary, disposable). Your git history stays clean. Your project stays sane. 🎯

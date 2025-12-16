@@ -35,8 +35,7 @@
 - **Contact**: Director of Innovation/Technology
 - **Timeline to close**: 4-8 months (federal process)
 - **Potential revenue**: $2M-10M annually
-
----
+##
 
 ### TIER 2: Education (Fast Sales Cycle)
 
@@ -71,8 +70,7 @@
 - **Contact**: Head of Product
 - **Timeline to close**: 3-5 months
 - **Potential revenue**: $250K-1M annually
-
----
+##
 
 ### TIER 3: Customer Service (Highest ROI)
 
@@ -107,8 +105,7 @@
 - **Contact**: Director of Customer Service Innovation
 - **Timeline to close**: 6-12 months (large org timeline)
 - **Potential revenue**: $5M-20M annually
-
----
+##
 
 ### TIER 4: Healthcare & Wellness
 
@@ -143,8 +140,7 @@
 - **Contact**: VP of Product/Technology
 - **Timeline to close**: 3-4 months
 - **Potential revenue**: $500K-2M annually
-
----
+##
 
 ### TIER 5: Social Services & Nonprofits
 
@@ -171,8 +167,7 @@
 - **Contact**: Innovation/Technology director
 - **Timeline to close**: 4-6 months (government process)
 - **Potential revenue**: $500K-2M annually
-
----
+##
 
 ## The "Pitch Deck" Framework
 
@@ -195,8 +190,7 @@ When approaching any of these companies, structure your pitch:
 
 ### 6. **Timeline** (30 seconds)
 "Pilot: [timeframe]. Full deployment: [timeframe]."
-
----
+##
 
 ## Specific Pitch Variations
 
@@ -211,8 +205,7 @@ When approaching any of these companies, structure your pitch:
 
 ### For Healthcare
 *"Between appointments, patients feel abandoned. We're the connection. Not trying to replace physicians, but filling the gap. Patient compliance up. Escalations detected earlier. Outcomes better. Costs down."*
-
----
+##
 
 ## Action Plan: Next 30 Days
 
@@ -239,8 +232,7 @@ When approaching any of these companies, structure your pitch:
 - [ ] Get legal framework started
 - [ ] Plan technical integration
 - [ ] Set success metrics
-
----
+##
 
 ## Success Metric: How You'll Know It's Working
 
@@ -261,8 +253,7 @@ By end of year 3:
 - [ ] 20+ platforms
 - [ ] 10M-100M users
 - [ ] Valuation: $100M-500M+ depending on model
-
----
+##
 
 ## The Hidden Advantage
 

@@ -31,14 +31,14 @@ and provides deployment steps, testing procedures, and success metrics.
 - Integration tests: Phase 1-2 workflows
 - Regression prevention: memory persistence, response quality
 - Performance: <3s full test suite execution
-
----
+##
 
 # ===== DEPLOYMENT STEPS =====
 
 ## Pre-Deployment Validation
 
 ```bash
+
 # 1. Verify all tests pass
 python -m pytest emotional_os/core/firstperson/test_*.py -v
 
@@ -49,9 +49,12 @@ python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; pr
 python scripts/validate_supabase.py
 ```
 
+
+
 ## Staging Deployment
 
 ```bash
+
 # 1. Deploy to staging environment
 ./deploy.sh staging
 
@@ -62,9 +65,12 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.report_health()"
 ```
 
+
+
 ## Production Deployment
 
 ```bash
+
 # 1. Create feature branch for release
 git checkout -b release/firstperson-phase-1-2
 
@@ -79,13 +85,15 @@ git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 git push origin release/firstperson-phase-1-2
 ```
 
----
+
+##
 
 # ===== TESTING PROCEDURES =====
 
 ## Unit Tests (All Modules)
 
 ```bash
+
 # Story-start detection
 pytest emotional_os/core/firstperson/test_story_start_detector.py -v
 
@@ -100,15 +108,20 @@ pytest emotional_os/core/firstperson/test_repair_orchestrator.py -v
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 ```
 
+
+
 ## Integration Tests
 
 ```bash
+
 # Full Phase 1 pipeline
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestIntegrationFlow -v
 
 # Phase 2.3 repair detection
 pytest emotional_os/core/firstperson/test_repair_orchestrator.py::TestRejectionDetection -v
 ```
+
+
 
 ## Manual Testing (Recommended)
 
@@ -122,12 +135,16 @@ orch = FirstPersonOrchestrator(user_id="test_user", conversation_id="test_conv")
 # Should generate clarifier
 response = orch.handle_conversation_turn("They were fighting again.")
 print(response.response_text)
+
 # Expected: Clarifying prompt about "they"
 ```
+
+
 
 ### Scenario 2: Frequency Reflection
 
 ```python
+
 # Three turns with same theme should trigger reflection
 inputs = [
     "The kids were fighting.",
@@ -138,8 +155,11 @@ inputs = [
 for turn_num, input_text in enumerate(inputs, 1):
     response = orch.handle_conversation_turn(input_text)
     print(f"Turn {turn_num}: {response.detected_theme}")
+
 # Expected: "family conflict" or similar theme on turn 3+
 ```
+
+
 
 ### Scenario 3: Repair Detection
 
@@ -151,10 +171,12 @@ repair = RepairOrchestrator(user_id="test_user")
 # Should detect this as correction
 is_rejection = repair.detect_rejection("No, that's not what I meant.")
 print(is_rejection)
+
 # Expected: True
 ```
 
----
+
+##
 
 # ===== SUCCESS METRICS =====
 
@@ -188,6 +210,7 @@ print(is_rejection)
 ## Monitoring Commands
 
 ```bash
+
 # Check all metrics
 python -m emotional_os.core.firstperson.deployment_monitor
 
@@ -198,13 +221,15 @@ watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.report_health()"
 ```
 
----
+
+##
 
 # ===== ROLLBACK PROCEDURE =====
 
 If issues arise:
 
 ```bash
+
 # 1. Identify issue via monitoring
 python -m emotional_os.core.firstperson.deployment_monitor
 
@@ -218,10 +243,12 @@ git revert HEAD
 pytest emotional_os/core/firstperson/test_*.py -q
 
 # 5. Open incident ticket for investigation
+
 # Issue tracking system: [fill in]
 ```
 
----
+
+##
 
 # ===== KNOWN LIMITATIONS & NEXT STEPS =====
 
@@ -246,8 +273,7 @@ pytest emotional_os/core/firstperson/test_*.py -q
 3. 3.3: Emotional attunement refinement
 4. 3.4: Therapeutic framework integration
 5. 3.5: Relationship dynamics modeling
-
----
+##
 
 # ===== SUPPORT & CONTACTS =====
 
@@ -269,8 +295,7 @@ pytest emotional_os/core/firstperson/test_*.py -q
 2. **User Report** → Product owner
 3. **Infrastructure** → Ops team
 4. **Multiple Issues** → Dev lead (deploy rollback if necessary)
-
----
+##
 
 # ===== DEPLOYMENT SIGN-OFF =====
 
@@ -283,8 +308,7 @@ pytest emotional_os/core/firstperson/test_*.py -q
 **Breaking Changes**: 0
 
 **Approved for Deployment**: ✓
-
----
+##
 
 **Next Section**: See `/docs/firstperson_monitoring.md` for detailed metrics
 **Backup Plan**: See `/docs/firstperson_rollback.md` for emergency procedures

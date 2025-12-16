@@ -18,11 +18,15 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ
 """
 ```
 
+
+
 **AFTER** (correct - single-line strings):
 
 ```toml
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8"
 ```
+
+
 
 ### 2. `.env`
 
@@ -31,6 +35,8 @@ Also wrapped the keys in quotes to ensure proper parsing:
 ```env
 SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8"
 ```
+
+
 
 ## Technical Details
 
@@ -58,6 +64,8 @@ key = secrets['supabase']['key']
 print('Has newlines:', '\\n' in key)  # Should print: False
 "
 ```
+
+
 
 Result: ✓ No newlines detected in keys
 

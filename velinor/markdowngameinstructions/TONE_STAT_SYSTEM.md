@@ -12,8 +12,7 @@ TONE stands for:
 - **E** — Empathy
 
 These stats are never displayed to the player—they work silently in the background, creating emergent gameplay where emotional resonance becomes mechanical.
-
----
+##
 
 ## Core TONE Mechanics
 
@@ -44,8 +43,7 @@ These stats are never displayed to the player—they work silently in the backgr
 - **Increases When**: The player listens to pain, validates loss, sits with grief, chooses vulnerability over performance, comforts others.
 - **Decreases When**: The player dismisses suffering, rushes through emotional moments, prioritizes efficiency over connection.
 - **NPC Response**: High Empathy → Nima shares secret knowledge, Sera teaches rituals, grief glyphs glow brighter. Low Empathy → Nima remains closed, shrine keepers distrust the player.
-
----
+##
 
 ## Hidden Stat Framework
 
@@ -55,8 +53,7 @@ These stats are never displayed to the player—they work silently in the backgr
 - Increases when all four TONE stats are balanced and high.
 - Unlocks the "Fragments Freed" ending when Resonance is sufficiently harmonized.
 - Determines access to deeper NPC memories and glyph chambers.
-
----
+##
 
 ## Example Stat Impacts: Marketplace Scene
 
@@ -68,8 +65,7 @@ These stats are never displayed to the player—they work silently in the backgr
 | Keep your distance | +1 Wisdom | +2 Observation | -1 Narrative Presence | -1 Empathy |
 | Explore the stalls | +1 Wisdom | +1 Observation | +1 Narrative Presence | +2 Empathy |
 | Freeze and observe | Neutral | +2 Observation | Neutral | +1 Empathy |
-
----
+##
 
 ## Integration with NPC Resonance
 
@@ -87,8 +83,7 @@ Each NPC has a private resonance score with the player based on TONE stats.
 - **High Empathy**: Nima softens, shares pre-collapse memories.
 - **High Trust + Empathy**: Nima reveals secret knowledge, teaches Bonded Gesture.
 - **Low Empathy**: Nima remains closed; future encounters require emotional repair.
-
----
+##
 
 ## Glyph Access Through TONE
 
@@ -100,8 +95,7 @@ Different glyphs respond to different TONE profiles:
 | Grief Glyphs | High Empathy, High Trust | Held Ache, Dislocated Attachment |
 | Defiance Glyphs | High Narrative Presence, Low Empathy | Preemptive Severance, Collapse Embraced |
 | Memory Glyphs | Balanced TONE (Resonance) | Sorrow, Remembrance, Legacy |
-
----
+##
 
 ## TONE and Ending Branches
 
@@ -115,8 +109,7 @@ The final encounter with Saori and Velinor branches based on accumulated TONE pr
 | **Cycle Broken** | High Narrative Presence, High Empathy, High Defiance |
 | **Sacred Withholding** | Selective high stats; player withholds key glyphs |
 | **Second Thoughts** | Undecided TONE profile; ambiguity honored |
-
----
+##
 
 ## Player Agency Through Hidden Stats
 
@@ -128,8 +121,7 @@ Because TONE stats are hidden, players don't optimize for them—they feel them.
 - **Trust-focused player**: Networks deepen, ripple effects compound, sphere mechanics reward consistency.
 
 This creates emergent narrative without the player feeling constrained by mechanical choices. The stats serve the story, not the reverse.
-
----
+##
 
 ## Integration Checklist
 

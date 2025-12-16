@@ -3,21 +3,19 @@
 ## Overview
 
 This guide explains how to use and maintain `story_map_velinor.md` - the comprehensive narrative design document for Velinor: Remnants of the Tone.
-
----
+##
 
 ## What is the Story Map?
 
 The story map is a **game bible** that organizes:
 - **Branching narratives** and decision points
-- **Character arcs** and relationship networks  
+- **Character arcs** and relationship networks
 - **Glyph systems** and progression mechanics
 - **Ending branches** and consequences
 - **Expansion placeholders** for future development
 
 Think of it as the **single source of truth** for Velinor's narrative structure.
-
----
+##
 
 ## Who Should Use This?
 
@@ -30,8 +28,7 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 - Ensuring narrative consistency
 
 **Your Section:** Character Relationships, Story Structure, Ending Branches
-
----
+##
 
 ### Game Developers
 ✅ **You should reference this when:**
@@ -42,8 +39,7 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 - Setting up choice nodes
 
 **Your Section:** Narrative Decision Points, Glyph System, TONE mechanics
-
----
+##
 
 ### Artists & Asset Creators
 ✅ **You should reference this when:**
@@ -53,8 +49,7 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 - Building UI elements (journal, map)
 
 **Your Section:** Character Relationships (appearance descriptions), Expansion Placeholders (locations)
-
----
+##
 
 ### Project Managers
 ✅ **You should reference this when:**
@@ -64,8 +59,7 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 - Estimating scope
 
 **Your Section:** How to Use This Map → For Project Managers
-
----
+##
 
 ## How to Navigate the Story Map
 
@@ -100,8 +94,7 @@ The story map is organized into **9 major sections**:
 - "Story Structure & Progression" has Act-by-Act breakdowns
 - "Narrative Decision Points" shows all major choice moments
 - Use flowcharts (` ↓ ` and ` ├─ ` symbols) to visualize branches
-
----
+##
 
 ## How to Update the Story Map
 
@@ -117,6 +110,7 @@ The story map is organized into **9 major sections**:
 #### Adding a New NPC
 
 **Step 1:** Add to "Character Relationships" section
+
 ```markdown
 **[Number]. [NPC Name]** ([Role/Archetype])
 - Appearance: [Physical description]
@@ -126,17 +120,19 @@ The story map is organized into **9 major sections**:
 - [Special mechanics if applicable]
 ```
 
+
+
 **Step 2:** Add their sphere connections to related NPCs
 
 **Step 3:** Add relevant encounters to "Story Structure"
 
 **Step 4:** If they affect endings, update "Ending Branches"
-
----
+##
 
 #### Adding a New Quest
 
 **Step 1:** Add to "Expansion Placeholders" → Side Quests
+
 ```markdown
 - [ ] **[Quest Name]**: [Brief description]
   - Trigger: [When it becomes available]
@@ -144,22 +140,27 @@ The story map is organized into **9 major sections**:
   - Reward: [What player gains]
 ```
 
+
+
 **Step 2:** Add quest beats to "Story Structure & Progression"
 
 **Step 3:** Add decision points to "Narrative Decision Points" if quest has major choices
 
 **Step 4:** Update NPC sections if quest affects relationships
-
----
+##
 
 #### Adding a New Glyph Chamber
 
 **Step 1:** Update "Glyph System" → Octoglyph System table
+
 ```markdown
 | [Number] | [Emotional Stage] | [Visual Description] | [Location] |
 ```
 
+
+
 **Step 2:** Fill expansion placeholder in "Expansion Placeholders" → Octoglyph Chamber Details
+
 ```markdown
 - [x] **[Chamber Name]**
   - Location: [Where in game world]
@@ -167,14 +168,17 @@ The story map is organized into **9 major sections**:
   - Memory echo: [What story is revealed]
 ```
 
-**Step 3:** Add chamber encounter to Act 3 in "Story Structure"
 
----
+
+**Step 3:** Add chamber encounter to Act 3 in "Story Structure"
+##
 
 #### Adding a New Ending Branch
 
 **Step 1:** Add to "Ending Branches" section
+
 ```markdown
+
 #### [Number]. [Ending Name] ([Theme])
 
 **Trigger:**
@@ -192,11 +196,12 @@ The story map is organized into **9 major sections**:
 [Visual description of ending scene]
 ```
 
+
+
 **Step 2:** Update "Narrative Decision Points" → Choice Node 8 with new action
 
 **Step 3:** Update Quick Reference numbers
-
----
+##
 
 ### Filling Placeholders
 
@@ -208,6 +213,7 @@ The story map is organized into **9 major sections**:
 4. **Cross-check** related sections for consistency
 
 **Example:**
+
 ```markdown
 Before:
 - [ ] **Healer's Circle** (2-3 NPCs)
@@ -216,11 +222,12 @@ Before:
 After:
 - [x] **Healer's Circle** (3 NPCs)
   - **Mirena the Bone-Setter**: Elderly, pragmatic
-  - **Joran the Herbalist**: Young, optimistic  
+  - **Joran the Herbalist**: Young, optimistic
   - **Lysandra the Memory-Keeper**: Middle-aged, haunted by Cataclysm
 ```
 
----
+
+##
 
 ### Version Control
 
@@ -230,12 +237,14 @@ After:
 - **Major (1.0 → 2.0)**: Structural changes, new acts, or core mechanic revisions
 
 **Update format:**
+
 ```markdown
+
 ## Update Log
 
 ### Version 1.1 (January 15, 2026)
 - Added 3 NPCs to Healer's Circle
-- Filled Octoglyph Chamber 2-4 placeholders  
+- Filled Octoglyph Chamber 2-4 placeholders
 - Created "Children of Velhara" NPC category
 - Updated Act 2 progression with new side quest
 
@@ -245,7 +254,8 @@ After:
 - Expansion placeholders established
 ```
 
----
+
+##
 
 ## Common Use Cases
 
@@ -264,8 +274,7 @@ After:
    - Rewards empathetic choices
    - References her connection to shrine keepers
    - Hints at Flicker Ritual reward
-
----
+##
 
 ### Use Case 2: Implementing Choice Node
 
@@ -287,8 +296,7 @@ After:
        unlock_thieves_lair_quest()
    ```
 5. Add ripple to Market Shadows sphere (0.2 weight)
-
----
+##
 
 ### Use Case 3: Designing New Glyph Chamber
 
@@ -305,13 +313,12 @@ After:
    ```markdown
    - [x] **Dislocated Attachment Chamber**
      - Location: Hospital Ruins, collapsed pediatric wing
-     - Puzzle: Player must hold two conflicting glyphs (Love/Fear) 
+     - Puzzle: Player must hold two conflicting glyphs (Love/Fear)
        simultaneously while navigating memory echoes
-     - Memory echo: Mother choosing to disconnect child from 
+     - Memory echo: Mother choosing to disconnect child from
        Corelink to spare them pain, knowing it may kill them
    ```
-
----
+##
 
 ### Use Case 4: Planning Development Milestone
 
@@ -331,8 +338,7 @@ After:
    - Add Thieves' lair quest
    - Optional: Add 1-2 more side quests from placeholders
 5. Estimate: 6-8 weeks for Act 2 completion
-
----
+##
 
 ## Maintaining Narrative Consistency
 
@@ -355,13 +361,12 @@ After:
 
 ### Red Flags to Avoid:
 
-❌ **DON'T** create "perfect" solutions - all choices should have trade-offs  
-❌ **DON'T** ignore NPC sphere connections - relationships must ripple  
-❌ **DON'T** make TONE stats visible - they stay hidden to preserve authenticity  
-❌ **DON'T** add combat-focused content - this is about emotional confrontation  
-❌ **DON'T** forget to update related sections when making changes  
-
----
+❌ **DON'T** create "perfect" solutions - all choices should have trade-offs
+❌ **DON'T** ignore NPC sphere connections - relationships must ripple
+❌ **DON'T** make TONE stats visible - they stay hidden to preserve authenticity
+❌ **DON'T** add combat-focused content - this is about emotional confrontation
+❌ **DON'T** forget to update related sections when making changes
+##
 
 ## Testing with the Story Map
 
@@ -392,8 +397,7 @@ Before marking content "complete," verify:
 - [ ] Core dialogue (Velinor/Saori) matches exactly
 - [ ] Survivor reactions match emotional lever chosen
 - [ ] Final image conveys appropriate ambiguity
-
----
+##
 
 ## Troubleshooting
 
@@ -404,19 +408,17 @@ Before marking content "complete," verify:
 - Check if content should be main path or expansion placeholder
 - Consider if this introduces new mechanics (document those first)
 - If truly doesn't fit, discuss with team before forcing it in
-
----
+##
 
 ### Problem: Contradicting existing lore
 
 **Solution:**
 - Search story map for all references to conflicting element
-- Check "Character Relationships" and "Core Narrative Arc" 
+- Check "Character Relationships" and "Core Narrative Arc"
 - Decide which version is canonical
 - Update all instances to maintain consistency
 - Add note in Update Log explaining resolution
-
----
+##
 
 ### Problem: Too many placeholders to track
 
@@ -425,8 +427,7 @@ Before marking content "complete," verify:
 - Create separate tracking document with priority levels
 - Focus on Critical Path placeholders first (main story)
 - Mark lower priority placeholders for post-launch content
-
----
+##
 
 ### Problem: Story map is getting too long
 
@@ -435,31 +436,29 @@ Before marking content "complete," verify:
 - Use the existing structure as a hub with links to detail docs
 - Keep story map as overview, move deep details to appendices
 - Maintain current file as "master" with cross-references
-
----
+##
 
 ## Best Practices
 
 ### Do's ✅
 
-✅ **Read the whole story map** before making significant changes  
-✅ **Update related sections** when adding content (NPCs affect quests, etc.)  
-✅ **Use consistent formatting** to maintain readability  
-✅ **Fill placeholders** as content is finalized  
-✅ **Test in-game** to verify story map accuracy  
-✅ **Communicate changes** to team via update log  
-✅ **Maintain ambiguity** in endings and choices  
+✅ **Read the whole story map** before making significant changes
+✅ **Update related sections** when adding content (NPCs affect quests, etc.)
+✅ **Use consistent formatting** to maintain readability
+✅ **Fill placeholders** as content is finalized
+✅ **Test in-game** to verify story map accuracy
+✅ **Communicate changes** to team via update log
+✅ **Maintain ambiguity** in endings and choices
 
 ### Don'ts ❌
 
-❌ **Don't bypass the story map** when making narrative decisions  
-❌ **Don't contradict established lore** without documenting changes  
-❌ **Don't create "right answer" choices** - maintain moral ambiguity  
-❌ **Don't forget TONE stats** when designing choices  
-❌ **Don't ignore NPC spheres** - relationships are interconnected  
-❌ **Don't make combat mandatory** - emotional confrontation is key  
-
----
+❌ **Don't bypass the story map** when making narrative decisions
+❌ **Don't contradict established lore** without documenting changes
+❌ **Don't create "right answer" choices** - maintain moral ambiguity
+❌ **Don't forget TONE stats** when designing choices
+❌ **Don't ignore NPC spheres** - relationships are interconnected
+❌ **Don't make combat mandatory** - emotional confrontation is key
+##
 
 ## Quick Reference Commands
 
@@ -475,30 +474,28 @@ Before marking content "complete," verify:
 | Glyph mechanics | **Glyph System** |
 | TONE stats | "TONE" or "Trust, Observation" |
 | Decision points | "Choice Node" |
-
----
+##
 
 ## FAQ
 
-**Q: Do I need to read the entire story map before starting work?**  
+**Q: Do I need to read the entire story map before starting work?**
 A: Not necessarily. Read the Overview and your role-specific section first, then reference other sections as needed.
 
-**Q: What if I want to add content not covered by placeholders?**  
+**Q: What if I want to add content not covered by placeholders?**
 A: Discuss with narrative lead first. If approved, add new placeholder category in "Expansion Placeholders" section before implementing.
 
-**Q: How strict are the ending requirements?**  
+**Q: How strict are the ending requirements?**
 A: They're guidelines. Player experience may reveal need for adjustments. Document any changes in Update Log.
 
-**Q: Can NPCs have relationships outside their documented spheres?**  
+**Q: Can NPCs have relationships outside their documented spheres?**
 A: Yes, but add the connection to the story map with appropriate weight value. All relationships must be documented.
 
-**Q: What if testing reveals a plot hole?**  
+**Q: What if testing reveals a plot hole?**
 A: Document it immediately, mark affected sections with `[NEEDS REVISION]`, and bring to team for resolution.
 
-**Q: How often should the story map be updated?**  
+**Q: How often should the story map be updated?**
 A: Update immediately when new content is added or changed. Review/audit monthly for consistency.
-
----
+##
 
 ## Resources
 
@@ -515,29 +512,26 @@ A: Update immediately when new content is added or changed. Review/audit monthly
 - Glyph System → Collection mechanics
 - Ending Branches → All possible conclusions
 - Narrative Decision Points → Choice nodes
-
----
+##
 
 ## Contact
 
-**Questions about the story map?**  
+**Questions about the story map?**
 - Narrative Lead: [Contact info]
-- Project Manager: [Contact info]  
+- Project Manager: [Contact info]
 - Development Team: [Contact info]
 
-**Reporting issues with the story map?**  
+**Reporting issues with the story map?**
 Create an issue with:
 - Section name
 - Description of problem
 - Suggested fix (if any)
 - Priority level
-
----
+##
 
 **Remember:** The story map is a living document. It should evolve as Velinor evolves. Keep it updated, keep it consistent, and let it guide the creation of this emotionally resonant world.
+##
 
----
-
-**Last Updated:** December 14, 2025  
-**Document Version:** 1.0  
+**Last Updated:** December 14, 2025
+**Document Version:** 1.0
 **Story Map Version:** 1.0

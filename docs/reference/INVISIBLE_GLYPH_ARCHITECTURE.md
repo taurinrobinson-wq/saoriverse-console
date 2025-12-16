@@ -12,18 +12,22 @@ The glyph system should work **invisibly**—informing quality without appearing
 ## Architecture: Visible vs. Invisible Glyphs
 
 ### ❌ OLD ARCHITECTURE (Visible Glyph System)
+
 ```
 User: "I have math anxiety"
      ↓
 Glyph Selected: Still Containment
      ↓
-Response: "There's something in what you're describing—boundaries that hold without pressure. 
+Response: "There's something in what you're describing—boundaries that hold without pressure.
 a sanctuary of quiet care. You're not alone—many brilliant people..."
 
 ❌ Problem: User feels categorized, system feels mechanical
 ```
 
+
+
 ### ✅ NEW ARCHITECTURE (Invisible Glyph System)
+
 ```
 User: "I have math anxiety"
      ↓
@@ -35,13 +39,15 @@ Glyph Informs (behind the scenes):
   - Poetry: Joy-category poems for stability
   - Entity weighting: People mentioned get appropriate focus
      ↓
-Response: "You're not alone—many brilliant people have genuine friction with math, 
+Response: "You're not alone—many brilliant people have genuine friction with math,
 especially when it's presented in a way that doesn't match how their mind naturally works..."
 
 ✓ User feels heard about their actual situation
 ✓ Glyph system works invisibly in background
 ✓ Response is compositionally fresh but coherent
 ```
+
+
 
 ## How Glyphs Work Invisibly
 
@@ -56,7 +62,7 @@ Instead of mentioning the glyph meaning, the system:
 
 ### 2. **Glyph Gates → Intensity Scaling (Invisible)**
 - Gate 2 (low intensity) → Permission-based closing
-- Gate 5-8 (medium) → Question-based closing  
+- Gate 5-8 (medium) → Question-based closing
 - Gate 9+ (high intensity) → Commitment-based closing
 
 User never sees "Gate 2". They just experience:
@@ -80,7 +86,9 @@ User never sees "Gate 2". They just experience:
 ### Response Building Process
 
 **_build_glyph_aware_response():**
+
 ```python
+
 # EXTRACT glyph data invisibly
 intensity_level = len(gates)  # Used for tone, never shown to user
 poetry_emotion = _glyph_to_emotion_category(glyph_name)  # Used for poetry selection
@@ -100,10 +108,14 @@ else:
 return "".join(parts)  # No glyph descriptions mentioned
 ```
 
+
+
 ### Message-Aware Composition
 
 **compose_message_aware_response():**
+
 ```python
+
 # Direct response to message features (math_frustration, inherited_pattern, etc.)
 if message_content.get("math_frustration"):
     parts.append("You're not alone—many brilliant people have genuine friction...")
@@ -114,6 +126,8 @@ if intensity >= 8:
 else:
     parts.append("What would it feel like to approach this differently?")
 ```
+
+
 
 No glyph descriptions. Just person-to-person response calibrated by glyph.
 
@@ -137,13 +151,16 @@ No glyph descriptions. Just person-to-person response calibrated by glyph.
 **Input:** "I have math anxiety. I've never been good at math and it's been a block my whole life."
 
 **Response:**
+
 ```
-You're not alone—many brilliant people have genuine friction with math, 
-especially when it's presented in a way that doesn't match how their mind naturally works. 
-Mental blocks are usually where the concept structure doesn't match your natural thinking pattern. 
-That's not fixed—it's just a mismatch to navigate. 
+You're not alone—many brilliant people have genuine friction with math,
+especially when it's presented in a way that doesn't match how their mind naturally works.
+Mental blocks are usually where the concept structure doesn't match your natural thinking pattern.
+That's not fixed—it's just a mismatch to navigate.
 What would it feel like to approach math frustration differently?
 ```
+
+
 
 ✓ Addresses **their specific struggle** (math, mental blocks)
 ✓ Validates **their experience** (not alone, it's real)
@@ -154,10 +171,13 @@ What would it feel like to approach math frustration differently?
 **Input:** "That's not quite what I meant. Michelle is my mother-in-law and my boss, and she always explains things in a way that only makes sense to her."
 
 **Response:**
+
 ```
-I appreciate you saying that. I want to make sure I'm actually hearing you, 
+I appreciate you saying that. I want to make sure I'm actually hearing you,
 not projecting onto you. Help me understand: what did I miss?
 ```
+
+
 
 ✓ Shows **they're being heard** (calibrated to feedback)
 ✓ Addresses **their specific person** (Michelle context)
@@ -190,11 +210,12 @@ not projecting onto you. Help me understand: what did I miss?
 ## User Experience Timeline
 
 ### User's Perspective:
+
 ```
 Day 1: "I have anxiety about math"
   → Response feels understanding, not categorical ✓
 
-Day 2: "It's from my mom"  
+Day 2: "It's from my mom"
   → Response acknowledges the pattern origin ✓
 
 Day 3: "That's not what I meant about Michelle"
@@ -203,7 +224,10 @@ Day 3: "That's not what I meant about Michelle"
 Overall: Felt like talking to someone who gets me, not a system
 ```
 
+
+
 ### System's Perspective:
+
 ```
 Day 1: Glyph=Still Containment, Gates=[Gate 2] → tone: gentle, closing: permission
 Day 2: Glyph=None, fallback → generic validation
@@ -211,6 +235,8 @@ Day 3: Glyph=Still Containment, feedback=misalignment → tone: corrective, clos
 
 Overall: Glyph system provided coherence without being visible
 ```
+
+
 
 ## Success Metrics
 

@@ -2,13 +2,12 @@
 
 ## What You Have
 
-✅ **Complete Docker configuration** ready to deploy FirstPerson web app  
-✅ **Automated setup script** (`docker-setup.sh`)  
-✅ **Comprehensive documentation**  
-✅ **Environment configuration** templates  
+✅ **Complete Docker configuration** ready to deploy FirstPerson web app
+✅ **Automated setup script** (`docker-setup.sh`)
+✅ **Comprehensive documentation**
+✅ **Environment configuration** templates
 ✅ **Production-ready** Nginx reverse proxy setup
-
----
+##
 
 ## Files Created/Updated
 
@@ -36,8 +35,7 @@
 |------|---------|
 | `.env.example` | ✅ Updated - Environment variables template |
 | `deploy/nginx.conf` | ✅ Updated - Reverse proxy configuration |
-
----
+##
 
 ## What This Setup Provides
 
@@ -61,15 +59,14 @@
 
 ### Features Included
 
-✅ Automatic health checks  
-✅ Container restart policies  
-✅ Volume mounts for persistence  
-✅ Docker network isolation  
-✅ Resource limits configured  
-✅ Logging support  
-✅ Easy scaling  
-
----
+✅ Automatic health checks
+✅ Container restart policies
+✅ Volume mounts for persistence
+✅ Docker network isolation
+✅ Resource limits configured
+✅ Logging support
+✅ Easy scaling
+##
 
 ## How to Deploy
 
@@ -83,13 +80,16 @@ chmod +x docker-setup.sh
 ./docker-setup.sh
 ```
 
-**Time**: ~5 minutes  
-**Difficulty**: Easy  
+
+
+**Time**: ~5 minutes
+**Difficulty**: Easy
 **What it does**: Installs Docker, builds images, starts containers, verifies setup
 
 ### Option 2: Manual
 
 ```bash
+
 # SSH to droplet
 ssh root@161.35.227.49
 
@@ -111,10 +111,11 @@ docker compose ps
 curl http://161.35.227.49:8000/health
 ```
 
-**Time**: ~10 minutes  
-**Difficulty**: Moderate  
 
----
+
+**Time**: ~10 minutes
+**Difficulty**: Moderate
+##
 
 ## Accessing Your App
 
@@ -129,9 +130,12 @@ Health Check:      http://161.35.227.49:8000/health
 Nginx Proxy:       http://161.35.227.49:80 (same as :3000)
 ```
 
+
+
 ### Test the API
 
 ```bash
+
 # Health check
 curl http://161.35.227.49:8000/health
 
@@ -141,11 +145,13 @@ curl -X POST http://161.35.227.49:8000/api/chat \
   -d '{"message":"Hello","user_id":"test","mode":"local"}'
 ```
 
----
+
+##
 
 ## Essential Docker Commands
 
 ```bash
+
 # Status
 docker compose ps              # Running containers
 docker compose logs -f         # Live logs
@@ -163,13 +169,15 @@ docker compose build --no-cache     # Rebuild images
 docker compose up -d --build        # Rebuild & restart
 ```
 
----
+
+##
 
 ## Environment Variables
 
 The `.env.example` file includes:
 
 ```env
+
 # API Configuration
 API_HOST=0.0.0.0
 API_PORT=8000
@@ -188,11 +196,14 @@ DEBUG=false
 LOG_LEVEL=info
 
 # Optional: External services
+
 # OPENAI_API_KEY=...
+
 # SUPABASE_URL=...
 ```
 
----
+
+##
 
 ## Project Structure
 
@@ -219,7 +230,8 @@ saoriverse-console/
 └── deploy/nginx.conf       # Reverse proxy config
 ```
 
----
+
+##
 
 ## Troubleshooting Quick Links
 
@@ -231,8 +243,7 @@ saoriverse-console/
 | Can't reach API | `curl http://161.35.227.49:8000/health` |
 | Frontend won't load | `docker compose logs frontend` |
 | Disk full | `docker system prune -a` |
-
----
+##
 
 ## Next Steps
 
@@ -255,8 +266,7 @@ saoriverse-console/
    - Set up monitoring/backups
    - Configure log aggregation
    - See `DIGITALOCEAN_DEPLOYMENT_GUIDE.md`
-
----
+##
 
 ## Key Files to Reference
 
@@ -268,8 +278,7 @@ saoriverse-console/
 | Environment config | `.env.example` |
 | Reverse proxy setup | `deploy/nginx.conf` |
 | Automated setup | `docker-setup.sh` |
-
----
+##
 
 ## Support Resources
 
@@ -277,25 +286,23 @@ saoriverse-console/
 - **FastAPI**: https://fastapi.tiangolo.com/
 - **React/Expo**: https://expo.dev/
 - **DigitalOcean**: https://www.digitalocean.com/docs/
-
----
+##
 
 ## Summary
 
 You now have:
 
-✅ A complete, production-ready Docker setup  
-✅ Automated deployment script (`docker-setup.sh`)  
-✅ Comprehensive documentation  
-✅ Three containerized services (backend, frontend, nginx)  
-✅ Configuration templates  
-✅ Troubleshooting guides  
+✅ A complete, production-ready Docker setup
+✅ Automated deployment script (`docker-setup.sh`)
+✅ Comprehensive documentation
+✅ Three containerized services (backend, frontend, nginx)
+✅ Configuration templates
+✅ Troubleshooting guides
 
 **You're ready to deploy!** 🚀
 
 **Next action**: Run `./docker-setup.sh` on your DigitalOcean droplet.
-
----
+##
 
 ### Quick Deployment Checklist
 
@@ -308,10 +315,9 @@ You now have:
 - [ ] Test API: `curl http://161.35.227.49:8000/health`
 - [ ] Visit frontend: http://161.35.227.49:3000
 - [ ] Monitor logs: `docker compose logs -f`
+##
 
----
-
-**Status**: ✅ READY FOR DEPLOYMENT  
-**Created**: December 13, 2025  
-**Target**: DigitalOcean droplet (161.35.227.49, Ubuntu)  
+**Status**: ✅ READY FOR DEPLOYMENT
+**Created**: December 13, 2025
+**Target**: DigitalOcean droplet (161.35.227.49, Ubuntu)
 **Services**: Backend (FastAPI) + Frontend (React/Expo) + Proxy (Nginx)

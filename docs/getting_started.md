@@ -16,11 +16,15 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 ```
 
+
+
 2. Load safe defaults
 
 ```bash
 cp .env.template .env  # Load safe defaults for local-only mode
 ```
+
+
 
 3. (Optional) Install Python deps
 
@@ -30,11 +34,15 @@ pip install -r requirements.txt      # runtime deps
 pip install -r requirements-dev.txt  # dev/test deps
 ```
 
+
+
 4. Run the enrichment pipeline (example)
 
 ```bash
 python3 enrich_runner.py
 ```
+
+
 
 5. View logs
 
@@ -42,11 +50,15 @@ python3 enrich_runner.py
 tail -f logs/enrich.log
 ```
 
+
+
 6. Run tests
 
 ```bash
 pytest -q
 ```
+
+
 
 Makefile (quick shortcuts)
 
@@ -60,14 +72,15 @@ make test       # Run tests
 make logs       # View recent enrichment logs
 ```
 
+
+
 Processing modes
 
 - `local`, Fully offline. Default. No remote AI calls allowed.
 - `hybrid`, Enables remote AI (OpenAI, Supabase hybrid processors).
 - `premium`, Optional tier for advanced generation tasks.
 
-Opt-in for remote AI
---------------------
+## Opt-in for remote AI
 
 To enable remote AI calls for testing or trusted environments:
 
@@ -75,6 +88,8 @@ To enable remote AI calls for testing or trusted environments:
 export PROCESSING_MODE=hybrid
 export ALLOW_REMOTE_AI=1
 ```
+
+
 
 CI & guard enforcement
 

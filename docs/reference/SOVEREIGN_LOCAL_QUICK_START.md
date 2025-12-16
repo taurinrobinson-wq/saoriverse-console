@@ -3,12 +3,12 @@
 ## 🚀 TODAY: Get Core Infrastructure Running
 
 This guide gets you from idea to working sovereign local system in hours, not weeks.
-
----
+##
 
 ## PART 1: INSTALL LOCAL DEPENDENCIES (15 minutes)
 
 ### 1.1 Install spaCy with English models
+
 ```bash
 pip install spacy
 
@@ -16,20 +16,30 @@ pip install spacy
 python -m spacy download en_core_web_sm
 ```
 
+
+
 ### 1.2 Download NRC Emotion Lexicon
+
 ```bash
+
 # Create folder
 mkdir -p data/lexicons
 
 # Download NRC Emotion Lexicon (free, public domain)
+
 # From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+
 # File: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
 
 # Put it in data/lexicons/nrc_emotion_lexicon.txt
 ```
 
+
+
 ### 1.3 Verify NLTK is loaded
+
 ```python
+
 # Your code already has this! Just verify:
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
@@ -39,7 +49,8 @@ sia = SentimentIntensityAnalyzer()
 print(sia.polarity_scores("I am happy"))
 ```
 
----
+
+##
 
 ## PART 2: CREATE NRC LEXICON LOADER (20 minutes)
 
@@ -59,11 +70,11 @@ from collections import defaultdict
 
 class NRCLexicon:
     """Load and query the NRC Emotion Lexicon locally."""
-    
+
     def __init__(self, filepath: str = "data/lexicons/nrc_emotion_lexicon.txt"):
         """
         Initialize NRC Lexicon loader.
-        
+
         Format of lexicon file:
         word    emotion    association
         good    trust    1
@@ -73,13 +84,13 @@ class NRCLexicon:
         self.word_emotions = defaultdict(list)
         self.emotion_words = defaultdict(list)
         self.loaded = False
-        
+
         if os.path.exists(filepath):
             self._load_lexicon(filepath)
         else:
             print(f"Warning: NRC lexicon not found at {filepath}")
             print("Download from: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm")
-    
+
     def _load_lexicon(self, filepath: str):
         """Load lexicon from file."""
         try:
@@ -91,35 +102,35 @@ class NRCLexicon:
                         word = parts[0].lower()
                         emotion = parts[1]
                         association = int(parts[2])
-                        
+
                         if association == 1:
                             self.word_emotions[word].append(emotion)
                             self.emotion_words[emotion].append(word)
-            
+
             self.loaded = True
             print(f"✓ NRC Lexicon loaded: {len(self.word_emotions)} words")
         except Exception as e:
             print(f"Error loading NRC lexicon: {e}")
-    
+
     def get_emotions(self, word: str) -> list:
         """Get emotions for a word."""
         return self.word_emotions.get(word.lower(), [])
-    
+
     def get_words_for_emotion(self, emotion: str) -> list:
         """Get all words for an emotion."""
         return self.emotion_words.get(emotion, [])
-    
+
     def analyze_text(self, text: str) -> dict:
         """Analyze text and return emotion frequencies."""
         words = text.lower().split()
         emotions = defaultdict(int)
-        
+
         for word in words:
             word_clean = word.strip('.,!?;:')
             word_emotions = self.get_emotions(word_clean)
             for emotion in word_emotions:
                 emotions[emotion] += 1
-        
+
         return dict(emotions)
 
 
@@ -133,13 +144,15 @@ if __name__ == "__main__":
     # Expected: {'joy': 2, 'trust': 1}
 ```
 
----
+
+##
 
 ## PART 3: ENHANCE SIGNAL PARSER (30 minutes)
 
 Update `parser/signal_parser.py` to use NRC lexicon:
 
 ```python
+
 # At the top, add:
 from parser.nrc_lexicon_loader import nrc
 import spacy
@@ -154,18 +167,18 @@ def enhanced_parse_signals(text: str) -> dict:
     2. spaCy NER (entity extraction)
     3. Existing signal lexicon
     """
-    
+
     # 1. Load NRC emotions
     nrc_emotions = nrc.analyze_text(text)
-    
+
     # 2. Extract entities (what triggered this?)
     doc = nlp(text)
     entities = [(ent.text, ent.label_) for ent in doc.ents]
     noun_chunks = [chunk.text for chunk in doc.noun_chunks]
-    
+
     # 3. Use existing signal lexicon
     signals_from_lexicon = parse_input(text)  # existing function
-    
+
     # 4. Map NRC emotions to voltage signals
     nrc_to_voltage = {
         'joy': 'α',
@@ -177,13 +190,13 @@ def enhanced_parse_signals(text: str) -> dict:
         'anger': 'ε',
         'anticipation': 'θ'
     }
-    
+
     voltage_signals = []
     for emotion, count in nrc_emotions.items():
         if emotion in nrc_to_voltage:
             for _ in range(count):
                 voltage_signals.append(nrc_to_voltage[emotion])
-    
+
     return {
         'text': text,
         'nrc_emotions': nrc_emotions,
@@ -195,7 +208,8 @@ def enhanced_parse_signals(text: str) -> dict:
     }
 ```
 
----
+
+##
 
 ## PART 4: CREATE POETRY EXTRACTION SCRIPT (45 minutes)
 
@@ -218,7 +232,7 @@ from collections import defaultdict
 
 class PoetryExtractor:
     """Extract and organize poetry by emotional theme."""
-    
+
     def __init__(self, db_path: str = "emotional_os/glyphs/glyphs.db"):
         self.db_path = db_path
         self.emotions = {
@@ -231,12 +245,12 @@ class PoetryExtractor:
             'peace': ['peace', 'calm', 'serene', 'still', 'quiet'],
             'hope': ['hope', 'aspire', 'long', 'yearn', 'strive'],
         }
-    
+
     def create_poetry_tables(self):
         """Create database tables for poetry storage."""
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
-        
+
         c.execute('''
             CREATE TABLE IF NOT EXISTS glyph_poetry (
                 id INTEGER PRIMARY KEY,
@@ -248,7 +262,7 @@ class PoetryExtractor:
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
-        
+
         c.execute('''
             CREATE TABLE IF NOT EXISTS glyph_metaphors (
                 id INTEGER PRIMARY KEY,
@@ -258,33 +272,33 @@ class PoetryExtractor:
                 source TEXT
             )
         ''')
-        
+
         conn.commit()
         conn.close()
         print("✓ Poetry tables created")
-    
-    def add_poetry_to_glyph(self, glyph_name: str, quote: str, 
+
+    def add_poetry_to_glyph(self, glyph_name: str, quote: str,
                            poet: str, emotional_resonance: float = 8.0):
         """Add a poem quote to a glyph."""
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
-        
+
         # Find glyph by name
         c.execute("SELECT id FROM glyph_lexicon WHERE glyph_name = ?", (glyph_name,))
         result = c.fetchone()
-        
+
         if result:
             glyph_id = result[0]
             c.execute('''
-                INSERT INTO glyph_poetry 
+                INSERT INTO glyph_poetry
                 (glyph_id, quote, poet, source, emotional_resonance)
                 VALUES (?, ?, ?, ?, ?)
             ''', (glyph_id, quote, poet, "Project Gutenberg", emotional_resonance))
-            
+
             conn.commit()
             conn.close()
             return True
-        
+
         conn.close()
         return False
 
@@ -341,7 +355,7 @@ def populate_poetry():
     """Populate database with curated poetry."""
     extractor = PoetryExtractor()
     extractor.create_poetry_tables()
-    
+
     for glyph_name, poems in POETRY_DATABASE.items():
         for poem in poems:
             extractor.add_poetry_to_glyph(
@@ -356,13 +370,15 @@ if __name__ == "__main__":
     populate_poetry()
 ```
 
----
+
+##
 
 ## PART 5: UPDATE STREAMLIT UI (20 minutes)
 
 Update `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) to show local mode toggle:
 
 ```python
+
 # Add to sidebar:
 st.sidebar.markdown("---")
 st.sidebar.subheader("🔐 Processing Mode")
@@ -393,7 +409,7 @@ if USE_LOCAL_ONLY:
     # Use local processing
     response_data = parse_input(user_message)
     glyph = response_data['best_glyph']
-    
+
     # Try to fetch poetry
     try:
         poetry = get_glyph_poetry(glyph)
@@ -406,7 +422,8 @@ else:
     pass
 ```
 
----
+
+##
 
 ## PART 6: TEST LOCAL MODE (10 minutes)
 
@@ -424,14 +441,14 @@ import spacy
 
 def test_local_processing():
     """Test complete local pipeline."""
-    
+
     print("🧪 Testing Local Mode Processing\n")
-    
+
     # Load models
     print("1. Loading spaCy model...")
     nlp = spacy.load("en_core_web_sm")
     print("   ✓ Loaded\n")
-    
+
     # Load NRC lexicon
     print("2. Loading NRC Emotion Lexicon...")
     if not nrc.loaded:
@@ -439,7 +456,7 @@ def test_local_processing():
         print("   http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm")
         return False
     print(f"   ✓ Loaded ({len(nrc.word_emotions)} words)\n")
-    
+
     # Test messages
     test_messages = [
         "I keep replaying that moment over and over, and it hurts",
@@ -448,35 +465,35 @@ def test_local_processing():
         "There's a small spark of hope I can't quite name",
         "I'm angry at what happened to me",
     ]
-    
+
     print("3. Processing test messages locally:\n")
-    
+
     for msg in test_messages:
         start = time.time()
-        
+
         # Tokenize + NER
         doc = nlp(msg)
-        
+
         # Get emotions
         emotions = nrc.analyze_text(msg)
-        
+
         # Get entities
         entities = [ent.text for ent in doc.ents]
-        
+
         elapsed = time.time() - start
-        
+
         print(f"Input: '{msg}'")
         print(f"  Emotions: {emotions}")
         print(f"  Entities: {entities}")
         print(f"  Time: {elapsed:.3f}s")
         print()
-    
+
     print("✅ All tests passed! Local mode is working.\n")
     print("Next steps:")
     print("1. Download Project Gutenberg poetry")
     print("2. Run data_preparation/extract_poetry.py")
     print("3. Start main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) and select 'Local Mode'")
-    
+
     return True
 
 if __name__ == "__main__":
@@ -484,16 +501,21 @@ if __name__ == "__main__":
     sys.exit(0 if success else 1)
 ```
 
+
+
 Run it:
+
 ```bash
 python test_local_mode.py
 ```
 
----
+
+##
 
 ## PART 7: DOWNLOAD PROJECT GUTENBERG POETRY (Optional, 30 min - 2 hours)
 
 ```bash
+
 # Option A: Download pre-curated poetry collection
 curl -o data/poetry/gutenberg_poetry.zip \
   "https://www.gutenberg.org/cache/epub/collections/poetry-zh.zip"
@@ -506,6 +528,7 @@ import os
 os.makedirs('data/poetry', exist_ok=True)
 
 # Download a specific poetry book
+
 # Example: Emily Dickinson Complete Poems
 url = 'https://www.gutenberg.org/cache/epub/1638/pg1638.txt'
 urllib.request.urlretrieve(url, 'data/poetry/dickinson.txt')
@@ -513,7 +536,8 @@ print('✓ Downloaded Emily Dickinson poems')
 "
 ```
 
----
+
+##
 
 ## PART 8: VERIFY NO EXTERNAL CALLS (Critical!)
 
@@ -526,12 +550,12 @@ import os
 if mode == "Local Mode (Recommended)":
     # Remove OpenAI key to prevent accidental API calls
     os.environ.pop('OPENAI_API_KEY', None)
-    
+
     # Verify no external requests
     import unittest.mock as mock
-    
+
     # This will raise error if code tries to call OpenAI
-    with mock.patch('openai.ChatCompletion.create', 
+    with mock.patch('openai.ChatCompletion.create',
                     side_effect=Exception("🚫 NO EXTERNAL API CALLS IN LOCAL MODE")):
         # Process user message
         response_data = parse_input(user_message)
@@ -539,7 +563,8 @@ if mode == "Local Mode (Recommended)":
         st.success("✓ Processing completely local (no external API calls)")
 ```
 
----
+
+##
 
 ## ✅ VERIFICATION CHECKLIST
 
@@ -553,21 +578,24 @@ if mode == "Local Mode (Recommended)":
 - [ ] `test_local_mode.py` passes all tests
 - [ ] Verified no external API calls in Local Mode
 - [ ] User can process messages with full poetry/metaphor enrichment
-
----
+##
 
 ## 🚀 NEXT: Try It
 
 ```bash
+
 # Start the app in local mode
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 # Select: "Local Mode (Recommended)"
+
 # Type: "I feel stuck in this loop of grief"
+
 # Expected: Beautiful response with poetry, metaphors, no API calls
 ```
 
----
+
+##
 
 ## 📊 PERFORMANCE EXPECTATIONS
 
@@ -579,17 +607,17 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 **Hybrid Mode (Old):**
 - First message: ~1-2s
-- Subsequent messages: ~1-2s  
+- Subsequent messages: ~1-2s
 - Network latency: ~0.5-1.5s
 - Data transmitted: Full message → API → Full response
 
 **Result: Local is 4-10x faster + 100% private**
-
----
+##
 
 ## 🔐 PRIVACY VERIFICATION
 
 ```python
+
 # Run this to verify local mode is truly private:
 python -c "
 import os
@@ -619,7 +647,8 @@ print('✅ Local mode verified - no external API calls possible')
 "
 ```
 
----
+
+##
 
 ## 📝 NEXT ACTIONS
 

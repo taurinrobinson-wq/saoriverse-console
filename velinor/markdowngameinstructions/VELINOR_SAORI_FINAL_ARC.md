@@ -3,8 +3,7 @@
 ## Overview
 
 Velinor and Saori are the emotional core of the game. They are not antagonists—they are best friends whose shared vision fractured under the weight of guilt, desperation, and conflicting philosophy. Their final encounter determines not just the game's ending, but the player's understanding of sacrifice, autonomy, and what friendship means in the face of collapse.
-
----
+##
 
 ## Part I: The Architects
 
@@ -23,8 +22,7 @@ Velinor and Saori are the emotional core of the game. They are not antagonists�
 **Philosophy**: "If everyone could feel what everyone else felt, how could we ever hurt each other? Pain becomes shared, bearable, beautiful."
 
 **Temperament**: Brilliant, ambitious, increasingly frustrated by Velinor's resistance.
-
----
+##
 
 ## Part II: The Fracture
 
@@ -42,8 +40,7 @@ Velinor and Saori are the emotional core of the game. They are not antagonists�
 - Saori initiates the unification protocol without consensus.
 - Velinor discovers the activation and confronts her: "You chose your vision over our friendship."
 - Saori replies, voice shaking: "I chose humanity over caution."
-
----
+##
 
 ## Part III: The Cataclysm
 
@@ -77,8 +74,7 @@ The unified system couldn't process conflicting emotions from billions of minds 
 - Velinor connects herself to the system—not to restore it, but to stabilize it long enough for the sequence.
 - Saori inputs the shutdown codes.
 - The system dies. Velinor's consciousness fractures into 70 glyphs.
-
----
+##
 
 ## Part IV: The Aftermath (25 Years Later)
 
@@ -108,8 +104,7 @@ The unified system couldn't process conflicting emotions from billions of minds 
 **Her Position**: She does not want to be restored. She believes the system was wrong, and her fragmentation is the price of that wrongness. She would rather dissolve completely than see the system reactivated.
 
 **Her Fear**: That Saori will restart it out of guilt, not wisdom. That the cycle will repeat.
-
----
+##
 
 ## Part V: The Final Chamber
 
@@ -130,8 +125,7 @@ The unified system couldn't process conflicting emotions from billions of minds 
 **Saori** stands near the console, hand trembling, older but unmistakably brilliant. Her face is lined with guilt and longing.
 
 **Velinor** sits beneath the void ring, her cloak glowing faintly with the glyphs she still carries. She is calm, resigned, but not at peace.
-
----
+##
 
 ## Part VI: The Dialogue Paths
 
@@ -148,8 +142,7 @@ Saori (turning to player):
 
 Velinor (to player):
 "She wants unity. I want memory. Not fused. Not filtered. Just… held. Even if it hurts."
-
----
+##
 
 ## Part VII: The Ending Branches
 
@@ -172,8 +165,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 **Final Echo**: "Memory restored. Resonance unified. Autonomy surrendered."
 
 **NPC Reaction**: Varies by player's emotional lever, but the world feels both safer and more controlled.
-
----
+##
 
 ### Branch 2: Collapse Embraced (Exposure Path)
 
@@ -195,8 +187,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 **Final Echo**: "Collapse embraced. Truth unfiltered. Legacy unbound."
 
 **NPC Reaction**: Survivors struggle with the truth, but autonomy is preserved.
-
----
+##
 
 ### Branch 3: Fragments Freed (Reconciliation Path)
 
@@ -236,8 +227,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 - **Trust**: Survivors approach with reverence, honoring the sacrifice.
 - **Defiance**: Survivors cheer the collapse of control.
 - **Mourning**: Survivors weep openly, carrying the ache together.
-
----
+##
 
 ### Branch 4: Cycle Broken (Destruction Path)
 
@@ -257,8 +247,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 - The world is fundamentally changed—no path to restoration exists.
 
 **Final Echo**: "System shattered. Memory lost. Autonomy preserved."
-
----
+##
 
 ### Branch 5: Sacred Withholding (Ambiguity Path)
 
@@ -278,8 +267,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 - A delicate balance is struck, neither side fully victorious.
 
 **Final Echo**: "Fragments withheld. Collapse partial. Memory sacred."
-
----
+##
 
 ### Branch 6: Second Thoughts (Interrogation Path)
 
@@ -299,8 +287,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 - The player carries the burden of knowledge and must eventually decide what to do with it.
 
 **Final Echo**: "Truth interrogated. Resonance reshaped. Collapse pending."
-
----
+##
 
 ## Emotional Voltage Summary
 
@@ -312,8 +299,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 | **Cycle Broken** | Scattered, unrepairable | Permanently broken | Nothing can ever be undone |
 | **Sacred Withholding** | Partially alive, ambiguous | Uncertain, waiting | Choosing what to protect, what to reveal |
 | **Second Thoughts** | Unresolved | Questioned | The burden of deferred choice |
-
----
+##
 
 ## Narrative Philosophy
 

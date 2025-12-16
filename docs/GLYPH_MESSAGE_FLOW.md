@@ -12,8 +12,7 @@ Sections
 - Fallbacks, caching, and safety gates
 - Glyph learning & promotion
 - Debugging tips and where to look for artifacts
-
----
+##
 
 ## Overview (quick path)
 
@@ -30,8 +29,7 @@ Sections
   8. The assistant reply is emitted to the user with metadata (selected glyphs, scores, debug traces).
 
 All of the above runs in `--dry-run` or demo mode when `supabase` secrets aren't configured; CI or production installs enable the hybrid AI endpoint and Supabase-backed persistence.
-
----
+##
 
 ## Detailed step-by-step trace (call order + functions)
 
@@ -105,8 +103,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 13) Learning / Logging (background)
     - The `HybridLearner` / `GlyphLearner` components record exchanges, update learned lexicons, and optionally create `glyph_candidates` when the system couldn't find a strong match.
     - Files / modules: `emotional_os/learning/hybrid_learner.py`, `emotional_os/glyphs/glyph_learner.py`
-
----
+##
 
 ## Key functions & files (quick index)
 
@@ -121,8 +118,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 - Glyph creation/learning: `emotional_os.glyphs.glyph_learner.GlyphLearner`
 - Limbic decoration: `emotional_os.glyphs.limbic_decorator.decorate_reply`
 - Fallback safety: `emotional_os.safety.fallback_protocols.FallbackProtocol`
-
----
+##
 
 ## Key data shapes (examples)
 
@@ -137,6 +133,8 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 }
 ```
 
+
+
 - Glyph row (from `fetch_glyphs` / DB):
 
 ```json
@@ -148,6 +146,8 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
   "response_template": "I hear the ache you’re describing..."
 }
 ```
+
+
 
 - `parse_input` return (high-level):
 
@@ -163,7 +163,8 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 }
 ```
 
----
+
+##
 
 ## Fallbacks, caching, and safety gates
 
@@ -174,8 +175,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 - AI/Hybrid fallback: If AI endpoint responds, the system always runs a SECOND local parse pass to re-anchor the AI text back into glyphs/signals.
 - Fallback protocols: `emotional_os.safety.fallback_protocols` can intercept exchanges to ask clarifying questions or trigger safe messaging if input appears sensitive.
 - Artifact filtering: `_looks_like_artifact` in `core/signal_parser.py` prunes pasted documents/archive rows from DB results before scoring.
-
----
+##
 
 ## Glyph learning & promotion (how glyphs are created)
 
@@ -192,8 +192,7 @@ Notes:
 
 - Glyph learning is conservative: confidence scores are capped below 1.0 and promotion requires explicit action.
 - Usage is logged in `glyph_usage_log` so candidates with repeated usefulness can be promoted.
-
----
+##
 
 ## Where to look for debugging info and artifacts
 
@@ -202,8 +201,7 @@ Notes:
 - Local preview/debugging helpers: `_last_glyphs_debug` global in `core/signal_parser.py` contains the last SQL and a preview of rows returned by `fetch_glyphs`.
 - **Telemetry events (NEW)**: Enable via `signal_parser.set_telemetry(True)` or UI toggle to see JSON-formatted events like `select_best_start`, `generate_contextual_start`, `select_best_done` with detailed metrics.
 - Reported artifacts from the cleanup pipeline (outside of runtime): `dev_tools/cleaned_glyphs.json`, `dev_tools/cleaned_glyphs_upsert.csv`, `dev_tools/cleanup_report.md`, and `dev_tools/fragments_to_review.json`.
-
----
+##
 
 ## Edge cases and recommended hardening
 
@@ -211,8 +209,7 @@ Notes:
 - Artifact detection: tune `_looks_like_artifact` heuristics to avoid false negatives for valid long-form glyphs.
 - Re-entrancy & DB locks: `GlyphLearner.log_glyph_candidate` uses retries and WAL mode — keep this pattern for other writers.
 - Determinism: the `hybrid` second-pass ensures AI replies are always grounded locally. Never surface raw AI text without local decoding in production.
-
----
+##
 
 ## Quick 'follow-the-message' checklist (for code readers)
 
@@ -226,8 +223,7 @@ Notes:
 8. (optional) limbic decoration and `FallbackProtocol` handling
 9. Append to `st.session_state` and display
 10. (background) `GlyphLearner` invoked when no suitable glyph found; writes to `glyph_candidates`
-
----
+##
 
 If you'd like, I can now:
 

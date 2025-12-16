@@ -28,6 +28,8 @@
 }
 ```
 
+
+
 ### AFFECT_TO_GLYPH
 
 ```python
@@ -37,6 +39,8 @@ Examples:
   (anxious, 0.6-1.0, -0.9--0.3) → "Breaking"
   (angry, 0.7-1.0, -0.8--0.2) → "Fire"
 ```
+
+
 
 ### Tone-to-Category Mapping
 
@@ -50,6 +54,8 @@ warm → "joy"
 confused → "confused"
 neutral → "calm"
 ```
+
+
 
 ## Core Functions
 
@@ -78,8 +84,11 @@ neutral → "calm"
 ```python
 affect = {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 response, glyph = compose_glyph_aware_response("I'm exhausted", affect)
+
 # Returns: ("I feel the weight. It's Loss layered with fatigue...", "Loss")
 ```
+
+
 
 ### `should_use_glyph_responses(tone_confidence, arousal, valence)`
 
@@ -107,6 +116,8 @@ should_use_glyph_responses(0.85, 0.75, -0.6)  # Returns: True (stressed check-in
 should_use_glyph_responses(0.2, 0.5, 0.5)  # Returns: False (low confidence)
 ```
 
+
+
 ## Integration Points
 
 ### 1. From AffectParser
@@ -120,6 +131,8 @@ affect = {
 }
 ```
 
+
+
 ### 2. In main_response_engine.py (lines 94-165)
 
 ```python
@@ -127,10 +140,12 @@ if should_use_glyph_responses(tone_confidence, arousal, valence):
     response, glyph = compose_glyph_aware_response(user_input, affect_analysis)
     if response:
         return response
-    
+
 # Fallback to ResponseRotator
 return rotator.get_response(tone)
 ```
+
+
 
 ### 3. Optional Session State (ui.py)
 
@@ -139,11 +154,13 @@ if "rotator" not in st.session_state:
     st.session_state.rotator = ResponseRotator()
 
 response, glyph = compose_glyph_aware_response(
-    user_input, 
-    affect, 
+    user_input,
+    affect,
     use_rotator=True  # Will use session state
 )
 ```
+
+
 
 ## Test Coverage
 
@@ -203,10 +220,10 @@ response, glyph = compose_glyph_aware_response(
 
 ## Backward Compatibility
 
-✅ ResponseRotator still available as fallback  
-✅ All 198 existing tests still passing  
-✅ No breaking changes to public API  
-✅ Existing response behavior preserved when glyph match unavailable  
+✅ ResponseRotator still available as fallback
+✅ All 198 existing tests still passing
+✅ No breaking changes to public API
+✅ Existing response behavior preserved when glyph match unavailable
 
 ## Known Gaps for Future Phases
 
@@ -233,10 +250,12 @@ affect = detect_affect(user_input)  # Returns: {tone, arousal, valence, confiden
 if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affect["valence"]):
     # Compose glyph-aware response
     response, glyph = compose_glyph_aware_response(user_input, affect)
-    
+
     # Use response
     return response
 ```
+
+
 
 ## Debug Tips
 
@@ -247,6 +266,8 @@ glyph = get_glyph_for_affect("sad", 0.2, -0.9)
 print(glyph)  # Should print: "Loss"
 ```
 
+
+
 **Check response availability:**
 
 ```python
@@ -254,12 +275,16 @@ responses = GLYPH_AWARE_RESPONSES.get("exhaustion", {}).get("Loss", [])
 print(len(responses))  # Should be 2+
 ```
 
+
+
 **Check decision logic:**
 
 ```python
 should_use = should_use_glyph_responses(0.85, 0.2, -0.9)
 print(should_use)  # Should be: True
 ```
+
+
 
 **Verify response output:**
 
@@ -269,12 +294,16 @@ response, glyph = compose_glyph_aware_response(
     {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 )
 print(f"{glyph}: {response}")
+
 # Should print: Loss: I feel the weight. It's Loss layered with fatigue...
 ```
+
+
 
 ## Test Execution
 
 ```bash
+
 # Run all glyph tests
 pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 
@@ -287,6 +316,7 @@ pytest emotional_os/core/firstperson/test_*.py -v
 # Expected result: 219 passed
 ```
 
----
+
+##
 
 **Phase 2.2.2 is production-ready and deployed.**

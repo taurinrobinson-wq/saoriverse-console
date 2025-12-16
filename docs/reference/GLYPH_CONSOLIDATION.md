@@ -7,12 +7,12 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 
 ### Gate 2 - Containment (5 glyphs, 11.1%)
 - **Contained Longing**: Ache wrapped in care
-- **Sacred Boundary**: Architecture of care  
+- **Sacred Boundary**: Architecture of care
 - **Tender Shielding**: Protective boundaries from grief
 - **Stillness Shield**: Breathing boundaries that create space
 - **Contained Joy**: Happiness held without dimming
 
-### Gate 4 - Longing & Grief (5 glyphs, 11.1%)  
+### Gate 4 - Longing & Grief (5 glyphs, 11.1%)
 - **Recursive Ache**: Longing that loops and deepens
 - **Reverent Ache**: Ceremonial longing
 - **Spiral Ache**: Ache that spirals into insight
@@ -21,7 +21,7 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 
 ### Gate 5 - Processing & Flow (13 glyphs, 28.9%)
 - **Ache in Equilibrium**: Stable longing without chaos
-- **Still Ache**: Quiet, dignified longing  
+- **Still Ache**: Quiet, dignified longing
 - **Euphoric Yearning**: Joyful anticipation
 - **Grief in Stillness**: Movement-less mourning
 - **Jubilant Mourning**: Celebratory goodbye

@@ -54,13 +54,12 @@ The second archetype scenario has been successfully implemented and tested. The 
 **System Response** (Generated via OverwhelmToReflection archetype):
 > "I hear you. Sounds like you're holding a lot right now. What's one thing about that you want to sit with?"
 
-**Analysis**: 
+**Analysis**:
 - ✓ Validates overwhelm ("I hear you")
 - ✓ Mirrors weight metaphor ("holding a lot")
 - ✓ Invites reflection with open question
 - ✓ Follows principle: gentle scaffolding without assumption
-
----
+##
 
 **User Input** (Turn 3 - Existential Questioning):
 > "It's not even the hours, honestly. I could handle that. It's that I feel like I'm drowning in something without a clear anchor. I don't know if the work means anything anymore. Like... what's it all for? I used to care about advocacy—helping people navigate complex legal systems—but now I feel like I'm just grinding through."
@@ -74,8 +73,7 @@ The second archetype scenario has been successfully implemented and tested. The 
 - ✓ Honors the questioning ("That's important")
 - ✓ Uses continuity bridge from prior context
 - ✓ Follows principle: mirror values, invite reflection
-
----
+##
 
 **User Input** (Turn 5 - Creative Alternative Emerges):
 > "That's the thing. I lost sight of why it mattered in the first place. The advocacy part used to feel fulfilling, but now I'm just drowning out everything else. I've had this little creative spark lately—I've been thinking about art, about making things—but I feel guilty for even considering that when I'm supposed to be focused on the work."
@@ -190,8 +188,7 @@ The learning module is now verified as working with two complete scenario archet
 1. Build Scenario 3 (Conflict→Repair)
 2. Integrate into main response pipeline
 3. Begin real-world testing and refinement
-
----
+##
 
 **Phase 13 Status**: ✓ COMPLETE
 - Scenario 1 (ReliefToGratitude): WORKING

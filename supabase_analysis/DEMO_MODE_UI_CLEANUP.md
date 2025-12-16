@@ -29,9 +29,12 @@ except Exception:
     pass
 ```
 
+
+
 **After**:
 
 ```python
+
 # Only show for authenticated users (requires data persistence)
 if st.session_state.get('authenticated'):
     try:
@@ -41,6 +44,8 @@ if st.session_state.get('authenticated'):
     except Exception:
         pass
 ```
+
+
 
 #### 2. Logout Button
 
@@ -58,9 +63,12 @@ except Exception:
     pass
 ```
 
+
+
 **After**:
 
 ```python
+
 # Only show for authenticated users
 if st.session_state.get('authenticated'):
     try:
@@ -72,6 +80,8 @@ if st.session_state.get('authenticated'):
         pass
 ```
 
+
+
 #### 3. Save My Chats Checkbox
 
 **Location**: `emotional_os/deploy/modules/ui.py` - `render_settings_sidebar()` function, line ~1271
@@ -79,6 +89,7 @@ if st.session_state.get('authenticated'):
 **Before**:
 
 ```python
+
 # Persist history toggle
 persist_default = st.session_state.get('persist_history', True)
 st.session_state['persist_history'] = st.checkbox(
@@ -88,10 +99,14 @@ st.session_state['persist_history'] = st.checkbox(
 )
 ```
 
+
+
 **After**:
 
 ```python
+
 # Persist history toggle - only show for authenticated users
+
 # Demo mode doesn't support data persistence
 if st.session_state.get('authenticated'):
     persist_default = st.session_state.get('persist_history', True)
@@ -101,6 +116,8 @@ if st.session_state.get('authenticated'):
         help="Automatically save conversations for later retrieval"
     )
 ```
+
+
 
 ## User Experience Impact
 

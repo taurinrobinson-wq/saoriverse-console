@@ -1,8 +1,7 @@
 # API Reference - SaoriVerse Console
 
 **Date**: December 3, 2025
-
----
+##
 
 ## Core Modules
 
@@ -29,6 +28,7 @@ Orchestrate the entire response pipeline from user input to response text.
 **Raises:** May raise on invalid input or system errors
 
 **Example:**
+
 ```python
 from src import process_user_input
 
@@ -36,7 +36,8 @@ response = process_user_input("I'm feeling overwhelmed")
 print(response)  # Returns generated response
 ```
 
----
+
+##
 
 ### src.signal_parser
 
@@ -56,19 +57,24 @@ Extract emotional signals from user text.
 - `valence`: Positive/negative (-1.0 to 1.0)
 
 **Example:**
+
 ```python
 from src.signal_parser import parse_input
 
 signal = parse_input("I'm happy about the news")
 print(signal)
+
 # {
 #   "voltage": 0.7,
 #   "tone": "Joy",
 #   "attunement": 0.8,
 #   "certainty": 0.9,
 #   "valence": 0.8
+
 # }
 ```
+
+
 
 #### `extract_themes(user_input: str) -> list`
 Extract semantic themes from text.
@@ -79,12 +85,15 @@ Extract semantic themes from text.
 **Returns:** List of theme strings
 
 **Example:**
+
 ```python
 themes = extract_themes("Work is stressful and relationships are complicated")
+
 # ["work", "stress", "relationships", "complexity"]
 ```
 
----
+
+##
 
 ### src.enhanced_response_composer
 
@@ -109,6 +118,7 @@ Compose response from multiple glyphs.
 **Returns:** Composed response text
 
 **Example:**
+
 ```python
 from src.enhanced_response_composer import DynamicResponseComposer
 
@@ -116,7 +126,8 @@ composer = DynamicResponseComposer()
 response = composer.compose_multi_glyph_response(signal, glyphs)
 ```
 
----
+
+##
 
 ### src.voice_interface
 
@@ -137,12 +148,15 @@ Transcribe audio file to text (STT).
 **Returns:** Transcribed text
 
 **Example:**
+
 ```python
 from src.voice_interface import VoiceInterface
 
 voice = VoiceInterface()
 text = voice.transcribe_audio("user_input.mp3")
 ```
+
+
 
 ##### `synthesize_speech(text: str, glyph: dict) -> bytes`
 Synthesize text to speech with glyph prosody (TTS).
@@ -154,11 +168,13 @@ Synthesize text to speech with glyph prosody (TTS).
 **Returns:** Audio bytes (mp3 format)
 
 **Example:**
+
 ```python
 audio_bytes = voice.synthesize_speech("That sounds difficult", glyph)
 ```
 
----
+
+##
 
 ### src.relational_memory
 
@@ -184,6 +200,7 @@ Store memory capsule to disk.
 **Returns:** True if stored successfully
 
 **Example:**
+
 ```python
 from src.relational_memory import RelationalMemoryCapsule, store_capsule
 
@@ -196,6 +213,8 @@ capsule = RelationalMemoryCapsule(
 store_capsule(capsule)
 ```
 
+
+
 #### `query_capsules(session_id: str) -> list`
 Retrieve memories for a session.
 
@@ -203,8 +222,7 @@ Retrieve memories for a session.
 - `session_id`: Session identifier
 
 **Returns:** List of RelationalMemoryCapsule instances
-
----
+##
 
 ### src.prosody_planner
 
@@ -230,6 +248,7 @@ Generate prosody parameters for text.
 - `pauses`: Pause locations and durations
 
 **Example:**
+
 ```python
 from src.prosody_planner import ProsodyPlanner
 
@@ -237,7 +256,8 @@ planner = ProsodyPlanner()
 prosody = planner.plan_prosody(glyph, "Take your time...")
 ```
 
----
+
+##
 
 ### src.streaming_tts
 
@@ -259,6 +279,7 @@ Synthesize text to audio.
 **Returns:** Audio bytes (mp3 format)
 
 **Example:**
+
 ```python
 from src.streaming_tts import StreamingTTS
 
@@ -266,7 +287,8 @@ tts = StreamingTTS()
 audio = tts.synthesize("Hello, how are you?")
 ```
 
----
+
+##
 
 ### src.audio_pipeline
 
@@ -289,6 +311,7 @@ Transcribe audio file to text.
 **Raises:** May raise on invalid audio file
 
 **Example:**
+
 ```python
 from src.audio_pipeline import AudioPipeline
 
@@ -296,7 +319,8 @@ pipeline = AudioPipeline()
 text = pipeline.transcribe("user_audio.mp3")
 ```
 
----
+
+##
 
 ### src.lexicon_learner
 
@@ -318,6 +342,7 @@ Extract learnable patterns from interaction.
 **Returns:** List of pattern dicts
 
 **Example:**
+
 ```python
 from src.lexicon_learner import LexiconLearner
 
@@ -325,7 +350,8 @@ learner = LexiconLearner()
 patterns = learner.extract_patterns(user_input, signal)
 ```
 
----
+
+##
 
 ## Entry Point
 
@@ -334,20 +360,23 @@ patterns = learner.extract_patterns(user_input, signal)
 **Streamlit application entry point.**
 
 **Run the app:**
+
 ```bash
 streamlit run app.py
 ```
 
-**Environment:** 
+
+
+**Environment:**
 - Port: 8501 (default Streamlit)
 - Browser: Opens automatically
 - Auth: Optional (configured in app)
-
----
+##
 
 ## Common Workflows
 
 ### Text-to-Response (Text Chat)
+
 ```python
 from src import process_user_input
 
@@ -355,7 +384,10 @@ response = process_user_input("I'm feeling lost")
 print(response)
 ```
 
+
+
 ### Audio-to-Audio (Voice Chat)
+
 ```python
 from src.voice_interface import VoiceInterface
 from src import process_user_input
@@ -372,7 +404,10 @@ response = process_user_input(text)
 audio_bytes = voice.synthesize_speech(response, glyph)
 ```
 
+
+
 ### Learning System
+
 ```python
 from src.signal_parser import parse_input
 from src.lexicon_learner import LexiconLearner
@@ -395,7 +430,8 @@ capsule = RelationalMemoryCapsule(
 store_capsule(capsule)
 ```
 
----
+
+##
 
 ## Error Handling
 
@@ -412,11 +448,13 @@ except Exception as e:
     print(f"System error: {e}")
 ```
 
----
+
+##
 
 ## Data Structures
 
 ### Signal Dict
+
 ```python
 {
     "voltage": 0.6,              # Intensity (0.0-1.0)
@@ -427,7 +465,10 @@ except Exception as e:
 }
 ```
 
+
+
 ### Glyph Dict
+
 ```python
 {
     "glyph_name": "Euphoric Yearning",
@@ -439,7 +480,10 @@ except Exception as e:
 }
 ```
 
+
+
 ### Prosody Dict
+
 ```python
 {
     "pitch": 1.2,                # Pitch range
@@ -452,7 +496,8 @@ except Exception as e:
 }
 ```
 
----
+
+##
 
 ## Module Relationships
 
@@ -475,7 +520,8 @@ src.lexicon_learner
     └── src.relational_memory
 ```
 
----
+
+##
 
 **For architecture overview, see**: `docs/ARCHITECTURE.md`
 **For testing, see**: `docs/TESTING_GUIDE.md`

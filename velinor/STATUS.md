@@ -1,10 +1,9 @@
 # Velinor: Remnants of the Tone - Status Report
 
-**Date:** December 6, 2025  
-**Branch:** `feature/velinor-remnants-of-tone`  
+**Date:** December 6, 2025
+**Branch:** `feature/velinor-remnants-of-tone`
 **Status:** 🟢 **TWINE INTEGRATION COMPLETE**
-
----
+##
 
 ## Project Overview
 
@@ -15,8 +14,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 - **Dynamic dialogue** (FirstPerson orchestrator integration)
 - **Multiplayer support** (collaborative storytelling)
 - **Background images** (location-based immersion)
-
----
+##
 
 ## Completed Work (Phase 1: Framework & Engine)
 
@@ -67,8 +65,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 - `TWINE_INTEGRATION_GUIDE.md` - Full integration reference
 - `TWINE_IMPLEMENTATION_COMPLETE.md` - Implementation summary
 - `quickstart.py` - Integration examples (Streamlit, FastAPI)
-
----
+##
 
 ## Architecture
 
@@ -92,7 +89,8 @@ FORMATTED GAME STATE
 UI LAYER (Streamlit, Web, CLI, etc.)
 ```
 
----
+
+##
 
 ## What Works Now
 
@@ -124,8 +122,7 @@ UI LAYER (Streamlit, Web, CLI, etc.)
 - Save/load full game state
 - Dialogue history preservation
 - Story progression recovery
-
----
+##
 
 ## What's Ready for Next Phase
 
@@ -149,8 +146,7 @@ UI LAYER (Streamlit, Web, CLI, etc.)
 - Add quest tracking UI
 - Create leaderboards
 - Design social features
-
----
+##
 
 ## File Structure
 
@@ -187,11 +183,13 @@ velinor/
 └── STATUS.md                      # This file
 ```
 
----
+
+##
 
 ## Running the System
 
 ### Initialize Game
+
 ```python
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
@@ -204,8 +202,12 @@ orchestrator = VelinorTwineOrchestrator(
 initial_state = orchestrator.start_game()
 ```
 
+
+
 ### Process Input
+
 ```python
+
 # Choice-based
 state = orchestrator.process_player_action(
     choice_index=0,
@@ -219,13 +221,17 @@ state = orchestrator.process_player_action(
 )
 ```
 
+
+
 ### Save/Load
+
 ```python
 orchestrator.save_game("saves/game_001.json")
 orchestrator.load_game("saves/game_001.json")
 ```
 
----
+
+##
 
 ## Integration Points
 
@@ -246,8 +252,7 @@ orchestrator.load_game("saves/game_001.json")
 - Apply FirstPerson-enhanced dialogue
 - Track NPC relationships
 - Adapt responses for group composition
-
----
+##
 
 ## Next Session Priorities
 
@@ -278,8 +283,7 @@ orchestrator.load_game("saves/game_001.json")
 3. Create achievement system
 4. Test with multiple players
 5. Polish UI/UX
-
----
+##
 
 ## Key Decisions Made
 
@@ -301,23 +305,21 @@ orchestrator.load_game("saves/game_001.json")
 - ✅ NPCs address group vs. individual
 - ✅ Sidebar shows other players
 - ✅ Scalable for 2-4 players
-
----
+##
 
 ## Success Criteria - Met ✅
 
-✅ Framework chosen based on design docs  
-✅ Modular game engine with event system  
-✅ Story system with markup support  
-✅ Skill check / dice roll mechanics  
-✅ FirstPerson integration hooks  
-✅ Multiplayer infrastructure  
-✅ Save/load persistence  
-✅ Documentation complete  
-✅ Sample story with working passages  
-✅ Ready for UI integration  
-
----
+✅ Framework chosen based on design docs
+✅ Modular game engine with event system
+✅ Story system with markup support
+✅ Skill check / dice roll mechanics
+✅ FirstPerson integration hooks
+✅ Multiplayer infrastructure
+✅ Save/load persistence
+✅ Documentation complete
+✅ Sample story with working passages
+✅ Ready for UI integration
+##
 
 ## Technical Debt & Considerations
 
@@ -327,18 +329,16 @@ orchestrator.load_game("saves/game_001.json")
 - **Story content** is scaffolding (20 passages need to become 50+)
 - **Performance** not yet tested with large stories (should scale well)
 - **Mobile support** not yet considered (responsive UI needed)
-
----
+##
 
 ## Contact & Updates
 
-Created: December 6, 2025  
-Branch: `feature/velinor-remnants-of-tone`  
+Created: December 6, 2025
+Branch: `feature/velinor-remnants-of-tone`
 Status: 🟢 Core system complete, ready for UI layer
 
 For questions about architecture or integration, see:
 - `TWINE_INTEGRATION_GUIDE.md` - Full reference
 - `quickstart.py` - Code examples
 - `orchestrator.py` - Main game loop implementation
-
----
+##

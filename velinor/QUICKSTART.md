@@ -7,9 +7,10 @@ cd /workspaces/saoriverse-console
 streamlit run velinor_scenes_test.py
 ```
 
-Then open your browser to the provided URL (usually `http://localhost:8501`).
 
----
+
+Then open your browser to the provided URL (usually `http://localhost:8501`).
+##
 
 ## 📖 What You'll See
 
@@ -41,8 +42,7 @@ Then open your browser to the provided URL (usually `http://localhost:8501`).
    - Learn to navigate the marketplace
    - Map mechanics explained
    - Final dialogue choice
-
----
+##
 
 ## 🎮 Controls
 
@@ -55,8 +55,7 @@ Then open your browser to the provided URL (usually `http://localhost:8501`).
 - **Player Stats**: name and NPC trust percentages
 - **Scene Navigation**: current position in sequence
 - **Dialogue History**: expandable, shows all choices made
-
----
+##
 
 ## 📊 Understanding the System
 
@@ -79,8 +78,7 @@ Emotional resonance indicators that appear below narration:
 - `[Querrä]` = Inquiry
 - `[Ruuñ]` = Collapse
 - `[Sha'rú]` = Repair/Adaptation
-
----
+##
 
 ## 🖼️ What You Need to Add
 
@@ -97,8 +95,7 @@ Create these in `velinor/backgrounds/`:
 - `nima_close.png` - Nima nearby
 
 **Note:** Right now the app uses placeholder paths. Images are optional for testing the flow.
-
----
+##
 
 ## 🔧 Adding New Scenes
 
@@ -111,18 +108,18 @@ def build_my_new_scene() -> SceneModule:
         scene_id="marketplace_my_scene_01",
         npc_name="Some NPC",
         npc_archetype="welcoming",  # or "mistrusting", "oracle"
-        
+
         narration_distant="What they see from far away...",
         narration_close="What they see up close...",
         npc_dialogue="What the NPC says...",
-        
+
         assets=SceneAssets(
             background_distant="velinor/backgrounds/bg_distant.png",
             background_close="velinor/backgrounds/bg_close.png",
             foreground_distant="velinor/backgrounds/npc_distant.png",
             foreground_close="velinor/backgrounds/npc_close.png",
         ),
-        
+
         player_options=[
             DialogueOption(
                 text="First choice",
@@ -137,7 +134,7 @@ def build_my_new_scene() -> SceneModule:
                 trust_modifier=0.15
             ),
         ],
-        
+
         glyph_distant=["Esḧ"],
         glyph_close=["Querrä", "Cinarä̈"],
     )
@@ -151,9 +148,10 @@ def get_sequence() -> List[SceneModule]:
     ]
 ```
 
-Then restart the test app and navigate to your new scene!
 
----
+
+Then restart the test app and navigate to your new scene!
+##
 
 ## 📚 Documentation Files
 
@@ -166,8 +164,7 @@ After running scenes, check these design docs to understand the system deeper:
 - **05_npc_reaction_library.md** - Reusable dialogue banks
 
 Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
-
----
+##
 
 ## 🐛 Troubleshooting
 
@@ -187,8 +184,7 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
 **Dialogue history empty:**
 - History only records choices from dialogue options
 - Auto-advance scenes (intro) don't add to history
-
----
+##
 
 ## 📖 Next Steps
 
@@ -216,8 +212,7 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
    - Import scene system into `velinor_app.py`
    - Create marketplace chapter/quest that uses scenes
    - Display player choices' effects on later story
-
----
+##
 
 ## 💡 Pro Tips
 
@@ -240,8 +235,7 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
 - Each scene should have 2-4 player options (not 1, too linear; not 5+, overwhelming)
 - Options should feel meaningfully different
 - Consequences (trust changes) should be visible and matter
-
----
+##
 
 ## 🎯 Quick Reference
 
@@ -252,8 +246,7 @@ Location: `/workspaces/saoriverse-console/velinor/markdowngameinstructions/`
 | `velinor/engine/marketplace_scenes.py` | 5-scene marketplace sequence |
 | `velinor/markdowngameinstructions/01-05_*.md` | Design documentation |
 | `velinor/IMPLEMENTATION_SUMMARY.md` | Full technical documentation |
-
----
+##
 
 ## ✨ You're Ready!
 
@@ -262,5 +255,7 @@ Everything is built and committed to git. Just:
 ```bash
 streamlit run velinor_scenes_test.py
 ```
+
+
 
 Have fun exploring the marketplace! 🎮

@@ -6,16 +6,14 @@
 - Enable multi-modal testing by comparing transcript analysis with audio (mp3) analysis.
 - Strengthen TTS/STT capabilities by validating transcription accuracy against annotated transcripts.
 - Establish a framework for audio, video, and facial expression recognition integration.
-
----
+##
 
 ## ✅ Current Strengths
 - Signal Parser, Response Generator V2, and Dynamic Composer integrated successfully.
 - Response type alternation verified (Question → Reflection → Question → Affirmation).
 - End-to-end dialogue flow functional with glyph parsing and response assignment.
 - Efficient performance (0.01–0.05s response times).
-
----
+##
 
 ## ⚠️ Observed Issues
 - Glyph diversity limited (over-reliance on “Yearning Joy”).
@@ -23,8 +21,7 @@
 - Crisis disclosure and check-in recognition not yet tested.
 - Positive affect inputs default to neutral reflection.
 - Platitude guard requires validation.
-
----
+##
 
 ## 🚀 Recommended Improvements
 1. **Expand Glyph Testing:** Introduce grief, anger, loneliness, joy scenarios to diversify glyph selection.
@@ -33,8 +30,7 @@
 4. **Check-in Recognition:** Add unit tests for continuity logic (user returns after invitation).
 5. **Positive Affect Stress Test:** Ensure celebratory tone pools fire correctly for joy/gratitude inputs.
 6. **Platitude Guard:** Confirm blocked phrases never appear in outputs.
-
----
+##
 
 ## 📚 Corpus Integration for Lexicon & Fluency
 
@@ -59,8 +55,7 @@
   - Extract context/response pairs that reflect **natural, everyday conversation**.
   - Map pairs into glyph rotation banks to enrich fluency.
   - Exclude deleted/uninformative comments, long technical threads, and research-only metrics.
-
----
+##
 
 ## 🎧 Multi-Modal Testing with MP3s
 
@@ -89,15 +84,13 @@
    - Run Student Corpus `.mp3` files through system.
    - Compare glyph outputs against annotated transcripts.
    - Identify mismatches to improve STT accuracy and conversational fluency.
-
----
+##
 
 ## 🧩 Fit with Existing System
 - **Lexicon enrichment:** Spoken fillers become new glyph triggers.
 - **Response generator:** Acknowledge tone (“I hear the heaviness in your voice”) alongside text.
 - **Safety layer:** Crisis disclosures in audio form trigger consent-based templates.
-
----
+##
 
 ## 🧪 Next Test Suite Additions
 - Crisis scenarios with consent-based responses.
@@ -106,8 +99,7 @@
 - Joy inputs mapped to celebratory glyphs.
 - Corpus-derived filler/disfluency handling tests.
 - Audio vs transcript comparison tests for STT accuracy.
-
----
+##
 
 ## 📌 Implementation Notes
 - **Corpus Access:**
@@ -119,7 +111,6 @@
 - **Testing:**
   - Compare transcript vs audio analysis for accuracy.
   - Validate glyph diversity and alternation with multi-modal inputs.
-
----
+##
 
 This document provides a detailed implementation plan for integrating spoken corpora and conversational datasets into the system, enabling multi-modal testing and improving both STT/TTS capabilities and conversational fluency.

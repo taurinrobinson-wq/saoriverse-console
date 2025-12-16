@@ -1,8 +1,7 @@
 # 🎮 Velinor on DigitalOcean - The Simple Version
 
 **TL;DR**: You're moving your game from Railway (unreliable) to DigitalOcean (simple, $6/month). Here's what's happening in plain English.
-
----
+##
 
 ## What Just Happened?
 
@@ -15,8 +14,7 @@ What I created:
 - ✅ SSL configuration (`nginx.prod.conf`)
 - ✅ Auto-deployment on code changes (`.github/workflows/deploy.yml`)
 - ✅ 5 guides/checklists to walk you through it
-
----
+##
 
 ## What is DigitalOcean?
 
@@ -27,16 +25,17 @@ Railway = Rental apartment where the landlord keeps breaking things
 DigitalOcean = Renting a small VPS where YOU have full control
 ```
 
+
+
 **DigitalOcean** = Renting a tiny computer (called a "Droplet") in the cloud for $6/month.
 
-**What you get**: 
+**What you get**:
 - 1 processor
-- 2GB memory  
+- 2GB memory
 - 50GB hard drive
 - Full root access
 - SSH to do whatever you want
-
----
+##
 
 ## The Simple Deploy Process
 
@@ -72,8 +71,7 @@ DigitalOcean = Renting a small VPS where YOU have full control
    - Play the game!
 
 **Total time**: ~30 minutes
-
----
+##
 
 ## What's Inside the Magic Box (Docker)
 
@@ -99,7 +97,8 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 8. You play! 🎮
 ```
 
----
+
+##
 
 ## The Three Services (Explained Simply)
 
@@ -122,14 +121,13 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 - How you'd debug it: Check nginx config
 
 **All three talk to each other inside one Docker container!**
-
----
+##
 
 ## SSL/TLS (The Fancy Stuff)
 
 **What is it?**: The little padlock 🔒 in your browser URL bar
 
-**Why it matters**: 
+**Why it matters**:
 - Encrypts data between browser and server
 - Makes it safe to send passwords/data
 - Required for "https://" URLs
@@ -142,8 +140,7 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 4. It auto-renews every 90 days (we don't have to do anything)
 
 **Bottom line**: Your game is encrypted and secure ✅
-
----
+##
 
 ## Auto-Deploy (The Bonus Feature)
 
@@ -167,11 +164,12 @@ Pull latest code, rebuild Docker, restart
 Your site is updated!
 ```
 
+
+
 **Time to update**: ~5-10 minutes after you push
 
 **How to enable it**: Follow section "Auto-Deploy" in DEPLOYMENT_VPS.md
-
----
+##
 
 ## The Guides I Made (Pick Your Style)
 
@@ -215,26 +213,25 @@ Your site is updated!
 - Commands, ports, troubleshooting
 - Keep handy
 - 100 lines
-
----
+##
 
 ## Common Questions
 
 **Q: Why DigitalOcean and not [other platform]?**
-A: 
+A:
 - Simple: Just give you a computer, full control
 - Cheap: $6/month vs Railway's variable/buggy pricing
 - Reliable: 99.9% uptime track record
 - Clear pricing: No surprises
 
 **Q: What if my site crashes?**
-A: 
+A:
 - Docker automatically restarts services
 - If the Droplet crashes: You get email alert from DigitalOcean
 - You can SSH in anytime to debug
 
 **Q: Can I upgrade later?**
-A: 
+A:
 - Yes! $6 → $12 → $24+ Droplets available
 - Just click "Resize" in DigitalOcean dashboard
 - No downtime (if you resize up)
@@ -261,8 +258,7 @@ A:
 A:
 - Visit `https://velinor.firstperson.chat` in browser
 - If you see the game and can play → It works! ✅
-
----
+##
 
 ## The Financial Reality
 
@@ -279,23 +275,28 @@ A:
 - Peace of mind 😊
 
 **Comparison**:
+
 ```
 Option       | Cost/mo | Reliability | Control | Support
 Railway      | $5-50+  | 😢😢😢      | 😞     | 😞
 DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
 ```
 
----
+
+##
 
 ## Your Next Steps (In Order)
 
 ### 1. Push to GitHub (5 min)
+
 ```bash
 cd d:\saoriverse-console
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
 git push origin main
 ```
+
+
 
 ### 2. Create DigitalOcean Account (5 min)
 Go to https://digitalocean.com
@@ -321,8 +322,7 @@ Confirm it works
 
 ### 7. Celebrate! (∞)
 You just deployed a game on production infrastructure! 🚀
-
----
+##
 
 ## What Could Go Wrong (And How to Fix It)
 
@@ -336,22 +336,28 @@ You just deployed a game on production infrastructure! 🚀
 | Auto-deploy not working | SSH key issue | Verify GitHub secrets (VPS_HOST, VPS_SSH_KEY) |
 
 All of these are in the full guides with detailed solutions!
-
----
+##
 
 ## The Bottom Line
 
 You went from:
+
 ```
 😞 Using Railway (broken, unreliable, going away)
 ```
 
+
+
 To:
+
 ```
 😊 Using DigitalOcean (simple, cheap, reliable, full control)
 ```
 
+
+
 With:
+
 ```
 ✅ Production Docker setup (verified working)
 ✅ SSL/HTTPS (encrypted and secure)
@@ -360,9 +366,10 @@ With:
 ✅ Peace of mind (99.9% uptime)
 ```
 
-**All for $6/month.**
 
----
+
+**All for $6/month.**
+##
 
 ## When You're Ready
 

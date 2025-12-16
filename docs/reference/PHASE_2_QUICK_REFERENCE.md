@@ -9,11 +9,13 @@ Print this out or pin it in your IDE.
 """
 
 # ============================================================================
+
 # THE SYSTEM IN ONE PARAGRAPH
+
 # ============================================================================
 
 """
-When signal_parser finds no matching glyph, instead of returning None or a 
+When signal_parser finds no matching glyph, instead of returning None or a
 generic message, the learning pipeline:
 1. Analyzes the emotional language patterns
 2. Generates a new glyph candidate (name, description, gates)
@@ -26,7 +28,9 @@ The database grows from every interaction.
 """
 
 # ============================================================================
+
 # THE THREE MODULES YOU NEED TO KNOW
+
 # ============================================================================
 
 """
@@ -56,7 +60,9 @@ The database grows from every interaction.
 """
 
 # ============================================================================
+
 # HOW TO INTEGRATE (3 STEPS)
+
 # ============================================================================
 
 """
@@ -75,9 +81,9 @@ STEP 2: Modify parse_input() function
 ──────────────────────────────────────
 def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
     # ... existing code to detect signals and evaluate gates ...
-    
+
     glyphs = fetch_glyphs(gates)
-    
+
     if glyphs:
         # EXISTING: Use matching glyph
         best_glyph, response = select_best_glyph_and_response(glyphs, signals, text)
@@ -87,24 +93,24 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
         # NEW: Learning pipeline
         candidate = _glyph_learner.analyze_input_for_glyph_generation(text, signals, user_hash)
         _glyph_learner.log_glyph_candidate(candidate)
-        
+
         glyph_name = candidate.get("glyph_name")
         _shared_glyph_manager.create_glyph_version(
-            glyph_name, 
+            glyph_name,
             candidate.get("description"),
             candidate.get("emotional_signal"),
             candidate.get("gates"),
             user_hash
         )
         _shared_glyph_manager.record_glyph_adoption(user_hash, glyph_name, quality_rating=1)
-        
+
         response = _learning_response_gen.generate_learning_response(
-            candidate, text, 
+            candidate, text,
             emotional_tone=_determine_emotional_tone(signals),
             emotional_terms=candidate.get("emotional_terms"),
             nrc_analysis=candidate.get("nrc_analysis")
         )
-        
+
         return {"best_glyph": glyph_name, "voltage_response": response, ...}
 
 
@@ -127,7 +133,9 @@ def _determine_emotional_tone(signals):
 """
 
 # ============================================================================
+
 # DATABASE SCHEMA (WHAT GETS CREATED)
+
 # ============================================================================
 
 """
@@ -184,7 +192,9 @@ emotional_patterns (retained)
 """
 
 # ============================================================================
+
 # KEY METHODS CHEATSHEET
+
 # ============================================================================
 
 """
@@ -237,7 +247,9 @@ mgr.get_system_health_report()
 """
 
 # ============================================================================
+
 # RESPONSE TEMPLATES (8 EMOTIONAL TONES)
+
 # ============================================================================
 
 """
@@ -273,7 +285,9 @@ Key pattern:
 """
 
 # ============================================================================
+
 # TESTING
+
 # ============================================================================
 
 """
@@ -316,7 +330,9 @@ sqlite3 emotional_os/glyphs/glyphs.db
 """
 
 # ============================================================================
+
 # DEPLOYMENT CHECKLIST
+
 # ============================================================================
 
 """
@@ -347,7 +363,9 @@ sqlite3 emotional_os/glyphs/glyphs.db
 """
 
 # ============================================================================
+
 # TROUBLESHOOTING
+
 # ============================================================================
 
 """
@@ -377,10 +395,13 @@ SOLUTION: Run analyze_coverage_gaps()
 """
 
 # ============================================================================
+
 # MONITORING COMMANDS
+
 # ============================================================================
 
 """
+
 # Check system health
 python -c "
 from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
@@ -401,19 +422,21 @@ ls -lh emotional_os/glyphs/glyphs.db
 
 # Count candidates vs production
 sqlite3 emotional_os/glyphs/glyphs.db \
-  "SELECT 'Candidates', count(*) FROM glyph_candidates 
-   UNION ALL 
+  "SELECT 'Candidates', count(*) FROM glyph_candidates
+   UNION ALL
    SELECT 'Production', count(*) FROM glyph_versions WHERE is_active=1;"
 
 # View top glyphs by adoption
 sqlite3 emotional_os/glyphs/glyphs.db \
-  "SELECT glyph_name, total_users_adopted, consensus_strength 
-   FROM glyph_consensus 
+  "SELECT glyph_name, total_users_adopted, consensus_strength
+   FROM glyph_consensus
    ORDER BY total_users_adopted DESC LIMIT 10;"
 """
 
 # ============================================================================
+
 # REFERENCE LINKS
+
 # ============================================================================
 
 """
@@ -444,7 +467,9 @@ WORKING EXAMPLE:
 """
 
 # ============================================================================
+
 # PHILOSOPHY
+
 # ============================================================================
 
 """

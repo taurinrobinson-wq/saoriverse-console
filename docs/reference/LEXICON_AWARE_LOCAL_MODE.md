@@ -9,7 +9,7 @@ Previously, the system learned lexicon data but **never used it to generate bett
 **LexiconAwareResponseGenerator** bridges this gap:
 
 1. **Loads** user's personal lexicon (learned keyword → emotional context mappings)
-2. **Analyzes** incoming message for learned keywords  
+2. **Analyzes** incoming message for learned keywords
 3. **Builds** contextual understanding from learned associations
 4. **Generates** responses that reflect user's unique patterns
 5. **Tracks** response quality to improve future personalization
@@ -39,6 +39,8 @@ LexiconAwareResponseGenerator.generate_response()
 Nuanced Response that feels personal, not canned
 ```
 
+
+
 ### Three Levels of Personalization
 
 #### Level 1: None (First Interaction)
@@ -51,6 +53,8 @@ User: "I'm struggling with something"
 Response: "That lands somewhere real for you. What does it feel like when you say that?"
 ```
 
+
+
 #### Level 2: Low (2-3 Learned Keywords)
 - System recognizes some keywords
 - Shows it understands their patterns
@@ -62,6 +66,8 @@ Response: "I recognize that when you mention 'Michelle', it touches frustration 
 There's something connecting them in your experience. What would change if this dynamic shifted?"
 ```
 
+
+
 #### Level 3: High (3+ Learned Keywords with Rich Context)
 - System deeply understands user's patterns
 - Responses are highly contextual and appropriate
@@ -70,16 +76,19 @@ There's something connecting them in your experience. What would change if this 
 ```
 User: "I'm struggling with Michelle but also feeling like I inherited this block"
 Response: "I recognize that when you mention 'Michelle', it touches frustration and communication_gap.
-The fact that 'michelle' and 'inherited' appear together for you—that's a real pattern. 
+The fact that 'michelle' and 'inherited' appear together for you—that's a real pattern.
 There's something connecting them in your experience. When you feel this frustration about 'Michelle'—
 what part of it asks for something from you?"
 ```
+
+
 
 ## Integration Points
 
 ### 1. In HybridProcessorWithEvolution
 
 ```python
+
 # The processor now includes lexicon-aware generation
 processor = create_integrated_processor(hybrid_learner, adaptive_extractor)
 
@@ -91,14 +100,18 @@ personalization_data = processor.enhance_response_with_learned_context(
 )
 
 print(personalization_data)
+
 # {
 #     "response": "I recognize that when you mention 'michelle'...",
 #     "personalization_level": "medium",
 #     "learned_associations": [("michelle", {...}), ...],
 #     "trigger_keywords": ["michelle"],
 #     "confidence": 0.6
+
 # }
 ```
+
+
 
 ### 2. In Local Response Generation
 
@@ -125,6 +138,8 @@ print(result["personalization_level"])  # How personalized is it?
 print(result["learned_associations"])  # What patterns were matched?
 ```
 
+
+
 ### 3. In Streamlit UI
 
 ```python
@@ -141,10 +156,10 @@ if user_message:
         user_message=user_message,
         user_id=st.session_state.get('user_id'),
     )
-    
+
     # Generate response (using lexicon-aware knowledge)
     # In real implementation, you'd generate or fetch AI response here
-    
+
     # Log the quality
     if user_liked_response:
         generator.log_response_quality(
@@ -154,6 +169,8 @@ if user_message:
             quality_score=0.9
         )
 ```
+
+
 
 ## Data Persistence
 
@@ -183,6 +200,8 @@ Stored in `learning/user_overrides/{user_id}_lexicon.json`:
 }
 ```
 
+
+
 ### Response Quality Log
 
 Stored in `learning/response_quality_log.jsonl`:
@@ -197,6 +216,8 @@ Stored in `learning/response_quality_log.jsonl`:
   "quality_score": 0.95
 }
 ```
+
+
 
 ## Key Features
 
@@ -221,13 +242,17 @@ Stored in `learning/response_quality_log.jsonl`:
 ## How It Improves Over Time
 
 ### Session 1
+
 ```
 User: "struggling with my mother-in-law"
 System: Generic response (no learned data)
 System learns: "mother-in-law" → frustration, communication_gap
 ```
 
+
+
 ### Session 2
+
 ```
 User: "michelle is being difficult"
 System: RECOGNIZES "michelle" from lexicon
@@ -235,7 +260,10 @@ System: Generates personalized response acknowledging pattern
 System learns: "michelle" specifically (not just general)
 ```
 
+
+
 ### Session 3+
+
 ```
 User: "the michelle thing plus inherited patterns"
 System: RECOGNIZES both "michelle" AND "inherited"
@@ -244,6 +272,8 @@ System learns: These two are connected for this user
 System response feels GENUINELY personal, not templated
 ```
 
+
+
 ## Customization
 
 ### Adjust Personalization Thresholds
@@ -251,14 +281,19 @@ System response feels GENUINELY personal, not templated
 In `LexiconAwareResponseGenerator`:
 
 ```python
+
 # Lower = more aggressive personalization
+
 # Higher = only when very confident
 generator = LexiconAwareResponseGenerator()
 
 # Modify the _build_context_understanding method to adjust thresholds:
+
 # if len(learned_contexts) >= 1:  # Lower threshold = more responsive
 #     personalization_level = "medium"
 ```
+
+
 
 ### Custom Response Templates
 
@@ -271,9 +306,12 @@ class CustomLexiconGenerator(LexiconAwareResponseGenerator):
         return "Custom acknowledgment that respects their patterns"
 ```
 
+
+
 ### Track Custom Metrics
 
 ```python
+
 # Log custom quality metric
 generator.log_response_quality(
     user_id=user_id,
@@ -287,6 +325,8 @@ stats = generator.get_personalization_stats(user_id)
 print(f"Average response quality: {stats['average_quality_score']}")
 print(f"Personalization trend: {stats['trend']}")
 ```
+
+
 
 ## Why This Matters for Local Mode
 
@@ -307,6 +347,7 @@ This transforms local mode from a "lite" version to a **genuinely personalized e
 ## Testing
 
 ```python
+
 # Quick test
 from lexicon_aware_response_generator import LexiconAwareResponseGenerator
 
@@ -322,6 +363,7 @@ print(f"Level: {result['personalization_level']}")  # "none"
 print(f"Response: {result['response']}")
 
 # Simulate learning
+
 # (In real scenario, this happens through hybrid_learner)
 
 print("\n=== Session 2 (With learned data) ===")
@@ -333,6 +375,7 @@ print(f"Level: {result['personalization_level']}")  # "medium" or "high"
 print(f"Response: {result['response']}")  # Shows learned pattern
 ```
 
----
+
+##
 
 **Result**: Users get genuinely personalized responses in local mode, no API required, improving naturally as the system learns about them.

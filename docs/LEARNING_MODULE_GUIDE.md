@@ -49,21 +49,25 @@ You've just built a **three-layer system** that enables the saoriverse console t
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
+
 ## The Workflow
 
 ### Phase 1: Playwright (You Write Dialogue)
 You create a conversational scene showing how the system should respond:
 
 ```
-User: Yesterday was so heavy, but today my child hugged me 
+User: Yesterday was so heavy, but today my child hugged me
       and I felt like everything melted away for a moment.
 
-System: That moment with your child sounds genuinely special. 
+System: That moment with your child sounds genuinely special.
         What does that connection feel like for you?
 
-User: Maybe even more so. I don't know sometimes I don't 
+User: Maybe even more so. I don't know sometimes I don't
       feel like I'm doing enough for my kids...
 ```
+
+
 
 ### Phase 2: Organizer (System Extracts Rules)
 The learner automatically extracts principles:
@@ -88,6 +92,8 @@ The learner automatically extracts principles:
   ]
 }
 ```
+
+
 
 ### Phase 3: Application (System Uses Principles)
 When user sends: *"I'm stressed but my friend just made me laugh"`
@@ -143,6 +149,8 @@ new_archetype = learner.learn_from_conversation(
 )
 ```
 
+
+
 ### Checking the Library
 
 ```python
@@ -161,6 +169,8 @@ best_match = library.get_best_match(
 # Record success for learning
 library.record_usage("ReliefToGratitude", success=True)
 ```
+
+
 
 ## Why This Matters
 
@@ -184,18 +194,19 @@ library.record_usage("ReliefToGratitude", success=True)
 ### To Extend the System
 
 1. **Add More Dialogue Scenes**: You write more conversational scenes, each becomes an archetype
-   
+
 2. **Integrate with Streamlit UI**: Show users that the system is learning their conversational patterns
-   
+
 3. **Add User Feedback Loop**: Let users rate responses, which auto-updates archetype success weights
-   
+
 4. **Multi-Turn Refinement**: System improves its archetype matching across a full conversation
-   
+
 5. **Export Archetypes**: Share learned patterns as a portable library other instances can use
 
 ### To Test
 
 ```bash
+
 # Run the test suite
 python test_learning_module.py
 
@@ -203,16 +214,17 @@ python test_learning_module.py
 cat emotional_os/learning/archetype_library.json | python -m json.tool
 ```
 
+
+
 ## Architecture Strengths
 
-✓ **Modular**: Each layer is independent, can be updated separately  
-✓ **Auditable**: Every archetype is readable JSON, not buried in ML weights  
-✓ **Expandable**: Add new archetypes without retraining  
-✓ **Personalized**: Learns from YOUR dialogue, your communication style  
-✓ **Transparent**: You can see exactly why system chose a response  
-✓ **Adaptive**: Success weights evolve based on real outcomes  
-
----
+✓ **Modular**: Each layer is independent, can be updated separately
+✓ **Auditable**: Every archetype is readable JSON, not buried in ML weights
+✓ **Expandable**: Add new archetypes without retraining
+✓ **Personalized**: Learns from YOUR dialogue, your communication style
+✓ **Transparent**: You can see exactly why system chose a response
+✓ **Adaptive**: Success weights evolve based on real outcomes
+##
 
 **This is the foundation for truly adaptive, learning-based empathetic conversation.**
 

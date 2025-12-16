@@ -10,7 +10,7 @@ Created a new **Adaptive Signal Extractor** that:
 
 ### 1. **Preserves Your Base 8 Dimensions**
 - Love
-- Intimacy  
+- Intimacy
 - Vulnerability
 - Transformation
 - Admiration
@@ -45,6 +45,7 @@ Example: If the corpus shows "time", "memory", "before", "forgotten" recurring t
 ## How It Works
 
 ### During Processing:
+
 ```
 Gutenberg Poetry Downloads
     ↓
@@ -59,7 +60,10 @@ Lexicon expansion across FULL emotional spectrum
 Report: Shows all dimensions discovered
 ```
 
+
+
 ### Example Output:
+
 ```
 [DIMENSIONS] Emotional Dimension Summary:
   Base dimensions: 8 (your original poem)
@@ -67,6 +71,8 @@ Report: Shows all dimensions discovered
   Newly learned dimensions: 3-5 (discovered from current corpus)
   TOTAL: 21-23 emotional dimensions
 ```
+
+
 
 ## New Capabilities
 
@@ -102,16 +108,22 @@ The system can now:
 ## Usage
 
 The system automatically uses the adaptive extractor. To disable it:
+
 ```python
 processor = BulkTextProcessor(use_adaptive_extractor=False)
 ```
 
+
+
 To generate a dimension report:
+
 ```python
 if hasattr(processor.extractor, 'get_dimension_report'):
     report = processor.extractor.get_dimension_report()
     print(report['total_dimensions'])  # Now >8!
 ```
+
+
 
 ## What This Means for Your Poetry Learning
 

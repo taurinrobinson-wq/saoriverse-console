@@ -1,5 +1,4 @@
-Velinor resonance engine
-------------------------
+## Velinor resonance engine
 
 This folder contains a small, testable resonance engine prototype used to map
 player `tone` vectors into NPC `remnants` updates. Files added:
@@ -15,13 +14,14 @@ Run the tests with:
 pytest -q velinor/tests/test_resonance.py
 ```
 
+
+
 # 🎮 Velinor: Remnants of the Tone
 
 A text-based narrative game with emotional resonance, dice mechanics, and multiplayer support.
 
 **Status:** 🟢 Core engine complete | 🔄 UI layer pending
-
----
+##
 
 ## What is Velinor?
 
@@ -33,20 +33,22 @@ Velinor is an innovative interactive fiction experience built with:
 - **Dynamic Narration** - NPC responses adapt to player personality and group composition
 - **Multiplayer Storytelling** - 2-4 players experience the story together
 - **Living World** - Nature-reclaimed ruins of Saonyx with layered history
-
----
+##
 
 ## Quick Start
 
 ### Installation
 
 ```bash
+
 # Clone repo and navigate
 cd saoriverse-console
 
 # Install dependencies
 pip install -r requirements.txt
 ```
+
+
 
 ### Run Sample Game
 
@@ -70,9 +72,10 @@ state = orchestrator.process_player_action(
 )
 ```
 
-See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, etc.)
 
----
+
+See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, etc.)
+##
 
 ## Architecture
 
@@ -94,6 +97,8 @@ TWINE STORY (JSON)
     └─ Mobile App (Future)
 ```
 
+
+
 ### Key Components
 
 | Component | Purpose | Status |
@@ -104,8 +109,7 @@ TWINE STORY (JSON)
 | `engine/orchestrator.py` | Game loop controller | ✅ Complete |
 | Streamlit UI | Visual game frontend | 🔄 Next |
 | Web API | Online multiplayer | 🔄 Planned |
-
----
+##
 
 ## Story System
 
@@ -123,6 +127,8 @@ You emerge into the Market District...
 [[Explore alone->market_exploration]]
 [[Observe (Wisdom, DC 11)->observer_path]]
 ```
+
+
 
 **Syntax:**
 
@@ -142,8 +148,7 @@ Current sample story includes:
 - **20+ Passages** - Scaffolding ready for expansion
 
 See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
-
----
+##
 
 ## Game Mechanics
 
@@ -158,6 +163,8 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
     'resonance': 100,  # Hear the Tone, collect glyphs
 }
 ```
+
+
 
 ### Dice Rolls
 
@@ -175,14 +182,15 @@ Roll: 14 + 3 = 17 ✅ Success
 → Route to success_path passage
 ```
 
+
+
 ### Glyphs
 
 - Collect emotional resonance tokens
 - Each glyph represents a value (Courage, Wisdom, etc.)
 - Strengthen player's resonance
 - Unlock hidden story paths
-
----
+##
 
 ## Multiplayer Features
 
@@ -201,14 +209,17 @@ Roll: 14 + 3 = 17 ✅ Success
 NPC: "You steady yourself, blade in hand."
 ```
 
+
+
 **Multiplayer Mode:**
 
 ```
-NPC: "Together, your courage strengthens. The mist bends 
+NPC: "Together, your courage strengthens. The mist bends
      to your collective will."
 ```
 
----
+
+##
 
 ## Integration with FirstPerson Orchestrator
 
@@ -220,8 +231,7 @@ When FirstPerson is available:
 - **Memory Tracking** - Remember previous choices
 
 Without FirstPerson: Game still works with template-based dialogue.
-
----
+##
 
 ## File Structure
 
@@ -242,7 +252,8 @@ velinor/
 └── TWINE_INTEGRATION_GUIDE.md  # Full reference
 ```
 
----
+
+##
 
 ## Next Steps
 
@@ -272,8 +283,7 @@ velinor/
 2. Quest tracking
 3. Achievement system
 4. Deploy to cloud (Heroku, AWS)
-
----
+##
 
 ## Documentation
 
@@ -281,12 +291,12 @@ velinor/
 - **`TWINE_IMPLEMENTATION_COMPLETE.md`** - Architecture details
 - **`STATUS.md`** - Current project status
 - **`engine/quickstart.py`** - Code examples
-
----
+##
 
 ## Example: Playing the Game
 
 ```python
+
 # Initialize
 orchestrator = VelinorTwineOrchestrator(
     game_engine=engine,
@@ -317,7 +327,8 @@ orchestrator.save_game("saves/game_001.json")
 state = orchestrator.load_game("saves/game_001.json")
 ```
 
----
+
+##
 
 ## Technical Details
 
@@ -341,6 +352,8 @@ Velinor loads Twine 2 JSON export format:
   ]
 }
 ```
+
+
 
 ### Game State Structure
 
@@ -370,22 +383,21 @@ Velinor loads Twine 2 JSON export format:
 }
 ```
 
----
+
+##
 
 ## Support & Resources
 
 - **Twine 2**: <https://twinery.org/>
 - **SugarCube Manual**: <https://www.motoslave.net/sugarcube/2/docs/>
 - **Game Design**: See `/velinor/markdowngameinstructions/`
-
----
+##
 
 ## License
 
 [Your License Here]
+##
 
----
-
-**Created:** December 6, 2025  
-**Branch:** `feature/velinor-remnants-of-tone`  
+**Created:** December 6, 2025
+**Branch:** `feature/velinor-remnants-of-tone`
 **Status:** 🟢 Core complete | Ready for UI integration

@@ -31,6 +31,8 @@ Optionally Diversify Generic Closings
 Return Clean Response
 ```
 
+
+
 No code changes needed in calling code — it happens automatically!
 
 ## 📊 Results at a Glance
@@ -97,6 +99,8 @@ No code changes needed in calling code — it happens automatically!
 (Grounded pool, periods applied)
 ```
 
+
+
 ## 📝 Using It Directly (Advanced)
 
 ```python
@@ -107,6 +111,7 @@ cleaned = clean_response(
     response="You're not alone—many people feel this way.",
     glyph_name="Still Recognition"
 )
+
 # Returns: "You're not alone, many people feel this way."
 
 # Access cleaner directly
@@ -120,6 +125,8 @@ cleaned = cleaner.process_response(
     diversify=True  # Replace generic closings
 )
 ```
+
+
 
 ## 🚀 What's Automatic
 
@@ -170,6 +177,8 @@ To customize, edit `style_matrix.json`:
 }
 ```
 
+
+
 No code changes needed — JSON editing only.
 
 ## ⚡ Performance
@@ -183,10 +192,13 @@ No code changes needed — JSON editing only.
 ## 🧪 Testing
 
 Run built-in tests:
+
 ```bash
 cd emotional_os/glyphs
 python punctuation_cleaner.py
 ```
+
+
 
 Shows example transformations and verification.
 
@@ -220,8 +232,7 @@ Shows example transformations and verification.
 - Main cleaner: `emotional_os/glyphs/punctuation_cleaner.py`
 - Configuration: `emotional_os/glyphs/style_matrix.json`
 - Integration: `emotional_os/glyphs/dynamic_response_composer.py`
-
----
+##
 
 **The em dash era is over. Your system now produces fresh, intelligent, beautifully punctuated responses.**
 

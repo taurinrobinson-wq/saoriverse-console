@@ -21,6 +21,7 @@ You're moving from Streamlit (with overlay limitations) to a proper web stack:
 ### Phase 1: Create Next.js Frontend Project
 
 ```bash
+
 # From repo root
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
@@ -28,15 +29,20 @@ cd velinor-web
 npm install axios zustand
 ```
 
+
+
 ### Phase 2: Copy Component Files
 
 From the root, copy the prepared files into the Next.js project:
 
 ```bash
+
 # From root of saoriverse-console
 cp frontend_lib_api.ts velinor-web/lib/api.ts
 cp frontend_GameScene.tsx velinor-web/components/GameScene.tsx
 ```
+
+
 
 ### Phase 3: Create App Pages
 
@@ -56,7 +62,7 @@ export default function Home() {
 
   const handleStartGame = async () => {
     if (!playerName.trim()) return;
-    
+
     setLoading(true);
     try {
       const { session_id } = await gameApi.startGame(playerName);
@@ -87,7 +93,7 @@ export default function Home() {
       <p style={{ fontSize: '1.2rem', marginBottom: '40px', color: '#aaa' }}>
         A narrative adventure in the ruins of Velhara
       </p>
-      
+
       <div style={{
         display: 'flex',
         flexDirection: 'column',
@@ -110,7 +116,7 @@ export default function Home() {
             color: '#fff',
           }}
         />
-        
+
         <button
           onClick={handleStartGame}
           disabled={loading}
@@ -132,6 +138,8 @@ export default function Home() {
   );
 }
 ```
+
+
 
 #### Game Scene (`velinor-web/app/game/[sessionId]/page.tsx`)
 
@@ -209,11 +217,14 @@ export default function GamePage({ params }: { params: { sessionId: string } }) 
 }
 ```
 
+
+
 ### Phase 4: Copy Game Assets
 
 Copy your game assets into the Next.js public folder:
 
 ```bash
+
 # Copy backgrounds
 cp -r velinor/backgrounds/* velinor-web/public/assets/backgrounds/
 
@@ -224,22 +235,33 @@ cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 mkdir -p velinor-web/public/assets/overlays/
 ```
 
+
+
 ### Phase 5: Test Locally
 
 **Terminal 1 - Backend:**
+
 ```bash
 cd d:\saoriverse-console
 python velinor_api.py
+
 # Runs on http://localhost:8000
+
 # Swagger docs: http://localhost:8000/docs
 ```
 
+
+
 **Terminal 2 - Frontend:**
+
 ```bash
 cd velinor-web
 npm run dev
+
 # Runs on http://localhost:3000
 ```
+
+
 
 Test the game flow:
 1. Open http://localhost:3000
@@ -251,14 +273,18 @@ Test the game flow:
 ### Phase 6: Deploy to Railway
 
 ```bash
+
 # Add and commit everything
 git add .
 git commit -m "feat: Complete Next.js + FastAPI Velinor game"
 git push origin main
 
 # Railway auto-deploys
+
 # Your game will be live at: https://<railway-domain>.up.railway.app
 ```
+
+
 
 ## API Reference
 
@@ -266,11 +292,15 @@ git push origin main
 Start a new game session.
 
 **Request:**
+
 ```json
 { "player_name": "Traveler" }
 ```
 
+
+
 **Response:**
+
 ```json
 {
   "session_id": "uuid-here",
@@ -286,15 +316,20 @@ Start a new game session.
 }
 ```
 
+
+
 ### POST /api/game/{session_id}/action
 Process player action.
 
 **Request:**
+
 ```json
 { "choice_index": 0 }
 // or
 { "player_input": "I approach cautiously" }
 ```
+
+
 
 **Response:** Updated game state (same structure as start)
 
@@ -333,6 +368,8 @@ Process player action.
 └────────────────────────────────────────────────────┘
 ```
 
+
+
 ## What You Get
 
 ✅ **Full overlay control** - Position buttons, text, images anywhere
@@ -360,8 +397,7 @@ Process player action.
 - **Mobile optimized**: Responsive touch controls
 - **Multiplayer**: Extend API to handle multiple players
 - **Save system**: Persist game progress to database
-
----
+##
 
 Questions? Check:
 - `NEXTJS_FRONTEND_SETUP.md` - Detailed setup guide

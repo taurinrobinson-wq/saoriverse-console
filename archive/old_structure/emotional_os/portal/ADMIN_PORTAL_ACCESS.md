@@ -12,7 +12,7 @@
 
 ### Dashboard
 - System statistics overview
-- Active users and sessions  
+- Active users and sessions
 - Recent activity monitoring
 - Performance metrics
 
@@ -40,8 +40,7 @@
 - Secure cookie-based authentication
 - Automatic logout on session expiry
 - Admin activity logging
-
----
+##
 
 **Created**: October 15, 2025
 **Platform**: Railway (FirstPerson deployment)

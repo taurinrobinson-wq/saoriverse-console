@@ -12,6 +12,7 @@ The issue: `DynamicResponseComposer` was accepting `glyph_name` parameter but ne
 ### 1. **Refactored Composer Method Signatures**
 
 **Before:**
+
 ```python
 def compose_response(
     self,
@@ -21,7 +22,10 @@ def compose_response(
 ) -> str:
 ```
 
+
+
 **After:**
+
 ```python
 def compose_response(
     self,
@@ -30,6 +34,8 @@ def compose_response(
     ...
 ) -> str:
 ```
+
+
 
 Both `compose_response()` and `compose_message_aware_response()` now accept full glyph dicts.
 
@@ -41,29 +47,35 @@ Added new method `_build_glyph_aware_response()` that uses glyph metadata to sca
 def _build_glyph_aware_response(self, glyph, entities, emotions, ...):
     # Layer 1: Glyph description as emotional anchor
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
-    
+
     # Layer 2: Message-specific bridges (for feedback/corrections)
     # Layer 3: Entity-specific contextualization
     # Layer 4: Poetry weaving based on glyph's emotional category
     # Layer 5: Intensity scaling based on glyph.gates
 ```
 
+
+
 ### 3. **Made Message-Aware Responses Glyph-Grounded**
 
 Updated `compose_message_aware_response()` to start with glyph description anchor:
 
 ```python
+
 # Now starts with glyph context before message-specific content
 if glyph and glyph.get("description"):
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
     parts.append(opening)
 ```
 
+
+
 ### 4. **Updated Call Sites in signal_parser.py**
 
 Changed from passing just `glyph_name` to passing full `glyph` dict:
 
 **Before:**
+
 ```python
 composed = _response_composer.compose_response(
     input_text=input_text,
@@ -72,7 +84,10 @@ composed = _response_composer.compose_response(
 )
 ```
 
+
+
 **After:**
+
 ```python
 composed = _response_composer.compose_response(
     input_text=input_text,
@@ -80,6 +95,8 @@ composed = _response_composer.compose_response(
     ...
 )
 ```
+
+
 
 ### 5. **Fixed Database Field Mapping**
 
@@ -91,35 +108,41 @@ Normalized glyph database fields:
 ## Test Results
 
 ### Message 1: Math Anxiety (Base Case)
+
 ```
 Input: "I have math anxiety. I've never been good at math and it's been a block my whole life."
 
 Glyph Selected: Still Containment
 Description: "Boundaries that hold without pressure. A sanctuary of quiet care."
 
-Response: 
-"...There's something in what you're describing—boundaries that hold without pressure. 
-a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction 
-with math, especially when it's presented in a way that doesn't match how their mind 
+Response:
+"...There's something in what you're describing—boundaries that hold without pressure.
+a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction
+with math, especially when it's presented in a way that doesn't match how their mind
 naturally works..."
 
 ✓✓ GLYPH DESCRIPTION FOUND IN RESPONSE!
 ```
 
+
+
 ### Message 3: Feedback Correction (Misalignment Detected)
+
 ```
-Input: "That's not quite what I meant. Michelle is my mother-in-law and my boss, and 
+Input: "That's not quite what I meant. Michelle is my mother-in-law and my boss, and
 she always explains things in a way that only makes sense to her."
 
 Feedback Detection: 'misalignment' contradiction detected
 Glyph Selected: Still Containment
 
-Response: "...I appreciate you saying that. I want to make sure I'm actually hearing you, 
+Response: "...I appreciate you saying that. I want to make sure I'm actually hearing you,
 not projecting onto you. Help me understand: what did I miss?"
 
 ✓ Feedback-aware response generation working
 ✓ Response grounded in glyph meaning
 ```
+
+
 
 ## Architecture Now
 
@@ -146,6 +169,8 @@ Dynamic Response Composer [GLYPH-AWARE]
         └─ Add inherited_pattern handling
 ```
 
+
+
 ## Key Benefits
 
 1. **Glyph Grounding**: Responses now open with the glyph's description, immediately establishing meaning context
@@ -157,24 +182,30 @@ Dynamic Response Composer [GLYPH-AWARE]
 ## Example: How It Works Now
 
 **Before Refactoring:**
+
 ```
 Glyph: Still Containment (used for label only)
 Response: "You're not alone—many brilliant people have genuine friction with math..."
 [Glyph metadata ignored]
 ```
 
+
+
 **After Refactoring:**
+
 ```
-Glyph: Still Containment 
+Glyph: Still Containment
        - description: "Boundaries that hold without pressure. A sanctuary of quiet care."
        - gate: "Gate 2"
        - emotional_signal: "containment/care"
 
-Response: "There's something in what you're describing—boundaries that hold without 
-pressure. a sanctuary of quiet care. You're not alone—many brilliant people have genuine 
+Response: "There's something in what you're describing—boundaries that hold without
+pressure. a sanctuary of quiet care. You're not alone—many brilliant people have genuine
 friction with math..."
 [Glyph description directly embedded; intensity informed by gates]
 ```
+
+
 
 ## Files Modified
 
@@ -187,7 +218,7 @@ friction with math..."
 
 2. **emotional_os/glyphs/signal_parser.py**
    - Updated composer call sites to pass full `glyph` dict instead of `glyph_name` string
-   - Fixed return value unpacking in `select_best_glyph_and_response()` 
+   - Fixed return value unpacking in `select_best_glyph_and_response()`
    - Ensured tuple return format consistency: `(best_glyph, (response, feedback_data))`
 
 ## Validation

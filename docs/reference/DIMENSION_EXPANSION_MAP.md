@@ -1,6 +1,7 @@
 # Emotional Dimension Expansion Map
 
 ## Your Original 8 Dimensions (from "Hope is the thing with feathers")
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  BASE EMOTIONAL DIMENSIONS (Foundation)                 │
@@ -16,7 +17,10 @@
 └─────────────────────────────────────────────────────────┘
 ```
 
+
+
 ## New Pre-Discovered Dimensions (from Poetry Analysis)
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  ENHANCED DIMENSIONS (Poetry Canon Analysis)            │
@@ -34,7 +38,10 @@
 └─────────────────────────────────────────────────────────┘
 ```
 
+
+
 ## Dynamically Discovered Dimensions (from Corpus Learning)
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  ADAPTIVE DIMENSIONS (Learned from Processing)          │
@@ -48,6 +55,8 @@
 │          - Modern disaffection                          │
 └─────────────────────────────────────────────────────────┘
 ```
+
+
 
 ## Dimension Expansion Timeline
 
@@ -65,9 +74,12 @@ November 3, 2025
     - Semantic relationships mapped
 ```
 
+
+
 ## Cross-Dimension Relationships
 
 ### Example: "Melancholic Nostalgia"
+
 ```
 Melancholy (13)
     + Nostalgia (9)
@@ -75,13 +87,16 @@ Melancholy (13)
     + Solitude (18)
         ↓
     = Complex emotional state
-    
+
 When extracted from Romantic poetry:
 "I remember the sweetness of days gone by,
  Yet grief fills my heart for what I've lost"
 ```
 
+
+
 ### Example: "Transcendent Wonder"
+
 ```
 Transcendence (11)
     + Wonder (16)
@@ -89,11 +104,13 @@ Transcendence (11)
     + Nature (8)
         ↓
     = Spiritual awakening
-    
+
 When extracted from Shelley:
 "The vast luminous sphere,
  Where infinite consciousness dwells"
 ```
+
+
 
 ## Dimension Keywords by Category
 
@@ -129,6 +146,8 @@ Lexicon expanded across full emotional spectrum
 System now understands poetry at deeper level
 ```
 
+
+
 ## Expected Outcomes from Gutenberg Processing
 
 ### After processing 18 poetry collections (~1.1M words):
@@ -140,6 +159,7 @@ System now understands poetry at deeper level
 - Semantic relationships between classical poets
 
 **Example Report:**
+
 ```
 Emotional Dimensions Report:
 ├─ Base Dimensions: 8
@@ -154,6 +174,8 @@ Emotional Dimensions Report:
    (vs. 8 at start)
 ```
 
+
+
 ## Impact on Lexicon Learning
 
 ### Before (Limited to 8 dimensions):
@@ -167,8 +189,7 @@ Emotional Dimensions Report:
 - "eternal" → love/admiration/transcendence/resilience/nostalgia
 
 **Result: 3-5x richer emotional understanding per word!**
-
----
+##
 
 ## Why This Matters
 

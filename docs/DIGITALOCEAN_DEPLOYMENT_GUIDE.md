@@ -1,16 +1,14 @@
 # DigitalOcean Deployment Guide (IP: 161.35.227.49)
 
 This is your complete step-by-step guide to deploy the FirstPerson web application on your DigitalOcean droplet running Ubuntu.
-
----
+##
 
 ## Prerequisites
 
 ✓ Ubuntu 22.04 LTS or later on your DigitalOcean droplet (161.35.227.49)
 ✓ SSH access to your droplet
 ✓ GitHub repository cloned locally
-
----
+##
 
 ## Quick Start (5 minutes)
 
@@ -18,13 +16,18 @@ This is your complete step-by-step guide to deploy the FirstPerson web applicati
 
 ```bash
 ssh root@161.35.227.49
+
 # If using SSH key, it may be automatic
+
 # If password, you'll be prompted
 ```
+
+
 
 ### Step 2: Run the Automated Setup Script
 
 ```bash
+
 # Clone the repo
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
@@ -35,6 +38,8 @@ chmod +x docker-setup.sh
 # Run it
 ./docker-setup.sh
 ```
+
+
 
 This script will:
 - ✓ Install Docker & Docker Compose
@@ -47,6 +52,7 @@ This script will:
 ### Step 3: Verify Deployment
 
 ```bash
+
 # Check running containers
 docker compose ps
 
@@ -57,13 +63,15 @@ curl http://161.35.227.49:8000/health
 curl http://161.35.227.49:3000
 ```
 
----
+
+##
 
 ## Detailed Setup (If You Prefer Manual Installation)
 
 ### Install Docker Manually
 
 ```bash
+
 # Update system
 sudo apt update
 sudo apt upgrade -y
@@ -98,9 +106,12 @@ newgrp docker
 docker --version
 ```
 
+
+
 ### Clone & Configure Your Project
 
 ```bash
+
 # Clone repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
@@ -112,14 +123,20 @@ cp .env.example .env
 nano .env
 
 # Key variables to check:
+
 # - API_URL=http://161.35.227.49:8000
+
 # - FRONTEND_URL=http://161.35.227.49
+
 # - DATABASE_URL=sqlite:///./data_local/app.db
 ```
+
+
 
 ### Build and Start Services
 
 ```bash
+
 # Build Docker images
 docker compose build
 
@@ -139,7 +156,8 @@ docker compose logs -f backend
 docker compose logs -f frontend
 ```
 
----
+
+##
 
 ## Access Your Application
 
@@ -151,14 +169,14 @@ Once everything is running:
 | API Backend | http://161.35.227.49:8000 | FastAPI server |
 | Nginx Proxy | http://161.35.227.49:80 | Reverse proxy |
 | Health Check | http://161.35.227.49:8000/health | API health status |
-
----
+##
 
 ## Common Operations
 
 ### View Logs
 
 ```bash
+
 # All services
 docker compose logs
 
@@ -177,9 +195,12 @@ docker compose logs --tail 100
 docker compose logs -f --tail 100
 ```
 
+
+
 ### Stop Services
 
 ```bash
+
 # Stop without removing
 docker compose stop
 
@@ -193,9 +214,12 @@ docker compose down
 docker compose down -v
 ```
 
+
+
 ### Restart Individual Services
 
 ```bash
+
 # Restart backend
 docker compose restart backend
 
@@ -206,9 +230,12 @@ docker compose restart frontend
 docker compose restart nginx
 ```
 
+
+
 ### Execute Commands in Containers
 
 ```bash
+
 # Get a shell in the backend container
 docker compose exec backend bash
 
@@ -219,9 +246,12 @@ docker compose exec backend python -c "import sys; print(sys.version)"
 docker compose exec frontend bash
 ```
 
+
+
 ### View Resource Usage
 
 ```bash
+
 # Overall Docker stats
 docker stats
 
@@ -232,13 +262,15 @@ docker system df
 docker system prune
 ```
 
----
+
+##
 
 ## Update Your Application
 
 ### Deploy New Code
 
 ```bash
+
 # Pull latest changes
 git pull origin main
 
@@ -252,9 +284,12 @@ docker compose up -d
 docker compose logs -f
 ```
 
+
+
 ### Update Specific Service
 
 ```bash
+
 # Just rebuild and restart backend
 docker compose up -d --build backend
 
@@ -262,13 +297,15 @@ docker compose up -d --build backend
 docker compose up -d --build frontend
 ```
 
----
+
+##
 
 ## Troubleshooting
 
 ### Service Won't Start
 
 ```bash
+
 # Check logs first
 docker compose logs backend
 
@@ -283,9 +320,12 @@ sudo lsof -i :3000
 sudo lsof -i :80
 ```
 
+
+
 ### Out of Disk Space
 
 ```bash
+
 # Check usage
 docker system df
 
@@ -296,9 +336,12 @@ docker system prune -a
 docker image rm <image_id>
 ```
 
+
+
 ### Network Issues
 
 ```bash
+
 # Check networks
 docker network ls
 
@@ -310,11 +353,15 @@ docker compose down
 docker compose up -d
 ```
 
+
+
 ### Can't Connect to Backend from Frontend
 
 ```bash
+
 # Check if backend is healthy
 docker compose ps
+
 # Status should be "Up (healthy)"
 
 # Test backend from inside frontend container
@@ -322,16 +369,19 @@ docker compose exec frontend curl http://backend:8000/health
 
 # Check environment variable in frontend
 docker compose exec frontend env | grep API_URL
+
 # Should show: REACT_APP_SAOYNX_API_URL=http://backend:8000
 ```
 
----
+
+##
 
 ## Backup & Recovery
 
 ### Backup Your Data
 
 ```bash
+
 # Backup database and files
 docker compose exec backend tar -czf /app/backup.tar.gz data_local/
 
@@ -342,9 +392,12 @@ docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 rsync -avz root@161.35.227.49:/path/to/data ./backup/
 ```
 
+
+
 ### Restore from Backup
 
 ```bash
+
 # Copy backup to container
 docker cp backup.tar.gz saoriverse-backend:/app/
 
@@ -355,13 +408,15 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 docker compose restart backend
 ```
 
----
+
+##
 
 ## SSL/HTTPS Setup (Optional)
 
 ### Using Let's Encrypt
 
 ```bash
+
 # Install certbot
 sudo apt install -y certbot python3-certbot-nginx
 
@@ -370,13 +425,17 @@ docker compose stop nginx
 sudo certbot certonly --standalone -d 161.35.227.49
 
 # Update nginx.conf with SSL directives
+
 # Then restart nginx
 docker compose start nginx
 ```
 
+
+
 ### Update nginx.conf for HTTPS
 
 Add to your nginx.conf:
+
 ```nginx
 server {
     listen 443 ssl;
@@ -392,7 +451,8 @@ server {
 }
 ```
 
----
+
+##
 
 ## Health Monitoring
 
@@ -400,6 +460,7 @@ server {
 
 ```bash
 #!/bin/bash
+
 # save as check-health.sh
 
 echo "=== Container Status ==="
@@ -418,17 +479,22 @@ echo "=== Disk Usage ==="
 docker system df
 ```
 
+
+
 Run it regularly:
+
 ```bash
 chmod +x check-health.sh
 ./check-health.sh
 
 # Or set up a cron job to check every hour
 crontab -e
+
 # Add: 0 * * * * /root/saoriverse-console/check-health.sh >> /var/log/saoriverse-health.log 2>&1
 ```
 
----
+
+##
 
 ## Next Steps
 
@@ -439,8 +505,7 @@ crontab -e
 5. ✅ Set up SSL (optional): Use Let's Encrypt
 6. ✅ Configure backups if needed
 7. ✅ Set up monitoring/health checks
-
----
+##
 
 ## Support & Documentation
 
@@ -449,8 +514,7 @@ crontab -e
 - **Nginx Docs**: https://nginx.org/en/docs/
 - **FastAPI Docs**: https://fastapi.tiangolo.com/
 - **React Docs**: https://react.dev/
-
----
+##
 
 **Your deployment is ready! 🚀**
 

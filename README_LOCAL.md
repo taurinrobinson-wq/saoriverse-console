@@ -11,17 +11,22 @@ This repository can be tested locally in two ways:
 PowerShell commands:
 
 ```powershell
+
 # from repo root
+
 # start dev services (builds and installs dependencies inside containers)
 docker compose -f docker-compose.dev.yml up --build
 
 # Open frontend: http://localhost:3000
+
 # Open API health: http://localhost:8000/health
 
 # to stop:
 ctrl+c
 docker compose -f docker-compose.dev.yml down
 ```
+
+
 
 Notes:
 - The backend runs with `--reload` so Python code changes are reflected immediately.
@@ -37,16 +42,20 @@ Notes:
 PowerShell commands:
 
 ```powershell
+
 # build and run production-like container (may take longer)
 docker compose up --build
 
 # open the site at: http://localhost:8080  (host port 8080 mapped to container port 8000)
+
 # check health endpoint: http://localhost:8080/health
 
 # to stop:
 ctrl+c
 docker compose down
 ```
+
+
 
 Tips to speed up cycles
 
@@ -56,12 +65,17 @@ Tips to speed up cycles
 - Tail logs from containers:
 
 ```powershell
+
 # list containers
 docker ps
+
 # then tail logs
 docker logs -f saoriverse-console-local
+
 # or for dev containers
 docker logs -f <container_name>
 ```
+
+
 
 If you want, I can also add a small `Makefile` or PowerShell script to wrap these commands.

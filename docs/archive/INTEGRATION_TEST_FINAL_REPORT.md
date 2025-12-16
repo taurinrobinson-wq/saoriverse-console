@@ -3,8 +3,7 @@
 **Date:** December 3, 2025
 **Test Run:** Comprehensive 6-scenario integration test suite
 **Duration:** Full flow testing (auth → message → response → affirmation)
-
----
+##
 
 ## 🎯 EXECUTIVE SUMMARY
 
@@ -12,8 +11,7 @@
 **Current Score:** 0.36/1.0 average humanlike assessment
 **Critical Issues Fixed:** ✅ Crisis response, ✅ Glyph database, ✅ Emotional keyword detection
 **Remaining Issues:** ⚠️ Mortality framework silent, ⚠️ Generic responses despite glyphs loaded, ⚠️ No affirmation tracking
-
----
+##
 
 ## 📊 TEST RESULTS MATRIX
 
@@ -29,8 +27,7 @@
 | 6. Crisis Response | N/A | 0 | **FIXED** ✅ | ✅ | **CRITICAL WIN** - Safety working |
 
 **Summary:** 6/6 scenarios completed, 5/6 showing glyphs, crisis response fixed, mortality framework silent.
-
----
+##
 
 ## ✅ WHAT'S WORKING NOW
 
@@ -57,7 +54,7 @@
 
 **Sample Glyphs Retrieved:**
 - "Recursive Ache"
-- "Jubilant Mourning"  
+- "Jubilant Mourning"
 - "Grief in Stillness"
 - "Yearning Joy"
 - "Celebrated Grief"
@@ -78,8 +75,7 @@
 - Scenario 3: 32 glyphs (recognition/connection signals)
 - Scenario 4: 16 glyphs (joy/transition signals)
 - Database queries running correctly with gate-based filtering
-
----
+##
 
 ## ⚠️ REMAINING CRITICAL ISSUES
 
@@ -134,8 +130,7 @@
 - Indicates glyphs not being *woven* into response
 - Should blend multiple emotional angles into coherent narrative
 - Currently: Just returning first glyph or generic template
-
----
+##
 
 ## 📈 IMPROVEMENT TRAJECTORY
 
@@ -146,9 +141,10 @@ After DB Init:     0.36/1.0 (database restored)
 Target for prod:   0.70/1.0 (needed for humanlike presence)
 ```
 
-**Distance to Production:** -0.34 points
 
----
+
+**Distance to Production:** -0.34 points
+##
 
 ## 🔧 IMMEDIATE NEXT STEPS (Priority Order)
 
@@ -181,7 +177,7 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
 - [ ] Tag with humanlike_score, signals, glyphs, response
 - [ ] Connect to reward model
 
-**Files:** 
+**Files:**
 - `emotional_os/core/signal_parser.py` (detection)
 - `emotional_os/feedback/affirmed_flows.jsonl` (logging)
 
@@ -191,8 +187,7 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
 - [ ] Maintain emotional coherence across multiple glyphs
 
 **File:** `emotional_os/glyphs/dynamic_response_composer.py`
-
----
+##
 
 ## 📁 Test Infrastructure Created
 
@@ -210,6 +205,7 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
     - Multi-glyph integration
 
 ### Assessment Scoring:
+
 ```
 0.0-0.3: Generic, not humanlike
 0.3-0.5: Functional but template-based
@@ -217,7 +213,10 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
 0.7-1.0: Humanlike, contextualized, emotionally present
 ```
 
+
+
 ### Affirmation Logging Structure:
+
 ```json
 {
   "timestamp": "2025-12-03T...",
@@ -232,7 +231,8 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
 }
 ```
 
----
+
+##
 
 ## 🎯 SUCCESS CRITERIA FOR PRODUCTION
 
@@ -245,8 +245,7 @@ Target for prod:   0.70/1.0 (needed for humanlike presence)
 - [ ] Multi-glyph composition → ⚠️ PENDING
 
 **Current Status:** 2/7 criteria met. 5/7 pending.
-
----
+##
 
 ## 💡 KEY INSIGHTS
 
@@ -270,8 +269,7 @@ System fetches 36 glyphs but returns generic response. This suggests:
 2. Poetic engine not injecting output
 3. Fallback template being returned
 4. Generic template handler too aggressive
-
----
+##
 
 ## 🚀 Path to Production (Estimated Timeline)
 
@@ -296,8 +294,7 @@ System fetches 36 glyphs but returns generic response. This suggests:
 - Deploy with monitoring
 
 **Total Estimated: 7-13 hours** to production readiness
-
----
+##
 
 ## 📋 Quick Reference: Files to Check
 
@@ -309,8 +306,7 @@ System fetches 36 glyphs but returns generic response. This suggests:
 | `emotional_os/glyphs/signal_parser.py` | Select best glyph | ⚠️ Unclear why returning generic |
 | `tests/test_comprehensive_integration.py` | Full integration tests | ✅ Created, running |
 | `emotional_os/feedback/affirmed_flows.jsonl` | Affirmation log | ⚠️ Not being written |
-
----
+##
 
 ## ❓ RECOMMENDATIONS
 
@@ -324,8 +320,7 @@ System fetches 36 glyphs but returns generic response. This suggests:
 
 ### If You Want Production Today:
 Not possible yet. Need at least 4-6 hours for core fixes. But system is CLOSE - all pieces exist, just not connected right.
-
----
+##
 
 ## 📞 ASSESSMENT
 
@@ -336,4 +331,3 @@ Not possible yet. Need at least 4-6 hours for core fixes. But system is CLOSE - 
 **The fix:** Relatively straightforward debugging + wiring. Not architectural - just integration.
 
 **My recommendation:** You're not facing "generic ass responses" because the system is weak. You're facing them because the output pipeline isn't connected properly. Once fixed, you'll see the humanlike responses your system is designed to generate.
-

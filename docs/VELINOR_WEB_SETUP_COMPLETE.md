@@ -57,6 +57,8 @@ d:\saoriverse-console\
 └── RUN_VELINOR_WEB.md                ✅ Quick start guide
 ```
 
+
+
 ### How It Works
 
 **User Flow:**
@@ -96,16 +98,22 @@ See `RUN_VELINOR_WEB.md` for detailed instructions.
 **Quick Start:**
 
 Terminal 1 (Backend):
+
 ```bash
 cd d:\saoriverse-console
 python velinor_api.py
 ```
 
+
+
 Terminal 2 (Frontend):
+
 ```bash
 cd d:\saoriverse-console\velinor-web
 npm run dev
 ```
+
+
 
 Then open: `http://localhost:3000`
 
@@ -119,6 +127,8 @@ git add .
 git commit -m "Velinor web stack complete - ready for production"
 git push origin main
 ```
+
+
 
 Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend domain.
 
@@ -142,7 +152,6 @@ Railway auto-deploys on push. Update the API URL in `.env.local` to point to you
 | Custom Layout | ❌ Column/expander only | ✅ Full CSS/Tailwind |
 | Performance | ⚠️ Heavy Python/Streamlit | ✅ Lightweight React |
 | Deployment | 📦 Streamlit Cloud | 🚀 Railway, Vercel, AWS, etc. |
-
----
+##
 
 **Ready to test!** See `RUN_VELINOR_WEB.md` for how to start both servers and play the game.

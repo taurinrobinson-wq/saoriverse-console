@@ -34,7 +34,7 @@ Instead of trying to populate 1844 response templates:
 ### Changes
 1. **Priority reordering in `_build_glyph_aware_response`**
    - Glyph wisdom now checked FIRST before generic fallbacks
-   
+
 2. **New method `_craft_glyph_grounded_response`**
    - Extracts glyph concepts (stillness, ache, joy, boundary, etc.)
    - Matches concepts to user input
@@ -63,29 +63,37 @@ All tests passing ✅:
 [✓] No database modifications required
 ```
 
+
+
 ## Results
 
 ### Example 1: Stress + Still Insight
+
 ```
 Input: "I'm feeling stressed about work piling up"
 Before: "I hear you. What's the feeling underneath all that?"
-After:  "That's a real thing you're carrying. Even in what feels active or 
-        chaotic, there's often a still place underneath. Quiet revelation. 
+After:  "That's a real thing you're carrying. Even in what feels active or
+        chaotic, there's often a still place underneath. Quiet revelation.
         Truth that arrives without noise. What's the next small step for you?"
 ```
+
+
 ✓ Acknowledges stress and work burden
 ✓ Incorporates stillness wisdom
 ✓ Uses glyph description
 ✓ Different from other glyphs
 
-### Example 2: Grief + Ache of Recognition  
+### Example 2: Grief + Ache of Recognition
+
 ```
 Input: "I've been feeling this deep sadness"
 Before: "That sadness is real. I'm here with you in it. What do you need?"
-After:  "I'm here with you on that. The ache you're feeling—sorrow witnessed. 
-        the pain of being truly seen.—that's actually meaningful. 
+After:  "I'm here with you on that. The ache you're feeling—sorrow witnessed.
+        the pain of being truly seen.—that's actually meaningful.
         What's the next small step for you?"
 ```
+
+
 ✓ Uses "ache" concept from glyph
 ✓ References "sorrow witnessed" directly
 ✓ "being truly seen" resonates with grief
@@ -132,7 +140,7 @@ The user can now verify the system actually works.
 ## Technical Debt Addressed
 
 - ✅ Removed reliance on missing response_template data
-- ✅ Used existing glyph description data effectively  
+- ✅ Used existing glyph description data effectively
 - ✅ Made each glyph's output unique and verifiable
 - ✅ No schema changes needed
 - ✅ No performance impact
@@ -161,8 +169,7 @@ The system now generates contextual responses that:
 5. Change based on user input and selected glyph
 
 This directly addresses the user's challenge and proves the system is actually functional.
-
----
+##
 
 **User Challenge**: "it doesn't acknowledge any part of the user's message"
 **Result**: ✅ FIXED - All responses now incorporate user context + glyph wisdom

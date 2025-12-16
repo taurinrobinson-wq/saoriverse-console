@@ -19,6 +19,8 @@ NPC adapts response:
   - Invites exploration: "What needs to be said about it?"
 ```
 
+
+
 ## 🧠 Emotional Analysis Components
 
 ### 1. **Tone** (How they're saying it)
@@ -49,6 +51,7 @@ NPC adapts response:
 FirstPerson tracks across turns:
 
 ### Conversation Memory
+
 ```
 Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6
 Turn 2: "It's like I've lost them" → Theme: grief, Valence: -0.8
@@ -58,11 +61,16 @@ Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
 → Emotional trend: Improving (from -0.8 to -0.1)
 ```
 
+
+
 ### NPC Responds to Pattern
+
 ```
-Turn 3 NPC: "I'm noticing a shift in what you're saying. 
+Turn 3 NPC: "I'm noticing a shift in what you're saying.
 What's helping you see this differently?"
 ```
+
+
 
 ## 💬 Response Generation
 
@@ -85,7 +93,9 @@ What's helping you see this differently?"
 ## 🛠 Code Integration Points
 
 ### In `velinor_app.py`
+
 ```python
+
 # FirstPerson initialized on startup
 st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(...)
 
@@ -96,10 +106,15 @@ orchestrator = VelinorTwineOrchestrator(
 )
 ```
 
+
+
 ### In `velinor/engine/orchestrator.py`
+
 ```python
+
 # Step 1: Analyze player input
 player_analysis = self._summarize_player_intent(player_input, player_id)
+
 # Returns: {emotional_tone, detected_theme, valence, intensity, memory_context}
 
 # Step 2: Apply to NPC dialogue
@@ -109,11 +124,14 @@ npc_dialogue = self._generate_npc_dialogue(
 )
 ```
 
+
+
 ## 🎮 Real Example
 
 **Game Scenario:** Meeting an NPC named Keeper
 
 ### Scenario 1: Heavy Emotional Weight
+
 ```
 You: "Everything feels too heavy. I don't know if I can go on."
 
@@ -127,11 +145,14 @@ FirstPerson Analysis:
 
 Keeper's Response:
 "I hear the weight in that. The gravity of what you're carrying—
-I feel it too. What needs to be said about it? Sometimes naming it 
+I feel it too. What needs to be said about it? Sometimes naming it
 helps."
 ```
 
+
+
 ### Scenario 2: Recurring Theme (After 3rd mention of loss)
+
 ```
 You: "I keep coming back to what I've lost..."
 
@@ -149,12 +170,15 @@ FirstPerson Analysis:
 }
 
 Keeper's Response:
-"I hear the weight in that. And I'm noticing grief keeps coming 
-back to you—it's sitting heavy. That tells me something. What do 
+"I hear the weight in that. And I'm noticing grief keeps coming
+back to you—it's sitting heavy. That tells me something. What do
 you need in this moment?"
 ```
 
+
+
 ### Scenario 3: Emotional Improvement
+
 ```
 You: "Maybe there's something I can learn from this pain..."
 
@@ -170,32 +194,42 @@ FirstPerson Analysis:
 }
 
 Keeper's Response:
-"There's something to sit with there. I'm also noticing a shift 
+"There's something to sit with there. I'm also noticing a shift
 in what you're saying. What's helping you see this differently?"
 ```
+
+
 
 ## 🚀 How to Use It
 
 ### Local Play
+
 ```bash
+
 # Just run it—integration works automatically!
 streamlit run velinor_app.py
 ```
+
+
 
 No configuration needed. FirstPerson analysis happens client-side.
 
 ### Observing the Analysis
 The terminal shows debug info (if logging enabled):
+
 ```
 [Player Input] "I'm struggling with loss"
 [FirstPerson] tone='heavy', theme='grief', valence=-0.7, intensity=0.8
 [NPC] Keeper generates response...
 ```
 
+
+
 ### Customizing Responses
 Edit `_generate_emotionally_aware_response()` in `orchestrator.py`:
 
 ```python
+
 # Modify opening responses
 response_openings = {
     'uplifting': ["Your custom uplifting response"],
@@ -209,6 +243,8 @@ theme_acknowledgments = {
     ...
 }
 ```
+
+
 
 ## 📈 What Improves Player Experience
 
@@ -227,6 +263,7 @@ theme_acknowledgments = {
 ## 🔄 Memory Tracking Examples
 
 ### Turn Tracking
+
 ```python
 self.memory.record_turn(
     user_input="I feel lost",
@@ -236,10 +273,13 @@ self.memory.record_turn(
 )
 ```
 
+
+
 ### Recurring Theme Detection
+
 ```python
 Turn 1: "I miss them" → theme='general'
-Turn 2: "The loss keeps returning" → theme='grief' 
+Turn 2: "The loss keeps returning" → theme='grief'
 Turn 3: "Grief is still with me" → theme='grief' (2nd occurrence)
 
 # FirstPerson detects 'grief' is recurring:
@@ -249,13 +289,18 @@ memory.repeated_patterns = ['grief']
 "I'm noticing grief keeps coming back to you."
 ```
 
+
+
 ### Emotional Trajectory
+
 ```python
 Valence history: [-0.8, -0.7, -0.6, -0.4, -0.2]
 → Trend: 'improving'
 
 NPC: "I'm also noticing a shift. What's helping?"
 ```
+
+
 
 ## 🎯 Key Features
 
@@ -271,10 +316,10 @@ NPC: "I'm also noticing a shift. What's helping?"
 
 ## 🔐 Privacy
 
-✅ All analysis happens locally on your machine  
-✅ No data sent to external servers (unless you configure it)  
-✅ No configuration required for local play  
-✅ Conversation history stored only in session memory  
+✅ All analysis happens locally on your machine
+✅ No data sent to external servers (unless you configure it)
+✅ No configuration required for local play
+✅ Conversation history stored only in session memory
 
 ## 📚 Files
 
@@ -288,22 +333,21 @@ NPC: "I'm also noticing a shift. What's helping?"
 
 ## ❓ FAQ
 
-**Q: Does the game work without FirstPerson?**  
+**Q: Does the game work without FirstPerson?**
 A: Yes! It gracefully falls back to basic responses if FirstPerson unavailable.
 
-**Q: Can I customize how emotions are detected?**  
+**Q: Can I customize how emotions are detected?**
 A: Yes, edit `AffectParser.analyze_affect()` in `firstperson.py`
 
-**Q: Do I need secrets or API keys?**  
+**Q: Do I need secrets or API keys?**
 A: No, not for local play. Only if deploying with external backends.
 
-**Q: How much emotional history is kept?**  
+**Q: How much emotional history is kept?**
 A: Entire conversation is tracked in session memory. Clears on new game.
 
-**Q: Can I export emotional analysis data?**  
+**Q: Can I export emotional analysis data?**
 A: Not yet, but the infrastructure is there. See `memory.get_memory_context()`
-
----
+##
 
 **Status:** ✅ **Ready to Play**
 

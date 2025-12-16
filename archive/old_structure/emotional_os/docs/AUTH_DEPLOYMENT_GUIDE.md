@@ -69,7 +69,7 @@ This guide walks through deploying the complete user authentication system for E
    ```bash
    # Backup current emotional_os_ui.py (ARCHIVED)
    cp emotional_os_ui.py (ARCHIVED) emotional_os_ui_backup.py
-   
+
    # Replace with authenticated version
    cp authenticated_emotional_os_ui.py emotional_os_ui.py (ARCHIVED)
    ```
@@ -122,7 +122,9 @@ This guide walks through deploying the complete user authentication system for E
 ## Configuration Details
 
 ### Environment Variables
+
 ```env
+
 # Required for edge functions
 SUPABASE_URL=your-supabase-url
 SUPABASE_ANON_KEY=your-anon-key
@@ -130,19 +132,27 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 OPENAI_API_KEY=your-openai-key
 ```
 
+
+
 ### Supabase Function URLs
+
 ```
 Authentication: https://your-project.supabase.co/functions/v1/auth-manager
 Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ```
 
+
+
 ### Security Headers
+
 ```typescript
 // Required CORS headers for Streamlit integration
 'Access-Control-Allow-Origin': '*'
 'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE'
 ```
+
+
 
 ## Security Features
 
@@ -242,7 +252,7 @@ Processing: https://your-project.supabase.co/functions/v1/authenticated-saori
 ## Next Steps
 
 1. **User Onboarding**: Create user guide for registration/login
-2. **Admin Dashboard**: Build admin interface for user management  
+2. **Admin Dashboard**: Build admin interface for user management
 3. **Analytics**: Add user engagement and system performance tracking
 4. **Mobile Support**: Optimize authentication for mobile devices
 5. **Social Features**: Consider user-to-user interaction features (optional)

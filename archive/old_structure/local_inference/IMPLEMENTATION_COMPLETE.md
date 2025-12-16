@@ -6,15 +6,14 @@ Phase 3.5 is a **complete, production-ready system** for glyph-controlled local 
 
 ### Key Achievements
 
-✅ **Glyph Schema & Registry** - 8 base glyphs with emotional attributes  
-✅ **Gate Enforcement** - Multi-layer safety policy system  
-✅ **Control Tag Rendering** - XML-based LLM prompt control  
-✅ **Safety Post-Processing** - 4-layer violation detection & removal  
-✅ **Training Corpus Pipeline** - JSONL-based fine-tuning data generation  
-✅ **Comprehensive Tests** - 31 tests, 100% pass rate  
-✅ **Production Examples** - Full end-to-end workflow demonstrations  
-
----
+✅ **Glyph Schema & Registry** - 8 base glyphs with emotional attributes
+✅ **Gate Enforcement** - Multi-layer safety policy system
+✅ **Control Tag Rendering** - XML-based LLM prompt control
+✅ **Safety Post-Processing** - 4-layer violation detection & removal
+✅ **Training Corpus Pipeline** - JSONL-based fine-tuning data generation
+✅ **Comprehensive Tests** - 31 tests, 100% pass rate
+✅ **Production Examples** - Full end-to-end workflow demonstrations
+##
 
 ## 📁 Implementation Structure
 
@@ -35,8 +34,7 @@ Phase 3.5 is a **complete, production-ready system** for glyph-controlled local 
 | `PHASE_3_5_DOCS.md` | Complete technical documentation |
 | `QUICK_START.md` | 5-minute setup guide |
 | `examples.py` | Runnable code examples |
-
----
+##
 
 ## 🧬 Core Components
 
@@ -63,6 +61,8 @@ Each glyph encodes:
 8. Recursive Recognition  (valence=+0.2, intensity=0.7, movement=RECURSIVE)
 ```
 
+
+
 ### 2. Gate Policies
 
 Safety constraints with 3 primary controls:
@@ -76,6 +76,8 @@ GatePolicy(
     metaphor_density_max=0.8                   # Metaphor usage cap
 )
 ```
+
+
 
 ### 3. Control Tag Rendering
 
@@ -97,6 +99,8 @@ User: I'm feeling overwhelmed
 Assistant:
 ```
 
+
+
 ### 4. Multi-Layer Safety Processing
 
 ```
@@ -113,6 +117,8 @@ RAW LLM OUTPUT
 SAFE RESPONSE
 ```
 
+
+
 #### Processing Example
 
 **Input:**
@@ -123,6 +129,8 @@ The boundaries of what you feel are dissolving into uncertainty.
 But I'm here, and that's something real we can hold onto.
 ```
 
+
+
 **Output (after safety processing):**
 
 ```
@@ -130,6 +138,8 @@ But I'm here, and that's something real we can hold onto.
 The boundaries of what you feel are [removed] into uncertainty.
 But I'm here, and that's something real we can hold onto.
 ```
+
+
 
 **Changes Made:**
 
@@ -170,7 +180,8 @@ Captures all interactions in JSONL format:
 }
 ```
 
----
+
+##
 
 ## 🧪 Testing
 
@@ -234,10 +245,12 @@ Captures all interactions in JSONL format:
 ```bash
 cd local_inference
 python -m pytest test_phase_3_5.py -v
+
 # Result: 31 passed in 0.06s
 ```
 
----
+
+##
 
 ## 🚀 Usage Examples
 
@@ -272,6 +285,8 @@ print(f"Safe: {safe_response}")
 print(f"Violations fixed: {result.safety_violations_fixed}")
 ```
 
+
+
 ### Example 2: Context-Based Glyph Selection
 
 ```python
@@ -295,6 +310,8 @@ glyphs = [
     (GLYPH_REGISTRY.get(config["secondary"]), 0.4),
 ]
 ```
+
+
 
 ### Example 3: Training Corpus Capture
 
@@ -323,7 +340,8 @@ print(f"Avg satisfaction: {stats['avg_user_satisfaction']:.2f}")
 builder.export_to_jsonl("training_data.jsonl")
 ```
 
----
+
+##
 
 ## 📊 Performance Characteristics
 
@@ -335,8 +353,7 @@ builder.export_to_jsonl("training_data.jsonl")
 | Training Example Size | ~10KB (JSONL) |
 | Glyph Registry Lookup | <1ms |
 | Control Tag Rendering | <5ms |
-
----
+##
 
 ## 🔒 Safety Guarantees
 
@@ -370,8 +387,7 @@ Boundary-dissolving phrases (removed when `uncanny_ok=False`):
 - "Merge into"
 - "Lose separation"
 - "Blur together"
-
----
+##
 
 ## 🎓 Curriculum Learning
 
@@ -401,14 +417,14 @@ Progressive training schedule:
 - Gates: Flexible (safety_bias=0.50)
 - Uncanny: Gradually allowed
 - Examples: 300+
-
----
+##
 
 ## 🔌 Integration Points
 
 ### Local LLM Integration (llama.cpp/Ollama)
 
 ```python
+
 # Future adapter for local LLM
 from local_inference.llm_adapter import LocalLLMAdapter
 
@@ -422,9 +438,12 @@ raw_response = adapter.generate(prompt, max_tokens=150)
 safe_response, result = create_safe_response(...)
 ```
 
+
+
 ### Streaming Inference
 
 ```python
+
 # Stream tokens with on-the-fly safety checks
 for chunk in adapter.generate_streaming(prompt):
     # Apply safety checks to each chunk
@@ -432,9 +451,12 @@ for chunk in adapter.generate_streaming(prompt):
     yield safe_chunk
 ```
 
+
+
 ### Fine-Tuning Integration
 
 ```python
+
 # Use captured training corpus for fine-tuning
 import json
 
@@ -447,7 +469,8 @@ with open("training_data.jsonl") as f:
 fine_tuner.train(epochs=3, batch_size=8)
 ```
 
----
+
+##
 
 ## 📋 Checklist: Production Readiness
 
@@ -464,8 +487,7 @@ fine_tuner.train(epochs=3, batch_size=8)
 - ⏳ Streaming inference support
 - ⏳ Fine-tuning pipeline integration
 - ⏳ Monitoring & auditing dashboard
-
----
+##
 
 ## 🚦 Next Steps
 
@@ -475,8 +497,7 @@ fine_tuner.train(epochs=3, batch_size=8)
 4. **Monitoring UI** - Dashboard for safety metrics
 5. **User Studies** - Validate satisfaction feedback
 6. **Domain Expansion** - Add specialized glyphs
-
----
+##
 
 ## 📚 Documentation Files
 
@@ -484,8 +505,7 @@ fine_tuner.train(epochs=3, batch_size=8)
 - **QUICK_START.md** - 5-minute setup guide
 - **examples.py** - Runnable integration examples
 - **test_phase_3_5.py** - Full test suite reference
-
----
+##
 
 ## 🎉 Summary
 
@@ -499,9 +519,8 @@ Phase 3.5 provides a **production-ready, safety-first glyph control system** for
 - ✅ **Well documented** with examples and guides
 
 Ready to deploy local inference with confidence! 🚀
+##
 
----
-
-*Created: January 2024*  
-*Status: Complete & Tested*  
+*Created: January 2024*
+*Status: Complete & Tested*
 *Test Results: 31/31 passing ✅*

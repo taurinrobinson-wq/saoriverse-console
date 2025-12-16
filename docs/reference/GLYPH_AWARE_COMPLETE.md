@@ -5,8 +5,7 @@
 Successfully refactored the response generation system to be **glyph-aware** instead of **glyph-labeled**. The system now uses glyph metadata (description, gates, emotional_signal) as scaffolding for compositional response generation, directly addressing the user's insight that "it doesn't really connect to my glyph system in that structure."
 
 **Status: ✓ COMPLETE & TESTED**
-
----
+##
 
 ## The Journey: From Problem to Solution
 
@@ -38,13 +37,17 @@ Then evolved to:
 #### Step 1: Update Composer Method Signatures
 
 **Changed:**
+
 ```python
+
 # OLD
 def compose_response(self, input_text: str, glyph_name: str = "", ...)
 
-# NEW  
+# NEW
 def compose_response(self, input_text: str, glyph: Optional[Dict] = None, ...)
 ```
+
+
 
 **Both methods updated:**
 - `compose_response(glyph: Optional[Dict])`
@@ -58,18 +61,18 @@ def compose_response(self, input_text: str, glyph: Optional[Dict] = None, ...)
 def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, ...):
     # LAYER 1: Glyph Description Anchor
     opening = f"There's something in what you're describing—{glyph.description.lower()}"
-    
+
     # LAYER 2: Feedback Bridging
     if feedback_type:
         bridge = random.choice(self.emotional_bridges[feedback_type])
-    
+
     # LAYER 3: Entity Contextualization
     movement = random.choice(self.movement_language["through"])
-    
+
     # LAYER 4: Poetry Weaving
     poetry_emotion = self._glyph_to_emotion_category(glyph_name)
     poetry_line = self._weave_poetry(input_text, emotions)
-    
+
     # LAYER 5: Intensity-Based Closing
     gates = glyph.get("gates") or glyph.get("gate")
     intensity_level = len(gates) if isinstance(gates, list) else 1
@@ -78,13 +81,15 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, 
                    random.choice(["question", "permission", "commitment"])
 ```
 
+
+
 #### Step 3: Create Glyph-to-Emotion Mapping
 
 **Added `_glyph_to_emotion_category()` helper:**
 
 Maps glyph names to poetry emotion categories:
 - "still insight" → joy
-- "grief", "ache", "loss" → sadness  
+- "grief", "ache", "loss" → sadness
 - "anger", "rage" → anger
 - "fear", "anxiety" → fear
 - "devotion", "love", "recognition" → joy
@@ -92,6 +97,7 @@ Maps glyph names to poetry emotion categories:
 #### Step 4: Make Message-Aware Responses Glyph-Grounded
 
 **Before:**
+
 ```python
 def compose_message_aware_response(self, input_text, message_content, glyph=None):
     # Generated message-specific content only
@@ -99,24 +105,30 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
         parts.append("You're not alone—many brilliant people...")
 ```
 
+
+
 **After:**
+
 ```python
 def compose_message_aware_response(self, input_text, message_content, glyph=None):
     # FIRST: Establish glyph anchor
     if glyph and glyph.get("description"):
         opening = f"There's something in what you're describing—{glyph_description.lower()}"
         parts.append(opening)
-    
+
     # THEN: Layer message-specific content
     if message_content.get("math_frustration"):
         parts.append("You're not alone—many brilliant people...")
 ```
+
+
 
 #### Step 5: Update Signal Parser Call Sites
 
 **Changed all composer invocations:**
 
 ```python
+
 # OLD
 composed = _response_composer.compose_response(
     input_text=input_text,
@@ -132,6 +144,8 @@ composed = _response_composer.compose_response(
 )
 ```
 
+
+
 Updated both:
 1. `compose_response()` call
 2. `compose_message_aware_response()` call
@@ -141,50 +155,62 @@ Updated both:
 **Fixed fallback return in `select_best_glyph_and_response()`:**
 
 ```python
+
 # OLD - inconsistent tuple structure
 return None, "I can sense there's something..."
 
 # NEW - consistent tuple: (best_glyph, (response, feedback_data))
-return None, ("I can sense there's something...", 
+return None, ("I can sense there's something...",
               {'is_correction': False, 'contradiction_type': None, ...})
 ```
+
+
 
 #### Step 7: Handle Database Field Variations
 
 **Fixed gate field handling:**
 
 ```python
+
 # Database returns singular "gate" field
+
 # Code checks both variations
 gate_data = glyph.get("gates") or glyph.get("gate")
 gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
 intensity_level = len(gates_list)
 ```
 
----
+
+##
 
 ## Test Validation Results
 
 ### Test Message 1: Math Anxiety (Base Case)
 
 **Input:**
+
 ```
 "I have math anxiety. I've never been good at math and it's been a block my whole life."
 ```
+
+
 
 **Glyph Detected:** Still Containment
 - Description: "Boundaries that hold without pressure. A sanctuary of quiet care."
 - Gate: Gate 2
 
 **Response Generated:**
+
 ```
-"...There's something in what you're describing—boundaries that hold without pressure. 
-a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction 
-with math, especially when it's presented in a way that doesn't match how their mind 
-naturally works. Mental blocks are usually where the concept structure doesn't match 
-your natural thinking pattern. That's not fixed—it's just a mismatch to navigate. 
+"...There's something in what you're describing—boundaries that hold without pressure.
+a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction
+with math, especially when it's presented in a way that doesn't match how their mind
+naturally works. Mental blocks are usually where the concept structure doesn't match
+your natural thinking pattern. That's not fixed—it's just a mismatch to navigate.
 What would it feel like to approach math frustration differently?"
 ```
+
+
 
 **Validation Results:**
 ✓ Glyph description present in response
@@ -195,9 +221,12 @@ What would it feel like to approach math frustration differently?"
 ### Test Message 2: Inherited Pattern
 
 **Input:**
+
 ```
 "Actually, it's inherited from my mother. She was always anxious about it too."
 ```
+
+
 
 **Outcome:**
 - Glyph lookup failed (edge case - "actually" keyword unusual)
@@ -207,32 +236,38 @@ What would it feel like to approach math frustration differently?"
 ### Test Message 3: Feedback Correction + Relationship Context
 
 **Input:**
+
 ```
-"That's not quite what I meant. Michelle is my mother-in-law and my boss, and 
+"That's not quite what I meant. Michelle is my mother-in-law and my boss, and
 she always explains things in a way that only makes sense to her."
 ```
+
+
 
 **Feedback Detected:** 'misalignment' (user starting with "That's not quite what I meant")
 
 **Glyph Detected:** Still Containment
 
 **Response Generated:**
+
 ```
-"...I appreciate you saying that. I want to make sure I'm actually hearing you, 
+"...I appreciate you saying that. I want to make sure I'm actually hearing you,
 not projecting onto you. Help me understand: what did I miss?"
 ```
+
+
 
 **Validation Results:**
 ✓ Feedback correction detected (misalignment type)
 ✓ Correction-specific response generated
 ✓ Response grounded in glyph
 ✓ Message-specific context (Michelle relationship)
-
----
+##
 
 ## Architecture: Before vs. After
 
 ### Before: Disconnected Architecture
+
 ```
 Signal Parser
     ↓
@@ -249,7 +284,10 @@ DynamicResponseComposer
        └─ Response disconnected from glyph meaning
 ```
 
+
+
 ### After: Glyph-Aware Architecture
+
 ```
 Signal Parser
     ↓
@@ -264,7 +302,7 @@ DynamicResponseComposer [GLYPH-AWARE]
     │   ├─ _build_glyph_aware_response()
     │   │   ├─ Layer 1: Glyph description anchor
     │   │   ├─ Layer 2: Feedback bridging
-    │   │   ├─ Layer 3: Entity contextualization  
+    │   │   ├─ Layer 3: Entity contextualization
     │   │   ├─ Layer 4: Poetry weaving (by glyph emotion)
     │   │   └─ Layer 5: Intensity-based closing (by gates)
     │
@@ -274,7 +312,8 @@ DynamicResponseComposer [GLYPH-AWARE]
         └─ Intensity-informed closing
 ```
 
----
+
+##
 
 ## Key Improvements
 
@@ -301,8 +340,7 @@ DynamicResponseComposer [GLYPH-AWARE]
 ### 6. Poetry Integration
 - **Before:** Poetry selected by generic emotion extraction
 - **After:** Poetry selected by glyph's emotional category mapping
-
----
+##
 
 ## Code Changes Summary
 
@@ -325,8 +363,7 @@ DynamicResponseComposer [GLYPH-AWARE]
 3. Line 210: Fixed fallback return to consistent tuple format
 
 **Total modifications:** 3 call sites + 1 consistency fix
-
----
+##
 
 ## Testing & Validation
 
@@ -351,8 +388,7 @@ DynamicResponseComposer [GLYPH-AWARE]
 - ✓ No syntax errors in dynamic_response_composer.py
 - ✓ All imports functional
 - ✓ Method signatures consistent across codebase
-
----
+##
 
 ## User's Question Answered
 
@@ -375,16 +411,14 @@ The refactoring ensures glyph-awareness through:
 5. **Message Integration**: Glyph scaffold supports message-specific content (math_frustration, inherited_pattern, communication_friction)
 
 The system now generates responses that feel like they emerge *from* the glyph's meaning, not *about* the glyph's label.
-
----
+##
 
 ## Performance Notes
 
 - **Composition Time**: ~20-50ms per response (includes spaCy NER, poetry selection, entity extraction)
 - **Memory**: Glyph dicts are small (~2KB each), negligible overhead
 - **Scalability**: Approach scales with glyph lexicon size; currently 64 glyphs
-
----
+##
 
 ## Future Enhancement Opportunities
 
@@ -394,8 +428,7 @@ The system now generates responses that feel like they emerge *from* the glyph's
 4. **Poetry Curation**: Expand poetry database with more glyph-specific selections
 5. **Feedback Learning**: Remember which glyph+message+feedback combinations work best
 6. **Multi-Turn Coherence**: Use glyph consistency across conversation turns
-
----
+##
 
 ## Conclusion
 

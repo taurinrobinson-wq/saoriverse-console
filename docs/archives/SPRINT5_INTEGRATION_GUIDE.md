@@ -27,6 +27,8 @@ if summary["avg_latency_ms"] > 300:
     faster_model = ModelPerformanceBenchmark.get_whisper_recommendation(150)
 ```
 
+
+
 ### 2. Advanced Prosody
 
 ```python
@@ -49,6 +51,8 @@ print(f"Emphasis points: {plan.emphasis_points}")
 print(f"Breath style: {plan.breath_style}")
 print(f"Breathiness: {plan.breathiness}")
 ```
+
+
 
 ### 3. Session Logging
 
@@ -74,6 +78,8 @@ print(f"Consistency: {metrics['consistency_score']}")
 # Save session
 logger.save_session()
 ```
+
+
 
 ### 4. Edge Case Handling & UI
 
@@ -101,11 +107,14 @@ if not is_valid:
 enhancements.render_performance_metrics(latency_ms=250, confidence=0.95)
 ```
 
+
+
 ## Integration Points
 
 ### In `voice_interface.py` or main chat loop
 
 ```python
+
 # At top of file
 from spoken_interface.performance_profiler import PerformanceProfiler
 from spoken_interface.session_logger import SessionLogger
@@ -123,12 +132,12 @@ def process_voice_input(audio_bytes):
     if not is_valid:
         show_error(error)
         return
-    
+
     # STT with profiling
     start_time = time.time()
     transcript = profiler.measure("stt", transcribe_audio, audio_bytes)
     latency = (time.time() - start_time) * 1000
-    
+
     # Validate transcription
     is_valid, error = enhancements.handle_transcription_edge_cases(
         transcript, confidence=conf_score
@@ -136,21 +145,21 @@ def process_voice_input(audio_bytes):
     if not is_valid:
         show_error(error)
         return
-    
+
     # Log user message
     logger.log_user_message(
         transcript,
         confidence=conf_score,
         latency_ms=int(latency)
     )
-    
+
     return transcript
 
 def generate_voice_response(response_text, emotional_state):
     # Use advanced prosody for emotional responses
     if emotional_state.get("tone") in ["excited", "sad", "empathetic"]:
         from spoken_interface.advanced_prosody import AdvancedProsodyPlanner
-        
+
         planner = AdvancedProsodyPlanner()
         prosody = planner.plan_advanced_prosody(
             text=response_text,
@@ -162,7 +171,7 @@ def generate_voice_response(response_text, emotional_state):
         # Pass prosody to TTS
     else:
         prosody = None
-    
+
     # TTS with profiling
     start_time = time.time()
     audio = profiler.measure(
@@ -172,30 +181,33 @@ def generate_voice_response(response_text, emotional_state):
         prosody
     )
     latency = (time.time() - start_time) * 1000
-    
+
     # Log assistant message
     logger.log_assistant_message(
         response_text,
         emotional_state=emotional_state,
         latency_ms=int(latency)
     )
-    
+
     # Display metrics
     enhancements.render_performance_metrics(
         latency_ms=int(latency),
         confidence=0.95
     )
-    
+
     return audio
 ```
+
+
 
 ### In Streamlit UI (`voice_ui.py`)
 
 ```python
+
 # Add to sidebar
 with st.sidebar:
     st.title("Performance & Metrics")
-    
+
     # Show glyph visualization
     if st.session_state.get("emotional_history"):
         ui_enhancements.render_glyph_visualization(
@@ -206,12 +218,14 @@ with st.sidebar:
             },
             emotional_history=st.session_state.get("emotional_history", [])
         )
-    
+
     # Show session summary
     if st.button("Export Session"):
         session_path = logger.save_session()
         st.success(f"Session saved: {session_path}")
 ```
+
+
 
 ## Troubleshooting
 
@@ -266,6 +280,8 @@ edge_case_handling:
   max_silence_ratio: 0.7
 ```
 
+
+
 Then load in Python:
 
 ```python
@@ -277,6 +293,8 @@ with open("config/sprint5.yaml") as f:
 if config["performance_profiling"]["enabled"]:
     profiler = PerformanceProfiler()
 ```
+
+
 
 ## Performance Overhead
 
@@ -298,8 +316,7 @@ if config["performance_profiling"]["enabled"]:
 6. [ ] Collect metrics and analyze patterns
 7. [ ] Conduct listening tests with advanced prosody
 8. [ ] Iterate based on user feedback
-
----
+##
 
 For detailed module documentation, see:
 

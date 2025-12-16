@@ -15,8 +15,7 @@
 3. **Ready to Build (1 hour)**
    → Read: `PRIVACY_LAYER_QUICK_START.md`
    → Follow Phase 2 checklist
-
----
+##
 
 ## 📖 Documentation Map
 
@@ -91,8 +90,7 @@
   - GDPR compliance tests
   - Security property tests
   - Integration tests
-
----
+##
 
 ## 🗺️ Which Document Do I Need?
 
@@ -125,8 +123,7 @@
 
 ### "I need code examples"
 → `PRIVACY_LAYER_INTEGRATION_GUIDE.md` (full code examples)
-
----
+##
 
 ## 📊 Document Sizes & Read Times
 
@@ -140,8 +137,7 @@
 | PRIVACY_LAYER_INTEGRATION_GUIDE.md | 400 lines | 25 min | How to build it |
 | PRIVACY_LAYER_QUICK_START.md | 400 lines | 30 min | Checklist & commands |
 | **Total** | **~3,100 lines** | **~2 hours** | **Full understanding** |
-
----
+##
 
 ## 🚀 Recommended Reading Order
 
@@ -163,8 +159,7 @@
 2. Review `encryption_manager.py` (10 min)
 3. Review `dream_engine.py` (10 min)
 4. Review `test_privacy_layer.py` (10 min)
-
----
+##
 
 ## ✅ Before You Start Implementation
 
@@ -176,8 +171,7 @@ Verify:
 - [ ] You have 1-2 hours to start Phase 2
 
 If you don't have these, start with reading the documentation!
-
----
+##
 
 ## 🔍 Find Specific Information
 
@@ -220,8 +214,7 @@ If you don't have these, start with reading the documentation!
 
 ### "What's the next phase?"
 → `PRIVACY_LAYER_READY_VS_NEXT.md` → "What Needs to Be Done NEXT"
-
----
+##
 
 ## 📋 Implementation Checklist (Quick Reference)
 
@@ -260,8 +253,7 @@ If you don't have these, start with reading the documentation!
 - [ ] Security review
 - [ ] Deploy to staging
 - [ ] Deploy to production
-
----
+##
 
 ## 🎓 Learning Resources
 
@@ -282,8 +274,7 @@ If you don't have these, start with reading the documentation!
 → `PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md` → "Compliance Mapping"
 → `PRIVACY_LAYER_DATABASE_SCHEMA.md` → "Privacy & Compliance Notes"
 → `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → GDPR/CCPA/HIPAA sections
-
----
+##
 
 ## 💡 Tips
 
@@ -296,12 +287,12 @@ If you don't have these, start with reading the documentation!
 4. **Questions?** Search this index, or look in `PRIVACY_LAYER_IMPLEMENTATION_SUMMARY.md` → "Questions & Clarifications"
 
 5. **Stuck?** Check `PRIVACY_LAYER_QUICK_START.md` → "Tips & Troubleshooting"
-
----
+##
 
 ## 📞 Quick Reference
 
 ### File Paths
+
 ```
 Code:
 - emotional_os/privacy/encryption_manager.py
@@ -318,8 +309,12 @@ Documentation:
 - PRIVACY_LAYER_QUICK_START.md
 ```
 
+
+
 ### Command Reference
+
 ```bash
+
 # Install dependencies
 pip install cryptography pytest
 
@@ -330,20 +325,22 @@ pytest test_privacy_layer.py -v
 pytest test_privacy_layer.py::TestEncryptionManager -v
 ```
 
+
+
 ### Key Concepts
 - **Encryption:** AES-256 with Fernet
 - **Key Derivation:** PBKDF2 from password
 - **Retention:** User-configurable (7/30/90/365 days)
 - **Dream Summaries:** Daily pattern extraction
 - **Compliance:** GDPR, CCPA, HIPAA support
-
----
+##
 
 ## 🎯 Your Next Step
 
 Choose one:
 
 **A) Quick Start (Experienced):**
+
 ```
 1. Read PRIVACY_LAYER_QUICK_START.md
 2. pip install cryptography
@@ -352,7 +349,10 @@ Choose one:
 5. Follow Phase 3
 ```
 
+
+
 **B) Learn First (Recommended):**
+
 ```
 1. Read SESSION_COMPLETION_SUMMARY.md (10 min)
 2. Read PRIVACY_LAYER_ARCHITECTURE_REFERENCE.md (20 min)
@@ -360,7 +360,10 @@ Choose one:
 4. Then follow approach A
 ```
 
+
+
 **C) Code Review Only:**
+
 ```
 1. Review encryption_manager.py
 2. Review dream_engine.py
@@ -368,7 +371,8 @@ Choose one:
 4. Read comments in code
 ```
 
----
+
+##
 
 **Everything is ready. Your next move is Phase 2: Install dependencies and create database tables.**
 

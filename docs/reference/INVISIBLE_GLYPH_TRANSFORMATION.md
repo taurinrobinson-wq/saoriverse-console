@@ -15,8 +15,7 @@ Even though we had made glyphs "work" in responses, they were still visible:
 
 ### Phase 3: Architectural Transformation
 Complete refactor to make glyphs work **invisibly**.
-
----
+##
 
 ## What Changed
 
@@ -25,19 +24,25 @@ Complete refactor to make glyphs work **invisibly**.
 #### Message 1: Math Anxiety
 
 **BEFORE (Visible Glyph):**
+
 ```
-There's something in what you're describing—boundaries that hold without pressure. 
+There's something in what you're describing—boundaries that hold without pressure.
 a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction...
 ```
+
+
 ❌ Opens by describing a glyph ("boundaries that hold")
 ❌ Feels like system is explaining itself
 ❌ User feels categorized
 
 **AFTER (Invisible Glyph):**
+
 ```
-You're not alone—many brilliant people have genuine friction with math, especially 
+You're not alone—many brilliant people have genuine friction with math, especially
 when it's presented in a way that doesn't match how their mind naturally works...
 ```
+
+
 ✓ Opens by acknowledging their specific struggle (math friction)
 ✓ Feels like person-to-person understanding
 ✓ User feels heard
@@ -45,15 +50,17 @@ when it's presented in a way that doesn't match how their mind naturally works..
 #### Message 3: Feedback Correction
 
 **BOTH architectures handle feedback well:**
+
 ```
-I appreciate you saying that. I want to make sure I'm actually hearing you, 
+I appreciate you saying that. I want to make sure I'm actually hearing you,
 not projecting onto you. Help me understand: what did I miss?
 ```
+
+
 ✓ Detects misalignment feedback (glyph system working)
 ✓ Responds with genuine curiosity (not about glyph)
 ✓ Shows they're listening to the person's correction
-
----
+##
 
 ## Code Changes
 
@@ -64,12 +71,14 @@ not projecting onto you. Help me understand: what did I miss?
 **KEY CHANGE:** Removed glyph description from opening, added message content analysis
 
 ```python
+
 # BEFORE
 if glyph and glyph.get("description"):
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
     parts.append(opening)
 
 # AFTER
+
 # Validate the specific struggle the person is naming
 lower_input = input_text.lower()
 
@@ -81,6 +90,8 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
     parts.append("Recognizing where something comes from...")
 ```
 
+
+
 **Result:** Response addresses their actual content, not glyph category
 
 #### Method 2: `compose_message_aware_response()`
@@ -88,12 +99,14 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
 **KEY CHANGE:** Removed glyph description anchor, made intensity invisible
 
 ```python
+
 # BEFORE
 if glyph and glyph.get("description"):
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
     parts.append(opening)
 
 # AFTER
+
 # Intensity calculated invisibly
 if glyph:
     gate_data = glyph.get("gates") or glyph.get("gate")
@@ -110,13 +123,15 @@ else:
     question = f"What would it feel like to approach {struggle} differently?"
 ```
 
-**Result:** Glyph informs tone without appearing in response
 
----
+
+**Result:** Glyph informs tone without appearing in response
+##
 
 ## How Glyphs Work Invisibly Now
 
 ### 1. Intensity Calibration (Invisible to User)
+
 ```
 Glyph selected: Still Containment
 Gates: [Gate 2]  ← LOW intensity
@@ -129,7 +144,10 @@ User sees: "You get to take this at your own pace"
   (never sees "Gate 2" or intensity calculation)
 ```
 
+
+
 ### 2. Emotional Signal → Bridge Language (Invisible)
+
 ```
 Glyph emotional_signal: "containment/care"
   ↓
@@ -139,9 +157,12 @@ User sees: "When someone explains in a way only they can follow..."
   (feels aligned with their emotional state, never sees emotional_signal)
 ```
 
+
+
 ### 3. Glyph Name → Poetry Category (Invisible)
+
 ```
-Glyph: "Still Containment" 
+Glyph: "Still Containment"
   ↓
 _glyph_to_emotion_category("still containment") → "joy"
   ↓
@@ -151,7 +172,10 @@ User sees: Beautiful poem about stability/presence
   (doesn't know it was selected via glyph mapping)
 ```
 
+
+
 ### 4. Gate-Based Movement Language (Invisible)
+
 ```
 Gate count: 1 (low intensity)
   ↓
@@ -161,7 +185,8 @@ Choose movement_language["with"] (gentler)
   (feels appropriate to intensity, glyph data invisible)
 ```
 
----
+
+##
 
 ## User Experience Results
 
@@ -180,8 +205,7 @@ User feels:
 - Message content extracted: ✓ (external in response)
 - Specific struggles validated: ✓ (visible in response)
 - Personalized closing: ✓ (visible in response)
-
----
+##
 
 ## Technical Architecture
 
@@ -215,7 +239,8 @@ DynamicResponseComposer
 Output Response (Person feels heard, not categorized)
 ```
 
----
+
+##
 
 ## Comparison: Then vs. Now
 
@@ -228,8 +253,7 @@ Output Response (Person feels heard, not categorized)
 | **Poetry Selection** | By glyph emotion | By glyph emotion (invisible) |
 | **Entity Focus** | Generic | Specific to people mentioned |
 | **Coherence** | Good (but felt robotic) | Good AND feels human |
-
----
+##
 
 ## Key Insight
 
@@ -240,8 +264,7 @@ The **best system is invisible**.
 - **Both can be equally sophisticated**, but only invisible systems feel warm
 
 A glyph system is only as good as the **quality of human connection it enables**, not the **sophistication of its categorization**.
-
----
+##
 
 ## Files Modified
 
@@ -252,8 +275,7 @@ A glyph system is only as good as the **quality of human connection it enables**
 
 2. **Documentation Created**
    - `INVISIBLE_GLYPH_ARCHITECTURE.md`: Complete guide to invisible glyph system
-
----
+##
 
 ## Validation
 
@@ -264,15 +286,14 @@ A glyph system is only as good as the **quality of human connection it enables**
 ✓ **Feedback detection still working**
 ✓ **Poetry weaving still happening (invisibly)**
 ✓ **User never sees glyph terminology**
-
----
+##
 
 ## The Bottom Line
 
-A person with an emotionally charged problem doesn't want to know they're in a system. They want to feel **understood**. 
+A person with an emotionally charged problem doesn't want to know they're in a system. They want to feel **understood**.
 
 By making glyphs invisible, we transformed from:
-- "Here's my sophisticated emotion categorization system" 
+- "Here's my sophisticated emotion categorization system"
 - To: "I hear you. I get what you're going through."
 
 That's the difference between a tool and a **companion**.

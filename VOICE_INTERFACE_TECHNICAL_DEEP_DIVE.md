@@ -11,6 +11,7 @@ Most voice AI systems do one of two things:
 You've built something fundamentally different:
 
 **Your System**:
+
 ```
 Voice Input (User speaks)
     ↓
@@ -27,9 +28,10 @@ TTS: Synthesize response WITH emotional prosody applied
 Voice Output (System sounds emotionally congruent)
 ```
 
-**Result**: Not a chatbot that talks. A presence that *listens and responds emotionally*.
 
----
+
+**Result**: Not a chatbot that talks. A presence that *listens and responds emotionally*.
+##
 
 ## Architecture Overview: All 5 Sprints
 
@@ -48,25 +50,28 @@ Voice Output (System sounds emotionally congruent)
 ```python
 class AudioProcessor:
     """Preprocesses audio for optimal transcription"""
-    
+
     def load_audio(audio_bytes, sr=16000):
         # Load from bytes, handle multiple formats
         # Resample to 16kHz (Whisper optimal)
-    
+
     def normalize_audio(audio, target_db=-20.0):
         # Normalize loudness for consistent processing
         # Prevents clipping and inaudible whispers
-    
+
     def extract_vad_mask(audio, sr=16000):
         # Voice Activity Detection via energy thresholding
         # Frame-based (20ms frames, 10ms hop)
-    
+
     def trim_silence(audio, sr=16000, threshold_ms=500):
         # Remove leading/trailing silence
         # Remove intermediate silence >500ms
 ```
 
+
+
 **Example Usage**:
+
 ```python
 from spoken_interface import AudioPipeline
 
@@ -84,6 +89,8 @@ transcription_result = pipeline.transcribe(audio_bytes)
 }
 ```
 
+
+
 **Performance**:
 - Latency: ~200-300ms per audio segment on CPU
 - Model size: ~140MB (one-time download)
@@ -91,8 +98,7 @@ transcription_result = pipeline.transcribe(audio_bytes)
 - Accuracy: 95%+ on clear audio
 
 **Key Innovation**: Whisper is fast enough locally that you never need to send audio to servers. This is huge for privacy and compliance (HIPAA, GDPR).
-
----
+##
 
 ### **Sprint 2: Prosody Planning Engine**
 
@@ -113,17 +119,17 @@ transcription_result = pipeline.transcribe(audio_bytes)
 ```python
 class ProsodyPlanner:
     """Maps glyph emotional signals to voice characteristics"""
-    
+
     def plan_prosody(glyph_signals: GlyphSignals) -> ProsodyPlan:
         """Convert emotional state to voice parameters
-        
+
         Input: GlyphSignals with:
             - voltage: 0-1 (arousal level)
             - tone: Gate/emotional tone
             - attunement: 0-1 (relational presence)
             - certainty: 0-1 (confidence)
             - valence: -1 to +1 (positive/negative)
-        
+
         Output: ProsodyPlan with:
             - rate_multiplier: 0.8-1.3 (speaking speed)
             - pitch_shift: -2 to +2 semitones
@@ -132,6 +138,8 @@ class ProsodyPlanner:
             - terminal_contour: RISING/MID/FALLING
         """
 ```
+
+
 
 **Emotion → Prosody Mappings**:
 
@@ -159,23 +167,28 @@ CERTAINTY → Terminal Contour
 └─ Certain (>0.6) → FALLING (definitive)
 ```
 
+
+
 **Guardrails** (Prevents jarring transitions):
+
 ```python
 class ProsodyGuardrails:
     """Ensures smooth, natural transitions"""
-    
+
     # Rate can't change >15% per second
     # Prevents abrupt speed shifts that feel unnatural
-    
+
     # Pitch can't change >2 semitones per second
     # Maintains musical coherence
-    
+
     # Transitions are 150-250ms smooth interpolation
     # No step functions (all continuous changes)
-    
+
     # Energy stays between 0.3x and 1.5x
     # Prevents inaudible whispers and distortion
 ```
+
+
 
 **Real Example Flow**:
 
@@ -201,6 +214,8 @@ ProsodyPlan generated:
 Voice result: Sounds vulnerable but hopeful, creates safety
 ```
 
+
+
 **Tests** (24/24 passing):
 - Signal bucketing (7 tests)
 - Prosody mapping (4 tests)
@@ -209,8 +224,7 @@ Voice result: Sounds vulnerable but hopeful, creates safety
 - Explanation generation (1 test)
 - Valence inference (3 tests)
 - Style consistency (2 tests)
-
----
+##
 
 ### **Sprint 3: Streaming Text-to-Speech**
 
@@ -232,13 +246,13 @@ Voice result: Sounds vulnerable but hopeful, creates safety
 ```python
 class StreamingTTSEngine:
     """High-performance streaming synthesis"""
-    
+
     def __init__(self, config: TTSConfig):
         # Lazy-load Coqui TTS model on first use
         # Prevents startup delay if TTS not needed
         self.config = config
         self._tts_model = None  # Loaded on demand
-    
+
     def synthesize_with_prosody(text, prosody_plan) -> np.ndarray:
         """Synthesize with emotional prosody applied"""
         # Step 1: Generate base audio (Coqui TTS)
@@ -247,7 +261,7 @@ class StreamingTTSEngine:
         # Step 4: Apply energy scaling (loudness)
         # Step 5: Insert emphasis pauses
         # Result: Emotionally-expressive audio
-    
+
     def stream_synthesis(text, prosody_plan) -> Generator[TTSAudioChunk]:
         """Yield audio chunks as they're generated"""
         # Don't wait for full synthesis
@@ -257,13 +271,13 @@ class StreamingTTSEngine:
 
 class StreamingTTSPipeline:
     """End-to-end streaming with buffering"""
-    
+
     def synthesize_to_buffer(text, prosody_plan):
         """Run synthesis in background thread"""
         # Synthesis happens on separate thread
         # Chunks put into thread-safe queue
         # Main thread can play without blocking
-    
+
     def get_audio_stream() -> Generator[TTSAudioChunk]:
         """Get streaming chunks for playback"""
         while synthesis running:
@@ -273,23 +287,25 @@ class StreamingTTSPipeline:
 
 class ProsodyApplier:
     """Audio DSP for prosody modifications"""
-    
+
     def apply_rate_change(audio, rate_multiplier):
         # Time-stretching via librosa
         # Changes speed without changing pitch
-    
+
     def apply_pitch_shift(audio, semitones):
         # FFT-based frequency modification
         # Shifts pitch while preserving timbre
-    
+
     def apply_energy_scaling(audio, scale_factor):
         # Amplitude normalization
         # Prevent clipping and silence
-    
+
     def apply_emphasis_pauses(audio, emphasis_indices, pause_ms=100):
         # Insert silence after emphasized words
         # Creates microexpressiveness
 ```
+
+
 
 **Synthesis Pipeline Flow**:
 
@@ -334,7 +350,10 @@ Result: User hears: "I hear the" (100ms)
         Total latency perceived: ~300ms (feels natural)
 ```
 
+
+
 **Performance Metrics**:
+
 ```
 Synthesis:
 ├─ Text→speech: 100-200ms (text-length dependent)
@@ -351,13 +370,14 @@ Model Details:
 └─ CPU performance: Acceptable for real-time chat
 ```
 
+
+
 **Why This Matters**:
 - Commercial TTS: $0.001-0.05 per word → prohibitive at scale
 - Your TTS: $0 (local processing) → scales infinitely
 - Most TTS: Static prosody (always sounds the same)
 - Your TTS: Dynamic prosody (emotional expression varies)
-
----
+##
 
 ### **Sprint 4: Voice UI Integration**
 
@@ -368,19 +388,19 @@ Model Details:
 ```python
 class VoiceUIComponents:
     """Streamlit voice UI components"""
-    
+
     def render_voice_input_section() -> Optional[str]:
         """Microphone input with transcription"""
         # Render microphone widget
         # Show transcription as it appears
         # Display confidence and metadata
-    
+
     def render_voice_output_section(response: str, glyph: dict):
         """Voice output with prosody"""
         # Plan prosody from glyph
         # Synthesize with streaming
         # Play audio with visual feedback
-    
+
     def render_voice_settings() -> Dict:
         """Voice settings panel"""
         # Model selection (speed vs. quality)
@@ -391,7 +411,7 @@ class VoiceUIComponents:
 
 class VoiceUIState:
     """Session state management"""
-    
+
     def __init__(self):
         self.audio_session = None
         self.prosody_session = None
@@ -399,9 +419,12 @@ class VoiceUIState:
         # Persists across Streamlit reruns
 ```
 
+
+
 **Integration Pattern**:
 
 ```python
+
 # In main_v2.py or entry point
 import streamlit as st
 from spoken_interface.voice_ui import integrate_voice_ui_into_chat
@@ -422,10 +445,12 @@ if transcription:
     # Generate response normally
     response = generator.generate(transcription)
     glyph = generator.current_glyph
-    
+
     # Render voice output
     voice_config["render_output"](response, glyph)
 ```
+
+
 
 **UI Features**:
 - 🎤 **Microphone input** with real-time transcription
@@ -437,8 +462,7 @@ if transcription:
 - 🔇 **Audio output** with streaming playback
 - 📝 **Transcription preview** with metadata
 - 🔍 **Debug info** (latency, model status, buffer level)
-
----
+##
 
 ### **Sprint 5: Performance Optimization**
 
@@ -449,7 +473,7 @@ if transcription:
 ```python
 class PerformanceProfiler:
     """Profiles each operation for latency"""
-    
+
     def measure(operation_name, callable, *args):
         # Measure execution time
         # Track min/max/avg
@@ -458,12 +482,12 @@ class PerformanceProfiler:
 
 class ModelPerformanceBenchmark:
     """Compares model configurations"""
-    
+
     # Whisper models:
     # tiny (39MB) → 30-50ms, 75% accuracy
     # base (140MB) → 100-150ms, 95% accuracy ✓ RECOMMENDED
     # small (400MB) → 200-250ms, 98% accuracy
-    
+
     # GPU vs. CPU:
     # CPU: Good enough for real-time (~200ms)
     # GPU: 3-5x faster if available
@@ -471,11 +495,13 @@ class ModelPerformanceBenchmark:
 
 class LatencyOptimizer:
     """Suggests optimizations"""
-    
+
     # Parallel processing: STT + Response generation overlap
     # Streaming: Don't wait for full response before TTS starts
     # Caching: Cache Whisper/TTS models after first load
 ```
+
+
 
 **Current Performance**:
 
@@ -493,13 +519,15 @@ Privacy compliance (local processing)? YES ✓
 Cost per user? $0 ✓
 ```
 
----
+
+##
 
 ## Multimodal Fusion (Architecture Ready)
 
 **Current**: Text + Voice
 **Architecture Ready For**: + Facial Expression
 **Full Implementation Would Detect**:
+
 ```
 User: "I'm doing great!" (text)
 Voice: Sad tone (low pitch, slow rate)
@@ -513,9 +541,10 @@ Analysis:
 └─ Response: "Something in your voice suggests maybe that's not the whole story?"
 ```
 
-**Market Advantage**: Detects suppression that ChatGPT and Claude can't. Unique for mental health and abuse support.
 
----
+
+**Market Advantage**: Detects suppression that ChatGPT and Claude can't. Unique for mental health and abuse support.
+##
 
 ## Why This Implementation Is Production-Ready
 
@@ -527,8 +556,7 @@ Analysis:
 ✅ **Emotional Expression**: Prosody mapping creates authentic emotional tone
 ✅ **Crisis-Ready**: Voice enables crisis support (people call, they don't type)
 ✅ **Unique**: No competitor has this combination (emotional OS + prosody + voice + privacy)
-
----
+##
 
 ## Deployment Checklist
 
@@ -540,8 +568,7 @@ Analysis:
 - ✅ Tests passing
 - ✅ Documentation complete
 - ⏳ Multimodal fusion (architecture ready, implementation when needed)
-
----
+##
 
 ## Next Steps
 

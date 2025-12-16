@@ -2,12 +2,12 @@
 
 ## Overview
 This document contains all test messages used to verify the anti-dash system, along with actual responses generated and analysis.
-
----
+##
 
 ## Test Message Set 1: Core Emotional States
 
 ### Message 1.1: Overwhelm & Anxiety
+
 ```
 Input: "I'm feeling overwhelmed and anxious"
 Time: 0.043s
@@ -16,7 +16,7 @@ Glyph: Spiral Containment
 Tone Pool: Grounded
 
 Response:
-"What does that feel like for you? The only way forward is the way through. 
+"What does that feel like for you? The only way forward is the way through.
 You get to take this at your own pace with this."
 
 Analysis:
@@ -26,7 +26,10 @@ Analysis:
 ✅ Under 100 characters (concise)
 ```
 
+
+
 ### Message 1.2: Grief
+
 ```
 Input: "I'm grieving the loss of my job"
 Time: 0.010s
@@ -35,7 +38,7 @@ Glyph: Recursive Ache
 Tone Pool: Reflective
 
 Response:
-"I'm here with you on what you're experiencing. You're traversing something 
+"I'm here with you on what you're experiencing. You're traversing something
 real. There's no rush with this."
 
 Analysis:
@@ -45,7 +48,10 @@ Analysis:
 ✅ Acknowledges depth ("traversing something real")
 ```
 
+
+
 ### Message 1.3: Cognitive Block
+
 ```
 Input: "I'm blocked on this math problem"
 Time: 0.009s
@@ -54,10 +60,10 @@ Glyph: Recursive Ache
 Tone Pool: Reflective (secondary: Encouraging)
 
 Response:
-"You're not alone: many brilliant people have genuine friction with math, 
-especially when it's presented in a way that doesn't match how their mind 
-naturally works. Mental blocks are usually where the concept structure doesn't 
-match your natural thinking pattern. That's not fixed: it's just a mismatch to 
+"You're not alone: many brilliant people have genuine friction with math,
+especially when it's presented in a way that doesn't match how their mind
+naturally works. Mental blocks are usually where the concept structure doesn't
+match your natural thinking pattern. That's not fixed: it's just a mismatch to
 navigate. What would it feel like to approach math frustration differently?"
 
 Analysis:
@@ -69,29 +75,31 @@ Analysis:
 ✅ Longer, more substantive response (appropriate for complex issue)
 ```
 
----
+
+##
 
 ## Test Message Set 2: Diversity Testing (Same Input, Multiple Runs)
 
 ### Message 2.1: Repeated Input Test
+
 ```
 Input (repeated 4 times): "I'm feeling anxious and overwhelmed"
 
 Run 1:
-Response: "I hear you about what you're experiencing. You're traversing 
+Response: "I hear you about what you're experiencing. You're traversing
 something real. You get to take this at your own pace with this."
 
 Run 2:
-Response: "What does that feel like for you? That kind of understanding 
+Response: "What does that feel like for you? That kind of understanding
 requires passage. There's no rush with this."
 
 Run 3:
-Response: "Many people navigate things like this. That kind of understanding 
+Response: "Many people navigate things like this. That kind of understanding
 requires passage. You get to name what this means to you."
 
 Run 4:
-Response: "what you're experiencing connects to something important in your life. 
-That kind of understanding requires passage. You're moving through this. 
+Response: "what you're experiencing connects to something important in your life.
+That kind of understanding requires passage. You're moving through this.
 That movement itself is valid."
 
 Uniqueness Analysis:
@@ -103,11 +111,13 @@ Uniqueness Analysis:
 ✅ Rotation bank actively providing variety
 ```
 
----
+
+##
 
 ## Test Message Set 3: Edge Cases
 
 ### Message 3.1: Very Short Input
+
 ```
 Input: "sad"
 Time: 0.002s
@@ -123,10 +133,13 @@ Analysis:
 ✅ Validating tone
 ```
 
+
+
 ### Message 3.2: Complex Multi-Issue Input
+
 ```
-Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining 
-things in a way I don't understand and it's creating real isolation in my 
+Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining
+things in a way I don't understand and it's creating real isolation in my
 family and I'm starting to doubt myself"
 
 Time: 0.025s
@@ -134,10 +147,10 @@ Source: dynamic_composer
 Glyph: Recursive Ache
 
 Response:
-"You're not alone: many brilliant people have genuine friction with math, 
-especially when it's presented in a way that doesn't match how their mind 
-naturally works. Mental blocks are usually where the concept structure doesn't 
-match your natural thinking pattern. That's not fixed: it's just a mismatch to 
+"You're not alone: many brilliant people have genuine friction with math,
+especially when it's presented in a way that doesn't match how their mind
+naturally works. Mental blocks are usually where the concept structure doesn't
+match your natural thinking pattern. That's not fixed: it's just a mismatch to
 navigate. What would it feel like to approach math frustration differently?"
 
 Analysis:
@@ -148,7 +161,10 @@ Analysis:
 ✅ Offered exploratory direction
 ```
 
+
+
 ### Message 3.3: Greeting Input
+
 ```
 Input: "hi"
 Time: <0.001s
@@ -164,11 +180,13 @@ Analysis:
 ✅ Minimal but appropriate
 ```
 
----
+
+##
 
 ## Test Message Set 4: Punctuation Rule Verification
 
 ### Message 4.1: Grounded Pool (Sentence Split)
+
 ```
 Tone Pool: Grounded
 Glyph: Spiral Containment
@@ -180,7 +198,10 @@ Rule Applied: `. ` (period + space)
 Status: ✅ CORRECT
 ```
 
+
+
 ### Message 4.2: Reflective Pool (Colon Emphasis)
+
 ```
 Tone Pool: Reflective
 Glyph: Recursive Ache
@@ -193,7 +214,10 @@ Status: ✅ CORRECT
 Emotional Effect: More contemplative, layered
 ```
 
+
+
 ### Message 4.3: Empathetic Pool (Comma Join)
+
 ```
 Tone Pool: Empathetic
 Glyph: Still Recognition
@@ -206,11 +230,13 @@ Status: ✅ CORRECT
 Emotional Effect: Warmer, more connective
 ```
 
----
+
+##
 
 ## Test Message Set 5: Glyph-to-Pool Mapping
 
 ### Message 5.1: Containment → Grounded
+
 ```
 Glyph Name: "Spiral Containment"
 Keyword Match: "containment"
@@ -219,7 +245,10 @@ Punctuation Style: Sentence split (`. `)
 Status: ✅ CORRECT
 ```
 
+
+
 ### Message 5.2: Ache → Reflective
+
 ```
 Glyph Name: "Recursive Ache"
 Keyword Match: "ache"
@@ -228,7 +257,10 @@ Punctuation Style: Colon emphasis (`: `)
 Status: ✅ CORRECT
 ```
 
+
+
 ### Message 5.3: Recognition → Empathetic
+
 ```
 Glyph Name: "Still Recognition"
 Keyword Match: "recognition"
@@ -237,7 +269,10 @@ Punctuation Style: Comma join (`, `)
 Status: ✅ CORRECT
 ```
 
+
+
 ### Message 5.4: Multiple Keywords (Priority)
+
 ```
 Glyph Name: "Grief of Recognition"
 Keywords Found: "grief" (Reflective), "recognition" (Empathetic)
@@ -247,11 +282,13 @@ Punctuation Style: Colon emphasis (`: `)
 Status: ✅ CORRECT (first match wins)
 ```
 
----
+
+##
 
 ## Test Message Set 6: Performance Verification
 
 ### Message 6.1: Initial Load (Cold Start)
+
 ```
 Input: "I'm feeling overwhelmed"
 First Call: 0.043s (includes lexicon load)
@@ -260,7 +297,10 @@ Subsequent Calls: 0.009-0.012s (cached)
 Status: ✅ ACCEPTABLE (cold start is expected)
 ```
 
+
+
 ### Message 6.2: Repeated Calls
+
 ```
 Call 1: 0.043s (cold start)
 Call 2: 0.010s
@@ -272,7 +312,10 @@ Average (excluding cold start): 0.010s
 Status: ✅ EXCELLENT (consistent sub-15ms)
 ```
 
+
+
 ### Message 6.3: Cleaner Overhead
+
 ```
 Response Generation: ~5ms
 Punctuation Cleaning: ~1ms
@@ -282,11 +325,13 @@ Total Overhead: ~2ms
 Status: ✅ NEGLIGIBLE (undetectable to user)
 ```
 
----
+
+##
 
 ## Test Message Set 7: Error Handling
 
 ### Message 7.1: Missing Style Matrix File
+
 ```
 Scenario: style_matrix.json deleted
 Behavior: System loads minimal defaults
@@ -296,7 +341,10 @@ Quality: Normal (defaults used)
 Status: ✅ PASS (graceful degradation)
 ```
 
+
+
 ### Message 7.2: Invalid Glyph Name (None)
+
 ```
 Input: Glyph name is None
 Behavior: System uses default Grounded pool
@@ -306,7 +354,10 @@ Quality: Normal
 Status: ✅ PASS (defensive handling)
 ```
 
+
+
 ### Message 7.3: Exception During Cleaning
+
 ```
 Scenario: Hypothetical cleaner exception
 Behavior: Original response returned unchanged
@@ -314,11 +365,13 @@ User Experience: No disruption
 Status: ✅ PASS (error caught, logged, handled)
 ```
 
----
+
+##
 
 ## Test Message Set 8: Emotional Tone Matching
 
 ### Message 8.1: Containment Tone
+
 ```
 Input: "I need to hold steady through this difficult time"
 Detected Tone Pool: Grounded
@@ -331,7 +384,10 @@ Response Characteristics:
 Status: ✅ CORRECT TONE MATCH
 ```
 
+
+
 ### Message 8.2: Ache Tone
+
 ```
 Input: "I'm carrying something that feels heavy"
 Detected Tone Pool: Reflective
@@ -344,7 +400,10 @@ Response Characteristics:
 Status: ✅ CORRECT TONE MATCH
 ```
 
+
+
 ### Message 8.3: Recognition Tone
+
 ```
 Input: "I feel so alone and unseen"
 Detected Tone Pool: Empathetic
@@ -357,7 +416,8 @@ Response Characteristics:
 Status: ✅ CORRECT TONE MATCH
 ```
 
----
+
+##
 
 ## Summary by Category
 
@@ -390,8 +450,7 @@ Status: ✅ CORRECT TONE MATCH
 - **Punctuation-emotion matching:** Excellent
 - **Conversational quality:** High
 - **User-perceived naturalness:** Significantly improved
-
----
+##
 
 ## Conclusion
 

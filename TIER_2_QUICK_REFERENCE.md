@@ -14,10 +14,15 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 **What it does:** Detects emotional tone and adjusts response energy
 
 ```python
+
 # Input: "I'm really excited about this!"
+
 # Detected tone: "joyful"
+
 # Adjustment: More energy, "!" instead of ".", "will" instead of "could"
 ```
+
+
 
 **Tones detected:**
 - 😊 Joyful: happy, excited, wonderful, amazing, love
@@ -26,21 +31,27 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 - 😠 Angry: angry, frustrated, furious, disgusted
 - 🤔 Reflective: think, wonder, question, consider
 - ❓ Uncertain: maybe, perhaps, not sure, confused
-
----
+##
 
 ### 2️⃣ EmotionalReciprocity
 **What it does:** Measures intensity (0.0 to 1.0) and matches response
 
 ```python
+
 # Input: "This is AMAZING!!!!"
+
 # Measured intensity: 0.85 (high)
+
 # Adjustment: "This will be AMAZING!" (more affirming, energetic)
 
 # Input: "maybe it could work?"
+
 # Measured intensity: 0.35 (low)
+
 # Adjustment: "That might possibly work..." (softer, tentative)
 ```
+
+
 
 **Intensity factors:**
 - `!` marks: +0.1 each (up to 0.3)
@@ -48,19 +59,25 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 - ALL CAPS: +0.05 each (emphasis)
 - Message length: shorter (-0.05), longer (+0.1)
 - Special markers: high/medium/low impact
-
----
+##
 
 ### 3️⃣ EmbodiedSimulation
 **What it does:** Adds subtle physical presence to responses
 
 ```python
+
 # Suggested phrases based on emotional state:
+
 # Anxious: "I'm holding space for your concerns"
+
 # Sad: "I'm here with you in this"
+
 # Joyful: "I'm present with your excitement"
+
 # Reflective: "I reach toward understanding this with you"
 ```
+
+
 
 **When added:** To responses >100 characters, ~40% of the time
 
@@ -69,26 +86,34 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 - "I'm holding space for..."
 - "I reach toward..."
 - "breathing with you"
-
----
+##
 
 ### 4️⃣ EnergyTracker
 **What it does:** Manages conversation energy and prevents fatigue
 
 ```python
+
 # Conversation phases:
+
 # 1-5 msgs: "opening" (establish rhythm, energy 0.6)
+
 # 5-15 msgs: "deepening" (build momentum, energy 0.7)
+
 # 15-25 msgs: "climax" (peak engagement, energy 0.8)
+
 # 25+ msgs: "closing" (wind down, energy 0.4)
 
 # Fatigue detection:
+
 # - Messages getting shorter? (fatigue detected)
+
 # - Session >30min + 20+ messages? (fatigue detected)
+
 # - Adjustment: reduce energy to prevent crash
 ```
 
----
+
+##
 
 ## How to Use
 
@@ -112,6 +137,7 @@ print(enhanced_response)
 
 # Check metrics (optional)
 print(metrics)
+
 # {
 #   "tone": "joyful",
 #   "intensity": 0.8,
@@ -120,23 +146,33 @@ print(metrics)
 #   "momentum": "building",
 #   "fatigue_detected": False,
 #   "processing_time_ms": 22.5
+
 # }
 ```
+
+
 
 ### Already Integrated!
 
 If you're using the response pipeline:
 
 ```python
+
 # In response_handler.py:
+
 # ✅ Tier 2 is already initialized
+
 # ✅ Already processing after Tier 1
+
 # ✅ Metrics logged automatically
+
 # ✅ Graceful fallback if fails
+
 # You just get better responses!
 ```
 
----
+
+##
 
 ## How It Works Internally
 
@@ -150,6 +186,7 @@ If you're using the response pipeline:
 
 ### Error Handling
 Each component has try-catch:
+
 ```python
 try:
     tone = attunement.detect_tone_shift(user_input)
@@ -158,9 +195,10 @@ except Exception as e:
     tone = "neutral"  # Graceful fallback
 ```
 
-If entire Tier 2 fails, returns base response (no crash).
 
----
+
+If entire Tier 2 fails, returns base response (no crash).
+##
 
 ## Performance
 
@@ -177,11 +215,12 @@ If entire Tier 2 fails, returns base response (no crash).
 └─────────────────────────────────────┘
 ```
 
-Each component: **<10ms** ✅  
-Combined pipeline: **<70ms** ✅  
-Well under 100ms budget: **✅**
 
----
+
+Each component: **<10ms** ✅
+Combined pipeline: **<70ms** ✅
+Well under 100ms budget: **✅**
+##
 
 ## Testing
 
@@ -191,13 +230,14 @@ Tier 1: 10/10 tests passing ✅
 Combined: 53/53 passing ✅
 ```
 
+
+
 Each component has:
 - ✅ Initialization test
 - ✅ Basic functionality tests
 - ✅ Edge case tests
 - ✅ Performance benchmarks
-
----
+##
 
 ## Key Insights
 
@@ -216,8 +256,7 @@ Each component has:
 - ❌ Not requiring ML models
 - ❌ Not adding latency (only +20ms)
 - ❌ Not breaking existing functionality
-
----
+##
 
 ## Session Integration
 
@@ -233,11 +272,12 @@ def _ensure_tier2_aliveness():
 # Called automatically in initialize_session_state()
 ```
 
-✅ Initialized once per user session  
-✅ Optional (graceful if fails)  
-✅ Accessible anywhere in app via `st.session_state["tier2_aliveness"]`
 
----
+
+✅ Initialized once per user session
+✅ Optional (graceful if fails)
+✅ Accessible anywhere in app via `st.session_state["tier2_aliveness"]`
+##
 
 ## Metrics Available
 
@@ -255,9 +295,10 @@ metrics = {
 }
 ```
 
-Use for logging, monitoring, debugging.
 
----
+
+Use for logging, monitoring, debugging.
+##
 
 ## Troubleshooting
 
@@ -275,14 +316,14 @@ Use for logging, monitoring, debugging.
 - It's random (40% probability)
 - Only on long responses (>100 chars)
 - Can disable by removing `add_embodied_language()` call
-
----
+##
 
 ## Customization
 
 To adjust Tier 2 behavior:
 
 ```python
+
 # In tier2_aliveness.py:
 
 # Change tone markers
@@ -293,12 +334,14 @@ embodied.embodied_phrases["opening"] = ["I'm listening", ...]
 
 # Change energy levels for phases
 pacing = tracker.calculate_optimal_pacing("deepening")
+
 # Modify returned energy: pacing["energy"] = 0.8
 ```
 
-All fully customizable without retraining!
 
----
+
+All fully customizable without retraining!
+##
 
 ## Next Steps
 
@@ -310,6 +353,7 @@ Coming Week 3-4:
 - Generative tension
 
 ### Combined Performance
+
 ```
 Tier 1: ~40ms
 Tier 2: ~20ms
@@ -317,7 +361,8 @@ Tier 3: ~20ms (estimate)
 Total: ~80ms (still under 100ms budget!)
 ```
 
----
+
+##
 
 ## Related Files
 
@@ -326,8 +371,7 @@ Total: ~80ms (still under 100ms budget!)
 - `src/emotional_os/deploy/modules/ui_components/response_handler.py` - Integration
 - `src/emotional_os/deploy/modules/ui_components/session_manager.py` - Session setup
 - `TIER_2_COMPLETION_REPORT.md` - Full technical report
-
----
+##
 
 ## Summary
 

@@ -18,24 +18,32 @@
 pip install fastapi uvicorn pydantic
 ```
 
+
+
 Update `requirements.txt`:
+
 ```
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 pydantic==2.5.0
 ```
 
+
+
 ## Step 2: Update Procfile for Dual Services
 
 Update your `Procfile` to run both backend and frontend:
 
 ```procfile
+
 # Backend API
 api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
 # Frontend (after Next.js is set up)
 web: cd velinor-web && npm run start
 ```
+
+
 
 ## Step 3: Set Up Next.js Frontend
 
@@ -44,6 +52,8 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 cd velinor-web
 npm install axios zustand
 ```
+
+
 
 Copy the frontend files:
 - `lib/api.ts` → `velinor-web/lib/api.ts`
@@ -58,9 +68,12 @@ In Railway dashboard, set:
 NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app/api
 ```
 
+
+
 ## Step 5: Deploy to Railway
 
 ```bash
+
 # Add Procfile changes
 git add Procfile requirements.txt
 
@@ -72,8 +85,11 @@ git commit -m "feat: Add FastAPI backend and Next.js frontend for Velinor"
 git push origin main
 
 # Railway auto-deploys (~3-5 minutes)
+
 # Visit: https://<your-railway-domain>.up.railway.app
 ```
+
+
 
 ## Step 6: Test
 
@@ -91,12 +107,15 @@ Make sure `NEXT_PUBLIC_API_URL` matches your Railway domain exactly.
 ### Frontend can't find images
 
 Ensure images are in `velinor-web/public/assets/`:
+
 ```
 velinor-web/public/assets/
 ├── backgrounds/
 ├── overlays/
 └── npcs/
 ```
+
+
 
 ### Slow startup
 
@@ -105,27 +124,39 @@ Railway might be cold-starting both services. Give it 1-2 minutes first.
 ### CORS errors
 
 Already enabled in `velinor_api.py`:
+
 ```python
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
 ```
+
+
 
 For production, restrict to your domain.
 
 ## Local Development
 
 Terminal 1 - Backend:
+
 ```bash
 python velinor_api.py
+
 # http://localhost:8000
+
 # Swagger docs: http://localhost:8000/docs
 ```
 
+
+
 Terminal 2 - Frontend:
+
 ```bash
 cd velinor-web
 npm run dev
+
 # http://localhost:3000
 ```
+
+
 
 ## File Structure
 
@@ -149,6 +180,8 @@ saoriverse-console/
     └── tsconfig.json
 ```
 
+
+
 ## Next Steps
 
 1. Create `velinor-web/app/page.tsx` with splash screen
@@ -156,7 +189,6 @@ saoriverse-console/
 3. Add background images to `velinor-web/public/assets/backgrounds/`
 4. Add overlay images to `velinor-web/public/assets/overlays/`
 5. Test locally, then push to Railway
-
----
+##
 
 **Your Railway domain** will be auto-generated. Once set, bookmark it!

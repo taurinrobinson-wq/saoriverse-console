@@ -2,12 +2,11 @@
 
 ## Status: 🔄 IN PROGRESS
 
-**Started:** November 5, 2025  
-**Current Stage:** Pruning (Stage 4 of 6)  
-**Elapsed:** ~5 minutes  
+**Started:** November 5, 2025
+**Current Stage:** Pruning (Stage 4 of 6)
+**Elapsed:** ~5 minutes
 **Estimated Total Time:** 10-15 minutes
-
----
+##
 
 ## Pipeline Status
 
@@ -40,8 +39,7 @@
 ⏳ **STEP 6: Report** (Pending)
 - Generate FACTORIAL_EXPANSION_REPORT.json
 - Summary statistics
-
----
+##
 
 ## Expected Final Results
 
@@ -53,23 +51,29 @@
 | JSON before | 64 |
 | JSON after | ~12,764 |
 | **Expansion ratio** | **~199x** |
-
----
+##
 
 ## Command Running
 
 ```bash
 cd /workspaces/saoriverse-console && timeout 900 python3 << 'EOF'
+
 # Full factorial expansion pipeline
+
 # - Load 292 glyphs from CSV
+
 # - Generate all combinations
+
 # - Score with novelty/coherence/coverage
+
 # - Prune to top 15%
+
 # - Sync to JSON
 EOF
 ```
 
----
+
+##
 
 ## Notes
 
@@ -79,7 +83,6 @@ EOF
 - Pruning strategy: Multi-stage redundancy removal
 - Target: Massive expansion of emotional vocabulary
 - This is the correct approach you asked for: CSV → Factorial → Prune → JSON
-
----
+##
 
 **Monitoring:** Check terminal 7aa1f31d-82af-42ed-b820-108b5c95a1c9 for final output

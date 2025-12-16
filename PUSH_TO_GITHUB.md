@@ -3,6 +3,7 @@
 These are the files ready to be pushed to your GitHub repository. Run these commands:
 
 ```bash
+
 # Make sure you're in the repository root
 cd d:\saoriverse-console
 
@@ -34,7 +35,8 @@ Replaces unreliable Railway deployment."
 git push origin main
 ```
 
----
+
+##
 
 ## 📋 Files Summary
 
@@ -48,12 +50,12 @@ git push origin main
 | `VPS_MIGRATION_CHECKLIST.md` | Progress tracking | ~200 lines |
 
 **Total**: 6 new/modified files, ~800 lines of configuration and documentation
-
----
+##
 
 ## ✅ Verification Before Pushing
 
 ```bash
+
 # Verify all files exist
 ls -la docker-compose.prod.yml
 ls -la nginx.prod.conf
@@ -68,7 +70,8 @@ cat nginx.prod.conf | head -5
 cat .github/workflows/deploy.yml | head -5
 ```
 
----
+
+##
 
 ## 🚀 After Pushing
 
@@ -76,15 +79,17 @@ cat .github/workflows/deploy.yml | head -5
 2. **Check Actions**: Click Actions tab - workflow should be visible
 3. **Clone on VPS**: During VPS setup, you'll run: `git clone https://github.com/YOUR_USERNAME/saoriverse-console.git`
 4. **Auto-deploy**: Future pushes will automatically trigger deployment
-
----
+##
 
 ## 🔄 Working with These Files Going Forward
 
 ### When you want to deploy:
+
 ```bash
+
 # Option 1: Auto-deploy (recommended)
 git push origin main
+
 # GitHub Actions will deploy automatically
 
 # Option 2: Manual deploy from VPS
@@ -95,21 +100,32 @@ docker compose -f docker-compose.prod.yml build
 docker compose -f docker-compose.prod.yml up -d
 ```
 
+
+
 ### When you want to make changes:
+
 ```bash
+
 # Edit locally (e.g., nginx.prod.conf)
+
 # Commit and push
 git add nginx.prod.conf
 git commit -m "chore: update nginx configuration"
 git push origin main
+
 # Auto-deploys to VPS!
 ```
 
+
+
 ### Emergency rollback:
+
 ```bash
+
 # Revert to previous commit
 git revert HEAD
 git push origin main
+
 # Or manually stop and restart with git checkout
 ssh root@YOUR_DROPLET_IP
 cd /opt/velinor
@@ -119,7 +135,8 @@ docker compose -f docker-compose.prod.yml build
 docker compose -f docker-compose.prod.yml up -d
 ```
 
----
+
+##
 
 ## 📝 Commit Message Template
 
@@ -133,7 +150,8 @@ chore: update [docker-compose.prod.yml|nginx.prod.conf|etc]
 - Any manual steps needed after deploy
 ```
 
----
+
+##
 
 ## ✨ Next Steps
 

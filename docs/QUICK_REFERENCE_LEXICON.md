@@ -1,14 +1,12 @@
 # Quick Reference: Word-Centric Lexicon Integration
 
 **Status:** ✅ Complete | **Version:** 1.0 | **Date:** [Current Session]
-
----
+##
 
 ## TL;DR
 
 Your FirstPerson system now recognizes **457+ actual emotional words** from your conversations with proper gate activation. Integration is complete, tested, and ready.
-
----
+##
 
 ## Key Emotional Words (Top 10)
 
@@ -25,11 +23,13 @@ TRUST     (108x) → Vulnerability [7,11]        → "I trust you"
 WITH      (3480x) → Multiple [1,5]             → "Being with you"
 ```
 
----
+
+##
 
 ## How It Works
 
 ### Detection Flow
+
 ```
 User Input
     ↓
@@ -49,13 +49,14 @@ parse_signals() extracts:
 Gates Activated → Glyphs Selected → Response Generated
 ```
 
+
+
 ### Performance
 - **Before:** ~50 keyword iterations
 - **After:** Direct dict lookup (457 words)
 - **Speed:** 10x faster
 - **Accuracy:** 100% (word boundaries)
-
----
+##
 
 ## For Users
 
@@ -71,8 +72,7 @@ Gates Activated → Glyphs Selected → Response Generated
 - Better glyph selection for subtle emotions
 - Reduced false positives
 - Faster response times
-
----
+##
 
 ## For Developers
 
@@ -95,6 +95,8 @@ print(analysis['primary_signals'])       # Most active signals
 print(analysis['gate_activations'])      # Gates activated
 print(analysis['intensity'])             # Emotional intensity (0-1)
 ```
+
+
 
 ### Lexicon Data Structure
 
@@ -127,7 +129,8 @@ print(analysis['intensity'])             # Emotional intensity (0-1)
 }
 ```
 
----
+
+##
 
 ## Files & Locations
 
@@ -153,31 +156,42 @@ print(analysis['intensity'])             # Emotional intensity (0-1)
 - `LEXICON_INTEGRATION_FINAL_STATUS_REPORT.md` - Status report
 - `LEXICON_INTEGRATION_CHECKLIST.md` - Completion checklist
 - `QUICK_REFERENCE_LEXICON.md` - This file
-
----
+##
 
 ## Common Tasks
 
 ### Check if Word is in Lexicon
+
 ```python
 lexicon = get_lexicon()
 if 'hold' in lexicon.lexicon:
     print("Found HOLD in lexicon")
 ```
 
+
+
 ### Get All Words for a Signal
+
 ```python
 intimacy_words = lexicon.words_for_signal('intimacy')
+
 # Returns: ['echo', 'tender', 'present', 'knowing', ...]
 ```
 
+
+
 ### Get All Words Activating Specific Gates
+
 ```python
 gate_7_11_words = lexicon.words_for_gates([7, 11])
+
 # Returns: ['hold', 'echo', 'trust', ...]
 ```
 
+
+
 ### Analyze Full Conversation
+
 ```python
 conversation = "I hold this sacred moment with tenderness..."
 analysis = lexicon.analyze_emotional_content(conversation)
@@ -188,7 +202,8 @@ print(f"Gates: {[g[0] for g in analysis['gate_activations']]}")
 print(f"Intensity: {analysis['intensity']}")
 ```
 
----
+
+##
 
 ## Gate Mapping Reference
 
@@ -200,13 +215,14 @@ print(f"Intensity: {analysis['intensity']}")
 | 7, 11 | Vulnerability, Intimacy | hold, echo, trust |
 | 8, 12 | Love, Sacred | sacred, honor, precious |
 | 10, 11 | Transformation | becoming, evolve, both |
-
----
+##
 
 ## Troubleshooting
 
 ### Lexicon Not Loading
+
 ```python
+
 # Check if file exists
 from pathlib import Path
 lexicon_path = Path("emotional_os/lexicon/word_centric_emotional_lexicon.json")
@@ -217,8 +233,12 @@ from emotional_os.lexicon.lexicon_loader import load_lexicon
 lexicon = load_lexicon(str(lexicon_path))
 ```
 
+
+
 ### Word Not Found
+
 ```python
+
 # Check if word is in lexicon
 word = 'hold'
 if word not in lexicon.lexicon:
@@ -227,8 +247,12 @@ if word not in lexicon.lexicon:
     freq = lexicon.get_frequency(word)  # Returns 0 if not found
 ```
 
+
+
 ### Signals Not Activating
+
 ```python
+
 # Debug: Check what signals are mapped
 text = "I hold this sacred"
 analysis = lexicon.analyze_emotional_content(text)
@@ -238,11 +262,13 @@ print("Signals:", analysis['primary_signals'])
 print("Gates:", analysis['gate_activations'])
 ```
 
----
+
+##
 
 ## Test Results Summary
 
 ### Direct Lexicon Tests ✅
+
 ```
 hold      → signals: ['vulnerability'], gates: [7, 11], freq: 568 ✓
 sacred    → signals: ['admiration'], gates: [8, 12], freq: 373 ✓
@@ -251,7 +277,10 @@ echo      → signals: ['intimacy'], gates: [7, 11], freq: 212 ✓
 tender    → signals: ['intimacy'], gates: [8, 11], freq: 150 ✓
 ```
 
+
+
 ### Integration Tests ✅
+
 ```
 parse_input("I hold this moment sacred")  → Emotional ✓
 parse_signals(...)                         → Signals extracted ✓
@@ -259,7 +288,8 @@ Gate activation                           → Verified ✓
 Glyph selection                          → Working ✓
 ```
 
----
+
+##
 
 ## Performance Characteristics
 
@@ -275,8 +305,7 @@ Glyph selection                          → Working ✓
 ### Memory
 - Lexicon size: ~150KB in memory (457 words)
 - Cache size: Minimal (analysis stored temporarily)
-
----
+##
 
 ## Next Steps
 
@@ -291,8 +320,7 @@ Glyph selection                          → Working ✓
 - 🔜 Add multi-word emotional phrases
 - 🔜 Implement learning from feedback
 - 🔜 Create seasonal variations
-
----
+##
 
 ## Quick Checklist
 
@@ -303,8 +331,7 @@ Glyph selection                          → Working ✓
 - [x] Performance improved 10x
 - [x] Documentation complete
 - [x] Ready for production
-
----
+##
 
 **Questions?** See:
 - `LEXICON_INTEGRATION_COMPLETE.md` for detailed implementation

@@ -17,6 +17,8 @@ How to run (dry-run, safe)
 python3 dev_tools/cleanup_glyphs.py --source glyphs_rows.sql --dry-run --sample 20
 ```
 
+
+
 Options
 
 - `--source`: path to SQL file containing the INSERT INTO ... VALUES (...) export. Defaults to `glyphs_rows.sql`.

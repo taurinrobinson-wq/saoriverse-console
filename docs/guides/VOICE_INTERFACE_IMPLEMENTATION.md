@@ -63,6 +63,8 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
                        └────────────────────┘
 ```
 
+
+
 ## Sprint-by-Sprint Delivery
 
 ### Sprint 1: Audio Pipeline & STT
@@ -91,8 +93,7 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
 - Cost: $0 (no API calls)
 - Model size: ~140MB (base Whisper model)
 - Language support: Multi-language automatic detection
-
----
+##
 
 ### Sprint 2: Prosody Planning
 
@@ -115,6 +116,8 @@ Emotional Attunement      → Word Emphasis Placement
 Certainty                 → Terminal Contour (rising/mid/falling)
 ```
 
+
+
 **Guardrails:**
 
 - Rate change: ±15% per second (prevents jarring tempo shifts)
@@ -131,8 +134,7 @@ Certainty                 → Terminal Contour (rising/mid/falling)
 - Explanation generation (1 test)
 - Valence inference (3 tests)
 - Style consistency (2 tests)
-
----
+##
 
 ### Sprint 3: Streaming TTS
 
@@ -172,8 +174,7 @@ Certainty                 → Terminal Contour (rising/mid/falling)
 - Streaming chunk size: 500ms (configurable)
 - Buffer size: 10 chunks maximum (prevents memory bloat)
 - Sample rate: 22050 Hz (configurable)
-
----
+##
 
 ### Sprint 4: Streamlit Voice UI Integration
 
@@ -209,8 +210,7 @@ Certainty                 → Terminal Contour (rising/mid/falling)
 - Component initialization (2 tests)
 - Integration (2 tests)
 - Rendering (2 tests)
-
----
+##
 
 ## Integration with Existing System
 
@@ -248,6 +248,8 @@ glyph_signals = generate_response_with_glyphs(response_text)
 # Render voice output with prosody
 voice_config["render_output"](response_text, glyph_signals)
 ```
+
+
 
 ## Deployment Checklist
 
@@ -323,6 +325,8 @@ spoken_interface/
 Total: 3,289 lines of production code + tests
 ```
 
+
+
 ## Dependencies
 
 **Required:**
@@ -336,6 +340,8 @@ scipy>=1.7.0              # Signal processing
 numpy>=1.21.0             # Arrays
 ```
 
+
+
 **Optional:**
 
 ```
@@ -343,6 +349,8 @@ torch>=1.9.0              # GPU acceleration (optional)
 matplotlib>=3.4.0         # Visualization (optional)
 streamlit>=1.0.0          # Web UI (required only for Streamlit deployment)
 ```
+
+
 
 ## Next Steps: Sprint 5 (In Progress)
 
@@ -427,8 +435,7 @@ Remaining tasks:
 - **Text-to-Speech**: Coqui TTS (<https://github.com/coqui-ai/TTS>)
 - **Prosody Science**: Fundamental frequency, spectral flux, energy representations
 - **Web Framework**: Streamlit (<https://streamlit.io>)
-
----
+##
 
 **Overall Status: 🟢 READY FOR DEPLOYMENT**
 

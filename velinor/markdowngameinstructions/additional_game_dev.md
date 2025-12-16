@@ -293,7 +293,3 @@ I can now draft the full dialogue tree for Ravi and Nima, including branching re
 “So walk. Speak. Listen. Not to win — to remember. The device, the glyphs, the glowing breath-shapes… they come later. First, you earn the right to be seen.”
 
 This way, the player isn’t just dropped into a system — they’re invited into a relational unfolding. Saori becomes a mythic mirror, and the city becomes a test of emotional voltage.
-
-
-
-

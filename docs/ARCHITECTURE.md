@@ -2,14 +2,12 @@
 
 **Date**: December 3, 2025
 **Status**: Post-Reorganization (Phase 9)
-
----
+##
 
 ## Overview
 
 SaoriVerse Console is a modular emotional AI system built with clean separation of concerns. The reorganization (Phases 1-8) established a flat, discoverable structure that enables rapid development and testing.
-
----
+##
 
 ## Directory Structure
 
@@ -83,7 +81,8 @@ saoriverse-console/
     └── old_modules/     # Original scripts
 ```
 
----
+
+##
 
 ## Core Module Interactions
 
@@ -108,6 +107,8 @@ relational_memory.py        Store memory capsule
 response (text) → Streamlit UI
 ```
 
+
+
 ### Voice Pipeline
 
 ```
@@ -126,6 +127,8 @@ streaming_tts.py            Text-to-speech
 audio_output (mp3/wav)
 ```
 
+
+
 ### Learning Pipeline
 
 ```
@@ -138,7 +141,8 @@ local_learner.py            Store learned patterns
 relational_memory.py        Persist patterns
 ```
 
----
+
+##
 
 ## Key Modules Explained
 
@@ -167,12 +171,12 @@ relational_memory.py        Persist patterns
 - **Purpose**: Persist interaction memories for learning
 - **Storage**: Local JSONL files (append-only)
 - **Access**: Query by session, user, or time range
-
----
+##
 
 ## Import Patterns
 
 ### In app.py (Streamlit entry point):
+
 ```python
 from src import (
     process_user_input,
@@ -181,17 +185,21 @@ from src import (
 )
 ```
 
+
+
 ### In internal modules:
+
 ```python
 from src.signal_parser import parse_input
 from src.relational_memory import store_capsule
 ```
 
+
+
 ### Key Constraint:
 - **No circular imports** - src/ modules never import from app.py
 - **Unidirectional imports** - Lower-level modules don't depend on higher-level UI
-
----
+##
 
 ## Testing Architecture
 
@@ -211,17 +219,20 @@ from src.relational_memory import store_capsule
 - Pytest configuration in `pytest.ini`
 - Shared fixtures in `tests/conftest.py`
 - Auto-discovery of `test_*.py` files
-
----
+##
 
 ## Deployment
 
 ### Single Streamlit Entry Point:
+
 ```bash
 streamlit run app.py
 ```
 
+
+
 ### Environment Setup:
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -229,12 +240,13 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+
+
 ### CI/CD:
 - GitHub Actions in `.github/workflows/`
 - Runs tests on push to refactor/* branches
 - Validates imports, runs test suite
-
----
+##
 
 ## Module Dependencies (by layer)
 
@@ -262,8 +274,7 @@ streamlit run app.py
 ### Layer 5: Learning (Optional)
 - `lexicon_learner.py` (standalone)
 - `local_learner.py` (standalone)
-
----
+##
 
 ## Future Improvements
 
@@ -273,8 +284,7 @@ streamlit run app.py
 4. **Error Handling**: Standardize error handling across modules
 5. **Configuration**: Move hardcoded values to config files
 6. **Logging**: Structured logging with context propagation
-
----
+##
 
 ## Quick Reference: Finding Things
 
@@ -288,8 +298,7 @@ streamlit run app.py
 | Tests | test_*.py | tests/unit/ or tests/integration/ |
 | Test fixtures | conftest.py | tests/ |
 | Data files | *.json, *.sql | data/ |
-
----
+##
 
 **For detailed testing information, see**: `docs/TESTING_GUIDE.md`
 **For API reference, see**: `docs/API_REFERENCE.md`

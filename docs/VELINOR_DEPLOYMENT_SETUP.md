@@ -3,16 +3,21 @@
 ## Quick Local Setup
 
 ### Option 1: Automated Setup (Recommended)
+
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 bash setup.sh
 bash run.sh
 ```
 
+
+
 **Game opens at:** http://localhost:8501
 
 ### Option 2: Manual Setup
+
 ```bash
+
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
@@ -24,7 +29,8 @@ pip install streamlit pillow
 streamlit run velinor_app.py
 ```
 
----
+
+##
 
 ## Integration with Your Glyph System
 
@@ -40,6 +46,7 @@ streamlit run velinor_app.py
 Modify the game initialization section to import and connect FirstPerson:
 
 ```python
+
 # Around line 540-560 in velinor_app.py
 from src.emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
@@ -52,10 +59,13 @@ orchestrator = VelinorTwineOrchestrator(
 )
 ```
 
+
+
 #### Step 2: Environment Variables (Secrets)
 For Streamlit Cloud deployment, add to `.streamlit/secrets.toml`:
 
 ```toml
+
 # .streamlit/secrets.toml
 [firstperson]
 module_path = "src.emotional_os.deploy.core.firstperson"
@@ -72,6 +82,8 @@ environment = "production"  # or "development"
 debug_mode = false
 ```
 
+
+
 #### Step 3: Session Secrets (for Streamlit Cloud)
 1. Go to your app's Settings on Streamlit Cloud
 2. Click "Secrets"
@@ -83,27 +95,34 @@ The game works perfectly without FirstPerson/Glyph integration:
 - All story functionality works
 - Stats and mechanics fully functional
 - Perfect for testing before integration
-
----
+##
 
 ## Running Velinor
 
 ### Local Testing
+
 ```bash
+
 # Terminal 1: Start the app
 streamlit run velinor_app.py
 
 # App runs at http://localhost:8501
+
 # Press Ctrl+C to stop
 ```
 
+
+
 ### With FirstPerson Connected
+
 ```bash
+
 # If FirstPerson is enabled, additional debug info will show
 streamlit run velinor_app.py --logger.level=debug
 ```
 
----
+
+##
 
 ## Deployment Options
 
@@ -115,8 +134,7 @@ streamlit run velinor_app.py --logger.level=debug
 - Can integrate FirstPerson locally
 
 **Setup:** Run `bash run.sh`
-
----
+##
 
 ### Option B: Streamlit Cloud (Free)
 **Steps:**
@@ -136,17 +154,18 @@ streamlit run velinor_app.py --logger.level=debug
 - Limited compute resources
 - Slow cold starts
 - Need secrets for FirstPerson
-
----
+##
 
 ### Option C: Docker Deployment
 **Dockerfile already compatible:**
+
 ```bash
 docker build -t velinor-game .
 docker run -p 8501:8501 velinor-game
 ```
 
----
+
+##
 
 ## Secrets Configuration
 
@@ -171,7 +190,9 @@ docker run -p 8501:8501 velinor-game
 ### If Integrating with Glyph System Later
 
 Add to `.streamlit/secrets.toml`:
+
 ```toml
+
 # Glyph persistence
 [glyph]
 supabase_url = "https://your-project.supabase.co"
@@ -187,7 +208,8 @@ session_scope = "velinor_game"
 enabled = false
 ```
 
----
+
+##
 
 ## What's Already Configured
 
@@ -210,8 +232,7 @@ enabled = false
 - All images in `velinor/backgrounds/` and `velinor/npcs/`
 - Story in `velinor/stories/sample_story.json`
 - Complete UI with light theme
-
----
+##
 
 ## File Locations
 
@@ -237,11 +258,13 @@ saoriverse-console/
                 └── firstperson/  ← Import from here for integration
 ```
 
----
+
+##
 
 ## Quick Commands
 
 ```bash
+
 # Setup
 bash setup.sh
 
@@ -264,11 +287,13 @@ rm -rf ~/.streamlit
 deactivate
 ```
 
----
+
+##
 
 ## Status Check
 
 ```bash
+
 # Check if Python dependencies installed
 pip list | grep -E "streamlit|pillow"
 
@@ -281,7 +306,8 @@ ls -la velinor/npcs/
 python3 -c "from velinor.engine import VelinorEngine; print('✓ Game ready')"
 ```
 
----
+
+##
 
 ## For FirstPerson/Glyph Integration
 
@@ -298,8 +324,7 @@ When ready to integrate your emotional resonance system:
 - ✅ Game engine has hooks for external analysis
 - ✅ Player stats include glyph tracking
 - ✅ Session management ready for persistence
-
----
+##
 
 ## Troubleshooting
 
@@ -311,17 +336,19 @@ When ready to integrate your emotional resonance system:
 | Game crashes on start | Clear cache: `rm -rf ~/.streamlit` |
 | FirstPerson import error | Update import path in velinor_app.py |
 | Secrets not loading | Ensure `.streamlit/secrets.toml` is in .gitignore |
-
----
+##
 
 ## Summary
 
 **To Start Playing Right Now:**
+
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 bash setup.sh
 bash run.sh
 ```
+
+
 
 **Secrets Required?** Only if integrating with FirstPerson/Glyph system
 

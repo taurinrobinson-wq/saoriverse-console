@@ -1,4 +1,5 @@
 ```markdown
+
 # 🌈 Lightpath – MVP Spec
 
 ### 🎯 Target Users

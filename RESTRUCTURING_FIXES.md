@@ -11,15 +11,19 @@ After the repository restructuring that moved files from root to `src/` director
 
 ### 1. Fixed `app.py` Import Path (lines 7-11)
 Added `src/` to `sys.path` so Python can find the modules:
+
 ```python
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 ```
+
+
 
 This ensures that when `from emotional_os.deploy.modules.ui_refactored import main` is executed, Python looks in the correct location.
 
 ### 2. Updated Package Configuration
 
 **pyproject.toml**: Changed from flat package layout to src-layout
+
 ```toml
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -29,7 +33,10 @@ where = ["src"]
 include = ["emotional_os*", "emotional_os_*"]
 ```
 
+
+
 **setup.cfg**: Updated to point packages to src directory
+
 ```ini
 [options]
 package_dir = {= src}
@@ -37,6 +44,8 @@ package_dir = {= src}
 [options.packages.find]
 where = src
 ```
+
+
 
 ### 3. Converted Text-Based Symlinks to Directory Stubs
 
@@ -57,7 +66,9 @@ Each directory now contains an `__init__.py` that:
 3. **Crucially**: Uses `sys.modules` manipulation to map all submodules to the expected namespace
 
 Example for `src/emotional_os/glyphs/__init__.py`:
+
 ```python
+
 # Register all submodules from the sibling in sys.modules
 for key, module in list(sys.modules.items()):
     if key.startswith('emotional_os_glyphs'):
@@ -65,6 +76,8 @@ for key, module in list(sys.modules.items()):
         new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')
         sys.modules[new_key] = module
 ```
+
+
 
 This allows code like `from emotional_os.glyphs.learning_response_generator import X` to work even though the actual module is `emotional_os_glyphs.learning_response_generator`.
 
@@ -88,6 +101,8 @@ All critical imports now work:
 cd d:\saoriverse-console
 streamlit run app.py
 ```
+
+
 
 The app should now start without import errors.
 

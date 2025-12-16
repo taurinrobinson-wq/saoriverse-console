@@ -1,4 +1,5 @@
 # Railway Environment Variables Guide
+
 # Set these in your Railway project dashboard under "Variables"
 
 # Required Supabase Configuration
@@ -14,6 +15,7 @@ PREFER_AI=true
 USE_LOCAL_FALLBACK=true
 
 # If using OpenAI directly (optional)
+
 # OPENAI_API_KEY=your-openai-api-key-here
 
 # Railway will automatically set PORT variable - don't override it

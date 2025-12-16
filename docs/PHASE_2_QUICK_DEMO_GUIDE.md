@@ -8,17 +8,22 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
+
+
 Then visit `http://localhost:3000`
 
 ## What You'll See
 
 ### 1. Landing Page (Home)
+
 ```
 URL: http://localhost:3000/
 Time: 0-3 seconds
 Show: Animated beautiful homepage
 Do: Click "Start Chatting" button
 ```
+
+
 
 **Visual Elements**:
 - 🌊 Animated background orbs (floating in and out)
@@ -29,11 +34,14 @@ Do: Click "Start Chatting" button
 - 🌀 Floating particles around edges
 
 ### 2. Chat Interface
+
 ```
 URL: http://localhost:3000/chat
 Time: Interactive experience
 Show: Main conversation interface
 ```
+
+
 
 **Try These Actions**:
 
@@ -71,11 +79,14 @@ Show: Main conversation interface
 4. Button changes state while playing
 
 ### 3. Settings Page
+
 ```
 URL: http://localhost:3000/settings
 Time: Configuration interface
 Show: Controls and preferences
 ```
+
+
 
 **Try These Controls**:
 
@@ -165,6 +176,7 @@ Show: Controls and preferences
 ## Common Interactions
 
 ### Typing a Message
+
 ```
 1. Click text input
    → Input scales slightly (1.02x)
@@ -180,7 +192,10 @@ Show: Controls and preferences
    → Chat scrolls to bottom automatically
 ```
 
+
+
 ### Recording Process
+
 ```
 1. Click microphone button
    → Button color changes to red
@@ -202,7 +217,10 @@ Show: Controls and preferences
    → Chat continues
 ```
 
+
+
 ### Excitement Detection
+
 ```
 1. Get response with keyword like "amazing"
 2. Response appears in chat
@@ -214,6 +232,8 @@ Show: Controls and preferences
    - "That's Amazing!" text
 5. Enjoy the moment!
 ```
+
+
 
 ## Settings Customization
 
@@ -242,30 +262,42 @@ Show: Controls and preferences
 ## Testing Scenarios
 
 ### Scenario 1: Happy Conversation
+
 ```
 User: "Tell me something amazing!"
 Expected: Response + Dance mode activation 💃
 ```
 
+
+
 ### Scenario 2: Curious Question
+
 ```
 User: "How does AI work?"
 Expected: Regular response, no dance mode
 ```
 
+
+
 ### Scenario 3: Excited Reaction
+
 ```
 User: "That's fantastic!"
 Expected: Response celebrates your excitement
 ```
 
+
+
 ### Scenario 4: Voice Testing
+
 ```
 1. Use microphone to record
 2. Check transcription accuracy
 3. Verify emotion detection
 4. Test audio playback
 ```
+
+
 
 ## Performance Checklist
 
@@ -281,6 +313,7 @@ Expected: Response celebrates your excitement
 ## Visual Tour
 
 ### Page Flow Map
+
 ```
 ┌─────────────┐
 │   HOME      │
@@ -302,7 +335,10 @@ Expected: Response celebrates your excitement
 └──────────────  └──────────────┘
 ```
 
+
+
 ### Component Relationships
+
 ```
 App Root
 ├── Layout (global styles)
@@ -348,6 +384,8 @@ App Root
         ├── Rate
         └── Volume
 ```
+
+
 
 ## Fun Things to Try
 
@@ -403,6 +441,7 @@ App Root
 - Demonstrate settings controls
 
 ### Demo Script
+
 ```
 "This is FirstPerson - an AI chat with emotion awareness.
 Watch the beautiful animations as I interact:
@@ -415,6 +454,8 @@ Watch the beautiful animations as I interact:
 6. Customizable settings for voice and behavior"
 ```
 
+
+
 ## Next Steps
 
 After exploring the UI:
@@ -423,8 +464,7 @@ After exploring the UI:
 3. Test with real AI responses
 4. Integrate emotion analysis
 5. Deploy to Digital Ocean
-
----
+##
 
 **Enjoy exploring the beautiful FirstPerson web app!** 🎉✨
 

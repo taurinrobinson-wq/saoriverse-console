@@ -52,6 +52,8 @@ Phase 3.5 implements a complete **glyph-controlled local LLM system** for fine-t
 └─────────────────────────────────────────────────────────────┘
 ```
 
+
+
 ## 1. Glyph Schema & Registry
 
 ### Glyph Structure
@@ -63,10 +65,12 @@ class Glyph:
     component_formula: str             # e.g., "X × Y"
     description: str
     attributes: GlyphAttributes
-    
+
     safe_uncanny_ok: bool = False      # Whether uncanny gate permits use
     lexicon_anchors: List[str] = None  # Semantic tags
 ```
+
+
 
 ### Glyph Attributes
 
@@ -82,6 +86,8 @@ class GlyphAttributes:
     primary_family: str               # Ache, Joy, Awe, Connection, etc.
     related_emotions: List[str] = None
 ```
+
+
 
 ### GlyphMovement Patterns
 
@@ -110,6 +116,8 @@ safe_glyphs = registry.list_safe_for_uncanny(uncanny_ok=False)
 stats = registry.get_statistics()
 ```
 
+
+
 ## 2. Gate Policies
 
 Gates enforce safety constraints on responses:
@@ -122,7 +130,7 @@ class GatePolicy:
     directness: float = 0.5                     # 0.0-1.0: direct vs. poetic
     recognition_risk_threshold: float = 0.7    # Detect "I remember you" phrases
     metaphor_density_max: float = 0.8           # Max metaphor density
-    
+
     def validates_glyph(self, glyph: Glyph) -> bool:
         """Check if glyph passes this gate."""
         if not self.uncanny_ok and not glyph.safe_uncanny_ok:
@@ -130,11 +138,14 @@ class GatePolicy:
         return True
 ```
 
+
+
 ## 3. Control Tag Rendering
 
 Glyphs are encoded as XML-like tags in the prompt:
 
 ```python
+
 # Render glyphs
 <GLYPH:Recursive Ache,0.80>
 <GLYPH:Grounded Joy,0.30>
@@ -153,6 +164,8 @@ Glyphs are encoded as XML-like tags in the prompt:
 </SYS>
 ```
 
+
+
 The complete control prefix looks like:
 
 ```xml
@@ -166,6 +179,8 @@ The complete control prefix looks like:
 User: How are you feeling today?
 ```
 
+
+
 ## 4. Safety Post-Processing
 
 ### Recognition Risk Detection
@@ -178,8 +193,11 @@ detector = RecognitionRiskDetector()
 text = "I remember your face from last time we talked"
 matches = detector.detect(text)          # Finds risky phrases
 cleaned, removed = detector.remove_risk_phrases(text)
+
 # Removed: ["I remember your face"]
 ```
+
+
 
 ### Uncanniness Enforcement
 
@@ -191,8 +209,11 @@ enforcer = UncannynessEnforcer()
 text = "The boundary dissolves and edges soften"
 flagged = enforcer.flag_uncanny_content(text)  # Find uncanny phrases
 cleaned, count = enforcer.remove_uncanny_content(text)
+
 # Removed: "dissolves", "edges soften"
 ```
+
+
 
 ### Rhythm Enforcement
 
@@ -203,10 +224,13 @@ enforcer = RhythmEnforcer()
 
 text = "Short sentences. Medium length sentence here. Longer sentence with more content."
 metrics = enforcer.analyze_rhythm(text)
+
 # {'avg_length': 12.3, 'short_count': 1, 'long_count': 1}
 
 suggestions = enforcer.suggest_rhythm_improvements(text, target_rhythm="slow")
 ```
+
+
 
 ### Metaphor Density Metering
 
@@ -221,6 +245,8 @@ density_lit = meter.measure_density(literal)        # ~0.1
 poetic = "Like water, emotions flow through being"
 density_poet = meter.measure_density(poetic)        # ~0.7
 ```
+
+
 
 ## 5. Complete Post-Processing Pipeline
 
@@ -242,6 +268,8 @@ print(result.processed_text)              # Cleaned version
 print(result.safety_violations_fixed)     # Count of issues fixed
 print(result.detailed_changes)            # List of all changes
 ```
+
+
 
 ## 6. Training Corpus Generation
 
@@ -276,6 +304,8 @@ example = TrainingExample(
 )
 ```
 
+
+
 ### Corpus Builder
 
 ```python
@@ -293,16 +323,20 @@ example = builder.add_from_interaction(
 
 # Get statistics
 stats = builder.get_statistics()
+
 # {
 #     'total_examples': 50,
 #     'avg_user_satisfaction': 0.87,
 #     'glyphs_used': 12,
 #     'avg_response_length': 42
+
 # }
 
 # Export to JSONL
 builder.export_to_jsonl("training_corpus.jsonl")
 ```
+
+
 
 ### Curriculum Learning
 
@@ -310,17 +344,22 @@ builder.export_to_jsonl("training_corpus.jsonl")
 from training_corpus import create_baseline_curriculum, create_safe_gate_schedule
 
 curriculum = create_baseline_curriculum()
+
 # [
 #   {"phase": 1, "glyphs": ["Grounded Joy"], "gates": {"uncanny_ok": False, ...}},
 #   {"phase": 2, "glyphs": ["Grounded Joy", "Subtle Ache"], "gates": {...}},
 #   ...
+
 # ]
 
 gate_schedule = create_safe_gate_schedule()
+
 # Gradually increase safety_bias as model learns
 
 examples = builder.add_curriculum_progression(curriculum, gate_schedule)
 ```
+
+
 
 ## Workflow: End-to-End Response Generation
 
@@ -335,6 +374,8 @@ gate = GatePolicy(uncanny_ok=False, safety_bias=0.9)
 style = StyleDirective(register="warm", rhythm="slow")
 ```
 
+
+
 ### Step 2: Render Control Prefix
 
 ```python
@@ -343,13 +384,21 @@ from glyph_lm_control import ControlTagRenderer
 prefix = ControlTagRenderer.render_control_prefix(glyphs, gate, style)
 
 # Result:
+
 # <SYS>
+
 # <GLYPH:Grounded Joy,0.80>
+
 # <GLYPH:Subtle Ache,0.30>
+
 # <GATE:uncanny_ok:false,safety_bias:0.90,directness:0.50>
+
 # <STYLE:register:warm,rhythm:slow,metaphor_density:0.50>
+
 # </SYS>
 ```
+
+
 
 ### Step 3: Send to Local LLM
 
@@ -366,6 +415,8 @@ full_prompt = f"{prefix}\n\nUser: {user_prompt}\nAssistant:"
 # Generate
 raw_response = adapter.generate(full_prompt, max_tokens=150)
 ```
+
+
 
 ### Step 4: Post-Process for Safety
 
@@ -386,6 +437,8 @@ print(f"Safe: {safe_response}")
 print(f"Issues fixed: {processing_details.safety_violations_fixed}")
 ```
 
+
+
 ### Step 5: Capture Training Data
 
 ```python
@@ -399,6 +452,8 @@ builder.add_from_interaction(
     context="User emotional state: anxious"
 )
 ```
+
+
 
 ## Implementation Guide
 
@@ -414,6 +469,8 @@ local_inference/
 ├── test_phase_3_5.py             # Comprehensive test suite (31 tests)
 └── __init__.py
 ```
+
+
 
 ### Key Classes
 
@@ -441,18 +498,31 @@ cd local_inference
 python -m pytest test_phase_3_5.py -v
 
 # 31 tests covering:
+
 # - Glyph schema and attributes
+
 # - Registry operations
+
 # - Gate enforcement
+
 # - Control tag rendering
+
 # - Recognition risk detection
+
 # - Uncanniness enforcement
+
 # - Rhythm analysis
+
 # - Metaphor density metering
+
 # - Post-processing pipeline
+
 # - Training corpus generation
+
 # - End-to-end integration
 ```
+
+
 
 ## Safety Guarantees
 

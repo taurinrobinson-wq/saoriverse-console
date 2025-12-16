@@ -10,12 +10,12 @@
 - ✅ Hard drive cleaned and optimized
 - ✅ System ready for continuous processing
 - ✅ All changes committed to GitHub
-
----
+##
 
 ## 📊 Current Storage Configuration
 
 ### External Drive Location
+
 ```
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (6.5 MB - 8 poetry collections)
@@ -25,7 +25,10 @@
 Total: 8.0 MB used | 458 GB available
 ```
 
+
+
 ### Hard Drive Location (Code Only)
+
 ```
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py           (210 lines - Gutenberg downloader)
@@ -36,7 +39,8 @@ Total: 8.0 MB used | 458 GB available
 Total: ~8 KB used
 ```
 
----
+
+##
 
 ## 📚 Data Downloaded
 
@@ -54,8 +58,7 @@ Total: ~8 KB used
 | Samuel Taylor Coleridge Complete | 440 KB | (est. 75K) | ✅ |
 
 **Total Downloaded**: ~3.2 MB of classic poetry
-
----
+##
 
 ## 🔧 Technical Implementation
 
@@ -98,39 +101,52 @@ From processing 8 collections:
 - Estimated **2,000-5,000+ new lexicon entries**
 - Keywords learned: "soul", "hope", "immortality", "tender", "feathers", etc.
 - Phrases learned: "thing with feathers", "perches in the soul", etc.
-
----
+##
 
 ## 🚀 Quick Start Guide
 
 ### Monitor Current Processing
+
 ```bash
 tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ```
 
+
+
 ### View Processing Results
+
 ```bash
 cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
 ```
 
+
+
 ### Run More Processing (Option 1 - Shell Script)
+
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ./run_gutenberg_learning.sh
 ```
 
+
+
 ### Run More Processing (Option 2 - Direct Python)
+
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py > "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning_$(date +%s).log" 2>&1 &
 ```
 
+
+
 ### Check External Drive Space
+
 ```bash
 df -h | grep "My Passport"
 ```
 
----
+
+##
 
 ## 📈 Processing Pipeline
 
@@ -155,7 +171,8 @@ Project Gutenberg API
    └─ gutenberg_poetry/ (downloaded collections)
 ```
 
----
+
+##
 
 ## 🔄 Processing Statistics
 
@@ -172,7 +189,8 @@ Quality Score Average: 0.75-0.85 (good)
 Processing Time: ~5-15 minutes total
 ```
 
----
+
+##
 
 ## ✨ Key Features
 
@@ -200,8 +218,7 @@ Processing Time: ~5-15 minutes total
 - All outputs automatically save to external drive
 - No hard drive bloat
 - Fully scalable (458 GB available)
-
----
+##
 
 ## 🎯 Next Steps
 
@@ -231,23 +248,26 @@ Processing Time: ~5-15 minutes total
 2. Quality metric tracking over time
 3. Performance optimization
 4. User feedback integration for refinement
-
----
+##
 
 ## 💡 Advanced Usage
 
 ### Adding Custom Poetry Collections
 
 Edit `gutenberg_fetcher.py` (lines 35-70) to add URLs:
+
 ```python
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
 "milton_paradise_lost": "https://www.gutenberg.org/ebooks/26",
 "byron_complete": "https://www.gutenberg.org/ebooks/3440",
 ```
 
+
+
 ### Processing Custom Text Files
 
 Use the bulk processor directly:
+
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 venv/bin/python -c "
@@ -257,14 +277,18 @@ results = processor.process()
 "
 ```
 
+
+
 ### Monitoring Real-Time Output
 
 Watch the log while processing runs:
+
 ```bash
 watch -n 2 'tail -20 "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"'
 ```
 
----
+
+##
 
 ## 🛡️ Storage Management
 
@@ -279,15 +303,19 @@ watch -n 2 'tail -20 "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_lea
 - Unlimited: Plenty of space available
 
 ### Cleanup (if needed)
+
 ```bash
+
 # Remove old poetry files only
 rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 
 # Keep the processing results and lexicon updates
+
 # Then re-download when ready
 ```
 
----
+
+##
 
 ## 📋 Files Reference
 
@@ -308,21 +336,23 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 - `/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/` - Downloaded collections
 - `/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log` - Processing log
 - `/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json` - Statistics
-
----
+##
 
 ## 🐛 Troubleshooting
 
 ### Command not recognized
 **Issue**: "command not found: /Volumes/My Passport for Mac..."
 **Solution**: Use quotes around paths with spaces
+
 ```bash
 tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ```
 
+
+
 ### External drive not visible
 **Issue**: "Cannot access /Volumes/My Passport for Mac"
-**Solution**: 
+**Solution**:
 1. Check connection: `df -h | grep "My Passport"`
 2. Reconnect USB if needed
 3. Mount manually if necessary
@@ -330,19 +360,25 @@ tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ### Permission denied
 **Issue**: "Permission denied" when running script
 **Solution**: Add execute permission
+
 ```bash
 chmod +x /Users/taurinrobinson/saoriverse-console/run_gutenberg_learning.sh
 ```
 
+
+
 ### Disk full (shouldn't happen, but...)
 **Issue**: "No space left on device"
 **Solution**: Check available space
+
 ```bash
 df -h "/Volumes/My Passport for Mac"
+
 # Should show 458 GB available
 ```
 
----
+
+##
 
 ## 📞 Support
 
@@ -351,14 +387,12 @@ For issues or questions:
 2. Review processing log for error messages
 3. Verify external drive is mounted and has space
 4. Check Python environment activation
+##
 
----
-
-**Last Updated**: November 3, 2025  
-**Status**: 🟢 Production Ready  
+**Last Updated**: November 3, 2025
+**Status**: 🟢 Production Ready
 **Version**: 1.0 - Complete Implementation
-
----
+##
 
 **Next Time You Want To**:
 - **Download more poetry**: Run `./run_gutenberg_learning.sh`

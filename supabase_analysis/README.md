@@ -11,6 +11,8 @@ supabase_analysis/
 └── README.md        # This file
 ```
 
+
+
 ## How to Export Your Tables
 
 ### Option 1: Export via Supabase Dashboard (Recommended)
@@ -28,13 +30,13 @@ supabase_analysis/
 2. Run this query for each table:
 
    ```sql
-   SELECT 
+   SELECT
      column_name,
      data_type,
      is_nullable,
      column_default
    FROM information_schema.columns
-   WHERE table_schema = 'public' 
+   WHERE table_schema = 'public'
      AND table_name = 'your_table_name'
    ORDER BY ordinal_position;
    ```
@@ -47,7 +49,7 @@ Run this in Supabase SQL Editor:
 
 ```sql
 -- Get all table structures
-SELECT 
+SELECT
   table_name,
   column_name,
   data_type,
@@ -59,6 +61,8 @@ WHERE table_schema = 'public'
 ORDER BY table_name, ordinal_position;
 ```
 
+
+
 Save result to: `supabase_analysis/schemas/complete_schema.csv`
 
 ### Option 3: Quick Table List
@@ -66,11 +70,13 @@ Save result to: `supabase_analysis/schemas/complete_schema.csv`
 Get a list of all your tables:
 
 ```sql
-SELECT tablename 
-FROM pg_tables 
+SELECT tablename
+FROM pg_tables
 WHERE schemaname = 'public'
 ORDER BY tablename;
 ```
+
+
 
 ## What to Export
 

@@ -5,14 +5,14 @@
 The conversation memory layer transforms the system from responding to isolated messages into building a coherent, evolving understanding of the user's emotional state across multiple messages.
 
 **Key Principle**: Information adds up. Each message contributes new data that enriches rather than replaces prior understanding.
-
----
+##
 
 ## Information Extraction & Integration
 
 ### Turn 1: "I'm feeling so stressed today"
 
 **What we extract:**
+
 ```
 actor: I
 primary_affects: [stress]
@@ -21,6 +21,8 @@ emphasis: so (high intensity)
 temporal_scope: today
 glyph: Still Insight
 ```
+
+
 
 **What we know:**
 - ✓ Emotional state: STRESS
@@ -32,6 +34,7 @@ glyph: Still Insight
 **Confidence: 0.7** (high on emotion, unknown on cause)
 
 **Memory stores:**
+
 ```json
 {
   "primary_affects": ["stress"],
@@ -46,11 +49,13 @@ glyph: Still Insight
 }
 ```
 
----
+
+##
 
 ### Turn 2: "I don't I just feel like I have so much on my mind at work that I can't even make one step forward."
 
 **What this message adds:**
+
 ```
 domain: work (PRIMARY STRESSOR)
 primary_affects: [cognitive_overload] <- NEW AFFECT
@@ -60,13 +65,18 @@ action_capacity: paralyzed <- CRITICAL: unable to move forward
 temporal_scope: ongoing (not just today!)
 ```
 
+
+
 **The causal chain emerges:**
+
 ```
-Work demands 
+Work demands
   → too much on mind (cognitive flooding)
   → cannot prioritize (fragmentation)
   → cannot take action (paralysis)
 ```
+
+
 
 **What memory learns:**
 - Root trigger: WORK
@@ -82,6 +92,7 @@ Work demands
 - Turn 2: Add Fragmentation (unable to integrate thoughts)
 
 **Memory now stores:**
+
 ```json
 {
   "primary_affects": ["stress", "cognitive_overload"],
@@ -105,11 +116,13 @@ Work demands
 }
 ```
 
----
+
+##
 
 ### Turn 3: "There are like 5 projects due this week - the client presentation is Thursday and I haven't even started the deck yet."
 
 **What this message adds:**
+
 ```
 specificity: 5 projects (QUANTIFIED)
 priority: client presentation (TIME-CRITICAL: Thursday)
@@ -118,7 +131,10 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
 temporal: this week (VERY NEAR-TERM)
 ```
 
+
+
 **The picture completes:**
+
 ```
 5 competing projects (cognitive overload source)
   → Client deck is due Thursday (most urgent)
@@ -127,6 +143,8 @@ temporal: this week (VERY NEAR-TERM)
   → Cannot make one step forward
 ```
 
+
+
 **Confidence: 0.95** (specificity provided, clear picture)
 
 **Glyph evolution:**
@@ -134,6 +152,7 @@ temporal: this week (VERY NEAR-TERM)
 - Add: The Threshold (decision point where action must be taken)
 
 **Memory final state:**
+
 ```json
 {
   "primary_affects": ["stress", "cognitive_overload", "pressure", "urgency"],
@@ -162,41 +181,48 @@ temporal: this week (VERY NEAR-TERM)
 }
 ```
 
----
+
+##
 
 ## How Memory Informs Response Generation
 
 ### Response Quality Progression
 
 **WITHOUT Memory (isolated message handling):**
+
 ```
 Turn 1: "I'm stressed"
         Response: "What's causing that stress?"
-Turn 2: "Too much on my mind"  
+Turn 2: "Too much on my mind"
         Response: "That sounds overwhelming. What's the main thing?"
 Turn 3: "5 projects, Thursday deadline"
         Response: "Have you prioritized them?"
         Problem: Redundant questions, no context carried forward
 ```
 
+
+
 **WITH Memory (contextual understanding):**
+
 ```
 Turn 1: "I'm stressed"
         Response: "I hear you're feeling stress today."
         Memory: Confidence 0.7, needs causation
 
 Turn 2: "Too much on my mind at work"
-        Response: "I hear you - work has flooded your mind with so many 
+        Response: "I hear you - work has flooded your mind with so many
                   competing demands that even one step forward feels impossible.
                   What you're describing contains insight that needs organizing."
         Memory: Confidence 0.85, mechanism revealed, glyph set enriched
-        
+
 Turn 3: "5 projects, Thursday deadline"
-        Response: "I hear you - work has flooded your mind with so many 
+        Response: "I hear you - work has flooded your mind with so many
                   competing demands that even one step forward feels impossible.
                   Which of these 5 could potentially wait?"
         Memory: Confidence 0.95, specific action question
 ```
+
+
 
 ### Response Composition from Memory
 
@@ -212,8 +238,7 @@ Turn 3: "5 projects, Thursday deadline"
 - Turn 1 need: "What triggered this?"
 - Turn 2 need: "How many distinct things?"
 - Turn 3 need: "Which could wait?" (action-oriented)
-
----
+##
 
 ## Memory Data Model
 
@@ -249,7 +274,8 @@ class SystemKnowledge:
     assumptions: List[str]  # What we're inferring
 ```
 
----
+
+##
 
 ## Benefits of Memory Layer
 
@@ -277,8 +303,7 @@ class SystemKnowledge:
 - Turn 1: Acknowledgment ("I hear you're stressed")
 - Turn 2: Understanding ("Here's what I understand about WHY")
 - Turn 3: Action-oriented ("What's the one thing we should tackle?")
-
----
+##
 
 ## Implementation in Dynamic Response Composer
 
@@ -291,48 +316,56 @@ class DynamicResponseComposer:
         glyph: Optional[Dict] = None,
     ) -> str:
         """Generate response informed by full conversation context"""
-        
+
         # 1. Get integrated understanding
         integrated_state = conversation_memory.integrated_state
         causal_chain = conversation_memory.causal_understanding
-        
+
         # 2. Build acknowledgment (informed by causal chain)
         if len(turns) == 1:
             acknowledgment = "I hear you're feeling stress today."
         else:
             acknowledgment = "I hear you - work has flooded your mind..."
-        
+
         # 3. Add glyph validation (if multiple glyphs)
         if len(glyph_set) > 1:
             validation = "What you're describing needs organizing."
-        
+
         # 4. Add targeted clarification (from critical needs)
         clarifications = memory.get_next_clarifications()
         clarification = "Which of these could wait?"
-        
+
         # 5. Combine
         return f"{acknowledgment} {validation} {clarification}"
 ```
 
----
+
+##
 
 ## Key Insights from Example Conversation
 
 ### Information Multiplier
+
 ```
 Turn 1: 1 fact (stressed)
 Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinking)
 Turn 3: 5 new facts (5 projects, Thursday, unstarted, competing, client-critical)
 ```
 
+
+
 ### Confidence Progression
+
 ```
-0.7 (isolated emotion) 
+0.7 (isolated emotion)
   → 0.85 (causal mechanism revealed)
   → 0.95 (specific context provided)
 ```
 
+
+
 ### Glyph Enrichment
+
 ```
 Still Insight (stress is emerging/becoming clear)
   → Add Quiet Revelation (thoughts arriving without organization)
@@ -340,14 +373,18 @@ Still Insight (stress is emerging/becoming clear)
   → Add The Threshold (decision point, action required)
 ```
 
+
+
 ### Response Quality Jump
+
 ```
 "I hear you're stressed."
   → "Work has flooded your mind with competing demands."
   → "Which of these 5 could we push back?"
 ```
 
----
+
+##
 
 ## Use Cases
 
@@ -366,8 +403,7 @@ System helps break problem into manageable pieces.
 ### 4. Validation and affirmation
 System demonstrates understanding grew.
 User feels truly heard, not just acknowledged.
-
----
+##
 
 ## Future Extensions
 

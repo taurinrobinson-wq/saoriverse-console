@@ -12,5 +12,5 @@
 - “Your blade trembles. The mist thickens, obscuring your vision.”
 
 ## Group Dynamics
-- Solo phrasing: “You steady yourself.”  
-- Group phrasing: “Together, your resolve strengthens. The mist bends to your collective will.”  
+- Solo phrasing: “You steady yourself.”
+- Group phrasing: “Together, your resolve strengthens. The mist bends to your collective will.”

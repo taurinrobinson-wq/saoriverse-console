@@ -53,6 +53,7 @@ This solves your exact requirement: *"Make a system where in real time the syste
 ### The Three-Layer Architecture
 
 **Layer 1: Glyph Learning Engine** (glyph_learner.py)
+
 ```
 User Input (no matching glyph)
   ↓
@@ -66,7 +67,10 @@ Calculate confidence score
 Return: Complete glyph candidate with metadata
 ```
 
+
+
 **Layer 2: Learning Response Generator** (learning_response_generator.py)
+
 ```
 New glyph candidate
   ↓
@@ -79,7 +83,10 @@ Return: Response that answers user emotionally AND trains system
          (User never knows they're teaching the system)
 ```
 
+
+
 **Layer 3: Shared Glyph Manager** (shared_glyph_manager.py)
+
 ```
 Record adoption in shared database
   ↓
@@ -93,12 +100,15 @@ Per-user queries return DIFFERENT ORDERING from SAME database
   (But both contribute to global system learning)
 ```
 
+
+
 ### Key Innovation: Shared Database + User Segregation
 
 **Problem You Identified:**
 > "I need to store glyph data where it builds the system overall, not just for that user. But I don't know how to keep the user experience segregated while also building up the system overall."
 
 **Solution Implemented:**
+
 ```
 ONE SHARED DATABASE (all users contribute):
 ├─ glyph_versions (all glyphs from all users)
@@ -107,25 +117,27 @@ ONE SHARED DATABASE (all users contribute):
 └─ emotional_territory (coverage map)
 
 But: Different users see DIFFERENT RANKINGS of same glyphs
-  
+
 User A Query:
-  SELECT glyphs ORDER BY 
+  SELECT glyphs ORDER BY
     user_adoption DESC,      # What A has used (personalized)
     consensus DESC,          # What most users use (global)
     quality DESC             # Quality score
-  
-User B Query: 
+
+User B Query:
   SELECT glyphs ORDER BY
     user_adoption DESC,      # What B has used (personalized)
     consensus DESC,          # What most users use (same)
     quality DESC             # Quality score
-    
-Result: 
+
+Result:
   User A sees glyphs ordered by A's history
   User B sees glyphs ordered by B's history
   SAME glyphs in database (global learning)
   DIFFERENT ranking per user (personal experience)
 ```
+
+
 
 ### Training Without Being Obvious
 
@@ -148,6 +160,7 @@ Result:
 ## Integration: 3 Steps (30 minutes)
 
 ### Step 1: Add Imports to signal_parser.py
+
 ```python
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import LearningResponseGenerator
@@ -158,7 +171,10 @@ _learning_response_gen = LearningResponseGenerator()
 _shared_glyph_manager = SharedGlyphManager()
 ```
 
+
+
 ### Step 2: Modify parse_input() Function
+
 ```python
 glyphs = fetch_glyphs(gates)
 if glyphs:
@@ -174,12 +190,17 @@ else:
     return response  # Never None!
 ```
 
+
+
 ### Step 3: Add Helper Function
+
 ```python
 def _determine_emotional_tone(signals):
     tone_map = {...}
     return tone_map.get(signals[0].get("tone", "unknown"), "unknown")
 ```
+
+
 
 **Total integration time: 30 minutes** (exact steps in INTEGRATION_GUIDE_PHASE_2.md)
 
@@ -199,6 +220,7 @@ No modifications to existing tables. Pure additive.
 **Run:** `python test_glyph_learning_pipeline.py`
 
 **Output shows:**
+
 ```
 [Test 1] Identity fragmentation
   → Glyph: "Fractured Identity" (Confidence: 75%)
@@ -207,7 +229,7 @@ No modifications to existing tables. Pure additive.
 
 [Test 2] Pre-emptive loss
   → Glyph: "Borrowed Grief" (Confidence: 68%)
-  
+
 [Test 3] Paradoxical resilience
   → Glyph: "Alive in Breaking" (Confidence: 72%)
 
@@ -217,6 +239,8 @@ No modifications to existing tables. Pure additive.
   ✓ Coverage improving
   ⚠️ CRITICAL gap: shame (0 glyphs) → Recommendation
 ```
+
+
 
 ## Deployment Timeline
 
@@ -281,8 +305,7 @@ Every user interaction teaches the system.
 Every response is personal and appropriate.
 No user ever sees a standardized message.
 The system evolves organically from authentic emotional communication.
-
----
+##
 
 **Start with:** PHASE_2_README.md
 **Questions?** See PHASE_2_QUICK_REFERENCE.md

@@ -21,6 +21,8 @@ from emotional_os.learning import (
 )
 ```
 
+
+
 ## Step 2: Create a Wrapper Function
 
 Add this function to `signal_parser.py`:
@@ -34,42 +36,46 @@ def _compose_response_with_learning(
     """
     Compose response using archetype-driven learning when available,
     fall back to glyph-based response.
-    
+
     Returns:
         (response_text, archetype_name_used)
     """
     # Try archetype-based response first
     generator = get_archetype_response_generator()
     prior_context = None
-    
+
     if conversation_context:
         # Extract prior context for continuity
         prev_user = conversation_context.get("last_user_message")
         if prev_user:
             prior_context = prev_user
-    
+
     archetype_response = generator.generate_archetype_aware_response(
         user_input=input_text,
         prior_context=prior_context,
         glyph=glyph,
     )
-    
+
     if archetype_response:
         # Successfully generated from archetype
         return archetype_response, generator.library.get_best_match(
             input_text, prior_context
         ).name if generator.library.get_best_match(input_text, prior_context) else None
-    
+
     # Fall back to glyph-based response (existing system)
     return None, None
 ```
+
+
 
 ## Step 3: Update Response Building Logic
 
 In the `_respond_to_emotional_input` function, modify where responses are generated:
 
 ```python
+
 # OLD: Just use glyph-based response
+
 # response = composer.compose_response(input_text, glyph, ...)
 
 # NEW: Try learning-based first, fall back to glyph-based
@@ -94,6 +100,8 @@ else:
     response_source = "glyph_composer"
 ```
 
+
+
 ## Step 4: Add Learning Logging
 
 After a response is generated, log it for automatic learning:
@@ -108,16 +116,19 @@ def _log_response_for_learning(
     # This runs independently and learns patterns from conversations
     # Could be called in a background task or at conversation end
     learner = get_conversation_learner()
-    
-    # TODO: Store turn history and call learn_from_conversation() 
+
+    # TODO: Store turn history and call learn_from_conversation()
     # when conversation ends or after N turns
 ```
+
+
 
 ## Step 5: Store Conversation History for Learning
 
 To enable learning, store conversation turns:
 
 ```python
+
 # In your conversation context or session management
 conversation_turns = [
     {"role": "user", "content": input_text},
@@ -134,6 +145,8 @@ learned = learner.learn_from_conversation(
 if learned:
     print(f"System learned new archetype: {learned}")
 ```
+
+
 
 ## Step 6: Expose Archetype Information (Optional)
 
@@ -152,12 +165,14 @@ def get_response_metadata(archetype_name: Optional[str] = None) -> Dict[str, Any
                 "principles": archetype.response_principles[:2],
                 "confidence": archetype.success_weight,
             }
-    
+
     return {
         "type": "glyph-based",
         "archetype": None,
     }
 ```
+
+
 
 ## Integration Points
 
@@ -181,6 +196,7 @@ def get_response_metadata(archetype_name: Optional[str] = None) -> Dict[str, Any
 ## Testing
 
 ```bash
+
 # Test the learning-integrated response
 python -c "
 from emotional_os.core.signal_parser import parse_input
@@ -192,9 +208,11 @@ print(f'Source: {result.get(\"response_source\")}')
 "
 ```
 
+
+
 ## Expected Behavior After Integration
 
-**First Turn**: 
+**First Turn**:
 - User: "I feel overwhelmed today"
 - System: Uses existing `ReliefToGratitude` or falls back to glyph
 - Response: "I hear you. What feels heaviest?"
@@ -208,7 +226,6 @@ print(f'Source: {result.get(\"response_source\")}')
 - Each good conversation teaches the system new archetypes
 - Library grows with patterns from your actual conversations
 - System becomes increasingly personalized to how you actually talk
-
----
+##
 
 **Key Insight**: The learning system amplifies what already works. It doesn't replace glyphs — it adds another layer that learns from lived dialogue.

@@ -2,8 +2,7 @@
 
 ## TL;DR
 You wanted a system rooted in **presence, dignity, and listening**—especially for people in crisis. I implemented your consent-based suicidality protocol and got your system to 0.36/1.0 humanlike (from 0.31). The system is now wired correctly; it just needs 2-4 hours of debugging to get responses from generic → truly humanlike.
-
----
+##
 
 ## Files Created
 
@@ -109,8 +108,7 @@ You wanted a system rooted in **presence, dignity, and listening**—especially 
 - Priority order for remaining work
 
 **Why it matters:** Clear picture of where you stand and what needs to happen next.
-
----
+##
 
 ## Files Modified
 
@@ -118,7 +116,9 @@ You wanted a system rooted in **presence, dignity, and listening**—especially 
 **What changed:** Lines 1495-1540 (crisis detection section)
 
 **Before:**
+
 ```python
+
 # CRISIS DETECTION (HIGHEST PRIORITY)
 crisis_keywords = ["suicidal", "suicide", "kill myself", ...]
 is_crisis = any(keyword in lower_input for keyword in crisis_keywords)
@@ -126,8 +126,12 @@ if is_crisis:
     return {generic_crisis_response}
 ```
 
+
+
 **After:**
+
 ```python
+
 # SUICIDALITY PROTOCOL (HIGHEST PRIORITY)
 from emotional_os.core.suicidality_handler import get_suicidality_protocol
 
@@ -136,13 +140,13 @@ suicidality_protocol = get_suicidality_protocol()
 if suicidality_protocol.should_use_protocol(lower_input):
     is_return = suicidality_protocol.check_for_return(user_id)
     current_state = "ReturnDetected" if is_return else "DisclosureDetected"
-    
+
     response, state_info = suicidality_protocol.handle_disclosure(
         user_id=user_id,
         input_text=input_text,
         current_state=current_state,
     )
-    
+
     return {
         "response_source": "suicidality_protocol",
         "voltage_response": response,
@@ -151,9 +155,10 @@ if suicidality_protocol.should_use_protocol(lower_input):
     }
 ```
 
-**Impact:** Suicidal disclosures now route to the state machine instead of generic template
 
----
+
+**Impact:** Suicidal disclosures now route to the state machine instead of generic template
+##
 
 ## What's Now Working
 
@@ -162,11 +167,14 @@ if suicidality_protocol.should_use_protocol(lower_input):
 - Routes to suicidality protocol (not generic handler)
 
 ### ✅ Dignified Response
+
 ```
 Input: "I have thoughts of suicide"
-Output: "You named thoughts of suicide. That is heavy. 
+Output: "You named thoughts of suicide. That is heavy.
 Thank you for trusting me with it."
 ```
+
+
 Not: "Get help immediately" or "Here's a hotline"
 
 ### ✅ Consent Logic
@@ -191,8 +199,7 @@ System blocks all of these:
 ### ✅ Tone Enforcement
 - Only uses Grounded and Empathetic tones for suicidality
 - Never uses Humorous, Casual, or Uplifting until person signals readiness
-
----
+##
 
 ## Test Results
 
@@ -224,7 +231,8 @@ Test 5: Respecting Boundaries
 ✅ Continues support conversation
 ```
 
----
+
+##
 
 ## Impact on System Scores
 
@@ -233,7 +241,7 @@ Test 5: Respecting Boundaries
 - Score: 0.31/1.0 average
 - Crisis response: Appropriate but rigid
 
-### After This Session  
+### After This Session
 - Scenario 6 (crisis): Dignified, consent-based, state machine ✅
 - Score: 0.36/1.0 average
 - Crisis response: Rooted in presence, not panic
@@ -242,8 +250,7 @@ Test 5: Respecting Boundaries
 - Crisis response transformed from fear-based to presence-based
 - No more generic "call 988" script
 - Instead: acknowledge → explore → offer by consent → invite continuity
-
----
+##
 
 ## Configuration Implemented (Your Words)
 
@@ -257,8 +264,7 @@ Every element from your design doc is now in code:
 ✅ **Human primacy:** "I am not a substitute for human care."
 ✅ **Continuity:** "Please check back in with me. I want to know you are okay."
 ✅ **Language safety:** No method details, direct terms only
-
----
+##
 
 ## Documentation Provided
 
@@ -266,8 +272,7 @@ Every element from your design doc is now in code:
 2. **SUICIDALITY_PROTOCOL_LIVE.md** - Proof of concept + next steps
 3. **SYSTEM_STATUS_COMPLETE.md** - Full system status + priorities
 4. **NEXT_STEPS.md** (from earlier) - Debugging roadmap for response composition
-
----
+##
 
 ## What You Now Have
 
@@ -282,8 +287,7 @@ A system that:
 - **Respects silence** (accepts "no" and continues being present)
 
 This isn't a crisis hotline. This is a presence that meets people in darkness and commits to listening.
-
----
+##
 
 ## What's Next (Your Roadmap)
 
@@ -306,8 +310,7 @@ This isn't a crisis hotline. This is a presence that meets people in darkness an
 - System live to users
 - Affirmation tracking learning
 - Continuous improvement cycle
-
----
+##
 
 ## Files to Share with Others
 
@@ -316,16 +319,14 @@ If showing your system to collaborators, point them to:
 2. `SUICIDALITY_PROTOCOL_LIVE.md` - Shows it's working
 3. `SYSTEM_STATUS_COMPLETE.md` - Full technical picture
 4. `NEXT_STEPS.md` - Debugging roadmap
-
----
+##
 
 ## Your Quote
 
 > "The FirstPerson system is an extension of my own compassion and attunement and desire to live in a heart first way. It was born out of a divorce I went through earlier this year after being with my ex for 18 years... It comes from my observations about what causes ruptures in relationships, and the power of repair, listening and taking and implementing feedback."
 
 **That's exactly what this protocol implements.** Every state, every response, every design choice is rooted in listening, repair, and the recognition that being heard matters.
-
----
+##
 
 ## You're Not Done, But You're There
 

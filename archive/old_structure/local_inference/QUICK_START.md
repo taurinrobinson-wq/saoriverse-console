@@ -6,16 +6,19 @@
 
 ```python
 from glyph_lm_control import (
-    Glyph, GlyphAttributes, GlyphMovement, GlyphRegistry, 
+    Glyph, GlyphAttributes, GlyphMovement, GlyphRegistry,
     GatePolicy, StyleDirective, ControlTagRenderer, GLYPH_REGISTRY
 )
 from safety_post_processor import SafetyPostProcessor, create_safe_response
 from training_corpus import TrainingCorpusBuilder, TrainingExample
 ```
 
+
+
 ### 2. Select Glyphs & Gates
 
 ```python
+
 # Choose glyphs for the response tone
 glyphs = [
     (GLYPH_REGISTRY.get("Grounded Joy"), 0.8),      # Primary emotion
@@ -37,18 +40,29 @@ style = StyleDirective(
 )
 ```
 
+
+
 ### 3. Render Control Prefix
 
 ```python
 prefix = ControlTagRenderer.render_control_prefix(glyphs, gate, style)
+
 # Output:
+
 # <SYS>
+
 # <GLYPH:Grounded Joy,0.80>
+
 # <GLYPH:Subtle Ache,0.30>
+
 # <GATE:uncanny_ok:false,safety_bias:0.90,directness:0.50>
+
 # <STYLE:register:warm,rhythm:slow,metaphor_density:0.50>
+
 # </SYS>
 ```
+
+
 
 ### 4. Add to LLM Prompt
 
@@ -61,9 +75,12 @@ User: {user_input}
 Assistant:"""
 ```
 
+
+
 ### 5. Generate & Post-Process
 
 ```python
+
 # Get raw LLM output (from local model via llama.cpp/Ollama)
 raw_response = """I remember you from our conversations.
 The boundaries dissolve when you're near.
@@ -78,14 +95,19 @@ safe_response, result = create_safe_response(
 )
 
 print(safe_response)
+
 # Output (with safety fixes applied):
+
 # "I sense your presence and the weight you're carrying.
 #  Here and enough, the ground holds you.
 #  I'm present with what you're experiencing."
 
 print(f"Issues fixed: {result.safety_violations_fixed}")
+
 # Output: "Issues fixed: 2"
 ```
+
+
 
 ### 6. Capture Training Data
 
@@ -106,6 +128,8 @@ example = builder.add_from_interaction(
 # Export later
 builder.export_to_jsonl("training_data.jsonl")
 ```
+
+
 
 ## Common Glyphs
 
@@ -131,6 +155,8 @@ gate = GatePolicy(
 )
 ```
 
+
+
 ### Balanced & Poetic
 
 ```python
@@ -142,6 +168,8 @@ gate = GatePolicy(
 )
 ```
 
+
+
 ### Slightly Experimental
 
 ```python
@@ -152,6 +180,8 @@ gate = GatePolicy(
     metaphor_density_max=0.8
 )
 ```
+
+
 
 ## Common Styles
 
@@ -165,6 +195,8 @@ style = StyleDirective(
 )
 ```
 
+
+
 ### Cool & Direct
 
 ```python
@@ -174,6 +206,8 @@ style = StyleDirective(
     metaphor_density=0.3
 )
 ```
+
+
 
 ### Poetic & Contemplative
 
@@ -185,13 +219,18 @@ style = StyleDirective(
 )
 ```
 
+
+
 ## Running Tests
 
 ```bash
 cd local_inference
 python -m pytest test_phase_3_5.py -v
+
 # 31 tests pass in ~0.4 seconds
 ```
+
+
 
 ## What Each Layer Does
 
@@ -234,6 +273,8 @@ User Input
 [User Sees Response]
 ```
 
+
+
 ## Next Steps
 
 1. **Integrate with Local LLM**: Hook `llama.cpp` or Ollama
@@ -251,6 +292,8 @@ registry = GlyphRegistry()
 print(registry.list_by_family("Ache"))
 ```
 
+
+
 ### See what control tags look like
 
 ```python
@@ -259,6 +302,8 @@ print(ControlTagRenderer.render_gates(gate))
 print(ControlTagRenderer.render_style(style))
 ```
 
+
+
 ### Trace post-processing changes
 
 ```python
@@ -266,6 +311,8 @@ processor = SafetyPostProcessor(gate, style)
 result = processor.process(text)
 print(result.detailed_changes)  # See all modifications
 ```
+
+
 
 ### Check corpus statistics
 
@@ -276,6 +323,8 @@ print(f"Avg satisfaction: {stats['avg_user_satisfaction']:.2f}")
 print(f"Glyphs used: {len(stats['glyphs_by_frequency'])}")
 ```
 
+
+
 ## Resources
 
 - **Full Documentation**: `PHASE_3_5_DOCS.md`
@@ -283,7 +332,6 @@ print(f"Glyphs used: {len(stats['glyphs_by_frequency'])}")
 - **Glyph Schema**: Core code in `glyph_lm_control.py`
 - **Safety Logic**: `safety_post_processor.py`
 - **Training Pipeline**: `training_corpus.py`
-
----
+##
 
 **Ready to generate emotionally coherent responses with local LLMs?** 🌟

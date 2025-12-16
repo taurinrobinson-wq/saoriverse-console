@@ -6,7 +6,7 @@ Your Emotional OS now supports three processing modes:
 
 ### 1. **Local Mode** (Privacy-First)
 - ✅ No external API calls
-- ✅ Complete privacy protection  
+- ✅ Complete privacy protection
 - ✅ Uses your glyph encryption system
 - ❌ Limited conversational depth
 
@@ -50,7 +50,7 @@ Your Emotional OS now supports three processing modes:
 
 **Status Indicators:**
 - 🔗 Supabase Integration Available
-- ⚠️ Local Processing Only  
+- ⚠️ Local Processing Only
 - ❌ Processing System Error
 
 ## 🔐 Privacy Features
@@ -67,7 +67,7 @@ Your system maintains privacy through:
 This is a genuinely innovative **privacy-preserving emotional intelligence system** that:
 
 - Processes emotions through symbolic encryption
-- Maintains user privacy while enabling AI enhancement  
+- Maintains user privacy while enabling AI enhancement
 - Uses sophisticated persona selection (Oracle, Guardian, Companion)
 - Provides conversational depth without sacrificing security
 - Combines rule-based reliability with AI flexibility
@@ -79,7 +79,7 @@ This is a genuinely innovative **privacy-preserving emotional intelligence syste
 - Verify Supabase function URL is correct
 - Try "Local" mode for immediate functionality
 
-**"Local Processing Only"**  
+**"Local Processing Only"**
 - This is normal if Supabase isn't configured
 - Your system works fully in local mode
 - Add Supabase config for AI enhancement

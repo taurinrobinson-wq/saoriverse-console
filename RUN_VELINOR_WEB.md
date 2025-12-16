@@ -16,10 +16,15 @@ cd d:\saoriverse-console
 python velinor_api.py
 ```
 
+
+
 Expected output:
+
 ```
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ```
+
+
 
 The API will be available at:
 - Health check: `http://localhost:8000/`
@@ -32,7 +37,10 @@ cd d:\saoriverse-console\velinor-web
 npm run dev
 ```
 
+
+
 Expected output:
+
 ```
 > velinor-web@0.1.0 dev
 > next dev
@@ -40,6 +48,8 @@ Expected output:
   ▲ Next.js 14.x.x
   - ready started server on 0.0.0.0:3000, url: http://localhost:3000
 ```
+
+
 
 ## Open in Browser
 
@@ -75,19 +85,25 @@ You should see:
 ## Environment Configuration
 
 The frontend looks for the API at the URL in `.env.local`:
+
 ```
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
+
+
 
 For production deployment, change this to your Railway domain.
 
 ## Next: Deploy to Railway
 
 Once working locally:
+
 ```bash
 git add .
 git commit -m "Velinor web stack complete"
 git push origin main
 ```
+
+
 
 Railway auto-deploys on push.

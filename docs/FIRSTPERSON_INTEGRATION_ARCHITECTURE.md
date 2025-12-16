@@ -87,10 +87,14 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
               └─────────────────────────┘
 ```
 
+
+
 ## Integration Points in Code
 
 ### 1️⃣ App Initialization (`velinor_app.py`)
+
 ```python
+
 # Lines 28-30
 from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
@@ -103,8 +107,12 @@ if 'firstperson_orchestrator' not in st.session_state:
     st.session_state.firstperson_orchestrator.initialize_session()
 ```
 
+
+
 ### 2️⃣ Game Initialization (`start_new_game()`)
+
 ```python
+
 # Lines 568-579
 firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
 if not firstperson_orchestrator:
@@ -119,8 +127,12 @@ orchestrator = VelinorTwineOrchestrator(
 )
 ```
 
+
+
 ### 3️⃣ Player Input Processing (`orchestrator.py`)
+
 ```python
+
 # Lines 177-210
 def _summarize_player_intent(self, player_input, player_id):
     # Analyzes emotional tone, theme, valence, intensity
@@ -129,8 +141,12 @@ def _summarize_player_intent(self, player_input, player_id):
     return analysis
 ```
 
+
+
 ### 4️⃣ NPC Response Generation (`orchestrator.py`)
+
 ```python
+
 # Lines 289-340
 def _generate_emotionally_aware_response(self, npc_name, player_input,
     emotional_tone, theme, valence, intensity, memory, ...):
@@ -141,8 +157,12 @@ def _generate_emotionally_aware_response(self, npc_name, player_input,
     # Returns: Nuanced NPC dialogue
 ```
 
+
+
 ### 5️⃣ State Flow (`process_player_action()`)
+
 ```python
+
 # Lines 140-150
 player_analysis = self._summarize_player_intent(player_input, player_id)
 next_state['player_analysis'] = player_analysis
@@ -155,6 +175,8 @@ if updated_state.get('npc_name'):
         context=updated_state,  # ← Contains player_analysis
     )
 ```
+
+
 
 ## Features Implemented
 
@@ -174,6 +196,7 @@ if updated_state.get('npc_name'):
 ## Data Flow Example: 3-Turn Conversation
 
 ### Turn 1
+
 ```
 Input:    "I feel disconnected from everything"
 Analysis: { tone: 'heavy', theme: 'general', valence: -0.7, intensity: 0.6 }
@@ -182,7 +205,10 @@ NPC:      "I hear the weight in that. What you're naming has weight.
            Tell me more about what feels disconnected."
 ```
 
+
+
 ### Turn 2
+
 ```
 Input:    "It's like I've lost something important"
 Analysis: { tone: 'heavy', theme: 'grief', valence: -0.8, intensity: 0.7 }
@@ -191,7 +217,10 @@ NPC:      "I hear the weight in that. Loss shapes us in ways words
            sometimes can't reach. What needs to be said about it?"
 ```
 
+
+
 ### Turn 3
+
 ```
 Input:    "But maybe there's something I can learn from this"
 Analysis: { tone: 'reflective', theme: 'grief', valence: -0.1, intensity: 0.3 }
@@ -203,6 +232,8 @@ NPC:      "There's something to sit with there. I'm noticing grief
            keeps coming back to you—that tells me something. And I'm
            also noticing a shift in what you're saying. What's helping?"
 ```
+
+
 
 ## Documentation Created
 
@@ -221,6 +252,8 @@ f90cccf - Feat: FirstPerson integration for emotionally-aware NPC responses
 a3de8fe - Docs: Add FirstPerson + Velinor quick reference guide
 5a91073 - Docs: Add FirstPerson integration summary
 ```
+
+
 
 ## Performance Notes
 
@@ -241,6 +274,7 @@ a3de8fe - Docs: Add FirstPerson + Velinor quick reference guide
 ## Ready for Deployment
 
 ```bash
+
 # Local development - Works immediately
 streamlit run velinor_app.py
 
@@ -248,10 +282,15 @@ streamlit run velinor_app.py
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 # Production
+
 # - Push to Streamlit Cloud
+
 # - Or deploy with Docker (Dockerfile included)
+
 # - Or use FastAPI backend from main branch
 ```
+
+
 
 ## What's Next
 
@@ -271,8 +310,7 @@ python3 FIRSTPERSON_INTEGRATION_TEST.py
 - ML model for better theme detection
 - Voice interface for richer emotional analysis
 - Cloud persistence with privacy controls
-
----
+##
 
 ## 🎉 Status: COMPLETE
 

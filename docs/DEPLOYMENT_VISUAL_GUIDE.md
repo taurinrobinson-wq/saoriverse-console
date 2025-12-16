@@ -34,7 +34,8 @@
 └── Data: SQLite (data_local/)
 ```
 
----
+
+##
 
 ## Three Ways to Deploy
 
@@ -48,6 +49,8 @@ chmod +x docker-setup.sh
 ./docker-setup.sh
 ```
 
+
+
 **What it does automatically:**
 1. Installs Docker & Docker Compose
 2. Creates environment file
@@ -55,27 +58,31 @@ chmod +x docker-setup.sh
 4. Starts all services
 5. Verifies everything works
 6. Shows you the URLs
-
----
+##
 
 ### 🟡 Way 2: Guided (10 minutes)
 
 ```bash
+
 # Follow the step-by-step instructions in:
 📖 DIGITALOCEAN_DEPLOYMENT_GUIDE.md (Sections 1-5)
 ```
 
----
+
+##
 
 ### 🔵 Way 3: Manual (15 minutes)
 
 ```bash
+
 # Read detailed instructions:
 🔧 DOCKER_UBUNTU_SETUP.md
+
 # Then manually run each Docker command
 ```
 
----
+
+##
 
 ## After Deployment: Your App Lives Here
 
@@ -86,7 +93,8 @@ chmod +x docker-setup.sh
 🔄 Nginx:       http://161.35.227.49:80 (same as :3000)
 ```
 
----
+
+##
 
 ## Container Architecture
 
@@ -104,12 +112,13 @@ chmod +x docker-setup.sh
     │  src/config.js ────┼──┼─► /api/chat endpoint  │
     │                     │  │  Uses glyphs.db      │
     └─────────────────────┘  └──────────────────────┘
-           
+
     Both services on same Docker network (saoriverse)
     Data persists in volumes: data_local/
 ```
 
----
+
+##
 
 ## What Gets Deployed
 
@@ -120,8 +129,7 @@ chmod +x docker-setup.sh
 | **Proxy** | Nginx | Route traffic |
 | **Database** | SQLite | Store app data |
 | **Network** | Docker Bridge | Internal communication |
-
----
+##
 
 ## The Simplest Checklist
 
@@ -135,13 +143,15 @@ chmod +x docker-setup.sh
 ☐ Done! ✅
 ```
 
----
+
+##
 
 ## Most Important Commands
 
 Once deployed, these are your daily commands:
 
 ```bash
+
 # See what's running
 docker compose ps
 
@@ -158,7 +168,8 @@ docker compose stop
 git pull && docker compose up -d --build
 ```
 
----
+
+##
 
 ## If Anything Goes Wrong
 
@@ -168,7 +179,9 @@ git pull && docker compose up -d --build
 - Check you have network access
 
 ### Problem 2: Setup script fails
+
 ```bash
+
 # Check the error
 docker compose logs
 
@@ -176,8 +189,12 @@ docker compose logs
 ./docker-setup.sh
 ```
 
+
+
 ### Problem 3: Services won't start
+
 ```bash
+
 # See what's wrong
 docker compose logs
 
@@ -187,8 +204,12 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
+
+
 ### Problem 4: Can't access from browser
+
 ```bash
+
 # Test from inside droplet first
 curl http://localhost:3000
 curl http://localhost:8000/health
@@ -198,9 +219,10 @@ curl http://161.35.227.49:3000
 curl http://161.35.227.49:8000/health
 ```
 
-See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
 
----
+
+See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
+##
 
 ## File Guide: "Which File Do I Read?"
 
@@ -211,8 +233,7 @@ See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
 | "I need to install Docker manually" | 🔧 DOCKER_UBUNTU_SETUP.md |
 | "Something broke, help!" | 📖 DIGITALOCEAN_DEPLOYMENT_GUIDE.md → Troubleshooting |
 | "I want to understand the setup" | 📋 DEPLOYMENT_SUMMARY.md |
-
----
+##
 
 ## Technologies Used
 
@@ -237,7 +258,8 @@ Deployment:
 └── DigitalOcean (Ubuntu 22.04 LTS)
 ```
 
----
+
+##
 
 ## Architecture Diagram
 
@@ -270,7 +292,8 @@ Deployment:
 All inside Docker on DigitalOcean (161.35.227.49)
 ```
 
----
+
+##
 
 ## Success Criteria
 
@@ -290,7 +313,8 @@ Frontend:  http://161.35.227.49:3000
 API:       http://161.35.227.49:8000
 ```
 
----
+
+##
 
 ## Next 5 Steps
 
@@ -301,8 +325,7 @@ API:       http://161.35.227.49:8000
 5. **Wait & verify**: `docker compose ps` then visit http://161.35.227.49:3000
 
 **Total time: ~10 minutes**
-
----
+##
 
 ## Key Files Summary
 
@@ -315,7 +338,8 @@ DOCKER COMPOSE:    docker-compose.yml
 DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 ```
 
----
+
+##
 
 ## Quick Links
 
@@ -326,8 +350,7 @@ DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 | Docker Docs | https://docs.docker.com/ |
 | FastAPI Docs | https://fastapi.tiangolo.com/ |
 | Expo Docs | https://expo.dev/ |
-
----
+##
 
 ## Deployment Timeline
 
@@ -340,8 +363,7 @@ DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 | **5** | 1 min | Verify (docker compose ps) |
 | **6** | 1 min | Visit http://161.35.227.49:3000 |
 | **TOTAL** | **~10 min** | **App is live!** |
-
----
+##
 
 ## You're All Set! 🎉
 
@@ -352,16 +374,14 @@ Everything you need is in this repository.
 - **FASTEST**: Run `./docker-setup.sh`
 - **GUIDED**: Read `DOCKER_QUICK_START.md` then deploy
 - **THOROUGH**: Read `DIGITALOCEAN_DEPLOYMENT_GUIDE.md` first
+##
 
----
-
-**Status**: ✅ DEPLOYMENT READY  
-**Date**: December 13, 2025  
-**Target**: 161.35.227.49 (DigitalOcean, Ubuntu)  
-**Time to Deploy**: ~10 minutes  
+**Status**: ✅ DEPLOYMENT READY
+**Date**: December 13, 2025
+**Target**: 161.35.227.49 (DigitalOcean, Ubuntu)
+**Time to Deploy**: ~10 minutes
 **Difficulty**: Easy 🟢
-
----
+##
 
 ### Questions?
 

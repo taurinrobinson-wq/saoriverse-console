@@ -3,8 +3,8 @@
 ## Data Flow Diagram
 
 ```
-USER INPUT FLOW
-===============
+
+# USER INPUT FLOW
 
 Turn 1: "I'm feeling so stressed today"
         |
@@ -32,8 +32,8 @@ Turn 1: "I'm feeling so stressed today"
         |
         v
     USER: "Response acknowledged"
-    
-    
+
+
 Turn 2: "I have so much on my mind at work that I can't take a step"
         |
         v
@@ -70,8 +70,8 @@ Turn 2: "I have so much on my mind at work that I can't take a step"
         |
         v
     USER: "Yes, exactly! 5 projects..."
-    
-    
+
+
 Turn 3: "5 projects due this week, client presentation Thursday, deck not started"
         |
         v
@@ -104,29 +104,29 @@ Turn 3: "5 projects due this week, client presentation Thursday, deck not starte
     SYSTEM UNDERSTANDS COMPLETE PROBLEM
 ```
 
----
+
+##
 
 ## Memory State Evolution
 
 ```
-CONFIDENCE PROGRESSION
-======================
+
+# CONFIDENCE PROGRESSION
 
 Turn 1: emotion stated but reason unknown
         Confidence: 0.7 (70% confident)
         ▓▓▓▓▓▓▓░░░
-        
+
 Turn 2: mechanism revealed (work -> cognitive flooding)
         Confidence: 0.85 (85% confident)
         ▓▓▓▓▓▓▓▓░░
-        
+
 Turn 3: specificity provided (5 projects, Thursday, deck)
         Confidence: 0.95 (95% confident)
         ▓▓▓▓▓▓▓▓▓░
 
 
-GLYPH EVOLUTION
-===============
+# GLYPH EVOLUTION
 
 Turn 1:
     Still Insight
@@ -144,8 +144,7 @@ Turn 3:
     The Threshold  ←─ decision point
 
 
-INFORMATION ACCUMULATION
-=========================
+# INFORMATION ACCUMULATION
 
 Turn 1:
     • emotion: stress
@@ -172,8 +171,7 @@ Turn 3:
     • next action: identify which can wait
 
 
-CAUSAL CHAIN EMERGENCE
-======================
+# CAUSAL CHAIN EMERGENCE
 
 Turn 1:
     Emotion
@@ -202,47 +200,47 @@ Turn 3:
             (cannot make one step forward)
 
 
-RESPONSE QUALITY FLOW
-====================
+# RESPONSE QUALITY FLOW
 
 Without Memory (Isolated):
-    
+
     Turn 1:  "What triggered the stress?"
              (generic question)
-    
+
     Turn 2:  "That sounds overwhelming."
              (acknowledges feeling, asks same question)
-    
+
     Turn 3:  "Have you made a list?"
              (generic solution suggestion)
-    
+
     Problem: Circular, repetitive, non-specific
 
 
 With Memory (Progressive):
-    
+
     Turn 1:  "I hear you're feeling stress today."
              (simple acknowledgment)
-    
+
     Turn 2:  "I hear you - work has flooded your mind with
               competing demands that even one step feels impossible.
               What you're describing needs organizing."
              (mechanism-aware, validates struggle)
-    
+
     Turn 3:  "I hear you - work has flooded your mind...
               Which of these 5 could potentially wait?"
              (specific, action-oriented, informed)
-    
+
     Benefit: Progressive, specific, builds understanding
 ```
 
----
+
+##
 
 ## System Architecture
 
 ```
-CONVERSATION MEMORY LAYER
-==========================
+
+# CONVERSATION MEMORY LAYER
 
                  User Input
                      │
@@ -329,7 +327,8 @@ CONVERSATION MEMORY LAYER
             System Response
 ```
 
----
+
+##
 
 ## Information Integration Logic
 
@@ -351,32 +350,32 @@ INCOMING MESSAGE                MEMORY STATE (before)
         ├─> secondary_affects: [paralysis]
         ├─> domain: [work]
         └─> thought_patterns: [flooding]
-        
+
         v
     MERGE with existing state:
-    
+
         For each new primary affect:
             if not in integrated_state.primary_affects:
                 add it
-        
+
         For each new secondary affect:
             if not in integrated_state.secondary_affects:
                 add it
-        
+
         For each new domain:
             if not in integrated_state.domains:
                 add it
-        
+
         Increase confidence: 0.7 + 0.15 = 0.85
-        
+
         Extract causal information:
             triggers.add(domain)
             if "flooding" in thought_patterns:
                 mechanisms.add("cognitive flooding")
             manifestations.extend(secondary_affects)
-        
+
         v
-        
+
     UPDATED MEMORY STATE
         │
         v
@@ -389,7 +388,7 @@ INCOMING MESSAGE                MEMORY STATE (before)
       thought_patterns: [flooding],
       ...
     }
-    
+
     CausalUnderstanding {
       triggers: [work],
       mechanisms: [cognitive flooding],
@@ -398,7 +397,8 @@ INCOMING MESSAGE                MEMORY STATE (before)
     }
 ```
 
----
+
+##
 
 ## Turn Sequence State Machine
 
@@ -408,10 +408,10 @@ INITIAL STATE (no memory)
         ├─> App starts
         ├─> Create ConversationMemory()
         └─> integrated_state = None
-            
+
                     │
                     v
-                    
+
 TURN 1 (First message)
         │
         ├─> Parse semantic elements
@@ -422,10 +422,10 @@ TURN 1 (First message)
         │           └─> confidence = 0.7
         │
         └─> RESPONSE: Basic acknowledgment
-        
+
                     │
                     v
-                    
+
 TURN 2+ (Subsequent messages)
         │
         ├─> Parse semantic elements
@@ -438,10 +438,10 @@ TURN 2+ (Subsequent messages)
         │       └─> Evolve glyphs
         │
         └─> RESPONSE: Mechanism-aware + targeted
-        
+
                     │
                     v
-                    
+
 TURN 3+ (Later messages)
         │
         ├─> Parse semantic elements
@@ -456,7 +456,8 @@ TURN 3+ (Later messages)
         └─> RESPONSE: Action-oriented + specific
 ```
 
----
+
+##
 
 ## Quality Metrics
 
@@ -472,13 +473,13 @@ Response Quality with Memory
     • Acknowledges emotion
     • Asks reasonable follow-up
     Score: 3.5/5
-    
+
     Turn 2:
     • Acknowledges emotion AND mechanism
     • Demonstrates understanding of WHY
     • Asks more specific follow-up
     Score: 4.5/5
-    
+
     Turn 3:
     • Acknowledges complete situation
     • Demonstrates understanding of WHAT

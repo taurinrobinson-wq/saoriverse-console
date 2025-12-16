@@ -1,5 +1,4 @@
-Configuration
-=============
+# Configuration
 
 This document describes how to configure [actionlint](..) behavior.
 
@@ -21,6 +20,8 @@ actionlint -init-config
 vim .github/actionlint.yaml
 ```
 
+
+
 Currently only one item can be configured.
 
 ```yaml
@@ -30,6 +31,7 @@ self-hosted-runner:
     - linux.2xlarge
     - windows-latest-xl
     - linux-multi-gpu
+
 # Configuration variables in array of strings defined in your repository or organization
 config-variables:
   - DEFAULT_RUNNER
@@ -37,12 +39,13 @@ config-variables:
   - ENVIRONMENT_STAGE
 ```
 
+
+
 - `self-hosted-runner`: Configuration for your self-hosted runner environment
   - `labels`: Label names added to your self-hosted runners as list of string
 - `config-variables`: [Configuration variables][vars]. When an array is set, actionlint will check `vars` properties strictly.
   An empty array means no variable is allowed. The default value `null` disables the check.
-
----
+##
 
 [Checks](checks.md) | [Installation](install.md) | [Usage](usage.md) | [Go API](api.md) | [References](reference.md)
 

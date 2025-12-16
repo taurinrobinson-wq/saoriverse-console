@@ -13,7 +13,7 @@ The heart of the system. This file:
 - Automatically generates new glyphs with sophisticated emotional profiles
 - Creates complete emotional tag entries ready for your database
 
-### 2. `evolving_glyph_integrator.py` 
+### 2. `evolving_glyph_integrator.py`
 Integration wrapper that:
 - Connects the glyph generator to your existing Supabase flow
 - Monitors conversation frequency to trigger evolution checks
@@ -87,6 +87,7 @@ New glyphs are automatically:
 ### Integration Options:
 
 **Option A: Replace Existing Flow**
+
 ```python
 from evolving_glyph_integrator import EvolvingGlyphIntegrator
 
@@ -98,6 +99,8 @@ integrator = EvolvingGlyphIntegrator(
 
 result = integrator.process_conversation_with_evolution(message="user input")
 ```
+
+
 
 **Option B: Parallel Processing**
 Run alongside your existing system, monitoring and evolving in the background.
@@ -161,7 +164,7 @@ This is exactly what you wanted - a system that makes Saori constantly evolve an
 ## 🎯 Next Steps
 
 1. Run `python ascii_glyph_demo.py` to see it in action
-2. Add your Supabase credentials to activate the full system  
+2. Add your Supabase credentials to activate the full system
 3. Integrate with your conversation flow
 4. Watch your emotional OS evolve naturally!
 

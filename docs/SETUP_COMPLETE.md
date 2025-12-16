@@ -37,13 +37,13 @@ Your FirstPerson app is **fully configured and running** with:
 
 ## What's Working
 
-✅ Streamlit UI responsive and fast  
-✅ Voice mode with microphone input  
-✅ Text-to-speech output  
-✅ Demo authentication (no backend needed)  
-✅ Document upload and processing  
-✅ Chat interface  
-✅ All dependencies installed and compatible  
+✅ Streamlit UI responsive and fast
+✅ Voice mode with microphone input
+✅ Text-to-speech output
+✅ Demo authentication (no backend needed)
+✅ Document upload and processing
+✅ Chat interface
+✅ All dependencies installed and compatible
 
 ## Notes on Python 3.13 Setup
 
@@ -81,5 +81,7 @@ To switch to Python 3.11/3.12 (if you need spacy/TTS):
 ```bash
 streamlit run app.py
 ```
+
+
 
 The app will be available at: http://localhost:8502

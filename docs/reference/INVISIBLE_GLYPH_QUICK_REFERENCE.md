@@ -3,13 +3,12 @@
 ## For Users of the System
 They see personalized responses about their specific situation. They never see:
 - Glyph names
-- Glyph descriptions  
+- Glyph descriptions
 - Emotional categories
 - System terminology
 
 **They see:** "I understand your specific struggle with math anxiety and communication mismatch with your boss"
-
----
+##
 
 ## For Developers
 
@@ -43,7 +42,9 @@ They see personalized responses about their specific situation. They never see:
 ### Key Methods
 
 #### `_build_glyph_aware_response(glyph, entities, emotions, ...)`
+
 ```python
+
 # What it does:
 1. Analyzes message content (what they're actually saying)
 2. Validates their specific struggle (not glyph category)
@@ -52,8 +53,12 @@ They see personalized responses about their specific situation. They never see:
 5. Returns response that feels personal, not categorical
 ```
 
+
+
 #### `compose_message_aware_response(message_content, glyph, ...)`
+
 ```python
+
 # What it does:
 1. Checks for message features (math_frustration, inherited_pattern, etc.)
 2. Responds directly to each feature
@@ -61,7 +66,8 @@ They see personalized responses about their specific situation. They never see:
 4. Returns response about their situation, not glyph system
 ```
 
----
+
+##
 
 ## Response Examples
 
@@ -110,13 +116,13 @@ They see personalized responses about their specific situation. They never see:
 ✓ Addresses the relationship (Michelle)
 ✓ Feedback detected and handled
 ✓ All glyph logic invisible
-
----
+##
 
 ## How to Extend This System
 
 ### Adding New Message Features
 In `signal_parser.py`, in message_features dict:
+
 ```python
 message_features = {
     "existing_feature": condition,
@@ -124,14 +130,20 @@ message_features = {
 }
 ```
 
+
+
 Then handle in `compose_message_aware_response()`:
+
 ```python
 if message_content.get("new_feature"):
     parts.append("Your response about this feature...")
 ```
 
+
+
 ### Adding New Glyph Categories
 Update `_glyph_to_emotion_category()` in `dynamic_response_composer.py`:
+
 ```python
 emotion_map = {
     "existing_glyph": "emotion",
@@ -139,17 +151,21 @@ emotion_map = {
 }
 ```
 
+
+
 ### Adding New Poetry Themes
 Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you add emotion types, poetry database will need expansion.
-
----
+##
 
 ## Testing the System
 
 ### Quick Test
+
 ```bash
 python test_glyph_aware_responses.py
 ```
+
+
 
 This runs three messages through the conversation and shows:
 - Glyph matched
@@ -157,6 +173,7 @@ This runs three messages through the conversation and shows:
 - Validates that glyph descriptions do NOT appear in responses
 
 ### Manual Testing
+
 ```python
 from emotional_os.glyphs.signal_parser import parse_input
 
@@ -173,7 +190,8 @@ print(result["best_glyph"]["glyph_name"])
 print(result["voltage_response"])
 ```
 
----
+
+##
 
 ## Performance Notes
 
@@ -181,8 +199,7 @@ print(result["voltage_response"])
 - **Glyph matching**: ~10-20ms database query
 - **Memory**: Minimal (glyph dicts are ~2KB each)
 - **Scalability**: Linear with glyph lexicon size (currently 64 glyphs)
-
----
+##
 
 ## Architecture Decision: Why Invisible?
 
@@ -195,8 +212,7 @@ print(result["voltage_response"])
 - Users with emotional problems don't want categorization, they want understanding
 
 **Principle:** The best system is the one the user doesn't know is there.
-
----
+##
 
 ## Documentation Files
 
@@ -204,8 +220,7 @@ print(result["voltage_response"])
 - **INVISIBLE_GLYPH_TRANSFORMATION.md** - How we transformed from visible to invisible
 - **GLYPH_AWARE_REFACTORING.md** - Original glyph-aware refactoring (for reference)
 - **GLYPH_AWARE_COMPLETE.md** - Initial completion status (for reference)
-
----
+##
 
 ## Next Frontier
 
@@ -217,8 +232,7 @@ Ideas for enhancement:
 5. **Depth progression**: Responses can get deeper as conversation progresses
 
 All while keeping glyphs **completely invisible** to users.
-
----
+##
 
 ## The Philosophy
 

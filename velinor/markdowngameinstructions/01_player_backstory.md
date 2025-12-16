@@ -2,8 +2,7 @@
 
 ## Overview
 The player is a survivor with **partial memory** — grounded enough to function but incomplete enough to seek restoration through glyphs. Their arrival at the city is driven by personal loss, not curiosity.
-
----
+##
 
 ## Player Memory State
 
@@ -18,8 +17,7 @@ The player is a survivor with **partial memory** — grounded enough to function
 - **Corelink Connection**: The depth of their integration or what they lost in the collapse
 - **Personal History**: How they fit into the wider world before fragmentation
 - **Why They Matter**: Their unique role or significance (if any)
-
----
+##
 
 ## Backstory: The Small Town Survivor
 
@@ -41,14 +39,12 @@ The player is a survivor with **partial memory** — grounded enough to function
 - Arrival as an **outsider entering unfamiliar territory**
 - This is their **first exposure** to the rebuilt marketplace structures
 - They are both "one of them" (a survivor) and visibly "not one of them" (new to the city)
-
----
+##
 
 ## Narrative Framing: Opening Monologue
 
 > "You've come from the quiet edges, haven't you? A small town, tucked away from the worst of the collapse. You remember some things — your name, the way barter works, how to keep warm when the wind turns. But the ones who held you… they're gone now. And the city calls, not with answers, but with ache."
-
----
+##
 
 ## Emotional Resonance
 
@@ -64,8 +60,7 @@ The player is a survivor with **partial memory** — grounded enough to function
 3. **Glyph Discovery**: Realizing that memory recovery isn't abstract — it's personal
 4. **Mid-Game Shift**: From "I'm lost" to "I'm recovering"
 5. **End Game**: Finding that their grief and recovery interconnect with others' stories
-
----
+##
 
 ## Design Philosophy
 

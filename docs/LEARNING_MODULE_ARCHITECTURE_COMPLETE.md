@@ -106,6 +106,8 @@
 
 ```
 
+
+
 ## Data Flow: From User Input to System Response
 
 ```
@@ -154,9 +156,12 @@ OPTIONAL: LEARNING (Layer 3)
 
 ```
 
+
+
 ## Current Archetype Library Contents
 
 ### Archetype 1: ReliefToGratitude
+
 ```
 Purpose: Handle transitions from burden to connection
 Entry Cues: relief, gratitude, hug, melted away, wonderful feeling, ...
@@ -179,7 +184,10 @@ Tone:
 Status: ✓ Working, tested
 ```
 
+
+
 ### Archetype 2: OverwhelmToReflection
+
 ```
 Purpose: Navigate work overwhelm to existential meaning-seeking
 Entry Cues: fragile, overwhelmed, drowning, purpose, advocacy, grind, ...
@@ -210,7 +218,10 @@ Tone:
 Status: ✓ Verified with 6-turn dialogue
 ```
 
+
+
 ### Archetype 3: GratitudeToOverwhelm (Auto-Learned)
+
 ```
 Purpose: Transition from mixed emotions to deeper complexity
 Entry Cues: but, hug, heavy, familial_connection, ...
@@ -232,16 +243,22 @@ Tone:
 Status: ✓ Auto-learned, working
 ```
 
+
+
 ## Response Generation Example: Full Flow
 
 ### User Input
+
 ```
-"I feel fragile today, like even small things overwhelm me. 
-Work has been relentless lately—this week alone I've felt 
+"I feel fragile today, like even small things overwhelm me.
+Work has been relentless lately—this week alone I've felt
 pummeled by back-to-back client meetings and impossible deadlines."
 ```
 
+
+
 ### Layer 1: Archetype Matching
+
 ```
 Library.get_best_match(user_input):
   ReliefToGratitude: 0.30   (1 cue match + low success_weight = low)
@@ -249,13 +266,16 @@ Library.get_best_match(user_input):
   OverwhelmToReflection: 0.39 ✓ BEST MATCH
     - Cues matched: "fragile" (1), "overwhelm" (2), "pummeled" (1) = 3 total
     - Score: min(3/16, 1.0) * 0.7 + 1.0 * 0.3 = 0.21 * 0.7 + 0.3 = 0.39
-    
+
   Selected: OverwhelmToReflection archetype
 ```
+
+
 
 ### Layer 2: Response Generation
 
 **Phase 1: Opening**
+
 ```
 Archetype principles: ["Validate overwhelm", "Gentle scaffolding", ...]
 Detect pattern: Overwhelm + pummeled + fragile → OVERWHELM pattern
@@ -265,13 +285,19 @@ Generate opening: "I hear you. Sounds like you're holding a lot right now."
   - Gentle, not prescriptive
 ```
 
+
+
 **Phase 2: Continuity Bridge**
+
 ```
 Prior context: (None - first turn)
 No bridge needed (but would apply if this were turn 3+)
 ```
 
+
+
 **Phase 3: Closing**
+
 ```
 Archetype tone: ["Curious, non-prescriptive", ...]
 Generate closing: "What's one thing about that you want to sit with?"
@@ -280,18 +306,24 @@ Generate closing: "What's one thing about that you want to sit with?"
   - Honors user's process
 ```
 
+
+
 **Assemble Response**
+
 ```
 opening = "I hear you. Sounds like you're holding a lot right now."
 bridge = ""
 closing = "What's one thing about that you want to sit with?"
 
 response = opening + closing
-         = "I hear you. Sounds like you're holding a lot right now. 
+         = "I hear you. Sounds like you're holding a lot right now.
             What's one thing about that you want to sit with?"
 ```
 
+
+
 ### Layer 3: Optional Learning
+
 ```
 If conversation is marked successful:
   ConversationLearner.analyze_conversation(full_dialogue)
@@ -299,16 +331,18 @@ If conversation is marked successful:
     - Extract entry cues
     - Extract response principles
     - Extract bridges and tone
-  
+
   Create new archetype or refine existing
   Add to library for future use
 ```
 
----
+
+##
 
 ## Why This Architecture Works
 
 ### Problem: Template Rotation (OLD)
+
 ```
 OLD SYSTEM:
 - Randomly select: opening + movement + closing
@@ -318,16 +352,21 @@ Example: Response could be "I understand" + "Have you tried..." + "Let me know!"
          Feels disjointed and unnatural
 ```
 
+
+
 ### Solution: Principle-Driven Generation (NEW)
+
 ```
 NEW SYSTEM:
 - Match archetype → Extract principles → Generate response
 - Result: Each response unique but follows learned rules, feels natural
 
-Example: "I hear you. Sounds like you're holding a lot right now. 
+Example: "I hear you. Sounds like you're holding a lot right now.
           What's one thing about that you want to sit with?"
          Feels coherent, contextual, genuinely responsive
 ```
+
+
 
 ### Key Advantages
 1. **Context-Aware**: Matches specific emotional patterns
@@ -336,13 +375,14 @@ Example: "I hear you. Sounds like you're holding a lot right now.
 4. **Expandable**: New archetypes learned from new scenarios
 5. **Adaptive**: Success weights adjust based on outcomes
 6. **Natural**: Responses feel fresh, not templated
-
----
+##
 
 ## Integration Points (Ready for Next Phase)
 
 ### With signal_parser.py
+
 ```python
+
 # In signal_parser.py response generation:
 def generate_response(user_input, prior_context):
     # Try archetype first
@@ -352,30 +392,35 @@ def generate_response(user_input, prior_context):
     )
     if archetype_response:
         return archetype_response  # Use learned principles
-    
+
     # Fallback to glyph system if no archetype match
     return glyph_response
 ```
 
+
+
 ### With Learning Pipeline
+
 ```python
+
 # After successful conversation:
 def log_successful_interaction(dialogue, feedback):
     learner = ConversationLearner()
-    
+
     # Extract patterns
     patterns = learner.analyze_conversation(dialogue)
-    
+
     # Optional: Add new archetype if sufficient patterns
     if should_create_new_archetype(patterns):
         new_archetype = learner.learn_from_conversation(
-            dialogue, 
+            dialogue,
             user_feedback=feedback
         )
         library.add_archetype(new_archetype)
 ```
 
----
+
+##
 
 ## Test Coverage
 
@@ -392,8 +437,7 @@ def log_successful_interaction(dialogue, feedback):
 - [ ] Archetype effectiveness feedback
 - [ ] Success rate monitoring
 - [ ] Adaptive weight refinement
-
----
+##
 
 ## Status: COMPLETE AND VERIFIED ✓
 

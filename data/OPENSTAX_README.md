@@ -15,6 +15,8 @@ git pull origin main
 git checkout feat/openstax-psych-extract || git checkout -b feat/openstax-psych-extract
 ```
 
+
+
 2. Install NLP deps (if needed):
 
 ```bash
@@ -22,17 +24,23 @@ python3 -m pip install requests beautifulsoup4 spacy
 python3 -m spacy download en_core_web_sm
 ```
 
+
+
 3. Re-run extraction (if you want to refresh the outputs):
 
 ```bash
 python3 tools/extract_openstax_psych_vocab.py
 ```
 
+
+
 4. Preview CSV results:
 
 ```bash
 head -n 50 data/openstax_psych_phrases.csv
 ```
+
+
 
 Notes
 

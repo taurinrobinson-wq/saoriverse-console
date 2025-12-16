@@ -5,8 +5,7 @@
 **Tests**: 31/31 passing (382 total with Phases 1-3)
 **Lines of Code**: 1,855 core + 500+ tests
 **Commits**: 95acb8c (main)
-
----
+##
 
 ## What Was Built
 
@@ -26,11 +25,14 @@
 - **ControlTagRenderer**: Converts glyphs to `<GLYPH:name:intensity>` tokens for LLM
 
 **Key Methods**:
+
 ```python
 registry.get_by_family("Ache")                 # Get family members
 registry.filter_by_gate(glyphs, gates)         # Apply safety filters
 renderer.render_control_prefix(glyphs, gates)  # Generate <SYS> prefix
 ```
+
+
 
 ### 2. Safety Post-Processing ✅
 **File**: `local_inference/safety_post_processor.py` (400 lines)
@@ -43,15 +45,20 @@ renderer.render_control_prefix(glyphs, gates)  # Generate <SYS> prefix
 - **SafetyPostProcessor**: Orchestrates all layers
 
 **Output Safety Score**:
+
 ```python
 result = processor.process(response, gates, glyphs)
+
 # Returns: {text, is_safe, modifications, safety_score: 0.0-1.0}
 ```
+
+
 
 ### 3. Training Corpus Pipeline ✅
 **File**: `local_inference/training_corpus.py` (340 lines)
 
 **Schema** (JSONL Format):
+
 ```json
 {
   "id": "ex_001",
@@ -63,6 +70,8 @@ result = processor.process(response, gates, glyphs)
   "lexicon_tags": ["vestibular", "safe-danger"]
 }
 ```
+
+
 
 **CorpusBuilder**:
 - Aggregate up to 5,000 training examples
@@ -93,12 +102,12 @@ result = processor.process(response, gates, glyphs)
 **PHASE_3_5_DOCS.md**: Full API reference
 **examples.py**: Working code examples
 **verify_phase_3_5.sh**: Verification script
-
----
+##
 
 ## Integration with Existing System
 
 ### Phase 3.1 → Phase 3.5
+
 ```
 EmotionalProfileManager detects: tone=GROUNDED, themes=[safety, connection]
          ↓
@@ -113,7 +122,10 @@ Feed to local LLM with LoRA adapter
 Post-process output (remove unsafe phrases, enforce rhythm)
 ```
 
+
+
 ### Phase 2.4 → Phase 3.5
+
 ```
 PreferenceEvolutionTracker shows: user likes [reassurance, grounding] glyphs
          ↓
@@ -122,7 +134,10 @@ CorpusBuilder incorporates this: increases safe glyph frequency in training data
 LoRA adapter learns user's preferred style distribution
 ```
 
+
+
 ### Phase 1 → Phase 3.5
+
 ```
 FrequencyReflector identifies: theme=grounding, secondary_themes=[safety]
          ↓
@@ -131,11 +146,13 @@ GlyphRegistry.match_by_themes() returns: [Grounded Stillness, Safe Connection]
 Gate enforcement ensures appropriate intensity/uncanniness
 ```
 
----
+
+##
 
 ## How to Use
 
 ### Basic Glyph Control
+
 ```python
 from local_inference.glyph_lm_control import GlyphRegistry, ControlTagRenderer, GatePolicy
 
@@ -154,10 +171,14 @@ control_prefix = renderer.render_control_prefix(
     gates={"uncanny_ok": False, "safety_bias": 0.9},
     style={"register": "warm", "rhythm": "mixed"}
 )
+
 # Output: "<SYS><GLYPH:Serene Stillness:0.8> <GATE:uncanny_ok:false> ...</SYS>"
 ```
 
+
+
 ### Safety Post-Processing
+
 ```python
 from local_inference.safety_post_processor import SafetyPostProcessor
 
@@ -169,15 +190,20 @@ result = processor.process(
     gates={"uncanny_ok": False},
     glyphs=glyphs
 )
+
 # Returns: {
 #   "text": "I sense your kindness.",
 #   "is_safe": True,
 #   "modifications": ["Removed recognition phrase"],
 #   "safety_score": 0.95
+
 # }
 ```
 
+
+
 ### Training Corpus Building
+
 ```python
 from local_inference.training_corpus import CorpusBuilder, TrainingExample
 
@@ -202,13 +228,15 @@ print(f"Gate distribution: {stats['gate_distribution']}")
 builder.export_jsonl("training_data.jsonl")
 ```
 
----
+
+##
 
 ## Next Steps: LoRA Fine-Tuning Pipeline (Not Yet Implemented)
 
 To enable local LLM fine-tuning:
 
 ### Setup Environment
+
 ```bash
 conda create -n emoos python=3.10 -y
 conda activate emoos
@@ -216,8 +244,12 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install transformers datasets peft accelerate bitsandbytes
 ```
 
+
+
 ### Download Model
+
 ```bash
+
 # Mistral-7B (recommended)
 huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2 --local-dir models/mistral-7b
 
@@ -225,8 +257,12 @@ huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2 --local-dir models/m
 huggingface-cli download microsoft/phi-3-mini --local-dir models/phi-3-mini
 ```
 
+
+
 ### Fine-Tune with Control Tags
+
 ```python
+
 # Pseudocode - full implementation in next phase
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer
 from peft import LoraConfig, get_peft_model
@@ -245,8 +281,12 @@ trainer = Trainer(model=model, args=training_args, train_dataset=dataset)
 trainer.train()
 ```
 
+
+
 ### Run Locally
+
 ```bash
+
 # Start FastAPI server (pseudocode)
 uvicorn local_inference.inference_service:app --port 8000
 
@@ -260,7 +300,8 @@ curl -X POST http://localhost:8000/generate \
   }'
 ```
 
----
+
+##
 
 ## Architecture Decision Rationale
 
@@ -285,8 +326,7 @@ curl -X POST http://localhost:8000/generate \
 - **Defense-in-depth**: Recognition risk + uncanniness + rhythm checks
 - **Gradual**: Can relax gates as system proves safe
 - **Measurable**: Safety score provides feedback for model improvement
-
----
+##
 
 ## Test Coverage Summary
 
@@ -303,8 +343,7 @@ curl -X POST http://localhost:8000/generate \
 | Training Corpus | 3 | 100% | Building, statistics, curriculum |
 | Integration | 2 | 100% | Full workflows |
 | **TOTAL** | **31** | **100%** | **Comprehensive** |
-
----
+##
 
 ## Files Created
 
@@ -321,7 +360,8 @@ local_inference/
 └── verify_phase_3_5.sh               (Verification script)
 ```
 
----
+
+##
 
 ## Production Readiness Checklist
 
@@ -335,8 +375,7 @@ local_inference/
 - [x] Code is modular and extensible
 - [x] Ready for LoRA fine-tuning integration
 - [x] Ready for FastAPI service deployment
-
----
+##
 
 ## What's Next
 
@@ -350,8 +389,7 @@ local_inference/
 - Multi-modal affect analysis (voice, facial expression)
 - Enhanced emotion detection from multiple channels
 - Fusion algorithms for multi-modal insights
-
----
+##
 
 ## Summary
 

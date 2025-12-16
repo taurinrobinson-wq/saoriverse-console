@@ -46,6 +46,7 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
 - System prompt support for personality/behavior
 
 **Key Methods**:
+
 ```python
 client.is_available()                           # Check if Ollama running
 client.get_available_models()                   # List available models
@@ -55,10 +56,15 @@ client.pull_model(model_name)                   # Download a model
 client.health_check()                           # Get service status
 ```
 
+
+
 **Singleton Pattern**:
+
 ```python
 ollama = get_ollama_client_singleton()  # Thread-safe caching
 ```
+
+
 
 ### 4. Response Handler Integration (`ui_components/response_handler.py`)
 **New Function**: `_get_ollama_fallback_response(user_input, conversation_context)`
@@ -76,10 +82,13 @@ ollama = get_ollama_client_singleton()  # Thread-safe caching
 - Error logging for debugging
 
 **System Prompt** (customizable):
+
 ```
 You are FirstPerson, a warm, empathetic AI companion for personal growth.
 Respond with genuine understanding, specific engagement, and practical support.
 ```
+
+
 
 ### 5. Session State Initialization (`ui_components/session_manager.py`)
 **New Function**: `_ensure_ollama_client()`
@@ -132,6 +141,8 @@ Tier 3 Poetic Consciousness (optional)
 Display to User
 ```
 
+
+
 ## Files Created/Modified
 
 ### Created
@@ -149,12 +160,17 @@ Display to User
 ## Quick Start
 
 ### 1. Launch with Docker Compose
+
 ```bash
 docker-compose -f docker-compose.local.yml up -d
 ```
 
+
+
 ### 2. Pull a Language Model
+
 ```bash
+
 # Default recommendation: llama3 (~4.7GB)
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
@@ -162,15 +178,23 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini  # 1.3GB
 ```
 
+
+
 ### 3. Open Streamlit
+
 ```
 http://localhost:8501
 ```
 
+
+
 ### 4. Test Integration
+
 ```bash
 python test_ollama_integration.py
 ```
+
+
 
 ## Model Recommendations
 
@@ -202,6 +226,7 @@ python test_ollama_integration.py
 ## Environment Variables
 
 Available in docker-compose/containers:
+
 ```bash
 OLLAMA_BASE_URL=http://ollama:11434        # Endpoint for Ollama API
 STREAMLIT_SERVER_HEADLESS=true              # Headless mode
@@ -209,16 +234,22 @@ STREAMLIT_SERVER_PORT=8501                  # Streamlit port
 STREAMLIT_LOGGER_LEVEL=info                 # Log level
 ```
 
+
+
 Override in docker-compose.local.yml:
+
 ```yaml
 environment:
   - OLLAMA_BASE_URL=http://ollama:11434
   - CUSTOM_VAR=value
 ```
 
+
+
 ## Development Workflow
 
 ### Run locally with Ollama
+
 ```bash
 docker-compose -f docker-compose.local.yml up -d
 
@@ -229,8 +260,12 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 docker-compose -f docker-compose.local.yml down
 ```
 
+
+
 ### Test Ollama directly
+
 ```bash
+
 # Check health
 curl http://localhost:11434/api/tags
 
@@ -245,8 +280,12 @@ curl -X POST http://localhost:11434/api/generate -d '{
 }'
 ```
 
+
+
 ### Debug FirstPerson integration
+
 ```python
+
 # In Streamlit app or Python REPL
 import streamlit as st
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
@@ -257,14 +296,20 @@ print("Models:", client.get_available_models())
 print("Response:", client.generate("Test prompt", model="llama3"))
 ```
 
+
+
 ## Testing
 
 ### Run Integration Tests
+
 ```bash
 python test_ollama_integration.py
 ```
 
+
+
 Expected output:
+
 ```
 ✅ Docker Compose File
 ✅ Ollama Service
@@ -275,6 +320,8 @@ Expected output:
 5/5 checks passed
 🎉 All checks passed! Ollama integration is ready.
 ```
+
+
 
 ### Manual Testing in Streamlit
 1. Open http://localhost:8501
@@ -291,15 +338,22 @@ Expected output:
 - **Alternative**: Deploy Ollama on beefier VPS if you want local LLM
 
 ### If Deploying to VPS
+
 ```bash
+
 # Would need to update production docker-compose to include Ollama
+
 # But not recommended for resource-constrained Droplets
 ```
+
+
 
 ## Troubleshooting
 
 ### "Ollama service not available"
+
 ```bash
+
 # Check if running
 docker-compose -f docker-compose.local.yml ps
 
@@ -310,14 +364,20 @@ docker-compose -f docker-compose.local.yml logs ollama
 docker-compose -f docker-compose.local.yml restart
 ```
 
+
+
 ### "No models found"
+
 ```bash
+
 # Pull a model
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # Verify
 docker-compose -f docker-compose.local.yml exec ollama ollama list
 ```
+
+
 
 ### Slow responses
 - Use smaller model (orca-mini)
@@ -339,8 +399,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 - Docker Compose: https://docs.docker.com/compose/
 - Streamlit: https://docs.streamlit.io/
 - FirstPerson Architecture: See LEARNING_QUICK_REFERENCE.md
-
----
+##
 
 **Implementation Date**: 2025
 **Status**: ✅ Complete and Ready for Testing

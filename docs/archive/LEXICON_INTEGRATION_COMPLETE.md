@@ -9,17 +9,21 @@ The word-centric emotional lexicon has been successfully integrated into `signal
 ### 1. **Enhanced Emotional Detection in `parse_input()` (Lines ~1175-1225)**
 
 **BEFORE:** Used hardcoded list of ~50 emotional keywords
+
 ```python
 emotional_keywords = ["burn", "overwhelm", "anxious", ...]
 has_emotional = any(keyword in lower_input for keyword in emotional_keywords)
 ```
 
+
+
 **AFTER:** Uses word-centric lexicon as PRIMARY method, with fallback
+
 ```python
 try:
     lexicon = get_word_centric_lexicon()
     emotional_analysis = lexicon.analyze_emotional_content(input_text)
-    
+
     if emotional_analysis['has_emotional_content']:
         _last_lexicon_analysis = emotional_analysis
         return None  # Process emotionally
@@ -30,6 +34,8 @@ except Exception as e:
 # Fallback: Original hardcoded keywords (still available)
 ```
 
+
+
 **Benefits:**
 - ✅ Direct word lookups (extremely fast)
 - ✅ Actual emotional vocabulary from your conversations (not generic)
@@ -39,10 +45,11 @@ except Exception as e:
 ### 2. **Enhanced Signal Detection in `parse_signals()` (Lines ~210-325)**
 
 **NEW FIRST PASS:** Uses lexicon analysis
+
 ```python
 def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
     global _last_lexicon_analysis
-    
+
     # FIRST: Try word-centric lexicon analysis (fastest)
     if _last_lexicon_analysis and _last_lexicon_analysis.get('has_emotional_content'):
         emotional_words = _last_lexicon_analysis.get('emotional_words', {})
@@ -59,6 +66,8 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                 })
 ```
 
+
+
 **Fallback Chain:**
 1. Word-centric lexicon analysis (fastest, most accurate)
 2. Enhanced NLP processor (if available)
@@ -69,11 +78,15 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 ### 3. **Module-Level Changes**
 
 **Added imports:**
+
 ```python
 from emotional_os.lexicon.lexicon_loader import get_lexicon, WordCentricLexicon
 ```
 
+
+
 **Added module variables:**
+
 ```python
 _word_centric_lexicon: Optional[WordCentricLexicon] = None
 _last_lexicon_analysis: Optional[Dict[str, Any]] = None
@@ -85,6 +98,8 @@ def get_word_centric_lexicon() -> WordCentricLexicon:
         _word_centric_lexicon = get_lexicon()
     return _word_centric_lexicon
 ```
+
+
 
 ## Lexicon Data Structure
 
@@ -148,6 +163,7 @@ text = "I hold this moment sacred and feel safe being tender"
 analysis = lexicon.analyze_emotional_content(text)
 
 # Returns:
+
 # {
 #   'emotional_words': [
 #       {'word': 'hold', 'frequency': 568, 'signals': ['vulnerability'], 'gates': [7, 11]},
@@ -160,6 +176,7 @@ analysis = lexicon.analyze_emotional_content(text)
 #   'sources': ['vulnerability', 'sensuality', 'admiration'],
 #   'has_emotional_content': True,
 #   'word_count': 10
+
 # }
 
 # Find words for a signal
@@ -169,20 +186,28 @@ intimacy_words = lexicon.words_for_signal('intimacy')
 gate_7_11_words = lexicon.words_for_gates([7, 11])
 ```
 
+
+
 ### In signal_parser.py
 
 ```python
+
 # Automatic via parse_input()
 response = parse_input("I hold this moment sacred")
+
 # Detected as emotional, triggers signal analysis
 
 # Via parse_signals()
 signals = parse_signals("I hold this moment sacred", signal_map)
+
 # Returns: [
 #   {"keyword": "hold", "signal": "vulnerability", "gates": [7, 11], ...},
 #   {"keyword": "sacred", "signal": "admiration", "gates": [8, 12], ...},
+
 # ]
 ```
+
+
 
 ## Performance Characteristics
 
@@ -209,7 +234,7 @@ The integration includes robust error handling:
 try:
     lexicon = get_word_centric_lexicon()
     emotional_analysis = lexicon.analyze_emotional_content(input_text)
-    
+
     if emotional_analysis['has_emotional_content']:
         _last_lexicon_analysis = emotional_analysis
         return None
@@ -218,6 +243,8 @@ except Exception as e:
     _last_lexicon_analysis = None
     # Falls back to hardcoded keywords
 ```
+
+
 
 ## Files Modified
 
@@ -284,6 +311,7 @@ except Exception as e:
 ## Testing Verification
 
 ✅ **Test Run Output:**
+
 ```
 [OK] Loaded word-centric lexicon: 457 words
 ✓ Lexicon loaded successfully
@@ -304,14 +332,15 @@ Emotional intensity: 1.00
 ✓ Integration test complete!
 ```
 
+
+
 ## Questions for Next Session
 
 1. Should we assign gates to expanded words (gentle, safe, depth, etc.)?
 2. How should we handle multi-word emotional phrases?
 3. Should we track which emotional words trigger specific glyphs?
 4. Ready to integrate privacy layer + scheduled cleanup?
-
----
+##
 
 **Integration Date:** [Current Date]
 **Status:** ✅ Complete and Tested

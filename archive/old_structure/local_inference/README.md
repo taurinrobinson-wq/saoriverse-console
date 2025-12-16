@@ -19,6 +19,8 @@ cd /workspaces/saoriverse-console/local_inference
 python examples.py
 ```
 
+
+
 ### For Verification (2 minutes)
 
 👉 Run **`verify_phase_3_5.sh`** to confirm all components:
@@ -27,7 +29,8 @@ python examples.py
 ./verify_phase_3_5.sh
 ```
 
----
+
+##
 
 ## 📦 What's Included
 
@@ -116,6 +119,8 @@ Run with:
 python -m pytest test_phase_3_5.py -v
 ```
 
+
+
 #### 5. `examples.py` (250+ lines)
 
 **Runnable end-to-end examples**
@@ -132,6 +137,8 @@ Run with:
 ```bash
 python examples.py
 ```
+
+
 
 ### Documentation
 
@@ -186,8 +193,7 @@ python examples.py
 - Runs test suite
 - Runs integration examples
 - Generates summary report
-
----
+##
 
 ## 🧬 The Five Core Systems
 
@@ -230,8 +236,7 @@ Local model generates response with control context:
 - **Input**: Raw LLM response
 - **Output**: Safe response + modification report
 - **Safety**: Catches violations not prevented by prompting
-
----
+##
 
 ## 🎯 Common Usage Patterns
 
@@ -249,6 +254,8 @@ raw_response = "LLM output here..."
 safe_response, result = create_safe_response(raw_response, [g for g, _ in glyphs], gate, style)
 ```
 
+
+
 ### Pattern 2: Context-Based Selection
 
 ```python
@@ -260,6 +267,8 @@ context_config = {
     },
 }
 ```
+
+
 
 ### Pattern 3: Training Corpus Capture
 
@@ -277,6 +286,8 @@ example = builder.add_from_interaction(
 )
 ```
 
+
+
 ### Pattern 4: Curriculum Learning
 
 ```python
@@ -286,7 +297,8 @@ curriculum = create_baseline_curriculum()
 examples = builder.add_curriculum_progression(curriculum, gate_schedule)
 ```
 
----
+
+##
 
 ## 🧪 Test Results Summary
 
@@ -329,7 +341,8 @@ test_phase_3_5.py::TestPhase35Integration::test_glyph_control_flow PASSED
 ============================== 31 passed in 0.06s ==============================
 ```
 
----
+
+##
 
 ## 🚀 Next Steps
 
@@ -339,8 +352,7 @@ test_phase_3_5.py::TestPhase35Integration::test_glyph_control_flow PASSED
 4. **Monitoring Dashboard** - Build metrics and safety auditing dashboard
 5. **User Studies** - Validate satisfaction feedback and safety effectiveness
 6. **Domain Expansion** - Add specialized glyphs for specific use cases
-
----
+##
 
 ## 📚 File Organization
 
@@ -358,7 +370,8 @@ local_inference/
 └── README.md (this file)          # Navigation guide
 ```
 
----
+
+##
 
 ## ✅ Verification Checklist
 
@@ -370,8 +383,7 @@ local_inference/
 - ✅ Multi-layer safety enforcement
 - ✅ Training corpus pipeline
 - ✅ Curriculum learning framework
-
----
+##
 
 ## 🎓 Learning Path
 
@@ -380,8 +392,7 @@ local_inference/
 3. **15 min**: Review `test_phase_3_5.py` to understand capabilities
 4. **30 min**: Read `PHASE_3_5_DOCS.md` for deep dive
 5. **30 min**: Integrate with your local LLM
-
----
+##
 
 ## 📞 Support & Resources
 
@@ -390,8 +401,7 @@ local_inference/
 - **Working code**: See `examples.py`
 - **Test reference**: See `test_phase_3_5.py`
 - **Verification**: Run `verify_phase_3_5.sh`
-
----
+##
 
 ## 🎉 Summary
 

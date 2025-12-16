@@ -17,12 +17,12 @@ This is your complete guide to migrating Velinor from Streamlit to a proper web 
 - **[velinor/TWINE_INTEGRATION_GUIDE.md](velinor/TWINE_INTEGRATION_GUIDE.md)** - Velinor game engine API
 - **[velinor/README.md](velinor/README.md)** - Game engine overview
 - **[velinor/QUICKSTART.md](velinor/QUICKSTART.md)** - Scene examples
-
----
+##
 
 ## 🛠️ Files Created for You
 
 ### Backend
+
 ```
 velinor_api.py          FastAPI server that wraps Velinor engine
                         - Session management
@@ -30,7 +30,10 @@ velinor_api.py          FastAPI server that wraps Velinor engine
                         - API endpoints
 ```
 
+
+
 ### Frontend Components
+
 ```
 frontend_lib_api.ts     TypeScript API client for axios
                         - Game start
@@ -45,7 +48,10 @@ frontend_GameScene.tsx  React component for game scenes
                         - Custom input
 ```
 
+
+
 ### Documentation
+
 ```
 VELINOR_WEB_COMPLETE.md         Complete overview (read first!)
 VELINOR_WEB_MIGRATION.md        Step-by-step setup (6 phases)
@@ -54,11 +60,13 @@ RAILWAY_DEPLOYMENT.md            Production deployment
 VELINOR_WEB_QUICK_REFERENCE.md  Commands & troubleshooting
 ```
 
----
+
+##
 
 ## 🚀 Quick Start (The Absolute Minimum)
 
 ```bash
+
 # Phase 1: Create Next.js project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 cd velinor-web
@@ -69,11 +77,15 @@ cp ../frontend_lib_api.ts lib/api.ts
 cp ../frontend_GameScene.tsx components/GameScene.tsx
 
 # Phase 3: Create pages
+
 # → app/page.tsx (splash screen)
+
 # → app/game/[sessionId]/page.tsx (game scene)
+
 # See VELINOR_WEB_MIGRATION.md for code
 
 # Phase 4: Test locally
+
 # Terminal 1:
 python velinor_api.py
 
@@ -86,7 +98,8 @@ git commit -m "Velinor web game"
 git push origin main
 ```
 
----
+
+##
 
 ## 📊 Architecture
 
@@ -114,7 +127,8 @@ git push origin main
                     └─ Stats Tracking
 ```
 
----
+
+##
 
 ## 🎯 What You Get
 
@@ -125,8 +139,7 @@ git push origin main
 ✅ **Easy to Expand** - Add scenes, change overlays, customize styling
 ✅ **One-Click Deploy** - Push to GitHub, Railway auto-deploys
 ✅ **No More Streamlit Limitations** - Full CSS, animations, z-index control
-
----
+##
 
 ## 📖 Reading Map
 
@@ -141,11 +154,13 @@ Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
 Want game engine info?  velinor/TWINE_INTEGRATION_GUIDE.md
 ```
 
----
+
+##
 
 ## ⚡ Key Commands
 
 ```bash
+
 # Create project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
@@ -162,7 +177,8 @@ cd velinor-web && npm run dev
 git add . && git commit -m "message" && git push origin main
 ```
 
----
+
+##
 
 ## 📋 Checklist
 
@@ -175,8 +191,7 @@ git add . && git commit -m "message" && git push origin main
 - [ ] Test locally (backend + frontend)
 - [ ] Deploy to Railway
 - [ ] Verify at your Railway domain
-
----
+##
 
 ## 🆘 Troubleshooting
 
@@ -187,8 +202,7 @@ git add . && git commit -m "message" && git push origin main
 | Backend slow to start | It initializes on first request | Normal! |
 | Button doesn't respond | Check browser console for errors | Dev tools F12 |
 | CORS errors | Already handled in code | velinor_api.py |
-
----
+##
 
 ## 🎓 Learning Resources
 
@@ -196,8 +210,7 @@ git add . && git commit -m "message" && git push origin main
 - **FastAPI**: https://fastapi.tiangolo.com/
 - **Railway**: https://docs.railway.app/
 - **React**: https://react.dev/
-
----
+##
 
 ## 💡 Tips
 
@@ -206,8 +219,7 @@ git add . && git commit -m "message" && git push origin main
 3. **Browser DevTools** - F12 to check network requests & errors
 4. **Test on mobile** - The game should work on phones too
 5. **Version control** - Commit frequently so you can revert if needed
-
----
+##
 
 ## 🎮 What's Next
 
@@ -229,8 +241,7 @@ After you get the basic setup working:
 - Save/load with database
 - Settings menu
 - Achievements system
-
----
+##
 
 ## 📞 Documentation Map
 
@@ -245,7 +256,8 @@ RAILWAY_DEPLOYMENT.md     ← Deploy here
 Test locally → Deploy → Live!
 ```
 
----
+
+##
 
 ## ✨ You're All Set!
 
@@ -256,8 +268,7 @@ You have:
 - ✅ Deployment configured (Railway)
 
 **Next step:** Open `VELINOR_WEB_COMPLETE.md` and start Phase 1!
-
----
+##
 
 **Questions?** Check the relevant documentation file or the game engine guide.
 

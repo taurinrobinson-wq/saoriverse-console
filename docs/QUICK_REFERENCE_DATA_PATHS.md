@@ -20,8 +20,7 @@
 - ✅ **Works** - File found and loads correctly
 - ⚠️ **Partial** - Works in some cases but not all
 - ❌ **Broken** - File not found or path mismatch
-
----
+##
 
 ## Key Issues at a Glance
 
@@ -38,8 +37,7 @@
 - `data/glyph_lexicon_rows.json` (actual)
 - `src/emotional_os_parser/signal_lexicon.json` (actual)
 - `src/emotional_os_safety/trauma_lexicon.json` (actual)
-
----
+##
 
 ## Modules by Load Behavior
 
@@ -56,8 +54,7 @@
 
 ### Using Search/Fallback (Flexible - ✅ GOOD)
 - `src/parser/nrc_lexicon_loader.py` (searches 5 locations)
-
----
+##
 
 ## Quick Diagnostic
 
@@ -112,7 +109,8 @@ for fname, paths in files_to_check.items():
         print(f"❌ {fname}: NOT FOUND - searched {[str(p) for p in paths]}")
 ```
 
----
+
+##
 
 ## Configuration by Module
 
@@ -137,8 +135,7 @@ for fname, paths in files_to_check.items():
 ### Learning System (`learning/`)
 - Creates: `hybrid_learning_log.jsonl` at runtime
 - Creates: `user_overrides/{user_id}_lexicon.json` per user
-
----
+##
 
 ## Startup Order
 
@@ -150,14 +147,14 @@ When the app starts, these files are loaded in this order:
 4. **Suicidality Protocol** → ⚠️ **PARTIAL** - expects `emotional_os/core/`
 5. **Trauma Lexicon** → `src/emotional_os_safety/trauma_lexicon.json` ✅
 6. **Word Lexicon** → ❌ **FAILS** - expects `emotional_os/lexicon/`
-
----
+##
 
 ## Recommended Minimal Fix
 
 **Fastest solution to get system working:**
 
 ```bash
+
 # Create missing directory structure
 mkdir -p emotional_os/glyphs
 mkdir -p emotional_os/core
@@ -176,9 +173,10 @@ cp src/emotional_os_safety/trauma_lexicon.json emotional_os/safety/
 cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
 ```
 
-This ensures all hardcoded paths will work immediately.
 
----
+
+This ensures all hardcoded paths will work immediately.
+##
 
 ## Recommended Long-Term Fix
 
@@ -186,4 +184,3 @@ This ensures all hardcoded paths will work immediately.
 2. Remove duplicate files (keep only in `data/` or `src/`)
 3. Add startup validation: `python -m src.emotional_os.core.startup_check`
 4. Document expected file structure in README
-

@@ -19,7 +19,7 @@
 
 ### Step 3: Deploy authenticated-saori Function
 1. Click **Create Function** again
-2. Function name: `authenticated-saori`  
+2. Function name: `authenticated-saori`
 3. Copy the entire content from `authenticated_edge_function.ts`
 4. Click **Deploy**
 

@@ -3,29 +3,39 @@
 ## 🚀 Quick Start
 
 ### Step 1: Pre-Flight Check
+
 ```powershell
+
 # Windows PowerShell
 python check-docker-requirements.py
 
-# macOS/Linux  
+# macOS/Linux
 python3 check-docker-requirements.py
 ```
+
+
 
 Expected output: All checks ✅
 
 ### Step 2: Build Docker Image
 
 **Option A: Standard Build** (Recommended - uses updated robust config)
+
 ```powershell
+
 # Windows PowerShell
 docker build -f Dockerfile.firstperson -t firstperson:latest .
 
 # macOS/Linux
 docker build -f Dockerfile.firstperson -t firstperson:latest .
 ```
+
+
 
 **Option B: Resilient Build** (If Option A times out)
+
 ```powershell
+
 # Windows PowerShell
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
@@ -33,8 +43,12 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 ```
 
+
+
 **Option C: Automated Test** (Validates build)
+
 ```powershell
+
 # Windows PowerShell
 .\test-docker-build.ps1
 
@@ -42,8 +56,12 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 bash test-docker-build.sh
 ```
 
+
+
 ### Step 3: Verify Build Success
+
 ```bash
+
 # Check image was created
 docker images | grep firstperson
 
@@ -58,9 +76,10 @@ docker stop firstperson-test
 docker rm firstperson-test
 ```
 
-Expected: `{"status":"healthy"}`
 
----
+
+Expected: `{"status":"healthy"}`
+##
 
 ## 📊 Build Information
 
@@ -73,32 +92,36 @@ Expected: `{"status":"healthy"}`
 | ElevenLabs | Latest | ✅ |
 | Node | 20-alpine | ✅ Frontend |
 | Nginx | Latest | ✅ Reverse proxy |
-
----
+##
 
 ## ⚙️ Build Configuration
 
 ### Timeouts & Retries
+
 ```
 PIP_TIMEOUT: 60 seconds (was 15s)
 PIP_RETRIES: 5 attempts (was 1)
 PIP_DEFAULT_TIMEOUT: 120 seconds
 ```
 
+
+
 ### Optimization
+
 ```
 --no-cache-dir: Saves disk space
 --retries 5: Handles network hiccups
 --default-timeout: Prevents premature timeout
 ```
 
----
+
+##
 
 ## 🐛 Troubleshooting
 
 ### Error: "Name or service not known"
 **Cause:** Docker cannot reach PyPI
-**Fix:** 
+**Fix:**
 1. Check network: `docker run --rm alpine ping 8.8.8.8`
 2. Use resilient build: `docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .`
 3. Increase timeout: `docker build ... --build-arg PIP_TIMEOUT=180 .`
@@ -112,7 +135,9 @@ PIP_DEFAULT_TIMEOUT: 120 seconds
 ### Error: "Dockerfile not found"
 **Cause:** Wrong working directory or filename
 **Fix:**
+
 ```bash
+
 # Verify you're in correct directory
 pwd  # or cd d:\saoriverse-console
 
@@ -123,11 +148,12 @@ ls Dockerfile.firstperson
 docker build -f ./Dockerfile.firstperson -t firstperson:latest .
 ```
 
+
+
 ### Build takes too long
 **Normal:** 5-10 minutes for first build
 **If >20 minutes:** Network issues, try resilient build
-
----
+##
 
 ## 📦 Files Updated/Created
 
@@ -135,7 +161,7 @@ docker build -f ./Dockerfile.firstperson -t firstperson:latest .
 - ✅ `requirements-backend.txt` — Pinned numpy to 2.1.2
 - ✅ `Dockerfile.firstperson` — Added timeout/retry config
 
-### Created  
+### Created
 - ✅ `Dockerfile.firstperson.resilient` — Extra robust version
 - ✅ `test-docker-build.ps1` — Windows test script
 - ✅ `test-docker-build.sh` — Linux test script
@@ -143,48 +169,66 @@ docker build -f ./Dockerfile.firstperson -t firstperson:latest .
 - ✅ `DOCKER_NETWORK_TROUBLESHOOTING.md` — Complete guide
 - ✅ `DOCKER_FIX_SUMMARY.md` — Quick summary
 - ✅ This file — Build guide
-
----
+##
 
 ## 🎯 Success Indicators
 
 ### Build Succeeded ✅
+
 ```
 Successfully tagged firstperson:latest
 docker images | grep firstperson  # Shows image with size ~2GB
 ```
 
+
+
 ### Container Runs ✅
+
 ```bash
 docker run -p 8000:8000 -p 3001:3001 firstperson:latest
+
 # No errors, container starts
+
 # Health check passes: curl http://localhost:8000/health
 ```
 
+
+
 ### Frontend Loads ✅
+
 ```
 curl http://localhost:3001
+
 # Returns HTML (Next.js frontend)
 ```
 
----
+
+##
 
 ## 🚢 Deployment After Build
 
 ### 1. Tag for Registry
+
 ```bash
 docker tag firstperson:latest your-registry/firstperson:v1.0.0
 docker tag firstperson:latest your-registry/firstperson:latest
 ```
 
+
+
 ### 2. Push to Registry
+
 ```bash
 docker push your-registry/firstperson:v1.0.0
 docker push your-registry/firstperson:latest
 ```
 
+
+
 ### 3. Deploy to Server
+
 ```bash
+
 # On your DigitalOcean droplet (161.35.227.49)
 ssh -i ~/.ssh/velinor root@161.35.227.49
 
@@ -198,7 +242,8 @@ docker run -d \
   your-registry/firstperson:latest
 ```
 
----
+
+##
 
 ## 📋 Checklist
 
@@ -217,14 +262,14 @@ Post-build:
 - [ ] FastAPI import works: `docker run --rm firstperson:latest python -c "import fastapi"`
 - [ ] Health check responds: `curl http://localhost:8000/health`
 - [ ] Container can start: `docker run ... firstperson:latest`
-
----
+##
 
 ## 🔄 Rebuild Without Cache
 
 If you need to force a clean rebuild:
 
 ```powershell
+
 # Windows PowerShell
 docker system prune -a  # Remove all images/containers
 docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
@@ -234,9 +279,10 @@ docker system prune -a
 docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 ```
 
-**Warning:** This will remove all Docker images/containers!
 
----
+
+**Warning:** This will remove all Docker images/containers!
+##
 
 ## 📞 Quick Reference
 
@@ -251,8 +297,7 @@ docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 | Check logs | `docker logs <container-id>` |
 | Stop container | `docker stop <container-id>` |
 | Remove image | `docker rmi firstperson:latest` |
-
----
+##
 
 ## ✅ Current Status
 
@@ -265,7 +310,6 @@ docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 - ✅ Troubleshooting guide available
 
 **Ready to:** Build Docker image with confidence 🚀
-
----
+##
 
 **Next Step:** Run `python check-docker-requirements.py` to verify everything is in place, then build!

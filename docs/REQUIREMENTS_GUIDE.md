@@ -2,8 +2,8 @@
 
 ## Python Version Compatibility
 
-**Recommended:** Python 3.11 or 3.12  
-**Supported:** Python 3.10+  
+**Recommended:** Python 3.11 or 3.12
+**Supported:** Python 3.10+
 **NOT supported:** Python 3.9 or earlier, or 3.13 (limited wheel support)
 
 ### Why Python 3.11 or 3.12?
@@ -12,15 +12,20 @@
 - ✅ Best performance and stability
 
 ### Checking Your Python Version
+
 ```bash
 python --version
 ```
+
+
 
 ### Switching Python Versions
 If you have multiple Python versions installed:
 
 **Windows (using py launcher):**
+
 ```bash
+
 # List installed versions
 py --list-paths
 
@@ -29,8 +34,12 @@ py -3.12 -m pip install -r requirements.txt
 py -3.12 -m streamlit run app.py
 ```
 
+
+
 **Or use pyenv/conda:**
+
 ```bash
+
 # With pyenv
 pyenv install 3.12.0
 pyenv local 3.12.0
@@ -41,6 +50,8 @@ conda activate firstperson
 pip install -r requirements.txt
 ```
 
+
+
 ## Single Requirements File
 
 All dependencies are now consolidated in **`requirements.txt`** at the root of the project.
@@ -48,6 +59,7 @@ All dependencies are now consolidated in **`requirements.txt`** at the root of t
 ### Installation
 
 ```bash
+
 # Install all dependencies
 pip install -r requirements.txt
 
@@ -57,19 +69,27 @@ pip-compile requirements.txt
 pip install -r requirements.txt
 ```
 
+
+
 ### Post-Installation Setup
 
 Some packages require additional setup:
 
 #### spaCy Language Models
+
 ```bash
 python -m spacy download en_core_web_sm
 ```
 
+
+
 #### TextBlob Corpora
+
 ```bash
 python -m textblob.download_corpora
 ```
+
+
 
 #### Faster-Whisper Models
 Models are downloaded automatically on first use (~140MB for "base" model).
@@ -81,16 +101,22 @@ Models are downloaded automatically on first use (~200MB for English).
 
 #### GPU Support (NVIDIA CUDA)
 If you have CUDA installed, uncomment these lines in `requirements.txt`:
+
 ```
 torch>=2.0.0
 torchaudio>=2.0.0
 ```
 
+
+
 #### Advanced Audio Processing
 For noise suppression, uncomment:
+
 ```
 noisereduce>=2.0.0
 ```
+
+
 
 ## Legacy Config Files
 
@@ -121,7 +147,9 @@ This usually means the package isn't installed in your Python environment.
 
 ### Virtual Environment Issues
 If using a virtual environment:
+
 ```bash
+
 # Windows
 .venv\Scripts\activate
 
@@ -131,4 +159,3 @@ source .venv/bin/activate
 # Then install
 pip install -r requirements.txt
 ```
-

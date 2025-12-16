@@ -11,11 +11,15 @@ cd firstperson
 npm install
 ```
 
+
+
 2. Start the Expo dev server
 
 ```bash
 npx expo start
 ```
+
+
 
 3. Open on device or emulator
 
@@ -29,6 +33,8 @@ Backend configuration
 REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000" npx expo start
 ```
 
+
+
 EAS (optional)
 
 - If you plan to use EAS Build / Submit, run:
@@ -37,6 +43,8 @@ EAS (optional)
 cd firstperson
 eas build:configure
 ```
+
+
 
 This project includes a minimal `eas.json` so the command will not fail. Note that EAS requires an Expo account and `eas-cli` to be installed and logged in.
 

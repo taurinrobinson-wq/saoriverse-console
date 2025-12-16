@@ -8,51 +8,70 @@ You now have two automated commit & push scripts that periodically save your wor
 - **Bash** (macOS/Linux): `scripts/auto-commit.sh`
 
 Both scripts monitor your workspace and commit/push changes at regular intervals.
-
----
+##
 
 ## Quick Start
 
 ### Windows (PowerShell)
 
 **Option 1: Run manually with default 30-minute interval**
+
 ```powershell
 .\scripts\auto-commit.ps1
 ```
 
+
+
 **Option 2: Custom interval (e.g., every 15 minutes)**
+
 ```powershell
 .\scripts\auto-commit.ps1 -IntervalMinutes 15
 ```
 
+
+
 **Option 3: Custom commit message**
+
 ```powershell
 .\scripts\auto-commit.ps1 -CommitMessage "wip: working on feature X"
 ```
 
+
+
 **Option 4: Stop anytime**
+
 ```
 Press Ctrl+C
 ```
+
+
 
 ### macOS/Linux
 
 **Option 1: Run with default 30-minute interval**
+
 ```bash
 bash scripts/auto-commit.sh
 ```
 
+
+
 **Option 2: Custom interval (e.g., every 10 minutes)**
+
 ```bash
 bash scripts/auto-commit.sh 10
 ```
 
+
+
 **Option 3: Stop anytime**
+
 ```
 Press Ctrl+C
 ```
 
----
+
+##
 
 ## How It Works
 
@@ -82,7 +101,8 @@ Press Ctrl+C to stop
   Waiting 30 minutes until next check...
 ```
 
----
+
+##
 
 ## Best Practices
 
@@ -100,7 +120,9 @@ The script outputs status for each commit cycle so you can see:
 
 ### 3. Combine with Manual Commits
 The auto-commit scripts work alongside manual commits:
+
 ```bash
+
 # Auto-commit runs in background
 .\scripts\auto-commit.ps1
 
@@ -110,13 +132,14 @@ git commit -m "feat: implement specific feature"
 git push
 ```
 
+
+
 ### 4. Handle Conflicts
 If you have conflicts or issues:
 1. **Stop the auto-commit script** (Ctrl+C)
 2. **Resolve conflicts manually** in git
 3. **Restart the script** when ready
-
----
+##
 
 ## Running in the Background
 
@@ -125,17 +148,21 @@ If you have conflicts or issues:
 Create a scheduled task to run the script automatically:
 
 ```powershell
+
 # Create scheduled task (run once at startup, repeat every 30 minutes)
 $trigger = New-ScheduledTaskTrigger -AtStartup -RepetitionInterval (New-TimeSpan -Minutes 30)
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\path\to\scripts\auto-commit.ps1"
 Register-ScheduledTask -TaskName "GitAutoCommit" -Trigger $trigger -Action $action -RunLevel Highest
 ```
 
+
+
 ### macOS/Linux (Cron)
 
 Create a cron job to run every 30 minutes:
 
 ```bash
+
 # Edit crontab
 crontab -e
 
@@ -143,21 +170,28 @@ crontab -e
 */30 * * * * cd /path/to/saoriverse-console && bash scripts/auto-commit.sh >> /tmp/git-auto-commit.log 2>&1
 ```
 
----
+
+##
 
 ## Troubleshooting
 
 ### "Permission denied" on bash script
+
 ```bash
 chmod +x scripts/auto-commit.sh
 ```
 
+
+
 ### "Git command not found"
 Ensure git is in your PATH:
+
 ```bash
 which git  # macOS/Linux
 where.exe git  # Windows PowerShell
 ```
+
+
 
 ### "Push failed (may require PR)"
 This is expected if your repo has branch protection rules. The script will:
@@ -168,19 +202,22 @@ This is expected if your repo has branch protection rules. The script will:
 
 ### Script keeps running but nothing commits
 Check if there are actual changes:
+
 ```bash
 git status --short
 ```
 
-If empty, everything is already committed.
 
----
+
+If empty, everything is already committed.
+##
 
 ## Manual Commit Alternative
 
 If you prefer manual one-off commits:
 
 ```bash
+
 # Quick single commit
 cd d:\saoriverse-console
 git add -A
@@ -188,24 +225,31 @@ git commit -m "feat: implement emotion learning system"
 git push origin main
 ```
 
----
+
+##
 
 ## Stopping the Auto-Commit
 
 **At any time:** Press `Ctrl+C` in the terminal running the script
 
 **To remove scheduled task (Windows):**
+
 ```powershell
 Unregister-ScheduledTask -TaskName "GitAutoCommit" -Confirm:$false
 ```
 
+
+
 **To remove cron job (macOS/Linux):**
+
 ```bash
 crontab -e
+
 # Remove the line you added earlier
 ```
 
----
+
+##
 
 ## Summary
 
@@ -215,8 +259,7 @@ crontab -e
 | Start auto-commit (15 min) | `.\scripts\auto-commit.ps1 -IntervalMinutes 15` |
 | Stop auto-commit | Ctrl+C |
 | Manual single commit | `git add -A && git commit -m "msg" && git push` |
-
----
+##
 
 **Your changes are now automatically backed up to GitHub!** 🎉
 

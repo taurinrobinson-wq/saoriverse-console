@@ -1,12 +1,10 @@
-Dev Archive
-===========
+# Dev Archive
 
 This folder contains developer-oriented scripts and one-off utilities moved out
 of the main tree to keep the repository tidy. Files in this folder are safe to
 restore with `git mv` if you need them back.
 
-Test fallbacks
---------------
+## Test fallbacks
 
 To make the test-suite safe for local development without a configured
 Supabase instance, the test fixtures include conservative, non-destructive
@@ -23,8 +21,7 @@ Key variables that the test fallbacks provide (only when missing):
 - `TEST_CUSTOM_TOKEN` / `TEST_ACCESS_TOKEN` — default: `test_custom_token` / `test_access_token`
 - `TEST_USER_ID` — default: `test_user`
 
-How to opt into real integration tests
--------------------------------------
+## How to opt into real integration tests
 
 If you want tests to exercise a real Supabase deployment (integration tests),
 set the real environment variables before running tests (for example in a
@@ -35,16 +32,18 @@ export SUPABASE_URL="https://your-project.supabase.co"
 export SUPABASE_PUBLISHABLE_KEY="your-publishable-key"
 export SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
 export PROJECT_JWT_SECRET="your-jwt-secret"
+
 # (optional) override other test vars
 export TEST_CUSTOM_TOKEN="..."
 export TEST_USER_ID="..."
 ```
 
+
+
 When the real env vars are present, the tests will use them instead of the
 fallbacks and perform real network calls against your Supabase instance.
 
-Restoring files
----------------
+## Restoring files
 
 To restore a file to the main tree:
 

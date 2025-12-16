@@ -1,8 +1,7 @@
 # 📌 Quick Reference: Gutenberg Integration
 
 ## Status: ✅ COMPLETE & OPERATIONAL
-
----
+##
 
 ## 🚀 Run Processing Now
 
@@ -11,12 +10,16 @@ cd /Users/taurinrobinson/saoriverse-console
 ./run_gutenberg_learning.sh
 ```
 
+
+
 Or directly:
+
 ```bash
 nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py &
 ```
 
----
+
+##
 
 ## 📊 Monitor Progress
 
@@ -24,7 +27,8 @@ nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher
 tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 ```
 
----
+
+##
 
 ## 📈 View Results
 
@@ -32,11 +36,13 @@ tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
 cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
 ```
 
----
+
+##
 
 ## 💾 Storage Locations
 
 **Data (External Drive)**
+
 ```
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/          (8 collections)
@@ -44,7 +50,10 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 └── gutenberg_processing_results.json
 ```
 
+
+
 **Code (Hard Drive)**
+
 ```
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
@@ -53,7 +62,8 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 └── GUTENBERG_PROCESSING.md
 ```
 
----
+
+##
 
 ## 📚 What Was Processed
 
@@ -61,19 +71,20 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 - **Emily Dickinson**, Walt Whitman, Keats, Wordsworth, Shelley, Coleridge, Love Poems
 - **Result**: 2,000-5,000 new lexicon entries
 - **Quality**: 4.8 MB processing log (59,796 lines)
-
----
+##
 
 ## 🎯 Add More Collections
 
 Edit `gutenberg_fetcher.py` line ~50 and add URLs:
+
 ```python
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
 ```
 
-Then run the fetcher again.
 
----
+
+Then run the fetcher again.
+##
 
 ## 💡 Key Commands
 
@@ -84,24 +95,21 @@ Then run the fetcher again.
 | **View results** | `cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" \| jq` |
 | **Check space** | `df -h \| grep "My Passport"` |
 | **List poetry files** | `ls -lh "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"` |
-
----
+##
 
 ## ⚡ External Drive Space
 
 - **Total**: 1.8 TB
 - **Used**: ~1.4 TB (76%)
 - **Available**: **458 GB** ← Plenty for expansion!
-
----
+##
 
 ## 📖 Documentation
 
 - **GUTENBERG_PROCESSING.md** - Technical details
 - **GUTENBERG_SUMMARY.md** - Complete overview
 - **This file** - Quick reference
-
----
+##
 
 ## ✅ System Ready!
 

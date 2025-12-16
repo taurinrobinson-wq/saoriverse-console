@@ -1,8 +1,7 @@
 # 🚀 Velinor VPS Quick Start
 
 Copy-paste commands to get Velinor running on DigitalOcean.
-
----
+##
 
 ## 1️⃣ Local: Generate SSH Key (One-Time)
 
@@ -10,9 +9,10 @@ Copy-paste commands to get Velinor running on DigitalOcean.
 ssh-keygen -t ed25519 -f ~/.ssh/velinor -C "velinor@firstperson"
 ```
 
-Save the public key output - you'll paste it into DigitalOcean.
 
----
+
+Save the public key output - you'll paste it into DigitalOcean.
+##
 
 ## 2️⃣ DigitalOcean: Create Droplet
 
@@ -25,8 +25,7 @@ Save the public key output - you'll paste it into DigitalOcean.
 - **Hostname**: `velinor-server`
 
 **📝 Save the Droplet IP when it's created** (e.g., `123.45.67.89`)
-
----
+##
 
 ## 3️⃣ Namecheap: Add DNS Record
 
@@ -38,14 +37,15 @@ Add A Record:
 - **TTL**: 30 min
 
 Click **Save** and wait 5-10 minutes.
-
----
+##
 
 ## 4️⃣ VPS: Run Setup Script
 
 ```bash
 ssh root@YOUR_DROPLET_IP
 ```
+
+
 
 Replace `YOUR_DROPLET_IP` with your actual IP.
 
@@ -93,7 +93,8 @@ docker compose -f docker-compose.prod.yml restart nginx-ssl
 echo "✅ Velinor is live at https://velinor.firstperson.chat"
 ```
 
----
+
+##
 
 ## 5️⃣ Test It
 
@@ -101,9 +102,10 @@ echo "✅ Velinor is live at https://velinor.firstperson.chat"
 curl https://velinor.firstperson.chat
 ```
 
-Or visit: **https://velinor.firstperson.chat** in your browser
 
----
+
+Or visit: **https://velinor.firstperson.chat** in your browser
+##
 
 ## 6️⃣ Auto-Deploy (Optional)
 
@@ -116,6 +118,8 @@ ssh root@YOUR_DROPLET_IP
 ssh-keygen -t ed25519 -f /root/.ssh/velinor_deploy -C "velinor-deploy" -N ""
 cat /root/.ssh/velinor_deploy.pub
 ```
+
+
 
 Copy the output.
 
@@ -154,6 +158,8 @@ EOF
 chmod +x /opt/velinor/deploy.sh
 ```
 
+
+
 ### D. Add GitHub Secrets:
 
 **Repo → Settings → Secrets and variables → Actions**
@@ -163,8 +169,7 @@ Add two secrets:
 - **VPS_SSH_KEY**: Content of `/root/.ssh/velinor_deploy` (the **private** key)
 
 The `.github/workflows/deploy.yml` file is already in your repo and will auto-trigger on push! 🚀
-
----
+##
 
 ## 📊 Check Status
 
@@ -173,7 +178,8 @@ ssh root@YOUR_DROPLET_IP
 docker compose -f docker-compose.prod.yml ps
 ```
 
----
+
+##
 
 ## 🆘 Troubleshooting
 
@@ -182,19 +188,24 @@ docker compose -f docker-compose.prod.yml ps
 **DNS not resolving**: Wait 10 minutes, then run `nslookup velinor.firstperson.chat`
 
 **Site shows nginx error**: Check containers are running with command above, or view logs:
+
 ```bash
 docker compose -f docker-compose.prod.yml logs
 ```
 
-**SSL certificate issue**: 
+
+
+**SSL certificate issue**:
+
 ```bash
 ls /etc/letsencrypt/live/velinor.firstperson.chat/
 ```
 
+
+
 If empty, domain name might be wrong - verify DNS is working first.
+##
 
----
-
-**Total time**: ~15 minutes ⏱️  
-**Total cost**: $6/month 💰  
+**Total time**: ~15 minutes ⏱️
+**Total cost**: $6/month 💰
 **Reliability**: 99.9% uptime ✅

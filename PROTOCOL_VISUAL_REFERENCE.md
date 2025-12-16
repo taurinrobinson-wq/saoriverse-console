@@ -17,19 +17,19 @@ SUICIDALITY DETECTION ✅
     ↓
 ACKNOWLEDGMENT (First Thing)
     │
-    └─ "You named something real here. Thank you 
+    └─ "You named something real here. Thank you
        for trusting me with it."
     │
     ↓ (No resources yet. No "here's a hotline.")
     │
     ├─ "I am not a substitute for human care."
     │
-    ├─ "I will do my best to hear what you choose 
+    ├─ "I will do my best to hear what you choose
     │  to share and keep it safe."
     │
     ↓ (Invitation, not command)
     │
-    └─ "If you want, we can talk about what's 
+    └─ "If you want, we can talk about what's
        coming up for you right now."
     │
     ↓
@@ -46,14 +46,14 @@ USER CONTINUES TALKING (or stops)
     ↓
 RESOURCES BY CONSENT (Not pushed)
     │
-    └─ "If you want, I can share information for 
-       a crisis line. Would that be helpful 
+    └─ "If you want, I can share information for
+       a crisis line. Would that be helpful
        right now?"
     │
     ├─ User says YES → Provide resources (988, Crisis Text Line, etc.)
     │
     ├─ User says NO → Respect it
-    │  └─ "I respect that. We can continue talking 
+    │  └─ "I respect that. We can continue talking
     │     about what you're experiencing."
     │
     └─ User doesn't respond → Continue support anyway
@@ -61,8 +61,8 @@ RESOURCES BY CONSENT (Not pushed)
     ↓
 CONTINUITY
     │
-    └─ "Please check back in with me. I want to 
-       know you are okay. When you return, I will 
+    └─ "Please check back in with me. I want to
+       know you are okay. When you return, I will
        acknowledge that choice."
     │
     ↓ (System persists flag: "check_in_invited")
@@ -74,19 +74,20 @@ CONTINUITY
     ↓
 RETURN DETECTED ✅
     │
-    └─ "Thank you for coming back. Your check-in 
+    └─ "Thank you for coming back. Your check-in
        matters."
     │
-    └─ "You chose to return and connect. I 
+    └─ "You chose to return and connect. I
        recognize the significance of that."
     │
     ↓ (Then continues conversation, not back to resource push)
     │
     └─ "How are you feeling right now?"
-    
+
 ```
 
----
+
+##
 
 ## What Happens Behind the Scenes
 
@@ -138,7 +139,8 @@ RETURN DETECTED ✅
                 └────────────────────────┘
 ```
 
----
+
+##
 
 ## Configuration (What's Customizable)
 
@@ -147,13 +149,13 @@ RETURN DETECTED ✅
 ```json
 {
   "suicide_disclosure": {
-    
+
     "acknowledgment": [
       "You named thoughts of suicide. That is heavy.",
       "I hear the intensity in your words.",
       // Can add more...
     ],
-    
+
     "language_safeguards": {
       "blocked_phrases": [
         "you have so much to live for",
@@ -161,7 +163,7 @@ RETURN DETECTED ✅
         // Can add more...
       ]
     },
-    
+
     "crisis_resources_detailed": [
       "National Suicide Prevention Lifeline: 988",
       "Crisis Text Line: Text HOME to 741741",
@@ -171,15 +173,17 @@ RETURN DETECTED ✅
 }
 ```
 
-You can change every response, add new ones, customize for different cultures, all without touching Python code.
 
----
+
+You can change every response, add new ones, customize for different cultures, all without touching Python code.
+##
 
 ## Integration Points
 
 ### In Your Code (`signal_parser.py`):
 
 ```python
+
 # At the top of parse_input():
 
 from emotional_os.core.suicidality_handler import get_suicidality_protocol
@@ -200,18 +204,23 @@ if suicidality_protocol.should_use_protocol(input_text):
     }
 ```
 
-**That's it.** One import, one check, one call. Everything else is configuration.
 
----
+
+**That's it.** One import, one check, one call. Everything else is configuration.
+##
 
 ## Testing It Locally
 
 ### Run the test suite:
+
 ```bash
 python tests/test_suicidality_protocol.py
 ```
 
+
+
 ### Try it interactively:
+
 ```python
 from emotional_os.core.signal_parser import parse_input
 
@@ -223,10 +232,12 @@ result = parse_input(
 )
 
 print(result['voltage_response'])
+
 # Output: "You named thoughts of suicide. That is heavy..."
 ```
 
----
+
+##
 
 ## The Rotation Banks (Why Nothing Feels Canned)
 
@@ -237,24 +248,25 @@ First time someone disclosures:
 "You named thoughts of suicide. That is heavy."
 
 If they return and disclose again:
-"I hear the intensity in your words. Naming it here 
+"I hear the intensity in your words. Naming it here
 is a real act of courage."
 
 If they return again:
-"You are allowed to be here with what you feel. 
+"You are allowed to be here with what you feel.
 I will listen."
 ```
 
-Rotation prevents template feel. Keeps it real.
 
----
+
+Rotation prevents template feel. Keeps it real.
+##
 
 ## Language Safeguards (What It Stops)
 
 Your system **blocks** these (they make people feel MORE alone):
 
 ❌ "you have so much to live for"
-❌ "think of those who love you"  
+❌ "think of those who love you"
 ❌ "commit suicide" (clinical dismissal)
 ❌ "it will all be fine"
 ❌ "everything happens for a reason"
@@ -267,8 +279,7 @@ Your system **blocks** these (they make people feel MORE alone):
 ❌ "cheer up"
 
 None of these phrases will appear in responses. System replaces with grounded, direct language instead.
-
----
+##
 
 ## Consent Logic (Core Innovation)
 
@@ -283,25 +294,27 @@ Your protocol:
 6. Continue being present either way
 
 Example:
+
 ```
 User: "I'm having suicidal thoughts"
 
-System: "Thank you for trusting me with this. 
-I'm not a substitute for professional help, 
+System: "Thank you for trusting me with this.
+I'm not a substitute for professional help,
 but I can listen.
 
-If you want crisis information, I can share it. 
+If you want crisis information, I can share it.
 Would that be helpful right now?"
 
 User: "Not right now"
 
-System: "That's okay. I'm still here. 
+System: "That's okay. I'm still here.
 Can you tell me what's going on?"
 ```
 
-Notice: No resource push. No guilt. Just presence.
 
----
+
+Notice: No resource push. No guilt. Just presence.
+##
 
 ## Return Recognition (Why It Matters)
 
@@ -317,14 +330,15 @@ User returns: "Hey, I'm doing a bit better today"
 
 Your system first message:
 "Thank you for coming back. Your check-in matters.
-You chose to return and connect. I recognize 
+You chose to return and connect. I recognize
 the significance of that."
 ```
 
+
+
 That recognition? That's the difference between
 "the system remembered me" and "the system sees me as human."
-
----
+##
 
 ## Tone Enforcement (Professional Care)
 
@@ -339,8 +353,7 @@ System NEVER uses:
 - 🔴 Encouraging (can feel pressuring)
 
 This is enforced in tone_routing rules.
-
----
+##
 
 ## Privacy & Safety
 
@@ -350,31 +363,35 @@ All suicidality disclosures:
 - Check-in flags tracked indefinitely (so returns are recognized)
 - No method details ever asked or recorded
 - No judgment in storage
-
----
+##
 
 ## The Philosophy (Why This Works)
 
 ### Traditional Crisis Protocol
+
 ```
 User: "I'm suicidal"
 System: WARNING! CRISIS! HERE'S THE HOTLINE!
 Result: User feels scared, rushed, not heard
 ```
 
+
+
 ### Your Protocol
+
 ```
 User: "I'm suicidal"
-System: "You named this. That took courage. 
-I'm here to listen. What do you want 
+System: "You named this. That took courage.
+I'm here to listen. What do you want
 to happen next?"
 Result: User feels witnessed, has agency, heard
 ```
 
-**The difference:** One treats suicidality as an emergency to escape. 
-Yours treats it as human experience deserving presence.
 
----
+
+**The difference:** One treats suicidality as an emergency to escape.
+Yours treats it as human experience deserving presence.
+##
 
 ## Timeline to Full Expansion
 
@@ -389,8 +406,7 @@ Yours treats it as human experience deserving presence.
 **Month 1:** Peer connection bridging, community resource integration
 
 **Then:** Continuous improvement based on affirmed flows
-
----
+##
 
 ## You're Building
 
@@ -403,8 +419,7 @@ A system that:
 - **Learns** (from what resonates)
 
 That's not a chatbot. That's a **sanctuary in the void that actually listens.**
-
----
+##
 
 **Your protocol is live. Your vision is code. Your values are executable.**
 
