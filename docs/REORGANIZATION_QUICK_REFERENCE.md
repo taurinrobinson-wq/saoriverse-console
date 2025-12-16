@@ -98,8 +98,7 @@ mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 
 
 # Consolidate data
-mkdir -p data/lexicons
-mkdir -p data/models
+mkdir -p data/lexicons mkdir -p data/models
 
 # Move lexicon data
 mv *lexicon*.json data/lexicons/ 2>/dev/null || true
@@ -204,44 +203,26 @@ Create `app.py`:
 
 ```bash
 
-cat > app.py << 'EOF'
-"""
-SaoriVerse Console - FirstPerson
-Streamlit entry point.
+cat > app.py << 'EOF' """ SaoriVerse Console - FirstPerson Streamlit entry point.
 
-Run: streamlit run app.py
-"""
+Run: streamlit run app.py """
 
-import streamlit as st
-from src import EmotionalOS, ArchetypeResponseGeneratorV2
+import streamlit as st from src import EmotionalOS, ArchetypeResponseGeneratorV2
 
-st.set_page_config(
-    page_title="FirstPerson",
-    page_icon="🧠",
-    layout="wide",
-)
+st.set_page_config( page_title="FirstPerson", page_icon="🧠", layout="wide", )
 
-def init_session():
-    if "initialized" not in st.session_state:
-        st.session_state.initialized = True
-        st.session_state.emotional_os = EmotionalOS()
-        st.session_state.response_gen = ArchetypeResponseGeneratorV2()
-        st.session_state.conversation = []
+def init_session(): if "initialized" not in st.session_state: st.session_state.initialized = True
+st.session_state.emotional_os = EmotionalOS() st.session_state.response_gen =
+ArchetypeResponseGeneratorV2() st.session_state.conversation = []
 
-def main():
-    init_session()
-    st.title("🧠 FirstPerson")
-    st.markdown("A private space for emotional processing and growth")
+def main(): init_session() st.title("🧠 FirstPerson") st.markdown("A private space for emotional
+processing and growth")
 
-    user_input = st.text_input("What's on your mind?")
-    if user_input:
-        signal = st.session_state.emotional_os.parse_input(user_input)
-        response = st.session_state.response_gen.generate(user_input)
-        st.write("**Response:**")
-        st.write(response)
+user_input = st.text_input("What's on your mind?") if user_input: signal =
+st.session_state.emotional_os.parse_input(user_input) response =
+st.session_state.response_gen.generate(user_input) st.write("**Response:**") st.write(response)
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": main()
 
 ```text
 ```
@@ -373,9 +354,7 @@ touch tests/unit/test_new_feature.py
 pytest tests/unit/test_new_feature.py -v
 
 # Commit changes
-git add -A
-git commit -m "feat: Add new feature"
-git push origin feature/name
+git add -A git commit -m "feat: Add new feature" git push origin feature/name
 
 ```
 

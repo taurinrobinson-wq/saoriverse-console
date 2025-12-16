@@ -15,32 +15,26 @@ A new orchestrator that wires ALL your built response systems together:
 ```text
 ```
 
-User Input
-    ↓
-[Tier 1: Foundation]
+User Input ↓ [Tier 1: Foundation]
 ├─ Safety checking (Sanctuary)
 ├─ Signal detection (emotional parsing)
 ├─ Base response generation
 └─ Learning from exchange (LexiconLearner)
-    ↓ (~40ms)
-[Tier 2: Aliveness]
+↓ (~40ms) [Tier 2: Aliveness]
 ├─ AttunementLoop (emotional synchronization)
 ├─ EmotionalReciprocity (energy matching)
 ├─ EmbodiedSimulation (presence metaphors)
 └─ EnergyTracker (conversation pacing)
-    ↓ (~15-20ms)
-[Tier 3: Poetic Consciousness]
+↓ (~15-20ms) [Tier 3: Poetic Consciousness]
 ├─ PoetryEngine (metaphor generation)
 ├─ SaoriLayer (aesthetic principles)
 ├─ TensionManager (generative tension)
 └─ MythologyWeaver (narrative building)
-    ↓ (~20-30ms)
-[Composition Layer]
+↓ (~20-30ms) [Composition Layer]
 ├─ Affect parsing (tone/valence/arousal)
 ├─ Template rotation (if available)
 └─ Metadata enrichment
-    ↓
-FINAL RESPONSE (~85-90ms total)
+↓ FINAL RESPONSE (~85-90ms total)
 
 ```
 
@@ -72,9 +66,7 @@ FINAL RESPONSE (~85-90ms total)
 ```text
 ```
 
-/chat endpoint
-    → generate_empathetic_response()
-    → return response
+/chat endpoint → generate_empathetic_response() → return response
 
 ```
 
@@ -175,12 +167,10 @@ FINAL RESPONSE (~85-90ms total)
 
 ## Error Handling & Fallback
 
-If ANY component fails:
-1. Tier 1 fails → Use base response, continue to Tier 2
-2. Tier 2 fails → Use current response, continue to Tier 3
-3. Tier 3 fails → Use current response, proceed to composition
-4. Entire pipeline fails → Return original base response
-5. Pipeline module unavailable → Use basic response generation
+If ANY component fails: 1. Tier 1 fails → Use base response, continue to Tier 2 2. Tier 2 fails →
+Use current response, continue to Tier 3 3. Tier 3 fails → Use current response, proceed to
+composition 4. Entire pipeline fails → Return original base response 5. Pipeline module unavailable
+→ Use basic response generation
 
 **Result:** System is ALWAYS responsive, never crashes
 ##
@@ -204,14 +194,9 @@ If ANY component fails:
 **Step 2: Watch for Startup Messages**
 
 ```
-✓ Whisper model initialized (tiny)
-✓ pyttsx3 engine initialized
-✓ Tier 1 Foundation initialized
-✓ Tier 2 Aliveness initialized
-✓ Tier 3 Poetic Consciousness initialized
-✓ Response Templates initialized
-✓ Affect Parser initialized
-✓ Context Selector initialized
+✓ Whisper model initialized (tiny) ✓ pyttsx3 engine initialized ✓ Tier 1 Foundation initialized ✓
+Tier 2 Aliveness initialized ✓ Tier 3 Poetic Consciousness initialized ✓ Response Templates
+initialized ✓ Affect Parser initialized ✓ Context Selector initialized
 ```text
 ```text
 ```

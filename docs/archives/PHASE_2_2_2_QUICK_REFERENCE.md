@@ -67,11 +67,8 @@ neutral → "calm"
 
 **Logic:**
 
-1. Map tone to response category
-2. Determine tone confidence threshold
-3. Look up glyph in AFFECT_TO_GLYPH
-4. Retrieve response from GLYPH_AWARE_RESPONSES
-5. Return with glyph name
+1. Map tone to response category 2. Determine tone confidence threshold 3. Look up glyph in
+AFFECT_TO_GLYPH 4. Retrieve response from GLYPH_AWARE_RESPONSES 5. Return with glyph name
 
 **Example:**
 
@@ -204,18 +201,15 @@ response, glyph = compose_glyph_aware_response(
 
 ## Backward Compatibility
 
-✅ ResponseRotator still available as fallback
-✅ All 198 existing tests still passing
-✅ No breaking changes to public API
-✅ Existing response behavior preserved when glyph match unavailable
+✅ ResponseRotator still available as fallback ✅ All 198 existing tests still passing ✅ No breaking
+changes to public API ✅ Existing response behavior preserved when glyph match unavailable
 
 ## Known Gaps for Future Phases
 
-1. **Phase 2.3 (Repair Module)**: Detect rejected glyphs, learn user preferences
-2. **Phase 3.1 (Perspective Taking)**: View same emotion through different glyphs
-3. **Phase 3.2 (Micro-Choice Offering)**: Offer glyph-aligned choices
-4. **Phase 4.2 (Emotion Regulation)**: Map glyphs to coping strategies
-5. **Phase 5.1 (Dynamic Scaffolding)**: Personalize glyph selection
+1. **Phase 2.3 (Repair Module)**: Detect rejected glyphs, learn user preferences 2. **Phase 3.1
+(Perspective Taking)**: View same emotion through different glyphs 3. **Phase 3.2 (Micro-Choice
+Offering)**: Offer glyph-aligned choices 4. **Phase 4.2 (Emotion Regulation)**: Map glyphs to coping
+strategies 5. **Phase 5.1 (Dynamic Scaffolding)**: Personalize glyph selection
 
 ## Quick Start for Developers
 

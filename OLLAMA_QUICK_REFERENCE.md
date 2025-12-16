@@ -52,31 +52,19 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 
 # Check if available
-if client.is_available():
-    print("✅ Ollama running")
+if client.is_available(): print("✅ Ollama running")
 
 # Get models
-models = client.get_available_models()
-print(f"Available models: {models}")
+models = client.get_available_models() print(f"Available models: {models}")
 
 # Generate response
-response = client.generate(
-    prompt="Why is the sky blue?",
-    model="llama3",
-    temperature=0.7,
-    num_predict=512
-)
-print(response)
+response = client.generate( prompt="Why is the sky blue?", model="llama3", temperature=0.7,
+num_predict=512 ) print(response)
 
 # Generate with conversation context
-response = client.generate_with_context(
-    user_input="I'm feeling overwhelmed",
-    conversation_history=[
-        {"role": "user", "content": "I've been stressed"},
-        {"role": "assistant", "content": "That sounds challenging"},
-    ],
-    model="llama3"
-)
+response = client.generate_with_context( user_input="I'm feeling overwhelmed",
+conversation_history=[ {"role": "user", "content": "I've been stressed"}, {"role": "assistant",
+"content": "That sounds challenging"}, ], model="llama3" )
 ```text
 ```text
 ```
@@ -93,16 +81,16 @@ docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml down
 
 # View logs
-docker-compose -f docker-compose.local.yml logs -f streamlit
-docker-compose -f docker-compose.local.yml logs -f ollama
+docker-compose -f docker-compose.local.yml logs -f streamlit docker-compose -f
+docker-compose.local.yml logs -f ollama
 
 # Check status
 docker-compose -f docker-compose.local.yml ps
 
 # Pull a model
-docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
-docker-compose -f docker-compose.local.yml exec ollama ollama pull mistral
-docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini
+docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3 docker-compose -f
+docker-compose.local.yml exec ollama ollama pull mistral docker-compose -f docker-compose.local.yml
+exec ollama ollama pull orca-mini
 
 # List models
 docker-compose -f docker-compose.local.yml exec ollama ollama list
@@ -198,20 +186,16 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 ## Fallback Flow
 
 ```
-User message arrives
-    ↓
-Try local Glyph parsing
+User message arrives ↓ Try local Glyph parsing
     ├─ Success (has voltage_response) → Use + Tier processing → Display
     └─ Fail (empty/null) ↓
-    ↓
-Try FirstPerson orchestrator
+↓ Try FirstPerson orchestrator
     ├─ Success → Use + Tier processing → Display
     └─ Fail ↓
-    ↓
-Try Ollama fallback
+↓ Try Ollama fallback
     ├─ Available → HTTP call + Tier processing → Display
     └─ Unavailable ↓
-    ↓
+↓
 ```text
 ```text
 ```
@@ -227,10 +211,8 @@ Try Ollama fallback
 
 ```
 
-docker-compose.local.yml          (72 lines)
-Dockerfile.streamlit               (29 lines)
-ollama_client.py                   (347 lines)
-OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
+docker-compose.local.yml          (72 lines) Dockerfile.streamlit               (29 lines)
+ollama_client.py                   (347 lines) OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
 OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
 
 ```text
@@ -305,12 +287,10 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 
 ## Next Steps
 
-1. **Test Locally**: Run docker-compose.local.yml
-2. **Pull Model**: Get llama3 or orca-mini
-3. **Chat**: Open <http://localhost:8501> and converse
-4. **Monitor**: Watch logs to see Ollama being called
-5. **Tune**: Adjust system prompt or model parameters
-6. **Share**: Share responses and feedback
+1. **Test Locally**: Run docker-compose.local.yml 2. **Pull Model**: Get llama3 or orca-mini 3.
+**Chat**: Open <http://localhost:8501> and converse 4. **Monitor**: Watch logs to see Ollama being
+called 5. **Tune**: Adjust system prompt or model parameters 6. **Share**: Share responses and
+feedback
 
 ## Resources
 

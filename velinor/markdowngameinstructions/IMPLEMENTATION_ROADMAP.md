@@ -2,7 +2,8 @@
 
 ## Document Structure Overview
 
-This roadmap outlines a complete development path for Velinor: Remnants of the Tone, organized into phases with clear deliverables, technical requirements, and narrative integration points.
+This roadmap outlines a complete development path for Velinor: Remnants of the Tone, organized into
+phases with clear deliverables, technical requirements, and narrative integration points.
 
 ##
 
@@ -646,19 +647,12 @@ This roadmap outlines a complete development path for Velinor: Remnants of the T
 ```text
 ```
 
-TONE System
-    ↓
-NPC Resonance
-    ↓
-Dialogue System
-    ↓
-Marketplace NPCs
+TONE System ↓ NPC Resonance ↓ Dialogue System ↓ Marketplace NPCs
     ├── NPC Sphere System
     └── Kaelen Arc
             ├── Veynar
             └── Drossel (prep for later)
-                    ↓
-                Journal System
+↓ Journal System
                     ├── Glyph System
                     │   ├── Triglyph Chambers
                     │   └── Octoglyph Chambers

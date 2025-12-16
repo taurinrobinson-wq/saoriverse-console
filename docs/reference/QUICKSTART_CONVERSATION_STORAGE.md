@@ -2,7 +2,8 @@
 
 ## What's New ✨
 
-Your conversations now **automatically save** and **persist across page refreshes**. Just like Microsoft Copilot!
+Your conversations now **automatically save** and **persist across page refreshes**. Just like
+Microsoft Copilot!
 
 ## Getting Started
 
@@ -12,10 +13,8 @@ Run this SQL in your Supabase dashboard:
 
 **Path**: `sql/conversations_table.sql`
 
-1. Go to Supabase Console → **SQL Editor**
-2. Click **New Query**
-3. Copy the entire contents of `sql/conversations_table.sql`
-4. Paste it and click **Run**
+1. Go to Supabase Console → **SQL Editor** 2. Click **New Query** 3. Copy the entire contents of
+`sql/conversations_table.sql` 4. Paste it and click **Run**
 
 This creates:
 
@@ -71,8 +70,7 @@ When you start a new conversation, the first message is used to auto-generate a 
 
 ```
 
-You: "I've been feeling really overwhelmed lately"
-       ↓
+You: "I've been feeling really overwhelmed lately" ↓
 
 ```text
 ```
@@ -127,26 +125,20 @@ Example:
 
 **A:**
 
-1. Check "💾 Save my chats" is toggled ON
-2. Refresh the page
-3. Wait a moment for sidebar to load
+1. Check "💾 Save my chats" is toggled ON 2. Refresh the page 3. Wait a moment for sidebar to load
 
 ### Q: Conversations disappeared after refresh?
 
 **A:**
 
-1. Make sure "💾 Save my chats" is checked
-2. Verify Supabase credentials in secrets.toml
-3. Check browser console (F12) for errors
-4. Verify `sql/conversations_table.sql` was run
+1. Make sure "💾 Save my chats" is checked 2. Verify Supabase credentials in secrets.toml 3. Check
+browser console (F12) for errors 4. Verify `sql/conversations_table.sql` was run
 
 ### Q: Auto-name shows "New Conversation" instead of smart title?
 
 **A:**
 
-1. Make sure first message is not empty
-2. Try restarting the app
-3. Check logs for NLP errors
+1. Make sure first message is not empty 2. Try restarting the app 3. Check logs for NLP errors
 
 ### Q: Can I rename a conversation?
 
@@ -193,12 +185,10 @@ from emotional_os.deploy.modules.conversation_manager import ConversationManager
 manager = ConversationManager(user_id="user123")
 
 # List all conversations
-convs = manager.load_conversations()
-print(convs)
+convs = manager.load_conversations() print(convs)
 
 # Load specific conversation
-conv = manager.load_conversation("conv-uuid")
-print(conv['messages'])
+conv = manager.load_conversation("conv-uuid") print(conv['messages'])
 
 # Rename
 success, msg = manager.rename_conversation("conv-uuid", "New Title")

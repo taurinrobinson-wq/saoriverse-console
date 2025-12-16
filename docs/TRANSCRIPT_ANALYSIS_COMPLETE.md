@@ -53,11 +53,11 @@ Your transcript revealed: Heavy em-dash usage (0.67/message) creates dense, form
 ```text
 ```
 
-❌ BEFORE: "That's such a tender contradiction, isn't it—the way connection
-can be genuine and exploitative at once—and I think what you're naming is that..."
+❌ BEFORE: "That's such a tender contradiction, isn't it—the way connection can be genuine and
+exploitative at once—and I think what you're naming is that..."
 
-✓ AFTER: "That's a tender contradiction. Connection can be genuine and
-exploitative at once. You're naming something real there."
+✓ AFTER: "That's a tender contradiction. Connection can be genuine and exploitative at once. You're
+naming something real there."
 
 ```
 

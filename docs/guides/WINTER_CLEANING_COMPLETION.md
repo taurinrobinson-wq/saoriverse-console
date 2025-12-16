@@ -4,7 +4,9 @@
 
 ## Overview
 
-Successfully reorganized the root directory from **30 Python files** down to **11 core files**. This cleanup significantly improves project maintainability and clarity while maintaining 100% backward compatibility.
+Successfully reorganized the root directory from **30 Python files** down to **11 core files**. This
+cleanup significantly improves project maintainability and clarity while maintaining 100% backward
+compatibility.
 
 ##
 
@@ -12,7 +14,8 @@ Successfully reorganized the root directory from **30 Python files** down to **1
 
 ### ✅ Phase Infrastructure → `archive/phase_infrastructure/` (8 files)
 
-These are historical phase files from the glyph generation pipeline that are preserved for reference:
+These are historical phase files from the glyph generation pipeline that are preserved for
+reference:
 
 ```text
 ```

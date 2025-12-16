@@ -2,7 +2,9 @@
 
 ## Overview
 
-You've just built a **three-layer system** that enables the saoriverse console to learn from lived dialogue and evolve dynamically. This is a fundamental shift from template-based responses to principle-driven, adaptive conversation.
+You've just built a **three-layer system** that enables the saoriverse console to learn from lived
+dialogue and evolve dynamically. This is a fundamental shift from template-based responses to
+principle-driven, adaptive conversation.
 
 ### The Three Layers
 
@@ -21,8 +23,7 @@ You've just built a **three-layer system** that enables the saoriverse console t
 │    - Tone Guidelines: Style, pacing, emotional calibration │
 │    - Success Weight: How well this archetype performs       │
 └─────────────────────────────────────────────────────────────┘
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────────────────┐
 │ 2. RESPONSE GENERATOR                                       │
 │    Applies learned archetype principles to generate fresh   │
 │    responses. NOT template rotation — actually honors the   │
@@ -34,8 +35,7 @@ You've just built a **three-layer system** that enables the saoriverse console t
 │    3. Generate response following those principles          │
 │    4. Each response is unique (not template variation)      │
 └─────────────────────────────────────────────────────────────┘
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────────────────┐
 │ 3. CONVERSATION LEARNER                                     │
 │    After each good conversation, automatically extracts     │
 │    new patterns or refines existing ones. This runs         │
@@ -62,14 +62,13 @@ You create a conversational scene showing how the system should respond:
 ```text
 ```
 
-User: Yesterday was so heavy, but today my child hugged me
-      and I felt like everything melted away for a moment.
+User: Yesterday was so heavy, but today my child hugged me and I felt like everything melted away
+for a moment.
 
-System: That moment with your child sounds genuinely special.
-        What does that connection feel like for you?
+System: That moment with your child sounds genuinely special. What does that connection feel like
+for you?
 
-User: Maybe even more so. I don't know sometimes I don't
-      feel like I'm doing enough for my kids...
+User: Maybe even more so. I don't know sometimes I don't feel like I'm doing enough for my kids...
 
 ```
 
@@ -80,23 +79,11 @@ User: Maybe even more so. I don't know sometimes I don't
 The learner automatically extracts principles:
 
 ```json
-{
-  "archetype": "ReliefToGratitude",
-  "entry_cues": ["relief", "grateful", "hug", "melted away"],
-  "response_principles": [
-    "Validate positive moment warmly",
-    "Balance empathy across mixed emotions",
-    "Invite elaboration with gentle questions"
-  ],
-  "continuity_bridges": [
-    "Connect gratitude to prior overwhelm",
-    "Carry forward themes into deeper exploration"
-  ],
-  "tone_guidelines": [
-    "Warm and embracing language",
-    "Gentle pacing with validation first",
-    "Mirror user's metaphors"
-  ]
+{ "archetype": "ReliefToGratitude", "entry_cues": ["relief", "grateful", "hug", "melted away"],
+"response_principles": [ "Validate positive moment warmly", "Balance empathy across mixed emotions",
+"Invite elaboration with gentle questions" ], "continuity_bridges": [ "Connect gratitude to prior
+overwhelm", "Carry forward themes into deeper exploration" ], "tone_guidelines": [ "Warm and
+embracing language", "Gentle pacing with validation first", "Mirror user's metaphors" ]
 ```text
 ```text
 ```
@@ -133,29 +120,19 @@ System records whether user found response helpful, updates archetype success we
 
 ```python
 
-from emotional_os.learning import (
-    get_archetype_library,
-    get_archetype_response_generator,
-    get_conversation_learner,
-)
+from emotional_os.learning import ( get_archetype_library, get_archetype_response_generator,
+get_conversation_learner, )
 
 # Generate a response using learned archetypes
-generator = get_archetype_response_generator()
-response = generator.generate_archetype_aware_response(
-    user_input="I feel grateful but also overwhelmed",
-    prior_context="Yesterday I was so stressed",
-    glyph=None,  # Optional glyph for tonal calibration
-)
+generator = get_archetype_response_generator() response =
+generator.generate_archetype_aware_response( user_input="I feel grateful but also overwhelmed",
+prior_context="Yesterday I was so stressed", glyph=None,  # Optional glyph for tonal calibration )
 
 # Learn from a conversation
-learner = get_conversation_learner()
-new_archetype = learner.learn_from_conversation(
-    turns=[
-        {"role": "user", "content": "..."},
-        {"role": "assistant", "content": "..."},
+learner = get_conversation_learner() new_archetype = learner.learn_from_conversation( turns=[
+{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."},
         # ... more turns
-    ],
-    user_rating=0.9,  # 1.0 = excellent, 0.0 = poor
+], user_rating=0.9,  # 1.0 = excellent, 0.0 = poor
 
 ```text
 ```
@@ -205,9 +182,11 @@ best_match = library.get_best_match(
 
 1. **Add More Dialogue Scenes**: You write more conversational scenes, each becomes an archetype
 
-2. **Integrate with Streamlit UI**: Show users that the system is learning their conversational patterns
+2. **Integrate with Streamlit UI**: Show users that the system is learning their conversational
+patterns
 
-3. **Add User Feedback Loop**: Let users rate responses, which auto-updates archetype success weights
+3. **Add User Feedback Loop**: Let users rate responses, which auto-updates archetype success
+weights
 
 4. **Multi-Turn Refinement**: System improves its archetype matching across a full conversation
 
@@ -228,15 +207,14 @@ cat emotional_os/learning/archetype_library.json | python -m json.tool
 
 ## Architecture Strengths
 
-✓ **Modular**: Each layer is independent, can be updated separately
-✓ **Auditable**: Every archetype is readable JSON, not buried in ML weights
-✓ **Expandable**: Add new archetypes without retraining
-✓ **Personalized**: Learns from YOUR dialogue, your communication style
-✓ **Transparent**: You can see exactly why system chose a response
-✓ **Adaptive**: Success weights evolve based on real outcomes
+✓ **Modular**: Each layer is independent, can be updated separately ✓ **Auditable**: Every archetype
+is readable JSON, not buried in ML weights ✓ **Expandable**: Add new archetypes without retraining ✓
+**Personalized**: Learns from YOUR dialogue, your communication style ✓ **Transparent**: You can see
+exactly why system chose a response ✓ **Adaptive**: Success weights evolve based on real outcomes
 
 ##
 
 **This is the foundation for truly adaptive, learning-based empathetic conversation.**
 
-Next: Integrate this into the main response pipeline so it starts learning from every conversation automatically.
+Next: Integrate this into the main response pipeline so it starts learning from every conversation
+automatically.

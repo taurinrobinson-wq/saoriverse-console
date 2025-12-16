@@ -199,9 +199,8 @@ git checkout 129ca3b  # Phase 3.1/3.5 commit
 
 ### Partial Rollback (disable Phase 3.2)
 
-1. Keep Phase 3.2 modules but don't call them
-2. Revert MultimodalFusionEngine initialization in Phase 3.1
-3. Fall back to text-only analysis
+1. Keep Phase 3.2 modules but don't call them 2. Revert MultimodalFusionEngine initialization in
+Phase 3.1 3. Fall back to text-only analysis
 
 ##
 

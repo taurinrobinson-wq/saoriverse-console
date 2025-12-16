@@ -8,9 +8,16 @@
 
 ## Core Concept (30-Second Pitch)
 
-In the fractured ruins of a futuristic city called Velhara, the player awakens with no memory of how they got there. They discover that Saori, the only person with full memory, is desperately trying to restart an ancient emotional-control system called Corelink—not out of ambition, but to save her best friend Velinor, who sacrificed her consciousness to shut down the system 25 years ago.
+In the fractured ruins of a futuristic city called Velhara, the player awakens with no memory of how
+they got there. They discover that Saori, the only person with full memory, is desperately trying to
+restart an ancient emotional-control system called Corelink—not out of ambition, but to save her
+best friend Velinor, who sacrificed her consciousness to shut down the system 25 years ago.
 
-The player must navigate a living community of NPCs, each with their own memories, pain, and perspectives. Every choice invisibly shapes the player's emotional profile—Trust, Observation, Narrative Presence, and Empathy (TONE)—which determines which NPCs open up, which glyphs (emotional fragments) become accessible, and ultimately, which of six fundamentally different endings become available.
+The player must navigate a living community of NPCs, each with their own memories, pain, and
+perspectives. Every choice invisibly shapes the player's emotional profile—Trust, Observation,
+Narrative Presence, and Empathy (TONE)—which determines which NPCs open up, which glyphs (emotional
+fragments) become accessible, and ultimately, which of six fundamentally different endings become
+available.
 
 **There is no "good" ending. Every path honors something while destroying something else. The game is about the weight of choice, not the thrill of winning.**
 
@@ -58,7 +65,8 @@ The player must navigate a living community of NPCs, each with their own memorie
 
 ## The Marketplace: Heart of the Game
 
-The marketplace is where 95% of early-game interaction happens. Eight distinct NPCs create a living, dynamic community:
+The marketplace is where 95% of early-game interaction happens. Eight distinct NPCs create a living,
+dynamic community:
 
 | NPC | Role | Primary TONE | Key Mechanic |
 |---|---|---|---|
@@ -77,15 +85,15 @@ The marketplace is where 95% of early-game interaction happens. Eight distinct N
 
 **Kaelen the Cloaked** is a pivotal NPC who tests the player's moral foundation:
 
-1. **Player encounters Kaelen** (suspected thief)
-2. **Two paths**:
+1. **Player encounters Kaelen** (suspected thief) 2. **Two paths**:
    - **Report to Captain Veynar** → Steal recovered, but Kaelen's trust fractures, optional Drossel questline closes
    - **Protect Kaelen's secret** → Items lost temporarily, but Kaelen trusts you, opens Drossel questline
 3. **Optional Drossel quest** (if Kaelen was protected):
    - Infiltrate thieves' lair in the swamp
    - Recover stolen items from Drossel's hideout
    - Bonus: recover all stolen items from villagers too
-4. **Player choice**: Return items (restore community trust) or keep them (personal gain, fracture trust)
+4. **Player choice**: Return items (restore community trust) or keep them (personal gain, fracture
+trust)
 
 **Why It Matters**: This is a microcosm of the final Saori-Velinor choice. Do you choose justice, loyalty, or survival?
 
@@ -95,15 +103,22 @@ The marketplace is where 95% of early-game interaction happens. Eight distinct N
 
 ### The Setup
 
-25 years ago, Saori and Velinor co-designed the Corelink system—an AI that would unify human emotional resonance and end suffering. Saori believed unified emotion could heal all conflict. Velinor believed emotional autonomy must be preserved.
+25 years ago, Saori and Velinor co-designed the Corelink system—an AI that would unify human
+emotional resonance and end suffering. Saori believed unified emotion could heal all conflict.
+Velinor believed emotional autonomy must be preserved.
 
-Saori, frustrated by Velinor's resistance, activated the system alone. **It catastrophically failed.** Millions died, including children. Velinor sacrificed her consciousness to stabilize the shutdown sequence so Saori could shut it down.
+Saori, frustrated by Velinor's resistance, activated the system alone. **It catastrophically
+failed.** Millions died, including children. Velinor sacrificed her consciousness to stabilize the
+shutdown sequence so Saori could shut it down.
 
-Velinor's consciousness fractured into 70 glyphs, scattered across Velhara. Saori has spent 25 years trying to gather enough glyphs to restart the system and bring Velinor back.
+Velinor's consciousness fractured into 70 glyphs, scattered across Velhara. Saori has spent 25 years
+trying to gather enough glyphs to restart the system and bring Velinor back.
 
 ### The Chamber
 
-The player discovers Saori's underground chamber—the last working node of Corelink. Picture frames line the walls: Saori and Velinor as young architects, full of hope. Now they stand 25 years older in the chamber, waiting.
+The player discovers Saori's underground chamber—the last working node of Corelink. Picture frames
+line the walls: Saori and Velinor as young architects, full of hope. Now they stand 25 years older
+in the chamber, waiting.
 
 ### The Choice
 

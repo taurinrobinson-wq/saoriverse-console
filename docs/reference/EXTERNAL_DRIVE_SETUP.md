@@ -2,7 +2,8 @@
 
 ## ✅ Status: Configured for External Storage
 
-Your FirstPerson local emotional processing system has been successfully moved to your external hard drive to conserve local storage.
+Your FirstPerson local emotional processing system has been successfully moved to your external hard
+drive to conserve local storage.
 
 ##
 
@@ -109,12 +110,10 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 ```bash
 
 # Local machine
-/Users/taurinrobinson/saoriverse-console/.venv
-  → Points to external drive
-     /Volumes/My Passport for Mac/FirstPerson/venv
+/Users/taurinrobinson/saoriverse-console/.venv → Points to external drive /Volumes/My Passport for
+Mac/FirstPerson/venv
 
-/Users/taurinrobinson/saoriverse-console/data
-  → Points to external drive
+/Users/taurinrobinson/saoriverse-console/data → Points to external drive
 ```text
 ```text
 ```
@@ -178,10 +177,7 @@ The Python environment on the external drive has **absolute paths** baked in. Th
 The `.git` folder is still on your local machine, so Git works normally:
 
 ```bash
-cd /Users/taurinrobinson/saoriverse-console
-git status
-git add .
-git commit -m "message"
+cd /Users/taurinrobinson/saoriverse-console git status git add . git commit -m "message"
 ```text
 ```text
 ```
@@ -282,8 +278,7 @@ For quick testing, you can:
 cp -r "/Volumes/My Passport for Mac/FirstPerson/venv" /Users/taurinrobinson/saoriverse-console/.venv
 
 # Remove symlink, use local copy
-cd /Users/taurinrobinson/saoriverse-console
-rm .venv
+cd /Users/taurinrobinson/saoriverse-console rm .venv
 
 # Now use local .venv
 
@@ -357,10 +352,8 @@ mount | grep "My Passport"
 
 Your FirstPerson system is now:
 
-✅ Running on external drive for storage efficiency
-✅ Accessible from local machine via symlinks
-✅ All functionality preserved
-✅ ~1.65GB freed on local machine
-✅ Ready for poetry enrichment (data grows as needed)
+✅ Running on external drive for storage efficiency ✅ Accessible from local machine via symlinks ✅
+All functionality preserved ✅ ~1.65GB freed on local machine ✅ Ready for poetry enrichment (data
+grows as needed)
 
 **Everything works the same way - just more storage-efficient!** 🚀

@@ -55,12 +55,8 @@ Also wrapped the keys in quotes to ensure proper parsing:
 
 ```bash
 
-python3 -c "
-import toml
-secrets = toml.load('.streamlit/secrets.toml')
-key = secrets['supabase']['key']
-print('Has newlines:', '\\n' in key)  # Should print: False
-"
+python3 -c " import toml secrets = toml.load('.streamlit/secrets.toml') key =
+secrets['supabase']['key'] print('Has newlines:', '\\n' in key)  # Should print: False "
 
 ```
 

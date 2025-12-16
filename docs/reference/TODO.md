@@ -1,6 +1,8 @@
 # Repository TODO
 
-This file is an auto-saved, persistent todo list for the ongoing "move root scripts into tools/" refactor and test stabilization work. It's committed to the repo so you can pick up from any machine.
+This file is an auto-saved, persistent todo list for the ongoing "move root scripts into tools/"
+refactor and test stabilization work. It's committed to the repo so you can pick up from any
+machine.
 
 Status (last updated 2025-10-31):
 

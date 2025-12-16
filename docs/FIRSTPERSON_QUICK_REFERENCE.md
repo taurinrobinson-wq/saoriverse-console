@@ -2,21 +2,19 @@
 
 ## 🎯 Integration at a Glance
 
-Your Velinor game now uses FirstPerson to make NPC dialogue **emotionally responsive**. Here's what happens:
+Your Velinor game now uses FirstPerson to make NPC dialogue **emotionally responsive**. Here's what
+happens:
 
 ```text
 ```
 
-You type: "I'm overwhelmed by all of this"
-           ↓
-FirstPerson analyzes:
+You type: "I'm overwhelmed by all of this" ↓ FirstPerson analyzes:
 
 - Tone: "heavy" (negative emotion)
 - Theme: "general" (burden/overwhelm)
 - Valence: -0.7 (quite negative)
 - Intensity: 0.8 (strong emotion)
-           ↓
-NPC adapts response:
+↓ NPC adapts response:
 - Opening acknowledges weight: "I hear the weight in that"
 - Connects to theme: "The burden can feel immense"
 - Invites exploration: "What needs to be said about it?"
@@ -59,12 +57,10 @@ FirstPerson tracks across turns:
 ```text
 ```
 
-Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6
-Turn 2: "It's like I've lost them" → Theme: grief, Valence: -0.8
-Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
+Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6 Turn 2: "It's like I've lost them"
+→ Theme: grief, Valence: -0.8 Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
 
-→ Detects: 'grief' is recurring
-→ Emotional trend: Improving (from -0.8 to -0.1)
+→ Detects: 'grief' is recurring → Emotional trend: Improving (from -0.8 to -0.1)
 
 ```
 
@@ -129,9 +125,8 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
 # Returns: {emotional_tone, detected_theme, valence, intensity, memory_context}
 
 # Step 2: Apply to NPC dialogue
-npc_dialogue = self._generate_npc_dialogue(
-    npc_name='Keeper',
-    context=updated_state  # Contains player_analysis
+npc_dialogue = self._generate_npc_dialogue( npc_name='Keeper', context=updated_state  # Contains
+player_analysis
 ```text
 ```text
 ```
@@ -146,17 +141,10 @@ npc_dialogue = self._generate_npc_dialogue(
 
 You: "Everything feels too heavy. I don't know if I can go on."
 
-FirstPerson Analysis:
-{
-  tone: 'heavy',
-  theme: 'general',
-  valence: -0.8,
-  intensity: 0.9
-}
+FirstPerson Analysis: { tone: 'heavy', theme: 'general', valence: -0.8, intensity: 0.9 }
 
-Keeper's Response:
-"I hear the weight in that. The gravity of what you're carrying—
-I feel it too. What needs to be said about it? Sometimes naming it
+Keeper's Response: "I hear the weight in that. The gravity of what you're carrying— I feel it too.
+What needs to be said about it? Sometimes naming it
 
 ```text
 ```
@@ -228,8 +216,8 @@ The terminal shows debug info (if logging enabled):
 
 ```
 
-[Player Input] "I'm struggling with loss"
-[FirstPerson] tone='heavy', theme='grief', valence=-0.7, intensity=0.8
+[Player Input] "I'm struggling with loss" [FirstPerson] tone='heavy', theme='grief', valence=-0.7,
+intensity=0.8
 
 ```text
 ```
@@ -287,9 +275,8 @@ self.memory.record_turn(
 ### Recurring Theme Detection
 
 ```python
-Turn 1: "I miss them" → theme='general'
-Turn 2: "The loss keeps returning" → theme='grief'
-Turn 3: "Grief is still with me" → theme='grief' (2nd occurrence)
+Turn 1: "I miss them" → theme='general' Turn 2: "The loss keeps returning" → theme='grief' Turn 3:
+"Grief is still with me" → theme='grief' (2nd occurrence)
 
 # FirstPerson detects 'grief' is recurring:
 memory.repeated_patterns = ['grief']
@@ -303,8 +290,7 @@ memory.repeated_patterns = ['grief']
 
 ```python
 
-Valence history: [-0.8, -0.7, -0.6, -0.4, -0.2]
-→ Trend: 'improving'
+Valence history: [-0.8, -0.7, -0.6, -0.4, -0.2] → Trend: 'improving'
 
 NPC: "I'm also noticing a shift. What's helping?"
 

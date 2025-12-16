@@ -46,22 +46,16 @@
 
 ```bash
 
-ssh root@161.35.227.49
-git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
-chmod +x docker-setup.sh
+ssh root@161.35.227.49 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git cd
+saoriverse-console chmod +x docker-setup.sh
 
 ```text
 ```
 
 **What it does automatically:**
 
-1. Installs Docker & Docker Compose
-2. Creates environment file
-3. Builds all containers
-4. Starts all services
-5. Verifies everything works
-6. Shows you the URLs
+1. Installs Docker & Docker Compose 2. Creates environment file 3. Builds all containers 4. Starts
+all services 5. Verifies everything works 6. Shows you the URLs
 
 ##
 
@@ -92,9 +86,8 @@ chmod +x docker-setup.sh
 ## After Deployment: Your App Lives Here
 
 ```
-🌐 Frontend:    http://161.35.227.49:3000
-⚙️  API:         http://161.35.227.49:8000
-💚 Health:      http://161.35.227.49:8000/health
+🌐 Frontend:    http://161.35.227.49:3000 ⚙️  API:         http://161.35.227.49:8000 💚 Health:
+http://161.35.227.49:8000/health
 ```text
 ```text
 ```
@@ -110,7 +103,7 @@ chmod +x docker-setup.sh
 │          Routes traffic to frontend/backend          │
 └──────────┬──────────────────────────┬────────────────┘
            │                          │
-    ┌──────▼──────────────┐  ┌───────▼──────────────┐
+┌──────▼──────────────┐  ┌───────▼──────────────┐
     │  REACT/EXPO         │  │  FASTAPI             │
     │  Frontend           │  │  Backend             │
     │  Port: 3000         │  │  Port: 8000          │
@@ -119,7 +112,7 @@ chmod +x docker-setup.sh
     │                     │  │  Uses glyphs.db      │
     └─────────────────────┘  └──────────────────────┘
 
-    Both services on same Docker network (saoriverse)
+Both services on same Docker network (saoriverse)
 
 ```text
 ```
@@ -208,8 +201,7 @@ docker compose logs
 docker compose logs
 
 # Rebuild from scratch
-docker compose down
-docker compose build --no-cache
+docker compose down docker compose build --no-cache
 
 ```sql
 ```
@@ -281,15 +273,15 @@ Deployment:
 │                                       │
 └────────────────┬──────────────────────┘
                  │ HTTP/REST
-       ┌─────────▼──────────┐
+┌─────────▼──────────┐
        │                    │
-    ┌──▼───────────────┐  ┌──▼──────────────┐
+┌──▼───────────────┐  ┌──▼──────────────┐
     │   NGINX          │  │                 │
     │   (Port 80)      │  │   Internet      │
     │                  │  │   (not used)    │
     └──┬───────────────┘  │                 │
        │ (Routes to)      │                 │
-   ┌───┴─────────────────────┬─────────────┘
+┌───┴─────────────────────┬─────────────┘
    │                         │
 ┌──▼──────────────┐   ┌──────▼───────────┐
 │  FRONTEND       │   │  BACKEND (API)   │
@@ -313,14 +305,10 @@ After running `./docker-setup.sh`, you should see:
 
 ✓ Setup Complete!
 
-Running containers:
-NAME                      STATUS
-saoriverse-backend        Up (healthy)
-saoriverse-frontend       Up
-saoriverse-nginx          Up
+Running containers: NAME                      STATUS saoriverse-backend        Up (healthy)
+saoriverse-frontend       Up saoriverse-nginx          Up
 
-Your application is now running on:
-Frontend:  http://161.35.227.49:3000
+Your application is now running on: Frontend:  http://161.35.227.49:3000
 
 ```text
 ```
@@ -329,11 +317,10 @@ Frontend:  http://161.35.227.49:3000
 
 ## Next 5 Steps
 
-1. **Open a terminal** on your Ubuntu machine
-2. **SSH to your droplet**: `ssh root@161.35.227.49`
-3. **Clone the repo**: `git clone https://github.com/taurinrobinson-wq/saoriverse-console.git && cd saoriverse-console`
-4. **Run setup**: `chmod +x docker-setup.sh && ./docker-setup.sh`
-5. **Wait & verify**: `docker compose ps` then visit <http://161.35.227.49:3000>
+1. **Open a terminal** on your Ubuntu machine 2. **SSH to your droplet**: `ssh root@161.35.227.49`
+3. **Clone the repo**: `git clone https://github.com/taurinrobinson-wq/saoriverse-console.git && cd
+saoriverse-console` 4. **Run setup**: `chmod +x docker-setup.sh && ./docker-setup.sh` 5. **Wait &
+verify**: `docker compose ps` then visit <http://161.35.227.49:3000>
 
 **Total time: ~10 minutes**
 

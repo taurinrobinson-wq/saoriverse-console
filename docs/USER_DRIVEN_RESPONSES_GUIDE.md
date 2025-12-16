@@ -2,7 +2,8 @@
 
 ## The Correction
 
-The previous implementation incorrectly made glyphs the PRIMARY driver of responses. This has been fixed.
+The previous implementation incorrectly made glyphs the PRIMARY driver of responses. This has been
+fixed.
 
 **Now**: User's message is PRIMARY → Glyph is VALIDATOR/CONTAINER
 
@@ -17,12 +18,10 @@ Extract linguistic elements:
 
 User Input: "I'm feeling so stressed today"
 
-1. ACTOR: "I" → personal, visceral, felt
-2. VERB: "feeling" → present participle (action happening NOW)
-3. TENSE: Present → indicates immediacy, urgency
-4. ADVERB: "so" → emphasis/intensity marker
-5. ADJECTIVE: "stressed" → primary emotional state
-6. TEMPORAL: "today" → specific day, not past/future anxiety
+1. ACTOR: "I" → personal, visceral, felt 2. VERB: "feeling" → present participle (action happening
+NOW) 3. TENSE: Present → indicates immediacy, urgency 4. ADVERB: "so" → emphasis/intensity marker 5.
+ADJECTIVE: "stressed" → primary emotional state 6. TEMPORAL: "today" → specific day, not past/future
+anxiety
 
 ```
 
@@ -105,14 +104,11 @@ System Analysis:
 - Present tense (immediate)
 - Missing: context, temporal, somatic, relational, agency
 
-Response:
-  "You've been experiencing sadness. This sadness is real—sorrow witnessed.
-   The pain of being truly seen. What's the loss you're sensing?"
+Response: "You've been experiencing sadness. This sadness is real—sorrow witnessed. The pain of
+being truly seen. What's the loss you're sensing?"
 
-Why this works:
-  ✓ Acknowledges emotional state immediately
-  ✓ Validates with glyph (without replacing user's message)
-  ✓ Asks specific question about missing context (what's the loss)
+Why this works: ✓ Acknowledges emotional state immediately ✓ Validates with glyph (without replacing
+user's message) ✓ Asks specific question about missing context (what's the loss)
 
 ```
 
@@ -132,16 +128,12 @@ System Analysis:
 - Temporal marker (today, not chronic/future)
 - Missing: context about what triggered it
 
-Response:
-  "You're feeling stress right now—and you're emphasizing how much this is present.
-   What you're describing has a quality of quiet revelation. Truth that arrives
-   without noise. What's creating this pressure right now?"
+Response: "You're feeling stress right now—and you're emphasizing how much this is present. What
+you're describing has a quality of quiet revelation. Truth that arrives without noise. What's
+creating this pressure right now?"
 
-Why this works:
-  ✓ Recognizes present-tense immediacy
-  ✓ Acknowledges emphasis explicitly
-  ✓ Uses glyph to validate (not generate)
-  ✓ Asks about missing context
+Why this works: ✓ Recognizes present-tense immediacy ✓ Acknowledges emphasis explicitly ✓ Uses glyph
+to validate (not generate) ✓ Asks about missing context
 
 ```
 
@@ -275,8 +267,8 @@ Example breakdown:
 ```text
 ```
 
-"You're feeling stress right now—and you're emphasizing how much this is present.
-What you're describing has a quality of quiet revelation. What's creating this pressure?"
+"You're feeling stress right now—and you're emphasizing how much this is present. What you're
+describing has a quality of quiet revelation. What's creating this pressure?"
 
 ```
 
@@ -312,10 +304,9 @@ Methods:
 Run tests to verify:
 
 ```bash
-python test_user_driven_responses.py           # Basic test
-python SEMANTIC_PARSING_WALKTHROUGH.py         # Detailed walkthrough
-python test_semantic_parsing.py                # Multiple cases
-python test_full_e2e_user_driven.py           # Full pipeline
+python test_user_driven_responses.py           # Basic test python SEMANTIC_PARSING_WALKTHROUGH.py
+# Detailed walkthrough python test_semantic_parsing.py                # Multiple cases python
+test_full_e2e_user_driven.py           # Full pipeline
 ```
 
 All tests demonstrate:

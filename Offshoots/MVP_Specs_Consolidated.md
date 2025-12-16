@@ -1,6 +1,8 @@
 # Offshoots, Consolidated MVP Specs
 
-This document consolidates and extends the MVP specs in `/Offshoots`. Each offshoot below has a 1-page MVP spec, acceptance criteria, success metrics, a 6–12 week roadmap, key risks, and recommended next actions.
+This document consolidates and extends the MVP specs in `/Offshoots`. Each offshoot below has a
+1-page MVP spec, acceptance criteria, success metrics, a 6–12 week roadmap, key risks, and
+recommended next actions.
 
 ##
 
@@ -339,9 +341,9 @@ Infrastructure
 
 # Next steps (recommendation)
 
-1. Confirm priority order of offshoots (which MVP to build first).
-2. For first-priority product, produce a 2-week sprint plan and begin the prototype (code scaffold + endpoint mock).
-3. Assemble small cross-functional team (ML eng, backend, mobile, UX, compliance advisor).
+1. Confirm priority order of offshoots (which MVP to build first). 2. For first-priority product,
+produce a 2-week sprint plan and begin the prototype (code scaffold + endpoint mock). 3. Assemble
+small cross-functional team (ML eng, backend, mobile, UX, compliance advisor).
 
 ##
 

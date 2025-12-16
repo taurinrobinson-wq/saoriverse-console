@@ -2,7 +2,8 @@
 
 ## Current State: What You Have Active
 
-Your system is now using **compositional response generation** instead of canned templates. The architecture leverages these offline resources:
+Your system is now using **compositional response generation** instead of canned templates. The
+architecture leverages these offline resources:
 
 ### 1. **spaCy (NLP Library)**
 
@@ -78,11 +79,8 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 from nltk.text import TextCollection
 
 # Build from all your glyph descriptions + poetry + prior responses
-linguistic_patterns = TextCollection([
-    list_of_glyph_descriptions,
-    list_of_poetry_lines,
-    list_of_prior_responses
-])
+linguistic_patterns = TextCollection([ list_of_glyph_descriptions, list_of_poetry_lines,
+list_of_prior_responses ])
 
 # Generate realistic-sounding next phrases based on learned patterns
 ```sql
@@ -101,12 +99,11 @@ linguistic_patterns = TextCollection([
 
 import spacy
 
-nlp = spacy.load("en_core_web_md")  # Medium model has better word vectors
-doc = nlp("Michelle explains things in a way that only she can follow")
+nlp = spacy.load("en_core_web_md")  # Medium model has better word vectors doc = nlp("Michelle
+explains things in a way that only she can follow")
 
 # Extract: subject, verb, object, modifiers
-for token in doc:
-    print(f"{token.text} -> {token.dep_} ({token.head.text})")
+for token in doc: print(f"{token.text} -> {token.dep_} ({token.head.text})")
 
 # Output:
 
@@ -129,10 +126,8 @@ for token in doc:
 
 ### **Phase 1: Current (DONE)**
 
-✅ Dynamic composition from linguistic fragments
-✅ Entity extraction (who, what, relationships)
-✅ Poetry weaving
-✅ Semantic engine (spaCy basics)
+✅ Dynamic composition from linguistic fragments ✅ Entity extraction (who, what, relationships) ✅
+Poetry weaving ✅ Semantic engine (spaCy basics)
 
 ### **Phase 2: Next Week (Recommended)**
 
@@ -161,11 +156,10 @@ if people:
 
 ## Summary: Why Offline is Better for You
 
-1. **No API costs or privacy leaks**, everything stays local
-2. **Can tap into your own voice**, train from existing glyphs/poetry
-3. **Faster inference**, local NLP is instant, not waiting for API
-4. **More control**, you decide which linguistic patterns to reward
-5. **Portable**, can run on laptop, phone, raspberry pi
+1. **No API costs or privacy leaks**, everything stays local 2. **Can tap into your own voice**,
+train from existing glyphs/poetry 3. **Faster inference**, local NLP is instant, not waiting for API
+4. **More control**, you decide which linguistic patterns to reward 5. **Portable**, can run on
+laptop, phone, raspberry pi
 
 ##
 

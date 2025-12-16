@@ -40,8 +40,7 @@ mkdir -p data/lexicons
 ```python
 
 # Your code already has this! Just verify:
-import nltk
-from nltk.sentiment import SentimentIntensityAnalyzer
+import nltk from nltk.sentiment import SentimentIntensityAnalyzer
 
 # Should work - NLTK already integrated
 sia = SentimentIntensityAnalyzer()
@@ -57,81 +56,50 @@ Create a new file: `parser/nrc_lexicon_loader.py`
 
 ```python
 
-"""
-Load NRC Emotion Lexicon for local emotional processing.
-14,182 words mapped to 10 emotion categories + sentiment.
+""" Load NRC Emotion Lexicon for local emotional processing. 14,182 words mapped to 10 emotion
+categories + sentiment.
 
-Data source: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
-Free for research use.
-"""
+Data source: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm Free for research use. """
 
-import os
-from collections import defaultdict
+import os from collections import defaultdict
 
-class NRCLexicon:
-    """Load and query the NRC Emotion Lexicon locally."""
+class NRCLexicon: """Load and query the NRC Emotion Lexicon locally."""
 
-    def __init__(self, filepath: str = "data/lexicons/nrc_emotion_lexicon.txt"):
-        """
-        Initialize NRC Lexicon loader.
+def __init__(self, filepath: str = "data/lexicons/nrc_emotion_lexicon.txt"): """ Initialize NRC
+Lexicon loader.
 
-        Format of lexicon file:
-        word    emotion    association
-        good    trust    1
-        good    joy    1
-        bad    sadness    1
-        """
-        self.word_emotions = defaultdict(list)
-        self.emotion_words = defaultdict(list)
-        self.loaded = False
+Format of lexicon file: word    emotion    association good    trust    1 good    joy    1 bad
+sadness    1 """ self.word_emotions = defaultdict(list) self.emotion_words = defaultdict(list)
+self.loaded = False
 
-        if os.path.exists(filepath):
-            self._load_lexicon(filepath)
-        else:
-            print(f"Warning: NRC lexicon not found at {filepath}")
-            print("Download from: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm")
+if os.path.exists(filepath): self._load_lexicon(filepath) else: print(f"Warning: NRC lexicon not
+found at {filepath}") print("Download from:
+http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm")
 
-    def _load_lexicon(self, filepath: str):
-        """Load lexicon from file."""
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                next(f)  # Skip header if present
-                for line in f:
-                    parts = line.strip().split('\t')
-                    if len(parts) >= 3:
-                        word = parts[0].lower()
-                        emotion = parts[1]
-                        association = int(parts[2])
+def _load_lexicon(self, filepath: str): """Load lexicon from file.""" try: with open(filepath, 'r',
+encoding='utf-8') as f: next(f)  # Skip header if present for line in f: parts =
+line.strip().split('\t') if len(parts) >= 3: word = parts[0].lower() emotion = parts[1] association
+= int(parts[2])
 
-                        if association == 1:
-                            self.word_emotions[word].append(emotion)
-                            self.emotion_words[emotion].append(word)
+if association == 1: self.word_emotions[word].append(emotion)
+self.emotion_words[emotion].append(word)
 
-            self.loaded = True
-            print(f"✓ NRC Lexicon loaded: {len(self.word_emotions)} words")
-        except Exception as e:
-            print(f"Error loading NRC lexicon: {e}")
+self.loaded = True print(f"✓ NRC Lexicon loaded: {len(self.word_emotions)} words") except Exception
+as e: print(f"Error loading NRC lexicon: {e}")
 
-    def get_emotions(self, word: str) -> list:
-        """Get emotions for a word."""
-        return self.word_emotions.get(word.lower(), [])
+def get_emotions(self, word: str) -> list: """Get emotions for a word.""" return
+self.word_emotions.get(word.lower(), [])
 
-    def get_words_for_emotion(self, emotion: str) -> list:
-        """Get all words for an emotion."""
-        return self.emotion_words.get(emotion, [])
+def get_words_for_emotion(self, emotion: str) -> list: """Get all words for an emotion.""" return
+self.emotion_words.get(emotion, [])
 
-    def analyze_text(self, text: str) -> dict:
-        """Analyze text and return emotion frequencies."""
-        words = text.lower().split()
-        emotions = defaultdict(int)
+def analyze_text(self, text: str) -> dict: """Analyze text and return emotion frequencies.""" words
+= text.lower().split() emotions = defaultdict(int)
 
-        for word in words:
-            word_clean = word.strip('.,!?;:')
-            word_emotions = self.get_emotions(word_clean)
-            for emotion in word_emotions:
-                emotions[emotion] += 1
+for word in words: word_clean = word.strip('.,!?;:') word_emotions = self.get_emotions(word_clean)
+for emotion in word_emotions: emotions[emotion] += 1
 
-        return dict(emotions)
+return dict(emotions)
 
 
 # Singleton instance - load once at startup
@@ -139,8 +107,8 @@ nrc = NRCLexicon()
 
 if __name__ == "__main__":
     # Test
-    emotions = nrc.analyze_text("I feel happy and grateful for this moment")
-    print("Emotions found:", emotions)
+emotions = nrc.analyze_text("I feel happy and grateful for this moment") print("Emotions found:",
+emotions)
 
 ```text
 ```
@@ -381,44 +349,29 @@ Update `main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)` (ARCHIVED) to show loca
 ```python
 
 # Add to sidebar:
-st.sidebar.markdown("---")
-st.sidebar.subheader("🔐 Processing Mode")
+st.sidebar.markdown("---") st.sidebar.subheader("🔐 Processing Mode")
 
-mode = st.sidebar.radio(
-    "Choose processing mode:",
-    ["Local Mode (Recommended)", "Hybrid Mode", "Cloud Mode"],
-    index=0,
-    help="Local Mode: All processing on your machine. Zero data transmission. Recommended for privacy."
-)
+mode = st.sidebar.radio( "Choose processing mode:", ["Local Mode (Recommended)", "Hybrid Mode",
+"Cloud Mode"], index=0, help="Local Mode: All processing on your machine. Zero data transmission.
+Recommended for privacy." )
 
-if mode == "Local Mode (Recommended)":
-    st.sidebar.success("✓ Running in Local Mode")
-    st.sidebar.info("""
-    🔐 **Your data is safe**
+if mode == "Local Mode (Recommended)": st.sidebar.success("✓ Running in Local Mode")
+st.sidebar.info(""" 🔐 **Your data is safe**
     - All processing happens locally
     - No data sent to external servers
     - No OpenAI API calls
     - Everything stays on your machine
-    """)
-    USE_LOCAL_ONLY = True
-else:
-    st.sidebar.warning("Cloud Mode: Some data may be transmitted")
-    USE_LOCAL_ONLY = False
+""") USE_LOCAL_ONLY = True else: st.sidebar.warning("Cloud Mode: Some data may be transmitted")
+USE_LOCAL_ONLY = False
 
 # In response generation:
 if USE_LOCAL_ONLY:
     # Use local processing
-    response_data = parse_input(user_message)
-    glyph = response_data['best_glyph']
+response_data = parse_input(user_message) glyph = response_data['best_glyph']
 
     # Try to fetch poetry
-    try:
-        poetry = get_glyph_poetry(glyph)
-        st.markdown(f"✨ **{glyph}**")
-        st.info(poetry)
-    except:
-        st.markdown(f"✨ **{glyph}**")
-else:
+try: poetry = get_glyph_poetry(glyph) st.markdown(f"✨ **{glyph}**") st.info(poetry) except:
+st.markdown(f"✨ **{glyph}**") else:
     # Hybrid/Cloud mode (existing code)
 ```text
 ```text
@@ -432,74 +385,52 @@ Create: `test_local_mode.py`
 
 ```python
 
-"""
-Test that local mode works end-to-end with no external API calls.
-"""
+""" Test that local mode works end-to-end with no external API calls. """
 
-import sys
-import time
-from parser.nrc_lexicon_loader import nrc
-import spacy
+import sys import time from parser.nrc_lexicon_loader import nrc import spacy
 
-def test_local_processing():
-    """Test complete local pipeline."""
+def test_local_processing(): """Test complete local pipeline."""
 
-    print("🧪 Testing Local Mode Processing\n")
+print("🧪 Testing Local Mode Processing\n")
 
     # Load models
-    print("1. Loading spaCy model...")
-    nlp = spacy.load("en_core_web_sm")
-    print("   ✓ Loaded\n")
+print("1. Loading spaCy model...") nlp = spacy.load("en_core_web_sm") print("   ✓ Loaded\n")
 
     # Load NRC lexicon
-    print("2. Loading NRC Emotion Lexicon...")
-    if not nrc.loaded:
-        print("   ✗ NRC not loaded! Download from:")
-        print("   http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm")
-        return False
-    print(f"   ✓ Loaded ({len(nrc.word_emotions)} words)\n")
+print("2. Loading NRC Emotion Lexicon...") if not nrc.loaded: print("   ✗ NRC not loaded! Download
+from:") print("   http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm") return False print(f"
+✓ Loaded ({len(nrc.word_emotions)} words)\n")
 
     # Test messages
-    test_messages = [
-        "I keep replaying that moment over and over, and it hurts",
-        "I feel so grateful for this beautiful day",
-        "I'm terrified about what comes next",
-        "There's a small spark of hope I can't quite name",
-        "I'm angry at what happened to me",
-    ]
+test_messages = [ "I keep replaying that moment over and over, and it hurts", "I feel so grateful
+for this beautiful day", "I'm terrified about what comes next", "There's a small spark of hope I
+can't quite name", "I'm angry at what happened to me", ]
 
-    print("3. Processing test messages locally:\n")
+print("3. Processing test messages locally:\n")
 
-    for msg in test_messages:
-        start = time.time()
+for msg in test_messages: start = time.time()
 
         # Tokenize + NER
-        doc = nlp(msg)
+doc = nlp(msg)
 
         # Get emotions
-        emotions = nrc.analyze_text(msg)
+emotions = nrc.analyze_text(msg)
 
         # Get entities
-        entities = [ent.text for ent in doc.ents]
+entities = [ent.text for ent in doc.ents]
 
-        elapsed = time.time() - start
+elapsed = time.time() - start
 
-        print(f"Input: '{msg}'")
-        print(f"  Emotions: {emotions}")
-        print(f"  Entities: {entities}")
-        print(f"  Time: {elapsed:.3f}s")
-        print()
+print(f"Input: '{msg}'") print(f"  Emotions: {emotions}") print(f"  Entities: {entities}") print(f"
+Time: {elapsed:.3f}s") print()
 
-    print("✅ All tests passed! Local mode is working.\n")
-    print("Next steps:")
-    print("1. Download Project Gutenberg poetry")
-    print("2. Run data_preparation/extract_poetry.py")
-    print("3. Start main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) and select 'Local Mode'")
+print("✅ All tests passed! Local mode is working.\n") print("Next steps:") print("1. Download
+Project Gutenberg poetry") print("2. Run data_preparation/extract_poetry.py") print("3. Start
+main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) and select 'Local Mode'")
 
-    return True
+return True
 
-if __name__ == "__main__":
-    success = test_local_processing()
+if __name__ == "__main__": success = test_local_processing()
 
 ```text
 ```
@@ -551,16 +482,16 @@ import os
 # DISABLE external API calls in local mode
 if mode == "Local Mode (Recommended)":
     # Remove OpenAI key to prevent accidental API calls
-    os.environ.pop('OPENAI_API_KEY', None)
+os.environ.pop('OPENAI_API_KEY', None)
 
     # Verify no external requests
-    import unittest.mock as mock
+import unittest.mock as mock
 
     # This will raise error if code tries to call OpenAI
-    with mock.patch('openai.ChatCompletion.create',
-                    side_effect=Exception("🚫 NO EXTERNAL API CALLS IN LOCAL MODE")):
+with mock.patch('openai.ChatCompletion.create', side_effect=Exception("🚫 NO EXTERNAL API CALLS IN
+LOCAL MODE")):
         # Process user message
-        response_data = parse_input(user_message)
+response_data = parse_input(user_message)
         # If we get here without exception, we're truly local!
 ```text
 ```text
@@ -657,10 +588,9 @@ print('✅ Local mode verified - no external API calls possible')
 
 ## 📝 NEXT ACTIONS
 
-1. **Today**: Install dependencies + test NRC lexicon (30 min)
-2. **Tomorrow**: Extract poetry + update UI (1 hour)
-3. **This week**: Full enrichment database (3-5 hours)
-4. **Next week**: Personalization + learning system (5-10 hours)
+1. **Today**: Install dependencies + test NRC lexicon (30 min) 2. **Tomorrow**: Extract poetry +
+update UI (1 hour) 3. **This week**: Full enrichment database (3-5 hours) 4. **Next week**:
+Personalization + learning system (5-10 hours)
 
 **Total to full sovereignty: ~15-20 hours of focused work**
 

@@ -105,9 +105,7 @@ TL;DR:
 ```bash
 
 # Already have Procfile and railway.json
-git add .
-git commit -m "feat: Add Next.js frontend for Velinor"
-git push origin main
+git add . git commit -m "feat: Add Next.js frontend for Velinor" git push origin main
 
 ```text
 ```text
@@ -119,13 +117,8 @@ git push origin main
 
 ```
 
-POST /api/game/start
-{
-  "player_name": "Traveler"
-}
-→ {
-  "session_id": "uuid",
-  "state": { ...game state... }
+POST /api/game/start { "player_name": "Traveler" } → { "session_id": "uuid", "state": { ...game
+state... }
 
 ```text
 ```
@@ -179,57 +172,20 @@ POST /api/game/{session_id}/action
 ### Positioning Example
 
 ```jsx
-<div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%' }}>
-  {/* 16:9 aspect ratio container */}
-  <img src="/backgrounds/market.png" style={{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover'
-  }} />
+<div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%' }}> {/* 16:9 aspect ratio
+container */} <img src="/backgrounds/market.png" style={{ position: 'absolute', top: 0, left: 0,
+width: '100%', height: '100%', objectFit: 'cover' }} />
 
-  {/* Overlays */}
-  <img src="/overlays/dust.png" style={{
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    opacity: 0.3
-  }} />
+{/* Overlays */} <img src="/overlays/dust.png" style={{ position: 'absolute', top: 0, left: 0,
+width: '100%', height: '100%', opacity: 0.3 }} />
 
-  {/* Text */}
-  <div style={{
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
-    right: '20px',
-    background: 'rgba(0,0,0,0.7)',
-    padding: '16px',
-    color: '#fff',
-    borderRadius: '8px'
-  }}>
-    {narration}
-  </div>
-
-  {/* Buttons */}
-  <button style={{
-    position: 'absolute',
-    bottom: '20px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    padding: '12px 24px',
-    background: '#3a6df0',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer'
-  }}>
-    Choice
-  </button>
+{/* Text */} <div style={{ position: 'absolute', top: '20px', left: '20px', right: '20px',
+background: 'rgba(0,0,0,0.7)', padding: '16px', color: '#fff', borderRadius: '8px' }}> {narration}
 </div>
+
+{/* Buttons */} <button style={{ position: 'absolute', bottom: '20px', left: '50%', transform:
+'translateX(-50%)', padding: '12px 24px', background: '#3a6df0', color: 'white', border: 'none',
+borderRadius: '8px', cursor: 'pointer' }}> Choice </button> </div>
 ```
 
 ## Customization

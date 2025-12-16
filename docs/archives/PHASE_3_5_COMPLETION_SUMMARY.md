@@ -402,4 +402,5 @@ Phase 3.5 provides **complete local LLM infrastructure** with:
 **Tests**: 382/382 passing (351 Phase 1-3 + 31 Phase 3.5)
 **Commits**: All changes committed to main
 
-The foundation for **semantic-emotional language generation** is complete. Next step: train with your corpus!
+The foundation for **semantic-emotional language generation** is complete. Next step: train with
+your corpus!

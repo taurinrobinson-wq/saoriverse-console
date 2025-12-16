@@ -2,17 +2,17 @@
 
 ## The Problem Solved
 
-Previously, the system learned lexicon data but **never used it to generate better responses**. Responses remained generic templates regardless of how much the system learned about the user.
+Previously, the system learned lexicon data but **never used it to generate better responses**.
+Responses remained generic templates regardless of how much the system learned about the user.
 
 ## The Solution
 
 **LexiconAwareResponseGenerator** bridges this gap:
 
-1. **Loads** user's personal lexicon (learned keyword → emotional context mappings)
-2. **Analyzes** incoming message for learned keywords
-3. **Builds** contextual understanding from learned associations
-4. **Generates** responses that reflect user's unique patterns
-5. **Tracks** response quality to improve future personalization
+1. **Loads** user's personal lexicon (learned keyword → emotional context mappings) 2. **Analyzes**
+incoming message for learned keywords 3. **Builds** contextual understanding from learned
+associations 4. **Generates** responses that reflect user's unique patterns 5. **Tracks** response
+quality to improve future personalization
 
 ## How It Works
 
@@ -21,9 +21,7 @@ Previously, the system learned lexicon data but **never used it to generate bett
 ```text
 ```
 
-User Message
-    ↓
-LexiconAwareResponseGenerator.generate_response()
+User Message ↓ LexiconAwareResponseGenerator.generate_response()
     ├─ Load user's personal lexicon
     │   (keywords → emotional contexts)
     │
@@ -36,9 +34,8 @@ LexiconAwareResponseGenerator.generate_response()
     │   (personalization_level: none/low/medium/high)
     │
     └─ Generate personalized response
-        (shows learned patterns, asks contextual questions)
-    ↓
-Nuanced Response that feels personal, not canned
+(shows learned patterns, asks contextual questions) ↓ Nuanced Response that feels personal, not
+canned
 
 ```
 
@@ -54,8 +51,8 @@ Nuanced Response that feels personal, not canned
 ```text
 ```
 
-User: "I'm struggling with something"
-Response: "That lands somewhere real for you. What does it feel like when you say that?"
+User: "I'm struggling with something" Response: "That lands somewhere real for you. What does it
+feel like when you say that?"
 
 ```
 
@@ -156,8 +153,7 @@ print(result["personalization_level"])  # How personalized is it?
 ### 3. In Streamlit UI
 
 ```python
-import streamlit as st
-from hybrid_processor_with_evolution import create_integrated_processor
+import streamlit as st from hybrid_processor_with_evolution import create_integrated_processor
 
 # In your Streamlit app
 st.session_state['processor'] = create_integrated_processor(...)
@@ -165,21 +161,15 @@ st.session_state['processor'] = create_integrated_processor(...)
 # When user sends a message
 if user_message:
     # Get personalization guidance
-    personalization = st.session_state['processor'].enhance_response_with_learned_context(
-        user_message=user_message,
-        user_id=st.session_state.get('user_id'),
-    )
+personalization = st.session_state['processor'].enhance_response_with_learned_context(
+user_message=user_message, user_id=st.session_state.get('user_id'), )
 
     # Generate response (using lexicon-aware knowledge)
     # In real implementation, you'd generate or fetch AI response here
 
     # Log the quality
-    if user_liked_response:
-        generator.log_response_quality(
-            user_id=user_id,
-            user_message=user_message,
-            response=ai_response,
-            quality_score=0.9
+if user_liked_response: generator.log_response_quality( user_id=user_id, user_message=user_message,
+response=ai_response, quality_score=0.9
 ```text
 ```text
 ```
@@ -192,24 +182,11 @@ Stored in `learning/user_overrides/{user_id}_lexicon.json`:
 
 ```json
 
-{
-  "learned_associations": {
-    "michelle": {
-      "associated_emotions": ["frustration", "communication_gap"],
-      "frequency": 5,
-      "context": "mother-in-law relationship"
-    },
-    "math": {
-      "associated_emotions": ["blocked", "inadequacy"],
-      "frequency": 3,
-      "context": "personal learning block"
-    },
-    "inherited": {
-      "associated_emotions": ["awareness", "pattern_breaking"],
-      "frequency": 4,
-      "context": "generational patterns"
-    }
-  }
+{ "learned_associations": { "michelle": { "associated_emotions": ["frustration",
+"communication_gap"], "frequency": 5, "context": "mother-in-law relationship" }, "math": {
+"associated_emotions": ["blocked", "inadequacy"], "frequency": 3, "context": "personal learning
+block" }, "inherited": { "associated_emotions": ["awareness", "pattern_breaking"], "frequency": 4,
+"context": "generational patterns" } }
 
 ```text
 ```
@@ -232,13 +209,11 @@ Stored in `learning/response_quality_log.jsonl`:
 
 ## Key Features
 
-✅ **Progressive Personalization**: Responses get better as system learns
-✅ **No API Required**: Works entirely locally
-✅ **Learned Data Used**: Lexicon actually informs responses
-✅ **Quality Tracking**: Know what works for each user
-✅ **Pattern Recognition**: Multiple keywords = deeper context
-✅ **Graceful Degradation**: Works even on first interaction
-✅ **Confidence Scoring**: Know how confident personalization is
+✅ **Progressive Personalization**: Responses get better as system learns ✅ **No API Required**:
+Works entirely locally ✅ **Learned Data Used**: Lexicon actually informs responses ✅ **Quality
+Tracking**: Know what works for each user ✅ **Pattern Recognition**: Multiple keywords = deeper
+context ✅ **Graceful Degradation**: Works even on first interaction ✅ **Confidence Scoring**: Know
+how confident personalization is
 
 ## Performance Characteristics
 
@@ -265,9 +240,8 @@ System: Generic response (no learned data)
 ### Session 2
 
 ```
-User: "michelle is being difficult"
-System: RECOGNIZES "michelle" from lexicon
-System: Generates personalized response acknowledging pattern
+User: "michelle is being difficult" System: RECOGNIZES "michelle" from lexicon System: Generates
+personalized response acknowledging pattern
 ```text
 ```text
 ```
@@ -276,10 +250,9 @@ System: Generates personalized response acknowledging pattern
 
 ```
 
-User: "the michelle thing plus inherited patterns"
-System: RECOGNIZES both "michelle" AND "inherited"
-System: Sees they co-occur, generates response showing understanding
-System learns: These two are connected for this user
+User: "the michelle thing plus inherited patterns" System: RECOGNIZES both "michelle" AND
+"inherited" System: Sees they co-occur, generates response showing understanding System learns:
+These two are connected for this user
 
 ```text
 ```
@@ -322,16 +295,12 @@ class CustomLexiconGenerator(LexiconAwareResponseGenerator):
 ```python
 
 # Log custom quality metric
-generator.log_response_quality(
-    user_id=user_id,
-    user_message=message,
-    response=response,
-    quality_score=0.95,  # User said "This is perfect"
-)
+generator.log_response_quality( user_id=user_id, user_message=message, response=response,
+quality_score=0.95,  # User said "This is perfect" )
 
 # Get personalization stats
-stats = generator.get_personalization_stats(user_id)
-print(f"Average response quality: {stats['average_quality_score']}")
+stats = generator.get_personalization_stats(user_id) print(f"Average response quality:
+{stats['average_quality_score']}")
 ```text
 ```text
 ```
@@ -365,25 +334,18 @@ from lexicon_aware_response_generator import LexiconAwareResponseGenerator
 generator = LexiconAwareResponseGenerator()
 
 # Simulate progression
-print("=== Session 1 (No learned data) ===")
-result = generator.generate_response(
-    user_message="I'm struggling",
-    user_id="test_user"
-)
-print(f"Level: {result['personalization_level']}")  # "none"
+print("=== Session 1 (No learned data) ===") result = generator.generate_response( user_message="I'm
+struggling", user_id="test_user" ) print(f"Level: {result['personalization_level']}")  # "none"
 print(f"Response: {result['response']}")
 
 # Simulate learning
 
 # (In real scenario, this happens through hybrid_learner)
 
-print("\n=== Session 2 (With learned data) ===")
-result = generator.generate_response(
-    user_message="michelle is being difficult",
-    user_id="test_user"
-)
-print(f"Level: {result['personalization_level']}")  # "medium" or "high"
-print(f"Response: {result['response']}")  # Shows learned pattern
+print("\n=== Session 2 (With learned data) ===") result = generator.generate_response(
+user_message="michelle is being difficult", user_id="test_user" ) print(f"Level:
+{result['personalization_level']}")  # "medium" or "high" print(f"Response: {result['response']}")
+# Shows learned pattern
 
 ```
 

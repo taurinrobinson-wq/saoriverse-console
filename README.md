@@ -167,17 +167,13 @@ See `docs/ARCHITECTURE.md` for complete module reference.
 
 ### Add a New Feature
 
-1. Create code in `src/`
-2. Add tests to `tests/unit/` or `tests/integration/`
-3. Run `pytest tests/` to verify
-4. Update documentation if needed
+1. Create code in `src/` 2. Add tests to `tests/unit/` or `tests/integration/` 3. Run `pytest
+tests/` to verify 4. Update documentation if needed
 
 ### Fix a Bug
 
-1. Write a test that reproduces the bug
-2. Fix the code
-3. Verify test passes: `pytest tests/`
-4. Commit with test
+1. Write a test that reproduces the bug 2. Fix the code 3. Verify test passes: `pytest tests/` 4.
+Commit with test
 
 ##
 

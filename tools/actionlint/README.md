@@ -1,25 +1,26 @@
 # actionlint
 
-[![CI Badge][]][CI]
-[![API Document][api-badge]][apidoc]
+[![CI Badge][]][CI] [![API Document][api-badge]][apidoc]
 
-[actionlint][repo] is a static checker for GitHub Actions workflow files. [Try it online!][playground]
+[actionlint][repo] is a static checker for GitHub Actions workflow files. [Try it
+online!][playground]
 
 Features:
 
 - **Syntax check for workflow files** to check unexpected or missing keys following [workflow syntax][syntax-doc]
 - **Strong type check for `${{ }}` expressions** to catch several semantic errors like access to not existing property,
-  type mismatches, ...
+type mismatches, ...
 - **Actions usage check** to check that inputs at `with:` and outputs in `steps.{id}.outputs` are correct
 - **Reusable workflow check** to check inputs/outputs/secrets of reusable workflows and workflow calls
 - **[shellcheck][] and [pyflakes][] integrations** for scripts at `run:`
 - **Security checks**; [script injection][script-injection-doc] by untrusted inputs, hard-coded credentials
 - **Other several useful checks**; [glob syntax][filter-pattern-doc] validation, dependencies check for `needs:`,
-  runner label validation, cron syntax validation, ...
+runner label validation, cron syntax validation, ...
 
 See [the full list](docs/checks.md) of checks done by actionlint.
 
-<img src="https://github.com/rhysd/ss/blob/master/actionlint/main.gif?raw=true" alt="actionlint reports 7 errors" width="806" height="492"/>
+<img src="https://github.com/rhysd/ss/blob/master/actionlint/main.gif?raw=true" alt="actionlint
+reports 7 errors" width="806" height="492"/>
 
 **Example of broken workflow:**
 

@@ -186,25 +186,19 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 
 ### ✅ KEEP & ACTIVE (2 tables)
 
-1. **users** - Authentication system (working)
-2. **glyph_lexicon** - Core glyphs (needs data sync)
+1. **users** - Authentication system (working) 2. **glyph_lexicon** - Core glyphs (needs data sync)
 
 ### ✅ KEEP & PREPARE (8 tables - will be used)
 
-3. **conversations** - Conversation persistence
-4. **conversation_messages** - Message storage
-5. **conversation_metadata** - Audit trail
-6. **glyphs** - User-learned glyphs
-7. **glyph_logs** - Interaction tracking
-8. **emotional_tags** - Tag definitions (needs population)
+3. **conversations** - Conversation persistence 4. **conversation_messages** - Message storage 5.
+**conversation_metadata** - Audit trail 6. **glyphs** - User-learned glyphs 7. **glyph_logs** -
+Interaction tracking 8. **emotional_tags** - Tag definitions (needs population)
 
 ### ❓ EVALUATE (4 tables - unclear usage)
 
-9. **glyph_trail** - Not referenced in code
-10. **messages** - Possibly redundant
-11. **ritual_triggers** - Not referenced in code
-12. **rupture_named** - Not referenced in code
-13. **symbolic_interpreter** - Not referenced in code
+9. **glyph_trail** - Not referenced in code 10. **messages** - Possibly redundant 11.
+**ritual_triggers** - Not referenced in code 12. **rupture_named** - Not referenced in code 13.
+**symbolic_interpreter** - Not referenced in code
 
 ### ❌ DELETE (1 table)
 
@@ -272,8 +266,8 @@ Your Supabase database has **14 tables** with only **2 tables actively being use
 ```text
 ```
 
-id, username, email, password_hash, salt, created_at,
-last_login, is_active, updated_at, first_name, last_name
+id, username, email, password_hash, salt, created_at, last_login, is_active, updated_at, first_name,
+last_name
 
 ```
 
@@ -289,8 +283,7 @@ Expected columns from local `glyphs.db`:
 ```text
 ```
 
-id, voltage_pair, glyph_name, description, gate,
-activation_signals, display_name, response_template
+id, voltage_pair, glyph_name, description, gate, activation_signals, display_name, response_template
 
 ```
 

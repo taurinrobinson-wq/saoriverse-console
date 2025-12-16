@@ -19,12 +19,10 @@ A standardized structure for building **modular NPC encounter scenes** with:
 ```text
 ```
 
-Scene ID:             Unique identifier (e.g., market_intro_velinor_01)
-Background Image:     Path to background asset
-Foreground Image:     Path to NPC/character asset
-Ambient Sound:        Optional audio layer
-Glyph Triggers:       Glyphs activated during scene
-NPC Name:             Primary character in scene
+Scene ID:             Unique identifier (e.g., market_intro_velinor_01) Background Image:     Path
+to background asset Foreground Image:     Path to NPC/character asset Ambient Sound:        Optional
+audio layer Glyph Triggers:       Glyphs activated during scene NPC Name:             Primary
+character in scene
 
 ```
 
@@ -45,8 +43,8 @@ NPC Name:             Primary character in scene
 - Position: Far background, center or off-center
 
 **Narration**:
-[2-3 lines establishing the NPC's presence, appearance, mood]
-[Avoid revealing too much; maintain mystery]
+[2-3 lines establishing the NPC's presence, appearance, mood] [Avoid revealing too much; maintain
+mystery]
 
 **Sensory Layer** (Ambient Sound):
 [Wind, music, marketplace sounds, chimes, etc.]
@@ -140,12 +138,10 @@ NPC Name:             Primary character in scene
 ### Scene Metadata
 
 ```
-Scene ID:             market_intro_velinor_01
-Background Image:     velinor_marketplace_distant.png
-Foreground Image:     velinor_priestess_distant.png (Scene 1)
-                      velinor_priestess_close.png (Scene 2)
-Ambient Sound:        wind_through_ruins.mp3 + faint_chimes.mp3
-Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈], [Aelitḧ]
+Scene ID:             market_intro_velinor_01 Background Image:     velinor_marketplace_distant.png
+Foreground Image:     velinor_priestess_distant.png (Scene 1) velinor_priestess_close.png (Scene 2)
+Ambient Sound:        wind_through_ruins.mp3 + faint_chimes.mp3 Glyph Triggers:       [Esḧ],
+[Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈], [Aelitḧ]
 ```text
 ```text
 ```
@@ -163,9 +159,8 @@ Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈
 - Presence feels older than appearance suggests
 
 **Narration**:
-You notice someone in the distance.
-She stands still amid the ruins, as if she's been waiting.
-She appears to be some kind of priestess… or something older.
+You notice someone in the distance. She stands still amid the ruins, as if she's been waiting. She
+appears to be some kind of priestess… or something older.
 
 **Ambient Sound**: Wind through broken towers, faint chime resonance
 
@@ -227,32 +222,25 @@ Before you have a chance to speak, she does.
 ```python
 
 # Scene 1: Distant presence
-col1, col2 = st.columns([3, 1])
-with col1:
-    background = st.image("velinor_marketplace_distant.png")
-    foreground = st.image("velinor_priestess_distant.png", width=150)
+col1, col2 = st.columns([3, 1]) with col1: background = st.image("velinor_marketplace_distant.png")
+foreground = st.image("velinor_priestess_distant.png", width=150)
 
 # Display narration and glyph
-st.write("You notice someone in the distance...")
-display_glyph([Esḧ])
+st.write("You notice someone in the distance...") display_glyph([Esḧ])
 
 # Player advances (button, timer, or next section)
 if st.button("Continue"):
     # Scene 2: Approach
-    st.image("velinor_marketplace_distant.png")
-    st.image("velinor_priestess_close.png", width=400)
-    st.write("She comes closer to you...")
-    display_dialogue("I see you. Not just your shape… but your ache.")
+st.image("velinor_marketplace_distant.png") st.image("velinor_priestess_close.png", width=400)
+st.write("She comes closer to you...") display_dialogue("I see you. Not just your shape… but your
+ache.")
 
     # Player options
-    choice = st.radio("How do you respond?",
-        ["Who are you really?",
-         "What do you mean, 'unremembered'?",
-         "Remain silent"])
+choice = st.radio("How do you respond?", ["Who are you really?", "What do you mean,
+'unremembered'?", "Remain silent"])
 
-    if choice == "Who are you really?":
-        trigger_glyph([Querrä])
-        st.write("Velinor Response: 'A question for another day...'")
+if choice == "Who are you really?": trigger_glyph([Querrä]) st.write("Velinor Response: 'A question
+for another day...'")
 ```
 
 ##

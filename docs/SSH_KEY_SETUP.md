@@ -78,8 +78,8 @@ EOF
 
 The DigitalOcean droplet has **public key authentication required**, meaning you need:
 
-1. ✅ The private SSH key file (on your machine)
-2. ✅ The matching public key (added to `~/.ssh/authorized_keys` on the droplet)
+1. ✅ The private SSH key file (on your machine) 2. ✅ The matching public key (added to
+`~/.ssh/authorized_keys` on the droplet)
 
 **You have neither right now**, so you can't connect.
 
@@ -93,11 +93,8 @@ Reset the root password via the DigitalOcean console, then use password auth.
 
 ### Solution 2: Use DigitalOcean Console
 
-1. Go to DigitalOcean dashboard
-2. Click your droplet (161.35.227.49)
-3. Click "Console" (top right)
-4. This opens a web terminal
-5. From there, you can do everything
+1. Go to DigitalOcean dashboard 2. Click your droplet (161.35.227.49) 3. Click "Console" (top right)
+4. This opens a web terminal 5. From there, you can do everything
 
 ### Solution 3: Recover from Your Other Machine
 
@@ -115,12 +112,9 @@ If you created the key on your Ubuntu machine at home:
 
 ## Right Now: Use Web Console (Fastest)
 
-1. Visit: <https://cloud.digitalocean.com>
-2. Log in
-3. Select your droplet (161.35.227.49)
-4. Click "Access" → "Console"
-5. You'll get a terminal directly in your browser
-6. From there, clone and run the deployment script!
+1. Visit: <https://cloud.digitalocean.com> 2. Log in 3. Select your droplet (161.35.227.49) 4. Click
+"Access" → "Console" 5. You'll get a terminal directly in your browser 6. From there, clone and run
+the deployment script!
 
 ##
 
@@ -141,12 +135,9 @@ cd saoriverse-console
 ## Reference: Common SSH Key Locations
 
 ```bash
-~/.ssh/id_rsa              # Default key
-~/.ssh/digitalocean_key    # DO-specific key
-~/.ssh/droplet_key         # Droplet-specific key
-~/.ssh/do_rsa              # Another common name
-~/droplet_key              # In home directory
-~/keys/do_key              # In keys folder
+~/.ssh/id_rsa              # Default key ~/.ssh/digitalocean_key    # DO-specific key
+~/.ssh/droplet_key         # Droplet-specific key ~/.ssh/do_rsa              # Another common name
+~/droplet_key              # In home directory ~/keys/do_key              # In keys folder
 ```
 
 Try searching for these files on your machines.

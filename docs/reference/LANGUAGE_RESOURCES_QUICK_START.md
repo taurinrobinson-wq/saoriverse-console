@@ -110,8 +110,7 @@ nrc.analyze_text("I have a mental block on math")
 
 from parser.poetry_database import PoetryDatabase
 
-db = PoetryDatabase()
-poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
+db = PoetryDatabase() poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
 
 # Current usage: Pick one randomly and weave it in
 
@@ -165,12 +164,9 @@ if 'block' in keywords:
 ```python
 
 # Extract features from actual message content
-features = {
-    'math_frustration': has_math_keywords and has_frustration,
-    'communication_friction': has_person and has_explain_keywords,
-    'inherited_pattern': has_inherited_keywords,
-    'person_involved': extract_person_name(text),  # spaCy
-}
+features = { 'math_frustration': has_math_keywords and has_frustration, 'communication_friction':
+has_person and has_explain_keywords, 'inherited_pattern': has_inherited_keywords, 'person_involved':
+extract_person_name(text),  # spaCy }
 
 # Compose response by layering features
 ```text
@@ -289,24 +285,18 @@ features = {
 Run this to see the new system in action:
 
 ```bash
-cd /workspaces/saoriverse-console
-source .venv/bin/activate
-python - <<'PY'
-from emotional_os.glyphs.signal_parser import parse_input
+cd /workspaces/saoriverse-console source .venv/bin/activate python - <<'PY' from
+emotional_os.glyphs.signal_parser import parse_input
 
-messages = [
-    "I have been working hard on a brief for Michelle... I'm very mad that I had to do so much math.",
-    "Yeah it's not that I'm against math. I just have a mental block on it... Michelle explains things in a way that only she understands.",
-    "well I don't know if its my anxiety. its inherited from Michelle because she is very anxious."
-]
+messages = [ "I have been working hard on a brief for Michelle... I'm very mad that I had to do so
+much math.", "Yeah it's not that I'm against math. I just have a mental block on it... Michelle
+explains things in a way that only she understands.", "well I don't know if its my anxiety. its
+inherited from Michelle because she is very anxious." ]
 
-for i, msg in enumerate(messages, 1):
-    res = parse_input(msg, 'emotional_os/parser/signal_lexicon.json',
-                      db_path='emotional_os/glyphs/glyphs.db')
-    print(f"\nMessage {i}: {msg[:60]}...")
-    print(f"Response: {res['voltage_response'][:150]}...")
-    print(f"Feedback: {res.get('feedback', {})}")
-PY
+for i, msg in enumerate(messages, 1): res = parse_input(msg,
+'emotional_os/parser/signal_lexicon.json', db_path='emotional_os/glyphs/glyphs.db')
+print(f"\nMessage {i}: {msg[:60]}...") print(f"Response: {res['voltage_response'][:150]}...")
+print(f"Feedback: {res.get('feedback', {})}") PY
 ```
 
 Each response should be **uniquely tailored to the message**, not a template structure with different keywords filled in.

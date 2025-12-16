@@ -7,13 +7,8 @@ Tracks user's emotional state across multiple messages and builds understanding.
 ```text
 ```
 
-Message 1: "I'm stressed"
-              ↓
-Message 2: "Too much on my mind at work"
-              ↓
-Message 3: "5 projects, Thursday deadline"
-              ↓
-SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
+Message 1: "I'm stressed" ↓ Message 2: "Too much on my mind at work" ↓ Message 3: "5 projects,
+Thursday deadline" ↓ SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
 
 ```
 
@@ -29,13 +24,8 @@ SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
 memory = ConversationMemory()
 
 # After each user message:
-memory.add_turn(
-    user_input="...",
-    parsed=SemanticParsing(...),
-    glyphs_identified=["..."],
-    missing_elements=["..."],
-    clarifications_asked=["..."],
-)
+memory.add_turn( user_input="...", parsed=SemanticParsing(...), glyphs_identified=["..."],
+missing_elements=["..."], clarifications_asked=["..."], )
 
 # Get current state:
 memory.get_emotional_profile_brief()  # "HIGH: stress, overload (in work)"
@@ -118,25 +108,18 @@ response = composer.compose_response_with_memory(
 ### With Memory
 
 ```python
-def compose_response_with_memory(
-    input_text,
-    conversation_memory,
-    glyph=None,
-):
+def compose_response_with_memory( input_text, conversation_memory, glyph=None, ):
     # 1. Get integrated state
-    integrated_state = memory.integrated_state
-    causal_chain = memory.causal_understanding
+integrated_state = memory.integrated_state causal_chain = memory.causal_understanding
 
     # 2. Build acknowledgment (causal-aware)
-    acknowledgment = "I hear you - work has flooded your mind..."
+acknowledgment = "I hear you - work has flooded your mind..."
 
     # 3. Add glyph validation (if rich)
-    if len(glyph_set) > 1:
-        validation = "This needs organizing."
+if len(glyph_set) > 1: validation = "This needs organizing."
 
     # 4. Add targeted clarification
-    clarifications = memory.get_next_clarifications()
-    question = "Which of these could wait?"
+clarifications = memory.get_next_clarifications() question = "Which of these could wait?"
 
     # 5. Combine
 ```text
@@ -165,8 +148,8 @@ def compose_response_with_memory(
 
 ```
 
-Turn 1: 0.7 (emotion stated, cause unknown)
-Turn 2: 0.85 (mechanism revealed: work → flooding → paralysis)
+Turn 1: 0.7 (emotion stated, cause unknown) Turn 2: 0.85 (mechanism revealed: work → flooding →
+paralysis)
 
 ```text
 ```
@@ -284,32 +267,17 @@ from conversation_memory import ConversationMemory, SemanticParsing
 memory = ConversationMemory()
 
 # 3. Parse each message
-parsed = SemanticParsing(
-    actor="I",
-    primary_affects=["stress"],
-    secondary_affects=[],
-    tense="present",
-    emphasis="so",
-    domains=[],
-    temporal_scope="today",
-    thought_patterns=[],
-    action_capacity="unknown",
-    raw_input="I'm feeling so stressed today",
-)
+parsed = SemanticParsing( actor="I", primary_affects=["stress"], secondary_affects=[],
+tense="present", emphasis="so", domains=[], temporal_scope="today", thought_patterns=[],
+action_capacity="unknown", raw_input="I'm feeling so stressed today", )
 
 # 4. Add to memory
-memory.add_turn(
-    user_input="I'm feeling so stressed today",
-    parsed=parsed,
-    glyphs_identified=["Still Insight"],
-    missing_elements=["causation"],
-    clarifications_asked=["What triggered this?"],
-)
+memory.add_turn( user_input="I'm feeling so stressed today", parsed=parsed,
+glyphs_identified=["Still Insight"], missing_elements=["causation"], clarifications_asked=["What
+triggered this?"], )
 
 # 5. Use memory in response
-response = composer.compose_response_with_memory(
-    input_text=user_input,
-    conversation_memory=memory,
+response = composer.compose_response_with_memory( input_text=user_input, conversation_memory=memory,
 )
 ```
 

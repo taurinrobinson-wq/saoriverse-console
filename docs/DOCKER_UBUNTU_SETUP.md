@@ -1,6 +1,7 @@
 # Docker Setup & Deploy Guide for Ubuntu (DigitalOcean 161.35.227.49)
 
-This guide walks you through setting up Docker on your fresh Ubuntu installation and deploying the FirstPerson web build to your DigitalOcean droplet.
+This guide walks you through setting up Docker on your fresh Ubuntu installation and deploying the
+FirstPerson web build to your DigitalOcean droplet.
 
 ##
 
@@ -81,8 +82,8 @@ sudo systemctl start docker
 docker compose version
 
 # If not, install it
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname
+-s)-$(uname -m)" -o /usr/local/bin/docker-compose sudo chmod +x /usr/local/bin/docker-compose
 
 # Verify
 
@@ -164,56 +165,39 @@ EXPOSE 3000
 ```yaml
 version: '3.8'
 
-services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
+services: backend: build: context: . dockerfile: Dockerfile ports:
       - "8000:8000"
-    environment:
+environment:
       - PYTHONUNBUFFERED=1
       - PORT=8000
-    volumes:
+volumes:
       - ./data:/app/data_local
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
+healthcheck: test: ["CMD", "curl", "-f", "http://localhost:8000/health"] interval: 30s timeout: 10s
+retries: 3 start_period: 40s networks:
       - saoriverse
 
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-    ports:
+frontend: build: context: . dockerfile: Dockerfile.frontend ports:
       - "3000:3000"
-    environment:
+environment:
       - REACT_APP_SAOYNX_API_URL=http://backend:8000
-    depends_on:
+depends_on:
       - backend
-    networks:
+networks:
       - saoriverse
 
-  nginx:
-    image: nginx:alpine
-    ports:
+nginx: image: nginx:alpine ports:
       - "80:80"
       - "443:443"
-    volumes:
+volumes:
       - ./deploy/nginx.conf:/etc/nginx/nginx.conf:ro
       # - ./certs:/etc/nginx/certs:ro  # uncomment when using SSL
-    depends_on:
+depends_on:
       - backend
       - frontend
-    networks:
+networks:
       - saoriverse
 
-networks:
-  saoriverse:
+networks: saoriverse:
 ```text
 ```text
 ```
@@ -222,18 +206,9 @@ networks:
 
 ```
 
-.git
-.gitignore
-.venv
-venv
-__pycache__
+.git .gitignore .venv venv __pycache__
 *.pyc
-.pytest_cache
-.mypy_cache
-node_modules
-.env.local
-.DS_Store
-.idea
+.pytest_cache .mypy_cache node_modules .env.local .DS_Store .idea
 
 ```text
 ```
@@ -273,9 +248,7 @@ Add/update these variables:
 ```env
 
 # API Configuration
-API_HOST=0.0.0.0
-API_PORT=8000
-API_URL=http://161.35.227.49:8000
+API_HOST=0.0.0.0 API_PORT=8000 API_URL=http://161.35.227.49:8000
 
 # Frontend Configuration
 FRONTEND_URL=http://161.35.227.49

@@ -6,7 +6,8 @@
 
 ## TL;DR
 
-Your FirstPerson system now recognizes **457+ actual emotional words** from your conversations with proper gate activation. Integration is complete, tested, and ready.
+Your FirstPerson system now recognizes **457+ actual emotional words** from your conversations with
+proper gate activation. Integration is complete, tested, and ready.
 
 ##
 
@@ -15,16 +16,13 @@ Your FirstPerson system now recognizes **457+ actual emotional words** from your
 ```text
 ```
 
-HOLD      (568x) → Vulnerability [7,11]      → "I hold this moment"
-SACRED    (373x) → Admiration [8,12]          → "This feels sacred"
-EXACTLY   (367x) → Joy [1,5]                   → "That exactly lands"
-PRESENT   (317x) → Joy [7,11]                  → "Being present with you"
-ECHO      (212x) → Intimacy [7,11]             → "I echo your feeling"
-FEEL      (200x) → Sensuality [6,9]            → "I feel you here"
-TENDER    (150x) → Intimacy [8,11]             → "Be tender with me"
-HONOR     (116x) → Admiration [8,12]           → "I honor your truth"
-TRUST     (108x) → Vulnerability [7,11]        → "I trust you"
-WITH      (3480x) → Multiple [1,5]             → "Being with you"
+HOLD      (568x) → Vulnerability [7,11]      → "I hold this moment" SACRED    (373x) → Admiration
+[8,12]          → "This feels sacred" EXACTLY   (367x) → Joy [1,5]                   → "That exactly
+lands" PRESENT   (317x) → Joy [7,11]                  → "Being present with you" ECHO      (212x) →
+Intimacy [7,11]             → "I echo your feeling" FEEL      (200x) → Sensuality [6,9]            →
+"I feel you here" TENDER    (150x) → Intimacy [8,11]             → "Be tender with me" HONOR
+(116x) → Admiration [8,12]           → "I honor your truth" TRUST     (108x) → Vulnerability [7,11]
+→ "I trust you" WITH      (3480x) → Multiple [1,5]             → "Being with you"
 
 ```
 
@@ -38,22 +36,11 @@ WITH      (3480x) → Multiple [1,5]             → "Being with you"
 ```text
 ```
 
-User Input
-    ↓
-parse_input() checks:
-    1. Word-centric lexicon (457+ words) ← NEW ✅
-    2. Hardcoded keywords (50 words) ← Fallback
-    ↓
-Marked as EMOTIONAL or SHORT-CIRCUIT
-    ↓
-parse_signals() extracts:
-    1. Lexicon signals + gates ← NEW ✅
-    2. Enhanced NLP signals (if available)
-    3. Signal lexicon matches
-    4. NRC emotions (if available)
-    5. Fuzzy matches (last resort)
-    ↓
-Gates Activated → Glyphs Selected → Response Generated
+User Input ↓ parse_input() checks: 1. Word-centric lexicon (457+ words) ← NEW ✅ 2. Hardcoded
+keywords (50 words) ← Fallback ↓ Marked as EMOTIONAL or SHORT-CIRCUIT ↓ parse_signals() extracts: 1.
+Lexicon signals + gates ← NEW ✅ 2. Enhanced NLP signals (if available) 3. Signal lexicon matches 4.
+NRC emotions (if available) 5. Fuzzy matches (last resort) ↓ Gates Activated → Glyphs Selected →
+Response Generated
 
 ```
 
@@ -93,14 +80,12 @@ from emotional_os.lexicon.lexicon_loader import get_lexicon
 lexicon = get_lexicon()
 
 # Query operations
-signals = lexicon.get_signals('hold')
-gates = lexicon.get_gates('sacred')
-freq = lexicon.get_frequency('exactly')
+signals = lexicon.get_signals('hold') gates = lexicon.get_gates('sacred') freq =
+lexicon.get_frequency('exactly')
 
 # Analyze text
-analysis = lexicon.analyze_emotional_content(user_input)
-print(analysis['emotional_words'])       # List of words found
-print(analysis['primary_signals'])       # Most active signals
+analysis = lexicon.analyze_emotional_content(user_input) print(analysis['emotional_words'])       #
+List of words found print(analysis['primary_signals'])       # Most active signals
 print(analysis['gate_activations'])      # Gates activated
 ```text
 ```text
@@ -110,31 +95,11 @@ print(analysis['gate_activations'])      # Gates activated
 
 ```json
 
-{
-  "metadata": {
-    "version": "1.0",
-    "total_words": 457,
-    "sources": ["transcript", "gutenberg"]
-  },
-  "lexicon": {
-    "hold": {
-      "frequency": 568,
-      "signals": ["vulnerability"],
-      "gates": [7, 11],
-      "sources": ["transcript"]
-    },
-    "sacred": {
-      "frequency": 373,
-      "signals": ["admiration"],
-      "gates": [8, 12],
-      "sources": ["transcript"]
-    }
-  },
-  "signal_map": {
-    "vulnerability": ["hold", "trust", "open", ...],
-    "intimacy": ["echo", "tender", "present", ...],
-    "admiration": ["sacred", "honor", "precious", ...]
-  }
+{ "metadata": { "version": "1.0", "total_words": 457, "sources": ["transcript", "gutenberg"] },
+"lexicon": { "hold": { "frequency": 568, "signals": ["vulnerability"], "gates": [7, 11], "sources":
+["transcript"] }, "sacred": { "frequency": 373, "signals": ["admiration"], "gates": [8, 12],
+"sources": ["transcript"] } }, "signal_map": { "vulnerability": ["hold", "trust", "open", ...],
+"intimacy": ["echo", "tender", "present", ...], "admiration": ["sacred", "honor", "precious", ...] }
 
 ```text
 ```
@@ -205,11 +170,10 @@ gate_7_11_words = lexicon.words_for_gates([7, 11])
 
 ```python
 
-conversation = "I hold this sacred moment with tenderness..."
-analysis = lexicon.analyze_emotional_content(conversation)
+conversation = "I hold this sacred moment with tenderness..." analysis =
+lexicon.analyze_emotional_content(conversation)
 
-print(f"Words: {len(analysis['emotional_words'])}")
-print(f"Signals: {analysis['sources']}")
+print(f"Words: {len(analysis['emotional_words'])}") print(f"Signals: {analysis['sources']}")
 print(f"Gates: {[g[0] for g in analysis['gate_activations']]}")
 
 ```text
@@ -266,11 +230,10 @@ if word not in lexicon.lexicon:
 ```python
 
 # Debug: Check what signals are mapped
-text = "I hold this sacred"
-analysis = lexicon.analyze_emotional_content(text)
+text = "I hold this sacred" analysis = lexicon.analyze_emotional_content(text)
 
-print("Found words:", [w['word'] for w in analysis['emotional_words']])
-print("Signals:", analysis['primary_signals'])
+print("Found words:", [w['word'] for w in analysis['emotional_words']]) print("Signals:",
+analysis['primary_signals'])
 ```text
 ```text
 ```
@@ -283,9 +246,8 @@ print("Signals:", analysis['primary_signals'])
 
 ```
 
-hold      → signals: ['vulnerability'], gates: [7, 11], freq: 568 ✓
-sacred    → signals: ['admiration'], gates: [8, 12], freq: 373 ✓
-exactly   → signals: ['joy'], gates: [1, 5], freq: 367 ✓
+hold      → signals: ['vulnerability'], gates: [7, 11], freq: 568 ✓ sacred    → signals:
+['admiration'], gates: [8, 12], freq: 373 ✓ exactly   → signals: ['joy'], gates: [1, 5], freq: 367 ✓
 echo      → signals: ['intimacy'], gates: [7, 11], freq: 212 ✓
 
 ```text

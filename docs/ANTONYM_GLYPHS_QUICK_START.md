@@ -2,11 +2,9 @@
 
 ## What You Now Have
 
-✅ **122 Antonym Glyphs** fully integrated and ready to use
-✅ **High-Level API** for easy access from any code
-✅ **Fast Indexed Lookup** by emotion, pairing, or name
-✅ **Comprehensive Tests** (22 tests, 100% passing)
-✅ **Full Documentation** with examples
+✅ **122 Antonym Glyphs** fully integrated and ready to use ✅ **High-Level API** for easy access from
+any code ✅ **Fast Indexed Lookup** by emotion, pairing, or name ✅ **Comprehensive Tests** (22 tests,
+100% passing) ✅ **Full Documentation** with examples
 
 ## Getting Started in 30 Seconds
 
@@ -33,8 +31,7 @@ antonym = find_antonym_by_emotion("comfort")
 ```python
 
 # Search for anything related to "joy"
-results = search_antonyms("joy")
-for r in results:
+results = search_antonyms("joy") for r in results:
 ```text
 ```text
 ```
@@ -45,14 +42,12 @@ for r in results:
 
 ```python
 
-import streamlit as st
-from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion, format_antonym_for_display
+import streamlit as st from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion,
+format_antonym_for_display
 
-emotion = "grief"
-opposite = find_antonym_by_emotion(emotion)
+emotion = "grief" opposite = find_antonym_by_emotion(emotion)
 
-if opposite:
-    st.markdown("### The Opposite Perspective")
+if opposite: st.markdown("### The Opposite Perspective")
 
 ```text
 ```
@@ -150,10 +145,9 @@ Pass Rate: 100.0%
 
 ## Next Steps
 
-1. **Try it out**: Import the module and play with the functions
-2. **Integrate into UI**: Add antonym suggestions to your interface
-3. **Build experiences**: Use opposites to explore emotional nuance
-4. **Expand coverage**: Suggest new antonym pairings based on user needs
+1. **Try it out**: Import the module and play with the functions 2. **Integrate into UI**: Add
+antonym suggestions to your interface 3. **Build experiences**: Use opposites to explore emotional
+nuance 4. **Expand coverage**: Suggest new antonym pairings based on user needs
 
 ## Troubleshooting
 

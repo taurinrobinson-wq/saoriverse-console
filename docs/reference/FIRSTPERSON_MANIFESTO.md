@@ -12,7 +12,8 @@ In 2024, when someone shares their most vulnerable moments:
 
 That data is **not theirs anymore**.
 
-It belongs to a corporation. It trains AI models. It's sold. It's analyzed. It's used to predict behavior, manipulate preferences, and extract value.
+It belongs to a corporation. It trains AI models. It's sold. It's analyzed. It's used to predict
+behavior, manipulate preferences, and extract value.
 
 The person who needed emotional safety got **emotional exploitation**.
 
@@ -134,12 +135,10 @@ When you share: *"I keep replaying that moment over and over, and it hurts"*
 
 FirstPerson:
 
-1. **Recognizes** the emotional content (recursion, ache, hurt)
-2. **Understands** the context (replaying a past moment)
-3. **Matches** to emotional glyph ("Recursive Ache")
-4. **Enriches** with poetry (Emily Dickinson on loops)
-5. **Reflects** with metaphors (spiral, echo, wave)
-6. **Responds** with ritual language (acknowledgment of the pattern)
+1. **Recognizes** the emotional content (recursion, ache, hurt) 2. **Understands** the context
+(replaying a past moment) 3. **Matches** to emotional glyph ("Recursive Ache") 4. **Enriches** with
+poetry (Emily Dickinson on loops) 5. **Reflects** with metaphors (spiral, echo, wave) 6.
+**Responds** with ritual language (acknowledgment of the pattern)
 
 Result: *You feel seen and understood. In seconds. Locally. Privately.*
 
@@ -173,7 +172,8 @@ Your system becomes **increasingly personal and useful**.
 
 ## The VELŌNIX Glyph System
 
-At FirstPerson's heart is the **VELŌNIX** system—a poetic, non-clinical way to name emotional states.
+At FirstPerson's heart is the **VELŌNIX** system—a poetic, non-clinical way to name emotional
+states.
 
 Rather than "Generalized Anxiety Disorder" or "Major Depression," FirstPerson uses:
 
@@ -219,8 +219,8 @@ And most importantly:
 
 **They trust the system.**
 
-Not because it's manipulative and makes you think it cares.
-But because it *actually* cares—by respecting you completely.
+Not because it's manipulative and makes you think it cares. But because it *actually* cares—by
+respecting you completely.
 
 ##
 

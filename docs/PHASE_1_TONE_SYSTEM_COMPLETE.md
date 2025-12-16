@@ -2,7 +2,9 @@
 
 ## Overview
 
-Phase 1 of the Velinor game development roadmap has been successfully implemented. The TONE (Trust, Observation, Narrative Presence, Empathy) stat system is now fully functional in the web version with a developer console for real-time monitoring.
+Phase 1 of the Velinor game development roadmap has been successfully implemented. The TONE (Trust,
+Observation, Narrative Presence, Empathy) stat system is now fully functional in the web version
+with a developer console for real-time monitoring.
 
 ## What's Been Done
 
@@ -45,18 +47,16 @@ The system tracks 4 hidden stats (0-100 range):
 
 ```typescript
 
-// Modify stats
-applyToneAction(stats, action)           // Add/subtract from a stat
+// Modify stats applyToneAction(stats, action)           // Add/subtract from a stat
 applyToneActions(stats, actions)         // Apply multiple changes
 
-// Check content availability
-canUnlockGlyph(glyphId, stats)          // Is glyph unlocked?
-getUnlockableGlyphs(stats)              // All currently unlocked glyphs
-canAccessEnding(endingId, stats)        // Is ending accessible?
-getAccessibleEndings(stats)             // All accessible endings
+// Check content availability canUnlockGlyph(glyphId, stats)          // Is glyph unlocked?
+getUnlockableGlyphs(stats)              // All currently unlocked glyphs canAccessEnding(endingId,
+stats)        // Is ending accessible? getAccessibleEndings(stats)             // All accessible
+endings
 
-// Get player feedback
-getToneTier(value)                       // "Poor", "Weak", "Good", "Strong", "Excellent"
+// Get player feedback getToneTier(value)                       // "Poor", "Weak", "Good", "Strong",
+"Excellent"
 
 ```text
 ```
@@ -115,12 +115,10 @@ Real-time monitoring widget shows:
 
 **6 Ending Paths:**
 
-1. **Friendship Eternal**: Trust ≥ 80 + Empathy ≥ 75
-2. **Sacrifice Path**: Empathy ≥ 85 + Narrative Presence ≥ 70
-3. **Hidden Knowledge**: Observation ≥ 90 + Trust ≥ 60
-4. **Lonely Ending**: Trust ≤ 30 + Empathy ≤ 30
-5. **Power Corruption**: Observation ≥ 70 + Empathy ≤ 35
-6. **Mutual Ascension**: Narrative Presence ≥ 80 + Trust ≥ 75
+1. **Friendship Eternal**: Trust ≥ 80 + Empathy ≥ 75 2. **Sacrifice Path**: Empathy ≥ 85 + Narrative
+Presence ≥ 70 3. **Hidden Knowledge**: Observation ≥ 90 + Trust ≥ 60 4. **Lonely Ending**: Trust ≤
+30 + Empathy ≤ 30 5. **Power Corruption**: Observation ≥ 70 + Empathy ≤ 35 6. **Mutual Ascension**:
+Narrative Presence ≥ 80 + Trust ≥ 75
 
 ## How to Use in Dialogue
 
@@ -153,11 +151,9 @@ choice.toneChanges.forEach(action => {
 ```typescript
 const { toneStats } = useGameStore();
 
-// Show vulnerable dialogue only if player has earned trust
-if (toneStats.trust >= 60) {
-  showDialog('I trust you enough to share this...');
-} else {
-  showDialog('I... don\'t know you well enough yet.');
+// Show vulnerable dialogue only if player has earned trust if (toneStats.trust >= 60) {
+showDialog('I trust you enough to share this...'); } else { showDialog('I... don\'t know you well
+enough yet.');
 ```text
 ```text
 ```
@@ -176,30 +172,17 @@ To continue implementation:
 
 ```typescript
 
-// In a dialogue component
-import { useGameStore } from '@/lib/gameStore';
+// In a dialogue component import { useGameStore } from '@/lib/gameStore';
 
-export default function DialogueScene() {
-  const { toneStats, updateToneStats } = useGameStore();
+export default function DialogueScene() { const { toneStats, updateToneStats } = useGameStore();
 
-  const handleChoice = (choiceIndex: number) => {
-    // Apply consequences
-    updateToneStats({
-      statName: 'trust',
-      delta: 5,
-      description: 'NPC name appreciated your response'
-    });
+const handleChoice = (choiceIndex: number) => { // Apply consequences updateToneStats({ statName:
+'trust', delta: 5, description: 'NPC name appreciated your response' });
 
-    // Move to next scene
-    // ... navigate to next dialogue
-  };
+// Move to next scene // ... navigate to next dialogue };
 
-  return (
-    <div>
-      {/* Render dialogue choices */}
-      {/* Each choice applies TONE changes when clicked */}
-    </div>
-  );
+return ( <div> {/* Render dialogue choices */} {/* Each choice applies TONE changes when clicked */}
+</div> );
 
 ```text
 ```
@@ -208,11 +191,9 @@ export default function DialogueScene() {
 
 To verify everything works:
 
-1. Start the game: `npm run dev` in `velinor-web/`
-2. Click "Dev Console" in bottom-right
-3. Watch stats update as you make choices
-4. Verify glyphs unlock at thresholds
-5. Check that endings appear when requirements met
+1. Start the game: `npm run dev` in `velinor-web/` 2. Click "Dev Console" in bottom-right 3. Watch
+stats update as you make choices 4. Verify glyphs unlock at thresholds 5. Check that endings appear
+when requirements met
 
 ## File Structure
 
@@ -248,7 +229,9 @@ velinor-web/
 
 ## Status: Ready for Phase 2
 
-The TONE system foundation is complete and tested. All graphics are integrated, state management is in place, and the developer console is operational. Ready to proceed with dialogue system integration and NPC relationship mechanics.
+The TONE system foundation is complete and tested. All graphics are integrated, state management is
+in place, and the developer console is operational. Ready to proceed with dialogue system
+integration and NPC relationship mechanics.
 
 **Commit**: `6543b0c` - Phase 1: TONE Stat System Implementation
 **Next Commit**: Phase 2 - Dialogue System Integration (in progress)

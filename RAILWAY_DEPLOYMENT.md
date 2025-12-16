@@ -47,8 +47,7 @@ api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
 ```bash
 
-npx create-next-app@latest velinor-web --typescript --tailwind --eslint
-cd velinor-web
+npx create-next-app@latest velinor-web --typescript --tailwind --eslint cd velinor-web
 
 ```text
 ```

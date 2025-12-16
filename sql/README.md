@@ -1,8 +1,7 @@
 # User preferences DB migration
 
-This folder contains a small SQL migration to create a server-side table used
-for storing simple UI preferences (currently used to persist the "Save my chats"
-toggle).
+This folder contains a small SQL migration to create a server-side table used for storing simple UI
+preferences (currently used to persist the "Save my chats" toggle).
 
 Table: `user_preferences`
 
@@ -28,7 +27,7 @@ psql $YOUR_DB_CONNECTION_URL -f sql/create_user_preferences_table.sql
 Notes:
 
 - This migration is intentionally minimal. If you prefer, create the table via
-  Supabase SQL editor in the web console.
+Supabase SQL editor in the web console.
 - The `ConversationManager` implements best-effort REST upsert via the
   `/rest/v1/user_preferences` endpoint. Ensure proper Row Level Security (RLS)
-  and policies are set if you wish to allow authenticated clients to write.
+and policies are set if you wish to allow authenticated clients to write.

@@ -2,7 +2,8 @@
 
 ## Overview
 
-The conversation memory layer transforms the system from responding to isolated messages into building a coherent, evolving understanding of the user's emotional state across multiple messages.
+The conversation memory layer transforms the system from responding to isolated messages into
+building a coherent, evolving understanding of the user's emotional state across multiple messages.
 
 **Key Principle**: Information adds up. Each message contributes new data that enriches rather than replaces prior understanding.
 
@@ -17,12 +18,8 @@ The conversation memory layer transforms the system from responding to isolated 
 ```text
 ```
 
-actor: I
-primary_affects: [stress]
-tense: present
-emphasis: so (high intensity)
-temporal_scope: today
-glyph: Still Insight
+actor: I primary_affects: [stress] tense: present emphasis: so (high intensity) temporal_scope:
+today glyph: Still Insight
 
 ```
 
@@ -41,16 +38,9 @@ glyph: Still Insight
 
 ```json
 
-{
-  "primary_affects": ["stress"],
-  "intensity": "medium",
-  "temporal_scope": "today",
-  "confidence": 0.7,
-  "next_clarifications": [
-    "What triggered this?",
-    "How does it manifest?",
-    "What have you tried?"
-  ]
+{ "primary_affects": ["stress"], "intensity": "medium", "temporal_scope": "today", "confidence":
+0.7, "next_clarifications": [ "What triggered this?", "How does it manifest?", "What have you
+tried?" ]
 
 ```text
 ```
@@ -100,25 +90,12 @@ Work demands
 **Memory now stores:**
 
 ```json
-{
-  "primary_affects": ["stress", "cognitive_overload"],
-  "secondary_affects": ["paralysis", "immobility"],
-  "intensity": "high",
-  "domains": ["work"],
-  "temporal_scope": "today (acute) + ongoing (chronic)",
-  "causal_chain": {
-    "trigger": "work",
-    "mechanism": "cognitive flooding",
-    "manifestation": "paralysis",
-    "agency_state": "paralyzed"
-  },
-  "confidence": 0.85,
-  "glyph_set": ["Still Insight", "Quiet Revelation", "Fragmentation"],
-  "next_clarifications": [
-    "How many distinct things compete?",
-    "Which is most time-critical?",
-    "How long has this been building?"
-  ]
+{ "primary_affects": ["stress", "cognitive_overload"], "secondary_affects": ["paralysis",
+"immobility"], "intensity": "high", "domains": ["work"], "temporal_scope": "today (acute) + ongoing
+(chronic)", "causal_chain": { "trigger": "work", "mechanism": "cognitive flooding", "manifestation":
+"paralysis", "agency_state": "paralyzed" }, "confidence": 0.85, "glyph_set": ["Still Insight",
+"Quiet Revelation", "Fragmentation"], "next_clarifications": [ "How many distinct things compete?",
+"Which is most time-critical?", "How long has this been building?" ]
 ```text
 ```text
 ```
@@ -131,10 +108,8 @@ Work demands
 
 ```
 
-specificity: 5 projects (QUANTIFIED)
-priority: client presentation (TIME-CRITICAL: Thursday)
-state: unstarted deck (BLOCKING FACTOR)
-domains: work + client work (CLIENT WORK IS PRIMARY)
+specificity: 5 projects (QUANTIFIED) priority: client presentation (TIME-CRITICAL: Thursday) state:
+unstarted deck (BLOCKING FACTOR) domains: work + client work (CLIENT WORK IS PRIMARY)
 
 ```text
 ```
@@ -198,12 +173,9 @@ domains: work + client work (CLIENT WORK IS PRIMARY)
 **WITHOUT Memory (isolated message handling):**
 
 ```
-Turn 1: "I'm stressed"
-        Response: "What's causing that stress?"
-Turn 2: "Too much on my mind"
-        Response: "That sounds overwhelming. What's the main thing?"
-Turn 3: "5 projects, Thursday deadline"
-        Response: "Have you prioritized them?"
+Turn 1: "I'm stressed" Response: "What's causing that stress?" Turn 2: "Too much on my mind"
+Response: "That sounds overwhelming. What's the main thing?" Turn 3: "5 projects, Thursday deadline"
+Response: "Have you prioritized them?"
 ```text
 ```text
 ```
@@ -212,20 +184,16 @@ Turn 3: "5 projects, Thursday deadline"
 
 ```
 
-Turn 1: "I'm stressed"
-        Response: "I hear you're feeling stress today."
-        Memory: Confidence 0.7, needs causation
+Turn 1: "I'm stressed" Response: "I hear you're feeling stress today." Memory: Confidence 0.7, needs
+causation
 
-Turn 2: "Too much on my mind at work"
-        Response: "I hear you - work has flooded your mind with so many
-                  competing demands that even one step forward feels impossible.
-                  What you're describing contains insight that needs organizing."
-        Memory: Confidence 0.85, mechanism revealed, glyph set enriched
+Turn 2: "Too much on my mind at work" Response: "I hear you - work has flooded your mind with so
+many competing demands that even one step forward feels impossible. What you're describing contains
+insight that needs organizing." Memory: Confidence 0.85, mechanism revealed, glyph set enriched
 
-Turn 3: "5 projects, Thursday deadline"
-        Response: "I hear you - work has flooded your mind with so many
-                  competing demands that even one step forward feels impossible.
-                  Which of these 5 could potentially wait?"
+Turn 3: "5 projects, Thursday deadline" Response: "I hear you - work has flooded your mind with so
+many competing demands that even one step forward feels impossible. Which of these 5 could
+potentially wait?"
 
 ```sql
 ```
@@ -364,8 +332,8 @@ class DynamicResponseComposer:
 ### Information Multiplier
 
 ```
-Turn 1: 1 fact (stressed)
-Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinking)
+Turn 1: 1 fact (stressed) Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete
+thinking)
 ```text
 ```text
 ```
@@ -374,8 +342,7 @@ Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinki
 
 ```
 
-0.7 (isolated emotion)
-  → 0.85 (causal mechanism revealed)
+0.7 (isolated emotion) → 0.85 (causal mechanism revealed)
 
 ```text
 ```
@@ -406,23 +373,20 @@ Still Insight (stress is emerging/becoming clear)
 
 ### 1. Multi-turn support conversations
 
-User comes back multiple times with same stress.
-Memory recognizes pattern, goes deeper.
+User comes back multiple times with same stress. Memory recognizes pattern, goes deeper.
 
 ### 2. Progressive disclosure
 
-User reveals more detail over time.
-System follows, building complete picture.
+User reveals more detail over time. System follows, building complete picture.
 
 ### 3. Problem decomposition
 
-Abstract stress → concrete cause → specific action
-System helps break problem into manageable pieces.
+Abstract stress → concrete cause → specific action System helps break problem into manageable
+pieces.
 
 ### 4. Validation and affirmation
 
-System demonstrates understanding grew.
-User feels truly heard, not just acknowledged.
+System demonstrates understanding grew. User feels truly heard, not just acknowledged.
 
 ##
 
@@ -430,25 +394,22 @@ User feels truly heard, not just acknowledged.
 
 ### 1. Cross-session memory
 
-Persist memory across multiple conversations.
-Recognize recurring patterns.
+Persist memory across multiple conversations. Recognize recurring patterns.
 
 ### 2. Glyph-guided intervention
 
-Use evolved glyph wisdom to suggest specific practices.
-"The Threshold suggests action is needed now."
+Use evolved glyph wisdom to suggest specific practices. "The Threshold suggests action is needed
+now."
 
 ### 3. Contextual reminders
 
-"Last time you were in this situation, you..."
-Build personal historical context.
+"Last time you were in this situation, you..." Build personal historical context.
 
 ### 4. Relational memory
 
-Track interactions between domains.
-"Work stress is affecting sleep, which increases work anxiety..."
+Track interactions between domains. "Work stress is affecting sleep, which increases work
+anxiety..."
 
 ### 5. Agency amplification
 
-Track what helps them regain control.
-"You previously found X helpful in this situation."
+Track what helps them regain control. "You previously found X helpful in this situation."

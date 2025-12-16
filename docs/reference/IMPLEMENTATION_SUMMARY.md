@@ -112,45 +112,39 @@ Changes to `render_main_app()`:
 
    ```python
    # Create ConversationManager instance
-   manager = ConversationManager(user_id)
+manager = ConversationManager(user_id)
 
    # Initialize current conversation ID (UUID)
-   current_conversation_id = str(uuid.uuid4())
+current_conversation_id = str(uuid.uuid4())
    ```
 
 2. **Sidebar Setup**
 
    ```python
-   with st.sidebar:
+with st.sidebar:
        # Persist toggle
-       persist_history = st.checkbox("💾 Save my chats")
+persist_history = st.checkbox("💾 Save my chats")
 
        # Load and display conversation list
-       load_all_conversations_to_sidebar(manager)
+load_all_conversations_to_sidebar(manager)
 
        # New conversation button
-       if st.button("➕ New Conversation"):
+if st.button("➕ New Conversation"):
            # Reset conversation
    ```
 
 3. **Auto-Naming on First Message**
 
    ```python
-   if len(messages) == 1:  # First exchange
-       title = generate_auto_name(first_user_input)
-       session_state['conversation_title'] = title
+if len(messages) == 1:  # First exchange title = generate_auto_name(first_user_input)
+session_state['conversation_title'] = title
    ```
 
 4. **Persistence After Each Exchange**
 
    ```python
-   if persist_history and manager:
-       manager.save_conversation(
-           conversation_id=current_id,
-           title=title,
-           messages=all_messages,
-           processing_mode=mode
-       )
+if persist_history and manager: manager.save_conversation( conversation_id=current_id, title=title,
+messages=all_messages, processing_mode=mode )
    ```
 
 ## Data Flow
@@ -159,26 +153,10 @@ Changes to `render_main_app()`:
 
 ```
 
-User starts app
-    ↓
-ConversationManager initialized
-    ↓
-Sidebar loads previous conversations
-    ↓
-"New Conversation" button clicked OR new UUID generated
-    ↓
-Empty chat displayed
-    ↓
-User types first message
-    ↓
-Auto-name generated from first message
-    ↓
-Response shown
-    ↓
-If "Save my chats" checked → Saved to Supabase
-    ↓
-Page refresh
-    ↓
+User starts app ↓ ConversationManager initialized ↓ Sidebar loads previous conversations ↓ "New
+Conversation" button clicked OR new UUID generated ↓ Empty chat displayed ↓ User types first message
+↓ Auto-name generated from first message ↓ Response shown ↓ If "Save my chats" checked → Saved to
+Supabase ↓ Page refresh ↓
 
 ```text
 ```
@@ -237,22 +215,20 @@ st.session_state = {
 
    ```bash
    # In Supabase SQL editor, run:
-   sql/conversations_table.sql
+sql/conversations_table.sql
    ```
 
 2. **Verify Supabase Secrets**
 
    ```yaml
    # .streamlit/secrets.toml
-   [supabase]
-   url = "https://your-project.supabase.co"
-   key = "your-anon-key"
+[supabase] url = "https://your-project.supabase.co" key = "your-anon-key"
    ```
 
 3. **Restart App**
 
    ```bash
-   streamlit run app.py
+streamlit run app.py
    ```
 
 ## Key Improvements Over Previous System
@@ -321,8 +297,7 @@ Documentation/
 
 ```
 
-commit 322c3c4
-Author: taurinrobinson-wq <taurinrobinson@gmail.com>
+commit 322c3c4 Author: taurinrobinson-wq <taurinrobinson@gmail.com>
 
 feat: implement persistent conversation storage with auto-naming
 

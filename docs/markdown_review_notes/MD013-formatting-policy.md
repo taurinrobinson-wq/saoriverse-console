@@ -12,13 +12,16 @@ Goals
 
 Policy (Draft)
 
-1. Line-length target: Soft-wrap at 100 characters for narrative paragraphs; hard limit 120 chars only when unavoidable.
+1. Line-length target: Soft-wrap at 100 characters for narrative paragraphs; hard limit 120 chars
+only when unavoidable.
    - Rationale: many narrative lines contain long titles/phrases; 100 chars balances readability and avoiding noisy diffs.
-2. Do not wrap or reflow inside fenced code blocks, tables, YAML front matter, or ASCII art diagrams — these are excluded from automated wrapping.
-3. When wrapping narrative text, prefer sentence-aware wrapping (wrap at sentence boundaries when possible) and retain paragraph indentation.
-4. Headings: normalize to ATX style (`## Heading`) with a single blank line above and below the heading.
-5. Remove duplicate top-level headings (consolidate content instead of duplicating identical H1/H2).
-6. Blank lines: ensure single blank line between block elements (no more than 1 consecutive blank line).
+2. Do not wrap or reflow inside fenced code blocks, tables, YAML front matter, or ASCII art diagrams
+— these are excluded from automated wrapping. 3. When wrapping narrative text, prefer sentence-aware
+wrapping (wrap at sentence boundaries when possible) and retain paragraph indentation. 4. Headings:
+normalize to ATX style (`## Heading`) with a single blank line above and below the heading. 5.
+Remove duplicate top-level headings (consolidate content instead of duplicating identical H1/H2). 6.
+Blank lines: ensure single blank line between block elements (no more than 1 consecutive blank
+line).
 
 Process
 

@@ -139,9 +139,7 @@ They see personalized responses about their specific situation. They never see:
 In `signal_parser.py`, in message_features dict:
 
 ```python
-message_features = {
-    "existing_feature": condition,
-    "new_feature": condition,  # Add here
+message_features = { "existing_feature": condition, "new_feature": condition,  # Add here
 ```text
 ```text
 ```
@@ -169,7 +167,8 @@ emotion_map = {
 
 ### Adding New Poetry Themes
 
-Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you add emotion types, poetry database will need expansion.
+Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you add emotion types,
+poetry database will need expansion.
 
 ##
 
@@ -193,11 +192,8 @@ This runs three messages through the conversation and shows:
 ```python
 from emotional_os.glyphs.signal_parser import parse_input
 
-result = parse_input(
-    "I have anxiety about math",
-    lexicon_path="velonix_lexicon.json",
-    db_path="glyphs.db"
-)
+result = parse_input( "I have anxiety about math", lexicon_path="velonix_lexicon.json",
+db_path="glyphs.db" )
 
 # See what glyph was selected:
 print(result["best_glyph"]["glyph_name"])

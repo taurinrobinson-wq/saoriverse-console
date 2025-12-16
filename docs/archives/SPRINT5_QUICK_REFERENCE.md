@@ -4,9 +4,9 @@
 
 ### 🎯 Start Here
 
-1. **This File** - Quick reference for Sprint 5
-2. **SPRINT5_INTEGRATION_GUIDE.md** - How to integrate modules (recommended first read)
-3. **SPRINT5_ENHANCEMENTS_SUMMARY.md** - Comprehensive reference (1,000+ lines)
+1. **This File** - Quick reference for Sprint 5 2. **SPRINT5_INTEGRATION_GUIDE.md** - How to
+integrate modules (recommended first read) 3. **SPRINT5_ENHANCEMENTS_SUMMARY.md** - Comprehensive
+reference (1,000+ lines)
 
 ### 📦 Source Code
 
@@ -232,21 +232,17 @@ Expected: All 24 tests pass ✅
 
 ### Latency too high?
 
-1. Run `profiler.get_summary()` to find bottleneck
-2. Use `ModelPerformanceBenchmark.get_whisper_recommendation(ms)`
-3. Profile specific operations
+1. Run `profiler.get_summary()` to find bottleneck 2. Use
+`ModelPerformanceBenchmark.get_whisper_recommendation(ms)` 3. Profile specific operations
 
 ### Prosody not applied?
 
-1. Verify `plan.pitch_contour` is populated
-2. Check TTS accepts prosody directives
-3. Use `plan.__dict__` to inspect
+1. Verify `plan.pitch_contour` is populated 2. Check TTS accepts prosody directives 3. Use
+`plan.__dict__` to inspect
 
 ### Sessions not saving?
 
-1. Verify `save_dir` exists
-2. Check file permissions
-3. Inspect `logger.events` list
+1. Verify `save_dir` exists 2. Check file permissions 3. Inspect `logger.events` list
 
 ##
 

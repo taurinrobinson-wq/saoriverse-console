@@ -2,7 +2,9 @@
 
 ## Overview
 
-Successfully segmented design documentation and implemented a **modular scene system** for the Velinor game. The system enables developers to build, test, and iterate on narrative encounters with visual layering, dialogue branching, and trust mechanics.
+Successfully segmented design documentation and implemented a **modular scene system** for the
+Velinor game. The system enables developers to build, test, and iterate on narrative encounters with
+visual layering, dialogue branching, and trust mechanics.
 
 ##
 
@@ -141,15 +143,9 @@ Streamlit app for interactive scene testing:
 ```text
 ```
 
-1. Run: streamlit run velinor_scenes_test.py
-2. Enter player name
-3. Start scene sequence
-4. Read narration, view NPC
-5. Click Continue to advance through states
-6. Make dialogue choices
-7. Watch trust levels update
-8. Navigate between scenes
-9. Review dialogue history
+1. Run: streamlit run velinor_scenes_test.py 2. Enter player name 3. Start scene sequence 4. Read
+narration, view NPC 5. Click Continue to advance through states 6. Make dialogue choices 7. Watch
+trust levels update 8. Navigate between scenes 9. Review dialogue history
 
 ```
 
@@ -163,17 +159,9 @@ Streamlit app for interactive scene testing:
 ```text
 ```
 
-Scene.DISTANT
-    ↓ [Continue button]
-Scene.APPROACH
-    ↓ [Continue button]
-Scene.CLOSE
-    ↓ [Continue button]
-Scene.DIALOGUE (NPC speaks)
-    ↓ [Continue button]
-Scene.CHOICES (Player selects dialogue)
-    ↓ [Choice selected]
-→ Next Scene or End
+Scene.DISTANT ↓ [Continue button] Scene.APPROACH ↓ [Continue button] Scene.CLOSE ↓ [Continue button]
+Scene.DIALOGUE (NPC speaks) ↓ [Continue button] Scene.CHOICES (Player selects dialogue) ↓ [Choice
+selected] → Next Scene or End
 
 ```
 
@@ -227,8 +215,8 @@ Each scene has:
 - glyph_close: glyphs triggered in Scene.APPROACH/CLOSE/DIALOGUE
 - Player choices can trigger additional glyphs
 
-Glyphs are displayed as text indicators below narration
-Examples: [Esḧ] = sacred witness, [Thalen̈] = longing, [Aelitḧ] = stillness
+Glyphs are displayed as text indicators below narration Examples: [Esḧ] = sacred witness, [Thalen̈]
+= longing, [Aelitḧ] = stillness
 
 ```
 
@@ -254,17 +242,9 @@ To create new scenes:
 
 ```python
 
-scene = SceneModule(
-    scene_id="my_scene_01",
-    npc_name="Unique NPC",
-    npc_archetype="oracle",  # or "welcoming", "mistrusting"
-    narration_distant="...",
-    narration_close="...",
-    npc_dialogue="...",
-    assets=SceneAssets(...),
-    player_options=[...],
-    glyph_distant=[...],
-    glyph_close=[...],
+scene = SceneModule( scene_id="my_scene_01", npc_name="Unique NPC", npc_archetype="oracle",  # or
+"welcoming", "mistrusting" narration_distant="...", narration_close="...", npc_dialogue="...",
+assets=SceneAssets(...), player_options=[...], glyph_distant=[...], glyph_close=[...],
 
 ```text
 ```
@@ -316,10 +296,8 @@ Then add to sequence:
 
 ### Immediate (Ready to Test)
 
-1. Run the test interface: `streamlit run velinor_scenes_test.py`
-2. Verify scene flow and dialogue makes sense
-3. Test player choice branching and trust updates
-4. Check styling and layout in browser
+1. Run the test interface: `streamlit run velinor_scenes_test.py` 2. Verify scene flow and dialogue
+makes sense 3. Test player choice branching and trust updates 4. Check styling and layout in browser
 
 ### Short Term (For You)
 
@@ -339,19 +317,17 @@ Then add to sequence:
 
 ### Medium Term
 
-1. Build additional scene sequences (shrine discovery, archive caves, etc.)
-2. Implement NPC memory: track encounters and relationship progression
-3. Add collapse aftermath: dynamically update map, block paths, reveal new areas
-4. Write content for remaining scenes (50-100+ passages target)
-5. Integrate with main `velinor_app.py` UI
+1. Build additional scene sequences (shrine discovery, archive caves, etc.) 2. Implement NPC memory:
+track encounters and relationship progression 3. Add collapse aftermath: dynamically update map,
+block paths, reveal new areas 4. Write content for remaining scenes (50-100+ passages target) 5.
+Integrate with main `velinor_app.py` UI
 
 ### Long Term
 
-1. Story branching: major choice points that diverge narrative
-2. Multiplayer scenes: multiple players making simultaneous or sequential choices
-3. Save/load: persist player progress across sessions
-4. Achievements: track player choices and unlock content
-5. Procedural generation: randomized NPC encounters, dynamic map changes
+1. Story branching: major choice points that diverge narrative 2. Multiplayer scenes: multiple
+players making simultaneous or sequential choices 3. Save/load: persist player progress across
+sessions 4. Achievements: track player choices and unlock content 5. Procedural generation:
+randomized NPC encounters, dynamic map changes
 
 ##
 
@@ -479,36 +455,21 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 
 ```python
 
-@staticmethod
-def build_healer_encounter() -> SceneModule:
-    return SceneModule(
-        scene_id="marketplace_healer_01",
-        npc_name="The Healer",
-        npc_archetype="welcoming",
+@staticmethod def build_healer_encounter() -> SceneModule: return SceneModule(
+scene_id="marketplace_healer_01", npc_name="The Healer", npc_archetype="welcoming",
 
-        narration_distant="A gentle figure tends to someone in an alcove...",
-        narration_close="She looks up, concern in her eyes...",
-        npc_dialogue="'You carry injury, not just physical...'",
+narration_distant="A gentle figure tends to someone in an alcove...", narration_close="She looks up,
+concern in her eyes...", npc_dialogue="'You carry injury, not just physical...'",
 
-        assets=SceneAssets(
-            background_distant="...",
-            background_close="...",
-            foreground_distant="...",
-            foreground_close="...",
-        ),
+assets=SceneAssets( background_distant="...", background_close="...", foreground_distant="...",
+foreground_close="...", ),
 
-        player_options=[
-            DialogueOption(
-                text="Can you help me?",
-                glyph_triggers=["Thalen̈"],
-                npc_response="Of course. Come, sit.",
-                trust_modifier=0.2
-            ),
+player_options=[ DialogueOption( text="Can you help me?", glyph_triggers=["Thalen̈"],
+npc_response="Of course. Come, sit.", trust_modifier=0.2 ),
             # ... more options
-        ],
+],
 
-        glyph_distant=["Esḧ"],
-        glyph_close=["Cinarä̈", "Sha'rú"],
+glyph_distant=["Esḧ"], glyph_close=["Cinarä̈", "Sha'rú"],
 
 ```text
 ```
@@ -528,14 +489,10 @@ Run `velinor_scenes_test.py` and navigate to test!
 
 ## 🎯 Success Criteria Met
 
-✅ Design docs segmented into 5 focused, implementation-ready markdown files
-✅ Modular scene engine created with clear architecture
-✅ 5 marketplace scenes built and connected
-✅ Streamlit UI demonstrates full scene system
-✅ Trust mechanics implemented and tracked
-✅ Glyph resonance integrated
-✅ Player choice tracking operational
-✅ Code is extensible and well-documented
-✅ Ready for asset creation and content expansion
+✅ Design docs segmented into 5 focused, implementation-ready markdown files ✅ Modular scene engine
+created with clear architecture ✅ 5 marketplace scenes built and connected ✅ Streamlit UI
+demonstrates full scene system ✅ Trust mechanics implemented and tracked ✅ Glyph resonance
+integrated ✅ Player choice tracking operational ✅ Code is extensible and well-documented ✅ Ready for
+asset creation and content expansion
 
 **Status:** ✨ **Implementation Complete - Ready for Asset Creation & Testing**

@@ -8,7 +8,8 @@
 
 ## 🎯 What Was Built
 
-A complete facial emotion detection and adaptive learning system that respects absolute user privacy while enabling the sanctuary to understand and respond to emotional context.
+A complete facial emotion detection and adaptive learning system that respects absolute user privacy
+while enabling the sanctuary to understand and respond to emotional context.
 
 ### Core Principle
 
@@ -66,11 +67,10 @@ A complete facial emotion detection and adaptive learning system that respects a
 
 ### 5. Documentation (4 Guides)
 
-1. **EMOTION_LEARNING_SETUP.md** — Supabase schema + SQL + RLS setup
-2. **FACEAPI_MODELS_SETUP.md** — Download and install face-api.js models
-3. **EMOTION_INTEGRATION_GUIDE.md** — How to integrate into your UI
-4. **EMOTION_LEARNING_QUICK_REFERENCE.md** — Quick lookup reference
-5. **EMOTION_LEARNING_IMPLEMENTATION.md** — Complete implementation roadmap
+1. **EMOTION_LEARNING_SETUP.md** — Supabase schema + SQL + RLS setup 2. **FACEAPI_MODELS_SETUP.md**
+— Download and install face-api.js models 3. **EMOTION_INTEGRATION_GUIDE.md** — How to integrate
+into your UI 4. **EMOTION_LEARNING_QUICK_REFERENCE.md** — Quick lookup reference 5.
+**EMOTION_LEARNING_IMPLEMENTATION.md** — Complete implementation roadmap
 
 ##
 
@@ -91,12 +91,9 @@ A complete facial emotion detection and adaptive learning system that respects a
 │                                    ↓                         │
 └────────────────────────────────────────────────────────────┘
                              │
-                    POST /api/emotions
-                    {emotion, confidence,
-                     timestamp, user_id, context}
+POST /api/emotions {emotion, confidence, timestamp, user_id, context}
                              │
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────────────────┐
 │ BACKEND (Next.js API Routes)                                │
 │                                                              │
 │ /api/emotions (POST)                                        │
@@ -113,8 +110,7 @@ A complete facial emotion detection and adaptive learning system that respects a
 │   ↓ Return updated record                                   │
 └────────────────────────────────────────────────────────────┘
                              │
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────────────────┐
 │ SUPABASE (Database + Realtime)                              │
 │                                                              │
 │ emotions_log (INSERT from /api/emotions)                   │
@@ -132,10 +128,9 @@ A complete facial emotion detection and adaptive learning system that respects a
 │                                                              │
 └────────────────────────────────────────────────────────────┘
                              │
-            Supabase Realtime Subscription
+Supabase Realtime Subscription
                              │
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────────────────┐
 │ BROWSER (EmotionDetector Realtime Listener)                │
 │                                                              │
 │ Receives emotion_thresholds UPDATE notification            │
@@ -146,11 +141,9 @@ A complete facial emotion detection and adaptive learning system that respects a
 │                                                              │
 └────────────────────────────────────────────────────────────┘
                              │
-                             ↓
-            [Weekly or On-Demand Training]
+↓ [Weekly or On-Demand Training]
                              │
-                             ↓
-┌─────────────────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────────────────┐
 │ TRAINING SCRIPT (train_emotion_model.py)                   │
 │                                                              │
 │ 1. Query emotions_log for user (last N days)              │
@@ -164,8 +157,7 @@ A complete facial emotion detection and adaptive learning system that respects a
 │                                                              │
 └────────────────────────────────────────────────────────────┘
                              │
-                             ↓
-              System becomes smarter & lighter:
+↓ System becomes smarter & lighter:
               - Better accuracy (user-specific)
               - Less CPU (higher thresholds for rare emotions)
               - Personalized (learns from individual patterns)

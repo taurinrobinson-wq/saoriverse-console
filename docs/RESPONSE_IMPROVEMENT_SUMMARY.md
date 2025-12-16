@@ -2,22 +2,20 @@
 
 ## The Problem
 
-The backend was returning a generic, template-based response that didn't acknowledge the user's specific emotional experience:
+The backend was returning a generic, template-based response that didn't acknowledge the user's
+specific emotional experience:
 
 ```text
 ```
 
-User: "Lately, I wake up already exhausted, like my body is carrying a weight
-I can't set down. Even small tasks — answering emails, making breakfast for
-the kids — feel like climbing a mountain. I catch myself staring out the window,
-watching people rush by, and wondering how they all keep moving when I feel
-stuck in place. What I need right now is someone who can hear that heaviness
-without trying to fix it immediately, just to sit with me in it for a moment."
+User: "Lately, I wake up already exhausted, like my body is carrying a weight I can't set down. Even
+small tasks — answering emails, making breakfast for the kids — feel like climbing a mountain. I
+catch myself staring out the window, watching people rush by, and wondering how they all keep moving
+when I feel stuck in place. What I need right now is someone who can hear that heaviness without
+trying to fix it immediately, just to sit with me in it for a moment."
 
-OLD RESPONSE:
-"I hear you saying: '[full message repeated]'. That's significant enough to
-bring here. Can you tell me more about what's behind that? What's the weight
-underneath those words?"
+OLD RESPONSE: "I hear you saying: '[full message repeated]'. That's significant enough to bring
+here. Can you tell me more about what's behind that? What's the weight underneath those words?"
 
 ```
 
@@ -38,13 +36,11 @@ Updated `generate_empathetic_response()` in `firstperson_backend.py` to:
 
 ```python
 
-has_exhaustion = any(word in message_lower for word in
-    ["exhausted", "exhaustion", "tired", "weary", "drained", "weight",
-     "carrying", "burden", "heavy"])
+has_exhaustion = any(word in message_lower for word in ["exhausted", "exhaustion", "tired", "weary",
+"drained", "weight", "carrying", "burden", "heavy"])
 
-has_momentum_loss = any(word in message_lower for word in
-    ["stuck", "stalled", "can't move", "frozen", "stopped", "watching",
-     "rushing by"])
+has_momentum_loss = any(word in message_lower for word in ["stuck", "stalled", "can't move",
+"frozen", "stopped", "watching", "rushing by"])
 
 requests_presence = any(phrase in message_lower for phrase in
 
@@ -148,8 +144,8 @@ The function was also updated to handle:
 **Grief detection:**
 
 ```
-"There's something deep in what you just shared. Grief, loss, something being
-taken from you. I'm here with that. Not to make it better, but to acknowledge
+"There's something deep in what you just shared. Grief, loss, something being taken from you. I'm
+here with that. Not to make it better, but to acknowledge
 ```text
 ```text
 ```
@@ -184,9 +180,7 @@ NEW RESPONSE:
 >
 > I'm sitting with you in this. You don't need to move right now. What does this exhaustion feel like in your body right now?"
 
-✅ **Acknowledges the specific experience** (weight, exhaustion, momentum loss)
-✅ **Validates their emotional intelligence** (they know what they need)
-✅ **Honors their explicit request** (just sit, don't fix)
-✅ **Provides holding space** (presence, not solutions)
-✅ **Uses glyph-informed attunement** (holding_space mode)
-✅ **Grounds in present moment** (body, feeling right now)
+✅ **Acknowledges the specific experience** (weight, exhaustion, momentum loss) ✅ **Validates their
+emotional intelligence** (they know what they need) ✅ **Honors their explicit request** (just sit,
+don't fix) ✅ **Provides holding space** (presence, not solutions) ✅ **Uses glyph-informed
+attunement** (holding_space mode) ✅ **Grounds in present moment** (body, feeling right now)

@@ -8,7 +8,8 @@
 
 ## Summary
 
-Successfully assigned signals and gate activation patterns to 10 high-frequency emotional words that were previously unmapped:
+Successfully assigned signals and gate activation patterns to 10 high-frequency emotional words that
+were previously unmapped:
 
 | Word | Frequency | Signals | Gates | Rationale |
 |------|-----------|---------|-------|-----------|
@@ -73,27 +74,15 @@ Successfully assigned signals and gate activation patterns to 10 high-frequency 
 ```text
 ```
 
-breathe   ✓ MAPPED  2 signals, 2 gates
-depth     ✓ MAPPED  2 signals, 2 gates
-desire    ✓ MAPPED  2 signals, 2 gates
-echo      ✓ MAPPED  1 signal,  2 gates
-exactly   ✓ MAPPED  1 signal,  2 gates
-faith     ✓ MAPPED  2 signals, 2 gates
-gentle    ✓ MAPPED  2 signals, 2 gates
-hold      ✓ MAPPED  1 signal,  2 gates
-honor     ✓ MAPPED  1 signal,  2 gates
-knowing   ✓ MAPPED  2 signals, 2 gates
-practice  ✓ MAPPED  2 signals, 2 gates
-presence  ✓ MAPPED  2 signals, 4 gates
-reflect   ✓ MAPPED  2 signals, 2 gates
-ritual    ✓ MAPPED  2 signals, 2 gates
-sacred    ✓ MAPPED  1 signal,  2 gates
-safe      ✓ MAPPED  2 signals, 2 gates
-safety    ✓ MAPPED  2 signals, 2 gates
-soft      ✓ MAPPED  2 signals, 2 gates
-tender    ✓ MAPPED  1 signal,  2 gates
-trust     ✓ MAPPED  1 signal,  2 gates
-wisdom    ✓ MAPPED  2 signals, 2 gates
+breathe   ✓ MAPPED  2 signals, 2 gates depth     ✓ MAPPED  2 signals, 2 gates desire    ✓ MAPPED  2
+signals, 2 gates echo      ✓ MAPPED  1 signal,  2 gates exactly   ✓ MAPPED  1 signal,  2 gates faith
+✓ MAPPED  2 signals, 2 gates gentle    ✓ MAPPED  2 signals, 2 gates hold      ✓ MAPPED  1 signal,  2
+gates honor     ✓ MAPPED  1 signal,  2 gates knowing   ✓ MAPPED  2 signals, 2 gates practice  ✓
+MAPPED  2 signals, 2 gates presence  ✓ MAPPED  2 signals, 4 gates reflect   ✓ MAPPED  2 signals, 2
+gates ritual    ✓ MAPPED  2 signals, 2 gates sacred    ✓ MAPPED  1 signal,  2 gates safe      ✓
+MAPPED  2 signals, 2 gates safety    ✓ MAPPED  2 signals, 2 gates soft      ✓ MAPPED  2 signals, 2
+gates tender    ✓ MAPPED  1 signal,  2 gates trust     ✓ MAPPED  1 signal,  2 gates wisdom    ✓
+MAPPED  2 signals, 2 gates
 
 ```
 

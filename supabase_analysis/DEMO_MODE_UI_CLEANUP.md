@@ -2,15 +2,16 @@
 
 ## Problem
 
-In demo mode (unauthenticated users), the UI was showing features that require authentication and data persistence:
+In demo mode (unauthenticated users), the UI was showing features that require authentication and
+data persistence:
 
-1. **"Start Personal Log"** button - Requires saving logs to database
-2. **"Logout"** button - User isn't actually logged in
-3. **"💾 Save my chats"** checkbox - Demo mode can't persist data
+1. **"Start Personal Log"** button - Requires saving logs to database 2. **"Logout"** button - User
+isn't actually logged in 3. **"💾 Save my chats"** checkbox - Demo mode can't persist data
 
 ## Solution
 
-Wrapped all these UI elements with authentication checks so they only appear for authenticated users:
+Wrapped all these UI elements with authentication checks so they only appear for authenticated
+users:
 
 ### Changes Made
 
@@ -53,12 +54,8 @@ if st.session_state.get('authenticated'):
 **Before**:
 
 ```python
-try:
-    if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-        from .auth import SaoynxAuthentication
-        auth = SaoynxAuthentication()
-        auth.logout()
-except Exception:
+try: if st.button("Logout", key="controls_logout", help="Sign out of your account"): from .auth
+import SaoynxAuthentication auth = SaoynxAuthentication() auth.logout() except Exception:
 ```text
 ```text
 ```
@@ -69,13 +66,9 @@ except Exception:
 
 
 # Only show for authenticated users
-if st.session_state.get('authenticated'):
-    try:
-        if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-            from .auth import SaoynxAuthentication
-            auth = SaoynxAuthentication()
-            auth.logout()
-    except Exception:
+if st.session_state.get('authenticated'): try: if st.button("Logout", key="controls_logout",
+help="Sign out of your account"): from .auth import SaoynxAuthentication auth =
+SaoynxAuthentication() auth.logout() except Exception:
 
 ```text
 ```

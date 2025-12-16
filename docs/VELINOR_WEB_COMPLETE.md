@@ -2,7 +2,8 @@
 
 ## What Changed
 
-You're ditching **Streamlit** and moving to a proper **web stack** because Streamlit's rendering model can't handle the layered overlays and interactive positioning you want for Velinor.
+You're ditching **Streamlit** and moving to a proper **web stack** because Streamlit's rendering
+model can't handle the layered overlays and interactive positioning you want for Velinor.
 
 ##
 
@@ -11,19 +12,17 @@ You're ditching **Streamlit** and moving to a proper **web stack** because Strea
 ```text
 ```
 
-Your Computer (Dev)          Railway Server (Production)
-═══════════════════          ════════════════════════════
+Your Computer (Dev)          Railway Server (Production) ═══════════════════
+════════════════════════════
 
-Backend:                     Backend:
-python velinor_api.py        FastAPI (auto-deployed)
+Backend:                     Backend: python velinor_api.py        FastAPI (auto-deployed)
 <http://localhost:8000>        <https://your-domain.up.railway.app>
 
-Frontend:                    Frontend:
-npm run dev                  Next.js (auto-deployed)
+Frontend:                    Frontend: npm run dev                  Next.js (auto-deployed)
 <http://localhost:3000>        <https://your-domain.up.railway.app>
 
-Game Engine:                 Game Engine:
-Velinor (Python)             Velinor (Python) - embedded in backend
+Game Engine:                 Game Engine: Velinor (Python)             Velinor (Python) - embedded
+in backend
 
 ```
 
@@ -62,8 +61,7 @@ Velinor (Python)             Velinor (Python) - embedded in backend
 
 ```bash
 
-npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
-cd velinor-web
+npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git cd velinor-web
 
 ```text
 ```
@@ -100,9 +98,7 @@ cd velinor-web && npm run dev
 ### Step 5: Deploy
 
 ```bash
-git add .
-git commit -m "feat: Next.js + FastAPI Velinor game"
-git push origin main
+git add . git commit -m "feat: Next.js + FastAPI Velinor game" git push origin main
 
 ```text
 ```text
@@ -269,9 +265,7 @@ python velinor_api.py
 cd velinor-web && npm run dev
 
 # Deployment (when ready)
-git add .
-git commit -m "your message"
-git push origin main
+git add . git commit -m "your message" git push origin main
 
 ```
 

@@ -2,11 +2,14 @@
 
 ## Problem
 
-After the repository restructuring that moved files from root to `src/` directory and split modules into separate packages (e.g., `emotional_os_glyphs`, `emotional_os_lexicon`, etc.), the FirstPerson app was broken because:
+After the repository restructuring that moved files from root to `src/` directory and split modules
+into separate packages (e.g., `emotional_os_glyphs`, `emotional_os_lexicon`, etc.), the FirstPerson
+app was broken because:
 
-1. `app.py` couldn't import `emotional_os.deploy.modules.ui_refactored`
-2. The new package structure had text-based symlink stubs that didn't work
-3. Import paths expected `emotional_os.glyphs`, `emotional_os.lexicon`, etc. but the actual packages were named `emotional_os_glyphs`, `emotional_os_lexicon`, etc.
+1. `app.py` couldn't import `emotional_os.deploy.modules.ui_refactored` 2. The new package structure
+had text-based symlink stubs that didn't work 3. Import paths expected `emotional_os.glyphs`,
+`emotional_os.lexicon`, etc. but the actual packages were named `emotional_os_glyphs`,
+`emotional_os_lexicon`, etc.
 
 ## Solution Implemented
 
@@ -19,7 +22,8 @@ Added `src/` to `sys.path` so Python can find the modules:
 ```sql
 ```
 
-This ensures that when `from emotional_os.deploy.modules.ui_refactored import main` is executed, Python looks in the correct location.
+This ensures that when `from emotional_os.deploy.modules.ui_refactored import main` is executed,
+Python looks in the correct location.
 
 ### 2. Updated Package Configuration
 
@@ -39,8 +43,7 @@ where = ["src"]
 **setup.cfg**: Updated to point packages to src directory
 
 ```ini
-[options]
-package_dir = {= src}
+[options] package_dir = {= src}
 
 [options.packages.find]
 ```text
@@ -73,15 +76,15 @@ Example for `src/emotional_os/glyphs/__init__.py`:
 
 
 # Register all submodules from the sibling in sys.modules
-for key, module in list(sys.modules.items()):
-    if key.startswith('emotional_os_glyphs'):
+for key, module in list(sys.modules.items()): if key.startswith('emotional_os_glyphs'):
         # Map emotional_os_glyphs.X to emotional_os.glyphs.X
-        new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')
+new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')
 
 ```sql
 ```
 
-This allows code like `from emotional_os.glyphs.learning_response_generator import X` to work even though the actual module is `emotional_os_glyphs.learning_response_generator`.
+This allows code like `from emotional_os.glyphs.learning_response_generator import X` to work even
+though the actual module is `emotional_os_glyphs.learning_response_generator`.
 
 ## Verification
 
@@ -109,13 +112,11 @@ The app should now start without import errors.
 
 ## Files Modified
 
-1. `app.py` - Updated import handling
-2. `pyproject.toml` - Fixed package configuration
-3. `setup.cfg` - Fixed package discovery
-4. `src/emotional_os/glyphs/__init__.py` - Created re-export stub
-5. `src/emotional_os/lexicon/__init__.py` - Created re-export stub
-6. `src/emotional_os/parser/__init__.py` - Created re-export stub
-7. `src/emotional_os/safety/__init__.py` - Created re-export stub
-8. `src/emotional_os/feedback/__init__.py` - Created re-export stub
-9. `src/emotional_os/learning/__init__.py` - Created re-export stub
-10. `src/emotional_os/privacy/__init__.py` - Created re-export stub
+1. `app.py` - Updated import handling 2. `pyproject.toml` - Fixed package configuration 3.
+`setup.cfg` - Fixed package discovery 4. `src/emotional_os/glyphs/__init__.py` - Created re-export
+stub 5. `src/emotional_os/lexicon/__init__.py` - Created re-export stub 6.
+`src/emotional_os/parser/__init__.py` - Created re-export stub 7.
+`src/emotional_os/safety/__init__.py` - Created re-export stub 8.
+`src/emotional_os/feedback/__init__.py` - Created re-export stub 9.
+`src/emotional_os/learning/__init__.py` - Created re-export stub 10.
+`src/emotional_os/privacy/__init__.py` - Created re-export stub

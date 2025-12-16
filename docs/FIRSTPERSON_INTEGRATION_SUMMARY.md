@@ -2,7 +2,8 @@
 
 ## ✨ What Just Happened
 
-Your Velinor game now has **emotionally-aware NPC responses** through FirstPerson integration. NPCs adapt their dialogue in real-time based on your emotional state.
+Your Velinor game now has **emotionally-aware NPC responses** through FirstPerson integration. NPCs
+adapt their dialogue in real-time based on your emotional state.
 
 ## 🎯 The Integration
 
@@ -11,8 +12,7 @@ Your Velinor game now has **emotionally-aware NPC responses** through FirstPerso
 ```text
 ```
 
-Player: "I'm overwhelmed"
-NPC:    "I see. What would you like to do?"
+Player: "I'm overwhelmed" NPC:    "I see. What would you like to do?"
 
 ```
 
@@ -23,16 +23,13 @@ NPC:    "I see. What would you like to do?"
 ```text
 ```
 
-Player: "I'm overwhelmed"
-         ↓ [FirstPerson Analysis]
+Player: "I'm overwhelmed" ↓ [FirstPerson Analysis]
          ├─ Tone: heavy
          ├─ Theme: burden/overwhelm
          ├─ Valence: -0.7 (quite negative)
          └─ Intensity: 0.8 (strong emotion)
-         ↓ [NPC Response Generation]
-NPC:    "I hear the weight in that. The burden you're carrying—
-         I feel it. What needs to be said about it? Sometimes
-         the weight lessens when we name it."
+↓ [NPC Response Generation] NPC:    "I hear the weight in that. The burden you're carrying— I feel
+it. What needs to be said about it? Sometimes the weight lessens when we name it."
 
 ```
 
@@ -105,9 +102,7 @@ memory.record_turn(input, affect, theme)
 ### 3. Game Engine Routes
 
 ```python
-orchestrator.process_player_action(player_input)
-→ Applies emotional analysis
-→ Updates game state
+orchestrator.process_player_action(player_input) → Applies emotional analysis → Updates game state
 ```text
 ```text
 ```
@@ -116,13 +111,8 @@ orchestrator.process_player_action(player_input)
 
 ```python
 
-_generate_emotionally_aware_response(
-    emotional_tone='heavy',
-    detected_theme='general',
-    valence=-0.6,
-    memory_context={...}
-)
-→ "I hear the weight in that. The path of responsibility
+_generate_emotionally_aware_response( emotional_tone='heavy', detected_theme='general',
+valence=-0.6, memory_context={...} ) → "I hear the weight in that. The path of responsibility
 
 ```text
 ```
@@ -188,9 +178,8 @@ NPC:   "I hear the uncertainty in that. That's real.
 ### Moment 2: Recurring Theme Recognition
 
 ```
-You:   "I keep coming back to my doubts"
-NPC:   "I'm hearing doubt come up again. That tells me
-        something. What's beneath it?"
+You:   "I keep coming back to my doubts" NPC:   "I'm hearing doubt come up again. That tells me
+something. What's beneath it?"
 ```text
 ```text
 ```
@@ -199,10 +188,8 @@ NPC:   "I'm hearing doubt come up again. That tells me
 
 ```
 
-You:   "But maybe I'm stronger than I thought"
-NPC:   "There's something to sit with there. I'm also
-        noticing a shift in what you're saying.
-        What's helping?"
+You:   "But maybe I'm stronger than I thought" NPC:   "There's something to sit with there. I'm also
+noticing a shift in what you're saying. What's helping?"
 
 ```text
 ```
@@ -308,10 +295,9 @@ Read more:
 **Your Velinor game now delivers emotionally responsive, contextually aware NPC dialogue that adapts to your emotional state in real-time.**
 
 ```
-Type any emotion → FirstPerson analyzes instantly →
-NPC responds with personalized, emotionally-aware dialogue →
-Conversation memory tracks themes and patterns →
-Your emotional journey is reflected and honored in the game
+Type any emotion → FirstPerson analyzes instantly → NPC responds with personalized,
+emotionally-aware dialogue → Conversation memory tracks themes and patterns → Your emotional journey
+is reflected and honored in the game
 ```
 
 ##

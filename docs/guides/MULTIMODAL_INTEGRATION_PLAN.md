@@ -6,7 +6,8 @@ Phase 3.2 works great but your app is text-only Streamlit. Users can't upload vi
 
 ## The Solution: Optional Multimodal Sidebar
 
-Add a **collapsible sidebar section** for users who want to provide voice/facial context alongside text.
+Add a **collapsible sidebar section** for users who want to provide voice/facial context alongside
+text.
 
 ##
 
@@ -62,9 +63,8 @@ When user sends:
 ```text
 ```
 
-Text: "I'm doing great!"
-Voice: Low pitch, slow rate, high pauses
-Face: Inner brows raised, lip corners down
+Text: "I'm doing great!" Voice: Low pitch, slow rate, high pauses Face: Inner brows raised, lip
+corners down
 
 ```
 
@@ -177,35 +177,29 @@ multimodal_data = render_multimodal_sidebar()
 
 if user_message:
     # Existing text processing
-    text_tone = parse_emotion_from_text(user_message)
+text_tone = parse_emotion_from_text(user_message)
 
     # NEW: Add multimodal analysis if available
-    if multimodal_data["voice_analysis"] or multimodal_data["facial_analysis"]:
-        fusion_engine = MultimodalFusionEngine()
-        multimodal_result = fusion_engine.fuse(
-            text_tone=text_tone,
-            voice_analysis=multimodal_data["voice_analysis"],
-            facial_analysis=multimodal_data["facial_analysis"],
-        )
+if multimodal_data["voice_analysis"] or multimodal_data["facial_analysis"]: fusion_engine =
+MultimodalFusionEngine() multimodal_result = fusion_engine.fuse( text_tone=text_tone,
+voice_analysis=multimodal_data["voice_analysis"],
+facial_analysis=multimodal_data["facial_analysis"], )
 
         # Store in session state
-        st.session_state.last_multimodal = multimodal_result
+st.session_state.last_multimodal = multimodal_result
 
         # Display to user
-        with st.expander("📊 Multimodal Analysis", expanded=True):
-            col1, col2, col3 = st.columns(3)
-            col1.metric("Confidence", f"{multimodal_result.confidence.overall_confidence:.1%}")
-            col2.metric("Congruence", multimodal_result.congruence_type.replace("_", " "))
-            col3.metric("Stress Level", f"{multimodal_result.dimensions.stress_level:.1%}")
+with st.expander("📊 Multimodal Analysis", expanded=True): col1, col2, col3 = st.columns(3)
+col1.metric("Confidence", f"{multimodal_result.confidence.overall_confidence:.1%}")
+col2.metric("Congruence", multimodal_result.congruence_type.replace("_", " ")) col3.metric("Stress
+Level", f"{multimodal_result.dimensions.stress_level:.1%}")
 
-            if multimodal_result.incongruences:
-                st.warning("Detected: " + ", ".join(multimodal_result.incongruences))
+if multimodal_result.incongruences: st.warning("Detected: " + ",
+".join(multimodal_result.incongruences))
 
     # Pass multimodal context to response generation
-    response = generate_response(
-        user_message,
-        text_tone,
-        multimodal_result=multimodal_result if 'multimodal_result' in locals() else None
+response = generate_response( user_message, text_tone, multimodal_result=multimodal_result if
+'multimodal_result' in locals() else None
 ```text
 ```text
 ```
@@ -216,34 +210,22 @@ if user_message:
 
 ```python
 
-def generate_response(user_message, text_tone, multimodal_result=None):
-    """Generate response with optional multimodal context."""
+def generate_response(user_message, text_tone, multimodal_result=None): """Generate response with
+optional multimodal context."""
 
-    base_context = {
-        "text_tone": text_tone,
-        "message": user_message,
-    }
+base_context = { "text_tone": text_tone, "message": user_message, }
 
     # If multimodal data available, enhance context
-    if multimodal_result:
-        base_context.update({
-            "actual_emotion": multimodal_result.primary_emotion,
-            "confidence": multimodal_result.confidence.overall_confidence,
-            "incongruences": multimodal_result.incongruences,
-            "stress_level": multimodal_result.dimensions.stress_level,
-        })
+if multimodal_result: base_context.update({ "actual_emotion": multimodal_result.primary_emotion,
+"confidence": multimodal_result.confidence.overall_confidence, "incongruences":
+multimodal_result.incongruences, "stress_level": multimodal_result.dimensions.stress_level, })
 
         # Add system prompt instruction
-        if "SUPPRESSION" in multimodal_result.congruence_type:
-            base_context["instruction"] = (
-                "User appears to be suppressing emotion. "
-                "Gently acknowledge the discrepancy and create space for honesty."
-            )
-        elif "TEXT_POSITIVE_VOICE_NEGATIVE" in multimodal_result.congruence_type:
-            base_context["instruction"] = (
-                "Detect possible sarcasm or irony. Respond with gentle humor "
-                "or direct inquiry about what's really happening."
-            )
+if "SUPPRESSION" in multimodal_result.congruence_type: base_context["instruction"] = ( "User appears
+to be suppressing emotion. " "Gently acknowledge the discrepancy and create space for honesty." )
+elif "TEXT_POSITIVE_VOICE_NEGATIVE" in multimodal_result.congruence_type:
+base_context["instruction"] = ( "Detect possible sarcasm or irony. Respond with gentle humor " "or
+direct inquiry about what's really happening." )
 
     # Pass to LLM or response composer
 

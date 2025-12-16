@@ -157,21 +157,12 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```
 
-Project Gutenberg API
-         ↓
-   gutenberg_fetcher.py (downloads poetry)
-         ↓
-   bulk_text_processor.py (chunks text)
-         ↓
-   poetry_signal_extractor.py (extracts 8 signals)
-         ↓
-   hybrid_learner_v2.py (learns patterns)
-         ↓
-   Updated Lexicons
+Project Gutenberg API ↓ gutenberg_fetcher.py (downloads poetry) ↓ bulk_text_processor.py (chunks
+text) ↓ poetry_signal_extractor.py (extracts 8 signals) ↓ hybrid_learner_v2.py (learns patterns) ↓
+Updated Lexicons
    ├─ signal_lexicon.json (8 emotional dimensions)
    └─ learned_lexicon.json (learned patterns)
-         ↓
-   Results saved to external drive
+↓ Results saved to external drive
    ├─ gutenberg_processing_results.json
    ├─ gutenberg_learning.log
 
@@ -236,9 +227,8 @@ Quality Score Average: 0.75-0.85 (good)
 
 ### Immediate (Recommended)
 
-1. ✅ Monitor processing log to verify output quality
-2. ✅ Test learned patterns in UI with sample inputs
-3. ✅ Verify signal extraction improving emotional detection
+1. ✅ Monitor processing log to verify output quality 2. ✅ Test learned patterns in UI with sample
+inputs 3. ✅ Verify signal extraction improving emotional detection
 
 ### Short Term (1-2 weeks)
 
@@ -253,17 +243,13 @@ Quality Score Average: 0.75-0.85 (good)
 
 ### Medium Term (1-2 months)
 
-1. Expand to 100+ collections
-2. Measure lexicon growth and quality improvements
-3. A/B test UI responses with expanded lexicon
-4. Integrate more text sources
+1. Expand to 100+ collections 2. Measure lexicon growth and quality improvements 3. A/B test UI
+responses with expanded lexicon 4. Integrate more text sources
 
 ### Long Term (Ongoing)
 
-1. Continuous lexicon expansion
-2. Quality metric tracking over time
-3. Performance optimization
-4. User feedback integration for refinement
+1. Continuous lexicon expansion 2. Quality metric tracking over time 3. Performance optimization 4.
+User feedback integration for refinement
 
 ##
 
@@ -286,11 +272,8 @@ Edit `gutenberg_fetcher.py` (lines 35-70) to add URLs:
 Use the bulk processor directly:
 
 ```bash
-cd /Users/taurinrobinson/saoriverse-console
-venv/bin/python -c "
-from bulk_text_processor import BulkTextProcessor
-processor = BulkTextProcessor('your_file.txt')
-results = processor.process()
+cd /Users/taurinrobinson/saoriverse-console venv/bin/python -c " from bulk_text_processor import
+BulkTextProcessor processor = BulkTextProcessor('your_file.txt') results = processor.process()
 ```text
 ```text
 ```

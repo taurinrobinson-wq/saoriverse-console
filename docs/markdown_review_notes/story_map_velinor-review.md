@@ -11,8 +11,9 @@ Remaining lint findings (post-edit):
 
 Recommendation / next steps:
 
-1. Leave MD013 and spacing issues for a dedicated pass to avoid altering narrative meaning.
-2. Proceed to the next prioritized file for MD040 reduction (per your list), then return to wrap/spacing passes.
+1. Leave MD013 and spacing issues for a dedicated pass to avoid altering narrative meaning. 2.
+Proceed to the next prioritized file for MD040 reduction (per your list), then return to
+wrap/spacing passes.
 
 Actions taken:
 

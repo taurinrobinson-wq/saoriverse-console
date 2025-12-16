@@ -6,11 +6,11 @@ This document describes the new persistent conversation storage system for First
 
 The system now supports:
 
-1. **Persistent Conversation Storage** - Conversations are saved to Supabase/database
-2. **Auto-Naming** - Conversations are automatically named based on first message context
-3. **Conversation Sidebar** - Previous conversations listed and selectable in sidebar
-4. **Rename/Delete** - Users can rename or delete conversations
-5. **Session Persistence** - Preferences like "Save my chats" are remembered across sessions
+1. **Persistent Conversation Storage** - Conversations are saved to Supabase/database 2.
+**Auto-Naming** - Conversations are automatically named based on first message context 3.
+**Conversation Sidebar** - Previous conversations listed and selectable in sidebar 4.
+**Rename/Delete** - Users can rename or delete conversations 5. **Session Persistence** -
+Preferences like "Save my chats" are remembered across sessions
 
 ## Architecture
 
@@ -192,7 +192,7 @@ Key session state variables:
 
    ```bash
    # Verify secrets are loaded
-   python -c "import streamlit as st; print(st.secrets.get('supabase'))"
+python -c "import streamlit as st; print(st.secrets.get('supabase'))"
    ```
 
 2. **Check network connectivity**

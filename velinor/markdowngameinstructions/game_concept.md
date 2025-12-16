@@ -2,7 +2,10 @@
 
 ## Game Concept
 
-Velinor is a mythic, emotionally-driven text-based adventure game set in the ruins of Saonyx—a once-futuristic civilization built on emotional infrastructure. After a catastrophic memory fracture, players navigate a world where nature has reclaimed the cities and emotional resonance lingers in glyphs, echoes, and ruins.
+Velinor is a mythic, emotionally-driven text-based adventure game set in the ruins of Saonyx—a
+once-futuristic civilization built on emotional infrastructure. After a catastrophic memory
+fracture, players navigate a world where nature has reclaimed the cities and emotional resonance
+lingers in glyphs, echoes, and ruins.
 
 ## Gameplay Structure
 

@@ -2,7 +2,9 @@
 
 ## Overview
 
-The TONE stat system is the emotional core mechanic of Velinor: Remnants of the Tone. Every player choice invisibly adjusts one or more TONE stats, shaping how NPCs respond, which glyphs unlock, and which ending branches become available.
+The TONE stat system is the emotional core mechanic of Velinor: Remnants of the Tone. Every player
+choice invisibly adjusts one or more TONE stats, shaping how NPCs respond, which glyphs unlock, and
+which ending branches become available.
 
 TONE stands for:
 
@@ -11,7 +13,8 @@ TONE stands for:
 - **N** — Narrative Presence
 - **E** — Empathy
 
-These stats are never displayed to the player—they work silently in the background, creating emergent gameplay where emotional resonance becomes mechanical.
+These stats are never displayed to the player—they work silently in the background, creating
+emergent gameplay where emotional resonance becomes mechanical.
 
 ##
 
@@ -120,14 +123,17 @@ The final encounter with Saori and Velinor branches based on accumulated TONE pr
 
 ## Player Agency Through Hidden Stats
 
-Because TONE stats are hidden, players don't optimize for them—they feel them. A player naturally high in Empathy will make different choices than one high in Observation, and both will experience genuinely different gameplay:
+Because TONE stats are hidden, players don't optimize for them—they feel them. A player naturally
+high in Empathy will make different choices than one high in Observation, and both will experience
+genuinely different gameplay:
 
 - **Empathy-focused player**: NPCs open up, glyphs bloom, world feels alive with connection.
 - **Observation-focused player**: Discover hidden paths, see through deceptions (Kaelen's tricks fail), find secret chambers.
 - **Narrative Presence player**: Bold encounters open, solo quests unlock, NPCs respect decisiveness.
 - **Trust-focused player**: Networks deepen, ripple effects compound, sphere mechanics reward consistency.
 
-This creates emergent narrative without the player feeling constrained by mechanical choices. The stats serve the story, not the reverse.
+This creates emergent narrative without the player feeling constrained by mechanical choices. The
+stats serve the story, not the reverse.
 
 ##
 

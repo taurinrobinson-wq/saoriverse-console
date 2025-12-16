@@ -1,6 +1,7 @@
 # ⚙️ Supabase Setup Guide - Conversation Storage
 
-Your Supabase credentials are now configured! Follow these steps to enable persistent conversation storage.
+Your Supabase credentials are now configured! Follow these steps to enable persistent conversation
+storage.
 
 ## Step 1: Create Database Tables
 
@@ -137,8 +138,7 @@ You should see:
 
 ```
 
-✅ conversations table EXISTS
-✅ conversation_metadata table EXISTS
+✅ conversations table EXISTS ✅ conversation_metadata table EXISTS
 
 ```text
 ```
@@ -151,9 +151,7 @@ You should see:
 
 ### Enable RLS
 
-1. Go to Supabase Dashboard → SQL Editor
-2. Create new query
-3. Run this SQL:
+1. Go to Supabase Dashboard → SQL Editor 2. Create new query 3. Run this SQL:
 
 ```sql
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
@@ -165,10 +163,8 @@ You should see: `Success - no rows returned`
 
 ### Add RLS Policies
 
-1. Create another new query
-2. Copy entire contents of `sql/conversations_rls_policies.sql`
-3. Paste into SQL editor
-4. Click "Run"
+1. Create another new query 2. Copy entire contents of `sql/conversations_rls_policies.sql` 3. Paste
+into SQL editor 4. Click "Run"
 
 You should see multiple `Success` messages (one per policy)
 

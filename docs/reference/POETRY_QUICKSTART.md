@@ -13,10 +13,8 @@ Your browser will automatically open to `http://localhost:8501`
 
 ### Step 2️⃣: Enable Poetry Enrichment in Sidebar
 
-1. Look at the **left sidebar**
-2. Scroll down to **"🎭 Local Mode Enhancement"**
-3. Click the **"Poetry Enrichment"** checkbox
-4. You'll see stats appear:
+1. Look at the **left sidebar** 2. Scroll down to **"🎭 Local Mode Enhancement"** 3. Click the
+**"Poetry Enrichment"** checkbox 4. You'll see stats appear:
    - 📖 **33 poems** available
    - 😊 **11 emotions** categories
    - 💭 **6,453 words** in vocabulary
@@ -99,10 +97,10 @@ You'll receive a **poetic, enriched response** like:
 
 ### For Best Results
 
-1. **Be specific with emotions**: "I'm feeling happy" works better than "I'm fine"
-2. **Use descriptive language**: More detail = better emotion detection
-3. **Express complete thoughts**: Sentences work better than fragments
-4. **Let poetry enhance**: Don't edit the poetic additions - they add depth
+1. **Be specific with emotions**: "I'm feeling happy" works better than "I'm fine" 2. **Use
+descriptive language**: More detail = better emotion detection 3. **Express complete thoughts**:
+Sentences work better than fragments 4. **Let poetry enhance**: Don't edit the poetic additions -
+they add depth
 
 ### Monitor System Health
 
@@ -161,7 +159,8 @@ For detailed documentation, see:
 
 ## Enjoy! 🎭✨
 
-Your FirstPerson Emotional OS now has a complete poetry enrichment layer, running 100% locally with beautiful, poetic responses enriched with metaphor and emotion.
+Your FirstPerson Emotional OS now has a complete poetry enrichment layer, running 100% locally with
+beautiful, poetic responses enriched with metaphor and emotion.
 
 Start a conversation and experience the magic!
 

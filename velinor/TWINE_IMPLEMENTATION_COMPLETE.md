@@ -47,8 +47,8 @@ Main game loop controller connecting story, engine, and dialogue.
 ```text
 ```
 
-Player Input → FirstPerson Intent Summary → Twine Processing →
-Game Mechanics → NPC Dialogue Generation → UI State Formatting → Response
+Player Input → FirstPerson Intent Summary → Twine Processing → Game Mechanics → NPC Dialogue
+Generation → UI State Formatting → Response
 
 ```
 
@@ -105,26 +105,19 @@ Full integration guide covering:
 ```text
 ```
 
-Twine Story (JSON)
-    ↓
-[TwineStoryLoader] → Passages & Links
-    ↓
-[User Input: Type or Choice]
-    ↓
+Twine Story (JSON) ↓ [TwineStoryLoader] → Passages & Links ↓ [User Input: Type or Choice] ↓
 [VelinorTwineOrchestrator]
     ├─ Summarize intent (FirstPerson, optional)
     ├─ Process through Twine system
     ├─ Apply game mechanics (dice, stats)
     └─ Generate NPC dialogue
-    ↓
-[Formatted Game State]
+↓ [Formatted Game State]
     ├─ Main dialogue
     ├─ Choices
     ├─ NPC response
     ├─ Player stats
     └─ Background image
-    ↓
-[UI Layer] → Player sees result
+↓ [UI Layer] → Player sees result
 
 ```
 
@@ -199,12 +192,12 @@ Twine Story (JSON)
 ## File Manifest
 
 **New Files Created:**
-1. `/velinor/engine/twine_adapter.py` - 500+ lines, Twine bridge
-2. `/velinor/engine/orchestrator.py` - 400+ lines, game loop controller
-3. `/velinor/engine/quickstart.py` - 200+ lines, integration guide + examples
-4. `/velinor/engine/sample_story.py` - Story builder script
-5. `/velinor/stories/sample_story.json` - Working Twine story (20+ passages)
-6. `/velinor/TWINE_INTEGRATION_GUIDE.md` - Comprehensive documentation
+1. `/velinor/engine/twine_adapter.py` - 500+ lines, Twine bridge 2.
+`/velinor/engine/orchestrator.py` - 400+ lines, game loop controller 3.
+`/velinor/engine/quickstart.py` - 200+ lines, integration guide + examples 4.
+`/velinor/engine/sample_story.py` - Story builder script 5. `/velinor/stories/sample_story.json` -
+Working Twine story (20+ passages) 6. `/velinor/TWINE_INTEGRATION_GUIDE.md` - Comprehensive
+documentation
 
 **Updated Files:**
 1. `/velinor/engine/__init__.py` - Added exports for new modules
@@ -224,45 +217,37 @@ Twine Story (JSON)
    - Background image gallery management
 
 ### Short-term (Content & Polish)
-1. **Populate Story** - Flesh out remaining locations and questlines
-2. **Create Background Images** - One per major location
-3. **Refine NPC Personalities** - Flesh out dialogue templates
-4. **Test Skill Checks** - Verify DC values make sense
-5. **Balance Stats** - Ensure Courage/Wisdom/Empathy checks feel fair
+1. **Populate Story** - Flesh out remaining locations and questlines 2. **Create Background Images**
+- One per major location 3. **Refine NPC Personalities** - Flesh out dialogue templates 4. **Test
+Skill Checks** - Verify DC values make sense 5. **Balance Stats** - Ensure Courage/Wisdom/Empathy
+checks feel fair
 
 ### Medium-term (Features)
-1. **Multiplayer Testing** - Full group gameplay validation
-2. **Inventory System** - Track glyphs and items
-3. **Quest Tracking** - Show active objectives
-4. **Achievements** - Define milestone rewards
-5. **Replayability** - Add branching endings
+1. **Multiplayer Testing** - Full group gameplay validation 2. **Inventory System** - Track glyphs
+and items 3. **Quest Tracking** - Show active objectives 4. **Achievements** - Define milestone
+rewards 5. **Replayability** - Add branching endings
 
 ### Long-term (Polish & Deployment)
-1. **Sound Design** - Ambient music, effect sounds
-2. **Visual Polish** - Particle effects, transitions
-3. **Performance** - Optimize for web/mobile
-4. **Analytics** - Track player choices and paths
-5. **Community** - Leaderboards, sharing, UGC support
+1. **Sound Design** - Ambient music, effect sounds 2. **Visual Polish** - Particle effects,
+transitions 3. **Performance** - Optimize for web/mobile 4. **Analytics** - Track player choices and
+paths 5. **Community** - Leaderboards, sharing, UGC support
 
 ## Success Criteria - Met ✅
 
-✅ **Framework Selection** - Twine/SugarCube chosen based on documented recommendations
-✅ **Story Bridge** - Complete adapter between Twine and game engine
-✅ **Game Loop** - Orchestrator processes input → generates output
-✅ **FirstPerson Integration** - Ready to connect with orchestrator for dynamic dialogue
-✅ **Sample Story** - Working scaffold with 20+ passages demonstrating mechanics
-✅ **Multiplayer Ready** - System tracks group state and adapts dialogue
-✅ **Documentation** - Complete guide for implementation and extension
-✅ **Modular Design** - Each component independently testable and replaceable
+✅ **Framework Selection** - Twine/SugarCube chosen based on documented recommendations ✅ **Story
+Bridge** - Complete adapter between Twine and game engine ✅ **Game Loop** - Orchestrator processes
+input → generates output ✅ **FirstPerson Integration** - Ready to connect with orchestrator for
+dynamic dialogue ✅ **Sample Story** - Working scaffold with 20+ passages demonstrating mechanics ✅
+**Multiplayer Ready** - System tracks group state and adapts dialogue ✅ **Documentation** - Complete
+guide for implementation and extension ✅ **Modular Design** - Each component independently testable
+and replaceable
 
 ## Testing Ready
 
-The system is ready for:
-1. **Story playthrough** - Load sample story and play through it
-2. **UI integration** - Connect to Streamlit or web frontend
-3. **Multiplayer testing** - Multiple players joining same session
-4. **FirstPerson connection** - Plug in FirstPerson orchestrator for dynamic dialogue
-5. **Skill check validation** - Test dice rolls and stat modifiers
+The system is ready for: 1. **Story playthrough** - Load sample story and play through it 2. **UI
+integration** - Connect to Streamlit or web frontend 3. **Multiplayer testing** - Multiple players
+joining same session 4. **FirstPerson connection** - Plug in FirstPerson orchestrator for dynamic
+dialogue 5. **Skill check validation** - Test dice rolls and stat modifiers
 
 ## Quick Start
 
@@ -295,12 +280,12 @@ python3 velinor/engine/quickstart.py
 │   - Commands            │
 └────────────┬────────────┘
              │
-      ┌──────▼──────┐
+┌──────▼──────┐
       │TwineStoryLoader
       │DialogueParser
       └──────┬──────┘
              │
-        ┌────▼─────────────────────────────┐
+┌────▼─────────────────────────────┐
         │ VelinorTwineOrchestrator         │
         │ ├─ Orchestration Logic           │
         │ ├─ State Management              │
@@ -308,7 +293,7 @@ python3 velinor/engine/quickstart.py
         │ └─ Save/Load                     │
         └────┬──────────┬──────────┬───────┘
              │          │          │
-        ┌────▼──┐  ┌────▼──┐  ┌───▼────┐
+┌────▼──┐  ┌────▼──┐  ┌───▼────┐
         │Game   │  │NPC    │  │FirstPer │
         │Engine │  │System │  │son      │
         │       │  │       │  │         │
@@ -319,7 +304,7 @@ python3 velinor/engine/quickstart.py
              │          │          │
              └────┬─────┴─────┬────┘
                   │           │
-          ┌───────▼──────────▼──────────┐
+┌───────▼──────────▼──────────┐
           │   Formatted Game State      │
           │   - Dialogue Text           │
           │   - NPC Response            │
@@ -329,7 +314,7 @@ python3 velinor/engine/quickstart.py
           │   - Dice Results            │
           └───────┬────────────────────┘
                   │
-        ┌─────────▼─────────┐
+┌─────────▼─────────┐
         │   UI Layer        │
         │ - Streamlit       │
         │ - Web Frontend    │

@@ -2,7 +2,8 @@
 
 ## Overview
 
-This guide explains how to use and maintain `story_map_velinor.md` - the comprehensive narrative design document for Velinor: Remnants of the Tone.
+This guide explains how to use and maintain `story_map_velinor.md` - the comprehensive narrative
+design document for Velinor: Remnants of the Tone.
 
 ##
 
@@ -82,15 +83,13 @@ Think of it as the **single source of truth** for Velinor's narrative structure.
 
 The story map is organized into **9 major sections**:
 
-1. **Overview** - High-level premise and themes
-2. **Core Narrative Arc** - Main story beats from Cataclysm to final choice
-3. **Character Relationships** - NPCs, spheres of influence, relationship mechanics
-4. **Story Structure & Progression** - Act-by-act breakdown with branching
-5. **Glyph System** - Types, functions, fusion mechanics
-6. **Ending Branches** - All 6 endings with requirements and consequences
-7. **Narrative Decision Points** - Major choice nodes with ripple effects
-8. **Expansion Placeholders** - Future content with [TBD] markers
-9. **How to Use This Map** - Role-specific guidance
+1. **Overview** - High-level premise and themes 2. **Core Narrative Arc** - Main story beats from
+Cataclysm to final choice 3. **Character Relationships** - NPCs, spheres of influence, relationship
+mechanics 4. **Story Structure & Progression** - Act-by-act breakdown with branching 5. **Glyph
+System** - Types, functions, fusion mechanics 6. **Ending Branches** - All 6 endings with
+requirements and consequences 7. **Narrative Decision Points** - Major choice nodes with ripple
+effects 8. **Expansion Placeholders** - Future content with [TBD] markers 9. **How to Use This Map**
+- Role-specific guidance
 
 ### Quick Navigation Tips
 
@@ -119,10 +118,9 @@ The story map is organized into **9 major sections**:
 
 ### General Guidelines
 
-1. **Always update the "Last Updated" field** at the top of the document
-2. **Maintain consistent formatting** with existing entries
-3. **Add update notes** in relevant sections
-4. **Cross-reference** related sections when making changes
+1. **Always update the "Last Updated" field** at the top of the document 2. **Maintain consistent
+formatting** with existing entries 3. **Add update notes** in relevant sections 4.
+**Cross-reference** related sections when making changes
 
 ### Adding New Content
 
@@ -227,10 +225,9 @@ The story map is organized into **9 major sections**:
 
 **When you have content for a `[PLACEHOLDER]` or `[TBD]`:**
 
-1. **Find all instances** of that placeholder (use search)
-2. **Replace with specific content** maintaining format
-3. **Update checkbox** if in expansion placeholder section: `- [ ]` → `- [x]`
-4. **Cross-check** related sections for consistency
+1. **Find all instances** of that placeholder (use search) 2. **Replace with specific content**
+maintaining format 3. **Update checkbox** if in expansion placeholder section: `- [ ]` → `- [x]` 4.
+**Cross-check** related sections for consistency
 
 **Example:**
 
@@ -311,14 +308,9 @@ After:
 4. Implement:
 
    ```python
-   if player_choice == "betray_kaelen":
-       kaelen.trust = -50
-       player.fragments += stolen_fragments
-       unlock_captain_veynar_dialogue()
-   elif player_choice == "protect_kaelen":
-       kaelen.trust = +50
-       player.fragments -= stolen_fragments
-       unlock_thieves_lair_quest()
+if player_choice == "betray_kaelen": kaelen.trust = -50 player.fragments += stolen_fragments
+unlock_captain_veynar_dialogue() elif player_choice == "protect_kaelen": kaelen.trust = +50
+player.fragments -= stolen_fragments unlock_thieves_lair_quest()
    ```
 
 5. Add ripple to Market Shadows sphere (0.2 weight)
@@ -343,9 +335,9 @@ After:
    - [x] **Dislocated Attachment Chamber**
      - Location: Hospital Ruins, collapsed pediatric wing
      - Puzzle: Player must hold two conflicting glyphs (Love/Fear)
-       simultaneously while navigating memory echoes
+simultaneously while navigating memory echoes
      - Memory echo: Mother choosing to disconnect child from
-       Corelink to spare them pain, knowing it may kill them
+Corelink to spare them pain, knowing it may kill them
    ```
 
 ##
@@ -585,12 +577,7 @@ Create an issue with:
 - Suggested fix (if any)
 - Priority level
 
-##
-
-**Remember:** The story map is a living document. It should evolve as Velinor evolves. Keep it updated, keep it consistent, and let it guide the creation of this emotionally resonant world.
-
-##
-
+## **Remember:** The story map is a living document. It should evolve as Velinor evolves. Keep it updated, keep it consistent, and let it guide the creation of this emotionally resonant world.
 **Last Updated:** December 14, 2025
 **Document Version:** 1.0
 **Story Map Version:** 1.0

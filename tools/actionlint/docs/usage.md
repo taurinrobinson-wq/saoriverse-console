@@ -87,8 +87,7 @@ property "platform" is not defined in object type {os: string}
 ```
 
 
-          key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
-                   ^~~~~~~~~~~~~~~
+key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }} ^~~~~~~~~~~~~~~
 
 ````text
 ````text
@@ -106,8 +105,7 @@ Output:
 
 ```
 
-{"message":"unexpected key \"branch\" for ...
-{"message":"character '\\' is invalid for branch ...
+{"message":"unexpected key \"branch\" for ... {"message":"character '\\' is invalid for branch ...
 {"message":"label \"linux-latest\" is unknown. ...
 
 ```
@@ -116,7 +114,9 @@ Output:
 
 ````sh
 
-actionlint -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace $err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' -ignore 'SC2016:'
+actionlint -format '{{range $err := .}}::error
+file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}%0A```%0A{{replace
+$err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' -ignore 'SC2016:'
 
 ````
 
@@ -228,21 +228,16 @@ shell for Windows runners is `pwsh`.
 
 ```yaml
 
-name: Lint GitHub Actions workflows
-on: [push, pull_request]
+name: Lint GitHub Actions workflows on: [push, pull_request]
 
-jobs:
-  actionlint:
-    runs-on: ubuntu-latest
-    steps:
+jobs: actionlint: runs-on: ubuntu-latest steps:
       - uses: actions/checkout@v3
       - name: Download actionlint
-        id: get_actionlint
-        run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-        shell: bash
+id: get_actionlint run: bash <(curl
+https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) shell:
+bash
       - name: Check workflow files
-        run: ${{ steps.get_actionlint.outputs.executable }} -color
-        shell: bash
+run: ${{ steps.get_actionlint.outputs.executable }} -color shell: bash
 
 ```
 
@@ -252,9 +247,9 @@ Or simply download the executable and run it in one step:
 
 - name: Check workflow files
   run: |
-    bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-    ./actionlint -color
-  shell: bash
+bash <(curl
+https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+./actionlint -color shell: bash
 
 ```
 
@@ -271,18 +266,12 @@ If you prefer Docker image to running a downloaded executable, using [actionlint
 
 ```yaml
 
-name: Lint GitHub Actions workflows
-on: [push, pull_request]
+name: Lint GitHub Actions workflows on: [push, pull_request]
 
-jobs:
-  actionlint:
-    runs-on: ubuntu-latest
-    steps:
+jobs: actionlint: runs-on: ubuntu-latest steps:
       - uses: actions/checkout@v3
       - name: Check workflow files
-        uses: docker://rhysd/actionlint:latest
-        with:
-          args: -color
+uses: docker://rhysd/actionlint:latest with: args: -color
 
 ```
 
@@ -358,12 +347,7 @@ The usage is easy. Run `reviewdog/action-actionlint` action in your workflow as 
 
 ```yaml
 
-name: reviewdog
-on: [pull_request]
-jobs:
-  actionlint:
-    runs-on: ubuntu-latest
-    steps:
+name: reviewdog on: [pull_request] jobs: actionlint: runs-on: ubuntu-latest steps:
       - uses: actions/checkout@v3
       - uses: reviewdog/action-actionlint@v1
 
@@ -383,10 +367,9 @@ Then enable the matcher using `add-matcher` command before running `actionlint` 
 
 - name: Check workflow files
   run: |
-    echo "::add-matcher::.github/actionlint-matcher.json"
-    bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
-    ./actionlint -color
-  shell: bash
+echo "::add-matcher::.github/actionlint-matcher.json" bash <(curl
+https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+./actionlint -color shell: bash
 
 ```
 
@@ -421,7 +404,8 @@ repos:
 ```
 
 
-As alternatives to `actionlint` hook, `actionlint-docker` or `actionlint-system` hooks are available.
+As alternatives to `actionlint` hook, `actionlint-docker` or `actionlint-system` hooks are
+available.
 
 | Hook ID | Explanation |
 |-|-|
@@ -431,21 +415,22 @@ As alternatives to `actionlint` hook, `actionlint-docker` or `actionlint-system`
 
 ### VS Code
 
-[Linter extension][vsc-extension] for [VS Code][vscode] is available. The extension automatically detects `.github/workflows`
-directory, runs `actionlint` command, and reports errors in the code editor while editing workflow files.
+[Linter extension][vsc-extension] for [VS Code][vscode] is available. The extension automatically
+detects `.github/workflows` directory, runs `actionlint` command, and reports errors in the code
+editor while editing workflow files.
 
 ### Nova
 
-[Nova.app][nova] is a MacOS only editor and IDE. The [Actionlint for Nova][nova-extension] allows you to get inline feedback
-while editing actions.
+[Nova.app][nova] is a MacOS only editor and IDE. The [Actionlint for Nova][nova-extension] allows
+you to get inline feedback while editing actions.
 
 ### trunk
 
-[trunk][trunk-io] is an extendable superlinter with a builtin language server and preexisting issue detection. Actionlint is
-integrated [here](https://github.com/trunk-io/plugins).
+[trunk][trunk-io] is an extendable superlinter with a builtin language server and preexisting issue
+detection. Actionlint is integrated [here](https://github.com/trunk-io/plugins).
 
-Once you have [initialized trunk in your repo](https://docs.trunk.io/docs/check-get-started), to enable at the latest actionlint
-version, just run:
+Once you have [initialized trunk in your repo](https://docs.trunk.io/docs/check-get-started), to
+enable at the latest actionlint version, just run:
 
 ```bash
 
@@ -483,36 +468,33 @@ trunk check
 
 ```
 
-and it will check your modified files via actionlint, if applicable, and show you the results. Trunk also will detect preexisting
-issues and highlight only the newly added actionlint issues. For more information, check the [trunk docs][trunk-docs].
+and it will check your modified files via actionlint, if applicable, and show you the results. Trunk
+also will detect preexisting issues and highlight only the newly added actionlint issues. For more
+information, check the [trunk docs][trunk-docs].
 
-You can also see actionlint issues inline in VS Code via the [Trunk VS Code extension][trunk-vscode].
+You can also see actionlint issues inline in VS Code via the [Trunk VS Code
+extension][trunk-vscode].
 
 ##
 
 [Checks](checks.md) | [Installation](install.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)
 
-[reviewdog-actionlint]: https://github.com/reviewdog/action-actionlint
-[reviewdog]: https://github.com/reviewdog/reviewdog
-[cmd-manual]: https://rhysd.github.io/actionlint/usage.html
-[re2]: https://golang.org/s/re2syntax
-[go-template]: https://pkg.go.dev/text/template
-[jsonl]: https://jsonlines.org/
-[ga-annotate-error]: https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-error-message
-[sarif]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
-[problem-matchers]: https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md
-[super-linter]: https://github.com/github/super-linter
-[super-linter-env-var]: https://github.com/super-linter/super-linter#environment-variables
-[actionlint-matcher]: https://raw.githubusercontent.com/rhysd/actionlint/main/.github/actionlint-matcher.json
-[preinstall-ubuntu]: https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
-[pre-commit]: https://pre-commit.com
-[go-install]: https://go.dev/doc/install
-[docker]: https://www.docker.com/
-[docker-image]: https://hub.docker.com/r/rhysd/actionlint
-[vsc-extension]: https://marketplace.visualstudio.com/items?itemName=arahata.linter-actionlint
-[vscode]: https://code.visualstudio.com/
-[nova-extension]: https://extensions.panic.com/extensions/org.netwrk/org.netwrk.actionlint/
-[nova]: https://nova.app
-[trunk-io]: https://docs.trunk.io/docs
-[trunk-docs]: https://docs.trunk.io/docs/check
+[reviewdog-actionlint]: https://github.com/reviewdog/action-actionlint [reviewdog]:
+https://github.com/reviewdog/reviewdog [cmd-manual]: https://rhysd.github.io/actionlint/usage.html
+[re2]: https://golang.org/s/re2syntax [go-template]: https://pkg.go.dev/text/template [jsonl]:
+https://jsonlines.org/ [ga-annotate-error]:
+https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-error-message
+[sarif]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html [problem-matchers]:
+https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md [super-linter]:
+https://github.com/github/super-linter [super-linter-env-var]:
+https://github.com/super-linter/super-linter#environment-variables [actionlint-matcher]:
+https://raw.githubusercontent.com/rhysd/actionlint/main/.github/actionlint-matcher.json
+[preinstall-ubuntu]:
+https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
+[pre-commit]: https://pre-commit.com [go-install]: https://go.dev/doc/install [docker]:
+https://www.docker.com/ [docker-image]: https://hub.docker.com/r/rhysd/actionlint [vsc-extension]:
+https://marketplace.visualstudio.com/items?itemName=arahata.linter-actionlint [vscode]:
+https://code.visualstudio.com/ [nova-extension]:
+https://extensions.panic.com/extensions/org.netwrk/org.netwrk.actionlint/ [nova]: https://nova.app
+[trunk-io]: https://docs.trunk.io/docs [trunk-docs]: https://docs.trunk.io/docs/check
 [trunk-vscode]: https://marketplace.visualstudio.com/items?itemName=trunk.io

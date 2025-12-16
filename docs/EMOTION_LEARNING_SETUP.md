@@ -2,10 +2,11 @@
 
 ## Overview
 
-This guide walks you through setting up the privacy-first emotion learning system in Supabase. The system consists of two tables:
+This guide walks you through setting up the privacy-first emotion learning system in Supabase. The
+system consists of two tables:
 
-1. **emotions_log** - Stores emotion metadata detected by the browser
-2. **emotion_thresholds** - Stores per-user adaptive thresholds calculated by the training script
+1. **emotions_log** - Stores emotion metadata detected by the browser 2. **emotion_thresholds** -
+Stores per-user adaptive thresholds calculated by the training script
 
 ## Prerequisites
 
@@ -16,7 +17,8 @@ This guide walks you through setting up the privacy-first emotion learning syste
 
 ## Step 1: Create the `emotions_log` Table
 
-This table stores emotion detection metadata. **No images, videos, or biometric data** — only emotion labels and confidence scores.
+This table stores emotion detection metadata. **No images, videos, or biometric data** — only
+emotion labels and confidence scores.
 
 ### SQL to create the table
 
@@ -44,11 +46,8 @@ create index if not exists emotions_log_context_idx
 
 ### How to apply
 
-1. Go to **SQL Editor** in Supabase Dashboard
-2. Click **New Query**
-3. Paste the SQL above
-4. Click **Run**
-5. You should see: `Success. No rows returned`
+1. Go to **SQL Editor** in Supabase Dashboard 2. Click **New Query** 3. Paste the SQL above 4. Click
+**Run** 5. You should see: `Success. No rows returned`
 
 ##
 
@@ -111,27 +110,19 @@ Restrict access so users can only see their own data:
 alter table public.emotions_log enable row level security;
 
 -- Create policy: authenticated users can insert their own emotion data
-create policy "Users can insert own emotion logs"
-  on public.emotions_log for insert
-  with check (
-    auth.uid()::text = user_id
-  );
+create policy "Users can insert own emotion logs" on public.emotions_log for insert with check (
+auth.uid()::text = user_id );
 
 -- Create policy: authenticated users can view their own emotion logs
-create policy "Users can view own emotion logs"
-  on public.emotions_log for select
-  with check (
-    auth.uid()::text = user_id
-  );
+create policy "Users can view own emotion logs" on public.emotions_log for select with check (
+auth.uid()::text = user_id );
 
 -- Enable RLS on emotion_thresholds
 alter table public.emotion_thresholds enable row level security;
 
 -- Create policy: authenticated users can view their own thresholds
-create policy "Users can view own emotion thresholds"
-  on public.emotion_thresholds for select
-  with check (
-    auth.uid()::text = user_id
+create policy "Users can view own emotion thresholds" on public.emotion_thresholds for select with
+check ( auth.uid()::text = user_id
 ```text
 ```text
 ```
@@ -158,8 +149,8 @@ Ensure your backend has these environment variables set:
 
 # .env.local (Next.js)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Keep private!
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Keep
+private!
 
 # For train_emotion_model.py
 export SUPABASE_URL="https://your-project.supabase.co"
@@ -173,26 +164,24 @@ export SUPABASE_URL="https://your-project.supabase.co"
 
 ### Frontend (EmotionDetector.tsx)
 
-1. Detects emotion using face-api.js (browser-side, no video transmission)
-2. Fetches thresholds from `/api/emotion-thresholds` via GET request
-3. Subscribes to Supabase Realtime for threshold updates
-4. Only sends emotion metadata to `/api/emotions` if confidence ≥ threshold
-5. Payload: `{emotion, confidence, timestamp, user_id, conversation_context}`
+1. Detects emotion using face-api.js (browser-side, no video transmission) 2. Fetches thresholds
+from `/api/emotion-thresholds` via GET request 3. Subscribes to Supabase Realtime for threshold
+updates 4. Only sends emotion metadata to `/api/emotions` if confidence ≥ threshold 5. Payload:
+`{emotion, confidence, timestamp, user_id, conversation_context}`
 
 ### Backend (Next.js API Routes)
 
-1. `/api/emotions` (POST): Receives emotion metadata, validates, stores in `emotions_log`
-2. `/api/emotions` (GET): Retrieves recent emotion logs for a user
-3. `/api/emotion-thresholds` (GET): Fetches user's thresholds for frontend
-4. `/api/emotion-thresholds` (POST): Updates thresholds (called by training script)
+1. `/api/emotions` (POST): Receives emotion metadata, validates, stores in `emotions_log` 2.
+`/api/emotions` (GET): Retrieves recent emotion logs for a user 3. `/api/emotion-thresholds` (GET):
+Fetches user's thresholds for frontend 4. `/api/emotion-thresholds` (POST): Updates thresholds
+(called by training script)
 
 ### Training Script (train_emotion_model.py)
 
-1. Queries `emotions_log` for a user over N days
-2. Analyzes emotion patterns: frequency and average confidence
-3. Calculates adaptive thresholds: lower for frequently detected emotions, higher for rare ones
-4. Updates `emotion_thresholds` table via `/api/emotion-thresholds` or direct Supabase insert
-5. Frontend automatically receives updates via Realtime
+1. Queries `emotions_log` for a user over N days 2. Analyzes emotion patterns: frequency and average
+confidence 3. Calculates adaptive thresholds: lower for frequently detected emotions, higher for
+rare ones 4. Updates `emotion_thresholds` table via `/api/emotion-thresholds` or direct Supabase
+insert 5. Frontend automatically receives updates via Realtime
 
 ##
 
@@ -228,10 +217,8 @@ insert into public.emotions_log (user_id, emotion, confidence, conversation_cont
 
 ```sql
 
-select emotion, confidence, timestamp
-from public.emotions_log
-where user_id = 'your_user_id'
-order by timestamp desc
+select emotion, confidence, timestamp from public.emotions_log where user_id = 'your_user_id' order
+by timestamp desc
 
 ```text
 ```
@@ -259,12 +246,11 @@ where timestamp < now() - interval '90 days';
 
 ## Privacy & Security Notes
 
-✓ **No video transmission** - Only emotion metadata leaves the browser
-✓ **No biometric storage** - Only emotion labels and confidence scores
-✓ **No conversation transcripts** - Optional context field for tagging
-✓ **User-specific thresholds** - Each user gets personalized detection sensitivity
-✓ **Row-level security** - (Optional) Restricts data access by authenticated user
-✓ **Service role key** - Keep private; only expose anon key to frontend
+✓ **No video transmission** - Only emotion metadata leaves the browser ✓ **No biometric storage** -
+Only emotion labels and confidence scores ✓ **No conversation transcripts** - Optional context field
+for tagging ✓ **User-specific thresholds** - Each user gets personalized detection sensitivity ✓
+**Row-level security** - (Optional) Restricts data access by authenticated user ✓ **Service role
+key** - Keep private; only expose anon key to frontend
 
 ##
 
@@ -286,9 +272,7 @@ where timestamp < now() - interval '90 days';
 
 ## Next Steps
 
-1. ✓ Create tables in Supabase (Steps 1-2)
-2. ✓ Enable Realtime (Step 3)
-3. ✓ Configure environment variables (Step 6)
-4. Run the frontend with EmotionDetector component
-5. Periodically run `train_emotion_model.py` to refine thresholds
-6. Monitor emotion logs in Supabase to understand user patterns
+1. ✓ Create tables in Supabase (Steps 1-2) 2. ✓ Enable Realtime (Step 3) 3. ✓ Configure environment
+variables (Step 6) 4. Run the frontend with EmotionDetector component 5. Periodically run
+`train_emotion_model.py` to refine thresholds 6. Monitor emotion logs in Supabase to understand user
+patterns

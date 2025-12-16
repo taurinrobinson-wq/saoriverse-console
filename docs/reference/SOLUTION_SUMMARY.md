@@ -2,7 +2,8 @@
 
 ## Problem Statement
 
-You identified that the local Streamlit interface was generating canned responses when glyphs were triggered, same structure, different keywords filled in for each message.
+You identified that the local Streamlit interface was generating canned responses when glyphs were
+triggered, same structure, different keywords filled in for each message.
 
 ## Root Cause
 
@@ -22,8 +23,7 @@ Response generation was **glyph-driven** (template-based) rather than **message-
 ```text
 ```
 
-OLD: Find Glyph → Fill Template
-NEW: Extract Message Features → Compose Response Dynamically
+OLD: Find Glyph → Fill Template NEW: Extract Message Features → Compose Response Dynamically
 
 ```
 

@@ -5,7 +5,9 @@
 User identified critical architectural disconnect:
 > "okay but it kind of sounds like it doesn't really connect to my glyph system in that structure. Am I right?"
 
-The issue: `DynamicResponseComposer` was accepting `glyph_name` parameter but never actually using glyph metadata (description, gates, emotional_signal) to scaffold responses. Responses were generic and compositional but disconnected from glyph meaning.
+The issue: `DynamicResponseComposer` was accepting `glyph_name` parameter but never actually using
+glyph metadata (description, gates, emotional_signal) to scaffold responses. Responses were generic
+and compositional but disconnected from glyph meaning.
 
 ## Solution Implemented
 
@@ -45,7 +47,7 @@ Added new method `_build_glyph_aware_response()` that uses glyph metadata to sca
 ```python
 def _build_glyph_aware_response(self, glyph, entities, emotions, ...):
     # Layer 1: Glyph description as emotional anchor
-    opening = f"There's something in what you're describing—{glyph_description.lower()}"
+opening = f"There's something in what you're describing—{glyph_description.lower()}"
 
     # Layer 2: Message-specific bridges (for feedback/corrections)
     # Layer 3: Entity-specific contextualization
@@ -62,8 +64,8 @@ Updated `compose_message_aware_response()` to start with glyph description ancho
 
 
 # Now starts with glyph context before message-specific content
-if glyph and glyph.get("description"):
-    opening = f"There's something in what you're describing—{glyph_description.lower()}"
+if glyph and glyph.get("description"): opening = f"There's something in what you're
+describing—{glyph_description.lower()}"
 
 ```text
 ```
@@ -110,14 +112,12 @@ Normalized glyph database fields:
 ```
 Input: "I have math anxiety. I've never been good at math and it's been a block my whole life."
 
-Glyph Selected: Still Containment
-Description: "Boundaries that hold without pressure. A sanctuary of quiet care."
+Glyph Selected: Still Containment Description: "Boundaries that hold without pressure. A sanctuary
+of quiet care."
 
-Response:
-"...There's something in what you're describing—boundaries that hold without pressure.
-a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction
-with math, especially when it's presented in a way that doesn't match how their mind
-naturally works..."
+Response: "...There's something in what you're describing—boundaries that hold without pressure. a
+sanctuary of quiet care. You're not alone—many brilliant people have genuine friction with math,
+especially when it's presented in a way that doesn't match how their mind naturally works..."
 
 ```text
 ```text
@@ -127,14 +127,13 @@ naturally works..."
 
 ```
 
-Input: "That's not quite what I meant. Michelle is my mother-in-law and my boss, and
-she always explains things in a way that only makes sense to her."
+Input: "That's not quite what I meant. Michelle is my mother-in-law and my boss, and she always
+explains things in a way that only makes sense to her."
 
-Feedback Detection: 'misalignment' contradiction detected
-Glyph Selected: Still Containment
+Feedback Detection: 'misalignment' contradiction detected Glyph Selected: Still Containment
 
-Response: "...I appreciate you saying that. I want to make sure I'm actually hearing you,
-not projecting onto you. Help me understand: what did I miss?"
+Response: "...I appreciate you saying that. I want to make sure I'm actually hearing you, not
+projecting onto you. Help me understand: what did I miss?"
 
 ✓ Feedback-aware response generation working
 
@@ -169,11 +168,12 @@ Dynamic Response Composer [GLYPH-AWARE]
 
 ## Key Benefits
 
-1. **Glyph Grounding**: Responses now open with the glyph's description, immediately establishing meaning context
-2. **Compositional Variety**: Each response is freshly composed (not templated) but anchored in glyph meaning
-3. **Message Specificity**: Glyph scaffolding works with message features (math_frustration, inherited_pattern, etc.)
-4. **Intensity Awareness**: Glyph gates inform response intensity (permission vs. commitment vs. question)
-5. **Feedback Integration**: Correction detection layers on top of glyph-aware foundation
+1. **Glyph Grounding**: Responses now open with the glyph's description, immediately establishing
+meaning context 2. **Compositional Variety**: Each response is freshly composed (not templated) but
+anchored in glyph meaning 3. **Message Specificity**: Glyph scaffolding works with message features
+(math_frustration, inherited_pattern, etc.) 4. **Intensity Awareness**: Glyph gates inform response
+intensity (permission vs. commitment vs. question) 5. **Feedback Integration**: Correction detection
+layers on top of glyph-aware foundation
 
 ## Example: How It Works Now
 
@@ -195,9 +195,8 @@ Glyph: Still Containment
        - gate: "Gate 2"
        - emotional_signal: "containment/care"
 
-Response: "There's something in what you're describing—boundaries that hold without
-pressure. a sanctuary of quiet care. You're not alone—many brilliant people have genuine
-friction with math..."
+Response: "There's something in what you're describing—boundaries that hold without pressure. a
+sanctuary of quiet care. You're not alone—many brilliant people have genuine friction with math..."
 [Glyph description directly embedded; intensity informed by gates]
 ```
 

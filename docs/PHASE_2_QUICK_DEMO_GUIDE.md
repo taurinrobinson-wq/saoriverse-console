@@ -36,8 +36,7 @@ Show: Animated beautiful homepage
 ### 2. Chat Interface
 
 ```
-URL: http://localhost:3000/chat
-Time: Interactive experience
+URL: http://localhost:3000/chat Time: Interactive experience
 ```text
 ```text
 ```
@@ -85,8 +84,7 @@ Time: Interactive experience
 
 ```
 
-URL: http://localhost:3000/settings
-Time: Configuration interface
+URL: http://localhost:3000/settings Time: Configuration interface
 
 ```text
 ```
@@ -165,22 +163,16 @@ Time: Configuration interface
 
 ### View Animations
 
-1. Open DevTools (F12)
-2. Go to Animations panel
-3. Interact with UI to see all animations
+1. Open DevTools (F12) 2. Go to Animations panel 3. Interact with UI to see all animations
 
 ### Inspect Components
 
-1. Open Elements tab
-2. Hover over animated elements
-3. See Tailwind classes applied
-4. Watch computed styles change
+1. Open Elements tab 2. Hover over animated elements 3. See Tailwind classes applied 4. Watch
+computed styles change
 
 ### Performance Monitor
 
-1. Open Console
-2. Type: `performance.measure()`
-3. Check Frame rate (should be 60fps)
+1. Open Console 2. Type: `performance.measure()` 3. Check Frame rate (should be 60fps)
 
 ### Network Tab
 
@@ -236,9 +228,7 @@ Time: Configuration interface
 ### Excitement Detection
 
 ```
-1. Get response with keyword like "amazing"
-2. Response appears in chat
-3. Check for celebration 🎉
+1. Get response with keyword like "amazing" 2. Response appears in chat 3. Check for celebration 🎉
 4. Watch for:
    - Confetti emojis
    - Floating hearts
@@ -307,9 +297,7 @@ User: "That's fantastic!"
 ### Scenario 4: Voice Testing
 
 ```
-1. Use microphone to record
-2. Check transcription accuracy
-3. Verify emotion detection
+1. Use microphone to record 2. Check transcription accuracy 3. Verify emotion detection
 ```text
 ```text
 ```
@@ -337,15 +325,13 @@ User: "That's fantastic!"
 │  Landing    │
 └──────┬──────┘
        │
-       v
-┌─────────────────────┐
+v ┌─────────────────────┐
 │   CHAT INTERFACE    │
 │  Main Experience    │
 │  With Voice I/O     │
 └────────┬────────┬───┘
          │        │
-         v        v
-┌──────────────  ┌──────────────┐
+v        v ┌──────────────  ┌──────────────┐
 │  SETTINGS     │  BACK HOME   │
 │  Controls     │  (Header)    │
 
@@ -403,16 +389,13 @@ App Root
 
 ## Fun Things to Try
 
-1. **Rainbow Messages**: Type long paragraphs to see word-wrapping
-2. **Fast Clicking**: Click buttons rapidly to see choreography
-3. **Hover Effects**: Hover over everything to see subtle animations
-4. **Dark Background**: Let the dancing confetti show up better
-5. **Full Screen**: Press F11 for immersive experience
-6. **Multiple Windows**: Open chat in multiple tabs (synchronized?)
-7. **Voice + Text**: Mix voice recording with manual typing
-8. **Settings Crazy**: Max out all sliders for extreme effect
-9. **Settings Min**: Min out all sliders for whisper mode
-10. **Refresh Page**: Watch loading animations on fresh load
+1. **Rainbow Messages**: Type long paragraphs to see word-wrapping 2. **Fast Clicking**: Click
+buttons rapidly to see choreography 3. **Hover Effects**: Hover over everything to see subtle
+animations 4. **Dark Background**: Let the dancing confetti show up better 5. **Full Screen**: Press
+F11 for immersive experience 6. **Multiple Windows**: Open chat in multiple tabs (synchronized?) 7.
+**Voice + Text**: Mix voice recording with manual typing 8. **Settings Crazy**: Max out all sliders
+for extreme effect 9. **Settings Min**: Min out all sliders for whisper mode 10. **Refresh Page**:
+Watch loading animations on fresh load
 
 ## Troubleshooting
 
@@ -480,11 +463,8 @@ Watch the beautiful animations as I interact:
 
 After exploring the UI:
 
-1. Start Phase 3 - Backend integration
-2. Connect to FastAPI server
-3. Test with real AI responses
-4. Integrate emotion analysis
-5. Deploy to Digital Ocean
+1. Start Phase 3 - Backend integration 2. Connect to FastAPI server 3. Test with real AI responses
+4. Integrate emotion analysis 5. Deploy to Digital Ocean
 
 ##
 

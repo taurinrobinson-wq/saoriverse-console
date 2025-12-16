@@ -26,5 +26,7 @@ Observations:
 
 Next steps:
 
-1. Review the `md013_pilot_after_lint.txt` diffs and identify a small set of manual exceptions (poems, ASCII art, long titles) to mark with `<!-- md013:ignore -->`.
-2. If the 100-char target looks good, run the same wrapper across the remaining high-priority docs in a controlled batch (10–20 files), with review notes per batch.
+1. Review the `md013_pilot_after_lint.txt` diffs and identify a small set of manual exceptions
+(poems, ASCII art, long titles) to mark with `<!-- md013:ignore -->`. 2. If the 100-char target
+looks good, run the same wrapper across the remaining high-priority docs in a controlled batch
+(10–20 files), with review notes per batch.

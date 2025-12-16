@@ -197,10 +197,8 @@ If you're using the response pipeline:
 Each component has try-catch:
 
 ```python
-try:
-    tone = attunement.detect_tone_shift(user_input)
-except Exception as e:
-    logger.warning(f"Failed: {e}")
+try: tone = attunement.detect_tone_shift(user_input) except Exception as e: logger.warning(f"Failed:
+{e}")
 ```text
 ```text
 ```
@@ -226,9 +224,7 @@ If entire Tier 2 fails, returns base response (no crash).
 ```text
 ```
 
-Each component: **<10ms** ✅
-Combined pipeline: **<70ms** ✅
-Well under 100ms budget: **✅**
+Each component: **<10ms** ✅ Combined pipeline: **<70ms** ✅ Well under 100ms budget: **✅**
 
 ##
 
@@ -254,11 +250,9 @@ Each component has:
 
 ### What Makes It Work?
 
-1. **Non-intrusive:** Adjustments feel natural, not forced
-2. **Context-aware:** Uses full conversation history
-3. **Adaptive:** Changes based on user's emotional state
-4. **Fast:** All heuristic-based, no ML models
-5. **Reliable:** Graceful fallbacks throughout
+1. **Non-intrusive:** Adjustments feel natural, not forced 2. **Context-aware:** Uses full
+conversation history 3. **Adaptive:** Changes based on user's emotional state 4. **Fast:** All
+heuristic-based, no ML models 5. **Reliable:** Graceful fallbacks throughout
 
 ### What It's NOT
 
@@ -296,14 +290,11 @@ def _ensure_tier2_aliveness():
 After processing:
 
 ```python
-metrics = {
-    "tone": "joyful",              # Detected emotional tone
-    "intensity": 0.75,             # 0.0 (min) to 1.0 (max)
-    "phase": "deepening",          # opening/deepening/climax/closing
-    "energy": 0.7,                 # Recommended energy level
-    "momentum": "building",        # Building/sustaining/winding
-    "fatigue_detected": False,     # Is user getting tired?
-    "processing_time_ms": 22.5     # How long it took
+metrics = { "tone": "joyful",              # Detected emotional tone "intensity": 0.75,
+# 0.0 (min) to 1.0 (max) "phase": "deepening",          # opening/deepening/climax/closing "energy":
+0.7,                 # Recommended energy level "momentum": "building",        #
+Building/sustaining/winding "fatigue_detected": False,     # Is user getting tired?
+"processing_time_ms": 22.5     # How long it took
 ```text
 ```text
 ```
@@ -395,7 +386,8 @@ Total: ~80ms (still under 100ms budget!)
 
 **Tier 2 Aliveness = Making responses feel more human**
 
-Through emotional tone adaptation, intensity matching, embodied presence, and energy pacing, the system now:
+Through emotional tone adaptation, intensity matching, embodied presence, and energy pacing, the
+system now:
 
 - 💫 Feels more alive and present
 - 🎯 Adapts to user's emotional state

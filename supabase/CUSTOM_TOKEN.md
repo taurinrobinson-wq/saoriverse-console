@@ -1,7 +1,7 @@
 # Custom Internal Token Usage
 
-This project uses a small custom token format for internal edge function authentication.
-The token is intentionally simple (base64 payload + signature) and is NOT a standard JWT.
+This project uses a small custom token format for internal edge function authentication. The token
+is intentionally simple (base64 payload + signature) and is NOT a standard JWT.
 
 Format
 
@@ -15,7 +15,7 @@ Why we use a custom header
 - To avoid platform-level JWT rejection for our internal tokens, functions accept them in the
   `X-Custom-Token` header (format: `Bearer <token>`).
 - Platform-level API keys (anon/service role) should still be sent in `Authorization` or `apikey` headers
-  so Supabase middleware can allow the request through.
+so Supabase middleware can allow the request through.
 
 Usage (curl)
 
@@ -39,7 +39,7 @@ Security notes and recommendations
 - This custom token format is convenient for prototyping but not cryptographically secure.
 - Recommended improvements:
   - Use proper signed JWTs (RS256/HS256) and have `auth-manager` sign tokens with a private key
-    that the functions can verify (or use Supabase Auth to mint tokens).
+that the functions can verify (or use Supabase Auth to mint tokens).
   - Add rotation and revocation (store a short-lived token table or use a revocation list).
   - Use `X-Custom-Token` only over HTTPS and avoid logging the raw token. Log only token presence or user id.
   - Limit accepted token life and validate `issued_at` and `expires_at` strictly (a small clock skew is tolerated).

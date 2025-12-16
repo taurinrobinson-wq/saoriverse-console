@@ -282,12 +282,11 @@ If you need to force a clean rebuild:
 ```powershell
 
 # Windows PowerShell
-docker system prune -a  # Remove all images/containers
-docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
+docker system prune -a  # Remove all images/containers docker build --no-cache -f
+Dockerfile.firstperson -t firstperson:latest .
 
 # macOS/Linux
-docker system prune -a
-docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
+docker system prune -a docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 ```
 
 **Warning:** This will remove all Docker images/containers!

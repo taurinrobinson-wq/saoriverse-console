@@ -53,15 +53,11 @@ Find where the base response is generated, then add:
 ```python
 
 # After generating base_response
-enhanced_response, perf_metrics = self.tier1.process_response(
-    user_input=user_message,
-    base_response=base_response,  # or generated_response
-    context={"user_id": user_id}  # optional
-)
+enhanced_response, perf_metrics = self.tier1.process_response( user_input=user_message,
+base_response=base_response,  # or generated_response context={"user_id": user_id}  # optional )
 
 # Log metrics if needed
-if perf_metrics.get("total") > 0.1:
-    logger.warning(f"Tier 1 slow: {perf_metrics['total']:.3f}s")
+if perf_metrics.get("total") > 0.1: logger.warning(f"Tier 1 slow: {perf_metrics['total']:.3f}s")
 
 # Return enhanced response instead of base
 ```text
@@ -117,16 +113,12 @@ In the chat display section:
 ```python
 
 # After showing the response
-if show_debug_metrics:
-    tier1 = st.session_state.tier1_foundation
-    metrics = tier1.get_performance_metrics()
+if show_debug_metrics: tier1 = st.session_state.tier1_foundation metrics =
+tier1.get_performance_metrics()
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Tier 1 Time", f"{metrics['total']*1000:.1f}ms")
-    with col2:
-        st.metric("Safety Check", f"{metrics['safety_check']*1000:.1f}ms")
-    with col3:
+col1, col2, col3 = st.columns(3) with col1: st.metric("Tier 1 Time",
+f"{metrics['total']*1000:.1f}ms") with col2: st.metric("Safety Check",
+f"{metrics['safety_check']*1000:.1f}ms") with col3:
 ```text
 ```text
 ```
@@ -144,7 +136,8 @@ if show_debug_metrics:
 python -m pytest tests/test_tier1_foundation.py -v
 
 # Individual performance test
-python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_performance_under_100ms -v
+python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_performance_under_100ms
+-v
 
 # Manual test script
 
@@ -153,11 +146,9 @@ python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_perfo
 
 **Manual local testing:**
 
-1. Start Streamlit UI: `streamlit run src/ui_refactored.py`
-2. Send 10-20 test messages
-3. Verify responses are faster/more compassionate
-4. Check browser console for no errors
-5. Look for "Tier 1" metrics in debug output
+1. Start Streamlit UI: `streamlit run src/ui_refactored.py` 2. Send 10-20 test messages 3. Verify
+responses are faster/more compassionate 4. Check browser console for no errors 5. Look for "Tier 1"
+metrics in debug output
 
 ##
 
@@ -280,12 +271,9 @@ If something goes wrong:
 
 ## Next Steps
 
-1. **Now:** Read this file (you are here ✓)
-2. **Next:** Integrate into response_handler.py (45 min)
-3. **Then:** Update ui_refactored.py (20 min)
-4. **Test:** Run test suite (5 min)
-5. **Verify:** Local manual testing (30 min)
-6. **Ready:** For Tier 2 implementation (Week 2)
+1. **Now:** Read this file (you are here ✓) 2. **Next:** Integrate into response_handler.py (45 min)
+3. **Then:** Update ui_refactored.py (20 min) 4. **Test:** Run test suite (5 min) 5. **Verify:**
+Local manual testing (30 min) 6. **Ready:** For Tier 2 implementation (Week 2)
 
 ##
 

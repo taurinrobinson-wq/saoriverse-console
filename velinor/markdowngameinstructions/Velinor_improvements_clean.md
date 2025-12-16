@@ -1,6 +1,7 @@
 # Velinor — Improvements & Implementation Checklist
 
-This is a cleaned, human-readable summary and implementation checklist distilled from `Velinor_improvements.md`.
+This is a cleaned, human-readable summary and implementation checklist distilled from
+`Velinor_improvements.md`.
 
 ##
 
@@ -46,16 +47,17 @@ This is a cleaned, human-readable summary and implementation checklist distilled
 
 ## Suggested Implementation Plan (short)
 
-1. Create canonical NPC profiles file: `velinor/data/npc_profiles.json` with entries for Ravi, Nima, Tovren, Dalen, Mariel, Sera, Korrin.
-2. Create `velinor/data/influence_map.json` containing the ripple values per NPC.
-3. Implement `velinor/engine/resonance.py` containing:
+1. Create canonical NPC profiles file: `velinor/data/npc_profiles.json` with entries for Ravi, Nima,
+Tovren, Dalen, Mariel, Sera, Korrin. 2. Create `velinor/data/influence_map.json` containing the
+ripple values per NPC. 3. Implement `velinor/engine/resonance.py` containing:
    - `apply_tone_to_remnants(npc_profile, tone_effects, correlation_map)`
    - `apply_tone_to_all_npcs(npc_profiles, tone_effects, influence_map)`
    - `simulate_encounters(npc_profiles, influence_map, encounters)`
 4. Clean `Velinor_improvements.md` (or replace with this cleaned file) and remove generator noise.
-5. Add small unit tests in `velinor/tests/test_resonance.py` exercising the example runs.
-6. Wire tool unlock conditions into `velinor/engine/tools.py` or a `velinor/data/tools.json`.
-7. Replace image placeholders with actual files in `velinor/assets/characters/` and update the markdown to reference them.
+5. Add small unit tests in `velinor/tests/test_resonance.py` exercising the example runs. 6. Wire
+tool unlock conditions into `velinor/engine/tools.py` or a `velinor/data/tools.json`. 7. Replace
+image placeholders with actual files in `velinor/assets/characters/` and update the markdown to
+reference them.
 
 ##
 
@@ -109,4 +111,5 @@ def apply_tone_to_remnants(npc_profile: dict, tone_effects: dict, correlation: d
 - Replace the noisy original `Velinor_improvements.md` with a cleaned version (this file) or update both in-place.
 - Generate the simulation harness and produce a sample output for your review.
 
-Tell me which of the next steps you want me to take and I will proceed (I can start with creating the canonical JSON and the resonance implementation).
+Tell me which of the next steps you want me to take and I will proceed (I can start with creating
+the canonical JSON and the resonance implementation).

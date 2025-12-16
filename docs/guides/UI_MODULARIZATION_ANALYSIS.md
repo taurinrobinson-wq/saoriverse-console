@@ -2,7 +2,8 @@
 
 ## Current State: `ui.py` (3,068 lines)
 
-The current `ui.py` is a monolithic module handling ~12 major responsibilities, making it difficult to maintain, test, and modify.
+The current `ui.py` is a monolithic module handling ~12 major responsibilities, making it difficult
+to maintain, test, and modify.
 
 ##
 
@@ -323,60 +324,47 @@ emotional_os/deploy/modules/
 
 ```python
 
-"""
-Main UI entry point and orchestration.
+""" Main UI entry point and orchestration.
 
-Handles page routing, session initialization, and high-level flow control.
-Delegates specific responsibilities to focused modules.
-"""
+Handles page routing, session initialization, and high-level flow control. Delegates specific
+responsibilities to focused modules. """
 
-import streamlit as st
-import logging
+import streamlit as st import logging
 
-from ui_components.session_manager import initialize_session_state, get_conversation_context
-from ui_components.header_ui import render_main_header
-from ui_components.sidebar_ui import render_sidebar
-from ui_components.chat_display import render_chat_container, handle_user_input
-from ui_components.response_handler import handle_response_pipeline
-from ui_components.theme_manager import apply_theme
+from ui_components.session_manager import initialize_session_state, get_conversation_context from
+ui_components.header_ui import render_main_header from ui_components.sidebar_ui import
+render_sidebar from ui_components.chat_display import render_chat_container, handle_user_input from
+ui_components.response_handler import handle_response_pipeline from ui_components.theme_manager
+import apply_theme
 
 logger = logging.getLogger(__name__)
 
-def render_splash_interface():
-    """Render authentication splash screen."""
-    from ui_components.auth_ui import render_auth_splash
-    render_auth_splash()
+def render_splash_interface(): """Render authentication splash screen.""" from ui_components.auth_ui
+import render_auth_splash render_auth_splash()
 
-def render_main_app():
-    """Main authenticated application interface."""
+def render_main_app(): """Main authenticated application interface."""
     # Theme setup
-    apply_theme()
+apply_theme()
 
     # Initialize session (orchestrator, parser, preferences)
-    initialize_session_state()
+initialize_session_state()
 
     # Render header
-    render_main_header()
+render_main_header()
 
     # Render sidebar
-    render_sidebar()
+render_sidebar()
 
     # Main chat interface
-    render_chat_container()
+render_chat_container()
 
     # Handle user input and processing
-    user_input = st.chat_input("Share what you're feeling...")
-    if user_input:
-        conversation_context = get_conversation_context()
-        response = handle_response_pipeline(user_input, conversation_context)
+user_input = st.chat_input("Share what you're feeling...") if user_input: conversation_context =
+get_conversation_context() response = handle_response_pipeline(user_input, conversation_context)
         # Display and persist
 
-def main():
-    """Main entry point."""
-    if not st.session_state.get("authenticated"):
-        render_splash_interface()
-    else:
-        render_main_app()
+def main(): """Main entry point.""" if not st.session_state.get("authenticated"):
+render_splash_interface() else: render_main_app()
 
 if __name__ == "__main__":
 
@@ -389,43 +377,32 @@ if __name__ == "__main__":
 
 ### Phase 1: Extract Utilities
 
-1. Create `utils/svg_loader.py`
-2. Create `utils/css_injector.py`
-3. Create `utils/styling_utils.py`
+1. Create `utils/svg_loader.py` 2. Create `utils/css_injector.py` 3. Create `utils/styling_utils.py`
 4. Update imports in `ui.py`
 
 ### Phase 2: Extract Session Management
 
-1. Create `ui_components/session_manager.py`
-2. Migrate `initialize_session_state()` logic
-3. Update `ui.py` imports
+1. Create `ui_components/session_manager.py` 2. Migrate `initialize_session_state()` logic 3. Update
+`ui.py` imports
 
 ### Phase 3: Extract Display Components
 
-1. Create `ui_components/header_ui.py`
-2. Create `ui_components/sidebar_ui.py`
-3. Create `ui_components/chat_display.py`
-4. Update `ui.py` to use new modules
+1. Create `ui_components/header_ui.py` 2. Create `ui_components/sidebar_ui.py` 3. Create
+`ui_components/chat_display.py` 4. Update `ui.py` to use new modules
 
 ### Phase 4: Extract Processing
 
-1. Create `ui_components/response_handler.py`
-2. Create `ui_components/glyph_handler.py`
-3. Migrate response pipeline logic
-4. Update `ui.py`
+1. Create `ui_components/response_handler.py` 2. Create `ui_components/glyph_handler.py` 3. Migrate
+response pipeline logic 4. Update `ui.py`
 
 ### Phase 5: Extract Optional Features
 
-1. Create `ui_components/document_processor.py`
-2. Create `ui_components/learning_tracker.py`
-3. Create `ui_components/journal_center.py`
-4. Create `ui_components/theme_manager.py`
+1. Create `ui_components/document_processor.py` 2. Create `ui_components/learning_tracker.py` 3.
+Create `ui_components/journal_center.py` 4. Create `ui_components/theme_manager.py`
 
 ### Phase 6: Refactor Main Entry
 
-1. Simplify `ui.py` to ~300 lines
-2. Add comprehensive docstrings
-3. Test all flows
+1. Simplify `ui.py` to ~300 lines 2. Add comprehensive docstrings 3. Test all flows
 
 ##
 

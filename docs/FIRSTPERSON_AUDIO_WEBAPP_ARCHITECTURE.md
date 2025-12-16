@@ -73,27 +73,17 @@ firstperson.chat (NEW subdomain):
 ```yaml
 services:
   # Existing
-  velinor_api:
-    image: velinor_prod
-    ports: [8000:8000]
+velinor_api: image: velinor_prod ports: [8000:8000]
 
   # NEW
-  firstperson_api:
-    image: firstperson_api
-    ports: [8001:8001]  # Internal only
-    depends_on:
+firstperson_api: image: firstperson_api ports: [8001:8001]  # Internal only depends_on:
       - ollama
 
   # Shared
-  ollama:
-    image: ollama/ollama
-    ports: [11434:11434]  # Local only
+ollama: image: ollama/ollama ports: [11434:11434]  # Local only
 
   # Reverse proxy (routes both domains)
-  nginx_ssl:
-    image: nginx:alpine
-    ports: [80:80, 443:443]
-    depends_on:
+nginx_ssl: image: nginx:alpine ports: [80:80, 443:443] depends_on:
       - velinor_api
 ```text
 ```text
@@ -105,8 +95,7 @@ services:
 
 
 # Existing
-server_name velinor.firstperson.chat;
-location / { proxy_pass http://velinor_api:8000; }
+server_name velinor.firstperson.chat; location / { proxy_pass http://velinor_api:8000; }
 
 # NEW
 server_name firstperson.chat;
@@ -204,19 +193,15 @@ FastAPI app
 ```bash
 
 # Transcribe audio
-POST /api/transcribe
-Content-Type: multipart/form-data
-{ audio: <wav_blob> }
-→ { text: "hello", confidence: 0.95 }
+POST /api/transcribe Content-Type: multipart/form-data { audio: <wav_blob> } → { text: "hello",
+confidence: 0.95 }
 
 # Get response
-POST /api/chat
-{ message: "hello", user_id: "abc123" }
-→ { text: "...", glyph_intent: {...}, audio_url: "..." }
+POST /api/chat { message: "hello", user_id: "abc123" } → { text: "...", glyph_intent: {...},
+audio_url: "..." }
 
 # Synthesize audio
-POST /api/synthesize
-{ text: "...", glyph_intent: {...} }
+POST /api/synthesize { text: "...", glyph_intent: {...} }
 ```text
 ```text
 ```
@@ -225,14 +210,9 @@ POST /api/synthesize
 
 ```javascript
 
-// Real-time conversation
-ws.send({ type: 'transcribe_start' })
-// User speaks...
-ws.send({ type: 'audio_chunk', data: <chunk> })
-ws.send({ type: 'transcribe_end' })
-← { type: 'transcript', text: '...' }
-← { type: 'response_start' }
-← { type: 'response_chunk', text: '...', audio: <chunk> }
+// Real-time conversation ws.send({ type: 'transcribe_start' }) // User speaks... ws.send({ type:
+'audio_chunk', data: <chunk> }) ws.send({ type: 'transcribe_end' }) ← { type: 'transcript', text:
+'...' } ← { type: 'response_start' } ← { type: 'response_chunk', text: '...', audio: <chunk> }
 
 ```text
 ```

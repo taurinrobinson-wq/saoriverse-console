@@ -2,15 +2,14 @@
 
 ## Overview
 
-Phase 1: Core Foundations of the FirstPerson relational AI system has been **successfully completed** with **5 major modules**, **111 comprehensive tests**, and full documentation.
+Phase 1: Core Foundations of the FirstPerson relational AI system has been **successfully
+completed** with **5 major modules**, **111 comprehensive tests**, and full documentation.
 
 This phase establishes the foundational capabilities for FirstPerson to:
 
-1. Detect ambiguous story-starts and clarify context
-2. Track emotional theme frequency patterns
-3. Persist memories across sessions via Supabase
-4. Rehydrate conversation context on sign-in
-5. Provide varied, non-repetitive response templates
+1. Detect ambiguous story-starts and clarify context 2. Track emotional theme frequency patterns 3.
+Persist memories across sessions via Supabase 4. Rehydrate conversation context on sign-in 5.
+Provide varied, non-repetitive response templates
 
 ##
 
@@ -358,11 +357,9 @@ anchor_salience numeric(0-1)         -- Relevance score for retrieval
 
 **Task:** Integration & Testing
 
-1. Wire all Phase 1.1-1.5 modules into main_response_engine.py
-2. Create integration test simulating realistic conversations
-3. Validate end-to-end flow with memory persistence
-4. Test cross-module signal passing
-5. Verify Supabase persistence (with mock or test DB)
+1. Wire all Phase 1.1-1.5 modules into main_response_engine.py 2. Create integration test simulating
+realistic conversations 3. Validate end-to-end flow with memory persistence 4. Test cross-module
+signal passing 5. Verify Supabase persistence (with mock or test DB)
 
 **Estimated scope:**
 
@@ -479,19 +476,16 @@ reflector = FrequencyReflector()
 
 ### Current Limitations
 
-1. **Supabase Integration:** Offline-safe, but requires env vars for live mode
-2. **Theme Categories:** Fixed at 8 categories (family, work, relationship, etc.)
-3. **Temporal Patterns:** Basic time-of-day categorization (4 categories)
-4. **Memory Salience:** Simple recency + frequency weighting
-5. **Template Customization:** Per-instance only, not persistent
+1. **Supabase Integration:** Offline-safe, but requires env vars for live mode 2. **Theme
+Categories:** Fixed at 8 categories (family, work, relationship, etc.) 3. **Temporal Patterns:**
+Basic time-of-day categorization (4 categories) 4. **Memory Salience:** Simple recency + frequency
+weighting 5. **Template Customization:** Per-instance only, not persistent
 
 ### Phase 1.6+ Improvements
 
-1. **Integration testing** with realistic conversation flows
-2. **Theme customization** per user or conversation context
-3. **Persistent template** customization via database
-4. **Advanced salience** scoring with ML-based weighting
-5. **Cross-module** signal optimization
+1. **Integration testing** with realistic conversation flows 2. **Theme customization** per user or
+conversation context 3. **Persistent template** customization via database 4. **Advanced salience**
+scoring with ML-based weighting 5. **Cross-module** signal optimization
 
 ##
 
@@ -516,11 +510,10 @@ pytest emotional_os/core/firstperson/test_frequency_reflector.py::TestFrequencyR
 
 ### Test Categories
 
-1. **Unit Tests:** Individual method behavior, edge cases
-2. **Integration Tests:** Module interactions, workflow completion
-3. **Data Validation:** Type safety, optional handling
-4. **Performance Tests:** History limits, rotation accuracy
-5. **Real-world Scenarios:** Ambiguous narratives, mixed themes
+1. **Unit Tests:** Individual method behavior, edge cases 2. **Integration Tests:** Module
+interactions, workflow completion 3. **Data Validation:** Type safety, optional handling 4.
+**Performance Tests:** History limits, rotation accuracy 5. **Real-world Scenarios:** Ambiguous
+narratives, mixed themes
 
 ##
 

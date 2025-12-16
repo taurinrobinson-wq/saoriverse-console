@@ -2,7 +2,9 @@
 
 ## Overview
 
-This guide shows how to integrate the `EmotionDetector` component into your First Person chat interface. The emotion learning system provides real-time facial emotion detection that feeds back into user experience and system learning.
+This guide shows how to integrate the `EmotionDetector` component into your First Person chat
+interface. The emotion learning system provides real-time facial emotion detection that feeds back
+into user experience and system learning.
 
 ##
 
@@ -56,39 +58,21 @@ export default function ChatPage() {
 Display emotion detector in a fixed sidebar next to your chat:
 
 ```tsx
-// app/chat/page.tsx
-import { EmotionDetector } from "@/components/EmotionDetector";
-import { ChatInterface } from "@/components/ChatInterface";
-import { useSession } from "@/hooks/useSession";
+// app/chat/page.tsx import { EmotionDetector } from "@/components/EmotionDetector"; import {
+ChatInterface } from "@/components/ChatInterface"; import { useSession } from "@/hooks/useSession";
 
-export default function ChatPage() {
-  const { user } = useSession();
+export default function ChatPage() { const { user } = useSession();
 
-  if (!user) {
-    return <div>Please log in</div>;
-  }
+if (!user) { return <div>Please log in</div>; }
 
-  return (
-    <div className="flex h-screen gap-4 p-4 bg-gray-900">
-      {/* Main chat area */}
-      <div className="flex-1 flex flex-col bg-white rounded-lg">
-        <ChatInterface userId={user.id} />
-      </div>
+return ( <div className="flex h-screen gap-4 p-4 bg-gray-900"> {/* Main chat area */} <div
+className="flex-1 flex flex-col bg-white rounded-lg"> <ChatInterface userId={user.id} /> </div>
 
-      {/* Emotion detection sidebar */}
-      <div className="w-80 bg-white rounded-lg overflow-hidden shadow-lg">
-        <div className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-          <h2 className="font-bold">Emotion Detection</h2>
-          <p className="text-sm text-purple-100">Privacy: Local browser only</p>
-        </div>
-        <EmotionDetector
-          userId={user.id}
-          conversationContext="sanctuary_chat"
-          isActive={true}
-        />
-      </div>
-    </div>
-  );
+{/* Emotion detection sidebar */} <div className="w-80 bg-white rounded-lg overflow-hidden
+shadow-lg"> <div className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white"> <h2
+className="font-bold">Emotion Detection</h2> <p className="text-sm text-purple-100">Privacy: Local
+browser only</p> </div> <EmotionDetector userId={user.id} conversationContext="sanctuary_chat"
+isActive={true} /> </div> </div> );
 ```text
 ```text
 ```
@@ -101,40 +85,25 @@ Show emotion detector as a modal dialog:
 
 ```tsx
 
-// components/EmotionDetectorModal.tsx
-import { EmotionDetector } from "@/components/EmotionDetector";
-import { useState } from "react";
+// components/EmotionDetectorModal.tsx import { EmotionDetector } from
+"@/components/EmotionDetector"; import { useState } from "react";
 
-export function EmotionDetectorModal({ userId }: { userId: string }) {
-  const [isOpen, setIsOpen] = useState(false);
+export function EmotionDetectorModal({ userId }: { userId: string }) { const [isOpen, setIsOpen] =
+useState(false);
 
-  return (
-    <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+return ( <> <button onClick={() => setIsOpen(!isOpen)} className="px-4 py-2 bg-purple-600 text-white
+rounded-lg hover:bg-purple-700"
       >
-        {isOpen ? "Hide" : "Show"} Emotion Detection
-      </button>
+{isOpen ? "Hide" : "Show"} Emotion Detection </button>
 
-      {isOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-96 h-96 overflow-hidden">
-            <div className="p-4 bg-purple-600 text-white flex justify-between items-center">
-              <h2 className="font-bold">Real-time Emotion Detection</h2>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-xl font-bold hover:bg-purple-700 w-8 h-8 rounded"
+{isOpen && ( <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"> <div
+className="bg-white rounded-lg w-96 h-96 overflow-hidden"> <div className="p-4 bg-purple-600
+text-white flex justify-between items-center"> <h2 className="font-bold">Real-time Emotion
+Detection</h2> <button onClick={() => setIsOpen(false)} className="text-xl font-bold
+hover:bg-purple-700 w-8 h-8 rounded"
               >
-                ✕
-              </button>
-            </div>
-            <EmotionDetector userId={userId} conversationContext="modal_session" isActive={true} />
-          </div>
-        </div>
-      )}
-    </>
-  );
+✕ </button> </div> <EmotionDetector userId={userId} conversationContext="modal_session"
+isActive={true} /> </div> </div> )} </> );
 
 ```text
 ```
@@ -269,16 +238,11 @@ If webcam is unavailable, emotion detection simply doesn't run. The chat interfa
 Control detection with the `isActive` prop:
 
 ```tsx
-// Disable during video calls or when not needed
-<EmotionDetector
-  userId={user.id}
-  isActive={isInChat} // Only detect while in chat
-/>
+// Disable during video calls or when not needed <EmotionDetector userId={user.id}
+isActive={isInChat} // Only detect while in chat />
 
-// Disable for privacy-focused users
-<EmotionDetector
-  userId={user.id}
-  isActive={user.preferences.enableEmotionTracking}
+// Disable for privacy-focused users <EmotionDetector userId={user.id}
+isActive={user.preferences.enableEmotionTracking}
 ```text
 ```text
 ```
@@ -292,10 +256,8 @@ Control detection with the `isActive` prop:
 ```sql
 
 -- View recent emotion logs for a user
-SELECT emotion, confidence, timestamp, conversation_context
-FROM emotions_log
-WHERE user_id = 'user_123'
-ORDER BY timestamp DESC
+SELECT emotion, confidence, timestamp, conversation_context FROM emotions_log WHERE user_id =
+'user_123' ORDER BY timestamp DESC
 
 ```text
 ```
@@ -375,7 +337,7 @@ export function EmotionHistory({ userId }: { userId: string }) {
 1. **Limit detection to active chats**
 
    ```tsx
-   isActive={isActiveChatOpen}
+isActive={isActiveChatOpen}
    ```
 
 2. **Use smaller video dimensions**
@@ -427,32 +389,30 @@ As more data accumulates:
 
 ### Emotion detection not working
 
-1. Check if models loaded: Open browser DevTools Console, look for model loading errors
-2. Check webcam permission: Browser → Settings → Site Permissions → Camera
-3. Check lighting: Better lighting = better detection
+1. Check if models loaded: Open browser DevTools Console, look for model loading errors 2. Check
+webcam permission: Browser → Settings → Site Permissions → Camera 3. Check lighting: Better lighting
+= better detection
 
 ### No emotion logs appearing
 
-1. Verify `/api/emotions` endpoint is responding: `curl http://localhost:3000/api/emotions?user_id=test`
-2. Check SUPABASE_SERVICE_ROLE_KEY is set in backend environment
-3. Verify `emotions_log` table exists in Supabase
+1. Verify `/api/emotions` endpoint is responding: `curl
+http://localhost:3000/api/emotions?user_id=test` 2. Check SUPABASE_SERVICE_ROLE_KEY is set in
+backend environment 3. Verify `emotions_log` table exists in Supabase
 
 ### Thresholds not updating
 
-1. Check if training script ran: `python train_emotion_model.py --user_id user_123`
-2. Verify Realtime is enabled on `emotion_thresholds` table in Supabase
-3. Check browser console for Realtime subscription errors
+1. Check if training script ran: `python train_emotion_model.py --user_id user_123` 2. Verify
+Realtime is enabled on `emotion_thresholds` table in Supabase 3. Check browser console for Realtime
+subscription errors
 
 ##
 
 ## Next Steps
 
-1. ✅ Integrate EmotionDetector into your chat page
-2. ✅ Set up Supabase tables (see EMOTION_LEARNING_SETUP.md)
-3. ✅ Download face-api.js models (see FACEAPI_MODELS_SETUP.md)
-4. ✅ Test emotion detection with your camera
-5. ✅ Run training script to create adaptive thresholds
-6. ✅ Monitor emotion patterns in Supabase dashboard
+1. ✅ Integrate EmotionDetector into your chat page 2. ✅ Set up Supabase tables (see
+EMOTION_LEARNING_SETUP.md) 3. ✅ Download face-api.js models (see FACEAPI_MODELS_SETUP.md) 4. ✅ Test
+emotion detection with your camera 5. ✅ Run training script to create adaptive thresholds 6. ✅
+Monitor emotion patterns in Supabase dashboard
 
 ##
 

@@ -32,15 +32,13 @@
 ```text
 ```
 
-❌ CURRENT (too dense):
-"That lands—you're naming something real there—the kind of tension that lives in the body when
-something's asked of you that you didn't consent to"
+❌ CURRENT (too dense): "That lands—you're naming something real there—the kind of tension that lives
+in the body when something's asked of you that you didn't consent to"
 
-✓ BETTER (conversational):
-"That lands.
+✓ BETTER (conversational): "That lands.
 
-You're naming something real there. The kind of tension that lives in the body when
-something's asked of you that you didn't consent to."
+You're naming something real there. The kind of tension that lives in the body when something's
+asked of you that you didn't consent to."
 
 ```
 
@@ -74,20 +72,12 @@ something's asked of you that you didn't consent to."
 ```text
 ```
 
-GLYPH: HOLD
-"I'm holding this with you."
-"Hold the both/and here."
-"Let me hold the weight of that."
+GLYPH: HOLD "I'm holding this with you." "Hold the both/and here." "Let me hold the weight of that."
 
-GLYPH: ECHO
-"I hear what you're saying."
-"That echoes something important."
-"Echo the truth of what you just said."
+GLYPH: ECHO "I hear what you're saying." "That echoes something important." "Echo the truth of what
+you just said."
 
-GLYPH: SACRED
-"This is sacred work."
-"Honor what's sacred here."
-"This moment is sacred."
+GLYPH: SACRED "This is sacred work." "Honor what's sacred here." "This moment is sacred."
 
 ```
 
@@ -188,35 +178,35 @@ Messages should be:
 1. **Sitting with contradiction** - Not trying to "fix" or resolve immediately
    ```
 
-   "Both are true: you enjoyed the work, and you were being taken advantage of."
+"Both are true: you enjoyed the work, and you were being taken advantage of."
 
    ```
 
 2. **Mirroring back what matters** - Showing you really heard
    ```
 
-   "Love is a simple love. That's all it needs to be."
+"Love is a simple love. That's all it needs to be."
 
    ```
 
 3. **Acknowledging the unsayable** - Honoring complexity
    ```
 
-   "Could be closure, could be echo. Could be the ending that dignifies what came before."
+"Could be closure, could be echo. Could be the ending that dignifies what came before."
 
    ```
 
 4. **Stance of curiosity** - Not having all the answers
    ```
 
-   "What's the last time? London or Watts? Ghana or Gaza?"
+"What's the last time? London or Watts? Ghana or Gaza?"
 
    ```
 
 5. **Present presence** - Being here now with the user
    ```
 
-   "I hold it with you."
+"I hold it with you."
 
    ```
 ##
@@ -288,14 +278,11 @@ GLYPH: SO_WHAT
 ```text
 ```
 
-GLYPH: NO_PRESSURE
-"You don't have to."
+GLYPH: NO_PRESSURE "You don't have to."
 
-GLYPH: IT_CAN_BE
-"It can be [this simple]."
+GLYPH: IT_CAN_BE "It can be [this simple]."
 
-GLYPH: OF_COURSE
-"Of course you do."
+GLYPH: OF_COURSE "Of course you do."
 
 ```
 
@@ -347,10 +334,9 @@ After implementation, measure:
 ```text
 ```
 
-"That's such a tender contradiction, isn't it—the way connection can be
-genuine and exploitative at once—and I think what you're naming is that
-the enjoyment of the work didn't make it okay to not have boundaries around
-the labor itself, and maybe that's the grief underneath—that something
+"That's such a tender contradiction, isn't it—the way connection can be genuine and exploitative at
+once—and I think what you're naming is that the enjoyment of the work didn't make it okay to not
+have boundaries around the labor itself, and maybe that's the grief underneath—that something
 beautiful was also something that cost you."
 
 ```
@@ -413,11 +399,10 @@ Notice: All are under 10 words. All are direct. All are present. All are true.
 
 ## 🔮 Next Steps
 
-1. **Create cleaned glyph response templates** using these insights
-2. **A/B test** new (shorter, less em-dash) vs. old (current) style
-3. **Gather user feedback** on conversational feel
-4. **Iterate** based on response patterns
-5. **Build a new system response lexicon** based on these gold-standard phrases
+1. **Create cleaned glyph response templates** using these insights 2. **A/B test** new (shorter,
+less em-dash) vs. old (current) style 3. **Gather user feedback** on conversational feel 4.
+**Iterate** based on response patterns 5. **Build a new system response lexicon** based on these
+gold-standard phrases
 ##
 
 **Your instinct was right:** The relational language and emotional depth from these conversations is gold. The fix is in the delivery—shorter, breezier, more present. Reduce the em-dashes, keep the heart.

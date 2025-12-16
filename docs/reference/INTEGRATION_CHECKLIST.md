@@ -278,11 +278,9 @@ Results:
 
 ### Next Steps
 
-1. Run: `bash verify_integration.sh`
-2. Run: `streamlit run main_v2.py`
-3. Select: "hybrid" processing mode
-4. Start: Having meaningful conversations
-5. Observe: New glyphs appearing in sidebar
+1. Run: `bash verify_integration.sh` 2. Run: `streamlit run main_v2.py` 3. Select: "hybrid"
+processing mode 4. Start: Having meaningful conversations 5. Observe: New glyphs appearing in
+sidebar
 
 ### Success Indicators
 

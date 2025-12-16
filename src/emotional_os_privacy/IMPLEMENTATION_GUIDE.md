@@ -2,7 +2,8 @@
 
 ## Overview
 
-This guide explains how to integrate the privacy-first encoding pipeline into FirstPerson so that raw conversation text is **never stored** in Supabase.
+This guide explains how to integrate the privacy-first encoding pipeline into FirstPerson so that
+raw conversation text is **never stored** in Supabase.
 
 ## Problem Statement
 
@@ -10,11 +11,8 @@ This guide explains how to integrate the privacy-first encoding pipeline into Fi
 
 **Desired State:**
 
-1. Raw text received but never persisted
-2. Only encoded signals/gates/glyphs stored
-3. User ID hashed one-way
-4. K-anonymity verified (k ≥ 5)
-5. Full GDPR/CCPA/HIPAA compliance
+1. Raw text received but never persisted 2. Only encoded signals/gates/glyphs stored 3. User ID
+hashed one-way 4. K-anonymity verified (k ≥ 5) 5. Full GDPR/CCPA/HIPAA compliance
 
 ## Architecture
 
@@ -98,8 +96,7 @@ Find all places where conversation data goes to the database:
 
 
 # Search for database writes
-grep -r "\.insert\(" emotional_os/
-grep -r "supabase\." emotional_os/
+grep -r "\.insert\(" emotional_os/ grep -r "supabase\." emotional_os/
 
 ```text
 ```
@@ -159,30 +156,20 @@ if not success:
 **Create new table for anonymized data:**
 
 ```sql
-CREATE TABLE conversation_logs_anonymized (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id_hashed VARCHAR(64) NOT NULL,  -- SHA-256 hash
-    session_id VARCHAR(255) NOT NULL,
-    timestamp TIMESTAMP DEFAULT NOW(),
-    timestamp_week VARCHAR(8),  -- "2025-W02"
-    message_turn INTEGER,
-    encoded_signals JSONB,  -- ["SIG_CRISIS_001", ...]
-    encoded_signals_category VARCHAR(100),
-    encoded_gates JSONB,  -- ["GATE_GRIEF_004", ...]
-    glyph_ids JSONB,  -- [42, 183, ...]
-    glyph_count INTEGER,
-    message_length_bucket VARCHAR(50),
-    response_length_bucket VARCHAR(50),
-    signal_count INTEGER,
-    response_source VARCHAR(50),
-    created_at TIMESTAMP DEFAULT NOW(),
+CREATE TABLE conversation_logs_anonymized ( id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+user_id_hashed VARCHAR(64) NOT NULL,  -- SHA-256 hash session_id VARCHAR(255) NOT NULL, timestamp
+TIMESTAMP DEFAULT NOW(), timestamp_week VARCHAR(8),  -- "2025-W02" message_turn INTEGER,
+encoded_signals JSONB,  -- ["SIG_CRISIS_001", ...] encoded_signals_category VARCHAR(100),
+encoded_gates JSONB,  -- ["GATE_GRIEF_004", ...] glyph_ids JSONB,  -- [42, 183, ...] glyph_count
+INTEGER, message_length_bucket VARCHAR(50), response_length_bucket VARCHAR(50), signal_count
+INTEGER, response_source VARCHAR(50), created_at TIMESTAMP DEFAULT NOW(),
 
     -- Privacy: No raw text fields allowed
     -- No: user_id, user_message, system_response, user_name, user_email
 );
 
-CREATE INDEX idx_user_id_hashed ON conversation_logs_anonymized(user_id_hashed);
-CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
+CREATE INDEX idx_user_id_hashed ON conversation_logs_anonymized(user_id_hashed); CREATE INDEX
+idx_session_id ON conversation_logs_anonymized(session_id);
 ```text
 ```text
 ```
@@ -195,17 +182,11 @@ CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
 ALTER TABLE conversations RENAME TO conversations_archived;
 
 -- Create audit trail
-CREATE TABLE data_migration_audit (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    migration_date TIMESTAMP DEFAULT NOW(),
-    rows_archived INTEGER,
-    note TEXT
-);
+CREATE TABLE data_migration_audit ( id UUID PRIMARY KEY DEFAULT gen_random_uuid(), migration_date
+TIMESTAMP DEFAULT NOW(), rows_archived INTEGER, note TEXT );
 
-INSERT INTO data_migration_audit (rows_archived, note)
-VALUES (
-    (SELECT COUNT(*) FROM conversations_archived),
-    'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
+INSERT INTO data_migration_audit (rows_archived, note) VALUES ( (SELECT COUNT(*) FROM
+conversations_archived), 'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
 
 ```text
 ```
@@ -304,13 +285,10 @@ verifier.run_monthly_compliance_check(db_connection)
 ### DISCARDED (Never Stored)
 
 ```
-❌ raw_user_input          "I want to end my life"
-❌ system_response         "I'm here for you..."
-❌ user_id                 "alice@example.com"
-❌ user_email              "alice@example.com"
-❌ user_name               "Alice"
-❌ user_phone              "+1-555-0123"
-❌ conversation_text       Full message
+❌ raw_user_input          "I want to end my life" ❌ system_response         "I'm here for you..." ❌
+user_id                 "alice@example.com" ❌ user_email              "alice@example.com" ❌
+user_name               "Alice" ❌ user_phone              "+1-555-0123" ❌ conversation_text
+Full message
 ```text
 ```text
 ```
@@ -319,12 +297,9 @@ verifier.run_monthly_compliance_check(db_connection)
 
 ```
 
-✓ user_id_hashed           "a7f3e9c1a8b2d5f4..." (SHA-256)
-✓ encoded_signals          ["SIG_CRISIS_001", "SIG_STRESS_001"]
-✓ encoded_gates            ["GATE_GRIEF_004"]
-✓ glyph_ids                [42, 183]
-✓ message_length_bucket    "100-200_chars"
-✓ timestamp_week           "2025-W02"
+✓ user_id_hashed           "a7f3e9c1a8b2d5f4..." (SHA-256) ✓ encoded_signals
+["SIG_CRISIS_001", "SIG_STRESS_001"] ✓ encoded_gates            ["GATE_GRIEF_004"] ✓ glyph_ids
+[42, 183] ✓ message_length_bucket    "100-200_chars" ✓ timestamp_week           "2025-W02"
 
 ```text
 ```
@@ -359,23 +334,16 @@ Database: Supabase
 ### User Data Export
 
 ```python
-@app.post("/user/data-export")
-def export_user_data(user_id: str):
-    """User can export their (anonymized) data."""
-    user_id_hashed = hashlib.sha256(f"salt:{user_id}".encode()).hexdigest()
+@app.post("/user/data-export") def export_user_data(user_id: str): """User can export their
+(anonymized) data.""" user_id_hashed = hashlib.sha256(f"salt:{user_id}".encode()).hexdigest()
 
-    records = db.table("conversation_logs_anonymized")\
-        .select("*")\
-        .eq("user_id_hashed", user_id_hashed)\
-        .execute()
+records = db.table("conversation_logs_anonymized")\ .select("*")\ .eq("user_id_hashed",
+user_id_hashed)\ .execute()
 
     # Return anonymized metadata only
-    return {
-        "export_date": datetime.now().isoformat(),
-        "conversation_count": len(records.data),
-        "signals_detected": [...],
-        "retention_policy": "90 days",
-        "note": "Data is anonymized; raw messages not stored"
+return { "export_date": datetime.now().isoformat(), "conversation_count": len(records.data),
+"signals_detected": [...], "retention_policy": "90 days", "note": "Data is anonymized; raw messages
+not stored"
 ```text
 ```text
 ```
@@ -384,19 +352,15 @@ def export_user_data(user_id: str):
 
 ```python
 
-@app.post("/user/data-delete")
-def delete_user_data(user_id: str):
-    """Delete all data for a user."""
-    user_id_hashed = hashlib.sha256(f"salt:{user_id}".encode()).hexdigest()
+@app.post("/user/data-delete") def delete_user_data(user_id: str): """Delete all data for a user."""
+user_id_hashed = hashlib.sha256(f"salt:{user_id}".encode()).hexdigest()
 
     # Delete from all tables
-    db.table("conversation_logs_anonymized")\
-        .delete()\
-        .eq("user_id_hashed", user_id_hashed)\
-        .execute()
+db.table("conversation_logs_anonymized")\ .delete()\ .eq("user_id_hashed", user_id_hashed)\
+.execute()
 
     # Log deletion
-    audit_log.record_deletion(user_id_hashed, datetime.now())
+audit_log.record_deletion(user_id_hashed, datetime.now())
 
 ```text
 ```
@@ -407,11 +371,8 @@ def delete_user_data(user_id: str):
 
 The system automatically generates:
 
-1. K-anonymity verification (k >= 5)
-2. Data retention audit
-3. User rights requests processed
-4. Encryption verification
-5. DPA compliance checklist
+1. K-anonymity verification (k >= 5) 2. Data retention audit 3. User rights requests processed 4.
+Encryption verification 5. DPA compliance checklist
 
 Reports saved to: `compliance_reports/[YYYY-MM-DD]_compliance_report.json`
 
@@ -525,8 +486,7 @@ python emotional_os/privacy/verify_compliance.py
 **Before Integration:**
 
 ```
-User Message → parse_input() → Response
-                     ↓
+User Message → parse_input() → Response ↓
 ```text
 ```text
 ```
@@ -535,14 +495,8 @@ User Message → parse_input() → Response
 
 ```
 
-User Message → parse_input() → Response
-                     ↓
-        encode_and_store_conversation()
-                     ↓
-        [Encode pipeline executes]
-                     ↓
-   Only anonymized data → Supabase ✓
-   Raw text discarded (never stored)
+User Message → parse_input() → Response ↓ encode_and_store_conversation() ↓ [Encode pipeline
+executes] ↓ Only anonymized data → Supabase ✓ Raw text discarded (never stored)
 
 ```
 

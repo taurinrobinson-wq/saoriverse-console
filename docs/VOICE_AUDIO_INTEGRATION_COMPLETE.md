@@ -67,25 +67,17 @@ src/emotional_os/deploy/modules/ui_components/
 ```text
 ```
 
-User sends message
-  ↓
-Response generated with glyph
-  ↓
-display_assistant_message() called
-  ↓
-IF voice_mode_enabled:
+User sends message ↓ Response generated with glyph ↓ display_assistant_message() called ↓ IF
+voice_mode_enabled:
   └─→ Get best glyph
-      ↓
-      synthesize_response_audio()
+↓ synthesize_response_audio()
         ├─ Use glyph name for prosody guidance
         ├─ Call StreamingTTSPipeline
         ├─ Apply emotional tone/speed
         └─ Return audio bytes
-      ↓
-      render_audio_playback()
+↓ render_audio_playback()
         └─ Display st.audio() widget with response audio
-  ↓
-Message displayed with audio player
+↓ Message displayed with audio player
 
 ```
 
@@ -156,19 +148,12 @@ pip install TTS
 ```python
 
 # Import audio components
-from emotional_os.deploy.modules.ui_components import (
-    render_voice_mode_toggle,
-    synthesize_response_audio,
-    render_audio_playback,
-)
+from emotional_os.deploy.modules.ui_components import ( render_voice_mode_toggle,
+synthesize_response_audio, render_audio_playback, )
 
 # Synthesize response with glyph guidance
-audio_bytes = synthesize_response_audio(
-    response_text="I hear you.",
-    glyph_name="I_HEAR_YOU",  # Influences prosody
-    voice="Warm",
-    speed=1.0
-)
+audio_bytes = synthesize_response_audio( response_text="I hear you.", glyph_name="I_HEAR_YOU",  #
+Influences prosody voice="Warm", speed=1.0 )
 
 # Display playback widget
 ```text
@@ -192,12 +177,9 @@ audio_bytes = synthesize_response_audio(
 
 _audio_pipeline = None
 
-def get_audio_pipeline():
-    global _audio_pipeline
-    if _audio_pipeline is None:
+def get_audio_pipeline(): global _audio_pipeline if _audio_pipeline is None:
         # Only loads if actually used
-        from .audio_pipeline import AudioPipeline
-        _audio_pipeline = AudioPipeline()
+from .audio_pipeline import AudioPipeline _audio_pipeline = AudioPipeline()
 
 ```text
 ```

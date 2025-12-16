@@ -19,7 +19,8 @@ You asked: **"so is this also effectively creating new glyphs as well"**
 
 ### Stage 2: Emotional Patterns Discovered ✓ COMPLETE
 
-Using Project Gutenberg data, we identified which emotional dimensions appeared together most frequently in poetry. Example frequencies:
+Using Project Gutenberg data, we identified which emotional dimensions appeared together most
+frequently in poetry. Example frequencies:
 
 - **Love + Intimacy**: 1,391 occurrences
 - **Love + Sensuality**: 1,237 occurrences
@@ -74,27 +75,20 @@ Using Project Gutenberg data, we identified which emotional dimensions appeared 
 ```text
 ```
 
-Project Gutenberg Poetry (1.1M words)
-        ↓
-Extract Emotional Signals (18+ dimensions)
-        ↓
-Learn Keywords & Patterns (136K entries)
-        ↓
-Analyze Co-occurrence Patterns
+Project Gutenberg Poetry (1.1M words) ↓ Extract Emotional Signals (18+ dimensions) ↓ Learn Keywords
+& Patterns (136K entries) ↓ Analyze Co-occurrence Patterns
         ├─ love + intimacy: 1,391 times
         ├─ love + sensuality: 1,237 times
         ├─ love + nature: 1,193 times
         └─ ... (20 significant patterns identified)
-        ↓
-Generate Glyph Definitions
+↓ Generate Glyph Definitions
         ├─ Glyph Name (e.g., "Deep Connection")
         ├─ Symbol (e.g., ♥❤)
         ├─ Core Emotions (e.g., [love, intimacy])
         ├─ Associated Keywords
         ├─ Response Cue
         └─ Narrative Hook
-        ↓
-20 NEW GLYPHS CREATED ✨
+↓ 20 NEW GLYPHS CREATED ✨
 
 ```
 
@@ -155,18 +149,10 @@ This isn't arbitrary—it's **emergent from the data itself**.
 
 ```json
 
-{
-  "id": "glyph_poetry_01",
-  "name": "Deep Connection",
-  "symbol": "♥❤",
-  "core_emotions": ["love", "intimacy"],
-  "associated_keywords": ["intimacy", "love"],
-  "combined_frequency": 1391,
-  "response_cue": "Acknowledge the love and intimacy here",
-  "narrative_hook": "A story of love through intimacy",
-  "created_from_pattern": true,
-  "source": "gutenberg_poetry"
-}
+{ "id": "glyph_poetry_01", "name": "Deep Connection", "symbol": "♥❤", "core_emotions": ["love",
+"intimacy"], "associated_keywords": ["intimacy", "love"], "combined_frequency": 1391,
+"response_cue": "Acknowledge the love and intimacy here", "narrative_hook": "A story of love through
+intimacy", "created_from_pattern": true, "source": "gutenberg_poetry" }
 
 ```
 

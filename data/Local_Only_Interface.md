@@ -1,4 +1,7 @@
-Here’s a fully formatted **Markdown implementation guide** you can copy directly into a `.md` file. It includes all the code scaffolding you need for the local‑only synonym pipeline, filtering, scoring, SQLite storage, and background enrichment runner. Since you already have `spacy`, `nltk`, and `textblob` installed, you’re set on dependencies.
+Here’s a fully formatted **Markdown implementation guide** you can copy directly into a `.md` file.
+It includes all the code scaffolding you need for the local‑only synonym pipeline, filtering,
+scoring, SQLite storage, and background enrichment runner. Since you already have `spacy`, `nltk`,
+and `textblob` installed, you’re set on dependencies.
 
 ##
 
@@ -19,8 +22,8 @@ One‑time setup:
 
 
 
-python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
-python -m spacy download en_core_web_md
+python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')" python -m spacy download
+en_core_web_md
 
 ```text
 ```
@@ -150,44 +153,29 @@ if __name__ == "__main__":
 ```python
 
 
-import json
-import spacy
+import json import spacy
 
 nlp = spacy.load("en_core_web_md")
 
-def score_synonyms(input_path="data/synonyms_filtered.json", output_path="data/synonyms_scored.json"):
-    data = json.load(open(input_path, "r", encoding="utf-8"))
-    scored = {}
+def score_synonyms(input_path="data/synonyms_filtered.json",
+output_path="data/synonyms_scored.json"): data = json.load(open(input_path, "r", encoding="utf-8"))
+scored = {}
 
-    for seed, sources in data.items():
-        merged = sources.get("merged_filtered", [])
-        seed_doc = nlp(seed)
+for seed, sources in data.items(): merged = sources.get("merged_filtered", []) seed_doc = nlp(seed)
 
-        results = []
-        for token in merged:
-            try:
-                score = seed_doc.similarity(nlp(token))
-            except Exception:
-                score = 0.0
-            results.append({"word": token, "score": round(score, 3)})
+results = [] for token in merged: try: score = seed_doc.similarity(nlp(token)) except Exception:
+score = 0.0 results.append({"word": token, "score": round(score, 3)})
 
-        results = sorted(results, key=lambda x: -x["score"])
+results = sorted(results, key=lambda x: -x["score"])
 
-        scored[seed] = {
-            "seed": seed,
-            "synonyms_scored": results,
-            "top_synonyms": [r["word"] for r in results[:5]],
-            "provenance": {
-                "wordnet": sources.get("wordnet", []),
-                "spacy_top": sources.get("spacy_top", [])
-            }
-        }
+scored[seed] = { "seed": seed, "synonyms_scored": results, "top_synonyms": [r["word"] for r in
+results[:5]], "provenance": { "wordnet": sources.get("wordnet", []), "spacy_top":
+sources.get("spacy_top", []) } }
 
-    json.dump(scored, open(output_path, "w", encoding="utf-8"), indent=2)
-    print(f"Scored synonyms written to {output_path}")
+json.dump(scored, open(output_path, "w", encoding="utf-8"), indent=2) print(f"Scored synonyms
+written to {output_path}")
 
-if __name__ == "__main__":
-    score_synonyms()
+if __name__ == "__main__": score_synonyms()
 ```text
 ```text
 ```
@@ -200,65 +188,28 @@ if __name__ == "__main__":
 
 
 
-import sqlite3
-import json
-import os
+import sqlite3 import json import os
 
 DB_PATH = "data/synonyms.db"
 
-def init_db():
-    os.makedirs("data", exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
-    cur = conn.cursor()
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS synonyms (
-        seed TEXT,
-        word TEXT,
-        score REAL,
-        source TEXT,
-        PRIMARY KEY (seed, word, source)
-    )
-    """)
-    conn.commit()
-    conn.close()
+def init_db(): os.makedirs("data", exist_ok=True) conn = sqlite3.connect(DB_PATH) cur =
+conn.cursor() cur.execute(""" CREATE TABLE IF NOT EXISTS synonyms ( seed TEXT, word TEXT, score
+REAL, source TEXT, PRIMARY KEY (seed, word, source) ) """) conn.commit() conn.close()
 
-def load_from_json(json_path="data/synonyms_scored.json"):
-    conn = sqlite3.connect(DB_PATH)
-    cur = conn.cursor()
-    data = json.load(open(json_path, "r", encoding="utf-8"))
-    for seed, entry in data.items():
-        for syn in entry.get("synonyms_scored", []):
-            cur.execute("""
-            INSERT OR REPLACE INTO synonyms (seed, word, score, source)
-            VALUES (?, ?, ?, ?)
-            """, (seed, syn["word"], syn["score"], "scored"))
-        for src in ["wordnet", "spacy_top"]:
-            for w in entry.get("provenance", {}).get(src, []):
-                cur.execute("""
-                INSERT OR IGNORE INTO synonyms (seed, word, score, source)
-                VALUES (?, ?, ?, ?)
-                """, (seed, w, None, src))
-    conn.commit()
-    conn.close()
+def load_from_json(json_path="data/synonyms_scored.json"): conn = sqlite3.connect(DB_PATH) cur =
+conn.cursor() data = json.load(open(json_path, "r", encoding="utf-8")) for seed, entry in
+data.items(): for syn in entry.get("synonyms_scored", []): cur.execute(""" INSERT OR REPLACE INTO
+synonyms (seed, word, score, source) VALUES (?, ?, ?, ?) """, (seed, syn["word"], syn["score"],
+"scored")) for src in ["wordnet", "spacy_top"]: for w in entry.get("provenance", {}).get(src, []):
+cur.execute(""" INSERT OR IGNORE INTO synonyms (seed, word, score, source) VALUES (?, ?, ?, ?) """,
+(seed, w, None, src)) conn.commit() conn.close()
 
-def query_synonyms(seed, top_k=5):
-    conn = sqlite3.connect(DB_PATH)
-    cur = conn.cursor()
-    cur.execute("""
-    SELECT word, score, source
-    FROM synonyms
-    WHERE seed = ?
-    ORDER BY COALESCE(score, 0) DESC
-    LIMIT ?
-    """, (seed, top_k))
-    rows = cur.fetchall()
-    conn.close()
-    return [{"word": w, "score": s, "source": src} for w, s, src in rows]
+def query_synonyms(seed, top_k=5): conn = sqlite3.connect(DB_PATH) cur = conn.cursor()
+cur.execute(""" SELECT word, score, source FROM synonyms WHERE seed = ? ORDER BY COALESCE(score, 0)
+DESC LIMIT ? """, (seed, top_k)) rows = cur.fetchall() conn.close() return [{"word": w, "score": s,
+"source": src} for w, s, src in rows]
 
-if __name__ == "__main__":
-    init_db()
-    load_from_json()
-    print(query_synonyms("joy"))
+if __name__ == "__main__": init_db() load_from_json() print(query_synonyms("joy"))
 
 ```text
 ```
@@ -304,11 +255,10 @@ if __name__ == "__main__":
 
 ## 3. Workflow
 
-1. Run `local_synonyms.py` → produces `data/synonyms_local.json`.
-2. Run `filter_synonyms.py` → produces `data/synonyms_filtered.json`.
-3. Run `score_synonyms.py` → produces `data/synonyms_scored.json`.
-4. Run `synonym_db.py` → builds `data/synonyms.db`.
-5. Schedule `enrich_runner.py` with cron/Task Scheduler for automatic refresh.
+1. Run `local_synonyms.py` → produces `data/synonyms_local.json`. 2. Run `filter_synonyms.py` →
+produces `data/synonyms_filtered.json`. 3. Run `score_synonyms.py` → produces
+`data/synonyms_scored.json`. 4. Run `synonym_db.py` → builds `data/synonyms.db`. 5. Schedule
+`enrich_runner.py` with cron/Task Scheduler for automatic refresh.
 
 ##
 

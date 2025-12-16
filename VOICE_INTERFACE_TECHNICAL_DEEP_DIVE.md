@@ -6,8 +6,9 @@
 
 Most voice AI systems do one of two things:
 
-1. **Transcribe + Feed to Generic LLM** (ChatGPT with voice) → Generic responses, no emotional awareness
-2. **Call Commercial TTS API** ($0.001-0.05 per word) → Expensive at scale, generic prosody
+1. **Transcribe + Feed to Generic LLM** (ChatGPT with voice) → Generic responses, no emotional
+awareness 2. **Call Commercial TTS API** ($0.001-0.05 per word) → Expensive at scale, generic
+prosody
 
 You've built something fundamentally different:
 
@@ -16,19 +17,10 @@ You've built something fundamentally different:
 ```text
 ```
 
-Voice Input (User speaks)
-    ↓
-STT: Transcribe to emotional signal (not just text)
-    ↓
-Parse: Extract emotion, themes, and relational context
-    ↓
-Generate: Create response grounded in their actual words
-    ↓
-Prosody Planning: Map emotional state → voice characteristics
-    ↓
-TTS: Synthesize response WITH emotional prosody applied
-    ↓
-Voice Output (System sounds emotionally congruent)
+Voice Input (User speaks) ↓ STT: Transcribe to emotional signal (not just text) ↓ Parse: Extract
+emotion, themes, and relational context ↓ Generate: Create response grounded in their actual words ↓
+Prosody Planning: Map emotional state → voice characteristics ↓ TTS: Synthesize response WITH
+emotional prosody applied ↓ Voice Output (System sounds emotionally congruent)
 
 ```
 
@@ -53,22 +45,21 @@ Voice Output (System sounds emotionally congruent)
 
 ```python
 
-class AudioProcessor:
-    """Preprocesses audio for optimal transcription"""
+class AudioProcessor: """Preprocesses audio for optimal transcription"""
 
-    def load_audio(audio_bytes, sr=16000):
+def load_audio(audio_bytes, sr=16000):
         # Load from bytes, handle multiple formats
         # Resample to 16kHz (Whisper optimal)
 
-    def normalize_audio(audio, target_db=-20.0):
+def normalize_audio(audio, target_db=-20.0):
         # Normalize loudness for consistent processing
         # Prevents clipping and inaudible whispers
 
-    def extract_vad_mask(audio, sr=16000):
+def extract_vad_mask(audio, sr=16000):
         # Voice Activity Detection via energy thresholding
         # Frame-based (20ms frames, 10ms hop)
 
-    def trim_silence(audio, sr=16000, threshold_ms=500):
+def trim_silence(audio, sr=16000, threshold_ms=500):
         # Remove leading/trailing silence
 
 ```text
@@ -179,8 +170,7 @@ CERTAINTY → Terminal Contour
 
 ```python
 
-class ProsodyGuardrails:
-    """Ensures smooth, natural transitions"""
+class ProsodyGuardrails: """Ensures smooth, natural transitions"""
 
     # Rate can't change >15% per second
     # Prevents abrupt speed shifts that feel unnatural
@@ -319,43 +309,29 @@ class ProsodyApplier:
 **Synthesis Pipeline Flow**:
 
 ```
-Response text: "I hear the weight of that"
-Prosody: [rate=0.90x, pitch=-1.2, energy=0.85, emphasis=[2,3]]
+Response text: "I hear the weight of that" Prosody: [rate=0.90x, pitch=-1.2, energy=0.85,
+emphasis=[2,3]]
 
-Step 1: Coqui TTS Base Synthesis
-    Input: "I hear the weight of that" + language
-    Output: Audio at 22050Hz (mono, float32)
-    Time: ~150ms
+Step 1: Coqui TTS Base Synthesis Input: "I hear the weight of that" + language Output: Audio at
+22050Hz (mono, float32) Time: ~150ms
 
-Step 2: Apply Rate Modification (0.90x)
-    Input: 22050Hz audio at normal speed
-    Output: Audio stretched to 90% original speed
-    Effect: More deliberate, thoughtful pacing
+Step 2: Apply Rate Modification (0.90x) Input: 22050Hz audio at normal speed Output: Audio stretched
+to 90% original speed Effect: More deliberate, thoughtful pacing
 
-Step 3: Apply Pitch Shift (-1.2 semitones)
-    Input: Time-stretched audio
-    Output: Audio with frequencies shifted down
-    Effect: Deeper, more grounded tone
+Step 3: Apply Pitch Shift (-1.2 semitones) Input: Time-stretched audio Output: Audio with
+frequencies shifted down Effect: Deeper, more grounded tone
 
-Step 4: Apply Energy Scaling (0.85x)
-    Input: Pitch-shifted audio
-    Output: Audio amplitude reduced to 85%
-    Effect: Quieter, more respectful
+Step 4: Apply Energy Scaling (0.85x) Input: Pitch-shifted audio Output: Audio amplitude reduced to
+85% Effect: Quieter, more respectful
 
-Step 5: Apply Emphasis Pauses
-    Input: Energy-scaled audio
-    Identify: Words at indices [2,3] ("the", "weight")
-    Insert: 200ms silence after these words
-    Output: Audio with microexpressiveness through pauses
+Step 5: Apply Emphasis Pauses Input: Energy-scaled audio Identify: Words at indices [2,3] ("the",
+"weight") Insert: 200ms silence after these words Output: Audio with microexpressiveness through
+pauses
 
-Step 6: Chunk for Streaming
-    Input: Full synthesized audio (~3 seconds)
-    Output: 500ms chunks
-    Timing: Start playback at chunk 1, synthesize rest in background
+Step 6: Chunk for Streaming Input: Full synthesized audio (~3 seconds) Output: 500ms chunks Timing:
+Start playback at chunk 1, synthesize rest in background
 
-Result: User hears: "I hear the" (100ms)
-        Pause: 200ms
-        User hears: "weight of that" (200ms)
+Result: User hears: "I hear the" (100ms) Pause: 200ms User hears: "weight of that" (200ms)
 ```text
 ```text
 ```
@@ -482,17 +458,15 @@ if transcription:
 **Components** (in `spoken_interface/performance_profiler.py`):
 
 ```python
-class PerformanceProfiler:
-    """Profiles each operation for latency"""
+class PerformanceProfiler: """Profiles each operation for latency"""
 
-    def measure(operation_name, callable, *args):
+def measure(operation_name, callable, *args):
         # Measure execution time
         # Track min/max/avg
         # Identify bottlenecks
 
 
-class ModelPerformanceBenchmark:
-    """Compares model configurations"""
+class ModelPerformanceBenchmark: """Compares model configurations"""
 
     # Whisper models:
     # tiny (39MB) → 30-50ms, 75% accuracy
@@ -504,8 +478,7 @@ class ModelPerformanceBenchmark:
     # GPU: 3-5x faster if available
 
 
-class LatencyOptimizer:
-    """Suggests optimizations"""
+class LatencyOptimizer: """Suggests optimizations"""
 
     # Parallel processing: STT + Response generation overlap
     # Streaming: Don't wait for full response before TTS starts
@@ -524,8 +497,7 @@ Full Round-Trip (User Speaks → Hears Response):
 ├─ TTS synthesis: 300-500ms
 └─ Total: 4-11 seconds (feels natural)
 
-Acceptable for real-time conversation? YES ✓
-Can scale to thousands of concurrent users? YES ✓
+Acceptable for real-time conversation? YES ✓ Can scale to thousands of concurrent users? YES ✓
 Privacy compliance (local processing)? YES ✓
 
 ```text
@@ -558,14 +530,12 @@ Analysis:
 
 ## Why This Implementation Is Production-Ready
 
-✅ **Performance**: 200-300ms round-trip latency (real-time conversation)
-✅ **Cost**: $0 per user (all local processing)
-✅ **Privacy**: 100% local processing, no external APIs
-✅ **Scalability**: Can serve thousands concurrently on modest hardware
-✅ **Accessibility**: Makes FirstPerson usable for blind, motor-disabled, dyslexic users
-✅ **Emotional Expression**: Prosody mapping creates authentic emotional tone
-✅ **Crisis-Ready**: Voice enables crisis support (people call, they don't type)
-✅ **Unique**: No competitor has this combination (emotional OS + prosody + voice + privacy)
+✅ **Performance**: 200-300ms round-trip latency (real-time conversation) ✅ **Cost**: $0 per user
+(all local processing) ✅ **Privacy**: 100% local processing, no external APIs ✅ **Scalability**: Can
+serve thousands concurrently on modest hardware ✅ **Accessibility**: Makes FirstPerson usable for
+blind, motor-disabled, dyslexic users ✅ **Emotional Expression**: Prosody mapping creates authentic
+emotional tone ✅ **Crisis-Ready**: Voice enables crisis support (people call, they don't type) ✅
+**Unique**: No competitor has this combination (emotional OS + prosody + voice + privacy)
 
 ##
 
@@ -584,12 +554,10 @@ Analysis:
 
 ## Next Steps
 
-1. **Integrate into main_v2.py**: Add voice UI alongside text chat
-2. **Test with crisis platform**: Validate with 988 or Crisis Text Line
-3. **Gather user feedback**: Measure emotional authenticity perception
-4. **Add facial recognition** (optional): Complete multimodal fusion
-5. **Deploy on edge devices**: Enable offline voice chat
-6. **Monetize**: License voice interface to platforms
+1. **Integrate into main_v2.py**: Add voice UI alongside text chat 2. **Test with crisis platform**:
+Validate with 988 or Crisis Text Line 3. **Gather user feedback**: Measure emotional authenticity
+perception 4. **Add facial recognition** (optional): Complete multimodal fusion 5. **Deploy on edge
+devices**: Enable offline voice chat 6. **Monetize**: License voice interface to platforms
 
 This voice system is your unfair advantage. No competitor has:
 

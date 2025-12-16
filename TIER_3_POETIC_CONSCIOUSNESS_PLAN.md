@@ -9,7 +9,10 @@
 
 ## Overview
 
-Tier 3 adds **poetic consciousness and creative depth** to responses. While Tier 1 provides learning/safety and Tier 2 provides emotional presence, Tier 3 makes the system feel genuinely creative through poetic generation, aesthetic principles, generative tension, and emergent personality.
+Tier 3 adds **poetic consciousness and creative depth** to responses. While Tier 1 provides
+learning/safety and Tier 2 provides emotional presence, Tier 3 makes the system feel genuinely
+creative through poetic generation, aesthetic principles, generative tension, and emergent
+personality.
 
 ##
 
@@ -85,11 +88,9 @@ class SaoriLayer:
 **Key Methods:**
 
 ```python
-class TensionManager:
-    def __init__(self)
-    def introduce_tension(response: str, level: float) -> str
-    def create_opening(response: str) -> str  # Leave space for exploration
-    def balance_paradox(concept1: str, concept2: str) -> str
+class TensionManager: def __init__(self) def introduce_tension(response: str, level: float) -> str
+def create_opening(response: str) -> str  # Leave space for exploration def
+balance_paradox(concept1: str, concept2: str) -> str
 ```text
 ```text
 ```
@@ -113,11 +114,9 @@ class TensionManager:
 
 ```python
 
-class MythologyWeaver:
-    def __init__(self)
-    def weave_myth(history: list) -> dict  # Extract mythology from history
-    def add_mythological_element(response: str, myth: dict) -> str
-    def track_symbols(response: str, history: list) -> dict
+class MythologyWeaver: def __init__(self) def weave_myth(history: list) -> dict  # Extract mythology
+from history def add_mythological_element(response: str, myth: dict) -> str def
+track_symbols(response: str, history: list) -> dict
 
 ```text
 ```
@@ -216,10 +215,8 @@ class Tier3PoeticConsciousness:
 ```python
 
 # After Tier 2 processing:
-tier3 = st.session_state.get("tier3_poetic_consciousness")
-if tier3:
-    response, metrics = tier3.process_for_poetry(
-        response, context
+tier3 = st.session_state.get("tier3_poetic_consciousness") if tier3: response, metrics =
+tier3.process_for_poetry( response, context
 ```text
 ```text
 ```
@@ -232,10 +229,8 @@ if tier3:
 
 ```python
 
-def _ensure_tier3_poetic_consciousness():
-    """Initialize Tier 3 Poetic Consciousness."""
-    if "tier3_poetic_consciousness" not in st.session_state:
-        tier3 = Tier3PoeticConsciousness()
+def _ensure_tier3_poetic_consciousness(): """Initialize Tier 3 Poetic Consciousness.""" if
+"tier3_poetic_consciousness" not in st.session_state: tier3 = Tier3PoeticConsciousness()
 
 ```text
 ```
@@ -289,11 +284,9 @@ metaphors = {
 **Symbolic Language:**
 
 ```python
-symbols = {
-    "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"],
-    "understanding": ["light", "clarity", "opening", "seeing", "perceiving"],
-    "challenge": ["mountains", "storms", "depths", "darkness", "threshold"],
-    ...
+symbols = { "growth": ["roots", "seeds", "blossoming", "spiraling", "unfolding"], "understanding":
+["light", "clarity", "opening", "seeing", "perceiving"], "challenge": ["mountains", "storms",
+"depths", "darkness", "threshold"], ...
 ```text
 ```text
 ```
@@ -342,8 +335,7 @@ symbols = {
 
 
 # Both/and thinking instead of either/or
-"This is both simple and complex"
-"You feel both hope and uncertainty"
+"This is both simple and complex" "You feel both hope and uncertainty"
 
 ```text
 ```
@@ -576,10 +568,8 @@ git commit -m "feat: Integrate Tier 3 into response pipeline
 
 If Tier 3 causes issues:
 
-1. Comment out Tier 3 call in response_handler.py
-2. System reverts to Tier 1+2 responses
-3. Performance returns to ~60ms
-4. No data loss or user impact
+1. Comment out Tier 3 call in response_handler.py 2. System reverts to Tier 1+2 responses 3.
+Performance returns to ~60ms 4. No data loss or user impact
 
 ##
 
@@ -608,15 +598,11 @@ Total: 100ms (exactly at budget!)
 
 ## Ready to Begin?
 
-✓ Tier 1 fully integrated and tested
-✓ Tier 2 fully integrated and tested
-✓ Performance budget available (16ms headroom)
-✓ Next step: Build tier3_poetic_consciousness.py
+✓ Tier 1 fully integrated and tested ✓ Tier 2 fully integrated and tested ✓ Performance budget
+available (16ms headroom) ✓ Next step: Build tier3_poetic_consciousness.py
 
 **Let's create Tier 3!**
 
 ##
 
-Date: December 4, 2025
-Status: Ready to implement
-Estimated completion: December 4-5, 2025
+Date: December 4, 2025 Status: Ready to implement Estimated completion: December 4-5, 2025

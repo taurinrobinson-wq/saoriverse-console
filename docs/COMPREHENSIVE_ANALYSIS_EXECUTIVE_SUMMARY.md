@@ -77,11 +77,9 @@ Complete privacy infrastructure:
 
 **Encoding Pipeline (5 stages):**
 
-1. Input capture (raw text not stored)
-2. Signal detection (extract emotional signals)
-3. Gate encoding (map to gate IDs)
-4. Glyph mapping (abstract references)
-5. Storage (only encoded data persisted)
+1. Input capture (raw text not stored) 2. Signal detection (extract emotional signals) 3. Gate
+encoding (map to gate IDs) 4. Glyph mapping (abstract references) 5. Storage (only encoded data
+persisted)
 
 **Long-Term Memory:**
 
@@ -163,15 +161,8 @@ Complete safety and crisis infrastructure:
 ```text
 ```
 
-User Input
-    ↓
-Basic signal parser (emotional_os.core) ← ONLY THIS RUNS
-    ↓
-Glyph lookup
-    ↓
-Compose response ← TEMPLATE-BASED
-    ↓
-Response
+User Input ↓ Basic signal parser (emotional_os.core) ← ONLY THIS RUNS ↓ Glyph lookup ↓ Compose
+response ← TEMPLATE-BASED ↓ Response
 
 ```
 
@@ -183,41 +174,33 @@ Response
 ```text
 ```
 
-User Input
-    ↓
-Safety Check (Sanctuary)
+User Input ↓ Safety Check (Sanctuary)
 ├─ Detect sensitive topics
 ├─ Classify risk
 └─ Offer consent if needed
-    ↓
-Lexicon Analysis (1000+ words)
+↓ Lexicon Analysis (1000+ words)
 ├─ Find emotional words
 ├─ Extract signals
 └─ Get gate activations
-    ↓
-Archetype Matching
+↓ Archetype Matching
 ├─ Find best learned pattern
 └─ Get principles + bridges
-    ↓
-Response Generation (FRESH, not template)
+↓ Response Generation (FRESH, not template)
 ├─ Apply archetype principles
 ├─ Connect prior context via bridges
 ├─ Vary response type (question/reflection/affirm)
 └─ Generate original response
-    ↓
-Privacy Encoding (5 stages)
+↓ Privacy Encoding (5 stages)
 ├─ Raw text discarded
 ├─ Signals → gate IDs → glyph refs
 └─ Encrypt for storage
-    ↓
-Learning & Growth
+↓ Learning & Growth
 ├─ Log exchange
 ├─ Extract new patterns
 ├─ Update archetype library
 ├─ Update lexicon
 └─ Create daily summary
-    ↓
-Response to User
+↓ Response to User
 
 ```
 

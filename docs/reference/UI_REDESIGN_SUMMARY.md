@@ -39,11 +39,10 @@
 
 ### How It Learns
 
-1. **Pattern Extraction**: Regex-based emotional phrase detection
-2. **Word Association**: Maps user input to effective responses
-3. **Theme Identification**: Categorizes conversations by emotional content
-4. **Signal Mapping**: Automatically assigns emotional signals to new words
-5. **Effectiveness Scoring**: Evaluates response quality based on:
+1. **Pattern Extraction**: Regex-based emotional phrase detection 2. **Word Association**: Maps user
+input to effective responses 3. **Theme Identification**: Categorizes conversations by emotional
+content 4. **Signal Mapping**: Automatically assigns emotional signals to new words 5.
+**Effectiveness Scoring**: Evaluates response quality based on:
    - Length and thoughtfulness
    - Presence of questions (encourages exploration)
    - Empathetic language

@@ -2,7 +2,8 @@
 
 ## What Was Done
 
-Your project is now organized with a clean, professional structure that prevents clutter and keeps your git history sane.
+Your project is now organized with a clean, professional structure that prevents clutter and keeps
+your git history sane.
 
 ### Folders Created
 
@@ -86,11 +87,9 @@ saoriverse-console/
 ```
 git log --oneline | head -20
 
-Commit 1: Implementation phase 1
-Commit 2: ANALYSIS_COMPLETE.md (auto-generated)
-Commit 3: PHASE_1_SUMMARY.md (auto-generated)
-Commit 4: BUG_FIX_REPORT.md (auto-generated)
-Commit 5: Fix actual issue
+Commit 1: Implementation phase 1 Commit 2: ANALYSIS_COMPLETE.md (auto-generated) Commit 3:
+PHASE_1_SUMMARY.md (auto-generated) Commit 4: BUG_FIX_REPORT.md (auto-generated) Commit 5: Fix
+actual issue
 ```text
 ```text
 ```
@@ -101,10 +100,8 @@ Commit 5: Fix actual issue
 
 git log --oneline | head -20
 
-Commit 1: Implementation phase 1
-Commit 2: Fix: Player choice processing
-Commit 3: Add: Glyph collection UI
-Commit 4: Chore: Organize project structure
+Commit 1: Implementation phase 1 Commit 2: Fix: Player choice processing Commit 3: Add: Glyph
+collection UI Commit 4: Chore: Organize project structure
 
 ```text
 ```
@@ -150,14 +147,12 @@ Commit 4: Chore: Organize project structure
 
 ### When Starting a Coding Session
 
-1. Read the root **README.md** (2 minutes)
-2. Use a quick command: `./scripts/RUN_WEB_DEV.sh`
-3. Find docs via **docs/PROJECT_STRUCTURE.md**
+1. Read the root **README.md** (2 minutes) 2. Use a quick command: `./scripts/RUN_WEB_DEV.sh` 3.
+Find docs via **docs/PROJECT_STRUCTURE.md**
 
 ### When AI Creates Documentation
 
-1. AI outputs go to **scratch/** by default
-2. You review and decide:
+1. AI outputs go to **scratch/** by default 2. You review and decide:
    - **Important?** → Move to `docs/`
    - **Temporary?** → Leave in `scratch/`
    - **Redundant?** → Delete it
@@ -165,10 +160,8 @@ Commit 4: Chore: Organize project structure
 
 ### When Adding Code
 
-1. Put source code in **src/** or appropriate subfolder
-2. Create tests in **tests/**
-3. Document important stuff in **docs/** only
-4. Keep root clean
+1. Put source code in **src/** or appropriate subfolder 2. Create tests in **tests/** 3. Document
+important stuff in **docs/** only 4. Keep root clean
 
 ##
 
@@ -203,8 +196,7 @@ ls docs/PROJECT_STRUCTURE.md
 
 ## Next Steps
 
-1. **Continue development** using the quick commands above
-2. **Read the guides**:
+1. **Continue development** using the quick commands above 2. **Read the guides**:
    - `docs/PROJECT_STRUCTURE.md` — Full structure explanation
    - `scratch/FOLDER_ORGANIZATION_GUIDE.md` — How to organize new files
 3. **Keep it clean**:
@@ -216,9 +208,9 @@ ls docs/PROJECT_STRUCTURE.md
 
 ## Key Takeaway
 
-🎯 **Treat `docs/` like a museum** (curated, intentional, permanent)
-🎯 **Treat `scratch/` like a junk drawer** (temporary, disposable, ignored by git)
-🎯 **Keep root minimal** (only config and entry points)
+🎯 **Treat `docs/` like a museum** (curated, intentional, permanent) 🎯 **Treat `scratch/` like a junk
+drawer** (temporary, disposable, ignored by git) 🎯 **Keep root minimal** (only config and entry
+points)
 
 Result: **Clean code, sane history, happy collaborators.** ✨
 

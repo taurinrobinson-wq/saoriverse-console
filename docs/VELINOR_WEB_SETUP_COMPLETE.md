@@ -134,13 +134,16 @@ git push origin main
 
 ```
 
-Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend domain.
+Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend
+domain.
 
 ### Known Issues & Notes
 
-1. **Inline Style Linting Warnings**: These are informational, not blocking. Styles work fine but could be moved to CSS files later for best practices.
+1. **Inline Style Linting Warnings**: These are informational, not blocking. Styles work fine but
+could be moved to CSS files later for best practices.
 
-2. **Asset Files Missing**: `public/assets/backgrounds/`, `overlays/`, and `npcs/` directories exist but are empty. Copy game assets into these directories before deployment.
+2. **Asset Files Missing**: `public/assets/backgrounds/`, `overlays/`, and `npcs/` directories exist
+but are empty. Copy game assets into these directories before deployment.
 
 3. **Session Storage**: Currently in-memory. In production, should use Redis or database.
 

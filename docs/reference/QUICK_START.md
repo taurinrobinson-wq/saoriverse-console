@@ -6,7 +6,8 @@
 
 ## The Solution Implemented
 
-Your system **now automatically creates new glyphs during every user-AI conversation** when running in hybrid mode.
+Your system **now automatically creates new glyphs during every user-AI conversation** when running
+in hybrid mode.
 
 ##
 
@@ -17,15 +18,8 @@ Your system **now automatically creates new glyphs during every user-AI conversa
 ```text
 ```
 
-User: "I feel vulnerable with you"
-  ↓
-Parse signals (8 hardcoded)
-  ↓
-Match to existing glyphs
-  ↓
-Return response
-  ↓
-[Nothing learned, no new glyphs]
+User: "I feel vulnerable with you" ↓ Parse signals (8 hardcoded) ↓ Match to existing glyphs ↓ Return
+response ↓ [Nothing learned, no new glyphs]
 
 ```
 
@@ -36,10 +30,8 @@ Return response
 ```text
 ```
 
-User: "I feel vulnerable with you"
-AI: "That vulnerability is your greatest strength"
-  ↓
-[HYBRID PROCESSOR ACTIVATED]
+User: "I feel vulnerable with you" AI: "That vulnerability is your greatest strength" ↓ [HYBRID
+PROCESSOR ACTIVATED]
   ├─ Signal Extraction (adaptive - discovers new dimensions)
   │  └─ Finds: love, vulnerability, intimacy, trust, courage...
   │
@@ -59,8 +51,7 @@ AI: "That vulnerability is your greatest strength"
      ├─ If yes: Creates new glyphs
      ├─ If no: Continues learning
      └─ Shows notification: "✨ 1 new glyph discovered!"
-  ↓
-[NEW GLYPHS AVAILABLE]
+↓ [NEW GLYPHS AVAILABLE]
   ├─ Display in sidebar: "✨ Glyphs Discovered This Session"
   ├─ Available for next dialogue turn
   ├─ Saved persistently to learning/conversation_glyphs.json
@@ -77,8 +68,7 @@ AI: "That vulnerability is your greatest strength"
 ### **1. When User Sends Message** (`main_v2.py`)
 
 ```python
-User clicks send in Streamlit chat
-  ↓
+User clicks send in Streamlit chat ↓
 ```text
 ```text
 ```
@@ -89,24 +79,18 @@ User clicks send in Streamlit chat
 
 if processing_mode == "hybrid":
     # NEW: Initialize processor once per session
-    if 'hybrid_processor' not in st.session_state:
-        from hybrid_processor_with_evolution import create_integrated_processor
-        processor = create_integrated_processor(learner, extractor, user_id)
-        st.session_state['hybrid_processor'] = processor
+if 'hybrid_processor' not in st.session_state: from hybrid_processor_with_evolution import
+create_integrated_processor processor = create_integrated_processor(learner, extractor, user_id)
+st.session_state['hybrid_processor'] = processor
 
     # NEW: Send exchange through pipeline
-    evolution_result = processor.process_user_message(
-        user_message=user_input,
-        ai_response=response,
-        user_id=user_id,
-    )
+evolution_result = processor.process_user_message( user_message=user_input, ai_response=response,
+user_id=user_id, )
 
     # NEW: Display new glyphs if any
-    new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
-    if new_glyphs:
-        st.session_state['new_glyphs_this_session'].extend(new_glyphs)
-        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
-        for glyph in new_glyphs:
+new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated'] if
+new_glyphs: st.session_state['new_glyphs_this_session'].extend(new_glyphs) st.success(f"✨
+{len(new_glyphs)} new glyph(s) discovered!") for glyph in new_glyphs:
 
 ```text
 ```
@@ -169,15 +153,14 @@ learning/
 ### **1. Core Engine: `dynamic_glyph_evolution.py`**
 
 ```python
-class DynamicGlyphEvolution:
-    """Manages glyph creation during conversations"""
+class DynamicGlyphEvolution: """Manages glyph creation during conversations"""
 
-    def process_dialogue_exchange(user_input, ai_response, signals):
+def process_dialogue_exchange(user_input, ai_response, signals):
         # 1. Detect patterns in exchange
-        patterns = self._detect_patterns_in_exchange(...)
+patterns = self._detect_patterns_in_exchange(...)
 
         # 2. Generate glyphs from patterns
-        new_glyphs = self._generate_glyphs_from_patterns(patterns)
+new_glyphs = self._generate_glyphs_from_patterns(patterns)
 
         # 3. Save and return
 ```text
@@ -197,22 +180,18 @@ class DynamicGlyphEvolution:
 
 ```python
 
-class HybridProcessorWithEvolution:
-    """Orchestrates the complete pipeline"""
+class HybridProcessorWithEvolution: """Orchestrates the complete pipeline"""
 
-    def process_user_message(user_msg, ai_response):
+def process_user_message(user_msg, ai_response):
         # 1. Extract signals (adaptive)
-        signals = self._extract_signals(...)
+signals = self._extract_signals(...)
 
         # 2. Learn from exchange
-        learning_result = self.evolution.process_dialogue_exchange(...)
+learning_result = self.evolution.process_dialogue_exchange(...)
 
         # 3. Return complete result
-        return {
-            "learning_result": ...,
-            "new_glyphs_generated": ...,
-            "lexicon_updates": ...,
-            "pattern_analysis": ...,
+return { "learning_result": ..., "new_glyphs_generated": ..., "lexicon_updates": ...,
+"pattern_analysis": ...,
 
 ```text
 ```
@@ -266,10 +245,8 @@ evolution = DynamicGlyphEvolution(
 In `dynamic_glyph_evolution.py`, `_create_pattern_name()`:
 
 ```python
-name_map = {
-    ("love", "intimacy"): "Intimate Connection",
-    ("love", "vulnerability"): "Open-Hearted Love",
-    ("joy", "celebration"): "Pure Celebration",
+name_map = { ("love", "intimacy"): "Intimate Connection", ("love", "vulnerability"): "Open-Hearted
+Love", ("joy", "celebration"): "Pure Celebration",
     # Add your own
 ```text
 ```text
@@ -281,10 +258,7 @@ In `dynamic_glyph_evolution.py`, `__init__()`:
 
 ```python
 
-self.emotion_symbols = {
-    "love": "♥",
-    "intimacy": "❤",
-    "vulnerability": "🌱",
+self.emotion_symbols = { "love": "♥", "intimacy": "❤", "vulnerability": "🌱",
     # Customize
 
 ```text
@@ -317,12 +291,9 @@ glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 
 ### **In Streamlit**
 
-1. `streamlit run main_v2.py`
-2. Login or create account
-3. Change processing mode to **"hybrid"**
-4. Have several meaningful conversations with emotional content
-5. Watch the sidebar "✨ Glyphs Discovered This Session" populate
-6. Click "📥 Export Discovered Glyphs" to save
+1. `streamlit run main_v2.py` 2. Login or create account 3. Change processing mode to **"hybrid"**
+4. Have several meaningful conversations with emotional content 5. Watch the sidebar "✨ Glyphs
+Discovered This Session" populate 6. Click "📥 Export Discovered Glyphs" to save
 
 ##
 
@@ -343,11 +314,9 @@ User: "I feel vulnerable"
 ### **Second Turn (Same Emotional Theme)**
 
 ```
-User: "Being with them makes me feel safe despite my fear"
-→ Adaptive extraction: ["vulnerability", "safety", "fear", "love"]
-→ Pattern: (vulnerability + safety) = 2 co-occurrences
-→ Frequency: 2 < 300 threshold
-→ No glyph created yet
+User: "Being with them makes me feel safe despite my fear" → Adaptive extraction: ["vulnerability",
+"safety", "fear", "love"] → Pattern: (vulnerability + safety) = 2 co-occurrences → Frequency: 2 <
+300 threshold → No glyph created yet
 ```text
 ```text
 ```
@@ -356,14 +325,11 @@ User: "Being with them makes me feel safe despite my fear"
 
 ```
 
-User: "This safe place with them is where I'm most myself"
-→ Adaptive extraction: ["safety", "authenticity", "love", "vulnerability"]
-→ Pattern: (vulnerability + safety) now = 150 co-occurrences
-→ Total across all turns: 300+
-→ ✨ GLYPH CREATED: "Safe Haven"
-→ Symbol: 🌱✨
-→ Response: "You've found the sacred space where vulnerability becomes strength"
-→ Saved to: learning/conversation_glyphs.json
+User: "This safe place with them is where I'm most myself" → Adaptive extraction: ["safety",
+"authenticity", "love", "vulnerability"] → Pattern: (vulnerability + safety) now = 150
+co-occurrences → Total across all turns: 300+ → ✨ GLYPH CREATED: "Safe Haven" → Symbol: 🌱✨ →
+Response: "You've found the sacred space where vulnerability becomes strength" → Saved to:
+learning/conversation_glyphs.json
 
 ```text
 ```

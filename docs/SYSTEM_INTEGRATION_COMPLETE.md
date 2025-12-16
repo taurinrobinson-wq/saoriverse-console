@@ -48,16 +48,15 @@ Your system now has **three distinct layers** working together:
 │                       app.py (Entry)                         │
 └──────────────────────┬──────────────────────────────────────┘
                        │
-                       ▼
-        ┌──────────────────────────────┐
+▼ ┌──────────────────────────────┐
         │   ui_refactored.py           │
         │   (Main orchestration)       │
         └───────────┬──────────────────┘
                     │
-        ┌───────────┴─────────────────────────────────────┐
+┌───────────┴─────────────────────────────────────┐
         │                                                  │
-        ▼                                                  ▼
-┌──────────────────────┐                    ┌─────────────────────────┐
+▼                                                  ▼ ┌──────────────────────┐
+┌─────────────────────────┐
 │  session_manager.py  │                    │  chat_display.py        │
 │                      │                    │  response_handler.py    │
 │ - Init FirstPerson   │                    │  sidebar_ui.py          │
@@ -68,10 +67,10 @@ Your system now has **three distinct layers** working together:
         │                                              │
         └──────────────────┬──────────────────────────┘
                            │
-        ┌──────────────────┴──────────────────┐
+┌──────────────────┴──────────────────┐
         │                                     │
-        ▼                                     ▼
-┌──────────────────────────────┐   ┌────────────────────────┐
+▼                                     ▼ ┌──────────────────────────────┐
+┌────────────────────────┐
 │  core/firstperson.py         │   │ ui_components/audio/   │
 │                              │   │                        │
 │ - FirstPersonOrchestrator    │   │ - audio_pipeline.py    │
@@ -95,23 +94,19 @@ Your system now has **three distinct layers** working together:
 ```text
 ```
 
-1. USER SENDS MESSAGE
-   ↓
-2. session_manager.initialize_session_state()
+1. USER SENDS MESSAGE ↓ 2. session_manager.initialize_session_state()
    ├─ FirstPersonOrchestrator created
    ├─ AffectParser created
    ├─ ConversationMemory initialized
    └─ Voice state initialized
-   ↓
-3. response_handler.handle_response_pipeline()
+↓ 3. response_handler.handle_response_pipeline()
    ├─ Analyze text (affect, signals, themes)
    ├─ Extract best glyph match
    ├─ Call FirstPerson.generate_response_with_glyph()
    │  └─ Uses memory for context (repeated themes, trajectory)
    ├─ Get memory_context + frequency_reflection
    └─ Return fresh response (not canned)
-   ↓
-4. chat_display.display_assistant_message()
+↓ 4. chat_display.display_assistant_message()
    ├─ Show response text
    ├─ IF voice_mode_enabled:
    │  ├─ Get best glyph
@@ -121,8 +116,7 @@ Your system now has **three distinct layers** working together:
    │  │  └─ Return audio bytes
    │  └─ Display audio playback widget
    └─ Store in session state
-   ↓
-5. CONVERSATION CONTINUES
+↓ 5. CONVERSATION CONTINUES
    └─ Memory grows with each turn
       └─ Responses become more contextually aware
 

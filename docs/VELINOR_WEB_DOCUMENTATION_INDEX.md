@@ -44,10 +44,7 @@ Start here based on what you need:
 ```text
 ```
 
-Frontend (<http://localhost:3000>)
-    ↓ (HTTP)
-FastAPI Backend (<http://localhost:8000>)
-    ↓ (Python)
+Frontend (<http://localhost:3000>) ↓ (HTTP) FastAPI Backend (<http://localhost:8000>) ↓ (Python)
 Velinor Game Engine
 
 ```
@@ -82,11 +79,9 @@ That's it! You should see the splash screen.
 
 ## Why This Works Better Than Streamlit
 
-✅ **Button Overlays** - Can now position buttons on top of background images
-✅ **Z-index Control** - Full layering support
-✅ **Animations** - Smooth hover effects, transitions
-✅ **Custom Layout** - Not constrained to columns/expanders
-✅ **Performance** - Lightweight React vs heavy Streamlit
+✅ **Button Overlays** - Can now position buttons on top of background images ✅ **Z-index Control** -
+Full layering support ✅ **Animations** - Smooth hover effects, transitions ✅ **Custom Layout** - Not
+constrained to columns/expanders ✅ **Performance** - Lightweight React vs heavy Streamlit
 
 ##
 

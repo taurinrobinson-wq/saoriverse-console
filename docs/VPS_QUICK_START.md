@@ -62,9 +62,7 @@ set -e
 apt-get update && apt-get upgrade -y
 
 # Install Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-rm get-docker.sh
+curl -fsSL https://get.docker.com -o get-docker.sh sh get-docker.sh rm get-docker.sh
 
 # Install Docker Compose
 apt-get install -y docker-compose-plugin
@@ -73,15 +71,13 @@ apt-get install -y docker-compose-plugin
 apt-get install -y certbot python3-certbot-nginx
 
 # Create deployment directory
-mkdir -p /opt/velinor
-cd /opt/velinor
+mkdir -p /opt/velinor cd /opt/velinor
 
 # Clone repo (replace with your repo URL)
 git clone https://github.com/YOUR_USERNAME/saoriverse-console.git .
 
 # Build and start
-docker compose -f docker-compose.prod.yml build
-docker compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml build docker compose -f docker-compose.prod.yml up -d
 
 # Get SSL certificate
 certbot certonly --standalone \

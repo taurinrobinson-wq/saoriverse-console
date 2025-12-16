@@ -6,7 +6,9 @@
 
 ## Overview
 
-Phase 3.2 adds voice and facial expression analysis to create a truly multimodal understanding of user emotions. By combining text analysis (Phase 1-2), voice acoustics, and facial expressions, we can:
+Phase 3.2 adds voice and facial expression analysis to create a truly multimodal understanding of
+user emotions. By combining text analysis (Phase 1-2), voice acoustics, and facial expressions, we
+can:
 
 - Detect hidden emotions not expressed in text (sarcasm, suppression)
 - Identify incongruences between modalities (deception indicators)
@@ -19,7 +21,8 @@ Phase 3.2 adds voice and facial expression analysis to create a truly multimodal
 
 #### 1. Voice Affect Detector (`voice_affect_detector.py`)
 
-Analyzes acoustic features of speech to detect emotional tone using Voice Activity Detection (VAD) model.
+Analyzes acoustic features of speech to detect emotional tone using Voice Activity Detection (VAD)
+model.
 
 **Input**: `AcousticFeatures`
 
@@ -46,9 +49,8 @@ Analyzes acoustic features of speech to detect emotional tone using Voice Activi
 ```text
 ```
 
-AcousticFeatures → [Arousal, Valence, Dominance] → Primary Tone → Emotional State
-                   ↓
-                  Stress Indicator (pitch variance + pauses + energy variance)
+AcousticFeatures → [Arousal, Valence, Dominance] → Primary Tone → Emotional State ↓ Stress Indicator
+(pitch variance + pauses + energy variance)
 
 ```
 
@@ -104,11 +106,8 @@ Detects emotional expression from facial landmarks using Facial Action Coding Sy
 ```text
 ```
 
-FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification
-                 ↓
-                [Arousal, Valence, Dominance] ← AU combinations
-                 ↓
-                Authenticity (AU consistency) & Attention (eye openness)
+FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification ↓ [Arousal, Valence, Dominance] ←
+AU combinations ↓ Authenticity (AU consistency) & Attention (eye openness)
 
 ```
 
@@ -215,20 +214,16 @@ from emotional_os.core.firstperson import FacialExpressionDetector, FaceLandmark
 detector = FacialExpressionDetector()
 
 # 68-point landmarks (simplified example)
-landmarks = FaceLandmarks(
-    contour=[(i/20, 0.5) for i in range(17)],
-    right_eyebrow=[(0.3, 0.3), (0.35, 0.25), (0.4, 0.3), (0.45, 0.35), (0.5, 0.3)],
-    left_eyebrow=[(0.5, 0.3), (0.55, 0.35), (0.6, 0.3), (0.65, 0.25), (0.7, 0.3)],
-    nose=[(0.5, 0.35), (0.5, 0.45), (0.5, 0.55), (0.48, 0.6), (0.52, 0.6)],
-    right_eye=[(0.35, 0.3), (0.35, 0.2), (0.45, 0.2), (0.45, 0.3), (0.4, 0.32), (0.4, 0.22)],
-    left_eye=[(0.55, 0.3), (0.55, 0.2), (0.65, 0.2), (0.65, 0.3), (0.6, 0.32), (0.6, 0.22)],
-    mouth=[(0.4, 0.7), (0.45, 0.65), (0.5, 0.63), (0.55, 0.65), (0.6, 0.7),
-           (0.55, 0.75), (0.5, 0.76), (0.45, 0.75), (0.5, 0.73), (0.5, 0.73)],
-)
+landmarks = FaceLandmarks( contour=[(i/20, 0.5) for i in range(17)], right_eyebrow=[(0.3, 0.3),
+(0.35, 0.25), (0.4, 0.3), (0.45, 0.35), (0.5, 0.3)], left_eyebrow=[(0.5, 0.3), (0.55, 0.35), (0.6,
+0.3), (0.65, 0.25), (0.7, 0.3)], nose=[(0.5, 0.35), (0.5, 0.45), (0.5, 0.55), (0.48, 0.6), (0.52,
+0.6)], right_eye=[(0.35, 0.3), (0.35, 0.2), (0.45, 0.2), (0.45, 0.3), (0.4, 0.32), (0.4, 0.22)],
+left_eye=[(0.55, 0.3), (0.55, 0.2), (0.65, 0.2), (0.65, 0.3), (0.6, 0.32), (0.6, 0.22)],
+mouth=[(0.4, 0.7), (0.45, 0.65), (0.5, 0.63), (0.55, 0.65), (0.6, 0.7), (0.55, 0.75), (0.5, 0.76),
+(0.45, 0.75), (0.5, 0.73), (0.5, 0.73)], )
 
-analysis = detector.analyze(landmarks)
-print(f"Expression: {analysis.expression}")     # HAPPY or SURPRISED
-print(f"AU12 (smile): {analysis.action_units.intensities['AU12_lip_corner_puller']:.2f}")
+analysis = detector.analyze(landmarks) print(f"Expression: {analysis.expression}")     # HAPPY or
+SURPRISED print(f"AU12 (smile): {analysis.action_units.intensities['AU12_lip_corner_puller']:.2f}")
 print(f"AU6 (cheek): {analysis.action_units.intensities['AU6_cheek_raiser']:.2f}")
 ```text
 ```text
@@ -243,26 +238,19 @@ from emotional_os.core.firstperson import MultimodalFusionEngine
 engine = MultimodalFusionEngine()
 
 # Combine all three modalities
-analysis = engine.fuse(
-    text_tone="excited",
-    voice_analysis=voice_result,
-    facial_analysis=facial_result,
-)
+analysis = engine.fuse( text_tone="excited", voice_analysis=voice_result,
+facial_analysis=facial_result, )
 
-print(f"Primary emotion: {analysis.primary_emotion}")
-print(f"Congruence: {analysis.congruence_type}")
-print(f"Agreement: {analysis.modality_agreement:.2f}")
-print(f"Overall confidence: {analysis.confidence.overall_confidence:.2f}")
+print(f"Primary emotion: {analysis.primary_emotion}") print(f"Congruence:
+{analysis.congruence_type}") print(f"Agreement: {analysis.modality_agreement:.2f}") print(f"Overall
+confidence: {analysis.confidence.overall_confidence:.2f}")
 
 # Check for incongruences
-if analysis.incongruences:
-    print("Detected incongruences:")
-    for inc in analysis.incongruences:
-        print(f"  - {inc}")
+if analysis.incongruences: print("Detected incongruences:") for inc in analysis.incongruences:
+print(f"  - {inc}")
 
 # Get fused dimensions
-dims = analysis.dimensions
-print(f"Fused arousal: {dims.arousal:.2f} (from {dims.arousal_source})")
+dims = analysis.dimensions print(f"Fused arousal: {dims.arousal:.2f} (from {dims.arousal_source})")
 print(f"Fused valence: {dims.valence:.2f} (from {dims.valence_source})")
 
 ```text
@@ -311,9 +299,8 @@ Result: TEXT_POSITIVE_VOICE_NEGATIVE
 ### Emotional Suppression
 
 ```
-Text: "I'm fine, everything is okay" (calm tone)
-Voice: Variable pitch, high pause frequency, high stress indicators
-Facial: Low eye contact, lip tension
+Text: "I'm fine, everything is okay" (calm tone) Voice: Variable pitch, high pause frequency, high
+stress indicators Facial: Low eye contact, lip tension
 
 Result: SUPPRESSION
 ```text
@@ -324,14 +311,10 @@ Result: SUPPRESSION
 
 ```
 
-Text: "I'm happy"
-Voice: High pitch, fast rate, minimal pauses
-Facial: AU12 + AU6 = Duchenne smile, high authenticity
-All modalities agree with high confidence
+Text: "I'm happy" Voice: High pitch, fast rate, minimal pauses Facial: AU12 + AU6 = Duchenne smile,
+high authenticity All modalities agree with high confidence
 
-Result: FULL_AGREEMENT
-Primary emotion: happy
-Confidence: 0.88
+Result: FULL_AGREEMENT Primary emotion: happy Confidence: 0.88
 
 ```
 

@@ -1,7 +1,7 @@
 ## Velinor resonance engine
 
-This folder contains a small, testable resonance engine prototype used to map
-player `tone` vectors into NPC `remnants` updates. Files added:
+This folder contains a small, testable resonance engine prototype used to map player `tone` vectors
+into NPC `remnants` updates. Files added:
 
 - `data/npc_profiles.json` — example NPC profiles with initial remnants.
 - `data/influence_map.json` — simple mapping from tone dimensions to remnants.
@@ -57,19 +57,15 @@ cd saoriverse-console
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
 # Initialize
-engine = VelinorEngine(player_name="Traveler")
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path="velinor/stories/sample_story.json"
-)
+engine = VelinorEngine(player_name="Traveler") orchestrator = VelinorTwineOrchestrator(
+game_engine=engine, story_path="velinor/stories/sample_story.json" )
 
 # Start game
 state = orchestrator.start_game()
 
 # Process player input
-state = orchestrator.process_player_action(
-    choice_index=0,  # Select first choice
-    player_id="player_1"
+state = orchestrator.process_player_action( choice_index=0,  # Select first choice
+player_id="player_1"
 ```text
 ```text
 ```
@@ -82,17 +78,13 @@ See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, et
 
 ```
 
-TWINE STORY (JSON)
-    ↓
-[TwineAdapter] → Loads passages, parses markup
-    ↓
-[Orchestrator] → Main game loop
+TWINE STORY (JSON) ↓ [TwineAdapter] → Loads passages, parses markup ↓ [Orchestrator] → Main game
+loop
     ├─ Process Input
     ├─ Apply Mechanics (Dice, Stats)
     ├─ Generate NPC Dialogue
     └─ Format UI State
-    ↓
-[UI Layer] → Display to Player
+↓ [UI Layer] → Display to Player
     ├─ Streamlit (Desktop)
     ├─ Web Framework (Online)
     ├─ CLI Terminal (Local)
@@ -178,9 +170,7 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
 Example:
 
 ```
-Player chooses: "Persuade the guard"
-DC: 12, Player Courage: +3
-Roll: 14 + 3 = 17 ✅ Success
+Player chooses: "Persuade the guard" DC: 12, Player Courage: +3 Roll: 14 + 3 = 17 ✅ Success
 ```text
 ```text
 ```
@@ -303,27 +293,20 @@ velinor/
 ```python
 
 # Initialize
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path="velinor/stories/sample_story.json"
-)
+orchestrator = VelinorTwineOrchestrator( game_engine=engine,
+story_path="velinor/stories/sample_story.json" )
 
 # Start
-state = orchestrator.start_game()
-print(state['main_dialogue'])
-print("Choices:", state['choices'])
+state = orchestrator.start_game() print(state['main_dialogue']) print("Choices:", state['choices'])
 
 # Player chooses
 state = orchestrator.process_player_action(choice_index=0)
 
 # Or player types
-state = orchestrator.process_player_action(
-    player_input="I approach cautiously"
-)
+state = orchestrator.process_player_action( player_input="I approach cautiously" )
 
 # Get result
-print(state['npc_dialogue'])
-print("New location:", state['game_state']['current_location'])
+print(state['npc_dialogue']) print("New location:", state['game_state']['current_location'])
 
 # Save
 orchestrator.save_game("saves/game_001.json")
@@ -343,19 +326,8 @@ Velinor loads Twine 2 JSON export format:
 
 ```json
 
-{
-  "name": "Story Title",
-  "startnode": "1",
-  "passages": [
-    {
-      "pid": "1",
-      "name": "start",
-      "text": "Story content...",
-      "tags": [],
-      "position": [0, 0],
-      "size": [100, 100]
-    }
-  ]
+{ "name": "Story Title", "startnode": "1", "passages": [ { "pid": "1", "name": "start", "text":
+"Story content...", "tags": [], "position": [0, 0], "size": [100, 100] } ]
 
 ```text
 ```

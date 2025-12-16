@@ -1,6 +1,8 @@
 # 🧪 VELΩNIX Emotional Reaction Engine
 
-The VELΩNIX (Velonix) system is an emotional alchemy engine that models how emotional states combine and transform through catalytic processes. It implements a precise system of emotional elements, reaction chains, and ritual prompts.
+The VELΩNIX (Velonix) system is an emotional alchemy engine that models how emotional states combine
+and transform through catalytic processes. It implements a precise system of emotional elements,
+reaction chains, and ritual prompts.
 
 ## Overview
 
@@ -49,14 +51,12 @@ Reactions transform input elements into results:
 ```text
 ```
 
-Longing + Grief → Tenderness
-"The ache of missing becomes the softness of cherishing"
+Longing + Grief → Tenderness "The ache of missing becomes the softness of cherishing"
 
-Rage + Forgiveness (catalyst: Resilience) → Presence
-"Anger dissolves when held in strength and forgiveness"
+Rage + Forgiveness (catalyst: Resilience) → Presence "Anger dissolves when held in strength and
+forgiveness"
 
-Vulnerability + Acceptance → Joy
-"Courage to be seen becomes freedom to celebrate"
+Vulnerability + Acceptance → Joy "Courage to be seen becomes freedom to celebrate"
 
 ```
 
@@ -283,16 +283,9 @@ This runs:
 ```python
 from emotional_os.glyphs.velonix_reaction_engine import EmotionalElement
 
-custom = EmotionalElement(
-    name="Serenity",
-    symbol="Sr",
-    valence="Tranquil",
-    reactivity="Soft-steady",
-    trace_role="Peace keeper",
-    relational_function="Calms turbulence",
-    tone="Golden Calm",
-    color_hex="#FFD700"
-)
+custom = EmotionalElement( name="Serenity", symbol="Sr", valence="Tranquil",
+reactivity="Soft-steady", trace_role="Peace keeper", relational_function="Calms turbulence",
+tone="Golden Calm", color_hex="#FFD700" )
 
 ```text
 ```text
@@ -304,12 +297,8 @@ custom = EmotionalElement(
 
 from emotional_os.glyphs.velonix_reaction_engine import ReactionChain
 
-custom_reaction = ReactionChain(
-    inputs=["Jy", "St"],
-    catalyst=None,
-    result="Ac",
-    trace_outcome="Joy held in Stillness becomes wise Acceptance"
-)
+custom_reaction = ReactionChain( inputs=["Jy", "St"], catalyst=None, result="Ac", trace_outcome="Joy
+held in Stillness becomes wise Acceptance" )
 
 engine.add_custom_reaction(custom_reaction)
 

@@ -8,7 +8,9 @@
 
 ## Project Summary
 
-Velinor is a **text-based narrative adventure game** with emotional resonance mechanics, dice rolls, and multiplayer support. The complete system is now **ready to play** with a fully-featured Streamlit UI and all graphics integrated.
+Velinor is a **text-based narrative adventure game** with emotional resonance mechanics, dice rolls,
+and multiplayer support. The complete system is now **ready to play** with a fully-featured
+Streamlit UI and all graphics integrated.
 
 ##
 
@@ -84,15 +86,12 @@ pip install streamlit pillow
 ## Architecture Complete
 
 ```
-velinor_app.py (Streamlit UI)
-        ↓
-[VelinorTwineOrchestrator] (Game Loop)
+velinor_app.py (Streamlit UI) ↓ [VelinorTwineOrchestrator] (Game Loop)
         ├─ Twine Story Loading
         ├─ Dice & Mechanics
         ├─ State Management
         └─ NPC Dialogue
-        ↓
-[Game Engine + NPC System]
+↓ [Game Engine + NPC System]
         ├─ Player Stats
         ├─ Event System
 ```text
@@ -206,13 +205,9 @@ saoriverse-console/
 
 ### ✅ Gameplay Loop
 
-1. Player sees dialogue + background
-2. Player chooses action or types response
-3. Game processes through story system
-4. Applies game mechanics (dice rolls, stat changes)
-5. Generates NPC response
-6. Updates UI with next state
-7. Repeat
+1. Player sees dialogue + background 2. Player chooses action or types response 3. Game processes
+through story system 4. Applies game mechanics (dice rolls, stat changes) 5. Generates NPC response
+6. Updates UI with next state 7. Repeat
 
 ### ✅ Story System
 
@@ -297,19 +292,14 @@ bash run.sh
 
 ### For Developers
 
-1. Read `VELINOR_QUICK_START.md` for overview
-2. Check `velinor_app.py` to understand UI
-3. Modify `velinor/engine/orchestrator.py` for game logic changes
-4. Create custom stories with Twine 2 editor
+1. Read `VELINOR_QUICK_START.md` for overview 2. Check `velinor_app.py` to understand UI 3. Modify
+`velinor/engine/orchestrator.py` for game logic changes 4. Create custom stories with Twine 2 editor
 5. Deploy when ready
 
 ### For Content Creators
 
-1. Download [Twine 2](https://twinery.org/)
-2. Create your story
-3. Export as JSON to `velinor/stories/`
-4. Update story path in `velinor_app.py`
-5. Test and play!
+1. Download [Twine 2](https://twinery.org/) 2. Create your story 3. Export as JSON to
+`velinor/stories/` 4. Update story path in `velinor_app.py` 5. Test and play!
 
 ##
 
@@ -368,17 +358,9 @@ bash run.sh
 
 ## Success Criteria - Met ✅
 
-✅ Framework chosen (Twine + Streamlit)
-✅ Game engine complete
-✅ Story system functional
-✅ Graphics integrated
-✅ UI fully featured
-✅ Sample story working
-✅ Save/load implemented
-✅ Multiplayer ready
-✅ Documentation complete
-✅ Installation automated
-✅ **Game is playable**
+✅ Framework chosen (Twine + Streamlit) ✅ Game engine complete ✅ Story system functional ✅ Graphics
+integrated ✅ UI fully featured ✅ Sample story working ✅ Save/load implemented ✅ Multiplayer ready ✅
+Documentation complete ✅ Installation automated ✅ **Game is playable**
 
 ##
 
@@ -460,12 +442,8 @@ If continuing development:
 
 ### Your First Game
 
-1. Run `bash run.sh`
-2. Click "🚀 Start New Game"
-3. Read the opening passage
-4. Make choices or type responses
-5. Watch the story unfold
-6. Save your game
+1. Run `bash run.sh` 2. Click "🚀 Start New Game" 3. Read the opening passage 4. Make choices or type
+responses 5. Watch the story unfold 6. Save your game
 
 ### What to Expect
 

@@ -1,7 +1,7 @@
 # Velinorian Glyphic Dictionary
 
-“To speak Velinorian is to breathe the wind.”
-Every word ends with a ritualized breath-shape, carrying emotional voltage and closure.
+“To speak Velinorian is to breathe the wind.” Every word ends with a ritualized breath-shape,
+carrying emotional voltage and closure.
 
 ##
 

@@ -4,10 +4,11 @@
 
 Your local system was generating responses that *felt* templated because:
 
-1. **Response generation was glyph-driven**, "Find the glyph, then fill the template"
-2. **Templates had slots**, `"I hear {entity}. That's {emotion}. You can..."`
-3. **Same structure, different keywords**, Every anxiety response had the same arc
-4. **No message-to-response mapping**, Whether you talked about math, inherited patterns, or communication friction, you got the "Still Insight" template filled with different words
+1. **Response generation was glyph-driven**, "Find the glyph, then fill the template" 2. **Templates
+had slots**, `"I hear {entity}. That's {emotion}. You can..."` 3. **Same structure, different
+keywords**, Every anxiety response had the same arc 4. **No message-to-response mapping**, Whether
+you talked about math, inherited patterns, or communication friction, you got the "Still Insight"
+template filled with different words
 
 ##
 
@@ -20,17 +21,14 @@ Instead of **fill-the-template**, use **compose-from-fragments**:
 ```text
 ```
 
-User Message
-    ↓
-┌─────────────────────────────────────────────────┐
+User Message ↓ ┌─────────────────────────────────────────────────┐
 │  EXTRACTION LAYER                               │
 │  • Entities (spaCy NER): Michelle, math, block  │
 │  • Emotions (NRC): anxiety, frustration, fear   │
 │  • Noun chunks: "mental block", "communication" │
 │  • Relationships: who/what/where                │
 └─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────────┐
 │  COMPOSITION LAYER                              │
 │  • Select opening move (from 5+ variants)       │
 │  • Add contextual bridge (if feedback)          │
@@ -39,8 +37,7 @@ User Message
 │  • Generate unique closing question             │
 │  • Assemble into coherent response              │
 └─────────────────────────────────────────────────┘
-    ↓
-Response (Always unique, never identical)
+↓ Response (Always unique, never identical)
 
 ```
 
@@ -55,13 +52,9 @@ Response (Always unique, never identical)
 
 
 # Old approach
-if 'anxiety' in keywords:
-    response = (
-        "I can feel the anxiety you're carrying. When our minds race like this, "
-        "it often helps to find a still point. The energy you're feeling, "
-        "that's your system preparing you. What if we could transform this "
-        "racing energy into focused readiness?"
-    )
+if 'anxiety' in keywords: response = ( "I can feel the anxiety you're carrying. When our minds race
+like this, " "it often helps to find a still point. The energy you're feeling, " "that's your system
+preparing you. What if we could transform this " "racing energy into focused readiness?" )
     # Repeat for messages 1, 2, 3 = identical structure
 
 # Problem: Same response for:
@@ -150,13 +143,10 @@ def detect_feedback_correction(input_text, last_assistant_message):
 ### Layer 2: Message-Driven Features
 
 ```python
-def extract_message_features(input_text):
-    features = {
-        "math_frustration": "math" in text and ("block" or "can't" or "frustrated") in text,
-        "communication_friction": "michelle" in text and ("explain" or "language") in text,
-        "inherited_pattern": "inherited from" in text,
-        "person_involved": extract_people(text),  # spaCy NER
-    }
+def extract_message_features(input_text): features = { "math_frustration": "math" in text and
+("block" or "can't" or "frustrated") in text, "communication_friction": "michelle" in text and
+("explain" or "language") in text, "inherited_pattern": "inherited from" in text, "person_involved":
+extract_people(text),  # spaCy NER }
 ```text
 ```text
 ```
@@ -167,11 +157,9 @@ def extract_message_features(input_text):
 
 class DynamicResponseComposer:
     # Multiple opening variants (not one template):
-    opening_moves = {
-        "acknowledgment": ["I hear {entity}.", "There's something real about {entity}.", ...],
-        "validation": ["{entity} is real.", "That's true—{entity}.", ...],
-        "curiosity": ["Tell me more about {entity}.", "What does {entity} feel like?", ...],
-    }
+opening_moves = { "acknowledgment": ["I hear {entity}.", "There's something real about {entity}.",
+...], "validation": ["{entity} is real.", "That's true—{entity}.", ...], "curiosity": ["Tell me more
+about {entity}.", "What does {entity} feel like?", ...], }
 
 ```text
 ```
@@ -230,19 +218,16 @@ like to approach math frustration differently?"
 ### Message 3: Inherited Pattern Correction
 
 ```
-User: "well I don't know if its my anxiety. If there is any anxiety.
-its inherited from Michelle because she is very anxious."
+User: "well I don't know if its my anxiety. If there is any anxiety. its inherited from Michelle
+because she is very anxious."
 
-OLD (Template-Driven):
-"I can feel the anxiety you're carrying..." (same again)
-→ Completely misses the correction: user is saying it's NOT theirs
+OLD (Template-Driven): "I can feel the anxiety you're carrying..." (same again) → Completely misses
+the correction: user is saying it's NOT theirs
 
-NEW (Composition-Driven):
-"I hear that—recognizing a pattern as inherited is actually the first step to
-changing it. You can inherit the pattern without being imprisoned by it. What
-would it feel like to notice the difference between *her* anxiety and what's
-actually *yours*?"
-→ Detects feedback correction (attribution_boundary) and addresses it directly
+NEW (Composition-Driven): "I hear that—recognizing a pattern as inherited is actually the first step
+to changing it. You can inherit the pattern without being imprisoned by it. What would it feel like
+to notice the difference between *her* anxiety and what's actually *yours*?" → Detects feedback
+correction (attribution_boundary) and addresses it directly
 ```
 
 ##

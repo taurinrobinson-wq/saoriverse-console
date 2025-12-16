@@ -153,8 +153,7 @@ docker compose ps
 
 ```bash
 
-docker system df
-docker system prune -a
+docker system df docker system prune -a
 
 ```
 

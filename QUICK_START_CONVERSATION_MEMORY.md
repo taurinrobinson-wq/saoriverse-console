@@ -13,10 +13,8 @@
 ```text
 ```
 
-User: "I'm stressed about work"
-System: "Tell me more about work."
-User: "I have 5 projects due Thursday"
-System: "Tell me more about your projects." ← REPEATED!
+User: "I'm stressed about work" System: "Tell me more about work." User: "I have 5 projects due
+Thursday" System: "Tell me more about your projects." ← REPEATED!
 
 ```
 
@@ -27,11 +25,9 @@ System: "Tell me more about your projects." ← REPEATED!
 ```text
 ```
 
-User: "I'm stressed about work"
-System: "I hear the weight of that stress."
-User: "I have 5 projects due Thursday"
-System: "So 5 competing priorities with one hard deadline...
-         Which of these is most urgent?" ← SPECIFIC, NO REPEAT
+User: "I'm stressed about work" System: "I hear the weight of that stress." User: "I have 5 projects
+due Thursday" System: "So 5 competing priorities with one hard deadline... Which of these is most
+urgent?" ← SPECIFIC, NO REPEAT
 
 ```
 
@@ -51,13 +47,10 @@ System: "So 5 competing priorities with one hard deadline...
 
 ```python
     # Initialize conversation memory for multi-turn context
-    if "conversation_memory" not in st.session_state:
-        try:
-            from emotional_os_glyphs.conversation_memory import ConversationMemory
-            st.session_state.conversation_memory = ConversationMemory()
-            logger.info("✅ ConversationMemory initialized")
-        except ImportError as e:
-            logger.warning(f"⚠️  ConversationMemory import failed: {e}")
+if "conversation_memory" not in st.session_state: try: from emotional_os_glyphs.conversation_memory
+import ConversationMemory st.session_state.conversation_memory = ConversationMemory() logger.info("✅
+ConversationMemory initialized") except ImportError as e: logger.warning(f"⚠️  ConversationMemory
+import failed: {e}")
 ```text
 ```text
 ```
@@ -74,52 +67,36 @@ System: "So 5 competing priorities with one hard deadline...
 
 ```python
 
-def _build_conversational_response(user_input: str, local_analysis: dict) -> str:
-    """Build response using conversation memory for context awareness."""
+def _build_conversational_response(user_input: str, local_analysis: dict) -> str: """Build response
+using conversation memory for context awareness."""
 
-    best_glyph = local_analysis.get("best_glyph") if local_analysis else None
-    voltage_response = local_analysis.get("voltage_response", "") if local_analysis else ""
+best_glyph = local_analysis.get("best_glyph") if local_analysis else None voltage_response =
+local_analysis.get("voltage_response", "") if local_analysis else ""
 
     # ===== NEW: Memory-informed response =====
-    memory = st.session_state.get("conversation_memory")
+memory = st.session_state.get("conversation_memory")
 
-    if memory and user_input.strip():
+if memory and user_input.strip():
         # Add this turn to memory
-        try:
-            memory.add_turn(
-                message=user_input,
-                signal_analysis=local_analysis,
-            )
-            confidence = memory._state.emotional_profile.confidence
-            logger.info(f"Memory turn added. Confidence: {confidence:.2f}")
-        except Exception as e:
-            logger.warning(f"Memory add_turn failed: {e}")
+try: memory.add_turn( message=user_input, signal_analysis=local_analysis, ) confidence =
+memory._state.emotional_profile.confidence logger.info(f"Memory turn added. Confidence:
+{confidence:.2f}") except Exception as e: logger.warning(f"Memory add_turn failed: {e}")
 
     # Use memory-aware composition if we have good context
-    if memory and memory._state.emotional_profile.confidence > 0.75:
-        try:
-            from emotional_os_glyphs.dynamic_response_composer import DynamicResponseComposer
-            composer = DynamicResponseComposer()
+if memory and memory._state.emotional_profile.confidence > 0.75: try: from
+emotional_os_glyphs.dynamic_response_composer import DynamicResponseComposer composer =
+DynamicResponseComposer()
 
-            response = composer.compose_response_with_memory(
-                input_text=user_input,
-                conversation_memory=memory,
-                glyph=best_glyph,
-            )
+response = composer.compose_response_with_memory( input_text=user_input, conversation_memory=memory,
+glyph=best_glyph, )
 
-            if response and response.strip():
-                logger.info("✅ Used memory-informed response")
-                return response
-        except Exception as e:
-            logger.debug(f"Memory-informed response failed, falling back: {e}")
+if response and response.strip(): logger.info("✅ Used memory-informed response") return response
+except Exception as e: logger.debug(f"Memory-informed response failed, falling back: {e}")
 
     # ===== FALLBACK: Use existing logic =====
     # (keep all existing code below this point unchanged)
-    if voltage_response and voltage_response.strip():
-        response = voltage_response.strip()
-        if "Resonant Glyph:" in response:
-            response = response.split("Resonant Glyph:")[0].strip()
-        return response
+if voltage_response and voltage_response.strip(): response = voltage_response.strip() if "Resonant
+Glyph:" in response: response = response.split("Resonant Glyph:")[0].strip() return response
 
     # Last resort
 
@@ -359,18 +336,17 @@ The app will fall back to the original behavior (voltage response).
 
 Once working, you unlock:
 
-1. **ConversationMemory** - Multi-turn context ✅
-2. **Implicit Learning** - Can add `LexiconLearner` feedback next (20 min)
-3. **Presence Layer** - Can integrate Attunement + Embodiment (2-3 hours)
-4. **Saori + Tension** - Advanced features (4-6 hours)
+1. **ConversationMemory** - Multi-turn context ✅ 2. **Implicit Learning** - Can add `LexiconLearner`
+feedback next (20 min) 3. **Presence Layer** - Can integrate Attunement + Embodiment (2-3 hours) 4.
+**Saori + Tension** - Advanced features (4-6 hours)
 
 ##
 
 ## Next Steps After This Works
 
-1. ✅ **Celebrate** - You just connected your first advanced module!
-2. ⏭️ **Add LexiconLearner** (20 min extra) - Implicit learning feedback
-3. ⏭️ **Then Tier 2** - Presence layer (attunement, embodiment)
+1. ✅ **Celebrate** - You just connected your first advanced module! 2. ⏭️ **Add LexiconLearner** (20
+min extra) - Implicit learning feedback 3. ⏭️ **Then Tier 2** - Presence layer (attunement,
+embodiment)
 
 ##
 
@@ -396,8 +372,7 @@ Test-Path src/emotional_os_glyphs/conversation_memory.py
 ```powershell
 
 
-taskkill /F /IM streamlit.exe
-streamlit run app.py
+taskkill /F /IM streamlit.exe streamlit run app.py
 ```text
 ```text
 ```
@@ -421,8 +396,8 @@ Just in case you want a quick revert:
 
 
 # Backup the files you're modifying
-Copy-Item "src/emotional_os/deploy/modules/ui_refactored.py" "ui_refactored.py.backup"
-Copy-Item "src/emotional_os/deploy/modules/ui_components/response_handler.py" "response_handler.py.backup"
+Copy-Item "src/emotional_os/deploy/modules/ui_refactored.py" "ui_refactored.py.backup" Copy-Item
+"src/emotional_os/deploy/modules/ui_components/response_handler.py" "response_handler.py.backup"
 
 ```text
 ```
@@ -441,7 +416,8 @@ Copy-Item "response_handler.py.backup" "src/emotional_os/deploy/modules/ui_compo
 
 ## You Got This! 🚀
 
-This is a straightforward, low-risk integration that will immediately improve your system. Follow the steps, test thoroughly, and you'll have multi-turn context awareness running in under an hour.
+This is a straightforward, low-risk integration that will immediately improve your system. Follow
+the steps, test thoroughly, and you'll have multi-turn context awareness running in under an hour.
 
 After this works, the path to Tier 2 and beyond becomes clear.
 

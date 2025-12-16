@@ -6,7 +6,8 @@
 
 ## What You Got
 
-A **fully integrated dynamic glyph generation system** that automatically creates new glyphs during user-AI conversations.
+A **fully integrated dynamic glyph generation system** that automatically creates new glyphs during
+user-AI conversations.
 
 ##
 
@@ -81,27 +82,21 @@ A **fully integrated dynamic glyph generation system** that automatically create
 ```text
 ```
 
-User Input: "I feel vulnerable but loved"
-    ↓
-Adaptive Signal Extraction
+User Input: "I feel vulnerable but loved" ↓ Adaptive Signal Extraction
     └─ Discovers: vulnerability, love, safety, intimacy, etc.
-    ↓
-Hybrid Learning
+↓ Hybrid Learning
     ├─ Updates user's personal lexicon
     ├─ Potentially contributes to shared lexicon
     └─ Quality filtered to prevent toxic content
-    ↓
-Pattern Detection
+↓ Pattern Detection
     ├─ Analyzes co-occurrence of signals
     ├─ Counts frequency of emotional combinations
     └─ e.g., (love + vulnerability) = 47 times seen
-    ↓
-Glyph Generation
+↓ Glyph Generation
     ├─ If pattern frequency >= 300: CREATE GLYPH
     ├─ If frequency < 300: Continue learning
     └─ Generates name, symbol, response cue, narrative
-    ↓
-New Glyph Available
+↓ New Glyph Available
     ├─ Stored in session state
     ├─ Displayed in UI sidebar
     ├─ Persisted to learning/conversation_glyphs.json
@@ -116,17 +111,11 @@ New Glyph Available
 ```text
 ```
 
-Turn 1: love (0.9) + intimacy (0.8) = co-occurrence
-Turn 2: love (0.85) + intimacy (0.7) = co-occurrence
-Turn 3: vulnerability (0.8) + love (0.9) = co-occurrence
-...
-Turn 150: accumulated frequency of (love + intimacy) = 300+
-    ↓
-✨ GLYPH CREATED: "Intimate Connection"
-    Symbol: ♥❤
-    Emotions: love + intimacy
-    Response: "Recognize the deep closeness being shared"
-    Story: "A story of two souls finding each other"
+Turn 1: love (0.9) + intimacy (0.8) = co-occurrence Turn 2: love (0.85) + intimacy (0.7) =
+co-occurrence Turn 3: vulnerability (0.8) + love (0.9) = co-occurrence ... Turn 150: accumulated
+frequency of (love + intimacy) = 300+ ↓ ✨ GLYPH CREATED: "Intimate Connection" Symbol: ♥❤ Emotions:
+love + intimacy Response: "Recognize the deep closeness being shared" Story: "A story of two souls
+finding each other"
 
 ```
 
@@ -140,37 +129,36 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
 
 1. **UI Entry Point** (`ui.py` line 573)
    ```python
-   if processing_mode == "hybrid":
-       processor = st.session_state.get('hybrid_processor')
-       evolution_result = processor.process_user_message(...)
-       new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
+if processing_mode == "hybrid": processor = st.session_state.get('hybrid_processor')
+evolution_result = processor.process_user_message(...) new_glyphs =
+evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
    ```
 
 2. **Data Persistence** (Automatic)
 
    ```
-   learning/conversation_glyphs.json
+learning/conversation_glyphs.json
    └─ All discovered glyphs (survives session restart)
 
-   learning/user_overrides/{user_id}_lexicon.json
+learning/user_overrides/{user_id}_lexicon.json
    └─ User-specific emotional vocabulary
 
-   learning/hybrid_learning_log.jsonl
+learning/hybrid_learning_log.jsonl
    └─ Append-only log of all learning exchanges
    ```
 
 3. **Session State** (Streamlit)
 
    ```python
-   st.session_state['hybrid_processor']        # Processor instance
-   st.session_state['new_glyphs_this_session'] # Glyphs from current session
-   st.session_state['conversation_id']         # Unique conversation ID
+st.session_state['hybrid_processor']        # Processor instance
+st.session_state['new_glyphs_this_session'] # Glyphs from current session
+st.session_state['conversation_id']         # Unique conversation ID
    ```
 
 4. **Sidebar Display** (`main_v2.py` line 131)
 
    ```python
-   with st.sidebar.expander("✨ Glyphs Discovered This Session"):
+with st.sidebar.expander("✨ Glyphs Discovered This Session"):
        # Shows all discovered glyphs with symbols, emotions, keywords
    ```
 
@@ -287,9 +275,7 @@ evolution = DynamicGlyphEvolution(
 ```python
 
 # In dynamic_glyph_evolution.py
-self.emotion_symbols = {
-    "love": "♥",
-    "vulnerability": "🌱",
+self.emotion_symbols = { "love": "♥", "vulnerability": "🌱",
     # Add more
 ```text
 ```text
@@ -301,8 +287,7 @@ self.emotion_symbols = {
 
 
 # In dynamic_glyph_evolution.py, _create_pattern_name()
-name_map = {
-    ("love", "vulnerability"): "Open-Hearted Love",
+name_map = { ("love", "vulnerability"): "Open-Hearted Love",
     # Customize as needed
 
 ```text
@@ -420,8 +405,7 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 **Cause:** Pattern frequency not reaching threshold
 **Fix:**
 
-1. Have longer conversations with consistent themes
-2. Lower threshold: `min_frequency_for_glyph=50`
+1. Have longer conversations with consistent themes 2. Lower threshold: `min_frequency_for_glyph=50`
 3. Check `learning/hybrid_learning_log.jsonl` for activity
 
 ### Issue: Glyphs Not Displayed in Sidebar
@@ -429,18 +413,16 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 **Cause:** Session not initialized or no glyphs generated
 **Fix:**
 
-1. Ensure processing mode is "hybrid"
-2. Check sidebar expansion
-3. Enable debug to see signal extraction
+1. Ensure processing mode is "hybrid" 2. Check sidebar expansion 3. Enable debug to see signal
+extraction
 
 ### Issue: Import Errors
 
 **Cause:** Missing files or dependencies
 **Fix:**
 
-1. Run `bash verify_integration.sh`
-2. Check all files are in root directory
-3. Verify dependencies installed
+1. Run `bash verify_integration.sh` 2. Check all files are in root directory 3. Verify dependencies
+installed
 
 ##
 
@@ -566,8 +548,7 @@ This transforms Saoriverse from a static system with predefined glyphs into a **
 ## Ready to Run
 
 ```bash
-bash verify_integration.sh     # ← Run this first
-streamlit run main_v2.py        # ← Then run this
+bash verify_integration.sh     # ← Run this first streamlit run main_v2.py        # ← Then run this
 
 # Select "hybrid" mode and start chatting!
 ```

@@ -1,11 +1,11 @@
 # Response Adapter / Composer Progress (snapshot)
 
-Date: 2025-11-16
-Branch: main
+Date: 2025-11-16 Branch: main
 
 ## Summary
 
-This note captures the current implementation and state of the response adapter and composer polishing work so you can pick this up later.
+This note captures the current implementation and state of the response adapter and composer
+polishing work so you can pick this up later.
 
 ## What's implemented
 
@@ -41,7 +41,9 @@ This note captures the current implementation and state of the response adapter 
 python3 scripts/test_local_response_flow.py
 ```
 
-Expected: The script will load local resources (spaCy, NRC lexicon, poetry DB), run `parse_input()` on the sample message, and print a composed response that uses plain-language snippets (no glyph names) and friend-like templates.
+Expected: The script will load local resources (spaCy, NRC lexicon, poetry DB), run `parse_input()`
+on the sample message, and print a composed response that uses plain-language snippets (no glyph
+names) and friend-like templates.
 
 ## Notes on current behavior
 
@@ -51,23 +53,28 @@ Expected: The script will load local resources (spaCy, NRC lexicon, poetry DB), 
 
 ## Remaining / recommended next steps (pick up later)
 
-1. Add unit tests: assert `translate_system_output()` never returns `glyph_name` substrings in `summary` or `snippets`.
-2. Constrain poetry: either force concise, grammatical poetry lines or disable by default (safer for conversational UX).
-3. Implement phase-driven template selection: use adapter `tone` (`initiatory` vs `archetypal`) to select different opener/closer pools explicitly.
-4. Add a small integration test that ensures post-processing strips template placeholders and pronoun artifacts.
+1. Add unit tests: assert `translate_system_output()` never returns `glyph_name` substrings in
+`summary` or `snippets`. 2. Constrain poetry: either force concise, grammatical poetry lines or
+disable by default (safer for conversational UX). 3. Implement phase-driven template selection: use
+adapter `tone` (`initiatory` vs `archetypal`) to select different opener/closer pools explicitly. 4.
+Add a small integration test that ensures post-processing strips template placeholders and pronoun
+artifacts.
 
 ## Why this matters
 
-The work preserves the system's internal symbolic processing while presenting plain, companion-like language to users, matching the "No backend terms" requirement and improving UX.
+The work preserves the system's internal symbolic processing while presenting plain, companion-like
+language to users, matching the "No backend terms" requirement and improving UX.
 
 ## Where to start when you return
 
-1. Run the harness (see above) to inspect current outputs.
-2. Decide whether you want to disable poetry by default; if so, edit `compose_multi_glyph_response()` and comment out the `_weave_poetry` inclusion.
-3. Add unit tests and CI checks (optional) to prevent regressions.
+1. Run the harness (see above) to inspect current outputs. 2. Decide whether you want to disable
+poetry by default; if so, edit `compose_multi_glyph_response()` and comment out the `_weave_poetry`
+inclusion. 3. Add unit tests and CI checks (optional) to prevent regressions.
 
 ## Commit note
 
-All current workspace changes (adapter, composer edits, and this progress file) are about to be committed to branch `main`.
+All current workspace changes (adapter, composer edits, and this progress file) are about to be
+committed to branch `main`.
 
-If you need any clarifications when you return, open this file and the modified modules first, they contain the most relevant context.
+If you need any clarifications when you return, open this file and the modified modules first, they
+contain the most relevant context.

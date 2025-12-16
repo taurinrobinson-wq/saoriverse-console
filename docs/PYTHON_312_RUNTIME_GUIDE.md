@@ -7,8 +7,8 @@ When clicking "Voice Mode", you see:
 ```text
 ```
 
-Voice recording unavailable - missing: faster-whisper, sounddevice
-Install with: pip install faster-whisper sounddevice
+Voice recording unavailable - missing: faster-whisper, sounddevice Install with: pip install
+faster-whisper sounddevice
 
 ```
 
@@ -43,9 +43,8 @@ Double-click `run_app.bat` in the project directory.
 
 ### Option 4: VS Code Task (Recommended if using VS Code)
 
-1. Press `Ctrl+Shift+B` in VS Code
-2. Select "Streamlit: Run with Python 3.12"
-3. Streamlit will start with the correct Python version
+1. Press `Ctrl+Shift+B` in VS Code 2. Select "Streamlit: Run with Python 3.12" 3. Streamlit will
+start with the correct Python version
 
 ##
 
@@ -78,7 +77,8 @@ The development machine has multiple Python versions:
 - **Python 3.12** ← All audio packages installed here ✓
 - **Python 3.13** ← Where Streamlit might default to ✗
 
-When you run `streamlit run app.py`, it uses the default Python, which is often 3.13. But the audio packages (faster-whisper, sounddevice) are only installed in 3.12.
+When you run `streamlit run app.py`, it uses the default Python, which is often 3.13. But the audio
+packages (faster-whisper, sounddevice) are only installed in 3.12.
 
 By using `py -3.12 -m streamlit run app.py`, you explicitly tell it to use Python 3.12.
 
@@ -108,14 +108,12 @@ For now, just use the `py -3.12` prefix to ensure you're using the correct versi
 
 Once running with Python 3.12:
 
-1. Check sidebar - should show "✓ Python 3.12.x"
-2. Enable "Voice Mode" toggle in sidebar
-3. Click the microphone button
-4. Speak your message
-5. It will transcribe using faster-whisper
-6. Response will be synthesized using pyttsx3
+1. Check sidebar - should show "✓ Python 3.12.x" 2. Enable "Voice Mode" toggle in sidebar 3. Click
+the microphone button 4. Speak your message 5. It will transcribe using faster-whisper 6. Response
+will be synthesized using pyttsx3
 
-If you still see the missing packages error, the app is not using Python 3.12. Kill it and restart with the correct command.
+If you still see the missing packages error, the app is not using Python 3.12. Kill it and restart
+with the correct command.
 
 ##
 

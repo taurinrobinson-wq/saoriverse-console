@@ -96,10 +96,8 @@ git push origin main
 # GitHub Actions will deploy automatically
 
 # Option 2: Manual deploy from VPS
-ssh root@YOUR_DROPLET_IP
-cd /opt/velinor
-git pull origin main
-docker compose -f docker-compose.prod.yml build
+ssh root@YOUR_DROPLET_IP cd /opt/velinor git pull origin main docker compose -f
+docker-compose.prod.yml build
 ```text
 ```text
 ```
@@ -112,9 +110,7 @@ docker compose -f docker-compose.prod.yml build
 # Edit locally (e.g., nginx.prod.conf)
 
 # Commit and push
-git add nginx.prod.conf
-git commit -m "chore: update nginx configuration"
-git push origin main
+git add nginx.prod.conf git commit -m "chore: update nginx configuration" git push origin main
 
 ```text
 ```
@@ -157,10 +153,8 @@ chore: update [docker-compose.prod.yml|nginx.prod.conf|etc]
 
 ## ✨ Next Steps
 
-1. **Verify files are all created locally** (run verification above)
-2. **Push to GitHub** (run git commands above)
-3. **Follow DEPLOYMENT_VPS.md** for DigitalOcean setup
-4. **Use VPS_QUICK_START.md** as quick reference during setup
-5. **Track progress** with VPS_MIGRATION_CHECKLIST.md
+1. **Verify files are all created locally** (run verification above) 2. **Push to GitHub** (run git
+commands above) 3. **Follow DEPLOYMENT_VPS.md** for DigitalOcean setup 4. **Use VPS_QUICK_START.md**
+as quick reference during setup 5. **Track progress** with VPS_MIGRATION_CHECKLIST.md
 
 **Estimated time from push to live**: 15-20 minutes ⏱️

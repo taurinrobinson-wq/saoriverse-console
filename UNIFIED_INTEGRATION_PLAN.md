@@ -151,24 +151,18 @@ learner.learn_from_exchange(
 
 # In handle_response_pipeline, before returning response:
 
-from src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response
-from src.emotional_os_safety.sanctuary_handler import classify_risk
+from src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response from
+src.emotional_os_safety.sanctuary_handler import classify_risk
 
 # Check if input is sensitive
-if is_sensitive_input(user_input):
-    risk_level = classify_risk(user_input)
+if is_sensitive_input(user_input): risk_level = classify_risk(user_input)
 
     # If high-risk, show consent (user controls next action)
-    if risk_level == "high":
-        consent_prompt = build_consent_prompt("high")
-        return consent_prompt  # Wait for user choice
+if risk_level == "high": consent_prompt = build_consent_prompt("high") return consent_prompt  # Wait
+for user choice
 
     # Otherwise, wrap response with compassionate framing
-    response = ensure_sanctuary_response(
-        input_text=user_input,
-        base_response=response,
-        tone="gentle"
-    )
+response = ensure_sanctuary_response( input_text=user_input, base_response=response, tone="gentle" )
 
 ```text
 ```text
@@ -188,81 +182,46 @@ if is_sensitive_input(user_input):
 # File: src/emotional_os/deploy/modules/ui_components/response_handler.py
 
 # Add imports at top
-from src.emotional_os_glyphs.conversation_memory import ConversationMemory
-from src.emotional_os_learning.lexicon_learner import get_lexicon_learner
-from src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response
-from src.emotional_os_safety.sanctuary_handler import classify_risk, build_consent_prompt
+from src.emotional_os_glyphs.conversation_memory import ConversationMemory from
+src.emotional_os_learning.lexicon_learner import get_lexicon_learner from
+src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response from
+src.emotional_os_safety.sanctuary_handler import classify_risk, build_consent_prompt
 
 # Update handle_response_pipeline:
-def handle_response_pipeline(user_input, context, session):
-    """
-    TIER 1: Foundation layer with context + compassion
+def handle_response_pipeline(user_input, context, session): """ TIER 1: Foundation layer with
+context + compassion
 
-    Flow:
-    1. Add to memory (for context tracking)
-    2. Check safety (risk classification)
-    3. Detect signals (from expanded lexicon)
-    4. Generate response (with context)
-    5. Learn from exchange (update lexicon)
-    6. Wrap with compassion (if needed)
-    """
+Flow: 1. Add to memory (for context tracking) 2. Check safety (risk classification) 3. Detect
+signals (from expanded lexicon) 4. Generate response (with context) 5. Learn from exchange (update
+lexicon) 6. Wrap with compassion (if needed) """
 
     # STAGE 1: Memory tracking
-    session.memory.add_turn(user_input, {
-        "role": "user",
-        "timestamp": datetime.now()
-    })
-    emotional_profile = session.memory.get_emotional_profile_brief()
+session.memory.add_turn(user_input, { "role": "user", "timestamp": datetime.now() })
+emotional_profile = session.memory.get_emotional_profile_brief()
 
     # STAGE 2: Safety check
-    is_sensitive = is_sensitive_input(user_input)
-    if is_sensitive:
-        risk = classify_risk(user_input)
-        if risk == "high":
-            prompt = build_consent_prompt(risk)
-            session.memory.add_turn(prompt, {
-                "role": "assistant",
-                "timestamp": datetime.now(),
-                "type": "consent_prompt"
-            })
-            return prompt
+is_sensitive = is_sensitive_input(user_input) if is_sensitive: risk = classify_risk(user_input) if
+risk == "high": prompt = build_consent_prompt(risk) session.memory.add_turn(prompt, { "role":
+"assistant", "timestamp": datetime.now(), "type": "consent_prompt" }) return prompt
 
     # STAGE 3: Signal detection (existing)
-    signals = signal_parser.parse_input(user_input)
-    glyph = glyph_matcher.find_matching_glyph(signals)
+signals = signal_parser.parse_input(user_input) glyph = glyph_matcher.find_matching_glyph(signals)
 
     # STAGE 4: Response generation with context
-    if emotional_profile and emotional_profile.get("confidence", 0) > 0.5:
-        response = composer.compose_response_with_memory(
-            user_input=user_input,
-            memory_context=emotional_profile,
-            glyph=glyph
-        )
-    else:
-        response = composer.compose_response(user_input, glyph)
+if emotional_profile and emotional_profile.get("confidence", 0) > 0.5: response =
+composer.compose_response_with_memory( user_input=user_input, memory_context=emotional_profile,
+glyph=glyph ) else: response = composer.compose_response(user_input, glyph)
 
     # STAGE 5: Learning
-    learner = get_lexicon_learner()
-    learner.learn_from_exchange(
-        user_input=user_input,
-        detected_signals=signals,
-        ai_response=response,
-        user_id=session.user_id
-    )
+learner = get_lexicon_learner() learner.learn_from_exchange( user_input=user_input,
+detected_signals=signals, ai_response=response, user_id=session.user_id )
 
     # STAGE 6: Compassion wrapping
-    if is_sensitive and risk != "high":
-        response = ensure_sanctuary_response(
-            input_text=user_input,
-            base_response=response,
-            tone="gentle"
-        )
+if is_sensitive and risk != "high": response = ensure_sanctuary_response( input_text=user_input,
+base_response=response, tone="gentle" )
 
     # Add response to memory
-    session.memory.add_turn(response, {
-        "role": "assistant",
-        "timestamp": datetime.now()
-    })
+session.memory.add_turn(response, { "role": "assistant", "timestamp": datetime.now() })
 
 ```sql
 ```
@@ -426,15 +385,12 @@ def handle_response_pipeline(user_input, context, session):
     # ... Tier 1 code ...
 
     # NEW: Attunement
-    presence = PresenceIntegration()
-    pacing_score = presence.detect_user_pacing(user_input, emotional_profile)
+presence = PresenceIntegration() pacing_score = presence.detect_user_pacing(user_input,
+emotional_profile)
 
     # Apply pacing to response (affects sentence length, word choice)
-    response = composer.compose_response_with_pacing(
-        user_input=user_input,
-        response=response,
-        pacing=pacing_score
-    )
+response = composer.compose_response_with_pacing( user_input=user_input, response=response,
+pacing=pacing_score )
 
 ```text
 ```
@@ -548,54 +504,30 @@ def handle_response_pipeline(user_input, context, session):
 
 # File: src/emotional_os/core/presence_integration.py
 
-from typing import Dict, Optional
-import re
+from typing import Dict, Optional import re
 
-class PresenceIntegration:
-    """Detect and match user pacing"""
+class PresenceIntegration: """Detect and match user pacing"""
 
-    def __init__(self):
-        self.fast_pace_indicators = [
-            r"!+", r"\?\?+", r"etc\.", r"btw", r"omg", r"asap"
-        ]
-        self.slow_pace_indicators = [
-            r"\.\.\.", r"hmm", r"maybe", r"i guess", r"i don't know"
-        ]
+def __init__(self): self.fast_pace_indicators = [ r"!+", r"\?\?+", r"etc\.", r"btw", r"omg", r"asap"
+] self.slow_pace_indicators = [ r"\.\.\.", r"hmm", r"maybe", r"i guess", r"i don't know" ]
 
-    def detect_user_pacing(self, user_input: str, profile: Dict) -> str:
-        """
-        Detect pacing: 'fast', 'normal', 'slow'
+def detect_user_pacing(self, user_input: str, profile: Dict) -> str: """ Detect pacing: 'fast',
+'normal', 'slow'
 
-        Fast: Exclamation marks, short turns, urgency
-        Slow: Ellipses, hedging, contemplation
-        """
-        lower = user_input.lower()
-        fast_score = sum(1 for pattern in self.fast_pace_indicators
-                        if re.search(pattern, lower))
-        slow_score = sum(1 for pattern in self.slow_pace_indicators
-                        if re.search(pattern, lower))
+Fast: Exclamation marks, short turns, urgency Slow: Ellipses, hedging, contemplation """ lower =
+user_input.lower() fast_score = sum(1 for pattern in self.fast_pace_indicators if re.search(pattern,
+lower)) slow_score = sum(1 for pattern in self.slow_pace_indicators if re.search(pattern, lower))
 
         # Also check confidence from memory profile
-        confidence = profile.get("confidence", 0.5)
-        if confidence < 0.3:
-            return "slow"
-        elif fast_score > slow_score:
-            return "fast"
-        elif slow_score > fast_score:
-            return "slow"
-        else:
-            return "normal"
+confidence = profile.get("confidence", 0.5) if confidence < 0.3: return "slow" elif fast_score >
+slow_score: return "fast" elif slow_score > fast_score: return "slow" else: return "normal"
 
-    def apply_pacing_to_response(self, response: str, pacing: str) -> str:
-        """Adjust response based on detected pacing"""
-        if pacing == "fast":
+def apply_pacing_to_response(self, response: str, pacing: str) -> str: """Adjust response based on
+detected pacing""" if pacing == "fast":
             # Shorten, remove elaboration
-            sentences = response.split(". ")
-            return ". ".join(sentences[:2]) + "."
-        elif pacing == "slow":
+sentences = response.split(". ") return ". ".join(sentences[:2]) + "." elif pacing == "slow":
             # Lengthen, add pauses and reflection
-            return response.replace(". ", ". ... ")
-        else:
+return response.replace(". ", ". ... ") else:
 ```text
 ```text
 ```
@@ -609,51 +541,33 @@ class PresenceIntegration:
 
 from typing import Dict, List, Optional
 
-class EmotionalReciprocity:
-    """Generate emotionally complementary responses"""
+class EmotionalReciprocity: """Generate emotionally complementary responses"""
 
     # Map from user emotion to system response approach
-    RECIPROCITY_MAP = {
-        "overwhelm": "grounding",  # Calm, steady, anchoring
-        "joy": "expansion",         # Encourage, elaborate, celebrate
-        "grief": "presence",        # Stay with, hold space, witness
-        "confusion": "clarifying",  # Offer structure, name patterns
-        "anger": "channeling",      # Validate, explore meaning
-        "vulnerability": "safety",  # Gentle, protective, affirming
-    }
+RECIPROCITY_MAP = { "overwhelm": "grounding",  # Calm, steady, anchoring "joy": "expansion",
+# Encourage, elaborate, celebrate "grief": "presence",        # Stay with, hold space, witness
+"confusion": "clarifying",  # Offer structure, name patterns "anger": "channeling",      # Validate,
+explore meaning "vulnerability": "safety",  # Gentle, protective, affirming }
 
-    def generate_complementary_tone(self, user_emotion: str, history: List[Dict]) -> str:
-        """
-        What emotional stance should system take?
+def generate_complementary_tone(self, user_emotion: str, history: List[Dict]) -> str: """ What
+emotional stance should system take?
 
-        Not echoing user (don't add more overwhelm if they're overwhelmed)
-        But complementing (ground them)
-        """
-        approach = self.RECIPROCITY_MAP.get(user_emotion, "reflective")
+Not echoing user (don't add more overwhelm if they're overwhelmed) But complementing (ground them)
+""" approach = self.RECIPROCITY_MAP.get(user_emotion, "reflective")
 
         # Check if we've used this approach recently (avoid repetition)
-        recent_approaches = [
-            turn.get("emotional_approach")
-            for turn in history
-            if turn.get("role") == "assistant"
-        ]
+recent_approaches = [ turn.get("emotional_approach") for turn in history if turn.get("role") ==
+"assistant" ]
 
-        if approach in recent_approaches:
+if approach in recent_approaches:
             # Vary approach
-            return self._vary_approach(approach)
+return self._vary_approach(approach)
 
-        return approach
+return approach
 
-    def _vary_approach(self, approach: str) -> str:
-        """Vary approach to avoid repetition"""
-        variations = {
-            "grounding": "validating",
-            "expansion": "deepening",
-            "presence": "exploring",
-            "clarifying": "wondering",
-            "channeling": "understanding",
-            "safety": "empowering",
-        }
+def _vary_approach(self, approach: str) -> str: """Vary approach to avoid repetition""" variations =
+{ "grounding": "validating", "expansion": "deepening", "presence": "exploring", "clarifying":
+"wondering", "channeling": "understanding", "safety": "empowering", }
 
 ```text
 ```
@@ -755,49 +669,36 @@ def handle_response_pipeline(user_input, context, session):
 
 # File: test_tier2_aliveness.py
 
-import pytest
-from src.emotional_os.core.presence_integration import PresenceIntegration
-from src.emotional_os.core.emotional_reciprocity import EmotionalReciprocity
-from src.emotional_os.core.embodied_simulation import EmbodiedSimulation
+import pytest from src.emotional_os.core.presence_integration import PresenceIntegration from
+src.emotional_os.core.emotional_reciprocity import EmotionalReciprocity from
+src.emotional_os.core.embodied_simulation import EmbodiedSimulation
 
-def test_pacing_detection():
-    """Should detect fast vs slow pacing"""
-    presence = PresenceIntegration()
+def test_pacing_detection(): """Should detect fast vs slow pacing""" presence =
+PresenceIntegration()
 
-    fast = presence.detect_user_pacing("I'm so stressed!!! Help ASAP!!!!", {})
-    slow = presence.detect_user_pacing("I... I don't know. Maybe... I'm lost.", {})
+fast = presence.detect_user_pacing("I'm so stressed!!! Help ASAP!!!!", {}) slow =
+presence.detect_user_pacing("I... I don't know. Maybe... I'm lost.", {})
 
-    assert fast == "fast"
-    assert slow == "slow"
+assert fast == "fast" assert slow == "slow"
 
-def test_emotional_reciprocity():
-    """Should vary emotional approach"""
-    reciprocity = EmotionalReciprocity()
+def test_emotional_reciprocity(): """Should vary emotional approach""" reciprocity =
+EmotionalReciprocity()
 
     # If user is overwhelmed, system grounds
-    tone1 = reciprocity.generate_complementary_tone("overwhelm", [])
-    assert tone1 == "grounding"
+tone1 = reciprocity.generate_complementary_tone("overwhelm", []) assert tone1 == "grounding"
 
     # If joy, system expands
-    tone2 = reciprocity.generate_complementary_tone("joy", [])
-    assert tone2 == "expansion"
+tone2 = reciprocity.generate_complementary_tone("joy", []) assert tone2 == "expansion"
 
-def test_energy_cycles():
-    """Should cycle through energy states"""
-    sim = EmbodiedSimulation(cycle_length=5)
+def test_energy_cycles(): """Should cycle through energy states""" sim =
+EmbodiedSimulation(cycle_length=5)
 
-    states = []
-    for i in range(5):
-        states.append(sim.get_current_state())
-        sim.update_state()
+states = [] for i in range(5): states.append(sim.get_current_state()) sim.update_state()
 
     # Should see pattern: fresh → mid → fatigued
-    assert "fresh" in states
-    assert "mid" in states
+assert "fresh" in states assert "mid" in states
 
-def test_tier2_response_time():
-    """Full pipeline with Tier 2 still under 100ms"""
-    import time
+def test_tier2_response_time(): """Full pipeline with Tier 2 still under 100ms""" import time
 
     # [Similar to Tier 1 test, verify time]
 ```text
@@ -957,17 +858,9 @@ After all Tiers 1-3 stable and tested
 
 ```python
 
-metrics = {
-    "total_time_ms": 0,
-    "breakdown": {
-        "memory_add": 0,
-        "signal_detection": 0,
-        "safety_check": 0,
-        "response_generation": 0,
-        "learning": 0,
-        "sanctuary_wrap": 0,
-        "memory_update": 0,
-    }
+metrics = { "total_time_ms": 0, "breakdown": { "memory_add": 0, "signal_detection": 0,
+"safety_check": 0, "response_generation": 0, "learning": 0, "sanctuary_wrap": 0, "memory_update": 0,
+}
 
 ```text
 ```

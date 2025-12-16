@@ -2,7 +2,9 @@
 
 ## Overview
 
-The marketplace is the living heart of Velinor—a dynamic, interconnected community where every NPC is part of a larger sphere of influence. These eight characters form the emotional and mechanical foundation of NPC interaction in the early to mid-game.
+The marketplace is the living heart of Velinor—a dynamic, interconnected community where every NPC
+is part of a larger sphere of influence. These eight characters form the emotional and mechanical
+foundation of NPC interaction in the early to mid-game.
 
 ##
 
@@ -304,8 +306,9 @@ The marketplace is the living heart of Velinor—a dynamic, interconnected commu
 
 Kaelen is the moral crossroads. The player can:
 
-1. **Report Kaelen to Captain Veynar** → Get stolen items back immediately, but fracture Kaelen's trust forever, lose optional Drossel questline.
-2. **Protect Kaelen's secret** → Sacrifice the items temporarily, but unlock Drossel questline and optional quest to recover items from thieves' lair.
+1. **Report Kaelen to Captain Veynar** → Get stolen items back immediately, but fracture Kaelen's
+trust forever, lose optional Drossel questline. 2. **Protect Kaelen's secret** → Sacrifice the items
+temporarily, but unlock Drossel questline and optional quest to recover items from thieves' lair.
 
 **Resonance Triggers**:
 
@@ -353,22 +356,14 @@ Each marketplace visit can feel fresh:
 ```text
 ```
 
-                     Ravi (0.8) ← → Nima
-                     /  \              /  \
-                 (0.4)/   \(0.2)  (0.5)/   \(0.3)
-                     /       \        /      \
-                Merchants   Shrine  Merchants
-                           Keepers
+Ravi (0.8) ← → Nima /  \              /  \ (0.4)/   \(0.2)  (0.5)/   \(0.3) /       \        / \
+Merchants   Shrine  Merchants Keepers
                    |          |         |
-            Tovren (0.6)  Sera (0.7) Korrin (0.6)
-            Mariel (0.5)  Mariel (0.4)
+Tovren (0.6)  Sera (0.7) Korrin (0.6) Mariel (0.5)  Mariel (0.4)
 
-            HIDDEN LAYER:
-            Kaelen (0.9 to Thieves' Gang)
-            Captain Veynar (0.5 counter-sphere with Kaelen)
+HIDDEN LAYER: Kaelen (0.9 to Thieves' Gang) Captain Veynar (0.5 counter-sphere with Kaelen)
 
-            WANDERERS:
-            Dalen (0.7 within wanderer sphere, 0.3 to marketplace)
+WANDERERS: Dalen (0.7 within wanderer sphere, 0.3 to marketplace)
 
 ```
 

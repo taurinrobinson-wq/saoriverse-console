@@ -66,27 +66,20 @@ class NRCLexicon:
 ### 2. parser/semantic_engine.py
 
 ```python
-import spacy
-from gensim.models import Word2Vec
+import spacy from gensim.models import Word2Vec
 
-class SemanticEngine:
-    def __init__(self):
-        self.nlp = spacy.load("en_core_web_sm")
+class SemanticEngine: def __init__(self): self.nlp = spacy.load("en_core_web_sm")
         # Optional: Load Word2Vec
         # self.wv = Word2Vec.load("models/word2vec.model")
 
-    def extract_entities(self, text: str):
-        doc = self.nlp(text)
-        return [(ent.text, ent.label_) for ent in doc.ents]
+def extract_entities(self, text: str): doc = self.nlp(text) return [(ent.text, ent.label_) for ent
+in doc.ents]
 
-    def get_noun_chunks(self, text: str):
-        doc = self.nlp(text)
-        return [chunk.text for chunk in doc.noun_chunks]
+def get_noun_chunks(self, text: str): doc = self.nlp(text) return [chunk.text for chunk in
+doc.noun_chunks]
 
-    def similarity(self, word1: str, word2: str) -> float:
-        doc1 = self.nlp(word1)
-        doc2 = self.nlp(word2)
-        return doc1.similarity(doc2)
+def similarity(self, word1: str, word2: str) -> float: doc1 = self.nlp(word1) doc2 = self.nlp(word2)
+return doc1.similarity(doc2)
 
 ```text
 ```text
@@ -98,19 +91,15 @@ class SemanticEngine:
 
 ```python
 
-class PoetricResponseGenerator:
-    def __init__(self, db_connection):
-        self.db = db_connection
+class PoetricResponseGenerator: def __init__(self, db_connection): self.db = db_connection
 
-    def generate_response(self, glyph_name: str, user_message: str):
+def generate_response(self, glyph_name: str, user_message: str):
         # Fetch enrichment
-        poetry = self._fetch_poetry(glyph_name)
-        metaphors = self._fetch_metaphors(glyph_name)
-        rituals = self._fetch_rituals(glyph_name)
+poetry = self._fetch_poetry(glyph_name) metaphors = self._fetch_metaphors(glyph_name) rituals =
+self._fetch_rituals(glyph_name)
 
         # Build response
-        response = f"""
-{self._validate(user_message)}
+response = f""" {self._validate(user_message)}
 
 ✨ **{glyph_name}**
 
@@ -118,23 +107,21 @@ class PoetricResponseGenerator:
 
 {metaphors}
 
-{rituals}
-        """
-        return response
+{rituals} """ return response
 
-    def _fetch_poetry(self, glyph_name: str) -> str:
+def _fetch_poetry(self, glyph_name: str) -> str:
         # Query glyph_poetry table
-        pass
+pass
 
-    def _fetch_metaphors(self, glyph_name: str) -> str:
+def _fetch_metaphors(self, glyph_name: str) -> str:
         # Query glyph_metaphors table
-        pass
+pass
 
-    def _fetch_rituals(self, glyph_name: str) -> str:
+def _fetch_rituals(self, glyph_name: str) -> str:
         # Query glyph_rituals table
-        pass
+pass
 
-    def _validate(self, user_message: str) -> str:
+def _validate(self, user_message: str) -> str:
         # Generate validation/acknowledgment
 
 ```text
@@ -261,28 +248,20 @@ print(response)
 ```bash
 
 # Create test_local_mode_dev.py
-python -c "
-import time
-from parser.nrc_lexicon_loader import nrc
-from parser.semantic_engine import SemanticEngine
+python -c " import time from parser.nrc_lexicon_loader import nrc from parser.semantic_engine import
+SemanticEngine
 
 # Test NRC
-emotions = nrc.analyze_text('I am happy and grateful')
-assert 'joy' in emotions or 'positive' in emotions
-print('✓ NRC Lexicon working')
+emotions = nrc.analyze_text('I am happy and grateful') assert 'joy' in emotions or 'positive' in
+emotions print('✓ NRC Lexicon working')
 
 # Test spaCy
-semantic = SemanticEngine()
-entities = semantic.extract_entities('I love New York')
-assert any('GPE' in e[1] for e in entities)
-print('✓ spaCy working')
+semantic = SemanticEngine() entities = semantic.extract_entities('I love New York') assert any('GPE'
+in e[1] for e in entities) print('✓ spaCy working')
 
 # Test latency
-start = time.time()
-for i in range(10):
-    nrc.analyze_text('I feel sad and lost')
-elapsed = (time.time() - start) / 10
-print(f'✓ Average latency: {elapsed*1000:.1f}ms')
+start = time.time() for i in range(10): nrc.analyze_text('I feel sad and lost') elapsed =
+(time.time() - start) / 10 print(f'✓ Average latency: {elapsed*1000:.1f}ms')
 
 print('\\n✅ All tests passed!')
 ```text
@@ -295,25 +274,17 @@ print('\\n✅ All tests passed!')
 
 ```bash
 
-python -c "
-import sys
-import os
+python -c " import sys import os
 
 # Check no API keys exposed
-if os.environ.get('OPENAI_API_KEY'):
-    print('❌ API key detected!')
-    sys.exit(1)
+if os.environ.get('OPENAI_API_KEY'): print('❌ API key detected!') sys.exit(1)
 
 # Check all models are local
-from parser.nrc_lexicon_loader import nrc
-import spacy
-nlp = spacy.load('en_core_web_sm')
+from parser.nrc_lexicon_loader import nrc import spacy nlp = spacy.load('en_core_web_sm')
 
 # Verify no network calls attempted
-print('✅ Local mode verified')
-print('✅ No external API keys')
-print('✅ All models local')
-print('✅ Zero external calls possible')
+print('✅ Local mode verified') print('✅ No external API keys') print('✅ All models local') print('✅
+Zero external calls possible')
 
 ```text
 ```

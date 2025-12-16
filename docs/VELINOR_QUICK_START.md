@@ -140,10 +140,9 @@ saoriverse-console/
 
 from velinor.engine import StoryBuilder
 
-story = StoryBuilder("My Adventure")
-story.add_passage("start", "You awake in a strange place...", is_start=True)
-story.add_choice("start", "Look around", "examine")
-story.add_choice("start", "Move forward", "walk")
+story = StoryBuilder("My Adventure") story.add_passage("start", "You awake in a strange place...",
+is_start=True) story.add_choice("start", "Look around", "examine") story.add_choice("start", "Move
+forward", "walk")
 
 ```text
 ```
@@ -180,8 +179,7 @@ cd /path/to/saoriverse-console
 **Check paths:**
 
 ```bash
-ls velinor/backgrounds/    # Should see 15+ images
-ls velinor/npcs/           # Should see 7+ images
+ls velinor/backgrounds/    # Should see 15+ images ls velinor/npcs/           # Should see 7+ images
 ```text
 ```text
 ```
@@ -223,10 +221,7 @@ conda activate velinor
 ### Docker (Optional)
 
 ```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY . .
-RUN pip install streamlit pillow
+FROM python:3.11-slim WORKDIR /app COPY . . RUN pip install streamlit pillow
 ```text
 ```text
 ```
@@ -242,10 +237,7 @@ docker build -t velinor .
 
 **Streamlit Cloud (Free):**
 
-1. Push to GitHub
-2. Go to share.streamlit.io
-3. Deploy from repo
-4. Select `velinor_app.py`
+1. Push to GitHub 2. Go to share.streamlit.io 3. Deploy from repo 4. Select `velinor_app.py`
 
 **Heroku:**
 
@@ -273,11 +265,8 @@ All stats start at 50 (neutral) and can go 0-100.
 
 ### Enable Multiplayer
 
-1. Menu → Settings
-2. Check "Multiplayer Mode"
-3. Set number of players (2-4)
-4. Enter each player's name/ID
-5. Start game
+1. Menu → Settings 2. Check "Multiplayer Mode" 3. Set number of players (2-4) 4. Enter each player's
+name/ID 5. Start game
 
 ### How It Works
 
@@ -291,11 +280,9 @@ All stats start at 50 (neutral) and can go 0-100.
 
 ## First Session Tips
 
-1. **Read everything** - Story has depth
-2. **Try different choices** - Same choice changes dialogue
-3. **Pay attention to stats** - They affect dice rolls
-4. **Save often** - Especially before major choices
-5. **Play with multiplayer** - Different story with friends
+1. **Read everything** - Story has depth 2. **Try different choices** - Same choice changes dialogue
+3. **Pay attention to stats** - They affect dice rolls 4. **Save often** - Especially before major
+choices 5. **Play with multiplayer** - Different story with friends
 
 ##
 
@@ -303,18 +290,13 @@ All stats start at 50 (neutral) and can go 0-100.
 
 ### For Players
 
-1. ✅ Install and play sample story
-2. Create custom stories in Twine 2
-3. Invite friends for multiplayer
-4. Deploy game online
+1. ✅ Install and play sample story 2. Create custom stories in Twine 2 3. Invite friends for
+multiplayer 4. Deploy game online
 
 ### For Developers
 
-1. Connect FirstPerson orchestrator for dynamic dialogue
-2. Implement inventory system
-3. Add quest tracking UI
-4. Create achievement system
-5. Build community features
+1. Connect FirstPerson orchestrator for dynamic dialogue 2. Implement inventory system 3. Add quest
+tracking UI 4. Create achievement system 5. Build community features
 
 ##
 

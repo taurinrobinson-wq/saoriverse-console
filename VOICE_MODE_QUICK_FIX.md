@@ -54,4 +54,5 @@ When the app starts:
 
 **Status:** ✅ Fixed and Verified
 
-See logs above showing `whisper=True, soundfile=True, sounddevice=True` - all voice dependencies are now detected!
+See logs above showing `whisper=True, soundfile=True, sounddevice=True` - all voice dependencies are
+now detected!

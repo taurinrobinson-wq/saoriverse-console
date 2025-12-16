@@ -8,9 +8,9 @@ Welcome to SaoriVerse Console! This guide helps you find what you need quickly.
 
 **First Time Here?** Start here:
 
-1. Read `DEVELOPER_QUICKSTART.md` - Everything you need to know
-2. Explore `docs/INDEX.md` - Navigation guide for all documentation
-3. Check `FILE_ORGANIZATION_GUIDE.md` - Where everything is located
+1. Read `DEVELOPER_QUICKSTART.md` - Everything you need to know 2. Explore `docs/INDEX.md` -
+Navigation guide for all documentation 3. Check `FILE_ORGANIZATION_GUIDE.md` - Where everything is
+located
 
 **Just Need to Run It?**
 
@@ -178,11 +178,10 @@ saoriverse-console/
 
 ## ❓ Need Help?
 
-1. **New to the project?** → `DEVELOPER_QUICKSTART.md`
-2. **Need to find a file?** → `FILE_ORGANIZATION_GUIDE.md`
-3. **Want architecture details?** → `docs/INDEX.md`
-4. **Need to deploy?** → `DEPLOYMENT_READINESS_REPORT.md`
-5. **Need documentation?** → `docs/INDEX.md` for complete navigation
+1. **New to the project?** → `DEVELOPER_QUICKSTART.md` 2. **Need to find a file?** →
+`FILE_ORGANIZATION_GUIDE.md` 3. **Want architecture details?** → `docs/INDEX.md` 4. **Need to
+deploy?** → `DEPLOYMENT_READINESS_REPORT.md` 5. **Need documentation?** → `docs/INDEX.md` for
+complete navigation
 
 ##
 

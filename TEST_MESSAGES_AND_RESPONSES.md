@@ -2,7 +2,8 @@
 
 ## Overview
 
-This document contains all test messages used to verify the anti-dash system, along with actual responses generated and analysis.
+This document contains all test messages used to verify the anti-dash system, along with actual
+responses generated and analysis.
 
 ##
 
@@ -13,21 +14,14 @@ This document contains all test messages used to verify the anti-dash system, al
 ```text
 ```
 
-Input: "I'm feeling overwhelmed and anxious"
-Time: 0.043s
-Source: dynamic_composer
-Glyph: Spiral Containment
-Tone Pool: Grounded
+Input: "I'm feeling overwhelmed and anxious" Time: 0.043s Source: dynamic_composer Glyph: Spiral
+Containment Tone Pool: Grounded
 
-Response:
-"What does that feel like for you? The only way forward is the way through.
-You get to take this at your own pace with this."
+Response: "What does that feel like for you? The only way forward is the way through. You get to
+take this at your own pace with this."
 
-Analysis:
-✅ No em dashes
-✅ Period separators (appropriate for Grounded pool)
-✅ Conversational and inviting
-✅ Under 100 characters (concise)
+Analysis: ✅ No em dashes ✅ Period separators (appropriate for Grounded pool) ✅ Conversational and
+inviting ✅ Under 100 characters (concise)
 
 ```
 
@@ -38,21 +32,14 @@ Analysis:
 ```text
 ```
 
-Input: "I'm grieving the loss of my job"
-Time: 0.010s
-Source: dynamic_composer
-Glyph: Recursive Ache
+Input: "I'm grieving the loss of my job" Time: 0.010s Source: dynamic_composer Glyph: Recursive Ache
 Tone Pool: Reflective
 
-Response:
-"I'm here with you on what you're experiencing. You're traversing something
-real. There's no rush with this."
+Response: "I'm here with you on what you're experiencing. You're traversing something real. There's
+no rush with this."
 
-Analysis:
-✅ No em dashes
-✅ Period separators (clean, reflective)
-✅ Warm and present ("I'm here with you")
-✅ Acknowledges depth ("traversing something real")
+Analysis: ✅ No em dashes ✅ Period separators (clean, reflective) ✅ Warm and present ("I'm here with
+you") ✅ Acknowledges depth ("traversing something real")
 
 ```
 
@@ -137,18 +124,13 @@ Uniqueness Analysis:
 ```text
 ```
 
-Input: "sad"
-Time: 0.002s
+Input: "sad" Time: 0.002s
 Source: fallback_message|conversationalized
 
-Response:
-"It's okay not to know. That's part of the process."
+Response: "It's okay not to know. That's part of the process."
 
-Analysis:
-✅ No em dashes
-✅ Appropriate for minimal input
-✅ Conversational despite brevity
-✅ Validating tone
+Analysis: ✅ No em dashes ✅ Appropriate for minimal input ✅ Conversational despite brevity ✅
+Validating tone
 
 ```
 
@@ -159,27 +141,18 @@ Analysis:
 ```text
 ```
 
-Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining
-things in a way I don't understand and it's creating real isolation in my
-family and I'm starting to doubt myself"
+Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining things in a way I don't
+understand and it's creating real isolation in my family and I'm starting to doubt myself"
 
-Time: 0.025s
-Source: dynamic_composer
-Glyph: Recursive Ache
+Time: 0.025s Source: dynamic_composer Glyph: Recursive Ache
 
-Response:
-"You're not alone: many brilliant people have genuine friction with math,
-especially when it's presented in a way that doesn't match how their mind
-naturally works. Mental blocks are usually where the concept structure doesn't
-match your natural thinking pattern. That's not fixed: it's just a mismatch to
-navigate. What would it feel like to approach math frustration differently?"
+Response: "You're not alone: many brilliant people have genuine friction with math, especially when
+it's presented in a way that doesn't match how their mind naturally works. Mental blocks are usually
+where the concept structure doesn't match your natural thinking pattern. That's not fixed: it's just
+a mismatch to navigate. What would it feel like to approach math frustration differently?"
 
-Analysis:
-✅ No em dashes
-✅ System parsed multiple emotional layers
-✅ Focused on core issue (communication mismatch)
-✅ Reframed as solvable problem
-✅ Offered exploratory direction
+Analysis: ✅ No em dashes ✅ System parsed multiple emotional layers ✅ Focused on core issue
+(communication mismatch) ✅ Reframed as solvable problem ✅ Offered exploratory direction
 
 ```
 
@@ -235,15 +208,12 @@ Status: ✅ CORRECT
 ```text
 ```
 
-Tone Pool: Reflective
-Glyph: Recursive Ache
+Tone Pool: Reflective Glyph: Recursive Ache
 
-Before: "The ache you're naming—that deserves recognition"
-After: "The ache you're naming: that deserves recognition."
+Before: "The ache you're naming—that deserves recognition" After: "The ache you're naming: that
+deserves recognition."
 
-Rule Applied: `:` (colon + space)
-Status: ✅ CORRECT
-Emotional Effect: More contemplative, layered
+Rule Applied: `:` (colon + space) Status: ✅ CORRECT Emotional Effect: More contemplative, layered
 
 ```
 
@@ -254,15 +224,12 @@ Emotional Effect: More contemplative, layered
 ```text
 ```
 
-Tone Pool: Empathetic
-Glyph: Still Recognition
+Tone Pool: Empathetic Glyph: Still Recognition
 
-Before: "The alone you feel—it belongs to the unknown"
-After: "The alone you feel, it belongs to the unknown."
+Before: "The alone you feel—it belongs to the unknown" After: "The alone you feel, it belongs to the
+unknown."
 
-Rule Applied: `,` (comma + space)
-Status: ✅ CORRECT
-Emotional Effect: Warmer, more connective
+Rule Applied: `,` (comma + space) Status: ✅ CORRECT Emotional Effect: Warmer, more connective
 
 ```
 
@@ -308,11 +275,8 @@ Status: ✅ CORRECT
 ```text
 ```
 
-Glyph Name: "Still Recognition"
-Keyword Match: "recognition"
-Mapped Pool: Empathetic
-Punctuation Style: Comma join (`,`)
-Status: ✅ CORRECT
+Glyph Name: "Still Recognition" Keyword Match: "recognition" Mapped Pool: Empathetic Punctuation
+Style: Comma join (`,`) Status: ✅ CORRECT
 
 ```
 
@@ -323,12 +287,9 @@ Status: ✅ CORRECT
 ```text
 ```
 
-Glyph Name: "Grief of Recognition"
-Keywords Found: "grief" (Reflective), "recognition" (Empathetic)
-Priority Mapping: "grief" checked first
-Mapped Pool: Reflective
-Punctuation Style: Colon emphasis (`:`)
-Status: ✅ CORRECT (first match wins)
+Glyph Name: "Grief of Recognition" Keywords Found: "grief" (Reflective), "recognition" (Empathetic)
+Priority Mapping: "grief" checked first Mapped Pool: Reflective Punctuation Style: Colon emphasis
+(`:`) Status: ✅ CORRECT (first match wins)
 
 ```
 
@@ -377,10 +338,7 @@ Status: ✅ EXCELLENT (consistent sub-15ms)
 ```text
 ```
 
-Response Generation: ~5ms
-Punctuation Cleaning: ~1ms
-Diversification: ~1ms
-Total Overhead: ~2ms
+Response Generation: ~5ms Punctuation Cleaning: ~1ms Diversification: ~1ms Total Overhead: ~2ms
 
 Status: ✅ NEGLIGIBLE (undetectable to user)
 
@@ -396,9 +354,7 @@ Status: ✅ NEGLIGIBLE (undetectable to user)
 ```text
 ```
 
-Scenario: style_matrix.json deleted
-Behavior: System loads minimal defaults
-Response Generated: Yes
+Scenario: style_matrix.json deleted Behavior: System loads minimal defaults Response Generated: Yes
 Quality: Normal (defaults used)
 
 Status: ✅ PASS (graceful degradation)
@@ -447,9 +403,8 @@ Status: ✅ PASS (error caught, logged, handled)
 ```text
 ```
 
-Input: "I need to hold steady through this difficult time"
-Detected Tone Pool: Grounded
-Response Characteristics:
+Input: "I need to hold steady through this difficult time" Detected Tone Pool: Grounded Response
+Characteristics:
 
 - Stable, reassuring language
 - Period separators (declarative)
@@ -467,9 +422,8 @@ Status: ✅ CORRECT TONE MATCH
 ```text
 ```
 
-Input: "I'm carrying something that feels heavy"
-Detected Tone Pool: Reflective
-Response Characteristics:
+Input: "I'm carrying something that feels heavy" Detected Tone Pool: Reflective Response
+Characteristics:
 
 - Contemplative language
 - Colon separators (layered thought)

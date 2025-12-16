@@ -2,7 +2,8 @@
 
 ## 🎯 What This System Does
 
-Automatically removes em dashes from AI responses and replaces them with emotionally intelligent punctuation:
+Automatically removes em dashes from AI responses and replaces them with emotionally intelligent
+punctuation:
 
 - **Grounded responses** → periods (calm, stable)
 - **Reflective responses** → colons (contemplative, layered)
@@ -21,16 +22,8 @@ Automatically removes em dashes from AI responses and replaces them with emotion
 ```text
 ```
 
-User Input
-    ↓
-Generate Response (may contain em dashes)
-    ↓
-Detect Glyph Tone Pool (keyword mapping)
-    ↓
-Remove Em Dashes + Apply Pool-Appropriate Punctuation
-    ↓
-Optionally Diversify Generic Closings
-    ↓
+User Input ↓ Generate Response (may contain em dashes) ↓ Detect Glyph Tone Pool (keyword mapping) ↓
+Remove Em Dashes + Apply Pool-Appropriate Punctuation ↓ Optionally Diversify Generic Closings ↓
 Return Clean Response
 
 ```
@@ -89,20 +82,16 @@ No code changes needed in calling code — it happens automatically!
 ```text
 ```
 
-"You're not alone—many brilliant people struggle with math—it's not your fault."
-↓
-"You're not alone: many brilliant people struggle with math: it's not your fault."
-(Reflective pool, colons applied)
+"You're not alone—many brilliant people struggle with math—it's not your fault." ↓ "You're not
+alone: many brilliant people struggle with math: it's not your fault." (Reflective pool, colons
+applied)
 
-"You're in territory without a map—the alone you're feeling belongs to the unknown."
-↓
-"You're in territory without a map, the alone you're feeling belongs to the unknown."
-(Empathetic pool, commas applied)
+"You're in territory without a map—the alone you're feeling belongs to the unknown." ↓ "You're in
+territory without a map, the alone you're feeling belongs to the unknown." (Empathetic pool, commas
+applied)
 
-"You're moving through this—there's no wrong way to do it."
-↓
-"You're moving through this. There's no wrong way to do it."
-(Grounded pool, periods applied)
+"You're moving through this—there's no wrong way to do it." ↓ "You're moving through this. There's
+no wrong way to do it." (Grounded pool, periods applied)
 
 ```
 
@@ -115,22 +104,17 @@ No code changes needed in calling code — it happens automatically!
 from emotional_os.glyphs.punctuation_cleaner import clean_response
 
 # Simple one-off cleaning
-cleaned = clean_response(
-    response="You're not alone—many people feel this way.",
-    glyph_name="Still Recognition"
-)
+cleaned = clean_response( response="You're not alone—many people feel this way.", glyph_name="Still
+Recognition" )
 
 # Returns: "You're not alone, many people feel this way."
 
 # Access cleaner directly
-from emotional_os.glyphs.punctuation_cleaner import get_cleaner
-cleaner = get_cleaner()
+from emotional_os.glyphs.punctuation_cleaner import get_cleaner cleaner = get_cleaner()
 
 # Process with all features
-cleaned = cleaner.process_response(
-    response=raw_response,
-    glyph_name=glyph_name,
-    diversify=True  # Replace generic closings
+cleaned = cleaner.process_response( response=raw_response, glyph_name=glyph_name, diversify=True  #
+Replace generic closings
 ```text
 ```text
 ```
@@ -178,14 +162,7 @@ To customize, edit `style_matrix.json`:
 
 ```json
 
-{
-  "Grounded": {
-    "rotation_bank": [
-      "Your new response here.",
-      "Another variation.",
-      ...
-    ]
-  }
+{ "Grounded": { "rotation_bank": [ "Your new response here.", "Another variation.", ... ] }
 
 ```text
 ```
@@ -221,11 +198,11 @@ Shows example transformations and verification.
 
 ## 🎓 Key Insights
 
-1. **No em dashes feel unnatural** - Your AI now sounds less like ChatGPT
-2. **Punctuation carries emotion** - Colons are contemplative, commas are warm, periods are grounded
-3. **Rotation banks work** - 4/4 unique responses to identical inputs proves it
-4. **Automatic scaling** - Thousands of glyphs work via keyword mapping, no hand-coding
-5. **Zero breaking changes** - Existing code works unchanged
+1. **No em dashes feel unnatural** - Your AI now sounds less like ChatGPT 2. **Punctuation carries
+emotion** - Colons are contemplative, commas are warm, periods are grounded 3. **Rotation banks
+work** - 4/4 unique responses to identical inputs proves it 4. **Automatic scaling** - Thousands of
+glyphs work via keyword mapping, no hand-coding 5. **Zero breaking changes** - Existing code works
+unchanged
 
 ## 🚦 Status
 

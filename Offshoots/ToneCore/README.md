@@ -1,7 +1,7 @@
 # ToneCore demo
 
-This folder contains a small Streamlit demo that generates MIDI from the
-normalized chord pivot and renders audio using FluidSynth.
+This folder contains a small Streamlit demo that generates MIDI from the normalized chord pivot and
+renders audio using FluidSynth.
 
 Quick start (local devcontainer / machine):
 

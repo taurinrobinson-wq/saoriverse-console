@@ -12,8 +12,8 @@
 ```text
 ```
 
-README.md                      Project overview & getting started
-CONTRIBUTING.md                Contribution guidelines
+README.md                      Project overview & getting started CONTRIBUTING.md
+Contribution guidelines
 
 ```
 

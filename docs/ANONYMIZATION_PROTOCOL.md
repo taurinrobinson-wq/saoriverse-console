@@ -52,16 +52,11 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 ```text
 ```
 
-mother/parent        → the Lightkeeper
-father/guardian      → the Steward / the Guardian
-son/child            → the Bearer / the Seedling
-daughter/child       → the Lightkeeper / the Seedling
-sibling              → the Mirror (sister) / the Anchor (brother)
-spouse               → the Thread (wife) / the Guardian (husband)
-therapist/counselor  → the Witness
-doctor               → the Steward of Medicine
-boss/authority       → the Authority
-friend/companion     → the Companion
+mother/parent        → the Lightkeeper father/guardian      → the Steward / the Guardian son/child
+→ the Bearer / the Seedling daughter/child       → the Lightkeeper / the Seedling sibling
+→ the Mirror (sister) / the Anchor (brother) spouse               → the Thread (wife) / the Guardian
+(husband) therapist/counselor  → the Witness doctor               → the Steward of Medicine
+boss/authority       → the Authority friend/companion     → the Companion
 
 ```
 
@@ -72,15 +67,10 @@ friend/companion     → the Companion
 ```text
 ```
 
-depression           → the Depths
-anxiety              → the Tightness
-trauma/PTSD          → the Rupture
-abuse                → the Wound
-suicidal ideation    → the Abyss
-chronic illness      → the Shadow
-medical device       → the Device
-medication           → the Medicine
-diagnosis            → the Recognition
+depression           → the Depths anxiety              → the Tightness trauma/PTSD          → the
+Rupture abuse                → the Wound suicidal ideation    → the Abyss chronic illness      → the
+Shadow medical device       → the Device medication           → the Medicine diagnosis            →
+the Recognition
 
 ```
 
@@ -253,8 +243,7 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 **2. Legacy Archive**
 
 ```
-"Include this in your personal legacy archive?"
-→ "Yes, with my real name"
+"Include this in your personal legacy archive?" → "Yes, with my real name"
 ```text
 ```text
 ```
@@ -263,8 +252,7 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 
 ```
 
-"Would you like to contribute to emotional research?"
-→ "Yes, but keep me anonymous"
+"Would you like to contribute to emotional research?" → "Yes, but keep me anonymous"
 
 ```text
 ```
@@ -319,33 +307,13 @@ User Entry (Raw)
 ## 📊 Anonymization Report Example
 
 ```json
-{
-  "entry_id": "entry_001",
-  "timestamp": "2025-11-05T00:57:51.013671",
-  "anonymization_level": "full",
-  "changes_made": {
-    "identifiers_replaced": 8,
-    "dates_anonymized": 1,
-    "locations_generalized": 1,
-    "medical_terms_preserved": false,
-    "names_preserved": false
-  },
-  "specific_replacements": {
-    "michelle": "The Thread",
-    "mother": "the Lightkeeper",
-    "son": "the Bearer",
-    "therapist": "the Witness",
-    "depression": "the Depths",
-    "anxiety": "the Tightness",
-    "IVC filter": "the Device",
-    "medication": "the Medicine"
-  },
-  "temporal_shifts": {
-    "August 2023": "2 years ago"
-  },
-  "location_changes": {
-    "CA": "West Coast"
-  }
+{ "entry_id": "entry_001", "timestamp": "2025-11-05T00:57:51.013671", "anonymization_level": "full",
+"changes_made": { "identifiers_replaced": 8, "dates_anonymized": 1, "locations_generalized": 1,
+"medical_terms_preserved": false, "names_preserved": false }, "specific_replacements": { "michelle":
+"The Thread", "mother": "the Lightkeeper", "son": "the Bearer", "therapist": "the Witness",
+"depression": "the Depths", "anxiety": "the Tightness", "IVC filter": "the Device", "medication":
+"the Medicine" }, "temporal_shifts": { "August 2023": "2 years ago" }, "location_changes": { "CA":
+"West Coast" }
 ```text
 ```text
 ```
@@ -362,12 +330,8 @@ User Entry (Raw)
 # Before logging an exchange:
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
 
-anon = AnonymizationProtocol()
-entry = {
-    "text": user_message,
-    "ritual": ritual_suggestion,
-    "metadata": metadata
-}
+anon = AnonymizationProtocol() entry = { "text": user_message, "ritual": ritual_suggestion,
+"metadata": metadata }
 
 anonymized, anonmap = anon.anonymize_entry(entry, user_id)
 

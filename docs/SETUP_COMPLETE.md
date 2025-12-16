@@ -43,13 +43,9 @@ Your FirstPerson app is **fully configured and running** with:
 
 ## What's Working
 
-✅ Streamlit UI responsive and fast
-✅ Voice mode with microphone input
-✅ Text-to-speech output
-✅ Demo authentication (no backend needed)
-✅ Document upload and processing
-✅ Chat interface
-✅ All dependencies installed and compatible
+✅ Streamlit UI responsive and fast ✅ Voice mode with microphone input ✅ Text-to-speech output ✅ Demo
+authentication (no backend needed) ✅ Document upload and processing ✅ Chat interface ✅ All
+dependencies installed and compatible
 
 ## Notes on Python 3.13 Setup
 
@@ -74,17 +70,13 @@ Both alternatives work great for the app's current features. If you need:
 
 To use with Supabase (optional):
 
-1. Get your project URL and keys from <https://supabase.com>
-2. Edit `.streamlit/secrets.toml` and uncomment the Supabase section
-3. Add your credentials
-4. Restart the app
+1. Get your project URL and keys from <https://supabase.com> 2. Edit `.streamlit/secrets.toml` and
+uncomment the Supabase section 3. Add your credentials 4. Restart the app
 
 To switch to Python 3.11/3.12 (if you need spacy/TTS):
 
-1. Install Python 3.11 or 3.12
-2. Create a new virtual environment: `python -m venv venv`
-3. Activate it and install: `pip install -r requirements.txt`
-4. Run: `streamlit run app.py`
+1. Install Python 3.11 or 3.12 2. Create a new virtual environment: `python -m venv venv` 3.
+Activate it and install: `pip install -r requirements.txt` 4. Run: `streamlit run app.py`
 
 ## Running the App
 

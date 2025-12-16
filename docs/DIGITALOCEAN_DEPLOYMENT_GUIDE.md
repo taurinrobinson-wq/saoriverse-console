@@ -1,14 +1,14 @@
 # DigitalOcean Deployment Guide (IP: 161.35.227.49)
 
-This is your complete step-by-step guide to deploy the FirstPerson web application on your DigitalOcean droplet running Ubuntu.
+This is your complete step-by-step guide to deploy the FirstPerson web application on your
+DigitalOcean droplet running Ubuntu.
 
 ##
 
 ## Prerequisites
 
-✓ Ubuntu 22.04 LTS or later on your DigitalOcean droplet (161.35.227.49)
-✓ SSH access to your droplet
-✓ GitHub repository cloned locally
+✓ Ubuntu 22.04 LTS or later on your DigitalOcean droplet (161.35.227.49) ✓ SSH access to your
+droplet ✓ GitHub repository cloned locally
 
 ##
 
@@ -76,34 +76,26 @@ curl http://161.35.227.49:8000/health
 
 
 # Update system
-sudo apt update
-sudo apt upgrade -y
+sudo apt update sudo apt upgrade -y
 
 # Install dependencies
-sudo apt install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+sudo apt install -y \ apt-transport-https \ ca-certificates \ curl \ gnupg \ lsb-release
 
 # Add Docker GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-    sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 # Add Docker repository
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-    https://download.docker.com/linux/ubuntu \
+https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install Docker
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt update sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Allow running docker without sudo (optional)
-sudo usermod -aG docker $USER
-newgrp docker
+sudo usermod -aG docker $USER newgrp docker
 
 # Verify
 
@@ -184,9 +176,7 @@ Once everything is running:
 docker compose logs
 
 # Specific service
-docker compose logs backend
-docker compose logs frontend
-docker compose logs nginx
+docker compose logs backend docker compose logs frontend docker compose logs nginx
 
 # Follow logs in real-time
 docker compose logs -f
@@ -422,8 +412,7 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 sudo apt install -y certbot python3-certbot-nginx
 
 # Get certificate (stops nginx temporarily)
-docker compose stop nginx
-sudo certbot certonly --standalone -d 161.35.227.49
+docker compose stop nginx sudo certbot certonly --standalone -d 161.35.227.49
 
 # Update nginx.conf with SSL directives
 
@@ -484,8 +473,7 @@ echo "=== Disk Usage ==="
 Run it regularly:
 
 ```bash
-chmod +x check-health.sh
-./check-health.sh
+chmod +x check-health.sh ./check-health.sh
 
 # Or set up a cron job to check every hour
 crontab -e

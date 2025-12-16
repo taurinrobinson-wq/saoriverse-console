@@ -66,11 +66,9 @@ Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
 
 New files to make this easier:
 
-1. **`run_app.bat`** - Windows batch script (double-click to run)
-2. **`run_app.ps1`** - PowerShell script
-3. **`.vscode/tasks.json`** - VS Code task configuration
-4. **`PYTHON_312_RUNTIME_GUIDE.md`** - Detailed setup guide
-5. **Enhanced diagnostics** in `app.py` sidebar
+1. **`run_app.bat`** - Windows batch script (double-click to run) 2. **`run_app.ps1`** - PowerShell
+script 3. **`.vscode/tasks.json`** - VS Code task configuration 4. **`PYTHON_312_RUNTIME_GUIDE.md`**
+- Detailed setup guide 5. **Enhanced diagnostics** in `app.py` sidebar
 
 ##
 
@@ -114,26 +112,11 @@ py -3.12 --version
 ## How This Works
 
 ```
-Your Command:
-  py -3.12 -m streamlit run app.py
-        ↓
-Python Launcher (/py):
-  "Run Python 3.12 specifically"
-        ↓
-Python 3.12 Interpreter:
-  C:\Users\Admin\AppData\Local\Programs\Python\Python312\python.exe
-        ↓
-Loads All Packages from Python 3.12:
-  ✓ streamlit
-  ✓ faster-whisper  ← Was missing before!
-  ✓ sounddevice     ← Was missing before!
-  ✓ pyttsx3
-  ✓ spacy
-  ✓ All others...
-        ↓
-Streamlit App Launches:
-  ✓ Voice mode works
-  ✓ NLP features work
+Your Command: py -3.12 -m streamlit run app.py ↓ Python Launcher (/py): "Run Python 3.12
+specifically" ↓ Python 3.12 Interpreter:
+C:\Users\Admin\AppData\Local\Programs\Python\Python312\python.exe ↓ Loads All Packages from Python
+3.12: ✓ streamlit ✓ faster-whisper  ← Was missing before! ✓ sounddevice     ← Was missing before! ✓
+pyttsx3 ✓ spacy ✓ All others... ↓ Streamlit App Launches: ✓ Voice mode works ✓ NLP features work
 ```text
 ```text
 ```
@@ -185,7 +168,8 @@ py -3.12 -m pip install faster-whisper sounddevice
 
 ✅ **Voice mode is now fixed!**
 
-All packages are installed. The issue was just which Python version was being used to run the app. Now you have:
+All packages are installed. The issue was just which Python version was being used to run the app.
+Now you have:
 
 - **Easy launchers** (batch, PowerShell, VS Code task)
 - **Improved diagnostics** (sidebar shows which Python version)

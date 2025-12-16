@@ -1,6 +1,7 @@
 # Ollama Integration Guide
 
-FirstPerson Streamlit app now integrates with Ollama for local LLM inference. This allows running AI-powered conversations entirely on your local machine without external API dependencies.
+FirstPerson Streamlit app now integrates with Ollama for local LLM inference. This allows running
+AI-powered conversations entirely on your local machine without external API dependencies.
 
 ## Quick Start
 
@@ -49,10 +50,8 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull neural-chat  
 curl http://localhost:11434/api/tags
 
 # Generate a response (replace llama3 with your model)
-curl -X POST http://localhost:11434/api/generate -d '{
-  "model": "llama3",
-  "prompt": "Why is the sky blue?",
-  "stream": false
+curl -X POST http://localhost:11434/api/generate -d '{ "model": "llama3", "prompt": "Why is the sky
+blue?", "stream": false
 ```text
 ```text
 ```
@@ -99,10 +98,9 @@ Key methods:
 
 ```python
 
-ollama = get_ollama_client_singleton()
-ollama.is_available()                                    # Check if service running
-ollama.get_available_models()                            # List pulled models
-ollama.generate(prompt, model="llama3")                  # Generate response
+ollama = get_ollama_client_singleton() ollama.is_available()                                    #
+Check if service running ollama.get_available_models()                            # List pulled
+models ollama.generate(prompt, model="llama3")                  # Generate response
 
 ```text
 ```
@@ -210,8 +208,8 @@ Edit `_get_ollama_fallback_response()` in `response_handler.py`:
 
 ```python
 
-system_prompt = """You are FirstPerson, a warm, empathetic AI companion...
-[customize personality and behavior here]
+system_prompt = """You are FirstPerson, a warm, empathetic AI companion... [customize personality
+and behavior here]
 
 ```text
 ```
@@ -262,8 +260,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```bash
 
 # Clean up old containers/images
-docker-compose -f docker-compose.local.yml down
-docker system prune -a
+docker-compose -f docker-compose.local.yml down docker system prune -a
 
 # Remove model data if needed (warning: deletes models)
 
@@ -285,12 +282,9 @@ For NVIDIA GPU support, uncomment in docker-compose.local.yml:
 
 ```yaml
 
-deploy:
-  resources:
-    reservations:
-      devices:
+deploy: resources: reservations: devices:
         - driver: nvidia
-          count: 1
+count: 1
 
 ```bash
 ```
@@ -364,8 +358,7 @@ response = client.generate("Hello! How can I help?", model="llama3")
 Enable debug logging:
 
 ```python
-import logging
-logging.basicConfig(level=logging.DEBUG)
+import logging logging.basicConfig(level=logging.DEBUG)
 ```text
 ```text
 ```
@@ -374,8 +367,7 @@ Check session state in Streamlit:
 
 ```python
 
-import streamlit as st
-st.write("Ollama Available:", st.session_state.get("ollama_available"))
+import streamlit as st st.write("Ollama Available:", st.session_state.get("ollama_available"))
 st.write("Models:", st.session_state.get("ollama_models"))
 
 ```

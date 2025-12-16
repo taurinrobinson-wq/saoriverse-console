@@ -1,6 +1,7 @@
 # Running Velinor Web Stack Locally
 
-This is the quickest way to run the full Velinor game with the web stack (FastAPI backend + Next.js frontend).
+This is the quickest way to run the full Velinor game with the web stack (FastAPI backend + Next.js
+frontend).
 
 ## Prerequisites
 
@@ -44,7 +45,7 @@ Expected output:
 > velinor-web@0.1.0 dev
 > next dev
 
-  ▲ Next.js 14.x.x
+▲ Next.js 14.x.x
 
 ```text
 ```
@@ -55,10 +56,9 @@ Navigate to `http://localhost:3000`
 
 You should see:
 
-1. Splash screen with "Velinor" title and "Start New Game" button
-2. Enter a player name (or use default)
-3. Click "Start New Game"
-4. The game scene loads with background, narration, and interactive choices
+1. Splash screen with "Velinor" title and "Start New Game" button 2. Enter a player name (or use
+default) 3. Click "Start New Game" 4. The game scene loads with background, narration, and
+interactive choices
 
 ## Troubleshooting
 

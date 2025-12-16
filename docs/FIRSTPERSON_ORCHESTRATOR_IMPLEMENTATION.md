@@ -8,17 +8,20 @@
 
 ## What Was Built
 
-The **FirstPerson Orchestrator** - a glyph-constrained response generation system that solves the "canned response" problem.
+The **FirstPerson Orchestrator** - a glyph-constrained response generation system that solves the
+"canned response" problem.
 
 ### The Problem We Solved
 
-Before: The system would select the correct glyph (signal parsing was working perfectly), but then the response generation would either:
+Before: The system would select the correct glyph (signal parsing was working perfectly), but then
+the response generation would either:
 
 - Return the glyph description directly (too poetic/template-like)
 - Use keyword matching rules (still canned, just more variable)
 - Apply rotation banks (made responses generic by replacing meaningful endings)
 
-Result: Same input often got identical responses, or responses felt pre-written and disconnected from actual user input.
+Result: Same input often got identical responses, or responses felt pre-written and disconnected
+from actual user input.
 
 ### The Solution: Glyph-as-Constraint Architecture
 
@@ -27,15 +30,13 @@ Instead of glyphs generating responses, glyphs **inform** response generation:
 ```text
 ```
 
-User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator → Fresh Response
-                                                    ↓
-                                          Glyph provides constraints:
+User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator → Fresh Response ↓ Glyph
+provides constraints:
                                           - Emotional tone
                                           - Response depth
                                           - Theme calibration
 
-                                          But response is generated fresh
-                                          specific to THIS input
+But response is generated fresh specific to THIS input
 
 ```
 
@@ -80,9 +81,8 @@ Orchestrates conversation turns and generates glyph-informed responses.
 
 **How it works:**
 
-1. Analyzes user input for affect (tone, intensity, valence)
-2. Extracts primary theme (grief, joy, fear, etc.)
-3. Uses glyph as calibration constraint:
+1. Analyzes user input for affect (tone, intensity, valence) 2. Extracts primary theme (grief, joy,
+fear, etc.) 3. Uses glyph as calibration constraint:
    - If glyph is "Recursive Ache" → response tone is reflective, present, witnessing
    - If glyph is "Euphoric Yearning" → response tone is affirming, warm
 4. Generates response that:
@@ -153,8 +153,7 @@ orchestrator.initialize_session()
 `response_handler.py` uses it in `_build_conversational_response()`:
 
 ```python
-fp_orch = st.session_state.get("firstperson_orchestrator")
-if fp_orch and best_glyph:
+fp_orch = st.session_state.get("firstperson_orchestrator") if fp_orch and best_glyph:
 ```text
 ```text
 ```
@@ -256,15 +255,13 @@ This implementation restores your **original vision** for the glyph system:
 │ User Input: "I'm grieving the loss of my job"             │
 └────────────────┬────────────────────────────────────────────┘
                  │
-                 ▼
-┌─────────────────────────────────────────────────────────────┐
+▼ ┌─────────────────────────────────────────────────────────────┐
 │ Signal Parser: Extract emotional signals, gate activation   │
 │ → Detects: grief, overwhelm, vulnerability                 │
 │ → Selects Glyph: "Recursive Ache"                           │
 └────────────────┬────────────────────────────────────────────┘
                  │
-                 ▼
-┌─────────────────────────────────────────────────────────────┐
+▼ ┌─────────────────────────────────────────────────────────────┐
 │ FirstPersonOrchestrator                                     │
 │ ┌─────────────────────────────────────────────────────────┐ │
 │ │ AffectParser                                            │ │
@@ -282,8 +279,7 @@ This implementation restores your **original vision** for the glyph system:
 │ └─────────────────────────────────────────────────────────┘ │
 └────────────────┬────────────────────────────────────────────┘
                  │
-                 ▼
-┌─────────────────────────────────────────────────────────────┐
+▼ ┌─────────────────────────────────────────────────────────────┐
 │ Fresh Response:                                             │
 │ "I hear the weight of grief. What's underneath?            │
 │  What do you need? There's no rush.                         │

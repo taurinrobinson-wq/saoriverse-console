@@ -2,7 +2,8 @@
 
 ## Overview
 
-The system now automatically creates new glyphs during live conversations through the hybrid processor. This document explains how the components work together.
+The system now automatically creates new glyphs during live conversations through the hybrid
+processor. This document explains how the components work together.
 
 ## Architecture
 
@@ -13,8 +14,7 @@ The system now automatically creates new glyphs during live conversations throug
 │                    USER-AI DIALOGUE                              │
 └────────────────────────┬────────────────────────────────────────┘
                          │
-                         ▼
-        ┌────────────────────────────────────┐
+▼ ┌────────────────────────────────────┐
         │  HYBRID PROCESSOR WITH EVOLUTION   │
         │                                    │
         │  ✓ Adaptive Signal Extraction      │
@@ -23,7 +23,7 @@ The system now automatically creates new glyphs during live conversations throug
         │  ✓ Glyph Generation               │
         └────────────────────────────────────┘
                    │                │
-        ┌──────────▼────────┐    ┌──▼──────────────────┐
+┌──────────▼────────┐    ┌──▼──────────────────┐
         │ HYBRID LEARNER    │    │ DYNAMIC GLYPH       │
         │                  │    │ EVOLUTION           │
         │ • User Overrides  │    │                    │
@@ -32,7 +32,7 @@ The system now automatically creates new glyphs during live conversations throug
         │ • Learning Log    │    │ • Tracks Discovery │
         └──────────────────┘    └─────┬──────────────┘
                                       │
-                        ┌─────────────▼────────────┐
+┌─────────────▼────────────┐
                         │   NEW GLYPHS AVAILABLE   │
                         │   FOR SYSTEM USE         │
                         └──────────────────────────┘
@@ -51,16 +51,11 @@ The main integration layer that orchestrates the entire pipeline:
 
 from hybrid_processor_with_evolution import create_integrated_processor
 
-processor = create_integrated_processor(
-    hybrid_learner=learner,
-    adaptive_extractor=extractor,
-    user_id="user_123"
-)
+processor = create_integrated_processor( hybrid_learner=learner, adaptive_extractor=extractor,
+user_id="user_123" )
 
-result = processor.process_user_message(
-    user_message="I feel a deep connection but it's terrifying",
-    ai_response="That vulnerability is the doorway...",
-)
+result = processor.process_user_message( user_message="I feel a deep connection but it's
+terrifying", ai_response="That vulnerability is the doorway...", )
 
 # Result includes:
 
@@ -125,12 +120,8 @@ signals = extractor.extract_signals(combined_text)
 ### Step 3: Hybrid Learning
 
 ```python
-learner.learn_from_exchange(
-    user_id="user_123",
-    user_input="...",
-    ai_response="...",
-    emotional_signals=signals,
-)
+learner.learn_from_exchange( user_id="user_123", user_input="...", ai_response="...",
+emotional_signals=signals, )
 
 # Updates:
 
@@ -146,9 +137,7 @@ learner.learn_from_exchange(
 
 ```python
 
-patterns = evolution._detect_patterns_in_exchange(
-    user_input, ai_response, signals
-)
+patterns = evolution._detect_patterns_in_exchange( user_input, ai_response, signals )
 
 # Returns: [
 #   {
@@ -202,26 +191,21 @@ new_glyphs = evolution._generate_glyphs_from_patterns(patterns, ...)
 ### Basic Integration
 
 ```python
-from hybrid_processor_with_evolution import create_integrated_processor
-from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
-from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
+from hybrid_processor_with_evolution import create_integrated_processor from
+emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides from
+emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 
 # Initialize components
-learner = HybridLearnerWithUserOverrides()
-extractor = AdaptiveSignalExtractor(adaptive=True, use_discovered=True)
+learner = HybridLearnerWithUserOverrides() extractor = AdaptiveSignalExtractor(adaptive=True,
+use_discovered=True)
 
 # Create integrated processor
-processor = create_integrated_processor(
-    hybrid_learner=learner,
-    adaptive_extractor=extractor,
-    user_id="user_123",
-)
+processor = create_integrated_processor( hybrid_learner=learner, adaptive_extractor=extractor,
+user_id="user_123", )
 
 # Process dialogue
-result = processor.process_user_message(
-    user_message="I want to understand my grief",
-    ai_response="Grief is love with nowhere to go...",
-)
+result = processor.process_user_message( user_message="I want to understand my grief",
+ai_response="Grief is love with nowhere to go...", )
 
 # Check results
 print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
@@ -236,18 +220,12 @@ print(f"New glyphs: {len(result['pipeline_stages']['glyph_generation']['new_glyp
 conversation_id = "conv_session_001"
 
 # Turn 1
-result1 = processor.process_user_message(
-    user_message="I feel lost",
-    ai_response="Feeling lost is the beginning of finding yourself",
-    conversation_id=conversation_id,
-)
+result1 = processor.process_user_message( user_message="I feel lost", ai_response="Feeling lost is
+the beginning of finding yourself", conversation_id=conversation_id, )
 
 # Turn 2
-result2 = processor.process_user_message(
-    user_message="But there's also beauty in the uncertainty",
-    ai_response="Yes, that uncertain beauty is where growth happens",
-    conversation_id=conversation_id,
-)
+result2 = processor.process_user_message( user_message="But there's also beauty in the uncertainty",
+ai_response="Yes, that uncertain beauty is where growth happens", conversation_id=conversation_id, )
 
 # Get conversation summary
 summary = processor.get_conversation_summary(conversation_id)
@@ -310,23 +288,17 @@ processor.print_session_summary()
 # HYBRID PROCESSOR SESSION SUMMARY
 
 # ════════════════════════════════════════════════════════════════════════════════
-#
-
 # Total conversations processed: 3
 
 # Total turns processed: 8
 
 # Total new glyphs generated: 5
-#
-
 # NEW GLYPHS GENERATED:
 #   1. ♥❤ Intimate Connection (love + intimacy)
 #   2. ♥🌱 Open-Hearted Love (love + vulnerability)
 #   3. ♥🌹 Sensual Devotion (love + sensuality)
 #   4. 🌱✨ Vulnerable Wonder (vulnerability + wonder)
-#   5. 🌿🎻 Natural Longing (nature + longing)
-#
-
+# 5. 🌿🎻 Natural Longing (nature + longing)
 ```text
 ```text
 ```
@@ -337,9 +309,8 @@ processor.print_session_summary()
 
 ```python
 
-evolution = DynamicGlyphEvolution(
-    hybrid_learner=learner,
-    min_frequency_for_glyph=300,  # Default: 300 co-occurrences
+evolution = DynamicGlyphEvolution( hybrid_learner=learner, min_frequency_for_glyph=300,  # Default:
+300 co-occurrences
 
 ```text
 ```
@@ -387,8 +358,7 @@ The system automatically expands the lexicon through:
 Example progression:
 
 ```
-Initial: 8 hardcoded dimensions
-After poetry processing: 18+ adaptive dimensions
+Initial: 8 hardcoded dimensions After poetry processing: 18+ adaptive dimensions
 ```text
 ```text
 ```
@@ -407,9 +377,7 @@ The hybrid learner applies quality checks:
 
 ```python
 
-is_quality, reason = learner._is_quality_exchange(
-    user_input, ai_response, signals
-)
+is_quality, reason = learner._is_quality_exchange( user_input, ai_response, signals )
 
 ```text
 ```
@@ -529,18 +497,17 @@ for glyph in top_glyphs:
 Create custom glyph generation logic:
 
 ```python
-class CustomGlyphEvolution(DynamicGlyphEvolution):
-    def _create_pattern_name(self, signal1, signal2):
+class CustomGlyphEvolution(DynamicGlyphEvolution): def _create_pattern_name(self, signal1, signal2):
         # Your custom naming logic
-        return f"Custom: {signal1} meets {signal2}"
+return f"Custom: {signal1} meets {signal2}"
 
-    def _create_pattern_symbol(self, signal1, signal2):
+def _create_pattern_symbol(self, signal1, signal2):
         # Your custom symbol selection
-        return "✨🔮"
+return "✨🔮"
 
 # Use it
-evolution = CustomGlyphEvolution(hybrid_learner)
-processor = HybridProcessorWithEvolution(..., evolution)
+evolution = CustomGlyphEvolution(hybrid_learner) processor = HybridProcessorWithEvolution(...,
+evolution)
 ```
 
 ## References

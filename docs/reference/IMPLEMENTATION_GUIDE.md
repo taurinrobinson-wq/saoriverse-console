@@ -2,7 +2,8 @@
 
 ## What We've Built (Today's Session)
 
-You now have a **complete roadmap** to transform FirstPerson into a fully sovereign, privacy-first emotional intelligence system. Here's what's in your repository:
+You now have a **complete roadmap** to transform FirstPerson into a fully sovereign, privacy-first
+emotional intelligence system. Here's what's in your repository:
 
 ##
 
@@ -363,8 +364,8 @@ And that place is completely **yours**.
 ```
 /SOVEREIGN_LOCAL_STRATEGY.md ........... Strategic vision & architecture
 /SOVEREIGN_LOCAL_QUICK_START.md ........ Implementation guide (copy-paste code)
-/FIRSTPERSON_MANIFESTO.md ............ Values & principles
-/TECHNICAL_ARCHITECTURE.md .......... Developer documentation
+/FIRSTPERSON_MANIFESTO.md ............ Values & principles /TECHNICAL_ARCHITECTURE.md ..........
+Developer documentation
 ```text
 ```text
 ```
@@ -373,10 +374,9 @@ Plus your existing:
 
 ```
 
-/parser/signal_parser.py ........... Core emotional processor
-/main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) ............ Streamlit interface
-/glyph_lexicon_rows.csv .......... 292 glyphs database
-/requirements.txt ................. Python dependencies
+/parser/signal_parser.py ........... Core emotional processor /main_v2.py  # (ARCHIVED:
+emotional_os_ui_v2.py) ............ Streamlit interface /glyph_lexicon_rows.csv .......... 292
+glyphs database /requirements.txt ................. Python dependencies
 
 ```
 

@@ -139,9 +139,8 @@ saoriverse-console/
 
 ### When AI Generates New Documentation
 
-1. **Good docs** → Move to `docs/`
-2. **Auto-summaries/clutter** → Stays in `scratch/` (auto-ignored by git)
-3. **Temporary notes** → Keep in `scratch/` for reference, delete later
+1. **Good docs** → Move to `docs/` 2. **Auto-summaries/clutter** → Stays in `scratch/` (auto-ignored
+by git) 3. **Temporary notes** → Keep in `scratch/` for reference, delete later
 
 ### Keeping It Clean
 

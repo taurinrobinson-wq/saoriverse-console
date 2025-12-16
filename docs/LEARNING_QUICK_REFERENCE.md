@@ -5,16 +5,8 @@
 ```text
 ```
 
-Playwright writes dialogue scenes
-        ↓
-Organizer extracts rules and principles
-        ↓
-System applies principles to generate responses
-        ↓
-Responses are logged and analyzed
-        ↓
-System learns new patterns
-        ↓
+Playwright writes dialogue scenes ↓ Organizer extracts rules and principles ↓ System applies
+principles to generate responses ↓ Responses are logged and analyzed ↓ System learns new patterns ↓
 Library grows, responses improve
 
 ```
@@ -29,24 +21,18 @@ Library grows, responses improve
 ```text
 ```
 
-What you need: Library of conversation archetypes
-File: emotional_os/learning/conversation_archetype.py
-What it does:
+What you need: Library of conversation archetypes File:
+emotional_os/learning/conversation_archetype.py What it does:
 
 - Stores patterns (ReliefToGratitude, OverwhelmToClarity, etc.)
 - Matches incoming user input to best pattern (0-1 score)
 - Tracks usage and success rates
 - Persists to JSON
 
-Example archetype:
-{
-  "name": "ReliefToGratitude",
-  "entry_cues": ["relief", "grateful", "hug", "precious", ...],
-  "response_principles": ["Validate warmly", "Balance emotions", ...],
-  "continuity_bridges": ["Connect to prior overwhelm", ...],
-  "tone_guidelines": ["Warm language", "Gentle pacing", ...],
-  "success_weight": 0.95
-}
+Example archetype: { "name": "ReliefToGratitude", "entry_cues": ["relief", "grateful", "hug",
+"precious", ...], "response_principles": ["Validate warmly", "Balance emotions", ...],
+"continuity_bridges": ["Connect to prior overwhelm", ...], "tone_guidelines": ["Warm language",
+"Gentle pacing", ...], "success_weight": 0.95 }
 
 ```
 
@@ -158,15 +144,12 @@ library = get_archetype_library()
 print(f"Total: {len(library.archetypes)}")
 
 # Find best match for input
-best = library.get_best_match("I feel relieved and grateful")
-print(f"Best match: {best.name if best else 'None'}")
+best = library.get_best_match("I feel relieved and grateful") print(f"Best match: {best.name if best
+else 'None'}")
 
 # Get all matches above threshold
-matches = library.get_all_matches(
-    user_input="I'm overwhelmed but grateful",
-    threshold=0.3
-)
-for archetype, score in matches:
+matches = library.get_all_matches( user_input="I'm overwhelmed but grateful", threshold=0.3 ) for
+archetype, score in matches:
 ```text
 ```text
 ```
@@ -199,13 +182,11 @@ Your dialogue scene → System extracted this archetype
 
 ```
 
-User: "I've been so stressed about my performance review,
-       but I just found out I got the raise."
+User: "I've been so stressed about my performance review, but I just found out I got the raise."
 
 System: "That's huge. That weight lifted off. How does it feel?"
 
-User: "Like I can finally breathe. But now I feel guilty
-       that it took this to relax."
+User: "Like I can finally breathe. But now I feel guilty that it took this to relax."
 
 System: "The relief and the guilt can coexist. What's underneath
 
@@ -279,14 +260,9 @@ python test_learning_module.py
 cat emotional_os/learning/archetype_library.json | python -m json.tool
 
 # Test a single response
-python -c "
-from emotional_os.learning import get_archetype_response_generator
-gen = get_archetype_response_generator()
-resp = gen.generate_archetype_aware_response(
-    'I feel relieved and grateful'
-)
-print(resp)
-"
+python -c " from emotional_os.learning import get_archetype_response_generator gen =
+get_archetype_response_generator() resp = gen.generate_archetype_aware_response( 'I feel relieved
+and grateful' ) print(resp) "
 ```
 
 ## Key Insight

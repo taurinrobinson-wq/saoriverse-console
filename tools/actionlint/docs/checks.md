@@ -1,6 +1,7 @@
 # All checks done by actionlint
 
-This document describes all checks done by [actionlint](..) with example inputs, outputs, and playground links.
+This document describes all checks done by [actionlint](..) with example inputs, outputs, and
+playground links.
 
 List of checks:
 
@@ -38,8 +39,8 @@ List of checks:
 - [Deprecated workflow commands](#check-deprecated-workflow-commands)
 - [Conditions always evaluated to true at `if:`](#if-cond-always-true)
 
-Note that actionlint focuses on catching mistakes in workflow files. If you want some general code style checks, please consider
-using a general YAML checker like [yamllint][].
+Note that actionlint focuses on catching mistakes in workflow files. If you want some general code
+style checks, please consider using a general YAML checker like [yamllint][].
 
 <a name="check-unexpected-keys"></a>
 
@@ -95,16 +96,11 @@ case-sensitivity mistakes.
 Example input:
 
 ```yaml
-on: push
-jobs:
-  test:
-    strategy:
+on: push jobs: test: strategy:
       # ERROR: Matrix name is duplicated. These keys are case insensitive
-      matrix:
-        version_name: [v1, v2]
-        VERSION_NAME: [V1, V2]
+matrix: version_name: [v1, v2] VERSION_NAME: [V1, V2]
     # ERROR: runs-on is missing
-    steps:
+steps:
 ```text
 ```text
 ```
@@ -117,7 +113,8 @@ test.yaml:3:3: "runs-on" section is missing in job "test" [syntax-check]
   |
 3 |   test:
   |   ^~~~~
-test.yaml:8:9: key "version_name" is duplicated in "matrix" section. previously defined at line:7,col:9. note that key names are case insensitive [syntax-check]
+test.yaml:8:9: key "version_name" is duplicated in "matrix" section. previously defined at
+line:7,col:9. note that key names are case insensitive [syntax-check]
   |
 8 |         VERSION_NAME: [V1, V2]
 
@@ -126,12 +123,15 @@ test.yaml:8:9: key "version_name" is duplicated in "matrix" section. previously 
 
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtuJSUChJLS4B0QoKxSVFiSWp6ZUQnoJCbmJJUWYFjKegUJZaVJyZnxefl5ibaqUQXWaoo1BmFAuXDnMNCvb094v3c/R1BUqHAaXDoNLFJakFxTCDdBWKSoGOSE3OyFdQz0jNyclXBwA2byiy)
 
-Some mappings must include specific keys. For example, job mappings must include `runs-on:` and `steps:`.
+Some mappings must include specific keys. For example, job mappings must include `runs-on:` and
+`steps:`.
 
-And duplicate keys are not allowed. In workflow syntax, comparing some keys is **case insensitive**. For example, the job ID
+And duplicate keys are not allowed. In workflow syntax, comparing some keys is **case insensitive**.
+For example, the job ID
 `test` in lower case and the job ID `TEST` in upper case are not able to exist in the same workflow.
 
-actionlint checks these missing required keys and duplicate keys while parsing, and reports an error.
+actionlint checks these missing required keys and duplicate keys while parsing, and reports an
+error.
 
 <a name="check-empty-mapping"></a>
 
@@ -170,16 +170,11 @@ error.
 Example input:
 
 ```yaml
-on: push
-jobs:
-  test:
-    strategy:
+on: push jobs: test: strategy:
       # ERROR: Boolean value "true" or "false" is expected
-      fail-fast: off
+fail-fast: off
       # ERROR: Integer value is expected
-      max-parallel: 1.5
-    runs-on: ubuntu-latest
-    steps:
+max-parallel: 1.5 runs-on: ubuntu-latest steps:
       - run: sleep 200
         # ERROR: Float value is expected
 ```text
@@ -190,15 +185,18 @@ Output:
 
 ```
 
-test.yaml:6:18: expecting a single ${{...}} expression or boolean literal "true" or "false", but found plain text node [syntax-check]
+test.yaml:6:18: expecting a single ${{...}} expression or boolean literal "true" or "false", but
+found plain text node [syntax-check]
   |
 6 |       fail-fast: off
   |                  ^~~
-test.yaml:8:21: expected scalar node for integer value but found scalar node with "!!float" tag [syntax-check]
+test.yaml:8:21: expected scalar node for integer value but found scalar node with "!!float" tag
+[syntax-check]
   |
 8 |       max-parallel: 1.5
   |                     ^~~
-test.yaml:13:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]
+test.yaml:13:26: expecting a single ${{...}} expression or float number literal, but found plain
+text node [syntax-check]
    |
 13 |         timeout-minutes: two minutes
 
@@ -207,11 +205,12 @@ test.yaml:13:26: expecting a single ${{...}} expression or float number literal,
 
 [Playground](https://rhysd.github.io/actionlint#eJw1jssNAjEMRO9bxTQQtCBxSTdeyYGg/BTbArongXCy5o395Fo8msl9e9RD/AYoi84JiHZSvr1/CQgUkws0atQQFsz0co06pcTJ43y6fnm3Iq4OtR1W1FyiqV1WbvJXurnpIYm54bLvC48vYuZq6nIsNk499FmxwgdsuTVm)
 
-Some mapping values are restricted to some constant strings. Several mapping values expect boolean value like `true` or
+Some mapping values are restricted to some constant strings. Several mapping values expect boolean
+value like `true` or
 `false`. And some mapping values expect integer or floating number values.
 
-actionlint checks such constant strings are used properly while parsing and reports an error when an unexpected value is
-specified.
+actionlint checks such constant strings are used properly while parsing and reports an error when an
+unexpected value is specified.
 
 <a name="check-syntax-expression"></a>
 
@@ -292,11 +291,7 @@ Type check by actionlint is more strict than GitHub Actions runtime.
 Example input:
 
 ```yaml
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+on: push jobs: test: runs-on: ubuntu-latest steps:
       # ERROR: `env` is object. Index access object is invalid
       - run: echo '${{ env[0] }}'
       # ERROR: Properties in objects are strongly typed. Missing property can be caught
@@ -316,15 +311,18 @@ test.yaml:7:28: property access of object must be type of string but got "number
   |
 7 |       - run: echo '${{ env[0] }}'
   |                            ^~
-test.yaml:9:24: property "os" is not defined in object type {id: string; network: string} [expression]
+test.yaml:9:24: property "os" is not defined in object type {id: string; network: string}
+[expression]
   |
 9 |       - run: echo '${{ job.container.os }}'
   |                        ^~~~~~~~~~~~~~~~
-test.yaml:11:24: receiver of object dereference "owner" must be type of object but got "string" [expression]
+test.yaml:11:24: receiver of object dereference "owner" must be type of object but got "string"
+[expression]
    |
 11 |       - run: echo '${{ github.repository.owner }}'
    |                        ^~~~~~~~~~~~~~~~~~~~~~~
-test.yaml:13:20: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type {string => string} [expression]
+test.yaml:13:20: object, array, and null values should not be evaluated in template with ${{ }} but
+evaluating the value of type {string => string} [expression]
    |
 13 |       - run: echo '${{ env }}'
 
@@ -333,12 +331,14 @@ test.yaml:13:20: object, array, and null values should not be evaluated in templ
 
 [Playground](https://rhysd.github.io/actionlint#eJx9jrEKAjEQRPv7iimEqxKs8yticTkWE5FsyO4qcty/m2jtVVO8N8xwCagmabpzlDABSqIjgWZFHHdu0YqaeyyDfZEoVflZgBtmAK2JMZ+2DVSel/MV+z7/M/qYX7nokgs1z3Lk3rImi75RZcnK7e351VtHlX5g4A+nCkLw)
 
-Type checks for expression syntax in `${{ }}` are done by semantics checker. Note that actual type checks by GitHub Actions
-runtime is loose.
+Type checks for expression syntax in `${{ }}` are done by semantics checker. Note that actual type
+checks by GitHub Actions runtime is loose.
 
-Any object value can be assigned into string value as string `'Object'`. `echo '${{ env }}'` will be replaced with
+Any object value can be assigned into string value as string `'Object'`. `echo '${{ env }}'` will be
+replaced with
 `echo 'Object'`. And an array can also be converted into `'Array'` string. Such loose conversions are bugs in almost all cases.
-actionlint checks types more strictly. actionlint checks values evaluated at `${{ }}` are not object (replaced with string
+actionlint checks types more strictly. actionlint checks values evaluated at `${{ }}` are not object
+(replaced with string
 `'Object'`), array (replaced with string `'Array'`), nor null (replaced with string `''`). If you want to check a content of
 object or array, use `toJSON()` function.
 
@@ -347,11 +347,13 @@ object or array, use `toJSON()` function.
 ```text
 ```
 
-There are two types of object types internally. One is an object which is strict for properties, which causes a type error
-when trying to access unknown properties. And another is an object which is not strict for properties, which allows to access
-unknown properties. In the case, accessing unknown property is typed as `any`.
+There are two types of object types internally. One is an object which is strict for properties,
+which causes a type error when trying to access unknown properties. And another is an object which
+is not strict for properties, which allows to access unknown properties. In the case, accessing
+unknown property is typed as `any`.
 
-When the type check cannot be done statically, the type is deduced to `any` (e.g. return type of `toJSON()`).
+When the type check cannot be done statically, the type is deduced to `any` (e.g. return type of
+`toJSON()`).
 
 As special case of `${{ }}`, it can be used for expanding object and array values.
 
@@ -403,11 +405,7 @@ Example input:
 
 ```yaml
 
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+on: push jobs: test: runs-on: ubuntu-latest steps:
       # Access undefined context
       - run: echo '${{ unknown_context }}'
       # Access undefined property of context
@@ -458,9 +456,9 @@ test.yaml:20:24: format string "{0}{1}" does not contain placeholder {2}. remove
 
 [Playground](https://rhysd.github.io/actionlint#eJydkNGKwjAQRd/9ikGEuJIWdd/6Iz5KWmeNazojnYkKpf9uorAorH3wKYR7zs0lTBWcovjJL9dSTQAURfMJ0EWSglMe60gai+Bydo9E8SQPCqDIZAXYeAYz63uIdCS+0LZhUrwqDIN5h+4P6mNd4hlJ5Q04zaCo63ST6LnxGAJbuHAXdsaCSRfzldzpqCv/yJ9Z9mX1aEf+AXcg+WD0n/r8WBlcjUHKRUmuxVSD5B012KZsvO6Hu9bp3PTLoV8NacHKwtrC9126AZ31neg=)
 
-[Contexts][contexts-doc] and [built-in functions][funcs-doc] are strongly typed. Typos in property access of contexts and
-function names can be checked. And invalid function calls like wrong number of arguments or type mismatch at parameter also
-can be checked thanks to type checker.
+[Contexts][contexts-doc] and [built-in functions][funcs-doc] are strongly typed. Typos in property
+access of contexts and function names can be checked. And invalid function calls like wrong number
+of arguments or type mismatch at parameter also can be checked thanks to type checker.
 
 The semantics checker can properly handle that
 
@@ -468,10 +466,11 @@ The semantics checker can properly handle that
 - some parameters are optional (e.g. `join(strings, sep)` and `join(strings)`)
 - some parameters are repeatable (e.g. `hashFiles(file1, file2, ...)`)
 
-In addition, `format()` function has a special check for placeholders in the first parameter which represents the formatting
-string.
+In addition, `format()` function has a special check for placeholders in the first parameter which
+represents the formatting string.
 
-Note that context names and function names are case insensitive. For example, `toJSON` and `toJson` are the same function.
+Note that context names and function names are case insensitive. For example, `toJSON` and `toJson`
+are the same function.
 
 <a name="check-contextual-step-object"></a>
 
@@ -538,18 +537,12 @@ Example input:
 
 on: push
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
       # ERROR: The step is not run yet at this point
       - run: echo ${{ steps.cache.outputs.cache-hit }}
       # actions/cache sets cache-hit output
       - uses: actions/cache@v3
-        id: cache
-        with:
-          key: ${{ hashFiles('**/*.lock') }}
-          path: ./packages
+id: cache with: key: ${{ hashFiles('**/*.lock') }} path: ./packages
       # OK
       - run: echo ${{ steps.cache.outputs.cache-hit }}
       # ERROR: Typo at output name
@@ -573,13 +566,15 @@ test.yaml:18:23: property "cache_hit" is not defined in object type {cache-hit: 
 
 [Playground](https://rhysd.github.io/actionlint#eJyNTksKwjAQ3fcUbyFUC0nBZVauvIakMZjY0gRnokjp3W3TUl26Gt53XugVYiJXFPfQkCoAtsTzBR6pJxEmQ2pSz0l0etayRGwjLS5AIJElBW3Yh55qo42zp+dxlQF/Vcjkxrw8O7UhoLVvhd0wwGlyZ99Z2pdVVVeyC6YtDxjHH3PUUxiyjtq0+mZpmzENVrDGhVyVN8r8V4bEMfGKhPP8bfw7dlliH1xHWso=)
 
-In the above example, [actions/cache][actions-cache] action sets `cache-hit` output so that the following steps can know
-whether the cache was hit or not. At line 8, the cache action is not run yet. So `cache` property does not exist in the
+In the above example, [actions/cache][actions-cache] action sets `cache-hit` output so that the
+following steps can know whether the cache was hit or not. At line 8, the cache action is not run
+yet. So `cache` property does not exist in the
 `steps` context yet. On running the step whose ID is `cache`, `steps.cache` object is typed as
 `{outputs: {cache-hit: any}, conclusion: string, outcome: string}`. At line 18, the expression has a typo in the output
 name. actionlint can check it because properties of `steps.cache.outputs` are typed.
 
-This strict typing for outputs is also applied to local actions. Let's say we have the following local action.
+This strict typing for outputs is also applied to local actions. Let's say we have the following
+local action.
 
 ```yaml
 
@@ -602,15 +597,12 @@ Example input:
 ```yaml
 on: push
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
       # ERROR: The step is not yet run
       - run: echo ${{ steps.my_action.outputs.some_value }}
       # The action runs here and sets its outputs
       - uses: ./.github/actions/my-action-with-output
-        id: my_action
+id: my_action
       # OK
       - run: echo ${{ steps.my_action.outputs.some_value }}
       # ERROR: No output named 'some-value' (typo)
@@ -626,15 +618,17 @@ test.yaml:8:23: property "my_action" is not defined in object type {} [expressio
   |
 8 |       - run: echo ${{ steps.my_action.outputs.some_value }}
   |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-test.yaml:15:23: property "some-value" is not defined in object type {some_value: string} [expression]
+test.yaml:15:23: property "some-value" is not defined in object type {some_value: string}
+[expression]
    |
 15 |       - run: echo ${{ steps.my_action.outputs.some-value }}
 
 ```text
 ```
 
-The 'My action with output' action defines one output `some_value`. The property is typed at `steps.my_action.outputs` object
-so that actionlint can check incorrect property accesses like a typo in the output name.
+The 'My action with output' action defines one output `some_value`. The property is typed at
+`steps.my_action.outputs` object so that actionlint can check incorrect property accesses like a
+typo in the output name.
 
 <a name="check-contextual-matrix-object"></a>
 
@@ -708,13 +702,11 @@ strictly like `package.name` in above example.
 When a type of the array elements is not persistent, the type of the matrix value falls back to `any`.
 
 ```yaml
-strategy:
-  matrix:
-    foo:
+strategy: matrix: foo:
       - 'string value'
       - 42
       - {aaa: true, bbb: null}
-    bar:
+bar:
       - [42]
       - [true]
       - [{aaa: true, bbb: null}]
@@ -735,37 +727,20 @@ Example input:
 
 ```yaml
 
-on: push
-jobs:
-  install:
-    outputs:
-      installed: '...'
-    runs-on: ubuntu-latest
-    steps:
+on: push jobs: install: outputs: installed: '...' runs-on: ubuntu-latest steps:
       - run: echo 'install something'
-  prepare:
-    outputs:
-      prepared: '...'
-    runs-on: ubuntu-latest
-    steps:
+prepare: outputs: prepared: '...' runs-on: ubuntu-latest steps:
       - run: echo 'parepare something'
       # ERROR: Outputs in other job is not accessible
       - run: echo '${{ needs.prepare.outputs.prepared }}'
-  build:
-    needs: [install, prepare]
-    outputs:
-      built: '...'
-    runs-on: ubuntu-latest
-    steps:
+build: needs: [install, prepare] outputs: built: '...' runs-on: ubuntu-latest steps:
       # OK: Accessing job results
       - run: echo 'build something with ${{ needs.install.outputs.installed }} and ${{ needs.prepare.outputs.prepared }}'
       # ERROR: Accessing undefined output causes an error
       - run: echo '${{ needs.install.outputs.foo }}'
       # ERROR: Accessing undefined job ID
       - run: echo '${{ needs.some_job }}'
-  other:
-    runs-on: ubuntu-latest
-    steps:
+other: runs-on: ubuntu-latest steps:
       # ERROR: Cannot access outputs across jobs
 
 ```text
@@ -795,10 +770,12 @@ test.yaml:33:24: property "build" is not defined in object type {} [expression]
 
 [Playground](https://rhysd.github.io/actionlint#eJylUs1uwjAMvvMUPiD1QvMAeRU0oZZ4S6cujmpHHBDvTh1CKjY0EBwiJfHn78cJBQsxsV99U892BTAElm4cdQtASWISvhxqDZ2FxhjT5OspBW5ppkl9CpLasRNkySUWjLW5VaQF3HuCpjAB0w+KH8KXcsUJYzfhXelSe19ZWXTdSv+BrY9HCIiOTVE2xdD17OB00s4+DaO7KGW8hW0Jt7ma/rgXSPvk7TRZfYkCh0E8LN6Lk+q9PuBsHrrg4OmY/wzot8gn0eMmtbyb/1xBknic7OtzWIjzRKqXPGXVOAPMHOsV)
 
-Job dependencies can be defined at [`needs:`][needs-doc]. A job runs after all jobs defined in `needs:` are done.
-Outputs from the jobs can be accessed only from jobs following them via [`needs` context][needs-context-doc].
+Job dependencies can be defined at [`needs:`][needs-doc]. A job runs after all jobs defined in
+`needs:` are done. Outputs from the jobs can be accessed only from jobs following them via [`needs`
+context][needs-context-doc].
 
-actionlint defines a type of `needs` variable contextually by looking at each job's `outputs:` section and `needs:` section.
+actionlint defines a type of `needs` variable contextually by looking at each job's `outputs:`
+section and `needs:` section.
 
 <a name="check-shellcheck-integ"></a>
 
@@ -829,11 +806,13 @@ jobs:
 Output:
 
 ```
-test.yaml:6:9: shellcheck reported issue in this script: SC2086:info:1:6: Double quote to prevent globbing and word splitting [shellcheck]
+test.yaml:6:9: shellcheck reported issue in this script: SC2086:info:1:6: Double quote to prevent
+globbing and word splitting [shellcheck]
   |
 6 |       - run: echo $FOO
   |         ^~~~
-test.yaml:14:9: shellcheck reported issue in this script: SC2086:info:1:6: Double quote to prevent globbing and word splitting [shellcheck]
+test.yaml:14:9: shellcheck reported issue in this script: SC2086:info:1:6: Double quote to prevent
+globbing and word splitting [shellcheck]
    |
 14 |       - run: echo $FOO
 ```json
@@ -868,20 +847,17 @@ When what shell is used cannot be determined statically, actionlint assumes `she
 
 ```yaml
 
-strategy:
-  matrix:
-    os: [ubuntu-latest, macos-latest, windows-latest]
-runs-on: ${{ matrix.os }}
-steps:
+strategy: matrix: os: [ubuntu-latest, macos-latest, windows-latest] runs-on: ${{ matrix.os }} steps:
   - name: Show file content
-    run: Get-Content -Path xxx\yyy.txt
+run: Get-Content -Path xxx\yyy.txt
 
 ```text
 ```
 
-The 'Show file content' script is only run by `pwsh` due to `matrix.os == 'windows-latest'` guard. However actionlint does not
-know that. It checks the script with shellcheck and it'd probably cause a false-positive (due to file separator). This kind of
-false positives can be avoided by showing the shell name explicitly. It is also better in terms of maintenance of the workflow.
+The 'Show file content' script is only run by `pwsh` due to `matrix.os == 'windows-latest'` guard.
+However actionlint does not know that. It checks the script with shellcheck and it'd probably cause
+a false-positive (due to file separator). This kind of false positives can be avoided by showing the
+shell name explicitly. It is also better in terms of maintenance of the workflow.
 
 ```yaml
 - name: Show file content
@@ -934,11 +910,13 @@ test.yaml:10:9: pyflakes reported issue in this script: 1:7: undefined name 'hel
    |
 10 |       - run: print(hello)
    |         ^~~~
-test.yaml:19:9: pyflakes reported issue in this script: 2:5: import 'sys' from line 1 shadowed by loop variable [pyflakes]
+test.yaml:19:9: pyflakes reported issue in this script: 2:5: import 'sys' from line 1 shadowed by
+loop variable [pyflakes]
    |
 19 |       - run: |
    |         ^~~~
-test.yaml:23:9: pyflakes reported issue in this script: 1:1: 'time.sleep' imported but unused [pyflakes]
+test.yaml:23:9: pyflakes reported issue in this script: 1:1: 'time.sleep' imported but unused
+[pyflakes]
    |
 23 |       - run: |
 ```text
@@ -970,25 +948,20 @@ Example input:
 
 ```yaml
 
-name: Test
-on: pull_request
+name: Test on: pull_request
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
       - name: Print pull request title
         # ERROR: Using the potentially untrusted input can cause script injection
-        run: echo '${{ github.event.pull_request.title }}'
+run: echo '${{ github.event.pull_request.title }}'
       - uses: actions/stale@v4
-        with:
-          repo-token: ${{ secrets.TOKEN }}
+with: repo-token: ${{ secrets.TOKEN }}
           # This is OK because action input is not evaluated by shell
-          stale-pr-message: ${{ github.event.pull_request.title }} was closed
+stale-pr-message: ${{ github.event.pull_request.title }} was closed
       - uses: actions/github-script@v4
-        with:
+with:
           # ERROR: Using the potentially untrusted input can cause script injection
-          script: console.log('${{ github.event.head_commit.author.name }}')
+script: console.log('${{ github.event.head_commit.author.name }}')
       - name: Get comments
         # ERROR: Accessing untrusted inputs via `.*` object filter; bodies of comment, review, and review_comment
 
@@ -1015,8 +988,8 @@ test.yaml:22:31: object filter extracts potentially untrusted properties "github
 
 [Playground](https://rhysd.github.io/actionlint#eJyFkUFLAzEQhe/9FXMQ2gqJF085eRFBoRXsvWSzQ3drNrNmJi1S+t9NdkupSvUUknnzvcdLsB0aWCHLhIKBPnm/jviRysNkSxWbCYDkWzkBYgqsijBVKUhS3pbZMGLBnkcVgIIwgF9jG2SgwokK0orHk2wAGkDXEExvDgfYtNKkSuMOg+jLMHpYg+NxenZIjGzAOmkp8B2L9fiwuz+T9xllzrfshD0poXfMhsWK0UUU1qvly+Migy+kA0v1UXXIbDc4LvyfDfaWwXlirK+kHBmKXWx7+SvtqDDg8hZ51J42s98NNWjrtaOua0XbJA1FXXovNc1//MQTChRlXuNr7Qs9vy0Xs28Wt7qi+nNekF/IR69F)
 
-Since `${{ }}` placeholders are evaluated and replaced directly by GitHub Actions runtime, you need to use them carefully in
-inline scripts at `run:`. For example, if we have step as follows,
+Since `${{ }}` placeholders are evaluated and replaced directly by GitHub Actions runtime, you need
+to use them carefully in inline scripts at `run:`. For example, if we have step as follows,
 
 ```yaml
 
@@ -1029,7 +1002,7 @@ inputs via environment variables. See [the official document][security-doc] for 
 
 ```yaml
 - run: echo "issue ${TITLE}"
-  env:
+env:
 ```text
 ```text
 ```
@@ -1078,8 +1051,8 @@ Instead, you should store the JSON string in an environment variable:
 ```text
 ```
 
-At last, the popular action [actions/github-script][github-script] has the same issue in its `script` input. actionlint also
-checks the input.
+At last, the popular action [actions/github-script][github-script] has the same issue in its
+`script` input. actionlint also checks the input.
 
 <a name="check-job-deps"></a>
 
@@ -1112,7 +1085,8 @@ jobs:
 Output:
 
 ```
-test.yaml:8:3: cyclic dependencies in "needs" configurations of jobs are detected. detected cycle is "install" -> "prepare", "prepare" -> "build", "build" -> "install" [job-needs]
+test.yaml:8:3: cyclic dependencies in "needs" configurations of jobs are detected. detected cycle is
+"install" -> "prepare", "prepare" -> "build", "build" -> "install" [job-needs]
   |
 8 |   install:
 ```json
@@ -1130,17 +1104,9 @@ Example input:
 
 ```yaml
 
-on: push
-jobs:
-  foo:
-    needs: [bar, BAR]
-    runs-on: ubuntu-latest
-    steps:
+on: push jobs: foo: needs: [bar, BAR] runs-on: ubuntu-latest steps:
       - run: echo 'hi'
-  bar:
-    needs: [unknown]
-    runs-on: ubuntu-latest
-    steps:
+bar: needs: [unknown] runs-on: ubuntu-latest steps:
 
 ```text
 ```
@@ -1190,15 +1156,18 @@ jobs:
 Output:
 
 ```
-test.yaml:6:28: duplicate value "14" is found in matrix "node". the same value is at line:6,col:24 [matrix]
+test.yaml:6:28: duplicate value "14" is found in matrix "node". the same value is at line:6,col:24
+[matrix]
   |
 6 |         node: [10, 12, 14, 14]
   |                            ^~~
-test.yaml:9:19: value "13" in "exclude" does not match in matrix "node" combinations. possible values are "10", "12", "14", "14" [matrix]
+test.yaml:9:19: value "13" in "exclude" does not match in matrix "node" combinations. possible
+values are "10", "12", "14", "14" [matrix]
   |
 9 |           - node: 13
   |                   ^~
-test.yaml:12:13: "platform" in "exclude" section does not exist in matrix. available matrix configurations are "node", "os" [matrix]
+test.yaml:12:13: "platform" in "exclude" section does not exist in matrix. available matrix
+configurations are "node", "os" [matrix]
    |
 12 |             platform: ubuntu-latest
 ```json
@@ -1221,26 +1190,19 @@ Example input:
 
 ```yaml
 
-on:
-  push:
+on: push:
     # ERROR: Incorrect filter. 'branches' is correct
-    branch: foo
+branch: foo
     # ERROR: Both 'paths' and 'paths-ignore' filters cannot be used for the same event
-    paths: path/to/foo
-    paths-ignore: path/to/foo
-  issues:
+paths: path/to/foo paths-ignore: path/to/foo issues:
     # ERROR: Incorrect type. 'opened' is correct
-    types: created
-  release:
+types: created release:
     # ERROR: 'tags' filter is not available for 'release' event
-    tags: v*.*.*
+tags: v*.*.*
   # ERROR: Unknown event name
-  pullreq:
+pullreq:
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
 
 ```text
 ```
@@ -1273,8 +1235,9 @@ test.yaml:15:3: unknown Webhook event "pullreq". see https://docs.github.com/en/
 
 [Playground](https://rhysd.github.io/actionlint#eJxdjkEOAyEIRfeegnUTnb23UUvHaYxYwCa9fdWZTRsWH3g/H6h6A9C65KkAkUNN2cODaM0taBa/ZFPaftb22Csx/tNDpKOccfppo4XEGBTvY8VYMAheNOwDvm9u1PqiFMaXN+ZJcQUoip5W7lUsVQ899qrdljDZQqLYrnMAdjo9YMoEzrkvdVRCRg==)
 
-At `on:`, Webhook events can be specified to trigger the workflow. [Webhook event documentation][webhook-doc] defines
-which Webhook events are available and what types can be specified at `types:` for each event.
+At `on:`, Webhook events can be specified to trigger the workflow. [Webhook event
+documentation][webhook-doc] defines which Webhook events are available and what types can be
+specified at `types:` for each event.
 
 actionlint validates the Webhook configurations:
 
@@ -1283,9 +1246,9 @@ actionlint validates the Webhook configurations:
 - filter names
 - filter usages
   - `paths` and `paths-ignore`, `branches` and `branches-ignore`, `tags` and `tags-ignore` are exclusive. They can not
-    be used for the same event.
+be used for the same event.
   - Some filters are only available for specific events as explained in [the official document][specific-paths-doc]
-    (see the following table).
+(see the following table).
 
 | Filter name       | Events where the filter is available          |
 |-------------------|-----------------------------------------------|
@@ -1296,8 +1259,9 @@ actionlint validates the Webhook configurations:
 | `tags`            | `push`                                        |
 | `tags-ignore`     | `push`                                        |
 
-The table of available Webhooks and their types are defined in [`all_webhooks.go`](../all_webhooks.go). It is generated
-by [a script][generate-webhook-events] and kept to the latest by CI workflow triggered weekly.
+The table of available Webhooks and their types are defined in
+[`all_webhooks.go`](../all_webhooks.go). It is generated by [a script][generate-webhook-events] and
+kept to the latest by CI workflow triggered weekly.
 
 <a name="check-workflow-dispatch-events"></a>
 
@@ -1352,7 +1316,8 @@ jobs:
 Output:
 
 ```
-test.yaml:6:15: input type of workflow_dispatch event must be one of "string", "number", "boolean", "choice", "environment" but got "text" [syntax-check]
+test.yaml:6:15: input type of workflow_dispatch event must be one of "string", "number", "boolean",
+"choice", "environment" but got "text" [syntax-check]
   |
 6 |         type: text
   |               ^~~~
@@ -1360,19 +1325,23 @@ test.yaml:8:7: input type of "kind" is "choice" but "options" is not set [events
   |
 8 |       kind:
   |       ^~~~~
-test.yaml:16:18: default value "Chobi" of "name" input is not included in its options "\"Tama\", \"Mike\"" [events]
+test.yaml:16:18: default value "Chobi" of "name" input is not included in its options "\"Tama\",
+\"Mike\"" [events]
    |
 16 |         default: Chobi
    |                  ^~~~~
-test.yaml:22:18: type of "verbose" input is "boolean". its default value "yes" must be "true" or "false" [events]
+test.yaml:22:18: type of "verbose" input is "boolean". its default value "yes" must be "true" or
+"false" [events]
    |
 22 |         default: yes
    |                  ^~~
-test.yaml:26:18: type of "age" input is "number" but its default value "teen" cannot be parsed as a float number: strconv.ParseFloat: parsing "teen": invalid syntax [events]
+test.yaml:26:18: type of "age" input is "number" but its default value "teen" cannot be parsed as a
+float number: strconv.ParseFloat: parsing "teen": invalid syntax [events]
    |
 26 |         default: teen
    |                  ^~~~
-test.yaml:33:24: property "massage" is not defined in object type {age: number; id: any; kind: string; message: string; name: string; verbose: bool} [expression]
+test.yaml:33:24: property "massage" is not defined in object type {age: number; id: any; kind:
+string; message: string; name: string; verbose: bool} [expression]
    |
 33 |       - run: echo "${{ inputs.massage }}"
    |                        ^~~~~~~~~~~~~~
@@ -1384,7 +1353,8 @@ test.yaml:37:28: property access of object must be type of string but got "numbe
    |
 37 |       - run: echo "${{ env[inputs.age] }}"
    |                            ^~~~~~~~~~~
-test.yaml:39:24: property "massage" is not defined in object type {age: string; id: string; kind: string; message: string; name: string; verbose: string} [expression]
+test.yaml:39:24: property "massage" is not defined in object type {age: string; id: string; kind:
+string; message: string; name: string; verbose: string} [expression]
    |
 39 |       - run: echo "${{ github.event.inputs.massage }}"
 ```json
@@ -1411,18 +1381,8 @@ For example,
 
 ```yaml
 
-inputs:
-  string_input:
-    type: string
-  choice_input:
-    type: choice
-    options: ['hello']
-  bool_input:
-    type: boolean
-  num_input:
-    type: number
-  env_input:
-    type: environment
+inputs: string_input: type: string choice_input: type: choice options: ['hello'] bool_input: type:
+boolean num_input: type: number env_input: type: environment
 
 ```sql
 ```
@@ -1463,22 +1423,17 @@ inputs:
 Example input:
 
 ```yaml
-on:
-  push:
-    branches:
+on: push: branches:
       # ^ is not available for branch name. This kind of mistake is usually caused by misunderstanding
       # that regular expression is available here
       - '^foo-'
-    tags:
+tags:
       # Invalid syntax. + cannot follow special character *
       - 'v*+'
       # Invalid character range 9-1
       - 'v[9-1]'
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
 ```text
 ```text
 ```
@@ -1487,15 +1442,27 @@ Output:
 
 ```
 
-test.yaml:6:10: character '^' is invalid for branch and tag names. ref name cannot contain spaces, ~, ^, :, [, ?, *. see `man git-check-ref-format` for more details. note that regular expression is unavailable. note: filter pattern syntax is explained at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet [glob]
+test.yaml:6:10: character '^' is invalid for branch and tag names. ref name cannot contain spaces,
+~, ^, :, [, ?, *. see `man git-check-ref-format` for more details. note that regular expression is
+unavailable. note: filter pattern syntax is explained at
+https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+[glob]
   |
 6 |       - '^foo-'
   |          ^~~~~~
-test.yaml:9:12: invalid glob pattern. unexpected character '+' while checking special character + (one or more). the preceding character must not be special character. note: filter pattern syntax is explained at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet [glob]
+test.yaml:9:12: invalid glob pattern. unexpected character '+' while checking special character +
+(one or more). the preceding character must not be special character. note: filter pattern syntax is
+explained at
+https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+[glob]
   |
 9 |       - 'v*+'
   |            ^~
-test.yaml:11:14: invalid glob pattern. unexpected character '1' while checking character range in []. start of range '9' (57) is larger than end of range '1' (49). note: filter pattern syntax is explained at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet [glob]
+test.yaml:11:14: invalid glob pattern. unexpected character '1' while checking character range in
+[]. start of range '9' (57) is larger than end of range '1' (49). note: filter pattern syntax is
+explained at
+https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet
+[glob]
    |
 11 |       - 'v[9-1]'
 
@@ -1504,9 +1471,9 @@ test.yaml:11:14: invalid glob pattern. unexpected character '1' while checking c
 
 [Playground](https://rhysd.github.io/actionlint#eJxNjEEKAjEQBO95Rd8CygQ8mq+IQrJEg8jMsjPj+3Wzl5yaoooWzgFYXfu+QN0KL73pQQAhPp4iFAdbec3mezrHiW5XutxjCG+po7KmdtSbs5Jwhldnc/qU3Q2l1tbp819mtKULUko/10snvA==)
 
-For filtering branches, tags and paths in Webhook events, [glob syntax][filter-pattern-doc] is available.
-actionlint validates glob patterns `branches:`, `branches-ignore:`, `tags:`, `tags-ignore:`, `paths:`, `paths-ignore:` in a
-workflow. It checks:
+For filtering branches, tags and paths in Webhook events, [glob syntax][filter-pattern-doc] is
+available. actionlint validates glob patterns `branches:`, `branches-ignore:`, `tags:`,
+`tags-ignore:`, `paths:`, `paths-ignore:` in a workflow. It checks:
 
 - syntax errors like missing closing brackets for character range `[..]`
 - invalid usage like `?` following `*`, invalid character range `[9-1]`, ...
@@ -1514,8 +1481,8 @@ workflow. It checks:
   - ref name cannot start/end with `/`
   - ref name cannot contain `[`, `:`, `\`, ...
 
-Most common mistake I have ever seen here is a misunderstanding that regular expression is available for filtering.
-This rule can catch the mistake so that users can notice their mistakes.
+Most common mistake I have ever seen here is a misunderstanding that regular expression is available
+for filtering. This rule can catch the mistake so that users can notice their mistakes.
 
 <a name="check-cron-syntax"></a>
 
@@ -1571,12 +1538,7 @@ When the job is run more frequently than once every 5 minutes, actionlint report
 Example input:
 
 ```yaml
-on: push
-jobs:
-  test:
-    strategy:
-      matrix:
-        runner:
+on: push jobs: test: strategy: matrix: runner:
           # OK
           - macos-latest
           # ERROR: Unknown runner
@@ -1587,14 +1549,12 @@ jobs:
           - arm64
           # ERROR: Unknown label "gpu". Custom label must be defined in actionlint.yaml config file
           - gpu
-    runs-on: ${{ matrix.runner }}
-    steps:
+runs-on: ${{ matrix.runner }} steps:
       - run: echo ...
 
-  test2:
+test2:
     # ERROR: Too old macOS worker
-    runs-on: macos-10.13
-    steps:
+runs-on: macos-10.13 steps:
 ```text
 ```text
 ```
@@ -1603,15 +1563,18 @@ Output:
 
 ```
 
-test.yaml:10:13: label "linux-latest" is unknown. available labels are "windows-latest", "windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
+test.yaml:10:13: label "linux-latest" is unknown. available labels are "windows-latest",
+"windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
    |
 10 |           - linux-latest
    |             ^~~~~~~~~~~~
-test.yaml:16:13: label "gpu" is unknown. available labels are "windows-latest", "windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
+test.yaml:16:13: label "gpu" is unknown. available labels are "windows-latest", "windows-2022",
+"windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
    |
 16 |           - gpu
    |             ^~~
-test.yaml:23:14: label "macos-10.13" is unknown. available labels are "windows-latest", "windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
+test.yaml:23:14: label "macos-10.13" is unknown. available labels are "windows-latest",
+"windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
    |
 23 |     runs-on: macos-10.13
 
@@ -1620,19 +1583,22 @@ test.yaml:23:14: label "macos-10.13" is unknown. available labels are "windows-l
 
 [Playground](https://rhysd.github.io/actionlint#eJyFj8EKgzAQRO/5ijn0aEJtxUN+pfSQ2lQtNpFsAhbx36skUgKFnpbZnR3mWSMxBurY095IMsBr8tsEyDvldfuOCngp7/ppV4ALxmj31QBfPY0lPqgtJTsMvQnTr8OF9PDgnSWv70W0FZjq6pq5lHvVVbZpx8BSC+J2pTjMc6ooYjMsS+LQI+01+fYgoZvOQgjBEvFJ5mGRozyK8vw34wNI+VUQ)
 
-GitHub Actions provides two kinds of job runners, [GitHub-hosted runner][gh-hosted-runner] and [self-hosted runner][self-hosted-runner].
-Each runner has one or more labels. GitHub Actions runtime finds a proper runner based on label(s) specified at `runs-on:`
-to run the job. So specifying proper labels at `runs-on:` is important.
+GitHub Actions provides two kinds of job runners, [GitHub-hosted runner][gh-hosted-runner] and
+[self-hosted runner][self-hosted-runner]. Each runner has one or more labels. GitHub Actions runtime
+finds a proper runner based on label(s) specified at `runs-on:` to run the job. So specifying proper
+labels at `runs-on:` is important.
 
-actionlint checks proper label is used at `runs-on:` configuration. Even if an expression is used in the section like
+actionlint checks proper label is used at `runs-on:` configuration. Even if an expression is used in
+the section like
 `runs-on: ${{ matrix.foo }}`, actionlint parses the expression and resolves the possible values, then validates the values.
 
-When you define some custom labels for your self-hosted runner, actionlint does not know the labels. Please set the label
-names in [`actionlint.yaml` configuration file](config.md) to let actionlint know them.
+When you define some custom labels for your self-hosted runner, actionlint does not know the labels.
+Please set the label names in [`actionlint.yaml` configuration file](config.md) to let actionlint
+know them.
 
-In addition to checking label values, actionlint checks combinations of labels. `runs-on:` section can be an array that contains
-multiple labels. In this case, a runner which has all the labels will be selected. However, those labels combinations can have
-conflicts.
+In addition to checking label values, actionlint checks combinations of labels. `runs-on:` section
+can be an array that contains multiple labels. In this case, a runner which has all the labels will
+be selected. However, those labels combinations can have conflicts.
 
 Example input:
 
@@ -1669,11 +1635,7 @@ In most cases, this is a misunderstanding that a matrix combination can be speci
 Example input:
 
 ```yaml
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+on: push jobs: test: runs-on: ubuntu-latest steps:
       # ERROR: ref is missing
       - uses: actions/checkout
       # ERROR: owner name is missing
@@ -1689,11 +1651,13 @@ Output:
 
 ```
 
-test.yaml:7:15: specifying action "actions/checkout" in invalid format because ref is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
+test.yaml:7:15: specifying action "actions/checkout" in invalid format because ref is missing.
+available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
   |
 7 |       - uses: actions/checkout
   |               ^~~~~~~~~~~~~~~~
-test.yaml:9:15: specifying action "checkout@v2" in invalid format because owner is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
+test.yaml:9:15: specifying action "checkout@v2" in invalid format because owner is missing.
+available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
   |
 9 |       - uses: checkout@v2
   |               ^~~~~~~~~~~
@@ -1701,7 +1665,8 @@ test.yaml:11:15: tag of Docker action should not be empty: "docker://image" [act
    |
 11 |       - uses: 'docker://image:'
    |               ^~~~~~~~~~~~~~~~~
-test.yaml:13:15: specifying action ".github/my-actions/do-something" in invalid format because ref is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
+test.yaml:13:15: specifying action ".github/my-actions/do-something" in invalid format because ref
+is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
    |
 13 |       - uses: .github/my-actions/do-something
 
@@ -1710,7 +1675,8 @@ test.yaml:13:15: specifying action ".github/my-actions/do-something" in invalid 
 
 [Playground](https://rhysd.github.io/actionlint#eJxdzTEOgzAMBdCdU3hjSi119NSrJKlFUkqMsF2pty8UsWTy139fsjSC1bUML0lKA4Cx2nEBNm8aZHdP3szDOx72JzVe9VwBBHBlJYjZqjTFXDjP4tbxVT8+907Gp+SZN0KsS5yYxs5vOFUrnvD6sHzDGX98DjoH)
 
-Action needs to be specified in a format defined in [the document][action-uses-doc]. There are 3 types of actions:
+Action needs to be specified in a format defined in [the document][action-uses-doc]. There are 3
+types of actions:
 
 - action hosted on GitHub: `owner/repo/path@ref`
 - local action: `./path/to/my-action`
@@ -1718,9 +1684,10 @@ Action needs to be specified in a format defined in [the document][action-uses-d
 
 actionlint checks values at `uses:` sections follow one of these formats.
 
-Note that actionlint does not report any error when a directory for a local action does not exist in the repository because it is
-a common case where the action is managed in a separate repository and the action directory is cloned at running the workflow.
-(See [#25][issue-25] and [#40][issue-40] for more details).
+Note that actionlint does not report any error when a directory for a local action does not exist in
+the repository because it is a common case where the action is managed in a separate repository and
+the action directory is cloned at running the workflow. (See [#25][issue-25] and [#40][issue-40] for
+more details).
 
 <a name="check-local-action-inputs"></a>
 
@@ -1773,11 +1740,13 @@ jobs:
 Output:
 
 ```
-test.yaml:7:15: missing input "message" which is required by action "My action" defined at "./.github/actions/my-action". all required inputs are "message" [action]
+test.yaml:7:15: missing input "message" which is required by action "My action" defined at
+"./.github/actions/my-action". all required inputs are "message" [action]
   |
 7 |       - uses: ./.github/actions/my-action
   |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
-test.yaml:13:11: input "additions" is not defined in action "My action" defined at "./.github/actions/my-action". available inputs are "addition", "message", "name" [action]
+test.yaml:13:11: input "additions" is not defined in action "My action" defined at
+"./.github/actions/my-action". available inputs are "addition", "message", "name" [action]
    |
 13 |           additions: foo, bar
 ```text
@@ -1797,16 +1766,11 @@ Example input:
 
 on: push
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
       - uses: actions/cache@v3
-        with:
+with:
           keys: |
-            ${{ hashFiles('**/*.lock') }}
-            ${{ hashFiles('**/*.cache') }}
-          path: ./packages
+${{ hashFiles('**/*.lock') }} ${{ hashFiles('**/*.cache') }} path: ./packages
 
 ```text
 ```
@@ -1832,15 +1796,18 @@ actionlint checks inputs of many popular actions such as `actions/checkout@v3`. 
 - some input is required by the action but it is not set at `with:`
 - input set at `with:` is not defined in the action (this commonly occurs by a typo)
 
-this is done by checking `with:` section items with a small database collected at building `actionlint` binary. actionlint
-can check popular actions without fetching any `action.yml` of the actions from the remote so that it can run efficiently.
+this is done by checking `with:` section items with a small database collected at building
+`actionlint` binary. actionlint can check popular actions without fetching any `action.yml` of the
+actions from the remote so that it can run efficiently.
 
-Note that it only supports the case of specifying major versions like `actions/checkout@v3`. Fixing version of action like
+Note that it only supports the case of specifying major versions like `actions/checkout@v3`. Fixing
+version of action like
 `actions/checkout@v3.0.2` and using the HEAD of action like `actions/checkout@main` are not supported for now.
 
-So far, actionlint supports more than 100 popular actions The data set is embedded at [`popular_actions.go`](../popular_actions.go)
-and were automatically collected by [a script][generate-popular-actions]. If you want more checks for other actions, please
-make a request [as an issue][issue-form].
+So far, actionlint supports more than 100 popular actions The data set is embedded at
+[`popular_actions.go`](../popular_actions.go) and were automatically collected by [a
+script][generate-popular-actions]. If you want more checks for other actions, please make a request
+[as an issue][issue-form].
 
 <a name="check-shell-names"></a>
 
@@ -1886,23 +1853,28 @@ jobs:
 Output:
 
 ```
-test.yaml:8:16: shell name "dash" is invalid. available names are "bash", "pwsh", "python", "sh" [shell-name]
+test.yaml:8:16: shell name "dash" is invalid. available names are "bash", "pwsh", "python", "sh"
+[shell-name]
   |
 8 |         shell: dash
   |                ^~~~
-test.yaml:11:16: shell name "powershell" is invalid on macOS or Linux. available names are "bash", "pwsh", "python", "sh" [shell-name]
+test.yaml:11:16: shell name "powershell" is invalid on macOS or Linux. available names are "bash",
+"pwsh", "python", "sh" [shell-name]
    |
 11 |         shell: powershell
    |                ^~~~~~~~~~
-test.yaml:14:16: shell name "powershell" is invalid on macOS or Linux. available names are "bash", "pwsh", "python", "sh" [shell-name]
+test.yaml:14:16: shell name "powershell" is invalid on macOS or Linux. available names are "bash",
+"pwsh", "python", "sh" [shell-name]
    |
 14 |         shell: powershell
    |                ^~~~~~~~~~
-test.yaml:20:16: shell name "fish" is invalid. available names are "bash", "pwsh", "python", "sh" [shell-name]
+test.yaml:20:16: shell name "fish" is invalid. available names are "bash", "pwsh", "python", "sh"
+[shell-name]
    |
 20 |         shell: fish
    |                ^~~~
-test.yaml:30:16: shell name "sh" is invalid on Windows. available names are "bash", "pwsh", "python", "cmd", "powershell" [shell-name]
+test.yaml:30:16: shell name "sh" is invalid on Windows. available names are "bash", "pwsh",
+"python", "cmd", "powershell" [shell-name]
    |
 30 |         shell: sh
 ```json
@@ -1922,20 +1894,14 @@ Example input:
 
 ```yaml
 
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+on: push jobs: test: runs-on: ubuntu-latest steps:
       - run: echo 'hello'
-        id: step_id
+id: step_id
       - run: echo 'bye'
         # ERROR: Duplicate step ID
-        id: STEP_ID
+id: STEP_ID
   # ERROR: Duplicate job ID
-  TEST:
-    runs-on: ubuntu-latest
-    steps:
+TEST: runs-on: ubuntu-latest steps:
       - run: echo 'hello'
         # OK. Step ID uniqueness is job-local
 
@@ -1958,8 +1924,8 @@ test.yaml:12:3: key "TEST" is duplicated in "jobs" section. previously defined a
 
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtuJSUChJLS4B0QoKRaV5xbr5QPnSpNK8klLdnESQHFiquCS1oBiiSkFBF6TSSiE1OSNfQT0jNScnXx0qo6CQmWIFVhyfmYJNdVJlKqra4BDXgHhPF6BYiGtwCE3cAQCKgUNq)
 
-Job IDs and step IDs in each jobs must be unique. IDs are compared in case insensitive. actionlint checks all job IDs
-and step IDs, and reports errors when some IDs duplicate.
+Job IDs and step IDs in each jobs must be unique. IDs are compared in case insensitive. actionlint
+checks all job IDs and step IDs, and reports errors when some IDs duplicate.
 
 <a name="check-hardcoded-credentials"></a>
 
@@ -1994,11 +1960,13 @@ jobs:
 Output:
 
 ```
-test.yaml:10:19: "password" section in "container" section should be specified via secrets. do not put password value directly [credentials]
+test.yaml:10:19: "password" section in "container" section should be specified via secrets. do not
+put password value directly [credentials]
    |
 10 |         password: pass
    |                   ^~~~
-test.yaml:17:21: "password" section in "redis" service should be specified via secrets. do not put password value directly [credentials]
+test.yaml:17:21: "password" section in "redis" service should be specified via secrets. do not put
+password value directly [credentials]
    |
 17 |           password: pass
 ```json
@@ -2019,14 +1987,7 @@ Example input:
 
 ```yaml
 
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    env:
-      FOO=BAR: foo
-      FOO BAR: foo
-    steps:
+on: push jobs: test: runs-on: ubuntu-latest env: FOO=BAR: foo FOO BAR: foo steps:
 
 ```text
 ```
@@ -2048,7 +2009,8 @@ test.yaml:7:7: environment variable name "FOO BAR" is invalid. '&', '=' and spac
 [Playground](https://rhysd.github.io/actionlint#eJzLz7NSKCgtzuDKyk8qtuJSUChJLS4B0QoKRaV5xbr5QPnSpNK8klLdnESQHFgqNa8MokZBwc3f39bJMchKIS0/HyGkgCJUXJJaUAzToAsy2EohNTkjX0E9IzUnJ18dAPhYJMc=)
 
 `=` must not be included in environment variable names. And `&` and spaces should not be included in them. In almost all
-cases they are mistakes and they may cause some issues on using them in shell since they have special meaning in shell syntax.
+cases they are mistakes and they may cause some issues on using them in shell since they have
+special meaning in shell syntax.
 
 actionlint checks environment variable names are correct in `env:` configuration.
 
@@ -2081,15 +2043,19 @@ jobs:
 Output:
 
 ```
-test.yaml:4:14: "write" is invalid for permission for all the scopes. available values are "read-all" and "write-all" [permissions]
+test.yaml:4:14: "write" is invalid for permission for all the scopes. available values are
+"read-all" and "write-all" [permissions]
   |
 4 | permissions: write
   |              ^~~~~
-test.yaml:11:7: unknown permission scope "check". all available permission scopes are "actions", "checks", "contents", "deployments", "discussions", "id-token", "issues", "packages", "pages", "pull-requests", "repository-projects", "security-events", "statuses" [permissions]
+test.yaml:11:7: unknown permission scope "check". all available permission scopes are "actions",
+"checks", "contents", "deployments", "discussions", "id-token", "issues", "packages", "pages",
+"pull-requests", "repository-projects", "security-events", "statuses" [permissions]
    |
 11 |       check: write
    |       ^~~~~~
-test.yaml:13:15: "readable" is invalid for permission of scope "issues". available values are "read", "write" or "none" [permissions]
+test.yaml:13:15: "readable" is invalid for permission of scope "issues". available values are
+"read", "write" or "none" [permissions]
    |
 13 |       issues: readable
 ```json
@@ -2125,36 +2091,15 @@ Example input:
 
 ```yaml
 
-on:
-  workflow_call:
-    inputs:
-      scheme:
-        description: Scheme of URL
+on: workflow_call: inputs: scheme: description: Scheme of URL
         # OK: Type is string
-        default: https
-        type: string
-      host:
-        default: example.com
-        type: string
-      port:
-        description: Port of URL
+default: https type: string host: default: example.com type: string port: description: Port of URL
         # ERROR: Type is number but default value is string
-        default: ':1234'
-        type: number
-      query:
-        description: Query of URL
+default: ':1234' type: number query: description: Query of URL
         # ERROR: Type must be one of number, string, boolean
-        type: object
-      path:
-        description: Path of URL
-        required: true
+type: object path: description: Path of URL required: true
         # ERROR: Default value is never used since this input is required
-        default: ''
-        type: string
-jobs:
-  do:
-    runs-on: ubuntu-latest
-    steps:
+default: '' type: string jobs: do: runs-on: ubuntu-latest steps:
 
 ```text
 ```
@@ -2179,8 +2124,9 @@ test.yaml:25:18: input "path" of workflow_call event has the default value "", b
 
 [Playground](https://rhysd.github.io/actionlint#eJx9kctuwyAQRff9ilFUKSsn6mPFN3TRh7quMB4XUswQGJRGkf+9JjiR5dbdwZnhzmUuOXEDcKDw1Vo6fChpbQYAxvnEsZwBotLY4eUG0GBUwXg25AS8nYtALby/Pk1aWpksC9DMPl4xHz0KiByM+xyhpsji9zv8lp23uFHU/ffaU+AFY89DadHWWtzdPzyuZ9IudTWGEe4ThuOC9kuuzcWLBtU7VHyxJ1kv2RtKc4WA+2QCNgI4JPzD9dzwuIsd1eewGirDQnKxykNSnRynykrGWDxFRn8Ntsqdw66VJljdnk5j7psSOPS92G4nOEeV4QTl/Q9oSvK/+n71A7U5rsA=)
 
-Unlike inputs of action, inputs of a workflow must specify their types. actionlint validates input types and checks the default
-values are correctly typed. For more details, see [the official document][create-reusable-workflow-doc].
+Unlike inputs of action, inputs of a workflow must specify their types. actionlint validates input
+types and checks the default values are correctly typed. For more details, see [the official
+document][create-reusable-workflow-doc].
 
 ### Check workflow call syntax
 
@@ -2213,19 +2159,26 @@ jobs:
 Output:
 
 ```
-test.yaml:6:5: when a reusable workflow is called with "uses", "runs-on" is not available. only following keys are allowed: "name", "uses", "with", "secrets", "needs", "if", and "permissions" in job "job1" [syntax-check]
+test.yaml:6:5: when a reusable workflow is called with "uses", "runs-on" is not available. only
+following keys are allowed: "name", "uses", "with", "secrets", "needs", "if", and "permissions" in
+job "job1" [syntax-check]
   |
 6 |     runs-on: ubuntu-latest
   |     ^~~~~~~~
-test.yaml:9:11: reusable workflow call "./.github/workflows/ci.yml@main" at "uses" is not following the format "owner/repo/path/to/workflow.yml@ref" nor "./path/to/workflow.yml". see https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details [workflow-call]
+test.yaml:9:11: reusable workflow call "./.github/workflows/ci.yml@main" at "uses" is not following
+the format "owner/repo/path/to/workflow.yml@ref" nor "./path/to/workflow.yml". see
+https://docs.github.com/en/actions/learn-github-actions/reusing-workflows for more details
+[workflow-call]
   |
 9 |     uses: ./.github/workflows/ci.yml@main
   |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-test.yaml:12:5: "with" is only available for a reusable workflow call with "uses" but "uses" is not found in job "job3" [syntax-check]
+test.yaml:12:5: "with" is only available for a reusable workflow call with "uses" but "uses" is not
+found in job "job3" [syntax-check]
    |
 12 |     with:
    |     ^~~~~
-test.yaml:19:11: could not read reusable workflow file for "./.github/workflows/not-existing.yml": open /path/to/.github/workflows/not-existing.yml: no such file or directory [workflow-call]
+test.yaml:19:11: could not read reusable workflow file for "./.github/workflows/not-existing.yml":
+open /path/to/.github/workflows/not-existing.yml: no such file or directory [workflow-call]
    |
 19 |     uses: ./.github/workflows/not-existing.yml
 ```json
@@ -2251,27 +2204,13 @@ Example input:
 
 ```yaml
 
-on:
-  workflow_call:
-    inputs:
-      url:
-        description: 'your URL'
-        type: string
-      lucky_number:
-        description: 'your lucky number'
-        type: number
-    secrets:
-      credential:
-        description: 'your credential'
+on: workflow_call: inputs: url: description: 'your URL' type: string lucky_number: description:
+'your lucky number' type: number secrets: credential: description: 'your credential'
 
-jobs:
-  test:
-    runs-on: ubuntu-20.04
-    steps:
+jobs: test: runs-on: ubuntu-20.04 steps:
       - name: Send data
         # ERROR: uri is typo of url
-        run: curl ${{ inputs.uri }} -d ${{ inputs.lucky_number }}
-        env:
+run: curl ${{ inputs.uri }} -d ${{ inputs.lucky_number }} env:
           # ERROR: credentials is typo of credential
 
 ```text
@@ -2293,16 +2232,18 @@ test.yaml:23:22: property "credentials" is not defined in object type {credentia
 
 [Playground](https://rhysd.github.io/actionlint#eJx9UD1PwzAQ3fMr3oCUKVGFmLwzgUAqMFeOfSDT9BzZZ6qo6n/HjUNSMXS7e/c+7s6zqoCjD/vP3h93Rvf9BQAcD0liqYEU+r8SsBRNcIM4zwr16FPAx/a5XuYyDqQQJTj+msE+mf2443ToKNw0mogoxP+OBZ3ASCbQul5uLLE4fXvLlVZX1bfvJr1QlKIKiWNzYacusaTmftNuHkqc0LCENWB9yOu8EVtYLXqJzAYKJv8Kd6fT/ME2BYfzGY29Bq//kaeLA/HPegHw/vr0+KIm4Xxxu94Qs/AXqVaEog==)
 
-Inputs of reusable workflow calls are set to `inputs.*` properties following the definitions at `on.workflow_call.inputs`.
-And in a job of a reusable workflow, `secrets.*` are passed from caller of the workflow so it is set following the definitions at
+Inputs of reusable workflow calls are set to `inputs.*` properties following the definitions at
+`on.workflow_call.inputs`. And in a job of a reusable workflow, `secrets.*` are passed from caller
+of the workflow so it is set following the definitions at
 `on.workflow_call.secrets`. See [the official document][create-reusable-workflow-doc] for more details.
 
-actionlint contextually defines types of `inputs` and `secrets` contexts looking at `workflow_call` event. Keys of `inputs` only
-allow keys at `on.workflow_call.inputs` and their values are typed based on `on.workflow_call.inputs.<input_name>.type`. Type of
+actionlint contextually defines types of `inputs` and `secrets` contexts looking at `workflow_call`
+event. Keys of `inputs` only allow keys at `on.workflow_call.inputs` and their values are typed
+based on `on.workflow_call.inputs.<input_name>.type`. Type of
 `secrets` is also strictly typed following `on.workflow_call.secrets`.
 
-[From May 3, 2022][inherit-secrets-announce], GitHub Actions allows inheriting secrets by calling reusable workflows. The caller
-declares to inherit all secrets.
+[From May 3, 2022][inherit-secrets-announce], GitHub Actions allows inheriting secrets by calling
+reusable workflows. The caller declares to inherit all secrets.
 
 ```yaml
 
@@ -2322,13 +2263,9 @@ To solve this issue, actionlint assumes that
 Following the assumptions,
 
 ```yaml
-on:
-  workflow_call:
+on: workflow_call:
 
-jobs:
-  pass-secret-to-action:
-    runs-on: ubuntu-latest
-    steps:
+jobs: pass-secret-to-action: runs-on: ubuntu-latest steps:
       # OK: This reports no error. FOO is assumed to be inherited from caller
 ```text
 ```text
@@ -2338,14 +2275,9 @@ this workflow causes no error. And
 
 ```yaml
 
-on:
-  workflow_call:
-    secrets:
+on: workflow_call: secrets:
 
-jobs:
-  pass-secret-to-action:
-    runs-on: ubuntu-latest
-    steps:
+jobs: pass-secret-to-action: runs-on: ubuntu-latest steps:
       # ERROR: Secret FOO is not defined
 
 ```text
@@ -2400,24 +2332,10 @@ Example reusable workflow:
 ```yaml
 
 # .github/workflows/reusable.yaml
-on:
-  workflow_call:
-    inputs:
-      name:
-        type: string
-        required: true
-      id:
-        type: number
-      message:
-        type: string
-    secrets:
-      password:
-        required: true
+on: workflow_call: inputs: name: type: string required: true id: type: number message: type: string
+secrets: password: required: true
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
 ```text
 ```text
 ```
@@ -2430,27 +2348,21 @@ on: push
 
 jobs:
   # Check required/undefined inputs and secrets
-  missing-required:
-    uses: ./.github/workflows/reusable.yaml
-    with:
+missing-required: uses: ./.github/workflows/reusable.yaml with:
       # ERROR: Undefined input
-      user: rhysd
+user: rhysd
       # ERROR: Required input "name" is missing
-    secrets:
+secrets:
       # ERROR: Undefined secret
-      credentials: my-token
+credentials: my-token
       # ERROR: Required secret "password" is missing
 
   # Check types of inputs defined in reusable workflow
-  type-checks:
-    uses: ./.github/workflows/reusable.yaml
-    with:
-      name: rhysd
+type-checks: uses: ./.github/workflows/reusable.yaml with: name: rhysd
       # ERROR: Cannot assign bool value to number input
-      id: true
+id: true
       # ERROR: Cannot assign null to string input. If you want to pass string "null", use ${{ 'null' }}
-      message: null
-    secrets:
+message: null secrets:
 
 ```text
 ```
@@ -2485,12 +2397,13 @@ test.yaml:24:16: input "message" is typed as string by reusable workflow "./.git
 ```text
 ```
 
-Reusable workflows can define required/optional inputs and secrets. When they are missing or some undefined input is used in a
-workflow call, actionlint reports an error.
+Reusable workflows can define required/optional inputs and secrets. When they are missing or some
+undefined input is used in a workflow call, actionlint reports an error.
 
-And reusable workflows must define types of their inputs by `type:` field. Workflow calls pass constants (`input: 42`) or
-expressions (`inputs: ${{ ... }}`) to the inputs or secrets. actionlint checks types of values passed to inputs in workflow call.
-When a type of input doesn't match to its definition, actionlint reports an error.
+And reusable workflows must define types of their inputs by `type:` field. Workflow calls pass
+constants (`input: 42`) or expressions (`inputs: ${{ ... }}`) to the inputs or secrets. actionlint
+checks types of values passed to inputs in workflow call. When a type of input doesn't match to its
+definition, actionlint reports an error.
 
 Note that this check only works with local reusable workflow (it starts with `./`).
 
@@ -2525,13 +2438,8 @@ Example input:
 ```yaml
 on: push
 
-jobs:
-  get_build_info:
-    uses: ./.github/workflows/get-build-info.yaml
-  downstream:
-    needs: [get_build_info]
-    runs-on: ubuntu-latest
-    steps:
+jobs: get_build_info: uses: ./.github/workflows/get-build-info.yaml downstream: needs:
+[get_build_info] runs-on: ubuntu-latest steps:
       # OK. `version` is defined in the reusable workflow
       - run: echo '${{ needs.get_build_info.outputs.version }}'
       # ERROR: `tag` is not defined in the reusable workflow
@@ -2550,12 +2458,13 @@ test.yaml:13:24: property "tag" is not defined in object type {version: string} 
 ```text
 ```
 
-Outputs of workflow call are set to the job's outputs object. They can be accessed by downstream jobs specified with `needs:`.
-What outputs are set is defined in the reusable workflow. actionlint types outputs objects from workflow calls and check the
-object types in downstream jobs.
+Outputs of workflow call are set to the job's outputs object. They can be accessed by downstream
+jobs specified with `needs:`. What outputs are set is defined in the reusable workflow. actionlint
+types outputs objects from workflow calls and check the object types in downstream jobs.
 
-In the above example, `get-build-info.yaml` has one output `version`. actionlint types the outputs object of workflow call job
-as `{version: string}`. In the downstream job, actionlint can report an error at undefined key `tag` in the object.
+In the above example, `get-build-info.yaml` has one output `version`. actionlint types the outputs
+object of workflow call job as `{version: string}`. In the downstream job, actionlint can report an
+error at undefined key `tag` in the object.
 
 Note that this check only works with local reusable workflow (starting with `./`).
 
@@ -2626,28 +2535,21 @@ Example input:
 ```yaml
 on: push
 
-env:
-  NAME: rhysd
+env: NAME: rhysd
 
-jobs:
-  test:
-    strategy:
-      matrix:
-        directory:
+jobs: test: strategy: matrix: directory:
           # OK: 'github' context is available here
           - ${{ github.workflow }}
           # ERROR: 'runner' context is not available here
           - ${{ runner.temp }}
-    runs-on: ubuntu-latest
-    env:
+runs-on: ubuntu-latest env:
       # ERROR: 'env' context is not available here
-      NAME: ${{ env.NAME }}
-    steps:
+NAME: ${{ env.NAME }} steps:
       - env:
           # OK: 'env' context is available here
-          NAME: ${{ env.NAME }}
+NAME: ${{ env.NAME }}
         # ERROR: 'success()' function is not available here
-        run: echo 'Success? ${{ success() }}'
+run: echo 'Success? ${{ success() }}'
         # OK: 'success()' function is available here
 ```text
 ```text
@@ -2657,15 +2559,24 @@ Output:
 
 ```
 
-test.yaml:14:17: context "runner" is not allowed here. available contexts are "github", "inputs", "needs", "vars". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]
+test.yaml:14:17: context "runner" is not allowed here. available contexts are "github", "inputs",
+"needs", "vars". see
+https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more
+details [expression]
    |
 14 |           - ${{ runner.temp }}
    |                 ^~~~~~~~~~~
-test.yaml:18:17: context "env" is not allowed here. available contexts are "github", "inputs", "matrix", "needs", "secrets", "strategy", "vars". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]
+test.yaml:18:17: context "env" is not allowed here. available contexts are "github", "inputs",
+"matrix", "needs", "secrets", "strategy", "vars". see
+https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more
+details [expression]
    |
 18 |       NAME: ${{ env.NAME }}
    |                 ^~~~~~~~
-test.yaml:24:33: calling function "success" is not allowed here. "success" is only available in "jobs.<job_id>.if", "jobs.<job_id>.steps.if". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]
+test.yaml:24:33: calling function "success" is not allowed here. "success" is only available in
+"jobs.<job_id>.if", "jobs.<job_id>.steps.if". see
+https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more
+details [expression]
    |
 24 |         run: echo 'Success? ${{ success() }}'
 
@@ -2674,10 +2585,11 @@ test.yaml:24:33: calling function "success" is not allowed here. "success" is on
 
 [Playground](https://rhysd.github.io/actionlint#eJx9jkEOgjAURPc9xSxM1AUcoBvjwqVuPAGUr6DQkv5flRDvLhVRExO7aWbmTTvOarSBS6XIXrQCduvtRsOXHRdKnVzO0RRiiTfA4jOhYzcqoMnEV7dJAUXlyYjz3ccCEsz6HsdKypCnV+fPh9pdcb//ID5YSz4VatopHixO3LAy5MFKSOosjnlGr8XxjKvjE4OZRjX1WajlCUu+O/97r781yJQO830whphXT5ZHsVgO8PxNVwf9SR5WsV7P)
 
-Some contexts are only available in some places. For example, `env` context is not available at `jobs.<job_id>.env` but it is
-available at `jobs.<job_id>.steps.env`.
+Some contexts are only available in some places. For example, `env` context is not available at
+`jobs.<job_id>.env` but it is available at `jobs.<job_id>.steps.env`.
 
-Similarly, some status functions are special since they limit where they can be called. For example, `success()`, `failure()`,
+Similarly, some status functions are special since they limit where they can be called. For example,
+`success()`, `failure()`,
 `always()`, and `cancelled()` are only available at `if:` section. At the time of writing this document, the following functions
 are special.
 
@@ -2687,11 +2599,11 @@ are special.
 - `failure()`
 - `cancelled()`
 
-[The official contexts document][availability-doc] describes which contexts and special functions are available at which workflow
-keys.
+[The official contexts document][availability-doc] describes which contexts and special functions
+are available at which workflow keys.
 
-actionlint checks if these contexts and special functions are used correctly. It reports an error when it finds that some context
-or special function is not available in your workflow.
+actionlint checks if these contexts and special functions are used correctly. It reports an error
+when it finds that some context or special function is not available in your workflow.
 
 <a name="#check-deprecated-workflow-commands"></a>
 
@@ -2747,27 +2659,24 @@ Example input:
 ```yaml
 on: push
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
+jobs: test: runs-on: ubuntu-latest steps:
       - run: echo 'Commit is pushed'
         # OK
-        if: ${{ github.event_name == 'push' }}
+if: ${{ github.event_name == 'push' }}
       - run: echo 'Commit is pushed'
         # OK
         if: |
-          github.event_name == 'push'
+github.event_name == 'push'
       - run: echo 'Commit is pushed'
         # ERROR: It is always evaluated to true
         if: |
-          ${{ github.event_name == 'push' }}
+${{ github.event_name == 'push' }}
       - run: echo 'Commit is pushed'
         # ERROR: It is always evaluated to true
-        if: "${{ github.event_name == 'push' }} "
+if: "${{ github.event_name == 'push' }} "
       - run: echo 'Commit is pushed to main'
         # OK
-        if: github.event_name == 'push' && github.ref_name == 'main'
+if: github.event_name == 'push' && github.ref_name == 'main'
       - run: echo 'Commit is pushed to main'
         # ERROR: It is always evaluated to true
 ```text
@@ -2778,15 +2687,18 @@ Output:
 
 ```
 
-test.yaml:16:13: if: condition "${{ github.event_name == 'push' }}\n" is always evaluated to true because extra characters are around ${{ }} [if-cond]
+test.yaml:16:13: if: condition "${{ github.event_name == 'push' }}\n" is always evaluated to true
+because extra characters are around ${{ }} [if-cond]
    |
 16 |         if: |
    |             ^
-test.yaml:20:13: if: condition "${{ github.event_name == 'push' }} " is always evaluated to true because extra characters are around ${{ }} [if-cond]
+test.yaml:20:13: if: condition "${{ github.event_name == 'push' }} " is always evaluated to true
+because extra characters are around ${{ }} [if-cond]
    |
 20 |         if: "${{ github.event_name == 'push' }} "
    |             ^~~~
-test.yaml:26:13: if: condition "${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}" is always evaluated to true because extra characters are around ${{ }} [if-cond]
+test.yaml:26:13: if: condition "${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main'
+}}" is always evaluated to true because extra characters are around ${{ }} [if-cond]
    |
 26 |         if: ${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}
 
@@ -2795,9 +2707,10 @@ test.yaml:26:13: if: condition "${{ github.event_name == 'push' }} && ${{ github
 
 [Playground](https://rhysd.github.io/actionlint#eJy1j00OgjAQhfec4oUYusIDNGHlQQzoIDW2JXTqBrm7FP8wJogaV5PJ+/K9GWskau+qKNrbwskIYHIcJtB441LbA77whn16yEM2RI6pdhcKSAMpQZvKQqys1oqh3KClrbhCgColFm2LneLKF0s6kuG1yTUhyyACLdB1nztP9w1T7t/E/zg8fi9FPEcLttC5Ms/6KXOS3OKGykc4lnzROOOfvnhEvZb3zBmiAMLK)
 
-Evaluation of `${{ }}` at `if:` condition is tricky. When the expression in `${{ }}` is evaluated to boolean value and there is
-no extra characters around the `${{ }}`, the condition is evaluated to the boolean value. Otherwise the condition is treated as
-string hence it is **always** evaluated to `true`.
+Evaluation of `${{ }}` at `if:` condition is tricky. When the expression in `${{ }}` is evaluated to
+boolean value and there is no extra characters around the `${{ }}`, the condition is evaluated to
+the boolean value. Otherwise the condition is treated as string hence it is **always** evaluated to
+`true`.
 
 It means that multi-line string must not be used at `if:` condition (`if: |`) because the condition is always evaluated to true.
 Multi-line string inserts newline character at end of each line.
@@ -2819,7 +2732,7 @@ Unlike using `${{ }}`, putting an expression directly ignores white spaces aroun
 
 ```yaml
 if: |
-  false
+false
 ```
 
 works as intended.

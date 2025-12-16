@@ -1,8 +1,11 @@
 # Glyph / Message Processing Flow (from `main_v2.py`)
 
-This document traces the runtime path a user message takes from the Streamlit entrypoint (`main_v2.py`) through the emotional parsing, glyph matching/creation, enrichment, fallback handling, and final response generation.
+This document traces the runtime path a user message takes from the Streamlit entrypoint
+(`main_v2.py`) through the emotional parsing, glyph matching/creation, enrichment, fallback
+handling, and final response generation.
 
-It is intended to restore architectural clarity and show the concrete functions, modules, and data shapes involved so you can follow the ritual of meaning flow through the codebase.
+It is intended to restore architectural clarity and show the concrete functions, modules, and data
+shapes involved so you can follow the ritual of meaning flow through the codebase.
 
 Sections
 
@@ -20,22 +23,25 @@ Sections
 - User interacts with the web UI served by `main_v2.py` (Streamlit).
 - `main_v2.py` loads the UI renderer from `emotional_os.deploy.modules.ui_refactored` (either `render_main_app` or `render_main_app_safe`).
 - The main chat input is rendered and when the user sends a message the UI pipeline:
-  1. Optionally sanitizes text via `local_inference.preprocessor.Preprocessor` (if available).
-  2. Calls the local parser: `emotional_os.glyphs.signal_parser.parse_input` (re-export of `emotional_os.core.signal_parser`).
-  3. `parse_input` -> extracts signals, maps to ECM gates, queries the glyph DB, and scores glyphs.
-  4. UI composes a payload for optional AI enhancement (saori function). If in `hybrid` mode, it sends local analysis + message to the remote AI endpoint.
-  5. The AI reply (if any) is re-parsed locally to convert it into glyph-level signals and to produce the final local decoding.
-  6. Optionally the `limbic` engine decorates/adjusts the reply.
-  7. Fallback protocols are applied (safety/clarification flows).
-  8. The assistant reply is emitted to the user with metadata (selected glyphs, scores, debug traces).
+1. Optionally sanitizes text via `local_inference.preprocessor.Preprocessor` (if available). 2.
+Calls the local parser: `emotional_os.glyphs.signal_parser.parse_input` (re-export of
+`emotional_os.core.signal_parser`). 3. `parse_input` -> extracts signals, maps to ECM gates, queries
+the glyph DB, and scores glyphs. 4. UI composes a payload for optional AI enhancement (saori
+function). If in `hybrid` mode, it sends local analysis + message to the remote AI endpoint. 5. The
+AI reply (if any) is re-parsed locally to convert it into glyph-level signals and to produce the
+final local decoding. 6. Optionally the `limbic` engine decorates/adjusts the reply. 7. Fallback
+protocols are applied (safety/clarification flows). 8. The assistant reply is emitted to the user
+with metadata (selected glyphs, scores, debug traces).
 
-All of the above runs in `--dry-run` or demo mode when `supabase` secrets aren't configured; CI or production installs enable the hybrid AI endpoint and Supabase-backed persistence.
+All of the above runs in `--dry-run` or demo mode when `supabase` secrets aren't configured; CI or
+production installs enable the hybrid AI endpoint and Supabase-backed persistence.
 
 ##
 
 ## Detailed step-by-step trace (call order + functions)
 
-Below is a linear trace for the common `hybrid` pipeline. For `local` mode the AI call step is skipped.
+Below is a linear trace for the common `hybrid` pipeline. For `local` mode the AI call step is
+skipped.
 
 1) Entry: `main_v2.py` -> `render_main_app()`
    - File: `main_v2.py`
@@ -155,15 +161,9 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 - `parse_input` return (high-level):
 
 ```json
-{
-  "glyphs": [ ... ],
-  "voltgage_response": "I notice a tightening in your chest...",
-  "ritual_prompt": "Try a three-breath grounding...",
-  "signals": [ ... ],
-  "gates": ["Gate 4", "Gate 5"],
-  "debug_sql": "SELECT ...",
-  "debug_glyph_rows": [ ... ]
-}
+{ "glyphs": [ ... ], "voltgage_response": "I notice a tightening in your chest...", "ritual_prompt":
+"Try a three-breath grounding...", "signals": [ ... ], "gates": ["Gate 4", "Gate 5"], "debug_sql":
+"SELECT ...", "debug_glyph_rows": [ ... ] }
 ```
 
 ##

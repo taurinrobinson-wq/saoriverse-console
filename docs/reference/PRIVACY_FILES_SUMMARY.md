@@ -158,20 +158,14 @@
 ```text
 ```
 
-Test 1: Unit Tests (test_privacy_masking.py)
-  ✅ 16/16 checks passed
-  ✅ No raw data exposure
-  ✅ Signals/gates preserved
+Test 1: Unit Tests (test_privacy_masking.py) ✅ 16/16 checks passed ✅ No raw data exposure ✅
+Signals/gates preserved
 
-Test 2: Audit Tool (privacy_monitor.py)
-  ✅ Correctly identifies violations
-  ✅ Shows compliant format
-  ✅ Reports statistics
+Test 2: Audit Tool (privacy_monitor.py) ✅ Correctly identifies violations ✅ Shows compliant format ✅
+Reports statistics
 
-Test 3: E2E Tests (test_e2e_simple.py)
-  ✅ 3/3 exchanges processed
-  ✅ All entries privacy-safe
-  ✅ Learning data preserved
+Test 3: E2E Tests (test_e2e_simple.py) ✅ 3/3 exchanges processed ✅ All entries privacy-safe ✅
+Learning data preserved
 
 ```
 
@@ -235,12 +229,7 @@ python3 test_privacy_masking.py
 ### Before (Privacy Violation) ❌
 
 ```
-User Input
-    ↓
-[Raw stored in log]
-    ↓
-"I'm struggling with depression and anxiety..."
-    ↓
+User Input ↓ [Raw stored in log] ↓ "I'm struggling with depression and anxiety..." ↓
 ```text
 ```text
 ```
@@ -249,15 +238,9 @@ User Input
 
 ```
 
-User Input
-    ↓
-Extract Signals
-    ↓
-["struggle", "vulnerability", "anxiety"]
-    ↓
-Log Entry: {signals: [...], gates: [...], metadata: {...}}
-    ↓
-✅ PRIVACY PROTECTED: Only emotional patterns, no personal data
+User Input ↓ Extract Signals ↓ ["struggle", "vulnerability", "anxiety"] ↓ Log Entry: {signals:
+[...], gates: [...], metadata: {...}} ↓ ✅ PRIVACY PROTECTED: Only emotional patterns, no personal
+data
 
 ```
 
