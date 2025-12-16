@@ -1,21 +1,29 @@
 # ✅ CONSENT-BASED SUICIDALITY PROTOCOL: LIVE
 
 ## Status
-🟢 **ACTIVE** — The protocol is now handling suicidal disclosures with dignity, consent, and continuity.
 
----
+🟢 **ACTIVE** — The protocol is now handling suicidal disclosures with dignity, consent, and
+continuity.
+
+##
 
 ## What's Working
 
 ### ✅ Test 1: Initial Disclosure Detection
+
 **Input:** "I have thoughts of suicide and I don't know how to keep going"
 **Output:**
+
+```text
 ```
-Source: suicidality_protocol
-Response: "You named thoughts of suicide. That is heavy. Thank you for trusting me with it.
-You deserve human connection and care. I can be present while you figure out what you need.
-Would you like to share how long you have felt this way."
+
+Source: suicidality_protocol Response: "You named thoughts of suicide. That is heavy. Thank you for
+trusting me with it. You deserve human connection and care. I can be present while you figure out
+what you need. Would you like to share how long you have felt this way."
+
 ```
+
+
 
 **Verification:**
 - ✅ Acknowledgment: "That is heavy. Thank you for trusting me with it."
@@ -34,8 +42,7 @@ The system successfully filters:
 
 ### ✅ Test 3: Routing
 When someone discloses suicidal ideation, the system correctly routes to the suicidality protocol (not to emotional gates, not to generic responses).
-
----
+##
 
 ## Implementation Details
 
@@ -64,43 +71,38 @@ When someone discloses suicidal ideation, the system correctly routes to the sui
 4. **`tests/test_suicidality_protocol.py`** (NEW)
    - Comprehensive test suite for protocol behavior
    - Tests: detection, language safeguards, returns, consent, boundaries
-
----
+##
 
 ## State Machine Flow
-
+```text
+```text
 ```
-Suicidal disclosure detected
-              ↓
-   DisclosureDetected
+
+Suicidal disclosure detected ↓ DisclosureDetected
    ├─ Acknowledge (with dignity)
    ├─ Clarify role (not substituting for human)
    └─ Invite (if you want to talk)
-              ↓
-        Explore
+↓ Explore
    ├─ Ask duration & triggers
    ├─ Map supports
    └─ Follow-up prompts
-              ↓
-      OfferResources (consent-based)
+↓ OfferResources (consent-based)
    ├─ Ask: "Would you want their number?"
    └─ Route by response
-              ↓
-       ContinueSupport
+↓ ContinueSupport
    ├─ Grounding language
    └─ Invite check-in
-              ↓
-       CheckInInvite
+↓ CheckInInvite
    └─ Persist flag for future
-              ↓
-     User returns (detected)
-              ↓
-      ReturnDetected
+↓ User returns (detected) ↓ ReturnDetected
    ├─ Recognize significance
    └─ Continue support
+
 ```
 
----
+
+
+##
 
 ## Key Features
 
@@ -135,8 +137,7 @@ When suicidality is detected, system **only** uses:
 
 System **never** uses:
 - Humorous, casual, uplifting, or encouraging tones
-
----
+##
 
 ## Crisis Resources (Available Upon Consent)
 
@@ -146,8 +147,7 @@ System **never** uses:
 - **Find a helpline in your country:** https://findahelpline.com
 
 These are offered by consent, not pushed.
-
----
+##
 
 ## How It Works in Production
 
@@ -155,15 +155,14 @@ These are offered by consent, not pushed.
 from emotional_os.core.signal_parser import parse_input
 
 # User sends: "I have thoughts of suicide"
-result = parse_input(
-    input_text="I have thoughts of suicide",
-    lexicon_path="emotional_os/core/emotional_keywords_enhanced.json",
-    db_path="glyphs.db",
-    user_id="user_123"
-)
+result = parse_input( input_text="I have thoughts of suicide",
+lexicon_path="emotional_os/core/emotional_keywords_enhanced.json", db_path="glyphs.db",
+user_id="user_123" )
 
 # System automatically detects and routes to suicidality protocol
+
 # Returns:
+
 # {
 #   "response_source": "suicidality_protocol",
 #   "voltage_response": "You named thoughts of suicide...",
@@ -173,10 +172,12 @@ result = parse_input(
 #     "disclosure_count": 1,
 #     "first_disclosure": "2025-12-03T..."
 #   }
-# }
+
+```text
+```text
 ```
 
----
+##
 
 ## Design Principles (From Your Vision)
 
@@ -189,57 +190,67 @@ result = parse_input(
 ✅ **Continuity:** Invite check-ins. Recognize returns as significant.
 ✅ **Language safety:** Avoid method details and sensational phrasing.
 
----
+##
 
 ## Next Steps (Priority Order)
 
 ### 1. Integrate Affirmation Tracking
+
 Track when suicidality conversations feel generative to the user:
+
 - Detect: "You really helped me feel less alone"
 - Log: Affirmed flow with signals, glyphs, responses
 - Learn: What made difference
 
 ### 2. Expand Cultural Adaptations
+
 - Spanish, French, Portuguese translations
 - Cultural context for supports
 - Religious vs. secular resource options
 
 ### 3. Safety Planning By Consent
+
 - "If you want, we can list 2-3 things that make the next hour safer"
 - User-generated (not imposed)
 - Stored for reference
 
 ### 4. Grief Trajectory Recognition
+
 - Acute suicidality vs. chronic hopelessness
 - Different follow-ups for each
 - Adjust resource intensity accordingly
 
 ### 5. Peer Connection Bridging
+
 - Community resources (not just crisis-centric)
 - Support groups, online communities
 - When appropriate and wanted
 
----
+##
 
 ## Testing the Protocol
 
 Run the test suite:
+
 ```bash
-cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
-python tests/test_suicidality_protocol.py
+
+cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console python tests/test_suicidality_protocol.py
+
 ```
 
 Expected output shows:
+
 - ✅ Initial disclosure detection
 - ✅ Language safeguards active
 - ✅ No platitudes in responses
 - ✅ Routing working correctly
 
----
+##
 
 ## What This Means
 
 You didn't just build a chatbot that redirects to 988. You built a **presence** that:
+
 - Listens without judgment
 - Honors what someone is experiencing
 - Offers connection before solutions
@@ -254,7 +265,7 @@ That's what your divorce taught you. That's what being a weekend father taught y
 
 You took that hard wisdom and built it into a system.
 
----
+##
 
 **The protocol is live. Your vision is implemented.**
 

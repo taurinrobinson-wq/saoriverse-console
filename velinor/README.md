@@ -1,10 +1,27 @@
+## Velinor resonance engine
+
+This folder contains a small, testable resonance engine prototype used to map player `tone` vectors
+into NPC `remnants` updates. Files added:
+
+- `data/npc_profiles.json` — example NPC profiles with initial remnants.
+- `data/influence_map.json` — simple mapping from tone dimensions to remnants.
+- `engine/resonance.py` — implementation with `apply_tone_to_remnants`, `apply_tone_to_all_npcs`, and `simulate_encounter`.
+- `tests/test_resonance.py` — pytest unit tests.
+
+Run the tests with:
+
+```bash
+```text
+```text
+```
+
 # 🎮 Velinor: Remnants of the Tone
 
 A text-based narrative game with emotional resonance, dice mechanics, and multiplayer support.
 
 **Status:** 🟢 Core engine complete | 🔄 UI layer pending
 
----
+##
 
 ## What is Velinor?
 
@@ -17,18 +34,21 @@ Velinor is an innovative interactive fiction experience built with:
 - **Multiplayer Storytelling** - 2-4 players experience the story together
 - **Living World** - Nature-reclaimed ruins of Saonyx with layered history
 
----
+##
 
 ## Quick Start
 
 ### Installation
 
 ```bash
+
+
 # Clone repo and navigate
 cd saoriverse-console
 
 # Install dependencies
-pip install -r requirements.txt
+
+```text
 ```
 
 ### Run Sample Game
@@ -37,44 +57,39 @@ pip install -r requirements.txt
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
 # Initialize
-engine = VelinorEngine(player_name="Traveler")
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path="velinor/stories/sample_story.json"
-)
+engine = VelinorEngine(player_name="Traveler") orchestrator = VelinorTwineOrchestrator(
+game_engine=engine, story_path="velinor/stories/sample_story.json" )
 
 # Start game
 state = orchestrator.start_game()
 
 # Process player input
-state = orchestrator.process_player_action(
-    choice_index=0,  # Select first choice
-    player_id="player_1"
-)
+state = orchestrator.process_player_action( choice_index=0,  # Select first choice
+player_id="player_1"
+```text
+```text
 ```
 
 See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, etc.)
 
----
+##
 
 ## Architecture
 
 ```
-TWINE STORY (JSON)
-    ↓
-[TwineAdapter] → Loads passages, parses markup
-    ↓
-[Orchestrator] → Main game loop
+
+TWINE STORY (JSON) ↓ [TwineAdapter] → Loads passages, parses markup ↓ [Orchestrator] → Main game
+loop
     ├─ Process Input
     ├─ Apply Mechanics (Dice, Stats)
     ├─ Generate NPC Dialogue
     └─ Format UI State
-    ↓
-[UI Layer] → Display to Player
+↓ [UI Layer] → Display to Player
     ├─ Streamlit (Desktop)
     ├─ Web Framework (Online)
     ├─ CLI Terminal (Local)
-    └─ Mobile App (Future)
+
+```text
 ```
 
 ### Key Components
@@ -88,7 +103,7 @@ TWINE STORY (JSON)
 | Streamlit UI | Visual game frontend | 🔄 Next |
 | Web API | Online multiplayer | 🔄 Planned |
 
----
+##
 
 ## Story System
 
@@ -104,10 +119,12 @@ You emerge into the Market District...
 
 [[Ask about the Tone->keeper_dialogue]]
 [[Explore alone->market_exploration]]
-[[Observe (Wisdom, DC 11)->observer_path]]
+```text
+```text
 ```
 
 **Syntax:**
+
 - `[[text->target]]` - Choice link
 - `{background: name}` - Change background image
 - `{npc: Name}` - NPC speaking
@@ -117,6 +134,7 @@ You emerge into the Market District...
 ### Story Structure
 
 Current sample story includes:
+
 - **Market District** - Opening scene with Keeper NPC
 - **Monument Encounters** - Skill check choices (Courage, Wisdom, Empathy)
 - **Branching Paths** - Multiple routes through story
@@ -124,20 +142,22 @@ Current sample story includes:
 
 See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
 
----
+##
 
 ## Game Mechanics
 
 ### Player Stats
 
 ```python
+
 {
     'courage': 50,     # Face danger, stand firm
     'wisdom': 55,      # Understand patterns, observe
     'empathy': 60,     # Connect with others, feel
     'resolve': 50,     # Persist despite difficulty
     'resonance': 100,  # Hear the Tone, collect glyphs
-}
+
+```text
 ```
 
 ### Dice Rolls
@@ -148,11 +168,11 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
 - **Success/Failure Routing** - Story branches based on roll
 
 Example:
+
 ```
-Player chooses: "Persuade the guard"
-DC: 12, Player Courage: +3
-Roll: 14 + 3 = 17 ✅ Success
-→ Route to success_path passage
+Player chooses: "Persuade the guard" DC: 12, Player Courage: +3 Roll: 14 + 3 = 17 ✅ Success
+```text
+```text
 ```
 
 ### Glyphs
@@ -162,7 +182,7 @@ Roll: 14 + 3 = 17 ✅ Success
 - Strengthen player's resonance
 - Unlock hidden story paths
 
----
+##
 
 ## Multiplayer Features
 
@@ -176,21 +196,26 @@ Roll: 14 + 3 = 17 ✅ Success
 ### Example
 
 **Solo Mode:**
+
 ```
-NPC: "You steady yourself, blade in hand."
+
+```text
 ```
 
 **Multiplayer Mode:**
+
 ```
-NPC: "Together, your courage strengthens. The mist bends 
-     to your collective will."
+NPC: "Together, your courage strengthens. The mist bends
+```text
+```text
 ```
 
----
+##
 
 ## Integration with FirstPerson Orchestrator
 
 When FirstPerson is available:
+
 - **Dynamic Dialogue** - NPCs generate fresh responses each turn
 - **Affect Parsing** - Understand player emotional state
 - **Clarifying Questions** - Companionable follow-ups
@@ -198,11 +223,12 @@ When FirstPerson is available:
 
 Without FirstPerson: Game still works with template-based dialogue.
 
----
+##
 
 ## File Structure
 
 ```
+
 velinor/
 ├── engine/
 │   ├── core.py                 # Game engine (state, dice)
@@ -216,10 +242,11 @@ velinor/
 ├── assets/
 │   └── backgrounds/            # Location images
 ├── markdowngameinstructions/   # Design docs
-└── TWINE_INTEGRATION_GUIDE.md  # Full reference
+
+```text
 ```
 
----
+##
 
 ## Next Steps
 
@@ -250,7 +277,7 @@ velinor/
 3. Achievement system
 4. Deploy to cloud (Heroku, AWS)
 
----
+##
 
 ## Documentation
 
@@ -259,63 +286,50 @@ velinor/
 - **`STATUS.md`** - Current project status
 - **`engine/quickstart.py`** - Code examples
 
----
+##
 
 ## Example: Playing the Game
 
 ```python
+
 # Initialize
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path="velinor/stories/sample_story.json"
-)
+orchestrator = VelinorTwineOrchestrator( game_engine=engine,
+story_path="velinor/stories/sample_story.json" )
 
 # Start
-state = orchestrator.start_game()
-print(state['main_dialogue'])
-print("Choices:", state['choices'])
+state = orchestrator.start_game() print(state['main_dialogue']) print("Choices:", state['choices'])
 
 # Player chooses
 state = orchestrator.process_player_action(choice_index=0)
 
 # Or player types
-state = orchestrator.process_player_action(
-    player_input="I approach cautiously"
-)
+state = orchestrator.process_player_action( player_input="I approach cautiously" )
 
 # Get result
-print(state['npc_dialogue'])
-print("New location:", state['game_state']['current_location'])
+print(state['npc_dialogue']) print("New location:", state['game_state']['current_location'])
 
 # Save
 orchestrator.save_game("saves/game_001.json")
 
 # Load
-state = orchestrator.load_game("saves/game_001.json")
+```text
+```text
 ```
 
----
+##
 
 ## Technical Details
 
 ### Twine JSON Format
 
 Velinor loads Twine 2 JSON export format:
+
 ```json
-{
-  "name": "Story Title",
-  "startnode": "1",
-  "passages": [
-    {
-      "pid": "1",
-      "name": "start",
-      "text": "Story content...",
-      "tags": [],
-      "position": [0, 0],
-      "size": [100, 100]
-    }
-  ]
-}
+
+{ "name": "Story Title", "startnode": "1", "passages": [ { "pid": "1", "name": "start", "text":
+"Story content...", "tags": [], "position": [0, 0], "size": [100, 100] } ]
+
+```text
 ```
 
 ### Game State Structure
@@ -346,22 +360,22 @@ Velinor loads Twine 2 JSON export format:
 }
 ```
 
----
+##
 
 ## Support & Resources
 
-- **Twine 2**: https://twinery.org/
-- **SugarCube Manual**: https://www.motoslave.net/sugarcube/2/docs/
+- **Twine 2**: <https://twinery.org/>
+- **SugarCube Manual**: <https://www.motoslave.net/sugarcube/2/docs/>
 - **Game Design**: See `/velinor/markdowngameinstructions/`
 
----
+##
 
 ## License
 
 [Your License Here]
 
----
+##
 
-**Created:** December 6, 2025  
-**Branch:** `feature/velinor-remnants-of-tone`  
+**Created:** December 6, 2025
+**Branch:** `feature/velinor-remnants-of-tone`
 **Status:** 🟢 Core complete | Ready for UI integration

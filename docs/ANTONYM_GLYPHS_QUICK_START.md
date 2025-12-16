@@ -2,35 +2,38 @@
 
 ## What You Now Have
 
-✅ **122 Antonym Glyphs** fully integrated and ready to use  
-✅ **High-Level API** for easy access from any code  
-✅ **Fast Indexed Lookup** by emotion, pairing, or name  
-✅ **Comprehensive Tests** (22 tests, 100% passing)  
-✅ **Full Documentation** with examples
+✅ **122 Antonym Glyphs** fully integrated and ready to use ✅ **High-Level API** for easy access from
+any code ✅ **Fast Indexed Lookup** by emotion, pairing, or name ✅ **Comprehensive Tests** (22 tests,
+100% passing) ✅ **Full Documentation** with examples
 
 ## Getting Started in 30 Seconds
 
 ### Import the Module
 
 ```python
-from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion, search_antonyms
+```text
+```text
 ```
 
 ### Find an Emotional Opposite
 
 ```python
+
+
 # Find the opposite of comfort
 antonym = find_antonym_by_emotion("comfort")
-print(antonym["Name"])  # Output: "Gentle Holding"
+
+```text
 ```
 
 ### Search for Related Emotions
 
 ```python
+
 # Search for anything related to "joy"
-results = search_antonyms("joy")
-for r in results:
-    print(f"{r['Base Emotion']}: {r['Name']}")
+results = search_antonyms("joy") for r in results:
+```text
+```text
 ```
 
 ## Common Tasks
@@ -38,15 +41,15 @@ for r in results:
 ### Task 1: Show Emotional Opposite in UI
 
 ```python
-import streamlit as st
-from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion, format_antonym_for_display
 
-emotion = "grief"
-opposite = find_antonym_by_emotion(emotion)
+import streamlit as st from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion,
+format_antonym_for_display
 
-if opposite:
-    st.markdown("### The Opposite Perspective")
-    st.markdown(format_antonym_for_display(opposite))
+emotion = "grief" opposite = find_antonym_by_emotion(emotion)
+
+if opposite: st.markdown("### The Opposite Perspective")
+
+```text
 ```
 
 ### Task 2: List All Available Emotions
@@ -57,12 +60,14 @@ from emotional_os.glyphs.antonym_glyphs import list_antonym_emotions
 emotions = list_antonym_emotions()
 print(f"Available antonym emotions: {len(emotions)}")
 for e in emotions[:10]:
-    print(f"  - {e}")
+```text
+```text
 ```
 
 ### Task 3: Build an Emotion Selector
 
 ```python
+
 from emotional_os.glyphs.antonym_glyphs import list_antonym_emotions, find_antonym_by_emotion
 
 emotions = list_antonym_emotions()
@@ -70,7 +75,8 @@ selected = st.selectbox("Choose an emotion:", emotions)
 
 antonym = find_antonym_by_emotion(selected)
 st.write(f"**Name**: {antonym['Name']}")
-st.write(f"**Description**: {antonym['Description']}")
+
+```text
 ```
 
 ## All Available Functions
@@ -107,17 +113,21 @@ st.write(f"**Description**: {antonym['Description']}")
 │   └── test_antonym_glyphs.py                  # Test suite
 └── docs/
     ├── ANTONYM_GLYPHS_INTEGRATION.md           # Full documentation
-    └── ANTONYM_GLYPHS_QUICK_START.md           # This file
+```text
+```text
 ```
 
 ## Run Tests
 
 ```bash
+
 cd /workspaces/saoriverse-console
-python3 tests/test_antonym_glyphs.py
+
+```text
 ```
 
 Expected output:
+
 ```
 🎉 ALL TESTS PASSED!
 Pass Rate: 100.0%
@@ -135,31 +145,31 @@ Pass Rate: 100.0%
 
 ## Next Steps
 
-1. **Try it out**: Import the module and play with the functions
-2. **Integrate into UI**: Add antonym suggestions to your interface
-3. **Build experiences**: Use opposites to explore emotional nuance
-4. **Expand coverage**: Suggest new antonym pairings based on user needs
+1. **Try it out**: Import the module and play with the functions 2. **Integrate into UI**: Add
+antonym suggestions to your interface 3. **Build experiences**: Use opposites to explore emotional
+nuance 4. **Expand coverage**: Suggest new antonym pairings based on user needs
 
 ## Troubleshooting
 
-**Q: "Antonym glyphs index not found"**  
+**Q: "Antonym glyphs index not found"**
 A: Run `python3 emotional_os/glyphs/antonym_glyphs_indexer.py`
 
-**Q: Search returns no results**  
+**Q: Search returns no results**
 A: Make sure you're using correct spelling. Searches are case-insensitive but must match content.
 
-**Q: Want to add more antonyms?**  
+**Q: Want to add more antonyms?**
 A: Edit `antonym_glyphs.txt`, then run the indexer to regenerate.
 
 ## More Information
 
 See `docs/ANTONYM_GLYPHS_INTEGRATION.md` for:
+
 - Complete API reference
 - Advanced examples
 - Development notes
 - Data format specs
 - Integration checklist
 
----
+##
 
 **Ready to use!** Import `emotional_os.glyphs.antonym_glyphs` and start exploring emotional opposites.

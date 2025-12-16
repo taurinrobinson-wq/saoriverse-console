@@ -42,6 +42,7 @@ How collaborators can sync after a history rewrite
 If the main branch was force-pushed after a scrub, instruct collaborators to do the following:
 
 ```bash
+
 # Fetch and reset local main to match origin
 git fetch origin
 git checkout main

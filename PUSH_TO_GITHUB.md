@@ -3,6 +3,7 @@
 These are the files ready to be pushed to your GitHub repository. Run these commands:
 
 ```bash
+
 # Make sure you're in the repository root
 cd d:\saoriverse-console
 
@@ -31,10 +32,11 @@ Enables self-hosted VPS deployment with automated CI/CD pipeline.
 Replaces unreliable Railway deployment."
 
 # Push to GitHub
-git push origin main
+```text
+```text
 ```
 
----
+##
 
 ## 📋 Files Summary
 
@@ -49,11 +51,13 @@ git push origin main
 
 **Total**: 6 new/modified files, ~800 lines of configuration and documentation
 
----
+##
 
 ## ✅ Verification Before Pushing
 
 ```bash
+
+
 # Verify all files exist
 ls -la docker-compose.prod.yml
 ls -la nginx.prod.conf
@@ -65,10 +69,11 @@ ls -la VPS_MIGRATION_CHECKLIST.md
 # Check file integrity
 cat docker-compose.prod.yml | head -5
 cat nginx.prod.conf | head -5
-cat .github/workflows/deploy.yml | head -5
+
+```text
 ```
 
----
+##
 
 ## 🚀 After Pushing
 
@@ -77,70 +82,79 @@ cat .github/workflows/deploy.yml | head -5
 3. **Clone on VPS**: During VPS setup, you'll run: `git clone https://github.com/YOUR_USERNAME/saoriverse-console.git`
 4. **Auto-deploy**: Future pushes will automatically trigger deployment
 
----
+##
 
 ## 🔄 Working with These Files Going Forward
 
-### When you want to deploy:
+### When you want to deploy
+
 ```bash
+
 # Option 1: Auto-deploy (recommended)
 git push origin main
+
 # GitHub Actions will deploy automatically
 
 # Option 2: Manual deploy from VPS
-ssh root@YOUR_DROPLET_IP
-cd /opt/velinor
-git pull origin main
-docker compose -f docker-compose.prod.yml build
-docker compose -f docker-compose.prod.yml up -d
+ssh root@YOUR_DROPLET_IP cd /opt/velinor git pull origin main docker compose -f
+docker-compose.prod.yml build
+```text
+```text
 ```
 
-### When you want to make changes:
+### When you want to make changes
+
 ```bash
+
+
 # Edit locally (e.g., nginx.prod.conf)
+
 # Commit and push
-git add nginx.prod.conf
-git commit -m "chore: update nginx configuration"
-git push origin main
-# Auto-deploys to VPS!
+git add nginx.prod.conf git commit -m "chore: update nginx configuration" git push origin main
+
+```text
 ```
 
-### Emergency rollback:
+### Emergency rollback
+
 ```bash
+
 # Revert to previous commit
 git revert HEAD
 git push origin main
+
 # Or manually stop and restart with git checkout
 ssh root@YOUR_DROPLET_IP
 cd /opt/velinor
 git log --oneline  # Find commit to revert to
 git checkout COMMIT_HASH
 docker compose -f docker-compose.prod.yml build
-docker compose -f docker-compose.prod.yml up -d
+```text
+```text
 ```
 
----
+##
 
 ## 📝 Commit Message Template
 
 For future updates to deployment files:
 
 ```
+
 chore: update [docker-compose.prod.yml|nginx.prod.conf|etc]
 
 - What changed
 - Why it changed
 - Any manual steps needed after deploy
+
 ```
 
----
+##
 
 ## ✨ Next Steps
 
-1. **Verify files are all created locally** (run verification above)
-2. **Push to GitHub** (run git commands above)
-3. **Follow DEPLOYMENT_VPS.md** for DigitalOcean setup
-4. **Use VPS_QUICK_START.md** as quick reference during setup
-5. **Track progress** with VPS_MIGRATION_CHECKLIST.md
+1. **Verify files are all created locally** (run verification above) 2. **Push to GitHub** (run git
+commands above) 3. **Follow DEPLOYMENT_VPS.md** for DigitalOcean setup 4. **Use VPS_QUICK_START.md**
+as quick reference during setup 5. **Track progress** with VPS_MIGRATION_CHECKLIST.md
 
 **Estimated time from push to live**: 15-20 minutes ⏱️

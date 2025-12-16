@@ -2,13 +2,11 @@
 
 ## What You Have
 
-✅ **Complete Docker configuration** ready to deploy FirstPerson web app  
-✅ **Automated setup script** (`docker-setup.sh`)  
-✅ **Comprehensive documentation**  
-✅ **Environment configuration** templates  
-✅ **Production-ready** Nginx reverse proxy setup
+✅ **Complete Docker configuration** ready to deploy FirstPerson web app ✅ **Automated setup script**
+(`docker-setup.sh`) ✅ **Comprehensive documentation** ✅ **Environment configuration** templates ✅
+**Production-ready** Nginx reverse proxy setup
 
----
+##
 
 ## Files Created/Updated
 
@@ -37,7 +35,7 @@
 | `.env.example` | ✅ Updated - Environment variables template |
 | `deploy/nginx.conf` | ✅ Updated - Reverse proxy configuration |
 
----
+##
 
 ## What This Setup Provides
 
@@ -61,15 +59,10 @@
 
 ### Features Included
 
-✅ Automatic health checks  
-✅ Container restart policies  
-✅ Volume mounts for persistence  
-✅ Docker network isolation  
-✅ Resource limits configured  
-✅ Logging support  
-✅ Easy scaling  
+✅ Automatic health checks ✅ Container restart policies ✅ Volume mounts for persistence ✅ Docker
+network isolation ✅ Resource limits configured ✅ Logging support ✅ Easy scaling
 
----
+##
 
 ## How to Deploy
 
@@ -80,16 +73,19 @@ ssh root@161.35.227.49
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
-./docker-setup.sh
+```text
+```text
 ```
 
-**Time**: ~5 minutes  
-**Difficulty**: Easy  
+**Time**: ~5 minutes
+**Difficulty**: Easy
 **What it does**: Installs Docker, builds images, starts containers, verifies setup
 
 ### Option 2: Manual
 
 ```bash
+
+
 # SSH to droplet
 ssh root@161.35.227.49
 
@@ -108,13 +104,14 @@ docker compose up -d
 
 # Verify
 docker compose ps
-curl http://161.35.227.49:8000/health
+
+```text
 ```
 
-**Time**: ~10 minutes  
-**Difficulty**: Moderate  
+**Time**: ~10 minutes
+**Difficulty**: Moderate
 
----
+##
 
 ## Accessing Your App
 
@@ -123,29 +120,33 @@ Once deployed, your app is live at:
 ### URLs
 
 ```
-Frontend:          http://161.35.227.49:3000
-API Server:        http://161.35.227.49:8000
-Health Check:      http://161.35.227.49:8000/health
-Nginx Proxy:       http://161.35.227.49:80 (same as :3000)
+Frontend:          http://161.35.227.49:3000 API Server:        http://161.35.227.49:8000 Health
+Check:      http://161.35.227.49:8000/health
+```text
+```text
 ```
 
 ### Test the API
 
 ```bash
+
+
 # Health check
 curl http://161.35.227.49:8000/health
 
 # Example API call (from your machine)
 curl -X POST http://161.35.227.49:8000/api/chat \
   -H "Content-Type: application/json" \
-  -d '{"message":"Hello","user_id":"test","mode":"local"}'
+
+```text
 ```
 
----
+##
 
 ## Essential Docker Commands
 
 ```bash
+
 # Status
 docker compose ps              # Running containers
 docker compose logs -f         # Live logs
@@ -160,16 +161,19 @@ docker compose down            # Remove containers
 # Development
 docker compose exec backend bash    # Shell access
 docker compose build --no-cache     # Rebuild images
-docker compose up -d --build        # Rebuild & restart
+```text
+```text
 ```
 
----
+##
 
 ## Environment Variables
 
 The `.env.example` file includes:
 
 ```env
+
+
 # API Configuration
 API_HOST=0.0.0.0
 API_PORT=8000
@@ -188,11 +192,13 @@ DEBUG=false
 LOG_LEVEL=info
 
 # Optional: External services
+
 # OPENAI_API_KEY=...
-# SUPABASE_URL=...
+
+```text
 ```
 
----
+##
 
 ## Project Structure
 
@@ -219,7 +225,7 @@ saoriverse-console/
 └── deploy/nginx.conf       # Reverse proxy config
 ```
 
----
+##
 
 ## Troubleshooting Quick Links
 
@@ -232,7 +238,7 @@ saoriverse-console/
 | Frontend won't load | `docker compose logs frontend` |
 | Disk full | `docker system prune -a` |
 
----
+##
 
 ## Next Steps
 
@@ -248,7 +254,7 @@ saoriverse-console/
 3. **Verify Deployment**
    - Check: `docker compose ps`
    - Test: `curl http://161.35.227.49:8000/health`
-   - Visit: http://161.35.227.49:3000 in your browser
+   - Visit: <http://161.35.227.49:3000> in your browser
 
 4. **Optional: Advanced Setup**
    - Enable HTTPS with Let's Encrypt
@@ -256,7 +262,7 @@ saoriverse-console/
    - Configure log aggregation
    - See `DIGITALOCEAN_DEPLOYMENT_GUIDE.md`
 
----
+##
 
 ## Key Files to Reference
 
@@ -269,33 +275,33 @@ saoriverse-console/
 | Reverse proxy setup | `deploy/nginx.conf` |
 | Automated setup | `docker-setup.sh` |
 
----
+##
 
 ## Support Resources
 
-- **Docker Documentation**: https://docs.docker.com/
-- **FastAPI**: https://fastapi.tiangolo.com/
-- **React/Expo**: https://expo.dev/
-- **DigitalOcean**: https://www.digitalocean.com/docs/
+- **Docker Documentation**: <https://docs.docker.com/>
+- **FastAPI**: <https://fastapi.tiangolo.com/>
+- **React/Expo**: <https://expo.dev/>
+- **DigitalOcean**: <https://www.digitalocean.com/docs/>
 
----
+##
 
 ## Summary
 
 You now have:
 
-✅ A complete, production-ready Docker setup  
-✅ Automated deployment script (`docker-setup.sh`)  
-✅ Comprehensive documentation  
-✅ Three containerized services (backend, frontend, nginx)  
-✅ Configuration templates  
-✅ Troubleshooting guides  
+✅ A complete, production-ready Docker setup
+✅ Automated deployment script (`docker-setup.sh`)
+✅ Comprehensive documentation
+✅ Three containerized services (backend, frontend, nginx)
+✅ Configuration templates
+✅ Troubleshooting guides
 
 **You're ready to deploy!** 🚀
 
 **Next action**: Run `./docker-setup.sh` on your DigitalOcean droplet.
 
----
+##
 
 ### Quick Deployment Checklist
 
@@ -306,12 +312,12 @@ You now have:
 - [ ] Wait for setup to complete (~5-10 minutes)
 - [ ] Verify: `docker compose ps`
 - [ ] Test API: `curl http://161.35.227.49:8000/health`
-- [ ] Visit frontend: http://161.35.227.49:3000
+- [ ] Visit frontend: <http://161.35.227.49:3000>
 - [ ] Monitor logs: `docker compose logs -f`
 
----
+##
 
-**Status**: ✅ READY FOR DEPLOYMENT  
-**Created**: December 13, 2025  
-**Target**: DigitalOcean droplet (161.35.227.49, Ubuntu)  
+**Status**: ✅ READY FOR DEPLOYMENT
+**Created**: December 13, 2025
+**Target**: DigitalOcean droplet (161.35.227.49, Ubuntu)
 **Services**: Backend (FastAPI) + Frontend (React/Expo) + Proxy (Nginx)

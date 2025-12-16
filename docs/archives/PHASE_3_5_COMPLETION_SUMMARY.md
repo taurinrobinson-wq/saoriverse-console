@@ -6,14 +6,16 @@
 **Lines of Code**: 1,855 core + 500+ tests
 **Commits**: 95acb8c (main)
 
----
+##
 
 ## What Was Built
 
 ### 1. Glyph-LLM Control Schema ✅
+
 **File**: `local_inference/glyph_lm_control.py` (415 lines)
 
 **Core Components**:
+
 - **38 Curated Glyphs** mapped to 5 emotional families:
   - Ache (Recursive, Spiral, Nested)
   - Mourning (Still, Gentle, Echoing)
@@ -26,6 +28,7 @@
 - **ControlTagRenderer**: Converts glyphs to `<GLYPH:name:intensity>` tokens for LLM
 
 **Key Methods**:
+
 ```python
 registry.get_by_family("Ache")                 # Get family members
 registry.filter_by_gate(glyphs, gates)         # Apply safety filters
@@ -33,9 +36,11 @@ renderer.render_control_prefix(glyphs, gates)  # Generate <SYS> prefix
 ```
 
 ### 2. Safety Post-Processing ✅
+
 **File**: `local_inference/safety_post_processor.py` (400 lines)
 
 **Multi-Layer Enforcement**:
+
 - **RecognitionRiskDetector**: Blocks "I remember you", "we met before", similar phrases
 - **UncannynessEnforcer**: Enforces `uncanny_ok` gate (blocks creepy content when disabled)
 - **RhythmEnforcer**: Analyzes sentence length distribution, suggests pacing improvements
@@ -43,15 +48,19 @@ renderer.render_control_prefix(glyphs, gates)  # Generate <SYS> prefix
 - **SafetyPostProcessor**: Orchestrates all layers
 
 **Output Safety Score**:
+
 ```python
 result = processor.process(response, gates, glyphs)
+
 # Returns: {text, is_safe, modifications, safety_score: 0.0-1.0}
 ```
 
 ### 3. Training Corpus Pipeline ✅
+
 **File**: `local_inference/training_corpus.py` (340 lines)
 
 **Schema** (JSONL Format):
+
 ```json
 {
   "id": "ex_001",
@@ -65,14 +74,17 @@ result = processor.process(response, gates, glyphs)
 ```
 
 **CorpusBuilder**:
+
 - Aggregate up to 5,000 training examples
 - Curriculum learning: safe → uncanny progression
 - Statistics: tone distribution, gate usage, style variance
 
 ### 4. Comprehensive Testing ✅
+
 **File**: `local_inference/test_phase_3_5.py` (500+ lines)
 
 **31 Tests Across**:
+
 - **Glyph Registry** (4 tests): Loading, registration, filtering
 - **Gate Policy** (3 tests): Safe/uncanny enforcement
 - **Control Rendering** (3 tests): Tag generation
@@ -94,11 +106,12 @@ result = processor.process(response, gates, glyphs)
 **examples.py**: Working code examples
 **verify_phase_3_5.sh**: Verification script
 
----
+##
 
 ## Integration with Existing System
 
 ### Phase 3.1 → Phase 3.5
+
 ```
 EmotionalProfileManager detects: tone=GROUNDED, themes=[safety, connection]
          ↓
@@ -114,6 +127,7 @@ Post-process output (remove unsafe phrases, enforce rhythm)
 ```
 
 ### Phase 2.4 → Phase 3.5
+
 ```
 PreferenceEvolutionTracker shows: user likes [reassurance, grounding] glyphs
          ↓
@@ -123,6 +137,7 @@ LoRA adapter learns user's preferred style distribution
 ```
 
 ### Phase 1 → Phase 3.5
+
 ```
 FrequencyReflector identifies: theme=grounding, secondary_themes=[safety]
          ↓
@@ -131,11 +146,12 @@ GlyphRegistry.match_by_themes() returns: [Grounded Stillness, Safe Connection]
 Gate enforcement ensures appropriate intensity/uncanniness
 ```
 
----
+##
 
 ## How to Use
 
 ### Basic Glyph Control
+
 ```python
 from local_inference.glyph_lm_control import GlyphRegistry, ControlTagRenderer, GatePolicy
 
@@ -154,10 +170,12 @@ control_prefix = renderer.render_control_prefix(
     gates={"uncanny_ok": False, "safety_bias": 0.9},
     style={"register": "warm", "rhythm": "mixed"}
 )
+
 # Output: "<SYS><GLYPH:Serene Stillness:0.8> <GATE:uncanny_ok:false> ...</SYS>"
 ```
 
 ### Safety Post-Processing
+
 ```python
 from local_inference.safety_post_processor import SafetyPostProcessor
 
@@ -169,15 +187,18 @@ result = processor.process(
     gates={"uncanny_ok": False},
     glyphs=glyphs
 )
+
 # Returns: {
 #   "text": "I sense your kindness.",
 #   "is_safe": True,
 #   "modifications": ["Removed recognition phrase"],
 #   "safety_score": 0.95
+
 # }
 ```
 
 ### Training Corpus Building
+
 ```python
 from local_inference.training_corpus import CorpusBuilder, TrainingExample
 
@@ -202,13 +223,14 @@ print(f"Gate distribution: {stats['gate_distribution']}")
 builder.export_jsonl("training_data.jsonl")
 ```
 
----
+##
 
 ## Next Steps: LoRA Fine-Tuning Pipeline (Not Yet Implemented)
 
 To enable local LLM fine-tuning:
 
 ### Setup Environment
+
 ```bash
 conda create -n emoos python=3.10 -y
 conda activate emoos
@@ -217,7 +239,9 @@ pip install transformers datasets peft accelerate bitsandbytes
 ```
 
 ### Download Model
+
 ```bash
+
 # Mistral-7B (recommended)
 huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2 --local-dir models/mistral-7b
 
@@ -226,7 +250,9 @@ huggingface-cli download microsoft/phi-3-mini --local-dir models/phi-3-mini
 ```
 
 ### Fine-Tune with Control Tags
+
 ```python
+
 # Pseudocode - full implementation in next phase
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer
 from peft import LoraConfig, get_peft_model
@@ -246,7 +272,9 @@ trainer.train()
 ```
 
 ### Run Locally
+
 ```bash
+
 # Start FastAPI server (pseudocode)
 uvicorn local_inference.inference_service:app --port 8000
 
@@ -260,33 +288,37 @@ curl -X POST http://localhost:8000/generate \
   }'
 ```
 
----
+##
 
 ## Architecture Decision Rationale
 
 ### Why Glyph-Based Control?
+
 - Your glyphs already encode emotional semantics + poetic form
 - Using them as "soft prompts" (control tokens) teaches the LLM your specific style
 - More flexible than static templates, more controllable than pure fine-tuning
 
 ### Why LoRA (Not Full Fine-Tuning)?
+
 - **Lightweight**: 50-200MB adapters vs 7GB+ full weights
 - **Fast**: Train in 1-2 hours on modest GPU
 - **Switchable**: Load different adapters for different personas
 - **Efficient**: 8bit quantization = runs on 8-16GB RAM
 
 ### Why Local Model?
+
 - **Privacy**: No external API, zero data transmission
 - **Cost**: One-time download, no per-query fees
 - **Control**: Full ownership of training data + model
 - **Offline**: Works without internet after setup
 
 ### Why Multi-Layer Safety?
+
 - **Defense-in-depth**: Recognition risk + uncanniness + rhythm checks
 - **Gradual**: Can relax gates as system proves safe
 - **Measurable**: Safety score provides feedback for model improvement
 
----
+##
 
 ## Test Coverage Summary
 
@@ -304,7 +336,7 @@ curl -X POST http://localhost:8000/generate \
 | Integration | 2 | 100% | Full workflows |
 | **TOTAL** | **31** | **100%** | **Comprehensive** |
 
----
+##
 
 ## Files Created
 
@@ -321,7 +353,7 @@ local_inference/
 └── verify_phase_3_5.sh               (Verification script)
 ```
 
----
+##
 
 ## Production Readiness Checklist
 
@@ -336,26 +368,29 @@ local_inference/
 - [x] Ready for LoRA fine-tuning integration
 - [x] Ready for FastAPI service deployment
 
----
+##
 
 ## What's Next
 
 **Planned Phase 3.5.2 (Soon)**:
+
 - LoRA fine-tuning pipeline implementation
 - FastAPI inference service
 - Lexicon expansion system (clustering + variants)
 - llama.cpp integration for CPU/GPU execution
 
 **Then: Circle Back to Phase 3.2**:
+
 - Multi-modal affect analysis (voice, facial expression)
 - Enhanced emotion detection from multiple channels
 - Fusion algorithms for multi-modal insights
 
----
+##
 
 ## Summary
 
 Phase 3.5 provides **complete local LLM infrastructure** with:
+
 - ✅ Glyph-based semantic control
 - ✅ Multi-layer safety enforcement
 - ✅ Training corpus pipeline
@@ -367,4 +402,5 @@ Phase 3.5 provides **complete local LLM infrastructure** with:
 **Tests**: 382/382 passing (351 Phase 1-3 + 31 Phase 3.5)
 **Commits**: All changes committed to main
 
-The foundation for **semantic-emotional language generation** is complete. Next step: train with your corpus!
+The foundation for **semantic-emotional language generation** is complete. Next step: train with
+your corpus!

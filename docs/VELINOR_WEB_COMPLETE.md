@@ -2,36 +2,39 @@
 
 ## What Changed
 
-You're ditching **Streamlit** and moving to a proper **web stack** because Streamlit's rendering model can't handle the layered overlays and interactive positioning you want for Velinor.
+You're ditching **Streamlit** and moving to a proper **web stack** because Streamlit's rendering
+model can't handle the layered overlays and interactive positioning you want for Velinor.
 
----
+##
 
 ## New Architecture
 
-```
-Your Computer (Dev)          Railway Server (Production)
-═══════════════════          ════════════════════════════
-
-Backend:                     Backend:
-python velinor_api.py        FastAPI (auto-deployed)
-http://localhost:8000        https://your-domain.up.railway.app
-
-Frontend:                    Frontend:
-npm run dev                  Next.js (auto-deployed)
-http://localhost:3000        https://your-domain.up.railway.app
-
-Game Engine:                 Game Engine:
-Velinor (Python)             Velinor (Python) - embedded in backend
+```text
 ```
 
----
+Your Computer (Dev)          Railway Server (Production) ═══════════════════
+════════════════════════════
+
+Backend:                     Backend: python velinor_api.py        FastAPI (auto-deployed)
+<http://localhost:8000>        <https://your-domain.up.railway.app>
+
+Frontend:                    Frontend: npm run dev                  Next.js (auto-deployed)
+<http://localhost:3000>        <https://your-domain.up.railway.app>
+
+Game Engine:                 Game Engine: Velinor (Python)             Velinor (Python) - embedded
+in backend
+
+```
+
+
+##
 
 ## What You Have Now
 
 ### ✅ Backend
 - **File**: `velinor_api.py`
 - **What it does**: Wraps your Velinor game engine as REST API
-- **Endpoints**: 
+- **Endpoints**:
   - `POST /api/game/start` - Create game session
   - `POST /api/game/{id}/action` - Process player choices
   - `GET/POST/DELETE /api/game/{id}` - Manage sessions
@@ -50,49 +53,58 @@ Velinor (Python)             Velinor (Python) - embedded in backend
 - **`NEXTJS_FRONTEND_SETUP.md`** - Detailed Next.js configuration
 - **`RAILWAY_DEPLOYMENT.md`** - Production deployment guide
 - **`VELINOR_WEB_QUICK_REFERENCE.md`** - Quick command reference
-
----
+##
 
 ## Quick Start (3 Steps)
 
 ### Step 1: Create Next.js App
+
 ```bash
-npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
-cd velinor-web
-npm install axios zustand
+
+npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git cd velinor-web
+
+```text
 ```
 
 ### Step 2: Copy Components
+
 ```bash
+
 # From repo root
 cp frontend_lib_api.ts velinor-web/lib/api.ts
-cp frontend_GameScene.tsx velinor-web/components/GameScene.tsx
+```text
+```text
 ```
 
 ### Step 3: Create Pages
+
 - `velinor-web/app/page.tsx` - Splash screen (see `VELINOR_WEB_MIGRATION.md`)
 - `velinor-web/app/game/[sessionId]/page.tsx` - Game scene
 
 ### Step 4: Test
+
 ```bash
+
+
 # Terminal 1
 python velinor_api.py
 
 # Terminal 2
 cd velinor-web && npm run dev
 
-# Browser: http://localhost:3000
+```text
 ```
 
 ### Step 5: Deploy
+
 ```bash
-git add .
-git commit -m "feat: Next.js + FastAPI Velinor game"
-git push origin main
-# Railway auto-deploys in ~3-5 minutes
+git add . git commit -m "feat: Next.js + FastAPI Velinor game" git push origin main
+
+```text
+```text
 ```
 
----
+##
 
 ## Why This is Better Than Streamlit
 
@@ -106,11 +118,12 @@ git push origin main
 | **Animations** | ❌ Not supported | ✅ Framer Motion, CSS |
 | **Customization** | ⚠️ Limited | ✅ Unlimited |
 
----
+##
 
 ## File Organization
 
 ```
+
 saoriverse-console/
 ├── velinor/                         ← Game engine (unchanged)
 │   ├── engine/
@@ -140,32 +153,40 @@ saoriverse-console/
     │   ├── backgrounds/             ← Copy from velinor/backgrounds/
     │   ├── overlays/                ← NEW: dust, fog, glyphs
     │   └── npcs/                    ← Copy from velinor/npcs/
-    └── package.json
+
+```text
 ```
 
----
+##
 
 ## Key Differences from Streamlit
 
 ### Before (Streamlit - Broken)
+
 ```python
+
 # Streamlit can't layer properly
 st.image(splash_img)  # Shows image
 st.button("Start")    # Shows below, not on top
-# Result: Button appears below image, not overlaid
+
+```text
+```text
 ```
 
 ### After (Next.js - Works)
+
 ```jsx
+
 <div style={{ position: 'relative' }}>
   <img src="background" style={{ position: 'absolute' }} />
   <button style={{ position: 'absolute', bottom: '20px' }}>
     Start  {/* Button is truly on top */}
   </button>
-</div>
+
+```text
 ```
 
----
+##
 
 ## What Happens When You Push
 
@@ -177,35 +198,39 @@ st.button("Start")    # Shows below, not on top
 4. Your game is live in ~3-5 minutes
 5. Users visit `https://your-railway-domain.up.railway.app`
 
----
+##
 
 ## Next Phase
 
 Once you have it running locally:
 
 ### Phase A: Add Scene Styling
+
 - Add background images to `velinor-web/public/assets/backgrounds/`
 - Create overlay PNGs for dust/fog/glyphs
 - Update `GameScene.tsx` to load them dynamically
 
 ### Phase B: Enhance UI
+
 - Add animations with Framer Motion
 - Add sound with Howler.js
 - Add glyph rendering
 - Add stats panel
 
 ### Phase C: Mobile Optimization
+
 - Test on phone (might need `--host 0.0.0.0` locally)
 - Adjust button sizes for touch
 - Responsive image sizing
 
 ### Phase D: Advanced Features
+
 - Save/load system with database
 - Multiplayer sessions
 - Settings panel
 - Achievements/progress tracking
 
----
+##
 
 ## Documentation Map
 
@@ -214,14 +239,17 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
   ├─→ NEXTJS_FRONTEND_SETUP.md (detailed setup)
   ├─→ RAILWAY_DEPLOYMENT.md (production deploy)
   ├─→ VELINOR_WEB_QUICK_REFERENCE.md (commands)
-  └─→ velinor/TWINE_INTEGRATION_GUIDE.md (engine API)
+```text
+```text
 ```
 
----
+##
 
 ## Commands You'll Need
 
 ```bash
+
+
 # Create Next.js project (one time)
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
@@ -229,6 +257,7 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 cd velinor-web && npm install axios zustand
 
 # Development (every session)
+
 # Terminal 1:
 python velinor_api.py
 
@@ -236,16 +265,16 @@ python velinor_api.py
 cd velinor-web && npm run dev
 
 # Deployment (when ready)
-git add .
-git commit -m "your message"
-git push origin main
+git add . git commit -m "your message" git push origin main
+
 ```
 
----
+##
 
 ## Success Criteria
 
 You'll know it's working when:
+
 - ✅ You can start a game and see the splash screen
 - ✅ You can enter a player name
 - ✅ You can click "Start New Game"
@@ -254,7 +283,7 @@ You'll know it's working when:
 - ✅ Custom text input works
 - ✅ It's responsive on mobile
 
----
+##
 
 ## Troubleshooting
 
@@ -266,7 +295,7 @@ You'll know it's working when:
 | `Slow to start` | Backend initializes - takes 1-2 seconds |
 | `Button doesn't work` | Check browser console for errors |
 
----
+##
 
 ## What's Next for You
 
@@ -278,7 +307,7 @@ You'll know it's working when:
 6. **Step 5**: Deploy to Railway
 7. **Done**: Your Velinor game is live!
 
----
+##
 
 **Total time to first deployment:** ~30-45 minutes
 
@@ -286,16 +315,17 @@ You'll know it's working when:
 
 **Complexity**: Medium (setting up two services, but well-documented)
 
----
+##
 
 ## Questions?
 
 Check the documentation files or the Velinor game engine guide:
+
 - `VELINOR_WEB_MIGRATION.md` - Complete step-by-step
 - `velinor/TWINE_INTEGRATION_GUIDE.md` - Game engine API
 - `RAILWAY_DEPLOYMENT.md` - Production specifics
 
----
+##
 
 **Ready to build the web version of Velinor?**
 

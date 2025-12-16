@@ -2,7 +2,7 @@
 
 Complete reference guide for all Velinor: Remnants of the Tone design documentation.
 
----
+##
 
 ## Core System Documentation
 
@@ -19,7 +19,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 
 **Start Here If**: You need to understand how player choices become mechanical impact.
 
----
+##
 
 ### 2. **NPC_SPHERE_SYSTEM.md**
 
@@ -34,7 +34,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 
 **Start Here If**: You need to understand NPC interconnection and cascade effects.
 
----
+##
 
 ### 3. **MARKETPLACE_NPC_ROSTER.md**
 
@@ -49,7 +49,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 
 **Start Here If**: You're building NPC dialogue, designing encounters, or creating character art.
 
----
+##
 
 ### 4. **VELINOR_SAORI_FINAL_ARC.md**
 
@@ -64,7 +64,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 
 **Start Here If**: You're writing the final story sequences or need to understand narrative branching.
 
----
+##
 
 ## Implementation & Planning
 
@@ -80,7 +80,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 
 **Start Here If**: You're planning the project or need to understand development sequencing.
 
----
+##
 
 ### 6. **EXECUTIVE_SUMMARY_AND_QUICKSTART.md**
 
@@ -95,7 +95,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 
 **Start Here If**: You're new to the project or need a comprehensive overview.
 
----
+##
 
 ## Topic-Specific Deep Dives (To Create)
 
@@ -107,7 +107,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 - Thieves' lair infiltration sequence
 - Infiltration mechanics and puzzle design
 
----
+##
 
 ### 8. **BOSS_CHAMBER_SYSTEM.md** (Priority: HIGH)
 
@@ -117,7 +117,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 - Emotional encounter mechanics (vs. combat)
 - Unified glyph rewards and visualization
 
----
+##
 
 ### 9. **JOURNAL_SYSTEM.md** (Priority: MEDIUM)
 
@@ -128,7 +128,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 - Sound design (page turn, parchment sounds)
 - React/JS implementation guide
 
----
+##
 
 ### 10. **ENDING_SEQUENCES.md** (Priority: HIGH)
 
@@ -138,7 +138,7 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 - Sound design for each ending
 - Camera angles and cinematics notes
 
----
+##
 
 ## Reference Documents (Existing in Folder)
 
@@ -149,37 +149,35 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 - `environments.md` — Location descriptions (add Saori's chamber)
 - `achievements.md` — Achievement conditions (tie to ending paths)
 
----
+##
 
 ## How to Use This Documentation
 
 ### For Narrative Designers
 
-1. Start with **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min read)
-2. Read **VELINOR_SAORI_FINAL_ARC.md** (20 min, detailed)
-3. Deep-dive **MARKETPLACE_NPC_ROSTER.md** (30 min, dialogue writing)
-4. Reference **NPC_SPHERE_SYSTEM.md** for relationship mechanics (15 min)
+1. Start with **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min read) 2. Read
+**VELINOR_SAORI_FINAL_ARC.md** (20 min, detailed) 3. Deep-dive **MARKETPLACE_NPC_ROSTER.md** (30
+min, dialogue writing) 4. Reference **NPC_SPHERE_SYSTEM.md** for relationship mechanics (15 min)
 
 ### For Developers
 
-1. Start with **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min read)
-2. Study **TONE_STAT_SYSTEM.md** thoroughly (25 min, design patterns)
-3. Read **NPC_SPHERE_SYSTEM.md** for architecture (20 min)
-4. Reference **IMPLEMENTATION_ROADMAP.md** for phasing (30 min)
+1. Start with **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min read) 2. Study **TONE_STAT_SYSTEM.md**
+thoroughly (25 min, design patterns) 3. Read **NPC_SPHERE_SYSTEM.md** for architecture (20 min) 4.
+Reference **IMPLEMENTATION_ROADMAP.md** for phasing (30 min)
 
 ### For Project Managers
 
-1. Read **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min, high-level)
-2. Deep-dive **IMPLEMENTATION_ROADMAP.md** (45 min, scheduling)
-3. Reference **TONE_STAT_SYSTEM.md** and **NPC_SPHERE_SYSTEM.md** for complexity estimates
+1. Read **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min, high-level) 2. Deep-dive
+**IMPLEMENTATION_ROADMAP.md** (45 min, scheduling) 3. Reference **TONE_STAT_SYSTEM.md** and
+**NPC_SPHERE_SYSTEM.md** for complexity estimates
 
 ### For Artists & Animators
 
-1. Start with **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min overview)
-2. Read **MARKETPLACE_NPC_ROSTER.md** for character descriptions (20 min)
-3. Reference **VELINOR_SAORI_FINAL_ARC.md** for final scene art direction (15 min)
+1. Start with **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** (10 min overview) 2. Read
+**MARKETPLACE_NPC_ROSTER.md** for character descriptions (20 min) 3. Reference
+**VELINOR_SAORI_FINAL_ARC.md** for final scene art direction (15 min)
 
----
+##
 
 ## Key Numbers to Remember
 
@@ -195,19 +193,19 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 | Dialogue Variations (per NPC) | 15-30 |
 | Development Timeline | 4.5 months |
 
----
+##
 
 ## Critical Design Principles
 
 **Always Remember**:
 
-1. **TONE stats are invisible** — Players never see numbers. They choose authentically.
-2. **Every NPC is connected** — One choice ripples across spheres.
-3. **Endings are all tragic** — No "good" ending. All paths honor something while destroying something.
-4. **Memory is the theme** — Glyphs, journal, fragmentation, Saori's desperation all reinforce it.
-5. **Relationship > Combat** — Emotional confrontations, not battles.
+1. **TONE stats are invisible** — Players never see numbers. They choose authentically. 2. **Every
+NPC is connected** — One choice ripples across spheres. 3. **Endings are all tragic** — No "good"
+ending. All paths honor something while destroying something. 4. **Memory is the theme** — Glyphs,
+journal, fragmentation, Saori's desperation all reinforce it. 5. **Relationship > Combat** —
+Emotional confrontations, not battles.
 
----
+##
 
 ## Document Maintenance
 
@@ -236,26 +234,27 @@ Complete reference guide for all Velinor: Remnants of the Tone design documentat
 - ⏳ npcs.md (cross-reference with roster)
 - ⏳ story_arcs.md (integrate ending paths)
 
----
+##
 
 ## Questions or Clarifications?
 
-If any documentation is unclear, refer back to **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** for the conceptual foundation, then return to the specific document.
+If any documentation is unclear, refer back to **EXECUTIVE_SUMMARY_AND_QUICKSTART.md** for the
+conceptual foundation, then return to the specific document.
 
 For implementation questions, **IMPLEMENTATION_ROADMAP.md** provides phase-by-phase guidance.
 
-For narrative questions, **VELINOR_SAORI_FINAL_ARC.md** and **MARKETPLACE_NPC_ROSTER.md** are your references.
+For narrative questions, **VELINOR_SAORI_FINAL_ARC.md** and **MARKETPLACE_NPC_ROSTER.md** are your
+references.
 
----
+##
 
 ## Next Steps
 
-1. **Distribute** this documentation to entire team
-2. **Schedule** team read-through (60-90 minutes)
-3. **Begin Phase 1** (TONE system foundation) within 1 week
-4. **Establish** weekly standups to track progress
-5. **Create** branching task lists in project management tool (Trello/Asana/Linear)
+1. **Distribute** this documentation to entire team 2. **Schedule** team read-through (60-90
+minutes) 3. **Begin Phase 1** (TONE system foundation) within 1 week 4. **Establish** weekly
+standups to track progress 5. **Create** branching task lists in project management tool
+(Trello/Asana/Linear)
 
----
+##
 
 **Welcome to Velinor. The fragments are scattered. Let's rebuild them.**

@@ -17,11 +17,12 @@
 | `glyphs.db` | (Created at runtime) | `emotional_os/glyphs/` | ⚠️ Inconsistent | Standardize path |
 
 **Legend:**
+
 - ✅ **Works** - File found and loads correctly
 - ⚠️ **Partial** - Works in some cases but not all
 - ❌ **Broken** - File not found or path mismatch
 
----
+##
 
 ## Key Issues at a Glance
 
@@ -30,24 +31,28 @@
 **Problem:** Code expects `emotional_os/` directory at repo root, but it doesn't exist.
 
 **Modules Affected:**
+
 - `GlyphFactorialEngine` - expects `emotional_os/glyphs/glyph_lexicon_rows.json`
 - `AntonymGlyphsIndexer` - expects `emotional_os/glyphs/antonym_glyphs_indexed.json`
 - `WordCentricLexicon` - expects `emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json`
 
 **Files Actually Located:**
+
 - `data/glyph_lexicon_rows.json` (actual)
 - `src/emotional_os_parser/signal_lexicon.json` (actual)
 - `src/emotional_os_safety/trauma_lexicon.json` (actual)
 
----
+##
 
 ## Modules by Load Behavior
 
 ### Using PathManager (Dynamic - ✅ SAFE)
+
 - `src/emotional_os/core/lexicon_learner.py`
 - `src/emotional_os_learning/hybrid_learner_v2.py`
 
 ### Hardcoding Paths (Fragile - ⚠️ RISKY)
+
 - `src/emotional_os_glyphs/glyph_factorial_engine.py`
 - `src/emotional_os_glyphs/antonym_glyphs_indexer.py`
 - `src/emotional_os_glyphs/advanced_pruning_engine.py`
@@ -55,9 +60,10 @@
 - `src/emotional_os_safety/sanctuary.py`
 
 ### Using Search/Fallback (Flexible - ✅ GOOD)
+
 - `src/parser/nrc_lexicon_loader.py` (searches 5 locations)
 
----
+##
 
 ## Quick Diagnostic
 
@@ -109,55 +115,62 @@ for fname, paths in files_to_check.items():
             found = True
             break
     if not found:
-        print(f"❌ {fname}: NOT FOUND - searched {[str(p) for p in paths]}")
+```text
+```text
 ```
 
----
+##
 
 ## Configuration by Module
 
 ### Glyph System (`src/emotional_os_glyphs/`)
+
 - Expects: `emotional_os/glyphs/glyph_lexicon_rows.{json,csv}`
 - Also expects: `emotional_os/glyphs/antonym_glyphs_indexed.json`
 - Database: `emotional_os/glyphs/glyphs.db`
 
 ### Parser System (`src/emotional_os_parser/`)
+
 - Has: `signal_lexicon.json` (relative location)
 - Has: `learned_lexicon.json` (gets updated)
 - Has: `runtime_fallback_lexicon.json`
 
 ### Safety System (`src/emotional_os_safety/`)
+
 - Has: `trauma_lexicon.json` (using relative path ✅)
 - Uses: `suicidality_protocol.json` (from `src/emotional_os/core/`)
 
 ### Lexicon System (`src/emotional_os_lexicon/`)
+
 - Expects: `emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json`
 - Actual: `data/word_centric_emotional_lexicon_expanded.json`
 
 ### Learning System (`learning/`)
+
 - Creates: `hybrid_learning_log.jsonl` at runtime
 - Creates: `user_overrides/{user_id}_lexicon.json` per user
 
----
+##
 
 ## Startup Order
 
 When the app starts, these files are loaded in this order:
 
-1. **NRC Lexicon** → `data/lexicons/nrc_emotion_lexicon.txt`
-2. **Signal Lexicon** → `src/emotional_os_parser/signal_lexicon.json` (or via PathManager)
-3. **Glyph Lexicon** → ❌ **FAILS** - expects `emotional_os/glyphs/`
-4. **Suicidality Protocol** → ⚠️ **PARTIAL** - expects `emotional_os/core/`
-5. **Trauma Lexicon** → `src/emotional_os_safety/trauma_lexicon.json` ✅
-6. **Word Lexicon** → ❌ **FAILS** - expects `emotional_os/lexicon/`
+1. **NRC Lexicon** → `data/lexicons/nrc_emotion_lexicon.txt` 2. **Signal Lexicon** →
+`src/emotional_os_parser/signal_lexicon.json` (or via PathManager) 3. **Glyph Lexicon** → ❌
+**FAILS** - expects `emotional_os/glyphs/` 4. **Suicidality Protocol** → ⚠️ **PARTIAL** - expects
+`emotional_os/core/` 5. **Trauma Lexicon** → `src/emotional_os_safety/trauma_lexicon.json` ✅ 6.
+**Word Lexicon** → ❌ **FAILS** - expects `emotional_os/lexicon/`
 
----
+##
 
 ## Recommended Minimal Fix
 
 **Fastest solution to get system working:**
 
 ```bash
+
+
 # Create missing directory structure
 mkdir -p emotional_os/glyphs
 mkdir -p emotional_os/core
@@ -174,16 +187,15 @@ cp src/emotional_os_parser/runtime_fallback_lexicon.json emotional_os/parser/
 cp src/emotional_os_lexicon/word_centric_emotional_lexicon_expanded.json emotional_os/lexicon/
 cp src/emotional_os_safety/trauma_lexicon.json emotional_os/safety/
 cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
+
 ```
 
 This ensures all hardcoded paths will work immediately.
 
----
+##
 
 ## Recommended Long-Term Fix
 
-1. Use `PathManager` everywhere instead of hardcoded paths
-2. Remove duplicate files (keep only in `data/` or `src/`)
-3. Add startup validation: `python -m src.emotional_os.core.startup_check`
-4. Document expected file structure in README
-
+1. Use `PathManager` everywhere instead of hardcoded paths 2. Remove duplicate files (keep only in
+`data/` or `src/`) 3. Add startup validation: `python -m src.emotional_os.core.startup_check` 4.
+Document expected file structure in README

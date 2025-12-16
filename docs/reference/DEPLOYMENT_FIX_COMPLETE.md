@@ -16,11 +16,15 @@
 
 All tests passing:
 
+```text
 ```
-✓ Core modules compile without errors
-✓ Integration functional
-✓ End-to-end response generation working
+
+✓ Core modules compile without errors ✓ Integration functional ✓ End-to-end response generation
+working
+
 ```
+
+
 
 ## Deployment Status
 
@@ -35,21 +39,26 @@ All tests passing:
 ### Running the System
 
 **Test locally:**
+
 ```bash
-python emotional_os/main_v2.py
+
+```text
 ```
 
 **Use in your application:**
+
 ```python
 from emotional_os.glyphs.signal_parser import parse_input
 
 result = parse_input("I feel overwhelmed", "emotional_os/glyphs/lexicon.db")
-print(result['voltage_response'])  # Generated response
+```text
+```text
 ```
 
 ## Architecture
 
 ```
+
 User Input
     ↓
 signal_parser.parse_input()
@@ -57,11 +66,13 @@ signal_parser.parse_input()
 Generate Response (fallback templates)
     ↓
 Return response to user
+
 ```
 
 ## Privacy & Security
 
 ✅ **Private:**
+
 - No external API calls
 - No cloud dependencies
 - No data leaves your machine
@@ -72,9 +83,9 @@ Return response to user
 
 ## Next Steps
 
-1. **Test the integration** with `python emotional_os/main_v2.py`
-2. **Deploy with confidence** - system now works in any Python environment
+1. **Test the integration** with `python emotional_os/main_v2.py` 2. **Deploy with confidence** -
+system now works in any Python environment
 
----
+##
 
 **Status:** Ready for deployment ✓

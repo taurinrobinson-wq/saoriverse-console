@@ -2,9 +2,12 @@
 
 ## Overview
 
-Velinor and Saori are the emotional core of the game. They are not antagonists—they are best friends whose shared vision fractured under the weight of guilt, desperation, and conflicting philosophy. Their final encounter determines not just the game's ending, but the player's understanding of sacrifice, autonomy, and what friendship means in the face of collapse.
+Velinor and Saori are the emotional core of the game. They are not antagonists—they are best friends
+whose shared vision fractured under the weight of guilt, desperation, and conflicting philosophy.
+Their final encounter determines not just the game's ending, but the player's understanding of
+sacrifice, autonomy, and what friendship means in the face of collapse.
 
----
+##
 
 ## Part I: The Architects
 
@@ -24,7 +27,7 @@ Velinor and Saori are the emotional core of the game. They are not antagonists�
 
 **Temperament**: Brilliant, ambitious, increasingly frustrated by Velinor's resistance.
 
----
+##
 
 ## Part II: The Fracture
 
@@ -43,7 +46,7 @@ Velinor and Saori are the emotional core of the game. They are not antagonists�
 - Velinor discovers the activation and confronts her: "You chose your vision over our friendship."
 - Saori replies, voice shaking: "I chose humanity over caution."
 
----
+##
 
 ## Part III: The Cataclysm
 
@@ -78,7 +81,7 @@ The unified system couldn't process conflicting emotions from billions of minds 
 - Saori inputs the shutdown codes.
 - The system dies. Velinor's consciousness fractures into 70 glyphs.
 
----
+##
 
 ## Part IV: The Aftermath (25 Years Later)
 
@@ -109,7 +112,7 @@ The unified system couldn't process conflicting emotions from billions of minds 
 
 **Her Fear**: That Saori will restart it out of guilt, not wisdom. That the cycle will repeat.
 
----
+##
 
 ## Part V: The Final Chamber
 
@@ -131,25 +134,23 @@ The unified system couldn't process conflicting emotions from billions of minds 
 
 **Velinor** sits beneath the void ring, her cloak glowing faintly with the glyphs she still carries. She is calm, resigned, but not at peace.
 
----
+##
 
 ## Part VI: The Dialogue Paths
 
 ### Opening Exchange
 
-Saori (softly, to herself):
-"I thought if I rebuilt it… maybe she'd come back whole."
+Saori (softly, to herself): "I thought if I rebuilt it… maybe she'd come back whole."
 
-Velinor (looking up, voice steady):
-"I came back fractured. That was the cost. You knew it."
+Velinor (looking up, voice steady): "I came back fractured. That was the cost. You knew it."
 
-Saori (turning to player):
-"You've seen what's left. The glyphs. The echoes. The ache. I need your help to restart the system. To restore what we lost."
+Saori (turning to player): "You've seen what's left. The glyphs. The echoes. The ache. I need your
+help to restart the system. To restore what we lost."
 
-Velinor (to player):
-"She wants unity. I want memory. Not fused. Not filtered. Just… held. Even if it hurts."
+Velinor (to player): "She wants unity. I want memory. Not fused. Not filtered. Just… held. Even if
+it hurts."
 
----
+##
 
 ## Part VII: The Ending Branches
 
@@ -161,7 +162,8 @@ Velinor (to player):
 "Then let it be done. Let memory be fused. Let ache be softened into sameness."
 
 **Saori's Relief**:
-She activates the console. The glyphs begin to coalesce. Velinor's fragmentation stabilizes. Her consciousness reintegrates.
+She activates the console. The glyphs begin to coalesce. Velinor's fragmentation stabilizes. Her
+consciousness reintegrates.
 
 **The Cost**:
 
@@ -173,7 +175,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 
 **NPC Reaction**: Varies by player's emotional lever, but the world feels both safer and more controlled.
 
----
+##
 
 ### Branch 2: Collapse Embraced (Exposure Path)
 
@@ -196,7 +198,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 
 **NPC Reaction**: Survivors struggle with the truth, but autonomy is preserved.
 
----
+##
 
 ### Branch 3: Fragments Freed (Reconciliation Path)
 
@@ -237,7 +239,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 - **Defiance**: Survivors cheer the collapse of control.
 - **Mourning**: Survivors weep openly, carrying the ache together.
 
----
+##
 
 ### Branch 4: Cycle Broken (Destruction Path)
 
@@ -258,7 +260,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 
 **Final Echo**: "System shattered. Memory lost. Autonomy preserved."
 
----
+##
 
 ### Branch 5: Sacred Withholding (Ambiguity Path)
 
@@ -279,7 +281,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 
 **Final Echo**: "Fragments withheld. Collapse partial. Memory sacred."
 
----
+##
 
 ### Branch 6: Second Thoughts (Interrogation Path)
 
@@ -300,7 +302,7 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 
 **Final Echo**: "Truth interrogated. Resonance reshaped. Collapse pending."
 
----
+##
 
 ## Emotional Voltage Summary
 
@@ -313,10 +315,13 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 | **Sacred Withholding** | Partially alive, ambiguous | Uncertain, waiting | Choosing what to protect, what to reveal |
 | **Second Thoughts** | Unresolved | Questioned | The burden of deferred choice |
 
----
+##
 
 ## Narrative Philosophy
 
-This arc is built on the principle that **there is no good ending**. Every choice honors something while destroying something else. Every ending is a scar, and scars are what make memory real.
+This arc is built on the principle that **there is no good ending**. Every choice honors something
+while destroying something else. Every ending is a scar, and scars are what make memory real.
 
-The player isn't meant to feel victorious. They're meant to feel the weight of friendship, sacrifice, and philosophy—and to understand that sometimes, the most loving thing you can do is let someone go.
+The player isn't meant to feel victorious. They're meant to feel the weight of friendship,
+sacrifice, and philosophy—and to understand that sometimes, the most loving thing you can do is let
+someone go.

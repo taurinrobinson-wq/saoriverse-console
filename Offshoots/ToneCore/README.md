@@ -1,25 +1,28 @@
 # ToneCore demo
 
-This folder contains a small Streamlit demo that generates MIDI from the
-normalized chord pivot and renders audio using FluidSynth.
+This folder contains a small Streamlit demo that generates MIDI from the normalized chord pivot and
+renders audio using FluidSynth.
 
 Quick start (local devcontainer / machine):
 
 1. Install system deps (Linux):
 
 ```bash
-sudo apt-get update && sudo apt-get install -y fluidsynth ffmpeg
+```text
+```text
 ```
 
 2. Install Python deps:
 
 ```bash
-python3 -m pip install -r Offshoots/ToneCore/requirements.txt
+
+```text
 ```
 
 3. Run the app:
 
 ```bash
+
 # Example: run on port 8502 to avoid conflicts with other apps
 streamlit run Offshoots/ToneCore/streamlit_app.py --server.port 8502
 ```

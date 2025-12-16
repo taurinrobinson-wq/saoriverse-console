@@ -2,7 +2,8 @@
 
 ## Current State: What You Have Active
 
-Your system is now using **compositional response generation** instead of canned templates. The architecture leverages these offline resources:
+Your system is now using **compositional response generation** instead of canned templates. The
+architecture leverages these offline resources:
 
 ### 1. **spaCy (NLP Library)**
 
@@ -12,13 +13,15 @@ Your system is now using **compositional response generation** instead of canned
   - Part-of-speech tagging (NOUN, VERB, ADJ)
   - Noun chunking: Key phrases ("mental block", "communication friction")
   - Word similarity / semantic overlap
-  
+
 **Why it matters**: Instead of keyword matching, you can extract *what the user is actually talking about* (entities: Michelle, math, anxiety) and build responses around those relationships.
 
 ```bash
+
 # Install (one-time)
 pip install spacy
-python -m spacy download en_core_web_sm
+```text
+```text
 ```
 
 ### 2. **NRC Emotion Lexicon (Already Integrated)**
@@ -42,28 +45,31 @@ python -m spacy download en_core_web_sm
   - WordNet (synonym/antonym relationships)
   - VADER sentiment analyzer
 
----
+##
 
 ## Next-Level Offline Language Resources
 
 ### **Option A: Add Word Embeddings (Word2Vec)**
 
-**Purpose**: Semantic similarity beyond keyword matching  
+**Purpose**: Semantic similarity beyond keyword matching
 **How it works**: Find emotionally related words without hardcoding patterns
 
 ```python
+
 from gensim.models import KeyedVectors
 
 # Download pre-trained Google News Word2Vec vectors (1.5GB, one-time)
+
 # Then use for similarity matching:
 vectors = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
 similar_words = vectors.most_similar('anxiety', topn=5)
-# Output: [('worried', 0.87), ('nervousness', 0.85), ('stress', 0.82), ...]
+
+```text
 ```
 
 **Benefit**: Responses could adapt based on semantic relationships, not just exact keywords
 
----
+##
 
 ### **Option B: Markov Chains for Linguistic Patterns**
 
@@ -73,54 +79,55 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 from nltk.text import TextCollection
 
 # Build from all your glyph descriptions + poetry + prior responses
-linguistic_patterns = TextCollection([
-    list_of_glyph_descriptions,
-    list_of_poetry_lines,
-    list_of_prior_responses
-])
+linguistic_patterns = TextCollection([ list_of_glyph_descriptions, list_of_poetry_lines,
+list_of_prior_responses ])
 
 # Generate realistic-sounding next phrases based on learned patterns
-next_words = linguistic_patterns.conditional_freq_dist
+```sql
+```sql
 ```
 
 **Benefit**: Prevents repetitive phrasing by learning *your actual voice* from existing glyphs
 
----
+##
 
 ### **Option C: Pre-built Linguistic Rules (Dependency Parsing)**
 
 **Purpose**: Understand *sentence structure* and emotional intensity
 
 ```python
+
 import spacy
 
-nlp = spacy.load("en_core_web_md")  # Medium model has better word vectors
-doc = nlp("Michelle explains things in a way that only she can follow")
+nlp = spacy.load("en_core_web_md")  # Medium model has better word vectors doc = nlp("Michelle
+explains things in a way that only she can follow")
 
 # Extract: subject, verb, object, modifiers
-for token in doc:
-    print(f"{token.text} -> {token.dep_} ({token.head.text})")
-    
+for token in doc: print(f"{token.text} -> {token.dep_} ({token.head.text})")
+
 # Output:
+
 # Michelle -> nsubj -> explains
+
 # explains -> ROOT
-# things -> dobj -> explains  
+
+# things -> dobj -> explains
+
 # way -> prep_in -> explains
-# follow -> advcl -> explains
+
+```text
 ```
 
 **Benefit**: Understand the *structure* of emotional statements and respond to the actual complaint (communication friction) not just keywords
 
----
+##
 
 ## Recommended Activation Path (No API Needed)
 
 ### **Phase 1: Current (DONE)**
 
-✅ Dynamic composition from linguistic fragments  
-✅ Entity extraction (who, what, relationships)  
-✅ Poetry weaving  
-✅ Semantic engine (spaCy basics)  
+✅ Dynamic composition from linguistic fragments ✅ Entity extraction (who, what, relationships) ✅
+Poetry weaving ✅ Semantic engine (spaCy basics)
 
 ### **Phase 2: Next Week (Recommended)**
 
@@ -129,12 +136,14 @@ for token in doc:
 - [ ] Enhance `DynamicResponseComposer` to recognize "attribution_boundary" patterns automatically
 
 ```python
+
 # Example enhancement to signal_parser.py:
 extracted = self.semantic_engine.extract_entities(text)
 people = extracted["people"]  # ["Michelle"]
 if people:
     person = people[0]
-    # Generate: "Michelle's communication style..." instead of generic response
+```text
+```text
 ```
 
 ### **Phase 3: Optional (If you want learning)**
@@ -143,45 +152,46 @@ if people:
 - [ ] Create response variants by sampling from learned phrase patterns
 - [ ] Result: Each response feels unique, not templated
 
----
+##
 
 ## Summary: Why Offline is Better for You
 
-1. **No API costs or privacy leaks**, everything stays local
-2. **Can tap into your own voice**, train from existing glyphs/poetry
-3. **Faster inference**, local NLP is instant, not waiting for API
-4. **More control**, you decide which linguistic patterns to reward
-5. **Portable**, can run on laptop, phone, raspberry pi
+1. **No API costs or privacy leaks**, everything stays local 2. **Can tap into your own voice**,
+train from existing glyphs/poetry 3. **Faster inference**, local NLP is instant, not waiting for API
+4. **More control**, you decide which linguistic patterns to reward 5. **Portable**, can run on
+laptop, phone, raspberry pi
 
----
+##
 
 ## Current Integration in Your Code
 
 **File**: `emotional_os/glyphs/dynamic_response_composer.py`
 
 ```python
+
 class DynamicResponseComposer:
     def compose_response(self, input_text, glyph_name, feedback_detected, ...):
         # 1. Extract entities & emotions (spaCy + NRC)
         extracted = self._extract_entities_and_emotions(input_text)
-        
+
         # 2. Select opening move (random variant, not templated)
         opening = self._select_opening(extracted["entities"], extracted["emotions"])
-        
+
         # 3. Weave poetry if available
         poetry_line = self._weave_poetry(input_text, extracted["emotions"])
-        
+
         # 4. Build movement language contextually
         movement = self._contextual_movement(input_text)
-        
+
         # 5. Generate unique closing question
         closing = self._dynamic_closing(extracted["entities"])
-        
+
         # Return composed response (never identical)
-        return " ".join([opening, poetry_line, movement, closing])
+
+```text
 ```
 
----
+##
 
 ## What This Eliminates
 
@@ -189,20 +199,29 @@ class DynamicResponseComposer:
 
 ```
 RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
-# Every similar input gets the SAME structure filled differently
+
+```text
+```text
 ```
 
 ### After (Compositional)
 
 ```
+
+
 # Each response randomly selects from multiple opening styles
+
 # + adds entity-specific context
+
 # + weaves poetry fragments
+
 # + builds unique closing question
+
 # Result: Feels fresh, not templated
+
 ```
 
----
+##
 
 ## Files Already Supporting This
 
@@ -212,7 +231,7 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 - `parser/learned_lexicon.json`, learned signal mappings
 - `emotional_os/glyphs/dynamic_response_composer.py`, *new* compositional engine
 
----
+##
 
 ## Next Step Recommendation
 

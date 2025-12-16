@@ -5,28 +5,34 @@
 Start here based on what you need:
 
 ### 🚀 I Just Want to Run It
+
 → **`VELINOR_WEB_QUICK_START.md`** - 3 steps, 5 minutes
 
-### 📋 I Want Detailed Setup Instructions  
+### 📋 I Want Detailed Setup Instructions
+
 → **`RUN_VELINOR_WEB.md`** - Full guide with troubleshooting
 
 ### ✅ I Want to Know What Was Built
+
 → **`VELINOR_WEB_SETUP_COMPLETE.md`** - Architecture, checklist, status
 
 ### 🏗️ I Want Architecture Details
+
 → **`VELINOR_WEB_MIGRATION.md`** - Why we switched, how it works
 
----
+##
 
 ## What's in This Stack?
 
 ### Backend: FastAPI (`velinor_api.py`)
+
 - REST API for game management
 - Session handling
 - Wraps VelinorTwineOrchestrator
 - Runs on `http://localhost:8000`
 
 ### Frontend: Next.js (`velinor-web/`)
+
 - React 18 + TypeScript
 - Splash screen with player name input
 - Game scene with overlays on background images
@@ -34,49 +40,55 @@ Start here based on what you need:
 - Runs on `http://localhost:3000`
 
 ### How They Talk
-```
-Frontend (http://localhost:3000)
-    ↓ (HTTP)
-FastAPI Backend (http://localhost:8000)
-    ↓ (Python)
-Velinor Game Engine
+
+```text
 ```
 
----
+Frontend (<http://localhost:3000>) ↓ (HTTP) FastAPI Backend (<http://localhost:8000>) ↓ (Python)
+Velinor Game Engine
+
+```
+
+
+##
 
 ## The 3-Step Start
 
 **Terminal 1:**
+
 ```bash
+
 cd d:\saoriverse-console
-python velinor_api.py
+
+```text
 ```
 
 **Terminal 2:**
+
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
+```text
 ```
 
 **Browser:** Open `http://localhost:3000`
 
 That's it! You should see the splash screen.
 
----
+##
 
 ## Why This Works Better Than Streamlit
 
-✅ **Button Overlays** - Can now position buttons on top of background images  
-✅ **Z-index Control** - Full layering support  
-✅ **Animations** - Smooth hover effects, transitions  
-✅ **Custom Layout** - Not constrained to columns/expanders  
-✅ **Performance** - Lightweight React vs heavy Streamlit  
+✅ **Button Overlays** - Can now position buttons on top of background images ✅ **Z-index Control** -
+Full layering support ✅ **Animations** - Smooth hover effects, transitions ✅ **Custom Layout** - Not
+constrained to columns/expanders ✅ **Performance** - Lightweight React vs heavy Streamlit
 
----
+##
 
 ## File Structure
 
 ```
+
 d:\saoriverse-console\
 ├── Backend
 │   └── velinor_api.py                     ← Start this first
@@ -107,10 +119,11 @@ d:\saoriverse-console\
     ├── VELINOR_WEB_QUICK_START.md         ← Start here
     ├── RUN_VELINOR_WEB.md                 ← Detailed guide
     ├── VELINOR_WEB_SETUP_COMPLETE.md      ← Full status
-    └── VELINOR_WEB_MIGRATION.md           ← Architecture
+
+```text
 ```
 
----
+##
 
 ## Next Actions
 
@@ -119,7 +132,7 @@ d:\saoriverse-console\
 3. **Deploy to Production** - Push to git, Railway auto-deploys
 4. **Optional: Fix Linting Warnings** - Move inline styles to CSS files
 
----
+##
 
 ## Key Endpoints
 
@@ -139,7 +152,7 @@ d:\saoriverse-console\
 - `/` - Splash screen (enter player name)
 - `/game/[sessionId]` - Game scene (play the game)
 
----
+##
 
 ## Troubleshooting Quick Links
 
@@ -155,18 +168,19 @@ d:\saoriverse-console\
 **Button overlays not working?**
 → Check browser console (F12) for JavaScript errors
 
----
+##
 
 ## Environment Configuration
 
 `.env.local` (in `velinor-web/`)
+
 ```
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
 Change this to your Railway backend domain for production.
 
----
+##
 
 ## You're All Set! 🎉
 

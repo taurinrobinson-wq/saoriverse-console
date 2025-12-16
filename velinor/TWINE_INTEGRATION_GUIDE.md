@@ -2,7 +2,9 @@
 
 ## Overview
 
-Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the narrative framework, integrated with:
+Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the narrative framework,
+integrated with:
+
 - **Game Engine** (`core.py`) - State management, dice rolls, player stats
 - **NPC System** (`npc_system.py`) - Dialogue generation using FirstPerson orchestrator
 - **Twine Adapter** (`twine_adapter.py`) - Bridges narrative and game mechanics
@@ -10,15 +12,16 @@ Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the n
 
 ## Architecture
 
+```text
 ```
+
 ┌─────────────────────────────────────────────────────┐
 │         Velinor Twine Integration                   │
 └─────────────────────────────────────────────────────┘
                           │
-        ┌─────────────────┼─────────────────┐
+┌─────────────────┼─────────────────┐
         │                 │                 │
-        ▼                 ▼                 ▼
-    ┌────────┐    ┌──────────────┐    ┌────────────┐
+▼                 ▼                 ▼ ┌────────┐    ┌──────────────┐    ┌────────────┐
     │ Twine  │    │ Game Engine  │    │  FirstPerson
     │ Story  │    │ - State      │    │  Orchestrator
     │ System │    │ - Dice Rolls │    │  - Dialogue
@@ -27,18 +30,21 @@ Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the n
         │                 │           └────────────┘
         └─────────────────┼─────────────────┐
                           │
-                    ┌─────▼─────┐
+┌─────▼─────┐
                     │ Orchestrator
                     │ - Game Loop
                     │ - Input Processing
                     │ - State Sync
                     └─────┬─────┘
                           │
-                    ┌─────▼─────────────┐
+┌─────▼─────────────┐
                     │ UI Layer (Streamlit,
                     │  Flask, Web, etc.)
                     └───────────────────┘
+
 ```
+
+
 
 ## Key Files
 
@@ -88,54 +94,51 @@ Manages:
 Velinor uses Twine 2 JSON export format:
 
 ```json
-{
-  "name": "Velinor: Remnants of the Tone",
-  "startnode": "1",
-  "passages": [
-    {
-      "pid": "1",
-      "name": "market_entry",
-      "text": "You emerge into the ruins...",
-      "tags": [],
-      "position": [0, 0],
-      "size": [100, 100]
-    }
-  ]
-}
+
+{ "name": "Velinor: Remnants of the Tone", "startnode": "1", "passages": [ { "pid": "1", "name":
+"market_entry", "text": "You emerge into the ruins...", "tags": [], "position": [0, 0], "size":
+[100, 100] } ]
+
+```text
 ```
 
 ### Twine Markup Syntax (SugarCube)
 
 **Choices (Links):**
+
 ```
 [[Choice text->target_passage]]
-[[Talk to them|meeting]]  (alternative syntax)
+```text
+```text
 ```
 
 **Skill Checks:**
+
 ```
-[[Persuade the guard (Courage, DC 12)->success_path]]
+
+```text
 ```
 
 **Commands (Special Markers):**
+
 ```
-{background: location_name}      # Change background image
-{npc: NPC_Name}                 # NPC speaking in scene
-{dice: d20+courage}              # Trigger dice roll
-{multiplayer: true}              # Enable multiplayer mode
+{background: location_name}      # Change background image {npc: NPC_Name}                 # NPC
+speaking in scene {dice: d20+courage}              # Trigger dice roll
+```text
+```text
 ```
 
 **Example Passage:**
+
 ```
-{background: market_ruins}
-{npc: Keeper}
 
-You emerge from the underpass into the Market District.
-A figure approaches: "Welcome, Traveler."
+{background: market_ruins} {npc: Keeper}
 
-[[Ask about the Tone->keeper_dialogue]]
-[[Explore alone->market_exploration]]
-[[Keep distance (Wisdom, DC 11)->observer_path]]
+You emerge from the underpass into the Market District. A figure approaches: "Welcome, Traveler."
+
+[[Ask about the Tone->keeper_dialogue]] [[Explore alone->market_exploration]]
+
+```text
 ```
 
 ## Creating Stories
@@ -159,19 +162,19 @@ story.add_choice("intro", "Follow the Guide", "guide_path")
 story.add_choice("intro", "Go alone", "alone_path")
 
 # Export as JSON
-story.export_json("my_story.json")
+```text
+```text
 ```
 
 ### Option 2: Create in Twine 2 UI
 
-1. Download [Twine 2](https://twinery.org/)
-2. Create story with visual passage editor
-3. Export as JSON via menu
-4. Load with `TwineStoryLoader()`
+1. Download [Twine 2](https://twinery.org/) 2. Create story with visual passage editor 3. Export as
+JSON via menu 4. Load with `TwineStoryLoader()`
 
 ### Option 3: Edit Sample Story
 
 See `/velinor/stories/sample_story.json` for a working example with:
+
 - Market District opening
 - Multiple dialogue paths
 - Skill check choices
@@ -183,6 +186,7 @@ See `/velinor/stories/sample_story.json` for a working example with:
 ### Basic Initialization
 
 ```python
+
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
 # Create game engine
@@ -195,53 +199,37 @@ orchestrator = VelinorTwineOrchestrator(
 )
 
 # Start game
-initial_state = orchestrator.start_game()
+
+```text
 ```
 
 ### Process Player Input
 
 ```python
+
 # Player chooses option 1
-next_state = orchestrator.process_player_action(
-    choice_index=0,
-    player_id="player_1"
-)
+next_state = orchestrator.process_player_action( choice_index=0, player_id="player_1" )
 
 # Player types response
-next_state = orchestrator.process_player_action(
-    player_input="I approach cautiously",
-    player_id="player_1"
-)
+next_state = orchestrator.process_player_action( player_input="I approach cautiously",
+player_id="player_1"
+```text
+```text
 ```
 
 ### Game State Structure
 
 ```python
-{
-    'passage_id': 'keeper_dialogue',
-    'passage_name': 'Meeting the Keeper',
-    'main_dialogue': 'The Keeper greets you...',
-    'npc_name': 'Keeper',
-    'npc_dialogue': '[Generated by FirstPerson]',
-    'background_image': 'market_ruins',
-    'choices': [
-        {'text': 'Ask about the Tone', 'target': 'keeper_dialogue_1'},
-        {'text': 'Explore alone', 'target': 'market_alone'}
-    ],
-    'clarifying_question': 'Are you sure this is the path you want?',
-    'has_clarifying_question': True,
-    'is_multiplayer': False,
-    'game_state': {
-        'current_location': 'MARKET_DISTRICT',
-        'player_stats': {
-            'courage': 50,
-            'wisdom': 55,
-            'empathy': 60,
-            'resolve': 50,
-            'resonance': 100
-        }
-    }
-}
+
+{ 'passage_id': 'keeper_dialogue', 'passage_name': 'Meeting the Keeper', 'main_dialogue': 'The
+Keeper greets you...', 'npc_name': 'Keeper', 'npc_dialogue': '[Generated by FirstPerson]',
+'background_image': 'market_ruins', 'choices': [ {'text': 'Ask about the Tone', 'target':
+'keeper_dialogue_1'}, {'text': 'Explore alone', 'target': 'market_alone'} ], 'clarifying_question':
+'Are you sure this is the path you want?', 'has_clarifying_question': True, 'is_multiplayer': False,
+'game_state': { 'current_location': 'MARKET_DISTRICT', 'player_stats': { 'courage': 50, 'wisdom':
+55, 'empathy': 60, 'resolve': 50, 'resonance': 100 } }
+
+```text
 ```
 
 ## UI Integration Examples
@@ -283,12 +271,14 @@ if st.button("Submit"):
         player_input=player_input, player_id="solo"
     )
     st.session_state.state = new_state
-    st.rerun()
+```text
+```text
 ```
 
 ### FastAPI Web Backend
 
 ```python
+
 from fastapi import FastAPI
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
@@ -321,7 +311,8 @@ def take_action(session_id: str, choice_index: int = None, input_text: str = Non
 @app.post("/api/game/{session_id}/save")
 def save_game(session_id: str):
     sessions[session_id].save_game(f"saves/{session_id}.json")
-    return {"status": "saved"}
+
+```text
 ```
 
 ## Multiplayer Support
@@ -329,17 +320,14 @@ def save_game(session_id: str):
 ### Enabling Multiplayer
 
 ```python
+
 # Start with multiple players
-orchestrator.start_game(
-    is_multiplayer=True,
-    player_ids=["player_1", "player_2", "player_3"]
-)
+orchestrator.start_game( is_multiplayer=True, player_ids=["player_1", "player_2", "player_3"] )
 
 # Process input from individual players
-orchestrator.process_player_action(
-    player_input="I agree with them",
-    player_id="player_2"
-)
+orchestrator.process_player_action( player_input="I agree with them", player_id="player_2"
+```text
+```text
 ```
 
 ### Multiplayer Features
@@ -350,9 +338,12 @@ orchestrator.process_player_action(
 4. **Persona-aware responses** - Different tone per player type
 
 **Multiplayer Dialogue Example:**
+
 ```
+
 Solo: "You steady yourself as the mist parts."
-Group: "Together, your resolve strengthens. The mist bends to your collective will."
+
+```text
 ```
 
 ## Dice Mechanics
@@ -360,23 +351,26 @@ Group: "Together, your resolve strengthens. The mist bends to your collective wi
 ### Automatic Skill Checks
 
 If a choice includes skill check notation:
+
 ```
-[[Persuade the guard (Courage, DC 12)->success]]
+```text
+```text
 ```
 
 The system automatically:
-1. Rolls d20
-2. Applies player's Courage modifier
-3. Compares against DC 12
-4. Routes to success/failure passage
+
+1. Rolls d20 2. Applies player's Courage modifier 3. Compares against DC 12 4. Routes to
+success/failure passage
 
 ### Manual Dice Rolls
 
 In passages:
+
 ```
+
 {dice: d20+wisdom}
 
-You attempt to solve the ancient puzzle...
+```text
 ```
 
 System processes and determines outcome, potentially branching story.
@@ -384,14 +378,17 @@ System processes and determines outcome, potentially branching story.
 ## Save/Load
 
 ```python
+
 # Save current game
 orchestrator.save_game("saves/game_001.json")
 
 # Load saved game
-state = orchestrator.load_game("saves/game_001.json")
+```text
+```text
 ```
 
 Save files contain:
+
 - Current passage ID
 - Visited passages list
 - Dialogue history
@@ -423,6 +420,7 @@ When FirstPerson orchestrator is available, NPC responses become:
 ## File Structure
 
 ```
+
 velinor/
 ├── engine/
 │   ├── core.py                      # Game engine
@@ -437,33 +435,38 @@ velinor/
 ├── assets/
 │   └── backgrounds/                 # Background images
 └── Characters_Lexicon/              # Game design docs
+
 ```
 
 ## Troubleshooting
 
 **Issue: Story not loading**
+
 - Check JSON path is correct
 - Verify JSON is valid (use `json -l` checker)
 - Ensure passages have unique names
 
 **Issue: Choices not appearing**
+
 - Verify `[[text->target]]` syntax
 - Ensure target passage exists
 - Check for typos in passage names
 
 **Issue: Dice rolls not working**
+
 - Verify `{dice: d20+stat}` syntax
 - Check player stat exists
 - Ensure DC is reasonable (1-20)
 
 **Issue: NPCs not generating dialogue**
+
 - Verify FirstPerson module is available
 - Check NPC registry has the NPC
 - Ensure passage has `{npc: Name}` tag
 
 ## Resources
 
-- **Twine 2**: https://twinery.org/
-- **SugarCube Manual**: https://www.motoslave.net/sugarcube/2/docs/
-- **Ink by Inkle**: https://github.com/inkle/ink
+- **Twine 2**: <https://twinery.org/>
+- **SugarCube Manual**: <https://www.motoslave.net/sugarcube/2/docs/>
+- **Ink by Inkle**: <https://github.com/inkle/ink>
 - **Velinor Game Docs**: `/velinor/markdowngameinstructions/`

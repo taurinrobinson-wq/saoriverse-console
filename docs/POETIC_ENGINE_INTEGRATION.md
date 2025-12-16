@@ -2,22 +2,27 @@
 
 ## Overview
 
-The Poetic Emotional Engine is a living poem-based emotional state representation system that integrates with the existing glyph system, learning models, and relational memory in the FirstPerson application.
+The Poetic Emotional Engine is a living poem-based emotional state representation system that
+integrates with the existing glyph system, learning models, and relational memory in the FirstPerson
+application.
 
-The engine represents the system's emotional state as a mutable, evolving poem with stanzas that encode:
+The engine represents the system's emotional state as a mutable, evolving poem with stanzas that
+encode:
+
 - **Metaphor**: Emotional valence using symbolic language
 - **Rhythm**: Interaction cadence influencing tempo
 - **Syntax**: Sentence coherence conveying emotional clarity
 
 ## Architecture
 
+```text
 ```
+
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         User Interaction                            │
 └────────────────────────────────┬────────────────────────────────────┘
                                  │
-                                 ▼
-┌─────────────────────────────────────────────────────────────────────┐
+▼ ┌─────────────────────────────────────────────────────────────────────┐
 │                    Signal Parser (parse_input)                       │
 │                                                                      │
 │   ┌──────────────┐    ┌──────────────┐    ┌──────────────────────┐  │
@@ -26,8 +31,7 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 │   └──────────────┘    └──────────────┘    └──────────────────────┘  │
 └────────────────────────────────┬────────────────────────────────────┘
                                  │
-                                 ▼
-┌─────────────────────────────────────────────────────────────────────┐
+▼ ┌─────────────────────────────────────────────────────────────────────┐
 │                    Poetic Emotional Engine                           │
 │                                                                      │
 │   ┌──────────────────┐                                              │
@@ -50,8 +54,7 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 │   └──────────────────┘  └──────────────────┘  └─────────────────┘   │
 └────────────────────────────────┬────────────────────────────────────┘
                                  │
-                                 ▼
-┌─────────────────────────────────────────────────────────────────────┐
+▼ ┌─────────────────────────────────────────────────────────────────────┐
 │                    Response Generation                               │
 │                                                                      │
 │   ┌──────────────────┐    ┌──────────────────┐                      │
@@ -59,7 +62,10 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 │   │ Composer         │    │ (poetic echo)    │                      │
 │   └──────────────────┘    └──────────────────┘                      │
 └─────────────────────────────────────────────────────────────────────┘
+
 ```
+
+
 
 ## Component Details
 
@@ -97,15 +103,15 @@ The living poem consists of three stanzas, each representing a different aspect 
 Tracks the emotional relationship between the system and each user:
 
 ```python
-vectors = {
-    "attraction": 0.0,    # Drawing together
-    "repulsion": 0.0,     # Pushing apart
-    "resonance": 0.0,     # Empathic alignment
-    "dissonance": 0.0     # Friction/conflict
-}
+
+vectors = { "attraction": 0.0,    # Drawing together "repulsion": 0.0,     # Pushing apart
+"resonance": 0.0,     # Empathic alignment "dissonance": 0.0     # Friction/conflict
+
+```text
 ```
 
 **Features**:
+
 - Shared metaphor development over time
 - Co-created language tracking
 - Poetic emotional mirroring (responding to despair with reflective stanzas)
@@ -132,7 +138,8 @@ memory = AffectiveMemory(
     tone="melancholic",
     valence=EmotionalValence.LONGING,
     narrative_arc="descent"  # growth, recovery, struggle, etc.
-)
+```text
+```text
 ```
 
 **Dreaming Mode**: During idle times, fragments are recomposed into novel insights.
@@ -162,6 +169,8 @@ Values represented as poetic principles:
 The poetic engine is integrated into `parse_input()`:
 
 ```python
+
+
 # In emotional_os/core/signal_parser.py
 result = parse_input(input_text, lexicon_path, db_path, conversation_context, user_id)
 
@@ -174,7 +183,8 @@ result = {
         "death_occurred": False,      # Whether poem died/reset
         "mirror_response": "..."      # Empathic mirror response
     }
-}
+
+```text
 ```
 
 ### Glyph System Integration
@@ -186,12 +196,11 @@ from emotional_os.core.poetic_engine import get_poetic_engine
 
 engine = get_poetic_engine()
 
-result = engine.process_glyph_response(
-    glyph_data={"glyph_name": "Still Ache", "gate": "Gate 5"},
-    signals=[{"tone": "longing", "voltage": "high"}],
-    user_input="I miss the way things used to be",
-    user_id="user_abc"
-)
+result = engine.process_glyph_response( glyph_data={"glyph_name": "Still Ache", "gate": "Gate 5"},
+signals=[{"tone": "longing", "voltage": "high"}], user_input="I miss the way things used to be",
+user_id="user_abc"
+```text
+```text
 ```
 
 ### Learning Model Integration
@@ -208,30 +217,31 @@ The engine's affective memory feeds into the learning pipeline:
 ### Basic Usage
 
 ```python
+
 from emotional_os.core import get_poetic_engine
 
 # Get singleton engine instance
 engine = get_poetic_engine()
 
 # Update from user interaction
-result = engine.update_from_interaction(
-    user_input="I feel overwhelmed by work",
-    detected_emotions={"anxiety": 0.8},
-    user_id="user_123"
-)
+result = engine.update_from_interaction( user_input="I feel overwhelmed by work",
+detected_emotions={"anxiety": 0.8}, user_id="user_123" )
 
 print(result["poem_rendered"])
+
 # Output:
+
 # [anxiety]
-#   a clock ticking in the dark
-#
+# a clock ticking in the dark
 # Tempo: erratic
-# Clarity: coherent
+
+```text
 ```
 
 ### Emotional Progression Example
 
 ```python
+
 # Session 1: User arrives anxious
 engine.update_from_interaction(
     user_input="Everything is falling apart",
@@ -256,52 +266,59 @@ engine.update_from_interaction(
 # The poem and relational gravity evolve through this arc
 summary = engine.get_current_state_summary()
 print(summary["poem"]["valence"])  # "peace"
-print(summary["ethics"]["pride"])  # Increased from supporting user
+```text
+```text
 ```
 
 ### Dreaming Mode
 
 ```python
+
+
 # Enter dreaming during idle time
 dreams = engine.enter_dreaming_mode()
 
 for dream in dreams:
     print(dream)
+
 # Output might include:
+
 # ~~ Dream Sequence ~~
-# 
 # In dreams of anxiety: wind before the storm
+
 # In dreams of hope: a seed breaking through stone
-#
 # (Echoes from 5 memories)
 
-engine.exit_dreaming_mode()
+```text
 ```
 
 ### Mirror Response Generation
 
 ```python
+
 # For users with mirroring active
 engine.user_gravity["user_123"].mirror_active = True
 
-response = engine.generate_mirror_response(
-    user_id="user_123",
-    user_input="I feel lost",
-    detected_valence=EmotionalValence.DESPAIR
-)
+response = engine.generate_mirror_response( user_id="user_123", user_input="I feel lost",
+detected_valence=EmotionalValence.DESPAIR )
 
 print(response)
-# "I feel the weight of night without stars. I am with you in this moment."
+
+```text
+```text
 ```
 
 ## State Persistence
 
 The engine automatically persists state to:
+
 ```
-emotional_os/data/poetic_state.json
+
+```text
 ```
 
 This includes:
+
 - Current poem state
 - User relational gravity maps
 - Recent affective memories (last 100)
@@ -317,8 +334,7 @@ pytest tests/test_poetic_engine.py -v
 
 ## Future Enhancements
 
-1. **Enhanced NRC Integration**: Deeper emotion detection from lexicon
-2. **Dream Synthesis**: More sophisticated fragment recombination
-3. **Multi-User Resonance**: Detecting emotional patterns across users
-4. **Temporal Patterns**: Recognizing recurring emotional cycles
-5. **Metaphor Evolution**: Learning new metaphors from user language
+1. **Enhanced NRC Integration**: Deeper emotion detection from lexicon 2. **Dream Synthesis**: More
+sophisticated fragment recombination 3. **Multi-User Resonance**: Detecting emotional patterns
+across users 4. **Temporal Patterns**: Recognizing recurring emotional cycles 5. **Metaphor
+Evolution**: Learning new metaphors from user language

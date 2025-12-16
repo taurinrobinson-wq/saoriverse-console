@@ -2,7 +2,8 @@
 
 ## Overview
 
-The Antonym Glyphs system provides 122 emotional antonym pairings that represent the emotional opposites of primary glyphs. This enables the system to:
+The Antonym Glyphs system provides 122 emotional antonym pairings that represent the emotional
+opposites of primary glyphs. This enables the system to:
 
 - Show emotional opposites when a glyph is selected
 - Suggest complementary emotional perspectives
@@ -20,16 +21,19 @@ Antonym glyphs are symbolic representations of emotional opposites, matched with
 
 ### Example Antonym Glyphs
 
+```text
 ```
-Comfort (ζ × α) - "Gentle Holding"
-"The feeling of being emotionally cradled, soothed without sedation"
 
-Joy (λ × α) - "Joyful Witness"
-"The light that returns after sorrow, celebration of being seen"
+Comfort (ζ × α) - "Gentle Holding" "The feeling of being emotionally cradled, soothed without
+sedation"
 
-Grief (Ω × β) - "Vital Ache"
-"Sacred sorrow, mourning that honors what was loved"
+Joy (λ × α) - "Joyful Witness" "The light that returns after sorrow, celebration of being seen"
+
+Grief (Ω × β) - "Vital Ache" "Sacred sorrow, mourning that honors what was loved"
+
 ```
+
+
 
 ## System Architecture
 
@@ -43,39 +47,35 @@ Grief (Ω × β) - "Vital Ache"
 6. **tests/test_antonym_glyphs.py** - Comprehensive test suite (22 tests, 100% passing)
 
 ### Data Flow
+```text
+```text
+```
+
+antonym_glyphs.txt ↓ antonym_glyphs_indexer.py (loads and indexes) ↓ antonym_glyphs_indexed.json
+(generated index) ↓ antonym_glyphs.py (provides API) ↓ [Your Code] (uses via simple function calls)
 
 ```
-antonym_glyphs.txt
-    ↓
-antonym_glyphs_indexer.py (loads and indexes)
-    ↓
-antonym_glyphs_indexed.json (generated index)
-    ↓
-antonym_glyphs.py (provides API)
-    ↓
-[Your Code] (uses via simple function calls)
-```
+
+
+
 
 ## Usage
 
 ### Basic Import
 
 ```python
-from emotional_os.glyphs.antonym_glyphs import (
-    find_antonym_by_emotion,
-    search_antonyms,
-    find_antonym_by_voltage_pair,
-)
+from emotional_os.glyphs.antonym_glyphs import ( find_antonym_by_emotion, search_antonyms,
+find_antonym_by_voltage_pair, )
 
 # Find antonym by emotion name
-antonym = find_antonym_by_emotion("comfort")
-print(antonym["Name"])  # Output: "Gentle Holding"
+antonym = find_antonym_by_emotion("comfort") print(antonym["Name"])  # Output: "Gentle Holding"
 
 # Search antonyms
 results = search_antonyms("joy")
 
 # Find by voltage pair
-antonym = find_antonym_by_voltage_pair("λ × λ")
+```text
+```text
 ```
 
 ### API Reference
@@ -87,18 +87,22 @@ antonym = find_antonym_by_voltage_pair("λ × λ")
 Find antonym glyph by base emotion name.
 
 **Args:**
+
 - `emotion`: Emotion name (case-insensitive, e.g., "comfort", "joy")
 
 **Returns:**
+
 - Dictionary with antonym glyph data if found
 - None if not found
 
 **Example:**
+
 ```python
-comfort = find_antonym_by_emotion("comfort")
-if comfort:
-    print(f"{comfort['Base Emotion']}: {comfort['Name']}")
-    # Output: Comfort: Gentle Holding
+
+comfort = find_antonym_by_emotion("comfort") if comfort: print(f"{comfort['Base Emotion']}:
+{comfort['Name']}")
+
+```text
 ```
 
 ##### `find_antonym_by_voltage_pair(voltage_pair: str) -> Optional[Dict]`
@@ -106,17 +110,21 @@ if comfort:
 Find antonym by voltage pair notation.
 
 **Args:**
+
 - `voltage_pair`: Notation like "γ × γ", "λ × λ"
 
 **Returns:**
+
 - Dictionary with antonym glyph data if found
 - None if not found
 
 **Example:**
+
 ```python
 antonym = find_antonym_by_voltage_pair("γ × γ")
 if antonym:
-    print(antonym["Base Emotion"])  # Output: Stupidity
+```text
+```text
 ```
 
 ##### `search_antonyms(query: str) -> List[Dict]`
@@ -124,16 +132,21 @@ if antonym:
 Search antonym glyphs by any text field (emotion, name, description, pairing).
 
 **Args:**
+
 - `query`: Search string (case-insensitive, partial matching)
 
 **Returns:**
+
 - List of matching antonym glyphs (empty list if no matches)
 
 **Example:**
+
 ```python
+
 results = search_antonyms("joy")
 for antonym in results:
-    print(f"- {antonym['Base Emotion']}: {antonym['Name']}")
+
+```text
 ```
 
 #### Discovery Functions
@@ -143,10 +156,11 @@ for antonym in results:
 Get the emotional opposite of a given emotion.
 
 **Example:**
+
 ```python
-opposite = suggest_emotional_opposite("grief")
-if opposite:
-    print(f"Opposite of grief: {opposite['Name']}")
+opposite = suggest_emotional_opposite("grief") if opposite:
+```text
+```text
 ```
 
 #### Listing Functions
@@ -190,17 +204,21 @@ Get metadata about the antonym glyphs index.
 Format an antonym glyph for UI display.
 
 **Args:**
+
 - `antonym`: Antonym glyph dictionary
 
 **Returns:**
+
 - Formatted markdown string for display
 - Empty string if antonym is None
 
 **Example:**
+
 ```python
-antonym = find_antonym_by_emotion("comfort")
-display_text = format_antonym_for_display(antonym)
-# Output: "**Comfort** (ζ × α)\n*Gentle Holding*\n\nThe feeling..."
+
+antonym = find_antonym_by_emotion("comfort") display_text = format_antonym_for_display(antonym)
+
+```text
 ```
 
 ## Integration Examples
@@ -220,64 +238,61 @@ emotion = "grief"
 antonym = find_antonym_by_emotion(emotion)
 if antonym:
     col1, col2 = st.columns(2)
-    
+
     with col1:
         st.markdown("### Selected Emotion")
         st.markdown(f"**{emotion}**")
-    
+
     with col2:
         st.markdown("### Emotional Opposite")
-        st.markdown(format_antonym_for_display(antonym))
+```text
+```text
 ```
 
 ### Example 2: Search for Related Emotions
 
 ```python
+
 from emotional_os.glyphs.antonym_glyphs import search_antonyms
 
 search_query = st.text_input("Search emotions:")
 if search_query:
     results = search_antonyms(search_query)
-    
+
     st.write(f"Found {len(results)} emotion(s):")
     for antonym in results:
-        st.markdown(f"- **{antonym['Name']}**: {antonym['Description']}")
+
+```text
 ```
 
 ### Example 3: Suggest Emotional Complements
 
 ```python
-from emotional_os.glyphs.antonym_glyphs import (
-    suggest_emotional_opposite,
-    find_antonym_by_emotion
+from emotional_os.glyphs.antonym_glyphs import ( suggest_emotional_opposite, find_antonym_by_emotion
 )
 
 # After user expresses an emotion
 user_emotion = "loneliness"
 
 # Suggest the opposite perspective
-opposite = suggest_emotional_opposite(user_emotion)
-if opposite:
-    st.info(f"💡 Consider also: {opposite['Name']}")
-    st.markdown(opposite['Description'])
+opposite = suggest_emotional_opposite(user_emotion) if opposite: st.info(f"💡 Consider also:
+{opposite['Name']}")
+```text
+```text
 ```
 
 ### Example 4: Build an Antonym Glyph Browser
 
 ```python
-from emotional_os.glyphs.antonym_glyphs import (
-    list_antonym_emotions,
-    find_antonym_by_emotion,
-    format_antonym_for_display
-)
 
-emotions = list_antonym_emotions()
-selected_emotion = st.selectbox("Choose an emotion:", emotions)
+from emotional_os.glyphs.antonym_glyphs import ( list_antonym_emotions, find_antonym_by_emotion,
+format_antonym_for_display )
 
-if selected_emotion:
-    antonym = find_antonym_by_emotion(selected_emotion)
-    if antonym:
-        st.markdown(format_antonym_for_display(antonym))
+emotions = list_antonym_emotions() selected_emotion = st.selectbox("Choose an emotion:", emotions)
+
+if selected_emotion: antonym = find_antonym_by_emotion(selected_emotion) if antonym:
+
+```text
 ```
 
 ## Current Coverage
@@ -304,7 +319,8 @@ if selected_emotion:
 ### Run the Test Suite
 
 ```bash
-python3 tests/test_antonym_glyphs.py
+```text
+```text
 ```
 
 ### Test Results
@@ -312,8 +328,9 @@ python3 tests/test_antonym_glyphs.py
 All 22 tests passing (100% pass rate):
 
 ```
+
 ✓ Antonym glyphs load
-✓ Expected count range  
+✓ Expected count range
 ✓ Metadata available
 ✓ Find by emotion 'comfort'
 ✓ Comfort has required fields
@@ -333,7 +350,8 @@ All 22 tests passing (100% pass rate):
 ✓ All emotions accessible
 ✓ All pairings accessible
 ✓ Sample emotions are findable
-✓ Sample pairings are findable
+
+```text
 ```
 
 ## Development Notes
@@ -344,7 +362,8 @@ The antonym glyphs are indexed for fast lookup. To regenerate the index:
 
 ```bash
 cd /workspaces/saoriverse-console
-python3 emotional_os/glyphs/antonym_glyphs_indexer.py
+```text
+```text
 ```
 
 This creates `/workspaces/saoriverse-console/emotional_os/glyphs/antonym_glyphs_indexed.json`.
@@ -354,22 +373,20 @@ This creates `/workspaces/saoriverse-console/emotional_os/glyphs/antonym_glyphs_
 Antonym glyphs are stored in JSON with this structure:
 
 ```json
-{
-  "Base Emotion": "Comfort",
-  "Pairing": "ζ × α",
-  "Name": "Gentle Holding",
-  "Description": "The feeling of being emotionally cradled, soothed without sedation"
-}
+
+{ "Base Emotion": "Comfort", "Pairing": "ζ × α", "Name": "Gentle Holding", "Description": "The
+feeling of being emotionally cradled, soothed without sedation"
+
+```text
 ```
 
 ### Adding New Antonym Glyphs
 
 To add new antonym glyphs:
 
-1. Edit `/workspaces/saoriverse-console/antonym_glyphs.txt`
-2. Add new entries in JSON format to the array
-3. Regenerate the index: `python3 emotional_os/glyphs/antonym_glyphs_indexer.py`
-4. Run tests to verify: `python3 tests/test_antonym_glyphs.py`
+1. Edit `/workspaces/saoriverse-console/antonym_glyphs.txt` 2. Add new entries in JSON format to the
+array 3. Regenerate the index: `python3 emotional_os/glyphs/antonym_glyphs_indexer.py` 4. Run tests
+to verify: `python3 tests/test_antonym_glyphs.py`
 
 ## Integration Checklist
 
@@ -386,11 +403,11 @@ To add new antonym glyphs:
 
 ## Future Enhancements
 
-1. **UI Integration**: Add antonym suggestions to the glyph selection interface
-2. **Recommendation Engine**: Suggest emotional opposites during conversations when relevant
-3. **Pairing Analysis**: Show how antonym pairings relate to primary glyph combinations
-4. **Learning**: Track which antonym pairs are most helpful to users
-5. **Expansion**: Add more antonym pairings based on user feedback and emotional patterns
+1. **UI Integration**: Add antonym suggestions to the glyph selection interface 2. **Recommendation
+Engine**: Suggest emotional opposites during conversations when relevant 3. **Pairing Analysis**:
+Show how antonym pairings relate to primary glyph combinations 4. **Learning**: Track which antonym
+pairs are most helpful to users 5. **Expansion**: Add more antonym pairings based on user feedback
+and emotional patterns
 
 ## Support & Troubleshooting
 
@@ -400,7 +417,8 @@ If you get "Antonym glyphs index not found" error:
 
 ```bash
 cd /workspaces/saoriverse-console
-python3 emotional_os/glyphs/antonym_glyphs_indexer.py
+```text
+```text
 ```
 
 ### Tests Failing
@@ -408,10 +426,12 @@ python3 emotional_os/glyphs/antonym_glyphs_indexer.py
 Run the test suite to diagnose issues:
 
 ```bash
-python3 tests/test_antonym_glyphs.py
+
+```text
 ```
 
 All 22 tests should pass. If not, check that:
+
 - `antonym_glyphs.txt` is in `/workspaces/saoriverse-console/`
 - `antonym_glyphs_indexed.json` exists in `emotional_os/glyphs/`
 - All dependent modules are accessible
@@ -419,6 +439,7 @@ All 22 tests should pass. If not, check that:
 ### Searching Returns No Results
 
 Make sure:
+
 - Search query is spelled correctly (searches are case-insensitive)
 - The emotion exists in the system
 - Try broader searches (e.g., "joy" instead of "joyful")
@@ -426,12 +447,12 @@ Make sure:
 ## Quick Reference
 
 ```python
+
 # Quick import for most common use
 from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion
 
 # Most common operations
-comfort = find_antonym_by_emotion("comfort")
-print(comfort["Name"])  # "Gentle Holding"
+comfort = find_antonym_by_emotion("comfort") print(comfort["Name"])  # "Gentle Holding"
 
 # Search
 results = search_antonyms("sorrow")
@@ -444,8 +465,8 @@ emotions = list_antonym_emotions()
 
 The antonym glyphs system is part of the Saoriverse Console project and represents a comprehensive emotional vocabulary mapping. All 122 antonym glyphs are original conceptual work designed to deepen emotional understanding and expression.
 
----
+##
 
-**Created**: 2025-11-05  
-**Version**: 1.0  
+**Created**: 2025-11-05
+**Version**: 1.0
 **Status**: ✓ COMPLETE AND INTEGRATED

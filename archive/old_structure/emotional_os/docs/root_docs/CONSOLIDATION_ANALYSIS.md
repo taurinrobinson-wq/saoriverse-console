@@ -10,7 +10,7 @@ Your system has **3 major sources of duplication**:
 
 **Impact**: Maintenance nightmare, desynchronization bugs, increased cognitive load
 
----
+##
 
 ## 📊 Detailed Inventory
 
@@ -27,6 +27,7 @@ Your system has **3 major sources of duplication**:
 **Winner**: `emotional_os/glyphs/signal_parser.py` - This is the canonical version
 
 **Key Features Only in Glyphs Version**:
+
 - NRC lexicon integration (better emotion detection)
 - Enhanced emotion processor support
 - Dynamic response composition
@@ -35,7 +36,7 @@ Your system has **3 major sources of duplication**:
 - Learning system integration with GlyphLearner
 - Full logging and debug support
 
----
+##
 
 ### Lexicon Learner Files
 
@@ -49,11 +50,12 @@ Your system has **3 major sources of duplication**:
 **Winner**: `emotional_os/deploy/learning/lexicon_learner.py` - Most complete with ToneMemory
 
 **Key Features by Version**:
+
 - All have: pattern extraction, word associations, effectiveness scoring
 - Deploy version adds: ToneMemory nested class with voltage scaling
 - Glyphs version: incomplete stub
 
----
+##
 
 ### Lexicon File Locations
 
@@ -65,7 +67,7 @@ Your system has **3 major sources of duplication**:
 
 **Problem**: If one is updated, others become stale
 
----
+##
 
 ## 🔍 Why This Happened
 
@@ -74,7 +76,7 @@ Your system has **3 major sources of duplication**:
 3. **No Central Registry**: No clear "canonical" version, so copies multiplied
 4. **Incremental Enhancement**: Bug fixes weren't propagated back to all copies
 
----
+##
 
 ## 🛠️ Consolidation Strategy
 
@@ -108,12 +110,14 @@ data/
 ### Phase 3: Update All Imports
 
 **Before**:
+
 ```python
 from emotional_os.glyphs.signal_parser import parse_input
 from learning.lexicon_learner import LexiconLearner
 ```
 
 **After**:
+
 ```python
 from emotional_os.core import parse_input, LexiconLearner
 ```
@@ -123,11 +127,12 @@ from emotional_os.core import parse_input, LexiconLearner
 Stub files at legacy locations redirect to canonical versions:
 
 ```python
+
 # parser/signal_parser.py (stub)
 from emotional_os.core.signal_parser import *
 ```
 
----
+##
 
 ## 📈 Implementation Order
 
@@ -158,26 +163,29 @@ from emotional_os.core.signal_parser import *
 6. **Create stubs for backward compatibility** (10 min)
    - Leave old files as re-export wrappers
 
----
+##
 
 ## ✅ Benefits
 
 ### Immediate
+
 - Single source of truth for parser and learner logic
 - Lexicon synchronization guaranteed
 - Easier to maintain and enhance
 
 ### Medium-term
+
 - Performance: centralized path resolution
 - Debugging: single stack trace instead of 4 different parsers
 - Testing: test canonical version once, works everywhere
 
 ### Long-term
+
 - Scalability: easy to add new signals/gates in one place
 - Experimentation: can A/B test variants without modifying core
 - Community: clear entry point for contributors
 
----
+##
 
 ## 🎯 Completion Criteria
 
@@ -190,7 +198,7 @@ from emotional_os.core.signal_parser import *
 - [ ] All tests pass
 - [ ] Git commits document the consolidation
 
----
+##
 
 ## 📝 Files to Create
 
@@ -202,7 +210,7 @@ from emotional_os.core.signal_parser import *
 | `emotional_os/core/paths.py` | Centralized path resolution |
 | `emotional_os/core/constants.py` | Signal defs, gate mappings, defaults |
 
----
+##
 
 ## 📝 Files to Delete/Stub
 
@@ -216,7 +224,7 @@ from emotional_os.core.signal_parser import *
 | `emotional_os/deploy/learning/lexicon_learner.py` | **Relocate** | Move to `emotional_os.core/` |
 | `emotional_os/glyphs/lexicon_learner.py` | Keep as stub | Imports from `emotional_os.core` |
 
----
+##
 
 ## 🚀 Next Steps
 
@@ -227,7 +235,7 @@ from emotional_os.core.signal_parser import *
 5. Phase 2: Migrate all consumers
 6. Phase 3: Backward compatibility stubs
 
----
+##
 
 ## Notes
 

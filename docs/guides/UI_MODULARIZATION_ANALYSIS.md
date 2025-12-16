@@ -2,9 +2,10 @@
 
 ## Current State: `ui.py` (3,068 lines)
 
-The current `ui.py` is a monolithic module handling ~12 major responsibilities, making it difficult to maintain, test, and modify.
+The current `ui.py` is a monolithic module handling ~12 major responsibilities, making it difficult
+to maintain, test, and modify.
 
----
+##
 
 ## File Size & Responsibility Breakdown
 
@@ -24,11 +25,13 @@ The current `ui.py` is a monolithic module handling ~12 major responsibilities, 
 | **Learning & Evolution** | 300+ | LOW | Lines 2800+ |
 | **Utility Functions** | 150+ | LOW | Lines 93-140 |
 
----
+##
 
 ## Proposed Modularization Structure
 
+```text
 ```
+
 emotional_os/deploy/modules/
 ├── ui.py (REFACTORED - entry point & orchestration, ~300 lines)
 ├── ui_components/
@@ -48,9 +51,11 @@ emotional_os/deploy/modules/
 │   ├── svg_loader.py                (~80 lines)
 │   ├── css_injector.py              (~120 lines)
 │   └── styling_utils.py             (~100 lines)
+
 ```
 
----
+
+##
 
 ## Detailed Module Specifications
 
@@ -79,8 +84,7 @@ emotional_os/deploy/modules/
 - `affect_parser`, `firstperson_orchestrator`
 - `fallback_protocol`, `processing_mode`
 - `last_preproc`
-
----
+##
 
 ### 2. **glyph_handler.py** (~350 lines)
 
@@ -104,8 +108,7 @@ emotional_os/deploy/modules/
 
 - `debug_glyphs`, `debug_signals`, `debug_gates`
 - `debug_glyph_rows`, `debug_sql`
-
----
+##
 
 ### 3. **chat_display.py** (~250 lines)
 
@@ -129,8 +132,7 @@ emotional_os/deploy/modules/
 
 - `conversation_history_{user_id}`
 - `processing_mode`
-
----
+##
 
 ### 4. **session_manager.py** (~300 lines)
 
@@ -155,8 +157,7 @@ emotional_os/deploy/modules/
 **Session State Keys Used**:
 
 - Manages all session initialization
-
----
+##
 
 ### 5. **header_ui.py** (~200 lines)
 
@@ -174,8 +175,7 @@ emotional_os/deploy/modules/
 
 - SVG loader utilities
 - Theme manager
-
----
+##
 
 ### 6. **sidebar_ui.py** (~350 lines)
 
@@ -202,8 +202,7 @@ emotional_os/deploy/modules/
 - `sidebar_show_login`, `sidebar_show_register`
 - `persist_history`, `conversation_manager`
 - `current_conversation_id`, `conversation_title`
-
----
+##
 
 ### 7. **theme_manager.py** (~200 lines)
 
@@ -225,8 +224,7 @@ emotional_os/deploy/modules/
 **Session State Keys Used**:
 
 - `theme`, `theme_select_row`, `theme_loaded`
-
----
+##
 
 ### 8. **document_processor.py** (~200 lines)
 
@@ -247,8 +245,7 @@ emotional_os/deploy/modules/
 **Dependencies**:
 
 - `docx.Document`, `pdfplumber`, `pandas`, etc.
-
----
+##
 
 ### 9. **learning_tracker.py** (~250 lines)
 
@@ -272,8 +269,7 @@ emotional_os/deploy/modules/
 
 - `hybrid_processor`, `learning_stats`
 - `new_glyphs_this_session`
-
----
+##
 
 ### 10. **journal_center.py** (~300 lines)
 
@@ -294,8 +290,7 @@ emotional_os/deploy/modules/
 
 - `doc_export.generate_doc`
 - Journaling UI components
-
----
+##
 
 ### 11. **svg_loader.py** (~80 lines)
 
@@ -309,8 +304,7 @@ emotional_os/deploy/modules/
 - `clear_svg_cache()` - Reset cache
 
 **Location**: `emotional_os/deploy/modules/utils/svg_loader.py`
-
----
+##
 
 ### 12. **css_injector.py** (~120 lines)
 
@@ -324,116 +318,93 @@ emotional_os/deploy/modules/
 - `inject_defensive_scripts()` - jQuery patches
 
 **Location**: `emotional_os/deploy/modules/utils/css_injector.py`
-
----
+##
 
 ## Refactored `ui.py` Structure (~300 lines)
 
 ```python
-"""
-Main UI entry point and orchestration.
 
-Handles page routing, session initialization, and high-level flow control.
-Delegates specific responsibilities to focused modules.
-"""
+""" Main UI entry point and orchestration.
 
-import streamlit as st
-import logging
+Handles page routing, session initialization, and high-level flow control. Delegates specific
+responsibilities to focused modules. """
 
-from ui_components.session_manager import initialize_session_state, get_conversation_context
-from ui_components.header_ui import render_main_header
-from ui_components.sidebar_ui import render_sidebar
-from ui_components.chat_display import render_chat_container, handle_user_input
-from ui_components.response_handler import handle_response_pipeline
-from ui_components.theme_manager import apply_theme
+import streamlit as st import logging
+
+from ui_components.session_manager import initialize_session_state, get_conversation_context from
+ui_components.header_ui import render_main_header from ui_components.sidebar_ui import
+render_sidebar from ui_components.chat_display import render_chat_container, handle_user_input from
+ui_components.response_handler import handle_response_pipeline from ui_components.theme_manager
+import apply_theme
 
 logger = logging.getLogger(__name__)
 
-def render_splash_interface():
-    """Render authentication splash screen."""
-    from ui_components.auth_ui import render_auth_splash
-    render_auth_splash()
+def render_splash_interface(): """Render authentication splash screen.""" from ui_components.auth_ui
+import render_auth_splash render_auth_splash()
 
-def render_main_app():
-    """Main authenticated application interface."""
+def render_main_app(): """Main authenticated application interface."""
     # Theme setup
-    apply_theme()
-    
+apply_theme()
+
     # Initialize session (orchestrator, parser, preferences)
-    initialize_session_state()
-    
+initialize_session_state()
+
     # Render header
-    render_main_header()
-    
+render_main_header()
+
     # Render sidebar
-    render_sidebar()
-    
+render_sidebar()
+
     # Main chat interface
-    render_chat_container()
-    
+render_chat_container()
+
     # Handle user input and processing
-    user_input = st.chat_input("Share what you're feeling...")
-    if user_input:
-        conversation_context = get_conversation_context()
-        response = handle_response_pipeline(user_input, conversation_context)
+user_input = st.chat_input("Share what you're feeling...") if user_input: conversation_context =
+get_conversation_context() response = handle_response_pipeline(user_input, conversation_context)
         # Display and persist
 
-def main():
-    """Main entry point."""
-    if not st.session_state.get("authenticated"):
-        render_splash_interface()
-    else:
-        render_main_app()
+def main(): """Main entry point.""" if not st.session_state.get("authenticated"):
+render_splash_interface() else: render_main_app()
 
 if __name__ == "__main__":
-    main()
+
+```text
 ```
 
----
+##
 
 ## Migration Path
 
 ### Phase 1: Extract Utilities
 
-1. Create `utils/svg_loader.py`
-2. Create `utils/css_injector.py`
-3. Create `utils/styling_utils.py`
+1. Create `utils/svg_loader.py` 2. Create `utils/css_injector.py` 3. Create `utils/styling_utils.py`
 4. Update imports in `ui.py`
 
 ### Phase 2: Extract Session Management
 
-1. Create `ui_components/session_manager.py`
-2. Migrate `initialize_session_state()` logic
-3. Update `ui.py` imports
+1. Create `ui_components/session_manager.py` 2. Migrate `initialize_session_state()` logic 3. Update
+`ui.py` imports
 
 ### Phase 3: Extract Display Components
 
-1. Create `ui_components/header_ui.py`
-2. Create `ui_components/sidebar_ui.py`
-3. Create `ui_components/chat_display.py`
-4. Update `ui.py` to use new modules
+1. Create `ui_components/header_ui.py` 2. Create `ui_components/sidebar_ui.py` 3. Create
+`ui_components/chat_display.py` 4. Update `ui.py` to use new modules
 
 ### Phase 4: Extract Processing
 
-1. Create `ui_components/response_handler.py`
-2. Create `ui_components/glyph_handler.py`
-3. Migrate response pipeline logic
-4. Update `ui.py`
+1. Create `ui_components/response_handler.py` 2. Create `ui_components/glyph_handler.py` 3. Migrate
+response pipeline logic 4. Update `ui.py`
 
 ### Phase 5: Extract Optional Features
 
-1. Create `ui_components/document_processor.py`
-2. Create `ui_components/learning_tracker.py`
-3. Create `ui_components/journal_center.py`
-4. Create `ui_components/theme_manager.py`
+1. Create `ui_components/document_processor.py` 2. Create `ui_components/learning_tracker.py` 3.
+Create `ui_components/journal_center.py` 4. Create `ui_components/theme_manager.py`
 
 ### Phase 6: Refactor Main Entry
 
-1. Simplify `ui.py` to ~300 lines
-2. Add comprehensive docstrings
-3. Test all flows
+1. Simplify `ui.py` to ~300 lines 2. Add comprehensive docstrings 3. Test all flows
 
----
+##
 
 ## Benefits of This Refactoring
 
@@ -473,7 +444,7 @@ if __name__ == "__main__":
 - Can build alternative UIs (mobile, API, etc.)
 - Better extensibility
 
----
+##
 
 ## Import Dependencies Map
 
@@ -496,7 +467,7 @@ utils/
 └─ styling_utils
 ```
 
----
+##
 
 ## Risk Mitigation
 
@@ -524,7 +495,7 @@ utils/
 - Unit tests for each component
 - E2E tests for critical flows
 
----
+##
 
 ## Estimated Implementation Time
 
@@ -538,7 +509,7 @@ utils/
 | 6 | Refactor main + test | 4 hours |
 | **Total** | **All phases** | **~25 hours** |
 
----
+##
 
 ## Success Criteria
 

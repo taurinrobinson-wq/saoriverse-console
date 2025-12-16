@@ -1,8 +1,8 @@
 # Glyphs cleanup utility
 
 This folder contains a small utility to parse a downloaded SQL export of the `glyphs` table,
-normalize fields, deduplicate, and produce preview artifacts so you can review changes
-before applying them to Supabase.
+normalize fields, deduplicate, and produce preview artifacts so you can review changes before
+applying them to Supabase.
 
 Files
 
@@ -27,8 +27,10 @@ Notes
 
 - The script is conservative and is intended for local review. It does not write to Supabase.
 - After you review the outputs I can add a safe upsert step that:
-  1) creates a backup export from Supabase
-  2) upserts cleaned rows in batches using the service-role key
-  3) writes an upsert report
 
-If you'd like me to proceed with a live dry-run against Supabase (backup + staged upsert without commit), export `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` into this shell and tell me to run the next step.
+1) creates a backup export from Supabase 2) upserts cleaned rows in batches using the service-role
+key 3) writes an upsert report
+
+If you'd like me to proceed with a live dry-run against Supabase (backup + staged upsert without
+commit), export `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` into this shell and tell me to run
+the next step.

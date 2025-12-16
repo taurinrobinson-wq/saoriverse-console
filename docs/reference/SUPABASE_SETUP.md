@@ -1,6 +1,7 @@
 # ⚙️ Supabase Setup Guide - Conversation Storage
 
-Your Supabase credentials are now configured! Follow these steps to enable persistent conversation storage.
+Your Supabase credentials are now configured! Follow these steps to enable persistent conversation
+storage.
 
 ## Step 1: Create Database Tables
 
@@ -12,13 +13,14 @@ If you have `supabase-cli` installed:
 
 ```bash
 cd /workspaces/saoriverse-console
-supabase db push
+```text
+```text
 ```
 
 ### Option B: Manual Setup via Supabase Dashboard
 
 1. **Go to Supabase Dashboard**
-   - URL: https://app.supabase.com/project/gyqzyuvuuyfjxnramkfq/sql/new
+   - URL: <https://app.supabase.com/project/gyqzyuvuuyfjxnramkfq/sql/new>
 
 2. **Create New Query**
    - Click "SQL Editor" in the left sidebar
@@ -32,11 +34,12 @@ supabase db push
    - Click the "Run" button (play icon)
    - You should see "Success" message
 
----
+##
 
 ## SQL Schema (Paste into Supabase SQL Editor)
 
 ```sql
+
 -- SQL DDL for conversations table
 -- Persistent conversation storage with metadata and auto-naming
 -- Intended for Supabase (Postgres)
@@ -69,20 +72,20 @@ CREATE TABLE IF NOT EXISTS public.conversations (
 );
 
 -- Create unique constraint on (user_id, conversation_id) for upsert operations
-CREATE UNIQUE INDEX IF NOT EXISTS idx_conversations_user_conversation 
+CREATE UNIQUE INDEX IF NOT EXISTS idx_conversations_user_conversation
 ON public.conversations (user_id, conversation_id);
 
 -- Create indexes for efficient queries
-CREATE INDEX IF NOT EXISTS idx_conversations_user_id 
+CREATE INDEX IF NOT EXISTS idx_conversations_user_id
 ON public.conversations (user_id);
 
-CREATE INDEX IF NOT EXISTS idx_conversations_updated_at 
+CREATE INDEX IF NOT EXISTS idx_conversations_updated_at
 ON public.conversations (updated_at DESC);
 
-CREATE INDEX IF NOT EXISTS idx_conversations_created_at 
+CREATE INDEX IF NOT EXISTS idx_conversations_created_at
 ON public.conversations (created_at DESC);
 
-CREATE INDEX IF NOT EXISTS idx_conversations_archived 
+CREATE INDEX IF NOT EXISTS idx_conversations_archived
 ON public.conversations (archived) WHERE NOT archived;
 
 -- Conversation metadata table for tracking renames and operations
@@ -95,10 +98,10 @@ CREATE TABLE IF NOT EXISTS public.conversation_metadata (
     created_at timestamptz DEFAULT now()
 );
 
-CREATE INDEX IF NOT EXISTS idx_conversation_metadata_user_id 
+CREATE INDEX IF NOT EXISTS idx_conversation_metadata_user_id
 ON public.conversation_metadata (user_id);
 
-CREATE INDEX IF NOT EXISTS idx_conversation_metadata_conversation_id 
+CREATE INDEX IF NOT EXISTS idx_conversation_metadata_conversation_id
 ON public.conversation_metadata (conversation_id);
 
 -- Helper function to update the updated_at timestamp
@@ -115,10 +118,11 @@ DROP TRIGGER IF EXISTS conversations_update_updated_at ON public.conversations;
 CREATE TRIGGER conversations_update_updated_at
 BEFORE UPDATE ON public.conversations
 FOR EACH ROW
-EXECUTE FUNCTION update_conversation_updated_at();
+
+```text
 ```
 
----
+##
 
 ## Step 2: Verify Installation
 
@@ -126,17 +130,20 @@ After running the SQL, verify the tables were created:
 
 ```bash
 cd /workspaces/saoriverse-console
-python3 scripts/migrate_supabase.py --verify
+```text
+```text
 ```
 
 You should see:
-```
-✅ conversations table EXISTS
-✅ conversation_metadata table EXISTS
-✅ All tables created successfully!
+
 ```
 
----
+✅ conversations table EXISTS ✅ conversation_metadata table EXISTS
+
+```text
+```
+
+##
 
 ## Step 4: Enable Row Level Security (RLS) ⚠️ IMPORTANT FOR SECURITY
 
@@ -144,23 +151,20 @@ You should see:
 
 ### Enable RLS
 
-1. Go to Supabase Dashboard → SQL Editor
-2. Create new query
-3. Run this SQL:
+1. Go to Supabase Dashboard → SQL Editor 2. Create new query 3. Run this SQL:
 
 ```sql
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.conversation_metadata ENABLE ROW LEVEL SECURITY;
+```text
+```text
 ```
 
 You should see: `Success - no rows returned`
 
 ### Add RLS Policies
 
-1. Create another new query
-2. Copy entire contents of `sql/conversations_rls_policies.sql`
-3. Paste into SQL editor
-4. Click "Run"
+1. Create another new query 2. Copy entire contents of `sql/conversations_rls_policies.sql` 3. Paste
+into SQL editor 4. Click "Run"
 
 You should see multiple `Success` messages (one per policy)
 
@@ -169,44 +173,49 @@ You should see multiple `Success` messages (one per policy)
 Check Authentication → Policies in Supabase dashboard
 
 You should see policies for:
+
 - `conversations` table (4 policies)
 - `conversation_metadata` table (4 policies)
 
 ✅ **RLS is now active!** Users can only access their own conversations.
 
----
+##
 
 ## Step 5: Configure Streamlit Secrets (Already Done ✅)
 
 Your `.streamlit/secrets.toml` is already configured with:
 
 ```toml
+
 [supabase]
 url = "https://gyqzyuvuuyfjxnramkfq.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8"
 service_role_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTQ2NzIwMCwiZXhwIjoyMDcxMDQzMjAwfQ.sILcK31ECwM0IUECL0NklBdv4WREIxToqtCdsMYKWqo"
 auth_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/auth-manager"
 saori_function_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/authenticated-saori"
-current_saori_url = "https://gyqzyuvuuyfjxnramkfq.supabase.co/functions/v1/saori-fixed"
+
+```text
 ```
 
 ✅ **No changes needed** - everything is ready!
 
----
+##
 
 ## Step 6: Restart Your App
 
 ```bash
-streamlit run app.py
+```text
+```text
 ```
 
 You should now see:
+
 - ✅ Sidebar with "Previous Conversations"
 - ✅ "💾 Save my chats" toggle
 - ✅ Conversations auto-save when you check the toggle
 - ✅ Data persists across page refreshes!
 
----
+##
 
 ## Troubleshooting
 
@@ -227,13 +236,16 @@ You should now see:
 ### Error: "conversations table not found"
 
 Run the migration script again:
+
 ```bash
+
 python3 scripts/migrate_supabase.py --verify
+
 ```
 
 If it says tables don't exist, go back to Step 1 and run the SQL.
 
----
+##
 
 ## Testing the Setup
 
@@ -261,7 +273,7 @@ If it says tables don't exist, go back to Step 1 and run the SQL.
 4. Name should update immediately
 5. Refresh browser - new name persists!
 
----
+##
 
 ## Next Steps
 
@@ -272,7 +284,7 @@ Now that the database is set up:
 3. ⏳ **Monitor Supabase dashboard** - see data flowing in
 4. ⏳ **Test all features** - sidebar, rename, delete
 
----
+##
 
 ## Files & Documentation
 
@@ -282,7 +294,7 @@ Now that the database is set up:
 - **`QUICKSTART_CONVERSATION_STORAGE.md`** - Quick start guide
 - **`scripts/migrate_supabase.py`** - Migration helper script
 
----
+##
 
 ## Need Help?
 

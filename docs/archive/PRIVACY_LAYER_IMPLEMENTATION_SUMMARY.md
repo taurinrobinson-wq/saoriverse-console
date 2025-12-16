@@ -94,7 +94,9 @@ cleanup_expired_conversations (automatic deletion)
 ## Key Features Implemented
 
 ### ✅ Encryption (Complete)
+
 ```python
+
 # Derive key from password
 key = EncryptionManager.derive_key_from_password(user_id, password)
 
@@ -111,7 +113,9 @@ encrypted, user_id_hashed = EncryptionManager.encrypt_conversation(
 ```
 
 ### ✅ Dream Engine (Complete)
+
 ```python
+
 # Create daily summary
 summary = DreamEngine.create_daily_summary(
     user_id="user_123",
@@ -121,20 +125,27 @@ summary = DreamEngine.create_daily_summary(
 )
 
 # Summary contains:
+
 # - primary_emotions: ["anxiety", "hope"]
+
 # - key_themes: ["work", "relationships"]
+
 # - recurring_concerns: ["boundary issues", "perfectionism"]
+
 # - most_effective_glyphs: ["ACCEPTANCE", "GROUNDING"]
+
 # - narrative_summary: "Today you experienced anxiety and hope..."
 ```
 
 ### ✅ Data Retention (Schema Complete)
+
 - User-configurable: 7, 30, 90, 365, or custom days
 - Full conversations expire per user setting
 - Dream summaries kept longer (90+ days)
 - Automatic daily cleanup of expired data
 
 ### ✅ User Control (Endpoints Designed)
+
 - GET `/api/user/retention-settings` - View current settings
 - POST `/api/user/retention-settings` - Update retention
 - GET `/api/user/data-export` - Download all encrypted data
@@ -142,6 +153,7 @@ summary = DreamEngine.create_daily_summary(
 - GET `/api/user/conversation-history` - Browse history with summaries
 
 ### ✅ GDPR Compliance (Designed)
+
 - Right to Access: `/api/user/data-export`
 - Right to Deletion: `/api/user/data-delete` with 30-day grace period
 - Right to Data Portability: Export in encrypted JSON format
@@ -152,18 +164,21 @@ summary = DreamEngine.create_daily_summary(
 ## What's Ready to Use
 
 ### Immediately Available
+
 1. **AES-256 Encryption** - Full implementation, just needs `cryptography` library
 2. **Dream Engine** - Complete pattern extraction logic
 3. **Database Schema** - Ready to create tables
 4. **Integration Guide** - Complete examples for each component
 
 ### Next: Install Dependencies
+
 ```bash
 pip install cryptography  # For AES-256 encryption
 pip install pytest        # For running tests
 ```
 
 ### Then: Create Database Tables
+
 ```sql
 -- See PRIVACY_LAYER_DATABASE_SCHEMA.md for full schema
 CREATE TABLE user_retention_preferences (...)
@@ -175,6 +190,7 @@ CREATE TABLE audit_log_privacy (...)
 ## Implementation Timeline
 
 ### Phase 1: Foundation (Completed ✓)
+
 - ✅ Design encryption + retention architecture
 - ✅ Implement `EncryptionManager` class
 - ✅ Implement `DreamEngine` class
@@ -183,6 +199,7 @@ CREATE TABLE audit_log_privacy (...)
 - **Status:** Ready for testing
 
 ### Phase 2: Database Integration (Next: 2-3 hours)
+
 - [ ] Install cryptography library
 - [ ] Create database tables
 - [ ] Test encryption/decryption with real DB
@@ -190,6 +207,7 @@ CREATE TABLE audit_log_privacy (...)
 - [ ] Run test suite
 
 ### Phase 3: Signal Parser Integration (Next: 2-3 hours)
+
 - [ ] Update signal_parser_integration.py
 - [ ] Create `UserAuthenticationManager` class
 - [ ] Create `ConversationStorageManager` class
@@ -197,6 +215,7 @@ CREATE TABLE audit_log_privacy (...)
 - [ ] Update conversation storage to encrypt
 
 ### Phase 4: Scheduled Tasks (Next: 1-2 hours)
+
 - [ ] Create scheduled_tasks.py
 - [ ] Implement daily dream generation
 - [ ] Implement cleanup_expired_conversations
@@ -204,6 +223,7 @@ CREATE TABLE audit_log_privacy (...)
 - [ ] Set up task scheduler (APScheduler or Celery)
 
 ### Phase 5: API Endpoints (Next: 1-2 hours)
+
 - [ ] Create api_privacy_endpoints.py
 - [ ] Implement `/api/user/retention-settings` GET/POST
 - [ ] Implement `/api/user/data-export`
@@ -211,6 +231,7 @@ CREATE TABLE audit_log_privacy (...)
 - [ ] Implement `/api/user/conversation-history`
 
 ### Phase 6: Testing & Deployment (Next: 2-3 hours)
+
 - [ ] Run test suite
 - [ ] Integration testing (login → store → dream)
 - [ ] Load testing (encryption performance)
@@ -224,6 +245,7 @@ CREATE TABLE audit_log_privacy (...)
 ## Comparison: Old vs New Architecture
 
 ### Old System (Encoding Model - Previous Session)
+
 ```
 Raw Text
   ↓
@@ -233,12 +255,14 @@ Discard Raw Text
   ↓
 Result: Maximum privacy, zero personalization
 ```
+
 - ❌ Can't greet by name
 - ❌ Can't reference past conversations
 - ❌ No personalization
 - ❌ No long-term memory
 
 ### New System (Encryption + Retention + Dreams)
+
 ```
 Raw Text
   ↓
@@ -250,6 +274,7 @@ Extract Daily Summaries (Patterns, Not Data)
   ↓
 Result: Privacy + Personalization + Memory
 ```
+
 - ✅ Greet by name ("Welcome back, Taurin!")
 - ✅ Reference past conversations (encrypted context)
 - ✅ Personalized responses
@@ -260,6 +285,7 @@ Result: Privacy + Personalization + Memory
 ## Security Highlights
 
 ### Key Properties
+
 1. **One-way user hashing** - User ID hashed for DB queries, not reversible
 2. **Password-derived encryption** - Each user has unique key, only derivable with password
 3. **Fernet encryption** - AES-256 with HMAC authentication
@@ -282,6 +308,7 @@ Result: Privacy + Personalization + Memory
 ## What Happens at Key Moments
 
 ### User Signs Up
+
 1. User provides: email, password, name
 2. `EncryptionManager.derive_key_from_password(email, password)` → unique key
 3. User profile encrypted: `{"name": "Taurin", "email": "..."}` → AES-256 blob
@@ -289,6 +316,7 @@ Result: Privacy + Personalization + Memory
 5. User ID hashed for DB queries (one-way hash)
 
 ### User Logs In
+
 1. User enters: email, password
 2. `EncryptionManager.derive_key_from_password(email, password)` → same unique key
 3. User profile decrypted: blob → `{"name": "Taurin", ...}`
@@ -297,6 +325,7 @@ Result: Privacy + Personalization + Memory
 6. System greets: "Welcome back, Taurin! I remember you were working through anxiety about work..."
 
 ### User Has a Conversation
+
 1. User types: "I'm anxious about my presentation"
 2. System processes: Signal extraction, glyph selection, response
 3. Conversation stored:
@@ -306,6 +335,7 @@ Result: Privacy + Personalization + Memory
    - Add to daily batch for dreaming
 
 ### End of Day
+
 1. All conversations from today retrieved from daily batch
 2. Dream Engine extracts:
    - Emotions: anxiety (60%), hope (40%)
@@ -317,6 +347,7 @@ Result: Privacy + Personalization + Memory
 5. Cleanup job runs: removes conversations older than expiration
 
 ### User Changes Retention to 7 Days
+
 1. User updates preference: `retention_days: 7`
 2. All NEW conversations now expire after 7 days
 3. Old conversations keep their original expiration
@@ -324,6 +355,7 @@ Result: Privacy + Personalization + Memory
 5. Dream summaries still kept (90 days, used for long-term pattern reference)
 
 ### User Requests Data Export
+
 1. User calls: `/api/user/data-export`
 2. System retrieves:
    - All encrypted conversations
@@ -334,6 +366,7 @@ Result: Privacy + Personalization + Memory
 5. User can decrypt offline with their password (they have the key!)
 
 ### User Requests Deletion (GDPR)
+
 1. User calls: `/api/user/data-delete`
 2. System sets: `deleted_at = now`
 3. System marks user retention preference: `deleted_at`
@@ -348,6 +381,7 @@ Result: Privacy + Personalization + Memory
 ## Next Steps
 
 1. **Install Dependencies** (5 minutes)
+
    ```bash
    pip install cryptography pytest
    ```
@@ -357,11 +391,13 @@ Result: Privacy + Personalization + Memory
    - Create 4 new tables
 
 3. **Run Encryption Tests** (15 minutes)
+
    ```bash
    pytest test_privacy_layer.py::TestEncryptionManager -v
    ```
 
 4. **Run Dream Engine Tests** (15 minutes)
+
    ```bash
    pytest test_privacy_layer.py::TestDreamEngine -v
    ```
@@ -379,24 +415,30 @@ Result: Privacy + Personalization + Memory
 ## Questions & Clarifications
 
 ### Q: What if a user forgets their password?
+
 **A:** Password recovery resets their password. New password → new encryption key → old encrypted data becomes inaccessible. User can request data export before password reset to preserve data, or system securely deletes old data. This is intentional security design (no master key).
 
 ### Q: Can FirstPerson employees read conversations?
+
 **A:** No. Conversations are encrypted with user's password-derived key. Even FirstPerson employees can't decrypt without the user's password. This is the security design.
 
 ### Q: What about HIPAA compliance?
+
 **A:** Yes. AES-256 encryption at rest, HTTPS for transit, access controls, audit logging, and user deletion support all meet HIPAA requirements. Consider HIPAA Business Associate Agreement (BAA) if handling PHI.
 
 ### Q: Can we back up encrypted data?
+
 **A:** Yes. Encrypted data is safe to back up. Backups should be encrypted, stored separately, and access-controlled. Decrypted data should never be backed up.
 
 ### Q: What if the database is compromised?
+
 **A:** Attacker gets encrypted blobs. Without user passwords, data is unreadable. Attacker would need to brute-force passwords (very expensive) or compromise passwords separately (not a database attack).
 
 ### Q: How long do we keep audit logs?
+
 **A:** Indefinitely (or per legal requirement). Audit logs don't contain sensitive data (only hashes and action types), so they can be kept for compliance.
 
----
+##
 
 ## File Locations Summary
 

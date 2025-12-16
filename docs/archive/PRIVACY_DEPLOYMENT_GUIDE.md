@@ -38,6 +38,7 @@ All privacy-first encoding infrastructure has been created and verified. Raw con
 ### ✓ Test Suite (1 File)
 
 **emotional_os/privacy/test_data_encoding.py** (400+ lines)
+
 - 20+ comprehensive tests
 - K-anonymity verification
 - GDPR/CCPA/HIPAA compliance tests
@@ -47,6 +48,7 @@ All privacy-first encoding infrastructure has been created and verified. Raw con
 ### ✓ Documentation (1 File)
 
 **emotional_os/privacy/IMPLEMENTATION_GUIDE.md** (500+ lines)
+
 - Complete integration instructions
 - Database schema design
 - User rights implementation
@@ -55,14 +57,14 @@ All privacy-first encoding infrastructure has been created and verified. Raw con
 
 ## Test Results
 
-```
-======================================================================
-PRIVACY ENCODING VERIFICATION COMPLETE
-======================================================================
+# ```
+
+# PRIVACY ENCODING VERIFICATION COMPLETE
 
 ✓ PASS: All critical privacy checks passed
 
 Key Achievements:
+
   1. ✓ No raw text in encoded record
   2. ✓ User ID properly hashed (SHA-256)
   3. ✓ Signals encoded to abstract codes
@@ -71,8 +73,8 @@ Key Achievements:
   6. ✓ Message lengths bucketed (not exact)
   7. ✓ Hash deterministic for same user
 
-READY FOR INTEGRATION WITH signal_parser.py
-======================================================================
+# READY FOR INTEGRATION WITH signal_parser.py
+
 ```
 
 ## Next Steps: Integration (This Week)
@@ -82,15 +84,24 @@ READY FOR INTEGRATION WITH signal_parser.py
 Search for where conversations are stored:
 
 ```bash
+
+
+
 grep -r "supabase" emotional_os/core/signal_parser.py
 grep -r "\.insert\(" emotional_os/core/
 grep -r "conversation" emotional_os/core/signal_parser.py
+
 ```
 
 ### Step 2: Wrap Existing Storage with Encoding
 
 **Current Flow (WRONG):**
+
 ```python
+
+
+
+
 # In signal_parser.py or your API endpoint
 result = parse_input(user_input, ...)
 db.table("conversations").insert({
@@ -99,10 +110,16 @@ db.table("conversations").insert({
     "system_response": result["response"],  # ❌ RAW TEXT
     "signals": result["signals"],
 }).execute()
+
 ```
 
 **Fixed Flow (PRIVACY-FIRST):**
+
 ```python
+
+
+
+
 # In signal_parser.py or your API endpoint
 from emotional_os.privacy.signal_parser_integration import encode_and_store_conversation
 
@@ -123,6 +140,7 @@ if not success:
     # Handle error (log, alert, etc.)
 else:
     logger.info(f"Stored encoded conversation: {record_id}")
+
 ```
 
 ### Step 3: Update Supabase Schema
@@ -130,6 +148,9 @@ else:
 **New table for anonymized data:**
 
 ```sql
+
+
+
 -- Create anonymized conversation storage
 CREATE TABLE conversation_logs_anonymized (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -156,11 +177,16 @@ CREATE INDEX idx_timestamp_week ON conversation_logs_anonymized(timestamp_week);
 
 -- Archive old conversation data (if exists)
 -- ALTER TABLE conversations RENAME TO conversations_archived;
+
 ```
 
 ### Step 4: Test in Development
 
 ```bash
+
+
+
+
 # 1. Run the existing integration tests
 python -m pytest emotional_os/privacy/test_data_encoding.py -v
 
@@ -189,6 +215,7 @@ success, record_id, _ = encode_and_store_conversation(
 print(f'Success: {success}')
 print(f'Record: {record_id}')
 "
+
 ```
 
 ### Step 5: Deploy to Staging
@@ -211,7 +238,11 @@ print(f'Record: {record_id}')
 ## What Happens to Raw Text
 
 ### During Conversation
+
 ```
+
+
+
 User: "I'm having thoughts of suicide"
       ↓
 [Received in memory - NOT stored]
@@ -227,10 +258,15 @@ Stage 4: Glyph Mapping → [42, 183]
 Stage 5: Storage → Only encoded signals/gates/glyphs
       ↓
 Raw text DESTROYED (not persisted) ✓
+
 ```
 
 ### Database
+
 ```
+
+
+
 Raw text: ❌ NOT STORED
 
 Stored instead:
@@ -245,11 +281,13 @@ User cannot be re-identified:
 - Multiple users → same approximate length/time → indistinguishable
 - K-anonymity: At least 5 users have identical quasi-identifiers
 - No raw text: No way to reconstruct original message
+
 ```
 
 ## Compliance Verification
 
 ### GDPR ✓
+
 - [x] Data minimization: Only encoded signals stored
 - [x] Purpose limitation: Used for response + learning only
 - [x] Storage limitation: 90 days default (configurable)
@@ -258,12 +296,14 @@ User cannot be re-identified:
 - [x] Privacy by design: Raw text never stored
 
 ### CCPA ✓
+
 - [x] Consumer access: Anonymized data export
 - [x] Consumer deletion: Delete all user data via hash
 - [x] Non-sale: Data never sold or shared
 - [x] Opt-out: Consent tracking ready
 
 ### HIPAA ✓
+
 - [x] Minimum necessary: Only signals stored
 - [x] Access control: User ID hashed
 - [x] Audit: Access logging ready
@@ -271,12 +311,14 @@ User cannot be re-identified:
 - [x] Breach notification: Procedure documented
 
 ### State Wiretapping Laws ✓
+
 - [x] All-party consent: Consent tracked per session
 - [x] Disclosure: Privacy policy explains encoding
 
 ## Files to Update/Review
 
 ### Must Update
+
 1. **emotional_os/core/signal_parser.py**
    - Import encoding integration
    - Wrap database storage calls
@@ -287,6 +329,7 @@ User cannot be re-identified:
    - Use `encode_and_store_conversation()`
 
 ### Should Review
+
 1. **Supabase RLS Policies**
    - Ensure only authenticated users access their hash
    - Consider field-level encryption for user_id_hashed
@@ -300,6 +343,7 @@ User cannot be re-identified:
    - Implement role-based access (developer vs researcher vs admin)
 
 ### Can Leave As-Is
+
 1. **signal_parser.py** logic (parsing stays the same)
 2. **Glyph database** (not changed)
 3. **Suicidality protocol** (not changed)
@@ -307,23 +351,39 @@ User cannot be re-identified:
 ## Monitoring & Alerts
 
 ### What to Monitor
+
 ```python
+
+
+
+
 # Monthly compliance check
 from emotional_os.privacy.arx_integration import ARXAnonymityVerifier
 
 verifier = ARXAnonymityVerifier(k_threshold=5)
 verifier.run_monthly_compliance_check(db_connection)
+
 # Saves report to: compliance_reports/[date]_compliance_report.json
 
 # Alert if:
+
 # - K-value drops below 5 (over-identification risk)
+
 # - Raw text field inserted (immediate escalation)
+
 # - Unencrypted backup detected
+
 # - Access without MFA
+
 ```
 
 ### What to Track
+
 ```python
+
+
+
+
 # In your monitoring dashboard:
 - Total anonymized conversations: N
 - K-anonymity status: k ≥ 5 ✓
@@ -331,6 +391,7 @@ verifier.run_monthly_compliance_check(db_connection)
 - User exports: N (monthly)
 - User deletions: N (monthly)
 - Compliance score: 100% (or flag if < 100%)
+
 ```
 
 ## Timeline
@@ -357,6 +418,9 @@ verifier.run_monthly_compliance_check(db_connection)
 If issues occur:
 
 ```sql
+
+
+
 -- Disable new encoding temporarily
 -- Keep using old table
 ALTER TABLE conversation_logs_anonymized DISABLE TRIGGER ALL;
@@ -367,6 +431,7 @@ ALTER TABLE conversation_logs_anonymized DISABLE TRIGGER ALL;
 -- Debug and fix
 -- Then re-enable
 ALTER TABLE conversation_logs_anonymized ENABLE TRIGGER ALL;
+
 ```
 
 ## Questions & Troubleshooting
@@ -392,19 +457,22 @@ A: Yes, with MFA + researcher role + audit logging. No user_id_hashed access.
 ## Support
 
 For questions about this privacy layer:
+
 1. Review IMPLEMENTATION_GUIDE.md
 2. Check data_encoding.py docstrings
 3. Run test_data_encoding.py
 4. Review anonymization_config.json for requirements
 
----
+##
 
 ## Summary
 
 **Problem Solved:**
+
 - ❌ Raw conversation text stored unencoded → ✅ Encoded immediately, never stored
 
 **Implementation:**
+
 - ✅ 5-stage encoding pipeline
 - ✅ K-anonymity verification (ARX API ready)
 - ✅ GDPR/CCPA/HIPAA compliant
@@ -412,6 +480,7 @@ For questions about this privacy layer:
 - ✅ Audit logging ready
 
 **Next Action:**
+
 - Find storage points in signal_parser.py
 - Wrap with `encode_and_store_conversation()`
 - Deploy to production

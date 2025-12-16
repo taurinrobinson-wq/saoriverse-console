@@ -2,15 +2,16 @@
 
 ## Problem
 
-In demo mode (unauthenticated users), the UI was showing features that require authentication and data persistence:
+In demo mode (unauthenticated users), the UI was showing features that require authentication and
+data persistence:
 
-1. **"Start Personal Log"** button - Requires saving logs to database
-2. **"Logout"** button - User isn't actually logged in
-3. **"💾 Save my chats"** checkbox - Demo mode can't persist data
+1. **"Start Personal Log"** button - Requires saving logs to database 2. **"Logout"** button - User
+isn't actually logged in 3. **"💾 Save my chats"** checkbox - Demo mode can't persist data
 
 ## Solution
 
-Wrapped all these UI elements with authentication checks so they only appear for authenticated users:
+Wrapped all these UI elements with authentication checks so they only appear for authenticated
+users:
 
 ### Changes Made
 
@@ -26,12 +27,15 @@ try:
         st.session_state.show_personal_log = True
         st.rerun()
 except Exception:
-    pass
+```text
+```text
 ```
 
 **After**:
 
 ```python
+
+
 # Only show for authenticated users (requires data persistence)
 if st.session_state.get('authenticated'):
     try:
@@ -39,7 +43,8 @@ if st.session_state.get('authenticated'):
             st.session_state.show_personal_log = True
             st.rerun()
     except Exception:
-        pass
+
+```text
 ```
 
 #### 2. Logout Button
@@ -49,27 +54,23 @@ if st.session_state.get('authenticated'):
 **Before**:
 
 ```python
-try:
-    if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-        from .auth import SaoynxAuthentication
-        auth = SaoynxAuthentication()
-        auth.logout()
-except Exception:
-    pass
+try: if st.button("Logout", key="controls_logout", help="Sign out of your account"): from .auth
+import SaoynxAuthentication auth = SaoynxAuthentication() auth.logout() except Exception:
+```text
+```text
 ```
 
 **After**:
 
 ```python
+
+
 # Only show for authenticated users
-if st.session_state.get('authenticated'):
-    try:
-        if st.button("Logout", key="controls_logout", help="Sign out of your account"):
-            from .auth import SaoynxAuthentication
-            auth = SaoynxAuthentication()
-            auth.logout()
-    except Exception:
-        pass
+if st.session_state.get('authenticated'): try: if st.button("Logout", key="controls_logout",
+help="Sign out of your account"): from .auth import SaoynxAuthentication auth =
+SaoynxAuthentication() auth.logout() except Exception:
+
+```text
 ```
 
 #### 3. Save My Chats Checkbox
@@ -79,19 +80,24 @@ if st.session_state.get('authenticated'):
 **Before**:
 
 ```python
+
 # Persist history toggle
 persist_default = st.session_state.get('persist_history', True)
 st.session_state['persist_history'] = st.checkbox(
     "💾 Save my chats",
     value=persist_default,
     help="Automatically save conversations for later retrieval"
-)
+```text
+```text
 ```
 
 **After**:
 
 ```python
+
+
 # Persist history toggle - only show for authenticated users
+
 # Demo mode doesn't support data persistence
 if st.session_state.get('authenticated'):
     persist_default = st.session_state.get('persist_history', True)
@@ -100,6 +106,7 @@ if st.session_state.get('authenticated'):
         value=persist_default,
         help="Automatically save conversations for later retrieval"
     )
+
 ```
 
 ## User Experience Impact

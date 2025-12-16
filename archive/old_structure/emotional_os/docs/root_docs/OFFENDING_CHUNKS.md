@@ -13,6 +13,7 @@ The following files were detected by GitHub's secret scanner during the recent c
 - `deploy/CoPilot_chunks/copilot_chunks/chunk_946.txt`
 
 Notes:
+
 - These files were flagged because they contained API keys / OAuth tokens. They have been removed from the git history and are no longer present in `origin/main` after the force-push.
 - Treat any credentials that appeared in those files as compromised; rotate/revoke them immediately in their provider consoles.
 

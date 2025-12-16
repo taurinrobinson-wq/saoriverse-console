@@ -2,41 +2,43 @@
 
 ## THE PROBLEM YOU IDENTIFIED ✓
 
+<!-- md013:ignore -->
 > "Why is it only mapping to 8 emotional dimensions which are the same ones that it derived from my poem?"
 
+<!-- md013:ignore -->
 **Answer**: It was hardcoded! The original system could only recognize the 8 dimensions discovered in your initial poem.
 
----
+##
 
 ## THE SOLUTION ✨
 
-### Timeline of Expansion:
+### Timeline of Expansion
 
+```text
 ```
+
 BEFORE (Original System)
 └─ 8 Dimensions Only
-   (hardcoded from your poem)
-   - Love, Intimacy, Vulnerability, 
-     Transformation, Admiration, Joy, 
-     Sensuality, Nature
+(hardcoded from your poem)
+
+- Love, Intimacy, Vulnerability,
+Transformation, Admiration, Joy, Sensuality, Nature
 
 AFTER (Adaptive System)
 ├─ 8 Base Dimensions (your poem)
 ├─ 10 Pre-discovered Dimensions
-│  (nostalgia, melancholy, transcendence, 
-│   longing, despair, serenity, rebellion, 
+│  (nostalgia, melancholy, transcendence,
+│   longing, despair, serenity, rebellion,
 │   wonder, resilience, solitude)
 │
 └─ N Dynamically Learned Dimensions
-   (discovered during poetry processing!)
-```
-
----
 
 ## WHAT CHANGED
 
 ### File: `emotional_os/learning/adaptive_signal_extractor.py` (NEW)
+
 **185 lines**
+
 - Start with your 8 base dimensions
 - Add 10 pre-analyzed dimensions from poetry
 - Dynamically discover new dimensions from corpus
@@ -44,19 +46,22 @@ AFTER (Adaptive System)
 - Generate dimension reports
 
 ### File: `bulk_text_processor.py` (UPDATED)
+
 - Now uses `AdaptiveSignalExtractor` by default
 - Can fall back to original if `use_adaptive_extractor=False`
 
 ### File: `gutenberg_fetcher.py` (UPDATED)
+
 - Reports dimension statistics in output
 - Shows: base + pre-discovered + newly learned dimensions
 
----
+##
 
 ## DIMENSION BREAKDOWN
 
 ### Your 8 Base Dimensions
-```
+
+```sql
 Foundation set from "Hope is the thing with feathers"
 ├─ Love
 ├─ Intimacy
@@ -69,7 +74,8 @@ Foundation set from "Hope is the thing with feathers"
 ```
 
 ### 10 Pre-Discovered Dimensions (from Poetry Analysis)
-```
+
+```text
 Identified patterns across poetry canon
 ├─ Nostalgia      → time, memory, longing for past
 ├─ Melancholy     → sorrow, sadness, grief
@@ -84,7 +90,8 @@ Identified patterns across poetry canon
 ```
 
 ### N Adaptive Dimensions (Learned from Your Collections)
-```
+
+```text
 Discovered dynamically during processing of:
 - Emily Dickinson (1.1M words)
 - Walt Whitman (1.1M words)
@@ -100,12 +107,11 @@ Expected discoveries:
 └─ Novel emotional patterns
 ```
 
----
-
 ## HOW IT WORKS NOW
 
 ### Before: Extraction Constrained to 8
-```
+
+```text
 Poetry Text
     ↓
 Poetry Extractor
@@ -118,7 +124,8 @@ Limited lexicon expansion
 ```
 
 ### After: Extraction Expands Dynamically
-```
+
+```text
 Poetry Text
     ↓
 Adaptive Signal Extractor
@@ -134,76 +141,78 @@ Discover new dimensions if present
 Comprehensive lexicon expansion
 ```
 
----
-
 ## PRACTICAL IMPACT
 
-### Same Poetry, Different Results:
+### Same Poetry, Different Results
 
 **Example: "Hope is the thing with feathers"**
 
 **Before** (8 dimensions):
+
 - Detects: Love, Transformation, Nature
 - Misses: Hope, Resilience, Wonder
 
 **After** (18+ dimensions):
+
 - Detects: Love, Transformation, Nature, Hope, Resilience, Wonder, Transcendence, Solitude
 - Discovers: New emotional patterns
 
----
+##
 
 ## MEASUREMENT
 
 ### Dimension Expansion Ratio
-```
+
+```text
 Starting:      8 dimensions (100%)
 With Pre-disc: 18 dimensions (225%)
 With Adaptive: 20-25+ dimensions (250-312%)
 ```
 
 ### Keyword Coverage
-```
+
+```text
 Before:  ~200 keywords (8 dimensions)
 After:   ~400+ keywords (18+ dimensions)
 Growth:  100%+ more emotional vocabulary
 ```
 
 ### Lexicon Richness
-```
+
+```text
 Same word, multiple meanings:
   "tears" → 3 dimensions (before) vs. 6 dimensions (after)
   "eternal" → 2 dimensions (before) vs. 5 dimensions (after)
   "bird" → 2 dimensions (before) vs. 6 dimensions (after)
 ```
 
----
-
 ## WHY YOU NEEDED THIS
 
-### Original Limitation:
-Your system was like a **translator that only knows 8 words**. No matter how much poetry you fed it, it could only recognize those 8 concepts.
+### Original Limitation
 
-### New Capability:
-Your system is now like a **linguist that learns new dialects**. As it processes poetry, it discovers the emotional vocabulary unique to each poet and era.
+Your system was like a **translator that only knows 8 words**. No matter how much poetry you fed it,
+it could only recognize those 8 concepts.
 
-### Result:
+### New Capability
+
+Your system is now like a **linguist that learns new dialects**. As it processes poetry, it
+discovers the emotional vocabulary unique to each poet and era.
+
+### Result
+
 - ✅ Recognizes classical poetry patterns
 - ✅ Discovers new emotional dimensions
 - ✅ Builds poet-specific vocabularies
 - ✅ Scales indefinitely with more data
 - ✅ Preserves your original insight (8 base dimensions) while expanding
 
----
+##
 
 ## NEXT: RUN THE ENHANCED SYSTEM
 
-The next time you run the Gutenberg processor:
-```bash
-./run_gutenberg_learning.sh
-```
+The next time you run the Gutenberg processor, watch for this in the output:
 
-Watch for this in the output:
-```
+```text
 [DIMENSIONS] Emotional Dimension Summary:
   Base dimensions: 8
   Pre-discovered dimensions: 10

@@ -1,25 +1,26 @@
-actionlint
-==========
-[![CI Badge][]][CI]
-[![API Document][api-badge]][apidoc]
+# actionlint
 
-[actionlint][repo] is a static checker for GitHub Actions workflow files. [Try it online!][playground]
+[![CI Badge][]][CI] [![API Document][api-badge]][apidoc]
+
+[actionlint][repo] is a static checker for GitHub Actions workflow files. [Try it
+online!][playground]
 
 Features:
 
 - **Syntax check for workflow files** to check unexpected or missing keys following [workflow syntax][syntax-doc]
 - **Strong type check for `${{ }}` expressions** to catch several semantic errors like access to not existing property,
-  type mismatches, ...
+type mismatches, ...
 - **Actions usage check** to check that inputs at `with:` and outputs in `steps.{id}.outputs` are correct
 - **Reusable workflow check** to check inputs/outputs/secrets of reusable workflows and workflow calls
 - **[shellcheck][] and [pyflakes][] integrations** for scripts at `run:`
 - **Security checks**; [script injection][script-injection-doc] by untrusted inputs, hard-coded credentials
 - **Other several useful checks**; [glob syntax][filter-pattern-doc] validation, dependencies check for `needs:`,
-  runner label validation, cron syntax validation, ...
+runner label validation, cron syntax validation, ...
 
 See [the full list](docs/checks.md) of checks done by actionlint.
 
-<img src="https://github.com/rhysd/ss/blob/master/actionlint/main.gif?raw=true" alt="actionlint reports 7 errors" width="806" height="492"/>
+<img src="https://github.com/rhysd/ss/blob/master/actionlint/main.gif?raw=true" alt="actionlint
+reports 7 errors" width="806" height="492"/>
 
 **Example of broken workflow:**
 
@@ -46,12 +47,14 @@ jobs:
           path: ~/.npm
           key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
         if: ${{ github.repository.permissions.admin == true }}
-      - run: npm install && npm test
+```text
+```text
 ```
 
 **actionlint reports 7 errors:**
 
 ```
+
 test.yaml:3:5: unexpected key "branch" for "push" section. expected one of "branches", "branches-ignore", "paths", "paths-ignore", "tags", "tags-ignore", "types", "workflows" [syntax-check]
   |
 3 |     branch: main
@@ -79,7 +82,8 @@ test.yaml:21:20: property "platform" is not defined in object type {os: string} 
 test.yaml:22:17: receiver of object dereference "permissions" must be type of object but got "string" [expression]
    |
 22 |         if: ${{ github.repository.permissions.admin == true }}
-   |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```text
 ```
 
 ## Why?
@@ -101,7 +105,8 @@ Install `actionlint` command by downloading [the released binary][releases] or b
 or run via Docker container.
 
 ```sh
-go install github.com/rhysd/actionlint/cmd/actionlint@latest
+```text
+```text
 ```
 
 Basically all you need to do is run the `actionlint` command in your repository. actionlint automatically detects workflows and
@@ -109,7 +114,9 @@ checks errors. actionlint focuses on finding out mistakes. It tries to catch err
 as minimal as possible.
 
 ```sh
+
 actionlint
+
 ```
 
 Another option to try actionlint is [the online playground][playground]. Your browser can run actionlint through WebAssembly.

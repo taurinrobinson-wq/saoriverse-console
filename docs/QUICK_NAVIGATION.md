@@ -2,23 +2,26 @@
 
 Welcome to SaoriVerse Console! This guide helps you find what you need quickly.
 
----
+##
 
 ## 🚀 Getting Started (5 Minutes)
 
 **First Time Here?** Start here:
-1. Read `DEVELOPER_QUICKSTART.md` - Everything you need to know
-2. Explore `docs/INDEX.md` - Navigation guide for all documentation
-3. Check `FILE_ORGANIZATION_GUIDE.md` - Where everything is located
+
+1. Read `DEVELOPER_QUICKSTART.md` - Everything you need to know 2. Explore `docs/INDEX.md` -
+Navigation guide for all documentation 3. Check `FILE_ORGANIZATION_GUIDE.md` - Where everything is
+located
 
 **Just Need to Run It?**
+
 ```bash
 python core/main_v2.py        # Start Streamlit dev app
 bash scripts/run_local.sh      # Run with full setup
-bash scripts/deploy.sh         # Deploy to production
+```text
+```text
 ```
 
----
+##
 
 ## 📚 Documentation Map
 
@@ -34,7 +37,7 @@ bash scripts/deploy.sh         # Deploy to production
 | Test & analysis reports | docs/reports/ | Various JSON & text files |
 | Historical context | docs/archives/ | Phase & sprint docs |
 
----
+##
 
 ## 🔧 Core Application Files
 
@@ -52,7 +55,7 @@ Located in `core/` directory:
 | relational_memory.py | Memory system |
 | And 3 more modules... | (See FILE_ORGANIZATION_GUIDE.md) |
 
----
+##
 
 ## 📊 Data Organization
 
@@ -65,7 +68,7 @@ Located in `data/` directory:
 | analysis/ | Analysis output files | Expandable |
 | exports/ | Export files | Expandable |
 
----
+##
 
 ## ⚙️ Configuration & Deployment
 
@@ -75,13 +78,14 @@ Located in `data/` directory:
 | scripts/ | Deployment and setup scripts | 2 files |
 | logs/ | Application runtime logs | 5 files |
 
----
+##
 
 ## 🎨 Features & Extensions
 
 Located in `emotional_os/` directory:
 
 9 modularized packages for features like:
+
 - UI components (emotional_os/ui/)
 - NLP parsing (emotional_os/parser/)
 - Learning system (emotional_os/learning/)
@@ -89,7 +93,7 @@ Located in `emotional_os/` directory:
 
 See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 
----
+##
 
 ## 🧪 Testing & Tools
 
@@ -100,15 +104,17 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 | tools/document_processing/ | Document handling tools |
 | tools/glyph_testing/ | Glyph validation tools |
 
----
+##
 
 ## 📖 Common Tasks
 
-### I want to...
+### I want to
 
 **Start the application**
+
 ```bash
-python core/main_v2.py
+
+```text
 ```
 
 **Find where a specific feature is**
@@ -124,13 +130,17 @@ python core/main_v2.py
 → Check `docs/archives/`
 
 **Deploy to production**
+
 ```bash
-bash scripts/deploy.sh
+```text
+```text
 ```
 
 **Set up locally**
+
 ```bash
-bash scripts/run_local.sh
+
+```text
 ```
 
 **Add a new feature**
@@ -139,7 +149,7 @@ bash scripts/run_local.sh
 **Debug an issue**
 → Check `logs/` directory for application logs
 
----
+##
 
 ## 🎯 Project Structure at a Glance
 
@@ -160,25 +170,27 @@ saoriverse-console/
 ├── emotional_os/             ← Feature modules
 ├── tools/                    ← Analysis and testing tools
 ├── tests/                    ← Test suites
-└── archive/                  ← Historical code
+```text
+```text
 ```
 
----
+##
 
 ## ❓ Need Help?
 
-1. **New to the project?** → `DEVELOPER_QUICKSTART.md`
-2. **Need to find a file?** → `FILE_ORGANIZATION_GUIDE.md`
-3. **Want architecture details?** → `docs/INDEX.md`
-4. **Need to deploy?** → `DEPLOYMENT_READINESS_REPORT.md`
-5. **Need documentation?** → `docs/INDEX.md` for complete navigation
+1. **New to the project?** → `DEVELOPER_QUICKSTART.md` 2. **Need to find a file?** →
+`FILE_ORGANIZATION_GUIDE.md` 3. **Want architecture details?** → `docs/INDEX.md` 4. **Need to
+deploy?** → `DEPLOYMENT_READINESS_REPORT.md` 5. **Need documentation?** → `docs/INDEX.md` for
+complete navigation
 
----
+##
 
 ## ✅ Quick Verification
 
 Everything working? Run this:
+
 ```bash
+
 python -c "
 import sys
 from pathlib import Path
@@ -186,9 +198,10 @@ sys.path.insert(0, str(Path.cwd()))
 from core.main_response_engine import translate_emotional_response
 print('✅ All systems operational!')
 "
+
 ```
 
----
+##
 
 **Last Updated**: December 3, 2025
 **Status**: ✅ Deployment Ready

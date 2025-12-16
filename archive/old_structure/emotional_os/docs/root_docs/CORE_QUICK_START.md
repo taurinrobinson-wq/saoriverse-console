@@ -9,12 +9,12 @@ from emotional_os.core import (
     # Main functions
     parse_input,
     LexiconLearner,
-    
+
     # Constants
     SIGNALS,
     ECM_GATES,
     SIGNAL_MAPPING,
-    
+
     # Path management
     signal_lexicon_path,
     learned_lexicon_path,
@@ -23,11 +23,12 @@ from emotional_os.core import (
 )
 ```
 
----
+##
 
 ## 📚 Common Tasks
 
 ### Parse User Input
+
 ```python
 from emotional_os.core import parse_input, signal_lexicon_path
 
@@ -43,6 +44,7 @@ print(result["glyphs"])   # Matched glyphs
 ```
 
 ### Learn from Conversation
+
 ```python
 from emotional_os.core import LexiconLearner
 
@@ -65,6 +67,7 @@ print(f"Learned {stats['learned_lexicon_size']} new words")
 ```
 
 ### Access Constants
+
 ```python
 from emotional_os.core import SIGNALS, ECM_GATES, EMOTIONAL_PATTERNS
 
@@ -82,6 +85,7 @@ feeling_exprs = patterns["feeling_expressions"]
 ```
 
 ### Manage Paths
+
 ```python
 from emotional_os.core.paths import PathManager, signal_lexicon_path
 
@@ -98,13 +102,14 @@ poetry_dir = pm.poetry_data_dir()
 pm.ensure_dir(poetry_dir)
 ```
 
----
+##
 
 ## 🔄 Backward Compatibility
 
 All old imports still work:
 
 ```python
+
 # ❌ Old (but still works)
 from parser.signal_parser import parse_input
 from learning.lexicon_learner import LexiconLearner
@@ -116,7 +121,7 @@ from emotional_os.core import parse_input, LexiconLearner
 # Both work identically!
 ```
 
----
+##
 
 ## 📁 File Organization
 
@@ -132,6 +137,7 @@ emotional_os/core/
 ### What's in Each File
 
 **`__init__.py`** - Main entry point
+
 ```python
 from emotional_os.core import (
     # Everything you need is exported here
@@ -144,44 +150,53 @@ from emotional_os.core import (
 ```
 
 **`constants.py`** - All configuration
+
 ```python
 SIGNALS = {'α': 'Devotion/Sacred', ...}
 ECM_GATES = {'Gate 2': ['β'], ...}
 EMOTIONAL_PATTERNS = {'feeling_expressions': [...], ...}
+
 # ... all constants centralized
 ```
 
 **`paths.py`** - Smart path resolution
+
 ```python
 PathManager()  # Resolves paths with intelligent fallbacks
 signal_lexicon_path()  # Returns path to signal lexicon
 learned_lexicon_path()  # Returns path to learned lexicon
+
 # ... handles migration/multiple locations seamlessly
 ```
 
 **`signal_parser.py`** - Core parsing engine
+
 ```python
 parse_input()  # Main parsing function
 parse_signals()  # Extract signals from text
 evaluate_gates()  # Activate ECM gates
 fetch_glyphs()  # Get matching glyphs
+
 # ... all signal parsing functionality
 ```
 
 **`lexicon_learner.py`** - Learning system
+
 ```python
 LexiconLearner()  # Main learner class
 learn_from_conversation()  # Extract patterns
 extract_emotional_patterns()  # Find emotional language
 update_lexicon_from_learning()  # Add new words to lexicon
+
 # ... all learning functionality
 ```
 
----
+##
 
 ## 🎯 Signals & Gates Reference
 
 ### 7 Core Signals
+
 ```python
 from emotional_os.core import SIGNALS
 
@@ -195,6 +210,7 @@ from emotional_os.core import SIGNALS
 ```
 
 ### 6 ECM Gates
+
 ```python
 from emotional_os.core import ECM_GATES
 
@@ -206,11 +222,12 @@ Gate 9:  α, β, γ, δ, ε, Ω    # Multiple signals
 Gate 10: θ                    # Grief alone
 ```
 
----
+##
 
 ## 🚀 Advanced Usage
 
 ### Use Custom Lexicon Paths
+
 ```python
 from emotional_os.core import LexiconLearner
 
@@ -220,6 +237,7 @@ learner = LexiconLearner(
 ```
 
 ### Process Multiple Inputs
+
 ```python
 from emotional_os.core import parse_input, signal_lexicon_path
 
@@ -239,6 +257,7 @@ for user_input in inputs:
 ```
 
 ### Get Learning Statistics
+
 ```python
 from emotional_os.core import LexiconLearner
 
@@ -252,12 +271,14 @@ print(f"Last updated: {stats['last_updated']}")
 print(f"Top learned words: {stats['top_learned_words']}")
 ```
 
----
+##
 
 ## 🐛 Troubleshooting
 
 ### Import Error?
+
 ```python
+
 # Make sure you're using the canonical import:
 from emotional_os.core import parse_input  # ✅ Correct
 
@@ -266,6 +287,7 @@ from emotional_os.glyphs.signal_parser import parse_input  # ❌ Works but outda
 ```
 
 ### Path Not Found?
+
 ```python
 from emotional_os.core.paths import signal_lexicon_path
 
@@ -274,12 +296,16 @@ print(f"Resolved path: {path}")
 print(f"Exists: {path.exists()}")
 
 # If not found, check these locations:
+
 # - parser/signal_lexicon.json
+
 # - data/lexicons/signal_lexicon.json
+
 # - emotional_os/parser/signal_lexicon.json
 ```
 
 ### Lexicon Not Updating?
+
 ```python
 from emotional_os.core import LexiconLearner
 
@@ -292,7 +318,7 @@ from emotional_os.core.paths import learned_lexicon_path
 print(learned_lexicon_path())
 ```
 
----
+##
 
 ## 📝 Migration Checklist
 
@@ -307,7 +333,7 @@ Moving existing code to canonical imports?
 - [ ] Test that code still works
 - [ ] Commit with message: "Migrate: Use canonical emotional_os.core imports"
 
----
+##
 
 ## 🎓 Learning Path
 
@@ -318,7 +344,7 @@ Moving existing code to canonical imports?
 5. **Customize lexicons** - Add new words and emotional mappings
 6. **Integrate with glyphs** - Use parsed signals to fetch glyphs
 
----
+##
 
 ## 📚 Documentation
 
@@ -326,7 +352,7 @@ Moving existing code to canonical imports?
 - **CONSOLIDATION_COMPLETE.md** - Migration guide for the consolidation
 - **CONSOLIDATION_STATUS.md** - Summary of what was achieved
 
----
+##
 
 ## 💡 Pro Tips
 
@@ -336,11 +362,12 @@ Moving existing code to canonical imports?
 4. **Test lexicon learning** - New words get added automatically
 5. **Use get_learning_stats()** - Monitor what the system is learning
 
----
+##
 
-## 🎉 You're All Set!
+## 🎉 You're All Set
 
 The consolidation is complete and working. Your codebase is now:
+
 - ✅ Cleaner (no duplication)
 - ✅ Faster to maintain (single source of truth)
 - ✅ Easier to understand (clear structure)

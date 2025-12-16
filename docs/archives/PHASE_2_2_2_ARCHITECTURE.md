@@ -170,7 +170,7 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
----
+##
 
 ## Fallback Paths
 
@@ -205,7 +205,7 @@
     └─────────────────────┘
 ```
 
----
+##
 
 ## Component Interactions
 
@@ -268,7 +268,7 @@
                         └────────────┘
 ```
 
----
+##
 
 ## Glyph System Integration
 
@@ -293,7 +293,7 @@ Affect  →  Response with Glyph Embedded
 
 **Solution**: Direct affect→response pipeline, glyph names conversational
 
----
+##
 
 ## Response Categories & Tone Routing
 
@@ -310,7 +310,7 @@ confused         (any)            → confused
 neutral          (any)            → calm
 ```
 
----
+##
 
 ## Example Response Cascade
 
@@ -350,7 +350,7 @@ Input: "I don't know what I'm feeling"
 └─ Output: 48 chars (generic but safe) ✓
 ```
 
----
+##
 
 ## Performance Profile
 
@@ -370,7 +370,7 @@ Network calls: 0 (pure Python)
 File I/O: 0 (preloaded)
 ```
 
----
+##
 
 ## Deployment Checklist
 
@@ -401,6 +401,6 @@ File I/O: 0 (preloaded)
 - Backward compatible ✓
 - Fallback mechanisms ✓
 
----
+##
 
 **Phase 2.2.2: Glyph-Aware Response Composition is fully deployed and operational.**

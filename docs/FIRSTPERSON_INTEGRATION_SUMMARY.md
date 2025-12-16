@@ -2,29 +2,39 @@
 
 ## ✨ What Just Happened
 
-Your Velinor game now has **emotionally-aware NPC responses** through FirstPerson integration. NPCs adapt their dialogue in real-time based on your emotional state.
+Your Velinor game now has **emotionally-aware NPC responses** through FirstPerson integration. NPCs
+adapt their dialogue in real-time based on your emotional state.
 
 ## 🎯 The Integration
 
 ### Before
-```
-Player: "I'm overwhelmed"
-NPC:    "I see. What would you like to do?"
+
+```text
 ```
 
-### After (With FirstPerson)
+Player: "I'm overwhelmed" NPC:    "I see. What would you like to do?"
+
 ```
-Player: "I'm overwhelmed"
-         ↓ [FirstPerson Analysis]
+
+
+
+### After (With FirstPerson)
+```text
+```text
+```
+
+Player: "I'm overwhelmed" ↓ [FirstPerson Analysis]
          ├─ Tone: heavy
          ├─ Theme: burden/overwhelm
          ├─ Valence: -0.7 (quite negative)
          └─ Intensity: 0.8 (strong emotion)
-         ↓ [NPC Response Generation]
-NPC:    "I hear the weight in that. The burden you're carrying—
-         I feel it. What needs to be said about it? Sometimes 
-         the weight lessens when we name it."
+↓ [NPC Response Generation] NPC:    "I hear the weight in that. The burden you're carrying— I feel
+it. What needs to be said about it? Sometimes the weight lessens when we name it."
+
 ```
+
+
+
 
 ## 📊 Emotional Analysis in Action
 
@@ -60,12 +70,20 @@ NPC:    "I hear the weight in that. The burden you're carrying—
 ## 🧠 How It Works
 
 ### 1. Player Input
-```
-"I'm not sure I can handle this responsibility"
+
+```text
 ```
 
+"I'm not sure I can handle this responsibility"
+
+```
+
+
+
 ### 2. FirstPerson Analysis
+
 ```python
+
 affect_parser.analyze_affect(input)
 → {
     'tone': 'heavy',
@@ -77,63 +95,70 @@ affect_parser.analyze_affect(input)
 memory.record_turn(input, affect, theme)
 → Tracks conversation history
 → Detects patterns across turns
-→ Measures emotional trajectory
+
+```text
 ```
 
 ### 3. Game Engine Routes
+
 ```python
-orchestrator.process_player_action(player_input)
-→ Applies emotional analysis
-→ Updates game state
-→ Calls NPC dialogue generation
+orchestrator.process_player_action(player_input) → Applies emotional analysis → Updates game state
+```text
+```text
 ```
 
 ### 4. NPC Response
+
 ```python
-_generate_emotionally_aware_response(
-    emotional_tone='heavy',
-    detected_theme='general',
-    valence=-0.6,
-    memory_context={...}
-)
-→ "I hear the weight in that. The path of responsibility 
-   can feel immense. What needs to be said about it?"
+
+_generate_emotionally_aware_response( emotional_tone='heavy', detected_theme='general',
+valence=-0.6, memory_context={...} ) → "I hear the weight in that. The path of responsibility
+
+```text
 ```
 
 ### 5. Display in Chat
+
 ```
-NPC: "I hear the weight in that. The path of responsibility 
-     can feel immense. What needs to be said about it?"
+NPC: "I hear the weight in that. The path of responsibility
+```text
+```text
 ```
 
 ## 💎 Key Features
 
 ### ✅ Real-Time Emotional Analysis
+
 - Analyzes every player input instantly
 - Extracts emotional tone, theme, intensity
 - No delay or latency
 
 ### ✅ Conversation Memory
+
 - Tracks all turns with emotional context
 - Detects recurring themes
 - Measures emotional trajectory (improving/worsening/stable)
 
 ### ✅ Adaptive NPC Responses
+
 - Opening adjusts to emotional tone
 - Middle acknowledges themes and patterns
 - Closing invites appropriate depth of exploration
 
 ### ✅ Pattern Recognition
+
 - Notices when you mention same theme repeatedly
 - Acknowledges the pattern: "I'm noticing grief keeps coming back"
 - Adapts responses accordingly
 
 ### ✅ Emotional Growth Awareness
+
 - Detects when emotions shift from negative to positive
 - Affirms improvements: "I'm noticing a shift. What's helping?"
 - Supports ongoing emotional journey
 
 ### ✅ No Configuration Needed
+
 - Works immediately on local play
 - All analysis happens client-side
 - No external API calls required
@@ -141,27 +166,32 @@ NPC: "I hear the weight in that. The path of responsibility
 ## 🎮 Example Gameplay Moments
 
 ### Moment 1: Initial Contact
+
 ```
+
 You:   "I don't know if I'm ready for this"
 NPC:   "I hear the uncertainty in that. That's real.
-        Tell me more about what concerns you."
+
+```text
 ```
 
 ### Moment 2: Recurring Theme Recognition
+
 ```
-You:   "I keep coming back to my doubts"
-NPC:   "I'm hearing doubt come up again. That tells me 
-        something. What's beneath it?"
-[FirstPerson detected 'doubt' appears in turn 1, 3, 5]
+You:   "I keep coming back to my doubts" NPC:   "I'm hearing doubt come up again. That tells me
+something. What's beneath it?"
+```text
+```text
 ```
 
 ### Moment 3: Emotional Shift
+
 ```
-You:   "But maybe I'm stronger than I thought"
-NPC:   "There's something to sit with there. I'm also 
-        noticing a shift in what you're saying. 
-        What's helping?"
-[FirstPerson measured: valence improved from -0.8 to +0.1]
+
+You:   "But maybe I'm stronger than I thought" NPC:   "There's something to sit with there. I'm also
+noticing a shift in what you're saying. What's helping?"
+
+```text
 ```
 
 ## 📈 Impact on Player Experience
@@ -177,11 +207,13 @@ NPC:   "There's something to sit with there. I'm also
 ## 🔐 Privacy & Security
 
 ✅ **All processing is local**
+
 - Emotional analysis happens on your device
 - Conversation history stored in session memory only
 - No data sent to external servers (by default)
 
 ✅ **No configuration required**
+
 - Works immediately
 - No secrets, keys, or authentication needed
 - Optional integration with external systems if desired
@@ -189,24 +221,33 @@ NPC:   "There's something to sit with there. I'm also
 ## 🚀 Ready to Play
 
 ### Quick Start
+
 ```bash
+
 # The integration is already active!
 streamlit run velinor_app.py
 
 # Game launches at http://localhost:8501
+
 # FirstPerson automatically analyzes your inputs
-# NPCs respond with emotional awareness
+
+```text
+```text
 ```
 
 ### Validating the Integration
+
 ```bash
+
 python3 FIRSTPERSON_INTEGRATION_TEST.py
-# Output shows all 5 integration tests passing ✓
+
+```text
 ```
 
 ## 📚 Documentation
 
 Read more:
+
 - **Quick Start**: `FIRSTPERSON_QUICK_REFERENCE.md`
 - **Technical Details**: `FIRSTPERSON_VELINOR_INTEGRATION_GUIDE.md`
 - **Deployment**: `VELINOR_DEPLOYMENT_SETUP.md`
@@ -215,18 +256,21 @@ Read more:
 ## 🎯 What This Enables
 
 ### For Players
+
 - Deeper emotional connection to NPCs
 - Responses that acknowledge your emotional state
 - Recognition of recurring themes in your journey
 - Affirmation of emotional growth
 
 ### For Developers
+
 - Template for FirstPerson integration in games
 - Example of real-time emotional analysis
 - Pattern in conversational game design
 - Foundation for glyph system integration
 
 ### For Future Enhancement
+
 - Store emotional trajectories for player profiles
 - Use patterns to unlock special story branches
 - Integrate with glyph system (emotional resonance)
@@ -251,13 +295,12 @@ Read more:
 **Your Velinor game now delivers emotionally responsive, contextually aware NPC dialogue that adapts to your emotional state in real-time.**
 
 ```
-Type any emotion → FirstPerson analyzes instantly → 
-NPC responds with personalized, emotionally-aware dialogue → 
-Conversation memory tracks themes and patterns → 
-Your emotional journey is reflected and honored in the game
+Type any emotion → FirstPerson analyzes instantly → NPC responds with personalized,
+emotionally-aware dialogue → Conversation memory tracks themes and patterns → Your emotional journey
+is reflected and honored in the game
 ```
 
----
+##
 
 **Status: ✅ COMPLETE & READY TO PLAY**
 

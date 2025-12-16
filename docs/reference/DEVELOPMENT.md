@@ -12,33 +12,42 @@
 
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
+```text
+```text
 ```
 
 ### 2. Set up Python environment
 
 ```bash
+
+
 # Create virtual environment
 python -m venv .venv
 
 # Activate virtual environment
+
 # On Linux/macOS:
 source .venv/bin/activate
+
 # On Windows:
-.venv\Scripts\activate
+
+```text
 ```
 
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+```text
+```text
 ```
 
 ### 4. Set up pre-commit hooks (optional but recommended)
 
 ```bash
+
 pip install pre-commit
-pre-commit install
+
+```text
 ```
 
 This will automatically run checks before each commit.
@@ -48,34 +57,41 @@ This will automatically run checks before each commit.
 ### Quick test run
 
 ```bash
-python tests/run_tests.py
+```text
+```text
 ```
 
 ### Run specific test category
 
 ```bash
+
 python tests/run_tests.py unit
 python tests/run_tests.py integration
-python tests/run_tests.py performance
+
+```text
 ```
 
 ### Generate coverage report
 
 ```bash
 pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
-# Open htmlcov/index.html in browser to view coverage
+
+```text
+```text
 ```
 
 ### Run with more verbose output
 
 ```bash
-pytest tests/ -vv
+
+```text
 ```
 
 ### Run specific test file
 
 ```bash
-pytest tests/unit/test_signal_matching.py -v
+```text
+```text
 ```
 
 ## Pre-commit Hooks
@@ -83,22 +99,28 @@ pytest tests/unit/test_signal_matching.py -v
 ### View available hooks
 
 ```bash
-pre-commit run --all-files  # Run all checks
+
+```text
 ```
 
 ### Run specific hook
 
 ```bash
 pre-commit run ruff --all-files
-pre-commit run trailing-whitespace --all-files
+```text
+```text
 ```
 
 ### Run tests as a pre-commit hook
 
 ```bash
+
+
 # Uncomment the pytest stage in .pre-commit-config.yaml to enable on commit
+
 # Then manually run:
-pre-commit run --hook-id pytest
+
+```text
 ```
 
 ## Code Quality
@@ -106,19 +128,22 @@ pre-commit run --hook-id pytest
 ### Linting with Ruff
 
 ```bash
-ruff check . --fix
+```text
+```text
 ```
 
 ### Format code
 
 ```bash
-ruff format .
+
+```text
 ```
 
 ### Type checking with mypy (manual)
 
 ```bash
-pre-commit run mypy --all-files
+```text
+```text
 ```
 
 ## Common Workflows
@@ -126,21 +151,25 @@ pre-commit run mypy --all-files
 ### Create a feature branch
 
 ```bash
-git checkout -b feature/my-feature
+
+```text
 ```
 
 ### Commit changes
 
 ```bash
+
 # Pre-commit hooks will run automatically if configured
 git add .
-git commit -m "feat: description of changes"
+```text
+```text
 ```
 
 ### Push to remote
 
 ```bash
-git push origin feature/my-feature
+
+```text
 ```
 
 ### Create pull request
@@ -154,48 +183,59 @@ git push origin feature/my-feature
 ## Continuous Integration
 
 Tests run automatically on:
+
 - Push to `main` or `develop` branches
 - All pull requests
 
-View results in GitHub Actions: https://github.com/taurinrobinson-wq/saoriverse-console/actions
+View results in GitHub Actions: <https://github.com/taurinrobinson-wq/saoriverse-console/actions>
 
 ## Troubleshooting
 
 ### Virtual environment not activating
 
 ```bash
+
 # Make sure you're in the project root
 cd /path/to/saoriverse-console
 
 # Try with explicit path
-source /path/to/.venv/bin/activate
+```text
+```text
 ```
 
 ### Tests failing with import errors
 
 ```bash
+
+
 # Ensure all dependencies are installed
 pip install -r requirements.txt
 
 # Reinstall in case of issues
-pip install --force-reinstall -r requirements.txt
+
+```text
 ```
 
 ### Pre-commit hooks not running
 
 ```bash
+
 # Reinstall hooks
-pre-commit install --install-hooks
+```text
+```text
 ```
 
 ### Coverage report not generating
 
 ```bash
+
+
 # Install coverage tools
 pip install pytest-cov
 
 # Generate manually
 pytest tests/ --cov=emotional_os --cov-report=html
+
 ```
 
 ## Questions?

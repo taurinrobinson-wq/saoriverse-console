@@ -4,7 +4,7 @@
 
 The code you asked about loads **clean poetry to train your emotional AI**. It's not just data sitting there - it's the "textbook" your system learns from to understand what users really mean.
 
----
+##
 
 ## What's Actually Happening
 
@@ -42,7 +42,7 @@ The code you asked about loads **clean poetry to train your emotional AI**. It's
 └─────────────────────────────────────────────────────────────────┘
 ```
 
----
+##
 
 ## The Code Explained
 
@@ -67,11 +67,12 @@ for collection_name, text in data.items():
     # This learns emotional patterns from the poetry
 ```
 
----
+##
 
 ## Why This Matters for User Input Parsing
 
 **Without this system:**
+
 ```
 User: "I feel lost in the darkness"
 System parses: [NEGATIVE_WORD, LOCATION, NEGATIVE_NOUN]
@@ -79,6 +80,7 @@ Result: Misses emotional depth
 ```
 
 **With clean poetry training:**
+
 ```
 User: "I feel lost in the darkness"
 System recognizes pattern from:
@@ -89,31 +91,36 @@ System understands: EMOTIONAL_DISORIENTATION + POTENTIAL_AWAKENING
 Result: Appropriate, empathetic response
 ```
 
----
+##
 
 ## The Four Processing Modes
 
 The `ProcessingModeAdapter` provides different formats for different uses:
 
 ```python
+
 # For signal extraction (discovering emotional dimensions)
 data = adapter.for_signal_extraction()
+
 # Returns: {name: clean_text}
 
 # For lexicon learning (mapping words to emotions)
 data = adapter.for_lexicon_learning()
+
 # Returns: {name: clean_text}
 
 # For glyph generation (creating emotional symbols)
 data = adapter.for_glyph_generation()
+
 # Returns: [(name, clean_text), ...]
 
 # For ritual processing (creating responses)
 data = adapter.for_ritual_processing()
+
 # Returns: {name: clean_text}
 ```
 
----
+##
 
 ## Real World Example: Training Your System
 
@@ -133,12 +140,12 @@ extractor = AdaptiveSignalExtractor()
 print("Training on poetry...")
 for poet_collection, poetry_text in poetry_data.items():
     print(f"  Learning from {poet_collection}")
-    
+
     # Extract emotional signals from poetry
-    # This discovers dimensions like: solitude, transcendence, 
+    # This discovers dimensions like: solitude, transcendence,
     # melancholy, hope, etc.
     signals = extractor.extract(poetry_text)
-    
+
     # Your system now knows what these patterns look like in real language
 
 print("✓ System trained on 528K+ words")
@@ -147,18 +154,21 @@ print("✓ Emotional patterns discovered and registered")
 # Now when user inputs text, system uses these patterns
 user_input = "I wander through the night, seeking something I can't name"
 understanding = extractor.extract(user_input)
+
 # System recognizes: WANDERING + SEEKING + MYSTERY pattern
+
 # Similar to Wordsworth's themes of spiritual journey
 ```
 
----
+##
 
 ## Why "Clean" Matters
 
 **OCR-corrupted poetry:**
+
 ```
 "Hope is the thing with fea-
-thers" 
+thers"
 
 → System learns broken pattern: "fea-thers"
 → Misses the elegance and completeness
@@ -166,6 +176,7 @@ thers"
 ```
 
 **Clean poetry:**
+
 ```
 "Hope is the thing with feathers"
 
@@ -174,7 +185,7 @@ thers"
 → Emotional dimensions are accurate
 ```
 
----
+##
 
 ## Summary
 
@@ -185,17 +196,22 @@ thers"
 **Answer:** Users express emotions like poets - your system learns poetry patterns, then recognizes those same patterns in user input
 
 **Question:** What does each line do?
+
 ```python
 from poetry_data_hub import PoetryDataHub, ProcessingModeAdapter
+
 # Import the data hub system
 
 hub = PoetryDataHub("poetry_data")
+
 # Open the database with 528K+ clean words
 
 adapter = ProcessingModeAdapter(hub)
+
 # Create adapter to format data for your use
 
 data = adapter.for_signal_extraction()
+
 # Get poetry formatted for signal extraction training
 
 for collection_name, text in data.items():
@@ -204,13 +220,14 @@ for collection_name, text in data.items():
     # System learns emotional patterns from each poet
 ```
 
----
+##
 
 ## The Bottom Line
 
 Poetry is **the language of emotion** - it's how humans express the deepest feelings. By training your system on clean, validated poetry, you give it a "lexicon of emotion" to recognize when users input text.
 
 This makes your system:
+
 - **More accurate** - Understands nuance and metaphor
 - **More empathetic** - Recognizes emotional weight
 - **More versatile** - Handles varied expressions of the same emotion

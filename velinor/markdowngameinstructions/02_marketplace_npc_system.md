@@ -1,33 +1,41 @@
 # Marketplace NPC System: Trust, Dynamics & Dialogue
 
 ## Overview
-The marketplace is a **trust economy** where NPCs vary in openness, but all require patience and genuine engagement. Crime wave context creates tension that impacts all encounters.
 
----
+The marketplace is a **trust economy** where NPCs vary in openness, but all require patience and
+genuine engagement. Crime wave context creates tension that impacts all encounters.
+
+##
 
 ## NPC Archetype 1: Mistrusting NPCs
 
 ### Behavior Profile
+
 - **Stance**: Guarded, suspicious, terse
 - **Motivation**: Outsiders historically exploit; locals protect resources
 - **Trigger**: Player is visibly new, unfamiliar with city rhythms
 - **Barrier**: High initial trust cost; requires multiple proof points
 
 ### Example NPCs
+
 - **Nima** (Market Guard): Sharp, assessing, protective of community
 - **Older Trader**: Weathered, reluctant to share, tests through challenge
 - **Shrine Keeper**: Skeptical of outsiders seeking sacred knowledge
 
 ### Dialogue Pattern: First Encounter
 
+```sql
 ```
+
 NPC: "You're not from here. Outsiders take more than they give."
 
-Player Options:
-A) "I've lost too much to take more."  → Shows vulnerability
-B) "I'll prove I can give back."       → Shows commitment
-C) "Then don't trust me yet. Just watch." → Shows respect for caution
+Player Options: A) "I've lost too much to take more."  → Shows vulnerability B) "I'll prove I can
+give back."       → Shows commitment C) "Then don't trust me yet. Just watch." → Shows respect for
+caution
+
 ```
+
+
 
 ### Trust Building Mechanics
 - **Small Acts**: Fair barter, helping with minor tasks, listening without interruption
@@ -39,8 +47,7 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 - **Early Trust**: Vague hints, warnings about dangers
 - **Mid Trust**: Fragments of glyph lore, directions to hidden shrines
 - **High Trust**: Full stories, personal revelations, alliance
-
----
+##
 
 ## NPC Archetype 2: Welcoming NPCs (Weary by Necessity)
 
@@ -56,15 +63,20 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 - **Scribe**: Eager to document stories, seeks connection through narratives
 
 ### Dialogue Pattern: First Encounter
-
+```text
+```text
 ```
+
 NPC: "I'd welcome you with open arms, but too many hands here have stolen."
 
-Player Options:
-A) "I'm not here to steal. I'm here to listen."   → Shows purpose alignment
-B) "I know what it's like to lose trust."        → Mirrors their experience
-C) "Then let me earn it, slowly."                → Respects their process
+Player Options: A) "I'm not here to steal. I'm here to listen."   → Shows purpose alignment B) "I
+know what it's like to lose trust."        → Mirrors their experience C) "Then let me earn it,
+slowly."                → Respects their process
+
 ```
+
+
+
 
 ### Trust Building Mechanics
 - **Early Engagement**: Offer small information early to establish goodwill
@@ -76,8 +88,7 @@ C) "Then let me earn it, slowly."                → Respects their process
 - **Early Trust**: Orientation, marketplace rumors, initial warmth
 - **Mid Trust**: Personal stories, glyph fragments, emotional openness
 - **High Trust**: Intimate revelations, alliance, possible adventure hooks
-
----
+##
 
 ## Crime Wave Context
 
@@ -98,25 +109,29 @@ C) "Then let me earn it, slowly."                → Respects their process
 - **Clues**: Hidden glyph fragments tied to stolen goods (e.g., [Ruuñ] glyphs in recovered items)
 - **Resolution**: Help recover goods, identify perpetrator, restore trust
 - **Reward**: Accelerated trust progression with victims + new glyph access
-
----
+##
 
 ## Trust Meter (Optional Implementation)
 
+```text
 ```
+
 Per NPC:
 [==========] Mistrusting NPC (10 points to unlock mid-tier dialogue)
 [======    ] Welcoming NPC (8 points to unlock mid-tier dialogue)
 
 Actions:
+
 - Fair barter: +1 point
 - Listen to full story: +2 points
 - Help with task: +3 points
 - Resolve crime: +5 points
 - Challenge or ignore advice: -2 points
+
 ```
 
----
+
+##
 
 ## Social Dynamics: The Marketplace Web
 
@@ -127,14 +142,20 @@ Actions:
 - Trust is not isolated; it propagates through the marketplace community
 
 ### Example:
+```text
+```text
 ```
+
 Player helps Nima (mistrusting guard) find stolen goods
 → Nima tells Ravi (welcoming NPC) the player is reliable
 → Ravi becomes even more welcoming
 → But Nima's rival, a black market trader, becomes wary
+
 ```
 
----
+
+
+##
 
 ## Core Dialogue Principle
 

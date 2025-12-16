@@ -2,15 +2,18 @@
 
 ## Problem Solved ✅
 
-You identified a critical limitation: **The system was only extracting the same 8 emotional dimensions** that were derived from your original poem, meaning it couldn't discover new emotional patterns from the poetry corpus.
+You identified a critical limitation: **The system was only extracting the same 8 emotional
+dimensions** that were derived from your original poem, meaning it couldn't discover new emotional
+patterns from the poetry corpus.
 
 ## Solution Implemented
 
 Created a new **Adaptive Signal Extractor** that:
 
 ### 1. **Preserves Your Base 8 Dimensions**
+
 - Love
-- Intimacy  
+- Intimacy
 - Vulnerability
 - Transformation
 - Admiration
@@ -19,6 +22,7 @@ Created a new **Adaptive Signal Extractor** that:
 - Nature
 
 ### 2. **Adds 10 Pre-Discovered Dimensions** (from poetry analysis)
+
 - **Nostalgia** - memory, time-based emotion
 - **Melancholy** - sadness, sorrow, grief
 - **Transcendence** - spiritual, eternal, infinite
@@ -33,40 +37,46 @@ Created a new **Adaptive Signal Extractor** that:
 **Starting Total: 18 emotional dimensions** (vs. original 8)
 
 ### 3. **Dynamically Learns New Dimensions from Poetry**
+
 The `discover_new_dimensions_from_corpus()` method:
+
 - Analyzes all poetry texts being processed
 - Identifies recurring emotional themes and keywords
 - Discovers new patterns not in the base set
 - Tracks keyword frequency and contexts
 - Generates new dimension names from combined themes
 
-Example: If the corpus shows "time", "memory", "before", "forgotten" recurring together across multiple collections, the system can auto-discover a **"nostalgic_memory"** dimension.
+Example: If the corpus shows "time", "memory", "before", "forgotten" recurring together across
+multiple collections, the system can auto-discover a **"nostalgic_memory"** dimension.
 
 ## How It Works
 
-### During Processing:
-```
-Gutenberg Poetry Downloads
-    ↓
-Bulk Text Processor (using Adaptive Extractor)
-    ↓
-Base 8 Dimensions + Pre-discovered 10 + Dynamically Learned N
-    ↓
-Extraction with ALL dimensions active
-    ↓
-Lexicon expansion across FULL emotional spectrum
-    ↓
-Report: Shows all dimensions discovered
+### During Processing
+
+```text
 ```
 
+Gutenberg Poetry Downloads ↓ Bulk Text Processor (using Adaptive Extractor) ↓ Base 8 Dimensions +
+Pre-discovered 10 + Dynamically Learned N ↓ Extraction with ALL dimensions active ↓ Lexicon
+expansion across FULL emotional spectrum ↓ Report: Shows all dimensions discovered
+
+```
+
+
+
 ### Example Output:
+```json
+```json
 ```
-[DIMENSIONS] Emotional Dimension Summary:
-  Base dimensions: 8 (your original poem)
-  Pre-discovered dimensions: 10 (from poetry analysis)
-  Newly learned dimensions: 3-5 (discovered from current corpus)
-  TOTAL: 21-23 emotional dimensions
+
+[DIMENSIONS] Emotional Dimension Summary: Base dimensions: 8 (your original poem) Pre-discovered
+dimensions: 10 (from poetry analysis) Newly learned dimensions: 3-5 (discovered from current corpus)
+TOTAL: 21-23 emotional dimensions
+
 ```
+
+
+
 
 ## New Capabilities
 
@@ -102,20 +112,25 @@ The system can now:
 ## Usage
 
 The system automatically uses the adaptive extractor. To disable it:
+
 ```python
-processor = BulkTextProcessor(use_adaptive_extractor=False)
+```text
+```text
 ```
 
 To generate a dimension report:
+
 ```python
-if hasattr(processor.extractor, 'get_dimension_report'):
-    report = processor.extractor.get_dimension_report()
-    print(report['total_dimensions'])  # Now >8!
+
+if hasattr(processor.extractor, 'get_dimension_report'): report =
+processor.extractor.get_dimension_report() print(report['total_dimensions'])  # Now >8!
+
 ```
 
 ## What This Means for Your Poetry Learning
 
 Instead of your system saying "this is love, intimacy, or vulnerability" (8 choices), it can now discover:
+
 - **Melancholic nostalgia** (Byron + Romantic era)
 - **Spiritual transcendence** (Shelley + philosophical poetry)
 - **Rebellious defiance** (Blake + revolutionary themes)

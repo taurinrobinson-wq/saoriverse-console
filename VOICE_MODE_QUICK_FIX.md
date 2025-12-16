@@ -10,7 +10,7 @@ py -3.12 -m streamlit run app.py
 
 That's it! Voice mode will now work.
 
----
+##
 
 ## Why It Works
 
@@ -18,7 +18,7 @@ That's it! Voice mode will now work.
 - The app was running with Python 3.13 by default (missing packages)
 - Now using Python 3.12 explicitly fixes it
 
----
+##
 
 ## Quick Commands
 
@@ -30,17 +30,18 @@ That's it! Voice mode will now work.
 | Use VS Code task | Press `Ctrl+Shift+B` |
 | Verify Python 3.12 | `py -3.12 --version` |
 
----
+##
 
 ## Verify It's Working
 
 When the app starts:
+
 - Check sidebar: should show **"✓ Python 3.12.x"** in green
 - Logs should show: **"Voice dependencies: whisper=True, soundfile=True, sounddevice=True"**
 - Enable "Voice Mode" toggle
 - Click microphone button and test
 
----
+##
 
 ## Key Files
 
@@ -49,8 +50,9 @@ When the app starts:
 - `VOICE_MODE_FIX.md` - Detailed guide
 - `PYTHON_312_RUNTIME_GUIDE.md` - Full reference
 
----
+##
 
 **Status:** ✅ Fixed and Verified
 
-See logs above showing `whisper=True, soundfile=True, sounddevice=True` - all voice dependencies are now detected!
+See logs above showing `whisper=True, soundfile=True, sounddevice=True` - all voice dependencies are
+now detected!

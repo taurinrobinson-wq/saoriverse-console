@@ -15,11 +15,13 @@
 ✅ **Settings Dashboard** - Preferences, conversation management, privacy controls
 ✅ **Streamlined UI** - Bottom tab navigation (Chat, Settings) with minimal cognitive load
 
----
+##
 
 ## Project Structure
 
+```text
 ```
+
 firstperson/
 ├── App.js                          # Main entry point with navigation setup
 ├── index.js                        # Expo app entry
@@ -42,9 +44,11 @@ firstperson/
 │       ├── StorageService.js      # 🆕 Local persistence layer
 │       └── SyncService.js         # 🆕 Offline-first sync
 └── assets/                         # Icons, images, splash screens
+
 ```
 
----
+
+##
 
 ## Core Components & Services
 
@@ -67,16 +71,21 @@ Manages all local data using `@react-native-async-storage/async-storage`.
 - `setOnboardingComplete(userId)` / `isOnboardingComplete()` - Track onboarding state
 
 **Storage Keys:**
-
+```text
+```text
 ```
+
 fp_conversations         # All conversations and messages
 fp_memory_capsules      # Relational context snapshots
 fp_user_prefs           # User preferences (theme, notifications, etc)
 fp_sync_queue           # Messages queued during offline
 fp_onboarding_complete  # Onboarding completion marker
+
 ```
 
----
+
+
+##
 
 #### `ApiService.js`
 
@@ -106,10 +115,11 @@ Handles all backend communication with prosody parsing and offline detection.
     { name: "Ember", score: 0.92, symbol: "🔥", description: "..." },
     { name: "Echo", score: 0.78, symbol: "📍", description: "..." }
   ]
-}
+```text
+```text
 ```
 
----
+##
 
 #### `SyncService.js`
 
@@ -120,12 +130,12 @@ Implements offline-first sync with listener pattern for UI updates.
 - `performSync()` - Process sync queue, retry failed messages
   - Returns: `{ success, syncedCount, errors? }`
   - Notifies listeners of progress
-  
+
 - `getSyncStatus()` - Current sync state
 - `onSyncStatusChange(callback)` - Subscribe to sync events
   - Fires: `{ syncing, syncedCount, errors?, queuedMessages }`
 
----
+##
 
 ### 2. **Screen Components**
 
@@ -152,7 +162,7 @@ Main chat interface with real-time message display and prosody rendering.
 5. Memory capsule created (every 5 messages)
 6. All persisted to AsyncStorage
 
----
+##
 
 #### `OnboardingScreen.js`
 
@@ -173,7 +183,7 @@ Main chat interface with real-time message display and prosody rendering.
 - Marks onboarding complete
 - Navigates to main app on completion
 
----
+##
 
 #### `SettingsScreen.js`
 
@@ -188,7 +198,7 @@ User preferences, conversation management, and privacy controls.
 5. **About** - Version, backend info
 6. **Danger Zone** - Clear all data (with confirmation)
 
----
+##
 
 ### 3. **Component Components**
 
@@ -199,6 +209,7 @@ Displays individual messages with optional prosody metadata.
 **Props:**
 
 ```javascript
+
 {
   message: {
     role: "user" | "assistant",
@@ -207,7 +218,8 @@ Displays individual messages with optional prosody metadata.
     timestamp?: ISO string,
   },
   theme: "light" | "dark"
-}
+
+```text
 ```
 
 **Rendering:**
@@ -217,7 +229,7 @@ Displays individual messages with optional prosody metadata.
 - Prosody metadata: emotion emoji + confidence, glyph symbols, tone
 - Timestamp in subtle text below message
 
----
+##
 
 #### `ChatInput.js`
 
@@ -231,7 +243,7 @@ Enhanced message input with multi-line support and sending state.
 - Auto-focus optimizations
 - Accessibility support
 
----
+##
 
 ## Data Flow Architecture
 
@@ -251,12 +263,14 @@ ChatScreen.handleSendMessage()
 │   └─ On error: Queue for offline sync
 ├─ Display assistant response with prosody
 ├─ Store assistant message locally
-└─ Create memory capsule (every 5 messages)
+```text
+```text
 ```
 
 ### Offline Sync Flow
 
 ```
+
 Network Offline
     ↓
 ApiService detects network error
@@ -274,16 +288,18 @@ SyncService.performSync() triggered
 ├─ Save successful responses to conversation
 └─ Clear sync queue
     ↓
-Notify UI of sync completion
+
+```text
 ```
 
----
+##
 
 ## Installation & Setup
 
 ### Prerequisites
 
 ```bash
+
 # Install Node.js 18+
 node --version
 
@@ -291,12 +307,14 @@ node --version
 npm install -g expo-cli
 
 # Install EAS CLI (for building)
-npm install -g eas-cli
+```text
+```text
 ```
 
 ### Quick Start
 
 ```bash
+
 cd /workspaces/saoriverse-console/firstperson
 
 # Install dependencies
@@ -306,33 +324,41 @@ npm install
 npm start
 
 # Scan QR code with Expo Go app (iOS/Android)
+
 # Or launch emulator:
+
 # - Android: npm run android
+
 # - iOS: npm run ios
 
 # Test on device:
+
 # - Physical device: Expo Go app → Scan QR
-# - Emulator: Follow Expo CLI prompts
+
+```text
 ```
 
 ### Environment Setup
 
 ```bash
+
 # Configure backend URL (in src/config.js):
 REACT_APP_SAOYNX_API_URL=http://192.168.1.100:8000  # Replace with your IP
 
 # Or in environment:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
-npm start
+```text
+```text
 ```
 
----
+##
 
 ## Dependencies
 
 **Added for this MVP:**
 
 ```json
+
 {
   "@react-native-async-storage/async-storage": "^1.21.0",    // Local storage
   "@react-native-community/netinfo": "^11.0.2",              // Network detection
@@ -345,10 +371,11 @@ npm start
   "react-navigation-bottom-tabs": "^6.4.0",                  // Bottom tab nav
   "react-navigation-native": "^6.1.9",                       // Navigation native
   "react-navigation-stack": "^6.3.20"                        // Stack navigation
-}
+
+```text
 ```
 
----
+##
 
 ## Next Steps (Future Enhancements)
 
@@ -379,7 +406,7 @@ npm start
 - [ ] **Accessibility** - Full VoiceOver/TalkBack support
 - [ ] **Performance** - Optimize list rendering, reduce bundle size
 
----
+##
 
 ## Testing Checklist
 
@@ -409,7 +436,7 @@ npm start
 - [ ] Device offline for extended period
 - [ ] Low storage conditions
 
----
+##
 
 ## Troubleshooting
 
@@ -418,29 +445,36 @@ npm start
 **"Cannot connect to backend"**
 
 ```bash
+
 # Check backend is running
 curl http://localhost:8000/health
 
 # Check IP address is correct in config.js
+
 # For device on same WiFi: use computer's LAN IP, not localhost
 ipconfig getifaddr en0  # macOS
-ifconfig | grep inet    # Linux
+```text
+```text
 ```
 
 **"AsyncStorage not working"**
 
 ```bash
+
+
 # Ensure package is installed
 npm list @react-native-async-storage/async-storage
 
 # Clear cache and reinstall
 rm -rf node_modules
-npm install
+
+```text
 ```
 
 **"Navigation not working"**
 
 ```bash
+
 # Ensure all navigation dependencies installed
 npm install @react-navigation/native @react-navigation/bottom-tabs
 
@@ -448,7 +482,7 @@ npm install @react-navigation/native @react-navigation/bottom-tabs
 expo start -c
 ```
 
----
+##
 
 ## Developer Notes
 
@@ -459,7 +493,7 @@ expo start -c
 - **Performance**: Message list virtualization ready (FlatList)
 - **Privacy**: No analytics by default; all data local unless explicitly shared
 
----
+##
 
 ## Files Modified/Created This Session
 
@@ -481,7 +515,7 @@ expo start -c
 
 - None breaking; legacy `MessageOverlay.js` preserved
 
----
+##
 
 ## Deployment Guide (Coming Next Phase)
 
@@ -496,9 +530,8 @@ See `Offshoots/FirstPerson-Mobile/FirstPerson-Mobile.md` for MVP spec.
 5. Monitor for crash reports
 6. Iterate on user feedback
 
----
+##
 
 **Status**: ✅ MVP Core Complete - Ready for Alpha Testing
 **Last Updated**: December 3, 2025
 **Maintainer**: FirstPerson Team
-

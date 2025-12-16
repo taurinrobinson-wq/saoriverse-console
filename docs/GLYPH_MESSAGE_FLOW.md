@@ -1,8 +1,11 @@
 # Glyph / Message Processing Flow (from `main_v2.py`)
 
-This document traces the runtime path a user message takes from the Streamlit entrypoint (`main_v2.py`) through the emotional parsing, glyph matching/creation, enrichment, fallback handling, and final response generation.
+This document traces the runtime path a user message takes from the Streamlit entrypoint
+(`main_v2.py`) through the emotional parsing, glyph matching/creation, enrichment, fallback
+handling, and final response generation.
 
-It is intended to restore architectural clarity and show the concrete functions, modules, and data shapes involved so you can follow the ritual of meaning flow through the codebase.
+It is intended to restore architectural clarity and show the concrete functions, modules, and data
+shapes involved so you can follow the ritual of meaning flow through the codebase.
 
 Sections
 
@@ -13,29 +16,33 @@ Sections
 - Glyph learning & promotion
 - Debugging tips and where to look for artifacts
 
----
+##
 
 ## Overview (quick path)
 
 - User interacts with the web UI served by `main_v2.py` (Streamlit).
 - `main_v2.py` loads the UI renderer from `emotional_os.deploy.modules.ui_refactored` (either `render_main_app` or `render_main_app_safe`).
 - The main chat input is rendered and when the user sends a message the UI pipeline:
-  1. Optionally sanitizes text via `local_inference.preprocessor.Preprocessor` (if available).
-  2. Calls the local parser: `emotional_os.glyphs.signal_parser.parse_input` (re-export of `emotional_os.core.signal_parser`).
-  3. `parse_input` -> extracts signals, maps to ECM gates, queries the glyph DB, and scores glyphs.
-  4. UI composes a payload for optional AI enhancement (saori function). If in `hybrid` mode, it sends local analysis + message to the remote AI endpoint.
-  5. The AI reply (if any) is re-parsed locally to convert it into glyph-level signals and to produce the final local decoding.
-  6. Optionally the `limbic` engine decorates/adjusts the reply.
-  7. Fallback protocols are applied (safety/clarification flows).
-  8. The assistant reply is emitted to the user with metadata (selected glyphs, scores, debug traces).
 
-All of the above runs in `--dry-run` or demo mode when `supabase` secrets aren't configured; CI or production installs enable the hybrid AI endpoint and Supabase-backed persistence.
+1. Optionally sanitizes text via `local_inference.preprocessor.Preprocessor` (if available). 2.
+Calls the local parser: `emotional_os.glyphs.signal_parser.parse_input` (re-export of
+`emotional_os.core.signal_parser`). 3. `parse_input` -> extracts signals, maps to ECM gates, queries
+the glyph DB, and scores glyphs. 4. UI composes a payload for optional AI enhancement (saori
+function). If in `hybrid` mode, it sends local analysis + message to the remote AI endpoint. 5. The
+AI reply (if any) is re-parsed locally to convert it into glyph-level signals and to produce the
+final local decoding. 6. Optionally the `limbic` engine decorates/adjusts the reply. 7. Fallback
+protocols are applied (safety/clarification flows). 8. The assistant reply is emitted to the user
+with metadata (selected glyphs, scores, debug traces).
 
----
+All of the above runs in `--dry-run` or demo mode when `supabase` secrets aren't configured; CI or
+production installs enable the hybrid AI endpoint and Supabase-backed persistence.
+
+##
 
 ## Detailed step-by-step trace (call order + functions)
 
-Below is a linear trace for the common `hybrid` pipeline. For `local` mode the AI call step is skipped.
+Below is a linear trace for the common `hybrid` pipeline. For `local` mode the AI call step is
+skipped.
 
 1) Entry: `main_v2.py` -> `render_main_app()`
    - File: `main_v2.py`
@@ -106,7 +113,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
     - The `HybridLearner` / `GlyphLearner` components record exchanges, update learned lexicons, and optionally create `glyph_candidates` when the system couldn't find a strong match.
     - Files / modules: `emotional_os/learning/hybrid_learner.py`, `emotional_os/glyphs/glyph_learner.py`
 
----
+##
 
 ## Key functions & files (quick index)
 
@@ -122,7 +129,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 - Limbic decoration: `emotional_os.glyphs.limbic_decorator.decorate_reply`
 - Fallback safety: `emotional_os.safety.fallback_protocols.FallbackProtocol`
 
----
+##
 
 ## Key data shapes (examples)
 
@@ -134,36 +141,33 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
   "signal": "θ",
   "voltage": "high",
   "tone": "grief"
-}
+```sql
+```sql
 ```
 
 - Glyph row (from `fetch_glyphs` / DB):
 
 ```json
+
 {
   "glyph_name": "Still Recognition",
   "description": "A practice of naming the ache and letting it be held.",
   "gate": "Gate 5",
   "display_name": "Still Recognition",
   "response_template": "I hear the ache you’re describing..."
-}
+
+```text
 ```
 
 - `parse_input` return (high-level):
 
 ```json
-{
-  "glyphs": [ ... ],
-  "voltgage_response": "I notice a tightening in your chest...",
-  "ritual_prompt": "Try a three-breath grounding...",
-  "signals": [ ... ],
-  "gates": ["Gate 4", "Gate 5"],
-  "debug_sql": "SELECT ...",
-  "debug_glyph_rows": [ ... ]
-}
+{ "glyphs": [ ... ], "voltgage_response": "I notice a tightening in your chest...", "ritual_prompt":
+"Try a three-breath grounding...", "signals": [ ... ], "gates": ["Gate 4", "Gate 5"], "debug_sql":
+"SELECT ...", "debug_glyph_rows": [ ... ] }
 ```
 
----
+##
 
 ## Fallbacks, caching, and safety gates
 
@@ -175,7 +179,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
 - Fallback protocols: `emotional_os.safety.fallback_protocols` can intercept exchanges to ask clarifying questions or trigger safe messaging if input appears sensitive.
 - Artifact filtering: `_looks_like_artifact` in `core/signal_parser.py` prunes pasted documents/archive rows from DB results before scoring.
 
----
+##
 
 ## Glyph learning & promotion (how glyphs are created)
 
@@ -193,7 +197,7 @@ Notes:
 - Glyph learning is conservative: confidence scores are capped below 1.0 and promotion requires explicit action.
 - Usage is logged in `glyph_usage_log` so candidates with repeated usefulness can be promoted.
 
----
+##
 
 ## Where to look for debugging info and artifacts
 
@@ -203,7 +207,7 @@ Notes:
 - **Telemetry events (NEW)**: Enable via `signal_parser.set_telemetry(True)` or UI toggle to see JSON-formatted events like `select_best_start`, `generate_contextual_start`, `select_best_done` with detailed metrics.
 - Reported artifacts from the cleanup pipeline (outside of runtime): `dev_tools/cleaned_glyphs.json`, `dev_tools/cleaned_glyphs_upsert.csv`, `dev_tools/cleanup_report.md`, and `dev_tools/fragments_to_review.json`.
 
----
+##
 
 ## Edge cases and recommended hardening
 
@@ -212,7 +216,7 @@ Notes:
 - Re-entrancy & DB locks: `GlyphLearner.log_glyph_candidate` uses retries and WAL mode — keep this pattern for other writers.
 - Determinism: the `hybrid` second-pass ensures AI replies are always grounded locally. Never surface raw AI text without local decoding in production.
 
----
+##
 
 ## Quick 'follow-the-message' checklist (for code readers)
 
@@ -227,7 +231,7 @@ Notes:
 9. Append to `st.session_state` and display
 10. (background) `GlyphLearner` invoked when no suitable glyph found; writes to `glyph_candidates`
 
----
+##
 
 If you'd like, I can now:
 

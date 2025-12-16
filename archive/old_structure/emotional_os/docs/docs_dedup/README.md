@@ -48,17 +48,18 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   ```
 
   To install the beta release channel:
-  
+
   ```sh
   brew install supabase/tap/supabase-beta
   brew link --overwrite supabase-beta
   ```
-  
+
   To upgrade:
 
   ```sh
   brew upgrade supabase
   ```
+
 </details>
 
 <details>
@@ -76,6 +77,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   ```powershell
   scoop update supabase
   ```
+
 </details>
 
 <details>
@@ -83,7 +85,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
 
   Available via [Homebrew](https://brew.sh) and Linux packages.
 
-  #### via Homebrew
+#### via Homebrew
 
   To install:
 
@@ -97,7 +99,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   brew upgrade supabase
   ```
 
-  #### via Linux packages
+#### via Linux packages
 
   Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
 
@@ -116,6 +118,7 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
   ```sh
   sudo pacman -U <...>.pkg.tar.zst
   ```
+
 </details>
 
 <details>
@@ -178,6 +181,7 @@ However, due to dependencies on other service images, we cannot guarantee that s
 To run from source:
 
 ```sh
+
 # Go >= 1.22
 go run . help
 ```

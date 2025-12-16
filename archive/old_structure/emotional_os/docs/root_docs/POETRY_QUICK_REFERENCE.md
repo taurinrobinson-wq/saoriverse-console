@@ -39,10 +39,13 @@ adapter = ProcessingModeAdapter(hub)
 
 # Pick your mode:
 data = adapter.for_signal_extraction()      # signal extraction mode
+
 # OR
 data = adapter.for_lexicon_learning()       # lexicon learning mode
+
 # OR
 data = adapter.for_glyph_generation()       # glyph generation mode
+
 # OR
 data = adapter.for_ritual_processing()      # ritual processing mode
 
@@ -95,6 +98,7 @@ Documentation:
 ## Processing Modes
 
 ```python
+
 # Mode 1: Signal Extraction
 adapter.for_signal_extraction()       # Returns: {name: text}
 
@@ -119,6 +123,7 @@ SQLite database (`poetry_hub.db`) tracks:
 **processing_log table**: All operations (download, clean, validate) with timestamps
 
 **quality_metrics table**: Cleaning metrics for each collection
+
 - artifacts_removed
 - encoding_issues_fixed
 - fragmented_lines_fixed
@@ -148,6 +153,7 @@ SQLite database (`poetry_hub.db`) tracks:
 ## Performance
 
 **Expected times** (all 8 collections, single-threaded):
+
 - Download: 2-5 minutes
 - Clean: 1-2 minutes
 - Validate: <1 minute
@@ -168,9 +174,11 @@ SQLite database (`poetry_hub.db`) tracks:
 All processing modes access the same clean data through the adapter:
 
 ```python
+
 # Don't do this (old way - would need different file handling):
 raw_file1 = open("poem1.txt")
 raw_file2 = open("poem2.txt")
+
 # ... manual processing ...
 
 # Do this (new way - unified, clean, validated):
@@ -180,9 +188,10 @@ for name, text in data.items():
     process(text)  # Guaranteed clean
 ```
 
----
+##
 
 **Questions? See**:
+
 - `POETRY_DATA_INTEGRATION_GUIDE.md` - Complete guide
 - `POETRY_INTEGRATION_EXAMPLES.md` - Code examples
 - Docstrings in `poetry_data_hub.py` - API reference

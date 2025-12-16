@@ -2,13 +2,11 @@
 
 ## Table of Contents
 
-1. [Voice Affect Detector](#voice-affect-detector)
-2. [Facial Expression Detector](#facial-expression-detector)
-3. [Multimodal Fusion Engine](#multimodal-fusion-engine)
-4. [Data Classes](#data-classes)
-5. [Enums](#enums)
+1. [Voice Affect Detector](#voice-affect-detector) 2. [Facial Expression
+Detector](#facial-expression-detector) 3. [Multimodal Fusion Engine](#multimodal-fusion-engine) 4.
+[Data Classes](#data-classes) 5. [Enums](#enums)
 
----
+##
 
 ## Voice Affect Detector
 
@@ -23,7 +21,8 @@ Main class for analyzing vocal emotion from acoustic features.
 ##### `__init__()`
 
 ```python
-detector = VoiceAffectDetector()
+```text
+```text
 ```
 
 Initializes the voice affect detector with no parameters.
@@ -41,6 +40,7 @@ Analyzes acoustic features to determine vocal emotion.
 **Example**:
 
 ```python
+
 features = AcousticFeatures(
     fundamental_frequency=150,
     intensity=75,
@@ -53,7 +53,8 @@ features = AcousticFeatures(
     mel_frequency_coefficients=[1.0] * 13,
     duration=5.0,
 )
-analysis = detector.analyze(features)
+
+```text
 ```
 
 **Output Fields**:
@@ -78,18 +79,15 @@ Compares voice emotion against text emotion to detect incongruences.
 **Returns**: Dictionary with comparison results
 
 ```python
-{
-    "text_tone": "excited",
-    "voice_tone": "anxious",
-    "match_score": 0.4,  # 0-1, higher = more similar
-    "incongruence_type": "possible_suppression",  # or "sarcasm", "conflict", "alignment"
-    "is_sarcasm": False,
-    "is_suppression": True,
-    "explanation": "Calm/hesitant voice with excited text suggests suppression",
-}
+{ "text_tone": "excited", "voice_tone": "anxious", "match_score": 0.4,  # 0-1, higher = more similar
+"incongruence_type": "possible_suppression",  # or "sarcasm", "conflict", "alignment" "is_sarcasm":
+False, "is_suppression": True, "explanation": "Calm/hesitant voice with excited text suggests
+suppression",
+```text
+```text
 ```
 
----
+##
 
 ### Class: `VoiceAffectTone` (Enum)
 
@@ -104,7 +102,7 @@ Compares voice emotion against text emotion to detect incongruences.
 - `ANXIOUS`: High arousal, negative valence, low dominance
 - `CONFIDENT`: Steady, controlled, high dominance
 
----
+##
 
 ### Class: `AcousticFeatures` (Dataclass)
 
@@ -113,18 +111,16 @@ Input data for voice analysis.
 **Fields**:
 
 ```python
-@dataclass
-class AcousticFeatures:
-    fundamental_frequency: float      # Hz, typically 80-250 Hz
-    intensity: float                  # dB, typically 50-100 dB
-    speech_rate: float                # words per minute, typically 100-200
-    pause_frequency: float            # pauses per second, 0-1
-    pause_duration_avg: float         # milliseconds, 50-500
-    pitch_variance: float             # Hz^2, measure of pitch fluctuation
-    energy_variance: float            # dB^2, measure of intensity fluctuation
-    formant_frequencies: List[float]  # Hz, typically 3 values [F1, F2, F3]
-    mel_frequency_coefficients: List[float]  # 13 MFCCs
-    duration: float                   # seconds
+
+@dataclass class AcousticFeatures: fundamental_frequency: float      # Hz, typically 80-250 Hz
+intensity: float                  # dB, typically 50-100 dB speech_rate: float                #
+words per minute, typically 100-200 pause_frequency: float            # pauses per second, 0-1
+pause_duration_avg: float         # milliseconds, 50-500 pitch_variance: float             # Hz^2,
+measure of pitch fluctuation energy_variance: float            # dB^2, measure of intensity
+fluctuation formant_frequencies: List[float]  # Hz, typically 3 values [F1, F2, F3]
+mel_frequency_coefficients: List[float]  # 13 MFCCs
+
+```text
 ```
 
 **Typical Ranges**:
@@ -136,7 +132,7 @@ class AcousticFeatures:
 - `energy_variance`: 1-30 dB²
 - `formant_frequencies`: [700-1000, 1200-2500, 2500-4000] Hz
 
----
+##
 
 ### Class: `VoiceAnalysis` (Dataclass)
 
@@ -153,10 +149,11 @@ class VoiceAnalysis:
     dominance: float                         # 0-1
     stress_indicator: float                  # 0-1
     emotional_state: Dict[str, float]        # All 8 tones with confidences
-    confidence: float                        # 0-1
+```text
+```text
 ```
 
----
+##
 
 ## Facial Expression Detector
 
@@ -171,7 +168,8 @@ Main class for analyzing facial emotion from landmarks.
 ##### `__init__()`
 
 ```python
-detector = FacialExpressionDetector()
+
+```text
 ```
 
 Initializes the facial expression detector.
@@ -189,21 +187,14 @@ Analyzes facial landmarks to determine expression and emotional state.
 **Example**:
 
 ```python
-landmarks = FaceLandmarks(
-    contour=[(x, y) for x, y in ...],
-    right_eyebrow=[...],
-    left_eyebrow=[...],
-    nose=[...],
-    right_eye=[...],
-    left_eye=[...],
-    mouth=[...],
-)
-analysis = detector.analyze(landmarks)
-print(f"Expression: {analysis.expression}")
-print(f"Authenticity: {analysis.authenticity:.2f}")
+landmarks = FaceLandmarks( contour=[(x, y) for x, y in ...], right_eyebrow=[...],
+left_eyebrow=[...], nose=[...], right_eye=[...], left_eye=[...], mouth=[...], ) analysis =
+detector.analyze(landmarks) print(f"Expression: {analysis.expression}")
+```text
+```text
 ```
 
----
+##
 
 ### Class: `FacialExpression` (Enum)
 
@@ -218,7 +209,7 @@ print(f"Authenticity: {analysis.authenticity:.2f}")
 - `CONTEMPTUOUS`: One-sided smile + asymmetry
 - `NEUTRAL`: Minimal AU activation
 
----
+##
 
 ### Class: `ActionUnit` (Enum)
 
@@ -238,7 +229,7 @@ FACS (Facial Action Coding System) units tracked.
 - `AU15`: Lip corner depressor (sadness)
 - `AU26`: Jaw drop (surprise, fear)
 
----
+##
 
 ### Class: `FaceLandmarks` (Dataclass)
 
@@ -247,20 +238,18 @@ Input data for facial analysis (68 points normalized to 0-1 range).
 **Fields**:
 
 ```python
-@dataclass
-class FaceLandmarks:
-    contour: List[Tuple[float, float]]              # 17 points
-    right_eyebrow: List[Tuple[float, float]]        # 5 points
-    left_eyebrow: List[Tuple[float, float]]         # 5 points
-    nose: List[Tuple[float, float]]                 # 9 points
-    right_eye: List[Tuple[float, float]]            # 6 points
-    left_eye: List[Tuple[float, float]]             # 6 points
-    mouth: List[Tuple[float, float]]                # 20 points
+
+@dataclass class FaceLandmarks: contour: List[Tuple[float, float]]              # 17 points
+right_eyebrow: List[Tuple[float, float]]        # 5 points left_eyebrow: List[Tuple[float, float]]
+# 5 points nose: List[Tuple[float, float]]                 # 9 points right_eye: List[Tuple[float,
+float]]            # 6 points left_eye: List[Tuple[float, float]]             # 6 points
+
+```text
 ```
 
 **Total**: 68 landmarks, all normalized to (0, 1) range
 
----
+##
 
 ### Class: `EyeMetrics` (Dataclass)
 
@@ -275,10 +264,11 @@ class EyeMetrics:
     pupil_dilation: float               # 0-1, constricted to dilated
     blink_rate: float                   # blinks per minute (0-30 typical)
     gaze_direction: str                 # "left", "center", "right"
-    fixation_duration: float            # seconds, how long looking at one point
+```text
+```text
 ```
 
----
+##
 
 ### Class: `MouthMetrics` (Dataclass)
 
@@ -287,15 +277,17 @@ Mouth-related measurements from facial landmarks.
 **Fields**:
 
 ```python
+
 @dataclass
 class MouthMetrics:
     smile_intensity: float              # 0-1, no smile to full smile
     mouth_openness: float               # 0-1, closed to wide open
     lip_tension: float                  # 0-1, relaxed to tense
-    mouth_asymmetry: float              # 0-1, symmetric to asymmetric
+
+```text
 ```
 
----
+##
 
 ### Class: `FacialAnalysis` (Dataclass)
 
@@ -304,22 +296,17 @@ Output data from facial expression analysis.
 **Fields**:
 
 ```python
-@dataclass
-class FacialAnalysis:
-    landmarks: FaceLandmarks
-    expression: FacialExpression
-    confidence: float                            # 0-1
-    action_units: ActionUnitIntensities          # AU measurements
-    eye_metrics: EyeMetrics
-    mouth_metrics: MouthMetrics
-    arousal: float                               # 0-1, sleepy to alert
-    valence: float                               # 0-1, negative to positive
-    dominance: float                             # 0-1, submissive to assertive
-    attention: float                             # 0-1, distracted to focused
-    authenticity: float                          # 0-1, fake to genuine
+@dataclass class FacialAnalysis: landmarks: FaceLandmarks expression: FacialExpression confidence:
+float                            # 0-1 action_units: ActionUnitIntensities          # AU
+measurements eye_metrics: EyeMetrics mouth_metrics: MouthMetrics arousal: float
+# 0-1, sleepy to alert valence: float                               # 0-1, negative to positive
+dominance: float                             # 0-1, submissive to assertive attention: float
+# 0-1, distracted to focused
+```text
+```text
 ```
 
----
+##
 
 ## Multimodal Fusion Engine
 
@@ -334,7 +321,8 @@ Fuses text, voice, and facial data into unified emotional understanding.
 ##### `__init__()`
 
 ```python
-engine = MultimodalFusionEngine()
+
+```text
 ```
 
 Initializes the fusion engine.
@@ -366,10 +354,11 @@ print(f"Congruence: {result.congruence_type}")
 
 if result.incongruences:
     for inc in result.incongruences:
-        print(f"  ⚠️  {inc}")
+```text
+```text
 ```
 
----
+##
 
 ### Class: `CongruenceType` (Enum)
 
@@ -382,7 +371,7 @@ if result.incongruences:
 - `SUPPRESSION`: Stressed voice/face with calm text
 - `CONSISTENT_FAKE`: Low authenticity across modalities
 
----
+##
 
 ### Class: `ModularityConfidence` (Dataclass)
 
@@ -391,15 +380,17 @@ Confidence scores for each modality and combined result.
 **Fields**:
 
 ```python
+
 @dataclass
 class ModularityConfidence:
     text_confidence: float               # 0-1
     voice_confidence: float              # 0-1
     facial_confidence: float             # 0-1
-    overall_confidence: float            # 0-1, weighted average
+
+```text
 ```
 
----
+##
 
 ### Class: `EmotionalDimensions` (Dataclass)
 
@@ -408,18 +399,16 @@ Fused dimensional emotion representation with source attribution.
 **Fields**:
 
 ```python
-@dataclass
-class EmotionalDimensions:
-    arousal: float                       # 0-1, fused arousal
-    valence: float                       # 0-1, fused valence
-    dominance: float                     # 0-1, fused dominance
-    arousal_source: str                  # "text", "voice", "facial"
-    valence_source: str                  # "text", "voice", "facial"
-    dominance_source: str                # "text", "voice", "facial"
-    stress_level: float                  # 0-1, combined stress indicator
+@dataclass class EmotionalDimensions: arousal: float                       # 0-1, fused arousal
+valence: float                       # 0-1, fused valence dominance: float                     #
+0-1, fused dominance arousal_source: str                  # "text", "voice", "facial"
+valence_source: str                  # "text", "voice", "facial" dominance_source: str
+# "text", "voice", "facial"
+```text
+```text
 ```
 
----
+##
 
 ### Class: `MultimodalAnalysis` (Dataclass)
 
@@ -428,19 +417,17 @@ Complete output of multimodal fusion.
 **Fields**:
 
 ```python
-@dataclass
-class MultimodalAnalysis:
-    primary_emotion: str                        # Dominant emotion
-    congruence_type: CongruenceType
-    modality_agreement: float                   # 0-1, how much agreement
-    incongruences: List[str]                    # List of detected issues
-    dimensions: EmotionalDimensions
-    confidence: ModularityConfidence
-    comparison: ModularityComparison            # Detailed modality breakdown
-    authenticity: float                         # 0-1, combined genuineness
+
+@dataclass class MultimodalAnalysis: primary_emotion: str                        # Dominant emotion
+congruence_type: CongruenceType modality_agreement: float                   # 0-1, how much
+agreement incongruences: List[str]                    # List of detected issues dimensions:
+EmotionalDimensions confidence: ModularityConfidence comparison: ModularityComparison            #
+Detailed modality breakdown
+
+```text
 ```
 
----
+##
 
 ## Data Classes
 
@@ -454,7 +441,8 @@ Container for all 11 Action Unit measurements.
 @dataclass
 class ActionUnitIntensities:
     intensities: Dict[str, float]  # Keys: "AU1_inner_brow_raiser", "AU2_outer_brow_raiser", etc.
-                                   # Values: 0-1 intensity
+```text
+```text
 ```
 
 **Keys** (11 total):
@@ -471,7 +459,7 @@ class ActionUnitIntensities:
 - `AU15_lip_corner_depressor`
 - `AU26_jaw_drop`
 
----
+##
 
 ### `ModularityComparison` (Dataclass)
 
@@ -480,6 +468,7 @@ Detailed comparison of each modality's analysis.
 **Fields**:
 
 ```python
+
 @dataclass
 class ModularityComparison:
     text_details: str           # Summary of text emotion
@@ -487,39 +476,45 @@ class ModularityComparison:
     facial_details: str         # Summary of facial expression
     text_voice_alignment: float # 0-1
     voice_facial_alignment: float # 0-1
-    text_facial_alignment: float # 0-1
+
+```text
 ```
 
----
+##
 
 ## Enums
 
 ### VoiceAffectTone
 
 ```python
-CALM, ENERGETIC, HESITANT, ANGRY, SAD, EXCITED, ANXIOUS, CONFIDENT
+```text
+```text
 ```
 
 ### FacialExpression
 
 ```python
-HAPPY, SAD, FEARFUL, SURPRISED, ANGRY, DISGUSTED, CONTEMPTUOUS, NEUTRAL
+
+```text
 ```
 
 ### ActionUnit
 
 ```python
-AU1, AU2, AU4, AU5, AU6, AU7, AU9, AU10, AU12, AU15, AU26
+```text
+```text
 ```
 
 ### CongruenceType
 
 ```python
-FULL_AGREEMENT, PARTIAL_AGREEMENT, MODALITY_CONFLICT, 
-TEXT_POSITIVE_VOICE_NEGATIVE, SUPPRESSION, CONSISTENT_FAKE
+
+FULL_AGREEMENT, PARTIAL_AGREEMENT, MODALITY_CONFLICT,
+
+```text
 ```
 
----
+##
 
 ## Common Usage Patterns
 
@@ -528,25 +523,24 @@ TEXT_POSITIVE_VOICE_NEGATIVE, SUPPRESSION, CONSISTENT_FAKE
 ```python
 from emotional_os.core.firstperson import VoiceAffectDetector, AcousticFeatures
 
-detector = VoiceAffectDetector()
-features = AcousticFeatures(...)
-analysis = detector.analyze(features)
-print(analysis.detected_tone)
+detector = VoiceAffectDetector() features = AcousticFeatures(...) analysis =
+detector.analyze(features)
+```text
+```text
 ```
 
 ### Pattern 2: Facial Expression with Authenticity
 
 ```python
+
 from emotional_os.core.firstperson import FacialExpressionDetector, FaceLandmarks
 
-detector = FacialExpressionDetector()
-landmarks = FaceLandmarks(...)
-analysis = detector.analyze(landmarks)
+detector = FacialExpressionDetector() landmarks = FaceLandmarks(...) analysis =
+detector.analyze(landmarks)
 
-if analysis.authenticity > 0.7:
-    print("Genuine expression")
-else:
-    print("Possibly fake/forced expression")
+if analysis.authenticity > 0.7: print("Genuine expression") else:
+
+```text
 ```
 
 ### Pattern 3: Full Multimodal Analysis
@@ -559,27 +553,29 @@ result = engine.fuse(text_tone, voice_analysis, facial_analysis)
 
 print(f"Emotion: {result.primary_emotion}")
 print(f"Confidence: {result.confidence.overall_confidence:.2%}")
-print(f"Detected: {', '.join(result.incongruences) if result.incongruences else 'None'}")
+```text
+```text
 ```
 
 ### Pattern 4: Sarcasm Detection
 
 ```python
+
 if result.congruence_type == "TEXT_POSITIVE_VOICE_NEGATIVE":
     print("⚠️  Possible sarcasm detected")
-    print(f"Text says happy but voice/face show negative")
+
+```text
 ```
 
 ### Pattern 5: Suppression Detection
 
 ```python
-if result.congruence_type == "SUPPRESSION":
-    print("⚠️  Possible emotion suppression")
-    print(f"Stress level: {result.dimensions.stress_level:.2%}")
+if result.congruence_type == "SUPPRESSION": print("⚠️  Possible emotion suppression") print(f"Stress
+level: {result.dimensions.stress_level:.2%}")
 ```
 
----
+##
 
-**Version**: 1.0  
-**Last Updated**: Phase 3.2 completion  
+**Version**: 1.0
+**Last Updated**: Phase 3.2 completion
 **API Status**: Stable

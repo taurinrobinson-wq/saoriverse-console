@@ -4,7 +4,8 @@ Wiring the Repair Module into the Response Pipeline.
 
 ## Overview
 
-This guide explains how to integrate the repair module and orchestrator into the main response engine for end-to-end correction detection and learning.
+This guide explains how to integrate the repair module and orchestrator into the main response
+engine for end-to-end correction detection and learning.
 
 ### Current Architecture
 
@@ -25,7 +26,8 @@ from emotional_os.core.firstperson.repair_orchestrator import RepairOrchestrator
 if "repair_orchestrator" not in st.session_state:
     st.session_state.repair_orchestrator = RepairOrchestrator(
         user_id=st.session_state.user_id
-    )
+```text
+```text
 ```
 
 ### 2. Response Generation
@@ -33,6 +35,7 @@ if "repair_orchestrator" not in st.session_state:
 Generate response and record glyph context.
 
 ```python
+
 response_text = glyph_composer.compose_glyph_aware_response(
     tone=detected_tone,
     arousal=arousal,
@@ -49,7 +52,8 @@ context = GlyphCompositionContext(
 )
 
 st.session_state.repair_orchestrator.record_response(response_text)
-st.session_state.last_glyph_context = context
+
+```text
 ```
 
 ### 3. Next Turn - Detect Corrections
@@ -57,20 +61,17 @@ st.session_state.last_glyph_context = context
 At start of next turn, analyze for rejections.
 
 ```python
-repair_analysis = st.session_state.repair_orchestrator.analyze_for_repair(
-    user_input=user_input
-)
+repair_analysis = st.session_state.repair_orchestrator.analyze_for_repair( user_input=user_input )
 
 if repair_analysis.is_rejection:
     # User rejected previous response
-    suggested_glyph = repair_analysis.suggested_alternative
-    correction_hint = repair_analysis.user_correction
-else:
+suggested_glyph = repair_analysis.suggested_alternative correction_hint =
+repair_analysis.user_correction else:
     # Record acceptance
-    if st.session_state.last_glyph_context:
-        st.session_state.repair_orchestrator.record_acceptance(
-            st.session_state.last_glyph_context
-        )
+if st.session_state.last_glyph_context: st.session_state.repair_orchestrator.record_acceptance(
+st.session_state.last_glyph_context
+```text
+```text
 ```
 
 ### 4. Generate Response with Alternative (if rejected)
@@ -78,19 +79,17 @@ else:
 Use suggested glyph if available.
 
 ```python
+
 if repair_analysis.is_rejection:
     # Acknowledge correction
-    if repair_analysis.user_correction:
-        response = f"I hear that—{repair_analysis.user_correction}. {response}"
-    
+if repair_analysis.user_correction: response = f"I hear that—{repair_analysis.user_correction}.
+{response}"
+
     # Use suggested glyph
-    if suggested_glyph:
-        response = glyph_composer.compose_glyph_aware_response(
-            tone=detected_tone,
-            arousal=arousal,
-            valence=valence,
-            glyph_name=suggested_glyph
-        )
+if suggested_glyph: response = glyph_composer.compose_glyph_aware_response( tone=detected_tone,
+arousal=arousal, valence=valence, glyph_name=suggested_glyph
+
+```text
 ```
 
 ## Session State Variables
@@ -100,14 +99,15 @@ Track these in Streamlit session state:
 ```python
 st.session_state.repair_orchestrator    # RepairOrchestrator instance
 st.session_state.last_glyph_context     # GlyphCompositionContext from last response
-st.session_state.last_response_text     # Previous response text
+```text
+```text
 ```
 
 ## Testing Integration
 
-1. **Unit tests**: Use `test_repair_module.py` and `test_repair_orchestrator.py`
-2. **Integration tests**: Create `test_repair_integration.py` for end-to-end flows
-3. **Manual testing**: Test full correction workflow in Streamlit app
+1. **Unit tests**: Use `test_repair_module.py` and `test_repair_orchestrator.py` 2. **Integration
+tests**: Create `test_repair_integration.py` for end-to-end flows 3. **Manual testing**: Test full
+correction workflow in Streamlit app
 
 ## Phase 2.3 Checklist
 
@@ -125,12 +125,13 @@ st.session_state.last_response_text     # Previous response text
 ## Example Complete Workflow
 
 ```python
+
 def handle_conversation_turn(user_input: str) -> str:
     orch = st.session_state.repair_orchestrator
-    
+
     # Detect if user is correcting previous response
     repair = orch.analyze_for_repair(user_input)
-    
+
     if repair.is_rejection:
         if st.session_state.last_glyph_context:
             # Record the rejection (orchestrator does this internally)
@@ -140,7 +141,7 @@ def handle_conversation_turn(user_input: str) -> str:
         # Record acceptance of previous response
         if st.session_state.last_glyph_context:
             orch.record_acceptance(st.session_state.last_glyph_context)
-        
+
         # Use best glyph for this state
         affect = affect_parser.parse(user_input)
         glyph = orch.get_best_glyph_for_state(
@@ -148,7 +149,7 @@ def handle_conversation_turn(user_input: str) -> str:
             affect["arousal"],
             affect["valence"]
         ) or default_glyph
-    
+
     # Generate response
     response = glyph_composer.compose_glyph_aware_response(
         tone=affect["tone"],
@@ -156,7 +157,7 @@ def handle_conversation_turn(user_input: str) -> str:
         valence=affect["valence"],
         glyph_name=glyph
     )
-    
+
     # Record for next turn
     context = GlyphCompositionContext(
         tone=affect["tone"],
@@ -167,8 +168,9 @@ def handle_conversation_turn(user_input: str) -> str:
     )
     orch.record_response(response)
     st.session_state.last_glyph_context = context
-    
+
     return response
+
 ```
 
 ## Test Results
@@ -179,8 +181,6 @@ def handle_conversation_turn(user_input: str) -> str:
 
 ## Next Steps
 
-1. Integrate orchestrator into `integration_orchestrator.py`
-2. Add affect parser output to glyph selection
-3. Wire session state in Streamlit app
-4. Create integration test suite
-5. Manual QA of full workflow
+1. Integrate orchestrator into `integration_orchestrator.py` 2. Add affect parser output to glyph
+selection 3. Wire session state in Streamlit app 4. Create integration test suite 5. Manual QA of
+full workflow

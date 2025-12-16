@@ -11,6 +11,7 @@
 On your Mac, open Terminal and navigate to where you want the project:
 
 ```bash
+
 # If you haven't cloned it yet:
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
@@ -19,6 +20,7 @@ cd saoriverse-console
 ### 2. Set Up Python Environment
 
 ```bash
+
 # Create a virtual environment
 python3 -m venv venv
 
@@ -45,7 +47,9 @@ streamlit run app.py
 ## Troubleshooting
 
 **"ModuleNotFoundError" when running streamlit:**
+
 ```bash
+
 # Make sure your virtual environment is activated
 source venv/bin/activate
 pip install -r requirements.txt
@@ -54,9 +58,10 @@ pip install -r requirements.txt
 ## File Structure
 
 Key files for local development:
+
 - `app.py` - Main Streamlit app entry point
 - `emotional_os/glyphs/signal_parser.py` - Core response generation
 
----
+##
 
 **That's all you need!** The system is designed to work seamlessly locally.

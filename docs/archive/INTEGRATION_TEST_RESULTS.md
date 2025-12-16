@@ -17,12 +17,14 @@
 
 **Total Improvement: +22.6% (0.31 → 0.42)**
 
----
+##
 
 ## What Was Fixed
 
 ### ✅ Crisis Response (PRODUCTION BLOCKING FIX)
+
 **Problem:** Suicidal ideation being treated as casual chat
+
 ```
 Input: "I don't know why I'm still here... I think about just ending it..."
 Before: "That's kind of you to ask. I'm here for you. How are you?"
@@ -30,6 +32,7 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 ```
 
 **Fix Applied:**
+
 - Added 50+ crisis/mortality keywords to emotional detection
 - Added CRISIS_DETECTION check before greeting logic
 - Crisis response includes:
@@ -40,7 +43,9 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
   - Professional support encouragement
 
 ### ✅ Mortality Framework Keywords
+
 **Added to emotional_keywords list:**
+
 - Endings: "dying", "dead", "death", "ending", "ends", "closing", "finished"
 - Grief: "grieving", "mourn", "mourning", "farewell", "goodbye"
 - Crisis: "suicidal", "suicide", "kill myself", "want to die", "end it", "ending it"
@@ -50,11 +55,12 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
 
 **Result:** Scenario 4 (life transition) now scores 0.46 (+24% improvement)
 
----
+##
 
 ## Remaining Critical Issues
 
 ### 1. **Zero Urgency Detection (0.00 across all)**
+
 - Even crisis scenario shows 0.00 urgency
 - Indicates poetic engine either:
   - Not being called
@@ -62,18 +68,21 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
   - Language not matching urgency keywords
 
 **Urgency Keywords Being Checked:**
+
 ```
 "right now", "in this moment", "while you", "before", "when",
 "eventually", "precious", "tender", "finite", "fragile", "ends", "fades"
 ```
 
 **Problem:** Responses don't contain these words
+
 - "I hear that you're in real pain" ← contains "now"? No
 - "You're in territory without a map" ← contains urgency words? No
 
 **Root Cause:** Responses are generic templates, not poetic engine output
 
 ### 2. **No Glyphs Retrieved (glyphs: [] for all**)**
+
 - SQL queries ARE running (debug output shows them)
 - But glyph_names returned empty
 - Possible causes:
@@ -83,13 +92,16 @@ After: "I hear that you're in real pain right now... 988 Crisis Line... professi
   - DB query returning 0 results
 
 **Debug Output Shows:**
+
 ```
 [fetch_glyphs] Gates: ['Gate 4', 'Gate 5', 'Gate 9']
 [fetch_glyphs] SQL: SELECT glyph_name ... FROM glyph_lexicon WHERE gate IN (?,?,?)
 ```
+
 But then: `glyphs: []`
 
 ### 3. **Generic Template Responses**
+
 - "I hear you, that sounds difficult..."
 - "You're in territory without a map..."
 - "That's kind of you to ask..."
@@ -97,26 +109,29 @@ But then: `glyphs: []`
 These are NOT coming from poetic engine + glyphs. They're fallback templates.
 
 ### 4. **No Mortality Framework Engagement**
+
 - Poetic engine should be injecting metaphor about finitude
 - Should see language like:
   - "petals falling from a withered rose"
   - "empty chair at the table"
   - "footsteps fading into distance"
   - Time-bounded language
-  
+
 Instead: Generic phrases
 
 ### 5. **Multi-Glyph Integration Still Failing**
+
 - Scenario 2 should trigger multiple glyphs
 - Expected: Woven response addressing stress + hope + exhaustion
 - Actual: 0 glyphs, generic template
 
 ### 6. **Affirmation Not Recognized**
+
 - "that really helped" doesn't trigger backend logging
 - Should tag response as affirmed
 - Should strengthen similar flows
 
----
+##
 
 ## Next Actions Required
 
@@ -129,6 +144,7 @@ Instead: Generic phrases
    - [ ] Verify gate-to-glyph mapping
 
    **Command to verify:**
+
    ```bash
    sqlite3 glyphs.db "SELECT COUNT(*) FROM glyph_lexicon;"
    ```
@@ -161,7 +177,7 @@ Instead: Generic phrases
    - [ ] Replace with composed responses
    - [ ] Or poetic engine output if glyphs empty
 
----
+##
 
 ## System State Assessment
 
@@ -172,8 +188,6 @@ Instead: Generic phrases
 **Bottleneck:** The connection between signal detection → glyph fetching → response composition is broken.
 
 **Next: Debug why glyphs are empty despite SQL queries running.**
-
-
 
 ### Scenario Breakdown
 
@@ -186,22 +200,25 @@ Instead: Generic phrases
 | 5. Joy/Connection | 0.21 | ✗ | **Completely missed the moment** |
 | 6. Crisis Response | ✗ | **FAIL** | **No crisis detection/safety response** |
 
----
+##
 
 ## Critical Issues Found
 
 ### 1. **Zero Glyphs Being Retrieved**
+
 - Most complex scenarios return `glyphs: []`
 - Signal parser detects signals (delta, gamma, omega) but doesn't fetch matching glyphs
 - Indicates glyph database lookup is failing or being skipped
 
 ### 2. **Generic Template Responses**
+
 - All responses follow same 2-3 sentence pattern
 - "You're in territory without a map..."
 - "I'm here and present with you..."
 - Not contextual to user input at all
 
 ### 3. **Mortality Framework Completely Absent**
+
 - `presence_of_urgency: 0.00` across ALL scenarios including:
   - Life transition (ending job of 10 years)
   - Crisis/suicidal ideation
@@ -209,23 +226,26 @@ Instead: Generic phrases
 - System completely missing the core emotional engine
 
 ### 4. **Crisis Response Not Engaged**
+
 - Suicidal ideation message received generic "How are you?" response
 - No crisis language detected (help, support, hotline, professional)
 - Safety protocols not triggered
 - This is a **production-blocking issue**
 
 ### 5. **Affirmation Not Logged**
+
 - When user says "that really helped," system treats it as new query
 - No backend learning triggered
 - Doesn't strengthen affirmed flows
 - Learning system not connected to response quality
 
 ### 6. **Multi-Glyph Integration Failing**
+
 - Scenario 2 should trigger: stress + overwhelm + hope (3+ glyphs)
 - Instead: 0 glyphs returned
 - Multi-glyph composition never executed
 
----
+##
 
 ## What Should Be Happening (vs. What Is)
 
@@ -234,6 +254,7 @@ Instead: Generic phrases
 **Input:** "I'm drowning in work deadlines but there's a part of me that knows I've gotten through hard things before. I'm exhausted though, and I don't know if I have it in me this time."
 
 **What Should Happen:**
+
 1. ✅ Signal detection: overwhelm, exhaustion, past strength, doubt (4+ signals)
 2. ✅ Gate activation: stress gate, resilience gate, uncertainty gate
 3. ✅ Glyph fetch: retrieve 3-5 matching glyphs for multi-glyph composition
@@ -241,6 +262,7 @@ Instead: Generic phrases
 5. ✅ Tone: urgent but grounded, acknowledging finitude (you ARE tired, this IS hard)
 
 **What Actually Happened:**
+
 - Signals detected: 2 signals (delta=exhausted, gamma=hard)
 - Glyphs retrieved: 0
 - Response: Generic 2-sentence template
@@ -251,6 +273,7 @@ Instead: Generic phrases
 **Input:** "I'm leaving my job of 10 years... they're just ending... entire chapter of my life is closing."
 
 **What Should Happen (Mortality Framework):**
+
 1. ✅ Detect death/ending language: "ending," "closing chapter," "grief"
 2. ✅ Activate mortality framework
 3. ✅ Response should include:
@@ -260,6 +283,7 @@ Instead: Generic phrases
    - Presence with the ending (not moving past it)
 
 **What Actually Happened:**
+
 - Generic greeting: "Thank you for asking. I'm focused on you—how are you feeling?"
 - Mortality urgency score: 0.00
 - No glyph retrieval
@@ -267,7 +291,7 @@ Instead: Generic phrases
 
 **Self-Assessment:** ❌ **SYSTEM IS NOT UNDERSTANDING ENDINGS**
 
----
+##
 
 ## Why This Is Happening
 
@@ -282,7 +306,7 @@ Instead: Generic phrases
 2. **Glyph Fetching Not Returning Results**
    - Debug output shows SQL queries are being run
    - But `glyphs: []` returned in response
-   - Possible: 
+   - Possible:
      - Gates not mapping to valid glyphs in DB
      - Glyph database is empty
      - Filtering logic is too strict
@@ -298,7 +322,7 @@ Instead: Generic phrases
    - Should trigger backend logging and flow strengthening
    - Currently treated as normal new query
 
----
+##
 
 ## Next Steps to Fix
 
@@ -340,11 +364,12 @@ Instead: Generic phrases
    - [ ] Pull from composed glyphs + poetic engine
    - [ ] Not rotating between 3 generic lines
 
----
+##
 
 ## Test Infrastructure Created
 
-### Files Generated:
+### Files Generated
+
 - `tests/test_comprehensive_integration.py` (850+ lines)
   - 6 real-life conversation scenarios
   - HumanlikeAssessment framework (0-1 scoring)
@@ -357,19 +382,21 @@ Instead: Generic phrases
     - Generic avoidance
     - Multi-glyph integration
 
-### Scoring Criteria:
+### Scoring Criteria
+
 - **0.0-0.3:** Generic, not humanlike
 - **0.3-0.5:** Functional but template-based
 - **0.5-0.7:** Good response quality
 - **0.7-1.0:** Humanlike, contextualized, emotionally present
 
----
+##
 
 ## Key Insight
 
 **The system has the infrastructure (poetic engine, signal parser, glyphs, gates) but the response pipeline isn't using it.**
 
 Responses suggest:
+
 - Poetic engine not injecting
 - Glyphs not being fetched OR not being composed
 - Generic template handler is too aggressive (catching real emotionally rich inputs)
@@ -377,11 +404,12 @@ Responses suggest:
 
 **The fix is not to build new features—it's to wire together what's already built.**
 
----
+##
 
 ## Affirmation Flow Tracking
 
 When user affirms ("that really helped"), system should:
+
 1. Detect affirmation signal
 2. Log to `emotional_os/feedback/affirmed_flows.jsonl`
 3. Extract:
@@ -393,4 +421,3 @@ When user affirms ("that really helped"), system should:
 5. Strengthen similar flows in future
 
 **Current Status:** Not happening - need to wire this in.
-

@@ -5,33 +5,46 @@
 This is your complete guide to migrating Velinor from Streamlit to a proper web stack.
 
 ### **START HERE** ⭐
+
 - **[VELINOR_WEB_COMPLETE.md](VELINOR_WEB_COMPLETE.md)** - Complete overview & migration summary
 
 ### **Then Read** (In Order)
-1. **[VELINOR_WEB_MIGRATION.md](VELINOR_WEB_MIGRATION.md)** - 6-phase step-by-step setup guide
-2. **[NEXTJS_FRONTEND_SETUP.md](NEXTJS_FRONTEND_SETUP.md)** - Detailed Next.js configuration
-3. **[RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)** - Production deployment to Railway
-4. **[VELINOR_WEB_QUICK_REFERENCE.md](VELINOR_WEB_QUICK_REFERENCE.md)** - Command reference & troubleshooting
+
+1. **[VELINOR_WEB_MIGRATION.md](VELINOR_WEB_MIGRATION.md)** - 6-phase step-by-step setup guide 2.
+**[NEXTJS_FRONTEND_SETUP.md](NEXTJS_FRONTEND_SETUP.md)** - Detailed Next.js configuration 3.
+**[RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)** - Production deployment to Railway 4.
+**[VELINOR_WEB_QUICK_REFERENCE.md](VELINOR_WEB_QUICK_REFERENCE.md)** - Command reference &
+troubleshooting
 
 ### **Reference** (As Needed)
+
 - **[velinor/TWINE_INTEGRATION_GUIDE.md](velinor/TWINE_INTEGRATION_GUIDE.md)** - Velinor game engine API
 - **[velinor/README.md](velinor/README.md)** - Game engine overview
 - **[velinor/QUICKSTART.md](velinor/QUICKSTART.md)** - Scene examples
 
----
+##
 
 ## 🛠️ Files Created for You
 
 ### Backend
+
+```text
 ```
+
 velinor_api.py          FastAPI server that wraps Velinor engine
                         - Session management
                         - Game state handling
                         - API endpoints
+
 ```
 
+
+
 ### Frontend Components
+```text
+```text
 ```
+
 frontend_lib_api.ts     TypeScript API client for axios
                         - Game start
                         - Action processing
@@ -43,22 +56,33 @@ frontend_GameScene.tsx  React component for game scenes
                         - Narration box
                         - Choice buttons (absolutely positioned)
                         - Custom input
+
 ```
 
+
+
+
 ### Documentation
+
+```text
 ```
+
 VELINOR_WEB_COMPLETE.md         Complete overview (read first!)
 VELINOR_WEB_MIGRATION.md        Step-by-step setup (6 phases)
 NEXTJS_FRONTEND_SETUP.md        Detailed Next.js guide
 RAILWAY_DEPLOYMENT.md            Production deployment
 VELINOR_WEB_QUICK_REFERENCE.md  Commands & troubleshooting
+
 ```
 
----
+
+##
 
 ## 🚀 Quick Start (The Absolute Minimum)
 
 ```bash
+
+
 # Phase 1: Create Next.js project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 cd velinor-web
@@ -69,11 +93,15 @@ cp ../frontend_lib_api.ts lib/api.ts
 cp ../frontend_GameScene.tsx components/GameScene.tsx
 
 # Phase 3: Create pages
+
 # → app/page.tsx (splash screen)
+
 # → app/game/[sessionId]/page.tsx (game scene)
+
 # See VELINOR_WEB_MIGRATION.md for code
 
 # Phase 4: Test locally
+
 # Terminal 1:
 python velinor_api.py
 
@@ -83,18 +111,18 @@ npm run dev
 # Phase 5: Deploy
 git add .
 git commit -m "Velinor web game"
-git push origin main
+
+```text
 ```
 
----
+##
 
 ## 📊 Architecture
 
 ```
-                       Next.js Frontend
-                    (http://localhost:3000)
+Next.js Frontend (http://localhost:3000)
                              │
-                    Game Scene Component
+Game Scene Component
                     ├─ Background Image
                     ├─ Overlay (Dust/Fog/Glyphs)
                     ├─ Narration Box
@@ -102,19 +130,18 @@ git push origin main
                     └─ Custom Input
                              │
                              │ HTTP/REST
-                             ▼
-                       FastAPI Backend
-                    (http://localhost:8000)
+▼ FastAPI Backend (http://localhost:8000)
                              │
-                    Game Logic & State
+Game Logic & State
                     ├─ Session Management
                     ├─ Velinor Engine
                     ├─ Dice Rolls
                     ├─ NPC Dialogue
-                    └─ Stats Tracking
+```text
+```text
 ```
 
----
+##
 
 ## 🎯 What You Get
 
@@ -126,26 +153,26 @@ git push origin main
 ✅ **One-Click Deploy** - Push to GitHub, Railway auto-deploys
 ✅ **No More Streamlit Limitations** - Full CSS, animations, z-index control
 
----
+##
 
 ## 📖 Reading Map
 
 ```
-Are you...              Then read...
-───────────────────────────────────────────────────────────
-Starting fresh?         VELINOR_WEB_COMPLETE.md
-Ready to set up?        VELINOR_WEB_MIGRATION.md (Phase 1)
-Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md
-Ready to deploy?        RAILWAY_DEPLOYMENT.md
-Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
-Want game engine info?  velinor/TWINE_INTEGRATION_GUIDE.md
+
+Are you...              Then read... ───────────────────────────────────────────────────────────
+Starting fresh?         VELINOR_WEB_COMPLETE.md Ready to set up?        VELINOR_WEB_MIGRATION.md
+(Phase 1) Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md Ready to deploy?
+RAILWAY_DEPLOYMENT.md Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
+
+```text
 ```
 
----
+##
 
 ## ⚡ Key Commands
 
 ```bash
+
 # Create project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
@@ -159,10 +186,11 @@ python velinor_api.py
 cd velinor-web && npm run dev
 
 # Deploy
-git add . && git commit -m "message" && git push origin main
+```text
+```text
 ```
 
----
+##
 
 ## 📋 Checklist
 
@@ -176,7 +204,7 @@ git add . && git commit -m "message" && git push origin main
 - [ ] Deploy to Railway
 - [ ] Verify at your Railway domain
 
----
+##
 
 ## 🆘 Troubleshooting
 
@@ -188,53 +216,57 @@ git add . && git commit -m "message" && git push origin main
 | Button doesn't respond | Check browser console for errors | Dev tools F12 |
 | CORS errors | Already handled in code | velinor_api.py |
 
----
+##
 
 ## 🎓 Learning Resources
 
-- **Next.js**: https://nextjs.org/docs
-- **FastAPI**: https://fastapi.tiangolo.com/
-- **Railway**: https://docs.railway.app/
-- **React**: https://react.dev/
+- **Next.js**: <https://nextjs.org/docs>
+- **FastAPI**: <https://fastapi.tiangolo.com/>
+- **Railway**: <https://docs.railway.app/>
+- **React**: <https://react.dev/>
 
----
+##
 
 ## 💡 Tips
 
-1. **Start with local development** - Get it working on your machine first
-2. **Use Swagger UI** - Visit `http://localhost:8000/docs` to test API
-3. **Browser DevTools** - F12 to check network requests & errors
-4. **Test on mobile** - The game should work on phones too
-5. **Version control** - Commit frequently so you can revert if needed
+1. **Start with local development** - Get it working on your machine first 2. **Use Swagger UI** -
+Visit `http://localhost:8000/docs` to test API 3. **Browser DevTools** - F12 to check network
+requests & errors 4. **Test on mobile** - The game should work on phones too 5. **Version control**
 
----
+- Commit frequently so you can revert if needed
+
+##
 
 ## 🎮 What's Next
 
 After you get the basic setup working:
 
 ### Immediate
+
 - Add more backgrounds to `public/assets/backgrounds/`
 - Create overlay PNGs (dust, fog, glyphs)
 - Flesh out game scenes
 
 ### Soon
+
 - Add animations (Framer Motion)
 - Add sound (Howler.js)
 - Add glyph rendering
 - Add stats panel
 
 ### Later
+
 - Multiplayer support
 - Save/load with database
 - Settings menu
 - Achievements system
 
----
+##
 
 ## 📞 Documentation Map
 
 ```
+
 VELINOR_WEB_COMPLETE.md  ← You are here (overview)
     ↓
 VELINOR_WEB_MIGRATION.md  ← Follow this (6 phases)
@@ -243,13 +275,15 @@ NEXTJS_FRONTEND_SETUP.md  ← Details here
 RAILWAY_DEPLOYMENT.md     ← Deploy here
     ↓
 Test locally → Deploy → Live!
+
 ```
 
----
+##
 
-## ✨ You're All Set!
+## ✨ You're All Set
 
 You have:
+
 - ✅ FastAPI backend (`velinor_api.py`)
 - ✅ React components (`frontend_*.tsx`)
 - ✅ Complete documentation
@@ -257,7 +291,7 @@ You have:
 
 **Next step:** Open `VELINOR_WEB_COMPLETE.md` and start Phase 1!
 
----
+##
 
 **Questions?** Check the relevant documentation file or the game engine guide.
 

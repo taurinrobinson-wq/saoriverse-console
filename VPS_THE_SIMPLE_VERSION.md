@@ -2,7 +2,7 @@
 
 **TL;DR**: You're moving your game from Railway (unreliable) to DigitalOcean (simple, $6/month). Here's what's happening in plain English.
 
----
+##
 
 ## What Just Happened?
 
@@ -11,32 +11,37 @@ You had a problem: **Railway keeps breaking**
 The solution: **You now have everything to move to a better platform**
 
 What I created:
+
 - ✅ Production Docker setup (`docker-compose.prod.yml`)
 - ✅ SSL configuration (`nginx.prod.conf`)
 - ✅ Auto-deployment on code changes (`.github/workflows/deploy.yml`)
 - ✅ 5 guides/checklists to walk you through it
 
----
+##
 
 ## What is DigitalOcean?
 
 Think of it like this:
 
+```text
 ```
-Railway = Rental apartment where the landlord keeps breaking things
-DigitalOcean = Renting a small VPS where YOU have full control
+
+Railway = Rental apartment where the landlord keeps breaking things DigitalOcean = Renting a small
+VPS where YOU have full control
+
 ```
+
+
 
 **DigitalOcean** = Renting a tiny computer (called a "Droplet") in the cloud for $6/month.
 
-**What you get**: 
+**What you get**:
 - 1 processor
-- 2GB memory  
+- 2GB memory
 - 50GB hard drive
 - Full root access
 - SSH to do whatever you want
-
----
+##
 
 ## The Simple Deploy Process
 
@@ -72,34 +77,27 @@ DigitalOcean = Renting a small VPS where YOU have full control
    - Play the game!
 
 **Total time**: ~30 minutes
-
----
+##
 
 ## What's Inside the Magic Box (Docker)
 
 When you click "Play" at `https://velinor.firstperson.chat`, here's what happens:
-
+```text
+```text
 ```
-1. Your browser sends request to velinor.firstperson.chat
-   ↓
-2. DNS says "that's 123.45.67.89" (your DigitalOcean IP)
-   ↓
-3. Browser connects to port 443 (HTTPS)
-   ↓
-4. Nginx (reverse proxy) catches it
+
+1. Your browser sends request to velinor.firstperson.chat ↓ 2. DNS says "that's 123.45.67.89" (your
+DigitalOcean IP) ↓ 3. Browser connects to port 443 (HTTPS) ↓ 4. Nginx (reverse proxy) catches it
    - "Is this a game request? Send to Next.js"
    - "Is this an API request? Send to FastAPI"
-   ↓
-5. Next.js sends you the game interface
-   ↓
-6. When you click "Start Game", your browser talks to FastAPI
-   ↓
-7. FastAPI runs the Velinor game engine
-   ↓
-8. You play! 🎮
+↓ 5. Next.js sends you the game interface ↓ 6. When you click "Start Game", your browser talks to
+FastAPI ↓ 7. FastAPI runs the Velinor game engine ↓ 8. You play! 🎮
+
 ```
 
----
+
+
+##
 
 ## The Three Services (Explained Simply)
 
@@ -122,14 +120,13 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 - How you'd debug it: Check nginx config
 
 **All three talk to each other inside one Docker container!**
-
----
+##
 
 ## SSL/TLS (The Fancy Stuff)
 
 **What is it?**: The little padlock 🔒 in your browser URL bar
 
-**Why it matters**: 
+**Why it matters**:
 - Encrypts data between browser and server
 - Makes it safe to send passwords/data
 - Required for "https://" URLs
@@ -142,8 +139,7 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 4. It auto-renews every 90 days (we don't have to do anything)
 
 **Bottom line**: Your game is encrypted and secure ✅
-
----
+##
 
 ## Auto-Deploy (The Bonus Feature)
 
@@ -151,7 +147,9 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 
 **How it works**:
 
+```text
 ```
+
 You make a change to Velinor code
     ↓ (git push origin main)
 GitHub gets the update
@@ -165,13 +163,15 @@ Runs deploy script on VPS
 Pull latest code, rebuild Docker, restart
     ↓
 Your site is updated!
+
 ```
+
+
 
 **Time to update**: ~5-10 minutes after you push
 
 **How to enable it**: Follow section "Auto-Deploy" in DEPLOYMENT_VPS.md
-
----
+##
 
 ## The Guides I Made (Pick Your Style)
 
@@ -215,26 +215,25 @@ Your site is updated!
 - Commands, ports, troubleshooting
 - Keep handy
 - 100 lines
-
----
+##
 
 ## Common Questions
 
 **Q: Why DigitalOcean and not [other platform]?**
-A: 
+A:
 - Simple: Just give you a computer, full control
 - Cheap: $6/month vs Railway's variable/buggy pricing
 - Reliable: 99.9% uptime track record
 - Clear pricing: No surprises
 
 **Q: What if my site crashes?**
-A: 
+A:
 - Docker automatically restarts services
 - If the Droplet crashes: You get email alert from DigitalOcean
 - You can SSH in anytime to debug
 
 **Q: Can I upgrade later?**
-A: 
+A:
 - Yes! $6 → $12 → $24+ Droplets available
 - Just click "Resize" in DigitalOcean dashboard
 - No downtime (if you resize up)
@@ -261,8 +260,7 @@ A:
 A:
 - Visit `https://velinor.firstperson.chat` in browser
 - If you see the game and can play → It works! ✅
-
----
+##
 
 ## The Financial Reality
 
@@ -279,50 +277,57 @@ A:
 - Peace of mind 😊
 
 **Comparison**:
+```text
+```text
 ```
+
 Option       | Cost/mo | Reliability | Control | Support
 Railway      | $5-50+  | 😢😢😢      | 😞     | 😞
 DigitalOcean | $6      | 😊😊😊      | 😊     | 😊
+
 ```
 
----
+
+
+##
 
 ## Your Next Steps (In Order)
 
 ### 1. Push to GitHub (5 min)
+
 ```bash
 cd d:\saoriverse-console
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
-git push origin main
+```text
+```text
 ```
 
 ### 2. Create DigitalOcean Account (5 min)
-Go to https://digitalocean.com
-Sign up with email
-Verify email
+
+Go to <https://digitalocean.com> Sign up with email Verify email
 
 ### 3. Create Droplet (5 min)
-Follow the simple steps on DigitalOcean dashboard
-Save the IP address
+
+Follow the simple steps on DigitalOcean dashboard Save the IP address
 
 ### 4. Configure DNS (2 min)
-Go to Namecheap
-Add A Record: `velinor` → your IP
+
+Go to Namecheap Add A Record: `velinor` → your IP
 
 ### 5. Run Setup Script (10 min)
-SSH into droplet
-Copy-paste the setup commands
-Wait for it to finish
+
+SSH into droplet Copy-paste the setup commands Wait for it to finish
 
 ### 6. Test (5 min)
-Visit https://velinor.firstperson.chat
-Confirm it works
+
+Visit <https://velinor.firstperson.chat> Confirm it works
 
 ### 7. Celebrate! (∞)
+
 You just deployed a game on production infrastructure! 🚀
 
----
+##
 
 ## What Could Go Wrong (And How to Fix It)
 
@@ -337,32 +342,37 @@ You just deployed a game on production infrastructure! 🚀
 
 All of these are in the full guides with detailed solutions!
 
----
+##
 
 ## The Bottom Line
 
 You went from:
+
 ```
-😞 Using Railway (broken, unreliable, going away)
+
+```text
 ```
 
 To:
+
 ```
-😊 Using DigitalOcean (simple, cheap, reliable, full control)
+```text
+```text
 ```
 
 With:
+
 ```
-✅ Production Docker setup (verified working)
-✅ SSL/HTTPS (encrypted and secure)
-✅ Auto-deployment (push code → site updates automatically)
-✅ Full documentation (5 different guides)
-✅ Peace of mind (99.9% uptime)
+
+✅ Production Docker setup (verified working) ✅ SSL/HTTPS (encrypted and secure) ✅ Auto-deployment
+(push code → site updates automatically) ✅ Full documentation (5 different guides) ✅ Peace of mind
+(99.9% uptime)
+
 ```
 
 **All for $6/month.**
 
----
+##
 
 ## When You're Ready
 

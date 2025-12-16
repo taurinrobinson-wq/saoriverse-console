@@ -9,23 +9,27 @@
 | Deployment | Railway | Automatic CI/CD |
 | Game Engine | Velinor (Twine/Python) | Narrative logic, dice rolls, NPC dialogue |
 
----
+##
 
 ## Local Development Commands
 
 ```bash
+
 # Start Backend (Terminal 1)
 cd /path/to/saoriverse-console
 python velinor_api.py
+
 # → http://localhost:8000 (Swagger docs at /docs)
 
 # Start Frontend (Terminal 2)
 cd velinor-web
 npm run dev
-# → http://localhost:3000
+
+```text
+```text
 ```
 
----
+##
 
 ## Files Created
 
@@ -38,11 +42,12 @@ npm run dev
 | `RAILWAY_DEPLOYMENT.md` | Railway deployment instructions |
 | `VELINOR_WEB_MIGRATION.md` | Complete step-by-step migration guide |
 
----
+##
 
 ## Setup Checklist
 
 ### One-Time Setup
+
 - [ ] Run `npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git`
 - [ ] Copy `frontend_lib_api.ts` → `velinor-web/lib/api.ts`
 - [ ] Copy `frontend_GameScene.tsx` → `velinor-web/components/GameScene.tsx`
@@ -51,15 +56,17 @@ npm run dev
 - [ ] Test locally
 
 ### Deployment
+
 - [ ] `git add .` && `git commit -m "..."` && `git push origin main`
 - [ ] Railway auto-deploys (~3-5 minutes)
 - [ ] Visit your Railway domain
 
----
+##
 
 ## Game Flow
 
 ```
+
 ┌─────────────────┐
 │  Splash Screen  │  (Enter player name)
 └────────┬────────┘
@@ -79,10 +86,11 @@ npm run dev
 │  + Glyph        │
 └────────┬────────┘
          │ ...continues
-         ▼
+
+```text
 ```
 
----
+##
 
 ## API Endpoints
 
@@ -95,37 +103,44 @@ npm run dev
 | POST | `/api/game/{id}/load` | Load saved game |
 | DELETE | `/api/game/{id}` | End session |
 
----
+##
 
 ## Environment Variables
 
 ### Development (`.env.local`)
+
 ```
-NEXT_PUBLIC_API_URL=http://localhost:8000
+```text
+```text
 ```
 
 ### Production (Railway Dashboard)
-```
-NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
+
 ```
 
----
+NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
+
+```
+
+##
 
 ## Styling
 
 All components use inline styles for portability. To customize:
 
 **Colors:**
+
 - Primary: `#3a6df0` (blue)
 - Success: `#4aa96c` (green)
 - Dark bg: `#191b1e`
 
 **Positioning:**
+
 - Use `position: absolute` for overlays
 - Use `position: relative` for containers
 - Use flexbox for layouts
 
----
+##
 
 ## Troubleshooting
 
@@ -141,7 +156,7 @@ All components use inline styles for portability. To customize:
 **CORS errors**
 → Already handled in `velinor_api.py`. For production, restrict to your domain.
 
----
+##
 
 ## Key Advantages Over Streamlit
 
@@ -152,7 +167,7 @@ All components use inline styles for portability. To customize:
 ✅ Easy to customize styling
 ✅ Full React ecosystem available
 
----
+##
 
 ## Resources
 
@@ -161,7 +176,7 @@ All components use inline styles for portability. To customize:
 - [Railway Docs](https://docs.railway.app/)
 - [Velinor Engine](./velinor/TWINE_INTEGRATION_GUIDE.md)
 
----
+##
 
 **Ready to deploy?**
 

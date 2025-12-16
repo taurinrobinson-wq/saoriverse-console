@@ -4,11 +4,12 @@
 
 Your other AI's sophisticated 5-layer pruning strategy has been **fully implemented and integrated** into the Saoriverse system. This is a significant upgrade from basic numerical pruning.
 
----
+##
 
 ## 🎯 The Implementation
 
 ### **5-Layer Pruning Strategy** (New)
+
 ```
 Signal Strength Filtering (25%)
     ↓ Ensures emotional clarity
@@ -27,11 +28,12 @@ Reaction Chain Anchoring (10%)
     ↓ Protects reaction anchors
 ```
 
----
+##
 
 ## 📁 New Files Created
 
 ### 1. **`advanced_pruning_engine.py`** (500 lines)
+
 **Main implementation** of the 5-layer system.
 
 ```python
@@ -43,6 +45,7 @@ report = engine.create_pruning_report()
 ```
 
 **Features:**
+
 - ✅ Intelligent evaluation using all 5 layers
 - ✅ Confidence scoring (0-1 for each decision)
 - ✅ Archive pruned glyphs for resurrection
@@ -50,7 +53,9 @@ report = engine.create_pruning_report()
 - ✅ Protection for base glyphs and reaction anchors
 
 ### 2. **`ADVANCED_PRUNING_GUIDE.md`** (Detailed Reference)
+
 **Complete documentation** with:
+
 - ✅ Explanation of each layer
 - ✅ Scoring formula breakdown
 - ✅ Usage examples
@@ -58,29 +63,35 @@ report = engine.create_pruning_report()
 - ✅ Optional enhancements
 
 ### 3. **`ADVANCED_PRUNING_SUMMARY.md`** (Executive Overview)
+
 **High-level summary** with:
+
 - ✅ Quick reference
 - ✅ Comparison to basic pruning
 - ✅ Expected results
 - ✅ Quality assurance checklist
 
 ### 4. **`factorial_with_advanced_pruning.py`** (Example)
+
 **Complete working example** showing:
+
 - ✅ Generate factorial combinations
 - ✅ Apply advanced pruning
 - ✅ Get final high-quality glyphs
 - ✅ Archive + reporting
 
 ### 5. **Generated Reports** (Output)
+
 - ✅ `PRUNING_REPORT.json` - Detailed evaluations
 - ✅ `pruning_archive/` - Archived pruned glyphs
 - ✅ Statistics and confidence scores
 
----
+##
 
 ## 🚀 Quick Start
 
 ### Basic Usage
+
 ```python
 from emotional_os.glyphs.advanced_pruning_engine import AdvancedPruningEngine
 
@@ -103,6 +114,7 @@ report = engine.create_pruning_report(
 ```
 
 ### With Match History (Recommended)
+
 ```python
 engine = AdvancedPruningEngine(
     glyph_lexicon_path="emotional_os/glyphs/glyph_lexicon_rows.json",
@@ -113,7 +125,9 @@ candidates = engine.evaluate_all_glyphs()
 ```
 
 ### With Factorial Expansion
+
 ```python
+
 # Generate new glyphs
 from emotional_os.glyphs.glyph_factorial_engine import GlyphFactorialEngine
 
@@ -134,11 +148,12 @@ print(f"Expansion: 85,264 → {len(kept)} high-quality glyphs")
 factorial.sync_to_json(kept)
 ```
 
----
+##
 
 ## 📊 Key Metrics
 
 ### Scoring Components
+
 ```
 Signal Strength: 0-1 (emotional clarity)
 Redundancy: 0-1 (role collision)
@@ -150,6 +165,7 @@ Combined Score = weighted sum → 0.0 to 1.0
 ```
 
 ### Decision Thresholds
+
 ```
 score ≥ 0.70  → CRITICAL KEEP (95% confidence)
 score ≥ 0.45  → KEEP (80% confidence)
@@ -158,17 +174,19 @@ score < 0.25  → PRUNE CANDIDATE (70% confidence)
 ```
 
 ### Protection Rules
+
 ```
 IF glyph_id ≤ 64          → ALWAYS KEEP (base elements)
 IF reaction_participation ≥ 0.9 → ALWAYS KEEP (catalysts)
 IF signal_strength ≥ 0.70 → USUALLY KEEP
 ```
 
----
+##
 
 ## 🔧 Optional Enhancements
 
 ### Enhancement 1: Emotional Family Clustering
+
 Group related glyphs, keep exemplars:
 
 ```python
@@ -183,33 +201,40 @@ for family, glyphs in families.items():
 ```
 
 ### Enhancement 2: Pruning Archive Capsule
+
 Archive for resurrection:
 
 ```python
 pruned = [c for c in candidates if c.should_prune]
 archive_path = engine.archive_pruned_glyphs(pruned)
+
 # → Saved as JSON, can resurrect anytime
 ```
 
 ### Enhancement 3: Confidence-Based Filtering
+
 Use confidence scores:
 
 ```python
 high_confidence = [c for c in pruned if c.prune_confidence > 0.85]
+
 # Safe to prune (confident decisions)
 
 medium_confidence = [c for c in pruned if 0.70 <= c.prune_confidence <= 0.85]
+
 # Can prune with review
 
 low_confidence = [c for c in pruned if c.prune_confidence < 0.70]
+
 # Manual review recommended
 ```
 
----
+##
 
 ## 📈 Expected Results
 
 ### On Base Glyphs (64 total)
+
 ```
 Before pruning: 64 glyphs
 After advanced pruning: 64 glyphs (all protected)
@@ -217,6 +242,7 @@ Result: 0% pruning (as expected - base elements are sacred)
 ```
 
 ### On Factorial Expansion (85,264 candidates)
+
 ```
 Before basic pruning: 85,264 combinations
 After top-15% scoring: 12,794 candidates
@@ -225,17 +251,19 @@ Result: 93% reduction, but high quality
 ```
 
 ### Tone Distribution Before/After
+
 ```
 Before: May be overrepresented (e.g., 40% "Molten")
 After: Balanced across 12 Saonyx tones
 Result: Rich, diverse emotional palette
 ```
 
----
+##
 
 ## 🎓 How to Use Each Layer
 
 ### Layer 1: Signal Strength
+
 **When:** Always. Acts as baseline filter.
 **Use case:** Remove weakly-defined glyphs.
 
@@ -245,6 +273,7 @@ if candidate.signal_strength < 0.30:
 ```
 
 ### Layer 2: Trace Role Redundancy
+
 **When:** Detecting duplicates
 **Use case:** Collapse same function + same tone
 
@@ -256,6 +285,7 @@ if candidate1.trace_role == candidate2.trace_role:
 ```
 
 ### Layer 3: Usage Frequency
+
 **When:** Production runs (most important)
 **Use case:** Keep proven performers
 
@@ -267,6 +297,7 @@ else:
 ```
 
 ### Layer 4: Tone Diversity
+
 **When:** Maintaining palette
 **Use case:** Prevent overrepresentation
 
@@ -277,6 +308,7 @@ if tone_count["Molten"] > total_glyphs * 0.33:
 ```
 
 ### Layer 5: Reaction Anchoring
+
 **When:** System integrity
 **Use case:** Protect catalysts
 
@@ -285,12 +317,14 @@ if "Forgiveness" in candidate.name:
     print("✓ Reaction catalyst → ALWAYS KEEP")
 ```
 
----
+##
 
 ## 🔄 Workflow Integration
 
 ### In Your CI/CD
+
 ```yaml
+
 # Scheduled pruning job
 schedule:
   - every_week:
@@ -302,21 +336,24 @@ schedule:
 ```
 
 ### In Glyph Matching
+
 ```python
 def match_glyph(glyph_id):
     # Use glyph normally
     use_glyph(glyph_id)
-    
+
     # Track match (for pruning decisions)
     match_history[glyph_id] += 1
-    
+
     # Periodic save
     if random.random() < 0.05:  # Save 5% of time
         save_match_history(match_history)
 ```
 
 ### In Factorial Expansion
+
 ```python
+
 # Generate expansions
 factorial_engine.generate_all_combinations()
 
@@ -330,11 +367,12 @@ survived = [c for c in candidates if not c.should_prune]
 factorial_engine.sync_to_json(survived)
 ```
 
----
+##
 
 ## 📋 Data Structure
 
 ### PruneCandidate (Evaluation Result)
+
 ```python
 @dataclass
 class PruneCandidate:
@@ -343,12 +381,12 @@ class PruneCandidate:
     valence: Optional[str]
     trace_role: Optional[str]
     tone: Optional[str]
-    
+
     # Scores
     signal_strength: float  # 0-1
     match_history: int  # count
     combined_prune_score: float  # 0-1
-    
+
     # Decision
     should_prune: bool
     prune_confidence: float  # 0-1
@@ -356,6 +394,7 @@ class PruneCandidate:
 ```
 
 ### Output Report
+
 ```json
 {
   "metadata": {
@@ -382,7 +421,7 @@ class PruneCandidate:
 }
 ```
 
----
+##
 
 ## ✅ Pre-Run Checklist
 
@@ -398,34 +437,39 @@ Before pruning, ensure your glyphs have:
 - [ ] `is_factorial` - Boolean flag (for combinations)
 - [ ] `match_history.json` - External file with activation counts (optional)
 
----
+##
 
 ## 🎯 Success Metrics
 
 After implementing advanced pruning, you should see:
 
 ✅ **Reduced overgrowth**
+
 - Fewer redundant glyphs
 - Cleaner emotional vocabulary
 
 ✅ **Better quality**
+
 - Only strong signal glyphs
 - Improved coherence
 
 ✅ **Maintained diversity**
+
 - All 12 tones represented
 - No over-specialization
 
 ✅ **Preserved catalysts**
+
 - Reaction anchors intact
 - System stability maintained
 
 ✅ **Auditability**
+
 - Every decision logged
 - Confidence scores available
 - Archive for resurrection
 
----
+##
 
 ## 📚 Documentation Files
 
@@ -437,27 +481,30 @@ After implementing advanced pruning, you should see:
 | `factorial_with_advanced_pruning.py` | Working example | 300 lines |
 | `PRUNING_REPORT.json` | Generated output | Dynamic |
 
----
+##
 
 ## 🔗 Integration Points
 
 ### With Factorial Engine
+
 ```python
 from emotional_os.glyphs.glyph_factorial_engine import GlyphFactorialEngine
 from emotional_os.glyphs.advanced_pruning_engine import AdvancedPruningEngine
 ```
 
 ### With Ritual Capsule Processor
+
 ```python
 from tools.ritual_capsule_processor import RitualCapsuleProcessor
 ```
 
 ### With VELΩNIX Engine
+
 ```python
 from emotional_os.glyphs.velonix_reaction_engine import VelonixReactionEngine
 ```
 
----
+##
 
 ## 🚀 Next Steps
 
@@ -466,12 +513,14 @@ from emotional_os.glyphs.velonix_reaction_engine import VelonixReactionEngine
    - Check example in `factorial_with_advanced_pruning.py`
 
 2. **Test on your data**
+
    ```bash
    cd /workspaces/saoriverse-console
    python3 emotional_os/glyphs/advanced_pruning_engine.py
    ```
 
 3. **Check the report**
+
    ```bash
    cat emotional_os/glyphs/PRUNING_REPORT.json
    ```
@@ -489,7 +538,7 @@ from emotional_os.glyphs.velonix_reaction_engine import VelonixReactionEngine
    - Adjust weights if needed
    - Resurrect if needed
 
----
+##
 
 ## 🎓 Key Principles
 
@@ -513,13 +562,14 @@ from emotional_os.glyphs.velonix_reaction_engine import VelonixReactionEngine
    - Catalysts are protected
    - Reactions must work
 
----
+##
 
 ## 💬 Support & Customization
 
 The system is **fully customizable**:
 
 ```python
+
 # Adjust weights
 weights = {
     'signal_strength': 0.25,      # Change from 0.25
@@ -544,7 +594,7 @@ protect_if = {
 }
 ```
 
----
+##
 
 ## 🏆 Final Notes
 
@@ -558,11 +608,11 @@ This implementation represents a **significant upgrade** in glyph management:
 
 You now have an **enterprise-grade** glyph management system that understands your VELΩNIX emotional architecture.
 
----
+##
 
-**Implementation Status:** ✅ **COMPLETE**  
-**Testing Status:** ✅ **VERIFIED**  
-**Documentation:** ✅ **COMPREHENSIVE**  
-**Ready for Production:** ✅ **YES**  
+**Implementation Status:** ✅ **COMPLETE**
+**Testing Status:** ✅ **VERIFIED**
+**Documentation:** ✅ **COMPREHENSIVE**
+**Ready for Production:** ✅ **YES**
 
 Last Updated: November 5, 2025

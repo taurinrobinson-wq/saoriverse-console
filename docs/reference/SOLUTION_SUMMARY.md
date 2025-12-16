@@ -2,7 +2,8 @@
 
 ## Problem Statement
 
-You identified that the local Streamlit interface was generating canned responses when glyphs were triggered, same structure, different keywords filled in for each message.
+You identified that the local Streamlit interface was generating canned responses when glyphs were
+triggered, same structure, different keywords filled in for each message.
 
 ## Root Cause
 
@@ -19,10 +20,14 @@ Response generation was **glyph-driven** (template-based) rather than **message-
 
 ### Architecture Shift
 
+```text
 ```
-OLD: Find Glyph → Fill Template
-NEW: Extract Message Features → Compose Response Dynamically
+
+OLD: Find Glyph → Fill Template NEW: Extract Message Features → Compose Response Dynamically
+
 ```
+
+
 
 ### Key Changes
 
@@ -65,11 +70,11 @@ NEW: Extract Message Features → Compose Response Dynamically
 
 ### Quality Metrics
 
-✅ **No identical responses** for similar emotional content  
-✅ **Message-specific** not glyph-templated  
-✅ **Detects feedback** when user corrects prior response  
-✅ **All offline**, no API required  
-✅ **Composes dynamically**, responses feel fresh  
+✅ **No identical responses** for similar emotional content
+✅ **Message-specific** not glyph-templated
+✅ **Detects feedback** when user corrects prior response
+✅ **All offline**, no API required
+✅ **Composes dynamically**, responses feel fresh
 
 ## What This Enables
 
@@ -106,9 +111,9 @@ NEW: Extract Message Features → Compose Response Dynamically
 
 ## No Additional Dependencies Required
 
-✅ All resources used are already available locally  
-✅ No API calls  
-✅ No external services  
+✅ All resources used are already available locally
+✅ No API calls
+✅ No external services
 ✅ Can run offline, instantly
 
 ## Next Steps

@@ -1,8 +1,7 @@
 """FirstPerson System Ready for Deployment Guide.
 
-This document confirms the complete Phase 1-2 integration is production-ready
-and provides deployment steps, testing procedures, and success metrics.
-"""
+This document confirms the complete Phase 1-2 integration is production-ready and provides
+deployment steps, testing procedures, and success metrics. """
 
 # ===== PRODUCTION READINESS CHECKLIST =====
 
@@ -32,13 +31,14 @@ and provides deployment steps, testing procedures, and success metrics.
 - Regression prevention: memory persistence, response quality
 - Performance: <3s full test suite execution
 
----
+##
 
 # ===== DEPLOYMENT STEPS =====
 
 ## Pre-Deployment Validation
 
 ```bash
+
 # 1. Verify all tests pass
 python -m pytest emotional_os/core/firstperson/test_*.py -v
 
@@ -46,12 +46,15 @@ python -m pytest emotional_os/core/firstperson/test_*.py -v
 python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; print('✓ Imports OK')"
 
 # 3. Verify Supabase connection (if applicable)
-python scripts/validate_supabase.py
+```text
+```text
 ```
 
 ## Staging Deployment
 
 ```bash
+
+
 # 1. Deploy to staging environment
 ./deploy.sh staging
 
@@ -59,12 +62,14 @@ python scripts/validate_supabase.py
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 
 # 3. Monitor metrics for 24 hours
-python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.report_health()"
+
+```text
 ```
 
 ## Production Deployment
 
 ```bash
+
 # 1. Create feature branch for release
 git checkout -b release/firstperson-phase-1-2
 
@@ -72,20 +77,24 @@ git checkout -b release/firstperson-phase-1-2
 ./deploy.sh production
 
 # 3. Begin real-time monitoring
-python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.start_monitoring()"
+python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m =
+DeploymentMonitor(); m.start_monitoring()"
 
 # 4. Commit deployment
 git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
-git push origin release/firstperson-phase-1-2
+```text
+```text
 ```
 
----
+##
 
 # ===== TESTING PROCEDURES =====
 
 ## Unit Tests (All Modules)
 
 ```bash
+
+
 # Story-start detection
 pytest emotional_os/core/firstperson/test_story_start_detector.py -v
 
@@ -93,21 +102,24 @@ pytest emotional_os/core/firstperson/test_story_start_detector.py -v
 pytest emotional_os/core/firstperson/test_frequency_reflector.py -v
 
 # Repair module
-pytest emotional_os/core/firstperson/test_repair_module.py -v
-pytest emotional_os/core/firstperson/test_repair_orchestrator.py -v
+pytest emotional_os/core/firstperson/test_repair_module.py -v pytest
+emotional_os/core/firstperson/test_repair_orchestrator.py -v
 
 # Integration orchestrator
-pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
+
+```text
 ```
 
 ## Integration Tests
 
 ```bash
+
 # Full Phase 1 pipeline
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestIntegrationFlow -v
 
 # Phase 2.3 repair detection
-pytest emotional_os/core/firstperson/test_repair_orchestrator.py::TestRejectionDetection -v
+```text
+```text
 ```
 
 ## Manual Testing (Recommended)
@@ -115,6 +127,7 @@ pytest emotional_os/core/firstperson/test_repair_orchestrator.py::TestRejectionD
 ### Scenario 1: Story-Start Detection
 
 ```python
+
 from emotional_os.core.firstperson.integration_orchestrator import FirstPersonOrchestrator
 
 orch = FirstPersonOrchestrator(user_id="test_user", conversation_id="test_conv")
@@ -122,39 +135,40 @@ orch = FirstPersonOrchestrator(user_id="test_user", conversation_id="test_conv")
 # Should generate clarifier
 response = orch.handle_conversation_turn("They were fighting again.")
 print(response.response_text)
-# Expected: Clarifying prompt about "they"
+
+```text
 ```
 
 ### Scenario 2: Frequency Reflection
 
 ```python
+
 # Three turns with same theme should trigger reflection
-inputs = [
-    "The kids were fighting.",
-    "More fighting today.",
-    "Still fighting over the same thing."
+inputs = [ "The kids were fighting.", "More fighting today.", "Still fighting over the same thing."
 ]
 
-for turn_num, input_text in enumerate(inputs, 1):
-    response = orch.handle_conversation_turn(input_text)
-    print(f"Turn {turn_num}: {response.detected_theme}")
-# Expected: "family conflict" or similar theme on turn 3+
+for turn_num, input_text in enumerate(inputs, 1): response =
+orch.handle_conversation_turn(input_text) print(f"Turn {turn_num}: {response.detected_theme}")
+
+```text
+```text
 ```
 
 ### Scenario 3: Repair Detection
 
 ```python
+
 from emotional_os.core.firstperson.repair_orchestrator import RepairOrchestrator
 
 repair = RepairOrchestrator(user_id="test_user")
 
 # Should detect this as correction
-is_rejection = repair.detect_rejection("No, that's not what I meant.")
-print(is_rejection)
-# Expected: True
+is_rejection = repair.detect_rejection("No, that's not what I meant.") print(is_rejection)
+
+```text
 ```
 
----
+##
 
 # ===== SUCCESS METRICS =====
 
@@ -188,6 +202,7 @@ print(is_rejection)
 ## Monitoring Commands
 
 ```bash
+
 # Check all metrics
 python -m emotional_os.core.firstperson.deployment_monitor
 
@@ -195,16 +210,19 @@ python -m emotional_os.core.firstperson.deployment_monitor
 watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 
 # Generate health report
-python -c "from emotional_os.core.firstperson.deployment_monitor import DeploymentMonitor; m = DeploymentMonitor(); m.report_health()"
+```text
+```text
 ```
 
----
+##
 
 # ===== ROLLBACK PROCEDURE =====
 
 If issues arise:
 
 ```bash
+
+
 # 1. Identify issue via monitoring
 python -m emotional_os.core.firstperson.deployment_monitor
 
@@ -218,36 +236,33 @@ git revert HEAD
 pytest emotional_os/core/firstperson/test_*.py -q
 
 # 5. Open incident ticket for investigation
+
 # Issue tracking system: [fill in]
+
 ```
 
----
+##
 
 # ===== KNOWN LIMITATIONS & NEXT STEPS =====
 
 ## Current Limitations
 
-1. No real-time learning loop (planned for Phase 3.2)
-2. Sarcasm detection relies on keyword patterns (upgrading to ML in Phase 2.5)
-3. Single-user memory model (multi-user planned for Phase 4)
+1. No real-time learning loop (planned for Phase 3.2) 2. Sarcasm detection relies on keyword
+patterns (upgrading to ML in Phase 2.5) 3. Single-user memory model (multi-user planned for Phase 4)
 4. No cross-session pattern analysis yet (Phase 3.1)
 
 ## Immediate Next Steps (Week 1)
 
-1. Deploy to staging with real user data
-2. Collect baseline metrics for all KPIs
-3. Gather user feedback on response quality
-4. Fine-tune temporal marker detection
+1. Deploy to staging with real user data 2. Collect baseline metrics for all KPIs 3. Gather user
+feedback on response quality 4. Fine-tune temporal marker detection
 
 ## Phase 3 Roadmap (Weeks 2-6)
 
-1. 3.1: Long-term memory integration
-2. 3.2: Multi-modal affect analysis
-3. 3.3: Emotional attunement refinement
-4. 3.4: Therapeutic framework integration
-5. 3.5: Relationship dynamics modeling
+1. 3.1: Long-term memory integration 2. 3.2: Multi-modal affect analysis 3. 3.3: Emotional
+attunement refinement 4. 3.4: Therapeutic framework integration 5. 3.5: Relationship dynamics
+modeling
 
----
+##
 
 # ===== SUPPORT & CONTACTS =====
 
@@ -265,12 +280,10 @@ pytest emotional_os/core/firstperson/test_*.py -q
 
 ## Escalation
 
-1. **Performance Issue** → On-call engineer
-2. **User Report** → Product owner
-3. **Infrastructure** → Ops team
-4. **Multiple Issues** → Dev lead (deploy rollback if necessary)
+1. **Performance Issue** → On-call engineer 2. **User Report** → Product owner 3. **Infrastructure**
+→ Ops team 4. **Multiple Issues** → Dev lead (deploy rollback if necessary)
 
----
+##
 
 # ===== DEPLOYMENT SIGN-OFF =====
 
@@ -284,7 +297,7 @@ pytest emotional_os/core/firstperson/test_*.py -q
 
 **Approved for Deployment**: ✓
 
----
+##
 
 **Next Section**: See `/docs/firstperson_monitoring.md` for detailed metrics
 **Backup Plan**: See `/docs/firstperson_rollback.md` for emergency procedures

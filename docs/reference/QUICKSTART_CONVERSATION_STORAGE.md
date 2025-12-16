@@ -2,7 +2,8 @@
 
 ## What's New ✨
 
-Your conversations now **automatically save** and **persist across page refreshes**. Just like Microsoft Copilot!
+Your conversations now **automatically save** and **persist across page refreshes**. Just like
+Microsoft Copilot!
 
 ## Getting Started
 
@@ -12,12 +13,11 @@ Run this SQL in your Supabase dashboard:
 
 **Path**: `sql/conversations_table.sql`
 
-1. Go to Supabase Console → **SQL Editor**
-2. Click **New Query**
-3. Copy the entire contents of `sql/conversations_table.sql`
-4. Paste it and click **Run**
+1. Go to Supabase Console → **SQL Editor** 2. Click **New Query** 3. Copy the entire contents of
+`sql/conversations_table.sql` 4. Paste it and click **Run**
 
 This creates:
+
 - `conversations` table (stores your full conversations)
 - `conversation_metadata` table (tracks changes)
 - Automatic timestamp updates
@@ -29,13 +29,15 @@ Make sure `.streamlit/secrets.toml` has:
 ```toml
 [supabase]
 url = "https://your-project.supabase.co"
-key = "your-anon-key"
+```text
+```text
 ```
 
 ### 3. Restart Your App
 
 ```bash
-streamlit run app.py
+
+```text
 ```
 
 ## Using the New Features
@@ -50,12 +52,14 @@ On the left sidebar, you'll see:
 │   ├── ✏️                             ← Click to rename
 │   └── 🗑️                             ← Click to delete
 ├── 💬 "Weekend plans"
-└── ➕ New Conversation                ← Start fresh
+```text
+```text
 ```
 
 ### Saving Conversations
 
 Check the **"💾 Save my chats"** box in the sidebar to:
+
 - ✅ Automatically save all conversations
 - ✅ Persist across page refreshes
 - ✅ Remember this preference next time you log in
@@ -65,9 +69,10 @@ Check the **"💾 Save my chats"** box in the sidebar to:
 When you start a new conversation, the first message is used to auto-generate a title:
 
 ```
-You: "I've been feeling really overwhelmed lately"
-       ↓
-Title: "Feeling really overwhelmed lately"
+
+You: "I've been feeling really overwhelmed lately" ↓
+
+```text
 ```
 
 You can rename it anytime by clicking ✏️
@@ -86,6 +91,7 @@ You can rename it anytime by clicking ✏️
 ## Data Structure
 
 Each conversation stores:
+
 - All messages (user + assistant)
 - Processing time
 - Mode used (hybrid/ai/local)
@@ -93,6 +99,7 @@ Each conversation stores:
 - Emotional context (for future features)
 
 Example:
+
 ```json
 {
   "id": "abc123...",
@@ -108,32 +115,30 @@ Example:
   ],
   "created_at": "2024-01-15T10:30:00Z",
   "updated_at": "2024-01-15T10:35:00Z"
-}
+```text
+```text
 ```
 
 ## Troubleshooting
 
 ### Q: Sidebar not showing previous conversations?
 
-**A:** 
-1. Check "💾 Save my chats" is toggled ON
-2. Refresh the page
-3. Wait a moment for sidebar to load
+**A:**
+
+1. Check "💾 Save my chats" is toggled ON 2. Refresh the page 3. Wait a moment for sidebar to load
 
 ### Q: Conversations disappeared after refresh?
 
 **A:**
-1. Make sure "💾 Save my chats" is checked
-2. Verify Supabase credentials in secrets.toml
-3. Check browser console (F12) for errors
-4. Verify `sql/conversations_table.sql` was run
+
+1. Make sure "💾 Save my chats" is checked 2. Verify Supabase credentials in secrets.toml 3. Check
+browser console (F12) for errors 4. Verify `sql/conversations_table.sql` was run
 
 ### Q: Auto-name shows "New Conversation" instead of smart title?
 
 **A:**
-1. Make sure first message is not empty
-2. Try restarting the app
-3. Check logs for NLP errors
+
+1. Make sure first message is not empty 2. Try restarting the app 3. Check logs for NLP errors
 
 ### Q: Can I rename a conversation?
 
@@ -148,19 +153,27 @@ Example:
 ### Testing the Feature
 
 ```bash
+
+
 # 1. Create test user
+
 # 2. Start conversation, check "Save my chats"
+
 # 3. Send a message
+
 # 4. Refresh page (F5)
+
 # 5. Verify conversation appears in sidebar
 
 # Check Supabase:
-SELECT * FROM conversations WHERE user_id = 'test-user';
+
+```text
 ```
 
 ### Monitoring
 
 Check Supabase dashboard:
+
 - **Conversations table** → See all saved conversations
 - **Conversation metadata** → Audit trail of changes
 
@@ -172,23 +185,23 @@ from emotional_os.deploy.modules.conversation_manager import ConversationManager
 manager = ConversationManager(user_id="user123")
 
 # List all conversations
-convs = manager.load_conversations()
-print(convs)
+convs = manager.load_conversations() print(convs)
 
 # Load specific conversation
-conv = manager.load_conversation("conv-uuid")
-print(conv['messages'])
+conv = manager.load_conversation("conv-uuid") print(conv['messages'])
 
 # Rename
 success, msg = manager.rename_conversation("conv-uuid", "New Title")
 
 # Delete
-success, msg = manager.delete_conversation("conv-uuid")
+```text
+```text
 ```
 
 ## Documentation
 
 For more details, see:
+
 - **`CONVERSATION_STORAGE.md`** - Complete setup & API guide
 - **`IMPLEMENTATION_SUMMARY.md`** - Technical architecture
 - **`sql/conversations_table.sql`** - Database schema
@@ -198,6 +211,7 @@ For more details, see:
 These features are in commit `4b1c501`:
 
 ```
+
 feat: implement persistent conversation storage with auto-naming
 
 - ConversationManager for Supabase persistence
@@ -205,17 +219,20 @@ feat: implement persistent conversation storage with auto-naming
 - Sidebar with load/rename/delete
 - Database schema with metadata
 - Integrated into UI
+
 ```
 
 ## What Changed
 
 ### New Files
+
 - `emotional_os/deploy/modules/conversation_manager.py` - Main implementation
 - `sql/conversations_table.sql` - Database schema
 - `CONVERSATION_STORAGE.md` - Setup guide
 - `IMPLEMENTATION_SUMMARY.md` - Architecture
 
 ### Modified Files
+
 - `emotional_os/deploy/modules/ui.py` - Added sidebar, persistence
 
 ## Next Steps
