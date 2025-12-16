@@ -26,6 +26,7 @@ if "repair_orchestrator" not in st.session_state:
     st.session_state.repair_orchestrator = RepairOrchestrator(
         user_id=st.session_state.user_id
 ```text
+```text
 ```
 
 
@@ -35,6 +36,7 @@ if "repair_orchestrator" not in st.session_state:
 Generate response and record glyph context.
 
 ```python
+
 response_text = glyph_composer.compose_glyph_aware_response(
     tone=detected_tone,
     arousal=arousal,
@@ -51,8 +53,10 @@ context = GlyphCompositionContext(
 )
 
 st.session_state.repair_orchestrator.record_response(response_text)
+
 ```text
 ```
+
 
 
 
@@ -75,6 +79,7 @@ else:
         st.session_state.repair_orchestrator.record_acceptance(
             st.session_state.last_glyph_context
 ```text
+```text
 ```
 
 
@@ -84,6 +89,7 @@ else:
 Use suggested glyph if available.
 
 ```python
+
 if repair_analysis.is_rejection:
     # Acknowledge correction
     if repair_analysis.user_correction:
@@ -96,8 +102,10 @@ if repair_analysis.is_rejection:
             arousal=arousal,
             valence=valence,
             glyph_name=suggested_glyph
+
 ```text
 ```
+
 
 
 
@@ -108,6 +116,7 @@ Track these in Streamlit session state:
 ```python
 st.session_state.repair_orchestrator    # RepairOrchestrator instance
 st.session_state.last_glyph_context     # GlyphCompositionContext from last response
+```text
 ```text
 ```
 
@@ -135,6 +144,7 @@ st.session_state.last_glyph_context     # GlyphCompositionContext from last resp
 ## Example Complete Workflow
 
 ```python
+
 def handle_conversation_turn(user_input: str) -> str:
     orch = st.session_state.repair_orchestrator
 
@@ -179,6 +189,7 @@ def handle_conversation_turn(user_input: str) -> str:
     st.session_state.last_glyph_context = context
 
     return response
+
 ```
 
 

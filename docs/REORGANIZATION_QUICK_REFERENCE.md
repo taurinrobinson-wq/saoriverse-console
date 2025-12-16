@@ -22,6 +22,7 @@ grep -l "emotional_os" *.py 2>/dev/null || echo "No imports in root"
 # Create backup branch
 git checkout -b refactor/reorganization-master
 ```text
+```text
 ```
 
 
@@ -30,6 +31,7 @@ git checkout -b refactor/reorganization-master
 ## Phase 2: Create Directory Structure
 
 ```bash
+
 
 # Core source structure
 mkdir -p src/
@@ -53,8 +55,10 @@ touch tests/integration/__init__.py
 touch scripts/__init__.py
 touch scripts/data/__init__.py
 touch scripts/setup/__init__.py
+
 ```text
 ```
+
 
 
 ##
@@ -86,6 +90,7 @@ mv tests/test_emotional_os.py tests/unit/ 2>/dev/null || true
 mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 
 ```text
+```text
 ```
 
 
@@ -93,6 +98,7 @@ mv tests/test_signal_parser.py tests/unit/ 2>/dev/null || true
 ### Data Files
 
 ```bash
+
 
 # Consolidate data
 mkdir -p data/lexicons
@@ -103,8 +109,10 @@ mv *lexicon*.json data/lexicons/ 2>/dev/null || true
 mv *glyph*.json data/ 2>/dev/null || true
 
 # Move database
+
 ```text
 ```
+
 
 
 
@@ -125,6 +133,7 @@ mv scripts/seed*.py scripts/setup/ 2>/dev/null || true
 mv scripts/inspect*.py scripts/debug/ 2>/dev/null || true
 mv scripts/debug*.py scripts/debug/ 2>/dev/null || true
 ```text
+```text
 ```
 
 
@@ -135,6 +144,7 @@ mv scripts/debug*.py scripts/debug/ 2>/dev/null || true
 Create `tools/import_checker.py`:
 
 ```bash
+
 cat > tools/import_checker.py << 'EOF'
 """Verify all imports work."""
 import sys
@@ -182,14 +192,17 @@ def check():
 
 if __name__ == "__main__":
     sys.exit(0 if check() else 1)
+
 ```text
 ```
+
 
 
 
 Run it:
 
 ```bash
+```text
 ```text
 ```
 
@@ -201,6 +214,7 @@ Run it:
 Create `app.py`:
 
 ```bash
+
 cat > app.py << 'EOF'
 """
 SaoriVerse Console - FirstPerson
@@ -239,8 +253,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 ```text
 ```
+
 
 
 ##
@@ -262,6 +278,7 @@ pytest tests/integration/ -v --tb=short
 streamlit run app.py
 
 ```text
+```text
 ```
 
 
@@ -270,6 +287,7 @@ streamlit run app.py
 ## Phase 7: Cleanup
 
 ```bash
+
 
 # Archive old structure
 mkdir -p archive/old_structure/
@@ -286,8 +304,10 @@ for file in *.md; do
     if [[ "$file" != "README.md" && "$file" != "CONTRIBUTING.md" ]]; then
         mv "$file" docs/archive/" 2>/dev/null || true
     fi
+
 ```text
 ```
+
 
 
 ##
@@ -314,6 +334,7 @@ git commit -m "refactor: Complete codebase reorganization
 - Ready for efficient development and deployment"
 
 # Push to GitHub
+```text
 ```text
 ```
 
@@ -350,6 +371,7 @@ After everything is organized:
 
 ```bash
 
+
 # Run all tests
 pytest tests/ -v --cov=src
 
@@ -366,6 +388,7 @@ pytest tests/unit/test_new_feature.py -v
 git add -A
 git commit -m "feat: Add new feature"
 git push origin feature/name
+
 ```
 
 

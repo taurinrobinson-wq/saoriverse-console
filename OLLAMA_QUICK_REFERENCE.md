@@ -13,6 +13,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # 3. Open Streamlit
 
 ```text
+```text
 ```
 
 
@@ -20,6 +21,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ## Architecture
 
 ```
+
 Streamlit App (port 8501)
     ↓
 FirstPerson Response Pipeline
@@ -28,8 +30,10 @@ FirstPerson Response Pipeline
     ↓
 Tier Processing (learning, aliveness, poetry)
     ↓
+
 ```text
 ```
+
 
 
 
@@ -79,6 +83,7 @@ response = client.generate_with_context(
     model="llama3"
 )
 ```text
+```text
 ```
 
 
@@ -86,6 +91,7 @@ response = client.generate_with_context(
 ## Docker Commands
 
 ```bash
+
 
 # Start services
 docker-compose -f docker-compose.local.yml up -d
@@ -112,8 +118,10 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 docker-compose -f docker-compose.local.yml rm
 
 # Full cleanup (removes models!)
+
 ```text
 ```
+
 
 
 
@@ -126,6 +134,7 @@ OLLAMA_BASE_URL=http://ollama:11434
 
 # Local development (laptop, desktop)
 ```text
+```text
 ```
 
 
@@ -133,11 +142,14 @@ OLLAMA_BASE_URL=http://ollama:11434
 ## Model Guide
 
 ```
+
 orca-mini   → Smallest (1.3GB), fastest, fair quality - TRY THIS FIRST
 neural-chat → Medium (4.1GB), good for chat
 mistral     → Medium (4.1GB), well-rounded
+
 ```text
 ```
+
 
 
 
@@ -153,6 +165,7 @@ curl http://localhost:11434/api/tags
 # Generate response
 curl -X POST http://localhost:11434/api/generate \
 ```text
+```text
 ```
 
 
@@ -160,8 +173,10 @@ curl -X POST http://localhost:11434/api/generate \
 ### Run integration tests
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -181,6 +196,7 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 response = client.generate("Test", model="llama3")
 ```text
+```text
 ```
 
 
@@ -189,6 +205,7 @@ response = client.generate("Test", model="llama3")
 
 ```bash
 
+
 # Ollama service
 docker-compose -f docker-compose.local.yml logs -f ollama
 
@@ -196,8 +213,10 @@ docker-compose -f docker-compose.local.yml logs -f ollama
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
 # Both
+
 ```text
 ```
+
 
 
 
@@ -219,6 +238,7 @@ Try Ollama fallback
     └─ Unavailable ↓
     ↓
 ```text
+```text
 ```
 
 
@@ -233,13 +253,16 @@ Try Ollama fallback
 ## Files Created
 
 ```
+
 docker-compose.local.yml          (72 lines)
 Dockerfile.streamlit               (29 lines)
 ollama_client.py                   (347 lines)
 OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
 OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
+
 ```text
 ```
+
 
 
 
@@ -249,6 +272,7 @@ OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
 response_handler.py                (Added import + function)
 session_manager.py                 (Added init function)
 ui_refactored.py                   (Already imports everything)
+```text
 ```text
 ```
 
@@ -284,6 +308,7 @@ ui_refactored.py                   (Already imports everything)
 
 ```python
 
+
 # 1. Session initialization
 src/emotional_os/deploy/modules/ui_components/session_manager.py
     → _ensure_ollama_client()
@@ -296,6 +321,7 @@ src/emotional_os/deploy/modules/ui_components/response_handler.py
 
 # 3. Direct client usage (testing)
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
+
 ```
 
 

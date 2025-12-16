@@ -11,8 +11,10 @@ Most voice AI systems do one of two things:
 You've built something fundamentally different:
 
 **Your System**:
+
 ```text
 ```
+
 Voice Input (User speaks)
     ↓
 STT: Transcribe to emotional signal (not just text)
@@ -26,6 +28,7 @@ Prosody Planning: Map emotional state → voice characteristics
 TTS: Synthesize response WITH emotional prosody applied
     ↓
 Voice Output (System sounds emotionally congruent)
+
 ```
 
 
@@ -48,6 +51,7 @@ Voice Output (System sounds emotionally congruent)
 **Components** (in `spoken_interface/audio_pipeline.py`):
 
 ```python
+
 class AudioProcessor:
     """Preprocesses audio for optimal transcription"""
 
@@ -65,8 +69,10 @@ class AudioProcessor:
 
     def trim_silence(audio, sr=16000, threshold_ms=500):
         # Remove leading/trailing silence
+
 ```text
 ```
+
 
 
 
@@ -86,6 +92,7 @@ transcription_result = pipeline.transcribe(audio_bytes)
     "language": "en",
     "confidence": 0.96,
     "duration": 3.2,
+```text
 ```text
 ```
 
@@ -117,6 +124,7 @@ transcription_result = pipeline.transcribe(audio_bytes)
 **Core Mapping** (in `spoken_interface/prosody_planner.py`):
 
 ```python
+
 class ProsodyPlanner:
     """Maps glyph emotional signals to voice characteristics"""
 
@@ -136,8 +144,10 @@ class ProsodyPlanner:
             - energy_scale: 0.3-1.5 (volume)
             - emphasis_indices: [word_positions]
             - terminal_contour: RISING/MID/FALLING
+
 ```text
 ```
+
 
 
 
@@ -165,6 +175,7 @@ CERTAINTY → Terminal Contour
 ├─ Uncertain (<0.4) → RISING (sounds questioning)
 ├─ Mixed (0.4-0.6) → MID (neutral)
 ```text
+```text
 ```
 
 
@@ -172,6 +183,7 @@ CERTAINTY → Terminal Contour
 **Guardrails** (Prevents jarring transitions):
 
 ```python
+
 class ProsodyGuardrails:
     """Ensures smooth, natural transitions"""
 
@@ -185,8 +197,10 @@ class ProsodyGuardrails:
     # No step functions (all continuous changes)
 
     # Energy stays between 0.3x and 1.5x
+
 ```text
 ```
+
 
 
 
@@ -211,6 +225,7 @@ ProsodyPlan generated:
 ├─ emphasis_pause: 200ms (pause after "try" - honoring vulnerability)
 └─ terminal_contour: RISING (inviting, not prescriptive)
 
+```text
 ```text
 ```
 
@@ -244,6 +259,7 @@ ProsodyPlan generated:
 **Core Components** (in `spoken_interface/streaming_tts.py`):
 
 ```python
+
 class StreamingTTSEngine:
     """High-performance streaming synthesis"""
 
@@ -302,8 +318,10 @@ class ProsodyApplier:
 
     def apply_emphasis_pauses(audio, emphasis_indices, pause_ms=100):
         # Insert silence after emphasized words
+
 ```text
 ```
+
 
 
 
@@ -348,6 +366,7 @@ Result: User hears: "I hear the" (100ms)
         Pause: 200ms
         User hears: "weight of that" (200ms)
 ```text
+```text
 ```
 
 
@@ -355,6 +374,7 @@ Result: User hears: "I hear the" (100ms)
 **Performance Metrics**:
 
 ```
+
 Synthesis:
 ├─ Text→speech: 100-200ms (text-length dependent)
 ├─ Prosody application: 20-50ms (DSP operations)
@@ -367,8 +387,10 @@ Model Details:
 ├─ Size: ~200MB (one-time download)
 ├─ Sample rate: 22050Hz
 ├─ GPU optional (3-5x faster if available)
+
 ```text
 ```
+
 
 
 
@@ -417,6 +439,7 @@ class VoiceUIState:
         self.prosody_session = None
         self.tts_session = None
 ```text
+```text
 ```
 
 
@@ -424,6 +447,7 @@ class VoiceUIState:
 **Integration Pattern**:
 
 ```python
+
 
 # In main_v2.py or entry point
 import streamlit as st
@@ -447,8 +471,10 @@ if transcription:
     glyph = generator.current_glyph
 
     # Render voice output
+
 ```text
 ```
+
 
 
 
@@ -499,6 +525,7 @@ class LatencyOptimizer:
     # Parallel processing: STT + Response generation overlap
     # Streaming: Don't wait for full response before TTS starts
 ```text
+```text
 ```
 
 
@@ -506,6 +533,7 @@ class LatencyOptimizer:
 **Current Performance**:
 
 ```
+
 Full Round-Trip (User Speaks → Hears Response):
 ├─ User speaking: 3-10 seconds (natural length)
 ├─ STT processing: 200-300ms
@@ -516,8 +544,10 @@ Full Round-Trip (User Speaks → Hears Response):
 Acceptable for real-time conversation? YES ✓
 Can scale to thousands of concurrent users? YES ✓
 Privacy compliance (local processing)? YES ✓
+
 ```text
 ```
+
 
 
 ##
@@ -540,6 +570,7 @@ Analysis:
 ├─ Consensus: Masking/suppression detected
 └─ Response: "Something in your voice suggests maybe that's not the whole story?"
 ```
+
 
 
 

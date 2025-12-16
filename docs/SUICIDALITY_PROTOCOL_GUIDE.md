@@ -57,8 +57,10 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 ##
 
 ## State Machine Flow
+
 ```text
 ```
+
 User discloses suicidal ideation
               ↓
    DisclosureDetected
@@ -88,6 +90,7 @@ User discloses suicidal ideation
    ├─ Recognize significance
    ├─ Ask present-moment question
    └─ Continue support or explore further
+
 ```
 
 
@@ -144,6 +147,7 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 
 ### Resource Offering (Key Innovation)
 ```text
+```text
 ```
 1. Detect suicidal disclosure
 2. Acknowledge + clarify role + invite
@@ -158,14 +162,18 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 
 
 
+
 ### Return Detection
+
 ```text
 ```
+
 If user returns AND has "check_in_invited" flag:
    1. Use check_in_recognition templates FIRST
    2. Acknowledge significance of return
    3. Ask present-focused question
    4. Route to Explore or ContinueSupport based on new input
+
 ```
 
 
@@ -176,9 +184,12 @@ If user returns AND has "check_in_invited" flag:
 ### Test It
 
 ```bash
+
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -207,6 +218,7 @@ Response includes resources: True
 Response respects boundary: True
 
 ```text
+```text
 ```
 
 
@@ -214,6 +226,7 @@ Response respects boundary: True
 ### Use It In Production
 
 ```python
+
 from emotional_os.core.signal_parser import parse_input
 
 result = parse_input(
@@ -226,6 +239,7 @@ result = parse_input(
 # System routes to suicidality protocol automatically
 
 # Returns with response_source: "suicidality_protocol"
+
 ```
 
 

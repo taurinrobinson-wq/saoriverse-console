@@ -63,6 +63,7 @@ User Output
 ```
 
 
+
 ##
 
 ## Key Integration Points
@@ -84,6 +85,7 @@ elif not repair_analysis.is_rejection:
 
 
 
+
 ### 2. Glyph Override (Line 180)
 
 ```python
@@ -96,6 +98,7 @@ brief_response, used_glyph = compose_glyph_aware_response(
     suggested_glyph=suggested_glyph_override,  # Phase 2.3
 )
 ```
+
 
 
 
@@ -117,6 +120,7 @@ if repair_orchestrator and used_glyph:
 ```
 
 
+
 ##
 
 ## Session State Management
@@ -127,6 +131,7 @@ The repair system uses Streamlit session state to maintain:
 st.session_state.repair_orchestrator      # RepairOrchestrator instance
 st.session_state.last_glyph_context       # GlyphCompositionContext
 ```
+
 
 
 
@@ -152,6 +157,7 @@ System: "That sounds like pressure building. What's bearing down on you?"
 
 
 
+
 ### Turn 2: User Rejects
 
 ```
@@ -166,6 +172,7 @@ Suggested alternative: Next glyph to try
 
 
 
+
 ### Turn 3: System Adapts
 
 ```
@@ -177,6 +184,7 @@ Uses: Alternative glyph that was more accepted
 ↓
 Response: "I hear the [learned alternative]. What's happening?"
 ```
+
 
 
 ##
@@ -213,6 +221,7 @@ Response: "I hear the [learned alternative]. What's happening?"
         - Wired glyph override capability
         - All tests passing, zero regressions
 ```
+
 
 
 
@@ -281,6 +290,7 @@ User Input
   ↓
 User Output + Context Ready for Next Turn
 ```
+
 
 
 ##

@@ -44,6 +44,7 @@ User Response (with metadata)
 
 
 
+
 ### Key Features
 
 ✅ **Lightweight Design** - No heavy NLP, fast startup
@@ -91,6 +92,7 @@ resp6 = orch.handle_conversation_turn("I want to help her more.")
 
 # → (different framing, no repetition, persisted to Supabase)
 ```
+
 
 
 

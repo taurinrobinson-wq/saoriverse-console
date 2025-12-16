@@ -21,6 +21,7 @@ python examples.py
 
 
 
+
 ### For Verification (2 minutes)
 
 👉 Run **`verify_phase_3_5.sh`** to confirm all components:
@@ -28,6 +29,7 @@ python examples.py
 ```bash
 ./verify_phase_3_5.sh
 ```
+
 
 
 ##
@@ -121,6 +123,7 @@ python -m pytest test_phase_3_5.py -v
 
 
 
+
 #### 5. `examples.py` (250+ lines)
 
 **Runnable end-to-end examples**
@@ -137,6 +140,7 @@ Run with:
 ```bash
 python examples.py
 ```
+
 
 
 
@@ -256,6 +260,7 @@ safe_response, result = create_safe_response(raw_response, [g for g, _ in glyphs
 
 
 
+
 ### Pattern 2: Context-Based Selection
 
 ```python
@@ -267,6 +272,7 @@ context_config = {
     },
 }
 ```
+
 
 
 
@@ -288,6 +294,7 @@ example = builder.add_from_interaction(
 
 
 
+
 ### Pattern 4: Curriculum Learning
 
 ```python
@@ -296,6 +303,7 @@ from training_corpus import create_baseline_curriculum
 curriculum = create_baseline_curriculum()
 examples = builder.add_curriculum_progression(curriculum, gate_schedule)
 ```
+
 
 
 ##
@@ -342,6 +350,7 @@ test_phase_3_5.py::TestPhase35Integration::test_glyph_control_flow PASSED
 ```
 
 
+
 ##
 
 ## 🚀 Next Steps
@@ -369,6 +378,7 @@ local_inference/
 ├── IMPLEMENTATION_COMPLETE.md    # Complete summary
 └── README.md (this file)          # Navigation guide
 ```
+
 
 
 ##

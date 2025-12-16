@@ -123,8 +123,10 @@ Streamlit app for interactive scene testing:
 - Glyph resonance display
 
 **Workflow:**
+
 ```text
 ```
+
 1. Run: streamlit run velinor_scenes_test.py
 2. Enter player name
 3. Start scene sequence
@@ -134,6 +136,7 @@ Streamlit app for interactive scene testing:
 7. Watch trust levels update
 8. Navigate between scenes
 9. Review dialogue history
+
 ```
 
 
@@ -142,6 +145,7 @@ Streamlit app for interactive scene testing:
 ## 🎮 How It Works
 
 ### Scene Progression Flow
+```text
 ```text
 ```
 Scene.DISTANT
@@ -159,9 +163,12 @@ Scene.CHOICES (Player selects dialogue)
 
 
 
+
 ### Visual Layering
+
 ```text
 ```
+
 Background Image (full width)
     ↓
 Foreground Image (NPC, scaled based on state)
@@ -173,11 +180,13 @@ Glyph Resonance Indicator
 NPC Dialogue Bubble
     ↓
 Player Option Buttons
+
 ```
 
 
 
 ### Trust System
+```text
 ```text
 ```
 Each NPC has trust value: 0.0 → 1.0
@@ -188,9 +197,12 @@ Trust gates deeper dialogue and future interactions
 
 
 
+
 ### Glyph Resonance
+
 ```text
 ```
+
 Each scene has:
 - glyph_distant: glyphs triggered in Scene.DISTANT
 - glyph_close: glyphs triggered in Scene.APPROACH/CLOSE/DIALOGUE
@@ -198,6 +210,7 @@ Each scene has:
 
 Glyphs are displayed as text indicators below narration
 Examples: [Esḧ] = sacred witness, [Thalen̈] = longing, [Aelitḧ] = stillness
+
 ```
 
 
@@ -221,6 +234,7 @@ Examples: [Esḧ] = sacred witness, [Thalen̈] = longing, [Aelitḧ] = stillness
 To create new scenes:
 
 ```python
+
 scene = SceneModule(
     scene_id="my_scene_01",
     npc_name="Unique NPC",
@@ -232,14 +246,17 @@ scene = SceneModule(
     player_options=[...],
     glyph_distant=[...],
     glyph_close=[...],
+
 ```text
 ```
+
 
 
 
 Then add to sequence:
 
 ```python
+```text
 ```text
 ```
 
@@ -317,6 +334,7 @@ Then add to sequence:
 ## 📁 File Structure
 
 ```
+
 velinor/
 ├── engine/
 │   ├── __init__.py (updated with exports)
@@ -343,8 +361,10 @@ velinor/
 Root:
 ├── velinor_app.py (original main app - can integrate scenes later)
 ├── velinor_scenes_test.py (NEW - test/demo interface)
+
 ```text
 ```
+
 
 
 ##
@@ -422,6 +442,7 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 # - Navigate to scene
 
 ```text
+```text
 ```
 
 
@@ -430,6 +451,7 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 ## ✨ Example: Adding a New NPC Scene
 
 ```python
+
 @staticmethod
 def build_healer_encounter() -> SceneModule:
     return SceneModule(
@@ -460,8 +482,10 @@ def build_healer_encounter() -> SceneModule:
 
         glyph_distant=["Esḧ"],
         glyph_close=["Cinarä̈", "Sha'rú"],
+
 ```text
 ```
+
 
 
 
@@ -473,6 +497,7 @@ sequence = [
     MarketplaceSceneSequence.build_healer_encounter(),  # NEW
 ]
 ```
+
 
 
 

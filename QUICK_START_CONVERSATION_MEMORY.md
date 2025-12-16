@@ -8,17 +8,21 @@
 ## The Problem It Solves
 
 **Before:**
+
 ```text
 ```
+
 User: "I'm stressed about work"
 System: "Tell me more about work."
 User: "I have 5 projects due Thursday"
 System: "Tell me more about your projects." ← REPEATED!
+
 ```
 
 
 
 **After:**
+```text
 ```text
 ```
 User: "I'm stressed about work"
@@ -27,6 +31,7 @@ User: "I have 5 projects due Thursday"
 System: "So 5 competing priorities with one hard deadline...
          Which of these is most urgent?" ← SPECIFIC, NO REPEAT
 ```
+
 
 
 ##
@@ -51,6 +56,7 @@ System: "So 5 competing priorities with one hard deadline...
         except ImportError as e:
             logger.warning(f"⚠️  ConversationMemory import failed: {e}")
 ```text
+```text
 ```
 
 
@@ -65,6 +71,7 @@ System: "So 5 competing priorities with one hard deadline...
 **Replace the beginning of the function with:**
 
 ```python
+
 def _build_conversational_response(user_input: str, local_analysis: dict) -> str:
     """Build response using conversation memory for context awareness."""
 
@@ -113,8 +120,10 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         return response
 
     # Last resort
+
 ```text
 ```
+
 
 
 ##
@@ -233,6 +242,7 @@ def test_memory_integration():
 if __name__ == "__main__":
     success = test_memory_integration()
 ```text
+```text
 ```
 
 
@@ -240,9 +250,12 @@ if __name__ == "__main__":
 **Run the test:**
 
 ```powershell
+
 cd d:\saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -360,17 +373,22 @@ Once working, you unlock:
 ```powershell
 
 
+
 Test-Path src/emotional_os_glyphs/conversation_memory.py
+
 ```text
 ```
 
+
 ### Issue: "compose_response_with_memory() not found"
 **Solution:** Module might need reload. Restart Streamlit:
+
 ```powershell
 
 
 taskkill /F /IM streamlit.exe
 streamlit run app.py
+```text
 ```text
 ```
 
@@ -388,13 +406,17 @@ Just in case you want a quick revert:
 
 
 
+
 # Backup the files you're modifying
 Copy-Item "src/emotional_os/deploy/modules/ui_refactored.py" "ui_refactored.py.backup"
 Copy-Item "src/emotional_os/deploy/modules/ui_components/response_handler.py" "response_handler.py.backup"
+
 ```text
 ```
 
+
 Then if anything goes wrong:
+
 ```powershell
 
 
@@ -402,6 +424,7 @@ Copy-Item "ui_refactored.py.backup" "src/emotional_os/deploy/modules/ui_refactor
 Copy-Item "response_handler.py.backup" "src/emotional_os/deploy/modules/ui_components/response_handler.py"
 
 ```
+
 ##
 
 ## You Got This! 🚀

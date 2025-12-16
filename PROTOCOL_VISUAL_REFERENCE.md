@@ -1,8 +1,10 @@
 # 🎬 Your Protocol, Visualized
 
 ## The Flow Your Users Will Experience
+
 ```text
 ```
+
 User in Crisis
     │
     ├─ Types: "I can't do this anymore"
@@ -93,6 +95,7 @@ RETURN DETECTED ✅
 
 ### State Machine (Your Logic Made Executable)
 ```text
+```text
 ```
                 ┌──────────────────────┐
                 │ DisclosureDetected   │
@@ -140,6 +143,7 @@ RETURN DETECTED ✅
 ```
 
 
+
 ##
 
 ## Configuration (What's Customizable)
@@ -171,6 +175,7 @@ RETURN DETECTED ✅
     ]
   }
 ```text
+```text
 ```
 
 
@@ -183,6 +188,7 @@ You can change every response, add new ones, customize for different cultures, a
 ### In Your Code (`signal_parser.py`):
 
 ```python
+
 
 # At the top of parse_input():
 
@@ -201,8 +207,10 @@ if suicidality_protocol.should_use_protocol(input_text):
         "response_source": "suicidality_protocol",
         "suicidality_state": state_info,
         # ... other fields
+
 ```text
 ```
+
 
 
 
@@ -215,6 +223,7 @@ if suicidality_protocol.should_use_protocol(input_text):
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -222,6 +231,7 @@ if suicidality_protocol.should_use_protocol(input_text):
 ### Try it interactively:
 
 ```python
+
 from emotional_os.core.signal_parser import parse_input
 
 result = parse_input(
@@ -235,6 +245,7 @@ print(result['voltage_response'])
 
 ```text
 ```
+
 
 
 ##
@@ -253,6 +264,7 @@ is a real act of courage."
 
 If they return again:
 "You are allowed to be here with what you feel.
+```text
 ```text
 ```
 
@@ -296,6 +308,7 @@ Your protocol:
 Example:
 
 ```
+
 User: "I'm having suicidal thoughts"
 
 System: "Thank you for trusting me with this.
@@ -308,8 +321,10 @@ Would that be helpful right now?"
 User: "Not right now"
 
 System: "That's okay. I'm still here.
+
 ```text
 ```
+
 
 
 
@@ -331,6 +346,7 @@ User returns: "Hey, I'm doing a bit better today"
 Your system first message:
 "Thank you for coming back. Your check-in matters.
 You chose to return and connect. I recognize
+```text
 ```text
 ```
 
@@ -370,10 +386,13 @@ All suicidality disclosures:
 ### Traditional Crisis Protocol
 
 ```
+
 User: "I'm suicidal"
 System: WARNING! CRISIS! HERE'S THE HOTLINE!
+
 ```text
 ```
+
 
 
 
@@ -386,6 +405,7 @@ I'm here to listen. What do you want
 to happen next?"
 Result: User feels witnessed, has agency, heard
 ```
+
 
 
 

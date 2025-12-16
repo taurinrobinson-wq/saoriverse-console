@@ -22,11 +22,14 @@ You expressed concern: *"My system is still likely storing full non-anonymized c
 ### ✅ Core Privacy Infrastructure (3 Files, 900 Lines)
 
 **1. data_encoding.py** - The 5-Stage Pipeline
+
 ```text
 ```
+
 Raw Text → Signal Detection → Gate Encoding → Glyph Mapping → Anonymous Storage
   ↓         (SIG_CRISIS_001)  (GATE_GRIEF_004)    ([42, 183])      ✓
 Discarded      (encoded)           (encoded)        (IDs only)    No raw text
+
 ```
 
 
@@ -79,6 +82,7 @@ Key Features:
 
 **verify_privacy_encoding.py** - Standalone Verification
 ```text
+```text
 ```
 ✓ Pipeline initialized
 ✓ Conversation encoded
@@ -88,6 +92,7 @@ Key Features:
 ✓ Hash deterministic
 READY FOR INTEGRATION ✓
 ```
+
 
 
 
@@ -135,6 +140,7 @@ READY FOR INTEGRATION ✓
   "signal_count": 2,                         // Count (not sequence)
   "response_source": "conversation"          // Metadata only
 ```text
+```text
 ```
 
 
@@ -142,6 +148,7 @@ READY FOR INTEGRATION ✓
 ### What Gets DISCARDED ❌
 
 ```
+
 ✗ Raw user input         "I want to end my life"
 ✗ Raw system response    "I'm here to help"
 ✗ User email             alice@example.com
@@ -149,8 +156,10 @@ READY FOR INTEGRATION ✓
 ✗ User phone             +1-555-0123
 ✗ Exact message length   150 characters
 ✗ Exact timestamp        13:24:28.123
+
 ```text
 ```
+
 
 
 ##
@@ -188,6 +197,7 @@ What makes someone unique?
 
 Result: At least 5 users have identical quasi-identifiers
 ```text
+```text
 ```
 
 
@@ -195,12 +205,14 @@ Result: At least 5 users have identical quasi-identifiers
 ### 2. One-Way Encryption
 
 ```
+
 Raw text: "I'm suicidal"
 Encoding: SIG_CRISIS_001
 Reversal: ✗ IMPOSSIBLE (one-way hash)
 
 ```text
 ```
+
 
 
 
@@ -216,6 +228,7 @@ What's NOT necessary:
 ✗ Exact user words (signals capture intent)
 ✗ User identity (hashed for anonymity)
 ```text
+```text
 ```
 
 
@@ -228,9 +241,12 @@ What's NOT necessary:
 **Step 1: Find Storage Points** (15 min)
 
 ```bash
+
 grep -r "\.insert\(" emotional_os/core/signal_parser.py
+
 ```text
 ```
+
 
 
 
@@ -247,6 +263,7 @@ success, record_id = encode_and_store_conversation(
     system_response=response,
     session_id=session_id,
     db_connection=db,
+```text
 ```text
 ```
 
@@ -282,6 +299,7 @@ success, record_id = encode_and_store_conversation(
 All critical privacy checks passed:
 
 ```
+
 [TEST 1] ✓ Pipeline initialized successfully
 [TEST 2] ✓ Conversation encoded
 [TEST 3] ✓ No raw text found in encoded record
@@ -305,6 +323,7 @@ Key Achievements:
 ```
 
 
+
 ##
 
 ## What This Means for FirstPerson
@@ -318,6 +337,7 @@ System processes (crisis response works)
      ↓
 BUT: Raw message stored in Supabase ❌
 ```text
+```text
 ```
 
 
@@ -325,6 +345,7 @@ BUT: Raw message stored in Supabase ❌
 ### After This Session
 
 ```
+
 User: "I'm suicidal"
      ↓
 System processes (crisis response works)
@@ -336,6 +357,7 @@ Database stores: SIG_CRISIS_001, GATE_CRISIS_009, [42,183]
 Raw message: DISCARDED (never stored) ✓
 Privacy: GDPR/CCPA/HIPAA compliant ✓
 User trust: Protected from day one ✓
+
 ```
 
 

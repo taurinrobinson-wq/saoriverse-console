@@ -1,8 +1,10 @@
 # 🚀 DEPLOYMENT READY - Visual Overview
 
 ## You Have Everything You Need
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                  YOUR DOCKER SETUP IS READY                 │
 └─────────────────────────────────────────────────────────────┘
@@ -32,6 +34,7 @@
 ├── Frontend: React/Expo Web (firstperson/)
 ├── Proxy: Nginx (deploy/nginx.conf)
 └── Data: SQLite (data_local/)
+
 ```
 
 
@@ -42,12 +45,15 @@
 ### 🟢 Way 1: Fastest (5 minutes) - RECOMMENDED
 
 ```bash
+
 ssh root@161.35.227.49
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
+
 ```text
 ```
+
 
 
 
@@ -66,6 +72,7 @@ chmod +x docker-setup.sh
 
 # Follow the step-by-step instructions in:
 ```text
+```text
 ```
 
 
@@ -75,11 +82,13 @@ chmod +x docker-setup.sh
 
 ```bash
 
+
 # Read detailed instructions:
 🔧 DOCKER_UBUNTU_SETUP.md
 
 ```text
 ```
+
 
 
 ##
@@ -91,6 +100,7 @@ chmod +x docker-setup.sh
 ⚙️  API:         http://161.35.227.49:8000
 💚 Health:      http://161.35.227.49:8000/health
 ```text
+```text
 ```
 
 
@@ -99,6 +109,7 @@ chmod +x docker-setup.sh
 ## Container Architecture
 
 ```
+
 ┌─────────────────────────────────────────────────────┐
 │                  NGINX (Port 80)                     │
 │          Routes traffic to frontend/backend          │
@@ -114,8 +125,10 @@ chmod +x docker-setup.sh
     └─────────────────────┘  └──────────────────────┘
 
     Both services on same Docker network (saoriverse)
+
 ```text
 ```
+
 
 
 ##
@@ -141,6 +154,7 @@ chmod +x docker-setup.sh
 ☐ 5. Wait 5-10 minutes
 ☐ 6. Open browser to http://161.35.227.49:3000
 ```text
+```text
 ```
 
 
@@ -151,6 +165,7 @@ chmod +x docker-setup.sh
 Once deployed, these are your daily commands:
 
 ```bash
+
 
 # See what's running
 docker compose ps
@@ -165,8 +180,10 @@ docker compose restart
 docker compose stop
 
 # Update code and restart
+
 ```text
 ```
+
 
 
 ##
@@ -187,6 +204,7 @@ docker compose logs
 
 # Usually just need to retry
 ```text
+```text
 ```
 
 
@@ -195,14 +213,17 @@ docker compose logs
 
 ```bash
 
+
 # See what's wrong
 docker compose logs
 
 # Rebuild from scratch
 docker compose down
 docker compose build --no-cache
+
 ```sql
 ```
+
 
 
 
@@ -216,6 +237,7 @@ curl http://localhost:8000/health
 
 # Then from your machine (replace IP if different)
 curl http://161.35.227.49:3000
+```text
 ```text
 ```
 
@@ -238,6 +260,7 @@ See **DIGITALOCEAN_DEPLOYMENT_GUIDE.md** for detailed troubleshooting.
 ## Technologies Used
 
 ```
+
 Backend:
 ├── FastAPI (Python web framework)
 ├── Uvicorn (ASGI server)
@@ -255,8 +278,10 @@ Infrastructure:
 └── Nginx (reverse proxy)
 
 Deployment:
+
 ```text
 ```
+
 
 
 ##
@@ -290,6 +315,7 @@ Deployment:
 └─────────────────┘   └──────────────────┘
 
 ```text
+```text
 ```
 
 
@@ -300,6 +326,7 @@ Deployment:
 After running `./docker-setup.sh`, you should see:
 
 ```bash
+
 ✓ Setup Complete!
 
 Running containers:
@@ -310,8 +337,10 @@ saoriverse-nginx          Up
 
 Your application is now running on:
 Frontend:  http://161.35.227.49:3000
+
 ```text
 ```
+
 
 
 ##
@@ -337,6 +366,7 @@ CONFIG TEMPLATE:   .env.example
 DOCKER COMPOSE:    docker-compose.yml
 DOCKER IMAGE:      Dockerfile + Dockerfile.frontend
 ```
+
 
 
 ##

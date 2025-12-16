@@ -1,8 +1,10 @@
 # Emotional Dimension Expansion Map
 
 ## Your Original 8 Dimensions (from "Hope is the thing with feathers")
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │  BASE EMOTIONAL DIMENSIONS (Foundation)                 │
 ├─────────────────────────────────────────────────────────┤
@@ -15,11 +17,13 @@
 │  7. Sensuality   - sensory experience & texture          │
 │  8. Nature       - natural imagery & symbolism           │
 └─────────────────────────────────────────────────────────┘
+
 ```
 
 
 
 ## New Pre-Discovered Dimensions (from Poetry Analysis)
+```text
 ```text
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -40,9 +44,12 @@
 
 
 
+
 ## Dynamically Discovered Dimensions (from Corpus Learning)
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │  ADAPTIVE DIMENSIONS (Learned from Processing)          │
 ├─────────────────────────────────────────────────────────┤
@@ -54,11 +61,13 @@
 │          - Victorian constraints & yearnings            │
 │          - Modern disaffection                          │
 └─────────────────────────────────────────────────────────┘
+
 ```
 
 
 
 ## Dimension Expansion Timeline
+```text
 ```text
 ```
 November 3, 2025
@@ -76,11 +85,14 @@ November 3, 2025
 
 
 
+
 ## Cross-Dimension Relationships
 
 ### Example: "Melancholic Nostalgia"
+
 ```text
 ```
+
 Melancholy (13)
     + Nostalgia (9)
     + Longing (12)
@@ -91,11 +103,13 @@ Melancholy (13)
 When extracted from Romantic poetry:
 "I remember the sweetness of days gone by,
  Yet grief fills my heart for what I've lost"
+
 ```
 
 
 
 ### Example: "Transcendent Wonder"
+```text
 ```text
 ```
 Transcendence (11)
@@ -109,6 +123,7 @@ When extracted from Shelley:
 "The vast luminous sphere,
  Where infinite consciousness dwells"
 ```
+
 
 
 
@@ -129,8 +144,10 @@ When extracted from Shelley:
 - **Resilience**: standing firm, enduring
 
 ## System Processing Flow with Adaptive Extraction
+
 ```text
 ```
+
 Poetry Corpus
     ↓
 [Chunk 1] → Extract with all 18 dimensions
@@ -144,6 +161,7 @@ Poetry Corpus
 Lexicon expanded across full emotional spectrum
     ↓
 System now understands poetry at deeper level
+
 ```
 
 
@@ -160,6 +178,7 @@ System now understands poetry at deeper level
 
 **Example Report:**
 ```text
+```text
 ```
 Emotional Dimensions Report:
 ├─ Base Dimensions: 8
@@ -173,6 +192,7 @@ Emotional Dimensions Report:
 └─ Total Dimensions: 23
    (vs. 8 at start)
 ```
+
 
 
 

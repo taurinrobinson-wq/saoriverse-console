@@ -14,6 +14,7 @@ This is the quickest way to run the full Velinor game with the web stack (FastAP
 ```bash
 cd d:\saoriverse-console
 ```text
+```text
 ```
 
 
@@ -21,8 +22,10 @@ cd d:\saoriverse-console
 Expected output:
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -35,6 +38,7 @@ The API will be available at:
 ```bash
 cd d:\saoriverse-console\velinor-web
 ```text
+```text
 ```
 
 
@@ -42,12 +46,15 @@ cd d:\saoriverse-console\velinor-web
 Expected output:
 
 ```
+
 > velinor-web@0.1.0 dev
 > next dev
 
   ▲ Next.js 14.x.x
+
 ```text
 ```
+
 
 
 
@@ -88,6 +95,7 @@ The frontend looks for the API at the URL in `.env.local`:
 
 ```
 ```text
+```text
 ```
 
 
@@ -99,9 +107,11 @@ For production deployment, change this to your Railway domain.
 Once working locally:
 
 ```bash
+
 git add .
 git commit -m "Velinor web stack complete"
 git push origin main
+
 ```
 
 

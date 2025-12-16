@@ -27,6 +27,7 @@ Tier 1 Foundation is a 7-stage response enhancement pipeline that:
 
 ```python
 ```text
+```text
 ```
 
 
@@ -34,14 +35,17 @@ Tier 1 Foundation is a 7-stage response enhancement pipeline that:
 **Step 2: In ResponseHandler.__init__**
 
 ```python
+
 def __init__(self, ...):
     # ... existing code ...
 
     # Add this after other initializations
     self.tier1 = Tier1Foundation(
         conversation_memory=kwargs.get("conversation_memory")
+
 ```text
 ```
+
 
 
 
@@ -63,6 +67,7 @@ if perf_metrics.get("total") > 0.1:
 
 # Return enhanced response instead of base
 ```text
+```text
 ```
 
 
@@ -71,10 +76,13 @@ if perf_metrics.get("total") > 0.1:
 
 ```python
 
+
 # In logging/monitoring section
 self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
+
 ```text
 ```
+
 
 
 ##
@@ -87,6 +95,7 @@ self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
 
 ```python
 ```text
+```text
 ```
 
 
@@ -95,6 +104,7 @@ self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
 Find the session initialization section (usually in `setup_session` or similar):
 
 ```python
+
 def setup_session():
     """Initialize session state"""
 
@@ -105,8 +115,10 @@ def setup_session():
         conversation_memory = st.session_state.get("conversation_memory")
         st.session_state.tier1_foundation = Tier1Foundation(
             conversation_memory=conversation_memory
+
 ```text
 ```
+
 
 
 
@@ -127,6 +139,7 @@ if show_debug_metrics:
         st.metric("Safety Check", f"{metrics['safety_check']*1000:.1f}ms")
     with col3:
 ```text
+```text
 ```
 
 
@@ -138,6 +151,7 @@ if show_debug_metrics:
 
 ```bash
 
+
 # Full test suite (should all pass)
 python -m pytest tests/test_tier1_foundation.py -v
 
@@ -145,8 +159,10 @@ python -m pytest tests/test_tier1_foundation.py -v
 python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_performance_under_100ms -v
 
 # Manual test script
+
 ```text
 ```
+
 
 
 
@@ -173,6 +189,7 @@ class ResponseHandler:
 -       return base_response
 +       enhanced_response, metrics = self.tier1.process_response(...)
 ```text
+```text
 ```
 
 
@@ -180,10 +197,12 @@ class ResponseHandler:
 ### ui_refactored.py
 
 ```diff
+
 + from src.emotional_os.tier1_foundation import Tier1Foundation
 
 def setup_session():
 +   st.session_state.tier1_foundation = Tier1Foundation(...)
+
 ```
 
 

@@ -51,6 +51,7 @@ They see personalized responses about their specific situation. They never see:
 3. Uses glyph intensity invisibly for tone/closing
 4. Maps glyph emotional signal to language choice
 ```text
+```text
 ```
 
 
@@ -59,12 +60,15 @@ They see personalized responses about their specific situation. They never see:
 
 ```python
 
+
 # What it does:
 1. Checks for message features (math_frustration, inherited_pattern, etc.)
 2. Responds directly to each feature
 3. Uses glyph intensity (invisible) to calibrate language intensity
+
 ```text
 ```
+
 
 
 ##
@@ -128,6 +132,7 @@ message_features = {
     "existing_feature": condition,
     "new_feature": condition,  # Add here
 ```text
+```text
 ```
 
 
@@ -135,9 +140,12 @@ message_features = {
 Then handle in `compose_message_aware_response()`:
 
 ```python
+
 if message_content.get("new_feature"):
+
 ```text
 ```
+
 
 
 
@@ -148,6 +156,7 @@ Update `_glyph_to_emotion_category()` in `dynamic_response_composer.py`:
 emotion_map = {
     "existing_glyph": "emotion",
     "new_glyph": "emotion",  # Add mapping
+```text
 ```text
 ```
 
@@ -162,8 +171,10 @@ Poetry comes from `_weave_poetry()` which uses emotion category mapping. If you 
 ### Quick Test
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -189,6 +200,7 @@ print(result["best_glyph"]["glyph_name"])
 # See the response (should not mention glyph):
 print(result["voltage_response"])
 ```
+
 
 
 ##

@@ -73,8 +73,10 @@ During-work companion with:
 ## The Solution (What You Get)
 
 ### Clean Source Structure
+
 ```text
 ```
+
 src/
 ├── emotional_os.py           (Core glyph logic)
 ├── signal_parser.py          (Text → signals)
@@ -87,11 +89,13 @@ src/
 ├── multimodal_fusion.py      (Multimodal analysis)
 ├── privacy_layer.py          (Encryption/privacy)
 └── learning.py               (Learning systems)
+
 ```
 
 
 
 ### Organized Tests
+```text
 ```text
 ```
 tests/
@@ -108,18 +112,23 @@ tests/
 
 
 
+
 ### Single Streamlit Entry Point
+
 ```text
 ```
+
 app.py (30 lines)
 - Imports from src/
 - No wrappers or redirects
 - Streamlit run app.py ← That's it
+
 ```
 
 
 
 ### Organized Scripts
+```text
 ```text
 ```
 scripts/
@@ -130,9 +139,12 @@ scripts/
 
 
 
+
 ### Result: Root Directory ✨
+
 ```text
 ```
+
 saoriverse-console/
 ├── app.py              ← Entry point
 ├── requirements.txt
@@ -145,6 +157,7 @@ saoriverse-console/
 ├── docs/               ← Documentation
 ├── config/             ← Configuration
 └── tools/              ← Development tools
+
 ```
 
 
@@ -157,6 +170,7 @@ saoriverse-console/
 ### Before Reorganization
 
 ```bash
+
 
 # Finding code was hard
 find . -name "*response*" -type f | grep -v __pycache__
@@ -179,6 +193,7 @@ streamlit run main_v2_simple.py   # This is a bypass
 
 ```text
 ```
+
 
 
 
@@ -205,6 +220,7 @@ streamlit run app.py               # That's the only option
 2. Add tests to tests/unit/test_your_module.py
 3. Run pytest tests/unit/test_your_module.py
 ```text
+```text
 ```
 
 
@@ -216,8 +232,10 @@ streamlit run app.py               # That's the only option
 Read the master plan to understand the scope:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -226,6 +244,7 @@ Read the master plan to understand the scope:
 ```bash
 cd /path/to/saoriverse-console
 git checkout -b refactor/reorganization-master
+```text
 ```text
 ```
 
@@ -241,6 +260,7 @@ Follow the phases in order:
 
 ```bash
 
+
 # Test imports
 python tools/import_checker.py
 
@@ -248,8 +268,10 @@ python tools/import_checker.py
 pytest tests/ -v
 
 # Launch Streamlit
+
 ```text
 ```
+
 
 
 
@@ -258,6 +280,7 @@ pytest tests/ -v
 ```bash
 git add -A
 git commit -m "refactor: Complete codebase reorganization"
+```text
 ```text
 ```
 
@@ -330,6 +353,7 @@ After you're done, run this verification:
 
 ```bash
 
+
 # 1. Imports work
 python tools/import_checker.py
 
@@ -359,6 +383,7 @@ ls -la | grep -E "\.py$" | wc -l
 python -c "from src import VoiceInterface; print('✅ Voice ready')"
 
 # Should print: ✅ Voice ready
+
 ```
 
 

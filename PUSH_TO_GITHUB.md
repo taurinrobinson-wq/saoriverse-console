@@ -33,6 +33,7 @@ Replaces unreliable Railway deployment."
 
 # Push to GitHub
 ```text
+```text
 ```
 
 
@@ -56,6 +57,7 @@ Replaces unreliable Railway deployment."
 
 ```bash
 
+
 # Verify all files exist
 ls -la docker-compose.prod.yml
 ls -la nginx.prod.conf
@@ -67,8 +69,10 @@ ls -la VPS_MIGRATION_CHECKLIST.md
 # Check file integrity
 cat docker-compose.prod.yml | head -5
 cat nginx.prod.conf | head -5
+
 ```text
 ```
+
 
 
 ##
@@ -98,6 +102,7 @@ cd /opt/velinor
 git pull origin main
 docker compose -f docker-compose.prod.yml build
 ```text
+```text
 ```
 
 
@@ -105,6 +110,7 @@ docker compose -f docker-compose.prod.yml build
 ### When you want to make changes:
 
 ```bash
+
 
 # Edit locally (e.g., nginx.prod.conf)
 
@@ -115,6 +121,7 @@ git push origin main
 
 ```text
 ```
+
 
 
 
@@ -133,6 +140,7 @@ git log --oneline  # Find commit to revert to
 git checkout COMMIT_HASH
 docker compose -f docker-compose.prod.yml build
 ```text
+```text
 ```
 
 
@@ -143,11 +151,13 @@ docker compose -f docker-compose.prod.yml build
 For future updates to deployment files:
 
 ```
+
 chore: update [docker-compose.prod.yml|nginx.prod.conf|etc]
 
 - What changed
 - Why it changed
 - Any manual steps needed after deploy
+
 ```
 
 

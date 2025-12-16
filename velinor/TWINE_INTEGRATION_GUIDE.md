@@ -9,8 +9,10 @@ Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the n
 - **Orchestrator** (`orchestrator.py`) - Main game loop controller
 
 ## Architecture
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────┐
 │         Velinor Twine Integration                   │
 └─────────────────────────────────────────────────────┘
@@ -38,6 +40,7 @@ Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the n
                     │ UI Layer (Streamlit,
                     │  Flask, Web, etc.)
                     └───────────────────┘
+
 ```
 
 
@@ -90,6 +93,7 @@ Manages:
 Velinor uses Twine 2 JSON export format:
 
 ```json
+
 {
   "name": "Velinor: Remnants of the Tone",
   "startnode": "1",
@@ -103,8 +107,10 @@ Velinor uses Twine 2 JSON export format:
       "size": [100, 100]
     }
   ]
+
 ```text
 ```
+
 
 
 
@@ -115,6 +121,7 @@ Velinor uses Twine 2 JSON export format:
 ```
 [[Choice text->target_passage]]
 ```text
+```text
 ```
 
 
@@ -122,8 +129,10 @@ Velinor uses Twine 2 JSON export format:
 **Skill Checks:**
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -134,6 +143,7 @@ Velinor uses Twine 2 JSON export format:
 {npc: NPC_Name}                 # NPC speaking in scene
 {dice: d20+courage}              # Trigger dice roll
 ```text
+```text
 ```
 
 
@@ -141,6 +151,7 @@ Velinor uses Twine 2 JSON export format:
 **Example Passage:**
 
 ```
+
 {background: market_ruins}
 {npc: Keeper}
 
@@ -149,8 +160,10 @@ A figure approaches: "Welcome, Traveler."
 
 [[Ask about the Tone->keeper_dialogue]]
 [[Explore alone->market_exploration]]
+
 ```text
 ```
+
 
 
 
@@ -175,6 +188,7 @@ story.add_choice("intro", "Follow the Guide", "guide_path")
 story.add_choice("intro", "Go alone", "alone_path")
 
 # Export as JSON
+```text
 ```text
 ```
 
@@ -201,6 +215,7 @@ See `/velinor/stories/sample_story.json` for a working example with:
 ### Basic Initialization
 
 ```python
+
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
 # Create game engine
@@ -213,8 +228,10 @@ orchestrator = VelinorTwineOrchestrator(
 )
 
 # Start game
+
 ```text
 ```
+
 
 
 
@@ -233,6 +250,7 @@ next_state = orchestrator.process_player_action(
     player_input="I approach cautiously",
     player_id="player_1"
 ```text
+```text
 ```
 
 
@@ -240,6 +258,7 @@ next_state = orchestrator.process_player_action(
 ### Game State Structure
 
 ```python
+
 {
     'passage_id': 'keeper_dialogue',
     'passage_name': 'Meeting the Keeper',
@@ -264,8 +283,10 @@ next_state = orchestrator.process_player_action(
             'resonance': 100
         }
     }
+
 ```text
 ```
+
 
 
 
@@ -309,6 +330,7 @@ if st.button("Submit"):
     )
     st.session_state.state = new_state
 ```text
+```text
 ```
 
 
@@ -316,6 +338,7 @@ if st.button("Submit"):
 ### FastAPI Web Backend
 
 ```python
+
 from fastapi import FastAPI
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
@@ -348,8 +371,10 @@ def take_action(session_id: str, choice_index: int = None, input_text: str = Non
 @app.post("/api/game/{session_id}/save")
 def save_game(session_id: str):
     sessions[session_id].save_game(f"saves/{session_id}.json")
+
 ```text
 ```
+
 
 
 
@@ -370,6 +395,7 @@ orchestrator.process_player_action(
     player_input="I agree with them",
     player_id="player_2"
 ```text
+```text
 ```
 
 
@@ -384,9 +410,12 @@ orchestrator.process_player_action(
 **Multiplayer Dialogue Example:**
 
 ```
+
 Solo: "You steady yourself as the mist parts."
+
 ```text
 ```
+
 
 
 
@@ -397,6 +426,7 @@ Solo: "You steady yourself as the mist parts."
 If a choice includes skill check notation:
 
 ```
+```text
 ```text
 ```
 
@@ -413,10 +443,12 @@ The system automatically:
 In passages:
 
 ```
+
 {dice: d20+wisdom}
 
 ```text
 ```
+
 
 
 
@@ -430,6 +462,7 @@ System processes and determines outcome, potentially branching story.
 orchestrator.save_game("saves/game_001.json")
 
 # Load saved game
+```text
 ```text
 ```
 
@@ -467,6 +500,7 @@ When FirstPerson orchestrator is available, NPC responses become:
 ## File Structure
 
 ```
+
 velinor/
 ├── engine/
 │   ├── core.py                      # Game engine
@@ -481,6 +515,7 @@ velinor/
 ├── assets/
 │   └── backgrounds/                 # Background images
 └── Characters_Lexicon/              # Game design docs
+
 ```
 
 

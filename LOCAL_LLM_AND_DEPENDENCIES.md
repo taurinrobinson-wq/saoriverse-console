@@ -122,6 +122,7 @@ print(f"FirstPerson available: {gen.is_available()}")  # Currently: False (Phase
 ```
 
 
+
 ##
 
 ## Performance Impact

@@ -1,8 +1,10 @@
 # Project Structure Guide
 
 ## 📂 Directory Layout
+
 ```text
 ```
+
 saoriverse-console/
 │
 ├── README.md                 # Main project README (start here)
@@ -60,6 +62,7 @@ saoriverse-console/
 ├── velinor_app.py        # Streamlit game app
 ├── velinor_api.py        # FastAPI backend
 └── firstperson_api.py    # FirstPerson API
+
 ```
 
 
@@ -94,18 +97,22 @@ saoriverse-console/
 
 ```bash
 
+
 # Run just the web dev server
 ./scripts/RUN_WEB_DEV.sh
 
 # Or run full stack (frontend + backend)
+
 ```text
 ```
+
 
 
 
 ### Install Dependencies
 
 ```bash
+```text
 ```text
 ```
 
@@ -141,6 +148,7 @@ saoriverse-console/
 
 ```bash
 
+
 # Check what's in scratch (for cleanup decisions)
 ls -la scratch/
 
@@ -148,8 +156,10 @@ ls -la scratch/
 rm scratch/old_summary.md
 
 # Verify .gitignore is working
+
 ```text
 ```
+
 
 
 
@@ -173,6 +183,7 @@ saoriverse-console/
 ├── ... 40+ more .md files
 ├── src/
 ```text
+```text
 ```
 
 
@@ -184,6 +195,7 @@ saoriverse-console/
 ### After (Clean Organization)
 
 ```
+
 saoriverse-console/
 ├── README.md  (main entry point)
 ├── docs/      (intentional documentation)
@@ -191,6 +203,7 @@ saoriverse-console/
 ├── scripts/   (dev utilities)
 ├── src/       (source code)
 └── velinor/   (game assets)
+
 ```
 
 

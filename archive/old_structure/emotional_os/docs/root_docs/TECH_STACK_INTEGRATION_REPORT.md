@@ -45,6 +45,7 @@ def main():
 
 
 
+
 **Glyph Access**: Indirect via LimbicIntegrationEngine and render_main_app()
 **Integration Status**: ✅ READY
 ##
@@ -64,6 +65,7 @@ class LimbicIntegrationEngine:
         # Brain regions: insula, amygdala, hippocampus, acc, vmpfc
         # Accesses: All 7,096 glyphs for matching
 ```
+
 
 
 
@@ -96,6 +98,7 @@ class HybridProcessor:
 
 
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ CRITICAL - READY
 ##
@@ -118,6 +121,7 @@ class GlyphFactorialEngine:
         # Fall back to JSON if CSV not available
         # Current setup: ✅ JSON at emotional_os/glyphs/glyph_lexicon_rows.json
 ```
+
 
 
 
@@ -147,6 +151,7 @@ class AdvancedPruningEngine:
 
 
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
 ##
@@ -169,6 +174,7 @@ class GateDistributionAnalyzer:
 
 
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Verification**: ✅ LAST RUN CONFIRMED 7,096 GLYPHS, ALL 12 GATES
 ##
@@ -188,6 +194,7 @@ class SharedGlyphManager:
 
 
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
 ##
@@ -204,6 +211,7 @@ class HybridLearner:
         # Maintains personal + shared lexicons
         # Returns: signals_learned, trust_score, etc.
 ```
+
 
 
 
@@ -227,6 +235,7 @@ def render_main_app():
 
 
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
 ##
@@ -242,6 +251,7 @@ class ConversationManager:
         # Tracks glyph encounters in conversations
         # Records for learning and future reference
 ```
+
 
 
 
@@ -284,6 +294,7 @@ Database Persistence
 
 
 
+
 **Status**: ✅ ALL STAGES VERIFIED & OPERATIONAL
 ##
 
@@ -315,6 +326,7 @@ Gate 12:   150 glyphs  (Transcendence & Return)
 
 TOTAL: 7,096 glyphs
 ```
+
 
 
 

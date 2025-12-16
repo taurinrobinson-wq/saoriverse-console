@@ -4,8 +4,10 @@
 ##
 
 ## 🏗️ CURRENT ARCHITECTURE
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    STREAMLIT UI (app.py)                    │
 └────────────────────────┬────────────────────────────────────┘
@@ -32,6 +34,7 @@
                          │
                          ▼
                   Response to User
+
 ```
 
 
@@ -41,15 +44,19 @@
 
 ### ✅ CONNECTED (Working Today)
 ```text
+```text
 ```
 Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Output
 ```
 
 
 
+
 ### ❌ MISSING (Built but Not Used)
+
 ```text
 ```
+
 ConversationMemory ❌
     ↓ (should feed context)
     └─> compose_response_with_memory() ❌ (not called)
@@ -72,6 +79,7 @@ SaoriLayer ❌
 
 GenerativeTension ❌
   └─ not initialized
+
 ```
 
 
@@ -80,6 +88,7 @@ GenerativeTension ❌
 ## 🎯 INTEGRATION PRIORITIES
 
 ### TIER 1: DO THIS WEEK (45 min)
+```text
 ```text
 ```
 ┌────────────────────────────────────┐
@@ -99,9 +108,12 @@ GenerativeTension ❌
 
 
 
+
 ### TIER 2: NEXT 1-2 WEEKS (3-4 hrs)
+
 ```text
 ```
+
 ┌────────────────────────────────────┐
 │  Presence Layer                    │  ⭐ Makes system feel alive
 │  ├─ AttunementLoop (rhythm adapt)  │     Multiple components
@@ -109,11 +121,13 @@ GenerativeTension ❌
 │  ├─ Emotional Reciprocity (mood)   │     Medium complexity
 │  └─ All work together              │
 └────────────────────────────────────┘
+
 ```
 
 
 
 ### TIER 3: WEEK 3-4 (6-8 hrs)
+```text
 ```text
 ```
 ┌────────────────────────────────────┐
@@ -134,21 +148,26 @@ GenerativeTension ❌
 
 
 
+
 ### TIER 4: ONGOING (2-3 hrs)
+
 ```text
 ```
+
 ┌────────────────────────────────────┐
 │  Temporal Memory                   │  🔵 Cross-session memory
 │  ├─ Session residue storage        │     Long-term value
 │  ├─ Emotional recall               │     Backend setup
 │  └─ Pattern recognition over time  │
 └────────────────────────────────────┘
+
 ```
 
 
 ##
 
 ## 📈 IMPACT PROGRESSION
+```text
 ```text
 ```
 TIER 1 (After 45 min)
@@ -184,11 +203,14 @@ Example: "Last time we spoke, you were struggling with..."
 ```
 
 
+
 ##
 
 ## ⏱️ TIMELINE AT A GLANCE
+
 ```text
 ```
+
 NOW (Today)
 │
 ├─ 30 min: Read summaries
@@ -209,12 +231,14 @@ NOW (Today)
             Tier 4 optional (temporal memory)
             Gather user metrics
             Iterate
+
 ```
 
 
 ##
 
 ## 📊 EFFORT vs. IMPACT
+```text
 ```text
 ```
 IMPACT
@@ -232,6 +256,7 @@ IMPACT
 
 
 
+
 **Key:**
 - Tier 1: Highest payoff per hour of work
 - Tier 2: High payoff, moderate effort
@@ -242,8 +267,10 @@ IMPACT
 ## 🔍 CONNECTIVITY HEAT MAP
 
 ### RED (Not Connected)
+
 ```text
 ```
+
 ❌ AttunementLoop
 ❌ EmbodiedSimulation
 ❌ EmotionalReciprocity
@@ -251,11 +278,13 @@ IMPACT
 ❌ PoeticConsciousness
 ❌ SaoriLayer
 ❌ GenerativeTension
+
 ```
 
 
 
 ### YELLOW (Built but Not Called)
+```text
 ```text
 ```
 ⚠️  ConversationMemory (methods exist but not used)
@@ -264,18 +293,23 @@ IMPACT
 
 
 
+
 ### GREEN (Connected)
+
 ```text
 ```
+
 ✅ signal_parser
 ✅ glyph_lookup
 ✅ response_composer (basic)
+
 ```
 
 
 ##
 
 ## 🚀 IMPLEMENTATION COMPLEXITY
+```text
 ```text
 ```
 EASY TO CONNECT                   HARD TO CONNECT
@@ -295,6 +329,7 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 ├─ Tier 2             └─ Tier 3+            └─ Full system refactor
 │  (optional)
 ```
+
 
 
 ##
@@ -321,8 +356,10 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 ##
 
 ## 📋 FILES TO READ (By Priority)
+
 ```text
 ```
+
 IMMEDIATE (Today)
 1. EVALUATION_SUMMARY.md         ⭐⭐⭐ START HERE
 2. QUICK_START_CONVERSATION_MEMORY.md  ⭐⭐⭐
@@ -338,6 +375,7 @@ PLANNING (Next Week)
 REFERENCE (As Needed)
 7. COMPREHENSIVE_EVALUATION_INDEX.md
 8. This file (VISUAL_SUMMARY.md)
+
 ```
 
 
@@ -349,6 +387,7 @@ REFERENCE (As Needed)
 
 ### Option A: 10 Minutes
 ```text
+```text
 ```
 Read: EVALUATION_SUMMARY.md
 Then: Know what to do next
@@ -356,17 +395,22 @@ Then: Know what to do next
 
 
 
+
 ### Option B: 45 Minutes
+
 ```text
 ```
+
 Read: QUICK_START_CONVERSATION_MEMORY.md
 Code: Follow 4 steps
 Test: Verify it works
+
 ```
 
 
 
 ### Option C: 1 Hour
+```text
 ```text
 ```
 Read: EVALUATION_SUMMARY.md
@@ -376,13 +420,17 @@ Test: Run test_quick_integration.py
 
 
 
+
 ### Option D: 2 Hours (Thorough)
+
 ```text
 ```
+
 Read: EVALUATION_SUMMARY.md
 Read: SYSTEM_INTEGRATION_ANALYSIS.md
 Code: CODE_CHANGES_READY_TO_COPY.md
 Test: Run full test
+
 ```
 
 
@@ -409,6 +457,7 @@ Test: Run full test
 
 ## 🌟 The Vision
 ```sql
+```sql
 ```
 TODAY                          4 WEEKS FROM NOW
 
@@ -421,6 +470,7 @@ Analytical            →        Poetically understood
 Static energy         →        Dynamic presence with cycles
 No learning           →        Learns user's language
 ```
+
 
 
 

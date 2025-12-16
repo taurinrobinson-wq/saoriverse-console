@@ -45,6 +45,7 @@ In the Streamlit Cloud dashboard, go to App settings → Secrets:
 [supabase]
 url = "your-supabase-url"
 ```text
+```text
 ```
 
 
@@ -70,11 +71,14 @@ The app will:
 Once you upgrade Python on your Mac:
 
 ```bash
+
 python3.11 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
 ```text
 ```
+
 
 
 
@@ -102,6 +106,7 @@ Signal Parser ← Response generation with learning
     ↓
 Glyph System ← Emotional response composition
 ```
+
 
 
 ##

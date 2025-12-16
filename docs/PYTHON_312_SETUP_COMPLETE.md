@@ -41,6 +41,7 @@ Audio, NLP, Document Processing, Data Science, Testing, Web Framework, Backend, 
 
 ```powershell
 ```text
+```text
 ```
 
 
@@ -48,14 +49,17 @@ Audio, NLP, Document Processing, Data Science, Testing, Web Framework, Backend, 
 ### Install spaCy Model (if needed - already done!)
 
 ```powershell
+
 ```text
 ```
+
 
 
 
 ### Download TextBlob Corpora (optional - improves accuracy)
 
 ```powershell
+```text
 ```text
 ```
 
@@ -64,14 +68,17 @@ Audio, NLP, Document Processing, Data Science, Testing, Web Framework, Backend, 
 ### Install Additional Packages
 
 ```powershell
+
 ```text
 ```
+
 
 
 
 ### Run Tests
 
 ```powershell
+```text
 ```text
 ```
 
@@ -97,6 +104,7 @@ Audio, NLP, Document Processing, Data Science, Testing, Web Framework, Backend, 
 ## Project Structure
 
 ```
+
 d:\saoriverse-console\
 ├── requirements.txt              ← Single source of all dependencies
 ├── app.py                        ← Main Streamlit application
@@ -107,8 +115,10 @@ d:\saoriverse-console\
 │   ├── deploy_modules/          ← Main deployment code
 │   ├── emotional_os/            ← Emotional OS variant
 │   └── emotional_os_safety/     ← Safety variant
+
 ```text
 ```
+
 
 
 ##
@@ -171,6 +181,7 @@ d:\saoriverse-console\
 
 ```powershell
 ```text
+```text
 ```
 
 
@@ -178,14 +189,17 @@ d:\saoriverse-console\
 ### If you need to reinstall packages:
 
 ```powershell
+
 ```text
 ```
+
 
 
 
 ### To check installed packages:
 
 ```powershell
+```text
 ```text
 ```
 
@@ -194,7 +208,9 @@ d:\saoriverse-console\
 ### To verify specific package:
 
 ```powershell
+
 py -3.12 -c "import package_name; print(package_name.__version__)"
+
 ```
 
 

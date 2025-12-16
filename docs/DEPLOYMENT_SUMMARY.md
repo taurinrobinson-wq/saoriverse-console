@@ -78,6 +78,7 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
 ```text
+```text
 ```
 
 
@@ -89,6 +90,7 @@ chmod +x docker-setup.sh
 ### Option 2: Manual
 
 ```bash
+
 
 # SSH to droplet
 ssh root@161.35.227.49
@@ -108,8 +110,10 @@ docker compose up -d
 
 # Verify
 docker compose ps
+
 ```text
 ```
+
 
 
 
@@ -128,6 +132,7 @@ Frontend:          http://161.35.227.49:3000
 API Server:        http://161.35.227.49:8000
 Health Check:      http://161.35.227.49:8000/health
 ```text
+```text
 ```
 
 
@@ -136,14 +141,17 @@ Health Check:      http://161.35.227.49:8000/health
 
 ```bash
 
+
 # Health check
 curl http://161.35.227.49:8000/health
 
 # Example API call (from your machine)
 curl -X POST http://161.35.227.49:8000/api/chat \
   -H "Content-Type: application/json" \
+
 ```text
 ```
+
 
 
 ##
@@ -167,6 +175,7 @@ docker compose down            # Remove containers
 docker compose exec backend bash    # Shell access
 docker compose build --no-cache     # Rebuild images
 ```text
+```text
 ```
 
 
@@ -177,6 +186,7 @@ docker compose build --no-cache     # Rebuild images
 The `.env.example` file includes:
 
 ```env
+
 
 # API Configuration
 API_HOST=0.0.0.0
@@ -201,6 +211,7 @@ LOG_LEVEL=info
 
 ```text
 ```
+
 
 
 ##
@@ -229,6 +240,7 @@ saoriverse-console/
 ├── data/                   # Data files (created at runtime)
 └── deploy/nginx.conf       # Reverse proxy config
 ```
+
 
 
 ##

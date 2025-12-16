@@ -21,6 +21,7 @@ python core/start.py
 
 # OR for Streamlit
 ```text
+```text
 ```
 
 
@@ -28,6 +29,7 @@ python core/start.py
 ### Project Structure at a Glance
 
 ```
+
 root/
 ├── core/                 ← All essential Python code
 ├── docs/                 ← All documentation (guides, reports, archives)
@@ -35,8 +37,10 @@ root/
 ├── config/               ← Configuration & dependencies
 ├── emotional_os/         ← Modularized application core
 ├── tools/                ← Organized analysis/testing tools
+
 ```text
 ```
+
 
 
 ##
@@ -115,6 +119,7 @@ from core.tone_adapters import generate_archetypal_response
 # Or maintain backward compatibility with shims
 from core.phase_modulator import detect_phase
 ```text
+```text
 ```
 
 
@@ -189,6 +194,7 @@ Export files directory (expand as needed)
 All dependencies and configuration files:
 
 ```
+
 config/
 ├── package.json              (Node dependencies)
 ├── package-lock.json         (Locked versions)
@@ -196,8 +202,10 @@ config/
 ├── requirements-dev.txt      (Development dependencies)
 ├── requirements-nlp.txt      (NLP-specific dependencies)
 ├── requirements-voice.txt    (Voice interface dependencies)
+
 ```text
 ```
+
 
 
 
@@ -205,6 +213,7 @@ Install dependencies:
 
 ```bash
 pip install -r config/requirements.txt
+```text
 ```text
 ```
 
@@ -217,12 +226,15 @@ Deployment and setup scripts:
 
 ```bash
 
+
 # Deploy to production
 scripts/deploy.sh
 
 # Run locally
+
 ```text
 ```
+
 
 
 ##
@@ -344,6 +356,7 @@ python core/start.py
 
 # Using Streamlit directly
 ```text
+```text
 ```
 
 
@@ -380,6 +393,7 @@ python core/start.py
 
 ```python
 
+
 # Response System
 from core.main_response_engine import process_user_input
 from core.response_adapter import translate_emotional_response
@@ -394,8 +408,10 @@ from core.main_v2 import run_app
 
 # Compatibility Shims (Legacy)
 from core.phase_modulator import detect_phase
+
 ```text
 ```
+
 
 
 
@@ -428,6 +444,7 @@ from emotional_os.features.theme_manager import manage_theme
 
 # Glyphs
 ```text
+```text
 ```
 
 
@@ -435,6 +452,7 @@ from emotional_os.features.theme_manager import manage_theme
 ### Tools
 
 ```python
+
 
 # Analysis
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
@@ -445,8 +463,10 @@ from tools.document_processing.docx_reader import read_docx
 from tools.document_processing.docx_viewer import view_docx
 
 # Glyph Testing
+
 ```text
 ```
+
 
 
 ##
@@ -481,6 +501,7 @@ from tools.document_processing.docx_viewer import view_docx
 ✅ Verification:      Complete (all imports working)
 ✅ Ready for:         Development & Deployment
 ```
+
 
 
 ##

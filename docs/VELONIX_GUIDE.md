@@ -45,8 +45,10 @@ Each element has:
 ### Reaction Chains
 
 Reactions transform input elements into results:
+
 ```text
 ```
+
 Longing + Grief → Tenderness
 "The ache of missing becomes the softness of cherishing"
 
@@ -55,6 +57,7 @@ Rage + Forgiveness (catalyst: Resilience) → Presence
 
 Vulnerability + Acceptance → Joy
 "Courage to be seen becomes freedom to celebrate"
+
 ```
 
 
@@ -64,6 +67,7 @@ Vulnerability + Acceptance → Joy
 ### Basic Usage
 
 ```python
+
 from emotional_os.glyphs.velonix_reaction_engine import get_velonix_engine
 
 engine = get_velonix_engine()
@@ -78,6 +82,7 @@ reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
 
 ```text
 ```
+
 
 
 
@@ -116,6 +121,7 @@ archive.log_reaction(
     ritual_prompt=ritual,
     user_notes="I'm finding tenderness in my grief..."
 ```text
+```text
 ```
 
 
@@ -124,13 +130,16 @@ archive.log_reaction(
 
 ```python
 
+
 # What reactions are possible from current state?
 current_elements = ["Lg", "Gf", "St"]
 possible = engine.find_possible_reactions(current_elements)
 
 for p in possible:
+
 ```text
 ```
+
 
 
 
@@ -140,6 +149,7 @@ for p in possible:
 from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 
 # In your Streamlit app
+```text
 ```text
 ```
 
@@ -157,6 +167,7 @@ from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 ### Class Structure
 
 ```
+
 VelonixReactionEngine
 ├── Elements Registry
 ├── Reaction Chains
@@ -176,8 +187,10 @@ RitualPromptSystem
 EmotionalArchive
 ├── Entry Logging
 ├── JSON Export
+
 ```text
 ```
+
 
 
 
@@ -255,6 +268,7 @@ All reactions are automatically logged to create a "legacy capsule" of emotional
 # Export archive
 archive_json = archive.export_as_json()
 ```text
+```text
 ```
 
 
@@ -264,8 +278,10 @@ archive_json = archive.export_as_json()
 Run the demo to see VELΩNIX in action:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -297,6 +313,7 @@ custom = EmotionalElement(
 )
 
 ```text
+```text
 ```
 
 
@@ -304,6 +321,7 @@ custom = EmotionalElement(
 ### Add Custom Reaction
 
 ```python
+
 from emotional_os.glyphs.velonix_reaction_engine import ReactionChain
 
 custom_reaction = ReactionChain(
@@ -314,6 +332,7 @@ custom_reaction = ReactionChain(
 )
 
 engine.add_custom_reaction(custom_reaction)
+
 ```
 
 

@@ -44,6 +44,7 @@ analysis = detector.analyze_story_start("They keep fighting but it's not their f
 ```
 
 
+
 ##
 
 ### Phase 1.2: Frequency Reflection ✅
@@ -77,6 +78,7 @@ reflection = reflector.generate_frequency_reflection("family_conflict", 2)
 
 # Returns: gentle reflection about emerging pattern
 ```
+
 
 
 ##
@@ -125,6 +127,7 @@ anchors = manager.get_recent_anchors(limit=20)
 ```
 
 
+
 ##
 
 ### Phase 1.4: Memory Rehydration ✅
@@ -161,6 +164,7 @@ formatted = manager.format_memory_for_parser()
 
 # Ready for injection into signal_parser context
 ```
+
 
 
 ##
@@ -216,6 +220,7 @@ templates.add_custom_clarifier("pronoun", "Who exactly do you mean?", weight=2.0
 ```
 
 
+
 ##
 
 ## Test Suite Summary
@@ -257,6 +262,7 @@ emotional_os/core/firstperson/
 
 
 
+
 ### Test Files (5 files)
 
 ```
@@ -267,6 +273,7 @@ emotional_os/core/firstperson/
 ├── test_memory_manager.py           (12 KB)  - 23 tests
 └── test_response_templates.py       (13 KB)  - 34 tests
 ```
+
 
 
 
@@ -282,6 +289,7 @@ sql/
     ├── Helper functions
     └── Sample queries
 ```
+
 
 
 
@@ -304,6 +312,7 @@ detected_time_patterns jsonb         -- {time_of_day, frequency_pattern}
 user_feedback jsonb                  -- {helpful, resonant, unexpected}
 anchor_salience numeric(0-1)         -- Relevance score for retrieval
 ```
+
 
 
 
@@ -432,6 +441,7 @@ FirstPerson Core Architecture (Phase 1)
 ```
 
 
+
 ##
 
 ## Performance Characteristics
@@ -459,6 +469,7 @@ templates.add_custom_reflection(3, "Pattern emerging with {theme}.")
 
 
 
+
 ### Adjusting Thresholds
 
 ```python
@@ -473,6 +484,7 @@ reflector = FrequencyReflector()
 
 
 
+
 ### Customizing Theme Categories
 
 ```python
@@ -483,6 +495,7 @@ reflector = FrequencyReflector()
 
 # Recommended in Phase 2 refactoring
 ```
+
 
 
 ##
@@ -524,6 +537,7 @@ pytest emotional_os/core/firstperson/test_*.py --cov=emotional_os.core.firstpers
 # Specific test class
 pytest emotional_os/core/firstperson/test_frequency_reflector.py::TestFrequencyReflector -v
 ```
+
 
 
 

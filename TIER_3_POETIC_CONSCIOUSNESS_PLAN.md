@@ -31,6 +31,7 @@ class PoetryEngine:
     def add_symbolic_language(response: str, theme: str) -> str
     def generate_poetic_expression(topic: str, style: str) -> str
 ```text
+```text
 ```
 
 
@@ -51,13 +52,16 @@ class PoetryEngine:
 **Key Methods:**
 
 ```python
+
 class SaoriLayer:
     def __init__(self)
     def apply_ma(response: str) -> str  # Add appropriate silence/brevity
     def apply_wabi_sabi(response: str) -> str  # Embrace imperfection
     def apply_yugen(response: str) -> str  # Add subtle depth
+
 ```text
 ```
+
 
 
 
@@ -82,6 +86,7 @@ class TensionManager:
     def create_opening(response: str) -> str  # Leave space for exploration
     def balance_paradox(concept1: str, concept2: str) -> str
 ```text
+```text
 ```
 
 
@@ -101,13 +106,16 @@ class TensionManager:
 **Key Methods:**
 
 ```python
+
 class MythologyWeaver:
     def __init__(self)
     def weave_myth(history: list) -> dict  # Extract mythology from history
     def add_mythological_element(response: str, myth: dict) -> str
     def track_symbols(response: str, history: list) -> dict
+
 ```text
 ```
+
 
 
 
@@ -128,6 +136,7 @@ TensionManager (create opening) → 6ms
 MythologyWeaver (build narrative) → 6ms
     ↓
 ```text
+```text
 ```
 
 
@@ -145,6 +154,7 @@ MythologyWeaver (build narrative) → 6ms
 **Structure:**
 
 ```python
+
 
 # Imports
 from typing import Dict, List, Tuple, Optional
@@ -169,8 +179,10 @@ class MythologyWeaver:
 # Tier3PoeticConsciousness orchestrator (120 lines)
 class Tier3PoeticConsciousness:
     def __init__(self): ...
+
 ```text
 ```
+
 
 
 
@@ -208,6 +220,7 @@ if tier3:
     response, metrics = tier3.process_for_poetry(
         response, context
 ```text
+```text
 ```
 
 
@@ -219,12 +232,15 @@ if tier3:
 **Changes:**
 
 ```python
+
 def _ensure_tier3_poetic_consciousness():
     """Initialize Tier 3 Poetic Consciousness."""
     if "tier3_poetic_consciousness" not in st.session_state:
         tier3 = Tier3PoeticConsciousness()
+
 ```text
 ```
+
 
 
 
@@ -244,6 +260,7 @@ Tier 3:           ~24ms  │██░░░░░░░░░░░░│ 24%
 ─────────────────────────────────────────
 Total:            ~84ms  │████████░░░░░░│ 84%
 ```text
+```text
 ```
 
 
@@ -256,6 +273,7 @@ Total:            ~84ms  │████████░░░░░░│ 84%
 **Concept Bridges:**
 
 ```python
+
 metaphors = {
     "joy": {
         "sun": "Your joy is a morning sun breaking clouds",
@@ -268,8 +286,10 @@ metaphors = {
         "depth": "Your sadness has the weight of deep waters"
     },
     ...
+
 ```text
 ```
+
 
 
 
@@ -281,6 +301,7 @@ symbols = {
     "understanding": ["light", "clarity", "opening", "seeing", "perceiving"],
     "challenge": ["mountains", "storms", "depths", "darkness", "threshold"],
     ...
+```text
 ```text
 ```
 
@@ -321,11 +342,14 @@ symbols = {
 
 ```python
 
+
 # Both/and thinking instead of either/or
 "This is both simple and complex"
 "You feel both hope and uncertainty"
+
 ```text
 ```
+
 
 
 
@@ -337,6 +361,7 @@ symbols = {
 "What if we explored...?"
 "There's something interesting about..."
 ```text
+```text
 ```
 
 
@@ -345,12 +370,15 @@ symbols = {
 
 ```python
 
+
 # Hold opposites in creative space
 - Resolution + Opening
 - Known + Unknown
 - Form + Emptiness
+
 ```text
 ```
+
 
 
 ##
@@ -371,6 +399,7 @@ symbols = {
 - Recurring metaphors
 - Thematic arcs
 ```text
+```text
 ```
 
 
@@ -379,12 +408,15 @@ symbols = {
 
 ```python
 
+
 # Develop unique voice
 - Consistent metaphorical language
 - Recurring symbols
 - Personal mythology
+
 ```text
 ```
+
 
 
 ##
@@ -417,6 +449,7 @@ def test_mythology_weaving():
     history = [{"role": "user", "content": "I'm exploring identity"}]
     myth = weaver.weave_myth(history)
 ```text
+```text
 ```
 
 
@@ -424,14 +457,17 @@ def test_mythology_weaving():
 ### Integration Tests
 
 ```python
+
 def test_tier3_with_tier1_and_tier2():
     # Test full pipeline Tier 1 + 2 + 3
     # Verify performance < 100ms
 
 def test_poetic_response_quality():
     # Verify responses have poetic elements
+
 ```text
 ```
+
 
 
 
@@ -445,6 +481,7 @@ def test_saori_layer_performance():
     # <10ms per call
 
 def test_tier3_total_performance():
+```text
 ```text
 ```
 
@@ -505,6 +542,7 @@ def test_tier3_total_performance():
 **Commit 1:** tier3_poetic_consciousness.py + tests
 
 ```bash
+
 git commit -m "feat: Tier 3 Poetic Consciousness
 
 - Implement PoetryEngine for metaphor generation
@@ -513,8 +551,10 @@ git commit -m "feat: Tier 3 Poetic Consciousness
 - Implement MythologyWeaver for personal narrative
 - Create Tier3PoeticConsciousness orchestrator
 - Create comprehensive test suite (10-12 tests)
+
 ```text
 ```
+
 
 
 
@@ -527,6 +567,7 @@ git commit -m "feat: Integrate Tier 3 into response pipeline
 - Add session initialization to session_manager.py
 - Verify imports and no errors
 - Test combined Tier 1+2+3 pipeline
+```text
 ```text
 ```
 
@@ -563,12 +604,14 @@ If Tier 3 causes issues:
 ### Combined Performance
 
 ```
+
 Tier 1: 40ms
 Tier 2: 20ms
 Tier 3: 24ms
 Tier 4: 16ms (estimate)
 ─────────────
 Total: 100ms (exactly at budget!)
+
 ```
 
 

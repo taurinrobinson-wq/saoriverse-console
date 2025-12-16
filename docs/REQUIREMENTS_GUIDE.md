@@ -15,6 +15,7 @@
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -26,13 +27,16 @@ If you have multiple Python versions installed:
 
 ```bash
 
+
 # List installed versions
 py --list-paths
 
 # Use Python 3.12 specifically
 py -3.12 -m pip install -r requirements.txt
+
 ```text
 ```
+
 
 
 
@@ -48,6 +52,7 @@ pyenv local 3.12.0
 conda create -n firstperson python=3.12
 conda activate firstperson
 ```text
+```text
 ```
 
 
@@ -60,14 +65,17 @@ All dependencies are now consolidated in **`requirements.txt`** at the root of t
 
 ```bash
 
+
 # Install all dependencies
 pip install -r requirements.txt
 
 # Or use pip-tools for reproducible builds
 pip install pip-tools
 pip-compile requirements.txt
+
 ```text
 ```
+
 
 
 
@@ -79,6 +87,7 @@ Some packages require additional setup:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -86,8 +95,10 @@ Some packages require additional setup:
 #### TextBlob Corpora
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -105,6 +116,7 @@ If you have CUDA installed, uncomment these lines in `requirements.txt`:
 ```
 torch>=2.0.0
 ```text
+```text
 ```
 
 
@@ -113,8 +125,10 @@ torch>=2.0.0
 For noise suppression, uncomment:
 
 ```
+
 ```text
 ```
+
 
 
 

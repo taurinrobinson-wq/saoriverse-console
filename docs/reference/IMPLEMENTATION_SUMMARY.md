@@ -19,6 +19,7 @@ class ConversationManager:
     - load_conversation(id) → Loads specific conversation
     - delete_conversation(id) → Removes conversation
 ```text
+```text
 ```
 
 
@@ -34,10 +35,12 @@ class ConversationManager:
 Intelligently generates conversation titles from the first user message:
 
 ```python
+
 generate_auto_name("I've been feeling anxious about work")
 
 ```text
 ```
+
 
 
 
@@ -59,6 +62,7 @@ New sidebar features:
 ├── 💬 [Another Conversation]
 └── ➕ New Conversation
 
+```text
 ```text
 ```
 
@@ -150,6 +154,7 @@ Changes to `render_main_app()`:
 ### New Conversation
 
 ```
+
 User starts app
     ↓
 ConversationManager initialized
@@ -170,8 +175,10 @@ If "Save my chats" checked → Saved to Supabase
     ↓
 Page refresh
     ↓
+
 ```text
 ```
+
 
 
 
@@ -189,6 +196,7 @@ session_state updated with messages
 Chat history displayed
     ↓
 ```text
+```text
 ```
 
 
@@ -196,6 +204,7 @@ Chat history displayed
 ## Session State Variables
 
 ```python
+
 st.session_state = {
     'current_conversation_id': 'uuid-string',
     'conversation_title': 'Feeling anxious about work',
@@ -212,8 +221,10 @@ st.session_state = {
     ],
     'persist_history': True,  # User preference
     'selected_conversation': 'conv-id-xyz'  # If loading
+
 ```text
 ```
+
 
 
 
@@ -304,6 +315,7 @@ Documentation/
 
 .git/
 ```text
+```text
 ```
 
 
@@ -311,6 +323,7 @@ Documentation/
 ## Commit Reference
 
 ```
+
 commit 322c3c4
 Author: taurinrobinson-wq <taurinrobinson@gmail.com>
 
@@ -322,6 +335,7 @@ feat: implement persistent conversation storage with auto-naming
 - Add conversations table schema with metadata tracking
 - Integrate persistence into UI render_main_app
 - Create comprehensive CONVERSATION_STORAGE.md documentation
+
 ```
 
 

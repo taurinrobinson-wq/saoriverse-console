@@ -4,8 +4,10 @@ Print this and keep it handy! 📋
 ##
 
 ## 🎯 Your Deployment Path
+
 ```text
 ```
+
 LOCAL MACHINE
     ↓ git push
 GITHUB (main branch)
@@ -21,6 +23,7 @@ DOCKER CONTAINERS
     ↓
 INTERNET PUBLIC
     https://velinor.firstperson.chat ✨
+
 ```
 
 
@@ -31,6 +34,7 @@ INTERNET PUBLIC
 ### Droplet Creation (DigitalOcean)
 
 ```bash
+
 
 # SSH Key Generation
 ssh-keygen -t ed25519 -f ~/.ssh/velinor
@@ -50,12 +54,14 @@ ssh-keygen -t ed25519 -f ~/.ssh/velinor
 
 
 
+
 ### DNS Setup (Namecheap)
 
 ```
 A Record:
   Host: velinor
   Value: [YOUR_DROPLET_IP]
+```text
 ```text
 ```
 
@@ -64,6 +70,7 @@ A Record:
 ### VPS Setup (One-liner)
 
 ```bash
+
 ssh root@[DROPLET_IP]
 
 # Then paste the full script from VPS_QUICK_START.md Step 4
@@ -83,6 +90,7 @@ ssh root@[DROPLET_IP]
 
 
 
+
 ### Test Deployment
 
 ```bash
@@ -99,6 +107,7 @@ curl https://velinor.firstperson.chat/health
 # Visit in browser
 https://velinor.firstperson.chat
 
+```text
 ```text
 ```
 
@@ -124,6 +133,7 @@ https://velinor.firstperson.chat
 
 ```bash
 
+
 # SSH into VPS
 ssh root@YOUR_DROPLET_IP
 
@@ -146,8 +156,10 @@ docker compose -f docker-compose.prod.yml up -d
 docker compose -f docker-compose.prod.yml ps
 
 # Manual deploy
+
 ```text
 ```
+
 
 
 ##
@@ -178,6 +190,7 @@ Your VPS (/opt/velinor):
 ├── velinor-web/               ← Frontend code
 ├── requirements-game.txt      ← Python dependencies
 ```text
+```text
 ```
 
 
@@ -188,8 +201,10 @@ Your VPS (/opt/velinor):
 ### Container crashed? Restart it
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -198,6 +213,7 @@ Your VPS (/opt/velinor):
 ```bash
 docker compose -f docker-compose.prod.yml down
 ```text
+```text
 ```
 
 
@@ -205,8 +221,10 @@ docker compose -f docker-compose.prod.yml down
 ### Nginx won't start? Check config
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -215,6 +233,7 @@ docker compose -f docker-compose.prod.yml down
 ```bash
 certbot renew --force-renewal
 ```text
+```text
 ```
 
 
@@ -222,10 +241,12 @@ certbot renew --force-renewal
 ### Check if DNS is working
 
 ```bash
+
 nslookup velinor.firstperson.chat
 
 ```text
 ```
+
 
 
 
@@ -234,6 +255,7 @@ nslookup velinor.firstperson.chat
 ```bash
 curl -I https://velinor.firstperson.chat
 
+```text
 ```text
 ```
 
@@ -249,9 +271,12 @@ curl -I https://velinor.firstperson.chat
 **Weekly** (manual):
 
 ```bash
+
 docker compose -f docker-compose.prod.yml ps
+
 ```text
 ```
+
 
 
 
@@ -264,6 +289,7 @@ apt-get update && apt-get upgrade -y
 
 # Test deploy script
 ```text
+```text
 ```
 
 
@@ -274,6 +300,7 @@ apt-get update && apt-get upgrade -y
 ### Scenario 1: Make code changes
 
 ```bash
+
 
 # Local machine
 cd ~/saoriverse-console
@@ -290,6 +317,7 @@ git push origin main
 
 
 
+
 ### Scenario 2: Update configuration
 
 ```bash
@@ -300,6 +328,7 @@ git commit -m "chore: update config"
 git push origin main
 
 ```text
+```text
 ```
 
 
@@ -307,6 +336,7 @@ git push origin main
 ### Scenario 3: Manual emergency fix
 
 ```bash
+
 
 # SSH to VPS
 ssh root@[DROPLET_IP]
@@ -317,8 +347,10 @@ nano docker-compose.prod.yml  # or edit any file
 
 # Manually redeploy
 docker compose -f docker-compose.prod.yml down
+
 ```text
 ```
+
 
 
 ##
@@ -333,6 +365,7 @@ docker compose -f docker-compose.prod.yml down
 
 # It's what gives GitHub permission to deploy
 ```text
+```text
 ```
 
 
@@ -340,12 +373,15 @@ docker compose -f docker-compose.prod.yml down
 ✨ **Tip 2**: Set up DigitalOcean Cloud Firewall
 
 ```
+
 Inbound Rules (Allow):
   - SSH (22) from your IP
   - HTTP (80) from Everywhere
   - HTTPS (443) from Everywhere
+
 ```text
 ```
+
 
 
 
@@ -362,6 +398,7 @@ Inbound Rules (Allow):
 # On VPS, regularly verify deploy.sh exists and works
 /opt/velinor/deploy.sh --dry-run  # Test without deploying
 ```
+
 
 
 ##

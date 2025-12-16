@@ -18,10 +18,13 @@ Response generation was **glyph-driven** (template-based) rather than **message-
 **Compositional Response Generation**, build responses from linguistic fragments instead of templates
 
 ### Architecture Shift
+
 ```text
 ```
+
 OLD: Find Glyph → Fill Template
 NEW: Extract Message Features → Compose Response Dynamically
+
 ```
 
 

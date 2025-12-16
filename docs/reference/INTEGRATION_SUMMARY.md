@@ -30,8 +30,10 @@ Your system now automatically creates new glyphs during live user-AI conversatio
    - Provides export option
 
 ## How It Works: The Pipeline
+
 ```text
 ```
+
 USER DIALOGUE
     ↓
 [hybrid mode in ui.py line 573]
@@ -49,6 +51,7 @@ NEW GLYPHS GENERATED
     ↓
 AVAILABLE FOR NEXT TURN
     └─ User can see and export them
+
 ```
 
 
@@ -58,6 +61,7 @@ AVAILABLE FOR NEXT TURN
 ### 1. **UI Processing Loop** (`emotional_os/deploy/modules/ui.py`, line 573)
 
 ```python
+
 if processing_mode == "hybrid":
     # NEW: Initialize processor once per session
     if 'hybrid_processor' not in st.session_state:
@@ -75,8 +79,10 @@ if processing_mode == "hybrid":
     new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
     if new_glyphs:
         st.session_state['new_glyphs_this_session'].extend(new_glyphs)
+
 ```text
 ```
+
 
 
 
@@ -89,6 +95,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
         st.success(f"🎉 {len(new_glyphs)} new glyph(s) discovered!")
         for glyph in new_glyphs:
 ```text
+```text
 ```
 
 
@@ -98,8 +105,10 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 The system tracks conversations with unique IDs:
 
 ```python
+
 ```text
 ```
+
 
 
 
@@ -108,6 +117,7 @@ Add this to `main_v2.py` initialization if not present:
 ```python
 if 'conversation_id' not in st.session_state:
     from uuid import uuid4
+```text
 ```text
 ```
 
@@ -118,10 +128,13 @@ if 'conversation_id' not in st.session_state:
 ### Session-Level (temporary, during conversation)
 
 ```python
+
 st.session_state['hybrid_processor']        # The processor instance
 st.session_state['new_glyphs_this_session'] # Glyphs generated this session
+
 ```text
 ```
+
 
 
 
@@ -132,6 +145,7 @@ learning/
 ├── conversation_glyphs.json           # All discovered glyphs registry
 ├── user_overrides/
 │   └── user_{id}_lexicon.json        # User's personal vocabulary
+```text
 ```text
 ```
 
@@ -146,11 +160,14 @@ New glyphs are only created when an emotional pattern combination reaches:
 This ensures only meaningful patterns create glyphs. In dialogue, this builds up over multiple exchanges:
 
 ```
+
 Turn 1: love (1) + vulnerability (1) = 2
 Turn 2: love (1) + vulnerability (1) = 2
 ...
+
 ```text
 ```
+
 
 
 
@@ -161,6 +178,7 @@ evolution = DynamicGlyphEvolution(
     hybrid_learner=learner,
     min_frequency_for_glyph=50,  # Lower threshold for testing
 ```text
+```text
 ```
 
 
@@ -170,13 +188,16 @@ evolution = DynamicGlyphEvolution(
 ### Turn 1
 
 ```
+
 User: "I want to let someone in, but the fear is overwhelming"
 AI:   "That exposed feeling is the threshold of intimacy itself..."
 
 Signals detected: love, vulnerability, fear, intimacy
 Patterns found: (love + vulnerability), (love + intimacy), (vulnerability + fear)
+
 ```text
 ```
+
 
 
 
@@ -190,6 +211,7 @@ Signals detected: love, transformation, joy, becoming
 Patterns found: (love + transformation), (love + joy)
 Lexicon update: vulnerability frequency +1, transformation frequency +1
 ```text
+```text
 ```
 
 
@@ -197,6 +219,7 @@ Lexicon update: vulnerability frequency +1, transformation frequency +1
 ### Turn 10 (after similar themed exchanges)
 
 ```
+
 User: "There's something sacred about being known..."
 AI:   "Being held in genuine love is the deepest intimacy..."
 
@@ -207,8 +230,10 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
   ├─ Symbol: ♥❤
   ├─ Emotions: love + intimacy
   ├─ Response cue: "Recognize the deep closeness being shared"
+
 ```text
 ```
+
 
 
 
@@ -228,6 +253,7 @@ emotion_symbols = {
     "nature": "🌿",
     # Add more...
 ```text
+```text
 ```
 
 
@@ -235,13 +261,16 @@ emotion_symbols = {
 ### In `dynamic_glyph_evolution.py` (glyph naming)
 
 ```python
+
 name_map = {
     ("love", "intimacy"): "Intimate Connection",
     ("love", "vulnerability"): "Open-Hearted Love",
     ("joy", "celebration"): "Pure Celebration",
     # Customize for your use case
+
 ```text
 ```
+
 
 
 
@@ -271,6 +300,7 @@ To reduce processing:
 # Only process evolution every N turns instead of every turn
 if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
 ```text
+```text
 ```
 
 
@@ -282,6 +312,7 @@ if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
 Run this in Python to verify integration:
 
 ```python
+
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 from hybrid_processor_with_evolution import create_integrated_processor
@@ -305,6 +336,7 @@ result = processor.process_user_message(
 
 ```text
 ```
+
 
 
 
@@ -347,6 +379,7 @@ result = processor.process_user_message(
 # In main_v2.py, add debug
 if 'new_glyphs_this_session' in st.session_state:
 ```text
+```text
 ```
 
 
@@ -364,9 +397,12 @@ if 'new_glyphs_this_session' in st.session_state:
 
 ```python
 
+
 # In ui.py, enable debug mode to see signals
+
 ```text
 ```
+
 
 
 
@@ -440,6 +476,7 @@ if 'new_glyphs_this_session' in st.session_state:
     │  "✨ Glyphs Discovered..."      │
     └────────────────────────────────┘
 ```
+
 
 
 

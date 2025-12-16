@@ -20,6 +20,7 @@ def compose_response(
     glyph_name: str = "",  # Just a string label
     ...
 ```text
+```text
 ```
 
 
@@ -27,13 +28,16 @@ def compose_response(
 **After:**
 
 ```python
+
 def compose_response(
     self,
     input_text: str,
     glyph: Optional[Dict] = None,  # Full glyph dict with metadata
     ...
+
 ```text
 ```
+
 
 
 
@@ -52,6 +56,7 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, ...):
     # Layer 3: Entity-specific contextualization
     # Layer 4: Poetry weaving based on glyph's emotional category
 ```text
+```text
 ```
 
 
@@ -62,11 +67,14 @@ Updated `compose_message_aware_response()` to start with glyph description ancho
 
 ```python
 
+
 # Now starts with glyph context before message-specific content
 if glyph and glyph.get("description"):
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
+
 ```text
 ```
+
 
 
 
@@ -82,6 +90,7 @@ composed = _response_composer.compose_response(
     glyph_name=name,  # Just string
     ...
 ```text
+```text
 ```
 
 
@@ -89,12 +98,15 @@ composed = _response_composer.compose_response(
 **After:**
 
 ```python
+
 composed = _response_composer.compose_response(
     input_text=input_text,
     glyph=glyph,  # Full dict with description, gates, emotional_signal
     ...
+
 ```text
 ```
+
 
 
 
@@ -122,6 +134,7 @@ with math, especially when it's presented in a way that doesn't match how their 
 naturally works..."
 
 ```text
+```text
 ```
 
 
@@ -129,6 +142,7 @@ naturally works..."
 ### Message 3: Feedback Correction (Misalignment Detected)
 
 ```
+
 Input: "That's not quite what I meant. Michelle is my mother-in-law and my boss, and
 she always explains things in a way that only makes sense to her."
 
@@ -139,8 +153,10 @@ Response: "...I appreciate you saying that. I want to make sure I'm actually hea
 not projecting onto you. Help me understand: what did I miss?"
 
 ✓ Feedback-aware response generation working
+
 ```text
 ```
+
 
 
 
@@ -167,6 +183,7 @@ Dynamic Response Composer [GLYPH-AWARE]
         └─ Start with glyph anchor
         └─ Layer message-specific content
 ```text
+```text
 ```
 
 
@@ -184,10 +201,13 @@ Dynamic Response Composer [GLYPH-AWARE]
 **Before Refactoring:**
 
 ```
+
 Glyph: Still Containment (used for label only)
 Response: "You're not alone—many brilliant people have genuine friction with math..."
+
 ```text
 ```
+
 
 
 
@@ -204,6 +224,7 @@ pressure. a sanctuary of quiet care. You're not alone—many brilliant people ha
 friction with math..."
 [Glyph description directly embedded; intensity informed by gates]
 ```
+
 
 
 

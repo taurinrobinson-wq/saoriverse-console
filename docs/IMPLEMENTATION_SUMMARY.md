@@ -58,6 +58,7 @@ I've successfully created a **production-ready glyph-informed chat system** that
 # OLD (BLOCKING)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
 ```text
+```text
 ```
 
 
@@ -66,12 +67,15 @@ save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
 
 ```python
 
+
 # NEW (NON-BLOCKING)
 return ChatResponse(...)  # Return IMMEDIATELY
 
 # Then in background:
+
 ```text
 ```
+
 
 
 
@@ -198,6 +202,7 @@ return ChatResponse(...)  # Return IMMEDIATELY
 │  - temporal_patterns (time-based learning)                 │
 │  - user_profiles (preferences)                             │
 ```text
+```text
 ```
 
 
@@ -207,10 +212,12 @@ return ChatResponse(...)  # Return IMMEDIATELY
 ### Start Backend
 
 ```bash
+
 python firstperson_backend.py
 
 ```text
 ```
+
 
 
 
@@ -228,6 +235,7 @@ python diagnose_backend.py
 # ✓ Conversations loading
 
 ```text
+```text
 ```
 
 
@@ -235,6 +243,7 @@ python diagnose_backend.py
 ### Test Chat
 
 ```bash
+
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
   -d '{
@@ -248,6 +257,7 @@ curl -X POST http://localhost:8000/chat \
   }'
 
 # Response should arrive in <100ms
+
 ```
 
 

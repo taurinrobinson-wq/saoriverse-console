@@ -45,8 +45,10 @@ Example: If the corpus shows "time", "memory", "before", "forgotten" recurring t
 ## How It Works
 
 ### During Processing:
+
 ```text
 ```
+
 Gutenberg Poetry Downloads
     ↓
 Bulk Text Processor (using Adaptive Extractor)
@@ -58,11 +60,13 @@ Extraction with ALL dimensions active
 Lexicon expansion across FULL emotional spectrum
     ↓
 Report: Shows all dimensions discovered
+
 ```
 
 
 
 ### Example Output:
+```json
 ```json
 ```
 [DIMENSIONS] Emotional Dimension Summary:
@@ -71,6 +75,7 @@ Report: Shows all dimensions discovered
   Newly learned dimensions: 3-5 (discovered from current corpus)
   TOTAL: 21-23 emotional dimensions
 ```
+
 
 
 
@@ -111,6 +116,7 @@ The system automatically uses the adaptive extractor. To disable it:
 
 ```python
 ```text
+```text
 ```
 
 
@@ -118,9 +124,11 @@ The system automatically uses the adaptive extractor. To disable it:
 To generate a dimension report:
 
 ```python
+
 if hasattr(processor.extractor, 'get_dimension_report'):
     report = processor.extractor.get_dimension_report()
     print(report['total_dimensions'])  # Now >8!
+
 ```
 
 

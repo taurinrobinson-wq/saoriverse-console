@@ -42,6 +42,7 @@ docs/INTEGRATION_COMPLETE.md (NEW)
 
 
 
+
 ## How to Use
 
 ### In Code (Python)
@@ -69,6 +70,7 @@ result = learner.learn_from_exchange(
 
 
 
+
 ### In UI (Streamlit)
 
 ```python
@@ -83,6 +85,7 @@ if consent:
     print(f"Medical: {consent['medical_details']}")
     print(f"Sharing: {consent['sharing']}")
 ```
+
 
 
 
@@ -148,12 +151,14 @@ HybridLearnerWithUserOverrides(
 
 
 
+
 ### Per-User Override (in Streamlit)
 
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
 ```
+
 
 
 
@@ -188,12 +193,14 @@ streamlit run main_v2.py
 
 
 
+
 ## Key Commits
 
 ```
 23abf3d - Full integration of anonymization protocol
 4be4a05 - Intelligent anonymization protocol implementation
 ```
+
 
 
 

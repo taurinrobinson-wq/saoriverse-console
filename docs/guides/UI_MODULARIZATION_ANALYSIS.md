@@ -25,8 +25,10 @@ The current `ui.py` is a monolithic module handling ~12 major responsibilities, 
 ##
 
 ## Proposed Modularization Structure
+
 ```text
 ```
+
 emotional_os/deploy/modules/
 ├── ui.py (REFACTORED - entry point & orchestration, ~300 lines)
 ├── ui_components/
@@ -46,6 +48,7 @@ emotional_os/deploy/modules/
 │   ├── svg_loader.py                (~80 lines)
 │   ├── css_injector.py              (~120 lines)
 │   └── styling_utils.py             (~100 lines)
+
 ```
 
 
@@ -317,6 +320,7 @@ emotional_os/deploy/modules/
 ## Refactored `ui.py` Structure (~300 lines)
 
 ```python
+
 """
 Main UI entry point and orchestration.
 
@@ -373,8 +377,10 @@ def main():
         render_main_app()
 
 if __name__ == "__main__":
+
 ```text
 ```
+
 
 
 ##
@@ -481,6 +487,7 @@ utils/
 ├─ css_injector
 └─ styling_utils
 ```
+
 
 
 ##

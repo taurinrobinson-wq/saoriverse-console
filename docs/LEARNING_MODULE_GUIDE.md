@@ -5,8 +5,10 @@
 You've just built a **three-layer system** that enables the saoriverse console to learn from lived dialogue and evolve dynamically. This is a fundamental shift from template-based responses to principle-driven, adaptive conversation.
 
 ### The Three Layers
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │ 1. ARCHETYPE LIBRARY                                        │
 │    Stores learned conversation patterns extracted from      │
@@ -47,6 +49,7 @@ You've just built a **three-layer system** that enables the saoriverse console t
 │    5. Add/merge into archetype library                      │
 │    6. Update success weights based on user feedback         │
 └─────────────────────────────────────────────────────────────┘
+
 ```
 
 
@@ -55,6 +58,7 @@ You've just built a **three-layer system** that enables the saoriverse console t
 
 ### Phase 1: Playwright (You Write Dialogue)
 You create a conversational scene showing how the system should respond:
+```text
 ```text
 ```
 User: Yesterday was so heavy, but today my child hugged me
@@ -66,6 +70,7 @@ System: That moment with your child sounds genuinely special.
 User: Maybe even more so. I don't know sometimes I don't
       feel like I'm doing enough for my kids...
 ```
+
 
 
 
@@ -90,6 +95,7 @@ The learner automatically extracts principles:
     "Gentle pacing with validation first",
     "Mirror user's metaphors"
   ]
+```text
 ```text
 ```
 
@@ -123,6 +129,7 @@ System records whether user found response helpful, updates archetype success we
 ### Using the System
 
 ```python
+
 from emotional_os.learning import (
     get_archetype_library,
     get_archetype_response_generator,
@@ -146,8 +153,10 @@ new_archetype = learner.learn_from_conversation(
         # ... more turns
     ],
     user_rating=0.9,  # 1.0 = excellent, 0.0 = poor
+
 ```text
 ```
+
 
 
 
@@ -167,6 +176,7 @@ best_match = library.get_best_match(
 )
 
 # Record success for learning
+```text
 ```text
 ```
 
@@ -207,11 +217,13 @@ best_match = library.get_best_match(
 
 ```bash
 
+
 # Run the test suite
 python test_learning_module.py
 
 # Check the archetype library
 cat emotional_os/learning/archetype_library.json | python -m json.tool
+
 ```
 
 

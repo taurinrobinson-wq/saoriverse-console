@@ -15,6 +15,7 @@ interface EmotionDetectorProps {
   conversationContext?: string; // Context tag (e.g., "grief_support", default: "default")
   isActive?: boolean;          // Enable/disable detection (default: true)
 ```text
+```text
 ```
 
 
@@ -22,6 +23,7 @@ interface EmotionDetectorProps {
 ### Example Usage
 
 ```tsx
+
 import { EmotionDetector } from "@/components/EmotionDetector";
 
 export default function ChatPage() {
@@ -42,8 +44,10 @@ export default function ChatPage() {
       </div>
     </div>
   );
+
 ```text
 ```
+
 
 
 ##
@@ -89,6 +93,7 @@ export default function ChatPage() {
     </div>
   );
 ```text
+```text
 ```
 
 
@@ -99,6 +104,7 @@ export default function ChatPage() {
 Show emotion detector as a modal dialog:
 
 ```tsx
+
 // components/EmotionDetectorModal.tsx
 import { EmotionDetector } from "@/components/EmotionDetector";
 import { useState } from "react";
@@ -133,8 +139,10 @@ export function EmotionDetectorModal({ userId }: { userId: string }) {
       )}
     </>
   );
+
 ```text
 ```
+
 
 
 ##
@@ -180,6 +188,7 @@ export function ChatWithTabs({ userId }: { userId: string }) {
       </div>
     </div>
   );
+```text
 ```text
 ```
 
@@ -232,6 +241,7 @@ export function ChatWithTabs({ userId }: { userId: string }) {
 The component automatically requests webcam permission. If denied:
 
 ```tsx
+
 // Show error state
 const [error, setError] = useState<string | null>(null);
 
@@ -250,8 +260,10 @@ const [error, setError] = useState<string | null>(null);
       </button>
     </div>
   );
+
 ```text
 ```
+
 
 
 
@@ -276,6 +288,7 @@ Control detection with the `isActive` prop:
   userId={user.id}
   isActive={user.preferences.enableEmotionTracking}
 ```text
+```text
 ```
 
 
@@ -286,13 +299,16 @@ Control detection with the `isActive` prop:
 ### In Supabase Dashboard
 
 ```sql
+
 -- View recent emotion logs for a user
 SELECT emotion, confidence, timestamp, conversation_context
 FROM emotions_log
 WHERE user_id = 'user_123'
 ORDER BY timestamp DESC
+
 ```text
 ```
+
 
 
 
@@ -307,6 +323,7 @@ async function getEmotionHistory(userId: string) {
   const { data } = await response.json();
   return data;
 ```text
+```text
 ```
 
 
@@ -314,6 +331,7 @@ async function getEmotionHistory(userId: string) {
 ### Create a Dashboard Component
 
 ```tsx
+
 // components/EmotionHistory.tsx
 import { useEffect, useState } from "react";
 
@@ -350,8 +368,10 @@ export function EmotionHistory({ userId }: { userId: string }) {
       </div>
     </div>
   );
+
 ```text
 ```
+
 
 
 ##
@@ -394,6 +414,7 @@ Run the training script weekly to refine thresholds:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -403,8 +424,10 @@ Run the training script weekly to refine thresholds:
 Check which emotions are most frequently detected:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -490,6 +513,7 @@ export default function ConversationPage({
   );
 }
 ```
+
 
 
 

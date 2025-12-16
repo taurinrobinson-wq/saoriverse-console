@@ -51,6 +51,7 @@ You can also run the prototype in a web browser:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -58,6 +59,7 @@ You can also run the prototype in a web browser:
 ## 📁 Project Structure
 
 ```
+
 MessageUIOverlayPrototype/
 ├── App.js              # Main entry point with text input and overlay showcase
 ├── HeatmapOverlay.js   # Component for displaying text with heatmap highlights
@@ -67,6 +69,7 @@ MessageUIOverlayPrototype/
 ├── babel.config.js     # Babel configuration for Expo
 ├── assets/             # Icon and splash screen assets
 └── README.md           # This file
+
 ```
 
 

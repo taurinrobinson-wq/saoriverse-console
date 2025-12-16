@@ -10,11 +10,13 @@ npm install -g @railway/cli
 
 
 
+
 ### 2. Login to Railway
 
 ```powershell
 railway login
 ```
+
 
 
 
@@ -29,6 +31,7 @@ railway init
 
 
 
+
 ### 4. Set Environment Variables
 
 ```powershell
@@ -40,11 +43,13 @@ railway variables set CURRENT_SAORI_URL="your_saori_url"
 
 
 
+
 ### 5. Deploy
 
 ```powershell
 railway up
 ```
+
 
 
 
@@ -68,6 +73,7 @@ npm install -g vercel
 
 
 
+
 ### 2. Deploy
 
 ```powershell
@@ -76,11 +82,13 @@ vercel --prod
 
 
 
+
 ### 3. Add Domain
 
 ```powershell
 vercel domains add firstperson.chat
 ```
+
 
 
 ##

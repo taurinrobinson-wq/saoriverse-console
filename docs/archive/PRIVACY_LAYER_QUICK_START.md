@@ -27,11 +27,13 @@ pip install pytest
 
 
 
+
 **Verify installation:**
 
 ```bash
 python -c "from cryptography.fernet import Fernet; print('Cryptography installed ✓')"
 ```
+
 
 
 
@@ -110,6 +112,7 @@ CREATE TABLE daily_dream_batch (
 
 
 
+
 **Verify tables created:**
 
 ```bash
@@ -129,6 +132,7 @@ CREATE TABLE daily_dream_batch (
 
 
 
+
 ### Step 3: Run Encryption Tests (15 minutes)
 
 ```bash
@@ -138,6 +142,7 @@ pytest test_privacy_layer.py::TestEncryptionManager -v
 
 # Expected output: 6 tests passed
 ```
+
 
 
 
@@ -154,6 +159,7 @@ pytest test_privacy_layer.py::TestDreamEngine -v
 
 # Expected output: 5 tests passed
 ```
+
 
 
 ##
@@ -196,6 +202,7 @@ class UserAuthenticationManager:
 
 
 
+
 **See:** `PRIVACY_LAYER_INTEGRATION_GUIDE.md` Section 1
 
 ### Step 2: Update Conversation Storage (1 hour)
@@ -224,6 +231,7 @@ class ConversationStorageManager:
 
         return True
 ```
+
 
 
 
@@ -258,6 +266,7 @@ def test_login_and_store():
 ```
 
 
+
 ##
 
 ## ⏳ Phase 4: Scheduled Tasks (1-2 hours)
@@ -285,6 +294,7 @@ def generate_daily_dreams():
 
 
 
+
 ### Step 2: Create Cleanup Task
 
 ```python
@@ -300,6 +310,7 @@ def cleanup_deleted_users():
 
 
 
+
 ### Step 3: Set Up Scheduler
 
 **Option A: APScheduler (simple)**
@@ -312,6 +323,7 @@ scheduler.add_job(generate_daily_dreams, 'cron', hour=3, minute=0)
 scheduler.add_job(cleanup_expired_conversations, 'cron', hour=4, minute=0)
 scheduler.start()
 ```
+
 
 
 
@@ -334,6 +346,7 @@ app.conf.beat_schedule = {
     }
 }
 ```
+
 
 
 ##
@@ -381,6 +394,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
     # Return recent conversations with dream summaries for older ones
     return [...]
 ```
+
 
 
 ##
@@ -465,6 +479,7 @@ pytest test_privacy_layer.py::TestPerformance -v
 
 
 
+
 ### Security Review
 - [ ] Review encryption_manager.py for key material leaks
 - [ ] Verify keys never written to logs/disk
@@ -484,6 +499,7 @@ git add api_privacy_endpoints.py
 git commit -m "feat: privacy layer with encryption + retention + dreams"
 git push origin privacy-layer
 ```
+
 
 
 
@@ -562,6 +578,7 @@ python -c "from cryptography.fernet import Fernet; print('OK')"
 
 
 
+
 ### Issue: Database constraints failing
 **Solution:** Ensure user_retention_preferences rows exist before inserting conversations
 
@@ -569,6 +586,7 @@ python -c "from cryptography.fernet import Fernet; print('OK')"
 INSERT INTO user_retention_preferences (user_id_hashed)
 VALUES (?) ON CONFLICT DO NOTHING;
 ```
+
 
 
 
@@ -586,6 +604,7 @@ scheduler.print_jobs()
 
 
 
+
 ### Issue: Audit logs not showing
 **Solution:** Ensure audit_log calls aren't catching exceptions
 
@@ -595,6 +614,7 @@ try:
 except Exception as e:
     logger.error(f"Audit log failed: {e}")  # Don't silently fail
 ```
+
 
 
 ##

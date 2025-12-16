@@ -12,6 +12,7 @@ Start with the executive summary:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -20,10 +21,13 @@ Start with the executive summary:
 Verify everything works:
 
 ```bash
+
 python3 privacy_monitor.py
 python3 test_privacy_masking.py
+
 ```text
 ```
+
 
 
 
@@ -31,6 +35,7 @@ python3 test_privacy_masking.py
 See exactly what changed:
 
 ```bash
+```text
 ```text
 ```
 
@@ -40,8 +45,10 @@ See exactly what changed:
 Follow the checklist:
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -88,6 +95,7 @@ Follow the checklist:
   "user_input": "I'm struggling with depression...",
   "ai_response": "I understand. These feelings..."
 ```text
+```text
 ```
 
 
@@ -96,14 +104,17 @@ Follow the checklist:
 ### After (Privacy Safe ✅)
 
 ```json
+
 {
   "user_id_hash": "a1b2c3d4...",
   "signals": ["struggle", "vulnerability"],
   "gates": ["Gate 4", "Gate 5"],
   "glyph_names": ["Recursive Grief"],
   "ai_response_length": 245
+
 ```text
 ```
+
 
 
 **Benefit**: Only emotional patterns visible
@@ -133,6 +144,7 @@ Follow the checklist:
 python3 privacy_monitor.py
 python3 test_privacy_masking.py
 ```text
+```text
 ```
 
 
@@ -140,9 +152,12 @@ python3 test_privacy_masking.py
 ### Review Changes
 
 ```bash
+
 git diff emotional_os/learning/hybrid_learner_v2.py
+
 ```text
 ```
+
 
 
 
@@ -152,6 +167,7 @@ git diff emotional_os/learning/hybrid_learner_v2.py
 cat PRIVACY_REPORT_FINAL.md
 cat DEPLOYMENT_CHECKLIST.md
 ```
+
 
 
 ##

@@ -8,6 +8,7 @@
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -16,6 +17,7 @@
 ## Step-by-Step (5 minutes)
 
 ```bash
+
 
 # 1. Connect
 ssh root@161.35.227.49
@@ -30,8 +32,10 @@ chmod +x docker-setup.sh
 
 # 4. Verify
 docker compose ps
+
 ```text
 ```
+
 
 
 ##
@@ -76,6 +80,7 @@ docker compose exec backend bash
 
 # Check disk usage
 ```text
+```text
 ```
 
 
@@ -84,6 +89,7 @@ docker compose exec backend bash
 ## What Got Deployed
 
 ```
+
 saoriverse-console/
 ├── Dockerfile              ← Backend (Python/FastAPI)
 ├── Dockerfile.frontend     ← Frontend (React/Expo)
@@ -99,8 +105,10 @@ saoriverse-console/
 │   ├── src/config.js       ← API configuration
 │   └── package.json        ← Node dependencies
 │
+
 ```text
 ```
+
 
 
 ##
@@ -116,6 +124,7 @@ docker compose logs
 docker compose down
 docker compose build --no-cache
 ```text
+```text
 ```
 
 
@@ -124,11 +133,14 @@ docker compose build --no-cache
 
 ```bash
 
+
 # Kill the process using the port
 sudo lsof -i :8000
 sudo kill -9 <PID>
+
 ```sql
 ```
+
 
 
 
@@ -143,6 +155,7 @@ docker compose ps
 
 # Test from inside frontend container
 ```text
+```text
 ```
 
 
@@ -150,8 +163,10 @@ docker compose ps
 ### Disk full
 
 ```bash
+
 docker system df
 docker system prune -a
+
 ```
 
 

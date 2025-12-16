@@ -19,11 +19,13 @@ python poetry_data_pipeline.py --process
 
 
 
+
 ### 2. Verify It Worked
 
 ```bash
 python poetry_data_pipeline.py --status
 ```
+
 
 
 
@@ -36,6 +38,7 @@ hub = PoetryDataHub("poetry_data")
 adapter = ProcessingModeAdapter(hub)
 data = adapter.for_signal_extraction()  # or your mode
 ```
+
 
 
 ##
@@ -185,6 +188,7 @@ data = adapter.for_signal_extraction()
 
 
 
+
 ### Mode 2: Lexicon Learning
 
 ```python
@@ -192,6 +196,7 @@ data = adapter.for_lexicon_learning()
 
 # Returns: {collection_name: clean_text}
 ```
+
 
 
 
@@ -205,6 +210,7 @@ data = adapter.for_glyph_generation()
 
 
 
+
 ### Mode 4: Ritual Processing
 
 ```python
@@ -212,6 +218,7 @@ data = adapter.for_ritual_processing()
 
 # Returns: {collection_name: clean_text}
 ```
+
 
 
 ##
@@ -245,6 +252,7 @@ POETRY_DATA_SYSTEM_INDEX.md            This file
 
 
 
+
 ### Implementation
 
 ```
@@ -257,6 +265,7 @@ scripts/utilities/
 
 
 
+
 ### Generated Data
 
 ```
@@ -266,6 +275,7 @@ poetry_data/
   ├── clean/                           Cleaned texts
   └── validated/                       Validated texts
 ```
+
 
 
 ##
@@ -304,6 +314,7 @@ for collection_name, text in data.items():
 ```
 
 
+
 ##
 
 ## 🚀 Getting Started
@@ -318,12 +329,14 @@ cat POETRY_QUICK_REFERENCE.md
 
 
 
+
 ### Step 2: Process Poetry (5-10 minutes)
 
 ```bash
 cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
+
 
 
 
@@ -335,11 +348,13 @@ python poetry_data_pipeline.py --status
 
 
 
+
 ### Step 4: Integrate (copy-paste from examples)
 
 ```bash
 cat /workspaces/saoriverse-console/POETRY_INTEGRATION_EXAMPLES.md
 ```
+
 
 
 ##

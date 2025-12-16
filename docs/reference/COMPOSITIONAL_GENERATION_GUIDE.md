@@ -15,8 +15,10 @@ Your local system was generating responses that *felt* templated because:
 Instead of **fill-the-template**, use **compose-from-fragments**:
 
 ### Architecture Overview
+
 ```text
 ```
+
 User Message
     ↓
 ┌─────────────────────────────────────────────────┐
@@ -38,6 +40,7 @@ User Message
 └─────────────────────────────────────────────────┘
     ↓
 Response (Always unique, never identical)
+
 ```
 
 
@@ -48,6 +51,7 @@ Response (Always unique, never identical)
 ### BEFORE: Template-Driven
 
 ```python
+
 
 # Old approach
 if 'anxiety' in keywords:
@@ -67,6 +71,7 @@ if 'anxiety' in keywords:
 
 ```text
 ```
+
 
 
 
@@ -109,6 +114,7 @@ response = compose_message_aware_response(
 # concept structure doesn't match your natural thinking pattern. That's not fixed—it's just a
 
 ```text
+```text
 ```
 
 
@@ -132,6 +138,7 @@ response = compose_message_aware_response(
 ### Layer 1: Feedback Detection
 
 ```python
+
 def detect_feedback_correction(input_text, last_assistant_message):
     # Pattern: "it's inherited FROM Michelle" after assistant said "I can feel YOUR anxiety"
     # → is_correction: True, contradiction_type: "attribution_boundary"
@@ -141,6 +148,7 @@ def detect_feedback_correction(input_text, last_assistant_message):
 
 ```text
 ```
+
 
 
 
@@ -155,6 +163,7 @@ def extract_message_features(input_text):
         "person_involved": extract_people(text),  # spaCy NER
     }
 ```text
+```text
 ```
 
 
@@ -162,6 +171,7 @@ def extract_message_features(input_text):
 ### Layer 3: Dynamic Composition
 
 ```python
+
 class DynamicResponseComposer:
     # Multiple opening variants (not one template):
     opening_moves = {
@@ -172,6 +182,7 @@ class DynamicResponseComposer:
 
 ```text
 ```
+
 
 
 ##
@@ -198,6 +209,7 @@ naturally works... We can absolutely break this into tiny, concrete steps,
 or I can walk through one problem with you... Would you want to tackle one
 small piece together, or would you rather have a script you can use with Michelle?"
 ```text
+```text
 ```
 
 
@@ -205,6 +217,7 @@ small piece together, or would you rather have a script you can use with Michell
 ### Message 2: Mental Block + Communication Friction
 
 ```
+
 User: "Yeah it's not that I'm against math. I just have a mental block on it...
 Michelle being mostly korean speaking and having a chip on her shoulder when it
 comes to being understood... She's also a very anxious person so she explains
@@ -221,8 +234,10 @@ real isolation. That's not a failing on your part—it's a rhythm mismatch. Ment
 blocks are usually where the concept structure doesn't match your natural thinking
 pattern. That's not fixed—it's just a mismatch to navigate. What would it feel
 like to approach math frustration differently?"
+
 ```text
 ```
+
 
 
 
@@ -243,6 +258,7 @@ would it feel like to notice the difference between *her* anxiety and what's
 actually *yours*?"
 → Detects feedback correction (attribution_boundary) and addresses it directly
 ```
+
 
 
 ##

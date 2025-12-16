@@ -25,6 +25,7 @@ cd velinor-web
 npm run dev
 
 ```text
+```text
 ```
 
 
@@ -61,6 +62,7 @@ npm run dev
 ## Game Flow
 
 ```
+
 ┌─────────────────┐
 │  Splash Screen  │  (Enter player name)
 └────────┬────────┘
@@ -80,8 +82,10 @@ npm run dev
 │  + Glyph        │
 └────────┬────────┘
          │ ...continues
+
 ```text
 ```
+
 
 
 ##
@@ -104,6 +108,7 @@ npm run dev
 
 ```
 ```text
+```text
 ```
 
 
@@ -111,7 +116,9 @@ npm run dev
 ### Production (Railway Dashboard)
 
 ```
+
 NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
+
 ```
 
 

@@ -17,10 +17,13 @@ One‑time setup:
 ```bash
 
 
+
 python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
 python -m spacy download en_core_web_md
+
 ```text
 ```
+
 ##
 
 ## 2. Scripts
@@ -77,12 +80,14 @@ if __name__ == "__main__":
     os.makedirs("data", exist_ok=True)
     json.dump(result, open("data/synonyms_local.json","w",encoding="utf-8"), indent=2)
 ```text
+```text
 ```
 ##
 
 ### `scripts/filter_synonyms.py`
 
 ```python
+
 
 
 import json
@@ -132,8 +137,10 @@ def filter_synonyms(input_path="data/synonyms_local.json", output_path="data/syn
 
 if __name__ == "__main__":
     filter_synonyms()
+
 ```text
 ```
+
 ##
 
 ### `scripts/score_synonyms.py`
@@ -180,12 +187,14 @@ def score_synonyms(input_path="data/synonyms_filtered.json", output_path="data/s
 if __name__ == "__main__":
     score_synonyms()
 ```text
+```text
 ```
 ##
 
 ### `scripts/synonym_db.py`
 
 ```python
+
 
 
 import sqlite3
@@ -247,8 +256,10 @@ if __name__ == "__main__":
     init_db()
     load_from_json()
     print(query_synonyms("joy"))
+
 ```text
 ```
+
 ##
 
 ### `scripts/enrich_runner.py`
@@ -283,6 +294,7 @@ def run_enrichment():
 if __name__ == "__main__":
     run_enrichment()
 ```text
+```text
 ```
 ##
 
@@ -298,6 +310,7 @@ if __name__ == "__main__":
 ## 4. Integration Example
 
 ```python
+
 
 
 from synonym_db import query

@@ -129,6 +129,7 @@ git commit -m "feat: add production VPS deployment infrastructure"
 git push origin main
 
 ```text
+```text
 ```
 
 
@@ -146,6 +147,7 @@ Choose based on your style:
 ## 📊 What Each File Does At a Glance
 
 ```
+
 INFRASTRUCTURE (Do these first)
 ├─ docker-compose.prod.yml    → Orchestrates services
 ├─ nginx.prod.conf            → SSL/reverse proxy
@@ -161,8 +163,10 @@ DOCUMENTATION (Pick your style)
 ├─ VPS_DEPLOYMENT_INDEX.md    → Find what you need
 ├─ VPS_READY_TO_LAUNCH.md     → Launch confirmation
 ├─ PUSH_TO_GITHUB.md          → Git instructions
+
 ```text
 ```
+
 
 
 ##
@@ -228,6 +232,7 @@ Your deployment is successful when:
 ```
 1. Push to GitHub → 2. Set up DigitalOcean → 3. Deploy → 4. Done!
 ```text
+```text
 ```
 
 
@@ -235,9 +240,12 @@ Your deployment is successful when:
 ### Pattern 2: Continuous Deployment
 
 ```
+
 1. Push to GitHub → Auto-triggers GitHub Actions → 2. VPS auto-updates
+
 ```text
 ```
+
 
 
 
@@ -245,6 +253,7 @@ Your deployment is successful when:
 
 ```
 1. Deploy to local Docker → 2. Test → 3. Push to GitHub → 4. Auto-deploys
+```text
 ```text
 ```
 
@@ -318,6 +327,7 @@ Everything is created, tested, documented, and packaged.
 ## 📍 YOUR LOCATION IN THE JOURNEY
 
 ```
+
 START ───→ Deploy Velinor on Railway ─→ Fix 502 Errors
                     ✅ Done                  ✅ Done
 
@@ -334,6 +344,7 @@ START ───→ Deploy Velinor on Railway ─→ Fix 502 Errors
              │
              ↓
              DigitalOcean VPS Live 🎉
+
 ```
 
 

@@ -34,6 +34,7 @@ from src import process_user_input
 
 response = process_user_input("I'm feeling overwhelmed")
 ```text
+```text
 ```
 
 
@@ -59,6 +60,7 @@ Extract emotional signals from user text.
 **Example:**
 
 ```python
+
 from src.signal_parser import parse_input
 
 signal = parse_input("I'm happy about the news")
@@ -76,6 +78,7 @@ print(signal)
 
 
 
+
 #### `extract_themes(user_input: str) -> list`
 Extract semantic themes from text.
 
@@ -89,6 +92,7 @@ Extract semantic themes from text.
 ```python
 themes = extract_themes("Work is stressful and relationships are complicated")
 
+```text
 ```text
 ```
 
@@ -120,11 +124,14 @@ Compose response from multiple glyphs.
 **Example:**
 
 ```python
+
 from src.enhanced_response_composer import DynamicResponseComposer
 
 composer = DynamicResponseComposer()
+
 ```text
 ```
+
 
 
 ##
@@ -154,6 +161,7 @@ from src.voice_interface import VoiceInterface
 
 voice = VoiceInterface()
 ```text
+```text
 ```
 
 
@@ -170,8 +178,10 @@ Synthesize text to speech with glyph prosody (TTS).
 **Example:**
 
 ```python
+
 ```text
 ```
+
 
 
 ##
@@ -210,6 +220,7 @@ capsule = RelationalMemoryCapsule(
     response="That sounds difficult...",
     glyph=selected_glyph,
 )
+```text
 ```text
 ```
 
@@ -250,11 +261,14 @@ Generate prosody parameters for text.
 **Example:**
 
 ```python
+
 from src.prosody_planner import ProsodyPlanner
 
 planner = ProsodyPlanner()
+
 ```text
 ```
+
 
 
 ##
@@ -285,6 +299,7 @@ from src.streaming_tts import StreamingTTS
 
 tts = StreamingTTS()
 ```text
+```text
 ```
 
 
@@ -313,11 +328,14 @@ Transcribe audio file to text.
 **Example:**
 
 ```python
+
 from src.audio_pipeline import AudioPipeline
 
 pipeline = AudioPipeline()
+
 ```text
 ```
+
 
 
 ##
@@ -348,6 +366,7 @@ from src.lexicon_learner import LexiconLearner
 
 learner = LexiconLearner()
 ```text
+```text
 ```
 
 
@@ -362,8 +381,10 @@ learner = LexiconLearner()
 **Run the app:**
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -382,6 +403,7 @@ from src import process_user_input
 
 response = process_user_input("I'm feeling lost")
 ```text
+```text
 ```
 
 
@@ -389,6 +411,7 @@ response = process_user_input("I'm feeling lost")
 ### Audio-to-Audio (Voice Chat)
 
 ```python
+
 from src.voice_interface import VoiceInterface
 from src import process_user_input
 
@@ -401,8 +424,10 @@ text = voice.transcribe_audio("user_input.mp3")
 response = process_user_input(text)
 
 # 3. Synthesize response to audio
+
 ```text
 ```
+
 
 
 
@@ -428,6 +453,7 @@ capsule = RelationalMemoryCapsule(
     glyph=selected_glyph,
 )
 ```text
+```text
 ```
 
 
@@ -438,6 +464,7 @@ capsule = RelationalMemoryCapsule(
 All API functions may raise exceptions. Recommended pattern:
 
 ```python
+
 from src import process_user_input
 
 try:
@@ -445,8 +472,10 @@ try:
 except ValueError as e:
     print(f"Invalid input: {e}")
 except Exception as e:
+
 ```text
 ```
+
 
 
 ##
@@ -463,6 +492,7 @@ except Exception as e:
     "certainty": 0.5,            # Confidence
     "valence": 0.3,              # Positive/negative
 ```text
+```text
 ```
 
 
@@ -470,6 +500,7 @@ except Exception as e:
 ### Glyph Dict
 
 ```python
+
 {
     "glyph_name": "Euphoric Yearning",
     "gate": "Gate 5",
@@ -477,8 +508,10 @@ except Exception as e:
     "response_templates": [...],
     "base_emotion": "Joy",
     "prosody_profile": {...},
+
 ```text
 ```
+
 
 
 
@@ -494,6 +527,7 @@ except Exception as e:
         {"position": 0.7, "duration": 0.3},
     ]
 ```text
+```text
 ```
 
 
@@ -502,6 +536,7 @@ except Exception as e:
 ## Module Relationships
 
 ```
+
 app.py (Streamlit)
     ↓
 src.response_generator (main orchestrator)
@@ -518,6 +553,7 @@ src.voice_interface
 
 src.lexicon_learner
     └── src.relational_memory
+
 ```
 
 

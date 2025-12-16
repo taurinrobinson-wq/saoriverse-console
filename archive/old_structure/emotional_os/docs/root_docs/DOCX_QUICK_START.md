@@ -17,6 +17,7 @@ When you have a DOCX file selected or open:
 
 
 
+
 ## 🌐 Web Viewer Features
 
 The browser viewer shows:
@@ -52,6 +53,7 @@ Try this on any DOCX file:
 ```bash
 python3 docx_reader.py "your_file.docx"
 ```
+
 
 
 

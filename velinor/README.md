@@ -12,6 +12,7 @@ Run the tests with:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -41,12 +42,15 @@ Velinor is an innovative interactive fiction experience built with:
 
 ```bash
 
+
 # Clone repo and navigate
 cd saoriverse-console
 
 # Install dependencies
+
 ```text
 ```
+
 
 
 
@@ -70,6 +74,7 @@ state = orchestrator.process_player_action(
     choice_index=0,  # Select first choice
     player_id="player_1"
 ```text
+```text
 ```
 
 
@@ -80,6 +85,7 @@ See `velinor/engine/quickstart.py` for complete examples (Streamlit, FastAPI, et
 ## Architecture
 
 ```
+
 TWINE STORY (JSON)
     ↓
 [TwineAdapter] → Loads passages, parses markup
@@ -94,8 +100,10 @@ TWINE STORY (JSON)
     ├─ Streamlit (Desktop)
     ├─ Web Framework (Online)
     ├─ CLI Terminal (Local)
+
 ```text
 ```
+
 
 
 
@@ -126,6 +134,7 @@ You emerge into the Market District...
 [[Ask about the Tone->keeper_dialogue]]
 [[Explore alone->market_exploration]]
 ```text
+```text
 ```
 
 
@@ -155,14 +164,17 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
 ### Player Stats
 
 ```python
+
 {
     'courage': 50,     # Face danger, stand firm
     'wisdom': 55,      # Understand patterns, observe
     'empathy': 60,     # Connect with others, feel
     'resolve': 50,     # Persist despite difficulty
     'resonance': 100,  # Hear the Tone, collect glyphs
+
 ```text
 ```
+
 
 
 
@@ -179,6 +191,7 @@ Example:
 Player chooses: "Persuade the guard"
 DC: 12, Player Courage: +3
 Roll: 14 + 3 = 17 ✅ Success
+```text
 ```text
 ```
 
@@ -206,8 +219,10 @@ Roll: 14 + 3 = 17 ✅ Success
 **Solo Mode:**
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -215,6 +230,7 @@ Roll: 14 + 3 = 17 ✅ Success
 
 ```
 NPC: "Together, your courage strengthens. The mist bends
+```text
 ```text
 ```
 
@@ -236,6 +252,7 @@ Without FirstPerson: Game still works with template-based dialogue.
 ## File Structure
 
 ```
+
 velinor/
 ├── engine/
 │   ├── core.py                 # Game engine (state, dice)
@@ -249,8 +266,10 @@ velinor/
 ├── assets/
 │   └── backgrounds/            # Location images
 ├── markdowngameinstructions/   # Design docs
+
 ```text
 ```
+
 
 
 ##
@@ -325,6 +344,7 @@ orchestrator.save_game("saves/game_001.json")
 
 # Load
 ```text
+```text
 ```
 
 
@@ -337,6 +357,7 @@ orchestrator.save_game("saves/game_001.json")
 Velinor loads Twine 2 JSON export format:
 
 ```json
+
 {
   "name": "Story Title",
   "startnode": "1",
@@ -350,8 +371,10 @@ Velinor loads Twine 2 JSON export format:
       "size": [100, 100]
     }
   ]
+
 ```text
 ```
+
 
 
 
@@ -382,6 +405,7 @@ Velinor loads Twine 2 JSON export format:
   }
 }
 ```
+
 
 
 ##

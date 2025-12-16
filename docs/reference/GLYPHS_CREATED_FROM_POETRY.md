@@ -63,8 +63,10 @@ Using Project Gutenberg data, we identified which emotional dimensions appeared 
 ##
 
 ## How This Works: The Process
+
 ```text
 ```
+
 Project Gutenberg Poetry (1.1M words)
         ↓
 Extract Emotional Signals (18+ dimensions)
@@ -86,6 +88,7 @@ Generate Glyph Definitions
         └─ Narrative Hook
         ↓
 20 NEW GLYPHS CREATED ✨
+
 ```
 
 
@@ -144,6 +147,7 @@ This isn't arbitrary—it's **emergent from the data itself**.
 **Format**: JSON array with complete glyph definitions including:
 
 ```json
+
 {
   "id": "glyph_poetry_01",
   "name": "Deep Connection",
@@ -156,6 +160,7 @@ This isn't arbitrary—it's **emergent from the data itself**.
   "created_from_pattern": true,
   "source": "gutenberg_poetry"
 }
+
 ```
 
 

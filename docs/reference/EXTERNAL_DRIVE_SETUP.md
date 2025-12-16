@@ -8,18 +8,22 @@ Your FirstPerson local emotional processing system has been successfully moved t
 ## 📍 Location Setup
 
 ### Local Machine
+
 ```text
 ```
+
 /Users/taurinrobinson/saoriverse-console
 ├── parser/                    (code - ~245MB)
 ├── .venv → symlink to external ↓
 ├── data → symlink to external ↓
 └── setup_external.sh (setup script)
+
 ```
 
 
 
 ### External Drive: "My Passport for Mac"
+```text
 ```text
 ```
 /Volumes/My Passport for Mac/FirstPerson
@@ -27,6 +31,7 @@ Your FirstPerson local emotional processing system has been successfully moved t
 ├── data/                      (~500MB, grows with data)
 └── saoriverse-console/        (backup copy)
 ```
+
 
 
 ##
@@ -52,6 +57,7 @@ The external drive should auto-mount when connected. To verify:
 ls /Volumes/
 
 ```text
+```text
 ```
 
 
@@ -59,9 +65,12 @@ ls /Volumes/
 ### 2. Run Setup Script (if needed)
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -78,6 +87,7 @@ Once external drive is mounted:
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```sql
+```sql
 ```
 
 
@@ -87,9 +97,12 @@ Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
 ### 4. Run Tests
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```
+
 
 
 ##
@@ -108,6 +121,7 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 /Users/taurinrobinson/saoriverse-console/data
   → Points to external drive
 ```text
+```text
 ```
 
 
@@ -121,9 +135,12 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 **View symlinks:**
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```
+
 
 
 ##
@@ -141,6 +158,7 @@ cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 
 ```text
+```text
 ```
 
 
@@ -151,9 +169,12 @@ If it doesn't auto-mount:
 
 ```bash
 
+
 # Manual mount command
+
 ```text
 ```
+
 
 
 
@@ -174,6 +195,7 @@ git status
 git add .
 git commit -m "message"
 ```text
+```text
 ```
 
 
@@ -187,10 +209,13 @@ All code changes sync to Git regardless of external storage.
 
 ```bash
 
+
 # Fix permissions on external drive
 chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
+
 ```text
 ```
+
 
 
 
@@ -207,6 +232,7 @@ diskutil mount "/Volumes/My Passport for Mac"
 # Verify symlinks
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -215,10 +241,13 @@ cd /Users/taurinrobinson/saoriverse-console
 
 ```bash
 
+
 # Run the setup script to fix everything
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```
+
 
 
 ##
@@ -240,6 +269,7 @@ Since your data is now on an external drive:
 cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstPerson-backup
 
 # Just data
+```text
 ```text
 ```
 
@@ -263,6 +293,7 @@ For quick testing, you can:
 
 ```bash
 
+
 # Copy venv locally (1.2GB)
 cp -r "/Volumes/My Passport for Mac/FirstPerson/venv" /Users/taurinrobinson/saoriverse-console/.venv
 
@@ -271,8 +302,10 @@ cd /Users/taurinrobinson/saoriverse-console
 rm .venv
 
 # Now use local .venv
+
 ```text
 ```
+
 
 
 
@@ -280,6 +313,7 @@ Then move it back to external:
 
 ```bash
 rm -rf .venv
+```text
 ```text
 ```
 
@@ -311,6 +345,7 @@ rm -rf .venv
 
 ```bash
 
+
 # Check setup
 cd /Users/taurinrobinson/saoriverse-console
 ./setup_external.sh
@@ -329,6 +364,7 @@ ls -la .venv data
 
 # Check if mounted
 mount | grep "My Passport"
+
 ```
 
 

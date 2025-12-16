@@ -35,8 +35,10 @@ The complete codebase reorganization has been successfully executed. The project
 ## What Changed
 
 ### Before Reorganization
+
 ```text
 ```
+
 saoriverse-console/
 ├── 150+ files in root (.py, .md)
 ├── emotional_os/         (deep nesting)
@@ -46,11 +48,13 @@ saoriverse-console/
 ├── learning/            (orphaned)
 ├── tests/               (scattered)
 └── scripts/             (unorganized 50+ files)
+
 ```
 
 
 
 ### After Reorganization
+```text
 ```text
 ```
 saoriverse-console/
@@ -66,6 +70,7 @@ saoriverse-console/
 ├── tools/
 └── archive/             (old_structure/ + old_modules/)
 ```
+
 
 
 
@@ -215,6 +220,7 @@ git log --oneline | head -5
 # b5d65d3 refactor: Complete codebase reorganization
 
 ```text
+```text
 ```
 
 
@@ -223,11 +229,13 @@ git log --oneline | head -5
 
 ```bash
 
+
 # To rollback to pre-reorganization state:
 git checkout pre-reorganization
 
 # or
 git reset --hard pre-reorganization
+
 ```
 
 

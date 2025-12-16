@@ -9,6 +9,7 @@
 # In the root of your repo or new folder
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 ```text
+```text
 ```
 
 
@@ -16,8 +17,10 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 ### 2. Install Dependencies
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -30,6 +33,7 @@ Create `.env.local`:
 
 ```
 ```text
+```text
 ```
 
 
@@ -37,8 +41,10 @@ Create `.env.local`:
 For production (Railway):
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -69,6 +75,7 @@ velinor-web/
 │       └── npcs/               # Character images
 └── styles/
 ```text
+```text
 ```
 
 
@@ -84,6 +91,7 @@ See the companion files:
 ### 6. Run Locally
 
 ```bash
+
 
 # Terminal 1: Start FastAPI backend
 cd /path/to/saoriverse-console
@@ -101,6 +109,7 @@ npm run dev
 
 
 
+
 ### 7. Deployment to Railway
 
 See `RAILWAY_DEPLOYMENT.md` for full setup.
@@ -115,6 +124,7 @@ git commit -m "feat: Add Next.js frontend for Velinor"
 git push origin main
 
 ```text
+```text
 ```
 
 
@@ -124,6 +134,7 @@ git push origin main
 ### Start Game
 
 ```
+
 POST /api/game/start
 {
   "player_name": "Traveler"
@@ -131,8 +142,10 @@ POST /api/game/start
 → {
   "session_id": "uuid",
   "state": { ...game state... }
+
 ```text
 ```
+
 
 
 
@@ -146,6 +159,7 @@ POST /api/game/{session_id}/action
   "player_input": "I approach cautiously"
 }
 ```text
+```text
 ```
 
 
@@ -153,6 +167,7 @@ POST /api/game/{session_id}/action
 ### Game State Structure
 
 ```typescript
+
 {
   passage_id: string           // Current passage ID
   passage_name: string         // Human-readable name
@@ -168,8 +183,10 @@ POST /api/game/{session_id}/action
   game_state: {
     player_stats: { ... }
   }
+
 ```text
 ```
+
 
 
 
@@ -237,6 +254,7 @@ POST /api/game/{session_id}/action
   </button>
 </div>
 ```
+
 
 
 

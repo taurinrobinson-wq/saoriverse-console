@@ -34,6 +34,7 @@ renderer.render_control_prefix(glyphs, gates)  # Generate <SYS> prefix
 
 
 
+
 ### 2. Safety Post-Processing ✅
 **File**: `local_inference/safety_post_processor.py` (400 lines)
 
@@ -54,6 +55,7 @@ result = processor.process(response, gates, glyphs)
 
 
 
+
 ### 3. Training Corpus Pipeline ✅
 **File**: `local_inference/training_corpus.py` (340 lines)
 
@@ -70,6 +72,7 @@ result = processor.process(response, gates, glyphs)
   "lexicon_tags": ["vestibular", "safe-danger"]
 }
 ```
+
 
 
 
@@ -124,6 +127,7 @@ Post-process output (remove unsafe phrases, enforce rhythm)
 
 
 
+
 ### Phase 2.4 → Phase 3.5
 
 ```
@@ -136,6 +140,7 @@ LoRA adapter learns user's preferred style distribution
 
 
 
+
 ### Phase 1 → Phase 3.5
 
 ```
@@ -145,6 +150,7 @@ GlyphRegistry.match_by_themes() returns: [Grounded Stillness, Safe Connection]
          ↓
 Gate enforcement ensures appropriate intensity/uncanniness
 ```
+
 
 
 ##
@@ -177,6 +183,7 @@ control_prefix = renderer.render_control_prefix(
 
 
 
+
 ### Safety Post-Processing
 
 ```python
@@ -199,6 +206,7 @@ result = processor.process(
 
 # }
 ```
+
 
 
 
@@ -229,6 +237,7 @@ builder.export_jsonl("training_data.jsonl")
 ```
 
 
+
 ##
 
 ## Next Steps: LoRA Fine-Tuning Pipeline (Not Yet Implemented)
@@ -246,6 +255,7 @@ pip install transformers datasets peft accelerate bitsandbytes
 
 
 
+
 ### Download Model
 
 ```bash
@@ -256,6 +266,7 @@ huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2 --local-dir models/m
 # Or Phi-3 mini (more efficient)
 huggingface-cli download microsoft/phi-3-mini --local-dir models/phi-3-mini
 ```
+
 
 
 
@@ -283,6 +294,7 @@ trainer.train()
 
 
 
+
 ### Run Locally
 
 ```bash
@@ -299,6 +311,7 @@ curl -X POST http://localhost:8000/generate \
     "gates": {"uncanny_ok": false}
   }'
 ```
+
 
 
 ##
@@ -359,6 +372,7 @@ local_inference/
 ├── examples.py                       (Working examples)
 └── verify_phase_3_5.sh               (Verification script)
 ```
+
 
 
 ##

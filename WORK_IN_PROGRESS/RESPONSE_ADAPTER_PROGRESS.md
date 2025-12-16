@@ -43,6 +43,7 @@ python3 scripts/test_local_response_flow.py
 
 
 
+
 Expected: The script will load local resources (spaCy, NRC lexicon, poetry DB), run `parse_input()` on the sample message, and print a composed response that uses plain-language snippets (no glyph names) and friend-like templates.
 
 ## Notes on current behavior

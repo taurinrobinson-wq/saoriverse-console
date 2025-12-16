@@ -47,6 +47,7 @@ python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; pr
 
 # 3. Verify Supabase connection (if applicable)
 ```text
+```text
 ```
 
 
@@ -55,6 +56,7 @@ python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; pr
 
 ```bash
 
+
 # 1. Deploy to staging environment
 ./deploy.sh staging
 
@@ -62,8 +64,10 @@ python -c "from emotional_os.core.firstperson import FirstPersonOrchestrator; pr
 pytest emotional_os/core/firstperson/test_integration_orchestrator.py -v
 
 # 3. Monitor metrics for 24 hours
+
 ```text
 ```
+
 
 
 
@@ -83,6 +87,7 @@ python -c "from emotional_os.core.firstperson.deployment_monitor import Deployme
 # 4. Commit deployment
 git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 ```text
+```text
 ```
 
 
@@ -93,6 +98,7 @@ git add . && git commit -m "deploy: FirstPerson Phase 1-2 to production"
 ## Unit Tests (All Modules)
 
 ```bash
+
 
 # Story-start detection
 pytest emotional_os/core/firstperson/test_story_start_detector.py -v
@@ -105,8 +111,10 @@ pytest emotional_os/core/firstperson/test_repair_module.py -v
 pytest emotional_os/core/firstperson/test_repair_orchestrator.py -v
 
 # Integration orchestrator
+
 ```text
 ```
+
 
 
 
@@ -119,6 +127,7 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestInteg
 
 # Phase 2.3 repair detection
 ```text
+```text
 ```
 
 
@@ -128,6 +137,7 @@ pytest emotional_os/core/firstperson/test_integration_orchestrator.py::TestInteg
 ### Scenario 1: Story-Start Detection
 
 ```python
+
 from emotional_os.core.firstperson.integration_orchestrator import FirstPersonOrchestrator
 
 orch = FirstPersonOrchestrator(user_id="test_user", conversation_id="test_conv")
@@ -138,6 +148,7 @@ print(response.response_text)
 
 ```text
 ```
+
 
 
 
@@ -157,6 +168,7 @@ for turn_num, input_text in enumerate(inputs, 1):
     print(f"Turn {turn_num}: {response.detected_theme}")
 
 ```text
+```text
 ```
 
 
@@ -164,6 +176,7 @@ for turn_num, input_text in enumerate(inputs, 1):
 ### Scenario 3: Repair Detection
 
 ```python
+
 from emotional_os.core.firstperson.repair_orchestrator import RepairOrchestrator
 
 repair = RepairOrchestrator(user_id="test_user")
@@ -174,6 +187,7 @@ print(is_rejection)
 
 ```text
 ```
+
 
 
 ##
@@ -219,6 +233,7 @@ watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 
 # Generate health report
 ```text
+```text
 ```
 
 
@@ -229,6 +244,7 @@ watch -n 5 'python -m emotional_os.core.firstperson.deployment_monitor'
 If issues arise:
 
 ```bash
+
 
 # 1. Identify issue via monitoring
 python -m emotional_os.core.firstperson.deployment_monitor
@@ -245,6 +261,7 @@ pytest emotional_os/core/firstperson/test_*.py -q
 # 5. Open incident ticket for investigation
 
 # Issue tracking system: [fill in]
+
 ```
 
 

@@ -311,6 +311,7 @@ Documentation:
 
 
 
+
 ### Command Reference
 
 ```bash
@@ -324,6 +325,7 @@ pytest test_privacy_layer.py -v
 # Run specific test class
 pytest test_privacy_layer.py::TestEncryptionManager -v
 ```
+
 
 
 
@@ -351,6 +353,7 @@ Choose one:
 
 
 
+
 **B) Learn First (Recommended):**
 
 ```
@@ -362,6 +365,7 @@ Choose one:
 
 
 
+
 **C) Code Review Only:**
 
 ```
@@ -370,6 +374,7 @@ Choose one:
 3. Review test_privacy_layer.py
 4. Read comments in code
 ```
+
 
 
 ##

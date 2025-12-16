@@ -1,8 +1,10 @@
 # Learning Module System Architecture - Complete Overview
 
 ## Three-Layer Learning Architecture
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        LAYER 1: ARCHETYPE LIBRARY                   │
 │                    conversation_archetype.py (315 lines)            │
@@ -110,6 +112,7 @@
 
 ## Data Flow: From User Input to System Response
 ```text
+```text
 ```
 USER INPUT
     ↓
@@ -158,11 +161,14 @@ OPTIONAL: LEARNING (Layer 3)
 
 
 
+
 ## Current Archetype Library Contents
 
 ### Archetype 1: ReliefToGratitude
+
 ```sql
 ```
+
 Purpose: Handle transitions from burden to connection
 Entry Cues: relief, gratitude, hug, melted away, wonderful feeling, ...
 Learned From: User dialogue about child hug dissolving overwhelm
@@ -182,11 +188,13 @@ Tone:
   - Mirror metaphors
   - Proportional empathy
 Status: ✓ Working, tested
+
 ```
 
 
 
 ### Archetype 2: OverwhelmToReflection
+```text
 ```text
 ```
 Purpose: Navigate work overwhelm to existential meaning-seeking
@@ -220,9 +228,12 @@ Status: ✓ Verified with 6-turn dialogue
 
 
 
+
 ### Archetype 3: GratitudeToOverwhelm (Auto-Learned)
+
 ```sql
 ```
+
 Purpose: Transition from mixed emotions to deeper complexity
 Entry Cues: but, hug, heavy, familial_connection, ...
 Learned From: Automatically extracted by ConversationLearner
@@ -241,6 +252,7 @@ Tone:
   - Warm, embracing language
   - Reflect feelings back empathetically
 Status: ✓ Auto-learned, working
+
 ```
 
 
@@ -248,6 +260,7 @@ Status: ✓ Auto-learned, working
 ## Response Generation Example: Full Flow
 
 ### User Input
+```text
 ```text
 ```
 "I feel fragile today, like even small things overwhelm me.
@@ -257,9 +270,12 @@ pummeled by back-to-back client meetings and impossible deadlines."
 
 
 
+
 ### Layer 1: Archetype Matching
+
 ```text
 ```
+
 Library.get_best_match(user_input):
   ReliefToGratitude: 0.30   (1 cue match + low success_weight = low)
   GratitudeToOverwhelm: 0.30 (1 cue match + low success_weight = low)
@@ -268,6 +284,7 @@ Library.get_best_match(user_input):
     - Score: min(3/16, 1.0) * 0.7 + 1.0 * 0.3 = 0.21 * 0.7 + 0.3 = 0.39
 
   Selected: OverwhelmToReflection archetype
+
 ```
 
 
@@ -275,6 +292,7 @@ Library.get_best_match(user_input):
 ### Layer 2: Response Generation
 
 **Phase 1: Opening**
+```text
 ```text
 ```
 Archetype principles: ["Validate overwhelm", "Gentle scaffolding", ...]
@@ -287,16 +305,21 @@ Generate opening: "I hear you. Sounds like you're holding a lot right now."
 
 
 
+
 **Phase 2: Continuity Bridge**
+
 ```text
 ```
+
 Prior context: (None - first turn)
 No bridge needed (but would apply if this were turn 3+)
+
 ```
 
 
 
 **Phase 3: Closing**
+```text
 ```text
 ```
 Archetype tone: ["Curious, non-prescriptive", ...]
@@ -308,9 +331,12 @@ Generate closing: "What's one thing about that you want to sit with?"
 
 
 
+
 **Assemble Response**
+
 ```text
 ```
+
 opening = "I hear you. Sounds like you're holding a lot right now."
 bridge = ""
 closing = "What's one thing about that you want to sit with?"
@@ -318,11 +344,13 @@ closing = "What's one thing about that you want to sit with?"
 response = opening + closing
          = "I hear you. Sounds like you're holding a lot right now.
             What's one thing about that you want to sit with?"
+
 ```
 
 
 
 ### Layer 3: Optional Learning
+```text
 ```text
 ```
 If conversation is marked successful:
@@ -337,24 +365,29 @@ If conversation is marked successful:
 ```
 
 
+
 ##
 
 ## Why This Architecture Works
 
 ### Problem: Template Rotation (OLD)
+
 ```text
 ```
+
 OLD SYSTEM:
 - Randomly select: opening + movement + closing
 - Result: Feels mechanical, unpredictable variation, incoherent
 
 Example: Response could be "I understand" + "Have you tried..." + "Let me know!"
          Feels disjointed and unnatural
+
 ```
 
 
 
 ### Solution: Principle-Driven Generation (NEW)
+```text
 ```text
 ```
 NEW SYSTEM:
@@ -365,6 +398,7 @@ Example: "I hear you. Sounds like you're holding a lot right now.
           What's one thing about that you want to sit with?"
          Feels coherent, contextual, genuinely responsive
 ```
+
 
 
 
@@ -395,6 +429,7 @@ def generate_response(user_input, prior_context):
 
     # Fallback to glyph system if no archetype match
 ```text
+```text
 ```
 
 
@@ -402,6 +437,7 @@ def generate_response(user_input, prior_context):
 ### With Learning Pipeline
 
 ```python
+
 
 # After successful conversation:
 def log_successful_interaction(dialogue, feedback):
@@ -417,6 +453,7 @@ def log_successful_interaction(dialogue, feedback):
             user_feedback=feedback
         )
         library.add_archetype(new_archetype)
+
 ```
 
 

@@ -45,6 +45,7 @@ All components of the Velinor web stack are complete and ready for testing.
 ```bash
 cd d:\saoriverse-console
 ```text
+```text
 ```
 
 
@@ -54,9 +55,12 @@ Wait for: `INFO: Uvicorn running on http://127.0.0.1:8000`
 ### Step 2: Start Frontend
 
 ```bash
+
 cd d:\saoriverse-console\velinor-web
+
 ```text
 ```
+
 
 
 
@@ -65,6 +69,7 @@ Wait for: `url: http://localhost:3000`
 ### Step 3: Open Browser
 
 ```
+```text
 ```text
 ```
 
@@ -87,6 +92,7 @@ That's it! You should see the splash screen.
 ## Architecture
 
 ```
+
 User (Browser)
     ↓
 Frontend: Next.js
@@ -101,6 +107,7 @@ Backend: FastAPI
     ↓ (Python)
 Velinor Engine
     └── VelinorTwineOrchestrator
+
 ```
 
 

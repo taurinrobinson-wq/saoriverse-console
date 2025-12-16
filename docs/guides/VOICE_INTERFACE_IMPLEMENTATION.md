@@ -7,8 +7,10 @@
 Implemented a complete end-to-end voice chat pipeline for FirstPerson, transforming it from text-only to a genuinely unique multimodal interface. The system integrates speech-to-text (Whisper), prosody planning (glyph signals → voice characteristics), and text-to-speech (Coqui TTS) with zero API costs.
 
 ## Architecture
+
 ```text
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                        User Interface                       │
 │                 Streamlit Web Application                   │
@@ -61,6 +63,7 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
                        │ • Buffering        │
                        │ • Streaming Output │
                        └────────────────────┘
+
 ```
 
 
@@ -109,12 +112,14 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
 
 **Prosody Mapping Logic:**
 ```text
+```text
 ```
 Voltage (0-1)              → Speaking Rate (0.8x - 1.3x)
 Tone + Valence            → Pitch Shift (-2 to +2 semitones)
 Emotional Attunement      → Word Emphasis Placement
 Certainty                 → Terminal Contour (rising/mid/falling)
 ```
+
 
 
 
@@ -247,6 +252,7 @@ glyph_signals = generate_response_with_glyphs(response_text)
 
 # Render voice output with prosody
 ```text
+```text
 ```
 
 
@@ -309,6 +315,7 @@ Compare to:
 ## File Structure
 
 ```
+
 spoken_interface/
 ├── __init__.py                    # Package exports
 ├── audio_pipeline.py              # Sprint 1: STT pipeline (485 lines)
@@ -327,6 +334,7 @@ spoken_interface/
 
 
 
+
 ## Dependencies
 
 **Required:**
@@ -338,6 +346,7 @@ soundfile>=0.12.0         # Audio I/O
 TTS>=0.21.0               # Coqui TTS
 scipy>=1.7.0              # Signal processing
 ```text
+```text
 ```
 
 
@@ -345,9 +354,11 @@ scipy>=1.7.0              # Signal processing
 **Optional:**
 
 ```
+
 torch>=1.9.0              # GPU acceleration (optional)
 matplotlib>=3.4.0         # Visualization (optional)
 streamlit>=1.0.0          # Web UI (required only for Streamlit deployment)
+
 ```
 
 

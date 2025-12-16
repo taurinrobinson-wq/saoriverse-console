@@ -16,8 +16,10 @@ Automatically removes em dashes from AI responses and replaces them with emotion
 | `dynamic_response_composer.py` (modified) | Integrated cleaner into response generation | +25 |
 
 ## 🔄 How It Works (Automatic)
+
 ```text
 ```
+
 User Input
     ↓
 Generate Response (may contain em dashes)
@@ -29,6 +31,7 @@ Remove Em Dashes + Apply Pool-Appropriate Punctuation
 Optionally Diversify Generic Closings
     ↓
 Return Clean Response
+
 ```
 
 
@@ -82,6 +85,7 @@ No code changes needed in calling code — it happens automatically!
 
 ### Before → After
 ```text
+```text
 ```
 "You're not alone—many brilliant people struggle with math—it's not your fault."
 ↓
@@ -98,6 +102,7 @@ No code changes needed in calling code — it happens automatically!
 "You're moving through this. There's no wrong way to do it."
 (Grounded pool, periods applied)
 ```
+
 
 
 
@@ -123,6 +128,7 @@ cleaned = cleaner.process_response(
     response=raw_response,
     glyph_name=glyph_name,
     diversify=True  # Replace generic closings
+```text
 ```text
 ```
 
@@ -166,6 +172,7 @@ And so on for Empathetic, Encouraging, Clarifying pools.
 To customize, edit `style_matrix.json`:
 
 ```json
+
 {
   "Grounded": {
     "rotation_bank": [
@@ -174,8 +181,10 @@ To customize, edit `style_matrix.json`:
       ...
     ]
   }
+
 ```text
 ```
+
 
 
 
@@ -197,6 +206,7 @@ Run built-in tests:
 cd emotional_os/glyphs
 python punctuation_cleaner.py
 ```
+
 
 
 

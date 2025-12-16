@@ -13,6 +13,7 @@
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
+```text
 ```
 
 
@@ -20,6 +21,7 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ### 2. Set up Python environment
 
 ```bash
+
 
 # Create virtual environment
 python -m venv .venv
@@ -30,14 +32,17 @@ python -m venv .venv
 source .venv/bin/activate
 
 # On Windows:
+
 ```text
 ```
+
 
 
 
 ### 3. Install dependencies
 
 ```bash
+```text
 ```text
 ```
 
@@ -46,9 +51,12 @@ source .venv/bin/activate
 ### 4. Set up pre-commit hooks (optional but recommended)
 
 ```bash
+
 pip install pre-commit
+
 ```text
 ```
+
 
 
 
@@ -60,6 +68,7 @@ This will automatically run checks before each commit.
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -67,10 +76,13 @@ This will automatically run checks before each commit.
 ### Run specific test category
 
 ```bash
+
 python tests/run_tests.py unit
 python tests/run_tests.py integration
+
 ```text
 ```
+
 
 
 
@@ -80,6 +92,7 @@ python tests/run_tests.py integration
 pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 
 ```text
+```text
 ```
 
 
@@ -87,14 +100,17 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 ### Run with more verbose output
 
 ```bash
+
 ```text
 ```
+
 
 
 
 ### Run specific test file
 
 ```bash
+```text
 ```text
 ```
 
@@ -105,8 +121,10 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 ### View available hooks
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -114,6 +132,7 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 
 ```bash
 pre-commit run ruff --all-files
+```text
 ```text
 ```
 
@@ -123,11 +142,14 @@ pre-commit run ruff --all-files
 
 ```bash
 
+
 # Uncomment the pytest stage in .pre-commit-config.yaml to enable on commit
 
 # Then manually run:
+
 ```text
 ```
+
 
 
 
@@ -137,6 +159,7 @@ pre-commit run ruff --all-files
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -144,14 +167,17 @@ pre-commit run ruff --all-files
 ### Format code
 
 ```bash
+
 ```text
 ```
+
 
 
 
 ### Type checking with mypy (manual)
 
 ```bash
+```text
 ```text
 ```
 
@@ -162,8 +188,10 @@ pre-commit run ruff --all-files
 ### Create a feature branch
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -174,6 +202,7 @@ pre-commit run ruff --all-files
 # Pre-commit hooks will run automatically if configured
 git add .
 ```text
+```text
 ```
 
 
@@ -181,8 +210,10 @@ git add .
 ### Push to remote
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -213,6 +244,7 @@ cd /path/to/saoriverse-console
 
 # Try with explicit path
 ```text
+```text
 ```
 
 
@@ -221,12 +253,15 @@ cd /path/to/saoriverse-console
 
 ```bash
 
+
 # Ensure all dependencies are installed
 pip install -r requirements.txt
 
 # Reinstall in case of issues
+
 ```text
 ```
+
 
 
 
@@ -236,6 +271,7 @@ pip install -r requirements.txt
 
 # Reinstall hooks
 ```text
+```text
 ```
 
 
@@ -244,11 +280,13 @@ pip install -r requirements.txt
 
 ```bash
 
+
 # Install coverage tools
 pip install pytest-cov
 
 # Generate manually
 pytest tests/ --cov=emotional_os --cov-report=html
+
 ```
 
 

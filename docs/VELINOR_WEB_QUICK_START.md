@@ -20,6 +20,7 @@ The complete Velinor web stack (FastAPI + Next.js) is ready to test. No more Str
 ```bash
 cd d:\saoriverse-console
 ```text
+```text
 ```
 
 
@@ -27,8 +28,10 @@ cd d:\saoriverse-console
 You should see:
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -39,6 +42,7 @@ You should see:
 ```bash
 cd d:\saoriverse-console\velinor-web
 ```text
+```text
 ```
 
 
@@ -46,9 +50,12 @@ cd d:\saoriverse-console\velinor-web
 You should see:
 
 ```
+
   ▲ Next.js 14.0.0
+
 ```text
 ```
+
 
 
 
@@ -97,6 +104,7 @@ Backend processes through Velinor engine
 Returns new game state
     ↓
 ```text
+```text
 ```
 
 
@@ -134,6 +142,7 @@ Returns new game state
 
 ```bash
 
+
 # Terminal 1
 Ctrl+C  (stop backend)
 python velinor_api.py
@@ -143,8 +152,10 @@ Ctrl+C  (stop frontend)
 npm run dev
 
 # Browser
+
 ```text
 ```
+
 
 
 ##
@@ -166,6 +177,7 @@ git push origin main
 # Railway auto-deploys!
 
 ```text
+```text
 ```
 
 
@@ -180,11 +192,14 @@ Copy your game images to:
 The `<GameScene>` component references them as:
 
 ```typescript
+
 <GameScene
   backgroundImage="/assets/backgrounds/market.png"
   // ...
+
 ```text
 ```
+
 
 
 
@@ -218,6 +233,7 @@ d:\saoriverse-console\
 │   └── ...other Next.js config
 └── [other game files]
 ```
+
 
 
 ##

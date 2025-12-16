@@ -10,8 +10,10 @@ Add a **collapsible sidebar section** for users who want to provide voice/facial
 ##
 
 ## Architecture Overview
+
 ```text
 ```
+
 User Types:
 ├─ Text-only chat (99% of users)
 │  └─ No changes needed, works as-is
@@ -21,6 +23,7 @@ User Types:
    ├─ Optional: Snap facial expression (single frame)
    ├─ Optional: Provide both
    └─ Saori gets richer understanding + multimodal confidence
+
 ```
 
 
@@ -55,6 +58,7 @@ User Types:
 
 When user sends:
 ```text
+```text
 ```
 Text: "I'm doing great!"
 Voice: Low pitch, slow rate, high pauses
@@ -63,9 +67,12 @@ Face: Inner brows raised, lip corners down
 
 
 
+
 Saori sees:
+
 ```text
 ```
+
 Multimodal Analysis:
 ├─ Text tone: Positive (excited)
 ├─ Voice tone: Sad (low valence)
@@ -76,6 +83,7 @@ Multimodal Analysis:
 Response: "I notice you said you're doing great, but
 I'm sensing maybe things aren't quite going as well
 as they seem? What's really going on?"
+
 ```
 
 
@@ -90,6 +98,7 @@ as they seem? What's really going on?"
 **File**: `emotional_os/deploy/modules/multimodal_ui.py`
 
 ```python
+
 import streamlit as st
 from pathlib import Path
 import tempfile
@@ -155,6 +164,7 @@ def render_multimodal_sidebar():
 
 
 
+
 ### Step 2: Integrate with Message Processing (~50 lines)
 
 **File**: `emotional_os/deploy/modules/ui.py` (modify `render_main_app`)
@@ -197,6 +207,7 @@ if user_message:
         text_tone,
         multimodal_result=multimodal_result if 'multimodal_result' in locals() else None
 ```text
+```text
 ```
 
 
@@ -206,6 +217,7 @@ if user_message:
 **File**: `main_response_engine.py` (modify response generation)
 
 ```python
+
 def generate_response(user_message, text_tone, multimodal_result=None):
     """Generate response with optional multimodal context."""
 
@@ -236,8 +248,10 @@ def generate_response(user_message, text_tone, multimodal_result=None):
             )
 
     # Pass to LLM or response composer
+
 ```text
 ```
+
 
 
 ##
@@ -250,6 +264,7 @@ def generate_response(user_message, text_tone, multimodal_result=None):
 User: "I'm having a rough day"
 → Streamlit app shows normal chat
 ```text
+```text
 ```
 
 
@@ -257,14 +272,17 @@ User: "I'm having a rough day"
 ### Scenario 2: Power User with Webcam (10%)
 
 ```
+
 User: "I'm doing fine" + Voice sample + Facial snap
 → Streamlit shows sidebar with:
    "Voice: Sad | Face: Sad | Text: Positive"
 → System detects suppression
 → Saori responds: "I'm noticing a disconnect between
   what you're saying and how you sound. What's
+
 ```text
 ```
+
 
 
 ##
@@ -296,6 +314,7 @@ extract_acoustic_features(audio_bytes) → AcousticFeatures
 
 # Facial landmark extraction (use MediaPipe)
 ```text
+```text
 ```
 
 
@@ -303,7 +322,9 @@ extract_acoustic_features(audio_bytes) → AcousticFeatures
 These are lightweight, standard libraries:
 
 ```bash
+
 pip install librosa mediaipe
+
 ```
 
 

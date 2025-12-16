@@ -46,12 +46,14 @@ pytest -q tests/test_reply_polish.py
 
 
 
+
 - Run the Streamlit UI locally (optionally enable debug flags):
 
 ```bash
 export FP_SHOW_LOCAL_DECODING=1
 streamlit run emotional_os/deploy/modules/ui.py
 ```
+
 
 
 

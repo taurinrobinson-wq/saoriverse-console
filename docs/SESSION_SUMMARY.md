@@ -124,6 +124,7 @@ crisis_keywords = ["suicidal", "suicide", "kill myself", ...]
 is_crisis = any(keyword in lower_input for keyword in crisis_keywords)
 if is_crisis:
 ```text
+```text
 ```
 
 
@@ -131,6 +132,7 @@ if is_crisis:
 **After:**
 
 ```python
+
 
 # SUICIDALITY PROTOCOL (HIGHEST PRIORITY)
 from emotional_os.core.suicidality_handler import get_suicidality_protocol
@@ -152,8 +154,10 @@ if suicidality_protocol.should_use_protocol(lower_input):
         "voltage_response": response,
         "suicidality_state": state_info,
         ...
+
 ```text
 ```
+
 
 
 
@@ -171,6 +175,7 @@ if suicidality_protocol.should_use_protocol(lower_input):
 ```
 Input: "I have thoughts of suicide"
 Output: "You named thoughts of suicide. That is heavy.
+```text
 ```text
 ```
 
@@ -204,6 +209,7 @@ System blocks all of these:
 ## Test Results
 
 ```
+
 SUICIDALITY PROTOCOL TEST SUITE
 ═══════════════════════════════════
 
@@ -229,6 +235,7 @@ Test 4: Consent-Based Resources
 Test 5: Respecting Boundaries
 ✅ System respects "no" to resources
 ✅ Continues support conversation
+
 ```
 
 

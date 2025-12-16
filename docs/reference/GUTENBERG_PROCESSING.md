@@ -3,17 +3,21 @@
 ## Storage Configuration
 
 **All data files are stored on your external drive:**
+
 ```text
 ```
+
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (8 poetry collections)
 ├── gutenberg_learning.log         (processing log)
 └── gutenberg_processing_results.json  (statistics)
+
 ```
 
 
 
 **Code files remain on your hard drive:**
+```text
 ```text
 ```
 /Users/taurinrobinson/saoriverse-console/
@@ -21,6 +25,7 @@
 ├── bulk_text_processor.py
 └── run_gutenberg_learning.sh
 ```
+
 
 
 
@@ -107,6 +112,7 @@ fetcher = GutenbergPoetryFetcher()
 downloaded = fetcher.download_all_collections()
 
 ```text
+```text
 ```
 
 
@@ -140,14 +146,17 @@ Results saved to:
 **View processing log on external drive:**
 
 ```bash
+
 ```text
 ```
+
 
 
 
 **Check results when complete:**
 
 ```bash
+```text
 ```text
 ```
 
@@ -156,8 +165,10 @@ Results saved to:
 **View downloaded poetry:**
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -171,6 +182,7 @@ To download more poetry collections or re-run processing in the future:
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -178,9 +190,12 @@ cd /Users/taurinrobinson/saoriverse-console
 **Option 2: Run Python directly**
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -253,6 +268,7 @@ Project Gutenberg API
    ├─ signal_lexicon.json
    └─ learned_lexicon.json
 ```
+
 
 
 ##

@@ -49,6 +49,7 @@ But they're actually in:
 # Line 73-74 - Will fail:
 glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```text
+```text
 ```
 
 
@@ -59,9 +60,12 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 ```python
 
+
 # Line 27 - Will fail:
+
 ```text
 ```
+
 
 
 
@@ -73,6 +77,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 # Line 89 - Will fail:
 ```text
+```text
 ```
 
 
@@ -83,9 +88,12 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 
 ```python
 
+
 # Line 18 - Will fail:
+
 ```text
 ```
+
 
 
 
@@ -96,6 +104,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 ```python
 
 # Line 33 - Will fail unless running from src/ directory:
+```text
 ```text
 ```
 
@@ -108,6 +117,7 @@ glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
 This is the **FASTEST FIX** - just create the directory structure code expects:
 
 ```bash
+
 
 # Run from repo root:
 mkdir -p emotional_os/glyphs
@@ -126,8 +136,10 @@ cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
 # Verify (should show all files found):
 ls -la emotional_os/glyphs/
 ls -la emotional_os/core/
+
 ```text
 ```
+
 
 
 
@@ -177,6 +189,7 @@ Load Antonym Index
     ↓ ❌ FAILS - File not at expected path
     ↓
 ```text
+```text
 ```
 
 
@@ -187,6 +200,7 @@ Load Antonym Index
 ### Data Directory (`data/`)
 
 ```
+
 data/
 ├── glyph_lexicon_rows.json         ← Code expects in emotional_os/glyphs/
 ├── glyph_lexicon_rows.csv          ← Code expects in emotional_os/glyphs/
@@ -194,8 +208,10 @@ data/
 ├── word_centric_emotional_lexicon_expanded.json  ← Code expects in emotional_os/lexicon/
 ├── lexicons/
 │   └── nrc_emotion_lexicon.txt     ✅ Works (found via search)
+
 ```text
 ```
+
 
 
 
@@ -227,6 +243,7 @@ src/
 └── emotional_os_safety/
     ├── trauma_lexicon.json               ✅ Works (relative path)
 ```text
+```text
 ```
 
 
@@ -234,6 +251,7 @@ src/
 ### What Code Expects (`emotional_os/` - MISSING)
 
 ```
+
 emotional_os/                            ← DOESN'T EXIST
 ├── core/
 │   └── suicidality_protocol.json
@@ -249,8 +267,10 @@ emotional_os/                            ← DOESN'T EXIST
 │   ├── runtime_fallback_lexicon.json
 │   └── learned_lexicon.json
 └── safety/
+
 ```text
 ```
+
 
 
 ##
@@ -269,6 +289,7 @@ test -f "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json" && e
 test -f "emotional_os/glyphs/antonym_glyphs_indexed.json" && echo "✅ Antonym index found" || echo "❌ Antonym index MISSING"
 test -f "data/lexicons/nrc_emotion_lexicon.txt" && echo "✅ NRC lexicon found" || echo "❌ NRC lexicon MISSING"
 ```
+
 
 
 

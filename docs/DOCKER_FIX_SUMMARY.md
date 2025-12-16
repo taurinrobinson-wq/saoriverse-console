@@ -23,6 +23,7 @@
 RUN pip install --default-timeout=60 \
                 --retries 5 \
 ```text
+```text
 ```
 
 
@@ -50,9 +51,12 @@ RUN pip install --default-timeout=60 \
 ### Windows (PowerShell):
 
 ```powershell
+
 cd d:\saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -60,6 +64,7 @@ cd d:\saoriverse-console
 
 ```bash
 cd d/saoriverse-console
+```text
 ```text
 ```
 
@@ -69,6 +74,7 @@ cd d/saoriverse-console
 ## If First Build Fails, Try:
 
 ```bash
+
 
 # Option 1: Use resilient version
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
@@ -81,6 +87,7 @@ docker build -f Dockerfile.firstperson -t firstperson:latest \
 
 # Option 3: Check Docker network
 docker run --rm alpine ping 8.8.8.8
+
 ```
 
 

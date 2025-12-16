@@ -11,6 +11,7 @@ python check-docker-requirements.py
 
 # macOS/Linux
 ```text
+```text
 ```
 
 
@@ -23,12 +24,15 @@ Expected output: All checks ✅
 
 ```powershell
 
+
 # Windows PowerShell
 docker build -f Dockerfile.firstperson -t firstperson:latest .
 
 # macOS/Linux
+
 ```text
 ```
+
 
 
 
@@ -41,6 +45,7 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 # macOS/Linux
 ```text
+```text
 ```
 
 
@@ -49,12 +54,15 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 ```powershell
 
+
 # Windows PowerShell
 .\test-docker-build.ps1
 
 # macOS/Linux
+
 ```text
 ```
+
 
 
 
@@ -73,6 +81,7 @@ docker run -d -p 8000:8000 --name firstperson-test firstperson:latest
 sleep 5
 curl http://localhost:8000/health
 docker stop firstperson-test
+```text
 ```text
 ```
 
@@ -99,10 +108,13 @@ Expected: `{"status":"healthy"}`
 ### Timeouts & Retries
 
 ```
+
 PIP_TIMEOUT: 60 seconds (was 15s)
 PIP_RETRIES: 5 attempts (was 1)
+
 ```text
 ```
+
 
 
 
@@ -111,6 +123,7 @@ PIP_RETRIES: 5 attempts (was 1)
 ```
 --no-cache-dir: Saves disk space
 --retries 5: Handles network hiccups
+```text
 ```text
 ```
 
@@ -138,6 +151,7 @@ PIP_RETRIES: 5 attempts (was 1)
 
 ```bash
 
+
 # Verify you're in correct directory
 pwd  # or cd d:\saoriverse-console
 
@@ -145,8 +159,10 @@ pwd  # or cd d:\saoriverse-console
 ls Dockerfile.firstperson
 
 # Rebuild with explicit path
+
 ```text
 ```
+
 
 
 
@@ -178,6 +194,7 @@ ls Dockerfile.firstperson
 ```
 Successfully tagged firstperson:latest
 ```text
+```text
 ```
 
 
@@ -185,6 +202,7 @@ Successfully tagged firstperson:latest
 ### Container Runs ✅
 
 ```bash
+
 docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 
 # No errors, container starts
@@ -194,11 +212,13 @@ docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 
 
 
+
 ### Frontend Loads ✅
 
 ```
 curl http://localhost:3001
 
+```text
 ```text
 ```
 
@@ -210,9 +230,12 @@ curl http://localhost:3001
 ### 1. Tag for Registry
 
 ```bash
+
 docker tag firstperson:latest your-registry/firstperson:v1.0.0
+
 ```text
 ```
+
 
 
 
@@ -221,6 +244,7 @@ docker tag firstperson:latest your-registry/firstperson:v1.0.0
 ```bash
 docker push your-registry/firstperson:v1.0.0
 ```text
+```text
 ```
 
 
@@ -228,6 +252,7 @@ docker push your-registry/firstperson:v1.0.0
 ### 3. Deploy to Server
 
 ```bash
+
 
 # On your DigitalOcean droplet (161.35.227.49)
 ssh -i ~/.ssh/velinor root@161.35.227.49
@@ -239,8 +264,10 @@ docker run -d \
   -p 3001:3001 \
   -e ELEVENLABS_API_KEY=sk_... \
   -e SUPABASE_URL=https://... \
+
 ```text
 ```
+
 
 
 ##
@@ -278,6 +305,7 @@ docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 docker system prune -a
 docker build --no-cache -f Dockerfile.firstperson -t firstperson:latest .
 ```
+
 
 
 

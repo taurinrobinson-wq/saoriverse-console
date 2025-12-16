@@ -22,17 +22,21 @@ This is your complete guide to migrating Velinor from Streamlit to a proper web 
 ## 🛠️ Files Created for You
 
 ### Backend
+
 ```text
 ```
+
 velinor_api.py          FastAPI server that wraps Velinor engine
                         - Session management
                         - Game state handling
                         - API endpoints
+
 ```
 
 
 
 ### Frontend Components
+```text
 ```text
 ```
 frontend_lib_api.ts     TypeScript API client for axios
@@ -50,14 +54,18 @@ frontend_GameScene.tsx  React component for game scenes
 
 
 
+
 ### Documentation
+
 ```text
 ```
+
 VELINOR_WEB_COMPLETE.md         Complete overview (read first!)
 VELINOR_WEB_MIGRATION.md        Step-by-step setup (6 phases)
 NEXTJS_FRONTEND_SETUP.md        Detailed Next.js guide
 RAILWAY_DEPLOYMENT.md            Production deployment
 VELINOR_WEB_QUICK_REFERENCE.md  Commands & troubleshooting
+
 ```
 
 
@@ -66,6 +74,7 @@ VELINOR_WEB_QUICK_REFERENCE.md  Commands & troubleshooting
 ## 🚀 Quick Start (The Absolute Minimum)
 
 ```bash
+
 
 # Phase 1: Create Next.js project
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
@@ -95,8 +104,10 @@ npm run dev
 # Phase 5: Deploy
 git add .
 git commit -m "Velinor web game"
+
 ```text
 ```
+
 
 
 ##
@@ -125,6 +136,7 @@ git commit -m "Velinor web game"
                     ├─ Dice Rolls
                     ├─ NPC Dialogue
 ```text
+```text
 ```
 
 
@@ -144,6 +156,7 @@ git commit -m "Velinor web game"
 ## 📖 Reading Map
 
 ```
+
 Are you...              Then read...
 ───────────────────────────────────────────────────────────
 Starting fresh?         VELINOR_WEB_COMPLETE.md
@@ -151,8 +164,10 @@ Ready to set up?        VELINOR_WEB_MIGRATION.md (Phase 1)
 Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md
 Ready to deploy?        RAILWAY_DEPLOYMENT.md
 Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
+
 ```text
 ```
+
 
 
 ##
@@ -174,6 +189,7 @@ python velinor_api.py
 cd velinor-web && npm run dev
 
 # Deploy
+```text
 ```text
 ```
 
@@ -246,6 +262,7 @@ After you get the basic setup working:
 ## 📞 Documentation Map
 
 ```
+
 VELINOR_WEB_COMPLETE.md  ← You are here (overview)
     ↓
 VELINOR_WEB_MIGRATION.md  ← Follow this (6 phases)
@@ -254,6 +271,7 @@ NEXTJS_FRONTEND_SETUP.md  ← Details here
 RAILWAY_DEPLOYMENT.md     ← Deploy here
     ↓
 Test locally → Deploy → Live!
+
 ```
 
 

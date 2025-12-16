@@ -20,8 +20,10 @@ Fixed the critical issue where the system was generating **generic, templated re
 ### How It Works
 
 For each response, the system now:
+
 ```text
 ```
+
 User Input + Selected Glyph
          ↓
 Extract Glyph Concepts (e.g., "stillness", "ache", "joy")
@@ -37,6 +39,7 @@ Weave in Glyph Description
 Generate Closing (targeted question or commitment)
          ↓
 Personalized Response ✓
+
 ```
 
 
@@ -46,11 +49,13 @@ Personalized Response ✓
 ### Before Fix ❌
 All responses were generic and interchangeable:
 ```text
+```text
 ```
 "I hear you. What's the feeling underneath all that?"
 "That sadness is real. I'm here with you in it. What do you need?"
 "I hear you about that. That's important."
 ```
+
 
 
 Could be used for ANY glyph with ANY emotion → Not functional
@@ -59,11 +64,14 @@ Could be used for ANY glyph with ANY emotion → Not functional
 Each response now incorporates glyph wisdom:
 
 **Stress + Still Insight:**
+
 ```text
 ```
+
 "That's a real thing you're carrying. Even in what feels active or chaotic,
 there's often a still place underneath. Quiet revelation. Truth that arrives
 without noise. What's the next small step for you?"
+
 ```
 
 
@@ -74,11 +82,13 @@ without noise. What's the next small step for you?"
 
 **Grief + Ache of Recognition:**
 ```text
+```text
 ```
 "I'm here with you on that. The ache you're feeling—sorrow witnessed.
 the pain of being truly seen.—that's actually meaningful.
 What's the next small step for you?"
 ```
+
 
 
 - Acknowledges grief ✓
@@ -87,10 +97,13 @@ What's the next small step for you?"
 - Different from stillness response ✓
 
 **Boundary Fear + Boundary Containment:**
+
 ```text
 ```
+
 "I hear you on that. The sacred yes and no. Limits that protect what matters.
 This resonates with where you are. What's the next small step for you?"
+
 ```
 
 
@@ -117,6 +130,7 @@ Run validation scripts:
 
 ```bash
 
+
 # Direct method test
 python test_craft_glyph_response.py
 
@@ -128,6 +142,7 @@ python test_end_to_end.py
 
 # Comprehensive validation
 python FINAL_VALIDATION.py
+
 ```
 
 

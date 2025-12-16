@@ -63,6 +63,7 @@ ProcessingModeAdapter
 
 
 
+
 ## Quick Start
 
 ### 1. Process all poetry (5-10 minutes)
@@ -71,6 +72,7 @@ ProcessingModeAdapter
 cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
+
 
 
 
@@ -92,6 +94,7 @@ python poetry_data_pipeline.py --status
 
 
 
+
 Shows: downloaded, cleaned, validated, total words, ready-for-processing status
 
 ### 3. Export for all modes
@@ -99,6 +102,7 @@ Shows: downloaded, cleaned, validated, total words, ready-for-processing status
 ```bash
 python poetry_data_pipeline.py --export poetry_export
 ```
+
 
 
 
@@ -123,6 +127,7 @@ ritual_data = adapter.for_ritual_processing()
 
 
 
+
 ## What Gets Cleaned
 
 ### OCR Artifacts Removed
@@ -139,11 +144,13 @@ Before:
 
 
 
+
 After:
 
 ```
 Some poetry text here more text
 ```
+
 
 
 
@@ -160,6 +167,7 @@ Smart "quotes" (wrong type)
 
 
 
+
 After:
 
 ```
@@ -168,6 +176,7 @@ Em—dash (correct character)
 Proper LF line endings
 Regular "quotes"
 ```
+
 
 
 
@@ -183,11 +192,13 @@ fests in every line they write.
 
 
 
+
 After:
 
 ```
 The poem is about love and complete devotion to art, which manifests in every line they write.
 ```
+
 
 
 
@@ -215,6 +226,7 @@ CREATE TABLE collections (
 
 
 
+
 ### processing_log table
 
 ```sql
@@ -230,6 +242,7 @@ CREATE TABLE processing_log (
 
 
 
+
 ### quality_metrics table
 
 ```sql
@@ -240,6 +253,7 @@ CREATE TABLE quality_metrics (
   metric_value REAL
 );
 ```
+
 
 
 
@@ -260,6 +274,7 @@ data = adapter.for_signal_extraction()  # Returns {name: text}
 ```
 
 
+
 - Gets clean poetry text
 - Ready for emotional signal extraction
 - Guaranteed no OCR artifacts that would corrupt signals
@@ -269,6 +284,7 @@ data = adapter.for_signal_extraction()  # Returns {name: text}
 ```python
 data = adapter.for_lexicon_learning()  # Returns {name: text}
 ```
+
 
 
 - Gets clean poetry text
@@ -282,6 +298,7 @@ data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 ```
 
 
+
 - Gets poetry as (name, text) tuples
 - Ready for glyph generation
 - Fragmentation-free text for reliable glyphs
@@ -291,6 +308,7 @@ data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 ```python
 data = adapter.for_ritual_processing()  # Returns {name: text}
 ```
+
 
 
 - Gets coherence-checked text
@@ -319,6 +337,7 @@ data = adapter.for_ritual_processing()  # Returns {name: text}
 ├── POETRY_INTEGRATION_EXAMPLES.md       # ← Integration code
 └── POETRY_DATA_SOLUTION_SUMMARY.md      # ← This file
 ```
+
 
 
 
@@ -356,6 +375,7 @@ python poetry_data_pipeline.py --process
 
 
 
+
 ### Step 2: Update your processing systems
 Each system should use the adapter:
 
@@ -368,6 +388,7 @@ adapter = ProcessingModeAdapter(hub)
 # Get data appropriate for this processing mode
 data = adapter.for_your_mode()
 ```
+
 
 
 
@@ -445,6 +466,7 @@ python poetry_data_pipeline.py --export poetry_export
 
 
 
+
 **Integration Pattern**:
 
 ```python
@@ -452,6 +474,7 @@ hub = PoetryDataHub("poetry_data")
 adapter = ProcessingModeAdapter(hub)
 data = adapter.for_signal_extraction()  # (or your mode)
 ```
+
 
 
 

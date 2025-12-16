@@ -19,6 +19,7 @@ cd saoriverse-console
 
 
 
+
 ### 2. Set Up Python Environment
 
 ```bash
@@ -35,11 +36,13 @@ pip install -r requirements.txt
 
 
 
+
 ### 3. Run the App
 
 ```bash
 streamlit run app.py
 ```
+
 
 
 
@@ -60,6 +63,7 @@ streamlit run app.py
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
 
 
 

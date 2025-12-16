@@ -18,6 +18,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 
 ```powershell
 ```text
+```text
 ```
 
 
@@ -25,14 +26,17 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 2: Custom interval (e.g., every 15 minutes)**
 
 ```powershell
+
 ```text
 ```
+
 
 
 
 **Option 3: Custom commit message**
 
 ```powershell
+```text
 ```text
 ```
 
@@ -41,8 +45,10 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 4: Stop anytime**
 
 ```
+
 ```text
 ```
+
 
 
 
@@ -52,6 +58,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -59,14 +66,17 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 2: Custom interval (e.g., every 10 minutes)**
 
 ```bash
+
 ```text
 ```
+
 
 
 
 **Option 3: Stop anytime**
 
 ```
+```text
 ```text
 ```
 
@@ -85,6 +95,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 ### Example Output
 
 ```
+
 🔄 Starting automatic git commit & push service...
 Interval: every 30 minutes
 Press Ctrl+C to stop
@@ -98,8 +109,10 @@ Press Ctrl+C to stop
   ✓ Staged changes
   ✓ Committed: auto: periodic commit and push (2025-12-12 14:35:45)
   ✓ Pushed to remote
+
 ```text
 ```
+
 
 
 ##
@@ -130,6 +143,7 @@ The auto-commit scripts work alongside manual commits:
 git add src/specific-file.ts
 git commit -m "feat: implement specific feature"
 ```text
+```text
 ```
 
 
@@ -149,11 +163,14 @@ Create a scheduled task to run the script automatically:
 
 ```powershell
 
+
 # Create scheduled task (run once at startup, repeat every 30 minutes)
 $trigger = New-ScheduledTaskTrigger -AtStartup -RepetitionInterval (New-TimeSpan -Minutes 30)
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\path\to\scripts\auto-commit.ps1"
+
 ```text
 ```
+
 
 
 
@@ -168,6 +185,7 @@ crontab -e
 
 # Add this line (runs every 30 minutes)
 ```text
+```text
 ```
 
 
@@ -178,8 +196,10 @@ crontab -e
 ### "Permission denied" on bash script
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -188,6 +208,7 @@ Ensure git is in your PATH:
 
 ```bash
 which git  # macOS/Linux
+```text
 ```text
 ```
 
@@ -204,8 +225,10 @@ This is expected if your repo has branch protection rules. The script will:
 Check if there are actual changes:
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -223,6 +246,7 @@ cd d:\saoriverse-console
 git add -A
 git commit -m "feat: implement emotion learning system"
 ```text
+```text
 ```
 
 
@@ -235,8 +259,10 @@ git commit -m "feat: implement emotion learning system"
 **To remove scheduled task (Windows):**
 
 ```powershell
+
 ```text
 ```
+
 
 
 
@@ -247,6 +273,7 @@ crontab -e
 
 # Remove the line you added earlier
 ```
+
 
 
 ##

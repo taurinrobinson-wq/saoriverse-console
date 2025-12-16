@@ -131,6 +131,7 @@ word_centric_emotional_lexicon_expanded.json (484 words)
 
 
 
+
 ### Signal Chain
 
 ```
@@ -144,6 +145,7 @@ Lexicon Lookup (FAST)
     │   └─ Multi-gate response
     └─ Still no match? → Signal lexicon/NRC/Fuzzy
 ```
+
 
 
 
@@ -162,6 +164,7 @@ All inputs → dynamic_composer
     ├─ Transformative → Recursive Ache
     └─ Crisis/overwhelm → Spiral Containment
 ```
+
 
 
 ##

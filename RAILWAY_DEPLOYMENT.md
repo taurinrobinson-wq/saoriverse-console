@@ -16,6 +16,7 @@
 
 ```bash
 ```sql
+```sql
 ```
 
 
@@ -23,10 +24,13 @@
 Update `requirements.txt`:
 
 ```
+
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
+
 ```sql
 ```
+
 
 
 
@@ -41,6 +45,7 @@ api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
 # Frontend (after Next.js is set up)
 ```text
+```text
 ```
 
 
@@ -48,10 +53,13 @@ api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 ## Step 3: Set Up Next.js Frontend
 
 ```bash
+
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 cd velinor-web
+
 ```text
 ```
+
 
 
 
@@ -66,6 +74,7 @@ In Railway dashboard, set:
 
 ```
 ```text
+```text
 ```
 
 
@@ -73,6 +82,7 @@ In Railway dashboard, set:
 ## Step 5: Deploy to Railway
 
 ```bash
+
 
 # Add Procfile changes
 git add Procfile requirements.txt
@@ -88,6 +98,7 @@ git push origin main
 
 ```text
 ```
+
 
 
 
@@ -113,6 +124,7 @@ velinor-web/public/assets/
 ├── backgrounds/
 ├── overlays/
 ```text
+```text
 ```
 
 
@@ -126,8 +138,10 @@ Railway might be cold-starting both services. Give it 1-2 minutes first.
 Already enabled in `velinor_api.py`:
 
 ```python
+
 ```text
 ```
+
 
 
 
@@ -143,6 +157,7 @@ python velinor_api.py
 # http://localhost:8000
 
 ```text
+```text
 ```
 
 
@@ -150,11 +165,13 @@ python velinor_api.py
 Terminal 2 - Frontend:
 
 ```bash
+
 cd velinor-web
 npm run dev
 
 ```text
 ```
+
 
 
 
@@ -179,6 +196,7 @@ saoriverse-console/
     ├── package.json
     └── tsconfig.json
 ```
+
 
 
 

@@ -25,6 +25,7 @@ templates/*.template
 
 
 
+
 3. Commit and push. CI will respect the allowlist when deciding whether a push/PR should fail.
 
 Security best practices
@@ -54,6 +55,7 @@ git reset --hard origin/main
 git reflog expire --expire=now --all
 git gc --prune=now --aggressive
 ```
+
 
 
 

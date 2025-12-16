@@ -20,8 +20,10 @@ The marketplace is in **constant flux** — buildings collapse, paths open, area
 ### Visual Changes
 
 #### Background Image Swap
+
 ```text
 ```
+
 Before Collapse:   marketplace_intact.png
                    - Open stalls, clear pathways
                    - Buildings stand, mostly whole
@@ -32,6 +34,7 @@ After Collapse:    marketplace_collapsed.png
                    - Rubble in pathways, new barriers
                    - Same perspective/vanishing points (critical for immersion)
                    - Atmosphere: dust, danger, quiet
+
 ```
 
 
@@ -39,6 +42,7 @@ After Collapse:    marketplace_collapsed.png
 **Design Note**: Matched perspective between intact/collapsed versions ensures players feel like they're in the *same space*, just transformed.
 
 #### Map Overlay Integration
+```sql
 ```sql
 ```
 Sidebar Map Update:
@@ -49,6 +53,7 @@ Sidebar Map Update:
 
 This is the FIRST TIME the map appears in gameplay.
 ```
+
 
 
 ##
@@ -69,6 +74,7 @@ You get used to it. We barely notice it now."
 **Glyph Trigger**: [Aelitḧ] (stillness, acceptance)
 
 ```text
+```text
 ```
 
 
@@ -83,6 +89,7 @@ You get used to it. We barely notice it now."
 **Behavior**: Foreground image swaps to alternate (widened eyes, shifted posture, hands raised)
 
 ```markdown
+
 **Visual**: Ravi's eyes widen, hand goes to chest
 
 **Dialogue Response**:
@@ -93,6 +100,7 @@ It still shakes me every time."
 
 ```text
 ```
+
 
 
 
@@ -123,6 +131,7 @@ Option C: [Remain silent]
 - Glyph: [Aelitḧ] (stillness, witness)
 - Shows: Player is absorbing, not panicking
 ```text
+```text
 ```
 
 
@@ -130,6 +139,7 @@ Option C: [Remain silent]
 ### NPC Closing Line (All Paths Converge)
 
 ```markdown
+
 **Shared Dialogue**:
 "We must be going. A new passageway may have opened up in the collapse.
 We suggest you keep track of your surroundings.
@@ -138,8 +148,10 @@ The only constant here is change."
 **Subtext**:
 - Collapse is opportunity, not just disaster
 - Paying attention matters
+
 ```text
 ```
+
 
 
 
@@ -170,6 +182,7 @@ Legend:
 ● = Player position (glowing)
 ❌ = Collapsed/blocked area (red)
 ```text
+```text
 ```
 
 
@@ -177,6 +190,7 @@ Legend:
 ### Map Introduction Dialogue
 
 ```markdown
+
 **NPC Points to Map**:
 "She points to a worn cloth map, worn at the edges.
 A red mark appears where the collapse occurred.
@@ -185,6 +199,7 @@ A red mark appears where the collapse occurred.
 But here, where the dust settles — a new passage, maybe.'
 
 **Map appears in sidebar, persistent for rest of gameplay**
+
 ```
 
 

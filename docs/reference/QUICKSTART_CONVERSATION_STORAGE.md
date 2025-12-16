@@ -30,6 +30,7 @@ Make sure `.streamlit/secrets.toml` has:
 [supabase]
 url = "https://your-project.supabase.co"
 ```text
+```text
 ```
 
 
@@ -37,8 +38,10 @@ url = "https://your-project.supabase.co"
 ### 3. Restart Your App
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -54,6 +57,7 @@ On the left sidebar, you'll see:
 │   ├── ✏️                             ← Click to rename
 │   └── 🗑️                             ← Click to delete
 ├── 💬 "Weekend plans"
+```text
 ```text
 ```
 
@@ -71,10 +75,13 @@ Check the **"💾 Save my chats"** box in the sidebar to:
 When you start a new conversation, the first message is used to auto-generate a title:
 
 ```
+
 You: "I've been feeling really overwhelmed lately"
        ↓
+
 ```text
 ```
+
 
 
 
@@ -118,6 +125,7 @@ Example:
   "created_at": "2024-01-15T10:30:00Z",
   "updated_at": "2024-01-15T10:35:00Z"
 ```text
+```text
 ```
 
 
@@ -160,6 +168,7 @@ Example:
 
 ```bash
 
+
 # 1. Create test user
 
 # 2. Start conversation, check "Save my chats"
@@ -171,8 +180,10 @@ Example:
 # 5. Verify conversation appears in sidebar
 
 # Check Supabase:
+
 ```text
 ```
+
 
 
 
@@ -202,6 +213,7 @@ success, msg = manager.rename_conversation("conv-uuid", "New Title")
 
 # Delete
 ```text
+```text
 ```
 
 
@@ -218,6 +230,7 @@ For more details, see:
 These features are in commit `4b1c501`:
 
 ```
+
 feat: implement persistent conversation storage with auto-naming
 
 - ConversationManager for Supabase persistence
@@ -225,6 +238,7 @@ feat: implement persistent conversation storage with auto-naming
 - Sidebar with load/rename/delete
 - Database schema with metadata
 - Integrated into UI
+
 ```
 
 

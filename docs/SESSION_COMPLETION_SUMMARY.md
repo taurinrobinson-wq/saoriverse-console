@@ -77,8 +77,10 @@ You now have a **complete, production-ready privacy architecture** that solves t
 ##
 
 ## 🏗️ Architecture Overview
+
 ```text
 ```
+
 User Login
   ↓ (password-derived key)
 Decrypt Profile & Load History
@@ -92,6 +94,7 @@ Store Encrypted (TTL: 7/30/90/365 days)
 Daily Dreams (patterns, summaries)
   ↓
 Long-term Memory (90+ days)
+
 ```
 
 
@@ -158,14 +161,17 @@ Long-term Memory (90+ days)
 
 ```bash
 
+
 # 1. Install dependencies
 pip install cryptography pytest
 
 # 2. Create database tables (see PRIVACY_LAYER_DATABASE_SCHEMA.md)
 
 # 3. Run tests to verify everything works
+
 ```text
 ```
+
 
 
 
@@ -300,6 +306,7 @@ Conversation: "You said what about your work stress?"
 History: None
 Memory: None
 ```text
+```text
 ```
 
 
@@ -307,11 +314,13 @@ Memory: None
 **After (New System):**
 
 ```
+
 Login: "Welcome back, Taurin!"
 Conversation: "I remember last week you were working on boundary-setting..."
 History: "Here's your last 7 days of conversations"
 Memory: "Your most effective glyph this month: GROUNDING (85% effectiveness)"
 Personalization: Full (knows name, remembers patterns, suggests relevant glyphs)
+
 ```
 
 

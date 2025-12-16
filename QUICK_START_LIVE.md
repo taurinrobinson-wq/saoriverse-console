@@ -1,13 +1,16 @@
 # 🚀 QUICK START - LIVE SYSTEM
 
 ## System Status
+
 ```text
 ```
+
 🟢 OPERATIONAL - Backend running on http://127.0.0.1:8000
 ✅ All endpoints tested and responding
 ✅ Theme detection working (grief, joy, stress, isolation, etc.)
 ✅ Empathetic response generation active
 ✅ 3-tier pipeline processing all responses
+
 ```
 
 
@@ -17,10 +20,13 @@
 ### 1. Health Check (2-second timeout)
 
 ```powershell
+
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/health" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
+
 ```text
 ```
+
 
 
 
@@ -41,6 +47,7 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
   -Method Post -ContentType "application/json" `
   -Body $body -UseBasicParsing -TimeoutSec 5 | `
 ```text
+```text
 ```
 
 
@@ -48,10 +55,13 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
 ### 3. Get User Conversations (2-second timeout)
 
 ```powershell
+
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/conversations/robinson1234" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
+
 ```text
 ```
+
 
 
 
@@ -75,6 +85,7 @@ Return Response to Client
     ↓
 Save to Database (async, non-blocking)
 ```
+
 
 
 

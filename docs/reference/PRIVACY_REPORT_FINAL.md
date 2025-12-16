@@ -82,6 +82,7 @@
   "emotional_signals": [...],
   "glyphs": [...]
 ```text
+```text
 ```
 
 
@@ -90,6 +91,7 @@
 ### After (Privacy Safe) ✅
 
 ```json
+
 {
   "user_id_hash": "a1b2c3d4e5f6g7h8",
   "signals": ["struggle", "vulnerability"],
@@ -97,8 +99,10 @@
   "glyph_names": ["Recursive Grief"],
   "ai_response_length": 245,
   "exchange_quality": "logged"
+
 ```text
 ```
+
 
 
 **Benefit**: Only emotional patterns visible, no personal data
@@ -169,6 +173,7 @@
 ✅ example_contexts have keyword field
 ✅ example_contexts have associated_signals
 ```text
+```text
 ```
 
 
@@ -176,11 +181,14 @@
 ### Test 2: Privacy Audit
 
 ```
+
 ✅ Tool detects violations correctly
 ✅ Reports compliance percentage
 ✅ Shows compliant entry format
+
 ```text
 ```
+
 
 
 
@@ -193,6 +201,7 @@
 ✅ 0/3 entries have raw ai_response
 ✅ 9/9 signals preserved
 ✅ 9/9 gates preserved
+```text
 ```text
 ```
 
@@ -304,11 +313,14 @@
 ### Run All Tests
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
 python3 test_privacy_masking.py     # Unit tests
 python3 test_e2e_simple.py          # Integration tests
+
 ```text
 ```
+
 
 
 
@@ -378,6 +390,7 @@ python3 test_e2e_simple.py          # Integration tests
 
 🎉 PRIVACY IMPLEMENTATION SUCCESSFUL
 ```
+
 
 
 ##

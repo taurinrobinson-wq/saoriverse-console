@@ -3,12 +3,15 @@
 This directory contains exported data and schemas from your Supabase database for analysis.
 
 ## Directory Structure
+
 ```text
 ```
+
 supabase_analysis/
 ├── tables/          # Place exported table data (CSV, JSON, or SQL dumps)
 ├── schemas/         # Place table schema definitions (DDL/structure exports)
 └── README.md        # This file
+
 ```
 
 
@@ -48,6 +51,7 @@ supabase_analysis/
 Run this in Supabase SQL Editor:
 
 ```sql
+
 -- Get all table structures
 SELECT
   table_name,
@@ -58,8 +62,10 @@ SELECT
   column_default
 FROM information_schema.columns
 WHERE table_schema = 'public'
+
 ```text
 ```
+
 
 
 
@@ -75,6 +81,7 @@ FROM pg_tables
 WHERE schemaname = 'public'
 ORDER BY tablename;
 ```
+
 
 
 

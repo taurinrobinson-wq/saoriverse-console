@@ -30,6 +30,7 @@ CREATE TABLE conversations_encrypted (
 
 
 
+
 **Purpose:** Store full conversations with all context, encrypted so only the authenticated user can read them.
 
 **Access Pattern:**
@@ -75,6 +76,7 @@ CREATE TABLE dream_summaries (
 
 
 
+
 **Purpose:** Store lightweight daily summaries that survive longer than full conversations.
 
 **Summary Contents (all encrypted):**
@@ -101,6 +103,7 @@ CREATE TABLE dream_summaries (
   "narrative_summary": "Today you experienced anxiety and hope. Key themes included work, relationships, and self-worth. You expressed needs for support, validation, and perspective. You had 3 conversations today."
 }
 ```
+
 
 
 
@@ -135,6 +138,7 @@ CREATE TABLE user_retention_preferences (
     INDEX idx_deleted (deleted_at)
 );
 ```
+
 
 
 
@@ -179,6 +183,7 @@ CREATE TABLE audit_log_privacy (
 
 
 
+
 **Purpose:** Compliance auditing for privacy operations.
 
 **Examples:**
@@ -201,6 +206,7 @@ ON CONFLICT DO NOTHING;
 
 
 
+
 ### Relationship Diagram
 
 ```
@@ -216,6 +222,7 @@ user_retention_preferences (retention settings, one per user)
 │
 └── audit_log_privacy (all encryption/deletion events)
 ```
+
 
 
 ##
@@ -236,6 +243,7 @@ SELECT DISTINCT user_id_hashed, 30
 FROM conversations_encrypted
 WHERE user_id_hashed NOT IN (SELECT user_id_hashed FROM user_retention_preferences);
 ```
+
 
 
 
@@ -312,6 +320,7 @@ WHERE user_id_hashed = ?
 ORDER BY date DESC
 LIMIT 30;
 ```
+
 
 
 

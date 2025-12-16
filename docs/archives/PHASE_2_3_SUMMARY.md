@@ -161,6 +161,7 @@ Time: 2.93s
 ```
 
 
+
 ##
 
 ## Integration Points
@@ -178,6 +179,7 @@ if "repair_orchestrator" not in st.session_state:
 
 
 
+
 #### 2. After Generating Response
 
 ```python
@@ -191,6 +193,7 @@ context = GlyphCompositionContext(
 st.session_state.repair_orchestrator.record_response(response_text)
 st.session_state.last_glyph_context = context
 ```
+
 
 
 
@@ -213,6 +216,7 @@ else:
 
 
 
+
 #### 4. Generate Response with Alternative (if Rejected)
 
 ```python
@@ -224,6 +228,7 @@ if repair_analysis.is_rejection:
         glyph_name=suggested_glyph or selected_glyph
     )
 ```
+
 
 
 ##

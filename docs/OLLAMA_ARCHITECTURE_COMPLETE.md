@@ -117,8 +117,10 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
    - Ollama functions automatically available through standard initialization flow
 
 ## 🏗️ Architecture Diagram
+
 ```text
 ```
+
 ┌──────────────────────────────────────────────────────────────────┐
 │                     Docker Network: firstperson_network           │
 ├───────────────────────────────────────────────────────────────────┤
@@ -152,11 +154,13 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
     │ localhost:8501   │ ← Streamlit UI
     │ localhost:11434  │ ← Ollama API (optional, for testing)
     └──────────────────┘
+
 ```
 
 
 
 ## 🔄 Response Pipeline
+```text
 ```text
 ```
 1. USER INPUT arrives in Streamlit
@@ -209,11 +213,14 @@ Successfully integrated **Ollama local LLM service** with FirstPerson Streamlit 
 
 
 
+
 ## 🚀 Execution Flow
 
 ### Starting Up
+
 ```bash
 ```
+
 $ docker-compose -f docker-compose.local.yml up -d
     ↓
 1. Build streamlit image from Dockerfile.streamlit
@@ -256,6 +263,7 @@ User types message
 7. Response streamed/collected
 8. Tier processing applied
 9. Response displayed in chat
+
 ```
 
 
@@ -265,6 +273,7 @@ User types message
 ### Request (Streamlit → Ollama)
 
 ```python
+
 
 # Python code in response_handler.py
 POST http://ollama:11434/api/generate
@@ -277,8 +286,10 @@ POST http://ollama:11434/api/generate
     "top_k": 40,
     "num_predict": 512,
     "system": "You are FirstPerson, a warm, empathetic AI companion..."
+
 ```text
 ```
+
 
 
 
@@ -298,6 +309,7 @@ POST http://ollama:11434/api/generate
     "eval_count": 32,
     "eval_duration": 1000000000
 ```text
+```text
 ```
 
 
@@ -305,6 +317,7 @@ POST http://ollama:11434/api/generate
 ### Session State
 
 ```python
+
 
 # After initialization
 st.session_state = {
@@ -318,8 +331,10 @@ st.session_state = {
     # Can be accessed in UI
     if st.session_state["ollama_available"]:
         st.info(f"🦙 Using local Ollama: {st.session_state['ollama_models']}")
+
 ```text
 ```
+
 
 
 
@@ -337,6 +352,7 @@ def _ensure_ollama_client():
         st.session_state["ollama_client"] = client
         st.session_state["ollama_available"] = client.is_available()
 ```text
+```text
 ```
 
 
@@ -347,6 +363,7 @@ def _ensure_ollama_client():
 **When**: Called when Glyph processing fails
 
 ```python
+
 def _get_ollama_fallback_response(user_input, conversation_context):
     ollama = get_ollama_client_singleton()
 
@@ -359,8 +376,10 @@ def _get_ollama_fallback_response(user_input, conversation_context):
         model=models[0] if models else "llama3",
         system_prompt="You are FirstPerson..."
     )
+
 ```text
 ```
+
 
 
 
@@ -384,6 +403,7 @@ def handle_response_pipeline(user_input, conversation_context):
     # ... more processing ...
 
 ```text
+```text
 ```
 
 
@@ -393,10 +413,13 @@ def handle_response_pipeline(user_input, conversation_context):
 ### Test 1: Docker Setup
 
 ```bash
+
 $ python test_ollama_integration.py
 Check: docker-compose.local.yml exists
+
 ```text
 ```
+
 
 
 
@@ -406,6 +429,7 @@ Check: docker-compose.local.yml exists
 Check: Ollama service responding
 curl http://localhost:11434/api/tags
 ```text
+```text
 ```
 
 
@@ -413,10 +437,13 @@ curl http://localhost:11434/api/tags
 ### Test 3: Model Availability
 
 ```bash
+
 Check: Models available
 curl http://localhost:11434/api/tags | jq '.models'
+
 ```text
 ```
+
 
 
 
@@ -427,6 +454,7 @@ Check: Can generate response
 curl -X POST http://localhost:11434/api/generate \
   -d '{"model":"llama3","prompt":"test","stream":false}'
 ```text
+```text
 ```
 
 
@@ -434,13 +462,16 @@ curl -X POST http://localhost:11434/api/generate \
 ### Test 5: FirstPerson Integration
 
 ```bash
+
 Check: FirstPerson client works
 from ollama_client import get_ollama_client_singleton
 client = get_ollama_client_singleton()
 client.is_available()  → True
 client.get_available_models()  → ["llama3"]
+
 ```text
 ```
+
 
 
 
@@ -454,6 +485,7 @@ Available in container environment:
 OLLAMA_BASE_URL=http://ollama:11434        # Endpoint (auto-set in Docker)
 STREAMLIT_SERVER_HEADLESS=true              # Headless mode
 STREAMLIT_SERVER_PORT=8501                  # Port
+```text
 ```text
 ```
 
@@ -509,9 +541,12 @@ STREAMLIT_SERVER_PORT=8501                  # Port
 ### Scenario 1: Ollama Not Running
 
 ```python
+
 if not ollama.is_available():
+
 ```text
 ```
+
 
 
 
@@ -522,6 +557,7 @@ models = ollama.get_available_models()
 if not models:
     logger.warning("No models available")
 ```text
+```text
 ```
 
 
@@ -529,12 +565,15 @@ if not models:
 ### Scenario 3: Generation Timeout
 
 ```python
+
 try:
     response = ollama.generate(prompt, timeout=120)
 except requests.Timeout:
     logger.error("Generation timeout")
+
 ```text
 ```
+
 
 
 
@@ -547,6 +586,7 @@ except requests.ConnectionError:
     logger.error("Cannot reach Ollama")
     return "I'm here to listen..."
 ```
+
 
 
 

@@ -3,6 +3,7 @@
 **Version:** 1.0
 **Last Updated:** December 14, 2025
 **Purpose:** This story map serves as the "game bible" for Velinor, organizing the branching narratives, character arcs, and dialogue options. It provides a modular structure for easy updates and expansion.
+
 ##
 
 ## Table of Contents
@@ -12,27 +13,32 @@ Relationships](#character-relationships) 4. [Story Structure &
 Progression](#story-structure--progression) 5. [Glyph System](#glyph-system) 6. [Ending
 Branches](#ending-branches) 7. [Narrative Decision Points](#narrative-decision-points) 8. [Expansion
 Placeholders](#expansion-placeholders) 9. [How to Use This Map](#how-to-use-this-map)
+
 ##
 
 ## Overview
 
 ### Premise
+
 Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velhara (formerly
 Saonyx), a futuristic city built on emotional infrastructure called the **Corelink system**. After a
 catastrophic memory fracture, players navigate a world where nature has reclaimed civilization and
 emotional resonance lingers in glyphs, echoes, and ruins.
 
 ### Core Themes
+
 - **Friendship & Sacrifice**: The relationship between Saori and Velinor
 - **Memory & Identity**: Scattered fragments of the past
 - **Autonomy vs. Unity**: The philosophical divide between the two architects
 - **Grief & Reconciliation**: Processing loss and finding meaning in fragments
 
 ### Gameplay Pillars
+<!-- md013:ignore -->
 1. **TONE System** (Hidden Stats): Trust, Observation, Narrative Presence, Empathy 2. **NPC Sphere
 of Influence**: Interconnected relationship networks 3. **Glyph Collection**: Emotional artifacts
 that unlock story progression 4. **Branching Narrative**: 6 distinct endings based on player choices
 and resonance
+
 ##
 
 ## Core Narrative Arc
@@ -58,6 +64,7 @@ to survive the severance 6. **The Sacrifice**:
 ### Player's Journey
 
 **Act 1: Arrival (Marketplace District)**
+
 - Player arrives in the ruined Marketplace of Velhara
 - Encounters first NPCs: Ravi & Nima
 - Learns about the shifting marketplace (collapsing paths marked with red X)
@@ -65,6 +72,7 @@ to survive the severance 6. **The Sacrifice**:
 - Begins collecting glyph fragments
 
 **Act 2: Exploration & Relationships**
+
 - Navigates interconnected biomes (desert, swamp, forest, lake) via aquatic routes
 - Builds relationships with 8+ Marketplace NPCs
 - Encounters Kaelen the Cloaked (possible thief)
@@ -72,6 +80,7 @@ to survive the severance 6. **The Sacrifice**:
 - Discovers hidden chambers and Corelink hubs
 
 **Act 3: Glyph Chambers (Boss Encounters)**
+
 - **Triglyph Chamber**: Fuses Sorrow + Remembrance + Legacy → Unified Tear of Integration
 - **Octoglyph Chambers** (8 stages): Each chamber refines disparate emotions from the Corelink collapse
   - Infrasensory Oblivion
@@ -86,11 +95,13 @@ to survive the severance 6. **The Sacrifice**:
 - Completing all chambers grants the **Void Octagon** (unified glyph)
 
 **Act 4: Final Chamber & Choice**
+
 - Player enters Saori's underground chamber (last working Corelink hub)
 - Meets Velinor in person (still connected to the system via the ring)
 - Confronts the central question: Restart the system or preserve autonomy?
 - Witnesses the resolution between Saori and Velinor
 - Experiences one of 6 possible endings
+
 ##
 
 ## Character Relationships
@@ -98,6 +109,7 @@ to survive the severance 6. **The Sacrifice**:
 ### Primary Characters
 
 #### Velinor
+
 - **Role**: Co-architect of Corelink, sacrificial figure
 - **Current State**: Fragmented into 70 glyphs, appears as "ghost in the machine"
 - **Visual**: Halo-like ring (actually the Corelink system tether)
@@ -105,6 +117,7 @@ to survive the severance 6. **The Sacrifice**:
 - **Arc**: From scattered fragments → reconstituted presence → final choice
 
 #### Saori
+
 - **Role**: Co-architect of Corelink, guilt-driven protagonist
 - **Current State**: Attempting to restart Corelink system
 - **Philosophy**: Unity and collective memory can heal
@@ -118,6 +131,7 @@ based on weighted connections (0.1-1.0).
 #### Marketplace NPCs
 
 **Core Couple:**
+
 1. **Ravi** (Trust anchor)
    - Appearance: Tall, broad-shouldered, warm eyes, earth-toned robe
    - Trait: Open, cautious (due to recent thefts)
@@ -179,24 +193,28 @@ based on weighted connections (0.1-1.0).
    - Role: Offers fragment recovery in exchange for intel
 
 10. **Drossel** (Thieves' Gang Leader)
-   - Appearance: Smooth movements, Slavic-French accent blend
-   - Location: Swamp hideout (Mire of Echoes)
-   - Trait: Charismatic yet brusque, unpredictable
-   - Visual Mechanic: Alternates screen sides with each dialogue line
-   - Boss Encounter: Not combat - negotiation/resonance challenge
-   - Resolution: Recover stolen fragments, player choice on returning items
+
+- Appearance: Smooth movements, Slavic-French accent blend
+- Location: Swamp hideout (Mire of Echoes)
+- Trait: Charismatic yet brusque, unpredictable
+- Visual Mechanic: Alternates screen sides with each dialogue line
+- Boss Encounter: Not combat - negotiation/resonance challenge
+- Resolution: Recover stolen fragments, player choice on returning items
 
 ### Relationship Mechanics
 
 **Ripple Effects:**
+
 - Strong Bonds (0.7-1.0): Immediate impact on connected NPCs
 - Medium Bonds (0.4-0.6): Subtle dialogue shifts
 - Weak Bonds (0.1-0.3): Background tone changes
 
 **Repair Paths:**
+
 - Relationships never fully sever
 - Repair requires sacrifice, vulnerability, or consistency
 - Successfully repaired bonds yield unique gifts
+
 ##
 
 ## Story Structure & Progression
@@ -204,11 +222,13 @@ based on weighted connections (0.1-1.0).
 ### Act 1: Awakening (Marketplace)
 
 **Key Locations:**
+
 - Market District (shifting paths)
 - Monument Ruins
 - Collapsed Underpass
 
 **Major Encounters:**
+
 ```json
 ```text
 [Player Arrival] ↓ [Dust Plume Choice]

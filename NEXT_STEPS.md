@@ -42,6 +42,7 @@ logger.info(f"DEBUG: Glyph names: {[g.get('glyph_name') for g in glyphs]}")
 # After response composition:
 logger.info(f"DEBUG: Response source: {response_source}")
 ```sql
+```sql
 ```
 
 
@@ -59,9 +60,12 @@ The poetic engine is being called but its output isn't showing in responses. Eit
 Add logging:
 
 ```python
+
 poetic_result = engine.process_glyph_response(...)
+
 ```text
 ```
+
 
 
 
@@ -83,6 +87,7 @@ if glyphs and response_composer:
         signals=signals,
         input_text=input_text
 ```text
+```text
 ```
 
 
@@ -96,10 +101,13 @@ if glyphs and response_composer:
 Add to `emotional_keywords` list:
 
 ```python
+
 "beautiful", "lovely", "wonderful", "joy", "delight",
 "daughter", "family", "together", "close", "connection",
+
 ```text
 ```
+
 
 
 
@@ -119,6 +127,7 @@ if any(kw in lower_input for kw in affirmation_keywords):
     # Log affirmed flow
     from emotional_os.feedback.reward_model import RewardModel
 ```text
+```text
 ```
 
 
@@ -129,8 +138,10 @@ if any(kw in lower_input for kw in affirmation_keywords):
 Use the integrated test suite:
 
 ```bash
+
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 python tests/test_comprehensive_integration.py
+
 ```
 
 

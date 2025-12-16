@@ -102,6 +102,7 @@ result = integrator.process_conversation_with_evolution(message="user input")
 
 
 
+
 **Option B: Parallel Processing**
 Run alongside your existing system, monitoring and evolving in the background.
 

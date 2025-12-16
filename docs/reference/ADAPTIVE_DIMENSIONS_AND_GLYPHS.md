@@ -2,6 +2,7 @@
 
 ## Short Answer: YES ✅
 
+<!-- md013:ignore -->
 The adaptive signal extractor **indirectly creates conditions for new glyphs** through two
 mechanisms:
 
@@ -27,7 +28,8 @@ phrases) ↓ Shared Lexicon Expansion ↓ [Could trigger] → Glyph Generator �
 ### The Gap:
 
 <!-- md013:ignore -->
-Currently, the bulk processor learns to **lexicons** but doesn't directly create **glyphs**. However, glyphs ARE created through the `GlyphGenerator` which watches for:
+Currently, the bulk processor learns to **lexicons** but doesn't directly create **glyphs**. However,
+glyphs ARE created through the `GlyphGenerator` which watches for:
 - New emotional patterns
 - Frequently occurring signal combinations
 - Novel context patterns

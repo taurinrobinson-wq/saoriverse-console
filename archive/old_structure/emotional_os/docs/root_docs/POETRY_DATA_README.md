@@ -30,6 +30,7 @@ poetry_data_hub.py            19 KB    Unified data management
 
 
 
+
 ### Documentation (37 KB)
 
 ```
@@ -41,6 +42,7 @@ POETRY_INTEGRATION_EXAMPLES.md         11 KB    Code examples for each mode
 
 
 
+
 ## Quick Start (5 minutes)
 
 ### 1. Process All Poetry
@@ -49,6 +51,7 @@ POETRY_INTEGRATION_EXAMPLES.md         11 KB    Code examples for each mode
 cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
+
 
 
 
@@ -64,6 +67,7 @@ This:
 ```bash
 python poetry_data_pipeline.py --status
 ```
+
 
 
 
@@ -100,6 +104,7 @@ for collection_name, text in data.items():
 
 
 
+
 ## What Gets Fixed
 
 ### Before (Raw from Gutenberg)
@@ -124,6 +129,7 @@ the words,
 
 
 
+
 ### After (Cleaned & Validated)
 
 ```
@@ -133,6 +139,7 @@ That perches in the soul,
 
 And sings the tune without the words,
 ```
+
 
 
 
@@ -203,6 +210,7 @@ And sings the tune without the words,
 
 
 
+
 ## Database Contents
 
 SQLite database (`poetry_data/poetry_hub.db`) includes:
@@ -219,6 +227,7 @@ keats_complete    | John Keats          | 2350         | validated
 
 
 
+
 **Processing Log** - Every operation recorded
 
 ```
@@ -227,6 +236,7 @@ dickinson_complet | download | success | 2024-01-15 10:30:45
 dickinson_complet | clean    | success | 2024-01-15 10:31:23
 dickinson_complet | validate | success | 2024-01-15 10:31:45
 ```
+
 
 
 
@@ -240,6 +250,7 @@ dickinson_complet | fragmented_lines_fixed| 156
 dickinson_complet | completeness_score    | 0.99
 dickinson_complet | usability_score       | 0.98
 ```
+
 
 
 
@@ -259,6 +270,7 @@ data = adapter.for_signal_extraction()
 
 
 
+
 ### Mode 2: Lexicon Learning
 
 ```python
@@ -270,6 +282,7 @@ data = adapter.for_lexicon_learning()
 
 # Guaranteed: Coherent text for reliable pattern learning
 ```
+
 
 
 
@@ -287,6 +300,7 @@ data = adapter.for_glyph_generation()
 
 
 
+
 ### Mode 4: Ritual Processing
 
 ```python
@@ -298,6 +312,7 @@ data = adapter.for_ritual_processing()
 
 # Guaranteed: Complete, coherent text for ritual creation
 ```
+
 
 
 
@@ -345,6 +360,7 @@ Documentation:
 
 
 
+
 ## Integration with Your Systems
 
 ### Signal Extraction (existing: AdaptiveSignalExtractor)
@@ -360,6 +376,7 @@ clean_poetry = adapter.for_signal_extraction()
 for collection_name, text in clean_poetry.items():
     signals = your_extractor.extract(text)  # Guaranteed clean input
 ```
+
 
 
 
@@ -379,6 +396,7 @@ for collection_name, text in clean_poetry.items():
 
 
 
+
 ### Glyph Generation (existing: PoetryGlyphGenerator)
 
 ```python
@@ -392,6 +410,7 @@ poetry_tuples = adapter.for_glyph_generation()
 for collection_name, text in poetry_tuples:
     glyphs = your_generator.generate(text)  # Guaranteed fragment-free
 ```
+
 
 
 
@@ -436,6 +455,7 @@ python poetry_data_pipeline.py --export poetry_export
 # Get help
 python poetry_data_pipeline.py --help
 ```
+
 
 
 

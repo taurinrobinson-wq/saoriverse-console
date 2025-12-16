@@ -9,8 +9,10 @@ Phase 1 of the Velinor game development roadmap has been successfully implemente
 ### 1. Graphics Assets Setup ✓
 
 All 7 renamed graphics are now in the web version:
+
 ```text
 ```
+
 velinor-web/public/assets/
 ├── overlays/
 │   ├── left_page_curl.png          (2.1 MB) - Journal UI left
@@ -23,6 +25,7 @@ velinor-web/public/assets/
 │   └── swamp.png                   (2.8 MB) - Swamp biome
 └── tools/
     └── notepad.png                 (3.0 MB) - Journal UI element
+
 ```
 
 
@@ -41,6 +44,7 @@ The system tracks 4 hidden stats (0-100 range):
 **Key Functions:**
 
 ```typescript
+
 // Modify stats
 applyToneAction(stats, action)           // Add/subtract from a stat
 applyToneActions(stats, actions)         // Apply multiple changes
@@ -53,8 +57,10 @@ getAccessibleEndings(stats)             // All accessible endings
 
 // Get player feedback
 getToneTier(value)                       // "Poor", "Weak", "Good", "Strong", "Excellent"
+
 ```text
 ```
+
 
 
 
@@ -81,6 +87,7 @@ updateToneStats({
   statName: 'empathy',
   delta: 5,
   description: 'Showed emotional understanding'
+```text
 ```text
 ```
 
@@ -125,6 +132,7 @@ Real-time monitoring widget shows:
 ### Example: Choice with TONE Consequences
 
 ```typescript
+
 // In your dialogue handler
 const choice = {
   text: 'Listen carefully to their story',
@@ -147,6 +155,7 @@ choice.toneChanges.forEach(action => {
 
 
 
+
 ### Example: Gated Dialogue (Only if Trust ≥ 60)
 
 ```typescript
@@ -157,6 +166,7 @@ if (toneStats.trust >= 60) {
   showDialog('I trust you enough to share this...');
 } else {
   showDialog('I... don\'t know you well enough yet.');
+```text
 ```text
 ```
 
@@ -175,6 +185,7 @@ To continue implementation:
 ### Quick Start Code
 
 ```typescript
+
 // In a dialogue component
 import { useGameStore } from '@/lib/gameStore';
 
@@ -199,8 +210,10 @@ export default function DialogueScene() {
       {/* Each choice applies TONE changes when clicked */}
     </div>
   );
+
 ```text
 ```
+
 
 
 
@@ -236,6 +249,7 @@ velinor-web/
 │           └── [sessionId]/
 │               └── page.tsx     (Updated - Integrated TONE display)
 ```
+
 
 
 

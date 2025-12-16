@@ -26,6 +26,7 @@ python -m spacy download en_core_web_sm
 # From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
 ```text
+```text
 ```
 
 
@@ -36,6 +37,7 @@ python -m spacy download en_core_web_sm
 ### 1. parser/nrc_lexicon_loader.py
 
 ```python
+
 from nltk.corpus import wordnet
 from collections import defaultdict
 
@@ -57,6 +59,7 @@ class NRCLexicon:
 
 ```text
 ```
+
 
 
 
@@ -88,6 +91,7 @@ class SemanticEngine:
         return doc1.similarity(doc2)
 
 ```text
+```text
 ```
 
 
@@ -97,6 +101,7 @@ class SemanticEngine:
 ### 3. emotional_os/glyphs/response_generator.py
 
 ```python
+
 class PoetricResponseGenerator:
     def __init__(self, db_connection):
         self.db = db_connection
@@ -135,8 +140,10 @@ class PoetricResponseGenerator:
 
     def _validate(self, user_message: str) -> str:
         # Generate validation/acknowledgment
+
 ```text
 ```
+
 
 
 
@@ -177,6 +184,7 @@ CREATE TABLE glyph_rituals (
 CREATE INDEX idx_glyph_poetry ON glyph_poetry(glyph_id);
 CREATE INDEX idx_glyph_metaphors ON glyph_metaphors(glyph_id);
 ```text
+```text
 ```
 
 
@@ -185,6 +193,7 @@ CREATE INDEX idx_glyph_metaphors ON glyph_metaphors(glyph_id);
 ## 📊 Processing Pipeline (Full Example)
 
 ```python
+
 
 # 1. Load models (once at startup)
 from parser.nrc_lexicon_loader import nrc
@@ -232,8 +241,10 @@ elapsed = time.time() - start
 
 # 4. Return to user
 print(response)
+
 ```text
 ```
+
 
 
 ##
@@ -283,6 +294,7 @@ print(f'✓ Average latency: {elapsed*1000:.1f}ms')
 
 print('\\n✅ All tests passed!')
 ```text
+```text
 ```
 
 
@@ -291,6 +303,7 @@ print('\\n✅ All tests passed!')
 ## 🔐 Verify Privacy
 
 ```bash
+
 python -c "
 import sys
 import os
@@ -310,8 +323,10 @@ print('✅ Local mode verified')
 print('✅ No external API keys')
 print('✅ All models local')
 print('✅ Zero external calls possible')
+
 ```text
 ```
+
 
 
 ##
@@ -348,6 +363,7 @@ data/
 │   └── nrc_emotion_lexicon.txt (NEW)
 └── poetry/
 ```text
+```text
 ```
 
 
@@ -366,10 +382,12 @@ data/
 ### Today (45 min)
 
 ```bash
+
 pip install spacy
 python -m spacy download en_core_web_sm
 
 # Download NRC lexicon manually
+
 ```
 
 

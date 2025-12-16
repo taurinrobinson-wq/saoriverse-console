@@ -1,8 +1,10 @@
 # Quick Reference: Transcript Analysis Results
 
 ## 📊 The Numbers
+
 ```text
 ```
+
 Original transcript:    39,811 lines
 Legal/song content:     -4,094 lines (10.3%)
 Clean conversational:   35,717 lines (ready to use)
@@ -10,6 +12,7 @@ Clean conversational:   35,717 lines (ready to use)
 AI messages analyzed:   11,181
 Human responses:        12,138
 Unique conversations:   1 (one amazing long thread)
+
 ```
 
 
@@ -37,6 +40,7 @@ Unique conversations:   1 (one amazing long thread)
 
 ### THIS WEEK
 ```text
+```text
 ```
 1. Add 3 new Glyphs:
    - THAT_LANDS ("That lands.")
@@ -50,9 +54,12 @@ Unique conversations:   1 (one amazing long thread)
 
 
 
+
 ### NEXT WEEK
+
 ```text
 ```
+
 5. Add 7 more Glyphs:
    - HOLD_IT, ECHO_BACK, PERMISSION
    - OF_COURSE, SACRED, BOTH_AND, THEN_WHAT
@@ -63,17 +70,20 @@ Unique conversations:   1 (one amazing long thread)
    - Emotional word frequency (increase by 50%)
 
 7. Update voice guidelines
+
 ```
 
 
 
 ### WEEK 3-4
 ```text
+```text
 ```
 8. Full Glyph lexicon rebuild with new standards
 9. A/B test old vs. new voice
 10. Gather user feedback and iterate
 ```
+
 
 
 
@@ -121,8 +131,10 @@ Use these as your model for tone/style:
 All 10 are under 15 words. All are direct. All are present. All are true.
 
 ## 📁 Files You Got
+
 ```text
 ```
+
 ✅ copilot-activity-history-cleaned.csv
    → 35,717 clean rows, all legal content removed
    → Safe to analyze, share, learn from
@@ -145,6 +157,7 @@ All 10 are under 15 words. All are direct. All are present. All are true.
 
 ✅ clean_and_extract_transcript.py
    → Cleaning script (already run)
+
 ```
 
 

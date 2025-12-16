@@ -52,8 +52,10 @@ We've successfully built a **complete React Native (Expo) mobile application** t
 ## Architecture Highlights
 
 ### **Data Flow**
+
 ```text
 ```
+
 User Input → ChatInput → StorageService (optimistic)
     ↓
 ApiService.sendMessage() → Backend /api/chat
@@ -65,11 +67,13 @@ Display MessageBubble with metadata
 Create memory capsule (every 5 messages)
     ↓
 Persist to AsyncStorage
+
 ```
 
 
 
 ### **Offline Sync**
+```text
 ```text
 ```
 Network Error → Queue message via SyncService
@@ -85,21 +89,26 @@ Clear queue on success
 
 
 
+
 ### **Storage Schema**
+
 ```text
 ```
+
 AsyncStorage Keys:
 ├── fp_conversations - All message history
 ├── fp_memory_capsules - Relational context snapshots
 ├── fp_user_prefs - Theme, notifications, analytics toggle
 ├── fp_sync_queue - Messages awaiting network
 └── fp_onboarding_complete - Onboarding state flag
+
 ```
 
 
 ##
 
 ## Project Structure
+```text
 ```text
 ```
 firstperson/
@@ -132,6 +141,7 @@ firstperson/
 ```
 
 
+
 ##
 
 ## Dependencies Added
@@ -151,6 +161,7 @@ firstperson/
   "react-navigation-native": "^6.1.9",
   "react-navigation-stack": "^6.3.20"
 ```text
+```text
 ```
 
 
@@ -163,9 +174,12 @@ firstperson/
 ### Installation
 
 ```bash
+
 cd /workspaces/saoriverse-console/firstperson
+
 ```text
 ```
+
 
 
 
@@ -179,6 +193,7 @@ npm start
 # Scan QR with Expo Go app, or:
 npm run ios      # iOS simulator
 ```text
+```text
 ```
 
 
@@ -187,10 +202,13 @@ npm run ios      # iOS simulator
 
 ```bash
 
+
 # Update backend URL in src/config.js or set env:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
+
 ```text
 ```
+
 
 
 
@@ -209,6 +227,7 @@ curl http://localhost:8000/health
 
 # (Airplane mode → send message → see queue → turn on)
 ```
+
 
 
 ##

@@ -21,11 +21,13 @@ python3 docx_reader.py document.docx view
 
 
 
+
 Extract plain text:
 
 ```bash
 python3 docx_reader.py document.docx text
 ```
+
 
 
 
@@ -35,6 +37,7 @@ Export as JSON:
 python3 docx_reader.py document.docx json
 python3 docx_reader.py document.docx json output.json
 ```
+
 
 
 
@@ -52,6 +55,7 @@ Launch the web viewer:
 ```bash
 streamlit run docx_viewer.py
 ```
+
 
 
 
@@ -81,6 +85,7 @@ print(text)
 # Export as JSON
 export_docx_json("document.docx", "output.json")
 ```
+
 
 
 
@@ -151,6 +156,7 @@ python3 docx_reader.py sample.docx
 
 
 
+
 ## Integration into Your Apps
 
 You can integrate DOCX reading into your Streamlit apps:
@@ -167,6 +173,7 @@ if uploaded_file:
     data = read_docx("temp.docx")
     st.json(data)
 ```
+
 
 
 

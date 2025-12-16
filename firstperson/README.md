@@ -9,6 +9,7 @@ Quick start (development):
 ```bash
 cd firstperson
 ```text
+```text
 ```
 
 
@@ -16,8 +17,10 @@ cd firstperson
 2. Start the Expo dev server
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -31,6 +34,7 @@ Backend configuration
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -40,8 +44,10 @@ EAS (optional)
 - If you plan to use EAS Build / Submit, run:
 
 ```bash
+
 cd firstperson
 eas build:configure
+
 ```
 
 

@@ -20,6 +20,7 @@ ssh root@161.35.227.49
 # If using SSH key, it may be automatic
 
 ```text
+```text
 ```
 
 
@@ -27,6 +28,7 @@ ssh root@161.35.227.49
 ### Step 2: Run the Automated Setup Script
 
 ```bash
+
 
 # Clone the repo
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
@@ -36,8 +38,10 @@ cd saoriverse-console
 chmod +x docker-setup.sh
 
 # Run it
+
 ```text
 ```
+
 
 
 
@@ -61,6 +65,7 @@ curl http://161.35.227.49:8000/health
 
 # Test the frontend
 ```text
+```text
 ```
 
 
@@ -71,6 +76,7 @@ curl http://161.35.227.49:8000/health
 ### Install Docker Manually
 
 ```bash
+
 
 # Update system
 sudo apt update
@@ -103,8 +109,10 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Verify
+
 ```text
 ```
+
 
 
 
@@ -129,6 +137,7 @@ nano .env
 # - FRONTEND_URL=http://161.35.227.49
 
 ```text
+```text
 ```
 
 
@@ -136,6 +145,7 @@ nano .env
 ### Build and Start Services
 
 ```bash
+
 
 # Build Docker images
 docker compose build
@@ -153,8 +163,10 @@ docker compose logs -f
 docker compose logs -f backend
 
 # View just frontend logs
+
 ```text
 ```
+
 
 
 ##
@@ -193,6 +205,7 @@ docker compose logs --tail 100
 
 # Last 100 lines, following
 ```text
+```text
 ```
 
 
@@ -200,6 +213,7 @@ docker compose logs --tail 100
 ### Stop Services
 
 ```bash
+
 
 # Stop without removing
 docker compose stop
@@ -211,8 +225,10 @@ docker compose restart
 docker compose down
 
 # Remove everything including volumes (WARNING: deletes data)
+
 ```text
 ```
+
 
 
 
@@ -228,6 +244,7 @@ docker compose restart frontend
 
 # Restart nginx
 ```text
+```text
 ```
 
 
@@ -236,6 +253,7 @@ docker compose restart frontend
 
 ```bash
 
+
 # Get a shell in the backend container
 docker compose exec backend bash
 
@@ -243,8 +261,10 @@ docker compose exec backend bash
 docker compose exec backend python -c "import sys; print(sys.version)"
 
 # Get a shell in the frontend container
+
 ```text
 ```
+
 
 
 
@@ -260,6 +280,7 @@ docker system df
 
 # Prune unused images/containers
 ```text
+```text
 ```
 
 
@@ -271,6 +292,7 @@ docker system df
 
 ```bash
 
+
 # Pull latest changes
 git pull origin main
 
@@ -281,8 +303,10 @@ docker compose build
 docker compose up -d
 
 # Verify
+
 ```sql
 ```
+
 
 
 
@@ -295,6 +319,7 @@ docker compose up -d --build backend
 
 # Just rebuild and restart frontend
 ```text
+```text
 ```
 
 
@@ -305,6 +330,7 @@ docker compose up -d --build backend
 ### Service Won't Start
 
 ```bash
+
 
 # Check logs first
 docker compose logs backend
@@ -317,8 +343,10 @@ docker compose up -d
 # Check if ports are already in use
 sudo lsof -i :8000
 sudo lsof -i :3000
+
 ```text
 ```
+
 
 
 
@@ -334,6 +362,7 @@ docker system prune -a
 
 # Remove specific image
 ```text
+```text
 ```
 
 
@@ -341,6 +370,7 @@ docker system prune -a
 ### Network Issues
 
 ```bash
+
 
 # Check networks
 docker network ls
@@ -350,8 +380,10 @@ docker network inspect saoriverse-console_saoriverse
 
 # Restart network
 docker compose down
+
 ```sql
 ```
+
 
 
 
@@ -371,6 +403,7 @@ docker compose exec frontend curl http://backend:8000/health
 docker compose exec frontend env | grep API_URL
 
 ```text
+```text
 ```
 
 
@@ -382,6 +415,7 @@ docker compose exec frontend env | grep API_URL
 
 ```bash
 
+
 # Backup database and files
 docker compose exec backend tar -czf /app/backup.tar.gz data_local/
 
@@ -389,8 +423,10 @@ docker compose exec backend tar -czf /app/backup.tar.gz data_local/
 docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 
 # Or use rsync
+
 ```sql
 ```
+
 
 
 
@@ -406,6 +442,7 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 
 # Restart
 ```text
+```text
 ```
 
 
@@ -417,6 +454,7 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 
 ```bash
 
+
 # Install certbot
 sudo apt install -y certbot python3-certbot-nginx
 
@@ -427,8 +465,10 @@ sudo certbot certonly --standalone -d 161.35.227.49
 # Update nginx.conf with SSL directives
 
 # Then restart nginx
+
 ```sql
 ```
+
 
 
 
@@ -449,6 +489,7 @@ server {
     listen 80;
     return 301 https://$host$request_uri;
 ```text
+```text
 ```
 
 
@@ -459,6 +500,7 @@ server {
 ### Create a Monitoring Script
 
 ```bash
+
 #!/bin/bash
 
 # save as check-health.sh
@@ -476,8 +518,10 @@ curl -s http://161.35.227.49:3000 | head -20 || echo "FAILED"
 
 echo ""
 echo "=== Disk Usage ==="
+
 ```text
 ```
+
 
 
 
@@ -492,6 +536,7 @@ crontab -e
 
 # Add: 0 * * * * /root/saoriverse-console/check-health.sh >> /var/log/saoriverse-health.log 2>&1
 ```
+
 
 
 ##

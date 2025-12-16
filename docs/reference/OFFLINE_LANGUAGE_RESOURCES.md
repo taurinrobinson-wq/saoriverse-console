@@ -20,6 +20,7 @@ Your system is now using **compositional response generation** instead of canned
 # Install (one-time)
 pip install spacy
 ```text
+```text
 ```
 
 
@@ -54,6 +55,7 @@ pip install spacy
 **How it works**: Find emotionally related words without hardcoding patterns
 
 ```python
+
 from gensim.models import KeyedVectors
 
 # Download pre-trained Google News Word2Vec vectors (1.5GB, one-time)
@@ -64,6 +66,7 @@ similar_words = vectors.most_similar('anxiety', topn=5)
 
 ```text
 ```
+
 
 
 
@@ -86,6 +89,7 @@ linguistic_patterns = TextCollection([
 
 # Generate realistic-sounding next phrases based on learned patterns
 ```sql
+```sql
 ```
 
 
@@ -98,6 +102,7 @@ linguistic_patterns = TextCollection([
 **Purpose**: Understand *sentence structure* and emotional intensity
 
 ```python
+
 import spacy
 
 nlp = spacy.load("en_core_web_md")  # Medium model has better word vectors
@@ -119,6 +124,7 @@ for token in doc:
 
 ```text
 ```
+
 
 
 
@@ -148,6 +154,7 @@ people = extracted["people"]  # ["Michelle"]
 if people:
     person = people[0]
 ```text
+```text
 ```
 
 
@@ -173,6 +180,7 @@ if people:
 **File**: `emotional_os/glyphs/dynamic_response_composer.py`
 
 ```python
+
 class DynamicResponseComposer:
     def compose_response(self, input_text, glyph_name, feedback_detected, ...):
         # 1. Extract entities & emotions (spaCy + NRC)
@@ -191,8 +199,10 @@ class DynamicResponseComposer:
         closing = self._dynamic_closing(extracted["entities"])
 
         # Return composed response (never identical)
+
 ```text
 ```
+
 
 
 ##
@@ -205,6 +215,7 @@ class DynamicResponseComposer:
 RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 
 ```text
+```text
 ```
 
 
@@ -212,6 +223,7 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 ### After (Compositional)
 
 ```
+
 
 # Each response randomly selects from multiple opening styles
 
@@ -222,6 +234,7 @@ RESPONSE_TEMPLATE = "I hear {entity}. That's {emotion}. The thing is..."
 # + builds unique closing question
 
 # Result: Feels fresh, not templated
+
 ```
 
 

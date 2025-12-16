@@ -73,8 +73,10 @@
 ## 🚀 Technical Implementation
 
 ### Architecture:
+
 ```text
 ```
+
 📁 Emotional OS/
 ├── main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)          # New user-focused UI
 ├── conversations/                  # Persistent conversation storage
@@ -85,6 +87,7 @@
 │   ├── signal_parser.py           # Enhanced with learning integration
 │   ├── signal_lexicon.json        # Base vocabulary
 │   └── learned_lexicon.json       # Dynamically learned vocabulary
+
 ```
 
 

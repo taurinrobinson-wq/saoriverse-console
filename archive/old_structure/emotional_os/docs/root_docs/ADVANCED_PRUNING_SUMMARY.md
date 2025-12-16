@@ -68,6 +68,7 @@ Amber Glow          (warm, steady)
 
 
 
+
 **Logic:** If overrepresented tone appears in low-scoring glyph → prune it
 
 **Result:** Balanced emotional tone palette maintained
@@ -103,6 +104,7 @@ combined_prune_score = (
 
 Range: 0.0 (prune) to 1.0 (keep)
 ```
+
 
 
 
@@ -142,6 +144,7 @@ families = {
 
 
 
+
 **Benefit:** Eliminates redundancy while preserving diversity
 ##
 
@@ -171,6 +174,7 @@ Archive pruned glyphs for future resurrection or analysis.
 
 
 
+
 **Benefit:** Can resurrect glyphs if system needs change, full auditability
 ##
 
@@ -192,6 +196,7 @@ pruned_glyph = {
     }
 }
 ```
+
 
 
 
@@ -268,6 +273,7 @@ Average confidence: 0.782
 
 
 
+
 ### Sample Decision
 
 ```
@@ -284,6 +290,7 @@ ID 145: "Ambiguous Echo"
     Activation: 0.00 (never used)
     Combined: 0.12 ← BELOW THRESHOLD (0.25)
 ```
+
 
 
 ##
@@ -310,6 +317,7 @@ print(f"Expansion: {85264} → {len(kept)} survivors")
 
 
 
+
 ### With Real Usage Data
 
 ```python
@@ -324,6 +332,7 @@ pruning_engine = AdvancedPruningEngine(
 )
 candidates = pruning_engine.evaluate_all_glyphs()
 ```
+
 
 
 ##

@@ -12,8 +12,10 @@ Successfully reorganized the root directory from **30 Python files** down to **1
 ### ✅ Phase Infrastructure → `archive/phase_infrastructure/` (8 files)
 
 These are historical phase files from the glyph generation pipeline that are preserved for reference:
+
 ```text
 ```
+
 archive/phase_infrastructure/
 ├── __init__.py
 ├── phase_1_generator.py
@@ -23,6 +25,7 @@ archive/phase_infrastructure/
 ├── phase_4_id_deduplicator.py
 ├── phase_4_ritual_tester.py
 └── phase_modulator.py (with root shim for backward compatibility)
+
 ```
 
 
@@ -37,6 +40,7 @@ archive/phase_infrastructure/
 
 Specialized analysis and reporting utilities:
 ```text
+```text
 ```
 tools/analysis/
 ├── __init__.py
@@ -48,16 +52,20 @@ tools/analysis/
 
 
 
+
 ### ✅ Document Processing → `tools/document_processing/` (3 files)
 
 Document handling utilities:
+
 ```text
 ```
+
 tools/document_processing/
 ├── __init__.py
 ├── docx_reader.py
 ├── docx_viewer.py
 └── docx_web_viewer.py
+
 ```
 
 
@@ -65,6 +73,7 @@ tools/document_processing/
 ### ✅ Glyph Testing Tools → `tools/glyph_testing/` (2 files)
 
 Glyph testing and validation:
+```text
 ```text
 ```
 tools/glyph_testing/
@@ -75,17 +84,21 @@ tools/glyph_testing/
 
 
 
+
 **Note**: `glyph_response_helpers.py` and `glyph_response_templates.py` already exist in `src/` as the canonical versions. The duplicates were removed.
 
 ### ✅ Test Files → `tests/integration/` (3 files)
 
 Integration and temporary test files:
+
 ```text
 ```
+
 tests/integration/
 ├── test_scenarios.py
 ├── tmp_run_mre.py
 └── sprint5_integration.py
+
 ```
 
 
@@ -164,6 +177,7 @@ Files now available in new locations:
 
 ## Directory Structure - Final State
 ```text
+```text
 ```
 /workspaces/saoriverse-console/
 ├── start.py                          (Railroad entry)
@@ -206,6 +220,7 @@ Files now available in new locations:
 │
 └── [existing structure...]
 ```
+
 
 
 ##

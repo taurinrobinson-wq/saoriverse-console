@@ -13,6 +13,7 @@ Your Saoriverse Console development environment is now fully configured with Pyt
 py -3.12 -m streamlit run app.py
 
 ```text
+```text
 ```
 
 
@@ -48,6 +49,7 @@ py -3.12 -m streamlit run app.py
 
 ```powershell
 
+
 # Run on different port
 py -3.12 -m streamlit run app.py --server.port 8502
 
@@ -61,8 +63,10 @@ py -3.12 -m pytest
 py -3.12 -m pip install package-name
 
 # Update specific package
+
 ```text
 ```
+
 
 
 ##
@@ -93,6 +97,7 @@ Data Processing:
 pandas + numpy → matplotlib (visualization)
 
 Document Processing:
+```text
 ```text
 ```
 
@@ -137,6 +142,7 @@ All systems verified working:
 ## File Structure
 
 ```
+
 d:\saoriverse-console\
 ├── requirements.txt                    ← All dependencies (70+)
 ├── app.py                              ← Main application
@@ -145,6 +151,7 @@ d:\saoriverse-console\
 ├── PYTHON_312_FINAL_REPORT.md          ← Complete setup report
 ├── PYTHON_312_SETUP_COMPLETE.md        ← Setup verification
 └── [Other documentation]
+
 ```
 
 

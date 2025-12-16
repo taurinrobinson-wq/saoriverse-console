@@ -118,6 +118,7 @@ The story map is organized into **9 major sections**:
 - Sphere: [Connected NPCs with weights]
 - Gift: [Tool or knowledge they provide]
 ```text
+```text
 ```
 
 
@@ -134,11 +135,14 @@ The story map is organized into **9 major sections**:
 **Step 1:** Add to "Expansion Placeholders" → Side Quests
 
 ```markdown
+
 - [ ] **[Quest Name]**: [Brief description]
   - Trigger: [When it becomes available]
   - NPCs involved: [List]
+
 ```text
 ```
+
 
 
 
@@ -155,6 +159,7 @@ The story map is organized into **9 major sections**:
 
 ```markdown
 ```text
+```text
 ```
 
 
@@ -162,11 +167,14 @@ The story map is organized into **9 major sections**:
 **Step 2:** Fill expansion placeholder in "Expansion Placeholders" → Octoglyph Chamber Details
 
 ```markdown
+
 - [x] **[Chamber Name]**
   - Location: [Where in game world]
   - Puzzle: [Emotional/mechanical challenge]
+
 ```text
 ```
+
 
 
 
@@ -194,6 +202,7 @@ The story map is organized into **9 major sections**:
 
 **Final Image:**
 ```sql
+```sql
 ```
 
 
@@ -215,6 +224,7 @@ The story map is organized into **9 major sections**:
 **Example:**
 
 ```markdown
+
 Before:
 - [ ] **Healer's Circle** (2-3 NPCs)
   - [PLACEHOLDER for names and details]
@@ -223,8 +233,10 @@ After:
 - [x] **Healer's Circle** (3 NPCs)
   - **Mirena the Bone-Setter**: Elderly, pragmatic
   - **Joran the Herbalist**: Young, optimistic
+
 ```text
 ```
+
 
 
 ##
@@ -253,6 +265,7 @@ After:
 - All core systems documented
 - Expansion placeholders established
 ```
+
 
 
 ##

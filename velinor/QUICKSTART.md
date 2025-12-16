@@ -5,6 +5,7 @@
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -102,6 +103,7 @@ Create these in `velinor/backgrounds/`:
 Edit `velinor/engine/marketplace_scenes.py`:
 
 ```python
+
 @staticmethod
 def build_my_new_scene() -> SceneModule:
     return SceneModule(
@@ -145,8 +147,10 @@ def get_sequence() -> List[SceneModule]:
     return [
         # ... existing scenes
         MarketplaceSceneSequence.build_my_new_scene(),  # ADD HERE
+
 ```text
 ```
+
 
 
 
@@ -255,6 +259,7 @@ Everything is built and committed to git. Just:
 ```bash
 streamlit run velinor_scenes_test.py
 ```
+
 
 
 

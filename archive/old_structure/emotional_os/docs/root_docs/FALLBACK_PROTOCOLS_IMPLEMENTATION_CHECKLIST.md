@@ -84,6 +84,7 @@ Coverage:
 
 
 
+
 ### Test Categories
 
 **Tone Analyzer (7 tests)**
@@ -126,6 +127,7 @@ except Exception:
 
 
 
+
 **Line 273-280**: Initialize in session
 
 ```python
@@ -135,6 +137,7 @@ if "fallback_protocol" not in st.session_state and FallbackProtocol:
     except Exception:
         st.session_state["fallback_protocol"] = None
 ```
+
 
 
 
@@ -152,6 +155,7 @@ if fallback_result.get("decisions", {}).get("should_ask_clarification"):
 
 
 
+
 **Line 660-668**: Debug panel
 
 ```python
@@ -161,6 +165,7 @@ if fallback_result:
         st.write("**Trigger Misfires:**", fallback_result.get("detections", {}).get("misfires"))
         # ... more details
 ```
+
 
 
 ##

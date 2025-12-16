@@ -65,6 +65,7 @@ export function GameScene({
     </div>
   );
 ```sql
+```sql
 ```
 
 
@@ -72,6 +73,7 @@ export function GameScene({
 ### Data You'll Receive From Backend
 
 ```typescript
+
 {
   story_text: string,
   current_location: string,
@@ -95,8 +97,10 @@ export function GameScene({
     resonance: number
   },
   discovered_glyphs: string[]
+
 ```text
 ```
+
 
 
 ##
@@ -182,6 +186,7 @@ export function useGame() {
     processFreeInput
   };
 ```text
+```text
 ```
 
 
@@ -189,6 +194,7 @@ export function useGame() {
 ### Wire It Into GameScene
 
 ```tsx
+
 import { useGame } from '@/hooks/useGame';
 
 export function GameScene() {
@@ -197,8 +203,10 @@ export function GameScene() {
   return (
     // Use gameState.story_text, gameState.choices, etc.
   );
+
 ```text
 ```
+
 
 
 ##
@@ -223,6 +231,7 @@ export function GameScene() {
     </button>
   ))}
 ```text
+```text
 ```
 
 
@@ -230,6 +239,7 @@ export function GameScene() {
 ### Free Text Input
 
 ```tsx
+
 const [input, setInput] = useState('');
 
 <div className="flex gap-2">
@@ -255,8 +265,10 @@ const [input, setInput] = useState('');
   >
     Send
   </button>
+
 ```text
 ```
+
 
 
 ##
@@ -302,6 +314,7 @@ const [input, setInput] = useState('');
     </div>
   </div>
 ```text
+```text
 ```
 
 
@@ -315,6 +328,7 @@ const [input, setInput] = useState('');
 ### Component Structure
 
 ```tsx
+
 export function StatsPanel({ stats: PlayerStats }) {
   return (
     <div className="bg-slate-900 p-4 rounded space-y-3">
@@ -335,14 +349,17 @@ export function StatsPanel({ stats: PlayerStats }) {
       ))}
     </div>
   );
+
 ```text
 ```
+
 
 
 
 ### Usage
 
 ```tsx
+```text
 ```text
 ```
 
@@ -372,6 +389,7 @@ See FirstPerson system output in backend responses - includes glyph data.
 ### Add to useGame Hook
 
 ```typescript
+
 const saveGame = useCallback(async () => {
   return await axios.post(`${API_BASE}/sessions/${sessionId}/save`, {
     save_name: 'AutoSave'
@@ -383,8 +401,10 @@ const loadGame = useCallback(async (saveId: string) => {
     `${API_BASE}/sessions/${sessionId}/load?save_id=${saveId}`
   );
   setGameState(response.data);
+
 ```text
 ```
+
 
 
 ##
@@ -427,6 +447,7 @@ velinor-web/
 │   │   └── game.ts                 ← CREATE (type definitions)
 │   └── lib/
 ```text
+```text
 ```
 
 
@@ -434,6 +455,7 @@ velinor-web/
 ### Files to Modify
 
 ```
+
 velinor-web/
 ├── src/
 │   ├── app/
@@ -443,6 +465,7 @@ velinor-web/
 │   │   └── page.tsx                ← ADD FLOW TO GAME PAGE
 │   └── styles/
 │       └── globals.css             ← ADD CUSTOM STYLES
+
 ```
 
 

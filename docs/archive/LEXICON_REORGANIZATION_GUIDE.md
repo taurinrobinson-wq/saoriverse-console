@@ -19,6 +19,7 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
 
 
 
+
 ### New Structure (Word-Centric)
 
 ```json
@@ -39,6 +40,7 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
   }
 }
 ```
+
 
 
 
@@ -72,6 +74,7 @@ if word_data:
 
 
 
+
 ### 2. Update parse_input() function
 
 ```python
@@ -87,6 +90,7 @@ def parse_input(user_message: str):
 
             # Use this data to select appropriate glyph/voltage
 ```
+
 
 
 
@@ -110,6 +114,7 @@ def top_emotional_words(n=20):
                   key=lambda x: x[1]['frequency'],
                   reverse=True)[:n]
 ```
+
 
 
 

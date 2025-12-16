@@ -18,6 +18,7 @@ I've set up your Next.js web version to run **directly on your Mac without Docke
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -26,9 +27,12 @@ Then visit: **http://localhost:3000**
 ### Option 2: Full Stack (Frontend + Backend)
 
 ```bash
+
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
+
 ```text
 ```
+
 
 
 This starts:
@@ -96,6 +100,7 @@ velinor-web/
 │   └── styles/
 ├── public/assets/        # All game graphics
 ```text
+```text
 ```
 
 
@@ -106,6 +111,7 @@ Save a file → Browser auto-refreshes. No manual reload needed!
 ### Common Commands
 
 ```bash
+
 cd velinor-web
 
 # Start dev (port 3000)
@@ -118,8 +124,10 @@ npm run build
 npm run lint
 
 # Run production server
+
 ```text
 ```
+
 
 
 ##
@@ -134,6 +142,7 @@ GET    /sessions/{id}               # Get game state
 POST   /sessions/{id}/actions       # Process player action
 POST   /sessions/{id}/save          # Save game
 ```sql
+```sql
 ```
 
 
@@ -141,6 +150,7 @@ POST   /sessions/{id}/save          # Save game
 Example call from Next.js:
 
 ```typescript
+
 import axios from 'axios';
 
 const startGame = async (playerName: string) => {
@@ -149,8 +159,10 @@ const startGame = async (playerName: string) => {
     player_backstory: 'Wanderer seeking truth'
   });
   return response.data; // { session_id, initial_state, ... }
+
 ```text
 ```
+
 
 
 ##
@@ -186,6 +198,7 @@ For understanding the game logic:
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 ```text
+```text
 ```
 
 
@@ -194,12 +207,15 @@ source "$NVM_DIR/nvm.sh"
 
 ```bash
 
+
 # Kill it
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 # Or use different port
+
 ```bash
 ```
+
 
 
 
@@ -209,6 +225,7 @@ Make sure the startup script sources nvm properly. Run manually:
 ```bash
 bash -c 'export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh" && nvm use 20.11.0 && cd velinor-web && npm run dev'
 ```
+
 
 
 ##

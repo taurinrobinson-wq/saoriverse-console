@@ -28,8 +28,10 @@ All scaffolding is complete. The full web stack is ready for local testing and d
 - ✅ All dependencies installed (axios, zustand, Tailwind CSS)
 
 ### Directory Structure
+
 ```text
 ```
+
 d:\saoriverse-console\
 ├── velinor_api.py                    ✅ FastAPI backend
 ├── frontend_lib_api.ts               ✅ (copied to velinor-web/lib/api.ts)
@@ -55,6 +57,7 @@ d:\saoriverse-console\
 │   ├── package.json                  ✅ Dependencies installed
 │   └── [other Next.js config files]
 └── RUN_VELINOR_WEB.md                ✅ Quick start guide
+
 ```
 
 
@@ -100,9 +103,12 @@ See `RUN_VELINOR_WEB.md` for detailed instructions.
 Terminal 1 (Backend):
 
 ```bash
+
 cd d:\saoriverse-console
+
 ```text
 ```
+
 
 
 
@@ -110,6 +116,7 @@ Terminal 2 (Frontend):
 
 ```bash
 cd d:\saoriverse-console\velinor-web
+```text
 ```text
 ```
 
@@ -122,10 +129,12 @@ Then open: `http://localhost:3000`
 Once tested locally and working:
 
 ```bash
+
 cd d:\saoriverse-console
 git add .
 git commit -m "Velinor web stack complete - ready for production"
 git push origin main
+
 ```
 
 

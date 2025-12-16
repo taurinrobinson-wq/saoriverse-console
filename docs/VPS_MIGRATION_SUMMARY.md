@@ -34,6 +34,7 @@ git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml \
         DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
 ```text
+```text
 ```
 
 
@@ -54,6 +55,7 @@ Or use **`VPS_QUICK_START.md`** for quick copy-paste commands.
 
 ```bash
 
+
 # Test HTTPS
 curl https://velinor.firstperson.chat
 
@@ -61,8 +63,10 @@ curl https://velinor.firstperson.chat
 https://velinor.firstperson.chat
 
 # Check API
+
 ```text
 ```
+
 
 
 
@@ -150,6 +154,7 @@ After this, every `git push origin main` auto-deploys to your VPS! 🚀
 │  (Namecheap DNS → DigitalOcean IP → Nginx → Services)      │
 └─────────────────────────────────────────────────────────────┘
 ```
+
 
 
 ##

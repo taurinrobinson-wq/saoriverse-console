@@ -11,6 +11,7 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 
 
+
 Your browser will automatically open to `http://localhost:8501`
 
 ### Step 2️⃣: Enable Poetry Enrichment in Sidebar

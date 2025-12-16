@@ -8,8 +8,10 @@
 ## 📁 File Structure
 
 ### Audio Components (Reorganized)
+
 ```text
 ```
+
 src/emotional_os/deploy/modules/ui_components/audio/
 ├── __init__.py                 # Audio module exports
 ├── audio_pipeline.py           # Speech-to-text (Whisper.cpp)
@@ -20,6 +22,7 @@ src/emotional_os/deploy/modules/ui_components/
 ├── chat_display.py             # MODIFIED - Now synthesizes audio
 ├── sidebar_ui.py               # MODIFIED - Added voice toggle
 └── session_manager.py          # MODIFIED - Initializes voice session
+
 ```
 
 
@@ -60,6 +63,7 @@ src/emotional_os/deploy/modules/ui_components/
 
 ### Audio Output Pipeline (Currently Working)
 ```text
+```text
 ```
 User sends message
   ↓
@@ -84,9 +88,12 @@ Message displayed with audio player
 
 
 
+
 ### Audio Input Pipeline (Ready but Requires Recording Component)
+
 ```text
 ```
+
 User clicks "🎙️ Start Recording"
   ↓
 Web Audio API captures microphone
@@ -100,6 +107,7 @@ process_audio_input()
   └─ Return transcribed text
   ↓
 Text treated as user message (same flow as text input)
+
 ```
 
 
@@ -111,6 +119,7 @@ These libraries enable audio features. Install only if you want voice:
 
 ```bash
 
+
 # For speech-to-text
 pip install faster-whisper librosa soundfile
 
@@ -118,8 +127,10 @@ pip install faster-whisper librosa soundfile
 pip install TTS
 
 # Optional: GPU acceleration
+
 ```text
 ```
+
 
 
 
@@ -158,6 +169,7 @@ audio_bytes = synthesize_response_audio(
 
 # Display playback widget
 ```text
+```text
 ```
 
 
@@ -174,6 +186,7 @@ audio_bytes = synthesize_response_audio(
 ### Why Lazy Initialization?
 
 ```python
+
 _audio_pipeline = None
 
 def get_audio_pipeline():
@@ -182,8 +195,10 @@ def get_audio_pipeline():
         # Only loads if actually used
         from .audio_pipeline import AudioPipeline
         _audio_pipeline = AudioPipeline()
+
 ```text
 ```
+
 
 
 - ✅ Avoids loading heavy models (Whisper ~140MB, TTS ~300MB) on startup
@@ -200,6 +215,7 @@ prosody_map = {
     "THAT_LANDS": {"energy": 0.9, "rate": 1.0},     # Present, clear
 }
 ```
+
 
 
 - Glyph metadata → audio characteristics

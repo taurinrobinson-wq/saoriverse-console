@@ -18,8 +18,10 @@ This guide explains how to integrate the privacy-first encoding pipeline into Fi
 ## Architecture
 
 ### 5-Stage Encoding Pipeline
+
 ```text
 ```
+
 Stage 1: INPUT CAPTURE
 ├─ User sends message (raw text received in memory)
 └─ NOT stored
@@ -47,6 +49,7 @@ Stage 5: STORAGE
 ├─ glyph_ids ([42, 183])
 ├─ message_length_bucket ("100-200_chars")
 └─ NO raw text, NO user_id, NO identifying info
+
 ```
 
 
@@ -92,11 +95,14 @@ Find all places where conversation data goes to the database:
 
 ```bash
 
+
 # Search for database writes
 grep -r "\.insert\(" emotional_os/
 grep -r "supabase\." emotional_os/
+
 ```text
 ```
+
 
 
 
@@ -120,6 +126,7 @@ db.table("conversations").insert({
     "system_response": response,  # ❌ Raw text!
     "signals": result["signals"],
 ```text
+```text
 ```
 
 
@@ -127,6 +134,7 @@ db.table("conversations").insert({
 **After Encoding (Correct - PRIVACY-FIRST):**
 
 ```python
+
 
 # Only encoded data goes to database
 from emotional_os.privacy.signal_parser_integration import encode_and_store_conversation
@@ -145,8 +153,10 @@ success, record_id, encoded_data = encode_and_store_conversation(
 
 if not success:
     logger.error(f"Failed to store encoded conversation: {record_id}")
+
 ```text
 ```
+
 
 
 
@@ -180,6 +190,7 @@ CREATE TABLE conversation_logs_anonymized (
 CREATE INDEX idx_user_id_hashed ON conversation_logs_anonymized(user_id_hashed);
 CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
 ```text
+```text
 ```
 
 
@@ -187,6 +198,7 @@ CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
 **Migrate existing data (if needed):**
 
 ```sql
+
 -- Archive old table
 ALTER TABLE conversations RENAME TO conversations_archived;
 
@@ -202,8 +214,10 @@ INSERT INTO data_migration_audit (rows_archived, note)
 VALUES (
     (SELECT COUNT(*) FROM conversations_archived),
     'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
+
 ```text
 ```
+
 
 
 
@@ -278,6 +292,7 @@ class TestDataEncoding(unittest.TestCase):
         self.assertIn("timestamp_week", result)
         timestamp_week = result["timestamp_week"]
 ```text
+```text
 ```
 
 
@@ -287,6 +302,7 @@ class TestDataEncoding(unittest.TestCase):
 **Monthly compliance check:**
 
 ```python
+
 from emotional_os.privacy.arx_integration import ARXAnonymityVerifier
 
 # Verify k-anonymity (k >= 5 means user not uniquely identifiable)
@@ -295,6 +311,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 ```text
 ```
+
 
 
 
@@ -311,6 +328,7 @@ verifier.run_monthly_compliance_check(db_connection)
 ❌ user_phone              "+1-555-0123"
 ❌ conversation_text       Full message
 ```text
+```text
 ```
 
 
@@ -318,14 +336,17 @@ verifier.run_monthly_compliance_check(db_connection)
 ### STORED (Encoded/Generalized)
 
 ```
+
 ✓ user_id_hashed           "a7f3e9c1a8b2d5f4..." (SHA-256)
 ✓ encoded_signals          ["SIG_CRISIS_001", "SIG_STRESS_001"]
 ✓ encoded_gates            ["GATE_GRIEF_004"]
 ✓ glyph_ids                [42, 183]
 ✓ message_length_bucket    "100-200_chars"
 ✓ timestamp_week           "2025-W02"
+
 ```text
 ```
+
 
 
 
@@ -336,6 +357,7 @@ verifier.run_monthly_compliance_check(db_connection)
 ```
 User Client ─────[TLS 1.3]────→ FirstPerson API ─────[TLS 1.3]────→ Supabase
 ```text
+```text
 ```
 
 
@@ -343,6 +365,7 @@ User Client ─────[TLS 1.3]────→ FirstPerson API ────
 ### At Rest (AES-256)
 
 ```
+
 Database: Supabase
 ├─ Transport: TLS 1.3 (enforced)
 ├─ Storage: AES-256 (Supabase native)
@@ -350,8 +373,10 @@ Database: Supabase
     └─ user_id_hashed: Already one-way hash
     └─ encoded_signals: Codes (no personal info)
     └─ encoded_gates: Codes (no personal info)
+
 ```text
 ```
+
 
 
 
@@ -378,6 +403,7 @@ def export_user_data(user_id: str):
         "retention_policy": "90 days",
         "note": "Data is anonymized; raw messages not stored"
 ```text
+```text
 ```
 
 
@@ -385,6 +411,7 @@ def export_user_data(user_id: str):
 ### User Data Deletion
 
 ```python
+
 @app.post("/user/data-delete")
 def delete_user_data(user_id: str):
     """Delete all data for a user."""
@@ -401,6 +428,7 @@ def delete_user_data(user_id: str):
 
 ```text
 ```
+
 
 
 
@@ -428,6 +456,7 @@ All data access is logged:
   records_accessed: 100
   user_id_hashed: requested (allowed for role)
   ip_address: 192.168.1.100
+```text
 ```text
 ```
 
@@ -488,6 +517,7 @@ Run full test suite:
 
 ```bash
 
+
 # Test encoding pipeline
 python -m pytest emotional_os/privacy/test_data_encoding.py -v
 
@@ -501,8 +531,10 @@ python -m pytest emotional_os/tests/test_privacy_integration.py -v
 python emotional_os/privacy/verify_compliance.py
 
 # Monthly compliance check
+
 ```text
 ```
+
 
 
 
@@ -523,6 +555,7 @@ python emotional_os/privacy/verify_compliance.py
 User Message → parse_input() → Response
                      ↓
 ```text
+```text
 ```
 
 
@@ -530,6 +563,7 @@ User Message → parse_input() → Response
 **After Integration:**
 
 ```
+
 User Message → parse_input() → Response
                      ↓
         encode_and_store_conversation()
@@ -538,6 +572,7 @@ User Message → parse_input() → Response
                      ↓
    Only anonymized data → Supabase ✓
    Raw text discarded (never stored)
+
 ```
 
 

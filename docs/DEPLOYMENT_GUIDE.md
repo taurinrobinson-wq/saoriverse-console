@@ -20,18 +20,23 @@
 
 ### Procfile (Updated)
 **Before:**
+
 ```text
 ```
+
 web: python core/start.py
+
 ```
 
 
 
 **After:**
 ```text
+```text
 ```
 web: streamlit run app.py
 ```
+
 
 
 
@@ -56,6 +61,7 @@ streamlit run app.py
 # Should launch at http://localhost:8501
 
 ```text
+```text
 ```
 
 
@@ -63,10 +69,12 @@ streamlit run app.py
 ### Step 2: Verify Procfile
 
 ```bash
+
 cat Procfile
 
 ```text
 ```
+
 
 
 
@@ -80,6 +88,7 @@ git commit -m "deployment: Update Procfile for reorganized structure
 - Use standard streamlit run command
 - Ready for Railway deployment"
 
+```text
 ```text
 ```
 
@@ -104,9 +113,12 @@ git commit -m "deployment: Update Procfile for reorganized structure
 
 ```bash
 
+
 # If you have railway CLI installed
+
 ```text
 ```
+
 
 
 
@@ -151,6 +163,7 @@ If something goes wrong:
 git revert HEAD
 git push origin refactor/reorganization-master
 
+```text
 ```text
 ```
 
@@ -208,9 +221,11 @@ The `.streamlit/config.toml` already has correct settings:
 ### Before Deployment (Local)
 
 ```bash
+
 streamlit run app.py
 
 # Should work fine
+
 ```
 
 

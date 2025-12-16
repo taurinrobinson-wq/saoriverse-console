@@ -28,6 +28,7 @@ python scripts/utilities/integrate_glyph_lexicons.py \
 
 
 
+
 ## What This Pipeline Does
 
 | Phase | Script | What It Does | Time |
@@ -84,6 +85,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 
 
 
+
 ### Generated Outputs
 
 ```
@@ -94,6 +96,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 └── learning/user_overrides/
     └── gutenberg_bulk_lexicon.json            (processed lexicon)
 ```
+
 
 
 
@@ -109,11 +112,13 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 
 
 
+
 ### Just Download Poetry
 
 ```bash
 python scripts/utilities/gutenberg_fetcher.py
 ```
+
 
 
 
@@ -125,11 +130,13 @@ python scripts/utilities/bulk_text_processor.py --dir /path/to/poetry/ --chunk-s
 
 
 
+
 ### Generate Glyphs Only (if processing already done)
 
 ```bash
 python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overrides/gutenberg_bulk_lexicon.json
 ```
+
 
 
 
@@ -143,6 +150,7 @@ tail -f learning/hybrid_learning_log.jsonl
 # View results
 cat bulk_processing_results.json | jq '.'
 ```
+
 
 
 
@@ -164,6 +172,7 @@ After full pipeline execution:
   "status": "✓ COMPLETE"
 }
 ```
+
 
 
 
@@ -199,6 +208,7 @@ cat generated_glyphs_from_poetry.json | jq '.[] | {name, symbol, core_emotions, 
 
 
 
+
 ### Add to Saoriverse
 
 ```python
@@ -221,6 +231,7 @@ lexicon.save()
 
 
 
+
 ### Create Custom Poetry Collections
 Edit `scripts/utilities/gutenberg_fetcher.py` and add poets to `POETRY_BOOKS`:
 
@@ -230,6 +241,7 @@ POETRY_BOOKS = {
     'your_poet_name': PROJECT_GUTENBERG_ID  # e.g., 12345
 }
 ```
+
 
 
 

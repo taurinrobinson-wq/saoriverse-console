@@ -25,8 +25,10 @@
   - Newlines instead of flowing thoughts
 
 **Example:**
+
 ```text
 ```
+
 ❌ CURRENT (too dense):
 "That lands—you're naming something real there—the kind of tension that lives in the body when
 something's asked of you that you didn't consent to"
@@ -36,6 +38,7 @@ something's asked of you that you didn't consent to"
 
 You're naming something real there. The kind of tension that lives in the body when
 something's asked of you that you didn't consent to."
+
 ```
 
 
@@ -65,6 +68,7 @@ something's asked of you that you didn't consent to."
 
 **How to Use in Glyphs:**
 ```text
+```text
 ```
 GLYPH: HOLD
 "I'm holding this with you."
@@ -81,6 +85,7 @@ GLYPH: SACRED
 "Honor what's sacred here."
 "This moment is sacred."
 ```
+
 
 
 ##
@@ -219,8 +224,10 @@ Add to Glyph lexicon:
 - BREATHE, TENDER, FIERCE, TRUE, REAL (context-dependent)
 
 ### 3. **Create Short-Form Affirmation Glyphs**
+
 ```text
 ```
+
 GLYPH: THAT_LANDS
 "That lands."
 
@@ -232,6 +239,7 @@ GLYPH: I_HEAR_YOU
 
 GLYPH: PRECISE
 "You're precise."
+
 ```
 
 
@@ -239,6 +247,7 @@ GLYPH: PRECISE
 These are powerful in their simplicity.
 
 ### 4. **Build Transition Glyphs**
+```text
 ```text
 ```
 GLYPH: AND_YET
@@ -256,9 +265,12 @@ GLYPH: SO_WHAT
 
 
 
+
 ### 5. **Permission-Giving Openers**
+
 ```text
 ```
+
 GLYPH: NO_PRESSURE
 "You don't have to."
 
@@ -267,6 +279,7 @@ GLYPH: IT_CAN_BE
 
 GLYPH: OF_COURSE
 "Of course you do."
+
 ```
 
 
@@ -314,6 +327,7 @@ After implementation, measure:
 
 ### BEFORE (Current Style):
 ```text
+```text
 ```
 "That's such a tender contradiction, isn't it—the way connection can be
 genuine and exploitative at once—and I think what you're naming is that
@@ -324,9 +338,12 @@ beautiful was also something that cost you."
 
 
 
+
 ### AFTER (Improved Style):
+
 ```text
 ```
+
 That's a tender contradiction.
 
 Connection can be genuine and exploitative at once. You're naming
@@ -334,6 +351,7 @@ something real there.
 
 The enjoyment didn't make it okay to skip boundaries. And that's
 maybe where the grief lives—something beautiful also cost you.
+
 ```
 
 

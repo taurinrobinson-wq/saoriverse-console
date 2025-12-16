@@ -15,19 +15,23 @@
 ## 📊 Current Storage Configuration
 
 ### External Drive Location
+
 ```text
 ```
+
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (6.5 MB - 8 poetry collections)
 ├── gutenberg_learning.log         (4.8 MB - processing log, 59,796 lines)
 └── gutenberg_processing_results.json (1.1 KB - statistics)
 
 Total: 8.0 MB used | 458 GB available
+
 ```
 
 
 
 ### Hard Drive Location (Code Only)
+```text
 ```text
 ```
 /Users/taurinrobinson/saoriverse-console/
@@ -38,6 +42,7 @@ Total: 8.0 MB used | 458 GB available
 
 Total: ~8 KB used
 ```
+
 
 
 ##
@@ -109,6 +114,7 @@ From processing 8 collections:
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -116,8 +122,10 @@ From processing 8 collections:
 ### View Processing Results
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -126,6 +134,7 @@ From processing 8 collections:
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+```text
 ```
 
 
@@ -133,15 +142,19 @@ cd /Users/taurinrobinson/saoriverse-console
 ### Run More Processing (Option 2 - Direct Python)
 
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
+
 ```text
 ```
+
 
 
 
 ### Check External Drive Space
 
 ```bash
+```text
 ```text
 ```
 
@@ -151,6 +164,7 @@ cd /Users/taurinrobinson/saoriverse-console
 ## 📈 Processing Pipeline
 
 ```
+
 Project Gutenberg API
          ↓
    gutenberg_fetcher.py (downloads poetry)
@@ -168,8 +182,10 @@ Project Gutenberg API
    Results saved to external drive
    ├─ gutenberg_processing_results.json
    ├─ gutenberg_learning.log
+
 ```text
 ```
+
 
 
 ##
@@ -186,6 +202,7 @@ Signals Extracted: ~8,000-10,000
 Lexicon Entries Added: ~2,000-5,000
 Processing Log Size: 4.8 MB (59,796 lines)
 Quality Score Average: 0.75-0.85 (good)
+```text
 ```text
 ```
 
@@ -257,10 +274,13 @@ Quality Score Average: 0.75-0.85 (good)
 Edit `gutenberg_fetcher.py` (lines 35-70) to add URLs:
 
 ```python
+
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
 "milton_paradise_lost": "https://www.gutenberg.org/ebooks/26",
+
 ```text
 ```
+
 
 
 
@@ -275,6 +295,7 @@ from bulk_text_processor import BulkTextProcessor
 processor = BulkTextProcessor('your_file.txt')
 results = processor.process()
 ```text
+```text
 ```
 
 
@@ -284,8 +305,10 @@ results = processor.process()
 Watch the log while processing runs:
 
 ```bash
+
 ```text
 ```
+
 
 
 ##
@@ -311,6 +334,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 
 # Keep the processing results and lexicon updates
 
+```text
 ```text
 ```
 
@@ -345,8 +369,10 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 **Solution**: Use quotes around paths with spaces
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -363,6 +389,7 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 
 ```bash
 ```text
+```text
 ```
 
 
@@ -372,9 +399,11 @@ rm -rf "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
 **Solution**: Check available space
 
 ```bash
+
 df -h "/Volumes/My Passport for Mac"
 
 # Should show 458 GB available
+
 ```
 
 

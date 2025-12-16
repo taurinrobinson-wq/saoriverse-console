@@ -40,6 +40,7 @@ streamlit run main_v2.py
 
 
 
+
 ## 💡 Development Guidelines
 
 1. **Entry Point**: Always use `main_v2.py` as the application entry point
@@ -69,6 +70,7 @@ pytest -q
 
 
 
+
 The tests added here exercise escalation logic and ensure `record_audit` writes a minimal log entry. When you provide the canonical `emotional_taxonomy.json` we can update the taxonomy and expand tests to match the editorial schema.
 
 ## CI badge
@@ -78,6 +80,7 @@ Fast preprocessor test feedback is available via GitHub Actions. Add the followi
 ```
 ![Preprocessor tests](https://github.com/taurinrobinson-wq/saoriverse-console/actions/workflows/preprocessor-tests.yml/badge.svg)
 ```
+
 
 
 

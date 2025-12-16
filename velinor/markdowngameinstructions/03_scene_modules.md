@@ -12,14 +12,17 @@ A standardized structure for building **modular NPC encounter scenes** with:
 ## Template Structure
 
 ### Scene Metadata
+
 ```text
 ```
+
 Scene ID:             Unique identifier (e.g., market_intro_velinor_01)
 Background Image:     Path to background asset
 Foreground Image:     Path to NPC/character asset
 Ambient Sound:        Optional audio layer
 Glyph Triggers:       Glyphs activated during scene
 NPC Name:             Primary character in scene
+
 ```
 
 
@@ -29,6 +32,7 @@ NPC Name:             Primary character in scene
 **Purpose**: Establish atmosphere and introduce the NPC from a distance
 
 ```markdown
+
 
 ## Scene 1: Distant Presence
 
@@ -45,8 +49,10 @@ NPC Name:             Primary character in scene
 [Wind, music, marketplace sounds, chimes, etc.]
 
 **Glyph Glow**:
+
 ```text
 ```
+
 
 
 
@@ -80,6 +86,7 @@ NPC Name:             Primary character in scene
 
 **Glyph Glow**:
 ```text
+```text
 ```
 
 
@@ -97,6 +104,7 @@ NPC Name:             Primary character in scene
 
 ```markdown
 
+
 ## Player Options
 
 **Option A: [Dialogue Choice 1]**
@@ -112,8 +120,10 @@ NPC Name:             Primary character in scene
 **Option C: [Dialogue Choice 3 — Silence/Observation]**
 - Glyph Trigger: [Aelitḧ] (stillness, witness)
 - NPC Response: [NPC reacts to player's silence]
+
 ```text
 ```
+
 
 
 
@@ -136,6 +146,7 @@ Foreground Image:     velinor_priestess_distant.png (Scene 1)
 Ambient Sound:        wind_through_ruins.mp3 + faint_chimes.mp3
 Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈], [Aelitḧ]
 ```text
+```text
 ```
 
 
@@ -143,6 +154,7 @@ Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈
 ### Scene 1: Distant Presence
 
 ```
+
 
 ## Scene 1: Distant Presence
 
@@ -160,6 +172,7 @@ She appears to be some kind of priestess… or something older.
 
 ```text
 ```
+
 
 
 
@@ -185,6 +198,7 @@ Before you have a chance to speak, she does.
 "I am Velinor. And you are not lost — only unremembered."
 
 ```text
+```text
 ```
 
 
@@ -192,6 +206,7 @@ Before you have a chance to speak, she does.
 ### Player Options
 
 ```
+
 **Option A**: "Who are you really?"
 - Glyph: [Querrä] (inquiry) glows
 - Velinor Response: "A question for another day. First, you must listen."
@@ -205,8 +220,10 @@ Before you have a chance to speak, she does.
 **Option C**: [Remain silent]
 - Glyph: [Aelitḧ] (stillness) glows
 - Velinor Response: "Good. You know when to listen. That is rare."
+
 ```text
 ```
+
 
 
 ##
@@ -245,6 +262,7 @@ if st.button("Continue"):
         trigger_glyph([Querrä])
         st.write("Velinor Response: 'A question for another day...'")
 ```
+
 
 
 ##

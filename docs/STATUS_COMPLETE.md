@@ -17,9 +17,12 @@ You asked me to "actually create this glyph-informed chat system that incorporat
 ## 🏗️ What Was Actually Built
 
 ### 1. **Non-Blocking FastAPI Backend**
+
 ```text
 ```
+
 User Request → Immediate Response (<100ms) → Async Background Processing
+
 ```
 
 
@@ -29,12 +32,14 @@ User Request → Immediate Response (<100ms) → Async Background Processing
 
 ### 2. **3-Tier Response Pipeline** (~85-90ms)
 ```text
+```text
 ```
 Input → Tier1 Foundation (~40ms)
       → Tier2 Aliveness (~20ms)
       → Tier3 Poetic (~30ms)
       → Response ✓
 ```
+
 
 
 
@@ -99,6 +104,7 @@ Key modules:
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```text
+```text
 ```
 
 
@@ -106,8 +112,10 @@ python -m spacy download en_core_web_sm
 ### 2. Validate Installation
 
 ```bash
+
 ```text
 ```
+
 
 
 
@@ -117,6 +125,7 @@ python -m spacy download en_core_web_sm
 python firstperson_backend.py
 
 ```text
+```text
 ```
 
 
@@ -124,10 +133,12 @@ python firstperson_backend.py
 ### 4. Test It
 
 ```bash
+
 python diagnose_backend.py
 
 ```text
 ```
+
 
 
 
@@ -146,6 +157,7 @@ curl -X POST http://localhost:8000/chat \
     }
   }'
 
+```text
 ```text
 ```
 
@@ -211,14 +223,17 @@ curl -X POST http://localhost:8000/chat \
 
 ```python
 
+
 # BEFORE (blocking, caused hang)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
 return ChatResponse(...)
 
 # AFTER (non-blocking)
 return ChatResponse(...)
+
 ```text
 ```
+
 
 
 
@@ -355,6 +370,7 @@ curl -X POST http://localhost:8000/chat \
     "context": {"conversation_id": "test", "is_first_message": true, "messages": []}
   }'
 ```
+
 
 
 
