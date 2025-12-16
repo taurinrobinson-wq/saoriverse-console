@@ -169,15 +169,13 @@ Some integration tests require local database setup:
 
 ### Missing Modules
 
-Tests are designed with graceful fallbacks for optional dependencies (poetry, spaCy, etc.)
-If you see warnings, it's expected and tests will skip that functionality.
+Tests are designed with graceful fallbacks for optional dependencies (poetry, spaCy, etc.) If you
+see warnings, it's expected and tests will skip that functionality.
 
 ## Adding New Tests
 
-1. Create test file in appropriate subdirectory
-2. Follow naming convention: `test_*.py`
-3. Add test functions starting with `test_`
-4. Import from project root (conftest.py handles path)
+1. Create test file in appropriate subdirectory 2. Follow naming convention: `test_*.py` 3. Add test
+functions starting with `test_` 4. Import from project root (conftest.py handles path)
 
 Example:
 

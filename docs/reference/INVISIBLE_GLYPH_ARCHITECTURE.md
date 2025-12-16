@@ -17,12 +17,9 @@ The glyph system should work **invisibly**—informing quality without appearing
 ```text
 ```
 
-User: "I have math anxiety"
-     ↓
-Glyph Selected: Still Containment
-     ↓
-Response: "There's something in what you're describing—boundaries that hold without pressure.
-a sanctuary of quiet care. You're not alone—many brilliant people..."
+User: "I have math anxiety" ↓ Glyph Selected: Still Containment ↓ Response: "There's something in
+what you're describing—boundaries that hold without pressure. a sanctuary of quiet care. You're not
+alone—many brilliant people..."
 
 ❌ Problem: User feels categorized, system feels mechanical
 
@@ -35,23 +32,18 @@ a sanctuary of quiet care. You're not alone—many brilliant people..."
 ```text
 ```
 
-User: "I have math anxiety"
-     ↓
-Glyph Selected: Still Containment [INVISIBLE TO USER]
-     ↓
-Glyph Informs (behind the scenes):
+User: "I have math anxiety" ↓ Glyph Selected: Still Containment [INVISIBLE TO USER] ↓ Glyph Informs
+(behind the scenes):
 
 - Tone: Calm, containing
 - Intensity: Gate 2 = gentle approach
 - Poetry: Joy-category poems for stability
 - Entity weighting: People mentioned get appropriate focus
-     ↓
-Response: "You're not alone—many brilliant people have genuine friction with math,
-especially when it's presented in a way that doesn't match how their mind naturally works..."
+↓ Response: "You're not alone—many brilliant people have genuine friction with math, especially when
+it's presented in a way that doesn't match how their mind naturally works..."
 
-✓ User feels heard about their actual situation
-✓ Glyph system works invisibly in background
-✓ Response is compositionally fresh but coherent
+✓ User feels heard about their actual situation ✓ Glyph system works invisibly in background ✓
+Response is compositionally fresh but coherent
 
 ```
 
@@ -99,19 +91,17 @@ User never sees "Gate 2". They just experience:
 ```python
 
 # EXTRACT glyph data invisibly
-intensity_level = len(gates)  # Used for tone, never shown to user
-poetry_emotion = _glyph_to_emotion_category(glyph_name)  # Used for poetry selection
+intensity_level = len(gates)  # Used for tone, never shown to user poetry_emotion =
+_glyph_to_emotion_category(glyph_name)  # Used for poetry selection
 
 # RESPOND TO PERSON, NOT GLYPH
 if "math" in input.lower():
     # Respond to THEIR struggle, not glyph category
-    parts.append("You're not alone—many brilliant people have genuine friction with math...")
+parts.append("You're not alone—many brilliant people have genuine friction with math...")
 
 # APPLY glyph calibration invisibly
-if intensity_level <= 2:
-    closing = "permission_based"  # Gentle
-else:
-    closing = "question_based"  # More engaging
+if intensity_level <= 2: closing = "permission_based"  # Gentle else: closing = "question_based"  #
+More engaging
 
 # OUTPUT feels personal, not categorical
 ```text
@@ -126,13 +116,11 @@ else:
 
 
 # Direct response to message features (math_frustration, inherited_pattern, etc.)
-if message_content.get("math_frustration"):
-    parts.append("You're not alone—many brilliant people have genuine friction...")
+if message_content.get("math_frustration"): parts.append("You're not alone—many brilliant people
+have genuine friction...")
 
 # High intensity = more support language
-if intensity >= 8:
-    parts.append("I'm here to work through this with you.")
-else:
+if intensity >= 8: parts.append("I'm here to work through this with you.") else:
 
 ```text
 ```
@@ -172,10 +160,8 @@ That's not fixed—it's just a mismatch to navigate.
 ```text
 ```
 
-✓ Addresses **their specific struggle** (math, mental blocks)
-✓ Validates **their experience** (not alone, it's real)
-✓ Offers **reframe** (mismatch, not failure)
-✓ Zero glyph terminology visible
+✓ Addresses **their specific struggle** (math, mental blocks) ✓ Validates **their experience** (not
+alone, it's real) ✓ Offers **reframe** (mismatch, not failure) ✓ Zero glyph terminology visible
 
 ### Message 3: Feedback + Relationship
 
@@ -225,14 +211,11 @@ I appreciate you saying that. I want to make sure I'm actually hearing you,
 ### User's Perspective
 
 ```
-Day 1: "I have anxiety about math"
-  → Response feels understanding, not categorical ✓
+Day 1: "I have anxiety about math" → Response feels understanding, not categorical ✓
 
-Day 2: "It's from my mom"
-  → Response acknowledges the pattern origin ✓
+Day 2: "It's from my mom" → Response acknowledges the pattern origin ✓
 
-Day 3: "That's not what I meant about Michelle"
-  → Response shows they're actually listening ✓
+Day 3: "That's not what I meant about Michelle" → Response shows they're actually listening ✓
 
 ```text
 ```text
@@ -242,9 +225,9 @@ Day 3: "That's not what I meant about Michelle"
 
 ```
 
-Day 1: Glyph=Still Containment, Gates=[Gate 2] → tone: gentle, closing: permission
-Day 2: Glyph=None, fallback → generic validation
-Day 3: Glyph=Still Containment, feedback=misalignment → tone: corrective, closing: commitment
+Day 1: Glyph=Still Containment, Gates=[Gate 2] → tone: gentle, closing: permission Day 2:
+Glyph=None, fallback → generic validation Day 3: Glyph=Still Containment, feedback=misalignment →
+tone: corrective, closing: commitment
 
 Overall: Glyph system provided coherence without being visible
 

@@ -54,11 +54,9 @@ Modify the game initialization section to import and connect FirstPerson:
 from src.emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
 # Then when creating orchestrator:
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path=str(story_path),
-    first_person_module=FirstPersonOrchestrator("game_npc", "velinor_session"),  # ← Add this
-    npc_system=npc_system
+orchestrator = VelinorTwineOrchestrator( game_engine=engine, story_path=str(story_path),
+first_person_module=FirstPersonOrchestrator("game_npc", "velinor_session"),  # ← Add this
+npc_system=npc_system
 ```text
 ```text
 ```
@@ -71,27 +69,21 @@ For Streamlit Cloud deployment, add to `.streamlit/secrets.toml`:
 
 
 # .streamlit/secrets.toml
-[firstperson]
-module_path = "src.emotional_os.deploy.core.firstperson"
-session_name = "velinor_game"
+[firstperson] module_path = "src.emotional_os.deploy.core.firstperson" session_name = "velinor_game"
 enable_affect_analysis = true
 
-[glyph]
-database_url = "your_supabase_or_db_url"
-enable_persistence = true
-glyph_collection_enabled = true
+[glyph] database_url = "your_supabase_or_db_url" enable_persistence = true glyph_collection_enabled
+= true
 
-[deployment]
-environment = "production"  # or "development"
+[deployment] environment = "production"  # or "development"
 
 ```text
 ```
 
 #### Step 3: Session Secrets (for Streamlit Cloud)
 
-1. Go to your app's Settings on Streamlit Cloud
-2. Click "Secrets"
-3. Add the same TOML content above
+1. Go to your app's Settings on Streamlit Cloud 2. Click "Secrets" 3. Add the same TOML content
+above
 
 ### For Local Development (No Secrets Needed)
 
@@ -213,14 +205,10 @@ Add to `.streamlit/secrets.toml`:
 
 
 # Glyph persistence
-[glyph]
-supabase_url = "https://your-project.supabase.co"
-supabase_key = "your-anon-key"
+[glyph] supabase_url = "https://your-project.supabase.co" supabase_key = "your-anon-key"
 
 # FirstPerson if needed
-[firstperson]
-api_key = "your-api-key"
-session_scope = "velinor_game"
+[firstperson] api_key = "your-api-key" session_scope = "velinor_game"
 
 # Optional: Analytics
 [analytics]
@@ -322,9 +310,7 @@ rm -rf ~/.streamlit
 pip list | grep -E "streamlit|pillow"
 
 # Check game files
-ls -la velinor/engine/
-ls -la velinor/backgrounds/
-ls -la velinor/npcs/
+ls -la velinor/engine/ ls -la velinor/backgrounds/ ls -la velinor/npcs/
 
 # Test game imports
 ```text
@@ -371,9 +357,7 @@ When ready to integrate your emotional resonance system:
 
 ```bash
 
-cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
-bash setup.sh
-bash run.sh
+cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console bash setup.sh bash run.sh
 
 ```
 

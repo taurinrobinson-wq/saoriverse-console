@@ -1,7 +1,7 @@
 # FirstPerson deployment notes — Nginx + Streamlit
 
-This document describes a simple deployment pattern that keeps the public static site
-at the root of `firstperson.chat` while proxying the Streamlit application to `/app/`.
+This document describes a simple deployment pattern that keeps the public static site at the root of
+`firstperson.chat` while proxying the Streamlit application to `/app/`.
 
 Files added in this repo:
 
@@ -34,7 +34,7 @@ Goals:
      ```
 
    - Deploy Streamlit on the host and bind to localhost (127.0.0.1) so it is only reachable via the proxy.
-     Example systemd unit should set `WorkingDirectory` to the repo and run `streamlit run main_v2.py`.
+Example systemd unit should set `WorkingDirectory` to the repo and run `streamlit run main_v2.py`.
 
 3) Enable Basic Auth for `/app/` (optional but recommended)
 
@@ -47,7 +47,7 @@ Goals:
      ```
 
    - The `deploy/nginx.conf` template references `/etc/nginx/.htpasswd`. You can disable `auth_basic`
-     lines if you prefer another auth mechanism (OAuth, Cloudflare Access, etc.).
+lines if you prefer another auth mechanism (OAuth, Cloudflare Access, etc.).
 
 4) Install the Nginx config
 
@@ -63,7 +63,8 @@ Goals:
 
    - Point your domain `firstperson.chat` (and optionally `www.firstperson.chat`) to the server IP.
    - If you use a static site host (Netlify/Cloudflare Pages/GitHub Pages), point the root to that host
-     and configure your proxy to use the same domain for the `/app/` path (see hosting docs for rewrites).
+and configure your proxy to use the same domain for the `/app/` path (see hosting docs for
+rewrites).
 
 6) Switching Streamlit off the root domain
 
@@ -72,16 +73,17 @@ Goals:
 
 7) Troubleshooting the logo / SVG assets
 
-   Problem: logo SVG or image not appearing when Streamlit is served under `/app/`.
+Problem: logo SVG or image not appearing when Streamlit is served under `/app/`.
 
-   Cause: image `src` paths may be relative (e.g., `static/graphics/logo.svg`) which become `/app/static/...` when
-   the page is under `/app/`. If your static files are served at root (`/static/...`), the missing leading slash
-   causes 404s.
+Cause: image `src` paths may be relative (e.g., `static/graphics/logo.svg`) which become
+`/app/static/...` when the page is under `/app/`. If your static files are served at root
+(`/static/...`), the missing leading slash causes 404s.
 
-   Fixes:
+Fixes:
 
 - Use absolute paths for static assets in Streamlit templates, e.g. `/static/graphics/FirstPerson-Logo-normalized.svg`.
-     We updated the app to reference `/static/...` so the browser fetches assets from the public root instead of `/app`.
+We updated the app to reference `/static/...` so the browser fetches assets from the public root
+instead of `/app`.
 - Ensure Nginx `location /static/` serves the `static/` folder and has correct MIME types (Nginx does this by default).
 - If SVGs are still served with incorrect content-type, add in the nginx conf inside `http {}`:
 
@@ -98,7 +100,8 @@ Goals:
 
 ## Railway-specific notes
 
-   If you deploy on Railway, the repo includes a `railway.json` and a small helper `emotional_os/deploy/railway_start.sh`.
+If you deploy on Railway, the repo includes a `railway.json` and a small helper
+`emotional_os/deploy/railway_start.sh`.
 
    - By default the Railway start command will run the `railway_start.sh` script which sets `SERVE_STATIC_CHAT=1` and starts Uvicorn.
    - Make sure to set the following Railway environment variables in the Railway project settings (Settings → Variables):
@@ -109,7 +112,7 @@ Goals:
 
    - The Railway container will serve the static site at `/` (templates/index.html) and `/app` will return `templates/chat.html` as long as `SERVE_STATIC_CHAT=1` is set. This makes Railway act as the public host for the static site. If you prefer to host static files separately (Netlify/Vercel), set `SERVE_STATIC_CHAT=0` and instead publish static assets to your static host, while using Railway for dev/admin APIs.
 
-   Security reminder:
+Security reminder:
    - If you keep Streamlit or admin endpoints on Railway, secure them (OAuth, basic auth, or restrict by IP). The static site should use Supabase Auth and Edge Functions for any server-side operations.
 
 ## Security notes

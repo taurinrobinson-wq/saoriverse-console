@@ -2,7 +2,9 @@
 
 ## Overview
 
-The player is a survivor with **partial memory** — grounded enough to function but incomplete enough to seek restoration through glyphs. Their arrival at the city is driven by personal loss, not curiosity.
+The player is a survivor with **partial memory** — grounded enough to function but incomplete enough
+to seek restoration through glyphs. Their arrival at the city is driven by personal loss, not
+curiosity.
 
 ##
 
@@ -67,16 +69,17 @@ The player is a survivor with **partial memory** — grounded enough to function
 
 ### Player Motivation Arc
 
-1. **Arrival**: Desperate, grieving, searching for meaning
-2. **Early Encounters**: Testing NPCs, learning the city's rules, earning trust
-3. **Glyph Discovery**: Realizing that memory recovery isn't abstract — it's personal
-4. **Mid-Game Shift**: From "I'm lost" to "I'm recovering"
-5. **End Game**: Finding that their grief and recovery interconnect with others' stories
+1. **Arrival**: Desperate, grieving, searching for meaning 2. **Early Encounters**: Testing NPCs,
+learning the city's rules, earning trust 3. **Glyph Discovery**: Realizing that memory recovery
+isn't abstract — it's personal 4. **Mid-Game Shift**: From "I'm lost" to "I'm recovering" 5. **End
+Game**: Finding that their grief and recovery interconnect with others' stories
 
 ##
 
 ## Design Philosophy
 
-The player is not a **chosen one**. They are a **wounded survivor learning to listen**. Their authority comes from willingness to be vulnerable, not from special knowledge or power.
+The player is not a **chosen one**. They are a **wounded survivor learning to listen**. Their
+authority comes from willingness to be vulnerable, not from special knowledge or power.
 
-This makes the empathy mechanic authentic — the player's resonance with NPCs isn't roleplay, it's recognition of shared trauma.
+This makes the empathy mechanic authentic — the player's resonance with NPCs isn't roleplay, it's
+recognition of shared trauma.

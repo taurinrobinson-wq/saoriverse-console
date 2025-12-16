@@ -24,6 +24,9 @@ Behavior notes:
   - return `None` from factory functions so local-only fallbacks continue to work.
 - In edge functions (serverless/TypeScript), guarded functions will return a 403 response when remote AI is disabled.
 
-This pattern ensures that hybrid/OpenAI code remains present for opt-in usage, but cannot accidentally run (and incur cost or leak data) in default local development environments.
+This pattern ensures that hybrid/OpenAI code remains present for opt-in usage, but cannot
+accidentally run (and incur cost or leak data) in default local development environments.
 
-If you need to enable remote AI temporarily for testing, set `ALLOW_REMOTE_AI=1` in your environment. For production deployments, prefer setting `PROCESSING_MODE=hybrid` and ensure the appropriate secrets (e.g., `OPENAI_API_KEY`, `SUPABASE_*`) are set in your deployment environment.
+If you need to enable remote AI temporarily for testing, set `ALLOW_REMOTE_AI=1` in your
+environment. For production deployments, prefer setting `PROCESSING_MODE=hybrid` and ensure the
+appropriate secrets (e.g., `OPENAI_API_KEY`, `SUPABASE_*`) are set in your deployment environment.

@@ -7,7 +7,9 @@
 
 ## Overview
 
-SaoriVerse Console is a modular emotional AI system built with clean separation of concerns. The reorganization (Phases 1-8) established a flat, discoverable structure that enables rapid development and testing.
+SaoriVerse Console is a modular emotional AI system built with clean separation of concerns. The
+reorganization (Phases 1-8) established a flat, discoverable structure that enables rapid
+development and testing.
 
 ##
 
@@ -96,22 +98,14 @@ saoriverse-console/
 ```text
 ```
 
-user_input (text)
-    ↓
-symbolic_tagger.py          Tag input (symbolic tags)
-    ↓
-signal_parser.py            Extract emotional signals
-    ↓
-response_generator.py       Main orchestrator
+user_input (text) ↓ symbolic_tagger.py          Tag input (symbolic tags) ↓ signal_parser.py
+Extract emotional signals ↓ response_generator.py       Main orchestrator
     ├─→ phase_modulator.py          Detect phase
     ├─→ tone_adapters.py            Generate tone-adapted response
     ├─→ response_selector.py        Select response type
     ├─→ response_adapter.py         Adapt to user-facing language
     └─→ enhanced_response_composer.py  Compose multi-glyph response
-    ↓
-relational_memory.py        Store memory capsule
-    ↓
-response (text) → Streamlit UI
+↓ relational_memory.py        Store memory capsule ↓ response (text) → Streamlit UI
 
 ```
 
@@ -255,10 +249,7 @@ from src.signal_parser import parse_input
 
 ```bash
 
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-streamlit run app.py
+python3 -m venv venv source venv/bin/activate pip install -r requirements.txt streamlit run app.py
 
 ```
 

@@ -35,8 +35,7 @@
 │  Storage: archetype_library.json                                    │
 │                                                                       │
 └─────────────────────────────────────────────────────────────────────┘
-                                   ↕
-┌─────────────────────────────────────────────────────────────────────┐
+↕ ┌─────────────────────────────────────────────────────────────────────┐
 │                    LAYER 2: RESPONSE GENERATOR                       │
 │              archetype_response_generator.py (280 lines)            │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -76,8 +75,7 @@
 │  Output: Fresh, unique response that honors archetype principles   │
 │                                                                       │
 └─────────────────────────────────────────────────────────────────────┘
-                                   ↕
-┌─────────────────────────────────────────────────────────────────────┐
+↕ ┌─────────────────────────────────────────────────────────────────────┐
 │                  LAYER 3: CONVERSATION LEARNER                       │
 │                 conversation_learner.py (322 lines)                 │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -115,18 +113,15 @@
 ```text
 ```
 
-USER INPUT
-    ↓
-┌─────────────────────────────────────────┐
+USER INPUT ↓ ┌─────────────────────────────────────────┐
 │  ArchetypeResponseGenerator (Layer 2)   │
 └─────────────────────────────────────────┘
-    ↓
+↓
     ├─→ Query ArchetypeLibrary (Layer 1)
     │   ├─ Analyze user_input against all archetypes
     │   ├─ Score each: (cue_match_rate * 0.7) + (success_weight * 0.3)
     │   └─ Return: Best-matching archetype or None
-    ↓
-APPLY ARCHETYPE PRINCIPLES
+↓ APPLY ARCHETYPE PRINCIPLES
     ├─ PHASE 1: Opening
     │  ├─ Detect emotional pattern type
     │  ├─ Generate validating opening
@@ -141,18 +136,15 @@ APPLY ARCHETYPE PRINCIPLES
        ├─ Generate reflection question
        ├─ Follow tone guidelines
        └─ Example: "What would feel meaningful to you?"
-    ↓
-ASSEMBLE RESPONSE
+↓ ASSEMBLE RESPONSE
     └─ Combine: Opening + Bridge + Closing
     └─ Result: Unique, fresh response that feels natural
-    ↓
-RETURN RESPONSE TO USER
+↓ RETURN RESPONSE TO USER
     ├─ Response follows learned principles
     ├─ Maintains conversational coherence
     ├─ Feels context-aware and genuine
     └─ NOT template-based rotation
-    ↓
-OPTIONAL: LEARNING (Layer 3)
+↓ OPTIONAL: LEARNING (Layer 3)
     └─ If successful:
        └─ ConversationLearner extracts patterns
        └─ New archetype added to library
@@ -239,10 +231,9 @@ Status: ✓ Verified with 6-turn dialogue
 ```sql
 ```
 
-Purpose: Transition from mixed emotions to deeper complexity
-Entry Cues: but, hug, heavy, familial_connection, ...
-Learned From: Automatically extracted by ConversationLearner
-Response Principles:
+Purpose: Transition from mixed emotions to deeper complexity Entry Cues: but, hug, heavy,
+familial_connection, ... Learned From: Automatically extracted by ConversationLearner Response
+Principles:
 
 - Balance mixed emotions
 - Create space for deeper disclosure
@@ -270,9 +261,8 @@ Status: ✓ Auto-learned, working
 ```text
 ```
 
-"I feel fragile today, like even small things overwhelm me.
-Work has been relentless lately—this week alone I've felt
-pummeled by back-to-back client meetings and impossible deadlines."
+"I feel fragile today, like even small things overwhelm me. Work has been relentless lately—this
+week alone I've felt pummeled by back-to-back client meetings and impossible deadlines."
 
 ```
 
@@ -322,8 +312,7 @@ Generate opening: "I hear you. Sounds like you're holding a lot right now."
 ```text
 ```
 
-Prior context: (None - first turn)
-No bridge needed (but would apply if this were turn 3+)
+Prior context: (None - first turn) No bridge needed (but would apply if this were turn 3+)
 
 ```
 
@@ -334,8 +323,8 @@ No bridge needed (but would apply if this were turn 3+)
 ```text
 ```
 
-Archetype tone: ["Curious, non-prescriptive", ...]
-Generate closing: "What's one thing about that you want to sit with?"
+Archetype tone: ["Curious, non-prescriptive", ...] Generate closing: "What's one thing about that
+you want to sit with?"
 
 - Invites reflection
 - Open-ended
@@ -396,8 +385,8 @@ OLD SYSTEM:
 - Randomly select: opening + movement + closing
 - Result: Feels mechanical, unpredictable variation, incoherent
 
-Example: Response could be "I understand" + "Have you tried..." + "Let me know!"
-         Feels disjointed and unnatural
+Example: Response could be "I understand" + "Have you tried..." + "Let me know!" Feels disjointed
+and unnatural
 
 ```
 
@@ -413,9 +402,8 @@ NEW SYSTEM:
 - Match archetype → Extract principles → Generate response
 - Result: Each response unique but follows learned rules, feels natural
 
-Example: "I hear you. Sounds like you're holding a lot right now.
-          What's one thing about that you want to sit with?"
-         Feels coherent, contextual, genuinely responsive
+Example: "I hear you. Sounds like you're holding a lot right now. What's one thing about that you
+want to sit with?" Feels coherent, contextual, genuinely responsive
 
 ```
 
@@ -440,12 +428,9 @@ Example: "I hear you. Sounds like you're holding a lot right now.
 # In signal_parser.py response generation:
 def generate_response(user_input, prior_context):
     # Try archetype first
-    archetype_response = archetype_generator.generate_archetype_aware_response(
-        user_input=user_input,
-        prior_context=prior_context
-    )
-    if archetype_response:
-        return archetype_response  # Use learned principles
+archetype_response = archetype_generator.generate_archetype_aware_response( user_input=user_input,
+prior_context=prior_context ) if archetype_response: return archetype_response  # Use learned
+principles
 
     # Fallback to glyph system if no archetype match
 ```text
@@ -458,19 +443,14 @@ def generate_response(user_input, prior_context):
 
 
 # After successful conversation:
-def log_successful_interaction(dialogue, feedback):
-    learner = ConversationLearner()
+def log_successful_interaction(dialogue, feedback): learner = ConversationLearner()
 
     # Extract patterns
-    patterns = learner.analyze_conversation(dialogue)
+patterns = learner.analyze_conversation(dialogue)
 
     # Optional: Add new archetype if sufficient patterns
-    if should_create_new_archetype(patterns):
-        new_archetype = learner.learn_from_conversation(
-            dialogue,
-            user_feedback=feedback
-        )
-        library.add_archetype(new_archetype)
+if should_create_new_archetype(patterns): new_archetype = learner.learn_from_conversation( dialogue,
+user_feedback=feedback ) library.add_archetype(new_archetype)
 
 ```
 

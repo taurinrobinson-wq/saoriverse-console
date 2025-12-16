@@ -143,8 +143,7 @@ Follow the checklist:
 ### Run All Tests
 
 ```bash
-python3 privacy_monitor.py
-python3 test_privacy_masking.py
+python3 privacy_monitor.py python3 test_privacy_masking.py
 ```text
 ```text
 ```
@@ -283,10 +282,8 @@ cat DEPLOYMENT_CHECKLIST.md
 
 ## Next Actions
 
-1. ✅ **TODAY**: Review documentation and run tests
-2. ✅ **THIS WEEK**: Deploy to staging
-3. ✅ **THIS MONTH**: Deploy to production
-4. ✅ **ONGOING**: Monthly compliance audits
+1. ✅ **TODAY**: Review documentation and run tests 2. ✅ **THIS WEEK**: Deploy to staging 3. ✅ **THIS
+MONTH**: Deploy to production 4. ✅ **ONGOING**: Monthly compliance audits
 
 ##
 

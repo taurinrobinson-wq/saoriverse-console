@@ -90,43 +90,32 @@ Your Identity:        Medical Details:    Sharing:
 ## 🔄 Data Flow (Full Integration)
 
 ```
-User Input
-    ↓
-Chat Processing
+User Input ↓ Chat Processing
     ├─ Local analysis (always happens)
     ├─ AI response (if enabled)
     └─ Limbic processing (if enabled)
-    ↓
-Response Displayed
-    ↓
-Consent Widget Shown
+↓ Response Displayed ↓ Consent Widget Shown
     ├─ "With my name"
     ├─ "Anonymous"
     └─ "Private"
     ├─ Medical: Keep / Abstract / Remove
     └─ Sharing: Private / Legacy / Research
-    ↓
-User Chooses
-    ↓
-Entry Anonymized (if needed)
+↓ User Chooses ↓ Entry Anonymized (if needed)
     ├─ Names → Glyphs
     ├─ Dates → Relative time
     ├─ Locations → Regions
     └─ Medical → Abstract
-    ↓
-Mapping Stored
+↓ Mapping Stored
     ├─ Original ↔ Anonymized
     ├─ Timestamp
     └─ Consent level
-    ↓
-Log Entry Saved
+↓ Log Entry Saved
     ├─ Signals only (no raw text)
     ├─ Gates (no content)
     ├─ Metadata
     ├─ Anonymization level
     └─ Mapping reference
-    ↓
-User History Updated
+↓ User History Updated
     ├─ Visible to user
     ├─ Searchable
 ```text
@@ -145,12 +134,8 @@ from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrid
 
 learner = HybridLearnerWithUserOverrides()  # Anonymization enabled by default
 
-result = learner.learn_from_exchange(
-    user_id="user_123",
-    user_input="I'm struggling with my therapist",
-    ai_response="That sounds challenging...",
-    emotional_signals=[...]
-)
+result = learner.learn_from_exchange( user_id="user_123", user_input="I'm struggling with my
+therapist", ai_response="That sounds challenging...", emotional_signals=[...] )
 
 # Automatically:
 
@@ -230,8 +215,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ### 1. **After Each Response**
 
 ```
-[Assistant Response]
-[Processing time]
+[Assistant Response] [Processing time]
 
 📋 Memory & Sharing
 ```text
@@ -363,11 +347,9 @@ This integration embodies:
 
 If any component fails:
 
-1. Check logs for error messages
-2. Verify anonymization protocol imports
-3. Ensure consent UI module is in `emotional_os/deploy/modules/`
-4. Check for missing dependencies (none required - uses standard library)
-5. Fall back to basic privacy (gate masking) - always works
+1. Check logs for error messages 2. Verify anonymization protocol imports 3. Ensure consent UI
+module is in `emotional_os/deploy/modules/` 4. Check for missing dependencies (none required - uses
+standard library) 5. Fall back to basic privacy (gate masking) - always works
 
 All integrations have graceful degradation built in.
 

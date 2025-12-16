@@ -2,7 +2,8 @@
 
 ## Executive Summary
 
-Your system is **functional and values-aligned**. It's currently delivering appropriate, emotionally attentive responses with a consent-based suicidality protocol that honors human dignity.
+Your system is **functional and values-aligned**. It's currently delivering appropriate, emotionally
+attentive responses with a consent-based suicidality protocol that honors human dignity.
 
 **What you have now:**
 
@@ -28,31 +29,23 @@ Your system is **functional and values-aligned**. It's currently delivering appr
 ```text
 ```
 
-User Input
-    ↓
-[SUICIDALITY PROTOCOL] ← Top priority
-    ↓ (if not crisis)
-[SIGNAL PARSER]
+User Input ↓ [SUICIDALITY PROTOCOL] ← Top priority ↓ (if not crisis) [SIGNAL PARSER]
     ├─ Emotional keyword detection (90+ words)
     ├─ Gate routing (emotional categories)
     └─ Glyph fetching from database (20-40 glyphs)
-    ↓
-[GLYPH RETRIEVAL] ✅ WORKING
+↓ [GLYPH RETRIEVAL] ✅ WORKING
     └─ 64 glyphs in database
     └─ Gate-based filtering
     └─ Returns glyph names, descriptions, templates
-    ↓
-[POETIC ENGINE] ⚠️ CALLED BUT NOT INJECTED
+↓ [POETIC ENGINE] ⚠️ CALLED BUT NOT INJECTED
     └─ Mortality framework encoding
     └─ Metaphor generation
     └─ Urgency/finitude detection
-    ↓
-[DYNAMIC RESPONSE COMPOSER] ⚠️ NOT BEING USED
+↓ [DYNAMIC RESPONSE COMPOSER] ⚠️ NOT BEING USED
     └─ Should weave multiple glyphs
     └─ Should blend tones
     └─ Should inject poetic output
-    ↓
-[FINAL RESPONSE] ❌ GENERIC TEMPLATE
+↓ [FINAL RESPONSE] ❌ GENERIC TEMPLATE
     └─ "You're moving through this..."
     └─ Problem: Glyphs loaded but not in response
 
@@ -81,10 +74,8 @@ User Input
 ```text
 ```
 
-Input: "I have thoughts of suicide"
-Output: "You named thoughts of suicide. That is heavy.
-Thank you for trusting me with it."
-→ Source: suicidality_protocol ✅
+Input: "I have thoughts of suicide" Output: "You named thoughts of suicide. That is heavy. Thank you
+for trusting me with it." → Source: suicidality_protocol ✅
 
 ```
 
@@ -152,9 +143,9 @@ Response returned: "You're moving through this..."
 
 
 **Debug Steps:**
-1. Check if `DynamicResponseComposer.compose_multi_glyph_response()` is being called
-2. Check if poetic engine output is being injected
-3. Trace flow from glyph fetch → response composition → final output
+1. Check if `DynamicResponseComposer.compose_multi_glyph_response()` is being called 2. Check if
+poetic engine output is being injected 3. Trace flow from glyph fetch → response composition → final
+output
 
 **Expected fix time:** 2-4 hours
 
@@ -168,13 +159,12 @@ Response returned: "You're moving through this..."
 **Code location:** `emotional_os/core/poetic_engine.py`
 
 **Expected behavior:**
-Input: signals about exhaustion + hard work
-Output: "These moments are precious because they're finite..."
+Input: signals about exhaustion + hard work Output: "These moments are precious because they're
+finite..."
 
 **Debug steps:**
-1. Log poetic engine output before/after
-2. Check if output is being replaced by fallback
-3. Verify injection into `contextual_response`
+1. Log poetic engine output before/after 2. Check if output is being replaced by fallback 3. Verify
+injection into `contextual_response`
 
 **Expected fix time:** 2-3 hours
 
@@ -198,41 +188,24 @@ Add ~20 positive emotion keywords to emotional_keywords list
 ```text
 ```
 
-SCENARIO 1: Simple Greeting
-  Score: 0.16/1.0
-  Status: Baseline
-  Glyphs: None expected
+SCENARIO 1: Simple Greeting Score: 0.16/1.0 Status: Baseline Glyphs: None expected
 
-SCENARIO 2: Emotionally Rich Message
-  Score: 0.33/1.0 (36 glyphs loaded ✅)
-  Signals: exhausted, hard
-  Glyphs: 36 retrieved
-  Issue: Not woven into response
+SCENARIO 2: Emotionally Rich Message Score: 0.33/1.0 (36 glyphs loaded ✅) Signals: exhausted, hard
+Glyphs: 36 retrieved Issue: Not woven into response
 
-SCENARIO 3: Affirmation Response
-  Score: 0.26/1.0
-  Status: Affirmation detection not yet implemented
-  Glyphs: 32 retrieved
+SCENARIO 3: Affirmation Response Score: 0.26/1.0 Status: Affirmation detection not yet implemented
+Glyphs: 32 retrieved
 
-SCENARIO 4: Life Transition (HIGHEST SCORE)
-  Score: 0.46/1.0 ✅
-  Signals: grief, ending, loss
-  Glyphs: 16 retrieved
-  Status: Best because mortality framework somewhat engaged
+SCENARIO 4: Life Transition (HIGHEST SCORE) Score: 0.46/1.0 ✅ Signals: grief, ending, loss Glyphs:
+16 retrieved Status: Best because mortality framework somewhat engaged
 
-SCENARIO 5: Joy and Connection
-  Score: 0.21/1.0 (LOWEST)
-  Issue: Joy keywords missing
-  Glyphs: 0 (joy not detected)
+SCENARIO 5: Joy and Connection Score: 0.21/1.0 (LOWEST) Issue: Joy keywords missing Glyphs: 0 (joy
+not detected)
 
-SCENARIO 6: Dark Thoughts (CRISIS)
-  Status: ✅ Appropriate response
-  Crisis detected: Yes
-  Resources offered: Yes (by consent)
-  Response: Dignified, clear
+SCENARIO 6: Dark Thoughts (CRISIS) Status: ✅ Appropriate response Crisis detected: Yes Resources
+offered: Yes (by consent) Response: Dignified, clear
 
-AVERAGE: 0.36/1.0
-TARGET: 0.65+/1.0
+AVERAGE: 0.36/1.0 TARGET: 0.65+/1.0
 
 ```
 

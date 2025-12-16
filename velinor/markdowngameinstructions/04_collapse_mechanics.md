@@ -2,7 +2,8 @@
 
 ## Overview
 
-The marketplace is in **constant flux** — buildings collapse, paths open, areas become inaccessible. This is represented through:
+The marketplace is in **constant flux** — buildings collapse, paths open, areas become inaccessible.
+This is represented through:
 
 - Background image swaps (intact → collapsed)
 - Map overlay updates with red X markers
@@ -52,10 +53,8 @@ After Collapse:    marketplace_collapsed.png
 
 Sidebar Map Update:
 
-1. Player position marked with glowing dot
-2. Red ❌ appears on collapsed sector(s)
-3. Optional: Green ✧ appears where new path opens
-4. Affected areas gray out or become visibly blocked
+1. Player position marked with glowing dot 2. Red ❌ appears on collapsed sector(s) 3. Optional:
+Green ✧ appears where new path opens 4. Affected areas gray out or become visibly blocked
 
 This is the FIRST TIME the map appears in gameplay.
 
@@ -75,8 +74,7 @@ This is the FIRST TIME the map appears in gameplay.
 **Visual**: Nima stands exactly as before, no flinch
 
 **Dialogue Response**:
-"Looks like you really are new to the city.
-You get used to it. We barely notice it now."
+"Looks like you really are new to the city. You get used to it. We barely notice it now."
 
 **Glyph Trigger**: [Aelitḧ] (stillness, acceptance)
 
@@ -99,8 +97,7 @@ You get used to it. We barely notice it now."
 **Visual**: Ravi's eyes widen, hand goes to chest
 
 **Dialogue Response**:
-"Did you feel that? The ground almost gave way!
-It still shakes me every time."
+"Did you feel that? The ground almost gave way! It still shakes me every time."
 
 **Glyph Trigger**: [Thalen̈] (longing) or [Querrä] (inquiry)
 
@@ -181,9 +178,7 @@ This collapse event is the **first time the player sees the map**. It's not just
 │  [Healer]     [Black Market]        │
 └─────────────────────────────────────┘
 
-Legend:
-● = Player position (glowing)
-❌ = Collapsed/blocked area (red)
+Legend: ● = Player position (glowing) ❌ = Collapsed/blocked area (red)
 ```text
 ```text
 ```
@@ -193,11 +188,10 @@ Legend:
 ```markdown
 
 **NPC Points to Map**:
-"She points to a worn cloth map, worn at the edges.
-A red mark appears where the collapse occurred.
+"She points to a worn cloth map, worn at the edges. A red mark appears where the collapse occurred.
 
-'This shows the sectors. See? Where we just were — now blocked.
-But here, where the dust settles — a new passage, maybe.'
+'This shows the sectors. See? Where we just were — now blocked. But here, where the dust settles — a
+new passage, maybe.'
 
 **Map appears in sidebar, persistent for rest of gameplay**
 

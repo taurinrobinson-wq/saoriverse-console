@@ -2,7 +2,8 @@
 
 ## Status: IN PROGRESS
 
-This document outlines the comprehensive reorganization of root-level Python files into appropriate directories for better project maintainability.
+This document outlines the comprehensive reorganization of root-level Python files into appropriate
+directories for better project maintainability.
 
 ##
 

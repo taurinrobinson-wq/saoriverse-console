@@ -81,19 +81,12 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 
 ```
 
-🔄 Starting automatic git commit & push service...
-Interval: every 30 minutes
-Press Ctrl+C to stop
+🔄 Starting automatic git commit & push service... Interval: every 30 minutes Press Ctrl+C to stop
 
-[2025-12-12 14:05:23] Found 3 modified file(s)
-  ✓ Staged changes
-  ✓ Committed: auto: periodic commit and push (2025-12-12 14:05:23)
-  ✓ Pushed to remote
-  Waiting 30 minutes until next check...
-[2025-12-12 14:35:45] Found 2 modified file(s)
-  ✓ Staged changes
-  ✓ Committed: auto: periodic commit and push (2025-12-12 14:35:45)
-  ✓ Pushed to remote
+[2025-12-12 14:05:23] Found 3 modified file(s) ✓ Staged changes ✓ Committed: auto: periodic commit
+and push (2025-12-12 14:05:23) ✓ Pushed to remote Waiting 30 minutes until next check... [2025-12-12
+14:35:45] Found 2 modified file(s) ✓ Staged changes ✓ Committed: auto: periodic commit and push
+(2025-12-12 14:35:45) ✓ Pushed to remote
 
 ```text
 ```
@@ -137,9 +130,8 @@ git commit -m "feat: implement specific feature"
 
 If you have conflicts or issues:
 
-1. **Stop the auto-commit script** (Ctrl+C)
-2. **Resolve conflicts manually** in git
-3. **Restart the script** when ready
+1. **Stop the auto-commit script** (Ctrl+C) 2. **Resolve conflicts manually** in git 3. **Restart
+the script** when ready
 
 ##
 
@@ -198,10 +190,8 @@ which git  # macOS/Linux
 
 This is expected if your repo has branch protection rules. The script will:
 
-1. Commit locally ✓
-2. Attempt push ⚠
-3. Warn you in console
-4. Continue next cycle (manual push needed)
+1. Commit locally ✓ 2. Attempt push ⚠ 3. Warn you in console 4. Continue next cycle (manual push
+needed)
 
 ### Script keeps running but nothing commits
 
@@ -223,9 +213,7 @@ If you prefer manual one-off commits:
 ```bash
 
 # Quick single commit
-cd d:\saoriverse-console
-git add -A
-git commit -m "feat: implement emotion learning system"
+cd d:\saoriverse-console git add -A git commit -m "feat: implement emotion learning system"
 ```text
 ```text
 ```
@@ -266,4 +254,5 @@ crontab -e
 
 **Your changes are now automatically backed up to GitHub!** 🎉
 
-Every change you make will be committed and pushed at regular intervals, ensuring no work is lost and progress is always tracked.
+Every change you make will be committed and pushed at regular intervals, ensuring no work is lost
+and progress is always tracked.

@@ -42,12 +42,10 @@ py -3.12 -m pip install -r requirements.txt
 ```bash
 
 # With pyenv
-pyenv install 3.12.0
-pyenv local 3.12.0
+pyenv install 3.12.0 pyenv local 3.12.0
 
 # With conda
-conda create -n firstperson python=3.12
-conda activate firstperson
+conda create -n firstperson python=3.12 conda activate firstperson
 ```text
 ```text
 ```
@@ -65,8 +63,7 @@ All dependencies are now consolidated in **`requirements.txt`** at the root of t
 pip install -r requirements.txt
 
 # Or use pip-tools for reproducible builds
-pip install pip-tools
-pip-compile requirements.txt
+pip install pip-tools pip-compile requirements.txt
 
 ```text
 ```
@@ -137,16 +134,15 @@ If a package shows as "not available" in the Streamlit console:
 
 1. **Check Python version:** `python --version` (should be 3.11 or 3.12)
 2. **Verify installation:** `pip list | grep package-name`
-3. **Reinstall:** `pip install --force-reinstall -r requirements.txt`
-4. **Restart Streamlit:** Kill the process and run `streamlit run app.py` again
+3. **Reinstall:** `pip install --force-reinstall -r requirements.txt` 4. **Restart Streamlit:** Kill
+the process and run `streamlit run app.py` again
 
 ### "No module named X"
 
 This usually means the package isn't installed in your Python environment.
 
-1. Check which Python Streamlit is using (shown in the sidebar)
-2. Install directly in that environment: `python -m pip install -r requirements.txt`
-3. Restart Streamlit
+1. Check which Python Streamlit is using (shown in the sidebar) 2. Install directly in that
+environment: `python -m pip install -r requirements.txt` 3. Restart Streamlit
 
 ### Virtual Environment Issues
 

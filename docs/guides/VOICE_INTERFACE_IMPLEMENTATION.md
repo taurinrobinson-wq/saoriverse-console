@@ -4,7 +4,10 @@
 
 ## Overview
 
-Implemented a complete end-to-end voice chat pipeline for FirstPerson, transforming it from text-only to a genuinely unique multimodal interface. The system integrates speech-to-text (Whisper), prosody planning (glyph signals → voice characteristics), and text-to-speech (Coqui TTS) with zero API costs.
+Implemented a complete end-to-end voice chat pipeline for FirstPerson, transforming it from
+text-only to a genuinely unique multimodal interface. The system integrates speech-to-text
+(Whisper), prosody planning (glyph signals → voice characteristics), and text-to-speech (Coqui TTS)
+with zero API costs.
 
 ## Architecture
 
@@ -16,12 +19,12 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
 │                 Streamlit Web Application                   │
 └────────┬──────────────────────────────────────────┬─────────┘
          │                                          │
-    ┌────▼──────┐                           ┌──────▼────┐
+┌────▼──────┐                           ┌──────▼────┐
     │ STT Input │                           │ TTS Output│
     │ (Whisper) │                           │ (Coqui)   │
     └────┬──────┘                           └──────▲────┘
          │                                        │
-    ┌────▼────────────────────────────────────────┤
+┌────▼────────────────────────────────────────┤
     │       Audio Processing Pipeline            │
     │                                             │
     │  ┌─────────────┐  ┌────────────────────┐  │
@@ -36,18 +39,18 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
     │                           │               │
     └────────────────────────────┼───────────────┘
                                  │
-                            ┌────▼──────────┐
+┌────▼──────────┐
                             │ Chat/Response │
                             │   Engine      │
                             │ (main_v2.py)  │
                             └────┬──────────┘
                                  │
-                       ┌─────────▼─────────┐
+┌─────────▼─────────┐
                        │ Glyph Generation  │
                        │ (Emotional State) │
                        └─────────┬─────────┘
                                  │
-                       ┌─────────▼────────────┐
+┌─────────▼────────────┐
                        │ Prosody Planning     │
                        │                      │
                        │ • Voltage → Rate     │
@@ -56,7 +59,7 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
                        │ • Certainty → Contour
                        └─────────┬────────────┘
                                  │
-                       ┌─────────▼──────────┐
+┌─────────▼──────────┐
                        │ Streaming TTS      │
                        │ • Synthesis        │
                        │ • Prosody Applied  │
@@ -115,10 +118,9 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
 ```text
 ```
 
-Voltage (0-1)              → Speaking Rate (0.8x - 1.3x)
-Tone + Valence            → Pitch Shift (-2 to +2 semitones)
-Emotional Attunement      → Word Emphasis Placement
-Certainty                 → Terminal Contour (rising/mid/falling)
+Voltage (0-1)              → Speaking Rate (0.8x - 1.3x) Tone + Valence            → Pitch Shift (-2
+to +2 semitones) Emotional Attunement      → Word Emphasis Placement Certainty                 →
+Terminal Contour (rising/mid/falling)
 
 ```
 
@@ -238,15 +240,13 @@ Integration points:
 from spoken_interface.voice_ui import integrate_voice_ui_into_chat
 
 # In main_v2.py or deployment UI:
-voice_config = integrate_voice_ui_into_chat()
-components = voice_config["components"]
+voice_config = integrate_voice_ui_into_chat() components = voice_config["components"]
 
 # Render voice input in sidebar
 transcription = voice_config["render_input"]()
 
 # Process transcription as user message
-if transcription:
-    user_message = transcription
+if transcription: user_message = transcription
     # ... existing chat flow ...
 
 # Generate glyph-based response
@@ -362,11 +362,9 @@ streamlit>=1.0.0          # Web UI (required only for Streamlit deployment)
 
 Remaining tasks:
 
-1. [x] Create all module files (4 sprints)
-2. [x] Write comprehensive tests (all sprints)
-3. [x] Validate all tests pass (64/66 passing)
-4. [x] Commit to main branch (4 commits)
-5. [ ] **NOW: Integration testing**
+1. [x] Create all module files (4 sprints) 2. [x] Write comprehensive tests (all sprints) 3. [x]
+Validate all tests pass (64/66 passing) 4. [x] Commit to main branch (4 commits) 5. [ ] **NOW:
+Integration testing**
    - Test full pipeline end-to-end
    - Measure actual latency (user input → audio response)
    - Test with real glyph system
@@ -392,19 +390,16 @@ Remaining tasks:
 
 **Current Limitations:**
 
-1. Single voice (Coqui default) - could implement voice cloning later
-2. No speaker adaptation (could add multi-speaker support)
-3. Prosody guardrails conservative - could learn more aggressive mappings
-4. No interruption handling (could implement mid-stream stop)
+1. Single voice (Coqui default) - could implement voice cloning later 2. No speaker adaptation
+(could add multi-speaker support) 3. Prosody guardrails conservative - could learn more aggressive
+mappings 4. No interruption handling (could implement mid-stream stop)
 
 **Future Improvements:**
 
-1. Real-time streaming synthesis (chunk-by-chunk playback during generation)
-2. Voice cloning (fine-tune TTS for specific voices)
-3. Multi-language support (currently works but untested)
-4. Emotional voice variations (happy/sad/angry variants)
-5. Prosody continuation across multiple responses
-6. Audio emotion analysis (detect user emotion from voice)
+1. Real-time streaming synthesis (chunk-by-chunk playback during generation) 2. Voice cloning
+(fine-tune TTS for specific voices) 3. Multi-language support (currently works but untested) 4.
+Emotional voice variations (happy/sad/angry variants) 5. Prosody continuation across multiple
+responses 6. Audio emotion analysis (detect user emotion from voice)
 
 ## Success Metrics
 
@@ -444,4 +439,5 @@ Remaining tasks:
 
 **Overall Status: 🟢 READY FOR DEPLOYMENT**
 
-The voice interface is production-ready. All code is tested, documented, and integrated. Next phase is user testing and fine-tuning prosody guardrails based on listening tests.
+The voice interface is production-ready. All code is tested, documented, and integrated. Next phase
+is user testing and fine-tuning prosody guardrails based on listening tests.

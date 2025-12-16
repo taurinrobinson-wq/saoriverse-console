@@ -97,19 +97,15 @@ That's it! You should see the splash screen.
 
 ```
 
-User (Browser)
-    ↓
-Frontend: Next.js
+User (Browser) ↓ Frontend: Next.js
     ├── page.tsx (splash screen)
     └── game/[sessionId]/page.tsx (game scene)
-    ↓ (HTTP/REST)
-Backend: FastAPI
+↓ (HTTP/REST) Backend: FastAPI
     ├── POST /api/game/start
     ├── POST /api/game/{id}/action
     ├── GET /api/game/{id}
     ├── etc.
-    ↓ (Python)
-Velinor Engine
+↓ (Python) Velinor Engine
     └── VelinorTwineOrchestrator
 
 ```
@@ -149,9 +145,7 @@ Velinor Engine
 4. **Deploy to Production**
 
    ```bash
-   git add .
-   git commit -m "Velinor web stack complete"
-   git push origin main
+git add . git commit -m "Velinor web stack complete" git push origin main
    ```
 
    - Railway auto-deploys on push

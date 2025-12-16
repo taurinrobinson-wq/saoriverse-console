@@ -192,12 +192,11 @@ find . -name "*response*" -type f | grep -v __pycache__
 # Returns multiple results in different places
 
 # Running tests was unclear
-pytest tests/ 2>&1  # Some tests don't run
-pytest test_*.py    # But these do?
+pytest tests/ 2>&1  # Some tests don't run pytest test_*.py    # But these do?
 
 # Launching app required knowing which file
-streamlit run main_v2.py          # This is a wrapper
-streamlit run main_v2_simple.py   # This is a bypass
+streamlit run main_v2.py          # This is a wrapper streamlit run main_v2_simple.py   # This is a
+bypass
 
 # Adding new features was confusing
 
@@ -250,8 +249,7 @@ Read the master plan to understand the scope:
 ### Step 2: Backup (5 min)
 
 ```bash
-cd /path/to/saoriverse-console
-git checkout -b refactor/reorganization-master
+cd /path/to/saoriverse-console git checkout -b refactor/reorganization-master
 ```text
 ```text
 ```
@@ -291,8 +289,8 @@ git commit -m "refactor: Complete codebase reorganization"
 
 ### Step 6: Create PR (5 min)
 
-Go to GitHub, create PR from `refactor/reorganization-master` → `main`
-Merge when you're confident everything works
+Go to GitHub, create PR from `refactor/reorganization-master` → `main` Merge when you're confident
+everything works
 
 ##
 
@@ -320,14 +318,12 @@ Merge when you're confident everything works
 
 ## Key Principles in This Plan
 
-1. **Flat structure over deep nesting** - 1 file per module, not nested directories
-2. **Separation of concerns** - Source code, tests, data, scripts, docs all separate
-3. **Single entry point** - One `app.py`, not five competing files
-4. **Clear organization** - Finding anything takes 30 seconds
-5. **Zero circular dependencies** - Imports work first try
-6. **Backward compatible** - Archive old code instead of deleting
-7. **Testable at each phase** - Verify nothing broke before moving on
-8. **Easy rollback** - If something goes wrong, just reset to tag
+1. **Flat structure over deep nesting** - 1 file per module, not nested directories 2. **Separation
+of concerns** - Source code, tests, data, scripts, docs all separate 3. **Single entry point** - One
+`app.py`, not five competing files 4. **Clear organization** - Finding anything takes 30 seconds 5.
+**Zero circular dependencies** - Imports work first try 6. **Backward compatible** - Archive old
+code instead of deleting 7. **Testable at each phase** - Verify nothing broke before moving on 8.
+**Easy rollback** - If something goes wrong, just reset to tag
 
 ##
 

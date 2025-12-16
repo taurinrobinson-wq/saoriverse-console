@@ -2,23 +2,23 @@
 
 ## Summary
 
-Identified and annotated 8 key exception paragraphs across 5 pilot files with `<!-- md013:ignore -->` markers. These exceptions are intentional due to semantic density or formatting requirements.
+Identified and annotated 8 key exception paragraphs across 5 pilot files with `<!-- md013:ignore
+-->` markers. These exceptions are intentional due to semantic density or formatting requirements.
 
 ## Exceptions Documented
 
 ### Conceptual Overviews (Cannot Wrap Without Losing Clarity)
 
-1. **story_map_velinor.md:20** — Premise (Velinor narrative setup)
-2. **story_map_velinor.md:33** — Gameplay Pillars (integrated stat system description)
-3. **ADAPTIVE_DIMENSIONS_AND_GLYPHS.md:5** — System mechanism overview
-4. **ADAPTIVE_EXTRACTOR_QUICK_SUMMARY.md:5** — Problem premise quote
-5. **ADAPTIVE_EXTRACTOR_QUICK_SUMMARY.md:8** — Answer premise (hardcoded explanation)
+1. **story_map_velinor.md:20** — Premise (Velinor narrative setup) 2. **story_map_velinor.md:33** —
+Gameplay Pillars (integrated stat system description) 3. **ADAPTIVE_DIMENSIONS_AND_GLYPHS.md:5** —
+System mechanism overview 4. **ADAPTIVE_EXTRACTOR_QUICK_SUMMARY.md:5** — Problem premise quote 5.
+**ADAPTIVE_EXTRACTOR_QUICK_SUMMARY.md:8** — Answer premise (hardcoded explanation)
 
 ### System Descriptions (Technical Integration)
 
-6. **TECHNICAL_ARCHITECTURE.md:4** — Diagram title + ASCII architecture
-7. **ADAPTIVE_DIMENSIONS_AND_GLYPHS.md:30** — Architecture gap description
-8. **npc_reaction_library.md:6** — Library overview + scope
+6. **TECHNICAL_ARCHITECTURE.md:4** — Diagram title + ASCII architecture 7.
+**ADAPTIVE_DIMENSIONS_AND_GLYPHS.md:30** — Architecture gap description 8.
+**npc_reaction_library.md:6** — Library overview + scope
 
 ## Rationale
 
@@ -35,7 +35,6 @@ Identified and annotated 8 key exception paragraphs across 5 pilot files with `<
 
 ## Next Steps
 
-1. Proceed with wrapping next batch of high-priority files (10–20 files)
-2. Apply exception markers proactively during wrapping process
-3. Keep per-batch review notes to track exception patterns
-4. Address structural rules (MD003, MD012, MD022) in dedicated cleanup pass
+1. Proceed with wrapping next batch of high-priority files (10–20 files) 2. Apply exception markers
+proactively during wrapping process 3. Keep per-batch review notes to track exception patterns 4.
+Address structural rules (MD003, MD012, MD022) in dedicated cleanup pass

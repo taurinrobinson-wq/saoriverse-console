@@ -2,7 +2,8 @@
 
 ## ✅ Setup Complete
 
-Your Next.js web version of Velinor is now ready for local development on your Mac **without Docker**.
+Your Next.js web version of Velinor is now ready for local development on your Mac **without
+Docker**.
 
 ### 🚀 Quick Start
 
@@ -149,7 +150,7 @@ The FastAPI backend is in `velinor_api.py` (295 lines). To use it:
    python velinor_api.py
    ```
 
-   It will run on `http://localhost:8000`
+It will run on `http://localhost:8000`
 
 2. **In Next.js, use axios to call it:**
 
@@ -257,10 +258,8 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 ```tsx
 
-<img
-  src="/assets/backgrounds/city_market(16-9).png"
-  alt="Market Ruins"
-  className="w-full h-96 object-cover rounded-lg"
+<img src="/assets/backgrounds/city_market(16-9).png" alt="Market Ruins" className="w-full h-96
+object-cover rounded-lg"
 
 ```text
 ```
@@ -295,18 +294,10 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ### Call the backend
 
 ```typescript
-const makeAction = async (input: string) => {
-  try {
-    const response = await axios.post(
+const makeAction = async (input: string) => { try { const response = await axios.post(
       `http://localhost:8000/sessions/${sessionId}/actions`,
-      { player_input: input },
-      { headers: { 'Content-Type': 'application/json' } }
-    );
-    console.log('Game response:', response.data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+{ player_input: input }, { headers: { 'Content-Type': 'application/json' } } ); console.log('Game
+response:', response.data); } catch (error) { console.error('Error:', error); } };
 ```
 
 ##

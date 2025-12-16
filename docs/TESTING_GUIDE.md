@@ -123,8 +123,7 @@ def sample_user_input():
 **Usage in tests:**
 
 ```python
-def test_parser(sample_user_input):
-    result = parse_input(sample_user_input)
+def test_parser(sample_user_input): result = parse_input(sample_user_input)
 ```text
 ```text
 ```
@@ -139,26 +138,17 @@ def test_parser(sample_user_input):
 
 """Tests for src/my_module.py"""
 
-import pytest
-from src.my_module import my_function
+import pytest from src.my_module import my_function
 
 
-class TestMyFunction:
-    """Tests for my_function."""
+class TestMyFunction: """Tests for my_function."""
 
-    def test_happy_path(self):
-        """Test normal operation."""
-        result = my_function("input")
-        assert result == "expected"
+def test_happy_path(self): """Test normal operation.""" result = my_function("input") assert result
+== "expected"
 
-    def test_edge_case(self):
-        """Test edge case."""
-        result = my_function("")
-        assert result is not None
+def test_edge_case(self): """Test edge case.""" result = my_function("") assert result is not None
 
-    def test_error_handling(self):
-        """Test error handling."""
-        with pytest.raises(ValueError):
+def test_error_handling(self): """Test error handling.""" with pytest.raises(ValueError):
 
 ```text
 ```
@@ -210,14 +200,11 @@ def test_with_mock():
 ### Fixture Usage
 
 ```python
-@pytest.fixture
-def temp_data_dir(tmp_path):
-    """Create temporary directory for test data."""
-    return tmp_path / "test_data"
+@pytest.fixture def temp_data_dir(tmp_path): """Create temporary directory for test data.""" return
+tmp_path / "test_data"
 
-def test_file_operations(temp_data_dir):
-    """Test with temporary directory."""
-    file_path = temp_data_dir / "test.json"
+def test_file_operations(temp_data_dir): """Test with temporary directory.""" file_path =
+temp_data_dir / "test.json"
 ```text
 ```text
 ```
@@ -226,13 +213,8 @@ def test_file_operations(temp_data_dir):
 
 ```python
 
-@pytest.mark.parametrize("input,expected", [
-    ("happy", "positive"),
-    ("sad", "negative"),
-    ("neutral", "neutral"),
-])
-def test_emotion_detection(input, expected):
-    result = detect_emotion(input)
+@pytest.mark.parametrize("input,expected", [ ("happy", "positive"), ("sad", "negative"), ("neutral",
+"neutral"), ]) def test_emotion_detection(input, expected): result = detect_emotion(input)
 
 ```text
 ```
@@ -283,9 +265,8 @@ pytest tests/ -m slow           # Only marked tests
 
 `.github/workflows/tests.yml` runs:
 
-1. `pytest tests/unit/` - Fast unit test suite
-2. `pytest tests/integration/` - Integration tests
-3. Coverage report generation
+1. `pytest tests/unit/` - Fast unit test suite 2. `pytest tests/integration/` - Integration tests 3.
+Coverage report generation
 
 **Triggered on:**
 
@@ -321,9 +302,7 @@ pytest tests/ -vv               # Even more detail
 ### Print Debug Info
 
 ```python
-def test_something():
-    result = my_function()
-    print(f"Result: {result}")  # Will show with -s flag
+def test_something(): result = my_function() print(f"Result: {result}")  # Will show with -s flag
 ```text
 ```text
 ```
@@ -408,45 +387,43 @@ pytest tests/ --cov=src.response_generator
 
    ```python
    # Good:
-   def test_parser_extracts_emotional_signal_from_text():
+def test_parser_extracts_emotional_signal_from_text():
 
    # Bad:
-   def test_parse():
+def test_parse():
    ```
 
 3. **Arrange-Act-Assert pattern**
 
    ```python
-   def test_something():
+def test_something():
        # Arrange
-       input_data = prepare_data()
+input_data = prepare_data()
 
        # Act
-       result = function_under_test(input_data)
+result = function_under_test(input_data)
 
        # Assert
-       assert result == expected
+assert result == expected
    ```
 
 4. **Use fixtures for common setup**
 
    ```python
    # Instead of repeating in every test:
-   @pytest.fixture
-   def sample_data():
-       return {"key": "value"}
+@pytest.fixture def sample_data(): return {"key": "value"}
    ```
 
 5. **Test both happy path and errors**
 
    ```python
-   def test_happy_path():
+def test_happy_path():
        # Normal operation
-       pass
+pass
 
-   def test_error_handling():
+def test_error_handling():
        # Error conditions
-       pass
+pass
    ```
 
 ##

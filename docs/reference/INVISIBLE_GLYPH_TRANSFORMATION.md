@@ -33,8 +33,8 @@ Complete refactor to make glyphs work **invisibly**.
 ```text
 ```
 
-There's something in what you're describing—boundaries that hold without pressure.
-a sanctuary of quiet care. You're not alone—many brilliant people have genuine friction...
+There's something in what you're describing—boundaries that hold without pressure. a sanctuary of
+quiet care. You're not alone—many brilliant people have genuine friction...
 
 ```
 
@@ -48,8 +48,8 @@ a sanctuary of quiet care. You're not alone—many brilliant people have genuine
 ```text
 ```
 
-You're not alone—many brilliant people have genuine friction with math, especially
-when it's presented in a way that doesn't match how their mind naturally works...
+You're not alone—many brilliant people have genuine friction with math, especially when it's
+presented in a way that doesn't match how their mind naturally works...
 
 ```
 
@@ -72,9 +72,8 @@ not projecting onto you. Help me understand: what did I miss?
 ```
 
 
-✓ Detects misalignment feedback (glyph system working)
-✓ Responds with genuine curiosity (not about glyph)
-✓ Shows they're listening to the person's correction
+✓ Detects misalignment feedback (glyph system working) ✓ Responds with genuine curiosity (not about
+glyph) ✓ Shows they're listening to the person's correction
 ##
 
 ## Code Changes
@@ -116,25 +115,20 @@ elif any(word in lower_input for word in ['inherited', 'from', 'mother']):
 ```python
 
 # BEFORE
-if glyph and glyph.get("description"):
-    opening = f"There's something in what you're describing—{glyph_description.lower()}"
-    parts.append(opening)
+if glyph and glyph.get("description"): opening = f"There's something in what you're
+describing—{glyph_description.lower()}" parts.append(opening)
 
 # AFTER
 
 # Intensity calculated invisibly
-if glyph:
-    gate_data = glyph.get("gates") or glyph.get("gate")
-    intensity = len(gates_list) if gates_list else 1
+if glyph: gate_data = glyph.get("gates") or glyph.get("gate") intensity = len(gates_list) if
+gates_list else 1
 
 # Response addresses message content
-if message_content.get("math_frustration"):
-    parts.append("You're not alone...")
+if message_content.get("math_frustration"): parts.append("You're not alone...")
 
 # Closing calibrated by intensity (invisible to user)
-if intensity >= 8:
-    question = f"I'm here to work through {struggle} with you."
-else:
+if intensity >= 8: question = f"I'm here to work through {struggle} with you." else:
 ```text
 ```text
 ```
@@ -149,14 +143,9 @@ else:
 
 ```
 
-Glyph selected: Still Containment
-Gates: [Gate 2]  ← LOW intensity
-  ↓
-Intensity = 1  (used internally)
-  ↓
-Closing choice: "permission" (gentle approach)
-  ↓
-User sees: "You get to take this at your own pace"
+Glyph selected: Still Containment Gates: [Gate 2]  ← LOW intensity ↓ Intensity = 1  (used
+internally) ↓ Closing choice: "permission" (gentle approach) ↓ User sees: "You get to take this at
+your own pace"
 
 ```text
 ```
@@ -191,11 +180,8 @@ User sees: Beautiful poem about stability/presence
 ### 4. Gate-Based Movement Language (Invisible)
 
 ```
-Gate count: 1 (low intensity)
-  ↓
-Choose movement_language["with"] (gentler)
-  ↓
-"You're carrying this with presence"
+Gate count: 1 (low intensity) ↓ Choose movement_language["with"] (gentler) ↓ "You're carrying this
+with presence"
 ```text
 ```text
 ```
@@ -231,17 +217,12 @@ User feels:
 
 ```
 
-User Input
-  ↓
-Parse Signals
-  ↓
-Fetch Matching Glyphs [GLYPH SYSTEM BEGINS - INVISIBLE TO USER]
+User Input ↓ Parse Signals ↓ Fetch Matching Glyphs [GLYPH SYSTEM BEGINS - INVISIBLE TO USER]
   ├─ Extract glyph_name
   ├─ Extract emotional_signal
   ├─ Extract gates
   └─ Extract description [USED FOR INTERNAL CALIBRATION ONLY]
-  ↓
-DynamicResponseComposer
+↓ DynamicResponseComposer
   ├─ _build_glyph_aware_response()
   │   ├─ Calculate intensity from gates (invisible)
   │   ├─ Map glyph_name to poetry_emotion (invisible)
@@ -253,9 +234,8 @@ DynamicResponseComposer
       ├─ Extract intensity from gates (invisible)
       ├─ RESPOND TO MESSAGE FEATURES (visible to user)
       └─ Scale closing by intensity (invisible)
-  ↓ [GLYPH SYSTEM ENDS - USER SEES ONLY PERSONALIZED RESPONSE]
-  ↓
-Output Response (Person feels heard, not categorized)
+↓ [GLYPH SYSTEM ENDS - USER SEES ONLY PERSONALIZED RESPONSE] ↓ Output Response (Person feels heard,
+not categorized)
 
 ```
 

@@ -2,7 +2,8 @@
 
 ## What Was Done
 
-I've set up your Next.js web version to run **directly on your Mac without Docker**. No container management needed!
+I've set up your Next.js web version to run **directly on your Mac without Docker**. No container
+management needed!
 
 ### Installation Summary
 
@@ -200,8 +201,7 @@ For understanding the game logic:
 ### Node version error?
 
 ```bash
-export NVM_DIR="$HOME/.nvm"
-source "$NVM_DIR/nvm.sh"
+export NVM_DIR="$HOME/.nvm" source "$NVM_DIR/nvm.sh"
 ```text
 ```text
 ```
@@ -237,7 +237,8 @@ For detailed development guide, see: **VELINOR_WEB_DEV_GUIDE.md**
 
 ## ✨ You're Ready
 
-Your Next.js web game is running and ready for development. The whole stack (frontend + backend) is available for iteration without needing Docker. Start the servers and begin building! 🚀
+Your Next.js web game is running and ready for development. The whole stack (frontend + backend) is
+available for iteration without needing Docker. Start the servers and begin building! 🚀
 
 Questions? Check the game logic files and the comprehensive dev guide.
 

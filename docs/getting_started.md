@@ -27,8 +27,7 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 3. (Optional) Install Python deps
 
 ```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt      # runtime deps
+python -m pip install --upgrade pip pip install -r requirements.txt      # runtime deps
 ```text
 ```text
 ```
@@ -59,10 +58,8 @@ Makefile (quick shortcuts)
 You can use the included `Makefile` to run common developer rituals:
 
 ```bash
-make env        # Load safe defaults
-make install    # Create virtualenv and install deps
-make enrich     # Run the enrichment pipeline
-make test       # Run tests
+make env        # Load safe defaults make install    # Create virtualenv and install deps make
+enrich     # Run the enrichment pipeline make test       # Run tests
 ```text
 ```text
 ```
@@ -79,8 +76,7 @@ To enable remote AI calls for testing or trusted environments:
 
 ```bash
 
-export PROCESSING_MODE=hybrid
-export ALLOW_REMOTE_AI=1
+export PROCESSING_MODE=hybrid export ALLOW_REMOTE_AI=1
 
 ```
 

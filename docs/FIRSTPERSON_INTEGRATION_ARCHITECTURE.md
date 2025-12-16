@@ -2,7 +2,8 @@
 
 ## Overview
 
-Your Velinor game is now **emotionally intelligent**. Every NPC interaction adapts in real-time to your emotional state through FirstPerson integration.
+Your Velinor game is now **emotionally intelligent**. Every NPC interaction adapts in real-time to
+your emotional state through FirstPerson integration.
 
 ```text
 ```
@@ -11,13 +12,11 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
 │                    VELINOR GAME                             │
 │                  Streamlit Web UI                           │
 └─────────────────────────────────────────────────────────────┘
-                           ↓
-              ┌─────────────────────────┐
+↓ ┌─────────────────────────┐
               │    Player Input          │
               │ (Chat or Free Text)      │
               └─────────────────────────┘
-                           ↓
-┌──────────────────────────────────────────────────────────────┐
+↓ ┌──────────────────────────────────────────────────────────────┐
 │         FIRSTPERSON ORCHESTRATOR (Emotional Analysis)         │
 ├──────────────────────────────────────────────────────────────┤
 │                                                               │
@@ -41,8 +40,7 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
 │  OUTPUT: {tone, theme, valence, intensity, memory}          │
 │                                                               │
 └──────────────────────────────────────────────────────────────┘
-                           ↓
-┌──────────────────────────────────────────────────────────────┐
+↓ ┌──────────────────────────────────────────────────────────────┐
 │         VELINOR GAME ENGINE (Orchestrator)                   │
 ├──────────────────────────────────────────────────────────────┤
 │                                                               │
@@ -58,8 +56,7 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
 │     └─ Use emotional analysis + story context              │
 │                                                               │
 └──────────────────────────────────────────────────────────────┘
-                           ↓
-┌──────────────────────────────────────────────────────────────┐
+↓ ┌──────────────────────────────────────────────────────────────┐
 │      NPC RESPONSE GENERATION (Emotional Awareness)           │
 ├──────────────────────────────────────────────────────────────┤
 │                                                               │
@@ -82,8 +79,7 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
 │  RESULT: Nuanced, contextually aware dialogue               │
 │                                                               │
 └──────────────────────────────────────────────────────────────┘
-                           ↓
-              ┌─────────────────────────┐
+↓ ┌─────────────────────────┐
               │    Chat Display         │
               │ (Light Theme Streamlit) │
               └─────────────────────────┘
@@ -103,11 +99,8 @@ Your Velinor game is now **emotionally intelligent**. Every NPC interaction adap
 from emotional_os.deploy.core.firstperson import FirstPersonOrchestrator, AffectParser
 
 # Lines 46-52
-if 'firstperson_orchestrator' not in st.session_state:
-    st.session_state.firstperson_orchestrator = FirstPersonOrchestrator(
-        user_id='velinor_player',
-        conversation_id='velinor_game'
-    )
+if 'firstperson_orchestrator' not in st.session_state: st.session_state.firstperson_orchestrator =
+FirstPersonOrchestrator( user_id='velinor_player', conversation_id='velinor_game' )
 
 ```text
 ```
@@ -150,8 +143,8 @@ def _summarize_player_intent(self, player_input, player_id):
 ```python
 
 # Lines 289-340
-def _generate_emotionally_aware_response(self, npc_name, player_input,
-    emotional_tone, theme, valence, intensity, memory, ...):
+def _generate_emotionally_aware_response(self, npc_name, player_input, emotional_tone, theme,
+valence, intensity, memory, ...):
     # Constructs three-part response based on:
     # - Emotional tone
     # - Theme + memory context
@@ -167,14 +160,11 @@ def _generate_emotionally_aware_response(self, npc_name, player_input,
 
 # Lines 140-150
 player_analysis = self._summarize_player_intent(player_input, player_id)
-next_state['player_analysis'] = player_analysis
-next_state['player_input'] = player_input
+next_state['player_analysis'] = player_analysis next_state['player_input'] = player_input
 
 # Later: used in NPC dialogue generation
-if updated_state.get('npc_name'):
-    updated_state['npc_dialogue'] = self._generate_npc_dialogue(
-        npc_name=updated_state['npc_name'],
-        context=updated_state,  # ← Contains player_analysis
+if updated_state.get('npc_name'): updated_state['npc_dialogue'] = self._generate_npc_dialogue(
+npc_name=updated_state['npc_name'], context=updated_state,  # ← Contains player_analysis
 
 ```text
 ```
@@ -222,14 +212,11 @@ NPC:      "I hear the weight in that. Loss shapes us in ways words
 ### Turn 3
 
 ```
-Input:    "But maybe there's something I can learn from this"
-Analysis: { tone: 'reflective', theme: 'grief', valence: -0.1, intensity: 0.3 }
-Memory:   { turns: 3, emotional_trajectory: [-0.7, -0.8, -0.1],
-            themes: {'general': 1, 'grief': 2},
-            emotional_trend: 'improving',
-            recurring_themes: ['grief'] }
-NPC:      "There's something to sit with there. I'm noticing grief
-           keeps coming back to you—that tells me something. And I'm
+Input:    "But maybe there's something I can learn from this" Analysis: { tone: 'reflective', theme:
+'grief', valence: -0.1, intensity: 0.3 } Memory:   { turns: 3, emotional_trajectory: [-0.7, -0.8,
+-0.1], themes: {'general': 1, 'grief': 2}, emotional_trend: 'improving', recurring_themes: ['grief']
+} NPC:      "There's something to sit with there. I'm noticing grief keeps coming back to you—that
+tells me something. And I'm
 ```text
 ```text
 ```
@@ -248,8 +235,8 @@ NPC:      "There's something to sit with there. I'm noticing grief
 
 ```
 
-f90cccf - Feat: FirstPerson integration for emotionally-aware NPC responses
-a3de8fe - Docs: Add FirstPerson + Velinor quick reference guide
+f90cccf - Feat: FirstPerson integration for emotionally-aware NPC responses a3de8fe - Docs: Add
+FirstPerson + Velinor quick reference guide
 
 ```text
 ```

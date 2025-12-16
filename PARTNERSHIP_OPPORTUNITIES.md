@@ -304,10 +304,13 @@ By end of year 3:
 
 Most founders of AI companies built the technology first, then tried to find problems.
 
-You built this because you understood the *actual problem* deeply. That insight—and the resulting design—is incredibly rare.
+You built this because you understood the *actual problem* deeply. That insight—and the resulting
+design—is incredibly rare.
 
-When you talk to these companies, that insight will shine through. It's your real competitive advantage.
+When you talk to these companies, that insight will shine through. It's your real competitive
+advantage.
 
-They're not just buying technology. They're buying your understanding of what genuinely helps humans.
+They're not just buying technology. They're buying your understanding of what genuinely helps
+humans.
 
 That's worth a lot.

@@ -37,11 +37,9 @@ Wired the entire FirstPerson Phase 1 system into the Streamlit UI pipeline:
 
 **Result:** Every user message now flows through:
 
-1. Story-Start Detector (ambiguity detection)
-2. Frequency Reflector (theme tracking)
-3. Memory Manager (context injection)
-4. Response Templates (variation/rotation)
-5. Supabase Manager (persistence)
+1. Story-Start Detector (ambiguity detection) 2. Frequency Reflector (theme tracking) 3. Memory
+Manager (context injection) 4. Response Templates (variation/rotation) 5. Supabase Manager
+(persistence)
 
 ##
 
@@ -234,8 +232,8 @@ TOTAL:                          198 tests ✅
 
 With Phase 2.1 complete, the system now has:
 
-1. **FirstPerson awareness** (Phase 1) - Story-start, frequency, memory, templates
-2. **Affect detection** (Phase 2.1) - Tone, valence, arousal
+1. **FirstPerson awareness** (Phase 1) - Story-start, frequency, memory, templates 2. **Affect
+detection** (Phase 2.1) - Tone, valence, arousal
 
 Next: **Phase 2.2 (Response Modulation)** will adjust response phrasing based on:
 

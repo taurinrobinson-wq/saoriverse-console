@@ -219,9 +219,9 @@ with st.sidebar:
 
 ### High Latency
 
-1. Check `profiler.get_summary()` for bottleneck operations
-2. Recommend faster model: `ModelPerformanceBenchmark.get_whisper_recommendation(target_latency)`
-3. Profile individual functions with `profiler.measure()`
+1. Check `profiler.get_summary()` for bottleneck operations 2. Recommend faster model:
+`ModelPerformanceBenchmark.get_whisper_recommendation(target_latency)` 3. Profile individual
+functions with `profiler.measure()`
 
 ### Poor Edge Case Detection
 
@@ -232,15 +232,14 @@ with st.sidebar:
 
 ### Session Logs Not Saving
 
-1. Verify `save_dir` exists: `Path(save_dir).mkdir(parents=True, exist_ok=True)`
-2. Check disk space and permissions
-3. Inspect `logger.events` list (should have messages)
+1. Verify `save_dir` exists: `Path(save_dir).mkdir(parents=True, exist_ok=True)` 2. Check disk space
+and permissions 3. Inspect `logger.events` list (should have messages)
 
 ### Prosody Not Applied
 
-1. Verify `plan.pitch_contour` and `plan.energy_contour` are populated
-2. Check TTS system accepts prosody directives format
-3. Log prosody plan: `logger.log_assistant_message(..., prosody_plan=plan.__dict__)`
+1. Verify `plan.pitch_contour` and `plan.energy_contour` are populated 2. Check TTS system accepts
+prosody directives format 3. Log prosody plan: `logger.log_assistant_message(...,
+prosody_plan=plan.__dict__)`
 
 ## Configuration
 
@@ -292,14 +291,10 @@ if config["performance_profiling"]["enabled"]:
 
 ## Next Steps
 
-1. ✅ Understand each module (this guide)
-2. [ ] Integrate performance_profiler into your pipeline
-3. [ ] Enable advanced_prosody for emotional responses
-4. [ ] Add session_logger to chat flow
-5. [ ] Display VoiceUIEnhancements in Streamlit UI
-6. [ ] Collect metrics and analyze patterns
-7. [ ] Conduct listening tests with advanced prosody
-8. [ ] Iterate based on user feedback
+1. ✅ Understand each module (this guide) 2. [ ] Integrate performance_profiler into your pipeline 3.
+[ ] Enable advanced_prosody for emotional responses 4. [ ] Add session_logger to chat flow 5. [ ]
+Display VoiceUIEnhancements in Streamlit UI 6. [ ] Collect metrics and analyze patterns 7. [ ]
+Conduct listening tests with advanced prosody 8. [ ] Iterate based on user feedback
 
 ##
 

@@ -68,10 +68,8 @@ The app will:
 
 ## Alternative: Deploy to Railway
 
-1. Connect GitHub repo to Railway
-2. Set environment variables for Supabase credentials
-3. Railway automatically detects `main_v2.py` as entry point
-4. Deploy with one click
+1. Connect GitHub repo to Railway 2. Set environment variables for Supabase credentials 3. Railway
+automatically detects `main_v2.py` as entry point 4. Deploy with one click
 
 ##
 
@@ -104,15 +102,8 @@ The app will run with built-in response generation.
 ## Architecture
 
 ```
-Streamlit Cloud/Railway
-    ↓
-main_v2.py (Entry point)
-    ↓
-Supabase (persistence) ← Conversation history
-    ↓
-Signal Parser ← Response generation with learning
-    ↓
-Glyph System ← Emotional response composition
+Streamlit Cloud/Railway ↓ main_v2.py (Entry point) ↓ Supabase (persistence) ← Conversation history ↓
+Signal Parser ← Response generation with learning ↓ Glyph System ← Emotional response composition
 ```
 
 ##

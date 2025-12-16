@@ -316,25 +316,19 @@ These files are set up for **velinor.firstperson.chat** but easily customizable:
 
 After using this package, you'll understand:
 
-✅ How Docker Compose orchestrates multi-service applications
-✅ How Nginx routes traffic to backend services
-✅ How SSL/TLS certificates work with Let's Encrypt
-✅ How GitHub Actions enables CI/CD
-✅ How DigitalOcean VPS works
-✅ How to troubleshoot deployment issues
-✅ How to maintain a production application
-✅ How to scale when needed
+✅ How Docker Compose orchestrates multi-service applications ✅ How Nginx routes traffic to backend
+services ✅ How SSL/TLS certificates work with Let's Encrypt ✅ How GitHub Actions enables CI/CD ✅ How
+DigitalOcean VPS works ✅ How to troubleshoot deployment issues ✅ How to maintain a production
+application ✅ How to scale when needed
 
 ##
 
 ## 🔐 SECURITY BUILT-IN
 
-✅ **SSL/TLS**: Encrypted traffic via Let's Encrypt
-✅ **SSH Keys**: Ed25519 (modern, secure)
-✅ **Automated Renewal**: Certificate auto-renews every 90 days
-✅ **No Passwords**: SSH key-only access
-✅ **Firewall Ready**: DigitalOcean Cloud Firewall compatible
-✅ **Health Checks**: Auto-restarts on unhealthy state
+✅ **SSL/TLS**: Encrypted traffic via Let's Encrypt ✅ **SSH Keys**: Ed25519 (modern, secure) ✅
+**Automated Renewal**: Certificate auto-renews every 90 days ✅ **No Passwords**: SSH key-only access
+✅ **Firewall Ready**: DigitalOcean Cloud Firewall compatible ✅ **Health Checks**: Auto-restarts on
+unhealthy state
 
 ##
 
@@ -344,11 +338,8 @@ Everything is created, tested, documented, and packaged.
 
 **All you need to do is**:
 
-1. Push to GitHub (2 min)
-2. Read one guide (5-20 min depending on choice)
-3. Create DigitalOcean account (3 min)
-4. Follow deployment steps (15 min)
-5. Test (5 min)
+1. Push to GitHub (2 min) 2. Read one guide (5-20 min depending on choice) 3. Create DigitalOcean
+account (3 min) 4. Follow deployment steps (15 min) 5. Test (5 min)
 
 **Total: ~30 minutes to production**
 
@@ -397,10 +388,8 @@ Now you're just **one push away** from launching Velinor on reliable, affordable
 
 **Next action**:
 
-1. Run the git push command
-2. Pick your documentation style
-3. Follow the steps
-4. Launch your game! 🚀
+1. Run the git push command 2. Pick your documentation style 3. Follow the steps 4. Launch your
+game! 🚀
 
 **Questions?**
 → Check `VPS_REFERENCE_CARD.md` or `DEPLOYMENT_VPS.md`

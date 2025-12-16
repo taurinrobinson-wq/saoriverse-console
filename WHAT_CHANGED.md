@@ -44,8 +44,7 @@ python main_v2_simple.py
 **Before:**
 
 ```bash
-pytest tests/
-pytest .                # Also ran root tests
+pytest tests/ pytest .                # Also ran root tests
 
 ```text
 ```text
@@ -55,8 +54,7 @@ pytest .                # Also ran root tests
 
 ```bash
 
-pytest tests/           # All tests
-pytest tests/unit/      # Just unit tests
+pytest tests/           # All tests pytest tests/unit/      # Just unit tests
 
 ```text
 ```
@@ -88,9 +86,8 @@ ls src/
 **Before:**
 
 ```
-1. Create code in multiple possible locations
-2. Update imports in 5+ places
-3. Add test somewhere unclear
+1. Create code in multiple possible locations 2. Update imports in 5+ places 3. Add test somewhere
+unclear
 ```text
 ```text
 ```
@@ -99,9 +96,8 @@ ls src/
 
 ```
 
-1. Add code to src/your_module.py
-2. Add test to tests/unit/test_your_module.py
-3. Run: pytest tests/unit/test_your_module.py
+1. Add code to src/your_module.py 2. Add test to tests/unit/test_your_module.py 3. Run: pytest
+tests/unit/test_your_module.py
 
 ```text
 ```
@@ -279,8 +275,7 @@ pytest tests/integration/  # Slower integration tests (< 10 sec)
 ```python
 
 # These all existed and were confusing:
-from emotional_os.core.signal_parser import parse_input
-from parser.signal_parser import parse_input
+from emotional_os.core.signal_parser import parse_input from parser.signal_parser import parse_input
 ```text
 ```text
 ```
@@ -423,11 +418,9 @@ ls -1 *.py
 
 ## Next Steps
 
-1. **Review**: Check out this branch and review changes
-2. **Test**: Verify app works and tests pass
-3. **PR**: Create pull request to `main`
-4. **Merge**: Merge when confident
-5. **Deploy**: Deploy new structure to production
+1. **Review**: Check out this branch and review changes 2. **Test**: Verify app works and tests pass
+3. **PR**: Create pull request to `main` 4. **Merge**: Merge when confident 5. **Deploy**: Deploy
+new structure to production
 
 ##
 

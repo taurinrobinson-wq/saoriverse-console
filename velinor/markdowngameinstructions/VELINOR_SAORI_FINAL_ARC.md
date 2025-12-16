@@ -2,7 +2,10 @@
 
 ## Overview
 
-Velinor and Saori are the emotional core of the game. They are not antagonists—they are best friends whose shared vision fractured under the weight of guilt, desperation, and conflicting philosophy. Their final encounter determines not just the game's ending, but the player's understanding of sacrifice, autonomy, and what friendship means in the face of collapse.
+Velinor and Saori are the emotional core of the game. They are not antagonists—they are best friends
+whose shared vision fractured under the weight of guilt, desperation, and conflicting philosophy.
+Their final encounter determines not just the game's ending, but the player's understanding of
+sacrifice, autonomy, and what friendship means in the face of collapse.
 
 ##
 
@@ -137,17 +140,15 @@ The unified system couldn't process conflicting emotions from billions of minds 
 
 ### Opening Exchange
 
-Saori (softly, to herself):
-"I thought if I rebuilt it… maybe she'd come back whole."
+Saori (softly, to herself): "I thought if I rebuilt it… maybe she'd come back whole."
 
-Velinor (looking up, voice steady):
-"I came back fractured. That was the cost. You knew it."
+Velinor (looking up, voice steady): "I came back fractured. That was the cost. You knew it."
 
-Saori (turning to player):
-"You've seen what's left. The glyphs. The echoes. The ache. I need your help to restart the system. To restore what we lost."
+Saori (turning to player): "You've seen what's left. The glyphs. The echoes. The ache. I need your
+help to restart the system. To restore what we lost."
 
-Velinor (to player):
-"She wants unity. I want memory. Not fused. Not filtered. Just… held. Even if it hurts."
+Velinor (to player): "She wants unity. I want memory. Not fused. Not filtered. Just… held. Even if
+it hurts."
 
 ##
 
@@ -161,7 +162,8 @@ Velinor (to player):
 "Then let it be done. Let memory be fused. Let ache be softened into sameness."
 
 **Saori's Relief**:
-She activates the console. The glyphs begin to coalesce. Velinor's fragmentation stabilizes. Her consciousness reintegrates.
+She activates the console. The glyphs begin to coalesce. Velinor's fragmentation stabilizes. Her
+consciousness reintegrates.
 
 **The Cost**:
 
@@ -317,6 +319,9 @@ She activates the console. The glyphs begin to coalesce. Velinor's fragmentation
 
 ## Narrative Philosophy
 
-This arc is built on the principle that **there is no good ending**. Every choice honors something while destroying something else. Every ending is a scar, and scars are what make memory real.
+This arc is built on the principle that **there is no good ending**. Every choice honors something
+while destroying something else. Every ending is a scar, and scars are what make memory real.
 
-The player isn't meant to feel victorious. They're meant to feel the weight of friendship, sacrifice, and philosophy—and to understand that sometimes, the most loving thing you can do is let someone go.
+The player isn't meant to feel victorious. They're meant to feel the weight of friendship,
+sacrifice, and philosophy—and to understand that sometimes, the most loving thing you can do is let
+someone go.

@@ -27,12 +27,9 @@ This document outlines what you need to build to complete the web version.
 
 Display the current game state with:
 
-1. **Background Image** - Story location visual
-2. **Story Text** - Current passage text from backend
-3. **NPC Section** - Portrait + dialogue
-4. **Choices** - Interactive buttons
-5. **Input Area** - Free text input option
-6. **Stats Panel** - Player stats display
+1. **Background Image** - Story location visual 2. **Story Text** - Current passage text from
+backend 3. **NPC Section** - Portrait + dialogue 4. **Choices** - Interactive buttons 5. **Input
+Area** - Free text input option 6. **Stats Panel** - Player stats display
 
 ### Reference Implementation
 
@@ -115,76 +112,32 @@ export function GameScene({
 Create a custom React hook to manage game state and backend calls:
 
 ```typescript
-// useGame.ts
-import { useCallback, useState } from 'react';
-import axios from 'axios';
+// useGame.ts import { useCallback, useState } from 'react'; import axios from 'axios';
 
 const API_BASE = 'http://localhost:8000';
 
-export function useGame() {
-  const [gameState, setGameState] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [sessionId, setSessionId] = useState('');
+export function useGame() { const [gameState, setGameState] = useState(null); const [loading,
+setLoading] = useState(false); const [sessionId, setSessionId] = useState('');
 
-  const startGame = useCallback(async (playerName: string) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(`${API_BASE}/sessions`, {
-        player_name: playerName,
-        player_backstory: 'Default backstory' // or get from user
-      });
-      setSessionId(response.data.session_id);
-      setGameState(response.data.initial_state);
-      return response.data;
-    } catch (error) {
-      console.error('Failed to start game:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+const startGame = useCallback(async (playerName: string) => { setLoading(true); try { const response
+= await axios.post(`${API_BASE}/sessions`, { player_name: playerName, player_backstory: 'Default
+backstory' // or get from user }); setSessionId(response.data.session_id);
+setGameState(response.data.initial_state); return response.data; } catch (error) {
+console.error('Failed to start game:', error); } finally { setLoading(false); } }, []);
 
-  const processChoice = useCallback(async (choiceId: string) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
+const processChoice = useCallback(async (choiceId: string) => { setLoading(true); try { const
+response = await axios.post(
         `${API_BASE}/sessions/${sessionId}/actions`,
-        {
-          player_input: choiceId,
-          action_type: 'choice'
-        }
-      );
-      setGameState(response.data.new_state);
-      return response.data;
-    } finally {
-      setLoading(false);
-    }
-  }, [sessionId]);
+{ player_input: choiceId, action_type: 'choice' } ); setGameState(response.data.new_state); return
+response.data; } finally { setLoading(false); } }, [sessionId]);
 
-  const processFreeInput = useCallback(async (input: string) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
+const processFreeInput = useCallback(async (input: string) => { setLoading(true); try { const
+response = await axios.post(
         `${API_BASE}/sessions/${sessionId}/actions`,
-        {
-          player_input: input,
-          action_type: 'free_text'
-        }
-      );
-      setGameState(response.data.new_state);
-      return response.data;
-    } finally {
-      setLoading(false);
-    }
-  }, [sessionId]);
+{ player_input: input, action_type: 'free_text' } ); setGameState(response.data.new_state); return
+response.data; } finally { setLoading(false); } }, [sessionId]);
 
-  return {
-    gameState,
-    loading,
-    sessionId,
-    startGame,
-    processChoice,
-    processFreeInput
-  };
+return { gameState, loading, sessionId, startGame, processChoice, processFreeInput };
 ```text
 ```text
 ```
@@ -195,12 +148,9 @@ export function useGame() {
 
 import { useGame } from '@/hooks/useGame';
 
-export function GameScene() {
-  const { gameState, processChoice, processFreeInput } = useGame();
+export function GameScene() { const { gameState, processChoice, processFreeInput } = useGame();
 
-  return (
-    // Use gameState.story_text, gameState.choices, etc.
-  );
+return ( // Use gameState.story_text, gameState.choices, etc. );
 
 ```text
 ```
@@ -273,38 +223,16 @@ const [input, setInput] = useState('');
 ### Display NPC Info
 
 ```tsx
-{gameState.npc_info && (
-  <div className="flex items-end gap-4">
-    {/* NPC Portrait */}
-    <img
-      src={`/assets/npcs/${gameState.npc_info.image}`}
-      alt={gameState.npc_info.name}
-      className="h-96 object-contain"
-    />
+{gameState.npc_info && ( <div className="flex items-end gap-4"> {/* NPC Portrait */} <img
+src={`/assets/npcs/${gameState.npc_info.image}`} alt={gameState.npc_info.name} className="h-96
+object-contain" />
 
-    {/* Dialogue Box */}
-    <div className="flex-1 bg-gradient-to-r from-purple-900 to-purple-800 p-6 rounded-lg">
-      <h3 className="text-2xl font-bold text-white mb-2">
-        {gameState.npc_info.name}
-      </h3>
-      <p className="text-purple-100">
-        {gameState.npc_info.dialogue}
-      </p>
-      {/* Trust indicator */}
-      <div className="mt-4 flex gap-1">
-        {Array(5).fill(0).map((_, i) => (
-          <div
-            key={i}
-            className={`h-2 flex-1 rounded ${
-              i < gameState.npc_info.trust_level * 5
-                ? 'bg-amber-400'
-                : 'bg-gray-600'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
+{/* Dialogue Box */} <div className="flex-1 bg-gradient-to-r from-purple-900 to-purple-800 p-6
+rounded-lg"> <h3 className="text-2xl font-bold text-white mb-2"> {gameState.npc_info.name} </h3> <p
+className="text-purple-100"> {gameState.npc_info.dialogue} </p> {/* Trust indicator */} <div
+className="mt-4 flex gap-1"> {Array(5).fill(0).map((_, i) => ( <div key={i} className={`h-2 flex-1
+rounded ${ i < gameState.npc_info.trust_level * 5 ? 'bg-amber-400' : 'bg-gray-600' }`} /> ))} </div>
+</div> </div>
 ```text
 ```text
 ```
@@ -320,26 +248,13 @@ const [input, setInput] = useState('');
 
 ```tsx
 
-export function StatsPanel({ stats: PlayerStats }) {
-  return (
-    <div className="bg-slate-900 p-4 rounded space-y-3">
-      <h3 className="text-lg font-bold text-white">Stats</h3>
-      {Object.entries(stats).map(([name, value]) => (
-        <div key={name}>
-          <div className="flex justify-between text-sm text-white mb-1">
-            <span className="capitalize">{name}</span>
-            <span>{(value * 100).toFixed(0)}%</span>
-          </div>
-          <div className="w-full bg-gray-700 rounded-full h-2">
-            <div
-              className="bg-gradient-to-r from-pink-500 to-purple-500 h-2 rounded-full"
-              style={{ width: `${value * 100}%` }}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+export function StatsPanel({ stats: PlayerStats }) { return ( <div className="bg-slate-900 p-4
+rounded space-y-3"> <h3 className="text-lg font-bold text-white">Stats</h3>
+{Object.entries(stats).map(([name, value]) => ( <div key={name}> <div className="flex
+justify-between text-sm text-white mb-1"> <span className="capitalize">{name}</span> <span>{(value *
+100).toFixed(0)}%</span> </div> <div className="w-full bg-gray-700 rounded-full h-2"> <div
+className="bg-gradient-to-r from-pink-500 to-purple-500 h-2 rounded-full" style={{ width: `${value *
+100}%` }} /> </div> </div> ))} </div> );
 
 ```text
 ```

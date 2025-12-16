@@ -188,11 +188,9 @@ python3 test_e2e_simple.py        # Integration tests (3 exchanges)
 
 Refer to:
 
-1. **Technical Details**: `PRIVACY_IMPLEMENTATION_A.md`
-2. **Executive Summary**: `PRIVACY_COMPLETE.md`
-3. **File Breakdown**: `PRIVACY_FILES_SUMMARY.md`
-4. **Implementation Report**: `PRIVACY_REPORT_FINAL.md`
-5. **Code**: `emotional_os/learning/hybrid_learner_v2.py`
+1. **Technical Details**: `PRIVACY_IMPLEMENTATION_A.md` 2. **Executive Summary**:
+`PRIVACY_COMPLETE.md` 3. **File Breakdown**: `PRIVACY_FILES_SUMMARY.md` 4. **Implementation
+Report**: `PRIVACY_REPORT_FINAL.md` 5. **Code**: `emotional_os/learning/hybrid_learner_v2.py`
 
 ##
 

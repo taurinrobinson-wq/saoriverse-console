@@ -2,7 +2,10 @@
 
 ## Overview
 
-The NPC Sphere of Influence System models how relationships ripple across Velinor's communities. Each NPC belongs to a sphere—a web of emotional connections, family ties, and shared resonance. When the player fractures trust or deepens empathy with one NPC, it affects not just that character, but their entire network.
+The NPC Sphere of Influence System models how relationships ripple across Velinor's communities.
+Each NPC belongs to a sphere—a web of emotional connections, family ties, and shared resonance. When
+the player fractures trust or deepens empathy with one NPC, it affects not just that character, but
+their entire network.
 
 ##
 
@@ -31,16 +34,11 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 ```text
 ```
 
-                    Ravi (0.8) ← → Nima
-                    /  \              /  \
-              (0.4)/    \(0.2)    (0.5)/   \(0.3)
-                  /        \          /       \
-            Merchants    Shrine Keepers    Merchants
-          (0.4 ripple)   (0.5 ripple)     (0.3 ripple)
+Ravi (0.8) ← → Nima /  \              /  \ (0.4)/    \(0.2)    (0.5)/   \(0.3) /        \          /
+\ Merchants    Shrine Keepers    Merchants (0.4 ripple)   (0.5 ripple)     (0.3 ripple)
               |              |                |
-        Tovren (Cartwright)  Sera (Novice)    Korrin (Gossip)
-        Mariel (Weaver)      [Others]        [Others]
-        Kaelen (Cloaked)*
+Tovren (Cartwright)  Sera (Novice)    Korrin (Gossip) Mariel (Weaver)      [Others]        [Others]
+Kaelen (Cloaked)*
 
 - Hidden sphere: Thieves' Gang (0.6 counter-sphere with Veynar)
 

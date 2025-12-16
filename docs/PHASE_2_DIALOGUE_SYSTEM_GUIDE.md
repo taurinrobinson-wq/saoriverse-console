@@ -2,7 +2,8 @@
 
 ## Overview
 
-Phase 2 focuses on wiring the TONE stat system into actual dialogue choices. The core system is built; now we add the content that uses it.
+Phase 2 focuses on wiring the TONE stat system into actual dialogue choices. The core system is
+built; now we add the content that uses it.
 
 ## Implementation Checklist
 
@@ -95,49 +96,30 @@ interface GameSceneProps {
 **File to create**: `velinor-web/src/lib/useDialogue.ts`
 
 ```typescript
-import { useGameStore } from './gameStore';
-import { dialogueDatabase } from './dialogueData';
+import { useGameStore } from './gameStore'; import { dialogueDatabase } from './dialogueData';
 
-export function useDialogue() {
-  const { toneStats, updateToneStats, setScene, unlockGlyph } = useGameStore();
+export function useDialogue() { const { toneStats, updateToneStats, setScene, unlockGlyph } =
+useGameStore();
 
-  const handleDialogueChoice = (dialogueId: string, choiceIndex: number) => {
-    const dialogue = dialogueDatabase[dialogueId];
-    if (!dialogue) return;
+const handleDialogueChoice = (dialogueId: string, choiceIndex: number) => { const dialogue =
+dialogueDatabase[dialogueId]; if (!dialogue) return;
 
-    const choice = dialogue.choices[choiceIndex];
-    if (!choice) return;
+const choice = dialogue.choices[choiceIndex]; if (!choice) return;
 
-    // Check if player can select this choice
-    if (choice.requiresStats) {
-      const canSelect = Object.entries(choice.requiresStats).every(
-        ([stat, required]) => toneStats[stat as keyof typeof toneStats] >= required
-      );
-      if (!canSelect) return; // Grey out or block this choice
-    }
+// Check if player can select this choice if (choice.requiresStats) { const canSelect =
+Object.entries(choice.requiresStats).every( ([stat, required]) => toneStats[stat as keyof typeof
+toneStats] >= required ); if (!canSelect) return; // Grey out or block this choice }
 
-    // Apply TONE stat changes
-    choice.toneChanges.forEach(action => {
-      updateToneStats(action);
-    });
+// Apply TONE stat changes choice.toneChanges.forEach(action => { updateToneStats(action); });
 
-    // Unlock content if applicable
-    if (choice.unlocksContent?.glyph) {
-      unlockGlyph(choice.unlocksContent.glyph);
-    }
+// Unlock content if applicable if (choice.unlocksContent?.glyph) {
+unlockGlyph(choice.unlocksContent.glyph); }
 
-    // Move to next dialogue
-    const nextDialogue = dialogueDatabase[choice.nextDialogueId];
-    if (nextDialogue) {
-      setScene(
-        nextDialogue.id,
-        nextDialogue.backgroundImage,
-        nextDialogue.overlayImage
-      );
-    }
-  };
+// Move to next dialogue const nextDialogue = dialogueDatabase[choice.nextDialogueId]; if
+(nextDialogue) { setScene( nextDialogue.id, nextDialogue.backgroundImage, nextDialogue.overlayImage
+); } };
 
-  return { handleDialogueChoice, dialogueDatabase };
+return { handleDialogueChoice, dialogueDatabase };
 ```text
 ```text
 ```
@@ -148,38 +130,24 @@ export function useDialogue() {
 
 ```typescript
 
-import { useGameStore } from '@/lib/gameStore';
-import { useDialogue } from '@/lib/useDialogue';
+import { useGameStore } from '@/lib/gameStore'; import { useDialogue } from '@/lib/useDialogue';
 import GameScene from './GameScene';
 
-export default function DialogueRenderer() {
-  const { currentScene, currentBackground, currentOverlay, toneStats } = useGameStore();
-  const { handleDialogueChoice, dialogueDatabase } = useDialogue();
+export default function DialogueRenderer() { const { currentScene, currentBackground,
+currentOverlay, toneStats } = useGameStore(); const { handleDialogueChoice, dialogueDatabase } =
+useDialogue();
 
-  const dialogue = dialogueDatabase[currentScene];
-  if (!dialogue) return <div>Scene not found</div>;
+const dialogue = dialogueDatabase[currentScene]; if (!dialogue) return <div>Scene not found</div>;
 
-  // Filter choices based on TONE requirements
-  const availableChoices = dialogue.choices.filter(choice => {
-    if (!choice.requiresStats) return true;
-    return Object.entries(choice.requiresStats).every(
-      ([stat, required]) => toneStats[stat as keyof typeof toneStats] >= required
-    );
-  });
+// Filter choices based on TONE requirements const availableChoices = dialogue.choices.filter(choice
+=> { if (!choice.requiresStats) return true; return Object.entries(choice.requiresStats).every(
+([stat, required]) => toneStats[stat as keyof typeof toneStats] >= required ); });
 
-  return (
-    <GameScene
-      backgroundImage={currentBackground}
-      overlay={currentOverlay}
-      narration={dialogue.narration}
-      npcName={dialogue.npc}
-      choices={availableChoices.map(c => ({ text: c.text, id: c.id }))}
-      onChoiceClick={(choiceIndex) => {
-        const choice = availableChoices[choiceIndex];
-        handleDialogueChoice(dialogue.id, dialogue.choices.indexOf(choice));
-      }}
-    />
-  );
+return ( <GameScene backgroundImage={currentBackground} overlay={currentOverlay}
+narration={dialogue.narration} npcName={dialogue.npc} choices={availableChoices.map(c => ({ text:
+c.text, id: c.id }))} onChoiceClick={(choiceIndex) => { const choice =
+availableChoices[choiceIndex]; handleDialogueChoice(dialogue.id, dialogue.choices.indexOf(choice));
+}} /> );
 
 ```sql
 ```

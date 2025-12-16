@@ -10,10 +10,11 @@ This is your complete guide to migrating Velinor from Streamlit to a proper web 
 
 ### **Then Read** (In Order)
 
-1. **[VELINOR_WEB_MIGRATION.md](VELINOR_WEB_MIGRATION.md)** - 6-phase step-by-step setup guide
-2. **[NEXTJS_FRONTEND_SETUP.md](NEXTJS_FRONTEND_SETUP.md)** - Detailed Next.js configuration
-3. **[RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)** - Production deployment to Railway
-4. **[VELINOR_WEB_QUICK_REFERENCE.md](VELINOR_WEB_QUICK_REFERENCE.md)** - Command reference & troubleshooting
+1. **[VELINOR_WEB_MIGRATION.md](VELINOR_WEB_MIGRATION.md)** - 6-phase step-by-step setup guide 2.
+**[NEXTJS_FRONTEND_SETUP.md](NEXTJS_FRONTEND_SETUP.md)** - Detailed Next.js configuration 3.
+**[RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)** - Production deployment to Railway 4.
+**[VELINOR_WEB_QUICK_REFERENCE.md](VELINOR_WEB_QUICK_REFERENCE.md)** - Command reference &
+troubleshooting
 
 ### **Reference** (As Needed)
 
@@ -119,10 +120,9 @@ git commit -m "Velinor web game"
 ## 📊 Architecture
 
 ```
-                       Next.js Frontend
-                    (http://localhost:3000)
+Next.js Frontend (http://localhost:3000)
                              │
-                    Game Scene Component
+Game Scene Component
                     ├─ Background Image
                     ├─ Overlay (Dust/Fog/Glyphs)
                     ├─ Narration Box
@@ -130,11 +130,9 @@ git commit -m "Velinor web game"
                     └─ Custom Input
                              │
                              │ HTTP/REST
-                             ▼
-                       FastAPI Backend
-                    (http://localhost:8000)
+▼ FastAPI Backend (http://localhost:8000)
                              │
-                    Game Logic & State
+Game Logic & State
                     ├─ Session Management
                     ├─ Velinor Engine
                     ├─ Dice Rolls
@@ -161,13 +159,10 @@ git commit -m "Velinor web game"
 
 ```
 
-Are you...              Then read...
-───────────────────────────────────────────────────────────
-Starting fresh?         VELINOR_WEB_COMPLETE.md
-Ready to set up?        VELINOR_WEB_MIGRATION.md (Phase 1)
-Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md
-Ready to deploy?        RAILWAY_DEPLOYMENT.md
-Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
+Are you...              Then read... ───────────────────────────────────────────────────────────
+Starting fresh?         VELINOR_WEB_COMPLETE.md Ready to set up?        VELINOR_WEB_MIGRATION.md
+(Phase 1) Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md Ready to deploy?
+RAILWAY_DEPLOYMENT.md Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
 
 ```text
 ```
@@ -234,11 +229,10 @@ cd velinor-web && npm run dev
 
 ## 💡 Tips
 
-1. **Start with local development** - Get it working on your machine first
-2. **Use Swagger UI** - Visit `http://localhost:8000/docs` to test API
-3. **Browser DevTools** - F12 to check network requests & errors
-4. **Test on mobile** - The game should work on phones too
-5. **Version control** - Commit frequently so you can revert if needed
+1. **Start with local development** - Get it working on your machine first 2. **Use Swagger UI** -
+Visit `http://localhost:8000/docs` to test API 3. **Browser DevTools** - F12 to check network
+requests & errors 4. **Test on mobile** - The game should work on phones too 5. **Version control**
+- Commit frequently so you can revert if needed
 
 ##
 

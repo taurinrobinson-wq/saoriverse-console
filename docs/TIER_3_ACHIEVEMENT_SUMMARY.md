@@ -12,11 +12,10 @@
 
 A sophisticated system that adds creative depth and poetic expression to every response through:
 
-1. **PoetryEngine** - Metaphor generation and symbolic language
-2. **SaoriLayer** - Japanese aesthetic principles (Ma, Wabi-sabi, Yūgen, Mono no aware)
-3. **TensionManager** - Creative tension and paradox balancing
-4. **MythologyWeaver** - Personal narrative and conversational mythology
-5. **Orchestrator** - Coordinating all components seamlessly
+1. **PoetryEngine** - Metaphor generation and symbolic language 2. **SaoriLayer** - Japanese
+aesthetic principles (Ma, Wabi-sabi, Yūgen, Mono no aware) 3. **TensionManager** - Creative tension
+and paradox balancing 4. **MythologyWeaver** - Personal narrative and conversational mythology 5.
+**Orchestrator** - Coordinating all components seamlessly
 
 ##
 
@@ -124,30 +123,24 @@ A sophisticated system that adds creative depth and poetic expression to every r
 ```text
 ```
 
-User Input
-    ↓
-Tier 1: Foundation (40ms)
+User Input ↓ Tier 1: Foundation (40ms)
 ├─ LexiconLearner: Learn new vocabulary
 ├─ Sanctuary: Apply safety wrapping with compassion
 └─ SignalParser: Detect emotional signals
 
-    ↓
-Tier 2: Aliveness (20ms)
+↓ Tier 2: Aliveness (20ms)
 ├─ AttunementLoop: Synchronize emotional tone
 ├─ EmotionalReciprocity: Match intensity
 ├─ EmbodiedSimulation: Add physical presence language
 └─ EnergyTracker: Manage conversation energy
 
-    ↓
-Tier 3: Poetic Consciousness (10ms)
+↓ Tier 3: Poetic Consciousness (10ms)
 ├─ PoetryEngine: Generate metaphors & symbols
 ├─ SaoriLayer: Apply aesthetic principles
 ├─ TensionManager: Create creative tension
 └─ MythologyWeaver: Build personal narrative
 
-    ↓
-Enhanced Response
-(Learned, Safe, Alive, Attuned, Poetic, Creative)
+↓ Enhanced Response (Learned, Safe, Alive, Attuned, Poetic, Creative)
 
 ```
 
@@ -333,12 +326,8 @@ Easy to extend:
 ```text
 ```
 
-Tier 1: 40ms (Foundation)
-Tier 2: 20ms (Aliveness)
-Tier 3: 10ms (Poetry)
-Tier 4: 20ms (Consciousness Bridging) - planned
-Buffer: 10ms
-Total: 100ms
+Tier 1: 40ms (Foundation) Tier 2: 20ms (Aliveness) Tier 3: 10ms (Poetry) Tier 4: 20ms (Consciousness
+Bridging) - planned Buffer: 10ms Total: 100ms
 
 ```
 

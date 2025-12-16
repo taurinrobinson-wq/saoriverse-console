@@ -101,12 +101,10 @@ Melancholy (13)
     + Nostalgia (9)
     + Longing (12)
     + Solitude (18)
-        ↓
-    = Complex emotional state
+↓ = Complex emotional state
 
-When extracted from Romantic poetry:
-"I remember the sweetness of days gone by,
- Yet grief fills my heart for what I've lost"
+When extracted from Romantic poetry: "I remember the sweetness of days gone by, Yet grief fills my
+heart for what I've lost"
 
 ```
 
@@ -121,12 +119,9 @@ Transcendence (11)
     + Wonder (16)
     + Transformation (4)
     + Nature (8)
-        ↓
-    = Spiritual awakening
+↓ = Spiritual awakening
 
-When extracted from Shelley:
-"The vast luminous sphere,
- Where infinite consciousness dwells"
+When extracted from Shelley: "The vast luminous sphere, Where infinite consciousness dwells"
 
 ```
 
@@ -221,13 +216,11 @@ Emotional Dimensions Report:
 
 ## Why This Matters
 
-Your original insight was profound: emotions in poetry are complex and multi-dimensional. By limiting to 8 dimensions, you were capturing only the primary patterns.
+Your original insight was profound: emotions in poetry are complex and multi-dimensional. By
+limiting to 8 dimensions, you were capturing only the primary patterns.
 
-Now with **18+ adaptive dimensions**, the system can:
-1. ✅ Recognize subtle emotional nuances
-2. ✅ Understand poet-specific emotional vocabularies
-3. ✅ Discover patterns unique to different eras
-4. ✅ Build a truly comprehensive emotional lexicon
-5. ✅ Scale indefinitely as more poetry is processed
+Now with **18+ adaptive dimensions**, the system can: 1. ✅ Recognize subtle emotional nuances 2. ✅
+Understand poet-specific emotional vocabularies 3. ✅ Discover patterns unique to different eras 4. ✅
+Build a truly comprehensive emotional lexicon 5. ✅ Scale indefinitely as more poetry is processed
 
 **The system no longer just recognizes emotions - it discovers them.** 🌟

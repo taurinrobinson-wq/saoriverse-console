@@ -82,23 +82,19 @@ Velinor is a text-based narrative game with innovative mechanics:
 ```text
 ```
 
-PLAYER INPUT (Text or Choice)
-        ↓
-VelinorTwineOrchestrator (Game Loop)
+PLAYER INPUT (Text or Choice) ↓ VelinorTwineOrchestrator (Game Loop)
         ├─ FirstPerson Intent Summary
         ├─ Twine Story Processing
         ├─ Game Mechanics (Dice, Stats)
         └─ NPC Dialogue Generation
-        ↓
-FORMATTED GAME STATE
+↓ FORMATTED GAME STATE
         ├─ Main Dialogue
         ├─ NPC Response
         ├─ Choices
         ├─ Background Image
         ├─ Player Stats
         └─ Dice Results
-        ↓
-UI LAYER (Streamlit, Web, CLI, etc.)
+↓ UI LAYER (Streamlit, Web, CLI, etc.)
 
 ```
 
@@ -210,11 +206,8 @@ velinor/
 ```python
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
-engine = VelinorEngine(player_name="Traveler")
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path="velinor/stories/sample_story.json"
-)
+engine = VelinorEngine(player_name="Traveler") orchestrator = VelinorTwineOrchestrator(
+game_engine=engine, story_path="velinor/stories/sample_story.json" )
 
 ```text
 ```text
@@ -226,15 +219,11 @@ orchestrator = VelinorTwineOrchestrator(
 
 
 # Choice-based
-state = orchestrator.process_player_action(
-    choice_index=0,
-    player_id="player_1"
-)
+state = orchestrator.process_player_action( choice_index=0, player_id="player_1" )
 
 # Free-text
-state = orchestrator.process_player_action(
-    player_input="I approach cautiously",
-    player_id="player_1"
+state = orchestrator.process_player_action( player_input="I approach cautiously",
+player_id="player_1"
 
 ```text
 ```
@@ -292,19 +281,13 @@ orchestrator.load_game("saves/game_001.json")
 
 ### Short-term (This week)
 
-1. Flesh out story passages (currently 20, target 50+)
-2. Create background images (6+ locations)
-3. Refine NPC personalities
-4. Test FirstPerson integration
-5. Balance stat modifiers and DCs
+1. Flesh out story passages (currently 20, target 50+) 2. Create background images (6+ locations) 3.
+Refine NPC personalities 4. Test FirstPerson integration 5. Balance stat modifiers and DCs
 
 ### Medium-term (Next 2 weeks)
 
-1. Implement inventory system
-2. Add quest tracking
-3. Create achievement system
-4. Test with multiple players
-5. Polish UI/UX
+1. Implement inventory system 2. Add quest tracking 3. Create achievement system 4. Test with
+multiple players 5. Polish UI/UX
 
 ##
 
@@ -336,15 +319,9 @@ orchestrator.load_game("saves/game_001.json")
 
 ## Success Criteria - Met ✅
 
-✅ Framework chosen based on design docs
-✅ Modular game engine with event system
-✅ Story system with markup support
-✅ Skill check / dice roll mechanics
-✅ FirstPerson integration hooks
-✅ Multiplayer infrastructure
-✅ Save/load persistence
-✅ Documentation complete
-✅ Sample story with working passages
+✅ Framework chosen based on design docs ✅ Modular game engine with event system ✅ Story system with
+markup support ✅ Skill check / dice roll mechanics ✅ FirstPerson integration hooks ✅ Multiplayer
+infrastructure ✅ Save/load persistence ✅ Documentation complete ✅ Sample story with working passages
 ✅ Ready for UI integration
 
 ##
@@ -362,9 +339,8 @@ orchestrator.load_game("saves/game_001.json")
 
 ## Contact & Updates
 
-Created: December 6, 2025
-Branch: `feature/velinor-remnants-of-tone`
-Status: 🟢 Core system complete, ready for UI layer
+Created: December 6, 2025 Branch: `feature/velinor-remnants-of-tone` Status: 🟢 Core system complete,
+ready for UI layer
 
 For questions about architecture or integration, see:
 

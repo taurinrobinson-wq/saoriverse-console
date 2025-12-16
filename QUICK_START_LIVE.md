@@ -5,11 +5,9 @@
 ```text
 ```
 
-🟢 OPERATIONAL - Backend running on <http://127.0.0.1:8000>
-✅ All endpoints tested and responding
-✅ Theme detection working (grief, joy, stress, isolation, etc.)
-✅ Empathetic response generation active
-✅ 3-tier pipeline processing all responses
+🟢 OPERATIONAL - Backend running on <http://127.0.0.1:8000> ✅ All endpoints tested and responding ✅
+Theme detection working (grief, joy, stress, isolation, etc.) ✅ Empathetic response generation
+active ✅ 3-tier pipeline processing all responses
 
 ```
 
@@ -60,22 +58,12 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/conversations/robinson1234" `
 ## How It Works
 
 ```
-User Message
-    ↓
-Theme Detection (grief, joy, stress, isolation, fatigue, work, health)
-    ↓
-Base Response Generation (empathetic templates)
-    ↓
-3-Tier Enhancement Pipeline:
+User Message ↓ Theme Detection (grief, joy, stress, isolation, fatigue, work, health) ↓ Base
+Response Generation (empathetic templates) ↓ 3-Tier Enhancement Pipeline:
   ├─ Tier 1: Foundation (safety, signals, learning)
   ├─ Tier 2: Aliveness (emotional attunement, energy)
   └─ Tier 3: Poetic Consciousness (aesthetics, narrative)
-    ↓
-Glyph-Informed Composition
-    ↓
-Return Response to Client
-    ↓
-Save to Database (async, non-blocking)
+↓ Glyph-Informed Composition ↓ Return Response to Client ↓ Save to Database (async, non-blocking)
 ```
 
 ## Response Examples

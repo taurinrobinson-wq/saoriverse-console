@@ -26,8 +26,8 @@ Think of it like this:
 ```text
 ```
 
-Railway = Rental apartment where the landlord keeps breaking things
-DigitalOcean = Renting a small VPS where YOU have full control
+Railway = Rental apartment where the landlord keeps breaking things DigitalOcean = Renting a small
+VPS where YOU have full control
 
 ```
 
@@ -86,23 +86,12 @@ When you click "Play" at `https://velinor.firstperson.chat`, here's what happens
 ```text
 ```
 
-1. Your browser sends request to velinor.firstperson.chat
-   ↓
-2. DNS says "that's 123.45.67.89" (your DigitalOcean IP)
-   ↓
-3. Browser connects to port 443 (HTTPS)
-   ↓
-4. Nginx (reverse proxy) catches it
+1. Your browser sends request to velinor.firstperson.chat ↓ 2. DNS says "that's 123.45.67.89" (your
+DigitalOcean IP) ↓ 3. Browser connects to port 443 (HTTPS) ↓ 4. Nginx (reverse proxy) catches it
    - "Is this a game request? Send to Next.js"
    - "Is this an API request? Send to FastAPI"
-   ↓
-5. Next.js sends you the game interface
-   ↓
-6. When you click "Start Game", your browser talks to FastAPI
-   ↓
-7. FastAPI runs the Velinor game engine
-   ↓
-8. You play! 🎮
+↓ 5. Next.js sends you the game interface ↓ 6. When you click "Start Game", your browser talks to
+FastAPI ↓ 7. FastAPI runs the Velinor game engine ↓ 8. You play! 🎮
 
 ```
 
@@ -316,30 +305,23 @@ git commit -m "feat: add production VPS deployment infrastructure"
 
 ### 2. Create DigitalOcean Account (5 min)
 
-Go to <https://digitalocean.com>
-Sign up with email
-Verify email
+Go to <https://digitalocean.com> Sign up with email Verify email
 
 ### 3. Create Droplet (5 min)
 
-Follow the simple steps on DigitalOcean dashboard
-Save the IP address
+Follow the simple steps on DigitalOcean dashboard Save the IP address
 
 ### 4. Configure DNS (2 min)
 
-Go to Namecheap
-Add A Record: `velinor` → your IP
+Go to Namecheap Add A Record: `velinor` → your IP
 
 ### 5. Run Setup Script (10 min)
 
-SSH into droplet
-Copy-paste the setup commands
-Wait for it to finish
+SSH into droplet Copy-paste the setup commands Wait for it to finish
 
 ### 6. Test (5 min)
 
-Visit <https://velinor.firstperson.chat>
-Confirm it works
+Visit <https://velinor.firstperson.chat> Confirm it works
 
 ### 7. Celebrate! (∞)
 
@@ -382,11 +364,9 @@ With:
 
 ```
 
-✅ Production Docker setup (verified working)
-✅ SSL/HTTPS (encrypted and secure)
-✅ Auto-deployment (push code → site updates automatically)
-✅ Full documentation (5 different guides)
-✅ Peace of mind (99.9% uptime)
+✅ Production Docker setup (verified working) ✅ SSL/HTTPS (encrypted and secure) ✅ Auto-deployment
+(push code → site updates automatically) ✅ Full documentation (5 different guides) ✅ Peace of mind
+(99.9% uptime)
 
 ```
 

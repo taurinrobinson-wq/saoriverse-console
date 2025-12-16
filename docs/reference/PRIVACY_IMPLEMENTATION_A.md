@@ -2,7 +2,8 @@
 
 ## Overview
 
-This document describes how **Option A: Gate-Based Data Masking** protects user privacy in the Saoriverse Console while preserving learning capability.
+This document describes how **Option A: Gate-Based Data Masking** protects user privacy in the
+Saoriverse Console while preserving learning capability.
 
 **Decision**: Selected by user after comprehensive privacy analysis of ECM gate system.
 
@@ -70,13 +71,9 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
 **Before (Privacy Violation):**
 
 ```python
-log_entry = {
-    "timestamp": datetime.now().isoformat(),
-    "user_id": user_id,
-    "user_input": user_input,  # ❌ RAW TEXT
-    "ai_response": ai_response,  # ❌ RAW CONTENT
-    "emotional_signals": emotional_signals,
-    "glyphs": glyphs,
+log_entry = { "timestamp": datetime.now().isoformat(), "user_id": user_id, "user_input": user_input,
+# ❌ RAW TEXT "ai_response": ai_response,  # ❌ RAW CONTENT "emotional_signals": emotional_signals,
+"glyphs": glyphs,
 ```text
 ```text
 ```
@@ -85,14 +82,10 @@ log_entry = {
 
 ```python
 
-log_entry = {
-    "timestamp": datetime.now().isoformat(),
-    "user_id_hash": user_id,  # Already hashed
-    "signals": signal_names,  # Only signal names, not text
-    "gates": signal_gates,  # Gate activation only
-    "glyph_names": [...],  # Glyph names only
-    "ai_response_length": len(ai_response),  # Metadata only
-    "exchange_quality": "logged",
+log_entry = { "timestamp": datetime.now().isoformat(), "user_id_hash": user_id,  # Already hashed
+"signals": signal_names,  # Only signal names, not text "gates": signal_gates,  # Gate activation
+only "glyph_names": [...],  # Glyph names only "ai_response_length": len(ai_response),  # Metadata
+only "exchange_quality": "logged",
     # REMOVED: "user_input" (raw text)
     # REMOVED: "ai_response" (content)
 
@@ -155,9 +148,8 @@ entry["example_contexts"].append({
 
 
 # 📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
-✅ Total entries: 3738
-❌ Violations: 11214 (from 3738 entries in old format)
-📊 Compliance: 0.0% (entries are from pre-privacy-implementation)
+✅ Total entries: 3738 ❌ Violations: 11214 (from 3738 entries in old format) 📊 Compliance: 0.0%
+(entries are from pre-privacy-implementation)
 
 ⚠️ This is expected for historical data logged before Option A.
 
@@ -231,12 +223,10 @@ User Input → Extracted Signals → LOGGED RAW → Hybrid Learning
 ### After (Gate-Based Data Masking)
 
 ```
-User Input → Extracted Signals → LOGGED SAFE → Hybrid Learning
-   ↓           ↓                  (Signals)      ↓
-"I'm         "struggle"  →       Log Entry:    User lexicon
-depressed"   "vulnerability"     signals,      (signal contexts
-             "melancholy"        gates,        only)
-                                 metadata      ✅ PRIVACY SAFE
+User Input → Extracted Signals → LOGGED SAFE → Hybrid Learning ↓           ↓
+(Signals)      ↓ "I'm         "struggle"  →       Log Entry:    User lexicon depressed"
+"vulnerability"     signals,      (signal contexts "melancholy"        gates,        only) metadata
+✅ PRIVACY SAFE
 ```
 
 ## Security Model

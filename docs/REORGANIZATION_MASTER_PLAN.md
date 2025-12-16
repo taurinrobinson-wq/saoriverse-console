@@ -232,13 +232,10 @@ touch src/privacy_layer.py         # Privacy/encryption
 ```bash
 
 # Create tests/ with organization
-mkdir -p tests/unit/
-mkdir -p tests/integration/
-mkdir -p tests/fixtures/
+mkdir -p tests/unit/ mkdir -p tests/integration/ mkdir -p tests/fixtures/
 
 # Create test discovery
-touch tests/__init__.py
-touch tests/conftest.py             # Pytest configuration
+touch tests/__init__.py touch tests/conftest.py             # Pytest configuration
 ```text
 ```text
 ```
@@ -249,9 +246,7 @@ touch tests/conftest.py             # Pytest configuration
 
 
 # Consolidate data files
-mkdir -p data/lexicons/
-mkdir -p data/models/
-mkdir -p data/fixtures/
+mkdir -p data/lexicons/ mkdir -p data/models/ mkdir -p data/fixtures/
 
 # Move all glyph/lexicon data to data/
 mv glyphs.db data/
@@ -378,31 +373,18 @@ For each major component:
 **src/__init__.py**
 
 ```python
-"""
-SaoriVerse Console - Emotional OS Core
+""" SaoriVerse Console - Emotional OS Core
 
-Exports all public APIs for use by UI layers (Streamlit, etc.)
-"""
+Exports all public APIs for use by UI layers (Streamlit, etc.) """
 
-from src.emotional_os import EmotionalOS, GlyphSignals
-from src.signal_parser import parse_input, extract_themes
-from src.response_generator import generate_response
-from src.archetype_response_v2 import ArchetypeResponseGeneratorV2
-from src.voice_interface import VoiceInterface
-from src.privacy_layer import encrypt_signals, decrypt_signals
-from src.learning import LearningSystem
+from src.emotional_os import EmotionalOS, GlyphSignals from src.signal_parser import parse_input,
+extract_themes from src.response_generator import generate_response from src.archetype_response_v2
+import ArchetypeResponseGeneratorV2 from src.voice_interface import VoiceInterface from
+src.privacy_layer import encrypt_signals, decrypt_signals from src.learning import LearningSystem
 
-__all__ = [
-    "EmotionalOS",
-    "GlyphSignals",
-    "parse_input",
-    "extract_themes",
-    "generate_response",
-    "ArchetypeResponseGeneratorV2",
-    "VoiceInterface",
-    "encrypt_signals",
-    "decrypt_signals",
-    "LearningSystem",
+__all__ = [ "EmotionalOS", "GlyphSignals", "parse_input", "extract_themes", "generate_response",
+"ArchetypeResponseGeneratorV2", "VoiceInterface", "encrypt_signals", "decrypt_signals",
+"LearningSystem",
 ```text
 ```text
 ```
@@ -481,10 +463,7 @@ def sample_signal():
 [pytest]
 
 # tests/pytest.ini
-testpaths = tests
-python_files = test_*.py
-python_classes = Test*
-python_functions = test_*
+testpaths = tests python_files = test_*.py python_classes = Test* python_functions = test_*
 ```text
 ```text
 ```
@@ -499,62 +478,41 @@ python_functions = test_*
 
 ```python
 
-"""
-SaoriVerse Console - FirstPerson
-Streamlit entry point for emotional AI system with voice interface.
+""" SaoriVerse Console - FirstPerson Streamlit entry point for emotional AI system with voice
+interface.
 
-Run: streamlit run app.py
-"""
+Run: streamlit run app.py """
 
-import streamlit as st
-from src import (
-    EmotionalOS,
-    ArchetypeResponseGeneratorV2,
-    VoiceInterface,
+import streamlit as st from src import ( EmotionalOS, ArchetypeResponseGeneratorV2, VoiceInterface,
 )
 
 # Page configuration
-st.set_page_config(
-    page_title="FirstPerson",
-    page_icon="🧠",
-    layout="wide",
-)
+st.set_page_config( page_title="FirstPerson", page_icon="🧠", layout="wide", )
 
-def init_session():
-    """Initialize session state."""
-    if "initialized" not in st.session_state:
-        st.session_state.initialized = True
-        st.session_state.emotional_os = EmotionalOS()
-        st.session_state.response_gen = ArchetypeResponseGeneratorV2()
-        st.session_state.voice = VoiceInterface()
-        st.session_state.conversation = []
+def init_session(): """Initialize session state.""" if "initialized" not in st.session_state:
+st.session_state.initialized = True st.session_state.emotional_os = EmotionalOS()
+st.session_state.response_gen = ArchetypeResponseGeneratorV2() st.session_state.voice =
+VoiceInterface() st.session_state.conversation = []
 
-def main():
-    """Main Streamlit app."""
-    init_session()
+def main(): """Main Streamlit app.""" init_session()
 
-    st.title("🧠 FirstPerson")
-    st.markdown("A private space for emotional processing and growth")
+st.title("🧠 FirstPerson") st.markdown("A private space for emotional processing and growth")
 
     # Text input
-    with st.sidebar:
-        st.header("💬 Text Chat")
-        user_input = st.text_input("What's on your mind?")
+with st.sidebar: st.header("💬 Text Chat") user_input = st.text_input("What's on your mind?")
 
-        if user_input:
+if user_input:
             # Parse emotional signal
-            signal = st.session_state.emotional_os.parse_input(user_input)
+signal = st.session_state.emotional_os.parse_input(user_input)
 
             # Generate response
-            response = st.session_state.response_gen.generate(user_input)
+response = st.session_state.response_gen.generate(user_input)
 
             # Display
-            st.write("**Response:**")
-            st.write(response)
+st.write("**Response:**") st.write(response)
 
     # Voice interface (optional)
-    if st.sidebar.checkbox("🎤 Enable Voice"):
-        st.info("Voice interface available")
+if st.sidebar.checkbox("🎤 Enable Voice"): st.info("Voice interface available")
         # Voice UI would go here
 
 if __name__ == "__main__":
@@ -602,20 +560,15 @@ python -m setup.init_db
 ```bash
 
 # Create subdirectories
-mkdir -p scripts/data/
-mkdir -p scripts/setup/
-mkdir -p scripts/debug/
+mkdir -p scripts/data/ mkdir -p scripts/setup/ mkdir -p scripts/debug/
 
 # Create __init__.py files
-touch scripts/__init__.py
-touch scripts/data/__init__.py
-touch scripts/setup/__init__.py
-touch scripts/debug/__init__.py
+touch scripts/__init__.py touch scripts/data/__init__.py touch scripts/setup/__init__.py touch
+scripts/debug/__init__.py
 
 # Move scripts to appropriate locations
-mv scripts/download_nrc_lexicon.py scripts/data/
-mv scripts/init_test_db.py scripts/setup/
-mv scripts/inspect_glyphs.py scripts/debug/
+mv scripts/download_nrc_lexicon.py scripts/data/ mv scripts/init_test_db.py scripts/setup/ mv
+scripts/inspect_glyphs.py scripts/debug/
 
 ```text
 ```text
@@ -631,23 +584,13 @@ Create `tools/import_checker.py`:
 
 ```python
 
-"""Verify all imports work correctly."""
-import sys
-from pathlib import Path
+"""Verify all imports work correctly.""" import sys from pathlib import Path
 
-def test_imports():
-    """Test that all core imports work."""
-    try:
-        from src import EmotionalOS, ArchetypeResponseGeneratorV2
-        from src import VoiceInterface, privacy_layer
-        print("✅ All imports successful")
-        return True
-    except ImportError as e:
-        print(f"❌ Import failed: {e}")
-        return False
+def test_imports(): """Test that all core imports work.""" try: from src import EmotionalOS,
+ArchetypeResponseGeneratorV2 from src import VoiceInterface, privacy_layer print("✅ All imports
+successful") return True except ImportError as e: print(f"❌ Import failed: {e}") return False
 
-if __name__ == "__main__":
-    success = test_imports()
+if __name__ == "__main__": success = test_imports()
 
 ```text
 ```
@@ -744,14 +687,9 @@ python-dotenv>=1.0
 ```
 __pycache__/
 *.pyc
-.pytest_cache/
-.coverage
-htmlcov/
-.streamlit/
-.env
+.pytest_cache/ .coverage htmlcov/ .streamlit/ .env
 *.log
-build/
-dist/
+build/ dist/
 ```text
 ```text
 ```
@@ -903,36 +841,30 @@ git branch -D refactor/reorganization-master
 
 After reorganization, you should be able to:
 
-1. ✅ Run `streamlit run app.py` with zero errors
-2. ✅ Run `pytest tests/` with all tests passing
-3. ✅ Run `python tools/import_checker.py` with success
-4. ✅ Import any module with `from src import X`
-5. ✅ Add new tests to tests/unit/ or tests/integration/
-6. ✅ Find any piece of code in 30 seconds
-7. ✅ Onboard new developer in < 10 minutes
-8. ✅ Deploy to cloud with single command
-9. ✅ No "cleanup" runs needed anymore
-10. ✅ Root directory has < 20 files (app.py, requirements.txt, docs/, src/, tests/, etc.)
+1. ✅ Run `streamlit run app.py` with zero errors 2. ✅ Run `pytest tests/` with all tests passing 3.
+✅ Run `python tools/import_checker.py` with success 4. ✅ Import any module with `from src import X`
+5. ✅ Add new tests to tests/unit/ or tests/integration/ 6. ✅ Find any piece of code in 30 seconds 7.
+✅ Onboard new developer in < 10 minutes 8. ✅ Deploy to cloud with single command 9. ✅ No "cleanup"
+runs needed anymore 10. ✅ Root directory has < 20 files (app.py, requirements.txt, docs/, src/,
+tests/, etc.)
 
 ##
 
 ## NEXT STEPS
 
-1. **Review this plan** - Make sure structure matches your vision
-2. **Create backup** - `git checkout -b refactor/reorganization-master`
-3. **Follow phases 1-9 in order** - Don't skip steps
-4. **Test at each phase** - Verify imports and tests work
-5. **Commit frequently** - Don't lose work if something breaks
-6. **Update CI/CD** - Ensure GitHub Actions uses new structure
+1. **Review this plan** - Make sure structure matches your vision 2. **Create backup** - `git
+checkout -b refactor/reorganization-master` 3. **Follow phases 1-9 in order** - Don't skip steps 4.
+**Test at each phase** - Verify imports and tests work 5. **Commit frequently** - Don't lose work if
+something breaks 6. **Update CI/CD** - Ensure GitHub Actions uses new structure
 
 ##
 
 ## QUESTIONS TO ANSWER BEFORE STARTING
 
-1. **Voice integration**: Should voice be optional or core? (Currently: optional)
-2. **Data location**: Keep glyphs.json in root or move to data/? (Currently: recommending data/)
-3. **Config files**: Should settings live in config/ or at root? (Currently: recommending config/)
-4. **Documentation**: Keep 100+ old docs or archive them? (Currently: recommending archive/)
-5. **Dependencies**: Do all packages in requirements.txt still needed? (Action: Audit)
+1. **Voice integration**: Should voice be optional or core? (Currently: optional) 2. **Data
+location**: Keep glyphs.json in root or move to data/? (Currently: recommending data/) 3. **Config
+files**: Should settings live in config/ or at root? (Currently: recommending config/) 4.
+**Documentation**: Keep 100+ old docs or archive them? (Currently: recommending archive/) 5.
+**Dependencies**: Do all packages in requirements.txt still needed? (Action: Audit)
 
 **Answer these and you're ready to start.**

@@ -2,7 +2,8 @@
 
 ## What Changed
 
-Your system now automatically creates new glyphs during live user-AI conversations. Here's what was added:
+Your system now automatically creates new glyphs during live user-AI conversations. Here's what was
+added:
 
 ### Files Created
 
@@ -34,22 +35,17 @@ Your system now automatically creates new glyphs during live user-AI conversatio
 ```text
 ```
 
-USER DIALOGUE
-    ↓
-[hybrid mode in ui.py line 573]
-    ↓
+USER DIALOGUE ↓ [hybrid mode in ui.py line 573] ↓
 HybridProcessorWithEvolution.process_user_message()
     ├─ Signal Extraction (adaptive - discovers new dimensions)
     ├─ Hybrid Learning (user + shared lexicon)
     ├─ Pattern Detection (co-occurrence analysis)
     └─ Glyph Generation (when patterns significant)
-    ↓
-NEW GLYPHS GENERATED
+↓ NEW GLYPHS GENERATED
     ├─ Stored in: st.session_state['new_glyphs_this_session']
     ├─ Displayed in: Streamlit UI (success message + sidebar)
     └─ Saved to: learning/conversation_glyphs.json
-    ↓
-AVAILABLE FOR NEXT TURN
+↓ AVAILABLE FOR NEXT TURN
     └─ User can see and export them
 
 ```
@@ -64,21 +60,16 @@ AVAILABLE FOR NEXT TURN
 
 if processing_mode == "hybrid":
     # NEW: Initialize processor once per session
-    if 'hybrid_processor' not in st.session_state:
-        processor = create_integrated_processor(learner, extractor, user_id)
-        st.session_state['hybrid_processor'] = processor
+if 'hybrid_processor' not in st.session_state: processor = create_integrated_processor(learner,
+extractor, user_id) st.session_state['hybrid_processor'] = processor
 
     # NEW: Process through evolution pipeline
-    evolution_result = processor.process_user_message(
-        user_message=user_input,
-        ai_response=response,
-        user_id=user_id,
-    )
+evolution_result = processor.process_user_message( user_message=user_input, ai_response=response,
+user_id=user_id, )
 
     # NEW: Check for and display new glyphs
-    new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
-    if new_glyphs:
-        st.session_state['new_glyphs_this_session'].extend(new_glyphs)
+new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated'] if
+new_glyphs: st.session_state['new_glyphs_this_session'].extend(new_glyphs)
 
 ```text
 ```
@@ -107,8 +98,7 @@ The system tracks conversations with unique IDs:
 Add this to `main_v2.py` initialization if not present:
 
 ```python
-if 'conversation_id' not in st.session_state:
-    from uuid import uuid4
+if 'conversation_id' not in st.session_state: from uuid import uuid4
 ```text
 ```text
 ```
@@ -142,7 +132,8 @@ New glyphs are only created when an emotional pattern combination reaches:
 
 - **Minimum combined frequency: 300** (configurable in `dynamic_glyph_evolution.py`)
 
-This ensures only meaningful patterns create glyphs. In dialogue, this builds up over multiple exchanges:
+This ensures only meaningful patterns create glyphs. In dialogue, this builds up over multiple
+exchanges:
 
 ```
 
@@ -156,9 +147,8 @@ Turn 2: love (1) + vulnerability (1) = 2
 For faster glyph creation in testing, you can reduce this threshold:
 
 ```python
-evolution = DynamicGlyphEvolution(
-    hybrid_learner=learner,
-    min_frequency_for_glyph=50,  # Lower threshold for testing
+evolution = DynamicGlyphEvolution( hybrid_learner=learner, min_frequency_for_glyph=50,  # Lower
+threshold for testing
 ```text
 ```text
 ```
@@ -169,11 +159,11 @@ evolution = DynamicGlyphEvolution(
 
 ```
 
-User: "I want to let someone in, but the fear is overwhelming"
-AI:   "That exposed feeling is the threshold of intimacy itself..."
+User: "I want to let someone in, but the fear is overwhelming" AI:   "That exposed feeling is the
+threshold of intimacy itself..."
 
-Signals detected: love, vulnerability, fear, intimacy
-Patterns found: (love + vulnerability), (love + intimacy), (vulnerability + fear)
+Signals detected: love, vulnerability, fear, intimacy Patterns found: (love + vulnerability), (love
++ intimacy), (vulnerability + fear)
 
 ```text
 ```
@@ -214,15 +204,8 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
 ### In `ui.py` (emotion-symbol mapping)
 
 ```python
-emotion_symbols = {
-    "love": "♥",
-    "intimacy": "❤",
-    "sensuality": "🌹",
-    "transformation": "🦋",
-    "admiration": "⭐",
-    "joy": "☀",
-    "vulnerability": "🌱",
-    "nature": "🌿",
+emotion_symbols = { "love": "♥", "intimacy": "❤", "sensuality": "🌹", "transformation": "🦋",
+"admiration": "⭐", "joy": "☀", "vulnerability": "🌱", "nature": "🌿",
     # Add more...
 ```text
 ```text
@@ -232,10 +215,8 @@ emotion_symbols = {
 
 ```python
 
-name_map = {
-    ("love", "intimacy"): "Intimate Connection",
-    ("love", "vulnerability"): "Open-Hearted Love",
-    ("joy", "celebration"): "Pure Celebration",
+name_map = { ("love", "intimacy"): "Intimate Connection", ("love", "vulnerability"): "Open-Hearted
+Love", ("joy", "celebration"): "Pure Celebration",
     # Customize for your use case
 
 ```text

@@ -171,21 +171,10 @@ Refactor all hardcoded paths to use the PathManager system. See example in `CODE
 ## 🔍 Affected Startup Flow
 
 ```
-START APP
-    ↓
-Load NRC Lexicon
-    ↓ ✅ Works
-Load Glyph Lexicon (JSON)
-    ↓ ❌ FAILS - File not at expected path
-Load Glyph Lexicon (CSV)
-    ↓ ❌ FAILS - File not at expected path
-Load Suicidality Protocol
-    ↓ ⚠️ PARTIAL - Path works from src/ only
-Load Word Lexicon
-    ↓ ❌ FAILS - File not at expected path
-Load Antonym Index
-    ↓ ❌ FAILS - File not at expected path
-    ↓
+START APP ↓ Load NRC Lexicon ↓ ✅ Works Load Glyph Lexicon (JSON) ↓ ❌ FAILS - File not at expected
+path Load Glyph Lexicon (CSV) ↓ ❌ FAILS - File not at expected path Load Suicidality Protocol ↓ ⚠️
+PARTIAL - Path works from src/ only Load Word Lexicon ↓ ❌ FAILS - File not at expected path Load
+Antonym Index ↓ ❌ FAILS - File not at expected path ↓
 ```text
 ```text
 ```

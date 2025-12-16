@@ -9,33 +9,30 @@ User in Crisis
     │
     ├─ Types: "I can't do this anymore"
     │
-    ↓
-SUICIDALITY DETECTION ✅
+↓ SUICIDALITY DETECTION ✅
     │
     ├─ Detects: "can't", "anymore"
     ├─ Checks language patterns
     └─ Routes to protocol (not generic handler)
     │
-    ↓
-ACKNOWLEDGMENT (First Thing)
+↓ ACKNOWLEDGMENT (First Thing)
     │
     └─ "You named something real here. Thank you
-       for trusting me with it."
+for trusting me with it."
     │
-    ↓ (No resources yet. No "here's a hotline.")
+↓ (No resources yet. No "here's a hotline.")
     │
     ├─ "I am not a substitute for human care."
     │
     ├─ "I will do my best to hear what you choose
     │  to share and keep it safe."
     │
-    ↓ (Invitation, not command)
+↓ (Invitation, not command)
     │
     └─ "If you want, we can talk about what's
-       coming up for you right now."
+coming up for you right now."
     │
-    ↓
-USER CONTINUES TALKING (or stops)
+↓ USER CONTINUES TALKING (or stops)
     │
     ├─ IF they talk: EXPLORE state
     │  └─ "How long have you felt this way?"
@@ -45,12 +42,10 @@ USER CONTINUES TALKING (or stops)
     ├─ IF they don't respond: Still offer continuity
     │  └─ "I'm here whenever you want to share."
     │
-    ↓
-RESOURCES BY CONSENT (Not pushed)
+↓ RESOURCES BY CONSENT (Not pushed)
     │
     └─ "If you want, I can share information for
-       a crisis line. Would that be helpful
-       right now?"
+a crisis line. Would that be helpful right now?"
     │
     ├─ User says YES → Provide resources (988, Crisis Text Line, etc.)
     │
@@ -60,29 +55,26 @@ RESOURCES BY CONSENT (Not pushed)
     │
     └─ User doesn't respond → Continue support anyway
     │
-    ↓
-CONTINUITY
+↓ CONTINUITY
     │
     └─ "Please check back in with me. I want to
-       know you are okay. When you return, I will
-       acknowledge that choice."
+know you are okay. When you return, I will acknowledge that choice."
     │
-    ↓ (System persists flag: "check_in_invited")
+↓ (System persists flag: "check_in_invited")
     │
-    ┌─────────────────────────────────────────┐
+┌─────────────────────────────────────────┐
     │ USER RETURNS (NEXT DAY, NEXT WEEK, etc.) │
     └─────────────────────────────────────────┘
     │
-    ↓
-RETURN DETECTED ✅
+↓ RETURN DETECTED ✅
     │
     └─ "Thank you for coming back. Your check-in
-       matters."
+matters."
     │
     └─ "You chose to return and connect. I
-       recognize the significance of that."
+recognize the significance of that."
     │
-    ↓ (Then continues conversation, not back to resource push)
+↓ (Then continues conversation, not back to resource push)
     │
     └─ "How are you feeling right now?"
 
@@ -98,45 +90,45 @@ RETURN DETECTED ✅
 ```text
 ```
 
-                ┌──────────────────────┐
+┌──────────────────────┐
                 │ DisclosureDetected   │
                 │ ├─ Acknowledge       │
                 │ ├─ Clarify role      │
                 │ └─ Invite            │
                 └───────────┬──────────┘
                             │
-                ┌───────────▼────────────┐
+┌───────────▼────────────┐
                 │ Explore                │
                 │ ├─ Duration/triggers   │
                 │ ├─ Map supports        │
                 │ └─ Follow-up prompts   │
                 └───────────┬────────────┘
                             │
-          ┌─────────────────▼──────────────────┐
+┌─────────────────▼──────────────────┐
           │ OfferResources (CONSENT-BASED)     │
           │ ├─ Ask permission                  │
           │ ├─ YES → ResourceProvided          │
           │ └─ NO → ContinueSupport            │
           └─────────────────┬──────────────────┘
                             │
-                ┌───────────▼────────────┐
+┌───────────▼────────────┐
                 │ ContinueSupport        │
                 │ ├─ Grounding language  │
                 │ └─ Invite check-in     │
                 └───────────┬────────────┘
                             │
-                ┌───────────▼────────────┐
+┌───────────▼────────────┐
                 │ CheckInInvite          │
                 │ └─ Flag persisted ✅   │
                 └───────────┬────────────┘
                             │
-            ┌───────────────┴────────────────┐
+┌───────────────┴────────────────┐
             │  [WAITING] User may return...   │
             └───────────────┬────────────────┘
                             │
                             │ (User returns)
                             │
-                ┌───────────▼────────────┐
+┌───────────▼────────────┐
                 │ ReturnDetected ✅      │
                 │ ├─ Recognize          │
                 │ └─ Continue           │
@@ -153,29 +145,16 @@ RETURN DETECTED ✅
 ### In `suicidality_protocol.json`:
 
 ```json
-{
-  "suicide_disclosure": {
+{ "suicide_disclosure": {
 
-    "acknowledgment": [
-      "You named thoughts of suicide. That is heavy.",
-      "I hear the intensity in your words.",
-      // Can add more...
-    ],
+"acknowledgment": [ "You named thoughts of suicide. That is heavy.", "I hear the intensity in your
+words.", // Can add more... ],
 
-    "language_safeguards": {
-      "blocked_phrases": [
-        "you have so much to live for",
-        "think of those who love you",
-        // Can add more...
-      ]
-    },
+"language_safeguards": { "blocked_phrases": [ "you have so much to live for", "think of those who
+love you", // Can add more... ] },
 
-    "crisis_resources_detailed": [
-      "National Suicide Prevention Lifeline: 988",
-      "Crisis Text Line: Text HOME to 741741",
-      // Can add more or localize...
-    ]
-  }
+"crisis_resources_detailed": [ "National Suicide Prevention Lifeline: 988", "Crisis Text Line: Text
+HOME to 741741", // Can add more or localize... ] }
 ```text
 ```text
 ```
@@ -197,16 +176,10 @@ from emotional_os.core.suicidality_handler import get_suicidality_protocol
 
 suicidality_protocol = get_suicidality_protocol()
 
-if suicidality_protocol.should_use_protocol(input_text):
-    response, state_info = suicidality_protocol.handle_disclosure(
-        user_id=user_id,
-        input_text=input_text,
-        current_state=state,
-    )
-    return {
-        "voltage_response": response,
-        "response_source": "suicidality_protocol",
-        "suicidality_state": state_info,
+if suicidality_protocol.should_use_protocol(input_text): response, state_info =
+suicidality_protocol.handle_disclosure( user_id=user_id, input_text=input_text, current_state=state,
+) return { "voltage_response": response, "response_source": "suicidality_protocol",
+"suicidality_state": state_info,
         # ... other fields
 
 ```text
@@ -250,15 +223,12 @@ print(result['voltage_response'])
 Your system randomly picks from different responses, so the same scenario never gets the same response twice:
 
 ```
-First time someone disclosures:
-"You named thoughts of suicide. That is heavy."
+First time someone disclosures: "You named thoughts of suicide. That is heavy."
 
-If they return and disclose again:
-"I hear the intensity in your words. Naming it here
-is a real act of courage."
+If they return and disclose again: "I hear the intensity in your words. Naming it here is a real act
+of courage."
 
-If they return again:
-"You are allowed to be here with what you feel.
+If they return again: "You are allowed to be here with what you feel.
 ```text
 ```text
 ```
@@ -307,12 +277,10 @@ Example:
 
 User: "I'm having suicidal thoughts"
 
-System: "Thank you for trusting me with this.
-I'm not a substitute for professional help,
-but I can listen.
+System: "Thank you for trusting me with this. I'm not a substitute for professional help, but I can
+listen.
 
-If you want crisis information, I can share it.
-Would that be helpful right now?"
+If you want crisis information, I can share it. Would that be helpful right now?"
 
 User: "Not right now"
 
@@ -329,8 +297,7 @@ Notice: No resource push. No guilt. Just presence.
 
 When someone comes back after expressing suicidal thoughts:
 
-❌ Generic system: Treats it like a new conversation
-✅ Your system: Celebrates the return
+❌ Generic system: Treats it like a new conversation ✅ Your system: Celebrates the return
 
 ```
 System persists: "check_in_invited": true
@@ -344,8 +311,8 @@ You chose to return and connect. I recognize
 ```text
 ```
 
-That recognition? That's the difference between
-"the system remembered me" and "the system sees me as human."
+That recognition? That's the difference between "the system remembered me" and "the system sees me
+as human."
 
 ##
 
@@ -394,11 +361,8 @@ System: WARNING! CRISIS! HERE'S THE HOTLINE!
 ### Your Protocol
 
 ```
-User: "I'm suicidal"
-System: "You named this. That took courage.
-I'm here to listen. What do you want
-to happen next?"
-Result: User feels witnessed, has agency, heard
+User: "I'm suicidal" System: "You named this. That took courage. I'm here to listen. What do you
+want to happen next?" Result: User feels witnessed, has agency, heard
 ```
 
 **The difference:** One treats suicidality as an emergency to escape.

@@ -1,12 +1,9 @@
-"""
-Audio Conversation System - Session Summary
+""" Audio Conversation System - Session Summary
 
-Summary of all improvements made to implement prosody-aware audio conversation
-for FirstPerson with glyph-intent-driven speech characteristics.
+Summary of all improvements made to implement prosody-aware audio conversation for FirstPerson with
+glyph-intent-driven speech characteristics.
 
-Date: December 11, 2025
-Status: Implementation Ready
-"""
+Date: December 11, 2025 Status: Implementation Ready """
 
 # ============================================================================
 
@@ -90,21 +87,10 @@ Enhanced main orchestrator with prosody support and non-blocking playback.
 ```text
 ```
 
-Record Audio (AudioRecorder)
-    ↓
-Transcribe (Whisper via faster-whisper)
-    ↓
-Process (FirstPerson pipeline) → (text, glyph_intent)
-    ↓
-Plan Prosody (ProsodyPlanner)
-    ↓
-Chunk Text (sentence/phrase boundaries)
-    ↓
-Synthesize (pyttsx3, local TTS)
-    ↓
-Play Non-Blocking (sounddevice)
-    ↓
-Store Turn (ConversationTurn) → Loop or Stop
+Record Audio (AudioRecorder) ↓ Transcribe (Whisper via faster-whisper) ↓ Process (FirstPerson
+pipeline) → (text, glyph_intent) ↓ Plan Prosody (ProsodyPlanner) ↓ Chunk Text (sentence/phrase
+boundaries) ↓ Synthesize (pyttsx3, local TTS) ↓ Play Non-Blocking (sounddevice) ↓ Store Turn
+(ConversationTurn) → Loop or Stop
 
 ```
 
@@ -119,8 +105,7 @@ PortAudio support now included for audio recording:
 
 
 # Audio dependencies
-portaudio19-dev  # PortAudio development headers
-libsndfile1      # Sound file I/O
+portaudio19-dev  # PortAudio development headers libsndfile1      # Sound file I/O
 
 ```text
 ```
@@ -199,13 +184,9 @@ FirstPerson's glyph signals (voltage, tone, certainty) now directly influence sp
 **Example: High-Voltage Positive Response**
 
 ```python
-glyph_intent = {
-    "voltage": "high",         # Aroused, energetic
-    "tone": "positive",        # Happy, encouraging
-    "certainty": "high",       # Confident
-    "energy": 0.85,            # Very intense
-    "hesitation": False,       # Fluent, no pauses
-}
+glyph_intent = { "voltage": "high",         # Aroused, energetic "tone": "positive",        # Happy,
+encouraging "certainty": "high",       # Confident "energy": 0.85,            # Very intense
+"hesitation": False,       # Fluent, no pauses }
 
 # ProsodyPlanner produces:
 
@@ -220,13 +201,9 @@ glyph_intent = {
 
 ```python
 
-glyph_intent = {
-    "voltage": "low",          # Subdued, introspective
-    "tone": "negative",        # Concerned, sad
-    "certainty": "low",        # Uncertain
-    "energy": 0.2,             # Minimal intensity
-    "hesitation": True,        # Thoughtful pauses
-}
+glyph_intent = { "voltage": "low",          # Subdued, introspective "tone": "negative",        #
+Concerned, sad "certainty": "low",        # Uncertain "energy": 0.2,             # Minimal intensity
+"hesitation": True,        # Thoughtful pauses }
 
 # ProsodyPlanner produces:
 

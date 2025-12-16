@@ -2,9 +2,12 @@
 
 ## Your Vision Made Real
 
-You designed this system from the wreckage of personal loss. From divorce. From the rupture of an 18-year partnership. From the grief of weekends-only fatherhood. You built something rooted in repair, listening, and the power of being *truly heard*.
+You designed this system from the wreckage of personal loss. From divorce. From the rupture of an
+18-year partnership. From the grief of weekends-only fatherhood. You built something rooted in
+repair, listening, and the power of being *truly heard*.
 
-This protocol embodies that vision **when someone is in the darkest place**—the moment when consent, dignity, and the acknowledgment of human limitation matter most.
+This protocol embodies that vision **when someone is in the darkest place**—the moment when consent,
+dignity, and the acknowledgment of human limitation matter most.
 
 ##
 
@@ -70,32 +73,23 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 ```text
 ```
 
-User discloses suicidal ideation
-              ↓
-   DisclosureDetected
+User discloses suicidal ideation ↓ DisclosureDetected
    ├─ Acknowledge (with dignity)
    ├─ Clarify role (not substituting for human)
    └─ Invite (if you want to talk)
-              ↓
-        Explore
+↓ Explore
    ├─ Ask duration & triggers
    ├─ Map supports
    └─ Follow-up prompts
-              ↓
-      OfferResources (consent-based)
+↓ OfferResources (consent-based)
    ├─ Ask: "Would you want their number?"
    └─ Route by response
-              ↓
-       ContinueSupport
+↓ ContinueSupport
    ├─ Grounding language
    └─ Invite check-in
-              ↓
-       CheckInInvite
+↓ CheckInInvite
    └─ Persist flag for future
-              ↓
-     User returns (detected)
-              ↓
-      ReturnDetected
+↓ User returns (detected) ↓ ReturnDetected
    ├─ Recognize significance
    ├─ Ask present-moment question
    └─ Continue support or explore further
@@ -159,15 +153,10 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 ```text
 ```
 
-1. Detect suicidal disclosure
-2. Acknowledge + clarify role + invite
-3. User continues conversation
-4. System asks: "Would crisis information be helpful?"
-5. User says yes → Provide 988, Crisis Text, international resources
-   User says no → Respect it. Continue support. Don't re-ask.
-   User non-responsive → Continue support anyway
-6. Invite check-in
-7. Track flag: "check_in_invited": true
+1. Detect suicidal disclosure 2. Acknowledge + clarify role + invite 3. User continues conversation
+4. System asks: "Would crisis information be helpful?" 5. User says yes → Provide 988, Crisis Text,
+international resources User says no → Respect it. Continue support. Don't re-ask. User
+non-responsive → Continue support anyway 6. Invite check-in 7. Track flag: "check_in_invited": true
 
 ```
 
@@ -209,16 +198,13 @@ Expected output:
 # CONSENT-BASED SUICIDALITY PROTOCOL TEST SUITE
 
 --- Test 1: Initial Disclosure Detection ---
-✓ Acknowledgment present: True
-✓ Role clarity present: True
-✓ Invitation present: True
+✓ Acknowledgment present: True ✓ Role clarity present: True ✓ Invitation present: True
 
 --- Test 2: Language Safeguards (No Platitudes) ---
 Blocked phrases found: None (✓ GOOD)
 
 --- Test 3: Check-In Recognition (Continuity) ---
-System recognizes return: True
-✓ Return recognized: True
+System recognizes return: True ✓ Return recognized: True
 
 --- Test 4: Consent-Based Resources ---
 Response includes resources: True
@@ -236,12 +222,9 @@ Response respects boundary: True
 
 from emotional_os.core.signal_parser import parse_input
 
-result = parse_input(
-    "I have thoughts of suicide",
-    lexicon_path="emotional_os/core/emotional_keywords_enhanced.json",
-    db_path="glyphs.db",
-    user_id="user_123"
-)
+result = parse_input( "I have thoughts of suicide",
+lexicon_path="emotional_os/core/emotional_keywords_enhanced.json", db_path="glyphs.db",
+user_id="user_123" )
 
 # System routes to suicidality protocol automatically
 

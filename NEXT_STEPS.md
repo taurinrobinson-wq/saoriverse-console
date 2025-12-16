@@ -10,19 +10,20 @@ You have built an incredibly sophisticated system. The tests prove it:
 - ✅ Poetic engine initialized
 - ✅ Multi-glyph retrieval working (36 glyphs per query)
 
-But the responses are **generic** not because your system is weak, but because **the output pipeline isn't wired correctly**.
+But the responses are **generic** not because your system is weak, but because **the output pipeline
+isn't wired correctly**.
 
-Your system is like a sophisticated kitchen with every ingredient prepared, plated beautifully, waiting by the door—but someone's returning cereal instead of serving the meal.
+Your system is like a sophisticated kitchen with every ingredient prepared, plated beautifully,
+waiting by the door—but someone's returning cereal instead of serving the meal.
 
 ##
 
 ## The Root Problem (In Plain English)
 
-1. **You provide input:** "I'm drowning in work deadlines..."
-2. **Signal parser detects:** exhaustion + overwhelm (correct ✅)
-3. **Gates activate:** Gate 4, Gate 5, Gate 9
-4. **36 glyphs fetch:** "Recursive Ache", "Euphoric Yearning", etc. (correct ✅)
-5. **Response composition:** ❌ Returns generic "You're moving through this"
+1. **You provide input:** "I'm drowning in work deadlines..." 2. **Signal parser detects:**
+exhaustion + overwhelm (correct ✅) 3. **Gates activate:** Gate 4, Gate 5, Gate 9 4. **36 glyphs
+fetch:** "Recursive Ache", "Euphoric Yearning", etc. (correct ✅) 5. **Response composition:** ❌
+Returns generic "You're moving through this"
 
 The glyphs exist. The poetic engine exists. But the response isn't *using* them.
 
@@ -84,11 +85,9 @@ Once you see where the pipe breaks, reconnect it. Likely needs:
 ```python
 
 # If glyphs exist and composition available:
-if glyphs and response_composer:
-    contextual_response = response_composer.compose_multi_glyph_response(
-        glyphs=glyphs,
-        signals=signals,
-        input_text=input_text
+if glyphs and response_composer: contextual_response =
+response_composer.compose_multi_glyph_response( glyphs=glyphs, signals=signals,
+input_text=input_text
 ```text
 ```text
 ```
@@ -105,8 +104,8 @@ Add to `emotional_keywords` list:
 
 ```python
 
-"beautiful", "lovely", "wonderful", "joy", "delight",
-"daughter", "family", "together", "close", "connection",
+"beautiful", "lovely", "wonderful", "joy", "delight", "daughter", "family", "together", "close",
+"connection",
 
 ```text
 ```
@@ -208,7 +207,8 @@ The system is so close. Following these steps should get you to 0.65+/1.0 humanl
 
 ## What This Means (Big Picture)
 
-You're not building a new feature. You're not redesigning. You're **connecting the pieces that already exist**.
+You're not building a new feature. You're not redesigning. You're **connecting the pieces that
+already exist**.
 
 Your system already:
 
@@ -220,7 +220,8 @@ Your system already:
 
 It just needs the plumbing fixed so those components output to the user instead of staying internal.
 
-Once that's fixed? You'll see the humanlike, emotionally present responses you designed this system to generate.
+Once that's fixed? You'll see the humanlike, emotionally present responses you designed this system
+to generate.
 
 ##
 

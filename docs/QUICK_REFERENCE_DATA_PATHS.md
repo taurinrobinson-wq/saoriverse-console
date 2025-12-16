@@ -156,12 +156,11 @@ for fname, paths in files_to_check.items():
 
 When the app starts, these files are loaded in this order:
 
-1. **NRC Lexicon** → `data/lexicons/nrc_emotion_lexicon.txt`
-2. **Signal Lexicon** → `src/emotional_os_parser/signal_lexicon.json` (or via PathManager)
-3. **Glyph Lexicon** → ❌ **FAILS** - expects `emotional_os/glyphs/`
-4. **Suicidality Protocol** → ⚠️ **PARTIAL** - expects `emotional_os/core/`
-5. **Trauma Lexicon** → `src/emotional_os_safety/trauma_lexicon.json` ✅
-6. **Word Lexicon** → ❌ **FAILS** - expects `emotional_os/lexicon/`
+1. **NRC Lexicon** → `data/lexicons/nrc_emotion_lexicon.txt` 2. **Signal Lexicon** →
+`src/emotional_os_parser/signal_lexicon.json` (or via PathManager) 3. **Glyph Lexicon** → ❌
+**FAILS** - expects `emotional_os/glyphs/` 4. **Suicidality Protocol** → ⚠️ **PARTIAL** - expects
+`emotional_os/core/` 5. **Trauma Lexicon** → `src/emotional_os_safety/trauma_lexicon.json` ✅ 6.
+**Word Lexicon** → ❌ **FAILS** - expects `emotional_os/lexicon/`
 
 ##
 
@@ -197,7 +196,6 @@ This ensures all hardcoded paths will work immediately.
 
 ## Recommended Long-Term Fix
 
-1. Use `PathManager` everywhere instead of hardcoded paths
-2. Remove duplicate files (keep only in `data/` or `src/`)
-3. Add startup validation: `python -m src.emotional_os.core.startup_check`
-4. Document expected file structure in README
+1. Use `PathManager` everywhere instead of hardcoded paths 2. Remove duplicate files (keep only in
+`data/` or `src/`) 3. Add startup validation: `python -m src.emotional_os.core.startup_check` 4.
+Document expected file structure in README

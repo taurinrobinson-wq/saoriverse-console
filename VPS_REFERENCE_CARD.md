@@ -9,21 +9,12 @@ Print this and keep it handy! 📋
 ```text
 ```
 
-LOCAL MACHINE
-    ↓ git push
-GITHUB (main branch)
-    ↓ auto-trigger
-GITHUB ACTIONS (deploy.yml)
-    ↓ SSH execute
-DIGITALOCEAN VPS (123.45.67.89)
-    ↓ docker compose
-DOCKER CONTAINERS
+LOCAL MACHINE ↓ git push GITHUB (main branch) ↓ auto-trigger GITHUB ACTIONS (deploy.yml) ↓ SSH
+execute DIGITALOCEAN VPS (123.45.67.89) ↓ docker compose DOCKER CONTAINERS
     ├─ Next.js (port 3000)
     ├─ FastAPI (port 8001)
     └─ Nginx (port 8000)
-    ↓
-INTERNET PUBLIC
-    <https://velinor.firstperson.chat> ✨
+↓ INTERNET PUBLIC <https://velinor.firstperson.chat> ✨
 
 ```
 
@@ -295,9 +286,8 @@ git push origin main
 ```bash
 
 # Edit docker-compose.prod.yml or nginx.prod.conf locally
-git add docker-compose.prod.yml nginx.prod.conf
-git commit -m "chore: update config"
-git push origin main
+git add docker-compose.prod.yml nginx.prod.conf git commit -m "chore: update config" git push origin
+main
 
 ```text
 ```text
@@ -312,8 +302,7 @@ git push origin main
 ssh root@[DROPLET_IP]
 
 # Make fix
-cd /opt/velinor
-nano docker-compose.prod.yml  # or edit any file
+cd /opt/velinor nano docker-compose.prod.yml  # or edit any file
 
 # Manually redeploy
 docker compose -f docker-compose.prod.yml down
@@ -410,12 +399,7 @@ Inbound Rules (Allow):
 **vs AWS**: Complex setup, $10+/month 😕
 **DigitalOcean**: Simple, $6/month, rock solid ✨
 
-##
-
-**Print this card | Keep it safe | Refer to it often**
-
-##
-
+## **Print this card | Keep it safe | Refer to it often**
 *Last Updated: Now*
 *Deployment Status: Ready to Launch 🚀*
 *Velinor Status: Waiting for your command ⚔️*

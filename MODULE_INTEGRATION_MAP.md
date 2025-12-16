@@ -70,33 +70,27 @@ from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtoco
 
 # In app startup or session creation:
 
-class SessionState:
-    def __init__(self):
+class SessionState: def __init__(self):
         # Safety
-        self.sanctuary = Sanctuary()
-        self.sanctuary_handler = SanctuaryHandler()
-        self.conversation_manager = SanctuaryConversationManager()
+self.sanctuary = Sanctuary() self.sanctuary_handler = SanctuaryHandler() self.conversation_manager =
+SanctuaryConversationManager()
 
         # Lexicon
-        self.lexicon = WordCentricLexicon()
+self.lexicon = WordCentricLexicon()
 
         # Learning
-        self.archetype_library = get_archetype_library()
-        self.archetype_gen = ArchetypeResponseGeneratorV2()
-        self.hybrid_learner = get_hybrid_learner()
-        self.conversation_learner = ConversationLearner()
-        self.adaptive_extractor = AdaptiveSignalExtractor()
-        self.poetry_extractor = PoetrySignalExtractor()
+self.archetype_library = get_archetype_library() self.archetype_gen = ArchetypeResponseGeneratorV2()
+self.hybrid_learner = get_hybrid_learner() self.conversation_learner = ConversationLearner()
+self.adaptive_extractor = AdaptiveSignalExtractor() self.poetry_extractor = PoetrySignalExtractor()
 
         # Privacy
-        self.encryption = EncryptionManager()
-        self.encoding = DataEncodingPipeline()
-        self.dream_engine = DreamEngine()
+self.encryption = EncryptionManager() self.encoding = DataEncodingPipeline() self.dream_engine =
+DreamEngine()
 
         # Memory
-        self.memory = ConversationMemory()
+self.memory = ConversationMemory()
 
-        self.user_id = None
+self.user_id = None
 ```text
 ```text
 ```
@@ -172,11 +166,8 @@ best_archetype = archetype_library.get_best_match(
 ```python
 
 # Call 1: Generate archetype-aware response
-response = archetype_gen.generate_archetype_aware_response(
-    user_input=user_input,
-    prior_context=context_summary,
-    glyph=None
-)
+response = archetype_gen.generate_archetype_aware_response( user_input=user_input,
+prior_context=context_summary, glyph=None )
 
 # → "That weight is real. What's underneath that for you?"
 
@@ -192,12 +183,8 @@ if not response:
 
 
 # If sensitive input detected, wrap response
-if is_sensitive:
-    response = ensure_sanctuary_response(
-        input_text=user_input,
-        base_response=response,
-        tone="gentle"
-    )
+if is_sensitive: response = ensure_sanctuary_response( input_text=user_input,
+base_response=response, tone="gentle" )
 
 ```text
 ```
@@ -285,63 +272,28 @@ if is_end_of_day:
 
 ```sql
 -- Store archetype library
-CREATE TABLE archetype_library (
-    id INTEGER PRIMARY KEY,
-    name TEXT UNIQUE,
-    entry_cues JSON,
-    response_principles JSON,
-    continuity_bridges JSON,
-    tone_guidelines JSON,
-    success_weight REAL,
-    usage_count INTEGER,
-    success_count INTEGER,
-    created_at TIMESTAMP
-);
+CREATE TABLE archetype_library ( id INTEGER PRIMARY KEY, name TEXT UNIQUE, entry_cues JSON,
+response_principles JSON, continuity_bridges JSON, tone_guidelines JSON, success_weight REAL,
+usage_count INTEGER, success_count INTEGER, created_at TIMESTAMP );
 
 -- Store learned exchanges
-CREATE TABLE learned_exchanges (
-    id INTEGER PRIMARY KEY,
-    user_id_hashed TEXT,
-    session_id TEXT,
-    user_input TEXT,  -- OPTIONAL (may be empty for privacy)
-    ai_response TEXT,  -- OPTIONAL (may be empty for privacy)
-    emotional_signals JSON,
-    glyphs JSON,
-    quality_score REAL,
-    learned_from_archetype TEXT,
-    created_at TIMESTAMP
-);
+CREATE TABLE learned_exchanges ( id INTEGER PRIMARY KEY, user_id_hashed TEXT, session_id TEXT,
+user_input TEXT,  -- OPTIONAL (may be empty for privacy) ai_response TEXT,  -- OPTIONAL (may be
+empty for privacy) emotional_signals JSON, glyphs JSON, quality_score REAL, learned_from_archetype
+TEXT, created_at TIMESTAMP );
 
 -- Per-user lexicon overrides
-CREATE TABLE user_lexicon_overrides (
-    id INTEGER PRIMARY KEY,
-    user_id_hashed TEXT,
-    word TEXT,
-    signals JSON,
-    gates JSON,
-    frequency INTEGER,
-    trust_score REAL,
-    created_at TIMESTAMP
-);
+CREATE TABLE user_lexicon_overrides ( id INTEGER PRIMARY KEY, user_id_hashed TEXT, word TEXT,
+signals JSON, gates JSON, frequency INTEGER, trust_score REAL, created_at TIMESTAMP );
 
 -- Daily summaries
-CREATE TABLE daily_summaries (
-    id INTEGER PRIMARY KEY,
-    user_id_hashed TEXT,
-    date TEXT,
-    primary_emotions JSON,
-    key_themes JSON,
-    glyph_effectiveness JSON,
-    session_count INTEGER,
-    engagement_level REAL,
-    crisis_flags JSON,
-    narrative_summary TEXT,
-    created_at TIMESTAMP
-);
+CREATE TABLE daily_summaries ( id INTEGER PRIMARY KEY, user_id_hashed TEXT, date TEXT,
+primary_emotions JSON, key_themes JSON, glyph_effectiveness JSON, session_count INTEGER,
+engagement_level REAL, crisis_flags JSON, narrative_summary TEXT, created_at TIMESTAMP );
 
 -- Encrypted conversations (already exists, but may need privacy fields)
-ALTER TABLE conversations ADD COLUMN encoded_version JSON;
-ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
+ALTER TABLE conversations ADD COLUMN encoded_version JSON; ALTER TABLE conversations ADD COLUMN
+is_encrypted BOOLEAN;
 ```text
 ```text
 ```
@@ -354,42 +306,15 @@ ALTER TABLE conversations ADD COLUMN is_encrypted BOOLEAN;
 
 ```json
 
-{
-  "learning": {
-    "enabled": true,
-    "hybrid_learner": true,
-    "conversation_learner": true,
-    "archetype_update_frequency": "per_exchange",
-    "quality_threshold": 0.6
-  },
-  "lexicon": {
-    "enabled": true,
-    "source": "word_centric_emotional_lexicon_expanded.json",
-    "use_adaptive_discovery": true,
-    "cache_on_startup": true
-  },
-  "archetype": {
-    "enabled": true,
-    "generator_version": "v2",
-    "min_match_threshold": 0.3,
-    "use_fallback_glyph": true
-  },
-  "privacy": {
-    "enabled": true,
-    "encryption": true,
-    "encoding_pipeline": true,
-    "dream_engine": true,
-    "anonymization": true,
-    "hipaa_compliant": true
-  },
-  "safety": {
-    "enabled": true,
-    "sanctuary_wrapper": true,
-    "risk_classification": true,
-    "consent_required_for": ["high"],
-    "include_crisis_resources": false,
-    "user_controlled_escalation": true
-  }
+{ "learning": { "enabled": true, "hybrid_learner": true, "conversation_learner": true,
+"archetype_update_frequency": "per_exchange", "quality_threshold": 0.6 }, "lexicon": { "enabled":
+true, "source": "word_centric_emotional_lexicon_expanded.json", "use_adaptive_discovery": true,
+"cache_on_startup": true }, "archetype": { "enabled": true, "generator_version": "v2",
+"min_match_threshold": 0.3, "use_fallback_glyph": true }, "privacy": { "enabled": true,
+"encryption": true, "encoding_pipeline": true, "dream_engine": true, "anonymization": true,
+"hipaa_compliant": true }, "safety": { "enabled": true, "sanctuary_wrapper": true,
+"risk_classification": true, "consent_required_for": ["high"], "include_crisis_resources": false,
+"user_controlled_escalation": true }
 
 ```text
 ```
@@ -491,17 +416,10 @@ def test_full_request_pipeline(): ...
 ### Track These Per-Session
 
 ```python
-metrics = {
-    "safety_checks_performed": 0,
-    "consent_prompts_shown": 0,
-    "archetypes_matched": 0,
-    "archetype_generation_success_rate": 0.0,
-    "fallback_to_glyph_count": 0,
-    "learning_exchanges": 0,
-    "new_archetypes_created": 0,
-    "lexicon_words_found_avg": 0.0,
-    "privacy_encoding_success": True,
-    "response_generation_time_ms": 0.0,
+metrics = { "safety_checks_performed": 0, "consent_prompts_shown": 0, "archetypes_matched": 0,
+"archetype_generation_success_rate": 0.0, "fallback_to_glyph_count": 0, "learning_exchanges": 0,
+"new_archetypes_created": 0, "lexicon_words_found_avg": 0.0, "privacy_encoding_success": True,
+"response_generation_time_ms": 0.0,
 ```text
 ```text
 ```
@@ -510,15 +428,8 @@ metrics = {
 
 ```python
 
-daily_metrics = {
-    "total_sessions": 0,
-    "total_exchanges": 0,
-    "safety_escalations": 0,
-    "archetype_library_size": 0,
-    "learned_exchanges_logged": 0,
-    "dream_engine_summaries": 0,
-    "quality_exchanges": 0,
-    "system_errors": 0,
-}
+daily_metrics = { "total_sessions": 0, "total_exchanges": 0, "safety_escalations": 0,
+"archetype_library_size": 0, "learned_exchanges_logged": 0, "dream_engine_summaries": 0,
+"quality_exchanges": 0, "system_errors": 0, }
 
 ```

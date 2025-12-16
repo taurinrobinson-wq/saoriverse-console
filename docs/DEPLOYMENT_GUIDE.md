@@ -12,9 +12,8 @@
 
 ✅ **YES** - But it's a 2-minute update:
 
-1. Update Procfile (already done)
-2. Push branch to GitHub
-3. Railway auto-redeploys (or manually trigger)
+1. Update Procfile (already done) 2. Push branch to GitHub 3. Railway auto-redeploys (or manually
+trigger)
 
 ##
 
@@ -60,8 +59,7 @@ That's the only deployment file change needed.
 ```bash
 
 # Test that the new structure works locally
-cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
-streamlit run app.py
+cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console streamlit run app.py
 
 # Should launch at http://localhost:8501
 
@@ -96,17 +94,12 @@ git commit -m "deployment: Update Procfile for reorganized structure
 
 **Option A: Auto-deploy via GitHub (if connected)**
 
-1. Go to Railway dashboard
-2. Click your project
-3. It should auto-detect the push and redeploy
-4. Wait for deployment to complete (~2-3 min)
+1. Go to Railway dashboard 2. Click your project 3. It should auto-detect the push and redeploy 4.
+Wait for deployment to complete (~2-3 min)
 
 **Option B: Manual redeploy**
 
-1. Go to Railway dashboard
-2. Go to your deployment
-3. Click "Redeploy"
-4. Select the latest commit
+1. Go to Railway dashboard 2. Go to your deployment 3. Click "Redeploy" 4. Select the latest commit
 5. Wait for deployment
 
 **Option C: Via Railway CLI**
@@ -164,8 +157,7 @@ If something goes wrong:
 ```bash
 
 # Revert to previous deployment
-git revert HEAD
-git push origin refactor/reorganization-master
+git revert HEAD git push origin refactor/reorganization-master
 
 ```text
 ```text

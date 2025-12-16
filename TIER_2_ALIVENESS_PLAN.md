@@ -9,7 +9,8 @@
 
 ## Overview
 
-Tier 2 adds **emotional presence and adaptivity** to responses. While Tier 1 focuses on context and learning, Tier 2 makes the system feel alive by adapting tone, energy, and presence in real-time.
+Tier 2 adds **emotional presence and adaptivity** to responses. While Tier 1 focuses on context and
+learning, Tier 2 makes the system feel alive by adapting tone, energy, and presence in real-time.
 
 ##
 
@@ -82,10 +83,8 @@ class EmotionalReciprocity:
 **Key Methods:**
 
 ```python
-class EmbodiedSimulation:
-    def __init__(self)
-    def suggest_presence(context: dict) -> str
-    def add_embodied_language(response: str) -> str
+class EmbodiedSimulation: def __init__(self) def suggest_presence(context: dict) -> str def
+add_embodied_language(response: str) -> str
 ```text
 ```text
 ```
@@ -109,11 +108,8 @@ class EmbodiedSimulation:
 
 ```python
 
-class EnergyTracker:
-    def __init__(self)
-    def get_conversation_phase(history: list) -> str
-    def detect_fatigue(history: list) -> bool
-    def calculate_optimal_pacing(phase: str) -> dict
+class EnergyTracker: def __init__(self) def get_conversation_phase(history: list) -> str def
+detect_fatigue(history: list) -> bool def calculate_optimal_pacing(phase: str) -> dict
 
 ```text
 ```
@@ -213,10 +209,8 @@ class Tier2Aliveness:
 ```python
 
 # After Tier 1 processing:
-tier2 = st.session_state.get("tier2_aliveness")
-if tier2:
-    response, metrics = tier2.process_for_aliveness(
-        user_input, response, history
+tier2 = st.session_state.get("tier2_aliveness") if tier2: response, metrics =
+tier2.process_for_aliveness( user_input, response, history
 ```text
 ```text
 ```
@@ -229,15 +223,10 @@ if tier2:
 
 ```python
 
-def _ensure_tier2_aliveness():
-    """Initialize Tier 2 Aliveness components."""
-    if "tier2_aliveness" not in st.session_state:
-        try:
-            from src.emotional_os.tier2_aliveness import Tier2Aliveness
-            tier2 = Tier2Aliveness()
-            st.session_state["tier2_aliveness"] = tier2
-        except Exception as e:
-            logger.warning(f"Tier 2 initialization failed: {e}")
+def _ensure_tier2_aliveness(): """Initialize Tier 2 Aliveness components.""" if "tier2_aliveness"
+not in st.session_state: try: from src.emotional_os.tier2_aliveness import Tier2Aliveness tier2 =
+Tier2Aliveness() st.session_state["tier2_aliveness"] = tier2 except Exception as e:
+logger.warning(f"Tier 2 initialization failed: {e}")
 
 ```text
 ```
@@ -425,10 +414,8 @@ git commit -m "feat: Integrate Tier 2 Aliveness into response pipeline
 
 If Tier 2 causes issues:
 
-1. Comment out Tier 2 call in response_handler.py
-2. System reverts to Tier 1 only
-3. Performance returns to ~50ms
-4. No data loss or user impact
+1. Comment out Tier 2 call in response_handler.py 2. System reverts to Tier 1 only 3. Performance
+returns to ~50ms 4. No data loss or user impact
 
 ##
 
@@ -452,15 +439,11 @@ Once Tier 2 is complete and integrated:
 
 ## Ready to Begin?
 
-✓ All previous changes committed
-✓ Tier 1 fully integrated and tested
-✓ Performance baseline established (~40ms)
-✓ Next step: Build tier2_aliveness.py
+✓ All previous changes committed ✓ Tier 1 fully integrated and tested ✓ Performance baseline
+established (~40ms) ✓ Next step: Build tier2_aliveness.py
 
 **Let's start!**
 
 ##
 
-Date: December 4, 2025
-Status: Ready to implement
-Estimated completion: December 4-5, 2025
+Date: December 4, 2025 Status: Ready to implement Estimated completion: December 4-5, 2025

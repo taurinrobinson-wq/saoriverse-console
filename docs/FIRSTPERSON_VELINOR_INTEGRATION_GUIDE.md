@@ -2,39 +2,36 @@
 
 ## 🎯 Overview
 
-Your Velinor game now integrates with the FirstPerson emotional analysis system to deliver **nuanced, emotionally-aware NPC responses**. Instead of generic dialogue, NPCs adapt their tone, empathy, and responses based on real-time analysis of the player's emotional state.
+Your Velinor game now integrates with the FirstPerson emotional analysis system to deliver
+**nuanced, emotionally-aware NPC responses**. Instead of generic dialogue, NPCs adapt their tone,
+empathy, and responses based on real-time analysis of the player's emotional state.
 
 ## 🔗 Integration Architecture
 
 ```text
 ```
 
-Player Input (typed or choice)
-        ↓
-┌─────────────────────────────────────────────┐
+Player Input (typed or choice) ↓ ┌─────────────────────────────────────────────┐
 │   FirstPerson Orchestrator                  │
 │  - Analyzes emotional tone                  │
 │  - Extracts detected themes (grief, joy)    │
 │  - Tracks conversation memory               │
 │  - Detects recurring patterns                │
 └─────────────────────────────────────────────┘
-        ↓
-┌─────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────┐
 │   Velinor Game Engine                       │
 │  - Maps emotional analysis to story context │
 │  - Applies game mechanics (dice, stats)     │
 │  - Routes to appropriate NPC encounter      │
 └─────────────────────────────────────────────┘
-        ↓
-┌─────────────────────────────────────────────┐
+↓ ┌─────────────────────────────────────────────┐
 │   NPC Response Generation                   │
 │  - Adapts opening based on emotional tone   │
 │  - Acknowledges recurring themes            │
 │  - Reflects emotional trajectory            │
 │  - Adjusts intensity of response            │
 └─────────────────────────────────────────────┘
-        ↓
-    Chat Display
+↓ Chat Display
 
 ```
 
@@ -75,9 +72,8 @@ When a player types a message, FirstPerson extracts:
 ```text
 ```
 
-NPC: I feel that brightness too.
-That's a light worth holding.
-Tell me more about what that feels like.
+NPC: I feel that brightness too. That's a light worth holding. Tell me more about what that feels
+like.
 
 ```
 
@@ -118,10 +114,8 @@ If the player keeps mentioning grief:
 ```text
 ```
 
-NPC: The weight in that stays with you, doesn't it?
-I keep hearing grief come back for you.
-I'm noticing the weight of it.
-What do you need?
+NPC: The weight in that stays with you, doesn't it? I keep hearing grief come back for you. I'm
+noticing the weight of it. What do you need?
 
 ```
 
@@ -134,8 +128,7 @@ If emotions are **worsening** (getting more negative):
 ```text
 ```
 
-NPC: I'm noticing the weight increasing.
-What's happening?
+NPC: I'm noticing the weight increasing. What's happening?
 
 ```
 
@@ -178,11 +171,8 @@ if 'firstperson_orchestrator' not in st.session_state:
 # FirstPerson is passed to orchestrator when game starts
 firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
 
-orchestrator = VelinorTwineOrchestrator(
-    game_engine=engine,
-    story_path=str(story_path),
-    first_person_module=firstperson_orchestrator,  # ← Connected here
-    npc_system=None
+orchestrator = VelinorTwineOrchestrator( game_engine=engine, story_path=str(story_path),
+first_person_module=firstperson_orchestrator,  # ← Connected here npc_system=None
 ```text
 ```text
 ```
@@ -196,17 +186,9 @@ orchestrator = VelinorTwineOrchestrator(
 player_analysis = self._summarize_player_intent(player_input, player_id)
 
 # Returns:
-{
-    'original_input': "I'm struggling with loss",
-    'emotional_tone': 'heavy',
-    'detected_theme': 'grief',
-    'valence': -0.6,
-    'intensity': 0.8,
-    'memory_context': {
-        'has_context': True,
-        'recurring_themes': ['grief'],
-        'emotional_trend': 'stable'
-    }
+{ 'original_input': "I'm struggling with loss", 'emotional_tone': 'heavy', 'detected_theme':
+'grief', 'valence': -0.6, 'intensity': 0.8, 'memory_context': { 'has_context': True,
+'recurring_themes': ['grief'], 'emotional_trend': 'stable' }
 
 ```text
 ```
@@ -262,8 +244,8 @@ Theme acknowledgment:
 
 ```
 
-High intensity (>0.7):  "What needs to be said about it?"
-Low intensity (<0.3):   "What's sitting underneath that?"
+High intensity (>0.7):  "What needs to be said about it?" Low intensity (<0.3):   "What's sitting
+underneath that?"
 
 ```text
 ```
@@ -385,22 +367,11 @@ coming back to you. That tells me something. What needs
 ### Turn 3: Player expresses slight improvement
 
 ```
-Input:  "Maybe there's hope in how I'm remembering them"
-Analysis: {
-    tone: 'reflective',
-    theme: 'grief',
-    valence: -0.2,  # ← Improved!
-    intensity: 0.4,
-    memory: {
-        has_context: true,
-        recurring_themes: ['grief'],
-        emotional_trend: 'improving',  # ← Detected!
-        num_turns: 3
-    }
-}
-NPC Response:
-"There's something to sit with there. I'm also noticing
-a shift. What's helping? Tell me more about what you're
+Input:  "Maybe there's hope in how I'm remembering them" Analysis: { tone: 'reflective', theme:
+'grief', valence: -0.2,  # ← Improved! intensity: 0.4, memory: { has_context: true,
+recurring_themes: ['grief'], emotional_trend: 'improving',  # ← Detected! num_turns: 3 } } NPC
+Response: "There's something to sit with there. I'm also noticing a shift. What's helping? Tell me
+more about what you're
 ```text
 ```text
 ```
@@ -426,8 +397,7 @@ Optional: For cloud deployment or advanced features, you can add:
 
 
 # .streamlit/secrets.toml (if deploying with Streamlit Cloud)
-[firstperson]
-enable_affect_analysis = true
+[firstperson] enable_affect_analysis = true
 
 ```text
 ```
@@ -476,7 +446,8 @@ enable_affect_analysis = true
 - Intensity: 0.7
 
 **NPC (Keeper) Response:**
-"I hear the weight in that. The path of a glyph-seeker isn't without its burdens. What needs to be said about it? Sometimes the weight lessens when shared."
+"I hear the weight in that. The path of a glyph-seeker isn't without its burdens. What needs to be
+said about it? Sometimes the weight lessens when shared."
 
 ##
 
@@ -491,7 +462,8 @@ enable_affect_analysis = true
 - Memory: Detects emotional trajectory shift
 
 **NPC (Keeper) Response:**
-"There's something to sit with there. I'm also noticing a shift in what you're saying. What's helping you see this differently? That matters."
+"There's something to sit with there. I'm also noticing a shift in what you're saying. What's
+helping you see this differently? That matters."
 
 ## 🛠 Troubleshooting
 
@@ -506,7 +478,8 @@ streamlit run velinor_app.py
 
 ### "AttributeError on emotional_tone"
 
-This means the emotional analysis didn't complete. The game gracefully falls back to basic responses. Check the terminal for errors.
+This means the emotional analysis didn't complete. The game gracefully falls back to basic
+responses. Check the terminal for errors.
 
 ### "Memory context empty"
 
@@ -514,11 +487,10 @@ This is expected on first turn. Memory builds up after multiple player inputs.
 
 ## 📖 Next Steps
 
-1. **Test locally** - Run `streamlit run velinor_app.py` and notice how NPC responses adapt
-2. **Play through scenarios** - See how dialogue changes based on your emotional expression
-3. **Monitor the logs** - Check terminal output for emotional analysis data
-4. **Expand story** - Add more passages and NPC encounters
-5. **Deploy** - Push to Streamlit Cloud or your own server
+1. **Test locally** - Run `streamlit run velinor_app.py` and notice how NPC responses adapt 2.
+**Play through scenarios** - See how dialogue changes based on your emotional expression 3.
+**Monitor the logs** - Check terminal output for emotional analysis data 4. **Expand story** - Add
+more passages and NPC encounters 5. **Deploy** - Push to Streamlit Cloud or your own server
 
 ## 📞 Support
 

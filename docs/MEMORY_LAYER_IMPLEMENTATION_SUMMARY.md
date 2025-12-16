@@ -44,11 +44,8 @@ New methods added to DynamicResponseComposer:
 ```text
 ```
 
-Input:  "I'm feeling so stressed today"
-Parse:  stress, present-tense, today-bound, emphasis "so"
-Store:  primary_affect=[stress], confidence=0.7
-Glyph:  Still Insight
-Ask:    "What triggered this?"
+Input:  "I'm feeling so stressed today" Parse:  stress, present-tense, today-bound, emphasis "so"
+Store:  primary_affect=[stress], confidence=0.7 Glyph:  Still Insight Ask:    "What triggered this?"
 
 ```
 
@@ -59,13 +56,11 @@ Ask:    "What triggered this?"
 ```text
 ```
 
-Input:  "I have so much on my mind at work that I can't make one step forward"
-Parse:  cognitive_overload, work-domain, paralysis, thought-flooding
-Store:  + cognitive_overload, + paralysis
-Learn:  CAUSAL CHAIN = work → cognitive flooding → paralysis
-Update: confidence = 0.85
-Glyphs: Add Quiet Revelation + Fragmentation
-Ask:    "How many distinct things compete?"  (now specific!)
+Input:  "I have so much on my mind at work that I can't make one step forward" Parse:
+cognitive_overload, work-domain, paralysis, thought-flooding Store:  + cognitive_overload, +
+paralysis Learn:  CAUSAL CHAIN = work → cognitive flooding → paralysis Update: confidence = 0.85
+Glyphs: Add Quiet Revelation + Fragmentation Ask:    "How many distinct things compete?"  (now
+specific!)
 
 ```
 
@@ -127,11 +122,9 @@ Problem: Redundant, doesn't build on prior messages
 ```text
 ```
 
-Turn 1: "I hear you're feeling stress today."
-Turn 2: "I hear you - work has flooded your mind with competing
-         demands that even one step feels impossible."
-Turn 3: "Which of these 5 could we push back?"
-Benefit: Each response builds, gets smarter and more actionable
+Turn 1: "I hear you're feeling stress today." Turn 2: "I hear you - work has flooded your mind with
+competing demands that even one step feels impossible." Turn 3: "Which of these 5 could we push
+back?" Benefit: Each response builds, gets smarter and more actionable
 
 ```
 
@@ -145,21 +138,9 @@ The memory layer builds understanding of the causal chain:
 ```text
 ```
 
-Root Trigger
-    ↓
-Work demands (5 projects, client deadline, multiple stakeholders)
-    ↓
-Mechanism
-    ↓
-Cognitive flooding (too much to organize/prioritize)
-    ↓
-Manifestation
-    ↓
-Decision paralysis (cannot act, cannot move forward)
-    ↓
-Result
-    ↓
-Stuck unable to start the most critical task
+Root Trigger ↓ Work demands (5 projects, client deadline, multiple stakeholders) ↓ Mechanism ↓
+Cognitive flooding (too much to organize/prioritize) ↓ Manifestation ↓ Decision paralysis (cannot
+act, cannot move forward) ↓ Result ↓ Stuck unable to start the most critical task
 
 ```
 
@@ -209,10 +190,8 @@ System responses evolve to acknowledge each level of this chain.
 ### ConversationMemory
 
 ```python
-turns: List[MessageTurn]
-integrated_state: IntegratedEmotionalState
-causal_understanding: CausalUnderstanding
-system_knowledge: SystemKnowledge
+turns: List[MessageTurn] integrated_state: IntegratedEmotionalState causal_understanding:
+CausalUnderstanding system_knowledge: SystemKnowledge
 ```text
 ```text
 ```
@@ -221,11 +200,9 @@ system_knowledge: SystemKnowledge
 
 ```python
 
-primary_affects: List[str]  # ["stress", "cognitive_overload", "pressure"]
-secondary_affects: List[str]  # ["paralysis", "anxiety", "overwhelm"]
-intensity: str  # "high"
-primary_domains: List[str]  # ["work", "client work"]
-temporal_scope: str  # "today (acute) + ongoing (chronic)"
+primary_affects: List[str]  # ["stress", "cognitive_overload", "pressure"] secondary_affects:
+List[str]  # ["paralysis", "anxiety", "overwhelm"] intensity: str  # "high" primary_domains:
+List[str]  # ["work", "client work"] temporal_scope: str  # "today (acute) + ongoing (chronic)"
 
 ```text
 ```
@@ -279,13 +256,10 @@ manifestations: List[str]  # ["paralysis", "anxiety"]
 
 ### Test Results
 
-✅ Memory layer correctly tracks semantic elements across turns
-✅ Information integrates and accumulates (doesn't get replaced)
-✅ Confidence scores progress: 0.7 → 0.85 → 0.95
-✅ Glyph sets evolve as understanding deepens
-✅ Causal chains emerge from multiple messages
-✅ System knowledge tracks gaps correctly
-✅ Response composition uses memory appropriately
+✅ Memory layer correctly tracks semantic elements across turns ✅ Information integrates and
+accumulates (doesn't get replaced) ✅ Confidence scores progress: 0.7 → 0.85 → 0.95 ✅ Glyph sets
+evolve as understanding deepens ✅ Causal chains emerge from multiple messages ✅ System knowledge
+tracks gaps correctly ✅ Response composition uses memory appropriately
 
 ### Test Files
 
@@ -380,19 +354,16 @@ response = composer.compose_response_with_memory(
 ### Test Run Summary
 
 ```
-TURN 1: "I'm feeling so stressed today"
-→ Response: "I hear you're feeling stress today."
+TURN 1: "I'm feeling so stressed today" → Response: "I hear you're feeling stress today."
 → Confidence: 0.7 | Glyphs: [Still Insight]
 
-TURN 2: "I have so much on my mind at work that I can't take a step"
-→ Response: "I hear you - work has flooded your mind with so many
-            competing demands that even one step forward feels impossible."
+TURN 2: "I have so much on my mind at work that I can't take a step" → Response: "I hear you - work
+has flooded your mind with so many competing demands that even one step forward feels impossible."
 → Confidence: 0.85 | Glyphs: [Still Insight, Quiet Revelation, Fragmentation]
 → Causal Chain: work → cognitive flooding → paralysis
 
-TURN 3: "5 projects due this week, client presentation Thursday, deck not started"
-→ Response: "I hear you - work has flooded your mind...
-            Which of these 5 could potentially wait?"
+TURN 3: "5 projects due this week, client presentation Thursday, deck not started" → Response: "I
+hear you - work has flooded your mind... Which of these 5 could potentially wait?"
 → Confidence: 0.95 | Glyphs: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
 → Next Need: "Which could wait?" (action-oriented)
 ```

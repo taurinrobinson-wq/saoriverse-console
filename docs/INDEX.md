@@ -247,25 +247,20 @@ root/
 
 ### Finding Information
 
-1. **For general project info** → README.md
-2. **For architecture details** → docs/guides/MODULARIZATION_COMPLETE.md
-3. **For historical context** → docs/archives/
-4. **For analysis & reports** → docs/reports/
-5. **For configuration** → config/
+1. **For general project info** → README.md 2. **For architecture details** →
+docs/guides/MODULARIZATION_COMPLETE.md 3. **For historical context** → docs/archives/ 4. **For
+analysis & reports** → docs/reports/ 5. **For configuration** → config/
 
 ### Working with Code
 
-1. **Core application** → Look in `core/`
-2. **UI components** → Look in `emotional_os/ui/`
-3. **Response processing** → Look in `emotional_os/response/`
-4. **Analysis tools** → Look in `tools/analysis/`
-5. **Test & validation** → Look in `tools/glyph_testing/` or `tests/`
+1. **Core application** → Look in `core/` 2. **UI components** → Look in `emotional_os/ui/` 3.
+**Response processing** → Look in `emotional_os/response/` 4. **Analysis tools** → Look in
+`tools/analysis/` 5. **Test & validation** → Look in `tools/glyph_testing/` or `tests/`
 
 ### Managing Data
 
-1. **Glyph data** → `data/glyphs/`
-2. **Lexicon data** → `data/lexicons/`
-3. **Analysis results** → `data/analysis/` or `docs/reports/`
+1. **Glyph data** → `data/glyphs/` 2. **Lexicon data** → `data/lexicons/` 3. **Analysis results** →
+`data/analysis/` or `docs/reports/`
 ##
 
 ## 📝 Documentation Files Quick Reference
@@ -318,10 +313,8 @@ Contains all JSON and text analysis reports from glyph testing and validation
 
 This will give you:
 
-1. Project context and overview
-2. Architecture and structure
-3. File locations and organization
-4. How to navigate the codebase
+1. Project context and overview 2. Architecture and structure 3. File locations and organization 4.
+How to navigate the codebase
 ##
 
 **Status**: ✅ Phase 8 Complete - Root Directory Fully Organized

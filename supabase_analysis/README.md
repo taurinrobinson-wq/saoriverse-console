@@ -33,15 +33,8 @@ supabase_analysis/
 2. Run this query for each table:
 
    ```sql
-   SELECT
-     column_name,
-     data_type,
-     is_nullable,
-     column_default
-   FROM information_schema.columns
-   WHERE table_schema = 'public'
-     AND table_name = 'your_table_name'
-   ORDER BY ordinal_position;
+SELECT column_name, data_type, is_nullable, column_default FROM information_schema.columns WHERE
+table_schema = 'public' AND table_name = 'your_table_name' ORDER BY ordinal_position;
    ```
 
 3. Export results to `supabase_analysis/schemas/[table_name]_schema.csv`
@@ -53,15 +46,8 @@ Run this in Supabase SQL Editor:
 ```sql
 
 -- Get all table structures
-SELECT
-  table_name,
-  column_name,
-  data_type,
-  character_maximum_length,
-  is_nullable,
-  column_default
-FROM information_schema.columns
-WHERE table_schema = 'public'
+SELECT table_name, column_name, data_type, character_maximum_length, is_nullable, column_default
+FROM information_schema.columns WHERE table_schema = 'public'
 
 ```text
 ```
@@ -95,12 +81,9 @@ ORDER BY tablename;
 
 Once you've placed the files here, I will:
 
-1. ✅ Map each table to your codebase usage
-2. ✅ Identify unused/redundant tables
-3. ✅ Suggest column optimizations
-4. ✅ Recommend safe deletions
-5. ✅ Verify schema matches code expectations
-6. ✅ Identify missing indexes or constraints
+1. ✅ Map each table to your codebase usage 2. ✅ Identify unused/redundant tables 3. ✅ Suggest column
+optimizations 4. ✅ Recommend safe deletions 5. ✅ Verify schema matches code expectations 6. ✅
+Identify missing indexes or constraints
 
 ## Notes
 

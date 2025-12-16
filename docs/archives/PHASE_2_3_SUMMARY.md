@@ -12,11 +12,14 @@
 
 ## What is Phase 2.3?
 
-Phase 2.3 is the **Repair Module** - a framework for detecting when users reject or correct glyph-aware responses, learning which glyphs work best for each user, and adapting future response generation based on this feedback.
+Phase 2.3 is the **Repair Module** - a framework for detecting when users reject or correct
+glyph-aware responses, learning which glyphs work best for each user, and adapting future response
+generation based on this feedback.
 
 ### Problem Solved
 
-Users sometimes reject or correct the glyph-aware responses we generate. Without a repair mechanism, we would:
+Users sometimes reject or correct the glyph-aware responses we generate. Without a repair mechanism,
+we would:
 
 - Keep offering glyphs that don't resonate
 - Miss opportunities to learn user preferences
@@ -24,10 +27,9 @@ Users sometimes reject or correct the glyph-aware responses we generate. Without
 
 Phase 2.3 addresses this by:
 
-1. Detecting when users explicitly reject ("that's not it") or implicitly correct ("actually, it's more like...")
-2. Tracking which glyphs work for which emotional states for each user
-3. Suggesting better alternatives when a glyph misses
-4. Learning from corrections to improve future responses
+1. Detecting when users explicitly reject ("that's not it") or implicitly correct ("actually, it's
+more like...") 2. Tracking which glyphs work for which emotional states for each user 3. Suggesting
+better alternatives when a glyph misses 4. Learning from corrections to improve future responses
 
 ##
 
@@ -397,12 +399,11 @@ if repair_analysis.is_rejection:
 
 Phase 2.3 implements a complete correction detection and learning system that:
 
-1. **Detects** when users reject or correct responses (20 patterns)
-2. **Tracks** which glyphs work for each user's emotional states
-3. **Suggests** better alternatives when glyphs miss
-4. **Learns** from corrections to improve future responses
-5. **Scales** with per-user customization
+1. **Detects** when users reject or correct responses (20 patterns) 2. **Tracks** which glyphs work
+for each user's emotional states 3. **Suggests** better alternatives when glyphs miss 4. **Learns**
+from corrections to improve future responses 5. **Scales** with per-user customization
 
-The system is fully tested (43 new tests, 262 total), well-documented, and ready for integration into the main response pipeline.
+The system is fully tested (43 new tests, 262 total), well-documented, and ready for integration
+into the main response pipeline.
 
 **Ready for handoff to Phase 2.4 (Integration) or next iteration.**

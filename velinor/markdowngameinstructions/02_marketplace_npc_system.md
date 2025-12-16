@@ -2,7 +2,8 @@
 
 ## Overview
 
-The marketplace is a **trust economy** where NPCs vary in openness, but all require patience and genuine engagement. Crime wave context creates tension that impacts all encounters.
+The marketplace is a **trust economy** where NPCs vary in openness, but all require patience and
+genuine engagement. Crime wave context creates tension that impacts all encounters.
 
 ##
 
@@ -28,10 +29,9 @@ The marketplace is a **trust economy** where NPCs vary in openness, but all requ
 
 NPC: "You're not from here. Outsiders take more than they give."
 
-Player Options:
-A) "I've lost too much to take more."  → Shows vulnerability
-B) "I'll prove I can give back."       → Shows commitment
-C) "Then don't trust me yet. Just watch." → Shows respect for caution
+Player Options: A) "I've lost too much to take more."  → Shows vulnerability B) "I'll prove I can
+give back."       → Shows commitment C) "Then don't trust me yet. Just watch." → Shows respect for
+caution
 
 ```
 
@@ -69,10 +69,9 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 
 NPC: "I'd welcome you with open arms, but too many hands here have stolen."
 
-Player Options:
-A) "I'm not here to steal. I'm here to listen."   → Shows purpose alignment
-B) "I know what it's like to lose trust."        → Mirrors their experience
-C) "Then let me earn it, slowly."                → Respects their process
+Player Options: A) "I'm not here to steal. I'm here to listen."   → Shows purpose alignment B) "I
+know what it's like to lose trust."        → Mirrors their experience C) "Then let me earn it,
+slowly."                → Respects their process
 
 ```
 

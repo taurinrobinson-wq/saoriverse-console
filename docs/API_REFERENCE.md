@@ -23,11 +23,8 @@ Orchestrate the entire response pipeline from user input to response text.
 
 **Steps:**
 
-1. Tag input (symbolic tags)
-2. Detect phase
-3. Generate tone-adapted response
-4. Adapt to user-facing language
-5. Store relational memory capsule
+1. Tag input (symbolic tags) 2. Detect phase 3. Generate tone-adapted response 4. Adapt to
+user-facing language 5. Store relational memory capsule
 
 **Raises:** May raise on invalid input or system errors
 
@@ -227,12 +224,8 @@ Store memory capsule to disk.
 ```python
 from src.relational_memory import RelationalMemoryCapsule, store_capsule
 
-capsule = RelationalMemoryCapsule(
-    user_input="I'm feeling lost",
-    signal=signal_dict,
-    response="That sounds difficult...",
-    glyph=selected_glyph,
-)
+capsule = RelationalMemoryCapsule( user_input="I'm feeling lost", signal=signal_dict, response="That
+sounds difficult...", glyph=selected_glyph, )
 ```text
 ```text
 ```
@@ -453,24 +446,17 @@ response = process_user_input(text)
 ### Learning System
 
 ```python
-from src.signal_parser import parse_input
-from src.lexicon_learner import LexiconLearner
-from src.relational_memory import RelationalMemoryCapsule, store_capsule
+from src.signal_parser import parse_input from src.lexicon_learner import LexiconLearner from
+src.relational_memory import RelationalMemoryCapsule, store_capsule
 
-user_input = "I'm feeling overwhelmed"
-signal = parse_input(user_input)
+user_input = "I'm feeling overwhelmed" signal = parse_input(user_input)
 
 # Learn from interaction
-learner = LexiconLearner()
-patterns = learner.extract_patterns(user_input, signal)
+learner = LexiconLearner() patterns = learner.extract_patterns(user_input, signal)
 
 # Store memory
-capsule = RelationalMemoryCapsule(
-    user_input=user_input,
-    signal=signal,
-    response=response,
-    glyph=selected_glyph,
-)
+capsule = RelationalMemoryCapsule( user_input=user_input, signal=signal, response=response,
+glyph=selected_glyph, )
 ```text
 ```text
 ```
@@ -485,10 +471,7 @@ All API functions may raise exceptions. Recommended pattern:
 
 from src import process_user_input
 
-try:
-    response = process_user_input(user_input)
-except ValueError as e:
-    print(f"Invalid input: {e}")
+try: response = process_user_input(user_input) except ValueError as e: print(f"Invalid input: {e}")
 except Exception as e:
 
 ```text
@@ -529,14 +512,9 @@ except Exception as e:
 ### Prosody Dict
 
 ```python
-{
-    "pitch": 1.2,                # Pitch range
-    "rate": 0.9,                 # Speaking rate
-    "energy": 0.8,               # Volume/intensity
-    "pauses": [                  # Pause locations
-        {"position": 0.3, "duration": 0.5},
-        {"position": 0.7, "duration": 0.3},
-    ]
+{ "pitch": 1.2,                # Pitch range "rate": 0.9,                 # Speaking rate "energy":
+0.8,               # Volume/intensity "pauses": [                  # Pause locations {"position":
+0.3, "duration": 0.5}, {"position": 0.7, "duration": 0.3}, ]
 ```text
 ```text
 ```
@@ -547,9 +525,7 @@ except Exception as e:
 
 ```
 
-app.py (Streamlit)
-    ↓
-src.response_generator (main orchestrator)
+app.py (Streamlit) ↓ src.response_generator (main orchestrator)
     ├── src.signal_parser
     ├── src.response_adapter
     ├── src.enhanced_response_composer

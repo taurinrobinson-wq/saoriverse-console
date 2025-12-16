@@ -1,15 +1,14 @@
 # Dev Archive
 
-This folder contains developer-oriented scripts and one-off utilities moved out
-of the main tree to keep the repository tidy. Files in this folder are safe to
-restore with `git mv` if you need them back.
+This folder contains developer-oriented scripts and one-off utilities moved out of the main tree to
+keep the repository tidy. Files in this folder are safe to restore with `git mv` if you need them
+back.
 
 ## Test fallbacks
 
-To make the test-suite safe for local development without a configured
-Supabase instance, the test fixtures include conservative, non-destructive
-environment fallbacks. These defaults only apply when the corresponding
-environment variables are not already set, so they will not override a real
+To make the test-suite safe for local development without a configured Supabase instance, the test
+fixtures include conservative, non-destructive environment fallbacks. These defaults only apply when
+the corresponding environment variables are not already set, so they will not override a real
 integration configuration.
 
 Key variables that the test fallbacks provide (only when missing):
@@ -23,9 +22,9 @@ Key variables that the test fallbacks provide (only when missing):
 
 ## How to opt into real integration tests
 
-If you want tests to exercise a real Supabase deployment (integration tests),
-set the real environment variables before running tests (for example in a
-local `.env` or `env` file loaded by your shell):
+If you want tests to exercise a real Supabase deployment (integration tests), set the real
+environment variables before running tests (for example in a local `.env` or `env` file loaded by
+your shell):
 
 ```bash
 export SUPABASE_URL="https://your-project.supabase.co"
@@ -39,8 +38,8 @@ export TEST_CUSTOM_TOKEN="..."
 ```text
 ```
 
-When the real env vars are present, the tests will use them instead of the
-fallbacks and perform real network calls against your Supabase instance.
+When the real env vars are present, the tests will use them instead of the fallbacks and perform
+real network calls against your Supabase instance.
 
 ## Restoring files
 

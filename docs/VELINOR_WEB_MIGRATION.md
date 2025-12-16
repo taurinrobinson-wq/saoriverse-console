@@ -51,91 +51,36 @@ cp frontend_lib_api.ts velinor-web/lib/api.ts
 ```typescript
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { gameApi } from '@/lib/api';
+import { useState } from 'react'; import { useRouter } from 'next/navigation'; import { gameApi }
+from '@/lib/api';
 
-export default function Home() {
-  const router = useRouter();
-  const [playerName, setPlayerName] = useState('');
-  const [loading, setLoading] = useState(false);
+export default function Home() { const router = useRouter(); const [playerName, setPlayerName] =
+useState(''); const [loading, setLoading] = useState(false);
 
-  const handleStartGame = async () => {
-    if (!playerName.trim()) return;
+const handleStartGame = async () => { if (!playerName.trim()) return;
 
-    setLoading(true);
-    try {
-      const { session_id } = await gameApi.startGame(playerName);
-      router.push(`/game/${session_id}`);
-    } catch (error) {
-      console.error('Failed to start game:', error);
-      alert('Failed to start game. Is the API running?');
-    } finally {
-      setLoading(false);
-    }
-  };
+setLoading(true); try { const { session_id } = await gameApi.startGame(playerName);
+router.push(`/game/${session_id}`); } catch (error) { console.error('Failed to start game:', error);
+alert('Failed to start game. Is the API running?'); } finally { setLoading(false); } };
 
-  return (
-    <main style={{
-      width: '100%',
-      height: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
-      color: '#fff',
-      fontFamily: 'system-ui, sans-serif'
-    }}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '20px', fontWeight: 'bold' }}>
-        Velinor: Remnants of the Tone
-      </h1>
-      <p style={{ fontSize: '1.2rem', marginBottom: '40px', color: '#aaa' }}>
-        A narrative adventure in the ruins of Velhara
-      </p>
+return ( <main style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column',
+alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #1a1a2e 0%,
+#16213e 100%)', color: '#fff', fontFamily: 'system-ui, sans-serif' }}> <h1 style={{ fontSize:
+'3rem', marginBottom: '20px', fontWeight: 'bold' }}> Velinor: Remnants of the Tone </h1> <p style={{
+fontSize: '1.2rem', marginBottom: '40px', color: '#aaa' }}> A narrative adventure in the ruins of
+Velhara </p>
 
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        width: '100%',
-        maxWidth: '300px'
-      }}>
-        <input
-          type="text"
-          placeholder="Enter your character name"
-          value={playerName}
-          onChange={(e) => setPlayerName(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleStartGame()}
-          style={{
-            padding: '12px',
-            fontSize: '1rem',
-            border: '2px solid #3a6df0',
-            borderRadius: '8px',
-            background: '#191b1e',
-            color: '#fff',
-          }}
-        />
+<div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', maxWidth:
+'300px' }}> <input type="text" placeholder="Enter your character name" value={playerName}
+onChange={(e) => setPlayerName(e.target.value)} onKeyPress={(e) => e.key === 'Enter' &&
+handleStartGame()} style={{ padding: '12px', fontSize: '1rem', border: '2px solid #3a6df0',
+borderRadius: '8px', background: '#191b1e', color: '#fff', }} />
 
-        <button
-          onClick={handleStartGame}
-          disabled={loading}
-          style={{
-            padding: '12px',
-            fontSize: '1rem',
-            background: loading ? '#666' : '#3a6df0',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            fontWeight: 'bold'
-          }}
+<button onClick={handleStartGame} disabled={loading} style={{ padding: '12px', fontSize: '1rem',
+background: loading ? '#666' : '#3a6df0', color: '#fff', border: 'none', borderRadius: '8px',
+cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}
         >
-          {loading ? 'Starting...' : 'Start New Game'}
-        </button>
-      </div>
-    </main>
-  );
+{loading ? 'Starting...' : 'Start New Game'} </button> </div> </main> );
 ```text
 ```text
 ```
@@ -146,74 +91,38 @@ export default function Home() {
 
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import GameScene from '@/components/GameScene';
-import { gameApi } from '@/lib/api';
+import { useEffect, useState } from 'react'; import { useRouter } from 'next/navigation'; import
+GameScene from '@/components/GameScene'; import { gameApi } from '@/lib/api';
 
-interface GameState {
-  passage_id: string;
-  passage_name: string;
-  main_dialogue: string;
-  npc_name?: string;
-  npc_dialogue?: string;
-  background_image?: string;
-  choices: Array<{ text: string; id?: string }>;
-  clarifying_question?: string;
-  game_state?: { player_stats?: any };
-}
+interface GameState { passage_id: string; passage_name: string; main_dialogue: string; npc_name?:
+string; npc_dialogue?: string; background_image?: string; choices: Array<{ text: string; id?: string
+}>; clarifying_question?: string; game_state?: { player_stats?: any }; }
 
-export default function GamePage({ params }: { params: { sessionId: string } }) {
-  const router = useRouter();
+export default function GamePage({ params }: { params: { sessionId: string } }) { const router =
+useRouter();
   const [gameState, setGameState] = useState<GameState | null>(null);
-  const [loading, setLoading] = useState(false);
+const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Get initial game state (you might fetch this via API)
-    // For now, assume it's passed via URL state or fetched
-    console.log('Session ID:', params.sessionId);
-  }, [params.sessionId]);
+useEffect(() => { // Get initial game state (you might fetch this via API) // For now, assume it's
+passed via URL state or fetched console.log('Session ID:', params.sessionId); },
+[params.sessionId]);
 
-  const handleChoiceClick = async (choiceIndex: number) => {
-    setLoading(true);
-    try {
-      const response = await gameApi.takeAction(params.sessionId, choiceIndex);
-      setGameState(response.state);
-    } catch (error) {
-      console.error('Failed to process choice:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleChoiceClick = async (choiceIndex: number) => { setLoading(true); try { const response =
+await gameApi.takeAction(params.sessionId, choiceIndex); setGameState(response.state); } catch
+(error) { console.error('Failed to process choice:', error); } finally { setLoading(false); } };
 
-  const handleCustomInput = async (text: string) => {
-    setLoading(true);
-    try {
-      const response = await gameApi.takeAction(params.sessionId, undefined, text);
-      setGameState(response.state);
-    } catch (error) {
-      console.error('Failed to process input:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleCustomInput = async (text: string) => { setLoading(true); try { const response = await
+gameApi.takeAction(params.sessionId, undefined, text); setGameState(response.state); } catch (error)
+{ console.error('Failed to process input:', error); } finally { setLoading(false); } };
 
-  if (!gameState) {
-    return <div style={{ padding: '20px' }}>Loading game...</div>;
-  }
+if (!gameState) { return <div style={{ padding: '20px' }}>Loading game...</div>; }
 
-  return (
-    <div style={{ width: '100%', padding: '20px', background: '#000' }}>
-      <GameScene
+return ( <div style={{ width: '100%', padding: '20px', background: '#000' }}> <GameScene
         backgroundImage={`/assets/backgrounds/${gameState.background_image || 'default.png'}`}
-        narration={gameState.main_dialogue}
+narration={gameState.main_dialogue}
         npcName={gameState.npc_name || 'Scene'}
-        choices={gameState.choices}
-        onChoiceClick={handleChoiceClick}
-        onCustomInput={handleCustomInput}
-      />
-    </div>
-  );
+choices={gameState.choices} onChoiceClick={handleChoiceClick} onCustomInput={handleCustomInput} />
+</div> );
 
 ```text
 ```
@@ -252,8 +161,7 @@ python velinor_api.py
 **Terminal 2 - Frontend:**
 
 ```bash
-cd velinor-web
-npm run dev
+cd velinor-web npm run dev
 
 ```text
 ```text
@@ -273,9 +181,7 @@ Test the game flow:
 
 
 # Add and commit everything
-git add .
-git commit -m "feat: Complete Next.js + FastAPI Velinor game"
-git push origin main
+git add . git commit -m "feat: Complete Next.js + FastAPI Velinor game" git push origin main
 
 # Railway auto-deploys
 
@@ -321,8 +227,7 @@ Process player action.
 **Request:**
 
 ```json
-{ "choice_index": 0 }
-// or
+{ "choice_index": 0 } // or
 ```text
 ```text
 ```

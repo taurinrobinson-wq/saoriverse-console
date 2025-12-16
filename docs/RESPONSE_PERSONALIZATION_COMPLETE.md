@@ -2,7 +2,8 @@
 
 ## Summary
 
-Fixed the critical issue where the system was generating **generic, templated responses** that didn't acknowledge user's specific message or incorporate glyph wisdom.
+Fixed the critical issue where the system was generating **generic, templated responses** that
+didn't acknowledge user's specific message or incorporate glyph wisdom.
 
 **Challenge from user**: "how can you determine its functional that is such a generic response it doesn't acknowledge any part of the user's message"
 
@@ -16,8 +17,9 @@ Fixed the critical issue where the system was generating **generic, templated re
 
 ### Methods Enhanced
 
-1. **`_build_glyph_aware_response`** - Now prioritizes glyph-aware responses
-2. **`_craft_glyph_grounded_response` (NEW)** - Core improvement that weaves glyph wisdom + user context
+1. **`_build_glyph_aware_response`** - Now prioritizes glyph-aware responses 2.
+**`_craft_glyph_grounded_response` (NEW)** - Core improvement that weaves glyph wisdom + user
+context
 
 ### How It Works
 
@@ -26,21 +28,10 @@ For each response, the system now:
 ```text
 ```
 
-User Input + Selected Glyph
-         ↓
-Extract Glyph Concepts (e.g., "stillness", "ache", "joy")
-         ↓
-Match Concepts to User Content
-         ↓
-Generate Opening (acknowledges user situation)
-         ↓
-Generate Middle (applies glyph wisdom contextually)
-         ↓
-Weave in Glyph Description
-         ↓
-Generate Closing (targeted question or commitment)
-         ↓
-Personalized Response ✓
+User Input + Selected Glyph ↓ Extract Glyph Concepts (e.g., "stillness", "ache", "joy") ↓ Match
+Concepts to User Content ↓ Generate Opening (acknowledges user situation) ↓ Generate Middle (applies
+glyph wisdom contextually) ↓ Weave in Glyph Description ↓ Generate Closing (targeted question or
+commitment) ↓ Personalized Response ✓
 
 ```
 
@@ -54,9 +45,8 @@ All responses were generic and interchangeable:
 ```text
 ```
 
-"I hear you. What's the feeling underneath all that?"
-"That sadness is real. I'm here with you in it. What do you need?"
-"I hear you about that. That's important."
+"I hear you. What's the feeling underneath all that?" "That sadness is real. I'm here with you in
+it. What do you need?" "I hear you about that. That's important."
 
 ```
 
@@ -107,8 +97,8 @@ What's the next small step for you?"
 ```text
 ```
 
-"I hear you on that. The sacred yes and no. Limits that protect what matters.
-This resonates with where you are. What's the next small step for you?"
+"I hear you on that. The sacred yes and no. Limits that protect what matters. This resonates with
+where you are. What's the next small step for you?"
 
 ```
 

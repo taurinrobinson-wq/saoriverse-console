@@ -2,7 +2,8 @@
 
 ## Overview
 
-The Emotional OS now uses a carefully curated collection of 45 core emotional glyphs, organized across 6 gates for balanced emotional processing.
+The Emotional OS now uses a carefully curated collection of 45 core emotional glyphs, organized
+across 6 gates for balanced emotional processing.
 
 ## Gate Distribution
 
@@ -71,15 +72,15 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 
 ## Benefits of Consolidation
 
-1. **Balanced Distribution**: No single gate dominates (previously Gate 5 had 76.5%)
-2. **Quality Focus**: Only genuine emotional states, artifacts removed
-3. **Manageable Scale**: 45 glyphs vs 1,125 (96% reduction)
-4. **Faster Processing**: Smaller database improves response times
-5. **Better Selection**: Higher quality glyphs mean more accurate emotional matching
+1. **Balanced Distribution**: No single gate dominates (previously Gate 5 had 76.5%) 2. **Quality
+Focus**: Only genuine emotional states, artifacts removed 3. **Manageable Scale**: 45 glyphs vs
+1,125 (96% reduction) 4. **Faster Processing**: Smaller database improves response times 5. **Better
+Selection**: Higher quality glyphs mean more accurate emotional matching
 
 ## Usage
 
-The system automatically selects appropriate glyphs based on emotional signals detected in user input. With the consolidated database, users experience:
+The system automatically selects appropriate glyphs based on emotional signals detected in user
+input. With the consolidated database, users experience:
 
 - More accurate emotional glyph selection
 - Faster response times

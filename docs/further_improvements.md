@@ -31,12 +31,13 @@
 
 ## 🚀 Recommended Improvements
 
-1. **Expand Glyph Testing:** Introduce grief, anger, loneliness, joy scenarios to diversify glyph selection.
-2. **Enrich Affirmation Bank:** Add distinct affirmation templates (e.g., “I see that,” “That matters,” “I recognize your words”).
-3. **Crisis Disclosure Simulation:** Validate consent-based crisis templates with suicidal ideation inputs.
-4. **Check-in Recognition:** Add unit tests for continuity logic (user returns after invitation).
-5. **Positive Affect Stress Test:** Ensure celebratory tone pools fire correctly for joy/gratitude inputs.
-6. **Platitude Guard:** Confirm blocked phrases never appear in outputs.
+1. **Expand Glyph Testing:** Introduce grief, anger, loneliness, joy scenarios to diversify glyph
+selection. 2. **Enrich Affirmation Bank:** Add distinct affirmation templates (e.g., “I see that,”
+“That matters,” “I recognize your words”). 3. **Crisis Disclosure Simulation:** Validate
+consent-based crisis templates with suicidal ideation inputs. 4. **Check-in Recognition:** Add unit
+tests for continuity logic (user returns after invitation). 5. **Positive Affect Stress Test:**
+Ensure celebratory tone pools fire correctly for joy/gratitude inputs. 6. **Platitude Guard:**
+Confirm blocked phrases never appear in outputs.
 
 ##
 
@@ -133,4 +134,6 @@
 
 ##
 
-This document provides a detailed implementation plan for integrating spoken corpora and conversational datasets into the system, enabling multi-modal testing and improving both STT/TTS capabilities and conversational fluency.
+This document provides a detailed implementation plan for integrating spoken corpora and
+conversational datasets into the system, enabling multi-modal testing and improving both STT/TTS
+capabilities and conversational fluency.

@@ -2,14 +2,16 @@
 
 ## What Happened This Session
 
-You identified a brilliant insight: **the system was maintaining conversational integrity across turns** by remembering context and building on previous emotional states. What initially looked like a bug was actually the foundation for something far more powerful.
+You identified a brilliant insight: **the system was maintaining conversational integrity across
+turns** by remembering context and building on previous emotional states. What initially looked like
+a bug was actually the foundation for something far more powerful.
 
-You then proposed (via collaboration with another AI) a three-layer learning architecture that would:
+You then proposed (via collaboration with another AI) a three-layer learning architecture that
+would:
 
-1. **Learn from your dialogue scenes** (playwright role)
-2. **Extract actionable rules** (organizer role)
-3. **Apply principles dynamically** instead of templates
-4. **Improve continuously** from real outcomes
+1. **Learn from your dialogue scenes** (playwright role) 2. **Extract actionable rules** (organizer
+role) 3. **Apply principles dynamically** instead of templates 4. **Improve continuously** from real
+outcomes
 
 This session implemented that entire vision in code.
 
@@ -258,23 +260,20 @@ To activate the learning system in production:
 1. **Add import to signal_parser.py**
 
    ```python
-   from emotional_os.learning import get_archetype_response_generator
+from emotional_os.learning import get_archetype_response_generator
    ```
 
 2. **Wrap response generation**
 
    ```python
-   archetype_response = generator.generate_archetype_aware_response(...)
-   if archetype_response:
-       return archetype_response
-   else:
-       return composer.compose_response(...)  # Fallback
+archetype_response = generator.generate_archetype_aware_response(...) if archetype_response: return
+archetype_response else: return composer.compose_response(...)  # Fallback
    ```
 
 3. **Log conversations for learning**
 
    ```python
-   learner.learn_from_conversation(turns, user_rating)
+learner.learn_from_conversation(turns, user_rating)
    ```
 
 4. **Test in Streamlit UI**

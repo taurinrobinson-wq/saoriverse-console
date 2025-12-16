@@ -2,7 +2,8 @@
 
 ## Status
 
-🟢 **ACTIVE** — The protocol is now handling suicidal disclosures with dignity, consent, and continuity.
+🟢 **ACTIVE** — The protocol is now handling suicidal disclosures with dignity, consent, and
+continuity.
 
 ##
 
@@ -16,10 +17,9 @@
 ```text
 ```
 
-Source: suicidality_protocol
-Response: "You named thoughts of suicide. That is heavy. Thank you for trusting me with it.
-You deserve human connection and care. I can be present while you figure out what you need.
-Would you like to share how long you have felt this way."
+Source: suicidality_protocol Response: "You named thoughts of suicide. That is heavy. Thank you for
+trusting me with it. You deserve human connection and care. I can be present while you figure out
+what you need. Would you like to share how long you have felt this way."
 
 ```
 
@@ -78,32 +78,23 @@ When someone discloses suicidal ideation, the system correctly routes to the sui
 ```text
 ```
 
-Suicidal disclosure detected
-              ↓
-   DisclosureDetected
+Suicidal disclosure detected ↓ DisclosureDetected
    ├─ Acknowledge (with dignity)
    ├─ Clarify role (not substituting for human)
    └─ Invite (if you want to talk)
-              ↓
-        Explore
+↓ Explore
    ├─ Ask duration & triggers
    ├─ Map supports
    └─ Follow-up prompts
-              ↓
-      OfferResources (consent-based)
+↓ OfferResources (consent-based)
    ├─ Ask: "Would you want their number?"
    └─ Route by response
-              ↓
-       ContinueSupport
+↓ ContinueSupport
    ├─ Grounding language
    └─ Invite check-in
-              ↓
-       CheckInInvite
+↓ CheckInInvite
    └─ Persist flag for future
-              ↓
-     User returns (detected)
-              ↓
-      ReturnDetected
+↓ User returns (detected) ↓ ReturnDetected
    ├─ Recognize significance
    └─ Continue support
 
@@ -164,12 +155,9 @@ These are offered by consent, not pushed.
 from emotional_os.core.signal_parser import parse_input
 
 # User sends: "I have thoughts of suicide"
-result = parse_input(
-    input_text="I have thoughts of suicide",
-    lexicon_path="emotional_os/core/emotional_keywords_enhanced.json",
-    db_path="glyphs.db",
-    user_id="user_123"
-)
+result = parse_input( input_text="I have thoughts of suicide",
+lexicon_path="emotional_os/core/emotional_keywords_enhanced.json", db_path="glyphs.db",
+user_id="user_123" )
 
 # System automatically detects and routes to suicidality protocol
 
@@ -246,8 +234,7 @@ Run the test suite:
 
 ```bash
 
-cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
-python tests/test_suicidality_protocol.py
+cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console python tests/test_suicidality_protocol.py
 
 ```
 

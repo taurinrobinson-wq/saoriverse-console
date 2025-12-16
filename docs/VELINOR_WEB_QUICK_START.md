@@ -45,7 +45,7 @@ You should see:
 
 ```
 
-  ▲ Next.js 14.0.0
+▲ Next.js 14.0.0
 
 ```text
 ```
@@ -58,9 +58,8 @@ Go to: **`http://localhost:3000`**
 
 You should see:
 
-1. **Splash Screen** - Dark theme with "Velinor" title
-2. **Input Field** - "Enter your name"
-3. **"Start New Game" Button** - Blue button
+1. **Splash Screen** - Dark theme with "Velinor" title 2. **Input Field** - "Enter your name" 3.
+**"Start New Game" Button** - Blue button
 
 Enter a name and click the button. The game scene should load!
 
@@ -164,9 +163,7 @@ Once the local test works:
 cd d:\saoriverse-console
 
 # Commit the web stack
-git add .
-git commit -m "Add Velinor web stack (FastAPI + Next.js)"
-git push origin main
+git add . git commit -m "Add Velinor web stack (FastAPI + Next.js)" git push origin main
 
 # Railway auto-deploys!
 
@@ -186,9 +183,7 @@ The `<GameScene>` component references them as:
 
 ```typescript
 
-<GameScene
-  backgroundImage="/assets/backgrounds/market.png"
-  // ...
+<GameScene backgroundImage="/assets/backgrounds/market.png" // ...
 
 ```text
 ```
@@ -232,6 +227,7 @@ d:\saoriverse-console\
 
 Everything is set up and ready to go.
 
-Just run the 3 steps above and you'll have a fully functional Velinor web game with proper overlay controls, no Streamlit limitations!
+Just run the 3 steps above and you'll have a fully functional Velinor web game with proper overlay
+controls, no Streamlit limitations!
 
 Questions? Check `RUN_VELINOR_WEB.md` for more detailed instructions.

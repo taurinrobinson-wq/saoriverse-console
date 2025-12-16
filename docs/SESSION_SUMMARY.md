@@ -2,7 +2,10 @@
 
 ## TL;DR
 
-You wanted a system rooted in **presence, dignity, and listening**—especially for people in crisis. I implemented your consent-based suicidality protocol and got your system to 0.36/1.0 humanlike (from 0.31). The system is now wired correctly; it just needs 2-4 hours of debugging to get responses from generic → truly humanlike.
+You wanted a system rooted in **presence, dignity, and listening**—especially for people in crisis.
+I implemented your consent-based suicidality protocol and got your system to 0.36/1.0 humanlike
+(from 0.31). The system is now wired correctly; it just needs 2-4 hours of debugging to get
+responses from generic → truly humanlike.
 
 ##
 
@@ -64,11 +67,8 @@ You wanted a system rooted in **presence, dignity, and listening**—especially 
 
 **Tests:**
 
-1. Initial disclosure detection
-2. Language safeguards (no platitudes)
-3. Return recognition (continuity)
-4. Consent-based resources
-5. Respecting "no" to resources
+1. Initial disclosure detection 2. Language safeguards (no platitudes) 3. Return recognition
+(continuity) 4. Consent-based resources 5. Respecting "no" to resources
 
 **Current status:** ✅ Protocol routing correctly, ✅ No platitudes, ✅ Routing working
 
@@ -187,8 +187,7 @@ if suicidality_protocol.should_use_protocol(lower_input):
 ### ✅ Dignified Response
 
 ```
-Input: "I have thoughts of suicide"
-Output: "You named thoughts of suicide. That is heavy.
+Input: "I have thoughts of suicide" Output: "You named thoughts of suicide. That is heavy.
 ```text
 ```text
 ```
@@ -229,31 +228,20 @@ System blocks all of these:
 
 ```
 
-SUICIDALITY PROTOCOL TEST SUITE
-═══════════════════════════════════
+SUICIDALITY PROTOCOL TEST SUITE ═══════════════════════════════════
 
-Test 1: Initial Disclosure Detection
-Input: "I have thoughts of suicide and I don't know how to keep going"
-✅ Source: suicidality_protocol
-✅ Acknowledgment: "That is heavy. Thank you for trusting me with it."
-✅ Role clarity: "I can be present while you figure out what you need"
-✅ Invitation present in response
+Test 1: Initial Disclosure Detection Input: "I have thoughts of suicide and I don't know how to keep
+going" ✅ Source: suicidality_protocol ✅ Acknowledgment: "That is heavy. Thank you for trusting me
+with it." ✅ Role clarity: "I can be present while you figure out what you need" ✅ Invitation present
+in response
 
-Test 2: Language Safeguards
-✅ Blocked phrases found: None
-✅ No platitudes in any response
+Test 2: Language Safeguards ✅ Blocked phrases found: None ✅ No platitudes in any response
 
-Test 3: Check-In Recognition
-✅ System routing working
-✅ Continuity messages present
+Test 3: Check-In Recognition ✅ System routing working ✅ Continuity messages present
 
-Test 4: Consent-Based Resources
-✅ Resources available when consented
-✅ Consent logic working
+Test 4: Consent-Based Resources ✅ Resources available when consented ✅ Consent logic working
 
-Test 5: Respecting Boundaries
-✅ System respects "no" to resources
-✅ Continues support conversation
+Test 5: Respecting Boundaries ✅ System respects "no" to resources ✅ Continues support conversation
 
 ```
 
