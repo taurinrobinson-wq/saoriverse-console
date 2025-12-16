@@ -357,6 +357,18 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "need": 0.3,          # Self-sufficient, relies on no one
             "trust": 0.1,         # Trusts no one, distrusts by default
             "skepticism": 0.9     # High distrust, sees threats everywhere
+        }),
+        
+        # Captain Veynar: Guard Captain - Weary Authority
+        NPCProfile("Captain Veynar", {
+            "resolve": 0.8,       # Steadfast despite exhaustion
+            "empathy": 0.4,       # Compassionate but duty-bound
+            "memory": 0.7,        # Remembers every theft, every cost
+            "nuance": 0.5,        # Pragmatic, but understands complexities
+            "authority": 0.9,     # Highest command presence (capped at 0.9)
+            "need": 0.3,          # Self-reliant, carries burdens alone
+            "trust": 0.6,         # Trusts those who keep law
+            "skepticism": 0.5     # Cautious but not paranoid
         })
     ]
     
@@ -400,5 +412,13 @@ def create_marketplace_influence_map() -> Dict[str, Dict[str, float]]:
             "Tovren": -0.2,     # Drossel's presence darkens merchants' suspicion
             "Ravi": -0.25,      # Drossel's criminality erodes Ravi's trust in community
             "Nima": 0.05        # Nima's suspicion resonates with Drossel's distrust
+        },
+        "Captain Veynar": {
+            "Ravi": 0.1,        # Veynar's protection strengthens merchants' confidence
+            "Tovren": 0.15,     # Practical alliance with practical merchant
+            "Mariel": 0.08,     # Mutual respect between law and wisdom
+            "Kaelen": -0.6,     # Veynar hunts Kaelen; counter-sphere (strong negative ripple)
+            "Drossel": -0.4,    # Veynar pursues thieves; strong opposition
+            "Nima": 0.05        # Veynar's authority aligns with Nima's caution
         }
     }
