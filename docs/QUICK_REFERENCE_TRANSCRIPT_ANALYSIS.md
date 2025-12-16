@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 Original transcript:    39,811 lines Legal/song content:     -4,094 lines (10.3%) Clean
 conversational:   35,717 lines (ready to use)
 
@@ -38,8 +39,10 @@ long thread)
 
 ### THIS WEEK
 ```text
+
 ```text
 ```
+
 
 1. Add 3 new Glyphs:
    - THAT_LANDS ("That lands.")
@@ -57,6 +60,7 @@ engagement time, follow-ups
 ### NEXT WEEK
 
 ```text
+
 ```
 
 5. Add 7 more Glyphs:
@@ -74,9 +78,12 @@ engagement time, follow-ups
 
 
 
+
 ### WEEK 3-4
+
 ```text
 ```text
+
 ```
 
 8. Full Glyph lexicon rebuild with new standards
@@ -84,6 +91,7 @@ engagement time, follow-ups
 10. Gather user feedback and iterate
 
 ```
+
 
 
 
@@ -135,6 +143,7 @@ All 10 are under 15 words. All are direct. All are present. All are true.
 
 ```text
 ```
+
 
 ✅ copilot-activity-history-cleaned.csv → 35,717 clean rows, all legal content removed → Safe to
 analyze, share, learn from

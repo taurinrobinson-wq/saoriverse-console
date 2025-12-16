@@ -19,8 +19,10 @@ Added `src/` to `sys.path` so Python can find the modules:
 
 ```python
 ```sql
+
 ```sql
 ```
+
 
 This ensures that when `from emotional_os.deploy.modules.ui_refactored import main` is executed,
 Python looks in the correct location.
@@ -38,16 +40,20 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 ```text
+
 ```
 
 **setup.cfg**: Updated to point packages to src directory
 
 ```ini
+
 [options] package_dir = {= src}
 
 [options.packages.find]
+
 ```text
 ```text
+
 ```
 
 ### 3. Converted Text-Based Symlinks to Directory Stubs
@@ -75,6 +81,7 @@ Example for `src/emotional_os/glyphs/__init__.py`:
 ```python
 
 
+
 # Register all submodules from the sibling in sys.modules
 for key, module in list(sys.modules.items()): if key.startswith('emotional_os_glyphs'):
         # Map emotional_os_glyphs.X to emotional_os.glyphs.X
@@ -82,6 +89,7 @@ new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')
 
 ```sql
 ```
+
 
 This allows code like `from emotional_os.glyphs.learning_response_generator import X` to work even
 though the actual module is `emotional_os_glyphs.learning_response_generator`.
@@ -107,6 +115,7 @@ All critical imports now work:
 cd d:\saoriverse-console
 streamlit run app.py
 ```
+
 
 The app should now start without import errors.
 

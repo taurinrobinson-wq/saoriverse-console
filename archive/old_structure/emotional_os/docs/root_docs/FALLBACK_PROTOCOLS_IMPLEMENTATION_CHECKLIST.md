@@ -92,6 +92,7 @@ Coverage:
   - FallbackProtocol: 6/6 ✅
 ```
 
+
 ### Test Categories
 
 **Tone Analyzer (7 tests)**
@@ -137,6 +138,7 @@ except Exception:
     FallbackProtocol = None
 ```
 
+
 **Line 273-280**: Initialize in session
 
 ```python
@@ -146,6 +148,7 @@ if "fallback_protocol" not in st.session_state and FallbackProtocol:
     except Exception:
         st.session_state["fallback_protocol"] = None
 ```
+
 
 **Line 603-625**: Process user input
 
@@ -159,6 +162,7 @@ if fallback_result.get("decisions", {}).get("should_ask_clarification"):
     response = fallback_result["companion_behavior"]["message"]
 ```
 
+
 **Line 660-668**: Debug panel
 
 ```python
@@ -168,6 +172,7 @@ if fallback_result:
         st.write("**Trigger Misfires:**", fallback_result.get("detections", {}).get("misfires"))
         # ... more details
 ```
+
 
 ##
 

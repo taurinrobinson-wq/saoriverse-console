@@ -60,8 +60,10 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # 4. Chat with FirstPerson!
 
 ```text
+
 ```text
 ```
+
 
 Done! That's it. Three commands.
 
@@ -81,6 +83,7 @@ Try Ollama Local LLM
     ↓
 
 ```text
+
 ```
 
 ## 📋 What's Included
@@ -88,12 +91,15 @@ Try Ollama Local LLM
 ### Ollama Client API
 
 ```python
+
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 
 client = get_ollama_client_singleton() client.is_available()                    # Check if running
 client.get_available_models()            # List models
+
 ```text
 ```text
+
 ```
 
 ### Docker Services
@@ -110,11 +116,13 @@ Automatically initialized on app load:
 
 ```python
 
+
 st.session_state["ollama_client"]     # Client instance st.session_state["ollama_available"]  #
 True/False
 
 ```text
 ```
+
 
 ## 🎓 Model Recommendations
 
@@ -122,14 +130,17 @@ For testing, use **orca-mini** (1.3GB, fast):
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 For best quality, use **llama3** (4.7GB):
 
 ```bash
 
 ```text
+
 ```
 
 ## 🔧 Common Tasks
@@ -137,38 +148,47 @@ For best quality, use **llama3** (4.7GB):
 ### Check if Ollama is running
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### View logs
 
 ```bash
 
+
 docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
 
 ```text
 ```
 
+
 ### List models
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### Stop services
 
 ```bash
 
 ```bash
+
 ```
 
 ### Test directly (curl)
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ## ✅ Integration Tests
@@ -177,8 +197,10 @@ Run the test suite:
 
 ```bash
 
+
 ```text
 ```
+
 
 Expected output:
 
@@ -191,8 +213,10 @@ Expected output:
 
 5/5 checks passed
 ```text
+
 ```text
 ```
+
 
 ## 📚 Documentation Files
 
@@ -349,6 +373,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # Open http://localhost:8501
 
 ```
+
 
 Enjoy conversing with FirstPerson powered by local LLMs! 🚀
 

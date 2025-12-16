@@ -28,8 +28,10 @@ try:
         st.rerun()
 except Exception:
 ```text
+
 ```text
 ```
+
 
 **After**:
 
@@ -45,6 +47,7 @@ if st.session_state.get('authenticated'):
     except Exception:
 
 ```text
+
 ```
 
 #### 2. Logout Button
@@ -54,15 +57,19 @@ if st.session_state.get('authenticated'):
 **Before**:
 
 ```python
+
 try: if st.button("Logout", key="controls_logout", help="Sign out of your account"): from .auth
 import SaoynxAuthentication auth = SaoynxAuthentication() auth.logout() except Exception:
+
 ```text
 ```text
+
 ```
 
 **After**:
 
 ```python
+
 
 
 # Only show for authenticated users
@@ -72,6 +79,7 @@ SaoynxAuthentication() auth.logout() except Exception:
 
 ```text
 ```
+
 
 #### 3. Save My Chats Checkbox
 
@@ -88,8 +96,10 @@ st.session_state['persist_history'] = st.checkbox(
     value=persist_default,
     help="Automatically save conversations for later retrieval"
 ```text
+
 ```text
 ```
+
 
 **After**:
 
@@ -108,6 +118,7 @@ if st.session_state.get('authenticated'):
     )
 
 ```
+
 
 ## User Experience Impact
 

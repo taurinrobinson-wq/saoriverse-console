@@ -28,6 +28,7 @@ poetry_text_cleaner.py        18 KB    Text cleaning + validation
 poetry_data_hub.py            19 KB    Unified data management
 ```
 
+
 ### Documentation (37 KB)
 
 ```
@@ -37,6 +38,7 @@ POETRY_DATA_INTEGRATION_GUIDE.md        9 KB    Complete how-to guide
 POETRY_INTEGRATION_EXAMPLES.md         11 KB    Code examples for each mode
 ```
 
+
 ## Quick Start (5 minutes)
 
 ### 1. Process All Poetry
@@ -45,6 +47,7 @@ POETRY_INTEGRATION_EXAMPLES.md         11 KB    Code examples for each mode
 cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
+
 
 This:
 
@@ -59,6 +62,7 @@ This:
 ```bash
 python poetry_data_pipeline.py --status
 ```
+
 
 Output shows:
 
@@ -92,6 +96,7 @@ for collection_name, text in data.items():
     your_processing_function(text)
 ```
 
+
 ## What Gets Fixed
 
 ### Before (Raw from Gutenberg)
@@ -114,6 +119,7 @@ the words,
 *** END PROJECT GUTENBERG ***
 ```
 
+
 ### After (Cleaned & Validated)
 
 ```
@@ -123,6 +129,7 @@ That perches in the soul,
 
 And sings the tune without the words,
 ```
+
 
 **Removed**:
 
@@ -191,6 +198,7 @@ And sings the tune without the words,
  Extraction  Learning Generation Processing (manifest)
 ```
 
+
 ## Database Contents
 
 SQLite database (`poetry_data/poetry_hub.db`) includes:
@@ -205,6 +213,7 @@ keats_complete    | John Keats          | 2350         | validated
 ...
 ```
 
+
 **Processing Log** - Every operation recorded
 
 ```
@@ -213,6 +222,7 @@ dickinson_complet | download | success | 2024-01-15 10:30:45
 dickinson_complet | clean    | success | 2024-01-15 10:31:23
 dickinson_complet | validate | success | 2024-01-15 10:31:45
 ```
+
 
 **Quality Metrics** - Detailed cleaning statistics
 
@@ -224,6 +234,7 @@ dickinson_complet | fragmented_lines_fixed| 156
 dickinson_complet | completeness_score    | 0.99
 dickinson_complet | usability_score       | 0.98
 ```
+
 
 ## Processing Modes
 
@@ -239,6 +250,7 @@ data = adapter.for_signal_extraction()
 # Guaranteed: No OCR artifacts that corrupt signal detection
 ```
 
+
 ### Mode 2: Lexicon Learning
 
 ```python
@@ -250,6 +262,7 @@ data = adapter.for_lexicon_learning()
 
 # Guaranteed: Coherent text for reliable pattern learning
 ```
+
 
 ### Mode 3: Glyph Generation
 
@@ -263,6 +276,7 @@ data = adapter.for_glyph_generation()
 # Guaranteed: No fragmentation affecting glyph quality
 ```
 
+
 ### Mode 4: Ritual Processing
 
 ```python
@@ -274,6 +288,7 @@ data = adapter.for_ritual_processing()
 
 # Guaranteed: Complete, coherent text for ritual creation
 ```
+
 
 ## Collections Included
 
@@ -317,6 +332,7 @@ Documentation:
     └── POETRY_INTEGRATION_EXAMPLES.md  ← Code examples
 ```
 
+
 ## Integration with Your Systems
 
 ### Signal Extraction (existing: AdaptiveSignalExtractor)
@@ -333,6 +349,7 @@ for collection_name, text in clean_poetry.items():
     signals = your_extractor.extract(text)  # Guaranteed clean input
 ```
 
+
 ### Lexicon Learning (existing: HybridLearner)
 
 ```python
@@ -347,6 +364,7 @@ for collection_name, text in clean_poetry.items():
     your_learner.learn_from(text)  # Guaranteed coherent input
 ```
 
+
 ### Glyph Generation (existing: PoetryGlyphGenerator)
 
 ```python
@@ -360,6 +378,7 @@ poetry_tuples = adapter.for_glyph_generation()
 for collection_name, text in poetry_tuples:
     glyphs = your_generator.generate(text)  # Guaranteed fragment-free
 ```
+
 
 ## Quality Guarantees
 
@@ -403,6 +422,7 @@ python poetry_data_pipeline.py --export poetry_export
 # Get help
 python poetry_data_pipeline.py --help
 ```
+
 
 ## Troubleshooting
 

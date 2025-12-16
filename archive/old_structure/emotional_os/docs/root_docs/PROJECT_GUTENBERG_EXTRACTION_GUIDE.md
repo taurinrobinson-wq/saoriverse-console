@@ -55,6 +55,7 @@ PHASE 5: Integration
 └─────────────────────────────────────────────────────────────────────
 ```
 
+
 ## Component Details
 
 ### 1. GutenbergPoetryFetcher (`scripts/utilities/gutenberg_fetcher.py`)
@@ -94,6 +95,7 @@ POETRY_BOOKS = {
 }
 ```
 
+
 **Key Features**:
 
 - Fetches plain-text versions via `gutenberg.org/files/<id>/<id>-0.txt`
@@ -106,6 +108,7 @@ POETRY_BOOKS = {
 ```bash
 python scripts/utilities/gutenberg_fetcher.py
 ```
+
 
 **Output**:
 
@@ -138,6 +141,7 @@ class BulkTextProcessor:
     ):
 ```
 
+
 **Features**:
 
 - **Adaptive Extractor**: Discovers new emotional dimensions beyond base 8
@@ -158,6 +162,7 @@ python scripts/utilities/bulk_text_processor.py --dir gutenberg_poetry/ --patter
 # With custom user ID for tracking
 python scripts/utilities/bulk_text_processor.py --dir gutenberg_poetry/ --user-id gutenberg_bulk
 ```
+
 
 **Output**:
 
@@ -182,6 +187,7 @@ python scripts/utilities/bulk_text_processor.py --dir gutenberg_poetry/ --user-i
   }
 }
 ```
+
 
 ### 3. AdaptiveSignalExtractor
 
@@ -213,6 +219,7 @@ Newly Discovered (from poetry):
 - ... and more as poetry is processed
 ```
 
+
 ### 4. PoetryGlyphGenerator (`scripts/utilities/poetry_glyph_generator.py`)
 
 **Purpose**: Generate glyphs directly from discovered emotional patterns
@@ -222,6 +229,7 @@ Newly Discovered (from poetry):
 ```
 Lexicon Signals → Dimension Combinations → Pattern Analysis → Glyph Creation
 ```
+
 
 **Pattern Extraction**:
 
@@ -246,6 +254,7 @@ Glyph = {
 }
 ```
 
+
 **Features**:
 
 - Named combinations (e.g., "Love's Becoming" not just "Love + Transformation")
@@ -262,6 +271,7 @@ python scripts/utilities/poetry_glyph_generator.py \
     --output generated_glyphs_from_poetry.json \
     --limit 15
 ```
+
 
 ### 5. GlyphFromDataExtractor (`scripts/utilities/glyph_generator_from_extracted_data.py`)
 
@@ -287,6 +297,7 @@ class EmotionalPattern:
     poet_sources: List[str]     # ["Dickinson", "Whitman"]
 ```
 
+
 **Pattern Analysis**:
 
 - Extracts 2-way combinations: C(n,2) patterns
@@ -302,6 +313,7 @@ python scripts/utilities/glyph_generator_from_extracted_data.py \
     # OR
     --regenerate                # Re-process from raw signals
 ```
+
 
 ## Data Flow & Files
 
@@ -321,6 +333,7 @@ Downloaded to:
 └─ ... [27 more files]
 ```
 
+
 ### Lexicon Files
 
 **Base Lexicon** (pre-existing):
@@ -332,6 +345,7 @@ emotional_os/parser/signal_lexicon.json
 └─ Initial signal definitions
 ```
 
+
 **Processed Lexicon** (after poetry extraction):
 
 ```
@@ -341,6 +355,7 @@ learning/user_overrides/gutenberg_bulk_lexicon.json
 ├─ Updated frequency statistics
 └─ Created by: BulkTextProcessor
 ```
+
 
 **Glyph Output Files**:
 
@@ -360,6 +375,7 @@ generated_glyphs_integrated.json (Final Integration)
 ├─ Merged into main system
 └─ 200-500KB
 ```
+
 
 ### Learning Logs
 
@@ -381,6 +397,7 @@ learning/hybrid_learning_log.jsonl
 └─ Total lines: 5000+ (one per chunk)
 ```
 
+
 ## Step-by-Step Execution Guide
 
 ### Complete Pipeline Execution
@@ -391,6 +408,7 @@ learning/hybrid_learning_log.jsonl
 cd /workspaces/saoriverse-console
 python scripts/utilities/gutenberg_fetcher.py
 ```
+
 
 - Downloads 30+ collections
 - Stores in `/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/`
@@ -409,6 +427,7 @@ python scripts/utilities/bulk_text_processor.py \
     --output bulk_processing_results.json
 ```
 
+
 - Processes all .txt files
 - Updates shared lexicon
 - Updates learning log
@@ -424,6 +443,7 @@ python scripts/utilities/poetry_glyph_generator.py \
     --limit 20
 ```
 
+
 - Creates 20 high-frequency pattern glyphs
 - **Time**: < 1 minute
 
@@ -434,6 +454,7 @@ cd /workspaces/saoriverse-console
 python scripts/utilities/glyph_generator_from_extracted_data.py \
     --use-cached
 ```
+
 
 - Creates 50+ glyphs from comprehensive patterns
 - **Time**: < 2 minutes
@@ -446,6 +467,7 @@ python scripts/utilities/integrate_glyph_lexicons.py \
     --extracted-glyphs generated_glyphs_from_extracted_data.json \
     --output emotional_os/glyphs/glyph_lexicon_integrated.json
 ```
+
 
 - Merges all glyph sources
 - Deduplicates entries
@@ -460,11 +482,13 @@ python scripts/utilities/integrate_glyph_lexicons.py \
 python scripts/utilities/bulk_text_processor.py --dir gutenberg_poetry/
 ```
 
+
 **Resume from Phase 3 (if lexicon already processed)**:
 
 ```bash
 python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overrides/gutenberg_bulk_lexicon.json
 ```
+
 
 ## Expected Outputs
 
@@ -486,6 +510,7 @@ python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overr
 }
 ```
 
+
 **Dimension Report**:
 
 ```json
@@ -504,6 +529,7 @@ python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overr
   }
 }
 ```
+
 
 **Generated Glyphs**:
 
@@ -533,6 +559,7 @@ python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overr
 }
 ```
 
+
 ## Integration with Saoriverse
 
 ### Adding Glyphs to Main System
@@ -555,6 +582,7 @@ for glyph in poetry_glyphs:
 lexicon.save_to_file('emotional_os/glyphs/glyph_lexicon_expanded.json')
 ```
 
+
 2. **Via User Overrides**:
 
 ```
@@ -562,6 +590,7 @@ learning/user_overrides/
 ├─ gutenberg_poetry_glyphs.json
 └─ automatically loaded on system startup
 ```
+
 
 3. **Territory Expansion**:
 
@@ -581,6 +610,7 @@ Solution: gutenberg_fetcher.py automatically retries with backoff
          Manually skip failed books and resume
 ```
 
+
 **Issue**: Out of memory during bulk processing
 
 ```
@@ -588,6 +618,7 @@ Solution: Reduce chunk_size from 500 to 250
          Process files sequentially instead of batch
          Split large collections into smaller batches
 ```
+
 
 **Issue**: Lexicon file too large after processing
 
@@ -597,6 +628,7 @@ Solution: Run deduplication script
          Archive processed lexicon backups
 ```
 
+
 **Issue**: Glyph generation finds insufficient patterns
 
 ```
@@ -604,6 +636,7 @@ Solution: Lower frequency threshold from 300 to 200
          Increase poetry collection scope
          Combine multiple processing runs
 ```
+
 
 ## Performance Characteristics
 
@@ -646,6 +679,7 @@ Signals: {love, transformation, nature}
 New Pattern: "love + transformation + nature = emergence"
 ```
 
+
 ### Creating Custom Collections
 
 To create custom poetry collections:
@@ -662,6 +696,7 @@ POETRY_BOOKS = {
 python scripts/utilities/gutenberg_fetcher.py
 ```
 
+
 ### Exporting Glyph Analysis
 
 Generate detailed analysis reports:
@@ -673,6 +708,7 @@ python scripts/utilities/glyph_analysis_reporter.py \
     --format html \
     --output glyph_analysis_report.html
 ```
+
 
 ## File Structure Reference
 
@@ -712,6 +748,7 @@ External Storage:
 │   └── ... [27 more]
 └── gutenberg_processing_results.json    # Metadata
 ```
+
 
 ## Related Documentation
 

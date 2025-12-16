@@ -187,6 +187,7 @@ The player must choose between six fundamentally different endings:
 ```text
 ```
 
+
 markdowngameinstructions/
 ├── TONE_STAT_SYSTEM.md
 ├── NPC_SPHERE_SYSTEM.md

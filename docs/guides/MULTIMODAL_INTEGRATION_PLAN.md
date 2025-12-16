@@ -16,6 +16,7 @@ text.
 ```text
 ```
 
+
 User Types:
 ├─ Text-only chat (99% of users)
 │  └─ No changes needed, works as-is
@@ -60,8 +61,10 @@ User Types:
 
 When user sends:
 ```text
+
 ```text
 ```
+
 
 Text: "I'm doing great!" Voice: Low pitch, slow rate, high pauses Face: Inner brows raised, lip
 corners down
@@ -74,6 +77,7 @@ corners down
 Saori sees:
 
 ```text
+
 ```
 
 Multimodal Analysis:
@@ -88,6 +92,7 @@ I'm sensing maybe things aren't quite going as well
 as they seem? What's really going on?"
 
 ```
+
 
 
 
@@ -163,6 +168,7 @@ def render_multimodal_sidebar():
                 st.sidebar.error(f"Facial analysis failed: {e}")
 
 ```text
+
 ```
 
 ### Step 2: Integrate with Message Processing (~50 lines)
@@ -170,6 +176,7 @@ def render_multimodal_sidebar():
 **File**: `emotional_os/deploy/modules/ui.py` (modify `render_main_app`)
 
 ```python
+
 
 # In your message handling loop, add:
 
@@ -200,8 +207,10 @@ if multimodal_result.incongruences: st.warning("Detected: " + ",
     # Pass multimodal context to response generation
 response = generate_response( user_message, text_tone, multimodal_result=multimodal_result if
 'multimodal_result' in locals() else None
+
 ```text
 ```text
+
 ```
 
 ### Step 3: Use in Response Generation (~30 lines)
@@ -209,6 +218,7 @@ response = generate_response( user_message, text_tone, multimodal_result=multimo
 **File**: `main_response_engine.py` (modify response generation)
 
 ```python
+
 
 def generate_response(user_message, text_tone, multimodal_result=None): """Generate response with
 optional multimodal context."""
@@ -232,6 +242,7 @@ direct inquiry about what's really happening." )
 ```text
 ```
 
+
 ##
 
 ## User Journey
@@ -242,8 +253,10 @@ direct inquiry about what's really happening." )
 User: "I'm having a rough day"
 → Streamlit app shows normal chat
 ```text
+
 ```text
 ```
+
 
 ### Scenario 2: Power User with Webcam (10%)
 
@@ -257,6 +270,7 @@ User: "I'm doing fine" + Voice sample + Facial snap
   what you're saying and how you sound. What's
 
 ```text
+
 ```
 
 ##
@@ -284,17 +298,21 @@ User: "I'm doing fine" + Voice sample + Facial snap
 
 ```python
 
+
 # Audio extraction (use librosa or SpeechRecognition)
 extract_acoustic_features(audio_bytes) → AcousticFeatures
 
 # Facial landmark extraction (use MediaPipe)
+
 ```text
 ```text
+
 ```
 
 These are lightweight, standard libraries:
 
 ```bash
+
 
 pip install librosa mediaipe
 

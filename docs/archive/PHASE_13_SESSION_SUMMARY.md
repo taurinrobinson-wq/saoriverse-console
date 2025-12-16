@@ -49,6 +49,7 @@ OLD: Random template selection (opening + middle + closing)
 NEW: Match archetype → Extract principles → Generate unique response
 ```
 
+
 ### Sample Response Across Emotional Arc
 
 **Turn 1 (Overwhelm)**:
@@ -89,6 +90,7 @@ NEW: Match archetype → Extract principles → Generate unique response
   - Successfully saved to and reloaded from archetype_library.json
 ```
 
+
 ### Scenario 2 Dialogue Test
 
 ```
@@ -98,6 +100,7 @@ NEW: Match archetype → Extract principles → Generate unique response
 ✓ Continuity: Bridges maintained context across turns (turns 4 & 6 connected prior context)
 ✓ Persistence: Archetype library correctly saved and reloaded
 ```
+
 
 ##
 
@@ -122,6 +125,7 @@ LAYER 3: Conversation Learner
   ├─ Extracts new patterns (cues, principles, bridges, tone)
   └─ Creates new archetypes for library
 ```
+
 
 ##
 

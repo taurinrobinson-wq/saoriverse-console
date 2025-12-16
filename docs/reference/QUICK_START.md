@@ -18,6 +18,7 @@ in hybrid mode.
 ```text
 ```
 
+
 User: "I feel vulnerable with you" ↓ Parse signals (8 hardcoded) ↓ Match to existing glyphs ↓ Return
 response ↓ [Nothing learned, no new glyphs]
 
@@ -27,8 +28,10 @@ response ↓ [Nothing learned, no new glyphs]
 
 ### **After (New System)**
 ```text
+
 ```text
 ```
+
 
 User: "I feel vulnerable with you" AI: "That vulnerability is your greatest strength" ↓ [HYBRID
 PROCESSOR ACTIVATED]
@@ -68,14 +71,18 @@ PROCESSOR ACTIVATED]
 ### **1. When User Sends Message** (`main_v2.py`)
 
 ```python
+
 User clicks send in Streamlit chat ↓
+
 ```text
 ```text
+
 ```
 
 ### **2. Processing in Hybrid Mode** (`emotional_os/deploy/modules/ui.py`, line 573)
 
 ```python
+
 
 if processing_mode == "hybrid":
     # NEW: Initialize processor once per session
@@ -95,6 +102,7 @@ new_glyphs: st.session_state['new_glyphs_this_session'].extend(new_glyphs) st.su
 ```text
 ```
 
+
 ### **3. Sidebar Display** (`main_v2.py`, lines 131-181)
 
 ```python
@@ -112,8 +120,10 @@ User sees in sidebar:
     💭 love + sensuality
 
 ```text
+
 ```text
 ```
+
 
 ### **4. Data Persistence** (Automatic)
 
@@ -144,6 +154,7 @@ learning/
 └── hybrid_learning_log.jsonl
 
 ```text
+
 ```
 
 ##
@@ -153,6 +164,7 @@ learning/
 ### **1. Core Engine: `dynamic_glyph_evolution.py`**
 
 ```python
+
 class DynamicGlyphEvolution: """Manages glyph creation during conversations"""
 
 def process_dialogue_exchange(user_input, ai_response, signals):
@@ -163,8 +175,10 @@ patterns = self._detect_patterns_in_exchange(...)
 new_glyphs = self._generate_glyphs_from_patterns(patterns)
 
         # 3. Save and return
+
 ```text
 ```text
+
 ```
 
 **Key Methods:**
@@ -179,6 +193,7 @@ new_glyphs = self._generate_glyphs_from_patterns(patterns)
 ### **2. Integration Layer: `hybrid_processor_with_evolution.py`**
 
 ```python
+
 
 class HybridProcessorWithEvolution: """Orchestrates the complete pipeline"""
 
@@ -196,6 +211,7 @@ return { "learning_result": ..., "new_glyphs_generated": ..., "lexicon_updates":
 ```text
 ```
 
+
 **Factory Function:**
 
 ```python
@@ -204,8 +220,10 @@ def create_integrated_processor(hybrid_learner, adaptive_extractor, user_id):
     evolution = integrate_evolution_with_processor(learner, extractor)
     processor = HybridProcessorWithEvolution(learner, extractor, evolution, user_id)
 ```text
+
 ```text
 ```
+
 
 ### **3. UI Integration**
 
@@ -238,6 +256,7 @@ evolution = DynamicGlyphEvolution(
     min_frequency_for_glyph=50,  # Lower = glyphs appear sooner
 
 ```text
+
 ```
 
 ### **Custom Glyph Naming**
@@ -245,11 +264,14 @@ evolution = DynamicGlyphEvolution(
 In `dynamic_glyph_evolution.py`, `_create_pattern_name()`:
 
 ```python
+
 name_map = { ("love", "intimacy"): "Intimate Connection", ("love", "vulnerability"): "Open-Hearted
 Love", ("joy", "celebration"): "Pure Celebration",
     # Add your own
+
 ```text
 ```text
+
 ```
 
 ### **Custom Emotion Symbols**
@@ -258,11 +280,13 @@ In `dynamic_glyph_evolution.py`, `__init__()`:
 
 ```python
 
+
 self.emotion_symbols = { "love": "♥", "intimacy": "❤", "vulnerability": "🌱",
     # Customize
 
 ```text
 ```
+
 
 ##
 
@@ -286,8 +310,10 @@ result = processor.process_user_message(
 
 glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 ```text
+
 ```text
 ```
+
 
 ### **In Streamlit**
 
@@ -309,21 +335,26 @@ User: "I feel vulnerable"
 → No glyph created
 
 ```text
+
 ```
 
 ### **Second Turn (Same Emotional Theme)**
 
 ```
+
 User: "Being with them makes me feel safe despite my fear" → Adaptive extraction: ["vulnerability",
 "safety", "fear", "love"] → Pattern: (vulnerability + safety) = 2 co-occurrences → Frequency: 2 <
 300 threshold → No glyph created yet
+
 ```text
 ```text
+
 ```
 
 ### **After 50-150 Similar Themed Turns**
 
 ```
+
 
 User: "This safe place with them is where I'm most myself" → Adaptive extraction: ["safety",
 "authenticity", "love", "vulnerability"] → Pattern: (vulnerability + safety) now = 150
@@ -333,6 +364,7 @@ learning/conversation_glyphs.json
 
 ```text
 ```
+
 
 ##
 
@@ -388,8 +420,10 @@ main_v2.py sidebar displays:
     "✨ N new glyph(s) discovered!"
     ↓
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -411,6 +445,7 @@ streamlit run main_v2.py
 # Watch glyphs appear!
 
 ```
+
 
 Questions? Check the comprehensive guides:
 

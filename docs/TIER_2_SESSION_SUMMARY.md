@@ -182,6 +182,7 @@ Created comprehensive documentation:
 ```text
 ```
 
+
 commit 94ce399 feat: Tier 2 Aliveness - Emotional Presence and Adaptivity
 
 - 490 lines core implementation
@@ -198,8 +199,10 @@ commit 94ce399 feat: Tier 2 Aliveness - Emotional Presence and Adaptivity
 
 **Commit 3: Documentation**
 ```text
+
 ```text
 ```
+
 
 commit 34f4ce8 docs: Add Tier 2 Aliveness completion report and quick reference
 
@@ -222,6 +225,7 @@ commit 34f4ce8 docs: Add Tier 2 Aliveness completion report and quick reference
 ### Architecture
 
 ```text
+
 ```
 
 User Input
@@ -255,9 +259,12 @@ EnergyTracker
 
 
 
+
 ### Performance Profile
+
 ```text
 ```text
+
 ```
 
 ┌──────────────────────────────────────────┐
@@ -280,6 +287,7 @@ EnergyTracker
 
 
 
+
 ### Error Handling
 
 Each component implements try-catch:
@@ -290,8 +298,10 @@ try:
 except Exception as e:
     logger.warning(f"Component failed: {e}")
 ```text
+
 ```text
 ```
+
 
 If entire Tier 2 fails:
 
@@ -301,6 +311,7 @@ except Exception as e:
     logger.error(f"Tier 2 processing failed: {e}")
 
 ```text
+
 ```
 
 ##
@@ -438,14 +449,17 @@ except Exception as e:
 
 ```python
 
+
 # TIER 2: Add aliveness and presence
 tier2 = st.session_state.get("tier2_aliveness") if tier2: try: conversation_history =
 conversation_context.get("messages", []) aliveness_response, tier2_metrics =
 tier2.process_for_aliveness( user_input=user_input, base_response=response,
 history=conversation_history, ) logger.debug(f"Tier 2 metrics: {tier2_metrics}") response =
 aliveness_response except Exception as e:
+
 ```text
 ```text
+
 ```
 
 ### session_manager.py
@@ -453,6 +467,7 @@ aliveness_response except Exception as e:
 **Location:** Lines 177-195 (New function)
 
 ```python
+
 
 def _ensure_tier2_aliveness(): """Initialize Tier 2 Aliveness for emotional presence.""" if
 "tier2_aliveness" not in st.session_state: try: from src.emotional_os.tier2_aliveness import
@@ -462,6 +477,7 @@ logger.warning(f"Failed to initialize Tier 2 Aliveness: {e}")
 
 ```text
 ```
+
 
 ##
 
@@ -523,8 +539,10 @@ EnergyTracker                    <10ms     4ms      ✅ 60% better
 Tier 2 Total                     <30ms    20ms      ✅ 33% better
 Tier 1 + Tier 2                  <70ms    60ms      ✅ 14% better
 ```text
+
 ```text
 ```
+
 
 All targets exceeded by 14-60%!
 
@@ -554,6 +572,7 @@ Total:         80ms (still under 100ms!)
 Headroom:      20ms
 
 ```
+
 
 ### What's Next
 

@@ -17,6 +17,7 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 ```
 
+
 ### 2. Set Up Python Environment
 
 ```bash
@@ -31,11 +32,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+
 ### 3. Run the App
 
 ```bash
 streamlit run app.py
 ```
+
 
 **That's it!** The app runs locally with built-in response generation.
 
@@ -54,6 +57,7 @@ streamlit run app.py
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+
 
 ## File Structure
 

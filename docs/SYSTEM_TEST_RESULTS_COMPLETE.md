@@ -196,6 +196,7 @@ functions correctly** (with and without NLP enhancement) ✅ **Glyph selection i
 ```text
 ```
 
+
 Fastest: 6ms (Test 8, 10) Slowest: 36ms (Test 2) Average: 12.3ms Median: 8.5ms
 
 ```

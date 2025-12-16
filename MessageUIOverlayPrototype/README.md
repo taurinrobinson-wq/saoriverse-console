@@ -54,8 +54,10 @@ You can also run the prototype in a web browser:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ## 📁 Project Structure
 
@@ -72,6 +74,7 @@ MessageUIOverlayPrototype/
 └── README.md           # This file
 
 ```
+
 
 ## 🧩 Components
 

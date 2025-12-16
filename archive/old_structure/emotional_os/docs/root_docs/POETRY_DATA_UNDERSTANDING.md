@@ -42,6 +42,7 @@ The code you asked about loads **clean poetry to train your emotional AI**. It's
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+
 ##
 
 ## The Code Explained
@@ -67,6 +68,7 @@ for collection_name, text in data.items():
     # This learns emotional patterns from the poetry
 ```
 
+
 ##
 
 ## Why This Matters for User Input Parsing
@@ -79,6 +81,7 @@ System parses: [NEGATIVE_WORD, LOCATION, NEGATIVE_NOUN]
 Result: Misses emotional depth
 ```
 
+
 **With clean poetry training:**
 
 ```
@@ -90,6 +93,7 @@ System recognizes pattern from:
 System understands: EMOTIONAL_DISORIENTATION + POTENTIAL_AWAKENING
 Result: Appropriate, empathetic response
 ```
+
 
 ##
 
@@ -119,6 +123,7 @@ data = adapter.for_ritual_processing()
 
 # Returns: {name: clean_text}
 ```
+
 
 ##
 
@@ -160,6 +165,7 @@ understanding = extractor.extract(user_input)
 # Similar to Wordsworth's themes of spiritual journey
 ```
 
+
 ##
 
 ## Why "Clean" Matters
@@ -175,6 +181,7 @@ thers"
 → Emotional patterns are skewed
 ```
 
+
 **Clean poetry:**
 
 ```
@@ -184,6 +191,7 @@ thers"
 → Understands the beauty and meaning
 → Emotional dimensions are accurate
 ```
+
 
 ##
 
@@ -219,6 +227,7 @@ for collection_name, text in data.items():
     # Feed each collection to your training system
     # System learns emotional patterns from each poet
 ```
+
 
 ##
 

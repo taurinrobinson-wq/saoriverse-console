@@ -22,8 +22,10 @@ python core/start.py
 
 # OR for Streamlit
 ```text
+
 ```text
 ```
+
 
 ### Project Structure at a Glance
 
@@ -38,6 +40,7 @@ root/
 ├── tools/                ← Organized analysis/testing tools
 
 ```text
+
 ```
 
 ##
@@ -109,14 +112,17 @@ All essential Python files are in `core/`:
 
 ```python
 
+
 # Import from core/ directory
 from core.main_response_engine import process_user_input from core.response_adapter import
 translate_emotional_response from core.tone_adapters import generate_archetypal_response
 
 # Or maintain backward compatibility with shims
 from core.phase_modulator import detect_phase
+
 ```text
 ```text
+
 ```
 
 ##
@@ -193,6 +199,7 @@ All dependencies and configuration files:
 
 ```
 
+
 config/
 ├── package.json              (Node dependencies)
 ├── package-lock.json         (Locked versions)
@@ -204,13 +211,16 @@ config/
 ```text
 ```
 
+
 Install dependencies:
 
 ```bash
 pip install -r config/requirements.txt
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -227,6 +237,7 @@ scripts/deploy.sh
 # Run locally
 
 ```text
+
 ```
 
 ##
@@ -346,12 +357,15 @@ Glyph testing:
 
 ```bash
 
+
 # Using start.py (Railway)
 python core/start.py
 
 # Using Streamlit directly
+
 ```text
 ```text
+
 ```
 
 ### Adding a New Feature
@@ -388,6 +402,7 @@ python core/start.py
 ```python
 
 
+
 # Response System
 from core.main_response_engine import process_user_input from core.response_adapter import
 translate_emotional_response from core.response_selector import select_first_turn_response from
@@ -402,6 +417,7 @@ from core.phase_modulator import detect_phase
 
 ```text
 ```
+
 
 ### Emotional OS Modules
 
@@ -432,8 +448,10 @@ from emotional_os.features.theme_manager import manage_theme
 
 # Glyphs
 ```text
+
 ```text
 ```
+
 
 ### Tools
 
@@ -451,6 +469,7 @@ from tools.document_processing.docx_viewer import view_docx
 # Glyph Testing
 
 ```text
+
 ```
 
 ##
@@ -481,9 +500,11 @@ from tools.document_processing.docx_viewer import view_docx
 ## ✅ Project Status
 
 ```
+
 ✅ Modularization:    Complete (7 phases) ✅ Organization:      Complete (95% clutter reduction) ✅
 Documentation:     Complete (comprehensive guides) ✅ Verification:      Complete (all imports
 working) ✅ Ready for:         Development & Deployment
+
 ```
 
 ##

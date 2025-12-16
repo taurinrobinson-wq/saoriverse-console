@@ -116,8 +116,10 @@ for fname, paths in files_to_check.items():
             break
     if not found:
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -189,6 +191,7 @@ cp src/emotional_os_safety/trauma_lexicon.json emotional_os/safety/
 cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
 
 ```
+
 
 This ensures all hardcoded paths will work immediately.
 

@@ -68,6 +68,7 @@
 ```text
 ```
 
+
 voice_affect_detector.py
   ├── No external dependencies
   └── Pure Python (enum, dataclass)
@@ -184,18 +185,22 @@ If issues arise in production:
 
 ```bash
 
+
 git revert f6b38a0
 
 ```text
 ```
+
 
 ### To Previous Stable State
 
 ```bash
 git checkout 129ca3b  # Phase 3.1/3.5 commit
 ```text
+
 ```text
 ```
+
 
 ### Partial Rollback (disable Phase 3.2)
 
@@ -222,11 +227,13 @@ python -c "from emotional_os.core.firstperson import VoiceAffectDetector, Facial
 # Verify Phase 3.1 compatibility
 
 ```text
+
 ```
 
 ### 2. Code Review
 
 ```bash
+
 
 # View changes
 git show f6b38a0
@@ -235,11 +242,13 @@ git show f6b38a0
 
 ```text
 ```text
+
 ```
 
 ### 3. Staging Deployment
 
 ```bash
+
 
 
 # Deploy to staging first
@@ -256,6 +265,7 @@ curl http://staging/api/voice/analyze \
 ```text
 ```
 
+
 ### 4. Production Deployment
 
 ```bash
@@ -270,8 +280,10 @@ curl https://saoriverse.ai/api/health
 
 # Monitor logs
 ```text
+
 ```text
 ```
+
 
 ### 5. Post-Deployment Validation
 
@@ -297,6 +309,7 @@ curl https://saoriverse.ai/api/multimodal/fuse \
 # Expected: Complete MultimodalAnalysis result
 
 ```
+
 
 ##
 

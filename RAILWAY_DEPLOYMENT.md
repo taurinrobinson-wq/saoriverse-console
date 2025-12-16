@@ -16,8 +16,10 @@
 
 ```bash
 ```sql
+
 ```sql
 ```
+
 
 Update `requirements.txt`:
 
@@ -27,6 +29,7 @@ fastapi==0.104.1
 uvicorn[standard]==0.24.0
 
 ```sql
+
 ```
 
 ## Step 2: Update Procfile for Dual Services
@@ -35,22 +38,27 @@ Update your `Procfile` to run both backend and frontend:
 
 ```procfile
 
+
 # Backend API
 api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
 # Frontend (after Next.js is set up)
+
 ```text
 ```text
+
 ```
 
 ## Step 3: Set Up Next.js Frontend
 
 ```bash
 
+
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint cd velinor-web
 
 ```text
 ```
+
 
 Copy the frontend files:
 
@@ -64,8 +72,10 @@ In Railway dashboard, set:
 
 ```
 ```text
+
 ```text
 ```
+
 
 ## Step 5: Deploy to Railway
 
@@ -85,6 +95,7 @@ git push origin main
 # Railway auto-deploys (~3-5 minutes)
 
 ```text
+
 ```
 
 ## Step 6: Test
@@ -105,11 +116,14 @@ Make sure `NEXT_PUBLIC_API_URL` matches your Railway domain exactly.
 Ensure images are in `velinor-web/public/assets/`:
 
 ```
+
 velinor-web/public/assets/
 ├── backgrounds/
 ├── overlays/
+
 ```text
 ```text
+
 ```
 
 ### Slow startup
@@ -122,8 +136,10 @@ Already enabled in `velinor_api.py`:
 
 ```python
 
+
 ```text
 ```
+
 
 For production, restrict to your domain.
 
@@ -137,8 +153,10 @@ python velinor_api.py
 # http://localhost:8000
 
 ```text
+
 ```text
 ```
+
 
 Terminal 2 - Frontend:
 
@@ -148,11 +166,13 @@ cd velinor-web
 npm run dev
 
 ```text
+
 ```
 
 ## File Structure
 
 ```
+
 saoriverse-console/
 ├── velinor/                    # Game engine
 │   ├── engine/
@@ -170,6 +190,7 @@ saoriverse-console/
     │   └── assets/             # Copy game assets here
     ├── package.json
     └── tsconfig.json
+
 ```
 
 ## Next Steps

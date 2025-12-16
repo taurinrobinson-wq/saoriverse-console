@@ -136,8 +136,10 @@ formatting** with existing entries 3. **Add update notes** in relevant sections 
 - Sphere: [Connected NPCs with weights]
 - Gift: [Tool or knowledge they provide]
 ```text
+
 ```text
 ```
+
 
 **Step 2:** Add their sphere connections to related NPCs
 
@@ -158,6 +160,7 @@ formatting** with existing entries 3. **Add update notes** in relevant sections 
   - NPCs involved: [List]
 
 ```text
+
 ```
 
 **Step 2:** Add quest beats to "Story Structure & Progression"
@@ -173,13 +176,16 @@ formatting** with existing entries 3. **Add update notes** in relevant sections 
 **Step 1:** Update "Glyph System" → Octoglyph System table
 
 ```markdown
+
 ```text
 ```text
+
 ```
 
 **Step 2:** Fill expansion placeholder in "Expansion Placeholders" → Octoglyph Chamber Details
 
 ```markdown
+
 
 - [x] **[Chamber Name]**
   - Location: [Where in game world]
@@ -187,6 +193,7 @@ formatting** with existing entries 3. **Add update notes** in relevant sections 
 
 ```text
 ```
+
 
 **Step 3:** Add chamber encounter to Act 3 in "Story Structure"
 
@@ -213,8 +220,10 @@ formatting** with existing entries 3. **Add update notes** in relevant sections 
 
 **Final Image:**
 ```sql
+
 ```sql
 ```
+
 
 **Step 2:** Update "Narrative Decision Points" → Choice Node 8 with new action
 
@@ -244,6 +253,7 @@ After:
   - **Joran the Herbalist**: Young, optimistic
 
 ```text
+
 ```
 
 ##
@@ -260,6 +270,7 @@ After:
 
 ```markdown
 
+
 ## Update Log
 
 ### Version 1.1 (January 15, 2026)
@@ -272,6 +283,7 @@ After:
 - Initial story map created
 - All core systems documented
 - Expansion placeholders established
+
 ```
 
 ##

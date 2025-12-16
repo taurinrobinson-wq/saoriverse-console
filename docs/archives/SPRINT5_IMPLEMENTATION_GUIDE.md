@@ -26,6 +26,7 @@ if glyphs:
     response_text = composer.compose_multi_glyph_response(...)
 ```
 
+
 **New code**:
 
 ```python
@@ -61,6 +62,7 @@ if glyphs:
     else:
         response_text = result
 ```
+
 
 ### 2. Add Session Logging to Chat Flow
 
@@ -105,6 +107,7 @@ def on_user_message(user_text, confidence=0.95):
             st.metric("Quality", f"{metrics.get('quality_score', 0):.0%}")
 ```
 
+
 ### 3. Add Edge Case Validation
 
 **File**: `emotional_os/deploy/modules/ui.py` (before processing user input)
@@ -122,6 +125,7 @@ if not is_valid:
     st.error(f"⚠️ {error_msg}")
     st.stop()  # Don't process this input
 ```
+
 
 ##
 
@@ -222,6 +226,7 @@ def render_main_app_safe():
         st.session_state.messages.append({"role": "assistant", "content": response_text})
 ```
 
+
 ##
 
 ## Testing the Integration
@@ -254,6 +259,7 @@ if prosody:
 "
 ```
 
+
 ##
 
 ## Expected Behavior After Integration
@@ -265,6 +271,7 @@ User: what a freakin' stressful day this has been!
 System: Thank you for asking. I'm focused on you—how are you feeling?
 System: I'm steady. How about you—what's on your mind?
 ```
+
 
 **After Integration**:
 
@@ -278,6 +285,7 @@ System: [Emotionally matched response reflecting frustration/stress]
   - Pauses: Strategic reflection points
   - Attunement: 94% (highly engaged)
 ```
+
 
 The system now:
 
@@ -324,6 +332,7 @@ If issues arise, revert to standard composer:
 composer = DynamicResponseComposer()  # Use original
 response_text = composer.compose_multi_glyph_response(...)
 ```
+
 
 No other code needs to change - enhanced_response_composer is a drop-in replacement.
 

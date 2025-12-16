@@ -52,8 +52,10 @@ predict_upcoming_themes(lookahead_hours=4)
 # Quality metrics
 get_session_coherence()
 ```text
+
 ```text
 ```
+
 
 **Data Structures:**
 
@@ -68,6 +70,7 @@ UserEmotionalProfile:
   ├── snapshots: [EmotionalSnapshot]
 
 ```text
+
 ```
 
 ##
@@ -86,6 +89,7 @@ Measures quality and continuity of individual sessions.
 
 ```python
 
+
 # Real-time turn recording
 record_turn(turn_number, user_input, themes, emotional_tone, glyph, frustration, breakthrough)
 
@@ -94,8 +98,10 @@ end_session(user_satisfaction)
 
 # Analysis
 get_coherence_report()  # Comprehensive metrics
+
 ```text
 ```text
+
 ```
 
 **Quality Metrics:**
@@ -110,12 +116,14 @@ get_coherence_report()  # Comprehensive metrics
 
 ```
 
+
 EXCELLENT    (coherence ≥ 0.85): High coherence, user satisfied GOOD         (coherence ≥ 0.70):
 Solid coherence, mostly on-track ADEQUATE     (coherence ≥ 0.50): Some coherence, minor deviations
 POOR         (coherence ≥ 0.30): Low coherence, user frustrated
 
 ```text
 ```
+
 
 ##
 
@@ -148,8 +156,10 @@ predict_preference_trajectory(pref, days_ahead=30)
 
 # Clustering
 ```text
+
 ```text
 ```
+
 
 **Trend Directions:**
 
@@ -182,6 +192,7 @@ insights = orchestrator.get_user_insights()
 recommendations = orchestrator.get_session_recommendations(session_id)
 
 ```text
+
 ```
 
 ## Integration with Phase 1-2
@@ -202,14 +213,17 @@ recommendations = orchestrator.get_session_recommendations(session_id)
 ### Data Flow
 
 ```
+
 User Input ↓ [Integration Orchestrator - Phase 1] → Detect tone, themes ↓ Record to all Phase 3.1
 components:
     ├→ [Emotional Profile] - Tone & theme tracking
     ├→ [Session Coherence] - Quality metrics
     ├→ [Preference Evolution] - Preference updates
 ↓ Generate Insights & Recommendations ↓
+
 ```text
 ```text
+
 ```
 
 ## Usage Examples
@@ -217,6 +231,7 @@ components:
 ### Building a User Profile
 
 ```python
+
 
 manager = EmotionalProfileManager("user_123")
 
@@ -230,6 +245,7 @@ manager.get_emotional_trajectory(days=30)
 
 ```text
 ```
+
 
 ### Tracking Session Quality
 
@@ -250,8 +266,10 @@ session.record_turn(
 coherence = session.end_session(user_satisfaction=0.8)
 report = session.get_coherence_report()
 ```text
+
 ```text
 ```
+
 
 ### Monitoring Preference Evolution
 
@@ -268,6 +286,7 @@ emerging = tracker.get_emerging_preferences(days=30)
 fading = tracker.get_fading_preferences(days=30)
 
 ```text
+
 ```
 
 ## Test Coverage
@@ -352,17 +371,21 @@ fading = tracker.get_fading_preferences(days=30)
 ### Coherence Report
 
 ```python
+
 { "session_id": "sess_001", "user_id": "user_123", "duration_seconds": 1234, "turn_count": 8,
 "quality": "good", "coherence_score": 0.78, "tone_consistency": 0.875, "theme_diversity": 0.375,
 "fragmentation_index": 0.25, "profile_alignment": 0.65, "theme_segments": 3, "theme_transitions": 2,
 "frustration_markers": [], "breakthrough_markers": [5], "user_satisfaction": 0.8,
+
 ```text
 ```text
+
 ```
 
 ### User Insights
 
 ```python
+
 
 { "dominant_themes": [ {"theme": "grounding", "occurrences": 47}, {"theme": "self-compassion",
 "occurrences": 31}, {"theme": "connection", "occurrences": 19}, ], "emerging_preferences": [ {
@@ -373,6 +396,7 @@ fading = tracker.get_fading_preferences(days=30)
 
 ```text
 ```
+
 
 ## Architecture Decisions
 
@@ -456,6 +480,7 @@ Total Phase 3.1: 2,451 lines of code
 New Tests: 34 (all passing)
 Integration Status: Complete
 ```
+
 
 ## Key Capabilities Summary
 

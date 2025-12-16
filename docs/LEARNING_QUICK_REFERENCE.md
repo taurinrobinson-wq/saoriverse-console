@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 Playwright writes dialogue scenes ↓ Organizer extracts rules and principles ↓ System applies
 principles to generate responses ↓ Responses are logged and analyzed ↓ System learns new patterns ↓
 Library grows, responses improve
@@ -18,8 +19,10 @@ Library grows, responses improve
 ### 1. Archetype Library
 **Stores learned patterns**
 ```text
+
 ```text
 ```
+
 
 What you need: Library of conversation archetypes File:
 emotional_os/learning/conversation_archetype.py What it does:
@@ -43,6 +46,7 @@ Example archetype: { "name": "ReliefToGratitude", "entry_cues": ["relief", "grat
 **Applies principles to generate responses**
 
 ```sql
+
 ```
 
 What you need: Generate fresh responses from principles
@@ -64,10 +68,13 @@ Output: "That takes courage. Sounds like something shifted.
 
 
 
+
 ### 3. Conversation Learner
 **Extracts patterns from conversations**
+
 ```sql
 ```sql
+
 ```
 
 What you need: Auto-extract new archetypes from successful conversations
@@ -95,6 +102,7 @@ Output: New archetype added to library
 
 
 
+
 ## Quick Start Code
 
 ### Generate a Response
@@ -108,8 +116,10 @@ response = generator.generate_archetype_aware_response(
     prior_context="Yesterday was really overwhelming",
 )
 ```sql
+
 ```sql
 ```
+
 
 ### Learn from a Conversation
 
@@ -131,11 +141,13 @@ new_archetype = learner.learn_from_conversation(
 )
 
 ```text
+
 ```
 
 ### Check the Library
 
 ```python
+
 from emotional_os.learning import get_archetype_library
 
 library = get_archetype_library()
@@ -150,8 +162,10 @@ else 'None'}")
 # Get all matches above threshold
 matches = library.get_all_matches( user_input="I'm overwhelmed but grateful", threshold=0.3 ) for
 archetype, score in matches:
+
 ```text
 ```text
+
 ```
 
 ## Pre-Loaded Archetype: ReliefToGratitude
@@ -182,6 +196,7 @@ Your dialogue scene → System extracted this archetype
 
 ```
 
+
 User: "I've been so stressed about my performance review, but I just found out I got the raise."
 
 System: "That's huge. That weight lifted off. How does it feel?"
@@ -193,13 +208,16 @@ System: "The relief and the guilt can coexist. What's underneath
 ```text
 ```
 
+
 ### Step 2: System Learns
 
 ```
 Conversation → Learner analyzes → New archetype created
 ```text
+
 ```text
 ```
+
 
 ### Step 3: System Uses It
 
@@ -236,6 +254,7 @@ Every archetype has these components:
   "success_count": 5
 
 ```text
+
 ```
 
 ## Files to Know
@@ -253,6 +272,7 @@ Every archetype has these components:
 
 ```bash
 
+
 # Run complete test
 python test_learning_module.py
 
@@ -263,6 +283,7 @@ cat emotional_os/learning/archetype_library.json | python -m json.tool
 python -c " from emotional_os.learning import get_archetype_response_generator gen =
 get_archetype_response_generator() resp = gen.generate_archetype_aware_response( 'I feel relieved
 and grateful' ) print(resp) "
+
 ```
 
 ## Key Insight

@@ -110,8 +110,10 @@ python -m spacy download en_core_web_sm
 
 # 3. Test that everything works
 ```text
+
 ```text
 ```
+
 
 That gets you infrastructure ready. 15 minutes.
 
@@ -222,6 +224,7 @@ User Input
     ↓
 
 ```text
+
 ```
 
 ##
@@ -362,17 +365,21 @@ And that place is completely **yours**.
 ## 📝 Files in This Repository
 
 ```
+
 /SOVEREIGN_LOCAL_STRATEGY.md ........... Strategic vision & architecture
 /SOVEREIGN_LOCAL_QUICK_START.md ........ Implementation guide (copy-paste code)
 /FIRSTPERSON_MANIFESTO.md ............ Values & principles /TECHNICAL_ARCHITECTURE.md ..........
 Developer documentation
+
 ```text
 ```text
+
 ```
 
 Plus your existing:
 
 ```
+
 
 /parser/signal_parser.py ........... Core emotional processor /main_v2.py  # (ARCHIVED:
 emotional_os_ui_v2.py) ............ Streamlit interface /glyph_lexicon_rows.csv .......... 292

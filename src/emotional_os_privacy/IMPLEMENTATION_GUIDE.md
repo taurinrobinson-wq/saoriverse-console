@@ -21,6 +21,7 @@ hashed one-way 4. K-anonymity verified (k ≥ 5) 5. Full GDPR/CCPA/HIPAA complia
 ```text
 ```
 
+
 Stage 1: INPUT CAPTURE
 ├─ User sends message (raw text received in memory)
 └─ NOT stored
@@ -95,11 +96,13 @@ Find all places where conversation data goes to the database:
 ```bash
 
 
+
 # Search for database writes
 grep -r "\.insert\(" emotional_os/ grep -r "supabase\." emotional_os/
 
 ```text
 ```
+
 
 Typical locations:
 
@@ -122,8 +125,10 @@ db.table("conversations").insert({
     "system_response": response,  # ❌ Raw text!
     "signals": result["signals"],
 ```text
+
 ```text
 ```
+
 
 **After Encoding (Correct - PRIVACY-FIRST):**
 
@@ -149,6 +154,7 @@ if not success:
     logger.error(f"Failed to store encoded conversation: {record_id}")
 
 ```text
+
 ```
 
 ### Step 3: Modify Supabase Schema
@@ -156,6 +162,7 @@ if not success:
 **Create new table for anonymized data:**
 
 ```sql
+
 CREATE TABLE conversation_logs_anonymized ( id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 user_id_hashed VARCHAR(64) NOT NULL,  -- SHA-256 hash session_id VARCHAR(255) NOT NULL, timestamp
 TIMESTAMP DEFAULT NOW(), timestamp_week VARCHAR(8),  -- "2025-W02" message_turn INTEGER,
@@ -170,13 +177,16 @@ INTEGER, response_source VARCHAR(50), created_at TIMESTAMP DEFAULT NOW(),
 
 CREATE INDEX idx_user_id_hashed ON conversation_logs_anonymized(user_id_hashed); CREATE INDEX
 idx_session_id ON conversation_logs_anonymized(session_id);
+
 ```text
 ```text
+
 ```
 
 **Migrate existing data (if needed):**
 
 ```sql
+
 
 -- Archive old table
 ALTER TABLE conversations RENAME TO conversations_archived;
@@ -190,6 +200,7 @@ conversations_archived), 'Migrated to anonymized schema for GDPR/CCPA/HIPAA comp
 
 ```text
 ```
+
 
 ### Step 4: Test Encoding Pipeline
 
@@ -262,8 +273,10 @@ class TestDataEncoding(unittest.TestCase):
         self.assertIn("timestamp_week", result)
         timestamp_week = result["timestamp_week"]
 ```text
+
 ```text
 ```
+
 
 ### Step 5: Verify K-Anonymity
 
@@ -278,6 +291,7 @@ verifier = ARXAnonymityVerifier(k_threshold=5)
 verifier.run_monthly_compliance_check(db_connection)
 
 ```text
+
 ```
 
 ## Data Minimization: What Gets Stored vs. Discarded
@@ -285,24 +299,29 @@ verifier.run_monthly_compliance_check(db_connection)
 ### DISCARDED (Never Stored)
 
 ```
+
 ❌ raw_user_input          "I want to end my life" ❌ system_response         "I'm here for you..." ❌
 user_id                 "alice@example.com" ❌ user_email              "alice@example.com" ❌
-user_name               "Alice" ❌ user_phone              "+1-555-0123" ❌ conversation_text
-Full message
+user_name               "Alice" ❌ user_phone              "+1-555-0123" ❌ conversation_text Full
+message
+
 ```text
 ```text
+
 ```
 
 ### STORED (Encoded/Generalized)
 
 ```
 
-✓ user_id_hashed           "a7f3e9c1a8b2d5f4..." (SHA-256) ✓ encoded_signals
-["SIG_CRISIS_001", "SIG_STRESS_001"] ✓ encoded_gates            ["GATE_GRIEF_004"] ✓ glyph_ids
-[42, 183] ✓ message_length_bucket    "100-200_chars" ✓ timestamp_week           "2025-W02"
+
+✓ user_id_hashed           "a7f3e9c1a8b2d5f4..." (SHA-256) ✓ encoded_signals ["SIG_CRISIS_001",
+"SIG_STRESS_001"] ✓ encoded_gates            ["GATE_GRIEF_004"] ✓ glyph_ids [42, 183] ✓
+message_length_bucket    "100-200_chars" ✓ timestamp_week           "2025-W02"
 
 ```text
 ```
+
 
 ## Encryption & Security
 
@@ -311,8 +330,10 @@ Full message
 ```
 User Client ─────[TLS 1.3]────→ FirstPerson API ─────[TLS 1.3]────→ Supabase
 ```text
+
 ```text
 ```
+
 
 ### At Rest (AES-256)
 
@@ -327,6 +348,7 @@ Database: Supabase
     └─ encoded_gates: Codes (no personal info)
 
 ```text
+
 ```
 
 ## User Rights Implementation
@@ -334,6 +356,7 @@ Database: Supabase
 ### User Data Export
 
 ```python
+
 @app.post("/user/data-export") def export_user_data(user_id: str): """User can export their
 (anonymized) data.""" user_id_hashed = hashlib.sha256(f"salt:{user_id}".encode()).hexdigest()
 
@@ -344,13 +367,16 @@ user_id_hashed)\ .execute()
 return { "export_date": datetime.now().isoformat(), "conversation_count": len(records.data),
 "signals_detected": [...], "retention_policy": "90 days", "note": "Data is anonymized; raw messages
 not stored"
+
 ```text
 ```text
+
 ```
 
 ### User Data Deletion
 
 ```python
+
 
 @app.post("/user/data-delete") def delete_user_data(user_id: str): """Delete all data for a user."""
 user_id_hashed = hashlib.sha256(f"salt:{user_id}".encode()).hexdigest()
@@ -364,6 +390,7 @@ audit_log.record_deletion(user_id_hashed, datetime.now())
 
 ```text
 ```
+
 
 ## Audit & Compliance
 
@@ -388,8 +415,10 @@ All data access is logged:
   user_id_hashed: requested (allowed for role)
   ip_address: 192.168.1.100
 ```text
+
 ```text
 ```
+
 
 ## Rollout Plan
 
@@ -469,6 +498,7 @@ python emotional_os/privacy/verify_compliance.py
 # Monthly compliance check
 
 ```text
+
 ```
 
 ## Monitoring & Alerts
@@ -486,14 +516,18 @@ python emotional_os/privacy/verify_compliance.py
 **Before Integration:**
 
 ```
+
 User Message → parse_input() → Response ↓
+
 ```text
 ```text
+
 ```
 
 **After Integration:**
 
 ```
+
 
 User Message → parse_input() → Response ↓ encode_and_store_conversation() ↓ [Encode pipeline
 executes] ↓ Only anonymized data → Supabase ✓ Raw text discarded (never stored)

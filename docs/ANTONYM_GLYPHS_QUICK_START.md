@@ -12,8 +12,10 @@ any code ✅ **Fast Indexed Lookup** by emotion, pairing, or name ✅ **Comprehe
 
 ```python
 ```text
+
 ```text
 ```
+
 
 ### Find an Emotional Opposite
 
@@ -24,16 +26,20 @@ any code ✅ **Fast Indexed Lookup** by emotion, pairing, or name ✅ **Comprehe
 antonym = find_antonym_by_emotion("comfort")
 
 ```text
+
 ```
 
 ### Search for Related Emotions
 
 ```python
 
+
 # Search for anything related to "joy"
 results = search_antonyms("joy") for r in results:
+
 ```text
 ```text
+
 ```
 
 ## Common Tasks
@@ -41,6 +47,7 @@ results = search_antonyms("joy") for r in results:
 ### Task 1: Show Emotional Opposite in UI
 
 ```python
+
 
 import streamlit as st from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion,
 format_antonym_for_display
@@ -52,6 +59,7 @@ if opposite: st.markdown("### The Opposite Perspective")
 ```text
 ```
 
+
 ### Task 2: List All Available Emotions
 
 ```python
@@ -61,8 +69,10 @@ emotions = list_antonym_emotions()
 print(f"Available antonym emotions: {len(emotions)}")
 for e in emotions[:10]:
 ```text
+
 ```text
 ```
+
 
 ### Task 3: Build an Emotion Selector
 
@@ -77,6 +87,7 @@ antonym = find_antonym_by_emotion(selected)
 st.write(f"**Name**: {antonym['Name']}")
 
 ```text
+
 ```
 
 ## All Available Functions
@@ -102,6 +113,7 @@ st.write(f"**Name**: {antonym['Name']}")
 ## File Locations
 
 ```
+
 /workspaces/saoriverse-console/
 ├── antonym_glyphs.txt                          # Source file
 ├── emotional_os/glyphs/
@@ -113,18 +125,22 @@ st.write(f"**Name**: {antonym['Name']}")
 │   └── test_antonym_glyphs.py                  # Test suite
 └── docs/
     ├── ANTONYM_GLYPHS_INTEGRATION.md           # Full documentation
+
 ```text
 ```text
+
 ```
 
 ## Run Tests
 
 ```bash
 
+
 cd /workspaces/saoriverse-console
 
 ```text
 ```
+
 
 Expected output:
 
@@ -132,6 +148,7 @@ Expected output:
 🎉 ALL TESTS PASSED!
 Pass Rate: 100.0%
 ```
+
 
 ## Example Antonym Glyphs
 

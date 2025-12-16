@@ -7,6 +7,7 @@ You were seeing:
 ```text
 ```
 
+
 Voice recording unavailable - missing: faster-whisper, sounddevice
 
 ```
@@ -24,15 +25,19 @@ Use Python 3.12 to run the app. Choose one of these methods:
 
 ```powershell
 
+
 ```text
 ```
+
 
 ### Method 2: Use Launcher Script
 
 ```powershell
 ```text
+
 ```text
 ```
+
 
 ### Method 3: VS Code Task
 
@@ -106,6 +111,7 @@ py -3.12 --version
 # Download spacy model (if needed)
 
 ```text
+
 ```
 
 ##
@@ -113,13 +119,16 @@ py -3.12 --version
 ## How This Works
 
 ```
+
 Your Command: py -3.12 -m streamlit run app.py ↓ Python Launcher (/py): "Run Python 3.12
 specifically" ↓ Python 3.12 Interpreter:
 C:\Users\Admin\AppData\Local\Programs\Python\Python312\python.exe ↓ Loads All Packages from Python
 3.12: ✓ streamlit ✓ faster-whisper  ← Was missing before! ✓ sounddevice     ← Was missing before! ✓
 pyttsx3 ✓ spacy ✓ All others... ↓ Streamlit App Launches: ✓ Voice mode works ✓ NLP features work
+
 ```text
 ```text
+
 ```
 
 ##
@@ -142,8 +151,10 @@ Use alternate port:
 
 ```powershell
 
+
 ```text
 ```
+
 
 ### Still getting import errors?
 
@@ -152,8 +163,10 @@ Verify packages are installed in Python 3.12:
 ```powershell
 py -3.12 -m pip list | grep faster-whisper
 ```text
+
 ```text
 ```
+
 
 If missing, reinstall:
 
@@ -162,6 +175,7 @@ If missing, reinstall:
 py -3.12 -m pip install faster-whisper sounddevice
 
 ```
+
 
 ##
 

@@ -16,8 +16,10 @@ First, install face-api.js:
 ```bash
 cd firstperson-web
 ```sql
+
 ```sql
 ```
+
 
 Then copy models from node_modules:
 
@@ -30,6 +32,7 @@ Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recur
 # macOS/Linux
 
 ```text
+
 ```
 
 ### Option B: Manual Download
@@ -46,6 +49,7 @@ Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recur
 Your `public/models` directory should contain these files:
 
 ```
+
 public/models/
 ├── tiny_face_detector_model-weights_manifest.json
 ├── tiny_face_detector_model-weights_shard_1
@@ -53,13 +57,16 @@ public/models/
 ├── face_expression_model-weights_manifest.json
 ├── face_expression_model-weights_shard_1
 ├── face_expression_model.json
+
 ```text
 ```text
+
 ```
 
 ### Check via file system
 
 ```bash
+
 
 
 # Windows PowerShell
@@ -69,6 +76,7 @@ Get-ChildItem -Path "firstperson-web/public/models" -File
 
 ```text
 ```
+
 
 You should see at least:
 
@@ -88,8 +96,10 @@ const nextConfig = {
 };
 
 ```text
+
 ```text
 ```
+
 
 Usually this is already configured by default in Next.js 13+.
 
@@ -119,23 +129,28 @@ export default async function handler(req: any, res: any) {
   }
 
 ```text
+
 ```
 
 Then test:
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 Expected response:
 
 ```json
 
+
 { "success": true, "message": "Models loaded successfully"
 
 ```text
 ```
+
 
 ## Step 5: Optimize Model Loading (Optional)
 
@@ -167,8 +182,10 @@ export async function loadFaceApiModels() {
 export function areModelsLoaded() {
   return modelsLoaded;
 ```text
+
 ```text
 ```
+
 
 ## Troubleshooting
 
@@ -238,6 +255,7 @@ if ('serviceWorker' in navigator) {
 }
 
 ```
+
 
 ## Privacy Note
 

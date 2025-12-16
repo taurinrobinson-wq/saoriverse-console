@@ -58,8 +58,10 @@ They see personalized responses about their specific situation. They never see:
 3. Uses glyph intensity invisibly for tone/closing
 4. Maps glyph emotional signal to language choice
 ```text
+
 ```text
 ```
+
 
 #### `compose_message_aware_response(message_content, glyph, ...)`
 
@@ -72,6 +74,7 @@ They see personalized responses about their specific situation. They never see:
 3. Uses glyph intensity (invisible) to calibrate language intensity
 
 ```text
+
 ```
 
 ##
@@ -139,19 +142,24 @@ They see personalized responses about their specific situation. They never see:
 In `signal_parser.py`, in message_features dict:
 
 ```python
+
 message_features = { "existing_feature": condition, "new_feature": condition,  # Add here
+
 ```text
 ```text
+
 ```
 
 Then handle in `compose_message_aware_response()`:
 
 ```python
 
+
 if message_content.get("new_feature"):
 
 ```text
 ```
+
 
 ### Adding New Glyph Categories
 
@@ -162,8 +170,10 @@ emotion_map = {
     "existing_glyph": "emotion",
     "new_glyph": "emotion",  # Add mapping
 ```text
+
 ```text
 ```
+
 
 ### Adding New Poetry Themes
 
@@ -179,6 +189,7 @@ poetry database will need expansion.
 ```bash
 
 ```text
+
 ```
 
 This runs three messages through the conversation and shows:
@@ -190,6 +201,7 @@ This runs three messages through the conversation and shows:
 ### Manual Testing
 
 ```python
+
 from emotional_os.glyphs.signal_parser import parse_input
 
 result = parse_input( "I have anxiety about math", lexicon_path="velonix_lexicon.json",
@@ -200,6 +212,7 @@ print(result["best_glyph"]["glyph_name"])
 
 # See the response (should not mention glyph):
 print(result["voltage_response"])
+
 ```
 
 ##

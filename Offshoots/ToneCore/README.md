@@ -9,22 +9,27 @@ Quick start (local devcontainer / machine):
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 2. Install Python deps:
 
 ```bash
 
 ```text
+
 ```
 
 3. Run the app:
 
 ```bash
 
+
 # Example: run on port 8502 to avoid conflicts with other apps
 streamlit run Offshoots/ToneCore/streamlit_app.py --server.port 8502
+
 ```
 
 Open <http://localhost:8502> (forward the port if running in a remote container).

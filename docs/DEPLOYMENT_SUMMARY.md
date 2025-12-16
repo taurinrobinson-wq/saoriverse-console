@@ -74,8 +74,10 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 chmod +x docker-setup.sh
 ```text
+
 ```text
 ```
+
 
 **Time**: ~5 minutes
 **Difficulty**: Easy
@@ -106,6 +108,7 @@ docker compose up -d
 docker compose ps
 
 ```text
+
 ```
 
 **Time**: ~10 minutes
@@ -120,15 +123,19 @@ Once deployed, your app is live at:
 ### URLs
 
 ```
+
 Frontend:          http://161.35.227.49:3000 API Server:        http://161.35.227.49:8000 Health
 Check:      http://161.35.227.49:8000/health
+
 ```text
 ```text
+
 ```
 
 ### Test the API
 
 ```bash
+
 
 
 # Health check
@@ -140,6 +147,7 @@ curl -X POST http://161.35.227.49:8000/api/chat \
 
 ```text
 ```
+
 
 ##
 
@@ -162,8 +170,10 @@ docker compose down            # Remove containers
 docker compose exec backend bash    # Shell access
 docker compose build --no-cache     # Rebuild images
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -196,6 +206,7 @@ LOG_LEVEL=info
 # OPENAI_API_KEY=...
 
 ```text
+
 ```
 
 ##
@@ -203,6 +214,7 @@ LOG_LEVEL=info
 ## Project Structure
 
 ```
+
 saoriverse-console/
 ├── Dockerfile              # Backend container
 ├── Dockerfile.frontend     # Frontend container
@@ -223,6 +235,7 @@ saoriverse-console/
 │
 ├── data/                   # Data files (created at runtime)
 └── deploy/nginx.conf       # Reverse proxy config
+
 ```
 
 ##

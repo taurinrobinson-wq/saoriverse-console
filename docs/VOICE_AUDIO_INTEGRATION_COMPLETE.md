@@ -13,6 +13,7 @@
 ```text
 ```
 
+
 src/emotional_os/deploy/modules/ui_components/audio/
 ├── __init__.py                 # Audio module exports
 ├── audio_pipeline.py           # Speech-to-text (Whisper.cpp)
@@ -64,8 +65,10 @@ src/emotional_os/deploy/modules/ui_components/
 
 ### Audio Output Pipeline (Currently Working)
 ```text
+
 ```text
 ```
+
 
 User sends message ↓ Response generated with glyph ↓ display_assistant_message() called ↓ IF
 voice_mode_enabled:
@@ -87,6 +90,7 @@ voice_mode_enabled:
 ### Audio Input Pipeline (Ready but Requires Recording Component)
 
 ```text
+
 ```
 
 User clicks "🎙️ Start Recording"
@@ -104,6 +108,7 @@ process_audio_input()
 Text treated as user message (same flow as text input)
 
 ```
+
 
 
 ##
@@ -124,6 +129,7 @@ pip install TTS
 # Optional: GPU acceleration
 
 ```text
+
 ```
 
 **If not installed**:
@@ -147,6 +153,7 @@ pip install TTS
 
 ```python
 
+
 # Import audio components
 from emotional_os.deploy.modules.ui_components import ( render_voice_mode_toggle,
 synthesize_response_audio, render_audio_playback, )
@@ -156,8 +163,10 @@ audio_bytes = synthesize_response_audio( response_text="I hear you.", glyph_name
 Influences prosody voice="Warm", speed=1.0 )
 
 # Display playback widget
+
 ```text
 ```text
+
 ```
 
 ##
@@ -175,6 +184,7 @@ Influences prosody voice="Warm", speed=1.0 )
 
 ```python
 
+
 _audio_pipeline = None
 
 def get_audio_pipeline(): global _audio_pipeline if _audio_pipeline is None:
@@ -183,6 +193,7 @@ from .audio_pipeline import AudioPipeline _audio_pipeline = AudioPipeline()
 
 ```text
 ```
+
 
 - ✅ Avoids loading heavy models (Whisper ~140MB, TTS ~300MB) on startup
 - ✅ Faster app startup time
@@ -198,6 +209,7 @@ prosody_map = {
     "THAT_LANDS": {"energy": 0.9, "rate": 1.0},     # Present, clear
 }
 ```
+
 
 - Glyph metadata → audio characteristics
 - Same glyph metadata used for response tone also used for voice tone

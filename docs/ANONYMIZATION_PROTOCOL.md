@@ -52,11 +52,12 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 ```text
 ```
 
-mother/parent        → the Lightkeeper father/guardian      → the Steward / the Guardian son/child
-→ the Bearer / the Seedling daughter/child       → the Lightkeeper / the Seedling sibling
-→ the Mirror (sister) / the Anchor (brother) spouse               → the Thread (wife) / the Guardian
-(husband) therapist/counselor  → the Witness doctor               → the Steward of Medicine
-boss/authority       → the Authority friend/companion     → the Companion
+
+mother/parent        → the Lightkeeper father/guardian      → the Steward / the Guardian son/child →
+the Bearer / the Seedling daughter/child       → the Lightkeeper / the Seedling sibling → the Mirror
+(sister) / the Anchor (brother) spouse               → the Thread (wife) / the Guardian (husband)
+therapist/counselor  → the Witness doctor               → the Steward of Medicine boss/authority
+→ the Authority friend/companion     → the Companion
 
 ```
 
@@ -64,8 +65,10 @@ boss/authority       → the Authority friend/companion     → the Companion
 
 ### Emotional States & Medical Terms
 ```text
+
 ```text
 ```
+
 
 depression           → the Depths anxiety              → the Tightness trauma/PTSD          → the
 Rupture abuse                → the Wound suicidal ideation    → the Abyss chronic illness      → the
@@ -80,6 +83,7 @@ the Recognition
 ### Locations
 
 ```text
+
 ```
 
 California           → West Coast
@@ -90,6 +94,7 @@ Seattle              → Pacific Northwest
 Denver               → Rocky Mountain
 
 ```
+
 
 
 ##
@@ -145,11 +150,13 @@ anonymized, anonmap = anon.anonymize_entry(entry, "user_123")
 print(anonymized["text"])
 
 ```text
+
 ```
 
 ### With Consent (Medical Details Preserved)
 
 ```python
+
 
 # Allow medical terms if user explicitly consents
 anon_with_medical = AnonymizationProtocol(allow_medical=True, allow_names=False)
@@ -160,11 +167,13 @@ print(anonymized["text"])
 
 ```text
 ```text
+
 ```
 
 ### Consent Request for Sharing
 
 ```python
+
 
 
 # Generate consent request for therapist sharing
@@ -184,6 +193,7 @@ print(consent["options"])
 ```text
 ```
 
+
 ### Transparency Report
 
 ```python
@@ -194,8 +204,10 @@ report = anon.generate_anonymization_report(entry, anonmap)
 print(f"Identifiers replaced: {report['changes_made']['identifiers_replaced']}")
 print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -238,24 +250,30 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 → "Yes, reveal my identity for clinical review"
 
 ```text
+
 ```
 
 **2. Legacy Archive**
 
 ```
+
 "Include this in your personal legacy archive?" → "Yes, with my real name"
+
 ```text
 ```text
+
 ```
 
 **3. Research Contribution**
 
 ```
 
+
 "Would you like to contribute to emotional research?" → "Yes, but keep me anonymous"
 
 ```text
 ```
+
 
 **4. Clinical Review**
 
@@ -263,8 +281,10 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 "Allow medical team to review with your actual identity?"
 → "Yes, only for this medical issue"
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -300,6 +320,7 @@ User Entry (Raw)
     ├─ If yes → Un-anonymize
 
 ```text
+
 ```
 
 ##
@@ -307,6 +328,7 @@ User Entry (Raw)
 ## 📊 Anonymization Report Example
 
 ```json
+
 { "entry_id": "entry_001", "timestamp": "2025-11-05T00:57:51.013671", "anonymization_level": "full",
 "changes_made": { "identifiers_replaced": 8, "dates_anonymized": 1, "locations_generalized": 1,
 "medical_terms_preserved": false, "names_preserved": false }, "specific_replacements": { "michelle":
@@ -314,8 +336,10 @@ User Entry (Raw)
 "depression": "the Depths", "anxiety": "the Tightness", "IVC filter": "the Device", "medication":
 "the Medicine" }, "temporal_shifts": { "August 2023": "2 years ago" }, "location_changes": { "CA":
 "West Coast" }
+
 ```text
 ```text
+
 ```
 
 ##
@@ -325,6 +349,7 @@ User Entry (Raw)
 ### 1. Hybrid Learner (emotional_os/learning/hybrid_learner_v2.py)
 
 ```python
+
 
 
 # Before logging an exchange:
@@ -342,6 +367,7 @@ _log_exchange(anonymized)
 
 ```text
 ```
+
 
 ### 2. Streamlit UI (main_v2.py)
 
@@ -365,8 +391,10 @@ with col3:
     if st.button("No, keep this private"):
         # Don't store at all
 ```text
+
 ```text
 ```
+
 
 ### 3. Export/Archive (emotional_os/glyphs/velonix_reaction_engine.py)
 
@@ -386,6 +414,7 @@ with col3:
 # - Clinical (medical details preserved, names hidden)
 
 ```
+
 
 ##
 

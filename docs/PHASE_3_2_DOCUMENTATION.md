@@ -49,6 +49,7 @@ model.
 ```text
 ```
 
+
 AcousticFeatures → [Arousal, Valence, Dominance] → Primary Tone → Emotional State ↓ Stress Indicator
 (pitch variance + pauses + energy variance)
 
@@ -103,8 +104,10 @@ Detects emotional expression from facial landmarks using Facial Action Coding Sy
 
 **Processing**:
 ```text
+
 ```text
 ```
+
 
 FaceLandmarks → [AU1-AU26 Intensities] → Expression Classification ↓ [Arousal, Valence, Dominance] ←
 AU combinations ↓ Authenticity (AU consistency) & Attention (eye openness)
@@ -154,6 +157,7 @@ Combines text, voice, and facial data into unified emotional understanding.
 **Processing**:
 
 ```text
+
 ```
 
 Text Tone + Voice Analysis + Facial Analysis
@@ -171,6 +175,7 @@ Incongruence Detection:
 Primary Emotion Determination & Confidence Calculation
 
 ```
+
 
 
 
@@ -204,11 +209,13 @@ print(f"Arousal: {analysis.arousal:.2f}")         # ~0.625
 print(f"Valence: {analysis.valence:.2f}")         # ~0.63
 
 ```text
+
 ```
 
 ### Facial Expression Analysis
 
 ```python
+
 from emotional_os.core.firstperson import FacialExpressionDetector, FaceLandmarks
 
 detector = FacialExpressionDetector()
@@ -225,13 +232,16 @@ mouth=[(0.4, 0.7), (0.45, 0.65), (0.5, 0.63), (0.55, 0.65), (0.6, 0.7), (0.55, 0
 analysis = detector.analyze(landmarks) print(f"Expression: {analysis.expression}")     # HAPPY or
 SURPRISED print(f"AU12 (smile): {analysis.action_units.intensities['AU12_lip_corner_puller']:.2f}")
 print(f"AU6 (cheek): {analysis.action_units.intensities['AU6_cheek_raiser']:.2f}")
+
 ```text
 ```text
+
 ```
 
 ### Multimodal Fusion
 
 ```python
+
 
 from emotional_os.core.firstperson import MultimodalFusionEngine
 
@@ -256,6 +266,7 @@ print(f"Fused valence: {dims.valence:.2f} (from {dims.valence_source})")
 ```text
 ```
 
+
 ## Integration with Phase 3.1
 
 Phase 3.2 data flows directly into Phase 3.1's emotional profiling:
@@ -270,8 +281,10 @@ Text + Voice + Facial (Phase 3.2)
     EmotionalProfileManager (Phase 3.1)
               ↓
 ```text
+
 ```text
 ```
+
 
 **Key inputs to Phase 3.1**:
 
@@ -294,22 +307,27 @@ Facial: Lowered mouth corners, inner brow raise (sad)
 Result: TEXT_POSITIVE_VOICE_NEGATIVE
 
 ```text
+
 ```
 
 ### Emotional Suppression
 
 ```
+
 Text: "I'm fine, everything is okay" (calm tone) Voice: Variable pitch, high pause frequency, high
 stress indicators Facial: Low eye contact, lip tension
 
 Result: SUPPRESSION
+
 ```text
 ```text
+
 ```
 
 ### Consistent Authenticity
 
 ```
+
 
 Text: "I'm happy" Voice: High pitch, fast rate, minimal pauses Facial: AU12 + AU6 = Duchenne smile,
 high authenticity All modalities agree with high confidence

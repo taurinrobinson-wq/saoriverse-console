@@ -14,6 +14,7 @@ with zero API costs.
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │                        User Interface                       │
 │                 Streamlit Web Application                   │
@@ -115,8 +116,10 @@ with zero API costs.
 
 **Prosody Mapping Logic:**
 ```text
+
 ```text
 ```
+
 
 Voltage (0-1)              → Speaking Rate (0.8x - 1.3x) Tone + Valence            → Pitch Shift (-2
 to +2 semitones) Emotional Attunement      → Word Emphasis Placement Certainty                 →
@@ -237,6 +240,7 @@ The voice interface integrates seamlessly with Phase 3.2:
 Integration points:
 
 ```python
+
 from spoken_interface.voice_ui import integrate_voice_ui_into_chat
 
 # In main_v2.py or deployment UI:
@@ -253,8 +257,10 @@ if transcription: user_message = transcription
 glyph_signals = generate_response_with_glyphs(response_text)
 
 # Render voice output with prosody
+
 ```text
 ```text
+
 ```
 
 ## Deployment Checklist
@@ -316,6 +322,7 @@ Compare to:
 
 ```
 
+
 spoken_interface/
 ├── __init__.py                    # Package exports
 ├── audio_pipeline.py              # Sprint 1: STT pipeline (485 lines)
@@ -332,6 +339,7 @@ spoken_interface/
 ```text
 ```
 
+
 ## Dependencies
 
 **Required:**
@@ -343,8 +351,10 @@ soundfile>=0.12.0         # Audio I/O
 TTS>=0.21.0               # Coqui TTS
 scipy>=1.7.0              # Signal processing
 ```text
+
 ```text
 ```
+
 
 **Optional:**
 
@@ -355,6 +365,7 @@ matplotlib>=3.4.0         # Visualization (optional)
 streamlit>=1.0.0          # Web UI (required only for Streamlit deployment)
 
 ```
+
 
 ## Next Steps: Sprint 5 (In Progress)
 

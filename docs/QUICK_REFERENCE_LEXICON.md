@@ -16,13 +16,14 @@ proper gate activation. Integration is complete, tested, and ready.
 ```text
 ```
 
+
 HOLD      (568x) → Vulnerability [7,11]      → "I hold this moment" SACRED    (373x) → Admiration
 [8,12]          → "This feels sacred" EXACTLY   (367x) → Joy [1,5]                   → "That exactly
 lands" PRESENT   (317x) → Joy [7,11]                  → "Being present with you" ECHO      (212x) →
 Intimacy [7,11]             → "I echo your feeling" FEEL      (200x) → Sensuality [6,9]            →
-"I feel you here" TENDER    (150x) → Intimacy [8,11]             → "Be tender with me" HONOR
-(116x) → Admiration [8,12]           → "I honor your truth" TRUST     (108x) → Vulnerability [7,11]
-→ "I trust you" WITH      (3480x) → Multiple [1,5]             → "Being with you"
+"I feel you here" TENDER    (150x) → Intimacy [8,11]             → "Be tender with me" HONOR (116x)
+→ Admiration [8,12]           → "I honor your truth" TRUST     (108x) → Vulnerability [7,11] → "I
+trust you" WITH      (3480x) → Multiple [1,5]             → "Being with you"
 
 ```
 
@@ -33,8 +34,10 @@ Intimacy [7,11]             → "I echo your feeling" FEEL      (200x) → Sensu
 
 ### Detection Flow
 ```text
+
 ```text
 ```
+
 
 User Input ↓ parse_input() checks: 1. Word-centric lexicon (457+ words) ← NEW ✅ 2. Hardcoded
 keywords (50 words) ← Fallback ↓ Marked as EMOTIONAL or SHORT-CIRCUIT ↓ parse_signals() extracts: 1.
@@ -75,6 +78,7 @@ Response Generated
 ### Use the Lexicon
 
 ```python
+
 from emotional_os.lexicon.lexicon_loader import get_lexicon
 
 lexicon = get_lexicon()
@@ -87,13 +91,16 @@ lexicon.get_frequency('exactly')
 analysis = lexicon.analyze_emotional_content(user_input) print(analysis['emotional_words'])       #
 List of words found print(analysis['primary_signals'])       # Most active signals
 print(analysis['gate_activations'])      # Gates activated
+
 ```text
 ```text
+
 ```
 
 ### Lexicon Data Structure
 
 ```json
+
 
 { "metadata": { "version": "1.0", "total_words": 457, "sources": ["transcript", "gutenberg"] },
 "lexicon": { "hold": { "frequency": 568, "signals": ["vulnerability"], "gates": [7, 11], "sources":
@@ -103,6 +110,7 @@ print(analysis['gate_activations'])      # Gates activated
 
 ```text
 ```
+
 
 ##
 
@@ -145,8 +153,10 @@ print(analysis['gate_activations'])      # Gates activated
 lexicon = get_lexicon()
 if 'hold' in lexicon.lexicon:
 ```text
+
 ```text
 ```
+
 
 ### Get All Words for a Signal
 
@@ -155,20 +165,24 @@ if 'hold' in lexicon.lexicon:
 intimacy_words = lexicon.words_for_signal('intimacy')
 
 ```text
+
 ```
 
 ### Get All Words Activating Specific Gates
 
 ```python
+
 gate_7_11_words = lexicon.words_for_gates([7, 11])
 
 ```text
 ```text
+
 ```
 
 ### Analyze Full Conversation
 
 ```python
+
 
 conversation = "I hold this sacred moment with tenderness..." analysis =
 lexicon.analyze_emotional_content(conversation)
@@ -178,6 +192,7 @@ print(f"Gates: {[g[0] for g in analysis['gate_activations']]}")
 
 ```text
 ```
+
 
 ##
 
@@ -208,8 +223,10 @@ assert lexicon_path.exists(), "Lexicon file missing!"
 # Try loading manually
 from emotional_os.lexicon.lexicon_loader import load_lexicon
 ```text
+
 ```text
 ```
+
 
 ### Word Not Found
 
@@ -223,19 +240,23 @@ if word not in lexicon.lexicon:
     # Check frequency data
 
 ```text
+
 ```
 
 ### Signals Not Activating
 
 ```python
 
+
 # Debug: Check what signals are mapped
 text = "I hold this sacred" analysis = lexicon.analyze_emotional_content(text)
 
 print("Found words:", [w['word'] for w in analysis['emotional_words']]) print("Signals:",
 analysis['primary_signals'])
+
 ```text
 ```text
+
 ```
 
 ##
@@ -246,12 +267,14 @@ analysis['primary_signals'])
 
 ```
 
+
 hold      → signals: ['vulnerability'], gates: [7, 11], freq: 568 ✓ sacred    → signals:
 ['admiration'], gates: [8, 12], freq: 373 ✓ exactly   → signals: ['joy'], gates: [1, 5], freq: 367 ✓
 echo      → signals: ['intimacy'], gates: [7, 11], freq: 212 ✓
 
 ```text
 ```
+
 
 ### Integration Tests ✅
 
@@ -261,6 +284,7 @@ parse_signals(...)                         → Signals extracted ✓
 Gate activation                           → Verified ✓
 Glyph selection                          → Working ✓
 ```
+
 
 ##
 

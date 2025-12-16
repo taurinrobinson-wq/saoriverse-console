@@ -21,8 +21,10 @@ management needed!
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 Then visit: **<http://localhost:3000>**
 
@@ -33,6 +35,7 @@ Then visit: **<http://localhost:3000>**
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 
 ```text
+
 ```
 
 This starts:
@@ -99,6 +102,7 @@ All graphics have been replicated to `/velinor-web/public/assets/`:
 ### File Structure
 
 ```
+
 velinor-web/
 ├── src/
 │   ├── app/              # Next.js pages/routes
@@ -109,8 +113,10 @@ velinor-web/
 │   │   └── GameScene.tsx # Main game component (empty, ready for you)
 │   └── styles/
 ├── public/assets/        # All game graphics
+
 ```text
 ```text
+
 ```
 
 ### Hot Reload
@@ -120,6 +126,7 @@ Save a file → Browser auto-refreshes. No manual reload needed!
 ### Common Commands
 
 ```bash
+
 
 cd velinor-web
 
@@ -137,6 +144,7 @@ npm run lint
 ```text
 ```
 
+
 ##
 
 ## 🔌 Connecting Frontend to Backend
@@ -149,8 +157,10 @@ GET    /sessions/{id}               # Get game state
 POST   /sessions/{id}/actions       # Process player action
 POST   /sessions/{id}/save          # Save game
 ```sql
+
 ```sql
 ```
+
 
 Example call from Next.js:
 
@@ -166,6 +176,7 @@ const startGame = async (playerName: string) => {
   return response.data; // { session_id, initial_state, ... }
 
 ```text
+
 ```
 
 ##
@@ -201,14 +212,18 @@ For understanding the game logic:
 ### Node version error?
 
 ```bash
+
 export NVM_DIR="$HOME/.nvm" source "$NVM_DIR/nvm.sh"
+
 ```text
 ```text
+
 ```
 
 ### Port 3000 in use?
 
 ```bash
+
 
 
 # Kill it
@@ -219,6 +234,7 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 ```bash
 ```
 
+
 ### Can't find node/npm?
 
 Make sure the startup script sources nvm properly. Run manually:
@@ -226,6 +242,7 @@ Make sure the startup script sources nvm properly. Run manually:
 ```bash
 bash -c 'export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh" && nvm use 20.11.0 && cd velinor-web && npm run dev'
 ```
+
 
 ##
 

@@ -21,14 +21,17 @@ The complete Velinor web stack (FastAPI + Next.js) is ready to test. No more Str
 ```bash
 cd d:\saoriverse-console
 ```text
+
 ```text
 ```
+
 
 You should see:
 
 ```
 
 ```text
+
 ```
 
 ✅ Backend is live at `http://localhost:8000`
@@ -36,19 +39,24 @@ You should see:
 ### Step 2: Open Terminal 2 (Frontend)
 
 ```bash
+
 cd d:\saoriverse-console\velinor-web
+
 ```text
 ```text
+
 ```
 
 You should see:
 
 ```
 
+
 ▲ Next.js 14.0.0
 
 ```text
 ```
+
 
 ✅ Frontend is live at `http://localhost:3000`
 
@@ -96,8 +104,10 @@ Backend processes through Velinor engine
 Returns new game state
     ↓
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -149,6 +159,7 @@ npm run dev
 # Browser
 
 ```text
+
 ```
 
 ##
@@ -160,6 +171,7 @@ npm run dev
 Once the local test works:
 
 ```bash
+
 cd d:\saoriverse-console
 
 # Commit the web stack
@@ -169,6 +181,7 @@ git add . git commit -m "Add Velinor web stack (FastAPI + Next.js)" git push ori
 
 ```text
 ```text
+
 ```
 
 ### To Add Game Assets
@@ -183,10 +196,12 @@ The `<GameScene>` component references them as:
 
 ```typescript
 
+
 <GameScene backgroundImage="/assets/backgrounds/market.png" // ...
 
 ```text
 ```
+
 
 ### To Improve Styling
 
@@ -220,6 +235,7 @@ d:\saoriverse-console\
 │   └── ...other Next.js config
 └── [other game files]
 ```
+
 
 ##
 

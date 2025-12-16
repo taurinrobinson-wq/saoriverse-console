@@ -44,8 +44,10 @@ python -m spacy download en_core_web_md
 
 # Verify
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -76,6 +78,7 @@ word1 = nlp("anxiety")
 word2 = nlp("worry")
 
 ```text
+
 ```
 
 **Use in Saoriverse**: Extract what the user is *actually talking about* (entities, relationships) instead of just keywords.
@@ -85,6 +88,7 @@ word2 = nlp("worry")
 ### 2. NRC Emotion Lexicon (170,000+ Words)
 
 ```python
+
 from parser.nrc_lexicon_loader import nrc
 
 # Each word mapped to emotions
@@ -98,6 +102,7 @@ nrc.analyze_text("I have a mental block on math")
 
 ```text
 ```text
+
 ```
 
 **Use in Saoriverse**: Richer emotion detection than keyword matching. "Block" has sadness+fear compound, not just "negative."
@@ -108,6 +113,7 @@ nrc.analyze_text("I have a mental block on math")
 
 ```python
 
+
 from parser.poetry_database import PoetryDatabase
 
 db = PoetryDatabase() poems = db.POETRY_COLLECTION["grief"]  # Get poems for grief emotion
@@ -116,6 +122,7 @@ db = PoetryDatabase() poems = db.POETRY_COLLECTION["grief"]  # Get poems for gri
 
 ```text
 ```
+
 
 **Use in Saoriverse**: Thematic poetry fragments that resonate without being corny.
 
@@ -136,8 +143,10 @@ scores = sia.polarity_scores("I'm FURIOUS about the math requirement!!!")
 #   'compound': -0.88  # Overall intensity (-1 to 1)
 
 ```text
+
 ```text
 ```
+
 
 **Use in Saoriverse**: Detect emotional intensity to calibrate response tone (angry=direct, sad=gentle).
 
@@ -155,6 +164,7 @@ if 'anxiety' in keywords and 'michelle' in keywords:
 if 'block' in keywords:
 
 ```text
+
 ```
 
 **Problem**: Same response structure every time.
@@ -163,14 +173,17 @@ if 'block' in keywords:
 
 ```python
 
+
 # Extract features from actual message content
 features = { 'math_frustration': has_math_keywords and has_frustration, 'communication_friction':
 has_person and has_explain_keywords, 'inherited_pattern': has_inherited_keywords, 'person_involved':
 extract_person_name(text),  # spaCy }
 
 # Compose response by layering features
+
 ```text
 ```text
+
 ```
 
 **Benefit**: Each response is unique, contextual, addresses what the user actually said.
@@ -183,10 +196,12 @@ extract_person_name(text),  # spaCy }
 
 ```
 
+
 "Michelle explains things in a way that only she can follow,
 
 ```text
 ```
+
 
 ### OLD System (Keyword-Based)
 
@@ -194,8 +209,10 @@ extract_person_name(text),  # spaCy }
 ✗ Detected: "Michelle" (name) + "follows" (verb)
 ✗ Matched: TEMPLATE_CLARITY → "I can feel the clarity you're seeking..."
 ```text
+
 ```text
 ```
+
 
 ### NEW System (Feature-Based Composition)
 
@@ -218,6 +235,7 @@ extract_person_name(text),  # spaCy }
   That's a communication breakdown. What would help you feel actually
 
 ```text
+
 ```
 
 ##
@@ -285,6 +303,7 @@ extract_person_name(text),  # spaCy }
 Run this to see the new system in action:
 
 ```bash
+
 cd /workspaces/saoriverse-console source .venv/bin/activate python - <<'PY' from
 emotional_os.glyphs.signal_parser import parse_input
 
@@ -297,6 +316,7 @@ for i, msg in enumerate(messages, 1): res = parse_input(msg,
 'emotional_os/parser/signal_lexicon.json', db_path='emotional_os/glyphs/glyphs.db')
 print(f"\nMessage {i}: {msg[:60]}...") print(f"Response: {res['voltage_response'][:150]}...")
 print(f"Feedback: {res.get('feedback', {})}") PY
+
 ```
 
 Each response should be **uniquely tailored to the message**, not a template structure with different keywords filled in.

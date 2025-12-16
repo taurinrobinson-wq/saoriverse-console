@@ -35,8 +35,10 @@ result = learner.learn_from_exchange(
 )
 
 ```text
+
 ```text
 ```
+
 
 ### 2. **Streamlit UI Integration** (`ui.py`)
 
@@ -58,6 +60,7 @@ Your Identity:        Medical Details:    Sharing:
 ○ Private (...)      ○ Remove            ○ Research
 
 ```text
+
 ```
 
 ### 3. **Consent UI Component** (`consent_ui.py`)
@@ -90,6 +93,7 @@ Your Identity:        Medical Details:    Sharing:
 ## 🔄 Data Flow (Full Integration)
 
 ```
+
 User Input ↓ Chat Processing
     ├─ Local analysis (always happens)
     ├─ AI response (if enabled)
@@ -118,8 +122,10 @@ User Input ↓ Chat Processing
 ↓ User History Updated
     ├─ Visible to user
     ├─ Searchable
+
 ```text
 ```text
+
 ```
 
 ##
@@ -129,6 +135,7 @@ User Input ↓ Chat Processing
 ### Basic: Use with All Defaults
 
 ```python
+
 
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 
@@ -146,6 +153,7 @@ therapist", ai_response="That sounds challenging...", emotional_signals=[...] )
 ```text
 ```
 
+
 ### Advanced: Custom Anonymization Settings
 
 ```python
@@ -156,8 +164,10 @@ learner = HybridLearnerWithUserOverrides(
     allow_medical_details=True,  # Keep "depression" as-is
     allow_names=False  # Anonymize "Michelle" → "The Thread"
 ```text
+
 ```text
 ```
+
 
 ### Streamlit: User Consent Flow
 
@@ -172,6 +182,7 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 # Shows options and gets user choice
 
 ```text
+
 ```
 
 ##
@@ -215,16 +226,20 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ### 1. **After Each Response**
 
 ```
+
 [Assistant Response] [Processing time]
 
 📋 Memory & Sharing
+
 ```text
 ```text
+
 ```
 
 ### 2. **Sidebar: Privacy & Consent**
 
 ```
+
 
 🛡️ Privacy & Consent
 ├─ Store names by default [toggle]
@@ -235,14 +250,17 @@ consent = render_anonymization_consent_widget(f"exchange_{i}")
 ```text
 ```
 
+
 ### 3. **Session State**
 
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -314,6 +332,7 @@ streamlit run main_v2.py
 # Try making a query and look for consent widget after response
 
 ```
+
 
 ##
 

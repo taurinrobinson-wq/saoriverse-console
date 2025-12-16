@@ -19,8 +19,10 @@ class ConversationManager:
     - load_conversation(id) → Loads specific conversation
     - delete_conversation(id) → Removes conversation
 ```text
+
 ```text
 ```
+
 
 **Features:**
 
@@ -38,6 +40,7 @@ Intelligently generates conversation titles from the first user message:
 generate_auto_name("I've been feeling anxious about work")
 
 ```text
+
 ```
 
 **Features:**
@@ -52,6 +55,7 @@ generate_auto_name("I've been feeling anxious about work")
 New sidebar features:
 
 ```
+
 📚 Previous Conversations
 ├── 💬 [Conversation Title]
 │   ├── ✏️ (rename)
@@ -61,6 +65,7 @@ New sidebar features:
 
 ```text
 ```text
+
 ```
 
 **Features:**
@@ -158,6 +163,7 @@ messages=all_messages, processing_mode=mode )
 
 ```
 
+
 User starts app ↓ ConversationManager initialized ↓ Sidebar loads previous conversations ↓ "New
 Conversation" button clicked OR new UUID generated ↓ Empty chat displayed ↓ User types first message
 ↓ Auto-name generated from first message ↓ Response shown ↓ If "Save my chats" checked → Saved to
@@ -165,6 +171,7 @@ Supabase ↓ Page refresh ↓
 
 ```text
 ```
+
 
 ### Load Previous Conversation
 
@@ -180,8 +187,10 @@ session_state updated with messages
 Chat history displayed
     ↓
 ```text
+
 ```text
 ```
+
 
 ## Session State Variables
 
@@ -205,6 +214,7 @@ st.session_state = {
     'selected_conversation': 'conv-id-xyz'  # If loading
 
 ```text
+
 ```
 
 ## Backward Compatibility
@@ -288,6 +298,7 @@ streamlit run app.py
 
 ```
 
+
 emotional_os/deploy/modules/
   ├── ui.py                          (modified - integrate manager, sidebar)
   └── conversation_manager.py         (new - main implementation)
@@ -302,11 +313,13 @@ Documentation/
 
 ```text
 ```text
+
 ```
 
 ## Commit Reference
 
 ```
+
 
 commit 322c3c4 Author: taurinrobinson-wq <taurinrobinson@gmail.com>
 

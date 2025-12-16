@@ -9,14 +9,17 @@ Quick start (development):
 ```bash
 cd firstperson
 ```text
+
 ```text
 ```
+
 
 2. Start the Expo dev server
 
 ```bash
 
 ```text
+
 ```
 
 3. Open on device or emulator
@@ -28,8 +31,10 @@ Backend configuration
 - By default the app points at `http://localhost:8000`. To change this, set the environment variable `REACT_APP_SAOYNX_API_URL` before starting the app. Example:
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 EAS (optional)
@@ -37,6 +42,7 @@ EAS (optional)
 - If you plan to use EAS Build / Submit, run:
 
 ```bash
+
 
 cd firstperson
 eas build:configure

@@ -143,6 +143,7 @@ Streamlit app for interactive scene testing:
 ```text
 ```
 
+
 1. Run: streamlit run velinor_scenes_test.py 2. Enter player name 3. Start scene sequence 4. Read
 narration, view NPC 5. Click Continue to advance through states 6. Make dialogue choices 7. Watch
 trust levels update 8. Navigate between scenes 9. Review dialogue history
@@ -156,8 +157,10 @@ trust levels update 8. Navigate between scenes 9. Review dialogue history
 
 ### Scene Progression Flow
 ```text
+
 ```text
 ```
+
 
 Scene.DISTANT ↓ [Continue button] Scene.APPROACH ↓ [Continue button] Scene.CLOSE ↓ [Continue button]
 Scene.DIALOGUE (NPC speaks) ↓ [Continue button] Scene.CHOICES (Player selects dialogue) ↓ [Choice
@@ -171,6 +174,7 @@ selected] → Next Scene or End
 ### Visual Layering
 
 ```text
+
 ```
 
 Background Image (full width)
@@ -189,9 +193,12 @@ Player Option Buttons
 
 
 
+
 ### Trust System
+
 ```text
 ```text
+
 ```
 
 Each NPC has trust value: 0.0 → 1.0
@@ -204,10 +211,12 @@ Trust gates deeper dialogue and future interactions
 
 
 
+
 ### Glyph Resonance
 
 ```text
 ```
+
 
 Each scene has:
 
@@ -242,6 +251,7 @@ To create new scenes:
 
 ```python
 
+
 scene = SceneModule( scene_id="my_scene_01", npc_name="Unique NPC", npc_archetype="oracle",  # or
 "welcoming", "mistrusting" narration_distant="...", narration_close="...", npc_dialogue="...",
 assets=SceneAssets(...), player_options=[...], glyph_distant=[...], glyph_close=[...],
@@ -249,12 +259,15 @@ assets=SceneAssets(...), player_options=[...], glyph_distant=[...], glyph_close=
 ```text
 ```
 
+
 Then add to sequence:
 
 ```python
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -363,6 +376,7 @@ Root:
 ├── velinor_scenes_test.py (NEW - test/demo interface)
 
 ```text
+
 ```
 
 ##
@@ -414,6 +428,7 @@ To add new scenes, follow this pattern:
 
 ```python
 
+
 # 1. Create scene in new file or add to existing module
 scene = MarketplaceSceneSequence.build_my_new_scene()
 
@@ -447,6 +462,7 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 
 ```text
 ```text
+
 ```
 
 ##
@@ -454,6 +470,7 @@ scene = MarketplaceSceneSequence.build_my_new_scene()
 ## ✨ Example: Adding a New NPC Scene
 
 ```python
+
 
 @staticmethod def build_healer_encounter() -> SceneModule: return SceneModule(
 scene_id="marketplace_healer_01", npc_name="The Healer", npc_archetype="welcoming",
@@ -474,6 +491,7 @@ glyph_distant=["Esḧ"], glyph_close=["Cinarä̈", "Sha'rú"],
 ```text
 ```
 
+
 Then add to `MarketplaceSceneSequence.get_sequence()`:
 
 ```python
@@ -482,6 +500,7 @@ sequence = [
     MarketplaceSceneSequence.build_healer_encounter(),  # NEW
 ]
 ```
+
 
 Run `velinor_scenes_test.py` and navigate to test!
 

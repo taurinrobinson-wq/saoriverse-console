@@ -28,6 +28,7 @@ Reaction Chain Anchoring (10%)
     ↓ Protects reaction anchors
 ```
 
+
 ##
 
 ## 📁 New Files Created
@@ -43,6 +44,7 @@ engine = AdvancedPruningEngine()
 candidates = engine.evaluate_all_glyphs()
 report = engine.create_pruning_report()
 ```
+
 
 **Features:**
 
@@ -113,6 +115,7 @@ report = engine.create_pruning_report(
 )
 ```
 
+
 ### With Match History (Recommended)
 
 ```python
@@ -123,6 +126,7 @@ engine = AdvancedPruningEngine(
 
 candidates = engine.evaluate_all_glyphs()
 ```
+
 
 ### With Factorial Expansion
 
@@ -148,6 +152,7 @@ print(f"Expansion: 85,264 → {len(kept)} high-quality glyphs")
 factorial.sync_to_json(kept)
 ```
 
+
 ##
 
 ## 📊 Key Metrics
@@ -164,6 +169,7 @@ Reaction Participation: 0-1 (system involvement)
 Combined Score = weighted sum → 0.0 to 1.0
 ```
 
+
 ### Decision Thresholds
 
 ```
@@ -173,6 +179,7 @@ score ≥ 0.25  → MARGINAL (60% confidence)
 score < 0.25  → PRUNE CANDIDATE (70% confidence)
 ```
 
+
 ### Protection Rules
 
 ```
@@ -180,6 +187,7 @@ IF glyph_id ≤ 64          → ALWAYS KEEP (base elements)
 IF reaction_participation ≥ 0.9 → ALWAYS KEEP (catalysts)
 IF signal_strength ≥ 0.70 → USUALLY KEEP
 ```
+
 
 ##
 
@@ -200,6 +208,7 @@ for family, glyphs in families.items():
     # Prune near-duplicates
 ```
 
+
 ### Enhancement 2: Pruning Archive Capsule
 
 Archive for resurrection:
@@ -210,6 +219,7 @@ archive_path = engine.archive_pruned_glyphs(pruned)
 
 # → Saved as JSON, can resurrect anytime
 ```
+
 
 ### Enhancement 3: Confidence-Based Filtering
 
@@ -229,6 +239,7 @@ low_confidence = [c for c in pruned if c.prune_confidence < 0.70]
 # Manual review recommended
 ```
 
+
 ##
 
 ## 📈 Expected Results
@@ -241,6 +252,7 @@ After advanced pruning: 64 glyphs (all protected)
 Result: 0% pruning (as expected - base elements are sacred)
 ```
 
+
 ### On Factorial Expansion (85,264 candidates)
 
 ```
@@ -250,6 +262,7 @@ After advanced 5-layer: 6,000-8,000 survivors
 Result: 93% reduction, but high quality
 ```
 
+
 ### Tone Distribution Before/After
 
 ```
@@ -257,6 +270,7 @@ Before: May be overrepresented (e.g., 40% "Molten")
 After: Balanced across 12 Saonyx tones
 Result: Rich, diverse emotional palette
 ```
+
 
 ##
 
@@ -272,6 +286,7 @@ if candidate.signal_strength < 0.30:
     print("Weak signal → candidate for pruning")
 ```
 
+
 ### Layer 2: Trace Role Redundancy
 
 **When:** Detecting duplicates
@@ -283,6 +298,7 @@ if candidate1.trace_role == candidate2.trace_role:
         # One is redundant
         keep_higher_signal(candidate1, candidate2)
 ```
+
 
 ### Layer 3: Usage Frequency
 
@@ -296,6 +312,7 @@ else:
     print("? Never activated → consider for pruning")
 ```
 
+
 ### Layer 4: Tone Diversity
 
 **When:** Maintaining palette
@@ -307,6 +324,7 @@ if tone_count["Molten"] > total_glyphs * 0.33:
         print("Overrepresented tone → candidate for pruning")
 ```
 
+
 ### Layer 5: Reaction Anchoring
 
 **When:** System integrity
@@ -316,6 +334,7 @@ if tone_count["Molten"] > total_glyphs * 0.33:
 if "Forgiveness" in candidate.name:
     print("✓ Reaction catalyst → ALWAYS KEEP")
 ```
+
 
 ##
 
@@ -335,6 +354,7 @@ schedule:
       - notify_team
 ```
 
+
 ### In Glyph Matching
 
 ```python
@@ -349,6 +369,7 @@ def match_glyph(glyph_id):
     if random.random() < 0.05:  # Save 5% of time
         save_match_history(match_history)
 ```
+
 
 ### In Factorial Expansion
 
@@ -366,6 +387,7 @@ survived = [c for c in candidates if not c.should_prune]
 # Sync to JSON
 factorial_engine.sync_to_json(survived)
 ```
+
 
 ##
 
@@ -392,6 +414,7 @@ class PruneCandidate:
     prune_confidence: float  # 0-1
     prune_reason: str
 ```
+
 
 ### Output Report
 
@@ -420,6 +443,7 @@ class PruneCandidate:
   ]
 }
 ```
+
 
 ##
 
@@ -492,17 +516,20 @@ from emotional_os.glyphs.glyph_factorial_engine import GlyphFactorialEngine
 from emotional_os.glyphs.advanced_pruning_engine import AdvancedPruningEngine
 ```
 
+
 ### With Ritual Capsule Processor
 
 ```python
 from tools.ritual_capsule_processor import RitualCapsuleProcessor
 ```
 
+
 ### With VELΩNIX Engine
 
 ```python
 from emotional_os.glyphs.velonix_reaction_engine import VelonixReactionEngine
 ```
+
 
 ##
 
@@ -593,6 +620,7 @@ protect_if = {
     'high_signal': 0.70,           # Protect above this?
 }
 ```
+
 
 ##
 

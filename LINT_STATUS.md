@@ -33,13 +33,12 @@
 ## Next Steps
 
 ### High ROI (Quick Wins)
-1. **MD024** - Fix duplicate headings in velinor narrative files
-2. **MD033** - Convert raw `<br>` to markdown equivalents
-3. **MD003** - Standardize remaining atx_closed headings
+1. **MD024** - Fix duplicate headings in velinor narrative files 2. **MD033** - Convert raw `<br>`
+to markdown equivalents 3. **MD003** - Standardize remaining atx_closed headings
 
 ### Medium ROI (Systematic)
-4. **MD025** - Consolidate multiple h1 headers in large files
-5. **MD046** - Review code block style preference
+4. **MD025** - Consolidate multiple h1 headers in large files 5. **MD046** - Review code block style
+preference
 
 ### Deferred (Lower Priority)
 - **MD013** exceptions: Accept as policy-based (100-char soft-wrap)
@@ -52,4 +51,3 @@
 - **Total lines wrapped**: 11,840 additions, 17,026 removals (net -5,186 LOC)
 - **Error reduction**: 69% (177K → 56K)
 - **Time to error-free baseline**: Est. 2-4 hours (MD024, MD033, MD003 focused work)
-

@@ -105,21 +105,26 @@ Or use the migration script:
 python3 scripts/migrate_supabase.py
 
 ```text
+
 ```text
 ```
+
 
 ### Step 2: Verify
 
 ```bash
 
 ```text
+
 ```
 
 ### Step 3: Start Using
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 Then:
@@ -133,6 +138,7 @@ Then:
 ## 📁 New Files
 
 ```
+
 
 ✨ NEW:
 - emotional_os/deploy/modules/conversation_manager.py    (380 lines)
@@ -148,6 +154,7 @@ Then:
 
 ```text
 ```
+
 
 ##
 
@@ -187,6 +194,7 @@ dfdec4f feat: add Supabase setup automation and configuration guide
 16a8dd5 docs: add comprehensive implementation summary for conversation storage
 4b1c501 feat: implement persistent conversation storage with auto-naming
 ```
+
 
 ##
 

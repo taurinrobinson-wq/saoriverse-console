@@ -14,8 +14,10 @@ Start with the executive summary:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### 2. Run the Tests (2 minutes)
 
@@ -27,6 +29,7 @@ python3 privacy_monitor.py
 python3 test_privacy_masking.py
 
 ```text
+
 ```
 
 ### 3. Review the Code Changes
@@ -34,8 +37,10 @@ python3 test_privacy_masking.py
 See exactly what changed:
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### 4. Deploy When Ready
@@ -44,8 +49,10 @@ Follow the checklist:
 
 ```bash
 
+
 ```text
 ```
+
 
 ##
 
@@ -96,8 +103,10 @@ Follow the checklist:
   "user_input": "I'm struggling with depression...",
   "ai_response": "I understand. These feelings..."
 ```text
+
 ```text
 ```
+
 
 **Problem**: Raw personal health data exposed
 
@@ -113,6 +122,7 @@ Follow the checklist:
   "ai_response_length": 245
 
 ```text
+
 ```
 
 **Benefit**: Only emotional patterns visible
@@ -143,19 +153,24 @@ Follow the checklist:
 ### Run All Tests
 
 ```bash
+
 python3 privacy_monitor.py python3 test_privacy_masking.py
+
 ```text
 ```text
+
 ```
 
 ### Review Changes
 
 ```bash
 
+
 git diff emotional_os/learning/hybrid_learner_v2.py
 
 ```text
 ```
+
 
 ### View Documentation
 
@@ -163,6 +178,7 @@ git diff emotional_os/learning/hybrid_learner_v2.py
 cat PRIVACY_REPORT_FINAL.md
 cat DEPLOYMENT_CHECKLIST.md
 ```
+
 
 ##
 

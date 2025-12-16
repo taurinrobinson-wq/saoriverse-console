@@ -29,14 +29,17 @@ python main_v2_simple.py
 
 # or
 ```text
+
 ```text
 ```
+
 
 **After:**
 
 ```bash
 
 ```text
+
 ```
 
 ### Running Tests
@@ -44,20 +47,24 @@ python main_v2_simple.py
 **Before:**
 
 ```bash
+
 pytest tests/ pytest .                # Also ran root tests
 
 ```text
 ```text
+
 ```
 
 **After:**
 
 ```bash
 
+
 pytest tests/           # All tests pytest tests/unit/      # Just unit tests
 
 ```text
 ```
+
 
 ### Finding Code
 
@@ -67,8 +74,10 @@ pytest tests/           # All tests pytest tests/unit/      # Just unit tests
 find . -name "*response*" | grep -v __pycache__
 
 ```text
+
 ```text
 ```
+
 
 **After:**
 
@@ -79,6 +88,7 @@ ls src/
 # response_generator.py, response_adapter.py, response_selector.py
 
 ```text
+
 ```
 
 ### Adding a New Feature
@@ -86,21 +96,26 @@ ls src/
 **Before:**
 
 ```
+
 1. Create code in multiple possible locations 2. Update imports in 5+ places 3. Add test somewhere
 unclear
+
 ```text
 ```text
+
 ```
 
 **After:**
 
 ```
 
+
 1. Add code to src/your_module.py 2. Add test to tests/unit/test_your_module.py 3. Run: pytest
 tests/unit/test_your_module.py
 
 ```text
 ```
+
 
 ### Importing Code
 
@@ -112,14 +127,17 @@ from parser.signal_parser import parse_input  # Which one?
 from src.signal_parser import parse_input
 
 ```text
+
 ```text
 ```
+
 
 **After:**
 
 ```python
 
 ```text
+
 ```
 
 ##
@@ -129,6 +147,7 @@ from src.signal_parser import parse_input
 ### Old Structure (Confusing)
 
 ```
+
 saoriverse-console/
 ├── 150+ .py files in root
 ├── 69 .md files in root
@@ -152,13 +171,16 @@ saoriverse-console/
 │   ├── test_*.py (mixed with integration tests)
 │   ├── fixtures/
 │   └── ...
+
 ```text
 ```text
+
 ```
 
 ### New Structure (Clear)
 
 ```
+
 
 saoriverse-console/
 ├── app.py                    (single entry point)
@@ -197,6 +219,7 @@ saoriverse-console/
 
 ```text
 ```
+
 
 ##
 
@@ -252,8 +275,10 @@ pytest tests/
 # - Hard to run specific tests
 
 ```text
+
 ```text
 ```
+
 
 ### After
 
@@ -264,6 +289,7 @@ pytest tests/unit/      # Fast unit tests (< 1 sec)
 pytest tests/integration/  # Slower integration tests (< 10 sec)
 
 ```text
+
 ```
 
 ##
@@ -274,10 +300,13 @@ pytest tests/integration/  # Slower integration tests (< 10 sec)
 
 ```python
 
+
 # These all existed and were confusing:
 from emotional_os.core.signal_parser import parse_input from parser.signal_parser import parse_input
+
 ```text
 ```text
+
 ```
 
 ### After
@@ -285,10 +314,12 @@ from emotional_os.core.signal_parser import parse_input from parser.signal_parse
 ```python
 
 
+
 # Clear single source of truth:
 
 ```text
 ```
+
 
 ##
 
@@ -326,8 +357,10 @@ git checkout pre-reorganization
 # Or: git reset --hard pre-reorganization
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -413,6 +446,7 @@ ls -1 *.py
 # Should show: app.py only
 
 ```
+
 
 ##
 

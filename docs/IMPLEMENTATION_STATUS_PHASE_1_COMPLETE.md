@@ -60,8 +60,10 @@ Zustand-based central state store providing:
 ```typescript
 import { useGameStore } from '@/lib/gameStore';
 ```text
+
 ```text
 ```
+
 
 ### 4. **Developer Console** (`velinor-web/src/components/ToneStatsDisplay.tsx`)
 
@@ -87,16 +89,20 @@ glyph_longing     → Observation ≥ 65 AND Trust ≥ 55
 glyph_chain       → Narrative Presence ≥ 70 AND Observation ≥ 60
 
 ```text
+
 ```
 
 **Endings (6 Paths):**
 
 ```
+
 1. Friendship Eternal    → Trust ≥ 80 AND Empathy ≥ 75 2. Sacrifice Path        → Empathy ≥ 85 AND
 Narrative Presence ≥ 70 3. Hidden Knowledge      → Observation ≥ 90 AND Trust ≥ 60 4. Lonely Ending
 → Trust ≤ 30 AND Empathy ≤ 30 5. Power Corruption      → Observation ≥ 70 AND Empathy ≤ 35
+
 ```text
 ```text
+
 ```
 
 ##
@@ -127,6 +133,7 @@ The foundation is complete. Phase 2 implementation guide included (`PHASE_2_DIAL
 
 ```typescript
 
+
 // In dialogue handler const choice = { text: 'Show genuine empathy', toneChanges: [ { statName:
 'empathy', delta: 8, description: 'Deep emotional understanding' }, { statName: 'narrativePresence',
 delta: 3, description: 'Safe space created' } ], nextScene: 'npc_opens_up' };
@@ -135,6 +142,7 @@ delta: 3, description: 'Safe space created' } ], nextScene: 'npc_opens_up' };
 
 ```text
 ```
+
 
 ### Gating Dialogue Behind TONE Stats
 
@@ -148,8 +156,10 @@ if (toneStats.observation >= 75) {
 if (toneStats.trust >= 80) {
   // Show vulnerable confession
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -201,6 +211,7 @@ complete
 ├── PHASE_2_DIALOGUE_SYSTEM_GUIDE.md         (✅ Implementation roadmap)
 
 ```text
+
 ```
 
 ##
@@ -259,12 +270,14 @@ complete
 ## Current Commit Status
 
 ```
+
 Commit 25129b4 (HEAD -> main) Author: taurinrobinson-wq Date:   Dec 14 2025
 
 Documentation: Phase 1 Complete & Phase 2 Implementation Guide 2 files changed, 582 insertions(+)
 
 Commit 6543b0c Phase 1: TONE Stat System Implementation - Complete Game Architecture 9 files
 changed, 225 insertions(+)
+
 ```
 
 Both commits pushed to `origin/main` ✅

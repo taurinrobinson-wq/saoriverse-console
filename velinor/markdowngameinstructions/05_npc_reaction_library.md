@@ -25,6 +25,7 @@ We've stopped counting."
 "Your shock will fade. Then you'll be like us."
 ```
 
+
 ### Wry/Dark Humor Tone
 
 ```text

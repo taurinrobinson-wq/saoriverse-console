@@ -10,8 +10,10 @@ This document describes how to install [actionlint](../docs).
 
 ```powershell
 ```text
+
 ```text
 ```
+
 
 ### [Scoop](https://scoop.sh/)
 
@@ -20,6 +22,7 @@ This document describes how to install [actionlint](../docs).
 ```powershell
 
 ```text
+
 ```
 
 ### [Winget](https://learn.microsoft.com/en-us/windows/package-manager/)
@@ -27,8 +30,10 @@ This document describes how to install [actionlint](../docs).
 [`actionlint` package][winget] is available in the winget-pkgs repo:
 
 ```powershell
+
 ```text
 ```text
+
 ```
 
 ## Linux
@@ -39,8 +44,10 @@ This document describes how to install [actionlint](../docs).
 
 ```sh
 
+
 ```text
 ```
+
 
 ### [Nix](https://nixos.wiki/)
 
@@ -50,14 +57,17 @@ On NixOS:
 
 ```sh
 ```text
+
 ```text
 ```
+
 
 On Non NixOS:
 
 ```sh
 
 ```text
+
 ```
 
 ## macOS
@@ -67,8 +77,10 @@ On Non NixOS:
 [`actionlint`][formula] formula is provided by Homebrew officially.
 
 ```sh
+
 ```text
 ```text
+
 ```
 
 And rhysd/actionlint repository also provides its own Homebrew package, which is automatically updated on new release.
@@ -76,10 +88,12 @@ If you prefer it, tap the repository before running `brew install`.
 
 ```sh
 
+
 brew tap "rhysd/actionlint" "https://github.com/rhysd/actionlint"
 
 ```text
 ```
+
 
 ## Prebuilt binaries
 
@@ -107,8 +121,10 @@ automatically. This is a recommended way if you install actionlint in some shell
 
 ```sh
 ```text
+
 ```text
 ```
+
 
 When you need to install specific version of actionlint, please give the version to the 1st command
 line argument. The following example installs v1.6.17.
@@ -116,6 +132,7 @@ line argument. The following example installs v1.6.17.
 ```sh
 
 ```text
+
 ```
 
 This script downloads `actionlint` (or `actionlint.exe` on Windows) binary to the current working directory. When you need to put
@@ -123,8 +140,10 @@ the downloaded binary to some other directory, please give the directory path to
 example installs the latest version to `/usr/bin`.
 
 ```sh
+
 ```text
 ```text
+
 ```
 
 For the usage of actionlint on GitHub Actions, see [the usage document](usage.md#on-github-actions).
@@ -142,6 +161,7 @@ installed, run these commands to install actionlint:
 ```bash
 
 
+
 # Add actionlint plugin
 asdf plugin add actionlint
 
@@ -156,6 +176,7 @@ asdf install actionlint latest
 ```sql
 ```
 
+
 ## Build from source
 
 Recent [Go][] toolchain is necessary to build actionlint from source. Use Go 1.16 or later.
@@ -169,13 +190,14 @@ go install github.com/rhysd/actionlint/cmd/actionlint@latest
 go install github.com/rhysd/actionlint/cmd/actionlint
 ```
 
+
 ##
 
 [Checks](checks.md) | [Usage](usage.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)
 
 [formula]: <https://formulae.brew.sh/formula/actionlint> [homebrew]: <https://brew.sh/> [releases]:
-<https://github.com/rhysd/actionlint/releases> [Go]: <https://golang.org/> [asdf]: <https://asdf-vm.com/>
-[asdf-plugin]: <https://github.com/crazy-matt/asdf-actionlint> [chocolatey]:
+<https://github.com/rhysd/actionlint/releases> [Go]: <https://golang.org/> [asdf]:
+<https://asdf-vm.com/> [asdf-plugin]: <https://github.com/crazy-matt/asdf-actionlint> [chocolatey]:
 <https://community.chocolatey.org/packages/actionlint> [scoop]:
 <https://scoop.sh/#/apps?q=actionlint&s=0&d=1&o=true> [winget]:
 <https://github.com/microsoft/winget-pkgs/tree/master/manifests/r/rhysd/actionlint> [aur]:

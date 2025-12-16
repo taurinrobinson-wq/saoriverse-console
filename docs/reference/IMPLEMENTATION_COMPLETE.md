@@ -82,6 +82,7 @@ user-AI conversations.
 ```text
 ```
 
+
 User Input: "I feel vulnerable but loved" ↓ Adaptive Signal Extraction
     └─ Discovers: vulnerability, love, safety, intimacy, etc.
 ↓ Hybrid Learning
@@ -108,8 +109,10 @@ User Input: "I feel vulnerable but loved" ↓ Adaptive Signal Extraction
 
 ### Pattern Recognition Example
 ```text
+
 ```text
 ```
+
 
 Turn 1: love (0.9) + intimacy (0.8) = co-occurrence Turn 2: love (0.85) + intimacy (0.7) =
 co-occurrence Turn 3: vulnerability (0.8) + love (0.9) = co-occurrence ... Turn 150: accumulated
@@ -192,6 +195,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session"):
 ### Configuration Files (Generated Automatically)
 
 ```text
+
 ```
 
 learning/
@@ -202,6 +206,7 @@ learning/
 └── hybrid_learning_log.jsonl         # Learning log
 
 ```
+
 
 
 ##
@@ -272,22 +277,27 @@ evolution = DynamicGlyphEvolution(
     # Higher = only very strong patterns
 
 ```text
+
 ```
 
 ### Customize Glyph Symbols
 
 ```python
 
+
 # In dynamic_glyph_evolution.py
 self.emotion_symbols = { "love": "♥", "vulnerability": "🌱",
     # Add more
+
 ```text
 ```text
+
 ```
 
 ### Customize Glyph Names
 
 ```python
+
 
 
 # In dynamic_glyph_evolution.py, _create_pattern_name()
@@ -296,6 +306,7 @@ name_map = { ("love", "vulnerability"): "Open-Hearted Love",
 
 ```text
 ```
+
 
 ##
 
@@ -316,8 +327,10 @@ streamlit run main_v2.py
 # Have meaningful conversations
 
 ```text
+
 ```text
 ```
+
 
 ### Accessing Glyphs Programmatically
 
@@ -342,11 +355,13 @@ processor.export_session_glyphs("output.json")
 # Print summary
 
 ```text
+
 ```
 
 ### Checking Persistent Storage
 
 ```bash
+
 
 # View discovered glyphs
 cat learning/conversation_glyphs.json | python -m json.tool
@@ -355,8 +370,10 @@ cat learning/conversation_glyphs.json | python -m json.tool
 cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 
 # View learning log
+
 ```text
 ```text
+
 ```
 
 ##
@@ -367,8 +384,10 @@ cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 
 ```bash
 
+
 ```text
 ```
+
 
 Checks:
 
@@ -397,8 +416,10 @@ result = processor.process_user_message(
 
 print('Success!' if result['status'] == 'success' else 'Failed')
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -479,6 +500,7 @@ installed
                   │ Sidebar  │  │ State        │  │              │
 
 ```text
+
 ```
 
 ##
@@ -552,9 +574,11 @@ This transforms Saoriverse from a static system with predefined glyphs into a **
 ## Ready to Run
 
 ```bash
+
 bash verify_integration.sh     # ← Run this first streamlit run main_v2.py        # ← Then run this
 
 # Select "hybrid" mode and start chatting!
+
 ```
 
 Enjoy your dynamically evolving glyph system! 🌟

@@ -7,6 +7,7 @@ This directory contains exported data and schemas from your Supabase database fo
 ```text
 ```
 
+
 supabase_analysis/
 ├── tables/          # Place exported table data (CSV, JSON, or SQL dumps)
 ├── schemas/         # Place table schema definitions (DDL/structure exports)
@@ -45,12 +46,14 @@ Run this in Supabase SQL Editor:
 
 ```sql
 
+
 -- Get all table structures
 SELECT table_name, column_name, data_type, character_maximum_length, is_nullable, column_default
 FROM information_schema.columns WHERE table_schema = 'public'
 
 ```text
 ```
+
 
 Save result to: `supabase_analysis/schemas/complete_schema.csv`
 
@@ -64,6 +67,7 @@ FROM pg_tables
 WHERE schemaname = 'public'
 ORDER BY tablename;
 ```
+
 
 ## What to Export
 

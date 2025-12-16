@@ -130,8 +130,10 @@ animated experience** with professional UI/UX design.
 cd firstperson-web
 npm install --legacy-peer-deps
 ```text
+
 ```text
 ```
+
 
 Visit `http://localhost:3000` to see the beautiful UI in action.
 
@@ -160,6 +162,7 @@ Edit Tailwind classes in components:
 // Change from indigo to purple
 
 ```text
+
 ```
 
 #### Adjust Animation Timing
@@ -167,9 +170,12 @@ Edit Tailwind classes in components:
 Edit Framer Motion transitions:
 
 ```tsx
+
 transition={{ duration: 0.5 }} // Slower
+
 ```text
 ```text
+
 ```
 
 #### Add More Dance Animations
@@ -182,10 +188,12 @@ Edit the `detectExcitement()` function in chat page:
 
 ```tsx
 
+
 const excitementPatterns = [ /your-keyword/i, // Add more patterns...
 
 ```text
 ```
+
 
 ## 🎬 Component Hierarchy
 
@@ -208,6 +216,7 @@ lib/
 ├── store.ts (Zustand state)
 └── api.ts (API client)
 ```
+
 
 ## ✅ Features Checklist
 

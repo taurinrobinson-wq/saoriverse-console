@@ -96,6 +96,7 @@ emotional_os/
 └── parser/
 ```
 
+
 ### Phase 2: Centralize Lexicon Storage
 
 ```
@@ -107,6 +108,7 @@ data/
 │   └── lexicon_versions.json     # Version metadata
 ```
 
+
 ### Phase 3: Update All Imports
 
 **Before**:
@@ -116,11 +118,13 @@ from emotional_os.glyphs.signal_parser import parse_input
 from learning.lexicon_learner import LexiconLearner
 ```
 
+
 **After**:
 
 ```python
 from emotional_os.core import parse_input, LexiconLearner
 ```
+
 
 ### Phase 4: Backward Compatibility Wrappers
 
@@ -131,6 +135,7 @@ Stub files at legacy locations redirect to canonical versions:
 # parser/signal_parser.py (stub)
 from emotional_os.core.signal_parser import *
 ```
+
 
 ##
 

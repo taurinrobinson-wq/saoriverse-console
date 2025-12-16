@@ -19,8 +19,10 @@ a default configuration with `-init-config` flag.
 ```sh
 actionlint -init-config
 ```text
+
 ```text
 ```
+
 
 Currently only one item can be configured.
 
@@ -40,6 +42,7 @@ config-variables:
   - ENVIRONMENT_STAGE
 
 ```
+
 
 - `self-hosted-runner`: Configuration for your self-hosted runner environment
   - `labels`: Label names added to your self-hosted runners as list of string

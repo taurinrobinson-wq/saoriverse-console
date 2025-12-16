@@ -50,6 +50,7 @@ Stage 5: STORAGE
 └─ NO raw text, NO user_id, NO identifying info
 ```
 
+
 ## Files Involved
 
 ### New Files (Created)
@@ -99,6 +100,7 @@ grep -r "supabase\." emotional_os/
 grep -r "\.table\(" emotional_os/
 ```
 
+
 Typical locations:
 
 - REST API endpoints (FastAPI/Flask)
@@ -121,6 +123,7 @@ db.table("conversations").insert({
     "signals": result["signals"],
 }).execute()
 ```
+
 
 **After Encoding (Correct - PRIVACY-FIRST):**
 
@@ -145,6 +148,7 @@ if not success:
     logger.error(f"Failed to store encoded conversation: {record_id}")
     # Handle error appropriately
 ```
+
 
 ### Step 3: Modify Supabase Schema
 
@@ -178,6 +182,7 @@ CREATE INDEX idx_session_id ON conversation_logs_anonymized(session_id);
 CREATE INDEX idx_timestamp_week ON conversation_logs_anonymized(timestamp_week);
 ```
 
+
 **Migrate existing data (if needed):**
 
 ```sql
@@ -198,6 +203,7 @@ VALUES (
     'Migrated to anonymized schema for GDPR/CCPA/HIPAA compliance'
 );
 ```
+
 
 ### Step 4: Test Encoding Pipeline
 
@@ -272,6 +278,7 @@ class TestDataEncoding(unittest.TestCase):
         self.assertRegex(timestamp_week, r"\d{4}-W\d{2}")
 ```
 
+
 ### Step 5: Verify K-Anonymity
 
 **Monthly compliance check:**
@@ -285,6 +292,7 @@ verifier.run_monthly_compliance_check(db_connection)
 
 # Generates report in: compliance_reports/[date]_compliance_report.json
 ```
+
 
 ## Data Minimization: What Gets Stored vs. Discarded
 
@@ -301,6 +309,7 @@ verifier.run_monthly_compliance_check(db_connection)
 ❌ identifying_phrases     Any unique content
 ```
 
+
 ### STORED (Encoded/Generalized)
 
 ```
@@ -313,6 +322,7 @@ verifier.run_monthly_compliance_check(db_connection)
 ✓ response_source          "signal_parser"
 ```
 
+
 ## Encryption & Security
 
 ### In Transit (TLS 1.3)
@@ -321,6 +331,7 @@ verifier.run_monthly_compliance_check(db_connection)
 User Client ─────[TLS 1.3]────→ FirstPerson API ─────[TLS 1.3]────→ Supabase
               All data encrypted
 ```
+
 
 ### At Rest (AES-256)
 
@@ -334,6 +345,7 @@ Database: Supabase
     └─ encoded_gates: Codes (no personal info)
     └─ glyph_ids: IDs only (no content)
 ```
+
 
 ## User Rights Implementation
 
@@ -360,6 +372,7 @@ def export_user_data(user_id: str):
     }
 ```
 
+
 ### User Data Deletion
 
 ```python
@@ -379,6 +392,7 @@ def delete_user_data(user_id: str):
 
     return {"status": "deleted", "timestamp": datetime.now().isoformat()}
 ```
+
 
 ## Audit & Compliance
 
@@ -407,6 +421,7 @@ All data access is logged:
   ip_address: 192.168.1.100
   mfa_verified: true
 ```
+
 
 ## Rollout Plan
 
@@ -486,6 +501,7 @@ python emotional_os/privacy/verify_compliance.py
 python emotional_os/privacy/run_compliance_check.py
 ```
 
+
 ## Monitoring & Alerts
 
 ### Alert Conditions
@@ -506,6 +522,7 @@ User Message → parse_input() → Response
               Raw text stored in DB ❌
 ```
 
+
 **After Integration:**
 
 ```
@@ -518,6 +535,7 @@ User Message → parse_input() → Response
    Only anonymized data → Supabase ✓
    Raw text discarded (never stored)
 ```
+
 
 **Privacy Achievement:**
 

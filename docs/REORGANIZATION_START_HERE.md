@@ -86,6 +86,7 @@ During-work companion with:
 ```text
 ```
 
+
 src/
 ├── emotional_os.py           (Core glyph logic)
 ├── signal_parser.py          (Text → signals)
@@ -105,8 +106,10 @@ src/
 
 ### Organized Tests
 ```text
+
 ```text
 ```
+
 
 tests/
 ├── conftest.py
@@ -127,6 +130,7 @@ tests/
 ### Single Streamlit Entry Point
 
 ```text
+
 ```
 
 app.py (30 lines)
@@ -139,9 +143,12 @@ app.py (30 lines)
 
 
 
+
 ### Organized Scripts
+
 ```text
 ```text
+
 ```
 
 scripts/
@@ -154,10 +161,12 @@ scripts/
 
 
 
+
 ### Result: Root Directory ✨
 
 ```text
 ```
+
 
 saoriverse-console/
 ├── app.py              ← Entry point
@@ -186,6 +195,7 @@ saoriverse-console/
 ```bash
 
 
+
 # Finding code was hard
 find . -name "*response*" -type f | grep -v __pycache__
 
@@ -206,6 +216,7 @@ bypass
 
 ```text
 ```
+
 
 ### After Reorganization
 
@@ -230,8 +241,10 @@ streamlit run app.py               # That's the only option
 2. Add tests to tests/unit/test_your_module.py
 3. Run pytest tests/unit/test_your_module.py
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -244,14 +257,18 @@ Read the master plan to understand the scope:
 ```bash
 
 ```text
+
 ```
 
 ### Step 2: Backup (5 min)
 
 ```bash
+
 cd /path/to/saoriverse-console git checkout -b refactor/reorganization-master
+
 ```text
 ```text
+
 ```
 
 ### Step 3: Execute (6-8 hours)
@@ -267,6 +284,7 @@ Follow the phases in order:
 ```bash
 
 
+
 # Test imports
 python tools/import_checker.py
 
@@ -278,14 +296,17 @@ pytest tests/ -v
 ```text
 ```
 
+
 ### Step 5: Commit (5 min)
 
 ```bash
 git add -A
 git commit -m "refactor: Complete codebase reorganization"
 ```text
+
 ```text
 ```
+
 
 ### Step 6: Create PR (5 min)
 
@@ -394,6 +415,7 @@ python -c "from src import VoiceInterface; print('✅ Voice ready')"
 # Should print: ✅ Voice ready
 
 ```
+
 
 When all 6 are passing, you're done. ✨
 

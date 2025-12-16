@@ -21,8 +21,10 @@ def handle_response_pipeline(user_input, context):
     5. encoding.encode_conversation()              # ← emotional_os_privacy
     6. learner.learn_from_exchange()               # ← emotional_os_learning
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -60,6 +62,7 @@ from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtoco
 # Memory
 
 ```text
+
 ```
 
 ##
@@ -67,6 +70,7 @@ from src.emotional_os_privacy.anonymization_protocol import AnonymizationProtoco
 ## Session Initialization (Session Startup)
 
 ```python
+
 
 # In app startup or session creation:
 
@@ -91,8 +95,10 @@ DreamEngine()
 self.memory = ConversationMemory()
 
 self.user_id = None
+
 ```text
 ```text
+
 ```
 
 ##
@@ -102,6 +108,7 @@ self.user_id = None
 ### 1. SAFETY CHECK
 
 ```python
+
 
 
 # Input: user_input = "I'm suicidal"
@@ -117,6 +124,7 @@ consent_prompt = build_consent_prompt(risk_level)
 
 ```text
 ```
+
 
 ### 2. SIGNAL DETECTION
 
@@ -138,8 +146,10 @@ signals = adaptive_extractor.extract_signals(user_input)
 poetry_signals = poetry_extractor.extract_signals(user_input)
 
 ```text
+
 ```text
 ```
+
 
 ### 3. ARCHETYPE MATCHING
 
@@ -159,11 +169,13 @@ best_archetype = archetype_library.get_best_match(
 )
 
 ```text
+
 ```
 
 ### 4. RESPONSE GENERATION
 
 ```python
+
 
 # Call 1: Generate archetype-aware response
 response = archetype_gen.generate_archetype_aware_response( user_input=user_input,
@@ -173,13 +185,16 @@ prior_context=context_summary, glyph=None )
 
 # If no archetype match, fallback:
 if not response:
+
 ```text
 ```text
+
 ```
 
 ### 5. SAFETY WRAPPING
 
 ```python
+
 
 
 # If sensitive input detected, wrap response
@@ -188,6 +203,7 @@ base_response=response, tone="gentle" )
 
 ```text
 ```
+
 
 ### 6. PRIVACY ENCODING
 
@@ -205,8 +221,10 @@ encoded = encoding.encode_conversation(
 )
 
 ```text
+
 ```text
 ```
+
 
 ### 7. LEARNING
 
@@ -239,6 +257,7 @@ if is_end_of_day:
         glyph_effectiveness={...}
 
 ```text
+
 ```
 
 ##
@@ -271,6 +290,7 @@ if is_end_of_day:
 ### New Tables for Learning
 
 ```sql
+
 -- Store archetype library
 CREATE TABLE archetype_library ( id INTEGER PRIMARY KEY, name TEXT UNIQUE, entry_cues JSON,
 response_principles JSON, continuity_bridges JSON, tone_guidelines JSON, success_weight REAL,
@@ -294,8 +314,10 @@ engagement_level REAL, crisis_flags JSON, narrative_summary TEXT, created_at TIM
 -- Encrypted conversations (already exists, but may need privacy fields)
 ALTER TABLE conversations ADD COLUMN encoded_version JSON; ALTER TABLE conversations ADD COLUMN
 is_encrypted BOOLEAN;
+
 ```text
 ```text
+
 ```
 
 ##
@@ -305,6 +327,7 @@ is_encrypted BOOLEAN;
 ### Config File (config/system_integration.json)
 
 ```json
+
 
 { "learning": { "enabled": true, "hybrid_learner": true, "conversation_learner": true,
 "archetype_update_frequency": "per_exchange", "quality_threshold": 0.6 }, "lexicon": { "enabled":
@@ -318,6 +341,7 @@ true, "source": "word_centric_emotional_lexicon_expanded.json", "use_adaptive_di
 
 ```text
 ```
+
 
 ##
 
@@ -349,8 +373,10 @@ try:
 except Exception as e:
     logger.error(f"Encoding failed: {e}")
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -390,6 +416,7 @@ def test_dream_engine(): ...
 def test_full_request_pipeline(): ...
 
 ```text
+
 ```
 
 ##
@@ -416,17 +443,21 @@ def test_full_request_pipeline(): ...
 ### Track These Per-Session
 
 ```python
+
 metrics = { "safety_checks_performed": 0, "consent_prompts_shown": 0, "archetypes_matched": 0,
 "archetype_generation_success_rate": 0.0, "fallback_to_glyph_count": 0, "learning_exchanges": 0,
 "new_archetypes_created": 0, "lexicon_words_found_avg": 0.0, "privacy_encoding_success": True,
 "response_generation_time_ms": 0.0,
+
 ```text
 ```text
+
 ```
 
 ### Track These Per-Day
 
 ```python
+
 
 daily_metrics = { "total_sessions": 0, "total_exchanges": 0, "safety_escalations": 0,
 "archetype_library_size": 0, "learned_exchanges_logged": 0, "dream_engine_summaries": 0,

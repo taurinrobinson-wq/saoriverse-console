@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 PROJECT GUTENBERG POETRY (1.1 Million Words from 18 Collections)
 ├─ Emily Dickinson - Complete Poems
 ├─ Walt Whitman - Leaves of Grass
@@ -107,6 +108,7 @@ PROJECT GUTENBERG POETRY (1.1 Million Words from 18 Collections)
 
 ```json
 
+
 { "id": "glyph_poetry_01", "name": "Deep Connection", "symbol": "♥❤", "core_emotions": ["love",
 "intimacy"], "associated_keywords": [ "intimacy", "love" ], "combined_frequency": 1391,
 "response_cue": "Acknowledge the love and intimacy here", "narrative_hook": "A story of love through
@@ -114,6 +116,7 @@ intimacy", "created_from_pattern": true, "source": "gutenberg_poetry"
 
 ```text
 ```
+
 
 ## Why This Approach Works
 
@@ -161,6 +164,7 @@ Appropriate Response (using glyph's cue and narrative)
     ↓
 User Receives Response Grounded in Poetic Tradition
 ```
+
 
 ## Looking Forward
 

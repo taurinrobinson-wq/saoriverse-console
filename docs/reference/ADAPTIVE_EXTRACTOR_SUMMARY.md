@@ -56,6 +56,7 @@ multiple collections, the system can auto-discover a **"nostalgic_memory"** dime
 ```text
 ```
 
+
 Gutenberg Poetry Downloads ↓ Bulk Text Processor (using Adaptive Extractor) ↓ Base 8 Dimensions +
 Pre-discovered 10 + Dynamically Learned N ↓ Extraction with ALL dimensions active ↓ Lexicon
 expansion across FULL emotional spectrum ↓ Report: Shows all dimensions discovered
@@ -66,8 +67,10 @@ expansion across FULL emotional spectrum ↓ Report: Shows all dimensions discov
 
 ### Example Output:
 ```json
+
 ```json
 ```
+
 
 [DIMENSIONS] Emotional Dimension Summary: Base dimensions: 8 (your original poem) Pre-discovered
 dimensions: 10 (from poetry analysis) Newly learned dimensions: 3-5 (discovered from current corpus)
@@ -114,13 +117,16 @@ The system can now:
 The system automatically uses the adaptive extractor. To disable it:
 
 ```python
+
 ```text
 ```text
+
 ```
 
 To generate a dimension report:
 
 ```python
+
 
 if hasattr(processor.extractor, 'get_dimension_report'): report =
 processor.extractor.get_dimension_report() print(report['total_dimensions'])  # Now >8!

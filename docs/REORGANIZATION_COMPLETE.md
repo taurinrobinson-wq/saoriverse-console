@@ -44,6 +44,7 @@ flat, discoverable structure with:
 ```text
 ```
 
+
 saoriverse-console/
 ├── 150+ files in root (.py, .md)
 ├── emotional_os/         (deep nesting)
@@ -60,8 +61,10 @@ saoriverse-console/
 
 ### After Reorganization
 ```text
+
 ```text
 ```
+
 
 saoriverse-console/
 ├── app.py               (single entry point)
@@ -217,6 +220,7 @@ saoriverse-console/
 ### Current Branch
 
 ```bash
+
 git branch
 
 # * refactor/reorganization-master
@@ -228,11 +232,13 @@ git log --oneline | head -5
 
 ```text
 ```text
+
 ```
 
 ### Rollback Available
 
 ```bash
+
 
 
 # To rollback to pre-reorganization state:

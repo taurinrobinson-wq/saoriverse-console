@@ -161,6 +161,7 @@ Complete safety and crisis infrastructure:
 ```text
 ```
 
+
 User Input ↓ Basic signal parser (emotional_os.core) ← ONLY THIS RUNS ↓ Glyph lookup ↓ Compose
 response ← TEMPLATE-BASED ↓ Response
 
@@ -171,8 +172,10 @@ response ← TEMPLATE-BASED ↓ Response
 
 ## HOW IT SHOULD WORK (Fully Integrated)
 ```text
+
 ```text
 ```
+
 
 User Input ↓ Safety Check (Sanctuary)
 ├─ Detect sensitive topics

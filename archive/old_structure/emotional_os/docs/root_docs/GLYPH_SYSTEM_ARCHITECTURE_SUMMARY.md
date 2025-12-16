@@ -22,6 +22,7 @@ API returns 200+ status code →
 Returns: "I'm experiencing some technical difficulties, but I'm still here for you."
 ```
 
+
 **Solution:** Add to your `.env` file:
 
 ```bash
@@ -29,6 +30,7 @@ CURRENT_SAORI_URL=https://your-supabase-project.supabase.co/functions/v1/saori-f
 SUPABASE_URL=https://your-supabase-project.supabase.co
 SUPABASE_ANON_KEY=your_anon_key_here
 ```
+
 
 ##
 
@@ -55,6 +57,7 @@ Gate 8:   174 glyphs (Boundary/Shielding)
 Gate 9:    23 glyphs (Stillness)
 Gate 10:    1 glyph (Surrender)
 ```
+
 
 ##
 
@@ -99,6 +102,7 @@ emotional_os/glyphs/learning_response_generator.py
     ↓
 Response delivered to user
 ```
+
 
 ## 🟢 Recent Local-only Integration (Nov 16, 2025)
 
@@ -231,6 +235,7 @@ Use this document as the canonical reference for the response flow while you con
               └────────────────────┘
 ```
 
+
 ##
 
 ## 🛠️ Configuration Requirements
@@ -250,6 +255,7 @@ CURRENT_SAORI_URL=https://your-project.supabase.co/functions/v1/saori-fixed
 SUPABASE_KEY=your_anon_key_here
 SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
 ```
+
 
 ### Processing Modes
 
@@ -299,6 +305,7 @@ print(f"Total glyphs: {count}")
 conn.close()
 ```
 
+
 ### Test Signal Parser
 
 ```python
@@ -313,6 +320,7 @@ result = parse_input(
 print(f"Best glyph: {result['best_glyph']}")
 print(f"Response: {result['voltage_response'][:100]}...")
 ```
+
 
 ##
 

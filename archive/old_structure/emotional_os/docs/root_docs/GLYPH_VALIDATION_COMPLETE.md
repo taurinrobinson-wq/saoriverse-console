@@ -113,6 +113,7 @@ Each glyph must pass:
 lexicon = load_glyphs()  # 8,560 glyphs with quality issues
 ```
 
+
 **After**:
 
 ```python
@@ -120,6 +121,7 @@ lexicon = load_glyphs()  # 8,560 glyphs with quality issues
 # Loading 6,434 validated glyphs (only quality ones)
 lexicon = load_glyphs()  # 6,434 glyphs, all validated
 ```
+
 
 ### Benefits
 

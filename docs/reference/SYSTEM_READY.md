@@ -65,8 +65,10 @@ New glyphs are automatically:
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 This shows you exactly how the system works!
 
@@ -102,6 +104,7 @@ result = integrator.process_conversation_with_evolution(
 saori_reply = result['saori_response'].reply
 
 ```text
+
 ```
 
 ## 🎉 WHAT YOU GET
@@ -135,9 +138,11 @@ saori_reply = result['saori_response'].reply
 ### Evolution Statistics
 
 ```python
+
 stats = integrator.get_evolution_stats() print(f"Conversations processed:
 {stats['conversations_processed']}") print(f"Patterns detected: {stats['detected_patterns_count']}")
 print(f"Next evolution check in: {stats['next_evolution_check']} conversations")
+
 ```
 
 ### Configuration Controls

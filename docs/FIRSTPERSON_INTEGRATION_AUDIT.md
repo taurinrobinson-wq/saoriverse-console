@@ -14,6 +14,7 @@ interface (STT/TTS) and multimodal features are built but NOT connected to UI**.
 ```text
 ```
 
+
 app.py (entry point)
   └─> ui_refactored.py (main UI orchestration)
       └─> session_manager.py (initialize_session_state)
@@ -36,6 +37,7 @@ app.py (entry point)
 ```python
 
 
+
 # From session_manager.py
 if "firstperson_orchestrator" not in st.session_state: try: from ..core.firstperson import
 create_orchestrator orchestrator = create_orchestrator(user_id, conversation_id) if orchestrator:
@@ -43,6 +45,7 @@ orchestrator.initialize_session()
 
 ```text
 ```
+
 
 **2. Response Generation** (`response_handler.py:144-160`)
 
@@ -56,8 +59,10 @@ orchestrator.initialize_session()
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch:
 ```text
+
 ```text
 ```
+
 
 **3. Analysis Pipeline** (`response_handler.py:195-220`)
 
@@ -77,6 +82,7 @@ if isinstance(firstperson_response, dict):
         "memory_context_injected": firstperson_response.get("memory_context_injected"),
 
 ```
+
 
 ### What's Working
 

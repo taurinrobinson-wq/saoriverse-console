@@ -58,6 +58,7 @@ multi-line input with send button
 ```text
 ```
 
+
 User Input → ChatInput → StorageService (optimistic) ↓ ApiService.sendMessage() → Backend /api/chat
 ↓ Parse prosody metadata (emotion, glyphs, confidence) ↓ Display MessageBubble with metadata ↓
 Create memory capsule (every 5 messages) ↓ Persist to AsyncStorage
@@ -68,8 +69,10 @@ Create memory capsule (every 5 messages) ↓ Persist to AsyncStorage
 
 ### **Offline Sync**
 ```text
+
 ```text
 ```
+
 
 Network Error → Queue message via SyncService ↓ Show: "📡 Message queued" ↓ Detect reconnection ↓
 performSync() → Retry all queued messages ↓ Clear queue on success
@@ -82,6 +85,7 @@ performSync() → Retry all queued messages ↓ Clear queue on success
 ### **Storage Schema**
 
 ```text
+
 ```
 
 AsyncStorage Keys:
@@ -94,11 +98,14 @@ AsyncStorage Keys:
 ```
 
 
+
 ##
 
 ## Project Structure
+
 ```text
 ```text
+
 ```
 
 firstperson/
@@ -133,6 +140,7 @@ firstperson/
 
 
 
+
 ##
 
 ## Dependencies Added
@@ -152,8 +160,10 @@ firstperson/
   "react-navigation-native": "^6.1.9",
   "react-navigation-stack": "^6.3.20"
 ```text
+
 ```text
 ```
+
 
 **Total**: ~2,400 lines of new code + comprehensive documentation
 
@@ -168,19 +178,23 @@ firstperson/
 cd /workspaces/saoriverse-console/firstperson
 
 ```text
+
 ```
 
 ### Development
 
 ```bash
 
+
 # Start Expo dev server
 npm start
 
 # Scan QR with Expo Go app, or:
 npm run ios      # iOS simulator
+
 ```text
 ```text
+
 ```
 
 ### Configuration
@@ -188,11 +202,13 @@ npm run ios      # iOS simulator
 ```bash
 
 
+
 # Update backend URL in src/config.js or set env:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 
 ```text
 ```
+
 
 ### Testing
 
@@ -209,6 +225,7 @@ curl http://localhost:8000/health
 
 # (Airplane mode → send message → see queue → turn on)
 ```
+
 
 ##
 

@@ -66,6 +66,7 @@ cd /Users/taurinrobinson/saoriverse-console
 python ascii_glyph_demo.py
 ```
 
+
 This shows you exactly how the system works!
 
 ### Step 2: Configure for Your System
@@ -100,6 +101,7 @@ result = integrator.process_conversation_with_evolution(
 saori_reply = result['saori_response'].reply
 new_glyphs = result['new_glyphs_generated']
 ```
+
 
 ## 🎉 WHAT YOU GET
 
@@ -137,6 +139,7 @@ print(f"Conversations processed: {stats['conversations_processed']}")
 print(f"Patterns detected: {stats['detected_patterns_count']}")
 print(f"Next evolution check in: {stats['next_evolution_check']} conversations")
 ```
+
 
 ### Configuration Controls
 

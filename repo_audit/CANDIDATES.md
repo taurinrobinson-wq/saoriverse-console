@@ -89,6 +89,7 @@ du -sh emotional_os/glyphs/glyphs.db || true
 git ls-files -z | xargs -0 du -sh | sort -h | tail -n 30
 ```
 
+
 If you'd like, I can generate a PR/branch that performs the archive moves for a small group (for
 example: `scripts/`, `dev_tools/`, `tools/`) and run tests to confirm nothing breaks. Tell me which
 subset you want archived first or approve me to propose a default set.

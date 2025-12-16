@@ -30,8 +30,10 @@ Tier 1 Foundation is a 7-stage response enhancement pipeline that:
 
 ```python
 ```text
+
 ```text
 ```
+
 
 **Step 2: In ResponseHandler.__init__**
 
@@ -45,12 +47,14 @@ def __init__(self, ...):
         conversation_memory=kwargs.get("conversation_memory")
 
 ```text
+
 ```
 
 **Step 3: In response generation method**
 Find where the base response is generated, then add:
 
 ```python
+
 
 # After generating base_response
 enhanced_response, perf_metrics = self.tier1.process_response( user_input=user_message,
@@ -60,8 +64,10 @@ base_response=base_response,  # or generated_response context={"user_id": user_i
 if perf_metrics.get("total") > 0.1: logger.warning(f"Tier 1 slow: {perf_metrics['total']:.3f}s")
 
 # Return enhanced response instead of base
+
 ```text
 ```text
+
 ```
 
 **Step 4: Optional - Track performance**
@@ -69,11 +75,13 @@ if perf_metrics.get("total") > 0.1: logger.warning(f"Tier 1 slow: {perf_metrics[
 ```python
 
 
+
 # In logging/monitoring section
 self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
 
 ```text
 ```
+
 
 ##
 
@@ -85,8 +93,10 @@ self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
 
 ```python
 ```text
+
 ```text
 ```
+
 
 **Step 2: Initialize in session state**
 Find the session initialization section (usually in `setup_session` or similar):
@@ -105,12 +115,14 @@ def setup_session():
             conversation_memory=conversation_memory
 
 ```text
+
 ```
 
 **Step 3: Optional - Show metrics in UI**
 In the chat display section:
 
 ```python
+
 
 # After showing the response
 if show_debug_metrics: tier1 = st.session_state.tier1_foundation metrics =
@@ -119,8 +131,10 @@ tier1.get_performance_metrics()
 col1, col2, col3 = st.columns(3) with col1: st.metric("Tier 1 Time",
 f"{metrics['total']*1000:.1f}ms") with col2: st.metric("Safety Check",
 f"{metrics['safety_check']*1000:.1f}ms") with col3:
+
 ```text
 ```text
+
 ```
 
 ##
@@ -130,6 +144,7 @@ f"{metrics['safety_check']*1000:.1f}ms") with col3:
 **Run the test suite:**
 
 ```bash
+
 
 
 # Full test suite (should all pass)
@@ -143,6 +158,7 @@ python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_perfo
 
 ```text
 ```
+
 
 **Manual local testing:**
 
@@ -167,8 +183,10 @@ class ResponseHandler:
 -       return base_response
 +       enhanced_response, metrics = self.tier1.process_response(...)
 ```text
+
 ```text
 ```
+
 
 ### ui_refactored.py
 
@@ -180,6 +198,7 @@ def setup_session():
 +   st.session_state.tier1_foundation = Tier1Foundation(...)
 
 ```
+
 
 ##
 

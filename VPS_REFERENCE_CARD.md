@@ -9,6 +9,7 @@ Print this and keep it handy! 📋
 ```text
 ```
 
+
 LOCAL MACHINE ↓ git push GITHUB (main branch) ↓ auto-trigger GITHUB ACTIONS (deploy.yml) ↓ SSH
 execute DIGITALOCEAN VPS (123.45.67.89) ↓ docker compose DOCKER CONTAINERS
     ├─ Next.js (port 3000)
@@ -28,6 +29,7 @@ execute DIGITALOCEAN VPS (123.45.67.89) ↓ docker compose DOCKER CONTAINERS
 ```bash
 
 
+
 # SSH Key Generation
 ssh-keygen -t ed25519 -f ~/.ssh/velinor
 
@@ -44,6 +46,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/velinor
 ```text
 ```
 
+
 ### DNS Setup (Namecheap)
 
 ```
@@ -51,8 +54,10 @@ A Record:
   Host: velinor
   Value: [YOUR_DROPLET_IP]
 ```text
+
 ```text
 ```
+
 
 ### VPS Setup (One-liner)
 
@@ -73,11 +78,13 @@ ssh root@[DROPLET_IP]
 # - Issue SSL certificate
 
 ```text
+
 ```
 
 ### Test Deployment
 
 ```bash
+
 
 # From local machine
 curl https://velinor.firstperson.chat
@@ -93,6 +100,7 @@ https://velinor.firstperson.chat
 
 ```text
 ```text
+
 ```
 
 ##
@@ -117,6 +125,7 @@ https://velinor.firstperson.chat
 ## 🔑 SSH Commands Cheat Sheet
 
 ```bash
+
 
 
 # SSH into VPS
@@ -144,6 +153,7 @@ docker compose -f docker-compose.prod.yml ps
 
 ```text
 ```
+
 
 ##
 
@@ -174,8 +184,10 @@ Your VPS (/opt/velinor):
 ├── velinor-web/               ← Frontend code
 ├── requirements-game.txt      ← Python dependencies
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -186,30 +198,38 @@ Your VPS (/opt/velinor):
 ```bash
 
 ```text
+
 ```
 
 ### Docker network issue? Reset
 
 ```bash
+
 docker compose -f docker-compose.prod.yml down
+
 ```text
 ```text
+
 ```
 
 ### Nginx won't start? Check config
 
 ```bash
 
+
 ```text
 ```
+
 
 ### SSL cert expired? Renew now
 
 ```bash
 certbot renew --force-renewal
 ```text
+
 ```text
 ```
+
 
 ### Check if DNS is working
 
@@ -218,15 +238,18 @@ certbot renew --force-renewal
 nslookup velinor.firstperson.chat
 
 ```text
+
 ```
 
 ### Check SSL certificate
 
 ```bash
+
 curl -I https://velinor.firstperson.chat
 
 ```text
 ```text
+
 ```
 
 ##
@@ -242,10 +265,12 @@ curl -I https://velinor.firstperson.chat
 
 ```bash
 
+
 docker compose -f docker-compose.prod.yml ps
 
 ```text
 ```
+
 
 **Monthly**:
 
@@ -256,8 +281,10 @@ apt-get update && apt-get upgrade -y
 
 # Test deploy script
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -279,11 +306,13 @@ git push origin main
 # VPS automatically updates within 5-10 minutes
 
 ```sql
+
 ```
 
 ### Scenario 2: Update configuration
 
 ```bash
+
 
 # Edit docker-compose.prod.yml or nginx.prod.conf locally
 git add docker-compose.prod.yml nginx.prod.conf git commit -m "chore: update config" git push origin
@@ -291,11 +320,13 @@ main
 
 ```text
 ```text
+
 ```
 
 ### Scenario 3: Manual emergency fix
 
 ```bash
+
 
 
 # SSH to VPS
@@ -310,6 +341,7 @@ docker compose -f docker-compose.prod.yml down
 ```text
 ```
 
+
 ##
 
 ## 💡 Pro Tips
@@ -322,8 +354,10 @@ docker compose -f docker-compose.prod.yml down
 
 # It's what gives GitHub permission to deploy
 ```text
+
 ```text
 ```
+
 
 ✨ **Tip 2**: Set up DigitalOcean Cloud Firewall
 
@@ -335,6 +369,7 @@ Inbound Rules (Allow):
   - HTTPS (443) from Everywhere
 
 ```text
+
 ```
 
 ✨ **Tip 3**: Monitor with DigitalOcean Dashboard
@@ -348,8 +383,10 @@ Inbound Rules (Allow):
 
 ```bash
 
+
 # On VPS, regularly verify deploy.sh exists and works
 /opt/velinor/deploy.sh --dry-run  # Test without deploying
+
 ```
 
 ##

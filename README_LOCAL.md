@@ -24,8 +24,10 @@ docker compose -f docker-compose.dev.yml up --build
 # to stop:
 ctrl+c
 ```text
+
 ```text
 ```
+
 
 Notes:
 
@@ -54,6 +56,7 @@ docker compose up --build
 ctrl+c
 
 ```text
+
 ```
 
 Tips to speed up cycles
@@ -65,6 +68,7 @@ Tips to speed up cycles
 
 ```powershell
 
+
 # list containers
 docker ps
 
@@ -73,6 +77,7 @@ docker logs -f saoriverse-console-local
 
 # or for dev containers
 docker logs -f <container_name>
+
 ```
 
 If you want, I can also add a small `Makefile` or PowerShell script to wrap these commands.

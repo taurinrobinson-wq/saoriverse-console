@@ -141,8 +141,10 @@ crisis_keywords = ["suicidal", "suicide", "kill myself", ...]
 is_crisis = any(keyword in lower_input for keyword in crisis_keywords)
 if is_crisis:
 ```text
+
 ```text
 ```
+
 
 **After:**
 
@@ -171,6 +173,7 @@ if suicidality_protocol.should_use_protocol(lower_input):
         ...
 
 ```text
+
 ```
 
 **Impact:** Suicidal disclosures now route to the state machine instead of generic template
@@ -187,9 +190,12 @@ if suicidality_protocol.should_use_protocol(lower_input):
 ### ✅ Dignified Response
 
 ```
+
 Input: "I have thoughts of suicide" Output: "You named thoughts of suicide. That is heavy.
+
 ```text
 ```text
+
 ```
 
 Not: "Get help immediately" or "Here's a hotline"
@@ -227,6 +233,7 @@ System blocks all of these:
 ## Test Results
 
 ```
+
 
 SUICIDALITY PROTOCOL TEST SUITE ═══════════════════════════════════
 

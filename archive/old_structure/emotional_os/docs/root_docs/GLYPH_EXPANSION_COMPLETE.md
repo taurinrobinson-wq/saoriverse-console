@@ -84,6 +84,7 @@ The full glyph factorial expansion pipeline has been successfully executed from 
 }
 ```
 
+
 ##
 
 ## 📝 Example New Glyph
@@ -107,6 +108,7 @@ The full glyph factorial expansion pipeline has been successfully executed from 
 }
 ```
 
+
 ##
 
 ## 🔬 Technical Details
@@ -127,6 +129,7 @@ Sync to JSON
 Result: 8,560 total glyphs
 ```
 
+
 ### Scoring Formula
 
 ```
@@ -136,6 +139,7 @@ Novelty:   0-0.6 based on description uniqueness
 Coherence: 0-1 based on parent voltage pair blend
 Coverage:  0-1 based on gate frequency (fills gaps)
 ```
+
 
 ### Parent Tracking
 

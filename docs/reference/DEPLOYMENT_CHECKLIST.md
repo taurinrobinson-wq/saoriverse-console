@@ -130,6 +130,7 @@ python3 test_privacy_masking.py   # Unit tests (16 checks)
 python3 test_e2e_simple.py        # Integration tests (3 exchanges)
 ```
 
+
 ### Key Changes
 
 - **REMOVED**: Raw `user_input` from logging

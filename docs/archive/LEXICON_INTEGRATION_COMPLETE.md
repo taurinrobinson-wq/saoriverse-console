@@ -15,6 +15,7 @@ emotional_keywords = ["burn", "overwhelm", "anxious", ...]
 has_emotional = any(keyword in lower_input for keyword in emotional_keywords)
 ```
 
+
 **AFTER:** Uses word-centric lexicon as PRIMARY method, with fallback
 
 ```python
@@ -31,6 +32,7 @@ except Exception as e:
 
 # Fallback: Original hardcoded keywords (still available)
 ```
+
 
 **Benefits:**
 
@@ -63,6 +65,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
                 })
 ```
 
+
 **Fallback Chain:**
 
 1. Word-centric lexicon analysis (fastest, most accurate)
@@ -79,6 +82,7 @@ def parse_signals(input_text: str, signal_map: Dict[str, Dict]) -> List[Dict]:
 from emotional_os.lexicon.lexicon_loader import get_lexicon, WordCentricLexicon
 ```
 
+
 **Added module variables:**
 
 ```python
@@ -92,6 +96,7 @@ def get_word_centric_lexicon() -> WordCentricLexicon:
         _word_centric_lexicon = get_lexicon()
     return _word_centric_lexicon
 ```
+
 
 ## Lexicon Data Structure
 
@@ -178,6 +183,7 @@ intimacy_words = lexicon.words_for_signal('intimacy')
 gate_7_11_words = lexicon.words_for_gates([7, 11])
 ```
 
+
 ### In signal_parser.py
 
 ```python
@@ -196,6 +202,7 @@ signals = parse_signals("I hold this moment sacred", signal_map)
 
 # ]
 ```
+
 
 ## Performance Characteristics
 
@@ -233,6 +240,7 @@ except Exception as e:
     _last_lexicon_analysis = None
     # Falls back to hardcoded keywords
 ```
+
 
 ## Files Modified
 
@@ -320,6 +328,7 @@ Emotional intensity: 1.00
 
 ✓ Integration test complete!
 ```
+
 
 ## Questions for Next Session
 

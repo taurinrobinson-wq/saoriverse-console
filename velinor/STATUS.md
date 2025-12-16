@@ -82,6 +82,7 @@ Velinor is a text-based narrative game with innovative mechanics:
 ```text
 ```
 
+
 PLAYER INPUT (Text or Choice) ↓ VelinorTwineOrchestrator (Game Loop)
         ├─ FirstPerson Intent Summary
         ├─ Twine Story Processing
@@ -159,8 +160,10 @@ PLAYER INPUT (Text or Choice) ↓ VelinorTwineOrchestrator (Game Loop)
 
 ## File Structure
 ```text
+
 ```text
 ```
+
 
 velinor/
 ├── engine/
@@ -204,6 +207,7 @@ velinor/
 ### Initialize Game
 
 ```python
+
 from velinor.engine import VelinorTwineOrchestrator, VelinorEngine
 
 engine = VelinorEngine(player_name="Traveler") orchestrator = VelinorTwineOrchestrator(
@@ -211,11 +215,13 @@ game_engine=engine, story_path="velinor/stories/sample_story.json" )
 
 ```text
 ```text
+
 ```
 
 ### Process Input
 
 ```python
+
 
 
 # Choice-based
@@ -228,12 +234,14 @@ player_id="player_1"
 ```text
 ```
 
+
 ### Save/Load
 
 ```python
 orchestrator.save_game("saves/game_001.json")
 orchestrator.load_game("saves/game_001.json")
 ```
+
 
 ##
 

@@ -66,6 +66,7 @@ Four complementary documentation files:
 ```text
 ```
 
+
 User Turn 1: "I'm stressed" System: "What's causing that stress?"
 
 User Turn 2: "Too much on my mind at work" System: "That sounds overwhelming. What's the main
@@ -83,8 +84,10 @@ root cause
 
 ### After Memory Layer
 ```text
+
 ```text
 ```
+
 
 User Turn 1: "I'm stressed" System: "I hear you're feeling stress today." Memory: Confidence 0.7,
 knows emotion, needs cause
@@ -111,6 +114,7 @@ Benefit: Progressive understanding, targeted questions, clear demonstration of c
 ### Turn 1: Emotional State Revealed
 
 ```text
+
 ```
 
 User says: "I'm feeling so stressed today"
@@ -135,9 +139,12 @@ Response: "I hear you're feeling stress today."
 
 
 
+
 ### Turn 2: Root Cause & Mechanism Revealed
+
 ```text
 ```text
+
 ```
 
 User says: "I have so much on my mind at work that I can't take a step forward"
@@ -169,10 +176,12 @@ Response: "I hear you - work has flooded your mind with so many competing
 
 
 
+
 ### Turn 3: Specificity & Context Revealed
 
 ```text
 ```
+
 
 User says: "5 projects due this week - client presentation Thursday, haven't even started the deck"
 
@@ -283,12 +292,14 @@ potentially wait?"
 ```python
 
 
+
 # Per user message:
 1. Parse semantically → SemanticParsing object 2. Add to memory → memory.add_turn(input, parsed,
 glyphs, needs) 3. Memory integrates → updates integrated_state, causal_understanding
 
 ```text
 ```
+
 
 ### Semantic Parsing Captures
 
@@ -305,8 +316,10 @@ SemanticParsing(
     action_capacity="can/cannot act?",
     raw_input="full message",
 ```text
+
 ```text
 ```
+
 
 ### Memory State Structure
 
@@ -334,6 +347,7 @@ ConversationMemory:
 └─ glyph_evolution: [[Still Insight], [+ Quiet Revelation, Fragmentation], ...]
 
 ```
+
 
 ##
 

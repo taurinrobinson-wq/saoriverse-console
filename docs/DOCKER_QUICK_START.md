@@ -9,8 +9,10 @@
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -34,6 +36,7 @@ chmod +x docker-setup.sh
 docker compose ps
 
 ```text
+
 ```
 
 ##
@@ -52,6 +55,7 @@ docker compose ps
 ## Most Common Commands
 
 ```bash
+
 
 # View all containers
 docker compose ps
@@ -78,8 +82,10 @@ git pull && docker compose up -d --build
 docker compose exec backend bash
 
 # Check disk usage
+
 ```text
 ```text
+
 ```
 
 ##
@@ -87,6 +93,7 @@ docker compose exec backend bash
 ## What Got Deployed
 
 ```
+
 
 saoriverse-console/
 ├── Dockerfile              ← Backend (Python/FastAPI)
@@ -107,6 +114,7 @@ saoriverse-console/
 ```text
 ```
 
+
 ##
 
 ## If Something Goes Wrong
@@ -120,8 +128,10 @@ docker compose logs
 docker compose down
 docker compose build --no-cache
 ```text
+
 ```text
 ```
+
 
 ### Port already in use
 
@@ -133,11 +143,13 @@ sudo lsof -i :8000
 sudo kill -9 <PID>
 
 ```sql
+
 ```
 
 ### Can't connect to backend from frontend
 
 ```bash
+
 
 # Check if backend is healthy
 docker compose ps
@@ -145,13 +157,16 @@ docker compose ps
 # Status column should say "healthy"
 
 # Test from inside frontend container
+
 ```text
 ```text
+
 ```
 
 ### Disk full
 
 ```bash
+
 
 docker system df docker system prune -a
 

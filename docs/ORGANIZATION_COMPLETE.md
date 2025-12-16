@@ -33,8 +33,10 @@ From the root directory:
 
 # Install dependencies
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -76,6 +78,7 @@ saoriverse-console/
 ├── tests/                       # Unit tests
 
 ```text
+
 ```
 
 ##
@@ -85,18 +88,22 @@ saoriverse-console/
 ### Before
 
 ```
+
 git log --oneline | head -20
 
 Commit 1: Implementation phase 1 Commit 2: ANALYSIS_COMPLETE.md (auto-generated) Commit 3:
 PHASE_1_SUMMARY.md (auto-generated) Commit 4: BUG_FIX_REPORT.md (auto-generated) Commit 5: Fix
 actual issue
+
 ```text
 ```text
+
 ```
 
 ### After
 
 ```
+
 
 git log --oneline | head -20
 
@@ -105,6 +112,7 @@ collection UI Commit 4: Chore: Organize project structure
 
 ```text
 ```
+
 
 ##
 
@@ -191,6 +199,7 @@ ls docs/PROJECT_STRUCTURE.md
 
 # Should exist ✅
 ```
+
 
 ##
 

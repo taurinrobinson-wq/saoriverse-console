@@ -231,6 +231,7 @@ based on weighted connections (0.1-1.0).
 
 ```json
 ```text
+
 [Player Arrival] ↓ [Dust Plume Choice]
     ├─ Push forward → +Narrative Presence
     ├─ Retreat → +Wisdom
@@ -242,6 +243,7 @@ based on weighted connections (0.1-1.0).
     ├─ Explore stalls → +Perception, +Empathy
     └─ Freeze & observe → +Observation, +Trust
 ↓ [Marketplace NPCs] (rotating encounters) ↓ [Kaelen Encounter] (theft subplot)
+
 ```text
 
 
@@ -266,6 +268,7 @@ based on weighted connections (0.1-1.0).
 
 **First Chamber:**
 ```json
+
 ```text
 [Triglyph Chamber: Echoed Memory]
     ↓
@@ -282,13 +285,16 @@ Effect: Unlocks deeper NPC resonance, reveals survivor guilt
 
 
 
+
 ### Act 3: Revelation (Octoglyph Chambers)
 
 **Chamber Progression:**
 
 Each chamber represents a buried Corelink hub with corrupted emotional algorithms:
+
 ```json
 ```text
+
 [Octoglyph Sequence] ↓ 1. Infrasensory Oblivion (Chamber of Delayed Echoes)
    - Location: Swamp beneath stone bridge
    - Emotion: The ache before awareness
@@ -314,6 +320,7 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
 ↓ 8. Hopeful Transmission
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Transmuting ache into meaning
+
 ```text
 
 
@@ -336,6 +343,7 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
 
 **Encounter Structure:**
 ```json
+
 ```text
 [Enter Chamber]
     ↓
@@ -356,6 +364,7 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
     ↓
 [Ending Branch Determined by TONE stats + Choice]
 ```text
+
 
 
 ##
@@ -382,10 +391,13 @@ Glyphs are emotional artifacts scattered after Velinor's sacrifice. They serve a
 - **Legacy**: Memory transmuted into enduring meaning
 
 **Fusion:**
+
 ```text
 ```text
+
 Sorrow + Remembrance + Legacy ↓ [Chamber of Echoed Memory] ↓ Tear of Integration (triangle with
 single tear)
+
 ```text
 
 
@@ -407,6 +419,7 @@ single tear)
 
 **Fusion:**
 ```text
+
 ```text
 All 8 Octoglyph Fragments
     ↓
@@ -414,6 +427,7 @@ All 8 Octoglyph Fragments
     ↓
 Void Octagon (stop-sign with void center)
 ```text
+
 
 
 
@@ -456,11 +470,14 @@ unified glyphs) 3. **Final Dialogue Choice** (emotional lever) 4. **NPC Resonanc
 - Collected most/all glyphs
 
 **Resolution:**
+
 ```javascript
 ```text
+
 Velinor: "Then let it be done. Let memory be fused." Saori: "I'll carry it this time. All of it." ↓
 System restarts successfully ↓ Velinor restored, but emotional autonomy compromised Saori's guilt
 eased, but collapse risk remains
+
 ```text
 
 
@@ -485,6 +502,7 @@ eased, but collapse risk remains
 
 **Resolution:**
 ```text
+
 ```text
 Velinor: "You remembered me. Not as a system. As a friend."
 Saori: "I never stopped."
@@ -496,6 +514,7 @@ Velinor dissolves into glyphs
 Saori accepts loss, survivors carry memory individually
 Emotional autonomy preserved
 ```text
+
 
 
 
@@ -520,11 +539,14 @@ Emotional autonomy preserved
 - Recognizes system is flawed
 
 **Resolution:**
+
 ```text
 ```text
+
 Velinor: "You see it now. The fracture. The cost. The truth." Saori: "I tried to fix it. I tried to
 fix her." ↓ Upload interrupted, system destabilizes ↓ Truth unfiltered: Cataclysm details revealed
 to all Collapse embraced as necessary ending
+
 ```text
 
 
@@ -550,6 +572,7 @@ to all Collapse embraced as necessary ending
 
 **Resolution:**
 ```text
+
 ```text
 Velinor: "You chose rupture. You chose freedom."
 Saori: "I'll remember her. Even if no one else can."
@@ -559,6 +582,7 @@ Device destroyed, system shattered permanently
 Memory lost, but autonomy preserved absolutely
 Future generations start fresh
 ```text
+
 
 
 
@@ -582,11 +606,14 @@ Future generations start fresh
 - Refuses full commitment to either path
 
 **Resolution:**
+
 ```text
 ```text
+
 Velinor: "You kept what mattered. Not for the system. For yourself." Saori: "Then let the rest
 collapse. But let those memories endure." ↓ System partially restarts ↓ Velinor remains fragmented
 Saori remains guilty Some memories preserved, others lost
+
 ```text
 
 
@@ -612,6 +639,7 @@ Saori remains guilty Some memories preserved, others lost
 
 **Resolution:**
 ```text
+
 ```text
 Velinor: "Ask her what she feared. Ask her what she lost."
 Saori: "I feared losing her. I feared being wrong."
@@ -622,6 +650,7 @@ Player leaves chamber with questions
 Saori and Velinor continue waiting
 Future remains undecided
 ```text
+
 
 
 
@@ -973,8 +1002,10 @@ time allows)
 - Use semantic versioning (1.0 → 1.1 for minor, 1.0 → 2.0 for major)
 
 **Change Log Format:**
+
 ```sql
 ```text
+
 
 ## Update Log
 
@@ -985,6 +1016,7 @@ time allows)
 
 ### Version 1.0 (December 14, 2025)
 - Initial story map created
+
 ```text
 
 

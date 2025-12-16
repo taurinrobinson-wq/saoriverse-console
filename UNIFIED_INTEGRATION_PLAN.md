@@ -93,8 +93,10 @@ def handle_response_pipeline(user_input, session):
     })
 
 ```text
+
 ```text
 ```
+
 
 **Performance Impact:** +2-3ms (negligible)
 
@@ -128,6 +130,7 @@ learner.learn_from_exchange(
     user_id=session.user_id
 
 ```text
+
 ```
 
 **Performance Impact:** +1-2ms (async optional)
@@ -149,6 +152,7 @@ learner.learn_from_exchange(
 
 ```python
 
+
 # In handle_response_pipeline, before returning response:
 
 from src.emotional_os_safety.sanctuary import is_sensitive_input, ensure_sanctuary_response from
@@ -166,6 +170,7 @@ response = ensure_sanctuary_response( input_text=user_input, base_response=respo
 
 ```text
 ```text
+
 ```
 
 **Performance Impact:** +3-5ms (trauma lexicon lookup)
@@ -177,6 +182,7 @@ response = ensure_sanctuary_response( input_text=user_input, base_response=respo
 **Step 1: Update response_handler.py** (15 min)
 
 ```python
+
 
 
 # File: src/emotional_os/deploy/modules/ui_components/response_handler.py
@@ -226,6 +232,7 @@ session.memory.add_turn(response, { "role": "assistant", "timestamp": datetime.n
 ```sql
 ```
 
+
 **Step 2: Update ui_refactored.py** (10 min)
 
 ```python
@@ -243,8 +250,10 @@ class SessionState:
         self.conversation = []
         self.session_id = str(uuid.uuid4())
 ```text
+
 ```text
 ```
+
 
 **Step 3: Create test file** (15 min)
 
@@ -317,11 +326,13 @@ def test_response_time():
     assert elapsed < 100, f"Response took {elapsed}ms (should be < 100ms)"
 
 ```text
+
 ```
 
 **Step 4: Test & Verify** (10 min)
 
 ```bash
+
 
 # Run tests
 python -m pytest test_tier1_foundation.py -v
@@ -339,6 +350,7 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 
 ```text
 ```text
+
 ```
 
 **Step 5: Deploy Tier 1** (5 min)
@@ -377,6 +389,7 @@ streamlit run src/emotional_os/deploy/modules/ui_refactored.py
 ```python
 
 
+
 # In response_handler.py:
 
 from src.emotional_os.core.presence_integration import PresenceIntegration
@@ -394,6 +407,7 @@ pacing=pacing_score )
 
 ```text
 ```
+
 
 **Performance Impact:** +2-3ms (profile-based, not model call)
 
@@ -435,8 +449,10 @@ def handle_response_pipeline(user_input, context, session):
     )
 
 ```text
+
 ```text
 ```
+
 
 **Performance Impact:** +1-2ms (heuristic-based, no ML)
 
@@ -490,6 +506,7 @@ def handle_response_pipeline(user_input, context, session):
     session.embodied.update_state()
 
 ```text
+
 ```
 
 **Performance Impact:** +1ms (state machine, not model)
@@ -501,6 +518,7 @@ def handle_response_pipeline(user_input, context, session):
 **Step 1: Create PresenceIntegration** (30 min)
 
 ```python
+
 
 # File: src/emotional_os/core/presence_integration.py
 
@@ -528,13 +546,16 @@ detected pacing""" if pacing == "fast":
 sentences = response.split(". ") return ". ".join(sentences[:2]) + "." elif pacing == "slow":
             # Lengthen, add pauses and reflection
 return response.replace(". ", ". ... ") else:
+
 ```text
 ```text
+
 ```
 
 **Step 2: Create EmotionalReciprocity** (30 min)
 
 ```python
+
 
 
 # File: src/emotional_os/core/emotional_reciprocity.py
@@ -545,6 +566,7 @@ class EmotionalReciprocity: """Generate emotionally complementary responses"""
 
     # Map from user emotion to system response approach
 RECIPROCITY_MAP = { "overwhelm": "grounding",  # Calm, steady, anchoring "joy": "expansion",
+
 # Encourage, elaborate, celebrate "grief": "presence",        # Stay with, hold space, witness
 "confusion": "clarifying",  # Offer structure, name patterns "anger": "channeling",      # Validate,
 explore meaning "vulnerability": "safety",  # Gentle, protective, affirming }
@@ -571,6 +593,7 @@ def _vary_approach(self, approach: str) -> str: """Vary approach to avoid repeti
 
 ```text
 ```
+
 
 **Step 3: Create EmbodiedSimulation** (30 min)
 
@@ -614,8 +637,10 @@ class EmbodiedSimulation:
     def reset(self):
         """Reset cycle (new conversation)"""
 ```sql
+
 ```sql
 ```
+
 
 **Step 4: Update response_handler.py with Tier 2** (20 min)
 
@@ -661,11 +686,13 @@ def handle_response_pipeline(user_input, context, session):
     session.embodied.update_state()
 
 ```text
+
 ```
 
 **Step 5: Create test file** (20 min)
 
 ```python
+
 
 # File: test_tier2_aliveness.py
 
@@ -701,8 +728,10 @@ assert "fresh" in states assert "mid" in states
 def test_tier2_response_time(): """Full pipeline with Tier 2 still under 100ms""" import time
 
     # [Similar to Tier 1 test, verify time]
+
 ```text
 ```text
+
 ```
 
 **Step 6: Deploy Tier 2** (Incremental)
@@ -785,6 +814,7 @@ After all Tiers 1-3 stable and tested
 ```python
 
 
+
 # ✅ DO: Use local systems
 - NRC (emotion lexicon)
 - Spacy (NLP, entity recognition)
@@ -797,6 +827,7 @@ After all Tiers 1-3 stable and tested
 
 ```text
 ```
+
 
 ### Decision 2: Heuristic-Based, Not ML-Based
 
@@ -812,8 +843,10 @@ After all Tiers 1-3 stable and tested
 - Large language models
 - Complex neural networks
 ```text
+
 ```text
 ```
+
 
 ### Decision 3: Pre-computation & Caching
 
@@ -830,11 +863,13 @@ After all Tiers 1-3 stable and tested
 - Recompile patterns
 
 ```text
+
 ```
 
 ### Decision 4: Simple > Complex
 
 ```python
+
 
 # ✅ DO: Simple approaches
 - Detect pacing from punctuation
@@ -844,8 +879,10 @@ After all Tiers 1-3 stable and tested
 # ❌ DON'T: Complex approaches
 - Sentiment analysis on every word
 - Complex ML models
+
 ```text
 ```text
+
 ```
 
 ##
@@ -858,12 +895,14 @@ After all Tiers 1-3 stable and tested
 
 ```python
 
+
 metrics = { "total_time_ms": 0, "breakdown": { "memory_add": 0, "signal_detection": 0,
 "safety_check": 0, "response_generation": 0, "learning": 0, "sanctuary_wrap": 0, "memory_update": 0,
 }
 
 ```text
 ```
+
 
 **Per-Session:**
 
@@ -875,8 +914,10 @@ session_metrics = {
     "turns_completed": 0,
     "error_count": 0,
 ```text
+
 ```text
 ```
+
 
 ### Instrumentation Code
 
@@ -927,6 +968,7 @@ def handle_response_pipeline(user_input, context, session):
         logger.warning(f"Response time {total_elapsed}ms > 100ms target")
 
 ```text
+
 ```
 
 ##
@@ -936,20 +978,24 @@ def handle_response_pipeline(user_input, context, session):
 ### Tier 1 Tests (Week 1)
 
 ```bash
+
 pytest test_tier1_foundation.py -v
 
 ```text
 ```text
+
 ```
 
 ### Tier 2 Tests (Week 2)
 
 ```bash
 
+
 pytest test_tier2_aliveness.py -v
 
 ```text
 ```
+
 
 ### Tier 3 Tests (Week 3-4)
 
@@ -957,8 +1003,10 @@ pytest test_tier2_aliveness.py -v
 pytest test_tier3_depth.py -v
 
 ```text
+
 ```text
 ```
+
 
 ### Integration Test (All Tiers)
 
@@ -967,14 +1015,17 @@ pytest test_tier3_depth.py -v
 pytest test_integration_full_pipeline.py -v
 
 ```text
+
 ```
 
 ### Performance Test (Each Tier)
 
 ```bash
+
 pytest test_performance.py -v
 
 # Verify: All responses < 100ms
+
 ```
 
 ##

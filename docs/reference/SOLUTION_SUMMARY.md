@@ -23,6 +23,7 @@ Response generation was **glyph-driven** (template-based) rather than **message-
 ```text
 ```
 
+
 OLD: Find Glyph → Fill Template NEW: Extract Message Features → Compose Response Dynamically
 
 ```

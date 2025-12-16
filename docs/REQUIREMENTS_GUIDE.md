@@ -16,8 +16,10 @@
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### Switching Python Versions
 
@@ -35,19 +37,23 @@ py --list-paths
 py -3.12 -m pip install -r requirements.txt
 
 ```text
+
 ```
 
 **Or use pyenv/conda:**
 
 ```bash
 
+
 # With pyenv
 pyenv install 3.12.0 pyenv local 3.12.0
 
 # With conda
 conda create -n firstperson python=3.12 conda activate firstperson
+
 ```text
 ```text
+
 ```
 
 ## Single Requirements File
@@ -59,6 +65,7 @@ All dependencies are now consolidated in **`requirements.txt`** at the root of t
 ```bash
 
 
+
 # Install all dependencies
 pip install -r requirements.txt
 
@@ -68,6 +75,7 @@ pip install pip-tools pip-compile requirements.txt
 ```text
 ```
 
+
 ### Post-Installation Setup
 
 Some packages require additional setup:
@@ -76,14 +84,17 @@ Some packages require additional setup:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 #### TextBlob Corpora
 
 ```bash
 
 ```text
+
 ```
 
 #### Faster-Whisper Models
@@ -101,9 +112,12 @@ Models are downloaded automatically on first use (~200MB for English).
 If you have CUDA installed, uncomment these lines in `requirements.txt`:
 
 ```
+
 torch>=2.0.0
+
 ```text
 ```text
+
 ```
 
 #### Advanced Audio Processing
@@ -112,8 +126,10 @@ For noise suppression, uncomment:
 
 ```
 
+
 ```text
 ```
+
 
 ## Legacy Config Files
 

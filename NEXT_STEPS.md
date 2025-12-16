@@ -47,8 +47,10 @@ logger.info(f"DEBUG: Glyph names: {[g.get('glyph_name') for g in glyphs]}")
 # After response composition:
 logger.info(f"DEBUG: Response source: {response_source}")
 ```sql
+
 ```sql
 ```
+
 
 **Question to answer:** Where does the response go from "36 glyphs fetched" to "generic template"?
 
@@ -69,6 +71,7 @@ Add logging:
 poetic_result = engine.process_glyph_response(...)
 
 ```text
+
 ```
 
 ### 3. VERIFY: Response Composition
@@ -84,12 +87,15 @@ Once you see where the pipe breaks, reconnect it. Likely needs:
 
 ```python
 
+
 # If glyphs exist and composition available:
 if glyphs and response_composer: contextual_response =
 response_composer.compose_multi_glyph_response( glyphs=glyphs, signals=signals,
 input_text=input_text
+
 ```text
 ```text
+
 ```
 
 ##
@@ -104,11 +110,13 @@ Add to `emotional_keywords` list:
 
 ```python
 
+
 "beautiful", "lovely", "wonderful", "joy", "delight", "daughter", "family", "together", "close",
 "connection",
 
 ```text
 ```
+
 
 Test: Scenario 5 should no longer return greeting.
 
@@ -127,8 +135,10 @@ if any(kw in lower_input for kw in affirmation_keywords):
     # Log affirmed flow
     from emotional_os.feedback.reward_model import RewardModel
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -142,6 +152,7 @@ cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 python tests/test_comprehensive_integration.py
 
 ```
+
 
 This runs 6 real-life scenarios and scores your system 0-1.0 on:
 

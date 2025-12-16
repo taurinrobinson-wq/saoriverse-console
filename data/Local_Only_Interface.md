@@ -22,11 +22,13 @@ One‑time setup:
 
 
 
+
 python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')" python -m spacy download
 en_core_web_md
 
 ```text
 ```
+
 
 ##
 
@@ -84,8 +86,10 @@ if __name__ == "__main__":
     os.makedirs("data", exist_ok=True)
     json.dump(result, open("data/synonyms_local.json","w",encoding="utf-8"), indent=2)
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -144,6 +148,7 @@ if __name__ == "__main__":
     filter_synonyms()
 
 ```text
+
 ```
 
 ##
@@ -151,6 +156,7 @@ if __name__ == "__main__":
 ### `scripts/score_synonyms.py`
 
 ```python
+
 
 
 import json import spacy
@@ -176,8 +182,10 @@ json.dump(scored, open(output_path, "w", encoding="utf-8"), indent=2) print(f"Sc
 written to {output_path}")
 
 if __name__ == "__main__": score_synonyms()
+
 ```text
 ```text
+
 ```
 
 ##
@@ -185,6 +193,7 @@ if __name__ == "__main__": score_synonyms()
 ### `scripts/synonym_db.py`
 
 ```python
+
 
 
 
@@ -213,6 +222,7 @@ if __name__ == "__main__": init_db() load_from_json() print(query_synonyms("joy"
 
 ```text
 ```
+
 
 ##
 
@@ -248,8 +258,10 @@ def run_enrichment():
 if __name__ == "__main__":
     run_enrichment()
 ```text
+
 ```text
 ```
+
 
 ##
 

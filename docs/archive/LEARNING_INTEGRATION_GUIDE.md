@@ -21,6 +21,7 @@ from emotional_os.learning import (
 )
 ```
 
+
 ## Step 2: Create a Wrapper Function
 
 Add this function to `signal_parser.py`:
@@ -64,6 +65,7 @@ def _compose_response_with_learning(
     return None, None
 ```
 
+
 ## Step 3: Update Response Building Logic
 
 In the `_respond_to_emotional_input` function, modify where responses are generated:
@@ -96,6 +98,7 @@ else:
     response_source = "glyph_composer"
 ```
 
+
 ## Step 4: Add Learning Logging
 
 After a response is generated, log it for automatic learning:
@@ -114,6 +117,7 @@ def _log_response_for_learning(
     # TODO: Store turn history and call learn_from_conversation()
     # when conversation ends or after N turns
 ```
+
 
 ## Step 5: Store Conversation History for Learning
 
@@ -138,6 +142,7 @@ if learned:
     print(f"System learned new archetype: {learned}")
 ```
 
+
 ## Step 6: Expose Archetype Information (Optional)
 
 Make the learning visible to users in the UI:
@@ -161,6 +166,7 @@ def get_response_metadata(archetype_name: Optional[str] = None) -> Dict[str, Any
         "archetype": None,
     }
 ```
+
 
 ## Integration Points
 
@@ -198,6 +204,7 @@ print(f'Response: {result.get(\"voltage_response\")}')
 print(f'Source: {result.get(\"response_source\")}')
 "
 ```
+
 
 ## Expected Behavior After Integration
 

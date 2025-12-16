@@ -20,6 +20,7 @@ provided**
 ```text
 ```
 
+
 User Request → Immediate Response (<100ms) → Async Background Processing
 
 ```
@@ -31,8 +32,10 @@ User Request → Immediate Response (<100ms) → Async Background Processing
 
 ### 2. **3-Tier Response Pipeline** (~85-90ms)
 ```text
+
 ```text
 ```
+
 
 Input → Tier1 Foundation (~40ms) → Tier2 Aliveness (~20ms) → Tier3 Poetic (~30ms) → Response ✓
 
@@ -99,17 +102,22 @@ Key modules:
 ### 1. Install
 
 ```bash
+
 pip install -r requirements.txt python -m spacy download en_core_web_sm
+
 ```text
 ```text
+
 ```
 
 ### 2. Validate Installation
 
 ```bash
 
+
 ```text
 ```
+
 
 ### 3. Run Backend
 
@@ -117,8 +125,10 @@ pip install -r requirements.txt python -m spacy download en_core_web_sm
 python firstperson_backend.py
 
 ```text
+
 ```text
 ```
+
 
 ### 4. Test It
 
@@ -127,11 +137,13 @@ python firstperson_backend.py
 python diagnose_backend.py
 
 ```text
+
 ```
 
 ### 5. Test Chat Directly
 
 ```bash
+
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
   -d '{
@@ -140,6 +152,7 @@ curl -X POST http://localhost:8000/chat \
 
 ```text
 ```text
+
 ```
 
 ##
@@ -209,6 +222,7 @@ curl -X POST http://localhost:8000/chat \
 ```python
 
 
+
 # BEFORE (blocking, caused hang)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...) return ChatResponse(...)
 
@@ -217,6 +231,7 @@ return ChatResponse(...)
 
 ```text
 ```
+
 
 **Result:** 85-90ms response time instead of 5-30s!
 
@@ -371,6 +386,7 @@ curl -X POST http://localhost:8000/chat \
     "context": {"conversation_id": "test", "is_first_message": true, "messages": []}
   }'
 ```
+
 
 **That's it. The system is ready.** 🚀
 

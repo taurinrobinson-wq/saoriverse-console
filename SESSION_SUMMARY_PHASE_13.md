@@ -80,8 +80,10 @@ This session implemented that entire vision in code.
     "Proportional empathy"
   ]
 ```text
+
 ```text
 ```
+
 
 ### 5. Test Suite
 
@@ -130,6 +132,7 @@ Matches:
   - GratitudeToOverwhelm: 0.65
 
 ```text
+
 ```
 
 ##
@@ -236,6 +239,7 @@ Matches:
 The system is designed to integrate into `signal_parser.py` at the response generation layer:
 
 ```
+
 parse_input(user_input)
   └─> _respond_to_emotional_input()
       ├─> TRY: _compose_response_with_learning()  [NEW]
@@ -243,6 +247,7 @@ parse_input(user_input)
       │        └─> library.get_best_match()
       │
       └─> FALLBACK: composer.compose_response()  [EXISTING]
+
 ```
 
 Three integration levels are documented:

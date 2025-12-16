@@ -86,6 +86,7 @@ content 4. **Signal Mapping**: Automatically assigns emotional signals to new wo
 ```text
 ```
 
+
 📁 Emotional OS/
 ├── main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)          # New user-focused UI
 ├── conversations/                  # Persistent conversation storage

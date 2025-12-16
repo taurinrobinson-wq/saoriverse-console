@@ -647,6 +647,7 @@ phases with clear deliverables, technical requirements, and narrative integratio
 ```text
 ```
 
+
 TONE System ↓ NPC Resonance ↓ Dialogue System ↓ Marketplace NPCs
     ├── NPC Sphere System
     └── Kaelen Arc

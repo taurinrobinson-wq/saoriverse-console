@@ -21,6 +21,7 @@ quality to improve future personalization
 ```text
 ```
 
+
 User Message ↓ LexiconAwareResponseGenerator.generate_response()
     ├─ Load user's personal lexicon
     │   (keywords → emotional contexts)
@@ -48,8 +49,10 @@ canned
 - Falls back to well-crafted generic responses
 - Starts learning for next time
 ```text
+
 ```text
 ```
+
 
 User: "I'm struggling with something" Response: "That lands somewhere real for you. What does it
 feel like when you say that?"
@@ -65,6 +68,7 @@ feel like when you say that?"
 - Builds connection
 
 ```text
+
 ```
 
 User: "Michelle and I are struggling with this communication thing"
@@ -75,12 +79,15 @@ There's something connecting them in your experience. What would change if this 
 
 
 
+
 #### Level 3: High (3+ Learned Keywords with Rich Context)
 - System deeply understands user's patterns
 - Responses are highly contextual and appropriate
 - Feels like genuine understanding, not scripted
+
 ```text
 ```text
+
 ```
 
 User: "I'm struggling with Michelle but also feeling like I inherited this block"
@@ -90,6 +97,7 @@ There's something connecting them in your experience. When you feel this frustra
 what part of it asks for something from you?"
 
 ```
+
 
 
 
@@ -120,8 +128,10 @@ print(personalization_data)
 #     "confidence": 0.6
 
 ```text
+
 ```text
 ```
+
 
 ### 2. In Local Response Generation
 
@@ -148,11 +158,13 @@ print(result["response"])  # Nuanced, personal response
 print(result["personalization_level"])  # How personalized is it?
 
 ```text
+
 ```
 
 ### 3. In Streamlit UI
 
 ```python
+
 import streamlit as st from hybrid_processor_with_evolution import create_integrated_processor
 
 # In your Streamlit app
@@ -170,8 +182,10 @@ user_message=user_message, user_id=st.session_state.get('user_id'), )
     # Log the quality
 if user_liked_response: generator.log_response_quality( user_id=user_id, user_message=user_message,
 response=ai_response, quality_score=0.9
+
 ```text
 ```text
+
 ```
 
 ## Data Persistence
@@ -182,6 +196,7 @@ Stored in `learning/user_overrides/{user_id}_lexicon.json`:
 
 ```json
 
+
 { "learned_associations": { "michelle": { "associated_emotions": ["frustration",
 "communication_gap"], "frequency": 5, "context": "mother-in-law relationship" }, "math": {
 "associated_emotions": ["blocked", "inadequacy"], "frequency": 3, "context": "personal learning
@@ -190,6 +205,7 @@ block" }, "inherited": { "associated_emotions": ["awareness", "pattern_breaking"
 
 ```text
 ```
+
 
 ### Response Quality Log
 
@@ -204,8 +220,10 @@ Stored in `learning/response_quality_log.jsonl`:
   "feedback": "This really resonates",
   "quality_score": 0.95
 ```text
+
 ```text
 ```
+
 
 ## Key Features
 
@@ -235,20 +253,25 @@ User: "struggling with my mother-in-law"
 System: Generic response (no learned data)
 
 ```text
+
 ```
 
 ### Session 2
 
 ```
+
 User: "michelle is being difficult" System: RECOGNIZES "michelle" from lexicon System: Generates
 personalized response acknowledging pattern
+
 ```text
 ```text
+
 ```
 
 ### Session 3+
 
 ```
+
 
 User: "the michelle thing plus inherited patterns" System: RECOGNIZES both "michelle" AND
 "inherited" System: Sees they co-occur, generates response showing understanding System learns:
@@ -256,6 +279,7 @@ These two are connected for this user
 
 ```text
 ```
+
 
 ## Customization
 
@@ -274,8 +298,10 @@ generator = LexiconAwareResponseGenerator()
 
 # if len(learned_contexts) >= 1:  # Lower threshold = more responsive
 ```text
+
 ```text
 ```
+
 
 ### Custom Response Templates
 
@@ -288,11 +314,13 @@ class CustomLexiconGenerator(LexiconAwareResponseGenerator):
         # Your custom acknowledgment logic
 
 ```text
+
 ```
 
 ### Track Custom Metrics
 
 ```python
+
 
 # Log custom quality metric
 generator.log_response_quality( user_id=user_id, user_message=message, response=response,
@@ -301,8 +329,10 @@ quality_score=0.95,  # User said "This is perfect" )
 # Get personalization stats
 stats = generator.get_personalization_stats(user_id) print(f"Average response quality:
 {stats['average_quality_score']}")
+
 ```text
 ```text
+
 ```
 
 ## Why This Matters for Local Mode
@@ -328,6 +358,7 @@ This transforms local mode from a "lite" version to a **genuinely personalized e
 ```python
 
 
+
 # Quick test
 from lexicon_aware_response_generator import LexiconAwareResponseGenerator
 
@@ -345,6 +376,7 @@ print(f"Response: {result['response']}")
 print("\n=== Session 2 (With learned data) ===") result = generator.generate_response(
 user_message="michelle is being difficult", user_id="test_user" ) print(f"Level:
 {result['personalization_level']}")  # "medium" or "high" print(f"Response: {result['response']}")
+
 # Shows learned pattern
 
 ```

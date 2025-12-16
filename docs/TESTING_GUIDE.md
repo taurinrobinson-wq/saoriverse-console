@@ -10,29 +10,36 @@
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### Run Only Unit Tests
 
 ```bash
 
 ```text
+
 ```
 
 ### Run Only Integration Tests
 
 ```bash
+
 ```text
 ```text
+
 ```
 
 ### Run Specific Test File
 
 ```bash
 
+
 ```text
 ```
+
 
 ### Run with Coverage
 
@@ -40,8 +47,10 @@
 pytest tests/ --cov=src --cov-report=html
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -118,14 +127,18 @@ def sample_signal():
 def sample_user_input():
 
 ```text
+
 ```
 
 **Usage in tests:**
 
 ```python
+
 def test_parser(sample_user_input): result = parse_input(sample_user_input)
+
 ```text
 ```text
+
 ```
 
 ##
@@ -135,6 +148,7 @@ def test_parser(sample_user_input): result = parse_input(sample_user_input)
 ### Unit Test Template
 
 ```python
+
 
 """Tests for src/my_module.py"""
 
@@ -152,6 +166,7 @@ def test_error_handling(self): """Test error handling.""" with pytest.raises(Val
 
 ```text
 ```
+
 
 ### Integration Test Template
 
@@ -175,8 +190,10 @@ def test_full_pipeline():
     response = process_user_input(user_input)
     assert response is not None
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -195,29 +212,35 @@ def test_with_mock():
         assert result == "mocked"
 
 ```text
+
 ```
 
 ### Fixture Usage
 
 ```python
+
 @pytest.fixture def temp_data_dir(tmp_path): """Create temporary directory for test data.""" return
 tmp_path / "test_data"
 
 def test_file_operations(temp_data_dir): """Test with temporary directory.""" file_path =
 temp_data_dir / "test.json"
+
 ```text
 ```text
+
 ```
 
 ### Parametrized Tests
 
 ```python
 
+
 @pytest.mark.parametrize("input,expected", [ ("happy", "positive"), ("sad", "negative"), ("neutral",
 "neutral"), ]) def test_emotion_detection(input, expected): result = detect_emotion(input)
 
 ```text
 ```
+
 
 ##
 
@@ -228,8 +251,10 @@ temp_data_dir / "test.json"
 ```bash
 pytest tests/unit/              # All unit tests
 ```text
+
 ```text
 ```
+
 
 ### By Module
 
@@ -238,24 +263,30 @@ pytest tests/unit/              # All unit tests
 pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
 
 ```text
+
 ```
 
 ### By Marker
 
 ```bash
 
+
 # Define in test: @pytest.mark.slow
 pytest tests/ -m slow           # Only marked tests
+
 ```text
 ```text
+
 ```
 
 ### Specific Test
 
 ```bash
 
+
 ```text
 ```
+
 
 ##
 
@@ -282,8 +313,10 @@ pytest tests/unit/ --tb=short
 
 # If all pass:
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -297,32 +330,40 @@ pytest tests/ -v                # Show all test names
 pytest tests/ -vv               # Even more detail
 
 ```text
+
 ```
 
 ### Print Debug Info
 
 ```python
+
 def test_something(): result = my_function() print(f"Result: {result}")  # Will show with -s flag
+
 ```text
 ```text
+
 ```
 
 Run with:
 
 ```bash
 
+
 pytest tests/ -s                # Show print() output
 
 ```text
 ```
+
 
 ### Show Local Variables
 
 ```bash
 pytest tests/ -l                # Show locals on failure
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -333,19 +374,24 @@ pytest tests/ -l                # Show locals on failure
 ```bash
 
 ```text
+
 ```
 
 ### View HTML Report
 
 ```bash
+
 pytest tests/ --cov=src --cov-report=html
+
 ```text
 ```text
+
 ```
 
 ### Coverage by Module
 
 ```bash
+
 
 pytest tests/ --cov=src.response_generator
 

@@ -47,8 +47,10 @@ log_glyph_usage(glyph_name, user_hash, input_text, relevance_score)
 
 promote_candidate_to_production(glyph_name)
 ```text
+
 ```text
 ```
+
 
 **Example Flow**:
 
@@ -67,6 +69,7 @@ GlyphLearner.analyze_input_for_glyph_generation()
   ↓
 
 ```text
+
 ```
 
 ##
@@ -88,6 +91,7 @@ GlyphLearner.analyze_input_for_glyph_generation()
 **Response Templates by Emotional Tone**:
 
 ```python
+
 "grief" patterns: "There's a depth to what you're carrying. {emotional_term} is one of the truest
 things we experience." "The {emotional_term} you describe isn't weakness. It's witness."
 
@@ -95,13 +99,16 @@ things we experience." "The {emotional_term} you describe isn't weakness. It's w
 "The {emotional_term} is evidence of your integrity."
 
 "insight" patterns:
+
 ```text
 ```text
+
 ```
 
 **Example Response**:
 
 ```
+
 
 User input: "I feel caught between who I pretend to be and who I really am" Generator crafts:
 "You're doing something quiet but powerful: maintaining distance between your performing self and
@@ -117,6 +124,7 @@ What this does: ✓ Answers emotionally (validates the experience) ✓ Reinforce
 ```text
 ```
 
+
 **Key Functions**:
 
 ```python
@@ -131,8 +139,10 @@ craft_insufficient_glyph_response(partial_glyph, existing_glyphs, input)
 
 create_training_response(glyph_candidate, original_input, signals, emotional_analysis)
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -184,6 +194,7 @@ emotional_territory (coverage mapping)
   ├─ coverage_quality (CRITICAL, POOR, FAIR, STRONG)
 
 ```text
+
 ```
 
 #### User Segregation (The Key Innovation)
@@ -191,6 +202,7 @@ emotional_territory (coverage mapping)
 **NOT per-user databases. ONE shared database, but different query results per user.**
 
 ```python
+
 
 # User A's view
 get_glyphs_for_user(user_hash="user_001", emotional_signal="β", gates=["Gate 4"]) ↓ Query returns
@@ -202,13 +214,16 @@ ordering, but all glyphs from shared DB
 get_glyphs_for_user(user_hash="user_002", emotional_signal="β", gates=["Gate 4"]) ↓ Query returns
 SAME glyphs, but ordered by: 1. User B's personal adoption history (different from A) 2. Consensus
 adoption (same as A, global) 3. Quality score (same as A)
+
 ```text
 ```text
+
 ```
 
 **Key Functions**:
 
 ```python
+
 
 get_glyphs_for_user(user_hash, emotional_signal, gates, top_k=5) → Glyphs for THIS user, ordered by
 adoption + consensus
@@ -232,6 +247,7 @@ get_system_health_report()
 ```text
 ```
 
+
 ##
 
 ## Integration with Existing System
@@ -246,8 +262,10 @@ User Input
   ├─ Fetch matching glyphs
   ├─ Select best glyph + contextual response
 ```text
+
 ```text
 ```
+
 
 ### New Flow (Phase 2)
 
@@ -279,6 +297,7 @@ User Input
   │
 
 ```text
+
 ```
 
 ##
@@ -323,6 +342,7 @@ Over time, system learns which intensity levels match which glyphs
 
 ```python
 
+
 # When a user sees a new glyph response:
 
 # 1. Log to glyph_versions (creates version 1)
@@ -344,13 +364,16 @@ INSERT INTO glyph_usage_log glyph_name = "Fractured Identity" user_hash = "user_
 
 # 5. Update coverage
 UPDATE emotional_territory SET primary_glyphs = [..., "Fractured Identity"]
+
 ```text
 ```text
+
 ```
 
 Later, when User 002 experiences similar emotion:
 
 ```python
+
 
 
 # Query returns to User 002:
@@ -368,6 +391,7 @@ Identity") → Moves from candidates to core glyphs
 
 ```text
 ```
+
 
 ##
 
@@ -388,8 +412,10 @@ Recommendations:
   ⚠️ Generate 3-4 more glyphs for "identity territory"
   ⚠️ Generate 5+ new glyphs for "shame territory"
 ```text
+
 ```text
 ```
+
 
 This guides the next round of glyph generation.
 
@@ -426,6 +452,7 @@ SYSTEM'S EXPERIENCE:
   - Most-adopted glyphs surface to top for new users
 
 ```text
+
 ```
 
 ##
@@ -437,6 +464,7 @@ SYSTEM'S EXPERIENCE:
 Modify `signal_parser.parse_input()` to:
 
 ```python
+
 def parse_input(text, user_hash): signals = detect_signals(text) gates = evaluate_gates(signals)
 glyphs = fetch_glyphs(gates)
 
@@ -447,6 +475,7 @@ return existing_glyph_response() else:
 candidate = learner.analyze_input_for_glyph_generation(text, signals, user_hash)
 learner.log_glyph_candidate(candidate) response = response_gen.generate_learning_response(candidate,
 text, ...) shared_mgr.record_glyph_adoption(user_hash, candidate['glyph_name']) return response
+
 ```
 
 ### 2. Test with Previously-Unmapped Messages

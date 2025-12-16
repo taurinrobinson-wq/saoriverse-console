@@ -79,6 +79,7 @@ into your UI 4. **EMOTION_LEARNING_QUICK_REFERENCE.md** — Quick lookup referen
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │ BROWSER (EmotionDetector.tsx)                               │
 │                                                              │
@@ -198,8 +199,10 @@ Supabase Realtime Subscription
 
 ### Traditional ML: Passive Collection
 ```text
+
 ```text
 ```
+
 
 Collect data → Train model → Deploy → (model stays static)
 
@@ -211,6 +214,7 @@ Collect data → Train model → Deploy → (model stays static)
 ### Adaptive Emotion Learning: Active Feedback
 
 ```text
+
 ```
 
 Detect emotion
@@ -230,6 +234,7 @@ System is smarter, faster, more accurate
 Repeat forever
 
 ```
+
 
 
 
@@ -304,6 +309,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 
 ```text
+
 ```
 
 ### Detection Settings
@@ -381,12 +387,14 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ## 📚 Documentation Structure
 
 ```
+
 ├── EMOTION_LEARNING_IMPLEMENTATION.md  ← START HERE (complete roadmap)
 ├── EMOTION_LEARNING_SETUP.md           ← Supabase + SQL
 ├── FACEAPI_MODELS_SETUP.md             ← Download models
 ├── EMOTION_INTEGRATION_GUIDE.md        ← How to use component
 ├── EMOTION_LEARNING_QUICK_REFERENCE.md ← Quick lookup
 └── This file (SUMMARY)                  ← Overview
+
 ```
 
 ##

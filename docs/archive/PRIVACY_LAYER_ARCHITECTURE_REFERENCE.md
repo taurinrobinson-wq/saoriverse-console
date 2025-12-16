@@ -156,6 +156,7 @@
     (removes 30-day old convos)             (removes 90-day old dreams)
 ```
 
+
 ##
 
 ## Data Flow: User Retention Changes
@@ -193,6 +194,7 @@ User Sets Retention to 7 Days
     All conversations deleted
     Only dream summaries remain (90-day retention)
 ```
+
 
 ##
 
@@ -236,6 +238,7 @@ User Clicks "Delete All My Data"
                         │ Deletion recorded    │
                         └──────────────────────┘
 ```
+
 
 ##
 
@@ -281,6 +284,7 @@ User Clicks "Export My Data"
     └──────────────────────────────────────┘
 ```
 
+
 ##
 
 ## Database Schema Relationship Diagram
@@ -319,6 +323,7 @@ User Clicks "Export My Data"
         │                     │                    │
         └─────────────────────┴────────────────────┘
 ```
+
 
 ##
 
@@ -405,6 +410,7 @@ Key Properties
             (same password always produces same key
              enables consistent encryption/decryption)
 ```
+
 
 ##
 
@@ -495,6 +501,7 @@ Scenario 5: Forgotten Password
             → Eventually deleted per policy
 ```
 
+
 ##
 
 ## Performance Characteristics
@@ -530,6 +537,7 @@ Per user per month (dreams)  | ~60KB     | 30 summaries
 ────────────────────────────────────────────────────────────
 ```
 
+
 ##
 
 ## Compliance Mapping
@@ -564,6 +572,7 @@ State Wiretapping Laws
 ├─→ Single Party: User consents to own monitoring ✅
 └─→ Termination: Can delete at any time ✅
 ```
+
 
 ##
 

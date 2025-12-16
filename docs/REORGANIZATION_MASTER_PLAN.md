@@ -52,6 +52,7 @@
 ```text
 ```
 
+
 saoriverse-console/
 │
 ├── app.py                          ← SINGLE Streamlit entry point (30 lines)
@@ -161,6 +162,7 @@ saoriverse-console/
 ```bash
 
 
+
 # Count tests
 find . -name "test_*.py" -type f | wc -l
 
@@ -177,6 +179,7 @@ grep -l "if __name__ == '__main__'" *.py
 ```text
 ```
 
+
 ### 1.2 Create Backup
 
 ```bash
@@ -186,8 +189,10 @@ git checkout -b refactor/reorganization-master
 
 # Tag current state
 ```text
+
 ```text
 ```
+
 
 ### 1.3 Document Dependencies
 
@@ -225,24 +230,29 @@ touch src/multimodal_fusion.py     # Multimodal analysis
 touch src/privacy_layer.py         # Privacy/encryption
 
 ```text
+
 ```
 
 ### 2.2 Create Test Structure
 
 ```bash
 
+
 # Create tests/ with organization
 mkdir -p tests/unit/ mkdir -p tests/integration/ mkdir -p tests/fixtures/
 
 # Create test discovery
 touch tests/__init__.py touch tests/conftest.py             # Pytest configuration
+
 ```text
 ```text
+
 ```
 
 ### 2.3 Organize Data
 
 ```bash
+
 
 
 # Consolidate data files
@@ -253,6 +263,7 @@ mv glyphs.db data/
 
 ```text
 ```
+
 
 ### 2.4 Organize Documentation
 
@@ -268,8 +279,10 @@ mv docs/LEXICON_*.md docs/archive/
 touch docs/ARCHITECTURE.md
 touch docs/TESTING_GUIDE.md
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -291,6 +304,7 @@ find . -type f -name "*response*" -o -name "*generator*" | grep -v __pycache__
 # Find all voice code
 
 ```text
+
 ```
 
 ### 3.2 Consolidate into src/
@@ -373,6 +387,7 @@ For each major component:
 **src/__init__.py**
 
 ```python
+
 """ SaoriVerse Console - Emotional OS Core
 
 Exports all public APIs for use by UI layers (Streamlit, etc.) """
@@ -385,8 +400,10 @@ src.privacy_layer import encrypt_signals, decrypt_signals from src.learning impo
 __all__ = [ "EmotionalOS", "GlyphSignals", "parse_input", "extract_themes", "generate_response",
 "ArchetypeResponseGeneratorV2", "VoiceInterface", "encrypt_signals", "decrypt_signals",
 "LearningSystem",
+
 ```text
 ```text
+
 ```
 
 ##
@@ -398,10 +415,12 @@ __all__ = [ "EmotionalOS", "GlyphSignals", "parse_input", "extract_themes", "gen
 ```bash
 
 
+
 # Move all test_*.py from root to tests/
 
 ```text
 ```
+
 
 ### 4.2 Organize by Module
 
@@ -420,8 +439,10 @@ tests/unit/
 ├── test_privacy_layer.py
 ├── test_learning.py
 ```text
+
 ```text
 ```
+
 
 ### 4.3 Create conftest.py
 
@@ -455,17 +476,21 @@ def sample_signal():
         "valence": 0.3
 
 ```sql
+
 ```
 
 ### 4.4 Update pytest.ini
 
 ```ini
+
 [pytest]
 
 # tests/pytest.ini
 testpaths = tests python_files = test_*.py python_classes = Test* python_functions = test_*
+
 ```text
 ```text
+
 ```
 
 ##
@@ -477,6 +502,7 @@ testpaths = tests python_files = test_*.py python_classes = Test* python_functio
 **app.py** (at root)
 
 ```python
+
 
 """ SaoriVerse Console - FirstPerson Streamlit entry point for emotional AI system with voice
 interface.
@@ -520,6 +546,7 @@ if __name__ == "__main__":
 ```text
 ```
 
+
 ### 5.2 Delete Competing Entry Points
 
 ```bash
@@ -528,8 +555,10 @@ if __name__ == "__main__":
 rm main_v2.py
 rm main_v2_simple.py
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -553,11 +582,13 @@ python -m data.download_nrc_lexicon
 python -m setup.init_db
 
 ```text
+
 ```
 
 ### 6.2 Reorganize scripts/
 
 ```bash
+
 
 # Create subdirectories
 mkdir -p scripts/data/ mkdir -p scripts/setup/ mkdir -p scripts/debug/
@@ -572,6 +603,7 @@ scripts/inspect_glyphs.py scripts/debug/
 
 ```text
 ```text
+
 ```
 
 ##
@@ -584,6 +616,7 @@ Create `tools/import_checker.py`:
 
 ```python
 
+
 """Verify all imports work correctly.""" import sys from pathlib import Path
 
 def test_imports(): """Test that all core imports work.""" try: from src import EmotionalOS,
@@ -595,12 +628,15 @@ if __name__ == "__main__": success = test_imports()
 ```text
 ```
 
+
 Run it:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### 7.2 Run Unit Tests
 
@@ -616,23 +652,28 @@ pytest tests/unit/ -v
 # Run with coverage
 
 ```text
+
 ```
 
 ### 7.3 Run Integration Tests
 
 ```bash
 
+
 # E2E test
 pytest tests/integration/test_full_e2e.py -v
 
 # All integration tests
+
 ```text
 ```text
+
 ```
 
 ### 7.4 Launch Streamlit
 
 ```bash
+
 
 
 # Should work with single entry point
@@ -642,6 +683,7 @@ streamlit run app.py
 
 ```text
 ```
+
 
 ##
 
@@ -663,8 +705,10 @@ mv local_inference archive/old_structure/
 mv *.md archive/old_docs/ 2>/dev/null || true
 
 ```sql
+
 ```sql
 ```
+
 
 ### 8.2 Update Root Files
 
@@ -680,26 +724,32 @@ pydantic>=2.0
 python-dotenv>=1.0
 
 ```text
+
 ```
 
 **.gitignore** - Ensure it ignores build artifacts:
 
 ```
+
 __pycache__/
 *.pyc
 .pytest_cache/ .coverage htmlcov/ .streamlit/ .env
 *.log
 build/ dist/
+
 ```text
 ```text
+
 ```
 
 ### 8.3 Verify No Broken Imports
 
 ```bash
 
+
 ```text
 ```
+
 
 ### 8.4 Commit Reorganization
 
@@ -717,8 +767,10 @@ git commit -m "refactor: Complete codebase reorganization
 - Ready for efficient development and deployment"
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -817,6 +869,7 @@ git reset --hard origin/main
 git branch -D refactor/reorganization-master
 
 ```
+
 
 ##
 

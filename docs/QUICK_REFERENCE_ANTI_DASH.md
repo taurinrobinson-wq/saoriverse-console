@@ -22,6 +22,7 @@ punctuation:
 ```text
 ```
 
+
 User Input ↓ Generate Response (may contain em dashes) ↓ Detect Glyph Tone Pool (keyword mapping) ↓
 Remove Em Dashes + Apply Pool-Appropriate Punctuation ↓ Optionally Diversify Generic Closings ↓
 Return Clean Response
@@ -79,8 +80,10 @@ No code changes needed in calling code — it happens automatically!
 
 ### Before → After
 ```text
+
 ```text
 ```
+
 
 "You're not alone—many brilliant people struggle with math—it's not your fault." ↓ "You're not
 alone: many brilliant people struggle with math: it's not your fault." (Reflective pool, colons
@@ -101,6 +104,7 @@ no wrong way to do it." (Grounded pool, periods applied)
 ## 📝 Using It Directly (Advanced)
 
 ```python
+
 from emotional_os.glyphs.punctuation_cleaner import clean_response
 
 # Simple one-off cleaning
@@ -115,8 +119,10 @@ from emotional_os.glyphs.punctuation_cleaner import get_cleaner cleaner = get_cl
 # Process with all features
 cleaned = cleaner.process_response( response=raw_response, glyph_name=glyph_name, diversify=True  #
 Replace generic closings
+
 ```text
 ```text
+
 ```
 
 ## 🚀 What's Automatic
@@ -162,10 +168,12 @@ To customize, edit `style_matrix.json`:
 
 ```json
 
+
 { "Grounded": { "rotation_bank": [ "Your new response here.", "Another variation.", ... ] }
 
 ```text
 ```
+
 
 No code changes needed — JSON editing only.
 
@@ -185,6 +193,7 @@ Run built-in tests:
 cd emotional_os/glyphs
 python punctuation_cleaner.py
 ```
+
 
 Shows example transformations and verification.
 

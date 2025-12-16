@@ -27,6 +27,7 @@ python poetry_data_pipeline.py --status
 python poetry_data_pipeline.py --export poetry_export
 ```
 
+
 ## Use in Your Code
 
 **Always the same pattern:**
@@ -53,6 +54,7 @@ data = adapter.for_ritual_processing()      # ritual processing mode
 for name, text in data.items():
     my_processing_function(text)
 ```
+
 
 ## What Gets Cleaned
 
@@ -95,6 +97,7 @@ Documentation:
   /workspaces/saoriverse-console/POETRY_INTEGRATION_EXAMPLES.md
 ```
 
+
 ## Processing Modes
 
 ```python
@@ -111,6 +114,7 @@ adapter.for_glyph_generation()        # Returns: [(name, text), ...]
 # Mode 4: Ritual Processing
 adapter.for_ritual_processing()       # Returns: {name: text}
 ```
+
 
 All return clean, validated, non-fragmented poetry ready to use.
 
@@ -187,6 +191,7 @@ data = adapter.for_your_mode()
 for name, text in data.items():
     process(text)  # Guaranteed clean
 ```
+
 
 ##
 

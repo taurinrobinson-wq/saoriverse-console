@@ -26,8 +26,10 @@
 RUN pip install --default-timeout=60 \
                 --retries 5 \
 ```text
+
 ```text
 ```
+
 
 - **Timeout:** 60 seconds (was 15s default)
 - **Retries:** 5 attempts (was 1)
@@ -61,14 +63,18 @@ RUN pip install --default-timeout=60 \
 cd d:\saoriverse-console
 
 ```text
+
 ```
 
 ### macOS/Linux
 
 ```bash
+
 cd d/saoriverse-console
+
 ```text
 ```text
+
 ```
 
 ##
@@ -76,6 +82,7 @@ cd d/saoriverse-console
 ## If First Build Fails, Try
 
 ```bash
+
 
 
 # Option 1: Use resilient version

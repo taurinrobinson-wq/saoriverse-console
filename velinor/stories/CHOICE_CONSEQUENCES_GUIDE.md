@@ -1,8 +1,8 @@
 # Choice Metadata & Consequence System
 
-When you create choices in `story_definitions.py`, you can now specify how each choice affects:
-1. **Player TONE state** - emotional progression
-2. **NPC relationships** - resonance/affinity with specific characters
+When you create choices in `story_definitions.py`, you can now specify how each choice affects: 1.
+**Player TONE state** - emotional progression 2. **NPC relationships** - resonance/affinity with
+specific characters
 
 ## Quick Example
 
@@ -21,6 +21,7 @@ story.add_choice(
     }
 )
 ```
+
 
 ## How It Works
 
@@ -42,7 +43,8 @@ The `tone_effects` dictionary tracks how a choice affects the player's emotional
 
 ### NPC Resonance
 
-The `npc_resonance` dictionary tracks how each choice affects the player's relationship with specific NPCs.
+The `npc_resonance` dictionary tracks how each choice affects the player's relationship with
+specific NPCs.
 
 **Values are change factors (0.0 to 1.0+):**
 - `0.15` = +15% relationship with that NPC
@@ -70,6 +72,7 @@ story.add_choice(
 )
 ```
 
+
 ### Choice with resonance only
 
 ```python
@@ -81,6 +84,7 @@ story.add_choice(
     # No tone_effects - doesn't change player tone
 )
 ```
+
 
 ### Choice affecting multiple NPCs
 
@@ -95,6 +99,7 @@ story.add_choice(
 )
 ```
 
+
 ### Neutral choice
 
 ```python
@@ -106,11 +111,13 @@ story.add_choice(
 )
 ```
 
+
 ## Complete Example: Market Arrival Scene
 
 Each choice affects the player differently:
 
 ```python
+
 # Aggressive approach - high courage, but makes Nima wary
 story.add_choice(
     from_passage_name="market_arrival",
@@ -147,6 +154,7 @@ story.add_choice(
     npc_resonance={"Ravi": 0.05, "Nima": 0.15}
 )
 ```
+
 
 **Results after this choice:**
 - Aggressive player: High courage, low Nima resonance
@@ -198,6 +206,7 @@ Both tone effects and NPC resonance are stored in the choices array:
 }
 ```
 
+
 The game engine reads:
 - `tone_effects` → applies to player tone tracking
 - `npc_resonance` → applies to NPC relationship scores
@@ -234,6 +243,7 @@ Relationships build over time:
 ### Finding the right numbers
 
 ```python
+
 # Small effect (neutral/minor)
 tone_effects={"courage": 0.05}
 
@@ -247,9 +257,11 @@ tone_effects={"courage": 0.25}
 tone_effects={"courage": -0.1}
 ```
 
+
 ### Multi-attribute choices
 
 ```python
+
 # Balanced approach - moderate effects
 story.add_choice(
     ...
@@ -270,9 +282,11 @@ story.add_choice(
 )
 ```
 
+
 ### Building resonance narratively
 
 ```python
+
 # Early meeting - establish base
 story.add_choice(
     ...
@@ -292,15 +306,13 @@ story.add_choice(
 )
 ```
 
+
 ## Workflow
 
-1. **Design the choice** - what does the player see?
-2. **Add to passage** - define destination
-3. **Identify tone effect** - what does this reveal about the player?
-4. **Identify NPC reactions** - how does each NPC feel?
-5. **Assign numbers** - magnitude of effect
-6. **Test** - verify numbers feel right
-7. **Document** - comment in code for later reference
+1. **Design the choice** - what does the player see? 2. **Add to passage** - define destination 3.
+**Identify tone effect** - what does this reveal about the player? 4. **Identify NPC reactions** -
+how does each NPC feel? 5. **Assign numbers** - magnitude of effect 6. **Test** - verify numbers
+feel right 7. **Document** - comment in code for later reference
 
 ## Next Steps
 
@@ -310,18 +322,16 @@ story.add_choice(
 - [ ] Test cumulative effects across multiple choices
 - [ ] Design Act 2 with branching based on resonance
 - [ ] Create "dead ends" for low resonance paths
-
----
+## 
 
 **Example: How Choices Compound**
 
-Player makes these consecutive choices:
-1. "Step toward figures" → Ravi +0.1, Nima -0.1
-2. "Ask for help" → Ravi +0.15, Nima +0.15
-3. "Prepare with them" → Ravi +0.2, Nima +0.2
+Player makes these consecutive choices: 1. "Step toward figures" → Ravi +0.1, Nima -0.1 2. "Ask for
+help" → Ravi +0.15, Nima +0.15 3. "Prepare with them" → Ravi +0.2, Nima +0.2
 
 **Final Resonance:**
 - Ravi: 0.1 + 0.15 + 0.2 = 0.45 (strong relationship)
 - Nima: -0.1 + 0.15 + 0.2 = 0.25 (wavering, but improving)
 
-This shapes what dialogue options appear, who player can ask for help, and what ending paths are available!
+This shapes what dialogue options appear, who player can ask for help, and what ending paths are
+available!

@@ -300,6 +300,7 @@ The system uses a 4-layer activation model:
 └─────────────────────────────────────────────────────────┘
 ```
 
+
 ##
 
 ## Gate Distribution & Semantic Weight
@@ -504,6 +505,7 @@ ultimate (150), divine (150), ε (214), Ω (139),
 resonance (97), witness (222), spiral (120), and 20+ others
 ```
 
+
 ### Glyph Distribution Summary
 
 ```
@@ -522,6 +524,7 @@ New vocabulary additions: 14 core keywords
 Total unique signals: 123
 ```
 
+
 ### Semantic Theme Distribution
 
 ```
@@ -539,6 +542,7 @@ Theme Prevalence:
 11. Love/Connection    679 glyphs (9.6%)
 12. Light/Illumination 479 glyphs (6.8%)
 ```
+
 
 ##
 

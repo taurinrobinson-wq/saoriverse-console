@@ -27,8 +27,10 @@ if "repair_orchestrator" not in st.session_state:
     st.session_state.repair_orchestrator = RepairOrchestrator(
         user_id=st.session_state.user_id
 ```text
+
 ```text
 ```
+
 
 ### 2. Response Generation
 
@@ -54,6 +56,7 @@ context = GlyphCompositionContext(
 st.session_state.repair_orchestrator.record_response(response_text)
 
 ```text
+
 ```
 
 ### 3. Next Turn - Detect Corrections
@@ -61,6 +64,7 @@ st.session_state.repair_orchestrator.record_response(response_text)
 At start of next turn, analyze for rejections.
 
 ```python
+
 repair_analysis = st.session_state.repair_orchestrator.analyze_for_repair( user_input=user_input )
 
 if repair_analysis.is_rejection:
@@ -70,8 +74,10 @@ repair_analysis.user_correction else:
     # Record acceptance
 if st.session_state.last_glyph_context: st.session_state.repair_orchestrator.record_acceptance(
 st.session_state.last_glyph_context
+
 ```text
 ```text
+
 ```
 
 ### 4. Generate Response with Alternative (if rejected)
@@ -79,6 +85,7 @@ st.session_state.last_glyph_context
 Use suggested glyph if available.
 
 ```python
+
 
 if repair_analysis.is_rejection:
     # Acknowledge correction
@@ -92,6 +99,7 @@ arousal=arousal, valence=valence, glyph_name=suggested_glyph
 ```text
 ```
 
+
 ## Session State Variables
 
 Track these in Streamlit session state:
@@ -100,8 +108,10 @@ Track these in Streamlit session state:
 st.session_state.repair_orchestrator    # RepairOrchestrator instance
 st.session_state.last_glyph_context     # GlyphCompositionContext from last response
 ```text
+
 ```text
 ```
+
 
 ## Testing Integration
 
@@ -172,6 +182,7 @@ def handle_conversation_turn(user_input: str) -> str:
     return response
 
 ```
+
 
 ## Test Results
 

@@ -28,8 +28,10 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
 cd velinor-web
 ```text
+
 ```text
 ```
+
 
 ### Phase 2: Copy Component Files
 
@@ -42,6 +44,7 @@ From the root, copy the prepared files into the Next.js project:
 cp frontend_lib_api.ts velinor-web/lib/api.ts
 
 ```text
+
 ```
 
 ### Phase 3: Create App Pages
@@ -49,6 +52,7 @@ cp frontend_lib_api.ts velinor-web/lib/api.ts
 #### Splash Screen (`velinor-web/app/page.tsx`)
 
 ```typescript
+
 'use client';
 
 import { useState } from 'react'; import { useRouter } from 'next/navigation'; import { gameApi }
@@ -81,13 +85,16 @@ background: loading ? '#666' : '#3a6df0', color: '#fff', border: 'none', borderR
 cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}
         >
 {loading ? 'Starting...' : 'Start New Game'} </button> </div> </main> );
+
 ```text
 ```text
+
 ```
 
 #### Game Scene (`velinor-web/app/game/[sessionId]/page.tsx`)
 
 ```typescript
+
 
 'use client';
 
@@ -127,6 +134,7 @@ choices={gameState.choices} onChoiceClick={handleChoiceClick} onCustomInput={han
 ```text
 ```
 
+
 ### Phase 4: Copy Game Assets
 
 Copy your game assets into the Next.js public folder:
@@ -141,8 +149,10 @@ cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 
 # Create overlays folder (for dust, fog, glyphs)
 ```text
+
 ```text
 ```
+
 
 ### Phase 5: Test Locally
 
@@ -156,15 +166,18 @@ python velinor_api.py
 # Runs on http://localhost:8000
 
 ```text
+
 ```
 
 **Terminal 2 - Frontend:**
 
 ```bash
+
 cd velinor-web npm run dev
 
 ```text
 ```text
+
 ```
 
 Test the game flow:
@@ -180,6 +193,7 @@ Test the game flow:
 ```bash
 
 
+
 # Add and commit everything
 git add . git commit -m "feat: Complete Next.js + FastAPI Velinor game" git push origin main
 
@@ -187,6 +201,7 @@ git add . git commit -m "feat: Complete Next.js + FastAPI Velinor game" git push
 
 ```text
 ```
+
 
 ## API Reference
 
@@ -198,8 +213,10 @@ Start a new game session.
 
 ```json
 ```text
+
 ```text
 ```
+
 
 **Response:**
 
@@ -218,6 +235,7 @@ Start a new game session.
   }
 
 ```text
+
 ```
 
 ### POST /api/game/{session_id}/action
@@ -227,9 +245,12 @@ Process player action.
 **Request:**
 
 ```json
+
 { "choice_index": 0 } // or
+
 ```text
 ```text
+
 ```
 
 **Response:** Updated game state (same structure as start)
@@ -237,6 +258,7 @@ Process player action.
 ## Architecture Diagram
 
 ```
+
 
 ┌─────────────────────────────────────────────────────┐
 │                    User Browser                      │

@@ -250,6 +250,7 @@ python poetry_data_pipeline.py --process
 # Expected: 5-10 minutes, 295K+ words cleaned and validated
 ```
 
+
 ### Step 2: Verify
 
 ```bash
@@ -257,6 +258,7 @@ python poetry_data_pipeline.py --status
 
 # Expected: All 8 collections marked as validated
 ```
+
 
 ### Step 3: Use in Your Code
 
@@ -274,6 +276,7 @@ for name, text in data.items():
     your_function(text)
 ```
 
+
 ## File Locations
 
 **Implementation**:
@@ -286,6 +289,7 @@ for name, text in data.items():
   └── poetry_glyph_generator.py
 ```
 
+
 **Data Created**:
 
 ```
@@ -295,6 +299,7 @@ for name, text in data.items():
   ├── clean/ (cleaned texts)
   └── validated/ (validated texts)
 ```
+
 
 **Documentation**:
 
@@ -306,6 +311,7 @@ for name, text in data.items():
   ├── POETRY_DATA_INTEGRATION_GUIDE.md
   └── POETRY_INTEGRATION_EXAMPLES.md
 ```
+
 
 ## Quality Guarantees
 
@@ -346,6 +352,7 @@ data = adapter.for_your_mode()
 for name, text in data.items():
     your_processing_function(text)
 ```
+
 
 ## What Changed vs. Before
 

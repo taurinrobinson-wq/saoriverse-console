@@ -6,8 +6,10 @@ First, try connecting with password authentication:
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 If you see a password prompt, enter your DigitalOcean root password.
 
@@ -28,11 +30,13 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 # ~/.ssh/digitalocean_key (private key - KEEP SAFE)
 
 ```text
+
 ```
 
 ### Step 2: Add Public Key to Droplet (If You Have Access)
 
 ```bash
+
 
 # Copy your public key
 cat ~/.ssh/digitalocean_key.pub
@@ -43,14 +47,17 @@ cat ~/.ssh/digitalocean_key.pub
 
 ```text
 ```text
+
 ```
 
 Or do it in one command (if you can SSH):
 
 ```bash
 
+
 ```text
 ```
+
 
 ### Step 3: Use the Key for SSH
 
@@ -69,8 +76,10 @@ EOF
 
 # Then just use:
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -128,6 +137,7 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 
 ```text
+
 ```
 
 ##
@@ -135,9 +145,11 @@ cd saoriverse-console
 ## Reference: Common SSH Key Locations
 
 ```bash
+
 ~/.ssh/id_rsa              # Default key ~/.ssh/digitalocean_key    # DO-specific key
 ~/.ssh/droplet_key         # Droplet-specific key ~/.ssh/do_rsa              # Another common name
 ~/droplet_key              # In home directory ~/keys/do_key              # In keys folder
+
 ```
 
 Try searching for these files on your machines.

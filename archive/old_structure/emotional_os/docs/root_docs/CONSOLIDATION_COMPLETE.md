@@ -35,6 +35,7 @@ emotional_os/deploy/learning/lexicon_learner.py → imports emotional_os.core.le
 emotional_os/glyphs/lexicon_learner.py → imports emotional_os.core.lexicon_learner
 ```
 
+
 ##
 
 ## How to Use
@@ -47,11 +48,13 @@ from learning.lexicon_learner import LexiconLearner
 from emotional_os.glyphs.signal_parser import parse_input
 ```
 
+
 ### New Way (Recommended)
 
 ```python
 from emotional_os.core import parse_input, LexiconLearner
 ```
+
 
 **Both work identically!** No code changes required.
 
@@ -80,6 +83,7 @@ from emotional_os.core import (
     glyph_db_path
 )
 ```
+
 
 ### 3. Easier Maintenance
 
@@ -130,6 +134,7 @@ learner = LexiconLearner()
 learning_results = learner.learn_from_conversation(conversation_data)
 ```
 
+
 ### For Legacy Code
 
 Gradually migrate imports:
@@ -142,6 +147,7 @@ from learning.lexicon_learner import LexiconLearner
 # After (drop-in replacement)
 from emotional_os.core import LexiconLearner
 ```
+
 
 ##
 
@@ -168,6 +174,7 @@ emotional_os/
 ├── parser/
 │   └── signal_parser.py          # → Stub (imports from core)
 ```
+
 
 ##
 
@@ -213,6 +220,7 @@ from emotional_os.core import signal_lexicon_path
 lexicon_path = signal_lexicon_path()
 ```
 
+
 This allows gradual migration without breaking anything.
 
 ##
@@ -231,6 +239,7 @@ from emotional_os.core import (
     STOP_WORDS,          # Filtering for analysis
 )
 ```
+
 
 No more:
 
@@ -259,6 +268,7 @@ from emotional_os.core import LexiconLearner
 from emotional_os.core import parse_input, LexiconLearner
 ```
 
+
 No code changes needed. Everything imported from the same canonical location.
 
 ##
@@ -277,6 +287,7 @@ data/lexicons/
 └── lexicon_versions.json
 ```
 
+
 The PathManager already supports this - just move the files!
 
 ### Optional: Update All Imports Proactively
@@ -291,6 +302,7 @@ from emotional_os.glyphs.signal_parser import parse_input
 # New
 from emotional_os.core import parse_input
 ```
+
 
 ### No Pressure
 

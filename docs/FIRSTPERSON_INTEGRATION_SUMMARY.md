@@ -12,6 +12,7 @@ adapt their dialogue in real-time based on your emotional state.
 ```text
 ```
 
+
 Player: "I'm overwhelmed" NPC:    "I see. What would you like to do?"
 
 ```
@@ -20,8 +21,10 @@ Player: "I'm overwhelmed" NPC:    "I see. What would you like to do?"
 
 ### After (With FirstPerson)
 ```text
+
 ```text
 ```
+
 
 Player: "I'm overwhelmed" ↓ [FirstPerson Analysis]
          ├─ Tone: heavy
@@ -72,11 +75,13 @@ it. What needs to be said about it? Sometimes the weight lessens when we name it
 ### 1. Player Input
 
 ```text
+
 ```
 
 "I'm not sure I can handle this responsibility"
 
 ```
+
 
 
 
@@ -97,19 +102,24 @@ memory.record_turn(input, affect, theme)
 → Detects patterns across turns
 
 ```text
+
 ```
 
 ### 3. Game Engine Routes
 
 ```python
+
 orchestrator.process_player_action(player_input) → Applies emotional analysis → Updates game state
+
 ```text
 ```text
+
 ```
 
 ### 4. NPC Response
 
 ```python
+
 
 _generate_emotionally_aware_response( emotional_tone='heavy', detected_theme='general',
 valence=-0.6, memory_context={...} ) → "I hear the weight in that. The path of responsibility
@@ -117,13 +127,16 @@ valence=-0.6, memory_context={...} ) → "I hear the weight in that. The path of
 ```text
 ```
 
+
 ### 5. Display in Chat
 
 ```
 NPC: "I hear the weight in that. The path of responsibility
 ```text
+
 ```text
 ```
+
 
 ## 💎 Key Features
 
@@ -173,26 +186,32 @@ You:   "I don't know if I'm ready for this"
 NPC:   "I hear the uncertainty in that. That's real.
 
 ```text
+
 ```
 
 ### Moment 2: Recurring Theme Recognition
 
 ```
+
 You:   "I keep coming back to my doubts" NPC:   "I'm hearing doubt come up again. That tells me
 something. What's beneath it?"
+
 ```text
 ```text
+
 ```
 
 ### Moment 3: Emotional Shift
 
 ```
 
+
 You:   "But maybe I'm stronger than I thought" NPC:   "There's something to sit with there. I'm also
 noticing a shift in what you're saying. What's helping?"
 
 ```text
 ```
+
 
 ## 📈 Impact on Player Experience
 
@@ -232,8 +251,10 @@ streamlit run velinor_app.py
 # FirstPerson automatically analyzes your inputs
 
 ```text
+
 ```text
 ```
+
 
 ### Validating the Integration
 
@@ -242,6 +263,7 @@ streamlit run velinor_app.py
 python3 FIRSTPERSON_INTEGRATION_TEST.py
 
 ```text
+
 ```
 
 ## 📚 Documentation
@@ -295,9 +317,11 @@ Read more:
 **Your Velinor game now delivers emotionally responsive, contextually aware NPC dialogue that adapts to your emotional state in real-time.**
 
 ```
+
 Type any emotion → FirstPerson analyzes instantly → NPC responds with personalized,
 emotionally-aware dialogue → Conversation memory tracks themes and patterns → Your emotional journey
 is reflected and honored in the game
+
 ```
 
 ##

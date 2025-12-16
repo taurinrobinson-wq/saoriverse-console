@@ -22,8 +22,10 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 # Detected tone: "joyful"
 
 ```text
+
 ```text
 ```
+
 
 **Tones detected:**
 
@@ -54,6 +56,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 # Measured intensity: 0.35 (low)
 
 ```text
+
 ```
 
 **Intensity factors:**
@@ -72,6 +75,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```python
 
+
 # Suggested phrases based on emotional state:
 
 # Anxious: "I'm holding space for your concerns"
@@ -82,6 +86,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```text
 ```text
+
 ```
 
 **When added:** To responses >100 characters, ~40% of the time
@@ -102,6 +107,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 ```python
 
 
+
 # Conversation phases:
 
 # 1-5 msgs: "opening" (establish rhythm, energy 0.6)
@@ -120,6 +126,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 ```text
 ```
+
 
 ##
 
@@ -156,8 +163,10 @@ print(metrics)
 #   "processing_time_ms": 22.5
 
 ```text
+
 ```text
 ```
+
 
 ### Already Integrated
 
@@ -177,6 +186,7 @@ If you're using the response pipeline:
 # ✅ Graceful fallback if fails
 
 ```text
+
 ```
 
 ##
@@ -197,10 +207,13 @@ If you're using the response pipeline:
 Each component has try-catch:
 
 ```python
+
 try: tone = attunement.detect_tone_shift(user_input) except Exception as e: logger.warning(f"Failed:
 {e}")
+
 ```text
 ```text
+
 ```
 
 If entire Tier 2 fails, returns base response (no crash).
@@ -210,6 +223,7 @@ If entire Tier 2 fails, returns base response (no crash).
 ## Performance
 
 ```
+
 
 ┌─────────────────────────────────────┐
 │ Response Pipeline Timing            │
@@ -224,6 +238,7 @@ If entire Tier 2 fails, returns base response (no crash).
 ```text
 ```
 
+
 Each component: **<10ms** ✅ Combined pipeline: **<70ms** ✅ Well under 100ms budget: **✅**
 
 ##
@@ -234,8 +249,10 @@ Each component: **<10ms** ✅ Combined pipeline: **<70ms** ✅ Well under 100ms 
 Tier 2: 43/43 tests passing ✅
 Tier 1: 10/10 tests passing ✅
 ```text
+
 ```text
 ```
+
 
 Each component has:
 
@@ -277,6 +294,7 @@ def _ensure_tier2_aliveness():
         st.session_state["tier2_aliveness"] = tier2
 
 ```text
+
 ```
 
 ✅ Initialized once per user session
@@ -290,13 +308,17 @@ def _ensure_tier2_aliveness():
 After processing:
 
 ```python
+
 metrics = { "tone": "joyful",              # Detected emotional tone "intensity": 0.75,
+
 # 0.0 (min) to 1.0 (max) "phase": "deepening",          # opening/deepening/climax/closing "energy":
 0.7,                 # Recommended energy level "momentum": "building",        #
 Building/sustaining/winding "fatigue_detected": False,     # Is user getting tired?
 "processing_time_ms": 22.5     # How long it took
+
 ```text
 ```text
+
 ```
 
 Use for logging, monitoring, debugging.
@@ -332,6 +354,7 @@ To adjust Tier 2 behavior:
 ```python
 
 
+
 # In tier2_aliveness.py:
 
 # Change tone markers
@@ -345,6 +368,7 @@ pacing = tracker.calculate_optimal_pacing("deepening")
 
 ```text
 ```
+
 
 All fully customizable without retraining!
 
@@ -369,6 +393,7 @@ Tier 2: ~20ms
 Tier 3: ~20ms (estimate)
 Total: ~80ms (still under 100ms budget!)
 ```
+
 
 ##
 

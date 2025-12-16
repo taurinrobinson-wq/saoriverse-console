@@ -50,8 +50,10 @@ def compose_response(self, input_text: str, glyph_name: str = "", ...)
 
 # NEW
 ```text
+
 ```text
 ```
+
 
 **Both methods updated:**
 
@@ -86,6 +88,7 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, 
                    "commitment" if intensity_level >= 9 else \
 
 ```text
+
 ```
 
 #### Step 3: Create Glyph-to-Emotion Mapping
@@ -105,16 +108,20 @@ Maps glyph names to poetry emotion categories:
 **Before:**
 
 ```python
+
 def compose_message_aware_response(self, input_text, message_content, glyph=None):
     # Generated message-specific content only
 if message_content.get("math_frustration"):
+
 ```text
 ```text
+
 ```
 
 **After:**
 
 ```python
+
 
 def compose_message_aware_response(self, input_text, message_content, glyph=None):
     # FIRST: Establish glyph anchor
@@ -126,6 +133,7 @@ if message_content.get("math_frustration"):
 
 ```sql
 ```
+
 
 #### Step 5: Update Signal Parser Call Sites
 
@@ -146,8 +154,10 @@ composed = _response_composer.compose_response(
     glyph=glyph,  # Pass full dict
     ...
 ```text
+
 ```text
 ```
+
 
 Updated both:
 
@@ -167,6 +177,7 @@ return None, "I can sense there's something..."
 return None, ("I can sense there's something...",
 
 ```text
+
 ```
 
 #### Step 7: Handle Database Field Variations
@@ -175,13 +186,16 @@ return None, ("I can sense there's something...",
 
 ```python
 
+
 # Database returns singular "gate" field
 
 # Code checks both variations
 gate_data = glyph.get("gates") or glyph.get("gate") gates_list = gate_data if isinstance(gate_data,
 list) else [gate_data]
+
 ```text
 ```text
+
 ```
 
 ##
@@ -194,8 +208,10 @@ list) else [gate_data]
 
 ```
 
+
 ```text
 ```
+
 
 **Glyph Detected:** Still Containment
 
@@ -211,8 +227,10 @@ with math, especially when it's presented in a way that doesn't match how their 
 naturally works. Mental blocks are usually where the concept structure doesn't match
 your natural thinking pattern. That's not fixed—it's just a mismatch to navigate.
 ```text
+
 ```text
 ```
+
 
 **Validation Results:**
 ✓ Glyph description present in response ✓ Message-specific content (math frustration, mental blocks)
@@ -225,6 +243,7 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 ```
 
 ```text
+
 ```
 
 **Outcome:**
@@ -238,9 +257,12 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 **Input:**
 
 ```
+
 "That's not quite what I meant. Michelle is my mother-in-law and my boss, and
+
 ```text
 ```text
+
 ```
 
 **Feedback Detected:** 'misalignment' (user starting with "That's not quite what I meant")
@@ -251,10 +273,12 @@ your natural thinking pattern. That's not fixed—it's just a mismatch to naviga
 
 ```
 
+
 "...I appreciate you saying that. I want to make sure I'm actually hearing you,
 
 ```text
 ```
+
 
 **Validation Results:**
 ✓ Feedback correction detected (misalignment type) ✓ Correction-specific response generated ✓
@@ -280,8 +304,10 @@ DynamicResponseComposer
        └─ Ignores glyph metadata
        └─ Generic compositional response
 ```text
+
 ```text
 ```
+
 
 ### After: Glyph-Aware Architecture
 
@@ -310,6 +336,7 @@ DynamicResponseComposer [GLYPH-AWARE]
         └─ Intensity-informed closing
 
 ```
+
 
 ##
 

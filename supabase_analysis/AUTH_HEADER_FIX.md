@@ -16,14 +16,17 @@
 key = """
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ1dXlmanhucmFta2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0NjcyMDAsImV4cCI6MjA3MTA0MzIwMH0.4SpC34q7lcURBX4hujkTGqICdSM6ZWASCENnRs5rkS8
 ```text
+
 ```text
 ```
+
 
 **AFTER** (correct - single-line strings):
 
 ```toml
 
 ```text
+
 ```
 
 ### 2. `.env`
@@ -31,8 +34,10 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cXp5dXZ
 Also wrapped the keys in quotes to ensure proper parsing:
 
 ```env
+
 ```text
 ```text
+
 ```
 
 ## Technical Details
@@ -54,6 +59,7 @@ Also wrapped the keys in quotes to ensure proper parsing:
 ## Verification
 
 ```bash
+
 
 python3 -c " import toml secrets = toml.load('.streamlit/secrets.toml') key =
 secrets['supabase']['key'] print('Has newlines:', '\\n' in key)  # Should print: False "

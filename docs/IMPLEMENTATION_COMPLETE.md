@@ -74,6 +74,7 @@ response types instead of question-only endings.
 ```text
 ```
 
+
 Turn 1: Expected QUESTION   | Got QUESTION   ✓
 Turn 2: Expected REFLECTION | Got REFLECTION ✓
 Turn 3: Expected QUESTION   | Got QUESTION   ✓
@@ -87,8 +88,10 @@ Turn 6: Expected REFLECTION | Got REFLECTION ✓
 
 ### Test 2: Closing Type Generation ✓
 ```text
+
 ```text
 ```
+
 
 Question:   "What's the part of the overwhelm that troubles you most?" ✓ Reflection: "It sounds like
 the accumulation is what's breaking it for you." ✓ Affirmation:"Your exhaustion is legitimate." ✓
@@ -109,6 +112,7 @@ the accumulation is what's breaking it for you." ✓ Affirmation:"Your exhaustio
 
 ```bash
 
+
 # Test response type pattern (turns 1-8)
 python test_closing_types.py
 
@@ -120,6 +124,7 @@ python IMPLEMENTATION_SUMMARY.py
 
 # View before/after comparison
 python BEFORE_AFTER_COMPARISON.py
+
 ```
 
 ## Key Improvements

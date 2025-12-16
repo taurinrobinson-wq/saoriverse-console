@@ -24,6 +24,7 @@ Antonym glyphs are symbolic representations of emotional opposites, matched with
 ```text
 ```
 
+
 Comfort (ζ × α) - "Gentle Holding" "The feeling of being emotionally cradled, soothed without
 sedation"
 
@@ -48,8 +49,10 @@ Grief (Ω × β) - "Vital Ache" "Sacred sorrow, mourning that honors what was lo
 
 ### Data Flow
 ```text
+
 ```text
 ```
+
 
 antonym_glyphs.txt ↓ antonym_glyphs_indexer.py (loads and indexes) ↓ antonym_glyphs_indexed.json
 (generated index) ↓ antonym_glyphs.py (provides API) ↓ [Your Code] (uses via simple function calls)
@@ -64,6 +67,7 @@ antonym_glyphs.txt ↓ antonym_glyphs_indexer.py (loads and indexes) ↓ antonym
 ### Basic Import
 
 ```python
+
 from emotional_os.glyphs.antonym_glyphs import ( find_antonym_by_emotion, search_antonyms,
 find_antonym_by_voltage_pair, )
 
@@ -74,8 +78,10 @@ antonym = find_antonym_by_emotion("comfort") print(antonym["Name"])  # Output: "
 results = search_antonyms("joy")
 
 # Find by voltage pair
+
 ```text
 ```text
+
 ```
 
 ### API Reference
@@ -99,11 +105,13 @@ Find antonym glyph by base emotion name.
 
 ```python
 
+
 comfort = find_antonym_by_emotion("comfort") if comfort: print(f"{comfort['Base Emotion']}:
 {comfort['Name']}")
 
 ```text
 ```
+
 
 ##### `find_antonym_by_voltage_pair(voltage_pair: str) -> Optional[Dict]`
 
@@ -124,8 +132,10 @@ Find antonym by voltage pair notation.
 antonym = find_antonym_by_voltage_pair("γ × γ")
 if antonym:
 ```text
+
 ```text
 ```
+
 
 ##### `search_antonyms(query: str) -> List[Dict]`
 
@@ -147,6 +157,7 @@ results = search_antonyms("joy")
 for antonym in results:
 
 ```text
+
 ```
 
 #### Discovery Functions
@@ -158,9 +169,12 @@ Get the emotional opposite of a given emotion.
 **Example:**
 
 ```python
+
 opposite = suggest_emotional_opposite("grief") if opposite:
+
 ```text
 ```text
+
 ```
 
 #### Listing Functions
@@ -216,10 +230,12 @@ Format an antonym glyph for UI display.
 
 ```python
 
+
 antonym = find_antonym_by_emotion("comfort") display_text = format_antonym_for_display(antonym)
 
 ```text
 ```
+
 
 ## Integration Examples
 
@@ -246,8 +262,10 @@ if antonym:
     with col2:
         st.markdown("### Emotional Opposite")
 ```text
+
 ```text
 ```
+
 
 ### Example 2: Search for Related Emotions
 
@@ -263,11 +281,13 @@ if search_query:
     for antonym in results:
 
 ```text
+
 ```
 
 ### Example 3: Suggest Emotional Complements
 
 ```python
+
 from emotional_os.glyphs.antonym_glyphs import ( suggest_emotional_opposite, find_antonym_by_emotion
 )
 
@@ -277,13 +297,16 @@ user_emotion = "loneliness"
 # Suggest the opposite perspective
 opposite = suggest_emotional_opposite(user_emotion) if opposite: st.info(f"💡 Consider also:
 {opposite['Name']}")
+
 ```text
 ```text
+
 ```
 
 ### Example 4: Build an Antonym Glyph Browser
 
 ```python
+
 
 from emotional_os.glyphs.antonym_glyphs import ( list_antonym_emotions, find_antonym_by_emotion,
 format_antonym_for_display )
@@ -294,6 +317,7 @@ if selected_emotion: antonym = find_antonym_by_emotion(selected_emotion) if anto
 
 ```text
 ```
+
 
 ## Current Coverage
 
@@ -320,8 +344,10 @@ if selected_emotion: antonym = find_antonym_by_emotion(selected_emotion) if anto
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### Test Results
 
@@ -352,6 +378,7 @@ All 22 tests passing (100% pass rate):
 ✓ Sample emotions are findable
 
 ```text
+
 ```
 
 ## Development Notes
@@ -361,9 +388,12 @@ All 22 tests passing (100% pass rate):
 The antonym glyphs are indexed for fast lookup. To regenerate the index:
 
 ```bash
+
 cd /workspaces/saoriverse-console
+
 ```text
 ```text
+
 ```
 
 This creates `/workspaces/saoriverse-console/emotional_os/glyphs/antonym_glyphs_indexed.json`.
@@ -374,11 +404,13 @@ Antonym glyphs are stored in JSON with this structure:
 
 ```json
 
+
 { "Base Emotion": "Comfort", "Pairing": "ζ × α", "Name": "Gentle Holding", "Description": "The
 feeling of being emotionally cradled, soothed without sedation"
 
 ```text
 ```
+
 
 ### Adding New Antonym Glyphs
 
@@ -418,8 +450,10 @@ If you get "Antonym glyphs index not found" error:
 ```bash
 cd /workspaces/saoriverse-console
 ```text
+
 ```text
 ```
+
 
 ### Tests Failing
 
@@ -428,6 +462,7 @@ Run the test suite to diagnose issues:
 ```bash
 
 ```text
+
 ```
 
 All 22 tests should pass. If not, check that:
@@ -448,6 +483,7 @@ Make sure:
 
 ```python
 
+
 # Quick import for most common use
 from emotional_os.glyphs.antonym_glyphs import find_antonym_by_emotion
 
@@ -459,6 +495,7 @@ results = search_antonyms("sorrow")
 
 # Get all emotions
 emotions = list_antonym_emotions()
+
 ```
 
 ## License & Attribution

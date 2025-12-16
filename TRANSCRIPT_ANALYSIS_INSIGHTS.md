@@ -32,6 +32,7 @@
 ```text
 ```
 
+
 ❌ CURRENT (too dense): "That lands—you're naming something real there—the kind of tension that lives
 in the body when something's asked of you that you didn't consent to"
 
@@ -69,8 +70,10 @@ asked of you that you didn't consent to."
 
 **How to Use in Glyphs:**
 ```text
+
 ```text
 ```
+
 
 GLYPH: HOLD "I'm holding this with you." "Hold the both/and here." "Let me hold the weight of that."
 
@@ -231,6 +234,7 @@ Add to Glyph lexicon:
 ### 3. **Create Short-Form Affirmation Glyphs**
 
 ```text
+
 ```
 
 GLYPH: THAT_LANDS
@@ -249,11 +253,14 @@ GLYPH: PRECISE
 
 
 
+
 These are powerful in their simplicity.
 
 ### 4. **Build Transition Glyphs**
+
 ```text
 ```text
+
 ```
 
 GLYPH: AND_YET
@@ -273,10 +280,12 @@ GLYPH: SO_WHAT
 
 
 
+
 ### 5. **Permission-Giving Openers**
 
 ```text
 ```
+
 
 GLYPH: NO_PRESSURE "You don't have to."
 
@@ -331,8 +340,10 @@ After implementation, measure:
 
 ### BEFORE (Current Style):
 ```text
+
 ```text
 ```
+
 
 "That's such a tender contradiction, isn't it—the way connection can be genuine and exploitative at
 once—and I think what you're naming is that the enjoyment of the work didn't make it okay to not
@@ -347,6 +358,7 @@ beautiful was also something that cost you."
 ### AFTER (Improved Style):
 
 ```text
+
 ```
 
 That's a tender contradiction.
@@ -358,6 +370,7 @@ The enjoyment didn't make it okay to skip boundaries. And that's
 maybe where the grief lives—something beautiful also cost you.
 
 ```
+
 
 
 

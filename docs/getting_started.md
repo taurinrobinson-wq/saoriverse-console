@@ -14,43 +14,54 @@ Quick steps
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 ```text
+
 ```text
 ```
+
 
 2. Load safe defaults
 
 ```bash
 
 ```text
+
 ```
 
 3. (Optional) Install Python deps
 
 ```bash
+
 python -m pip install --upgrade pip pip install -r requirements.txt      # runtime deps
+
 ```text
 ```text
+
 ```
 
 4. Run the enrichment pipeline (example)
 
 ```bash
 
+
 ```text
 ```
+
 
 5. View logs
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 6. Run tests
 
 ```bash
 
 ```text
+
 ```
 
 Makefile (quick shortcuts)
@@ -58,10 +69,13 @@ Makefile (quick shortcuts)
 You can use the included `Makefile` to run common developer rituals:
 
 ```bash
+
 make env        # Load safe defaults make install    # Create virtualenv and install deps make
 enrich     # Run the enrichment pipeline make test       # Run tests
+
 ```text
 ```text
+
 ```
 
 Processing modes
@@ -75,6 +89,7 @@ Processing modes
 To enable remote AI calls for testing or trusted environments:
 
 ```bash
+
 
 export PROCESSING_MODE=hybrid export ALLOW_REMOTE_AI=1
 

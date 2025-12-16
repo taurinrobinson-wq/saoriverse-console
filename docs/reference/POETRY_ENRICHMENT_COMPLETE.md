@@ -12,6 +12,7 @@ enrichment layer running 100% locally with zero external dependencies.
 ```text
 ```
 
+
 ┌─ LOCAL MACHINE (245MB) ─────────────────────┐
 │  • /Users/taurinrobinson/saoriverse-console │
 │  • main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) (Streamlit UI)    │
@@ -118,10 +119,12 @@ enrichment layer running 100% locally with zero external dependencies.
 
 ```bash
 
+
 cd /Users/taurinrobinson/saoriverse-console
 
 ```text
 ```
+
 
 ### Enable Poetry Enrichment
 
@@ -154,8 +157,10 @@ Analysis:
 ├─ Glyphs: ✨ 🌈
 ├─ Poetry Source: Emily Dickinson
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -247,11 +252,13 @@ Add Metadata (for conversation history)
     ↓
 
 ```text
+
 ```
 
 ### Data Flow Architecture
 
 ```
+
 main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) (Streamlit UI)
     ├─ poetry_enrichment.py (Main enrichment)
     │  ├─ nrc_lexicon_loader.py (Emotion detection)
@@ -259,6 +266,7 @@ main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) (Streamlit UI)
     │  └─ poetry_database.py (Poem retrieval)
     │     └─ data/poetry/poetry_database.json (33 poems)
     └─ Glyphs (292+ symbols)
+
 ```
 
 ### Key Classes

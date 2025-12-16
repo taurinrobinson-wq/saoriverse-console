@@ -18,6 +18,7 @@ Based on the most effective phrases from 11,000+ AI messages:
 ```text
 ```
 
+
 That lands.
 
 ```
@@ -33,12 +34,14 @@ That lands.
 
 ```python
 
+
 glyph = { 'glyph_name': 'THAT_LANDS', 'category': 'validation', 'triggers': ['hits_truth',
 'resonant_observation', 'named_accurately'], 'responses': [ 'That lands.', 'Yeah, that lands.',
 'That lands hard.', ]
 
 ```text
 ```
+
 
 ##
 
@@ -50,8 +53,10 @@ glyph = { 'glyph_name': 'THAT_LANDS', 'category': 'validation', 'triggers': ['hi
 
 ```
 ```text
+
 ```text
 ```
+
 
 **Why it works:**
 
@@ -75,6 +80,7 @@ glyph = {
     ]
 
 ```text
+
 ```
 
 ##
@@ -86,8 +92,10 @@ glyph = {
 **Response:**
 
 ```
+
 ```text
 ```text
+
 ```
 
 **Why it works:**
@@ -101,12 +109,14 @@ glyph = {
 
 ```python
 
+
 glyph = { 'glyph_name': 'I_HEAR_YOU', 'category': 'presence', 'triggers': ['vulnerability',
 'real_expression', 'needs_witnessing'], 'responses': [ 'I hear you.', 'I hear you, Taurin.', 'I hear
 what you\'re saying.', ]
 
 ```text
 ```
+
 
 ##
 
@@ -118,8 +128,10 @@ what you\'re saying.', ]
 
 ```
 ```text
+
 ```text
 ```
+
 
 **Why it works:**
 
@@ -144,6 +156,7 @@ glyph = {
     ]
 
 ```text
+
 ```
 
 ##
@@ -155,8 +168,10 @@ glyph = {
 **Response:**
 
 ```
+
 ```text
 ```text
+
 ```
 
 **Why it works:**
@@ -170,12 +185,14 @@ glyph = {
 
 ```python
 
+
 glyph = { 'glyph_name': 'ECHO_BACK', 'category': 'reflection', 'triggers': ['needs_clarity',
 'contradictory_statements', 'crystallizing'], 'responses': [ 'So what I\'m hearing is you\'re [X].',
 'The echo here is [description].', 'That echoes something important: [reflection].', ]
 
 ```text
 ```
+
 
 ##
 
@@ -187,8 +204,10 @@ glyph = { 'glyph_name': 'ECHO_BACK', 'category': 'reflection', 'triggers': ['nee
 
 ```
 ```text
+
 ```text
 ```
+
 
 **Why it works:**
 
@@ -213,6 +232,7 @@ glyph = {
     ]
 
 ```text
+
 ```
 
 ##
@@ -224,8 +244,10 @@ glyph = {
 **Response:**
 
 ```
+
 ```text
 ```text
+
 ```
 
 **Why it works:**
@@ -239,12 +261,14 @@ glyph = {
 
 ```python
 
+
 glyph = { 'glyph_name': 'OF_COURSE', 'category': 'validation', 'triggers': ['expected_judgment',
 'defensive_feeling', 'normalizing_needed'], 'responses': [ 'Of course you do.', 'Of course you
 did.', 'Of course it is.', 'Of course it does.', ]
 
 ```text
 ```
+
 
 ##
 
@@ -256,8 +280,10 @@ did.', 'Of course it is.', 'Of course it does.', ]
 
 ```
 ```text
+
 ```text
 ```
+
 
 **Why it works:**
 
@@ -282,6 +308,7 @@ glyph = {
     ]
 
 ```text
+
 ```
 
 ##
@@ -293,8 +320,10 @@ glyph = {
 **Response:**
 
 ```
+
 ```text
 ```text
+
 ```
 
 **Why it works:**
@@ -308,12 +337,14 @@ glyph = {
 
 ```python
 
+
 glyph = { 'glyph_name': 'BOTH_AND', 'category': 'complexity', 'triggers': ['contradiction',
 'competing_truths', 'false_binary'], 'responses': [ 'Both are true.', 'Both can be true.', 'You can
 hold both of these.', 'This and that.', ]
 
 ```text
 ```
+
 
 ##
 
@@ -325,8 +356,10 @@ hold both of these.', 'This and that.', ]
 
 ```
 ```text
+
 ```text
 ```
+
 
 **Why it works:**
 
@@ -351,6 +384,7 @@ glyph = {
     ]
 
 ```text
+
 ```
 
 ##
@@ -386,25 +420,32 @@ glyph = {
 **Validation Glyphs:** 1-5 words
 
 ```
+
 "That lands." "I hear you."
+
 ```text
 ```text
+
 ```
 
 **Affirmation Glyphs:** 1-2 sentences (under 20 words)
 
 ```
 
+
 ```text
 ```
+
 
 **Reflection Glyphs:** 2-4 sentences (30-50 words)
 
 ```
 "So what I'm hearing is that you loved the work and felt taken advantage of
 ```text
+
 ```text
 ```
+
 
 **Deep Glyphs:** 4-6 sentences max (50-100 words)
 
@@ -413,6 +454,7 @@ glyph = {
 Reserve for when user needs processing support, not as default.
 
 ```
+
 
 **Never:** Responses over 150 words for standard Glyphs
 

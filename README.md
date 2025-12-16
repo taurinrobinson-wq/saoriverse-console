@@ -12,14 +12,17 @@ A private, local-first emotional AI companion with integrated voice interface.
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 ### 2. Run the Application
 
 ```bash
 
 ```text
+
 ```
 
 Opens automatically in your browser at `http://localhost:8501`
@@ -47,6 +50,7 @@ This project uses a clean folder structure to prevent clutter:
 
 ```bash
 
+
 # Start Velinor web game (dev mode)
 ./scripts/RUN_WEB_DEV.sh
 
@@ -57,8 +61,10 @@ This project uses a clean folder structure to prevent clutter:
 pip install -r requirements.txt
 
 # Run Streamlit app
+
 ```text
 ```text
+
 ```
 
 ## Documentation
@@ -84,6 +90,7 @@ pip install -r requirements.txt
 
 ```
 
+
 saoriverse-console/
 ├── app.py                 # Single Streamlit entry point
 ├── requirements.txt       # Dependencies
@@ -97,6 +104,7 @@ saoriverse-console/
 
 ```text
 ```
+
 
 **Key Change**: Flat `src/` directory with no deep nesting, single `app.py` entry point.
 
@@ -117,8 +125,10 @@ pytest tests/integration/
 
 # With coverage report
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -129,21 +139,26 @@ pytest tests/integration/
 ```
 
 ```text
+
 ```
 
 ### Voice Pipeline (Optional)
 
 ```
+
 ```text
 ```text
+
 ```
 
 ### Learning System
 
 ```
 
+
 ```text
 ```
+
 
 ##
 
@@ -213,8 +228,10 @@ kill -9 <PID>
 
 # Then restart
 ```text
+
 ```text
 ```
+
 
 ### Import Errors
 
@@ -230,17 +247,20 @@ python -c "import sys; print(sys.path)"
 # Reinstall dependencies
 
 ```text
+
 ```
 
 ### Tests Not Running
 
 ```bash
 
+
 # Check pytest is installed
 python -m pytest --version
 
 # Run with verbose output
 pytest tests/ -v
+
 ```
 
 ##

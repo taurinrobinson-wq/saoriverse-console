@@ -8,6 +8,7 @@ happens:
 ```text
 ```
 
+
 You type: "I'm overwhelmed by all of this" ↓ FirstPerson analyzes:
 
 - Tone: "heavy" (negative emotion)
@@ -54,8 +55,10 @@ FirstPerson tracks across turns:
 
 ### Conversation Memory
 ```text
+
 ```text
 ```
+
 
 Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6 Turn 2: "It's like I've lost them"
 → Theme: grief, Valence: -0.8 Turn 3: "But maybe there's hope"  → Theme: grief, Valence: -0.1
@@ -70,12 +73,14 @@ Turn 1: "I feel disconnected"     → Theme: general, Valence: -0.6 Turn 2: "It'
 ### NPC Responds to Pattern
 
 ```text
+
 ```
 
 Turn 3 NPC: "I'm noticing a shift in what you're saying.
 What's helping you see this differently?"
 
 ```
+
 
 
 
@@ -113,11 +118,13 @@ orchestrator = VelinorTwineOrchestrator(
     ...
 
 ```text
+
 ```
 
 ### In `velinor/engine/orchestrator.py`
 
 ```python
+
 
 # Step 1: Analyze player input
 player_analysis = self._summarize_player_intent(player_input, player_id)
@@ -127,8 +134,10 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
 # Step 2: Apply to NPC dialogue
 npc_dialogue = self._generate_npc_dialogue( npc_name='Keeper', context=updated_state  # Contains
 player_analysis
+
 ```text
 ```text
+
 ```
 
 ## 🎮 Real Example
@@ -139,6 +148,7 @@ player_analysis
 
 ```
 
+
 You: "Everything feels too heavy. I don't know if I can go on."
 
 FirstPerson Analysis: { tone: 'heavy', theme: 'general', valence: -0.8, intensity: 0.9 }
@@ -148,6 +158,7 @@ What needs to be said about it? Sometimes naming it
 
 ```text
 ```
+
 
 ### Scenario 2: Recurring Theme (After 3rd mention of loss)
 
@@ -171,8 +182,10 @@ Keeper's Response:
 "I hear the weight in that. And I'm noticing grief keeps coming
 back to you—it's sitting heavy. That tells me something. What do
 ```text
+
 ```text
 ```
+
 
 ### Scenario 3: Emotional Improvement
 
@@ -195,6 +208,7 @@ Keeper's Response:
 "There's something to sit with there. I'm also noticing a shift
 
 ```text
+
 ```
 
 ## 🚀 How to Use It
@@ -203,9 +217,12 @@ Keeper's Response:
 
 ```bash
 
+
 # Just run it—integration works automatically!
+
 ```text
 ```text
+
 ```
 
 No configuration needed. FirstPerson analysis happens client-side.
@@ -216,11 +233,13 @@ The terminal shows debug info (if logging enabled):
 
 ```
 
+
 [Player Input] "I'm struggling with loss" [FirstPerson] tone='heavy', theme='grief', valence=-0.7,
 intensity=0.8
 
 ```text
 ```
+
 
 ### Customizing Responses
 
@@ -240,8 +259,10 @@ theme_acknowledgments = {
     'grief': "Your custom grief acknowledgment",
     ...
 ```text
+
 ```text
 ```
+
 
 ## 📈 What Improves Player Experience
 
@@ -270,11 +291,13 @@ self.memory.record_turn(
     glyph_name=None
 
 ```text
+
 ```
 
 ### Recurring Theme Detection
 
 ```python
+
 Turn 1: "I miss them" → theme='general' Turn 2: "The loss keeps returning" → theme='grief' Turn 3:
 "Grief is still with me" → theme='grief' (2nd occurrence)
 
@@ -282,13 +305,16 @@ Turn 1: "I miss them" → theme='general' Turn 2: "The loss keeps returning" →
 memory.repeated_patterns = ['grief']
 
 # Next NPC response includes:
+
 ```text
 ```text
+
 ```
 
 ### Emotional Trajectory
 
 ```python
+
 
 Valence history: [-0.8, -0.7, -0.6, -0.4, -0.2] → Trend: 'improving'
 

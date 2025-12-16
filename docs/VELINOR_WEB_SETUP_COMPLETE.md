@@ -34,6 +34,7 @@ All scaffolding is complete. The full web stack is ready for local testing and d
 ```text
 ```
 
+
 d:\saoriverse-console\
 ├── velinor_api.py                    ✅ FastAPI backend
 ├── frontend_lib_api.ts               ✅ (copied to velinor-web/lib/api.ts)
@@ -106,18 +107,22 @@ Terminal 1 (Backend):
 
 ```bash
 
+
 cd d:\saoriverse-console
 
 ```text
 ```
+
 
 Terminal 2 (Frontend):
 
 ```bash
 cd d:\saoriverse-console\velinor-web
 ```text
+
 ```text
 ```
+
 
 Then open: `http://localhost:3000`
 
@@ -133,6 +138,7 @@ git commit -m "Velinor web stack complete - ready for production"
 git push origin main
 
 ```
+
 
 Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend
 domain.

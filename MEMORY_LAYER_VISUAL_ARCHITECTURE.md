@@ -5,6 +5,7 @@
 ```text
 ```
 
+
 # USER INPUT FLOW
 
 Turn 1: "I'm feeling so stressed today"
@@ -97,8 +98,10 @@ v SYSTEM UNDERSTANDS COMPLETE PROBLEM
 
 ## Memory State Evolution
 ```text
+
 ```text
 ```
+
 
 # CONFIDENCE PROGRESSION
 
@@ -185,6 +188,7 @@ Benefit: Progressive, specific, builds understanding
 ## System Architecture
 
 ```text
+
 ```
 
 # CONVERSATION MEMORY LAYER
@@ -276,11 +280,14 @@ Benefit: Progressive, specific, builds understanding
 ```
 
 
+
 ##
 
 ## Information Integration Logic
+
 ```text
 ```text
+
 ```
 
 INCOMING MESSAGE                MEMORY STATE (before)
@@ -350,12 +357,14 @@ INCOMING MESSAGE                MEMORY STATE (before)
 
 
 
+
 ##
 
 ## Turn Sequence State Machine
 
 ```text
 ```
+
 
 INITIAL STATE (no memory)
         │
@@ -416,8 +425,10 @@ TURN 3+ (Later messages)
 
 ## Quality Metrics
 ```text
+
 ```text
 ```
+
 
 Response Quality Baseline: WITHOUT Memory • Generic (same questions for different contexts) •
 Isolated (doesn't reference prior messages) • Repetitive (asks "tell me more" repeatedly) Score: 2/5
@@ -433,4 +444,5 @@ action-oriented question Score: 5/5
 Improvements Enabled by Memory: • +50% specificity (emotion → mechanism → specifics) • +70%
 relevance (contextual vs. generic) • +100% user understanding (feels truly heard) • -80% repetition
 (each question targets new gap)
+
 ```

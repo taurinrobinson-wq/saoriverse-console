@@ -17,6 +17,7 @@ export PROCESSING_MODE=hybrid
 export ALLOW_REMOTE_AI=1
 ```
 
+
 Behavior notes:
 
 - In `local` mode the codebase defaults to privacy-first behaviour. Any attempt to initialize or call remote AI clients from guarded factory functions will either:

@@ -22,8 +22,10 @@ ssh root@161.35.227.49
 # If using SSH key, it may be automatic
 
 ```text
+
 ```text
 ```
+
 
 ### Step 2: Run the Automated Setup Script
 
@@ -40,6 +42,7 @@ chmod +x docker-setup.sh
 # Run it
 
 ```text
+
 ```
 
 This script will:
@@ -55,6 +58,7 @@ This script will:
 
 ```bash
 
+
 # Check running containers
 docker compose ps
 
@@ -62,8 +66,10 @@ docker compose ps
 curl http://161.35.227.49:8000/health
 
 # Test the frontend
+
 ```text
 ```text
+
 ```
 
 ##
@@ -73,6 +79,7 @@ curl http://161.35.227.49:8000/health
 ### Install Docker Manually
 
 ```bash
+
 
 
 # Update system
@@ -102,6 +109,7 @@ sudo usermod -aG docker $USER newgrp docker
 ```text
 ```
 
+
 ### Clone & Configure Your Project
 
 ```bash
@@ -123,8 +131,10 @@ nano .env
 # - FRONTEND_URL=http://161.35.227.49
 
 ```text
+
 ```text
 ```
+
 
 ### Build and Start Services
 
@@ -149,6 +159,7 @@ docker compose logs -f backend
 # View just frontend logs
 
 ```text
+
 ```
 
 ##
@@ -172,6 +183,7 @@ Once everything is running:
 
 ```bash
 
+
 # All services
 docker compose logs
 
@@ -185,13 +197,16 @@ docker compose logs -f
 docker compose logs --tail 100
 
 # Last 100 lines, following
+
 ```text
 ```text
+
 ```
 
 ### Stop Services
 
 ```bash
+
 
 
 # Stop without removing
@@ -208,6 +223,7 @@ docker compose down
 ```text
 ```
 
+
 ### Restart Individual Services
 
 ```bash
@@ -220,8 +236,10 @@ docker compose restart frontend
 
 # Restart nginx
 ```text
+
 ```text
 ```
+
 
 ### Execute Commands in Containers
 
@@ -237,11 +255,13 @@ docker compose exec backend python -c "import sys; print(sys.version)"
 # Get a shell in the frontend container
 
 ```text
+
 ```
 
 ### View Resource Usage
 
 ```bash
+
 
 # Overall Docker stats
 docker stats
@@ -250,8 +270,10 @@ docker stats
 docker system df
 
 # Prune unused images/containers
+
 ```text
 ```text
+
 ```
 
 ##
@@ -261,6 +283,7 @@ docker system df
 ### Deploy New Code
 
 ```bash
+
 
 
 # Pull latest changes
@@ -277,6 +300,7 @@ docker compose up -d
 ```sql
 ```
 
+
 ### Update Specific Service
 
 ```bash
@@ -286,8 +310,10 @@ docker compose up -d --build backend
 
 # Just rebuild and restart frontend
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -311,11 +337,13 @@ sudo lsof -i :8000
 sudo lsof -i :3000
 
 ```text
+
 ```
 
 ### Out of Disk Space
 
 ```bash
+
 
 # Check usage
 docker system df
@@ -324,13 +352,16 @@ docker system df
 docker system prune -a
 
 # Remove specific image
+
 ```text
 ```text
+
 ```
 
 ### Network Issues
 
 ```bash
+
 
 
 # Check networks
@@ -344,6 +375,7 @@ docker compose down
 
 ```sql
 ```
+
 
 ### Can't Connect to Backend from Frontend
 
@@ -361,8 +393,10 @@ docker compose exec frontend curl http://backend:8000/health
 docker compose exec frontend env | grep API_URL
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -382,11 +416,13 @@ docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 # Or use rsync
 
 ```sql
+
 ```
 
 ### Restore from Backup
 
 ```bash
+
 
 # Copy backup to container
 docker cp backup.tar.gz saoriverse-backend:/app/
@@ -395,8 +431,10 @@ docker cp backup.tar.gz saoriverse-backend:/app/
 docker compose exec backend tar -xzf /app/backup.tar.gz
 
 # Restart
+
 ```text
 ```text
+
 ```
 
 ##
@@ -406,6 +444,7 @@ docker compose exec backend tar -xzf /app/backup.tar.gz
 ### Using Let's Encrypt
 
 ```bash
+
 
 
 # Install certbot
@@ -420,6 +459,7 @@ docker compose stop nginx sudo certbot certonly --standalone -d 161.35.227.49
 
 ```sql
 ```
+
 
 ### Update nginx.conf for HTTPS
 
@@ -438,8 +478,10 @@ server {
     listen 80;
     return 301 https://$host$request_uri;
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -468,17 +510,20 @@ echo ""
 echo "=== Disk Usage ==="
 
 ```text
+
 ```
 
 Run it regularly:
 
 ```bash
+
 chmod +x check-health.sh ./check-health.sh
 
 # Or set up a cron job to check every hour
 crontab -e
 
 # Add: 0 * * * * /root/saoriverse-console/check-health.sh >> /var/log/saoriverse-health.log 2>&1
+
 ```
 
 ##

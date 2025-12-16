@@ -28,8 +28,10 @@ python -m spacy download en_core_web_sm
 # From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -59,6 +61,7 @@ class NRCLexicon:
         return dict(emotions)
 
 ```text
+
 ```
 
 **Use**: Load NRC once at startup, then query freely.
@@ -66,6 +69,7 @@ class NRCLexicon:
 ### 2. parser/semantic_engine.py
 
 ```python
+
 import spacy from gensim.models import Word2Vec
 
 class SemanticEngine: def __init__(self): self.nlp = spacy.load("en_core_web_sm")
@@ -83,6 +87,7 @@ return doc1.similarity(doc2)
 
 ```text
 ```text
+
 ```
 
 **Use**: Entity extraction, semantic similarity.
@@ -90,6 +95,7 @@ return doc1.similarity(doc2)
 ### 3. emotional_os/glyphs/response_generator.py
 
 ```python
+
 
 class PoetricResponseGenerator: def __init__(self, db_connection): self.db = db_connection
 
@@ -126,6 +132,7 @@ def _validate(self, user_message: str) -> str:
 
 ```text
 ```
+
 
 **Use**: Generate beautiful, poetic responses locally.
 
@@ -165,8 +172,10 @@ CREATE TABLE glyph_rituals (
 CREATE INDEX idx_glyph_poetry ON glyph_poetry(glyph_id);
 CREATE INDEX idx_glyph_metaphors ON glyph_metaphors(glyph_id);
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -223,6 +232,7 @@ elapsed = time.time() - start
 print(response)
 
 ```text
+
 ```
 
 ##
@@ -247,6 +257,7 @@ print(response)
 
 ```bash
 
+
 # Create test_local_mode_dev.py
 python -c " import time from parser.nrc_lexicon_loader import nrc from parser.semantic_engine import
 SemanticEngine
@@ -264,8 +275,10 @@ start = time.time() for i in range(10): nrc.analyze_text('I feel sad and lost') 
 (time.time() - start) / 10 print(f'✓ Average latency: {elapsed*1000:.1f}ms')
 
 print('\\n✅ All tests passed!')
+
 ```text
 ```text
+
 ```
 
 ##
@@ -273,6 +286,7 @@ print('\\n✅ All tests passed!')
 ## 🔐 Verify Privacy
 
 ```bash
+
 
 python -c " import sys import os
 
@@ -288,6 +302,7 @@ Zero external calls possible')
 
 ```text
 ```
+
 
 ##
 
@@ -324,8 +339,10 @@ data/
 │   └── nrc_emotion_lexicon.txt (NEW)
 └── poetry/
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -350,6 +367,7 @@ python -m spacy download en_core_web_sm
 # Download NRC lexicon manually
 
 ```
+
 
 ### Tomorrow (2 hours)
 

@@ -119,8 +119,10 @@
 
 ```bash
 ```text
+
 ```text
 ```
+
 
 Results:
 
@@ -353,6 +355,7 @@ Data Persistence
 ├─ JSON files
 
 ```text
+
 ```
 
 ##
@@ -367,6 +370,7 @@ The system now **automatically creates new glyphs during live user-AI conversati
 
 ```bash
 
+
 # Verify integration
 bash verify_integration.sh
 
@@ -374,6 +378,7 @@ bash verify_integration.sh
 streamlit run main_v2.py
 
 # Select "hybrid" mode and start chatting!
+
 ```
 
 🎉 **Ready to use!**

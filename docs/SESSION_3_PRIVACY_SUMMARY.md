@@ -29,9 +29,10 @@ care level of crisis response
 ```text
 ```
 
-Raw Text → Signal Detection → Gate Encoding → Glyph Mapping → Anonymous Storage ↓
-(SIG_CRISIS_001)  (GATE_GRIEF_004)    ([42, 183])      ✓ Discarded      (encoded)
-(encoded)        (IDs only)    No raw text
+
+Raw Text → Signal Detection → Gate Encoding → Glyph Mapping → Anonymous Storage ↓ (SIG_CRISIS_001)
+(GATE_GRIEF_004)    ([42, 183])      ✓ Discarded      (encoded) (encoded)        (IDs only)    No
+raw text
 
 ```
 
@@ -85,8 +86,10 @@ Key Features:
 
 **verify_privacy_encoding.py** - Standalone Verification
 ```text
+
 ```text
 ```
+
 
 ✓ Pipeline initialized ✓ Conversation encoded ✓ No raw text found ✓ All required fields present ✓
 Encoded record displays properly ✓ Hash deterministic READY FOR INTEGRATION ✓
@@ -129,19 +132,23 @@ Encoded record displays properly ✓ Hash deterministic READY FOR INTEGRATION �
 ### What Gets STORED ✓
 
 ```json
-{ "user_id_hashed": "7a9f3c1e2d5b8a4f...",  // SHA-256 one-way hash "session_id": "sess_abc123",
-// Session reference "encoded_signals": ["SIG_CRISIS_001"],     // Signal codes (not words)
-"encoded_gates": ["GATE_GRIEF_004"],       // Gate codes (not content) "glyph_ids": [42, 183],
-// Glyph IDs (not text) "message_length_bucket": "100-200_chars",  // Bucket (not exact)
-"timestamp_week": "2025-W02",              // Week level (not exact time) "signal_count": 2,
-// Count (not sequence) "response_source": "conversation"          // Metadata only
+
+{ "user_id_hashed": "7a9f3c1e2d5b8a4f...",  // SHA-256 one-way hash "session_id": "sess_abc123", //
+Session reference "encoded_signals": ["SIG_CRISIS_001"],     // Signal codes (not words)
+"encoded_gates": ["GATE_GRIEF_004"],       // Gate codes (not content) "glyph_ids": [42, 183], //
+Glyph IDs (not text) "message_length_bucket": "100-200_chars",  // Bucket (not exact)
+"timestamp_week": "2025-W02",              // Week level (not exact time) "signal_count": 2, //
+Count (not sequence) "response_source": "conversation"          // Metadata only
+
 ```text
 ```text
+
 ```
 
 ### What Gets DISCARDED ❌
 
 ```
+
 
 ✗ Raw user input         "I want to end my life" ✗ Raw system response    "I'm here to help" ✗ User
 email             alice@example.com ✗ User name              Alice ✗ User phone
@@ -149,6 +156,7 @@ email             alice@example.com ✗ User name              Alice ✗ User ph
 
 ```text
 ```
+
 
 ##
 
@@ -186,8 +194,10 @@ What makes someone unique?
 
 Result: At least 5 users have identical quasi-identifiers
 ```text
+
 ```text
 ```
+
 
 ### 2. One-Way Encryption
 
@@ -198,18 +208,22 @@ Encoding: SIG_CRISIS_001
 Reversal: ✗ IMPOSSIBLE (one-way hash)
 
 ```text
+
 ```
 
 ### 3. Data Minimization
 
 ```
+
 What's necessary for system to respond appropriately: ✓ Emotional signals (to understand user state)
 ✓ Gates triggered (for response framework) ✓ Glyphs used (for quality assessment)
 
 What's NOT necessary: ✗ Exact user words (signals capture intent) ✗ User identity (hashed for
 anonymity)
+
 ```text
 ```text
+
 ```
 
 ##
@@ -222,10 +236,12 @@ anonymity)
 
 ```bash
 
+
 grep -r "\.insert\(" emotional_os/core/signal_parser.py
 
 ```text
 ```
+
 
 **Step 2: Wrap with Encoding** (30 min)
 
@@ -241,8 +257,10 @@ success, record_id = encode_and_store_conversation(
     session_id=session_id,
     db_connection=db,
 ```text
+
 ```text
 ```
+
 
 **Step 3: Deploy** (1 hour)
 
@@ -298,6 +316,7 @@ Key Achievements:
   7. ✓ Hash deterministic for same user
 
 ```text
+
 ```
 
 ##
@@ -307,15 +326,19 @@ Key Achievements:
 ### Before This Session
 
 ```
+
 User: "I'm suicidal" ↓ System processes (crisis response works) ↓ BUT: Raw message stored in
 Supabase ❌
+
 ```text
 ```text
+
 ```
 
 ### After This Session
 
 ```
+
 
 User: "I'm suicidal" ↓ System processes (crisis response works) ↓ 5-stage encoding pipeline ↓
 Database stores: SIG_CRISIS_001, GATE_CRISIS_009, [42,183] ↓ Raw message: DISCARDED (never stored) ✓

@@ -23,17 +23,20 @@ Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
 npm i supabase --save-dev
 ```
 
+
 To install the beta release channel:
 
 ```bash
 npm i supabase@beta --save-dev
 ```
 
+
 When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
 
 ```
 NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 ```
+
 
 > **Note**
 For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency](https://bun.sh/guides/install/trusted) before running `bun add -D supabase`.
@@ -158,11 +161,13 @@ For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency
 supabase bootstrap
 ```
 
+
 Or using npx:
 
 ```bash
 npx supabase bootstrap
 ```
+
 
 The bootstrap command will guide you through the process of setting up a Supabase project using one of the [starter](https://github.com/supabase-community/supabase-samples/blob/main/samples.json) templates.
 

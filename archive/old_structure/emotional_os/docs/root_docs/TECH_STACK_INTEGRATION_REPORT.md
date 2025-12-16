@@ -47,6 +47,7 @@ def main():
         render_splash_interface(auth)
 ```
 
+
 **Glyph Access**: Indirect via LimbicIntegrationEngine and render_main_app()
 **Integration Status**: ✅ READY
 
@@ -68,6 +69,7 @@ class LimbicIntegrationEngine:
         # Brain regions: insula, amygdala, hippocampus, acc, vmpfc
         # Accesses: All 7,096 glyphs for matching
 ```
+
 
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
@@ -98,6 +100,7 @@ class HybridProcessor:
         # Uses full 7,096-glyph pool for context
 ```
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ CRITICAL - READY
 
@@ -122,6 +125,7 @@ class GlyphFactorialEngine:
         # Fall back to JSON if CSV not available
         # Current setup: ✅ JSON at emotional_os/glyphs/glyph_lexicon_rows.json
 ```
+
 
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
@@ -149,6 +153,7 @@ class AdvancedPruningEngine:
             self.glyphs = data.get('glyphs', [])
 ```
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
 
@@ -171,6 +176,7 @@ class GateDistributionAnalyzer:
             self.glyphs = data['glyphs']
 ```
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Verification**: ✅ LAST RUN CONFIRMED 7,096 GLYPHS, ALL 12 GATES
 
@@ -190,6 +196,7 @@ class SharedGlyphManager:
         # Handles glyph discovery
 ```
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
 
@@ -208,6 +215,7 @@ class HybridLearner:
         # Maintains personal + shared lexicons
         # Returns: signals_learned, trust_score, etc.
 ```
+
 
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
@@ -229,6 +237,7 @@ def render_main_app():
     # Accesses all glyphs via HybridProcessor
 ```
 
+
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
 
@@ -246,6 +255,7 @@ class ConversationManager:
         # Tracks glyph encounters in conversations
         # Records for learning and future reference
 ```
+
 
 **Glyph Access**: Full lexicon (7,096 glyphs)
 **Integration Status**: ✅ READY
@@ -285,6 +295,7 @@ Database Persistence
     └─ Store glyphs for future sessions & learning
 ```
 
+
 **Status**: ✅ ALL STAGES VERIFIED & OPERATIONAL
 
 ##
@@ -318,6 +329,7 @@ Gate 12:   150 glyphs  (Transcendence & Return)
 
 TOTAL: 7,096 glyphs
 ```
+
 
 ### Ritual Status (All Intact)
 

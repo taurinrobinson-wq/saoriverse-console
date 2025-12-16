@@ -12,6 +12,7 @@ model can't handle the layered overlays and interactive positioning you want for
 ```text
 ```
 
+
 Your Computer (Dev)          Railway Server (Production) ═══════════════════
 ════════════════════════════
 
@@ -61,10 +62,12 @@ in backend
 
 ```bash
 
+
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git cd velinor-web
 
 ```text
 ```
+
 
 ### Step 2: Copy Components
 
@@ -73,8 +76,10 @@ npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 # From repo root
 cp frontend_lib_api.ts velinor-web/lib/api.ts
 ```text
+
 ```text
 ```
+
 
 ### Step 3: Create Pages
 
@@ -93,15 +98,18 @@ python velinor_api.py
 cd velinor-web && npm run dev
 
 ```text
+
 ```
 
 ### Step 5: Deploy
 
 ```bash
+
 git add . git commit -m "feat: Next.js + FastAPI Velinor game" git push origin main
 
 ```text
 ```text
+
 ```
 
 ##
@@ -123,6 +131,7 @@ git add . git commit -m "feat: Next.js + FastAPI Velinor game" git push origin m
 ## File Organization
 
 ```
+
 
 saoriverse-console/
 ├── velinor/                         ← Game engine (unchanged)
@@ -157,6 +166,7 @@ saoriverse-console/
 ```text
 ```
 
+
 ##
 
 ## Key Differences from Streamlit
@@ -170,8 +180,10 @@ st.image(splash_img)  # Shows image
 st.button("Start")    # Shows below, not on top
 
 ```text
+
 ```text
 ```
+
 
 ### After (Next.js - Works)
 
@@ -184,6 +196,7 @@ st.button("Start")    # Shows below, not on top
   </button>
 
 ```text
+
 ```
 
 ##
@@ -235,12 +248,15 @@ Once you have it running locally:
 ## Documentation Map
 
 ```
+
 START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
   ├─→ NEXTJS_FRONTEND_SETUP.md (detailed setup)
   ├─→ RAILWAY_DEPLOYMENT.md (production deploy)
   ├─→ VELINOR_WEB_QUICK_REFERENCE.md (commands)
+
 ```text
 ```text
+
 ```
 
 ##
@@ -248,6 +264,7 @@ START → VELINOR_WEB_MIGRATION.md (complete guide, 6 phases)
 ## Commands You'll Need
 
 ```bash
+
 
 
 # Create Next.js project (one time)

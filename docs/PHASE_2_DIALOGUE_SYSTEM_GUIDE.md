@@ -73,8 +73,10 @@ export const dialogueDatabase: Record<string, DialogueNode> = {
   },
   // More dialogue nodes...
 ```sql
+
 ```sql
 ```
+
 
 ### Step 2: Update GameScene Component
 
@@ -89,6 +91,7 @@ interface GameSceneProps {
   onChoiceClick: (choiceId: string, choiceIndex: number) => void;
 
 ```text
+
 ```
 
 ### Step 3: Create Dialogue Handler Hook
@@ -96,6 +99,7 @@ interface GameSceneProps {
 **File to create**: `velinor-web/src/lib/useDialogue.ts`
 
 ```typescript
+
 import { useGameStore } from './gameStore'; import { dialogueDatabase } from './dialogueData';
 
 export function useDialogue() { const { toneStats, updateToneStats, setScene, unlockGlyph } =
@@ -120,8 +124,10 @@ unlockGlyph(choice.unlocksContent.glyph); }
 ); } };
 
 return { handleDialogueChoice, dialogueDatabase };
+
 ```text
 ```text
+
 ```
 
 ### Step 4: Create Main Dialogue Component
@@ -129,6 +135,7 @@ return { handleDialogueChoice, dialogueDatabase };
 **File to create**: `velinor-web/src/components/DialogueRenderer.tsx`
 
 ```typescript
+
 
 import { useGameStore } from '@/lib/gameStore'; import { useDialogue } from '@/lib/useDialogue';
 import GameScene from './GameScene';
@@ -152,6 +159,7 @@ availableChoices[choiceIndex]; handleDialogueChoice(dialogue.id, dialogue.choice
 ```sql
 ```
 
+
 ### Step 5: Update Main Game Page
 
 **File to modify**: `velinor-web/src/app/game/[sessionId]/page.tsx`
@@ -170,8 +178,10 @@ Replace the hardcoded GameScene with DialogueRenderer:
 
 // New:
 ```text
+
 ```text
 ```
+
 
 ### Step 6: Add NPC Personality System
 
@@ -205,6 +215,7 @@ export const NPCDatabase: Record<string, NPC> = {
   // ... more NPCs
 
 ```text
+
 ```
 
 ## Content Creation Tasks
@@ -276,6 +287,7 @@ Each glyph should unlock from a meaningful dialogue moment:
 ## Code Structure After Phase 2
 
 ```
+
 velinor-web/src/
 ├── lib/
 │   ├── toneSystem.ts          (Existing)
@@ -291,6 +303,7 @@ velinor-web/src/
 └── app/
     └── game/[sessionId]/
         └── page.tsx           (Updated - use DialogueRenderer)
+
 ```
 
 ## Success Criteria

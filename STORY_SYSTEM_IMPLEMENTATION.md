@@ -1,14 +1,14 @@
 # Story System Implementation Guide
 
-**Status:** ✅ Complete and tested  
-**Date:** December 15, 2025  
+**Status:** ✅ Complete and tested
+**Date:** December 15, 2025
 **Version:** 1.0
-
----
+## 
 
 ## What You Now Have
 
-A **complete, self-contained story editing system** that gives you full independence to write, edit, validate, and build your Velinor story without needing an AI agent to modify JSON.
+A **complete, self-contained story editing system** that gives you full independence to write, edit,
+validate, and build your Velinor story without needing an AI agent to modify JSON.
 
 ### The Pipeline
 
@@ -24,7 +24,7 @@ sample_story.json (What the game engine reads)
 story_validator.py (Catch errors before runtime)
 ```
 
----
+## 
 
 ## Quick Start (3 Steps)
 
@@ -48,11 +48,13 @@ story.add_choice(
 )
 ```
 
+
 ### 2. Build to JSON
 
 ```bash
 python velinor/stories/build_story.py
 ```
+
 
 This converts your Python to JSON automatically.
 
@@ -62,9 +64,9 @@ This converts your Python to JSON automatically.
 python velinor/stories/build_story.py --validate
 ```
 
-Catches broken links, dead ends, missing passages, etc.
 
----
+Catches broken links, dead ends, missing passages, etc.
+## 
 
 ## File Inventory
 
@@ -76,8 +78,7 @@ Catches broken links, dead ends, missing passages, etc.
 | `story_validator.py` | Validation system | ✅ Working |
 | `story_map_parser.py` | Markdown parser (optional) | ✅ Ready |
 | `README.md` | Detailed usage guide | ✅ Complete |
-
----
+## 
 
 ## Key Features
 
@@ -106,12 +107,12 @@ Catches broken links, dead ends, missing passages, etc.
 - Multiple choice paths per passage
 - Converging story branches
 - Path tracking via tags
-
----
+## 
 
 ## Complete Workflow
 
 ```bash
+
 # 1. Edit the story
 nano velinor/stories/story_definitions.py
 
@@ -129,7 +130,7 @@ git commit -m "story: [Your message]"
 git push
 ```
 
----
+## 
 
 ## Story Structure (Current)
 
@@ -158,8 +159,7 @@ git push
 ### Shared Ending
 - Marketplace Shelter (rest)
 - Decision point for Act 2
-
----
+## 
 
 ## Stat Effects System
 
@@ -175,9 +175,9 @@ story.add_choice(
 )
 ```
 
-The game engine reads these to track emotional trajectory.
 
----
+The game engine reads these to track emotional trajectory.
+## 
 
 ## Advanced Features
 
@@ -189,6 +189,7 @@ If you want to auto-generate Python from your Markdown outline:
 python velinor/stories/build_story.py --parse-markdown
 ```
 
+
 This reads `story_map_velinor.md` and creates Python scaffolding.
 
 ### Watch for Changes
@@ -198,6 +199,7 @@ Auto-rebuild while editing:
 ```bash
 python velinor/stories/build_story.py --watch
 ```
+
 
 Rebuilds JSON + validates every time you save story_definitions.py
 
@@ -209,7 +211,7 @@ Check the generated JSON directly:
 python velinor/stories/story_validator.py velinor/stories/sample_story.json
 ```
 
----
+## 
 
 ## Common Tasks
 
@@ -224,6 +226,7 @@ story.add_passage(
 )
 ```
 
+
 ### Link Two Passages
 
 ```python
@@ -234,9 +237,11 @@ story.add_choice(
 )
 ```
 
+
 ### Create a Branching Path
 
 ```python
+
 # Decision point
 story.add_choice(from_passage_name="fork", choice_text="Path A", to_passage_name="path_a_1")
 story.add_choice(from_passage_name="fork", choice_text="Path B", to_passage_name="path_b_1")
@@ -245,6 +250,7 @@ story.add_choice(from_passage_name="fork", choice_text="Path B", to_passage_name
 story.add_choice(from_passage_name="path_a_1", choice_text="Meet up", to_passage_name="convergence")
 story.add_choice(from_passage_name="path_b_1", choice_text="Meet up", to_passage_name="convergence")
 ```
+
 
 ### Tag Organization
 
@@ -263,13 +269,13 @@ story.add_passage(
 )
 ```
 
+
 **Recommended tag system:**
 - Act: `act1`, `act2`, `act3`, `act4`
 - Location: `marketplace`, `archive`, `temple`, `underground`
 - NPC: `ravi_path`, `nima_path`, `kaelen_path`
 - Type: `dialogue`, `exploration`, `choice_point`, `ending`
-
----
+## 
 
 ## Error Messages & Solutions
 
@@ -278,6 +284,7 @@ story.add_passage(
 Your choice points to a passage that doesn't exist.
 
 **Fix:** Check the `to_passage_name` matches exactly:
+
 ```python
 story.add_choice(
     from_passage_name="current",
@@ -286,11 +293,13 @@ story.add_choice(
 )
 ```
 
+
 ### "Start passage (pid=1) does not exist"
 
 First passage not found.
 
 **Fix:** Ensure your first passage has `is_start=True`:
+
 ```python
 story.add_passage(
     name="market_arrival",
@@ -298,6 +307,7 @@ story.add_passage(
     is_start=True  # Only one passage should have this
 )
 ```
+
 
 ### "Passage 'X' is a dead end"
 
@@ -307,8 +317,7 @@ Passage has no choices and isn't marked as ending.
 - Add choices: `story.add_choice(..., to_passage_name="next")`
 - Mark as ending: Add to passage definition
 - Add loop back: `story.add_choice(..., to_passage_name="previous")`
-
----
+## 
 
 ## Version Control
 
@@ -319,15 +328,17 @@ Your `story_definitions.py` is pure Python, so Git diffs are clean:
 + story.add_passage(name="ravi", text="...")
 ```
 
+
 Much better than JSON diffs!
 
 **Commit frequently:**
+
 ```bash
 git add velinor/stories/story_definitions.py
 git commit -m "story: Add Act 2 opening scene"
 ```
 
----
+## 
 
 ## Next Steps
 
@@ -376,25 +387,20 @@ git commit -m "story: Add Act 2 opening scene"
    - Performance improvements
    - Better stat tracking
    - Enhanced choice system
-
----
+## 
 
 ## Integration with Velinor Engine
 
 The game engine (`velinor-web`) loads `sample_story.json` and:
 
-1. Reads story metadata (title, start passage)
-2. Displays passage text to player
-3. Provides buttons for each choice
-4. Applies stat effects when choices made
-5. Navigates to next passage
+1. Reads story metadata (title, start passage) 2. Displays passage text to player 3. Provides
+buttons for each choice 4. Applies stat effects when choices made 5. Navigates to next passage
 
 **You don't modify JSON directly.** Just:
 - Edit Python definitions
 - Run build_story.py
 - Game automatically picks up changes
-
----
+## 
 
 ## Support & Documentation
 
@@ -402,29 +408,26 @@ The game engine (`velinor-web`) loads `sample_story.json` and:
 - **Build System:** `velinor/stories/build_story.py` (inline help)
 - **Validation:** `velinor/stories/story_validator.py` (error messages)
 - **Parser:** `velinor/stories/story_map_parser.py` (Markdown conversion)
-
----
+## 
 
 ## Summary
 
 You now have:
 
-✅ A **readable, editable story system** (Python, not JSON)  
-✅ **Automatic JSON generation** (one command)  
-✅ **Built-in validation** (catches errors early)  
-✅ **Git-friendly** (clean diffs, version history)  
-✅ **Complete independence** (no agent needed for story edits)  
-✅ **Extensible architecture** (add features easily)  
+✅ A **readable, editable story system** (Python, not JSON) ✅ **Automatic JSON generation** (one
+command) ✅ **Built-in validation** (catches errors early) ✅ **Git-friendly** (clean diffs, version
+history) ✅ **Complete independence** (no agent needed for story edits) ✅ **Extensible architecture**
+(add features easily)
 
 **You're in control of your narrative.** 📖
 
 Write the story. Run the build. Validate. Play. Repeat.
-
----
+## 
 
 ## Quick Reference Commands
 
 ```bash
+
 # Build story (Python → JSON)
 python velinor/stories/build_story.py
 
@@ -441,6 +444,6 @@ python velinor/stories/build_story.py --parse-markdown
 python velinor/stories/story_validator.py velinor/stories/sample_story.json
 ```
 
----
+## 
 
 **Ready to write?** Start editing `velinor/stories/story_definitions.py` and bring Velinor to life! 🌟

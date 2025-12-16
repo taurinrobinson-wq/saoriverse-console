@@ -73,6 +73,7 @@ dignity, and the acknowledgment of human limitation matter most.
 ```text
 ```
 
+
 User discloses suicidal ideation ↓ DisclosureDetected
    ├─ Acknowledge (with dignity)
    ├─ Clarify role (not substituting for human)
@@ -150,8 +151,10 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 
 ### Resource Offering (Key Innovation)
 ```text
+
 ```text
 ```
+
 
 1. Detect suicidal disclosure 2. Acknowledge + clarify role + invite 3. User continues conversation
 4. System asks: "Would crisis information be helpful?" 5. User says yes → Provide 988, Crisis Text,
@@ -166,6 +169,7 @@ non-responsive → Continue support anyway 6. Invite check-in 7. Track flag: "ch
 ### Return Detection
 
 ```text
+
 ```
 
 If user returns AND has "check_in_invited" flag:
@@ -176,6 +180,7 @@ If user returns AND has "check_in_invited" flag:
    4. Route to Explore or ContinueSupport based on new input
 
 ```
+
 
 
 ##
@@ -189,11 +194,13 @@ If user returns AND has "check_in_invited" flag:
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 
 ```text
+
 ```
 
 Expected output:
 
 ```
+
 
 # CONSENT-BASED SUICIDALITY PROTOCOL TEST SUITE
 
@@ -214,11 +221,13 @@ Response respects boundary: True
 
 ```text
 ```text
+
 ```
 
 ### Use It In Production
 
 ```python
+
 
 from emotional_os.core.signal_parser import parse_input
 

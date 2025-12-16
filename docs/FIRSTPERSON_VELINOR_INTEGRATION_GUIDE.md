@@ -11,6 +11,7 @@ empathy, and responses based on real-time analysis of the player's emotional sta
 ```text
 ```
 
+
 Player Input (typed or choice) ↓ ┌─────────────────────────────────────────────┐
 │   FirstPerson Orchestrator                  │
 │  - Analyzes emotional tone                  │
@@ -69,8 +70,10 @@ When a player types a message, FirstPerson extracts:
 
 **If player is "uplifting":**
 ```text
+
 ```text
 ```
+
 
 NPC: I feel that brightness too. That's a light worth holding. Tell me more about what that feels
 like.
@@ -83,6 +86,7 @@ like.
 **If player is "heavy":**
 
 ```text
+
 ```
 
 NPC: I hear the weight in that.
@@ -93,9 +97,12 @@ What needs to be said about it?
 
 
 
+
 **If player is "reflective":**
+
 ```text
 ```text
+
 ```
 
 NPC: There's something to sit with there.
@@ -107,12 +114,14 @@ What's sitting underneath that?
 
 
 
+
 ### Based on Theme Recurrence
 
 If the player keeps mentioning grief:
 
 ```text
 ```
+
 
 NPC: The weight in that stays with you, doesn't it? I keep hearing grief come back for you. I'm
 noticing the weight of it. What do you need?
@@ -125,8 +134,10 @@ noticing the weight of it. What do you need?
 
 If emotions are **worsening** (getting more negative):
 ```text
+
 ```text
 ```
+
 
 NPC: I'm noticing the weight increasing. What's happening?
 
@@ -138,12 +149,14 @@ NPC: I'm noticing the weight increasing. What's happening?
 If emotions are **improving** (getting more positive):
 
 ```text
+
 ```
 
 NPC: I'm also noticing a shift.
 What's helping?
 
 ```
+
 
 
 
@@ -162,24 +175,29 @@ if 'firstperson_orchestrator' not in st.session_state:
     )
 
 ```text
+
 ```
 
 ### 2. **Game Initialization** (`start_new_game()`)
 
 ```python
 
+
 # FirstPerson is passed to orchestrator when game starts
 firstperson_orchestrator = st.session_state.get('firstperson_orchestrator')
 
 orchestrator = VelinorTwineOrchestrator( game_engine=engine, story_path=str(story_path),
 first_person_module=firstperson_orchestrator,  # ← Connected here npc_system=None
+
 ```text
 ```text
+
 ```
 
 ### 3. **Player Input Processing** (`orchestrator.py`)
 
 ```python
+
 
 
 # Player input is analyzed through FirstPerson
@@ -192,6 +210,7 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
 
 ```text
 ```
+
 
 ### 4. **NPC Response Generation** (`_generate_npc_dialogue()`)
 
@@ -209,8 +228,10 @@ dialogue = self._generate_emotionally_aware_response(
     npc_personality=npc_personality,
     is_multiplayer=False
 ```text
+
 ```text
 ```
+
 
 ## 📝 Response Generation Logic
 
@@ -225,30 +246,36 @@ heavy:       "I hear the weight in that"
 reflective:  "There's something to sit with there"
 
 ```text
+
 ```
 
 ### 2. **Middle** (acknowledges theme + memory)
 
 ```
+
 Theme acknowledgment:
 - grief:     "Loss shapes us in ways words can't reach"
 - joy:       "Joy that's felt this deeply matters"
 - general:   "What you're naming has weight"
 
 + Memory awareness (if recurring):
+
 ```text
 ```text
+
 ```
 
 ### 3. **Closing** (invites deeper exploration, adjusted for intensity)
 
 ```
 
+
 High intensity (>0.7):  "What needs to be said about it?" Low intensity (<0.3):   "What's sitting
 underneath that?"
 
 ```text
 ```
+
 
 ## 🧠 Conversation Memory System
 
@@ -270,8 +297,10 @@ FirstPerson maintains memory across turns:
 frequency_reflection = orchestrator.memory.get_frequency_reflection("grief")
 
 ```text
+
 ```text
 ```
+
 
 **Emotional trend detection:**
 
@@ -285,6 +314,7 @@ if trend == 'worsening':
 elif trend == 'improving':
 
 ```text
+
 ```
 
 ## 🚀 How to Run
@@ -293,12 +323,15 @@ elif trend == 'improving':
 
 ```bash
 
+
 # Activate venv if not already active
 source venv/bin/activate
 
 # Run the Velinor game
+
 ```text
 ```text
+
 ```
 
 The integration works automatically—no configuration needed!
@@ -308,10 +341,12 @@ The integration works automatically—no configuration needed!
 ```bash
 
 
+
 # Run the integration test
 
 ```text
 ```
+
 
 Output shows:
 
@@ -337,8 +372,10 @@ Analysis: {
 NPC Response:
 "I hear the weight in that. Loss shapes us in ways words
 ```text
+
 ```text
 ```
+
 
 ### Turn 2: Player mentions same theme
 
@@ -362,18 +399,22 @@ NPC Response:
 coming back to you. That tells me something. What needs
 
 ```text
+
 ```
 
 ### Turn 3: Player expresses slight improvement
 
 ```
+
 Input:  "Maybe there's hope in how I'm remembering them" Analysis: { tone: 'reflective', theme:
 'grief', valence: -0.2,  # ← Improved! intensity: 0.4, memory: { has_context: true,
 recurring_themes: ['grief'], emotional_trend: 'improving',  # ← Detected! num_turns: 3 } } NPC
 Response: "There's something to sit with there. I'm also noticing a shift. What's helping? Tell me
 more about what you're
+
 ```text
 ```text
+
 ```
 
 ## 🎯 Features
@@ -396,11 +437,13 @@ Optional: For cloud deployment or advanced features, you can add:
 ```toml
 
 
+
 # .streamlit/secrets.toml (if deploying with Streamlit Cloud)
 [firstperson] enable_affect_analysis = true
 
 ```text
 ```
+
 
 ## 📚 Code Changes Summary
 
@@ -475,6 +518,7 @@ helping you see this differently? That matters."
 export PYTHONPATH="${PYTHONPATH}:/path/to/saoriverse-console/src"
 streamlit run velinor_app.py
 ```
+
 
 ### "AttributeError on emotional_tone"
 

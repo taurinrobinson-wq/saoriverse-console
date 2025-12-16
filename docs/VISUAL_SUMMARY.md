@@ -9,6 +9,7 @@
 ```text
 ```
 
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    STREAMLIT UI (app.py)                    │
 └────────────────────────┬────────────────────────────────────┘
@@ -44,8 +45,10 @@
 
 ### ✅ CONNECTED (Working Today)
 ```text
+
 ```text
 ```
+
 
 Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Output
 
@@ -57,6 +60,7 @@ Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Ou
 ### ❌ MISSING (Built but Not Used)
 
 ```text
+
 ```
 
 ConversationMemory ❌
@@ -85,13 +89,16 @@ GenerativeTension ❌
 ```
 
 
+
 ##
 
 ## 🎯 INTEGRATION PRIORITIES
 
 ### TIER 1: DO THIS WEEK (45 min)
+
 ```text
 ```text
+
 ```
 
 ┌────────────────────────────────────┐
@@ -113,10 +120,12 @@ GenerativeTension ❌
 
 
 
+
 ### TIER 2: NEXT 1-2 WEEKS (3-4 hrs)
 
 ```text
 ```
+
 
 ┌────────────────────────────────────┐
 │  Presence Layer                    │  ⭐ Makes system feel alive
@@ -132,8 +141,10 @@ GenerativeTension ❌
 
 ### TIER 3: WEEK 3-4 (6-8 hrs)
 ```text
+
 ```text
 ```
+
 
 ┌────────────────────────────────────┐
 │  Saori Layer                       │  ⭐ Poetic understanding
@@ -158,6 +169,7 @@ GenerativeTension ❌
 ### TIER 4: ONGOING (2-3 hrs)
 
 ```text
+
 ```
 
 ┌────────────────────────────────────┐
@@ -170,11 +182,14 @@ GenerativeTension ❌
 ```
 
 
+
 ##
 
 ## 📈 IMPACT PROGRESSION
+
 ```text
 ```text
+
 ```
 
 TIER 1 (After 45 min)
@@ -209,12 +224,14 @@ Example: "Last time we spoke, you were struggling with..."
 
 
 
+
 ##
 
 ## ⏱️ TIMELINE AT A GLANCE
 
 ```text
 ```
+
 
 NOW (Today)
 │
@@ -242,8 +259,10 @@ Tier 4 optional (temporal memory) Gather user metrics Iterate
 
 ## 📊 EFFORT vs. IMPACT
 ```text
+
 ```text
 ```
+
 
 IMPACT
   │
@@ -274,6 +293,7 @@ IMPACT
 ### RED (Not Connected)
 
 ```text
+
 ```
 
 ❌ AttunementLoop
@@ -288,9 +308,12 @@ IMPACT
 
 
 
+
 ### YELLOW (Built but Not Called)
+
 ```text
 ```text
+
 ```
 
 ⚠️  ConversationMemory (methods exist but not used)
@@ -301,10 +324,12 @@ IMPACT
 
 
 
+
 ### GREEN (Connected)
 
 ```text
 ```
+
 
 ✅ signal_parser ✅ glyph_lookup ✅ response_composer (basic)
 
@@ -315,8 +340,10 @@ IMPACT
 
 ## 🚀 IMPLEMENTATION COMPLEXITY
 ```text
+
 ```text
 ```
+
 
 EASY TO CONNECT                   HARD TO CONNECT
 ├─ ConversationMemory             ├─ SaoriLayer
@@ -365,6 +392,7 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 ## 📋 FILES TO READ (By Priority)
 
 ```text
+
 ```
 
 IMMEDIATE (Today)
@@ -387,6 +415,7 @@ REFERENCE (As Needed)
 ```
 
 
+
 ##
 
 ## 🎯 YOUR NEXT STEP
@@ -394,8 +423,10 @@ REFERENCE (As Needed)
 **Pick ONE and do it:**
 
 ### Option A: 10 Minutes
+
 ```text
 ```text
+
 ```
 
 Read: EVALUATION_SUMMARY.md
@@ -406,10 +437,12 @@ Then: Know what to do next
 
 
 
+
 ### Option B: 45 Minutes
 
 ```text
 ```
+
 
 Read: QUICK_START_CONVERSATION_MEMORY.md Code: Follow 4 steps Test: Verify it works
 
@@ -419,8 +452,10 @@ Read: QUICK_START_CONVERSATION_MEMORY.md Code: Follow 4 steps Test: Verify it wo
 
 ### Option C: 1 Hour
 ```text
+
 ```text
 ```
+
 
 Read: EVALUATION_SUMMARY.md Code: CODE_CHANGES_READY_TO_COPY.md Test: Run test_quick_integration.py
 
@@ -432,6 +467,7 @@ Read: EVALUATION_SUMMARY.md Code: CODE_CHANGES_READY_TO_COPY.md Test: Run test_q
 ### Option D: 2 Hours (Thorough)
 
 ```text
+
 ```
 
 Read: EVALUATION_SUMMARY.md
@@ -440,6 +476,7 @@ Code: CODE_CHANGES_READY_TO_COPY.md
 Test: Run full test
 
 ```
+
 
 
 ##
@@ -460,8 +497,10 @@ path 4. Come back and tackle next tier
 ##
 
 ## 🌟 The Vision
+
 ```sql
 ```sql
+
 ```
 
 TODAY                          4 WEEKS FROM NOW
@@ -476,6 +515,7 @@ Static energy         →        Dynamic presence with cycles
 No learning           →        Learns user's language
 
 ```
+
 
 
 

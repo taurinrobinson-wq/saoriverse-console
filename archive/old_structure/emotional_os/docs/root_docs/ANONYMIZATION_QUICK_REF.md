@@ -41,6 +41,7 @@ docs/INTEGRATION_COMPLETE.md (NEW)
 └─ Integration guide & deployment checklist
 ```
 
+
 ## How to Use
 
 ### In Code (Python)
@@ -66,6 +67,7 @@ result = learner.learn_from_exchange(
 # Stored as: "The Thread said I'm the Depths"
 ```
 
+
 ### In UI (Streamlit)
 
 ```python
@@ -80,6 +82,7 @@ if consent:
     print(f"Medical: {consent['medical_details']}")
     print(f"Sharing: {consent['sharing']}")
 ```
+
 
 ### User Experience
 
@@ -144,12 +147,14 @@ HybridLearnerWithUserOverrides(
 )
 ```
 
+
 ### Per-User Override (in Streamlit)
 
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
 ```
+
 
 ## Troubleshooting
 
@@ -180,12 +185,14 @@ streamlit run main_v2.py
 # Make a query and look for consent widget
 ```
 
+
 ## Key Commits
 
 ```
 23abf3d - Full integration of anonymization protocol
 4be4a05 - Intelligent anonymization protocol implementation
 ```
+
 
 ## Documentation Links
 

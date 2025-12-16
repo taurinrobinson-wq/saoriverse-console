@@ -41,8 +41,10 @@ print(f"Detected emotion: {multimodal_result.primary_emotion}")
 print(f"Confidence: {multimodal_result.confidence.overall_confidence:.2f}")
 if multimodal_result.incongruences:
 ```text
+
 ```text
 ```
+
 
 ### 2. Feeding into Phase 3.1 Emotional Profiles
 
@@ -67,11 +69,13 @@ profile_manager.update_profile(
 # Profile now tracks multimodal data
 
 ```text
+
 ```
 
 ### 3. Audio Feature Extraction Reference
 
 ```python
+
 import librosa import numpy as np from emotional_os.core.firstperson import AcousticFeatures
 
 def extract_acoustic_features(audio_path, sr=22050): """Extract acoustic features from audio
@@ -112,13 +116,16 @@ return AcousticFeatures( fundamental_frequency=fundamental_frequency, intensity=
 speech_rate=speech_rate, pause_frequency=pause_frequency, pause_duration_avg=pause_duration,
 pitch_variance=pitch_variance, energy_variance=energy_variance, formant_frequencies=formants,
 mel_frequency_coefficients=mfcc_mean.tolist(), duration=duration,
+
 ```text
 ```text
+
 ```
 
 ### 4. Facial Landmarks Extraction Reference
 
 ```python
+
 
 import mediapipe as mp import numpy as np from emotional_os.core.firstperson import FaceLandmarks
 
@@ -150,6 +157,7 @@ left_eye], mouth=[normalize(lm) for lm in mouth],
 ```text
 ```
 
+
 ## Integration Checkpoints
 
 ### Checkpoint 1: Voice Analysis Only
@@ -166,8 +174,10 @@ assert voice_analysis.detected_tone in [
 assert 0 <= voice_analysis.arousal <= 1
 assert 0 <= voice_analysis.valence <= 1
 ```text
+
 ```text
 ```
+
 
 ### Checkpoint 2: Facial Analysis Only
 
@@ -185,11 +195,13 @@ assert 0 <= facial_analysis.authenticity <= 1
 assert 0 <= facial_analysis.attention <= 1
 
 ```text
+
 ```
 
 ### Checkpoint 3: Multimodal Fusion
 
 ```python
+
 
 # Test fusion of all three modalities
 engine = MultimodalFusionEngine() result = engine.fuse(text_tone, voice_analysis, facial_analysis)
@@ -201,11 +213,13 @@ result.confidence.overall_confidence >= result.confidence.text_confidence
 
 ```text
 ```text
+
 ```
 
 ### Checkpoint 4: Phase 3.1 Integration
 
 ```python
+
 
 
 # Test integration with emotional profiles
@@ -226,6 +240,7 @@ assert profile_after.current_emotion != profile_before.current_emotion or \
 
 ```text
 ```
+
 
 ## Common Patterns
 
@@ -263,8 +278,10 @@ class VoiceStreamAnalyzer:
             "arousal_trend": "increasing" if avg_arousal > recent[0].arousal else "decreasing",
             "valence_trend": "increasing" if avg_valence > recent[0].valence else "decreasing",
 ```text
+
 ```text
 ```
+
 
 ### Pattern 2: Video Frame Batch Processing
 
@@ -306,11 +323,13 @@ class FacialExpressionBatchAnalyzer:
         expressions = [r.expression for r in self.results]
 
 ```text
+
 ```
 
 ### Pattern 3: Sarcasm Detection Workflow
 
 ```python
+
 def detect_sarcasm(text, voice_analysis, facial_analysis): """Detect sarcasm using text positivity
 and voice/facial negativity."""
 
@@ -330,8 +349,10 @@ is_sarcasm = text_positive and (voice_negative or facial_negative)
 
 return { "is_sarcasm": is_sarcasm, "text_positive": text_positive, "voice_negative": voice_negative,
 "facial_negative": facial_negative,
+
 ```text
 ```text
+
 ```
 
 ## Performance Optimization
@@ -339,6 +360,7 @@ return { "is_sarcasm": is_sarcasm, "text_positive": text_positive, "voice_negati
 ### Caching Strategy
 
 ```python
+
 
 from functools import lru_cache import hashlib
 
@@ -360,6 +382,7 @@ facial_analysis = self.facial_detector.analyze(landmarks)
 
 ```text
 ```
+
 
 ### Parallel Processing
 
@@ -386,8 +409,10 @@ class ParallelMultimodalAnalyzer:
             facial_analysis = facial_future.result()
 
 ```text
+
 ```text
 ```
+
 
 ## Troubleshooting
 
@@ -409,6 +434,7 @@ if voice_analysis.confidence < 0.5:
     # Fall back to facial analysis or request clearer audio
 
 ```text
+
 ```
 
 ### Issue: Unrecognized Facial Expression
@@ -424,11 +450,14 @@ if voice_analysis.confidence < 0.5:
 **Solution**:
 
 ```python
+
 if facial_analysis.authenticity < 0.3:
     # Request clearer video or manual input
 print("Unable to reliably detect expression")
+
 ```text
 ```text
+
 ```
 
 ### Issue: Multimodal Conflict
@@ -439,11 +468,13 @@ print("Unable to reliably detect expression")
 
 ```python
 
+
 if result.congruence_type == "Modality_Conflict": print(f"Text: {text_tone}") print(f"Voice:
 {result.comparison.voice_details}") print(f"Facial: {result.comparison.facial_details}")
 
 ```text
 ```
+
 
 ## Testing Utilities
 
@@ -483,6 +514,7 @@ def create_mock_happy_face():
         mouth=[(0.4, 0.65), (0.5, 0.62), (0.6, 0.65), (0.5, 0.72)],
     )
 ```
+
 
 ##
 

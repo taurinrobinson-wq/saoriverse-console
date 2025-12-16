@@ -31,6 +31,7 @@ troubleshooting
 ```text
 ```
 
+
 velinor_api.py          FastAPI server that wraps Velinor engine
                         - Session management
                         - Game state handling
@@ -42,8 +43,10 @@ velinor_api.py          FastAPI server that wraps Velinor engine
 
 ### Frontend Components
 ```text
+
 ```text
 ```
+
 
 frontend_lib_api.ts     TypeScript API client for axios
                         - Game start
@@ -65,6 +68,7 @@ frontend_GameScene.tsx  React component for game scenes
 ### Documentation
 
 ```text
+
 ```
 
 VELINOR_WEB_COMPLETE.md         Complete overview (read first!)
@@ -74,6 +78,7 @@ RAILWAY_DEPLOYMENT.md            Production deployment
 VELINOR_WEB_QUICK_REFERENCE.md  Commands & troubleshooting
 
 ```
+
 
 
 ##
@@ -113,6 +118,7 @@ git add .
 git commit -m "Velinor web game"
 
 ```text
+
 ```
 
 ##
@@ -120,6 +126,7 @@ git commit -m "Velinor web game"
 ## 📊 Architecture
 
 ```
+
 Next.js Frontend (http://localhost:3000)
                              │
 Game Scene Component
@@ -137,8 +144,10 @@ Game Logic & State
                     ├─ Velinor Engine
                     ├─ Dice Rolls
                     ├─ NPC Dialogue
+
 ```text
 ```text
+
 ```
 
 ##
@@ -159,13 +168,15 @@ Game Logic & State
 
 ```
 
+
 Are you...              Then read... ───────────────────────────────────────────────────────────
 Starting fresh?         VELINOR_WEB_COMPLETE.md Ready to set up?        VELINOR_WEB_MIGRATION.md
-(Phase 1) Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md Ready to deploy?
-RAILWAY_DEPLOYMENT.md Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
+(Phase 1) Stuck on Next.js?       NEXTJS_FRONTEND_SETUP.md Ready to deploy? RAILWAY_DEPLOYMENT.md
+Forgot a command?       VELINOR_WEB_QUICK_REFERENCE.md
 
 ```text
 ```
+
 
 ##
 
@@ -187,8 +198,10 @@ cd velinor-web && npm run dev
 
 # Deploy
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -277,6 +290,7 @@ RAILWAY_DEPLOYMENT.md     ← Deploy here
 Test locally → Deploy → Live!
 
 ```
+
 
 ##
 

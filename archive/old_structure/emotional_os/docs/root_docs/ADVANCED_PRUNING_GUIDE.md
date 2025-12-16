@@ -34,6 +34,7 @@ LOW SIGNAL: "Generic Feeling"
   → Signal score: 0.04 ✗ PRUNE
 ```
 
+
 ### 2. **Trace Role Redundancy**
 
 - **Metric:** `redundancy_score` (0-1, inverse)
@@ -66,6 +67,7 @@ DISTINCT:
   → Keep both (tone diversity)
 ```
 
+
 ### 3. **Usage Frequency & Match History**
 
 - **Metric:** `activation_score` (0-1)
@@ -86,6 +88,7 @@ INACTIVE: Never matched
   → activation_score: 0.0 → Prune unless other factors protect it
 ```
 
+
 **Integration Point:** You'll need to log glyph matches:
 
 ```python
@@ -95,6 +98,7 @@ match_history[glyph_id] = match_history.get(glyph_id, 0) + 1
 
 # Save periodically to match_history.json
 ```
+
 
 ### 4. **Tone Diversity Enforcement**
 
@@ -119,6 +123,7 @@ PRUNING DECISION:
   - Hallowed glyph: tone_score = 1 - 0.15 = 0.85 (good)
   - Velvet glyph: tone_score = 1 - 0.03 = 0.97 (excellent) ✓ PROTECT
 ```
+
 
 ### 5. **Reaction Chain Anchoring**
 
@@ -152,6 +157,7 @@ ISOLATED (0.0):
   → Prune if low signal + no activation history
 ```
 
+
 ##
 
 ## 📊 Scoring Formula
@@ -176,6 +182,7 @@ score < 0.25  → CANDIDATE FOR PRUNING (confidence: 70%)
 - Reaction anchors (participation ≥ 0.9) → ALWAYS KEEP
 ```
 
+
 ##
 
 ## 🔧 Optional Enhancements
@@ -195,6 +202,7 @@ families = {
 
 # Prune semantic duplicates
 ```
+
 
 ### 2. **Pruning Archive Capsule**
 
@@ -224,6 +232,7 @@ archive = {
 # Save as JSON for future resurrection
 ```
 
+
 ### 3. **Pruning Confidence Scoring**
 
 Auditability with confidence in each decision:
@@ -249,6 +258,7 @@ pruned_glyph = {
 
 # Low confidence (< 0.70): Should review manually
 ```
+
 
 ##
 
@@ -284,6 +294,7 @@ report = engine.create_pruning_report(
 )
 ```
 
+
 ### Integration with Factorial Engine
 
 ```python
@@ -312,6 +323,7 @@ approved_combos = [
 factorial_engine.sync_to_json(approved_combos)
 ```
 
+
 ### With Match History
 
 To track which glyphs are actually used:
@@ -332,6 +344,7 @@ pruning_engine = AdvancedPruningEngine(
     match_history_path="emotional_os/glyphs/glyph_match_history.json"
 )
 ```
+
 
 ##
 
@@ -375,6 +388,7 @@ Comprehensive report with all evaluations and statistics:
 }
 ```
 
+
 ### pruned_glyphs_overgrowth_control_*.json
 
 Archive of pruned glyphs for potential resurrection.
@@ -409,6 +423,7 @@ Archive of pruned glyphs for potential resurrection.
 │  │  └─ YES → KEEP (protected)
 │  └─ NO → PRUNE (candidate for archival)
 ```
+
 
 ##
 

@@ -62,6 +62,7 @@ ProcessingModeAdapter
     └── Ritual Processing
 ```
 
+
 ## Quick Start
 
 ### 1. Process all poetry (5-10 minutes)
@@ -70,6 +71,7 @@ ProcessingModeAdapter
 cd /workspaces/saoriverse-console/scripts/utilities
 python poetry_data_pipeline.py --process
 ```
+
 
 Processes 8 major poetry collections (295K+ words):
 
@@ -88,6 +90,7 @@ Processes 8 major poetry collections (295K+ words):
 python poetry_data_pipeline.py --status
 ```
 
+
 Shows: downloaded, cleaned, validated, total words, ready-for-processing status
 
 ### 3. Export for all modes
@@ -95,6 +98,7 @@ Shows: downloaded, cleaned, validated, total words, ready-for-processing status
 ```bash
 python poetry_data_pipeline.py --export poetry_export
 ```
+
 
 Creates manifests for signal extraction, lexicon learning, glyph generation
 
@@ -115,6 +119,7 @@ ritual_data = adapter.for_ritual_processing()
 # All guaranteed to be clean, validated, non-fragmented
 ```
 
+
 ## What Gets Cleaned
 
 ### OCR Artifacts Removed
@@ -129,11 +134,13 @@ Before:
 ## Some poetry text here [***] more text
 ```
 
+
 After:
 
 ```
 Some poetry text here more text
 ```
+
 
 ### Encoding Issues Fixed
 
@@ -146,6 +153,7 @@ Line ending issues (CRLF/CR)
 Smart "quotes" (wrong type)
 ```
 
+
 After:
 
 ```
@@ -154,6 +162,7 @@ Em—dash (correct character)
 Proper LF line endings
 Regular "quotes"
 ```
+
 
 ### Fragmentation Fixed
 
@@ -165,11 +174,13 @@ plete devotion to art, which mani-
 fests in every line they write.
 ```
 
+
 After:
 
 ```
 The poem is about love and complete devotion to art, which manifests in every line they write.
 ```
+
 
 ### Poetry Formatting Preserved
 
@@ -193,6 +204,7 @@ CREATE TABLE collections (
 );
 ```
 
+
 ### processing_log table
 
 ```sql
@@ -206,6 +218,7 @@ CREATE TABLE processing_log (
 );
 ```
 
+
 ### quality_metrics table
 
 ```sql
@@ -216,6 +229,7 @@ CREATE TABLE quality_metrics (
   metric_value REAL
 );
 ```
+
 
 Tracked metrics:
 
@@ -234,6 +248,7 @@ Tracked metrics:
 data = adapter.for_signal_extraction()  # Returns {name: text}
 ```
 
+
 - Gets clean poetry text
 - Ready for emotional signal extraction
 - Guaranteed no OCR artifacts that would corrupt signals
@@ -243,6 +258,7 @@ data = adapter.for_signal_extraction()  # Returns {name: text}
 ```python
 data = adapter.for_lexicon_learning()  # Returns {name: text}
 ```
+
 
 - Gets clean poetry text
 - Ready for pattern learning
@@ -254,6 +270,7 @@ data = adapter.for_lexicon_learning()  # Returns {name: text}
 data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 ```
 
+
 - Gets poetry as (name, text) tuples
 - Ready for glyph generation
 - Fragmentation-free text for reliable glyphs
@@ -263,6 +280,7 @@ data = adapter.for_glyph_generation()  # Returns [(name, text), ...]
 ```python
 data = adapter.for_ritual_processing()  # Returns {name: text}
 ```
+
 
 - Gets coherence-checked text
 - Ready for ritual creation
@@ -290,6 +308,7 @@ data = adapter.for_ritual_processing()  # Returns {name: text}
 ├── POETRY_INTEGRATION_EXAMPLES.md       # ← Integration code
 └── POETRY_DATA_SOLUTION_SUMMARY.md      # ← This file
 ```
+
 
 ## Quality Assurance
 
@@ -323,6 +342,7 @@ Output: **295,000+ words of clean, validated poetry**
 python poetry_data_pipeline.py --process
 ```
 
+
 ### Step 2: Update your processing systems
 
 Each system should use the adapter:
@@ -336,6 +356,7 @@ adapter = ProcessingModeAdapter(hub)
 # Get data appropriate for this processing mode
 data = adapter.for_your_mode()
 ```
+
 
 ### Step 3: Process clean poetry
 
@@ -411,6 +432,7 @@ python poetry_data_pipeline.py --status
 python poetry_data_pipeline.py --export poetry_export
 ```
 
+
 **Integration Pattern**:
 
 ```python
@@ -418,6 +440,7 @@ hub = PoetryDataHub("poetry_data")
 adapter = ProcessingModeAdapter(hub)
 data = adapter.for_signal_extraction()  # (or your mode)
 ```
+
 
 **Location of Help**:
 

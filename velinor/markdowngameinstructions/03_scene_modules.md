@@ -19,6 +19,7 @@ A standardized structure for building **modular NPC encounter scenes** with:
 ```text
 ```
 
+
 Scene ID:             Unique identifier (e.g., market_intro_velinor_01) Background Image:     Path
 to background asset Foreground Image:     Path to NPC/character asset Ambient Sound:        Optional
 audio layer Glyph Triggers:       Glyphs activated during scene NPC Name:             Primary
@@ -33,6 +34,7 @@ character in scene
 **Purpose**: Establish atmosphere and introduce the NPC from a distance
 
 ```markdown
+
 
 
 ## Scene 1: Distant Presence
@@ -53,6 +55,7 @@ mystery]
 
 ```text
 ```
+
 
 **Design Notes**:
 
@@ -86,8 +89,10 @@ mystery]
 
 **Glyph Glow**:
 ```text
+
 ```text
 ```
+
 
 **Design Notes**:
 
@@ -122,6 +127,7 @@ mystery]
 - NPC Response: [NPC reacts to player's silence]
 
 ```text
+
 ```
 
 **Design Notes**:
@@ -138,17 +144,21 @@ mystery]
 ### Scene Metadata
 
 ```
+
 Scene ID:             market_intro_velinor_01 Background Image:     velinor_marketplace_distant.png
 Foreground Image:     velinor_priestess_distant.png (Scene 1) velinor_priestess_close.png (Scene 2)
 Ambient Sound:        wind_through_ruins.mp3 + faint_chimes.mp3 Glyph Triggers:       [Esḧ],
 [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈], [Aelitḧ]
+
 ```text
 ```text
+
 ```
 
 ### Scene 1: Distant Presence
 
 ```
+
 
 
 ## Scene 1: Distant Presence
@@ -166,6 +176,7 @@ appears to be some kind of priestess… or something older.
 
 ```text
 ```
+
 
 ### Scene 2: Approach
 
@@ -189,8 +200,10 @@ Before you have a chance to speak, she does.
 "I am Velinor. And you are not lost — only unremembered."
 
 ```text
+
 ```text
 ```
+
 
 ### Player Options
 
@@ -211,6 +224,7 @@ Before you have a chance to speak, she does.
 - Velinor Response: "Good. You know when to listen. That is rare."
 
 ```text
+
 ```
 
 ##
@@ -220,6 +234,7 @@ Before you have a chance to speak, she does.
 ### For Streamlit Integration
 
 ```python
+
 
 # Scene 1: Distant presence
 col1, col2 = st.columns([3, 1]) with col1: background = st.image("velinor_marketplace_distant.png")
@@ -241,6 +256,7 @@ choice = st.radio("How do you respond?", ["Who are you really?", "What do you me
 
 if choice == "Who are you really?": trigger_glyph([Querrä]) st.write("Velinor Response: 'A question
 for another day...'")
+
 ```
 
 ##

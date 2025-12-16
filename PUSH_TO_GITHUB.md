@@ -33,8 +33,10 @@ Replaces unreliable Railway deployment."
 
 # Push to GitHub
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -71,6 +73,7 @@ cat docker-compose.prod.yml | head -5
 cat nginx.prod.conf | head -5
 
 ```text
+
 ```
 
 ##
@@ -90,6 +93,7 @@ cat nginx.prod.conf | head -5
 
 ```bash
 
+
 # Option 1: Auto-deploy (recommended)
 git push origin main
 
@@ -98,13 +102,16 @@ git push origin main
 # Option 2: Manual deploy from VPS
 ssh root@YOUR_DROPLET_IP cd /opt/velinor git pull origin main docker compose -f
 docker-compose.prod.yml build
+
 ```text
 ```text
+
 ```
 
 ### When you want to make changes
 
 ```bash
+
 
 
 # Edit locally (e.g., nginx.prod.conf)
@@ -114,6 +121,7 @@ git add nginx.prod.conf git commit -m "chore: update nginx configuration" git pu
 
 ```text
 ```
+
 
 ### Emergency rollback
 
@@ -130,8 +138,10 @@ git log --oneline  # Find commit to revert to
 git checkout COMMIT_HASH
 docker compose -f docker-compose.prod.yml build
 ```text
+
 ```text
 ```
+
 
 ##
 
@@ -148,6 +158,7 @@ chore: update [docker-compose.prod.yml|nginx.prod.conf|etc]
 - Any manual steps needed after deploy
 
 ```
+
 
 ##
 

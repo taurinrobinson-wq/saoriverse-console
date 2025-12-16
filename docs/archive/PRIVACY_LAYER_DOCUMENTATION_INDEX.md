@@ -359,6 +359,7 @@ Documentation:
 - PRIVACY_LAYER_QUICK_START.md
 ```
 
+
 ### Command Reference
 
 ```bash
@@ -372,6 +373,7 @@ pytest test_privacy_layer.py -v
 # Run specific test class
 pytest test_privacy_layer.py::TestEncryptionManager -v
 ```
+
 
 ### Key Concepts
 
@@ -397,6 +399,7 @@ Choose one:
 5. Follow Phase 3
 ```
 
+
 **B) Learn First (Recommended):**
 
 ```
@@ -406,6 +409,7 @@ Choose one:
 4. Then follow approach A
 ```
 
+
 **C) Code Review Only:**
 
 ```
@@ -414,6 +418,7 @@ Choose one:
 3. Review test_privacy_layer.py
 4. Read comments in code
 ```
+
 
 ##
 

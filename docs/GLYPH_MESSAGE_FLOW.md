@@ -142,8 +142,10 @@ skipped.
   "voltage": "high",
   "tone": "grief"
 ```sql
+
 ```sql
 ```
+
 
 - Glyph row (from `fetch_glyphs` / DB):
 
@@ -157,14 +159,17 @@ skipped.
   "response_template": "I hear the ache you’re describing..."
 
 ```text
+
 ```
 
 - `parse_input` return (high-level):
 
 ```json
+
 { "glyphs": [ ... ], "voltgage_response": "I notice a tightening in your chest...", "ritual_prompt":
 "Try a three-breath grounding...", "signals": [ ... ], "gates": ["Gate 4", "Gate 5"], "debug_sql":
 "SELECT ...", "debug_glyph_rows": [ ... ] }
+
 ```
 
 ##

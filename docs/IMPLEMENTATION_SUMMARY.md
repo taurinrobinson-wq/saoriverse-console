@@ -65,8 +65,10 @@ sophisticated emotional intelligence with advanced technical infrastructure.
 # OLD (BLOCKING)
 save_success = await run_in_threadpool(save_conversation_to_supabase, ...)
 ```text
+
 ```text
 ```
+
 
 **Solution:** Return response immediately, save asynchronously in background:
 
@@ -79,6 +81,7 @@ return ChatResponse(...)  # Return IMMEDIATELY
 # Then in background:
 
 ```text
+
 ```
 
 **Impact:**
@@ -154,6 +157,7 @@ return ChatResponse(...)  # Return IMMEDIATELY
 ## System Overview
 
 ```
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    Next.js Frontend                          │
 │              (React, TypeScript, Turbopack)                  │
@@ -210,8 +214,10 @@ return ChatResponse(...)  # Return IMMEDIATELY
 │  - theme_anchors (emotional themes)                        │
 │  - temporal_patterns (time-based learning)                 │
 │  - user_profiles (preferences)                             │
+
 ```text
 ```text
+
 ```
 
 ## Running the System
@@ -220,10 +226,12 @@ return ChatResponse(...)  # Return IMMEDIATELY
 
 ```bash
 
+
 python firstperson_backend.py
 
 ```text
 ```
+
 
 ### Run Diagnostics
 
@@ -239,8 +247,10 @@ python diagnose_backend.py
 # ✓ Conversations loading
 
 ```text
+
 ```text
 ```
+
 
 ### Test Chat
 
@@ -261,6 +271,7 @@ curl -X POST http://localhost:8000/chat \
 # Response should arrive in <100ms
 
 ```
+
 
 ## Performance Targets (All Met ✓)
 
