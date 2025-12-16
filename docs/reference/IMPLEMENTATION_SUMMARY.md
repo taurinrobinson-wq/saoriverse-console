@@ -18,10 +18,12 @@ class ConversationManager:
     - load_conversations() → Fetches user's conversation list
     - load_conversation(id) → Loads specific conversation
     - delete_conversation(id) → Removes conversation
-    - rename_conversation(id, new_title) → Updates title
+```text
+```text
 ```
 
 **Features:**
+
 - Automatic Supabase configuration from `st.secrets`
 - JSON message serialization/deserialization
 - Timestamp tracking for each save
@@ -32,11 +34,14 @@ class ConversationManager:
 Intelligently generates conversation titles from the first user message:
 
 ```python
+
 generate_auto_name("I've been feeling anxious about work")
-# Returns: "Feeling anxious about work"
+
+```text
 ```
 
 **Features:**
+
 - Removes common filler phrases
 - Extracts meaningful content
 - Limits to 50 characters
@@ -54,10 +59,12 @@ New sidebar features:
 ├── 💬 [Another Conversation]
 └── ➕ New Conversation
 
-💾 Save my chats (checkbox)
+```text
+```text
 ```
 
 **Features:**
+
 - Lists all user's previous conversations
 - Click to load any conversation
 - Inline rename with save/cancel
@@ -70,6 +77,7 @@ New sidebar features:
 New Supabase tables:
 
 **`conversations` table:**
+
 - `id` (uuid, primary key)
 - `user_id` (text) - Link to user
 - `conversation_id` (text) - Unique per conversation
@@ -83,14 +91,17 @@ New Supabase tables:
 - `archived` (boolean) - Soft delete
 
 **`conversation_metadata` table:**
+
 - Audit trail of conversation operations
 - Tracks: created, renamed, deleted, archived, restored
 
 **Indexes:**
+
 - `(user_id, conversation_id)` unique constraint
 - Indexes on `user_id`, `updated_at`, `created_at`, `archived`
 
 **Triggers:**
+
 - Auto-update `updated_at` on modifications
 
 ### 5. **UI Integration** (modified `ui.py`)
@@ -98,74 +109,65 @@ New Supabase tables:
 Changes to `render_main_app()`:
 
 1. **Initialization**
+
    ```python
    # Create ConversationManager instance
-   manager = ConversationManager(user_id)
-   
-   # Initialize current conversation ID (UUID)
-   current_conversation_id = str(uuid.uuid4())
+
+manager = ConversationManager(user_id)
+
+# Initialize current conversation ID (UUID)
+
+current_conversation_id = str(uuid.uuid4())
+
    ```
 
 2. **Sidebar Setup**
+
    ```python
-   with st.sidebar:
+with st.sidebar:
        # Persist toggle
-       persist_history = st.checkbox("💾 Save my chats")
-       
+persist_history = st.checkbox("💾 Save my chats")
+
        # Load and display conversation list
-       load_all_conversations_to_sidebar(manager)
-       
+load_all_conversations_to_sidebar(manager)
+
        # New conversation button
-       if st.button("➕ New Conversation"):
+if st.button("➕ New Conversation"):
            # Reset conversation
    ```
 
 3. **Auto-Naming on First Message**
+
    ```python
-   if len(messages) == 1:  # First exchange
-       title = generate_auto_name(first_user_input)
-       session_state['conversation_title'] = title
+
+if len(messages) == 1:  # First exchange title = generate_auto_name(first_user_input)
+session_state['conversation_title'] = title
+
    ```
 
 4. **Persistence After Each Exchange**
+
    ```python
-   if persist_history and manager:
-       manager.save_conversation(
-           conversation_id=current_id,
-           title=title,
-           messages=all_messages,
-           processing_mode=mode
-       )
+if persist_history and manager: manager.save_conversation( conversation_id=current_id, title=title,
+messages=all_messages, processing_mode=mode )
    ```
 
 ## Data Flow
 
 ### New Conversation
+
 ```
-User starts app
-    ↓
-ConversationManager initialized
-    ↓
-Sidebar loads previous conversations
-    ↓
-"New Conversation" button clicked OR new UUID generated
-    ↓
-Empty chat displayed
-    ↓
-User types first message
-    ↓
-Auto-name generated from first message
-    ↓
-Response shown
-    ↓
-If "Save my chats" checked → Saved to Supabase
-    ↓
-Page refresh
-    ↓
-Conversation preserved in sidebar
+
+User starts app ↓ ConversationManager initialized ↓ Sidebar loads previous conversations ↓ "New
+Conversation" button clicked OR new UUID generated ↓ Empty chat displayed ↓ User types first message
+↓ Auto-name generated from first message ↓ Response shown ↓ If "Save my chats" checked → Saved to
+Supabase ↓ Page refresh ↓
+
+```text
 ```
 
 ### Load Previous Conversation
+
 ```
 Sidebar shows "💬 [Previous Title]"
     ↓
@@ -177,12 +179,14 @@ session_state updated with messages
     ↓
 Chat history displayed
     ↓
-Can continue conversation or start new one
+```text
+```text
 ```
 
 ## Session State Variables
 
 ```python
+
 st.session_state = {
     'current_conversation_id': 'uuid-string',
     'conversation_title': 'Feeling anxious about work',
@@ -199,7 +203,8 @@ st.session_state = {
     ],
     'persist_history': True,  # User preference
     'selected_conversation': 'conv-id-xyz'  # If loading
-}
+
+```text
 ```
 
 ## Backward Compatibility
@@ -212,22 +217,27 @@ st.session_state = {
 ## Setup Required
 
 1. **Run SQL Migration**
+
    ```bash
    # In Supabase SQL editor, run:
-   sql/conversations_table.sql
+
+sql/conversations_table.sql
+
    ```
 
 2. **Verify Supabase Secrets**
+
    ```yaml
    # .streamlit/secrets.toml
-   [supabase]
-   url = "https://your-project.supabase.co"
-   key = "your-anon-key"
+[supabase] url = "https://your-project.supabase.co" key = "your-anon-key"
    ```
 
 3. **Restart App**
+
    ```bash
-   streamlit run app.py
+
+streamlit run app.py
+
    ```
 
 ## Key Improvements Over Previous System
@@ -277,6 +287,7 @@ st.session_state = {
 ## Files Changed
 
 ```
+
 emotional_os/deploy/modules/
   ├── ui.py                          (modified - integrate manager, sidebar)
   └── conversation_manager.py         (new - main implementation)
@@ -288,14 +299,16 @@ Documentation/
   ├── CONVERSATION_STORAGE.md         (new - setup & usage guide)
 
 .git/
-  └── [commit 322c3c4]               (feature commit)
+
+```text
+```text
 ```
 
 ## Commit Reference
 
 ```
-commit 322c3c4
-Author: taurinrobinson-wq <taurinrobinson@gmail.com>
+
+commit 322c3c4 Author: taurinrobinson-wq <taurinrobinson@gmail.com>
 
 feat: implement persistent conversation storage with auto-naming
 
@@ -305,6 +318,7 @@ feat: implement persistent conversation storage with auto-naming
 - Add conversations table schema with metadata tracking
 - Integrate persistence into UI render_main_app
 - Create comprehensive CONVERSATION_STORAGE.md documentation
+
 ```
 
 ## Notes for Developer
@@ -318,6 +332,7 @@ feat: implement persistent conversation storage with auto-naming
 ## User Impact
 
 Users will now experience:
+
 1. ✅ Conversations persist across page refreshes
 2. ✅ "Save my chats" preference remembered
 3. ✅ Automatic, intelligent conversation naming

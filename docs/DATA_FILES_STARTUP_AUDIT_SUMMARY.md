@@ -1,21 +1,22 @@
 # 📋 COMPLETE DATA FILES AUDIT - EXECUTIVE SUMMARY
 
-**Date:** December 4, 2025  
+**Date:** December 4, 2025
 **Status:** ⚠️ **CRITICAL ISSUES FOUND - SYSTEM WILL NOT START FULLY**
 
----
+##
 
 ## 🎯 The Problem in 30 Seconds
 
 **Your system expects files to be in `emotional_os/` directory at the repo root.**
 
 But they're actually in:
+
 - `data/` (for glyph files)
 - `src/emotional_os_*/` (for config files)
 
 **Result:** When you try to start the app, it will fail to load critical data files.
 
----
+##
 
 ## 📊 Full Audit Results
 
@@ -39,67 +40,87 @@ But they're actually in:
 | `antonym_glyphs_indexed.json` | `emotional_os/glyphs/` | `data/` | **HIGH** - Antonym system fails |
 | `runtime_fallback_lexicon.json` | `emotional_os/parser/` | `src/emotional_os_parser/` | **MEDIUM** - Fallback fails |
 
----
+##
 
 ## 🔴 Critical Modules That Will Fail
 
 ### 1. Glyph System ❌
-**File:** `src/emotional_os_glyphs/glyph_factorial_engine.py`  
+
+**File:** `src/emotional_os_glyphs/glyph_factorial_engine.py`
 **Impact:** No glyphs load, responses become generic
 
 ```python
+
 # Line 73-74 - Will fail:
 glyph_csv: str = "emotional_os/glyphs/glyph_lexicon_rows.csv",
-glyph_json: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
+```text
+```text
 ```
 
 ### 2. Antonym System ❌
-**File:** `src/emotional_os_glyphs/antonym_glyphs_indexer.py`  
+
+**File:** `src/emotional_os_glyphs/antonym_glyphs_indexer.py`
 **Impact:** Can't find opposite emotions
 
 ```python
+
+
 # Line 27 - Will fail:
-glyph_lexicon: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
+
+```text
 ```
 
 ### 3. Advanced Pruning ❌
-**File:** `src/emotional_os_glyphs/advanced_pruning_engine.py`  
+
+**File:** `src/emotional_os_glyphs/advanced_pruning_engine.py`
 **Impact:** Glyph selection doesn't work
 
 ```python
+
 # Line 89 - Will fail:
-glyph_lexicon_path: str = "emotional_os/glyphs/glyph_lexicon_rows.json",
+```text
+```text
 ```
 
 ### 4. Word-Centric Lexicon ❌
-**File:** `src/emotional_os_lexicon/lexicon_loader.py`  
+
+**File:** `src/emotional_os_lexicon/lexicon_loader.py`
 **Impact:** Word emotional mappings fail
 
 ```python
+
+
 # Line 18 - Will fail:
-lexicon_path: str = "emotional_os/lexicon/word_centric_emotional_lexicon_expanded.json"
+
+```text
 ```
 
 ### 5. Suicidality Protocol ⚠️
-**File:** `src/emotional_os/core/suicidality_handler.py`  
+
+**File:** `src/emotional_os/core/suicidality_handler.py`
 **Impact:** Crisis handling won't activate
 
 ```python
+
 # Line 33 - Will fail unless running from src/ directory:
-protocol_config_path: str = "emotional_os/core/suicidality_protocol.json"
+```text
+```text
 ```
 
----
+##
 
 ## 🛠️ Immediate Action Required
 
 ### Option 1: Create Missing Directory (5 minutes) ⚡
+
 This is the **FASTEST FIX** - just create the directory structure code expects:
 
 ```bash
+
+
 # Run from repo root:
 mkdir -p emotional_os/glyphs
-mkdir -p emotional_os/core  
+mkdir -p emotional_os/core
 mkdir -p emotional_os/lexicon
 
 # Copy glyph files
@@ -114,7 +135,8 @@ cp src/emotional_os/core/suicidality_protocol.json emotional_os/core/
 # Verify (should show all files found):
 ls -la emotional_os/glyphs/
 ls -la emotional_os/core/
-ls -la emotional_os/lexicon/
+
+```text
 ```
 
 **After this, system SHOULD start.**
@@ -127,7 +149,7 @@ See `CODE_LOCATIONS_NEEDING_FIXES.md` for exact file locations and suggested cod
 
 Refactor all hardcoded paths to use the PathManager system. See example in `CODE_LOCATIONS_NEEDING_FIXES.md`.
 
----
+##
 
 ## 📋 All Files Needing Startup
 
@@ -144,35 +166,27 @@ Refactor all hardcoded paths to use the PathManager system. See example in `CODE
 | **MEDIUM** | `runtime_fallback_lexicon.json` | `src/emotional_os_parser/` | ~10KB | Fallback patterns |
 | **MEDIUM** | `trauma_lexicon.json` | `src/emotional_os_safety/` | ~3KB | Safety keywords |
 
----
+##
 
 ## 🔍 Affected Startup Flow
 
 ```
-START APP
-    ↓
-Load NRC Lexicon
-    ↓ ✅ Works
-Load Glyph Lexicon (JSON)
-    ↓ ❌ FAILS - File not at expected path
-Load Glyph Lexicon (CSV)
-    ↓ ❌ FAILS - File not at expected path
-Load Suicidality Protocol
-    ↓ ⚠️ PARTIAL - Path works from src/ only
-Load Word Lexicon
-    ↓ ❌ FAILS - File not at expected path
-Load Antonym Index
-    ↓ ❌ FAILS - File not at expected path
-    ↓
-SYSTEM PARTIALLY INITIALIZED (many features broken)
+START APP ↓ Load NRC Lexicon ↓ ✅ Works Load Glyph Lexicon (JSON) ↓ ❌ FAILS - File not at expected
+path Load Glyph Lexicon (CSV) ↓ ❌ FAILS - File not at expected path Load Suicidality Protocol ↓ ⚠️
+PARTIAL - Path works from src/ only Load Word Lexicon ↓ ❌ FAILS - File not at expected path Load
+Antonym Index ↓ ❌ FAILS - File not at expected path ↓
+```text
+```text
 ```
 
----
+##
 
 ## 📍 File Locations: Complete Map
 
 ### Data Directory (`data/`)
+
 ```
+
 data/
 ├── glyph_lexicon_rows.json         ← Code expects in emotional_os/glyphs/
 ├── glyph_lexicon_rows.csv          ← Code expects in emotional_os/glyphs/
@@ -180,10 +194,12 @@ data/
 ├── word_centric_emotional_lexicon_expanded.json  ← Code expects in emotional_os/lexicon/
 ├── lexicons/
 │   └── nrc_emotion_lexicon.txt     ✅ Works (found via search)
-└── [other files...]
+
+```text
 ```
 
 ### Source Directory (`src/`)
+
 ```
 src/
 ├── emotional_os/
@@ -209,11 +225,14 @@ src/
 │
 └── emotional_os_safety/
     ├── trauma_lexicon.json               ✅ Works (relative path)
-    └── [other modules...]
+```text
+```text
 ```
 
 ### What Code Expects (`emotional_os/` - MISSING)
+
 ```
+
 emotional_os/                            ← DOESN'T EXIST
 ├── core/
 │   └── suicidality_protocol.json
@@ -229,16 +248,18 @@ emotional_os/                            ← DOESN'T EXIST
 │   ├── runtime_fallback_lexicon.json
 │   └── learned_lexicon.json
 └── safety/
-    └── trauma_lexicon.json
+
+```text
 ```
 
----
+##
 
 ## ✅ Verification Checklist
 
 Before starting the app, run this check:
 
 ```bash
+
 # Check if critical files exist at code's expected paths
 test -f "emotional_os/glyphs/glyph_lexicon_rows.json" && echo "✅ Glyph JSON found" || echo "❌ Glyph JSON MISSING"
 test -f "emotional_os/glyphs/glyph_lexicon_rows.csv" && echo "✅ Glyph CSV found" || echo "❌ Glyph CSV MISSING"
@@ -250,7 +271,7 @@ test -f "data/lexicons/nrc_emotion_lexicon.txt" && echo "✅ NRC lexicon found" 
 
 If all show ✅, system should start. If any show ❌, apply one of the fixes above.
 
----
+##
 
 ## 📚 Related Documentation
 
@@ -258,7 +279,7 @@ If all show ✅, system should start. If any show ❌, apply one of the fixes ab
 2. **QUICK_REFERENCE_DATA_PATHS.md** - Quick reference table and diagnostic script
 3. **CODE_LOCATIONS_NEEDING_FIXES.md** - Exact code locations and suggested fixes
 
----
+##
 
 ## 🎯 Next Steps
 
@@ -267,7 +288,7 @@ If all show ✅, system should start. If any show ❌, apply one of the fixes ab
 3. **Proper Fix (This week):** Refactor to use PathManager or update paths
 4. **Documentation (This week):** Update README with startup requirements
 
----
+##
 
 ## 📞 Questions?
 
@@ -275,4 +296,3 @@ If all show ✅, system should start. If any show ❌, apply one of the fixes ab
 - **"How long to fix?"** - 5 minutes for quick fix, 30 minutes for code fixes
 - **"Which fix should I use?"** - Option 1 (create directory) is fastest and safest
 - **"Will this break anything?"** - No, just replicates what code already expects
-

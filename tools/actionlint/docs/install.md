@@ -1,5 +1,4 @@
-Installation
-============
+# Installation
 
 This document describes how to install [actionlint](../docs).
 
@@ -10,7 +9,8 @@ This document describes how to install [actionlint](../docs).
 [`actionlint` package][chocolatey] is available in the community repo:
 
 ```powershell
-choco install actionlint
+```text
+```text
 ```
 
 ### [Scoop](https://scoop.sh/)
@@ -18,7 +18,8 @@ choco install actionlint
 [`actionlint` package][scoop] is available in the main bucket:
 
 ```powershell
-scoop install actionlint
+
+```text
 ```
 
 ### [Winget](https://learn.microsoft.com/en-us/windows/package-manager/)
@@ -26,7 +27,8 @@ scoop install actionlint
 [`actionlint` package][winget] is available in the winget-pkgs repo:
 
 ```powershell
-winget install actionlint
+```text
+```text
 ```
 
 ## Linux
@@ -36,7 +38,8 @@ winget install actionlint
 [`actionlint` package][aur] is available in the AUR:
 
 ```sh
-paru -S actionlint
+
+```text
 ```
 
 ### [Nix](https://nixos.wiki/)
@@ -46,13 +49,15 @@ paru -S actionlint
 On NixOS:
 
 ```sh
-nix-env -iA nixos.actionlint
+```text
+```text
 ```
 
 On Non NixOS:
 
 ```sh
-nix-env -iA nixpkgs.actionlint
+
+```text
 ```
 
 ## macOS
@@ -62,21 +67,24 @@ nix-env -iA nixpkgs.actionlint
 [`actionlint`][formula] formula is provided by Homebrew officially.
 
 ```sh
-brew install actionlint
+```text
+```text
 ```
 
 And rhysd/actionlint repository also provides its own Homebrew package, which is automatically updated on new release.
 If you prefer it, tap the repository before running `brew install`.
 
 ```sh
+
 brew tap "rhysd/actionlint" "https://github.com/rhysd/actionlint"
-brew install actionlint
+
+```text
 ```
 
 ## Prebuilt binaries
 
-Download an archive file from [the releases page][releases] for your platform, unarchive it and put the executable file to a
-directory in `$PATH`.
+Download an archive file from [the releases page][releases] for your platform, unarchive it and put
+the executable file to a directory in `$PATH`.
 
 Prebuilt binaries are built at each release by CI for the following OS and arch:
 
@@ -85,24 +93,29 @@ Prebuilt binaries are built at each release by CI for the following OS and arch:
 - Windows (i386, x86_64, arm64)
 - FreeBSD (i386, x86_64)
 
-Note: `darwin/arm64` and `windows/arm64` target binaries are not tested since the author doesn't have the environments.
+Note: `darwin/arm64` and `windows/arm64` target binaries are not tested since the author doesn't
+have the environments.
 
 <a name="download-script"></a>
+
 ## Download script
 
-To install `actionlint` executable with one command, [the download script](../scripts/download-actionlint.bash) is available.
-It downloads the latest version of actionlint (`actionlint.exe` on Windows and `actionlint` on other OSes) to the current
-directory automatically. This is a recommended way if you install actionlint in some shell script.
+To install `actionlint` executable with one command, [the download
+script](../scripts/download-actionlint.bash) is available. It downloads the latest version of
+actionlint (`actionlint.exe` on Windows and `actionlint` on other OSes) to the current directory
+automatically. This is a recommended way if you install actionlint in some shell script.
 
 ```sh
-bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+```text
+```text
 ```
 
-When you need to install specific version of actionlint, please give the version to the 1st command line argument. The following
-example installs v1.6.17.
+When you need to install specific version of actionlint, please give the version to the 1st command
+line argument. The following example installs v1.6.17.
 
 ```sh
-bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) 1.6.17
+
+```text
 ```
 
 This script downloads `actionlint` (or `actionlint.exe` on Windows) binary to the current working directory. When you need to put
@@ -110,7 +123,8 @@ the downloaded binary to some other directory, please give the directory path to
 example installs the latest version to `/usr/bin`.
 
 ```sh
-bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash) latest /usr/bin
+```text
+```text
 ```
 
 For the usage of actionlint on GitHub Actions, see [the usage document](usage.md#on-github-actions).
@@ -126,6 +140,8 @@ automates the process of installing (and switching between) various versions of 
 installed, run these commands to install actionlint:
 
 ```bash
+
+
 # Add actionlint plugin
 asdf plugin add actionlint
 
@@ -136,7 +152,8 @@ asdf list-all actionlint
 asdf install actionlint latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global actionlint latest
+
+```sql
 ```
 
 ## Build from source
@@ -144,6 +161,7 @@ asdf global actionlint latest
 Recent [Go][] toolchain is necessary to build actionlint from source. Use Go 1.16 or later.
 
 ```sh
+
 # Install the latest stable version
 go install github.com/rhysd/actionlint/cmd/actionlint@latest
 
@@ -151,18 +169,15 @@ go install github.com/rhysd/actionlint/cmd/actionlint@latest
 go install github.com/rhysd/actionlint/cmd/actionlint
 ```
 
----
+##
 
 [Checks](checks.md) | [Usage](usage.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)
 
-[formula]: https://formulae.brew.sh/formula/actionlint
-[homebrew]: https://brew.sh/
-[releases]: https://github.com/rhysd/actionlint/releases
-[Go]: https://golang.org/
-[asdf]: https://asdf-vm.com/
-[asdf-plugin]: https://github.com/crazy-matt/asdf-actionlint
-[chocolatey]: https://community.chocolatey.org/packages/actionlint
-[scoop]: https://scoop.sh/#/apps?q=actionlint&s=0&d=1&o=true
-[winget]: https://github.com/microsoft/winget-pkgs/tree/master/manifests/r/rhysd/actionlint
-[aur]: https://aur.archlinux.org/packages/actionlint
-[nixpkgs]: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/analysis/actionlint/default.nix
+[formula]: <https://formulae.brew.sh/formula/actionlint> [homebrew]: <https://brew.sh/> [releases]:
+<https://github.com/rhysd/actionlint/releases> [Go]: <https://golang.org/> [asdf]: <https://asdf-vm.com/>
+[asdf-plugin]: <https://github.com/crazy-matt/asdf-actionlint> [chocolatey]:
+<https://community.chocolatey.org/packages/actionlint> [scoop]:
+<https://scoop.sh/#/apps?q=actionlint&s=0&d=1&o=true> [winget]:
+<https://github.com/microsoft/winget-pkgs/tree/master/manifests/r/rhysd/actionlint> [aur]:
+<https://aur.archlinux.org/packages/actionlint> [nixpkgs]:
+<https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/analysis/actionlint/default.nix>

@@ -1,4 +1,5 @@
 ```markdown
+
 # 🏥 Threshold Enterprise (Therapist Edition) – MVP Spec
 
 ### 🎯 Target Users

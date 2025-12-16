@@ -2,17 +2,18 @@
 
 Copy-paste commands to get Velinor running on DigitalOcean.
 
----
+##
 
 ## 1️⃣ Local: Generate SSH Key (One-Time)
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/velinor -C "velinor@firstperson"
+```text
+```text
 ```
 
 Save the public key output - you'll paste it into DigitalOcean.
 
----
+##
 
 ## 2️⃣ DigitalOcean: Create Droplet
 
@@ -26,25 +27,27 @@ Save the public key output - you'll paste it into DigitalOcean.
 
 **📝 Save the Droplet IP when it's created** (e.g., `123.45.67.89`)
 
----
+##
 
 ## 3️⃣ Namecheap: Add DNS Record
 
 **firstperson.chat → Advanced DNS**
 
 Add A Record:
+
 - **Host**: `velinor`
 - **Value**: Your Droplet IP
 - **TTL**: 30 min
 
 Click **Save** and wait 5-10 minutes.
 
----
+##
 
 ## 4️⃣ VPS: Run Setup Script
 
 ```bash
-ssh root@YOUR_DROPLET_IP
+
+```text
 ```
 
 Replace `YOUR_DROPLET_IP` with your actual IP.
@@ -59,9 +62,7 @@ set -e
 apt-get update && apt-get upgrade -y
 
 # Install Docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-rm get-docker.sh
+curl -fsSL https://get.docker.com -o get-docker.sh sh get-docker.sh rm get-docker.sh
 
 # Install Docker Compose
 apt-get install -y docker-compose-plugin
@@ -70,15 +71,13 @@ apt-get install -y docker-compose-plugin
 apt-get install -y certbot python3-certbot-nginx
 
 # Create deployment directory
-mkdir -p /opt/velinor
-cd /opt/velinor
+mkdir -p /opt/velinor cd /opt/velinor
 
 # Clone repo (replace with your repo URL)
 git clone https://github.com/YOUR_USERNAME/saoriverse-console.git .
 
 # Build and start
-docker compose -f docker-compose.prod.yml build
-docker compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml build docker compose -f docker-compose.prod.yml up -d
 
 # Get SSL certificate
 certbot certonly --standalone \
@@ -90,45 +89,50 @@ certbot certonly --standalone \
 # Restart nginx with SSL
 docker compose -f docker-compose.prod.yml restart nginx-ssl
 
-echo "✅ Velinor is live at https://velinor.firstperson.chat"
+```text
+```text
 ```
 
----
+##
 
 ## 5️⃣ Test It
 
 ```bash
-curl https://velinor.firstperson.chat
+
+```text
 ```
 
-Or visit: **https://velinor.firstperson.chat** in your browser
+Or visit: **<https://velinor.firstperson.chat>** in your browser
 
----
+##
 
 ## 6️⃣ Auto-Deploy (Optional)
 
 To deploy automatically on `git push main`:
 
-### A. Create deploy key on VPS:
+### A. Create deploy key on VPS
 
 ```bash
 ssh root@YOUR_DROPLET_IP
 ssh-keygen -t ed25519 -f /root/.ssh/velinor_deploy -C "velinor-deploy" -N ""
-cat /root/.ssh/velinor_deploy.pub
+```text
+```text
 ```
 
 Copy the output.
 
-### B. Add to GitHub:
+### B. Add to GitHub
 
 **Repo → Settings → Deploy Keys → Add deploy key**
+
 - **Title**: `Velinor VPS Deploy`
 - **Key**: Paste from above
 - ✅ **Allow write access**
 
-### C. Create deploy script on VPS:
+### C. Create deploy script on VPS
 
 ```bash
+
 ssh root@YOUR_DROPLET_IP
 
 cat > /opt/velinor/deploy.sh << 'EOF'
@@ -151,29 +155,31 @@ else
 fi
 EOF
 
-chmod +x /opt/velinor/deploy.sh
+```text
 ```
 
-### D. Add GitHub Secrets:
+### D. Add GitHub Secrets
 
 **Repo → Settings → Secrets and variables → Actions**
 
 Add two secrets:
+
 - **VPS_HOST**: Your Droplet IP (e.g., `123.45.67.89`)
 - **VPS_SSH_KEY**: Content of `/root/.ssh/velinor_deploy` (the **private** key)
 
 The `.github/workflows/deploy.yml` file is already in your repo and will auto-trigger on push! 🚀
 
----
+##
 
 ## 📊 Check Status
 
 ```bash
 ssh root@YOUR_DROPLET_IP
-docker compose -f docker-compose.prod.yml ps
+```text
+```text
 ```
 
----
+##
 
 ## 🆘 Troubleshooting
 
@@ -182,19 +188,22 @@ docker compose -f docker-compose.prod.yml ps
 **DNS not resolving**: Wait 10 minutes, then run `nslookup velinor.firstperson.chat`
 
 **Site shows nginx error**: Check containers are running with command above, or view logs:
+
 ```bash
-docker compose -f docker-compose.prod.yml logs
+
+```text
 ```
 
-**SSL certificate issue**: 
+**SSL certificate issue**:
+
 ```bash
 ls /etc/letsencrypt/live/velinor.firstperson.chat/
 ```
 
 If empty, domain name might be wrong - verify DNS is working first.
 
----
+##
 
-**Total time**: ~15 minutes ⏱️  
-**Total cost**: $6/month 💰  
+**Total time**: ~15 minutes ⏱️
+**Total cost**: $6/month 💰
 **Reliability**: 99.9% uptime ✅

@@ -2,9 +2,12 @@
 
 ## Overview
 
-The NPC Sphere of Influence System models how relationships ripple across Velinor's communities. Each NPC belongs to a sphere—a web of emotional connections, family ties, and shared resonance. When the player fractures trust or deepens empathy with one NPC, it affects not just that character, but their entire network.
+The NPC Sphere of Influence System models how relationships ripple across Velinor's communities.
+Each NPC belongs to a sphere—a web of emotional connections, family ties, and shared resonance. When
+the player fractures trust or deepens empathy with one NPC, it affects not just that character, but
+their entire network.
 
----
+##
 
 ## Core Mechanics
 
@@ -22,26 +25,26 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 | **0.4–0.6 (Medium)** | Subtle shifts in dialogue, glyph access | Ravi ↔ Merchants, Nima ↔ Shrine Keepers |
 | **0.1–0.3 (Weak)** | Background changes, NPC tone | Merchants ↔ Wanderers (minimal overlap) |
 
----
+##
 
 ## Marketplace Sphere of Influence
 
 ### Network Map
 
+```text
 ```
-                    Ravi (0.8) ← → Nima
-                    /  \              /  \
-              (0.4)/    \(0.2)    (0.5)/   \(0.3)
-                  /        \          /       \
-            Merchants    Shrine Keepers    Merchants
-          (0.4 ripple)   (0.5 ripple)     (0.3 ripple)
+
+Ravi (0.8) ← → Nima /  \              /  \ (0.4)/    \(0.2)    (0.5)/   \(0.3) /        \          /
+\ Merchants    Shrine Keepers    Merchants (0.4 ripple)   (0.5 ripple)     (0.3 ripple)
               |              |                |
-        Tovren (Cartwright)  Sera (Novice)    Korrin (Gossip)
-        Mariel (Weaver)      [Others]        [Others]
-        Kaelen (Cloaked)*    
-        
-* Hidden sphere: Thieves' Gang (0.6 counter-sphere with Veynar)
+Tovren (Cartwright)  Sera (Novice)    Korrin (Gossip) Mariel (Weaver)      [Others]        [Others]
+Kaelen (Cloaked)*
+
+- Hidden sphere: Thieves' Gang (0.6 counter-sphere with Veynar)
+
 ```
+
+
 
 ### Core NPCs and Their Connections
 
@@ -128,8 +131,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
   - Veynar ↔ Kaelen: **0.6 (Counter)** — direct opposition
   - Veynar ↔ Guards: **0.8 (Strong)** — authority network
   - Veynar ↔ Shrine Keepers: **0.2 (Weak)** — spiritual distrust of law
-
----
+##
 
 ## Ripple Effect Examples
 
@@ -192,8 +194,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 
 - Shrine keepers approve of defiance against authority.
 - Dalen the Guide respects the player's boldness.
-
----
+##
 
 ## Repair Mechanics: Sphere Healing
 
@@ -224,8 +225,7 @@ The NPC Sphere of Influence System models how relationships ripple across Velino
 **Mechanic**: Repairing trust with one NPC can heal ripples across their sphere.
 
 **Example**: Reconciling with Nima (0.8 weight) can automatically soften Sera and shrine keepers (0.5 ripple). Healing spreads like trust itself.
-
----
+##
 
 ## Dynamic Sphere Shifts
 
@@ -242,8 +242,7 @@ Sphere weights can shift based on in-game time and events:
 - **Kaelen's Theft**: Korrin's gossip network activates, merchant sphere fractures.
 - **Nima's Breakdown**: Ravi's concern rises, his ripple to merchants increases (0.5 → 0.6).
 - **Dalen's Challenge**: Ravi's caution rises, his weight to Dalen lowers (0.3 → 0.1).
-
----
+##
 
 ## Implementation Notes
 
@@ -254,8 +253,7 @@ Sphere weights can shift based on in-game time and events:
 - [ ] Create "sphere stability" meter (dev tool) to test cascade effects.
 - [ ] Test repair paths for each major NPC.
 - [ ] Ensure ripple effects feel organic, not mechanical.
-
----
+##
 
 ## Sphere Philosophy
 

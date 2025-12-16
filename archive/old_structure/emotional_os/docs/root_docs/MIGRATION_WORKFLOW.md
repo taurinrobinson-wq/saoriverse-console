@@ -7,7 +7,7 @@ This document outlines the complete workflow for using the new telemetry, fragme
 The migration includes three main components:
 
 1. **Conservative Cleanup Pipeline** - Normalizes and enriches glyph data with fragment detection
-2. **Telemetry Instrumentation** - Observable events for debugging and monitoring  
+2. **Telemetry Instrumentation** - Observable events for debugging and monitoring
 3. **Safe Supabase Migration Tools** - Backup and batched upsert capabilities
 
 ## 📁 Key Files Added
@@ -20,7 +20,7 @@ The migration includes three main components:
 - `dev_tools/cleanup_report.md` - Human-readable cleanup summary
 - `dev_tools/lowest_integrity_sample.csv` - Bottom 50 glyphs by integrity score
 
-### Supabase Migration Tools  
+### Supabase Migration Tools
 
 - `dev_tools/supabase_backup_and_plan.py` - Creates full table backup and upsert plan
 - `dev_tools/supabase_upsert_runner.py` - Applies upsert plan in safe batches
@@ -39,6 +39,7 @@ The migration includes three main components:
 The cleanup has already been run and produced these artifacts:
 
 ```bash
+
 # Review the cleanup outputs
 cat dev_tools/cleanup_report.md
 head -10 dev_tools/lowest_integrity_sample.csv
@@ -55,10 +56,11 @@ ls -la dev_tools/fragments_to_review.json  # Should be empty (no fragments found
 ### Phase 2: Test Migration Tools (✅ Completed)
 
 ```bash
+
 # Test backup script in dry-run mode
 python3 dev_tools/supabase_backup_and_plan.py --no-backup --cleaned dev_tools/cleaned_glyphs.json
 
-# Test upsert runner in dry-run mode  
+# Test upsert runner in dry-run mode
 python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_<timestamp>.json
 ```
 
@@ -71,10 +73,12 @@ python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_pla
 ### Phase 3: Validate Telemetry (✅ Completed)
 
 ```bash
+
 # Test telemetry toggle programmatically
 python3 -c "
 from emotional_os.core import signal_parser as sp
 sp.set_telemetry(True)
+
 # Run operations - should see JSON telemetry events
 sp.set_telemetry(False)
 "
@@ -91,6 +95,7 @@ sp.set_telemetry(False)
 ### Phase 4: Verify No Regressions (✅ Completed)
 
 ```bash
+
 # Run full test suite
 python3 -m pytest tests/ -v
 ```
@@ -114,6 +119,7 @@ python3 dev_tools/supabase_backup_and_plan.py --table glyphs
 #### 5.2 Review Plan
 
 ```bash
+
 # Inspect the generated plan files
 cat dev_tools/supabase_upsert_plan_*.json
 head -20 dev_tools/supabase_upsert_plan_*_inserts.csv
@@ -123,6 +129,7 @@ head -20 dev_tools/supabase_upsert_plan_*_updates.csv
 #### 5.3 Apply Migration (CAUTION)
 
 ```bash
+
 # Final dry-run check
 python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_*.json
 
@@ -139,7 +146,7 @@ export SAORI_TELEMETRY=1  # Enable
 export SAORI_TELEMETRY=0  # Disable
 ```
 
-### Runtime Toggle  
+### Runtime Toggle
 
 ```python
 from emotional_os.core import signal_parser
@@ -209,6 +216,7 @@ All events are logged as JSON to facilitate parsing:
 **Cleanup script fails to find SQL file:**
 
 ```bash
+
 # Ensure glyphs_rows.sql exists, or specify custom path
 python3 dev_tools/cleanup_glyphs.py --source path/to/your/export.sql
 ```
@@ -216,15 +224,18 @@ python3 dev_tools/cleanup_glyphs.py --source path/to/your/export.sql
 **Backup script authentication errors:**
 
 ```bash
+
 # Verify environment variables are set
 echo $SUPABASE_URL
 echo $SUPABASE_KEY
+
 # Ensure using service role key, not anon key
 ```
 
 **Telemetry not showing:**
 
 ```bash
+
 # Verify telemetry is enabled
 python3 -c "
 from emotional_os.core import signal_parser as sp
@@ -243,6 +254,7 @@ print('Telemetry enabled:', hasattr(sp, 'TELEMETRY_ENABLED') and sp.TELEMETRY_EN
 If you encounter issues, gather this information:
 
 ```bash
+
 # System info
 python3 --version
 pip3 list | grep -E "(requests|streamlit|pandas)"
@@ -255,6 +267,7 @@ wc -l dev_tools/*.csv
 python3 -c "
 from emotional_os.core import signal_parser as sp
 sp.set_telemetry(True)
+
 # ... run test operation
 "
 ```
@@ -264,7 +277,7 @@ sp.set_telemetry(True)
 ### Recommended Follow-ups
 
 1. **Monitor telemetry** in production to identify performance bottlenecks
-2. **Adjust fragment threshold** if 0.5 proves too conservative/aggressive  
+2. **Adjust fragment threshold** if 0.5 proves too conservative/aggressive
 3. **Expand cleanup heuristics** based on production data patterns
 4. **Automate migration** using CI/CD pipeline for future updates
 
@@ -274,14 +287,14 @@ sp.set_telemetry(True)
 - **A/B testing** - Use telemetry to compare glyph selection strategies
 - **Data quality** - Track integrity scores over time to identify degradation
 
----
+##
 
 ## ✅ Summary
 
 This migration successfully adds:
 
 - ✅ Conservative cleanup pipeline with integrity scoring
-- ✅ Comprehensive telemetry instrumentation  
+- ✅ Comprehensive telemetry instrumentation
 - ✅ Safe Supabase migration tools with backup
 - ✅ Fragment detection (0 fragments found - good data quality)
 - ✅ All tests passing (109/110) - no regressions

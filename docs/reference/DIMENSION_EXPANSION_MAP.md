@@ -1,7 +1,10 @@
 # Emotional Dimension Expansion Map
 
 ## Your Original 8 Dimensions (from "Hope is the thing with feathers")
+
+```text
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │  BASE EMOTIONAL DIMENSIONS (Foundation)                 │
 ├─────────────────────────────────────────────────────────┤
@@ -14,10 +17,16 @@
 │  7. Sensuality   - sensory experience & texture          │
 │  8. Nature       - natural imagery & symbolism           │
 └─────────────────────────────────────────────────────────┘
+
 ```
 
+
+
 ## New Pre-Discovered Dimensions (from Poetry Analysis)
+```text
+```text
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │  ENHANCED DIMENSIONS (Poetry Canon Analysis)            │
 ├─────────────────────────────────────────────────────────┤
@@ -32,10 +41,17 @@
 │  17. Resilience  - strength, endurance, persistence    │
 │  18. Solitude    - isolation, loneliness, being apart  │
 └─────────────────────────────────────────────────────────┘
+
 ```
 
+
+
+
 ## Dynamically Discovered Dimensions (from Corpus Learning)
+
+```text
 ```
+
 ┌─────────────────────────────────────────────────────────┐
 │  ADAPTIVE DIMENSIONS (Learned from Processing)          │
 ├─────────────────────────────────────────────────────────┤
@@ -47,11 +63,16 @@
 │          - Victorian constraints & yearnings            │
 │          - Modern disaffection                          │
 └─────────────────────────────────────────────────────────┘
+
 ```
+
+
 
 ## Dimension Expansion Timeline
-
+```text
+```text
 ```
+
 November 3, 2025
 ├─ Started: 8 dimensions (your poem)
 │
@@ -63,37 +84,49 @@ November 3, 2025
     - Poet-specific dimensions identified
     - Era-specific themes extracted
     - Semantic relationships mapped
+
 ```
+
+
+
 
 ## Cross-Dimension Relationships
 
 ### Example: "Melancholic Nostalgia"
+
+```text
 ```
+
 Melancholy (13)
     + Nostalgia (9)
     + Longing (12)
     + Solitude (18)
-        ↓
-    = Complex emotional state
-    
-When extracted from Romantic poetry:
-"I remember the sweetness of days gone by,
- Yet grief fills my heart for what I've lost"
+↓ = Complex emotional state
+
+When extracted from Romantic poetry: "I remember the sweetness of days gone by, Yet grief fills my
+heart for what I've lost"
+
 ```
 
+
+
 ### Example: "Transcendent Wonder"
+```text
+```text
 ```
+
 Transcendence (11)
     + Wonder (16)
     + Transformation (4)
     + Nature (8)
-        ↓
-    = Spiritual awakening
-    
-When extracted from Shelley:
-"The vast luminous sphere,
- Where infinite consciousness dwells"
+↓ = Spiritual awakening
+
+When extracted from Shelley: "The vast luminous sphere, Where infinite consciousness dwells"
+
 ```
+
+
+
 
 ## Dimension Keywords by Category
 
@@ -113,7 +146,9 @@ When extracted from Shelley:
 
 ## System Processing Flow with Adaptive Extraction
 
+```text
 ```
+
 Poetry Corpus
     ↓
 [Chunk 1] → Extract with all 18 dimensions
@@ -127,7 +162,10 @@ Poetry Corpus
 Lexicon expanded across full emotional spectrum
     ↓
 System now understands poetry at deeper level
+
 ```
+
+
 
 ## Expected Outcomes from Gutenberg Processing
 
@@ -140,7 +178,10 @@ System now understands poetry at deeper level
 - Semantic relationships between classical poets
 
 **Example Report:**
+```text
+```text
 ```
+
 Emotional Dimensions Report:
 ├─ Base Dimensions: 8
 ├─ Pre-discovered: 10
@@ -152,7 +193,11 @@ Emotional Dimensions Report:
 │
 └─ Total Dimensions: 23
    (vs. 8 at start)
+
 ```
+
+
+
 
 ## Impact on Lexicon Learning
 
@@ -167,18 +212,15 @@ Emotional Dimensions Report:
 - "eternal" → love/admiration/transcendence/resilience/nostalgia
 
 **Result: 3-5x richer emotional understanding per word!**
-
----
+##
 
 ## Why This Matters
 
-Your original insight was profound: emotions in poetry are complex and multi-dimensional. By limiting to 8 dimensions, you were capturing only the primary patterns.
+Your original insight was profound: emotions in poetry are complex and multi-dimensional. By
+limiting to 8 dimensions, you were capturing only the primary patterns.
 
-Now with **18+ adaptive dimensions**, the system can:
-1. ✅ Recognize subtle emotional nuances
-2. ✅ Understand poet-specific emotional vocabularies
-3. ✅ Discover patterns unique to different eras
-4. ✅ Build a truly comprehensive emotional lexicon
-5. ✅ Scale indefinitely as more poetry is processed
+Now with **18+ adaptive dimensions**, the system can: 1. ✅ Recognize subtle emotional nuances 2. ✅
+Understand poet-specific emotional vocabularies 3. ✅ Discover patterns unique to different eras 4. ✅
+Build a truly comprehensive emotional lexicon 5. ✅ Scale indefinitely as more poetry is processed
 
 **The system no longer just recognizes emotions - it discovers them.** 🌟

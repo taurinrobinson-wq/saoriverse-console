@@ -5,11 +5,12 @@ This document describes the new persistent conversation storage system for First
 ## Overview
 
 The system now supports:
-1. **Persistent Conversation Storage** - Conversations are saved to Supabase/database
-2. **Auto-Naming** - Conversations are automatically named based on first message context
-3. **Conversation Sidebar** - Previous conversations listed and selectable in sidebar
-4. **Rename/Delete** - Users can rename or delete conversations
-5. **Session Persistence** - Preferences like "Save my chats" are remembered across sessions
+
+1. **Persistent Conversation Storage** - Conversations are saved to Supabase/database 2.
+**Auto-Naming** - Conversations are automatically named based on first message context 3.
+**Conversation Sidebar** - Previous conversations listed and selectable in sidebar 4.
+**Rename/Delete** - Users can rename or delete conversations 5. **Session Persistence** -
+Preferences like "Save my chats" are remembered across sessions
 
 ## Architecture
 
@@ -41,16 +42,22 @@ The system now supports:
 Run the SQL migration in Supabase:
 
 ```bash
+
 # Option A: Via Supabase Dashboard
+
 # 1. Go to Supabase Console → SQL Editor
+
 # 2. Create new query
+
 # 3. Copy and run sql/conversations_table.sql
 
 # Option B: Via Supabase CLI (if installed)
-supabase db push
+```text
+```text
 ```
 
 The schema creates:
+
 - `conversations` table - stores full conversations with metadata
 - `conversation_metadata` table - audit trail of changes
 - Automatic triggers for timestamp management
@@ -60,16 +67,20 @@ The schema creates:
 Ensure `st.secrets` contains Supabase credentials:
 
 ```yaml
+
+
 # .streamlit/secrets.toml
 [supabase]
 url = "https://your-project.supabase.co"
-key = "your-anon-key"
+
+```text
 ```
 
 ### 3. Run the Application
 
 ```bash
-streamlit run app.py
+```text
+```text
 ```
 
 ## Features
@@ -79,16 +90,19 @@ streamlit run app.py
 Conversations are automatically named from the first message:
 
 ```python
+
 from emotional_os.deploy.modules.conversation_manager import generate_auto_name
 
 # Example
 title = generate_auto_name("I've been feeling anxious about work")
-# Result: "Feeling anxious about work"
+
+```text
 ```
 
 ### Managing Conversations
 
 In the sidebar:
+
 - 📚 **Previous Conversations** - Lists all saved conversations
 - 💬 - Click to load a conversation
 - ✏️ - Rename a conversation
@@ -122,7 +136,8 @@ success, msg = manager.save_conversation(
 success, msg = manager.rename_conversation("conv-id-123", "New Title")
 
 # Delete conversation
-success, msg = manager.delete_conversation("conv-id-123")
+```text
+```text
 ```
 
 ## Data Structure
@@ -130,6 +145,7 @@ success, msg = manager.delete_conversation("conv-id-123")
 ### Conversation Storage Format
 
 ```json
+
 {
   "id": "uuid",
   "user_id": "user123",
@@ -153,12 +169,14 @@ success, msg = manager.delete_conversation("conv-id-123")
   "emotional_context": {},
   "topics": [],
   "archived": false
-}
+
+```text
 ```
 
 ## Session State Management
 
 Key session state variables:
+
 - `current_conversation_id` - Active conversation UUID
 - `conversation_title` - Current conversation title
 - `conversation_manager` - ConversationManager instance
@@ -171,9 +189,12 @@ Key session state variables:
 ### Conversations not saving
 
 1. **Check Supabase configuration**
+
    ```bash
    # Verify secrets are loaded
-   python -c "import streamlit as st; print(st.secrets.get('supabase'))"
+
+python -c "import streamlit as st; print(st.secrets.get('supabase'))"
+
    ```
 
 2. **Check network connectivity**
@@ -193,6 +214,7 @@ Key session state variables:
 ### Auto-naming not working
 
 If `generate_auto_name()` returns "New Conversation":
+
 1. Check if first message is empty
 2. Verify NLP module is available (spaCy, NLTK)
 3. Check logs for errors
@@ -202,7 +224,9 @@ If `generate_auto_name()` returns "New Conversation":
 To migrate existing conversation history:
 
 ```python
+
 # This would require custom migration script
+
 # Contact development team for migration support
 ```
 

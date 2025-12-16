@@ -1,9 +1,9 @@
 # Glyph System Architecture & Current Status
 
-**Date:** November 12, 2025  
+**Date:** November 12, 2025
 **Status:** ✅ Database Updated | ⚠️ Backend Configuration Needed
 
----
+##
 
 ## 🔴 Current Issues Resolved
 
@@ -16,9 +16,9 @@
 **Error Flow:**
 
 ```
-User sends message → UI calls run_hybrid_pipeline() → 
-Tries to POST to saori_url → saori_url is None → 
-API returns 200+ status code → 
+User sends message → UI calls run_hybrid_pipeline() →
+Tries to POST to saori_url → saori_url is None →
+API returns 200+ status code →
 Returns: "I'm experiencing some technical difficulties, but I'm still here for you."
 ```
 
@@ -30,7 +30,7 @@ SUPABASE_URL=https://your-supabase-project.supabase.co
 SUPABASE_ANON_KEY=your_anon_key_here
 ```
 
----
+##
 
 ## ✅ Database Update Complete
 
@@ -56,7 +56,7 @@ Gate 9:    23 glyphs (Stillness)
 Gate 10:    1 glyph (Surrender)
 ```
 
----
+##
 
 ## 📊 How Glyphs Generate Responses
 
@@ -112,7 +112,7 @@ Response delivered to user
 
 Use this document as the canonical reference for the response flow while you continue improving the system. If you update selection heuristics (weights, `top_n`, or intensity calculations), update this file so the team's expectations stay aligned.
 
----
+##
 
 ## 🗂️ Key Files That Generate Responses
 
@@ -174,7 +174,7 @@ Use this document as the canonical reference for the response flow while you con
   - Stores in `glyph_candidates` table
   - Learns from user interactions
 
----
+##
 
 ## 🔄 Response Flow Diagram
 
@@ -231,13 +231,14 @@ Use this document as the canonical reference for the response flow while you con
               └────────────────────┘
 ```
 
----
+##
 
 ## 🛠️ Configuration Requirements
 
 ### Environment Variables (.env file)
 
 ```bash
+
 # Supabase Configuration
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your_anon_key_here
@@ -262,7 +263,7 @@ SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
    - No external API calls
    - Works without SAORI configuration
 
----
+##
 
 ## 📁 Database Tables
 
@@ -282,7 +283,7 @@ SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
 - **glyph_lexicon_archived** - Historical glyphs
 - **trace_log** - System telemetry
 
----
+##
 
 ## 🔍 Quick Diagnostics
 
@@ -313,13 +314,13 @@ print(f"Best glyph: {result['best_glyph']}")
 print(f"Response: {result['voltage_response'][:100]}...")
 ```
 
----
+##
 
 ## 📝 Summary
 
-✅ **Database Updated:** 6,434 glyphs now loaded  
-⚠️ **Action Required:** Configure `CURRENT_SAORI_URL` in `.env`  
-📊 **Response System:** Multi-layered with learning capabilities  
-🔄 **Flow:** signal_parser → glyphs.db → response composers  
+✅ **Database Updated:** 6,434 glyphs now loaded
+⚠️ **Action Required:** Configure `CURRENT_SAORI_URL` in `.env`
+📊 **Response System:** Multi-layered with learning capabilities
+🔄 **Flow:** signal_parser → glyphs.db → response composers
 
 The system is now ready to provide rich emotional responses once the backend API is configured.

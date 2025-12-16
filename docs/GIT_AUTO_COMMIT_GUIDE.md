@@ -9,50 +9,64 @@ You now have two automated commit & push scripts that periodically save your wor
 
 Both scripts monitor your workspace and commit/push changes at regular intervals.
 
----
+##
 
 ## Quick Start
 
 ### Windows (PowerShell)
 
 **Option 1: Run manually with default 30-minute interval**
+
 ```powershell
-.\scripts\auto-commit.ps1
+```text
+```text
 ```
 
 **Option 2: Custom interval (e.g., every 15 minutes)**
+
 ```powershell
-.\scripts\auto-commit.ps1 -IntervalMinutes 15
+
+```text
 ```
 
 **Option 3: Custom commit message**
+
 ```powershell
-.\scripts\auto-commit.ps1 -CommitMessage "wip: working on feature X"
+```text
+```text
 ```
 
 **Option 4: Stop anytime**
+
 ```
-Press Ctrl+C
+
+```text
 ```
 
 ### macOS/Linux
 
 **Option 1: Run with default 30-minute interval**
+
 ```bash
-bash scripts/auto-commit.sh
+```text
+```text
 ```
 
 **Option 2: Custom interval (e.g., every 10 minutes)**
+
 ```bash
-bash scripts/auto-commit.sh 10
+
+```text
 ```
 
 **Option 3: Stop anytime**
+
 ```
-Press Ctrl+C
+```text
+```text
 ```
 
----
+##
 
 ## How It Works
 
@@ -66,57 +80,60 @@ Press Ctrl+C
 ### Example Output
 
 ```
-🔄 Starting automatic git commit & push service...
-Interval: every 30 minutes
-Press Ctrl+C to stop
 
-[2025-12-12 14:05:23] Found 3 modified file(s)
-  ✓ Staged changes
-  ✓ Committed: auto: periodic commit and push (2025-12-12 14:05:23)
-  ✓ Pushed to remote
-  Waiting 30 minutes until next check...
-[2025-12-12 14:35:45] Found 2 modified file(s)
-  ✓ Staged changes
-  ✓ Committed: auto: periodic commit and push (2025-12-12 14:35:45)
-  ✓ Pushed to remote
-  Waiting 30 minutes until next check...
+🔄 Starting automatic git commit & push service... Interval: every 30 minutes Press Ctrl+C to stop
+
+[2025-12-12 14:05:23] Found 3 modified file(s) ✓ Staged changes ✓ Committed: auto: periodic commit
+and push (2025-12-12 14:05:23) ✓ Pushed to remote Waiting 30 minutes until next check... [2025-12-12
+14:35:45] Found 2 modified file(s) ✓ Staged changes ✓ Committed: auto: periodic commit and push
+(2025-12-12 14:35:45) ✓ Pushed to remote
+
+```text
 ```
 
----
+##
 
 ## Best Practices
 
 ### 1. Choose Appropriate Interval
+
 - **Development**: 15-30 minutes (frequent changes)
 - **Documentation**: 30-60 minutes (less frequent updates)
 - **Production**: 60+ minutes (minimal changes)
 
 ### 2. Monitor the Console
+
 The script outputs status for each commit cycle so you can see:
+
 - How many files changed
 - Whether commit succeeded
 - Whether push succeeded
 - When next check happens
 
 ### 3. Combine with Manual Commits
+
 The auto-commit scripts work alongside manual commits:
+
 ```bash
+
 # Auto-commit runs in background
 .\scripts\auto-commit.ps1
 
 # You can still commit manually in another terminal
 git add src/specific-file.ts
 git commit -m "feat: implement specific feature"
-git push
+```text
+```text
 ```
 
 ### 4. Handle Conflicts
-If you have conflicts or issues:
-1. **Stop the auto-commit script** (Ctrl+C)
-2. **Resolve conflicts manually** in git
-3. **Restart the script** when ready
 
----
+If you have conflicts or issues:
+
+1. **Stop the auto-commit script** (Ctrl+C) 2. **Resolve conflicts manually** in git 3. **Restart
+the script** when ready
+
+##
 
 ## Running in the Background
 
@@ -125,10 +142,13 @@ If you have conflicts or issues:
 Create a scheduled task to run the script automatically:
 
 ```powershell
+
+
 # Create scheduled task (run once at startup, repeat every 30 minutes)
 $trigger = New-ScheduledTaskTrigger -AtStartup -RepetitionInterval (New-TimeSpan -Minutes 30)
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\path\to\scripts\auto-commit.ps1"
-Register-ScheduledTask -TaskName "GitAutoCommit" -Trigger $trigger -Action $action -RunLevel Highest
+
+```text
 ```
 
 ### macOS/Linux (Cron)
@@ -136,76 +156,90 @@ Register-ScheduledTask -TaskName "GitAutoCommit" -Trigger $trigger -Action $acti
 Create a cron job to run every 30 minutes:
 
 ```bash
+
 # Edit crontab
 crontab -e
 
 # Add this line (runs every 30 minutes)
-*/30 * * * * cd /path/to/saoriverse-console && bash scripts/auto-commit.sh >> /tmp/git-auto-commit.log 2>&1
+```text
+```text
 ```
 
----
+##
 
 ## Troubleshooting
 
 ### "Permission denied" on bash script
+
 ```bash
-chmod +x scripts/auto-commit.sh
+
+```text
 ```
 
 ### "Git command not found"
+
 Ensure git is in your PATH:
+
 ```bash
 which git  # macOS/Linux
-where.exe git  # Windows PowerShell
+```text
+```text
 ```
 
 ### "Push failed (may require PR)"
+
 This is expected if your repo has branch protection rules. The script will:
-1. Commit locally ✓
-2. Attempt push ⚠
-3. Warn you in console
-4. Continue next cycle (manual push needed)
+
+1. Commit locally ✓ 2. Attempt push ⚠ 3. Warn you in console 4. Continue next cycle (manual push
+needed)
 
 ### Script keeps running but nothing commits
+
 Check if there are actual changes:
+
 ```bash
-git status --short
+
+```text
 ```
 
 If empty, everything is already committed.
 
----
+##
 
 ## Manual Commit Alternative
 
 If you prefer manual one-off commits:
 
 ```bash
+
 # Quick single commit
-cd d:\saoriverse-console
-git add -A
-git commit -m "feat: implement emotion learning system"
-git push origin main
+cd d:\saoriverse-console git add -A git commit -m "feat: implement emotion learning system"
+```text
+```text
 ```
 
----
+##
 
 ## Stopping the Auto-Commit
 
 **At any time:** Press `Ctrl+C` in the terminal running the script
 
 **To remove scheduled task (Windows):**
+
 ```powershell
-Unregister-ScheduledTask -TaskName "GitAutoCommit" -Confirm:$false
+
+```text
 ```
 
 **To remove cron job (macOS/Linux):**
+
 ```bash
 crontab -e
+
 # Remove the line you added earlier
 ```
 
----
+##
 
 ## Summary
 
@@ -216,8 +250,9 @@ crontab -e
 | Stop auto-commit | Ctrl+C |
 | Manual single commit | `git add -A && git commit -m "msg" && git push` |
 
----
+##
 
 **Your changes are now automatically backed up to GitHub!** 🎉
 
-Every change you make will be committed and pushed at regular intervals, ensuring no work is lost and progress is always tracked.
+Every change you make will be committed and pushed at regular intervals, ensuring no work is lost
+and progress is always tracked.

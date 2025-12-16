@@ -4,41 +4,39 @@
 
 Tracks user's emotional state across multiple messages and builds understanding.
 
-```
-Message 1: "I'm stressed"
-              ↓
-Message 2: "Too much on my mind at work"
-              ↓
-Message 3: "5 projects, Thursday deadline"
-              ↓
-SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
+```text
 ```
 
----
+Message 1: "I'm stressed" ↓ Message 2: "Too much on my mind at work" ↓ Message 3: "5 projects,
+Thursday deadline" ↓ SYSTEM UNDERSTANDS: Work demands → cognitive flooding → paralysis → stuck
+
+```
+
+
+##
 
 ## Key Classes
 
 ### ConversationMemory (Main)
+
 ```python
+
 memory = ConversationMemory()
 
 # After each user message:
-memory.add_turn(
-    user_input="...",
-    parsed=SemanticParsing(...),
-    glyphs_identified=["..."],
-    missing_elements=["..."],
-    clarifications_asked=["..."],
-)
+memory.add_turn( user_input="...", parsed=SemanticParsing(...), glyphs_identified=["..."],
+missing_elements=["..."], clarifications_asked=["..."], )
 
 # Get current state:
 memory.get_emotional_profile_brief()  # "HIGH: stress, overload (in work)"
 memory.get_causal_narrative()  # "work → cognitive flooding → paralysis"
 memory.get_next_clarifications()  # ["What triggered?", "How many things?"]
-memory.get_glyph_set()  # ["Still Insight", "Quiet Revelation", ...]
+
+```text
 ```
 
 ### SemanticParsing (Input)
+
 ```python
 parsed = SemanticParsing(
     actor="I",
@@ -51,14 +49,16 @@ parsed = SemanticParsing(
     thought_patterns=["flooding"],
     action_capacity="paralyzed",
     raw_input="...",
-)
+```text
+```text
 ```
 
----
+##
 
 ## Integration Example
 
 ```python
+
 from src.emotional_os_glyphs.conversation_memory import ConversationMemory, SemanticParsing
 from src.emotional_os_glyphs.dynamic_response_composer import DynamicResponseComposer
 
@@ -98,40 +98,35 @@ response = composer.compose_response_with_memory(
     glyph=None,
 )
 
-print(response)  # "I hear you're feeling stress today."
+```text
 ```
 
----
+##
 
 ## Response Composition
 
 ### With Memory
+
 ```python
-def compose_response_with_memory(
-    input_text,
-    conversation_memory,
-    glyph=None,
-):
+def compose_response_with_memory( input_text, conversation_memory, glyph=None, ):
     # 1. Get integrated state
-    integrated_state = memory.integrated_state
-    causal_chain = memory.causal_understanding
-    
+integrated_state = memory.integrated_state causal_chain = memory.causal_understanding
+
     # 2. Build acknowledgment (causal-aware)
-    acknowledgment = "I hear you - work has flooded your mind..."
-    
+acknowledgment = "I hear you - work has flooded your mind..."
+
     # 3. Add glyph validation (if rich)
-    if len(glyph_set) > 1:
-        validation = "This needs organizing."
-    
+if len(glyph_set) > 1: validation = "This needs organizing."
+
     # 4. Add targeted clarification
-    clarifications = memory.get_next_clarifications()
-    question = "Which of these could wait?"
-    
+clarifications = memory.get_next_clarifications() question = "Which of these could wait?"
+
     # 5. Combine
-    return f"{acknowledgment} {validation} {question}"
+```text
+```text
 ```
 
----
+##
 
 ## Data Structure Summary
 
@@ -147,27 +142,30 @@ def compose_response_with_memory(
 | **Confidence** | Understanding level | 0.7 → 0.85 → 0.95 |
 | **Needs** | Missing information | "What triggered?", "Which is urgent?" |
 
----
+##
 
 ## Confidence Progression
 
 ```
-Turn 1: 0.7 (emotion stated, cause unknown)
-Turn 2: 0.85 (mechanism revealed: work → flooding → paralysis)
-Turn 3: 0.95 (specifics provided: 5 projects, Thursday, unstarted)
+
+Turn 1: 0.7 (emotion stated, cause unknown) Turn 2: 0.85 (mechanism revealed: work → flooding →
+paralysis)
+
+```text
 ```
 
----
+##
 
 ## Glyph Evolution
 
 ```
 Turn 1: [Still Insight]
 Turn 2: [Still Insight, Quiet Revelation, Fragmentation]
-Turn 3: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
+```text
+```text
 ```
 
----
+##
 
 ## Response Quality Scale
 
@@ -182,11 +180,12 @@ Turn 3: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
 | "Have you prioritized?" | "Which of 5 could wait?" |
 | Generic suggestion | Action-oriented |
 
----
+##
 
 ## Method Reference
 
 ### ConversationMemory
+
 - `add_turn()` - Add message and integrate
 - `get_emotional_profile_brief()` - Human-readable affect summary
 - `get_causal_narrative()` - Trigger → Mechanism → Manifestation chain
@@ -195,65 +194,72 @@ Turn 3: [Still Insight, Quiet Revelation, Fragmentation, The Threshold]
 - `get_conversation_summary()` - Full JSON snapshot
 
 ### DynamicResponseComposer
+
 - `compose_response_with_memory()` - Generate memory-informed response
 - `_build_first_turn_acknowledgment()` - Initial response
 - `_build_subsequent_turn_acknowledgment()` - Mechanism-aware response
 - `_build_glyph_validation_from_set()` - Multi-glyph validation text
 - `_build_targeted_clarifications()` - Smart question from gaps
 
----
+##
 
 ## Example Conversation
 
 ```
+
 USER: "I'm feeling so stressed today"
 
 SYSTEM (with memory):
   parsed: stress, present, today
   stored: confident in emotion, needs cause
   response: "I hear you're feeling stress today."
-  
+
 USER: "I have so much on my mind at work that I can't take a step"
 
 SYSTEM (memory enriched):
   parsed: cognitive_overload, work, paralysis, flooding
   learns: work → cognitive flooding → paralysis
   stored: confident in mechanism, confidence 0.85
-  response: "I hear you - work has flooded your mind with so many 
+  response: "I hear you - work has flooded your mind with so many
             competing demands. What you're describing needs organizing."
-  
+
 USER: "5 projects due this week, client presentation Thursday, haven't started"
 
 SYSTEM (full context):
   parsed: 5 items, Thursday deadline, client, unstarted
   learns: exact problem, most urgent item, blocker
   stored: confident in specifics, confidence 0.95
-  response: "I hear you - which of these 5 could potentially wait?"
+
+```text
 ```
 
----
+##
 
 ## Files
 
 ### Core Implementation
+
 - `src/emotional_os_glyphs/conversation_memory.py` - Memory layer
 - `src/emotional_os_glyphs/dynamic_response_composer.py` - Response methods
 
 ### Tests
+
 - `test_memory_layer.py` - Full integration test
 - `test_memory_informed_logic.py` - Logic simulation
 
 ### Documentation
+
 - `MEMORY_LAYER_ARCHITECTURE.md` - Full design
 - `MEMORY_LAYER_VISUAL_ARCHITECTURE.md` - Diagrams
 - `MEMORY_LAYER_IMPLEMENTATION_SUMMARY.md` - Status
 - `MEMORY_LAYER_QUICK_REFERENCE.md` - This file
 
----
+##
 
 ## Quick Start
 
 ```python
+
 # 1. Import
 from conversation_memory import ConversationMemory, SemanticParsing
 
@@ -261,40 +267,26 @@ from conversation_memory import ConversationMemory, SemanticParsing
 memory = ConversationMemory()
 
 # 3. Parse each message
-parsed = SemanticParsing(
-    actor="I",
-    primary_affects=["stress"],
-    secondary_affects=[],
-    tense="present",
-    emphasis="so",
-    domains=[],
-    temporal_scope="today",
-    thought_patterns=[],
-    action_capacity="unknown",
-    raw_input="I'm feeling so stressed today",
-)
+parsed = SemanticParsing( actor="I", primary_affects=["stress"], secondary_affects=[],
+tense="present", emphasis="so", domains=[], temporal_scope="today", thought_patterns=[],
+action_capacity="unknown", raw_input="I'm feeling so stressed today", )
 
 # 4. Add to memory
-memory.add_turn(
-    user_input="I'm feeling so stressed today",
-    parsed=parsed,
-    glyphs_identified=["Still Insight"],
-    missing_elements=["causation"],
-    clarifications_asked=["What triggered this?"],
-)
+memory.add_turn( user_input="I'm feeling so stressed today", parsed=parsed,
+glyphs_identified=["Still Insight"], missing_elements=["causation"], clarifications_asked=["What
+triggered this?"], )
 
 # 5. Use memory in response
-response = composer.compose_response_with_memory(
-    input_text=user_input,
-    conversation_memory=memory,
+response = composer.compose_response_with_memory( input_text=user_input, conversation_memory=memory,
 )
 ```
 
----
+##
 
 ## Status: READY FOR INTEGRATION ✓
 
 All components implemented and tested:
+
 - ✅ Memory layer stores and integrates information
 - ✅ Response composer uses memory for better responses
 - ✅ Confidence scores track understanding

@@ -8,13 +8,15 @@ Quick start (development):
 
 ```bash
 cd firstperson
-npm install
+```text
+```text
 ```
 
 2. Start the Expo dev server
 
 ```bash
-npx expo start
+
+```text
 ```
 
 3. Open on device or emulator
@@ -26,7 +28,8 @@ Backend configuration
 - By default the app points at `http://localhost:8000`. To change this, set the environment variable `REACT_APP_SAOYNX_API_URL` before starting the app. Example:
 
 ```bash
-REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000" npx expo start
+```text
+```text
 ```
 
 EAS (optional)
@@ -34,8 +37,10 @@ EAS (optional)
 - If you plan to use EAS Build / Submit, run:
 
 ```bash
+
 cd firstperson
 eas build:configure
+
 ```
 
 This project includes a minimal `eas.json` so the command will not fail. Note that EAS requires an Expo account and `eas-cli` to be installed and logged in.

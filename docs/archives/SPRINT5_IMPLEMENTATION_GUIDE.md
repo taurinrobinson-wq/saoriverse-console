@@ -2,7 +2,9 @@
 
 ## Problem Statement
 
-The current system generates generic, template-like responses that don't match the emotional intensity of user input. When you say "what a freakin' stressful day!", the system responds with vague pleasantries like "How are you feeling?" instead of meeting you emotionally.
+The current system generates generic, template-like responses that don't match the emotional
+intensity of user input. When you say "what a freakin' stressful day!", the system responds with
+vague pleasantries like "How are you feeling?" instead of meeting you emotionally.
 
 **Root Cause**: Sprint 5 modules (advanced prosody, session logging, edge case handling) are created and tested but NOT integrated into the response pipeline.
 
@@ -49,7 +51,7 @@ if glyphs:
         top_n=5,
         include_prosody=True  # Enable advanced prosody
     )
-    
+
     # Handle both return types (tuple or string)
     if isinstance(result, tuple):
         response_text, prosody_directives = result
@@ -78,10 +80,10 @@ if "sprint5_initialized" not in st.session_state:
 # Log each interaction in your chat loop
 def on_user_message(user_text, confidence=0.95):
     latency_ms = time.time() - start_time
-    
+
     # Your existing response generation...
     response = generate_response(user_text)
-    
+
     # Log the interaction
     log_interaction(
         user_text=user_text,
@@ -91,7 +93,7 @@ def on_user_message(user_text, confidence=0.95):
         confidence=confidence,
         prosody_plan=st.session_state.get("current_prosody")
     )
-    
+
     # Display session metrics in sidebar (optional)
     metrics = get_session_metrics()
     with st.sidebar:
@@ -121,13 +123,14 @@ if not is_valid:
     st.stop()  # Don't process this input
 ```
 
----
+##
 
 ## Complete Integration Example
 
 Here's how it fits into the existing `main_v2.py` → `ui.py` flow:
 
 ```python
+
 # In emotional_os/deploy/modules/ui.py
 
 import time
@@ -145,26 +148,26 @@ def render_main_app_safe():
     if "sprint5_initialized" not in st.session_state:
         init_sprint5_systems()
         st.session_state.sprint5_initialized = True
-    
+
     # Initialize enhanced composer
     if "composer" not in st.session_state:
         st.session_state.composer = create_enhanced_composer()
-    
+
     # Chat loop
     for message in st.session_state.messages:
         st.write(f"{message['role']}: {message['content']}")
-    
+
     # User input
     user_input = st.text_input("You: ")
     if user_input:
         start_time = time.time()
-        
+
         # 1. Validate input
         is_valid, error_msg = validate_user_input(user_input)
         if not is_valid:
             st.error(error_msg)
             return
-        
+
         # 2. Parse emotional signals
         local_analysis = parse_input(user_input, ...)
         glyphs = local_analysis.get("glyphs", [])
@@ -174,7 +177,7 @@ def render_main_app_safe():
             "attunement": 0.7,
             "certainty": 0.6
         }
-        
+
         # 3. Generate response with advanced prosody
         composer = st.session_state.composer
         result = composer.compose_multi_glyph_response(
@@ -183,15 +186,15 @@ def render_main_app_safe():
             conversation_context=st.session_state.messages,
             include_prosody=True
         )
-        
+
         if isinstance(result, tuple):
             response_text, prosody_directives = result
         else:
             response_text = result
             prosody_directives = None
-        
+
         latency_ms = (time.time() - start_time) * 1000
-        
+
         # 4. Log interaction
         log_interaction(
             user_text=user_input,
@@ -200,10 +203,10 @@ def render_main_app_safe():
             latency_ms=latency_ms,
             prosody_plan=prosody_directives
         )
-        
+
         # 5. Display response
         st.write(f"Assistant: {response_text}")
-        
+
         # 6. Show metrics
         metrics = get_session_metrics()
         col1, col2, col3 = st.columns(3)
@@ -213,13 +216,13 @@ def render_main_app_safe():
             st.metric("Quality", f"{metrics.get('quality_score', 0):.0%}")
         with col3:
             st.metric("Latency", f"{latency_ms:.0f}ms")
-        
+
         # 7. Store message
         st.session_state.messages.append({"role": "user", "content": user_input})
         st.session_state.messages.append({"role": "assistant", "content": response_text})
 ```
 
----
+##
 
 ## Testing the Integration
 
@@ -251,7 +254,7 @@ if prosody:
 "
 ```
 
----
+##
 
 ## Expected Behavior After Integration
 
@@ -278,14 +281,11 @@ System: [Emotionally matched response reflecting frustration/stress]
 
 The system now:
 
-1. ✅ Detects high emotion (stressful → intensity 0.8)
-2. ✅ Applies advanced prosody (SHALLOW breath, rising pitch, empathetic energy fade)
-3. ✅ Emphasizes relevant words
-4. ✅ Adds micro-pauses for reflection
-5. ✅ Logs interaction for learning
-6. ✅ Shows session metrics
+1. ✅ Detects high emotion (stressful → intensity 0.8) 2. ✅ Applies advanced prosody (SHALLOW breath,
+rising pitch, empathetic energy fade) 3. ✅ Emphasizes relevant words 4. ✅ Adds micro-pauses for
+reflection 5. ✅ Logs interaction for learning 6. ✅ Shows session metrics
 
----
+##
 
 ## Files to Modify
 
@@ -302,7 +302,7 @@ The system now:
    - `sprint5_integration.py` - Central integration bridge
    - `enhanced_response_composer.py` - Enhanced composer with prosody
 
----
+##
 
 ## Performance Impact
 
@@ -312,13 +312,14 @@ The system now:
 - **Advanced Prosody**: ~5-10ms (negligible vs TTS)
 - **Total**: <50ms overhead (unnoticeable to user)
 
----
+##
 
 ## Rollback Plan
 
 If issues arise, revert to standard composer:
 
 ```python
+
 # In ui.py
 composer = DynamicResponseComposer()  # Use original
 response_text = composer.compose_multi_glyph_response(...)
@@ -326,15 +327,14 @@ response_text = composer.compose_multi_glyph_response(...)
 
 No other code needs to change - enhanced_response_composer is a drop-in replacement.
 
----
+##
 
 ## Next Steps
 
-1. Modify `emotional_os/deploy/modules/ui.py` per instructions above
-2. Test in main_v2.py with high-emotion inputs
-3. Verify prosody directives are being generated
-4. Hook prosody directives to TTS system (if voice output available)
-5. Conduct user listening tests
-6. Monitor session logs for patterns
+1. Modify `emotional_os/deploy/modules/ui.py` per instructions above 2. Test in main_v2.py with
+high-emotion inputs 3. Verify prosody directives are being generated 4. Hook prosody directives to
+TTS system (if voice output available) 5. Conduct user listening tests 6. Monitor session logs for
+patterns
 
-Once integrated, the system will respond with emotional intelligence matching Sprint 5's advanced capabilities.
+Once integrated, the system will respond with emotional intelligence matching Sprint 5's advanced
+capabilities.

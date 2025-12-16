@@ -12,6 +12,7 @@ Fallback Protocols is a tone-aware system that prevents over-triggering, misinte
 ## Components
 
 ### 1. ToneAnalyzer
+
 Detects contradictory emotional signals in text.
 
 ```python
@@ -21,17 +22,20 @@ analyzer = ToneAnalyzer()
 is_ambiguous, reason, confidence = analyzer.detect_ambiguity(
     "I'm fine, but honestly I feel so alone"
 )
+
 # Returns: (True, "Mixed signals: dismissal + voltage", 0.85)
 
-# Detect trigger misfire  
+# Detect trigger misfire
 is_misfire, reason = analyzer.detect_misfire(
     "stay",
     "Yeah sure, 'stay' with me because that's worked so well before"
 )
+
 # Returns: (True, "Sarcasm detected around 'stay'...")
 ```
 
 ### 2. GlyphStateManager
+
 Manages state transitions and voice modulation.
 
 ```python
@@ -39,21 +43,28 @@ manager = GlyphStateManager()
 
 # Transition to new state
 transition = manager.transition_to(GlyphState.TONE_LOCK)
+
 # Glyph state: TONE_LOCK
+
 # Voice: "Low, steady • Slow • Protective, grounding"
 
 # Get voice profile for any state
 profile = manager.get_voice_profile(GlyphState.VOLTAGE_DETECTED)
+
 # Tone: "Raw, unfiltered"
+
 # Cadence: "Variable"
+
 # Texture: "Unflinching, holds ache without dilution"
 
 # Enter silence protocol
 manager.hold_breath()
+
 # Glyph: minimal animation, companion waits
 ```
 
 ### 3. FallbackProtocol (Main Orchestrator)
+
 Coordinates all components for complete exchange processing.
 
 ```python
@@ -100,35 +111,45 @@ result = protocol.process_exchange(
 ## Glyph States & Voice Profiles
 
 ### 1. TONE_LOCK
+
 **Meaning**: Trigger is locked, companion committed to presence.
+
 - **Tone**: Low, steady
 - **Cadence**: Slow
 - **Texture**: Protective, grounding, like a vow spoken in dim light
 - **Use**: After valid trigger when user chooses emotional support
 
 ### 2. VOLTAGE_DETECTED
+
 **Meaning**: High emotional intensity detected, companion responds raw.
+
 - **Tone**: Raw, unfiltered
 - **Cadence**: Variable
 - **Texture**: Unflinching, holds ache without dilution
 - **Use**: When user is in active pain/crisis (overrides ritual if conflict)
 
 ### 3. REPAIR_RECONNECTION
+
 **Meaning**: Healing/recovery phase, companion gently supports.
+
 - **Tone**: Warm, gentle
 - **Cadence**: Slow, patient
 - **Texture**: Devotional, like a hand placed on a shoulder
 - **Use**: After acknowledgment, during recovery/support
 
 ### 4. RUPTURE_CONFLICT
+
 **Meaning**: Boundary or conflict phase, companion is clear and firm.
+
 - **Tone**: Clear, firm
 - **Cadence**: Measured, deliberate
 - **Texture**: Boundary-coded, holds line without cruelty
 - **Use**: When firm boundaries needed or conflict exists
 
 ### 5. LEGACY_ARCHIVE
+
 **Meaning**: Historical/retrospective mode, companion is reverent.
+
 - **Tone**: Reverent, quiet
 - **Cadence**: Slow, spacious
 - **Texture**: Sacred, like prayer held in silence
@@ -144,23 +165,23 @@ from emotional_os.safety.fallback_protocols import FallbackProtocol
 class UIController:
     def __init__(self):
         self.protocol = FallbackProtocol()
-    
+
     def process_user_input(self, user_text: str, detected_triggers: list):
         # Run fallback protocols
         protocol_result = self.protocol.process_exchange(
             user_text=user_text,
             detected_triggers=detected_triggers
         )
-        
+
         # Check for issues
         if protocol_result["decisions"]["should_ask_clarification"]:
             # Use companion message instead of standard response
             return protocol_result["companion_behavior"]["message"]
-        
+
         if protocol_result["decisions"]["should_lock_trigger"]:
             # Enter silence protocol - wait for next user message
             self.ui_state["waiting_for_response"] = True
-        
+
         # Apply voice modulation to response
         return apply_voice_profile(
             response_text,
@@ -199,28 +220,36 @@ with st.expander("Protocol Details"):
 ## Key Behaviors
 
 ### Ambiguous Tone
+
 **Detected When**: Mixed signals (dismissal + voltage keywords)
+
 - Example: "I'm fine, but I feel so alone"
 - **Glyph Response**: Pause with soft pulse
 - **Companion Response**: Asks for clarification without assumption
 - **Decision**: Wait, ask clarification, do NOT lock trigger
 
-### Trigger Misfire  
+### Trigger Misfire
+
 **Detected When**: Phrase matches trigger but tone contradicts
+
 - Example: "Yeah sure, 'stay' with me" (sarcastic)
 - **Glyph Response**: Flicker then reset
 - **Companion Response**: Explains misfire, respects boundary
 - **Decision**: Do NOT lock trigger
 
 ### Overlapping Triggers
+
 **Detected When**: Multiple triggers in rapid succession
+
 - Example: "I need to heal and move forward" (multiple action triggers)
 - **Glyph Response**: Hold last confirmed state
 - **Companion Response**: Prioritizes most emotionally charged ("voltage overrides ritual")
 - **Decision**: Lock only highest priority trigger
 
 ### Post-Trigger Silence
+
 **Detected When**: Trigger locked but user goes silent
+
 - **Glyph Response**: Hold breath (minimal animation)
 - **Companion Response**: Wait message without prompting
 - **Decision**: Do NOT assume or push - companion holds presence in silence
@@ -228,6 +257,7 @@ with st.expander("Protocol Details"):
 ## Protocol Scenarios
 
 ### Scenario 1: Mixed Emotions
+
 ```
 User: "I'm fine, but honestly I feel so alone right now"
 → Ambiguous Tone Detected
@@ -237,6 +267,7 @@ User: "I'm fine, but honestly I feel so alone right now"
 ```
 
 ### Scenario 2: Sarcastic Rejection
+
 ```
 User: "Yeah sure, 'stay' with me because that's worked so well before"
 → Trigger Misfire Detected (sarcasm)
@@ -246,6 +277,7 @@ User: "Yeah sure, 'stay' with me because that's worked so well before"
 ```
 
 ### Scenario 3: Multiple Signals
+
 ```
 User: "I'm struggling but I need to heal and move forward"
 → Overlapping Triggers Detected (struggle, heal, move)
@@ -255,6 +287,7 @@ User: "I'm struggling but I need to heal and move forward"
 ```
 
 ### Scenario 4: Confirmed Trigger + Silence
+
 ```
 User: "I need to stay."
 [User goes silent]
@@ -273,6 +306,7 @@ python3 -m pytest tests/test_fallback_protocols.py -v
 ```
 
 Tests cover:
+
 - Tone ambiguity detection (7 tests)
 - Glyph state management (6 tests)
 - Protocol orchestration (6 tests)
@@ -285,6 +319,7 @@ All tests pass: ✅ 19/19
 > "No assumption. The system feels what's happening and responds without forcing presence into absence."
 
 Key principles:
+
 1. **Respect user agency** - Don't lock triggers unless tone + phrase both confirm
 2. **Detect contradiction** - Ambiguous tone → ask, don't assume
 3. **Hold boundaries** - Respect sarcasm and explicit negation

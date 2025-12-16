@@ -4,20 +4,23 @@
 
 All infrastructure for the glyph factorial expansion system is now complete and tested.
 
----
+##
 
 ## 🎯 Objectives Accomplished
 
 ### 1. ✅ CSV Discovery & Authority Established
-- **Found:** `glyph_lexicon_rows.csv` contains **292 comprehensive glyphs** 
+
+- **Found:** `glyph_lexicon_rows.csv` contains **292 comprehensive glyphs**
 - **Previous system:** Using `glyph_lexicon_rows.json` with only **64 glyphs**
 - **Action taken:** Modified engine to use CSV as authoritative source
 - **Impact:** 4.5x more emotional vocabulary for combinations
 
 ### 2. ✅ Engine Architecture Upgraded
+
 **File:** `emotional_os/glyphs/glyph_factorial_engine.py` (751 lines)
 
 **New Capabilities:**
+
 - `load_primary_glyphs()` - Loads 292 glyphs from CSV with JSON fallback
 - `_load_glyphs_from_csv()` - Proper CSV parsing with csv.DictReader
 - `generate_all_combinations()` - Creates N² combinations (292² = 85,264)
@@ -27,6 +30,7 @@ All infrastructure for the glyph factorial expansion system is now complete and 
 - `_text_similarity()` - Jaccard-based semantic duplicate detection
 
 ### 3. ✅ Comprehensive Pruning System
+
 Handles 85,264+ combinations through intelligent filtering:
 
 **Stage 1:** Remove self-combinations (same glyph × same glyph)
@@ -35,11 +39,13 @@ Handles 85,264+ combinations through intelligent filtering:
 **Stage 4:** Filter by combined score threshold
 
 **Results from testing:**
+
 - 50×50 sample: 1,275 → 790 combinations (38% removal rate)
 - 100×100 sample: 5,050 → 1,386 combinations (27.4% removal rate)
 - 150×150 sample: ~11,000 → ~1,800 combinations (estimated)
 
 ### 4. ✅ Fixed Data Format Handling
+
 - Fixed `combine_voltage_pairs()` to handle both:
   - Simple pairs: `α-β`
   - Compound pairs: `α-β × γ-δ`
@@ -47,18 +53,21 @@ Handles 85,264+ combinations through intelligent filtering:
 - Fixed `_calculate_coverage()` with error handling for missing gates
 
 ### 5. ✅ Tested Full Pipeline
+
 Successfully executed end-to-end:
+
 1. Load 292 glyphs from CSV
 2. Generate combinations
 3. Score combinations
 4. Prune redundancy
 5. Ready to sync to JSON
 
----
+##
 
 ## 📊 Expansion Projections
 
-### From Sample Runs:
+### From Sample Runs
+
 | Metric | Value |
 |--------|-------|
 | Primary glyphs (CSV) | 292 |
@@ -69,7 +78,8 @@ Successfully executed end-to-end:
 | **Projected new JSON glyphs** | **6,064-8,064** |
 | **Expansion ratio** | **94-126x from original** |
 
-### Test Results Summary:
+### Test Results Summary
+
 ```
 Sample Size         Generated    After Pruning    Removal Rate
 50×50              1,275        790              38.0%
@@ -77,17 +87,19 @@ Sample Size         Generated    After Pruning    Removal Rate
 150×150            ~11,000      ~1,800           estimated
 ```
 
----
+##
 
 ## 🔧 Technical Implementation Details
 
 ### CSV Source Format
+
 ```
 id, voltage_pair, glyph_name, description, gate, activation_signals
 1, α-β, Recursive Ache, Longing that loops inward..., Gate 4, γ, θ
 ```
 
 ### New Glyph Structure (factorial combinations)
+
 ```json
 {
   "id": 293,
@@ -105,6 +117,7 @@ id, voltage_pair, glyph_name, description, gate, activation_signals
 ```
 
 ### Scoring Formula
+
 ```
 combined_score = (novelty × 0.40) + (coherence × 0.35) + (coverage × 0.25)
 
@@ -114,16 +127,18 @@ coverage:   Gap filling potential (0-1 based on gate frequency)
 ```
 
 ### Pruning Logic
+
 1. **Self-combinations:** Remove `glyph × glyph` (exact same parent)
 2. **Exact duplicates:** Same voltage pair = remove
 3. **Semantic duplicates:** Text similarity >80% = remove
 4. **Score filtering:** Keep top X% by combined_score
 
----
+##
 
 ## 📁 Modified Files
 
-### Primary Changes:
+### Primary Changes
+
 - **`emotional_os/glyphs/glyph_factorial_engine.py`** (747 lines, +229 from original)
   - Added CSV loading infrastructure
   - Added comprehensive pruning system
@@ -131,11 +146,12 @@ coverage:   Gap filling potential (0-1 based on gate frequency)
   - Fixed voltage pair handling
   - Fixed scoring calculations
 
-### Data Files (Unchanged):
+### Data Files (Unchanged)
+
 - **`emotional_os/glyphs/glyph_lexicon_rows.csv`** (292 glyphs) - authoritative source
 - **`emotional_os/glyphs/glyph_lexicon_rows.json`** (64 glyphs) - working copy
 
----
+##
 
 ## 🚀 Next Steps to Complete Expansion
 
@@ -171,11 +187,12 @@ engine.sync_to_json(
 **Expected runtime:** 10-15 minutes total
 **Expected result:** JSON updated with 6,000-8,000 new factorial glyphs
 
----
+##
 
 ## ✅ Quality Assurance
 
 All components tested and working:
+
 - ✅ CSV loading: 292 glyphs successfully loaded
 - ✅ Combination generation: 85,264 combinations calculable
 - ✅ Scoring: All three metrics calculated correctly
@@ -183,7 +200,7 @@ All components tested and working:
 - ✅ Sync ready: sync_to_json() method implemented
 - ✅ Type annotations: All fixed and valid
 
----
+##
 
 ## 🎓 Key Insights
 
@@ -193,15 +210,17 @@ All components tested and working:
 4. **Scoring is balanced:** Weighted formula prevents novelty-only bias
 5. **Semantic detection works:** 80%+ text similarity detection removes near-duplicates
 
----
+##
 
 ## 📈 System Impact
 
 **Before:**
+
 - Emotional vocabulary: 64 glyphs
 - Coverage: Limited to base gates 2-7
 
 **After Expansion:**
+
 - Emotional vocabulary: ~6,064-8,064 glyphs
 - Coverage: Full gate range + all combinations
 - Expansion: 94-126x increase
@@ -209,7 +228,7 @@ All components tested and working:
 
 This represents a **massive expansion** of the emotional vocabulary available to the Saoriverse system, enabling much more nuanced and precise emotional expression.
 
----
+##
 
 ## 🔗 Related Files
 
@@ -218,7 +237,7 @@ This represents a **massive expansion** of the emotional vocabulary available to
 - JSON target: `/workspaces/saoriverse-console/emotional_os/glyphs/glyph_lexicon_rows.json`
 - Status: `/workspaces/saoriverse-console/GLYPH_EXPANSION_STATUS.md`
 
----
+##
 
-**Status:** ✅ Ready for full-scale execution  
+**Status:** ✅ Ready for full-scale execution
 **Last updated:** November 5, 2025

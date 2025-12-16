@@ -75,18 +75,18 @@ If you prefer a more modern stack:
    # Install dependencies
    sudo apt update
    sudo apt install python3-pip nginx certbot python3-certbot-nginx
-   
+
    # Clone your repo
    git clone https://github.com/yourusername/firstperson-web
    cd firstperson-web
-   
+
    # Install Python packages
    pip3 install -r web_requirements.txt
-   
+
    # Create .env file with your credentials
    cp env_template.txt .env
    # Edit .env with your actual values
-   
+
    # Run with systemd service
    sudo nano /etc/systemd/system/firstperson.service
    ```
@@ -97,7 +97,7 @@ If you prefer a more modern stack:
    server {
        listen 80;
        server_name firstperson.chat;
-       
+
        location / {
            proxy_pass http://127.0.0.1:8000;
            proxy_set_header Host $host;
@@ -117,11 +117,13 @@ If you prefer a more modern stack:
 Test your web app locally before deploying:
 
 ```bash
+
 # Install dependencies
 pip install -r web_requirements.txt
 
 # Create .env file
 cp env_template.txt .env
+
 # Edit .env with your Supabase credentials
 
 # Run development server

@@ -1,24 +1,32 @@
 # 🚀 QUICK START - LIVE SYSTEM
 
 ## System Status
+
+```text
 ```
-🟢 OPERATIONAL - Backend running on http://127.0.0.1:8000
-✅ All endpoints tested and responding
-✅ Theme detection working (grief, joy, stress, isolation, etc.)
-✅ Empathetic response generation active
-✅ 3-tier pipeline processing all responses
+
+🟢 OPERATIONAL - Backend running on <http://127.0.0.1:8000> ✅ All endpoints tested and responding ✅
+Theme detection working (grief, joy, stress, isolation, etc.) ✅ Empathetic response generation
+active ✅ 3-tier pipeline processing all responses
+
 ```
+
+
 
 ## Test It Now
 
 ### 1. Health Check (2-second timeout)
+
 ```powershell
+
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/health" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
-  Select-Object -ExpandProperty Content
+
+```text
 ```
 
 ### 2. Send a Message (5-second timeout)
+
 ```powershell
 $body = @{
     message = "I feel confused about my life"
@@ -33,43 +41,37 @@ $body = @{
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
   -Method Post -ContentType "application/json" `
   -Body $body -UseBasicParsing -TimeoutSec 5 | `
-  Select-Object -ExpandProperty Content
+```text
+```text
 ```
 
 ### 3. Get User Conversations (2-second timeout)
+
 ```powershell
+
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/conversations/robinson1234" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
-  Select-Object -ExpandProperty Content
+
+```text
 ```
 
 ## How It Works
 
 ```
-User Message
-    ↓
-Theme Detection (grief, joy, stress, isolation, fatigue, work, health)
-    ↓
-Base Response Generation (empathetic templates)
-    ↓
-3-Tier Enhancement Pipeline:
+User Message ↓ Theme Detection (grief, joy, stress, isolation, fatigue, work, health) ↓ Base
+Response Generation (empathetic templates) ↓ 3-Tier Enhancement Pipeline:
   ├─ Tier 1: Foundation (safety, signals, learning)
   ├─ Tier 2: Aliveness (emotional attunement, energy)
   └─ Tier 3: Poetic Consciousness (aesthetics, narrative)
-    ↓
-Glyph-Informed Composition
-    ↓
-Return Response to Client
-    ↓
-Save to Database (async, non-blocking)
+↓ Glyph-Informed Composition ↓ Return Response to Client ↓ Save to Database (async, non-blocking)
 ```
 
 ## Response Examples
 
-**User:** "I feel lost"  
+**User:** "I feel lost"
 **System:** *Detects grief theme* → "There's something deep in what you just shared. Grief, loss, something being taken from you. I'm here with that. Not to make it better, but to acknowledge it matters. What part of this is hardest to say out loud?"
 
-**User:** "I'm so happy today!"  
+**User:** "I'm so happy today!"
 **System:** *Detects joy theme* → "There's light in what you're sharing. Something that matters, something worth celebrating. I feel that. Tell me more—what's making this real for you?"
 
 ## Detected Themes
@@ -96,15 +98,15 @@ Save to Database (async, non-blocking)
 
 ## Key Features
 
-✅ **Empathetic Response Generation**  
-✅ **Multi-Turn Conversation Support**  
-✅ **Theme-Based Emotional Attunement**  
-✅ **Glyph-Informed Composition**  
-✅ **3-Tier Enhancement Pipeline**  
-✅ **User Isolation & Conversation Tracking**  
-✅ **Timeout Protection** (all endpoints <5s)  
-✅ **Graceful Error Handling**  
-✅ **Non-Blocking Architecture**  
+✅ **Empathetic Response Generation**
+✅ **Multi-Turn Conversation Support**
+✅ **Theme-Based Emotional Attunement**
+✅ **Glyph-Informed Composition**
+✅ **3-Tier Enhancement Pipeline**
+✅ **User Isolation & Conversation Tracking**
+✅ **Timeout Protection** (all endpoints <5s)
+✅ **Graceful Error Handling**
+✅ **Non-Blocking Architecture**
 
 ## Performance
 
@@ -119,15 +121,15 @@ All endpoints respond well within 5-second timeout windows.
 
 ## Fixes Applied
 
-✅ **TTS Timeout Issue** - Endpoint now returns immediately (disabled TTS, recommend cloud service)  
-✅ **Missing Theme Keys** - Added grief/joy detection to theme dictionary  
-✅ **Error Handling** - Improved error messages and timeouts  
+✅ **TTS Timeout Issue** - Endpoint now returns immediately (disabled TTS, recommend cloud service)
+✅ **Missing Theme Keys** - Added grief/joy detection to theme dictionary
+✅ **Error Handling** - Improved error messages and timeouts
 
 ## Documentation
 
-📄 **COMPREHENSIVE_TEST_REPORT.md** - Full test results and validation  
-📄 **SYSTEM_LIVE_REPORT.md** - Live test results with timestamps  
-📄 **STATUS_COMPLETE.md** - Complete implementation summary  
+📄 **COMPREHENSIVE_TEST_REPORT.md** - Full test results and validation
+📄 **SYSTEM_LIVE_REPORT.md** - Live test results with timestamps
+📄 **STATUS_COMPLETE.md** - Complete implementation summary
 
 ## Next Steps
 
@@ -139,11 +141,11 @@ All endpoints respond well within 5-second timeout windows.
 
 ## Status
 
-🟢 **FULLY OPERATIONAL**  
-🟢 **TESTED & VALIDATED**  
-🟢 **TIMEOUT PROTECTION ACTIVE**  
-🟢 **READY FOR DEPLOYMENT**  
+🟢 **FULLY OPERATIONAL**
+🟢 **TESTED & VALIDATED**
+🟢 **TIMEOUT PROTECTION ACTIVE**
+🟢 **READY FOR DEPLOYMENT**
 
-**Last Updated:** December 11, 2025  
-**Backend Status:** Running  
+**Last Updated:** December 11, 2025
+**Backend Status:** Running
 **All Tests:** Passed ✓

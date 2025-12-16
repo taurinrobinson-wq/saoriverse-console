@@ -2,7 +2,8 @@
 
 ## What Changed
 
-Your system now automatically creates new glyphs during live user-AI conversations. Here's what was added:
+Your system now automatically creates new glyphs during live user-AI conversations. Here's what was
+added:
 
 ### Files Created
 
@@ -31,49 +32,46 @@ Your system now automatically creates new glyphs during live user-AI conversatio
 
 ## How It Works: The Pipeline
 
+```text
 ```
-USER DIALOGUE
-    ↓
-[hybrid mode in ui.py line 573]
-    ↓
+
+USER DIALOGUE ↓ [hybrid mode in ui.py line 573] ↓
 HybridProcessorWithEvolution.process_user_message()
     ├─ Signal Extraction (adaptive - discovers new dimensions)
     ├─ Hybrid Learning (user + shared lexicon)
     ├─ Pattern Detection (co-occurrence analysis)
     └─ Glyph Generation (when patterns significant)
-    ↓
-NEW GLYPHS GENERATED
+↓ NEW GLYPHS GENERATED
     ├─ Stored in: st.session_state['new_glyphs_this_session']
     ├─ Displayed in: Streamlit UI (success message + sidebar)
     └─ Saved to: learning/conversation_glyphs.json
-    ↓
-AVAILABLE FOR NEXT TURN
+↓ AVAILABLE FOR NEXT TURN
     └─ User can see and export them
+
 ```
+
+
 
 ## Integration Points
 
 ### 1. **UI Processing Loop** (`emotional_os/deploy/modules/ui.py`, line 573)
 
 ```python
+
 if processing_mode == "hybrid":
     # NEW: Initialize processor once per session
-    if 'hybrid_processor' not in st.session_state:
-        processor = create_integrated_processor(learner, extractor, user_id)
-        st.session_state['hybrid_processor'] = processor
-    
+if 'hybrid_processor' not in st.session_state: processor = create_integrated_processor(learner,
+extractor, user_id) st.session_state['hybrid_processor'] = processor
+
     # NEW: Process through evolution pipeline
-    evolution_result = processor.process_user_message(
-        user_message=user_input,
-        ai_response=response,
-        user_id=user_id,
-    )
-    
+evolution_result = processor.process_user_message( user_message=user_input, ai_response=response,
+user_id=user_id, )
+
     # NEW: Check for and display new glyphs
-    new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
-    if new_glyphs:
-        st.session_state['new_glyphs_this_session'].extend(new_glyphs)
-        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
+new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated'] if
+new_glyphs: st.session_state['new_glyphs_this_session'].extend(new_glyphs)
+
+```text
 ```
 
 ### 2. **Sidebar Display** (`main_v2.py`, lines 131-181)
@@ -84,7 +82,8 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
     if new_glyphs:
         st.success(f"🎉 {len(new_glyphs)} new glyph(s) discovered!")
         for glyph in new_glyphs:
-            # Display symbol, name, emotions, keywords
+```text
+```text
 ```
 
 ### 3. **Conversation ID Tracking**
@@ -92,15 +91,16 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 The system tracks conversations with unique IDs:
 
 ```python
-conversation_id=st.session_state.get('conversation_id', 'default')
+
+```text
 ```
 
 Add this to `main_v2.py` initialization if not present:
 
 ```python
-if 'conversation_id' not in st.session_state:
-    from uuid import uuid4
-    st.session_state['conversation_id'] = str(uuid4())[:8]
+if 'conversation_id' not in st.session_state: from uuid import uuid4
+```text
+```text
 ```
 
 ## What Gets Stored
@@ -108,9 +108,11 @@ if 'conversation_id' not in st.session_state:
 ### Session-Level (temporary, during conversation)
 
 ```python
+
 st.session_state['hybrid_processor']        # The processor instance
 st.session_state['new_glyphs_this_session'] # Glyphs generated this session
-st.session_state['conversation_id']         # Unique conversation ID
+
+```text
 ```
 
 ### Persistent Files (survives session restarts)
@@ -120,7 +122,8 @@ learning/
 ├── conversation_glyphs.json           # All discovered glyphs registry
 ├── user_overrides/
 │   └── user_{id}_lexicon.json        # User's personal vocabulary
-└── hybrid_learning_log.jsonl          # Append-only learning log
+```text
+```text
 ```
 
 ## Pattern Detection Threshold
@@ -129,37 +132,44 @@ New glyphs are only created when an emotional pattern combination reaches:
 
 - **Minimum combined frequency: 300** (configurable in `dynamic_glyph_evolution.py`)
 
-This ensures only meaningful patterns create glyphs. In dialogue, this builds up over multiple exchanges:
+This ensures only meaningful patterns create glyphs. In dialogue, this builds up over multiple
+exchanges:
 
 ```
+
 Turn 1: love (1) + vulnerability (1) = 2
 Turn 2: love (1) + vulnerability (1) = 2
 ...
-After 150+ turns: combined frequency reaches 300 → glyph created
+
+```text
 ```
 
 For faster glyph creation in testing, you can reduce this threshold:
 
 ```python
-evolution = DynamicGlyphEvolution(
-    hybrid_learner=learner,
-    min_frequency_for_glyph=50,  # Lower threshold for testing
-)
+evolution = DynamicGlyphEvolution( hybrid_learner=learner, min_frequency_for_glyph=50,  # Lower
+threshold for testing
+```text
+```text
 ```
 
 ## Example Flow: Real Conversation
 
 ### Turn 1
-```
-User: "I want to let someone in, but the fear is overwhelming"
-AI:   "That exposed feeling is the threshold of intimacy itself..."
 
-Signals detected: love, vulnerability, fear, intimacy
-Patterns found: (love + vulnerability), (love + intimacy), (vulnerability + fear)
-Glyphs generated: 0 (patterns not yet at threshold)
+```
+
+User: "I want to let someone in, but the fear is overwhelming" AI:   "That exposed feeling is the
+threshold of intimacy itself..."
+
+Signals detected: love, vulnerability, fear, intimacy Patterns found: (love + vulnerability), (love
++ intimacy), (vulnerability + fear)
+
+```text
 ```
 
 ### Turn 2
+
 ```
 User: "When I'm with them, the fear turns into something beautiful"
 AI:   "That transformation from fear into becoming is love..."
@@ -167,11 +177,14 @@ AI:   "That transformation from fear into becoming is love..."
 Signals detected: love, transformation, joy, becoming
 Patterns found: (love + transformation), (love + joy)
 Lexicon update: vulnerability frequency +1, transformation frequency +1
-Glyphs generated: 0 (still building)
+```text
+```text
 ```
 
 ### Turn 10 (after similar themed exchanges)
+
 ```
+
 User: "There's something sacred about being known..."
 AI:   "Being held in genuine love is the deepest intimacy..."
 
@@ -182,7 +195,8 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
   ├─ Symbol: ♥❤
   ├─ Emotions: love + intimacy
   ├─ Response cue: "Recognize the deep closeness being shared"
-  └─ Stored in: learning/conversation_glyphs.json
+
+```text
 ```
 
 ## Configuration
@@ -190,28 +204,22 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
 ### In `ui.py` (emotion-symbol mapping)
 
 ```python
-emotion_symbols = {
-    "love": "♥",
-    "intimacy": "❤",
-    "sensuality": "🌹",
-    "transformation": "🦋",
-    "admiration": "⭐",
-    "joy": "☀",
-    "vulnerability": "🌱",
-    "nature": "🌿",
+emotion_symbols = { "love": "♥", "intimacy": "❤", "sensuality": "🌹", "transformation": "🦋",
+"admiration": "⭐", "joy": "☀", "vulnerability": "🌱", "nature": "🌿",
     # Add more...
-}
+```text
+```text
 ```
 
 ### In `dynamic_glyph_evolution.py` (glyph naming)
 
 ```python
-name_map = {
-    ("love", "intimacy"): "Intimate Connection",
-    ("love", "vulnerability"): "Open-Hearted Love",
-    ("joy", "celebration"): "Pure Celebration",
+
+name_map = { ("love", "intimacy"): "Intimate Connection", ("love", "vulnerability"): "Open-Hearted
+Love", ("joy", "celebration"): "Pure Celebration",
     # Customize for your use case
-}
+
+```text
 ```
 
 ## Performance Considerations
@@ -234,10 +242,13 @@ name_map = {
 To reduce processing:
 
 ```python
+
 # In ui.py, around line 573
+
 # Only process evolution every N turns instead of every turn
 if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
-    evolution_result = processor.process_user_message(...)
+```text
+```text
 ```
 
 ## Testing the Integration
@@ -247,6 +258,7 @@ if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
 Run this in Python to verify integration:
 
 ```python
+
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 from emotional_os.learning.adaptive_signal_extractor import AdaptiveSignalExtractor
 from hybrid_processor_with_evolution import create_integrated_processor
@@ -268,7 +280,7 @@ result = processor.process_user_message(
     ai_response="That vulnerability is your greatest strength",
 )
 
-print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
+```text
 ```
 
 ### In Streamlit
@@ -286,11 +298,13 @@ print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['ne
 **Problem**: Many conversations but no new glyphs.
 
 **Check**:
+
 1. Are you in "hybrid" mode? (Only hybrid mode processes evolution)
 2. Is the pattern frequency high enough? (Default: 300)
 3. Are similar emotions appearing together?
 
 **Solutions**:
+
 - Lower threshold: `min_frequency_for_glyph=50` in dynamic_glyph_evolution.py
 - Have longer conversations with consistent emotional themes
 - Check logs: `tail -f learning/hybrid_learning_log.jsonl`
@@ -300,14 +314,18 @@ print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['ne
 **Problem**: System generates glyphs but they don't show in UI.
 
 **Check**:
+
 1. Is `st.session_state['new_glyphs_this_session']` being populated?
 2. Is the sidebar section expanded?
 
 **Fix**:
+
 ```python
+
 # In main_v2.py, add debug
 if 'new_glyphs_this_session' in st.session_state:
-    st.sidebar.write(f"Debug: {len(st.session_state['new_glyphs_this_session'])} glyphs in session")
+```text
+```text
 ```
 
 ### Learning Not Happening
@@ -315,35 +333,44 @@ if 'new_glyphs_this_session' in st.session_state:
 **Problem**: No lexicon updates, no pattern detection.
 
 **Check**:
+
 1. Verify `hybrid_learner` initializes: check logs
 2. Verify signals are extracted: check `debug_signals` in UI
 3. Verify learning functions are called
 
 **Fix**:
+
 ```python
+
+
 # In ui.py, enable debug mode to see signals
-st.session_state['show_debug'] = True
+
+```text
 ```
 
 ## Next Steps
 
 ### Phase 1: Validation (Already Done)
+
 - ✅ Poetry processing created base glyphs
 - ✅ Adaptive dimensions working
 - ✅ Hybrid processor integrated
 
 ### Phase 2: Live Testing (Current)
+
 - 🔄 Real conversations generating glyphs
 - 🔄 User feedback on glyph quality
 - 🔄 Pattern threshold tuning
 
 ### Phase 3: Enhancement (Upcoming)
+
 - Database persistence of glyphs
 - Per-user glyph recommendations
 - Glyph usage analytics
 - Visual glyph exploration interface
 
 ### Phase 4: Scale (Future)
+
 - Community glyph discovery
 - Cross-user pattern learning
 - Glyph marketplace/sharing

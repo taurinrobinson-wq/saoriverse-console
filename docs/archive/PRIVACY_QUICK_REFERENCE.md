@@ -1,9 +1,11 @@
 # Privacy Layer Quick Reference
 
 ## One-Sentence Summary
+
 **All raw conversation text is encoded immediately, never stored in Supabase.**
 
 ## The Problem You Had
+
 ```
 Raw messages in database ❌
 → GDPR risk
@@ -13,6 +15,7 @@ Raw messages in database ❌
 ```
 
 ## The Solution
+
 ```
 Raw messages → Encoded immediately → Stored encoded only ✓
 → GDPR compliant
@@ -60,7 +63,9 @@ Raw messages → Encoded immediately → Stored encoded only ✓
 ## Implementation: 3 Simple Steps
 
 ### Step 1: Find Your Storage Code
+
 ```python
+
 # Find this pattern in signal_parser.py or API layer:
 db.table("conversations").insert({
     "user_message": user_input,      # ← Raw text ❌
@@ -70,6 +75,7 @@ db.table("conversations").insert({
 ```
 
 ### Step 2: Replace With Encoding
+
 ```python
 from emotional_os.privacy.signal_parser_integration import encode_and_store_conversation
 
@@ -85,6 +91,7 @@ success, record_id = encode_and_store_conversation(
 ```
 
 ### Step 3: Create New Table
+
 ```sql
 CREATE TABLE conversation_logs_anonymized (
     user_id_hashed VARCHAR(64),
@@ -119,20 +126,27 @@ CREATE TABLE conversation_logs_anonymized (
 | test_data_encoding.py | Test suite | 400 lines |
 
 ## Test It
+
 ```bash
+
 # Verify no raw text leakage
 python verify_privacy_encoding.py
 
 # Should output:
+
 # ✓ No raw text found in encoded record
+
 # ✓ User ID properly hashed
+
 # ✓ All required fields present
+
 # ✓ PASS: All critical privacy checks passed
 ```
 
 ## Key Concepts
 
 ### User ID Hashing
+
 ```
 Original: alice@example.com
 Hash: 7a9f3c1e2d5b8a4f... (SHA-256, one-way)
@@ -142,6 +156,7 @@ Different salt for different deployments ✓
 ```
 
 ### K-Anonymity
+
 ```
 Goal: k ≥ 5 (at least 5 users indistinguishable)
 
@@ -155,6 +170,7 @@ Result: Individual cannot be uniquely identified ✓
 ```
 
 ### Data Minimization
+
 ```
 Needed: ✓ Emotional signals (to respond appropriately)
 Needed: ✓ Gates triggered (for learning)
@@ -227,6 +243,6 @@ If raw text appears in database:
 8. Deploy to production
 9. Monitor with monthly compliance reports
 
----
+##
 
 **Bottom Line:** FirstPerson now protects user privacy from day one. Raw text never reaches the database. ✓

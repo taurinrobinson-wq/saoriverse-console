@@ -39,10 +39,12 @@ python scripts/utilities/integrate_glyph_lexicons.py \
 ## Input & Output
 
 ### Input
+
 - **30+ Poetry Collections** from Project Gutenberg
 - ~580,000 words from authors like Emily Dickinson, Walt Whitman, Keats, Shelley, etc.
 
 ### Output
+
 - **2,300+ new lexicon entries** (emotional vocabulary from poetry)
 - **9+ new emotional dimensions** discovered beyond the base 8
 - **50-80 new glyphs** generated from emotional patterns
@@ -51,7 +53,9 @@ python scripts/utilities/integrate_glyph_lexicons.py \
 ## Key Discoveries
 
 ### New Emotional Dimensions Found
+
 Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sensuality, intimacy, nature), poetry reveals:
+
 - Nostalgia / Longing
 - Wonder / Awe
 - Melancholy / Grief
@@ -62,6 +66,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 - Emergence / Awakening
 
 ### Most Frequent Patterns (Glyph Candidates)
+
 1. Love + Nature = "Nature's Love"
 2. Love + Transformation = "Love's Becoming"
 3. Joy + Nature = "Natural Joy"
@@ -71,6 +76,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 ## File Locations
 
 ### Poetry Downloads
+
 ```
 /Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/
 ├── dickinson_complete.txt
@@ -80,6 +86,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 ```
 
 ### Generated Outputs
+
 ```
 /workspaces/saoriverse-console/
 ├── generated_glyphs_from_poetry.json          (15-25 glyphs)
@@ -92,28 +99,35 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 ## Common Commands
 
 ### Process Everything from Scratch
+
 ```bash
+
 # Takes ~2-5 hours total
 ./scripts/utilities/run_full_gutenberg_pipeline.sh
 ```
 
 ### Just Download Poetry
+
 ```bash
 python scripts/utilities/gutenberg_fetcher.py
 ```
 
 ### Process Existing Poetry Files
+
 ```bash
 python scripts/utilities/bulk_text_processor.py --dir /path/to/poetry/ --chunk-size 500
 ```
 
 ### Generate Glyphs Only (if processing already done)
+
 ```bash
 python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overrides/gutenberg_bulk_lexicon.json
 ```
 
 ### Check Processing Status
+
 ```bash
+
 # View learning log
 tail -f learning/hybrid_learning_log.jsonl
 
@@ -143,21 +157,25 @@ After full pipeline execution:
 ## Troubleshooting
 
 ### Phase 1: Download Fails
+
 - Check network connection
 - Gutenberg may rate-limit; script automatically retries
 - Can skip failed books and resume later
 
 ### Phase 2: Processing Takes Too Long
+
 - Reduce `--chunk-size` from 500 to 250 for faster processing
 - Process files individually instead of all at once
 - Check system memory usage with `top`
 
 ### Phase 3-4: No Glyphs Generated
+
 - Ensure `learning/user_overrides/gutenberg_bulk_lexicon.json` exists
 - Check that processing completed successfully
 - Lower frequency threshold if needed
 
 ### Phase 5: Integration Fails
+
 - Check file paths are correct
 - Ensure JSON files are valid with `jq .`
 - Try integrating files individually first
@@ -165,11 +183,13 @@ After full pipeline execution:
 ## Next Steps
 
 ### View Generated Glyphs
+
 ```bash
 cat generated_glyphs_from_poetry.json | jq '.[] | {name, symbol, core_emotions, frequency}'
 ```
 
 ### Add to Saoriverse
+
 ```python
 from emotional_os.glyphs.glyph_lexicon import GlyphLexicon
 
@@ -189,7 +209,9 @@ lexicon.save()
 ```
 
 ### Create Custom Poetry Collections
+
 Edit `scripts/utilities/gutenberg_fetcher.py` and add poets to `POETRY_BOOKS`:
+
 ```python
 POETRY_BOOKS = {
     ...existing...
@@ -200,13 +222,14 @@ POETRY_BOOKS = {
 ## Documentation
 
 For detailed information, see:
+
 - [Full Project Gutenberg Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md)
 - [Emotional Dimensions Reference](./README.md)
 - [Learning System](./learning/README.md)
 
----
+##
 
-**Total Time**: ~2-5 hours  
-**Output**: 50-80 new poetry-derived glyphs  
-**New Dimensions**: 9+  
+**Total Time**: ~2-5 hours
+**Output**: 50-80 new poetry-derived glyphs
+**New Dimensions**: 9+
 **Status**: Production-Ready ✓

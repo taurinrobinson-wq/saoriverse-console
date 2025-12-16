@@ -15,14 +15,18 @@
 ## Step 1: Install Backend Dependencies
 
 ```bash
-pip install fastapi uvicorn pydantic
+```sql
+```sql
 ```
 
 Update `requirements.txt`:
+
 ```
+
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
-pydantic==2.5.0
+
+```sql
 ```
 
 ## Step 2: Update Procfile for Dual Services
@@ -30,22 +34,26 @@ pydantic==2.5.0
 Update your `Procfile` to run both backend and frontend:
 
 ```procfile
+
 # Backend API
 api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
 # Frontend (after Next.js is set up)
-web: cd velinor-web && npm run start
+```text
+```text
 ```
 
 ## Step 3: Set Up Next.js Frontend
 
 ```bash
-npx create-next-app@latest velinor-web --typescript --tailwind --eslint
-cd velinor-web
-npm install axios zustand
+
+npx create-next-app@latest velinor-web --typescript --tailwind --eslint cd velinor-web
+
+```text
 ```
 
 Copy the frontend files:
+
 - `lib/api.ts` → `velinor-web/lib/api.ts`
 - `components/GameScene.tsx` → `velinor-web/components/GameScene.tsx`
 - Update `app/page.tsx` with splash screen and game scene logic
@@ -55,12 +63,15 @@ Copy the frontend files:
 In Railway dashboard, set:
 
 ```
-NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app/api
+```text
+```text
 ```
 
 ## Step 5: Deploy to Railway
 
 ```bash
+
+
 # Add Procfile changes
 git add Procfile requirements.txt
 
@@ -72,7 +83,8 @@ git commit -m "feat: Add FastAPI backend and Next.js frontend for Velinor"
 git push origin main
 
 # Railway auto-deploys (~3-5 minutes)
-# Visit: https://<your-railway-domain>.up.railway.app
+
+```text
 ```
 
 ## Step 6: Test
@@ -91,11 +103,13 @@ Make sure `NEXT_PUBLIC_API_URL` matches your Railway domain exactly.
 ### Frontend can't find images
 
 Ensure images are in `velinor-web/public/assets/`:
+
 ```
 velinor-web/public/assets/
 ├── backgrounds/
 ├── overlays/
-└── npcs/
+```text
+```text
 ```
 
 ### Slow startup
@@ -105,8 +119,10 @@ Railway might be cold-starting both services. Give it 1-2 minutes first.
 ### CORS errors
 
 Already enabled in `velinor_api.py`:
+
 ```python
-app.add_middleware(CORSMiddleware, allow_origins=["*"])
+
+```text
 ```
 
 For production, restrict to your domain.
@@ -114,17 +130,24 @@ For production, restrict to your domain.
 ## Local Development
 
 Terminal 1 - Backend:
+
 ```bash
 python velinor_api.py
+
 # http://localhost:8000
-# Swagger docs: http://localhost:8000/docs
+
+```text
+```text
 ```
 
 Terminal 2 - Frontend:
+
 ```bash
+
 cd velinor-web
 npm run dev
-# http://localhost:3000
+
+```text
 ```
 
 ## File Structure
@@ -157,6 +180,6 @@ saoriverse-console/
 4. Add overlay images to `velinor-web/public/assets/overlays/`
 5. Test locally, then push to Railway
 
----
+##
 
 **Your Railway domain** will be auto-generated. Once set, bookmark it!

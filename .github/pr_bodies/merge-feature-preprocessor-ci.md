@@ -1,7 +1,8 @@
-Title: merge(feature/preprocessor-ci): preprocessor prefs, responsive header, dark theme fixes, tests & CI
+Title: merge(feature/preprocessor-ci): preprocessor prefs, responsive header, dark theme fixes,
+tests & CI
 
-Body:
-This merge brings together a group of focused improvements to the local preprocessor, UI responsiveness, accessibility in dark mode, and the developer testing/CI workflow.
+Body: This merge brings together a group of focused improvements to the local preprocessor, UI
+responsiveness, accessibility in dark mode, and the developer testing/CI workflow.
 
 Key updates
 - Preprocessor preferences
@@ -28,4 +29,5 @@ Notes & follow-ups
 - If you want cross-device persistence for anonymous users, consider an anonymous-id approach or a small client-side cookie/localStorage fallback (held off per request).
 - The SQL migration expects a `user_preferences` table accessible via the Supabase REST endpoint `/rest/v1/user_preferences` (ensure RLS/policies if writing from clients).
 
-If desired, copy this body into the PR description or the release notes to preserve lineage and audit history.
+If desired, copy this body into the PR description or the release notes to preserve lineage and
+audit history.

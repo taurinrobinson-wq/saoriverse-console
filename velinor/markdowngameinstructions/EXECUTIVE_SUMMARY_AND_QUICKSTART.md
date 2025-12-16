@@ -4,17 +4,24 @@
 
 **Velinor: Remnants of the Tone** is a narrative-driven, choice-based RPG where every decision shapes not just the story, but the emotional evolution of the main character. The game is fundamentally about relationship-building, moral ambiguity, and the cost of friendship and sacrifice.
 
----
+##
 
 ## Core Concept (30-Second Pitch)
 
-In the fractured ruins of a futuristic city called Velhara, the player awakens with no memory of how they got there. They discover that Saori, the only person with full memory, is desperately trying to restart an ancient emotional-control system called Corelink—not out of ambition, but to save her best friend Velinor, who sacrificed her consciousness to shut down the system 25 years ago.
+In the fractured ruins of a futuristic city called Velhara, the player awakens with no memory of how
+they got there. They discover that Saori, the only person with full memory, is desperately trying to
+restart an ancient emotional-control system called Corelink—not out of ambition, but to save her
+best friend Velinor, who sacrificed her consciousness to shut down the system 25 years ago.
 
-The player must navigate a living community of NPCs, each with their own memories, pain, and perspectives. Every choice invisibly shapes the player's emotional profile—Trust, Observation, Narrative Presence, and Empathy (TONE)—which determines which NPCs open up, which glyphs (emotional fragments) become accessible, and ultimately, which of six fundamentally different endings become available.
+The player must navigate a living community of NPCs, each with their own memories, pain, and
+perspectives. Every choice invisibly shapes the player's emotional profile—Trust, Observation,
+Narrative Presence, and Empathy (TONE)—which determines which NPCs open up, which glyphs (emotional
+fragments) become accessible, and ultimately, which of six fundamentally different endings become
+available.
 
 **There is no "good" ending. Every path honors something while destroying something else. The game is about the weight of choice, not the thrill of winning.**
 
----
+##
 
 ## Three Core Pillars
 
@@ -54,11 +61,12 @@ The player must navigate a living community of NPCs, each with their own memorie
 
 **Why It Matters**: Glyphs aren't just collectibles—they're mnemonic mirrors. Collecting a "Held Ache" glyph means the player has witnessed emotional pain. It unlocks dialogue options, alters how NPCs respond, and determines which ending branches become available.
 
----
+##
 
 ## The Marketplace: Heart of the Game
 
-The marketplace is where 95% of early-game interaction happens. Eight distinct NPCs create a living, dynamic community:
+The marketplace is where 95% of early-game interaction happens. Eight distinct NPCs create a living,
+dynamic community:
 
 | NPC | Role | Primary TONE | Key Mechanic |
 |---|---|---|---|
@@ -71,39 +79,46 @@ The marketplace is where 95% of early-game interaction happens. Eight distinct N
 | **Korrin** | Gossip, informant | Observation | Reveals rumors to those who watch |
 | **Kaelen** | Suspected thief, moral test | Observation counter | Steals from trusting but unobservant players |
 
----
+##
 
 ## The Kaelen-Veynar Moral Crossroads
 
 **Kaelen the Cloaked** is a pivotal NPC who tests the player's moral foundation:
 
-1. **Player encounters Kaelen** (suspected thief)
-2. **Two paths**:
+1. **Player encounters Kaelen** (suspected thief) 2. **Two paths**:
    - **Report to Captain Veynar** → Steal recovered, but Kaelen's trust fractures, optional Drossel questline closes
    - **Protect Kaelen's secret** → Items lost temporarily, but Kaelen trusts you, opens Drossel questline
 3. **Optional Drossel quest** (if Kaelen was protected):
    - Infiltrate thieves' lair in the swamp
    - Recover stolen items from Drossel's hideout
    - Bonus: recover all stolen items from villagers too
-4. **Player choice**: Return items (restore community trust) or keep them (personal gain, fracture trust)
+4. **Player choice**: Return items (restore community trust) or keep them (personal gain, fracture
+trust)
 
 **Why It Matters**: This is a microcosm of the final Saori-Velinor choice. Do you choose justice, loyalty, or survival?
 
----
+##
 
 ## The Final Arc: Saori & Velinor
 
 ### The Setup
 
-25 years ago, Saori and Velinor co-designed the Corelink system—an AI that would unify human emotional resonance and end suffering. Saori believed unified emotion could heal all conflict. Velinor believed emotional autonomy must be preserved.
+25 years ago, Saori and Velinor co-designed the Corelink system—an AI that would unify human
+emotional resonance and end suffering. Saori believed unified emotion could heal all conflict.
+Velinor believed emotional autonomy must be preserved.
 
-Saori, frustrated by Velinor's resistance, activated the system alone. **It catastrophically failed.** Millions died, including children. Velinor sacrificed her consciousness to stabilize the shutdown sequence so Saori could shut it down.
+Saori, frustrated by Velinor's resistance, activated the system alone. **It catastrophically
+failed.** Millions died, including children. Velinor sacrificed her consciousness to stabilize the
+shutdown sequence so Saori could shut it down.
 
-Velinor's consciousness fractured into 70 glyphs, scattered across Velhara. Saori has spent 25 years trying to gather enough glyphs to restart the system and bring Velinor back.
+Velinor's consciousness fractured into 70 glyphs, scattered across Velhara. Saori has spent 25 years
+trying to gather enough glyphs to restart the system and bring Velinor back.
 
 ### The Chamber
 
-The player discovers Saori's underground chamber—the last working node of Corelink. Picture frames line the walls: Saori and Velinor as young architects, full of hope. Now they stand 25 years older in the chamber, waiting.
+The player discovers Saori's underground chamber—the last working node of Corelink. Picture frames
+line the walls: Saori and Velinor as young architects, full of hope. Now they stand 25 years older
+in the chamber, waiting.
 
 ### The Choice
 
@@ -133,7 +148,7 @@ The player must choose between six fundamentally different endings:
 - Release → Velinor is gone forever
 - All paths honor sacrifice while demanding loss.
 
----
+##
 
 ## The Journal System
 
@@ -149,7 +164,7 @@ The player must choose between six fundamentally different endings:
 
 **Narrative Purpose**: Since all players have fragmented memory, the journal becomes a shared story—a way for the player to externalize memory and recognize patterns in NPC behavior.
 
----
+##
 
 ## Game Statistics
 
@@ -165,11 +180,13 @@ The player must choose between six fundamentally different endings:
 | **Dialogue Variations per NPC** | 15-30 |
 | **Optional Secret Encounters** | 5+ |
 
----
+##
 
 ## File Structure (markdowngameinstructions folder)
 
+```text
 ```
+
 markdowngameinstructions/
 ├── TONE_STAT_SYSTEM.md
 ├── NPC_SPHERE_SYSTEM.md
@@ -184,9 +201,11 @@ markdowngameinstructions/
 ├── npcs.md (existing, update with roster)
 ├── story_arcs.md (existing, update with endings)
 └── ... (other existing files)
+
 ```
 
----
+
+##
 
 ## Quick-Start Implementation Order
 
@@ -231,8 +250,7 @@ markdowngameinstructions/
 1. Audio design and ambient soundscape
 2. Full playtesting across all paths
 3. Balance and refinement
-
----
+##
 
 ## Design Philosophy Summary
 
@@ -247,8 +265,7 @@ markdowngameinstructions/
 4. **Ripple effects over isolation**: A single choice with one NPC cascades across their sphere, reshaping the entire community.
 
 5. **Memory as theme**: Every mechanic (glyphs, journal, NPC fragmentation, Saori's desperation) reinforces the game's central theme: **memory, loss, and how we choose to honor what we've lost.**
-
----
+##
 
 ## Next Action Items
 
@@ -272,8 +289,7 @@ markdowngameinstructions/
 - [ ] Allocate resources to each phase
 - [ ] Set up weekly standups
 - [ ] Create branching dev plan (parallel work on NPCs + systems)
-
----
+##
 
 ## Final Thought
 

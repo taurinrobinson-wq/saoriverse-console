@@ -30,6 +30,7 @@ Additional archived files exist in:
 ## 🏃‍♂️ Running the Application
 
 ```bash
+
 # Activate virtual environment (if using one)
 source .venv/bin/activate
 
@@ -57,6 +58,7 @@ Public audit API:
 How to run tests:
 
 ```bash
+
 # activate the virtualenv in the project root (if present)
 source .venv/bin/activate
 pip install -r requirements.txt  # ensure test deps available

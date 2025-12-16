@@ -3,6 +3,7 @@
 ## What Was Built
 
 **3-Layer Privacy Protection System**:
+
 1. **Gate-Based Masking** (Always active) - Raw data never stored, signals only
 2. **Intelligent Anonymization** (When enabled) - Names/dates/locations/medical → glyphs
 3. **Consent-Based De-Anonymization** (You control) - User chooses sharing preferences
@@ -43,6 +44,7 @@ docs/INTEGRATION_COMPLETE.md (NEW)
 ## How to Use
 
 ### In Code (Python)
+
 ```python
 from emotional_os.learning.hybrid_learner_v2 import HybridLearnerWithUserOverrides
 
@@ -60,10 +62,12 @@ result = learner.learn_from_exchange(
     ai_response="...",
     emotional_signals=[...]
 )
+
 # Stored as: "The Thread said I'm the Depths"
 ```
 
 ### In UI (Streamlit)
+
 ```python
 from emotional_os.deploy.modules.consent_ui import render_anonymization_consent_widget
 
@@ -78,6 +82,7 @@ if consent:
 ```
 
 ### User Experience
+
 1. Type message in chat
 2. Get response
 3. **Consent widget appears:**
@@ -99,6 +104,7 @@ if consent:
 ## What Gets Stored
 
 ### ✅ YES (Safe to Store)
+
 - Emotional signals: `["struggle", "vulnerability"]`
 - Gates: `["Gate 4", "Gate 6"]`
 - Glyphs: `["Recursive Grief"]`
@@ -107,6 +113,7 @@ if consent:
 - Anonymization map ID: (for reversal if needed)
 
 ### ❌ NO (Never Stored)
+
 - Raw user input
 - AI response content
 - Real names
@@ -126,7 +133,9 @@ if consent:
 ## Configuration
 
 ### Default Behavior
+
 ```python
+
 # Anonymous by default
 HybridLearnerWithUserOverrides(
     enable_anonymization=True,
@@ -136,6 +145,7 @@ HybridLearnerWithUserOverrides(
 ```
 
 ### Per-User Override (in Streamlit)
+
 ```python
 st.session_state['consent_allow_names'] = False
 st.session_state['consent_allow_medical'] = False
@@ -153,6 +163,7 @@ st.session_state['consent_allow_medical'] = False
 ## Testing
 
 ```bash
+
 # Test anonymization protocol
 python3 emotional_os/safety/anonymization_protocol.py
 
@@ -165,6 +176,7 @@ print('✅ Anonymization ready')
 
 # Run full app
 streamlit run main_v2.py
+
 # Make a query and look for consent widget
 ```
 
@@ -189,6 +201,6 @@ streamlit run main_v2.py
 > This system preserves emotional truth while protecting personal truth.
 > The glyphs aren't abstractions; they're doors to deeper feeling.
 
----
+##
 
 **Status**: ✅ Production Ready | **Version**: 1.0 | **Compliant**: HIPAA, GDPR, CCPA

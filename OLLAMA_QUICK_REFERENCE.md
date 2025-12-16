@@ -3,6 +3,7 @@
 ## TL;DR - Get Started in 3 Steps
 
 ```bash
+
 # 1. Start services
 docker-compose -f docker-compose.local.yml up -d
 
@@ -10,12 +11,15 @@ docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # 3. Open Streamlit
-# Visit http://localhost:8501
+
+```text
+```text
 ```
 
 ## Architecture
 
 ```
+
 Streamlit App (port 8501)
     ↓
 FirstPerson Response Pipeline
@@ -24,7 +28,8 @@ FirstPerson Response Pipeline
     ↓
 Tier Processing (learning, aliveness, poetry)
     ↓
-User sees response
+
+```text
 ```
 
 ## Key Files
@@ -47,37 +52,28 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 
 # Check if available
-if client.is_available():
-    print("✅ Ollama running")
+if client.is_available(): print("✅ Ollama running")
 
 # Get models
-models = client.get_available_models()
-print(f"Available models: {models}")
+models = client.get_available_models() print(f"Available models: {models}")
 
 # Generate response
-response = client.generate(
-    prompt="Why is the sky blue?",
-    model="llama3",
-    temperature=0.7,
-    num_predict=512
-)
-print(response)
+response = client.generate( prompt="Why is the sky blue?", model="llama3", temperature=0.7,
+num_predict=512 ) print(response)
 
 # Generate with conversation context
-response = client.generate_with_context(
-    user_input="I'm feeling overwhelmed",
-    conversation_history=[
-        {"role": "user", "content": "I've been stressed"},
-        {"role": "assistant", "content": "That sounds challenging"},
-    ],
-    model="llama3"
-)
-print(response)
+response = client.generate_with_context( user_input="I'm feeling overwhelmed",
+conversation_history=[ {"role": "user", "content": "I've been stressed"}, {"role": "assistant",
+"content": "That sounds challenging"}, ], model="llama3" )
+```text
+```text
 ```
 
 ## Docker Commands
 
 ```bash
+
+
 # Start services
 docker-compose -f docker-compose.local.yml up -d
 
@@ -85,16 +81,16 @@ docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml down
 
 # View logs
-docker-compose -f docker-compose.local.yml logs -f streamlit
-docker-compose -f docker-compose.local.yml logs -f ollama
+docker-compose -f docker-compose.local.yml logs -f streamlit docker-compose -f
+docker-compose.local.yml logs -f ollama
 
 # Check status
 docker-compose -f docker-compose.local.yml ps
 
 # Pull a model
-docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
-docker-compose -f docker-compose.local.yml exec ollama ollama pull mistral
-docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini
+docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3 docker-compose -f
+docker-compose.local.yml exec ollama ollama pull mistral docker-compose -f docker-compose.local.yml
+exec ollama ollama pull orca-mini
 
 # List models
 docker-compose -f docker-compose.local.yml exec ollama ollama list
@@ -103,48 +99,59 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 docker-compose -f docker-compose.local.yml rm
 
 # Full cleanup (removes models!)
-docker-compose -f docker-compose.local.yml down -v
+
+```text
 ```
 
 ## Environment Variables
 
 ```bash
+
 # Ollama base URL (auto-configured in Docker)
 OLLAMA_BASE_URL=http://ollama:11434
 
 # Local development (laptop, desktop)
-OLLAMA_BASE_URL=http://localhost:11434
+```text
+```text
 ```
 
 ## Model Guide
 
 ```
+
 orca-mini   → Smallest (1.3GB), fastest, fair quality - TRY THIS FIRST
 neural-chat → Medium (4.1GB), good for chat
 mistral     → Medium (4.1GB), well-rounded
-llama3      → Largest (4.7GB), best quality - PRODUCTION
+
+```text
 ```
 
 ## Common Tasks
 
 ### Test Ollama directly (curl)
+
 ```bash
+
 # Check health
 curl http://localhost:11434/api/tags
 
 # Generate response
 curl -X POST http://localhost:11434/api/generate \
-  -d '{"model":"llama3","prompt":"Hello!","stream":false}'
+```text
+```text
 ```
 
 ### Run integration tests
+
 ```bash
-python test_ollama_integration.py
+
+```text
 ```
 
 Expected: All 5 checks pass ✅
 
 ### Debug in Streamlit
+
 ```python
 import streamlit as st
 
@@ -156,11 +163,15 @@ st.write("Models:", st.session_state.get("ollama_models"))
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 client = get_ollama_client_singleton()
 response = client.generate("Test", model="llama3")
-st.write(response)
+```text
+```text
 ```
 
 ### View service logs in real-time
+
 ```bash
+
+
 # Ollama service
 docker-compose -f docker-compose.local.yml logs -f ollama
 
@@ -168,27 +179,25 @@ docker-compose -f docker-compose.local.yml logs -f ollama
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
 # Both
-docker-compose -f docker-compose.local.yml logs -f
+
+```text
 ```
 
 ## Fallback Flow
 
 ```
-User message arrives
-    ↓
-Try local Glyph parsing
+User message arrives ↓ Try local Glyph parsing
     ├─ Success (has voltage_response) → Use + Tier processing → Display
     └─ Fail (empty/null) ↓
-    ↓
-Try FirstPerson orchestrator
+↓ Try FirstPerson orchestrator
     ├─ Success → Use + Tier processing → Display
     └─ Fail ↓
-    ↓
-Try Ollama fallback
+↓ Try Ollama fallback
     ├─ Available → HTTP call + Tier processing → Display
     └─ Unavailable ↓
-    ↓
-Generic fallback → "I'm here to listen..."
+↓
+```text
+```text
 ```
 
 ## Performance Notes
@@ -201,12 +210,12 @@ Generic fallback → "I'm here to listen..."
 ## Files Created
 
 ```
-docker-compose.local.yml          (72 lines)
-Dockerfile.streamlit               (29 lines)
-ollama_client.py                   (347 lines)
-OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
+
+docker-compose.local.yml          (72 lines) Dockerfile.streamlit               (29 lines)
+ollama_client.py                   (347 lines) OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
 OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
-test_ollama_integration.py         (300+ lines)
+
+```text
 ```
 
 ## Files Modified
@@ -215,7 +224,8 @@ test_ollama_integration.py         (300+ lines)
 response_handler.py                (Added import + function)
 session_manager.py                 (Added init function)
 ui_refactored.py                   (Already imports everything)
-ui_components/__init__.py           (Already exports everything)
+```text
+```text
 ```
 
 ## Verification Checklist
@@ -228,7 +238,7 @@ ui_components/__init__.py           (Already exports everything)
 - [ ] `test_ollama_integration.py` runs without errors
 - [ ] Streamlit starts: `docker-compose -f docker-compose.local.yml up -d`
 - [ ] Model pulls: `docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3`
-- [ ] http://localhost:8501 accessible
+- [ ] <http://localhost:8501> accessible
 - [ ] Chat works in Streamlit
 
 ## Troubleshooting
@@ -245,7 +255,10 @@ ui_components/__init__.py           (Already exports everything)
 ## Integration Points
 
 ### Where Ollama is Called
+
 ```python
+
+
 # 1. Session initialization
 src/emotional_os/deploy/modules/ui_components/session_manager.py
     → _ensure_ollama_client()
@@ -258,6 +271,7 @@ src/emotional_os/deploy/modules/ui_components/response_handler.py
 
 # 3. Direct client usage (testing)
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
+
 ```
 
 ## What's Different from Velinor Deployment
@@ -266,28 +280,26 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 |--------|---------------|-------------------|
 | Deployment | DigitalOcean Droplet | Docker Compose locally |
 | LLM | FirstPerson local processing | FirstPerson + Ollama fallback |
-| Network | Public internet (https://velinor.firstperson.chat) | localhost:8501 |
+| Network | Public internet (<https://velinor.firstperson.chat>) | localhost:8501 |
 | Ports | 80, 443 (nginx proxy) | 8501 (Streamlit) |
 | CPU | 1 vCPU (constrained) | Your laptop (flexible) |
 | Performance | Fast for game, okay for AI | Depends on hardware |
 
 ## Next Steps
 
-1. **Test Locally**: Run docker-compose.local.yml
-2. **Pull Model**: Get llama3 or orca-mini
-3. **Chat**: Open http://localhost:8501 and converse
-4. **Monitor**: Watch logs to see Ollama being called
-5. **Tune**: Adjust system prompt or model parameters
-6. **Share**: Share responses and feedback
+1. **Test Locally**: Run docker-compose.local.yml 2. **Pull Model**: Get llama3 or orca-mini 3.
+**Chat**: Open <http://localhost:8501> and converse 4. **Monitor**: Watch logs to see Ollama being
+called 5. **Tune**: Adjust system prompt or model parameters 6. **Share**: Share responses and
+feedback
 
 ## Resources
 
 - **Full Guide**: `OLLAMA_INTEGRATION_GUIDE.md`
 - **Implementation Details**: `OLLAMA_INTEGRATION_IMPLEMENTATION.md`
-- **Ollama Repo**: https://github.com/ollama/ollama
-- **Docker Docs**: https://docs.docker.com/compose/
+- **Ollama Repo**: <https://github.com/ollama/ollama>
+- **Docker Docs**: <https://docs.docker.com/compose/>
 - **FirstPerson**: See `LEARNING_QUICK_REFERENCE.md`
 
----
+##
 
 **Updated**: 2025 | **Status**: ✅ Ready to Use

@@ -3,13 +3,14 @@
 **Last Updated**: Phase 10 - Documentation Updates
 **Project Status**: ✅ Fully Modularized & Organized
 
----
+##
 
 ## 🚀 Quick Start (5 minutes)
 
 ### First Time Setup
 
 ```bash
+
 # 1. Navigate to project
 cd /workspaces/saoriverse-console
 
@@ -18,13 +19,16 @@ pip install -r config/requirements.txt
 
 # 3. Start the application
 python core/start.py
+
 # OR for Streamlit
-streamlit run core/main_v2.py
+```text
+```text
 ```
 
 ### Project Structure at a Glance
 
 ```
+
 root/
 ├── core/                 ← All essential Python code
 ├── docs/                 ← All documentation (guides, reports, archives)
@@ -32,10 +36,11 @@ root/
 ├── config/               ← Configuration & dependencies
 ├── emotional_os/         ← Modularized application core
 ├── tools/                ← Organized analysis/testing tools
-└── README.md             ← Project overview
+
+```text
 ```
 
----
+##
 
 ## 📂 Finding What You Need
 
@@ -80,7 +85,7 @@ root/
 → **Location**: `scripts/`
 → **Files**: `deploy.sh`, `run_local.sh`
 
----
+##
 
 ## 🔧 Core Python Files (core/)
 
@@ -103,17 +108,18 @@ All essential Python files are in `core/`:
 ### Importing from Core
 
 ```python
+
 # Import from core/ directory
-from core.main_response_engine import process_user_input
-from core.response_adapter import translate_emotional_response
-from core.tone_adapters import generate_archetypal_response
+from core.main_response_engine import process_user_input from core.response_adapter import
+translate_emotional_response from core.tone_adapters import generate_archetypal_response
 
 # Or maintain backward compatibility with shims
 from core.phase_modulator import detect_phase
-from core.glyph_generator import GlyphGenerator
+```text
+```text
 ```
 
----
+##
 
 ## 📚 Documentation Organization (docs/)
 
@@ -149,7 +155,7 @@ Historical phase and sprint documentation:
 
 **Navigation guide for all documentation** - Start here if you're lost!
 
----
+##
 
 ## 📊 Data Organization (data/)
 
@@ -179,13 +185,14 @@ Analysis output directory (expand as needed)
 
 Export files directory (expand as needed)
 
----
+##
 
 ## ⚙️ Configuration (config/)
 
 All dependencies and configuration files:
 
 ```
+
 config/
 ├── package.json              (Node dependencies)
 ├── package-lock.json         (Locked versions)
@@ -193,31 +200,36 @@ config/
 ├── requirements-dev.txt      (Development dependencies)
 ├── requirements-nlp.txt      (NLP-specific dependencies)
 ├── requirements-voice.txt    (Voice interface dependencies)
-└── runtime.txt               (Python runtime version)
+
+```text
 ```
 
 Install dependencies:
 
 ```bash
 pip install -r config/requirements.txt
-pip install -r config/requirements-dev.txt  # For development
+```text
+```text
 ```
 
----
+##
 
 ## 📜 Scripts (scripts/)
 
 Deployment and setup scripts:
 
 ```bash
+
+
 # Deploy to production
 scripts/deploy.sh
 
 # Run locally
-scripts/run_local.sh
+
+```text
 ```
 
----
+##
 
 ## 🔍 Logs (logs/)
 
@@ -229,7 +241,7 @@ Application logs for debugging:
 - `streamlit.log` - Streamlit app logs
 - `streamlit_tonecore.log` - ToneCore interface logs
 
----
+##
 
 ## 🏛️ Modularized Application (emotional_os/)
 
@@ -298,7 +310,7 @@ Learning system:
 - Local learner
 - Memory management
 
----
+##
 
 ## 🗜️ Organized Tools (tools/)
 
@@ -326,18 +338,20 @@ Glyph testing:
 - Conversation test harness
 - Effectiveness validator
 
----
+##
 
 ## 📝 Common Tasks
 
 ### Running the Application
 
 ```bash
+
 # Using start.py (Railway)
 python core/start.py
 
 # Using Streamlit directly
-streamlit run core/main_v2.py --server.port=8501
+```text
+```text
 ```
 
 ### Adding a New Feature
@@ -365,33 +379,34 @@ streamlit run core/main_v2.py --server.port=8501
 2. Add lexicon data to `data/lexicons/`
 3. Add analysis outputs to `data/analysis/`
 
----
+##
 
 ## 🔗 Import Paths Reference
 
 ### Core Modules (New Locations)
 
 ```python
+
+
 # Response System
-from core.main_response_engine import process_user_input
-from core.response_adapter import translate_emotional_response
-from core.response_selector import select_first_turn_response
-from core.tone_adapters import generate_archetypal_response
-from core.symbolic_tagger import tag_input
+from core.main_response_engine import process_user_input from core.response_adapter import
+translate_emotional_response from core.response_selector import select_first_turn_response from
+core.tone_adapters import generate_archetypal_response from core.symbolic_tagger import tag_input
 from core.relational_memory import RelationalMemoryCapsule
 
 # Application Entry Points
-from core.start import main as start_railway
-from core.main_v2 import run_app
+from core.start import main as start_railway from core.main_v2 import run_app
 
 # Compatibility Shims (Legacy)
 from core.phase_modulator import detect_phase
-from core.glyph_generator import GlyphGenerator
+
+```text
 ```
 
 ### Emotional OS Modules
 
 ```python
+
 # Utils
 from emotional_os.utils.svg_loader import load_svg
 from emotional_os.utils.css_injector import inject_css
@@ -416,12 +431,15 @@ from emotional_os.features.journal_center import manage_journal
 from emotional_os.features.theme_manager import manage_theme
 
 # Glyphs
-from emotional_os.glyphs.glyph_generator import GlyphGenerator
+```text
+```text
 ```
 
 ### Tools
 
 ```python
+
+
 # Analysis
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 from tools.analysis.evolving_glyph_integrator import EvolvingGlyphIntegrator
@@ -431,10 +449,11 @@ from tools.document_processing.docx_reader import read_docx
 from tools.document_processing.docx_viewer import view_docx
 
 # Glyph Testing
-from tools.glyph_testing.glyph_conversation_test_harness import run_conversation_test
+
+```text
 ```
 
----
+##
 
 ## 📋 Checklist for New Developers
 
@@ -447,7 +466,7 @@ from tools.glyph_testing.glyph_conversation_test_harness import run_conversation
 - [ ] Explore `emotional_os/` for modular components
 - [ ] Check `logs/` when debugging
 
----
+##
 
 ## 🆘 Getting Help
 
@@ -457,18 +476,16 @@ from tools.glyph_testing.glyph_conversation_test_harness import run_conversation
 4. **Code examples** → Look in `tests/` for usage examples
 5. **Debugging** → Check `logs/` directory
 
----
+##
 
 ## ✅ Project Status
 
 ```
-✅ Modularization:    Complete (7 phases)
-✅ Organization:      Complete (95% clutter reduction)
-✅ Documentation:     Complete (comprehensive guides)
-✅ Verification:      Complete (all imports working)
-✅ Ready for:         Development & Deployment
+✅ Modularization:    Complete (7 phases) ✅ Organization:      Complete (95% clutter reduction) ✅
+Documentation:     Complete (comprehensive guides) ✅ Verification:      Complete (all imports
+working) ✅ Ready for:         Development & Deployment
 ```
 
----
+##
 
 **For more information**: See `docs/INDEX.md` ⭐

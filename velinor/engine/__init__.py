@@ -1,3 +1,6 @@
+"""Velinor engine package."""
+
+__all__ = ["resonance"]
 """Velinor Engine Package
 
 Core game engine for Velinor: Remnants of the Tone

@@ -1,13 +1,16 @@
 # FirstPerson Audio Webapp - Architecture & Deployment Plan
 
-**Status:** Planning → Implementation  
-**Target:** firstperson.chat (Digital Ocean)  
+**Status:** Planning → Implementation
+**Target:** firstperson.chat (Digital Ocean)
 **Timeline:** 2-3 days for MVP
 
 ## Current State
 
 ### What's Running
+
+```text
 ```
+
 Digital Ocean VPS:
 ├── velinor.firstperson.chat (Next.js 16 + FastAPI backend)
 │   ├── Port 8000: FastAPI (velinor_api.py)
@@ -16,7 +19,10 @@ Digital Ocean VPS:
 │
 └── Docker Compose (docker-compose.prod.yml)
     └── Orchestrates: velinor API + nginx-ssl
+
 ```
+
+
 
 ### Deployment Pattern (Proven)
 - **Container:** Docker with FastAPI + Next.js
@@ -27,7 +33,10 @@ Digital Ocean VPS:
 ## New Architecture: FirstPerson Audio App
 
 ### Proposed Setup
+```text
+```text
 ```
+
 firstperson.chat (NEW subdomain):
 ├── Frontend (Next.js)
 │   ├── Audio UI components
@@ -53,51 +62,51 @@ firstperson.chat (NEW subdomain):
         ├── Faster-Whisper (transcription)
         ├── pyttsx3 + ProsodyPlanner (TTS)
         └── Audio processing (scipy, librosa)
+
 ```
 
+
+
+
 ### Docker Compose Structure (Updated)
+
 ```yaml
 services:
   # Existing
-  velinor_api:
-    image: velinor_prod
-    ports: [8000:8000]
-    
+velinor_api: image: velinor_prod ports: [8000:8000]
+
   # NEW
-  firstperson_api:
-    image: firstperson_api
-    ports: [8001:8001]  # Internal only
-    depends_on:
+firstperson_api: image: firstperson_api ports: [8001:8001]  # Internal only depends_on:
       - ollama
-    
+
   # Shared
-  ollama:
-    image: ollama/ollama
-    ports: [11434:11434]  # Local only
-    
+ollama: image: ollama/ollama ports: [11434:11434]  # Local only
+
   # Reverse proxy (routes both domains)
-  nginx_ssl:
-    image: nginx:alpine
-    ports: [80:80, 443:443]
-    depends_on:
+nginx_ssl: image: nginx:alpine ports: [80:80, 443:443] depends_on:
       - velinor_api
-      - firstperson_api
+```text
+```text
 ```
 
 ### Nginx Configuration (Updated)
+
 ```nginx
+
+
 # Existing
-server_name velinor.firstperson.chat;
-location / { proxy_pass http://velinor_api:8000; }
+server_name velinor.firstperson.chat; location / { proxy_pass http://velinor_api:8000; }
 
 # NEW
 server_name firstperson.chat;
-location / { proxy_pass http://firstperson_api:8001; }
+
+```text
 ```
 
 ## Implementation Roadmap
 
 ### Phase 1: Scaffold (2 hours)
+
 - [ ] Create `/firstperson-web/` directory (Next.js app)
 - [ ] Copy tailwind/eslint setup from velinor-web
 - [ ] Create `/firstperson_api.py` FastAPI backend
@@ -106,6 +115,7 @@ location / { proxy_pass http://firstperson_api:8001; }
 - [ ] Update `nginx.prod.conf` for dual-domain routing
 
 ### Phase 2: Frontend (4-6 hours)
+
 - [ ] Audio recorder component (Web Audio API)
   - Capture microphone input
   - Send to backend for transcription
@@ -118,6 +128,7 @@ location / { proxy_pass http://firstperson_api:8001; }
 - [ ] Settings panel (model selection, voice settings)
 
 ### Phase 3: Backend (6-8 hours)
+
 - [ ] FastAPI endpoints
   - POST `/api/transcribe` - audio blob → text
   - POST `/api/chat` - text → response
@@ -132,6 +143,7 @@ location / { proxy_pass http://firstperson_api:8001; }
 - [ ] Error handling & graceful degradation
 
 ### Phase 4: Deployment (2-3 hours)
+
 - [ ] Build Docker image for firstperson_api
 - [ ] Deploy to Digital Ocean
 - [ ] SSL certificate for firstperson.chat
@@ -139,6 +151,7 @@ location / { proxy_pass http://firstperson_api:8001; }
 - [ ] Performance optimization
 
 ### Phase 5: Polish (2-3 hours)
+
 - [ ] UI refinements
 - [ ] Response latency optimization
 - [ ] Audio quality tuning
@@ -147,16 +160,22 @@ location / { proxy_pass http://firstperson_api:8001; }
 ## Code Reuse Strategy
 
 ### Python Code (Direct)
+
 ```python
+
 # Copy to firstperson_api.py
 from emotional_os.deploy.modules.audio_conversation_orchestrator import AudioConversationOrchestrator
 from emotional_os.deploy.modules.prosody_planner import ProsodyPlanner
 from emotional_os.deploy.modules.nlp_init import warmup_nlp
-from firstperson import FirstPersonOrchestrator
+```sql
+```sql
 ```
 
 ### Architecture Pattern (Copy from Velinor)
+
 ```python
+
+
 # velinor_api.py structure
 FastAPI app
 ├── CORS middleware
@@ -164,46 +183,44 @@ FastAPI app
 ├── Route handlers (POST, GET, WebSocket)
 └── Integration logic
 
-# We'll follow exact same pattern for firstperson_api.py
+```text
 ```
 
 ## Key Endpoints
 
 ### Simple (HTTP Request/Response)
+
 ```bash
+
 # Transcribe audio
-POST /api/transcribe
-Content-Type: multipart/form-data
-{ audio: <wav_blob> }
-→ { text: "hello", confidence: 0.95 }
+POST /api/transcribe Content-Type: multipart/form-data { audio: <wav_blob> } → { text: "hello",
+confidence: 0.95 }
 
 # Get response
-POST /api/chat
-{ message: "hello", user_id: "abc123" }
-→ { text: "...", glyph_intent: {...}, audio_url: "..." }
+POST /api/chat { message: "hello", user_id: "abc123" } → { text: "...", glyph_intent: {...},
+audio_url: "..." }
 
 # Synthesize audio
-POST /api/synthesize
-{ text: "...", glyph_intent: {...} }
-→ { audio_url: "audio.wav", prosody_markup: "<prosody...>" }
+POST /api/synthesize { text: "...", glyph_intent: {...} }
+```text
+```text
 ```
 
 ### Streaming (WebSocket)
+
 ```javascript
-// Real-time conversation
-ws.send({ type: 'transcribe_start' })
-// User speaks...
-ws.send({ type: 'audio_chunk', data: <chunk> })
-ws.send({ type: 'transcribe_end' })
-← { type: 'transcript', text: '...' }
-← { type: 'response_start' }
-← { type: 'response_chunk', text: '...', audio: <chunk> }
-← { type: 'response_end' }
+
+// Real-time conversation ws.send({ type: 'transcribe_start' }) // User speaks... ws.send({ type:
+'audio_chunk', data: <chunk> }) ws.send({ type: 'transcribe_end' }) ← { type: 'transcript', text:
+'...' } ← { type: 'response_start' } ← { type: 'response_chunk', text: '...', audio: <chunk> }
+
+```text
 ```
 
 ## Digital Ocean Setup Checklist
 
 ### Pre-Deployment
+
 - [ ] Clone repo on VPS
 - [ ] Create DNS A record for firstperson.chat → VPS IP
 - [ ] Request SSL certificate for firstperson.chat (Let's Encrypt)
@@ -211,12 +228,14 @@ ws.send({ type: 'transcribe_end' })
 - [ ] Update nginx.prod.conf
 
 ### Deployment
+
 - [ ] Build Docker image: `docker-compose build`
 - [ ] Start services: `docker-compose up -d`
 - [ ] Verify health: Check both velinor.firstperson.chat and firstperson.chat
 - [ ] Monitor logs: `docker-compose logs -f firstperson_api`
 
 ### Post-Deployment
+
 - [ ] Test audio recording → transcription
 - [ ] Test chat → FirstPerson response
 - [ ] Test audio synthesis
@@ -292,9 +311,10 @@ saoriverse-console/
 
 5. **Deploy & test**
 
----
+##
 
 **Benefits of this approach:**
+
 - ✅ Proper audio I/O (no Streamlit limitations)
 - ✅ Real-time WebSocket support
 - ✅ Production-grade architecture

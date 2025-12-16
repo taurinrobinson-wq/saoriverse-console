@@ -1,8 +1,7 @@
 Title: chore(ci): focused preprocessor tests + taxonomy validator
 
-Body:
-This PR adds a lightweight CI workflow focused on the local preprocessor unit tests and
-a taxonomy validator intended to protect the canonical emotional taxonomy JSON.
+Body: This PR adds a lightweight CI workflow focused on the local preprocessor unit tests and a
+taxonomy validator intended to protect the canonical emotional taxonomy JSON.
 
 What it does:
 - Adds `.github/workflows/preprocessor-tests.yml` which runs on pull requests and executes:

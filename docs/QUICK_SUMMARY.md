@@ -1,14 +1,19 @@
 # Quick Summary: Response Personalization Fix
 
 ## The Problem
-User challenged: "how can you determine its functional that is such a generic response it doesn't acknowledge any part of the user's message"
+
+User challenged: "how can you determine its functional that is such a generic response it doesn't
+acknowledge any part of the user's message"
 
 **Root cause**: All 1844 glyphs were generating identical generic responses despite being correctly selected.
 
 ## The Solution
-Enhanced response generation to use glyph **descriptions** (the wisdom/insight of each glyph) to create personalized responses.
+
+Enhanced response generation to use glyph **descriptions** (the wisdom/insight of each glyph) to
+create personalized responses.
 
 ## What Changed
+
 **File**: `src/emotional_os_glyphs/dynamic_response_composer.py`
 
 - Modified `_build_glyph_aware_response` to prioritize glyph wisdom
@@ -21,16 +26,29 @@ Enhanced response generation to use glyph **descriptions** (the wisdom/insight o
 ## Results
 
 **Before**: Generic response for ANY glyph/emotion
-```
-"I hear you. What's the feeling underneath all that?"
+
+```text
 ```
 
+"I hear you. What's the feeling underneath all that?"
+
+```
+
+
+
 **After**: Personalized response unique to selected glyph
+```text
+```text
 ```
-"That's a real thing you're carrying. Even in what feels active or chaotic, 
-there's often a still place underneath. Quiet revelation. Truth that arrives 
-without noise. What's the next small step for you?"
+
+"That's a real thing you're carrying. Even in what feels active or chaotic, there's often a still
+place underneath. Quiet revelation. Truth that arrives without noise. What's the next small step for
+you?"
+
 ```
+
+
+
 
 ## Validation ✅
 - All responses now use glyph descriptions
@@ -57,9 +75,8 @@ without noise. What's the next small step for you?"
 - `IMPLEMENTATION_DETAILS.md` - Code-level details
 - `BEFORE_AFTER_RESPONSE_IMPROVEMENT.md` - Detailed examples
 - Test files: `FINAL_VALIDATION.py`, `validate_full_pipeline.py`, `test_craft_glyph_response.py`
-
----
+##
 
 **User's Challenge Addressed**: ✅
-"doesn't acknowledge any part of the user's message" 
+"doesn't acknowledge any part of the user's message"
 → NOW IT DOES - responses incorporate both glyph wisdom AND user context

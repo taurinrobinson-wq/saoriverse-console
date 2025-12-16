@@ -7,6 +7,7 @@ All scaffolding is complete. The full web stack is ready for local testing and d
 ### What Was Built
 
 **Backend: FastAPI REST API** (`velinor_api.py`)
+
 - ✅ Complete REST endpoints for game management
 - ✅ Session management with in-memory storage
 - ✅ CORS enabled for frontend communication
@@ -20,6 +21,7 @@ All scaffolding is complete. The full web stack is ready for local testing and d
   - `GET /api/sessions` - List active sessions
 
 **Frontend: Next.js + React** (`velinor-web/`)
+
 - ✅ `app/page.tsx` - Splash screen with player name input
 - ✅ `app/game/[sessionId]/page.tsx` - Game scene page
 - ✅ `components/GameScene.tsx` - Full game scene with overlays, narration, choices
@@ -29,7 +31,9 @@ All scaffolding is complete. The full web stack is ready for local testing and d
 
 ### Directory Structure
 
+```text
 ```
+
 d:\saoriverse-console\
 ├── velinor_api.py                    ✅ FastAPI backend
 ├── frontend_lib_api.ts               ✅ (copied to velinor-web/lib/api.ts)
@@ -55,7 +59,10 @@ d:\saoriverse-console\
 │   ├── package.json                  ✅ Dependencies installed
 │   └── [other Next.js config files]
 └── RUN_VELINOR_WEB.md                ✅ Quick start guide
+
 ```
+
+
 
 ### How It Works
 
@@ -96,15 +103,20 @@ See `RUN_VELINOR_WEB.md` for detailed instructions.
 **Quick Start:**
 
 Terminal 1 (Backend):
+
 ```bash
+
 cd d:\saoriverse-console
-python velinor_api.py
+
+```text
 ```
 
 Terminal 2 (Frontend):
+
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
+```text
 ```
 
 Then open: `http://localhost:3000`
@@ -114,19 +126,24 @@ Then open: `http://localhost:3000`
 Once tested locally and working:
 
 ```bash
+
 cd d:\saoriverse-console
 git add .
 git commit -m "Velinor web stack complete - ready for production"
 git push origin main
+
 ```
 
-Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend domain.
+Railway auto-deploys on push. Update the API URL in `.env.local` to point to your Railway backend
+domain.
 
 ### Known Issues & Notes
 
-1. **Inline Style Linting Warnings**: These are informational, not blocking. Styles work fine but could be moved to CSS files later for best practices.
+1. **Inline Style Linting Warnings**: These are informational, not blocking. Styles work fine but
+could be moved to CSS files later for best practices.
 
-2. **Asset Files Missing**: `public/assets/backgrounds/`, `overlays/`, and `npcs/` directories exist but are empty. Copy game assets into these directories before deployment.
+2. **Asset Files Missing**: `public/assets/backgrounds/`, `overlays/`, and `npcs/` directories exist
+but are empty. Copy game assets into these directories before deployment.
 
 3. **Session Storage**: Currently in-memory. In production, should use Redis or database.
 
@@ -143,6 +160,6 @@ Railway auto-deploys on push. Update the API URL in `.env.local` to point to you
 | Performance | ⚠️ Heavy Python/Streamlit | ✅ Lightweight React |
 | Deployment | 📦 Streamlit Cloud | 🚀 Railway, Vercel, AWS, etc. |
 
----
+##
 
 **Ready to test!** See `RUN_VELINOR_WEB.md` for how to start both servers and play the game.

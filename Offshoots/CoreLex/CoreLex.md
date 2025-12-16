@@ -1,4 +1,5 @@
 ```markdown
+
 # ⚖️ CoreLex – MVP Spec
 
 ### 🎯 Target Users

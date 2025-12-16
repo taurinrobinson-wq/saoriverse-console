@@ -67,17 +67,15 @@ neutral → "calm"
 
 **Logic:**
 
-1. Map tone to response category
-2. Determine tone confidence threshold
-3. Look up glyph in AFFECT_TO_GLYPH
-4. Retrieve response from GLYPH_AWARE_RESPONSES
-5. Return with glyph name
+1. Map tone to response category 2. Determine tone confidence threshold 3. Look up glyph in
+AFFECT_TO_GLYPH 4. Retrieve response from GLYPH_AWARE_RESPONSES 5. Return with glyph name
 
 **Example:**
 
 ```python
 affect = {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 response, glyph = compose_glyph_aware_response("I'm exhausted", affect)
+
 # Returns: ("I feel the weight. It's Loss layered with fatigue...", "Loss")
 ```
 
@@ -127,7 +125,7 @@ if should_use_glyph_responses(tone_confidence, arousal, valence):
     response, glyph = compose_glyph_aware_response(user_input, affect_analysis)
     if response:
         return response
-    
+
 # Fallback to ResponseRotator
 return rotator.get_response(tone)
 ```
@@ -139,8 +137,8 @@ if "rotator" not in st.session_state:
     st.session_state.rotator = ResponseRotator()
 
 response, glyph = compose_glyph_aware_response(
-    user_input, 
-    affect, 
+    user_input,
+    affect,
     use_rotator=True  # Will use session state
 )
 ```
@@ -203,18 +201,15 @@ response, glyph = compose_glyph_aware_response(
 
 ## Backward Compatibility
 
-✅ ResponseRotator still available as fallback  
-✅ All 198 existing tests still passing  
-✅ No breaking changes to public API  
-✅ Existing response behavior preserved when glyph match unavailable  
+✅ ResponseRotator still available as fallback ✅ All 198 existing tests still passing ✅ No breaking
+changes to public API ✅ Existing response behavior preserved when glyph match unavailable
 
 ## Known Gaps for Future Phases
 
-1. **Phase 2.3 (Repair Module)**: Detect rejected glyphs, learn user preferences
-2. **Phase 3.1 (Perspective Taking)**: View same emotion through different glyphs
-3. **Phase 3.2 (Micro-Choice Offering)**: Offer glyph-aligned choices
-4. **Phase 4.2 (Emotion Regulation)**: Map glyphs to coping strategies
-5. **Phase 5.1 (Dynamic Scaffolding)**: Personalize glyph selection
+1. **Phase 2.3 (Repair Module)**: Detect rejected glyphs, learn user preferences 2. **Phase 3.1
+(Perspective Taking)**: View same emotion through different glyphs 3. **Phase 3.2 (Micro-Choice
+Offering)**: Offer glyph-aligned choices 4. **Phase 4.2 (Emotion Regulation)**: Map glyphs to coping
+strategies 5. **Phase 5.1 (Dynamic Scaffolding)**: Personalize glyph selection
 
 ## Quick Start for Developers
 
@@ -233,7 +228,7 @@ affect = detect_affect(user_input)  # Returns: {tone, arousal, valence, confiden
 if should_use_glyph_responses(affect["tone_confidence"], affect["arousal"], affect["valence"]):
     # Compose glyph-aware response
     response, glyph = compose_glyph_aware_response(user_input, affect)
-    
+
     # Use response
     return response
 ```
@@ -269,12 +264,14 @@ response, glyph = compose_glyph_aware_response(
     {"tone": "sad", "arousal": 0.2, "valence": -0.9, "tone_confidence": 0.85}
 )
 print(f"{glyph}: {response}")
+
 # Should print: Loss: I feel the weight. It's Loss layered with fatigue...
 ```
 
 ## Test Execution
 
 ```bash
+
 # Run all glyph tests
 pytest emotional_os/core/firstperson/test_glyph_response_composer.py -v
 
@@ -287,6 +284,6 @@ pytest emotional_os/core/firstperson/test_*.py -v
 # Expected result: 219 passed
 ```
 
----
+##
 
 **Phase 2.2.2 is production-ready and deployed.**

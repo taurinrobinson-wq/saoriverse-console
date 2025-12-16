@@ -47,6 +47,7 @@ python poetry_data_pipeline.py --process
 ```
 
 This:
+
 - Downloads 8 major poetry collections from Project Gutenberg
 - Cleans each text (removes artifacts, fixes encoding, fixes fragmentation)
 - Validates quality (passes 5-level checks)
@@ -60,6 +61,7 @@ python poetry_data_pipeline.py --status
 ```
 
 Output shows:
+
 - Collections downloaded: 8
 - Collections cleaned: 8
 - Collections validated: 8
@@ -123,6 +125,7 @@ And sings the tune without the words,
 ```
 
 **Removed**:
+
 - Gutenberg headers and footers
 - Illustration markers
 - Page numbers
@@ -130,6 +133,7 @@ And sings the tune without the words,
 - Hyphenation across lines
 
 **Fixed**:
+
 - Line continuations (fea-thers → feathers)
 - Encoding issues (if any)
 - Whitespace normalization (preserves stanzas)
@@ -192,6 +196,7 @@ And sings the tune without the words,
 SQLite database (`poetry_data/poetry_hub.db`) includes:
 
 **Collections Table** - One row per poetry collection
+
 ```
 name              | poet                | gutenberg_id | status
 dickinson_complet | Emily Dickinson     | 12242        | validated
@@ -201,6 +206,7 @@ keats_complete    | John Keats          | 2350         | validated
 ```
 
 **Processing Log** - Every operation recorded
+
 ```
 collection        | stage    | status  | timestamp
 dickinson_complet | download | success | 2024-01-15 10:30:45
@@ -209,6 +215,7 @@ dickinson_complet | validate | success | 2024-01-15 10:31:45
 ```
 
 **Quality Metrics** - Detailed cleaning statistics
+
 ```
 collection        | metric_name           | value
 dickinson_complet | artifacts_removed     | 47
@@ -224,8 +231,11 @@ dickinson_complet | usability_score       | 0.98
 
 ```python
 data = adapter.for_signal_extraction()
+
 # Returns: {collection_name: clean_text}
+
 # Use when: Extracting emotional signals from poetry
+
 # Guaranteed: No OCR artifacts that corrupt signal detection
 ```
 
@@ -233,8 +243,11 @@ data = adapter.for_signal_extraction()
 
 ```python
 data = adapter.for_lexicon_learning()
+
 # Returns: {collection_name: clean_text}
+
 # Use when: Learning emotional patterns from poetry
+
 # Guaranteed: Coherent text for reliable pattern learning
 ```
 
@@ -242,8 +255,11 @@ data = adapter.for_lexicon_learning()
 
 ```python
 data = adapter.for_glyph_generation()
+
 # Returns: [(collection_name, clean_text), ...]
+
 # Use when: Generating emotional glyphs from poetry
+
 # Guaranteed: No fragmentation affecting glyph quality
 ```
 
@@ -251,8 +267,11 @@ data = adapter.for_glyph_generation()
 
 ```python
 data = adapter.for_ritual_processing()
+
 # Returns: {collection_name: clean_text}
+
 # Use when: Processing poetry into emotional rituals
+
 # Guaranteed: Complete, coherent text for ritual creation
 ```
 
@@ -357,6 +376,7 @@ Every collection processed through the system is guaranteed to have:
 ## Performance
 
 **Processing time**: 5-10 minutes for all 8 collections (295K+ words)
+
 - Download: 2-5 minutes
 - Clean: 1-2 minutes
 - Validate: <1 minute
@@ -450,7 +470,7 @@ Your original request:
 
 **Status**: ✅ Ready to use. Start with: `python poetry_data_pipeline.py --process`
 
----
+##
 
 **Questions?** See the documentation or check docstrings in the code.
 

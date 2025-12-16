@@ -6,15 +6,15 @@ Phase 3.5 is a **complete, production-ready system** for glyph-controlled local 
 
 ### Key Achievements
 
-✅ **Glyph Schema & Registry** - 8 base glyphs with emotional attributes  
-✅ **Gate Enforcement** - Multi-layer safety policy system  
-✅ **Control Tag Rendering** - XML-based LLM prompt control  
-✅ **Safety Post-Processing** - 4-layer violation detection & removal  
-✅ **Training Corpus Pipeline** - JSONL-based fine-tuning data generation  
-✅ **Comprehensive Tests** - 31 tests, 100% pass rate  
-✅ **Production Examples** - Full end-to-end workflow demonstrations  
+✅ **Glyph Schema & Registry** - 8 base glyphs with emotional attributes
+✅ **Gate Enforcement** - Multi-layer safety policy system
+✅ **Control Tag Rendering** - XML-based LLM prompt control
+✅ **Safety Post-Processing** - 4-layer violation detection & removal
+✅ **Training Corpus Pipeline** - JSONL-based fine-tuning data generation
+✅ **Comprehensive Tests** - 31 tests, 100% pass rate
+✅ **Production Examples** - Full end-to-end workflow demonstrations
 
----
+##
 
 ## 📁 Implementation Structure
 
@@ -36,7 +36,7 @@ Phase 3.5 is a **complete, production-ready system** for glyph-controlled local 
 | `QUICK_START.md` | 5-minute setup guide |
 | `examples.py` | Runnable code examples |
 
----
+##
 
 ## 🧬 Core Components
 
@@ -170,7 +170,7 @@ Captures all interactions in JSONL format:
 }
 ```
 
----
+##
 
 ## 🧪 Testing
 
@@ -234,10 +234,11 @@ Captures all interactions in JSONL format:
 ```bash
 cd local_inference
 python -m pytest test_phase_3_5.py -v
+
 # Result: 31 passed in 0.06s
 ```
 
----
+##
 
 ## 🚀 Usage Examples
 
@@ -323,7 +324,7 @@ print(f"Avg satisfaction: {stats['avg_user_satisfaction']:.2f}")
 builder.export_to_jsonl("training_data.jsonl")
 ```
 
----
+##
 
 ## 📊 Performance Characteristics
 
@@ -336,7 +337,7 @@ builder.export_to_jsonl("training_data.jsonl")
 | Glyph Registry Lookup | <1ms |
 | Control Tag Rendering | <5ms |
 
----
+##
 
 ## 🔒 Safety Guarantees
 
@@ -371,7 +372,7 @@ Boundary-dissolving phrases (removed when `uncanny_ok=False`):
 - "Lose separation"
 - "Blur together"
 
----
+##
 
 ## 🎓 Curriculum Learning
 
@@ -402,13 +403,14 @@ Progressive training schedule:
 - Uncanny: Gradually allowed
 - Examples: 300+
 
----
+##
 
 ## 🔌 Integration Points
 
 ### Local LLM Integration (llama.cpp/Ollama)
 
 ```python
+
 # Future adapter for local LLM
 from local_inference.llm_adapter import LocalLLMAdapter
 
@@ -425,6 +427,7 @@ safe_response, result = create_safe_response(...)
 ### Streaming Inference
 
 ```python
+
 # Stream tokens with on-the-fly safety checks
 for chunk in adapter.generate_streaming(prompt):
     # Apply safety checks to each chunk
@@ -435,6 +438,7 @@ for chunk in adapter.generate_streaming(prompt):
 ### Fine-Tuning Integration
 
 ```python
+
 # Use captured training corpus for fine-tuning
 import json
 
@@ -447,7 +451,7 @@ with open("training_data.jsonl") as f:
 fine_tuner.train(epochs=3, batch_size=8)
 ```
 
----
+##
 
 ## 📋 Checklist: Production Readiness
 
@@ -465,7 +469,7 @@ fine_tuner.train(epochs=3, batch_size=8)
 - ⏳ Fine-tuning pipeline integration
 - ⏳ Monitoring & auditing dashboard
 
----
+##
 
 ## 🚦 Next Steps
 
@@ -476,7 +480,7 @@ fine_tuner.train(epochs=3, batch_size=8)
 5. **User Studies** - Validate satisfaction feedback
 6. **Domain Expansion** - Add specialized glyphs
 
----
+##
 
 ## 📚 Documentation Files
 
@@ -485,7 +489,7 @@ fine_tuner.train(epochs=3, batch_size=8)
 - **examples.py** - Runnable integration examples
 - **test_phase_3_5.py** - Full test suite reference
 
----
+##
 
 ## 🎉 Summary
 
@@ -500,8 +504,8 @@ Phase 3.5 provides a **production-ready, safety-first glyph control system** for
 
 Ready to deploy local inference with confidence! 🚀
 
----
+##
 
-*Created: January 2024*  
-*Status: Complete & Tested*  
+*Created: January 2024*
+*Status: Complete & Tested*
 *Test Results: 31/31 passing ✅*

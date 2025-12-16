@@ -2,11 +2,14 @@
 
 ## Executive Summary
 
-Your glyph system contains **6,434 glyphs** organized across **63 primary categories**, making it one of the most comprehensive emotional-semantic systems built. However, the current architecture requires **translation layers** (glyph → affect → conversational tone) that create friction and cognitive overhead.
+Your glyph system contains **6,434 glyphs** organized across **63 primary categories**, making it
+one of the most comprehensive emotional-semantic systems built. However, the current architecture
+requires **translation layers** (glyph → affect → conversational tone) that create friction and
+cognitive overhead.
 
 **Key Finding**: The system is *underutilized* because glyphs are too poetic/abstract to use directly in conversational responses. Modernizing them would eliminate translation layers and allow direct glyph→response mapping.
 
----
+##
 
 ## Current State Analysis
 
@@ -36,23 +39,22 @@ Your glyph system contains **6,434 glyphs** organized across **63 primary catego
 
 **Problem**: User says "I'm exhausted" → System detects *sadness* → Maps to... which glyph? "Drain"? "Surrender"? "Collapse"?
 
----
+##
 
 ## The Translation Problem
 
 ### Current Flow (3 layers)
 
+```text
 ```
-User Input: "I'm exhausted"
-    ↓
-AffectParser: tone=sad, arousal=0.3, valence=-0.9
-    ↓
-ResponseRotator: "sadness" category → 
-    "I hear the sadness in this. It feels heavy."
-    ↓
-Glyph System: "Which glyph represents this?"
-    (System doesn't know - needs manual interpretation)
+
+User Input: "I'm exhausted" ↓ AffectParser: tone=sad, arousal=0.3, valence=-0.9 ↓ ResponseRotator:
+"sadness" category → "I hear the sadness in this. It feels heavy." ↓ Glyph System: "Which glyph
+represents this?" (System doesn't know - needs manual interpretation)
+
 ```
+
+
 
 ### Why This Fails
 
@@ -60,8 +62,7 @@ Glyph System: "Which glyph represents this?"
 2. **No glyph→affect mapping** - Can't directly say "Drain = fatigue/sadness with low arousal"
 3. **Two response systems** - ResponseRotator works independently from glyph system, creating duplication
 4. **Abstract names** - "Shielding of witnessed?" doesn't tell you when to use it
-
----
+##
 
 ## Proposed Modernization
 
@@ -100,20 +101,22 @@ Benefits:
 ### Step 3: Direct Response Mapping
 
 New flow (2 layers instead of 3):
-
+```text
+```text
 ```
-User Input: "I'm exhausted"
-    ↓
-AffectParser: tone=sad, arousal=0.3, valence=-0.9
-    ↓
-ResponseRotator + Glyph System (integrated):
+
+User Input: "I'm exhausted" ↓ AffectParser: tone=sad, arousal=0.3, valence=-0.9 ↓ ResponseRotator +
+Glyph System (integrated):
     - Detect: sadness + low arousal = "Grief" glyph family
     - Response: "I hear the *grief* in this. It feels heavy."
     - Glyph anchors available: Grief, Loss, Mourning, Ache
     - Response can use glyph directly: "That's real *grief*."
+
 ```
 
----
+
+
+##
 
 ## Implementation Roadmap
 
@@ -142,8 +145,7 @@ ResponseRotator + Glyph System (integrated):
 - [ ] Move old poetic descriptions to archive table
 - [ ] Update documentation to use new names
 - [ ] Add migration guide for any external consumers
-
----
+##
 
 ## Specific Recommendations
 
@@ -167,16 +169,14 @@ ResponseRotator + Glyph System (integrated):
 Create a lookup table in Python:
 
 ```python
-AFFECT_TO_GLYPH = {
-    ("sad", 0.2, -0.8): "Grief",        # Low arousal + very negative
-    ("sad", 0.5, -0.8): "Deep Wound",   # Medium arousal + very negative
-    ("anxious", 0.8, -0.6): "Overwhelm", # High arousal + negative
-    ("angry", 0.8, -0.4): "Breaking",   # High arousal, moderate negative
-    ("anxious", 0.6, -0.3): "Pressure", # Moderate arousal + unease
-    ("neutral", 0.3, 0.1): "Stillness", # Low arousal + slightly positive
-    ("warm", 0.7, 0.8): "Connection",   # High arousal + positive
-    ("grateful", 0.4, 0.9): "Acceptance", # Low-medium + very positive
-}
+AFFECT_TO_GLYPH = { ("sad", 0.2, -0.8): "Grief",        # Low arousal + very negative ("sad", 0.5,
+-0.8): "Deep Wound",   # Medium arousal + very negative ("anxious", 0.8, -0.6): "Overwhelm", # High
+arousal + negative ("angry", 0.8, -0.4): "Breaking",   # High arousal, moderate negative ("anxious",
+0.6, -0.3): "Pressure", # Moderate arousal + unease ("neutral", 0.3, 0.1): "Stillness", # Low
+arousal + slightly positive ("warm", 0.7, 0.8): "Connection",   # High arousal + positive
+("grateful", 0.4, 0.9): "Acceptance", # Low-medium + very positive
+```text
+```text
 ```
 
 ### 3. Response Template With Glyphs
@@ -184,10 +184,11 @@ AFFECT_TO_GLYPH = {
 **Before** (current):
 
 ```python
-brief_responses = [
-    "I hear the sadness in this. It feels heavy.",
-    "I can sense the sorrow. It's real.",
-]
+
+brief_responses = [ "I hear the sadness in this. It feels heavy.", "I can sense the sorrow. It's
+real.",
+
+```text
 ```
 
 **After** (with glyphs):
@@ -200,7 +201,7 @@ brief_responses = [
 ]
 ```
 
----
+##
 
 ## Benefits of Modernization
 
@@ -213,7 +214,7 @@ brief_responses = [
 | **Glyph Usage** | Underutilized | Direct integration |
 | **Consistency** | Translation errors possible | 1:1 mapping guarantees consistency |
 
----
+##
 
 ## Risk Assessment
 
@@ -236,27 +237,30 @@ brief_responses = [
 - Test with subset first (top 100 glyphs)
 - Keep both systems running in parallel during transition
 
----
+##
 
 ## Next Steps
 
-1. **Approve modernization approach** - Do you want to proceed?
-2. **Select tier 1 glyphs** - Which 50-100 should we modernize first?
-3. **Create mapping** - Build affect→glyph lookup table
-4. **Test on subset** - Run against Phase 1-2.2 test suite
-5. **Full deployment** - Migrate all 6,434 glyphs over 2-3 weeks
+1. **Approve modernization approach** - Do you want to proceed? 2. **Select tier 1 glyphs** - Which
+50-100 should we modernize first? 3. **Create mapping** - Build affect→glyph lookup table 4. **Test
+on subset** - Run against Phase 1-2.2 test suite 5. **Full deployment** - Migrate all 6,434 glyphs
+over 2-3 weeks
 
----
+##
 
 ## Questions for You
 
-1. **Poetic vs Practical**: Should we keep some poetic descriptions in a "richness layer" for deeper contexts (poetry, ritual), while using practical names for conversational responses?
+1. **Poetic vs Practical**: Should we keep some poetic descriptions in a "richness layer" for deeper
+contexts (poetry, ritual), while using practical names for conversational responses?
 
-2. **Category Size**: The 180-glyph "Collapse" and "Surrender" categories are massive. Should we split them into sub-categories (e.g., "Collapse/Overwhelm", "Collapse/Breaking", "Collapse/Defeat")?
+2. **Category Size**: The 180-glyph "Collapse" and "Surrender" categories are massive. Should we
+split them into sub-categories (e.g., "Collapse/Overwhelm", "Collapse/Breaking", "Collapse/Defeat")?
 
-3. **External Usage**: Are any systems currently depending on these glyph names? Do we need a migration guide?
+3. **External Usage**: Are any systems currently depending on these glyph names? Do we need a
+migration guide?
 
-4. **Timeline**: Can we modernize gradually (top 100 glyphs first) or do you want a full restructuring?
+4. **Timeline**: Can we modernize gradually (top 100 glyphs first) or do you want a full
+restructuring?
 
 5. **Naming Philosophy**: Should we favor:
    - **Short + punchy**: "Grief", "Joy", "Pressure"

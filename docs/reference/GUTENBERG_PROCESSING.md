@@ -3,29 +3,41 @@
 ## Storage Configuration
 
 **All data files are stored on your external drive:**
+
+```text
 ```
+
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/              (8 poetry collections)
 ├── gutenberg_learning.log         (processing log)
 └── gutenberg_processing_results.json  (statistics)
+
 ```
 
+
+
 **Code files remain on your hard drive:**
+```text
+```text
 ```
+
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
 ├── bulk_text_processor.py
 └── run_gutenberg_learning.sh
+
 ```
 
-This keeps your hard drive free and stores large data files on the external drive! ✅
 
----
+
+
+This keeps your hard drive free and stores large data files on the external drive! ✅
+##
 
 ## Overview
 Successfully automated the download and processing of classic poetry collections from Project Gutenberg directly into the SaoriVerse learning pipeline.
 
-### 1. **gutenberg_fetcher.py** 
+### 1. **gutenberg_fetcher.py**
 - Automatic downloader for 12+ poetry collections from Project Gutenberg
 - Removes Project Gutenberg metadata (headers/footers)
 - Processes each collection through signal extraction + learning pipeline
@@ -53,8 +65,7 @@ Successfully automated the download and processing of classic poetry collections
 - Bash wrapper for running the fetcher with logging
 - Creates timestamped log files
 - Perfect for background/scheduled runs
-
----
+##
 
 ## Poetry Collections Downloaded
 
@@ -70,8 +81,7 @@ Successfully automated the download and processing of classic poetry collections
 | Love Poems Anthology | 421 KB | (calculating) | ✓ Downloaded |
 
 **Total Downloaded**: ~3.2 MB of classic poetry (~600K+ words)
-
----
+##
 
 ## Learning Pipeline Integration
 
@@ -93,20 +103,23 @@ From our test run with Emily Dickinson poetry:
 - 2-3 word phrases learned: "thing with feathers", "perches in the soul", "creak across my soul", etc.
 
 **Expected Total**: 10,000-50,000+ new lexicon entries from ~600K words of poetry
-
----
+##
 
 ## How It Works
 
 ### 1. Download Phase
+
 ```python
-fetcher = GutenbergPoetryFetcher()
-downloaded = fetcher.download_all_collections()
-# Downloads 12 poetry collections from Project Gutenberg
+fetcher = GutenbergPoetryFetcher() downloaded = fetcher.download_all_collections()
+
+```text
+```text
 ```
 
 ### 2. Processing Phase
+
 For each file:
+
 - Split into 500-word chunks (respecting sentence boundaries)
 - Extract emotional signals from each chunk
 - Learn keywords and phrases
@@ -114,13 +127,15 @@ For each file:
 - Track quality metrics
 
 ### 3. Results
+
 Results saved to:
+
 - `gutenberg_processing_results.json` - Statistics and metadata
 - `gutenberg_learning.log` - Full processing log
 - Updated `parser/signal_lexicon.json` - Expanded lexicon
 - Updated `parser/learned_lexicon.json` - Learned patterns
 
----
+##
 
 ## Current Status
 
@@ -129,41 +144,52 @@ Results saved to:
 ✅ **Background processing finished** - Results saved to external drive
 ✅ **All data on external drive** - Hard drive cleaned and freed of data files
 
----
+##
 
 ## How to Monitor/Access Results
 
 **View processing log on external drive:**
+
 ```bash
-tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
+
+```text
 ```
 
 **Check results when complete:**
+
 ```bash
-cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
+```text
+```text
 ```
 
 **View downloaded poetry:**
+
 ```bash
-ls -lh "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"
+
+```text
 ```
 
----
+##
 
 ## Running Additional Processing
 
 To download more poetry collections or re-run processing in the future:
 
 **Option 1: Use the shell script (recommended)**
+
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-./run_gutenberg_learning.sh
+```text
+```text
 ```
 
 **Option 2: Run Python directly**
+
 ```bash
+
 cd /Users/taurinrobinson/saoriverse-console
-nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py > /Volumes/My Passport\ for\ Mac/saoriverse_data/gutenberg_learning.log 2>&1 &
+
+```text
 ```
 
 All outputs will automatically save to the external drive!
@@ -189,26 +215,29 @@ All outputs will automatically save to the external drive!
    - Include prose (novels, essays) for broader language patterns
    - Monitor external drive space (currently 458 GB available)
 
----
+##
 
 ## Technical Details
 
 ### Files Modified/Created
+
 - ✅ `gutenberg_fetcher.py` - NEW (210 lines)
 - ✅ `bulk_text_processor.py` - NEW (300 lines)
 - ✅ `run_gutenberg_learning.sh` - NEW
 - Committed to GitHub (commit 1233d41)
 
 ### Dependencies
+
 - `requests` - HTTP library for downloading (installed)
 - Existing: `hybrid_learner_v2.py`, `poetry_signal_extractor.py`, `signal_parser.py`
 
 ### Performance
+
 - Downloads: ~2 seconds per book
 - Processing: ~10-20ms per 500-word chunk
 - Total estimated time: 10-20 minutes for all 10 collections
 
----
+##
 
 ## System Architecture
 
@@ -238,19 +267,19 @@ Project Gutenberg API
    └─ learned_lexicon.json
 ```
 
----
+##
 
 ## Key Innovations
 
-1. **Automated Bulk Learning** - No manual intervention needed
-2. **Semantic Chunking** - Preserves context by respecting sentence boundaries
-3. **Multi-Signal Extraction** - Captures 8 different emotional dimensions
-4. **Dual Lexicon System** - Personal + shared learning
-5. **Quality Scoring** - Tracks exchange quality for training value
-6. **Metadata Tracking** - Records source, confidence, phrase_length for each entry
+1. **Automated Bulk Learning** - No manual intervention needed 2. **Semantic Chunking** - Preserves
+context by respecting sentence boundaries 3. **Multi-Signal Extraction** - Captures 8 different
+emotional dimensions 4. **Dual Lexicon System** - Personal + shared learning 5. **Quality Scoring**
 
----
+- Tracks exchange quality for training value 6. **Metadata Tracking** - Records source, confidence,
+phrase_length for each entry
 
----
+##
+
+##
 
 **Status**: 🟢 COMPLETED | All data on external drive | Hard drive cleaned ✅

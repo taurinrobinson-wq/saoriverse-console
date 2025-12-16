@@ -106,6 +106,7 @@ enhancements.render_performance_metrics(latency_ms=250, confidence=0.95)
 ### In `voice_interface.py` or main chat loop
 
 ```python
+
 # At top of file
 from spoken_interface.performance_profiler import PerformanceProfiler
 from spoken_interface.session_logger import SessionLogger
@@ -123,12 +124,12 @@ def process_voice_input(audio_bytes):
     if not is_valid:
         show_error(error)
         return
-    
+
     # STT with profiling
     start_time = time.time()
     transcript = profiler.measure("stt", transcribe_audio, audio_bytes)
     latency = (time.time() - start_time) * 1000
-    
+
     # Validate transcription
     is_valid, error = enhancements.handle_transcription_edge_cases(
         transcript, confidence=conf_score
@@ -136,21 +137,21 @@ def process_voice_input(audio_bytes):
     if not is_valid:
         show_error(error)
         return
-    
+
     # Log user message
     logger.log_user_message(
         transcript,
         confidence=conf_score,
         latency_ms=int(latency)
     )
-    
+
     return transcript
 
 def generate_voice_response(response_text, emotional_state):
     # Use advanced prosody for emotional responses
     if emotional_state.get("tone") in ["excited", "sad", "empathetic"]:
         from spoken_interface.advanced_prosody import AdvancedProsodyPlanner
-        
+
         planner = AdvancedProsodyPlanner()
         prosody = planner.plan_advanced_prosody(
             text=response_text,
@@ -162,7 +163,7 @@ def generate_voice_response(response_text, emotional_state):
         # Pass prosody to TTS
     else:
         prosody = None
-    
+
     # TTS with profiling
     start_time = time.time()
     audio = profiler.measure(
@@ -172,30 +173,31 @@ def generate_voice_response(response_text, emotional_state):
         prosody
     )
     latency = (time.time() - start_time) * 1000
-    
+
     # Log assistant message
     logger.log_assistant_message(
         response_text,
         emotional_state=emotional_state,
         latency_ms=int(latency)
     )
-    
+
     # Display metrics
     enhancements.render_performance_metrics(
         latency_ms=int(latency),
         confidence=0.95
     )
-    
+
     return audio
 ```
 
 ### In Streamlit UI (`voice_ui.py`)
 
 ```python
+
 # Add to sidebar
 with st.sidebar:
     st.title("Performance & Metrics")
-    
+
     # Show glyph visualization
     if st.session_state.get("emotional_history"):
         ui_enhancements.render_glyph_visualization(
@@ -206,7 +208,7 @@ with st.sidebar:
             },
             emotional_history=st.session_state.get("emotional_history", [])
         )
-    
+
     # Show session summary
     if st.button("Export Session"):
         session_path = logger.save_session()
@@ -217,9 +219,9 @@ with st.sidebar:
 
 ### High Latency
 
-1. Check `profiler.get_summary()` for bottleneck operations
-2. Recommend faster model: `ModelPerformanceBenchmark.get_whisper_recommendation(target_latency)`
-3. Profile individual functions with `profiler.measure()`
+1. Check `profiler.get_summary()` for bottleneck operations 2. Recommend faster model:
+`ModelPerformanceBenchmark.get_whisper_recommendation(target_latency)` 3. Profile individual
+functions with `profiler.measure()`
 
 ### Poor Edge Case Detection
 
@@ -230,15 +232,14 @@ with st.sidebar:
 
 ### Session Logs Not Saving
 
-1. Verify `save_dir` exists: `Path(save_dir).mkdir(parents=True, exist_ok=True)`
-2. Check disk space and permissions
-3. Inspect `logger.events` list (should have messages)
+1. Verify `save_dir` exists: `Path(save_dir).mkdir(parents=True, exist_ok=True)` 2. Check disk space
+and permissions 3. Inspect `logger.events` list (should have messages)
 
 ### Prosody Not Applied
 
-1. Verify `plan.pitch_contour` and `plan.energy_contour` are populated
-2. Check TTS system accepts prosody directives format
-3. Log prosody plan: `logger.log_assistant_message(..., prosody_plan=plan.__dict__)`
+1. Verify `plan.pitch_contour` and `plan.energy_contour` are populated 2. Check TTS system accepts
+prosody directives format 3. Log prosody plan: `logger.log_assistant_message(...,
+prosody_plan=plan.__dict__)`
 
 ## Configuration
 
@@ -290,16 +291,12 @@ if config["performance_profiling"]["enabled"]:
 
 ## Next Steps
 
-1. ✅ Understand each module (this guide)
-2. [ ] Integrate performance_profiler into your pipeline
-3. [ ] Enable advanced_prosody for emotional responses
-4. [ ] Add session_logger to chat flow
-5. [ ] Display VoiceUIEnhancements in Streamlit UI
-6. [ ] Collect metrics and analyze patterns
-7. [ ] Conduct listening tests with advanced prosody
-8. [ ] Iterate based on user feedback
+1. ✅ Understand each module (this guide) 2. [ ] Integrate performance_profiler into your pipeline 3.
+[ ] Enable advanced_prosody for emotional responses 4. [ ] Add session_logger to chat flow 5. [ ]
+Display VoiceUIEnhancements in Streamlit UI 6. [ ] Collect metrics and analyze patterns 7. [ ]
+Conduct listening tests with advanced prosody 8. [ ] Iterate based on user feedback
 
----
+##
 
 For detailed module documentation, see:
 

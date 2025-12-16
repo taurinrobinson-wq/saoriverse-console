@@ -13,39 +13,44 @@ Quick steps
 
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
+```text
+```text
 ```
 
 2. Load safe defaults
 
 ```bash
-cp .env.template .env  # Load safe defaults for local-only mode
+
+```text
 ```
 
 3. (Optional) Install Python deps
 
 ```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt      # runtime deps
-pip install -r requirements-dev.txt  # dev/test deps
+python -m pip install --upgrade pip pip install -r requirements.txt      # runtime deps
+```text
+```text
 ```
 
 4. Run the enrichment pipeline (example)
 
 ```bash
-python3 enrich_runner.py
+
+```text
 ```
 
 5. View logs
 
 ```bash
-tail -f logs/enrich.log
+```text
+```text
 ```
 
 6. Run tests
 
 ```bash
-pytest -q
+
+```text
 ```
 
 Makefile (quick shortcuts)
@@ -53,11 +58,10 @@ Makefile (quick shortcuts)
 You can use the included `Makefile` to run common developer rituals:
 
 ```bash
-make env        # Load safe defaults
-make install    # Create virtualenv and install deps
-make enrich     # Run the enrichment pipeline
-make test       # Run tests
-make logs       # View recent enrichment logs
+make env        # Load safe defaults make install    # Create virtualenv and install deps make
+enrich     # Run the enrichment pipeline make test       # Run tests
+```text
+```text
 ```
 
 Processing modes
@@ -66,14 +70,14 @@ Processing modes
 - `hybrid`, Enables remote AI (OpenAI, Supabase hybrid processors).
 - `premium`, Optional tier for advanced generation tasks.
 
-Opt-in for remote AI
---------------------
+## Opt-in for remote AI
 
 To enable remote AI calls for testing or trusted environments:
 
 ```bash
-export PROCESSING_MODE=hybrid
-export ALLOW_REMOTE_AI=1
+
+export PROCESSING_MODE=hybrid export ALLOW_REMOTE_AI=1
+
 ```
 
 CI & guard enforcement

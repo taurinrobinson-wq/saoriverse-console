@@ -1,6 +1,8 @@
 # 🧪 VELΩNIX Emotional Reaction Engine
 
-The VELΩNIX (Velonix) system is an emotional alchemy engine that models how emotional states combine and transform through catalytic processes. It implements a precise system of emotional elements, reaction chains, and ritual prompts.
+The VELΩNIX (Velonix) system is an emotional alchemy engine that models how emotional states combine
+and transform through catalytic processes. It implements a precise system of emotional elements,
+reaction chains, and ritual prompts.
 
 ## Overview
 
@@ -46,33 +48,39 @@ Each element has:
 
 Reactions transform input elements into results:
 
+```text
 ```
-Longing + Grief → Tenderness
-"The ache of missing becomes the softness of cherishing"
 
-Rage + Forgiveness (catalyst: Resilience) → Presence
-"Anger dissolves when held in strength and forgiveness"
+Longing + Grief → Tenderness "The ache of missing becomes the softness of cherishing"
 
-Vulnerability + Acceptance → Joy
-"Courage to be seen becomes freedom to celebrate"
+Rage + Forgiveness (catalyst: Resilience) → Presence "Anger dissolves when held in strength and
+forgiveness"
+
+Vulnerability + Acceptance → Joy "Courage to be seen becomes freedom to celebrate"
+
 ```
+
+
 
 ## Usage
 
 ### Basic Usage
 
 ```python
+
 from emotional_os.glyphs.velonix_reaction_engine import get_velonix_engine
 
 engine = get_velonix_engine()
 
 # Execute a reaction
 reaction = engine.react(["Lg", "Gf"])
+
 # Result: Tenderness
 
 # With catalyst
 reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
-# Result: Presence
+
+```text
 ```
 
 ### Full Integration
@@ -109,18 +117,22 @@ archive.log_reaction(
     reaction_result=reaction,
     ritual_prompt=ritual,
     user_notes="I'm finding tenderness in my grief..."
-)
+```text
+```text
 ```
 
 ### Find Possible Reactions
 
 ```python
+
+
 # What reactions are possible from current state?
 current_elements = ["Lg", "Gf", "St"]
 possible = engine.find_possible_reactions(current_elements)
 
 for p in possible:
-    print(f"{p['inputs']} → {p['result'].name}")
+
+```text
 ```
 
 ### Streamlit Integration
@@ -129,7 +141,8 @@ for p in possible:
 from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 
 # In your Streamlit app
-render_velonix_interface()
+```text
+```text
 ```
 
 ## Architecture
@@ -144,6 +157,7 @@ render_velonix_interface()
 ### Class Structure
 
 ```
+
 VelonixReactionEngine
 ├── Elements Registry
 ├── Reaction Chains
@@ -163,7 +177,8 @@ RitualPromptSystem
 EmotionalArchive
 ├── Entry Logging
 ├── JSON Export
-└── Narrative Export
+
+```text
 ```
 
 ## Reaction Catalog
@@ -236,9 +251,11 @@ VELΩNIX provides:
 All reactions are automatically logged to create a "legacy capsule" of emotional transformations:
 
 ```python
+
 # Export archive
 archive_json = archive.export_as_json()
-narrative = archive.export_as_narrative()
+```text
+```text
 ```
 
 ## Demo
@@ -246,7 +263,8 @@ narrative = archive.export_as_narrative()
 Run the demo to see VELΩNIX in action:
 
 ```bash
-python3 emotional_os/glyphs/velonix_demo.py
+
+```text
 ```
 
 This runs:
@@ -265,33 +283,25 @@ This runs:
 ```python
 from emotional_os.glyphs.velonix_reaction_engine import EmotionalElement
 
-custom = EmotionalElement(
-    name="Serenity",
-    symbol="Sr",
-    valence="Tranquil",
-    reactivity="Soft-steady",
-    trace_role="Peace keeper",
-    relational_function="Calms turbulence",
-    tone="Golden Calm",
-    color_hex="#FFD700"
-)
+custom = EmotionalElement( name="Serenity", symbol="Sr", valence="Tranquil",
+reactivity="Soft-steady", trace_role="Peace keeper", relational_function="Calms turbulence",
+tone="Golden Calm", color_hex="#FFD700" )
 
-engine.add_custom_element(custom)
+```text
+```text
 ```
 
 ### Add Custom Reaction
 
 ```python
+
 from emotional_os.glyphs.velonix_reaction_engine import ReactionChain
 
-custom_reaction = ReactionChain(
-    inputs=["Jy", "St"],
-    catalyst=None,
-    result="Ac",
-    trace_outcome="Joy held in Stillness becomes wise Acceptance"
-)
+custom_reaction = ReactionChain( inputs=["Jy", "St"], catalyst=None, result="Ac", trace_outcome="Joy
+held in Stillness becomes wise Acceptance" )
 
 engine.add_custom_reaction(custom_reaction)
+
 ```
 
 ## Philosophy

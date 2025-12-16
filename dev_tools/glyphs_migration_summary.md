@@ -1,6 +1,8 @@
 # Glyphs Migration Summary
 
-This file summarizes the conservative cleanup, fragment detection, and CI fixes performed on the `chore/cleanup-telemetry-fragments` branch. It is intended as a brief migration note for reviewers and for future audits.
+This file summarizes the conservative cleanup, fragment detection, and CI fixes performed on the
+`chore/cleanup-telemetry-fragments` branch. It is intended as a brief migration note for reviewers
+and for future audits.
 
 ## What changed
 
@@ -30,9 +32,11 @@ This file summarizes the conservative cleanup, fragment detection, and CI fixes 
 
 ## How to review
 
-1. Inspect `dev_tools/lowest_integrity_sample.csv` and `dev_tools/cleanup_report.md` for problematic candidates.
-2. Optionally run `python3 dev_tools/cleanup_glyphs.py --source glyphs_rows.sql --dry-run --fragments` locally to regenerate `dev_tools/fragments_to_review.json` if you want a different threshold or additional samples.
-3. When satisfied, request an explicit upsert step (I will create a backup and run batched upserts using `SUPABASE_SERVICE_ROLE_KEY`).
+1. Inspect `dev_tools/lowest_integrity_sample.csv` and `dev_tools/cleanup_report.md` for problematic
+candidates. 2. Optionally run `python3 dev_tools/cleanup_glyphs.py --source glyphs_rows.sql
+--dry-run --fragments` locally to regenerate `dev_tools/fragments_to_review.json` if you want a
+different threshold or additional samples. 3. When satisfied, request an explicit upsert step (I
+will create a backup and run batched upserts using `SUPABASE_SERVICE_ROLE_KEY`).
 
 ## Next steps (recommended)
 
@@ -40,5 +44,6 @@ This file summarizes the conservative cleanup, fragment detection, and CI fixes 
 - Decide whether to adjust the fragment threshold or integrity rubric.
 - If approved, instruct me to create a Supabase backup and proceed with a safe, batched upsert.
 
----
+##
+
 Commit: chore/cleanup-telemetry-fragments — adds migration summary for PR context.

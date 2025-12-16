@@ -116,7 +116,7 @@ CREATE TABLE conversation_messages (
 Examples from `data/glyph_lexicon_rows.json`:
 
 - **Euphoric Yearning**: Joy, excitement, anticipation
-- **Recursive Ache**: Anxiety, worry, repetitive thoughts  
+- **Recursive Ache**: Anxiety, worry, repetitive thoughts
 - **Reverent Ache**: Respectful sadness, meaningful pain
 - **Contained Longing**: Restrained desire, patient waiting
 - **Ache of Recognition**: Understanding pain, insightful sadness
@@ -132,17 +132,25 @@ Examples from `data/glyph_lexicon_rows.json`:
 ### Required Environment Variables
 
 ```bash
+
+
+
 SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key  # Required for RLS bypass
+
 ```
 
 ### Streamlit Secrets
 
 ```toml
+
+
+
 [supabase]
 url = "your_supabase_url"
 service_role_key = "your_service_role_key"  # Primary
 key = "your_anon_key"  # Fallback
+
 ```
 
 ## Testing Results ✅

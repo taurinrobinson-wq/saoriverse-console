@@ -4,9 +4,9 @@
 
 ### 🎯 Start Here
 
-1. **This File** - Quick reference for Sprint 5
-2. **SPRINT5_INTEGRATION_GUIDE.md** - How to integrate modules (recommended first read)
-3. **SPRINT5_ENHANCEMENTS_SUMMARY.md** - Comprehensive reference (1,000+ lines)
+1. **This File** - Quick reference for Sprint 5 2. **SPRINT5_INTEGRATION_GUIDE.md** - How to
+integrate modules (recommended first read) 3. **SPRINT5_ENHANCEMENTS_SUMMARY.md** - Comprehensive
+reference (1,000+ lines)
 
 ### 📦 Source Code
 
@@ -16,7 +16,7 @@
 - `spoken_interface/voice_ui_enhancements.py` (431 lines) - UI & edge case handling
 - `spoken_interface/test_sprint5_enhancements.py` (326 lines) - Comprehensive test suite
 
----
+##
 
 ## 🚀 Quick Start (5 minutes)
 
@@ -63,7 +63,7 @@ is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
 is_valid, error = ui.handle_transcription_edge_cases(text, confidence)
 ```
 
----
+##
 
 ## 📊 Module Overview
 
@@ -74,7 +74,7 @@ is_valid, error = ui.handle_transcription_edge_cases(text, confidence)
 | `session_logger.py` | Log & analyze interactions | `SessionLogger` | `log_user_message()` |
 | `voice_ui_enhancements.py` | UI & edge cases | `VoiceUIEnhancements` | `handle_*_edge_cases()` |
 
----
+##
 
 ## 🔧 Integration Points
 
@@ -98,10 +98,10 @@ def on_user_input(audio_bytes, user_text, confidence):
     is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
     if not is_valid:
         return error
-    
+
     # Log
     logger.log_user_message(user_text, confidence=confidence)
-    
+
 def on_assistant_response(response_text, emotional_state):
     # Prosody
     if emotional_state.get("tone") in ["excited", "sad"]:
@@ -112,12 +112,12 @@ def on_assistant_response(response_text, emotional_state):
             attunement=emotional_state.get("attunement", 0.5),
             certainty=emotional_state.get("certainty", 0.5)
         )
-    
+
     # Log
     logger.log_assistant_message(response_text, emotional_state=emotional_state)
 ```
 
----
+##
 
 ## 📈 Testing
 
@@ -130,7 +130,7 @@ python -m pytest spoken_interface/test_sprint5_enhancements.py -v
 
 Result: ✅ **24/24 tests passing (100%)**
 
----
+##
 
 ## 💾 Key Features
 
@@ -164,7 +164,7 @@ Result: ✅ **24/24 tests passing (100%)**
 - ✅ 10+ edge case types with error messages
 - ✅ Performance metrics display
 
----
+##
 
 ## 🎯 Common Tasks
 
@@ -183,6 +183,7 @@ planner = AdvancedProsodyPlanner()
 plan = planner.plan_advanced_prosody(
     text=response, voltage=v, tone=t, attunement=a, certainty=c
 )
+
 # Use plan.pitch_contour, emphasis_points, breath_style, etc.
 ```
 
@@ -205,7 +206,7 @@ if not is_valid:
     print(f"Error: {error}")
 ```
 
----
+##
 
 ## ⚡ Performance
 
@@ -217,7 +218,7 @@ if not is_valid:
 | `AdvancedProsodyPlanner.plan()` | 5-10ms | Negligible |
 | **Total** | **<50ms** | **Unnoticeable** |
 
----
+##
 
 ## 🐛 Troubleshooting
 
@@ -231,23 +232,19 @@ Expected: All 24 tests pass ✅
 
 ### Latency too high?
 
-1. Run `profiler.get_summary()` to find bottleneck
-2. Use `ModelPerformanceBenchmark.get_whisper_recommendation(ms)`
-3. Profile specific operations
+1. Run `profiler.get_summary()` to find bottleneck 2. Use
+`ModelPerformanceBenchmark.get_whisper_recommendation(ms)` 3. Profile specific operations
 
 ### Prosody not applied?
 
-1. Verify `plan.pitch_contour` is populated
-2. Check TTS accepts prosody directives
-3. Use `plan.__dict__` to inspect
+1. Verify `plan.pitch_contour` is populated 2. Check TTS accepts prosody directives 3. Use
+`plan.__dict__` to inspect
 
 ### Sessions not saving?
 
-1. Verify `save_dir` exists
-2. Check file permissions
-3. Inspect `logger.events` list
+1. Verify `save_dir` exists 2. Check file permissions 3. Inspect `logger.events` list
 
----
+##
 
 ## 📖 Learning Resources
 
@@ -271,7 +268,7 @@ Expected: All 24 tests pass ✅
 
 → See `SPRINT5_INTEGRATION_GUIDE.md`
 
----
+##
 
 ## ✅ Checklist
 
@@ -286,7 +283,7 @@ Expected: All 24 tests pass ✅
 - [ ] Monitor session logs
 - [ ] Iterate based on feedback
 
----
+##
 
 ## 📞 Support
 
@@ -297,7 +294,7 @@ For detailed documentation:
 - **Source Code**: See module docstrings
 - **Tests**: `test_sprint5_enhancements.py`
 
----
+##
 
 **Status**: ✅ Complete, Tested, Ready for Integration
 **Next Phase**: Integration & User Testing

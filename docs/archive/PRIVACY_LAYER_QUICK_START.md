@@ -11,12 +11,14 @@
 
 **Status:** Foundation complete, ready for testing
 
----
+##
 
 ## ⏳ Phase 2: Dependencies & Database (NEXT - 1 hour)
 
 ### Step 1: Install Dependencies (5 minutes)
+
 ```bash
+
 # Install cryptography for AES-256 encryption
 pip install cryptography
 
@@ -25,6 +27,7 @@ pip install pytest
 ```
 
 **Verify installation:**
+
 ```bash
 python -c "from cryptography.fernet import Fernet; print('Cryptography installed ✓')"
 ```
@@ -60,7 +63,7 @@ CREATE TABLE conversations_encrypted (
     FOREIGN KEY (user_id_hashed) REFERENCES user_retention_preferences(user_id_hashed)
 );
 
-CREATE INDEX idx_conversations_user_expiration 
+CREATE INDEX idx_conversations_user_expiration
 ON conversations_encrypted(user_id_hashed, expires_at);
 
 -- 3. Encrypted daily dream summaries
@@ -75,7 +78,7 @@ CREATE TABLE dream_summaries (
     FOREIGN KEY (user_id_hashed) REFERENCES user_retention_preferences(user_id_hashed)
 );
 
-CREATE INDEX idx_dream_summaries_user_date 
+CREATE INDEX idx_dream_summaries_user_date
 ON dream_summaries(user_id_hashed, date);
 
 -- 4. Audit log for compliance
@@ -88,7 +91,7 @@ CREATE TABLE audit_log_privacy (
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX idx_audit_user_action 
+CREATE INDEX idx_audit_user_action
 ON audit_log_privacy(user_id_hashed, action);
 
 -- 5. Daily dream batch (staging, temporary)
@@ -103,17 +106,26 @@ CREATE TABLE daily_dream_batch (
 ```
 
 **Verify tables created:**
+
 ```bash
+
 # In Supabase console, check that all 5 tables exist
+
 # - user_retention_preferences
+
 # - conversations_encrypted
+
 # - dream_summaries
+
 # - audit_log_privacy
+
 # - daily_dream_batch
 ```
 
 ### Step 3: Run Encryption Tests (15 minutes)
+
 ```bash
+
 # Test the EncryptionManager
 pytest test_privacy_layer.py::TestEncryptionManager -v
 
@@ -121,18 +133,21 @@ pytest test_privacy_layer.py::TestEncryptionManager -v
 ```
 
 **If tests fail:**
+
 - Verify cryptography installed: `pip install cryptography --upgrade`
 - Check Python version: `python --version` (requires 3.8+)
 
 ### Step 4: Run Dream Engine Tests (15 minutes)
+
 ```bash
+
 # Test the DreamEngine
 pytest test_privacy_layer.py::TestDreamEngine -v
 
 # Expected output: 5 tests passed
 ```
 
----
+##
 
 ## ⏳ Phase 3: Signal Parser Integration (2-3 hours)
 
@@ -141,6 +156,7 @@ pytest test_privacy_layer.py::TestDreamEngine -v
 **File:** `signal_parser_integration.py`
 
 **Add this class:**
+
 ```python
 from emotional_os.privacy.encryption_manager import EncryptionManager
 
@@ -148,18 +164,18 @@ class UserAuthenticationManager:
     def __init__(self, db_connection):
         self.db = db_connection
         self.encryption = EncryptionManager()
-    
+
     def login_user(self, user_id: str, password: str) -> dict:
         """
         Login and decrypt user profile + conversations.
         """
         # Derive encryption key
         key = self.encryption.derive_key_from_password(user_id, password)
-        
+
         # Load and decrypt user profile
         # Load and decrypt recent conversations
         # Load dream summaries
-        
+
         return {
             'success': True,
             'user_profile': {...},
@@ -176,6 +192,7 @@ class UserAuthenticationManager:
 **File:** `signal_parser_integration.py`
 
 **Add this class:**
+
 ```python
 class ConversationStorageManager:
     def store_conversation(
@@ -193,7 +210,7 @@ class ConversationStorageManager:
         # Store to conversations_encrypted with expiration
         # Add to daily_dream_batch for end-of-day processing
         # Audit log
-        
+
         return True
 ```
 
@@ -202,15 +219,16 @@ class ConversationStorageManager:
 ### Step 3: Test Integration (30 minutes)
 
 ```python
+
 # test_integration.py
 def test_login_and_store():
     manager = UserAuthenticationManager(db)
-    
+
     # 1. User logs in
     login = manager.login_user("taurin@example.com", "password123")
     assert login['success'] == True
     assert login['greeting'].startswith("Welcome back")
-    
+
     # 2. Store conversation
     storage = ConversationStorageManager(db, encryption)
     stored = storage.store_conversation(
@@ -220,13 +238,13 @@ def test_login_and_store():
         conversation_data={...}
     )
     assert stored == True
-    
+
     # 3. Verify it's encrypted in DB
     # Query DB directly, verify encrypted_content is bytes
     # Can't read it without password
 ```
 
----
+##
 
 ## ⏳ Phase 4: Scheduled Tasks (1-2 hours)
 
@@ -258,7 +276,7 @@ def cleanup_expired_conversations():
     """Run daily. Delete conversations past retention date."""
     # DELETE FROM conversations_encrypted WHERE expires_at < NOW()
     # DELETE FROM dream_summaries WHERE expires_at < NOW()
-    
+
 def cleanup_deleted_users():
     """Run daily. Permanently delete after grace period."""
     # DELETE FROM conversations_encrypted WHERE user marked deleted 30+ days ago
@@ -267,6 +285,7 @@ def cleanup_deleted_users():
 ### Step 3: Set Up Scheduler
 
 **Option A: APScheduler (simple)**
+
 ```python
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -277,6 +296,7 @@ scheduler.start()
 ```
 
 **Option B: Celery (production)**
+
 ```python
 from celery import Celery
 
@@ -295,7 +315,7 @@ app.conf.beat_schedule = {
 }
 ```
 
----
+##
 
 ## ⏳ Phase 5: User API Endpoints (1-2 hours)
 
@@ -341,19 +361,21 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
     return [...]
 ```
 
----
+##
 
 ## ✅ Phase 6: Testing & Launch (2-3 hours)
 
 ### Manual End-to-End Test
 
 1. **User signs up**
+
    ```
    POST /api/auth/signup
    → user_id hashed, profile encrypted, retention pref stored
    ```
 
 2. **User logs in**
+
    ```
    POST /api/auth/login
    → profile decrypted, conversations loaded
@@ -361,6 +383,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 3. **User has conversation**
+
    ```
    POST /api/conversation
    → signals extracted, glyphs generated
@@ -369,12 +392,14 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 4. **Check encryption (Query DB directly)**
+
    ```sql
    SELECT encrypted_content FROM conversations_encrypted LIMIT 1;
    -- Returns: \x80236f...d4f (binary, unreadable)
    ```
 
 5. **End of day - Generate dream**
+
    ```
    TRIGGER: 3 AM scheduled task
    → retrieves daily_dream_batch
@@ -384,6 +409,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 6. **User browses history**
+
    ```
    GET /api/user/conversation-history
    → recent encrypted conversations (metadata)
@@ -391,6 +417,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 7. **User changes retention to 7 days**
+
    ```
    POST /api/user/retention-settings
    → new conversations expire in 7 days
@@ -398,6 +425,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 8. **User exports data**
+
    ```
    GET /api/user/data-export
    → download ZIP with encrypted conversations
@@ -405,6 +433,7 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 9. **User deletes account**
+
    ```
    DELETE /api/user/data-delete
    → marked for deletion, grace period 30 days
@@ -412,7 +441,9 @@ async def get_history(user_id_hashed: str = Depends(get_current_user)):
    ```
 
 ### Load Testing
+
 ```bash
+
 # Test encryption/decryption performance
 pytest test_privacy_layer.py::TestPerformance -v
 
@@ -420,6 +451,7 @@ pytest test_privacy_layer.py::TestPerformance -v
 ```
 
 ### Security Review
+
 - [ ] Review encryption_manager.py for key material leaks
 - [ ] Verify keys never written to logs/disk
 - [ ] Check HTTPS everywhere
@@ -428,6 +460,7 @@ pytest test_privacy_layer.py::TestPerformance -v
 - [ ] Review database access controls
 
 ### Deploy to Staging
+
 ```bash
 git add emotional_os/privacy/
 git add *.md
@@ -439,6 +472,7 @@ git push origin privacy-layer
 ```
 
 ### User Acceptance Testing
+
 - [ ] Test with real users (staging)
 - [ ] Verify personalization working ("Welcome back, [name]!")
 - [ ] Verify retention settings working
@@ -447,13 +481,14 @@ git push origin privacy-layer
 - [ ] Gather feedback
 
 ### Deploy to Production
+
 - [ ] Run migration on production DB
 - [ ] Update API with new endpoints
 - [ ] Start scheduled task runner
 - [ ] Monitor encryption/decryption performance
 - [ ] Monitor audit logs
 
----
+##
 
 ## 📊 Implementation Metrics
 
@@ -466,7 +501,7 @@ git push origin privacy-layer
 | Test Suite | ✅ | 400 | 15 |
 | **Total** | | **1850** | **26** |
 
----
+##
 
 ## 📋 Pre-Launch Verification
 
@@ -490,7 +525,7 @@ Before going live, verify:
 - [ ] GDPR documentation updated
 - [ ] Privacy policy updated
 
----
+##
 
 ## 🎯 Success Criteria
 
@@ -503,36 +538,46 @@ Before going live, verify:
 ✅ **Security:** No plaintext in database, keys never stored
 ✅ **Performance:** Encryption/decryption <100ms
 
----
+##
 
 ## 💡 Tips & Troubleshooting
 
 ### Issue: "ImportError: No module named cryptography"
+
 **Solution:**
+
 ```bash
 pip install cryptography
 python -c "from cryptography.fernet import Fernet; print('OK')"
 ```
 
 ### Issue: Database constraints failing
+
 **Solution:** Ensure user_retention_preferences rows exist before inserting conversations
+
 ```sql
 INSERT INTO user_retention_preferences (user_id_hashed)
 VALUES (?) ON CONFLICT DO NOTHING;
 ```
 
 ### Issue: Decrypt failing after password change
+
 **Solution:** Intentional. New password = new key = old data inaccessible. User should export before password reset.
 
 ### Issue: Daily dreams not generating
+
 **Solution:** Check scheduled task is running
+
 ```python
+
 # Verify scheduler is active
 scheduler.print_jobs()
 ```
 
 ### Issue: Audit logs not showing
+
 **Solution:** Ensure audit_log calls aren't catching exceptions
+
 ```python
 try:
     self._audit_log(...)
@@ -540,6 +585,6 @@ except Exception as e:
     logger.error(f"Audit log failed: {e}")  # Don't silently fail
 ```
 
----
+##
 
 **Ready to proceed? Start with Phase 2: Install dependencies!**

@@ -58,7 +58,7 @@
 - Victorian Poems (ID: 17190)
 - Romantic Poems (ID: 17191)
 
----
+##
 
 ## Example Processing Output
 
@@ -137,7 +137,7 @@
 }
 ```
 
----
+##
 
 ## Sample Generated Glyphs
 
@@ -269,7 +269,7 @@
 }
 ```
 
----
+##
 
 ## Emotional Dimension Discoveries
 
@@ -279,7 +279,7 @@
 1. Love (lov*)
    - Keywords: heart, soul, beloved, forever, passion, desire
    - Frequency: 4,200 | Coverage: 95% of poetry
-   
+
 2. Joy (joy*, happina*, delight*)
    - Keywords: bright, glad, festive, merry, celebrate
    - Frequency: 2,900 | Coverage: 78% of poetry
@@ -316,7 +316,7 @@
    - Keywords: yesterday, used_to, once, past, memory, echo
    - Frequency: 890 | Coverage: 35% of poetry
    - Discovered in: Dickinson, Keats, Wordsworth
-   
+
 10. Wonder / Awe (wonder*, amazement*, astonishment*, miracl*)
     - Keywords: mystery, marvel, strange, curious, enchant
     - Frequency: 756 | Coverage: 31% of poetry
@@ -355,7 +355,7 @@
 17. (and 8+ more discovered during full processing)
 ```
 
----
+##
 
 ## Sample Lexicon Entry
 
@@ -400,7 +400,7 @@
       "petal", "garden", "spring", "renewal", "becoming", "transformed", "awakening"
     ],
     "related_dimensions": [
-      "intimacy", "sensuality", "nature", "transformation", 
+      "intimacy", "sensuality", "nature", "transformation",
       "vulnerability", "transcendence", "nostalgia"  // NEW
     ],
     "discovered_in_poets": [
@@ -426,7 +426,7 @@
 }
 ```
 
----
+##
 
 ## Performance Benchmarks
 
@@ -457,7 +457,7 @@ I/O Overhead: ~8% (lexicon write operations)
 Network: ~2 Mbps (during download phase only)
 ```
 
----
+##
 
 ## Integration Example
 
@@ -492,7 +492,7 @@ print(f"After integration: {len(lexicon.glyphs)} glyphs")
 print(f"New glyphs added: {len(poetry_glyphs) + len(extracted_glyphs)}")
 ```
 
----
+##
 
 ## Real Data Statistics
 
@@ -552,8 +552,8 @@ TOTAL PIPELINE RESULTS:
 └─ Success rate: 99.8%
 ```
 
----
+##
 
-**Examples Version**: 1.0  
-**Last Updated**: 2025-11-05  
+**Examples Version**: 1.0
+**Last Updated**: 2025-11-05
 **Data Accuracy**: Based on actual poetry content from Project Gutenberg

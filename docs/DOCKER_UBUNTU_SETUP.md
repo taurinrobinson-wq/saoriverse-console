@@ -1,14 +1,16 @@
 # Docker Setup & Deploy Guide for Ubuntu (DigitalOcean 161.35.227.49)
 
-This guide walks you through setting up Docker on your fresh Ubuntu installation and deploying the FirstPerson web build to your DigitalOcean droplet.
+This guide walks you through setting up Docker on your fresh Ubuntu installation and deploying the
+FirstPerson web build to your DigitalOcean droplet.
 
----
+##
 
 ## Part 1: Install Docker Desktop on Ubuntu
 
 ### Step 1a: Install Docker Engine (Foundation)
 
 ```bash
+
 # Update package index
 sudo apt update
 sudo apt upgrade -y
@@ -34,12 +36,15 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Verify installation
-docker --version
+```text
+```text
 ```
 
 ### Step 1b: Post-Installation Setup (Optional but Recommended)
 
 ```bash
+
+
 # Allow running docker without sudo
 sudo usermod -aG docker $USER
 
@@ -47,12 +52,14 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Verify you can run docker without sudo
-docker ps
+
+```text
 ```
 
 ### Step 1c: Start Docker Service
 
 ```bash
+
 # Enable Docker to start on boot
 sudo systemctl enable docker
 
@@ -60,26 +67,30 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # Check status
-sudo systemctl status docker
+```text
+```text
 ```
 
----
+##
 
 ## Part 2: Install Docker Compose (if not included)
 
 ```bash
+
+
 # Check if docker-compose already installed
 docker compose version
 
 # If not, install it
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname
+-s)-$(uname -m)" -o /usr/local/bin/docker-compose sudo chmod +x /usr/local/bin/docker-compose
 
 # Verify
-docker compose version
+
+```text
 ```
 
----
+##
 
 ## Part 3: Prepare Your Project for Docker
 
@@ -118,12 +129,14 @@ RUN mkdir -p /app/data_local
 EXPOSE 8000
 
 # Run FastAPI server
-CMD ["uvicorn", "core.start:app", "--host", "0.0.0.0", "--port", "8000"]
+```text
+```text
 ```
 
 #### 3b. Create `Dockerfile.frontend` (Frontend - React/Expo)
 
 ```dockerfile
+
 FROM node:18-alpine
 
 WORKDIR /app
@@ -143,7 +156,8 @@ COPY firstperson/*.json ./
 EXPOSE 3000
 
 # Start Expo
-CMD ["npx", "expo", "start", "--web"]
+
+```bash
 ```
 
 #### 3c. Create `docker-compose.yml`
@@ -151,108 +165,90 @@ CMD ["npx", "expo", "start", "--web"]
 ```yaml
 version: '3.8'
 
-services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
+services: backend: build: context: . dockerfile: Dockerfile ports:
       - "8000:8000"
-    environment:
+environment:
       - PYTHONUNBUFFERED=1
       - PORT=8000
-    volumes:
+volumes:
       - ./data:/app/data_local
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
+healthcheck: test: ["CMD", "curl", "-f", "http://localhost:8000/health"] interval: 30s timeout: 10s
+retries: 3 start_period: 40s networks:
       - saoriverse
 
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-    ports:
+frontend: build: context: . dockerfile: Dockerfile.frontend ports:
       - "3000:3000"
-    environment:
+environment:
       - REACT_APP_SAOYNX_API_URL=http://backend:8000
-    depends_on:
+depends_on:
       - backend
-    networks:
+networks:
       - saoriverse
 
-  nginx:
-    image: nginx:alpine
-    ports:
+nginx: image: nginx:alpine ports:
       - "80:80"
       - "443:443"
-    volumes:
+volumes:
       - ./deploy/nginx.conf:/etc/nginx/nginx.conf:ro
       # - ./certs:/etc/nginx/certs:ro  # uncomment when using SSL
-    depends_on:
+depends_on:
       - backend
       - frontend
-    networks:
+networks:
       - saoriverse
 
-networks:
-  saoriverse:
-    driver: bridge
+networks: saoriverse:
+```text
+```text
 ```
 
 #### 3d. Create `.dockerignore`
 
 ```
-.git
-.gitignore
-.venv
-venv
-__pycache__
+
+.git .gitignore .venv venv __pycache__
 *.pyc
-.pytest_cache
-.mypy_cache
-node_modules
-.env.local
-.DS_Store
-.idea
-.vscode
+.pytest_cache .mypy_cache node_modules .env.local .DS_Store .idea
+
+```text
 ```
 
----
+##
 
 ## Part 4: Deploy to Your DigitalOcean Droplet (161.35.227.49)
 
 ### 4a: Clone Your Repository on the Droplet
 
 ```bash
+
 # SSH into your droplet
 ssh root@161.35.227.49
 
 # Clone the repository
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
+```text
+```text
 ```
 
 ### 4b: Configure Environment Variables
 
 ```bash
+
+
 # Create .env file from template
 cp .env.example .env
 
 # Edit with your settings
-nano .env
+
+```sql
 ```
 
 Add/update these variables:
+
 ```env
+
 # API Configuration
-API_HOST=0.0.0.0
-API_PORT=8000
-API_URL=http://161.35.227.49:8000
+API_HOST=0.0.0.0 API_PORT=8000 API_URL=http://161.35.227.49:8000
 
 # Frontend Configuration
 FRONTEND_URL=http://161.35.227.49
@@ -260,12 +256,15 @@ FRONTEND_URL=http://161.35.227.49
 # Database (if needed)
 DATABASE_URL=sqlite:///./data_local/app.db
 
-# Other configs as needed from your .env.example
+```text
+```text
 ```
 
 ### 4c: Build and Start Containers
 
 ```bash
+
+
 # Build images
 docker compose build
 
@@ -282,12 +281,14 @@ docker compose logs -f
 docker compose logs -f backend
 
 # View frontend logs only
-docker compose logs -f frontend
+
+```text
 ```
 
 ### 4d: Verify Deployment
 
 ```bash
+
 # Test backend API
 curl http://161.35.227.49:8000/health
 
@@ -295,16 +296,18 @@ curl http://161.35.227.49:8000/health
 curl http://161.35.227.49:3000
 
 # Check container health
-docker compose ps
+```text
+```text
 ```
 
----
+##
 
 ## Part 5: Nginx Configuration (Reverse Proxy)
 
 Update `deploy/nginx.conf` to route traffic:
 
 ```nginx
+
 upstream backend {
     server backend:8000;
 }
@@ -336,14 +339,16 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
     }
-}
+
+```text
 ```
 
----
+##
 
 ## Part 6: Common Docker Commands
 
 ```bash
+
 # View all containers
 docker ps -a
 
@@ -378,16 +383,19 @@ docker compose logs -f
 docker compose exec backend bash
 
 # Check resource usage
-docker stats
+```text
+```text
 ```
 
----
+##
 
 ## Part 7: Maintenance & Updates
 
 ### Update Application Code
 
 ```bash
+
+
 # Pull latest changes
 git pull origin main
 
@@ -395,84 +403,101 @@ git pull origin main
 docker compose build
 
 # Restart with new code
-docker compose up -d
+
+```text
 ```
 
 ### View Application Logs
 
 ```bash
+
 # All services
 docker compose logs -f
 
 # Last 100 lines
-docker compose logs --tail 100
+```text
+```text
 ```
 
 ### Backup Data
 
 ```bash
+
+
 # Backup SQLite database
 docker compose exec backend cp data_local/app.db data_local/app.db.backup
 
 # Or tar everything
 docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
-docker cp <container_id>:/tmp/backup.tar.gz ./backup.tar.gz
+
+```text
 ```
 
----
+##
 
 ## Part 8: Troubleshooting
 
 ### Container won't start
 
 ```bash
+
 # Check logs
 docker compose logs backend
 
 # Rebuild and restart
 docker compose down
-docker compose up --build
+```text
+```text
 ```
 
 ### Port conflicts
 
 ```bash
+
+
 # Check what's using port 8000
 sudo netstat -tlnp | grep 8000
 
 # Kill process (if needed)
-sudo kill -9 <PID>
+
+```text
 ```
 
 ### Network issues
 
 ```bash
+
 # Check network
 docker network ls
 docker network inspect saoriverse-console_saoriverse
 
 # Rebuild network
 docker compose down
-docker compose up -d --remove-orphans
+```text
+```text
 ```
 
 ### Out of disk space
 
 ```bash
+
+
 # Check disk usage
 docker system df
 
 # Clean up unused images/containers/networks
-docker system prune -a
+
+```text
 ```
 
----
+##
 
 ## Part 9: SSL/HTTPS Setup (Optional)
 
 ### Using Let's Encrypt with Certbot
 
 ```bash
+
 # Install Certbot
 sudo apt install -y certbot python3-certbot-nginx
 
@@ -480,10 +505,11 @@ sudo apt install -y certbot python3-certbot-nginx
 sudo certbot certonly --standalone -d 161.35.227.49
 
 # Update nginx.conf with SSL
+
 # Then: docker compose restart nginx
 ```
 
----
+##
 
 ## Quick Reference Summary
 
@@ -498,7 +524,7 @@ sudo certbot certonly --standalone -d 161.35.227.49
 | Test API | `curl http://161.35.227.49:8000/health` |
 | Test frontend | `curl http://161.35.227.49:3000` |
 
----
+##
 
 ## Support & Next Steps
 

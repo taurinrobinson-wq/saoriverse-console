@@ -1,18 +1,22 @@
 # Emotional OS - Consolidated Glyph System
 
 ## Overview
-The Emotional OS now uses a carefully curated collection of 45 core emotional glyphs, organized across 6 gates for balanced emotional processing.
+
+The Emotional OS now uses a carefully curated collection of 45 core emotional glyphs, organized
+across 6 gates for balanced emotional processing.
 
 ## Gate Distribution
 
 ### Gate 2 - Containment (5 glyphs, 11.1%)
+
 - **Contained Longing**: Ache wrapped in care
-- **Sacred Boundary**: Architecture of care  
+- **Sacred Boundary**: Architecture of care
 - **Tender Shielding**: Protective boundaries from grief
 - **Stillness Shield**: Breathing boundaries that create space
 - **Contained Joy**: Happiness held without dimming
 
-### Gate 4 - Longing & Grief (5 glyphs, 11.1%)  
+### Gate 4 - Longing & Grief (5 glyphs, 11.1%)
+
 - **Recursive Ache**: Longing that loops and deepens
 - **Reverent Ache**: Ceremonial longing
 - **Spiral Ache**: Ache that spirals into insight
@@ -20,8 +24,9 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 - **Acheful Mourning**: Purposeful grief that remembers
 
 ### Gate 5 - Processing & Flow (13 glyphs, 28.9%)
+
 - **Ache in Equilibrium**: Stable longing without chaos
-- **Still Ache**: Quiet, dignified longing  
+- **Still Ache**: Quiet, dignified longing
 - **Euphoric Yearning**: Joyful anticipation
 - **Grief in Stillness**: Movement-less mourning
 - **Jubilant Mourning**: Celebratory goodbye
@@ -35,6 +40,7 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 - **Devotional Fulfillment**: Joy braided with purpose
 
 ### Gate 6 - Devotion & Insight (12 glyphs, 26.7%)
+
 - **Devotional Ache**: Spiritual longing as prayer
 - **Exalted Mourning**: Sacred grief as vow
 - **Joyful Devotion**: Purpose-driven happiness
@@ -49,6 +55,7 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 - **Recursive Clarity**: Deepening knowledge
 
 ### Gate 9 - Recognition (6 glyphs, 13.3%)
+
 - **Ache of Recognition**: Being seen in longing
 - **Grief of Recognition**: Being met in mourning
 - **Joy of Recognition**: Being celebrated in truth
@@ -57,6 +64,7 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 - **Boundary of Recognition**: Being seen within limits
 
 ### Gate 10 - Collapse & Ceremony (4 glyphs, 8.9%)
+
 - **Ceremonial Collapse**: Sacred ritualized fall
 - **Ritual Collapse**: Breakdown as prayer
 - **Sacred Surrender**: Resistance becoming reverence
@@ -64,15 +72,15 @@ The Emotional OS now uses a carefully curated collection of 45 core emotional gl
 
 ## Benefits of Consolidation
 
-1. **Balanced Distribution**: No single gate dominates (previously Gate 5 had 76.5%)
-2. **Quality Focus**: Only genuine emotional states, artifacts removed
-3. **Manageable Scale**: 45 glyphs vs 1,125 (96% reduction)
-4. **Faster Processing**: Smaller database improves response times
-5. **Better Selection**: Higher quality glyphs mean more accurate emotional matching
+1. **Balanced Distribution**: No single gate dominates (previously Gate 5 had 76.5%) 2. **Quality
+Focus**: Only genuine emotional states, artifacts removed 3. **Manageable Scale**: 45 glyphs vs
+1,125 (96% reduction) 4. **Faster Processing**: Smaller database improves response times 5. **Better
+Selection**: Higher quality glyphs mean more accurate emotional matching
 
 ## Usage
 
-The system automatically selects appropriate glyphs based on emotional signals detected in user input. With the consolidated database, users experience:
+The system automatically selects appropriate glyphs based on emotional signals detected in user
+input. With the consolidated database, users experience:
 
 - More accurate emotional glyph selection
 - Faster response times

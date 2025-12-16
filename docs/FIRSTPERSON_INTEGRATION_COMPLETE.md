@@ -2,19 +2,22 @@
 
 ## 🎯 Mission Accomplished
 
-Your Velinor game is now **emotionally intelligent**. NPC responses adapt in real-time based on your emotional state through the integrated FirstPerson orchestrator.
+Your Velinor game is now **emotionally intelligent**. NPC responses adapt in real-time based on your
+emotional state through the integrated FirstPerson orchestrator.
 
 ## 📋 What Was Integrated
 
 ### Core Changes
 
 **1. Velinor App (`velinor_app.py`)**
+
 - Added FirstPerson and AffectParser imports
 - Initialize FirstPerson orchestrator at app startup
 - Pass orchestrator to game engine
 - Automatic initialization on every new game
 
 **2. Game Orchestrator (`velinor/engine/orchestrator.py`)**
+
 - Enhanced `_summarize_player_intent()` to extract emotional analysis
 - New `_generate_emotionally_aware_response()` method
 - Updated `_generate_npc_dialogue()` to use emotional context
@@ -22,26 +25,26 @@ Your Velinor game is now **emotionally intelligent**. NPC responses adapt in rea
 
 ### Emotional Analysis Pipeline
 
+```text
 ```
-Player Input
-    ↓
-FirstPerson Orchestrator
+
+Player Input ↓ FirstPerson Orchestrator
     ├─ AffectParser: Extracts tone, valence, intensity
     ├─ Theme Extraction: Detects what they're talking about
     └─ ConversationMemory: Tracks turns, patterns, trajectory
-    ↓
-Game Engine Orchestrator
+↓ Game Engine Orchestrator
     ├─ Processes input through story system
     ├─ Applies game mechanics (dice, stats)
     └─ Passes emotional analysis to NPC response gen
-    ↓
-NPC Response Generator
+↓ NPC Response Generator
     ├─ Opening: Mirrors emotional tone
     ├─ Middle: Acknowledges theme + recurring patterns
     └─ Closing: Invites appropriate depth
-    ↓
-Chat Display (Light Theme)
+↓ Chat Display (Light Theme)
+
 ```
+
+
 
 ## 🧠 Emotional Analysis Components
 
@@ -72,46 +75,82 @@ Chat Display (Light Theme)
 ### Based on Emotional Tone
 
 **Your Input:** "I'm feeling overwhelmed by everything"
-```
-Analysis: { tone: 'heavy', valence: -0.8, intensity: 0.9 }
-NPC:      "I hear the weight in that. The gravity of what
-           you're carrying—I feel it too. What needs to be
-           said about it?"
+```text
+```text
 ```
 
-**Your Input:** "I'm curious about what comes next"
+Analysis: { tone: 'heavy', valence: -0.8, intensity: 0.9 } NPC:      "I hear the weight in that. The
+gravity of what you're carrying—I feel it too. What needs to be said about it?"
+
 ```
+
+
+
+
+**Your Input:** "I'm curious about what comes next"
+
+```text
+```
+
 Analysis: { tone: 'curious', valence: 0.3, intensity: 0.4 }
 NPC:      "Tell me more about that. I'm curious where that
            leading. What would you like to explore?"
+
 ```
+
+
 
 ### Based on Recurring Themes
 
 **Turn 1:** "I keep thinking about loss"
-```
-Analysis: { theme: 'grief', frequency: 1 }
-NPC:      "Loss shapes us in ways words can't reach..."
+```text
+```text
 ```
 
+Analysis: { theme: 'grief', frequency: 1 }
+NPC:      "Loss shapes us in ways words can't reach..."
+
+```
+
+
+
+
 **Turn 3:** "The grief is still with me"
+
+```text
 ```
-Analysis: { theme: 'grief', frequency: 2, is_recurring: true }
-NPC:      "I hear the weight in that. And I'm noticing grief
-           keeps coming back to you. That tells me something."
+
+Analysis: { theme: 'grief', frequency: 2, is_recurring: true } NPC:      "I hear the weight in that.
+And I'm noticing grief keeps coming back to you. That tells me something."
+
 ```
+
+
 
 ### Based on Emotional Trajectory
 
 **Turns 1-2:** Valence: -0.8 → -0.9 (worsening)
-```
-NPC:      "I'm noticing the weight increasing. What's happening?"
+```text
+```text
 ```
 
+NPC:      "I'm noticing the weight increasing. What's happening?"
+
+```
+
+
+
+
 **Turns 2-3:** Valence: -0.9 → -0.2 (improving)
+
+```text
 ```
+
 NPC:      "I'm also noticing a shift. What's helping?"
+
 ```
+
+
 
 ## 📊 Feature Matrix
 
@@ -131,18 +170,23 @@ NPC:      "I'm also noticing a shift. What's helping?"
 ## 🚀 How to Use It
 
 ### Launch the Game
+
 ```bash
-streamlit run velinor_app.py
+
+```text
 ```
 
 That's it! FirstPerson integration is automatic. Just play normally and notice how NPCs respond to your emotions.
 
 ### Validate the Integration
+
 ```bash
-python3 FIRSTPERSON_INTEGRATION_TEST.py
+```text
+```text
 ```
 
 All 5 tests should pass:
+
 - ✓ FirstPerson imports
 - ✓ Orchestrator initialization
 - ✓ Emotional analysis on inputs
@@ -210,11 +254,13 @@ All pushed to GitHub main branch ✅
 ## 🔒 Privacy & Security
 
 ✅ **No external calls required**
+
 - All emotional analysis happens locally
 - Conversation memory stored in session only
 - No data sent to servers (unless explicitly configured)
 
 ✅ **Optional cloud integration**
+
 - If you deploy with Streamlit Cloud, add secrets only if needed
 - Works perfectly offline
 
@@ -225,27 +271,25 @@ All pushed to GitHub main branch ✅
 **You:** "I've been thinking about everything that's changed"
 
 **FirstPerson Analysis:**
+
 ```
-{
-  emotional_tone: 'reflective',
-  detected_theme: 'general',
-  valence: -0.3,
-  intensity: 0.5,
-  memory_context: {
-    has_context: false,  // First turn
-    emotional_trend: 'stable'
-  }
-}
+
+{ emotional_tone: 'reflective', detected_theme: 'general', valence: -0.3, intensity: 0.5,
+memory_context: { has_context: false,  // First turn emotional_trend: 'stable' }
+
+```text
 ```
 
 **Keeper (NPC) Responds:**
-"There's something to sit with there. That deserves thought. Tell me more about what you've been reflecting on."
+"There's something to sit with there. That deserves thought. Tell me more about what you've been
+reflecting on."
 
----
+##
 
 **You:** "It's like I've lost parts of who I was"
 
 **FirstPerson Analysis:**
+
 ```
 {
   emotional_tone: 'heavy',
@@ -261,18 +305,22 @@ All pushed to GitHub main branch ✅
       'grief': {frequency: 1}
     }
   }
-}
+```text
+```text
 ```
 
 **Keeper Responds:**
-"I hear the weight in that. Loss shapes us in ways words sometimes can't reach. And I'm noticing the weight deepening. What do you need in this moment?"
+"I hear the weight in that. Loss shapes us in ways words sometimes can't reach. And I'm noticing the
+weight deepening. What do you need in this moment?"
 
----
+##
 
 **You:** "Maybe learning to carry it differently will help"
 
 **FirstPerson Analysis:**
+
 ```
+
 {
   emotional_tone: 'reflective',
   detected_theme: 'grief',
@@ -288,7 +336,8 @@ All pushed to GitHub main branch ✅
     },
     recurring_themes: ['grief']
   }
-}
+
+```text
 ```
 
 **Keeper Responds:**
@@ -297,6 +346,7 @@ All pushed to GitHub main branch ✅
 ## 🎯 Key Benefits
 
 ### For Players
+
 - NPC dialogue feels personalized and understanding
 - Emotions are acknowledged and reflected back
 - Recurring themes are recognized
@@ -304,6 +354,7 @@ All pushed to GitHub main branch ✅
 - Deeper immersion and emotional connection
 
 ### For Game Design
+
 - Template for emotionally-aware game dialogue
 - Pattern recognition in narrative games
 - Real-time player emotional tracking
@@ -311,6 +362,7 @@ All pushed to GitHub main branch ✅
 - Integration point for glyph system
 
 ### For Development
+
 - Clean separation: emotional analysis ↔ game logic
 - Graceful fallback if FirstPerson unavailable
 - Easy to extend with new themes/tones
@@ -331,18 +383,26 @@ All pushed to GitHub main branch ✅
 ## 🚀 Ready to Deploy
 
 ### Local Development
+
 ```bash
 streamlit run velinor_app.py
-# Game launches with FirstPerson integration active
+
+```text
+```text
 ```
 
 ### Validation
+
 ```bash
+
 python3 FIRSTPERSON_INTEGRATION_TEST.py
+
 # All 5 tests pass ✓
+
 ```
 
 ### Production
+
 - Streamlit Cloud: Works as-is (no config needed for basic)
 - Docker: `docker build -t velinor . && docker run -p 8501:8501 velinor`
 - FastAPI Backend: Available from merged main branch

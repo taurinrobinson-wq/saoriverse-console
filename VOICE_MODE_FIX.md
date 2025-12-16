@@ -3,32 +3,42 @@
 ## The Problem (Solved!)
 
 You were seeing:
+
+```text
 ```
+
 Voice recording unavailable - missing: faster-whisper, sounddevice
+
 ```
+
+
 
 **Root Cause:** The app was running with Python 3.13 instead of Python 3.12 where the audio packages are installed.
-
----
+##
 
 ## The Solution
 
 Use Python 3.12 to run the app. Choose one of these methods:
 
 ### Method 1: Command Line (Quickest)
+
 ```powershell
-py -3.12 -m streamlit run app.py
+
+```text
 ```
 
 ### Method 2: Use Launcher Script
+
 ```powershell
-.\run_app.ps1
+```text
+```text
 ```
 
 ### Method 3: VS Code Task
+
 Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
 
----
+##
 
 ## How to Verify It's Working
 
@@ -43,25 +53,25 @@ Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
    - It should transcribe successfully
 
 3. **Check Logs** - Should show:
+
    ```
    INFO:emotional_os.deploy.modules.nlp_init:TextBlob available: True
    INFO:emotional_os.deploy.modules.nlp_init:spaCy import successful
    INFO:emotional_os.deploy.modules.nlp_init:spaCy model 'en_core_web_sm' loaded
    ```
 
----
+##
 
 ## What Was Created
 
 New files to make this easier:
 
-1. **`run_app.bat`** - Windows batch script (double-click to run)
-2. **`run_app.ps1`** - PowerShell script
-3. **`.vscode/tasks.json`** - VS Code task configuration
-4. **`PYTHON_312_RUNTIME_GUIDE.md`** - Detailed setup guide
-5. **Enhanced diagnostics** in `app.py` sidebar
+1. **`run_app.bat`** - Windows batch script (double-click to run) 2. **`run_app.ps1`** - PowerShell
+script 3. **`.vscode/tasks.json`** - VS Code task configuration 4. **`PYTHON_312_RUNTIME_GUIDE.md`**
 
----
+- Detailed setup guide 5. **Enhanced diagnostics** in `app.py` sidebar
+
+##
 
 ## Technical Details
 
@@ -74,11 +84,13 @@ New files to make this easier:
 | **App diagnostics** | ✅ Updated | Shows which Python version running |
 | **Launcher scripts** | ✅ Created | Easy-to-use app starters |
 
----
+##
 
 ## Command Reference
 
 ```powershell
+
+
 # Run with Python 3.12 (main command)
 py -3.12 -m streamlit run app.py
 
@@ -92,38 +104,25 @@ py -3.12 -m pip list | grep -E "faster-whisper|sounddevice|pyttsx3"
 py -3.12 --version
 
 # Download spacy model (if needed)
-py -3.12 -m spacy download en_core_web_sm
+
+```text
 ```
 
----
+##
 
 ## How This Works
 
 ```
-Your Command:
-  py -3.12 -m streamlit run app.py
-        ↓
-Python Launcher (/py):
-  "Run Python 3.12 specifically"
-        ↓
-Python 3.12 Interpreter:
-  C:\Users\Admin\AppData\Local\Programs\Python\Python312\python.exe
-        ↓
-Loads All Packages from Python 3.12:
-  ✓ streamlit
-  ✓ faster-whisper  ← Was missing before!
-  ✓ sounddevice     ← Was missing before!
-  ✓ pyttsx3
-  ✓ spacy
-  ✓ All others...
-        ↓
-Streamlit App Launches:
-  ✓ Voice mode works
-  ✓ NLP features work
-  ✓ All audio features work
+Your Command: py -3.12 -m streamlit run app.py ↓ Python Launcher (/py): "Run Python 3.12
+specifically" ↓ Python 3.12 Interpreter:
+C:\Users\Admin\AppData\Local\Programs\Python\Python312\python.exe ↓ Loads All Packages from Python
+3.12: ✓ streamlit ✓ faster-whisper  ← Was missing before! ✓ sounddevice     ← Was missing before! ✓
+pyttsx3 ✓ spacy ✓ All others... ↓ Streamlit App Launches: ✓ Voice mode works ✓ NLP features work
+```text
+```text
 ```
 
----
+##
 
 ## Troubleshooting
 
@@ -140,30 +139,38 @@ Streamlit App Launches:
 ### Port 8501 already in use?
 
 Use alternate port:
+
 ```powershell
-py -3.12 -m streamlit run app.py --server.port 8502
+
+```text
 ```
 
 ### Still getting import errors?
 
 Verify packages are installed in Python 3.12:
+
 ```powershell
 py -3.12 -m pip list | grep faster-whisper
-py -3.12 -m pip list | grep sounddevice
+```text
+```text
 ```
 
 If missing, reinstall:
+
 ```powershell
+
 py -3.12 -m pip install faster-whisper sounddevice
+
 ```
 
----
+##
 
 ## Summary
 
 ✅ **Voice mode is now fixed!**
 
-All packages are installed. The issue was just which Python version was being used to run the app. Now you have:
+All packages are installed. The issue was just which Python version was being used to run the app.
+Now you have:
 
 - **Easy launchers** (batch, PowerShell, VS Code task)
 - **Improved diagnostics** (sidebar shows which Python version)

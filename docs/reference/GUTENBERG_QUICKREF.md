@@ -2,58 +2,66 @@
 
 ## Status: ✅ COMPLETE & OPERATIONAL
 
----
-
 ## 🚀 Run Processing Now
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-./run_gutenberg_learning.sh
+```text
+```text
 ```
 
 Or directly:
+
 ```bash
-nohup /Users/taurinrobinson/saoriverse-console/venv/bin/python gutenberg_fetcher.py &
+
+```text
 ```
 
----
+##
 
 ## 📊 Monitor Progress
 
 ```bash
-tail -f "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_learning.log"
+```text
+```text
 ```
 
----
+##
 
 ## 📈 View Results
 
 ```bash
-cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.json" | jq
+
+```text
 ```
 
----
+##
 
 ## 💾 Storage Locations
 
 **Data (External Drive)**
+
 ```
 /Volumes/My Passport for Mac/saoriverse_data/
 ├── gutenberg_poetry/          (8 collections)
 ├── gutenberg_learning.log     (processing log)
-└── gutenberg_processing_results.json
+```text
+```text
 ```
 
 **Code (Hard Drive)**
+
 ```
+
 /Users/taurinrobinson/saoriverse-console/
 ├── gutenberg_fetcher.py
 ├── bulk_text_processor.py
 ├── run_gutenberg_learning.sh
-└── GUTENBERG_PROCESSING.md
+
+```text
 ```
 
----
+##
 
 ## 📚 What Was Processed
 
@@ -62,18 +70,19 @@ cat "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_processing_results.j
 - **Result**: 2,000-5,000 new lexicon entries
 - **Quality**: 4.8 MB processing log (59,796 lines)
 
----
+##
 
 ## 🎯 Add More Collections
 
 Edit `gutenberg_fetcher.py` line ~50 and add URLs:
+
 ```python
 "shakespeare_sonnets": "https://www.gutenberg.org/ebooks/1041",
 ```
 
 Then run the fetcher again.
 
----
+##
 
 ## 💡 Key Commands
 
@@ -85,7 +94,7 @@ Then run the fetcher again.
 | **Check space** | `df -h \| grep "My Passport"` |
 | **List poetry files** | `ls -lh "/Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/"` |
 
----
+##
 
 ## ⚡ External Drive Space
 
@@ -93,7 +102,7 @@ Then run the fetcher again.
 - **Used**: ~1.4 TB (76%)
 - **Available**: **458 GB** ← Plenty for expansion!
 
----
+##
 
 ## 📖 Documentation
 
@@ -101,8 +110,8 @@ Then run the fetcher again.
 - **GUTENBERG_SUMMARY.md** - Complete overview
 - **This file** - Quick reference
 
----
+##
 
-## ✅ System Ready!
+## ✅ System Ready
 
 All data on external drive | Hard drive clean | Code committed | Ready for continuous processing

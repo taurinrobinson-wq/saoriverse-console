@@ -4,7 +4,10 @@
 
 I've created a **complete, production-ready Real-Time Glyph Learning System** for Emotional OS.
 
-This solves your exact requirement: *"Make a system where in real time the system parses the user's input for language that informs the system's response. System checks for existing glyphs to inform its response → if none → system begins building new glyph and mapping gates appropriately → returns appropriate initial response..."*
+This solves your exact requirement: *"Make a system where in real time the system parses the user's
+input for language that informs the system's response. System checks for existing glyphs to inform
+its response → if none → system begins building new glyph and mapping gates appropriately → returns
+appropriate initial response..."*
 
 ## The Delivery (12 Files)
 
@@ -39,48 +42,52 @@ This solves your exact requirement: *"Make a system where in real time the syste
 
 ### 8 Comprehensive Documentation Files (~500+ lines)
 
-1. **PHASE_2_README.md** - Main overview and quick start
-2. **PHASE_2_QUICK_REFERENCE.md** - One-page developer cheatsheet (print this!)
-3. **PHASE_2_LEARNING_SYSTEM_ARCHITECTURE.md** - Complete architecture with database schema
-4. **INTEGRATION_GUIDE_PHASE_2.md** - Exact code changes needed to signal_parser.py
-5. **PHASE_2_VISUAL_DIAGRAMS.md** - 8 detailed ASCII architecture diagrams
-6. **PHASE_2_IMPLEMENTATION_CHECKLIST.md** - 9-part step-by-step implementation plan
-7. **PHASE_2_DELIVERY_SUMMARY.md** - Complete delivery overview
-8. **PHASE_2_DELIVERABLES_MANIFEST.md** - This inventory
+1. **PHASE_2_README.md** - Main overview and quick start 2. **PHASE_2_QUICK_REFERENCE.md** -
+One-page developer cheatsheet (print this!) 3. **PHASE_2_LEARNING_SYSTEM_ARCHITECTURE.md** -
+Complete architecture with database schema 4. **INTEGRATION_GUIDE_PHASE_2.md** - Exact code changes
+needed to signal_parser.py 5. **PHASE_2_VISUAL_DIAGRAMS.md**- 8 detailed ASCII architecture
+diagrams 6.**PHASE_2_IMPLEMENTATION_CHECKLIST.md** - 9-part step-by-step implementation plan 7.
+**PHASE_2_DELIVERY_SUMMARY.md**- Complete delivery overview 8.**PHASE_2_DELIVERABLES_MANIFEST.md**
+
+- This inventory
 
 ## How It Works
 
 ### The Three-Layer Architecture
 
 **Layer 1: Glyph Learning Engine** (glyph_learner.py)
+
+```text
 ```
-User Input (no matching glyph)
-  ↓
-Extract emotional language patterns
-Analyze with NRC Emotion Lexicon
-Find similar existing glyphs
-Generate new glyph candidate
-Map signals to gates (1-9)
-Calculate confidence score
-  ↓
-Return: Complete glyph candidate with metadata
+
+User Input (no matching glyph) ↓ Extract emotional language patterns Analyze with NRC Emotion
+Lexicon Find similar existing glyphs Generate new glyph candidate Map signals to gates (1-9)
+Calculate confidence score ↓ Return: Complete glyph candidate with metadata
+
 ```
+
+
 
 **Layer 2: Learning Response Generator** (learning_response_generator.py)
-```
-New glyph candidate
-  ↓
-Select response template by emotional tone (8 tones)
-Insert key emotional terms (reinforcement)
-Add validation prompt (feedback gathering)
-Reference glyph name (training signal)
-  ↓
-Return: Response that answers user emotionally AND trains system
-         (User never knows they're teaching the system)
+```text
+```text
 ```
 
-**Layer 3: Shared Glyph Manager** (shared_glyph_manager.py)
+New glyph candidate ↓ Select response template by emotional tone (8 tones) Insert key emotional
+terms (reinforcement) Add validation prompt (feedback gathering) Reference glyph name (training
+signal) ↓ Return: Response that answers user emotionally AND trains system (User never knows they're
+teaching the system)
+
 ```
+
+
+
+
+**Layer 3: Shared Glyph Manager** (shared_glyph_manager.py)
+
+```text
+```
+
 Record adoption in shared database
   ↓
 Update consensus (how many users adopted)
@@ -91,7 +98,10 @@ Analyze coverage gaps (what's missing)
 Per-user queries return DIFFERENT ORDERING from SAME database
   (User A gets personalized, User B gets personalized)
   (But both contribute to global system learning)
+
 ```
+
+
 
 ### Key Innovation: Shared Database + User Segregation
 
@@ -99,7 +109,10 @@ Per-user queries return DIFFERENT ORDERING from SAME database
 > "I need to store glyph data where it builds the system overall, not just for that user. But I don't know how to keep the user experience segregated while also building up the system overall."
 
 **Solution Implemented:**
+```text
+```text
 ```
+
 ONE SHARED DATABASE (all users contribute):
 ├─ glyph_versions (all glyphs from all users)
 ├─ user_glyph_preferences (adoption history)
@@ -107,25 +120,29 @@ ONE SHARED DATABASE (all users contribute):
 └─ emotional_territory (coverage map)
 
 But: Different users see DIFFERENT RANKINGS of same glyphs
-  
+
 User A Query:
-  SELECT glyphs ORDER BY 
+  SELECT glyphs ORDER BY
     user_adoption DESC,      # What A has used (personalized)
     consensus DESC,          # What most users use (global)
     quality DESC             # Quality score
-  
-User B Query: 
+
+User B Query:
   SELECT glyphs ORDER BY
     user_adoption DESC,      # What B has used (personalized)
     consensus DESC,          # What most users use (same)
     quality DESC             # Quality score
-    
-Result: 
+
+Result:
   User A sees glyphs ordered by A's history
   User B sees glyphs ordered by B's history
   SAME glyphs in database (global learning)
   DIFFERENT ranking per user (personal experience)
+
 ```
+
+
+
 
 ### Training Without Being Obvious
 
@@ -148,6 +165,7 @@ Result:
 ## Integration: 3 Steps (30 minutes)
 
 ### Step 1: Add Imports to signal_parser.py
+
 ```python
 from emotional_os.glyphs.glyph_learner import GlyphLearner
 from emotional_os.glyphs.learning_response_generator import LearningResponseGenerator
@@ -155,11 +173,14 @@ from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 
 _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
-_shared_glyph_manager = SharedGlyphManager()
+```text
+```text
 ```
 
 ### Step 2: Modify parse_input() Function
+
 ```python
+
 glyphs = fetch_glyphs(gates)
 if glyphs:
     # EXISTING CODE: Return existing glyph
@@ -171,14 +192,16 @@ else:
     _shared_glyph_manager.create_glyph_version(...)
     _shared_glyph_manager.record_glyph_adoption(user_hash, candidate['glyph_name'])
     response = _learning_response_gen.generate_learning_response(...)
-    return response  # Never None!
+
+```text
 ```
 
 ### Step 3: Add Helper Function
+
 ```python
-def _determine_emotional_tone(signals):
-    tone_map = {...}
-    return tone_map.get(signals[0].get("tone", "unknown"), "unknown")
+def _determine_emotional_tone(signals): tone_map = {...}
+```text
+```text
 ```
 
 **Total integration time: 30 minutes** (exact steps in INTEGRATION_GUIDE_PHASE_2.md)
@@ -186,6 +209,7 @@ def _determine_emotional_tone(signals):
 ## Database: What Gets Created
 
 5 new tables (auto-created on first run):
+
 - `glyph_candidates` - Candidate glyphs awaiting consensus
 - `glyph_versions` - Track how each glyph evolves
 - `user_glyph_preferences` - Track personal adoption history
@@ -199,23 +223,19 @@ No modifications to existing tables. Pure additive.
 **Run:** `python test_glyph_learning_pipeline.py`
 
 **Output shows:**
+
 ```
-[Test 1] Identity fragmentation
-  → Glyph: "Fractured Identity" (Confidence: 75%)
-  → Response: [empathetic, trains without being obvious]
-  → Adoption recorded in shared database
 
-[Test 2] Pre-emptive loss
-  → Glyph: "Borrowed Grief" (Confidence: 68%)
-  
-[Test 3] Paradoxical resilience
-  → Glyph: "Alive in Breaking" (Confidence: 72%)
+[Test 1] Identity fragmentation → Glyph: "Fractured Identity" (Confidence: 75%) → Response:
+[empathetic, trains without being obvious] → Adoption recorded in shared database
 
-📊 System Health Report:
-  ✓ 287 active glyphs
-  ✓ 3 unique users contributed
-  ✓ Coverage improving
-  ⚠️ CRITICAL gap: shame (0 glyphs) → Recommendation
+[Test 2] Pre-emptive loss → Glyph: "Borrowed Grief" (Confidence: 68%)
+
+[Test 3] Paradoxical resilience → Glyph: "Alive in Breaking" (Confidence: 72%)
+
+📊 System Health Report: ✓ 287 active glyphs ✓ 3 unique users contributed ✓ Coverage improving ⚠️
+CRITICAL gap: shame (0 glyphs) → Recommendation
+
 ```
 
 ## Deployment Timeline
@@ -239,12 +259,14 @@ No modifications to existing tables. Pure additive.
 ## What's Different From Phase 1
 
 **Phase 1 (Completed):**
+
 - Fixed 56% failure rate
 - Expanded signal vocabulary
 - Integrated NRC lexicon
 - Result: 100% glyph coverage (all inputs get matched glyphs)
 
 **Phase 2 (This Delivery):**
+
 - Dynamic glyph generation when no match found
 - Training responses that subtly teach the system
 - Shared database with user segregation
@@ -267,6 +289,7 @@ No modifications to existing tables. Pure additive.
 ## The Vision Realized
 
 You wanted a system where:
+
 - ✅ User input is parsed for emotional language in real-time
 - ✅ System checks for existing glyphs
 - ✅ If none exist, system builds new glyph and maps gates
@@ -282,7 +305,7 @@ Every response is personal and appropriate.
 No user ever sees a standardized message.
 The system evolves organically from authentic emotional communication.
 
----
+##
 
 **Start with:** PHASE_2_README.md
 **Questions?** See PHASE_2_QUICK_REFERENCE.md

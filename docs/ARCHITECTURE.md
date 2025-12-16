@@ -3,17 +3,21 @@
 **Date**: December 3, 2025
 **Status**: Post-Reorganization (Phase 9)
 
----
+##
 
 ## Overview
 
-SaoriVerse Console is a modular emotional AI system built with clean separation of concerns. The reorganization (Phases 1-8) established a flat, discoverable structure that enables rapid development and testing.
+SaoriVerse Console is a modular emotional AI system built with clean separation of concerns. The
+reorganization (Phases 1-8) established a flat, discoverable structure that enables rapid
+development and testing.
 
----
+##
 
 ## Directory Structure
 
+```text
 ```
+
 saoriverse-console/
 ├── app.py                    # Single Streamlit entry point
 ├── requirements.txt          # Python dependencies
@@ -81,36 +85,38 @@ saoriverse-console/
 └── archive/             # Old code and documentation
     ├── old_structure/   # Original directories
     └── old_modules/     # Original scripts
+
 ```
 
----
+
+##
 
 ## Core Module Interactions
 
 ### Text-to-Response Pipeline
-
+```text
+```text
 ```
-user_input (text)
-    ↓
-symbolic_tagger.py          Tag input (symbolic tags)
-    ↓
-signal_parser.py            Extract emotional signals
-    ↓
-response_generator.py       Main orchestrator
+
+user_input (text) ↓ symbolic_tagger.py          Tag input (symbolic tags) ↓ signal_parser.py
+Extract emotional signals ↓ response_generator.py       Main orchestrator
     ├─→ phase_modulator.py          Detect phase
     ├─→ tone_adapters.py            Generate tone-adapted response
     ├─→ response_selector.py        Select response type
     ├─→ response_adapter.py         Adapt to user-facing language
     └─→ enhanced_response_composer.py  Compose multi-glyph response
-    ↓
-relational_memory.py        Store memory capsule
-    ↓
-response (text) → Streamlit UI
+↓ relational_memory.py        Store memory capsule ↓ response (text) → Streamlit UI
+
 ```
+
+
+
 
 ### Voice Pipeline
 
+```text
 ```
+
 audio_input (mp3/wav)
     ↓
 audio_pipeline.py           STT (speech-to-text)
@@ -124,11 +130,16 @@ prosody_planner.py          Glyph → prosody mapping
 streaming_tts.py            Text-to-speech
     ↓
 audio_output (mp3/wav)
+
 ```
+
+
 
 ### Learning Pipeline
-
+```text
+```text
 ```
+
 user_input + response + feedback
     ↓
 lexicon_learner.py          Extract patterns
@@ -136,9 +147,12 @@ lexicon_learner.py          Extract patterns
 local_learner.py            Store learned patterns
     ↓
 relational_memory.py        Persist patterns
+
 ```
 
----
+
+
+##
 
 ## Key Modules Explained
 
@@ -167,82 +181,95 @@ relational_memory.py        Persist patterns
 - **Purpose**: Persist interaction memories for learning
 - **Storage**: Local JSONL files (append-only)
 - **Access**: Query by session, user, or time range
-
----
+##
 
 ## Import Patterns
 
 ### In app.py (Streamlit entry point):
+
 ```python
 from src import (
     process_user_input,
     DynamicResponseComposer,
     VoiceInterface,
-)
+```text
+```text
 ```
 
-### In internal modules:
+### In internal modules
+
 ```python
+
 from src.signal_parser import parse_input
-from src.relational_memory import store_capsule
+
+```text
 ```
 
-### Key Constraint:
+### Key Constraint
+
 - **No circular imports** - src/ modules never import from app.py
 - **Unidirectional imports** - Lower-level modules don't depend on higher-level UI
 
----
+##
 
 ## Testing Architecture
 
 ### Unit Tests (tests/unit/)
+
 - Test individual modules in isolation
 - Mock external dependencies
 - Fast execution (< 100ms per test)
 - Run with: `pytest tests/unit/`
 
 ### Integration Tests (tests/integration/)
+
 - Test module interactions
 - Use real or fixture data
 - Slower execution (can take seconds)
 - Run with: `pytest tests/integration/`
 
 ### Test Discovery
+
 - Pytest configuration in `pytest.ini`
 - Shared fixtures in `tests/conftest.py`
 - Auto-discovery of `test_*.py` files
 
----
+##
 
 ## Deployment
 
-### Single Streamlit Entry Point:
+### Single Streamlit Entry Point
+
 ```bash
-streamlit run app.py
+```text
+```text
 ```
 
-### Environment Setup:
+### Environment Setup
+
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-streamlit run app.py
+
+python3 -m venv venv source venv/bin/activate pip install -r requirements.txt streamlit run app.py
+
 ```
 
-### CI/CD:
+### CI/CD
+
 - GitHub Actions in `.github/workflows/`
 - Runs tests on push to refactor/* branches
 - Validates imports, runs test suite
 
----
+##
 
 ## Module Dependencies (by layer)
 
 ### Layer 1: Input Processing
+
 - `symbolic_tagger.py` (no dependencies on other modules)
 - `signal_parser.py` (no dependencies on other modules)
 
 ### Layer 2: Response Generation
+
 - `response_generator.py` (orchestrator)
 - `response_selector.py` (uses signal_parser)
 - `response_adapter.py` (uses signal_parser)
@@ -250,20 +277,23 @@ streamlit run app.py
 - `enhanced_response_composer.py` (uses signal_parser)
 
 ### Layer 3: Persistence
+
 - `relational_memory.py` (no core dependencies)
 - `phase_modulator.py` (no core dependencies)
 
 ### Layer 4: Voice (Optional)
+
 - `voice_interface.py` (orchestrator)
 - `streaming_tts.py` (standalone)
 - `audio_pipeline.py` (standalone)
 - `prosody_planner.py` (uses signal_parser)
 
 ### Layer 5: Learning (Optional)
+
 - `lexicon_learner.py` (standalone)
 - `local_learner.py` (standalone)
 
----
+##
 
 ## Future Improvements
 
@@ -274,7 +304,7 @@ streamlit run app.py
 5. **Configuration**: Move hardcoded values to config files
 6. **Logging**: Structured logging with context propagation
 
----
+##
 
 ## Quick Reference: Finding Things
 
@@ -287,9 +317,9 @@ streamlit run app.py
 | Memory/persistence | relational_memory.py | src/ |
 | Tests | test_*.py | tests/unit/ or tests/integration/ |
 | Test fixtures | conftest.py | tests/ |
-| Data files | *.json, *.sql | data/ |
+| Data files | *.json,*.sql | data/ |
 
----
+##
 
 **For detailed testing information, see**: `docs/TESTING_GUIDE.md`
 **For API reference, see**: `docs/API_REFERENCE.md`

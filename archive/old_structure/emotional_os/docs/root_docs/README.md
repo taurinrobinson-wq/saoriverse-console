@@ -101,12 +101,12 @@ Emotional OS represents a new category of **encrypted emotional intelligence** t
 This repository now includes focused unit tests and a CI job that lock in core glyph-native behaviors:
 
 - Unit tests added:
- 	- `tests/test_ui_template_usage.py` — ensures the UI selection rule prefers `response_template` when glyph debug is off and falls back to contextual responses when debug is on.
- 	- `tests/unit/test_multi_glyph_selection.py` — verifies `select_best_glyph_and_response` returns the modern quadruple and exposes `glyphs_selected` with `score` and `display_name`.
- 	- `tests/unit/test_display_name_normalizer.py` — asserts `_normalize_display_name` uses DB-provided `display_name`, extracts sensible fragments, and truncates long names safely.
+  - `tests/test_ui_template_usage.py` — ensures the UI selection rule prefers `response_template` when glyph debug is off and falls back to contextual responses when debug is on.
+  - `tests/unit/test_multi_glyph_selection.py` — verifies `select_best_glyph_and_response` returns the modern quadruple and exposes `glyphs_selected` with `score` and `display_name`.
+  - `tests/unit/test_display_name_normalizer.py` — asserts `_normalize_display_name` uses DB-provided `display_name`, extracts sensible fragments, and truncates long names safely.
 
 - CI behavior:
- 	- A GitHub Actions workflow (`.github/workflows/ci.yml`) runs these unit tests on push and pull requests to `main`. The CI job is intentionally scoped to stable, DB-independent unit tests to provide a fast, reliable guardrail for future changes.
+  - A GitHub Actions workflow (`.github/workflows/ci.yml`) runs these unit tests on push and pull requests to `main`. The CI job is intentionally scoped to stable, DB-independent unit tests to provide a fast, reliable guardrail for future changes.
 
 Running tests locally:
 

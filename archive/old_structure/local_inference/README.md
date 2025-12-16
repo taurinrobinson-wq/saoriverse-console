@@ -27,7 +27,7 @@ python examples.py
 ./verify_phase_3_5.sh
 ```
 
----
+##
 
 ## 📦 What's Included
 
@@ -187,7 +187,7 @@ python examples.py
 - Runs integration examples
 - Generates summary report
 
----
+##
 
 ## 🧬 The Five Core Systems
 
@@ -231,7 +231,7 @@ Local model generates response with control context:
 - **Output**: Safe response + modification report
 - **Safety**: Catches violations not prevented by prompting
 
----
+##
 
 ## 🎯 Common Usage Patterns
 
@@ -286,7 +286,7 @@ curriculum = create_baseline_curriculum()
 examples = builder.add_curriculum_progression(curriculum, gate_schedule)
 ```
 
----
+##
 
 ## 🧪 Test Results Summary
 
@@ -329,7 +329,7 @@ test_phase_3_5.py::TestPhase35Integration::test_glyph_control_flow PASSED
 ============================== 31 passed in 0.06s ==============================
 ```
 
----
+##
 
 ## 🚀 Next Steps
 
@@ -340,7 +340,7 @@ test_phase_3_5.py::TestPhase35Integration::test_glyph_control_flow PASSED
 5. **User Studies** - Validate satisfaction feedback and safety effectiveness
 6. **Domain Expansion** - Add specialized glyphs for specific use cases
 
----
+##
 
 ## 📚 File Organization
 
@@ -358,7 +358,7 @@ local_inference/
 └── README.md (this file)          # Navigation guide
 ```
 
----
+##
 
 ## ✅ Verification Checklist
 
@@ -371,7 +371,7 @@ local_inference/
 - ✅ Training corpus pipeline
 - ✅ Curriculum learning framework
 
----
+##
 
 ## 🎓 Learning Path
 
@@ -381,7 +381,7 @@ local_inference/
 4. **30 min**: Read `PHASE_3_5_DOCS.md` for deep dive
 5. **30 min**: Integrate with your local LLM
 
----
+##
 
 ## 📞 Support & Resources
 
@@ -391,7 +391,7 @@ local_inference/
 - **Test reference**: See `test_phase_3_5.py`
 - **Verification**: Run `verify_phase_3_5.sh`
 
----
+##
 
 ## 🎉 Summary
 

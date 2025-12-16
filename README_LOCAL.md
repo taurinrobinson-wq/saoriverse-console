@@ -11,23 +11,27 @@ This repository can be tested locally in two ways:
 PowerShell commands:
 
 ```powershell
+
 # from repo root
+
 # start dev services (builds and installs dependencies inside containers)
 docker compose -f docker-compose.dev.yml up --build
 
 # Open frontend: http://localhost:3000
+
 # Open API health: http://localhost:8000/health
 
 # to stop:
 ctrl+c
-docker compose -f docker-compose.dev.yml down
+```text
+```text
 ```
 
 Notes:
+
 - The backend runs with `--reload` so Python code changes are reflected immediately.
 - The frontend runs Next.js in dev mode (fast), so edits to `velinor-web` reflect immediately.
 - The compose file mounts the repository into both containers using volumes; this speeds iteration.
-
 
 2) Production-like test (build the same Docker image Railway will build)
 
@@ -37,15 +41,19 @@ Notes:
 PowerShell commands:
 
 ```powershell
+
+
 # build and run production-like container (may take longer)
 docker compose up --build
 
 # open the site at: http://localhost:8080  (host port 8080 mapped to container port 8000)
+
 # check health endpoint: http://localhost:8080/health
 
 # to stop:
 ctrl+c
-docker compose down
+
+```text
 ```
 
 Tips to speed up cycles
@@ -56,10 +64,13 @@ Tips to speed up cycles
 - Tail logs from containers:
 
 ```powershell
+
 # list containers
 docker ps
+
 # then tail logs
 docker logs -f saoriverse-console-local
+
 # or for dev containers
 docker logs -f <container_name>
 ```

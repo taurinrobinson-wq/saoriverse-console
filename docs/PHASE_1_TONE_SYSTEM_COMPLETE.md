@@ -2,7 +2,9 @@
 
 ## Overview
 
-Phase 1 of the Velinor game development roadmap has been successfully implemented. The TONE (Trust, Observation, Narrative Presence, Empathy) stat system is now fully functional in the web version with a developer console for real-time monitoring.
+Phase 1 of the Velinor game development roadmap has been successfully implemented. The TONE (Trust,
+Observation, Narrative Presence, Empathy) stat system is now fully functional in the web version
+with a developer console for real-time monitoring.
 
 ## What's Been Done
 
@@ -10,11 +12,13 @@ Phase 1 of the Velinor game development roadmap has been successfully implemente
 
 All 7 renamed graphics are now in the web version:
 
+```text
 ```
+
 velinor-web/public/assets/
 ├── overlays/
 │   ├── left_page_curl.png          (2.1 MB) - Journal UI left
-│   ├── right_page_curl.png         (256 KB) - Journal UI right  
+│   ├── right_page_curl.png         (256 KB) - Journal UI right
 │   └── glowing_swamp_overlay.png   (1.7 MB) - Swamp effects
 ├── backgrounds/
 │   ├── saori_velinor_end.png       (2.1 MB) - Final chamber
@@ -23,7 +27,10 @@ velinor-web/public/assets/
 │   └── swamp.png                   (2.8 MB) - Swamp biome
 └── tools/
     └── notepad.png                 (3.0 MB) - Journal UI element
+
 ```
+
+
 
 ### 2. TONE Stat System Core
 
@@ -39,19 +46,19 @@ The system tracks 4 hidden stats (0-100 range):
 **Key Functions:**
 
 ```typescript
-// Modify stats
-applyToneAction(stats, action)           // Add/subtract from a stat
+
+// Modify stats applyToneAction(stats, action)           // Add/subtract from a stat
 applyToneActions(stats, actions)         // Apply multiple changes
 
-// Check content availability
-canUnlockGlyph(glyphId, stats)          // Is glyph unlocked?
-getUnlockableGlyphs(stats)              // All currently unlocked glyphs
-canAccessEnding(endingId, stats)        // Is ending accessible?
-getAccessibleEndings(stats)             // All accessible endings
+// Check content availability canUnlockGlyph(glyphId, stats)          // Is glyph unlocked?
+getUnlockableGlyphs(stats)              // All currently unlocked glyphs canAccessEnding(endingId,
+stats)        // Is ending accessible? getAccessibleEndings(stats)             // All accessible
+endings
 
-// Get player feedback
-getToneTier(value)                       // "Poor", "Weak", "Good", "Strong", "Excellent"
-getNPCDialoguePath(npcName, stats)      // Which dialogue variation?
+// Get player feedback getToneTier(value)                       // "Poor", "Weak", "Good", "Strong",
+"Excellent"
+
+```text
 ```
 
 ### 3. Game State Management
@@ -77,7 +84,8 @@ updateToneStats({
   statName: 'empathy',
   delta: 5,
   description: 'Showed emotional understanding'
-});
+```text
+```text
 ```
 
 ### 4. Developer Console
@@ -107,18 +115,17 @@ Real-time monitoring widget shows:
 
 **6 Ending Paths:**
 
-1. **Friendship Eternal**: Trust ≥ 80 + Empathy ≥ 75
-2. **Sacrifice Path**: Empathy ≥ 85 + Narrative Presence ≥ 70
-3. **Hidden Knowledge**: Observation ≥ 90 + Trust ≥ 60
-4. **Lonely Ending**: Trust ≤ 30 + Empathy ≤ 30
-5. **Power Corruption**: Observation ≥ 70 + Empathy ≤ 35
-6. **Mutual Ascension**: Narrative Presence ≥ 80 + Trust ≥ 75
+1. **Friendship Eternal**: Trust ≥ 80 + Empathy ≥ 75 2. **Sacrifice Path**: Empathy ≥ 85 + Narrative
+Presence ≥ 70 3. **Hidden Knowledge**: Observation ≥ 90 + Trust ≥ 60 4. **Lonely Ending**: Trust ≤
+30 + Empathy ≤ 30 5. **Power Corruption**: Observation ≥ 70 + Empathy ≤ 35 6. **Mutual Ascension**:
+Narrative Presence ≥ 80 + Trust ≥ 75
 
 ## How to Use in Dialogue
 
 ### Example: Choice with TONE Consequences
 
 ```typescript
+
 // In your dialogue handler
 const choice = {
   text: 'Listen carefully to their story',
@@ -136,7 +143,7 @@ choice.toneChanges.forEach(action => {
   updateToneStats(action);
 });
 
-setScene(choice.nextScene, backgroundImage, overlayImage);
+```text
 ```
 
 ### Example: Gated Dialogue (Only if Trust ≥ 60)
@@ -144,12 +151,11 @@ setScene(choice.nextScene, backgroundImage, overlayImage);
 ```typescript
 const { toneStats } = useGameStore();
 
-// Show vulnerable dialogue only if player has earned trust
-if (toneStats.trust >= 60) {
-  showDialog('I trust you enough to share this...');
-} else {
-  showDialog('I... don\'t know you well enough yet.');
-}
+// Show vulnerable dialogue only if player has earned trust if (toneStats.trust >= 60) {
+showDialog('I trust you enough to share this...'); } else { showDialog('I... don\'t know you well
+enough yet.');
+```text
+```text
 ```
 
 ## Next Steps: Phase 2 (Dialogue Integration)
@@ -165,42 +171,29 @@ To continue implementation:
 ### Quick Start Code
 
 ```typescript
-// In a dialogue component
-import { useGameStore } from '@/lib/gameStore';
 
-export default function DialogueScene() {
-  const { toneStats, updateToneStats } = useGameStore();
+// In a dialogue component import { useGameStore } from '@/lib/gameStore';
 
-  const handleChoice = (choiceIndex: number) => {
-    // Apply consequences
-    updateToneStats({
-      statName: 'trust',
-      delta: 5,
-      description: 'NPC name appreciated your response'
-    });
+export default function DialogueScene() { const { toneStats, updateToneStats } = useGameStore();
 
-    // Move to next scene
-    // ... navigate to next dialogue
-  };
+const handleChoice = (choiceIndex: number) => { // Apply consequences updateToneStats({ statName:
+'trust', delta: 5, description: 'NPC name appreciated your response' });
 
-  return (
-    <div>
-      {/* Render dialogue choices */}
-      {/* Each choice applies TONE changes when clicked */}
-    </div>
-  );
-}
+// Move to next scene // ... navigate to next dialogue };
+
+return ( <div> {/* Render dialogue choices */} {/* Each choice applies TONE changes when clicked */}
+</div> );
+
+```text
 ```
 
 ## Testing the System
 
 To verify everything works:
 
-1. Start the game: `npm run dev` in `velinor-web/`
-2. Click "Dev Console" in bottom-right
-3. Watch stats update as you make choices
-4. Verify glyphs unlock at thresholds
-5. Check that endings appear when requirements met
+1. Start the game: `npm run dev` in `velinor-web/` 2. Click "Dev Console" in bottom-right 3. Watch
+stats update as you make choices 4. Verify glyphs unlock at thresholds 5. Check that endings appear
+when requirements met
 
 ## File Structure
 
@@ -236,7 +229,9 @@ velinor-web/
 
 ## Status: Ready for Phase 2
 
-The TONE system foundation is complete and tested. All graphics are integrated, state management is in place, and the developer console is operational. Ready to proceed with dialogue system integration and NPC relationship mechanics.
+The TONE system foundation is complete and tested. All graphics are integrated, state management is
+in place, and the developer console is operational. Ready to proceed with dialogue system
+integration and NPC relationship mechanics.
 
 **Commit**: `6543b0c` - Phase 1: TONE Stat System Implementation
 **Next Commit**: Phase 2 - Dialogue System Integration (in progress)
