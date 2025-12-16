@@ -59,7 +59,7 @@ jobs:
     steps:
       - run: echo hello
         # ERROR: `shell:` must be in lower case
-        Shell: bash
+```text
 ```
 
 
@@ -74,7 +74,7 @@ test.yaml:6:5: unexpected key "default" for "job" section. expected one of "conc
 test.yaml:12:9: unexpected key "Shell" for "step" section. expected one of "continue-on-error", "env", "id", "if", "name", "run", "shell", "timeout-minutes", "uses", "with", "working-directory" [syntax-check]
    |
 12 |         Shell: bash
-   |         ^~~~~~
+```json
 ```
 
 
@@ -106,7 +106,7 @@ jobs:
         VERSION_NAME: [V1, V2]
     # ERROR: runs-on is missing
     steps:
-      - run: echo 'hello'
+```text
 ```
 
 
@@ -121,7 +121,7 @@ test.yaml:3:3: "runs-on" section is missing in job "test" [syntax-check]
 test.yaml:8:9: key "version_name" is duplicated in "matrix" section. previously defined at line:7,col:9. note that key names are case insensitive [syntax-check]
   |
 8 |         VERSION_NAME: [V1, V2]
-  |         ^~~~~~~~~~~~~
+```json
 ```
 
 
@@ -143,7 +143,7 @@ Example input:
 
 ```yaml
 on: push
-jobs:
+```text
 ```
 
 
@@ -154,7 +154,7 @@ Output:
 test.yaml:2:6: "jobs" section should not be empty. please remove this section if it's unnecessary [syntax-check]
   |
 2 | jobs:
-  |      ^
+```json
 ```
 
 
@@ -185,7 +185,7 @@ jobs:
     steps:
       - run: sleep 200
         # ERROR: Float value is expected
-        timeout-minutes: two minutes
+```text
 ```
 
 
@@ -204,7 +204,7 @@ test.yaml:8:21: expected scalar node for integer value but found scalar node wit
 test.yaml:13:26: expecting a single ${{...}} expression or float number literal, but found plain text node [syntax-check]
    |
 13 |         timeout-minutes: two minutes
-   |                          ^~~
+```json
 ```
 
 
@@ -236,7 +236,7 @@ jobs:
       # Missing ')' paren
       - run: echo "${{ toJson(hashFiles('**/lock', '**/cache/') }}"
       # unexpected end of input
-      - run: echo '${{ github.event. }}'
+```text
 ```
 
 
@@ -259,7 +259,7 @@ test.yaml:11:65: unexpected end of input while parsing arguments of function cal
 test.yaml:13:38: unexpected end of input while parsing object property dereference like 'a.b' or array element dereference like 'a.*'. expecting "IDENT", "*" [expression]
    |
 13 |       - run: echo '${{ github.event. }}'
-   |                                      ^~~
+```json
 ```
 
 
@@ -309,7 +309,7 @@ jobs:
       # ERROR: `github.repository` is string. Trying to access .owner property is invalid
       - run: echo '${{ github.repository.owner }}'
       # ERROR: Objects, arrays and null should not be evaluated at ${{ }} since the outputs are useless
-      - run: echo '${{ env }}'
+```text
 ```
 
 
@@ -332,7 +332,7 @@ test.yaml:11:24: receiver of object dereference "owner" must be type of object b
 test.yaml:13:20: object, array, and null values should not be evaluated in template with ${{ }} but evaluating the value of type {string => string} [expression]
    |
 13 |       - run: echo '${{ env }}'
-   |                    ^~~
+```json
 ```
 
 
@@ -349,7 +349,7 @@ actionlint checks types more strictly. actionlint checks values evaluated at `${
 object or array, use `toJSON()` function.
 
 ```
-echo '${{ toJSON(github.event) }}'
+```text
 ```
 
 
@@ -383,7 +383,7 @@ jobs:
         env: ${{ matrix.env_object }}
       # ERROR: String value cannot be expanded as object
       - run: echo "$FOO"
-        env: ${{ matrix.env_string }}
+```text
 ```
 
 
@@ -394,7 +394,7 @@ Output:
 test.yaml:19:14: type of expression at "env" must be object but found type string [expression]
    |
 19 |         env: ${{ matrix.env_string }}
-   |              ^~~
+```json
 ```
 
 
@@ -429,7 +429,7 @@ jobs:
       - run: echo "${{ contains('hello, world', 'lo,') }}"
       - run: echo "${{ contains(github.event.labels.*.name, 'enhancement') }}"
       # format() has a special check for formatting string
-      - run: echo "${{ format('{0}{1}', 1, 2, 3) }}"
+```text
 ```
 
 
@@ -460,7 +460,7 @@ test.yaml:15:51: 2nd argument of function call is not assignable. "object" canno
 test.yaml:20:24: format string "{0}{1}" does not contain placeholder {2}. remove argument which is unused in the format string [expression]
    |
 20 |       - run: echo "${{ format('{0}{1}', 1, 2, 3) }}"
-   |                        ^~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -510,7 +510,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ERROR: Access undefined step outputs. Step objects are job-local
-      - run: echo '${{ steps.get_value.outputs.name }}'
+```text
 ```
 
 
@@ -525,7 +525,7 @@ test.yaml:10:24: property "get_value" is not defined in object type {} [expressi
 test.yaml:22:24: property "get_value" is not defined in object type {} [expression]
    |
 22 |       - run: echo '${{ steps.get_value.outputs.name }}'
-   |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -562,7 +562,7 @@ jobs:
       # OK
       - run: echo ${{ steps.cache.outputs.cache-hit }}
       # ERROR: Typo at output name
-      - run: echo ${{ steps.cache.outputs.cache_hit }}
+```text
 ```
 
 
@@ -577,7 +577,7 @@ test.yaml:8:23: property "cache" is not defined in object type {} [expression]
 test.yaml:18:23: property "cache_hit" is not defined in object type {cache-hit: string} [expression]
    |
 18 |       - run: echo ${{ steps.cache.outputs.cache_hit }}
-   |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -603,7 +603,7 @@ outputs:
 
 runs:
   using: 'node14'
-  main: 'index.js'
+```text
 ```
 
 
@@ -625,7 +625,7 @@ jobs:
       # OK
       - run: echo ${{ steps.my_action.outputs.some_value }}
       # ERROR: No output named 'some-value' (typo)
-      - run: echo ${{ steps.my_action.outputs.some-value }}
+```text
 ```
 
 
@@ -640,7 +640,7 @@ test.yaml:8:23: property "my_action" is not defined in object type {} [expressio
 test.yaml:15:23: property "some-value" is not defined in object type {some_value: string} [expression]
    |
 15 |       - run: echo ${{ steps.my_action.outputs.some-value }}
-   |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```text
 ```
 
 
@@ -688,7 +688,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Matrix values in other job is not accessible
-      - run: echo '${{ matrix.os }}'
+```text
 ```
 
 
@@ -707,7 +707,7 @@ test.yaml:21:24: property "dev" is not defined in object type {name: string; opt
 test.yaml:34:24: property "os" is not defined in object type {} [expression]
    |
 34 |       - run: echo '${{ matrix.os }}'
-   |                        ^~~~~~~~~
+```json
 ```
 
 
@@ -736,7 +736,7 @@ steps:
   # matrix.foo is any type value
   - run: echo ${{ matrix.foo }}
   # matrix.bar is array<any> type value
-  - run: echo ${{ matrix.bar[0] }}
+```text
 ```
 
 
@@ -780,7 +780,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ERROR: Cannot access outputs across jobs
-      - run: echo '${{ needs.build.outputs.built }}'
+```text
 ```
 
 
@@ -803,7 +803,7 @@ test.yaml:28:24: property "some_job" is not defined in object type {install: {ou
 test.yaml:33:24: property "build" is not defined in object type {} [expression]
    |
 33 |       - run: echo '${{ needs.build.outputs.built }}'
-   |                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -836,7 +836,7 @@ jobs:
       - run: echo $FOO
       # This script is run with bash due to 'shell:' configuration
       - run: echo $FOO
-        shell: bash
+```text
 ```
 
 
@@ -851,7 +851,7 @@ test.yaml:6:9: shellcheck reported issue in this script: SC2086:info:1:6: Double
 test.yaml:14:9: shellcheck reported issue in this script: SC2086:info:1:6: Double quote to prevent globbing and word splitting [shellcheck]
    |
 14 |       - run: echo $FOO
-   |         ^~~~
+```json
 ```
 
 
@@ -890,7 +890,7 @@ runs-on: ${{ matrix.os }}
 steps:
   - name: Show file content
     run: Get-Content -Path xxx\yyy.txt
-    if: ${{ matrix.os == 'windows-latest' }}
+```text
 ```
 
 
@@ -903,7 +903,7 @@ false positives can be avoided by showing the shell name explicitly. It is also 
 - name: Show file content
   run: Get-Content -Path xxx\yyy.txt
   if: ${{ matrix.os == 'windows-latest' }}
-  shell: pwsh
+```text
 ```
 
 
@@ -939,7 +939,7 @@ jobs:
             print(sys)
       - run: |
           from time import sleep
-          print(100)
+```text
 ```
 
 
@@ -958,7 +958,7 @@ test.yaml:19:9: pyflakes reported issue in this script: 2:5: import 'sys' from l
 test.yaml:23:9: pyflakes reported issue in this script: 1:1: 'time.sleep' imported but unused [pyflakes]
    |
 23 |       - run: |
-   |         ^~~~
+```text
 ```
 
 
@@ -1008,7 +1008,7 @@ jobs:
           script: console.log('${{ github.event.head_commit.author.name }}')
       - name: Get comments
         # ERROR: Accessing untrusted inputs via `.*` object filter; bodies of comment, review, and review_comment
-        run: echo '${{ toJSON(github.event.*.body) }}'
+```text
 ```
 
 
@@ -1027,7 +1027,7 @@ test.yaml:19:36: "github.event.head_commit.author.name" is potentially untrusted
 test.yaml:22:31: object filter extracts potentially untrusted properties "github.event.comment.body", "github.event.discussion.body", "github.event.issue.body", "github.event.pull_request.body", "github.event.review.body", "github.event.review_comment.body". avoid using the value directly in inline scripts. instead, pass the value through an environment variable. see https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions for more details [expression]
    |
 22 |         run: echo '${{ toJSON(github.event.*.body) }}'
-   |                               ^~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -1038,7 +1038,7 @@ Since `${{ }}` placeholders are evaluated and replaced directly by GitHub Action
 inline scripts at `run:`. For example, if we have step as follows,
 
 ```yaml
-- run: echo 'issue ${{github.event.issue.title}}'
+```text
 ```
 
 
@@ -1050,7 +1050,7 @@ inputs via environment variables. See [the official document][security-doc] for 
 ```yaml
 - run: echo "issue ${TITLE}"
   env:
-    TITLE: ${{github.event.issue.title}}
+```text
 ```
 
 
@@ -1085,7 +1085,7 @@ of `github.event` as array. Those properties include untrusted inputs like `gith
 ```sh
 
 # Echo list of github.event.comment.body, github.event.pull_request.body, ...
-echo '${{ toJSON(github.event.*.body) }}'
+```text
 ```
 
 
@@ -1095,7 +1095,7 @@ Instead, you should store the JSON string in an environment variable:
 ```sh
 - run: echo "${BODIES}"
   env:
-    BODIES: '${{ toJSON(github.event.*.body) }}'
+```text
 ```
 
 
@@ -1126,7 +1126,7 @@ jobs:
     needs: [install]
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'build'
+```text
 ```
 
 
@@ -1137,7 +1137,7 @@ Output:
 test.yaml:8:3: cyclic dependencies in "needs" configurations of jobs are detected. detected cycle is "install" -> "prepare", "prepare" -> "build", "build" -> "install" [job-needs]
   |
 8 |   install:
-  |   ^~~~~~~~
+```json
 ```
 
 
@@ -1163,7 +1163,7 @@ jobs:
     needs: [unknown]
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'hi'
+```text
 ```
 
 
@@ -1178,7 +1178,7 @@ test.yaml:4:18: job ID "BAR" duplicates in "needs" section. note that job ID is 
 test.yaml:8:3: job "bar" needs job "unknown" which does not exist in this workflow [job-needs]
   |
 8 |   bar:
-  |   ^~~~
+```json
 ```
 
 
@@ -1206,7 +1206,7 @@ jobs:
             platform: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - run: echo ...
+```text
 ```
 
 
@@ -1225,7 +1225,7 @@ test.yaml:9:19: value "13" in "exclude" does not match in matrix "node" combinat
 test.yaml:12:13: "platform" in "exclude" section does not exist in matrix. available matrix configurations are "node", "os" [matrix]
    |
 12 |             platform: ubuntu-latest
-   |             ^~~~~~~~~
+```json
 ```
 
 
@@ -1265,7 +1265,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ...
+```text
 ```
 
 
@@ -1292,7 +1292,7 @@ test.yaml:13:5: "tags" filter is not available for release event. it is only for
 test.yaml:15:3: unknown Webhook event "pullreq". see https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#webhook-events for list of all Webhook event names [events]
    |
 15 |   pullreq:
-   |   ^~~~~~~~
+```json
 ```
 
 
@@ -1370,7 +1370,7 @@ jobs:
       # ERROR: Number value is not available for object key
       - run: echo "${{ env[inputs.age] }}"
       # ERROR: `github.event.inputs` is also not defined
-      - run: echo "${{ github.event.inputs.massage }}"
+```text
 ```
 
 
@@ -1413,7 +1413,7 @@ test.yaml:37:28: property access of object must be type of string but got "numbe
 test.yaml:39:24: property "massage" is not defined in object type {age: string; id: string; kind: string; message: string; name: string; verbose: string} [expression]
    |
 39 |       - run: echo "${{ github.event.inputs.massage }}"
-   |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -1449,7 +1449,7 @@ inputs:
     type: number
   env_input:
     type: environment
-  no_type_input:
+```sql
 ```
 
 
@@ -1464,7 +1464,7 @@ inputs:
   "num_input": number;
   "env_input": string;
   "no_type_input": any;
-}
+```text
 ```
 
 
@@ -1479,7 +1479,7 @@ inputs:
   "num_input": string;
   "env_input": string;
   "no_type_input": string;
-}
+```text
 ```
 
 
@@ -1507,7 +1507,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ...
+```text
 ```
 
 
@@ -1526,7 +1526,7 @@ test.yaml:9:12: invalid glob pattern. unexpected character '+' while checking sp
 test.yaml:11:14: invalid glob pattern. unexpected character '1' while checking character range in []. start of range '9' (57) is larger than end of range '1' (49). note: filter pattern syntax is explained at https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet [glob]
    |
 11 |       - 'v[9-1]'
-   |              ^~~
+```json
 ```
 
 
@@ -1564,7 +1564,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ...
+```text
 ```
 
 
@@ -1579,7 +1579,7 @@ test.yaml:4:13: invalid CRON format "0 */3 * *" in schedule event: expected exac
 test.yaml:6:13: scheduled job runs too frequently. it runs once per 60 seconds. the shortest interval is once every 5 minutes [events]
   |
 6 |     - cron: '* */3 * * *'
-  |             ^~
+```json
 ```
 
 
@@ -1625,7 +1625,7 @@ jobs:
     # ERROR: Too old macOS worker
     runs-on: macos-10.13
     steps:
-      - run: echo ...
+```text
 ```
 
 
@@ -1644,7 +1644,7 @@ test.yaml:16:13: label "gpu" is unknown. available labels are "windows-latest", 
 test.yaml:23:14: label "macos-10.13" is unknown. available labels are "windows-latest", "windows-2022", "windows-2019", "windows-2016", "ubuntu-latest", ... [runner-label]
    |
 23 |     runs-on: macos-10.13
-   |              ^~~~~~~~~~~
+```json
 ```
 
 
@@ -1673,7 +1673,7 @@ jobs:
   test:
     runs-on: [ubuntu-latest, windows-latest]
     steps:
-      - run: echo ...
+```text
 ```
 
 
@@ -1684,7 +1684,7 @@ Output:
 test.yaml:4:30: label "windows-latest" conflicts with label "ubuntu-latest" defined at line:4,col:15. note: to run your job on each worker, use matrix [runner-label]
   |
 4 |     runs-on: [ubuntu-latest, windows-latest]
-  |                              ^~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -1713,7 +1713,7 @@ jobs:
       # ERROR: tag is empty
       - uses: 'docker://image:'
       # ERROR: local action must start with './'
-      - uses: .github/my-actions/do-something
+```text
 ```
 
 
@@ -1736,7 +1736,7 @@ test.yaml:11:15: tag of Docker action should not be empty: "docker://image" [act
 test.yaml:13:15: specifying action ".github/my-actions/do-something" in invalid format because ref is missing. available formats are "{owner}/{repo}@{ref}" or "{owner}/{repo}/{path}@{ref}" [action]
    |
 13 |       - uses: .github/my-actions/do-something
-   |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -1779,7 +1779,7 @@ inputs:
 
 runs:
   using: 'node14'
-  main: 'index.js'
+```text
 ```
 
 
@@ -1799,7 +1799,7 @@ jobs:
         with:
           name: rhysd
           message: hello
-          additions: foo, bar
+```text
 ```
 
 
@@ -1814,7 +1814,7 @@ test.yaml:7:15: missing input "message" which is required by action "My action" 
 test.yaml:13:11: input "additions" is not defined in action "My action" defined at "./.github/actions/my-action". available inputs are "addition", "message", "name" [action]
    |
 13 |           additions: foo, bar
-   |           ^~~~~~~~~~
+```text
 ```
 
 
@@ -1841,7 +1841,7 @@ jobs:
             ${{ hashFiles('**/*.lock') }}
             ${{ hashFiles('**/*.cache') }}
           path: ./packages
-      - run: make
+```text
 ```
 
 
@@ -1856,7 +1856,7 @@ test.yaml:7:15: missing input "key" which is required by action "actions/cache@v
 test.yaml:9:11: input "keys" is not defined in action "actions/cache@v3". available inputs are "key", "path", "restore-keys", "upload-chunk-size" [action]
   |
 9 |           keys: |
-  |           ^~~~~
+```json
 ```
 
 
@@ -1914,7 +1914,7 @@ jobs:
         shell: sh
       - run: echo 'hello'
         # OK: 'powershell' is only available on Windows
-        shell: powershell
+```text
 ```
 
 
@@ -1941,7 +1941,7 @@ test.yaml:20:16: shell name "fish" is invalid. available names are "bash", "pwsh
 test.yaml:30:16: shell name "sh" is invalid on Windows. available names are "bash", "pwsh", "python", "cmd", "powershell" [shell-name]
    |
 30 |         shell: sh
-   |                ^~
+```json
 ```
 
 
@@ -1974,7 +1974,7 @@ jobs:
     steps:
       - run: echo 'hello'
         # OK. Step ID uniqueness is job-local
-        id: step_id
+```text
 ```
 
 
@@ -1989,7 +1989,7 @@ test.yaml:10:13: step ID "STEP_ID" duplicates. previously defined at line:7,col:
 test.yaml:12:3: key "TEST" is duplicated in "jobs" section. previously defined at line:3,col:3. note that key names are case insensitive [syntax-check]
    |
 12 |   TEST:
-   |   ^~~~~
+```json
 ```
 
 
@@ -2024,7 +2024,7 @@ jobs:
           # ERROR: Hardcoded password
           password: pass
     steps:
-      - run: echo 'hello'
+```text
 ```
 
 
@@ -2039,7 +2039,7 @@ test.yaml:10:19: "password" section in "container" section should be specified v
 test.yaml:17:21: "password" section in "redis" service should be specified via secrets. do not put password value directly [credentials]
    |
 17 |           password: pass
-   |                     ^~~~
+```json
 ```
 
 
@@ -2065,7 +2065,7 @@ jobs:
       FOO=BAR: foo
       FOO BAR: foo
     steps:
-      - run: echo 'hello'
+```text
 ```
 
 
@@ -2080,7 +2080,7 @@ test.yaml:6:7: environment variable name "FOO=BAR" is invalid. '&', '=' and spac
 test.yaml:7:7: environment variable name "FOO BAR" is invalid. '&', '=' and spaces should not be contained [env-var]
   |
 7 |       FOO BAR: foo
-  |       ^~~
+```json
 ```
 
 
@@ -2113,7 +2113,7 @@ jobs:
       # ERROR: Available values are "read", "write" or "none"
       issues: readable
     steps:
-      - run: echo hello
+```text
 ```
 
 
@@ -2132,7 +2132,7 @@ test.yaml:11:7: unknown permission scope "check". all available permission scope
 test.yaml:13:15: "readable" is invalid for permission of scope "issues". available values are "read", "write" or "none" [permissions]
    |
 13 |       issues: readable
-   |               ^~~~~~~~
+```json
 ```
 
 
@@ -2195,7 +2195,7 @@ jobs:
   do:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ inputs.scheme }}://${{ inputs.host }}:${{ inputs.port }}${{ inputs.path }}"
+```text
 ```
 
 
@@ -2214,7 +2214,7 @@ test.yaml:20:15: invalid value "object" for input type of workflow_call event. i
 test.yaml:25:18: input "path" of workflow_call event has the default value "", but it is also required. if an input is marked as required, its default value will never be used [events]
    |
 25 |         default: ''
-   |                  ^~
+```json
 ```
 
 
@@ -2247,7 +2247,7 @@ jobs:
       - run: echo hello
   job4:
     # ERROR: This workflow does not exist
-    uses: ./.github/workflows/not-existing.yml
+```text
 ```
 
 
@@ -2270,7 +2270,7 @@ test.yaml:12:5: "with" is only available for a reusable workflow call with "uses
 test.yaml:19:11: could not read reusable workflow file for "./.github/workflows/not-existing.yml": open /path/to/.github/workflows/not-existing.yml: no such file or directory [workflow-call]
    |
 19 |     uses: ./.github/workflows/not-existing.yml
-   |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -2315,7 +2315,7 @@ jobs:
         run: curl ${{ inputs.uri }} -d ${{ inputs.lucky_number }}
         env:
           # ERROR: credentials is typo of credential
-          TOKEN: ${{ secrets.credentials }}
+```text
 ```
 
 
@@ -2330,7 +2330,7 @@ test.yaml:20:23: property "uri" is not defined in object type {url: string; luck
 test.yaml:23:22: property "credentials" is not defined in object type {credential: string} [expression]
    |
 23 |           TOKEN: ${{ secrets.credentials }}
-   |                      ^~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -2352,7 +2352,7 @@ declares to inherit all secrets.
 jobs:
   pass-secrets-to-workflow:
     uses: ./.github/workflows/called-workflow.yml
-    secrets: inherit
+```text
 ```
 
 
@@ -2374,7 +2374,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # OK: This reports no error. FOO is assumed to be inherited from caller
-      - run: echo ${{ secrets.FOO }}
+```text
 ```
 
 
@@ -2391,7 +2391,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # ERROR: Secret FOO is not defined
-      - run: echo ${{ secrets.FOO }}
+```text
 ```
 
 
@@ -2417,7 +2417,7 @@ jobs:
       image_tag: "${{ steps.get_tag.outputs.tag }}"
     steps:
       - run: ./output_image_tag.sh
-        id: get_tag
+```text
 ```
 
 
@@ -2428,7 +2428,7 @@ Output:
 test.yaml:6:20: property "imagetag" is not defined in object type {image_tag: string} [expression]
   |
 6 |         value: ${{ jobs.gen-image-version.outputs.imagetag }}
-  |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```json
 ```
 
 
@@ -2464,7 +2464,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ outputs.required_input }}'
+```text
 ```
 
 
@@ -2497,7 +2497,7 @@ jobs:
       # ERROR: Cannot assign null to string input. If you want to pass string "null", use ${{ 'null' }}
       message: null
     secrets:
-      password: p@ssw0rd
+```text
 ```
 
 
@@ -2528,7 +2528,7 @@ test.yaml:22:11: input "id" is typed as number by reusable workflow "./.github/w
 test.yaml:24:16: input "message" is typed as string by reusable workflow "./.github/workflows/reusable.yaml". null value cannot be assigned [expression]
    |
 24 |       message: null
-   |                ^~~~
+```text
 ```
 
 
@@ -2563,7 +2563,7 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - run: ...
-        id: get_version
+```text
 ```
 
 
@@ -2583,7 +2583,7 @@ jobs:
       # OK. `version` is defined in the reusable workflow
       - run: echo '${{ needs.get_build_info.outputs.version }}'
       # ERROR: `tag` is not defined in the reusable workflow
-      - run: echo '${{ needs.get_build_info.outputs.tag }}'
+```text
 ```
 
 
@@ -2594,7 +2594,7 @@ Output:
 test.yaml:13:24: property "tag" is not defined in object type {version: string} [expression]
    |
 13 |       - run: echo '${{ needs.get_build_info.outputs.tag }}'
-   |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```text
 ```
 
 
@@ -2634,7 +2634,7 @@ jobs:
   2d-game:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'oops'
+```text
 ```
 
 
@@ -2657,7 +2657,7 @@ test.yaml:12:3: invalid job ID "-hello-world-". job ID must start with a letter 
 test.yaml:17:3: invalid job ID "2d-game". job ID must start with a letter or _ and contain only alphanumeric characters, -, or _ [id]
    |
 17 |   2d-game:
-   |   ^~~~~~~~
+```json
 ```
 
 
@@ -2699,7 +2699,7 @@ jobs:
         # ERROR: 'success()' function is not available here
         run: echo 'Success? ${{ success() }}'
         # OK: 'success()' function is available here
-        if: success()
+```text
 ```
 
 
@@ -2718,7 +2718,7 @@ test.yaml:18:17: context "env" is not allowed here. available contexts are "gith
 test.yaml:24:33: calling function "success" is not allowed here. "success" is only available in "jobs.<job_id>.if", "jobs.<job_id>.steps.if". see https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability for more details [expression]
    |
 24 |         run: echo 'Success? ${{ success() }}'
-   |                                 ^~~~~~~~~
+```json
 ```
 
 
@@ -2762,7 +2762,7 @@ jobs:
       # OK: Use this instead
       - run: echo "foo=bar" >> "$GITHUB_OUTPUT"
       # OK: 'debug' command is not deprecated
-      - run: echo "::debug::Set the Octocat variable"
+```text
 ```
 
 
@@ -2773,7 +2773,7 @@ Output:
 test.yaml:8:14: workflow command "set-output" was deprecated. use `echo "{name}={value}" >> $GITHUB_OUTPUT` instead: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions [deprecated-commands]
   |
 8 |       - run: echo '::set-output name=foo::bar'
-  |              ^~~~
+```json
 ```
 
 
@@ -2822,7 +2822,7 @@ jobs:
         if: github.event_name == 'push' && github.ref_name == 'main'
       - run: echo 'Commit is pushed to main'
         # ERROR: It is always evaluated to true
-        if: ${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}
+```text
 ```
 
 
@@ -2841,7 +2841,7 @@ test.yaml:20:13: if: condition "${{ github.event_name == 'push' }} " is always e
 test.yaml:26:13: if: condition "${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}" is always evaluated to true because extra characters are around ${{ }} [if-cond]
    |
 26 |         if: ${{ github.event_name == 'push' }} && ${{ github.ref_name == 'main' }}
-   |             ^~~
+```json
 ```
 
 
@@ -2857,7 +2857,7 @@ Multi-line string inserts newline character at end of each line.
 
 ```yaml
 if: |
-  ${{ false }}
+```text
 ```
 
 
@@ -2865,7 +2865,7 @@ if: |
 is equivalent to
 
 ```yaml
-if: "${{ false }}\n"
+```text
 ```
 
 

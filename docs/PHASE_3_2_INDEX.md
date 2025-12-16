@@ -351,7 +351,7 @@ A: Use integration checkpoints in PHASE_3_2_INTEGRATION_GUIDE.md.
 ##
 
 ## Document Locations
-
+```text
 ```
 docs/
 ├── PHASE_3_2_SUMMARY.md ..................... Executive summary (start here)

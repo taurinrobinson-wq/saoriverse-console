@@ -14,7 +14,7 @@
 ### Checking Your Python Version
 
 ```bash
-python --version
+```text
 ```
 
 
@@ -31,7 +31,7 @@ py --list-paths
 
 # Use Python 3.12 specifically
 py -3.12 -m pip install -r requirements.txt
-py -3.12 -m streamlit run app.py
+```text
 ```
 
 
@@ -47,7 +47,7 @@ pyenv local 3.12.0
 # With conda
 conda create -n firstperson python=3.12
 conda activate firstperson
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -66,7 +66,7 @@ pip install -r requirements.txt
 # Or use pip-tools for reproducible builds
 pip install pip-tools
 pip-compile requirements.txt
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -78,7 +78,7 @@ Some packages require additional setup:
 #### spaCy Language Models
 
 ```bash
-python -m spacy download en_core_web_sm
+```text
 ```
 
 
@@ -86,7 +86,7 @@ python -m spacy download en_core_web_sm
 #### TextBlob Corpora
 
 ```bash
-python -m textblob.download_corpora
+```text
 ```
 
 
@@ -104,7 +104,7 @@ If you have CUDA installed, uncomment these lines in `requirements.txt`:
 
 ```
 torch>=2.0.0
-torchaudio>=2.0.0
+```text
 ```
 
 
@@ -113,7 +113,7 @@ torchaudio>=2.0.0
 For noise suppression, uncomment:
 
 ```
-noisereduce>=2.0.0
+```text
 ```
 
 

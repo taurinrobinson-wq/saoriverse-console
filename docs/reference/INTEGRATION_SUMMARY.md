@@ -30,7 +30,7 @@ Your system now automatically creates new glyphs during live user-AI conversatio
    - Provides export option
 
 ## How It Works: The Pipeline
-
+```text
 ```
 USER DIALOGUE
     ↓
@@ -75,7 +75,7 @@ if processing_mode == "hybrid":
     new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
     if new_glyphs:
         st.session_state['new_glyphs_this_session'].extend(new_glyphs)
-        st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
+```text
 ```
 
 
@@ -88,7 +88,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
     if new_glyphs:
         st.success(f"🎉 {len(new_glyphs)} new glyph(s) discovered!")
         for glyph in new_glyphs:
-            # Display symbol, name, emotions, keywords
+```text
 ```
 
 
@@ -98,7 +98,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 The system tracks conversations with unique IDs:
 
 ```python
-conversation_id=st.session_state.get('conversation_id', 'default')
+```text
 ```
 
 
@@ -108,7 +108,7 @@ Add this to `main_v2.py` initialization if not present:
 ```python
 if 'conversation_id' not in st.session_state:
     from uuid import uuid4
-    st.session_state['conversation_id'] = str(uuid4())[:8]
+```text
 ```
 
 
@@ -120,7 +120,7 @@ if 'conversation_id' not in st.session_state:
 ```python
 st.session_state['hybrid_processor']        # The processor instance
 st.session_state['new_glyphs_this_session'] # Glyphs generated this session
-st.session_state['conversation_id']         # Unique conversation ID
+```text
 ```
 
 
@@ -132,7 +132,7 @@ learning/
 ├── conversation_glyphs.json           # All discovered glyphs registry
 ├── user_overrides/
 │   └── user_{id}_lexicon.json        # User's personal vocabulary
-└── hybrid_learning_log.jsonl          # Append-only learning log
+```text
 ```
 
 
@@ -149,7 +149,7 @@ This ensures only meaningful patterns create glyphs. In dialogue, this builds up
 Turn 1: love (1) + vulnerability (1) = 2
 Turn 2: love (1) + vulnerability (1) = 2
 ...
-After 150+ turns: combined frequency reaches 300 → glyph created
+```text
 ```
 
 
@@ -160,7 +160,7 @@ For faster glyph creation in testing, you can reduce this threshold:
 evolution = DynamicGlyphEvolution(
     hybrid_learner=learner,
     min_frequency_for_glyph=50,  # Lower threshold for testing
-)
+```text
 ```
 
 
@@ -175,7 +175,7 @@ AI:   "That exposed feeling is the threshold of intimacy itself..."
 
 Signals detected: love, vulnerability, fear, intimacy
 Patterns found: (love + vulnerability), (love + intimacy), (vulnerability + fear)
-Glyphs generated: 0 (patterns not yet at threshold)
+```text
 ```
 
 
@@ -189,7 +189,7 @@ AI:   "That transformation from fear into becoming is love..."
 Signals detected: love, transformation, joy, becoming
 Patterns found: (love + transformation), (love + joy)
 Lexicon update: vulnerability frequency +1, transformation frequency +1
-Glyphs generated: 0 (still building)
+```text
 ```
 
 
@@ -207,7 +207,7 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
   ├─ Symbol: ♥❤
   ├─ Emotions: love + intimacy
   ├─ Response cue: "Recognize the deep closeness being shared"
-  └─ Stored in: learning/conversation_glyphs.json
+```text
 ```
 
 
@@ -227,7 +227,7 @@ emotion_symbols = {
     "vulnerability": "🌱",
     "nature": "🌿",
     # Add more...
-}
+```text
 ```
 
 
@@ -240,7 +240,7 @@ name_map = {
     ("love", "vulnerability"): "Open-Hearted Love",
     ("joy", "celebration"): "Pure Celebration",
     # Customize for your use case
-}
+```text
 ```
 
 
@@ -270,7 +270,7 @@ To reduce processing:
 
 # Only process evolution every N turns instead of every turn
 if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
-    evolution_result = processor.process_user_message(...)
+```text
 ```
 
 
@@ -303,7 +303,7 @@ result = processor.process_user_message(
     ai_response="That vulnerability is your greatest strength",
 )
 
-print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
+```text
 ```
 
 
@@ -346,7 +346,7 @@ print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['ne
 
 # In main_v2.py, add debug
 if 'new_glyphs_this_session' in st.session_state:
-    st.sidebar.write(f"Debug: {len(st.session_state['new_glyphs_this_session'])} glyphs in session")
+```text
 ```
 
 
@@ -365,7 +365,7 @@ if 'new_glyphs_this_session' in st.session_state:
 ```python
 
 # In ui.py, enable debug mode to see signals
-st.session_state['show_debug'] = True
+```text
 ```
 
 

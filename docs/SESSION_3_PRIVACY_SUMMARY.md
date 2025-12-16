@@ -22,7 +22,7 @@ You expressed concern: *"My system is still likely storing full non-anonymized c
 ### ✅ Core Privacy Infrastructure (3 Files, 900 Lines)
 
 **1. data_encoding.py** - The 5-Stage Pipeline
-
+```text
 ```
 Raw Text → Signal Detection → Gate Encoding → Glyph Mapping → Anonymous Storage
   ↓         (SIG_CRISIS_001)  (GATE_GRIEF_004)    ([42, 183])      ✓
@@ -78,7 +78,7 @@ Key Features:
 - All tests passing ✓
 
 **verify_privacy_encoding.py** - Standalone Verification
-
+```text
 ```
 ✓ Pipeline initialized
 ✓ Conversation encoded
@@ -134,7 +134,7 @@ READY FOR INTEGRATION ✓
   "timestamp_week": "2025-W02",              // Week level (not exact time)
   "signal_count": 2,                         // Count (not sequence)
   "response_source": "conversation"          // Metadata only
-}
+```text
 ```
 
 
@@ -149,7 +149,7 @@ READY FOR INTEGRATION ✓
 ✗ User phone             +1-555-0123
 ✗ Exact message length   150 characters
 ✗ Exact timestamp        13:24:28.123
-✗ Any identifying info   (anything unique to user)
+```text
 ```
 
 
@@ -187,7 +187,7 @@ What makes someone unique?
 - Exact signals: [suicidal, grief]  → signal_category (crisis)
 
 Result: At least 5 users have identical quasi-identifiers
-No user can be uniquely identified ✓
+```text
 ```
 
 
@@ -199,7 +199,7 @@ Raw text: "I'm suicidal"
 Encoding: SIG_CRISIS_001
 Reversal: ✗ IMPOSSIBLE (one-way hash)
 
-Cannot reconstruct original message ✓
+```text
 ```
 
 
@@ -215,7 +215,7 @@ What's necessary for system to respond appropriately:
 What's NOT necessary:
 ✗ Exact user words (signals capture intent)
 ✗ User identity (hashed for anonymity)
-✗ Exact timing (week-level is enough)
+```text
 ```
 
 
@@ -229,7 +229,7 @@ What's NOT necessary:
 
 ```bash
 grep -r "\.insert\(" emotional_os/core/signal_parser.py
-grep -r "supabase\." emotional_os/
+```text
 ```
 
 
@@ -247,7 +247,7 @@ success, record_id = encode_and_store_conversation(
     system_response=response,
     session_id=session_id,
     db_connection=db,
-)
+```text
 ```
 
 
@@ -301,7 +301,7 @@ Key Achievements:
   6. ✓ Message lengths bucketed (not exact)
   7. ✓ Hash deterministic for same user
 
-READY FOR INTEGRATION WITH signal_parser.py
+```text
 ```
 
 
@@ -317,7 +317,7 @@ User: "I'm suicidal"
 System processes (crisis response works)
      ↓
 BUT: Raw message stored in Supabase ❌
-Privacy concern: GDPR/CCPA/HIPAA risk
+```text
 ```
 
 

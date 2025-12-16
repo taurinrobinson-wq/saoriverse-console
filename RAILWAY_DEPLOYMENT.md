@@ -15,7 +15,7 @@
 ## Step 1: Install Backend Dependencies
 
 ```bash
-pip install fastapi uvicorn pydantic
+```sql
 ```
 
 
@@ -25,7 +25,7 @@ Update `requirements.txt`:
 ```
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
-pydantic==2.5.0
+```sql
 ```
 
 
@@ -40,7 +40,7 @@ Update your `Procfile` to run both backend and frontend:
 api: cd . && python -m uvicorn velinor_api:app --host 0.0.0.0 --port 8000
 
 # Frontend (after Next.js is set up)
-web: cd velinor-web && npm run start
+```text
 ```
 
 
@@ -50,7 +50,7 @@ web: cd velinor-web && npm run start
 ```bash
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 cd velinor-web
-npm install axios zustand
+```text
 ```
 
 
@@ -65,7 +65,7 @@ Copy the frontend files:
 In Railway dashboard, set:
 
 ```
-NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app/api
+```text
 ```
 
 
@@ -86,7 +86,7 @@ git push origin main
 
 # Railway auto-deploys (~3-5 minutes)
 
-# Visit: https://<your-railway-domain>.up.railway.app
+```text
 ```
 
 
@@ -112,7 +112,7 @@ Ensure images are in `velinor-web/public/assets/`:
 velinor-web/public/assets/
 ├── backgrounds/
 ├── overlays/
-└── npcs/
+```text
 ```
 
 
@@ -126,7 +126,7 @@ Railway might be cold-starting both services. Give it 1-2 minutes first.
 Already enabled in `velinor_api.py`:
 
 ```python
-app.add_middleware(CORSMiddleware, allow_origins=["*"])
+```text
 ```
 
 
@@ -142,7 +142,7 @@ python velinor_api.py
 
 # http://localhost:8000
 
-# Swagger docs: http://localhost:8000/docs
+```text
 ```
 
 
@@ -153,7 +153,7 @@ Terminal 2 - Frontend:
 cd velinor-web
 npm run dev
 
-# http://localhost:3000
+```text
 ```
 
 

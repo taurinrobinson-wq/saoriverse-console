@@ -14,7 +14,7 @@ interface EmotionDetectorProps {
   userId: string;              // User's unique ID (required)
   conversationContext?: string; // Context tag (e.g., "grief_support", default: "default")
   isActive?: boolean;          // Enable/disable detection (default: true)
-}
+```text
 ```
 
 
@@ -42,7 +42,7 @@ export default function ChatPage() {
       </div>
     </div>
   );
-}
+```text
 ```
 
 
@@ -88,7 +88,7 @@ export default function ChatPage() {
       </div>
     </div>
   );
-}
+```text
 ```
 
 
@@ -133,7 +133,7 @@ export function EmotionDetectorModal({ userId }: { userId: string }) {
       )}
     </>
   );
-}
+```text
 ```
 
 
@@ -180,7 +180,7 @@ export function ChatWithTabs({ userId }: { userId: string }) {
       </div>
     </div>
   );
-}
+```text
 ```
 
 
@@ -250,7 +250,7 @@ const [error, setError] = useState<string | null>(null);
       </button>
     </div>
   );
-}
+```text
 ```
 
 
@@ -275,7 +275,7 @@ Control detection with the `isActive` prop:
 <EmotionDetector
   userId={user.id}
   isActive={user.preferences.enableEmotionTracking}
-/>
+```text
 ```
 
 
@@ -291,7 +291,7 @@ SELECT emotion, confidence, timestamp, conversation_context
 FROM emotions_log
 WHERE user_id = 'user_123'
 ORDER BY timestamp DESC
-LIMIT 50;
+```text
 ```
 
 
@@ -306,7 +306,7 @@ async function getEmotionHistory(userId: string) {
   );
   const { data } = await response.json();
   return data;
-}
+```text
 ```
 
 
@@ -350,7 +350,7 @@ export function EmotionHistory({ userId }: { userId: string }) {
       </div>
     </div>
   );
-}
+```text
 ```
 
 
@@ -393,7 +393,7 @@ export function EmotionHistory({ userId }: { userId: string }) {
 Run the training script weekly to refine thresholds:
 
 ```bash
-python train_emotion_model.py --user_id user_123 --days 7
+```text
 ```
 
 
@@ -403,7 +403,7 @@ python train_emotion_model.py --user_id user_123 --days 7
 Check which emotions are most frequently detected:
 
 ```bash
-python train_emotion_model.py --all --days 30
+```text
 ```
 
 

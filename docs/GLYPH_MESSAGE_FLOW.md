@@ -130,7 +130,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
   "signal": "θ",
   "voltage": "high",
   "tone": "grief"
-}
+```sql
 ```
 
 
@@ -144,7 +144,7 @@ Below is a linear trace for the common `hybrid` pipeline. For `local` mode the A
   "gate": "Gate 5",
   "display_name": "Still Recognition",
   "response_template": "I hear the ache you’re describing..."
-}
+```text
 ```
 
 

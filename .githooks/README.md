@@ -3,7 +3,7 @@ This folder contains recommended repository hooks.
 ## Usage
 
 To enable the hooks locally for your clone, run:
-
+```text
 ```
 git config core.hooksPath .githooks
 ```

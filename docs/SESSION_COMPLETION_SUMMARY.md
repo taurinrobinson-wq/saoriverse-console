@@ -77,7 +77,7 @@ You now have a **complete, production-ready privacy architecture** that solves t
 ##
 
 ## 🏗️ Architecture Overview
-
+```text
 ```
 User Login
   ↓ (password-derived key)
@@ -164,7 +164,7 @@ pip install cryptography pytest
 # 2. Create database tables (see PRIVACY_LAYER_DATABASE_SCHEMA.md)
 
 # 3. Run tests to verify everything works
-pytest test_privacy_layer.py -v
+```text
 ```
 
 
@@ -299,7 +299,7 @@ Login: "Hi there!"
 Conversation: "You said what about your work stress?"
 History: None
 Memory: None
-Personalization: Minimal
+```text
 ```
 
 

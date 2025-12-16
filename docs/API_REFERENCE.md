@@ -33,7 +33,7 @@ Orchestrate the entire response pipeline from user input to response text.
 from src import process_user_input
 
 response = process_user_input("I'm feeling overwhelmed")
-print(response)  # Returns generated response
+```text
 ```
 
 
@@ -71,7 +71,7 @@ print(signal)
 #   "certainty": 0.9,
 #   "valence": 0.8
 
-# }
+```text
 ```
 
 
@@ -89,7 +89,7 @@ Extract semantic themes from text.
 ```python
 themes = extract_themes("Work is stressful and relationships are complicated")
 
-# ["work", "stress", "relationships", "complexity"]
+```text
 ```
 
 
@@ -123,7 +123,7 @@ Compose response from multiple glyphs.
 from src.enhanced_response_composer import DynamicResponseComposer
 
 composer = DynamicResponseComposer()
-response = composer.compose_multi_glyph_response(signal, glyphs)
+```text
 ```
 
 
@@ -153,7 +153,7 @@ Transcribe audio file to text (STT).
 from src.voice_interface import VoiceInterface
 
 voice = VoiceInterface()
-text = voice.transcribe_audio("user_input.mp3")
+```text
 ```
 
 
@@ -170,7 +170,7 @@ Synthesize text to speech with glyph prosody (TTS).
 **Example:**
 
 ```python
-audio_bytes = voice.synthesize_speech("That sounds difficult", glyph)
+```text
 ```
 
 
@@ -210,7 +210,7 @@ capsule = RelationalMemoryCapsule(
     response="That sounds difficult...",
     glyph=selected_glyph,
 )
-store_capsule(capsule)
+```text
 ```
 
 
@@ -253,7 +253,7 @@ Generate prosody parameters for text.
 from src.prosody_planner import ProsodyPlanner
 
 planner = ProsodyPlanner()
-prosody = planner.plan_prosody(glyph, "Take your time...")
+```text
 ```
 
 
@@ -284,7 +284,7 @@ Synthesize text to audio.
 from src.streaming_tts import StreamingTTS
 
 tts = StreamingTTS()
-audio = tts.synthesize("Hello, how are you?")
+```text
 ```
 
 
@@ -316,7 +316,7 @@ Transcribe audio file to text.
 from src.audio_pipeline import AudioPipeline
 
 pipeline = AudioPipeline()
-text = pipeline.transcribe("user_audio.mp3")
+```text
 ```
 
 
@@ -347,7 +347,7 @@ Extract learnable patterns from interaction.
 from src.lexicon_learner import LexiconLearner
 
 learner = LexiconLearner()
-patterns = learner.extract_patterns(user_input, signal)
+```text
 ```
 
 
@@ -362,7 +362,7 @@ patterns = learner.extract_patterns(user_input, signal)
 **Run the app:**
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 
@@ -381,7 +381,7 @@ streamlit run app.py
 from src import process_user_input
 
 response = process_user_input("I'm feeling lost")
-print(response)
+```text
 ```
 
 
@@ -401,7 +401,7 @@ text = voice.transcribe_audio("user_input.mp3")
 response = process_user_input(text)
 
 # 3. Synthesize response to audio
-audio_bytes = voice.synthesize_speech(response, glyph)
+```text
 ```
 
 
@@ -427,7 +427,7 @@ capsule = RelationalMemoryCapsule(
     response=response,
     glyph=selected_glyph,
 )
-store_capsule(capsule)
+```text
 ```
 
 
@@ -445,7 +445,7 @@ try:
 except ValueError as e:
     print(f"Invalid input: {e}")
 except Exception as e:
-    print(f"System error: {e}")
+```text
 ```
 
 
@@ -462,7 +462,7 @@ except Exception as e:
     "attunement": 0.7,           # Connection level
     "certainty": 0.5,            # Confidence
     "valence": 0.3,              # Positive/negative
-}
+```text
 ```
 
 
@@ -477,7 +477,7 @@ except Exception as e:
     "response_templates": [...],
     "base_emotion": "Joy",
     "prosody_profile": {...},
-}
+```text
 ```
 
 
@@ -493,7 +493,7 @@ except Exception as e:
         {"position": 0.3, "duration": 0.5},
         {"position": 0.7, "duration": 0.3},
     ]
-}
+```text
 ```
 
 

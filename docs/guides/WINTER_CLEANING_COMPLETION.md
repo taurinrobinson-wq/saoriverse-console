@@ -12,7 +12,7 @@ Successfully reorganized the root directory from **30 Python files** down to **1
 ### ✅ Phase Infrastructure → `archive/phase_infrastructure/` (8 files)
 
 These are historical phase files from the glyph generation pipeline that are preserved for reference:
-
+```text
 ```
 archive/phase_infrastructure/
 ├── __init__.py
@@ -36,7 +36,7 @@ archive/phase_infrastructure/
 ### ✅ Analysis Tools → `tools/analysis/` (4 files)
 
 Specialized analysis and reporting utilities:
-
+```text
 ```
 tools/analysis/
 ├── __init__.py
@@ -51,7 +51,7 @@ tools/analysis/
 ### ✅ Document Processing → `tools/document_processing/` (3 files)
 
 Document handling utilities:
-
+```text
 ```
 tools/document_processing/
 ├── __init__.py
@@ -65,7 +65,7 @@ tools/document_processing/
 ### ✅ Glyph Testing Tools → `tools/glyph_testing/` (2 files)
 
 Glyph testing and validation:
-
+```text
 ```
 tools/glyph_testing/
 ├── __init__.py
@@ -80,7 +80,7 @@ tools/glyph_testing/
 ### ✅ Test Files → `tests/integration/` (3 files)
 
 Integration and temporary test files:
-
+```text
 ```
 tests/integration/
 ├── test_scenarios.py
@@ -163,7 +163,7 @@ Files now available in new locations:
 ##
 
 ## Directory Structure - Final State
-
+```text
 ```
 /workspaces/saoriverse-console/
 ├── start.py                          (Railroad entry)

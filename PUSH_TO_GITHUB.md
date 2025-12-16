@@ -32,7 +32,7 @@ Enables self-hosted VPS deployment with automated CI/CD pipeline.
 Replaces unreliable Railway deployment."
 
 # Push to GitHub
-git push origin main
+```text
 ```
 
 
@@ -67,7 +67,7 @@ ls -la VPS_MIGRATION_CHECKLIST.md
 # Check file integrity
 cat docker-compose.prod.yml | head -5
 cat nginx.prod.conf | head -5
-cat .github/workflows/deploy.yml | head -5
+```text
 ```
 
 
@@ -97,7 +97,7 @@ ssh root@YOUR_DROPLET_IP
 cd /opt/velinor
 git pull origin main
 docker compose -f docker-compose.prod.yml build
-docker compose -f docker-compose.prod.yml up -d
+```text
 ```
 
 
@@ -113,7 +113,7 @@ git add nginx.prod.conf
 git commit -m "chore: update nginx configuration"
 git push origin main
 
-# Auto-deploys to VPS!
+```text
 ```
 
 
@@ -132,7 +132,7 @@ cd /opt/velinor
 git log --oneline  # Find commit to revert to
 git checkout COMMIT_HASH
 docker compose -f docker-compose.prod.yml build
-docker compose -f docker-compose.prod.yml up -d
+```text
 ```
 
 

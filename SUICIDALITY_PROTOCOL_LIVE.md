@@ -9,7 +9,7 @@
 ### ✅ Test 1: Initial Disclosure Detection
 **Input:** "I have thoughts of suicide and I don't know how to keep going"
 **Output:**
-
+```text
 ```
 Source: suicidality_protocol
 Response: "You named thoughts of suicide. That is heavy. Thank you for trusting me with it.
@@ -68,7 +68,7 @@ When someone discloses suicidal ideation, the system correctly routes to the sui
 ##
 
 ## State Machine Flow
-
+```text
 ```
 Suicidal disclosure detected
               ↓
@@ -175,7 +175,7 @@ result = parse_input(
 #     "first_disclosure": "2025-12-03T..."
 #   }
 
-# }
+```text
 ```
 
 

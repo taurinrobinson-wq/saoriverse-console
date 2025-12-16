@@ -21,7 +21,7 @@
 ##
 
 ## TEST EXECUTION SUMMARY
-
+```text
 ```
 Platform: Windows 10 / Python 3.13.7
 Framework: pytest 9.0.1
@@ -76,7 +76,7 @@ Execution Time: 0.39 seconds
 ## PERFORMANCE VERIFICATION
 
 ### Actual Measurements
-
+```text
 ```
 Stage 1: Memory tracking          0-3ms  ✓
 Stage 2: Safety checking          3-8ms  ✓
@@ -224,7 +224,7 @@ Status: ✅ ON TRACK
 ##
 
 ## DELIVERABLES MANIFEST
-
+```text
 ```
 Implementation (18.9 KB):
 ├── src/emotional_os/tier1_foundation.py      (9.7 KB)

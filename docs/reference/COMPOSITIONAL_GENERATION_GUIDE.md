@@ -15,7 +15,7 @@ Your local system was generating responses that *felt* templated because:
 Instead of **fill-the-template**, use **compose-from-fragments**:
 
 ### Architecture Overview
-
+```text
 ```
 User Message
     ↓
@@ -65,7 +65,7 @@ if 'anxiety' in keywords:
 
 # - "mental block on it" (anxiety keyword in context: NO)
 
-# - "it's inherited from Michelle because she is very anxious" (anxiety keyword: YES, but USER is contradicting)
+```text
 ```
 
 
@@ -108,7 +108,7 @@ response = compose_message_aware_response(
 
 # concept structure doesn't match your natural thinking pattern. That's not fixed—it's just a
 
-# mismatch to navigate. What would it feel like to approach math frustration differently?"
+```text
 ```
 
 
@@ -139,7 +139,7 @@ def detect_feedback_correction(input_text, last_assistant_message):
     # Pattern: User says "no, actually..." after a claim
     # → is_correction: True, contradiction_type: "negation"
 
-    # Result: Response addresses the *correction*, not just the emotion
+```text
 ```
 
 
@@ -154,7 +154,7 @@ def extract_message_features(input_text):
         "inherited_pattern": "inherited from" in text,
         "person_involved": extract_people(text),  # spaCy NER
     }
-    # Then respond to the *actual features present*, not generic emotion
+```text
 ```
 
 
@@ -170,7 +170,7 @@ class DynamicResponseComposer:
         "curiosity": ["Tell me more about {entity}.", "What does {entity} feel like?", ...],
     }
 
-    # Select randomly, fill entity, result feels fresh each time
+```text
 ```
 
 
@@ -197,7 +197,7 @@ especially when it's presented in a way that doesn't match how their mind
 naturally works... We can absolutely break this into tiny, concrete steps,
 or I can walk through one problem with you... Would you want to tackle one
 small piece together, or would you rather have a script you can use with Michelle?"
-→ Directly addresses message content: math block + Michelle + wanting help
+```text
 ```
 
 
@@ -221,7 +221,7 @@ real isolation. That's not a failing on your part—it's a rhythm mismatch. Ment
 blocks are usually where the concept structure doesn't match your natural thinking
 pattern. That's not fixed—it's just a mismatch to navigate. What would it feel
 like to approach math frustration differently?"
-→ Layers: math block + communication friction + Michelle specificity
+```text
 ```
 
 

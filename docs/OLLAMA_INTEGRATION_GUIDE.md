@@ -18,7 +18,7 @@ docker-compose -f docker-compose.local.yml up -d
 
 # Streamlit available at: http://localhost:8501
 
-# Ollama API available at: http://localhost:11434
+```text
 ```
 
 
@@ -36,7 +36,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 # Or try other models
 docker-compose -f docker-compose.local.yml exec ollama ollama pull mistral      # ~4.1GB
 docker-compose -f docker-compose.local.yml exec ollama ollama pull neural-chat  # ~4.1GB
-docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini    # ~1.3GB (faster, less capable)
+```text
 ```
 
 
@@ -53,7 +53,7 @@ curl -X POST http://localhost:11434/api/generate -d '{
   "model": "llama3",
   "prompt": "Why is the sky blue?",
   "stream": false
-}'
+```text
 ```
 
 
@@ -98,7 +98,7 @@ ollama = get_ollama_client_singleton()
 ollama.is_available()                                    # Check if service running
 ollama.get_available_models()                            # List pulled models
 ollama.generate(prompt, model="llama3")                  # Generate response
-ollama.generate_with_context(user_input, history, model) # With conversation context
+```text
 ```
 
 
@@ -116,7 +116,7 @@ System prompt sets FirstPerson personality:
 
 ```
 You are FirstPerson, a warm, empathetic AI companion for personal growth.
-Respond with genuine understanding, specific engagement, and practical support.
+```text
 ```
 
 
@@ -156,7 +156,7 @@ Tier 3 Poetic Consciousness (optional metaphor)
     ↓
 Strip prosody metadata + prevent repetition
     ↓
-Display to user
+```text
 ```
 
 
@@ -192,7 +192,7 @@ STREAMLIT_LOGGER_LEVEL=info
 
 # Optional: GPU acceleration (requires nvidia-docker)
 
-# CUDA_VISIBLE_DEVICES=0
+```text
 ```
 
 
@@ -204,7 +204,7 @@ Edit `_get_ollama_fallback_response()` in `response_handler.py`:
 ```python
 system_prompt = """You are FirstPerson, a warm, empathetic AI companion...
 [customize personality and behavior here]
-"""
+```text
 ```
 
 
@@ -225,7 +225,7 @@ docker-compose -f docker-compose.local.yml logs ollama
 docker network ls | grep firstperson_network
 
 # Restart services
-docker-compose -f docker-compose.local.yml restart
+```text
 ```
 
 
@@ -238,7 +238,7 @@ docker-compose -f docker-compose.local.yml restart
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # Verify
-curl http://localhost:11434/api/tags
+```text
 ```
 
 
@@ -260,7 +260,7 @@ docker system prune -a
 
 # Remove model data if needed (warning: deletes models)
 
-# docker volume rm ollama_data
+```text
 ```
 
 
@@ -282,7 +282,7 @@ deploy:
       devices:
         - driver: nvidia
           count: 1
-          capabilities: [gpu]
+```bash
 ```
 
 
@@ -321,7 +321,7 @@ response = client.generate_with_context(
 ) -> str
 
 # Health status
-status = client.health_check() -> dict
+```text
 ```
 
 
@@ -346,7 +346,7 @@ client = get_ollama_client_singleton()
 print(client.is_available())
 print(client.get_available_models())
 response = client.generate("Hello! How can I help?", model="llama3")
-print(response)
+```text
 ```
 
 
@@ -358,7 +358,7 @@ Enable debug logging:
 ```python
 import logging
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger("src.emotional_os.deploy.modules.ollama_client")
+```text
 ```
 
 

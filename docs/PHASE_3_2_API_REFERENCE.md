@@ -22,7 +22,7 @@ Main class for analyzing vocal emotion from acoustic features.
 ##### `__init__()`
 
 ```python
-detector = VoiceAffectDetector()
+```text
 ```
 
 
@@ -54,7 +54,7 @@ features = AcousticFeatures(
     mel_frequency_coefficients=[1.0] * 13,
     duration=5.0,
 )
-analysis = detector.analyze(features)
+```text
 ```
 
 
@@ -89,7 +89,7 @@ Compares voice emotion against text emotion to detect incongruences.
     "is_sarcasm": False,
     "is_suppression": True,
     "explanation": "Calm/hesitant voice with excited text suggests suppression",
-}
+```text
 ```
 
 
@@ -127,7 +127,7 @@ class AcousticFeatures:
     energy_variance: float            # dB^2, measure of intensity fluctuation
     formant_frequencies: List[float]  # Hz, typically 3 values [F1, F2, F3]
     mel_frequency_coefficients: List[float]  # 13 MFCCs
-    duration: float                   # seconds
+```text
 ```
 
 
@@ -157,7 +157,7 @@ class VoiceAnalysis:
     dominance: float                         # 0-1
     stress_indicator: float                  # 0-1
     emotional_state: Dict[str, float]        # All 8 tones with confidences
-    confidence: float                        # 0-1
+```text
 ```
 
 
@@ -176,7 +176,7 @@ Main class for analyzing facial emotion from landmarks.
 ##### `__init__()`
 
 ```python
-detector = FacialExpressionDetector()
+```text
 ```
 
 
@@ -207,7 +207,7 @@ landmarks = FaceLandmarks(
 )
 analysis = detector.analyze(landmarks)
 print(f"Expression: {analysis.expression}")
-print(f"Authenticity: {analysis.authenticity:.2f}")
+```text
 ```
 
 
@@ -261,7 +261,7 @@ class FaceLandmarks:
     nose: List[Tuple[float, float]]                 # 9 points
     right_eye: List[Tuple[float, float]]            # 6 points
     left_eye: List[Tuple[float, float]]             # 6 points
-    mouth: List[Tuple[float, float]]                # 20 points
+```text
 ```
 
 
@@ -282,7 +282,7 @@ class EyeMetrics:
     pupil_dilation: float               # 0-1, constricted to dilated
     blink_rate: float                   # blinks per minute (0-30 typical)
     gaze_direction: str                 # "left", "center", "right"
-    fixation_duration: float            # seconds, how long looking at one point
+```text
 ```
 
 
@@ -300,7 +300,7 @@ class MouthMetrics:
     smile_intensity: float              # 0-1, no smile to full smile
     mouth_openness: float               # 0-1, closed to wide open
     lip_tension: float                  # 0-1, relaxed to tense
-    mouth_asymmetry: float              # 0-1, symmetric to asymmetric
+```text
 ```
 
 
@@ -325,7 +325,7 @@ class FacialAnalysis:
     valence: float                               # 0-1, negative to positive
     dominance: float                             # 0-1, submissive to assertive
     attention: float                             # 0-1, distracted to focused
-    authenticity: float                          # 0-1, fake to genuine
+```text
 ```
 
 
@@ -344,7 +344,7 @@ Fuses text, voice, and facial data into unified emotional understanding.
 ##### `__init__()`
 
 ```python
-engine = MultimodalFusionEngine()
+```text
 ```
 
 
@@ -378,7 +378,7 @@ print(f"Congruence: {result.congruence_type}")
 
 if result.incongruences:
     for inc in result.incongruences:
-        print(f"  ⚠️  {inc}")
+```text
 ```
 
 
@@ -408,7 +408,7 @@ class ModularityConfidence:
     text_confidence: float               # 0-1
     voice_confidence: float              # 0-1
     facial_confidence: float             # 0-1
-    overall_confidence: float            # 0-1, weighted average
+```text
 ```
 
 
@@ -429,7 +429,7 @@ class EmotionalDimensions:
     arousal_source: str                  # "text", "voice", "facial"
     valence_source: str                  # "text", "voice", "facial"
     dominance_source: str                # "text", "voice", "facial"
-    stress_level: float                  # 0-1, combined stress indicator
+```text
 ```
 
 
@@ -451,7 +451,7 @@ class MultimodalAnalysis:
     dimensions: EmotionalDimensions
     confidence: ModularityConfidence
     comparison: ModularityComparison            # Detailed modality breakdown
-    authenticity: float                         # 0-1, combined genuineness
+```text
 ```
 
 
@@ -469,7 +469,7 @@ Container for all 11 Action Unit measurements.
 @dataclass
 class ActionUnitIntensities:
     intensities: Dict[str, float]  # Keys: "AU1_inner_brow_raiser", "AU2_outer_brow_raiser", etc.
-                                   # Values: 0-1 intensity
+```text
 ```
 
 
@@ -503,7 +503,7 @@ class ModularityComparison:
     facial_details: str         # Summary of facial expression
     text_voice_alignment: float # 0-1
     voice_facial_alignment: float # 0-1
-    text_facial_alignment: float # 0-1
+```text
 ```
 
 
@@ -514,7 +514,7 @@ class ModularityComparison:
 ### VoiceAffectTone
 
 ```python
-CALM, ENERGETIC, HESITANT, ANGRY, SAD, EXCITED, ANXIOUS, CONFIDENT
+```text
 ```
 
 
@@ -522,7 +522,7 @@ CALM, ENERGETIC, HESITANT, ANGRY, SAD, EXCITED, ANXIOUS, CONFIDENT
 ### FacialExpression
 
 ```python
-HAPPY, SAD, FEARFUL, SURPRISED, ANGRY, DISGUSTED, CONTEMPTUOUS, NEUTRAL
+```text
 ```
 
 
@@ -530,7 +530,7 @@ HAPPY, SAD, FEARFUL, SURPRISED, ANGRY, DISGUSTED, CONTEMPTUOUS, NEUTRAL
 ### ActionUnit
 
 ```python
-AU1, AU2, AU4, AU5, AU6, AU7, AU9, AU10, AU12, AU15, AU26
+```text
 ```
 
 
@@ -539,7 +539,7 @@ AU1, AU2, AU4, AU5, AU6, AU7, AU9, AU10, AU12, AU15, AU26
 
 ```python
 FULL_AGREEMENT, PARTIAL_AGREEMENT, MODALITY_CONFLICT,
-TEXT_POSITIVE_VOICE_NEGATIVE, SUPPRESSION, CONSISTENT_FAKE
+```text
 ```
 
 
@@ -555,7 +555,7 @@ from emotional_os.core.firstperson import VoiceAffectDetector, AcousticFeatures
 detector = VoiceAffectDetector()
 features = AcousticFeatures(...)
 analysis = detector.analyze(features)
-print(analysis.detected_tone)
+```text
 ```
 
 
@@ -572,7 +572,7 @@ analysis = detector.analyze(landmarks)
 if analysis.authenticity > 0.7:
     print("Genuine expression")
 else:
-    print("Possibly fake/forced expression")
+```text
 ```
 
 
@@ -587,7 +587,7 @@ result = engine.fuse(text_tone, voice_analysis, facial_analysis)
 
 print(f"Emotion: {result.primary_emotion}")
 print(f"Confidence: {result.confidence.overall_confidence:.2%}")
-print(f"Detected: {', '.join(result.incongruences) if result.incongruences else 'None'}")
+```text
 ```
 
 
@@ -597,7 +597,7 @@ print(f"Detected: {', '.join(result.incongruences) if result.incongruences else 
 ```python
 if result.congruence_type == "TEXT_POSITIVE_VOICE_NEGATIVE":
     print("⚠️  Possible sarcasm detected")
-    print(f"Text says happy but voice/face show negative")
+```text
 ```
 
 

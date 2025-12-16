@@ -5,7 +5,7 @@
 Your Velinor game now integrates with the FirstPerson emotional analysis system to deliver **nuanced, emotionally-aware NPC responses**. Instead of generic dialogue, NPCs adapt their tone, empathy, and responses based on real-time analysis of the player's emotional state.
 
 ## 🔗 Integration Architecture
-
+```text
 ```
 Player Input (typed or choice)
         ↓
@@ -68,7 +68,7 @@ When a player types a message, FirstPerson extracts:
 ### Based on Emotional Tone
 
 **If player is "uplifting":**
-
+```text
 ```
 NPC: I feel that brightness too.
 That's a light worth holding.
@@ -78,7 +78,7 @@ Tell me more about what that feels like.
 
 
 **If player is "heavy":**
-
+```text
 ```
 NPC: I hear the weight in that.
 The gravity of it—I feel it too.
@@ -88,7 +88,7 @@ What needs to be said about it?
 
 
 **If player is "reflective":**
-
+```text
 ```
 NPC: There's something to sit with there.
 That deserves thought.
@@ -100,7 +100,7 @@ What's sitting underneath that?
 ### Based on Theme Recurrence
 
 If the player keeps mentioning grief:
-
+```text
 ```
 NPC: The weight in that stays with you, doesn't it?
 I keep hearing grief come back for you.
@@ -113,7 +113,7 @@ What do you need?
 ### Based on Emotional Trajectory
 
 If emotions are **worsening** (getting more negative):
-
+```text
 ```
 NPC: I'm noticing the weight increasing.
 What's happening?
@@ -122,7 +122,7 @@ What's happening?
 
 
 If emotions are **improving** (getting more positive):
-
+```text
 ```
 NPC: I'm also noticing a shift.
 What's helping?
@@ -142,7 +142,7 @@ if 'firstperson_orchestrator' not in st.session_state:
         user_id='velinor_player',
         conversation_id='velinor_game'
     )
-    st.session_state.firstperson_orchestrator.initialize_session()
+```text
 ```
 
 
@@ -159,7 +159,7 @@ orchestrator = VelinorTwineOrchestrator(
     story_path=str(story_path),
     first_person_module=firstperson_orchestrator,  # ← Connected here
     npc_system=None
-)
+```text
 ```
 
 
@@ -183,7 +183,7 @@ player_analysis = self._summarize_player_intent(player_input, player_id)
         'recurring_themes': ['grief'],
         'emotional_trend': 'stable'
     }
-}
+```text
 ```
 
 
@@ -203,7 +203,7 @@ dialogue = self._generate_emotionally_aware_response(
     memory=memory_context,
     npc_personality=npc_personality,
     is_multiplayer=False
-)
+```text
 ```
 
 
@@ -218,7 +218,7 @@ The `_generate_emotionally_aware_response()` method constructs responses in thre
 uplifting:   "I feel that brightness too"
 heavy:       "I hear the weight in that"
 reflective:  "There's something to sit with there"
-curious:     "Tell me more about that"
+```text
 ```
 
 
@@ -232,7 +232,7 @@ Theme acknowledgment:
 - general:   "What you're naming has weight"
 
 + Memory awareness (if recurring):
-"I'm noticing {theme} keeps coming back to you"
+```text
 ```
 
 
@@ -242,7 +242,7 @@ Theme acknowledgment:
 ```
 High intensity (>0.7):  "What needs to be said about it?"
 Low intensity (<0.3):   "What's sitting underneath that?"
-Medium:                 "What would help you carry this?"
+```text
 ```
 
 
@@ -265,7 +265,7 @@ FirstPerson maintains memory across turns:
 ```python
 frequency_reflection = orchestrator.memory.get_frequency_reflection("grief")
 
-# Returns: "I'm hearing grief come up again. That's important."
+```text
 ```
 
 
@@ -279,7 +279,7 @@ trend = memory['emotional_trend']  # 'improving', 'worsening', or 'stable'
 if trend == 'worsening':
     response += " I'm noticing the weight increasing. What's happening?"
 elif trend == 'improving':
-    response += " What's helping?"
+```text
 ```
 
 
@@ -294,7 +294,7 @@ elif trend == 'improving':
 source venv/bin/activate
 
 # Run the Velinor game
-streamlit run velinor_app.py
+```text
 ```
 
 
@@ -306,7 +306,7 @@ The integration works automatically—no configuration needed!
 ```bash
 
 # Run the integration test
-python3 FIRSTPERSON_INTEGRATION_TEST.py
+```text
 ```
 
 
@@ -333,7 +333,7 @@ Analysis: {
 }
 NPC Response:
 "I hear the weight in that. Loss shapes us in ways words
-sometimes can't reach. What would help you carry this?"
+```text
 ```
 
 
@@ -357,7 +357,7 @@ Analysis: {
 NPC Response:
 "I hear the weight in that. And I'm noticing grief keeps
 coming back to you. That tells me something. What needs
-to be said about it?"
+```text
 ```
 
 
@@ -381,7 +381,7 @@ Analysis: {
 NPC Response:
 "There's something to sit with there. I'm also noticing
 a shift. What's helping? Tell me more about what you're
-remembering."
+```text
 ```
 
 
@@ -408,7 +408,7 @@ Optional: For cloud deployment or advanced features, you can add:
 # .streamlit/secrets.toml (if deploying with Streamlit Cloud)
 [firstperson]
 enable_affect_analysis = true
-session_scope = "velinor_game"
+```text
 ```
 
 

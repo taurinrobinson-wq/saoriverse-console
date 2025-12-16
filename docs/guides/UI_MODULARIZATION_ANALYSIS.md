@@ -25,7 +25,7 @@ The current `ui.py` is a monolithic module handling ~12 major responsibilities, 
 ##
 
 ## Proposed Modularization Structure
-
+```text
 ```
 emotional_os/deploy/modules/
 ├── ui.py (REFACTORED - entry point & orchestration, ~300 lines)
@@ -373,7 +373,7 @@ def main():
         render_main_app()
 
 if __name__ == "__main__":
-    main()
+```text
 ```
 
 

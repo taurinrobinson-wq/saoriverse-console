@@ -8,7 +8,7 @@
 ### Run All Tests
 
 ```bash
-pytest tests/
+```text
 ```
 
 
@@ -16,7 +16,7 @@ pytest tests/
 ### Run Only Unit Tests
 
 ```bash
-pytest tests/unit/
+```text
 ```
 
 
@@ -24,7 +24,7 @@ pytest tests/unit/
 ### Run Only Integration Tests
 
 ```bash
-pytest tests/integration/
+```text
 ```
 
 
@@ -32,7 +32,7 @@ pytest tests/integration/
 ### Run Specific Test File
 
 ```bash
-pytest tests/unit/test_signal_parser.py -v
+```text
 ```
 
 
@@ -42,7 +42,7 @@ pytest tests/unit/test_signal_parser.py -v
 ```bash
 pytest tests/ --cov=src --cov-report=html
 
-# Open htmlcov/index.html to view coverage
+```text
 ```
 
 
@@ -107,7 +107,7 @@ def sample_signal():
 
 @pytest.fixture
 def sample_user_input():
-    return "I've been feeling lost lately."
+```text
 ```
 
 
@@ -117,7 +117,7 @@ def sample_user_input():
 ```python
 def test_parser(sample_user_input):
     result = parse_input(sample_user_input)
-    assert result is not None
+```text
 ```
 
 
@@ -150,7 +150,7 @@ class TestMyFunction:
     def test_error_handling(self):
         """Test error handling."""
         with pytest.raises(ValueError):
-            my_function(None)
+```text
 ```
 
 
@@ -176,7 +176,7 @@ def test_full_pipeline():
     # Generate response
     response = process_user_input(user_input)
     assert response is not None
-    assert len(response) > 0
+```text
 ```
 
 
@@ -194,7 +194,7 @@ def test_with_mock():
         mock_func.return_value = "mocked"
         result = my_function()
         assert result == "mocked"
-        mock_func.assert_called_once()
+```text
 ```
 
 
@@ -210,7 +210,7 @@ def temp_data_dir(tmp_path):
 def test_file_operations(temp_data_dir):
     """Test with temporary directory."""
     file_path = temp_data_dir / "test.json"
-    # Use file_path for testing
+```text
 ```
 
 
@@ -225,7 +225,7 @@ def test_file_operations(temp_data_dir):
 ])
 def test_emotion_detection(input, expected):
     result = detect_emotion(input)
-    assert result == expected
+```text
 ```
 
 
@@ -237,7 +237,7 @@ def test_emotion_detection(input, expected):
 
 ```bash
 pytest tests/unit/              # All unit tests
-pytest tests/integration/       # All integration tests
+```text
 ```
 
 
@@ -246,7 +246,7 @@ pytest tests/integration/       # All integration tests
 
 ```bash
 pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
-pytest tests/ -k "test_parse"   # Tests with "test_parse" in name
+```text
 ```
 
 
@@ -257,7 +257,7 @@ pytest tests/ -k "test_parse"   # Tests with "test_parse" in name
 
 # Define in test: @pytest.mark.slow
 pytest tests/ -m slow           # Only marked tests
-pytest tests/ -m "not slow"     # Skip marked tests
+```text
 ```
 
 
@@ -265,7 +265,7 @@ pytest tests/ -m "not slow"     # Skip marked tests
 ### Specific Test
 
 ```bash
-pytest tests/unit/test_signal_parser.py::TestParser::test_happy_path
+```text
 ```
 
 
@@ -291,7 +291,7 @@ pytest tests/unit/test_signal_parser.py::TestParser::test_happy_path
 pytest tests/unit/ --tb=short
 
 # If all pass:
-git commit -m "..."
+```text
 ```
 
 
@@ -304,7 +304,7 @@ git commit -m "..."
 ```bash
 pytest tests/ -v                # Show all test names
 pytest tests/ -vv               # Even more detail
-pytest tests/ -vvv              # Maximum verbosity
+```text
 ```
 
 
@@ -315,7 +315,7 @@ pytest tests/ -vvv              # Maximum verbosity
 def test_something():
     result = my_function()
     print(f"Result: {result}")  # Will show with -s flag
-    pytest.set_trace()           # Drop into debugger
+```text
 ```
 
 
@@ -324,7 +324,7 @@ Run with:
 
 ```bash
 pytest tests/ -s                # Show print() output
-pytest tests/ --pdb             # Drop into debugger on failure
+```text
 ```
 
 
@@ -333,7 +333,7 @@ pytest tests/ --pdb             # Drop into debugger on failure
 
 ```bash
 pytest tests/ -l                # Show locals on failure
-pytest tests/ --tb=long         # Longer traceback
+```text
 ```
 
 
@@ -344,7 +344,7 @@ pytest tests/ --tb=long         # Longer traceback
 ### Generate Coverage
 
 ```bash
-pytest tests/ --cov=src
+```text
 ```
 
 
@@ -353,7 +353,7 @@ pytest tests/ --cov=src
 
 ```bash
 pytest tests/ --cov=src --cov-report=html
-open htmlcov/index.html
+```text
 ```
 
 

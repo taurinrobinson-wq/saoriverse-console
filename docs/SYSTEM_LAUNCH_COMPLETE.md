@@ -9,7 +9,7 @@
 - **Pipeline:** 3-tier architecture active
 
 ### ✅ API Endpoints
-
+```text
 ```
 GET  /health              → System status (✅ <5ms)
 POST /chat                → Send message (✅ <2000ms)
@@ -21,7 +21,7 @@ POST /transcribe          → STT ready (Whisper model)
 
 
 ### ✅ Features Implemented
-
+```text
 ```
 Theme Detection
   ├─ Grief detection ✅
@@ -47,7 +47,7 @@ Response Generation
 
 
 ### ✅ Issues Fixed This Session
-
+```text
 ```
 1. TTS Timeout
    - Problem: Hanging indefinitely
@@ -71,7 +71,7 @@ Response Generation
 ## 📊 Test Results
 
 ### All Endpoints Tested with Timeouts
-
+```text
 ```
 Endpoint            Timeout  Actual Response  Status
 ────────────────────────────────────────────────────
@@ -111,7 +111,7 @@ GET  /conversations   2s        <50ms         ✅ PASS
 ## 🏗️ Architecture Verification
 
 ### 3-Tier Pipeline
-
+```text
 ```
 Input Message
     ↓
@@ -184,7 +184,7 @@ Return to Client (~85-90ms total)
 ## 🚀 What Happens Next
 
 ### You Can Do Now
-
+```text
 ```
 1. Open http://127.0.0.1:8000/docs
    → See interactive API documentation
@@ -206,7 +206,7 @@ Return to Client (~85-90ms total)
 
 
 ### Production Deployment
-
+```text
 ```
 1. Move to production environment
 2. Configure Supabase for persistence
@@ -219,7 +219,7 @@ Return to Client (~85-90ms total)
 
 
 ### Enhancements (Optional)
-
+```text
 ```
 1. Ollama local LLM integration
 2. Voice emotion detection (Phase 3.2)

@@ -18,7 +18,7 @@ class ConversationManager:
     - load_conversations() → Fetches user's conversation list
     - load_conversation(id) → Loads specific conversation
     - delete_conversation(id) → Removes conversation
-    - rename_conversation(id, new_title) → Updates title
+```text
 ```
 
 
@@ -36,7 +36,7 @@ Intelligently generates conversation titles from the first user message:
 ```python
 generate_auto_name("I've been feeling anxious about work")
 
-# Returns: "Feeling anxious about work"
+```text
 ```
 
 
@@ -59,7 +59,7 @@ New sidebar features:
 ├── 💬 [Another Conversation]
 └── ➕ New Conversation
 
-💾 Save my chats (checkbox)
+```text
 ```
 
 
@@ -170,7 +170,7 @@ If "Save my chats" checked → Saved to Supabase
     ↓
 Page refresh
     ↓
-Conversation preserved in sidebar
+```text
 ```
 
 
@@ -188,7 +188,7 @@ session_state updated with messages
     ↓
 Chat history displayed
     ↓
-Can continue conversation or start new one
+```text
 ```
 
 
@@ -212,7 +212,7 @@ st.session_state = {
     ],
     'persist_history': True,  # User preference
     'selected_conversation': 'conv-id-xyz'  # If loading
-}
+```text
 ```
 
 
@@ -303,7 +303,7 @@ Documentation/
   ├── CONVERSATION_STORAGE.md         (new - setup & usage guide)
 
 .git/
-  └── [commit 322c3c4]               (feature commit)
+```text
 ```
 
 

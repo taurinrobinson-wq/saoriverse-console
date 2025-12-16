@@ -13,7 +13,7 @@ After the repository restructuring that moved files from root to `src/` director
 Added `src/` to `sys.path` so Python can find the modules:
 
 ```python
-sys.path.insert(0, str(Path(__file__).parent / "src"))
+```sql
 ```
 
 
@@ -30,7 +30,7 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["emotional_os*", "emotional_os_*"]
+```text
 ```
 
 
@@ -42,7 +42,7 @@ include = ["emotional_os*", "emotional_os_*"]
 package_dir = {= src}
 
 [options.packages.find]
-where = src
+```text
 ```
 
 
@@ -74,7 +74,7 @@ for key, module in list(sys.modules.items()):
     if key.startswith('emotional_os_glyphs'):
         # Map emotional_os_glyphs.X to emotional_os.glyphs.X
         new_key = key.replace('emotional_os_glyphs', 'emotional_os.glyphs')
-        sys.modules[new_key] = module
+```sql
 ```
 
 

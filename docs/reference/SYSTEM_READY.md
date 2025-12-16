@@ -53,7 +53,7 @@ New glyphs are automatically:
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-python ascii_glyph_demo.py
+```text
 ```
 
 
@@ -88,7 +88,7 @@ result = integrator.process_conversation_with_evolution(
 
 # Access both normal response AND evolution info:
 saori_reply = result['saori_response'].reply
-new_glyphs = result['new_glyphs_generated']
+```text
 ```
 
 

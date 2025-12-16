@@ -22,7 +22,7 @@
 # Added these parameters:
 RUN pip install --default-timeout=60 \
                 --retries 5 \
-                -r requirements-backend.txt
+```text
 ```
 
 
@@ -51,7 +51,7 @@ RUN pip install --default-timeout=60 \
 
 ```powershell
 cd d:\saoriverse-console
-.\test-docker-build.ps1
+```text
 ```
 
 
@@ -60,7 +60,7 @@ cd d:\saoriverse-console
 
 ```bash
 cd d/saoriverse-console
-bash test-docker-build.sh
+```text
 ```
 
 

@@ -21,7 +21,7 @@ Enhanced response generation to use glyph **descriptions** (the wisdom/insight o
 ## Results
 
 **Before**: Generic response for ANY glyph/emotion
-
+```text
 ```
 "I hear you. What's the feeling underneath all that?"
 ```
@@ -29,7 +29,7 @@ Enhanced response generation to use glyph **descriptions** (the wisdom/insight o
 
 
 **After**: Personalized response unique to selected glyph
-
+```text
 ```
 "That's a real thing you're carrying. Even in what feels active or chaotic,
 there's often a still place underneath. Quiet revelation. Truth that arrives

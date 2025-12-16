@@ -66,7 +66,7 @@ A complete facial emotion detection and adaptive learning system that respects a
 ##
 
 ## 🔄 Data Flow Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ BROWSER (EmotionDetector.tsx)                               │
@@ -193,7 +193,7 @@ A complete facial emotion detection and adaptive learning system that respects a
 ## 📊 Emotion Learning Loop
 
 ### Traditional ML: Passive Collection
-
+```text
 ```
 Collect data → Train model → Deploy → (model stays static)
 ```
@@ -201,7 +201,7 @@ Collect data → Train model → Deploy → (model stays static)
 
 
 ### Adaptive Emotion Learning: Active Feedback
-
+```text
 ```
 Detect emotion
     ↓
@@ -290,7 +290,7 @@ Repeat forever
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
-SUPABASE_SERVICE_ROLE_KEY=...  # Keep private
+```text
 ```
 
 

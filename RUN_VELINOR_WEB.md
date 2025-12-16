@@ -13,7 +13,7 @@ This is the quickest way to run the full Velinor game with the web stack (FastAP
 
 ```bash
 cd d:\saoriverse-console
-python velinor_api.py
+```text
 ```
 
 
@@ -21,7 +21,7 @@ python velinor_api.py
 Expected output:
 
 ```
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```text
 ```
 
 
@@ -34,7 +34,7 @@ The API will be available at:
 
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
 ```
 
 
@@ -46,7 +46,7 @@ Expected output:
 > next dev
 
   ▲ Next.js 14.x.x
-  - ready started server on 0.0.0.0:3000, url: http://localhost:3000
+```text
 ```
 
 
@@ -87,7 +87,7 @@ You should see:
 The frontend looks for the API at the URL in `.env.local`:
 
 ```
-NEXT_PUBLIC_API_URL=http://localhost:8000
+```text
 ```
 
 

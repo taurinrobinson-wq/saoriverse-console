@@ -8,7 +8,7 @@
 ## The Problem It Solves
 
 **Before:**
-
+```text
 ```
 User: "I'm stressed about work"
 System: "Tell me more about work."
@@ -19,7 +19,7 @@ System: "Tell me more about your projects." ← REPEATED!
 
 
 **After:**
-
+```text
 ```
 User: "I'm stressed about work"
 System: "I hear the weight of that stress."
@@ -50,7 +50,7 @@ System: "So 5 competing priorities with one hard deadline...
             logger.info("✅ ConversationMemory initialized")
         except ImportError as e:
             logger.warning(f"⚠️  ConversationMemory import failed: {e}")
-            st.session_state.conversation_memory = None
+```text
 ```
 
 
@@ -113,7 +113,7 @@ def _build_conversational_response(user_input: str, local_analysis: dict) -> str
         return response
 
     # Last resort
-    return f"I hear you. {best_glyph.get('description', 'Tell me more.')}" if best_glyph else "I'm here to listen."
+```text
 ```
 
 
@@ -232,7 +232,7 @@ def test_memory_integration():
 
 if __name__ == "__main__":
     success = test_memory_integration()
-    sys.exit(0 if success else 1)
+```text
 ```
 
 
@@ -241,7 +241,7 @@ if __name__ == "__main__":
 
 ```powershell
 cd d:\saoriverse-console
-.\.venv\Scripts\python.exe test_quick_integration.py
+```text
 ```
 
 
@@ -361,7 +361,7 @@ Once working, you unlock:
 
 
 Test-Path src/emotional_os_glyphs/conversation_memory.py
-
+```text
 ```
 
 ### Issue: "compose_response_with_memory() not found"
@@ -371,7 +371,7 @@ Test-Path src/emotional_os_glyphs/conversation_memory.py
 
 taskkill /F /IM streamlit.exe
 streamlit run app.py
-
+```text
 ```
 
 ### Issue: "Memory confidence stays at 0.7"
@@ -391,7 +391,7 @@ Just in case you want a quick revert:
 # Backup the files you're modifying
 Copy-Item "src/emotional_os/deploy/modules/ui_refactored.py" "ui_refactored.py.backup"
 Copy-Item "src/emotional_os/deploy/modules/ui_components/response_handler.py" "response_handler.py.backup"
-
+```text
 ```
 
 Then if anything goes wrong:

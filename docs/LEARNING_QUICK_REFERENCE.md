@@ -1,7 +1,7 @@
 # Dynamic Learning System - Quick Reference
 
 ## The Big Picture
-
+```text
 ```
 Playwright writes dialogue scenes
         ↓
@@ -22,7 +22,7 @@ Library grows, responses improve
 
 ### 1. Archetype Library
 **Stores learned patterns**
-
+```text
 ```
 What you need: Library of conversation archetypes
 File: emotional_os/learning/conversation_archetype.py
@@ -47,7 +47,7 @@ Example archetype:
 
 ### 2. Response Generator
 **Applies principles to generate responses**
-
+```sql
 ```
 What you need: Generate fresh responses from principles
 File: emotional_os/learning/archetype_response_generator.py
@@ -68,7 +68,7 @@ Output: "That takes courage. Sounds like something shifted.
 
 ### 3. Conversation Learner
 **Extracts patterns from conversations**
-
+```sql
 ```
 What you need: Auto-extract new archetypes from successful conversations
 File: emotional_os/learning/conversation_learner.py
@@ -103,7 +103,7 @@ response = generator.generate_archetype_aware_response(
     user_input="I'm feeling grateful despite the stress",
     prior_context="Yesterday was really overwhelming",
 )
-print(response)
+```sql
 ```
 
 
@@ -125,7 +125,7 @@ new_archetype = learner.learn_from_conversation(
     turns=conversation_turns,
     user_rating=0.95,  # 1.0 = excellent
 )
-print(f"Learned: {new_archetype}")
+```text
 ```
 
 
@@ -150,7 +150,7 @@ matches = library.get_all_matches(
     threshold=0.3
 )
 for archetype, score in matches:
-    print(f"  {archetype.name}: {score:.2f}")
+```text
 ```
 
 
@@ -189,7 +189,7 @@ User: "Like I can finally breathe. But now I feel guilty
        that it took this to relax."
 
 System: "The relief and the guilt can coexist. What's underneath
-         the guilt?"
+```text
 ```
 
 
@@ -198,7 +198,7 @@ System: "The relief and the guilt can coexist. What's underneath
 
 ```
 Conversation → Learner analyzes → New archetype created
-"ReliefToGuilt" archetype added to library
+```text
 ```
 
 
@@ -234,7 +234,7 @@ Every archetype has these components:
   "success_weight": 0.95,
   "usage_count": 5,
   "success_count": 5
-}
+```text
 ```
 
 

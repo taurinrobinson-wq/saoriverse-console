@@ -7,7 +7,7 @@ This document describes how to use [actionlint](..).
 With no argument, actionlint finds all workflow files in the current repository and checks them.
 
 ```sh
-actionlint
+```text
 ```
 
 
@@ -15,7 +15,7 @@ actionlint
 When paths to YAML workflow files are given as arguments, actionlint checks them.
 
 ```sh
-actionlint path/to/workflow1.yaml path/to/workflow2.yaml
+```sql
 ```
 
 
@@ -23,7 +23,7 @@ actionlint path/to/workflow1.yaml path/to/workflow2.yaml
 When `-` argument is given, actionlint reads inputs from stdin and checks it as workflow source.
 
 ```sh
-cat path/to/workflow.yaml | actionlint -
+```text
 ```
 
 
@@ -36,7 +36,7 @@ To ignore some errors, `-ignore` option offers to filter errors by messages usin
 The regular expression syntax is the same as [RE2][re2].
 
 ```sh
-actionlint -ignore 'label ".+" is unknown' -ignore '".+" is potentially untrusted'
+```text
 ```
 
 
@@ -46,7 +46,7 @@ actionlint -ignore 'label ".+" is unknown' -ignore '".+" is potentially untruste
 processes.
 
 ```sh
-actionlint -shellcheck= -pyflakes=
+```text
 ```
 
 
@@ -62,7 +62,7 @@ Before explaining the formatting details, let's see some examples.
 #### Example: Serialized into JSON
 
 ```sh
-actionlint -format '{{json .}}'
+```text
 ```
 
 
@@ -70,7 +70,7 @@ actionlint -format '{{json .}}'
 Output:
 
 ```
-[{"message":"unexpected key \"branch\" for ...
+```text
 ```
 
 
@@ -78,7 +78,7 @@ Output:
 #### Example: Markdown
 
 ````sh
-actionlint -format '{{range $err := .}}### Error at line {{$err.Line}}, col {{$err.Column}} of `{{$err.Filepath}}`\n\n{{$err.Message}}\n\n```\n{{$err.Snippet}}\n```\n\n{{end}}'
+````text
 ````
 
 
@@ -90,14 +90,14 @@ Output:
 ### Error at line 21, col 20 of `test.yaml`
 
 property "platform" is not defined in object type {os: string}
-
+```text
 ```
 
 
           key: ${{ matrix.platform }}-node-${{ hashFiles('**/package-lock.json') }}
                    ^~~~~~~~~~~~~~~
 
-```
+````text
 ````
 
 

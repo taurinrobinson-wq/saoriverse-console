@@ -44,7 +44,7 @@ All components of the Velinor web stack are complete and ready for testing.
 
 ```bash
 cd d:\saoriverse-console
-python velinor_api.py
+```text
 ```
 
 
@@ -55,7 +55,7 @@ Wait for: `INFO: Uvicorn running on http://127.0.0.1:8000`
 
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
 ```
 
 
@@ -65,7 +65,7 @@ Wait for: `url: http://localhost:3000`
 ### Step 3: Open Browser
 
 ```
-http://localhost:3000
+```text
 ```
 
 

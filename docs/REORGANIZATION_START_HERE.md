@@ -73,7 +73,7 @@ During-work companion with:
 ## The Solution (What You Get)
 
 ### Clean Source Structure
-
+```text
 ```
 src/
 ├── emotional_os.py           (Core glyph logic)
@@ -92,7 +92,7 @@ src/
 
 
 ### Organized Tests
-
+```text
 ```
 tests/
 ├── conftest.py
@@ -109,7 +109,7 @@ tests/
 
 
 ### Single Streamlit Entry Point
-
+```text
 ```
 app.py (30 lines)
 - Imports from src/
@@ -120,7 +120,7 @@ app.py (30 lines)
 
 
 ### Organized Scripts
-
+```text
 ```
 scripts/
 ├── data/           (Data processing)
@@ -131,7 +131,7 @@ scripts/
 
 
 ### Result: Root Directory ✨
-
+```text
 ```
 saoriverse-console/
 ├── app.py              ← Entry point
@@ -177,7 +177,7 @@ streamlit run main_v2_simple.py   # This is a bypass
 
 # How do I import what I just wrote?
 
-# Did I break anything?
+```text
 ```
 
 
@@ -204,7 +204,7 @@ streamlit run app.py               # That's the only option
 1. Add code to src/your_module.py
 2. Add tests to tests/unit/test_your_module.py
 3. Run pytest tests/unit/test_your_module.py
-4. If it passes, you didn't break anything
+```text
 ```
 
 
@@ -216,7 +216,7 @@ streamlit run app.py               # That's the only option
 Read the master plan to understand the scope:
 
 ```bash
-cat docs/REORGANIZATION_MASTER_PLAN.md
+```text
 ```
 
 
@@ -226,7 +226,7 @@ cat docs/REORGANIZATION_MASTER_PLAN.md
 ```bash
 cd /path/to/saoriverse-console
 git checkout -b refactor/reorganization-master
-git tag pre-reorganization
+```text
 ```
 
 
@@ -248,7 +248,7 @@ python tools/import_checker.py
 pytest tests/ -v
 
 # Launch Streamlit
-streamlit run app.py
+```text
 ```
 
 
@@ -258,7 +258,7 @@ streamlit run app.py
 ```bash
 git add -A
 git commit -m "refactor: Complete codebase reorganization"
-git push origin refactor/reorganization-master
+```text
 ```
 
 

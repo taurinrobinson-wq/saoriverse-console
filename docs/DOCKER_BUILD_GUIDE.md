@@ -10,7 +10,7 @@
 python check-docker-requirements.py
 
 # macOS/Linux
-python3 check-docker-requirements.py
+```text
 ```
 
 
@@ -27,7 +27,7 @@ Expected output: All checks ✅
 docker build -f Dockerfile.firstperson -t firstperson:latest .
 
 # macOS/Linux
-docker build -f Dockerfile.firstperson -t firstperson:latest .
+```text
 ```
 
 
@@ -40,7 +40,7 @@ docker build -f Dockerfile.firstperson -t firstperson:latest .
 docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 
 # macOS/Linux
-docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
+```text
 ```
 
 
@@ -53,7 +53,7 @@ docker build -f Dockerfile.firstperson.resilient -t firstperson:latest .
 .\test-docker-build.ps1
 
 # macOS/Linux
-bash test-docker-build.sh
+```text
 ```
 
 
@@ -73,7 +73,7 @@ docker run -d -p 8000:8000 --name firstperson-test firstperson:latest
 sleep 5
 curl http://localhost:8000/health
 docker stop firstperson-test
-docker rm firstperson-test
+```text
 ```
 
 
@@ -101,7 +101,7 @@ Expected: `{"status":"healthy"}`
 ```
 PIP_TIMEOUT: 60 seconds (was 15s)
 PIP_RETRIES: 5 attempts (was 1)
-PIP_DEFAULT_TIMEOUT: 120 seconds
+```text
 ```
 
 
@@ -111,7 +111,7 @@ PIP_DEFAULT_TIMEOUT: 120 seconds
 ```
 --no-cache-dir: Saves disk space
 --retries 5: Handles network hiccups
---default-timeout: Prevents premature timeout
+```text
 ```
 
 
@@ -145,7 +145,7 @@ pwd  # or cd d:\saoriverse-console
 ls Dockerfile.firstperson
 
 # Rebuild with explicit path
-docker build -f ./Dockerfile.firstperson -t firstperson:latest .
+```text
 ```
 
 
@@ -177,7 +177,7 @@ docker build -f ./Dockerfile.firstperson -t firstperson:latest .
 
 ```
 Successfully tagged firstperson:latest
-docker images | grep firstperson  # Shows image with size ~2GB
+```text
 ```
 
 
@@ -189,7 +189,7 @@ docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 
 # No errors, container starts
 
-# Health check passes: curl http://localhost:8000/health
+```text
 ```
 
 
@@ -199,7 +199,7 @@ docker run -p 8000:8000 -p 3001:3001 firstperson:latest
 ```
 curl http://localhost:3001
 
-# Returns HTML (Next.js frontend)
+```text
 ```
 
 
@@ -211,7 +211,7 @@ curl http://localhost:3001
 
 ```bash
 docker tag firstperson:latest your-registry/firstperson:v1.0.0
-docker tag firstperson:latest your-registry/firstperson:latest
+```text
 ```
 
 
@@ -220,7 +220,7 @@ docker tag firstperson:latest your-registry/firstperson:latest
 
 ```bash
 docker push your-registry/firstperson:v1.0.0
-docker push your-registry/firstperson:latest
+```text
 ```
 
 
@@ -239,7 +239,7 @@ docker run -d \
   -p 3001:3001 \
   -e ELEVENLABS_API_KEY=sk_... \
   -e SUPABASE_URL=https://... \
-  your-registry/firstperson:latest
+```text
 ```
 
 

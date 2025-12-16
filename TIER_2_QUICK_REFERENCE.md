@@ -19,7 +19,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 # Detected tone: "joyful"
 
-# Adjustment: More energy, "!" instead of ".", "will" instead of "could"
+```text
 ```
 
 
@@ -48,7 +48,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 # Measured intensity: 0.35 (low)
 
-# Adjustment: "That might possibly work..." (softer, tentative)
+```text
 ```
 
 
@@ -74,7 +74,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 # Joyful: "I'm present with your excitement"
 
-# Reflective: "I reach toward understanding this with you"
+```text
 ```
 
 
@@ -109,7 +109,7 @@ Tier 2 adds **emotional presence** to the response pipeline. It makes responses 
 
 # - Session >30min + 20+ messages? (fatigue detected)
 
-# - Adjustment: reduce energy to prevent crash
+```text
 ```
 
 
@@ -147,7 +147,7 @@ print(metrics)
 #   "fatigue_detected": False,
 #   "processing_time_ms": 22.5
 
-# }
+```text
 ```
 
 
@@ -168,7 +168,7 @@ If you're using the response pipeline:
 
 # ✅ Graceful fallback if fails
 
-# You just get better responses!
+```text
 ```
 
 
@@ -192,7 +192,7 @@ try:
     tone = attunement.detect_tone_shift(user_input)
 except Exception as e:
     logger.warning(f"Failed: {e}")
-    tone = "neutral"  # Graceful fallback
+```text
 ```
 
 
@@ -212,7 +212,7 @@ If entire Tier 2 fails, returns base response (no crash).
 │ Total:                     60ms    │
 │ Budget:                   100ms    │
 │ Headroom:                  40ms    │
-└─────────────────────────────────────┘
+```text
 ```
 
 
@@ -227,7 +227,7 @@ Well under 100ms budget: **✅**
 ```
 Tier 2: 43/43 tests passing ✅
 Tier 1: 10/10 tests passing ✅
-Combined: 53/53 passing ✅
+```text
 ```
 
 
@@ -269,7 +269,7 @@ def _ensure_tier2_aliveness():
         tier2 = Tier2Aliveness()
         st.session_state["tier2_aliveness"] = tier2
 
-# Called automatically in initialize_session_state()
+```text
 ```
 
 
@@ -292,7 +292,7 @@ metrics = {
     "momentum": "building",        # Building/sustaining/winding
     "fatigue_detected": False,     # Is user getting tired?
     "processing_time_ms": 22.5     # How long it took
-}
+```text
 ```
 
 
@@ -335,7 +335,7 @@ embodied.embodied_phrases["opening"] = ["I'm listening", ...]
 # Change energy levels for phases
 pacing = tracker.calculate_optimal_pacing("deepening")
 
-# Modify returned energy: pacing["energy"] = 0.8
+```text
 ```
 
 

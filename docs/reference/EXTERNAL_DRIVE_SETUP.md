@@ -8,7 +8,7 @@ Your FirstPerson local emotional processing system has been successfully moved t
 ## 📍 Location Setup
 
 ### Local Machine
-
+```text
 ```
 /Users/taurinrobinson/saoriverse-console
 ├── parser/                    (code - ~245MB)
@@ -20,7 +20,7 @@ Your FirstPerson local emotional processing system has been successfully moved t
 
 
 ### External Drive: "My Passport for Mac"
-
+```text
 ```
 /Volumes/My Passport for Mac/FirstPerson
 ├── venv/                      (~1.2GB Python environment)
@@ -51,7 +51,7 @@ The external drive should auto-mount when connected. To verify:
 ```bash
 ls /Volumes/
 
-# Should show: "My Passport for Mac"
+```text
 ```
 
 
@@ -60,7 +60,7 @@ ls /Volumes/
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-./setup_external.sh
+```text
 ```
 
 
@@ -77,7 +77,7 @@ Once external drive is mounted:
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-.venv/bin/streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+```sql
 ```
 
 
@@ -88,7 +88,7 @@ Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-.venv/bin/python test_local_mode.py
+```text
 ```
 
 
@@ -107,7 +107,7 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 
 /Users/taurinrobinson/saoriverse-console/data
   → Points to external drive
-     /Volumes/My Passport for Mac/FirstPerson/data
+```text
 ```
 
 
@@ -122,7 +122,7 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-ls -la | grep "venv\|data"
+```text
 ```
 
 
@@ -140,7 +140,7 @@ FirstPerson **requires** the external drive to be mounted to run:
 cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 
-# Error: Cannot find /Volumes/My Passport for Mac
+```text
 ```
 
 
@@ -152,7 +152,7 @@ If it doesn't auto-mount:
 ```bash
 
 # Manual mount command
-diskutil mount "/Volumes/My Passport for Mac"
+```text
 ```
 
 
@@ -173,7 +173,7 @@ cd /Users/taurinrobinson/saoriverse-console
 git status
 git add .
 git commit -m "message"
-git push origin main
+```text
 ```
 
 
@@ -189,7 +189,7 @@ All code changes sync to Git regardless of external storage.
 
 # Fix permissions on external drive
 chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
-chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson/venv"
+```text
 ```
 
 
@@ -206,7 +206,7 @@ diskutil mount "/Volumes/My Passport for Mac"
 
 # Verify symlinks
 cd /Users/taurinrobinson/saoriverse-console
-ls -la .venv data
+```text
 ```
 
 
@@ -217,7 +217,7 @@ ls -la .venv data
 
 # Run the setup script to fix everything
 cd /Users/taurinrobinson/saoriverse-console
-./setup_external.sh
+```text
 ```
 
 
@@ -240,7 +240,7 @@ Since your data is now on an external drive:
 cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstPerson-backup
 
 # Just data
-cp -r /Users/taurinrobinson/saoriverse-console/data ~/FirstPerson-data-backup
+```text
 ```
 
 
@@ -271,7 +271,7 @@ cd /Users/taurinrobinson/saoriverse-console
 rm .venv
 
 # Now use local .venv
-.venv/bin/python test_local_mode.py
+```text
 ```
 
 
@@ -280,7 +280,7 @@ Then move it back to external:
 
 ```bash
 rm -rf .venv
-ln -s "/Volumes/My Passport for Mac/FirstPerson/venv" .venv
+```text
 ```
 
 

@@ -19,7 +19,7 @@ ssh root@161.35.227.49
 
 # If using SSH key, it may be automatic
 
-# If password, you'll be prompted
+```text
 ```
 
 
@@ -36,7 +36,7 @@ cd saoriverse-console
 chmod +x docker-setup.sh
 
 # Run it
-./docker-setup.sh
+```text
 ```
 
 
@@ -60,7 +60,7 @@ docker compose ps
 curl http://161.35.227.49:8000/health
 
 # Test the frontend
-curl http://161.35.227.49:3000
+```text
 ```
 
 
@@ -103,7 +103,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Verify
-docker --version
+```text
 ```
 
 
@@ -128,7 +128,7 @@ nano .env
 
 # - FRONTEND_URL=http://161.35.227.49
 
-# - DATABASE_URL=sqlite:///./data_local/app.db
+```text
 ```
 
 
@@ -153,7 +153,7 @@ docker compose logs -f
 docker compose logs -f backend
 
 # View just frontend logs
-docker compose logs -f frontend
+```text
 ```
 
 
@@ -192,7 +192,7 @@ docker compose logs -f
 docker compose logs --tail 100
 
 # Last 100 lines, following
-docker compose logs -f --tail 100
+```text
 ```
 
 
@@ -211,7 +211,7 @@ docker compose restart
 docker compose down
 
 # Remove everything including volumes (WARNING: deletes data)
-docker compose down -v
+```text
 ```
 
 
@@ -227,7 +227,7 @@ docker compose restart backend
 docker compose restart frontend
 
 # Restart nginx
-docker compose restart nginx
+```text
 ```
 
 
@@ -243,7 +243,7 @@ docker compose exec backend bash
 docker compose exec backend python -c "import sys; print(sys.version)"
 
 # Get a shell in the frontend container
-docker compose exec frontend bash
+```text
 ```
 
 
@@ -259,7 +259,7 @@ docker stats
 docker system df
 
 # Prune unused images/containers
-docker system prune
+```text
 ```
 
 
@@ -281,7 +281,7 @@ docker compose build
 docker compose up -d
 
 # Verify
-docker compose logs -f
+```sql
 ```
 
 
@@ -294,7 +294,7 @@ docker compose logs -f
 docker compose up -d --build backend
 
 # Just rebuild and restart frontend
-docker compose up -d --build frontend
+```text
 ```
 
 
@@ -317,7 +317,7 @@ docker compose up -d
 # Check if ports are already in use
 sudo lsof -i :8000
 sudo lsof -i :3000
-sudo lsof -i :80
+```text
 ```
 
 
@@ -333,7 +333,7 @@ docker system df
 docker system prune -a
 
 # Remove specific image
-docker image rm <image_id>
+```text
 ```
 
 
@@ -350,7 +350,7 @@ docker network inspect saoriverse-console_saoriverse
 
 # Restart network
 docker compose down
-docker compose up -d
+```sql
 ```
 
 
@@ -370,7 +370,7 @@ docker compose exec frontend curl http://backend:8000/health
 # Check environment variable in frontend
 docker compose exec frontend env | grep API_URL
 
-# Should show: REACT_APP_SAOYNX_API_URL=http://backend:8000
+```text
 ```
 
 
@@ -389,7 +389,7 @@ docker compose exec backend tar -czf /app/backup.tar.gz data_local/
 docker cp saoriverse-backend:/app/backup.tar.gz ./backup.tar.gz
 
 # Or use rsync
-rsync -avz root@161.35.227.49:/path/to/data ./backup/
+```sql
 ```
 
 
@@ -405,7 +405,7 @@ docker cp backup.tar.gz saoriverse-backend:/app/
 docker compose exec backend tar -xzf /app/backup.tar.gz
 
 # Restart
-docker compose restart backend
+```text
 ```
 
 
@@ -427,7 +427,7 @@ sudo certbot certonly --standalone -d 161.35.227.49
 # Update nginx.conf with SSL directives
 
 # Then restart nginx
-docker compose start nginx
+```sql
 ```
 
 
@@ -448,7 +448,7 @@ server {
 server {
     listen 80;
     return 301 https://$host$request_uri;
-}
+```text
 ```
 
 
@@ -476,7 +476,7 @@ curl -s http://161.35.227.49:3000 | head -20 || echo "FAILED"
 
 echo ""
 echo "=== Disk Usage ==="
-docker system df
+```text
 ```
 
 

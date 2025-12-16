@@ -17,7 +17,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 1: Run manually with default 30-minute interval**
 
 ```powershell
-.\scripts\auto-commit.ps1
+```text
 ```
 
 
@@ -25,7 +25,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 2: Custom interval (e.g., every 15 minutes)**
 
 ```powershell
-.\scripts\auto-commit.ps1 -IntervalMinutes 15
+```text
 ```
 
 
@@ -33,7 +33,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 3: Custom commit message**
 
 ```powershell
-.\scripts\auto-commit.ps1 -CommitMessage "wip: working on feature X"
+```text
 ```
 
 
@@ -41,7 +41,7 @@ Both scripts monitor your workspace and commit/push changes at regular intervals
 **Option 4: Stop anytime**
 
 ```
-Press Ctrl+C
+```text
 ```
 
 
@@ -51,7 +51,7 @@ Press Ctrl+C
 **Option 1: Run with default 30-minute interval**
 
 ```bash
-bash scripts/auto-commit.sh
+```text
 ```
 
 
@@ -59,7 +59,7 @@ bash scripts/auto-commit.sh
 **Option 2: Custom interval (e.g., every 10 minutes)**
 
 ```bash
-bash scripts/auto-commit.sh 10
+```text
 ```
 
 
@@ -67,7 +67,7 @@ bash scripts/auto-commit.sh 10
 **Option 3: Stop anytime**
 
 ```
-Press Ctrl+C
+```text
 ```
 
 
@@ -98,7 +98,7 @@ Press Ctrl+C to stop
   ✓ Staged changes
   ✓ Committed: auto: periodic commit and push (2025-12-12 14:35:45)
   ✓ Pushed to remote
-  Waiting 30 minutes until next check...
+```text
 ```
 
 
@@ -129,7 +129,7 @@ The auto-commit scripts work alongside manual commits:
 # You can still commit manually in another terminal
 git add src/specific-file.ts
 git commit -m "feat: implement specific feature"
-git push
+```text
 ```
 
 
@@ -152,7 +152,7 @@ Create a scheduled task to run the script automatically:
 # Create scheduled task (run once at startup, repeat every 30 minutes)
 $trigger = New-ScheduledTaskTrigger -AtStartup -RepetitionInterval (New-TimeSpan -Minutes 30)
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\path\to\scripts\auto-commit.ps1"
-Register-ScheduledTask -TaskName "GitAutoCommit" -Trigger $trigger -Action $action -RunLevel Highest
+```text
 ```
 
 
@@ -167,7 +167,7 @@ Create a cron job to run every 30 minutes:
 crontab -e
 
 # Add this line (runs every 30 minutes)
-*/30 * * * * cd /path/to/saoriverse-console && bash scripts/auto-commit.sh >> /tmp/git-auto-commit.log 2>&1
+```text
 ```
 
 
@@ -178,7 +178,7 @@ crontab -e
 ### "Permission denied" on bash script
 
 ```bash
-chmod +x scripts/auto-commit.sh
+```text
 ```
 
 
@@ -188,7 +188,7 @@ Ensure git is in your PATH:
 
 ```bash
 which git  # macOS/Linux
-where.exe git  # Windows PowerShell
+```text
 ```
 
 
@@ -204,7 +204,7 @@ This is expected if your repo has branch protection rules. The script will:
 Check if there are actual changes:
 
 ```bash
-git status --short
+```text
 ```
 
 
@@ -222,7 +222,7 @@ If you prefer manual one-off commits:
 cd d:\saoriverse-console
 git add -A
 git commit -m "feat: implement emotion learning system"
-git push origin main
+```text
 ```
 
 
@@ -235,7 +235,7 @@ git push origin main
 **To remove scheduled task (Windows):**
 
 ```powershell
-Unregister-ScheduledTask -TaskName "GitAutoCommit" -Confirm:$false
+```text
 ```
 
 

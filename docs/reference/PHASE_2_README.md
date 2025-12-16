@@ -65,7 +65,7 @@ Activates when no existing glyph matches:
 6. Logs to database with full metadata
 
 **Example:**
-
+```text
 ```
 Input: "I feel caught between who I pretend to be and who I really am"
 Output: Candidate glyph "Fractured Identity"
@@ -86,7 +86,7 @@ Crafts responses that simultaneously:
 - Gather implicit feedback (learning signal)
 
 **Response Template Example (Containment tone):**
-
+```text
 ```
 "You're doing something quiet but powerful: holding space for complexity.
 That tension—it's evidence of your integrity, even when it aches.
@@ -112,7 +112,7 @@ User never knows they're teaching the system. Training is invisible.
 Solves the "shared learning + personal experience" problem:
 
 **Architecture:**
-
+```text
 ```
 SHARED DATABASE (one for all users)
           ↓
@@ -180,7 +180,7 @@ from emotional_os.glyphs.shared_glyph_manager import SharedGlyphManager
 
 _glyph_learner = GlyphLearner()
 _learning_response_gen = LearningResponseGenerator()
-_shared_glyph_manager = SharedGlyphManager()
+```text
 ```
 
 
@@ -199,7 +199,7 @@ else:
     _shared_glyph_manager.record_glyph_adoption(user_hash, glyph_name, quality_rating=1)
 
     response = _learning_response_gen.generate_learning_response(...)
-    return {"best_glyph": glyph_name, "voltage_response": response, ...}
+```text
 ```
 
 
@@ -218,7 +218,7 @@ def _determine_emotional_tone(signals):
         "recognition": "recognition",
         "unknown": "unknown"
     }
-    return tone_map.get(signals[0].get("tone", "unknown"), "unknown")
+```text
 ```
 
 
@@ -258,7 +258,7 @@ emotional_territory
 ├─ emotional_area (grief, longing, shame, etc)
 ├─ primary_glyphs
 ├─ coverage_quality (CRITICAL, POOR, FAIR, STRONG)
-└─ needs_development (0/1)
+```text
 ```
 
 

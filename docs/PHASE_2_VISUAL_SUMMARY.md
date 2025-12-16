@@ -7,7 +7,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 ## 🎨 What You Get
 
 ### 🌟 Landing Page
-
+```text
 ```
 ┌─────────────────────────────────────────┐
 │    ✨ Animated Background Orbs       │
@@ -30,7 +30,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 
 
 ### 💬 Chat Interface
-
+```text
 ```
 ┌──────────────────────────────────────────┐
 │  🧠 FirstPerson Chat  [Settings] [≡]   │
@@ -57,7 +57,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 
 
 ### ⚙️ Settings Page
-
+```text
 ```
 ┌──────────────────────────────────────────┐
 │  ← Settings                             │
@@ -126,7 +126,7 @@ Transformed the FirstPerson audio webapp from basic scaffolding into a **gorgeou
 | **Type Safe** | Full TypeScript support |
 
 ## 🚀 Tech Stack
-
+```text
 ```
 Frontend:
 ├── Next.js 16 (Framework)
@@ -161,7 +161,7 @@ Backend (Coming Next):
 ## 🎨 Design Highlights
 
 ### Color Scheme
-
+```text
 ```
 Primary Colors:
 - Indigo-600: from-indigo-600 (#4F46E5)
@@ -215,7 +215,7 @@ Text:
 5. Adjusts settings as needed
 
 ## 🔄 Animation Flow Example
-
+```text
 ```
 User speaks:
 ┌─────────────────────────────┐

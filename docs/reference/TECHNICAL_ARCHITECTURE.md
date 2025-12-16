@@ -1,7 +1,7 @@
 # FirstPerson: Technical Architecture for Sovereign Local Mode
 
 ## System Overview
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                     FIRSTPERSON LOCAL MODE                      │
@@ -76,7 +76,7 @@
 ## Data Flow: Complete Example
 
 ### User Input
-
+```text
 ```
 "I keep replaying that moment over and over, and it hurts"
 ```
@@ -94,7 +94,7 @@ Tokens: ["I", "keep", "replaying", "that", "moment",
 POS Tags: ["PRP", "VBP", "VBG", "DT", "NN",
            "RB", "CC", "RB", "CC", "PRP", "VBZ"]
 
-Sentences: ["I keep replaying that moment over and over, and it hurts"]
+```text
 ```
 
 
@@ -115,7 +115,7 @@ Result Emotions: {
   'sadness': 4,
   'negative': 5,
   'fear': 1
-}
+```text
 ```
 
 
@@ -132,7 +132,7 @@ Noun Chunks: ["that moment", "over and over", "it"]
 Context Interpretation:
 - Past event (temporal focus)
 - Repetitive pattern (recursive signal)
-- Harm/hurt (emotional intensity)
+```text
 ```
 
 
@@ -156,7 +156,7 @@ Word2Vec Embeddings (find similar concepts):
 WordNet (semantic relationships):
 - replaying → repetition → cycles → recursion
 - hurt → pain → ache → suffering
-- moment → event → trigger
+```text
 ```
 
 
@@ -180,7 +180,7 @@ Fear component:
   → But context suggests pain, not fear
   → γ dominates
 
-Result: [γ, γ, γ, γ] = DOMINANT SIGNAL: γ
+```text
 ```
 
 
@@ -200,7 +200,7 @@ Gate 10: Transformation
 Candidate glyphs by gate:
 - Gate 4: Recursive Ache, Spiral Ache, Loop Ache
 - Gate 5: Depth Ache, Layered Ache
-- Gate 9: Ache of Recognition, Recognized Ache
+```text
 ```
 
 
@@ -229,7 +229,7 @@ Recognized Ache:
   - Context match (self-aware pain): +5.0
   → Total: 18.0/30 → 60% match
 
-WINNER: Recursive Ache (89% match)
+```text
 ```
 
 
@@ -258,7 +258,7 @@ Metaphors for γ (Ache):
 Rituals for acknowledgment:
   - "Let us hold this ache together in silence"
   - "This pattern deserves witnessing"
-  - "In each return, you deepen"
+```text
 ```
 
 
@@ -296,7 +296,7 @@ again and again.' She found in that return a kind of knowing.
 
 What if, instead of trying to escape the loop, we honored what
 each return reveals?"
-─────────────────────────────────────────────────────────
+```text
 ```
 
 
@@ -325,7 +325,7 @@ Over time (100+ interactions):
 - System learns: Metaphor > clinical language
 - System learns: This user values validation first
 
-→ Responses get progressively more personalized
+```text
 ```
 
 
@@ -363,7 +363,7 @@ CREATE TABLE interactions (
     response TEXT,
     feedback TEXT,
     processing_time_ms INTEGER
-);
+```text
 ```
 
 
@@ -420,7 +420,7 @@ CREATE TABLE user_patterns (
     most_helpful_metaphor TEXT,
     most_helpful_poetry TEXT,
     effectiveness_score FLOAT
-);
+```text
 ```
 
 
@@ -436,7 +436,7 @@ CREATE TABLE user_patterns (
 from nltk.sentiment import SentimentIntensityAnalyzer
 
 sia = SentimentIntensityAnalyzer()
-scores = sia.polarity_scores(text)  # Instant classification
+```text
 ```
 
 
@@ -450,7 +450,7 @@ from parser.nrc_lexicon_loader import nrc
 
 emotions = nrc.analyze_text(text)  # 14,182 word database
 
-# Result: {"sadness": 4, "fear": 1, "negative": 5}
+```text
 ```
 
 
@@ -466,7 +466,7 @@ nlp = spacy.load("en_core_web_sm")
 doc = nlp(text)
 
 entities = [(ent.text, ent.label_) for ent in doc.ents]
-chunks = [chunk.text for chunk in doc.noun_chunks]
+```text
 ```
 
 
@@ -487,7 +487,7 @@ signals = parse_input(text)
 #   'gates': [4, 5, 9],
 #   'glyphs': ['Recursive Ache', 'Spiral Ache']
 
-# }
+```text
 ```
 
 
@@ -500,7 +500,7 @@ signals = parse_input(text)
 glyph_id = fetch_glyph_id("Recursive Ache")
 poetry = fetch_glyph_poetry(glyph_id)
 metaphors = fetch_glyph_metaphors(glyph_id)
-rituals = fetch_glyph_rituals(glyph_id)
+```text
 ```
 
 
@@ -516,7 +516,7 @@ response = generate_response(
     metaphors=metaphors,
     rituals=rituals,
     user_message=text
-)
+```text
 ```
 
 
@@ -571,7 +571,7 @@ saoriverse-console/
 ├── SOVEREIGN_LOCAL_STRATEGY.md      # NEW: Vision & architecture
 ├── SOVEREIGN_LOCAL_QUICK_START.md   # NEW: Implementation guide
 ├── FIRSTPERSON_MANIFESTO.md         # NEW: Values & principles
-└── TECHNICAL_ARCHITECTURE.md        # NEW: This file
+```text
 ```
 
 
@@ -638,7 +638,7 @@ python -m spacy download en_core_web_sm
 # Run
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
-# Select "Local Mode" in sidebar
+```text
 ```
 
 

@@ -8,7 +8,7 @@ I have successfully implemented a **production-grade Ollama LLM integration** fo
 ## 📦 What Was Delivered
 
 ### Core Implementation (4 Files)
-
+```bash
 ```
 ✅ docker-compose.local.yml      (1.6 KB) - Docker Compose orchestration
 ✅ Dockerfile.streamlit           (0.8 KB) - Streamlit container image
@@ -19,7 +19,7 @@ I have successfully implemented a **production-grade Ollama LLM integration** fo
 
 
 ### Code Integration (2 Files Modified)
-
+```text
 ```
 ✅ response_handler.py           - Added Ollama fallback function
 ✅ session_manager.py            - Added Ollama initialization
@@ -28,7 +28,7 @@ I have successfully implemented a **production-grade Ollama LLM integration** fo
 
 
 ### Documentation (6 Files)
-
+```text
 ```
 ✅ OLLAMA_START_HERE.md          (10.0 KB) - Entry point guide
 ✅ OLLAMA_QUICK_REFERENCE.md     (8.8 KB) - Commands cheatsheet
@@ -51,7 +51,7 @@ I have successfully implemented a **production-grade Ollama LLM integration** fo
 docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
-# Open http://localhost:8501
+```text
 ```
 
 
@@ -61,7 +61,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ```bash
 ollama pull llama3         # Best quality (4.7GB)
 ollama pull mistral        # Well-balanced (4.1GB)
-ollama pull orca-mini      # Fast iteration (1.3GB)
+```text
 ```
 
 
@@ -101,7 +101,7 @@ ollama pull orca-mini      # Fast iteration (1.3GB)
         ↓
     Host Ports
     • localhost:8501 (Streamlit)
-    • localhost:11434 (Ollama - testing)
+```text
 ```
 
 
@@ -119,7 +119,7 @@ Ollama Fallback (local LLM)
     ├─ Available → HTTP POST /api/generate
     └─ Unavailable ↓
     ↓
-Generic Fallback → "I'm here to listen..."
+```text
 ```
 
 
@@ -139,7 +139,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # Visit http://localhost:8501
 
-# 4. Chat with FirstPerson!
+```text
 ```
 
 
@@ -164,7 +164,7 @@ That's it. Three commands.
 All functionality has been tested and is production-ready:
 
 ```bash
-python test_ollama_integration.py
+```text
 ```
 
 

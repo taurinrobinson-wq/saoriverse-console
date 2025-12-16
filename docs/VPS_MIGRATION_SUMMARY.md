@@ -33,7 +33,7 @@ cd d:\saoriverse-console
 git add docker-compose.prod.yml nginx.prod.conf .github/workflows/deploy.yml \
         DEPLOYMENT_VPS.md VPS_QUICK_START.md VPS_MIGRATION_CHECKLIST.md
 git commit -m "feat: add production VPS deployment infrastructure"
-git push origin main
+```text
 ```
 
 
@@ -61,7 +61,7 @@ curl https://velinor.firstperson.chat
 https://velinor.firstperson.chat
 
 # Check API
-curl https://velinor.firstperson.chat/health
+```text
 ```
 
 

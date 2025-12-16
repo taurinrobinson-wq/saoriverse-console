@@ -12,7 +12,7 @@ The conversation memory layer transforms the system from responding to isolated 
 ### Turn 1: "I'm feeling so stressed today"
 
 **What we extract:**
-
+```text
 ```
 actor: I
 primary_affects: [stress]
@@ -46,7 +46,7 @@ glyph: Still Insight
     "How does it manifest?",
     "What have you tried?"
   ]
-}
+```text
 ```
 
 
@@ -62,7 +62,7 @@ primary_affects: [cognitive_overload] <- NEW AFFECT
 secondary_affects: [paralysis, immobility] <- NEW MANIFESTATIONS
 thought_patterns: [flooding, incomplete thinking]
 action_capacity: paralyzed <- CRITICAL: unable to move forward
-temporal_scope: ongoing (not just today!)
+```text
 ```
 
 
@@ -73,7 +73,7 @@ temporal_scope: ongoing (not just today!)
 Work demands
   → too much on mind (cognitive flooding)
   → cannot prioritize (fragmentation)
-  → cannot take action (paralysis)
+```text
 ```
 
 
@@ -113,7 +113,7 @@ Work demands
     "Which is most time-critical?",
     "How long has this been building?"
   ]
-}
+```text
 ```
 
 
@@ -128,7 +128,7 @@ specificity: 5 projects (QUANTIFIED)
 priority: client presentation (TIME-CRITICAL: Thursday)
 state: unstarted deck (BLOCKING FACTOR)
 domains: work + client work (CLIENT WORK IS PRIMARY)
-temporal: this week (VERY NEAR-TERM)
+```text
 ```
 
 
@@ -140,7 +140,7 @@ temporal: this week (VERY NEAR-TERM)
   → Client deck is due Thursday (most urgent)
   → Deck not started yet (blocking progress)
   → Cannot prioritize/act (cognitive paralysis)
-  → Cannot make one step forward
+```text
 ```
 
 
@@ -178,7 +178,7 @@ temporal: this week (VERY NEAR-TERM)
     "What's minimum viable deck?",
     "Who can help prepare?"
   ]
-}
+```text
 ```
 
 
@@ -197,7 +197,7 @@ Turn 2: "Too much on my mind"
         Response: "That sounds overwhelming. What's the main thing?"
 Turn 3: "5 projects, Thursday deadline"
         Response: "Have you prioritized them?"
-        Problem: Redundant questions, no context carried forward
+```text
 ```
 
 
@@ -219,7 +219,7 @@ Turn 3: "5 projects, Thursday deadline"
         Response: "I hear you - work has flooded your mind with so many
                   competing demands that even one step forward feels impossible.
                   Which of these 5 could potentially wait?"
-        Memory: Confidence 0.95, specific action question
+```sql
 ```
 
 
@@ -271,7 +271,7 @@ class SystemKnowledge:
     confirmed_facts: List[str]  # What we know for certain
     high_confidence_needs: List[str]  # What we need to know most
     low_confidence_needs: List[str]  # What would be nice to know
-    assumptions: List[str]  # What we're inferring
+```text
 ```
 
 
@@ -336,7 +336,7 @@ class DynamicResponseComposer:
         clarification = "Which of these could wait?"
 
         # 5. Combine
-        return f"{acknowledgment} {validation} {clarification}"
+```text
 ```
 
 
@@ -349,7 +349,7 @@ class DynamicResponseComposer:
 ```
 Turn 1: 1 fact (stressed)
 Turn 2: 5 new facts (work, flooding, paralysis, fragmentation, incomplete thinking)
-Turn 3: 5 new facts (5 projects, Thursday, unstarted, competing, client-critical)
+```text
 ```
 
 
@@ -359,7 +359,7 @@ Turn 3: 5 new facts (5 projects, Thursday, unstarted, competing, client-critical
 ```
 0.7 (isolated emotion)
   → 0.85 (causal mechanism revealed)
-  → 0.95 (specific context provided)
+```text
 ```
 
 
@@ -370,7 +370,7 @@ Turn 3: 5 new facts (5 projects, Thursday, unstarted, competing, client-critical
 Still Insight (stress is emerging/becoming clear)
   → Add Quiet Revelation (thoughts arriving without organization)
   → Add Fragmentation (unable to prioritize/integrate)
-  → Add The Threshold (decision point, action required)
+```text
 ```
 
 

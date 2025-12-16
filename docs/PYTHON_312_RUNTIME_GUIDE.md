@@ -3,7 +3,7 @@
 ## Problem
 
 When clicking "Voice Mode", you see:
-
+```text
 ```
 Voice recording unavailable - missing: faster-whisper, sounddevice
 Install with: pip install faster-whisper sounddevice
@@ -21,7 +21,7 @@ All packages are installed in Python 3.12. You just need to start Streamlit with
 ### Option 1: Command Line (Recommended)
 
 ```powershell
-py -3.12 -m streamlit run app.py
+```text
 ```
 
 
@@ -35,7 +35,7 @@ Double-click `run_app.bat` in the project directory.
 ### Option 3: PowerShell Script
 
 ```powershell
-.\run_app.ps1
+```text
 ```
 
 

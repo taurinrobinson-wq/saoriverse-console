@@ -8,7 +8,7 @@
 
 # In the root of your repo or new folder
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
-cd velinor-web
+```text
 ```
 
 
@@ -16,7 +16,7 @@ cd velinor-web
 ### 2. Install Dependencies
 
 ```bash
-npm install axios zustand
+```text
 ```
 
 
@@ -29,7 +29,7 @@ npm install axios zustand
 Create `.env.local`:
 
 ```
-NEXT_PUBLIC_API_URL=http://localhost:8000
+```text
 ```
 
 
@@ -37,7 +37,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 For production (Railway):
 
 ```
-NEXT_PUBLIC_API_URL=https://your-railway-domain.up.railway.app
+```text
 ```
 
 
@@ -68,7 +68,7 @@ velinor-web/
 │       ├── overlays/           # Dust, fog, glyphs
 │       └── npcs/               # Character images
 └── styles/
-    └── globals.css             # Global styles
+```text
 ```
 
 
@@ -96,7 +96,7 @@ python velinor_api.py
 cd velinor-web
 npm run dev
 
-# Opens on http://localhost:3000
+```text
 ```
 
 
@@ -114,7 +114,7 @@ git add .
 git commit -m "feat: Add Next.js frontend for Velinor"
 git push origin main
 
-# Railway auto-deploys
+```text
 ```
 
 
@@ -131,7 +131,7 @@ POST /api/game/start
 → {
   "session_id": "uuid",
   "state": { ...game state... }
-}
+```text
 ```
 
 
@@ -145,7 +145,7 @@ POST /api/game/{session_id}/action
   // or
   "player_input": "I approach cautiously"
 }
-→ { "session_id": "uuid", "state": { ...new state... } }
+```text
 ```
 
 
@@ -168,7 +168,7 @@ POST /api/game/{session_id}/action
   game_state: {
     player_stats: { ... }
   }
-}
+```text
 ```
 
 

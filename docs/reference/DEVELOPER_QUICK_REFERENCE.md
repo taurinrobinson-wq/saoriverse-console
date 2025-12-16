@@ -25,7 +25,7 @@ python -m spacy download en_core_web_sm
 
 # From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
 
-# Place in: data/lexicons/nrc_emotion_lexicon.txt
+```text
 ```
 
 
@@ -55,7 +55,7 @@ class NRCLexicon:
                 emotions[emotion] += 1
         return dict(emotions)
 
-nrc = NRCLexicon("data/lexicons/nrc_emotion_lexicon.txt")
+```text
 ```
 
 
@@ -87,7 +87,7 @@ class SemanticEngine:
         doc2 = self.nlp(word2)
         return doc1.similarity(doc2)
 
-semantic = SemanticEngine()
+```text
 ```
 
 
@@ -135,7 +135,7 @@ class PoetricResponseGenerator:
 
     def _validate(self, user_message: str) -> str:
         # Generate validation/acknowledgment
-        pass
+```text
 ```
 
 
@@ -176,7 +176,7 @@ CREATE TABLE glyph_rituals (
 
 CREATE INDEX idx_glyph_poetry ON glyph_poetry(glyph_id);
 CREATE INDEX idx_glyph_metaphors ON glyph_metaphors(glyph_id);
-CREATE INDEX idx_glyph_rituals ON glyph_rituals(glyph_id);
+```text
 ```
 
 
@@ -232,7 +232,7 @@ elapsed = time.time() - start
 
 # 4. Return to user
 print(response)
-print(f"Processed locally in {elapsed:.3f}s")
+```text
 ```
 
 
@@ -282,7 +282,7 @@ elapsed = (time.time() - start) / 10
 print(f'✓ Average latency: {elapsed*1000:.1f}ms')
 
 print('\\n✅ All tests passed!')
-"
+```text
 ```
 
 
@@ -310,7 +310,7 @@ print('✅ Local mode verified')
 print('✅ No external API keys')
 print('✅ All models local')
 print('✅ Zero external calls possible')
-"
+```text
 ```
 
 
@@ -347,7 +347,7 @@ data/
 ├── lexicons/
 │   └── nrc_emotion_lexicon.txt (NEW)
 └── poetry/
-    └── gutenberg_collection/ (NEW)
+```text
 ```
 
 

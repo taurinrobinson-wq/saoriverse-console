@@ -3,7 +3,7 @@
 ## The Problem (Solved!)
 
 You were seeing:
-
+```text
 ```
 Voice recording unavailable - missing: faster-whisper, sounddevice
 ```
@@ -20,7 +20,7 @@ Use Python 3.12 to run the app. Choose one of these methods:
 ### Method 1: Command Line (Quickest)
 
 ```powershell
-py -3.12 -m streamlit run app.py
+```text
 ```
 
 
@@ -28,7 +28,7 @@ py -3.12 -m streamlit run app.py
 ### Method 2: Use Launcher Script
 
 ```powershell
-.\run_app.ps1
+```text
 ```
 
 
@@ -97,7 +97,7 @@ py -3.12 -m pip list | grep -E "faster-whisper|sounddevice|pyttsx3"
 py -3.12 --version
 
 # Download spacy model (if needed)
-py -3.12 -m spacy download en_core_web_sm
+```text
 ```
 
 
@@ -126,7 +126,7 @@ Loads All Packages from Python 3.12:
 Streamlit App Launches:
   ✓ Voice mode works
   ✓ NLP features work
-  ✓ All audio features work
+```text
 ```
 
 
@@ -149,7 +149,7 @@ Streamlit App Launches:
 Use alternate port:
 
 ```powershell
-py -3.12 -m streamlit run app.py --server.port 8502
+```text
 ```
 
 
@@ -160,7 +160,7 @@ Verify packages are installed in Python 3.12:
 
 ```powershell
 py -3.12 -m pip list | grep faster-whisper
-py -3.12 -m pip list | grep sounddevice
+```text
 ```
 
 

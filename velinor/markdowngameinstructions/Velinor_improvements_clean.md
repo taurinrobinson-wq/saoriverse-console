@@ -77,7 +77,7 @@ This is a cleaned, human-readable summary and implementation checklist distilled
     "influence": "Offers map tools if trust is high",
     "ripple": {"Nima": -0.1}
   }
-}
+```text
 ```
 
 

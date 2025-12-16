@@ -30,7 +30,7 @@
 
 ### The Finding
 The response pipeline is a **narrow path**:
-
+```text
 ```
 Input → signal_parser → glyph_lookup → compose_response → Output
 ```
@@ -62,7 +62,7 @@ Everything else exists but sits beside this path, unused.
 
 ### ConversationMemory (Tier 1)
 **Problem:** System treats each message in isolation
-
+```text
 ```
 User: "I'm stressed"
 System: "Tell me about the stress."
@@ -73,7 +73,7 @@ System: "Tell me about work." ← REPEATED!
 
 
 **Solution:** Track context across turns
-
+```text
 ```
 User: "I'm stressed"
 System: "I hear you're stressed."
@@ -112,7 +112,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ## Integration Roadmap
 
 ### Week 1: Tier 1 (45 min)
-
+```text
 ```
 ✅ ConversationMemory
 ✅ LexiconLearner
@@ -123,7 +123,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 **Result:** Context-aware responses, no repeated questions
 
 ### Week 2: Tier 2 (3-4 hrs)
-
+```text
 ```
 ✅ AttunementLoop
 ✅ EmbodiedSimulation
@@ -135,7 +135,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 **Result:** Responses feel alive and adaptive
 
 ### Week 3-4: Tier 3 (6-8 hrs)
-
+```text
 ```
 ✅ SaoriLayer
 ✅ GenerativeTension
@@ -146,7 +146,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 **Result:** Poetically understood with dynamic engagement
 
 ### Week 5+: Optional (2-3 hrs)
-
+```text
 ```
 ✅ TemporalMemory
 ✅ Cross-session persistence
@@ -247,7 +247,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 ## Expected Outcomes
 
 ### After Tier 1 (45 min)
-
+```text
 ```
 ✅ Context builds across turns
 ✅ No repeated questions
@@ -259,7 +259,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 ### After Tier 2 (3-4 hours)
-
+```text
 ```
 ✅ Responses vary in tone
 ✅ System matches user pacing
@@ -271,7 +271,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 ### After Tier 3 (6-8 hours)
-
+```text
 ```
 ✅ Multiple archetypal voices
 ✅ Creative reframing visible
@@ -283,7 +283,7 @@ System: "Work has flooded your mind..." ← INTEGRATED!
 
 
 ### After Tier 4 (2-3 hours)
-
+```text
 ```
 ✅ Cross-session memory works
 ✅ Emotional patterns recognized

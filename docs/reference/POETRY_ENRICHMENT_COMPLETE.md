@@ -6,7 +6,7 @@ All 6 steps completed successfully! Your FirstPerson emotional AI system now has
 ##
 
 ## 📊 System Architecture
-
+```text
 ```
 ┌─ LOCAL MACHINE (245MB) ─────────────────────┐
 │  • /Users/taurinrobinson/saoriverse-console │
@@ -114,7 +114,7 @@ All 6 steps completed successfully! Your FirstPerson emotional AI system now has
 
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
-streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
+```text
 ```
 
 
@@ -150,7 +150,7 @@ Analysis:
 ├─ Dominant Emotion: positive (strength: 3)
 ├─ Glyphs: ✨ 🌈
 ├─ Poetry Source: Emily Dickinson
-└─ Privacy: 100% Local
+```text
 ```
 
 
@@ -235,7 +235,7 @@ Build Enriched Response (poetic commentary)
     ↓
 Add Metadata (for conversation history)
     ↓
-Display to User
+```text
 ```
 
 

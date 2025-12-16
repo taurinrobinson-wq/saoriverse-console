@@ -20,7 +20,7 @@ pip install -r config/requirements.txt
 python core/start.py
 
 # OR for Streamlit
-streamlit run core/main_v2.py
+```text
 ```
 
 
@@ -35,7 +35,7 @@ root/
 ├── config/               ← Configuration & dependencies
 ├── emotional_os/         ← Modularized application core
 ├── tools/                ← Organized analysis/testing tools
-└── README.md             ← Project overview
+```text
 ```
 
 
@@ -114,7 +114,7 @@ from core.tone_adapters import generate_archetypal_response
 
 # Or maintain backward compatibility with shims
 from core.phase_modulator import detect_phase
-from core.glyph_generator import GlyphGenerator
+```text
 ```
 
 
@@ -196,7 +196,7 @@ config/
 ├── requirements-dev.txt      (Development dependencies)
 ├── requirements-nlp.txt      (NLP-specific dependencies)
 ├── requirements-voice.txt    (Voice interface dependencies)
-└── runtime.txt               (Python runtime version)
+```text
 ```
 
 
@@ -205,7 +205,7 @@ Install dependencies:
 
 ```bash
 pip install -r config/requirements.txt
-pip install -r config/requirements-dev.txt  # For development
+```text
 ```
 
 
@@ -221,7 +221,7 @@ Deployment and setup scripts:
 scripts/deploy.sh
 
 # Run locally
-scripts/run_local.sh
+```text
 ```
 
 
@@ -343,7 +343,7 @@ Glyph testing:
 python core/start.py
 
 # Using Streamlit directly
-streamlit run core/main_v2.py --server.port=8501
+```text
 ```
 
 
@@ -394,7 +394,7 @@ from core.main_v2 import run_app
 
 # Compatibility Shims (Legacy)
 from core.phase_modulator import detect_phase
-from core.glyph_generator import GlyphGenerator
+```text
 ```
 
 
@@ -427,7 +427,7 @@ from emotional_os.features.journal_center import manage_journal
 from emotional_os.features.theme_manager import manage_theme
 
 # Glyphs
-from emotional_os.glyphs.glyph_generator import GlyphGenerator
+```text
 ```
 
 
@@ -445,7 +445,7 @@ from tools.document_processing.docx_reader import read_docx
 from tools.document_processing.docx_viewer import view_docx
 
 # Glyph Testing
-from tools.glyph_testing.glyph_conversation_test_harness import run_conversation_test
+```text
 ```
 
 

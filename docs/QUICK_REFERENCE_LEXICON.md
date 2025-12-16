@@ -9,7 +9,7 @@ Your FirstPerson system now recognizes **457+ actual emotional words** from your
 ##
 
 ## Key Emotional Words (Top 10)
-
+```text
 ```
 HOLD      (568x) → Vulnerability [7,11]      → "I hold this moment"
 SACRED    (373x) → Admiration [8,12]          → "This feels sacred"
@@ -29,7 +29,7 @@ WITH      (3480x) → Multiple [1,5]             → "Being with you"
 ## How It Works
 
 ### Detection Flow
-
+```text
 ```
 User Input
     ↓
@@ -93,7 +93,7 @@ analysis = lexicon.analyze_emotional_content(user_input)
 print(analysis['emotional_words'])       # List of words found
 print(analysis['primary_signals'])       # Most active signals
 print(analysis['gate_activations'])      # Gates activated
-print(analysis['intensity'])             # Emotional intensity (0-1)
+```text
 ```
 
 
@@ -126,7 +126,7 @@ print(analysis['intensity'])             # Emotional intensity (0-1)
     "intimacy": ["echo", "tender", "present", ...],
     "admiration": ["sacred", "honor", "precious", ...]
   }
-}
+```text
 ```
 
 
@@ -165,7 +165,7 @@ print(analysis['intensity'])             # Emotional intensity (0-1)
 ```python
 lexicon = get_lexicon()
 if 'hold' in lexicon.lexicon:
-    print("Found HOLD in lexicon")
+```text
 ```
 
 
@@ -175,7 +175,7 @@ if 'hold' in lexicon.lexicon:
 ```python
 intimacy_words = lexicon.words_for_signal('intimacy')
 
-# Returns: ['echo', 'tender', 'present', 'knowing', ...]
+```text
 ```
 
 
@@ -185,7 +185,7 @@ intimacy_words = lexicon.words_for_signal('intimacy')
 ```python
 gate_7_11_words = lexicon.words_for_gates([7, 11])
 
-# Returns: ['hold', 'echo', 'trust', ...]
+```text
 ```
 
 
@@ -199,7 +199,7 @@ analysis = lexicon.analyze_emotional_content(conversation)
 print(f"Words: {len(analysis['emotional_words'])}")
 print(f"Signals: {analysis['sources']}")
 print(f"Gates: {[g[0] for g in analysis['gate_activations']]}")
-print(f"Intensity: {analysis['intensity']}")
+```text
 ```
 
 
@@ -230,7 +230,7 @@ assert lexicon_path.exists(), "Lexicon file missing!"
 
 # Try loading manually
 from emotional_os.lexicon.lexicon_loader import load_lexicon
-lexicon = load_lexicon(str(lexicon_path))
+```text
 ```
 
 
@@ -244,7 +244,7 @@ word = 'hold'
 if word not in lexicon.lexicon:
     print(f"{word} not in lexicon")
     # Check frequency data
-    freq = lexicon.get_frequency(word)  # Returns 0 if not found
+```text
 ```
 
 
@@ -259,7 +259,7 @@ analysis = lexicon.analyze_emotional_content(text)
 
 print("Found words:", [w['word'] for w in analysis['emotional_words']])
 print("Signals:", analysis['primary_signals'])
-print("Gates:", analysis['gate_activations'])
+```text
 ```
 
 
@@ -274,7 +274,7 @@ hold      → signals: ['vulnerability'], gates: [7, 11], freq: 568 ✓
 sacred    → signals: ['admiration'], gates: [8, 12], freq: 373 ✓
 exactly   → signals: ['joy'], gates: [1, 5], freq: 367 ✓
 echo      → signals: ['intimacy'], gates: [7, 11], freq: 212 ✓
-tender    → signals: ['intimacy'], gates: [8, 11], freq: 150 ✓
+```text
 ```
 
 

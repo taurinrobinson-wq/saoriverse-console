@@ -68,7 +68,7 @@ A **fully integrated dynamic glyph generation system** that automatically create
 ## How It Works
 
 ### The Pipeline
-
+```text
 ```
 User Input: "I feel vulnerable but loved"
     ↓
@@ -100,7 +100,7 @@ New Glyph Available
 
 
 ### Pattern Recognition Example
-
+```text
 ```
 Turn 1: love (0.9) + intimacy (0.8) = co-occurrence
 Turn 2: love (0.85) + intimacy (0.7) = co-occurrence
@@ -178,7 +178,7 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
 | `main_v2.py` | +51 lines | Sidebar glyph display & export |
 
 ### Configuration Files (Generated Automatically)
-
+```text
 ```
 learning/
 ├── conversation_glyphs.json          # Glyph registry
@@ -254,7 +254,7 @@ evolution = DynamicGlyphEvolution(
     min_frequency_for_glyph=300,  # Default
     # Lower = glyphs appear faster
     # Higher = only very strong patterns
-)
+```text
 ```
 
 
@@ -268,7 +268,7 @@ self.emotion_symbols = {
     "love": "♥",
     "vulnerability": "🌱",
     # Add more
-}
+```text
 ```
 
 
@@ -281,7 +281,7 @@ self.emotion_symbols = {
 name_map = {
     ("love", "vulnerability"): "Open-Hearted Love",
     # Customize as needed
-}
+```text
 ```
 
 
@@ -303,7 +303,7 @@ streamlit run main_v2.py
 
 # Have meaningful conversations
 
-# Watch glyphs appear in sidebar!
+```text
 ```
 
 
@@ -328,7 +328,7 @@ new_glyphs = result['pipeline_stages']['glyph_generation']['new_glyphs_generated
 processor.export_session_glyphs("output.json")
 
 # Print summary
-processor.print_session_summary()
+```text
 ```
 
 
@@ -344,7 +344,7 @@ cat learning/conversation_glyphs.json | python -m json.tool
 cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 
 # View learning log
-tail -20 learning/hybrid_learning_log.jsonl
+```text
 ```
 
 
@@ -355,7 +355,7 @@ tail -20 learning/hybrid_learning_log.jsonl
 ### Automated Verification
 
 ```bash
-bash verify_integration.sh
+```text
 ```
 
 
@@ -385,7 +385,7 @@ result = processor.process_user_message(
 )
 
 print('Success!' if result['status'] == 'success' else 'Failed')
-"
+```text
 ```
 
 
@@ -461,7 +461,7 @@ print('Success!' if result['status'] == 'success' else 'Failed')
                   │ Display  │  │ Store in     │  │ Persist to   │
                   │ in UI    │  │ Session      │  │ JSON files   │
                   │ Sidebar  │  │ State        │  │              │
-                  └──────────┘  └──────────────┘  └──────────────┘
+```text
 ```
 
 

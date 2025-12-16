@@ -16,7 +16,7 @@ Automatically removes em dashes from AI responses and replaces them with emotion
 | `dynamic_response_composer.py` (modified) | Integrated cleaner into response generation | +25 |
 
 ## 🔄 How It Works (Automatic)
-
+```text
 ```
 User Input
     ↓
@@ -81,7 +81,7 @@ No code changes needed in calling code — it happens automatically!
 ## 🔍 Examples of Dash Removal
 
 ### Before → After
-
+```text
 ```
 "You're not alone—many brilliant people struggle with math—it's not your fault."
 ↓
@@ -123,7 +123,7 @@ cleaned = cleaner.process_response(
     response=raw_response,
     glyph_name=glyph_name,
     diversify=True  # Replace generic closings
-)
+```text
 ```
 
 
@@ -174,7 +174,7 @@ To customize, edit `style_matrix.json`:
       ...
     ]
   }
-}
+```text
 ```
 
 

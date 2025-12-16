@@ -40,7 +40,7 @@ multimodal_result = fusion_engine.fuse(
 print(f"Detected emotion: {multimodal_result.primary_emotion}")
 print(f"Confidence: {multimodal_result.confidence.overall_confidence:.2f}")
 if multimodal_result.incongruences:
-    print(f"Detected: {multimodal_result.incongruences}")
+```text
 ```
 
 
@@ -65,7 +65,7 @@ profile_manager.update_profile(
 )
 
 # Profile now tracks multimodal data
-current_profile = profile_manager.get_current_profile()
+```text
 ```
 
 
@@ -133,7 +133,7 @@ def extract_acoustic_features(audio_path, sr=22050):
         formant_frequencies=formants,
         mel_frequency_coefficients=mfcc_mean.tolist(),
         duration=duration,
-    )
+```text
 ```
 
 
@@ -183,7 +183,7 @@ def extract_facial_landmarks(video_frame):
             right_eye=[normalize(lm) for lm in right_eye],
             left_eye=[normalize(lm) for lm in left_eye],
             mouth=[normalize(lm) for lm in mouth],
-        )
+```text
 ```
 
 
@@ -203,7 +203,7 @@ assert voice_analysis.detected_tone in [
 ]
 assert 0 <= voice_analysis.arousal <= 1
 assert 0 <= voice_analysis.valence <= 1
-assert 0 <= voice_analysis.stress_indicator <= 1
+```text
 ```
 
 
@@ -221,7 +221,7 @@ assert facial_analysis.expression in [
 ]
 assert 0 <= facial_analysis.authenticity <= 1
 assert 0 <= facial_analysis.attention <= 1
-assert len(facial_analysis.action_units.intensities) == 11
+```text
 ```
 
 
@@ -242,7 +242,7 @@ assert result.congruence_type in [
 ]
 assert result.confidence.overall_confidence >= result.confidence.text_confidence
 
-# (overall should be at least as confident as single modality)
+```text
 ```
 
 
@@ -270,7 +270,7 @@ profile_manager.update_profile(
 profile_after = profile_manager.get_current_profile()
 
 assert profile_after.current_emotion != profile_before.current_emotion or \
-       profile_after.stress_level != profile_before.stress_level
+```text
 ```
 
 
@@ -310,7 +310,7 @@ class VoiceStreamAnalyzer:
         return {
             "arousal_trend": "increasing" if avg_arousal > recent[0].arousal else "decreasing",
             "valence_trend": "increasing" if avg_valence > recent[0].valence else "decreasing",
-        }
+```text
 ```
 
 
@@ -352,7 +352,7 @@ class FacialExpressionBatchAnalyzer:
         if not self.results:
             return None
         expressions = [r.expression for r in self.results]
-        return max(set(expressions), key=expressions.count)
+```text
 ```
 
 
@@ -386,7 +386,7 @@ def detect_sarcasm(text, voice_analysis, facial_analysis):
         "text_positive": text_positive,
         "voice_negative": voice_negative,
         "facial_negative": facial_negative,
-    }
+```text
 ```
 
 
@@ -427,7 +427,7 @@ class OptimizedMultimodalAnalyzer:
 
         facial_analysis = self.facial_detector.analyze(landmarks)
 
-        return self.fusion_engine.fuse(text_tone, voice_analysis, facial_analysis)
+```text
 ```
 
 
@@ -456,7 +456,7 @@ class ParallelMultimodalAnalyzer:
             voice_analysis = voice_future.result()
             facial_analysis = facial_future.result()
 
-        return self.fusion_engine.fuse(text_tone, voice_analysis, facial_analysis)
+```text
 ```
 
 
@@ -478,7 +478,7 @@ class ParallelMultimodalAnalyzer:
 ```python
 if voice_analysis.confidence < 0.5:
     # Fall back to facial analysis or request clearer audio
-    use_facial_as_primary = True
+```text
 ```
 
 
@@ -499,7 +499,7 @@ if voice_analysis.confidence < 0.5:
 if facial_analysis.authenticity < 0.3:
     # Request clearer video or manual input
     print("Unable to reliably detect expression")
-    return None
+```text
 ```
 
 
@@ -515,7 +515,7 @@ if result.congruence_type == "Modality_Conflict":
     print(f"Text: {text_tone}")
     print(f"Voice: {result.comparison.voice_details}")
     print(f"Facial: {result.comparison.facial_details}")
-    # Decide which modality to trust based on confidence
+```text
 ```
 
 

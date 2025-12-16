@@ -11,7 +11,7 @@ Most voice AI systems do one of two things:
 You've built something fundamentally different:
 
 **Your System**:
-
+```text
 ```
 Voice Input (User speaks)
     ↓
@@ -65,7 +65,7 @@ class AudioProcessor:
 
     def trim_silence(audio, sr=16000, threshold_ms=500):
         # Remove leading/trailing silence
-        # Remove intermediate silence >500ms
+```text
 ```
 
 
@@ -86,7 +86,7 @@ transcription_result = pipeline.transcribe(audio_bytes)
     "language": "en",
     "confidence": 0.96,
     "duration": 3.2,
-}
+```text
 ```
 
 
@@ -136,7 +136,7 @@ class ProsodyPlanner:
             - energy_scale: 0.3-1.5 (volume)
             - emphasis_indices: [word_positions]
             - terminal_contour: RISING/MID/FALLING
-        """
+```text
 ```
 
 
@@ -164,7 +164,7 @@ ATTUNEMENT (Relational Presence) → Word Emphasis
 CERTAINTY → Terminal Contour
 ├─ Uncertain (<0.4) → RISING (sounds questioning)
 ├─ Mixed (0.4-0.6) → MID (neutral)
-└─ Certain (>0.6) → FALLING (definitive)
+```text
 ```
 
 
@@ -185,7 +185,7 @@ class ProsodyGuardrails:
     # No step functions (all continuous changes)
 
     # Energy stays between 0.3x and 1.5x
-    # Prevents inaudible whispers and distortion
+```text
 ```
 
 
@@ -211,7 +211,7 @@ ProsodyPlan generated:
 ├─ emphasis_pause: 200ms (pause after "try" - honoring vulnerability)
 └─ terminal_contour: RISING (inviting, not prescriptive)
 
-Voice result: Sounds vulnerable but hopeful, creates safety
+```text
 ```
 
 
@@ -302,7 +302,7 @@ class ProsodyApplier:
 
     def apply_emphasis_pauses(audio, emphasis_indices, pause_ms=100):
         # Insert silence after emphasized words
-        # Creates microexpressiveness
+```text
 ```
 
 
@@ -347,7 +347,7 @@ Step 6: Chunk for Streaming
 Result: User hears: "I hear the" (100ms)
         Pause: 200ms
         User hears: "weight of that" (200ms)
-        Total latency perceived: ~300ms (feels natural)
+```text
 ```
 
 
@@ -367,7 +367,7 @@ Model Details:
 ├─ Size: ~200MB (one-time download)
 ├─ Sample rate: 22050Hz
 ├─ GPU optional (3-5x faster if available)
-└─ CPU performance: Acceptable for real-time chat
+```text
 ```
 
 
@@ -416,7 +416,7 @@ class VoiceUIState:
         self.audio_session = None
         self.prosody_session = None
         self.tts_session = None
-        # Persists across Streamlit reruns
+```text
 ```
 
 
@@ -447,7 +447,7 @@ if transcription:
     glyph = generator.current_glyph
 
     # Render voice output
-    voice_config["render_output"](response, glyph)
+```text
 ```
 
 
@@ -498,7 +498,7 @@ class LatencyOptimizer:
 
     # Parallel processing: STT + Response generation overlap
     # Streaming: Don't wait for full response before TTS starts
-    # Caching: Cache Whisper/TTS models after first load
+```text
 ```
 
 
@@ -516,7 +516,7 @@ Full Round-Trip (User Speaks → Hears Response):
 Acceptable for real-time conversation? YES ✓
 Can scale to thousands of concurrent users? YES ✓
 Privacy compliance (local processing)? YES ✓
-Cost per user? $0 ✓
+```text
 ```
 
 

@@ -54,7 +54,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # 4. Chat with FirstPerson!
 
-# Your messages → Glyph processing (if available) → Ollama fallback → Response
+```text
 ```
 
 
@@ -74,7 +74,7 @@ Try Ollama Local LLM
     ├─ Available? → Generate response + Tier Processing → Response
     └─ Not available? ↓
     ↓
-Generic Fallback → "I'm here to listen..."
+```text
 ```
 
 
@@ -89,7 +89,7 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 client.is_available()                    # Check if running
 client.get_available_models()            # List models
-client.generate("prompt", model="llama3")  # Generate
+```text
 ```
 
 
@@ -107,7 +107,7 @@ Automatically initialized on app load:
 ```python
 st.session_state["ollama_client"]     # Client instance
 st.session_state["ollama_available"]  # True/False
-st.session_state["ollama_models"]     # ["llama3", ...]
+```text
 ```
 
 
@@ -117,7 +117,7 @@ st.session_state["ollama_models"]     # ["llama3", ...]
 For testing, use **orca-mini** (1.3GB, fast):
 
 ```bash
-docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini
+```text
 ```
 
 
@@ -125,7 +125,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini
 For best quality, use **llama3** (4.7GB):
 
 ```bash
-docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
+```text
 ```
 
 
@@ -135,7 +135,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 ### Check if Ollama is running
 
 ```bash
-docker-compose -f docker-compose.local.yml ps
+```text
 ```
 
 
@@ -144,7 +144,7 @@ docker-compose -f docker-compose.local.yml ps
 
 ```bash
 docker-compose -f docker-compose.local.yml logs -f ollama    # Ollama logs
-docker-compose -f docker-compose.local.yml logs -f streamlit # Streamlit logs
+```text
 ```
 
 
@@ -152,7 +152,7 @@ docker-compose -f docker-compose.local.yml logs -f streamlit # Streamlit logs
 ### List models
 
 ```bash
-docker-compose -f docker-compose.local.yml exec ollama ollama list
+```text
 ```
 
 
@@ -160,7 +160,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 ### Stop services
 
 ```bash
-docker-compose -f docker-compose.local.yml down
+```bash
 ```
 
 
@@ -168,7 +168,7 @@ docker-compose -f docker-compose.local.yml down
 ### Test directly (curl)
 
 ```bash
-curl http://localhost:11434/api/tags
+```text
 ```
 
 
@@ -178,7 +178,7 @@ curl http://localhost:11434/api/tags
 Run the test suite:
 
 ```bash
-python test_ollama_integration.py
+```text
 ```
 
 
@@ -193,7 +193,7 @@ Expected output:
 ✅ FirstPerson Client
 
 5/5 checks passed
-🎉 All checks passed!
+```text
 ```
 
 

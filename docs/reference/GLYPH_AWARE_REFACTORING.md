@@ -19,7 +19,7 @@ def compose_response(
     input_text: str,
     glyph_name: str = "",  # Just a string label
     ...
-) -> str:
+```text
 ```
 
 
@@ -32,7 +32,7 @@ def compose_response(
     input_text: str,
     glyph: Optional[Dict] = None,  # Full glyph dict with metadata
     ...
-) -> str:
+```text
 ```
 
 
@@ -51,7 +51,7 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, ...):
     # Layer 2: Message-specific bridges (for feedback/corrections)
     # Layer 3: Entity-specific contextualization
     # Layer 4: Poetry weaving based on glyph's emotional category
-    # Layer 5: Intensity scaling based on glyph.gates
+```text
 ```
 
 
@@ -65,7 +65,7 @@ Updated `compose_message_aware_response()` to start with glyph description ancho
 # Now starts with glyph context before message-specific content
 if glyph and glyph.get("description"):
     opening = f"There's something in what you're describing—{glyph_description.lower()}"
-    parts.append(opening)
+```text
 ```
 
 
@@ -81,7 +81,7 @@ composed = _response_composer.compose_response(
     input_text=input_text,
     glyph_name=name,  # Just string
     ...
-)
+```text
 ```
 
 
@@ -93,7 +93,7 @@ composed = _response_composer.compose_response(
     input_text=input_text,
     glyph=glyph,  # Full dict with description, gates, emotional_signal
     ...
-)
+```text
 ```
 
 
@@ -121,7 +121,7 @@ a sanctuary of quiet care. You're not alone—many brilliant people have genuine
 with math, especially when it's presented in a way that doesn't match how their mind
 naturally works..."
 
-✓✓ GLYPH DESCRIPTION FOUND IN RESPONSE!
+```text
 ```
 
 
@@ -139,7 +139,7 @@ Response: "...I appreciate you saying that. I want to make sure I'm actually hea
 not projecting onto you. Help me understand: what did I miss?"
 
 ✓ Feedback-aware response generation working
-✓ Response grounded in glyph meaning
+```text
 ```
 
 
@@ -166,7 +166,7 @@ Dynamic Response Composer [GLYPH-AWARE]
     └─ compose_message_aware_response(glyph: Dict)
         └─ Start with glyph anchor
         └─ Layer message-specific content
-        └─ Add inherited_pattern handling
+```text
 ```
 
 
@@ -186,7 +186,7 @@ Dynamic Response Composer [GLYPH-AWARE]
 ```
 Glyph: Still Containment (used for label only)
 Response: "You're not alone—many brilliant people have genuine friction with math..."
-[Glyph metadata ignored]
+```text
 ```
 
 

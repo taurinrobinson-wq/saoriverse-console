@@ -10,7 +10,7 @@ SaoriVerse Console is a modular emotional AI system built with clean separation 
 ##
 
 ## Directory Structure
-
+```text
 ```
 saoriverse-console/
 ├── app.py                    # Single Streamlit entry point
@@ -87,7 +87,7 @@ saoriverse-console/
 ## Core Module Interactions
 
 ### Text-to-Response Pipeline
-
+```text
 ```
 user_input (text)
     ↓
@@ -110,7 +110,7 @@ response (text) → Streamlit UI
 
 
 ### Voice Pipeline
-
+```text
 ```
 audio_input (mp3/wav)
     ↓
@@ -130,7 +130,7 @@ audio_output (mp3/wav)
 
 
 ### Learning Pipeline
-
+```text
 ```
 user_input + response + feedback
     ↓
@@ -182,7 +182,7 @@ from src import (
     process_user_input,
     DynamicResponseComposer,
     VoiceInterface,
-)
+```text
 ```
 
 
@@ -191,7 +191,7 @@ from src import (
 
 ```python
 from src.signal_parser import parse_input
-from src.relational_memory import store_capsule
+```text
 ```
 
 
@@ -226,7 +226,7 @@ from src.relational_memory import store_capsule
 ### Single Streamlit Entry Point:
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 

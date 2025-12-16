@@ -3,7 +3,7 @@
 ## Overview
 
 Tier 3 adds **Poetic Consciousness** to responses through four integrated components:
-
+```text
 ```
 Response Input
     ↓
@@ -45,7 +45,7 @@ expr = engine.generate_poetic_expression("growth", "metaphorical")
 
 bridge = engine.bridge_concepts("growth", "challenge")
 
-# → "Where growth meets challenge"
+```text
 ```
 
 
@@ -78,7 +78,7 @@ subtle = saori.apply_yugen("Here's the insight")
 # Mono no aware: gentle melancholy
 transient = saori.apply_mono_no_aware("This moment")
 
-# → "This moment - and so it changes"
+```text
 ```
 
 
@@ -109,7 +109,7 @@ opening = tension.create_opening("This is what I think")
 # Balance paradox (both/and thinking)
 paradox = tension.balance_paradox("strength", "vulnerability")
 
-# → "It is both strength and vulnerability"
+```text
 ```
 
 
@@ -147,7 +147,7 @@ enhanced = weaver.add_mythological_element(response, myth)
 # Build personal narrative
 narrative = weaver.build_personal_narrative(history)
 
-# → "Your journey has been one of transformation..."
+```text
 ```
 
 
@@ -185,7 +185,7 @@ print(metrics)
 # }
 
 # Get latest metrics anytime
-metrics = tier3.get_metrics()
+```text
 ```
 
 
@@ -209,7 +209,7 @@ if tier3:
         )
         response = poetry_response
     except Exception as e:
-        logger.warning(f"Tier 3 enhancement failed: {e}")
+```text
 ```
 
 
@@ -229,7 +229,7 @@ def _ensure_tier3_poetic_consciousness():
             st.session_state["tier3_poetic_consciousness"] = tier3
         except Exception as e:
             logger.warning(f"Failed to initialize Tier 3: {e}")
-            st.session_state["tier3_poetic_consciousness"] = None
+```text
 ```
 
 
@@ -258,7 +258,7 @@ Phase 4: Mythology Weaver (2-3ms)
   • Add mythological elements
   ↓
 Output: enhanced response string, metrics dict
-Total: ~7-9ms (well under 30ms target)
+```text
 ```
 
 
@@ -299,7 +299,7 @@ pytest tests/test_tier1_foundation.py tests/test_tier2_aliveness.py tests/test_t
 # Quick check
 pytest tests/test_tier3_poetic_consciousness.py --tb=no -q
 
-# Expected: 45 passed
+```text
 ```
 
 
@@ -326,7 +326,7 @@ if random.random() > 0.6:  # 40% chance
 
 # In MythologyWeaver
 if myth.get("themes"):  # Only if themes extracted
-    response = weaver.add_mythological_element(response, myth)
+```text
 ```
 
 
@@ -339,7 +339,7 @@ To increase poetry intensity (in any component):
 
 # Lower probability threshold (e.g., 0.5 → 0.3 = 70% chance)
 if random.random() > 0.3:  # was 0.5
-    response = apply_enhancement(response)
+```text
 ```
 
 
@@ -350,7 +350,7 @@ To decrease poetry intensity:
 
 # Raise probability threshold (e.g., 0.5 → 0.8 = 20% chance)
 if random.random() > 0.8:  # was 0.5
-    response = apply_enhancement(response)
+```text
 ```
 
 
@@ -368,7 +368,7 @@ If Tier 3 initialization fails:
 If Tier 3 processing fails:
   → Uses previous tier's response
   → Warning logged
-  → Metrics include error info
+```text
 ```
 
 
@@ -383,7 +383,7 @@ try:
     result = component.process(input)
 except Exception as e:
     logger.warning(f"Component failed: {e}")
-    result = fallback_value  # Return safe default
+```text
 ```
 
 
@@ -396,7 +396,7 @@ except Exception as e:
 
 # Just enhance response, don't care about metrics
 poetic, _ = tier3.process_for_poetry(response)
-return poetic
+```text
 ```
 
 
@@ -407,7 +407,7 @@ return poetic
 poetic, metrics = tier3.process_for_poetry(response)
 if metrics.get("processing_time_ms", 0) > 15:
     logger.warning("Tier 3 slow")
-return poetic
+```text
 ```
 
 
@@ -421,7 +421,7 @@ context = {
 }
 poetic, metrics = tier3.process_for_poetry(response, context)
 logger.info(f"Applied {metrics['aesthetic_applied']} aesthetic")
-return poetic
+```text
 ```
 
 
@@ -435,7 +435,7 @@ return poetic
 ```python
 if "tier3_poetic_consciousness" in st.session_state:
     tier3 = st.session_state["tier3_poetic_consciousness"]
-    print(tier3)  # Should not be None
+```text
 ```
 
 
@@ -448,7 +448,7 @@ if "tier3_poetic_consciousness" in st.session_state:
 _, metrics = tier3.process_for_poetry(response)
 print(f"Time: {metrics.get('processing_time_ms')}ms")
 
-# Should be under 15ms typically
+```text
 ```
 
 

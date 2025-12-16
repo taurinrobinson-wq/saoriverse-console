@@ -53,7 +53,7 @@ client.get_available_models()                   # List available models
 client.generate(prompt, model, temperature)    # Generate response
 client.generate_with_context(user_input, history, model)  # With context
 client.pull_model(model_name)                   # Download a model
-client.health_check()                           # Get service status
+```text
 ```
 
 
@@ -61,7 +61,7 @@ client.health_check()                           # Get service status
 **Singleton Pattern**:
 
 ```python
-ollama = get_ollama_client_singleton()  # Thread-safe caching
+```text
 ```
 
 
@@ -85,7 +85,7 @@ ollama = get_ollama_client_singleton()  # Thread-safe caching
 
 ```
 You are FirstPerson, a warm, empathetic AI companion for personal growth.
-Respond with genuine understanding, specific engagement, and practical support.
+```text
 ```
 
 
@@ -138,7 +138,7 @@ Tier 2 Aliveness (emotional tuning)
     ↓
 Tier 3 Poetic Consciousness (optional)
     ↓
-Display to User
+```text
 ```
 
 
@@ -162,7 +162,7 @@ Display to User
 ### 1. Launch with Docker Compose
 
 ```bash
-docker-compose -f docker-compose.local.yml up -d
+```text
 ```
 
 
@@ -175,7 +175,7 @@ docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # Or try smaller models for faster iteration
-docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini  # 1.3GB
+```text
 ```
 
 
@@ -183,7 +183,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull orca-mini  # 
 ### 3. Open Streamlit
 
 ```
-http://localhost:8501
+```text
 ```
 
 
@@ -191,7 +191,7 @@ http://localhost:8501
 ### 4. Test Integration
 
 ```bash
-python test_ollama_integration.py
+```text
 ```
 
 
@@ -231,7 +231,7 @@ Available in docker-compose/containers:
 OLLAMA_BASE_URL=http://ollama:11434        # Endpoint for Ollama API
 STREAMLIT_SERVER_HEADLESS=true              # Headless mode
 STREAMLIT_SERVER_PORT=8501                  # Streamlit port
-STREAMLIT_LOGGER_LEVEL=info                 # Log level
+```bash
 ```
 
 
@@ -241,7 +241,7 @@ Override in docker-compose.local.yml:
 ```yaml
 environment:
   - OLLAMA_BASE_URL=http://ollama:11434
-  - CUSTOM_VAR=value
+```text
 ```
 
 
@@ -257,7 +257,7 @@ docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
 # Stop
-docker-compose -f docker-compose.local.yml down
+```text
 ```
 
 
@@ -277,7 +277,7 @@ curl -X POST http://localhost:11434/api/generate -d '{
   "model": "llama3",
   "prompt": "Hello!",
   "stream": false
-}'
+```text
 ```
 
 
@@ -293,7 +293,7 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 client = get_ollama_client_singleton()
 print("Available:", client.is_available())
 print("Models:", client.get_available_models())
-print("Response:", client.generate("Test prompt", model="llama3"))
+```text
 ```
 
 
@@ -303,7 +303,7 @@ print("Response:", client.generate("Test prompt", model="llama3"))
 ### Run Integration Tests
 
 ```bash
-python test_ollama_integration.py
+```text
 ```
 
 
@@ -318,7 +318,7 @@ Expected output:
 ✅ FirstPerson Client
 
 5/5 checks passed
-🎉 All checks passed! Ollama integration is ready.
+```text
 ```
 
 
@@ -343,7 +343,7 @@ Expected output:
 
 # Would need to update production docker-compose to include Ollama
 
-# But not recommended for resource-constrained Droplets
+```text
 ```
 
 
@@ -361,7 +361,7 @@ docker-compose -f docker-compose.local.yml ps
 docker-compose -f docker-compose.local.yml logs ollama
 
 # Restart
-docker-compose -f docker-compose.local.yml restart
+```text
 ```
 
 

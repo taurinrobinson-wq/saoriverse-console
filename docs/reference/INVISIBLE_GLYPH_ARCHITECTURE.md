@@ -12,7 +12,7 @@ The glyph system should work **invisibly**—informing quality without appearing
 ## Architecture: Visible vs. Invisible Glyphs
 
 ### ❌ OLD ARCHITECTURE (Visible Glyph System)
-
+```text
 ```
 User: "I have math anxiety"
      ↓
@@ -27,7 +27,7 @@ a sanctuary of quiet care. You're not alone—many brilliant people..."
 
 
 ### ✅ NEW ARCHITECTURE (Invisible Glyph System)
-
+```text
 ```
 User: "I have math anxiety"
      ↓
@@ -105,7 +105,7 @@ else:
     closing = "question_based"  # More engaging
 
 # OUTPUT feels personal, not categorical
-return "".join(parts)  # No glyph descriptions mentioned
+```text
 ```
 
 
@@ -124,7 +124,7 @@ if message_content.get("math_frustration"):
 if intensity >= 8:
     parts.append("I'm here to work through this with you.")
 else:
-    parts.append("What would it feel like to approach this differently?")
+```text
 ```
 
 
@@ -157,7 +157,7 @@ You're not alone—many brilliant people have genuine friction with math,
 especially when it's presented in a way that doesn't match how their mind naturally works.
 Mental blocks are usually where the concept structure doesn't match your natural thinking pattern.
 That's not fixed—it's just a mismatch to navigate.
-What would it feel like to approach math frustration differently?
+```text
 ```
 
 
@@ -174,7 +174,7 @@ What would it feel like to approach math frustration differently?
 
 ```
 I appreciate you saying that. I want to make sure I'm actually hearing you,
-not projecting onto you. Help me understand: what did I miss?
+```text
 ```
 
 
@@ -221,7 +221,7 @@ Day 2: "It's from my mom"
 Day 3: "That's not what I meant about Michelle"
   → Response shows they're actually listening ✓
 
-Overall: Felt like talking to someone who gets me, not a system
+```text
 ```
 
 

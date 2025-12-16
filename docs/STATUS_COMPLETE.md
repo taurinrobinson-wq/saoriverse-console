@@ -17,7 +17,7 @@ You asked me to "actually create this glyph-informed chat system that incorporat
 ## 🏗️ What Was Actually Built
 
 ### 1. **Non-Blocking FastAPI Backend**
-
+```text
 ```
 User Request → Immediate Response (<100ms) → Async Background Processing
 ```
@@ -28,7 +28,7 @@ User Request → Immediate Response (<100ms) → Async Background Processing
 - Detailed logging at every stage
 
 ### 2. **3-Tier Response Pipeline** (~85-90ms)
-
+```text
 ```
 Input → Tier1 Foundation (~40ms)
       → Tier2 Aliveness (~20ms)
@@ -98,7 +98,7 @@ Key modules:
 ```bash
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
-python -m textblob.download_corpora
+```text
 ```
 
 
@@ -106,7 +106,7 @@ python -m textblob.download_corpora
 ### 2. Validate Installation
 
 ```bash
-python validate_installation.py
+```text
 ```
 
 
@@ -116,7 +116,7 @@ python validate_installation.py
 ```bash
 python firstperson_backend.py
 
-# Backend is now on http://localhost:8000
+```text
 ```
 
 
@@ -126,7 +126,7 @@ python firstperson_backend.py
 ```bash
 python diagnose_backend.py
 
-# Tests: health, chat endpoint, conversations loading, timing
+```text
 ```
 
 
@@ -146,7 +146,7 @@ curl -X POST http://localhost:8000/chat \
     }
   }'
 
-# Response in <100ms ✓
+```text
 ```
 
 
@@ -217,7 +217,7 @@ return ChatResponse(...)
 
 # AFTER (non-blocking)
 return ChatResponse(...)
-asyncio.create_task(save_in_background())  # Save in background
+```text
 ```
 
 

@@ -51,7 +51,7 @@ Run the SQL migration in Supabase:
 # 3. Copy and run sql/conversations_table.sql
 
 # Option B: Via Supabase CLI (if installed)
-supabase db push
+```text
 ```
 
 
@@ -70,7 +70,7 @@ Ensure `st.secrets` contains Supabase credentials:
 # .streamlit/secrets.toml
 [supabase]
 url = "https://your-project.supabase.co"
-key = "your-anon-key"
+```text
 ```
 
 
@@ -78,7 +78,7 @@ key = "your-anon-key"
 ### 3. Run the Application
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 
@@ -95,7 +95,7 @@ from emotional_os.deploy.modules.conversation_manager import generate_auto_name
 # Example
 title = generate_auto_name("I've been feeling anxious about work")
 
-# Result: "Feeling anxious about work"
+```text
 ```
 
 
@@ -136,7 +136,7 @@ success, msg = manager.save_conversation(
 success, msg = manager.rename_conversation("conv-id-123", "New Title")
 
 # Delete conversation
-success, msg = manager.delete_conversation("conv-id-123")
+```text
 ```
 
 
@@ -169,7 +169,7 @@ success, msg = manager.delete_conversation("conv-id-123")
   "emotional_context": {},
   "topics": [],
   "archived": false
-}
+```text
 ```
 
 

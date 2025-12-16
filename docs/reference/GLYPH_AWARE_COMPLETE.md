@@ -44,7 +44,7 @@ Then evolved to:
 def compose_response(self, input_text: str, glyph_name: str = "", ...)
 
 # NEW
-def compose_response(self, input_text: str, glyph: Optional[Dict] = None, ...)
+```text
 ```
 
 
@@ -78,7 +78,7 @@ def _build_glyph_aware_response(self, glyph, entities, emotions, feedback_type, 
     intensity_level = len(gates) if isinstance(gates, list) else 1
     closing_move = "permission" if intensity_level <= 1 else \
                    "commitment" if intensity_level >= 9 else \
-                   random.choice(["question", "permission", "commitment"])
+```text
 ```
 
 
@@ -102,7 +102,7 @@ Maps glyph names to poetry emotion categories:
 def compose_message_aware_response(self, input_text, message_content, glyph=None):
     # Generated message-specific content only
     if message_content.get("math_frustration"):
-        parts.append("You're not alone—many brilliant people...")
+```text
 ```
 
 
@@ -118,7 +118,7 @@ def compose_message_aware_response(self, input_text, message_content, glyph=None
 
     # THEN: Layer message-specific content
     if message_content.get("math_frustration"):
-        parts.append("You're not alone—many brilliant people...")
+```sql
 ```
 
 
@@ -141,7 +141,7 @@ composed = _response_composer.compose_response(
     input_text=input_text,
     glyph=glyph,  # Pass full dict
     ...
-)
+```text
 ```
 
 
@@ -161,7 +161,7 @@ return None, "I can sense there's something..."
 
 # NEW - consistent tuple: (best_glyph, (response, feedback_data))
 return None, ("I can sense there's something...",
-              {'is_correction': False, 'contradiction_type': None, ...})
+```text
 ```
 
 
@@ -177,7 +177,7 @@ return None, ("I can sense there's something...",
 # Code checks both variations
 gate_data = glyph.get("gates") or glyph.get("gate")
 gates_list = gate_data if isinstance(gate_data, list) else [gate_data]
-intensity_level = len(gates_list)
+```text
 ```
 
 
@@ -190,7 +190,7 @@ intensity_level = len(gates_list)
 **Input:**
 
 ```
-"I have math anxiety. I've never been good at math and it's been a block my whole life."
+```text
 ```
 
 
@@ -207,7 +207,7 @@ a sanctuary of quiet care. You're not alone—many brilliant people have genuine
 with math, especially when it's presented in a way that doesn't match how their mind
 naturally works. Mental blocks are usually where the concept structure doesn't match
 your natural thinking pattern. That's not fixed—it's just a mismatch to navigate.
-What would it feel like to approach math frustration differently?"
+```text
 ```
 
 
@@ -223,7 +223,7 @@ What would it feel like to approach math frustration differently?"
 **Input:**
 
 ```
-"Actually, it's inherited from my mother. She was always anxious about it too."
+```text
 ```
 
 
@@ -239,7 +239,7 @@ What would it feel like to approach math frustration differently?"
 
 ```
 "That's not quite what I meant. Michelle is my mother-in-law and my boss, and
-she always explains things in a way that only makes sense to her."
+```text
 ```
 
 
@@ -252,7 +252,7 @@ she always explains things in a way that only makes sense to her."
 
 ```
 "...I appreciate you saying that. I want to make sure I'm actually hearing you,
-not projecting onto you. Help me understand: what did I miss?"
+```text
 ```
 
 
@@ -281,7 +281,7 @@ DynamicResponseComposer
     └─ compose_response(glyph_name="Still Containment")
        └─ Ignores glyph metadata
        └─ Generic compositional response
-       └─ Response disconnected from glyph meaning
+```text
 ```
 
 

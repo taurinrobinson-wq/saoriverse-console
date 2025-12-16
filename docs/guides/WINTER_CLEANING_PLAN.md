@@ -91,7 +91,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 ## Reorganization Plan
 
 ### Step 1: Archive Historical Phase Infrastructure ✅
-
+```text
 ```
 archive/phase_infrastructure/
 ├── phase_1_generator.py
@@ -106,7 +106,7 @@ archive/phase_infrastructure/
 
 
 ### Step 2: Consolidate Analysis Tools ✅
-
+```text
 ```
 tools/analysis/
 ├── gate_distribution_analyzer.py
@@ -118,7 +118,7 @@ tools/analysis/
 
 
 ### Step 3: Organize Document Processing ✅
-
+```text
 ```
 tools/document_processing/
 ├── docx_reader.py
@@ -129,7 +129,7 @@ tools/document_processing/
 
 
 ### Step 4: Move Glyph Testing Tools ✅
-
+```text
 ```
 tools/glyph_testing/
 ├── glyph_response_helpers.py

@@ -38,7 +38,7 @@ SaoriVerse Console has successfully completed all Phase 11 deployment verificati
   ```
 
 **Evidence**:
-
+```text
 ```
 INFO:parser.nrc_lexicon_loader:NRC Lexicon loaded: 6453 words
 ✓ spaCy NLP model loaded (en_core_web_sm)
@@ -65,7 +65,7 @@ INFO:parser.nrc_lexicon_loader:NRC Lexicon loaded: 6453 words
 **Result**: 7/7 modules import successfully
 
 **Evidence**: All modules loaded without errors:
-
+```text
 ```
 ✓ Main Response Engine loaded
 ✓ Response Adapter loaded
@@ -113,7 +113,7 @@ INFO:parser.nrc_lexicon_loader:NRC Lexicon loaded: 6453 words
 ## Directory Structure Verification
 
 ### Root Directory (Clean)
-
+```text
 ```
 ✅ 2 essential files only
 - README.md
@@ -123,7 +123,7 @@ INFO:parser.nrc_lexicon_loader:NRC Lexicon loaded: 6453 words
 
 
 ### Organized Directories
-
+```text
 ```
 ✅ core/                    - 11 essential Python files
 ✅ docs/guides/             - 10 design & reference documents

@@ -12,7 +12,7 @@ Quick resume (recommended)
 
 ```bash
 git pull origin main
-git checkout feat/openstax-psych-extract || git checkout -b feat/openstax-psych-extract
+```text
 ```
 
 
@@ -21,7 +21,7 @@ git checkout feat/openstax-psych-extract || git checkout -b feat/openstax-psych-
 
 ```bash
 python3 -m pip install requests beautifulsoup4 spacy
-python3 -m spacy download en_core_web_sm
+```text
 ```
 
 
@@ -29,7 +29,7 @@ python3 -m spacy download en_core_web_sm
 3. Re-run extraction (if you want to refresh the outputs):
 
 ```bash
-python3 tools/extract_openstax_psych_vocab.py
+```text
 ```
 
 

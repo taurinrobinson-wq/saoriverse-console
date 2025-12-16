@@ -10,7 +10,7 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 - **Syntax**: Sentence coherence conveying emotional clarity
 
 ## Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                         User Interaction                            │
@@ -104,7 +104,7 @@ vectors = {
     "repulsion": 0.0,     # Pushing apart
     "resonance": 0.0,     # Empathic alignment
     "dissonance": 0.0     # Friction/conflict
-}
+```text
 ```
 
 
@@ -136,7 +136,7 @@ memory = AffectiveMemory(
     tone="melancholic",
     valence=EmotionalValence.LONGING,
     narrative_arc="descent"  # growth, recovery, struggle, etc.
-)
+```text
 ```
 
 
@@ -181,7 +181,7 @@ result = {
         "death_occurred": False,      # Whether poem died/reset
         "mirror_response": "..."      # Empathic mirror response
     }
-}
+```text
 ```
 
 
@@ -200,7 +200,7 @@ result = engine.process_glyph_response(
     signals=[{"tone": "longing", "voltage": "high"}],
     user_input="I miss the way things used to be",
     user_id="user_abc"
-)
+```text
 ```
 
 
@@ -241,7 +241,7 @@ print(result["poem_rendered"])
 
 # Tempo: erratic
 
-# Clarity: coherent
+```text
 ```
 
 
@@ -274,7 +274,7 @@ engine.update_from_interaction(
 # The poem and relational gravity evolve through this arc
 summary = engine.get_current_state_summary()
 print(summary["poem"]["valence"])  # "peace"
-print(summary["ethics"]["pride"])  # Increased from supporting user
+```text
 ```
 
 
@@ -301,7 +301,7 @@ for dream in dreams:
 
 # (Echoes from 5 memories)
 
-engine.exit_dreaming_mode()
+```text
 ```
 
 
@@ -321,7 +321,7 @@ response = engine.generate_mirror_response(
 
 print(response)
 
-# "I feel the weight of night without stars. I am with you in this moment."
+```text
 ```
 
 
@@ -331,7 +331,7 @@ print(response)
 The engine automatically persists state to:
 
 ```
-emotional_os/data/poetic_state.json
+```text
 ```
 
 

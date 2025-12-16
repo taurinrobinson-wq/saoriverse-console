@@ -20,7 +20,7 @@
 
 ### Procfile (Updated)
 **Before:**
-
+```text
 ```
 web: python core/start.py
 ```
@@ -28,7 +28,7 @@ web: python core/start.py
 
 
 **After:**
-
+```text
 ```
 web: streamlit run app.py
 ```
@@ -55,7 +55,7 @@ streamlit run app.py
 
 # Should launch at http://localhost:8501
 
-# Test the UI briefly to confirm it works
+```text
 ```
 
 
@@ -65,7 +65,7 @@ streamlit run app.py
 ```bash
 cat Procfile
 
-# Should show: web: streamlit run app.py
+```text
 ```
 
 
@@ -80,7 +80,7 @@ git commit -m "deployment: Update Procfile for reorganized structure
 - Use standard streamlit run command
 - Ready for Railway deployment"
 
-git push origin refactor/reorganization-master
+```text
 ```
 
 
@@ -105,7 +105,7 @@ git push origin refactor/reorganization-master
 ```bash
 
 # If you have railway CLI installed
-railway deploy --branch refactor/reorganization-master
+```text
 ```
 
 
@@ -151,7 +151,7 @@ If something goes wrong:
 git revert HEAD
 git push origin refactor/reorganization-master
 
-# Or manually select previous commit in Railway dashboard
+```text
 ```
 
 

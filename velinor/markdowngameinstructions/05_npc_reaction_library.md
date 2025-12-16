@@ -7,7 +7,7 @@ A **palette of interchangeable dialogue lines** for NPCs to react to collapse ev
 ## Static NPC Reactions (Desensitized to Collapse)
 
 ### Resigned Tone
-
+```text
 ```
 "Looks like you really are new to the city.
 You get used to it. We barely notice it now."
@@ -25,7 +25,7 @@ We've stopped counting."
 
 
 ### Wry/Dark Humor Tone
-
+```text
 ```
 "The city's sense of humor is getting darker every day."
 
@@ -42,7 +42,7 @@ Keeps everyone on their toes."
 
 
 ### Ritualized Tone
-
+```text
 ```
 "The city exhales. We breathe with it.
 Collapse is just another rhythm."
@@ -62,7 +62,7 @@ Collapse is just another rhythm."
 ## Reactive NPC Reactions (Still Affected by Collapse)
 
 ### Fearful Tone
-
+```text
 ```
 "I thought that was it. I thought we were finally coming down."
 
@@ -79,7 +79,7 @@ It still shakes me every time."
 
 
 ### Empathetic Tone
-
+```text
 ```
 "Are you alright? New arrivals always find this unsettling."
 
@@ -96,7 +96,7 @@ Come, sit. It will pass."
 
 
 ### Determined Tone
-
+```text
 ```
 "Another collapse means new opportunities. Stay alert."
 
@@ -115,7 +115,7 @@ Come, sit. It will pass."
 ## Generic Closing Line (All NPCs, Post-Collapse)
 
 ### Standard Version
-
+```text
 ```
 "We must be going. A new passageway may have opened up in the collapse.
 We suggest you keep track of your surroundings.
@@ -127,7 +127,7 @@ The only constant here is change."
 ### Alternate Versions by Tone
 
 **Ominous**:
-
+```text
 ```
 "The city devours itself. Best not to be caught in its mouth.
 Watch the map. Watch the ground. Watch your back."
@@ -136,7 +136,7 @@ Watch the map. Watch the ground. Watch your back."
 
 
 **Hopeful**:
-
+```text
 ```
 "Collapse opens doors. Keep your eyes sharp for what emerges.
 Sometimes loss is just opportunity in disguise."
@@ -145,7 +145,7 @@ Sometimes loss is just opportunity in disguise."
 
 
 **Ritualized**:
-
+```text
 ```
 "The city remembers. We walk the broken paths. You will learn.
 The map is your first teacher. The collapse is the second."
@@ -154,7 +154,7 @@ The map is your first teacher. The collapse is the second."
 
 
 **Practical**:
-
+```text
 ```
 "Mark it on your mental map where the blockage is.
 The city changes constantly — staying oriented is half the battle."
@@ -166,7 +166,7 @@ The city changes constantly — staying oriented is half the battle."
 ## Player Dialogue Response Options
 
 ### Shock/Alarm
-
+```text
 ```
 "What was that? Are you two okay!?
 I'm surprised you didn't even flinch."
@@ -185,7 +185,7 @@ I'm surprised you didn't even flinch."
 ##
 
 ### Observation/Inquiry
-
+```text
 ```
 "I'm surprised you didn't even flinch."
 
@@ -206,7 +206,7 @@ You're so calm, and I'm terrified."
 ##
 
 ### Acceptance/Stillness
-
+```json
 ```
 [Remain silent, observing both the collapse and the NPCs' reaction]
 
@@ -230,7 +230,7 @@ You're so calm, and I'm terrified."
 - No personal details shared
 
 **Example (Mistrusting NPC, Static)**:
-
+```text
 ```
 "You're new. This is how things are now.
 Best you get used to it fast or get out."
@@ -246,7 +246,7 @@ Best you get used to it fast or get out."
 - Hints of personal stories emerge
 
 **Example (Mistrusting NPC, Medium Trust)**:
-
+```text
 ```
 "You've been around a few days now. At least you don't panic like most.
 The collapses... yeah, they're part of life. Learn the patterns."
@@ -262,7 +262,7 @@ The collapses... yeah, they're part of life. Learn the patterns."
 - Full stories and motivations revealed
 
 **Example (Mistrusting NPC, High Trust)**:
-
+```text
 ```
 "I've lost people to these collapses. That's why I don't react anymore.
 If I flinched every time, I'd never survive. You understand?
@@ -275,7 +275,7 @@ But you're different. You still feel. That's good. Don't lose that."
 ## Special Moments: Dialogue Combinations
 
 ### If Player Remains Calm During First Collapse
-
+```text
 ```
 Velinor (Reactive NPC):
 "Most new arrivals scream or panic.
@@ -288,7 +288,7 @@ That is rare."
 
 
 ### If Player Shows Immediate Concern for NPC
-
+```text
 ```
 Ravi (Welcoming NPC):
 "You were worried about us. Even as a stranger.
@@ -301,7 +301,7 @@ I think you'll do well here."
 
 
 ### If Player Questions the Cycle
-
+```text
 ```
 Nima (Mistrusting NPC):
 "You're asking the right question. 'Will it ever stop?'

@@ -13,7 +13,7 @@ This guide gets you from idea to working sovereign local system in hours, not we
 pip install spacy
 
 # Download English model for NER, tokenization, etc.
-python -m spacy download en_core_web_sm
+```text
 ```
 
 
@@ -31,7 +31,7 @@ mkdir -p data/lexicons
 
 # File: NRC-Emotion-Lexicon-Wordlevel-v0.92.txt
 
-# Put it in data/lexicons/nrc_emotion_lexicon.txt
+```text
 ```
 
 
@@ -46,7 +46,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 
 # Should work - NLTK already integrated
 sia = SentimentIntensityAnalyzer()
-print(sia.polarity_scores("I am happy"))
+```text
 ```
 
 
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     # Test
     emotions = nrc.analyze_text("I feel happy and grateful for this moment")
     print("Emotions found:", emotions)
-    # Expected: {'joy': 2, 'trust': 1}
+```text
 ```
 
 
@@ -205,7 +205,7 @@ def enhanced_parse_signals(text: str) -> dict:
         'voltage_signals': voltage_signals,
         'signal_strength': len(voltage_signals),
         'primary_emotions': list(nrc_emotions.keys())
-    }
+```text
 ```
 
 
@@ -367,7 +367,7 @@ def populate_poetry():
             print(f"✓ Added poetry to {glyph_name}")
 
 if __name__ == "__main__":
-    populate_poetry()
+```text
 ```
 
 
@@ -419,7 +419,7 @@ if USE_LOCAL_ONLY:
         st.markdown(f"✨ **{glyph}**")
 else:
     # Hybrid/Cloud mode (existing code)
-    pass
+```text
 ```
 
 
@@ -498,7 +498,7 @@ def test_local_processing():
 
 if __name__ == "__main__":
     success = test_local_processing()
-    sys.exit(0 if success else 1)
+```text
 ```
 
 
@@ -506,7 +506,7 @@ if __name__ == "__main__":
 Run it:
 
 ```bash
-python test_local_mode.py
+```text
 ```
 
 
@@ -533,7 +533,7 @@ os.makedirs('data/poetry', exist_ok=True)
 url = 'https://www.gutenberg.org/cache/epub/1638/pg1638.txt'
 urllib.request.urlretrieve(url, 'data/poetry/dickinson.txt')
 print('✓ Downloaded Emily Dickinson poems')
-"
+```text
 ```
 
 
@@ -560,7 +560,7 @@ if mode == "Local Mode (Recommended)":
         # Process user message
         response_data = parse_input(user_message)
         # If we get here without exception, we're truly local!
-        st.success("✓ Processing completely local (no external API calls)")
+```text
 ```
 
 
@@ -591,7 +591,7 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 
 # Type: "I feel stuck in this loop of grief"
 
-# Expected: Beautiful response with poetry, metaphors, no API calls
+```text
 ```
 
 

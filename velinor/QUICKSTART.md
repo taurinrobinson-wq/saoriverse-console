@@ -4,7 +4,7 @@
 
 ```bash
 cd /workspaces/saoriverse-console
-streamlit run velinor_scenes_test.py
+```text
 ```
 
 
@@ -145,7 +145,7 @@ def get_sequence() -> List[SceneModule]:
     return [
         # ... existing scenes
         MarketplaceSceneSequence.build_my_new_scene(),  # ADD HERE
-    ]
+```text
 ```
 
 

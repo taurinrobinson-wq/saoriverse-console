@@ -32,7 +32,7 @@ Your FirstPerson app is now configured with **persistent conversation storage**!
 cd /workspaces/saoriverse-console
 python3 scripts/migrate_supabase.py
 
-# Follow the instructions shown
+```text
 ```
 
 
@@ -42,7 +42,7 @@ python3 scripts/migrate_supabase.py
 After creating tables, verify they were created:
 
 ```bash
-python3 scripts/migrate_supabase.py --verify
+```text
 ```
 
 
@@ -52,7 +52,7 @@ You should see:
 ```
 ✅ conversations table EXISTS
 ✅ conversation_metadata table EXISTS
-✅ All tables created successfully!
+```text
 ```
 
 
@@ -60,7 +60,7 @@ You should see:
 Then start your app:
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 
@@ -74,7 +74,7 @@ streamlit run app.py
 [supabase]
 url = "https://gyqzyuvuuyfjxnramkfq.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-service_role_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```text
 ```
 
 
@@ -94,7 +94,7 @@ service_role_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ├── 💬 "Weekend plans discussion"
 └── ➕ New Conversation
 
-💾 Save my chats (toggle)
+```text
 ```
 
 
@@ -123,7 +123,7 @@ streamlit run app.py
 
 # 4. Refresh browser (F5)
 
-# 5. Your message should still be there! ✅
+```text
 ```
 
 
@@ -158,7 +158,7 @@ saoriverse-console/
 ├── SUPABASE_SETUP.md                   📘 Step-by-step setup guide
 ├── CONVERSATION_STORAGE.md             📚 Complete documentation
 ├── QUICKSTART_CONVERSATION_STORAGE.md  🚀 Quick reference
-└── IMPLEMENTATION_SUMMARY.md           🏗️ Technical architecture
+```text
 ```
 
 
@@ -177,7 +177,7 @@ python3 scripts/migrate_supabase.py
 
 # Paste into Supabase SQL editor
 
-# Click "Run"
+```text
 ```
 
 
@@ -225,7 +225,7 @@ Store: {
     title: "Feeling anxious",
     messages: [...],
     created_at: "2024-11-04T23:20:00Z"
-  }
+```text
 ```
 
 
@@ -245,7 +245,7 @@ Displays in sidebar
   ↓
 Session state restored from Supabase
   ↓
-User sees all previous conversations!
+```text
 ```
 
 
@@ -267,7 +267,7 @@ Supabase updates row
   ↓
 Sidebar refreshes
   ↓
-Title changed!
+```text
 ```
 
 
@@ -331,7 +331,7 @@ For more information, see:
 python3 scripts/migrate_supabase.py --verify
 
 # View recent commits
-git log --oneline -5
+```text
 ```
 
 
@@ -355,7 +355,7 @@ python3 -c "from emotional_os.deploy.modules.conversation_manager import Convers
 
 # Git status
 git status
-git log --oneline
+```text
 ```
 
 

@@ -8,7 +8,7 @@ Bad news: **Voice interface (STT/TTS) and multimodal features are built but NOT 
 ## ✅ FIRSTPERSON ORCHESTRATOR - FULLY INTEGRATED
 
 ### Code Path
-
+```text
 ```
 app.py (entry point)
   └─> ui_refactored.py (main UI orchestration)
@@ -37,7 +37,7 @@ if "firstperson_orchestrator" not in st.session_state:
         orchestrator = create_orchestrator(user_id, conversation_id)
         if orchestrator:
             orchestrator.initialize_session()
-            st.session_state["firstperson_orchestrator"] = orchestrator
+```text
 ```
 
 
@@ -52,7 +52,7 @@ if "firstperson_orchestrator" not in st.session_state:
 # From response_handler.py
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch:
-    response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
+```text
 ```
 
 

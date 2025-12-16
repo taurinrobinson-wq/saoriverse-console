@@ -73,7 +73,7 @@
 ## 🚀 Technical Implementation
 
 ### Architecture:
-
+```text
 ```
 📁 Emotional OS/
 ├── main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)          # New user-focused UI

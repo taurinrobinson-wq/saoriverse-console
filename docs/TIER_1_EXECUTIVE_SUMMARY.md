@@ -33,7 +33,7 @@ Tier1Foundation(conversation_memory=None)
 ├─ LexiconLearner integration
 ├─ Sanctuary safety integration
 ├─ Signal detection
-└─ Optional memory tracking
+```text
 ```
 
 
@@ -51,7 +51,7 @@ Stage 7 (Final):        2ms     ✅
 ─────────────────────────────────
 TOTAL:                  ~40ms   ✅
 BUDGET:                 100ms
-HEADROOM:               60ms    ✅
+```text
 ```
 
 
@@ -71,7 +71,7 @@ HEADROOM:               60ms    ✅
 ✓ Sanctuary availability (component check)
 
 Test Execution Time: 0.42s
-Success Rate: 100%
+```text
 ```
 
 
@@ -197,7 +197,7 @@ src/emotional_os/
     ├── Tier1Foundation class
     ├── 7-stage pipeline
     ├── Performance tracking
-    └── Graceful error handling
+```text
 ```
 
 
@@ -208,7 +208,7 @@ src/emotional_os/
 tests/
 └── test_tier1_foundation.py (220 lines, 5.7 KB)
     ├── TestTier1Foundation (8 tests)
-    └── TestTier1ComponentIntegration (2 tests)
+```text
 ```
 
 
@@ -222,7 +222,7 @@ d:\saoriverse-console\
 ├── TIER_1_INTEGRATION_QUICK_START.md (7.3 KB)
 │   └── Step-by-step integration guide
 └── UNIFIED_INTEGRATION_PLAN_TIER1_COMPLETE.md (new)
-    └── Timeline and roadmap update
+```text
 ```
 
 

@@ -48,7 +48,7 @@
 - ✅ ConversationMemory - Optional context tracking
 
 ### Performance Achieved
-
+```text
 ```
 Pipeline Stages:
   Stage 1 (Memory):           0-3ms ✅
@@ -65,7 +65,7 @@ TOTAL: <40ms (62% under budget)
 
 
 ### Test Results
-
+```text
 ```
 tests/test_tier1_foundation.py::TestTier1Foundation::test_initialization PASSED
 tests/test_tier1_foundation.py::TestTier1Foundation::test_process_response_basic PASSED
@@ -106,7 +106,7 @@ enhanced_response, perf_metrics = self.tier1.process_response(
     context={"user_id": user_id, "turn_count": turn_count}
 )
 
-# 4. Return enhanced_response instead of base response
+```sql
 ```
 
 
@@ -127,7 +127,7 @@ if "tier1_foundation" not in st.session_state:
 
 # In chat loop:
 
-# Use st.session_state.tier1_foundation.process_response()
+```text
 ```
 
 

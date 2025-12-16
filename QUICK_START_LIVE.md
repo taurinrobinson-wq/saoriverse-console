@@ -1,7 +1,7 @@
 # 🚀 QUICK START - LIVE SYSTEM
 
 ## System Status
-
+```text
 ```
 🟢 OPERATIONAL - Backend running on http://127.0.0.1:8000
 ✅ All endpoints tested and responding
@@ -19,7 +19,7 @@
 ```powershell
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/health" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
-  Select-Object -ExpandProperty Content
+```text
 ```
 
 
@@ -40,7 +40,7 @@ $body = @{
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
   -Method Post -ContentType "application/json" `
   -Body $body -UseBasicParsing -TimeoutSec 5 | `
-  Select-Object -ExpandProperty Content
+```text
 ```
 
 
@@ -50,7 +50,7 @@ Invoke-WebRequest -Uri "http://127.0.0.1:8000/chat" `
 ```powershell
 Invoke-WebRequest -Uri "http://127.0.0.1:8000/conversations/robinson1234" `
   -Method Get -UseBasicParsing -TimeoutSec 2 | `
-  Select-Object -ExpandProperty Content
+```text
 ```
 
 

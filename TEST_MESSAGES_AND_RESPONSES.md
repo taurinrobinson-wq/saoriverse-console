@@ -7,7 +7,7 @@ This document contains all test messages used to verify the anti-dash system, al
 ## Test Message Set 1: Core Emotional States
 
 ### Message 1.1: Overwhelm & Anxiety
-
+```text
 ```
 Input: "I'm feeling overwhelmed and anxious"
 Time: 0.043s
@@ -29,7 +29,7 @@ Analysis:
 
 
 ### Message 1.2: Grief
-
+```text
 ```
 Input: "I'm grieving the loss of my job"
 Time: 0.010s
@@ -51,7 +51,7 @@ Analysis:
 
 
 ### Message 1.3: Cognitive Block
-
+```text
 ```
 Input: "I'm blocked on this math problem"
 Time: 0.009s
@@ -81,7 +81,7 @@ Analysis:
 ## Test Message Set 2: Diversity Testing (Same Input, Multiple Runs)
 
 ### Message 2.1: Repeated Input Test
-
+```text
 ```
 Input (repeated 4 times): "I'm feeling anxious and overwhelmed"
 
@@ -117,7 +117,7 @@ Uniqueness Analysis:
 ## Test Message Set 3: Edge Cases
 
 ### Message 3.1: Very Short Input
-
+```text
 ```
 Input: "sad"
 Time: 0.002s
@@ -136,7 +136,7 @@ Analysis:
 
 
 ### Message 3.2: Complex Multi-Issue Input
-
+```text
 ```
 Input: "I'm feeling overwhelmed because my mother-in-law keeps explaining
 things in a way I don't understand and it's creating real isolation in my
@@ -164,7 +164,7 @@ Analysis:
 
 
 ### Message 3.3: Greeting Input
-
+```text
 ```
 Input: "hi"
 Time: <0.001s
@@ -186,7 +186,7 @@ Analysis:
 ## Test Message Set 4: Punctuation Rule Verification
 
 ### Message 4.1: Grounded Pool (Sentence Split)
-
+```text
 ```
 Tone Pool: Grounded
 Glyph: Spiral Containment
@@ -201,7 +201,7 @@ Status: ✅ CORRECT
 
 
 ### Message 4.2: Reflective Pool (Colon Emphasis)
-
+```text
 ```
 Tone Pool: Reflective
 Glyph: Recursive Ache
@@ -217,7 +217,7 @@ Emotional Effect: More contemplative, layered
 
 
 ### Message 4.3: Empathetic Pool (Comma Join)
-
+```text
 ```
 Tone Pool: Empathetic
 Glyph: Still Recognition
@@ -236,7 +236,7 @@ Emotional Effect: Warmer, more connective
 ## Test Message Set 5: Glyph-to-Pool Mapping
 
 ### Message 5.1: Containment → Grounded
-
+```text
 ```
 Glyph Name: "Spiral Containment"
 Keyword Match: "containment"
@@ -248,7 +248,7 @@ Status: ✅ CORRECT
 
 
 ### Message 5.2: Ache → Reflective
-
+```text
 ```
 Glyph Name: "Recursive Ache"
 Keyword Match: "ache"
@@ -260,7 +260,7 @@ Status: ✅ CORRECT
 
 
 ### Message 5.3: Recognition → Empathetic
-
+```text
 ```
 Glyph Name: "Still Recognition"
 Keyword Match: "recognition"
@@ -272,7 +272,7 @@ Status: ✅ CORRECT
 
 
 ### Message 5.4: Multiple Keywords (Priority)
-
+```text
 ```
 Glyph Name: "Grief of Recognition"
 Keywords Found: "grief" (Reflective), "recognition" (Empathetic)
@@ -288,7 +288,7 @@ Status: ✅ CORRECT (first match wins)
 ## Test Message Set 6: Performance Verification
 
 ### Message 6.1: Initial Load (Cold Start)
-
+```text
 ```
 Input: "I'm feeling overwhelmed"
 First Call: 0.043s (includes lexicon load)
@@ -300,7 +300,7 @@ Status: ✅ ACCEPTABLE (cold start is expected)
 
 
 ### Message 6.2: Repeated Calls
-
+```text
 ```
 Call 1: 0.043s (cold start)
 Call 2: 0.010s
@@ -315,7 +315,7 @@ Status: ✅ EXCELLENT (consistent sub-15ms)
 
 
 ### Message 6.3: Cleaner Overhead
-
+```text
 ```
 Response Generation: ~5ms
 Punctuation Cleaning: ~1ms
@@ -331,7 +331,7 @@ Status: ✅ NEGLIGIBLE (undetectable to user)
 ## Test Message Set 7: Error Handling
 
 ### Message 7.1: Missing Style Matrix File
-
+```text
 ```
 Scenario: style_matrix.json deleted
 Behavior: System loads minimal defaults
@@ -344,7 +344,7 @@ Status: ✅ PASS (graceful degradation)
 
 
 ### Message 7.2: Invalid Glyph Name (None)
-
+```text
 ```
 Input: Glyph name is None
 Behavior: System uses default Grounded pool
@@ -357,7 +357,7 @@ Status: ✅ PASS (defensive handling)
 
 
 ### Message 7.3: Exception During Cleaning
-
+```text
 ```
 Scenario: Hypothetical cleaner exception
 Behavior: Original response returned unchanged
@@ -371,7 +371,7 @@ Status: ✅ PASS (error caught, logged, handled)
 ## Test Message Set 8: Emotional Tone Matching
 
 ### Message 8.1: Containment Tone
-
+```text
 ```
 Input: "I need to hold steady through this difficult time"
 Detected Tone Pool: Grounded
@@ -387,7 +387,7 @@ Status: ✅ CORRECT TONE MATCH
 
 
 ### Message 8.2: Ache Tone
-
+```text
 ```
 Input: "I'm carrying something that feels heavy"
 Detected Tone Pool: Reflective
@@ -403,7 +403,7 @@ Status: ✅ CORRECT TONE MATCH
 
 
 ### Message 8.3: Recognition Tone
-
+```text
 ```
 Input: "I feel so alone and unseen"
 Detected Tone Pool: Empathetic

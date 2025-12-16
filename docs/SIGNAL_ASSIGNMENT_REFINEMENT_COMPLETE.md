@@ -66,7 +66,7 @@ Successfully assigned signals and gate activation patterns to 10 high-frequency 
 **Total emotional words checked:** 21
 **All words now mapped:** ✅ YES
 **No gaps remaining:** ✅ YES
-
+```text
 ```
 breathe   ✓ MAPPED  2 signals, 2 gates
 depth     ✓ MAPPED  2 signals, 2 gates

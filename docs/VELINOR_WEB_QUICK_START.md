@@ -19,7 +19,7 @@ The complete Velinor web stack (FastAPI + Next.js) is ready to test. No more Str
 
 ```bash
 cd d:\saoriverse-console
-python velinor_api.py
+```text
 ```
 
 
@@ -27,7 +27,7 @@ python velinor_api.py
 You should see:
 
 ```
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```text
 ```
 
 
@@ -38,7 +38,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 ```bash
 cd d:\saoriverse-console\velinor-web
-npm run dev
+```text
 ```
 
 
@@ -47,7 +47,7 @@ You should see:
 
 ```
   ▲ Next.js 14.0.0
-  - ready started server on 0.0.0.0:3000, url: http://localhost:3000
+```text
 ```
 
 
@@ -96,7 +96,7 @@ Backend processes through Velinor engine
     ↓
 Returns new game state
     ↓
-Game scene re-renders with new content
+```text
 ```
 
 
@@ -143,7 +143,7 @@ Ctrl+C  (stop frontend)
 npm run dev
 
 # Browser
-Reload the page
+```text
 ```
 
 
@@ -165,7 +165,7 @@ git push origin main
 
 # Railway auto-deploys!
 
-# Update .env.local NEXT_PUBLIC_API_URL to your Railway backend domain
+```text
 ```
 
 
@@ -183,7 +183,7 @@ The `<GameScene>` component references them as:
 <GameScene
   backgroundImage="/assets/backgrounds/market.png"
   // ...
-/>
+```text
 ```
 
 

@@ -37,7 +37,7 @@ Successfully implemented, tested, integrated, and deployed Tier 2 Aliveness laye
 ##
 
 ## 📈 Performance Achieved
-
+```text
 ```
 ┌─────────────────────────────────────┐
 │ Response Pipeline Performance       │
@@ -97,7 +97,7 @@ Successfully implemented, tested, integrated, and deployed Tier 2 Aliveness laye
 - Performance benchmarks ✅
 
 ### Test Results
-
+```text
 ```
 PASSED: 53/53 (100%)
 FAILED: 0
@@ -225,7 +225,7 @@ Comprehensive session report:
 3. `2f8a5e3` - Session summary
 
 **Status:** ✅ All pushed to GitHub
-
+```text
 ```
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -306,7 +306,7 @@ nothing to commit, working tree clean
 **Estimated:** 20-30ms additional processing
 
 **Total Pipeline:**
-
+```text
 ```
 Tier 1: 40ms
 Tier 2: 20ms

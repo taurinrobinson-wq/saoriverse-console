@@ -7,7 +7,7 @@
 Implemented a complete end-to-end voice chat pipeline for FirstPerson, transforming it from text-only to a genuinely unique multimodal interface. The system integrates speech-to-text (Whisper), prosody planning (glyph signals → voice characteristics), and text-to-speech (Coqui TTS) with zero API costs.
 
 ## Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                        User Interface                       │
@@ -108,7 +108,7 @@ Implemented a complete end-to-end voice chat pipeline for FirstPerson, transform
 - `ProsodyExplainer`: Human-readable debugging tool
 
 **Prosody Mapping Logic:**
-
+```text
 ```
 Voltage (0-1)              → Speaking Rate (0.8x - 1.3x)
 Tone + Valence            → Pitch Shift (-2 to +2 semitones)
@@ -246,7 +246,7 @@ if transcription:
 glyph_signals = generate_response_with_glyphs(response_text)
 
 # Render voice output with prosody
-voice_config["render_output"](response_text, glyph_signals)
+```text
 ```
 
 
@@ -322,7 +322,7 @@ spoken_interface/
 ├── test_sprint4_voice_ui.py       # Sprint 4: Tests (280+ lines)
 └── requirements-voice.txt         # Dependencies
 
-Total: 3,289 lines of production code + tests
+```text
 ```
 
 
@@ -337,7 +337,7 @@ librosa>=0.10.0           # Audio features
 soundfile>=0.12.0         # Audio I/O
 TTS>=0.21.0               # Coqui TTS
 scipy>=1.7.0              # Signal processing
-numpy>=1.21.0             # Arrays
+```text
 ```
 
 

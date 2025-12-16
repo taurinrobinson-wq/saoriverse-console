@@ -11,7 +11,7 @@
 Start with the executive summary:
 
 ```bash
-cat PRIVACY_REPORT_FINAL.md
+```text
 ```
 
 
@@ -22,7 +22,7 @@ Verify everything works:
 ```bash
 python3 privacy_monitor.py
 python3 test_privacy_masking.py
-python3 test_e2e_simple.py
+```text
 ```
 
 
@@ -31,7 +31,7 @@ python3 test_e2e_simple.py
 See exactly what changed:
 
 ```bash
-git diff emotional_os/learning/hybrid_learner_v2.py
+```text
 ```
 
 
@@ -40,7 +40,7 @@ git diff emotional_os/learning/hybrid_learner_v2.py
 Follow the checklist:
 
 ```bash
-cat DEPLOYMENT_CHECKLIST.md
+```text
 ```
 
 
@@ -87,7 +87,7 @@ cat DEPLOYMENT_CHECKLIST.md
   "user_id": "user_123",
   "user_input": "I'm struggling with depression...",
   "ai_response": "I understand. These feelings..."
-}
+```text
 ```
 
 
@@ -102,7 +102,7 @@ cat DEPLOYMENT_CHECKLIST.md
   "gates": ["Gate 4", "Gate 5"],
   "glyph_names": ["Recursive Grief"],
   "ai_response_length": 245
-}
+```text
 ```
 
 
@@ -132,7 +132,7 @@ cat DEPLOYMENT_CHECKLIST.md
 ```bash
 python3 privacy_monitor.py
 python3 test_privacy_masking.py
-python3 test_e2e_simple.py
+```text
 ```
 
 
@@ -141,7 +141,7 @@ python3 test_e2e_simple.py
 
 ```bash
 git diff emotional_os/learning/hybrid_learner_v2.py
-git status
+```text
 ```
 
 

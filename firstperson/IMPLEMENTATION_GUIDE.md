@@ -17,7 +17,7 @@
 ##
 
 ## Project Structure
-
+```text
 ```
 firstperson/
 ├── App.js                          # Main entry point with navigation setup
@@ -67,7 +67,7 @@ Manages all local data using `@react-native-async-storage/async-storage`.
 - `setOnboardingComplete(userId)` / `isOnboardingComplete()` - Track onboarding state
 
 **Storage Keys:**
-
+```text
 ```
 fp_conversations         # All conversations and messages
 fp_memory_capsules      # Relational context snapshots
@@ -107,7 +107,7 @@ Handles all backend communication with prosody parsing and offline detection.
     { name: "Ember", score: 0.92, symbol: "🔥", description: "..." },
     { name: "Echo", score: 0.78, symbol: "📍", description: "..." }
   ]
-}
+```text
 ```
 
 
@@ -205,7 +205,7 @@ Displays individual messages with optional prosody metadata.
     timestamp?: ISO string,
   },
   theme: "light" | "dark"
-}
+```text
 ```
 
 
@@ -249,7 +249,7 @@ ChatScreen.handleSendMessage()
 │   └─ On error: Queue for offline sync
 ├─ Display assistant response with prosody
 ├─ Store assistant message locally
-└─ Create memory capsule (every 5 messages)
+```text
 ```
 
 
@@ -274,7 +274,7 @@ SyncService.performSync() triggered
 ├─ Save successful responses to conversation
 └─ Clear sync queue
     ↓
-Notify UI of sync completion
+```text
 ```
 
 
@@ -293,7 +293,7 @@ node --version
 npm install -g expo-cli
 
 # Install EAS CLI (for building)
-npm install -g eas-cli
+```text
 ```
 
 
@@ -321,7 +321,7 @@ npm start
 
 # - Physical device: Expo Go app → Scan QR
 
-# - Emulator: Follow Expo CLI prompts
+```text
 ```
 
 
@@ -335,7 +335,7 @@ REACT_APP_SAOYNX_API_URL=http://192.168.1.100:8000  # Replace with your IP
 
 # Or in environment:
 export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
-npm start
+```text
 ```
 
 
@@ -358,7 +358,7 @@ npm start
   "react-navigation-bottom-tabs": "^6.4.0",                  // Bottom tab nav
   "react-navigation-native": "^6.1.9",                       // Navigation native
   "react-navigation-stack": "^6.3.20"                        // Stack navigation
-}
+```text
 ```
 
 
@@ -438,7 +438,7 @@ curl http://localhost:8000/health
 
 # For device on same WiFi: use computer's LAN IP, not localhost
 ipconfig getifaddr en0  # macOS
-ifconfig | grep inet    # Linux
+```text
 ```
 
 
@@ -452,7 +452,7 @@ npm list @react-native-async-storage/async-storage
 
 # Clear cache and reinstall
 rm -rf node_modules
-npm install
+```text
 ```
 
 

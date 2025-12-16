@@ -24,7 +24,7 @@ python velinor_api.py
 cd velinor-web
 npm run dev
 
-# → http://localhost:3000
+```text
 ```
 
 
@@ -80,7 +80,7 @@ npm run dev
 │  + Glyph        │
 └────────┬────────┘
          │ ...continues
-         ▼
+```text
 ```
 
 
@@ -103,7 +103,7 @@ npm run dev
 ### Development (`.env.local`)
 
 ```
-NEXT_PUBLIC_API_URL=http://localhost:8000
+```text
 ```
 
 

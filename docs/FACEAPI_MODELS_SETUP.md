@@ -13,7 +13,7 @@ First, install face-api.js:
 
 ```bash
 cd firstperson-web
-npm install face-api.js
+```sql
 ```
 
 
@@ -26,7 +26,7 @@ Then copy models from node_modules:
 Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recurse -Force
 
 # macOS/Linux
-cp -r node_modules/face-api.js/dist/models public/models
+```text
 ```
 
 
@@ -52,7 +52,7 @@ public/models/
 ├── face_expression_model-weights_manifest.json
 ├── face_expression_model-weights_shard_1
 ├── face_expression_model.json
-├── (additional model files as needed)
+```text
 ```
 
 
@@ -65,7 +65,7 @@ public/models/
 Get-ChildItem -Path "firstperson-web/public/models" -File
 
 # macOS/Linux
-ls -la firstperson-web/public/models/
+```text
 ```
 
 
@@ -86,7 +86,7 @@ const nextConfig = {
   // your other config here
 };
 
-module.exports = nextConfig;
+```text
 ```
 
 
@@ -116,7 +116,7 @@ export default async function handler(req: any, res: any) {
       error: error.message
     });
   }
-}
+```text
 ```
 
 
@@ -124,7 +124,7 @@ export default async function handler(req: any, res: any) {
 Then test:
 
 ```bash
-curl http://localhost:3000/api/test-models
+```text
 ```
 
 
@@ -135,7 +135,7 @@ Expected response:
 {
   "success": true,
   "message": "Models loaded successfully"
-}
+```text
 ```
 
 
@@ -169,7 +169,7 @@ export async function loadFaceApiModels() {
 
 export function areModelsLoaded() {
   return modelsLoaded;
-}
+```text
 ```
 
 

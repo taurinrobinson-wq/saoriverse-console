@@ -14,7 +14,7 @@ The easiest way to start developing:
 cd "/Volumes/My Passport for Mac/saoriverse-console"
 
 # Run the dev server
-./RUN_WEB_DEV.sh
+```text
 ```
 
 
@@ -23,7 +23,7 @@ Or manually:
 
 ```bash
 cd velinor-web
-npm run dev
+```text
 ```
 
 
@@ -63,7 +63,7 @@ velinor-web/
 ├── package.json
 ├── next.config.ts
 ├── tsconfig.json
-└── tailwind.config.ts
+```text
 ```
 
 
@@ -114,7 +114,7 @@ npm run build
 npm start
 
 # Lint code
-npm run lint
+```text
 ```
 
 
@@ -125,7 +125,7 @@ Styling uses Tailwind CSS v4. Add classes directly to JSX elements:
 ```tsx
 <div className="bg-slate-900 text-white p-8 rounded-lg">
   <h1 className="text-3xl font-bold">Game Title</h1>
-</div>
+```text
 ```
 
 
@@ -184,7 +184,7 @@ The FastAPI backend is in `velinor_api.py` (295 lines). To use it:
 # Make sure nvm is loaded
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
-nvm use 20.11.0
+```text
 ```
 
 
@@ -197,7 +197,7 @@ nvm use 20.11.0
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
 # Or use a different port
-PORT=3001 npm run dev
+```text
 ```
 
 
@@ -240,7 +240,7 @@ PORT=3001 npm run dev
   src="/assets/backgrounds/city_market(16-9).png"
   alt="Market Ruins"
   className="w-full h-96 object-cover rounded-lg"
-/>
+```text
 ```
 
 
@@ -252,7 +252,7 @@ PORT=3001 npm run dev
   src="/assets/npcs/keeper.png"
   alt="Keeper"
   className="h-96 object-contain"
-/>
+```text
 ```
 
 
@@ -268,7 +268,7 @@ PORT=3001 npm run dev
   >
     {choice.text}
   </button>
-))}
+```text
 ```
 
 

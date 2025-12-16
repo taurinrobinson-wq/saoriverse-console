@@ -9,7 +9,7 @@ Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the n
 - **Orchestrator** (`orchestrator.py`) - Main game loop controller
 
 ## Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────┐
 │         Velinor Twine Integration                   │
@@ -103,7 +103,7 @@ Velinor uses Twine 2 JSON export format:
       "size": [100, 100]
     }
   ]
-}
+```text
 ```
 
 
@@ -114,7 +114,7 @@ Velinor uses Twine 2 JSON export format:
 
 ```
 [[Choice text->target_passage]]
-[[Talk to them|meeting]]  (alternative syntax)
+```text
 ```
 
 
@@ -122,7 +122,7 @@ Velinor uses Twine 2 JSON export format:
 **Skill Checks:**
 
 ```
-[[Persuade the guard (Courage, DC 12)->success_path]]
+```text
 ```
 
 
@@ -133,7 +133,7 @@ Velinor uses Twine 2 JSON export format:
 {background: location_name}      # Change background image
 {npc: NPC_Name}                 # NPC speaking in scene
 {dice: d20+courage}              # Trigger dice roll
-{multiplayer: true}              # Enable multiplayer mode
+```text
 ```
 
 
@@ -149,7 +149,7 @@ A figure approaches: "Welcome, Traveler."
 
 [[Ask about the Tone->keeper_dialogue]]
 [[Explore alone->market_exploration]]
-[[Keep distance (Wisdom, DC 11)->observer_path]]
+```text
 ```
 
 
@@ -175,7 +175,7 @@ story.add_choice("intro", "Follow the Guide", "guide_path")
 story.add_choice("intro", "Go alone", "alone_path")
 
 # Export as JSON
-story.export_json("my_story.json")
+```text
 ```
 
 
@@ -213,7 +213,7 @@ orchestrator = VelinorTwineOrchestrator(
 )
 
 # Start game
-initial_state = orchestrator.start_game()
+```text
 ```
 
 
@@ -232,7 +232,7 @@ next_state = orchestrator.process_player_action(
 next_state = orchestrator.process_player_action(
     player_input="I approach cautiously",
     player_id="player_1"
-)
+```text
 ```
 
 
@@ -264,7 +264,7 @@ next_state = orchestrator.process_player_action(
             'resonance': 100
         }
     }
-}
+```text
 ```
 
 
@@ -308,7 +308,7 @@ if st.button("Submit"):
         player_input=player_input, player_id="solo"
     )
     st.session_state.state = new_state
-    st.rerun()
+```text
 ```
 
 
@@ -348,7 +348,7 @@ def take_action(session_id: str, choice_index: int = None, input_text: str = Non
 @app.post("/api/game/{session_id}/save")
 def save_game(session_id: str):
     sessions[session_id].save_game(f"saves/{session_id}.json")
-    return {"status": "saved"}
+```text
 ```
 
 
@@ -369,7 +369,7 @@ orchestrator.start_game(
 orchestrator.process_player_action(
     player_input="I agree with them",
     player_id="player_2"
-)
+```text
 ```
 
 
@@ -385,7 +385,7 @@ orchestrator.process_player_action(
 
 ```
 Solo: "You steady yourself as the mist parts."
-Group: "Together, your resolve strengthens. The mist bends to your collective will."
+```text
 ```
 
 
@@ -397,7 +397,7 @@ Group: "Together, your resolve strengthens. The mist bends to your collective wi
 If a choice includes skill check notation:
 
 ```
-[[Persuade the guard (Courage, DC 12)->success]]
+```text
 ```
 
 
@@ -415,7 +415,7 @@ In passages:
 ```
 {dice: d20+wisdom}
 
-You attempt to solve the ancient puzzle...
+```text
 ```
 
 
@@ -430,7 +430,7 @@ System processes and determines outcome, potentially branching story.
 orchestrator.save_game("saves/game_001.json")
 
 # Load saved game
-state = orchestrator.load_game("saves/game_001.json")
+```text
 ```
 
 

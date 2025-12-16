@@ -21,7 +21,7 @@ Result: Same input often got identical responses, or responses felt pre-written 
 ### The Solution: Glyph-as-Constraint Architecture
 
 Instead of glyphs generating responses, glyphs **inform** response generation:
-
+```text
 ```
 User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator → Fresh Response
                                                     ↓
@@ -51,7 +51,7 @@ affect = parser.analyze_affect("I'm grieving the loss of my job")
 #   "tone": "heavy" (reflective but intense)
 #   "arousal": 0.8
 
-# }
+```text
 ```
 
 
@@ -108,7 +108,7 @@ middle = "What's underneath? What do you need?"  (depth="deep" because intensity
 closing = "There's no rush. Move at your own pace."  (theme="grief" specific)
 
 FINAL: "I hear the weight of grief. What's underneath? What do you need?
-        There's no rush. Move at your own pace."
+```text
 ```
 
 
@@ -129,7 +129,7 @@ FINAL: "I hear the weight of grief. What's underneath? What do you need?
 ```python
 orchestrator = create_orchestrator(user_id, conversation_id)
 orchestrator.initialize_session()
-st.session_state["firstperson_orchestrator"] = orchestrator
+```text
 ```
 
 
@@ -140,7 +140,7 @@ st.session_state["firstperson_orchestrator"] = orchestrator
 ```python
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch and best_glyph:
-    response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
+```text
 ```
 
 

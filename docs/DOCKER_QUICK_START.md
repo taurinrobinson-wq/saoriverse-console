@@ -7,7 +7,7 @@
 ## One-Liner Deployment
 
 ```bash
-ssh root@161.35.227.49 && git clone https://github.com/taurinrobinson-wq/saoriverse-console.git && cd saoriverse-console && chmod +x docker-setup.sh && ./docker-setup.sh
+```text
 ```
 
 
@@ -30,7 +30,7 @@ chmod +x docker-setup.sh
 
 # 4. Verify
 docker compose ps
-curl http://161.35.227.49:8000/health
+```text
 ```
 
 
@@ -75,7 +75,7 @@ git pull && docker compose up -d --build
 docker compose exec backend bash
 
 # Check disk usage
-docker system df
+```text
 ```
 
 
@@ -99,7 +99,7 @@ saoriverse-console/
 │   ├── src/config.js       ← API configuration
 │   └── package.json        ← Node dependencies
 │
-└── data/                   ← Data directory (created at runtime)
+```text
 ```
 
 
@@ -115,7 +115,7 @@ docker compose logs
 # Read the error message, then:
 docker compose down
 docker compose build --no-cache
-docker compose up -d
+```text
 ```
 
 
@@ -127,7 +127,7 @@ docker compose up -d
 # Kill the process using the port
 sudo lsof -i :8000
 sudo kill -9 <PID>
-docker compose restart
+```sql
 ```
 
 
@@ -142,7 +142,7 @@ docker compose ps
 # Status column should say "healthy"
 
 # Test from inside frontend container
-docker compose exec frontend curl http://backend:8000/health
+```text
 ```
 
 

@@ -50,7 +50,7 @@ A React Native / Expo prototype demonstrating the core UI components for the Mes
 You can also run the prototype in a web browser:
 
 ```bash
-npx expo start --web
+```text
 ```
 
 

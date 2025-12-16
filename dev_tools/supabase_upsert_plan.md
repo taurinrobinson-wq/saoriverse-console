@@ -23,7 +23,7 @@ Files added:
 ```bash
 
 # dry-run (no network writes)
-python3 dev_tools/supabase_upsert_runner.py --plan dev_tools/supabase_upsert_plan_<ts>.json
+```sql
 ```
 
 

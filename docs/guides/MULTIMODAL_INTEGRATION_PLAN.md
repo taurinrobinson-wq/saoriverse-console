@@ -10,7 +10,7 @@ Add a **collapsible sidebar section** for users who want to provide voice/facial
 ##
 
 ## Architecture Overview
-
+```text
 ```
 User Types:
 ├─ Text-only chat (99% of users)
@@ -54,7 +54,7 @@ User Types:
 ### The Differentiator
 
 When user sends:
-
+```text
 ```
 Text: "I'm doing great!"
 Voice: Low pitch, slow rate, high pauses
@@ -64,7 +64,7 @@ Face: Inner brows raised, lip corners down
 
 
 Saori sees:
-
+```text
 ```
 Multimodal Analysis:
 ├─ Text tone: Positive (excited)
@@ -150,7 +150,7 @@ def render_multimodal_sidebar():
             except Exception as e:
                 st.sidebar.error(f"Facial analysis failed: {e}")
 
-    return multimodal_data
+```text
 ```
 
 
@@ -196,7 +196,7 @@ if user_message:
         user_message,
         text_tone,
         multimodal_result=multimodal_result if 'multimodal_result' in locals() else None
-    )
+```text
 ```
 
 
@@ -236,7 +236,7 @@ def generate_response(user_message, text_tone, multimodal_result=None):
             )
 
     # Pass to LLM or response composer
-    return compose_response(base_context)
+```text
 ```
 
 
@@ -249,7 +249,7 @@ def generate_response(user_message, text_tone, multimodal_result=None):
 ```
 User: "I'm having a rough day"
 → Streamlit app shows normal chat
-→ Saori responds based on text alone
+```text
 ```
 
 
@@ -263,7 +263,7 @@ User: "I'm doing fine" + Voice sample + Facial snap
 → System detects suppression
 → Saori responds: "I'm noticing a disconnect between
   what you're saying and how you sound. What's
-  really going on?"
+```text
 ```
 
 
@@ -295,7 +295,7 @@ User: "I'm doing fine" + Voice sample + Facial snap
 extract_acoustic_features(audio_bytes) → AcousticFeatures
 
 # Facial landmark extraction (use MediaPipe)
-extract_landmarks_from_frame(image) → FaceLandmarks
+```text
 ```
 
 

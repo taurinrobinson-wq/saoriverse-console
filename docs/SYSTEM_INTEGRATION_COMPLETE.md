@@ -35,7 +35,7 @@ Your system now has **three distinct layers** working together:
 ##
 
 ## 📊 Integration Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                       app.py (Entry)                         │
@@ -83,7 +83,7 @@ Your system now has **three distinct layers** working together:
 ##
 
 ## 🔄 Response Flow (With Voice)
-
+```text
 ```
 1. USER SENDS MESSAGE
    ↓
@@ -121,7 +121,7 @@ Your system now has **three distinct layers** working together:
 ##
 
 ## 🗂️ File Structure
-
+```text
 ```
 src/emotional_os/deploy/
 ├── core/
@@ -159,7 +159,7 @@ src/emotional_os/deploy/
 ### Step 1: Push to GitHub
 
 ```bash
-git push origin main
+```text
 ```
 
 

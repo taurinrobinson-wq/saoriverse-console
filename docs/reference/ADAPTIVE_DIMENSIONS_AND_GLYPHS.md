@@ -11,7 +11,7 @@ The adaptive signal extractor **indirectly creates conditions for new glyphs** t
 ## Architecture: How Dimensions & Glyphs Relate
 
 ### Current Architecture:
-
+```text
 ```
 Poetry Processing
     ↓
@@ -38,7 +38,7 @@ Currently, the bulk processor learns to **lexicons** but doesn't directly create
 ## What This Means
 
 ### Before (Limited to 8 dimensions):
-
+```text
 ```
 Poetry Input
     ↓
@@ -54,7 +54,7 @@ Glyphs: Can only represent 8-dimension combinations
 
 
 ### After (18+ adaptive dimensions):
-
+```text
 ```
 Poetry Input
     ↓
@@ -84,7 +84,7 @@ Example glyphs in your system:
 - A symbol for "spiritual awakening"
 
 ### How Glyphs Are Generated:
-
+```text
 ```
 GlyphGenerator watches for:
 ├─ Emotional Patterns (recurring signal combinations)
@@ -105,7 +105,7 @@ When conditions met:
 
 
 ### Example Glyph Creation Flow:
-
+```text
 ```
 Detect pattern: [Melancholy + Nostalgia + Memory]
     ↓
@@ -127,7 +127,7 @@ Create glyph:
 ## The Connection: Dimensions → Lexicon → Glyphs
 
 ### Before (Constrained):
-
+```text
 ```
 8 Dimensions
     ↓
@@ -141,7 +141,7 @@ System can represent ~50-100 glyph concepts
 
 
 ### After (Adaptive):
-
+```text
 ```
 18+ Dimensions
     ↓
@@ -158,7 +158,7 @@ System can represent 200-500+ glyph concepts
 ## How Adaptive Dimensions Create Glyph Opportunities
 
 ### Step 1: Expand Dimensions
-
+```text
 ```
 discover_new_dimensions_from_corpus()
     ├─ Find "melancholic_yearning" pattern
@@ -170,7 +170,7 @@ discover_new_dimensions_from_corpus()
 
 
 ### Step 2: Extract from Poetry
-
+```text
 ```
 Processing Shelley poem:
     "I ache for thee in endless night,
@@ -188,7 +188,7 @@ Processing Shelley poem:
 
 
 ### Step 3: Learn Keywords
-
+```text
 ```
 Lexicon learns:
     "ache" → [longing, vulnerability, melancholy]
@@ -203,7 +203,7 @@ Lexicon learns:
 
 
 ### Step 4: Enable Glyph Creation
-
+```text
 ```
 GlyphGenerator sees pattern:
     [longing + melancholy + nostalgia] appearing frequently
@@ -258,7 +258,7 @@ def process_text(self, text, ...):
             if pattern.frequency >= 3 and pattern.is_novel():
                 glyph = self.glyph_generator.create_glyph_from_pattern(pattern)
                 if glyph:
-                    stats["new_glyphs_created"] += 1
+```text
 ```
 
 
@@ -291,7 +291,7 @@ NEW GLYPHS CREATED: 12
     ├─ "Romantic Rebellion" (Byron influence)
     ├─ "Transcendent Solitude" (Shelley influence)
     ├─ "Melancholic Memory" (Dickinson influence)
-    └─ 9 more...
+```text
 ```
 
 

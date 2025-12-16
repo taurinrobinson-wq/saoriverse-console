@@ -72,7 +72,7 @@ if new_glyphs:
     st.session_state['new_glyphs_this_session'].extend(new_glyphs)
     st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
     for glyph in new_glyphs:
-        st.info(f"  {glyph.symbol} {glyph.name}")
+```text
 ```
 
 
@@ -97,7 +97,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 
         # NEW: Export button
         if st.button("📥 Export Discovered Glyphs"):
-            processor.export_session_glyphs(...)
+```text
 ```
 
 
@@ -112,7 +112,7 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
 ```
 learning/
 ├── generated_glyphs/              # (created by verify_integration.sh)
-└── user_overrides/                # (already existed)
+```text
 ```
 
 
@@ -143,7 +143,7 @@ learning/
 │       "total_discovered": 5,
 │       "last_updated": "2025-11-03T..."
 │     }
-│   }
+```text
 ```
 
 
@@ -174,7 +174,7 @@ Match to Fixed Glyphs
   ↓
 Return Response
   ↓
-[Done - Nothing Learned, No New Glyphs]
+```text
 ```
 
 
@@ -204,7 +204,7 @@ UI Shows:
 Data Persisted:
   • learning/conversation_glyphs.json
   • learning/user_overrides/{user_id}_lexicon.json
-  • learning/hybrid_learning_log.jsonl
+```text
 ```
 
 
@@ -241,7 +241,7 @@ st.session_state['new_glyphs_this_session']  (Session Memory)
   ↓
 learning/conversation_glyphs.json            (Persistent)
   ↓
-User can export/integrate with system
+```text
 ```
 
 
@@ -254,7 +254,7 @@ All in `dynamic_glyph_evolution.py`:
 ### Frequency Threshold (Line ~82)
 
 ```python
-min_frequency_for_glyph: int = 300  # Glyphs created when pattern reaches 300
+```text
 ```
 
 
@@ -269,7 +269,7 @@ emotion_symbols = {
     "intimacy": "❤",
     "vulnerability": "🌱",
     # ... customize as needed
-}
+```text
 ```
 
 
@@ -281,7 +281,7 @@ name_map = {
     ("love", "intimacy"): "Intimate Connection",
     ("love", "vulnerability"): "Open-Hearted Love",
     # ... add your own patterns
-}
+```text
 ```
 
 
@@ -311,7 +311,7 @@ name_map = {
 ### Automated Check
 
 ```bash
-bash verify_integration.sh
+```text
 ```
 
 
@@ -339,7 +339,7 @@ result = processor.process_user_message(
     "That's your strength"
 )
 
-# Should return dict with 'status': 'success'
+```text
 ```
 
 

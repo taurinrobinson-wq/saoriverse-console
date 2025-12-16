@@ -12,7 +12,7 @@
 
 ```bash
 git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
-cd saoriverse-console
+```text
 ```
 
 
@@ -30,7 +30,7 @@ python -m venv .venv
 source .venv/bin/activate
 
 # On Windows:
-.venv\Scripts\activate
+```text
 ```
 
 
@@ -38,7 +38,7 @@ source .venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+```text
 ```
 
 
@@ -47,7 +47,7 @@ pip install -r requirements.txt
 
 ```bash
 pip install pre-commit
-pre-commit install
+```text
 ```
 
 
@@ -59,7 +59,7 @@ This will automatically run checks before each commit.
 ### Quick test run
 
 ```bash
-python tests/run_tests.py
+```text
 ```
 
 
@@ -69,7 +69,7 @@ python tests/run_tests.py
 ```bash
 python tests/run_tests.py unit
 python tests/run_tests.py integration
-python tests/run_tests.py performance
+```text
 ```
 
 
@@ -79,7 +79,7 @@ python tests/run_tests.py performance
 ```bash
 pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 
-# Open htmlcov/index.html in browser to view coverage
+```text
 ```
 
 
@@ -87,7 +87,7 @@ pytest tests/ --cov=emotional_os --cov=parser --cov=learning --cov-report=html
 ### Run with more verbose output
 
 ```bash
-pytest tests/ -vv
+```text
 ```
 
 
@@ -95,7 +95,7 @@ pytest tests/ -vv
 ### Run specific test file
 
 ```bash
-pytest tests/unit/test_signal_matching.py -v
+```text
 ```
 
 
@@ -105,7 +105,7 @@ pytest tests/unit/test_signal_matching.py -v
 ### View available hooks
 
 ```bash
-pre-commit run --all-files  # Run all checks
+```text
 ```
 
 
@@ -114,7 +114,7 @@ pre-commit run --all-files  # Run all checks
 
 ```bash
 pre-commit run ruff --all-files
-pre-commit run trailing-whitespace --all-files
+```text
 ```
 
 
@@ -126,7 +126,7 @@ pre-commit run trailing-whitespace --all-files
 # Uncomment the pytest stage in .pre-commit-config.yaml to enable on commit
 
 # Then manually run:
-pre-commit run --hook-id pytest
+```text
 ```
 
 
@@ -136,7 +136,7 @@ pre-commit run --hook-id pytest
 ### Linting with Ruff
 
 ```bash
-ruff check . --fix
+```text
 ```
 
 
@@ -144,7 +144,7 @@ ruff check . --fix
 ### Format code
 
 ```bash
-ruff format .
+```text
 ```
 
 
@@ -152,7 +152,7 @@ ruff format .
 ### Type checking with mypy (manual)
 
 ```bash
-pre-commit run mypy --all-files
+```text
 ```
 
 
@@ -162,7 +162,7 @@ pre-commit run mypy --all-files
 ### Create a feature branch
 
 ```bash
-git checkout -b feature/my-feature
+```text
 ```
 
 
@@ -173,7 +173,7 @@ git checkout -b feature/my-feature
 
 # Pre-commit hooks will run automatically if configured
 git add .
-git commit -m "feat: description of changes"
+```text
 ```
 
 
@@ -181,7 +181,7 @@ git commit -m "feat: description of changes"
 ### Push to remote
 
 ```bash
-git push origin feature/my-feature
+```text
 ```
 
 
@@ -212,7 +212,7 @@ View results in GitHub Actions: https://github.com/taurinrobinson-wq/saoriverse-
 cd /path/to/saoriverse-console
 
 # Try with explicit path
-source /path/to/.venv/bin/activate
+```text
 ```
 
 
@@ -225,7 +225,7 @@ source /path/to/.venv/bin/activate
 pip install -r requirements.txt
 
 # Reinstall in case of issues
-pip install --force-reinstall -r requirements.txt
+```text
 ```
 
 
@@ -235,7 +235,7 @@ pip install --force-reinstall -r requirements.txt
 ```bash
 
 # Reinstall hooks
-pre-commit install --install-hooks
+```text
 ```
 
 

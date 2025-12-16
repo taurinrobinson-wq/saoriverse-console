@@ -20,7 +20,7 @@ The marketplace is in **constant flux** — buildings collapse, paths open, area
 ### Visual Changes
 
 #### Background Image Swap
-
+```text
 ```
 Before Collapse:   marketplace_intact.png
                    - Open stalls, clear pathways
@@ -39,7 +39,7 @@ After Collapse:    marketplace_collapsed.png
 **Design Note**: Matched perspective between intact/collapsed versions ensures players feel like they're in the *same space*, just transformed.
 
 #### Map Overlay Integration
-
+```sql
 ```
 Sidebar Map Update:
 1. Player position marked with glowing dot
@@ -68,7 +68,7 @@ You get used to it. We barely notice it now."
 
 **Glyph Trigger**: [Aelitḧ] (stillness, acceptance)
 
-**Subtext**: The city's collapse is now just background noise to them
+```text
 ```
 
 
@@ -91,7 +91,7 @@ It still shakes me every time."
 
 **Glyph Trigger**: [Thalen̈] (longing) or [Querrä] (inquiry)
 
-**Subtext**: This NPC hasn't fully hardened; collapse still frightens them
+```text
 ```
 
 
@@ -122,7 +122,7 @@ Option B: "I'm surprised you didn't even flinch."
 Option C: [Remain silent]
 - Glyph: [Aelitḧ] (stillness, witness)
 - Shows: Player is absorbing, not panicking
-- NPC reads this as: "They have some composure"
+```text
 ```
 
 
@@ -138,7 +138,7 @@ The only constant here is change."
 **Subtext**:
 - Collapse is opportunity, not just disaster
 - Paying attention matters
-- The city itself is the real teacher
+```text
 ```
 
 
@@ -169,7 +169,7 @@ This collapse event is the **first time the player sees the map**. It's not just
 Legend:
 ● = Player position (glowing)
 ❌ = Collapsed/blocked area (red)
-✧ = New path opened (green, optional)
+```text
 ```
 
 

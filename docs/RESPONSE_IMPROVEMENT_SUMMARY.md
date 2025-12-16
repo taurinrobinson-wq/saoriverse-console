@@ -2,7 +2,7 @@
 
 ## The Problem
 The backend was returning a generic, template-based response that didn't acknowledge the user's specific emotional experience:
-
+```text
 ```
 User: "Lately, I wake up already exhausted, like my body is carrying a weight
 I can't set down. Even small tasks — answering emails, making breakfast for
@@ -42,7 +42,7 @@ has_momentum_loss = any(word in message_lower for word in
      "rushing by"])
 
 requests_presence = any(phrase in message_lower for phrase in
-    ["without trying to fix", "just sit", "hear", "presence"])
+```text
 ```
 
 
@@ -64,7 +64,7 @@ if (has_exhaustion or themes["fatigue"]) and has_momentum_loss and requests_pres
 
         I'm sitting with you in this. You don't need to move right now. What does
         this exhaustion feel like in your body right now?"
-    )
+```text
 ```
 
 
@@ -104,7 +104,7 @@ The response now returns a more accurate glyph_intent:
     "tone": "negative",         # Acknowledges the difficulty
     "attunement": "holding_space",  # NEW: Sitting with, not solving
     "certainty": "confident"    # Clear understanding of their need
-}
+```text
 ```
 
 
@@ -137,7 +137,7 @@ The function was also updated to handle:
 ```
 "There's something deep in what you just shared. Grief, loss, something being
 taken from you. I'm here with that. Not to make it better, but to acknowledge
-it matters. What part of this is hardest to say out loud?"
+```text
 ```
 
 
@@ -146,7 +146,7 @@ it matters. What part of this is hardest to say out loud?"
 
 ```
 "There's light in what you're sharing. Something that matters, something worth
-celebrating. I feel that. Tell me more—what's making this real for you?"
+```text
 ```
 
 

@@ -93,7 +93,7 @@ Or use the migration script:
 ```bash
 python3 scripts/migrate_supabase.py
 
-# Copy the SQL shown, paste in Supabase, run it
+```text
 ```
 
 
@@ -101,7 +101,7 @@ python3 scripts/migrate_supabase.py
 ### Step 2: Verify
 
 ```bash
-python3 scripts/migrate_supabase.py --verify
+```text
 ```
 
 
@@ -109,7 +109,7 @@ python3 scripts/migrate_supabase.py --verify
 ### Step 3: Start Using
 
 ```bash
-streamlit run app.py
+```text
 ```
 
 
@@ -134,7 +134,7 @@ Then:
 - SETUP_COMPLETE.md                                       (Verification)
 
 ✏️ MODIFIED:
-- emotional_os/deploy/modules/ui.py                       (+sidebar integration)
+```text
 ```
 
 

@@ -35,7 +35,7 @@ create index if not exists emotions_log_user_time_idx
 
 -- Create index for conversation context queries
 create index if not exists emotions_log_context_idx
-  on public.emotions_log (user_id, conversation_context, timestamp desc);
+```text
 ```
 
 
@@ -67,7 +67,7 @@ create table if not exists public.emotion_thresholds (
 
 -- Create index for faster lookups
 create index if not exists emotion_thresholds_user_idx
-  on public.emotion_thresholds (user_id);
+```text
 ```
 
 
@@ -124,7 +124,7 @@ create policy "Users can view own emotion thresholds"
   on public.emotion_thresholds for select
   with check (
     auth.uid()::text = user_id
-  );
+```text
 ```
 
 
@@ -153,7 +153,7 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key  # Keep private!
 
 # For train_emotion_model.py
 export SUPABASE_URL="https://your-project.supabase.co"
-export SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
+```text
 ```
 
 
@@ -188,7 +188,7 @@ export SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
 
 ```sql
 insert into public.emotions_log (user_id, emotion, confidence, conversation_context)
-values ('test_user_123', 'sad', 0.85, 'grief_support');
+```text
 ```
 
 
@@ -196,7 +196,7 @@ values ('test_user_123', 'sad', 0.85, 'grief_support');
 ### Test 2: Verify frontend can fetch thresholds
 
 ```bash
-curl "http://localhost:3000/api/emotion-thresholds?user_id=test_user_123"
+```text
 ```
 
 
@@ -204,7 +204,7 @@ curl "http://localhost:3000/api/emotion-thresholds?user_id=test_user_123"
 ### Test 3: Run training script
 
 ```bash
-python train_emotion_model.py --user_id test_user_123
+```text
 ```
 
 
@@ -219,7 +219,7 @@ select emotion, confidence, timestamp
 from public.emotions_log
 where user_id = 'your_user_id'
 order by timestamp desc
-limit 20;
+```text
 ```
 
 
@@ -230,7 +230,7 @@ limit 20;
 select emotion, threshold, updated_at
 from public.emotion_thresholds
 where user_id = 'your_user_id'
-order by emotion;
+```text
 ```
 
 

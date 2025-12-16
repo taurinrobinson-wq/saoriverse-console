@@ -1,7 +1,7 @@
 # Memory Layer: Visual Architecture
 
 ## Data Flow Diagram
-
+```text
 ```
 
 # USER INPUT FLOW
@@ -108,7 +108,7 @@ Turn 3: "5 projects due this week, client presentation Thursday, deck not starte
 ##
 
 ## Memory State Evolution
-
+```text
 ```
 
 # CONFIDENCE PROGRESSION
@@ -237,7 +237,7 @@ With Memory (Progressive):
 ##
 
 ## System Architecture
-
+```text
 ```
 
 # CONVERSATION MEMORY LAYER
@@ -331,7 +331,7 @@ With Memory (Progressive):
 ##
 
 ## Information Integration Logic
-
+```text
 ```
 INCOMING MESSAGE                MEMORY STATE (before)
         │                               │
@@ -401,7 +401,7 @@ INCOMING MESSAGE                MEMORY STATE (before)
 ##
 
 ## Turn Sequence State Machine
-
+```text
 ```
 INITIAL STATE (no memory)
         │
@@ -460,7 +460,7 @@ TURN 3+ (Later messages)
 ##
 
 ## Quality Metrics
-
+```text
 ```
 Response Quality Baseline: WITHOUT Memory
     • Generic (same questions for different contexts)

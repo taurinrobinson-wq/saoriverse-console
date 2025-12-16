@@ -78,7 +78,7 @@ Successfully resolved all import path issues and completed the transition from m
 ## Verification Results
 
 ### All 8 Import Tests Pass ✅
-
+```text
 ```
 ✅ Test 1: Root shim import (main_response_engine)
 ✅ Test 2: Core direct import (core.main_response_engine)
@@ -171,7 +171,7 @@ Successfully resolved all import path issues and completed the transition from m
    - Create component development guide for future maintenance
 
 ## Commit Summary
-
+```text
 ```
 235507c Fix root-level shims to re-export main function
 44d7af3 Fix utils exports and add delete_user_history_from_supabase to ui_refactored

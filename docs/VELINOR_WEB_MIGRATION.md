@@ -26,7 +26,7 @@ You're moving from Streamlit (with overlay limitations) to a proper web stack:
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint --no-git
 
 cd velinor-web
-npm install axios zustand
+```text
 ```
 
 
@@ -39,7 +39,7 @@ From the root, copy the prepared files into the Next.js project:
 
 # From root of saoriverse-console
 cp frontend_lib_api.ts velinor-web/lib/api.ts
-cp frontend_GameScene.tsx velinor-web/components/GameScene.tsx
+```text
 ```
 
 
@@ -136,7 +136,7 @@ export default function Home() {
       </div>
     </main>
   );
-}
+```text
 ```
 
 
@@ -214,7 +214,7 @@ export default function GamePage({ params }: { params: { sessionId: string } }) 
       />
     </div>
   );
-}
+```text
 ```
 
 
@@ -232,7 +232,7 @@ cp -r velinor/backgrounds/* velinor-web/public/assets/backgrounds/
 cp -r velinor/npcs/* velinor-web/public/assets/npcs/
 
 # Create overlays folder (for dust, fog, glyphs)
-mkdir -p velinor-web/public/assets/overlays/
+```text
 ```
 
 
@@ -247,7 +247,7 @@ python velinor_api.py
 
 # Runs on http://localhost:8000
 
-# Swagger docs: http://localhost:8000/docs
+```text
 ```
 
 
@@ -258,7 +258,7 @@ python velinor_api.py
 cd velinor-web
 npm run dev
 
-# Runs on http://localhost:3000
+```text
 ```
 
 
@@ -281,7 +281,7 @@ git push origin main
 
 # Railway auto-deploys
 
-# Your game will be live at: https://<railway-domain>.up.railway.app
+```text
 ```
 
 
@@ -294,7 +294,7 @@ Start a new game session.
 **Request:**
 
 ```json
-{ "player_name": "Traveler" }
+```text
 ```
 
 
@@ -313,7 +313,7 @@ Start a new game session.
       { "text": "Explore", "id": "choice_2" }
     ]
   }
-}
+```text
 ```
 
 
@@ -326,7 +326,7 @@ Process player action.
 ```json
 { "choice_index": 0 }
 // or
-{ "player_input": "I approach cautiously" }
+```text
 ```
 
 

@@ -1,7 +1,7 @@
 # Learning Module System Architecture - Complete Overview
 
 ## Three-Layer Learning Architecture
-
+```text
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        LAYER 1: ARCHETYPE LIBRARY                   │
@@ -109,7 +109,7 @@
 
 
 ## Data Flow: From User Input to System Response
-
+```text
 ```
 USER INPUT
     ↓
@@ -161,7 +161,7 @@ OPTIONAL: LEARNING (Layer 3)
 ## Current Archetype Library Contents
 
 ### Archetype 1: ReliefToGratitude
-
+```sql
 ```
 Purpose: Handle transitions from burden to connection
 Entry Cues: relief, gratitude, hug, melted away, wonderful feeling, ...
@@ -187,7 +187,7 @@ Status: ✓ Working, tested
 
 
 ### Archetype 2: OverwhelmToReflection
-
+```text
 ```
 Purpose: Navigate work overwhelm to existential meaning-seeking
 Entry Cues: fragile, overwhelmed, drowning, purpose, advocacy, grind, ...
@@ -221,7 +221,7 @@ Status: ✓ Verified with 6-turn dialogue
 
 
 ### Archetype 3: GratitudeToOverwhelm (Auto-Learned)
-
+```sql
 ```
 Purpose: Transition from mixed emotions to deeper complexity
 Entry Cues: but, hug, heavy, familial_connection, ...
@@ -248,7 +248,7 @@ Status: ✓ Auto-learned, working
 ## Response Generation Example: Full Flow
 
 ### User Input
-
+```text
 ```
 "I feel fragile today, like even small things overwhelm me.
 Work has been relentless lately—this week alone I've felt
@@ -258,7 +258,7 @@ pummeled by back-to-back client meetings and impossible deadlines."
 
 
 ### Layer 1: Archetype Matching
-
+```text
 ```
 Library.get_best_match(user_input):
   ReliefToGratitude: 0.30   (1 cue match + low success_weight = low)
@@ -275,7 +275,7 @@ Library.get_best_match(user_input):
 ### Layer 2: Response Generation
 
 **Phase 1: Opening**
-
+```text
 ```
 Archetype principles: ["Validate overwhelm", "Gentle scaffolding", ...]
 Detect pattern: Overwhelm + pummeled + fragile → OVERWHELM pattern
@@ -288,7 +288,7 @@ Generate opening: "I hear you. Sounds like you're holding a lot right now."
 
 
 **Phase 2: Continuity Bridge**
-
+```text
 ```
 Prior context: (None - first turn)
 No bridge needed (but would apply if this were turn 3+)
@@ -297,7 +297,7 @@ No bridge needed (but would apply if this were turn 3+)
 
 
 **Phase 3: Closing**
-
+```text
 ```
 Archetype tone: ["Curious, non-prescriptive", ...]
 Generate closing: "What's one thing about that you want to sit with?"
@@ -309,7 +309,7 @@ Generate closing: "What's one thing about that you want to sit with?"
 
 
 **Assemble Response**
-
+```text
 ```
 opening = "I hear you. Sounds like you're holding a lot right now."
 bridge = ""
@@ -323,7 +323,7 @@ response = opening + closing
 
 
 ### Layer 3: Optional Learning
-
+```text
 ```
 If conversation is marked successful:
   ConversationLearner.analyze_conversation(full_dialogue)
@@ -342,7 +342,7 @@ If conversation is marked successful:
 ## Why This Architecture Works
 
 ### Problem: Template Rotation (OLD)
-
+```text
 ```
 OLD SYSTEM:
 - Randomly select: opening + movement + closing
@@ -355,7 +355,7 @@ Example: Response could be "I understand" + "Have you tried..." + "Let me know!"
 
 
 ### Solution: Principle-Driven Generation (NEW)
-
+```text
 ```
 NEW SYSTEM:
 - Match archetype → Extract principles → Generate response
@@ -394,7 +394,7 @@ def generate_response(user_input, prior_context):
         return archetype_response  # Use learned principles
 
     # Fallback to glyph system if no archetype match
-    return glyph_response
+```text
 ```
 
 

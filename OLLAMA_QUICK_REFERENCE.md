@@ -12,7 +12,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # 3. Open Streamlit
 
-# Visit http://localhost:8501
+```text
 ```
 
 
@@ -28,7 +28,7 @@ FirstPerson Response Pipeline
     ↓
 Tier Processing (learning, aliveness, poetry)
     ↓
-User sees response
+```text
 ```
 
 
@@ -78,7 +78,7 @@ response = client.generate_with_context(
     ],
     model="llama3"
 )
-print(response)
+```text
 ```
 
 
@@ -112,7 +112,7 @@ docker-compose -f docker-compose.local.yml exec ollama ollama list
 docker-compose -f docker-compose.local.yml rm
 
 # Full cleanup (removes models!)
-docker-compose -f docker-compose.local.yml down -v
+```text
 ```
 
 
@@ -125,7 +125,7 @@ docker-compose -f docker-compose.local.yml down -v
 OLLAMA_BASE_URL=http://ollama:11434
 
 # Local development (laptop, desktop)
-OLLAMA_BASE_URL=http://localhost:11434
+```text
 ```
 
 
@@ -136,7 +136,7 @@ OLLAMA_BASE_URL=http://localhost:11434
 orca-mini   → Smallest (1.3GB), fastest, fair quality - TRY THIS FIRST
 neural-chat → Medium (4.1GB), good for chat
 mistral     → Medium (4.1GB), well-rounded
-llama3      → Largest (4.7GB), best quality - PRODUCTION
+```text
 ```
 
 
@@ -152,7 +152,7 @@ curl http://localhost:11434/api/tags
 
 # Generate response
 curl -X POST http://localhost:11434/api/generate \
-  -d '{"model":"llama3","prompt":"Hello!","stream":false}'
+```text
 ```
 
 
@@ -160,7 +160,7 @@ curl -X POST http://localhost:11434/api/generate \
 ### Run integration tests
 
 ```bash
-python test_ollama_integration.py
+```text
 ```
 
 
@@ -180,7 +180,7 @@ st.write("Models:", st.session_state.get("ollama_models"))
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 client = get_ollama_client_singleton()
 response = client.generate("Test", model="llama3")
-st.write(response)
+```text
 ```
 
 
@@ -196,7 +196,7 @@ docker-compose -f docker-compose.local.yml logs -f ollama
 docker-compose -f docker-compose.local.yml logs -f streamlit
 
 # Both
-docker-compose -f docker-compose.local.yml logs -f
+```text
 ```
 
 
@@ -218,7 +218,7 @@ Try Ollama fallback
     ├─ Available → HTTP call + Tier processing → Display
     └─ Unavailable ↓
     ↓
-Generic fallback → "I'm here to listen..."
+```text
 ```
 
 
@@ -238,7 +238,7 @@ Dockerfile.streamlit               (29 lines)
 ollama_client.py                   (347 lines)
 OLLAMA_INTEGRATION_GUIDE.md        (550+ lines)
 OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
-test_ollama_integration.py         (300+ lines)
+```text
 ```
 
 
@@ -249,7 +249,7 @@ test_ollama_integration.py         (300+ lines)
 response_handler.py                (Added import + function)
 session_manager.py                 (Added init function)
 ui_refactored.py                   (Already imports everything)
-ui_components/__init__.py           (Already exports everything)
+```text
 ```
 
 

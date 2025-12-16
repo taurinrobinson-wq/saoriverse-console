@@ -80,7 +80,7 @@ Over 7 comprehensive phases, the SaoriVerse Console has undergone a complete arc
 ##
 
 ## Directory Structure After Modularization
-
+```text
 ```
 /workspaces/saoriverse-console/
 │
@@ -186,7 +186,7 @@ Over 7 comprehensive phases, the SaoriVerse Console has undergone a complete arc
 **Verification Status**: ✅ All imports tested and working
 
 ### Import Resolution Path
-
+```text
 ```
 Old Import Path        →  New Location              →  Shim Status
 ───────────────────────────────────────────────────────────────
@@ -273,7 +273,7 @@ from main_v2 import *                               →  ✅ Root
 # Unclear which file belongs with which functionality
 from glyph_generator import ...
 from main_response_engine import ...
-from response_adapter import ...
+```text
 ```
 
 
@@ -296,7 +296,7 @@ from archive.phase_infrastructure.phase_modulator import detect_phase
 
 # UI components
 from emotional_os.ui.header_ui import render_header
-from emotional_os.session.session_manager import SessionManager
+```text
 ```
 
 
@@ -363,7 +363,7 @@ from emotional_os.session.session_manager import SessionManager
 ✅ from response_adapter import translate_emotional_response
 ✅ from tone_adapters import generate_archetypal_response
 ✅ from relational_memory import RelationalMemoryCapsule
-✅ from symbolic_tagger import tag_input
+```text
 ```
 
 
@@ -373,7 +373,7 @@ from emotional_os.session.session_manager import SessionManager
 ```
 ✅ from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 ✅ from tools.document_processing.docx_reader import read_docx
-✅ from archive.phase_infrastructure.phase_modulator import detect_phase
+```text
 ```
 
 

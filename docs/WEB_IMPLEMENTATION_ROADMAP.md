@@ -64,7 +64,7 @@ export function GameScene({
       </div>
     </div>
   );
-}
+```sql
 ```
 
 
@@ -95,7 +95,7 @@ export function GameScene({
     resonance: number
   },
   discovered_glyphs: string[]
-}
+```text
 ```
 
 
@@ -181,7 +181,7 @@ export function useGame() {
     processChoice,
     processFreeInput
   };
-}
+```text
 ```
 
 
@@ -197,7 +197,7 @@ export function GameScene() {
   return (
     // Use gameState.story_text, gameState.choices, etc.
   );
-}
+```text
 ```
 
 
@@ -222,7 +222,7 @@ export function GameScene() {
       {choice.text}
     </button>
   ))}
-</div>
+```text
 ```
 
 
@@ -255,7 +255,7 @@ const [input, setInput] = useState('');
   >
     Send
   </button>
-</div>
+```text
 ```
 
 
@@ -301,7 +301,7 @@ const [input, setInput] = useState('');
       </div>
     </div>
   </div>
-)}
+```text
 ```
 
 
@@ -335,7 +335,7 @@ export function StatsPanel({ stats: PlayerStats }) {
       ))}
     </div>
   );
-}
+```text
 ```
 
 
@@ -343,7 +343,7 @@ export function StatsPanel({ stats: PlayerStats }) {
 ### Usage
 
 ```tsx
-<StatsPanel stats={gameState.player_stats} />
+```text
 ```
 
 
@@ -383,7 +383,7 @@ const loadGame = useCallback(async (saveId: string) => {
     `${API_BASE}/sessions/${sessionId}/load?save_id=${saveId}`
   );
   setGameState(response.data);
-}, [sessionId]);
+```text
 ```
 
 
@@ -426,7 +426,7 @@ velinor-web/
 │   ├── types/
 │   │   └── game.ts                 ← CREATE (type definitions)
 │   └── lib/
-│       └── api.ts                  ← CREATE (API client)
+```text
 ```
 
 

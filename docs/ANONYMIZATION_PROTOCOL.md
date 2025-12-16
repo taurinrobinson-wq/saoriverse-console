@@ -45,7 +45,7 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 ## 🔐 Symbolic Glyphs
 
 ### Family Roles
-
+```text
 ```
 mother/parent        → the Lightkeeper
 father/guardian      → the Steward / the Guardian
@@ -62,7 +62,7 @@ friend/companion     → the Companion
 
 
 ### Emotional States & Medical Terms
-
+```text
 ```
 depression           → the Depths
 anxiety              → the Tightness
@@ -78,7 +78,7 @@ diagnosis            → the Recognition
 
 
 ### Locations
-
+```text
 ```
 California           → West Coast
 New York             → East Coast
@@ -140,7 +140,7 @@ anonymized, anonmap = anon.anonymize_entry(entry, "user_123")
 
 print(anonymized["text"])
 
-# Output: "The Thread said I should see The Witness. I'm the Depths since 2 years ago."
+```text
 ```
 
 
@@ -156,7 +156,7 @@ anonymized, anonmap = anon_with_medical.anonymize_entry(entry, "user_123")
 
 print(anonymized["text"])
 
-# Output: "The Thread said I should see The Witness. I'm depressed since 2 years ago."
+```text
 ```
 
 
@@ -179,7 +179,7 @@ print(consent["options"])
 #   "yes_keep_anon": "Yes, keep it anonymous",
 #   "no_decline": "No, keep this private"
 
-# }
+```text
 ```
 
 
@@ -193,7 +193,7 @@ report = anon.generate_anonymization_report(entry, anonmap)
 
 print(f"Identifiers replaced: {report['changes_made']['identifiers_replaced']}")
 print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
-print(report['specific_replacements'])
+```text
 ```
 
 
@@ -231,7 +231,7 @@ print(report['specific_replacements'])
 ```
 "Would you like to share this with your therapist?"
 → "Yes, reveal my identity for clinical review"
-→ Therapist sees: Original names, dates, locations, medical details
+```text
 ```
 
 
@@ -241,7 +241,7 @@ print(report['specific_replacements'])
 ```
 "Include this in your personal legacy archive?"
 → "Yes, with my real name"
-→ Family sees: Fully un-anonymized entry with your identity
+```text
 ```
 
 
@@ -251,7 +251,7 @@ print(report['specific_replacements'])
 ```
 "Would you like to contribute to emotional research?"
 → "Yes, but keep me anonymous"
-→ Researchers see: Anonymized version (glyphs, relative dates, etc.)
+```text
 ```
 
 
@@ -261,7 +261,7 @@ print(report['specific_replacements'])
 ```
 "Allow medical team to review with your actual identity?"
 → "Yes, only for this medical issue"
-→ Doctor sees: Medical terms preserved, your identity revealed
+```text
 ```
 
 
@@ -296,7 +296,7 @@ User Entry (Raw)
     [Optional: Consent Request]
     ├─ Ask user: "Share this?"
     ├─ If yes → Un-anonymize
-    └─ If no → Keep private
+```text
 ```
 
 
@@ -332,7 +332,7 @@ User Entry (Raw)
   "location_changes": {
     "CA": "West Coast"
   }
-}
+```text
 ```
 
 
@@ -360,7 +360,7 @@ anonymized, anonmap = anon.anonymize_entry(entry, user_id)
 _log_exchange(anonymized)
 
 # Store map for potential de-anonymization
-_store_consent_map(user_id, anonmap)
+```text
 ```
 
 
@@ -386,7 +386,7 @@ with col2:
 with col3:
     if st.button("No, keep this private"):
         # Don't store at all
-        pass
+```text
 ```
 
 

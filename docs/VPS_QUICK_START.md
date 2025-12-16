@@ -6,7 +6,7 @@ Copy-paste commands to get Velinor running on DigitalOcean.
 ## 1️⃣ Local: Generate SSH Key (One-Time)
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/velinor -C "velinor@firstperson"
+```text
 ```
 
 
@@ -42,7 +42,7 @@ Click **Save** and wait 5-10 minutes.
 ## 4️⃣ VPS: Run Setup Script
 
 ```bash
-ssh root@YOUR_DROPLET_IP
+```text
 ```
 
 
@@ -90,7 +90,7 @@ certbot certonly --standalone \
 # Restart nginx with SSL
 docker compose -f docker-compose.prod.yml restart nginx-ssl
 
-echo "✅ Velinor is live at https://velinor.firstperson.chat"
+```text
 ```
 
 
@@ -99,7 +99,7 @@ echo "✅ Velinor is live at https://velinor.firstperson.chat"
 ## 5️⃣ Test It
 
 ```bash
-curl https://velinor.firstperson.chat
+```text
 ```
 
 
@@ -116,7 +116,7 @@ To deploy automatically on `git push main`:
 ```bash
 ssh root@YOUR_DROPLET_IP
 ssh-keygen -t ed25519 -f /root/.ssh/velinor_deploy -C "velinor-deploy" -N ""
-cat /root/.ssh/velinor_deploy.pub
+```text
 ```
 
 
@@ -155,7 +155,7 @@ else
 fi
 EOF
 
-chmod +x /opt/velinor/deploy.sh
+```text
 ```
 
 
@@ -175,7 +175,7 @@ The `.github/workflows/deploy.yml` file is already in your repo and will auto-tr
 
 ```bash
 ssh root@YOUR_DROPLET_IP
-docker compose -f docker-compose.prod.yml ps
+```text
 ```
 
 
@@ -190,7 +190,7 @@ docker compose -f docker-compose.prod.yml ps
 **Site shows nginx error**: Check containers are running with command above, or view logs:
 
 ```bash
-docker compose -f docker-compose.prod.yml logs
+```text
 ```
 
 

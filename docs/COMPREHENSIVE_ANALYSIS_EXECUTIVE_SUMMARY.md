@@ -134,7 +134,7 @@ Complete safety and crisis infrastructure:
 ##
 
 ## HOW IT CURRENTLY WORKS (Not Integrated)
-
+```text
 ```
 User Input
     ↓
@@ -151,7 +151,7 @@ Response
 ##
 
 ## HOW IT SHOULD WORK (Fully Integrated)
-
+```text
 ```
 User Input
     ↓
