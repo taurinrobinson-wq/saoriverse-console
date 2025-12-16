@@ -8,6 +8,7 @@ supports:
 ✅ **Local LLM Inference** - No external API calls needed ✅ **Docker Compose** - Single command to
 start both services ✅ **Seamless Fallback** - Ollama kicks in when local Glyph processing
 unavailable ✅ **Privacy-First** - All conversation data stays on your machine ✅ **Production-Ready**
+
 - Health checks, error handling, logging
 
 ## 📁 File Inventory
@@ -81,8 +82,10 @@ unavailable ✅ **Privacy-First** - All conversation data stays on your machine 
 
 - Automated integration testing suite
 - 5 verification checks:
+
 1. Docker Compose file validation 2. Ollama service connectivity 3. Available models detection 4.
 Response generation test 5. FirstPerson client integration
+
 - Detailed error messages and fixes
 - **Location**: `/d/saoriverse-console/test_ollama_integration.py`
 

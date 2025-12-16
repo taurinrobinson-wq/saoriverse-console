@@ -23,6 +23,7 @@ Sections
 - User interacts with the web UI served by `main_v2.py` (Streamlit).
 - `main_v2.py` loads the UI renderer from `emotional_os.deploy.modules.ui_refactored` (either `render_main_app` or `render_main_app_safe`).
 - The main chat input is rendered and when the user sends a message the UI pipeline:
+
 1. Optionally sanitizes text via `local_inference.preprocessor.Preprocessor` (if available). 2.
 Calls the local parser: `emotional_os.glyphs.signal_parser.parse_input` (re-export of
 `emotional_os.core.signal_parser`). 3. `parse_input` -> extracts signals, maps to ECM gates, queries

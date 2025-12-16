@@ -5,6 +5,7 @@ Your codespace now has full DOCX (Word document) reading and viewing capabilitie
 ## What's Available
 
 ### ✅ Installed Packages
+
 - **python-docx** (1.1.0) - Read and parse DOCX files
 - **docx2txt** (0.9) - Convert DOCX to plain text
 - **lxml** (5.3.0) - XML processing for document structure
@@ -19,17 +20,11 @@ View a DOCX file in the terminal:
 python3 docx_reader.py document.docx view
 ```
 
-
-
-
 Extract plain text:
 
 ```bash
 python3 docx_reader.py document.docx text
 ```
-
-
-
 
 Export as JSON:
 
@@ -38,10 +33,8 @@ python3 docx_reader.py document.docx json
 python3 docx_reader.py document.docx json output.json
 ```
 
-
-
-
 **Features:**
+
 - 📋 Displays document metadata (title, author, created date, etc.)
 - 📝 Shows all paragraphs with formatting info
 - 📊 Displays tables in readable format
@@ -56,12 +49,10 @@ Launch the web viewer:
 streamlit run docx_viewer.py
 ```
 
-
-
-
 Then open the local URL in your browser.
 
 **Features:**
+
 - 👁️ **Document View** - Read formatted documents
 - 🔍 **Raw Content** - Inspect JSON structure
 - ℹ️ **Metadata** - View document properties
@@ -85,9 +76,6 @@ print(text)
 # Export as JSON
 export_docx_json("document.docx", "output.json")
 ```
-
-
-
 
 ## What Gets Extracted
 
@@ -154,9 +142,6 @@ python3 docx_reader.py sample.docx
 #   Cell 1   | Cell 2   | Cell 3
 ```
 
-
-
-
 ## Integration into Your Apps
 
 You can integrate DOCX reading into your Streamlit apps:
@@ -174,9 +159,6 @@ if uploaded_file:
     st.json(data)
 ```
 
-
-
-
 ## Notes
 
 - DOCX files are actually ZIP archives containing XML - we're reading the content directly from the XML
@@ -187,11 +169,13 @@ if uploaded_file:
 ## Next Steps
 
 1. **Try it out** with any DOCX file:
+
    ```bash
    python3 docx_reader.py your_file.docx
    ```
 
 2. **Launch the viewer**:
+
    ```bash
    streamlit run docx_viewer.py
    ```

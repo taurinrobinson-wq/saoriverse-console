@@ -23,8 +23,6 @@ from emotional_os.core import (
 )
 ```
 
-
-
 ##
 
 ## 📚 Common Tasks
@@ -44,9 +42,6 @@ print(result["signals"])  # Emotional signals detected
 print(result["gates"])    # Activated ECM gates
 print(result["glyphs"])   # Matched glyphs
 ```
-
-
-
 
 ### Learn from Conversation
 
@@ -71,9 +66,6 @@ stats = learner.get_learning_stats()
 print(f"Learned {stats['learned_lexicon_size']} new words")
 ```
 
-
-
-
 ### Access Constants
 
 ```python
@@ -92,9 +84,6 @@ patterns = EMOTIONAL_PATTERNS
 feeling_exprs = patterns["feeling_expressions"]
 ```
 
-
-
-
 ### Manage Paths
 
 ```python
@@ -112,8 +101,6 @@ poetry_dir = pm.poetry_data_dir()
 # Create directory if needed
 pm.ensure_dir(poetry_dir)
 ```
-
-
 
 ##
 
@@ -134,8 +121,6 @@ from emotional_os.core import parse_input, LexiconLearner
 # Both work identically!
 ```
 
-
-
 ##
 
 ## 📁 File Organization
@@ -148,9 +133,6 @@ emotional_os/core/
 ├── signal_parser.py         # Emotional signal extraction & glyph matching
 └── lexicon_learner.py       # Learn patterns from conversations
 ```
-
-
-
 
 ### What's in Each File
 
@@ -167,9 +149,6 @@ from emotional_os.core import (
 )
 ```
 
-
-
-
 **`constants.py`** - All configuration
 
 ```python
@@ -180,9 +159,6 @@ EMOTIONAL_PATTERNS = {'feeling_expressions': [...], ...}
 # ... all constants centralized
 ```
 
-
-
-
 **`paths.py`** - Smart path resolution
 
 ```python
@@ -192,9 +168,6 @@ learned_lexicon_path()  # Returns path to learned lexicon
 
 # ... handles migration/multiple locations seamlessly
 ```
-
-
-
 
 **`signal_parser.py`** - Core parsing engine
 
@@ -207,9 +180,6 @@ fetch_glyphs()  # Get matching glyphs
 # ... all signal parsing functionality
 ```
 
-
-
-
 **`lexicon_learner.py`** - Learning system
 
 ```python
@@ -220,8 +190,6 @@ update_lexicon_from_learning()  # Add new words to lexicon
 
 # ... all learning functionality
 ```
-
-
 
 ##
 
@@ -241,9 +209,6 @@ from emotional_os.core import SIGNALS
 Ω  - Recognition/Witnessing (seen, witnessed, recognized, heard)
 ```
 
-
-
-
 ### 6 ECM Gates
 
 ```python
@@ -256,8 +221,6 @@ Gate 6:  α, Ω, ε             # Devotion + Recognition + Insight
 Gate 9:  α, β, γ, δ, ε, Ω    # Multiple signals
 Gate 10: θ                    # Grief alone
 ```
-
-
 
 ##
 
@@ -272,9 +235,6 @@ learner = LexiconLearner(
     base_lexicon_path="/path/to/custom/signals.json"
 )
 ```
-
-
-
 
 ### Process Multiple Inputs
 
@@ -296,9 +256,6 @@ for user_input in inputs:
     print()
 ```
 
-
-
-
 ### Get Learning Statistics
 
 ```python
@@ -314,8 +271,6 @@ print(f"Last updated: {stats['last_updated']}")
 print(f"Top learned words: {stats['top_learned_words']}")
 ```
 
-
-
 ##
 
 ## 🐛 Troubleshooting
@@ -330,9 +285,6 @@ from emotional_os.core import parse_input  # ✅ Correct
 # Not:
 from emotional_os.glyphs.signal_parser import parse_input  # ❌ Works but outdated
 ```
-
-
-
 
 ### Path Not Found?
 
@@ -352,9 +304,6 @@ print(f"Exists: {path.exists()}")
 # - emotional_os/parser/signal_lexicon.json
 ```
 
-
-
-
 ### Lexicon Not Updating?
 
 ```python
@@ -368,8 +317,6 @@ learner.update_lexicon_from_learning(results)
 from emotional_os.core.paths import learned_lexicon_path
 print(learned_lexicon_path())
 ```
-
-
 
 ##
 
@@ -385,6 +332,7 @@ Moving existing code to canonical imports?
 - [ ] Replace with imports from `emotional_os.core`
 - [ ] Test that code still works
 - [ ] Commit with message: "Migrate: Use canonical emotional_os.core imports"
+
 ##
 
 ## 🎓 Learning Path
@@ -395,6 +343,7 @@ Moving existing code to canonical imports?
 4. **Learn from conversations** - Use `LexiconLearner` to extract patterns
 5. **Customize lexicons** - Add new words and emotional mappings
 6. **Integrate with glyphs** - Use parsed signals to fetch glyphs
+
 ##
 
 ## 📚 Documentation
@@ -402,6 +351,7 @@ Moving existing code to canonical imports?
 - **CONSOLIDATION_ANALYSIS.md** - Why consolidation was needed
 - **CONSOLIDATION_COMPLETE.md** - Migration guide for the consolidation
 - **CONSOLIDATION_STATUS.md** - Summary of what was achieved
+
 ##
 
 ## 💡 Pro Tips
@@ -411,11 +361,13 @@ Moving existing code to canonical imports?
 3. **Check constants first** - Don't hardcode gate numbers, use ECM_GATES
 4. **Test lexicon learning** - New words get added automatically
 5. **Use get_learning_stats()** - Monitor what the system is learning
+
 ##
 
-## 🎉 You're All Set!
+## 🎉 You're All Set
 
 The consolidation is complete and working. Your codebase is now:
+
 - ✅ Cleaner (no duplication)
 - ✅ Faster to maintain (single source of truth)
 - ✅ Easier to understand (clear structure)

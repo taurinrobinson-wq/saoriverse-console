@@ -192,7 +192,9 @@ Key session state variables:
 
    ```bash
    # Verify secrets are loaded
+
 python -c "import streamlit as st; print(st.secrets.get('supabase'))"
+
    ```
 
 2. **Check network connectivity**

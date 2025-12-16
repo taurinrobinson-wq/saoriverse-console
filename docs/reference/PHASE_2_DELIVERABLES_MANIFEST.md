@@ -1,4 +1,5 @@
 # !/usr/bin/env python3
+
 """ PHASE 2 DELIVERABLES MANIFEST
 
 Complete list of all files delivered for the Real-Time Glyph Learning System. Verify all files are

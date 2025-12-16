@@ -3,6 +3,7 @@
 ## TL;DR
 
 The code you asked about loads **clean poetry to train your emotional AI**. It's not just data sitting there - it's the "textbook" your system learns from to understand what users really mean.
+
 ##
 
 ## What's Actually Happening
@@ -41,8 +42,6 @@ The code you asked about loads **clean poetry to train your emotional AI**. It's
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-
-
 ##
 
 ## The Code Explained
@@ -68,8 +67,6 @@ for collection_name, text in data.items():
     # This learns emotional patterns from the poetry
 ```
 
-
-
 ##
 
 ## Why This Matters for User Input Parsing
@@ -82,9 +79,6 @@ System parses: [NEGATIVE_WORD, LOCATION, NEGATIVE_NOUN]
 Result: Misses emotional depth
 ```
 
-
-
-
 **With clean poetry training:**
 
 ```
@@ -96,8 +90,6 @@ System recognizes pattern from:
 System understands: EMOTIONAL_DISORIENTATION + POTENTIAL_AWAKENING
 Result: Appropriate, empathetic response
 ```
-
-
 
 ##
 
@@ -127,8 +119,6 @@ data = adapter.for_ritual_processing()
 
 # Returns: {name: clean_text}
 ```
-
-
 
 ##
 
@@ -170,8 +160,6 @@ understanding = extractor.extract(user_input)
 # Similar to Wordsworth's themes of spiritual journey
 ```
 
-
-
 ##
 
 ## Why "Clean" Matters
@@ -187,9 +175,6 @@ thers"
 → Emotional patterns are skewed
 ```
 
-
-
-
 **Clean poetry:**
 
 ```
@@ -199,8 +184,6 @@ thers"
 → Understands the beauty and meaning
 → Emotional dimensions are accurate
 ```
-
-
 
 ##
 
@@ -237,8 +220,6 @@ for collection_name, text in data.items():
     # System learns emotional patterns from each poet
 ```
 
-
-
 ##
 
 ## The Bottom Line
@@ -246,6 +227,7 @@ for collection_name, text in data.items():
 Poetry is **the language of emotion** - it's how humans express the deepest feelings. By training your system on clean, validated poetry, you give it a "lexicon of emotion" to recognize when users input text.
 
 This makes your system:
+
 - **More accurate** - Understands nuance and metaphor
 - **More empathetic** - Recognizes emotional weight
 - **More versatile** - Handles varied expressions of the same emotion

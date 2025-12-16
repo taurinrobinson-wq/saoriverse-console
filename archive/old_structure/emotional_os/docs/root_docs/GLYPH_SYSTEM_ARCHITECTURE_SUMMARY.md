@@ -2,6 +2,7 @@
 
 **Date:** November 12, 2025
 **Status:** ✅ Database Updated | ⚠️ Backend Configuration Needed
+
 ##
 
 ## 🔴 Current Issues Resolved
@@ -21,9 +22,6 @@ API returns 200+ status code →
 Returns: "I'm experiencing some technical difficulties, but I'm still here for you."
 ```
 
-
-
-
 **Solution:** Add to your `.env` file:
 
 ```bash
@@ -31,8 +29,6 @@ CURRENT_SAORI_URL=https://your-supabase-project.supabase.co/functions/v1/saori-f
 SUPABASE_URL=https://your-supabase-project.supabase.co
 SUPABASE_ANON_KEY=your_anon_key_here
 ```
-
-
 
 ##
 
@@ -59,8 +55,6 @@ Gate 8:   174 glyphs (Boundary/Shielding)
 Gate 9:    23 glyphs (Stillness)
 Gate 10:    1 glyph (Surrender)
 ```
-
-
 
 ##
 
@@ -106,9 +100,6 @@ emotional_os/glyphs/learning_response_generator.py
 Response delivered to user
 ```
 
-
-
-
 ## 🟢 Recent Local-only Integration (Nov 16, 2025)
 
 - The UI and main entry now enforce a local-first, local-only processing model by default. Remote/hybrid AI is disabled in the standard app flow; any remote calls are optional and have robust fallbacks.
@@ -120,6 +111,7 @@ Response delivered to user
 - Main app docstring now documents the full startup → auth → opt-in persistence → parse → response flow. See `main_v2.py` for the succinct runtime summary.
 
 Use this document as the canonical reference for the response flow while you continue improving the system. If you update selection heuristics (weights, `top_n`, or intensity calculations), update this file so the team's expectations stay aligned.
+
 ##
 
 ## 🗂️ Key Files That Generate Responses
@@ -181,6 +173,7 @@ Use this document as the canonical reference for the response flow while you con
   - Generates new candidate glyphs
   - Stores in `glyph_candidates` table
   - Learns from user interactions
+
 ##
 
 ## 🔄 Response Flow Diagram
@@ -238,8 +231,6 @@ Use this document as the canonical reference for the response flow while you con
               └────────────────────┘
 ```
 
-
-
 ##
 
 ## 🛠️ Configuration Requirements
@@ -260,9 +251,6 @@ SUPABASE_KEY=your_anon_key_here
 SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
 ```
 
-
-
-
 ### Processing Modes
 
 1. **Hybrid Mode** (default)
@@ -274,6 +262,7 @@ SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
    - All processing happens locally
    - No external API calls
    - Works without SAORI configuration
+
 ##
 
 ## 📁 Database Tables
@@ -293,6 +282,7 @@ SUPABASE_FUNCTION_URL=https://your-project.supabase.co/functions/v1/saori-fixed
 - **consolidation_map** - Duplicate tracking
 - **glyph_lexicon_archived** - Historical glyphs
 - **trace_log** - System telemetry
+
 ##
 
 ## 🔍 Quick Diagnostics
@@ -309,9 +299,6 @@ print(f"Total glyphs: {count}")
 conn.close()
 ```
 
-
-
-
 ### Test Signal Parser
 
 ```python
@@ -326,8 +313,6 @@ result = parse_input(
 print(f"Best glyph: {result['best_glyph']}")
 print(f"Response: {result['voltage_response'][:100]}...")
 ```
-
-
 
 ##
 

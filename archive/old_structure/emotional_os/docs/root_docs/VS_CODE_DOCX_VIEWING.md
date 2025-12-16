@@ -16,11 +16,13 @@ When you have a DOCX file open or selected in VS Code:
 You also have two extensions that provide additional viewing options:
 
 ### **OpenXml Package Explorer** (View document structure)
+
 - Right-click any `.docx` file → "Open with OpenXml Package Explorer"
 - Shows XML structure, styles, numbering, metadata
 - Best for: Inspecting document internals
 
 ### **LibreOffice Preview** (Preview rendered layout)
+
 - Right-click any `.docx` file → "Open with LibreOffice Preview"
 - Shows document as it appears in Word
 - Best for: Seeing actual formatting and layout
@@ -46,9 +48,6 @@ streamlit run docx_viewer.py
 # Web-based viewer (opens in browser)
 python3 docx_web_viewer.py document.docx
 ```
-
-
-
 
 ## 📋 What Each Method Does
 

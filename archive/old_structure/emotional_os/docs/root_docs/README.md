@@ -20,9 +20,6 @@ pip install streamlit requests
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```
 
-
-
-
 Select "Local" mode in the sidebar for privacy-first processing.
 
 ### AI-Enhanced Mode (Supabase Integration)
@@ -47,9 +44,6 @@ source .venv/bin/activate
 pip install --upgrade pip
 pip install -e .
 ```
-
-
-
 
 The editable install exposes the package name `saoriverse_console` and makes the `emotional_os` package importable (for example: `from emotional_os.supabase.supabase_integration import SupabaseIntegrator`).
 
@@ -81,9 +75,6 @@ Emotional OS/
 └── .env.example                   # Configuration template
 ```
 
-
-
-
 ## 🔐 Privacy & Security
 
 This system prioritizes user privacy through:
@@ -110,12 +101,12 @@ Emotional OS represents a new category of **encrypted emotional intelligence** t
 This repository now includes focused unit tests and a CI job that lock in core glyph-native behaviors:
 
 - Unit tests added:
- 	- `tests/test_ui_template_usage.py` — ensures the UI selection rule prefers `response_template` when glyph debug is off and falls back to contextual responses when debug is on.
- 	- `tests/unit/test_multi_glyph_selection.py` — verifies `select_best_glyph_and_response` returns the modern quadruple and exposes `glyphs_selected` with `score` and `display_name`.
- 	- `tests/unit/test_display_name_normalizer.py` — asserts `_normalize_display_name` uses DB-provided `display_name`, extracts sensible fragments, and truncates long names safely.
+  - `tests/test_ui_template_usage.py` — ensures the UI selection rule prefers `response_template` when glyph debug is off and falls back to contextual responses when debug is on.
+  - `tests/unit/test_multi_glyph_selection.py` — verifies `select_best_glyph_and_response` returns the modern quadruple and exposes `glyphs_selected` with `score` and `display_name`.
+  - `tests/unit/test_display_name_normalizer.py` — asserts `_normalize_display_name` uses DB-provided `display_name`, extracts sensible fragments, and truncates long names safely.
 
 - CI behavior:
- 	- A GitHub Actions workflow (`.github/workflows/ci.yml`) runs these unit tests on push and pull requests to `main`. The CI job is intentionally scoped to stable, DB-independent unit tests to provide a fast, reliable guardrail for future changes.
+  - A GitHub Actions workflow (`.github/workflows/ci.yml`) runs these unit tests on push and pull requests to `main`. The CI job is intentionally scoped to stable, DB-independent unit tests to provide a fast, reliable guardrail for future changes.
 
 Running tests locally:
 
@@ -125,9 +116,6 @@ source .venv/bin/activate
 pip install -r requirements.txt  # or at least: pip install pytest
 pytest -q tests/test_ui_template_usage.py tests/unit/test_multi_glyph_selection.py tests/unit/test_display_name_normalizer.py
 ```
-
-
-
 
 If you want broader integration tests (DB fixtures, spaCy, TextBlob), I can add an optional CI job that prepares the environment; for now these unit tests anchor the symbolic behaviors we care about.
 
@@ -152,17 +140,11 @@ Quick apply options
 psql "postgresql://postgres:<SERVICE_ROLE_KEY>@<PROJECT_REF>.db.supabase.co:5432/postgres" -f sql/create_conversation_history_tables.sql
 ```
 
-
-
-
 3) Supabase CLI
 
 ```bash
 supabase db query < sql/create_conversation_history_tables.sql
 ```
-
-
-
 
 Row-Level Security (recommended)
 
@@ -186,9 +168,6 @@ CREATE POLICY "Delete own rows" ON public.conversation_history
  TO authenticated
  USING (user_id::text = auth.uid());
 ```
-
-
-
 
 Deletion & audit
 

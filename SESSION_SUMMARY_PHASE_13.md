@@ -260,7 +260,9 @@ To activate the learning system in production:
 1. **Add import to signal_parser.py**
 
    ```python
+
 from emotional_os.learning import get_archetype_response_generator
+
    ```
 
 2. **Wrap response generation**
@@ -273,7 +275,9 @@ archetype_response else: return composer.compose_response(...)  # Fallback
 3. **Log conversations for learning**
 
    ```python
+
 learner.learn_from_conversation(turns, user_rating)
+
    ```
 
 4. **Test in Streamlit UI**

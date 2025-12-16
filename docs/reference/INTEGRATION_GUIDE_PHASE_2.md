@@ -1,4 +1,5 @@
 # !/usr/bin/env python3
+
 """ Integration Guide: Adding Phase 2 Learning to signal_parser.py
 
 This file shows the exact modifications needed to signal_parser.py to activate the real-time glyph
@@ -95,7 +96,7 @@ else:
         # ================== PHASE 2: NEW - Learning pipeline ==================
 
         # STEP 4.1: Analyze input for glyph generation
-glyph_candidate = _glyph_learner.analyze_input_for_glyph_generation( input_text=text,
+glyph_candidate =_glyph_learner.analyze_input_for_glyph_generation( input_text=text,
 signals=signals, user_hash=user_hash )
 
         # STEP 4.2: Log candidate to database
@@ -117,7 +118,7 @@ emotional_analysis = { "primary_tone": _determine_emotional_tone(signals), "emot
 glyph_candidate.get("emotional_terms", {}), "nrc_analysis": glyph_candidate.get("nrc_analysis", {})
 }
 
-learning_response = _learning_response_gen.generate_learning_response(
+learning_response =_learning_response_gen.generate_learning_response(
 glyph_candidate=glyph_candidate, original_input=text,
 emotional_tone=emotional_analysis["primary_tone"],
 emotional_terms=emotional_analysis["emotional_terms"],
@@ -206,4 +207,5 @@ result = parse_input( "I feel caught between who I pretend to be and who I reall
 user_hash="test_user_001" )
 
 print(result["best_glyph"])  # Should be "Fractured Identity" or similar print(result["source"])
+
 # Should be "glyph_learning_pipeline" print(result["confidence"])  # Should be > 0.5 """

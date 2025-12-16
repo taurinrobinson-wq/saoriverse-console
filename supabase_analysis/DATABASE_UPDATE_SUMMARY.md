@@ -209,6 +209,7 @@ OPENAI_API_KEY=configured
 
 1. `supabase_analysis/COMPLETE_DATABASE_ANALYSIS.md` - Full analysis 2.
 `supabase_analysis/enable_rls_policies.sql` - RLS policies 3. `supabase_analysis/final_cleanup.sql`
+
 - Cleanup script 4. `supabase_analysis/DATABASE_UPDATE_SUMMARY.md` - This file
 
 ##

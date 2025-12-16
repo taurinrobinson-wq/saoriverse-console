@@ -15,12 +15,10 @@ When you have a DOCX file selected or open:
    ✅ Export DOCX to JSON        → Extract all data
 ```
 
-
-
-
 ## 🌐 Web Viewer Features
 
 The browser viewer shows:
+
 - 📄 **Document Tab** - Read the formatted content
 - 📋 **Raw Content Tab** - Inspect JSON structure
 - 📝 **Text Only Tab** - Extract plain text
@@ -54,10 +52,8 @@ Try this on any DOCX file:
 python3 docx_reader.py "your_file.docx"
 ```
 
-
-
-
 You'll see:
+
 - Document metadata (title, author, dates)
 - All paragraphs with formatting
 - All tables
@@ -77,6 +73,7 @@ You'll see:
 - Use **JSON export** if you need to process data programmatically
 - Use **terminal preview** for quick text extraction
 - Right-click DOCX files to see extension options for structure inspection
+
 ##
 
 **Everything is ready to go!** Pick any DOCX file and try it now. 📄

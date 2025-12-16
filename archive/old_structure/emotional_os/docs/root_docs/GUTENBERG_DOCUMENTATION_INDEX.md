@@ -3,35 +3,45 @@
 ## Overview
 
 This is the **complete documentation** of the **Project Gutenberg Poetry Extraction & Learning Pipeline** for the Saoriverse Emotional OS. This system downloads 30+ classic poetry collections and processes them to discover new emotional dimensions and generate meaningful emotional glyphs (symbols representing emotional states).
+
 ##
 
 ## Quick Navigation
 
 ### For First-Time Users
+
 Start here for a quick understanding:
+
 1. **[Quick Start Guide](./GUTENBERG_QUICK_START.md)** - 5-minute overview
 2. Run the pipeline with simple commands
 3. See immediate results
 
 ### For Technical Implementation
+
 For detailed technical information:
+
 1. **[Complete Technical Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md)** - Full documentation (5,000+ words)
 2. **[Architecture & Design](./GUTENBERG_ARCHITECTURE.md)** - System diagrams and component interactions
 3. **[Examples & Sample Data](./GUTENBERG_EXAMPLES_AND_DATA.md)** - Real outputs and metrics
 
 ### For Project Understanding
+
 For understanding what this project does:
+
 1. Read the [Overview](#overview) section below
 2. Check [Key Features](#key-features)
 3. Review [Expected Outputs](#expected-outputs)
+
 ##
 
 ## Complete Documentation Suite
 
 ### 1. Project Gutenberg Extraction Guide
+
 **File**: `PROJECT_GUTENBERG_EXTRACTION_GUIDE.md` (10,000+ words)
 
 **Contains**:
+
 - Complete system architecture overview
 - Component details for each processing phase
 - Data flow and file organization
@@ -45,9 +55,11 @@ For understanding what this project does:
 **Best for**: Understanding the full system design and implementation details
 
 ### 2. Quick Start Guide
+
 **File**: `GUTENBERG_QUICK_START.md` (1,500 words)
 
 **Contains**:
+
 - TL;DR execution commands
 - Table of processing phases
 - Input and output summary
@@ -59,9 +71,11 @@ For understanding what this project does:
 **Best for**: Running the pipeline quickly without deep understanding
 
 ### 3. Architecture & System Design
+
 **File**: `GUTENBERG_ARCHITECTURE.md` (5,000 words)
 
 **Contains**:
+
 - Complete system architecture diagrams
 - Component interaction diagrams
 - Data flow visualization
@@ -75,9 +89,11 @@ For understanding what this project does:
 **Best for**: Understanding system design and technical architecture
 
 ### 4. Examples & Sample Data
+
 **File**: `GUTENBERG_EXAMPLES_AND_DATA.md` (3,000 words)
 
 **Contains**:
+
 - All 30+ poetry collections with details
 - Real processing output examples
 - Sample generated glyphs (3 full examples)
@@ -87,6 +103,7 @@ For understanding what this project does:
 - Real data statistics from complete runs
 
 **Best for**: Seeing real outputs and understanding what data looks like
+
 ##
 
 ## Project Summary
@@ -109,9 +126,6 @@ Emotional Glyphs (50-80 new symbols)
 Expanded Emotional OS (98%+ coverage)
 ```
 
-
-
-
 ### Key Achievements
 
 - **30+ Poetry Collections**: Downloads from Project Gutenberg
@@ -131,39 +145,46 @@ Expanded Emotional OS (98%+ coverage)
 | Generate | <5 min |
 | Integrate | <1 min |
 | **Total** | **2-5 hours** |
+
 ##
 
 ## Key Features
 
 ### 1. Adaptive Signal Extraction
+
 - Discovers **new emotional dimensions** beyond base 8
 - Analyzes semantic relationships in poetry
 - Identifies keyword patterns and emotional intensity
 - Results: 17 new dimensions discovered
 
 ### 2. Intelligent Pattern Recognition
+
 - Creates 2-way emotional combinations (e.g., "love" + "nature")
 - Analyzes 3-way combinations for rare patterns
 - Frequency-weighted significance analysis
 - Results: 145 unique patterns identified
 
 ### 3. Meaningful Glyph Generation
+
 - Assigns Unicode symbols to emotional states
 - Generates contextual response cues
 - Creates engaging narrative hooks
 - Results: 50-80 production-ready glyphs
 
 ### 4. Learning Integration
+
 - Updates shared emotional lexicon
 - Maintains learning log for all discoveries
 - Tracks contribution quality
 - Results: 2,347 new vocabulary entries
 
 ### 5. Quality Validation
+
 - Validates all outputs
 - Checks for duplicates and conflicts
 - Ensures coverage expansion
 - Results: 98%+ system improvement
+
 ##
 
 ## Expected Outputs
@@ -192,9 +213,6 @@ After complete pipeline execution, you'll have:
     └─ Learning events (1,160 entries)
 ```
 
-
-
-
 ### Metrics Generated
 
 ```
@@ -213,8 +231,6 @@ After complete pipeline execution, you'll have:
 }
 ```
 
-
-
 ##
 
 ## Getting Started
@@ -230,9 +246,6 @@ python scripts/utilities/bulk_text_processor.py --dir ./gutenberg_poetry/ && \
 python scripts/utilities/poetry_glyph_generator.py
 ```
 
-
-
-
 ### Full Pipeline (with all phases)
 
 ```bash
@@ -242,9 +255,6 @@ python scripts/utilities/poetry_glyph_generator.py
 # Takes 2-5 hours total
 ./scripts/run_full_gutenberg_pipeline.sh
 ```
-
-
-
 
 ### Individual Phases
 
@@ -260,8 +270,6 @@ python scripts/utilities/bulk_text_processor.py --dir ./gutenberg_poetry/
 python scripts/utilities/poetry_glyph_generator.py
 ```
 
-
-
 ##
 
 ## Poetry Collections Included
@@ -269,6 +277,7 @@ python scripts/utilities/poetry_glyph_generator.py
 ### Major Collections (30+)
 
 **Romantic & Victorian Era**:
+
 - Emily Dickinson - Complete Works (1,774 poems)
 - Walt Whitman - Leaves of Grass
 - John Keats - Complete Poetical Works
@@ -279,6 +288,7 @@ python scripts/utilities/poetry_glyph_generator.py
 - John Donne - Poems
 
 **Modern Era**:
+
 - W.B. Yeats - Collected Poems
 - T.S. Eliot - Selected Poems
 - W.H. Auden - Poems
@@ -286,6 +296,7 @@ python scripts/utilities/poetry_glyph_generator.py
 - Robert Frost - Complete Poems
 
 **Thematic Collections**:
+
 - Love Poems
 - Poems of Nature
 - Poems of Passion
@@ -293,23 +304,28 @@ python scripts/utilities/poetry_glyph_generator.py
 - Romantic Poems
 
 **See [Examples & Sample Data](./GUTENBERG_EXAMPLES_AND_DATA.md) for complete list**
+
 ##
 
 ## System Requirements
 
 ### Software
+
 - Python 3.8+
 - Git (for version control)
 - ~5 Python packages (requests, pathlib, json, etc.)
 
 ### Hardware
+
 - **RAM**: 2-4 GB (for full lexicon processing)
 - **Disk**: 500 MB - 2 GB (for poetry files + outputs)
 - **CPU**: Moderate (signal extraction is bottleneck)
 
 ### Network
+
 - Internet connection (for initial download)
 - ~5 Mbps bandwidth (during Phase 1)
+
 ##
 
 ## Component Overview
@@ -334,11 +350,13 @@ python scripts/utilities/poetry_glyph_generator.py
 | HybridLearnerWithUserOverrides | Learning system | Tracks contributions |
 | PoetryGlyphGenerator | Simple glyphs | High-frequency patterns |
 | GlyphFromDataExtractor | Advanced glyphs | Comprehensive analysis |
+
 ##
 
 ## Discovered Emotional Dimensions
 
 ### Base 8 (Original)
+
 1. Love
 2. Joy
 3. Vulnerability
@@ -349,6 +367,7 @@ python scripts/utilities/poetry_glyph_generator.py
 8. Nature
 
 ### Newly Discovered (17+)
+
 - Nostalgia / Longing
 - Wonder / Awe
 - Melancholy / Grief
@@ -360,6 +379,7 @@ python scripts/utilities/poetry_glyph_generator.py
 - ... and 9+ more
 
 **See [Examples & Sample Data](./GUTENBERG_EXAMPLES_AND_DATA.md) for details**
+
 ##
 
 ## Sample Glyph
@@ -374,22 +394,24 @@ Response Cue: "Celebrate love found in natural beauty"
 Narrative: "A story of love through nature's cycles"
 ```
 
-
-
-
 **See [Examples & Sample Data](./GUTENBERG_EXAMPLES_AND_DATA.md) for 3 full examples**
+
 ##
 
 ## Advanced Topics
 
 ### Custom Poetry Collections
+
 See **[Complete Technical Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md#creating-custom-collections)** for how to add your own poets
 
 ### Scaling Up
+
 See **[Architecture Guide](./GUTENBERG_ARCHITECTURE.md#scalability-considerations)** for processing larger datasets
 
 ### Troubleshooting
+
 See **[Complete Technical Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md#troubleshooting)** for solutions
+
 ##
 
 ## File Organization
@@ -426,28 +448,30 @@ See **[Complete Technical Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md#trouble
    └─ bulk_processing_results.json
 ```
 
-
-
 ##
 
 ## Performance Benchmarks
 
 ### Processing Speed
+
 - **Download**: 15-30 minutes
 - **Processing**: 2-4 hours
 - **Generation**: <5 minutes
 - **Total**: 2-5 hours
 
 ### Resource Usage
+
 - **Peak Memory**: 3.2 GB
 - **CPU**: 40-60% average
 - **Disk**: 500 MB - 2 GB
 
 ### Output Scale
+
 - **New Entries**: 2,347
 - **New Dimensions**: 17
 - **New Glyphs**: 50-80
 - **Coverage**: 98%+
+
 ##
 
 ## Integration with Saoriverse
@@ -463,14 +487,13 @@ lexicon.load_from_file('emotional_os/glyphs/glyph_lexicon.json')
 lexicon.save()
 ```
 
-
-
-
 ### Deploy to Production
+
 1. Validate all outputs
 2. Merge glyphs into main system
 3. Test ritual coverage
 4. Deploy to production
+
 ##
 
 ## Documentation Structure
@@ -494,29 +517,34 @@ DOCUMENTATION HIERARCHY:
    └─ For seeing real outputs and metrics
 ```
 
-
-
 ##
 
 ## Frequently Asked Questions
 
 ### Q: How long does the pipeline take?
+
 **A**: 2-5 hours total (mostly processing phase). See [Processing Time](#processing-time)
 
 ### Q: Can I run individual phases?
+
 **A**: Yes! See [Individual Phases](#individual-phases)
 
 ### Q: What if a phase fails?
+
 **A**: See troubleshooting in [Complete Technical Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md#troubleshooting)
 
 ### Q: How many glyphs will be generated?
+
 **A**: 50-80 new glyphs typically. See [Expected Outputs](#expected-outputs)
 
 ### Q: What new dimensions are discovered?
+
 **A**: 17+ beyond the base 8. See [Discovered Dimensions](#discovered-emotional-dimensions)
 
 ### Q: How much disk space is needed?
+
 **A**: 500 MB - 2 GB. See [System Requirements](#system-requirements)
+
 ##
 
 ## Documentation Links
@@ -528,6 +556,7 @@ DOCUMENTATION HIERARCHY:
 | [Technical Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md) | 10K | 30 min | Learn implementation |
 | [Architecture](./GUTENBERG_ARCHITECTURE.md) | 5K | 20 min | Understand design |
 | [Examples](./GUTENBERG_EXAMPLES_AND_DATA.md) | 3K | 15 min | See real outputs |
+
 ##
 
 ## Version History
@@ -535,6 +564,7 @@ DOCUMENTATION HIERARCHY:
 | Version | Date | Status | Notes |
 |---------|------|--------|-------|
 | 1.0 | 2025-11-05 | Complete | Initial release - Full pipeline documented |
+
 ##
 
 ## Related Documentation
@@ -543,20 +573,24 @@ DOCUMENTATION HIERARCHY:
 - [Emotional OS Documentation](./emotional_os/README.md)
 - [Learning System Guide](./learning/README.md)
 - [Glyph System Reference](./emotional_os/glyphs/README.md)
+
 ##
 
 ## Support & Contribution
 
 ### Getting Help
+
 1. Check [Troubleshooting](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md#troubleshooting)
 2. Review [Examples](./GUTENBERG_EXAMPLES_AND_DATA.md)
 3. See [Architecture](./GUTENBERG_ARCHITECTURE.md#error-handling--recovery)
 
 ### Contributing
+
 - Add new poetry collections to POETRY_BOOKS
 - Improve signal extraction algorithms
 - Enhance glyph generation patterns
 - Submit processing results and metrics
+
 ##
 
 ## License & Attribution
@@ -565,6 +599,7 @@ DOCUMENTATION HIERARCHY:
 - **System Code**: Saoriverse License
 - **Generated Glyphs**: Saoriverse License
 - **Documentation**: This project
+
 ##
 
 ## Quick Commands Reference
@@ -591,14 +626,13 @@ cat bulk_processing_results.json | jq '.'
 jq '.[] | {name, symbol, emotions: .core_emotions}' generated_glyphs_from_poetry.json
 ```
 
-
-
 ##
 
 **Last Updated**: 2025-11-05
 **Documentation Version**: 1.0
 **Project Status**: ✓ Production-Ready
 **Maintenance**: Active
+
 ##
 
 ## 📖 Where to Start?
@@ -612,4 +646,5 @@ jq '.[] | {name, symbol, emotions: .core_emotions}' generated_glyphs_from_poetry
 **Want system design?** → Read [Architecture](./GUTENBERG_ARCHITECTURE.md) (20 min)
 
 **Ready to run?** → Run the commands in [Quick Start](./GUTENBERG_QUICK_START.md)
+
 ##

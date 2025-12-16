@@ -89,6 +89,7 @@ mechanics 4. **Story Structure & Progression** - Act-by-act breakdown with branc
 System** - Types, functions, fusion mechanics 6. **Ending Branches** - All 6 endings with
 requirements and consequences 7. **Narrative Decision Points** - Major choice nodes with ripple
 effects 8. **Expansion Placeholders** - Future content with [TBD] markers 9. **How to Use This Map**
+
 - Role-specific guidance
 
 ### Quick Navigation Tips
@@ -308,9 +309,11 @@ After:
 4. Implement:
 
    ```python
+
 if player_choice == "betray_kaelen": kaelen.trust = -50 player.fragments += stolen_fragments
 unlock_captain_veynar_dialogue() elif player_choice == "protect_kaelen": kaelen.trust = +50
 player.fragments -= stolen_fragments unlock_thieves_lair_quest()
+
    ```
 
 5. Add ripple to Market Shadows sphere (0.2 weight)
@@ -577,7 +580,8 @@ Create an issue with:
 - Suggested fix (if any)
 - Priority level
 
-## **Remember:** The story map is a living document. It should evolve as Velinor evolves. Keep it updated, keep it consistent, and let it guide the creation of this emotionally resonant world.
+## **Remember:** The story map is a living document. It should evolve as Velinor evolves. Keep it updated, keep it consistent, and let it guide the creation of this emotionally resonant world
+
 **Last Updated:** December 14, 2025
 **Document Version:** 1.0
 **Story Map Version:** 1.0

@@ -107,7 +107,7 @@ This document explains the reorganized directory structure of the Saoriverse Con
 
 ## Import Patterns
 
-### Within emotional_os package:
+### Within emotional_os package
 
 ```python
 from emotional_os.deploy.modules.auth import SaoynxAuthentication
@@ -115,10 +115,7 @@ from emotional_os.glyphs.signal_parser import parse_input
 from emotional_os.learning.hybrid_learner_v2 import get_hybrid_learner
 ```
 
-
-
-
-### Root-level modules:
+### Root-level modules
 
 ```python
 from parser.signal_parser import parse_input
@@ -126,10 +123,7 @@ from learning.lexicon_learner import LexiconLearner
 from em_trace.trace_engine import save_trace_json
 ```
 
-
-
-
-### Scripts and utilities:
+### Scripts and utilities
 
 ```python
 
@@ -139,9 +133,6 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from emotional_os import ...
 ```
-
-
-
 
 ## Running the Application
 
@@ -154,14 +145,12 @@ streamlit run main_v2.py
 python3 start.py
 ```
 
-
-
-
 ## Environment Setup
 
 See `LOCAL_SETUP_GUIDE.md` for complete setup instructions.
 
 Key files:
+
 - `.streamlit/secrets.toml` - Streamlit secrets (Supabase credentials)
 - `.env.example` - Environment variable template
 - `requirements.txt` - Python dependencies

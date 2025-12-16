@@ -137,6 +137,7 @@ evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
 2. **Data Persistence** (Automatic)
 
    ```
+
 learning/conversation_glyphs.json
    └─ All discovered glyphs (survives session restart)
 
@@ -145,6 +146,7 @@ learning/user_overrides/{user_id}_lexicon.json
 
 learning/hybrid_learning_log.jsonl
    └─ Append-only log of all learning exchanges
+
    ```
 
 3. **Session State** (Streamlit)
@@ -158,8 +160,10 @@ st.session_state['conversation_id']         # Unique conversation ID
 4. **Sidebar Display** (`main_v2.py` line 131)
 
    ```python
+
 with st.sidebar.expander("✨ Glyphs Discovered This Session"):
        # Shows all discovered glyphs with symbols, emotions, keywords
+
    ```
 
 ##

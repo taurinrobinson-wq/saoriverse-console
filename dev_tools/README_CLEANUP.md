@@ -27,6 +27,7 @@ Notes
 
 - The script is conservative and is intended for local review. It does not write to Supabase.
 - After you review the outputs I can add a safe upsert step that:
+
 1) creates a backup export from Supabase 2) upserts cleaned rows in batches using the service-role
 key 3) writes an upsert report
 

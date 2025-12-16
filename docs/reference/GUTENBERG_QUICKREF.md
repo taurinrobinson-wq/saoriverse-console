@@ -1,6 +1,7 @@
 # 📌 Quick Reference: Gutenberg Integration
 
 ## Status: ✅ COMPLETE & OPERATIONAL
+
 ## 🚀 Run Processing Now
 
 ```bash

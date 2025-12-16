@@ -3,25 +3,31 @@
 ## 🎯 What Was Implemented
 
 Your other AI's sophisticated 5-layer pruning strategy is now fully implemented in the Saoriverse system. This replaces basic numerical pruning with **architecture-aware** filtering that understands your VELΩNIX emotional alchemy system.
+
 ##
 
 ## 📋 The Five Layers
 
 ### 1️⃣ **Signal Strength Filtering** (25% weight)
+
 Retains glyphs with high emotional clarity, drops weak/ambiguous ones.
 
 **Components:**
+
 - Valence clarity: Noble, Heavy Noble, Stable, Volatile, Luminous, Dormant
 - Signal density: Count of activation signals (0-5 rated)
 - Description richness: Presence of emotional keywords (grief, joy, longing, tenderness, etc.)
 
 **Result:** Only emotionally clear glyphs survive
+
 ##
 
 ### 2️⃣ **Trace Role Redundancy** (20% weight)
+
 Collapses glyphs with identical trace roles, keeps only distinct tonal representatives.
 
 **Trace Role Categories:**
+
 - Portal marker (initiates connection)
 - Archive builder (anchors memory)
 - Sanctuary keeper (holds attunement)
@@ -32,21 +38,26 @@ Collapses glyphs with identical trace roles, keeps only distinct tonal represent
 **Logic:** If two glyphs have same role + same tone → remove one
 
 **Result:** One representative per role/tone combination
+
 ##
 
 ### 3️⃣ **Usage Frequency & Match History** (30% weight, HIGHEST)
+
 Prioritizes glyphs that have actually been used in conversations.
 
 **Implementation:**
+
 - Track every time a glyph is matched to user input
 - Store in `glyph_match_history.json`
 - High activation = strong signal to keep
 - Zero activation (with low signal) = candidate for pruning
 
 **Result:** Production-validated glyphs get priority
+
 ##
 
 ### 4️⃣ **Tone Diversity Enforcement** (15% weight)
+
 Ensures retained glyphs span your full **Saonyx tone palette**.
 
 **12 Core Tones:**
@@ -66,29 +77,31 @@ Moss Green          (growth, healing)
 Amber Glow          (warm, steady)
 ```
 
-
-
-
 **Logic:** If overrepresented tone appears in low-scoring glyph → prune it
 
 **Result:** Balanced emotional tone palette maintained
+
 ##
 
 ### 5️⃣ **Reaction Chain Anchoring** (10% weight)
+
 Preserves glyphs that participate in VELΩNIX reactions.
 
 **Categories:**
+
 - **1.0 (Critical):** Catalysts like Witness, Forgiveness, Acceptance
 - **0.8 (Base):** First 64 glyphs (core elements)
 - **0.4 (Factorial):** New combinations
 - **0.0 (Isolated):** No reaction participation
 
 **Logic:**
+
 - Catalysts = ALWAYS KEEP
 - Base elements = PROTECTED
 - Isolated + low signal + no activation = PRUNE
 
 **Result:** System catalysts are preserved
+
 ##
 
 ## 📊 Scoring Formula
@@ -105,10 +118,7 @@ combined_prune_score = (
 Range: 0.0 (prune) to 1.0 (keep)
 ```
 
-
-
-
-### Decision Thresholds:
+### Decision Thresholds
 
 | Score | Decision | Confidence | Notes |
 |-------|----------|-----------|-------|
@@ -117,15 +127,18 @@ Range: 0.0 (prune) to 1.0 (keep)
 | ≥ 0.25 | **MARGINAL** | 60% | Low priority, don't prune |
 | < 0.25 | **CANDIDATE FOR PRUNING** | 70% | Unless protected |
 
-### Protected Categories:
+### Protected Categories
+
 - ✅ Base glyphs (ID ≤ 64) → ALWAYS KEEP
 - ✅ Reaction anchors (participation ≥ 0.9) → ALWAYS KEEP
 - ✅ High signal strength (≥ 0.70) → ALWAYS KEEP
+
 ##
 
 ## 🔧 Three Optional Enhancements
 
 ### **Enhancement 1: Emotional Family Clustering**
+
 Group semantically related glyphs and keep only exemplars.
 
 ```python
@@ -142,13 +155,12 @@ families = {
 # Prune semantic near-duplicates within family
 ```
 
-
-
-
 **Benefit:** Eliminates redundancy while preserving diversity
+
 ##
 
 ### **Enhancement 2: Pruning Archive Capsule**
+
 Archive pruned glyphs for future resurrection or analysis.
 
 ```json
@@ -172,13 +184,12 @@ Archive pruned glyphs for future resurrection or analysis.
 }
 ```
 
-
-
-
 **Benefit:** Can resurrect glyphs if system needs change, full auditability
+
 ##
 
 ### **Enhancement 3: Confidence Scoring for Auditability**
+
 Each pruning decision includes confidence score (0-1).
 
 ```python
@@ -197,34 +208,38 @@ pruned_glyph = {
 }
 ```
 
-
-
-
 **Confidence Interpretation:**
+
 - **> 0.85:** Safe to prune (high confidence)
 - **0.70-0.85:** Can prune with review
 - **< 0.70:** Manual review recommended
 
 **Benefit:** Transparent, auditable decisions
+
 ##
 
 ## 🚀 Files Created
 
 ### `advanced_pruning_engine.py` (500 lines)
+
 **Main implementation** of the 5-layer pruning system.
 
 **Key Classes:**
+
 - `PruneCandidate`: Glyph with all scores and decision metadata
 - `AdvancedPruningEngine`: Main engine with evaluation logic
 
 **Key Methods:**
+
 - `evaluate_all_glyphs()` - Evaluate entire lexicon
 - `get_pruning_statistics()` - Generate summary statistics
 - `archive_pruned_glyphs()` - Save to archive for resurrection
 - `create_pruning_report()` - Generate detailed JSON report
 
 ### `ADVANCED_PRUNING_GUIDE.md`
+
 **Comprehensive documentation** with:
+
 - Detailed explanation of all 5 layers
 - Scoring formula breakdown
 - Usage examples
@@ -233,17 +248,22 @@ pruned_glyph = {
 - Quality assurance checklist
 
 ### `PRUNING_REPORT.json` (Generated)
+
 **Output report** with:
+
 - All glyph evaluations
 - Pruning decisions and confidence scores
 - Statistics by trace role and tone
 - Detailed scores for each glyph
 
 ### `pruning_archive/` (Generated)
+
 **Archive directory** storing:
+
 - Pruned glyphs with full metadata
 - Timestamped snapshots
 - Resurrection capability
+
 ##
 
 ## 💡 How It Differs from Basic Pruning
@@ -258,6 +278,7 @@ pruned_glyph = {
 | **Auditability** | Score only | Full trace reasoning + confidence |
 | **Resurrection** | Lost forever | Archived in capsules |
 | **Tone diversity** | Ignored | Actively enforced |
+
 ##
 
 ## 📊 Example Output
@@ -270,9 +291,6 @@ Total to prune: 87 (24.4%)
 Total to keep: 269 (75.6%)
 Average confidence: 0.782
 ```
-
-
-
 
 ### Sample Decision
 
@@ -290,8 +308,6 @@ ID 145: "Ambiguous Echo"
     Activation: 0.00 (never used)
     Combined: 0.12 ← BELOW THRESHOLD (0.25)
 ```
-
-
 
 ##
 
@@ -315,9 +331,6 @@ kept = [c for c in candidates if not c.should_prune]
 print(f"Expansion: {85264} → {len(kept)} survivors")
 ```
 
-
-
-
 ### With Real Usage Data
 
 ```python
@@ -333,8 +346,6 @@ pruning_engine = AdvancedPruningEngine(
 candidates = pruning_engine.evaluate_all_glyphs()
 ```
 
-
-
 ##
 
 ## ✅ Quality Assurance Checklist
@@ -348,6 +359,7 @@ Before running advanced pruning, ensure:
 - ✅ `activation_signals` or similar field present
 - ✅ `is_factorial` flag set for combination glyphs
 - ⏳ `match_history.json` updated periodically (optional but recommended)
+
 ##
 
 ## 🎯 Key Takeaways
@@ -371,6 +383,7 @@ Before running advanced pruning, ensure:
 5. **Reaction anchors are sacred** (10% weight)
    - Catalysts like Forgiveness are protected
    - System catalysts must remain
+
 ##
 
 ## 📈 Expected Results
@@ -384,17 +397,20 @@ When applied to factorial expansions:
 | 25,000 | Remove tone overreps | ~12,000 |
 | 12,000 | Remove inactive | ~6,000-8,000 |
 | | | **~6-8k high-quality** |
+
 ##
 
 ## 🔗 Next Steps
 
 1. **Test with real data**
+
    ```bash
    cd /workspaces/saoriverse-console
    python3 emotional_os/glyphs/advanced_pruning_engine.py
    ```
 
 2. **Review the report**
+
    ```bash
    cat emotional_os/glyphs/PRUNING_REPORT.json
    ```
@@ -411,6 +427,7 @@ When applied to factorial expansions:
    - Adjust weights based on results
    - Archive pruned glyphs
    - Resurrect if needed
+
 ##
 
 **Implementation Status:** ✅ **COMPLETE & TESTED**

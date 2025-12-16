@@ -173,11 +173,11 @@ go install github.com/rhysd/actionlint/cmd/actionlint
 
 [Checks](checks.md) | [Usage](usage.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)
 
-[formula]: https://formulae.brew.sh/formula/actionlint [homebrew]: https://brew.sh/ [releases]:
-https://github.com/rhysd/actionlint/releases [Go]: https://golang.org/ [asdf]: https://asdf-vm.com/
-[asdf-plugin]: https://github.com/crazy-matt/asdf-actionlint [chocolatey]:
-https://community.chocolatey.org/packages/actionlint [scoop]:
-https://scoop.sh/#/apps?q=actionlint&s=0&d=1&o=true [winget]:
-https://github.com/microsoft/winget-pkgs/tree/master/manifests/r/rhysd/actionlint [aur]:
-https://aur.archlinux.org/packages/actionlint [nixpkgs]:
-https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/analysis/actionlint/default.nix
+[formula]: <https://formulae.brew.sh/formula/actionlint> [homebrew]: <https://brew.sh/> [releases]:
+<https://github.com/rhysd/actionlint/releases> [Go]: <https://golang.org/> [asdf]: <https://asdf-vm.com/>
+[asdf-plugin]: <https://github.com/crazy-matt/asdf-actionlint> [chocolatey]:
+<https://community.chocolatey.org/packages/actionlint> [scoop]:
+<https://scoop.sh/#/apps?q=actionlint&s=0&d=1&o=true> [winget]:
+<https://github.com/microsoft/winget-pkgs/tree/master/manifests/r/rhysd/actionlint> [aur]:
+<https://aur.archlinux.org/packages/actionlint> [nixpkgs]:
+<https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/analysis/actionlint/default.nix>

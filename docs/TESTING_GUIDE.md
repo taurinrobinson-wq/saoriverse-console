@@ -387,10 +387,13 @@ pytest tests/ --cov=src.response_generator
 
    ```python
    # Good:
+
 def test_parser_extracts_emotional_signal_from_text():
 
-   # Bad:
+# Bad
+
 def test_parse():
+
    ```
 
 3. **Arrange-Act-Assert pattern**
@@ -411,7 +414,9 @@ assert result == expected
 
    ```python
    # Instead of repeating in every test:
+
 @pytest.fixture def sample_data(): return {"key": "value"}
+
    ```
 
 5. **Test both happy path and errors**

@@ -400,6 +400,7 @@ Inbound Rules (Allow):
 **DigitalOcean**: Simple, $6/month, rock solid ✨
 
 ## **Print this card | Keep it safe | Refer to it often**
+
 *Last Updated: Now*
 *Deployment Status: Ready to Launch 🚀*
 *Velinor Status: Waiting for your command ⚔️*

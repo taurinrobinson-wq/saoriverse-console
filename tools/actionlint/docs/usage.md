@@ -479,22 +479,22 @@ extension][trunk-vscode].
 
 [Checks](checks.md) | [Installation](install.md) | [Configuration](config.md) | [Go API](api.md) | [References](reference.md)
 
-[reviewdog-actionlint]: https://github.com/reviewdog/action-actionlint [reviewdog]:
-https://github.com/reviewdog/reviewdog [cmd-manual]: https://rhysd.github.io/actionlint/usage.html
-[re2]: https://golang.org/s/re2syntax [go-template]: https://pkg.go.dev/text/template [jsonl]:
-https://jsonlines.org/ [ga-annotate-error]:
-https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-error-message
-[sarif]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html [problem-matchers]:
-https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md [super-linter]:
-https://github.com/github/super-linter [super-linter-env-var]:
-https://github.com/super-linter/super-linter#environment-variables [actionlint-matcher]:
-https://raw.githubusercontent.com/rhysd/actionlint/main/.github/actionlint-matcher.json
+[reviewdog-actionlint]: <https://github.com/reviewdog/action-actionlint> [reviewdog]:
+<https://github.com/reviewdog/reviewdog> [cmd-manual]: <https://rhysd.github.io/actionlint/usage.html>
+[re2]: <https://golang.org/s/re2syntax> [go-template]: <https://pkg.go.dev/text/template> [jsonl]:
+<https://jsonlines.org/> [ga-annotate-error]:
+<https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#setting-an-error-message>
+[sarif]: <https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html> [problem-matchers]:
+<https://github.com/actions/toolkit/blob/master/docs/problem-matchers.md> [super-linter]:
+<https://github.com/github/super-linter> [super-linter-env-var]:
+<https://github.com/super-linter/super-linter#environment-variables> [actionlint-matcher]:
+<https://raw.githubusercontent.com/rhysd/actionlint/main/.github/actionlint-matcher.json>
 [preinstall-ubuntu]:
-https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md
-[pre-commit]: https://pre-commit.com [go-install]: https://go.dev/doc/install [docker]:
-https://www.docker.com/ [docker-image]: https://hub.docker.com/r/rhysd/actionlint [vsc-extension]:
-https://marketplace.visualstudio.com/items?itemName=arahata.linter-actionlint [vscode]:
-https://code.visualstudio.com/ [nova-extension]:
-https://extensions.panic.com/extensions/org.netwrk/org.netwrk.actionlint/ [nova]: https://nova.app
-[trunk-io]: https://docs.trunk.io/docs [trunk-docs]: https://docs.trunk.io/docs/check
-[trunk-vscode]: https://marketplace.visualstudio.com/items?itemName=trunk.io
+<https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-README.md>
+[pre-commit]: <https://pre-commit.com> [go-install]: <https://go.dev/doc/install> [docker]:
+<https://www.docker.com/> [docker-image]: <https://hub.docker.com/r/rhysd/actionlint> [vsc-extension]:
+<https://marketplace.visualstudio.com/items?itemName=arahata.linter-actionlint> [vscode]:
+<https://code.visualstudio.com/> [nova-extension]:
+<https://extensions.panic.com/extensions/org.netwrk/org.netwrk.actionlint/> [nova]: <https://nova.app>
+[trunk-io]: <https://docs.trunk.io/docs> [trunk-docs]: <https://docs.trunk.io/docs/check>
+[trunk-vscode]: <https://marketplace.visualstudio.com/items?itemName=trunk.io>

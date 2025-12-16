@@ -274,6 +274,7 @@ Project Gutenberg API
 1. **Automated Bulk Learning** - No manual intervention needed 2. **Semantic Chunking** - Preserves
 context by respecting sentence boundaries 3. **Multi-Signal Extraction** - Captures 8 different
 emotional dimensions 4. **Dual Lexicon System** - Personal + shared learning 5. **Quality Scoring**
+
 - Tracks exchange quality for training value 6. **Metadata Tracking** - Records source, confidence,
 phrase_length for each entry
 

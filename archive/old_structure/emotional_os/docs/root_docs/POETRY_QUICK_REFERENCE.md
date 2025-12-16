@@ -27,9 +27,6 @@ python poetry_data_pipeline.py --status
 python poetry_data_pipeline.py --export poetry_export
 ```
 
-
-
-
 ## Use in Your Code
 
 **Always the same pattern:**
@@ -56,9 +53,6 @@ data = adapter.for_ritual_processing()      # ritual processing mode
 for name, text in data.items():
     my_processing_function(text)
 ```
-
-
-
 
 ## What Gets Cleaned
 
@@ -101,9 +95,6 @@ Documentation:
   /workspaces/saoriverse-console/POETRY_INTEGRATION_EXAMPLES.md
 ```
 
-
-
-
 ## Processing Modes
 
 ```python
@@ -121,9 +112,6 @@ adapter.for_glyph_generation()        # Returns: [(name, text), ...]
 adapter.for_ritual_processing()       # Returns: {name: text}
 ```
 
-
-
-
 All return clean, validated, non-fragmented poetry ready to use.
 
 ## Database Schema
@@ -135,6 +123,7 @@ SQLite database (`poetry_hub.db`) tracks:
 **processing_log table**: All operations (download, clean, validate) with timestamps
 
 **quality_metrics table**: Cleaning metrics for each collection
+
 - artifacts_removed
 - encoding_issues_fixed
 - fragmented_lines_fixed
@@ -164,6 +153,7 @@ SQLite database (`poetry_hub.db`) tracks:
 ## Performance
 
 **Expected times** (all 8 collections, single-threaded):
+
 - Download: 2-5 minutes
 - Clean: 1-2 minutes
 - Validate: <1 minute
@@ -198,11 +188,10 @@ for name, text in data.items():
     process(text)  # Guaranteed clean
 ```
 
-
-
 ##
 
 **Questions? See**:
+
 - `POETRY_DATA_INTEGRATION_GUIDE.md` - Complete guide
 - `POETRY_INTEGRATION_EXAMPLES.md` - Code examples
 - Docstrings in `poetry_data_hub.py` - API reference

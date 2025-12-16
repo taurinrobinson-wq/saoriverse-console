@@ -50,5 +50,5 @@ An empty array means no variable is allowed. The default value `null` disables t
 
 [Checks](checks.md) | [Installation](install.md) | [Usage](usage.md) | [Go API](api.md) | [References](reference.md)
 
-[Super-Linter]: https://github.com/github/super-linter [vars]:
-https://docs.github.com/en/actions/learn-github-actions/variables
+[Super-Linter]: <https://github.com/github/super-linter> [vars]:
+<https://docs.github.com/en/actions/learn-github-actions/variables>
