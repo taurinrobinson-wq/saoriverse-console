@@ -9,7 +9,9 @@ Status: Implementation Ready
 """
 
 # ============================================================================
+
 # WHAT WAS BUILT
+
 # ============================================================================
 
 ## 1. ProsodyPlanner Class
@@ -80,6 +82,7 @@ Enhanced main orchestrator with prosody support and non-blocking playback.
    - State callbacks for real-time UI updates
 
 **Architecture**:
+
 ```
 Record Audio (AudioRecorder)
     ↓
@@ -98,16 +101,22 @@ Play Non-Blocking (sounddevice)
 Store Turn (ConversationTurn) → Loop or Stop
 ```
 
+
+
 ## 3. Docker Infrastructure
 **Files**: `Dockerfile.streamlit`, `docker-compose.local.yml`
 
 PortAudio support now included for audio recording:
+
 ```dockerfile
+
 # Audio dependencies
 portaudio19-dev  # PortAudio development headers
 libsndfile1      # Sound file I/O
 ffmpeg           # Audio format conversion
 ```
+
+
 
 ## 4. Documentation
 **Two comprehensive guides created**:
@@ -128,19 +137,25 @@ ffmpeg           # Audio format conversion
 - Current status & next priorities
 
 # ============================================================================
+
 # TECHNICAL IMPROVEMENTS EXPLAINED
+
 # ============================================================================
 
 ## Non-Blocking Playback (Why It Matters)
 
 **Before** (Blocking):
+
 ```
 Chunk 1: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 Chunk 2: Synthesize (1.0s) → Play (2.0s) [TOTAL: 3.0s idle]
 Total for 2 chunks: 6.0 seconds
 ```
 
+
+
 **After** (Non-Blocking with 0.9x overlap):
+
 ```
 Chunk 1: Synthesize (1.0s)
          ├─ Play (1.8s, non-blocking) ─────────────────→
@@ -150,6 +165,8 @@ Chunk 2:                    Synthesize (1.0s)
                            └─ Sleep (1.8s)
 Total for 2 chunks: 3.8 seconds (37% faster!)
 ```
+
+
 
 ## Prosody Planning (Why It's Essential)
 
@@ -169,6 +186,7 @@ Total for 2 chunks: 3.8 seconds (37% faster!)
 FirstPerson's glyph signals (voltage, tone, certainty) now directly influence speech:
 
 **Example: High-Voltage Positive Response**
+
 ```python
 glyph_intent = {
     "voltage": "high",         # Aroused, energetic
@@ -179,13 +197,17 @@ glyph_intent = {
 }
 
 # ProsodyPlanner produces:
+
 # <prosody rate='fast' pitch='high' volume='loud'>Let's do this!</prosody>
 
-# Result: Fast speech, high pitch, loud volume → 
+# Result: Fast speech, high pitch, loud volume →
 #         User hears: excited, energetic, confident FirstPerson
 ```
 
+
+
 **Example: Low-Voltage Negative Response**
+
 ```python
 glyph_intent = {
     "voltage": "low",          # Subdued, introspective
@@ -196,17 +218,25 @@ glyph_intent = {
 }
 
 # ProsodyPlanner produces:
+
 # <prosody rate='slow' pitch='low' volume='soft'>
-# I'm<break time="250ms"/> not sure<break time="250ms"/> 
+
+# I'm<break time="250ms"/> not sure<break time="250ms"/>
+
 # about this...
+
 # </prosody>
 
 # Result: Slow speech, low pitch, soft volume, pauses →
 #         User hears: concerned, uncertain, introspective FirstPerson
 ```
 
+
+
 # ============================================================================
+
 # FILES CHANGED
+
 # ============================================================================
 
 **Created**:
@@ -237,7 +267,9 @@ glyph_intent = {
 **Deleted**: None
 
 # ============================================================================
+
 # GIT COMMITS
+
 # ============================================================================
 
 1. **dadea67** - "fix: correct NRC lexicon import paths and resolve sys variable shadowing in nlp_init.py"
@@ -255,7 +287,9 @@ glyph_intent = {
    - New: `AUDIO_CONVERSATION_IMPLEMENTATION_CHECKLIST.md`
 
 # ============================================================================
+
 # WHAT'S READY NOW
+
 # ============================================================================
 
 ✅ **Production-Ready Components**:
@@ -284,7 +318,9 @@ glyph_intent = {
 5. Optimize latency/performance
 
 # ============================================================================
+
 # KEY INSIGHTS
+
 # ============================================================================
 
 **1. Non-Blocking Playback is Game-Changing**
@@ -313,7 +349,9 @@ glyph_intent = {
    - Pause/Resume/Stop give users full control
 
 # ============================================================================
+
 # REMAINING WORK (Priority Order)
+
 # ============================================================================
 
 **PHASE 3 (UI Integration)** - 2-3 hours
@@ -339,7 +377,9 @@ glyph_intent = {
 **Total Estimated Remaining**: 10-16 hours for full production-ready system
 
 # ============================================================================
+
 # SUCCESS CRITERIA
+
 # ============================================================================
 
 When complete, the system should:
@@ -358,7 +398,9 @@ When complete, the system should:
 ✓ Sound natural, emotionally expressive, and responsive to user input
 
 # ============================================================================
+
 # CONCLUSION
+
 # ============================================================================
 
 All foundational infrastructure for prosody-aware audio conversation is now in place.

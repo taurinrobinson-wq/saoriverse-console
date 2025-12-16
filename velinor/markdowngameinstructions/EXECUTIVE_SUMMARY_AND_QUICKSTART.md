@@ -3,8 +3,7 @@
 ## What Is Velinor?
 
 **Velinor: Remnants of the Tone** is a narrative-driven, choice-based RPG where every decision shapes not just the story, but the emotional evolution of the main character. The game is fundamentally about relationship-building, moral ambiguity, and the cost of friendship and sacrifice.
-
----
+##
 
 ## Core Concept (30-Second Pitch)
 
@@ -13,8 +12,7 @@ In the fractured ruins of a futuristic city called Velhara, the player awakens w
 The player must navigate a living community of NPCs, each with their own memories, pain, and perspectives. Every choice invisibly shapes the player's emotional profile—Trust, Observation, Narrative Presence, and Empathy (TONE)—which determines which NPCs open up, which glyphs (emotional fragments) become accessible, and ultimately, which of six fundamentally different endings become available.
 
 **There is no "good" ending. Every path honors something while destroying something else. The game is about the weight of choice, not the thrill of winning.**
-
----
+##
 
 ## Three Core Pillars
 
@@ -53,8 +51,7 @@ The player must navigate a living community of NPCs, each with their own memorie
 - **Octoglyph** (8 glyphs): Eight emotional stages of transcendence (Infrasensory Oblivion → Hopeful Transmission) → Unified into Void Octagon
 
 **Why It Matters**: Glyphs aren't just collectibles—they're mnemonic mirrors. Collecting a "Held Ache" glyph means the player has witnessed emotional pain. It unlocks dialogue options, alters how NPCs respond, and determines which ending branches become available.
-
----
+##
 
 ## The Marketplace: Heart of the Game
 
@@ -70,8 +67,7 @@ The marketplace is where 95% of early-game interaction happens. Eight distinct N
 | **Mariel** | Elder, community bridge | Trust + Empathy | Shares lore with balanced hearts |
 | **Korrin** | Gossip, informant | Observation | Reveals rumors to those who watch |
 | **Kaelen** | Suspected thief, moral test | Observation counter | Steals from trusting but unobservant players |
-
----
+##
 
 ## The Kaelen-Veynar Moral Crossroads
 
@@ -88,8 +84,7 @@ The marketplace is where 95% of early-game interaction happens. Eight distinct N
 4. **Player choice**: Return items (restore community trust) or keep them (personal gain, fracture trust)
 
 **Why It Matters**: This is a microcosm of the final Saori-Velinor choice. Do you choose justice, loyalty, or survival?
-
----
+##
 
 ## The Final Arc: Saori & Velinor
 
@@ -132,8 +127,7 @@ The player must choose between six fundamentally different endings:
 - Destroy → Saori is permanently broken
 - Release → Velinor is gone forever
 - All paths honor sacrifice while demanding loss.
-
----
+##
 
 ## The Journal System
 
@@ -148,8 +142,7 @@ The player must choose between six fundamentally different endings:
 - Page turn sound (velinor_pageturn.mp3) triggers on curl click
 
 **Narrative Purpose**: Since all players have fragmented memory, the journal becomes a shared story—a way for the player to externalize memory and recognize patterns in NPC behavior.
-
----
+##
 
 ## Game Statistics
 
@@ -164,8 +157,7 @@ The player must choose between six fundamentally different endings:
 | **NPC Sphere Connections** | 20+ |
 | **Dialogue Variations per NPC** | 15-30 |
 | **Optional Secret Encounters** | 5+ |
-
----
+##
 
 ## File Structure (markdowngameinstructions folder)
 
@@ -186,7 +178,8 @@ markdowngameinstructions/
 └── ... (other existing files)
 ```
 
----
+
+##
 
 ## Quick-Start Implementation Order
 
@@ -231,8 +224,7 @@ markdowngameinstructions/
 1. Audio design and ambient soundscape
 2. Full playtesting across all paths
 3. Balance and refinement
-
----
+##
 
 ## Design Philosophy Summary
 
@@ -247,8 +239,7 @@ markdowngameinstructions/
 4. **Ripple effects over isolation**: A single choice with one NPC cascades across their sphere, reshaping the entire community.
 
 5. **Memory as theme**: Every mechanic (glyphs, journal, NPC fragmentation, Saori's desperation) reinforces the game's central theme: **memory, loss, and how we choose to honor what we've lost.**
-
----
+##
 
 ## Next Action Items
 
@@ -272,8 +263,7 @@ markdowngameinstructions/
 - [ ] Allocate resources to each phase
 - [ ] Set up weekly standups
 - [ ] Create branching dev plan (parallel work on NPCs + systems)
-
----
+##
 
 ## Final Thought
 

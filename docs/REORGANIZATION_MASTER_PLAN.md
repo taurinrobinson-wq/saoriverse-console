@@ -4,8 +4,7 @@
 **Goal**: Create a clean, modular structure that enables efficient testing, clear imports, and seamless Streamlit deployment
 **Effort**: ~6-8 hours of reorganization
 **Expected Outcome**: Zero import errors, all tests passing, single clear Streamlit entry point
-
----
+##
 
 ## CURRENT STATE ANALYSIS
 
@@ -42,8 +41,7 @@
    - Never integrated into entry points
    - Tests exist but scattered
    - Result: Voice features exist but unreachable
-
----
+##
 
 ## TARGET STATE
 
@@ -148,33 +146,45 @@ saoriverse-console/
         └── tests.yml               ← Test workflow
 ```
 
----
+
+##
 
 ## PHASE 1: ANALYSIS & PREPARATION (30 min)
 
 ### 1.1 Audit Current State
+
 ```bash
+
 # Count tests
 find . -name "test_*.py" -type f | wc -l
+
 # Output: Test count by location
 
 # Check imports
 grep -r "from emotional_os" --include="*.py" | head -20
+
 # Output: What's importing what
 
 # Check entry points
 grep -l "if __name__ == '__main__'" *.py
+
 # Output: Multiple entry points to consolidate
 ```
 
+
+
 ### 1.2 Create Backup
+
 ```bash
+
 # Create branch for reorganization
 git checkout -b refactor/reorganization-master
 
 # Tag current state
 git tag pre-reorganization
 ```
+
+
 
 ### 1.3 Document Dependencies
 Create a dependency map showing:
@@ -183,13 +193,14 @@ Create a dependency map showing:
 - Which modules are used by Streamlit
 - Which modules are voice-specific
 - Which modules are privacy-specific
-
----
+##
 
 ## PHASE 2: CREATE TARGET STRUCTURE (1-2 hours)
 
 ### 2.1 Create New Source Structure
+
 ```bash
+
 # Create src/ with flat structure
 mkdir -p src/
 touch src/__init__.py
@@ -208,8 +219,12 @@ touch src/privacy_layer.py         # Privacy/encryption
 touch src/learning.py              # Learning systems
 ```
 
+
+
 ### 2.2 Create Test Structure
+
 ```bash
+
 # Create tests/ with organization
 mkdir -p tests/unit/
 mkdir -p tests/integration/
@@ -221,8 +236,12 @@ touch tests/conftest.py             # Pytest configuration
 touch tests/fixtures/sample_data.py # Test fixtures
 ```
 
+
+
 ### 2.3 Organize Data
+
 ```bash
+
 # Consolidate data files
 mkdir -p data/lexicons/
 mkdir -p data/models/
@@ -233,8 +252,12 @@ mv glyphs.db data/
 mv lexicons/* data/lexicons/ 2>/dev/null || true
 ```
 
+
+
 ### 2.4 Organize Documentation
+
 ```bash
+
 # Archive old docs
 mkdir -p docs/archive/
 mv docs/PHASE_13_*.md docs/archive/
@@ -247,7 +270,8 @@ touch docs/TESTING_GUIDE.md
 touch docs/API_REFERENCE.md
 ```
 
----
+
+##
 
 ## PHASE 3: CONSOLIDATE SOURCE CODE (2-3 hours)
 
@@ -256,6 +280,7 @@ touch docs/API_REFERENCE.md
 **Goal**: Find where each piece of core logic actually lives
 
 ```bash
+
 # Find all emotional_os related files
 find . -type f -name "*.py" -exec grep -l "emotional_os" {} \; | grep -v __pycache__ | sort
 
@@ -265,6 +290,8 @@ find . -type f -name "*response*" -o -name "*generator*" | grep -v __pycache__
 # Find all voice code
 find . -type f -path "*spoken_interface*" -name "*.py" | sort
 ```
+
+
 
 ### 3.2 Consolidate into src/
 
@@ -333,6 +360,7 @@ For each major component:
 ### 3.3 Create Clean Imports
 
 **src/__init__.py**
+
 ```python
 """
 SaoriVerse Console - Emotional OS Core
@@ -362,16 +390,20 @@ __all__ = [
 ]
 ```
 
----
+
+##
 
 ## PHASE 4: CONSOLIDATE TESTS (1-2 hours)
 
 ### 4.1 Move Root Tests
 
 ```bash
+
 # Move all test_*.py from root to tests/
 mv test_*.py tests/
 ```
+
+
 
 ### 4.2 Organize by Module
 
@@ -392,9 +424,12 @@ tests/unit/
 └── test_multimodal_fusion.py
 ```
 
+
+
 ### 4.3 Create conftest.py
 
 ```python
+
 # tests/conftest.py
 import pytest
 import sys
@@ -423,10 +458,13 @@ def sample_signal():
     }
 ```
 
+
+
 ### 4.4 Update pytest.ini
 
 ```ini
 [pytest]
+
 # tests/pytest.ini
 testpaths = tests
 python_files = test_*.py
@@ -435,13 +473,15 @@ python_functions = test_*
 addopts = -v --tb=short
 ```
 
----
+
+##
 
 ## PHASE 5: CREATE STREAMLIT ENTRY POINT (30 min)
 
 ### 5.1 Create Single app.py
 
 **app.py** (at root)
+
 ```python
 """
 SaoriVerse Console - FirstPerson
@@ -476,26 +516,26 @@ def init_session():
 def main():
     """Main Streamlit app."""
     init_session()
-    
+
     st.title("🧠 FirstPerson")
     st.markdown("A private space for emotional processing and growth")
-    
+
     # Text input
     with st.sidebar:
         st.header("💬 Text Chat")
         user_input = st.text_input("What's on your mind?")
-        
+
         if user_input:
             # Parse emotional signal
             signal = st.session_state.emotional_os.parse_input(user_input)
-            
+
             # Generate response
             response = st.session_state.response_gen.generate(user_input)
-            
+
             # Display
             st.write("**Response:**")
             st.write(response)
-    
+
     # Voice interface (optional)
     if st.sidebar.checkbox("🎤 Enable Voice"):
         st.info("Voice interface available")
@@ -505,22 +545,27 @@ if __name__ == "__main__":
     main()
 ```
 
+
+
 ### 5.2 Delete Competing Entry Points
 
 ```bash
+
 # Remove old entry points (after backup)
 rm main_v2.py
 rm main_v2_simple.py
 rm start.py
 ```
 
----
+
+##
 
 ## PHASE 6: ORGANIZE SCRIPTS (30 min)
 
 ### 6.1 Create scripts/ README
 
 ```markdown
+
 # Scripts Directory
 
 Organization:
@@ -535,9 +580,12 @@ python -m setup.init_db
 python -m debug.inspect_glyphs
 ```
 
+
+
 ### 6.2 Reorganize scripts/
 
 ```bash
+
 # Create subdirectories
 mkdir -p scripts/data/
 mkdir -p scripts/setup/
@@ -553,16 +601,19 @@ touch scripts/debug/__init__.py
 mv scripts/download_nrc_lexicon.py scripts/data/
 mv scripts/init_test_db.py scripts/setup/
 mv scripts/inspect_glyphs.py scripts/debug/
+
 # ... etc
 ```
 
----
+
+##
 
 ## PHASE 7: VERIFY & TEST (1-2 hours)
 
 ### 7.1 Test Imports
 
 Create `tools/import_checker.py`:
+
 ```python
 """Verify all imports work correctly."""
 import sys
@@ -584,14 +635,20 @@ if __name__ == "__main__":
     sys.exit(0 if success else 1)
 ```
 
+
+
 Run it:
+
 ```bash
 python tools/import_checker.py
 ```
 
+
+
 ### 7.2 Run Unit Tests
 
 ```bash
+
 # Run specific test module
 pytest tests/unit/test_emotional_os.py -v
 
@@ -602,9 +659,12 @@ pytest tests/unit/ -v
 pytest tests/ --cov=src --cov-report=html
 ```
 
+
+
 ### 7.3 Run Integration Tests
 
 ```bash
+
 # E2E test
 pytest tests/integration/test_full_e2e.py -v
 
@@ -612,23 +672,29 @@ pytest tests/integration/test_full_e2e.py -v
 pytest tests/integration/ -v
 ```
 
+
+
 ### 7.4 Launch Streamlit
 
 ```bash
+
 # Should work with single entry point
 streamlit run app.py
 
 # Verify in browser
+
 # http://localhost:8501
 ```
 
----
+
+##
 
 ## PHASE 8: CLEANUP & COMMIT (30 min)
 
 ### 8.1 Archive Old Files
 
 ```bash
+
 # Create archive directory
 mkdir -p archive/old_structure/
 
@@ -639,12 +705,16 @@ mv local_inference archive/old_structure/
 
 # Move old documentation
 mv *.md archive/old_docs/ 2>/dev/null || true
+
 # Keep: README.md, CONTRIBUTING.md, docs/ directory
 ```
+
+
 
 ### 8.2 Update Root Files
 
 **requirements.txt** - Clean list of all dependencies:
+
 ```
 streamlit>=1.28.0
 faster-whisper>=0.10.0
@@ -652,10 +722,14 @@ librosa>=0.10.0
 TTS>=0.21.0
 pydantic>=2.0
 python-dotenv>=1.0
+
 # ... etc
 ```
 
+
+
 **.gitignore** - Ensure it ignores build artifacts:
+
 ```
 __pycache__/
 *.pyc
@@ -670,11 +744,15 @@ dist/
 *.egg-info/
 ```
 
+
+
 ### 8.3 Verify No Broken Imports
 
 ```bash
 python -c "import src; print('✅ Core module imports successfully')"
 ```
+
+
 
 ### 8.4 Commit Reorganization
 
@@ -694,7 +772,8 @@ git commit -m "refactor: Complete codebase reorganization
 git push origin refactor/reorganization-master
 ```
 
----
+
+##
 
 ## PHASE 9: DOCUMENTATION UPDATE (30 min)
 
@@ -727,8 +806,7 @@ Add:
 - Quick start (one command to run: `streamlit run app.py`)
 - Project structure overview
 - Link to docs/
-
----
+##
 
 ## FINAL CHECKLIST
 
@@ -764,14 +842,14 @@ Add:
 - [ ] API_REFERENCE.md written
 - [ ] README.md updated
 - [ ] Old docs archived but accessible
-
----
+##
 
 ## ROLLBACK PLAN
 
 If something breaks during reorganization:
 
 ```bash
+
 # Revert to backup
 git checkout pre-reorganization
 
@@ -780,7 +858,8 @@ git reset --hard origin/main
 git branch -D refactor/reorganization-master
 ```
 
----
+
+##
 
 ## ESTIMATED TIMELINE
 
@@ -796,8 +875,7 @@ git branch -D refactor/reorganization-master
 | 8 | Cleanup & Commit | 30 min | Pending |
 | 9 | Documentation | 30 min | Pending |
 | **Total** | | **6-8 hrs** | |
-
----
+##
 
 ## SUCCESS METRICS
 
@@ -813,8 +891,7 @@ After reorganization, you should be able to:
 8. ✅ Deploy to cloud with single command
 9. ✅ No "cleanup" runs needed anymore
 10. ✅ Root directory has < 20 files (app.py, requirements.txt, docs/, src/, tests/, etc.)
-
----
+##
 
 ## NEXT STEPS
 
@@ -824,8 +901,7 @@ After reorganization, you should be able to:
 4. **Test at each phase** - Verify imports and tests work
 5. **Commit frequently** - Don't lose work if something breaks
 6. **Update CI/CD** - Ensure GitHub Actions uses new structure
-
----
+##
 
 ## QUESTIONS TO ANSWER BEFORE STARTING
 

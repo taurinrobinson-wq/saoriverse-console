@@ -1,10 +1,9 @@
 # FirstPerson Orchestrator Implementation - December 4, 2025
 
-**Status:** ✅ COMPLETE  
-**Commit:** ff5926a  
+**Status:** ✅ COMPLETE
+**Commit:** ff5926a
 **Branch:** main
-
----
+##
 
 ## What Was Built
 
@@ -30,12 +29,13 @@ User Input → Signal Parser → Glyph Selection → FirstPerson Orchestrator �
                                           - Emotional tone
                                           - Response depth
                                           - Theme calibration
-                                          
+
                                           But response is generated fresh
                                           specific to THIS input
 ```
 
----
+
+##
 
 ## Core Components
 
@@ -44,13 +44,17 @@ Analyzes emotional tone, intensity, and valence of user input.
 
 ```python
 affect = parser.analyze_affect("I'm grieving the loss of my job")
+
 # Returns: {
 #   "valence": -0.6 (negative)
 #   "intensity": 0.8 (high emotional arousal)
 #   "tone": "heavy" (reflective but intense)
 #   "arousal": 0.8
+
 # }
 ```
+
+
 
 **What it detects:**
 - **Valence:** emotional direction (positive/negative)
@@ -77,8 +81,7 @@ Orchestrates conversation turns and generates glyph-informed responses.
    - Opens by acknowledging what they said (specific to input)
    - Moves through the emotional space (calibrated by glyph)
    - Closes with agency/permission (consistent with tone)
-
----
+##
 
 ## Response Generation Process
 
@@ -98,14 +101,17 @@ Orchestrates conversation turns and generates glyph-informed responses.
 - Implied tone: reflective, witness-like, present
 
 **Step 4: Response Composition**
+
 ```
 opening = "I hear the weight of grief."
 middle = "What's underneath? What do you need?"  (depth="deep" because intensity > 0.7)
 closing = "There's no rush. Move at your own pace."  (theme="grief" specific)
 
-FINAL: "I hear the weight of grief. What's underneath? What do you need? 
+FINAL: "I hear the weight of grief. What's underneath? What do you need?
         There's no rush. Move at your own pace."
 ```
+
+
 
 **Why this works:**
 - ✅ Specific to their input (acknowledges job loss + grief)
@@ -113,28 +119,32 @@ FINAL: "I hear the weight of grief. What's underneath? What do you need?
 - ✅ Calibrated by glyph (tone matches "Recursive Ache")
 - ✅ Respects emotional intensity (goes deep because intensity is high)
 - ✅ Different every time (even same input gets variations)
-
----
+##
 
 ## Integration Points
 
 ### Session Initialization
 `session_manager.py` initializes the orchestrator:
+
 ```python
 orchestrator = create_orchestrator(user_id, conversation_id)
 orchestrator.initialize_session()
 st.session_state["firstperson_orchestrator"] = orchestrator
 ```
 
+
+
 ### Response Generation
 `response_handler.py` uses it in `_build_conversational_response()`:
+
 ```python
 fp_orch = st.session_state.get("firstperson_orchestrator")
 if fp_orch and best_glyph:
     response = fp_orch.generate_response_with_glyph(user_input, best_glyph)
 ```
 
----
+
+##
 
 ## What This Solves
 
@@ -150,8 +160,7 @@ if fp_orch and best_glyph:
 - Same input can get different responses ✓
 - Response is grounded in what the user actually said ✓
 - Glyph informs tone/depth/calibration without being visible ✓
-
----
+##
 
 ## Technical Details
 
@@ -174,8 +183,7 @@ Opening acknowledges emotional direction:
 - `valence < -0.5` → "I hear the weight..."
 - `valence > 0.5` → "That's something to feel..."
 - `-0.5 to 0.5` → "You're naming something real..."
-
----
+##
 
 ## Why This Matters
 
@@ -186,8 +194,7 @@ This implementation restores your **original vision** for the glyph system:
 3. **Emotionally Grounded:** Response intensity/tone matches user's actual state
 4. **Context-Aware:** Responses reference what the user actually said
 5. **Non-Repetitive:** Same input can generate different responses naturally
-
----
+##
 
 ## Next Steps
 
@@ -201,8 +208,7 @@ This implementation restores your **original vision** for the glyph system:
 - Implement perspective-taking (reflect other-side views)
 - Add micro-choice offering (agency scaffolds)
 - Integrate repair module (handle misattunements)
-
----
+##
 
 ## Files Modified
 
@@ -210,8 +216,7 @@ This implementation restores your **original vision** for the glyph system:
 2. **Created:** `src/emotional_os/deploy/core/__init__.py` (1 line)
 3. **Modified:** `src/emotional_os/deploy/modules/ui_components/response_handler.py`
    - Updated `_build_conversational_response()` to use `fp_orch.generate_response_with_glyph()`
-
----
+##
 
 ## Architecture Diagram
 
@@ -255,7 +260,8 @@ This implementation restores your **original vision** for the glyph system:
 └─────────────────────────────────────────────────────────────┘
 ```
 
----
+
+##
 
 **Status:** Ready for deployment and testing on Streamlit Cloud
 **Test:** `cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console && git log --oneline | head -1`

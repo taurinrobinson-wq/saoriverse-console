@@ -1,11 +1,11 @@
 # System Lexicon Analysis Report
+
 ## Reverse-Engineered from 7,096 Glyphs
 
-**Generated:** November 5, 2025  
-**Analysis Method:** Semantic extraction from glyph_lexicon_rows.json  
+**Generated:** November 5, 2025
+**Analysis Method:** Semantic extraction from glyph_lexicon_rows.json
 **Data Scope:** All 12 emotional gates, 7,096 glyphs, 22,799 activation signals
-
----
+##
 
 ## Executive Summary
 
@@ -23,8 +23,7 @@ This report documents a complete reverse-engineering of the SaoriVerse emotional
 2. **Activation Pattern Distribution**: Greek symbols (α,β,γ,δ) dominate physical/energetic layer; emotional keywords on manifestation layer
 3. **Vocabulary Stratification**: 4 layers detected (energetic symbols → emotional concepts → descriptive modifiers → narrative context)
 4. **Gate Specialization**: Clear thematic clusters with minimal overlap between territories
-
----
+##
 
 ## System Architecture
 
@@ -137,8 +136,7 @@ This report documents a complete reverse-engineering of the SaoriVerse emotional
 - **Activation Vocabulary**: transcend, divine, infinite, eternal, ultimate, enlighten
 - **Descriptive Modifiers**: peaceful, mastery, enlightenment, divine, cosmic
 - **Key Glyphs**: Transcendence (peaceful), Enlightenment (subtle), Ultimate Wisdom (quiet knowing)
-
----
+##
 
 ## Semantic Themes Analysis
 
@@ -203,8 +201,7 @@ This report documents a complete reverse-engineering of the SaoriVerse emotional
     - Distributed in: Gates 1, 12
     - Keywords: light, bright, illuminate, clarity, vision, radiant, shining
     - Activation Rate: 8% of system vocabulary
-
----
+##
 
 ## Activation Signal Analysis
 
@@ -250,8 +247,7 @@ Top descriptive words from glyph names:
 10. **shielding** (205 glyphs) - Protection, containment
 
 Other significant modifiers: tender, shield, awakening, joy, ache, fierce, stillness, signal, grounded, insight, grief, spiral, emergence, flowing, mourning, profound, celestial, quiet
-
----
+##
 
 ## Vocabulary Stratification Model
 
@@ -283,7 +279,8 @@ The system uses a 4-layer activation model:
 └─────────────────────────────────────────────────────────┘
 ```
 
----
+
+##
 
 ## Gate Distribution & Semantic Weight
 
@@ -308,8 +305,7 @@ The system uses a 4-layer activation model:
 **Balanced Territories** (Even theme distribution):
 - Gate 2 (Paradox): Duality dominant but complemented by transcendence
 - Gate 8 (Abundance): Three balanced themes (transcendence, birth, surrender)
-
----
+##
 
 ## Cross-Gate Semantic Bridges
 
@@ -332,37 +328,35 @@ The system uses a 4-layer activation model:
 - **Gate 1** → Gate 4 → Gate 9: Initiation → Foundation → Selfhood
 - Bridges: Awakening → Grounding → Authentic Self
 - Glyphs: Distributed (coherent thread)
-
----
+##
 
 ## Ritual Sequence Lexicon Alignment
 
 ### Inner Circle (Gates 4→5→6→7→8→9)
-**Lexical Theme**: From grounding through embodied creativity to authentic community  
-**Semantic Arc**: Foundation → Expression → Vitality → Depth → Devotion → Identity  
+**Lexical Theme**: From grounding through embodied creativity to authentic community
+**Semantic Arc**: Foundation → Expression → Vitality → Depth → Devotion → Identity
 **Core Vocabulary**: ground, voice, alive, mystery, sacred, self
 
 ### Shadow Work (Gates 7→8→9→10→11)
-**Lexical Theme**: Exploring hidden depths into surrendered consciousness  
-**Semantic Arc**: Mystery → Surrender → Self-discovery → Witnessing → Flow  
+**Lexical Theme**: Exploring hidden depths into surrendered consciousness
+**Semantic Arc**: Mystery → Surrender → Self-discovery → Witnessing → Flow
 **Core Vocabulary**: shadow, vulnerability, authentic, witness, rhythm
 
 ### Light Work (Gates 1→2→3→4→5→6)
-**Lexical Theme**: Awakening through paradox into embodied expression  
-**Semantic Arc**: Beginning → Balance → Transformation → Foundation → Voice → Vitality  
+**Lexical Theme**: Awakening through paradox into embodied expression
+**Semantic Arc**: Beginning → Balance → Transformation → Foundation → Voice → Vitality
 **Core Vocabulary**: awaken, paradox, transform, ground, speak, alive
 
 ### Ascending Ritual (Gates 1→12)
-**Lexical Theme**: Complete journey from initiation to transcendence  
-**Gate Progression**: Awakening → Paradox → Transformation → Grounding → Expression → Vitality → Mystery → Abundance → Community → Consciousness → Flow → Transcendence  
+**Lexical Theme**: Complete journey from initiation to transcendence
+**Gate Progression**: Awakening → Paradox → Transformation → Grounding → Expression → Vitality → Mystery → Abundance → Community → Consciousness → Flow → Transcendence
 **Vocabulary Accumulation**: Each gate adds semantic layers without losing prior context
 
 ### Grounding Ritual (Gates 12→1)
-**Lexical Theme**: Integration of transcendent experience into embodied awakening  
-**Reversal Pattern**: From ultimate completion back to fresh initiation  
+**Lexical Theme**: Integration of transcendent experience into embodied awakening
+**Reversal Pattern**: From ultimate completion back to fresh initiation
 **Integration Method**: Each gate's vocabulary feeds into simpler expressions below
-
----
+##
 
 ## Enhanced Keyword Recommendations
 
@@ -383,8 +377,7 @@ Based on frequency analysis and semantic gaps identified:
 - **Emotional Intensity Markers**: quiet, gentle, fierce, ecstatic (already present, could expand)
 - **Temporal Keywords**: eternal, moment, timing, rhythm (partially present)
 - **Relational Keywords**: within, through, beyond, between (already present subtly)
-
----
+##
 
 ## Integration Recommendations
 
@@ -408,8 +401,7 @@ Future enhancements could include:
 2. **Frequency-weighted activation**: Rare keywords trigger more precise responses
 3. **Contextual disambiguation**: "Love" in Gate 11 vs Gate 9 = different semantics
 4. **Emotional resonance tuning**: Adjust response intensity based on keyword presence
-
----
+##
 
 ## System Health Metrics
 
@@ -430,8 +422,7 @@ Future enhancements could include:
 - **Specificity**: High (rare keywords for precise activation)
 - **Flexibility**: High (vocabulary work at multiple levels)
 - **Scalability**: Excellent (can accommodate additional keywords at any level)
-
----
+##
 
 ## Conclusion
 
@@ -445,12 +436,12 @@ The SaoriVerse system is fundamentally sound in its semantic architecture. The 7
 The enhanced keyword additions (5,706 glyphs updated) complete semantic territories that were previously underspecified, particularly in transcendence pathways and specialized emotional dimensions.
 
 **Status**: ✅ **PRODUCTION-READY** with comprehensive lexical support for all emotional territories.
-
----
+##
 
 ## Appendix: Data Tables
 
 ### Activation Signal Frequency Distribution
+
 ```
 Top 40 Signals:
 δ (3125), γ (3103), β (2988), α (2918), vulnerability (1950),
@@ -461,7 +452,10 @@ ultimate (150), divine (150), ε (214), Ω (139),
 resonance (97), witness (222), spiral (120), and 20+ others
 ```
 
+
+
 ### Glyph Distribution Summary
+
 ```
 Gate Distribution:
 Gate 1:   494 glyphs | Gate 2:  600 glyphs | Gate 3: 1200 glyphs
@@ -478,7 +472,10 @@ New vocabulary additions: 14 core keywords
 Total unique signals: 123
 ```
 
+
+
 ### Semantic Theme Distribution
+
 ```
 Theme Prevalence:
 1. Creation/Birth      2957 glyphs (41.7%)
@@ -495,7 +492,8 @@ Theme Prevalence:
 12. Light/Illumination 479 glyphs (6.8%)
 ```
 
----
 
-**Report End**  
+##
+
+**Report End**
 *For system integration, see: lexicon_enhanced.json*

@@ -21,16 +21,22 @@ Enhanced response generation to use glyph **descriptions** (the wisdom/insight o
 ## Results
 
 **Before**: Generic response for ANY glyph/emotion
+
 ```
 "I hear you. What's the feeling underneath all that?"
 ```
 
+
+
 **After**: Personalized response unique to selected glyph
+
 ```
-"That's a real thing you're carrying. Even in what feels active or chaotic, 
-there's often a still place underneath. Quiet revelation. Truth that arrives 
+"That's a real thing you're carrying. Even in what feels active or chaotic,
+there's often a still place underneath. Quiet revelation. Truth that arrives
 without noise. What's the next small step for you?"
 ```
+
+
 
 ## Validation ✅
 - All responses now use glyph descriptions
@@ -57,9 +63,8 @@ without noise. What's the next small step for you?"
 - `IMPLEMENTATION_DETAILS.md` - Code-level details
 - `BEFORE_AFTER_RESPONSE_IMPROVEMENT.md` - Detailed examples
 - Test files: `FINAL_VALIDATION.py`, `validate_full_pipeline.py`, `test_craft_glyph_response.py`
-
----
+##
 
 **User's Challenge Addressed**: ✅
-"doesn't acknowledge any part of the user's message" 
+"doesn't acknowledge any part of the user's message"
 → NOW IT DOES - responses incorporate both glyph wisdom AND user context

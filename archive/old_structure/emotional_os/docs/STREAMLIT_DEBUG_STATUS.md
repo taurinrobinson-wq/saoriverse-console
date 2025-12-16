@@ -5,8 +5,8 @@
 2. **HTTP Unknown error**: Edge function connection problem
 
 ### Recent Fixes Deployed:
-✅ **Updated authentication** to use `st.secrets` instead of `config.py`  
-✅ **Added fallback processors** to handle missing dependencies  
+✅ **Updated authentication** to use `st.secrets` instead of `config.py`
+✅ **Added fallback processors** to handle missing dependencies
 ✅ **Improved error handling** for configuration issues
 
 ### What Should Happen Now:

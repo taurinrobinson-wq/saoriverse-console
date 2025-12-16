@@ -9,12 +9,15 @@ Your Next.js web version of Velinor is now ready for local development on your M
 The easiest way to start developing:
 
 ```bash
+
 # Navigate to your project
 cd "/Volumes/My Passport for Mac/saoriverse-console"
 
 # Run the dev server
 ./RUN_WEB_DEV.sh
 ```
+
+
 
 Or manually:
 
@@ -23,9 +26,10 @@ cd velinor-web
 npm run dev
 ```
 
-The dev server will start at **http://localhost:3000**
 
----
+
+The dev server will start at **http://localhost:3000**
+##
 
 ## 🛠️ What Was Installed
 
@@ -33,8 +37,7 @@ The dev server will start at **http://localhost:3000**
 - **npm 10.2.4** - Package manager
 - **Next.js 16.0.8** - React framework with Turbopack
 - **368 npm packages** - All dependencies for the web game
-
----
+##
 
 ## 📁 Project Structure
 
@@ -63,28 +66,28 @@ velinor-web/
 └── tailwind.config.ts
 ```
 
----
+
+##
 
 ## 🎮 Current State
 
 ### What's Ready
-✅ Next.js project structure  
-✅ TypeScript configuration  
-✅ Tailwind CSS for styling  
-✅ All graphics assets (backgrounds, NPCs)  
-✅ Zustand for state management (installed)  
+✅ Next.js project structure
+✅ TypeScript configuration
+✅ Tailwind CSS for styling
+✅ All graphics assets (backgrounds, NPCs)
+✅ Zustand for state management (installed)
 ✅ Axios for API calls (installed)
 
 ### What Needs Development
-⏳ Connect to FastAPI backend (`velinor_api.py`)  
-⏳ Wire game logic from Python orchestrator to React components  
-⏳ Implement GameScene component with choice UI  
-⏳ Build game session management  
-⏳ Integrate FirstPerson emotional analysis  
-⏳ Create NPC dialogue UI  
-⏳ Build save/load functionality  
-
----
+⏳ Connect to FastAPI backend (`velinor_api.py`)
+⏳ Wire game logic from Python orchestrator to React components
+⏳ Implement GameScene component with choice UI
+⏳ Build game session management
+⏳ Integrate FirstPerson emotional analysis
+⏳ Create NPC dialogue UI
+⏳ Build save/load functionality
+##
 
 ## 📝 Development Tips
 
@@ -100,6 +103,7 @@ The dev server automatically reloads when you save files—just edit and refresh
 ### Common Commands
 
 ```bash
+
 # Start dev server (3000)
 npm run dev
 
@@ -113,6 +117,8 @@ npm start
 npm run lint
 ```
 
+
+
 ### Tailwind CSS
 Styling uses Tailwind CSS v4. Add classes directly to JSX elements:
 
@@ -122,7 +128,8 @@ Styling uses Tailwind CSS v4. Add classes directly to JSX elements:
 </div>
 ```
 
----
+
+##
 
 ## 🔌 Connecting to the Python Backend
 
@@ -151,8 +158,7 @@ The FastAPI backend is in `velinor_api.py` (295 lines). To use it:
    - `POST /sessions/{session_id}/actions` - Process player action
    - `POST /sessions/{session_id}/save` - Save game
    - `GET /sessions/{session_id}/load` - Load game
-
----
+##
 
 ## 🎨 Design References
 
@@ -167,21 +173,26 @@ The FastAPI backend is in `velinor_api.py` (295 lines). To use it:
 - Backgrounds: 1200×675 (16:9 landscape)
 - NPC portraits: Variable (use `object-cover`)
 - Container max-width: 1200px
-
----
+##
 
 ## 🐛 Troubleshooting
 
 ### "Node version not found"
+
 ```bash
+
 # Make sure nvm is loaded
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 nvm use 20.11.0
 ```
 
+
+
 ### Port 3000 already in use
+
 ```bash
+
 # Kill the existing process
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
@@ -189,12 +200,13 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 PORT=3001 npm run dev
 ```
 
+
+
 ### TypeScript errors
 - Check `/src/components/` for component exports
 - Ensure all imports use `.tsx` for components
 - Run `npm run lint` to see all issues
-
----
+##
 
 ## 📚 Next Steps for Development
 
@@ -217,21 +229,24 @@ PORT=3001 npm run dev
 1. Create glyph collection UI
 2. Show emotional analysis from FirstPerson
 3. Build glyph visualization
-
----
+##
 
 ## 💡 Code Examples
 
 ### Display a background image
+
 ```tsx
-<img 
+<img
   src="/assets/backgrounds/city_market(16-9).png"
   alt="Market Ruins"
   className="w-full h-96 object-cover rounded-lg"
 />
 ```
 
+
+
 ### Show NPC portrait
+
 ```tsx
 <img
   src="/assets/npcs/keeper.png"
@@ -240,7 +255,10 @@ PORT=3001 npm run dev
 />
 ```
 
+
+
 ### Create choice buttons
+
 ```tsx
 {choices.map((choice) => (
   <button
@@ -253,7 +271,10 @@ PORT=3001 npm run dev
 ))}
 ```
 
+
+
 ### Call the backend
+
 ```typescript
 const makeAction = async (input: string) => {
   try {
@@ -269,7 +290,8 @@ const makeAction = async (input: string) => {
 };
 ```
 
----
+
+##
 
 ## 📞 Need Help?
 
@@ -278,8 +300,7 @@ Check these files for reference:
 - **Story structure**: `/Volumes/My Passport for Mac/saoriverse-console/velinor/stories/sample_story.json`
 - **Streamlit UI reference**: `/Volumes/My Passport for Mac/saoriverse-console/velinor_app.py`
 - **FastAPI endpoints**: `/Volumes/My Passport for Mac/saoriverse-console/velinor_api.py`
-
----
+##
 
 ## 🎯 You're all set!
 

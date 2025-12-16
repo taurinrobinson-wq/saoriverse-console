@@ -3,27 +3,31 @@
 A private, local-first emotional AI companion with integrated voice interface.
 
 **Status**: Post-reorganization (Phase 9) - Clean, modular architecture
-
----
+##
 
 ## Quick Start
 
 ### 1. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
+
+
 ### 2. Run the Application
+
 ```bash
 streamlit run app.py
 ```
+
+
 
 Opens automatically in your browser at `http://localhost:8501`
 
 ### 3. (Optional) Enable Voice
 Configure voice settings in the sidebar when running app.py
-
----
+##
 
 ## 📂 Project Organization
 
@@ -40,6 +44,7 @@ This project uses a clean folder structure to prevent clutter:
 ## 🚀 Quick Commands
 
 ```bash
+
 # Start Velinor web game (dev mode)
 ./scripts/RUN_WEB_DEV.sh
 
@@ -52,6 +57,8 @@ pip install -r requirements.txt
 # Run Streamlit app
 streamlit run app.py
 ```
+
+
 
 ## Documentation
 
@@ -67,8 +74,7 @@ streamlit run app.py
 | **FirstPerson AI** | `docs/FIRSTPERSON_*.md` |
 | **Deployment** | `docs/DEPLOYMENT_*.md` |
 | **Code structure** | `docs/ARCHITECTURE.md` |
-
----
+##
 
 ## Project Structure (Post-Reorganization)
 
@@ -86,13 +92,15 @@ saoriverse-console/
 └── archive/              # Old code/docs (for reference)
 ```
 
-**Key Change**: Flat `src/` directory with no deep nesting, single `app.py` entry point.
 
----
+
+**Key Change**: Flat `src/` directory with no deep nesting, single `app.py` entry point.
+##
 
 ## Running Tests
 
 ```bash
+
 # All tests
 pytest tests/
 
@@ -106,26 +114,35 @@ pytest tests/integration/
 pytest tests/ --cov=src
 ```
 
----
+
+##
 
 ## Architecture
 
 ### Text-to-Response Pipeline
+
 ```
 User Input → Signal Parser → Response Generator → Streamlit UI
 ```
 
+
+
 ### Voice Pipeline (Optional)
+
 ```
 Audio Input → STT → [same as above] → TTS → Audio Output
 ```
 
+
+
 ### Learning System
+
 ```
 User Feedback → Pattern Learning → Memory Storage → Improvement
 ```
 
----
+
+##
 
 ## Core Modules
 
@@ -140,8 +157,7 @@ User Feedback → Pattern Learning → Memory Storage → Improvement
 | `src/relational_memory.py` | Memory/persistence |
 
 See `docs/ARCHITECTURE.md` for complete module reference.
-
----
+##
 
 ## Development
 
@@ -156,8 +172,7 @@ See `docs/ARCHITECTURE.md` for complete module reference.
 2. Fix the code
 3. Verify test passes: `pytest tests/`
 4. Commit with test
-
----
+##
 
 ## Privacy & Local-First
 
@@ -165,14 +180,12 @@ See `docs/ARCHITECTURE.md` for complete module reference.
 - ✅ No data leaves your computer
 - ✅ No cloud dependencies
 - ✅ Optional: Connect to remote AI (disabled by default)
-
----
+##
 
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
----
+##
 
 ## Documentation Index
 
@@ -180,13 +193,14 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 - **[Testing Guide](./docs/TESTING_GUIDE.md)** - How to test
 - **[API Reference](./docs/API_REFERENCE.md)** - Public APIs for all modules
 - **[Full Index](./docs/INDEX.md)** - All documentation
-
----
+##
 
 ## Troubleshooting
 
 ### Port Already in Use
+
 ```bash
+
 # Kill the process using port 8501
 lsof -i :8501
 kill -9 <PID>
@@ -195,8 +209,12 @@ kill -9 <PID>
 streamlit run app.py
 ```
 
+
+
 ### Import Errors
+
 ```bash
+
 # Ensure you're in the project root
 cd saoriverse-console
 
@@ -207,8 +225,12 @@ python -c "import sys; print(sys.path)"
 pip install -r requirements.txt
 ```
 
+
+
 ### Tests Not Running
+
 ```bash
+
 # Check pytest is installed
 python -m pytest --version
 
@@ -216,7 +238,8 @@ python -m pytest --version
 pytest tests/ -v
 ```
 
----
+
+##
 
 ## Version History
 
@@ -226,7 +249,6 @@ pytest tests/ -v
 - 26 unit tests + 11 integration tests
 - Single app.py entry point
 - Ready for production
-
----
+##
 
 **Questions?** See `docs/INDEX.md` for the complete documentation index.

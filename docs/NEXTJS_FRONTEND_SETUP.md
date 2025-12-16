@@ -5,16 +5,21 @@
 ### 1. Create Next.js App
 
 ```bash
+
 # In the root of your repo or new folder
 npx create-next-app@latest velinor-web --typescript --tailwind --eslint
 cd velinor-web
 ```
+
+
 
 ### 2. Install Dependencies
 
 ```bash
 npm install axios zustand
 ```
+
+
 
 - **axios** - HTTP client for API calls
 - **zustand** - State management (lightweight alternative to Redux)
@@ -27,10 +32,15 @@ Create `.env.local`:
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
+
+
 For production (Railway):
+
 ```
 NEXT_PUBLIC_API_URL=https://your-railway-domain.up.railway.app
 ```
+
+
 
 ### 4. Project Structure
 
@@ -61,6 +71,8 @@ velinor-web/
     └── globals.css             # Global styles
 ```
 
+
+
 ### 5. Key Files to Create
 
 See the companion files:
@@ -72,34 +84,45 @@ See the companion files:
 ### 6. Run Locally
 
 ```bash
+
 # Terminal 1: Start FastAPI backend
 cd /path/to/saoriverse-console
 pip install fastapi uvicorn
 python velinor_api.py
+
 # Opens on http://localhost:8000
 
 # Terminal 2: Start Next.js frontend
 cd velinor-web
 npm run dev
+
 # Opens on http://localhost:3000
 ```
+
+
 
 ### 7. Deployment to Railway
 
 See `RAILWAY_DEPLOYMENT.md` for full setup.
 
 TL;DR:
+
 ```bash
+
 # Already have Procfile and railway.json
 git add .
 git commit -m "feat: Add Next.js frontend for Velinor"
 git push origin main
+
 # Railway auto-deploys
 ```
+
+
 
 ## API Contract
 
 ### Start Game
+
 ```
 POST /api/game/start
 {
@@ -111,7 +134,10 @@ POST /api/game/start
 }
 ```
 
+
+
 ### Take Action
+
 ```
 POST /api/game/{session_id}/action
 {
@@ -122,7 +148,10 @@ POST /api/game/{session_id}/action
 → { "session_id": "uuid", "state": { ...new state... } }
 ```
 
+
+
 ### Game State Structure
+
 ```typescript
 {
   passage_id: string           // Current passage ID
@@ -142,6 +171,8 @@ POST /api/game/{session_id}/action
 }
 ```
 
+
+
 ## Frontend Architecture
 
 ### Layers
@@ -152,6 +183,7 @@ POST /api/game/{session_id}/action
 5. **UI Controls** - Stats, menu buttons (bottom/sidebar)
 
 ### Positioning Example
+
 ```jsx
 <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%' }}>
   {/* 16:9 aspect ratio container */}
@@ -163,7 +195,7 @@ POST /api/game/{session_id}/action
     height: '100%',
     objectFit: 'cover'
   }} />
-  
+
   {/* Overlays */}
   <img src="/overlays/dust.png" style={{
     position: 'absolute',
@@ -173,7 +205,7 @@ POST /api/game/{session_id}/action
     height: '100%',
     opacity: 0.3
   }} />
-  
+
   {/* Text */}
   <div style={{
     position: 'absolute',
@@ -187,7 +219,7 @@ POST /api/game/{session_id}/action
   }}>
     {narration}
   </div>
-  
+
   {/* Buttons */}
   <button style={{
     position: 'absolute',
@@ -206,6 +238,8 @@ POST /api/game/{session_id}/action
 </div>
 ```
 
+
+
 ## Customization
 
 ### Change Colors/Fonts
@@ -221,8 +255,7 @@ Modify `ChoiceButtons.tsx` - use `style={{ bottom: '...', left: '...' }}` to pos
 
 ### Add Sound/Music
 Use HTML5 `<audio>` or `Howler.js` library.
-
----
+##
 
 **Next Steps:**
 1. Run `npm install` and `npm run dev`

@@ -1,4 +1,5 @@
 ```markdown
+
 # 💬 AffectIQ – MVP Spec
 
 ### 🎯 Target Users

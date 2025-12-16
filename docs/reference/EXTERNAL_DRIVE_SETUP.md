@@ -3,12 +3,12 @@
 ## ✅ Status: Configured for External Storage
 
 Your FirstPerson local emotional processing system has been successfully moved to your external hard drive to conserve local storage.
-
----
+##
 
 ## 📍 Location Setup
 
 ### Local Machine
+
 ```
 /Users/taurinrobinson/saoriverse-console
 ├── parser/                    (code - ~245MB)
@@ -17,7 +17,10 @@ Your FirstPerson local emotional processing system has been successfully moved t
 └── setup_external.sh (setup script)
 ```
 
+
+
 ### External Drive: "My Passport for Mac"
+
 ```
 /Volumes/My Passport for Mac/FirstPerson
 ├── venv/                      (~1.2GB Python environment)
@@ -25,7 +28,8 @@ Your FirstPerson local emotional processing system has been successfully moved t
 └── saoriverse-console/        (backup copy)
 ```
 
----
+
+##
 
 ## 💾 Storage Savings
 
@@ -36,18 +40,21 @@ Your FirstPerson local emotional processing system has been successfully moved t
 | **Moved** | 1.7GB (external drive) | - |
 
 **Result**: Freed up ~1.65GB on your local machine! 🎉
-
----
+##
 
 ## 🚀 How to Use
 
 ### 1. Mount External Drive
 
 The external drive should auto-mount when connected. To verify:
+
 ```bash
 ls /Volumes/
+
 # Should show: "My Passport for Mac"
 ```
+
+
 
 ### 2. Run Setup Script (if needed)
 
@@ -55,6 +62,8 @@ ls /Volumes/
 cd /Users/taurinrobinson/saoriverse-console
 ./setup_external.sh
 ```
+
+
 
 This script:
 - Verifies external drive is mounted
@@ -71,6 +80,8 @@ cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```
 
+
+
 Then in Streamlit sidebar, select **"Local Mode"** for full sovereignty!
 
 ### 4. Run Tests
@@ -80,13 +91,15 @@ cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
 ```
 
----
+
+##
 
 ## 🔗 How Symlinks Work
 
 Your local project uses **symbolic links** (symlinks) to point to files on the external drive:
 
 ```bash
+
 # Local machine
 /Users/taurinrobinson/saoriverse-console/.venv
   → Points to external drive
@@ -97,6 +110,8 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
      /Volumes/My Passport for Mac/FirstPerson/data
 ```
 
+
+
 **Benefits:**
 - ✅ Code changes sync automatically
 - ✅ Works transparently (you don't notice the symlink)
@@ -104,12 +119,14 @@ Your local project uses **symbolic links** (symlinks) to point to files on the e
 - ✅ Local machine stays clean
 
 **View symlinks:**
+
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 ls -la | grep "venv\|data"
 ```
 
----
+
+##
 
 ## ⚠️ Important Notes
 
@@ -118,6 +135,7 @@ ls -la | grep "venv\|data"
 FirstPerson **requires** the external drive to be mounted to run:
 
 ```bash
+
 # If external drive isn't mounted:
 cd /Users/taurinrobinson/saoriverse-console
 .venv/bin/python test_local_mode.py
@@ -125,13 +143,19 @@ cd /Users/taurinrobinson/saoriverse-console
 # Error: Cannot find /Volumes/My Passport for Mac
 ```
 
-**Solution**: Connect external drive, it will auto-mount. 
+
+
+**Solution**: Connect external drive, it will auto-mount.
 
 If it doesn't auto-mount:
+
 ```bash
+
 # Manual mount command
 diskutil mount "/Volumes/My Passport for Mac"
 ```
+
+
 
 ### Python Paths Are Fixed
 
@@ -152,23 +176,28 @@ git commit -m "message"
 git push origin main
 ```
 
-All code changes sync to Git regardless of external storage.
 
----
+
+All code changes sync to Git regardless of external storage.
+##
 
 ## 🔧 Troubleshooting
 
 ### "Permission denied" errors
 
 ```bash
+
 # Fix permissions on external drive
 chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson"
 chmod -R 755 "/Volumes/My Passport for Mac/FirstPerson/venv"
 ```
 
+
+
 ### Symlinks broken
 
 ```bash
+
 # Check if external drive is mounted
 ls /Volumes/ | grep "My Passport"
 
@@ -180,15 +209,19 @@ cd /Users/taurinrobinson/saoriverse-console
 ls -la .venv data
 ```
 
+
+
 ### Still can't run?
 
 ```bash
+
 # Run the setup script to fix everything
 cd /Users/taurinrobinson/saoriverse-console
 ./setup_external.sh
 ```
 
----
+
+##
 
 ## 📊 Backup Considerations
 
@@ -200,7 +233,9 @@ Since your data is now on an external drive:
 - `parser/learned_lexicon.json` - Learned patterns
 
 ### How to Backup
+
 ```bash
+
 # All FirstPerson data
 cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstPerson-backup
 
@@ -208,7 +243,8 @@ cp -r "/Volumes/My Passport for Mac/FirstPerson" /Volumes/[another-drive]/FirstP
 cp -r /Users/taurinrobinson/saoriverse-console/data ~/FirstPerson-data-backup
 ```
 
----
+
+##
 
 ## 🌍 Using From Different Locations
 
@@ -224,24 +260,31 @@ You'll need to:
 
 ### Without External Drive
 For quick testing, you can:
+
 ```bash
+
 # Copy venv locally (1.2GB)
 cp -r "/Volumes/My Passport for Mac/FirstPerson/venv" /Users/taurinrobinson/saoriverse-console/.venv
 
 # Remove symlink, use local copy
 cd /Users/taurinrobinson/saoriverse-console
 rm .venv
+
 # Now use local .venv
 .venv/bin/python test_local_mode.py
 ```
 
+
+
 Then move it back to external:
+
 ```bash
 rm -rf .venv
 ln -s "/Volumes/My Passport for Mac/FirstPerson/venv" .venv
 ```
 
----
+
+##
 
 ## 📈 What's on External Drive
 
@@ -262,12 +305,12 @@ ln -s "/Volumes/My Passport for Mac/FirstPerson/venv" .venv
 ### Backup Copy (~245MB)
 - Original project code
 - Useful for recovery
-
----
+##
 
 ## 🎯 Quick Commands Reference
 
 ```bash
+
 # Check setup
 cd /Users/taurinrobinson/saoriverse-console
 ./setup_external.sh
@@ -288,7 +331,8 @@ ls -la .venv data
 mount | grep "My Passport"
 ```
 
----
+
+##
 
 ## ✨ Summary
 

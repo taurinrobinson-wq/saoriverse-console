@@ -37,10 +37,13 @@ Main game loop controller connecting story, engine, and dialogue.
 - Event logging for debugging and replay
 
 **Game Loop:**
+
 ```
-Player Input → FirstPerson Intent Summary → Twine Processing → 
+Player Input → FirstPerson Intent Summary → Twine Processing →
 Game Mechanics → NPC Dialogue Generation → UI State Formatting → Response
 ```
+
+
 
 ### 3. **Updated Engine Package** (`__init__.py`)
 Exports all new components for clean API:
@@ -113,6 +116,8 @@ Twine Story (JSON)
 [UI Layer] → Player sees result
 ```
 
+
+
 ### Key Features
 
 **1. Dynamic Dialogue**
@@ -126,12 +131,15 @@ Twine Story (JSON)
 - Success/failure routing based on roll
 
 **3. Story Commands**
+
 ```
 {background: location}      # UI shows background image
 {npc: NPC_Name}            # NPC is speaking
 {dice: d20+courage}        # Hidden or visible dice roll
 {multiplayer: true}        # Adapt dialogue for group
 ```
+
+
 
 **4. Clarifying Questions**
 - 40% chance per turn (configurable)
@@ -243,6 +251,7 @@ The system is ready for:
 ## Quick Start
 
 ```bash
+
 # Build sample story
 python3 build_sample_story.py
 
@@ -250,8 +259,11 @@ python3 build_sample_story.py
 python3 velinor/engine/quickstart.py
 
 # Run with Streamlit (UI layer to be created)
+
 # streamlit run app.py  # (not yet created)
 ```
+
+
 
 ## Architecture Diagram
 
@@ -311,7 +323,8 @@ python3 velinor/engine/quickstart.py
         └───────────────────┘
 ```
 
----
+
+##
 
 **Status:** 🟢 Twine integration complete and ready for UI layer
 **Next Session:** Build Streamlit UI and test full game flow

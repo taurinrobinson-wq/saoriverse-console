@@ -1,10 +1,9 @@
 # TIER 1 INTEGRATION QUICK START
 
-**Status:** Ready to integrate ✅  
-**Time estimate:** 1-2 hours total  
+**Status:** Ready to integrate ✅
+**Time estimate:** 1-2 hours total
 **Risk level:** LOW (graceful fallbacks, no breaking changes)
-
----
+##
 
 ## What is Tier 1?
 
@@ -16,8 +15,7 @@ Tier 1 Foundation is a 7-stage response enhancement pipeline that:
 - ✅ Maintains <100ms response time
 
 **Performance:** ~40ms (60% under budget)
-
----
+##
 
 ## The Three Integration Points
 
@@ -26,24 +24,32 @@ Tier 1 Foundation is a 7-stage response enhancement pipeline that:
 **Location:** `src/response_handler.py`
 
 **Step 1: Add import at top**
+
 ```python
 from src.emotional_os.tier1_foundation import Tier1Foundation
 ```
 
+
+
 **Step 2: In ResponseHandler.__init__**
+
 ```python
 def __init__(self, ...):
     # ... existing code ...
-    
+
     # Add this after other initializations
     self.tier1 = Tier1Foundation(
         conversation_memory=kwargs.get("conversation_memory")
     )
 ```
 
+
+
 **Step 3: In response generation method**
 Find where the base response is generated, then add:
+
 ```python
+
 # After generating base_response
 enhanced_response, perf_metrics = self.tier1.process_response(
     user_input=user_message,
@@ -59,32 +65,41 @@ if perf_metrics.get("total") > 0.1:
 return enhanced_response  # Changed from: return base_response
 ```
 
+
+
 **Step 4: Optional - Track performance**
+
 ```python
+
 # In logging/monitoring section
 self.metrics["tier1_avg_time"] = perf_metrics.get("total", 0)
 self.metrics["tier1_safety_triggered"] = perf_metrics.get("safety_check", 0) > 0.005
 ```
 
----
+
+##
 
 ### 2. ui_refactored.py (20 min)
 
 **Location:** `src/ui_refactored.py`
 
 **Step 1: Add import**
+
 ```python
 from src.emotional_os.tier1_foundation import Tier1Foundation
 ```
 
+
+
 **Step 2: Initialize in session state**
 Find the session initialization section (usually in `setup_session` or similar):
+
 ```python
 def setup_session():
     """Initialize session state"""
-    
+
     # ... existing code ...
-    
+
     # Add Tier 1 Foundation
     if "tier1_foundation" not in st.session_state:
         conversation_memory = st.session_state.get("conversation_memory")
@@ -93,14 +108,18 @@ def setup_session():
         )
 ```
 
+
+
 **Step 3: Optional - Show metrics in UI**
 In the chat display section:
+
 ```python
+
 # After showing the response
 if show_debug_metrics:
     tier1 = st.session_state.tier1_foundation
     metrics = tier1.get_performance_metrics()
-    
+
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("Tier 1 Time", f"{metrics['total']*1000:.1f}ms")
@@ -110,12 +129,15 @@ if show_debug_metrics:
         st.metric("Learning", f"{metrics['learning']*1000:.1f}ms")
 ```
 
----
+
+##
 
 ### 3. Testing (30 min)
 
 **Run the test suite:**
+
 ```bash
+
 # Full test suite (should all pass)
 python -m pytest tests/test_tier1_foundation.py -v
 
@@ -126,32 +148,37 @@ python -m pytest tests/test_tier1_foundation.py::TestTier1Foundation::test_perfo
 python test_tier1_manual.py
 ```
 
+
+
 **Manual local testing:**
 1. Start Streamlit UI: `streamlit run src/ui_refactored.py`
 2. Send 10-20 test messages
 3. Verify responses are faster/more compassionate
 4. Check browser console for no errors
 5. Look for "Tier 1" metrics in debug output
-
----
+##
 
 ## Code Changes Summary
 
 ### response_handler.py
+
 ```diff
 + from src.emotional_os.tier1_foundation import Tier1Foundation
 
 class ResponseHandler:
     def __init__(self, ...):
 +       self.tier1 = Tier1Foundation(...)
-    
+
     def handle_response(self, ...):
 -       return base_response
 +       enhanced_response, metrics = self.tier1.process_response(...)
 +       return enhanced_response
 ```
 
+
+
 ### ui_refactored.py
+
 ```diff
 + from src.emotional_os.tier1_foundation import Tier1Foundation
 
@@ -159,7 +186,8 @@ def setup_session():
 +   st.session_state.tier1_foundation = Tier1Foundation(...)
 ```
 
----
+
+##
 
 ## Verification Checklist
 
@@ -173,8 +201,7 @@ After integration, verify:
 - [ ] Response time <100ms per message (check metrics)
 - [ ] Sensitive inputs get compassionate wrapping
 - [ ] Memory tracking works (no repeated questions)
-
----
+##
 
 ## Troubleshooting
 
@@ -189,8 +216,7 @@ After integration, verify:
 
 ### ConversationMemory not available
 **Solution:** Normal fallback - pass `None` to Tier1Foundation. System works without it.
-
----
+##
 
 ## Performance Targets
 
@@ -200,8 +226,7 @@ After integration, verify:
 - Safety detection: +3-5ms when sensitive
 - Learning: +1-2ms per message
 - **Total budget used:** ~40ms / 100ms (60% headroom)
-
----
+##
 
 ## Rollback Plan
 
@@ -217,8 +242,7 @@ If something goes wrong:
 3. **No data loss**
    - All user data preserved
    - Only response quality changes
-
----
+##
 
 ## Files Involved
 
@@ -235,8 +259,7 @@ If something goes wrong:
 **Documentation:**
 - `TIER_1_FOUNDATION_COMPLETE.md` - Full technical details
 - `UNIFIED_INTEGRATION_PLAN_TIER1_COMPLETE.md` - Timeline and roadmap
-
----
+##
 
 ## Next Steps
 
@@ -246,8 +269,7 @@ If something goes wrong:
 4. **Test:** Run test suite (5 min)
 5. **Verify:** Local manual testing (30 min)
 6. **Ready:** For Tier 2 implementation (Week 2)
-
----
+##
 
 ## Need Help?
 
@@ -260,10 +282,9 @@ If something goes wrong:
 - Check logs for warnings
 - Verify all components initialized
 - Confirm test suite still passes
+##
 
----
-
-**Prepared:** December 4, 2025  
-**Status:** Ready for integration ✅  
-**Complexity:** LOW  
+**Prepared:** December 4, 2025
+**Status:** Ready for integration ✅
+**Complexity:** LOW
 **Time:** 1-2 hours

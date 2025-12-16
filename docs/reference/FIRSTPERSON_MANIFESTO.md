@@ -4,7 +4,7 @@
 
 In 2024, when someone shares their most vulnerable moments:
 - Their grief about losing a loved one
-- Their shame about past mistakes  
+- Their shame about past mistakes
 - Their fear of the future
 - Their anger at injustice
 - Their longing for belonging
@@ -14,8 +14,7 @@ That data is **not theirs anymore**.
 It belongs to a corporation. It trains AI models. It's sold. It's analyzed. It's used to predict behavior, manipulate preferences, and extract value.
 
 The person who needed emotional safety got **emotional exploitation**.
-
----
+##
 
 ## Our Vision: Emotional Sanctuary
 
@@ -47,8 +46,7 @@ When you open FirstPerson and share your emotional truth:
 - Not an AI
 - You decide what your emotions mean
 - You choose how to respond
-
----
+##
 
 ## The Technology: Local, Free, Open
 
@@ -68,22 +66,21 @@ FirstPerson is built entirely from:
 - Your personal interaction history
 
 ### No External Dependencies
-- **No OpenAI** 
+- **No OpenAI**
 - **No commercial APIs**
 - **No cloud services**
 - **No tracking**
 - **No advertising**
 
 Just you, your emotions, and the tools you own.
-
----
+##
 
 ## The 4 Principles
 
 ### 1. Data Sovereignty
 Your emotional data belongs to you.
 - You can export it anytime
-- You can delete it anytime  
+- You can delete it anytime
 - You can back it up anytime
 - You control where it lives
 
@@ -107,8 +104,7 @@ Technology serves your emotional growth, not corporate metrics.
 - Understanding, not judgment
 - Growth, not engagement
 - Wisdom, not manipulation
-
----
+##
 
 ## What FirstPerson Does
 
@@ -134,8 +130,7 @@ Over time, FirstPerson learns:
 - How you're changing and growing
 
 Your system becomes **increasingly personal and useful**.
-
----
+##
 
 ## What FirstPerson Does NOT Do
 
@@ -148,8 +143,7 @@ Your system becomes **increasingly personal and useful**.
 - ✗ Require an account or login
 - ✗ Phone home or check in
 - ✗ Analyze you for market research
-
----
+##
 
 ## The VELŌNIX Glyph System
 
@@ -171,8 +165,7 @@ Each glyph:
 - Has activation signals (keywords that trigger it)
 - Builds emotional vocabulary
 - Creates space for nuance
-
----
+##
 
 ## The Promise: Emotional Sanctuary
 
@@ -198,13 +191,12 @@ And most importantly:
 
 Not because it's manipulative and makes you think it cares.
 But because it *actually* cares—by respecting you completely.
-
----
+##
 
 ## The Path to Sovereignty
 
 **This week:** Local processing for all 292 glyphs
-**Next week:** Poetry enrichment from Project Gutenberg  
+**Next week:** Poetry enrichment from Project Gutenberg
 **Next month:** Self-improving system that learns your patterns
 **This year:** Full emotional sovereignty
 
@@ -217,8 +209,7 @@ Either way, the future should be:
 - Safe
 - Beautiful
 - Sovereign
-
----
+##
 
 ## For Users
 
@@ -237,8 +228,7 @@ Your vulnerability deserves better than a corporate data farm.
 Your emotions deserve poetry and wisdom, not algorithms and ads.
 
 Your data deserves to stay with you.
-
----
+##
 
 ## For Developers
 
@@ -254,8 +244,7 @@ Fork this. Improve it. Make it better.
 The code is yours. The vision is shared.
 
 Together, we build systems that trust humans more than profit.
-
----
+##
 
 ## For Therapists & Practitioners
 
@@ -264,7 +253,7 @@ If you're reading this and thinking:
 - *"This respects the therapeutic relationship"*
 - *"My clients' data would be safe"*
 
-Yes. 
+Yes.
 
 FirstPerson doesn't replace therapy.
 
@@ -273,8 +262,7 @@ It supports the space between sessions.
 It's a tool for emotional literacy and self-understanding.
 
 Use it. Adapt it. Recommend it.
-
----
+##
 
 ## The Future We're Building
 
@@ -293,8 +281,7 @@ Where you can be fully, vulnerably yourself without fear.
 That's FirstPerson.
 
 That's the future we're building.
-
----
+##
 
 ## One More Thing
 
@@ -315,8 +302,7 @@ They can be real.
 They can grow.
 
 That's what FirstPerson is for.
-
----
+##
 
 **FirstPerson: A sovereign place where people can feel at ease sharing details about their life without fear of where the data is going.**
 

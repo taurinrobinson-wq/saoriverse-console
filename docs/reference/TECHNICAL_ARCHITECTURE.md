@@ -70,29 +70,37 @@
                     └────────────────┘
 ```
 
----
+
+##
 
 ## Data Flow: Complete Example
 
 ### User Input
+
 ```
 "I keep replaying that moment over and over, and it hurts"
 ```
 
+
+
 ### Stage 1: Tokenization & POS Tagging
+
 ```python
 Using NLTK (already integrated):
 
-Tokens: ["I", "keep", "replaying", "that", "moment", 
+Tokens: ["I", "keep", "replaying", "that", "moment",
          "over", "and", "over", "and", "it", "hurts"]
 
-POS Tags: ["PRP", "VBP", "VBG", "DT", "NN", 
+POS Tags: ["PRP", "VBP", "VBG", "DT", "NN",
            "RB", "CC", "RB", "CC", "PRP", "VBZ"]
 
 Sentences: ["I keep replaying that moment over and over, and it hurts"]
 ```
 
+
+
 ### Stage 2: NRC Emotion Lexicon Lookup
+
 ```
 NRC Lexicon (14,182 words → emotions):
 
@@ -110,7 +118,10 @@ Result Emotions: {
 }
 ```
 
+
+
 ### Stage 3: Entity Extraction (spaCy)
+
 ```
 Named Entity Recognition:
 - No proper nouns, dates, or locations mentioned
@@ -124,7 +135,10 @@ Context Interpretation:
 - Harm/hurt (emotional intensity)
 ```
 
+
+
 ### Stage 4: Semantic Analysis
+
 ```
 Word2Vec Embeddings (find similar concepts):
 
@@ -145,7 +159,10 @@ WordNet (semantic relationships):
 - moment → event → trigger
 ```
 
+
+
 ### Stage 5: Signal Mapping
+
 ```
 Emotion → Voltage Signal Mapping:
 
@@ -166,7 +183,10 @@ Fear component:
 Result: [γ, γ, γ, γ] = DOMINANT SIGNAL: γ
 ```
 
+
+
 ### Stage 6: Gate Activation
+
 ```
 Voltage γ activates these gates:
 
@@ -179,11 +199,14 @@ Gate 10: Transformation
 
 Candidate glyphs by gate:
 - Gate 4: Recursive Ache, Spiral Ache, Loop Ache
-- Gate 5: Depth Ache, Layered Ache  
+- Gate 5: Depth Ache, Layered Ache
 - Gate 9: Ache of Recognition, Recognized Ache
 ```
 
+
+
 ### Stage 7: Glyph Scoring & Selection
+
 ```
 Scoring Algorithm:
 
@@ -209,7 +232,10 @@ Recognized Ache:
 WINNER: Recursive Ache (89% match)
 ```
 
+
+
 ### Stage 8: Poetry & Metaphor Enrichment
+
 ```
 From local poetry database:
 
@@ -235,42 +261,48 @@ Rituals for acknowledgment:
   - "In each return, you deepen"
 ```
 
+
+
 ### Stage 9: Response Generation
+
 ```
 Template: [Validation] + [Glyph] + [Poetry] + [Metaphor] + [Ritual]
 
-Validation: "That moment keeps spiraling back—not because 
-             you're trapped, but because it's teaching you 
+Validation: "That moment keeps spiraling back—not because
+             you're trapped, but because it's teaching you
              something."
 
-Glyph: "This is the Recursive Ache—the one that refines 
+Glyph: "This is the Recursive Ache—the one that refines
         through repetition."
 
-Poetry: "Emily Dickinson knew this spiral: 'The Ache remains, 
-         returning again and again.' She found in that return 
+Poetry: "Emily Dickinson knew this spiral: 'The Ache remains,
+         returning again and again.' She found in that return
          a kind of knowing."
 
 Metaphor: "Like a spiral, each loop brings you deeper."
 
-Ritual: "What if, instead of trying to escape the loop, 
+Ritual: "What if, instead of trying to escape the loop,
          we honored what each return reveals?"
 
 FINAL OUTPUT:
 ─────────────────────────────────────────────────────────
 "That moment keeps spiraling back—not because you're trapped,
-but because it's teaching you something. Like a spiral, each 
-loop brings you deeper. This is the Recursive Ache—the one 
+but because it's teaching you something. Like a spiral, each
+loop brings you deeper. This is the Recursive Ache—the one
 that refines through repetition.
 
-Emily Dickinson knew this spiral: 'The Ache remains, returning 
+Emily Dickinson knew this spiral: 'The Ache remains, returning
 again and again.' She found in that return a kind of knowing.
 
-What if, instead of trying to escape the loop, we honored what 
+What if, instead of trying to escape the loop, we honored what
 each return reveals?"
 ─────────────────────────────────────────────────────────
 ```
 
+
+
 ### Stage 10: Learning & Personalization
+
 ```
 System logs (all local, private):
 
@@ -296,11 +328,13 @@ Over time (100+ interactions):
 → Responses get progressively more personalized
 ```
 
----
+
+##
 
 ## Database Schema
 
 ### Core Tables (Existing)
+
 ```sql
 -- 292 Glyphs from VELŌNIX system
 CREATE TABLE glyph_lexicon (
@@ -332,7 +366,10 @@ CREATE TABLE interactions (
 );
 ```
 
+
+
 ### Enrichment Tables (New)
+
 ```sql
 -- Poetry mapped to glyphs
 CREATE TABLE glyph_poetry (
@@ -386,12 +423,15 @@ CREATE TABLE user_patterns (
 );
 ```
 
----
+
+##
 
 ## Processing Layers
 
 ### Layer 1: Fast Recognition (0-1ms)
+
 ```python
+
 # Tier 1 - Built-in, already working
 from nltk.sentiment import SentimentIntensityAnalyzer
 
@@ -399,17 +439,26 @@ sia = SentimentIntensityAnalyzer()
 scores = sia.polarity_scores(text)  # Instant classification
 ```
 
+
+
 ### Layer 2: Linguistic Understanding (1-5ms)
+
 ```python
+
 # NRC Emotion Lexicon lookup
 from parser.nrc_lexicon_loader import nrc
 
 emotions = nrc.analyze_text(text)  # 14,182 word database
+
 # Result: {"sadness": 4, "fear": 1, "negative": 5}
 ```
 
+
+
 ### Layer 3: Semantic Understanding (5-20ms)
+
 ```python
+
 # Entity extraction + semantic relationships
 import spacy
 
@@ -420,22 +469,33 @@ entities = [(ent.text, ent.label_) for ent in doc.ents]
 chunks = [chunk.text for chunk in doc.noun_chunks]
 ```
 
+
+
 ### Layer 4: Signal Mapping (1-2ms)
+
 ```python
+
 # Custom signal parser
 from parser.signal_parser import parse_input
 
 signals = parse_input(text)
-# Result: 
+
+# Result:
+
 # {
 #   'signals': ['γ', 'γ'],
 #   'gates': [4, 5, 9],
 #   'glyphs': ['Recursive Ache', 'Spiral Ache']
+
 # }
 ```
 
+
+
 ### Layer 5: Enrichment (5-10ms)
+
 ```python
+
 # Fetch poetry, metaphors, rituals
 glyph_id = fetch_glyph_id("Recursive Ache")
 poetry = fetch_glyph_poetry(glyph_id)
@@ -443,8 +503,12 @@ metaphors = fetch_glyph_metaphors(glyph_id)
 rituals = fetch_glyph_rituals(glyph_id)
 ```
 
+
+
 ### Layer 6: Response Generation (10-50ms)
+
 ```python
+
 # Template-based response using all enrichment
 response = generate_response(
     glyph_name="Recursive Ache",
@@ -455,10 +519,11 @@ response = generate_response(
 )
 ```
 
+
+
 **Total Latency: 25-100ms (typically 50-80ms)**
 **vs OpenAI API: 1-2 seconds**
-
----
+##
 
 ## File Structure
 
@@ -509,7 +574,8 @@ saoriverse-console/
 └── TECHNICAL_ARCHITECTURE.md        # NEW: This file
 ```
 
----
+
+##
 
 ## Performance Targets
 
@@ -521,7 +587,7 @@ saoriverse-console/
 
 ### Memory
 - **spaCy model**: ~100MB
-- **NRC lexicon**: ~50MB  
+- **NRC lexicon**: ~50MB
 - **Word2Vec**: ~300MB (optional, lazy load)
 - **Database**: ~10MB (with 292 glyphs + enrichment)
 - **Total footprint**: ~500MB-1GB
@@ -533,8 +599,7 @@ saoriverse-console/
 - **External dependencies**: 0
 - **Corporate tracking**: 0
 - **Encryption**: Optional, available
-
----
+##
 
 ## Key Advantages of Local Mode
 
@@ -549,13 +614,14 @@ saoriverse-console/
 | **Personalization** | Progressive | Limited |
 | **Deterministic** | Yes | No |
 | **Controllable** | Yes | No |
-
----
+##
 
 ## Deployment
 
 ### For End Users
+
 ```bash
+
 # Clone repo
 git clone https://github.com/user/firstperson.git
 
@@ -564,7 +630,9 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 
 # Download NRC (one-time, 15MB)
+
 # From: http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+
 # Place in: data/lexicons/nrc_emotion_lexicon.txt
 
 # Run
@@ -573,8 +641,12 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 # Select "Local Mode" in sidebar
 ```
 
+
+
 ### For Developers
+
 ```bash
+
 # Setup dev environment
 python -m venv venv
 source venv/bin/activate
@@ -591,7 +663,8 @@ pytest tests/
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=debug
 ```
 
----
+
+##
 
 ## Security Considerations
 
@@ -616,8 +689,7 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=deb
 - spaCy: MIT License
 - SQLite: Public domain
 - Project Gutenberg: Public domain texts
-
----
+##
 
 ## Next Steps for Implementation
 
@@ -652,8 +724,7 @@ streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py) --logger.level=deb
    - [ ] Quality assurance
 
 **Total effort: 10-15 hours to full sovereignty**
-
----
+##
 
 ## This is the future we're building.
 

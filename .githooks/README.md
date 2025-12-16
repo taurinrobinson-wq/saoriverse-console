@@ -1,13 +1,14 @@
 This folder contains recommended repository hooks.
 
-Usage
------
+## Usage
 
 To enable the hooks locally for your clone, run:
 
 ```
 git config core.hooksPath .githooks
 ```
+
+
 
 The repository includes a `pre-commit` hook that rejects staged files larger than 5 MB.
 

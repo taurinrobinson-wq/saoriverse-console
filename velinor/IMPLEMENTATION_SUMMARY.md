@@ -2,8 +2,7 @@
 
 ## Overview
 Successfully segmented design documentation and implemented a **modular scene system** for the Velinor game. The system enables developers to build, test, and iterate on narrative encounters with visual layering, dialogue branching, and trust mechanics.
-
----
+##
 
 ## 📋 What Was Created
 
@@ -54,6 +53,7 @@ Five focused markdown files replacing the original two large design docs:
 - Implementation strategy for Streamlit integration (Python code examples)
 
 ### 2. Velinor Engine Enhancement
+
 #### `velinor/engine/scene_manager.py`
 Core scene system with:
 
@@ -107,6 +107,7 @@ Pre-built marketplace sequence with 5 connected scenes:
    - Three dialogue options with minimal trust modifiers
 
 ### 3. Testing Interface
+
 #### `velinor_scenes_test.py`
 Streamlit app for interactive scene testing:
 
@@ -122,6 +123,7 @@ Streamlit app for interactive scene testing:
 - Glyph resonance display
 
 **Workflow:**
+
 ```
 1. Run: streamlit run velinor_scenes_test.py
 2. Enter player name
@@ -134,11 +136,13 @@ Streamlit app for interactive scene testing:
 9. Review dialogue history
 ```
 
----
+
+##
 
 ## 🎮 How It Works
 
 ### Scene Progression Flow
+
 ```
 Scene.DISTANT
     ↓ [Continue button]
@@ -153,7 +157,10 @@ Scene.CHOICES (Player selects dialogue)
 → Next Scene or End
 ```
 
+
+
 ### Visual Layering
+
 ```
 Background Image (full width)
     ↓
@@ -168,7 +175,10 @@ NPC Dialogue Bubble
 Player Option Buttons
 ```
 
+
+
 ### Trust System
+
 ```
 Each NPC has trust value: 0.0 → 1.0
 Each dialogue option has trust_modifier: 0.05 → 0.25
@@ -176,7 +186,10 @@ Player choice adds modifier to relevant NPC's trust
 Trust gates deeper dialogue and future interactions
 ```
 
+
+
 ### Glyph Resonance
+
 ```
 Each scene has:
 - glyph_distant: glyphs triggered in Scene.DISTANT
@@ -187,7 +200,8 @@ Glyphs are displayed as text indicators below narration
 Examples: [Esḧ] = sacred witness, [Thalen̈] = longing, [Aelitḧ] = stillness
 ```
 
----
+
+##
 
 ## 🔧 Technical Architecture
 
@@ -205,6 +219,7 @@ Examples: [Esḧ] = sacred witness, [Thalen̈] = longing, [Aelitḧ] = stillness
 
 ### Extensibility
 To create new scenes:
+
 ```python
 scene = SceneModule(
     scene_id="my_scene_01",
@@ -220,12 +235,16 @@ scene = SceneModule(
 )
 ```
 
+
+
 Then add to sequence:
+
 ```python
 scenes.append(scene)
 ```
 
----
+
+##
 
 ## 📊 What's Implemented vs. Pending
 
@@ -255,8 +274,7 @@ scenes.append(scene)
 - Save/load functionality for scenes
 - Accessibility features (alt text, keyboard navigation)
 - Audio layer (ambient sounds referenced but not integrated)
-
----
+##
 
 ## 🚀 Next Steps
 
@@ -271,7 +289,7 @@ scenes.append(scene)
    - `velinor/backgrounds/marketplace_intact_distant.png`
    - `velinor/backgrounds/marketplace_intact_close.png`
    - `velinor/backgrounds/marketplace_collapsed_close.png`
-   
+
 2. Create foreground/NPC image assets:
    - `velinor/backgrounds/ravi_distant.png`
    - `velinor/backgrounds/ravi_close.png`
@@ -294,8 +312,7 @@ scenes.append(scene)
 3. Save/load: persist player progress across sessions
 4. Achievements: track player choices and unlock content
 5. Procedural generation: randomized NPC encounters, dynamic map changes
-
----
+##
 
 ## 📁 File Structure
 
@@ -329,7 +346,8 @@ Root:
 └── ...
 ```
 
----
+
+##
 
 ## 💾 Git Commits
 
@@ -346,8 +364,7 @@ Root:
 - Full scene rendering pipeline
 - Player stats and trust tracking
 - Scene navigation and dialogue history
-
----
+##
 
 ## 🎓 Design Philosophy
 
@@ -365,37 +382,50 @@ Root:
 - Trust is **earned through presence**, not tasks
 - The **city itself** is a character (collapse, decay, rebirth)
 - **Glyphs** connect emotion to memory (both individual and collective)
-
----
+##
 
 ## 🤝 Contributing to This System
 
 To add new scenes, follow this pattern:
 
 ```python
+
 # 1. Create scene in new file or add to existing module
 scene = MarketplaceSceneSequence.build_my_new_scene()
 
 # 2. Define all fields
+
 # - scene_id: unique identifier
+
 # - npc_name: who the player meets
+
 # - narration_distant/close: what player sees
+
 # - npc_dialogue: what NPC says
+
 # - assets: background/foreground paths
+
 # - player_options: dialogue choices (DialogueOption instances)
+
 # - glyph_distant/close: resonance indicators
 
 # 3. Add to sequence or standalone
+
 # - For sequences, add to get_sequence() list
+
 # - For standalone, can use SceneRenderer.render_scene()
 
 # 4. Test in velinor_scenes_test.py
+
 # - Run streamlit app
+
 # - Navigate to scene
+
 # - Verify dialogue flows and choices branch correctly
 ```
 
----
+
+##
 
 ## ✨ Example: Adding a New NPC Scene
 
@@ -406,18 +436,18 @@ def build_healer_encounter() -> SceneModule:
         scene_id="marketplace_healer_01",
         npc_name="The Healer",
         npc_archetype="welcoming",
-        
+
         narration_distant="A gentle figure tends to someone in an alcove...",
         narration_close="She looks up, concern in her eyes...",
         npc_dialogue="'You carry injury, not just physical...'",
-        
+
         assets=SceneAssets(
             background_distant="...",
             background_close="...",
             foreground_distant="...",
             foreground_close="...",
         ),
-        
+
         player_options=[
             DialogueOption(
                 text="Can you help me?",
@@ -427,13 +457,16 @@ def build_healer_encounter() -> SceneModule:
             ),
             # ... more options
         ],
-        
+
         glyph_distant=["Esḧ"],
         glyph_close=["Cinarä̈", "Sha'rú"],
     )
 ```
 
+
+
 Then add to `MarketplaceSceneSequence.get_sequence()`:
+
 ```python
 sequence = [
     # ... existing scenes
@@ -441,9 +474,10 @@ sequence = [
 ]
 ```
 
-Run `velinor_scenes_test.py` and navigate to test!
 
----
+
+Run `velinor_scenes_test.py` and navigate to test!
+##
 
 ## 🎯 Success Criteria Met
 

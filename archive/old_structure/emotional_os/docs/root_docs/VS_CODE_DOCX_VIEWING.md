@@ -30,6 +30,7 @@ You also have two extensions that provide additional viewing options:
 You also have command-line tools:
 
 ```bash
+
 # View formatted in terminal
 python3 docx_reader.py document.docx
 
@@ -45,6 +46,8 @@ streamlit run docx_viewer.py
 # Web-based viewer (opens in browser)
 python3 docx_web_viewer.py document.docx
 ```
+
+
 
 ## 📋 What Each Method Does
 

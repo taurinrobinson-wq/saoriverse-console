@@ -5,13 +5,13 @@
 The optimized edge function addresses the 9.48s latency bottleneck with these key improvements:
 
 ### Response Time Breakdown (Current vs Optimized):
-- **Current**: 9.48s total (OpenAI: 6.64s | Glyph: 1.42s | DB: 0.95s | Network: 0.47s)  
+- **Current**: 9.48s total (OpenAI: 6.64s | Glyph: 1.42s | DB: 0.95s | Network: 0.47s)
 - **Target**: <2s total with aggressive caching and parallel processing
 
 ### Key Optimizations:
 1. **Response Caching**: 1-minute TTL Map cache for repeated queries
 2. **Quick Responses**: Instant replies for common emotions (grief, joy, anxiety, etc.)
-3. **Parallel Processing**: Tag lookup and AI calls run simultaneously  
+3. **Parallel Processing**: Tag lookup and AI calls run simultaneously
 4. **Faster Model**: gpt-4o-mini with max_tokens limit
 5. **Selective Glyph Processing**: Only for complex messages
 
@@ -32,7 +32,7 @@ The optimized edge function addresses the 9.48s latency bottleneck with these ke
 3. **Verify Environment Variables**: Ensure these are still set:
    - `SUPABASE_URL`
    - `SUPABASE_ANON_KEY` or `PROJECT_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY` or `PROJECT_SERVICE_ROLE_KEY`  
+   - `SUPABASE_SERVICE_ROLE_KEY` or `PROJECT_SERVICE_ROLE_KEY`
    - `OPENAI_API_KEY`
 
 ### Step 4: Deploy and Test
@@ -55,39 +55,41 @@ def test_optimized_performance():
         "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
         "Content-Type": "application/json"
     }
-    
+
     test_messages = [
         "I'm feeling overwhelmed by everything",  # Should hit quick response
-        "Joy is bubbling up inside me today",     # Should hit quick response  
+        "Joy is bubbling up inside me today",     # Should hit quick response
         "I'm struggling with grief from my divorce", # Should hit quick response
         "Complex philosophical thoughts about existence and meaning" # Should use full processing
     ]
-    
+
     results = []
     for message in test_messages:
         start_time = time.time()
-        
+
         response = requests.post(url, headers=headers, json={
             "message": message,
             "mode": "hybrid"
         })
-        
+
         response_time = time.time() - start_time
         results.append({
             "message": message[:50] + "...",
             "response_time": f"{response_time:.2f}s",
             "success": response.status_code == 200
         })
-        
+
         print(f"✓ {message[:50]}... | {response_time:.2f}s")
         time.sleep(1)  # Avoid rate limits
-    
+
     return results
 
 # Run the test
 print("Testing optimized edge function performance...")
 test_results = test_optimized_performance()
 ```
+
+
 
 ## 🎯 Expected Performance Gains
 
@@ -111,6 +113,7 @@ test_results = test_optimized_performance()
 
 ### Debug Mode in Streamlit:
 Add this to your Streamlit app for performance visibility:
+
 ```python
 if st.sidebar.checkbox("Debug Performance"):
     st.sidebar.json({
@@ -119,6 +122,8 @@ if st.sidebar.checkbox("Debug Performance"):
         "cache_stats": st.session_state.get("performance_stats", {})
     })
 ```
+
+
 
 ## 🚨 Rollback Plan
 
@@ -132,17 +137,16 @@ If issues occur, quickly revert:
 
 Monitor these improvements:
 - **Average Response Time**: Target <2s (down from 9.48s)
-- **Cache Hit Rate**: Target >30% for repeat emotional patterns  
+- **Cache Hit Rate**: Target >30% for repeat emotional patterns
 - **User Experience**: Seamless conversational flow without long pauses
 - **Error Rate**: Maintain <1% error rate with fallbacks
 
 ## Next Steps After Deployment
 
 1. **Integrate Client Optimizations**: Update Streamlit UI to use instant acknowledgments
-2. **Monitor Real Usage**: Track performance with actual user interactions  
+2. **Monitor Real Usage**: Track performance with actual user interactions
 3. **Fine-tune Cache TTL**: Adjust based on usage patterns
 4. **Add Streaming**: Implement progressive response loading for complex queries
-
----
+##
 
 **Ready to deploy?** The optimized edge function is backward-compatible with your existing system while providing dramatic performance improvements. The worst case is we revert to the original version if any issues arise.

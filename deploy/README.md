@@ -1,5 +1,4 @@
-FirstPerson deployment notes — Nginx + Streamlit
-===============================================
+# FirstPerson deployment notes — Nginx + Streamlit
 
 This document describes a simple deployment pattern that keeps the public static site
 at the root of `firstperson.chat` while proxying the Streamlit application to `/app/`.
@@ -12,8 +11,7 @@ Goals:
 - Public site (static) served at `https://firstperson.chat/` (no Streamlit UI controls exposed)
 - Streamlit app served at `https://firstperson.chat/app/` behind Basic Auth (optional)
 
-Step-by-step
-------------
+## Step-by-step
 
 1) Prepare your static site
 
@@ -111,7 +109,6 @@ Step-by-step
    Security reminder:
    - If you keep Streamlit or admin endpoints on Railway, secure them (OAuth, basic auth, or restrict by IP). The static site should use Supabase Auth and Edge Functions for any server-side operations.
 
-Security notes
---------------
+## Security notes
 - Prefer an OAuth proxy (Cloudflare Access, oauth2-proxy) over basic auth for production.
 - Ensure TLS/HTTPS termination at Nginx (Let's Encrypt / Certbot) before exposing the site publicly.

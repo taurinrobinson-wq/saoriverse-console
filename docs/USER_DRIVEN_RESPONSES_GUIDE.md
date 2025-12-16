@@ -23,6 +23,8 @@ User Input: "I'm feeling so stressed today"
 6. TEMPORAL: "today" → specific day, not past/future anxiety
 ```
 
+
+
 ### 2. Analyze What's Missing
 
 System identifies gaps in the message:
@@ -35,6 +37,8 @@ User said "I'm feeling so stressed today" but didn't say:
 - AGENCY: What have you tried? What might help?
 - TEMPORAL SPECIFICITY: How long? All day? Just now?
 ```
+
+
 
 ### 3. Build Response Structure
 
@@ -54,6 +58,8 @@ Clarifying Question:
   (Targets missing context, emotionally themed)
 ```
 
+
+
 ### 4. Generate Targeted Clarification
 
 Questions are specific to what's missing, not generic:
@@ -68,9 +74,12 @@ Relational context              "Is there someone or something involved?"
 Agency/attempt                  "What have you tried?"
 ```
 
+
+
 ## Examples
 
 ### Example 1: Minimal Information
+
 ```
 User: "I'm sad"
 
@@ -79,7 +88,7 @@ System Analysis:
   - Missing: context, temporal, somatic, relational, agency
 
 Response:
-  "You've been experiencing sadness. This sadness is real—sorrow witnessed. 
+  "You've been experiencing sadness. This sadness is real—sorrow witnessed.
    The pain of being truly seen. What's the loss you're sensing?"
 
 Why this works:
@@ -88,7 +97,10 @@ Why this works:
   ✓ Asks specific question about missing context (what's the loss)
 ```
 
+
+
 ### Example 2: Present Tense + Emphasis + Temporal
+
 ```
 User: "I'm feeling so stressed today"
 
@@ -99,8 +111,8 @@ System Analysis:
   - Missing: context about what triggered it
 
 Response:
-  "You're feeling stress right now—and you're emphasizing how much this is present. 
-   What you're describing has a quality of quiet revelation. Truth that arrives 
+  "You're feeling stress right now—and you're emphasizing how much this is present.
+   What you're describing has a quality of quiet revelation. Truth that arrives
    without noise. What's creating this pressure right now?"
 
 Why this works:
@@ -110,7 +122,10 @@ Why this works:
   ✓ Asks about missing context
 ```
 
+
+
 ### Example 3: Continuous Past + No Specifics
+
 ```
 User: "I've been feeling anxious lately"
 
@@ -120,8 +135,8 @@ System Analysis:
   - Missing: context, somatic, relational, what's triggering it
 
 Response:
-  "You're experiencing anxiety in this moment. That anxiety is asking for 
-   something—the sacred yes and no. Limits that protect what matters. 
+  "You're experiencing anxiety in this moment. That anxiety is asking for
+   something—the sacred yes and no. Limits that protect what matters.
    What are you worried might happen?"
 
 Why this works:
@@ -130,7 +145,10 @@ Why this works:
   ✓ Asks specific question about trigger (what are you worried about)
 ```
 
+
+
 ### Example 4: Rich Context
+
 ```
 User: "I feel really overwhelmed with all the work and family responsibilities right now"
 
@@ -142,8 +160,8 @@ System Analysis:
   - Missing: somatic, what they've tried
 
 Response:
-  "You're feeling overwhelm right now—and you're emphasizing how much this is 
-   present. That overwhelm is asking for something—the complexity you're in has 
+  "You're feeling overwhelm right now—and you're emphasizing how much this is
+   present. That overwhelm is asking for something—the complexity you're in has
    a structure. Spirals are patterns, not chaos. What triggered this feeling?"
 
 Why this works:
@@ -151,6 +169,8 @@ Why this works:
   ✓ Uses glyph about complexity/patterns
   ✓ Still asks clarifications (but about different missing elements)
 ```
+
+
 
 ## Key Principles
 
@@ -212,11 +232,16 @@ Why this works:
 {acknowledgment}. {glyph_validation}. {clarifying_question}
 ```
 
+
+
 Example breakdown:
+
 ```
-"You're feeling stress right now—and you're emphasizing how much this is present. 
+"You're feeling stress right now—and you're emphasizing how much this is present.
 What you're describing has a quality of quiet revelation. What's creating this pressure?"
 ```
+
+
 
 ## Why This Is Correct
 
@@ -245,6 +270,7 @@ Methods:
 ## Testing
 
 Run tests to verify:
+
 ```bash
 python test_user_driven_responses.py           # Basic test
 python SEMANTIC_PARSING_WALKTHROUGH.py         # Detailed walkthrough
@@ -252,13 +278,14 @@ python test_semantic_parsing.py                # Multiple cases
 python test_full_e2e_user_driven.py           # Full pipeline
 ```
 
+
+
 All tests demonstrate:
 - ✅ User's message is primary driver
 - ✅ Glyph validates but doesn't generate
 - ✅ System identifies missing information
 - ✅ Clarifications are specific and emotionally themed
 - ✅ Responses vary based on user input, not glyph
-
----
+##
 
 **Status**: ✅ CORRECTED - System now uses user-driven responses with glyph validation

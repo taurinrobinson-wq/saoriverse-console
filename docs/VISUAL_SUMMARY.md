@@ -1,8 +1,7 @@
 # SYSTEM STATUS: Visual Summary
 
 **Your Emotional OS System Architecture - December 4, 2025**
-
----
+##
 
 ## 🏗️ CURRENT ARCHITECTURE
 
@@ -35,16 +34,21 @@
                   Response to User
 ```
 
----
+
+##
 
 ## 🔌 WHAT'S CONNECTED vs. DISCONNECTED
 
 ### ✅ CONNECTED (Working Today)
+
 ```
 Input → signal_parser ✅ → glyph lookup ✅ → compose_response ✅ → Output
 ```
 
+
+
 ### ❌ MISSING (Built but Not Used)
+
 ```
 ConversationMemory ❌
     ↓ (should feed context)
@@ -70,11 +74,13 @@ GenerativeTension ❌
   └─ not initialized
 ```
 
----
+
+##
 
 ## 🎯 INTEGRATION PRIORITIES
 
 ### TIER 1: DO THIS WEEK (45 min)
+
 ```
 ┌────────────────────────────────────┐
 │  ConversationMemory                │  ⭐ Huge impact
@@ -91,7 +97,10 @@ GenerativeTension ❌
 └────────────────────────────────────┘
 ```
 
+
+
 ### TIER 2: NEXT 1-2 WEEKS (3-4 hrs)
+
 ```
 ┌────────────────────────────────────┐
 │  Presence Layer                    │  ⭐ Makes system feel alive
@@ -102,7 +111,10 @@ GenerativeTension ❌
 └────────────────────────────────────┘
 ```
 
+
+
 ### TIER 3: WEEK 3-4 (6-8 hrs)
+
 ```
 ┌────────────────────────────────────┐
 │  Saori Layer                       │  ⭐ Poetic understanding
@@ -120,7 +132,10 @@ GenerativeTension ❌
 └────────────────────────────────────┘
 ```
 
+
+
 ### TIER 4: ONGOING (2-3 hrs)
+
 ```
 ┌────────────────────────────────────┐
 │  Temporal Memory                   │  🔵 Cross-session memory
@@ -130,7 +145,8 @@ GenerativeTension ❌
 └────────────────────────────────────┘
 ```
 
----
+
+##
 
 ## 📈 IMPACT PROGRESSION
 
@@ -167,7 +183,8 @@ Response quality: Exceptional (with continuity)
 Example: "Last time we spoke, you were struggling with..."
 ```
 
----
+
+##
 
 ## ⏱️ TIMELINE AT A GLANCE
 
@@ -194,7 +211,8 @@ NOW (Today)
             Iterate
 ```
 
----
+
+##
 
 ## 📊 EFFORT vs. IMPACT
 
@@ -212,17 +230,19 @@ IMPACT
         0h    2h    4h    6h    8h
 ```
 
-**Key:** 
+
+
+**Key:**
 - Tier 1: Highest payoff per hour of work
 - Tier 2: High payoff, moderate effort
 - Tier 3: Very high payoff, significant effort
 - All tiers valuable, do in order
-
----
+##
 
 ## 🔍 CONNECTIVITY HEAT MAP
 
 ### RED (Not Connected)
+
 ```
 ❌ AttunementLoop
 ❌ EmbodiedSimulation
@@ -233,20 +253,27 @@ IMPACT
 ❌ GenerativeTension
 ```
 
+
+
 ### YELLOW (Built but Not Called)
+
 ```
 ⚠️  ConversationMemory (methods exist but not used)
 ⚠️  LexiconLearner (methods exist but not used)
 ```
 
+
+
 ### GREEN (Connected)
+
 ```
 ✅ signal_parser
 ✅ glyph_lookup
 ✅ response_composer (basic)
 ```
 
----
+
+##
 
 ## 🚀 IMPLEMENTATION COMPLEXITY
 
@@ -269,7 +296,8 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 │  (optional)
 ```
 
----
+
+##
 
 ## ✅ SUCCESS CHECKLIST
 
@@ -290,8 +318,7 @@ LOW RISK              MEDIUM RISK           HIGH RISK
 - [ ] Tension engines functional
 - [ ] Integration hooks planned
 - [ ] Testing framework ready
-
----
+##
 
 ## 📋 FILES TO READ (By Priority)
 
@@ -313,33 +340,44 @@ REFERENCE (As Needed)
 8. This file (VISUAL_SUMMARY.md)
 ```
 
----
+
+##
 
 ## 🎯 YOUR NEXT STEP
 
 **Pick ONE and do it:**
 
 ### Option A: 10 Minutes
+
 ```
 Read: EVALUATION_SUMMARY.md
 Then: Know what to do next
 ```
 
-### Option B: 45 Minutes  
+
+
+### Option B: 45 Minutes
+
 ```
 Read: QUICK_START_CONVERSATION_MEMORY.md
 Code: Follow 4 steps
 Test: Verify it works
 ```
 
+
+
 ### Option C: 1 Hour
+
 ```
 Read: EVALUATION_SUMMARY.md
 Code: CODE_CHANGES_READY_TO_COPY.md
 Test: Run test_quick_integration.py
 ```
 
+
+
 ### Option D: 2 Hours (Thorough)
+
 ```
 Read: EVALUATION_SUMMARY.md
 Read: SYSTEM_INTEGRATION_ANALYSIS.md
@@ -347,7 +385,8 @@ Code: CODE_CHANGES_READY_TO_COPY.md
 Test: Run full test
 ```
 
----
+
+##
 
 ## 💡 KEY INSIGHTS
 
@@ -356,8 +395,7 @@ Test: Run full test
 3. **Easy to fix** - Clear integration points
 4. **Big payoff** - User experience will transform
 5. **Low risk** - Can rollback easily
-
----
+##
 
 ## 🎬 ACTION NOW
 
@@ -367,8 +405,7 @@ Test: Run full test
 4. Come back and tackle next tier
 
 **That's it. You've got everything you need.**
-
----
+##
 
 ## 🌟 The Vision
 
@@ -385,7 +422,8 @@ Static energy         →        Dynamic presence with cycles
 No learning           →        Learns user's language
 ```
 
+
+
 **Everything needed to create that vision exists right now.**
 
 **Time to connect it all.** 🚀
-

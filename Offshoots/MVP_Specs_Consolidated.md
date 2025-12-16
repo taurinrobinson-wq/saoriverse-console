@@ -1,8 +1,7 @@
 # Offshoots, Consolidated MVP Specs
 
 This document consolidates and extends the MVP specs in `/Offshoots`. Each offshoot below has a 1-page MVP spec, acceptance criteria, success metrics, a 6–12 week roadmap, key risks, and recommended next actions.
-
----
+##
 
 ## 1) FirstPerson Mobile (Flagship)
 
@@ -53,8 +52,7 @@ Next actions
 - Finalize onboarding narrative & UX flows.
 - Prototype first-turn selector integration with current codebase.
 - Prepare privacy/security checklist and storage plan.
-
----
+##
 
 ## 2) Lightpath (Childlike / Sensitive UX)
 
@@ -98,8 +96,7 @@ Next actions
 
 - Convene child-safety review and UX workshop.
 - Build constrained prompt templates and classifier tests.
-
----
+##
 
 ## 3) Message UI Overlay (iOS/Android)
 
@@ -144,8 +141,7 @@ Next actions
 
 - Gather sample dataset for manipulation/gaslighting.
 - Prototype classifier and simple overlay proof-of-concept.
-
----
+##
 
 ## 4) Threshold Enterprise (Therapist / Case Worker Edition)
 
@@ -190,8 +186,7 @@ Next actions
 
 - Draft HIPAA engineering checklist and risk register.
 - Implement anonymization test harness and synthetic dataset.
-
----
+##
 
 ## 5) Tonecore (Emotional Soundscaping)
 
@@ -231,8 +226,7 @@ Key risks
 Next actions
 
 - Prototype mapping rules and a small MIDI demo playable in browser.
-
----
+##
 
 ## 6) CoreLex (Legal Services / CoreLex)
 
@@ -275,8 +269,7 @@ Key risks
 Next actions
 
 - Line up legal advisor and pilot partner firm.
-
----
+##
 
 ## 7) AffectIQ (Industry Chat Overlays)
 
@@ -318,8 +311,7 @@ Key risks
 Next actions
 
 - Prepare sample chat datasets and agent UX flows.
-
----
+##
 
 # Shared Core Recommendations
 
@@ -342,8 +334,7 @@ Infrastructure
 1. Confirm priority order of offshoots (which MVP to build first).
 2. For first-priority product, produce a 2-week sprint plan and begin the prototype (code scaffold + endpoint mock).
 3. Assemble small cross-functional team (ML eng, backend, mobile, UX, compliance advisor).
-
----
+##
 
 If you'd like, I can now:
 

@@ -2,8 +2,7 @@
 
 ## Overview
 The marketplace is a **trust economy** where NPCs vary in openness, but all require patience and genuine engagement. Crime wave context creates tension that impacts all encounters.
-
----
+##
 
 ## NPC Archetype 1: Mistrusting NPCs
 
@@ -29,6 +28,8 @@ B) "I'll prove I can give back."       → Shows commitment
 C) "Then don't trust me yet. Just watch." → Shows respect for caution
 ```
 
+
+
 ### Trust Building Mechanics
 - **Small Acts**: Fair barter, helping with minor tasks, listening without interruption
 - **Repeated Engagement**: Must return multiple times; trust is slow
@@ -39,8 +40,7 @@ C) "Then don't trust me yet. Just watch." → Shows respect for caution
 - **Early Trust**: Vague hints, warnings about dangers
 - **Mid Trust**: Fragments of glyph lore, directions to hidden shrines
 - **High Trust**: Full stories, personal revelations, alliance
-
----
+##
 
 ## NPC Archetype 2: Welcoming NPCs (Weary by Necessity)
 
@@ -66,6 +66,8 @@ B) "I know what it's like to lose trust."        → Mirrors their experience
 C) "Then let me earn it, slowly."                → Respects their process
 ```
 
+
+
 ### Trust Building Mechanics
 - **Early Engagement**: Offer small information early to establish goodwill
 - **Emotional Resonance**: Respond to player's grief or questions with empathy
@@ -76,8 +78,7 @@ C) "Then let me earn it, slowly."                → Respects their process
 - **Early Trust**: Orientation, marketplace rumors, initial warmth
 - **Mid Trust**: Personal stories, glyph fragments, emotional openness
 - **High Trust**: Intimate revelations, alliance, possible adventure hooks
-
----
+##
 
 ## Crime Wave Context
 
@@ -98,8 +99,7 @@ C) "Then let me earn it, slowly."                → Respects their process
 - **Clues**: Hidden glyph fragments tied to stolen goods (e.g., [Ruuñ] glyphs in recovered items)
 - **Resolution**: Help recover goods, identify perpetrator, restore trust
 - **Reward**: Accelerated trust progression with victims + new glyph access
-
----
+##
 
 ## Trust Meter (Optional Implementation)
 
@@ -116,7 +116,8 @@ Actions:
 - Challenge or ignore advice: -2 points
 ```
 
----
+
+##
 
 ## Social Dynamics: The Marketplace Web
 
@@ -127,6 +128,7 @@ Actions:
 - Trust is not isolated; it propagates through the marketplace community
 
 ### Example:
+
 ```
 Player helps Nima (mistrusting guard) find stolen goods
 → Nima tells Ravi (welcoming NPC) the player is reliable
@@ -134,7 +136,8 @@ Player helps Nima (mistrusting guard) find stolen goods
 → But Nima's rival, a black market trader, becomes wary
 ```
 
----
+
+##
 
 ## Core Dialogue Principle
 

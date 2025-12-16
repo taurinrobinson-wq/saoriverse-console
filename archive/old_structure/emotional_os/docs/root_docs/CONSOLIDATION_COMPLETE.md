@@ -4,10 +4,9 @@
 
 Successfully consolidated **1,735 lines of duplicated code** across 7 files into a single, canonical **`emotional_os/core/`** module.
 
-**Before**: 4 signal parsers + 3 lexicon learners scattered across codebase  
-**After**: 1 canonical implementation + backward-compatible stubs  
-
----
+**Before**: 4 signal parsers + 3 lexicon learners scattered across codebase
+**After**: 1 canonical implementation + backward-compatible stubs
+##
 
 ## What Changed
 
@@ -35,25 +34,31 @@ emotional_os/deploy/learning/lexicon_learner.py → imports emotional_os.core.le
 emotional_os/glyphs/lexicon_learner.py → imports emotional_os.core.lexicon_learner
 ```
 
----
+
+##
 
 ## How to Use
 
 ### Old Way (Still Works!)
+
 ```python
 from parser.signal_parser import parse_input
 from learning.lexicon_learner import LexiconLearner
 from emotional_os.glyphs.signal_parser import parse_input
 ```
 
+
+
 ### New Way (Recommended)
+
 ```python
 from emotional_os.core import parse_input, LexiconLearner
 ```
 
-**Both work identically!** No code changes required.
 
----
+
+**Both work identically!** No code changes required.
+##
 
 ## Key Benefits
 
@@ -64,7 +69,9 @@ from emotional_os.core import parse_input, LexiconLearner
 - One path resolution system
 
 ### 2. Centralized Configuration
+
 ```python
+
 # All constants in one place
 from emotional_os.core import SIGNALS, ECM_GATES, SIGNAL_MAPPING
 
@@ -75,6 +82,8 @@ from emotional_os.core import (
     glyph_db_path
 )
 ```
+
+
 
 ### 3. Easier Maintenance
 - Bug fix in signal parser? Fix once in `emotional_os/core/signal_parser.py`
@@ -90,8 +99,7 @@ from emotional_os.core import (
 - Easy to add new processing modes
 - Clear extension points in constants
 - No need to propagate changes to 7 different files
-
----
+##
 
 ## Migration Path
 
@@ -104,6 +112,7 @@ from emotional_os.core import (
 Use the canonical imports:
 
 ```python
+
 # Best practice for new code
 from emotional_os.core import (
     parse_input,
@@ -121,11 +130,14 @@ learner = LexiconLearner()
 learning_results = learner.learn_from_conversation(conversation_data)
 ```
 
+
+
 ### For Legacy Code
 
 Gradually migrate imports:
 
 ```python
+
 # Before
 from learning.lexicon_learner import LexiconLearner
 
@@ -133,7 +145,8 @@ from learning.lexicon_learner import LexiconLearner
 from emotional_os.core import LexiconLearner
 ```
 
----
+
+##
 
 ## Structure
 
@@ -159,7 +172,8 @@ emotional_os/
 │   └── signal_parser.py          # → Stub (imports from core)
 ```
 
----
+
+##
 
 ## Deduplication Results
 
@@ -177,8 +191,7 @@ emotional_os/
 - **695 lines** of redundant parser code
 - **703 lines** of redundant learner code
 - **~1,400 lines eliminated while maintaining backward compatibility**
-
----
+##
 
 ## Path Resolution
 
@@ -188,17 +201,22 @@ The `PathManager` class intelligently resolves paths:
 from emotional_os.core import signal_lexicon_path
 
 # Tries in order:
+
 # 1. parser/signal_lexicon.json (if exists)
+
 # 2. data/lexicons/signal_lexicon.json (if exists)
+
 # 3. emotional_os/parser/signal_lexicon.json (if exists)
+
 # 4. Returns first candidate (for creation if needed)
 
 lexicon_path = signal_lexicon_path()
 ```
 
-This allows gradual migration without breaking anything.
 
----
+
+This allows gradual migration without breaking anything.
+##
 
 ## Constants Centralization
 
@@ -215,18 +233,20 @@ from emotional_os.core import (
 )
 ```
 
+
+
 No more:
 - ❌ Different gate definitions in different files
 - ❌ Duplicate signal mappings
 - ❌ Scattered constants
-
----
+##
 
 ## Testing
 
 All 4 processing modes should continue working:
 
 ```bash
+
 # Mode 1: Local parser
 from emotional_os.core import parse_input
 
@@ -240,14 +260,16 @@ from emotional_os.core import LexiconLearner
 from emotional_os.core import parse_input, LexiconLearner
 ```
 
-No code changes needed. Everything imported from the same canonical location.
 
----
+
+No code changes needed. Everything imported from the same canonical location.
+##
 
 ## Next Steps
 
 ### Optional: Migrate Lexicon Locations
 Currently lexicons are in multiple locations. Can consolidate to:
+
 ```
 data/lexicons/
 ├── signal_lexicon.json
@@ -256,12 +278,15 @@ data/lexicons/
 └── lexicon_versions.json
 ```
 
+
+
 The PathManager already supports this - just move the files!
 
 ### Optional: Update All Imports Proactively
 While backward compatibility stubs work, clean up imports in UI files:
 
 ```python
+
 # Old
 from emotional_os.glyphs.signal_parser import parse_input
 
@@ -269,10 +294,11 @@ from emotional_os.glyphs.signal_parser import parse_input
 from emotional_os.core import parse_input
 ```
 
+
+
 ### No Pressure
 Everything works as-is. These are quality-of-life improvements, not necessary changes.
-
----
+##
 
 ## Troubleshooting
 
@@ -287,15 +313,14 @@ Check that lexicon files exist in one of these locations:
 
 ### Module Not Updating?
 Restart your Python kernel/environment to reload modules.
-
----
+##
 
 ## Summary
 
-✅ **Consolidation complete and working**  
-✅ **Backward compatibility maintained**  
-✅ **Single source of truth established**  
-✅ **1,400+ lines of duplication removed**  
-✅ **Future maintenance dramatically simplified**  
+✅ **Consolidation complete and working**
+✅ **Backward compatibility maintained**
+✅ **Single source of truth established**
+✅ **1,400+ lines of duplication removed**
+✅ **Future maintenance dramatically simplified**
 
 Your codebase is now **leaner, more maintainable, and more professional**. 🚀

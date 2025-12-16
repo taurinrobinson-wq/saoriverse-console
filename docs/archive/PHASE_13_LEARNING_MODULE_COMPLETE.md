@@ -8,8 +8,7 @@ You've implemented a **three-layer dynamic learning system** that transforms how
 2. **Extracts actionable rules** (response principles, tone guidelines, continuity bridges)
 3. **Applies principles dynamically** (generates fresh responses, not templates)
 4. **Improves continuously** (success weights evolve based on real outcomes)
-
----
+##
 
 ## The Three Layers
 
@@ -26,6 +25,8 @@ ReliefToGratitude archetype contains:
 └─ Tone Guidelines: ["Warm language", "Gentle pacing", "Mirror metaphors", ...]
 ```
 
+
+
 **Key Classes**:
 - `ConversationArchetype`: Single pattern (name, cues, principles, bridges, tone)
 - `ArchetypeLibrary`: Collection management (add, match, persist)
@@ -36,8 +37,7 @@ ReliefToGratitude archetype contains:
 - ✓ Track usage and success rates
 - ✓ Update success weights based on outcomes
 - ✓ Persist to JSON for recovery
-
----
+##
 
 ### Layer 2: Response Generator
 **File**: `emotional_os/learning/archetype_response_generator.py`
@@ -54,9 +54,11 @@ Extracts principles:
   - Balance emotions
   - Ask gentle question
        ↓
-Generates: "That moment with your child sounds genuinely special. 
+Generates: "That moment with your child sounds genuinely special.
            What does that connection feel like for you?"
 ```
+
+
 
 **Key Classes**:
 - `ArchetypeResponseGenerator`: Main engine
@@ -71,8 +73,7 @@ Generates: "That moment with your child sounds genuinely special.
 - Templates = "select random option A, B, or C"
 - Principles = "follow these rules to generate something fresh"
 - Result: Each response is unique but consistent
-
----
+##
 
 ### Layer 3: Conversation Learner
 **File**: `emotional_os/learning/conversation_learner.py`
@@ -105,6 +106,8 @@ Extracts:
 New or refined archetype added to library
 ```
 
+
+
 **Key Classes**:
 - `ConversationLearner`: Main learning engine
 - Methods:
@@ -123,15 +126,13 @@ New or refined archetype added to library
 4. Identifies how system maintained conversation coherence
 5. Creates archetype or merges with existing one
 6. Updates success weights based on user feedback
-
----
+##
 
 ## Test Results
 
-```
-================================================================================
-LEARNING MODULE TEST COMPLETE [OK]
-================================================================================
+# ```
+
+# LEARNING MODULE TEST COMPLETE [OK]
 
 ✓ Layer 1: Archetype Library loaded (1 pre-loaded archetype)
 ✓ Layer 2: Response Generator produced contextualized responses
@@ -140,15 +141,15 @@ LEARNING MODULE TEST COMPLETE [OK]
 Sample Results:
 - Input: "My child hugged me and I felt relieved despite stress"
 - Archetype matched: ReliefToGratitude (confidence: 0.77)
-- Response generated: "That moment with your child sounds genuinely special. 
+- Response generated: "That moment with your child sounds genuinely special.
                        What does that connection feel like for you?"
 
 - New archetype learned: "GratitudeToOverwhelm" (from your dialogue)
   Entry cues: ['heavy', 'hug', 'familial_connection', 'but']
   Response principles: ['Create space for deeper disclosure', 'Balance mixed emotions']
-```
 
----
+```
+##
 
 ## Pre-Loaded Archetype: ReliefToGratitude
 
@@ -176,12 +177,14 @@ Sample Results:
 - Mirror user's expressive metaphors
 - Proportional empathy — not overblown, not clinical
 - Use concrete details (hugs, silence, consistency)
-
----
+##
 
 ## API Summary
 
 ```python
+
+
+
 # Access the three layers
 from emotional_os.learning import (
     get_archetype_library,
@@ -211,9 +214,9 @@ new_archetype = learner.learn_from_conversation(
 library = get_archetype_library()
 print(f"Total archetypes: {len(library.archetypes)}")
 print(f"Best match for input: {library.get_best_match(user_input)}")
-```
 
----
+```
+##
 
 ## Files Created
 
@@ -229,8 +232,7 @@ print(f"Best match for input: {library.get_best_match(user_input)}")
 | `LEARNING_INTEGRATION_GUIDE.md` | Integration instructions | (additional doc) |
 
 **Total new code**: ~1100 lines of well-structured, testable Python
-
----
+##
 
 ## Key Achievements
 
@@ -263,8 +265,7 @@ print(f"Best match for input: {library.get_best_match(user_input)}")
 - Add new dialogue scenes → new archetypes
 - Library can grow indefinitely
 - No retraining needed
-
----
+##
 
 ## Next Steps
 
@@ -282,8 +283,7 @@ print(f"Best match for input: {library.get_best_match(user_input)}")
 1. **Community dialogue library**: Collect user-submitted conversational scenes
 2. **Archetype versioning**: Track how patterns evolve
 3. **Pattern analytics**: See which archetypes are most used/successful
-
----
+##
 
 ## The Philosophy Behind This
 
@@ -296,12 +296,14 @@ This learning module makes that real:
 - **Not opaque** → every decision is based on human-readable rules
 
 The playwright/organizer workflow (you write scenes, system extracts rules) keeps the human in the loop while building genuine adaptability.
-
----
+##
 
 ## Testing the System
 
 ```bash
+
+
+
 # Run the complete test
 python test_learning_module.py
 
@@ -315,9 +317,9 @@ lib = get_archetype_library()
 match = lib.get_best_match('I felt so grateful after the hard day')
 print(f'Best match: {match.name if match else None}')
 "
-```
 
----
+```
+##
 
 **Summary**: You've built the infrastructure for genuinely adaptive, learning-based empathetic conversation. The system now learns principles from your dialogue and applies them dynamically. Over time, it will become increasingly personalized to how you actually communicate.
 

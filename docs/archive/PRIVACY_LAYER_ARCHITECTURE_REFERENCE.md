@@ -156,7 +156,8 @@
     (removes 30-day old convos)             (removes 90-day old dreams)
 ```
 
----
+
+##
 
 ## Data Flow: User Retention Changes
 
@@ -194,7 +195,8 @@ User Sets Retention to 7 Days
     Only dream summaries remain (90-day retention)
 ```
 
----
+
+##
 
 ## Data Flow: GDPR Deletion Request
 
@@ -237,7 +239,8 @@ User Clicks "Delete All My Data"
                         └──────────────────────┘
 ```
 
----
+
+##
 
 ## Data Flow: User Export Request
 
@@ -281,7 +284,8 @@ User Clicks "Export My Data"
     └──────────────────────────────────────┘
 ```
 
----
+
+##
 
 ## Database Schema Relationship Diagram
 
@@ -320,7 +324,8 @@ User Clicks "Export My Data"
         └─────────────────────┴────────────────────┘
 ```
 
----
+
+##
 
 ## Encryption Key Management Flow
 
@@ -406,7 +411,8 @@ Key Properties
              enables consistent encryption/decryption)
 ```
 
----
+
+##
 
 ## Security Model: Threat Scenarios
 
@@ -495,7 +501,8 @@ Scenario 5: Forgotten Password
             → Eventually deleted per policy
 ```
 
----
+
+##
 
 ## Performance Characteristics
 
@@ -530,7 +537,8 @@ Per user per month (dreams)  | ~60KB     | 30 summaries
 ────────────────────────────────────────────────────────────
 ```
 
----
+
+##
 
 ## Compliance Mapping
 
@@ -565,7 +573,8 @@ State Wiretapping Laws
 └─→ Termination: Can delete at any time ✅
 ```
 
----
+
+##
 
 **This architecture ensures FirstPerson provides both:**
 - **Personalization** (data stored & accessible)

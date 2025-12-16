@@ -7,7 +7,9 @@ that can enhance your system WITHOUT relying on OpenAI APIs.
 """
 
 # ============================================================================
+
 # 1. NLTK - ALREADY INTEGRATED IN YOUR SYSTEM
+
 # ============================================================================
 
 NLTK_RESOURCES = {
@@ -40,7 +42,9 @@ NLTK_RESOURCES = {
 }
 
 # ============================================================================
+
 # 2. WORDNET - INTEGRATED VIA NLTK
+
 # ============================================================================
 
 WORDNET_RESOURCE = {
@@ -62,21 +66,21 @@ WORDNET_RESOURCE = {
     "use_for_emotional_system": """
     # Find emotional synonyms
     from nltk.corpus import wordnet
-    
+
     # Get synonyms for "grief"
     synsets = wordnet.synsets("grief")
     synonyms = []
     for syn in synsets:
         for lemma in syn.lemmas():
             synonyms.append(lemma.name())
-    
+
     Result: sorrow, sadness, regret, mourning, misery, etc.
-    
+
     # Find antonyms
     grief_lemmas = wordnet.lemmas("grief")
     for lemma in grief_lemmas:
         antonyms = lemma.antonyms()
-        
+
     Result: joy, happiness, delight
     """,
     "emotional_use_cases": [
@@ -88,7 +92,9 @@ WORDNET_RESOURCE = {
 }
 
 # ============================================================================
+
 # 3. SPACY - ADVANCED NLP (NOT INSTALLED, SHOULD BE)
+
 # ============================================================================
 
 SPACY_RESOURCE = {
@@ -114,18 +120,18 @@ SPACY_RESOURCE = {
     ],
     "code_example": """
     import spacy
-    
+
     nlp = spacy.load("en_core_web_sm")
     doc = nlp("My best friend just betrayed me")
-    
+
     # Extract entities
     for ent in doc.ents:
         print(ent.text, ent.label_)  # "best friend" → PERSON
-    
+
     # Get lemmas
     for token in doc:
         print(token.text, token.lemma_)
-    
+
     # Find similarity
     doc1 = nlp("I'm feeling sad")
     doc2 = nlp("I'm feeling depressed")
@@ -134,7 +140,9 @@ SPACY_RESOURCE = {
 }
 
 # ============================================================================
+
 # 4. TEXTBLOB - SIMPLE SENTIMENT ANALYSIS
+
 # ============================================================================
 
 TEXTBLOB_RESOURCE = {
@@ -143,10 +151,10 @@ TEXTBLOB_RESOURCE = {
     "install": "pip install textblob",
     "simple_usage": """
     from textblob import TextBlob
-    
+
     text = "I love this moment!"
     blob = TextBlob(text)
-    
+
     # Sentiment: polarity (-1 to 1), subjectivity (0 to 1)
     print(blob.sentiment)  # Sentiment(polarity=0.8, subjectivity=0.9)
     """,
@@ -154,7 +162,9 @@ TEXTBLOB_RESOURCE = {
 }
 
 # ============================================================================
+
 # 5. GENSIM - WORD EMBEDDINGS & SIMILARITY
+
 # ============================================================================
 
 GENSIM_RESOURCE = {
@@ -170,17 +180,17 @@ GENSIM_RESOURCE = {
     # Find similar emotional words
     from gensim.models import Word2Vec
     from gensim.models import KeyedVectors
-    
+
     # Load pre-trained embeddings
     model = KeyedVectors.load_word2vec_format(
         'GoogleNews-vectors-negative300.bin',
         binary=True
     )
-    
+
     # Find words similar to 'grief'
     similar = model.most_similar('grief', topn=5)
     # Result: [('sorrow', 0.8), ('mourning', 0.75), ...]
-    
+
     # Find words similar to 'love' - 'heartbreak' + 'connection'
     result = model.most_similar(
         positive=['love', 'connection'],
@@ -197,7 +207,9 @@ GENSIM_RESOURCE = {
 }
 
 # ============================================================================
+
 # 6. PUBLIC DATASETS & LEXICONS
+
 # ============================================================================
 
 PUBLIC_EMOTIONAL_DATASETS = {
@@ -207,21 +219,21 @@ PUBLIC_EMOTIONAL_DATASETS = {
         "free": True,
         "use": "Extract emotional language from real reviews"
     },
-    
+
     "movie_reviews": {
         "source": "https://dataset.cs.mcgill.ca/sentiment/",
         "size": "5000 reviews",
         "free": True,
         "use": "Sentiment analysis training data"
     },
-    
+
     "stanford_sentiment": {
         "source": "https://nlp.stanford.edu/sentiment/",
         "size": "11,855 sentences",
         "free": True,
         "use": "Fine-grained sentiment (1-5 scale)"
     },
-    
+
     "nrc_emotion_lexicon": {
         "source": "http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm",
         "words": "14,000+ words",
@@ -230,21 +242,21 @@ PUBLIC_EMOTIONAL_DATASETS = {
         "use": "Map words to emotions (anger, fear, joy, sadness, etc.)",
         "access": "Download crowdsourced emotion annotations"
     },
-    
+
     "affective_computing_datasets": {
         "source": "https://affect.media.mit.edu/",
         "size": "Multiple datasets",
         "free": True,
         "use": "Emotion recognition and detection"
     },
-    
+
     "crowdflower_sentiment": {
         "source": "Data available on Kaggle",
         "size": "1.6M+ labeled tweets",
         "free": True,
         "use": "Sentiment classification training"
     },
-    
+
     "google_nGram_corpus": {
         "source": "https://books.google.com/ngrams",
         "content": "Frequency of word phrases across 5M+ books",
@@ -254,7 +266,9 @@ PUBLIC_EMOTIONAL_DATASETS = {
 }
 
 # ============================================================================
+
 # 7. NRC EMOTION LEXICON - MOST RELEVANT FOR YOUR SYSTEM
+
 # ============================================================================
 
 NRC_EMOTION_LEXICON = {
@@ -287,7 +301,7 @@ NRC_EMOTION_LEXICON = {
     1. Sending user message to OpenAI
     2. Waiting for response
     3. Parsing response
-    
+
     You can:
     1. Look up words in NRC lexicon → get emotions
     2. Match to VELŌNIX glyphs
@@ -297,17 +311,17 @@ NRC_EMOTION_LEXICON = {
     "integration_example": """
     # Load NRC lexicon
     nrc_lexicon = load_nrc_lexicon("nrc-lexicon.txt")
-    
+
     user_message = "I feel betrayed and hurt"
     words = user_message.lower().split()
-    
+
     detected_emotions = set()
     for word in words:
         if word in nrc_lexicon:
             detected_emotions.update(nrc_lexicon[word])
-    
+
     # Result: {'negative', 'fear', 'sadness', 'anger'}
-    
+
     # Map to your voltage signals
     emotion_to_voltage = {
         'sadness': 'γ',      # ache
@@ -316,14 +330,16 @@ NRC_EMOTION_LEXICON = {
         'trust': 'β',        # boundary
         'joy': 'λ'           # joy
     }
-    
+
     signals = [emotion_to_voltage[e] for e in detected_emotions if e in emotion_to_voltage]
     # Result: ['γ', 'ε']
     """
 }
 
 # ============================================================================
+
 # 8. RECOMMENDATION: SETUP PLAN
+
 # ============================================================================
 
 RECOMMENDED_SETUP = {
@@ -333,21 +349,21 @@ RECOMMENDED_SETUP = {
         "3": "Download NRC Emotion Lexicon from http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm",
         "benefit": "Instant emotion detection without any API calls"
     },
-    
+
     "SHORT TERM (1 hour)": {
         "1": "pip install textblob gensim",
         "2": "Create NRC lexicon loader in parser/",
         "3": "Replace signal_lexicon.json lookups with NRC lexicon",
         "benefit": "Richer emotion detection, 10x more accurate"
     },
-    
+
     "MEDIUM TERM (1 day)": {
         "1": "Download pre-trained Word2Vec embeddings (Google News vectors)",
         "2": "Create semantic similarity module",
         "3": "Integrate with glyph selection (find similar glyphs via embeddings)",
         "benefit": "Context-aware glyph matching, understand emotion nuance"
     },
-    
+
     "LONG TERM (1 week)": {
         "1": "Download Yelp or movie reviews dataset",
         "2": "Fine-tune your own emotion detection model",
@@ -357,7 +373,9 @@ RECOMMENDED_SETUP = {
 }
 
 # ============================================================================
+
 # 9. COMPARISON: API vs LOCAL
+
 # ============================================================================
 
 API_VS_LOCAL = {
@@ -371,7 +389,7 @@ API_VS_LOCAL = {
             "Dependent on external service"
         ]
     },
-    
+
     "Local Approach (Recommended)": {
         "pros": [
             "FREE - no API costs",
@@ -387,7 +405,7 @@ API_VS_LOCAL = {
             "Need to curate/combine multiple sources"
         ]
     },
-    
+
     "HYBRID Approach (Best)": {
         "description": "Use local for speed, add API as enhancement when needed",
         "strategy": """
@@ -402,10 +420,13 @@ API_VS_LOCAL = {
 }
 
 # ============================================================================
+
 # 10. IMPLEMENTATION CODE TEMPLATE
+
 # ============================================================================
 
 IMPLEMENTATION_TEMPLATE = """
+
 # parser/nrc_lexicon_loader.py
 
 import json
@@ -414,7 +435,7 @@ from typing import Dict, Set
 class NRCLexiconLoader:
     def __init__(self, lexicon_path: str):
         self.lexicon = self.load_lexicon(lexicon_path)
-    
+
     def load_lexicon(self, path: str) -> Dict[str, Set[str]]:
         '''Load NRC emotion lexicon from file'''
         lexicon = {}
@@ -428,24 +449,24 @@ class NRCLexiconLoader:
                             lexicon[word] = set()
                         lexicon[word].add(emotion)
         return lexicon
-    
+
     def get_emotions(self, text: str) -> Dict[str, float]:
         '''Extract emotions from text using NRC lexicon'''
         words = text.lower().split()
         emotions = {}
-        
+
         for word in words:
             if word in self.lexicon:
                 for emotion in self.lexicon[word]:
                     emotions[emotion] = emotions.get(emotion, 0) + 1
-        
+
         # Normalize
         if emotions:
             total = sum(emotions.values())
             emotions = {e: count/total for e, count in emotions.items()}
-        
+
         return emotions
-    
+
     def to_voltage_signals(self, emotions: Dict[str, float]) -> list:
         '''Convert emotions to VELŌNIX voltage signals'''
         emotion_signal_map = {
@@ -460,7 +481,7 @@ class NRCLexiconLoader:
             'surprise': 'ε',
             'trust': 'β'
         }
-        
+
         signals = []
         for emotion, score in emotions.items():
             if emotion in emotion_signal_map:
@@ -468,7 +489,7 @@ class NRCLexiconLoader:
                 # Add signal proportional to score
                 for _ in range(int(score * 10)):
                     signals.append(signal)
-        
+
         return signals
 
 
@@ -476,22 +497,22 @@ class NRCLexiconLoader:
 
 def parse_input_with_nrc(input_text: str, nrc_loader: NRCLexiconLoader) -> Dict:
     '''Enhanced parsing using NRC lexicon + local resources'''
-    
+
     # Get emotions from NRC lexicon
     emotions = nrc_loader.get_emotions(input_text)
-    
+
     # Convert to voltage signals
     signals = nrc_loader.to_voltage_signals(emotions)
-    
+
     # Evaluate gates as before
     gates = evaluate_gates_from_signals(signals)
-    
+
     # Fetch glyphs
     glyphs = fetch_glyphs(gates)
-    
+
     # Select best glyph
     best_glyph, response = select_best_glyph_and_response(glyphs, signals)
-    
+
     return {
         'input': input_text,
         'emotions': emotions,  # NEW
@@ -505,7 +526,9 @@ def parse_input_with_nrc(input_text: str, nrc_loader: NRCLexiconLoader) -> Dict:
 """
 
 # ============================================================================
+
 # SUMMARY
+
 # ============================================================================
 
 """

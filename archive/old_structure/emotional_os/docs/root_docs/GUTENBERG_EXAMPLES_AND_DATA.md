@@ -57,8 +57,7 @@
 - Poems of Passion (ID: 8801)
 - Victorian Poems (ID: 17190)
 - Romantic Poems (ID: 17191)
-
----
+##
 
 ## Example Processing Output
 
@@ -82,6 +81,8 @@
 
 ✓ Processed: 89 new entries, 2340 signals
 ```
+
+
 
 ### Sample Results JSON
 
@@ -137,7 +138,8 @@
 }
 ```
 
----
+
+##
 
 ## Sample Generated Glyphs
 
@@ -183,6 +185,8 @@
 }
 ```
 
+
+
 ### Glyph Example 2: Melancholy Awakening
 
 ```json
@@ -225,6 +229,8 @@
   ]
 }
 ```
+
+
 
 ### Glyph Example 3: Transcendent Love
 
@@ -269,7 +275,8 @@
 }
 ```
 
----
+
+##
 
 ## Emotional Dimension Discoveries
 
@@ -279,7 +286,7 @@
 1. Love (lov*)
    - Keywords: heart, soul, beloved, forever, passion, desire
    - Frequency: 4,200 | Coverage: 95% of poetry
-   
+
 2. Joy (joy*, happina*, delight*)
    - Keywords: bright, glad, festive, merry, celebrate
    - Frequency: 2,900 | Coverage: 78% of poetry
@@ -309,6 +316,8 @@
    - Frequency: 3,800 | Coverage: 92% of poetry
 ```
 
+
+
 ### Newly Discovered Dimensions (from Poetry)
 
 ```
@@ -316,7 +325,7 @@
    - Keywords: yesterday, used_to, once, past, memory, echo
    - Frequency: 890 | Coverage: 35% of poetry
    - Discovered in: Dickinson, Keats, Wordsworth
-   
+
 10. Wonder / Awe (wonder*, amazement*, astonishment*, miracl*)
     - Keywords: mystery, marvel, strange, curious, enchant
     - Frequency: 756 | Coverage: 31% of poetry
@@ -355,7 +364,8 @@
 17. (and 8+ more discovered during full processing)
 ```
 
----
+
+##
 
 ## Sample Lexicon Entry
 
@@ -384,6 +394,8 @@
 }
 ```
 
+
+
 ### After Poetry Processing
 
 ```json
@@ -400,7 +412,7 @@
       "petal", "garden", "spring", "renewal", "becoming", "transformed", "awakening"
     ],
     "related_dimensions": [
-      "intimacy", "sensuality", "nature", "transformation", 
+      "intimacy", "sensuality", "nature", "transformation",
       "vulnerability", "transcendence", "nostalgia"  // NEW
     ],
     "discovered_in_poets": [
@@ -426,7 +438,8 @@
 }
 ```
 
----
+
+##
 
 ## Performance Benchmarks
 
@@ -448,6 +461,8 @@ TOTAL (8 major collections)   8.1MB   755K    51 min  53,339   1,959
 AVERAGE                       1.01MB  94K     6.4min  6,667    245
 ```
 
+
+
 ### Resource Usage During Processing
 
 ```
@@ -457,7 +472,8 @@ I/O Overhead: ~8% (lexicon write operations)
 Network: ~2 Mbps (during download phase only)
 ```
 
----
+
+##
 
 ## Integration Example
 
@@ -492,7 +508,8 @@ print(f"After integration: {len(lexicon.glyphs)} glyphs")
 print(f"New glyphs added: {len(poetry_glyphs) + len(extracted_glyphs)}")
 ```
 
----
+
+##
 
 ## Real Data Statistics
 
@@ -552,8 +569,9 @@ TOTAL PIPELINE RESULTS:
 └─ Success rate: 99.8%
 ```
 
----
 
-**Examples Version**: 1.0  
-**Last Updated**: 2025-11-05  
+##
+
+**Examples Version**: 1.0
+**Last Updated**: 2025-11-05
 **Data Accuracy**: Based on actual poetry content from Project Gutenberg

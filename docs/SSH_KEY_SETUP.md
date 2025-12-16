@@ -8,33 +8,44 @@ First, try connecting with password authentication:
 ssh -o PreferredAuthentications=password root@161.35.227.49
 ```
 
-If you see a password prompt, enter your DigitalOcean root password.
 
----
+
+If you see a password prompt, enter your DigitalOcean root password.
+##
 
 ## If Password Auth Doesn't Work: Generate SSH Key
 
 ### Step 1: Generate a New SSH Key on velinor-server
 
 ```bash
+
 # Generate SSH key (press Enter to accept defaults)
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean_key -N ""
 
 # This creates:
+
 # ~/.ssh/digitalocean_key (private key - KEEP SAFE)
+
 # ~/.ssh/digitalocean_key.pub (public key - share with server)
 ```
+
+
 
 ### Step 2: Add Public Key to Droplet (If You Have Access)
 
 ```bash
+
 # Copy your public key
 cat ~/.ssh/digitalocean_key.pub
 
 # Then SSH to droplet and add it:
+
 # 1. ssh root@161.35.227.49
+
 # 2. Paste this into ~/.ssh/authorized_keys:
 ```
+
+
 
 Or do it in one command (if you can SSH):
 
@@ -42,9 +53,12 @@ Or do it in one command (if you can SSH):
 cat ~/.ssh/digitalocean_key.pub | ssh root@161.35.227.49 "cat >> ~/.ssh/authorized_keys"
 ```
 
+
+
 ### Step 3: Use the Key for SSH
 
 ```bash
+
 # Now connect with your key
 ssh -i ~/.ssh/digitalocean_key root@161.35.227.49
 
@@ -60,7 +74,8 @@ EOF
 ssh 161.35.227.49
 ```
 
----
+
+##
 
 ## The Problem You're Having
 
@@ -70,8 +85,7 @@ The DigitalOcean droplet has **public key authentication required**, meaning you
 2. ✅ The matching public key (added to `~/.ssh/authorized_keys` on the droplet)
 
 **You have neither right now**, so you can't connect.
-
----
+##
 
 ## Solutions (In Order of Easiest)
 
@@ -93,8 +107,7 @@ If you created the key on your Ubuntu machine at home:
   ```bash
   scp -r ~/.ssh/digitalocean_key root@velinor-server:~/.ssh/
   ```
-
----
+##
 
 ## Right Now: Use Web Console (Fastest)
 
@@ -104,8 +117,7 @@ If you created the key on your Ubuntu machine at home:
 4. Click "Access" → "Console"
 5. You'll get a terminal directly in your browser
 6. From there, clone and run the deployment script!
-
----
+##
 
 ## After You Get Access
 
@@ -117,7 +129,8 @@ cd saoriverse-console
 chmod +x docker-setup.sh && ./docker-setup.sh
 ```
 
----
+
+##
 
 ## Reference: Common SSH Key Locations
 
@@ -130,9 +143,10 @@ chmod +x docker-setup.sh && ./docker-setup.sh
 ~/keys/do_key              # In keys folder
 ```
 
-Try searching for these files on your machines.
 
----
+
+Try searching for these files on your machines.
+##
 
 **Status**: Waiting for SSH access
 **Next**: Either find your key OR use DigitalOcean console

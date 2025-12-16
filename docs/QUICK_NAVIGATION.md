@@ -1,8 +1,7 @@
 # Quick Navigation Guide
 
 Welcome to SaoriVerse Console! This guide helps you find what you need quickly.
-
----
+##
 
 ## 🚀 Getting Started (5 Minutes)
 
@@ -12,13 +11,15 @@ Welcome to SaoriVerse Console! This guide helps you find what you need quickly.
 3. Check `FILE_ORGANIZATION_GUIDE.md` - Where everything is located
 
 **Just Need to Run It?**
+
 ```bash
 python core/main_v2.py        # Start Streamlit dev app
 bash scripts/run_local.sh      # Run with full setup
 bash scripts/deploy.sh         # Deploy to production
 ```
 
----
+
+##
 
 ## 📚 Documentation Map
 
@@ -33,8 +34,7 @@ bash scripts/deploy.sh         # Deploy to production
 | Design documents | docs/guides/ | Multiple guides |
 | Test & analysis reports | docs/reports/ | Various JSON & text files |
 | Historical context | docs/archives/ | Phase & sprint docs |
-
----
+##
 
 ## 🔧 Core Application Files
 
@@ -51,8 +51,7 @@ Located in `core/` directory:
 | enhanced_response_composer.py | Response composition |
 | relational_memory.py | Memory system |
 | And 3 more modules... | (See FILE_ORGANIZATION_GUIDE.md) |
-
----
+##
 
 ## 📊 Data Organization
 
@@ -64,8 +63,7 @@ Located in `data/` directory:
 | lexicons/ | NLP lexicon data | 4 files |
 | analysis/ | Analysis output files | Expandable |
 | exports/ | Export files | Expandable |
-
----
+##
 
 ## ⚙️ Configuration & Deployment
 
@@ -74,8 +72,7 @@ Located in `data/` directory:
 | config/ | Python requirements, package.json, etc. | 7 files |
 | scripts/ | Deployment and setup scripts | 2 files |
 | logs/ | Application runtime logs | 5 files |
-
----
+##
 
 ## 🎨 Features & Extensions
 
@@ -88,8 +85,7 @@ Located in `emotional_os/` directory:
 - And more...
 
 See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
-
----
+##
 
 ## 🧪 Testing & Tools
 
@@ -99,17 +95,19 @@ See `FILE_ORGANIZATION_GUIDE.md` for complete breakdown.
 | tools/analysis/ | Analysis utilities |
 | tools/document_processing/ | Document handling tools |
 | tools/glyph_testing/ | Glyph validation tools |
-
----
+##
 
 ## 📖 Common Tasks
 
 ### I want to...
 
 **Start the application**
+
 ```bash
 python core/main_v2.py
 ```
+
+
 
 **Find where a specific feature is**
 → Check `FILE_ORGANIZATION_GUIDE.md` or `DEVELOPER_QUICKSTART.md`
@@ -124,22 +122,27 @@ python core/main_v2.py
 → Check `docs/archives/`
 
 **Deploy to production**
+
 ```bash
 bash scripts/deploy.sh
 ```
 
+
+
 **Set up locally**
+
 ```bash
 bash scripts/run_local.sh
 ```
+
+
 
 **Add a new feature**
 → See `DEVELOPER_QUICKSTART.md` New Developer Checklist
 
 **Debug an issue**
 → Check `logs/` directory for application logs
-
----
+##
 
 ## 🎯 Project Structure at a Glance
 
@@ -163,7 +166,8 @@ saoriverse-console/
 └── archive/                  ← Historical code
 ```
 
----
+
+##
 
 ## ❓ Need Help?
 
@@ -172,12 +176,12 @@ saoriverse-console/
 3. **Want architecture details?** → `docs/INDEX.md`
 4. **Need to deploy?** → `DEPLOYMENT_READINESS_REPORT.md`
 5. **Need documentation?** → `docs/INDEX.md` for complete navigation
-
----
+##
 
 ## ✅ Quick Verification
 
 Everything working? Run this:
+
 ```bash
 python -c "
 import sys
@@ -188,7 +192,8 @@ print('✅ All systems operational!')
 "
 ```
 
----
+
+##
 
 **Last Updated**: December 3, 2025
 **Status**: ✅ Deployment Ready

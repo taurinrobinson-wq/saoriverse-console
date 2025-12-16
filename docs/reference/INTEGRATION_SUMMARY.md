@@ -51,6 +51,8 @@ AVAILABLE FOR NEXT TURN
     └─ User can see and export them
 ```
 
+
+
 ## Integration Points
 
 ### 1. **UI Processing Loop** (`emotional_os/deploy/modules/ui.py`, line 573)
@@ -61,20 +63,22 @@ if processing_mode == "hybrid":
     if 'hybrid_processor' not in st.session_state:
         processor = create_integrated_processor(learner, extractor, user_id)
         st.session_state['hybrid_processor'] = processor
-    
+
     # NEW: Process through evolution pipeline
     evolution_result = processor.process_user_message(
         user_message=user_input,
         ai_response=response,
         user_id=user_id,
     )
-    
+
     # NEW: Check for and display new glyphs
     new_glyphs = evolution_result['pipeline_stages']['glyph_generation']['new_glyphs_generated']
     if new_glyphs:
         st.session_state['new_glyphs_this_session'].extend(new_glyphs)
         st.success(f"✨ {len(new_glyphs)} new glyph(s) discovered!")
 ```
+
+
 
 ### 2. **Sidebar Display** (`main_v2.py`, lines 131-181)
 
@@ -87,6 +91,8 @@ with st.sidebar.expander("✨ Glyphs Discovered This Session", expanded=False):
             # Display symbol, name, emotions, keywords
 ```
 
+
+
 ### 3. **Conversation ID Tracking**
 
 The system tracks conversations with unique IDs:
@@ -95,6 +101,8 @@ The system tracks conversations with unique IDs:
 conversation_id=st.session_state.get('conversation_id', 'default')
 ```
 
+
+
 Add this to `main_v2.py` initialization if not present:
 
 ```python
@@ -102,6 +110,8 @@ if 'conversation_id' not in st.session_state:
     from uuid import uuid4
     st.session_state['conversation_id'] = str(uuid4())[:8]
 ```
+
+
 
 ## What Gets Stored
 
@@ -113,6 +123,8 @@ st.session_state['new_glyphs_this_session'] # Glyphs generated this session
 st.session_state['conversation_id']         # Unique conversation ID
 ```
 
+
+
 ### Persistent Files (survives session restarts)
 
 ```
@@ -122,6 +134,8 @@ learning/
 │   └── user_{id}_lexicon.json        # User's personal vocabulary
 └── hybrid_learning_log.jsonl          # Append-only learning log
 ```
+
+
 
 ## Pattern Detection Threshold
 
@@ -138,6 +152,8 @@ Turn 2: love (1) + vulnerability (1) = 2
 After 150+ turns: combined frequency reaches 300 → glyph created
 ```
 
+
+
 For faster glyph creation in testing, you can reduce this threshold:
 
 ```python
@@ -147,9 +163,12 @@ evolution = DynamicGlyphEvolution(
 )
 ```
 
+
+
 ## Example Flow: Real Conversation
 
 ### Turn 1
+
 ```
 User: "I want to let someone in, but the fear is overwhelming"
 AI:   "That exposed feeling is the threshold of intimacy itself..."
@@ -159,7 +178,10 @@ Patterns found: (love + vulnerability), (love + intimacy), (vulnerability + fear
 Glyphs generated: 0 (patterns not yet at threshold)
 ```
 
+
+
 ### Turn 2
+
 ```
 User: "When I'm with them, the fear turns into something beautiful"
 AI:   "That transformation from fear into becoming is love..."
@@ -170,7 +192,10 @@ Lexicon update: vulnerability frequency +1, transformation frequency +1
 Glyphs generated: 0 (still building)
 ```
 
+
+
 ### Turn 10 (after similar themed exchanges)
+
 ```
 User: "There's something sacred about being known..."
 AI:   "Being held in genuine love is the deepest intimacy..."
@@ -184,6 +209,8 @@ Glyphs generated: 1 ✨ "Intimate Connection" (♥❤)
   ├─ Response cue: "Recognize the deep closeness being shared"
   └─ Stored in: learning/conversation_glyphs.json
 ```
+
+
 
 ## Configuration
 
@@ -203,6 +230,8 @@ emotion_symbols = {
 }
 ```
 
+
+
 ### In `dynamic_glyph_evolution.py` (glyph naming)
 
 ```python
@@ -213,6 +242,8 @@ name_map = {
     # Customize for your use case
 }
 ```
+
+
 
 ## Performance Considerations
 
@@ -234,11 +265,15 @@ name_map = {
 To reduce processing:
 
 ```python
+
 # In ui.py, around line 573
+
 # Only process evolution every N turns instead of every turn
 if len(st.session_state[conversation_key]) % 5 == 0:  # Every 5 turns
     evolution_result = processor.process_user_message(...)
 ```
+
+
 
 ## Testing the Integration
 
@@ -270,6 +305,8 @@ result = processor.process_user_message(
 
 print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['new_glyphs_generated'])}")
 ```
+
+
 
 ### In Streamlit
 
@@ -304,11 +341,15 @@ print(f"Glyphs generated: {len(result['pipeline_stages']['glyph_generation']['ne
 2. Is the sidebar section expanded?
 
 **Fix**:
+
 ```python
+
 # In main_v2.py, add debug
 if 'new_glyphs_this_session' in st.session_state:
     st.sidebar.write(f"Debug: {len(st.session_state['new_glyphs_this_session'])} glyphs in session")
 ```
+
+
 
 ### Learning Not Happening
 
@@ -320,10 +361,14 @@ if 'new_glyphs_this_session' in st.session_state:
 3. Verify learning functions are called
 
 **Fix**:
+
 ```python
+
 # In ui.py, enable debug mode to see signals
 st.session_state['show_debug'] = True
 ```
+
+
 
 ## Next Steps
 
@@ -395,6 +440,8 @@ st.session_state['show_debug'] = True
     │  "✨ Glyphs Discovered..."      │
     └────────────────────────────────┘
 ```
+
+
 
 ## Files Reference
 

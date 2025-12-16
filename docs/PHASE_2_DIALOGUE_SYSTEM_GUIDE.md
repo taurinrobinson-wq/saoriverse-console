@@ -74,6 +74,8 @@ export const dialogueDatabase: Record<string, DialogueNode> = {
 };
 ```
 
+
+
 ### Step 2: Update GameScene Component
 
 **File to modify**: `velinor-web/src/components/GameScene.tsx`
@@ -86,6 +88,8 @@ interface GameSceneProps {
   onChoiceClick: (choiceId: string, choiceIndex: number) => void;
 }
 ```
+
+
 
 ### Step 3: Create Dialogue Handler Hook
 
@@ -138,6 +142,8 @@ export function useDialogue() {
 }
 ```
 
+
+
 ### Step 4: Create Main Dialogue Component
 
 **File to create**: `velinor-web/src/components/DialogueRenderer.tsx`
@@ -178,6 +184,8 @@ export default function DialogueRenderer() {
 }
 ```
 
+
+
 ### Step 5: Update Main Game Page
 
 **File to modify**: `velinor-web/src/app/game/[sessionId]/page.tsx`
@@ -197,6 +205,8 @@ Replace the hardcoded GameScene with DialogueRenderer:
 // New:
 <DialogueRenderer />
 ```
+
+
 
 ### Step 6: Add NPC Personality System
 
@@ -229,6 +239,8 @@ export const NPCDatabase: Record<string, NPC> = {
   // ... more NPCs
 };
 ```
+
+
 
 ## Content Creation Tasks
 
@@ -315,6 +327,8 @@ velinor-web/src/
     └── game/[sessionId]/
         └── page.tsx           (Updated - use DialogueRenderer)
 ```
+
+
 
 ## Success Criteria
 

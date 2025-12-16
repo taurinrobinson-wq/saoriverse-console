@@ -23,6 +23,8 @@ deploy/*.toml
 templates/*.template
 ```
 
+
+
 3. Commit and push. CI will respect the allowlist when deciding whether a push/PR should fail.
 
 Security best practices
@@ -42,6 +44,7 @@ How collaborators can sync after a history rewrite
 If the main branch was force-pushed after a scrub, instruct collaborators to do the following:
 
 ```bash
+
 # Fetch and reset local main to match origin
 git fetch origin
 git checkout main
@@ -51,6 +54,8 @@ git reset --hard origin/main
 git reflog expire --expire=now --all
 git gc --prune=now --aggressive
 ```
+
+
 
 Optional enhancements I can add
 

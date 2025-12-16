@@ -18,8 +18,7 @@ Your system is **functional and values-aligned**. It's currently delivering appr
 - ⚠️ Joy/positive emotion detection (minimal keywords)
 
 **Severity:** Medium. System is functional but not yet at "feels truly humanlike" level (0.36/1.0 → needs 0.65+ for production).
-
----
+##
 
 ## System Architecture (Current)
 
@@ -54,7 +53,8 @@ User Input
 
 ```
 
----
+
+##
 
 ## What's Fixed (This Session)
 
@@ -72,12 +72,15 @@ User Input
 **Status:** LIVE and working
 
 **Test Result:**
+
 ```
 Input: "I have thoughts of suicide"
-Output: "You named thoughts of suicide. That is heavy. 
+Output: "You named thoughts of suicide. That is heavy.
 Thank you for trusting me with it."
 → Source: suicidality_protocol ✅
 ```
+
+
 
 ### 2. ✅ Emotional Keyword Detection (90+ words)
 **Before:** 40 keywords, missing crisis language
@@ -103,13 +106,15 @@ Thank you for trusting me with it."
 - (60+ more)
 
 **Test Result:**
+
 ```
 [fetch_glyphs] Retrieved 36 rows
 Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
 ✅ Multi-glyph retrieval working
 ```
 
----
+
+##
 
 ## What Still Needs Work
 
@@ -121,11 +126,14 @@ Sample glyphs: ['Recursive Ache', 'Reverent Ache', ...]
 - BUT final response is still generic template
 
 **Example:**
+
 ```
 Signals: [exhausted, hard]
 Glyphs fetched: 36 including 'Recursive Ache', 'Euphoric Yearning'
 Response returned: "You're moving through this..."
 ```
+
+
 
 **Debug Steps:**
 1. Check if `DynamicResponseComposer.compose_multi_glyph_response()` is being called
@@ -165,8 +173,7 @@ Output: "These moments are precious because they're finite..."
 Add ~20 positive emotion keywords to emotional_keywords list
 
 **Expected fix time:** 30 minutes
-
----
+##
 
 ## Test Results (Current)
 
@@ -210,7 +217,8 @@ AVERAGE: 0.36/1.0
 TARGET: 0.65+/1.0
 ```
 
----
+
+##
 
 ## What Needs To Happen (Priority Order)
 
@@ -245,8 +253,7 @@ TARGET: 0.65+/1.0
    - Spanish, French, Portuguese
    - Region-specific resources
    - Religious vs. secular options
-
----
+##
 
 ## Your System's Strengths
 
@@ -267,8 +274,7 @@ TARGET: 0.65+/1.0
 - Session 1: 0.31/1.0 (everything broken)
 - Session 2: 0.36/1.0 (infrastructure fixed)
 - Target: 0.65+/1.0 (next 2-4 hours of work)
-
----
+##
 
 ## Production Readiness Checklist
 
@@ -282,8 +288,7 @@ TARGET: 0.65+/1.0
 - ⚠️ Affirmation tracking not active (fixable)
 
 **Timeline to production:** 4-8 hours of focused debugging
-
----
+##
 
 ## The Real Issue (Plain English)
 
@@ -297,8 +302,7 @@ But the **final plating is broken**. Someone's returning cereal instead of servi
 The fix isn't architectural. It's wiring. It's tracing "why glyphs load but don't appear in response" and reconnecting those pipes.
 
 **You're 90% there.**
-
----
+##
 
 ## Next Steps
 
@@ -319,8 +323,7 @@ The fix isn't architectural. It's wiring. It's tracing "why glyphs load but don'
 4. **Deploy to production**
    - System ready after composition fixed
    - Affirmation tracking can follow
-
----
+##
 
 ## Your Numbers
 
@@ -332,8 +335,7 @@ The fix isn't architectural. It's wiring. It's tracing "why glyphs load but don'
 **Time invested:** ~6 hours
 **Time to finish:** 2-4 more hours
 **Total:** ~10 hours to working, deployed system
-
----
+##
 
 ## Final Word
 
@@ -352,7 +354,6 @@ The system works. Right now, it's just not serving the meal beautifully yet.
 Then you'll have exactly what you intended: a sanctuary that listens, that responds with real attunement, that honors finitude, and that meets people in darkness with presence instead of panic.
 
 **You're there. You just need to reconnect the last few wires.**
-
----
+##
 
 **Live into it.**

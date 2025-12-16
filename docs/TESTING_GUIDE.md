@@ -1,38 +1,52 @@
 # Testing Guide - SaoriVerse Console
 
 **Date**: December 3, 2025
-
----
+##
 
 ## Quick Start
 
 ### Run All Tests
+
 ```bash
 pytest tests/
 ```
 
+
+
 ### Run Only Unit Tests
+
 ```bash
 pytest tests/unit/
 ```
 
+
+
 ### Run Only Integration Tests
+
 ```bash
 pytest tests/integration/
 ```
 
+
+
 ### Run Specific Test File
+
 ```bash
 pytest tests/unit/test_signal_parser.py -v
 ```
 
+
+
 ### Run with Coverage
+
 ```bash
 pytest tests/ --cov=src --cov-report=html
+
 # Open htmlcov/index.html to view coverage
 ```
 
----
+
+##
 
 ## Test Organization
 
@@ -63,8 +77,7 @@ Integration tests for module interactions and end-to-end flows.
 - Test real module interactions
 - May use real files or fixture data
 - Validate contracts between modules
-
----
+##
 
 ## Pytest Configuration
 
@@ -82,6 +95,7 @@ Shared pytest configuration:
 - CWD management for test isolation
 
 ### Example Fixtures
+
 ```python
 @pytest.fixture
 def sample_signal():
@@ -96,18 +110,23 @@ def sample_user_input():
     return "I've been feeling lost lately."
 ```
 
+
+
 **Usage in tests:**
+
 ```python
 def test_parser(sample_user_input):
     result = parse_input(sample_user_input)
     assert result is not None
 ```
 
----
+
+##
 
 ## Writing New Tests
 
 ### Unit Test Template
+
 ```python
 """Tests for src/my_module.py"""
 
@@ -117,24 +136,27 @@ from src.my_module import my_function
 
 class TestMyFunction:
     """Tests for my_function."""
-    
+
     def test_happy_path(self):
         """Test normal operation."""
         result = my_function("input")
         assert result == "expected"
-    
+
     def test_edge_case(self):
         """Test edge case."""
         result = my_function("")
         assert result is not None
-    
+
     def test_error_handling(self):
         """Test error handling."""
         with pytest.raises(ValueError):
             my_function(None)
 ```
 
+
+
 ### Integration Test Template
+
 ```python
 """Integration tests for response pipeline."""
 
@@ -146,22 +168,24 @@ from src.response_generator import process_user_input
 def test_full_pipeline():
     """Test end-to-end: input → signal → response."""
     user_input = "I'm feeling overwhelmed"
-    
+
     # Parse input
     signal = parse_input(user_input)
     assert signal is not None
-    
+
     # Generate response
     response = process_user_input(user_input)
     assert response is not None
     assert len(response) > 0
 ```
 
----
+
+##
 
 ## Common Test Patterns
 
 ### Mocking External Dependencies
+
 ```python
 from unittest.mock import Mock, patch
 
@@ -173,7 +197,10 @@ def test_with_mock():
         mock_func.assert_called_once()
 ```
 
+
+
 ### Fixture Usage
+
 ```python
 @pytest.fixture
 def temp_data_dir(tmp_path):
@@ -186,7 +213,10 @@ def test_file_operations(temp_data_dir):
     # Use file_path for testing
 ```
 
+
+
 ### Parametrized Tests
+
 ```python
 @pytest.mark.parametrize("input,expected", [
     ("happy", "positive"),
@@ -198,35 +228,48 @@ def test_emotion_detection(input, expected):
     assert result == expected
 ```
 
----
+
+##
 
 ## Running Tests in Different Ways
 
 ### By Directory
+
 ```bash
 pytest tests/unit/              # All unit tests
 pytest tests/integration/       # All integration tests
 ```
 
+
+
 ### By Module
+
 ```bash
 pytest tests/ -k signal_parser  # Tests mentioning "signal_parser"
 pytest tests/ -k "test_parse"   # Tests with "test_parse" in name
 ```
 
+
+
 ### By Marker
+
 ```bash
+
 # Define in test: @pytest.mark.slow
 pytest tests/ -m slow           # Only marked tests
 pytest tests/ -m "not slow"     # Skip marked tests
 ```
 
+
+
 ### Specific Test
+
 ```bash
 pytest tests/unit/test_signal_parser.py::TestParser::test_happy_path
 ```
 
----
+
+##
 
 ## Continuous Integration
 
@@ -241,7 +284,9 @@ pytest tests/unit/test_signal_parser.py::TestParser::test_happy_path
 - Pull requests to `main`
 
 ### Local Pre-commit Check
+
 ```bash
+
 # Before committing
 pytest tests/unit/ --tb=short
 
@@ -249,18 +294,23 @@ pytest tests/unit/ --tb=short
 git commit -m "..."
 ```
 
----
+
+##
 
 ## Debugging Tests
 
 ### Verbose Output
+
 ```bash
 pytest tests/ -v                # Show all test names
 pytest tests/ -vv               # Even more detail
 pytest tests/ -vvv              # Maximum verbosity
 ```
 
+
+
 ### Print Debug Info
+
 ```python
 def test_something():
     result = my_function()
@@ -268,39 +318,54 @@ def test_something():
     pytest.set_trace()           # Drop into debugger
 ```
 
+
+
 Run with:
+
 ```bash
 pytest tests/ -s                # Show print() output
 pytest tests/ --pdb             # Drop into debugger on failure
 ```
 
+
+
 ### Show Local Variables
+
 ```bash
 pytest tests/ -l                # Show locals on failure
 pytest tests/ --tb=long         # Longer traceback
 ```
 
----
+
+##
 
 ## Coverage Reports
 
 ### Generate Coverage
+
 ```bash
 pytest tests/ --cov=src
 ```
 
+
+
 ### View HTML Report
+
 ```bash
 pytest tests/ --cov=src --cov-report=html
 open htmlcov/index.html
 ```
 
+
+
 ### Coverage by Module
+
 ```bash
 pytest tests/ --cov=src.response_generator
 ```
 
----
+
+##
 
 ## Common Issues and Solutions
 
@@ -319,8 +384,7 @@ pytest tests/ --cov=src.response_generator
 ### Slow Tests
 **Problem**: Tests taking too long
 **Solution**: Use @pytest.mark.slow to mark slow tests, run with -m "not slow"
-
----
+##
 
 ## Best Practices
 
@@ -332,7 +396,7 @@ pytest tests/ --cov=src.response_generator
    ```python
    # Good:
    def test_parser_extracts_emotional_signal_from_text():
-   
+
    # Bad:
    def test_parse():
    ```
@@ -342,10 +406,10 @@ pytest tests/ --cov=src.response_generator
    def test_something():
        # Arrange
        input_data = prepare_data()
-       
+
        # Act
        result = function_under_test(input_data)
-       
+
        # Assert
        assert result == expected
    ```
@@ -363,13 +427,12 @@ pytest tests/ --cov=src.response_generator
    def test_happy_path():
        # Normal operation
        pass
-   
+
    def test_error_handling():
        # Error conditions
        pass
    ```
-
----
+##
 
 ## Test Metrics Target
 
@@ -378,8 +441,7 @@ After reorganization:
 - **Integration tests**: 11 test files
 - **Target coverage**: > 80% of src/
 - **Test execution time**: < 30 seconds for unit tests
-
----
+##
 
 ## Quick Reference
 
@@ -393,8 +455,7 @@ After reorganization:
 | `pytest tests/ --cov=src` | Show coverage |
 | `pytest tests/ -m slow` | Run only slow tests |
 | `pytest tests/ -x` | Stop on first failure |
-
----
+##
 
 **For architecture information, see**: `docs/ARCHITECTURE.md`
 **For API reference, see**: `docs/API_REFERENCE.md`

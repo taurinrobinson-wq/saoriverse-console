@@ -11,6 +11,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
 ## Privacy Problem Solved
 
 **Before (Privacy Violation):**
+
 ```json
 {
   "timestamp": "2025-11-03T00:18:19.077172",
@@ -22,6 +23,8 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
 }
 ```
 
+
+
 **Issues:**
 - Raw user text stored plaintext (sensitive mental health data)
 - AI response stored plaintext (context can reveal personal details)
@@ -31,6 +34,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
 ## Privacy Solution: Gate-Based Data Masking
 
 **After (Privacy Safe):**
+
 ```json
 {
   "timestamp": "2025-11-03T07:45:08.298103",
@@ -42,6 +46,8 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
   "exchange_quality": "logged"
 }
 ```
+
+
 
 **What Changed:**
 - ✅ Raw `user_input` → Removed (no personal data stored)
@@ -61,6 +67,7 @@ This document describes how **Option A: Gate-Based Data Masking** protects user 
 **What it does:** Appends each exchange to `learning/hybrid_learning_log.jsonl`
 
 **Before (Privacy Violation):**
+
 ```python
 log_entry = {
     "timestamp": datetime.now().isoformat(),
@@ -72,7 +79,10 @@ log_entry = {
 }
 ```
 
+
+
 **After (Privacy Safe):**
+
 ```python
 log_entry = {
     "timestamp": datetime.now().isoformat(),
@@ -87,6 +97,8 @@ log_entry = {
 }
 ```
 
+
+
 **Impact:** New exchanges will log only signals, gates, and metadata.
 
 #### Method 2: `_learn_to_user_lexicon()` (Lines 276-315)
@@ -94,12 +106,16 @@ log_entry = {
 **What it does:** Stores emotional keywords and patterns in user's personal lexicon
 
 **Before (Privacy Violation):**
+
 ```python
 entry = user_overrides["signals"][signal]
 entry["examples"].append(user_input)  # ❌ RAW MESSAGE STORED
 ```
 
+
+
 **After (Privacy Safe):**
+
 ```python
 entry = user_overrides["signals"][signal]
 entry["example_contexts"].append({
@@ -109,6 +125,8 @@ entry["example_contexts"].append({
     # NO user_input stored
 })
 ```
+
+
 
 **Impact:** User lexicon learns signal co-occurrence patterns, not raw messages.
 
@@ -125,14 +143,18 @@ entry["example_contexts"].append({
 - Shows compliant entry format
 
 **Usage:**
+
 ```bash
 python3 privacy_monitor.py
 ```
 
+
+
 **Example Output:**
+
 ```
-📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
-======================================================================
+
+# 📋 PRIVACY AUDIT: learning/hybrid_learning_log.jsonl
 ✅ Total entries: 3738
 ❌ Violations: 11214 (from 3738 entries in old format)
 📊 Compliance: 0.0% (entries are from pre-privacy-implementation)
@@ -141,14 +163,17 @@ python3 privacy_monitor.py
 New exchanges (after code deployment) will use privacy-safe format.
 ```
 
+
+
 ### Test Verification: `test_privacy_masking.py`
 
 **Purpose:** Verify privacy masking works correctly
 
 **Test Results (✅ ALL PASSED):**
+
 ```
 ✅ NO raw user_input field
-✅ NO ai_response field  
+✅ NO ai_response field
 ✅ HAS user_id_hash field
 ✅ HAS signals field
 ✅ HAS gates field
@@ -164,6 +189,8 @@ New exchanges (after code deployment) will use privacy-safe format.
 ✅ example_contexts have associated_signals
 ✅ example_contexts have gates
 ```
+
+
 
 ## Privacy Protection: What's Preserved vs What's Removed
 
@@ -189,6 +216,7 @@ New exchanges (after code deployment) will use privacy-safe format.
 ## Data Flow: Before and After
 
 ### Before (With Raw Data Leakage)
+
 ```
 User Input → Extracted Signals → LOGGED RAW → Hybrid Learning
    ↓                              (Private!)    ↓
@@ -197,7 +225,10 @@ User Input → Extracted Signals → LOGGED RAW → Hybrid Learning
                            ❌ PRIVACY RISK
 ```
 
+
+
 ### After (Gate-Based Data Masking)
+
 ```
 User Input → Extracted Signals → LOGGED SAFE → Hybrid Learning
    ↓           ↓                  (Signals)      ↓
@@ -206,6 +237,8 @@ depressed"   "vulnerability"     signals,      (signal contexts
              "melancholy"        gates,        only)
                                  metadata      ✅ PRIVACY SAFE
 ```
+
+
 
 ## Security Model
 

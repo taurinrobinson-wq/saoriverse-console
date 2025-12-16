@@ -1,5 +1,4 @@
-User preferences DB migration
-=============================
+# User preferences DB migration
 
 This folder contains a small SQL migration to create a server-side table used
 for storing simple UI preferences (currently used to persist the "Save my chats"
@@ -16,6 +15,7 @@ Columns:
 To apply this migration to your Supabase/Postgres database, run (example):
 
 ```bash
+
 # If you have psql configured with appropriate connection string / env var:
 psql $DATABASE_URL -f sql/create_user_preferences_table.sql
 
@@ -23,6 +23,8 @@ psql $DATABASE_URL -f sql/create_user_preferences_table.sql
 supabase db remote set $YOUR_DB_CONNECTION_URL
 psql $YOUR_DB_CONNECTION_URL -f sql/create_user_preferences_table.sql
 ```
+
+
 
 Notes:
 - This migration is intentionally minimal. If you prefer, create the table via

@@ -26,6 +26,8 @@ python scripts/utilities/integrate_glyph_lexicons.py \
     --output emotional_os/glyphs/glyph_lexicon_integrated.json
 ```
 
+
+
 ## What This Pipeline Does
 
 | Phase | Script | What It Does | Time |
@@ -71,6 +73,7 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 ## File Locations
 
 ### Poetry Downloads
+
 ```
 /Volumes/My Passport for Mac/saoriverse_data/gutenberg_poetry/
 ├── dickinson_complete.txt
@@ -79,7 +82,10 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
 └── ... [27 more]
 ```
 
+
+
 ### Generated Outputs
+
 ```
 /workspaces/saoriverse-console/
 ├── generated_glyphs_from_poetry.json          (15-25 glyphs)
@@ -89,37 +95,56 @@ Beyond the original 8 (love, joy, vulnerability, transformation, admiration, sen
     └── gutenberg_bulk_lexicon.json            (processed lexicon)
 ```
 
+
+
 ## Common Commands
 
 ### Process Everything from Scratch
+
 ```bash
+
 # Takes ~2-5 hours total
 ./scripts/utilities/run_full_gutenberg_pipeline.sh
 ```
 
+
+
 ### Just Download Poetry
+
 ```bash
 python scripts/utilities/gutenberg_fetcher.py
 ```
 
+
+
 ### Process Existing Poetry Files
+
 ```bash
 python scripts/utilities/bulk_text_processor.py --dir /path/to/poetry/ --chunk-size 500
 ```
 
+
+
 ### Generate Glyphs Only (if processing already done)
+
 ```bash
 python scripts/utilities/poetry_glyph_generator.py --lexicon learning/user_overrides/gutenberg_bulk_lexicon.json
 ```
 
+
+
 ### Check Processing Status
+
 ```bash
+
 # View learning log
 tail -f learning/hybrid_learning_log.jsonl
 
 # View results
 cat bulk_processing_results.json | jq '.'
 ```
+
+
 
 ## Expected Results
 
@@ -139,6 +164,8 @@ After full pipeline execution:
   "status": "✓ COMPLETE"
 }
 ```
+
+
 
 ## Troubleshooting
 
@@ -165,11 +192,15 @@ After full pipeline execution:
 ## Next Steps
 
 ### View Generated Glyphs
+
 ```bash
 cat generated_glyphs_from_poetry.json | jq '.[] | {name, symbol, core_emotions, frequency}'
 ```
 
+
+
 ### Add to Saoriverse
+
 ```python
 from emotional_os.glyphs.glyph_lexicon import GlyphLexicon
 
@@ -188,8 +219,11 @@ for glyph in new_glyphs:
 lexicon.save()
 ```
 
+
+
 ### Create Custom Poetry Collections
 Edit `scripts/utilities/gutenberg_fetcher.py` and add poets to `POETRY_BOOKS`:
+
 ```python
 POETRY_BOOKS = {
     ...existing...
@@ -197,16 +231,17 @@ POETRY_BOOKS = {
 }
 ```
 
+
+
 ## Documentation
 
 For detailed information, see:
 - [Full Project Gutenberg Guide](./PROJECT_GUTENBERG_EXTRACTION_GUIDE.md)
 - [Emotional Dimensions Reference](./README.md)
 - [Learning System](./learning/README.md)
+##
 
----
-
-**Total Time**: ~2-5 hours  
-**Output**: 50-80 new poetry-derived glyphs  
-**New Dimensions**: 9+  
+**Total Time**: ~2-5 hours
+**Output**: 50-80 new poetry-derived glyphs
+**New Dimensions**: 9+
 **Status**: Production-Ready ✓

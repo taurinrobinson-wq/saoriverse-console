@@ -1,10 +1,9 @@
 # 🛡️ Anonymization Protocol for Saonyx / Keeper's Edition
 
-**Status**: ✅ **IMPLEMENTED** (Intelligent Symbolic Anonymization)  
-**Date**: November 5, 2025  
+**Status**: ✅ **IMPLEMENTED** (Intelligent Symbolic Anonymization)
+**Date**: November 5, 2025
 **Purpose**: Dramatically reduce HIPAA/GDPR burden while preserving emotional integrity
-
----
+##
 
 ## 🧬 What It Does
 
@@ -27,8 +26,7 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
    - GDPR-aligned (easier deletion/portability)
    - Consent-based de-anonymization for sharing
    - Trackable anonymization maps for audits
-
----
+##
 
 ## <strong>FP</strong> What It Preserves
 
@@ -42,12 +40,12 @@ This protocol intelligently anonymizes journal entries, rituals, and emotional d
 | **Name** | "Michelle" | "The Thread" | ❌ Removed |
 | **Specific location** | "Bell, CA" | "West Coast" | ❌ Generalized |
 | **Exact date** | "August 2023" | "2 years ago" | ❌ Abstracted |
-
----
+##
 
 ## 🔐 Symbolic Glyphs
 
 ### Family Roles
+
 ```
 mother/parent        → the Lightkeeper
 father/guardian      → the Steward / the Guardian
@@ -61,7 +59,10 @@ boss/authority       → the Authority
 friend/companion     → the Companion
 ```
 
+
+
 ### Emotional States & Medical Terms
+
 ```
 depression           → the Depths
 anxiety              → the Tightness
@@ -74,7 +75,10 @@ medication           → the Medicine
 diagnosis            → the Recognition
 ```
 
+
+
 ### Locations
+
 ```
 California           → West Coast
 New York             → East Coast
@@ -84,7 +88,8 @@ Seattle              → Pacific Northwest
 Denver               → Rocky Mountain
 ```
 
----
+
+##
 
 ## 🧭 Implementation Strategy
 
@@ -112,12 +117,12 @@ Denver               → Rocky Mountain
 - **Technique**: Preserve through symbolic mapping
 - **Preserves**: Emotional coherence
 - **Example**: "My daughter learned to read" → "My Lightkeeper learned to read"
-
----
+##
 
 ## 💾 Usage Example
 
 ### Basic Anonymization
+
 ```python
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
 
@@ -134,38 +139,55 @@ entry = {
 anonymized, anonmap = anon.anonymize_entry(entry, "user_123")
 
 print(anonymized["text"])
+
 # Output: "The Thread said I should see The Witness. I'm the Depths since 2 years ago."
 ```
 
+
+
 ### With Consent (Medical Details Preserved)
+
 ```python
+
 # Allow medical terms if user explicitly consents
 anon_with_medical = AnonymizationProtocol(allow_medical=True, allow_names=False)
 
 anonymized, anonmap = anon_with_medical.anonymize_entry(entry, "user_123")
 
 print(anonymized["text"])
+
 # Output: "The Thread said I should see The Witness. I'm depressed since 2 years ago."
 ```
 
+
+
 ### Consent Request for Sharing
+
 ```python
+
 # Generate consent request for therapist sharing
 consent = anon.create_consent_request("user_123", "therapy_sharing")
 
 print(consent["question"])
+
 # Output: "Share this moment with your therapist for clinical review?"
 
 print(consent["options"])
+
 # {
 #   "yes_unveil": "Yes, reveal my identity for this purpose",
 #   "yes_keep_anon": "Yes, keep it anonymous",
 #   "no_decline": "No, keep this private"
+
 # }
 ```
 
+
+
 ### Transparency Report
+
 ```python
+
 # Generate report for user to see what was changed
 report = anon.generate_anonymization_report(entry, anonmap)
 
@@ -174,7 +196,8 @@ print(f"Dates anonymized: {report['changes_made']['dates_anonymized']}")
 print(report['specific_replacements'])
 ```
 
----
+
+##
 
 ## 🔐 Benefits
 
@@ -197,42 +220,52 @@ print(report['specific_replacements'])
 - ✅ Reversible (map allows de-anonymization with consent)
 - ✅ Auditable (timestamps and maps recorded)
 - ✅ Transparent (users see what changed)
-
----
+##
 
 ## 🧶 Consent-Based De-Anonymization
 
 ### Use Cases
 
 **1. Therapy Sharing**
+
 ```
 "Would you like to share this with your therapist?"
 → "Yes, reveal my identity for clinical review"
 → Therapist sees: Original names, dates, locations, medical details
 ```
 
+
+
 **2. Legacy Archive**
+
 ```
 "Include this in your personal legacy archive?"
 → "Yes, with my real name"
 → Family sees: Fully un-anonymized entry with your identity
 ```
 
+
+
 **3. Research Contribution**
+
 ```
 "Would you like to contribute to emotional research?"
 → "Yes, but keep me anonymous"
 → Researchers see: Anonymized version (glyphs, relative dates, etc.)
 ```
 
+
+
 **4. Clinical Review**
+
 ```
 "Allow medical team to review with your actual identity?"
 → "Yes, only for this medical issue"
 → Doctor sees: Medical terms preserved, your identity revealed
 ```
 
----
+
+##
 
 ## 🔄 Data Flow
 
@@ -266,7 +299,8 @@ User Entry (Raw)
     └─ If no → Keep private
 ```
 
----
+
+##
 
 ## 📊 Anonymization Report Example
 
@@ -301,12 +335,15 @@ User Entry (Raw)
 }
 ```
 
----
+
+##
 
 ## 🚀 Integration Points
 
 ### 1. Hybrid Learner (emotional_os/learning/hybrid_learner_v2.py)
+
 ```python
+
 # Before logging an exchange:
 from emotional_os.safety.anonymization_protocol import AnonymizationProtocol
 
@@ -326,8 +363,12 @@ _log_exchange(anonymized)
 _store_consent_map(user_id, anonmap)
 ```
 
+
+
 ### 2. Streamlit UI (main_v2.py)
+
 ```python
+
 # After ritual execution:
 st.write("Would you like this moment to be remembered with your name?")
 
@@ -336,29 +377,39 @@ with col1:
     if st.button("Yes, reveal my identity"):
         consent = anon.create_consent_request(user_id, "legacy_archive")
         # Un-anonymize and store
-        
+
 with col2:
     if st.button("Yes, keep it anonymous"):
         # Store anonymized version
         pass
-        
+
 with col3:
     if st.button("No, keep this private"):
         # Don't store at all
         pass
 ```
 
+
+
 ### 3. Export/Archive (emotional_os/glyphs/velonix_reaction_engine.py)
+
 ```python
+
 # When exporting emotional archives:
+
 # Ask user: consent level for export?
+
 # Options:
+
 # - Full (with identity revealed)
+
 # - Anonymized (glyphs, relative dates)
+
 # - Clinical (medical details preserved, names hidden)
 ```
 
----
+
+##
 
 ## 🛠️ Next Steps
 
@@ -370,8 +421,7 @@ with col3:
 - [ ] Document for HIPAA/GDPR compliance report
 - [ ] Set up audit logging for de-anonymization requests
 - [ ] Add differential privacy for signal frequency analysis
-
----
+##
 
 ## 🎯 Philosophy
 
@@ -384,9 +434,8 @@ with col3:
 > feels the emotion, but cannot re-identify the person.
 >
 > That's the power of this design: privacy without loss of presence.
+##
 
----
-
-**Implementation Status**: ✅ Ready for production integration  
-**Compliance**: HIPAA-ready, GDPR-aligned, audit-transparent  
+**Implementation Status**: ✅ Ready for production integration
+**Compliance**: HIPAA-ready, GDPR-aligned, audit-transparent
 **User Experience**: Emotionally coherent, relationally honest, privately protected

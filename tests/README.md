@@ -26,11 +26,14 @@ tests/
     └── test_evolving_glyphs.py
 ```
 
+
+
 ## Running Tests
 
 ### Using the test runner script
 
 ```bash
+
 # Run all tests
 python tests/run_tests.py
 
@@ -47,9 +50,12 @@ python tests/run_tests.py performance
 python tests/run_tests.py --verbose
 ```
 
+
+
 ### Using pytest directly
 
 ```bash
+
 # Run all tests
 pytest tests/
 
@@ -70,6 +76,8 @@ pytest -v tests/
 # Run with markers
 pytest -m unit tests/
 ```
+
+
 
 ## Test Categories
 
@@ -97,16 +105,22 @@ Tests focused on system evolution and performance:
 ## Installation & Setup
 
 ### Prerequisites
+
 ```bash
 pip install -r requirements.txt
 pip install pytest  # If not already included
 ```
 
+
+
 ### First Run
+
 ```bash
 cd /workspaces/saoriverse-console
 python tests/run_tests.py
 ```
+
+
 
 ## Expected Results
 
@@ -131,10 +145,14 @@ If tests fail with import errors, ensure:
 
 ### Database Errors
 Some integration tests require local database setup:
+
 ```bash
+
 # Initialize glyphs database
 python -c "from emotional_os.glyphs import glyphs; glyphs.init_db()"
 ```
+
+
 
 ### Missing Modules
 Tests are designed with graceful fallbacks for optional dependencies (poetry, spaCy, etc.)
@@ -148,7 +166,9 @@ If you see warnings, it's expected and tests will skip that functionality.
 4. Import from project root (conftest.py handles path)
 
 Example:
+
 ```python
+
 # tests/unit/test_my_feature.py
 def test_something():
     from emotional_os.glyphs import some_function
@@ -156,15 +176,20 @@ def test_something():
     assert result is not None
 ```
 
+
+
 5. Run: `pytest tests/unit/test_my_feature.py`
 
 ## CI/CD Integration
 
 For GitHub Actions or other CI systems:
+
 ```yaml
 - name: Run tests
   run: python tests/run_tests.py
 ```
+
+
 
 ## Continuous Integration Setup
 

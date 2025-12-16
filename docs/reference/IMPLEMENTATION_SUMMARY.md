@@ -21,6 +21,8 @@ class ConversationManager:
     - rename_conversation(id, new_title) → Updates title
 ```
 
+
+
 **Features:**
 - Automatic Supabase configuration from `st.secrets`
 - JSON message serialization/deserialization
@@ -33,8 +35,11 @@ Intelligently generates conversation titles from the first user message:
 
 ```python
 generate_auto_name("I've been feeling anxious about work")
+
 # Returns: "Feeling anxious about work"
 ```
+
+
 
 **Features:**
 - Removes common filler phrases
@@ -56,6 +61,8 @@ New sidebar features:
 
 💾 Save my chats (checkbox)
 ```
+
+
 
 **Features:**
 - Lists all user's previous conversations
@@ -101,7 +108,7 @@ Changes to `render_main_app()`:
    ```python
    # Create ConversationManager instance
    manager = ConversationManager(user_id)
-   
+
    # Initialize current conversation ID (UUID)
    current_conversation_id = str(uuid.uuid4())
    ```
@@ -111,10 +118,10 @@ Changes to `render_main_app()`:
    with st.sidebar:
        # Persist toggle
        persist_history = st.checkbox("💾 Save my chats")
-       
+
        # Load and display conversation list
        load_all_conversations_to_sidebar(manager)
-       
+
        # New conversation button
        if st.button("➕ New Conversation"):
            # Reset conversation
@@ -141,6 +148,7 @@ Changes to `render_main_app()`:
 ## Data Flow
 
 ### New Conversation
+
 ```
 User starts app
     ↓
@@ -165,7 +173,10 @@ Page refresh
 Conversation preserved in sidebar
 ```
 
+
+
 ### Load Previous Conversation
+
 ```
 Sidebar shows "💬 [Previous Title]"
     ↓
@@ -179,6 +190,8 @@ Chat history displayed
     ↓
 Can continue conversation or start new one
 ```
+
+
 
 ## Session State Variables
 
@@ -201,6 +214,8 @@ st.session_state = {
     'selected_conversation': 'conv-id-xyz'  # If loading
 }
 ```
+
+
 
 ## Backward Compatibility
 
@@ -291,6 +306,8 @@ Documentation/
   └── [commit 322c3c4]               (feature commit)
 ```
 
+
+
 ## Commit Reference
 
 ```
@@ -306,6 +323,8 @@ feat: implement persistent conversation storage with auto-naming
 - Integrate persistence into UI render_main_app
 - Create comprehensive CONVERSATION_STORAGE.md documentation
 ```
+
+
 
 ## Notes for Developer
 

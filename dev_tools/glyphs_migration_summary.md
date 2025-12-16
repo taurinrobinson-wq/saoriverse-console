@@ -39,6 +39,5 @@ This file summarizes the conservative cleanup, fragment detection, and CI fixes 
 - Your review of the bottom-50 sample and `fragments_to_review.json` (if you want it generated).
 - Decide whether to adjust the fragment threshold or integrity rubric.
 - If approved, instruct me to create a Supabase backup and proceed with a safe, batched upsert.
-
----
+##
 Commit: chore/cleanup-telemetry-fragments — adds migration summary for PR context.

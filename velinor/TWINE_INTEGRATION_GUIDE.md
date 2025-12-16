@@ -40,6 +40,8 @@ Velinor uses **Twine 2** with **SugarCube** (or **Ink** as alternative) as the n
                     └───────────────────┘
 ```
 
+
+
 ## Key Files
 
 ### 1. **twine_adapter.py** - Twine/Story System Bridge
@@ -104,20 +106,29 @@ Velinor uses Twine 2 JSON export format:
 }
 ```
 
+
+
 ### Twine Markup Syntax (SugarCube)
 
 **Choices (Links):**
+
 ```
 [[Choice text->target_passage]]
 [[Talk to them|meeting]]  (alternative syntax)
 ```
 
+
+
 **Skill Checks:**
+
 ```
 [[Persuade the guard (Courage, DC 12)->success_path]]
 ```
 
+
+
 **Commands (Special Markers):**
+
 ```
 {background: location_name}      # Change background image
 {npc: NPC_Name}                 # NPC speaking in scene
@@ -125,7 +136,10 @@ Velinor uses Twine 2 JSON export format:
 {multiplayer: true}              # Enable multiplayer mode
 ```
 
+
+
 **Example Passage:**
+
 ```
 {background: market_ruins}
 {npc: Keeper}
@@ -137,6 +151,8 @@ A figure approaches: "Welcome, Traveler."
 [[Explore alone->market_exploration]]
 [[Keep distance (Wisdom, DC 11)->observer_path]]
 ```
+
+
 
 ## Creating Stories
 
@@ -161,6 +177,8 @@ story.add_choice("intro", "Go alone", "alone_path")
 # Export as JSON
 story.export_json("my_story.json")
 ```
+
+
 
 ### Option 2: Create in Twine 2 UI
 
@@ -198,9 +216,12 @@ orchestrator = VelinorTwineOrchestrator(
 initial_state = orchestrator.start_game()
 ```
 
+
+
 ### Process Player Input
 
 ```python
+
 # Player chooses option 1
 next_state = orchestrator.process_player_action(
     choice_index=0,
@@ -213,6 +234,8 @@ next_state = orchestrator.process_player_action(
     player_id="player_1"
 )
 ```
+
+
 
 ### Game State Structure
 
@@ -243,6 +266,8 @@ next_state = orchestrator.process_player_action(
     }
 }
 ```
+
+
 
 ## UI Integration Examples
 
@@ -286,6 +311,8 @@ if st.button("Submit"):
     st.rerun()
 ```
 
+
+
 ### FastAPI Web Backend
 
 ```python
@@ -324,11 +351,14 @@ def save_game(session_id: str):
     return {"status": "saved"}
 ```
 
+
+
 ## Multiplayer Support
 
 ### Enabling Multiplayer
 
 ```python
+
 # Start with multiple players
 orchestrator.start_game(
     is_multiplayer=True,
@@ -342,6 +372,8 @@ orchestrator.process_player_action(
 )
 ```
 
+
+
 ### Multiplayer Features
 
 1. **Sidebar tracking** - See other players' inputs
@@ -350,19 +382,25 @@ orchestrator.process_player_action(
 4. **Persona-aware responses** - Different tone per player type
 
 **Multiplayer Dialogue Example:**
+
 ```
 Solo: "You steady yourself as the mist parts."
 Group: "Together, your resolve strengthens. The mist bends to your collective will."
 ```
+
+
 
 ## Dice Mechanics
 
 ### Automatic Skill Checks
 
 If a choice includes skill check notation:
+
 ```
 [[Persuade the guard (Courage, DC 12)->success]]
 ```
+
+
 
 The system automatically:
 1. Rolls d20
@@ -373,23 +411,29 @@ The system automatically:
 ### Manual Dice Rolls
 
 In passages:
+
 ```
 {dice: d20+wisdom}
 
 You attempt to solve the ancient puzzle...
 ```
 
+
+
 System processes and determines outcome, potentially branching story.
 
 ## Save/Load
 
 ```python
+
 # Save current game
 orchestrator.save_game("saves/game_001.json")
 
 # Load saved game
 state = orchestrator.load_game("saves/game_001.json")
 ```
+
+
 
 Save files contain:
 - Current passage ID
@@ -438,6 +482,8 @@ velinor/
 │   └── backgrounds/                 # Background images
 └── Characters_Lexicon/              # Game design docs
 ```
+
+
 
 ## Troubleshooting
 

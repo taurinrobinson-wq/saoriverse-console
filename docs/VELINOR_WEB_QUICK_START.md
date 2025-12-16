@@ -11,8 +11,7 @@ The complete Velinor web stack (FastAPI + Next.js) is ready to test. No more Str
 - **Full Button Overlays**: Absolute positioned buttons on background images (Streamlit couldn't do this)
 - **Responsive Design**: 16:9 aspect ratio, Tailwind CSS styling
 - **Local Testing**: Ready to run on localhost
-
----
+##
 
 ## How to Test (3 Simple Steps)
 
@@ -23,10 +22,15 @@ cd d:\saoriverse-console
 python velinor_api.py
 ```
 
+
+
 You should see:
+
 ```
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ```
+
+
 
 ✅ Backend is live at `http://localhost:8000`
 
@@ -37,11 +41,16 @@ cd d:\saoriverse-console\velinor-web
 npm run dev
 ```
 
+
+
 You should see:
+
 ```
   ▲ Next.js 14.0.0
   - ready started server on 0.0.0.0:3000, url: http://localhost:3000
 ```
+
+
 
 ✅ Frontend is live at `http://localhost:3000`
 
@@ -55,8 +64,7 @@ You should see:
 3. **"Start New Game" Button** - Blue button
 
 Enter a name and click the button. The game scene should load!
-
----
+##
 
 ## What's Happening Behind the Scenes
 
@@ -91,7 +99,8 @@ Returns new game state
 Game scene re-renders with new content
 ```
 
----
+
+##
 
 ## Key Differences from Streamlit
 
@@ -102,8 +111,7 @@ Game scene re-renders with new content
 | **Animations** | ❌ Limited | ✅ Smooth hover effects |
 | **Layout Control** | ❌ Columns & expanders only | ✅ Custom CSS/Tailwind |
 | **Visual Design** | ⚠️ Constrained | ✅ Full creative control |
-
----
+##
 
 ## Troubleshooting
 
@@ -123,12 +131,14 @@ Game scene re-renders with new content
 - Check browser Console (F12) for error details
 
 ### Clear & Fresh Start
+
 ```bash
+
 # Terminal 1
 Ctrl+C  (stop backend)
 python velinor_api.py
 
-# Terminal 2  
+# Terminal 2
 Ctrl+C  (stop frontend)
 npm run dev
 
@@ -136,7 +146,8 @@ npm run dev
 Reload the page
 ```
 
----
+
+##
 
 ## What's Next?
 
@@ -153,8 +164,11 @@ git commit -m "Add Velinor web stack (FastAPI + Next.js)"
 git push origin main
 
 # Railway auto-deploys!
+
 # Update .env.local NEXT_PUBLIC_API_URL to your Railway backend domain
 ```
+
+
 
 ### To Add Game Assets
 
@@ -164,12 +178,15 @@ Copy your game images to:
 - `velinor-web/public/assets/npcs/` - NPC character images
 
 The `<GameScene>` component references them as:
+
 ```typescript
-<GameScene 
+<GameScene
   backgroundImage="/assets/backgrounds/market.png"
   // ...
 />
 ```
+
+
 
 ### To Improve Styling
 
@@ -177,8 +194,7 @@ All inline styles currently show linting warnings. To fix:
 - Create `velinor-web/app/globals.css` (or component CSS modules)
 - Move inline `style={{}}` props to classes
 - This is optional—code works fine as-is, but best practices suggest external CSS
-
----
+##
 
 ## Files You Now Have
 
@@ -203,11 +219,12 @@ d:\saoriverse-console\
 └── [other game files]
 ```
 
----
+
+##
 
 ## You're Ready! 🚀
 
-Everything is set up and ready to go. 
+Everything is set up and ready to go.
 
 Just run the 3 steps above and you'll have a fully functional Velinor web game with proper overlay controls, no Streamlit limitations!
 

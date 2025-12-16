@@ -16,6 +16,8 @@ System learns new patterns
 Library grows, responses improve
 ```
 
+
+
 ## The Three Layers at a Glance
 
 ### 1. Archetype Library
@@ -41,6 +43,8 @@ Example archetype:
 }
 ```
 
+
+
 ### 2. Response Generator
 **Applies principles to generate responses**
 
@@ -56,9 +60,11 @@ What it does:
 Input: "I feel relieved after that difficult conversation"
 Archetype: ReliefToGratitude
 Principles: [Validate warmly, Balance emotions, Ask gentle question]
-Output: "That takes courage. Sounds like something shifted. 
+Output: "That takes courage. Sounds like something shifted.
          What helped you get there?"
 ```
+
+
 
 ### 3. Conversation Learner
 **Extracts patterns from conversations**
@@ -83,6 +89,8 @@ Analysis:
 Output: New archetype added to library
 ```
 
+
+
 ## Quick Start Code
 
 ### Generate a Response
@@ -97,6 +105,8 @@ response = generator.generate_archetype_aware_response(
 )
 print(response)
 ```
+
+
 
 ### Learn from a Conversation
 
@@ -117,6 +127,8 @@ new_archetype = learner.learn_from_conversation(
 )
 print(f"Learned: {new_archetype}")
 ```
+
+
 
 ### Check the Library
 
@@ -141,6 +153,8 @@ for archetype, score in matches:
     print(f"  {archetype.name}: {score:.2f}")
 ```
 
+
+
 ## Pre-Loaded Archetype: ReliefToGratitude
 
 Your dialogue scene → System extracted this archetype
@@ -164,24 +178,30 @@ Your dialogue scene → System extracted this archetype
 ## How to Add More Archetypes
 
 ### Step 1: Write a Dialogue Scene
+
 ```
-User: "I've been so stressed about my performance review, 
+User: "I've been so stressed about my performance review,
        but I just found out I got the raise."
 
 System: "That's huge. That weight lifted off. How does it feel?"
 
-User: "Like I can finally breathe. But now I feel guilty 
+User: "Like I can finally breathe. But now I feel guilty
        that it took this to relax."
 
-System: "The relief and the guilt can coexist. What's underneath 
+System: "The relief and the guilt can coexist. What's underneath
          the guilt?"
 ```
 
+
+
 ### Step 2: System Learns
+
 ```
 Conversation → Learner analyzes → New archetype created
 "ReliefToGuilt" archetype added to library
 ```
+
+
 
 ### Step 3: System Uses It
 Next similar input automatically uses learned principles
@@ -217,6 +237,8 @@ Every archetype has these components:
 }
 ```
 
+
+
 ## Files to Know
 
 | Path | Purpose |
@@ -231,6 +253,7 @@ Every archetype has these components:
 ## Testing
 
 ```bash
+
 # Run complete test
 python test_learning_module.py
 
@@ -248,13 +271,14 @@ print(resp)
 "
 ```
 
+
+
 ## Key Insight
 
 **Template-based**: Select from A, B, C, or D
 **Principle-driven**: Follow these rules to generate something fresh
 
 That's the difference. The system learns **how** to respond, not **what** to say.
-
----
+##
 
 **You now have a learning system. Next: integrate it into the main pipeline so it starts improving automatically with every conversation.**

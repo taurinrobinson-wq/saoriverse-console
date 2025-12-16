@@ -11,18 +11,25 @@ Quick start (local devcontainer / machine):
 sudo apt-get update && sudo apt-get install -y fluidsynth ffmpeg
 ```
 
+
+
 2. Install Python deps:
 
 ```bash
 python3 -m pip install -r Offshoots/ToneCore/requirements.txt
 ```
 
+
+
 3. Run the app:
 
 ```bash
+
 # Example: run on port 8502 to avoid conflicts with other apps
 streamlit run Offshoots/ToneCore/streamlit_app.py --server.port 8502
 ```
+
+
 
 Open <http://localhost:8502> (forward the port if running in a remote container).
 

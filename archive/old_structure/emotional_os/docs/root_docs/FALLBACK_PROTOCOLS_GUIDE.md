@@ -21,15 +21,19 @@ analyzer = ToneAnalyzer()
 is_ambiguous, reason, confidence = analyzer.detect_ambiguity(
     "I'm fine, but honestly I feel so alone"
 )
+
 # Returns: (True, "Mixed signals: dismissal + voltage", 0.85)
 
-# Detect trigger misfire  
+# Detect trigger misfire
 is_misfire, reason = analyzer.detect_misfire(
     "stay",
     "Yeah sure, 'stay' with me because that's worked so well before"
 )
+
 # Returns: (True, "Sarcasm detected around 'stay'...")
 ```
+
+
 
 ### 2. GlyphStateManager
 Manages state transitions and voice modulation.
@@ -39,19 +43,27 @@ manager = GlyphStateManager()
 
 # Transition to new state
 transition = manager.transition_to(GlyphState.TONE_LOCK)
+
 # Glyph state: TONE_LOCK
+
 # Voice: "Low, steady • Slow • Protective, grounding"
 
 # Get voice profile for any state
 profile = manager.get_voice_profile(GlyphState.VOLTAGE_DETECTED)
+
 # Tone: "Raw, unfiltered"
+
 # Cadence: "Variable"
+
 # Texture: "Unflinching, holds ache without dilution"
 
 # Enter silence protocol
 manager.hold_breath()
+
 # Glyph: minimal animation, companion waits
 ```
+
+
 
 ### 3. FallbackProtocol (Main Orchestrator)
 Coordinates all components for complete exchange processing.
@@ -96,6 +108,8 @@ result = protocol.process_exchange(
     }
 }
 ```
+
+
 
 ## Glyph States & Voice Profiles
 
@@ -144,29 +158,31 @@ from emotional_os.safety.fallback_protocols import FallbackProtocol
 class UIController:
     def __init__(self):
         self.protocol = FallbackProtocol()
-    
+
     def process_user_input(self, user_text: str, detected_triggers: list):
         # Run fallback protocols
         protocol_result = self.protocol.process_exchange(
             user_text=user_text,
             detected_triggers=detected_triggers
         )
-        
+
         # Check for issues
         if protocol_result["decisions"]["should_ask_clarification"]:
             # Use companion message instead of standard response
             return protocol_result["companion_behavior"]["message"]
-        
+
         if protocol_result["decisions"]["should_lock_trigger"]:
             # Enter silence protocol - wait for next user message
             self.ui_state["waiting_for_response"] = True
-        
+
         # Apply voice modulation to response
         return apply_voice_profile(
             response_text,
             glyph_state=protocol_result["glyph_response"]["state"]
         )
 ```
+
+
 
 ### Streamlit Integration
 
@@ -196,6 +212,8 @@ with st.expander("Protocol Details"):
     st.json(result["decisions"])
 ```
 
+
+
 ## Key Behaviors
 
 ### Ambiguous Tone
@@ -205,7 +223,7 @@ with st.expander("Protocol Details"):
 - **Companion Response**: Asks for clarification without assumption
 - **Decision**: Wait, ask clarification, do NOT lock trigger
 
-### Trigger Misfire  
+### Trigger Misfire
 **Detected When**: Phrase matches trigger but tone contradicts
 - Example: "Yeah sure, 'stay' with me" (sarcastic)
 - **Glyph Response**: Flicker then reset
@@ -228,6 +246,7 @@ with st.expander("Protocol Details"):
 ## Protocol Scenarios
 
 ### Scenario 1: Mixed Emotions
+
 ```
 User: "I'm fine, but honestly I feel so alone right now"
 → Ambiguous Tone Detected
@@ -236,7 +255,10 @@ User: "I'm fine, but honestly I feel so alone right now"
 → Awaits user clarification
 ```
 
+
+
 ### Scenario 2: Sarcastic Rejection
+
 ```
 User: "Yeah sure, 'stay' with me because that's worked so well before"
 → Trigger Misfire Detected (sarcasm)
@@ -245,7 +267,10 @@ User: "Yeah sure, 'stay' with me because that's worked so well before"
 → Respects user's actual boundary
 ```
 
+
+
 ### Scenario 3: Multiple Signals
+
 ```
 User: "I'm struggling but I need to heal and move forward"
 → Overlapping Triggers Detected (struggle, heal, move)
@@ -254,7 +279,10 @@ User: "I'm struggling but I need to heal and move forward"
 → Prioritizes highest emotional intensity
 ```
 
+
+
 ### Scenario 4: Confirmed Trigger + Silence
+
 ```
 User: "I need to stay."
 [User goes silent]
@@ -264,6 +292,8 @@ User: "I need to stay."
 → No prompting, no performance - just presence
 ```
 
+
+
 ## Testing
 
 Run comprehensive test suite:
@@ -271,6 +301,8 @@ Run comprehensive test suite:
 ```bash
 python3 -m pytest tests/test_fallback_protocols.py -v
 ```
+
+
 
 Tests cover:
 - Tone ambiguity detection (7 tests)

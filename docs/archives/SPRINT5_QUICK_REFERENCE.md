@@ -15,8 +15,7 @@
 - `spoken_interface/session_logger.py` (526 lines) - Session logging & analysis
 - `spoken_interface/voice_ui_enhancements.py` (431 lines) - UI & edge case handling
 - `spoken_interface/test_sprint5_enhancements.py` (326 lines) - Comprehensive test suite
-
----
+##
 
 ## 🚀 Quick Start (5 minutes)
 
@@ -30,6 +29,8 @@ result = profiler.measure("stt", transcribe_audio, audio)
 print(profiler.get_summary())
 ```
 
+
+
 ### 2. Advanced Prosody
 
 ```python
@@ -42,6 +43,8 @@ plan = planner.plan_advanced_prosody(
 )
 ```
 
+
+
 ### 3. Session Logging
 
 ```python
@@ -53,6 +56,8 @@ logger.log_assistant_message("Hello!", emotional_state={...})
 logger.save_session()
 ```
 
+
+
 ### 4. Edge Case Handling
 
 ```python
@@ -63,7 +68,8 @@ is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
 is_valid, error = ui.handle_transcription_edge_cases(text, confidence)
 ```
 
----
+
+##
 
 ## 📊 Module Overview
 
@@ -73,8 +79,7 @@ is_valid, error = ui.handle_transcription_edge_cases(text, confidence)
 | `advanced_prosody.py` | Dynamic emotional prosody | `AdvancedProsodyPlanner` | `plan_advanced_prosody()` |
 | `session_logger.py` | Log & analyze interactions | `SessionLogger` | `log_user_message()` |
 | `voice_ui_enhancements.py` | UI & edge cases | `VoiceUIEnhancements` | `handle_*_edge_cases()` |
-
----
+##
 
 ## 🔧 Integration Points
 
@@ -98,10 +103,10 @@ def on_user_input(audio_bytes, user_text, confidence):
     is_valid, error = ui.handle_audio_edge_cases(audio_bytes)
     if not is_valid:
         return error
-    
+
     # Log
     logger.log_user_message(user_text, confidence=confidence)
-    
+
 def on_assistant_response(response_text, emotional_state):
     # Prosody
     if emotional_state.get("tone") in ["excited", "sad"]:
@@ -112,12 +117,13 @@ def on_assistant_response(response_text, emotional_state):
             attunement=emotional_state.get("attunement", 0.5),
             certainty=emotional_state.get("certainty", 0.5)
         )
-    
+
     # Log
     logger.log_assistant_message(response_text, emotional_state=emotional_state)
 ```
 
----
+
+##
 
 ## 📈 Testing
 
@@ -128,9 +134,10 @@ cd /workspaces/saoriverse-console
 python -m pytest spoken_interface/test_sprint5_enhancements.py -v
 ```
 
-Result: ✅ **24/24 tests passing (100%)**
 
----
+
+Result: ✅ **24/24 tests passing (100%)**
+##
 
 ## 💾 Key Features
 
@@ -163,8 +170,7 @@ Result: ✅ **24/24 tests passing (100%)**
 - ✅ Glyph visualization
 - ✅ 10+ edge case types with error messages
 - ✅ Performance metrics display
-
----
+##
 
 ## 🎯 Common Tasks
 
@@ -176,6 +182,8 @@ result = profiler.measure("my_operation", my_function, arg1, arg2)
 print(profiler.get_summary())
 ```
 
+
+
 ### I want dynamic prosody for emotional responses
 
 ```python
@@ -183,8 +191,11 @@ planner = AdvancedProsodyPlanner()
 plan = planner.plan_advanced_prosody(
     text=response, voltage=v, tone=t, attunement=a, certainty=c
 )
+
 # Use plan.pitch_contour, emphasis_points, breath_style, etc.
 ```
+
+
 
 ### I want to log conversations
 
@@ -196,6 +207,8 @@ metrics = logger.calculate_session_metrics()
 logger.save_session()
 ```
 
+
+
 ### I want to validate audio
 
 ```python
@@ -205,7 +218,8 @@ if not is_valid:
     print(f"Error: {error}")
 ```
 
----
+
+##
 
 ## ⚡ Performance
 
@@ -216,8 +230,7 @@ if not is_valid:
 | `EdgeCaseManager.validate()` | 2-5ms | Very fast |
 | `AdvancedProsodyPlanner.plan()` | 5-10ms | Negligible |
 | **Total** | **<50ms** | **Unnoticeable** |
-
----
+##
 
 ## 🐛 Troubleshooting
 
@@ -226,6 +239,8 @@ if not is_valid:
 ```bash
 python -m pytest spoken_interface/test_sprint5_enhancements.py -v
 ```
+
+
 
 Expected: All 24 tests pass ✅
 
@@ -246,8 +261,7 @@ Expected: All 24 tests pass ✅
 1. Verify `save_dir` exists
 2. Check file permissions
 3. Inspect `logger.events` list
-
----
+##
 
 ## 📖 Learning Resources
 
@@ -270,8 +284,7 @@ Expected: All 24 tests pass ✅
 ### For Integration Examples
 
 → See `SPRINT5_INTEGRATION_GUIDE.md`
-
----
+##
 
 ## ✅ Checklist
 
@@ -285,8 +298,7 @@ Expected: All 24 tests pass ✅
 - [ ] Conduct listening tests
 - [ ] Monitor session logs
 - [ ] Iterate based on feedback
-
----
+##
 
 ## 📞 Support
 
@@ -296,8 +308,7 @@ For detailed documentation:
 - **Comprehensive Reference**: `SPRINT5_ENHANCEMENTS_SUMMARY.md`
 - **Source Code**: See module docstrings
 - **Tests**: `test_sprint5_enhancements.py`
-
----
+##
 
 **Status**: ✅ Complete, Tested, Ready for Integration
 **Next Phase**: Integration & User Testing

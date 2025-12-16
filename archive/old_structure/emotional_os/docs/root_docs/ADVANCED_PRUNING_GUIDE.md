@@ -3,8 +3,7 @@
 ## Overview
 
 Your other AI's pruning strategy is now implemented in `advanced_pruning_engine.py`. This sophisticated system replaces the basic numerical pruning with architecture-aware filtering that understands your VELΩNIX system.
-
----
+##
 
 ## 🎯 Five-Layer Pruning Strategy
 
@@ -18,19 +17,22 @@ Your other AI's pruning strategy is now implemented in `advanced_pruning_engine.
 - **Action:** Drop glyphs with weak emotional markers (< 0.3 signal strength)
 
 **Example:**
+
 ```
-HIGH SIGNAL: "Recursive Ache" 
+HIGH SIGNAL: "Recursive Ache"
   - Valence: "Noble" (1.0)
   - Signals: [γ, θ] (0.4)
   - Keywords: "longing", "loop", "deepen" (0.5)
   → Signal score: 0.70 ✓ KEEP
 
-LOW SIGNAL: "Generic Feeling" 
+LOW SIGNAL: "Generic Feeling"
   - Valence: "Ambiguous" (0.2)
   - Signals: [] (0.0)
   - Keywords: none (0.0)
   → Signal score: 0.04 ✗ PRUNE
 ```
+
+
 
 ### 2. **Trace Role Redundancy**
 - **Metric:** `redundancy_score` (0-1, inverse)
@@ -47,6 +49,7 @@ LOW SIGNAL: "Generic Feeling"
 - etc.
 
 **Example:**
+
 ```
 REDUNDANT:
   Glyph A: trace_role="Sanctuary keeper", tone="Velvet Drift"
@@ -61,6 +64,8 @@ DISTINCT:
   → Keep both (tone diversity)
 ```
 
+
+
 ### 3. **Usage Frequency & Match History**
 - **Metric:** `activation_score` (0-1)
 - **Data:** Glyphs that match user inputs or appear in harness runs
@@ -68,6 +73,7 @@ DISTINCT:
 - **Action:** Prioritize historically matched glyphs, archive inactive ones
 
 **Example:**
+
 ```
 ACTIVE: Matched 12 times in user conversations
   → activation_score: min(1.0, 12/5) = 1.0 ✓ CRITICAL KEEP
@@ -79,12 +85,19 @@ INACTIVE: Never matched
   → activation_score: 0.0 → Prune unless other factors protect it
 ```
 
+
+
 **Integration Point:** You'll need to log glyph matches:
+
 ```python
+
 # When a glyph is matched:
 match_history[glyph_id] = match_history.get(glyph_id, 0) + 1
+
 # Save periodically to match_history.json
 ```
+
+
 
 ### 4. **Tone Diversity Enforcement**
 - **Metric:** `tone_distribution` (0-1)
@@ -96,6 +109,7 @@ match_history[glyph_id] = match_history.get(glyph_id, 0) + 1
 - **Action:** Prune overrepresented tones, preserve underrepresented ones
 
 **Example:**
+
 ```
 TONE DISTRIBUTION (from 100 glyphs):
   Molten:        25 glyphs (overrepresented)
@@ -108,6 +122,8 @@ PRUNING DECISION:
   - Velvet glyph: tone_score = 1 - 0.03 = 0.97 (excellent) ✓ PROTECT
 ```
 
+
+
 ### 5. **Reaction Chain Anchoring**
 - **Metric:** `reaction_chain_participation` (0-1)
 - **Categories:**
@@ -119,6 +135,7 @@ PRUNING DECISION:
 - **Action:** Preserve glyphs participating in VELΩNIX reactions
 
 **Example:**
+
 ```
 CRITICAL (1.0):
   "Forgiveness" → Catalyst in grief + rage → relief reaction
@@ -138,7 +155,8 @@ ISOLATED (0.0):
   → Prune if low signal + no activation history
 ```
 
----
+
+##
 
 ## 📊 Scoring Formula
 
@@ -162,7 +180,8 @@ score < 0.25  → CANDIDATE FOR PRUNING (confidence: 70%)
 - Reaction anchors (participation ≥ 0.9) → ALWAYS KEEP
 ```
 
----
+
+##
 
 ## 🔧 Optional Enhancements
 
@@ -177,8 +196,11 @@ families = {
 }
 
 # For each family, keep exemplar (highest signal + highest usage)
+
 # Prune semantic duplicates
 ```
+
+
 
 ### 2. **Pruning Archive Capsule**
 Archive pruned glyphs for resurrection or analysis:
@@ -203,8 +225,11 @@ archive = {
         ...
     ]
 }
+
 # Save as JSON for future resurrection
 ```
+
+
 
 ### 3. **Pruning Confidence Scoring**
 Auditability with confidence in each decision:
@@ -225,11 +250,14 @@ pruned_glyph = {
 }
 
 # High confidence (> 0.85): Safe to prune
+
 # Medium confidence (0.70-0.85): Can prune with review
+
 # Low confidence (< 0.70): Should review manually
 ```
 
----
+
+##
 
 ## 🚀 Usage
 
@@ -263,6 +291,8 @@ report = engine.create_pruning_report(
 )
 ```
 
+
+
 ### Integration with Factorial Engine
 
 ```python
@@ -285,17 +315,20 @@ print(f"Factorial expansion: {len(factorial_engine.combinations)} → {len(kept)
 
 # Sync to JSON
 approved_combos = [
-    c for c in factorial_engine.combinations 
+    c for c in factorial_engine.combinations
     if c.glyph_id in [k.glyph_id for k in kept]
 ]
 factorial_engine.sync_to_json(approved_combos)
 ```
+
+
 
 ### With Match History
 
 To track which glyphs are actually used:
 
 ```python
+
 # In your glyph matching code:
 match_history = {}
 
@@ -311,7 +344,8 @@ pruning_engine = AdvancedPruningEngine(
 )
 ```
 
----
+
+##
 
 ## 📋 Output Files
 
@@ -352,10 +386,11 @@ Comprehensive report with all evaluations and statistics:
 }
 ```
 
+
+
 ### pruned_glyphs_overgrowth_control_*.json
 Archive of pruned glyphs for potential resurrection.
-
----
+##
 
 ## 🔍 Decision Logic Flowchart
 
@@ -386,7 +421,8 @@ Archive of pruned glyphs for potential resurrection.
 │  └─ NO → PRUNE (candidate for archival)
 ```
 
----
+
+##
 
 ## ✅ Quality Assurance
 
@@ -399,8 +435,7 @@ Ensure data completeness for best results:
 - ✅ `activation_signals` or similar match history
 - ✅ `is_factorial` flag: Distinguishes base from combination glyphs
 - ⏳ `match_history.json` (optional but recommended for best pruning)
-
----
+##
 
 ## 🎓 Key Insights
 
@@ -409,8 +444,7 @@ Ensure data completeness for best results:
 3. **Tone diversity preserves richness** (15% weight) - don't over-specialize
 4. **Redundancy detection is sophisticated** (20% weight) - role-based, not just name-based
 5. **Reaction anchors are protected** (10% weight) - keep system catalysts
-
----
+##
 
 ## 🔗 Related Files
 
@@ -418,8 +452,7 @@ Ensure data completeness for best results:
 - **Reports:** `emotional_os/glyphs/PRUNING_REPORT.json`
 - **Archives:** `emotional_os/glyphs/pruning_archive/`
 - **Integration:** `emotional_os/glyphs/glyph_factorial_engine.py`
+##
 
----
-
-**Status:** ✅ Ready for use  
+**Status:** ✅ Ready for use
 **Last updated:** November 5, 2025

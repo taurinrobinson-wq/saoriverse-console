@@ -3,6 +3,7 @@
 ## TL;DR - Get Started in 3 Steps
 
 ```bash
+
 # 1. Start services
 docker-compose -f docker-compose.local.yml up -d
 
@@ -10,8 +11,11 @@ docker-compose -f docker-compose.local.yml up -d
 docker-compose -f docker-compose.local.yml exec ollama ollama pull llama3
 
 # 3. Open Streamlit
+
 # Visit http://localhost:8501
 ```
+
+
 
 ## Architecture
 
@@ -26,6 +30,8 @@ Tier Processing (learning, aliveness, poetry)
     ↓
 User sees response
 ```
+
+
 
 ## Key Files
 
@@ -75,9 +81,12 @@ response = client.generate_with_context(
 print(response)
 ```
 
+
+
 ## Docker Commands
 
 ```bash
+
 # Start services
 docker-compose -f docker-compose.local.yml up -d
 
@@ -106,15 +115,20 @@ docker-compose -f docker-compose.local.yml rm
 docker-compose -f docker-compose.local.yml down -v
 ```
 
+
+
 ## Environment Variables
 
 ```bash
+
 # Ollama base URL (auto-configured in Docker)
 OLLAMA_BASE_URL=http://ollama:11434
 
 # Local development (laptop, desktop)
 OLLAMA_BASE_URL=http://localhost:11434
 ```
+
+
 
 ## Model Guide
 
@@ -125,10 +139,14 @@ mistral     → Medium (4.1GB), well-rounded
 llama3      → Largest (4.7GB), best quality - PRODUCTION
 ```
 
+
+
 ## Common Tasks
 
 ### Test Ollama directly (curl)
+
 ```bash
+
 # Check health
 curl http://localhost:11434/api/tags
 
@@ -137,14 +155,20 @@ curl -X POST http://localhost:11434/api/generate \
   -d '{"model":"llama3","prompt":"Hello!","stream":false}'
 ```
 
+
+
 ### Run integration tests
+
 ```bash
 python test_ollama_integration.py
 ```
 
+
+
 Expected: All 5 checks pass ✅
 
 ### Debug in Streamlit
+
 ```python
 import streamlit as st
 
@@ -159,8 +183,12 @@ response = client.generate("Test", model="llama3")
 st.write(response)
 ```
 
+
+
 ### View service logs in real-time
+
 ```bash
+
 # Ollama service
 docker-compose -f docker-compose.local.yml logs -f ollama
 
@@ -170,6 +198,8 @@ docker-compose -f docker-compose.local.yml logs -f streamlit
 # Both
 docker-compose -f docker-compose.local.yml logs -f
 ```
+
+
 
 ## Fallback Flow
 
@@ -191,6 +221,8 @@ Try Ollama fallback
 Generic fallback → "I'm here to listen..."
 ```
 
+
+
 ## Performance Notes
 
 - **llama3 on 1 vCPU**: 10-30s per response (slow but works)
@@ -209,6 +241,8 @@ OLLAMA_INTEGRATION_IMPLEMENTATION.md (400+ lines)
 test_ollama_integration.py         (300+ lines)
 ```
 
+
+
 ## Files Modified
 
 ```
@@ -217,6 +251,8 @@ session_manager.py                 (Added init function)
 ui_refactored.py                   (Already imports everything)
 ui_components/__init__.py           (Already exports everything)
 ```
+
+
 
 ## Verification Checklist
 
@@ -245,7 +281,9 @@ ui_components/__init__.py           (Already exports everything)
 ## Integration Points
 
 ### Where Ollama is Called
+
 ```python
+
 # 1. Session initialization
 src/emotional_os/deploy/modules/ui_components/session_manager.py
     → _ensure_ollama_client()
@@ -259,6 +297,8 @@ src/emotional_os/deploy/modules/ui_components/response_handler.py
 # 3. Direct client usage (testing)
 from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_singleton
 ```
+
+
 
 ## What's Different from Velinor Deployment
 
@@ -287,7 +327,6 @@ from src.emotional_os.deploy.modules.ollama_client import get_ollama_client_sing
 - **Ollama Repo**: https://github.com/ollama/ollama
 - **Docker Docs**: https://docs.docker.com/compose/
 - **FirstPerson**: See `LEARNING_QUICK_REFERENCE.md`
-
----
+##
 
 **Updated**: 2025 | **Status**: ✅ Ready to Use

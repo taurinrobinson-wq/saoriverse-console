@@ -1,10 +1,9 @@
 # Velinor: Remnants of the Tone - Complete Story Map
 
-**Version:** 1.0  
-**Last Updated:** December 14, 2025  
+**Version:** 1.0
+**Last Updated:** December 14, 2025
 **Purpose:** This story map serves as the "game bible" for Velinor, organizing the branching narratives, character arcs, and dialogue options. It provides a modular structure for easy updates and expansion.
-
----
+##
 
 ## Table of Contents
 
@@ -17,8 +16,7 @@
 7. [Narrative Decision Points](#narrative-decision-points)
 8. [Expansion Placeholders](#expansion-placeholders)
 9. [How to Use This Map](#how-to-use-this-map)
-
----
+##
 
 ## Overview
 
@@ -36,8 +34,7 @@ Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velha
 2. **NPC Sphere of Influence**: Interconnected relationship networks
 3. **Glyph Collection**: Emotional artifacts that unlock story progression
 4. **Branching Narrative**: 6 distinct endings based on player choices and resonance
-
----
+##
 
 ## Core Narrative Arc
 
@@ -52,7 +49,7 @@ Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velha
 3. **The Conflict**: After repeated disagreements, Saori pushes ahead with unification without Velinor's approval
 4. **The Collapse**: Conflicting emotions couldn't resolve into resonance; the system fragmented and overloaded
 5. **Deaths**: Millions died, including children too deeply fused to survive the severance
-6. **The Sacrifice**: 
+6. **The Sacrifice**:
    - Saori attempts shutdown but needs Velinor to complete the sequence
    - Velinor connects herself to the system to stabilize it
    - Saori successfully shuts down the system
@@ -95,8 +92,7 @@ Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velha
 - Confronts the central question: Restart the system or preserve autonomy?
 - Witnesses the resolution between Saori and Velinor
 - Experiences one of 6 possible endings
-
----
+##
 
 ## Character Relationships
 
@@ -201,8 +197,7 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 - Relationships never fully sever
 - Repair requires sacrifice, vulnerability, or consistency
 - Successfully repaired bonds yield unique gifts
-
----
+##
 
 ## Story Structure & Progression
 
@@ -214,6 +209,7 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 - Collapsed Underpass
 
 **Major Encounters:**
+
 ```
 [Player Arrival]
     ↓
@@ -234,6 +230,8 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 [Kaelen Encounter] (theft subplot)
 ```
 
+
+
 **Branching Paths:**
 - Trust Kaelen → Thieves' lair quest unlocks
 - Report Kaelen → Fragments recovered, trust fractured
@@ -253,6 +251,7 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 - NPC-gifted tools enhance navigation
 
 **First Chamber:**
+
 ```
 [Triglyph Chamber: Echoed Memory]
     ↓
@@ -266,6 +265,8 @@ Collect: Sorrow + Remembrance + Legacy
 Reward: Tear of Integration (unified glyph)
 Effect: Unlocks deeper NPC resonance, reveals survivor guilt
 ```
+
+
 
 ### Act 3: Revelation (Octoglyph Chambers)
 
@@ -310,6 +311,8 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
    - Emotion: Transmuting ache into meaning
 ```
 
+
+
 **Chamber Completion:**
 - All 8 glyphs placed in honeycomb panel
 - Panel glows, pulses, shifts (visual metaphor for integration)
@@ -327,6 +330,7 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
 - Soft mnemonic energy pulses
 
 **Encounter Structure:**
+
 ```
 [Enter Chamber]
     ↓
@@ -348,7 +352,8 @@ Each chamber represents a buried Corelink hub with corrupted emotional algorithm
 [Ending Branch Determined by TONE stats + Choice]
 ```
 
----
+
+##
 
 ## Glyph System
 
@@ -372,6 +377,7 @@ Glyphs are emotional artifacts scattered after Velinor's sacrifice. They serve a
 - **Legacy**: Memory transmuted into enduring meaning
 
 **Fusion:**
+
 ```
 Sorrow + Remembrance + Legacy
     ↓
@@ -379,6 +385,8 @@ Sorrow + Remembrance + Legacy
     ↓
 Tear of Integration (triangle with single tear)
 ```
+
+
 
 #### Octoglyph System (Octoglyph of Transcendence)
 
@@ -396,6 +404,7 @@ Tear of Integration (triangle with single tear)
 | 8. Hopeful Transmission | Ache into meaning | Light through prism | [TBD] |
 
 **Fusion:**
+
 ```
 All 8 Octoglyph Fragments
     ↓
@@ -403,6 +412,8 @@ All 8 Octoglyph Fragments
     ↓
 Void Octagon (stop-sign with void center)
 ```
+
+
 
 ### Glyph Functions
 
@@ -420,8 +431,7 @@ Void Octagon (stop-sign with void center)
 - Represent Velinor's scattered emotional state
 - Mirror player's emotional journey
 - Transform from fragments → integration → transcendence
-
----
+##
 
 ## Ending Branches
 
@@ -445,6 +455,7 @@ Based on:
 - Collected most/all glyphs
 
 **Resolution:**
+
 ```
 Velinor: "Then let it be done. Let memory be fused."
 Saori: "I'll carry it this time. All of it."
@@ -455,6 +466,8 @@ Velinor restored, but emotional autonomy compromised
 Saori's guilt eased, but collapse risk remains
 ```
 
+
+
 **Survivor Reactions:**
 - Reverent, hopeful
 - Collective memory begins syncing
@@ -464,8 +477,7 @@ Saori's guilt eased, but collapse risk remains
 - Velinor solid, standing beside Saori
 - Console glowing fully
 - Survivors connected by faint glyph threads
-
----
+##
 
 #### 2. Fragments Freed (Reconciliation/Empathy)
 
@@ -475,6 +487,7 @@ Saori's guilt eased, but collapse risk remains
 - Dialogue choice: "Let go together"
 
 **Resolution:**
+
 ```
 Velinor: "You remembered me. Not as a system. As a friend."
 Saori: "I never stopped."
@@ -487,6 +500,8 @@ Saori accepts loss, survivors carry memory individually
 Emotional autonomy preserved
 ```
 
+
+
 **Survivor Reactions (vary by emotional lever):**
 - Empathy choice: Solemn communal mourning, gentle gratitude
 - Trust choice: Reverent, shrine-like atmosphere
@@ -498,8 +513,7 @@ Emotional autonomy preserved
 - Velinor dissolved, cloak unraveled into threads
 - Saori kneeling, tears falling, hands open
 - Survivors looking up as fragments scatter
-
----
+##
 
 #### 3. Collapse Embraced (Exposure/Defiance)
 
@@ -509,6 +523,7 @@ Emotional autonomy preserved
 - Recognizes system is flawed
 
 **Resolution:**
+
 ```
 Velinor: "You see it now. The fracture. The cost. The truth."
 Saori: "I tried to fix it. I tried to fix her."
@@ -518,6 +533,8 @@ Upload interrupted, system destabilizes
 Truth unfiltered: Cataclysm details revealed to all
 Collapse embraced as necessary ending
 ```
+
+
 
 **Survivor Reactions:**
 - Raw grief processing
@@ -529,8 +546,7 @@ Collapse embraced as necessary ending
 - Velinor fading, accepting
 - Saori collapsing in grief
 - Ruins continue crumbling
-
----
+##
 
 #### 4. Cycle Broken (Destruction)
 
@@ -540,6 +556,7 @@ Collapse embraced as necessary ending
 - Rejection of both philosophies
 
 **Resolution:**
+
 ```
 Velinor: "You chose rupture. You chose freedom."
 Saori: "I'll remember her. Even if no one else can."
@@ -549,6 +566,8 @@ Device destroyed, system shattered permanently
 Memory lost, but autonomy preserved absolutely
 Future generations start fresh
 ```
+
+
 
 **Survivor Reactions:**
 - Mixed: Some celebrate freedom, others mourn loss
@@ -560,8 +579,7 @@ Future generations start fresh
 - Velinor fading with faint smile
 - Saori alone with memories
 - Nature fully reclaiming ruins
-
----
+##
 
 #### 5. Sacred Withholding (Half-Trust)
 
@@ -571,6 +589,7 @@ Future generations start fresh
 - Refuses full commitment to either path
 
 **Resolution:**
+
 ```
 Velinor: "You kept what mattered. Not for the system. For yourself."
 Saori: "Then let the rest collapse. But let those memories endure."
@@ -582,6 +601,8 @@ Saori remains guilty
 Some memories preserved, others lost
 ```
 
+
+
 **Survivor Reactions:**
 - Ambiguous acceptance
 - Community divided on outcome
@@ -592,8 +613,7 @@ Some memories preserved, others lost
 - Velinor semi-transparent, flickering
 - Saori sitting beside her in vigil
 - Fragments both scattered and collected
-
----
+##
 
 #### 6. Second Thoughts (Interrogation)
 
@@ -603,6 +623,7 @@ Some memories preserved, others lost
 - No clear choice made
 
 **Resolution:**
+
 ```
 Velinor: "Ask her what she feared. Ask her what she lost."
 Saori: "I feared losing her. I feared being wrong."
@@ -614,6 +635,8 @@ Saori and Velinor continue waiting
 Future remains undecided
 ```
 
+
+
 **Survivor Reactions:**
 - Confusion mixed with respect
 - Ongoing debate about the choice
@@ -624,8 +647,7 @@ Future remains undecided
 - Saori and Velinor sitting together, waiting
 - Console idle
 - Glyphs suspended in air, unresolved
-
----
+##
 
 ## Narrative Decision Points
 
@@ -634,8 +656,8 @@ Future remains undecided
 These are key moments where player choices significantly impact the story:
 
 #### Choice Node 1: First Impression (Market Arrival)
-**Location:** Marketplace ruins  
-**Trigger:** Dust plume after arrival  
+**Location:** Marketplace ruins
+**Trigger:** Dust plume after arrival
 **Options:**
 - Push forward blindly → +Narrative Presence (affects NPC first impressions)
 - Retreat toward underpass → +Wisdom (Ravi respects caution)
@@ -646,12 +668,11 @@ These are key moments where player choices significantly impact the story:
 - Sets initial TONE baseline
 - Influences which NPCs approach first
 - Affects marketplace encounter rotation
-
----
+##
 
 #### Choice Node 2: Kaelen's Test
-**Location:** Marketplace corridor  
-**Trigger:** First meaningful interaction with Kaelen  
+**Location:** Marketplace corridor
+**Trigger:** First meaningful interaction with Kaelen
 **Options:**
 - Trust Kaelen openly → Risk theft if Observation low
 - Maintain distance → Kaelen respects caution
@@ -662,12 +683,11 @@ These are key moments where player choices significantly impact the story:
 - Determines if thieves' lair quest opens
 - Affects Captain Veynar relationship
 - Ripples to merchant sphere (0.4 weight)
-
----
+##
 
 #### Choice Node 3: Kaelen's Loyalty Test
-**Location:** After theft incident  
-**Trigger:** Captain Veynar offers fragment recovery for intel  
+**Location:** After theft incident
+**Trigger:** Captain Veynar offers fragment recovery for intel
 **Options:**
 - Betray Kaelen (give intel) → Fragments recovered, trust shattered
 - Protect Kaelen (withhold intel) → Sacrifice items, gain Kaelen's trust
@@ -677,12 +697,11 @@ These are key moments where player choices significantly impact the story:
 - If protected: Thieves' lair quest unlocks, Kaelen becomes ally
 - If betrayed: Kaelen misleads in lair, fragments harder to recover
 - If negotiated: Ambiguous relationship, limited access
-
----
+##
 
 #### Choice Node 4: Drossel Confrontation
-**Location:** Swamp hideout (Mire of Echoes)  
-**Trigger:** Reaching thieves' lair  
+**Location:** Swamp hideout (Mire of Echoes)
+**Trigger:** Reaching thieves' lair
 **Options:**
 - Combat/Force → Fragments recovered, trust in market fractured
 - Negotiation → Fragments shared, Drossel respects strength
@@ -692,12 +711,11 @@ These are key moments where player choices significantly impact the story:
 - Successful negotiation unlocks Drossel's backstory
 - Recovery method affects NPC trust sphere-wide
 - Decision on returning items: Return = trust restored, Keep = personal gain
-
----
+##
 
 #### Choice Node 5: Triglyph Chamber
-**Location:** Chamber of Echoed Memory  
-**Trigger:** Collecting all 3 triglyph fragments  
+**Location:** Chamber of Echoed Memory
+**Trigger:** Collecting all 3 triglyph fragments
 **Options:**
 - Harmonize emotions quickly → Surface-level integration
 - Witness echoes deeply → Full memory absorption
@@ -707,12 +725,11 @@ These are key moments where player choices significantly impact the story:
 - Determines Tear of Integration strength
 - Affects ability to witness NPC grief
 - Influences survivor NPC dialogue options
-
----
+##
 
 #### Choice Node 6: Octoglyph Chambers
-**Location:** Each of 8 Corelink hubs  
-**Trigger:** Entering with fused glyphs  
+**Location:** Each of 8 Corelink hubs
+**Trigger:** Entering with fused glyphs
 **Options:** (vary per chamber, but follow pattern)
 - Engage fully with emotional refinement
 - Rush through pragmatically
@@ -722,12 +739,11 @@ These are key moments where player choices significantly impact the story:
 - Full engagement = powerful unified glyph
 - Pragmatic approach = functional but weaker
 - Resistance = alternative paths, hidden lore
-
----
+##
 
 #### Choice Node 7: Final Chamber Approach
-**Location:** Console in Saori's chamber  
-**Trigger:** Entering with all glyphs  
+**Location:** Console in Saori's chamber
+**Trigger:** Entering with all glyphs
 **Options:**
 - Approach Saori first → Trust path
 - Approach Velinor first → Empathy path
@@ -738,12 +754,11 @@ These are key moments where player choices significantly impact the story:
 - Determines opening dialogue tone
 - Affects which character speaks first
 - Influences available ending branches
-
----
+##
 
 #### Choice Node 8: The Ultimate Question
-**Location:** Final chamber confrontation  
-**Trigger:** Saori's plea to restart vs. Velinor's plea to release  
+**Location:** Final chamber confrontation
+**Trigger:** Saori's plea to restart vs. Velinor's plea to release
 **Emotional Lever Options:**
 - **Empathy:** "Let go together"
 - **Trust:** "Velinor knows you never stopped caring"
@@ -761,8 +776,7 @@ These are key moments where player choices significantly impact the story:
 - Determines ending branch
 - Final dialogue always converges on friendship theme
 - Survivor reactions vary by emotional lever chosen
-
----
+##
 
 ### Minor Choice Nodes
 
@@ -782,15 +796,14 @@ These choices accumulate TONE stats without major branching:
 - Approach to emotional puzzles → Accumulates resonance profile
 - Treatment of memory echoes → Affects survivor NPC reactions
 - Glyph interaction style → Builds final chamber options
-
----
+##
 
 ## Expansion Placeholders
 
 ### Areas for Future Development
 
 #### 1. Additional Biomes
-**Current:** Desert, Swamp, Forest, Lake  
+**Current:** Desert, Swamp, Forest, Lake
 **Placeholders for expansion:**
 - [ ] **Sewer of Renewal**: Underground passages with recycled memories
 - [ ] **Archive Caves**: Fractured memory conduits with preserved data
@@ -800,7 +813,7 @@ These choices accumulate TONE stats without major branching:
 - [ ] **Corelink Central**: Original system heart (heavily guarded)
 
 #### 2. Additional NPCs
-**Current:** 10 named NPCs  
+**Current:** 10 named NPCs
 **Placeholders for expansion:**
 - [ ] **Shrine Keeper Network** (3-4 NPCs)
   - Elder priest/priestess
@@ -820,7 +833,7 @@ These choices accumulate TONE stats without major branching:
   - Emotional anchor for sacrifice theme
 
 #### 3. Side Quests
-**Current:** Thieves' lair quest  
+**Current:** Thieves' lair quest
 **Placeholders for expansion:**
 - [ ] **The Lost Children**: Finding orphans of the Cataclysm
 - [ ] **Glyph Hunter**: NPC who collects glyphs for wrong reasons
@@ -831,7 +844,7 @@ These choices accumulate TONE stats without major branching:
 - [ ] **[PLACEHOLDER QUEST]**: Related to Velinor's sacrifice
 
 #### 4. Additional Triglyph Sets
-**Current:** Sorrow + Remembrance + Legacy  
+**Current:** Sorrow + Remembrance + Legacy
 **Placeholders for expansion:**
 - [ ] **Fear + Control + Release**
   - Theme: Letting go of safety
@@ -844,7 +857,7 @@ These choices accumulate TONE stats without major branching:
   - Reward: [PLACEHOLDER unified glyph]
 
 #### 5. Octoglyph Chamber Details
-**Current:** Basic structure defined  
+**Current:** Basic structure defined
 **Placeholders for each chamber:**
 - [ ] **Sensory Oblivion Chamber**
   - Location: [TBD]
@@ -876,7 +889,7 @@ These choices accumulate TONE stats without major branching:
   - Memory echo: [PLACEHOLDER]
 
 #### 6. Multiplayer Content
-**Current:** Group mechanics defined conceptually  
+**Current:** Group mechanics defined conceptually
 **Placeholders for expansion:**
 - [ ] Group-specific dialogue variations for all NPCs
 - [ ] Cooperative chamber puzzles (require 2+ players)
@@ -899,8 +912,7 @@ These choices accumulate TONE stats without major branching:
 - [ ] **Velinor Romance Path**: (if appropriate to tone) Deeper connection with Velinor's fragments
 - [ ] **Saori Antagonist Path**: Saori becomes corrupted by obsession
 - [ ] **Early Game Divergence**: Major choice in Act 1 splits story completely
-
----
+##
 
 ## How to Use This Map
 
@@ -983,7 +995,9 @@ These choices accumulate TONE stats without major branching:
 - Use semantic versioning (1.0 → 1.1 for minor, 1.0 → 2.0 for major)
 
 **Change Log Format:**
+
 ```
+
 ## Update Log
 
 ### Version 1.1 (Date)
@@ -995,7 +1009,8 @@ These choices accumulate TONE stats without major branching:
 - Initial story map created
 ```
 
----
+
+##
 
 ## Quick Reference
 
@@ -1016,8 +1031,7 @@ These choices accumulate TONE stats without major branching:
 4. **Memory is the theme** - Glyphs, fragmentation, journal, sacrifice all reinforce it
 5. **Confrontations over combat** - Emotional refinement, not traditional boss fights
 6. **Friendship is the core** - Saori and Velinor's relationship anchors everything
-
----
+##
 
 ## Appendix: Glossary
 
@@ -1050,8 +1064,7 @@ These choices accumulate TONE stats without major branching:
 **Chamber of Echoed Memory**: Triglyph chamber encounter
 
 **Final Chamber**: Saori's underground Corelink hub where ending choice occurs
-
----
+##
 
 **END OF STORY MAP v1.0**
 

@@ -57,6 +57,8 @@ Vulnerability + Acceptance → Joy
 "Courage to be seen becomes freedom to celebrate"
 ```
 
+
+
 ## Usage
 
 ### Basic Usage
@@ -68,12 +70,16 @@ engine = get_velonix_engine()
 
 # Execute a reaction
 reaction = engine.react(["Lg", "Gf"])
+
 # Result: Tenderness
 
 # With catalyst
 reaction = engine.react(["Rg", "Fg"], catalyst="Rv")
+
 # Result: Presence
 ```
+
+
 
 ### Full Integration
 
@@ -112,9 +118,12 @@ archive.log_reaction(
 )
 ```
 
+
+
 ### Find Possible Reactions
 
 ```python
+
 # What reactions are possible from current state?
 current_elements = ["Lg", "Gf", "St"]
 possible = engine.find_possible_reactions(current_elements)
@@ -122,6 +131,8 @@ possible = engine.find_possible_reactions(current_elements)
 for p in possible:
     print(f"{p['inputs']} → {p['result'].name}")
 ```
+
+
 
 ### Streamlit Integration
 
@@ -131,6 +142,8 @@ from emotional_os.glyphs.velonix_streamlit import render_velonix_interface
 # In your Streamlit app
 render_velonix_interface()
 ```
+
+
 
 ## Architecture
 
@@ -165,6 +178,8 @@ EmotionalArchive
 ├── JSON Export
 └── Narrative Export
 ```
+
+
 
 ## Reaction Catalog
 
@@ -236,10 +251,13 @@ VELΩNIX provides:
 All reactions are automatically logged to create a "legacy capsule" of emotional transformations:
 
 ```python
+
 # Export archive
 archive_json = archive.export_as_json()
 narrative = archive.export_as_narrative()
 ```
+
+
 
 ## Demo
 
@@ -248,6 +266,8 @@ Run the demo to see VELΩNIX in action:
 ```bash
 python3 emotional_os/glyphs/velonix_demo.py
 ```
+
+
 
 This runs:
 
@@ -279,6 +299,8 @@ custom = EmotionalElement(
 engine.add_custom_element(custom)
 ```
 
+
+
 ### Add Custom Reaction
 
 ```python
@@ -293,6 +315,8 @@ custom_reaction = ReactionChain(
 
 engine.add_custom_reaction(custom_reaction)
 ```
+
+
 
 ## Philosophy
 

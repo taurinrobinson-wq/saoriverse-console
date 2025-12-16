@@ -6,7 +6,7 @@
 - **Remembrancer**: Unlock all 70 glyphs solo
 
 ## Co-Play Path
-- **Twin Resonance (Final Achievement)**: Unlock all 70 glyphs with a friend  
+- **Twin Resonance (Final Achievement)**: Unlock all 70 glyphs with a friend
   - Symbolizes that memory restoration is communal, not solitary.
   - Requires shared glyph discovery or co-play session.
 

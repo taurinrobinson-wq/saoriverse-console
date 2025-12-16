@@ -3,10 +3,13 @@
 ## Get Started in 3 Steps
 
 ### Step 1️⃣: Launch the Streamlit App
+
 ```bash
 cd /Users/taurinrobinson/saoriverse-console
 streamlit run main_v2.py  # (ARCHIVED: emotional_os_ui_v2.py)
 ```
+
+
 
 Your browser will automatically open to `http://localhost:8501`
 
@@ -28,12 +31,11 @@ In the main chat area, type a message like:
 
 You'll receive a **poetic, enriched response** like:
 
-> "✨ 🌈 Good energy flows ✨ 🌈. This builds the world. 
+> "✨ 🌈 Good energy flows ✨ 🌈. This builds the world.
 >
-> *As the poets knew: 'O world, I cannot hold thee close enough! 
+> *As the poets knew: 'O world, I cannot hold thee close enough!
 > Thy winds, thy wide grey skies! Thy mists that roll and rise!'*"
-
----
+##
 
 ## What You're Getting
 
@@ -45,8 +47,7 @@ You'll receive a **poetic, enriched response** like:
 | **Glyphs** | 292+ emotional symbols (✨💕🔥🌹 etc) |
 | **Speed** | 0.1ms per enrichment (instant) |
 | **Privacy** | 100% local (0 external API calls) |
-
----
+##
 
 ## Example Conversations
 
@@ -64,8 +65,7 @@ You'll receive a **poetic, enriched response** like:
 **You**: "I'm contemplating my future and it feels uncertain."
 **Saori**: "⏰ 🔮 Something wonderful awaits ⏰ 🔮. Your hope is radiant even in uncertainty."
 **Emotion**: anticipation (strength: 2) | **Poetry**: Frost poem
-
----
+##
 
 ## Settings & Controls
 
@@ -85,8 +85,7 @@ You'll receive a **poetic, enriched response** like:
 - When ON: All responses enriched with poetry
 - Shows live stats
 - 0 external API calls
-
----
+##
 
 ## Tips & Tricks
 
@@ -101,7 +100,7 @@ You'll receive a **poetic, enriched response** like:
 
 Check the sidebar metrics:
 - **Poems**: Should always show 33
-- **Emotions**: Should always show 11  
+- **Emotions**: Should always show 11
 - **Words**: Should always show 6,453
 
 If numbers are lower, check external drive connection.
@@ -114,8 +113,7 @@ If numbers are lower, check external drive connection.
 | Responses not enriched | Refresh browser page (Ctrl/Cmd + R) |
 | Slow enrichment | Check external drive performance |
 | Stats not showing | Ensure data/poetry/poetry_database.json exists |
-
----
+##
 
 ## System Requirements
 
@@ -135,8 +133,7 @@ If numbers are lower, check external drive connection.
 - RAM: ~200MB for system
 - Disk: 1.7GB on external drive
 - Network: None required (100% local)
-
----
+##
 
 ## Learn More
 
@@ -144,13 +141,12 @@ For detailed documentation, see:
 - `POETRY_ENRICHMENT_COMPLETE.md` - Full system documentation
 - `EXTERNAL_DRIVE_SETUP.md` - External drive setup
 - `test_poetry_enrichment_e2e.py` - Test suite with detailed results
-
----
+##
 
 ## Enjoy! 🎭✨
 
 Your FirstPerson Emotional OS now has a complete poetry enrichment layer, running 100% locally with beautiful, poetic responses enriched with metaphor and emotion.
 
-Start a conversation and experience the magic! 
+Start a conversation and experience the magic!
 
 **Tip**: Try emotionally expressive inputs for the best poetic responses. The more emotion you express, the more poetry you'll receive! 💫

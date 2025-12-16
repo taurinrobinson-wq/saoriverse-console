@@ -5,6 +5,7 @@
 The signal lexicon has been reorganized from **signal-centric** to **word-centric**:
 
 ### Old Structure (Signal-Centric)
+
 ```json
 {
   "signals": {
@@ -16,7 +17,10 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
 }
 ```
 
-### New Structure (Word-Centric)  
+
+
+### New Structure (Word-Centric)
+
 ```json
 {
   "hold": {
@@ -36,6 +40,8 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
 }
 ```
 
+
+
 ## Benefits
 
 1. **Direct Lookups**: `lexicon["hold"]` instead of searching through all signals
@@ -50,6 +56,7 @@ The signal lexicon has been reorganized from **signal-centric** to **word-centri
 ### 1. Update signal_parser.py
 
 ```python
+
 # Old way
 for signal_name, signal_data in lexicon['signals'].items():
     keywords = signal_data.get('keywords', [])
@@ -63,28 +70,33 @@ if word_data:
     # Direct lookup!
 ```
 
+
+
 ### 2. Update parse_input() function
 
 ```python
 def parse_input(user_message: str):
     words = tokenize(user_message)
-    
+
     # Now this is FAST:
     for word in words:
         if word in word_centric_lexicon:
             emotional_signals = word_centric_lexicon[word]['signals']
             gates = word_centric_lexicon[word]['gates']
             frequency = word_centric_lexicon[word]['frequency']
-            
+
             # Use this data to select appropriate glyph/voltage
 ```
+
+
 
 ### 3. Create Query Functions
 
 ```python
+
 # Get all words for a signal
 def words_for_signal(signal_name):
-    return [word for word, data in lexicon.items() 
+    return [word for word, data in lexicon.items()
             if signal_name in data['signals']]
 
 # Get all words that activate specific gates
@@ -94,10 +106,12 @@ def words_for_gates(gate_numbers):
 
 # Get most frequently used emotional words
 def top_emotional_words(n=20):
-    return sorted(lexicon.items(), 
-                  key=lambda x: x[1]['frequency'], 
+    return sorted(lexicon.items(),
+                  key=lambda x: x[1]['frequency'],
                   reverse=True)[:n]
 ```
+
+
 
 ## File Locations
 
@@ -143,7 +157,6 @@ def top_emotional_words(n=20):
 2. Check TRANSCRIPT_ANALYSIS_INSIGHTS.md for emotional vocabulary recommendations
 3. Integrate new Glyphs that leverage high-frequency emotional words
 4. A/B test response quality with word-centric emotional recognition
+##
 
----
-
-Generated: 
+Generated:

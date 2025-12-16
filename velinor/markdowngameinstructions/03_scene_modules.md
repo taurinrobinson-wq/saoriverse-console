@@ -7,12 +7,12 @@ A standardized structure for building **modular NPC encounter scenes** with:
 - Glyph resonance triggers
 - Dialogue bubble progression
 - Player choice architecture
-
----
+##
 
 ## Template Structure
 
 ### Scene Metadata
+
 ```
 Scene ID:             Unique identifier (e.g., market_intro_velinor_01)
 Background Image:     Path to background asset
@@ -22,11 +22,14 @@ Glyph Triggers:       Glyphs activated during scene
 NPC Name:             Primary character in scene
 ```
 
+
+
 ### Scene 1: Distant Presence
 
 **Purpose**: Establish atmosphere and introduce the NPC from a distance
 
 ```markdown
+
 ## Scene 1: Distant Presence
 
 **Visual Setup**:
@@ -45,19 +48,21 @@ NPC Name:             Primary character in scene
 [Esḧ] (sacred witness) — Player begins to perceive
 ```
 
+
+
 **Design Notes**:
 - Foreground opacity: 40-60%
 - Foreground scale: 0.6-0.7x normal
 - Narration tone: Observational, not yet intimate
 - Glyph is *passive* — just awareness beginning
-
----
+##
 
 ### Scene 2: Approach
 
 **Purpose**: Collapse distance; establish connection
 
 ```markdown
+
 ## Scene 2: Approach
 
 **Visual Setup**:
@@ -77,19 +82,21 @@ NPC Name:             Primary character in scene
 [Cinarä̈], [Brethielï̈], [Thalen̈] — NPC's emotional signature
 ```
 
+
+
 **Design Notes**:
 - Foreground opacity: 100%
 - Foreground scale: 1.0x (full size) or 1.1x (commanding presence)
 - Dialogue is the **first interaction** — tone is crucial
 - Glyphs now *active* — resonance responding to moment
-
----
+##
 
 ### Scene 3: Player Response (Optional Multi-Stage)
 
 **Purpose**: Branch based on player choice
 
 ```markdown
+
 ## Player Options
 
 **Option A: [Dialogue Choice 1]**
@@ -108,17 +115,19 @@ NPC Name:             Primary character in scene
 - Foreground Shift: [Static or NPC's reading of the moment]
 ```
 
+
+
 **Design Notes**:
 - Each option should feel **meaningfully different**
 - NPC responses vary not just in content but in **tone and pacing**
 - Glyphs reflect player's internal state, not just NPC action
 - One path can lead to faster trust; others preserve mystery
-
----
+##
 
 ## Example: Velinor's First Encounter
 
 ### Scene Metadata
+
 ```
 Scene ID:             market_intro_velinor_01
 Background Image:     velinor_marketplace_distant.png
@@ -129,8 +138,12 @@ Glyph Triggers:       [Esḧ], [Cinarä̈], [Brethielï̈], [Querrä], [Thalen̈
 NPC Name:             Velinor
 ```
 
+
+
 ### Scene 1: Distant Presence
+
 ```
+
 ## Scene 1: Distant Presence
 
 **Visual**:
@@ -148,8 +161,12 @@ She appears to be some kind of priestess… or something older.
 **Glyph Glow**: [Esḧ] pulses softly — sacred witness
 ```
 
+
+
 ### Scene 2: Approach
+
 ```
+
 ## Scene 2: Approach
 
 **Visual**:
@@ -170,7 +187,10 @@ Before you have a chance to speak, she does.
 **Glyph Glow**: [Cinarä̈] (invoked beloved) and [Brethielï̈] (breath as guide) shimmer
 ```
 
+
+
 ### Player Options
+
 ```
 **Option A**: "Who are you really?"
 - Glyph: [Querrä] (inquiry) glows
@@ -188,12 +208,15 @@ Before you have a chance to speak, she does.
 - Foreground: Velinor nods slowly, respect in her gaze
 ```
 
----
+
+##
 
 ## Implementation Guide
 
 ### For Streamlit Integration
+
 ```python
+
 # Scene 1: Distant presence
 col1, col2 = st.columns([3, 1])
 with col1:
@@ -211,19 +234,20 @@ if st.button("Continue"):
     st.image("velinor_priestess_close.png", width=400)
     st.write("She comes closer to you...")
     display_dialogue("I see you. Not just your shape… but your ache.")
-    
+
     # Player options
-    choice = st.radio("How do you respond?", 
-        ["Who are you really?", 
-         "What do you mean, 'unremembered'?", 
+    choice = st.radio("How do you respond?",
+        ["Who are you really?",
+         "What do you mean, 'unremembered'?",
          "Remain silent"])
-    
+
     if choice == "Who are you really?":
         trigger_glyph([Querrä])
         st.write("Velinor Response: 'A question for another day...'")
 ```
 
----
+
+##
 
 ## Reuse Across NPCs
 

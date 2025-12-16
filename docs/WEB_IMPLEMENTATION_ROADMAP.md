@@ -14,13 +14,12 @@ This document outlines what you need to build to complete the web version.
 | Stats Display | ❌ Not Started | 🟠 Medium | 30 min |
 | Glyph System | ❌ Not Started | 🟡 Low | 2-3 hrs |
 | Save/Load | ❌ Not Started | 🟡 Low | 1-2 hrs |
-
----
+##
 
 ## 🎯 Task 1: Implement GameScene Component (HIGH PRIORITY)
 
-**File**: `velinor-web/src/components/GameScene.tsx`  
-**Status**: Empty file, ready for implementation  
+**File**: `velinor-web/src/components/GameScene.tsx`
+**Status**: Empty file, ready for implementation
 **Estimated Time**: 1-2 hours
 
 ### What It Should Do
@@ -36,8 +35,9 @@ Display the current game state with:
 See `velinor_app.py` (Streamlit version) for how these are laid out.
 
 ### Suggested Structure
+
 ```tsx
-export function GameScene({ 
+export function GameScene({
   sessionId: string,
   gameState: GameState // from backend
 }) {
@@ -67,7 +67,10 @@ export function GameScene({
 }
 ```
 
+
+
 ### Data You'll Receive From Backend
+
 ```typescript
 {
   story_text: string,
@@ -95,11 +98,12 @@ export function GameScene({
 }
 ```
 
----
+
+##
 
 ## 🎯 Task 2: Wire Up Backend Connection (HIGH PRIORITY)
 
-**Files**: `velinor-web/src/hooks/useGame.ts` (NEW)  
+**Files**: `velinor-web/src/hooks/useGame.ts` (NEW)
 **Estimated Time**: 1 hour
 
 ### What You Need to Build
@@ -140,7 +144,7 @@ export function useGame() {
     try {
       const response = await axios.post(
         `${API_BASE}/sessions/${sessionId}/actions`,
-        { 
+        {
           player_input: choiceId,
           action_type: 'choice'
         }
@@ -157,7 +161,7 @@ export function useGame() {
     try {
       const response = await axios.post(
         `${API_BASE}/sessions/${sessionId}/actions`,
-        { 
+        {
           player_input: input,
           action_type: 'free_text'
         }
@@ -180,7 +184,10 @@ export function useGame() {
 }
 ```
 
+
+
 ### Wire It Into GameScene
+
 ```tsx
 import { useGame } from '@/hooks/useGame';
 
@@ -193,14 +200,16 @@ export function GameScene() {
 }
 ```
 
----
+
+##
 
 ## 🎯 Task 3: Display Choices & Process Input (HIGH PRIORITY)
 
-**File**: `velinor-web/src/components/GameScene.tsx`  
+**File**: `velinor-web/src/components/GameScene.tsx`
 **Estimated Time**: 1-2 hours
 
 ### Choices UI
+
 ```tsx
 <div className="space-y-2">
   {gameState.choices.map(choice => (
@@ -216,7 +225,10 @@ export function GameScene() {
 </div>
 ```
 
+
+
 ### Free Text Input
+
 ```tsx
 const [input, setInput] = useState('');
 
@@ -246,14 +258,16 @@ const [input, setInput] = useState('');
 </div>
 ```
 
----
+
+##
 
 ## 🎯 Task 4: NPC Display (MEDIUM PRIORITY)
 
-**File**: `velinor-web/src/components/GameScene.tsx`  
+**File**: `velinor-web/src/components/GameScene.tsx`
 **Estimated Time**: 1-2 hours
 
 ### Display NPC Info
+
 ```tsx
 {gameState.npc_info && (
   <div className="flex items-end gap-4">
@@ -263,7 +277,7 @@ const [input, setInput] = useState('');
       alt={gameState.npc_info.name}
       className="h-96 object-contain"
     />
-    
+
     {/* Dialogue Box */}
     <div className="flex-1 bg-gradient-to-r from-purple-900 to-purple-800 p-6 rounded-lg">
       <h3 className="text-2xl font-bold text-white mb-2">
@@ -290,14 +304,16 @@ const [input, setInput] = useState('');
 )}
 ```
 
----
+
+##
 
 ## 🎯 Task 5: Stats Display (MEDIUM PRIORITY)
 
-**File**: `velinor-web/src/components/StatsPanel.tsx` (NEW)  
+**File**: `velinor-web/src/components/StatsPanel.tsx` (NEW)
 **Estimated Time**: 30 minutes
 
 ### Component Structure
+
 ```tsx
 export function StatsPanel({ stats: PlayerStats }) {
   return (
@@ -322,16 +338,20 @@ export function StatsPanel({ stats: PlayerStats }) {
 }
 ```
 
+
+
 ### Usage
+
 ```tsx
 <StatsPanel stats={gameState.player_stats} />
 ```
 
----
+
+##
 
 ## 🎯 Task 6: Glyph System (LOW PRIORITY)
 
-**File**: `velinor-web/src/components/GlyphCollection.tsx` (NEW)  
+**File**: `velinor-web/src/components/GlyphCollection.tsx` (NEW)
 **Estimated Time**: 2-3 hours
 
 ### What It Shows
@@ -342,15 +362,15 @@ export function StatsPanel({ stats: PlayerStats }) {
 
 ### Reference
 See FirstPerson system output in backend responses - includes glyph data.
-
----
+##
 
 ## 🎯 Task 7: Save/Load System (LOW PRIORITY)
 
-**File**: `velinor-web/src/hooks/useGame.ts` (ADD METHODS)  
+**File**: `velinor-web/src/hooks/useGame.ts` (ADD METHODS)
 **Estimated Time**: 1-2 hours
 
 ### Add to useGame Hook
+
 ```typescript
 const saveGame = useCallback(async () => {
   return await axios.post(`${API_BASE}/sessions/${sessionId}/save`, {
@@ -366,7 +386,8 @@ const loadGame = useCallback(async (saveId: string) => {
 }, [sessionId]);
 ```
 
----
+
+##
 
 ## 📦 Implementation Order
 
@@ -386,12 +407,12 @@ const loadGame = useCallback(async (saveId: string) => {
    - [ ] Task 6: Glyph system (if desired)
    - [ ] Task 7: Save/load (if desired)
    - [ ] Bug fixes & optimization
-
----
+##
 
 ## 🔧 Files to Create/Modify
 
 ### New Files Needed
+
 ```
 velinor-web/
 ├── src/
@@ -408,7 +429,10 @@ velinor-web/
 │       └── api.ts                  ← CREATE (API client)
 ```
 
+
+
 ### Files to Modify
+
 ```
 velinor-web/
 ├── src/
@@ -421,7 +445,8 @@ velinor-web/
 │       └── globals.css             ← ADD CUSTOM STYLES
 ```
 
----
+
+##
 
 ## 💡 Development Tips
 
@@ -430,8 +455,7 @@ velinor-web/
 3. **Use React DevTools** - Debug state and props
 4. **Reference Streamlit** - The Streamlit version is your visual guide
 5. **Commit often** - Push to git frequently
-
----
+##
 
 ## 🆘 If You Get Stuck
 
@@ -439,8 +463,7 @@ velinor-web/
 2. **Component issues**: Reference `/velinor_app.py` for UI logic
 3. **Data structure**: Check `/velinor/engine/core.py` for state format
 4. **Story data**: See `/velinor/stories/sample_story.json` for structure
-
----
+##
 
 ## ✅ Definition of Done
 
@@ -455,9 +478,8 @@ When all tasks are complete, you should have:
 - ✅ Glyph system visible (optional)
 - ✅ Save/load functionality (optional)
 
-**Total Estimated Work**: 8-12 hours for core features  
+**Total Estimated Work**: 8-12 hours for core features
 **With polish & extras**: 15-20 hours
-
----
+##
 
 Ready to start? Open `velinor-web/src/components/GameScene.tsx` and begin! 🚀

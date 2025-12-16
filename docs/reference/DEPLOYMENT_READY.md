@@ -23,8 +23,7 @@
 - Branch `chore/lint-emotional_os` merged to `main`
 - All changes pushed to GitHub
 - Working tree clean, up to date with origin/main
-
----
+##
 
 ## Next Steps: Deploy to Streamlit Cloud
 
@@ -38,7 +37,9 @@ Click "New app" → Select repository `saoriverse-console` → Branch `main` →
 In the Streamlit Cloud dashboard, go to App settings → Secrets:
 
 ```toml
+
 # .streamlit/secrets.toml (for local testing)
+
 # OR Streamlit Cloud Secrets tab
 
 [supabase]
@@ -46,14 +47,15 @@ url = "your-supabase-url"
 key = "your-supabase-anon-key"
 ```
 
+
+
 ### 4. That's It!
 The app will:
 - Auto-connect to Supabase for persistence
 - Use built-in response generation
 - Run on Streamlit's infrastructure (Python 3.11+)
 - Scale automatically with traffic
-
----
+##
 
 ## Alternative: Deploy to Railway
 
@@ -61,12 +63,12 @@ The app will:
 2. Set environment variables for Supabase credentials
 3. Railway automatically detects `main_v2.py` as entry point
 4. Deploy with one click
-
----
+##
 
 ## Local Development (When Python 3.9+ Available)
 
 Once you upgrade Python on your Mac:
+
 ```bash
 python3.11 -m venv venv
 source venv/bin/activate
@@ -74,9 +76,10 @@ pip install -r requirements.txt
 streamlit run main_v2.py
 ```
 
-The app will run with built-in response generation.
 
----
+
+The app will run with built-in response generation.
+##
 
 ## Key Files
 
@@ -84,8 +87,7 @@ The app will run with built-in response generation.
 - **UI module**: `emotional_os/deploy/modules/ui.py`
 - **Backend logic**: `emotional_os/glyphs/signal_parser.py`
 - **Persistence**: `emotional_os/supabase/supabase_integration.py`
-
----
+##
 
 ## Architecture
 
@@ -101,6 +103,7 @@ Signal Parser ← Response generation with learning
 Glyph System ← Emotional response composition
 ```
 
----
+
+##
 
 **Everything is ready. You can deploy now.** 🚀

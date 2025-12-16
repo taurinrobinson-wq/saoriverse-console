@@ -5,8 +5,7 @@
 Your glyph system contains **6,434 glyphs** organized across **63 primary categories**, making it one of the most comprehensive emotional-semantic systems built. However, the current architecture requires **translation layers** (glyph → affect → conversational tone) that create friction and cognitive overhead.
 
 **Key Finding**: The system is *underutilized* because glyphs are too poetic/abstract to use directly in conversational responses. Modernizing them would eliminate translation layers and allow direct glyph→response mapping.
-
----
+##
 
 ## Current State Analysis
 
@@ -35,8 +34,7 @@ Your glyph system contains **6,434 glyphs** organized across **63 primary catego
 - "Recursive Ache" - layered abstraction
 
 **Problem**: User says "I'm exhausted" → System detects *sadness* → Maps to... which glyph? "Drain"? "Surrender"? "Collapse"?
-
----
+##
 
 ## The Translation Problem
 
@@ -47,12 +45,14 @@ User Input: "I'm exhausted"
     ↓
 AffectParser: tone=sad, arousal=0.3, valence=-0.9
     ↓
-ResponseRotator: "sadness" category → 
+ResponseRotator: "sadness" category →
     "I hear the sadness in this. It feels heavy."
     ↓
 Glyph System: "Which glyph represents this?"
     (System doesn't know - needs manual interpretation)
 ```
+
+
 
 ### Why This Fails
 
@@ -60,8 +60,7 @@ Glyph System: "Which glyph represents this?"
 2. **No glyph→affect mapping** - Can't directly say "Drain = fatigue/sadness with low arousal"
 3. **Two response systems** - ResponseRotator works independently from glyph system, creating duplication
 4. **Abstract names** - "Shielding of witnessed?" doesn't tell you when to use it
-
----
+##
 
 ## Proposed Modernization
 
@@ -113,7 +112,8 @@ ResponseRotator + Glyph System (integrated):
     - Response can use glyph directly: "That's real *grief*."
 ```
 
----
+
+##
 
 ## Implementation Roadmap
 
@@ -142,8 +142,7 @@ ResponseRotator + Glyph System (integrated):
 - [ ] Move old poetic descriptions to archive table
 - [ ] Update documentation to use new names
 - [ ] Add migration guide for any external consumers
-
----
+##
 
 ## Specific Recommendations
 
@@ -179,6 +178,8 @@ AFFECT_TO_GLYPH = {
 }
 ```
 
+
+
 ### 3. Response Template With Glyphs
 
 **Before** (current):
@@ -190,6 +191,8 @@ brief_responses = [
 ]
 ```
 
+
+
 **After** (with glyphs):
 
 ```python
@@ -200,7 +203,8 @@ brief_responses = [
 ]
 ```
 
----
+
+##
 
 ## Benefits of Modernization
 
@@ -212,8 +216,7 @@ brief_responses = [
 | **Response Latency** | Multiple lookups | Single lookup |
 | **Glyph Usage** | Underutilized | Direct integration |
 | **Consistency** | Translation errors possible | 1:1 mapping guarantees consistency |
-
----
+##
 
 ## Risk Assessment
 
@@ -235,8 +238,7 @@ brief_responses = [
 - Create migration script with rollback
 - Test with subset first (top 100 glyphs)
 - Keep both systems running in parallel during transition
-
----
+##
 
 ## Next Steps
 
@@ -245,8 +247,7 @@ brief_responses = [
 3. **Create mapping** - Build affect→glyph lookup table
 4. **Test on subset** - Run against Phase 1-2.2 test suite
 5. **Full deployment** - Migrate all 6,434 glyphs over 2-3 weeks
-
----
+##
 
 ## Questions for You
 

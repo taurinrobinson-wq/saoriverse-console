@@ -14,7 +14,9 @@ Table of Contents:
 """
 
 # ============================================================================
+
 # 1. ARCHITECTURE OVERVIEW
+
 # ============================================================================
 
 """
@@ -53,7 +55,9 @@ KEY FEATURES:
 """
 
 # ============================================================================
+
 # 2. COMPONENTS & RESPONSIBILITIES
+
 # ============================================================================
 
 """
@@ -128,7 +132,9 @@ KEY FEATURES:
 """
 
 # ============================================================================
+
 # 3. DATA FLOW
+
 # ============================================================================
 
 """
@@ -191,7 +197,9 @@ TURN-BY-TURN DATA FLOW:
 """
 
 # ============================================================================
+
 # 4. INTEGRATION WITH FIRSTPERSON PIPELINE
+
 # ============================================================================
 
 """
@@ -205,18 +213,18 @@ def your_response_processor(user_text: str, context: dict) -> Union[str, Tuple[s
             • conversation_history (List[ConversationTurn])
             • turn_number (int)
             • Any other context you add
-    
+
     Returns:
         str: Plain response text
         OR
         Tuple[str, dict]: (response_text, glyph_intent)
     '''
-    
+
     # Example: Call FirstPerson tier processing
     from emotional_os.deploy.modules.response_handler import handle_response_pipeline
-    
+
     response_text, processing_time = handle_response_pipeline(user_text, context)
-    
+
     # Example: Extract glyph intent from Glyph signals
     glyph_intent = {
         "voltage": "high",        # User expressing high energy
@@ -225,7 +233,7 @@ def your_response_processor(user_text: str, context: dict) -> Union[str, Tuple[s
         "energy": 0.8,            # 80% intensity
         "hesitation": False,      # No pauses
     }
-    
+
     return response_text, glyph_intent
 
 # Then instantiate orchestrator:
@@ -246,7 +254,9 @@ for turn in turns:
 """
 
 # ============================================================================
+
 # 5. USAGE EXAMPLES
+
 # ============================================================================
 
 """
@@ -261,7 +271,7 @@ from emotional_os.deploy.modules.response_handler import handle_response_pipelin
 
 def my_response_processor(user_text, context):
     response, _ = handle_response_pipeline(user_text, context)
-    
+
     # Extract glyph-based intent (from your Glyph signals)
     glyph_intent = {
         "voltage": "medium",
@@ -269,7 +279,7 @@ def my_response_processor(user_text, context):
         "certainty": "high",
         "energy": 0.5,
     }
-    
+
     return response, glyph_intent
 
 orchestrator = AudioConversationOrchestrator(my_response_processor, max_turns=10)
@@ -308,7 +318,7 @@ st.title("FirstPerson Audio Conversation")
 def response_processor(user_text, context):
     # Your FirstPerson processing here
     response, _ = handle_response_pipeline(user_text, context)
-    
+
     # Build glyph intent based on response analysis
     glyph_intent = {
         "voltage": "high" if len(response) > 200 else "medium",
@@ -384,7 +394,7 @@ import time
 def monitor_user_input():
     while not stop_event.is_set():
         user_input = input("Command (p=pause, r=resume, s=stop): ")
-        
+
         if user_input.lower() == "p":
             orchestrator.pause()
             print("⏸️ Paused")
@@ -394,7 +404,7 @@ def monitor_user_input():
         elif user_input.lower() == "s":
             orchestrator.stop()
             print("⏹️ Stopped")
-        
+
         time.sleep(0.1)
 
 # Run in separate thread:
@@ -406,7 +416,9 @@ turns = asyncio.run(orchestrator.run_conversation_loop())
 """
 
 # ============================================================================
+
 # 6. TROUBLESHOOTING
+
 # ============================================================================
 
 """
@@ -461,5 +473,7 @@ Fix:
 """
 
 # ============================================================================
+
 # END OF GUIDE
+
 # ============================================================================

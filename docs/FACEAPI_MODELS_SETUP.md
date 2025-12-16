@@ -16,15 +16,20 @@ cd firstperson-web
 npm install face-api.js
 ```
 
+
+
 Then copy models from node_modules:
 
 ```bash
+
 # Windows PowerShell
 Copy-Item node_modules/face-api.js/dist/models -Destination public/models -Recurse -Force
 
 # macOS/Linux
 cp -r node_modules/face-api.js/dist/models public/models
 ```
+
+
 
 ### Option B: Manual Download
 
@@ -50,14 +55,20 @@ public/models/
 ├── (additional model files as needed)
 ```
 
+
+
 ### Check via file system:
+
 ```bash
+
 # Windows PowerShell
 Get-ChildItem -Path "firstperson-web/public/models" -File
 
 # macOS/Linux
 ls -la firstperson-web/public/models/
 ```
+
+
 
 You should see at least:
 - `tiny_face_detector_model.*` (3 files)
@@ -78,6 +89,8 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
+
+
 Usually this is already configured by default in Next.js 13+.
 
 ## Step 4: Test Models Load Correctly
@@ -92,32 +105,40 @@ export default async function handler(req: any, res: any) {
   try {
     await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
     await faceapi.nets.faceExpressionNet.loadFromUri("/models");
-    
-    res.status(200).json({ 
-      success: true, 
-      message: "Models loaded successfully" 
+
+    res.status(200).json({
+      success: true,
+      message: "Models loaded successfully"
     });
   } catch (error: any) {
-    res.status(500).json({ 
-      success: false, 
-      error: error.message 
+    res.status(500).json({
+      success: false,
+      error: error.message
     });
   }
 }
 ```
 
+
+
 Then test:
+
 ```bash
 curl http://localhost:3000/api/test-models
 ```
 
+
+
 Expected response:
+
 ```json
 {
   "success": true,
   "message": "Models loaded successfully"
 }
 ```
+
+
 
 ## Step 5: Optimize Model Loading (Optional)
 
@@ -131,7 +152,7 @@ let modelsLoaded = false;
 
 export async function loadFaceApiModels() {
   if (modelsLoaded) return;
-  
+
   try {
     const modelsPath = "/models";
     await Promise.all([
@@ -150,6 +171,8 @@ export function areModelsLoaded() {
   return modelsLoaded;
 }
 ```
+
+
 
 ## Troubleshooting
 
@@ -211,11 +234,12 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
+
+
 ## Privacy Note
 
 ⚠️ **Important:** All models run locally in the browser. No facial data, emotions, or video frames are transmitted to any server. Only emotion metadata (`{emotion, confidence}`) is sent to your backend.
-
----
+##
 
 ## Summary
 

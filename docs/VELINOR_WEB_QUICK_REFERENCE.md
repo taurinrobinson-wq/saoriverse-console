@@ -8,24 +8,27 @@
 | Frontend | Next.js + React/TypeScript | UI with full overlay control |
 | Deployment | Railway | Automatic CI/CD |
 | Game Engine | Velinor (Twine/Python) | Narrative logic, dice rolls, NPC dialogue |
-
----
+##
 
 ## Local Development Commands
 
 ```bash
+
 # Start Backend (Terminal 1)
 cd /path/to/saoriverse-console
 python velinor_api.py
+
 # → http://localhost:8000 (Swagger docs at /docs)
 
 # Start Frontend (Terminal 2)
 cd velinor-web
 npm run dev
+
 # → http://localhost:3000
 ```
 
----
+
+##
 
 ## Files Created
 
@@ -37,8 +40,7 @@ npm run dev
 | `NEXTJS_FRONTEND_SETUP.md` | Detailed Next.js setup guide |
 | `RAILWAY_DEPLOYMENT.md` | Railway deployment instructions |
 | `VELINOR_WEB_MIGRATION.md` | Complete step-by-step migration guide |
-
----
+##
 
 ## Setup Checklist
 
@@ -54,8 +56,7 @@ npm run dev
 - [ ] `git add .` && `git commit -m "..."` && `git push origin main`
 - [ ] Railway auto-deploys (~3-5 minutes)
 - [ ] Visit your Railway domain
-
----
+##
 
 ## Game Flow
 
@@ -82,7 +83,8 @@ npm run dev
          ▼
 ```
 
----
+
+##
 
 ## API Endpoints
 
@@ -94,22 +96,26 @@ npm run dev
 | POST | `/api/game/{id}/save` | Save progress |
 | POST | `/api/game/{id}/load` | Load saved game |
 | DELETE | `/api/game/{id}` | End session |
-
----
+##
 
 ## Environment Variables
 
 ### Development (`.env.local`)
+
 ```
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
+
+
 ### Production (Railway Dashboard)
+
 ```
 NEXT_PUBLIC_API_URL=https://<your-railway-domain>.up.railway.app
 ```
 
----
+
+##
 
 ## Styling
 
@@ -124,8 +130,7 @@ All components use inline styles for portability. To customize:
 - Use `position: absolute` for overlays
 - Use `position: relative` for containers
 - Use flexbox for layouts
-
----
+##
 
 ## Troubleshooting
 
@@ -140,8 +145,7 @@ All components use inline styles for portability. To customize:
 
 **CORS errors**
 → Already handled in `velinor_api.py`. For production, restrict to your domain.
-
----
+##
 
 ## Key Advantages Over Streamlit
 
@@ -151,8 +155,7 @@ All components use inline styles for portability. To customize:
 ✅ Better performance
 ✅ Easy to customize styling
 ✅ Full React ecosystem available
-
----
+##
 
 ## Resources
 
@@ -160,8 +163,7 @@ All components use inline styles for portability. To customize:
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Railway Docs](https://docs.railway.app/)
 - [Velinor Engine](./velinor/TWINE_INTEGRATION_GUIDE.md)
-
----
+##
 
 **Ready to deploy?**
 

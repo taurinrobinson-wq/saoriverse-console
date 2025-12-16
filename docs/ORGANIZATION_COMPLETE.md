@@ -13,14 +13,14 @@ Your project is now organized with a clean, professional structure that prevents
 - ✅ **.gitignore** — Added rules for `scratch/`, `*.tmp.md`, `.next/`
 - ✅ **README.md** — Updated with new structure navigation and quick commands
 - ✅ **Git commit** — All changes tracked (db51477)
-
----
+##
 
 ## New Quick Commands
 
 From the root directory:
 
 ```bash
+
 # Start Velinor web game (dev mode at localhost:3000)
 ./scripts/RUN_WEB_DEV.sh
 
@@ -31,7 +31,8 @@ From the root directory:
 pip install -r requirements.txt
 ```
 
----
+
+##
 
 ## Folder Layout (After)
 
@@ -71,11 +72,13 @@ saoriverse-console/
 └── ...                          # Other source folders
 ```
 
----
+
+##
 
 ## Git Hygiene Benefits
 
 ### Before
+
 ```
 git log --oneline | head -20
 
@@ -87,7 +90,10 @@ Commit 5: Fix actual issue
 ... (40+ commits, half are garbage summaries)
 ```
 
+
+
 ### After
+
 ```
 git log --oneline | head -20
 
@@ -98,7 +104,8 @@ Commit 4: Chore: Organize project structure
 ... (clean, meaningful history)
 ```
 
----
+
+##
 
 ## What Goes Where?
 
@@ -128,8 +135,7 @@ Commit 4: Chore: Organize project structure
 - Automation helpers
 - One-off utilities
 - Build tools
-
----
+##
 
 ## How to Use This
 
@@ -151,32 +157,37 @@ Commit 4: Chore: Organize project structure
 2. Create tests in **tests/**
 3. Document important stuff in **docs/** only
 4. Keep root clean
-
----
+##
 
 ## Verification
 
 Check that everything is working:
 
 ```bash
+
 # Verify git status is clean
 git status
+
 # Should show: "On branch main" + nothing to commit
 
 # Verify scripts are executable
 ls -la scripts/RUN*.sh
+
 # Should show: -rwxr-xr-x (executable)
 
 # Verify scratch is ignored
 git status scratch/
+
 # Should show: scratch/ is ignored
 
 # Verify important docs exist
 ls docs/PROJECT_STRUCTURE.md
+
 # Should exist ✅
 ```
 
----
+
+##
 
 ## Next Steps
 
@@ -188,18 +199,16 @@ ls docs/PROJECT_STRUCTURE.md
    - Monthly: Review `scratch/`, delete old temp files
    - Every commit: Verify root is clean (`git status`)
    - Never create .md files in root (use `docs/` instead)
-
----
+##
 
 ## Key Takeaway
 
-🎯 **Treat `docs/` like a museum** (curated, intentional, permanent)  
-🎯 **Treat `scratch/` like a junk drawer** (temporary, disposable, ignored by git)  
+🎯 **Treat `docs/` like a museum** (curated, intentional, permanent)
+🎯 **Treat `scratch/` like a junk drawer** (temporary, disposable, ignored by git)
 🎯 **Keep root minimal** (only config and entry points)
 
 Result: **Clean code, sane history, happy collaborators.** ✨
-
----
+##
 
 ## Commit Information
 
@@ -209,8 +218,7 @@ Result: **Clean code, sane history, happy collaborators.** ✨
 - **Type**: Organizational improvement (no breaking changes)
 
 All existing code remains functional. This is purely structural reorganization.
-
----
+##
 
 ## Questions?
 

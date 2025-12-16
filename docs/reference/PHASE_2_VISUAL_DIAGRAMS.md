@@ -5,7 +5,9 @@ This file contains ASCII diagrams showing how all the pieces fit together.
 """
 
 # ============================================================================
+
 # DIAGRAM 1: Overall System Flow
+
 # ============================================================================
 
 """
@@ -66,7 +68,9 @@ This file contains ASCII diagrams showing how all the pieces fit together.
 
 
 # ============================================================================
+
 # DIAGRAM 2: Shared Database vs User Segregation
+
 # ============================================================================
 
 """
@@ -93,25 +97,25 @@ This file contains ASCII diagrams showing how all the pieces fit together.
            v                  v                   v
     USER A VIEW         SYSTEM VIEW          USER B VIEW
     (Personalized)      (Global Admin)       (Personalized)
-    
+
     Queries:                                 Queries:
     get_glyphs_for_user  get_system_view  get_glyphs_for_user
     ("user_A", β, [4,5]) ()               ("user_B", β, [4,5])
-    
+
     Order by:                               Order by:
     1. A's usage count                     1. B's usage count
     2. Consensus                           2. Consensus
     3. Quality                             3. Quality
-    
+
     Result:                                Result:
     [1. Containment]                       [1. Recognition]
     [2. Recognition]                       [2. Containment]
     [3. Longing]                           [3. Longing]
-    
+
     ↓                                      ↓
     User A sees order                     User B sees different order
     based on A's history                  based on B's history
-    
+
     BUT: Same glyphs in shared DB!
     User A's adoption helps User B!
 
@@ -119,7 +123,9 @@ This file contains ASCII diagrams showing how all the pieces fit together.
 
 
 # ============================================================================
+
 # DIAGRAM 3: Glyph Learning Pipeline
+
 # ============================================================================
 
 """
@@ -198,7 +204,9 @@ This file contains ASCII diagrams showing how all the pieces fit together.
 
 
 # ============================================================================
+
 # DIAGRAM 4: User Segregation Mechanism
+
 # ============================================================================
 
 """
@@ -254,7 +262,9 @@ KEY INSIGHT:
 
 
 # ============================================================================
+
 # DIAGRAM 5: System Learning Feedback Loop
+
 # ============================================================================
 
 """
@@ -316,7 +326,9 @@ KEY INSIGHT:
 
 
 # ============================================================================
+
 # DIAGRAM 6: From No-Glyph to Production (Glyph Lifecycle)
+
 # ============================================================================
 
 """
@@ -325,35 +337,37 @@ KEY INSIGHT:
   (0 users)         (1-3 adoptions)     (4-10 adoptions)   (11+ adoptions)   (STABLE)
       |                  |                    |                  |               |
       v                  v                    v                  v               v
-                         
+
   Signal               confidence:        quality_score        consensus_       is_active:
   detected             0.65-0.80          accumulates          strength: 0.6+   1
-  by system                               positive feedback                    
+  by system                               positive feedback
                                                                             all users can
   No existing          Candidate         Starting to show      Strong signal    find it
-  glyph found          stored in         pattern across        across user      
+  glyph found          stored in         pattern across        across user
                        database          users                 base             promoted to
   Rare edge                                                                     core lexicon
-  case               Marked for         Featured in                            
+  case               Marked for         Featured in
                      validation         personalized                           Can be
                      & refinement       recommendations                        updated/versioned
                                                             Appears in         but stable
-                     Awaiting           Used by new          system health     
+                     Awaiting           Used by new          system health
                      human review       users actively        reports           Widely
                      or consensus                                              trusted
-                     promotion          Building              Marketing         
+                     promotion          Building              Marketing
                                         strong track         vector           Becomes
                                         record                                 reference
                                                             Core glyphs       point for
                                                             (proven)          new ones
 
   Timeline: 0 interactions    1-3 sessions    4-10 sessions    Multiple weeks   Months+
-  
+
 """
 
 
 # ============================================================================
+
 # DIAGRAM 7: Response Template Selection (Tone-Based)
+
 # ============================================================================
 
 """
@@ -369,17 +383,17 @@ KEY INSIGHT:
   GRIEF  LONGING CONT INSGHT JOY  DEVOTION RECOGNITION UNKNOWN
      |       |    |    |     |       |         |        |
      v       v    v    v     v       v         v        v
-  
+
   Template: Template: Template: Template: Template: Template: Template: Template:
   "There's  "I hear   "You're   "You've   "The      "Real     "You're   "You're
    depth    the       holding   arrived   joy you   devotion  asking    in
    to what  longing"  space"    at truth" feel"     always    to be     territory
    you              (quiet     (not      (let it   has a     known"    without
    carry"           power)     confusion) exist)    cost"     (mirror)  a map"
-   
+
    + Insert                                                    + Gather
    emotional term                                             feedback
-   
+
    + Validate                                                 + Add
    experience                                                validation
                                                              prompt
@@ -388,12 +402,12 @@ KEY INSIGHT:
   Response 1      Response 2       Response 3
   (varies by      (varies by       (varies by
    input)         input)           input)
-  
+
   Result:
   Each user with same emotional tone gets
   DIFFERENT response based on their exact language
   but FROM the same template pattern
-  
+
   → System learns emotional patterns
   → Users never see duplicates
   → Training happens through language
@@ -402,19 +416,21 @@ KEY INSIGHT:
 
 
 # ============================================================================
+
 # DIAGRAM 8: Coverage Analysis (Where to Generate Next)
+
 # ============================================================================
 
 """
 
         EMOTIONAL TERRITORY MAP
-        
+
         CRITICAL (0 glyphs) ──────────────────┐
         ┌─────────────────────────────────────┘
         │
         ├─ Shame: 0 glyphs              Generate 5+ new
         ├─ Betrayal: 0 glyphs           Priority: IMMEDIATE
-        ├─ Abandonment: 1 glyph         
+        ├─ Abandonment: 1 glyph
         │
         │ POOR (1-3 glyphs) ──────────────────┐
         │ ┌──────────────────────────────────┘
@@ -437,7 +453,7 @@ KEY INSIGHT:
         │ │ │ ├─ Recognition: 15 glyphs      Priority: LOW
         │ │ │ ├─ Joy: 9 glyphs
         │ │ │ │
-        
+
         System learns where to expand
         Recommendations auto-generated
         Users can contribute to weak areas

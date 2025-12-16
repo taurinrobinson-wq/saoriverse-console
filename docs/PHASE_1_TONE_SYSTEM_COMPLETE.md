@@ -14,7 +14,7 @@ All 7 renamed graphics are now in the web version:
 velinor-web/public/assets/
 ├── overlays/
 │   ├── left_page_curl.png          (2.1 MB) - Journal UI left
-│   ├── right_page_curl.png         (256 KB) - Journal UI right  
+│   ├── right_page_curl.png         (256 KB) - Journal UI right
 │   └── glowing_swamp_overlay.png   (1.7 MB) - Swamp effects
 ├── backgrounds/
 │   ├── saori_velinor_end.png       (2.1 MB) - Final chamber
@@ -24,6 +24,8 @@ velinor-web/public/assets/
 └── tools/
     └── notepad.png                 (3.0 MB) - Journal UI element
 ```
+
+
 
 ### 2. TONE Stat System Core
 
@@ -54,6 +56,8 @@ getToneTier(value)                       // "Poor", "Weak", "Good", "Strong", "E
 getNPCDialoguePath(npcName, stats)      // Which dialogue variation?
 ```
 
+
+
 ### 3. Game State Management
 
 **Location:** `velinor-web/src/lib/gameStore.ts`
@@ -79,6 +83,8 @@ updateToneStats({
   description: 'Showed emotional understanding'
 });
 ```
+
+
 
 ### 4. Developer Console
 
@@ -139,6 +145,8 @@ choice.toneChanges.forEach(action => {
 setScene(choice.nextScene, backgroundImage, overlayImage);
 ```
 
+
+
 ### Example: Gated Dialogue (Only if Trust ≥ 60)
 
 ```typescript
@@ -151,6 +159,8 @@ if (toneStats.trust >= 60) {
   showDialog('I... don\'t know you well enough yet.');
 }
 ```
+
+
 
 ## Next Steps: Phase 2 (Dialogue Integration)
 
@@ -192,6 +202,8 @@ export default function DialogueScene() {
 }
 ```
 
+
+
 ## Testing the System
 
 To verify everything works:
@@ -224,6 +236,8 @@ velinor-web/
 │           └── [sessionId]/
 │               └── page.tsx     (Updated - Integrated TONE display)
 ```
+
+
 
 ## Key Metrics
 

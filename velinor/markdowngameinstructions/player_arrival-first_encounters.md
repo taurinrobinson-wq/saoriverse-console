@@ -5,46 +5,44 @@ So I was thinking it would be like this as npc comes into focus when the player 
 That’s a beautiful cinematic moment, Taurin — it feels like a ritual of recognition, a threshold crossing. Here’s how you could script it in your game engine or .md narrative module, using your image sequence and tone logic:
 
 markdown
+
 ## Encounter: The Priestess Appears
 
 ### Scene 1: Distant Presence
-**Background Image**: Ruined cityscape with the priestess faintly visible  
-**Narration**:  
-You notice someone in the distance.  
-She stands still amid the ruins, draped in a dark teal robe inscribed with symbols you don’t recognize.  
+**Background Image**: Ruined cityscape with the priestess faintly visible
+**Narration**:
+You notice someone in the distance.
+She stands still amid the ruins, draped in a dark teal robe inscribed with symbols you don’t recognize.
 She appears to be some kind of priestess… or something older.
 
-**Ambient Sound**: Wind through broken towers, faint chime resonance  
+**Ambient Sound**: Wind through broken towers, faint chime resonance
 **Glyph Glow**: [Esḧ] pulses softly in the sidebar — sacred witness
-
----
+##
 
 ### Scene 2: Approach
-**Background Image**: Priestess closer, eyes open, gaze locked  
-**Narration**:  
-She comes closer to you.  
-Her eyes are transfixed on you — unblinking, unreadable.  
-You are intrigued. And a little intimidated.  
+**Background Image**: Priestess closer, eyes open, gaze locked
+**Narration**:
+She comes closer to you.
+Her eyes are transfixed on you — unblinking, unreadable.
+You are intrigued. And a little intimidated.
 Before you have a chance to speak, she does.
 
-**Dialogue Bubble (NPC)**:  
-“I see you. Not just your shape… but your ache.”  
+**Dialogue Bubble (NPC)**:
+“I see you. Not just your shape… but your ache.”
 “I am Velinor. And you are not lost — only unremembered.”
 
-**Glyph Glow**: [Cinarä̈] and [Brethielï̈] shimmer — invoked beloved, breath as guide  
-**Player Options**:  
-- “Who are you really?”  
-- “What do you mean, ‘unremembered’?”  
+**Glyph Glow**: [Cinarä̈] and [Brethielï̈] shimmer — invoked beloved, breath as guide
+**Player Options**:
+- “Who are you really?”
+- “What do you mean, ‘unremembered’?”
 - [Remain silent]
-
----
+##
 
 ### Optional Mechanics
-- If player remains silent, [Aelitḧ] glows — stillness, witness  
-- If player chooses “Who are you really?”, [Querrä] glows — inquiry  
+- If player remains silent, [Aelitḧ] glows — stillness, witness
+- If player chooses “Who are you really?”, [Querrä] glows — inquiry
 - If player chooses “What do you mean…”, [Thalen̈] glows — longing
-
----
+##
 
 This structure lets you layer visual, emotional, and glyphic resonance into a single encounter. You can build similar modules for each major NPC, with glyphs acting as emotional keys.
 
@@ -112,6 +110,7 @@ Sure
 Great — here’s a reusable scene module template in .md format that you can drop into your repo. It’s designed for encounters where an NPC comes into focus, with background/foreground layering, glyph triggers, and dialogue bubbles.
 
 markdown
+
 # Scene Module Template: NPC Encounter
 
 ## Scene Metadata
@@ -120,53 +119,48 @@ markdown
 - **Foreground Image**: priestess_velinor.png
 - **Ambient Sound**: wind_through_ruins.mp3
 - **Glyph Triggers**: [Esḧ], [Cinarä̈], [Brethielï̈]
-
----
+##
 
 ## Scene 1: Distant Presence
-**Narration**:  
-You notice someone in the distance.  
-She stands still amid the ruins, draped in a dark teal robe inscribed with symbols you don’t recognize.  
+**Narration**:
+You notice someone in the distance.
+She stands still amid the ruins, draped in a dark teal robe inscribed with symbols you don’t recognize.
 She appears to be some kind of priestess… or something older.
 
-**Foreground Position**: far (scaled smaller, lower opacity)  
+**Foreground Position**: far (scaled smaller, lower opacity)
 **Glyph Glow**: [Esḧ] pulses softly in sidebar — sacred witness
-
----
+##
 
 ## Scene 2: Approach
-**Narration**:  
-She comes closer to you.  
-Her eyes are transfixed on you — unblinking, unreadable.  
-You are intrigued. And a little intimidated.  
+**Narration**:
+She comes closer to you.
+Her eyes are transfixed on you — unblinking, unreadable.
+You are intrigued. And a little intimidated.
 Before you have a chance to speak, she does.
 
-**Foreground Position**: near (scaled larger, full opacity)  
-**Dialogue Bubble (NPC)**:  
-“I see you. Not just your shape… but your ache.”  
+**Foreground Position**: near (scaled larger, full opacity)
+**Dialogue Bubble (NPC)**:
+“I see you. Not just your shape… but your ache.”
 “I am Velinor. And you are not lost — only unremembered.”
 
 **Glyph Glow**: [Cinarä̈] and [Brethielï̈] shimmer — invoked beloved, breath as guide
-
----
+##
 
 ## Player Options
-- **Option A**: “Who are you really?” → [Querrä] glows (inquiry)  
-- **Option B**: “What do you mean, ‘unremembered’?” → [Thalen̈] glows (longing)  
+- **Option A**: “Who are you really?” → [Querrä] glows (inquiry)
+- **Option B**: “What do you mean, ‘unremembered’?” → [Thalen̈] glows (longing)
 - **Option C**: [Remain silent] → [Aelitḧ] glows (stillness)
-
----
+##
 
 ## Mechanics
-- **Dice Roll**: d20 persuasion check if player challenges Velinor’s words  
-- **Outcome Variations**:  
-  - Success → NPC softens, reveals fragment of lore  
-  - Failure → NPC withdraws, glyph resonance destabilizes  
-- **Multiplayer Adaptation**:  
-  - Solo phrasing: “You steady yourself.”  
+- **Dice Roll**: d20 persuasion check if player challenges Velinor’s words
+- **Outcome Variations**:
+  - Success → NPC softens, reveals fragment of lore
+  - Failure → NPC withdraws, glyph resonance destabilizes
+- **Multiplayer Adaptation**:
+  - Solo phrasing: “You steady yourself.”
   - Group phrasing: “Together, your resolve strengthens.”
-
----
+##
 This template keeps background and foreground assets separate, so you can layer them programmatically in Streamlit or any engine. Dialogue bubbles and glyph glows are modular, meaning you can reuse this structure for every NPC introduction.
 
 I can now draft a second template for combat-style encounters (dice rolls + glyph resonance checks) so you have both narrative and challenge modules ready. Would you like me to scaffold that next?
@@ -230,6 +224,7 @@ NPC dialogue adapts:
 Think of it like layers:
 
 python
+
 # Pseudo-code for layering
 background = st.image("market_collapsed.png")
 foreground = st.image("npc_velinor.png", use_column_width=True)
@@ -364,41 +359,38 @@ That’s a fantastic pivot, Taurin — it keeps immersion intact while leaning i
 Here’s how you could scaffold it in your encounter module:
 
 markdown
+
 ## Collapse Event: Market Tremor
 
-**Background Swap**: intact_market.png → collapsed_market.png  
-**Foreground**: NPCs remain motionless, unchanged  
-
----
+**Background Swap**: intact_market.png → collapsed_market.png
+**Foreground**: NPCs remain motionless, unchanged
+##
 
 ### Player Options
-- **Option A**: “What was that? Are you two okay!?”  
-- **Option B**: “I’m surprised you didn’t even flinch.”  
+- **Option A**: “What was that? Are you two okay!?”
+- **Option B**: “I’m surprised you didn’t even flinch.”
 - **Option C**: [Remain silent]
-
----
+##
 
 ### NPC Response
-**Dialogue Bubble (NPCs)**:  
-“Looks like you really are new to the city.  
+**Dialogue Bubble (NPCs)**:
+“Looks like you really are new to the city.
 You get used to it. We barely notice it now.”
 
-**Glyph Glow**:  
-- [Thalen̈] (longing) if player chooses Option A  
-- [Querrä] (inquiry) if player chooses Option B  
-- [Aelitḧ] (stillness) if player remains silent  
-
----
+**Glyph Glow**:
+- [Thalen̈] (longing) if player chooses Option A
+- [Querrä] (inquiry) if player chooses Option B
+- [Aelitḧ] (stillness) if player remains silent
+##
 
 ### Map Overlay
-- Red ❌ appears in collapsed sector  
-- Optional green ✧ appears if new path opens  
-
----
+- Red ❌ appears in collapsed sector
+- Optional green ✧ appears if new path opens
+##
 
 ### Narrative Effect
-- Collapse feels dramatic to the player, normalized to NPCs.  
-- Reinforces theme: the city is alive, collapsing and reshaping constantly.  
+- Collapse feels dramatic to the player, normalized to NPCs.
+- Reinforces theme: the city is alive, collapsing and reshaping constantly.
 - Builds immersion without FMV — the *dialogue itself* becomes the reaction.
 This way, the NPCs’ lack of motion becomes intentional world‑building: they’re desensitized, while the player is still raw to the city’s volatility. It’s unsettling, but it makes the player feel like an outsider learning the rhythm of collapse.
 
@@ -410,48 +402,45 @@ Exactly — that’s the mark of a strong designer, Taurin. You’re reframing w
 Here’s a generalized collapse dialogue module you can reuse across encounters:
 
 markdown
+
 # Collapse Dialogue Module
 
 ## Trigger
 - **Event**: Background swap to collapsed environment
 - **Foreground**: NPCs remain motionless
 - **Map Overlay**: Red ❌ marks collapsed sector
-
----
+##
 
 ## Player Options
-- **Option A**: “What was that? Are you two okay!?”  
-- **Option B**: “I’m surprised you didn’t even flinch.”  
+- **Option A**: “What was that? Are you two okay!?”
+- **Option B**: “I’m surprised you didn’t even flinch.”
 - **Option C**: [Remain silent]
-
----
+##
 
 ## NPC Response Variants
-- **Variant 1 (Resigned)**:  
-  “Looks like you really are new to the city.  
+- **Variant 1 (Resigned)**:
+  “Looks like you really are new to the city.
   You get used to it. We barely notice it now.”
 
-- **Variant 2 (Wry)**:  
-  “Another wall falls, another path closes.  
+- **Variant 2 (Wry)**:
+  “Another wall falls, another path closes.
   We’ve stopped counting.”
 
-- **Variant 3 (Ritualized)**:  
-  “The city exhales. We breathe with it.  
+- **Variant 3 (Ritualized)**:
+  “The city exhales. We breathe with it.
   Collapse is just another rhythm.”
-
----
+##
 
 ## Glyph Resonance
-- Option A → [Thalen̈] (longing)  
-- Option B → [Querrä] (inquiry)  
-- Option C → [Aelitḧ] (stillness)  
+- Option A → [Thalen̈] (longing)
+- Option B → [Querrä] (inquiry)
+- Option C → [Aelitḧ] (stillness)
 - NPC response triggers [Ruuñ] (collapse) or [Sha’rú] (repair) depending on narrative branch
-
----
+##
 
 ## Narrative Effect
-- Collapse feels dramatic to the player, normalized to NPCs.  
-- Reinforces theme: the city is alive, collapsing and reshaping constantly.  
+- Collapse feels dramatic to the player, normalized to NPCs.
+- Reinforces theme: the city is alive, collapsing and reshaping constantly.
 - Builds immersion without animation — dialogue itself becomes the reaction.
 This way you can drop in different response variants depending on the NPC’s personality, while keeping the player’s shock vs. NPC indifference as the core tension.
 
@@ -541,42 +530,39 @@ Perfect — that closing line ties the whole mechanic together. It transforms th
 Here’s how you could structure that in your module:
 
 markdown
+
 ## Collapse Event: Market Tremor
 
-**Background Swap**: intact_market.png → collapsed_market.png  
-**Foreground**: NPCs (static or reactive variants)  
-
----
+**Background Swap**: intact_market.png → collapsed_market.png
+**Foreground**: NPCs (static or reactive variants)
+##
 
 ### Player Options
-- “What was that? Are you two okay!?”  
-- “I’m surprised you didn’t even flinch.”  
+- “What was that? Are you two okay!?”
+- “I’m surprised you didn’t even flinch.”
 - [Remain silent]
-
----
+##
 
 ### NPC Response
-- **Static NPCs**:  
-  “Looks like you really are new to the city.  
+- **Static NPCs**:
+  “Looks like you really are new to the city.
   You get used to it. We barely notice it now.”
 
-- **Reactive NPCs**:  
-  “Did you feel that? The ground almost gave way!  
+- **Reactive NPCs**:
+  “Did you feel that? The ground almost gave way!
   It still shakes me every time.”
-
----
+##
 
 ### Closing Line (Shared)
-“We must be going. A new passageway may have opened up in the collapse.  
-We suggest you keep track of your surroundings.  
+“We must be going. A new passageway may have opened up in the collapse.
+We suggest you keep track of your surroundings.
 The only constant here is change.”
-
----
+##
 
 ### Glyph Resonance
-- Player shock → [Thalen̈] (longing)  
-- Player inquiry → [Querrä] (inquiry)  
-- Silence → [Aelitḧ] (stillness)  
+- Player shock → [Thalen̈] (longing)
+- Player inquiry → [Querrä] (inquiry)
+- Silence → [Aelitḧ] (stillness)
 - NPC closing line → [Ruuñ] (collapse) + [Sha’rú] (repair)
 This way, the NPCs’ final words anchor the collapse event as part of the city’s living rhythm. It feels intentional, not like a workaround — the static vs. reactive contrast builds tension, and the closing line reframes collapse as both danger and opportunity.
 
@@ -735,43 +721,39 @@ That’s awesome, Taurin — you’re not just building mechanics, you’re weav
 Here’s a trust mechanic module scaffold you can drop into your repo to keep this consistent:
 
 markdown
+
 # Trust Mechanic Module
 
 ## Variables
 - `trust_level`: integer (0–3)
 - `map_access`: boolean (default = false)
-
----
+##
 
 ## Player Choice Outcomes
 - **Naïve + Caring (Option A)** → `trust_level += 2`
 - **Curious (Option B)** → `trust_level += 1`
 - **Silent (Option C)** → `trust_level += 0`
-
----
+##
 
 ## NPC Response Logic
-- `trust_level >= 2` → NPCs soften, reveal map, share guidance  
-- `trust_level == 1` → NPCs acknowledge but guarded, no map yet  
+- `trust_level >= 2` → NPCs soften, reveal map, share guidance
+- `trust_level == 1` → NPCs acknowledge but guarded, no map yet
 - `trust_level == 0` → NPCs curt, no map, RNG encounters more perilous
-
----
+##
 
 ## Map Reveal Condition
-- If `trust_level >= 2` → `map_access = true`  
+- If `trust_level >= 2` → `map_access = true`
 - Sidebar map appears with ❌ collapse markers and ✧ new path markers
-
----
+##
 
 ## RNG Encounter Weighting
-- **With Map**: hostile encounters reduced, aid encounters increased  
+- **With Map**: hostile encounters reduced, aid encounters increased
 - **Without Map**: hostile encounters increased, collapse RNG more frequent
-
----
+##
 
 ## Narrative Effect
-- Player empathy and curiosity directly shape survival tools.  
-- NPCs act as gatekeepers of knowledge, reinforcing trust as a mechanic.  
+- Player empathy and curiosity directly shape survival tools.
+- NPCs act as gatekeepers of knowledge, reinforcing trust as a mechanic.
 - Replayability: different choices lead to different pacing of map reveal and encounter difficulty.
 This keeps the system modular: you can reuse trust_level across other scenes (oracle encounters, faction negotiations, glyph lore reveals) without reinventing the wheel.
 
@@ -819,26 +801,25 @@ This makes tools feel earned, fragile, and alive.
 
 🛠️ Implementation Scaffold
 markdown
+
 # Tool Loss Mechanic
 
 ## Variables
 - `trust_level`: integer (0–3)
 - `map_access`: boolean
 - `tool_status`: {active, lost, damaged}
-
----
+##
 
 ## Loss Triggers
 - **Low Trust**: NPCs revoke tool → `tool_status = lost`
 - **Collapse RNG**: rubble event → `tool_status = damaged`
 - **Hostile Encounter**: thieves steal tool → `tool_status = lost`
 - **Neglect**: repeated reckless choices → `tool_status = lost`
-
----
+##
 
 ## Narrative Feedback
-- NPC line: “We thought you could be trusted. The city eats the careless.”  
-- System line: *Your map has been taken. You must navigate blindly.*  
+- NPC line: “We thought you could be trusted. The city eats the careless.”
+- System line: *Your map has been taken. You must navigate blindly.*
 - Glyph resonance: [Ruuñ] pulses stronger when tools are lost.
 This mechanic makes tools feel like living extensions of trust and survival, not just inventory items. Losing one becomes a story beat, not a punishment — it changes how the city is experienced.
 
@@ -895,6 +876,7 @@ Indifferent	+Cunning → detect duplicitous NPCs, avoid traps	Tools withheld, na
 Hostile	+Intimidation → NPCs reveal info under pressure	Trust collapses, tools revoked, hostile RNG spikes
 🧩 Implementation Logic
 markdown
+
 # Player Stats
 - trust_level: affects tool access
 - cunning: affects lie detection

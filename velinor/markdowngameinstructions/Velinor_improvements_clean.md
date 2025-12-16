@@ -1,8 +1,7 @@
 # Velinor — Improvements & Implementation Checklist
 
 This is a cleaned, human-readable summary and implementation checklist distilled from `Velinor_improvements.md`.
-
----
+##
 
 ## Summary (what's in the file)
 
@@ -14,8 +13,7 @@ This is a cleaned, human-readable summary and implementation checklist distilled
 - Mapping and pseudo‑code showing how TONE → REMNANTS correlations work, a multi‑NPC manager, and a simulation loop.
 - Several example REMNANTS profiles and game integration notes.
 - Many inline AI image prompt placeholders and several generator-error lines that need cleanup.
-
----
+##
 
 ## Issues found (needs work)
 
@@ -41,8 +39,7 @@ This is a cleaned, human-readable summary and implementation checklist distilled
 
 6. Documentation polish
    - Add cross‑links to `CHOICE_CONSEQUENCES_GUIDE.md`, `SCENE_COMPOSITION_GUIDE.md`, etc. Confirm those files are present (or create stubs).
-
----
+##
 
 ## Suggested Implementation Plan (short)
 
@@ -56,8 +53,7 @@ This is a cleaned, human-readable summary and implementation checklist distilled
 5. Add small unit tests in `velinor/tests/test_resonance.py` exercising the example runs.
 6. Wire tool unlock conditions into `velinor/engine/tools.py` or a `velinor/data/tools.json`.
 7. Replace image placeholders with actual files in `velinor/assets/characters/` and update the markdown to reference them.
-
----
+##
 
 ## Quick cleaned examples (copyable)
 
@@ -84,6 +80,8 @@ This is a cleaned, human-readable summary and implementation checklist distilled
 }
 ```
 
+
+
 ### Example resonance application (Python stub)
 
 ```python
@@ -97,7 +95,8 @@ def apply_tone_to_remnants(npc_profile: dict, tone_effects: dict, correlation: d
     return npc_profile
 ```
 
----
+
+##
 
 ## What I can do next (pick any, I can run all)
 

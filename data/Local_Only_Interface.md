@@ -1,13 +1,12 @@
 Here’s a fully formatted **Markdown implementation guide** you can copy directly into a `.md` file. It includes all the code scaffolding you need for the local‑only synonym pipeline, filtering, scoring, SQLite storage, and background enrichment runner. Since you already have `spacy`, `nltk`, and `textblob` installed, you’re set on dependencies.
-
----
+##
 
 ```markdown
+
 # Local‑Only Synonym Pipeline, Implementation Guide
 
 This guide sets up a local synonym enrichment system using **WordNet (NLTK)** and **SpaCy embeddings**, with filtering, scoring, and SQLite storage. It runs fully offline, no API calls, no costs.
-
----
+##
 
 ## 1. Setup
 
@@ -16,17 +15,21 @@ Already installed: `spacy`, `nltk`, `textblob`.
 
 One‑time setup:
 ```bash
+
+
 python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
 python -m spacy download en_core_web_md
-```
 
----
+```
+##
 
 ## 2. Scripts
 
 ### `scripts/local_synonyms.py`
 
 ```python
+
+
 import json, re, os
 from nltk.corpus import wordnet as wn
 from nltk.stem import WordNetLemmatizer
@@ -73,13 +76,15 @@ if __name__ == "__main__":
     result = build_synonyms(seeds)
     os.makedirs("data", exist_ok=True)
     json.dump(result, open("data/synonyms_local.json","w",encoding="utf-8"), indent=2)
-```
 
----
+```
+##
 
 ### `scripts/filter_synonyms.py`
 
 ```python
+
+
 import json
 import re
 import os
@@ -95,7 +100,7 @@ def normalize_token(t: str) -> str:
     return t
 
 def is_valid_token(t: str) -> bool:
-    if not t: 
+    if not t:
         return False
     if t in STOPWORDS:
         return False
@@ -127,13 +132,15 @@ def filter_synonyms(input_path="data/synonyms_local.json", output_path="data/syn
 
 if __name__ == "__main__":
     filter_synonyms()
-```
 
----
+```
+##
 
 ### `scripts/score_synonyms.py`
 
 ```python
+
+
 import json
 import spacy
 
@@ -172,13 +179,15 @@ def score_synonyms(input_path="data/synonyms_filtered.json", output_path="data/s
 
 if __name__ == "__main__":
     score_synonyms()
-```
 
----
+```
+##
 
 ### `scripts/synonym_db.py`
 
 ```python
+
+
 import sqlite3
 import json
 import os
@@ -238,13 +247,15 @@ if __name__ == "__main__":
     init_db()
     load_from_json()
     print(query_synonyms("joy"))
-```
 
----
+```
+##
 
 ### `scripts/enrich_runner.py`
 
 ```python
+
+
 import os
 from synonym_db import init_db, load_from_json
 from filter_synonyms import filter_synonyms
@@ -271,9 +282,9 @@ def run_enrichment():
 
 if __name__ == "__main__":
     run_enrichment()
-```
 
----
+```
+##
 
 ## 3. Workflow
 
@@ -282,10 +293,11 @@ if __name__ == "__main__":
 3. Run `score_synonyms.py` → produces `data/synonyms_scored.json`.
 4. Run `synonym_db.py` → builds `data/synonyms.db`.
 5. Schedule `enrich_runner.py` with cron/Task Scheduler for automatic refresh.
-
----
+##
 
 ## 4. Integration Example
 
 ```python
+
+
 from synonym_db import query

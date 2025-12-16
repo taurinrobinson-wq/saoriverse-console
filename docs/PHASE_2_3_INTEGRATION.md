@@ -28,6 +28,8 @@ if "repair_orchestrator" not in st.session_state:
     )
 ```
 
+
+
 ### 2. Response Generation
 
 Generate response and record glyph context.
@@ -52,6 +54,8 @@ st.session_state.repair_orchestrator.record_response(response_text)
 st.session_state.last_glyph_context = context
 ```
 
+
+
 ### 3. Next Turn - Detect Corrections
 
 At start of next turn, analyze for rejections.
@@ -73,6 +77,8 @@ else:
         )
 ```
 
+
+
 ### 4. Generate Response with Alternative (if rejected)
 
 Use suggested glyph if available.
@@ -82,7 +88,7 @@ if repair_analysis.is_rejection:
     # Acknowledge correction
     if repair_analysis.user_correction:
         response = f"I hear that—{repair_analysis.user_correction}. {response}"
-    
+
     # Use suggested glyph
     if suggested_glyph:
         response = glyph_composer.compose_glyph_aware_response(
@@ -93,6 +99,8 @@ if repair_analysis.is_rejection:
         )
 ```
 
+
+
 ## Session State Variables
 
 Track these in Streamlit session state:
@@ -102,6 +110,8 @@ st.session_state.repair_orchestrator    # RepairOrchestrator instance
 st.session_state.last_glyph_context     # GlyphCompositionContext from last response
 st.session_state.last_response_text     # Previous response text
 ```
+
+
 
 ## Testing Integration
 
@@ -127,10 +137,10 @@ st.session_state.last_response_text     # Previous response text
 ```python
 def handle_conversation_turn(user_input: str) -> str:
     orch = st.session_state.repair_orchestrator
-    
+
     # Detect if user is correcting previous response
     repair = orch.analyze_for_repair(user_input)
-    
+
     if repair.is_rejection:
         if st.session_state.last_glyph_context:
             # Record the rejection (orchestrator does this internally)
@@ -140,7 +150,7 @@ def handle_conversation_turn(user_input: str) -> str:
         # Record acceptance of previous response
         if st.session_state.last_glyph_context:
             orch.record_acceptance(st.session_state.last_glyph_context)
-        
+
         # Use best glyph for this state
         affect = affect_parser.parse(user_input)
         glyph = orch.get_best_glyph_for_state(
@@ -148,7 +158,7 @@ def handle_conversation_turn(user_input: str) -> str:
             affect["arousal"],
             affect["valence"]
         ) or default_glyph
-    
+
     # Generate response
     response = glyph_composer.compose_glyph_aware_response(
         tone=affect["tone"],
@@ -156,7 +166,7 @@ def handle_conversation_turn(user_input: str) -> str:
         valence=affect["valence"],
         glyph_name=glyph
     )
-    
+
     # Record for next turn
     context = GlyphCompositionContext(
         tone=affect["tone"],
@@ -167,9 +177,11 @@ def handle_conversation_turn(user_input: str) -> str:
     )
     orch.record_response(response)
     st.session_state.last_glyph_context = context
-    
+
     return response
 ```
+
+
 
 ## Test Results
 

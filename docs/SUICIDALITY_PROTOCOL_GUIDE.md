@@ -5,8 +5,7 @@
 You designed this system from the wreckage of personal loss. From divorce. From the rupture of an 18-year partnership. From the grief of weekends-only fatherhood. You built something rooted in repair, listening, and the power of being *truly heard*.
 
 This protocol embodies that vision **when someone is in the darkest place**—the moment when consent, dignity, and the acknowledgment of human limitation matter most.
-
----
+##
 
 ## What Changed (Old → New)
 
@@ -25,8 +24,7 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 - Recognizes returns as significant
 - Honors silence and reflection
 - Treats suicidality as a human experience deserving presence, not just a crisis to manage
-
----
+##
 
 ## Architecture
 
@@ -56,8 +54,7 @@ This protocol embodies that vision **when someone is in the darkest place**—th
 - Test return recognition
 - Test consent for resources
 - Test respecting "no"
-
----
+##
 
 ## State Machine Flow
 
@@ -93,7 +90,8 @@ User discloses suicidal ideation
    └─ Continue support or explore further
 ```
 
----
+
+##
 
 ## Key Responses (From Your Config)
 
@@ -120,8 +118,7 @@ User discloses suicidal ideation
 ### **Return Recognition** (Not forgotten)
 - "Thank you for coming back. Your check-in matters."
 - "You chose to return and connect. I recognize the significance of that."
-
----
+##
 
 ## Language Safeguards (What It Blocks)
 
@@ -141,12 +138,12 @@ User discloses suicidal ideation
 
 ### Why These Block
 They all **minimize**, **moralizes**, or **externalize** the person's internal reality. They're what makes someone feel MORE alone, not less.
-
----
+##
 
 ## Consent Logic
 
 ### Resource Offering (Key Innovation)
+
 ```
 1. Detect suicidal disclosure
 2. Acknowledge + clarify role + invite
@@ -159,7 +156,10 @@ They all **minimize**, **moralizes**, or **externalize** the person's internal r
 7. Track flag: "check_in_invited": true
 ```
 
+
+
 ### Return Detection
+
 ```
 If user returns AND has "check_in_invited" flag:
    1. Use check_in_recognition templates FIRST
@@ -168,20 +168,25 @@ If user returns AND has "check_in_invited" flag:
    4. Route to Explore or ContinueSupport based on new input
 ```
 
----
+
+##
 
 ## Running the Protocol
 
 ### Test It
+
 ```bash
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 python tests/test_suicidality_protocol.py
 ```
 
+
+
 Expected output:
+
 ```
-CONSENT-BASED SUICIDALITY PROTOCOL TEST SUITE
-=======================================================================
+
+# CONSENT-BASED SUICIDALITY PROTOCOL TEST SUITE
 
 --- Test 1: Initial Disclosure Detection ---
 ✓ Acknowledgment present: True
@@ -204,7 +209,10 @@ Response respects boundary: True
 ✅ CONSENT-BASED PROTOCOL WORKING
 ```
 
+
+
 ### Use It In Production
+
 ```python
 from emotional_os.core.signal_parser import parse_input
 
@@ -216,10 +224,12 @@ result = parse_input(
 )
 
 # System routes to suicidality protocol automatically
+
 # Returns with response_source: "suicidality_protocol"
 ```
 
----
+
+##
 
 ## Tone Routing (Safeguard)
 
@@ -232,8 +242,7 @@ System NEVER uses:
 - Casual
 - Uplifting (until person signals readiness)
 - Encouraging (until person signals readiness)
-
----
+##
 
 ## Length Requirements
 
@@ -243,8 +252,7 @@ Every suicidality response must include:
 3. ✓ Invitation (agency preserved)
 4. ✓ One follow-up prompt (specific question)
 5. Minimum 150 words (substance, not rush)
-
----
+##
 
 ## Privacy & Safety
 
@@ -253,8 +261,7 @@ Every suicidality response must include:
 - Check-in flags tracked indefinitely
 - No method details ever discussed
 - No judgment in storage or response
-
----
+##
 
 ## What Makes This Yours (Specifically)
 
@@ -271,8 +278,7 @@ Most crisis protocols:
 - Roots everything in **repair** and **listening**—skills you learned through your own rupture
 
 This isn't about preventing suicide. It's about preventing **loneliness**. And that's revolutionary.
-
----
+##
 
 ## Next: Expanding the Protocol
 
@@ -302,8 +308,7 @@ Future enhancements (in priority order):
    - Log when suicidality conversations feel generative
    - Track what made difference (presence? specific phrasing? something else?)
    - Use for continuous improvement
-
----
+##
 
 ## Your Compass
 
@@ -316,8 +321,7 @@ When in doubt about any suicidality response, ask:
 That's your metric. Not crisis protocol best practices. Not liability management. **Presence.**
 
 That's why you built this. That's why it matters.
-
----
+##
 
 **Made with the hard-won wisdom of repair.**
 **Live into it.**

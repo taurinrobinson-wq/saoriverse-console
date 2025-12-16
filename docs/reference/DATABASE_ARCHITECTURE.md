@@ -76,28 +76,28 @@ DATABASE_ACCESS_CODE = {
         "key_function": "parse_input(input_text, lexicon_path, db_path='glyphs.db', conversation_context)",
         "what_it_does": """
         MAIN ORCHESTRATION FUNCTION - Complete pipeline:
-        
+
         1. load_signal_map(lexicon_path)
            - Loads base signal lexicon (JSON)
            - Loads learned lexicon (JSON)
            - Merges both into combined_lexicon
-           
+
         2. parse_signals(input_text, signal_map)
            - Fuzzy matches keywords against input
            - Returns List[Dict] with keyword, signal, voltage, tone
-           
+
         3. evaluate_gates(signals)
            - Maps voltage signals to ECM gates
            - Returns activated gates
-           
+
         4. fetch_glyphs(gates, db_path)
            - Queries SQLite database
            - Returns matching glyphs from glyph_lexicon
-           
+
         5. select_best_glyph_and_response(glyphs, signals)
            - Scores glyphs based on emotional relevance
            - Returns (best_glyph, contextual_response)
-           
+
         RETURNS: {
             "timestamp": ISO timestamp,
             "input": original text,
@@ -146,7 +146,7 @@ STREAMLIT_INTEGRATION = {
         - input_text: user's message
         - lexicon_path: path to signal lexicon
         - db_path: path to glyphs database
-        
+
         Displays:
         - best_glyph['glyph_name'] as "Resonant Glyph"
         - voltage_response as system response
@@ -173,7 +173,7 @@ QUERY_PATTERNS = {
         "sql": "SELECT COUNT(*) FROM glyph_lexicon",
         "result": 292
     },
-    
+
     "explore_glyphs_by_voltage": {
         "sql": "SELECT voltage_pair, glyph_name FROM glyph_lexicon WHERE voltage_pair LIKE ?",
         "used_by": "Analysis and debugging scripts"

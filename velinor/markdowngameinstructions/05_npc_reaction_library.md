@@ -2,12 +2,12 @@
 
 ## Overview
 A **palette of interchangeable dialogue lines** for NPCs to react to collapse events, player choices, and marketplace moments. Mix and match based on NPC personality, trust level, and story context.
-
----
+##
 
 ## Static NPC Reactions (Desensitized to Collapse)
 
 ### Resigned Tone
+
 ```
 "Looks like you really are new to the city.
 You get used to it. We barely notice it now."
@@ -22,7 +22,10 @@ We've stopped counting."
 "Your shock will fade. Then you'll be like us."
 ```
 
+
+
 ### Wry/Dark Humor Tone
+
 ```
 "The city's sense of humor is getting darker every day."
 
@@ -36,7 +39,10 @@ Keeps everyone on their toes."
 "You get numb to anything if it happens enough times."
 ```
 
+
+
 ### Ritualized Tone
+
 ```
 "The city exhales. We breathe with it.
 Collapse is just another rhythm."
@@ -50,11 +56,13 @@ Collapse is just another rhythm."
 "Collapse speaks. Those who listen survive."
 ```
 
----
+
+##
 
 ## Reactive NPC Reactions (Still Affected by Collapse)
 
 ### Fearful Tone
+
 ```
 "I thought that was it. I thought we were finally coming down."
 
@@ -68,7 +76,10 @@ It still shakes me every time."
 "I had family in that sector. I have to check if they're—"
 ```
 
+
+
 ### Empathetic Tone
+
 ```
 "Are you alright? New arrivals always find this unsettling."
 
@@ -82,7 +93,10 @@ Come, sit. It will pass."
 "I understand. This is your first real taste of how fragile we all are."
 ```
 
+
+
 ### Determined Tone
+
 ```
 "Another collapse means new opportunities. Stay alert."
 
@@ -95,48 +109,64 @@ Come, sit. It will pass."
 "The city tests us. Those who adapt, survive."
 ```
 
----
+
+##
 
 ## Generic Closing Line (All NPCs, Post-Collapse)
 
 ### Standard Version
+
 ```
 "We must be going. A new passageway may have opened up in the collapse.
 We suggest you keep track of your surroundings.
 The only constant here is change."
 ```
 
+
+
 ### Alternate Versions by Tone
 
 **Ominous**:
+
 ```
 "The city devours itself. Best not to be caught in its mouth.
 Watch the map. Watch the ground. Watch your back."
 ```
 
+
+
 **Hopeful**:
+
 ```
 "Collapse opens doors. Keep your eyes sharp for what emerges.
 Sometimes loss is just opportunity in disguise."
 ```
 
+
+
 **Ritualized**:
+
 ```
 "The city remembers. We walk the broken paths. You will learn.
 The map is your first teacher. The collapse is the second."
 ```
 
+
+
 **Practical**:
+
 ```
 "Mark it on your mental map where the blockage is.
 The city changes constantly — staying oriented is half the battle."
 ```
 
----
+
+##
 
 ## Player Dialogue Response Options
 
 ### Shock/Alarm
+
 ```
 "What was that? Are you two okay!?
 I'm surprised you didn't even flinch."
@@ -148,12 +178,14 @@ I'm surprised you didn't even flinch."
 "How often does that happen? Is this normal?!"
 ```
 
+
+
 **Glyph Trigger**: [Thalen̈] (longing, concern)
 **NPC Reading**: Player is new, sensitive, inexperienced
-
----
+##
 
 ### Observation/Inquiry
+
 ```
 "I'm surprised you didn't even flinch."
 
@@ -167,12 +199,14 @@ You don't even react anymore."
 You're so calm, and I'm terrified."
 ```
 
+
+
 **Glyph Trigger**: [Querrä] (inquiry, observation)
 **NPC Reading**: Player is perceptive, learning, analytical
-
----
+##
 
 ### Acceptance/Stillness
+
 ```
 [Remain silent, observing both the collapse and the NPCs' reaction]
 
@@ -181,10 +215,11 @@ You're so calm, and I'm terrified."
 [Take a breath, center yourself, acknowledge the change without fear]
 ```
 
+
+
 **Glyph Trigger**: [Aelitḧ] (stillness, witness)
 **NPC Reading**: Player has composure, wisdom, or shocking calm
-
----
+##
 
 ## NPC Dialogue by Trust Level
 
@@ -195,12 +230,14 @@ You're so calm, and I'm terrified."
 - No personal details shared
 
 **Example (Mistrusting NPC, Static)**:
+
 ```
 "You're new. This is how things are now.
 Best you get used to it fast or get out."
 ```
 
----
+
+##
 
 ### Medium Trust (Repeated Encounters)
 - NPCs begin to distinguish player from other outsiders
@@ -209,12 +246,14 @@ Best you get used to it fast or get out."
 - Hints of personal stories emerge
 
 **Example (Mistrusting NPC, Medium Trust)**:
+
 ```
 "You've been around a few days now. At least you don't panic like most.
 The collapses... yeah, they're part of life. Learn the patterns."
 ```
 
----
+
+##
 
 ### High Trust (Established Relationship)
 - NPCs actively reassure or guide player
@@ -223,17 +262,20 @@ The collapses... yeah, they're part of life. Learn the patterns."
 - Full stories and motivations revealed
 
 **Example (Mistrusting NPC, High Trust)**:
+
 ```
 "I've lost people to these collapses. That's why I don't react anymore.
 If I flinched every time, I'd never survive. You understand?
 But you're different. You still feel. That's good. Don't lose that."
 ```
 
----
+
+##
 
 ## Special Moments: Dialogue Combinations
 
 ### If Player Remains Calm During First Collapse
+
 ```
 Velinor (Reactive NPC):
 "Most new arrivals scream or panic.
@@ -243,7 +285,10 @@ That is rare."
 [Glyph resonance: [Aelitḧ] + [Cinarä̈] combine]
 ```
 
+
+
 ### If Player Shows Immediate Concern for NPC
+
 ```
 Ravi (Welcoming NPC):
 "You were worried about us. Even as a stranger.
@@ -253,7 +298,10 @@ I think you'll do well here."
 [Glyph resonance: [Thalen̈] + [Brethielï̈] combine]
 ```
 
+
+
 ### If Player Questions the Cycle
+
 ```
 Nima (Mistrusting NPC):
 "You're asking the right question. 'Will it ever stop?'
@@ -263,12 +311,15 @@ We keep going anyway."
 [Glyph resonance: [Querrä] + [Ruuñ] + [Sha'rú] combine]
 ```
 
----
+
+##
 
 ## Implementation Strategy
 
 ### For Streamlit Integration
+
 ```python
+
 # Define reaction library
 STATIC_NPC_RESPONSES = {
     "resigned": [
@@ -296,15 +347,16 @@ def trigger_collapse_event(npc_name, npc_archetype, npc_tone):
         dialogue = random.choice(STATIC_NPC_RESPONSES[npc_tone])
     else:
         dialogue = random.choice(REACTIVE_NPC_RESPONSES[npc_tone])
-    
+
     # Trigger glyph
     trigger_glyph(get_resonance_for_tone(npc_tone))
-    
+
     # Display dialogue
     st.write(dialogue)
 ```
 
----
+
+##
 
 ## Notes for Consistency
 

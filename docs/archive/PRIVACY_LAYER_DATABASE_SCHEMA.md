@@ -9,24 +9,26 @@ Stores full encrypted conversations with user-configurable retention.
 ```sql
 CREATE TABLE conversations_encrypted (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    
+
     -- User identification
     user_id_hashed VARCHAR(64) NOT NULL,  -- PBKDF2 hashed user_id
     session_id VARCHAR(255),              -- Session identifier
-    
+
     -- Encrypted content
     encrypted_content BYTEA NOT NULL,     -- AES-256 encrypted conversation
-    
+
     -- Timestamps
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     expires_at TIMESTAMP WITH TIME ZONE NOT NULL,  -- When to delete
     retention_days INT NOT NULL DEFAULT 30,        -- User's retention preference
-    
+
     -- Indexing
     FOREIGN KEY (user_id_hashed) REFERENCES user_retention_preferences(user_id_hashed),
     INDEX idx_user_expiration (user_id_hashed, expires_at)
 );
 ```
+
+
 
 **Purpose:** Store full conversations with all context, encrypted so only the authenticated user can read them.
 
@@ -41,8 +43,7 @@ CREATE TABLE conversations_encrypted (
 - expires_at = created_at + 30 days → Default (keep 1 month)
 - expires_at = created_at + 90 days → Extended (keep 3 months)
 - expires_at = created_at + 365 days → Long-term (keep 1 year)
-
----
+##
 
 ## Table: `dream_summaries`
 
@@ -51,30 +52,33 @@ Stores lightweight daily summaries of emotional patterns and themes.
 ```sql
 CREATE TABLE dream_summaries (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    
+
     -- User identification
     user_id_hashed VARCHAR(64) NOT NULL,  -- Same hash as conversations_encrypted
     date DATE NOT NULL,                    -- Which day (YYYY-MM-DD)
-    
+
     -- Encrypted summary content
     encrypted_summary BYTEA NOT NULL,     -- AES-256 encrypted dream summary
-    
+
     -- Timestamps
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     expires_at TIMESTAMP WITH TIME ZONE NOT NULL,  -- Usually 90-180 days later
-    
+
     -- Unique constraint (one summary per day per user)
     UNIQUE(user_id_hashed, date),
-    
+
     -- Indexing
     FOREIGN KEY (user_id_hashed) REFERENCES user_retention_preferences(user_id_hashed),
     INDEX idx_user_date (user_id_hashed, date)
 );
 ```
 
+
+
 **Purpose:** Store lightweight daily summaries that survive longer than full conversations.
 
 **Summary Contents (all encrypted):**
+
 ```json
 {
   "date": "2024-01-15",
@@ -98,13 +102,14 @@ CREATE TABLE dream_summaries (
 }
 ```
 
+
+
 **Why Separate?**
 - Size: Summary is ~1KB vs full conversation ~10-50KB
 - Retention: Summaries kept 90-180 days, full conversations 7-30 days
 - Performance: Can load patterns without decrypting months of data
 - Privacy: Summaries can't reconstruct exact words, only patterns
-
----
+##
 
 ## Table: `user_retention_preferences`
 
@@ -113,23 +118,25 @@ Stores user settings for data retention and privacy controls.
 ```sql
 CREATE TABLE user_retention_preferences (
     user_id_hashed VARCHAR(64) PRIMARY KEY,  -- Links to auth system
-    
+
     -- Retention settings
     full_conversation_retention_days INT NOT NULL DEFAULT 30,  -- 7/30/90/365/custom
     dream_summary_retention_days INT NOT NULL DEFAULT 90,       -- Longer for patterns
-    
+
     -- User controls
     allow_export BOOLEAN NOT NULL DEFAULT true,                 -- Can download data
     allow_archive BOOLEAN NOT NULL DEFAULT true,                -- Can archive manually
     deleted_at TIMESTAMP WITH TIME ZONE,                        -- GDPR deletion timestamp
-    
+
     -- Audit
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-    
+
     INDEX idx_deleted (deleted_at)
 );
 ```
+
+
 
 **Purpose:** User configuration for privacy and retention. Single record per user.
 
@@ -139,8 +146,7 @@ CREATE TABLE user_retention_preferences (
 - `90`: Extended (quarter) - long-term pattern recognition
 - `365`: Long-term (year) - comprehensive history
 - `custom_N`: User-specified days (documented in field or separate table)
-
----
+##
 
 ## Table: `audit_log_privacy`
 
@@ -149,27 +155,29 @@ Audit trail for all encryption/decryption/deletion operations.
 ```sql
 CREATE TABLE audit_log_privacy (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    
+
     -- Who and what
     user_id_hashed VARCHAR(64) NOT NULL,
     action VARCHAR(50) NOT NULL,  -- 'encrypt_conversation', 'decrypt_conversation', 'delete_all', 'export_data', 'set_retention'
-    
+
     -- Details
     resource_type VARCHAR(50),    -- 'conversation', 'dream_summary', 'profile', 'all'
     record_count INT,             -- How many records affected
-    
+
     -- Context
     ip_address INET,              -- User's IP
     user_agent VARCHAR(500),      -- Browser/client info
-    
+
     -- Timestamp
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-    
+
     -- Indexing
     INDEX idx_user_action (user_id_hashed, action),
     INDEX idx_timestamp (created_at)
 );
 ```
+
+
 
 **Purpose:** Compliance auditing for privacy operations.
 
@@ -178,20 +186,23 @@ CREATE TABLE audit_log_privacy (
 - "delete_all" - User exercised right to be forgotten
 - "export_data" - User downloaded their data
 - "set_retention" - User changed retention preference
-
----
+##
 
 ## Integration with Existing Tables
 
 ### `users` or `auth_users`
 When creating/updating a user, ensure `user_retention_preferences` is created:
+
 ```sql
 INSERT INTO user_retention_preferences (user_id_hashed)
 VALUES (PBKDF2_HASH(user_id))
 ON CONFLICT DO NOTHING;
 ```
 
+
+
 ### Relationship Diagram
+
 ```
 users (auth system)
   ↓
@@ -206,7 +217,8 @@ user_retention_preferences (retention settings, one per user)
 └── audit_log_privacy (all encryption/deletion events)
 ```
 
----
+
+##
 
 ## Migration Path (From Current System)
 
@@ -217,12 +229,15 @@ user_retention_preferences (retention settings, one per user)
 4. Create `audit_log_privacy` table
 
 ### Phase 2: Initialize User Preferences
+
 ```sql
 INSERT INTO user_retention_preferences (user_id_hashed, full_conversation_retention_days)
 SELECT DISTINCT user_id_hashed, 30
 FROM conversations_encrypted
 WHERE user_id_hashed NOT IN (SELECT user_id_hashed FROM user_retention_preferences);
 ```
+
+
 
 ### Phase 3: Migrate Existing Conversations
 For each existing conversation:
@@ -240,8 +255,7 @@ For each existing conversation:
 1. Once all conversations migrated and verified
 2. Drop old conversation storage table
 3. Keep audit logs forever for compliance
-
----
+##
 
 ## Privacy & Compliance Notes
 
@@ -268,8 +282,7 @@ For each existing conversation:
 - **Notice:** Privacy policy discloses storage and monitoring
 - **Termination:** User can delete at any time
 - **No Interception:** Data only stored after user submits, not intercepted
-
----
+##
 
 ## Performance Considerations
 
@@ -279,15 +292,16 @@ For each existing conversation:
 - Index on `(user_id_hashed, action)` for audit queries
 
 ### Query Optimization
+
 ```sql
 -- Fast cleanup (runs daily)
-DELETE FROM conversations_encrypted 
+DELETE FROM conversations_encrypted
 WHERE expires_at < NOW();
 
 -- Fast user context retrieval
-SELECT encrypted_content 
+SELECT encrypted_content
 FROM conversations_encrypted
-WHERE user_id_hashed = ? 
+WHERE user_id_hashed = ?
 AND created_at > NOW() - INTERVAL '7 days'
 ORDER BY created_at DESC;
 
@@ -298,6 +312,8 @@ WHERE user_id_hashed = ?
 ORDER BY date DESC
 LIMIT 30;
 ```
+
+
 
 ### Storage Estimates
 - Full conversation: ~20KB encrypted (grows with length)

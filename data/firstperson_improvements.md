@@ -15,8 +15,7 @@ FirstPerson is an empathetic conversational system designed to:
 > "ChatGPT and Copilot help you get things done. FirstPerson helps you feel seen—and teaches you how to see others."
 
 FirstPerson's invisible complexity (distributed module architecture, memory integration, affect detection) produces simple, relational responses that feel like a friend who remembers, reflects, and cares.
-
----
+##
 
 ## Architecture Overview
 
@@ -62,14 +61,15 @@ Output Layer
 └─ Final Response Composer (fresh, varied phrasing)
 ```
 
----
+
+##
 
 ## Implementation Roadmap
 
 ### Phase 1: Core Foundations
 
-**Goal**: Establish the "friend-like memory" baseline  
-**Duration**: ~2-3 weeks  
+**Goal**: Establish the "friend-like memory" baseline
+**Duration**: ~2-3 weeks
 **Modules**: Story-start detection, frequency reflection, memory anchors, RNG variation
 
 #### Phase 1 Tasks
@@ -111,13 +111,12 @@ Output Layer
 - Clarifiers firing too often
 - Memory not persisting across sessions
 - RNG collisions (same phrasing twice in a row)
-
----
+##
 
 ### Phase 2: Emotional Attunement
 
-**Goal**: Make responses feel attuned to mood, not just content  
-**Duration**: ~2-3 weeks  
+**Goal**: Make responses feel attuned to mood, not just content
+**Duration**: ~2-3 weeks
 **Modules**: Affect parser, response modulation, repair module
 
 #### Phase 2 Tasks
@@ -153,13 +152,12 @@ Output Layer
 - Affect misclassification (sarcasm taken literally, tiredness labeled as sadness)
 - Repair loops (system apologizing repeatedly)
 - Tone mismatch (responding softly when urgency needed)
-
----
+##
 
 ### Phase 3: Relational Depth
 
-**Goal**: Encourage empathy practice and highlight relational patterns  
-**Duration**: ~2-3 weeks  
+**Goal**: Encourage empathy practice and highlight relational patterns
+**Duration**: ~2-3 weeks
 **Modules**: Perspective-taking, micro-choice offering, temporal tracking
 
 #### Phase 3 Tasks
@@ -198,13 +196,12 @@ Output Layer
 - Perspective reflections sounding forced or judgmental
 - Temporal false positives (one late-night input marked as pattern)
 - Perspective-taking missing relational context
-
----
+##
 
 ### Phase 4: Integration & Continuity
 
-**Goal**: Create sense of system that "remembers and relates"  
-**Duration**: ~2-3 weeks  
+**Goal**: Create sense of system that "remembers and relates"
+**Duration**: ~2-3 weeks
 **Modules**: Contextual resonance, emotion regulation, multi-thread weaving
 
 #### Phase 4 Tasks
@@ -242,13 +239,12 @@ Output Layer
 - Calming responses sounding dismissive or minimizing
 - Thread weaving becoming too dense or verbose
 - Contextual resonance too aggressive (surfacing false positives)
-
----
+##
 
 ### Phase 5: Advanced Modeling
 
-**Goal**: Help users practice empathy through modeling  
-**Duration**: ~2-3 weeks  
+**Goal**: Help users practice empathy through modeling
+**Duration**: ~2-3 weeks
 **Modules**: Dynamic scaffolding, adaptive learning loop, empathy rituals
 
 #### Phase 5 Tasks
@@ -292,8 +288,7 @@ Output Layer
 - Ritual prompts feeling intrusive or condescending
 - Adaptive loop drifting off-tone (optimizing toward wrong target)
 - Response composer losing voice or becoming generic
-
----
+##
 
 ## QA Strategy
 
@@ -391,8 +386,7 @@ Each module gets:
 4. **Edge Case Tests**: Stress-test with sarcasm, fragments, contradictions, multi-anchor narratives
 5. **User Simulation Runs**: Personas with different tones, loops, and interaction styles
 6. **Feedback Logging**: Capture corrections and missed attunements for refinement
-
----
+##
 
 ## Module × Edge Case Responsibility Matrix
 
@@ -408,8 +402,7 @@ Each module gets:
 | Long Narrative + Anchors | ✅ Clarify | ✅ Detect repeat | ✅ Tone | ✅ If corrected | ✅ Reflect | ✅ Offer choices | ✅ Timestamp | ✅ Recall | ✅ Scaffold | ✅ Weave | ✅ Blend all | ✅ Ritual |
 
 **How to Read**: ✅ means module is responsible; blank means not directly involved.
-
----
+##
 
 ## Supabase Schema Extension
 
@@ -436,6 +429,8 @@ create index idx_conversations_theme on conversations(theme);
 create index idx_conversations_user_theme on conversations(user_id, theme);
 ```
 
+
+
 ### Sample Queries
 
 **Fetch recent anchors on sign-in:**
@@ -448,6 +443,8 @@ order by created_at desc
 limit 20;
 ```
 
+
+
 **Count theme frequency:**
 
 ```sql
@@ -457,6 +454,8 @@ where user_id = $1 and created_at > now() - interval '30 days'
 group by theme
 order by frequency desc;
 ```
+
+
 
 **Find time-of-day patterns:**
 
@@ -468,7 +467,8 @@ group by hour_of_day
 order by frequency desc;
 ```
 
----
+
+##
 
 ## Front-End Integration (React Example)
 
@@ -504,6 +504,8 @@ export function useConversationMemory(userId) {
 }
 ```
 
+
+
 ### Parser Context Integration
 
 ```javascript
@@ -514,7 +516,8 @@ function handleUserInput(input, memory) {
 }
 ```
 
----
+
+##
 
 ## Implementation Notes
 
@@ -539,8 +542,7 @@ function handleUserInput(input, memory) {
 - **Contextual recall**: Surfaces at >0.7 semantic similarity
 - **Response freshness**: <5% phrasing repetition across 50+ responses
 - **User feedback**: Positive sentiment on attunement, memory, and empathy modeling
-
----
+##
 
 ## References
 
@@ -559,9 +561,7 @@ function handleUserInput(input, memory) {
 - **Emotion regulation frameworks**: Inform escalation detection and calming scaffolds
 - **Perspective-taking neuroscience**: Brain regions involved in Theory of Mind
 - **Narrative psychology**: Memory anchoring and story continuity
+##
 
----
-
-**Last Updated**: December 1, 2025  
+**Last Updated**: December 1, 2025
 **Status**: Roadmap finalized, ready for Phase 1 implementation
-

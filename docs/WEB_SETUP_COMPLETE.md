@@ -9,29 +9,33 @@ I've set up your Next.js web version to run **directly on your Mac without Docke
 - ✅ Installed npm dependencies (368 packages)
 - ✅ Verified Next.js dev server works
 - ✅ Created startup scripts for easy launching
-
----
+##
 
 ## 🚀 How to Start Developing
 
 ### Option 1: Frontend Only (Quickest)
+
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 ./RUN_WEB_DEV.sh
 ```
+
+
 Then visit: **http://localhost:3000**
 
 ### Option 2: Full Stack (Frontend + Backend)
+
 ```bash
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 ./RUN_FULL_STACK.sh
 ```
+
+
 This starts:
 - Frontend: **http://localhost:3000**
 - Backend API: **http://localhost:8000**
 - API Docs: **http://localhost:8000/docs**
-
----
+##
 
 ## 📁 What You Have
 
@@ -55,8 +59,7 @@ All graphics have been replicated to `/velinor-web/public/assets/`:
 - **Backgrounds**: 15+ images (1200×675, 16:9 format)
 - **NPC Portraits**: 7 character images
 - **UI Assets**: Velinor title images
-
----
+##
 
 ## 🎮 Current Web Version State
 
@@ -69,18 +72,18 @@ All graphics have been replicated to `/velinor-web/public/assets/`:
 - ✅ Hot module reloading (auto-refresh on save)
 
 ### What Needs Development
-⏳ **Game Scene Component** - Display story text, choices, NPC dialogue  
-⏳ **Backend Connection** - Wire frontend to FastAPI endpoints  
-⏳ **Choice System** - Process player choices and send to backend  
-⏳ **NPC Display** - Show portraits and responses  
-⏳ **Game State** - Display stats, location, inventory  
-⏳ **Glyph System** - Visual representation of emotional glyphs  
-
----
+⏳ **Game Scene Component** - Display story text, choices, NPC dialogue
+⏳ **Backend Connection** - Wire frontend to FastAPI endpoints
+⏳ **Choice System** - Process player choices and send to backend
+⏳ **NPC Display** - Show portraits and responses
+⏳ **Game State** - Display stats, location, inventory
+⏳ **Glyph System** - Visual representation of emotional glyphs
+##
 
 ## 💡 Development Tips
 
 ### File Structure
+
 ```
 velinor-web/
 ├── src/
@@ -95,10 +98,13 @@ velinor-web/
 └── package.json
 ```
 
+
+
 ### Hot Reload
 Save a file → Browser auto-refreshes. No manual reload needed!
 
 ### Common Commands
+
 ```bash
 cd velinor-web
 
@@ -115,7 +121,8 @@ npm run lint
 npm start
 ```
 
----
+
+##
 
 ## 🔌 Connecting Frontend to Backend
 
@@ -129,7 +136,10 @@ POST   /sessions/{id}/save          # Save game
 GET    /sessions/{id}/load          # Load game
 ```
 
+
+
 Example call from Next.js:
+
 ```typescript
 import axios from 'axios';
 
@@ -142,7 +152,8 @@ const startGame = async (playerName: string) => {
 };
 ```
 
----
+
+##
 
 ## 📚 Reference Files
 
@@ -151,8 +162,7 @@ For understanding the game logic:
 - **Story structure**: `/velinor/stories/sample_story.json`
 - **Streamlit reference** (what web version should replicate): `/velinor_app.py`
 - **FastAPI backend** (endpoints to call): `/velinor_api.py`
-
----
+##
 
 ## ⚡ Next Immediate Steps
 
@@ -166,20 +176,24 @@ For understanding the game logic:
    - Choice buttons
    - Free text input
 5. **Wire to backend** by calling FastAPI endpoints
-
----
+##
 
 ## 🆘 Troubleshooting
 
 ### Node version error?
+
 ```bash
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 nvm use 20.11.0
 ```
 
+
+
 ### Port 3000 in use?
+
 ```bash
+
 # Kill it
 lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 
@@ -187,19 +201,22 @@ lsof -i :3000 | grep LISTEN | awk '{print $2}' | xargs kill -9
 PORT=3001 npm run dev
 ```
 
+
+
 ### Can't find node/npm?
 Make sure the startup script sources nvm properly. Run manually:
+
 ```bash
 bash -c 'export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh" && nvm use 20.11.0 && cd velinor-web && npm run dev'
 ```
 
----
+
+##
 
 ## 📖 Read More
 
 For detailed development guide, see: **VELINOR_WEB_DEV_GUIDE.md**
-
----
+##
 
 ## ✨ You're Ready!
 

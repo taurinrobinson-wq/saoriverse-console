@@ -2,20 +2,22 @@
 
 ## Status
 🟢 **ACTIVE** — The protocol is now handling suicidal disclosures with dignity, consent, and continuity.
-
----
+##
 
 ## What's Working
 
 ### ✅ Test 1: Initial Disclosure Detection
 **Input:** "I have thoughts of suicide and I don't know how to keep going"
 **Output:**
+
 ```
 Source: suicidality_protocol
 Response: "You named thoughts of suicide. That is heavy. Thank you for trusting me with it.
 You deserve human connection and care. I can be present while you figure out what you need.
 Would you like to share how long you have felt this way."
 ```
+
+
 
 **Verification:**
 - ✅ Acknowledgment: "That is heavy. Thank you for trusting me with it."
@@ -34,8 +36,7 @@ The system successfully filters:
 
 ### ✅ Test 3: Routing
 When someone discloses suicidal ideation, the system correctly routes to the suicidality protocol (not to emotional gates, not to generic responses).
-
----
+##
 
 ## Implementation Details
 
@@ -64,8 +65,7 @@ When someone discloses suicidal ideation, the system correctly routes to the sui
 4. **`tests/test_suicidality_protocol.py`** (NEW)
    - Comprehensive test suite for protocol behavior
    - Tests: detection, language safeguards, returns, consent, boundaries
-
----
+##
 
 ## State Machine Flow
 
@@ -100,7 +100,8 @@ Suicidal disclosure detected
    └─ Continue support
 ```
 
----
+
+##
 
 ## Key Features
 
@@ -135,8 +136,7 @@ When suicidality is detected, system **only** uses:
 
 System **never** uses:
 - Humorous, casual, uplifting, or encouraging tones
-
----
+##
 
 ## Crisis Resources (Available Upon Consent)
 
@@ -146,8 +146,7 @@ System **never** uses:
 - **Find a helpline in your country:** https://findahelpline.com
 
 These are offered by consent, not pushed.
-
----
+##
 
 ## How It Works in Production
 
@@ -163,7 +162,9 @@ result = parse_input(
 )
 
 # System automatically detects and routes to suicidality protocol
+
 # Returns:
+
 # {
 #   "response_source": "suicidality_protocol",
 #   "voltage_response": "You named thoughts of suicide...",
@@ -173,10 +174,12 @@ result = parse_input(
 #     "disclosure_count": 1,
 #     "first_disclosure": "2025-12-03T..."
 #   }
+
 # }
 ```
 
----
+
+##
 
 ## Design Principles (From Your Vision)
 
@@ -188,8 +191,7 @@ result = parse_input(
 ✅ **Human primacy:** Acknowledge you're not a substitute for human care.
 ✅ **Continuity:** Invite check-ins. Recognize returns as significant.
 ✅ **Language safety:** Avoid method details and sensational phrasing.
-
----
+##
 
 ## Next Steps (Priority Order)
 
@@ -218,24 +220,25 @@ Track when suicidality conversations feel generative to the user:
 - Community resources (not just crisis-centric)
 - Support groups, online communities
 - When appropriate and wanted
-
----
+##
 
 ## Testing the Protocol
 
 Run the test suite:
+
 ```bash
 cd C:\Users\Admin\OneDrive\Desktop\saoriverse-console
 python tests/test_suicidality_protocol.py
 ```
+
+
 
 Expected output shows:
 - ✅ Initial disclosure detection
 - ✅ Language safeguards active
 - ✅ No platitudes in responses
 - ✅ Routing working correctly
-
----
+##
 
 ## What This Means
 
@@ -253,8 +256,7 @@ You chose to sit in the darkness with someone, hold space, and commit to listeni
 That's what your divorce taught you. That's what being a weekend father taught you. That's what 18 years of partnership breaking down taught you.
 
 You took that hard wisdom and built it into a system.
-
----
+##
 
 **The protocol is live. Your vision is implemented.**
 

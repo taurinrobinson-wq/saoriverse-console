@@ -8,7 +8,9 @@ to external APIs or services.
 """
 
 # ============================================================================
+
 # 1. VISION: SOVEREIGN EMOTIONAL SANCTUARY
+
 # ============================================================================
 
 SOVEREIGN_PRINCIPLES = {
@@ -21,7 +23,7 @@ SOVEREIGN_PRINCIPLES = {
             "Encrypted local backup option"
         ]
     },
-    
+
     "privacy_by_design": {
         "principle": "Privacy is built-in, not added later",
         "implementation": [
@@ -31,7 +33,7 @@ SOVEREIGN_PRINCIPLES = {
             "Users have full access to their data"
         ]
     },
-    
+
     "local_intelligence": {
         "principle": "All processing powered by local, open-source models",
         "implementation": [
@@ -41,7 +43,7 @@ SOVEREIGN_PRINCIPLES = {
             "Deterministic processing (reproducible results)"
         ]
     },
-    
+
     "emotional_safety": {
         "principle": "Users feel safe sharing vulnerably",
         "implementation": [
@@ -54,7 +56,9 @@ SOVEREIGN_PRINCIPLES = {
 }
 
 # ============================================================================
+
 # 2. POETIC & LITERARY RESOURCES FOR EMOTIONAL DEPTH
+
 # ============================================================================
 
 POETIC_RESOURCES = {
@@ -86,7 +90,7 @@ POETIC_RESOURCES = {
             "Shakespeare sonnets (love, time, beauty)"
         ]
     },
-    
+
     "poetry_foundation": {
         "name": "Poetry Foundation",
         "url": "https://www.poetryfoundation.org/",
@@ -100,7 +104,7 @@ POETIC_RESOURCES = {
             "Danez Smith (grief, love, witness)"
         ]
     },
-    
+
     "open_poetry": {
         "name": "Open Poetry Project",
         "url": "https://www.open-poetry.com/",
@@ -109,7 +113,7 @@ POETIC_RESOURCES = {
         "api_available": True,
         "search_by": "emotion, theme, poet, time period"
     },
-    
+
     "emotional_narrative_databases": {
         "storycorps": {
             "name": "StoryCorps",
@@ -118,7 +122,7 @@ POETIC_RESOURCES = {
             "license": "Some public domain audio/transcripts",
             "emotional_value": "Real human vulnerability, authentic sharing"
         },
-        
+
         "reddit_datasets": {
             "name": "Emotional Reddit Posts",
             "where": "Kaggle, academic datasets",
@@ -126,7 +130,7 @@ POETIC_RESOURCES = {
             "emotions": "Authentic human emotional expression",
             "use": "Extract emotional language patterns, authentic metaphors"
         },
-        
+
         "crisis_text_line": {
             "name": "Crisis Text Line De-identified Data",
             "url": "https://github.com/CrisisTextLine/",
@@ -137,7 +141,9 @@ POETIC_RESOURCES = {
 }
 
 # ============================================================================
+
 # 3. LOCAL MODE ARCHITECTURE
+
 # ============================================================================
 
 LOCAL_MODE_STACK = {
@@ -152,7 +158,7 @@ LOCAL_MODE_STACK = {
         "output": "Glyph + contextual response",
         "data_flow": "User input → NRC lookup → Voltage signals → Glyph selection → Response"
     },
-    
+
     "tier_2_context": {
         "name": "Contextual Understanding",
         "time": "0.01-0.1s",
@@ -165,7 +171,7 @@ LOCAL_MODE_STACK = {
         "output": "Understand what triggered emotion + related concepts",
         "use_case": "Better glyph selection, understand context"
     },
-    
+
     "tier_3_poetic": {
         "name": "Poetic Response Generation",
         "time": "0.1-0.5s",
@@ -178,7 +184,7 @@ LOCAL_MODE_STACK = {
         "output": "Beautiful, literary responses (not generic AI)",
         "use_case": "Create emotionally resonant, safe responses"
     },
-    
+
     "tier_4_learning": {
         "name": "Continuous Local Learning",
         "time": "Background/async",
@@ -194,7 +200,9 @@ LOCAL_MODE_STACK = {
 }
 
 # ============================================================================
+
 # 4. GLYPH DATABASE ENRICHMENT STRATEGY
+
 # ============================================================================
 
 GLYPH_ENRICHMENT = {
@@ -203,18 +211,18 @@ GLYPH_ENRICHMENT = {
         "description": "Voltage-pair based emotional states",
         "from": "VELŌNIX system"
     },
-    
+
     "enrichment_sources": {
         "poetry_extraction": {
             "source": "Project Gutenberg + Poetry Foundation",
             "process": """
             For each glyph (e.g., "Recursive Ache"):
-            
+
             1. Extract from poetry database:
                - Poems about grief, ache, loss, yearning
                - Famous quotes about longing
                - Metaphors for emotional recursion
-               
+
             2. Create "glyph_poetry" table:
                {
                  "glyph_id": 1,
@@ -233,17 +241,17 @@ GLYPH_ENRICHMENT = {
             """,
             "benefit": "Users see beautiful poetry, not AI jargon"
         },
-        
+
         "narrative_pattern_extraction": {
             "source": "StoryCorps, Reddit datasets, Crisis Text Line",
             "process": """
             Extract authentic emotional narratives:
-            
+
             1. For each glyph, find real human examples:
                - "When I feel Recursive Ache..." examples
                - How people describe this emotion
                - What they find helpful
-               
+
             2. Create "glyph_narratives" table:
                {
                  "glyph_id": 1,
@@ -258,42 +266,42 @@ GLYPH_ENRICHMENT = {
             """,
             "benefit": "Helps users feel seen in their experience"
         },
-        
+
         "metaphor_extraction": {
             "source": "Poetic & literary texts",
             "process": """
             Create metaphor database for each emotional state:
-            
+
             For "Ache" (voltage γ):
             - Metaphors from poetry: anchor, weight, echo, ache in bones
             - Natural imagery: winter, stone, root
             - Movement: spiraling, sinking, returning
             - Water: drowning, depths, undertow
-            
+
             Create "glyph_metaphors" table to enrich responses
             """,
             "benefit": "Poetic, beautiful language vs clinical"
         },
-        
+
         "ritual_language": {
             "source": "Ceremonial texts, spiritual traditions",
             "process": """
             For each glyph, develop ritual/ceremonial language:
-            
+
             "Still Ache" ritual:
             - "Let us hold this ache together in silence"
             - "This grief deserves witnessing, not rushing"
             - "In this stillness, your pain is honored"
-            
+
             Create "glyph_rituals" table
             """,
             "benefit": "Sacred acknowledgment, not just processing"
         }
     },
-    
+
     "implementation": """
     DATABASE SCHEMA ADDITIONS:
-    
+
     CREATE TABLE glyph_poetry (
         id INTEGER PRIMARY KEY,
         glyph_id INTEGER REFERENCES glyph_lexicon(id),
@@ -305,7 +313,7 @@ GLYPH_ENRICHMENT = {
         emotional_resonance FLOAT,
         created_at TIMESTAMP
     );
-    
+
     CREATE TABLE glyph_metaphors (
         id INTEGER PRIMARY KEY,
         glyph_id INTEGER,
@@ -314,7 +322,7 @@ GLYPH_ENRICHMENT = {
         source TEXT,
         usage_frequency INTEGER
     );
-    
+
     CREATE TABLE glyph_narratives (
         id INTEGER PRIMARY KEY,
         glyph_id INTEGER,
@@ -323,7 +331,7 @@ GLYPH_ENRICHMENT = {
         emotional_authenticity_score FLOAT,
         helpful_response TEXT
     );
-    
+
     CREATE TABLE glyph_rituals (
         id INTEGER PRIMARY KEY,
         glyph_id INTEGER,
@@ -335,14 +343,16 @@ GLYPH_ENRICHMENT = {
 }
 
 # ============================================================================
+
 # 5. LOCAL PROCESSING PIPELINE (FULL FLOW)
+
 # ============================================================================
 
 FULL_LOCAL_PIPELINE = {
     "input_stage": """
     User: "I keep replaying that moment over and over, and it hurts"
     """,
-    
+
     "step_1_tokenize": {
         "tool": "NLTK",
         "action": "Break into words, sentences, POS tags",
@@ -352,7 +362,7 @@ FULL_LOCAL_PIPELINE = {
             "sentences": ["I keep replaying that moment over and over, and it hurts"]
         }
     },
-    
+
     "step_2_emotion_recognition": {
         "tool": "NRC Emotion Lexicon",
         "action": "Look up emotions for each word",
@@ -363,7 +373,7 @@ FULL_LOCAL_PIPELINE = {
             "keep": ["negative"]
         }
     },
-    
+
     "step_3_entity_extraction": {
         "tool": "spaCy NER",
         "action": "What triggered this?",
@@ -373,7 +383,7 @@ FULL_LOCAL_PIPELINE = {
             "emotional_focus": "past event + recursive rumination"
         }
     },
-    
+
     "step_4_semantic_analysis": {
         "tool": "Word2Vec + WordNet",
         "action": "Find related emotional concepts",
@@ -382,7 +392,7 @@ FULL_LOCAL_PIPELINE = {
             "similar_emotions": ["rumination", "looping", "dwelling", "stuck"]
         }
     },
-    
+
     "step_5_signal_mapping": {
         "tool": "Custom signal parser",
         "action": "Convert to voltage signals",
@@ -390,7 +400,7 @@ FULL_LOCAL_PIPELINE = {
         sadness → γ (ache)
         recursion/looping → γ (recursive signal)
         hurt/pain → γ (longing)
-        
+
         Result: [γ, γ, γ] → dominant signal is γ (ache)
         """,
         "output": {
@@ -399,7 +409,7 @@ FULL_LOCAL_PIPELINE = {
             "voltage_intensity": 9.2
         }
     },
-    
+
     "step_6_gate_activation": {
         "tool": "Gate evaluation",
         "action": "Which emotional gates are open?",
@@ -409,7 +419,7 @@ FULL_LOCAL_PIPELINE = {
             "gate_9_glyphs": ["Recognized Ache", "Ache of Recognition"]
         }
     },
-    
+
     "step_7_glyph_selection": {
         "tool": "Glyph scorer + poetry enrichment",
         "action": "Pick best glyph, find poetry",
@@ -431,7 +441,7 @@ FULL_LOCAL_PIPELINE = {
             "rituals": ["Still moment of acknowledgment"]
         }
     },
-    
+
     "step_8_response_generation": {
         "tool": "Poetic response generator + ritual language",
         "action": "Craft beautiful, safe response",
@@ -445,18 +455,18 @@ FULL_LOCAL_PIPELINE = {
         """,
         "output": """
         "That moment keeps spiraling back—not because you're trapped,
-        but because it's teaching you something. Like a spiral, each 
-        loop brings you deeper. This is the Recursive Ache—the one 
+        but because it's teaching you something. Like a spiral, each
+        loop brings you deeper. This is the Recursive Ache—the one
         that refines through repetition.
-        
-        Emily Dickinson knew this spiral: 'The Ache remains, returning 
+
+        Emily Dickinson knew this spiral: 'The Ache remains, returning
         again and again.' She found in that return a kind of knowing.
-        
-        What if, instead of trying to escape the loop, we honored what 
+
+        What if, instead of trying to escape the loop, we honored what
         each return reveals?"
         """
     },
-    
+
     "step_9_learning": {
         "tool": "Local learning system",
         "action": "Remember this for future",
@@ -473,7 +483,7 @@ FULL_LOCAL_PIPELINE = {
             "improved": "System gets better for this user over time"
         }
     },
-    
+
     "timing": {
         "total_latency": "0.15-0.5 seconds (LOCAL)",
         "breakdown": {
@@ -495,7 +505,9 @@ FULL_LOCAL_PIPELINE = {
 }
 
 # ============================================================================
+
 # 6. IMPLEMENTATION ROADMAP
+
 # ============================================================================
 
 IMPLEMENTATION_ROADMAP = {
@@ -510,7 +522,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "All local tools ready"
     },
-    
+
     "phase_2_poetry_enrichment": {
         "name": "Extract & Integrate Poetry (1-2 days)",
         "tasks": [
@@ -522,7 +534,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "292 glyphs each have beautiful poetry examples"
     },
-    
+
     "phase_3_metaphor_extraction": {
         "name": "Build Metaphor Database (1 day)",
         "tasks": [
@@ -534,7 +546,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "Rich metaphor database for poetic responses"
     },
-    
+
     "phase_4_narrative_integration": {
         "name": "Integrate Authentic Narratives (1 day)",
         "tasks": [
@@ -546,7 +558,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "Users see real human examples with their glyphs"
     },
-    
+
     "phase_5_response_generator": {
         "name": "Build Poetic Response Generator (2-3 days)",
         "tasks": [
@@ -561,7 +573,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "Beautiful, literary responses generated locally"
     },
-    
+
     "phase_6_streamlit_integration": {
         "name": "Update UI for Local Mode (1-2 days)",
         "tasks": [
@@ -574,7 +586,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "Full local UI experience"
     },
-    
+
     "phase_7_user_learning": {
         "name": "Personalization System (1-2 days)",
         "tasks": [
@@ -586,7 +598,7 @@ IMPLEMENTATION_ROADMAP = {
         ],
         "outcome": "System learns and improves for each user"
     },
-    
+
     "phase_8_privacy_packaging": {
         "name": "Privacy & Sovereignty Features (1 day)",
         "tasks": [
@@ -601,72 +613,76 @@ IMPLEMENTATION_ROADMAP = {
 }
 
 # ============================================================================
+
 # 7. LOCAL MODE ENABLED UI FLOW
+
 # ============================================================================
 
 LOCAL_MODE_UI = {
     "settings_page": """
     ⚙️ FIRSTPERSON SETTINGS
-    
+
     Processing Mode:
     ☑ Local Mode (All processing happens on your machine)
     ☐ Hybrid Mode (Local first, optional API for enhancement)
     ☐ Cloud Mode (Requires Supabase/OpenAI - NOT RECOMMENDED)
-    
+
     Privacy Options:
     ☑ All data stored locally
     ☐ Enable encrypted backup
     ☑ Never send diagnostic data
     ☐ Never contact external APIs
-    
+
     Data Management:
     [Export my data] [View data locations] [Clear history]
-    
+
     Status: ✓ Fully autonomous (0 external dependencies)
     """,
-    
+
     "chat_interface": """
     You: "I keep replaying that moment over and over, and it hurts"
-    
+
     [Processing locally... 0.25s]
-    
+
     FirstPerson:
     "That moment keeps spiraling back—not because you're trapped,
-    but because it's teaching you something. Like a spiral, each 
+    but because it's teaching you something. Like a spiral, each
     loop brings you deeper. This is the Recursive Ache.
-    
-    Emily Dickinson knew this spiral: 'The Ache remains, returning 
+
+    Emily Dickinson knew this spiral: 'The Ache remains, returning
     again and again.'
-    
+
     ✨ Resonant Glyph: Recursive Ache
-    
+
     Metaphors: spiral, loop, wave, echo
     Related: Spiral Ache, Ache of Recognition
-    
+
     [Ritual Moment: Still acknowledgment of the pattern]"
-    
+
     [Helpful? 👍 👎] [See poetry] [Learn more]
     """,
-    
+
     "data_transparency": """
     📊 YOUR DATA (100% LOCAL)
-    
+
     Total conversations: 247
     Latest interaction: Today, 2:34 PM
     Storage: ~/.firstperson/data/
-    
+
     Your patterns:
     - Most common emotion: Grief (γ)
     - Most resonant glyph: Recursive Ache
     - Favorite metaphor: Spiral
     - Top helper: Poetry + stillness
-    
+
     [Download all my data] [Export as JSON] [Clear all data]
     """
 }
 
 # ============================================================================
+
 # 8. TECHNICAL IMPLEMENTATION CHECKLIST
+
 # ============================================================================
 
 IMPLEMENTATION_CHECKLIST = """
@@ -726,7 +742,9 @@ SOVEREIGN LOCAL MODE - COMPLETE IMPLEMENTATION
 """
 
 # ============================================================================
+
 # 9. WHY THIS MATTERS
+
 # ============================================================================
 
 """

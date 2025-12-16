@@ -117,6 +117,8 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
+
+
 Visit `http://localhost:3000` to see the beautiful UI in action.
 
 ### Key User Flows
@@ -141,29 +143,38 @@ Visit `http://localhost:3000` to see the beautiful UI in action.
 
 #### Change Colors
 Edit Tailwind classes in components:
+
 ```tsx
 // Change from indigo to purple
 className="from-purple-600 to-pink-600"
 ```
 
+
+
 #### Adjust Animation Timing
 Edit Framer Motion transitions:
+
 ```tsx
 transition={{ duration: 0.5 }} // Slower
 transition={{ duration: 0.2 }} // Faster
 ```
+
+
 
 #### Add More Dance Animations
 Edit `DanceAnimation.tsx` - add new motion.div elements with different animation patterns.
 
 #### Trigger Dance Mode on Different Keywords
 Edit the `detectExcitement()` function in chat page:
+
 ```tsx
 const excitementPatterns = [
   /your-keyword/i,
   // Add more patterns...
 ];
 ```
+
+
 
 ## 🎬 Component Hierarchy
 
@@ -186,6 +197,8 @@ lib/
 ├── store.ts (Zustand state)
 └── api.ts (API client)
 ```
+
+
 
 ## ✅ Features Checklist
 
@@ -265,8 +278,7 @@ lib/
 - Consistent naming conventions
 - Component composition
 - Separation of concerns
-
----
+##
 
 **Status**: ✅ Phase 2 Complete
 **Time**: ~30-45 minutes of implementation

@@ -12,21 +12,23 @@ This is a reference implementation showing exactly where to add the learning pip
 """
 
 # ============================================================================
+
 # CURRENT signal_parser.py FLOW (Simplified)
+
 # ============================================================================
 
 """
 def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
-    
+
     # 1. Detect signals (3-phase)
     signals = parse_signals(text)
-    
+
     # 2. Map signals to gates
     gates = evaluate_gates(signals)
-    
+
     # 3. Fetch glyphs matching gates
     glyphs = fetch_glyphs(gates)
-    
+
     # 4. Select best and generate response
     if glyphs:
         best_glyph, response = select_best_glyph_and_response(
@@ -50,7 +52,9 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
 """
 
 # ============================================================================
+
 # PHASE 2 INTEGRATION: The Complete Modification
+
 # ============================================================================
 
 """
@@ -78,42 +82,44 @@ def _get_user_hash(user_id: str = None) -> str:
 
 
 # ============================================================================
+
 # MODIFIED parse_input() with Learning Pipeline
+
 # ============================================================================
 
 def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
     """
     Parse emotional input and return glyph + response.
-    
+
     NOW INCLUDES: Real-time glyph generation when no match found.
     """
-    
+
     if not user_hash:
         user_hash = _get_user_hash()
-    
+
     # STEP 1: Detect signals (existing code)
     signals = parse_signals(text)
-    
+
     # STEP 2: Evaluate gates (existing code)
     gates = evaluate_gates(signals)
-    
+
     # STEP 3: Fetch glyphs matching gates (existing code)
     glyphs = fetch_glyphs(gates)
-    
+
     # STEP 4: SELECT BEST OR GENERATE NEW
     if glyphs:
         # ================== PHASE 1: Existing glyph ==================
         best_glyph, response = select_best_glyph_and_response(
             glyphs, signals, text
         )
-        
+
         # ADDED: Log adoption (this glyph was used)
         _shared_glyph_manager.record_glyph_adoption(
             user_hash=user_hash,
             glyph_name=best_glyph,
             quality_rating=None  # User hasn't rated yet
         )
-        
+
         return {
             "best_glyph": best_glyph,
             "voltage_response": response,
@@ -122,20 +128,20 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
             "source": "existing_glyph",
             "learning_status": "production"
         }
-    
+
     else:
         # ================== PHASE 2: NEW - Learning pipeline ==================
-        
+
         # STEP 4.1: Analyze input for glyph generation
         glyph_candidate = _glyph_learner.analyze_input_for_glyph_generation(
             input_text=text,
             signals=signals,
             user_hash=user_hash
         )
-        
+
         # STEP 4.2: Log candidate to database
         _glyph_learner.log_glyph_candidate(glyph_candidate)
-        
+
         # STEP 4.3: Create version in shared manager
         glyph_name = glyph_candidate.get("glyph_name", "Emerging Emotion")
         version_num = _shared_glyph_manager.create_glyph_version(
@@ -145,21 +151,21 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
             gates=glyph_candidate.get("gates", ["Gate 5"]),
             created_by=user_hash
         )
-        
+
         # STEP 4.4: Record adoption (user creating = first user adopting)
         _shared_glyph_manager.record_glyph_adoption(
             user_hash=user_hash,
             glyph_name=glyph_name,
             quality_rating=1  # Implicit positive (they're engaging)
         )
-        
+
         # STEP 4.5: Generate learning response
         emotional_analysis = {
             "primary_tone": _determine_emotional_tone(signals),
             "emotional_terms": glyph_candidate.get("emotional_terms", {}),
             "nrc_analysis": glyph_candidate.get("nrc_analysis", {})
         }
-        
+
         learning_response = _learning_response_gen.generate_learning_response(
             glyph_candidate=glyph_candidate,
             original_input=text,
@@ -167,7 +173,7 @@ def parse_input(text: str, user_hash: Optional[str] = None) -> Dict:
             emotional_terms=emotional_analysis["emotional_terms"],
             nrc_analysis=emotional_analysis["nrc_analysis"]
         )
-        
+
         # STEP 4.6: Return generated glyph + training response
         return {
             "best_glyph": glyph_name,  # ← NO LONGER None!
@@ -189,10 +195,10 @@ def _determine_emotional_tone(signals: List[Dict]) -> str:
     """
     if not signals:
         return "unknown"
-    
+
     # Look at the primary signal's tone
     primary_tone = signals[0].get("tone", "unknown")
-    
+
     # Map to response tone
     tone_map = {
         "grief": "grief",
@@ -204,12 +210,14 @@ def _determine_emotional_tone(signals: List[Dict]) -> str:
         "recognition": "recognition",
         "unknown": "unknown"
     }
-    
+
     return tone_map.get(primary_tone, "unknown")
 
 
 # ============================================================================
+
 # BONUS: Admin Dashboard Helpers
+
 # ============================================================================
 
 def get_system_learning_status() -> Dict:
@@ -218,7 +226,7 @@ def get_system_learning_status() -> Dict:
     Useful for admin dashboard.
     """
     health = _shared_glyph_manager.get_system_health_report()
-    
+
     return {
         "active_glyphs": health.get("total_active_glyphs", 0),
         "unique_users": health.get("unique_users_contributed", 0),
@@ -246,7 +254,9 @@ def promote_candidate_glyph(glyph_name: str) -> bool:
 
 
 # ============================================================================
+
 # INTEGRATION CHECKLIST
+
 # ============================================================================
 
 """
@@ -281,7 +291,9 @@ AFTER:
 """
 
 # ============================================================================
+
 # TESTING THE INTEGRATION
+
 # ============================================================================
 
 """
@@ -295,7 +307,7 @@ Expected output:
   ✓ 3 adoptions recorded
   ✓ System health report shows new glyphs
   ✓ Coverage recommendations generated
-  
+
 Then validate with signal_parser directly:
 
 from emotional_os.parser.signal_parser import parse_input

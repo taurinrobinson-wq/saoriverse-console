@@ -26,8 +26,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 - Provides unified interface to FirstPerson modules
 - Implements placeholder structure for all 7 core modules
 - Ready for phase-by-phase implementation
-
----
+##
 
 ## Optional Dependencies Status
 
@@ -37,8 +36,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 | **TextBlob** | ⚠️ Optional | Sentiment analysis, subjectivity | Graceful fallback - system works |
 | **spaCy** | ⚠️ Optional | POS tagging, entity extraction | Graceful fallback - system works |
 | **FirstPerson** | 🔧 Phase 1-5 | Emotional attunement, memory, scaffolding | Advanced features (can rollout incrementally) |
-
----
+##
 
 ## What's Currently Being Used
 
@@ -55,8 +53,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 1. **NRC Lexicon** (Primary) - 6,453 words across 10 emotions ✅
 2. **Enhanced Emotion Processor** - Multi-source routing (if TextBlob/spaCy available)
 3. **Heuristic Detection** - Built-in keyword mapping (always available)
-
----
+##
 
 ## FirstPerson System Architecture
 
@@ -79,8 +76,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 | 5 | Dynamic Scaffolding | Blend all elements |
 | 5 | Adaptive Learning | Refine from corrections |
 | 5 | Empathy Rituals | Teach-as-you-go practices |
-
----
+##
 
 ## Implementation Roadmap
 
@@ -99,8 +95,7 @@ Created: `emotional_os/llm/firstperson_integration.py`
 
 3. **Phase 3-5** (Ongoing)
    - See `/data/firstperson_improvements.md` for detailed tasks
-
----
+##
 
 ## Files Modified & Created
 
@@ -108,13 +103,14 @@ Created: `emotional_os/llm/firstperson_integration.py`
 2. `emotional_os/deploy/modules/nlp_init.py` - Demoted warnings to debug
 3. `emotional_os/llm/firstperson_integration.py` - NEW: FirstPerson bridge layer
 4. `LOCAL_LLM_AND_DEPENDENCIES.md` - This file (updated)
-
----
+##
 
 ## Verification
 
 To confirm system is working:
+
 ```python
+
 # Check NRC lexicon is loaded
 from parser.nrc_lexicon_loader import nrc
 print(f"NRC loaded: {len(nrc)} emotions")  # Should show: NRC loaded: 10 emotions
@@ -125,15 +121,15 @@ gen = get_firstperson_generator()
 print(f"FirstPerson available: {gen.is_available()}")  # Currently: False (Phase 1 pending)
 ```
 
----
+
+##
 
 ## Performance Impact
 
 - **Response Time:** 0.01-0.04s (unaffected by optional dependencies)
 - **Memory:** Slightly lower with TextBlob/spaCy disabled
 - **Accuracy:** Unaffected (NRC lexicon provides excellent emotion detection)
-
----
+##
 
 ## Key Concepts from FirstPerson Roadmap
 
@@ -158,8 +154,7 @@ System helps users practice empathy:
 System detects misattunement and repairs:
 - User: "No, that's not what I meant"
 - System: "Thanks for clarifying—I want to get closer to what you mean"
-
----
+##
 
 ## Questions?
 

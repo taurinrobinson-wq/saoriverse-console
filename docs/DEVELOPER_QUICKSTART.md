@@ -2,14 +2,14 @@
 
 **Last Updated**: Phase 10 - Documentation Updates
 **Project Status**: ✅ Fully Modularized & Organized
-
----
+##
 
 ## 🚀 Quick Start (5 minutes)
 
 ### First Time Setup
 
 ```bash
+
 # 1. Navigate to project
 cd /workspaces/saoriverse-console
 
@@ -18,9 +18,12 @@ pip install -r config/requirements.txt
 
 # 3. Start the application
 python core/start.py
+
 # OR for Streamlit
 streamlit run core/main_v2.py
 ```
+
+
 
 ### Project Structure at a Glance
 
@@ -35,7 +38,8 @@ root/
 └── README.md             ← Project overview
 ```
 
----
+
+##
 
 ## 📂 Finding What You Need
 
@@ -79,8 +83,7 @@ root/
 
 → **Location**: `scripts/`
 → **Files**: `deploy.sh`, `run_local.sh`
-
----
+##
 
 ## 🔧 Core Python Files (core/)
 
@@ -103,6 +106,7 @@ All essential Python files are in `core/`:
 ### Importing from Core
 
 ```python
+
 # Import from core/ directory
 from core.main_response_engine import process_user_input
 from core.response_adapter import translate_emotional_response
@@ -113,7 +117,8 @@ from core.phase_modulator import detect_phase
 from core.glyph_generator import GlyphGenerator
 ```
 
----
+
+##
 
 ## 📚 Documentation Organization (docs/)
 
@@ -148,8 +153,7 @@ Historical phase and sprint documentation:
 ### INDEX.md
 
 **Navigation guide for all documentation** - Start here if you're lost!
-
----
+##
 
 ## 📊 Data Organization (data/)
 
@@ -178,8 +182,7 @@ Analysis output directory (expand as needed)
 ### exports/
 
 Export files directory (expand as needed)
-
----
+##
 
 ## ⚙️ Configuration (config/)
 
@@ -196,6 +199,8 @@ config/
 └── runtime.txt               (Python runtime version)
 ```
 
+
+
 Install dependencies:
 
 ```bash
@@ -203,13 +208,15 @@ pip install -r config/requirements.txt
 pip install -r config/requirements-dev.txt  # For development
 ```
 
----
+
+##
 
 ## 📜 Scripts (scripts/)
 
 Deployment and setup scripts:
 
 ```bash
+
 # Deploy to production
 scripts/deploy.sh
 
@@ -217,7 +224,8 @@ scripts/deploy.sh
 scripts/run_local.sh
 ```
 
----
+
+##
 
 ## 🔍 Logs (logs/)
 
@@ -228,8 +236,7 @@ Application logs for debugging:
 - `glyph_generation.log` - Glyph generation logs
 - `streamlit.log` - Streamlit app logs
 - `streamlit_tonecore.log` - ToneCore interface logs
-
----
+##
 
 ## 🏛️ Modularized Application (emotional_os/)
 
@@ -297,8 +304,7 @@ Learning system:
 
 - Local learner
 - Memory management
-
----
+##
 
 ## 🗜️ Organized Tools (tools/)
 
@@ -325,20 +331,22 @@ Glyph testing:
 
 - Conversation test harness
 - Effectiveness validator
-
----
+##
 
 ## 📝 Common Tasks
 
 ### Running the Application
 
 ```bash
+
 # Using start.py (Railway)
 python core/start.py
 
 # Using Streamlit directly
 streamlit run core/main_v2.py --server.port=8501
 ```
+
+
 
 ### Adding a New Feature
 
@@ -364,14 +372,14 @@ streamlit run core/main_v2.py --server.port=8501
 1. Add glyph data to `data/glyphs/`
 2. Add lexicon data to `data/lexicons/`
 3. Add analysis outputs to `data/analysis/`
-
----
+##
 
 ## 🔗 Import Paths Reference
 
 ### Core Modules (New Locations)
 
 ```python
+
 # Response System
 from core.main_response_engine import process_user_input
 from core.response_adapter import translate_emotional_response
@@ -389,9 +397,12 @@ from core.phase_modulator import detect_phase
 from core.glyph_generator import GlyphGenerator
 ```
 
+
+
 ### Emotional OS Modules
 
 ```python
+
 # Utils
 from emotional_os.utils.svg_loader import load_svg
 from emotional_os.utils.css_injector import inject_css
@@ -419,9 +430,12 @@ from emotional_os.features.theme_manager import manage_theme
 from emotional_os.glyphs.glyph_generator import GlyphGenerator
 ```
 
+
+
 ### Tools
 
 ```python
+
 # Analysis
 from tools.analysis.gate_distribution_analyzer import GateDistributionAnalyzer
 from tools.analysis.evolving_glyph_integrator import EvolvingGlyphIntegrator
@@ -434,7 +448,8 @@ from tools.document_processing.docx_viewer import view_docx
 from tools.glyph_testing.glyph_conversation_test_harness import run_conversation_test
 ```
 
----
+
+##
 
 ## 📋 Checklist for New Developers
 
@@ -446,8 +461,7 @@ from tools.glyph_testing.glyph_conversation_test_harness import run_conversation
 - [ ] Explore `core/` for main code
 - [ ] Explore `emotional_os/` for modular components
 - [ ] Check `logs/` when debugging
-
----
+##
 
 ## 🆘 Getting Help
 
@@ -456,8 +470,7 @@ from tools.glyph_testing.glyph_conversation_test_harness import run_conversation
 3. **Project history** → `docs/archives/`
 4. **Code examples** → Look in `tests/` for usage examples
 5. **Debugging** → Check `logs/` directory
-
----
+##
 
 ## ✅ Project Status
 
@@ -469,6 +482,7 @@ from tools.glyph_testing.glyph_conversation_test_harness import run_conversation
 ✅ Ready for:         Development & Deployment
 ```
 
----
+
+##
 
 **For more information**: See `docs/INDEX.md` ⭐

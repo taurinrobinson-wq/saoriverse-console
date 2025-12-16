@@ -30,12 +30,15 @@ Additional archived files exist in:
 ## 🏃‍♂️ Running the Application
 
 ```bash
+
 # Activate virtual environment (if using one)
 source .venv/bin/activate
 
 # Run the main application
 streamlit run main_v2.py
 ```
+
+
 
 ## 💡 Development Guidelines
 
@@ -57,11 +60,14 @@ Public audit API:
 How to run tests:
 
 ```bash
+
 # activate the virtualenv in the project root (if present)
 source .venv/bin/activate
 pip install -r requirements.txt  # ensure test deps available
 pytest -q
 ```
+
+
 
 The tests added here exercise escalation logic and ensure `record_audit` writes a minimal log entry. When you provide the canonical `emotional_taxonomy.json` we can update the taxonomy and expand tests to match the editorial schema.
 
@@ -72,5 +78,7 @@ Fast preprocessor test feedback is available via GitHub Actions. Add the followi
 ```
 ![Preprocessor tests](https://github.com/taurinrobinson-wq/saoriverse-console/actions/workflows/preprocessor-tests.yml/badge.svg)
 ```
+
+
 
 Note: the badge will display correctly once the workflow has run at least once on the repository (e.g., after a PR or a push). The workflow is configured to run on pull requests and executes only `tests/test_preprocessor.py` for fast feedback.

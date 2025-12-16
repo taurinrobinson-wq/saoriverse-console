@@ -1,14 +1,14 @@
 # Voice/Audio Integration - Complete Setup Guide
 
-**Date**: December 4, 2025  
-**Status**: Voice components reorganized and integrated into UI  
+**Date**: December 4, 2025
+**Status**: Voice components reorganized and integrated into UI
 **Integration Type**: Gradual enhancement (voice mode can be toggled on/off)
-
----
+##
 
 ## 📁 File Structure
 
 ### Audio Components (Reorganized)
+
 ```
 src/emotional_os/deploy/modules/ui_components/audio/
 ├── __init__.py                 # Audio module exports
@@ -22,13 +22,14 @@ src/emotional_os/deploy/modules/ui_components/
 └── session_manager.py          # MODIFIED - Initializes voice session
 ```
 
+
+
 ### Why This Structure?
 - ✅ **Modular**: Audio components isolated in `ui_components/audio/`
 - ✅ **Importable**: Can be imported as `from .audio import AudioPipeline`
 - ✅ **Streamlit-friendly**: Wrapper module handles Streamlit-specific concerns
 - ✅ **No CSS/JS issues**: Pure Python, no external HTML/JS file management needed
-
----
+##
 
 ## 🎙️ Features Integrated
 
@@ -53,12 +54,12 @@ src/emotional_os/deploy/modules/ui_components/
 ### 4. **Session Initialization**
 - Voice state initialized in `session_manager.py`
 - Sets: `voice_mode_enabled`, `last_audio_input`, `last_audio_output`
-
----
+##
 
 ## 🔧 How It Works
 
 ### Audio Output Pipeline (Currently Working)
+
 ```
 User sends message
   ↓
@@ -81,7 +82,10 @@ IF voice_mode_enabled:
 Message displayed with audio player
 ```
 
+
+
 ### Audio Input Pipeline (Ready but Requires Recording Component)
+
 ```
 User clicks "🎙️ Start Recording"
   ↓
@@ -98,29 +102,32 @@ process_audio_input()
 Text treated as user message (same flow as text input)
 ```
 
----
+
+##
 
 ## 📦 Dependencies (Optional)
 
 These libraries enable audio features. Install only if you want voice:
 
 ```bash
+
 # For speech-to-text
 pip install faster-whisper librosa soundfile
 
-# For text-to-speech  
+# For text-to-speech
 pip install TTS
 
 # Optional: GPU acceleration
 pip install torch torchvision torchaudio  # For faster inference
 ```
 
-**If not installed**: 
+
+
+**If not installed**:
 - Voice features gracefully degrade to text-only
 - User gets helpful error messages
 - Text responses still work normally
-
----
+##
 
 ## 🚀 Usage
 
@@ -131,7 +138,9 @@ pip install torch torchvision torchaudio  # For faster inference
 4. Click 🔊 to listen to response
 
 ### For Developers
+
 ```python
+
 # Import audio components
 from emotional_os.deploy.modules.ui_components import (
     render_voice_mode_toggle,
@@ -151,7 +160,8 @@ audio_bytes = synthesize_response_audio(
 render_audio_playback(audio_bytes, label="🔊 Listen")
 ```
 
----
+
+##
 
 ## ⚙️ Architecture Decisions
 
@@ -162,6 +172,7 @@ render_audio_playback(audio_bytes, label="🔊 Listen")
 - ❌ (Avoided) External JS files cause path resolution issues in Streamlit
 
 ### Why Lazy Initialization?
+
 ```python
 _audio_pipeline = None
 
@@ -173,12 +184,15 @@ def get_audio_pipeline():
         _audio_pipeline = AudioPipeline()
     return _audio_pipeline
 ```
+
+
 - ✅ Avoids loading heavy models (Whisper ~140MB, TTS ~300MB) on startup
 - ✅ Faster app startup time
 - ✅ Models only load if voice mode enabled
 - ✅ Graceful degradation if dependencies missing
 
 ### Why Glyph-Informed Prosody?
+
 ```python
 prosody_map = {
     "I_HEAR_YOU": {"energy": 0.8, "rate": 0.95},    # Slower, gentle
@@ -186,11 +200,12 @@ prosody_map = {
     "THAT_LANDS": {"energy": 0.9, "rate": 1.0},     # Present, clear
 }
 ```
+
+
 - Glyph metadata → audio characteristics
 - Same glyph metadata used for response tone also used for voice tone
 - Consistent emotional presentation across text + audio
-
----
+##
 
 ## 🔍 Testing Checklist
 
@@ -203,8 +218,7 @@ prosody_map = {
 - [ ] With voice dependencies: Audio synthesis generates on response
 - [ ] Audio playback widget displays correctly
 - [ ] Glyph metadata influences audio prosody
-
----
+##
 
 ## 🐛 Troubleshooting
 
@@ -227,8 +241,7 @@ prosody_map = {
 - Voice mode not enabled in sidebar
 - Dependencies missing (but should see warning message)
 - Check browser console for JS errors
-
----
+##
 
 ## 🎯 Future Enhancements
 
@@ -256,8 +269,7 @@ prosody_map = {
    - Save audio responses
    - Replay past conversations with audio
    - Export conversations as podcasts
-
----
+##
 
 ## 📝 Notes
 
@@ -265,8 +277,7 @@ prosody_map = {
 - **Privacy**: All audio processing is local (Whisper.cpp, no cloud APIs)
 - **Performance**: First run downloads models (~500MB total), subsequent runs use cache
 - **Browser Support**: Chrome/Firefox/Safari with Web Audio API support
-
----
+##
 
 ## Summary
 

@@ -61,6 +61,8 @@ The engine represents the system's emotional state as a mutable, evolving poem w
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+
+
 ## Component Details
 
 ### 1. Living Poem (Core State)
@@ -105,6 +107,8 @@ vectors = {
 }
 ```
 
+
+
 **Features**:
 - Shared metaphor development over time
 - Co-created language tracking
@@ -135,6 +139,8 @@ memory = AffectiveMemory(
 )
 ```
 
+
+
 **Dreaming Mode**: During idle times, fragments are recomposed into novel insights.
 
 ### 5. Ethical Compass
@@ -162,6 +168,7 @@ Values represented as poetic principles:
 The poetic engine is integrated into `parse_input()`:
 
 ```python
+
 # In emotional_os/core/signal_parser.py
 result = parse_input(input_text, lexicon_path, db_path, conversation_context, user_id)
 
@@ -176,6 +183,8 @@ result = {
     }
 }
 ```
+
+
 
 ### Glyph System Integration
 
@@ -193,6 +202,8 @@ result = engine.process_glyph_response(
     user_id="user_abc"
 )
 ```
+
+
 
 ### Learning Model Integration
 
@@ -221,17 +232,24 @@ result = engine.update_from_interaction(
 )
 
 print(result["poem_rendered"])
+
 # Output:
+
 # [anxiety]
 #   a clock ticking in the dark
 #
+
 # Tempo: erratic
+
 # Clarity: coherent
 ```
+
+
 
 ### Emotional Progression Example
 
 ```python
+
 # Session 1: User arrives anxious
 engine.update_from_interaction(
     user_input="Everything is falling apart",
@@ -259,28 +277,39 @@ print(summary["poem"]["valence"])  # "peace"
 print(summary["ethics"]["pride"])  # Increased from supporting user
 ```
 
+
+
 ### Dreaming Mode
 
 ```python
+
 # Enter dreaming during idle time
 dreams = engine.enter_dreaming_mode()
 
 for dream in dreams:
     print(dream)
+
 # Output might include:
+
 # ~~ Dream Sequence ~~
-# 
+#
+
 # In dreams of anxiety: wind before the storm
+
 # In dreams of hope: a seed breaking through stone
 #
+
 # (Echoes from 5 memories)
 
 engine.exit_dreaming_mode()
 ```
 
+
+
 ### Mirror Response Generation
 
 ```python
+
 # For users with mirroring active
 engine.user_gravity["user_123"].mirror_active = True
 
@@ -291,15 +320,21 @@ response = engine.generate_mirror_response(
 )
 
 print(response)
+
 # "I feel the weight of night without stars. I am with you in this moment."
 ```
+
+
 
 ## State Persistence
 
 The engine automatically persists state to:
+
 ```
 emotional_os/data/poetic_state.json
 ```
+
+
 
 This includes:
 - Current poem state
@@ -314,6 +349,8 @@ Run the poetic engine tests:
 ```bash
 pytest tests/test_poetic_engine.py -v
 ```
+
+
 
 ## Future Enhancements
 

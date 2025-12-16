@@ -37,7 +37,7 @@ A React Native / Expo prototype demonstrating the core UI components for the Mes
    npx expo start
    ```
 
-2. A QR code will appear in your terminal. 
+2. A QR code will appear in your terminal.
 
 3. **On iOS**: Open the Camera app and scan the QR code. It will prompt you to open in Expo Go.
 
@@ -48,9 +48,12 @@ A React Native / Expo prototype demonstrating the core UI components for the Mes
 ### Alternative: Run in Web Browser
 
 You can also run the prototype in a web browser:
+
 ```bash
 npx expo start --web
 ```
+
+
 
 ## 📁 Project Structure
 
@@ -65,6 +68,8 @@ MessageUIOverlayPrototype/
 ├── assets/             # Icon and splash screen assets
 └── README.md           # This file
 ```
+
+
 
 ## 🧩 Components
 

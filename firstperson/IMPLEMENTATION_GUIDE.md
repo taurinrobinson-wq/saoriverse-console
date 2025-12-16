@@ -14,8 +14,7 @@
 ✅ **Offline-First Sync** - Messages queue when offline, auto-sync when online
 ✅ **Settings Dashboard** - Preferences, conversation management, privacy controls
 ✅ **Streamlined UI** - Bottom tab navigation (Chat, Settings) with minimal cognitive load
-
----
+##
 
 ## Project Structure
 
@@ -44,7 +43,8 @@ firstperson/
 └── assets/                         # Icons, images, splash screens
 ```
 
----
+
+##
 
 ## Core Components & Services
 
@@ -76,7 +76,8 @@ fp_sync_queue           # Messages queued during offline
 fp_onboarding_complete  # Onboarding completion marker
 ```
 
----
+
+##
 
 #### `ApiService.js`
 
@@ -109,7 +110,8 @@ Handles all backend communication with prosody parsing and offline detection.
 }
 ```
 
----
+
+##
 
 #### `SyncService.js`
 
@@ -120,12 +122,11 @@ Implements offline-first sync with listener pattern for UI updates.
 - `performSync()` - Process sync queue, retry failed messages
   - Returns: `{ success, syncedCount, errors? }`
   - Notifies listeners of progress
-  
+
 - `getSyncStatus()` - Current sync state
 - `onSyncStatusChange(callback)` - Subscribe to sync events
   - Fires: `{ syncing, syncedCount, errors?, queuedMessages }`
-
----
+##
 
 ### 2. **Screen Components**
 
@@ -151,8 +152,7 @@ Main chat interface with real-time message display and prosody rendering.
 4. Response displayed with prosody metadata
 5. Memory capsule created (every 5 messages)
 6. All persisted to AsyncStorage
-
----
+##
 
 #### `OnboardingScreen.js`
 
@@ -172,8 +172,7 @@ Main chat interface with real-time message display and prosody rendering.
 - Stores preferences to AsyncStorage
 - Marks onboarding complete
 - Navigates to main app on completion
-
----
+##
 
 #### `SettingsScreen.js`
 
@@ -187,8 +186,7 @@ User preferences, conversation management, and privacy controls.
 4. **Privacy & Security** - Info card, links to policies
 5. **About** - Version, backend info
 6. **Danger Zone** - Clear all data (with confirmation)
-
----
+##
 
 ### 3. **Component Components**
 
@@ -210,14 +208,15 @@ Displays individual messages with optional prosody metadata.
 }
 ```
 
+
+
 **Rendering:**
 
 - User messages: right-aligned, green background
 - Assistant messages: left-aligned, gray background
 - Prosody metadata: emotion emoji + confidence, glyph symbols, tone
 - Timestamp in subtle text below message
-
----
+##
 
 #### `ChatInput.js`
 
@@ -230,8 +229,7 @@ Enhanced message input with multi-line support and sending state.
 - Disabled state management
 - Auto-focus optimizations
 - Accessibility support
-
----
+##
 
 ## Data Flow Architecture
 
@@ -253,6 +251,8 @@ ChatScreen.handleSendMessage()
 ├─ Store assistant message locally
 └─ Create memory capsule (every 5 messages)
 ```
+
+
 
 ### Offline Sync Flow
 
@@ -277,13 +277,15 @@ SyncService.performSync() triggered
 Notify UI of sync completion
 ```
 
----
+
+##
 
 ## Installation & Setup
 
 ### Prerequisites
 
 ```bash
+
 # Install Node.js 18+
 node --version
 
@@ -293,6 +295,8 @@ npm install -g expo-cli
 # Install EAS CLI (for building)
 npm install -g eas-cli
 ```
+
+
 
 ### Quick Start
 
@@ -306,18 +310,26 @@ npm install
 npm start
 
 # Scan QR code with Expo Go app (iOS/Android)
+
 # Or launch emulator:
+
 # - Android: npm run android
+
 # - iOS: npm run ios
 
 # Test on device:
+
 # - Physical device: Expo Go app → Scan QR
+
 # - Emulator: Follow Expo CLI prompts
 ```
+
+
 
 ### Environment Setup
 
 ```bash
+
 # Configure backend URL (in src/config.js):
 REACT_APP_SAOYNX_API_URL=http://192.168.1.100:8000  # Replace with your IP
 
@@ -326,7 +338,8 @@ export REACT_APP_SAOYNX_API_URL="http://192.168.1.100:8000"
 npm start
 ```
 
----
+
+##
 
 ## Dependencies
 
@@ -348,7 +361,8 @@ npm start
 }
 ```
 
----
+
+##
 
 ## Next Steps (Future Enhancements)
 
@@ -378,8 +392,7 @@ npm start
 - [ ] **Share Feature** - Share conversations securely
 - [ ] **Accessibility** - Full VoiceOver/TalkBack support
 - [ ] **Performance** - Optimize list rendering, reduce bundle size
-
----
+##
 
 ## Testing Checklist
 
@@ -408,8 +421,7 @@ npm start
 - [ ] App backgrounded during sync
 - [ ] Device offline for extended period
 - [ ] Low storage conditions
-
----
+##
 
 ## Troubleshooting
 
@@ -418,18 +430,23 @@ npm start
 **"Cannot connect to backend"**
 
 ```bash
+
 # Check backend is running
 curl http://localhost:8000/health
 
 # Check IP address is correct in config.js
+
 # For device on same WiFi: use computer's LAN IP, not localhost
 ipconfig getifaddr en0  # macOS
 ifconfig | grep inet    # Linux
 ```
 
+
+
 **"AsyncStorage not working"**
 
 ```bash
+
 # Ensure package is installed
 npm list @react-native-async-storage/async-storage
 
@@ -438,9 +455,12 @@ rm -rf node_modules
 npm install
 ```
 
+
+
 **"Navigation not working"**
 
 ```bash
+
 # Ensure all navigation dependencies installed
 npm install @react-navigation/native @react-navigation/bottom-tabs
 
@@ -448,7 +468,8 @@ npm install @react-navigation/native @react-navigation/bottom-tabs
 expo start -c
 ```
 
----
+
+##
 
 ## Developer Notes
 
@@ -458,8 +479,7 @@ expo start -c
 - **Accessibility**: Components designed with VoiceOver compatibility
 - **Performance**: Message list virtualization ready (FlatList)
 - **Privacy**: No analytics by default; all data local unless explicitly shared
-
----
+##
 
 ## Files Modified/Created This Session
 
@@ -480,8 +500,7 @@ expo start -c
 **Existing Files Updated:**
 
 - None breaking; legacy `MessageOverlay.js` preserved
-
----
+##
 
 ## Deployment Guide (Coming Next Phase)
 
@@ -495,10 +514,8 @@ See `Offshoots/FirstPerson-Mobile/FirstPerson-Mobile.md` for MVP spec.
 4. Submit to TestFlight / Play Store
 5. Monitor for crash reports
 6. Iterate on user feedback
-
----
+##
 
 **Status**: ✅ MVP Core Complete - Ready for Alpha Testing
 **Last Updated**: December 3, 2025
 **Maintainer**: FirstPerson Team
-

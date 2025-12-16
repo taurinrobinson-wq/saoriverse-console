@@ -7,8 +7,7 @@
 ## What You Got
 
 A **fully integrated dynamic glyph generation system** that automatically creates new glyphs during user-AI conversations.
-
----
+##
 
 ## Implementation Overview
 
@@ -64,8 +63,7 @@ A **fully integrated dynamic glyph generation system** that automatically create
   - Displays glyph symbols, emotions, keywords
   - Export button for discovered glyphs
   - Seamless integration with existing UI
-
----
+##
 
 ## How It Works
 
@@ -99,11 +97,13 @@ New Glyph Available
     └─ Ready for system use
 ```
 
+
+
 ### Pattern Recognition Example
 
 ```
 Turn 1: love (0.9) + intimacy (0.8) = co-occurrence
-Turn 2: love (0.85) + intimacy (0.7) = co-occurrence  
+Turn 2: love (0.85) + intimacy (0.7) = co-occurrence
 Turn 3: vulnerability (0.8) + love (0.9) = co-occurrence
 ...
 Turn 150: accumulated frequency of (love + intimacy) = 300+
@@ -115,7 +115,8 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
     Story: "A story of two souls finding each other"
 ```
 
----
+
+##
 
 ## Integration Points
 
@@ -133,10 +134,10 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
    ```
    learning/conversation_glyphs.json
    └─ All discovered glyphs (survives session restart)
-   
+
    learning/user_overrides/{user_id}_lexicon.json
    └─ User-specific emotional vocabulary
-   
+
    learning/hybrid_learning_log.jsonl
    └─ Append-only log of all learning exchanges
    ```
@@ -153,8 +154,7 @@ Turn 150: accumulated frequency of (love + intimacy) = 300+
    with st.sidebar.expander("✨ Glyphs Discovered This Session"):
        # Shows all discovered glyphs with symbols, emotions, keywords
    ```
-
----
+##
 
 ## Files Delivered
 
@@ -188,7 +188,8 @@ learning/
 └── hybrid_learning_log.jsonl         # Learning log
 ```
 
----
+
+##
 
 ## Key Features
 
@@ -221,14 +222,13 @@ learning/
 - JSON format for database import
 - User-scoped organization
 - Metadata tracking (source, created_at, etc.)
-
----
+##
 
 ## Performance
 
 ### Processing Overhead (Per Message)
 - Signal extraction: ~50-100ms
-- Pattern detection: ~10-20ms  
+- Pattern detection: ~10-20ms
 - Glyph generation: ~5-10ms
 - **Total: ~100-150ms** (negligible user impact)
 
@@ -241,13 +241,14 @@ learning/
 - Handles unlimited conversations
 - Pattern history grows naturally
 - Graceful degradation if threshold not met
-
----
+##
 
 ## Configuration
 
 ### Adjust Frequency Threshold
+
 ```python
+
 # In dynamic_glyph_evolution.py
 evolution = DynamicGlyphEvolution(
     min_frequency_for_glyph=300,  # Default
@@ -256,8 +257,12 @@ evolution = DynamicGlyphEvolution(
 )
 ```
 
+
+
 ### Customize Glyph Symbols
+
 ```python
+
 # In dynamic_glyph_evolution.py
 self.emotion_symbols = {
     "love": "♥",
@@ -266,8 +271,12 @@ self.emotion_symbols = {
 }
 ```
 
+
+
 ### Customize Glyph Names
+
 ```python
+
 # In dynamic_glyph_evolution.py, _create_pattern_name()
 name_map = {
     ("love", "vulnerability"): "Open-Hearted Love",
@@ -275,13 +284,15 @@ name_map = {
 }
 ```
 
----
+
+##
 
 ## Usage
 
 ### Starting the System
 
 ```bash
+
 # Verify integration
 bash verify_integration.sh
 
@@ -289,9 +300,13 @@ bash verify_integration.sh
 streamlit run main_v2.py
 
 # Select "hybrid" processing mode
+
 # Have meaningful conversations
+
 # Watch glyphs appear in sidebar!
 ```
+
+
 
 ### Accessing Glyphs Programmatically
 
@@ -316,9 +331,12 @@ processor.export_session_glyphs("output.json")
 processor.print_session_summary()
 ```
 
+
+
 ### Checking Persistent Storage
 
 ```bash
+
 # View discovered glyphs
 cat learning/conversation_glyphs.json | python -m json.tool
 
@@ -329,7 +347,8 @@ cat learning/user_overrides/user_123_lexicon.json | python -m json.tool
 tail -20 learning/hybrid_learning_log.jsonl
 ```
 
----
+
+##
 
 ## Testing & Verification
 
@@ -338,6 +357,8 @@ tail -20 learning/hybrid_learning_log.jsonl
 ```bash
 bash verify_integration.sh
 ```
+
+
 
 Checks:
 - ✅ All files exist
@@ -367,13 +388,14 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 "
 ```
 
----
+
+##
 
 ## Troubleshooting
 
 ### Issue: No Glyphs Generated
 **Cause:** Pattern frequency not reaching threshold
-**Fix:** 
+**Fix:**
 1. Have longer conversations with consistent themes
 2. Lower threshold: `min_frequency_for_glyph=50`
 3. Check `learning/hybrid_learning_log.jsonl` for activity
@@ -391,8 +413,7 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 1. Run `bash verify_integration.sh`
 2. Check all files are in root directory
 3. Verify dependencies installed
-
----
+##
 
 ## Architecture Diagram
 
@@ -443,7 +464,8 @@ print('Success!' if result['status'] == 'success' else 'Failed')
                   └──────────┘  └──────────────┘  └──────────────┘
 ```
 
----
+
+##
 
 ## What This Enables
 
@@ -464,8 +486,7 @@ print('Success!' if result['status'] == 'success' else 'Failed')
 - Emergent emotional territories
 - Glyph marketplace
 - Multi-user pattern learning
-
----
+##
 
 ## Success Indicators
 
@@ -478,8 +499,7 @@ You'll know it's working when:
 ✅ Each glyph has symbol, name, emotions, keywords
 ✅ Glyphs are user-specific
 ✅ Export button saves glyphs
-
----
+##
 
 ## Documentation
 
@@ -490,8 +510,7 @@ You'll know it's working when:
 | `DYNAMIC_GLYPH_EVOLUTION_GUIDE.md` | Complete technical reference |
 | `demo_dynamic_glyph_evolution.py` | Working example |
 | `verify_integration.sh` | Automated verification |
-
----
+##
 
 ## The Result
 
@@ -505,15 +524,17 @@ You now have a **fully functional dynamic glyph generation system** that:
 6. **Persists** glyphs for future sessions and integration
 
 This transforms Saoriverse from a static system with predefined glyphs into a **living, learning system** that grows and evolves with each conversation.
-
----
+##
 
 ## Ready to Run
 
 ```bash
 bash verify_integration.sh     # ← Run this first
 streamlit run main_v2.py        # ← Then run this
+
 # Select "hybrid" mode and start chatting!
 ```
+
+
 
 Enjoy your dynamically evolving glyph system! 🌟

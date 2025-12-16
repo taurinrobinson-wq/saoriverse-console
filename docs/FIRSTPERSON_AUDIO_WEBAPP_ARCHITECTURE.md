@@ -1,12 +1,13 @@
 # FirstPerson Audio Webapp - Architecture & Deployment Plan
 
-**Status:** Planning → Implementation  
-**Target:** firstperson.chat (Digital Ocean)  
+**Status:** Planning → Implementation
+**Target:** firstperson.chat (Digital Ocean)
 **Timeline:** 2-3 days for MVP
 
 ## Current State
 
 ### What's Running
+
 ```
 Digital Ocean VPS:
 ├── velinor.firstperson.chat (Next.js 16 + FastAPI backend)
@@ -18,6 +19,8 @@ Digital Ocean VPS:
     └── Orchestrates: velinor API + nginx-ssl
 ```
 
+
+
 ### Deployment Pattern (Proven)
 - **Container:** Docker with FastAPI + Next.js
 - **Reverse Proxy:** Nginx with Let's Encrypt SSL
@@ -27,6 +30,7 @@ Digital Ocean VPS:
 ## New Architecture: FirstPerson Audio App
 
 ### Proposed Setup
+
 ```
 firstperson.chat (NEW subdomain):
 ├── Frontend (Next.js)
@@ -55,26 +59,29 @@ firstperson.chat (NEW subdomain):
         └── Audio processing (scipy, librosa)
 ```
 
+
+
 ### Docker Compose Structure (Updated)
+
 ```yaml
 services:
   # Existing
   velinor_api:
     image: velinor_prod
     ports: [8000:8000]
-    
+
   # NEW
   firstperson_api:
     image: firstperson_api
     ports: [8001:8001]  # Internal only
     depends_on:
       - ollama
-    
+
   # Shared
   ollama:
     image: ollama/ollama
     ports: [11434:11434]  # Local only
-    
+
   # Reverse proxy (routes both domains)
   nginx_ssl:
     image: nginx:alpine
@@ -84,8 +91,12 @@ services:
       - firstperson_api
 ```
 
+
+
 ### Nginx Configuration (Updated)
+
 ```nginx
+
 # Existing
 server_name velinor.firstperson.chat;
 location / { proxy_pass http://velinor_api:8000; }
@@ -94,6 +105,8 @@ location / { proxy_pass http://velinor_api:8000; }
 server_name firstperson.chat;
 location / { proxy_pass http://firstperson_api:8001; }
 ```
+
+
 
 ## Implementation Roadmap
 
@@ -147,7 +160,9 @@ location / { proxy_pass http://firstperson_api:8001; }
 ## Code Reuse Strategy
 
 ### Python Code (Direct)
+
 ```python
+
 # Copy to firstperson_api.py
 from emotional_os.deploy.modules.audio_conversation_orchestrator import AudioConversationOrchestrator
 from emotional_os.deploy.modules.prosody_planner import ProsodyPlanner
@@ -155,8 +170,12 @@ from emotional_os.deploy.modules.nlp_init import warmup_nlp
 from firstperson import FirstPersonOrchestrator
 ```
 
+
+
 ### Architecture Pattern (Copy from Velinor)
+
 ```python
+
 # velinor_api.py structure
 FastAPI app
 ├── CORS middleware
@@ -167,10 +186,14 @@ FastAPI app
 # We'll follow exact same pattern for firstperson_api.py
 ```
 
+
+
 ## Key Endpoints
 
 ### Simple (HTTP Request/Response)
+
 ```bash
+
 # Transcribe audio
 POST /api/transcribe
 Content-Type: multipart/form-data
@@ -188,7 +211,10 @@ POST /api/synthesize
 → { audio_url: "audio.wav", prosody_markup: "<prosody...>" }
 ```
 
+
+
 ### Streaming (WebSocket)
+
 ```javascript
 // Real-time conversation
 ws.send({ type: 'transcribe_start' })
@@ -200,6 +226,8 @@ ws.send({ type: 'transcribe_end' })
 ← { type: 'response_chunk', text: '...', audio: <chunk> }
 ← { type: 'response_end' }
 ```
+
+
 
 ## Digital Ocean Setup Checklist
 
@@ -268,6 +296,8 @@ saoriverse-console/
 └── [existing files]
 ```
 
+
+
 ## Next Steps
 
 1. **Get Digital Ocean details from you:**
@@ -291,8 +321,7 @@ saoriverse-console/
    - Add error handling
 
 5. **Deploy & test**
-
----
+##
 
 **Benefits of this approach:**
 - ✅ Proper audio I/O (no Streamlit limitations)

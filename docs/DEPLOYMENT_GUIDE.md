@@ -3,33 +3,37 @@
 **Date**: December 3, 2025
 **Platform**: Railway (Streamlit)
 **Status**: Ready to Deploy
-
----
+##
 
 ## Quick Answer
 
-**Do you need to re-deploy?** 
+**Do you need to re-deploy?**
 
 ✅ **YES** - But it's a 2-minute update:
 
 1. Update Procfile (already done)
 2. Push branch to GitHub
 3. Railway auto-redeploys (or manually trigger)
-
----
+##
 
 ## What Changed
 
 ### Procfile (Updated)
 **Before:**
+
 ```
 web: python core/start.py
 ```
 
+
+
 **After:**
+
 ```
 web: streamlit run app.py
 ```
+
+
 
 That's the only deployment file change needed.
 
@@ -37,28 +41,37 @@ That's the only deployment file change needed.
 - `core/start.py` no longer exists (moved and consolidated)
 - `app.py` is now the single Streamlit entry point
 - Streamlit command is the standard way to run
-
----
+##
 
 ## Deployment Steps
 
 ### Step 1: Verify Local Build
+
 ```bash
+
 # Test that the new structure works locally
 cd /Volumes/My\ Passport\ for\ Mac/saoriverse-console
 streamlit run app.py
 
 # Should launch at http://localhost:8501
+
 # Test the UI briefly to confirm it works
 ```
 
+
+
 ### Step 2: Verify Procfile
+
 ```bash
 cat Procfile
+
 # Should show: web: streamlit run app.py
 ```
 
+
+
 ### Step 3: Commit & Push
+
 ```bash
 git add Procfile
 git commit -m "deployment: Update Procfile for reorganized structure
@@ -69,6 +82,8 @@ git commit -m "deployment: Update Procfile for reorganized structure
 
 git push origin refactor/reorganization-master
 ```
+
+
 
 ### Step 4: Deploy to Railway
 
@@ -86,10 +101,14 @@ git push origin refactor/reorganization-master
 5. Wait for deployment
 
 **Option C: Via Railway CLI**
+
 ```bash
+
 # If you have railway CLI installed
 railway deploy --branch refactor/reorganization-master
 ```
+
+
 
 ### Step 5: Verify Deployment
 1. Go to your Railway deployment URL
@@ -98,8 +117,7 @@ railway deploy --branch refactor/reorganization-master
    - Text input works
    - Response generated
    - No import errors in logs
-
----
+##
 
 ## Expected Result
 
@@ -108,8 +126,7 @@ After deployment:
 - ✅ All features work the same
 - ✅ No UI changes for users
 - ✅ Backend is cleaner (devs benefit)
-
----
+##
 
 ## No Breaking Changes
 
@@ -122,14 +139,14 @@ After deployment:
 - Cleaner code structure
 - Easier to test locally
 - Better organized modules
-
----
+##
 
 ## Rollback (If Needed)
 
 If something goes wrong:
 
 ```bash
+
 # Revert to previous deployment
 git revert HEAD
 git push origin refactor/reorganization-master
@@ -137,7 +154,8 @@ git push origin refactor/reorganization-master
 # Or manually select previous commit in Railway dashboard
 ```
 
----
+
+##
 
 ## Environment Variables
 
@@ -149,8 +167,7 @@ git push origin refactor/reorganization-master
 - `PORT` (defaults to 8501 for Streamlit)
 
 All continue to work as before.
-
----
+##
 
 ## Streamlit Config
 
@@ -161,15 +178,14 @@ The `.streamlit/config.toml` already has correct settings:
 - XSRF protection: disabled (for API access)
 
 **No changes needed** to Streamlit config.
-
----
+##
 
 ## Troubleshooting
 
 ### If deployment fails after push:
 
 **Problem**: Railway shows "module not found" errors
-**Solution**: 
+**Solution**:
 - Check Procfile has `web: streamlit run app.py`
 - Verify `requirements.txt` has all dependencies
 - Check Railway logs for specific error
@@ -185,16 +201,19 @@ The `.streamlit/config.toml` already has correct settings:
 - Compare local vs Railway environment
 - Check if any env vars are missing
 - Look at Railway logs: Project → Deployment → Logs
-
----
+##
 
 ## Testing Before/After
 
 ### Before Deployment (Local)
+
 ```bash
 streamlit run app.py
+
 # Should work fine
 ```
+
+
 
 ### After Deployment (Railway)
 1. Go to your Railway project URL
@@ -203,8 +222,7 @@ streamlit run app.py
 4. Type a test message
 5. Verify response generates
 6. Check logs for any errors
-
----
+##
 
 ## CI/CD Updates Needed
 
@@ -218,8 +236,7 @@ If you have GitHub Actions or other CI/CD:
 - `.github/workflows/deploy.yml`
 - `.github/workflows/test.yml`
 - Any scripts that reference old paths
-
----
+##
 
 ## Timeline
 
@@ -230,8 +247,7 @@ If you have GitHub Actions or other CI/CD:
 | Railway redeploy | 2-3 min | After push |
 | Verify app works | 2 min | After deploy |
 | **Total** | **~7 min** | |
-
----
+##
 
 ## Summary
 
@@ -253,8 +269,7 @@ If you have GitHub Actions or other CI/CD:
 - Developer experience
 - Maintenance ease
 - Code discoverability
-
----
+##
 
 ## Next Steps
 
@@ -262,8 +277,7 @@ If you have GitHub Actions or other CI/CD:
 2. **Update main branch** on Railway to auto-deploy
 3. **Archive old structure** (already done)
 4. **Start development** with new clean structure
-
----
+##
 
 **Ready to deploy!** The reorganization is production-ready with just the Procfile update.
 

@@ -32,11 +32,15 @@ url = "https://your-project.supabase.co"
 key = "your-anon-key"
 ```
 
+
+
 ### 3. Restart Your App
 
 ```bash
 streamlit run app.py
 ```
+
+
 
 ## Using the New Features
 
@@ -52,6 +56,8 @@ On the left sidebar, you'll see:
 ├── 💬 "Weekend plans"
 └── ➕ New Conversation                ← Start fresh
 ```
+
+
 
 ### Saving Conversations
 
@@ -69,6 +75,8 @@ You: "I've been feeling really overwhelmed lately"
        ↓
 Title: "Feeling really overwhelmed lately"
 ```
+
+
 
 You can rename it anytime by clicking ✏️
 
@@ -93,6 +101,7 @@ Each conversation stores:
 - Emotional context (for future features)
 
 Example:
+
 ```json
 {
   "id": "abc123...",
@@ -111,11 +120,13 @@ Example:
 }
 ```
 
+
+
 ## Troubleshooting
 
 ### Q: Sidebar not showing previous conversations?
 
-**A:** 
+**A:**
 1. Check "💾 Save my chats" is toggled ON
 2. Refresh the page
 3. Wait a moment for sidebar to load
@@ -148,15 +159,22 @@ Example:
 ### Testing the Feature
 
 ```bash
+
 # 1. Create test user
+
 # 2. Start conversation, check "Save my chats"
+
 # 3. Send a message
+
 # 4. Refresh page (F5)
+
 # 5. Verify conversation appears in sidebar
 
 # Check Supabase:
 SELECT * FROM conversations WHERE user_id = 'test-user';
 ```
+
+
 
 ### Monitoring
 
@@ -186,6 +204,8 @@ success, msg = manager.rename_conversation("conv-uuid", "New Title")
 success, msg = manager.delete_conversation("conv-uuid")
 ```
 
+
+
 ## Documentation
 
 For more details, see:
@@ -206,6 +226,8 @@ feat: implement persistent conversation storage with auto-naming
 - Database schema with metadata
 - Integrated into UI
 ```
+
+
 
 ## What Changed
 

@@ -7,8 +7,7 @@ The marketplace is in **constant flux** — buildings collapse, paths open, area
 - NPC reactions (static vs. reactive)
 - Glyph resonance tied to collapse events
 - First-time map introduction during collapse
-
----
+##
 
 ## Collapse Event Structure
 
@@ -21,6 +20,7 @@ The marketplace is in **constant flux** — buildings collapse, paths open, area
 ### Visual Changes
 
 #### Background Image Swap
+
 ```
 Before Collapse:   marketplace_intact.png
                    - Open stalls, clear pathways
@@ -34,9 +34,12 @@ After Collapse:    marketplace_collapsed.png
                    - Atmosphere: dust, danger, quiet
 ```
 
+
+
 **Design Note**: Matched perspective between intact/collapsed versions ensures players feel like they're in the *same space*, just transformed.
 
 #### Map Overlay Integration
+
 ```
 Sidebar Map Update:
 1. Player position marked with glowing dot
@@ -47,7 +50,8 @@ Sidebar Map Update:
 This is the FIRST TIME the map appears in gameplay.
 ```
 
----
+
+##
 
 ## NPC Reactions: Static vs. Reactive
 
@@ -66,6 +70,8 @@ You get used to it. We barely notice it now."
 
 **Subtext**: The city's collapse is now just background noise to them
 ```
+
+
 
 **Variants (Choose Based on NPC Personality)**:
 - Resigned: "Another wall falls, another path closes. We've stopped counting."
@@ -88,12 +94,13 @@ It still shakes me every time."
 **Subtext**: This NPC hasn't fully hardened; collapse still frightens them
 ```
 
+
+
 **Variants**:
 - Fearful: "I thought that was it. I thought we were finally coming down."
 - Empathetic: "Are you alright? New arrivals always find this unsettling."
 - Determined: "Another collapse means new opportunities. Stay alert."
-
----
+##
 
 ## Player Dialogue Options During Collapse
 
@@ -118,6 +125,8 @@ Option C: [Remain silent]
 - NPC reads this as: "They have some composure"
 ```
 
+
+
 ### NPC Closing Line (All Paths Converge)
 
 ```markdown
@@ -126,18 +135,19 @@ Option C: [Remain silent]
 We suggest you keep track of your surroundings.
 The only constant here is change."
 
-**Subtext**: 
+**Subtext**:
 - Collapse is opportunity, not just disaster
 - Paying attention matters
 - The city itself is the real teacher
 ```
 
+
+
 **Tone Variants**:
 - Ominous: "The city devours itself. Best not to be caught in its mouth."
 - Hopeful: "Collapse opens doors. Keep your eyes sharp for what emerges."
 - Ritualized: "The city remembers. We walk the broken paths. You will learn."
-
----
+##
 
 ## Map Appearance & First Introduction
 
@@ -145,6 +155,7 @@ The only constant here is change."
 This collapse event is the **first time the player sees the map**. It's not just a UI element — it's a world-building moment.
 
 ### Map Visual Elements
+
 ```
 ┌─────────────────────────────────────┐
 │   MARKETPLACE SECTORS               │
@@ -161,6 +172,8 @@ Legend:
 ✧ = New path opened (green, optional)
 ```
 
+
+
 ### Map Introduction Dialogue
 
 ```markdown
@@ -174,7 +187,8 @@ But here, where the dust settles — a new passage, maybe.'
 **Map appears in sidebar, persistent for rest of gameplay**
 ```
 
----
+
+##
 
 ## Collapse Effects on Gameplay
 
@@ -194,8 +208,7 @@ But here, where the dust settles — a new passage, maybe.'
 - **Before Collapse**: NPCs in one area, dialogue about that sector
 - **After Collapse**: NPCs may relocate or adopt new dialogue
 - **Trust Implications**: If player helped an NPC before collapse, that NPC remembers (trust carries forward)
-
----
+##
 
 ## Optional: Collapse Frequency & Progression
 
@@ -214,8 +227,7 @@ But here, where the dust settles — a new passage, maybe.'
 - Most NPCs barely react anymore
 - Map shows larger blocked areas
 - New paths become crucial to navigation
-
----
+##
 
 ## Implementation Checklist
 

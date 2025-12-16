@@ -6,12 +6,12 @@ The adaptive signal extractor **indirectly creates conditions for new glyphs** t
 
 1. **Expanded Lexicon** → More diverse keywords → Triggers glyph generation
 2. **New Dimensions** → New emotional patterns → Can trigger glyph creation
-
----
+##
 
 ## Architecture: How Dimensions & Glyphs Relate
 
 ### Current Architecture:
+
 ```
 Poetry Processing
     ↓
@@ -26,17 +26,19 @@ Shared Lexicon Expansion
                   New Glyphs Created
 ```
 
+
+
 ### The Gap:
 Currently, the bulk processor learns to **lexicons** but doesn't directly create **glyphs**. However, glyphs ARE created through the `GlyphGenerator` which watches for:
 - New emotional patterns
 - Frequently occurring signal combinations
 - Novel context patterns
-
----
+##
 
 ## What This Means
 
 ### Before (Limited to 8 dimensions):
+
 ```
 Poetry Input
     ↓
@@ -49,7 +51,10 @@ Lexicon grows within 8 dimensions
 Glyphs: Can only represent 8-dimension combinations
 ```
 
+
+
 ### After (18+ adaptive dimensions):
+
 ```
 Poetry Input
     ↓
@@ -65,7 +70,8 @@ Glyphs: Can NOW represent richer combinations like:
         - "Romantic Rebellion" (new glyph)
 ```
 
----
+
+##
 
 ## The Glyph System Explained
 
@@ -74,10 +80,11 @@ A **glyph** is a **semantic unit** that represents a specific emotional combinat
 
 Example glyphs in your system:
 - A symbol for "deep love"
-- A symbol for "tragic nostalgia"  
+- A symbol for "tragic nostalgia"
 - A symbol for "spiritual awakening"
 
 ### How Glyphs Are Generated:
+
 ```
 GlyphGenerator watches for:
 ├─ Emotional Patterns (recurring signal combinations)
@@ -95,7 +102,10 @@ When conditions met:
     └─ Narrative hook
 ```
 
+
+
 ### Example Glyph Creation Flow:
+
 ```
 Detect pattern: [Melancholy + Nostalgia + Memory]
     ↓
@@ -111,11 +121,13 @@ Create glyph:
     narrative_hook: "times that shaped us"
 ```
 
----
+
+##
 
 ## The Connection: Dimensions → Lexicon → Glyphs
 
 ### Before (Constrained):
+
 ```
 8 Dimensions
     ↓
@@ -126,7 +138,10 @@ Fewer unique glyphs possible
 System can represent ~50-100 glyph concepts
 ```
 
+
+
 ### After (Adaptive):
+
 ```
 18+ Dimensions
     ↓
@@ -137,11 +152,13 @@ MANY more unique glyphs possible
 System can represent 200-500+ glyph concepts
 ```
 
----
+
+##
 
 ## How Adaptive Dimensions Create Glyph Opportunities
 
 ### Step 1: Expand Dimensions
+
 ```
 discover_new_dimensions_from_corpus()
     ├─ Find "melancholic_yearning" pattern
@@ -150,48 +167,58 @@ discover_new_dimensions_from_corpus()
     └─ Now extractable as signal
 ```
 
+
+
 ### Step 2: Extract from Poetry
+
 ```
 Processing Shelley poem:
     "I ache for thee in endless night,
      The stars mock my forgotten dreams..."
-    
+
     Detects:
     ├─ Longing (keyword: "ache")
     ├─ Melancholy (keyword: "endless night")
     └─ Nostalgia (keyword: "forgotten dreams")
-    
+
     NEW: All three extracted as separate signals
     BEFORE: Only one or two would be detected
 ```
 
+
+
 ### Step 3: Learn Keywords
+
 ```
 Lexicon learns:
     "ache" → [longing, vulnerability, melancholy]
     "endless night" → [melancholy, despair, nature]
     "forgotten dreams" → [nostalgia, longing, despair]
-    
+
     Phrase learns:
     "ache for thee" → [longing, intimacy, melancholy]
     "endless night" → [melancholy, solitude, nature]
 ```
 
+
+
 ### Step 4: Enable Glyph Creation
+
 ```
 GlyphGenerator sees pattern:
     [longing + melancholy + nostalgia] appearing frequently
-    
+
     Creates NEW GLYPH:
     ├─ Symbol: [new Greek letter or symbol]
     ├─ Name: "yearning_past"
     ├─ Response: "validate the bittersweet ache of memory"
     └─ Dimensions: [longing, melancholy, nostalgia]
-    
+
     This glyph would NOT have been possible with only 8 dimensions!
 ```
 
----
+
+##
 
 ## Quantifying the Impact
 
@@ -212,8 +239,7 @@ GlyphGenerator sees pattern:
 - **Realistic unique glyphs: 200-500**
 
 **Potential increase: 4-10x more glyphs possible!**
-
----
+##
 
 ## Making It Explicit: Updating the Bulk Processor
 
@@ -222,10 +248,10 @@ Currently, the bulk processor learns to lexicons but doesn't trigger glyph creat
 ```python
 def process_text(self, text, ...):
     # ... existing code ...
-    
+
     # NEW: Track emerging patterns for glyph creation
     emotional_patterns = self._track_patterns(signals)
-    
+
     # NEW: Check if new glyphs should be created
     if hasattr(self, 'glyph_generator'):
         for pattern in emotional_patterns:
@@ -235,9 +261,10 @@ def process_text(self, text, ...):
                     stats["new_glyphs_created"] += 1
 ```
 
-This would make the relationship **explicit and automatic**.
 
----
+
+This would make the relationship **explicit and automatic**.
+##
 
 ## The Bigger Picture
 
@@ -253,6 +280,7 @@ This would make the relationship **explicit and automatic**.
 - ✅ System becomes more sophisticated and nuanced
 
 ### Example Output After Enhancement:
+
 ```
 [GUTENBERG PROCESSING COMPLETE]
 Dimensions discovered: 8 base + 10 pre + 3 new = 21 total
@@ -266,7 +294,8 @@ NEW GLYPHS CREATED: 12
     └─ 9 more...
 ```
 
----
+
+##
 
 ## Your System's Evolution Path
 
@@ -291,7 +320,8 @@ Future (Full Vision)
 └─ Self-improving emotional understanding
 ```
 
----
+
+##
 
 ## Bottom Line
 

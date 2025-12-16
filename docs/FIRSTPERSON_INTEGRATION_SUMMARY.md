@@ -7,12 +7,16 @@ Your Velinor game now has **emotionally-aware NPC responses** through FirstPerso
 ## 🎯 The Integration
 
 ### Before
+
 ```
 Player: "I'm overwhelmed"
 NPC:    "I see. What would you like to do?"
 ```
 
+
+
 ### After (With FirstPerson)
+
 ```
 Player: "I'm overwhelmed"
          ↓ [FirstPerson Analysis]
@@ -22,9 +26,11 @@ Player: "I'm overwhelmed"
          └─ Intensity: 0.8 (strong emotion)
          ↓ [NPC Response Generation]
 NPC:    "I hear the weight in that. The burden you're carrying—
-         I feel it. What needs to be said about it? Sometimes 
+         I feel it. What needs to be said about it? Sometimes
          the weight lessens when we name it."
 ```
+
+
 
 ## 📊 Emotional Analysis in Action
 
@@ -60,11 +66,15 @@ NPC:    "I hear the weight in that. The burden you're carrying—
 ## 🧠 How It Works
 
 ### 1. Player Input
+
 ```
 "I'm not sure I can handle this responsibility"
 ```
 
+
+
 ### 2. FirstPerson Analysis
+
 ```python
 affect_parser.analyze_affect(input)
 → {
@@ -80,7 +90,10 @@ memory.record_turn(input, affect, theme)
 → Measures emotional trajectory
 ```
 
+
+
 ### 3. Game Engine Routes
+
 ```python
 orchestrator.process_player_action(player_input)
 → Applies emotional analysis
@@ -88,7 +101,10 @@ orchestrator.process_player_action(player_input)
 → Calls NPC dialogue generation
 ```
 
+
+
 ### 4. NPC Response
+
 ```python
 _generate_emotionally_aware_response(
     emotional_tone='heavy',
@@ -96,15 +112,20 @@ _generate_emotionally_aware_response(
     valence=-0.6,
     memory_context={...}
 )
-→ "I hear the weight in that. The path of responsibility 
+→ "I hear the weight in that. The path of responsibility
    can feel immense. What needs to be said about it?"
 ```
 
+
+
 ### 5. Display in Chat
+
 ```
-NPC: "I hear the weight in that. The path of responsibility 
+NPC: "I hear the weight in that. The path of responsibility
      can feel immense. What needs to be said about it?"
 ```
+
+
 
 ## 💎 Key Features
 
@@ -141,28 +162,37 @@ NPC: "I hear the weight in that. The path of responsibility
 ## 🎮 Example Gameplay Moments
 
 ### Moment 1: Initial Contact
+
 ```
 You:   "I don't know if I'm ready for this"
 NPC:   "I hear the uncertainty in that. That's real.
         Tell me more about what concerns you."
 ```
 
+
+
 ### Moment 2: Recurring Theme Recognition
+
 ```
 You:   "I keep coming back to my doubts"
-NPC:   "I'm hearing doubt come up again. That tells me 
+NPC:   "I'm hearing doubt come up again. That tells me
         something. What's beneath it?"
 [FirstPerson detected 'doubt' appears in turn 1, 3, 5]
 ```
 
+
+
 ### Moment 3: Emotional Shift
+
 ```
 You:   "But maybe I'm stronger than I thought"
-NPC:   "There's something to sit with there. I'm also 
-        noticing a shift in what you're saying. 
+NPC:   "There's something to sit with there. I'm also
+        noticing a shift in what you're saying.
         What's helping?"
 [FirstPerson measured: valence improved from -0.8 to +0.1]
 ```
+
+
 
 ## 📈 Impact on Player Experience
 
@@ -189,20 +219,30 @@ NPC:   "There's something to sit with there. I'm also
 ## 🚀 Ready to Play
 
 ### Quick Start
+
 ```bash
+
 # The integration is already active!
 streamlit run velinor_app.py
 
 # Game launches at http://localhost:8501
+
 # FirstPerson automatically analyzes your inputs
+
 # NPCs respond with emotional awareness
 ```
 
+
+
 ### Validating the Integration
+
 ```bash
 python3 FIRSTPERSON_INTEGRATION_TEST.py
+
 # Output shows all 5 integration tests passing ✓
 ```
+
+
 
 ## 📚 Documentation
 
@@ -251,13 +291,14 @@ Read more:
 **Your Velinor game now delivers emotionally responsive, contextually aware NPC dialogue that adapts to your emotional state in real-time.**
 
 ```
-Type any emotion → FirstPerson analyzes instantly → 
-NPC responds with personalized, emotionally-aware dialogue → 
-Conversation memory tracks themes and patterns → 
+Type any emotion → FirstPerson analyzes instantly →
+NPC responds with personalized, emotionally-aware dialogue →
+Conversation memory tracks themes and patterns →
 Your emotional journey is reflected and honored in the game
 ```
 
----
+
+##
 
 **Status: ✅ COMPLETE & READY TO PLAY**
 

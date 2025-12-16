@@ -41,14 +41,20 @@ The system now supports:
 Run the SQL migration in Supabase:
 
 ```bash
+
 # Option A: Via Supabase Dashboard
+
 # 1. Go to Supabase Console → SQL Editor
+
 # 2. Create new query
+
 # 3. Copy and run sql/conversations_table.sql
 
 # Option B: Via Supabase CLI (if installed)
 supabase db push
 ```
+
+
 
 The schema creates:
 - `conversations` table - stores full conversations with metadata
@@ -60,17 +66,22 @@ The schema creates:
 Ensure `st.secrets` contains Supabase credentials:
 
 ```yaml
+
 # .streamlit/secrets.toml
 [supabase]
 url = "https://your-project.supabase.co"
 key = "your-anon-key"
 ```
 
+
+
 ### 3. Run the Application
 
 ```bash
 streamlit run app.py
 ```
+
+
 
 ## Features
 
@@ -83,8 +94,11 @@ from emotional_os.deploy.modules.conversation_manager import generate_auto_name
 
 # Example
 title = generate_auto_name("I've been feeling anxious about work")
+
 # Result: "Feeling anxious about work"
 ```
+
+
 
 ### Managing Conversations
 
@@ -125,6 +139,8 @@ success, msg = manager.rename_conversation("conv-id-123", "New Title")
 success, msg = manager.delete_conversation("conv-id-123")
 ```
 
+
+
 ## Data Structure
 
 ### Conversation Storage Format
@@ -155,6 +171,8 @@ success, msg = manager.delete_conversation("conv-id-123")
   "archived": false
 }
 ```
+
+
 
 ## Session State Management
 
@@ -202,9 +220,13 @@ If `generate_auto_name()` returns "New Conversation":
 To migrate existing conversation history:
 
 ```python
+
 # This would require custom migration script
+
 # Contact development team for migration support
 ```
+
+
 
 ## Performance Considerations
 

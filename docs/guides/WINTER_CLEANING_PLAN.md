@@ -3,8 +3,7 @@
 ## Status: IN PROGRESS
 
 This document outlines the comprehensive reorganization of root-level Python files into appropriate directories for better project maintainability.
-
----
+##
 
 ## Analysis of Root Python Files (30 files)
 
@@ -14,8 +13,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `main_v2.py` - Primary Streamlit app entry point (~736 lines)
 
 **Action**: Keep in root. These are the application entry points.
-
----
+##
 
 ### Category 2: CORE GLYPH SYSTEM (moved to emotional_os/glyphs/) ✅ **SHIMS EXIST**
 
@@ -29,8 +27,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 
 - `glyph_generator.py` - Already a shim, leave as-is ✅
 - Move others to: `tools/glyph_testing/` or `emotional_os/glyphs/`
-
----
+##
 
 ### Category 3: GLYPH GENERATION PHASES (Legacy phase infrastructure)
 
@@ -43,8 +40,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `phase_modulator.py`
 
 **Action**: Move to `archive/phase_infrastructure/` (historical but referenced in code)
-
----
+##
 
 ### Category 4: ANALYSIS & REPORTING TOOLS
 
@@ -54,8 +50,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `evolving_glyph_integrator.py` - Glyph evolution analysis
 
 **Action**: Move to `tools/analysis/`
-
----
+##
 
 ### Category 5: DOCUMENT PROCESSING & VIEWERS
 
@@ -64,8 +59,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `docx_web_viewer.py` - Web-based DOCX viewer
 
 **Action**: Move to `tools/document_processing/` or keep in root if used frequently
-
----
+##
 
 ### Category 6: RESPONSE SYSTEM (Likely refactored into modules/)
 
@@ -76,16 +70,14 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `tone_adapters.py` - Tone adaptation
 
 **Action**: These should be imported from `emotional_os/` modularization or moved to `src/response_system/`
-
----
+##
 
 ### Category 7: RELATIONAL & MEMORY SYSTEMS
 
 - `relational_memory.py` - Relational memory implementation
 
 **Action**: Move to `src/memory_systems/` or integrate into main modules
-
----
+##
 
 ### Category 8: TESTING & DEBUGGING
 
@@ -94,8 +86,7 @@ This document outlines the comprehensive reorganization of root-level Python fil
 - `sprint5_integration.py` - Sprint integration testing
 
 **Action**: Move to `tests/integration/`
-
----
+##
 
 ## Reorganization Plan
 
@@ -112,6 +103,8 @@ archive/phase_infrastructure/
 └── phase_modulator.py
 ```
 
+
+
 ### Step 2: Consolidate Analysis Tools ✅
 
 ```
@@ -122,6 +115,8 @@ tools/analysis/
 └── evolving_glyph_integrator.py
 ```
 
+
+
 ### Step 3: Organize Document Processing ✅
 
 ```
@@ -130,6 +125,8 @@ tools/document_processing/
 ├── docx_viewer.py
 └── docx_web_viewer.py
 ```
+
+
 
 ### Step 4: Move Glyph Testing Tools ✅
 
@@ -140,6 +137,8 @@ tools/glyph_testing/
 ├── glyph_conversation_test_harness.py
 ├── glyph_effectiveness_validator.py
 ```
+
+
 
 ### Step 5: Verify and Update Imports
 
@@ -163,8 +162,7 @@ After moving all files, root will contain only:
 - Core config/build files (Makefile, pyproject.toml, etc.)
 - Markdown docs (README, CONTRIBUTING, etc.)
 - Root .json and .txt files (data/config)
-
----
+##
 
 ## Files to Keep in Root
 
@@ -200,8 +198,7 @@ After moving all files, root will contain only:
 - `Procfile`
 - `runtime.txt`
 - `railway.env.template`
-
----
+##
 
 ## Migration Checklist
 
@@ -219,8 +216,7 @@ After moving all files, root will contain only:
 - [ ] Commit changes with clear message
 - [ ] Remove moved files from root
 - [ ] Final verification
-
----
+##
 
 ## Notes
 
@@ -228,7 +224,6 @@ After moving all files, root will contain only:
 - Check if relational_memory.py has been moved to modules/
 - Verify that test scenario files are properly moved to tests/
 - Ensure backward compatibility shims are in place where needed
-
----
+##
 
 **Last Updated**: During Phase 7 - Operation Winter Cleaning

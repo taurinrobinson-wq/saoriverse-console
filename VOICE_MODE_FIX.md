@@ -3,32 +3,39 @@
 ## The Problem (Solved!)
 
 You were seeing:
+
 ```
 Voice recording unavailable - missing: faster-whisper, sounddevice
 ```
 
-**Root Cause:** The app was running with Python 3.13 instead of Python 3.12 where the audio packages are installed.
 
----
+
+**Root Cause:** The app was running with Python 3.13 instead of Python 3.12 where the audio packages are installed.
+##
 
 ## The Solution
 
 Use Python 3.12 to run the app. Choose one of these methods:
 
 ### Method 1: Command Line (Quickest)
+
 ```powershell
 py -3.12 -m streamlit run app.py
 ```
 
+
+
 ### Method 2: Use Launcher Script
+
 ```powershell
 .\run_app.ps1
 ```
 
+
+
 ### Method 3: VS Code Task
 Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
-
----
+##
 
 ## How to Verify It's Working
 
@@ -48,8 +55,7 @@ Press `Ctrl+Shift+B` and select "Streamlit: Run with Python 3.12"
    INFO:emotional_os.deploy.modules.nlp_init:spaCy import successful
    INFO:emotional_os.deploy.modules.nlp_init:spaCy model 'en_core_web_sm' loaded
    ```
-
----
+##
 
 ## What Was Created
 
@@ -60,8 +66,7 @@ New files to make this easier:
 3. **`.vscode/tasks.json`** - VS Code task configuration
 4. **`PYTHON_312_RUNTIME_GUIDE.md`** - Detailed setup guide
 5. **Enhanced diagnostics** in `app.py` sidebar
-
----
+##
 
 ## Technical Details
 
@@ -73,12 +78,12 @@ New files to make this easier:
 | **spacy** | ✅ Installed | Python 3.12 site-packages |
 | **App diagnostics** | ✅ Updated | Shows which Python version running |
 | **Launcher scripts** | ✅ Created | Easy-to-use app starters |
-
----
+##
 
 ## Command Reference
 
 ```powershell
+
 # Run with Python 3.12 (main command)
 py -3.12 -m streamlit run app.py
 
@@ -95,7 +100,8 @@ py -3.12 --version
 py -3.12 -m spacy download en_core_web_sm
 ```
 
----
+
+##
 
 ## How This Works
 
@@ -123,7 +129,8 @@ Streamlit App Launches:
   ✓ All audio features work
 ```
 
----
+
+##
 
 ## Troubleshooting
 
@@ -140,24 +147,32 @@ Streamlit App Launches:
 ### Port 8501 already in use?
 
 Use alternate port:
+
 ```powershell
 py -3.12 -m streamlit run app.py --server.port 8502
 ```
 
+
+
 ### Still getting import errors?
 
 Verify packages are installed in Python 3.12:
+
 ```powershell
 py -3.12 -m pip list | grep faster-whisper
 py -3.12 -m pip list | grep sounddevice
 ```
 
+
+
 If missing, reinstall:
+
 ```powershell
 py -3.12 -m pip install faster-whisper sounddevice
 ```
 
----
+
+##
 
 ## Summary
 

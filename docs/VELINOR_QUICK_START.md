@@ -3,13 +3,17 @@
 ## Installation (Quick)
 
 ### macOS/Linux
+
 ```bash
 bash setup.sh
 source venv/bin/activate
 bash run.sh
 ```
 
+
+
 ### Windows
+
 ```cmd
 python -m venv venv
 venv\Scripts\activate.bat
@@ -17,9 +21,10 @@ pip install streamlit pillow
 streamlit run velinor_app.py
 ```
 
-The game will open at: **http://localhost:8501**
 
----
+
+The game will open at: **http://localhost:8501**
+##
 
 ## What's New
 
@@ -45,8 +50,7 @@ Your graphics files are fully integrated:
 - **Save/Load system** with timestamped saves
 - **Multiplayer support** with player customization
 - **Responsive layout** - main story area + sidebar stats
-
----
+##
 
 ## How to Play
 
@@ -67,8 +71,7 @@ Your graphics files are fully integrated:
 | Load game | Menu → Save/Load → Load |
 | New game | Menu → Settings → Start New Game |
 | Multiplayer | Menu → Settings → Enable, set player names |
-
----
+##
 
 ## File Structure
 
@@ -111,7 +114,8 @@ saoriverse-console/
     └── TWINE_IMPLEMENTATION_COMPLETE.md
 ```
 
----
+
+##
 
 ## Creating Custom Stories
 
@@ -123,6 +127,7 @@ saoriverse-console/
 5. Update story path in `velinor_app.py`
 
 ### Option 2: Programmatically
+
 ```python
 from velinor.engine import StoryBuilder
 
@@ -133,7 +138,10 @@ story.add_choice("start", "Move forward", "walk")
 story.export_json("my_story.json")
 ```
 
+
+
 ### Story Markup Syntax
+
 ```
 {background: location}    # Set background image
 {npc: NPCName}           # NPC is speaking
@@ -143,51 +151,67 @@ story.export_json("my_story.json")
 [[Choice (Skill, DC N)->passage]]  # Skill check choice
 ```
 
----
+
+##
 
 ## Troubleshooting
 
 ### "ModuleNotFoundError: No module named 'velinor'"
 **Fix:** Run from project root:
+
 ```bash
 cd /path/to/saoriverse-console
 streamlit run velinor_app.py
 ```
 
+
+
 ### Images not loading
 **Check paths:**
+
 ```bash
 ls velinor/backgrounds/    # Should see 15+ images
 ls velinor/npcs/           # Should see 7+ images
 ls velinor/velinor_title_transparent.png
 ```
 
+
+
 ### Port 8501 already in use
 **Try different port:**
+
 ```bash
 streamlit run velinor_app.py --server.port 8502
 ```
 
+
+
 ### Virtual environment issues
 **Fresh start:**
+
 ```bash
 deactivate  # if in a venv
 rm -rf venv/
 bash setup.sh
 ```
 
----
+
+##
 
 ## Advanced Setup
 
 ### Conda Environment (Alternative)
+
 ```bash
 conda create -n velinor python=3.11
 conda activate velinor
 pip install streamlit pillow
 ```
 
+
+
 ### Docker (Optional)
+
 ```dockerfile
 FROM python:3.11-slim
 WORKDIR /app
@@ -196,10 +220,14 @@ RUN pip install streamlit pillow
 CMD ["streamlit", "run", "velinor_app.py"]
 ```
 
+
+
 ```bash
 docker build -t velinor .
 docker run -p 8501:8501 velinor
 ```
+
+
 
 ### Cloud Deployment
 
@@ -210,11 +238,13 @@ docker run -p 8501:8501 velinor
 4. Select `velinor_app.py`
 
 **Heroku:**
+
 ```bash
 git push heroku main
 ```
 
----
+
+##
 
 ## Stats System
 
@@ -227,8 +257,7 @@ git push heroku main
 | **Resonance** | Connection to the Tone | Find glyphs, hear echoes, understand story |
 
 All stats start at 50 (neutral) and can go 0-100.
-
----
+##
 
 ## Multiplayer
 
@@ -245,8 +274,7 @@ All stats start at 50 (neutral) and can go 0-100.
 - Responses adapt to group composition
 - See other players' choices in sidebar
 - Shared story progression
-
----
+##
 
 ## First Session Tips
 
@@ -255,8 +283,7 @@ All stats start at 50 (neutral) and can go 0-100.
 3. **Pay attention to stats** - They affect dice rolls
 4. **Save often** - Especially before major choices
 5. **Play with multiplayer** - Different story with friends
-
----
+##
 
 ## Next Steps
 
@@ -272,8 +299,7 @@ All stats start at 50 (neutral) and can go 0-100.
 3. Add quest tracking UI
 4. Create achievement system
 5. Build community features
-
----
+##
 
 ## Important Files
 
@@ -286,8 +312,7 @@ All stats start at 50 (neutral) and can go 0-100.
 | `velinor/engine/twine_adapter.py` | Story loader |
 | `velinor/engine/orchestrator.py` | Game loop |
 | `velinor/stories/sample_story.json` | Example story |
-
----
+##
 
 ## Support & Documentation
 
@@ -295,8 +320,7 @@ All stats start at 50 (neutral) and can go 0-100.
 - 🏗️ **Architecture:** `velinor/TWINE_IMPLEMENTATION_COMPLETE.md`
 - 📊 **Project Status:** `velinor/STATUS.md`
 - 🎮 **Game Overview:** `velinor/README.md`
-
----
+##
 
 ## System Requirements
 
@@ -305,8 +329,7 @@ All stats start at 50 (neutral) and can go 0-100.
 - **RAM:** 512MB minimum
 - **Disk:** 100MB for installation + saves
 - **Browser:** Any modern browser (Chrome, Firefox, Safari, Edge)
-
----
+##
 
 ## Performance Notes
 
@@ -314,20 +337,17 @@ All stats start at 50 (neutral) and can go 0-100.
 - Session state: Game state persists during session
 - Save files: Stored as JSON in `velinor/saves/`
 - Large stories: 100+ passages work fine
-
----
+##
 
 ## License
 
 [Your License Here]
+##
 
----
-
-**Created:** December 6, 2025  
-**Status:** 🟢 Ready to Play!  
+**Created:** December 6, 2025
+**Status:** 🟢 Ready to Play!
 **Version:** 1.0 - Streamlit UI Edition
-
----
+##
 
 ## Enjoy!
 

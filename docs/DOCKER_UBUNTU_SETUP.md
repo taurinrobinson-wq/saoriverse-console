@@ -1,14 +1,14 @@
 # Docker Setup & Deploy Guide for Ubuntu (DigitalOcean 161.35.227.49)
 
 This guide walks you through setting up Docker on your fresh Ubuntu installation and deploying the FirstPerson web build to your DigitalOcean droplet.
-
----
+##
 
 ## Part 1: Install Docker Desktop on Ubuntu
 
 ### Step 1a: Install Docker Engine (Foundation)
 
 ```bash
+
 # Update package index
 sudo apt update
 sudo apt upgrade -y
@@ -37,9 +37,12 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 docker --version
 ```
 
+
+
 ### Step 1b: Post-Installation Setup (Optional but Recommended)
 
 ```bash
+
 # Allow running docker without sudo
 sudo usermod -aG docker $USER
 
@@ -50,9 +53,12 @@ newgrp docker
 docker ps
 ```
 
+
+
 ### Step 1c: Start Docker Service
 
 ```bash
+
 # Enable Docker to start on boot
 sudo systemctl enable docker
 
@@ -63,11 +69,13 @@ sudo systemctl start docker
 sudo systemctl status docker
 ```
 
----
+
+##
 
 ## Part 2: Install Docker Compose (if not included)
 
 ```bash
+
 # Check if docker-compose already installed
 docker compose version
 
@@ -79,7 +87,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker compose version
 ```
 
----
+
+##
 
 ## Part 3: Prepare Your Project for Docker
 
@@ -121,6 +130,8 @@ EXPOSE 8000
 CMD ["uvicorn", "core.start:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
+
+
 #### 3b. Create `Dockerfile.frontend` (Frontend - React/Expo)
 
 ```dockerfile
@@ -145,6 +156,8 @@ EXPOSE 3000
 # Start Expo
 CMD ["npx", "expo", "start", "--web"]
 ```
+
+
 
 #### 3c. Create `docker-compose.yml`
 
@@ -204,6 +217,8 @@ networks:
     driver: bridge
 ```
 
+
+
 #### 3d. Create `.dockerignore`
 
 ```
@@ -222,13 +237,15 @@ node_modules
 .vscode
 ```
 
----
+
+##
 
 ## Part 4: Deploy to Your DigitalOcean Droplet (161.35.227.49)
 
 ### 4a: Clone Your Repository on the Droplet
 
 ```bash
+
 # SSH into your droplet
 ssh root@161.35.227.49
 
@@ -237,9 +254,12 @@ git clone https://github.com/taurinrobinson-wq/saoriverse-console.git
 cd saoriverse-console
 ```
 
+
+
 ### 4b: Configure Environment Variables
 
 ```bash
+
 # Create .env file from template
 cp .env.example .env
 
@@ -247,8 +267,12 @@ cp .env.example .env
 nano .env
 ```
 
+
+
 Add/update these variables:
+
 ```env
+
 # API Configuration
 API_HOST=0.0.0.0
 API_PORT=8000
@@ -263,9 +287,12 @@ DATABASE_URL=sqlite:///./data_local/app.db
 # Other configs as needed from your .env.example
 ```
 
+
+
 ### 4c: Build and Start Containers
 
 ```bash
+
 # Build images
 docker compose build
 
@@ -285,9 +312,12 @@ docker compose logs -f backend
 docker compose logs -f frontend
 ```
 
+
+
 ### 4d: Verify Deployment
 
 ```bash
+
 # Test backend API
 curl http://161.35.227.49:8000/health
 
@@ -298,7 +328,8 @@ curl http://161.35.227.49:3000
 docker compose ps
 ```
 
----
+
+##
 
 ## Part 5: Nginx Configuration (Reverse Proxy)
 
@@ -339,11 +370,13 @@ server {
 }
 ```
 
----
+
+##
 
 ## Part 6: Common Docker Commands
 
 ```bash
+
 # View all containers
 docker ps -a
 
@@ -381,13 +414,15 @@ docker compose exec backend bash
 docker stats
 ```
 
----
+
+##
 
 ## Part 7: Maintenance & Updates
 
 ### Update Application Code
 
 ```bash
+
 # Pull latest changes
 git pull origin main
 
@@ -398,9 +433,12 @@ docker compose build
 docker compose up -d
 ```
 
+
+
 ### View Application Logs
 
 ```bash
+
 # All services
 docker compose logs -f
 
@@ -408,9 +446,12 @@ docker compose logs -f
 docker compose logs --tail 100
 ```
 
+
+
 ### Backup Data
 
 ```bash
+
 # Backup SQLite database
 docker compose exec backend cp data_local/app.db data_local/app.db.backup
 
@@ -419,13 +460,15 @@ docker compose exec backend tar -czf /tmp/backup.tar.gz data_local/
 docker cp <container_id>:/tmp/backup.tar.gz ./backup.tar.gz
 ```
 
----
+
+##
 
 ## Part 8: Troubleshooting
 
 ### Container won't start
 
 ```bash
+
 # Check logs
 docker compose logs backend
 
@@ -434,9 +477,12 @@ docker compose down
 docker compose up --build
 ```
 
+
+
 ### Port conflicts
 
 ```bash
+
 # Check what's using port 8000
 sudo netstat -tlnp | grep 8000
 
@@ -444,9 +490,12 @@ sudo netstat -tlnp | grep 8000
 sudo kill -9 <PID>
 ```
 
+
+
 ### Network issues
 
 ```bash
+
 # Check network
 docker network ls
 docker network inspect saoriverse-console_saoriverse
@@ -456,9 +505,12 @@ docker compose down
 docker compose up -d --remove-orphans
 ```
 
+
+
 ### Out of disk space
 
 ```bash
+
 # Check disk usage
 docker system df
 
@@ -466,13 +518,15 @@ docker system df
 docker system prune -a
 ```
 
----
+
+##
 
 ## Part 9: SSL/HTTPS Setup (Optional)
 
 ### Using Let's Encrypt with Certbot
 
 ```bash
+
 # Install Certbot
 sudo apt install -y certbot python3-certbot-nginx
 
@@ -480,10 +534,12 @@ sudo apt install -y certbot python3-certbot-nginx
 sudo certbot certonly --standalone -d 161.35.227.49
 
 # Update nginx.conf with SSL
+
 # Then: docker compose restart nginx
 ```
 
----
+
+##
 
 ## Quick Reference Summary
 
@@ -497,8 +553,7 @@ sudo certbot certonly --standalone -d 161.35.227.49
 | Stop everything | `docker compose down` |
 | Test API | `curl http://161.35.227.49:8000/health` |
 | Test frontend | `curl http://161.35.227.49:3000` |
-
----
+##
 
 ## Support & Next Steps
 
