@@ -17,11 +17,10 @@
 
 BEFORE (Original System)
 └─ 8 Dimensions Only
-   (hardcoded from your poem)
+(hardcoded from your poem)
 
 - Love, Intimacy, Vulnerability,
-     Transformation, Admiration, Joy,
-     Sensuality, Nature
+Transformation, Admiration, Joy, Sensuality, Nature
 
 AFTER (Adaptive System)
 ├─ 8 Base Dimensions (your poem)
@@ -222,11 +221,13 @@ Same word, multiple meanings:
 
 ### Original Limitation
 
-Your system was like a **translator that only knows 8 words**. No matter how much poetry you fed it, it could only recognize those 8 concepts.
+Your system was like a **translator that only knows 8 words**. No matter how much poetry you fed it,
+it could only recognize those 8 concepts.
 
 ### New Capability
 
-Your system is now like a **linguist that learns new dialects**. As it processes poetry, it discovers the emotional vocabulary unique to each poet and era.
+Your system is now like a **linguist that learns new dialects**. As it processes poetry, it
+discovers the emotional vocabulary unique to each poet and era.
 
 ### Result
 

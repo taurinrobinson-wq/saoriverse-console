@@ -7,21 +7,20 @@
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Core Narrative Arc](#core-narrative-arc)
-3. [Character Relationships](#character-relationships)
-4. [Story Structure & Progression](#story-structure--progression)
-5. [Glyph System](#glyph-system)
-6. [Ending Branches](#ending-branches)
-7. [Narrative Decision Points](#narrative-decision-points)
-8. [Expansion Placeholders](#expansion-placeholders)
-9. [How to Use This Map](#how-to-use-this-map)
+1. [Overview](#overview) 2. [Core Narrative Arc](#core-narrative-arc) 3. [Character
+Relationships](#character-relationships) 4. [Story Structure &
+Progression](#story-structure--progression) 5. [Glyph System](#glyph-system) 6. [Ending
+Branches](#ending-branches) 7. [Narrative Decision Points](#narrative-decision-points) 8. [Expansion
+Placeholders](#expansion-placeholders) 9. [How to Use This Map](#how-to-use-this-map)
 ##
 
 ## Overview
 
 ### Premise
-Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velhara (formerly Saonyx), a futuristic city built on emotional infrastructure called the **Corelink system**. After a catastrophic memory fracture, players navigate a world where nature has reclaimed civilization and emotional resonance lingers in glyphs, echoes, and ruins.
+Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velhara (formerly
+Saonyx), a futuristic city built on emotional infrastructure called the **Corelink system**. After a
+catastrophic memory fracture, players navigate a world where nature has reclaimed civilization and
+emotional resonance lingers in glyphs, echoes, and ruins.
 
 ### Core Themes
 - **Friendship & Sacrifice**: The relationship between Saori and Velinor
@@ -30,10 +29,10 @@ Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velha
 - **Grief & Reconciliation**: Processing loss and finding meaning in fragments
 
 ### Gameplay Pillars
-1. **TONE System** (Hidden Stats): Trust, Observation, Narrative Presence, Empathy
-2. **NPC Sphere of Influence**: Interconnected relationship networks
-3. **Glyph Collection**: Emotional artifacts that unlock story progression
-4. **Branching Narrative**: 6 distinct endings based on player choices and resonance
+1. **TONE System** (Hidden Stats): Trust, Observation, Narrative Presence, Empathy 2. **NPC Sphere
+of Influence**: Interconnected relationship networks 3. **Glyph Collection**: Emotional artifacts
+that unlock story progression 4. **Branching Narrative**: 6 distinct endings based on player choices
+and resonance
 ##
 
 ## Core Narrative Arc
@@ -42,14 +41,14 @@ Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velha
 
 **25 Years Before Game Start:**
 
-1. **The Architects**: Saori and Velinor co-created the Corelink system to preserve emotional memory across humanity
-2. **The Philosophical Split**:
+1. **The Architects**: Saori and Velinor co-created the Corelink system to preserve emotional memory
+across humanity 2. **The Philosophical Split**:
    - **Saori's Vision**: Emotional unification - a hive mind for efficiency and stability
    - **Velinor's Vision**: Emotional autonomy - protected resonance with individuation
-3. **The Conflict**: After repeated disagreements, Saori pushes ahead with unification without Velinor's approval
-4. **The Collapse**: Conflicting emotions couldn't resolve into resonance; the system fragmented and overloaded
-5. **Deaths**: Millions died, including children too deeply fused to survive the severance
-6. **The Sacrifice**:
+3. **The Conflict**: After repeated disagreements, Saori pushes ahead with unification without
+Velinor's approval 4. **The Collapse**: Conflicting emotions couldn't resolve into resonance; the
+system fragmented and overloaded 5. **Deaths**: Millions died, including children too deeply fused
+to survive the severance 6. **The Sacrifice**:
    - Saori attempts shutdown but needs Velinor to complete the sequence
    - Velinor connects herself to the system to stabilize it
    - Saori successfully shuts down the system
@@ -113,7 +112,8 @@ Velinor is a mythic, emotionally-driven narrative game set in the ruins of Velha
 
 ### NPC Sphere of Influence System
 
-NPCs are organized in interconnected spheres. Player actions with one NPC ripple to connected NPCs based on weighted connections (0.1-1.0).
+NPCs are organized in interconnected spheres. Player actions with one NPC ripple to connected NPCs
+based on weighted connections (0.1-1.0).
 
 #### Marketplace NPCs
 
@@ -211,23 +211,17 @@ NPCs are organized in interconnected spheres. Player actions with one NPC ripple
 **Major Encounters:**
 ```json
 ```text
-[Player Arrival]
-    ↓
-[Dust Plume Choice]
+[Player Arrival] ↓ [Dust Plume Choice]
     ├─ Push forward → +Narrative Presence
     ├─ Retreat → +Wisdom
     ├─ Call out → +Empathy
     └─ Stay still → +Observation
-    ↓
-[Meet Ravi & Nima]
+↓ [Meet Ravi & Nima]
     ├─ Step toward → +Trust, +Narrative Presence
     ├─ Keep distance → +Observation, +Wisdom
     ├─ Explore stalls → +Perception, +Empathy
     └─ Freeze & observe → +Observation, +Trust
-    ↓
-[Marketplace NPCs] (rotating encounters)
-    ↓
-[Kaelen Encounter] (theft subplot)
+↓ [Marketplace NPCs] (rotating encounters) ↓ [Kaelen Encounter] (theft subplot)
 ```text
 
 
@@ -275,38 +269,29 @@ Effect: Unlocks deeper NPC resonance, reveals survivor guilt
 Each chamber represents a buried Corelink hub with corrupted emotional algorithms:
 ```json
 ```text
-[Octoglyph Sequence]
-    ↓
-1. Infrasensory Oblivion (Chamber of Delayed Echoes)
+[Octoglyph Sequence] ↓ 1. Infrasensory Oblivion (Chamber of Delayed Echoes)
    - Location: Swamp beneath stone bridge
    - Emotion: The ache before awareness
    - Puzzle: Align light and shadow
-    ↓
-2. Sensory Oblivion
+↓ 2. Sensory Oblivion
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Awareness of loss flooding senses
-    ↓
-3. Primal Oblivion
+↓ 3. Primal Oblivion
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Raw, unprocessed grief
-    ↓
-4. Dislocated Attachment
+↓ 4. Dislocated Attachment
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Love and fear coexisting
-    ↓
-5. Preemptive Severance
+↓ 5. Preemptive Severance
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Cutting ties before being cut
-    ↓
-6. Interruptive Restraint
+↓ 6. Interruptive Restraint
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Holding back instead of acting
-    ↓
-7. Held Ache
+↓ 7. Held Ache
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Carrying pain without collapse
-    ↓
-8. Hopeful Transmission
+↓ 8. Hopeful Transmission
    - [PLACEHOLDER FOR LOCATION]
    - Emotion: Transmuting ache into meaning
 ```text
@@ -379,11 +364,8 @@ Glyphs are emotional artifacts scattered after Velinor's sacrifice. They serve a
 **Fusion:**
 ```text
 ```text
-Sorrow + Remembrance + Legacy
-    ↓
-[Chamber of Echoed Memory]
-    ↓
-Tear of Integration (triangle with single tear)
+Sorrow + Remembrance + Legacy ↓ [Chamber of Echoed Memory] ↓ Tear of Integration (triangle with
+single tear)
 ```text
 
 
@@ -435,15 +417,14 @@ Void Octagon (stop-sign with void center)
 
 ## Ending Branches
 
-All 6 endings are **ambiguous** - no "good" ending exists. Every path honors something while destroying something else.
+All 6 endings are **ambiguous** - no "good" ending exists. Every path honors something while
+destroying something else.
 
 ### Ending Requirements
 
-Based on:
-1. **TONE Stats** (accumulated throughout game)
-2. **Glyphs Collected** (especially unified glyphs)
-3. **Final Dialogue Choice** (emotional lever)
-4. **NPC Resonance Profile** (relationship networks)
+Based on: 1. **TONE Stats** (accumulated throughout game) 2. **Glyphs Collected** (especially
+unified glyphs) 3. **Final Dialogue Choice** (emotional lever) 4. **NPC Resonance Profile**
+(relationship networks)
 
 ### The Six Endings
 
@@ -457,13 +438,9 @@ Based on:
 **Resolution:**
 ```javascript
 ```text
-Velinor: "Then let it be done. Let memory be fused."
-Saori: "I'll carry it this time. All of it."
-    ↓
-System restarts successfully
-    ↓
-Velinor restored, but emotional autonomy compromised
-Saori's guilt eased, but collapse risk remains
+Velinor: "Then let it be done. Let memory be fused." Saori: "I'll carry it this time. All of it." ↓
+System restarts successfully ↓ Velinor restored, but emotional autonomy compromised Saori's guilt
+eased, but collapse risk remains
 ```text
 
 
@@ -525,13 +502,9 @@ Emotional autonomy preserved
 **Resolution:**
 ```text
 ```text
-Velinor: "You see it now. The fracture. The cost. The truth."
-Saori: "I tried to fix it. I tried to fix her."
-    ↓
-Upload interrupted, system destabilizes
-    ↓
-Truth unfiltered: Cataclysm details revealed to all
-Collapse embraced as necessary ending
+Velinor: "You see it now. The fracture. The cost. The truth." Saori: "I tried to fix it. I tried to
+fix her." ↓ Upload interrupted, system destabilizes ↓ Truth unfiltered: Cataclysm details revealed
+to all Collapse embraced as necessary ending
 ```text
 
 
@@ -591,14 +564,9 @@ Future generations start fresh
 **Resolution:**
 ```text
 ```text
-Velinor: "You kept what mattered. Not for the system. For yourself."
-Saori: "Then let the rest collapse. But let those memories endure."
-    ↓
-System partially restarts
-    ↓
-Velinor remains fragmented
-Saori remains guilty
-Some memories preserved, others lost
+Velinor: "You kept what mattered. Not for the system. For yourself." Saori: "Then let the rest
+collapse. But let those memories endure." ↓ System partially restarts ↓ Velinor remains fragmented
+Saori remains guilty Some memories preserved, others lost
 ```text
 
 
@@ -919,36 +887,29 @@ These choices accumulate TONE stats without major branching:
 ### For Writers & Narrative Designers
 
 **Adding New Content:**
-1. Identify the appropriate section (Character, Quest, Chamber, etc.)
-2. Use placeholder format: `[ ]` for incomplete items
-3. Maintain consistent naming conventions
-4. Update related sections (e.g., new NPC requires sphere connections)
+1. Identify the appropriate section (Character, Quest, Chamber, etc.) 2. Use placeholder format: `[
+]` for incomplete items 3. Maintain consistent naming conventions 4. Update related sections (e.g.,
+new NPC requires sphere connections)
 
 **Expanding Existing Content:**
-1. Find `[PLACEHOLDER]` or `[TBD]` markers
-2. Replace with detailed content maintaining established tone
-3. Ensure new content integrates with existing decision points
-4. Update consequences in related sections
+1. Find `[PLACEHOLDER]` or `[TBD]` markers 2. Replace with detailed content maintaining established
+tone 3. Ensure new content integrates with existing decision points 4. Update consequences in
+related sections
 
 **Tracking Branches:**
-1. Use decision point structure for all major choices
-2. Document TONE stat impacts
-3. Map NPC sphere ripples
-4. Note ending availability changes
+1. Use decision point structure for all major choices 2. Document TONE stat impacts 3. Map NPC
+sphere ripples 4. Note ending availability changes
 
 ### For Developers
 
 **Implementing Mechanics:**
-1. TONE stats are always hidden from player
-2. Use weighted connections (0.1-1.0) for NPC ripples
-3. Track glyph collection in persistent player state
-4. Gate endings based on stat thresholds AND player actions
+1. TONE stats are always hidden from player 2. Use weighted connections (0.1-1.0) for NPC ripples 3.
+Track glyph collection in persistent player state 4. Gate endings based on stat thresholds AND
+player actions
 
 **Quest Implementation:**
-1. Each choice node should log stat changes
-2. NPC reactions should pull from sphere connection data
-3. Glyph chambers are puzzle-based, not combat-based
-4. Final chamber checks both stats and choices
+1. Each choice node should log stat changes 2. NPC reactions should pull from sphere connection data
+3. Glyph chambers are puzzle-based, not combat-based 4. Final chamber checks both stats and choices
 
 **Testing Checklist:**
 - [ ] All 6 endings reachable from different stat profiles
@@ -960,10 +921,10 @@ These choices accumulate TONE stats without major branching:
 ### For Artists & Designers
 
 **Visual Priorities:**
-1. **Character Designs**: 10 marketplace NPCs + Saori + Velinor (young & aged)
-2. **Environments**: Marketplace, biomes, 9+ glyph chambers, final chamber
-3. **Glyphs**: Visual designs for 70+ glyphs, triglyph symbols, octoglyph symbols
-4. **UI Elements**: Journal, map with red X marks, console interfaces
+1. **Character Designs**: 10 marketplace NPCs + Saori + Velinor (young & aged) 2. **Environments**:
+Marketplace, biomes, 9+ glyph chambers, final chamber 3. **Glyphs**: Visual designs for 70+ glyphs,
+triglyph symbols, octoglyph symbols 4. **UI Elements**: Journal, map with red X marks, console
+interfaces
 
 **Tone Guide:**
 - Ruins: Nature-reclaimed, bioluminescent details
@@ -974,18 +935,15 @@ These choices accumulate TONE stats without major branching:
 ### For Project Managers
 
 **Milestone Tracking:**
-1. **Act 1 Complete**: Marketplace NPCs, basic exploration, journal system
-2. **Act 2 Complete**: All biomes accessible, triglyph chamber functional, side quests
-3. **Act 3 Complete**: All 8 octoglyph chambers, NPC sphere system fully reactive
-4. **Act 4 Complete**: Final chamber, all 6 endings, survivor reactions
+1. **Act 1 Complete**: Marketplace NPCs, basic exploration, journal system 2. **Act 2 Complete**:
+All biomes accessible, triglyph chamber functional, side quests 3. **Act 3 Complete**: All 8
+octoglyph chambers, NPC sphere system fully reactive 4. **Act 4 Complete**: Final chamber, all 6
+endings, survivor reactions
 
 **Priority Order:**
-1. Core narrative arc (Saori & Velinor)
-2. TONE stat system implementation
-3. Primary NPCs (Ravi, Nima, Kaelen, Saori, Velinor)
-4. Glyph chamber mechanics
-5. Ending branches
-6. Expansion content (as time allows)
+1. Core narrative arc (Saori & Velinor) 2. TONE stat system implementation 3. Primary NPCs (Ravi,
+Nima, Kaelen, Saori, Velinor) 4. Glyph chamber mechanics 5. Ending branches 6. Expansion content (as
+time allows)
 
 ### Updating This Document
 
