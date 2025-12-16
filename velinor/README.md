@@ -1,3 +1,20 @@
+Velinor resonance engine
+------------------------
+
+This folder contains a small, testable resonance engine prototype used to map
+player `tone` vectors into NPC `remnants` updates. Files added:
+
+- `data/npc_profiles.json` — example NPC profiles with initial remnants.
+- `data/influence_map.json` — simple mapping from tone dimensions to remnants.
+- `engine/resonance.py` — implementation with `apply_tone_to_remnants`, `apply_tone_to_all_npcs`, and `simulate_encounter`.
+- `tests/test_resonance.py` — pytest unit tests.
+
+Run the tests with:
+
+```bash
+pytest -q velinor/tests/test_resonance.py
+```
+
 # 🎮 Velinor: Remnants of the Tone
 
 A text-based narrative game with emotional resonance, dice mechanics, and multiplayer support.
@@ -108,6 +125,7 @@ You emerge into the Market District...
 ```
 
 **Syntax:**
+
 - `[[text->target]]` - Choice link
 - `{background: name}` - Change background image
 - `{npc: Name}` - NPC speaking
@@ -117,6 +135,7 @@ You emerge into the Market District...
 ### Story Structure
 
 Current sample story includes:
+
 - **Market District** - Opening scene with Keeper NPC
 - **Monument Encounters** - Skill check choices (Courage, Wisdom, Empathy)
 - **Branching Paths** - Multiple routes through story
@@ -148,6 +167,7 @@ See `velinor/TWINE_INTEGRATION_GUIDE.md` for complete markup reference.
 - **Success/Failure Routing** - Story branches based on roll
 
 Example:
+
 ```
 Player chooses: "Persuade the guard"
 DC: 12, Player Courage: +3
@@ -176,11 +196,13 @@ Roll: 14 + 3 = 17 ✅ Success
 ### Example
 
 **Solo Mode:**
+
 ```
 NPC: "You steady yourself, blade in hand."
 ```
 
 **Multiplayer Mode:**
+
 ```
 NPC: "Together, your courage strengthens. The mist bends 
      to your collective will."
@@ -191,6 +213,7 @@ NPC: "Together, your courage strengthens. The mist bends
 ## Integration with FirstPerson Orchestrator
 
 When FirstPerson is available:
+
 - **Dynamic Dialogue** - NPCs generate fresh responses each turn
 - **Affect Parsing** - Understand player emotional state
 - **Clarifying Questions** - Companionable follow-ups
@@ -301,6 +324,7 @@ state = orchestrator.load_game("saves/game_001.json")
 ### Twine JSON Format
 
 Velinor loads Twine 2 JSON export format:
+
 ```json
 {
   "name": "Story Title",
@@ -350,8 +374,8 @@ Velinor loads Twine 2 JSON export format:
 
 ## Support & Resources
 
-- **Twine 2**: https://twinery.org/
-- **SugarCube Manual**: https://www.motoslave.net/sugarcube/2/docs/
+- **Twine 2**: <https://twinery.org/>
+- **SugarCube Manual**: <https://www.motoslave.net/sugarcube/2/docs/>
 - **Game Design**: See `/velinor/markdowngameinstructions/`
 
 ---
