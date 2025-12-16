@@ -12,7 +12,9 @@ When you increase a TONE stat (courage, empathy, etc.), it automatically ripples
 
 ### REMNANTS Traits (What NPCs Are Made Of)
 
-Each NPC has 8 personality traits, each ranging from 0.0 (absent) to 1.0 (dominant):
+Each NPC has 8 personality traits, each ranging from **0.1 (recessive) to 0.9 (dominant)**:
+
+No trait ever reaches absolute extremes (0.0 or 1.0) — this preserves nuance and ensures room for growth/decline.
 
 | Trait | Meaning | Example |
 |-------|---------|---------|
@@ -493,10 +495,10 @@ Player reaches extreme TONE (e.g., very bold, very unempathetic) → Some NPCs c
 ## Technical Specs
 
 ### REMNANTS Value Range
-- Minimum: 0.0 (trait absent)
-- Maximum: 1.0 (trait dominant)
+- Minimum: 0.1 (trait recessive but never absent)
+- Maximum: 0.9 (trait dominant but never absolute)
 - Change per choice: typically 0.05 to 0.25
-- Clamped after each update (no overflow)
+- Clamped after each update (enforced to stay in [0.1, 0.9])
 
 ### Correlation Weights
 - Direct TONE effect: 1:1 (TONE change = REMNANTS change)

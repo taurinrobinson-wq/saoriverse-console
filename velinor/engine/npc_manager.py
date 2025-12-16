@@ -52,7 +52,7 @@ class NPCProfile:
         self._validate_traits()
     
     def _validate_traits(self):
-        """Ensure all 8 REMNANTS traits are present and in valid range."""
+        """Ensure all 8 REMNANTS traits are present and in valid range [0.1, 0.9]."""
         required = {"resolve", "empathy", "memory", "nuance", "authority", "need", "trust", "skepticism"}
         present = set(self.remnants.keys())
         
@@ -60,12 +60,12 @@ class NPCProfile:
             raise ValueError(f"NPC {self.name} missing traits: {required - present}")
         
         for trait, value in self.remnants.items():
-            if not 0.0 <= value <= 1.0:
-                raise ValueError(f"{self.name}.{trait} = {value} out of range [0.0, 1.0]")
+            if not 0.1 <= value <= 0.9:
+                raise ValueError(f"{self.name}.{trait} = {value} out of range [0.1, 0.9]")
     
     def adjust_trait(self, trait: str, delta: float) -> None:
         """
-        Adjust a single trait by delta, clamping to [0.0, 1.0].
+        Adjust a single trait by delta, clamping to [0.1, 0.9].
         
         Args:
             trait: trait name, e.g. "resolve"
@@ -74,7 +74,7 @@ class NPCProfile:
         if trait not in self.remnants:
             raise ValueError(f"Unknown trait: {trait}")
         
-        self.remnants[trait] = max(0.0, min(1.0, self.remnants[trait] + delta))
+        self.remnants[trait] = max(0.1, min(0.9, self.remnants[trait] + delta))
     
     def copy(self) -> 'NPCProfile':
         """Return a deep copy of this profile."""
@@ -284,7 +284,7 @@ def create_marketplace_npcs() -> List[NPCProfile]:
             "authority": 0.3,
             "need": 0.7,
             "trust": 0.2,
-            "skepticism": 0.9
+            "skepticism": 0.8       # capped at 0.8, was 0.9
         }),
         
         # Tovren: Practical, distrustful, values observation over dreaming
@@ -327,7 +327,7 @@ def create_marketplace_npcs() -> List[NPCProfile]:
         NPCProfile("Mariel", {
             "resolve": 0.6,
             "empathy": 0.8,
-            "memory": 0.9,
+            "memory": 0.8,         # capped at 0.8, was 0.9
             "nuance": 0.7,
             "authority": 0.5,
             "need": 0.4,
@@ -351,12 +351,12 @@ def create_marketplace_npcs() -> List[NPCProfile]:
         NPCProfile("Drossel", {
             "resolve": 0.8,       # Firm in his convictions, steady as leader
             "empathy": 0.2,       # Appears caring but internally cold
-            "memory": 0.9,        # Sharp recall of betrayals, grudges
-            "nuance": 0.9,        # Master manipulator, reads subtle cues
-            "authority": 0.9,     # Commands gang with iron presence
+            "memory": 0.8,        # capped at 0.8, was 0.9
+            "nuance": 0.8,        # capped at 0.8, was 0.9
+            "authority": 0.8,     # capped at 0.8, was 0.9
             "need": 0.3,          # Self-sufficient, relies on no one
             "trust": 0.1,         # Trusts no one, distrusts by default
-            "skepticism": 0.95    # Extreme distrust, sees threats everywhere
+            "skepticism": 0.9     # High distrust, sees threats everywhere
         })
     ]
     
