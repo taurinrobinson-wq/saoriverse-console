@@ -377,3 +377,13 @@ if __name__ == "__main__":
     velinor_story = build_velinor_story()
     velinor_story.export_json("velinor/stories/sample_story.json")
     print("[OK] Story exported to sample_story.json")
+    
+    # Export NPC REMNANTS state if REMNANTS is enabled
+    if velinor_story.enable_remnants and velinor_story.npc_manager:
+        # Simulate story choices to track NPC evolution
+        simulation = velinor_story.simulate_npc_evolution()
+        print(f"[OK] NPC evolution simulated: {simulation['total_choices']} choices, {simulation['npc_count']} NPCs")
+        
+        # Export NPC state
+        velinor_story.export_npc_state("velinor/stories/npc_state.json")
+        print("[OK] NPC state exported to npc_state.json")

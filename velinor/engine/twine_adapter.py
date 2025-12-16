@@ -12,6 +12,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 import random
 
+# Import NPC manager for REMNANTS system integration
+try:
+    from velinor.engine.npc_manager import NPCManager, create_marketplace_npcs, create_marketplace_influence_map
+except ImportError:
+    # Fallback if npc_manager not available
+    NPCManager = None
+
 
 class StoryNodeType(Enum):
     """Types of narrative nodes in Twine story."""
@@ -423,9 +430,9 @@ class TwineGameSession:
 
 
 class StoryBuilder:
-    """Helper to programmatically build Twine stories."""
+    """Helper to programmatically build Twine stories with REMNANTS NPC system."""
     
-    def __init__(self, story_title: str):
+    def __init__(self, story_title: str, enable_remnants: bool = True):
         self.story_data = {
             'name': story_title,
             'startnode': None,
@@ -433,6 +440,22 @@ class StoryBuilder:
         }
         self.next_pid = 1
         self.passage_map = {}
+        
+        # REMNANTS system integration
+        self.enable_remnants = enable_remnants and NPCManager is not None
+        self.npc_manager: Optional[NPCManager] = None
+        if self.enable_remnants:
+            self.npc_manager = NPCManager()
+            # Initialize marketplace NPCs and influence map
+            npcs = create_marketplace_npcs()
+            self.npc_manager.add_npcs_batch(npcs)
+            influence_map = create_marketplace_influence_map()
+            for from_npc, ripples in influence_map.items():
+                for to_npc, ripple_value in ripples.items():
+                    self.npc_manager.set_influence(from_npc, to_npc, ripple_value)
+        
+        # Track choices for REMNANTS simulation
+        self.choice_sequence: List[Dict[str, float]] = []
     
     def add_passage(
         self,
@@ -525,6 +548,10 @@ class StoryBuilder:
                 
                 passage['choices'].append(choice)
                 
+                # Track for REMNANTS simulation
+                if self.enable_remnants and (tone_effects or npc_resonance):
+                    self.choice_sequence.append(tone_effects or {})
+                
                 # Also append classic Twine markup for backward compatibility
                 choice_markup = f"[[{choice_text}->{to_passage_name}]]"
                 passage['text'] += f"\n\n{choice_markup}"
@@ -534,3 +561,34 @@ class StoryBuilder:
         """Export story as JSON."""
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(self.story_data, f, indent=2)
+    
+    def simulate_npc_evolution(self) -> Dict[str, Any]:
+        """
+        Simulate how NPCs evolve through the sequence of player choices.
+        Uses TONE → REMNANTS correlations.
+        
+        Returns:
+            Simulation result with NPC state history
+        """
+        if not self.enable_remnants or not self.npc_manager:
+            return {"error": "REMNANTS system not enabled"}
+        
+        # Run simulation
+        history = self.npc_manager.simulate_encounters(self.choice_sequence)
+        
+        return {
+            "enabled": True,
+            "total_choices": len(self.choice_sequence),
+            "npc_count": len(self.npc_manager.npcs),
+            "final_state": self.npc_manager.get_all_npc_states(),
+            "evolution_history": history
+        }
+    
+    def export_npc_state(self, output_path: str) -> None:
+        """Export NPC REMNANTS state to JSON."""
+        if not self.enable_remnants or not self.npc_manager:
+            return
+        
+        npc_data = self.npc_manager.export_state()
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(npc_data, f, indent=2)

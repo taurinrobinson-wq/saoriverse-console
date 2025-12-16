@@ -29,6 +29,7 @@ class StoryBuilder:
         self.story_dir = Path(story_dir)
         self.definitions_file = self.story_dir / "story_definitions.py"
         self.output_file = self.story_dir / "sample_story.json"
+        self.npc_state_file = self.story_dir / "npc_state.json"
         self.validator_file = self.story_dir / "story_validator.py"
         self.markdown_file = Path("velinor/story_map_velinor.md")
     
@@ -53,11 +54,36 @@ class StoryBuilder:
                 return False
             
             print(result.stdout)
+            
+            # Check if NPC state was generated
+            if self.npc_state_file.exists():
+                print(f"   NPC state: {self.npc_state_file}")
+                self._show_npc_summary()
+            
             return True
         
         except Exception as e:
             print(f"❌ Error: {e}")
             return False
+    
+    def _show_npc_summary(self) -> None:
+        """Display summary of NPC REMNANTS state."""
+        try:
+            with open(self.npc_state_file, 'r') as f:
+                npc_data = json.load(f)
+            
+            if 'npc_profiles' in npc_data:
+                print("\n🧑‍🤝‍🧑 NPC REMNANTS Evolution:")
+                profiles = npc_data['npc_profiles']
+                for npc_name, npc_info in profiles.items():
+                    remnants = npc_info.get('remnants', {})
+                    # Show top 3 traits
+                    sorted_traits = sorted(remnants.items(), key=lambda x: x[1], reverse=True)[:3]
+                    traits_str = ", ".join([f"{t[0]}: {t[1]:.2f}" for t in sorted_traits])
+                    print(f"   • {npc_name}: {traits_str}")
+        except Exception as e:
+            # Silently fail if can't show summary
+            pass
     
     def validate(self) -> bool:
         """Validate generated story JSON."""
