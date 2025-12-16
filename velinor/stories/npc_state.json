@@ -9,8 +9,8 @@
         "nuance": 0.7999999999999999,
         "authority": 0.19999999999999998,
         "need": 1.0,
-        "trust": 1.0,
-        "skepticism": 0.0
+        "trust": 0.0,
+        "skepticism": 1.0
       }
     },
     "Nima": {
@@ -22,8 +22,8 @@
         "nuance": 0.7999999999999999,
         "authority": 0.19999999999999998,
         "need": 1.0,
-        "trust": 0.6800000000000003,
-        "skepticism": 0.4199999999999997
+        "trust": 1.0,
+        "skepticism": 0.0
       }
     },
     "Kaelen": {
@@ -35,8 +35,8 @@
         "nuance": 0.7999999999999999,
         "authority": 0.19999999999999998,
         "need": 1.0,
-        "trust": 0.0,
-        "skepticism": 1.0
+        "trust": 0.2,
+        "skepticism": 0.85
       }
     },
     "Tovren": {
@@ -48,8 +48,8 @@
         "nuance": 0.7,
         "authority": 0.19999999999999998,
         "need": 1.0,
-        "trust": 0.4,
-        "skepticism": 0.7
+        "trust": 0.0,
+        "skepticism": 1.0
       }
     },
     "Sera": {
@@ -100,6 +100,19 @@
         "nuance": 0.7999999999999999,
         "authority": 0.19999999999999998,
         "need": 1.0,
+        "trust": 0.0,
+        "skepticism": 1.0
+      }
+    },
+    "Drossel": {
+      "name": "Drossel",
+      "remnants": {
+        "resolve": 0.5,
+        "empathy": 1.0,
+        "memory": 1.0,
+        "nuance": 0.7999999999999999,
+        "authority": 0.3500000000000001,
+        "need": 1.0,
         "trust": 1.0,
         "skepticism": 0.0
       }
@@ -118,7 +131,8 @@
     },
     "Kaelen": {
       "Tovren": -0.1,
-      "Korrin": 0.05
+      "Korrin": 0.05,
+      "Drossel": 0.2
     },
     "Tovren": {
       "Ravi": 0.05
@@ -129,6 +143,13 @@
     "Mariel": {
       "Ravi": 0.1,
       "Nima": 0.1
+    },
+    "Drossel": {
+      "Kaelen": 0.15,
+      "Korrin": -0.1,
+      "Tovren": -0.2,
+      "Ravi": -0.25,
+      "Nima": 0.05
     }
   },
   "history": [
@@ -148,8 +169,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -161,8 +182,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -174,8 +195,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -187,8 +208,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -238,6 +259,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -261,8 +295,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -274,8 +308,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -287,8 +321,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -300,8 +334,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -351,6 +385,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -374,8 +421,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -387,8 +434,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -400,8 +447,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -413,8 +460,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -464,6 +511,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -487,8 +547,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -500,8 +560,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -513,8 +573,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -526,8 +586,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -577,6 +637,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -600,8 +673,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -613,8 +686,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -626,8 +699,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -639,8 +712,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -690,6 +763,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -713,8 +799,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -726,8 +812,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -739,8 +825,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -752,8 +838,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -803,6 +889,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -826,8 +925,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -839,8 +938,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -852,8 +951,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -865,8 +964,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -916,6 +1015,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -938,8 +1050,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -951,8 +1063,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -964,8 +1076,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -977,8 +1089,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1028,6 +1140,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1051,8 +1176,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1064,8 +1189,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1077,8 +1202,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1090,8 +1215,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1141,6 +1266,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1163,8 +1301,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1176,8 +1314,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1189,8 +1327,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1202,8 +1340,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1253,6 +1391,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1276,8 +1427,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1289,8 +1440,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1302,8 +1453,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1315,8 +1466,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1366,6 +1517,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1389,8 +1553,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1402,8 +1566,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1415,8 +1579,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1428,8 +1592,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1479,6 +1643,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1502,8 +1679,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1515,8 +1692,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1528,8 +1705,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1541,8 +1718,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1592,6 +1769,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1615,8 +1805,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1628,8 +1818,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1641,8 +1831,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1654,8 +1844,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1705,6 +1895,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1727,8 +1930,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1740,8 +1943,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1753,8 +1956,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1766,8 +1969,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1817,6 +2020,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1840,8 +2056,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1853,8 +2069,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1866,8 +2082,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1879,8 +2095,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -1930,6 +2146,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -1952,8 +2181,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -1965,8 +2194,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -1978,8 +2207,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -1991,8 +2220,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -2042,6 +2271,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -2064,8 +2306,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -2077,8 +2319,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -2090,8 +2332,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -2103,8 +2345,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -2154,6 +2396,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
@@ -2177,8 +2432,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 1.0,
-            "skepticism": 0.0
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Nima": {
@@ -2190,8 +2445,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.6800000000000003,
-            "skepticism": 0.4199999999999997
+            "trust": 1.0,
+            "skepticism": 0.0
           }
         },
         "Kaelen": {
@@ -2203,8 +2458,8 @@
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.0,
-            "skepticism": 1.0
+            "trust": 0.2,
+            "skepticism": 0.85
           }
         },
         "Tovren": {
@@ -2216,8 +2471,8 @@
             "nuance": 0.7,
             "authority": 0.19999999999999998,
             "need": 1.0,
-            "trust": 0.4,
-            "skepticism": 0.7
+            "trust": 0.0,
+            "skepticism": 1.0
           }
         },
         "Sera": {
@@ -2267,6 +2522,19 @@
             "memory": 1.0,
             "nuance": 0.7999999999999999,
             "authority": 0.19999999999999998,
+            "need": 1.0,
+            "trust": 0.0,
+            "skepticism": 1.0
+          }
+        },
+        "Drossel": {
+          "name": "Drossel",
+          "remnants": {
+            "resolve": 0.5,
+            "empathy": 1.0,
+            "memory": 1.0,
+            "nuance": 0.7999999999999999,
+            "authority": 0.3500000000000001,
             "need": 1.0,
             "trust": 1.0,
             "skepticism": 0.0
