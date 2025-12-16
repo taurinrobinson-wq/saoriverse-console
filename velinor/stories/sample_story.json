@@ -5,7 +5,7 @@
     {
       "pid": "1",
       "name": "market_arrival",
-      "text": "You emerge from the collapsed underpass into what was once the Market District of Velhara. The air is thick with silence\u2014not the silence of absence, but of waiting. Crumbling vendor stalls line the plaza, their surfaces worn by time and weather. Vines creep up shattered display windows, and bioluminescent fungi cast a faint glow on the stone.\n\nA dust plume hangs in the air ahead. Two figures move within it.\n\n[[Push forward boldly->meet_ravi_nima]]\n\n[[Retreat toward the underpass (safer)->meet_ravi_nima]]\n\n[[Call out to them->meet_ravi_nima]]\n\n[[Stay still and observe->meet_ravi_nima]]",
+      "text": "{background: market_ruins}\n\nYou emerge from the collapsed underpass into what was once the Market District of Velhara. The air is thick with silence\u2014not the silence of absence, but of waiting. Crumbling vendor stalls line the plaza, their surfaces worn by time and weather. Vines creep up shattered display windows, and bioluminescent fungi cast a faint glow on the stone.\n\nA dust plume hangs in the air ahead. Two figures move within it.\n\n[[Push forward boldly->meet_ravi_nima]]\n\n[[Retreat toward the underpass (safer)->meet_ravi_nima]]\n\n[[Call out to them->meet_ravi_nima]]\n\n[[Stay still and observe->meet_ravi_nima]]",
       "tags": [
         "marketplace",
         "act1"
@@ -17,12 +17,16 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": []
+      }
     },
     {
       "pid": "2",
       "name": "meet_ravi_nima",
-      "text": "The dust clears. Two figures emerge:\n\nRavi - tall, warm-eyed, with earth-toned robes and the bearing of someone who once led.\nNima - sharp-gazed, braided hair, layers of practical cloth. She watches you carefully.\n\n\"You carry something,\" Nima says, her voice like wind through ruins. \"A resonance. We felt it.\"\n\nRavi steps forward, less cautious. \"Welcome. The Market District doesn't often receive travelers anymore. What brings you here?\"\n\n[[Step toward them openly->ravi_dialogue]]\n\n[[Keep distance and ask questions first->nima_dialogue]]\n\n[[Ask what they mean by 'resonance'->ravi_nima_resonance]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nThe dust clears. Two figures emerge:\n\nRavi - tall, warm-eyed, with earth-toned robes and the bearing of someone who once led.\nNima - sharp-gazed, braided hair, layers of practical cloth. She watches you carefully.\n\n\"You carry something,\" Nima says, her voice like wind through ruins. \"A resonance. We felt it.\"\n\nRavi steps forward, less cautious. \"Welcome. The Market District doesn't often receive travelers anymore. What brings you here?\"\n\n[[Step toward them openly->ravi_dialogue]]\n\n[[Keep distance and ask questions first->nima_dialogue]]\n\n[[Ask what they mean by 'resonance'->ravi_nima_resonance]]",
       "tags": [
         "marketplace",
         "act1",
@@ -35,12 +39,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "3",
       "name": "ravi_dialogue",
-      "text": "You move toward Ravi. His expression softens.\n\n\"I've learned to recognize it,\" he says. \"People who listen. People who feel the Tone beneath the silence.\"\n\nHe extends a weathered hand. \"I'm Ravi. That's Nima\u2014she's more careful than I am, but she's rarely wrong about people.\"\n\nNima nods slightly, a small gesture of acknowledgment.\n\n\"What's your name, traveler?\"\n\n[[Tell them your name->established_in_market]]\n\n[[Ask them first who they were before the collapse->ravi_backstory]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nYou move toward Ravi. His expression softens.\n\n\"I've learned to recognize it,\" he says. \"People who listen. People who feel the Tone beneath the silence.\"\n\nHe extends a weathered hand. \"I'm Ravi. That's Nima\u2014she's more careful than I am, but she's rarely wrong about people.\"\n\nNima nods slightly, a small gesture of acknowledgment.\n\n\"What's your name, traveler?\"\n\n[[Tell them your name->established_in_market]]\n\n[[Ask them first who they were before the collapse->ravi_backstory]]",
       "tags": [
         "marketplace",
         "act1",
@@ -53,12 +64,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "4",
       "name": "nima_dialogue",
-      "text": "You take a step back, measuring them both. Nima notices. She respects caution.\n\n\"Wise,\" she says quietly. \"Not everyone is.\"\n\nShe crosses her arms, not defensively\u2014more like she's settled in for a real conversation.\n\n\"I'm Nima. We've been here longer than we should have been. Looking for something, though we're not always sure what.\"\n\nRavi adds, \"The Market District used to be the heart of Velhara. Now it's just... ruins and waiting.\"\n\n[[Ask what they're looking for->nima_quest_reveal]]\n\n[[Ask about the resonance they mentioned->ravi_nima_resonance]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nYou take a step back, measuring them both. Nima notices. She respects caution.\n\n\"Wise,\" she says quietly. \"Not everyone is.\"\n\nShe crosses her arms, not defensively\u2014more like she's settled in for a real conversation.\n\n\"I'm Nima. We've been here longer than we should have been. Looking for something, though we're not always sure what.\"\n\nRavi adds, \"The Market District used to be the heart of Velhara. Now it's just... ruins and waiting.\"\n\n[[Ask what they're looking for->nima_quest_reveal]]\n\n[[Ask about the resonance they mentioned->ravi_nima_resonance]]",
       "tags": [
         "marketplace",
         "act1",
@@ -71,12 +89,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "5",
       "name": "ravi_nima_resonance",
-      "text": "Ravi and Nima exchange a glance. Some unspoken agreement passes between them.\n\n\"The Tone,\" Ravi begins. \"It was the name we gave to the emotional frequency that held the city together. Our collective voice, resonating across the Corelink system.\"\n\nNima continues, \"Most people can't feel it anymore. The system broke. But some people... they carry an echo of it. You do.\"\n\n\"It means you can hear what others can't,\" Ravi says. \"You can gather the glyphs. You might even understand what happened.\"\n\nNima adds, more cautiously: \"It also means the city will know you're here. That brings attention.\"\n\n[[Ask to learn more->established_in_market]]\n\n[[Ask what kind of attention->nima_warning]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nRavi and Nima exchange a glance. Some unspoken agreement passes between them.\n\n\"The Tone,\" Ravi begins. \"It was the name we gave to the emotional frequency that held the city together. Our collective voice, resonating across the Corelink system.\"\n\nNima continues, \"Most people can't feel it anymore. The system broke. But some people... they carry an echo of it. You do.\"\n\n\"It means you can hear what others can't,\" Ravi says. \"You can gather the glyphs. You might even understand what happened.\"\n\nNima adds, more cautiously: \"It also means the city will know you're here. That brings attention.\"\n\n[[Ask to learn more->established_in_market]]\n\n[[Ask what kind of attention->nima_warning]]",
       "tags": [
         "marketplace",
         "act1",
@@ -89,12 +114,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "6",
       "name": "nima_warning",
-      "text": "Nima's jaw tightens slightly.\n\n\"There are others who hear the Tone. Most have... different ideas about what should happen next. Some want to restore the system. Others want to destroy what's left of it. And some...\" she pauses, \"...some want to use it.\"\n\nRavi adds quietly, \"Kaelen is one of them. A thief, or so they call him. He's been taking things from people\u2014tools, fragments, things that might be glyphs.\"\n\n\"He won't touch you if you can prove you're useful to him,\" Nima says. \"But he's watching everyone new.\"\n\n[[Ask where you can find Kaelen->kaelen_location]]\n\n[[Ask if Ravi and Nima can help you->established_in_market]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nNima's jaw tightens slightly.\n\n\"There are others who hear the Tone. Most have... different ideas about what should happen next. Some want to restore the system. Others want to destroy what's left of it. And some...\" she pauses, \"...some want to use it.\"\n\nRavi adds quietly, \"Kaelen is one of them. A thief, or so they call him. He's been taking things from people\u2014tools, fragments, things that might be glyphs.\"\n\n\"He won't touch you if you can prove you're useful to him,\" Nima says. \"But he's watching everyone new.\"\n\n[[Ask where you can find Kaelen->kaelen_location]]\n\n[[Ask if Ravi and Nima can help you->established_in_market]]",
       "tags": [
         "marketplace",
         "act1",
@@ -107,12 +139,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "7",
       "name": "kaelen_location",
-      "text": "Nima says, \"The Thieves' Cache. An old underground market. We can show you the way, but you should know: going there is a choice. Once Kaelen knows you're interested, you become part of his game.\"\n\nRavi nods slowly. \"We can guide you if you want. Or we can help you prepare first.\"\n\nThe choice hangs in the market air between you.\n\n[[Go to the Thieves' Cache now->thieves_cache_entrance]]\n\n[[Ask Ravi and Nima to help you prepare->market_preparation]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nNima says, \"The Thieves' Cache. An old underground market. We can show you the way, but you should know: going there is a choice. Once Kaelen knows you're interested, you become part of his game.\"\n\nRavi nods slowly. \"We can guide you if you want. Or we can help you prepare first.\"\n\nThe choice hangs in the market air between you.\n\n[[Go to the Thieves' Cache now->thieves_cache_entrance]]\n\n[[Ask Ravi and Nima to help you prepare->market_preparation]]",
       "tags": [
         "marketplace",
         "act1",
@@ -125,12 +164,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "8",
       "name": "established_in_market",
-      "text": "Whether you told them your name or shared stories, something shifts. You're no longer just a stranger.\n\nRavi says, \"The Market District isn't safe to explore alone. But if you travel with us, or if we can vouch for you, others will be more welcoming.\"\n\n\"There are shrines deeper in,\" Nima adds. \"Places where people gather. And there are chambers\u2014old Corelink hubs that have been sealed. We think there are glyphs there.\"\n\n\"For now,\" Ravi concludes, \"you should rest. There's a shelter we know. Tomorrow, you can decide which path to take.\"\n\nThe day is ending. The bioluminescent fungi grow brighter as the sun sets beyond the ruins.\n\n[[Go to the shelter and rest->marketplace_shelter]]\n\n[[Ask to visit the shrines before nightfall->shrine_visit_evening]]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nWhether you told them your name or shared stories, something shifts. You're no longer just a stranger.\n\nRavi says, \"The Market District isn't safe to explore alone. But if you travel with us, or if we can vouch for you, others will be more welcoming.\"\n\n\"There are shrines deeper in,\" Nima adds. \"Places where people gather. And there are chambers\u2014old Corelink hubs that have been sealed. We think there are glyphs there.\"\n\n\"For now,\" Ravi concludes, \"you should rest. There's a shelter we know. Tomorrow, you can decide which path to take.\"\n\nThe day is ending. The bioluminescent fungi grow brighter as the sun sets beyond the ruins.\n\n[[Go to the shelter and rest->marketplace_shelter]]\n\n[[Ask to visit the shrines before nightfall->shrine_visit_evening]]",
       "tags": [
         "marketplace",
         "act1",
@@ -143,12 +189,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "9",
       "name": "marketplace_shelter",
-      "text": "You rest in a sheltered corner of the Market District\u2014an old merchant's vault, fortified and safe. Ravi and Nima leave you with water and dried fruit.\n\n\"Tomorrow,\" Ravi says, \"we'll show you what comes next.\"\n\nYou rest, and in your dreams, you hear the faint echo of thousands of voices, layered and distant.\n\nThe Tone.\n\n[END OF PROTOTYPE - Act 2 to follow]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: shelter_interior}\n\nYou rest in a sheltered corner of the Market District\u2014an old merchant's vault, fortified and safe. Ravi and Nima leave you with water and dried fruit.\n\n\"Tomorrow,\" Ravi says, \"we'll show you what comes next.\"\n\nYou rest, and in your dreams, you hear the faint echo of thousands of voices, layered and distant.\n\nThe Tone.\n\n[END OF PROTOTYPE - Act 2 to follow]",
       "tags": [
         "marketplace",
         "act1",
@@ -161,12 +214,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "shelter_interior",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "10",
       "name": "shrine_visit_evening",
-      "text": "Ravi nods. \"If you want to move before nightfall, we should go now.\"\n\nThe shrines await, deeper in the city...\n\n[PLACEHOLDER: Shrine encounter - Saori appears if resonance is high enough]",
+      "text": "{npc: Ravi}\n{background: shrine_ruins}\n\nRavi nods. \"If you want to move before nightfall, we should go now.\"\n\nThe shrines await, deeper in the city...\n\n[PLACEHOLDER: Shrine encounter - Saori appears if resonance is high enough]",
       "tags": [
         "marketplace",
         "act1",
@@ -179,12 +239,18 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "shrine_ruins",
+        "npcs": [
+          "Ravi"
+        ]
+      }
     },
     {
       "pid": "11",
       "name": "thieves_cache_entrance",
-      "text": "The path to the Thieves' Cache descends into older tunnels...\n\n[PLACEHOLDER: Thieves' Cache - Kaelen encounter]",
+      "text": "{npc: Kaelen}\n{background: thieves_cache}\n\nThe path to the Thieves' Cache descends into older tunnels...\n\n[PLACEHOLDER: Thieves' Cache - Kaelen encounter]",
       "tags": [
         "marketplace",
         "act1",
@@ -197,12 +263,18 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "thieves_cache",
+        "npcs": [
+          "Kaelen"
+        ]
+      }
     },
     {
       "pid": "12",
       "name": "market_preparation",
-      "text": "Ravi and Nima lead you through the Market District, showing you the lay of the land...\n\n[PLACEHOLDER: Market preparation - Learning from Ravi & Nima]",
+      "text": "{npc: Nima}\n{npc: Ravi}\n{background: market_ruins}\n\nRavi and Nima lead you through the Market District, showing you the lay of the land...\n\n[PLACEHOLDER: Market preparation - Learning from Ravi & Nima]",
       "tags": [
         "marketplace",
         "act1",
@@ -215,12 +287,19 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi",
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "13",
       "name": "nima_quest_reveal",
-      "text": "Nima's eyes distant.\n\n\"We're looking for the Corelink's heart. The system that connected everyone...\" \n\n[PLACEHOLDER: Nima's quest - What they've been searching for]",
+      "text": "{npc: Nima}\n{background: market_ruins}\n\nNima's eyes distant.\n\n\"We're looking for the Corelink's heart. The system that connected everyone...\" \n\n[PLACEHOLDER: Nima's quest - What they've been searching for]",
       "tags": [
         "marketplace",
         "act1",
@@ -233,12 +312,18 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Nima"
+        ]
+      }
     },
     {
       "pid": "14",
       "name": "ravi_backstory",
-      "text": "Ravi settles, as if preparing for a long story.\n\n\"Before the collapse, I was a teacher in the Archive...\" \n\n[PLACEHOLDER: Ravi's backstory - Before the collapse]",
+      "text": "{npc: Ravi}\n{background: market_ruins}\n\nRavi settles, as if preparing for a long story.\n\n\"Before the collapse, I was a teacher in the Archive...\" \n\n[PLACEHOLDER: Ravi's backstory - Before the collapse]",
       "tags": [
         "marketplace",
         "act1",
@@ -251,7 +336,13 @@
       "size": [
         100,
         100
-      ]
+      ],
+      "_metadata": {
+        "background": "market_ruins",
+        "npcs": [
+          "Ravi"
+        ]
+      }
     }
   ]
 }

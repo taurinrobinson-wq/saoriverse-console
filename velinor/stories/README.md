@@ -30,22 +30,22 @@ def build_velinor_story():
     
     # Scene: Market Arrival
     story.add_passage(
-        pid="1",
         name="market_arrival",
         text="""
 You emerge from the collapsed underpass into the Market District.
 The air is thick with silence—not the silence of absence, but of waiting.
         """,
         is_start=True,
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1"]
     )
     
     # Player choice
     story.add_choice(
-        from_passage="market_arrival",
-        text="Push forward boldly",
-        to_passage="meet_ravi_nima",
-        stat_effects={"narrative_presence": 0.2}
+        from_passage_name="market_arrival",
+        choice_text="Push forward boldly",
+        to_passage_name="meet_ravi_nima"
     )
     
     return story
@@ -54,17 +54,17 @@ The air is thick with silence—not the silence of absence, but of waiting.
 **Key Concepts:**
 
 - **Passages**: Individual scenes or text nodes
-  - `pid`: Unique numeric ID
   - `name`: Unique identifier (snake_case)
   - `text`: Story content (what player reads)
+  - `background`: Background/location name (e.g., "market_ruins", "temple_hall")
+  - `npcs`: List of NPCs present in this scene (e.g., `["Ravi", "Nima"]`)
   - `is_start`: Mark the first passage (only one)
   - `tags`: Organize by act, theme, NPC, etc.
 
 - **Choices**: What players can do
-  - `from_passage`: Which passage contains this choice
-  - `text`: What the player sees (e.g., "Ask about the glyphs")
-  - `to_passage`: Where the choice leads
-  - `stat_effects`: How this choice affects player stats (optional)
+  - `from_passage_name`: Which passage contains this choice
+  - `choice_text`: What the player sees (e.g., "Ask about the glyphs")
+  - `to_passage_name`: Where the choice leads
 
 ### 2. Build to JSON
 
@@ -167,7 +167,25 @@ story.add_choice(
 ```
 
 The game engine uses these to track the player's emotional arc.
+### Backgrounds and NPCs
 
+Specify what location and characters are in each scene:
+
+```python
+story.add_passage(
+    name="market_arrival",
+    text="...",
+    background="market_ruins",        # Location/visual setting
+    npcs=["Ravi", "Nima"],           # List of NPCs present
+    tags=["marketplace", "act1"]
+)
+```
+
+**Backgrounds** should match available assets in velinor-web (e.g., "market_ruins", "temple_hall", "shelter_interior")
+
+**NPCs** are character names that the game engine will render (e.g., "Ravi", "Nima", "Kaelen")
+
+Both are optional - use them to provide context to the game engine about scene composition.
 ### Organizing by Tags
 
 Use tags to organize passages:
@@ -226,12 +244,13 @@ Unlike JSON diffs, you can easily see what changed.
 
 ```python
 story.add_passage(
-    pid="15",
     name="new_scene",
     text="""
 Your new story text here.
 Multiple lines work fine.
     """,
+    background="location_name",
+    npcs=["NPC1"],
     tags=["act2"]
 )
 ```

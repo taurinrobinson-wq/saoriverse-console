@@ -439,19 +439,48 @@ class StoryBuilder:
         name: str,
         text: str,
         tags: Optional[List[str]] = None,
-        is_start: bool = False
+        is_start: bool = False,
+        background: Optional[str] = None,
+        npcs: Optional[List[str]] = None
     ) -> str:
-        """Add a passage to the story."""
+        """Add a passage to the story.
+        
+        Args:
+            name: Unique passage identifier
+            text: Story text displayed to player
+            tags: List of tags for organization
+            is_start: Whether this is the starting passage
+            background: Background/location name (e.g., "market_ruins")
+            npcs: List of NPC names present in this scene (e.g., ["Ravi", "Nima"])
+        """
         pid = str(self.next_pid)
         self.next_pid += 1
+        
+        # Build passage text with metadata
+        passage_text = text
+        
+        # Prepend background metadata if provided
+        if background:
+            passage_text = f"{{background: {background}}}\n\n{passage_text}"
+        
+        # Prepend NPC metadata if provided
+        if npcs:
+            for npc in npcs:
+                passage_text = f"{{npc: {npc}}}\n{passage_text}"
         
         passage = {
             'pid': pid,
             'name': name,
-            'text': text,
+            'text': passage_text,
             'tags': tags or [],
             'position': (0, 0),
             'size': (100, 100)
+        }
+        
+        # Store metadata separately for potential game engine use
+        passage['_metadata'] = {
+            'background': background,
+            'npcs': npcs or []
         }
         
         self.story_data['passages'].append(passage)

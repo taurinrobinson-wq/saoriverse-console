@@ -37,6 +37,7 @@ def build_velinor_story():
 
 A dust plume hangs in the air ahead. Two figures move within it.""",
         is_start=True,
+        background="market_ruins",
         tags=["marketplace", "act1"]
     )
     
@@ -73,6 +74,8 @@ Nima - sharp-gazed, braided hair, layers of practical cloth. She watches you car
 "You carry something," Nima says, her voice like wind through ruins. "A resonance. We felt it."
 
 Ravi steps forward, less cautious. "Welcome. The Market District doesn't often receive travelers anymore. What brings you here?\"""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "npc_encounter"]
     )
     
@@ -105,6 +108,8 @@ He extends a weathered hand. "I'm Ravi. That's Nima—she's more careful than I 
 Nima nods slightly, a small gesture of acknowledgment.
 
 "What's your name, traveler?\"""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "ravi_relationship"]
     )
     
@@ -131,6 +136,8 @@ She crosses her arms, not defensively—more like she's settled in for a real co
 "I'm Nima. We've been here longer than we should have been. Looking for something, though we're not always sure what."
 
 Ravi adds, "The Market District used to be the heart of Velhara. Now it's just... ruins and waiting.\"""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "nima_relationship"]
     )
     
@@ -157,6 +164,8 @@ Nima continues, "Most people can't feel it anymore. The system broke. But some p
 "It means you can hear what others can't," Ravi says. "You can gather the glyphs. You might even understand what happened."
 
 Nima adds, more cautiously: "It also means the city will know you're here. That brings attention.\"""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "lore"]
     )
     
@@ -181,6 +190,8 @@ Nima adds, more cautiously: "It also means the city will know you're here. That 
 Ravi adds quietly, "Kaelen is one of them. A thief, or so they call him. He's been taking things from people—tools, fragments, things that might be glyphs."
 
 "He won't touch you if you can prove you're useful to him," Nima says. "But he's watching everyone new.\"""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "threat"]
     )
     
@@ -203,6 +214,8 @@ Ravi adds quietly, "Kaelen is one of them. A thief, or so they call him. He's be
 Ravi nods slowly. "We can guide you if you want. Or we can help you prepare first."
 
 The choice hangs in the market air between you.""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "quest_fork"]
     )
     
@@ -229,6 +242,8 @@ Ravi says, "The Market District isn't safe to explore alone. But if you travel w
 "For now," Ravi concludes, "you should rest. There's a shelter we know. Tomorrow, you can decide which path to take."
 
 The day is ending. The bioluminescent fungi grow brighter as the sun sets beyond the ruins.""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "rest"]
     )
     
@@ -255,6 +270,8 @@ You rest, and in your dreams, you hear the faint echo of thousands of voices, la
 The Tone.
 
 [END OF PROTOTYPE - Act 2 to follow]""",
+        background="shelter_interior",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "ending"]
     )
     
@@ -266,6 +283,8 @@ The Tone.
 The shrines await, deeper in the city...
 
 [PLACEHOLDER: Shrine encounter - Saori appears if resonance is high enough]""",
+        background="shrine_ruins",
+        npcs=["Ravi"],
         tags=["marketplace", "act1", "shrine"]
     )
     
@@ -274,6 +293,8 @@ The shrines await, deeper in the city...
         text="""The path to the Thieves' Cache descends into older tunnels...
 
 [PLACEHOLDER: Thieves' Cache - Kaelen encounter]""",
+        background="thieves_cache",
+        npcs=["Kaelen"],
         tags=["marketplace", "act1", "kaelen"]
     )
     
@@ -282,6 +303,8 @@ The shrines await, deeper in the city...
         text="""Ravi and Nima lead you through the Market District, showing you the lay of the land...
 
 [PLACEHOLDER: Market preparation - Learning from Ravi & Nima]""",
+        background="market_ruins",
+        npcs=["Ravi", "Nima"],
         tags=["marketplace", "act1", "prep"]
     )
     
@@ -292,6 +315,8 @@ The shrines await, deeper in the city...
 "We're looking for the Corelink's heart. The system that connected everyone..." 
 
 [PLACEHOLDER: Nima's quest - What they've been searching for]""",
+        background="market_ruins",
+        npcs=["Nima"],
         tags=["marketplace", "act1", "quest"]
     )
     
@@ -302,6 +327,8 @@ The shrines await, deeper in the city...
 "Before the collapse, I was a teacher in the Archive..." 
 
 [PLACEHOLDER: Ravi's backstory - Before the collapse]""",
+        background="market_ruins",
+        npcs=["Ravi"],
         tags=["marketplace", "act1", "backstory"]
     )
     
