@@ -2,7 +2,9 @@
 
 ## Overview
 
-A **palette of interchangeable dialogue lines** for NPCs to react to collapse events, player choices, and marketplace moments. Mix and match based on NPC personality, trust level, and story context.
+A **palette of interchangeable dialogue lines** for NPCs to react to collapse events, player
+choices, and marketplace moments. Mix and match based on NPC personality, trust level, and story
+context.
 
 
 ## Static NPC Reactions (Desensitized to Collapse)

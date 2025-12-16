@@ -7,18 +7,17 @@
 │                     FIRSTPERSON LOCAL MODE                      │
 │                   (100% Private, No External APIs)              │
 └─────────────────────────────────────────────────────────────────┘
-                              ▲
+▲
                               │
-                    ┌─────────┴──────────┐
+┌─────────┴──────────┐
                     │  Streamlit UI      │
                     │  (emotional_os_    │
                     │   ui_v2.py)        │
                     └─────────┬──────────┘
                               │
-        ┌─────────────────────┼─────────────────────┐
+┌─────────────────────┼─────────────────────┐
         │                     │                     │
-        ▼                     ▼                     ▼
-   ┌─────────┐         ┌──────────┐        ┌────────────┐
+▼                     ▼                     ▼ ┌─────────┐         ┌──────────┐        ┌────────────┐
    │ Input   │         │ Process  │        │  Response  │
    │ Layer   │         │ Layer    │        │  Layer     │
    └────┬────┘         └────┬─────┘        └─────┬──────┘
@@ -58,7 +57,7 @@
         │                   │                   │
         └───────────────────┼───────────────────┘
                             │
-                    ┌───────▼────────┐
+┌───────▼────────┐
                     │ LOCAL DATABASE │
                     │                │
                     ├─ Glyphs (292)  │
@@ -104,17 +103,10 @@ POS Tags: ["PRP", "VBP", "VBG", "DT", "NN",
 ```
 NRC Lexicon (14,182 words → emotions):
 
-replaying → [negative, sadness]
-moment → [negative, sadness]
-hurts → [negative, sadness, fear]
-over → [negative, sadness]
-it → []
-keep → [negative, sadness]
+replaying → [negative, sadness] moment → [negative, sadness] hurts → [negative, sadness, fear] over
+→ [negative, sadness] it → [] keep → [negative, sadness]
 
-Result Emotions: {
-  'sadness': 4,
-  'negative': 5,
-  'fear': 1
+Result Emotions: { 'sadness': 4, 'negative': 5, 'fear': 1
 ```text
 ```
 
@@ -190,12 +182,8 @@ Fear component:
 ```
 Voltage γ activates these gates:
 
-Gate 2: Ache states
-Gate 4: Recursion & looping
-Gate 5: Depth & layers
-Gate 6: Acknowledgment
-Gate 9: Recognition & witness
-Gate 10: Transformation
+Gate 2: Ache states Gate 4: Recursion & looping Gate 5: Depth & layers Gate 6: Acknowledgment Gate
+9: Recognition & witness Gate 10: Transformation
 
 Candidate glyphs by gate:
 - Gate 4: Recursive Ache, Spiral Ache, Loop Ache
@@ -239,14 +227,10 @@ Recognized Ache:
 ```
 From local poetry database:
 
-Recursive Ache Poetry:
-  "The Ache remains, returning again and again"
-    → Emily Dickinson
-    → Resonance: 9.2/10
+Recursive Ache Poetry: "The Ache remains, returning again and again" → Emily Dickinson → Resonance:
+9.2/10
 
-  "Each loop another layer of knowing"
-    → Rainer Maria Rilke
-    → Resonance: 8.8/10
+"Each loop another layer of knowing" → Rainer Maria Rilke → Resonance: 8.8/10
 
 Metaphors for γ (Ache):
   - Spiral: "spiraling inward"
@@ -306,17 +290,10 @@ each return reveals?"
 ```
 System logs (all local, private):
 
-{
-  "timestamp": "2024-01-15T14:32:00Z",
-  "user_input": "I keep replaying that moment over and over, and it hurts",
-  "detected_emotions": {"sadness": 4, "negative": 5, "fear": 1},
-  "voltage_signals": ["γ"],
-  "glyph_matched": "Recursive Ache",
-  "response_generated": "[full response]",
-  "user_feedback": "helpful",  // or "not helpful"
-  "processing_time_ms": 247,
-  "poetry_used": "Emily Dickinson"
-}
+{ "timestamp": "2024-01-15T14:32:00Z", "user_input": "I keep replaying that moment over and over,
+and it hurts", "detected_emotions": {"sadness": 4, "negative": 5, "fear": 1}, "voltage_signals":
+["γ"], "glyph_matched": "Recursive Ache", "response_generated": "[full response]", "user_feedback":
+"helpful",  // or "not helpful" "processing_time_ms": 247, "poetry_used": "Emily Dickinson" }
 
 Over time (100+ interactions):
 - System learns: This user resonates with poetry + stillness
@@ -372,54 +349,28 @@ CREATE TABLE interactions (
 
 ```sql
 -- Poetry mapped to glyphs
-CREATE TABLE glyph_poetry (
-    id INTEGER PRIMARY KEY,
-    glyph_id INTEGER REFERENCES glyph_lexicon(id),
-    quote TEXT,
-    poet TEXT,
-    source TEXT,  -- "Project Gutenberg", "Poetry Foundation"
-    emotional_resonance FLOAT,  -- 1.0-10.0
-    created_at TIMESTAMP
-);
+CREATE TABLE glyph_poetry ( id INTEGER PRIMARY KEY, glyph_id INTEGER REFERENCES glyph_lexicon(id),
+quote TEXT, poet TEXT, source TEXT,  -- "Project Gutenberg", "Poetry Foundation" emotional_resonance
+FLOAT,  -- 1.0-10.0 created_at TIMESTAMP );
 
 -- Metaphors for emotional expression
-CREATE TABLE glyph_metaphors (
-    id INTEGER PRIMARY KEY,
-    glyph_id INTEGER,
-    metaphor TEXT,  -- e.g., "spiral", "wave", "echo"
-    category TEXT,  -- "nature", "movement", "element"
-    source TEXT,
-    usage_frequency INTEGER
-);
+CREATE TABLE glyph_metaphors ( id INTEGER PRIMARY KEY, glyph_id INTEGER, metaphor TEXT,  -- e.g.,
+"spiral", "wave", "echo" category TEXT,  -- "nature", "movement", "element" source TEXT,
+usage_frequency INTEGER );
 
 -- Ritual/ceremonial language
-CREATE TABLE glyph_rituals (
-    id INTEGER PRIMARY KEY,
-    glyph_id INTEGER,
-    ritual_language TEXT,
-    ritual_type TEXT,  -- "acknowledgment", "witnessing", "transformation"
-    source TEXT
-);
+CREATE TABLE glyph_rituals ( id INTEGER PRIMARY KEY, glyph_id INTEGER, ritual_language TEXT,
+ritual_type TEXT,  -- "acknowledgment", "witnessing", "transformation" source TEXT );
 
 -- Authentic emotional narratives
-CREATE TABLE glyph_narratives (
-    id INTEGER PRIMARY KEY,
-    glyph_id INTEGER,
-    narrative_excerpt TEXT,
-    source TEXT,  -- "Reddit", "StoryCorps", etc. (de-identified)
-    emotional_authenticity_score FLOAT,
-    helpful_response TEXT
-);
+CREATE TABLE glyph_narratives ( id INTEGER PRIMARY KEY, glyph_id INTEGER, narrative_excerpt TEXT,
+source TEXT,  -- "Reddit", "StoryCorps", etc. (de-identified) emotional_authenticity_score FLOAT,
+helpful_response TEXT );
 
 -- User-specific patterns
-CREATE TABLE user_patterns (
-    id INTEGER PRIMARY KEY,
-    pattern_name TEXT,  -- e.g., "recursive_grief"
-    frequency INTEGER,
-    associated_glyphs TEXT,  -- comma-separated
-    most_helpful_metaphor TEXT,
-    most_helpful_poetry TEXT,
-    effectiveness_score FLOAT
+CREATE TABLE user_patterns ( id INTEGER PRIMARY KEY, pattern_name TEXT,  -- e.g., "recursive_grief"
+frequency INTEGER, associated_glyphs TEXT,  -- comma-separated most_helpful_metaphor TEXT,
+most_helpful_poetry TEXT, effectiveness_score FLOAT
 ```text
 ```
 
@@ -510,12 +461,8 @@ metaphors = fetch_glyph_metaphors(glyph_id)
 ```python
 
 # Template-based response using all enrichment
-response = generate_response(
-    glyph_name="Recursive Ache",
-    poetry=poetry,
-    metaphors=metaphors,
-    rituals=rituals,
-    user_message=text
+response = generate_response( glyph_name="Recursive Ache", poetry=poetry, metaphors=metaphors,
+rituals=rituals, user_message=text
 ```text
 ```
 
@@ -626,8 +573,7 @@ saoriverse-console/
 git clone https://github.com/user/firstperson.git
 
 # Install
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
+pip install -r requirements.txt python -m spacy download en_core_web_sm
 
 # Download NRC (one-time, 15MB)
 
