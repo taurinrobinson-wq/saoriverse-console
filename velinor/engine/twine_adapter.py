@@ -491,11 +491,41 @@ class StoryBuilder:
         
         return pid
     
-    def add_choice(self, from_passage_name: str, choice_text: str, to_passage_name: str) -> None:
-        """Add a choice link between passages."""
-        # Find the passage and append choice to its text
+    def add_choice(
+        self,
+        from_passage_name: str,
+        choice_text: str,
+        to_passage_name: str,
+        tone_effects: Optional[Dict[str, float]] = None,
+        npc_resonance: Optional[Dict[str, float]] = None
+    ) -> None:
+        """Add a choice link between passages with consequence metadata.
+        
+        Args:
+            from_passage_name: Source passage
+            choice_text: Text player sees
+            to_passage_name: Destination passage
+            tone_effects: Changes to player TONE stats (e.g., {"courage": 0.2, "empathy": -0.1})
+            npc_resonance: Changes to NPC relationships (e.g., {"Ravi": 0.15, "Nima": -0.1})
+        """
+        # Find the passage and store choice metadata
         for passage in self.story_data['passages']:
             if passage['name'] == from_passage_name:
+                # Initialize choices array if not exists
+                if 'choices' not in passage:
+                    passage['choices'] = []
+                
+                # Create choice object with metadata
+                choice = {
+                    'text': choice_text,
+                    'target': to_passage_name,
+                    'tone_effects': tone_effects or {},
+                    'npc_resonance': npc_resonance or {}
+                }
+                
+                passage['choices'].append(choice)
+                
+                # Also append classic Twine markup for backward compatibility
                 choice_markup = f"[[{choice_text}->{to_passage_name}]]"
                 passage['text'] += f"\n\n{choice_markup}"
                 break
