@@ -51,8 +51,8 @@ def test_aggressive_playstyle():
         for to_npc, ripple_value in ripples.items():
             manager.set_influence(from_npc, to_npc, ripple_value)
     
-    # Save initial state
-    initial_state = {name: npc.to_dict() for name, npc in manager.npcs.items()}
+    # Save initial state (use deepcopy to avoid reference sharing)
+    initial_state = {name: deepcopy(npc.to_dict()) for name, npc in manager.npcs.items()}
     
     print_npc_state(manager, "INITIAL STATE:")
     
@@ -101,8 +101,8 @@ def test_cautious_playstyle():
         for to_npc, ripple_value in ripples.items():
             manager.set_influence(from_npc, to_npc, ripple_value)
     
-    # Save initial state
-    initial_state = {name: npc.to_dict() for name, npc in manager.npcs.items()}
+    # Save initial state (use deepcopy to avoid reference sharing)
+    initial_state = {name: deepcopy(npc.to_dict()) for name, npc in manager.npcs.items()}
     
     print_npc_state(manager, "INITIAL STATE:")
     
@@ -151,8 +151,8 @@ def test_empathetic_playstyle():
         for to_npc, ripple_value in ripples.items():
             manager.set_influence(from_npc, to_npc, ripple_value)
     
-    # Save initial state
-    initial_state = {name: npc.to_dict() for name, npc in manager.npcs.items()}
+    # Save initial state (use deepcopy to avoid reference sharing)
+    initial_state = {name: deepcopy(npc.to_dict()) for name, npc in manager.npcs.items()}
     
     print_npc_state(manager, "INITIAL STATE:")
     
@@ -201,8 +201,8 @@ def test_mixed_playstyle():
         for to_npc, ripple_value in ripples.items():
             manager.set_influence(from_npc, to_npc, ripple_value)
     
-    # Save initial state
-    initial_state = {name: npc.to_dict() for name, npc in manager.npcs.items()}
+    # Save initial state (use deepcopy to avoid reference sharing)
+    initial_state = {name: deepcopy(npc.to_dict()) for name, npc in manager.npcs.items()}
     
     print_npc_state(manager, "INITIAL STATE:")
     
